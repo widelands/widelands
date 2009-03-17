@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,12 +80,10 @@ void WarehouseSupply::set_nrworkers(Ware_Index const i) {
 
 /*
 ===============
-WarehouseSupply::set_economy
-
 Add and remove our wares and the Supply to the economies as necessary.
 ===============
 */
-void WarehouseSupply::set_economy(Economy* e)
+void WarehouseSupply::set_economy(Economy * const e)
 {
 	if (e == m_economy)
 		return;
@@ -239,8 +237,6 @@ WareInstance & WarehouseSupply::launch_item(Game * game, const Request* req) {
 
 /*
 ===============
-WarehouseSupply::launch_worker
-
 Launch a ware as worker.
 ===============
 */
@@ -393,8 +389,6 @@ void Warehouse::set_needed(Ware_Index const ware_index, int const value) {
 
 /*
 ===============
-Warehouse::init
-
 Conquer the land around the HQ on init.
 ===============
 */
@@ -507,10 +501,10 @@ void Warehouse::act(Game* g, uint32_t data)
 		int32_t tdelta = CARRIER_SPAWN_INTERVAL;
 
 		if (stock < 100) {
-			tdelta -= 4*(100 - stock);
+			tdelta -= 4 * (100 - stock);
 			insert_workers(id, 1);
 		} else if (stock > 100) {
-			tdelta -= 4*(stock - 100);
+			tdelta -= 4 * (stock - 100);
 			if (tdelta < 10)
 				tdelta = 10;
 			remove_workers(id, 1);
@@ -551,14 +545,12 @@ void Warehouse::act(Game* g, uint32_t data)
 
 /*
 ===============
-Warehouse::set_economy
-
 Transfer our registration to the new economy.
 ===============
 */
-void Warehouse::set_economy(Economy* e)
+void Warehouse::set_economy(Economy * const e)
 {
-	Economy* old = get_economy();
+	Economy * const old = get_economy();
 
 	if (old == e)
 		return;
@@ -582,7 +574,7 @@ void Warehouse::set_economy(Economy* e)
 Warehouse::get_wares
 ===============
 */
-const WareList& Warehouse::get_wares() const
+WareList const & Warehouse::get_wares() const
 {
 	return m_supply->get_wares();
 }
@@ -592,7 +584,7 @@ const WareList& Warehouse::get_wares() const
 Warehouse::get_workers
 ===============
 */
-const WareList& Warehouse::get_workers() const
+WareList const & Warehouse::get_workers() const
 {
 	return m_supply->get_workers();
 }
@@ -688,7 +680,7 @@ bool Warehouse::fetch_from_flag(Game* g)
  */
 uint32_t Warehouse::count_workers(Game* g, Ware_Index ware, const Requirements& req) {
 	Tribe_Descr const & tribe = owner().tribe();
-	std::vector<Map_Object_Descr*> subs;
+	std::vector<Map_Object_Descr *> subs;
 	uint32_t sum = 0;
 
 	do {
@@ -712,8 +704,6 @@ uint32_t Warehouse::count_workers(Game* g, Ware_Index ware, const Requirements& 
 
 /*
 ===============
-Warehouse::launch_worker
-
 Start a worker of a given type. The worker will be assigned a job by the caller.
 ===============
 */

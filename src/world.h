@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ struct Resource_Descr {
 	Resource_Descr() {}
 	~Resource_Descr() {}
 
-	void parse(Section* s, std::string);
+	void parse(Section *, std::string);
 
 	const std::string & name     () const throw () {return m_name;}
 	std::string const & descname() const throw () {return m_descname;}
@@ -143,7 +143,6 @@ struct World {
 	static bool exists_world(std::string); ///  check if a world really exists
 	static void get_all_worlds(std::vector<std::string> &);
 
-	void postload(Editor_Game_Base *);
 	void load_graphics();
 
 	const char * get_name  () const throw () {return hd.name;}

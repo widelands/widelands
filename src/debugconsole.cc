@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,12 +44,12 @@ struct Console : public ChatProvider, public Handler {
 	{
 	}
 
-	void cmdHelp(const std::vector<std::string>&)
+	void cmdHelp(std::vector<std::string> const &)
 	{
 		write("Use 'ls' to list all available commands.");
 	}
 
-	void cmdLs(const std::vector<std::string>&)
+	void cmdLs(std::vector<std::string> const &)
 	{
 		for
 			(CommandMap::const_iterator it = commands.begin();
@@ -60,7 +60,7 @@ struct Console : public ChatProvider, public Handler {
 		}
 	}
 
-	void send(const std::string& msg)
+	void send(std::string const & msg)
 	{
 		std::vector<std::string> arg;
 		size_t pos = 0;
@@ -69,7 +69,7 @@ struct Console : public ChatProvider, public Handler {
 
 		while ((pos = msg.find_first_not_of(' ', pos)) != std::string::npos) {
 			size_t end = msg.find_first_of(' ', pos);
-			arg.push_back(msg.substr(pos, end-pos));
+			arg.push_back(msg.substr(pos, end - pos));
 			pos = end;
 		}
 
@@ -85,12 +85,12 @@ struct Console : public ChatProvider, public Handler {
 		it->second(arg);
 	}
 
-	const std::vector<ChatMessage>& getMessages() const
+	std::vector<ChatMessage> const & getMessages() const
 	{
 		return messages;
 	}
 
-	void write(const std::string& msg)
+	void write(std::string const & msg)
 	{
 		ChatMessage cm;
 
@@ -115,7 +115,7 @@ ChatProvider * getChatProvider()
 	return &g_console;
 }
 
-void write(const std::string& text)
+void write(std::string const & text)
 {
 	g_console.write(text);
 }
@@ -138,7 +138,7 @@ Handler::~Handler()
 	}
 }
 
-void Handler::addCommand(const std::string& cmd, const HandlerFn& fun)
+void Handler::addCommand(std::string const & cmd, HandlerFn const & fun)
 {
 	g_console.commands[cmd] = fun;
 	m_commands.push_back(cmd);

@@ -54,7 +54,7 @@ struct Map_Loader;
 #define S2MF_MAGIC  "WORLD_V1.0"
 
 
-const uint16_t NUMBER_OF_MAP_DIMENSIONS=29;
+uint16_t const NUMBER_OF_MAP_DIMENSIONS = 29;
 const uint16_t MAP_DIMENSIONS[] = {
 	64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 256, 272, 288, 304,
 	320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512
@@ -80,11 +80,11 @@ CheckStep
 Predicates used in path finding and find functions.
 */
 struct FindImmovable;
-const FindImmovable& FindImmovableAlwaysTrue();
+FindImmovable const & FindImmovableAlwaysTrue();
 
 struct FindBob {
 	// Return true if this immovable should be returned by find_bobs()
-	virtual bool accept(Bob *imm) const = 0;
+	virtual bool accept(Bob *) const = 0;
 	virtual ~FindBob() {}  // make gcc shut up
 };
 struct FindNode;
@@ -100,7 +100,7 @@ struct FindBobAlwaysTrue : public FindBob {
 struct FindBobAttribute : public FindBob {
 	FindBobAttribute(uint32_t attrib) : m_attrib(attrib) {}
 
-	virtual bool accept(Bob *imm) const;
+	virtual bool accept(Bob *) const;
 
 	int32_t m_attrib;
 	virtual ~FindBobAttribute() {}  // make gcc shut up
@@ -108,7 +108,7 @@ struct FindBobAttribute : public FindBob {
 struct FindBobEnemySoldier : public FindBob {
 	FindBobEnemySoldier(Player* _player) : player(_player) {}
 
-	virtual bool accept(Bob *imm) const;
+	virtual bool accept(Bob *) const;
 
 	Player* player;
 };
@@ -227,7 +227,7 @@ struct Map {
 		 const FindImmovable & = FindImmovableAlwaysTrue());
 	uint32_t find_reachable_immovables_unique
 		(const Area<FCoords>,
-		 std::vector<BaseImmovable*> * list,
+		 std::vector<BaseImmovable *> * list,
 		 const CheckStep &,
 		 const FindImmovable & = FindImmovableAlwaysTrue());
 	uint32_t find_fields
@@ -406,8 +406,8 @@ private:
 
 	template<typename functorT> void find(const Area<FCoords>, functorT &) const;
 
-	Map & operator=(Map const &);
-	explicit Map   (Map const &);
+	Map & operator= (Map const &);
+	explicit Map    (Map const &);
 };
 
 
@@ -422,8 +422,8 @@ struct Path {
 	friend struct Map;
 
 	Path() {}
-	Path(Coords c) : m_start(c), m_end(c) {}
-	Path(CoordPath &o);
+	Path(Coords const c) : m_start(c), m_end(c) {}
+	Path(CoordPath &);
 
 	void reverse();
 
@@ -1065,7 +1065,7 @@ inline void move_r(X_Coordinate const mapwidth, FCoords & f, Map_Index & i) {
 		for (fc.x = 0; fc.x < extent.w; ++fc.x, ++fc.field)                     \
 
 
-std::string g_VariableCallback(std::string str, void* data);
+std::string g_VariableCallback(std::string, void * data);
 
 };
 

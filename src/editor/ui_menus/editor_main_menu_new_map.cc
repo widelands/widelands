@@ -80,12 +80,12 @@ m_currentworld(0)
 
 	new UI::IDButton<Main_Menu_New_Map, int32_t>
 		(this,
-		 get_inner_w()-spacing - 20, posy, 20, 20,
+		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 1,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Main_Menu_New_Map::button_clicked, this, 1);
 
-	posy+=20+spacing+spacing;
+	posy += 20 + spacing + spacing;
 
 	snprintf
 		(buffer, sizeof(buffer),
@@ -146,7 +146,8 @@ void Main_Menu_New_Map::button_clicked(int32_t n) {
 	case 3: --m_h; break;
 	case 4:
 		++m_currentworld;
-		if (m_currentworld == m_worlds.size()) m_currentworld=0;
+		if (m_currentworld == m_worlds.size())
+			m_currentworld = 0;
 		m_world->set_title
 			(Widelands::World::World(m_worlds[m_currentworld].c_str()).get_name
 			 	());
@@ -183,9 +184,6 @@ void Main_Menu_New_Map::clicked_create_map() {
 		 m_worlds[m_currentworld],
 		 _("No Name"),
 		 g_options.pull_section("global").get_string("realname", _("Unknown")));
-
-	// Postload the world which provides all the immovables found on a map
-	map.world().postload(&egbase);
 
 	egbase.postload     ();
 	egbase.load_graphics(loader);

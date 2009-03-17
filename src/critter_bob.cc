@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,9 +93,7 @@ void Critter_BobProgram::parse(Parser* parser, std::string name)
 			(this->*s_parsemap[mapidx].function)(&act, parser, cmd);
 
 			m_actions.push_back(act);
-		}
-		catch (std::exception& e)
-		{
+		} catch (std::exception const & e) {
 			throw wexception("Line %i: %s", idx, e.what());
 		}
 	}
@@ -166,7 +164,7 @@ Critter_Bob_Descr::Critter_Bob_Descr
 
 	while (Section::Value const * const v = global_s.get_next_val("program")) {
 		std::string const program_name = v->get_string();
-		Critter_BobProgram* prog = 0;
+		Critter_BobProgram * prog = 0;
 		try {
 			if (m_programs.count(program_name))
 				throw wexception("this program has already been declared");
@@ -197,12 +195,10 @@ Critter_Bob_Descr::~Critter_Bob_Descr() {
 
 /*
 ===============
-Critter_Bob_Descr::get_program
-
 Get a program from the workers description.
 ===============
 */
-const Critter_BobProgram* Critter_Bob_Descr::get_program
+Critter_BobProgram const * Critter_Bob_Descr::get_program
 	(std::string const & programname) const
 {
 	Programs::const_iterator const it = m_programs.find(programname);

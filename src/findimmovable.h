@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,22 +38,22 @@ private:
 			if (--refcount == 0)
 				delete this;
 		}
-		virtual bool accept(BaseImmovable* imm) const = 0;
+		virtual bool accept(BaseImmovable *) const = 0;
 
 		int refcount;
 	};
 	template<typename T>
 	struct Capsule : public BaseCapsule {
-		Capsule(const T& _op) : op(_op) {}
-		bool accept(BaseImmovable* imm) const {return op.accept(imm);}
+		Capsule(T const & _op) : op(_op) {}
+		bool accept(BaseImmovable * const imm) const {return op.accept(imm);}
 
 		const T op;
 	};
 
-	BaseCapsule* capsule;
+	BaseCapsule * capsule;
 
 public:
-	FindImmovable(const FindImmovable& o) {
+	FindImmovable(FindImmovable const & o) {
 		capsule = o.capsule;
 		capsule->addref();
 	}
@@ -61,7 +61,7 @@ public:
 		capsule->deref();
 		capsule = 0;
 	}
-	FindImmovable& operator=(const FindImmovable& o) {
+	FindImmovable & operator= (FindImmovable const & o) {
 		capsule->deref();
 		capsule = o.capsule;
 		capsule->addref();
@@ -69,12 +69,12 @@ public:
 	}
 
 	template<typename T>
-	FindImmovable(const T& op) {
+	FindImmovable(T const & op) {
 		capsule = new Capsule<T>(op);
 	}
 
 	// Return true if this node should be returned by find_fields()
-	bool accept(BaseImmovable* imm) const {
+	bool accept(BaseImmovable * const imm) const {
 		return capsule->accept(imm);
 	}
 };
@@ -107,19 +107,19 @@ private:
 struct FindImmovablePlayerImmovable {
 	FindImmovablePlayerImmovable() {}
 
-	bool accept(BaseImmovable* imm) const;
+	bool accept(BaseImmovable *) const;
 };
 struct FindImmovablePlayerMilitarySite {
-	FindImmovablePlayerMilitarySite(Player* _player) : player(_player) {}
+	FindImmovablePlayerMilitarySite(Player & _player) : player(_player) {}
 
-	bool accept(BaseImmovable* imm) const;
+	bool accept(BaseImmovable *) const;
 
-	Player* player;
+	Player & player;
 };
 struct FindImmovableAttackable {
 	FindImmovableAttackable()  {}
 
-	bool accept(BaseImmovable* imm) const;
+	bool accept(BaseImmovable *) const;
 };
 
 

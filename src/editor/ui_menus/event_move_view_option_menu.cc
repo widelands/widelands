@@ -129,28 +129,28 @@ m_location(event.location())
 
 	new UI::IDButton<Event_Move_View_Option_Menu, int32_t>
 		(this,
-		 spacing, posy+40, 20, 20,
+		 spacing, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Event_Move_View_Option_Menu::clicked, this, 10);
 
 	new UI::IDButton<Event_Move_View_Option_Menu, int32_t>
 		(this,
-		 spacing+20, posy, 20, 20,
+		 spacing + 20, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Event_Move_View_Option_Menu::clicked, this, 11);
 
 	new UI::IDButton<Event_Move_View_Option_Menu, int32_t>
 		(this,
-		 spacing+20, posy+40, 20, 20,
+		 spacing + 20, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Event_Move_View_Option_Menu::clicked, this, 12);
 
 	new UI::IDButton<Event_Move_View_Option_Menu, int32_t>
 		(this,
-		 spacing+40, posy, 20, 20,
+		 spacing + 40, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Event_Move_View_Option_Menu::clicked, this, 13);
@@ -207,7 +207,7 @@ bool Event_Move_View_Option_Menu::handle_mouserelease(const Uint8, int32_t, int3
 
 
 void Event_Move_View_Option_Menu::clicked_ok() {
-	const std::string& name = m_name->text();
+	std::string const & name = m_name->text();
 	if (name.size()) {
 		if
 			(Widelands::Event * const registered_event =

@@ -61,32 +61,32 @@ throw (_wexception)
 			int32_t id=fr.Unsigned16();
 			char const * const buffer = fr.CString();
 			int32_t res=world->get_resource(buffer);
-			if (res==-1) throw wexception("Resource '%s' exists in map, not in world!", buffer);
-			smap[id]=res;
+			if (res == -1)
+				throw wexception
+					("Resource '%s' exists in map, not in world!", buffer);
+			smap[id] = res;
 		}
 
 		for (uint16_t y = 0; y < map->get_height(); ++y) {
 			for (uint16_t x = 0; x < map->get_width(); ++x) {
-				int32_t id=fr.Unsigned8();
-				int32_t found_amount=fr.Unsigned8();
-				int32_t start_amount=0;
-				int32_t amount=0;
-				amount=found_amount;
-				start_amount=fr.Unsigned8();
+				uint8_t const id           = fr.Unsigned8();
+				uint8_t const found_amount = fr.Unsigned8();
+				uint8_t const amount       = found_amount;
+				uint8_t const start_amount = fr.Unsigned8();
 
-				int32_t set_id, set_amount, set_start_amount;
+				uint8_t set_id, set_amount, set_start_amount;
 				//  if amount is zero, theres nothing here
 				if (!amount) {
-					set_id=0;
-					set_amount=0;
-					set_start_amount=0;
+					set_id           = 0;
+					set_amount       = 0;
+					set_start_amount = 0;
 				} else {
-					set_id=smap[id];
-					set_amount=amount;
-					set_start_amount=start_amount;
+					set_id           = smap[id];
+					set_amount       = amount;
+					set_start_amount = start_amount;
 				}
 
-				if (set_id == -1)
+				if (0xa < set_id)
 					throw "Unknown resource in map file. It is not in world!\n";
 				egbase->map()[Coords(x, y)].set_resources(set_id, set_amount);
 				egbase->map()[Coords(x, y)].set_starting_res_amount(set_start_amount);
@@ -125,7 +125,7 @@ throw (_wexception)
 	std::map<std::string, uint8_t> smap;
 	for (int32_t i = 0; i < nr_res; ++i) {
 		Resource_Descr* res=world->get_resource(i);
-		smap[res->name().c_str()]=i;
+		smap[res->name().c_str()] = i;
 		fw.Unsigned16(i);
 		fw.CString(res->name().c_str());
 	}

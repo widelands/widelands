@@ -32,5 +32,5 @@ void get_horiz_linearcomb
 	det = u1 * v2 - u2 * v1; //  determinant of (u v)
 
 	lambda = v2 / det;       //  by Cramer's rule
-	mu=-u2/det;
+	mu = -u2 / det;
 }

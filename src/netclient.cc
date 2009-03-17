@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,10 +52,10 @@ struct NetClientImpl {
 	Deserializer deserializer;
 
 	/// Currently active modal panel. Receives an end_modal on disconncet
-	UI::Panel* modal;
+	UI::Panel * modal;
 
 	/// Current game. Only non-null if a game is actually running.
-	Widelands::Game* game;
+	Widelands::Game * game;
 
 	NetworkTime time;
 
@@ -80,7 +80,7 @@ struct NetClientImpl {
 	std::vector<ChatMessage> chatmessages;
 };
 
-NetClient::NetClient (IPaddress* svaddr, const std::string& playername)
+NetClient::NetClient (IPaddress * const svaddr, std::string const & playername)
 : d(new NetClientImpl)
 {
 	d->sock = SDLNet_TCP_Open(svaddr);
@@ -126,7 +126,7 @@ void NetClient::run ()
 	s.send(d->sock);
 
 	d->settings.multiplayer = true;
-	setScenario(false);//no scenario for multiplayer
+	setScenario(false); //  FIXME no scenario for multiplayer
 	{
 		Fullscreen_Menu_LaunchGame lgm(this, this);
 		lgm.setChatProvider(this);
@@ -149,7 +149,7 @@ void NetClient::run ()
 		d->game = &game;
 		game.set_game_controller(this);
 		uint8_t pn = d->playernum + 1;
-		Interactive_GameBase* igb;
+		Interactive_GameBase * igb;
 		if (pn > 0)
 			igb = new Interactive_Player(game, pn, false, true);
 		else
@@ -185,11 +185,10 @@ void NetClient::think()
 	handle_network();
 
 	if (d->game) {
-		if (d->realspeed == 0 || d->server_is_waiting) {
+		if (d->realspeed == 0 || d->server_is_waiting)
 			d->time.fastforward();
-		} else {
+		else
 			d->time.think(d->realspeed);
-		}
 
 		if (d->server_is_waiting && d->game->get_gametime() == d->time.networktime()) {
 			sendTime();
@@ -236,7 +235,7 @@ std::string NetClient::getGameDescription()
 	return buf;
 }
 
-const GameSettings& NetClient::settings()
+GameSettings const & NetClient::settings()
 {
 	return d->settings;
 }
@@ -271,7 +270,7 @@ bool NetClient::canLaunch()
 	return false;
 }
 
-void NetClient::setMap(const std::string&, const std::string&, uint32_t, bool)
+void NetClient::setMap(std::string const &, std::string const &, uint32_t, bool)
 {
 	// client is not allowed to do this
 }
@@ -281,7 +280,7 @@ void NetClient::setPlayerState(uint8_t, PlayerSettings::State)
 	// client is not allowed to do this
 }
 
-void NetClient::setPlayerAI(uint8_t, const std::string&)
+void NetClient::setPlayerAI(uint8_t, std::string const &)
 {
 	// client is not allowed to do this
 }
@@ -291,7 +290,7 @@ void NetClient::nextPlayerState(uint8_t)
 	// client is not allowed to do this
 }
 
-void NetClient::setPlayerTribe(uint8_t number, const std::string& tribe)
+void NetClient::setPlayerTribe(uint8_t number, std::string const & tribe)
 {
 	if (number != d->playernum)
 		return;
@@ -307,7 +306,7 @@ void NetClient::setPlayerInit(uint8_t, uint8_t)
 	//  client is not allowed to do this
 }
 
-void NetClient::setPlayerName(uint8_t, const std::string&)
+void NetClient::setPlayerName(uint8_t, std::string const &)
 {
 	// until now the name is set before joining - if you allow a change in
 	// launchgame-menu, here properly should be a set_name function
@@ -357,13 +356,14 @@ void NetClient::setDesiredSpeed(uint32_t speed)
 }
 
 
-void NetClient::recvOnePlayer(uint8_t number, Widelands::StreamRead& packet)
+void NetClient::recvOnePlayer
+	(uint8_t const number, Widelands::StreamRead & packet)
 {
 	if (number >= d->settings.players.size())
 		throw DisconnectException
 			(_("Server sent a player update for a player that does not exist."));
 
-	PlayerSettings& player = d->settings.players[number];
+	PlayerSettings & player = d->settings.players[number];
 	player.state = static_cast<PlayerSettings::State>(packet.Unsigned8());
 	player.name = packet.String();
 	player.tribe = packet.String();
@@ -373,7 +373,8 @@ void NetClient::recvOnePlayer(uint8_t number, Widelands::StreamRead& packet)
 		d->localplayername = player.name;
 }
 
-void NetClient::recvOneUser(uint32_t number, Widelands::StreamRead& packet)
+void NetClient::recvOneUser
+	(uint32_t const number, Widelands::StreamRead & packet)
 {
 	if (number > d->settings.users.size())
 		throw DisconnectException
@@ -394,7 +395,7 @@ void NetClient::recvOneUser(uint32_t number, Widelands::StreamRead& packet)
 	}
 }
 
-void NetClient::send(const std::string& msg)
+void NetClient::send(std::string const & msg)
 {
 	SendPacket s;
 	s.Unsigned8(NETCMD_CHAT);
@@ -402,7 +403,7 @@ void NetClient::send(const std::string& msg)
 	s.send(d->sock);
 }
 
-const std::vector<ChatMessage>& NetClient::getMessages() const
+std::vector<ChatMessage> const & NetClient::getMessages() const
 {
 	return d->chatmessages;
 }
@@ -439,7 +440,7 @@ void NetClient::syncreport()
  *
  * \note The caller must handle exceptions by closing the connection.
  */
-void NetClient::handle_packet(RecvPacket& packet)
+void NetClient::handle_packet(RecvPacket & packet)
 {
 	uint8_t cmd = packet.Unsigned8();
 
@@ -478,7 +479,7 @@ void NetClient::handle_packet(RecvPacket& packet)
 	case NETCMD_SETTING_MAP:
 		d->settings.mapname = packet.String();
 		d->settings.mapfilename = g_fs->FileSystem::fixCrossFile(packet.String());
-		d->settings.savegame = packet.Unsigned8() == 1 ? true : false;
+		d->settings.savegame = packet.Unsigned8() == 1;
 		log("[Client] SETTING_MAP '%s' '%s'\n", d->settings.mapname.c_str(), d->settings.mapfilename.c_str());
 		break;
 
@@ -549,9 +550,10 @@ void NetClient::handle_packet(RecvPacket& packet)
 			throw DisconnectException(_("Server sent a PLAYERCOMMAND even though no game is running."));
 
 		int32_t time = packet.Signed32();
-		Widelands::PlayerCommand* plcmd = Widelands::PlayerCommand::deserialize(packet);
-		plcmd->set_duetime(time);
-		d->game->enqueue_command(plcmd);
+		Widelands::PlayerCommand & plcmd =
+			*Widelands::PlayerCommand::deserialize(packet);
+		plcmd.set_duetime(time);
+		d->game->enqueue_command(&plcmd);
 		d->time.recv(time);
 		break;
 	}
@@ -604,9 +606,9 @@ void NetClient::handle_network ()
 				handle_packet(packet);
 			}
 		}
-	} catch (const DisconnectException& e) {
+	} catch (DisconnectException const & e) {
 		disconnect(e.what());
-	} catch (const std::exception& e) {
+	} catch (std::exception const & e) {
 		std::string reason = _("Server sent malformed commands: ");
 		reason += e.what();
 		disconnect(reason);
@@ -614,7 +616,8 @@ void NetClient::handle_network ()
 }
 
 
-void NetClient::disconnect (const std::string& reason, bool sendreason, bool showmsg)
+void NetClient::disconnect
+	(std::string const & reason, bool const sendreason, bool const showmsg)
 {
 	log("[Client]: disconnect(%s)\n", reason.c_str());
 
@@ -631,7 +634,7 @@ void NetClient::disconnect (const std::string& reason, bool sendreason, bool sho
 		d->sock = 0;
 	}
 
-	bool trysave = showmsg && d->game;
+	bool const trysave = showmsg && d->game;
 
 	if (showmsg) {
 		std::string msg = reason;
@@ -655,4 +658,3 @@ void NetClient::disconnect (const std::string& reason, bool sendreason, bool sho
 		d->modal = 0;
 	}
 }
-

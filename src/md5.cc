@@ -50,14 +50,14 @@ std::string md5_checksum::str() const
  * From GNU textutils. md5.c
  *******************************************************************/
 
-static const uint8_t fillbuf[64] = {0x80, 0/*, 0, 0, ... 0 */};
+static const uint8_t fillbuf[64] = {0x80, 0 /*, 0, 0, ... 0 */};
 
 /* Process the remaining bytes in the internal buffer and the usual
    prolog according to the standard and write the result to RESBUF.
 
    IMPORTANT: On some systems it is required that RESBUF is correctly
    aligned for a 32 bits value.  */
-void * md5_finish_ctx (md5_ctx* ctx, void* resbuf)
+void * md5_finish_ctx (md5_ctx * const ctx, void * const resbuf)
 {
 	/* Take yet unprocessed bytes into account.  */
 	uint32_t bytes = ctx->buflen;
@@ -89,7 +89,8 @@ void * md5_finish_ctx (md5_ctx* ctx, void* resbuf)
 }
 
 /* Processes some bytes in the internal buffer */
-void md5_process_bytes (const void* buffer, uint32_t len, struct md5_ctx* ctx)
+void md5_process_bytes
+	(void const * buffer, uint32_t len, struct md5_ctx * const ctx)
 {
 	/* When we already have some bits in our internal buffer concatenate
 		both inputs first.  */
@@ -144,7 +145,8 @@ void md5_process_bytes (const void* buffer, uint32_t len, struct md5_ctx* ctx)
 /* Process LEN bytes of BUFFER, accumulating context into CTX.
    It is assumed that LEN % 64 == 0.  */
 
-void md5_process_block (const void* buffer, uint32_t len, md5_ctx* ctx)
+void md5_process_block
+	(void const * const buffer, uint32_t const len, md5_ctx * const ctx)
 {
 	uint32_t correct_words[16];
 	uint32_t const * words = static_cast<const uint32_t *>(buffer);

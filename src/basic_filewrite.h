@@ -38,8 +38,8 @@ template <typename Base> struct basic_FileWrite : public Base {
 
 		bool isNull() const throw () {return *this == Null();}
 		operator size_t() const throw () {return pos;}
-		Pos operator++() {return ++pos;}
-		Pos operator+=(Pos const other) {return pos += other.pos;}
+		Pos operator++ () {return ++pos;}
+		Pos operator+= (Pos const other) {return pos += other.pos;}
 	private:
 		size_t pos;
 	};

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ struct PlayerCommand : public GameLogicCommand {
 	PlayerCommand() : GameLogicCommand(0), sender(0), cmdserial(0) {} // For savegame loading
 	virtual ~PlayerCommand ();
 
-	char get_sender() const {return sender;}
+	Player_Number get_sender() const {return sender;}
 	uint32_t get_cmdserial() const {return cmdserial;}
 	void set_cmdserial(uint32_t s) {cmdserial = s;}
 
@@ -83,8 +83,14 @@ private:
 
 struct Cmd_Build:public PlayerCommand {
 	Cmd_Build() : PlayerCommand() {} // For savegame loading
-	Cmd_Build (int32_t t, int32_t p, const Coords& c, Building_Index i):PlayerCommand(t, p)
-	{coords=c; id=i;}
+	Cmd_Build
+		(int32_t        const t,
+		 int32_t        const p,
+		 Coords         const c,
+		 Building_Index const i)
+		:
+		PlayerCommand(t, p), coords(c), id(i)
+	{}
 
 	Cmd_Build (StreamRead &);
 
@@ -103,8 +109,9 @@ private:
 
 struct Cmd_BuildFlag:public PlayerCommand {
 	Cmd_BuildFlag() : PlayerCommand() {} // For savegame loading
-	Cmd_BuildFlag (int32_t t, int32_t p, const Coords& c):PlayerCommand(t, p)
-	{coords=c;}
+	Cmd_BuildFlag (int32_t const t, int32_t const p, Coords const c) :
+		PlayerCommand(t, p), coords(c)
+	{}
 
 	Cmd_BuildFlag (StreamRead &);
 

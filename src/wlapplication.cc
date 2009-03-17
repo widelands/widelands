@@ -73,9 +73,9 @@
 
 #ifdef DEBUG
 #ifndef __WIN32__
-int32_t WLApplication::pid_me=0;
-int32_t WLApplication::pid_peer=0;
-volatile int32_t WLApplication::may_run=0;
+int32_t WLApplication::pid_me   = 0;
+int32_t WLApplication::pid_peer = 0;
+volatile int32_t WLApplication::may_run = 0;
 #include <signal.h>
 #endif // WIN32
 #endif // DEBUG
@@ -97,7 +97,9 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(FileSystem::Create("Widelands.app/Contents/Resources/"));
 #else
 		// first, try the data directory used in the last scons invocation
-		g_fs->AddFileSystem(FileSystem::Create(std::string(INSTALL_PREFIX)+'/'+INSTALL_DATADIR)); //see config.h
+		g_fs->AddFileSystem //  see config.h
+			(FileSystem::Create
+			 	(std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR));
 #endif
 	}
 	catch (FileNotFound_error e) {}
@@ -190,7 +192,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 #endif
 }
 
-WLApplication *WLApplication::the_singleton=0;
+WLApplication * WLApplication::the_singleton = 0;
 
 /**
  * The main entry point for the WLApplication singleton.
@@ -209,10 +211,8 @@ WLApplication *WLApplication::the_singleton=0;
  * \todo Return a reference - the return value is always valid anyway
  */
 WLApplication * WLApplication::get(int const argc, char const * * argv) {
-	if (the_singleton==0) {
-		the_singleton=new WLApplication(argc, argv);
-	}
-
+	if (the_singleton == 0)
+		the_singleton = new WLApplication(argc, argv);
 	return the_singleton;
 }
 
@@ -239,8 +239,8 @@ m_should_die           (false),
 m_gfx_w(0), m_gfx_h(0),
 m_gfx_fullscreen       (false)
 {
-	g_fs=new LayeredFileSystem();
-	g_fh=new Font_Handler();
+	g_fs = new LayeredFileSystem();
+	g_fh = new Font_Handler();
 
 	m_editor_commandline = false;
 	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
@@ -268,7 +268,7 @@ WLApplication::~WLApplication()
 	delete g_fh;
 	g_fh = 0;
 
-	assert(g_fs!=0);
+	assert(g_fs);
 	delete g_fs;
 	g_fs = 0;
 }
@@ -337,15 +337,14 @@ void WLApplication::run()
  * \todo Catch Journalfile_error
  */
 bool WLApplication::poll_event(SDL_Event *ev, const bool throttle) {
-	bool haveevent=false;
+	bool haveevent = false;
 
 restart:
 	//inject synthesized events into the event queue when playing back
 	if (journal->is_playingback()) {
 		try {
-			haveevent=journal->read_event(ev);
-		}
-		catch (Journalfile_error& e) {
+			haveevent = journal->read_event(ev);
+		} catch (Journalfile_error const & e) {
 			// An error might occur here when playing back a file that
 			// was not finalized due to a crash etc.
 			// Since playbacks are intended precisely for debugging such
@@ -354,10 +353,9 @@ restart:
 			journal->stop_playback();
 		}
 	} else {
-		haveevent=SDL_PollEvent(ev);
+		haveevent = SDL_PollEvent(ev);
 
-		if (haveevent)
-		{
+		if (haveevent) {
 			// We edit mouse motion events in here, so that
 			// differences caused by GrabInput or mouse speed
 			// settings are invisible to the rest of the code
@@ -376,7 +374,7 @@ restart:
 
 				break;
 			case SDL_USEREVENT:
-				if (ev->user.code==CHANGE_MUSIC)
+				if (ev->user.code == CHANGE_MUSIC)
 					g_sound_handler.change_music();
 
 				break;
@@ -495,7 +493,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 				break;
 			}
 			if (cb && cb->key) {
-				int16_t c=ev.key.keysym.unicode;
+				int16_t c = ev.key.keysym.unicode;
 
 				//TODO: this kills international characters
 				if (c < 32 || c >= 128)
@@ -565,7 +563,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 int32_t WLApplication::get_time() {
 	Uint32 time;
 
-	time=SDL_GetTicks();
+	time = SDL_GetTicks();
 	journal->timestamp_handler(&time); //might change the time when playing back!
 
 	return time;
@@ -654,7 +652,7 @@ void WLApplication::init_graphics
 bool WLApplication::init_settings() {
 
 	//create a journal so that handle_commandline_parameters can open the journal files
-	journal=new Journal();
+	journal = new Journal();
 
 	//read in the configuration file
 	g_options.read("config", "global");
@@ -716,7 +714,7 @@ void WLApplication::shutdown_settings()
 
 	assert(journal);
 	delete journal;
-	journal=0;
+	journal = 0;
 }
 
 /**
@@ -727,14 +725,14 @@ void WLApplication::shutdown_settings()
  * \return true if there were no fatal errors that prevent the game from running
  */
 bool WLApplication::init_hardware() {
-	Uint32 sdl_flags=0;
+	Uint32 sdl_flags = 0;
 	Section & s = g_options.pull_section("global");
 
 	//Start the SDL core
-	if (s.get_bool("coredump", false))
-		sdl_flags=SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE;
-	else
-		sdl_flags=SDL_INIT_VIDEO;
+	sdl_flags =
+		SDL_INIT_VIDEO
+		|
+		(s.get_bool("coredump", false) ? SDL_INIT_NOPARACHUTE : 0);
 
 	//  NOTE Enable a workaround for bug #1784815, caused by SDL, which thinks
 	//  NOTE that it is perfectly fine for a library to tamper with the user's
@@ -801,15 +799,15 @@ void WLApplication::shutdown_hardware()
 void WLApplication::parse_commandline(const int argc, const char **argv)
 {
 	//TODO: EXENAME gets written out on windows!
-	m_commandline["EXENAME"]=argv[0];
+	m_commandline["EXENAME"] = argv[0];
 
 	for (int i = 1; i < argc; ++i) {
-		std::string opt=argv[i];
+		std::string opt = argv[i];
 		std::string value;
 		SSS_T pos;
 
 		//are we looking at an option at all?
-		if (opt.substr(0, 2)=="--") {
+		if (opt.substr(0, 2) == "--") {
 			//yes. remove the leading "--", just for cosmetics
 			opt.erase(0, 2);
 		} else {
@@ -817,19 +815,19 @@ void WLApplication::parse_commandline(const int argc, const char **argv)
 		}
 
 		//look if this option has a value
-		pos=opt.find("=");
+		pos = opt.find("=");
 
-		if (pos==std::string::npos) { //if no equals sign found
-			value="";
+		if (pos == std::string::npos) { //  if no equals sign found
+			value = "";
 		} else {
 			//extract option value
-			value=opt.substr(pos+1, opt.size()-pos);
+			value = opt.substr(pos + 1, opt.size() - pos);
 
 			//remove value from option name
-			opt.erase(pos, opt.size()-pos);
+			opt.erase(pos, opt.size() - pos);
 		}
 
-		m_commandline[opt]=value;
+		m_commandline[opt] = value;
 	}
 }
 
@@ -846,7 +844,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	}
 
 	if (m_commandline.count("nosound")>0) {
-		g_sound_handler.m_nosound=true;
+		g_sound_handler.m_nosound = true;
 		m_commandline.erase("nosound");
 	}
 
@@ -873,7 +871,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_editor_filename = m_commandline["editor"];
 		if (m_editor_filename.size() and *m_editor_filename.rbegin() == '/')
 			m_editor_filename.erase(m_editor_filename.size() - 1);
-		m_editor_commandline=true;
+		m_editor_commandline = true;
 		m_commandline.erase("editor");
 	}
 
@@ -951,7 +949,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
  */
 void WLApplication::show_usage()
 {
-	i18n::Textdomain textdomain("widelands");// uses system standard language
+	i18n::Textdomain textdomain("widelands"); //  uses system standard language
 
 	cout << _("This is Widelands-") << build_id() << "\n\n";
 	cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n\n");
@@ -1047,20 +1045,20 @@ void WLApplication::show_usage()
  */
 void WLApplication::init_double_game ()
 {
-	if (pid_me!=0)
+	if (pid_me != 0)
 		return;
 
-	pid_me=getpid();
-	pid_peer=fork();
+	pid_me = getpid();
+	pid_peer = fork();
 	//TODO: handle fork errors
 
-	assert (pid_peer>=0);
+	assert (pid_peer >= 0);
 
-	if (pid_peer==0) {
-		pid_peer=pid_me;
-		pid_me=getpid();
+	if (pid_peer == 0) {
+		pid_peer = pid_me;
+		pid_me   = getpid();
 
-		may_run=1;
+		may_run = 1;
 	}
 
 	signal (SIGUSR1, signal_handler);
@@ -1093,15 +1091,15 @@ void WLApplication::quit_handler()
  */
 void WLApplication::yield_double_game()
 {
-	if (pid_me==0)
+	if (pid_me == 0)
 		return;
 
-	if (may_run>0) {
+	if (may_run > 0) {
 		--may_run;
 		kill (pid_peer, SIGUSR1);
 	}
 
-	if (may_run==0)
+	if (may_run == 0)
 		usleep (500000);
 
 	// using sleep instead of pause avoids a race condition
@@ -1169,11 +1167,11 @@ void WLApplication::mainmenu()
 			case Fullscreen_Menu_Main::mm_exit:
 				return;
 			}
-		} catch (warning& e) {
+		} catch (warning const & e) {
 			messagetitle = _("Warning: ");
 			messagetitle += e.title();
 			message = e.what();
-		} catch (const std::exception& e) {
+		} catch (std::exception const & e) {
 			messagetitle = _("Unexpected error during the game");
 			message = e.what();
 			message +=
@@ -1269,8 +1267,8 @@ void WLApplication::mainmenu_multiplayer()
 					("Invalid Adress",
 					 _("The address of the game server is invalid"));
 
-			peer.host=addr;
-			peer.port=port;
+			peer.host = addr;
+			peer.port = port;
 
 			NetClient netgame(&peer, playername);
 			netgame.run();
@@ -1338,7 +1336,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 
 	virtual void setScenario(bool const set) {s.scenario = set;}
 
-	virtual const GameSettings& settings() {return s;}
+	virtual GameSettings const & settings() {return s;}
 
 	virtual bool canChangeMap() {return true;}
 	virtual bool canChangePlayerState(uint8_t number) {return (!s.scenario & (number != s.playernum));}
@@ -1353,7 +1351,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		return s.mapfilename;
 	}
 
-	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers, bool savegame) {
+	virtual void setMap(std::string const & mapname, std::string const & mapfilename, uint32_t maxplayers, bool savegame) {
 		s.mapname = mapname;
 		s.mapfilename = mapfilename;
 		s.savegame = savegame;
@@ -1362,12 +1360,12 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players.resize(maxplayers);
 
 		while (oldplayers < maxplayers) {
-			PlayerSettings& player = s.players[oldplayers];
+			PlayerSettings & player = s.players[oldplayers];
 			player.state = (oldplayers == 0) ? PlayerSettings::stateHuman : PlayerSettings::stateComputer;
 			player.tribe                = s.tribes.at(0).name;
 			player.initialization_index = 0;
 			char buf[200];
-			snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers+1);
+			snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers + 1);
 			player.name = buf;
 			++oldplayers;
 		}
@@ -1381,7 +1379,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 
 		s.players[number].state = state;
 	}
-	virtual void setPlayerAI(uint8_t number, const std::string& ai) {
+	virtual void setPlayerAI(uint8_t const number, std::string const & ai) {
 		if (number >= s.players.size())
 			return;
 
@@ -1391,13 +1389,13 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		if (number == s.playernum || number >= s.players.size())
 			return;
 
-		const Computer_Player::ImplementationVector& impls =
+		Computer_Player::ImplementationVector const & impls =
 			Computer_Player::getImplementations();
 		if (impls.size() > 1) {
 			Computer_Player::ImplementationVector::const_iterator it = impls.begin();
 			do {
-				it++;
-				if ((*(it-1))->name == s.players[number].ai)
+				++it;
+				if ((*(it - 1))->name == s.players[number].ai)
 					break;
 			} while (it != impls.end());
 			if (it == impls.end())
@@ -1408,7 +1406,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].state = PlayerSettings::stateComputer;
 	}
 
-	virtual void setPlayerTribe(uint8_t number, const std::string& tribe) {
+	virtual void setPlayerTribe(uint8_t number, std::string const & tribe) {
 		if (number >= s.players.size())
 			return;
 
@@ -1436,7 +1434,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		assert(false);
 	}
 
-	virtual void setPlayerName(uint8_t number, const std::string& name) {
+	virtual void setPlayerName(uint8_t const number, std::string const & name) {
 		if (number >= s.players.size())
 			return;
 
@@ -1555,7 +1553,7 @@ bool WLApplication::campaign_game()
 			Fullscreen_Menu_CampaignSelect select_campaign;
 			if (select_campaign.run() > 0)
 				campaign = select_campaign.get_campaign();
-			else {// Back was pressed
+			else { //  back was pressed
 				filename = "";
 				break;
 			}
@@ -1581,13 +1579,13 @@ bool WLApplication::campaign_game()
 
 
 struct ReplayGameController : public GameController {
-	ReplayGameController(Widelands::Game& game, const std::string& filename)
-		: m_game(game)
+	ReplayGameController(Widelands::Game & game, std::string const & filename) :
+		m_game     (game),
+		m_lastframe(WLApplication::get()->get_time()),
+		m_time     (m_game.get_gametime()),
+		m_speed    (1000)
 	{
 		m_game.set_game_controller(this);
-		m_lastframe = WLApplication::get()->get_time();
-		m_time = m_game.get_gametime();
-		m_speed = 1000;
 
 		// We have to create an empty map, otherwise nothing will load properly
 		game.set_map(new Widelands::Map);
@@ -1622,7 +1620,7 @@ struct ReplayGameController : public GameController {
 		else if (frametime > 1000)
 			frametime = 1000;
 
-		frametime = frametime*m_speed/1000;
+		frametime = frametime * m_speed / 1000;
 
 		m_time = m_game.get_gametime() + frametime;
 
@@ -1652,10 +1650,10 @@ struct ReplayGameController : public GameController {
 	}
 	uint32_t realSpeed() {return m_speed;}
 	uint32_t desiredSpeed() {return m_speed;}
-	void setDesiredSpeed(uint32_t speed) {m_speed=speed;}
+	void setDesiredSpeed(uint32_t const speed) {m_speed = speed;}
 
 private:
-	Widelands::Game& m_game;
+	Widelands::Game & m_game;
 	boost::scoped_ptr<Widelands::ReplayReader> m_replayreader;
 	int32_t m_lastframe;
 	int32_t m_time;
@@ -1699,17 +1697,17 @@ void WLApplication::replay()
 /**
 * Try to save the game instance if possible
  */
-void WLApplication::emergency_save(Widelands::Game& game) {
+void WLApplication::emergency_save(Widelands::Game & game) {
 	if (game.is_loaded()) {
 		try {
-			SaveHandler * save_handler = game.get_save_handler();
+			SaveHandler & save_handler = *game.get_save_handler();
 			std::string error;
 			if
 				(!
-				 save_handler->save_game
+				 save_handler.save_game
 				 	(game,
-				 	 save_handler->create_file_name
-				 	 	(save_handler->get_base_dir(), timestring()),
+				 	 save_handler.create_file_name
+				 	 	(save_handler.get_base_dir(), timestring()),
 				 	 &error))
 			{
 				log("Emergency save failed: %s\n", error.c_str());

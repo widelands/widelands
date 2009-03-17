@@ -191,7 +191,7 @@ public:
 	virtual bool burn_on_destroy();
 	virtual void destroy(Editor_Game_Base*);
 
-	void show_options(Interactive_Player* plr);
+	void show_options(Interactive_Player *);
 	void hide_options();
 
 	virtual bool fetch_from_flag(Game* g);
@@ -250,9 +250,9 @@ protected:
 		(Interactive_Player * plr, UI::Window * * registry)
 		= 0;
 
-	UI::Window* m_optionswindow;
+	UI::Window * m_optionswindow;
 	Coords    m_position;
-	Flag*     m_flag;
+	Flag       * m_flag;
 
 	uint32_t m_anim;
 	int32_t  m_animstart;

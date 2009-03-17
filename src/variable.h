@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,7 +73,7 @@ struct Variable_String : public Variable {
 	Variable_String(bool const t = 0) : Variable(t) {}
 
 	std::string const & get_value() const {return m_value;}
-	void set_value(const char* t) {m_value = t;}
+	void set_value(char const * const t) {m_value = t;}
 	std::string get_string_representation() const {return m_value;}
 
 private:

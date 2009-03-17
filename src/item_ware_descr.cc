@@ -48,4 +48,4 @@ void Item_Ware_Descr::load_graphics()
 	m_icon = g_gr->get_picture(PicMod_Game, m_icon_fname.c_str());
 }
 
-};
+}

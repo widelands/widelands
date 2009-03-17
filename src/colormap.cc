@@ -37,16 +37,16 @@ Colormap::Colormap (const SDL_Color & pal, const SDL_PixelFormat & format) {
 
 	for (i = 0; i < 256; ++i)
 		for (j = 0; j < 256; ++j) {
-			int32_t shade=(j<128)?j:(j-256);
-			shade=256+2*shade;
+			int32_t shade = (j < 128) ? j : (j - 256);
+			shade = 256 + 2 * shade;
 
-			r = (palette[i].r*shade)>>8;
-			g = (palette[i].g*shade)>>8;
-			b = (palette[i].b*shade)>>8;
+			r = (palette[i].r * shade) >> 8;
+			g = (palette[i].g * shade) >> 8;
+			b = (palette[i].b * shade) >> 8;
 
-			if (r>255) r=255;
-			if (g>255) g=255;
-			if (b>255) b=255;
+			if (r > 255) r = 255;
+			if (g > 255) g = 255;
+			if (b > 255) b = 255;
 
 			const Uint32 value =
 				SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), r, g, b);

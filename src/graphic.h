@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ class Surface;
 struct Graphic;
 
 ///\todo Get rid of this global function
-SDL_Surface* LoadImage(const char * const filename);
+SDL_Surface * LoadImage(char const * const filename);
 
 /**
  * A renderer to get pixels to a 16bit framebuffer.
@@ -60,7 +60,7 @@ struct Graphic {
 
 	int32_t get_xres();
 	int32_t get_yres();
-	RenderTarget* get_render_target();
+	RenderTarget * get_render_target();
 	void toggle_fullscreen();
 	void update_fullscreen();
 	void update_rectangle(int32_t x, int32_t y, int32_t w, int32_t h);
@@ -73,12 +73,12 @@ struct Graphic {
 	uint32_t get_picture(uint8_t module, char const * fname);
 	void get_picture_size(const uint32_t pic, uint32_t & w, uint32_t & h);
 	uint32_t get_picture(uint32_t module, Surface &, const char * name = 0);
-	Surface* get_picture_surface(uint32_t id);
+	Surface * get_picture_surface(uint32_t id);
 	void save_png(uint32_t, StreamWrite *);
 	uint32_t create_surface(int32_t w, int32_t h);
 	void free_surface(uint32_t pic);
 	uint32_t create_grayed_out_pic(uint32_t picid);
-	RenderTarget* get_surface_renderer(uint32_t pic);
+	RenderTarget * get_surface_renderer(uint32_t pic);
 
 	enum  ResizeMode {
 		// do not worry about proportions, just sketch to requested size
@@ -99,15 +99,15 @@ struct Graphic {
 	void reset_texture_animation_reminder();
 
 	void load_animations(UI::ProgressWindow & loader_ui);
-	AnimationGfx::Index nr_frames(const uint32_t anim=0) const;
+	AnimationGfx::Index nr_frames(uint32_t const anim = 0) const;
 	void get_animation_size(const uint32_t anim, const uint32_t time, uint32_t & w, uint32_t & h);
 
 	void screenshot(const char & fname) const;
-	const char* get_maptexture_picture (uint32_t id);
-	Texture* get_maptexture_data(uint32_t id);
+	char const * get_maptexture_picture (uint32_t id);
+	Texture * get_maptexture_data(uint32_t id);
 	AnimationGfx * get_animation(uint32_t) const;
 
-	Surface* get_road_texture(int32_t roadtex);
+	Surface * get_road_texture(int32_t roadtex);
 
 protected:
 	/// Static function for png writing
@@ -128,12 +128,12 @@ protected:
 	/// hash of filename/picture ID pairs
 	picmap_t m_picturemap;
 
-	Road_Textures* m_roadtextures;
+	Road_Textures * m_roadtextures;
 	std::vector<Texture *> m_maptextures;
 	std::vector<AnimationGfx *> m_animations;
 };
 
-extern Graphic* g_gr;
+extern Graphic * g_gr;
 
 #endif
 

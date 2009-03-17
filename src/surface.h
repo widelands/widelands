@@ -44,19 +44,19 @@ class Surface {
 	friend class AnimationGfx;
 	friend class Font_Handler; // Needs m_surface for SDL_Blitting
 
-	SDL_Surface* m_surface;
+	SDL_Surface * m_surface;
 	int32_t m_offsx;
 	int32_t m_offsy;
 	uint32_t m_w, m_h;
 
 public:
 	Surface() : m_surface(0), m_offsx(0), m_offsy(0) {}
-	Surface(const Surface&);
+	Surface(Surface const &);
 	~Surface();
 
 	/// Set surface, only call once
 	void set_sdl_surface(SDL_Surface & surface);
-	SDL_Surface* get_sdl_surface() {return m_surface;}
+	SDL_Surface * get_sdl_surface() {return m_surface;}
 
 	/// Get width and height
 	uint32_t get_w() const {return m_w;}
@@ -87,8 +87,8 @@ public:
 	void fill_rect(Rect, RGBColor);
 	void brighten_rect(Rect, int32_t factor);
 
-	void blit(Point dst, Surface* src, Rect srcrc);
-	void fast_blit(Surface* src);
+	void blit(Point, Surface *, Rect srcrc);
+	void fast_blit(Surface *);
 
 	void draw_minimap
 		(Widelands::Editor_Game_Base const &,
@@ -99,10 +99,10 @@ public:
 	/// sw16_terrain.cc
 	void draw_field
 		(Rect &,
-		 const Vertex& f_vert,
-		 const Vertex& r_vert,
-		 const Vertex& bl_vert,
-		 const Vertex& br_vert,
+		 Vertex const & f_vert,
+		 Vertex const & r_vert,
+		 Vertex const & bl_vert,
+		 Vertex const & br_vert,
 		 uint8_t roads,
 		 const Texture & tr_d_texture,
 		 const Texture & l_r_texture,

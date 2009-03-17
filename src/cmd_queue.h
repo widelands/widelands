@@ -115,7 +115,7 @@ class Cmd_Queue {
 		int32_t category;
 		uint32_t serial;
 
-		bool operator< (const cmditem& c) const
+		bool operator< (cmditem const & c) const
 		{
 			if (cmd->get_duetime() != c.cmd->get_duetime())
 				return cmd->get_duetime() > c.cmd->get_duetime();
@@ -136,7 +136,7 @@ public:
 	/// with operator <b>new</b>, containing only the command. The command queue
 	/// will take ownership of the memory block and deallocate it with operator
 	/// <b>delete</b> when the command has been executed.
-	void enqueue (Command*);
+	void enqueue (Command *);
 
 	int32_t run_queue (int32_t interval, int32_t* game_time_var);
 

@@ -88,8 +88,8 @@ struct StreamWrite {
 	void Text   (std::string const &       x) {Data(x.c_str(), x.size());}
 
 private:
-	StreamWrite & operator=(StreamWrite const &);
-	explicit StreamWrite   (StreamWrite const &);
+	StreamWrite & operator= (StreamWrite const &);
+	explicit StreamWrite    (StreamWrite const &);
 };
 
 #endif

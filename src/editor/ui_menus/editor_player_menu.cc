@@ -57,7 +57,7 @@ m_remove_last_player
 	 1 < parent.egbase().map().get_nrplayers())
 {
 	int32_t const spacing = 5;
-	int32_t const width   =20;
+	int32_t const width   = 20;
 	int32_t       posy    = 0;
 
 	Widelands::Tribe_Descr::get_all_tribenames(m_tribes);
@@ -176,7 +176,7 @@ void Editor_Player_Menu::update() {
 		m_plr_set_pos_buts[p - 1]->set_pic(g_gr->get_picture(PicMod_Game, text));
 		posy += size + spacing;
 	}
-	set_inner_size(get_inner_w(), posy+spacing);
+	set_inner_size(get_inner_w(), posy + spacing);
 }
 
 void Editor_Player_Menu::clicked_add_player() {
@@ -188,7 +188,7 @@ void Editor_Player_Menu::clicked_add_player() {
 	map.set_nrplayers(nr_players);
 	{ //  register new default name for this players
 		assert(nr_players <= 99); //  2 decimal digits
-		std::string name=_("Player ");
+		std::string name = _("Player ");
 		if (char const nr_players_10 = nr_players / 10)
 			name += '0' + nr_players_10;
 		name += '0' + nr_players % 10;
@@ -268,7 +268,7 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 			if (m_tribes[i] == t)
 				break;
 		t = i == m_tribes.size() - 1 ? m_tribes[0] : m_tribes[++i];
-		parent.egbase().map().set_scenario_player_tribe(n+1, t);
+		parent.egbase().map().set_scenario_player_tribe(n + 1, t);
 		parent.set_need_save(true);
 	} else {
 		UI::MessageBox mmb
@@ -292,7 +292,7 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 	Editor_Interactive & parent =
 		dynamic_cast<Editor_Interactive &>(*get_parent());
 	//  jump to the current node
-	Widelands::Map & map =parent.egbase().map();
+	Widelands::Map & map = parent.egbase().map();
 	if (Widelands::Coords const sp = map.get_starting_pos(n))
 		parent.move_view_to(sp);
 

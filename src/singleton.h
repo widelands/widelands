@@ -42,12 +42,12 @@
 /// enforce that T equals the derived class. Unfortunately, using dynamic_cast
 /// (or any other kind of RTTI) in the constructor doesn't work.
 template <typename T> class Singleton {
-	static T* ms;
+	static T * ms;
 
 protected:
 	Singleton() {
 		assert(!ms);
-		ms = static_cast<T*>(this);
+		ms = static_cast<T *>(this);
 	}
 
 	~Singleton() {
@@ -56,11 +56,11 @@ protected:
 	}
 
 public:
-	static T& get_singleton() {assert(ms); return *ms;}
-	static T* get_ptsingleton() {assert(ms); return ms;}
+	static T & get_singleton  () {assert(ms); return *ms;}
+	static T * get_ptsingleton() {assert(ms); return  ms;}
 };
 
-template <typename T> T* Singleton <T>::ms = 0;
+template <typename T> T * Singleton <T>::ms = 0;
 
 
 #endif

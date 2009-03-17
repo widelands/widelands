@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@
 #include <stdio.h>
 
 #define TRUE_WORDS 4
-const char* trueWords[TRUE_WORDS] =
+char const * trueWords[TRUE_WORDS] =
 {
 	"true",
 	"yes",
@@ -47,7 +47,7 @@ const char* trueWords[TRUE_WORDS] =
 };
 
 #define FALSE_WORDS 4
-const char* falseWords[FALSE_WORDS] =
+char const * falseWords[FALSE_WORDS] =
 {
 	"false",
 	"no",
@@ -77,7 +77,7 @@ Section::Value::~Value()
 	free(m_value);
 }
 
-Section::Value &Section::Value::operator=(const Section::Value &o)
+Section::Value & Section::Value::operator= (Section::Value const & o)
 {
 	if (this != &o) {
 		free(m_name);
@@ -206,7 +206,7 @@ m_values      (o.m_values)
 
 Section::~Section() {free(m_section_name);}
 
-Section &Section::operator=(const Section & o) {
+Section & Section::operator= (Section const & o) {
 	if (this != &o) {
 		free(m_section_name);
 
@@ -266,7 +266,7 @@ bool Section::has_val(char const * const name) const
  *
  * Returns: Pointer to the Value struct; 0 if the key doesn't exist.
  */
-Section::Value *Section::get_val(const char *name)
+Section::Value *Section::get_val(char const * name)
 {
 	container_iterate(Value_list, m_values, i)
 		if (!strcasecmp(i.current->get_name(), name)) {
@@ -687,8 +687,7 @@ Profile::Profile(int32_t error_level)
 	m_error_level = error_level;
 }
 
-/** Profile::Profile(const char* filename, const char *global_section = 0, int32_t error_level = err_throw)
- *
+/**
  * Parses an ini-style file into sections and key-value pairs.
  * If global_section is not null, keys outside of sections are put into a section
  * of that name.
@@ -839,7 +838,7 @@ inline void rtrim(char *str)
 {
 	char *p;
 	for (p = strchr(str, 0); p > str; --p) {
-		if (!isspace(*(p-1)))
+		if (!isspace(p[-1]))
 			break;
 	}
 	*p = 0;
@@ -856,11 +855,10 @@ inline void killcomments(char *p)
 	}
 }
 
-inline char *setEndAt(char *str, char c)
+inline char * setEndAt(char * const str, char const c)
 {
-	char* s = strchr(str, c);
-	if (s)
-		s[0] = 0;
+	if (char * const s = strchr(str, c))
+		*s = '\0';
 	return str;
 }
 
@@ -902,7 +900,7 @@ void Profile::read
 				setEndAt(p, ']');
 				s = &create_section_duplicate(p);
 			} else {
-				char* tail = 0;
+				char * tail = 0;
 				translate_line = false;
 				if (reading_multiline) {
 					// Note: comments are killed by walking backwards into the string
@@ -918,7 +916,7 @@ void Profile::read
 					// skip " or '
 					++line;
 
-					char *eot = line+strlen(line)-1;
+					char * eot = line + strlen(line) - 1;
 					while (*eot != '"' && *eot != '\'') {
 						*eot = 0;
 						--eot;
@@ -932,7 +930,7 @@ void Profile::read
 					*tail++ = 0;
 					key = p;
 					if (*tail == '_') {
-						tail+= 1; // skip =_, which is only used for translations
+						tail += 1; // skip =_, which is only used for translations
 						translate_line = true;
 					}
 					tail = skipwhite(tail);
@@ -955,11 +953,11 @@ void Profile::read
 						++tail;
 				}
 				if (tail) {
-					char *eot = tail+strlen(tail)-1;
+					char * eot = tail + strlen(tail) - 1;
 					if (*eot == '\'' || *eot == '"') {
 						*eot = 0;
 						if (*tail) {
-							char *eot2 = tail+strlen(tail)-1;
+							char * eot2 = tail + strlen(tail) - 1;
 							if (*eot2 == '\'' || *eot2 == '"') {
 								reading_multiline = false;
 								*eot2 = 0;
@@ -1012,7 +1010,7 @@ void Profile::write
 	FileWrite fw;
 
 
-	fw.Printf((std::string("# Automatically created by Widelands ")+build_id()+"\n").c_str());
+	fw.Printf((std::string("# Automatically created by Widelands ") + build_id() + "\n").c_str());
 
 	container_iterate_const(Section_list, m_sections, s) {
 		if (used_only && !s.current->is_used())
@@ -1026,7 +1024,7 @@ void Profile::write
 
 			char const * const str = v.current->get_string();
 
-			if (strlen(str)>=1) {
+			if (*str) {
 				uint32_t spaces = strlen(v.current->get_name());
 				bool multiline = false;
 
@@ -1044,21 +1042,22 @@ void Profile::write
 					// Show WL that a multilined text starts
 					tempstr += "\"";
 
-				for (uint32_t i = 0; i < strlen(str); i++) {//  FIXME
+				for (char const * it = str; *it; ++it)
 					// No speach marks - they would break the format
-					if (str[i] == '"')
+					switch (*it) {
+					case '"':
 						tempstr += "''";
-					else {
+						break;
+					case '\n':
 						// Convert the newlines to WL format.
-						if (str[i] == '\n') {
-							tempstr += " \"\n";
-							for (uint32_t j = 0; j <= spaces; j++)//  FIXME
-								tempstr += " ";
-							tempstr += " \"";
-						} else
-							tempstr += str[i];
+						tempstr += " \"\n";
+						for (uint32_t j = 0; j <= spaces; ++j)
+							tempstr += ' ';
+						tempstr += " \"";
+						break;
+					default:
+						tempstr += *it;
 					}
-				}
 
 				if (multiline)
 					// End of multilined text.

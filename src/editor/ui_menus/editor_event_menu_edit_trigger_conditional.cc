@@ -56,7 +56,9 @@ m_event_chain(chain)
 
 	//  trigger List
 	new UI::Textarea(this, posx, offsy, _("Trigger Conditional: "), Align_Left);
-	m_construction= new UI::Listselect<Widelands::TriggerConditional_Factory::Token &>(this, spacing, offsy+20, ls_width, get_inner_h()-offsy-55);
+	m_construction =
+		new UI::Listselect<Widelands::TriggerConditional_Factory::Token &>
+			(this, spacing, offsy + 20, ls_width, get_inner_h() - offsy - 55);
 	m_construction->selected.set
 		(this, &Editor_Event_Menu_Edit_TriggerConditional::cs_selected);
 	m_construction->double_clicked.set

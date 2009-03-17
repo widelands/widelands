@@ -38,9 +38,9 @@ public:
 	Colormap (const SDL_Color &, const SDL_PixelFormat & fmt);
 	~Colormap ();
 
-	SDL_Color* get_palette() {return palette;}
+	SDL_Color * get_palette() {return palette;}
 
-	void* get_colormap () const {return colormap;}
+	void * get_colormap () const {return colormap;}
 };
 
 #endif

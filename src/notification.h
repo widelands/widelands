@@ -50,11 +50,11 @@ class NoteSender {
 public:
 	~NoteSender() {
 		while (m_links.size())
-			m_links[m_links.size()-1]->disconnect(*this);
+			m_links[m_links.size() - 1]->disconnect(*this);
 	}
 
 protected:
-	void send(const T& note) {
+	void send(T const & note) {
 		for (typename Links::iterator it = m_links.begin(); it != m_links.end(); ++it)
 			(*it)->receive(note);
 	}
@@ -72,17 +72,17 @@ class NoteReceiver {
 public:
 	virtual ~NoteReceiver() {
 		while (m_links.size())
-			disconnect(*m_links[m_links.size()-1]);
+			disconnect(*m_links[m_links.size() - 1]);
 	}
 
-	void connect(NoteSender<T>& sender) {
+	void connect(NoteSender<T> & sender) {
 		if (std::find(m_links.begin(), m_links.end(), &sender) != m_links.end())
 			return;
 		m_links.push_back(&sender);
 		sender.m_links.push_back(this);
 	}
 
-	void disconnect(NoteSender<T>& sender) {
+	void disconnect(NoteSender<T> & sender) {
 		typename NoteSender<T>::Links::iterator oit = std::find(sender.m_links.begin(), sender.m_links.end(), this);
 		if (oit != sender.m_links.end())
 			sender.m_links.erase(oit);
@@ -91,20 +91,20 @@ public:
 			m_links.erase(it);
 	}
 
-	virtual void receive(const T& note) = 0;
+	virtual void receive(T const & note) = 0;
 
 private:
 	Links m_links;
 };
 
 
-enum losegain_t {LOSE=0, GAIN};
+enum losegain_t {LOSE = 0, GAIN};
 
 struct NoteImmovable {
-	PlayerImmovable* pi;
+	PlayerImmovable * pi;
 	losegain_t lg;
 
-	NoteImmovable(PlayerImmovable* _pi, losegain_t _lg)
+	NoteImmovable(PlayerImmovable * const _pi, losegain_t const _lg)
 		: pi(_pi), lg(_lg) {}
 };
 
@@ -112,7 +112,7 @@ struct NoteField {
 	FCoords fc;
 	losegain_t lg;
 
-	NoteField(const FCoords& _fc, losegain_t _lg)
+	NoteField(FCoords const & _fc, losegain_t const _lg)
 		: fc(_fc), lg(_lg) {}
 };
 

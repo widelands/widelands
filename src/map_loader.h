@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,7 +58,7 @@ protected:
 		STATE_WORLD_LOADED,
 		STATE_LOADED
 	};
-	void set_state(State s) {m_s=s;}
+	void set_state(State const s) {m_s = s;}
 	State get_state() {return m_s;}
 	Map & m_map;
 

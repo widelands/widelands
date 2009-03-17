@@ -236,8 +236,6 @@ uint32_t ConstructionSite::get_built_per64k()
 
 /*
 ===============
-ConstructionSite::set_building
-
 Set the type of building we're going to build
 ===============
 */
@@ -268,23 +266,19 @@ Change the economy for the wares queues.
 Note that the workers are dealt with in the PlayerImmovable code.
 ===============
 */
-void ConstructionSite::set_economy(Economy* e)
+void ConstructionSite::set_economy(Economy * const e)
 {
-	Economy* old = get_economy();
-
-	if (old) {
+	if (Economy * const old = get_economy())
 		for (size_t i = 0; i < m_wares.size(); ++i)
 			m_wares[i]->remove_from_economy(old);
-	}
 
 	Building::set_economy(e);
 	if (m_builder_request)
 		m_builder_request->set_economy(e);
 
-	if (e) {
+	if (e)
 		for (size_t i = 0; i < m_wares.size(); ++i)
 			m_wares[i]->add_to_economy(e);
-	}
 }
 
 
@@ -440,8 +434,6 @@ bool ConstructionSite::fetch_from_flag(Game* g)
 
 /*
 ===============
-ConstructionSite::get_building_work
-
 Called by our builder to get instructions.
 ===============
 */
@@ -488,10 +480,6 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 
 			if (!wq->get_filled())
 				continue;
-
-			molog
-				("ConstructionSite::check_work: wq has %i/%i, begin work\n",
-				 wq->get_filled(), wq->get_size());
 
 			wq->set_filled(wq->get_filled() - 1);
 			wq->set_size(wq->get_size() - 1);

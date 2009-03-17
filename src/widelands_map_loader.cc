@@ -122,8 +122,6 @@ int32_t WL_Map_Loader::load_map_complete
 		load_world();
 	assert(get_state() == STATE_WORLD_LOADED);
 
-	//  Postload the world which provides all the immovables found on a map.
-	m_map.world().postload(egbase);
 	m_map.set_size(m_map.m_width, m_map.m_height);
 
 	delete m_mol;

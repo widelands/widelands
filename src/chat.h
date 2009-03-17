@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,7 +72,7 @@ struct ChatProvider : public Widelands::NoteSender<ChatMessage> {
 	 *
 	 * The message may or may not appear in subsequent calls to \ref getMessages.
 	 */
-	virtual void send(const std::string& msg) = 0;
+	virtual void send(std::string const &) = 0;
 
 	/**
 	 * \return a (chronological) list of received chat messages.
@@ -80,10 +80,10 @@ struct ChatProvider : public Widelands::NoteSender<ChatMessage> {
 	 * subsequent calls to this functions may return a smaller or
 	 * greater number of chat messages.
 	 */
-	virtual const std::vector<ChatMessage>& getMessages() const = 0;
+	virtual std::vector<ChatMessage> const & getMessages() const = 0;
 
 protected:
-	void send(const ChatMessage& c) {Widelands::NoteSender<ChatMessage>::send(c);}
+	void send(ChatMessage const & c) {Widelands::NoteSender<ChatMessage>::send(c);}
 };
 
 #endif // CHAT_H

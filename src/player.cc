@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,7 +76,11 @@ Player::Player
 	m_ware_productions  (tribe_descr.get_nrwares    ())
 {
 	for (int32_t i = 0; i < 4; ++i)
-		m_playercolor[i] = RGBColor(playercolor[i*3 + 0], playercolor[i*3 + 1], playercolor[i*3 + 2]);
+		m_playercolor[i] =
+			RGBColor
+				(playercolor[i * 3 + 0],
+				 playercolor[i * 3 + 1],
+				 playercolor[i * 3 + 2]);
 
 	set_name(name);
 }
@@ -494,14 +498,15 @@ void Player::allow_building(Building_Index const i, bool const allow) {
 /*
  * Economy stuff below
  */
-void Player::add_economy(Economy* eco)
+void Player::add_economy(Economy * const eco)
 {
 	if (has_economy(eco))
 		return;
 	m_economies.push_back(eco);
 }
 
-void Player::remove_economy(Economy* eco) {
+
+void Player::remove_economy(Economy * const eco) {
 	if (!has_economy(eco)) return;
 	std::vector<Economy*>::iterator i = m_economies.begin();
 	while (i!=m_economies.end()) {
@@ -596,7 +601,7 @@ uint32_t Player::findAttackSoldiers
 		(Area<FCoords>(map.get_fcoords(flag.get_position()), 25),
 		 &immovables,
 		 CheckStepWalkOn(MOVECAPS_WALK, false),
-		 FindImmovablePlayerMilitarySite(this));
+		 FindImmovablePlayerMilitarySite(*this));
 
 	if (immovables.empty())
 		return 0;

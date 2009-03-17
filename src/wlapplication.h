@@ -211,12 +211,12 @@ struct WLApplication {
 
 	static void show_usage();
 
-	static void emergency_save(Widelands::Game& game);
+	static void emergency_save(Widelands::Game &);
 
 protected:
-	WLApplication(const int argc, const char **argv);
+	WLApplication(int argc, char const * * argv);
 
-	bool poll_event(SDL_Event *ev, const bool throttle);
+	bool poll_event(SDL_Event *ev, bool throttle);
 
 	bool init_settings();
 	void shutdown_settings();
@@ -224,7 +224,7 @@ protected:
 	bool init_hardware();
 	void shutdown_hardware();
 
-	void parse_commandline(const int argc, const char **argv);
+	void parse_commandline(int argc, char const * * argv);
 	void handle_commandline_parameters() throw (Parameter_error);
 
 	void setup_searchpaths(std::string argv0);

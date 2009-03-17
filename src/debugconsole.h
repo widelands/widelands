@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,13 +50,13 @@ struct Handler {
 	 * The passed array contains a list of all (space-separated) components
 	 * of the command, including the command name itself.
 	 */
-	typedef boost::function<void (const std::vector<std::string>&)> HandlerFn;
+	typedef boost::function<void (std::vector<std::string> const &)> HandlerFn;
 
 	Handler();
 	virtual ~Handler();
 
 protected:
-	void addCommand(const std::string& cmd, const HandlerFn& fun);
+	void addCommand(std::string const &, HandlerFn const &);
 
 private:
 	std::vector<std::string> m_commands;
@@ -80,7 +80,7 @@ ChatProvider * getChatProvider();
  * \ref getChatProvider(). Sending a message via \ref getChatProvider()
  * executes a command, while this function writes to the console.
  */
-void write(const std::string& text);
+void write(std::string const & text);
 
 }
 

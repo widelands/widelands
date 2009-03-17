@@ -111,7 +111,7 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 
 
 	uint32_t plr_in_game = 0;
-	const Player_Number nr_players = game.map().get_nrplayers();
+	Player_Number const nr_players = game.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) ++plr_in_game;
 
 	pos.x = spacing;
@@ -269,7 +269,7 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 		 4,
 		 &WUIPlot_Area::set_time, &m_plot, WUIPlot_Area::TIME_FOUR_HOURS,
 		 _("4 h"));
-	pos.x += button_size+spacing;
+	pos.x += button_size + spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,

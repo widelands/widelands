@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,10 +44,10 @@ Graphic *g_gr;
  * Cannot return 0, throws an exception on error.
  * \todo Get rid of this function
 */
-SDL_Surface* LoadImage(const char * const filename)
+SDL_Surface * LoadImage(char const * const filename)
 {
 	FileRead fr;
-	SDL_Surface* surf;
+	SDL_Surface * surf;
 
 	fr.Open(*g_fs, filename);
 
@@ -85,14 +85,15 @@ Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen)
 	if (fullscreen)
 		flags |= SDL_FULLSCREEN;
 
-	SDL_Surface* sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
+	SDL_Surface * sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
 
 	if (!sdlsurface)
 		throw wexception("Couldn't set video mode: %s", SDL_GetError());
 
 	assert(sdlsurface->format->BytesPerPixel == 2 || sdlsurface->format->BytesPerPixel == 4);
 
-	SDL_WM_SetCaption((std::string("Widelands ")+build_id()).c_str(), "Widelands");
+	SDL_WM_SetCaption
+		((std::string("Widelands ") + build_id()).c_str(), "Widelands");
 
 	m_screen.set_sdl_surface(*sdlsurface);
 
@@ -137,7 +138,7 @@ int32_t Graphic::get_yres()
 /**
  * Return a pointer to the RenderTarget representing the screen
 */
-RenderTarget* Graphic::get_render_target()
+RenderTarget * Graphic::get_render_target()
 {
 	m_rendertarget->reset();
 
@@ -257,15 +258,15 @@ uint32_t Graphic::get_picture(uint8_t const module, char const * const fname) {
 	//  Check if the picture is already loaded.
 	const picmap_t::const_iterator it = m_picturemap.find(fname);
 
-	if (it != m_picturemap.end()) {
+	if (it != m_picturemap.end())
 		id = it->second;
-	} else {
-		SDL_Surface* bmp;
+	else {
+		SDL_Surface * bmp;
 
 		try {
 			bmp = LoadImage(fname);
 			//log("Graphic::get_picture(): loading picture '%s'\n", fname);
-		} catch (std::exception& e) {
+		} catch (std::exception const & e) {
 			log("WARNING: Couldn't open %s: %s\n", fname, e.what());
 			return 0;
 		}
@@ -329,7 +330,7 @@ uint32_t Graphic::get_resized_picture
 		throw wexception
 			("get_resized_picture(%i): picture doesn't exist", index);
 
-	Surface* orig = m_pictures[index].surface;
+	Surface * const orig = m_pictures[index].surface;
 	if (orig->get_w() == w and orig->get_h() == h)
 		return index;
 
@@ -358,18 +359,12 @@ uint32_t Graphic::get_resized_picture
 
 	const uint32_t pic = g_gr->create_surface(w, h);
 
-	if (mode == ResizeMode_Loose || (width == w && height == h)) {
-		SDL_Surface * const resized = resize(index, w, h);
-		Surface* s = m_pictures[pic].surface;
-		s->set_sdl_surface(*resized);
-	} else {
+	if (mode == ResizeMode_Loose || (width == w && height == h))
+		m_pictures[pic].surface->set_sdl_surface(*resize(index, w, h));
+	else {
 
-		SDL_Surface * const resized = resize(index, width, height);
 		Surface src;
-		src.set_sdl_surface(*resized);
-
-		// Get the rendertarget for this
-		RenderTarget* target = g_gr->get_surface_renderer(pic);
+		src.set_sdl_surface(*resize(index, width, height));
 
 		// apply rectangle by adjusted size
 		Rect srcrc;
@@ -378,7 +373,8 @@ uint32_t Graphic::get_resized_picture
 		srcrc.x = (width - srcrc.w) / 2;
 		srcrc.y = (height - srcrc.h) / 2;
 
-		target->blitrect
+
+		g_gr->get_surface_renderer(pic)->blitrect //  Get the rendertarget
 			(Point((w - srcrc.w) / 2, (h - srcrc.h) / 2),
 			 get_picture(m_pictures[index].module, src), srcrc);
 	}
@@ -394,13 +390,16 @@ uint32_t Graphic::get_resized_picture
  * \param h target height
  * \return resized version of picture
  */
-SDL_Surface* Graphic::resize(const uint32_t index, const uint32_t w, const uint32_t h)
+SDL_Surface * Graphic::resize
+	(uint32_t const index, uint32_t const w, uint32_t const h)
 {
-	Surface *orig = g_gr->get_picture_surface(index);
-	double zoomx = double(w) / orig->get_w();
-	double zoomy = double(h) / orig->get_h();
+	Surface & orig = *g_gr->get_picture_surface(index);
 
-	return zoomSurface(orig->get_sdl_surface(), zoomx, zoomy, 1);
+	return
+		zoomSurface
+			(orig.get_sdl_surface(),
+			 double(w) / orig.get_w(), double(h) / orig.get_h(),
+			 1);
 }
 
 
@@ -413,11 +412,11 @@ void Graphic::get_picture_size(const uint32_t pic, uint32_t & w, uint32_t & h)
 	if (pic >= m_pictures.size() || !m_pictures[pic].module)
 		throw wexception("get_picture_size(%i): picture doesn't exist", pic);
 
-	Surface* bmp = m_pictures[pic].surface;
+	Surface & bmp = *m_pictures[pic].surface;
 
-	w = bmp->get_w();
+	w = bmp.get_w();
 
-	h = bmp->get_h();
+	h = bmp.get_h();
 }
 
 void Graphic::save_png(uint32_t pic_index, StreamWrite * const sw)
@@ -575,15 +574,15 @@ uint32_t Graphic::create_grayed_out_pic(uint32_t const picid) {
 /**
  * Returns the RenderTarget for the given surface
 */
-RenderTarget* Graphic::get_surface_renderer(uint32_t const pic) {
+RenderTarget * Graphic::get_surface_renderer(uint32_t const pic) {
 	assert(pic < m_pictures.size());
 	//  assert(m_pictures[pic].module == 0xff); fails showing terrains in editor
 
-	RenderTarget* rt = m_pictures[pic].u.rendertarget;
+	RenderTarget & rt = *m_pictures[pic].u.rendertarget;
 
-	rt->reset();
+	rt.reset();
 
-	return rt;
+	return &rt;
 }
 
 /**
@@ -603,7 +602,7 @@ uint32_t Graphic::get_maptexture(const char & fnametempl, const uint32_t frameti
 	try {
 		m_maptextures.push_back
 		(new Texture(fnametempl, frametime, m_screen.format()));
-	} catch (std::exception& e) {
+	} catch (std::exception const & e) {
 		log("Failed to load maptexture %s: %s\n", &fnametempl, e.what());
 		return 0;
 	}
@@ -663,9 +662,9 @@ AnimationGfx::Index Graphic::nr_frames(const uint32_t anim) const
 void Graphic::get_animation_size
 	(uint32_t const anim, uint32_t const time, uint32_t & w, uint32_t & h)
 {
-	const AnimationData* data = g_anim.get_animation(anim);
-	AnimationGfx* gfx = get_animation(anim);
-	Surface* frame;
+	AnimationData const * data = g_anim.get_animation(anim);
+	AnimationGfx        * gfx  = get_animation(anim);
+	Surface * frame;
 
 	if (!data || !gfx) {
 		log("WARNING: Animation %i doesn't exist\n", anim);
@@ -692,11 +691,9 @@ void Graphic::screenshot(const char & fname) const
 /**
  * \return Filename of texture of given ID.
 */
-const char* Graphic::get_maptexture_picture(uint32_t id)
+char const * Graphic::get_maptexture_picture(uint32_t const id)
 {
-	Texture* tex = get_maptexture_data(id);
-
-	if (tex)
+	if (Texture * const tex = get_maptexture_data(id))
 		return tex->get_texture_picture();
 	else
 		return 0;
@@ -731,7 +728,7 @@ std::vector<Picture>::size_type Graphic::find_free_picture()
 		if (m_pictures[id].module == 0)
 			return id;
 
-	m_pictures.resize(id+1);
+	m_pictures.resize(id + 1);
 
 	return id;
 }
@@ -740,7 +737,7 @@ std::vector<Picture>::size_type Graphic::find_free_picture()
  * Returns the bitmap that belongs to the given picture ID.
  * May return 0 if the given picture does not exist.
 */
-Surface* Graphic::get_picture_surface(uint32_t id)
+Surface * Graphic::get_picture_surface(uint32_t const id)
 {
 	if (id >= m_pictures.size())
 		return 0;
@@ -754,18 +751,18 @@ Surface* Graphic::get_picture_surface(uint32_t id)
 /**
  * Retrieve the animation graphics
 */
-AnimationGfx* Graphic::get_animation(const uint32_t anim) const
+AnimationGfx * Graphic::get_animation(uint32_t const anim) const
 {
 	if (!anim || anim > m_animations.size())
 		return 0;
 
-	return m_animations[anim-1];
+	return m_animations[anim - 1];
 }
 
 /**
  * \return the actual texture data associated with the given ID.
 */
-Texture* Graphic::get_maptexture_data(uint32_t id)
+Texture * Graphic::get_maptexture_data(uint32_t id)
 {
 	--id; // ID 1 is at m_maptextures[0]
 
@@ -778,7 +775,7 @@ Texture* Graphic::get_maptexture_data(uint32_t id)
 /**
  * \return The road textures
 */
-Surface* Graphic::get_road_texture(int32_t roadtex)
+Surface * Graphic::get_road_texture(int32_t const roadtex)
 {
 	if (not m_roadtextures) {
 		// Load the road textures

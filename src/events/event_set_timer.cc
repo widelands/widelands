@@ -86,4 +86,4 @@ Event::State Event_Set_Timer::run(Game * game) {
 	return m_state = DONE;
 }
 
-};
+}

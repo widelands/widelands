@@ -52,6 +52,7 @@ Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
 	m_readyflags   (0),
 	m_first_strikes(true)
 {
+	assert(First.get_owner() != Second.get_owner());
 	{
 		StreamWrite & ss = game.syncstream();
 		ss.Unsigned32(0x00e111ba); // appears as ba111e00 in a hexdump

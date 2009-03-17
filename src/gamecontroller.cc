@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ struct SinglePlayerGameController : public GameController {
 	void setDesiredSpeed(uint32_t speed);
 
 private:
-	Widelands::Game& m_game;
+	Widelands::Game & m_game;
 	bool m_useai;
 	int32_t m_lastframe;
 	int32_t m_time;
@@ -87,23 +87,23 @@ void SinglePlayerGameController::think()
 	else if (frametime > 1000)
 		frametime = 1000;
 
-	frametime = (frametime*m_speed)/1000;
+	frametime = frametime * m_speed / 1000;
 
 	m_time = m_game.get_gametime() + frametime;
 
 	if (m_useai && m_game.is_loaded()) {
 		const Widelands::Player_Number nr_players = m_game.map().get_nrplayers();
-		iterate_players_existing(p, nr_players, m_game, plr) {
-			if (p == m_local)
-				continue;
+		iterate_players_existing(p, nr_players, m_game, plr)
+			if (p != m_local) {
 
-			if (p > m_computerplayers.size())
-				m_computerplayers.resize(p);
-			if (!m_computerplayers[p-1]) {
-				m_computerplayers[p-1] = Computer_Player::getImplementation(plr->getAI())->instantiate(m_game, p);
+				if (p > m_computerplayers.size())
+					m_computerplayers.resize(p);
+				if (!m_computerplayers[p - 1])
+					m_computerplayers[p - 1] =
+						Computer_Player::getImplementation
+							(plr->getAI())->instantiate(m_game, p);
+				m_computerplayers[p - 1]->think();
 			}
-			m_computerplayers[p-1]->think();
-		}
 	}
 }
 
@@ -133,7 +133,7 @@ uint32_t SinglePlayerGameController::desiredSpeed()
 	return m_speed;
 }
 
-void SinglePlayerGameController::setDesiredSpeed(uint32_t speed)
+void SinglePlayerGameController::setDesiredSpeed(uint32_t const speed)
 {
 	m_speed = speed;
 }

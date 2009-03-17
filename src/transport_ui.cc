@@ -40,7 +40,9 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 		UI::UniqueWindow
 			(&parent, &_economy.m_optionswindow_registry, 0, 0,
 			 _("Target quantities")),
-		m_box     (this, 0, 0, UI::Box::Vertical, g_gr->get_xres()-80, g_gr->get_yres()-80),
+		m_box
+			(this, 0, 0, UI::Box::Vertical,
+			 g_gr->get_xres() - 80, g_gr->get_yres() - 80),
 		m_economy (_economy)
 	{
 		Widelands::Tribe_Descr const & tribe = parent.player().tribe();

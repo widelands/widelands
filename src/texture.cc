@@ -69,16 +69,13 @@ is_32bit   (format.BytesPerPixel == 4)
 			break;
 
 		// Load it
-		SDL_Surface* surf;
+		SDL_Surface * surf;
 
 		m_texture_picture = strdup(fname);
 
-		try
-		{
+		try {
 			surf = LoadImage(fname);
-		}
-		catch (std::exception& e)
-		{
+		} catch (std::exception const & e) {
 			log("WARNING: Failed to load texture frame %s: %s\n", fname, e.what());
 			break;
 		}
@@ -101,9 +98,9 @@ is_32bit   (format.BytesPerPixel == 4)
 				for (int32_t r = 0; r < 8; ++r)
 					for (int32_t g = 0; g < 8; ++g)
 						for (int32_t b = 0; b < 4; ++b) {
-							pal[(r<<5) | (g<<2) | b].r=r<<5;
-							pal[(r<<5) | (g<<2) | b].g=g<<5;
-							pal[(r<<5) | (g<<2) | b].b=b<<6;
+							pal[(r << 5) | (g << 2) | b].r = r << 5;
+							pal[(r << 5) | (g << 2) | b].g = g << 5;
+							pal[(r << 5) | (g << 2) | b].b = b << 6;
 						}
 
 				m_colormap = new Colormap(*pal, format);
@@ -122,12 +119,14 @@ is_32bit   (format.BytesPerPixel == 4)
 		fmt.BytesPerPixel = 1;
 		fmt.palette = &palette;
 
-		SDL_Surface* cv = SDL_ConvertSurface(surf, &fmt, 0);
+		SDL_Surface * const cv = SDL_ConvertSurface(surf, &fmt, 0);
 
 		// Add the frame
-		m_pixels = static_cast<uint8_t *>
-			(realloc(m_pixels, TEXTURE_WIDTH*TEXTURE_HEIGHT * (m_nrframes + 1)));
-		m_curframe = &m_pixels[TEXTURE_WIDTH*TEXTURE_HEIGHT*m_nrframes];
+		m_pixels =
+			static_cast<uint8_t *>
+				(realloc
+				 	(m_pixels, TEXTURE_WIDTH * TEXTURE_HEIGHT * (m_nrframes + 1)));
+		m_curframe = &m_pixels[TEXTURE_WIDTH * TEXTURE_HEIGHT * m_nrframes];
 		++m_nrframes;
 
 		SDL_LockSurface(cv);
@@ -179,11 +178,11 @@ Uint32 Texture::get_minimap_color(const char shade) {
  */
 void Texture::animate(uint32_t time)
 {
-	int32_t frame = (time / m_frametime) % m_nrframes;
+	int32_t const frame = (time / m_frametime) % m_nrframes;
 
-	uint8_t* lastframe = m_curframe;
+	uint8_t * const lastframe = m_curframe;
 
-	m_curframe = &m_pixels[TEXTURE_WIDTH*TEXTURE_HEIGHT*frame];
+	m_curframe = &m_pixels[TEXTURE_WIDTH * TEXTURE_HEIGHT * frame];
 	if (lastframe != m_curframe)
 		m_was_animated = true;
 }

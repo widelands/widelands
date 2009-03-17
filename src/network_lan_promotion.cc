@@ -41,7 +41,7 @@ LAN_Base::LAN_Base ()
 #ifndef WIN32
 
 	//  get a list of all local broadcast addresses
-	struct if_nameindex* ifnames=if_nameindex();
+	struct if_nameindex * ifnames = if_nameindex();
 	struct ifreq ifr;
 
 	for (int32_t i = 0; ifnames[i].if_index; ++i) {
@@ -97,20 +97,21 @@ bool LAN_Base::avail ()
 	return select(sock + 1, &fds, 0, 0, &tv) == 1;
 }
 
-ssize_t LAN_Base::recv (void* buf, size_t len, sockaddr_in* addr)
+ssize_t LAN_Base::recv
+	(void * const buf, size_t const len, sockaddr_in * const addr)
 {
 	socklen_t addrlen = sizeof(sockaddr_in);
 	return
 		recvfrom
-		(sock,
-		 static_cast<DATATYPE *>(buf),
-		 len,
-		 0,
-		 reinterpret_cast<sockaddr *>(addr),
-		 &addrlen);
+			(sock,
+			 static_cast<DATATYPE *>(buf),
+			 len,
+			 0,
+			 reinterpret_cast<sockaddr *>(addr),
+			 &addrlen);
 }
 
-void LAN_Base::send (const void* buf, size_t len, const sockaddr_in* addr)
+void LAN_Base::send (void const * buf, size_t len, sockaddr_in const * addr)
 {
 	sendto
 		(sock,
@@ -121,7 +122,7 @@ void LAN_Base::send (const void* buf, size_t len, const sockaddr_in* addr)
 		 sizeof(sockaddr_in));
 }
 
-void LAN_Base::broadcast (const void* buf, size_t len, uint16_t port)
+void LAN_Base::broadcast (void const * buf, size_t len, uint16_t port)
 {
 	for
 		(std::list<in_addr_t>::iterator i = broadcast_addresses.begin();
@@ -186,12 +187,15 @@ void LAN_Game_Promoter::run ()
 
 		printf ("Received %s packet\n", magic);
 
-		if (!strncmp(magic, "QUERY", 6) && magic[6]==LAN_PROMOTION_PROTOCOL_VERSION)
+		if
+			(!strncmp(magic, "QUERY", 6)
+			 &&
+			 magic[6] == LAN_PROMOTION_PROTOCOL_VERSION)
 			send (&gameinfo, sizeof(gameinfo), &addr);
 	}
 }
 
-void LAN_Game_Promoter::set_map (const char* map)
+void LAN_Game_Promoter::set_map (char const * map)
 {
 	strncpy (gameinfo.map, map, sizeof(gameinfo.map));
 
@@ -216,7 +220,7 @@ void LAN_Game_Finder::reset ()
 	opengames.clear();
 
 	strncpy (magic, "QUERY", 8);
-	magic[6]=LAN_PROMOTION_PROTOCOL_VERSION;
+	magic[6] = LAN_PROMOTION_PROTOCOL_VERSION;
 
 	broadcast (magic, 8, WIDELANDS_LAN_PROMOTION_PORT);
 }
@@ -243,10 +247,10 @@ void LAN_Game_Finder::run ()
 			continue;
 
 		std::list<LAN_Open_Game *>::iterator i;
-		// if the game already is in the list, update the information
+		//  if the game already is in the list, update the information
 		for (i = opengames.begin(); i != opengames.end(); ++i) {
 			if ((*i)->address == addr.sin_addr.s_addr) {
-				(*i)->info=info;
+				(*i)->info = info;
 
 				callback (GameUpdated, *i, userdata);
 				break;
@@ -254,7 +258,7 @@ void LAN_Game_Finder::run ()
 		}
 
 		//  otherwise just append it to the list
-		if (i==opengames.end()) {
+		if (i == opengames.end()) {
 			opengames.push_back (new LAN_Open_Game);
 
 			opengames.back()->address = addr.sin_addr.s_addr;
@@ -266,7 +270,8 @@ void LAN_Game_Finder::run ()
 	}
 }
 
-void LAN_Game_Finder::set_callback (void (*cb)(int32_t, const LAN_Open_Game*, void*), void* ud)
+void LAN_Game_Finder::set_callback
+	(void (* const cb)(int32_t, LAN_Open_Game const *, void *), void * const ud)
 {
 	callback = cb;
 	userdata = ud;

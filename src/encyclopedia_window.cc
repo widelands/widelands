@@ -144,7 +144,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	//  FIXME identify the program.
 	//  Only shows information from the first program that has a name indicating
 	//  that it produces the considered ware type.
-	std::map<std::string, ProductionProgram*>::const_iterator programIt =
+	std::map<std::string, ProductionProgram *>::const_iterator programIt =
 		programs.find(std::string("produce_") + selectedWare->name());
 
 	if (programIt == programs.end())

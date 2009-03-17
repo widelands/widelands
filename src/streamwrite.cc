@@ -44,19 +44,19 @@ void StreamWrite::Printf(const char *fmt, ...)
 		Data(buffer, i);
 	} else {
 		uint32_t size = sizeof(buffer);
-		char* heapbuf = 0;
+		char * heapbuf = 0;
 
 		do {
 			if (i < 0)
-				size = 2*size; // old vsnprintf
+				size = 2 * size; //  old vsnprintf
 			else
-				size = i+1; // C99-compatible vsnprintf
+				size = i + 1; //  C99-compatible vsnprintf
 
 			delete[] heapbuf;
 			heapbuf = new char[size];
 
 			va_start(va, fmt);
-			i = vsnprintf(heapbuf, i+1, fmt, va);
+			i = vsnprintf(heapbuf, i + 1, fmt, va);
 			va_end(va);
 		} while (static_cast<uint32_t>(i) >= size);
 

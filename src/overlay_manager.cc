@@ -155,7 +155,7 @@ void Overlay_Manager::register_overlay
 	 Job_Id               const jobid)
 {
 	assert(c.t <= 2);
-	assert(level!=5); // level == 5 is undefined behavior
+	assert(level != 5); //  level == 5 is undefined behavior
 
 	if (hotspot == Point::invalid()) {
 		uint32_t picture_width, picture_height;

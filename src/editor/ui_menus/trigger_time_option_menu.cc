@@ -88,7 +88,7 @@ m_trigger (trigger)
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
-		 posx, posy+40, width, height,
+		 posx, posy + 40, width, height,
 		 1,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 3);
@@ -110,14 +110,15 @@ m_trigger (trigger)
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
-		 posx, posy+40, width, height,
+		 posx, posy + 40, width, height,
 		 1,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 5);
 
 	posx += width + spacing;
 
-	UI::Textarea * tt = new UI::Textarea(this, posx, posy+23, ":", Align_Left);
+	UI::Textarea * tt =
+		new UI::Textarea(this, posx, posy + 23, ":", Align_Left);
 	posx += spacing + tt->get_w();
 
 	//  minutes, first cipher
@@ -131,11 +132,11 @@ m_trigger (trigger)
 
 	m_textareas[2] =
 		new UI::Textarea
-		(this, posx, posy + 20, width, height, "9", Align_Center);
+			(this, posx, posy + 20, width, height, "9", Align_Center);
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
-		 posx, posy+40, width, height,
+		 posx, posy + 40, width, height,
 		 1,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 7);
@@ -157,14 +158,14 @@ m_trigger (trigger)
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
-		 posx, posy+40, width, height,
+		 posx, posy + 40, width, height,
 		 1,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 9);
 
 	posx += width + spacing;
 
-	tt = new UI::Textarea(this, posx, posy+23, ":", Align_Left);
+	tt = new UI::Textarea(this, posx, posy + 23, ":", Align_Left);
 
 	posx += spacing + tt->get_w();
 	// seconds, first cipher
@@ -182,7 +183,7 @@ m_trigger (trigger)
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
-		 posx, posy+40, width, height,
+		 posx, posy + 40, width, height,
 		 1,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 11);
@@ -203,7 +204,7 @@ m_trigger (trigger)
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
-		 posx, posy+40, width, height,
+		 posx, posy + 40, width, height,
 		 1,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, this, 13);
@@ -258,7 +259,7 @@ void Trigger_Time_Option_Menu::clicked_ok() {
 		 (m_values[2] * 10 + m_values[3]) * 60
 		 +
 		 (m_values[4] * 10 + m_values[5]));
-	const std::string& name = m_name->text();
+	std::string const & name = m_name->text();
 	if (name.size()) {
 		if
 			(Widelands::Trigger * const registered_trigger =
@@ -285,8 +286,8 @@ void Trigger_Time_Option_Menu::clicked_ok() {
 
 
 void Trigger_Time_Option_Menu::clicked(int32_t const i) {
-	int32_t id = (i - 2) /2;
-	m_values[id]= i % 2 ?  m_values[id] - 1 :  m_values[id] + 1;
+	int32_t id = (i - 2) / 2;
+	m_values[id] = i % 2 ?  m_values[id] - 1 :  m_values[id] + 1;
 	if (m_values[id] < 0)
 		m_values[id] = 0;
 	if

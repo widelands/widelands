@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,14 +45,14 @@ struct CheckStepAlwaysFalse {
 	}
 };
 
-const CheckStep& CheckStep::alwaysfalse()
+CheckStep const & CheckStep::alwaysfalse()
 {
 	static const CheckStep cstep = CheckStep(CheckStepAlwaysFalse());
 	return cstep;
 }
 
 
-void CheckStepAnd::add(const CheckStep& sub)
+void CheckStepAnd::add(CheckStep const & sub)
 {
 	subs.push_back(sub);
 }
@@ -77,10 +77,8 @@ bool CheckStepAnd::reachabledest(Map* map, FCoords dest) const
 		(std::vector<CheckStep>::const_iterator it = subs.begin();
 		 it != subs.end();
 		 ++it)
-	{
 		if (!it->reachabledest(map, dest))
 			return false;
-	}
 
 	return true;
 }

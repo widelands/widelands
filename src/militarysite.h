@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -82,7 +82,7 @@ public:
 	virtual void act(Game* g, uint32_t data);
 	virtual void remove_worker(Worker*);
 
-	virtual void set_economy(Economy* e);
+	virtual void set_economy(Economy *);
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
 
 	// Begin implementation of SoldierControl
@@ -108,9 +108,11 @@ public:
 	void sendAttacker(Soldier &, Building &);
 
 	/// This methods are helper for use at configure this site.
-	void set_requirements (const Requirements&);
+	void set_requirements (Requirements const &);
 	void  clear_requirements ();
-	const Requirements& get_requirements () const {return m_soldier_requirements;}
+	Requirements const & get_requirements () const {
+		return m_soldier_requirements;
+	}
 
 	void update_soldier_request();
 
@@ -125,12 +127,12 @@ private:
 	static void request_soldier_callback
 		(Game *, Request *, Ware_Index, Worker *, void * data);
 
-	Map_Object* popSoldierJob(Soldier* soldier, bool* stayhome = 0);
+	Map_Object * popSoldierJob(Soldier *, bool * stayhome = 0);
 	bool haveSoldierJob(Soldier &);
 
 private:
 	Requirements m_soldier_requirements;
-	Request* m_soldier_request;
+	Request    * m_soldier_request;
 	bool m_didconquer;
 	uint32_t m_capacity;
 

@@ -30,8 +30,8 @@ GameChatPanel::GameChatPanel
 :
 UI::Panel(parent, x, y, w, h),
 m_chat(chat),
-chatbox(this, 0, 0, w, h-25, "", Align_Left, 1),
-editbox(this, 0, h-20, w,  20)
+chatbox(this, 0, 0, w, h - 25, "", Align_Left, 1),
+editbox(this, 0, h - 20, w,  20)
 {
 	chatbox.set_scrollmode(UI::Multiline_Textarea::ScrollLog);
 	editbox.ok.set(this, &GameChatPanel::keyEnter);
@@ -66,14 +66,14 @@ void GameChatPanel::focusEdit()
 	editbox.focus();
 }
 
-void GameChatPanel::receive(const ChatMessage&)
+void GameChatPanel::receive(ChatMessage const &)
 {
 	recalculate();
 }
 
 void GameChatPanel::keyEnter()
 {
-	const std::string& str = editbox.text();
+	std::string const & str = editbox.text();
 
 	if (str.size())
 		m_chat.send(str);

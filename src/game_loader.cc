@@ -51,7 +51,7 @@ int32_t Game_Loader::preload_game(Game_Preload_Data_Packet & mp) {
 /*
  * Load the complete file
  */
-int32_t Game_Loader::load_game(bool multiplayer) {
+int32_t Game_Loader::load_game(bool const multiplayer) {
 
 	log("Game: Reading Preload Data ... ");
 	{Game_Preload_Data_Packet                     p; p.Read(m_fs, m_game, 0);}

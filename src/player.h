@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,7 @@ struct Economy;
 struct Path;
 struct PlayerImmovable;
 class Soldier;
+struct TrainingSite;
 class Flag;
 struct Tribe_Descr;
 struct AttackController;
@@ -97,7 +98,7 @@ struct Player :
 	FieldCaps get_buildcaps(FCoords) const;
 
 	// For cheating
-	void set_see_all(bool t) {m_see_all=t; m_view_changed = true;}
+	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}
 	bool see_all() const throw () {return m_see_all;}
 
 	/// Per-player field information.
@@ -301,8 +302,8 @@ struct Player :
 		//  <end>                           0x100         0x160
 
 	private:
-		Field & operator=(Field const &);
-		explicit Field   (Field const &);
+		Field & operator= (Field const &);
+		explicit Field    (Field const &);
 	};
 
 	const Field * fields() const throw () {return m_fields;}
@@ -395,9 +396,9 @@ struct Player :
 		(Building *, Building_Index index_of_new_building);
 
 	// Economy stuff
-	void add_economy(Economy*);
-	void remove_economy(Economy*);
-	bool has_economy(Economy * const) const throw ();
+	void    add_economy(Economy *);
+	void remove_economy(Economy *);
+	bool    has_economy(Economy *) const throw ();
 	typedef std::vector<Economy *> economy_vector;
 	economy_vector::size_type get_economy_number(Economy const *) const
 		throw (); //  for savegames
@@ -457,20 +458,20 @@ struct Player :
 	std::vector<uint32_t> const * get_ware_production_statistics
 		(Ware_Index const) const;
 
-	void ReadStatistics(FileRead& fr, uint32_t version);
+	void ReadStatistics(FileRead &, uint32_t version);
 	void WriteStatistics(FileWrite &) const;
 	void sample_statistics();
 	void ware_produced(Ware_Index);
 	void next_ware_production_period();
 
-	void receive(const NoteImmovable& note);
-	void receive(const NoteField& note);
+	void receive(NoteImmovable const &);
+	void receive(NoteField     const &);
 
-	void setAI(const std::string & ai);
+	void setAI(std::string const &);
 	const std::string & getAI() const;
 
 private:
-	void update_building_statistics(Building* building, losegain_t lg);
+	void update_building_statistics(Building *, losegain_t);
 
 	/**
 	 * Called when a node becomes seen (not only the first time) before the
@@ -488,7 +489,7 @@ private:
 	bool m_see_all;
 	bool                   m_view_changed;
 	const Player_Number    m_plnum;
-	const Tribe_Descr&     m_tribe; // buildings, wares, workers, sciences
+	Tribe_Descr const    & m_tribe; // buildings, wares, workers, sciences
 	uint32_t               m_casualties, m_kills;
 	uint32_t               m_msites_lost,     m_msites_defeated;
 	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;

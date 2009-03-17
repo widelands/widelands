@@ -41,7 +41,7 @@ struct SyncCallback {
  * to schedule taking a synchronization hash.
  */
 struct Cmd_NetCheckSync : public Widelands::Command {
-	Cmd_NetCheckSync (int32_t dt, SyncCallback* cb);
+	Cmd_NetCheckSync (int32_t dt, SyncCallback *);
 
 	virtual void execute (Widelands::Game *);
 
@@ -106,7 +106,7 @@ private:
  */
 struct RecvPacket : public Widelands::StreamRead {
 public:
-	RecvPacket(Deserializer& des);
+	RecvPacket(Deserializer &);
 
 	size_t Data(void * data, size_t bufsize);
 	bool EndOfFile() const;

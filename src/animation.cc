@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -239,12 +239,12 @@ Return AnimationData for this animation.
 Returns 0 if the animation doesn't exist.
 ===============
 */
-const AnimationData* AnimationManager::get_animation(uint32_t id) const
+AnimationData const * AnimationManager::get_animation(uint32_t const id) const
 {
 	if (!id || id > m_animations.size())
 		return 0;
 
-	return &m_animations[id-1];
+	return &m_animations[id - 1];
 }
 
 /**
@@ -356,7 +356,7 @@ void DirAnimations::parse
 		static const char *dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
 		char sectname[300];
 
-		snprintf(sectname, sizeof(sectname), sectnamebase, dirstrings[dir-1]);
+		snprintf(sectname, sizeof(sectname), sectnamebase, dirstrings[dir - 1]);
 
 		std::string const anim_name = sectname;
 
@@ -367,8 +367,8 @@ void DirAnimations::parse
 			s = defaults;
 		}
 
-		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir-1]);
-		m_animations[dir - 1] = g_anim.get(directory.c_str(), *s, sectname, encdefaults);
+		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir - 1]);
+		m_animations[dir - 1] = g_anim.get(directory, *s, sectname, encdefaults);
 		b.add_animation(anim_name.c_str(), m_animations[dir - 1]);
 	}
 }

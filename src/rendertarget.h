@@ -49,11 +49,11 @@ class Surface;
  * false and doesn't change the window state at all.
 */
 struct RenderTarget {
-	RenderTarget(Surface* bmp);
+	RenderTarget(Surface *);
 	~RenderTarget();
-	void get_window(Rect* rc, Point* ofs) const;
-	void set_window(const Rect& rc, const Point& ofs);
-	bool enter_window(const Rect& rc, Rect* previous, Point* prevofs);
+	void get_window(Rect *, Point * ofs) const;
+	void set_window(Rect const & rc, Point const & ofs);
+	bool enter_window(Rect const & rc, Rect * previous, Point * prevofs);
 
 	int32_t get_w() const;
 	int32_t get_h() const;

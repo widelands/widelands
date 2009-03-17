@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -167,8 +167,8 @@ private:
 	Terrains terrains;
 
 	/** linked list, \sa Bob::m_linknext*/
-	Bob* bobs;
-	BaseImmovable* immovable;
+	Bob           * bobs;
+	BaseImmovable * immovable;
 
 public:
 	Height get_height() const throw () {return height;}
@@ -187,7 +187,7 @@ public:
 
 	Bob * get_first_bob() const throw () {return bobs;}
 	const BaseImmovable * get_immovable() const throw () {return immovable;}
-	BaseImmovable* get_immovable() {return immovable;}
+	BaseImmovable * get_immovable() {return immovable;}
 
 	void set_brightness(int32_t l, int32_t r, int32_t tl, int32_t tr, int32_t bl, int32_t br);
 	int8_t get_brightness() const {return brightness;}
@@ -242,8 +242,15 @@ public:
 
 	uint8_t get_resources() const {return m_resources;} ///<\todo This should return Resource_Index
 	uint8_t get_resources_amount() const {return m_res_amount;}
-	void set_resources(uint8_t res, uint8_t amount) {m_resources = res; m_res_amount=amount;}
-	void set_starting_res_amount(int32_t amount) {m_starting_res_amount=amount;} ///<\todo This should take uint8_t
+	void set_resources(uint8_t const res, uint8_t const amount) {
+		m_resources  = res;
+		m_res_amount = amount;
+	}
+
+	///<\todo This should take uint8_t
+	void set_starting_res_amount(int32_t const amount) {
+		m_starting_res_amount = amount;
+	}
 	int32_t get_starting_res_amount() const {return m_starting_res_amount;} ///<\todo This should return uint8_t
 
 	/// \note you must reset this field's + neighbor's brightness when you

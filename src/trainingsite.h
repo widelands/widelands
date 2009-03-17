@@ -163,18 +163,18 @@ private:
 
 	void find_and_start_next_program(Game &);
 	void start_upgrade(Game &, Upgrade &);
-	void add_upgrade(tAttribute atr, const std::string& prefix);
+	void add_upgrade(tAttribute, std::string const & prefix);
 	void calc_upgrades();
 
 	void drop_unupgradable_soldiers(Game * g);
-	Upgrade* get_upgrade(enum tAttribute atr);
+	Upgrade * get_upgrade(tAttribute);
 
 private:
 	/** Open requests for soldiers. The soldiers can be under way or unavailable*/
-	Request* m_soldier_request;
+	Request * m_soldier_request;
 
 	/** The soldiers currently at the training site*/
-	std::vector<Soldier*> m_soldiers;
+	std::vector<Soldier *> m_soldiers;
 
 	/** Number of soldiers that should be trained concurrently.
 	 * Equal or less to maximum number of soldiers supported by a training site. There is no
@@ -187,7 +187,7 @@ private:
 	bool m_build_heros;
 
 	std::vector<Upgrade> m_upgrades;
-	Upgrade* m_current_upgrade;
+	Upgrade * m_current_upgrade;
 
 	Program_Result m_result; /// The result of the last training program.
 };

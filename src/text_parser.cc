@@ -38,7 +38,7 @@ Richtext_Block::Richtext_Block(const Richtext_Block &src) {
 	m_text_blocks.clear();
 	for (uint32_t i = 0; i < src.m_images.size(); ++i)
 		m_images.push_back(src.m_images[i]);
-	for (uint32_t i=0;i<src.m_text_blocks.size(); ++i)
+	for (uint32_t i = 0; i < src.m_text_blocks.size(); ++i)
 		m_text_blocks.push_back(src.m_text_blocks[i]);
 	m_image_align = src.m_image_align;
 	m_text_align = src.m_text_align;
@@ -136,9 +136,9 @@ bool Text_Parser::parse_textblock
 		if (end == std::string::npos)
 			log("WARNING: <variable> tag not closed!\n");
 		else {
-			std::string name = block_text.substr(offset+15, end-(offset+15));
+			std::string name(block_text.substr(offset + 15, end - (offset + 15)));
 			std::string str = vcb(name, vcdata);
-			block_text.replace(offset, end-offset+1, str);
+			block_text.replace(offset, end - offset + 1, str);
 		}
 	}
 
@@ -271,17 +271,17 @@ void Text_Parser::parse_text_attributes(std::string format, Text_Block *element)
 			return;
 		else {
 			std::string key = format.substr(0, key_end);
-			format.erase(0, key_end+1);
+			format.erase(0, key_end + 1);
 			SSS_T val_end = format.find(" ");
 			if (val_end == std::string::npos)
 				val_end = format.size();
 			std::string val = format.substr(0, val_end);
-			format.erase(0, val_end+1);
+			format.erase(0, val_end + 1);
 			if (key == "font-size") {
 				element->set_font_size(atoi(val.c_str()));
 			}
 			else if (key == "font-face")
-				element->set_font_face(val+".ttf");
+				element->set_font_face(val + ".ttf");
 			else if (key == "line-spacing")
 				element->set_line_spacing(atoi(val.c_str()));
 			else if (key == "font-color") {

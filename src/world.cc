@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,8 +71,7 @@ void Resource_Descr::parse(Section *s, std::string basedir)
 		i.upperlimit = -1;
 
 		if (args.size() >= 2) {
-			char* endp;
-
+			char * endp;
 			i.upperlimit = strtol(args[1].c_str(), &endp, 0);
 
 			if (*endp) {
@@ -186,20 +185,6 @@ World::World(std::string const & name) : m_basedir("worlds/" + name + '/') {
 
 /*
 ===============
-World::postload
-
-Load all logic game data now
-===============
-*/
-void World::postload(Editor_Game_Base *) {
-	// TODO: move more loads to postload
-}
-
-
-/*
-===============
-World::load_graphics
-
 Load graphics data here
 ===============
 */
@@ -261,12 +246,15 @@ void World::parse_terrains()
 	try
 	{
 		Profile prof(fname);
-		Section* s;
 
-		for (Terrain_Index i = 0; (s = prof.get_next_section(0)); ++i) {
+		for (Terrain_Index i = 0;; ++i) {
+			Section * const s = prof.get_next_section(0);
+			if (not s)
+				break;
 			if (i == 0x10)
 				throw wexception
-					("%s: too many terrain types, can not be more than 16\n", fname);
+					("%s: too many terrain types, can not be more than 16\n",
+					 fname);
 			ters.add(new Terrain_Descr(m_basedir.c_str(), s, &m_resources));
 		}
 
@@ -345,7 +333,10 @@ Terrain_Descr
 ==============================================================================
 */
 
-Terrain_Descr::Terrain_Descr(const char* directory, Section* s, Descr_Maintainer<Resource_Descr>* resources)
+Terrain_Descr::Terrain_Descr
+	(char                       const * const directory,
+	 Section                          * const s,
+	 Descr_Maintainer<Resource_Descr> * const resources)
 :
 m_name              (s->get_name()),
 m_picnametempl      (0),
@@ -380,13 +371,13 @@ m_texture           (0)
 			if (*i.current == ',')
 				++nres;
 
-		m_nr_valid_resources =nres;
+		m_nr_valid_resources = nres;
 		m_valid_resources    = new uint8_t[nres];
 		std::string curres;
 		uint32_t i = 0;
 		int32_t cur_res = 0;
 		while (i <= str1.size()) {
-			if (str1[i] == ' ' || str1[i] == ' ' || str1[i]=='\t') {
+			if (str1[i] == ' ' || str1[i] == ' ' || str1[i] == '\t') {
 				++i;
 				continue;
 			}
@@ -397,7 +388,7 @@ m_texture           (0)
 						("Terrain %s has valid resource %s which doesn't exist in "
 						 "world!",
 						 s->get_name(), curres.c_str());
-				m_valid_resources[cur_res++]=res;
+				m_valid_resources[cur_res++] = res;
 				curres = "";
 			} else
 				curres.append(1, str1[i]);

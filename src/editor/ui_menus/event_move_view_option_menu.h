@@ -53,7 +53,7 @@ private:
 
 	UI::EditBox * m_name;
 	Widelands::Coords m_location;
-	UI::Textarea* m_x_ta, *m_y_ta;
+	UI::Textarea * m_x_ta, * m_y_ta;
 };
 
 #endif

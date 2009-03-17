@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,13 +60,13 @@ private:
 
 	boost::shared_ptr<BaseCapsule> capsule;
 
-	static const CheckStep& alwaysfalse();
+	static CheckStep const & alwaysfalse();
 
 public:
 	CheckStep();
 
 	template<typename T>
-	CheckStep(const T&op) : capsule(new Capsule<T>(op)) {}
+	CheckStep(T const & op) : capsule(new Capsule<T>(op)) {}
 
 	/**
 	 * \return \c true true if moving from start to end (single step in the given
@@ -91,7 +91,7 @@ public:
  * that have been added via \ref add().
  */
 struct CheckStepAnd {
-	void add(const CheckStep& sub);
+	void add(CheckStep const & sub);
 
 	bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, CheckStep::StepId id) const;
 	bool reachabledest(Map* map, FCoords dest) const;
@@ -151,7 +151,7 @@ struct CheckStepRoad {
 	bool reachabledest(Map* map, FCoords dest) const;
 
 private:
-	const Player& m_player;
+	Player const & m_player;
 	uint8_t m_movecaps;
 };
 

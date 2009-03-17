@@ -50,9 +50,10 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 /**
  * Parse a program
  */
-void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
+void WorkerProgram::parse
+	(Worker_Descr * descr, Parser * parser, char const * const name)
 {
-	Section & program_s = parser->prof->get_safe_section(name.c_str());
+	Section & program_s = parser->prof->get_safe_section(name);
 
 	for (uint32_t idx = 0;; ++idx) {
 		try
@@ -82,9 +83,7 @@ void WorkerProgram::parse(Worker_Descr* descr, Parser* parser, std::string name)
 			(this->*s_parsemap[mapidx].function)(descr, &act, parser, cmd);
 
 			m_actions.push_back(act);
-		}
-		catch (std::exception& e)
-		{
+		} catch (std::exception const & e) {
 			throw wexception("Line %i: %s", idx, e.what());
 		}
 	}
@@ -255,11 +254,11 @@ void WorkerProgram::parse_findobject
 	// Parse predicates
 	for (i = 1; i < cmd.size(); ++i) {
 		uint32_t idx = cmd[i].find(':');
-		std::string key = cmd[i].substr(0, idx);
-		std::string value = cmd[i].substr(idx+1);
+		std::string const key   = cmd[i].substr(0, idx);
+		std::string const value = cmd[i].substr(idx + 1);
 
 		if (key == "radius") {
-			char* endp;
+			char * endp;
 
 			act->iparam1 = strtol(value.c_str(), &endp, 0);
 			if (*endp)
@@ -333,10 +332,10 @@ void WorkerProgram::parse_findspace
 	for (i = 1; i < cmd.size(); ++i) {
 		uint32_t idx = cmd[i].find(':');
 		std::string key = cmd[i].substr(0, idx);
-		std::string value = cmd[i].substr(idx+1);
+		std::string value = cmd[i].substr(idx + 1);
 
 		if (key == "radius") {
-			char* endp;
+			char * endp;
 
 			act->iparam1 = strtol(value.c_str(), &endp, 0);
 			if (*endp)
@@ -344,7 +343,7 @@ void WorkerProgram::parse_findspace
 
 		} else if (key == "size") {
 			static const struct {
-				const char* name;
+				char const * name;
 				int32_t val;
 			} sizenames[] = {
 				{"any",    FindNodeSize::sizeAny},
@@ -427,7 +426,7 @@ void WorkerProgram::parse_animation
 	 Parser                         * parser,
 	 std::vector<std::string> const & cmd)
 {
-	char* endp;
+	char * endp;
 
 	if (cmd.size() != 3)
 		throw wexception("Usage: animation <name> <time>");
@@ -549,7 +548,7 @@ void WorkerProgram::parse_geologist
 	 Parser                         *,
 	 std::vector<std::string> const & cmd)
 {
-	char* endp;
+	char * endp;
 
 	if (cmd.size() != 4)
 		throw wexception("Usage: geologist <repeat #> <radius> <subcommand>");
@@ -594,12 +593,12 @@ void WorkerProgram::parse_playFX
 	if (cmd.size()<2 || cmd.size()>3)
 		throw wexception("Usage: playFX <fx_name> [priority]");
 
-	act->sparam1=cmd[1];
+	act->sparam1 = cmd[1];
 	act->function = &Worker::run_playFX;
-	if (cmd.size()==2)
-		act->iparam1=64;//50%chance to play, only one instance at a time
-	else
-		act->iparam1=atoi(cmd[2].c_str());
+	act->iparam1 =
+		cmd.size() == 2 ?
+		64 : //  50% chance to play, only one instance at a time
+		atoi(cmd[2].c_str());
 }
 
 };

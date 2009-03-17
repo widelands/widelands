@@ -431,7 +431,7 @@ void Map_Object::act(Game *, uint32_t) {}
 /**
  * Set the logsink. This should only be used by the debugging facilities.
  */
-void Map_Object::set_logsink(LogSink* sink)
+void Map_Object::set_logsink(LogSink * const sink)
 {
 	m_logsink = sink;
 }
@@ -444,7 +444,7 @@ void Map_Object::log_general_info(Editor_Game_Base*) {}
 /**
  * Prints a log message prepended by the object's serial number.
  */
-void Map_Object::molog(const char* fmt, ...) const
+void Map_Object::molog(char const * fmt, ...) const
 {
 	va_list va;
 	char buffer[2048];
@@ -470,7 +470,7 @@ void Map_Object::molog(const char* fmt, ...) const
  *
  * Derived functions must call ancestor's function in the appropriate place.
  */
-void Map_Object::Loader::load(FileRead& fr)
+void Map_Object::Loader::load(FileRead & fr)
 {
 	try {
 		uint8_t const header = fr.Unsigned8();

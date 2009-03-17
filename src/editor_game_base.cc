@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -139,12 +139,12 @@ void Editor_Game_Base::think()
 	// by a given number of milliseconds
 }
 
-void Editor_Game_Base::receive(const NoteImmovable& note)
+void Editor_Game_Base::receive(NoteImmovable const & note)
 {
 	note.pi->get_owner()->receive(note);
 }
 
-void Editor_Game_Base::receive(const NoteField& note)
+void Editor_Game_Base::receive(NoteField const & note)
 {
 	get_player(note.fc.field->get_owned_by())->receive(note);
 }
@@ -373,7 +373,7 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 	(Player_Area<Area<FCoords> > const area)
 {
 	std::vector<ImmovableFound> immovables;
-	std::vector<PlayerImmovable*> burnlist;
+	std::vector<PlayerImmovable *> burnlist;
 	Map & m = *m_map;
 
 	// Find all immovables that need fixing
@@ -716,13 +716,11 @@ Player * Editor_Game_Base::get_safe_player(Player_Number const n) {
 
 /*
 ===============
-Editor_Game_Base::add_trackpointer
-
 Add a registered pointer.
 Returns the serial number that can be used to retrieve or remove the pointer.
 ===============
 */
-uint32_t Editor_Game_Base::add_trackpointer(void* ptr)
+uint32_t Editor_Game_Base::add_trackpointer(void * const ptr)
 {
 	++m_lasttrackserial;
 
@@ -736,15 +734,13 @@ uint32_t Editor_Game_Base::add_trackpointer(void* ptr)
 
 /*
 ===============
-Editor_Game_Base::get_trackpointer
-
 Retrieve a previously stored pointer using the serial number.
 Returns 0 if the pointer has been removed.
 ===============
 */
-void* Editor_Game_Base::get_trackpointer(uint32_t serial)
+void * Editor_Game_Base::get_trackpointer(uint32_t const serial)
 {
-	std::map<uint32_t, void*>::iterator it = m_trackpointers.find(serial);
+	std::map<uint32_t, void *>::iterator it = m_trackpointers.find(serial);
 
 	if (it != m_trackpointers.end())
 		return it->second;

@@ -57,7 +57,7 @@ inline char * match
 {
 	assert(terminator);
 	char * const result = p;
-	for (;*p != terminator; ++p)
+	for (; *p != terminator; ++p)
 		if (*p == '\0') {
 			reached_end = true;
 			goto end;
@@ -126,7 +126,7 @@ inline bool match_force_skip(char * & candidate, char const * pattern) {
  * \see http://www.experts-exchange.com/Programming/Programming_Languages/Cplusplus/Q_20670737.html
  * \author AssafLavie on http://www.experts-exchange.com
  */
-template<typename T> T stringTo(const std::string& s) {
+template<typename T> T stringTo(std::string const & s) {
 	std::istringstream iss(s);
 	T x;
 	iss >> x;
@@ -141,7 +141,7 @@ template<typename T> T stringTo(const std::string& s) {
 ///
 /// \see http://www.experts-exchange.com/Programming/Programming_Languages/Cplusplus/Q_20670737.html
 /// \author AssafLavie on http://www.experts-exchange.com
-template<typename T> std::string toString(const T& x) {
+template<typename T> std::string toString(T const & x) {
 	std::ostringstream oss;
 	oss << x;
 	return oss.str();

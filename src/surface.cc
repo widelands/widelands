@@ -69,8 +69,8 @@ void Surface::unlock() {
 }
 
 uint32_t Surface::get_pixel(uint32_t x, uint32_t y) {
-	x+= m_offsx;
-	y+= m_offsy;
+	x += m_offsx;
+	y += m_offsy;
 
 	assert(x < get_w());
 	assert(y < get_h());
@@ -111,8 +111,8 @@ uint32_t Surface::get_pixel(uint32_t x, uint32_t y) {
 }
 
 void Surface::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
-	x+= m_offsx;
-	y+= m_offsy;
+	x += m_offsx;
+	y += m_offsy;
 
 	assert(x < get_w());
 	assert(y < get_h());
@@ -137,7 +137,7 @@ void Surface::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
 void Surface::set_subwin(Rect r) {
 	m_offsx = r.x;
 	m_offsy = r.y;
-	m_w =r.w;
+	m_w = r.w;
 	m_h = r.h;
 }
 

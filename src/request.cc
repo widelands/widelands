@@ -604,7 +604,7 @@ int32_t Request::get_base_required_time
 			return m_required_time + (curtime - m_required_time) / 2;
 
 		assert(2 <= nr);
-		return curtime + (nr-2) * m_required_interval;
+		return curtime + (nr - 2) * m_required_interval;
 	}
 
 	return m_required_time + nr * m_required_interval;

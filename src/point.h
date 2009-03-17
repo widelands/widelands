@@ -35,21 +35,23 @@ struct Point {
 			 std::numeric_limits<int32_t>::max());
 	}
 
-	bool operator==(const Point other) const throw ()
-	{return x == other.x and y == other.y;}
-	bool operator!=(const Point other) const  throw ()
-	{return not (*this == other);}
+	bool operator== (Point const other) const throw () {
+		return x == other.x and y == other.y;
+	}
+	bool operator!= (Point const other) const throw () {
+		return not (*this == other);
+	}
 
-	Point operator+(const Point other) const
+	Point   operator+  (Point const other) const
 		{return Point(x + other.x, y + other.y);}
-	Point operator-(const Point other) const
+	Point   operator-  (Point const other) const
 		{return Point(x - other.x, y - other.y);}
-	Point & operator+=(const Point other) {
+	Point & operator+= (Point const other) {
 		x += other.x;
 		y += other.y;
 		return *this;
 	}
-	Point & operator-=(const Point other) {
+	Point & operator-= (Point const other) {
 		x -= other.x;
 		y -= other.y;
 		return *this;

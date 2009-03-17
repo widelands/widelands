@@ -23,9 +23,7 @@
 #include "game.h"
 #include "instances.h"
 #include "player.h"
-#include "productionsite.h"
 #include "soldier.h"
-#include "soldiercontrol.h"
 #include "streamwrite.h"
 #include "tribe.h"
 #include "wexception.h"
@@ -39,7 +37,7 @@
 namespace Widelands {
 
 enum {
-	PLCMD_UNUSED=0,
+	PLCMD_UNUSED = 0,
 	PLCMD_BULLDOZE,
 	PLCMD_BUILD,
 	PLCMD_BUILDFLAG,
@@ -64,7 +62,7 @@ PlayerCommand::PlayerCommand (int32_t const time, Player_Number const s)
 
 PlayerCommand::~PlayerCommand () {}
 
-PlayerCommand* PlayerCommand::deserialize (StreamRead & des)
+PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 {
 	switch (des.Unsigned8()) {
 	case PLCMD_BULLDOZE:              return new Cmd_Bulldoze             (des);
@@ -290,8 +288,8 @@ PlayerCommand (0, des.Unsigned8())
 	nsteps = des.Unsigned16();
 
 	// we cannot completely deserialize the path here because we don't have a Map
-	path=0;
-	steps=new char[nsteps];
+	path = 0;
+	steps = new char[nsteps];
 
 	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
 		steps[i] = des.Unsigned8();
@@ -306,8 +304,8 @@ Cmd_BuildRoad::~Cmd_BuildRoad ()
 
 void Cmd_BuildRoad::execute (Game* g)
 {
-	if (path==0) {
-		assert (steps!=0);
+	if (path == 0) {
+		assert (steps);
 
 		path = new Path(start);
 		for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
@@ -325,7 +323,7 @@ void Cmd_BuildRoad::serialize (StreamWrite & ser)
 	ser.Coords32  (start);
 	ser.Unsigned16(nsteps);
 
-	assert (path!=0 || steps!=0);
+	assert (path || steps);
 
 	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
 		ser.Unsigned8(path ? (*path)[i] : steps[i]);
@@ -430,7 +428,7 @@ void Cmd_FlagAction::Write
 Cmd_StartStopBuilding::Cmd_StartStopBuilding (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
-	serial=des.Unsigned32();
+	serial = des.Unsigned32();
 }
 
 void Cmd_StartStopBuilding::execute (Game* g)
@@ -545,9 +543,9 @@ void Cmd_EnhanceBuilding::Write
 
 /*** class Cmd_SetWarePriority ***/
 Cmd_SetWarePriority::Cmd_SetWarePriority
-	(int32_t duetime, Player_Number _sender,
+	(int32_t const duetime, Player_Number const _sender,
 	 PlayerImmovable* imm,
-	 int32_t type, Ware_Index index, int32_t priority)
+	 int32_t const type, Ware_Index const index, int32_t const priority)
 	: PlayerCommand(duetime, _sender)
 {
 	m_serial = imm->serial();
@@ -606,16 +604,15 @@ void Cmd_SetWarePriority::Read(FileRead& fr, Editor_Game_Base& egbase, Map_Map_O
 	}
 }
 
-Cmd_SetWarePriority::Cmd_SetWarePriority(StreamRead& des)
-	: PlayerCommand(0, des.Unsigned8())
-{
-	m_serial = des.Unsigned32();
-	m_type = des.Unsigned8();
-	m_index    = Ware_Index(static_cast<Ware_Index::value_t>(des.Signed32()));
-	m_priority = des.Signed32();
-}
+Cmd_SetWarePriority::Cmd_SetWarePriority(StreamRead & des) :
+	PlayerCommand(0, des.Unsigned8()),
+	m_serial     (des.Unsigned32()),
+	m_type       (des.Unsigned8()),
+	m_index      (Ware_Index(static_cast<Ware_Index::value_t>(des.Signed32()))),
+	m_priority   (des.Signed32())
+{}
 
-void Cmd_SetWarePriority::serialize(StreamWrite& ser)
+void Cmd_SetWarePriority::serialize(StreamWrite & ser)
 {
 	ser.Unsigned8(PLCMD_SETWAREPRIORITY);
 	ser.Unsigned8(get_sender());
@@ -926,15 +923,13 @@ void Cmd_DropSoldier::Write
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
 
-	// Now serial
-	{
+	{ //  site serial
 		const Map_Object * const obj = egbase.objects().get_object(serial);
 		assert(mos.is_object_known(obj));
 		fw.Unsigned32(mos.get_object_file_index(obj));
 	}
 
-	// Now soldier serial
-	{
+	{ //  soldier serial
 		const Map_Object * const obj = egbase.objects().get_object(soldier);
 		assert(mos.is_object_known(obj));
 		fw.Unsigned32(mos.get_object_file_index(obj));

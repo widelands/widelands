@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -518,8 +518,8 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 	int32_t minlevel = upgrade.max;
 	int32_t maxlevel = upgrade.min;
 
-	for (std::vector<Soldier*>::const_iterator it = m_soldiers.begin(); it != m_soldiers.end(); ++it) {
-		int32_t level = (*it)->get_level(upgrade.attribute);
+	container_iterate_const(std::vector<Soldier *>, m_soldiers, i) {
+		int32_t const level = (*i.current)->get_level(upgrade.attribute);
 
 		if (level > upgrade.max || level < upgrade.min)
 			continue;
@@ -567,10 +567,9 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 
 TrainingSite::Upgrade* TrainingSite::get_upgrade(enum tAttribute atr)
 {
-	for (std::vector<Upgrade>::iterator it = m_upgrades.begin(); it != m_upgrades.end(); ++it) {
-		if (it->attribute == atr)
-			return &*it;
-	}
+	container_iterate(std::vector<Upgrade>, m_upgrades, i)
+		if (i.current->attribute == atr)
+			return &*i.current;
 
 	return 0;
 }
@@ -608,7 +607,8 @@ void TrainingSite::set_pri(tAttribute atr, int32_t prio)
 /**
  * Only called from \ref calc_upgrades
  */
-void TrainingSite::add_upgrade(tAttribute atr, const std::string& prefix)
+void TrainingSite::add_upgrade
+	(tAttribute const atr, std::string const & prefix)
 {
 	Upgrade u;
 	u.attribute = atr;

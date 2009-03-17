@@ -34,8 +34,8 @@ struct RNG {
 
 	uint32_t rand ();
 
-	void ReadState(StreamRead&);
-	void WriteState(StreamWrite&);
+	void ReadState(StreamRead &);
+	void WriteState(StreamWrite &);
 
 private:
 	uint32_t state0;

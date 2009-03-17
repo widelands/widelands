@@ -50,7 +50,7 @@ m_event   (event)
 	int32_t const spacing =  5;
 	Point         pos       (spacing, 25);
 	m_nr_buttons  = m_event.get_nr_buttons();
-	m_ls_selected =0;
+	m_ls_selected = 0;
 
 	m_buttons[0].name    = _("Continue");
 	m_buttons[1].name    = _("Button 1");
@@ -209,7 +209,7 @@ m_event   (event)
 				}
 
 			if (foundidx == m_button_triggers[j])
-				m_buttons[i].trigger=j;
+				m_buttons[i].trigger = j;
 		}
 	}
 
@@ -233,7 +233,7 @@ bool Event_Message_Box_Option_Menu::handle_mouserelease(const Uint8, int32_t, in
 
 
 void Event_Message_Box_Option_Menu::clicked_ok() {
-	const std::string& name = m_name->text();
+	std::string const & name = m_name->text();
 	if (name.size()) {
 		if
 			(Widelands::Event * const registered_event =
@@ -344,7 +344,7 @@ void Event_Message_Box_Option_Menu::update() {
 			 .name());
 	} else {
 		m_current_trigger_ta->set_text("---");
-		m_buttons[0].trigger=-1;
+		m_buttons[0].trigger = -1;
 	}
 }
 

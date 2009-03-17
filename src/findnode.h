@@ -45,16 +45,16 @@ private:
 	};
 	template<typename T>
 	struct Capsule : public BaseCapsule {
-		Capsule(const T& _op) : op(_op) {}
+		Capsule(T const & _op) : op(_op) {}
 		bool accept(const Map & map, const FCoords& coord) const {return op.accept(map, coord);}
 
 		const T op;
 	};
 
-	BaseCapsule* capsule;
+	BaseCapsule * capsule;
 
 public:
-	FindNode(const FindNode& o) {
+	FindNode(FindNode const & o) {
 		capsule = o.capsule;
 		capsule->addref();
 	}
@@ -62,7 +62,7 @@ public:
 		capsule->deref();
 		capsule = 0;
 	}
-	FindNode& operator=(const FindNode& o) {
+	FindNode& operator= (FindNode const & o) {
 		capsule->deref();
 		capsule = o.capsule;
 		capsule->addref();
@@ -70,7 +70,7 @@ public:
 	}
 
 	template<typename T>
-	FindNode(const T& op) {
+	FindNode(T const & op) {
 		capsule = new Capsule<T>(op);
 	}
 
@@ -93,7 +93,7 @@ private:
 struct FindNodeAnd {
 	FindNodeAnd() {}
 
-	void add(const FindNode& findfield, bool negate = false);
+	void add(FindNode const &, bool negate = false);
 
 	bool accept(Map const &, const FCoords&) const;
 
@@ -102,7 +102,7 @@ private:
 		bool negate;
 		FindNode findfield;
 
-		Subfunctor(const FindNode& _ff, bool _negate);
+		Subfunctor(FindNode const &, bool _negate);
 	};
 
 	std::vector<Subfunctor> m_subfunctors;

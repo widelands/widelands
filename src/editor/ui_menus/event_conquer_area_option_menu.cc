@@ -91,7 +91,7 @@ m_player_area(event.m_player_area)
 
 	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
-		 spacing + 40, posy+40, 20, 20,
+		 spacing + 40, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Event_Conquer_Area_Option_Menu::clicked, this, 6);
@@ -162,7 +162,7 @@ m_player_area(event.m_player_area)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Event_Conquer_Area_Option_Menu::clicked, this, 14);
 
-	new UI::Textarea(this, spacing, posy+20, 20, 20, "Y: ", Align_CenterLeft);
+	new UI::Textarea(this, spacing, posy + 20, 20, 20, "Y: ", Align_CenterLeft);
 	m_y_ta =
 		new UI::Textarea
 		(this, spacing + 20, posy + 20, 20, 20, "Y: ", Align_CenterLeft);
@@ -172,7 +172,7 @@ m_player_area(event.m_player_area)
 	new UI::Textarea
 		(this, spacing, posy, 70, 20, _("Player: "), Align_CenterLeft);
 	m_player_ta =
-		new UI::Textarea(this, spacing+70, posy, 20, 20, "2", Align_Center);
+		new UI::Textarea(this, spacing + 70, posy, 20, 20, "2", Align_Center);
 
 	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
@@ -189,7 +189,8 @@ m_player_area(event.m_player_area)
 		 &Event_Conquer_Area_Option_Menu::clicked, this, 16);
 
 	posy += 20 + spacing;
-	new UI::Textarea(this, spacing, posy+20, 70, 20, _("Area: "), Align_CenterLeft);
+	new UI::Textarea
+		(this, spacing, posy + 20, 70, 20, _("Area: "), Align_CenterLeft);
 
 	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
@@ -233,7 +234,9 @@ m_player_area(event.m_player_area)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Event_Conquer_Area_Option_Menu::clicked, this, 22);
 
-	m_area_ta=new UI::Textarea(this, spacing+90, posy+20, 20, 20, "2", Align_Center);
+	m_area_ta =
+		new UI::Textarea
+			(this, spacing + 90, posy + 20, 20, 20, "2", Align_Center);
 
 
 	posx = get_inner_w() / 2 - 60 -spacing;
@@ -277,7 +280,7 @@ bool Event_Conquer_Area_Option_Menu::handle_mouserelease
 
 
 void Event_Conquer_Area_Option_Menu::clicked_ok() {
-	const std::string& name = m_name->text();
+	std::string const & name = m_name->text();
 	if (name.size()) {
 		if
 			(Widelands::Event * const registered_event =

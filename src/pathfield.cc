@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,7 @@ boost::shared_ptr<Pathfields> PathfieldManager::allocate()
 	return pf;
 }
 
-void PathfieldManager::clear(const boost::shared_ptr<Pathfields>& pf)
+void PathfieldManager::clear(boost::shared_ptr<Pathfields> const & pf)
 {
 	for (uint32_t i = 0; i < m_nrfields; ++i)
 		pf->fields[i].cycle = 0;

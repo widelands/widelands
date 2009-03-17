@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ struct Font_Loader {
 	Font_Loader() {};
 	~Font_Loader();
 	TTF_Font * open_font(const std::string & name, int32_t size);
-	TTF_Font * get_font(std::string name, int32_t size);
+	TTF_Font * get_font (std::string const & name, int32_t size);
 	void clear_fonts();
 private:
 	std::map<std::string, TTF_Font *> m_font_table;

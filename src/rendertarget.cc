@@ -41,7 +41,7 @@ using Widelands::TCoords;
  * \note The bitmap will not be owned by the renderer, i.e. it won't be
  * deleted by the destructor.
  */
-RenderTarget::RenderTarget(Surface* bmp)
+RenderTarget::RenderTarget(Surface * const bmp)
 {
 	m_surface = bmp;
 
@@ -55,7 +55,7 @@ RenderTarget::~RenderTarget()
 /**
  * Retrieve the current window setting.
  */
-void RenderTarget::get_window(Rect* rc, Point* ofs) const
+void RenderTarget::get_window(Rect * const rc, Point * const ofs) const
 {
 	*rc = m_rect;
 	*ofs = m_offset;
@@ -64,7 +64,7 @@ void RenderTarget::get_window(Rect* rc, Point* ofs) const
 /**
  * Sets an arbitrary drawing window.
  */
-void RenderTarget::set_window(const Rect& rc, const Point& ofs)
+void RenderTarget::set_window(Rect const & rc, Point const & ofs)
 {
 	m_rect = rc;
 	m_offset = ofs;
@@ -101,7 +101,8 @@ void RenderTarget::set_window(const Rect& rc, const Point& ofs)
  * Returns false if the subwindow is invisible. In that case, the window state
  * is not changed at all. Otherwise, the function returns true.
  */
-bool RenderTarget::enter_window(const Rect& rc, Rect* previous, Point* prevofs)
+bool RenderTarget::enter_window
+	(Rect const & rc, Rect * const previous, Point * const prevofs)
 {
 	Rect newrect = rc;
 
@@ -144,12 +145,12 @@ int32_t RenderTarget::get_h() const
  */
 void RenderTarget::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2, RGBColor color)
 {
-	int32_t dx=x2-x1;      /* the horizontal distance of the line */
-	int32_t dy=y2-y1;      /* the vertical distance of the line */
+	int32_t dx = x2 - x1;      /* the horizontal distance of the line */
+	int32_t dy = y2 - y1;      /* the vertical distance of the line */
 	const uint32_t dxabs = abs(dx);
 	const uint32_t dyabs = abs(dy);
-	int32_t sdx= dx < 0 ? -1 : 1;
-	int32_t sdy= dy < 0 ? -1 : 1;
+	int32_t sdx = dx < 0 ? -1 : 1;
+	int32_t sdy = dy < 0 ? -1 : 1;
 	uint32_t x = dyabs / 2;
 	uint32_t y = dxabs / 2;
 	Point p(x1, y1);
@@ -158,7 +159,7 @@ void RenderTarget::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2, RGB
 
 	if (dxabs >= dyabs) for (uint32_t i = 0;i < dxabs; ++i) {
 		//  the line is more horizontal than vertical
-		y+=dyabs;
+		y += dyabs;
 
 		if (y >= dxabs) {y -= dxabs; p.y += sdy;}
 
@@ -167,7 +168,7 @@ void RenderTarget::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2, RGB
 	}
 	else for (uint32_t i = 0; i < dyabs; ++i) {
 		// the line is more vertical than horizontal
-		x+=dxabs;
+		x += dxabs;
 
 		if (x >= dyabs) {x -= dyabs; p.x += sdx;}
 
@@ -232,9 +233,9 @@ void RenderTarget::blitrect
  * The pixel from ofs inside picture is placed at the top-left corner of
  * the filled rectangle.
  */
-void RenderTarget::tile(Rect r, uint32_t picture, Point ofs)
+void RenderTarget::tile(Rect r, uint32_t const picture, Point ofs)
 {
-	Surface* src = g_gr->get_picture_surface(picture);
+	Surface * const src = g_gr->get_picture_surface(picture);
 
 	if (!src) {
 		log("RenderTarget::tile: bad picture %u\n", picture);
@@ -295,9 +296,10 @@ static inline Sint8 node_brightness
 	(Widelands::Time   const gametime,
 	 Widelands::Time   const last_seen,
 	 Widelands::Vision const vision,
-	 Sint8                   result)
+	 int8_t                  result)
 {
-	if      (vision == 0) result = -128;
+	if      (vision == 0)
+		result = -128;
 	else if (vision == 1) {
 		assert(last_seen <= gametime);
 		Widelands::Duration const time_ago = gametime - last_seen;
@@ -445,11 +447,11 @@ void RenderTarget::rendermap
 				 TRIANGLE_WIDTH, 64);
 
 			if (row_is_forward) {
-				f_vert.tx += TRIANGLE_WIDTH/2;
-				r_vert.tx += TRIANGLE_WIDTH/2;
+				f_vert.tx += TRIANGLE_WIDTH / 2;
+				r_vert.tx += TRIANGLE_WIDTH / 2;
 			} else {
-				bl_vert.tx -= TRIANGLE_WIDTH/2;
-				br_vert.tx -= TRIANGLE_WIDTH/2;
+				bl_vert.tx -= TRIANGLE_WIDTH / 2;
+				br_vert.tx -= TRIANGLE_WIDTH / 2;
 			}
 
 			m_surface->draw_field //  Render ground
@@ -474,7 +476,7 @@ void RenderTarget::rendermap
 			const int32_t posy = b_posy2;
 			b_posy2 += TRIANGLE_HEIGHT;
 
-			{//  Draw things on the node.
+			{ //  Draw things on the node.
 				const int32_t linear_fx = minfx;
 				FCoords r(Coords(linear_fx, linear_fy2));
 				FCoords br
@@ -491,11 +493,11 @@ void RenderTarget::rendermap
 				map.get_tln(r, &tr);
 				map.get_ln(r, &f);
 				bool r_is_border;
-				uint8_t f_owner_number = f.field->get_owned_by();//  FIXME PPoV
+				uint8_t f_owner_number = f.field->get_owned_by(); //  FIXME PPoV
 				uint8_t r_owner_number;
-				r_is_border = r.field->is_border();//  FIXME PPoV
-				r_owner_number = r.field->get_owned_by();//  FIXME PPoV
-				uint8_t br_owner_number = br.field->get_owned_by();//  FIXME PPoV
+				r_is_border = r.field->is_border(); //  FIXME PPoV
+				r_owner_number = r.field->get_owned_by(); //  FIXME PPoV
+				uint8_t br_owner_number = br.field->get_owned_by(); //  FIXME PPoV
 				const Player::Field * r_player_field = first_player_field + r_index;
 				const Player::Field * br_player_field =
 					first_player_field + br_index;
@@ -577,7 +579,7 @@ void RenderTarget::rendermap
 							drawanim(middle(f_pos, br_pos), anim, 0, &owner);
 					}
 
-					if (1 < f_vision) {// Render stuff that belongs to the node
+					if (1 < f_vision) { // Render stuff that belongs to the node.
 
 						// Render bobs
 						// TODO - rendering order?
@@ -626,7 +628,7 @@ void RenderTarget::rendermap
 				}
 			}
 
-			if (false) {//  Draw things on the R-triangle (nothing to draw yet).
+			if (false) { //  Draw things on the R-triangle (nothing to draw yet).
 				const int32_t linear_fx = minfx;
 				FCoords r(Coords(linear_fx, linear_fy2));
 				FCoords b(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
@@ -659,7 +661,7 @@ void RenderTarget::rendermap
 					//  FIXME are drawn on triangles now (except the ground) are
 					//  FIXME overlays for the editor terrain tool, and the editor
 					//  FIXME does not need visibility rules.
-					{//  FIXME Visibility check here.
+					{ //  FIXME Visibility check here.
 						Overlay_Manager::Overlay_Info overlay_info
 							[MAX_OVERLAYS_PER_TRIANGLE];
 						const Overlay_Manager::Overlay_Info & overlay_info_end = *
@@ -695,7 +697,7 @@ void RenderTarget::rendermap
 				}
 			}
 
-			if (false) {//  Draw things on the D-triangle (nothing to draw yet).
+			if (false) { //  Draw things on the D-triangle (nothing to draw yet).
 				const int32_t linear_fx = minfx;
 				FCoords f(Coords(linear_fx - 1, linear_fy2));
 				FCoords br
@@ -723,7 +725,7 @@ void RenderTarget::rendermap
 					map.get_rn(br, &br);
 					posx += TRIANGLE_WIDTH;
 
-					{//  FIXME Visibility check here.
+					{ //  FIXME Visibility check here.
 						Overlay_Manager::Overlay_Info overlay_info
 							[MAX_OVERLAYS_PER_TRIANGLE];
 						const Overlay_Manager::Overlay_Info * const overlay_info_end =
@@ -845,11 +847,11 @@ void RenderTarget::rendermap
 				 TRIANGLE_WIDTH, 64);
 
 			if (row_is_forward) {
-				f_vert.tx += TRIANGLE_WIDTH/2;
-				r_vert.tx += TRIANGLE_WIDTH/2;
+				f_vert.tx += TRIANGLE_WIDTH / 2;
+				r_vert.tx += TRIANGLE_WIDTH / 2;
 			} else {
-				bl_vert.tx -= TRIANGLE_WIDTH/2;
-				br_vert.tx -= TRIANGLE_WIDTH/2;
+				bl_vert.tx -= TRIANGLE_WIDTH / 2;
+				br_vert.tx -= TRIANGLE_WIDTH / 2;
 			}
 
 			m_surface->draw_field //  Render ground
@@ -874,7 +876,7 @@ void RenderTarget::rendermap
 			const int32_t posy = b_posy2;
 			b_posy2 += TRIANGLE_HEIGHT;
 
-			{//  Draw things on the node.
+			{ //  Draw things on the node.
 				const int32_t linear_fx = minfx;
 				FCoords r(Coords(linear_fx, linear_fy2));
 				FCoords br(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
@@ -958,7 +960,7 @@ void RenderTarget::rendermap
 							drawanim(middle(f_pos, br_pos), anim, 0, &owner);
 					}
 
-					{// Render stuff that belongs to the node
+					{ // Render stuff that belongs to the node.
 
 						// Render bobs
 						// TODO - rendering order?
@@ -995,7 +997,7 @@ void RenderTarget::rendermap
 				}
 			}
 
-			{//  Draw things on the R-triangle.
+			{ //  Draw things on the R-triangle.
 				const int32_t linear_fx = minfx;
 				FCoords r(Coords(linear_fx, linear_fy2));
 				FCoords b
@@ -1061,7 +1063,7 @@ void RenderTarget::rendermap
 				}
 			}
 
-			{//  Draw things on the D-triangle.
+			{ //  Draw things on the D-triangle.
 				const int32_t linear_fx = minfx;
 				FCoords f(Coords(linear_fx - 1, linear_fy2));
 				FCoords br(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
@@ -1172,33 +1174,28 @@ void RenderTarget::drawanim
 	 uint32_t       const time,
 	 Player const * const player)
 {
-	const AnimationData* data = g_anim.get_animation(animation);
-	AnimationGfx* gfx = g_gr->get_animation(animation);
+	AnimationData const & data = *g_anim.get_animation(animation);
+	AnimationGfx        & gfx  = *g_gr-> get_animation(animation);
 
-	assert(data);
-	assert(gfx);
-
-	if (!data || !gfx) {
-		log("WARNING: Animation %i doesn't exist\n", animation);
-		return;
-	}
+	assert(&data);
+	assert(&gfx);
 
 	// Get the frame and its data
-	Surface* frame;
 
-	const uint32_t framenumber = (time / data->frametime) % gfx->nr_frames();
+	uint32_t const framenumber = (time / data.frametime) % gfx.nr_frames();
 
-	frame = gfx->get_frame
+	Surface * const frame =
+		gfx.get_frame
 			(framenumber, player ? player->get_player_number() : 0, player);
 
-	dst -= gfx->get_hotspot();
+	dst -= gfx.get_hotspot();
 
 	Rect srcrc(Point(0, 0), frame->get_w(), frame->get_h());
 
 	doblit(dst, frame, srcrc);
 
 	// Look if there's a sound effect registered for this frame and trigger the effect
-	uint32_t stereo_position=128; //see Sound_Handler::stereo_position()
+	uint32_t stereo_position = 128; //  see Sound_Handler::stereo_position()
 
 	g_anim.trigger_soundfx(animation, framenumber, stereo_position);
 }
@@ -1213,7 +1210,7 @@ void RenderTarget::drawanimrect
 	 Player const * const player,
 	 Rect                 srcrc)
 {
-	const AnimationData* data = g_anim.get_animation(animation);
+	AnimationData const * data = g_anim.get_animation(animation);
 	if (!data || !g_gr) {
 		log("WARNING: Animation %i doesn't exist\n", animation);
 		return;

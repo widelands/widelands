@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,7 +65,9 @@ using boost::format;
 
 #define CHAT_DISPLAY_TIME 5000 // Show chat messages as overlay for 5 seconds
 
-ChatDisplay::ChatDisplay(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h)
+ChatDisplay::ChatDisplay
+	(UI::Panel * const parent,
+	 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
 : UI::Panel(parent, x, y, w, h)
 {
 	m_chat = 0;
@@ -88,7 +90,7 @@ void ChatDisplay::draw(RenderTarget & dst)
 
 	int32_t now = WLApplication::get()->get_time();
 
-	const std::vector<ChatMessage>& msgs = m_chat->getMessages();
+	std::vector<ChatMessage> const & msgs = m_chat->getMessages();
 	std::vector<Displayed> displaylist;
 	uint32_t totalheight = 0;
 	uint32_t idx = msgs.size();
@@ -96,10 +98,10 @@ void ChatDisplay::draw(RenderTarget & dst)
 	while (idx && now - msgs[idx - 1].time <= CHAT_DISPLAY_TIME) {
 		int32_t w;
 
-		Displayed d = {msgs[idx-1].toPrintable(), 0};
+		Displayed d = {msgs[idx - 1].toPrintable(), 0};
 
 		g_fh->get_size(UI_FONT_SMALL, d.text, &w, &d.h, get_w());
-		if (d.h+static_cast<int32_t>(totalheight) > get_h())
+		if (d.h + static_cast<int32_t>(totalheight) > get_h())
 			break;
 
 		displaylist.push_back(d);
@@ -142,7 +144,10 @@ Initialize
 ===============
 */
 Interactive_Player::Interactive_Player
-		(Widelands::Game & g, uint8_t const plyn, bool scenario, bool multiplayer)
+	(Widelands::Game        &       g,
+	 Widelands::Player_Number const plyn,
+	 bool                     const scenario,
+	 bool                     const multiplayer)
 :
 Interactive_GameBase(g),
 m_flag_to_connect(Widelands::Coords::Null()),
@@ -420,8 +425,8 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
  * Set the player and the visibility to this
  * player
  */
-void Interactive_Player::set_player_number(uint32_t n) {
-	m_player_number=n;
+void Interactive_Player::set_player_number(uint32_t const n) {
+	m_player_number = n;
 }
 
 
@@ -431,7 +436,7 @@ void Interactive_Player::set_player_number(uint32_t n) {
  */
 void Interactive_Player::cleanup_for_load() {}
 
-void Interactive_Player::cmdSwitchPlayer(const std::vector<std::string>& args)
+void Interactive_Player::cmdSwitchPlayer(std::vector<std::string> const & args)
 {
 	if (args.size() != 2) {
 		DebugConsole::write("Usage: switchplayer <nr>");

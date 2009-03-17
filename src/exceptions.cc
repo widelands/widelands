@@ -27,7 +27,8 @@
  * class _wexception implementation
  */
 #undef wexception
-_wexception::_wexception(const char* file, uint32_t line, const char *fmt, ...)
+_wexception::_wexception
+	(char const * const file, uint32_t const line, char const * const fmt, ...)
 throw ()
 {
 	char buffer[512];

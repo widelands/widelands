@@ -33,7 +33,10 @@ struct ChatProvider;
  * entry field.
  */
 struct GameChatPanel : public UI::Panel, public Widelands::NoteReceiver<ChatMessage> {
-	GameChatPanel(UI::Panel*, int32_t x, int32_t y, uint32_t w, uint32_t h, ChatProvider&);
+	GameChatPanel
+		(UI::Panel    *,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h,
+		 ChatProvider &);
 
 	/**
 	 * Signal is called when a message has been sent by the user.
@@ -47,7 +50,7 @@ struct GameChatPanel : public UI::Panel, public Widelands::NoteReceiver<ChatMess
 
 	void focusEdit();
 
-	void receive(const ChatMessage& msg);
+	void receive(ChatMessage const &);
 
 private:
 	void recalculate();

@@ -114,7 +114,7 @@ void Journal::read(uint8_t  & v)
  */
 void Journal::read (int16_t & v) {
 	m_playbackstream.read(reinterpret_cast<char *>(&v), sizeof(int16_t));
-	v=Little16(v);
+	v = Little16(v);
 }
 
 /**
@@ -122,7 +122,7 @@ void Journal::read (int16_t & v) {
  */
 void Journal::read(uint16_t & v) {
 	m_playbackstream.read(reinterpret_cast<char *>(&v), sizeof(uint16_t));
-	v=Little16(v);
+	v = Little16(v);
 }
 
 /**
@@ -130,7 +130,7 @@ void Journal::read(uint16_t & v) {
  */
 void Journal::read (int32_t & v) {
 	m_playbackstream.read(reinterpret_cast<char *>(&v), sizeof(int32_t));
-	v=Little32(v);
+	v = Little32(v);
 }
 
 /**
@@ -138,7 +138,7 @@ void Journal::read (int32_t & v) {
  */
 void Journal::read(uint32_t & v) {
 	m_playbackstream.read(reinterpret_cast<char *>(&v), sizeof(uint32_t));
-	v=Little32(v);
+	v = Little32(v);
 }
 
 /**
@@ -213,20 +213,20 @@ Journal::~Journal()
  * \param filename File the events should be written to
  * \todo set the filename somewhere else
  */
-void Journal::start_recording(std::string filename)
+void Journal::start_recording(std::string const & filename)
 {
 	assert(!m_recordstream.is_open());
 
-	//TODO: m_recordname=FileSystem::FS_CanonicalizeName(filename);
-	m_recordname=filename;
+	//TODO: m_recordname = FileSystem::FS_CanonicalizeName(filename);
+	m_recordname = filename;
 	if (m_recordname.empty())
-		assert(1==0); //TODO: barf in a controlled way
+		assert(false); //TODO: barf in a controlled way
 
 	try {
 		m_recordstream.open(m_recordname.c_str(), std::ios::binary|std::ios::trunc);
 		write(RFC_MAGIC);
-		m_recordstream<<std::flush;
-		m_record=true;
+		m_recordstream << std::flush;
+		m_record = true;
 		log("Recording into %s\n", m_recordname.c_str());
 	}
 	catch (std::ofstream::failure e) {
@@ -247,7 +247,7 @@ void Journal::start_recording(std::string filename)
  */
 void Journal::stop_recording()
 {
-	m_record=false;
+	m_record = false;
 
 	if (m_recordstream.is_open()) {
 		m_recordstream<<std::flush;
@@ -260,14 +260,14 @@ void Journal::stop_recording()
  * \param filename File to get events from
  * \todo set the filename somewhere else
  */
-void Journal::start_playback(std::string filename)
+void Journal::start_playback(std::string const & filename)
 {
 	assert(!m_playbackstream.is_open());
 
-	//TODO: m_playbackname=FileSystem::FS_CanonicalizeName(filename);
-	m_playbackname=filename;
+	//TODO: m_playbackname = FileSystem::FS_CanonicalizeName(filename);
+	m_playbackname = filename;
 	if (m_playbackname.empty())
-		assert(1==0); //TODO: barf in a controlled way
+		assert(false); //TODO: barf in a controlled way
 
 	try {
 		uint32_t magic;
@@ -276,7 +276,7 @@ void Journal::start_playback(std::string filename)
 		read(magic);
 		if (magic != RFC_MAGIC)
 			throw BadMagic_error(m_playbackname);
-		m_playback=true;
+		m_playback = true;
 		log("Playing back from %s\n", m_playbackname.c_str());
 	}
 	catch (std::ifstream::failure e) {
@@ -297,7 +297,7 @@ void Journal::start_playback(std::string filename)
  */
 void Journal::stop_playback()
 {
-	m_playback=false;
+	m_playback = false;
 
 	if (m_playbackstream.is_open()) {
 		m_playbackstream.close();
@@ -396,7 +396,7 @@ void Journal::record_event(SDL_Event *e)
 bool Journal::read_event(SDL_Event *e)
 {
 	uint8_t recordtype, eventtype;
-	bool haveevent=false;
+	bool haveevent = false;
 
 	if (!m_playback)
 		return false;
@@ -410,26 +410,26 @@ bool Journal::read_event(SDL_Event *e)
 
 			switch (eventtype) {
 			case RFC_KEYDOWN:
-				e->type=SDL_KEYDOWN;
+				e->type = SDL_KEYDOWN;
 				read(e->key.keysym.mod);
 				read(e->key.keysym.sym);
 				read(e->key.keysym.unicode);
 				break;
 			case RFC_KEYUP:
-				e->type=SDL_KEYUP;
+				e->type = SDL_KEYUP;
 				read(e->key.keysym.mod);
 				read(e->key.keysym.sym);
 				read(e->key.keysym.unicode);
 				break;
 			case RFC_MOUSEBUTTONDOWN:
-				e->type=SDL_MOUSEBUTTONDOWN;
+				e->type = SDL_MOUSEBUTTONDOWN;
 				read(e->button.button);
 				read(e->button.x);
 				read(e->button.y);
 				read(e->button.state);
 				break;
 			case RFC_MOUSEBUTTONUP:
-				e->type=SDL_MOUSEBUTTONUP;
+				e->type = SDL_MOUSEBUTTONUP;
 				read(e->button.button);
 				read(e->button.x);
 				read(e->button.y);

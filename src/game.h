@@ -95,13 +95,13 @@ struct Game : public Editor_Game_Base {
 	~Game();
 
 	// life cycle
-	void set_game_controller(GameController* ctrl);
-	GameController* gameController();
+	void set_game_controller(GameController *);
+	GameController * gameController();
 	void set_write_replay(bool wr);
 	void save_syncstream(bool save);
-	void init_newgame(UI::ProgressWindow & loader_ui, const GameSettings& settings);
-	void init_savegame(UI::ProgressWindow & loader_ui, const GameSettings& settings);
-	bool run_splayer_scenario_direct(const char* mapname);
+	void init_newgame(UI::ProgressWindow & loader_ui, GameSettings const & settings);
+	void init_savegame(UI::ProgressWindow & loader_ui, GameSettings const & settings);
+	bool run_splayer_scenario_direct(char const * mapname);
 	bool run_load_game (std::string filename);
 	enum Start_Game_Type {NewScenario, NewNonScenario, Loaded};
 	bool run(UI::ProgressWindow & loader_ui, Start_Game_Type);
@@ -133,7 +133,7 @@ struct Game : public Editor_Game_Base {
 
 	void logic_rand_seed (uint32_t const seed) {rng().seed (seed);}
 
-	StreamWrite& syncstream();
+	StreamWrite & syncstream();
 	md5_checksum get_sync_hash() const;
 
 	bool get_allow_cheats();
@@ -143,8 +143,8 @@ struct Game : public Editor_Game_Base {
 	void send_player_command (Widelands::PlayerCommand *);
 
 	void send_player_bulldoze (PlayerImmovable &, bool recurse = false);
-	void send_player_build (int32_t, const Coords&, Building_Index);
-	void send_player_build_flag (int32_t, const Coords&);
+	void send_player_build      (int32_t, Coords, Building_Index);
+	void send_player_build_flag (int32_t, Coords);
 	void send_player_build_road (int32_t, Path &);
 	void send_player_flagaction (Flag &);
 	void send_player_start_stop_building (Building &);
@@ -156,7 +156,7 @@ struct Game : public Editor_Game_Base {
 	void send_player_enemyflagaction
 		(Flag const &, Player_Number, uint32_t count);
 
-	Interactive_Player* get_ipl();
+	Interactive_Player * get_ipl();
 
 	SaveHandler* get_save_handler() {return &m_savehandler;}
 
@@ -165,8 +165,8 @@ struct Game : public Editor_Game_Base {
 		return m_general_stats;
 	}
 
-	void ReadStatistics(FileRead& fr, uint32_t version);
-	void WriteStatistics(FileWrite& fw);
+	void ReadStatistics(FileRead &, uint32_t version);
+	void WriteStatistics(FileWrite &);
 
 private:
 	void sample_statistics();
@@ -182,8 +182,8 @@ private:
 
 	SaveHandler                    m_savehandler;
 
-	ReplayReader* m_replayreader;
-	ReplayWriter* m_replaywriter;
+	ReplayReader * m_replayreader;
+	ReplayWriter * m_replaywriter;
 
 	uint32_t m_last_stats_update;
 	General_Stats_vector m_general_stats;

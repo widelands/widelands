@@ -120,8 +120,6 @@ int32_t S2_Map_Loader::load_map_complete
 		load_world();
 	assert(get_state() == STATE_WORLD_LOADED);
 
-	//  Postload the world which provides all the immovables found on a map.
-	m_map.world().postload(game);
 	m_map.set_size(m_map.m_width, m_map.m_height);
 	load_s2mf(game);
 
@@ -411,7 +409,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 			uint32_t i = y * mapwidth;
 			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
 				// ignore everything but HQs
-				if (section[i]==0x80) {
+				if (section[i] == 0x80) {
 					if (bobs[i] < m_map.get_nrplayers())
 						m_map.set_starting_pos
 							(bobs[i] + 1, Widelands::Coords(x, y));
@@ -773,27 +771,27 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 				// Begin with a circle of radius = 1 :
 				if (!fixed & (tl.field->get_caps() == BIG)) {
 					m_map.set_starting_pos(p, tl);
-					fixed=true;
+					fixed = true;
 				}
 				if (!fixed & (l.field->get_caps() == BIG)) {
 					m_map.set_starting_pos(p,  l);
-					fixed=true;
+					fixed = true;
 				}
 				if (!fixed & (bl.field->get_caps() == BIG)) {
 					m_map.set_starting_pos(p, bl);
-					fixed=true;
+					fixed = true;
 				}
 				if (!fixed & (br.field->get_caps() == BIG)) {
 					m_map.set_starting_pos(p, br);
-					fixed=true;
+					fixed = true;
 				}
 				if (!fixed &  (r.field->get_caps() == BIG)) {
 					m_map.set_starting_pos(p,  r);
-					fixed=true;
+					fixed = true;
 				}
 				if (!fixed & (tr.field->get_caps() == BIG)) {
 					m_map.set_starting_pos(p, tr);
-					fixed=true;
+					fixed = true;
 				}
 				// check whether starting position was fixed.
 				if (fixed) {
@@ -805,54 +803,54 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 						// the three points at the top of the circle
 					if (!fixed & (m_map.tl_n(tl).field->get_caps() == BIG)) {
 						m_map.set_starting_pos(p, m_map.tl_n(tl));
-						fixed=true;
+						fixed = true;
 					}
 					if (!fixed & (m_map.tr_n(tl).field->get_caps() == BIG)) {
 						m_map.set_starting_pos(p, m_map.tr_n(tl));
-						fixed=true;
+						fixed = true;
 					}
 					if (!fixed & (m_map.tr_n(tr).field->get_caps() == BIG)) {
 						m_map.set_starting_pos(p, m_map.tr_n(tr));
-						fixed=true;
+						fixed = true;
 					}
 					//  the three points at the bottom of the circle
 					if (!fixed & (m_map.bl_n(bl).field->get_caps() == BIG)) {
 						m_map.set_starting_pos(p, m_map.bl_n(bl));
-						fixed=true;
+						fixed = true;
 					}
 					if (!fixed & (m_map.br_n(bl).field->get_caps() == BIG)) {
 						m_map.set_starting_pos(p, m_map.br_n(bl));
-						fixed=true;
+						fixed = true;
 					}
 					if (!fixed & (m_map.br_n(br).field->get_caps() == BIG)) {
 						m_map.set_starting_pos(p, m_map.br_n(br));
-						fixed=true;
+						fixed = true;
 					}
 					//  the three points at the left side of the circle
 					if (!fixed & (m_map. l_n(tl).field->get_caps() == BIG)) {
 						m_map.set_starting_pos(p, m_map. l_n(tl));
-						fixed=true;
+						fixed = true;
 					}
 					if (!fixed & (m_map. l_n (l).field->get_caps() == BIG)) {
 						m_map.set_starting_pos(p, m_map. l_n (l));
-						fixed=true;
+						fixed = true;
 					}
 					if (!fixed & (m_map. l_n(bl).field->get_caps() == BIG)) {
 						m_map.set_starting_pos(p, m_map. l_n(bl));
-						fixed=true;
+						fixed = true;
 					}
 					//  the three points at the right side of the circle
 					if (!fixed & (m_map. r_n(tr).field->get_caps() == BIG)) {
 						m_map.set_starting_pos(p, m_map. r_n(tr));
-						fixed=true;
+						fixed = true;
 					}
 					if (!fixed & (m_map. r_n (r).field->get_caps() == BIG)) {
 						m_map.set_starting_pos(p, m_map. r_n (r));
-						fixed=true;
+						fixed = true;
 					}
 					if (!fixed & (m_map. r_n(br).field->get_caps() == BIG)) {
 						m_map.set_starting_pos(p, m_map. r_n(br));
-						fixed=true;
+						fixed = true;
 					}
 					// check whether starting position was fixed.
 					if (fixed) {

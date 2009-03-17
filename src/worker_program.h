@@ -52,13 +52,13 @@ struct WorkerProgram : public BobProgramBase {
 	typedef std::vector<Worker::Action> Actions;
 	Actions::size_type get_size() const {return m_actions.size();}
 	Actions const & actions() const {return m_actions;}
-	const Worker::Action* get_action(int32_t idx) const {
+	Worker::Action const * get_action(int32_t idx) const {
 		assert(idx >= 0);
 		assert(static_cast<uint32_t>(idx) < m_actions.size());
 		return &m_actions[idx];
 	}
 
-	void parse(Worker_Descr *, Parser *, std::string name);
+	void parse(Worker_Descr *, Parser *, char const * name);
 	const Workarea_Info & get_workarea_info() const {return m_workarea_info;}
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void writeHTML(::FileWrite &, Worker_Descr const &) const;

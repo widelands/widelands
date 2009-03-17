@@ -54,7 +54,7 @@ private:
 	void toggle_playertribe();
 	void toggle_playerinit();
 
-	PlayerDescriptionGroupImpl* d;
+	PlayerDescriptionGroupImpl * d;
 };
 
 

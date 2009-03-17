@@ -89,8 +89,8 @@ void Event_Message_Box::set_button_name(int32_t i, std::string str) {
 	assert(i<get_nr_buttons());
 	m_buttons[i].name = str;
 }
-const char* Event_Message_Box::get_button_name(int32_t i) {
-	assert(i<get_nr_buttons());
+char const * Event_Message_Box::get_button_name(int32_t const i) {
+	assert(i < get_nr_buttons());
 	return m_buttons[i].name.c_str();
 }
 
@@ -182,7 +182,7 @@ void Event_Message_Box::Write(Section & s, Editor_Game_Base &) const {
 		s.set_int("posy",         get_posy());
 
 	char key[] = "button_00\0trigger"; //  tailed string
-	for (int32_t i=0; i < get_nr_buttons(); ++i) {
+	for (int32_t i = 0; i < get_nr_buttons(); ++i) {
 		s.set_string(key, m_buttons[i].name);
 		if (m_buttons[i].trigger) {
 			key[9] = '_'; //  Enable the "_trigger" tail of the key string.
@@ -198,10 +198,10 @@ void Event_Message_Box::Write(Section & s, Editor_Game_Base &) const {
 /**
  * Check if trigger conditions are done
  */
-Event::State Event_Message_Box::run(Game* game) {
+Event::State Event_Message_Box::run(Game * game) {
 	Message_Box_Event_Message_Box * mb =
 		new Message_Box_Event_Message_Box
-		(game, this, get_posx(), get_posy(), get_w(), get_h());
+			(game, this, get_posx(), get_posy(), get_w(), get_h());
 	if (get_is_modal()) {
 		mb->run();
 		delete mb;

@@ -152,7 +152,7 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 		} else break;
 	}
 
-	{//  Calculate which of the 2 nodes (x, y) is closest to.
+	{ //  Calculate which of the 2 nodes (x, y) is closest to.
 		uint16_t upper_x, lower_x, upper_screen_dx, lower_screen_dx;
 		if (slash) {
 			upper_x = right_col;

@@ -51,12 +51,12 @@ struct ReplayReader {
 	ReplayReader(Game &, std::string const & filename);
 	~ReplayReader();
 
-	Command* GetNextCommand(uint32_t time);
+	Command * GetNextCommand(uint32_t time);
 	bool EndOfReplay();
 
 private:
 	Game       & m_game;
-	StreamRead* m_cmdlog;
+	StreamRead * m_cmdlog;
 
 	uint32_t m_replaytime;
 };
@@ -68,12 +68,12 @@ struct ReplayWriter {
 	ReplayWriter(Game &, std::string const & filename);
 	~ReplayWriter();
 
-	void SendPlayerCommand(PlayerCommand* cmd);
-	void SendSync(const md5_checksum& hash);
+	void SendPlayerCommand(PlayerCommand *);
+	void SendSync(md5_checksum const &);
 
 private:
 	Game        & m_game;
-	StreamWrite* m_cmdlog;
+	StreamWrite * m_cmdlog;
 };
 
 };

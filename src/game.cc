@@ -38,10 +38,10 @@
 #include "network.h"
 #include "player.h"
 #include "playercommand.h"
-#include "productionsite.h"
 #include "replay.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
+#include "trainingsite.h"
 #include "tribe.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
@@ -672,13 +672,14 @@ void Game::send_player_bulldoze (PlayerImmovable & pi, bool const recurse)
 		 	(get_gametime(), pi.owner().get_player_number(), pi, recurse));
 }
 
-void Game::send_player_build (int32_t pid, const Coords& coords, Building_Index id)
+void Game::send_player_build
+	(int32_t const pid, Coords const coords, Building_Index const id)
 {
 	assert(id);
 	send_player_command (new Cmd_Build(get_gametime(), pid, coords, id));
 }
 
-void Game::send_player_build_flag (int32_t pid, const Coords& coords)
+void Game::send_player_build_flag (int32_t const pid, Coords const coords)
 {
 	send_player_command (new Cmd_BuildFlag(get_gametime(), pid, coords));
 }

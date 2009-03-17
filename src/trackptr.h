@@ -45,7 +45,7 @@ class Trackable {
 		Trackable * m_ptr;
 
 	public:
-		Tracker(Trackable* p) : m_refcount(0), m_ptr(p) {}
+		Tracker(Trackable * const p) : m_refcount(0), m_ptr(p) {}
 
 		void addref() {
 			++m_refcount;
@@ -63,7 +63,7 @@ class Trackable {
 				delete this;
 		}
 
-		Trackable* get() {return m_ptr;}
+		Trackable * get() {return m_ptr;}
 
 		//  Putting "private:" here causes a compiler warning, even though we use
 		//  delete this.
@@ -95,20 +95,20 @@ protected:
 		if (m_tracker)
 			m_tracker->deref();
 	}
-	BaseTrackPtr(Trackable* t) {
+	BaseTrackPtr(Trackable * const t) {
 		if (t) {
 			m_tracker = t->m_tracker;
 			m_tracker->addref();
 		} else
 			m_tracker = 0;
 	}
-	BaseTrackPtr(const BaseTrackPtr& o) {
+	BaseTrackPtr(BaseTrackPtr const & o) {
 		m_tracker = o.m_tracker;
 		if (m_tracker)
 			m_tracker->addref();
 	}
 
-	void set(const BaseTrackPtr& o) {
+	void set(BaseTrackPtr const & o) {
 		if (m_tracker)
 			m_tracker->deref();
 
@@ -117,7 +117,7 @@ protected:
 			m_tracker->addref();
 	}
 
-	void set(Trackable* t)
+	void set(Trackable * const t)
 	{
 		if (m_tracker)
 			m_tracker->deref();
@@ -129,12 +129,10 @@ protected:
 			m_tracker = 0;
 	}
 
-	Trackable* get() const
+	Trackable * get() const
 	{
 		if (m_tracker) {
-			Trackable* t = m_tracker->get();
-
-			if (t)
+			if (Trackable * const t = m_tracker->get())
 				return t;
 
 			m_tracker->deref();
@@ -156,14 +154,14 @@ template<class T>
 struct TrackPtr : BaseTrackPtr {
 	TrackPtr() {}
 
-	TrackPtr(T* ptr) : BaseTrackPtr(ptr) {}
-	TrackPtr(const TrackPtr<T>& o) : BaseTrackPtr(o) {}
+	TrackPtr(T * ptr) : BaseTrackPtr(ptr) {}
+	TrackPtr(TrackPtr<T> const & o) : BaseTrackPtr(o) {}
 
-	TrackPtr& operator=(const TrackPtr<T>& o) {set(o); return *this;}
-	TrackPtr& operator=(T* ptr) {set(ptr); return *this;}
+	TrackPtr & operator= (TrackPtr<T> const &       o) {set(o); return *this;}
+	TrackPtr & operator= (T                 * const p) {set(p); return *this;}
 
-	operator T*() const {return static_cast<T*>(get());}
-	T* operator->() const {return static_cast<T*>(get());}
+	operator T *  () const {return static_cast<T *>(get());}
+	T * operator->() const {return static_cast<T *>(get());}
 };
 
 

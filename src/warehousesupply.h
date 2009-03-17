@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@ struct WarehouseSupply : public Supply {
 	WarehouseSupply(Warehouse * const wh) : m_economy(0), m_warehouse(wh) {}
 	virtual ~WarehouseSupply();
 
-	void set_economy(Economy* e);
+	void set_economy(Economy *);
 
 	void set_nrworkers(Ware_Index);
 	void set_nrwares  (Ware_Index);

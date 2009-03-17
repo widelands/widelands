@@ -286,7 +286,9 @@ void Tribe_Descr::load_graphics()
 /*
  * does this tribe exist?
  */
-bool Tribe_Descr::exists_tribe(const std::string & name, TribeBasicInfo* info) {
+bool Tribe_Descr::exists_tribe
+	(std::string const & name, TribeBasicInfo * const info)
+{
 	std::string buf = "tribes/";
 	buf            += name;
 	buf            += "/conf";
@@ -317,7 +319,7 @@ bool Tribe_Descr::exists_tribe(const std::string & name, TribeBasicInfo* info) {
 }
 
 struct TribeBasicComparator {
-	bool operator()(const TribeBasicInfo& t1, const TribeBasicInfo& t2) {
+	bool operator()(TribeBasicInfo const & t1, TribeBasicInfo const & t2) {
 		return t1.uiposition < t2.uiposition;
 	}
 };
@@ -407,7 +409,9 @@ uint32_t Tribe_Descr::get_resource_indicator
 
 	uint32_t bestmatch =
 		static_cast<uint32_t>
-		((static_cast<float>(amount)/res->get_max_amount()) * num_indicators);
+			((static_cast<float>(amount) / res->get_max_amount())
+			 *
+			 num_indicators);
 	if (static_cast<int32_t>(amount) < res->get_max_amount())
 		bestmatch += 1; // Resi start with 1, not 0
 

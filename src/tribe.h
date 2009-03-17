@@ -62,7 +62,8 @@ struct Tribe_Descr {
 	Tribe_Descr(std::string const & name, Editor_Game_Base &);
 
 	//  Static function to check for tribes.
-	static bool exists_tribe(const std::string & name, TribeBasicInfo* info = 0);
+	static bool exists_tribe
+		(std::string const & name, TribeBasicInfo * info = 0);
 	static void get_all_tribenames(std::vector<std::string> &);
 	static void get_all_tribe_infos(std::vector<TribeBasicInfo> &);
 
@@ -90,7 +91,7 @@ struct Tribe_Descr {
 	Ware_Index ware_index(char const * const warename) const {
 		return m_wares.get_index(warename);
 	}
-	Item_Ware_Descr* get_ware_descr(Ware_Index const index) const {
+	Item_Ware_Descr * get_ware_descr(Ware_Index const index) const {
 		return m_wares.get(index);
 	}
 	Ware_Index safe_worker_index(std::string const & workername) const;
@@ -108,11 +109,15 @@ struct Tribe_Descr {
 	Building_Index building_index(char const * const buildingname) const {
 		return m_buildings.get_index(buildingname);
 	}
-	int32_t get_immovable_index(const char* l) const {return m_immovables.get_index(l);}
+	int32_t get_immovable_index(char const * l) const {return m_immovables.get_index(l);}
 	int32_t get_nr_immovables() {return m_immovables.get_nitems();}
-	Immovable_Descr* get_immovable_descr(int32_t index) const {return m_immovables.get(index);}
-	int32_t get_bob(const char* l) const {return m_bobs.get_index(l);}
-	Bob::Descr* get_bob_descr(uint16_t index) const {return m_bobs.get(index);}
+	Immovable_Descr * get_immovable_descr(int32_t const index) const {
+		return m_immovables.get(index);
+	}
+	int32_t get_bob(char const * const l) const {return m_bobs.get_index(l);}
+	Bob::Descr * get_bob_descr(uint16_t const index) const {
+		return m_bobs.get(index);
+	}
 	int32_t get_nr_bobs() {return m_bobs.get_nitems();}
 
 	uint32_t get_frontier_anim() const throw () {return m_anim_frontier;}

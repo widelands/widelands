@@ -75,7 +75,7 @@ Soldier_Descr::Soldier_Descr
 		container_iterate(std::vector<std::string>, list, i)
 			remove_spaces(*i.current);
 		char * endp;
-		m_min_hp= strtol(list[0].c_str(), &endp, 0);
+		m_min_hp = strtol(list[0].c_str(), &endp, 0);
 		if (*endp)
 			throw wexception
 				("Parse error in hp string: %s is a bad value", list[0].c_str());
@@ -102,7 +102,7 @@ Soldier_Descr::Soldier_Descr
 		container_iterate(std::vector<std::string>, list, i)
 			remove_spaces(*i.current);
 		char * endp;
-		m_min_attack= strtol(list[0].c_str(), &endp, 0);
+		m_min_attack = strtol(list[0].c_str(), &endp, 0);
 		if (*endp)
 			throw wexception
 				("Parse error in attack string: %s is a bad value",
@@ -133,31 +133,31 @@ Soldier_Descr::Soldier_Descr
 	m_max_evade_level   = global_s.get_safe_int("max_evade_level");
 
 	// Load the filenames
-	m_hp_pics_fn.resize(m_max_hp_level+1);
-	m_attack_pics_fn.resize(m_max_attack_level+1);
-	m_defense_pics_fn.resize(m_max_defense_level+1);
-	m_evade_pics_fn.resize(m_max_evade_level+1);
+	m_hp_pics_fn     .resize(m_max_hp_level      + 1);
+	m_attack_pics_fn .resize(m_max_attack_level  + 1);
+	m_defense_pics_fn.resize(m_max_defense_level + 1);
+	m_evade_pics_fn  .resize(m_max_evade_level   + 1);
 	char buffer[256];
-	std::string dir=directory;
-	dir+="/";
+	std::string dir = directory;
+	dir += "/";
 	for (uint32_t i = 0; i <= m_max_hp_level;      ++i) {
 		snprintf(buffer, sizeof(buffer), "hp_level_%u_pic",      i);
-		m_hp_pics_fn[i]=dir;
+		m_hp_pics_fn[i] = dir;
 		m_hp_pics_fn[i] += global_s.get_safe_string(buffer);
 	}
 	for (uint32_t i = 0; i <= m_max_attack_level;  ++i) {
 		snprintf(buffer, sizeof(buffer), "attack_level_%u_pic",  i);
-		m_attack_pics_fn[i]=dir;
+		m_attack_pics_fn[i] = dir;
 		m_attack_pics_fn[i] += global_s.get_safe_string(buffer);
 	}
 	for (uint32_t i = 0; i <= m_max_defense_level; ++i) {
 		snprintf(buffer, sizeof(buffer), "defense_level_%u_pic", i);
-		m_defense_pics_fn[i]=dir;
+		m_defense_pics_fn[i] = dir;
 		m_defense_pics_fn[i] += global_s.get_safe_string(buffer);
 	}
 	for (uint32_t i = 0; i <= m_max_evade_level;   ++i) {
 		snprintf(buffer, sizeof(buffer), "evade_level_%i_pic",   i);
-		m_evade_pics_fn[i]=dir;
+		m_evade_pics_fn[i] = dir;
 		m_evade_pics_fn[i] += global_s.get_safe_string(buffer);
 	}
 }
@@ -166,18 +166,21 @@ Soldier_Descr::Soldier_Descr
  * Load the graphics
  */
 void Soldier_Descr::load_graphics() {
-	m_hp_pics.resize(m_max_hp_level+1);
-	m_attack_pics.resize(m_max_attack_level+1);
-	m_defense_pics.resize(m_max_defense_level+1);
-	m_evade_pics.resize(m_max_evade_level+1);
+	m_hp_pics     .resize(m_max_hp_level      + 1);
+	m_attack_pics .resize(m_max_attack_level  + 1);
+	m_defense_pics.resize(m_max_defense_level + 1);
+	m_evade_pics  .resize(m_max_evade_level   + 1);
 	for (uint32_t i = 0; i <= m_max_hp_level;      ++i)
-		m_hp_pics[i]=g_gr->get_picture(PicMod_Game,  m_hp_pics_fn[i].c_str());
+		m_hp_pics[i] = g_gr->get_picture(PicMod_Game,  m_hp_pics_fn[i].c_str());
 	for (uint32_t i = 0; i <= m_max_attack_level;  ++i)
-		m_attack_pics[i]=g_gr->get_picture(PicMod_Game,  m_attack_pics_fn[i].c_str());
+		m_attack_pics[i] =
+			g_gr->get_picture(PicMod_Game,  m_attack_pics_fn[i].c_str());
 	for (uint32_t i = 0; i <= m_max_defense_level; ++i)
-		m_defense_pics[i]=g_gr->get_picture(PicMod_Game,  m_defense_pics_fn[i].c_str());
+		m_defense_pics[i] =
+			g_gr->get_picture(PicMod_Game,  m_defense_pics_fn[i].c_str());
 	for (uint32_t i = 0; i <= m_max_evade_level;   ++i)
-		m_evade_pics[i]=g_gr->get_picture(PicMod_Game,  m_evade_pics_fn[i].c_str());
+		m_evade_pics[i] =
+			g_gr->get_picture(PicMod_Game,  m_evade_pics_fn[i].c_str());
 	Worker_Descr::load_graphics();
 }
 
@@ -214,23 +217,23 @@ Soldier::Soldier(const Soldier_Descr & soldier_descr) : Worker(soldier_descr)
 
 void Soldier::init(Editor_Game_Base* gg)
 {
-	m_hp_level=0;
-	m_attack_level=0;
-	m_defense_level=0;
-	m_evade_level=0;
+	m_hp_level      = 0;
+	m_attack_level  = 0;
+	m_defense_level = 0;
+	m_evade_level   = 0;
 
-	m_hp_max=0;
-	m_min_attack=descr().get_min_attack();
-	m_max_attack=descr().get_max_attack();
-	m_defense=descr().get_defense();
-	m_evade=descr().get_evade();
+	m_hp_max        = 0;
+	m_min_attack    = descr().get_min_attack();
+	m_max_attack    = descr().get_max_attack();
+	m_defense       = descr().get_defense   ();
+	m_evade         = descr().get_evade     ();
 	if (upcast(Game, game, gg)) {
 		const uint32_t min_hp = descr().get_min_hp();
 		assert(min_hp);
 		assert(min_hp <= descr().get_max_hp());
 		m_hp_max = min_hp + game->logic_rand() % (descr().get_max_hp() - min_hp);
 	}
-	m_hp_current=m_hp_max;
+	m_hp_current    = m_hp_max;
 
 	Worker::init(gg);
 }
@@ -255,37 +258,41 @@ void Soldier::set_level
 	set_evade_level(evade);
 }
 void Soldier::set_hp_level(const uint32_t hp) {
-	assert(hp>=m_hp_level && hp<=descr().get_max_hp_level());
+	assert(m_hp_level <= hp);
+	assert              (hp <= descr().get_max_hp_level());
 
-	while (m_hp_level<hp) {
+	while (m_hp_level < hp) {
 		++m_hp_level;
-		m_hp_max+=descr().get_hp_incr_per_level();
-		m_hp_current+=descr().get_hp_incr_per_level();
+		m_hp_max     += descr().get_hp_incr_per_level();
+		m_hp_current += descr().get_hp_incr_per_level();
 	}
 }
 void Soldier::set_attack_level(const uint32_t attack) {
-	assert(attack>=m_attack_level && attack<=descr().get_max_attack_level());
+	assert(m_attack_level <= attack);
+	assert                  (attack <= descr().get_max_attack_level());
 
-	while (m_attack_level<attack) {
+	while (m_attack_level < attack) {
 		++m_attack_level;
-		m_min_attack+=descr().get_attack_incr_per_level();
-		m_max_attack+=descr().get_attack_incr_per_level();
+		m_min_attack += descr().get_attack_incr_per_level();
+		m_max_attack += descr().get_attack_incr_per_level();
 	}
 }
 void Soldier::set_defense_level(const uint32_t defense) {
-	assert(defense>=m_defense_level && defense<=descr().get_max_defense_level());
+	assert(m_defense_level <= defense);
+	assert                   (defense <= descr().get_max_defense_level());
 
-	while (m_defense_level<defense) {
+	while (m_defense_level < defense) {
 		++m_defense_level;
-		m_defense+=descr().get_defense_incr_per_level();
+		m_defense += descr().get_defense_incr_per_level();
 	}
 }
 void Soldier::set_evade_level(const uint32_t evade) {
-	assert(evade>=m_evade_level && evade<=descr().get_max_evade_level());
+	assert(m_evade_level <= evade);
+	assert                 (evade <= descr().get_max_evade_level());
 
-	while (m_evade_level<evade) {
+	while (m_evade_level < evade) {
 		++m_evade_level;
-		m_evade+=descr().get_evade_incr_per_level();
+		m_evade += descr().get_evade_incr_per_level();
 	}
 }
 
@@ -323,10 +330,10 @@ int32_t Soldier::get_tattribute(uint32_t attr) const
 //  Unsignedness ensures that we can only heal, not hurt through this method.
 void Soldier::heal (const uint32_t hp) {
 	molog ("healing (%d+)%d/%d\n", hp, m_hp_current, m_hp_max);
-	m_hp_current += hp;
-
-	if (m_hp_current > m_hp_max)
-		m_hp_current = m_hp_max;
+	assert(hp);
+	assert(m_hp_current <  m_hp_max);
+	m_hp_current += std::min(hp, m_hp_max - m_hp_current);
+	assert(m_hp_current <= m_hp_max);
 }
 
 /**
@@ -427,7 +434,7 @@ bool Soldier::isOnBattlefield()
 }
 
 
-Battle* Soldier::getBattle()
+Battle * Soldier::getBattle()
 {
 	return m_battle;
 }
@@ -692,7 +699,7 @@ void Soldier::defense_pop(Game* g, State*)
  */
 bool Soldier::stayHome()
 {
-	if (State* state = get_state(&taskDefense))
+	if (State * const state = get_state(&taskDefense))
 		return state->ivar1;
 	return false;
 }
@@ -817,7 +824,7 @@ bool Soldier::checkFieldBlocked(Game* g, const FCoords& field, bool commit)
 		}
 	}
 
-	std::vector<Bob*> soldiers;
+	std::vector<Bob *> soldiers;
 	g->map().find_bobs(Area<FCoords>(field, 0), &soldiers, FindSoldierOnBattlefield());
 
 	if
@@ -849,7 +856,7 @@ bool Soldier::checkFieldBlocked(Game* g, const FCoords& field, bool commit)
  */
 void Soldier::sendSpaceSignals(Game* g)
 {
-	std::vector<Bob*> soldiers;
+	std::vector<Bob *> soldiers;
 
 	g->map().find_bobs(Area<FCoords>(get_position(), 1), &soldiers, FindSoldierOnBattlefield());
 
@@ -868,15 +875,12 @@ void Soldier::sendSpaceSignals(Game* g)
 			 CheckStepWalkOn(descr().movecaps(), false),
 			 FindImmovableAttackable());
 
-		for
-			(std::vector<BaseImmovable*>::const_iterator it = attackables.begin();
-			 it != attackables.end();
-			 ++it)
+		container_iterate_const(std::vector<BaseImmovable *>, attackables, i)
 			if
-				(dynamic_cast<PlayerImmovable const &>(**it).get_owner()
+				(dynamic_cast<PlayerImmovable const &>(**i.current).get_owner()
 				 !=
 				 get_owner())
-				dynamic_cast<Attackable &>(**it).aggressor(*this);
+				dynamic_cast<Attackable &>(**i.current).aggressor(*this);
 	}
 }
 

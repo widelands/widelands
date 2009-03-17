@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ struct NetClient :
 	private SyncCallback,
 	public  ChatProvider
 {
-	NetClient (IPaddress*, const std::string& playername);
+	NetClient (IPaddress *, std::string const & playername);
 	virtual ~NetClient ();
 
 	void run();
@@ -57,9 +57,9 @@ struct NetClient :
 	// End GameController interface
 
 	// GameSettingsProvider interface
-	virtual const GameSettings& settings();
+	virtual GameSettings const & settings();
 
-	virtual void setScenario(bool);//no scenario for multiplayer
+	virtual void setScenario(bool); //  FIXME no scenario for multiplayer
 	virtual bool canChangeMap();
 	virtual bool canChangePlayerState(uint8_t number);
 	virtual bool canChangePlayerTribe(uint8_t number);
@@ -67,31 +67,33 @@ struct NetClient :
 
 	virtual bool canLaunch();
 
-	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers, bool savegame = false);
+	virtual void setMap(std::string const & mapname, std::string const & mapfilename, uint32_t maxplayers, bool savegame = false);
 	virtual void setPlayerState (uint8_t number, PlayerSettings::State state);
-	virtual void setPlayerAI    (uint8_t number, const std::string& ai);
+	virtual void setPlayerAI    (uint8_t number, std::string const & ai);
 	virtual void nextPlayerState(uint8_t number);
-	virtual void setPlayerTribe (uint8_t number, const std::string& tribe);
+	virtual void setPlayerTribe (uint8_t number, std::string const & tribe);
 	virtual void setPlayerInit  (uint8_t number, uint8_t index);
-	virtual void setPlayerName  (uint8_t number, const std::string& name);
+	virtual void setPlayerName  (uint8_t number, std::string const & name);
 	virtual void setPlayer      (uint8_t number, PlayerSettings ps);
 	virtual void setPlayerNumber(int32_t number);
 
 	// ChatProvider interface
-	void send(const std::string& msg);
-	const std::vector<ChatMessage>& getMessages() const;
+	void send(std::string const & msg);
+	std::vector<ChatMessage> const & getMessages() const;
 
 private:
 	void syncreport();
 
-	void handle_packet(RecvPacket& packet);
+	void handle_packet(RecvPacket &);
 	void handle_network ();
 	void sendTime();
-	void recvOnePlayer(uint8_t number, Widelands::StreamRead& packet);
-	void recvOneUser(uint32_t number, Widelands::StreamRead& packet);
-	void disconnect (const std::string& reason, bool sendreason = true, bool showmsg = true);
+	void recvOnePlayer(uint8_t  number, Widelands::StreamRead &);
+	void recvOneUser  (uint32_t number, Widelands::StreamRead &);
+	void disconnect
+		(std::string const & reason,
+		 bool sendreason = true, bool showmsg = true);
 
-	NetClientImpl* d;
+	NetClientImpl * d;
 };
 
 #endif // NETCLIENT_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ using Widelands::Map_Object;
 using Widelands::TCoords;
 
 struct InteractiveBaseInternals {
-	MiniMap* mm;
+	MiniMap * mm;
 	MiniMap::Registry minimap;
 
 	InteractiveBaseInternals() : mm(0) {}
@@ -204,7 +204,8 @@ static std::string speedString(uint32_t const speed)
 {
 	if (speed) {
 		char buffer[32];
-		snprintf(buffer, sizeof(buffer), _("%u.%ux"), speed/1000, (speed/100)%10);
+		snprintf
+			(buffer, sizeof(buffer), _("%u.%ux"), speed / 1000, speed / 100 % 10);
 		return buffer;
 	}
 	return _("PAUSE");
@@ -706,7 +707,7 @@ void Interactive_Base::roadb_add_overlay()
 			dir = Widelands::get_reverse_dir(dir);
 		}
 
-		int32_t shift = 2*(dir - Map_Object::WALK_E);
+		int32_t const shift = 2 * (dir - Map_Object::WALK_E);
 
 		uint8_t set_to = overlay_manager.get_road_overlay(c);
 		set_to|=  Widelands::Road_Normal << shift;
@@ -804,28 +805,24 @@ bool Interactive_Base::handle_key(bool down, SDL_keysym code)
 		if (!get_display_flag(dfSpeed))
 			break;
 
-		if (down) {
-			if (upcast(Game, g, &m_egbase)) {
+		if (down)
+			if (upcast(Game, g, &m_egbase))
 				if (GameController* ctrl = g->gameController()) {
 					int32_t speed = ctrl->desiredSpeed();
 					ctrl->setDesiredSpeed(speed+1000);
 				}
-			}
-		}
 		return true;
 
 	case SDLK_PAGEDOWN:
 		if (!get_display_flag(dfSpeed))
 			break;
 
-		if (down) {
-			if (upcast(Widelands::Game, g, &m_egbase)) {
+		if (down)
+			if (upcast(Widelands::Game, g, &m_egbase))
 				if (GameController* ctrl = g->gameController()) {
 					int32_t speed = ctrl->desiredSpeed();
 					ctrl->setDesiredSpeed(std::max(0, speed - 1000));
 				}
-			}
-		}
 		return true;
 
 	default:

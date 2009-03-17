@@ -93,7 +93,7 @@ void WaresDisplay::add_warelist
 	rows = (wares->get_nrwareids().value() + WaresPerRow - 1) / WaresPerRow;
 	height = rows * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1;
 
-	set_size(get_inner_w(), height+30);
+	set_size(get_inner_w(), height + 30);
 	m_curware.set_pos(Point(0, get_inner_h() - 25));
 	m_curware.set_size(get_inner_w(), 20);
 

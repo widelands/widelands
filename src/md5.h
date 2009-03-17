@@ -47,20 +47,19 @@ struct md5_checksum {
 
 	std::string str() const;
 
-	bool operator==(const md5_checksum& o) const
-	{
+	bool operator== (md5_checksum const & o) const {
 		return memcmp(data, o.data, sizeof(data)) == 0;
 	}
 
-	bool operator!=(const md5_checksum& o) const {return not (*this == o);}
+	bool operator!= (md5_checksum const & o) const {return not (*this == o);}
 };
 
 // Note that the implementation of MD5Checksum is basically just
 // a wrapper around these functions, which have been taken basically
 // verbatim (with some whitespace changes) from the GNU tools; see below.
-void * md5_finish_ctx (md5_ctx* ctx, void* resbuf);
-void md5_process_bytes (const void* buffer, uint32_t len, struct md5_ctx* ctx);
-void md5_process_block (const void* buffer, uint32_t len, md5_ctx* ctx);
+void * md5_finish_ctx (md5_ctx *, void * resbuf);
+void md5_process_bytes (void const * buffer, uint32_t len, md5_ctx *);
+void md5_process_block (void const * buffer, uint32_t len, md5_ctx *);
 
 /**
  * This class is responsible for creating a streaming md5 checksum.

@@ -383,7 +383,7 @@ m_parent(&parent)
 	//  all wares
 	Widelands::Ware_Index::value_t cur_ware = 0;
 	int32_t dposy    = 0;
-	pos.y += PLOT_HEIGHT+ 2 * spacing;
+	pos.y += PLOT_HEIGHT + 2 * spacing;
 	Widelands::Tribe_Descr const & tribe = parent.get_player()->tribe();
 	for (uint32_t y = 0; y < nr_rows; ++y) {
 		pos.x = spacing;
@@ -412,7 +412,7 @@ m_parent(&parent)
 		pos.y += dposy;
 	}
 
-	m_plot->set_size(get_inner_w()-2*spacing, PLOT_HEIGHT);
+	m_plot->set_size(get_inner_w() - 2 * spacing, PLOT_HEIGHT);
 
 
 	int32_t button_size = (get_inner_w() - spacing * 5) / 4;
@@ -464,7 +464,7 @@ m_parent(&parent)
 		 &Ware_Statistics_Menu::clicked_help, this,
 		 _("Help"));
 
-	pos.x += button_size+spacing;
+	pos.x += button_size + spacing;
 
 	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,

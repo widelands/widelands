@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,43 +30,37 @@ struct FindImmovableAlwaysTrueImpl {
 	bool accept(BaseImmovable *) const {return true;}
 };
 
-const FindImmovable& FindImmovableAlwaysTrue()
+FindImmovable const & FindImmovableAlwaysTrue()
 {
 	static FindImmovable alwaystrue = FindImmovableAlwaysTrueImpl();
 	return alwaystrue;
 }
 
-bool FindImmovableSize::accept(BaseImmovable *imm) const
-{
-	int32_t size = imm->get_size();
+bool FindImmovableSize              ::accept(BaseImmovable * const imm) const {
+	int32_t const size = imm->get_size();
 	return (m_min <= size && size <= m_max);
 }
 
-bool FindImmovableType::accept(BaseImmovable *imm) const
-{
+bool FindImmovableType              ::accept(BaseImmovable * const imm) const {
 	return (m_type == imm->get_type());
 }
 
-bool FindImmovableAttribute::accept(BaseImmovable *imm) const
-{
+bool FindImmovableAttribute         ::accept(BaseImmovable * const imm) const {
 	return imm->has_attribute(m_attrib);
 }
 
-bool FindImmovablePlayerImmovable::accept(BaseImmovable* imm) const
-{
+bool FindImmovablePlayerImmovable   ::accept(BaseImmovable * const imm) const {
 	return dynamic_cast<PlayerImmovable const *>(imm);
 }
 
-bool FindImmovablePlayerMilitarySite::accept(BaseImmovable* imm) const {
+bool FindImmovablePlayerMilitarySite::accept(BaseImmovable * const imm) const {
 	if (upcast(MilitarySite, ms, imm))
-		return &ms->owner() == player;
+		return &ms->owner() == &player;
 	return false;
 }
 
-bool FindImmovableAttackable::accept(BaseImmovable* imm) const {
-	if (upcast(Attackable, attackable, imm))
-		return true;
-	return false;
+bool FindImmovableAttackable        ::accept(BaseImmovable * const imm) const {
+	return dynamic_cast<Attackable const *>(imm);
 }
 
 

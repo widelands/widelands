@@ -80,7 +80,7 @@ struct EventChain
 		assert(i < m_events.size()); return m_events[i];
 	}
 	void clear_events();
-	void add_event(Event* ev);
+	void add_event(Event *);
 
 
 	State run(Game *);

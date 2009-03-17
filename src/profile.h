@@ -67,7 +67,7 @@ struct Section {
 		Value(const Value &o);
 		~Value();
 
-		Value &operator=(const Value &o);
+		Value & operator= (Value const &);
 
 		const char *get_name() const {return m_name;}
 
@@ -92,7 +92,7 @@ struct Section {
 	Section(const Section &);
 	~Section();
 
-	Section & operator=(const Section &);
+	Section & operator= (Section const &);
 
 	/// \returns whether a value with the given name exists.
 	/// Does not mark the value as used.
@@ -229,7 +229,10 @@ struct Profile {
 	};
 
 	Profile(int32_t error_level = err_throw);
-	Profile(const char* filename, const char *global_section = 0, int32_t error_level = err_throw);
+	Profile
+		(char const * filename,
+		 char const * global_section = 0,
+		 int32_t      error_level    = err_throw);
 	~Profile();
 
 	void error(const char *fmt, ...) const __attribute__((format(printf, 2, 3)));

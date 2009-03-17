@@ -177,7 +177,7 @@ bool Event_Allow_Building_Option_Menu::handle_mouserelease
 
 
 void Event_Allow_Building_Option_Menu::clicked_ok() {
-	const std::string& name = m_name.text();
+	std::string const & name = m_name.text();
 	if (name.size()) {
 		if
 			(Widelands::Event * const registered_event =

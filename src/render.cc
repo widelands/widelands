@@ -79,7 +79,7 @@ void Surface::save_bmp(const char & fname) const {
  * textures
  */
 void Surface::force_disable_alpha() {
-	SDL_Surface* newsur = SDL_DisplayFormat(m_surface);
+	SDL_Surface * const newsur = SDL_DisplayFormat(m_surface);
 	SDL_FreeSurface(m_surface);
 	m_surface = newsur;
 }
@@ -182,7 +182,7 @@ Surface::blit
 Blit this given source bitmap to this bitmap.
 ===============
 */
-void Surface::blit(Point dst, Surface* src, Rect srcrc)
+void Surface::blit(Point const dst, Surface * const src, Rect const srcrc)
 {
 	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
 	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
@@ -193,7 +193,7 @@ void Surface::blit(Point dst, Surface* src, Rect srcrc)
 /*
  * Fast blit, simply copy the source to the destination
  */
-void Surface::fast_blit(Surface* src) {
+void Surface::fast_blit(Surface * const src) {
 	SDL_BlitSurface(src->m_surface, 0, m_surface, 0);
 }
 
@@ -367,7 +367,7 @@ Load the animation
 */
 static const uint32_t nextensions = 4;
 static const char extensions[nextensions][5] = {".bmp", ".png", ".gif", ".jpg"};
-AnimationGfx::AnimationGfx(const AnimationData* data)
+AnimationGfx::AnimationGfx(AnimationData const * data)
 : m_hotspot(data->hotspot)
 {
 	m_encodedata.hasplrclrs = data->encdata.hasplrclrs;
@@ -634,16 +634,17 @@ AnimationGfx::encode
 Encodes the given surface into a frame
 ===============
 */
-void AnimationGfx::encode(uint8_t plr, const RGBColor* plrclrs)
+void AnimationGfx::encode(uint8_t plr, RGBColor const * plrclrs)
 {
 	assert(m_plrframes[0].size() == m_pcmasks.size());
-	std::vector<Surface*>& frames = m_plrframes[plr];
+	std::vector<Surface *> & frames = m_plrframes[plr];
 
 	for (uint32_t i = 0; i < m_plrframes[0].size(); ++i) {
 		//  Copy the old surface.
 		Surface & origsurface = *m_plrframes[0][i];
 		Surface & newsurface = *new Surface();
-		newsurface.set_sdl_surface(*SDL_DisplayFormatAlpha(origsurface.get_sdl_surface()));
+		newsurface.set_sdl_surface
+			(*SDL_DisplayFormatAlpha(origsurface.get_sdl_surface()));
 
 		Surface & pcmask = *m_pcmasks[i];
 
@@ -657,9 +658,17 @@ void AnimationGfx::encode(uint8_t plr, const RGBColor* plrclrs)
 				source.set(newsurface.format(), newsurface.get_pixel(x, y));
 				mask.set(pcmask.format(), pcmask.get_pixel(x, y));
 
-				uint32_t influence = static_cast<uint32_t>(mask.r)*mask.a;
-				if (influence > 0) {
-					uint32_t intensity = static_cast<uint32_t>(source.r + source.g + source.b) / 3;
+				if
+					(uint32_t const influence =
+					 	static_cast<uint32_t>(mask.r) * mask.a)
+				{
+					//  FIXME This intensity calculation may not be correct. It
+					//  FIXME counts all 3 base colors equally. They should usually
+					//  FIXME be weighted in a certain way. See for example the
+					//  FIXME luminance calculation in
+					//  FIXME Graphic::create_grayed_out_pic.
+					uint32_t intensity =
+						static_cast<uint32_t>(source.r + source.g + source.b) / 3;
 					RGBAColor plrclr;
 
 					plrclr.r = (plrclrs[3].r() * intensity) >> 8;
@@ -667,9 +676,12 @@ void AnimationGfx::encode(uint8_t plr, const RGBColor* plrclrs)
 					plrclr.b = (plrclrs[3].b() * intensity) >> 8;
 
 					RGBAColor dest(source);
-					dest.r = (plrclr.r*influence + dest.r*(65536-influence)) >> 16;
-					dest.g = (plrclr.g*influence + dest.g*(65536-influence)) >> 16;
-					dest.b = (plrclr.b*influence + dest.b*(65536-influence)) >> 16;
+					dest.r =
+						(plrclr.r * influence + dest.r * (65536 - influence)) >> 16;
+					dest.g =
+						(plrclr.g * influence + dest.g * (65536 - influence)) >> 16;
+					dest.b =
+						(plrclr.b * influence + dest.b * (65536 - influence)) >> 16;
 
 					newsurface.set_pixel(x, y, dest.map(newsurface.format()));
 				}

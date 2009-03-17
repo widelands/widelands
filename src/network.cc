@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2008 by the Widelands Development Team
+ * Copyright (C) 2004-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,11 +24,9 @@
 
 
 
-Cmd_NetCheckSync::Cmd_NetCheckSync(int32_t dt, SyncCallback* cb)
-	: Command (dt)
-{
-	m_callback=cb;
-}
+Cmd_NetCheckSync::Cmd_NetCheckSync(int32_t const dt, SyncCallback * const cb) :
+Command (dt), m_callback(cb)
+{}
 
 int32_t Cmd_NetCheckSync::get_id()
 {
@@ -77,10 +75,12 @@ void NetworkTime::think(uint32_t speed)
 
 	// Play catch up
 	uint32_t speedup = 0;
-	if (m_latency > static_cast<uint32_t>(10*delta))
-		speedup = m_latency/3; // just try to kill as much of the latency as possible if we're that far behind
+	if (m_latency > static_cast<uint32_t>(10 * delta))
+		//  just try to kill as much of the latency as possible if we are that
+		//  far behind
+		speedup = m_latency / 3;
 	else if (m_latency > static_cast<uint32_t>(delta))
-		speedup = delta/8; // speed up by 12.5%
+		speedup = delta / 8; //  speed up by 12.5%
 	if (static_cast<int32_t>(delta + speedup) > behind)
 		speedup = behind - delta;
 
@@ -162,7 +162,7 @@ void SendPacket::reset ()
 
 /*** class RecvPacket ***/
 
-RecvPacket::RecvPacket (Deserializer& des)
+RecvPacket::RecvPacket (Deserializer & des)
 {
 	uint16_t size = des.queue[0] << 8 | des.queue[1];
 
@@ -176,9 +176,9 @@ RecvPacket::RecvPacket (Deserializer& des)
 	des.queue.erase(des.queue.begin(), des.queue.begin() + size);
 }
 
-size_t RecvPacket::Data(void* const data, const size_t bufsize)
+size_t RecvPacket::Data(void * const data, size_t const bufsize)
 {
-	if (m_index+bufsize > buffer.size())
+	if (m_index + bufsize > buffer.size())
 		throw wexception("Packet too short");
 
 	for (size_t read = 0; read < bufsize; ++read)

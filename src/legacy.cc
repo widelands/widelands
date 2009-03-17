@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@ struct FakeAttackController : public BaseImmovable {
 	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point) {}
 
 	struct Loader : public BaseImmovable::Loader {
-		virtual void load(FileRead& fr) {
+		virtual void load(FileRead & fr) {
 			BaseImmovable::Loader::load(fr);
 
 			try {
@@ -89,7 +89,7 @@ Map_Object::Loader* loadAttackController(Editor_Game_Base *egbase, Map_Map_Objec
 
 		loader->init(egbase, mol, new FakeAttackController);
 		loader->load(fr);
-	} catch (const std::exception& e) {
+	} catch (std::exception const & e) {
 		throw wexception("Loading legacy AttackController: %s", e.what());
 	}
 
@@ -108,7 +108,7 @@ struct FakeBattle : public BaseImmovable {
 	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point) {}
 
 	struct Loader : public BaseImmovable::Loader {
-		virtual void load(FileRead& fr) {
+		virtual void load(FileRead & fr) {
 			BaseImmovable::Loader::load(fr);
 
 			fr.Unsigned32();

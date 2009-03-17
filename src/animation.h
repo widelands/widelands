@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,7 +84,7 @@ struct AnimationManager {
 
 	// for use by the graphics subsystem
 	uint32_t get_nranimations() const;
-	const AnimationData* get_animation(uint32_t id) const;
+	AnimationData const * get_animation(uint32_t id) const;
 	void trigger_soundfx(uint32_t animation, uint32_t framenumber, uint32_t stereo_position);
 
 private:

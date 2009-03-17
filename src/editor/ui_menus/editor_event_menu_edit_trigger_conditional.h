@@ -42,7 +42,7 @@ struct Editor_Event_Menu_Edit_TriggerConditional : public UI::Window {
 
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
-	Widelands::TriggerConditional* get_trigcond() {return m_given_cond;}
+	Widelands::TriggerConditional * get_trigcond() {return m_given_cond;}
 
 private:
 	Editor_Interactive & eia();

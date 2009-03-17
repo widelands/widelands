@@ -96,7 +96,7 @@ public:
 	void update(Game*);
 
 	void set_location(Editor_Game_Base* g, Map_Object* loc);
-	void set_economy(Economy* e);
+	void set_economy(Economy *);
 
 	bool is_moving() const throw ();
 	void cancel_moving();
@@ -112,7 +112,7 @@ private:
 	Ware_Index       m_descr_index;
 
 	IdleWareSupply  * m_supply;
-	Transfer*         m_transfer;
+	Transfer       * m_transfer;
 	Object_Ptr        m_transfer_nextstep; ///< cached PlayerImmovable, can be 0
 };
 
@@ -167,7 +167,7 @@ public:
 
 	const Coords &get_position() const {return m_position;}
 
-	virtual void set_economy(Economy *e);
+	virtual void set_economy(Economy *);
 
 	Building * get_building() const {return m_building;}
 	void attach_building(Editor_Game_Base *g, Building *building);
@@ -182,8 +182,8 @@ public:
 	void attach_road(int32_t dir, Road *road);
 	void detach_road(int32_t dir);
 
-	void get_neighbours(Neighbour_list *neighbours);
-	Road *get_road(Flag *flag);
+	void get_neighbours(Neighbour_list *);
+	Road * get_road(Flag *);
 
 	bool is_dead_end() const;
 
@@ -245,7 +245,7 @@ private:
 	Flag                  * mpf_backlink; ///< flag where we came from
 	int32_t                     mpf_estimate; ///< estimate of cost to destination
 
-	int32_t cost() const {return mpf_realcost+mpf_estimate;}
+	int32_t cost() const {return mpf_realcost + mpf_estimate;}
 };
 
 /**
@@ -291,7 +291,7 @@ struct Road : public PlayerImmovable {
 
 	virtual Flag* get_base_flag();
 
-	virtual void set_economy(Economy *e);
+	virtual void set_economy(Economy *);
 
 	int32_t get_cost(FlagId fromflag);
 	const Path &get_path() const {return m_path;}
@@ -330,7 +330,7 @@ private:
 	int32_t        m_cost   [2];
 
 	Path       m_path;       ///< path goes from start to end
-	int32_t        m_idle_index; ///< index into path where carriers should idle
+	uint32_t   m_idle_index; ///< index into path where carriers should idle
 
 	///< total number of carriers we want (currently limited to 0 or 1)
 	uint32_t       m_desire_carriers;
@@ -353,7 +353,7 @@ struct Route {
 	void clear();
 
 	int32_t get_totalcost() const {return m_totalcost;}
-	int32_t get_nrsteps() const {return m_route.size()-1;}
+	int32_t get_nrsteps() const {return m_route.size() - 1;}
 	Flag * get_flag(Editor_Game_Base *, std::vector<Flag *>::size_type);
 
 	void starttrim(int32_t count);
@@ -363,8 +363,8 @@ struct Route {
 		std::vector<uint32_t> flags;
 	};
 
-	void load(LoadData& data, FileRead& fr);
-	void load_pointers(const LoadData&, Map_Map_Object_Loader &);
+	void load(LoadData &, FileRead &);
+	void load_pointers(LoadData const &, Map_Map_Object_Loader &);
 	void save(FileWrite &, Editor_Game_Base *, Map_Map_Object_Saver *);
 
 private:
@@ -406,7 +406,7 @@ public:
 	void has_failed();
 
 private:
-	void tlog(const char* fmt, ...) PRINTF_FORMAT(2, 3);
+	void tlog(char const * fmt, ...) PRINTF_FORMAT(2, 3);
 
 	Game         * m_game;
 	Request      * m_request;
@@ -505,7 +505,7 @@ struct WaresQueue {
 	void cleanup();
 	void update();
 
-	void set_callback(callback_t* fn, void* data);
+	void set_callback(callback_t *, void * data);
 
 	void remove_from_economy(Economy* e);
 	void add_to_economy(Economy* e);
@@ -688,10 +688,7 @@ private:
 struct Cmd_Call_Economy_Balance : public GameLogicCommand {
 	Cmd_Call_Economy_Balance () : GameLogicCommand (0) {} ///< for load and save
 
-	Cmd_Call_Economy_Balance
-		(int32_t starttime,
-		 Economy* economy,
-		 uint32_t timerid);
+	Cmd_Call_Economy_Balance (int32_t starttime, Economy *, uint32_t timerid);
 
 	void execute (Game *);
 

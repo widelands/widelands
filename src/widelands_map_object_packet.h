@@ -39,7 +39,7 @@ struct Map_Map_Object_Saver;
  * are in this packet.
  */
 struct Map_Object_Packet {
-	typedef std::set<Map_Object::Loader*> LoaderSet;
+	typedef std::set<Map_Object::Loader *> LoaderSet;
 	LoaderSet loaders;
 
 	~Map_Object_Packet();

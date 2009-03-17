@@ -80,15 +80,15 @@ template <typename T> struct _Index {
 	///  Get a value for array subscripting.
 	value_t value() const {assert(*this); return i;}
 
-	bool operator==(_Index const other) const {return i == other.i;}
-	bool operator!=(_Index const other) const {return i != other.i;}
-	bool operator< (_Index const other) const {return i <  other.i;}
+	bool operator== (_Index const other) const {return i == other.i;}
+	bool operator!= (_Index const other) const {return i != other.i;}
+	bool operator<  (_Index const other) const {return i <  other.i;}
 	bool operator<= (_Index const other) const {return i <=  other.i;}
 
-	T operator++() {return T(++i);}
-	T operator--() {return T(--i);}
+	T operator++ () {return T(++i);}
+	T operator-- () {return T(--i);}
 
-	operator bool() const throw () {return operator!=(Null());}
+	operator bool() const throw () {return operator!= (Null());}
 
 	/// Implicit conversion to size_t type for array indexing.
 	operator size_t() const throw () {return static_cast<size_t>(i);}

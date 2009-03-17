@@ -83,7 +83,7 @@ struct Request : public Trackable {
 
 	Flag * get_target_flag();
 
-	void set_economy(Economy* e);
+	void set_economy(Economy *);
 	void set_idle(bool idle);
 	void set_count(uint32_t);
 	void set_required_time(int32_t time);
@@ -111,9 +111,9 @@ public:
 	void cancel_transfer(uint32_t idx);
 private:
 	void remove_transfer(uint32_t idx);
-	uint32_t find_transfer(Transfer* t);
+	uint32_t find_transfer(Transfer *);
 
-	typedef std::vector<Transfer*> TransferList;
+	typedef std::vector<Transfer *> TransferList;
 
 	Type              m_type;
 	PlayerImmovable * m_target;            //  who requested it?

@@ -56,7 +56,7 @@ using Widelands::Game;
 // The BuildGrid presents a selection of buildable buildings
 struct BuildGrid : public UI::Icon_Grid {
 	BuildGrid
-		(UI::Panel* parent,
+		(UI::Panel                    * parent,
 		 Widelands::Tribe_Descr const & tribe,
 		 const int32_t x, const int32_t y,
 		 int32_t cols);
@@ -175,6 +175,10 @@ struct FieldActionWindow : public UI::UniqueWindow {
 		 UI::UniqueWindow::Registry * registry);
 	~FieldActionWindow();
 
+	Interactive_Base & ibase() {
+		return dynamic_cast<Interactive_Base &>(*get_parent());
+	}
+
 	virtual void think();
 
 	void init();
@@ -234,9 +238,9 @@ private:
 	int32_t        m_attackers_type; //  STRONGEST - WEAKEST ...
 };
 
-static const char* const pic_tab_buildroad = "pics/menu_tab_buildroad.png";
-static const char* const pic_tab_watch = "pics/menu_tab_watch.png";
-static const char* const pic_tab_buildhouse[] = {
+static char const * const pic_tab_buildroad  = "pics/menu_tab_buildroad.png";
+static char const * const pic_tab_watch      = "pics/menu_tab_watch.png";
+static char const * const pic_tab_buildhouse[] = {
 	"pics/menu_tab_buildsmall.png",
 	"pics/menu_tab_buildmedium.png",
 	"pics/menu_tab_buildbig.png"
@@ -247,23 +251,23 @@ static const std::string tooltip_tab_build[] = {
 	_("Build large buildings")
 };
 
-static const char* const pic_tab_buildmine = "pics/menu_tab_buildmine.png";
+static char const * const pic_tab_buildmine  = "pics/menu_tab_buildmine.png";
 
-static const char* const pic_buildroad = "pics/menu_build_way.png";
-static const char* const pic_remroad = "pics/menu_rem_way.png";
-static const char* const pic_buildflag = "pics/menu_build_flag.png";
-static const char* const pic_ripflag = "pics/menu_rip_flag.png";
-static const char* const pic_watchfield = "pics/menu_watch_field.png";
-static const char* const pic_showcensus = "pics/menu_show_census.png";
-static const char* const pic_showstatistics = "pics/menu_show_statistics.png";
-static const char* const pic_debug = "pics/menu_debug.png";
-static const char* const pic_abort = "pics/menu_abort.png";
-static const char* const pic_geologist = "pics/menu_geologist.png";
+static char const * const pic_buildroad      = "pics/menu_build_way.png";
+static char const * const pic_remroad        = "pics/menu_rem_way.png";
+static char const * const pic_buildflag      = "pics/menu_build_flag.png";
+static char const * const pic_ripflag        = "pics/menu_rip_flag.png";
+static char const * const pic_watchfield     = "pics/menu_watch_field.png";
+static char const * const pic_showcensus     = "pics/menu_show_census.png";
+static char const * const pic_showstatistics = "pics/menu_show_statistics.png";
+static char const * const pic_debug          = "pics/menu_debug.png";
+static char const * const pic_abort          = "pics/menu_abort.png";
+static char const * const pic_geologist      = "pics/menu_geologist.png";
 
-static const char* const pic_tab_attack    = "pics/menu_tab_attack.png";
-static const char* const pic_attack_more   = "pics/attack_add_soldier.png";
-static const char* const pic_attack_less   = "pics/attack_sub_soldier.png";
-static const char* const pic_attack        = "pics/menu_attack.png";
+static char const * const pic_tab_attack     = "pics/menu_tab_attack.png";
+static char const * const pic_attack_more    = "pics/attack_add_soldier.png";
+static char const * const pic_attack_less    = "pics/attack_sub_soldier.png";
+static char const * const pic_attack         = "pics/menu_attack.png";
 
 
 /*
@@ -369,8 +373,8 @@ Add the buttons you normally get when clicking on a field.
 */
 void FieldActionWindow::add_buttons_auto()
 {
-	UI::Box* buildbox = 0;
-	UI::Box* watchbox;
+	UI::Box * buildbox = 0;
+	UI::Box * watchbox;
 
 	watchbox = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
@@ -407,10 +411,8 @@ void FieldActionWindow::add_buttons_auto()
 					 &FieldActionWindow::act_geologist,
 					 _("Send geologist to explore site"));
 			// No geologist in editor
-		}
-		else
-		{
-			int32_t buildcaps = m_plr->get_buildcaps(m_field);
+		} else {
+			int32_t const buildcaps = m_plr->get_buildcaps(m_field);
 
 			// Add house building
 			if
@@ -519,8 +521,8 @@ Add buttons for house building.
 */
 void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 {
-	BuildGrid* bbg_house[3] = {0, 0, 0};
-	BuildGrid* bbg_mine = 0;
+	BuildGrid * bbg_house[3] = {0, 0, 0};
+	BuildGrid * bbg_mine = 0;
 
 	Widelands::Tribe_Descr const & tribe = m_plr->tribe();
 
@@ -533,7 +535,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 		 ++id)
 	{
 		Widelands::Building_Descr const & descr = *tribe.get_building_descr(id);
-		BuildGrid** ppgrid;
+		BuildGrid * * ppgrid;
 
 		//  Some buildings cannot be built (i.e. construction site, HQ) and not
 		//  allowed buildings. The rules are different in editor and game:
@@ -553,7 +555,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 		} else {
 			int32_t size = descr.get_size() - Widelands::BaseImmovable::SMALL;
 
-			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) < (size+1))
+			if ((buildcaps & Widelands::BUILDCAPS_SIZEMASK) < size + 1)
 				continue;
 
 			ppgrid = &bbg_house[size];
@@ -972,9 +974,9 @@ void FieldActionWindow::act_attack_more() {
 }
 
 uint32_t FieldActionWindow::get_max_attackers() {
-	upcast(Building, building, m_map->get_immovable(m_field));
-	if (building && building->get_owner() != m_plr)
-		return m_plr->findAttackSoldiers(*building->get_base_flag());
+	if (upcast(Building, building, m_map->get_immovable(m_field)))
+		if (&building->owner() != m_plr)
+			return m_plr->findAttackSoldiers(*building->get_base_flag());
 	return 0;
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,10 +84,10 @@ public:
 
 	virtual bool burn_on_destroy();
 
-	virtual void set_economy(Economy* e);
+	virtual void set_economy(Economy *);
 
 	uint32_t get_nrwaresqueues() {return m_wares.size();}
-	WaresQueue* get_waresqueue(uint32_t idx) {return m_wares[idx];}
+	WaresQueue * get_waresqueue(uint32_t const idx) {return m_wares[idx];}
 
 	virtual bool fetch_from_flag(Game* g);
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
@@ -111,10 +111,10 @@ private:
 	const Building_Descr * m_building; // type of building that is being built
 	const Building_Descr * m_prev_building; // Building that was standing here before
 
-	Request* m_builder_request;
+	Request * m_builder_request;
 	OPtr<Worker> m_builder;
 
-	std::vector<WaresQueue*> m_wares;
+	std::vector<WaresQueue *> m_wares;
 
 	int32_t m_fetchfromflag; // # of items to fetch from flag
 

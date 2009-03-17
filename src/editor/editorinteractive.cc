@@ -147,7 +147,7 @@ void Editor_Interactive::load(std::string const & filename) {
 	std::string text;
 	Widelands::Player_Number const nr_players = map.get_nrplayers();
 	assert(nr_players <= 99); //  2 decimal digits
-	char fname[] ="pics/editor_player_00_starting_pos.png";
+	char fname[] = "pics/editor_player_00_starting_pos.png";
 	iterate_player_numbers(p, nr_players) {
 		if (fname[20] == '9') {fname[20] = '0'; ++fname[19];} else ++fname[20];
 		if (Widelands::Coords const sp = map.get_starting_pos(p))
@@ -256,7 +256,8 @@ void Editor_Interactive::map_clicked() {
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
 void Editor_Interactive::set_sel_pos(Widelands::Node_and_Triangle<> const sel)
 {
-	const bool target_changed = tools.current().operates_on_triangles() ?
+	bool const target_changed =
+		tools.current().operates_on_triangles() ?
 		sel.triangle != get_sel_pos().triangle : sel.node != get_sel_pos().node;
 	Interactive_Base::set_sel_pos(sel);
 	int32_t mask = SDL_BUTTON_LMASK;
@@ -313,50 +314,50 @@ bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 		// Sel radius
 		case SDLK_1:
 			set_sel_radius_and_update_menu (0);
-			handled=true;
+			handled = true;
 			break;
 		case SDLK_2:
 			set_sel_radius_and_update_menu (1);
-			handled=true;
+			handled = true;
 			break;
 		case SDLK_3:
 			set_sel_radius_and_update_menu (2);
-			handled=true;
+			handled = true;
 			break;
 		case SDLK_4:
 			set_sel_radius_and_update_menu (3);
-			handled=true;
+			handled = true;
 			break;
 		case SDLK_5:
 			set_sel_radius_and_update_menu (4);
-			handled=true;
+			handled = true;
 			break;
 		case SDLK_6:
 			set_sel_radius_and_update_menu (5);
-			handled=true;
+			handled = true;
 			break;
 		case SDLK_7:
 			set_sel_radius_and_update_menu (6);
-			handled=true;
+			handled = true;
 			break;
 		case SDLK_8:
 			set_sel_radius_and_update_menu (7);
-			handled=true;
+			handled = true;
 			break;
 		case SDLK_9:
 			set_sel_radius_and_update_menu (8);
-			handled=true;
+			handled = true;
 			break;
 		case SDLK_0:
 			set_sel_radius_and_update_menu (9);
-			handled=true;
+			handled = true;
 			break;
 
 		case SDLK_LSHIFT:
 		case SDLK_RSHIFT:
 			if (tools.use_tool == Editor_Tool::First)
 				select_tool (tools.current(), Editor_Tool::Second);
-			handled=true;
+			handled = true;
 			break;
 
 		case SDLK_LALT:
@@ -364,66 +365,66 @@ bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 		case SDLK_MODE:
 			if (tools.use_tool == Editor_Tool::First)
 				select_tool (tools.current(), Editor_Tool::Third);
-			handled=true;
+			handled = true;
 			break;
 
 		case SDLK_SPACE:
 			toggle_buildhelp();
-			handled=true;
+			handled = true;
 			break;
 
 		case SDLK_c:
 			set_display_flag
 				(Interactive_Base::dfShowCensus,
 				 !get_display_flag (Interactive_Base::dfShowCensus));
-			handled=true;
+			handled = true;
 			break;
 
 		case SDLK_e:
 			toggle_eventmenu();
-			handled=true;
+			handled = true;
 			break;
 
 		case SDLK_f:
 			g_gr->toggle_fullscreen();
-			handled=true;
+			handled = true;
 			break;
 
 		case SDLK_h:
 			toggle_mainmenu();
-			handled=true;
+			handled = true;
 			break;
 
 		case SDLK_i:
 			select_tool (tools.info, Editor_Tool::First);
-			handled=true;
+			handled = true;
 			break;
 
 		case SDLK_m:
 			toggle_minimap();
-			handled=true;
+			handled = true;
 			break;
 
 		case SDLK_l:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				new Main_Menu_Load_Map (this);
-			handled=true;
+			handled = true;
 			break;
 
 		case SDLK_p:
 			toggle_playermenu();
-			handled=true;
+			handled = true;
 			break;
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				new Main_Menu_Save_Map (this);
-			handled=true;
+			handled = true;
 			break;
 
 		case SDLK_t:
 			tool_menu_btn();
-			handled=true;
+			handled = true;
 			break;
 
 		default:
@@ -440,7 +441,7 @@ bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 		case SDLK_MODE:
 			if (tools.use_tool != Editor_Tool::First)
 				select_tool (tools.current(), Editor_Tool::First);
-			handled=true;
+			handled = true;
 			break;
 		default:
 			break;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -101,17 +101,17 @@ template<typename T> static void render_edge_lists
 			skip = right->height;
 
 		if (skip < static_cast<int32_t>(left->height)) {
-			left->x0 += skip*left->dx;
-			left->tx0 += skip*left->dtx;
-			left->ty0 += skip*left->dty;
-			left->b0 += skip*left->db;
+			left->x0     += skip * left->dx;
+			left->tx0    += skip * left->dtx;
+			left->ty0    += skip * left->dty;
+			left->b0     += skip * left->db;
 			left->height -= skip;
 		} else {
 			++left;
 		}
 
 		if (skip < static_cast<int32_t>(right->height)) {
-			right->x0 += skip*right->dx;
+			right->x0     += skip * right->dx;
 			right->height -= skip;
 		} else {
 			++right;
@@ -142,8 +142,8 @@ template<typename T> static void render_edge_lists
 
 			int32_t adjust = ITOFIX(leftx) - left->x0;
 			tx += adjust; // note: dtx/dx = 1
-			ty += FIXTOI(static_cast<long long>(adjust)*dtydx);
-			b += FIXTOI(static_cast<long long>(adjust)*dbdx);
+			ty += FIXTOI(static_cast<long long>(adjust) * dtydx);
+			b  += FIXTOI(static_cast<long long>(adjust) * dbdx);
 
 			// Technically, we should clamp b at every pixel, but that's too expensive.
 			// The following seems to be enough to get rid of artifacts along the border
@@ -155,15 +155,19 @@ template<typename T> static void render_edge_lists
 
 			T * scanline =
 				reinterpret_cast<T *>
-				(static_cast<Uint8 *>(dst.get_pixels()) + y * dst.get_pitch())
+					(static_cast<Uint8 *>(dst.get_pixels()) + y * dst.get_pitch())
 				+
 				leftx;
 
-			uint32_t count = rightx-leftx;
+			uint32_t count = rightx - leftx;
 			while (count--) {
-				int32_t texel = (tx & (TEXTURE_WIDTH-1)) | ((ty>>10) & ((TEXTURE_HEIGHT-1)<<6));
-
-				*scanline++ = texcolormap[texpixels[texel] | ((b>>8) & 0xFF00)];
+				*scanline++ =
+					texcolormap
+						[texpixels
+						 	[(tx & (TEXTURE_WIDTH - 1)) |
+						 	 ((ty >> 10) & ((TEXTURE_HEIGHT - 1) << 6))]
+						 |
+						 ((b>>8) & 0xFF00)];
 
 				b += dbdx;
 				++tx;
@@ -229,20 +233,21 @@ template<typename T> static void render_triangle
 		}
 	}
 
-	// Calculate d(b)/d(x) etc. as fixed point variables.
-	// Remember that we assume d(tx)/d(x) == 1 and d(tx)/d(y) == 0.
+	// Calculate d(b) / d(x) etc. as fixed point variables.
+	// Remember that we assume d(tx) / d(x) == 1 and d(tx) / d(y) == 0.
 
 	//  lA * (p2 - p1) + lB * (p3 - p1) = (1, 0)
 	//  mA * (p2 - p1) + mB * (p3 - p1) = (0, 1)
-	int32_t det = (p2.x-p1.x)*(p3.y-p1.y) - (p2.y-p1.y)*(p3.x-p1.x);
-	int32_t lA = ITOFIX(p3.y-p1.y)/det;
-	int32_t lB = -ITOFIX(p2.y-p1.y)/det;
-	int32_t mA = -ITOFIX(p3.x-p1.x)/det;
-	int32_t mB = ITOFIX(p2.x-p1.x)/det;
-	int32_t dbdx = lA*(p2.b-p1.b) + lB*(p3.b-p1.b);
-	int32_t dbdy = mA*(p2.b-p1.b) + mB*(p3.b-p1.b);
-	int32_t dtydx = lA*(p2.ty-p1.ty) + lB*(p3.ty-p1.ty);
-	int32_t dtydy = mA*(p2.ty-p1.ty) + mB*(p3.ty-p1.ty);
+	int32_t const det =
+		(p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
+	int32_t const lA =  ITOFIX(p3.y - p1.y) / det;
+	int32_t const lB = -ITOFIX(p2.y - p1.y) / det;
+	int32_t const mA = -ITOFIX(p3.x - p1.x) / det;
+	int32_t const mB =  ITOFIX(p2.x - p1.x) / det;
+	int32_t const dbdx = lA * (p2.b - p1.b) + lB * (p3.b - p1.b);
+	int32_t const dbdy = mA * (p2.b - p1.b) + mB * (p3.b - p1.b);
+	int32_t const dtydx = lA * (p2.ty - p1.ty) + lB * (p3.ty - p1.ty);
+	int32_t const dtydy = mA * (p2.ty - p1.ty) + mB * (p3.ty - p1.ty);
 
 	// Build left edges
 	int32_t boty = topy;
@@ -251,17 +256,20 @@ template<typename T> static void render_triangle
 
 	{
 		uint8_t start = top;
-		uint8_t end = (top+1)%polygon.nrpoints;
+		uint8_t end = (top + 1) % polygon.nrpoints;
 		do {
 			if (polygon.p[end].y > polygon.p[start].y) {
 				boty = polygon.p[end].y;
 
-				LeftEdge& edge = leftedges[nrleftedges++];
+				LeftEdge & edge = leftedges[nrleftedges++];
 				assert(nrleftedges <= 3);
 
 				edge.height = polygon.p[end].y - polygon.p[start].y;
 				edge.x0 = ITOFIX(polygon.p[start].x);
-				edge.dx = ITOFIX(polygon.p[end].x-polygon.p[start].x)/static_cast<int32_t>(edge.height);
+				edge.dx =
+					ITOFIX(polygon.p[end].x - polygon.p[start].x)
+					/
+					static_cast<int32_t>(edge.height);
 
 				int32_t startdx = polygon.p[start].x - p1.x;
 				int32_t startdy = polygon.p[start].y - p1.y;
@@ -269,15 +277,17 @@ template<typename T> static void render_triangle
 				int32_t dy = polygon.p[end].y - polygon.p[start].y;
 
 				edge.tx0 = ITOFIX(p1.tx + startdx);
-				edge.ty0 = ITOFIX(p1.ty) + startdx*dtydx + startdy*dtydy;
-				edge.b0 = ITOFIX(p1.b) + startdx*dbdx + startdy*dbdy;
-				edge.dtx = ITOFIX(dx)/static_cast<int32_t>(edge.height);
-				edge.dty = (dx*dtydx + dy*dtydy)/static_cast<int32_t>(edge.height);
-				edge.db = (dx*dbdx + dy*dbdy)/static_cast<int32_t>(edge.height);
+				edge.ty0 = ITOFIX(p1.ty) + startdx * dtydx + startdy * dtydy;
+				edge.b0 = ITOFIX(p1.b) + startdx * dbdx + startdy * dbdy;
+				edge.dtx = ITOFIX(dx) / static_cast<int32_t>(edge.height);
+				edge.dty =
+					(dx * dtydx + dy * dtydy) / static_cast<int32_t>(edge.height);
+				edge.db =
+					(dx * dbdx  + dy * dbdy)  / static_cast<int32_t>(edge.height);
 			}
 
 			start = end;
-			end = (start+1)%polygon.nrpoints;
+			end = (start + 1) % polygon.nrpoints;
 		} while (polygon.p[end].y >= polygon.p[start].y);
 	}
 
@@ -287,23 +297,27 @@ template<typename T> static void render_triangle
 
 	{
 		uint8_t start = top;
-		uint8_t end = (polygon.nrpoints+top-1)%polygon.nrpoints;
+		uint8_t end = (polygon.nrpoints + top - 1) % polygon.nrpoints;
 		do {
 			if (polygon.p[end].y > polygon.p[start].y) {
-				RightEdge& edge = rightedges[nrrightedges++];
+				RightEdge & edge = rightedges[nrrightedges++];
 				assert(nrrightedges <= 3);
 
 				edge.height = polygon.p[end].y - polygon.p[start].y;
 				edge.x0 = ITOFIX(polygon.p[start].x);
-				edge.dx = ITOFIX(polygon.p[end].x - polygon.p[start].x)/static_cast<int32_t>(edge.height);
+				edge.dx =
+					ITOFIX(polygon.p[end].x - polygon.p[start].x)
+					/
+					static_cast<int32_t>(edge.height);
 			}
 
 			start = end;
-			end = (polygon.nrpoints+start-1)%polygon.nrpoints;
+			end = (polygon.nrpoints + start - 1) % polygon.nrpoints;
 		} while (polygon.p[end].y >= polygon.p[start].y);
 	}
 
-	render_edge_lists<T>(dst, tex, topy, boty-topy, leftedges, rightedges, dbdx, dtydx);
+	render_edge_lists<T>
+		(dst, tex, topy, boty - topy, leftedges, rightedges, dbdx, dtydx);
 }
 
 /**
@@ -337,15 +351,15 @@ template<typename T> static void dither_edge_horiz
 
 	int32_t tx, ty, b, dtx, dty, db, tx0, ty0;
 
-	tx=ITOFIX(start.tx);
-	ty=ITOFIX(start.ty);
-	b=ITOFIX(start.b);
-	dtx=(ITOFIX(end.tx)-tx) / (end.x-start.x+1);
-	dty=(ITOFIX(end.ty)-ty) / (end.x-start.x+1);
-	db=(ITOFIX(end.b)-b) / (end.x-start.x+1);
+	tx  = ITOFIX(start.tx);
+	ty  = ITOFIX(start.ty);
+	b   = ITOFIX(start.b);
+	dtx = (ITOFIX(end.tx) - tx) / (end.x - start.x + 1);
+	dty = (ITOFIX(end.ty) - ty) / (end.x - start.x + 1);
+	db  = (ITOFIX(end.b)  - b)  / (end.x - start.x + 1);
 
 	// TODO: seed this depending on field coordinates
-	uint32_t rnd=0;
+	uint32_t rnd = 0;
 
 	const int32_t dstw = dst.get_w();
 	const int32_t dsth = dst.get_h();
@@ -354,19 +368,19 @@ template<typename T> static void dither_edge_horiz
 	int32_t centery = ITOFIX(start.y);
 
 	for (int32_t x = start.x; x < end.x; x++, centery += ydiff) {
-		rnd=SIMPLE_RAND(rnd);
+		rnd = SIMPLE_RAND(rnd);
 
-		if (x>=0 && x<dstw) {
+		if (x >= 0 && x < dstw) {
 			int32_t y = FIXTOI(centery) - DITHER_WIDTH;
 
-			tx0=tx - DITHER_WIDTH*dty;
-			ty0=ty + DITHER_WIDTH*dtx;
+			tx0 = tx - DITHER_WIDTH * dty;
+			ty0 = ty + DITHER_WIDTH * dtx;
 
-			uint32_t rnd0=rnd;
+			uint32_t rnd0 = rnd;
 
 			// dither above the edge
 			for (uint32_t i = 0; i < DITHER_WIDTH; i++, y++) {
-				if ((rnd0&DITHER_RAND_MASK)<=i && y>=0 && y<dsth) {
+				if ((rnd0 & DITHER_RAND_MASK) <= i && y >= 0 && y < dsth) {
 					T * const pix =
 						reinterpret_cast<T *>
 						(static_cast<uint8_t *>(dst.get_pixels())
@@ -374,38 +388,45 @@ template<typename T> static void dither_edge_horiz
 						 y * dst.get_pitch())
 						+
 						x;
-					int32_t texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
-					*pix = tcolormap[tpixels[texel] | ((b >> 8) & 0xFF00)];
+					*pix =
+						tcolormap
+							[tpixels
+							 	[((tx0 >> 16) &  (TEXTURE_WIDTH  - 1)) |
+							 	 ((ty0 >> 10) & ((TEXTURE_HEIGHT - 1) << 6))]
+							 |
+							 ((b >> 8) & 0xFF00)];
 				}
 
-				tx0+=dty;
-				ty0-=dtx;
-				rnd0>>=DITHER_RAND_SHIFT;
+				tx0 += dty;
+				ty0 -= dtx;
+				rnd0 >>= DITHER_RAND_SHIFT;
 			}
 
 			// dither below the edge
-			for (uint32_t i = 0; i < DITHER_WIDTH; i++, y++) {
-				if ((rnd0&DITHER_RAND_MASK)>=i+DITHER_WIDTH && y>=0 && y<dsth) {
-					T * const pix =
-						reinterpret_cast<T *>
+			for
+				(uint32_t i = 0;
+				 i < DITHER_WIDTH;
+				 ++i, ++y, tx0 += dty, ty0 -= dtx, rnd0 >>= DITHER_RAND_SHIFT)
+				if
+					((rnd0 & DITHER_RAND_MASK) >= i + DITHER_WIDTH &&
+					 y >= 0 && y < dsth)
+					reinterpret_cast<T *>
 						(static_cast<uint8_t *>(dst.get_pixels())
 						 +
 						 y * dst.get_pitch())
-						+
-						x;
-					int32_t texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
-					*pix = bcolormap[bpixels[texel] | ((b >> 8) & 0xFF00)];
-				}
-
-				tx0+=dty;
-				ty0-=dtx;
-				rnd0>>=DITHER_RAND_SHIFT;
-			}
+						[x]
+						=
+						bcolormap
+							[bpixels
+							 	[((tx0 >> 16) &  (TEXTURE_WIDTH  - 1)) |
+							 	 ((ty0 >> 10) & ((TEXTURE_HEIGHT - 1) << 6))]
+							 |
+							 ((b >> 8) & 0xFF00)];
 		}
 
-		tx+=dtx;
-		ty+=dty;
-		b+=db;
+		tx += dtx;
+		ty += dty;
+		b  += db;
 	}
 }
 
@@ -417,8 +438,8 @@ template<typename T> static void dither_edge_vert
 	 Vertex const & start, Vertex const & end,
 	 Texture const & ltex, Texture const & rtex)
 {
-	uint8_t *lpixels, *rpixels;
-	T* lcolormap, *rcolormap;
+	uint8_t * lpixels, * rpixels;
+	T * lcolormap, * rcolormap;
 
 	lpixels = ltex.get_curpixels();
 	lcolormap = static_cast<T *>(ltex.get_colormap());
@@ -427,15 +448,15 @@ template<typename T> static void dither_edge_vert
 
 	int32_t tx, ty, b, dtx, dty, db, tx0, ty0;
 
-	tx=ITOFIX(start.tx);
-	ty=ITOFIX(start.ty);
-	b=ITOFIX(start.b);
-	dtx=(ITOFIX(end.tx)-tx) / (end.y-start.y+1);
-	dty=(ITOFIX(end.ty)-ty) / (end.y-start.y+1);
-	db=(ITOFIX(end.b)-b) / (end.y-start.y+1);
+	tx  =  ITOFIX(start.tx);
+	ty  =  ITOFIX(start.ty);
+	b   =  ITOFIX(start.b);
+	dtx = (ITOFIX(end.tx) - tx) / (end.y - start.y + 1);
+	dty = (ITOFIX(end.ty) - ty) / (end.y - start.y + 1);
+	db  = (ITOFIX(end.b)  - b)  / (end.y - start.y + 1);
 
 	// TODO: seed this depending on field coordinates
-	uint32_t rnd=0;
+	uint32_t rnd = 0;
 
 	const int32_t dstw = dst.get_w();
 	const int32_t dsth = dst.get_h();
@@ -444,56 +465,61 @@ template<typename T> static void dither_edge_vert
 	int32_t centerx = ITOFIX(start.x);
 
 	for (int32_t y = start.y; y < end.y; y++, centerx += xdiff) {
-		rnd=SIMPLE_RAND(rnd);
+		rnd = SIMPLE_RAND(rnd);
 
-		if (y>=0 && y<dsth) {
+		if (y >= 0 && y < dsth) {
 			int32_t x = FIXTOI(centerx) - DITHER_WIDTH;
 
-			tx0=tx - DITHER_WIDTH*dty;
-			ty0=ty + DITHER_WIDTH*dtx;
+			tx0 = tx - DITHER_WIDTH * dty;
+			ty0 = ty + DITHER_WIDTH * dtx;
 
-			uint32_t rnd0=rnd;
+			uint32_t rnd0 = rnd;
 
 			// dither on left side
-			for (uint32_t i = 0; i < DITHER_WIDTH; i++, x++) {
-				if ((rnd0&DITHER_RAND_MASK)<=i && x>=0 && x<dstw) {
-					T * const pix = reinterpret_cast<T *>
+			for
+				(uint32_t i = 0;
+				 i < DITHER_WIDTH;
+				 ++i, ++x, tx0 += dty, ty0 -= dtx, rnd0 >>= DITHER_RAND_SHIFT)
+				if ((rnd0 & DITHER_RAND_MASK) <= i && x >= 0 && x < dstw)
+					reinterpret_cast<T *>
 						(static_cast<Uint8 *>(dst.get_pixels())
 						 +
 						 y * dst.get_pitch())
-						+
-						x;
-					int32_t texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
-					*pix = lcolormap[lpixels[texel] | ((b >> 8) & 0xFF00)];
-				}
-
-				tx0+=dty;
-				ty0-=dtx;
-				rnd0>>=DITHER_RAND_SHIFT;
-			}
+						[x]
+						=
+						lcolormap
+							[lpixels
+							 	[((tx0 >> 16) &  (TEXTURE_WIDTH  - 1)) |
+							 	 ((ty0 >> 10) & ((TEXTURE_HEIGHT - 1) << 6))]
+							 |
+							 ((b >> 8) & 0xFF00)];
 
 			// dither on right side
-			for (uint32_t i = 0; i < DITHER_WIDTH; i++, x++) {
-				if ((rnd0 & DITHER_RAND_MASK)>=i+DITHER_WIDTH && x>=0 && x<dstw) {
-					T * const pix = reinterpret_cast<T *>
+			for
+				(uint32_t i = 0;
+				 i < DITHER_WIDTH;
+				 ++i, ++x, tx0 += dty, ty0 -= dtx, rnd0 >>= DITHER_RAND_SHIFT)
+				if
+					((rnd0 & DITHER_RAND_MASK) >= i + DITHER_WIDTH
+					 &&
+					 x >= 0 && x < dstw)
+					reinterpret_cast<T *>
 						(static_cast<Uint8 *>(dst.get_pixels())
 						 +
 						 y * dst.get_pitch())
-						+
-						x;
-					int32_t texel=((tx0>>16) & (TEXTURE_WIDTH-1)) | ((ty0>>10) & ((TEXTURE_HEIGHT-1)<<6));
-					*pix = rcolormap[rpixels[texel] | ((b >> 8) & 0xFF00)];
-				}
-
-				tx0+=dty;
-				ty0-=dtx;
-				rnd0>>=DITHER_RAND_SHIFT;
-			}
+						[x]
+						=
+						rcolormap
+							[rpixels
+							 	[((tx0 >> 16) & (TEXTURE_WIDTH - 1)) |
+							 	 ((ty0 >> 10) & ((TEXTURE_HEIGHT - 1) << 6))]
+							 	|
+							 	((b >> 8) & 0xFF00)];
 		}
 
-		tx+=dtx;
-		ty+=dty;
-		b+=db;
+		tx += dtx;
+		ty += dty;
+		b  += db;
 	}
 }
 
@@ -510,22 +536,17 @@ template<typename T> static void render_road_horiz
 		if (x < 0 || x >= dstw)
 			continue;
 
-		int32_t y = (centery >> 16) - 2;
-
-		for (int32_t i = 0; i < 5; i++, y++) if (0 < y and y < dsth)
-			*
-			(reinterpret_cast<T *>
-			 	(static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
-			 +
-			 x)
-			=
-			*
-			(reinterpret_cast<const T *>
-			 	(static_cast<const uint8_t *>(src.get_pixels())
-			 	 +
-			 	 i * src.get_pitch())
-			 +
-			 sx);
+		for (int32_t i = 0, y = (centery >> 16) - 2; i < 5; ++i, ++y)
+			if (0 < y and y < dsth)
+				reinterpret_cast<T *>
+					(static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
+					[x]
+					=
+					reinterpret_cast<T const *>
+						(static_cast<uint8_t const *>(src.get_pixels())
+						 +
+						 i * src.get_pitch())
+						[sx];
 	}
 }
 
@@ -542,22 +563,17 @@ template<typename T> static void render_road_vert
 		if (y < 0 || y >= dsth)
 			continue;
 
-		int32_t x = (centerx >> 16) - 2;
-
-		for (int32_t i = 0; i < 5; i++, x++) if (0 < x and x < dstw)
-			*
-			(reinterpret_cast<T *>
-			 	(static_cast<uint8_t *>(dst.get_pixels()) +  y * dst.get_pitch())
-			 +
-			 x)
-			=
-			*
-			(reinterpret_cast<const T *>
-			 	(static_cast<const uint8_t *>(src.get_pixels())
-			 	 +
-			 	 sy * src.get_pitch())
-			 +
-			 i);
+		for (int32_t i = 0, x = (centerx >> 16) - 2; i < 5; ++i, ++x)
+			if (0 < x and x < dstw)
+				reinterpret_cast<T *>
+					(static_cast<uint8_t *>(dst.get_pixels()) + y * dst.get_pitch())
+					[x]
+					=
+					reinterpret_cast<T const *>
+						(static_cast<uint8_t const *>(src.get_pixels())
+						 +
+						 sy * src.get_pitch())
+						[i];
 	}
 }
 

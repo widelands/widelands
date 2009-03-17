@@ -48,9 +48,9 @@ struct Texture {
 
 	const char * get_texture_picture() {return m_texture_picture;}
 
-	uint8_t *get_pixels () const {return m_pixels;}
-	uint8_t* get_curpixels() const {return m_curframe;}
-	void* get_colormap () const {return m_colormap->get_colormap();}
+	uint8_t * get_pixels   () const {return m_pixels;}
+	uint8_t * get_curpixels() const {return m_curframe;}
+	void    * get_colormap () const {return m_colormap->get_colormap();}
 
 	uint32_t get_minimap_color(char shade);
 

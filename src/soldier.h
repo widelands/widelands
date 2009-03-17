@@ -178,7 +178,7 @@ public:
 	void log_general_info(Editor_Game_Base *);
 
 	bool isOnBattlefield();
-	Battle* getBattle();
+	Battle * getBattle();
 	bool canBeChallenged();
 	virtual bool checkFieldBlocked(Game* g, const FCoords& field, bool commit);
 
@@ -221,7 +221,7 @@ private:
 	 * If the soldier is involved in a challenge, it is assigned a battle
 	 * object.
 	 */
-	Battle* m_battle;
+	Battle * m_battle;
 };
 
 };

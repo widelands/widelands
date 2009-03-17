@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,8 +35,8 @@ struct Computer_Player : Widelands::NoteReceiver<Widelands::NoteImmovable>, Wide
 
 	virtual void think () = 0;
 
-	virtual void receive(const Widelands::NoteImmovable&) {}
-	virtual void receive(const Widelands::NoteField&) {}
+	virtual void receive(Widelands::NoteImmovable const &) {}
+	virtual void receive(Widelands::NoteField     const &) {}
 
 	Widelands::Game & game() const throw () {return m_game;}
 	Widelands::Player_Number get_player_number() {return player_number;}
@@ -50,15 +50,16 @@ struct Computer_Player : Widelands::NoteReceiver<Widelands::NoteImmovable>, Wide
 		std::string name;
 		virtual ~Implementation() {}
 		virtual Computer_Player * instantiate
-			(Widelands::Game&,
-			 Widelands::Player_Number) const = 0;
+			(Widelands::Game &, Widelands::Player_Number) const = 0;
 	};
-	typedef std::vector<const Computer_Player::Implementation*> ImplementationVector;
+	typedef
+		std::vector<Computer_Player::Implementation const *>
+		ImplementationVector;
 
 	/**
 	 * Get a list of available AI implementations.
 	 */
-	static const ImplementationVector& getImplementations();
+	static ImplementationVector const & getImplementations();
 
 	/**
 	 * Get the best matching implementation for this name.

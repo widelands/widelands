@@ -74,7 +74,7 @@ private:
 
 
 template <typename T>
-int32_t Descr_Maintainer<T>::add(T* item) {
+int32_t Descr_Maintainer<T>::add(T * const item) {
 	int32_t const result = nitems;
 	if (++nitems >= capacity)
 		reserve(nitems);
@@ -84,7 +84,7 @@ int32_t Descr_Maintainer<T>::add(T* item) {
 
 /// Returns the element if it exists, 0 otherwise.
 template <typename T>
-T* Descr_Maintainer<T>::exists(const char* name) {
+T * Descr_Maintainer<T>::exists(char const * const name) {
 	for (typename T::Index i = 0; i < nitems; ++i)
 		if (name == items[i]->name()) return items[i];
 	return 0;

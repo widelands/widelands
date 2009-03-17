@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -122,6 +122,6 @@ enum {
  * C++ is really bad at integer types. For example this constant is not
  * recognized as a valid value of type Workarea_Info::size_type without a cast.
  */
-#define NUMBER_OF_WORKAREA_PICS static_cast<const Workarea_Info::size_type>(3)
+#define NUMBER_OF_WORKAREA_PICS static_cast<Workarea_Info::size_type>(3)
 
 #endif

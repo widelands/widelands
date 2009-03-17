@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -109,7 +109,8 @@ RequirementsStorage::RequirementsStorage(uint32_t _id, Reader reader)
 {
 	StorageMap& s = storageMap();
 
-	assert(_id > 0 && _id < 65535);
+	assert(0 < _id);
+	assert    (_id < 65535);
 	assert(s.find(_id) == s.end());
 
 	s.insert(std::make_pair(_id, this));
@@ -150,11 +151,8 @@ void RequireOr::add(const Requirements& req)
 
 bool RequireOr::check(Map_Object const * const obj) const
 {
-	for
-		(std::vector<Requirements>::const_iterator it = m.begin();
-		 it != m.end();
-		 ++it)
-		if (it->check(obj))
+	container_iterate_const(std::vector<Requirements>, m, i)
+		if (i.current->check(obj))
 			return true;
 
 	return false;
@@ -162,14 +160,11 @@ bool RequireOr::check(Map_Object const * const obj) const
 
 void RequireOr::write(FileWrite *fw, Editor_Game_Base * egbase, Map_Map_Object_Saver *mos) const
 {
-	assert(m.size() < 65535);
+	assert(m.size() == static_cast<uint16_t>(m.size()));
 	fw->Unsigned16(m.size());
 
-	for
-		(std::vector<Requirements>::const_iterator it = m.begin();
-		 it != m.end();
-		 ++it)
-		it->Write(fw, egbase, mos);
+	container_iterate_const(std::vector<Requirements>, m, i)
+		i.current->Write(fw, egbase, mos);
 }
 
 static Requirements readOr(FileRead* fr, Editor_Game_Base* egbase, Map_Map_Object_Loader* mol)
@@ -189,7 +184,7 @@ static Requirements readOr(FileRead* fr, Editor_Game_Base* egbase, Map_Map_Objec
 const RequirementsStorage RequireOr::storage(requirementIdOr, readOr);
 
 
-void RequireAnd::add(const Requirements& req)
+void RequireAnd::add(Requirements const & req)
 {
 	m.push_back(req);
 }
@@ -205,14 +200,11 @@ bool RequireAnd::check(Map_Object const * const obj) const
 
 void RequireAnd::write(FileWrite *fw, Editor_Game_Base * egbase, Map_Map_Object_Saver *mos) const
 {
-	assert(m.size() < 65535);
+	assert(m.size() == static_cast<uint16_t>(m.size()));
 	fw->Unsigned16(m.size());
 
-	for
-		(std::vector<Requirements>::const_iterator it = m.begin();
-		 it != m.end();
-		 ++it)
-		it->Write(fw, egbase, mos);
+	container_iterate_const(std::vector<Requirements>, m, i)
+		i.current->Write(fw, egbase, mos);
 }
 
 static Requirements readAnd(FileRead* fr, Editor_Game_Base* egbase, Map_Map_Object_Loader* mol)

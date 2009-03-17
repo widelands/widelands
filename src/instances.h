@@ -74,18 +74,19 @@ struct Map_Object_Descr {
 
 
 
-	private:
-		typedef std::map<std::string, uint32_t> AttribMap;
+private:
+	typedef std::map<std::string, uint32_t> Anims;
+	typedef std::map<std::string, uint32_t> AttribMap;
 
-		Map_Object_Descr & operator=(Map_Object_Descr const &);
-		explicit Map_Object_Descr   (Map_Object_Descr const &);
+	Map_Object_Descr & operator= (Map_Object_Descr const &);
+	explicit Map_Object_Descr    (Map_Object_Descr const &);
 
 	std::string const m_name;
 	std::string const m_descname;       ///< Descriptive name
 		std::vector<uint32_t>           m_attributes;
-		std::map<std::string, uint32_t>  m_anims;
-		static uint32_t                 s_dyn_attribhigh; ///< highest attribute ID used
-		static AttribMap            s_dyn_attribs;
+	Anims             m_anims;
+	static uint32_t   s_dyn_attribhigh; ///< highest attribute ID used
+	static AttribMap  s_dyn_attribs;
 
 };
 
@@ -128,7 +129,7 @@ extern Map_Object_Descr g_flag_descr;
 /// If you find a better way to do this that doesn't cost a virtual function or additional
 /// member variable, go ahead
 #define MO_DESCR(type) \
-public: __attribute__ ((deprecated)) const type* get_descr() const {return dynamic_cast<const type *>(m_descr);}\
+public: __attribute__ ((deprecated)) type const * get_descr() const {return dynamic_cast<type const *>(m_descr);}\
 public: const type & descr() const {return dynamic_cast<const type &>(*m_descr);}
 
 class Map_Object {
@@ -230,8 +231,8 @@ public:
 	virtual void create_debug_panels
 		(Editor_Game_Base const & egbase, UI::Tab_Panel & tabs);
 
-	LogSink* get_logsink() {return m_logsink;}
-	void set_logsink(LogSink* sink);
+	LogSink * get_logsink() {return m_logsink;}
+	void set_logsink(LogSink *);
 
 	/// Called when a new logsink is set. Used to give general information.
 	virtual void log_general_info(Editor_Game_Base *);
@@ -261,9 +262,9 @@ public:
 	 * all Loader objects should be deleted.
 	 */
 	class Loader {
-		Editor_Game_Base* m_egbase;
+		Editor_Game_Base      * m_egbase;
 		Map_Map_Object_Loader * m_mol;
-		Map_Object* m_object;
+		Map_Object            * m_object;
 
 	protected:
 		Loader() : m_egbase(0), m_mol(0), m_object(0) {}
@@ -281,13 +282,13 @@ public:
 			m_object = object;
 		}
 
-		Editor_Game_Base& egbase() {return *m_egbase;}
+		Editor_Game_Base      & egbase    () {return *m_egbase;}
 		Map_Map_Object_Loader & mol   () {return *m_mol;}
-		Map_Object * get_object() {return m_object;}
+		Map_Object            * get_object() {return m_object;}
 		template<typename T> T & get() {return dynamic_cast<T &>(*m_object);}
 
 	protected:
-		virtual void load(FileRead&);
+		virtual void load(FileRead &);
 
 	public:
 		virtual void load_pointers();
@@ -306,7 +307,8 @@ protected:
 	virtual void init(Editor_Game_Base*);
 	virtual void cleanup(Editor_Game_Base*);
 
-	void molog(const char* fmt, ...) const __attribute__((format(printf, 2, 3)));
+	void molog(char const * fmt, ...) const
+		__attribute__((format(printf, 2, 3)));
 
 protected:
 	const Map_Object_Descr * m_descr;
@@ -314,11 +316,13 @@ protected:
 	LogSink                * m_logsink;
 
 private:
-	Map_Object & operator=(Map_Object const &);
-	explicit Map_Object   (Map_Object const &);
+	Map_Object & operator= (Map_Object const &);
+	explicit Map_Object    (Map_Object const &);
 };
 
-inline int32_t get_reverse_dir(int32_t dir) {return 1 + ((dir-1)+3)%6;}
+inline int32_t get_reverse_dir(int32_t const dir) {
+	return 1 + ((dir - 1) + 3) % 6;
+}
 
 
 /**
@@ -343,8 +347,9 @@ struct Object_Manager {
 
 	bool object_still_available(const Map_Object * const t) const {
 		objmap_t::const_iterator it = m_objects.begin();
-		while (it!=m_objects.end()) {
-			if (it->second==t) return true;
+		while (it != m_objects.end()) {
+			if (it->second == t)
+				return true;
 			++it;
 		}
 		return false;
@@ -360,8 +365,8 @@ private:
 	Serial   m_lastserial;
 	objmap_t m_objects;
 
-	Object_Manager & operator=(const Object_Manager &);
-	Object_Manager            (const Object_Manager &);
+	Object_Manager & operator= (Object_Manager const &);
+	Object_Manager             (Object_Manager const &);
 };
 
 /**
@@ -371,8 +376,10 @@ struct Object_Ptr {
 	Object_Ptr(Map_Object * const obj = 0) {m_serial = obj ? obj->m_serial : 0;}
 	// can use standard copy constructor and assignment operator
 
-	Object_Ptr & operator=(Map_Object * const obj)
-	{m_serial = obj ? obj->m_serial : 0; return *this;}
+	Object_Ptr & operator= (Map_Object * const obj) {
+		m_serial = obj ? obj->m_serial : 0;
+		return *this;
+	}
 
 	bool is_set() const {return m_serial;}
 
@@ -381,10 +388,12 @@ struct Object_Ptr {
 	Map_Object * get(const Editor_Game_Base * const g);
 	const Map_Object * get(const Editor_Game_Base * const g) const;
 
-	bool operator<(const Object_Ptr other) const throw ()
-	{return m_serial < other.m_serial;}
-	bool operator==(const Object_Ptr other) const throw ()
-	{return m_serial == other.m_serial;}
+	bool operator<  (Object_Ptr const other) const throw () {
+		return m_serial < other.m_serial;
+	}
+	bool operator== (Object_Ptr const other) const throw () {
+		return m_serial == other.m_serial;
+	}
 
 	uint32_t serial() const {return m_serial;}
 
@@ -396,8 +405,7 @@ template<class T>
 struct OPtr {
 	OPtr(T * const obj = 0) : m(obj) {}
 
-	OPtr& operator=(T* const obj)
-	{
+	OPtr & operator= (T * const obj) {
 		m = obj;
 		return *this;
 	}
@@ -414,12 +422,8 @@ struct OPtr {
 		return static_cast<const T*>(m.get(g));
 	}
 
-	bool operator<(const OPtr<T>& other) const throw ()
-	{
-		return m < other.m;
-	}
-
-	bool operator==(const OPtr<T>& other) const {return m == other.m;}
+	bool operator<  (OPtr<T> const & other) const {return m <  other.m;}
+	bool operator== (OPtr<T> const & other) const {return m == other.m;}
 
 	Serial serial() const {return m.serial();}
 
@@ -429,7 +433,7 @@ private:
 
 struct Cmd_Destroy_Map_Object : public GameLogicCommand {
 	Cmd_Destroy_Map_Object() : GameLogicCommand(0) {} ///< For savegame loading
-	Cmd_Destroy_Map_Object (int32_t t, Map_Object* o);
+	Cmd_Destroy_Map_Object (int32_t t, Map_Object *);
 	virtual void execute (Game* g);
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
@@ -443,7 +447,7 @@ private:
 
 struct Cmd_Act : public GameLogicCommand {
 	Cmd_Act() : GameLogicCommand(0) {} ///< For savegame loading
-	Cmd_Act (int32_t t, Map_Object* o, int32_t a);
+	Cmd_Act (int32_t t, Map_Object *, int32_t a);
 
 	virtual void execute (Game* g);
 

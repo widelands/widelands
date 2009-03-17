@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,14 +53,15 @@ using namespace Widelands;
 DefaultAI::Implementation DefaultAI::implementation;
 
 struct CheckStepRoadAI {
-	CheckStepRoadAI(Player* pl, uint8_t mc, bool oe)
+	CheckStepRoadAI(Player * const pl, uint8_t const mc, bool const oe)
 		: player(pl), movecaps(mc), openend(oe)
 	{}
 
-	void set_openend (bool oe)
-	{openend=oe;}
+	void set_openend (bool const oe) {openend = oe;}
 
-	bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, CheckStep::StepId id) const;
+	bool allowed
+		(Map* map, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
+		const;
 	bool reachabledest(Map* map, FCoords dest) const;
 
 //private:
@@ -100,7 +101,7 @@ void DefaultAI::late_initialization ()
 	// Read the computerplayer hints of the tribe
 	// FIXME: this is only a temporary workaround. Better define all this stuff
 	//        in each buildings conf-file.
-	std::string tribehints = "tribes/"+ tribe->name() + "/cphints";
+	std::string tribehints = "tribes/" + tribe->name() + "/cphints";
 	if (g_fs->FileExists(tribehints)) {
 		Profile prof(tribehints.c_str());
 		Section & hints = prof.get_safe_section("global");
@@ -134,7 +135,7 @@ void DefaultAI::late_initialization ()
 
 		buildings.resize (buildings.size() + 1);
 
-		BuildingObserver& bo      = buildings.back();
+		BuildingObserver & bo     = buildings.back();
 		bo.name                   = building_name.c_str();
 		bo.id                     = i;
 		bo.desc                   = &bld;
@@ -153,12 +154,12 @@ void DefaultAI::late_initialization ()
 		bo.need_water = (building_name == fisher);
 
 		if (typeid(bld) == typeid(ConstructionSite_Descr)) {
-			bo.type=BuildingObserver::CONSTRUCTIONSITE;
+			bo.type = BuildingObserver::CONSTRUCTIONSITE;
 			continue;
 		}
 
 		if (typeid(bld) == typeid(MilitarySite_Descr)) {
-			bo.type=BuildingObserver::MILITARYSITE;
+			bo.type = BuildingObserver::MILITARYSITE;
 			continue;
 		}
 
@@ -180,14 +181,14 @@ void DefaultAI::late_initialization ()
 		}
 	}
 
-	total_constructionsites=0;
-	next_construction_due=0;
-	next_road_due=1000;
-	next_productionsite_check_due=0;
-	inhibit_road_building=0;
+	total_constructionsites       =    0;
+	next_construction_due         =    0;
+	next_road_due                 = 1000;
+	next_productionsite_check_due =    0;
+	inhibit_road_building         =    0;
 
 	// Add all fields that we own
-	Map& map = game().map();
+	Map & map = game().map();
 	std::set<OPtr<PlayerImmovable> > found_immovables;
 
 	for (Y_Coordinate y = 0; y < map.get_height(); ++y) {
@@ -199,22 +200,20 @@ void DefaultAI::late_initialization ()
 
 			unusable_fields.push_back (map.get_fcoords(Coords(x, y)));
 
-			upcast(PlayerImmovable, imm, f.field->get_immovable());
-
-			if (imm && imm->get_owner() == player) {
+			if (upcast(PlayerImmovable, imm, f.field->get_immovable()))
 				// Guard by a set because immovables might be on several fields at once
-				if (found_immovables.find(imm) == found_immovables.end()) {
+				if (&imm->owner() == player and not found_immovables.count(imm)) {
 					found_immovables.insert(imm);
-					gain_immovable(imm);
+					gain_immovable(*imm);
 				}
-			}
 		}
 	}
 }
 
 DefaultAI::~DefaultAI () {}
 
-DefaultAI::BuildingObserver& DefaultAI::get_building_observer (const char* name)
+DefaultAI::BuildingObserver & DefaultAI::get_building_observer
+	(char const * const name)
 {
 	if (tribe == 0)
 		late_initialization ();
@@ -243,16 +242,16 @@ void DefaultAI::think ()
 		 and
 		 buildable_fields.front()->next_update_due <= gametime)
 	{
-		BuildableField* bf=buildable_fields.front();
+		BuildableField * bf = buildable_fields.front();
 
 		// check whether we lost ownership of the field
-		if (bf->coords.field->get_owned_by()!=get_player_number()) {
+		if (bf->coords.field->get_owned_by() != get_player_number()) {
 			buildable_fields.pop_front();
 			continue;
 		}
 
 		// check whether we can still construct regular buildings on the field
-		if ((player->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK)==0) {
+		if ((player->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK) == 0) {
 			unusable_fields.push_back (bf->coords);
 			delete bf;
 
@@ -260,7 +259,7 @@ void DefaultAI::think ()
 			continue;
 		}
 
-		update_buildable_field (bf);
+		update_buildable_field (*bf);
 		bf->next_update_due = gametime + FIELD_UPDATE_INTERVAL;
 
 		buildable_fields.push_back (bf);
@@ -274,16 +273,16 @@ void DefaultAI::think ()
 		 and
 		 mineable_fields.front()->next_update_due <= gametime)
 	{
-		MineableField* mf=mineable_fields.front();
+		MineableField * mf = mineable_fields.front();
 
 		// check whether we lost ownership of the field
-		if (mf->coords.field->get_owned_by()!=get_player_number()) {
+		if (mf->coords.field->get_owned_by() != get_player_number()) {
 			mineable_fields.pop_front();
 			continue;
 		}
 
 		// check whether we can still construct regular buildings on the field
-		if ((player->get_buildcaps(mf->coords) & BUILDCAPS_MINE)==0) {
+		if ((player->get_buildcaps(mf->coords) & BUILDCAPS_MINE) == 0) {
 			unusable_fields.push_back (mf->coords);
 			delete mf;
 
@@ -291,34 +290,37 @@ void DefaultAI::think ()
 			continue;
 		}
 
-		update_mineable_field (mf);
+		update_mineable_field (*mf);
 		mf->next_update_due = gametime + FIELD_UPDATE_INTERVAL;
 
 		mineable_fields.push_back (mf);
 		mineable_fields.pop_front ();
 	}
 	//printf("DefaultAI: Done looking for minenable fields. %i found.\n", mineable_fields.size());
-	for (std::list<FCoords>::iterator i=unusable_fields.begin(); i!=unusable_fields.end();) {
+	for
+		(std::list<FCoords>::iterator i = unusable_fields.begin();
+		 i != unusable_fields.end();)
+	{
 		// check whether we lost ownership of the field
-		if (i->field->get_owned_by()!=get_player_number()) {
-			i=unusable_fields.erase(i);
+		if (i->field->get_owned_by() != get_player_number()) {
+			i = unusable_fields.erase(i);
 			continue;
 		}
 
 		// check whether building capabilities have improved
 		if ((player->get_buildcaps(*i) & BUILDCAPS_SIZEMASK) != 0) {
 			buildable_fields.push_back (new BuildableField(*i));
-			i=unusable_fields.erase(i);
+			i = unusable_fields.erase(i);
 
-			update_buildable_field (buildable_fields.back());
+			update_buildable_field (*buildable_fields.back());
 			continue;
 		}
 
 		if ((player->get_buildcaps(*i) & BUILDCAPS_MINE) != 0) {
 			mineable_fields.push_back (new MineableField(*i));
-			i=unusable_fields.erase(i);
+			i = unusable_fields.erase(i);
 
-			update_mineable_field (mineable_fields.back());
+			update_mineable_field (*mineable_fields.back());
 			continue;
 		}
 
@@ -356,34 +358,27 @@ void DefaultAI::think ()
 	//printf("DefaultAI: Done checking up on construction sites.\n");
 	// if nothing else is to do, update flags and economies
 	while (!new_flags.empty()) {
-		Flag* flag=new_flags.front();
+		Flag const & flag = *new_flags.front();
 		new_flags.pop_front();
 
-		get_economy_observer(flag->get_economy())->flags.push_back (flag);
+		get_economy_observer(flag.economy())->flags.push_back (&flag);
 	}
 
-	for
-		(std::list<EconomyObserver *>::iterator i = economies.begin();
-		 i != economies.end();
-		 ++i)
-	{
+	container_iterate(std::list<EconomyObserver *>, economies, i) {
 		// check if any flag has changed its economy
-		for
-			(std::list<Flag *>::iterator j = (*i)->flags.begin();
-			 j != (*i)->flags.end();
-			 ++j)
-		{
-			if ((*i)->economy!=(*j)->get_economy()) {
-				get_economy_observer((*j)->get_economy())->flags.push_back (*j);
-				j=(*i)->flags.erase(j);
+		container_iterate(std::list<Flag const *>, (*i.current)->flags, j) {
+			if (&(*i.current)->economy != &(*j.current)->economy()) {
+				get_economy_observer((*j.current)->economy())->flags.push_back
+					(*j.current);
+				j.current = (*i.current)->flags.erase(j.current);
 				continue;
 			}
 		}
 
 		// if there are no more flags in this economy, we no longer need its observer
-		if ((*i)->flags.empty()) {
-			delete *i;
-			i=economies.erase(i);
+		if ((*i.current)->flags.empty()) {
+			delete *i.current;
+			i.current = economies.erase(i.current);
 			continue;
 		}
 	}
@@ -400,9 +395,9 @@ void DefaultAI::think ()
 
 #if 0
 	if (not economies.empty() and inhibit_road_building <= gametime) {
-		EconomyObserver* eco=economies.front();
+		EconomyObserver * eco = economies.front();
 
-		bool finish=false;
+		bool finish = false;
 
 		// try to connect to another economy
 		if (economies.size() > 1)
@@ -427,7 +422,7 @@ void DefaultAI::think ()
 	// force a split on roads that are extremely long
 	// note that having too many flags causes a loss of building capabilities
 	if (!roads.empty()) {
-		const Path& path=roads.front()->get_path();
+		Path const & path = roads.front()->get_path();
 
 		if (path.get_nsteps()>6) {
 			const Map & map = game().map();
@@ -464,7 +459,7 @@ bool DefaultAI::construct_building ()
 	int32_t spots_avail[4];
 
 	for (int32_t i = 0; i < 4; ++i)
-		spots_avail[i]=0;
+		spots_avail[i] = 0;
 
 	for
 		(std::list<BuildableField *>::iterator i = buildable_fields.begin();
@@ -472,17 +467,22 @@ bool DefaultAI::construct_building ()
 		 ++i)
 		++spots_avail[(*i)->coords.field->get_caps() & BUILDCAPS_SIZEMASK];
 
-	int32_t expand_factor=1;
+	int32_t expand_factor = 1;
 
-	if (spots_avail[BUILDCAPS_BIG]<2)
+	if (spots_avail[BUILDCAPS_BIG] < 2)
 		++expand_factor;
-	if (spots_avail[BUILDCAPS_MEDIUM]+spots_avail[BUILDCAPS_BIG]<4)
+	if (spots_avail[BUILDCAPS_MEDIUM] + spots_avail[BUILDCAPS_BIG] < 4)
 		++expand_factor;
-	if (spots_avail[BUILDCAPS_SMALL]+spots_avail[BUILDCAPS_MEDIUM]+spots_avail[BUILDCAPS_BIG]<8)
+	if
+		(spots_avail[BUILDCAPS_SMALL]  +
+		 spots_avail[BUILDCAPS_MEDIUM] +
+		 spots_avail[BUILDCAPS_BIG]
+		 <
+		 8)
 		++expand_factor;
 
 	Building_Index proposed_building;
-	int32_t proposed_priority=0;
+	int32_t proposed_priority = 0;
 	Coords proposed_coords;
 
 	// first scan all buildable fields for regular buildings
@@ -491,7 +491,7 @@ bool DefaultAI::construct_building ()
 		 i != buildable_fields.end();
 		 ++i)
 	{
-		BuildableField* bf=*i;
+		BuildableField * const bf = *i;
 
 		if (!bf->reachable)
 			continue;
@@ -515,7 +515,7 @@ bool DefaultAI::construct_building ()
 
 			int32_t prio = 0;
 
-			if (j->type==BuildingObserver::MILITARYSITE) {
+			if (j->type == BuildingObserver::MILITARYSITE) {
 				prio  = bf->unowned_land_nearby - bf->military_influence * 2;
 				prio *= expand_factor;
 				prio /= 4;
@@ -530,12 +530,12 @@ bool DefaultAI::construct_building ()
 				prio -= spots_avail[BUILDCAPS_SMALL]  / 8;
 			}
 
-			if (j->type==BuildingObserver::PRODUCTIONSITE) {
+			if (j->type == BuildingObserver::PRODUCTIONSITE) {
 				if (j->need_trees)
-					prio += bf->trees_nearby - 6*bf->tree_consumers_nearby - 2;
+					prio += bf->trees_nearby - 6 * bf->tree_consumers_nearby - 2;
 
 				if (j->need_stones)
-					prio += bf->stones_nearby - 6*bf->stone_consumers_nearby - 2;
+					prio += bf->stones_nearby - 6 * bf->stone_consumers_nearby - 2;
 
 				if
 					((j->need_trees || j->need_stones)
@@ -546,7 +546,7 @@ bool DefaultAI::construct_building ()
 					prio *= 2;
 
 				if (!j->need_trees && !j->need_stones) {
-					if (j->cnt_built+j->cnt_under_construction==0)
+					if (j->cnt_built + j->cnt_under_construction == 0)
 						prio += 2;
 
 					// Pull type economy, build consumeres until
@@ -563,7 +563,7 @@ bool DefaultAI::construct_building ()
 
 					// normalize by output count so that multipurpose
 					// buildings are not too good
-					int32_t output_prio=0;
+					int32_t output_prio = 0;
 					for (uint32_t k = 0; k < j->outputs.size(); ++k) {
 						WareObserver & wo = wares[j->outputs[k]];
 						output_prio -= 12 * wo.producers;
@@ -594,14 +594,15 @@ bool DefaultAI::construct_building ()
 							++prio;
 					}
 
-					int32_t iosum=0;
+					int32_t iosum = 0;
 					for (size_t k = 0; k < j->inputs.size(); ++k)
 						if (bf->producers_nearby[j->inputs[k]]>0) ++iosum;
 						else if (bf->consumers_nearby[j->inputs[k]]>0) --iosum;
 					if (iosum < -2) iosum = -2;
 					for (size_t k = 0; k < j->outputs.size(); ++k)
-						if (bf->consumers_nearby[j->outputs[k]]>0) ++iosum;
-					prio += 2*iosum;
+						if (bf->consumers_nearby[j->outputs[k]] > 0)
+							++iosum;
+					prio += 2 * iosum;
 				}
 				prio -=
 					2 * j->cnt_under_construction * (j->cnt_under_construction + 1);
@@ -614,7 +615,8 @@ bool DefaultAI::construct_building ()
 				prio += effect > 0 ? static_cast<int>(sqrt(effect)) : effect;
 				// if same producers are nearby, then give some penalty
 				for (size_t k = 0; k < j->outputs.size(); ++k)
-					if (bf->producers_nearby[j->outputs[k]]>0) prio-=3;
+					if (bf->producers_nearby[j->outputs[k]] > 0)
+						prio -= 3;
 			}
 
 			// Prefer road side fields
@@ -633,35 +635,35 @@ bool DefaultAI::construct_building ()
 #if 0 //FIXME
 	// then try all mines
 	const World & world = game().map().world();
-	for (std::list<BuildingObserver>::iterator i = buildings.begin();i != buildings.end(); ++i) {
-		if (!i->is_buildable || i->type!=BuildingObserver::MINE)
+	for (std::list<BuildingObserver>::iterator i = buildings.begin(); i != buildings.end(); ++i) {
+		if (!i->is_buildable || i->type != BuildingObserver::MINE)
 			continue;
 
 		for (std::list<MineableField *>::iterator j = mineable_fields.begin(); j != mineable_fields.end(); ++j) {
-			MineableField* mf=*j;
-			int32_t prio=-1;
+			MineableField * mf = *j;
+			int32_t prio = -1;
 
-			if (i->hints->get_need_map_resource()!=0) {
+			if (i->hints->get_need_map_resource() != 0) {
 				int32_t res = world.get_resource(i->hints->get_need_map_resource());
 
-				if (mf->coords.field->get_resources()!=res)
+				if (mf->coords.field->get_resources() != res)
 					continue;
 
-				prio+=mf->coords.field->get_resources_amount();
+				prio += mf->coords.field->get_resources_amount();
 			}
 
-			WareObserver& output=wares[i->outputs[0]];
+			WareObserver & output = wares[i->outputs[0]];
 			if (output.consumers>0)
-				prio*=2;
+				prio *= 2;
 
-			prio-=2 * mf->mines_nearby * mf->mines_nearby;
-			prio-=i->cnt_built*3;
-			prio-=i->cnt_under_construction*8;
+			prio -= 2 * mf->mines_nearby * mf->mines_nearby;
+			prio -= i->cnt_built * 3;
+			prio -= i->cnt_under_construction * 8;
 
 			if (prio>proposed_priority) {
-				proposed_building=i->id;
-				proposed_priority=prio;
-				proposed_coords=mf->coords;
+				proposed_building = i->id;
+				proposed_priority = prio;
+				proposed_coords = mf->coords;
 			}
 		}
 	}
@@ -683,7 +685,7 @@ bool DefaultAI::construct_building ()
 	return true;
 }
 
-void DefaultAI::check_productionsite (ProductionSiteObserver& site)
+void DefaultAI::check_productionsite (ProductionSiteObserver & site)
 {
 	// Get max radius of recursive workarea
 	Workarea_Info::size_type radius = 0;
@@ -741,56 +743,57 @@ bool FindNodeUnowned::accept (const Map &, const FCoords fc) const
 {
 	// when looking for unowned terrain to acquire, we are actually
 	// only interested in fields we can walk on
-	return fc.field->get_owned_by()==0 && (fc.field->get_caps()&MOVECAPS_WALK);
+	return
+		fc.field->get_owned_by() == 0 && (fc.field->get_caps() & MOVECAPS_WALK);
 }
 
 
 struct FindNodeWater
 {
-	bool accept(const Map & map, const FCoords& coord) const {
+	bool accept(Map const & map, FCoords const & coord) const {
 		return
 			(map.world().terrain_descr(coord.field->terrain_d()).get_is() & TERRAIN_WATER) ||
 			(map.world().terrain_descr(coord.field->terrain_r()).get_is() & TERRAIN_WATER);
 	}
 };
 
-void DefaultAI::update_buildable_field (BuildableField* field)
+void DefaultAI::update_buildable_field (BuildableField & field)
 {
 	// look if there is any unowned land nearby
 	FindNodeUnowned find_unowned;
 	Map & map = game().map();
 
-	field->unowned_land_nearby =
-		map.find_fields(Area<FCoords>(field->coords, 8), 0, find_unowned);
+	field.unowned_land_nearby =
+		map.find_fields(Area<FCoords>(field.coords, 8), 0, find_unowned);
 
 	// collect information about resources in the area
 	std::vector<ImmovableFound> immovables;
 
-	const int32_t tree_attr=Map_Object_Descr::get_attribute_id("tree");
-	const int32_t stone_attr=Map_Object_Descr::get_attribute_id("stone");
+	int32_t const tree_attr  = Map_Object_Descr::get_attribute_id("tree");
+	int32_t const stone_attr = Map_Object_Descr::get_attribute_id("stone");
 
-	map.find_immovables (Area<FCoords>(field->coords, 10), &immovables); //  FIXME magic number
+	map.find_immovables (Area<FCoords>(field.coords, 10), &immovables); //  FIXME magic number
 
-	field->reachable=false;
-	field->preferred=false;
-	field->avoid_military=false;
+	field.reachable      = false;
+	field.preferred      = false;
+	field.avoid_military = false;
 
-	field->military_influence=0;
-	field->trees_nearby=0;
-	field->stones_nearby=0;
-	field->tree_consumers_nearby=0;
-	field->stone_consumers_nearby=0;
-	field->producers_nearby.clear();
-	field->producers_nearby.resize(wares.size());
-	field->consumers_nearby.clear();
-	field->consumers_nearby.resize(wares.size());
+	field.military_influence     = 0;
+	field.trees_nearby           = 0;
+	field.stones_nearby          = 0;
+	field.tree_consumers_nearby  = 0;
+	field.stone_consumers_nearby = 0;
+	field.producers_nearby.clear();
+	field.producers_nearby.resize(wares.size());
+	field.consumers_nearby.clear();
+	field.consumers_nearby.resize(wares.size());
 	std::vector<Coords> water_list;
 	FindNodeWater find_water;
-	map.find_fields(Area<FCoords>(field->coords, 4), &water_list, find_water);
-	field->water_nearby = water_list.size();
+	map.find_fields(Area<FCoords>(field.coords, 4), &water_list, find_water);
+	field.water_nearby = water_list.size();
 
 	FCoords fse;
-	map.get_neighbour (field->coords, Map_Object::WALK_SE, &fse);
+	map.get_neighbour (field.coords, Map_Object::WALK_SE, &fse);
 
 	if (BaseImmovable const * const imm = fse.field->get_immovable())
 		if
@@ -799,12 +802,12 @@ void DefaultAI::update_buildable_field (BuildableField* field)
 			 (dynamic_cast<Road const *>(imm)
 			  &&
 			  fse.field->get_caps() & BUILDCAPS_FLAG))
-		field->preferred=true;
+		field.preferred = true;
 
 	for (uint32_t i = 0;i < immovables.size(); ++i) {
 		const BaseImmovable & base_immovable = *immovables[i].object;
 		if (dynamic_cast<const Flag *>(&base_immovable))
-			field->reachable=true;
+			field.reachable = true;
 		if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
 			if (player_immovable->owner().get_player_number() != get_player_number())
 				continue;
@@ -818,29 +821,29 @@ void DefaultAI::update_buildable_field (BuildableField* field)
 					const int32_t v =
 						target_ms_d->get_conquers()
 						-
-						map.calc_distance(field->coords, immovables[i].coords);
+						map.calc_distance(field.coords, immovables[i].coords);
 
 					if (0 < v) {
-						field->military_influence += v * (v + 2) * 6;
-						field->avoid_military = true;
+						field.military_influence += v * (v + 2) * 6;
+						field.avoid_military = true;
 					}
 				}
 
 				if (dynamic_cast<ProductionSite_Descr const *>(&target_descr))
 					consider_productionsite_influence
-					(field,
-					 immovables[i].coords,
-					 get_building_observer(constructionsite->name().c_str()));
+						(field,
+						 immovables[i].coords,
+						 get_building_observer(constructionsite->name().c_str()));
 			}
 
 			if (upcast(MilitarySite const, militarysite, building)) {
 				const int32_t v =
 					militarysite->get_conquers()
 					-
-					map.calc_distance(field->coords, immovables[i].coords);
+					map.calc_distance(field.coords, immovables[i].coords);
 
 				if (v > 0)
-					field->military_influence +=
+					field.military_influence +=
 						v * v * militarysite->soldierCapacity();
 			}
 
@@ -854,27 +857,27 @@ void DefaultAI::update_buildable_field (BuildableField* field)
 		}
 
 		if (immovables[i].object->has_attribute(tree_attr))
-			++field->trees_nearby;
+			++field.trees_nearby;
 
 		if (immovables[i].object->has_attribute(stone_attr))
-			++field->stones_nearby;
+			++field.stones_nearby;
 	}
 }
 
-void DefaultAI::update_mineable_field (MineableField* field)
+void DefaultAI::update_mineable_field (MineableField & field)
 {
 	// collect information about resources in the area
 	std::vector<ImmovableFound> immovables;
 	Map & map = game().map();
 
-	map.find_immovables (Area<FCoords>(field->coords, 6), &immovables);
+	map.find_immovables (Area<FCoords>(field.coords, 6), &immovables);
 
-	field->reachable=false;
-	field->preferred=false;
-	field->mines_nearby=true;
+	field.reachable    = false;
+	field.preferred    = false;
+	field.mines_nearby = true;
 
 	FCoords fse;
-	map.get_neighbour (field->coords, Map_Object::WALK_SE, &fse);
+	map.get_neighbour (field.coords, Map_Object::WALK_SE, &fse);
 
 	if (BaseImmovable const * const imm = fse.field->get_immovable())
 		if
@@ -883,13 +886,12 @@ void DefaultAI::update_mineable_field (MineableField* field)
 			 (dynamic_cast<Road const *>(imm)
 			  &&
 			  fse.field->get_caps() & BUILDCAPS_FLAG))
-		field->preferred=true;
+		field.preferred = true;
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
-		if (immovables[i].object->get_type()==BaseImmovable::FLAG)
-			field->reachable=true;
-
-		if (upcast(Building const, bld, immovables[i].object))
+		if (dynamic_cast<Flag const *>(immovables[i].object))
+			field.reachable = true;
+		else if (upcast(Building const, bld, immovables[i].object))
 			if
 				(player->get_buildcaps(map.get_fcoords(immovables[i].coords))
 				 &
@@ -899,32 +901,33 @@ void DefaultAI::update_mineable_field (MineableField* field)
 			if
 				(dynamic_cast<ConstructionSite const *>(bld) or
 				 dynamic_cast<ProductionSite   const *>(bld))
-				++field->mines_nearby;
+				++field.mines_nearby;
 			}
 	}
 }
 
 void DefaultAI::consider_productionsite_influence
-	(BuildableField * field, Coords, BuildingObserver const & bo)
+	(BuildableField & field, Coords, BuildingObserver const & bo)
 {
 	if (bo.need_trees)
-		++field->tree_consumers_nearby;
+		++field.tree_consumers_nearby;
 
 	if (bo.need_stones)
-		++field->stone_consumers_nearby;
-	for (size_t i=0;i<bo.inputs.size();++i)
-		++field->consumers_nearby[bo.inputs[i]];
-	for (size_t i=0;i<bo.outputs.size();++i)
-		++field->producers_nearby[bo.outputs[i]];
+		++field.stone_consumers_nearby;
+	for (size_t i = 0; i < bo.inputs.size(); ++i)
+		++field.consumers_nearby[bo.inputs[i]];
+	for (size_t i = 0; i < bo.outputs.size(); ++i)
+		++field.producers_nearby[bo.outputs[i]];
 }
 
-DefaultAI::EconomyObserver* DefaultAI::get_economy_observer (Economy* economy)
+DefaultAI::EconomyObserver * DefaultAI::get_economy_observer
+	(Economy & economy)
 {
 	for
-		(std::list<EconomyObserver*>::iterator i = economies.begin();
+		(std::list<EconomyObserver *>::iterator i = economies.begin();
 		 i != economies.end();
 		 ++i)
-		if ((*i)->economy==economy)
+		if (&(*i)->economy == &economy)
 			return *i;
 
 	economies.push_front (new EconomyObserver(economy));
@@ -932,14 +935,14 @@ DefaultAI::EconomyObserver* DefaultAI::get_economy_observer (Economy* economy)
 	return economies.front();
 }
 
-void DefaultAI::gain_building (Building* b)
+void DefaultAI::gain_building (Building & b)
 {
-	BuildingObserver & bo = get_building_observer(b->name().c_str());
+	BuildingObserver & bo = get_building_observer(b.name().c_str());
 
-	if (bo.type==BuildingObserver::CONSTRUCTIONSITE) {
-		BuildingObserver &target_bo =
+	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
+		BuildingObserver & target_bo =
 			get_building_observer
-				(dynamic_cast<const ConstructionSite &>(*b)
+				(dynamic_cast<ConstructionSite &>(b)
 				 .building().name().c_str());
 		++target_bo.cnt_under_construction;
 		++total_constructionsites;
@@ -947,10 +950,11 @@ void DefaultAI::gain_building (Building* b)
 	else {
 		++bo.cnt_built;
 
-		if (bo.type==BuildingObserver::PRODUCTIONSITE) {
+		if (bo.type == BuildingObserver::PRODUCTIONSITE) {
 			productionsites.push_back (ProductionSiteObserver());
-			productionsites.back().site=static_cast<ProductionSite*>(b);
-			productionsites.back().bo=&bo;
+			productionsites.back().site =
+				&dynamic_cast<ProductionSite &>(b);
+			productionsites.back().bo = &bo;
 
 			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
 				++wares[bo.outputs[i]].producers;
@@ -961,28 +965,28 @@ void DefaultAI::gain_building (Building* b)
 	}
 }
 
-void DefaultAI::lose_building (Building* b)
+void DefaultAI::lose_building (Building const & b)
 {
-	BuildingObserver & bo = get_building_observer(b->name().c_str());
+	BuildingObserver & bo = get_building_observer(b.name().c_str());
 
-	if (bo.type==BuildingObserver::CONSTRUCTIONSITE) {
+	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
 		BuildingObserver &target_bo =
 			get_building_observer
-			(dynamic_cast<const ConstructionSite &>(*b)
-			 .building().name().c_str());
+				(dynamic_cast<ConstructionSite const &>(b)
+				 .building().name().c_str());
 		--target_bo.cnt_under_construction;
 		--total_constructionsites;
 	}
 	else {
 		--bo.cnt_built;
 
-		if (bo.type==BuildingObserver::PRODUCTIONSITE) {
+		if (bo.type == BuildingObserver::PRODUCTIONSITE) {
 			for
 				(std::list<ProductionSiteObserver>::iterator i =
 				 productionsites.begin();
 				 i != productionsites.end();
 				 ++i)
-				if (i->site==b) {
+				if (i->site == &b) {
 					productionsites.erase (i);
 					break;
 				}
@@ -998,39 +1002,33 @@ void DefaultAI::lose_building (Building* b)
 
 // Road building
 struct FindNodeWithFlagOrRoad {
-	Economy* economy;
+	Economy * economy;
 	bool accept(const Map &, FCoords) const;
 };
 
 bool FindNodeWithFlagOrRoad::accept (const Map &, FCoords fc) const {
-	BaseImmovable* imm=fc.field->get_immovable();
-
-	if (imm==0)
-		return false;
-
-	if (imm->get_type()>=BaseImmovable::BUILDING && static_cast<PlayerImmovable*>(imm)->get_economy()==economy)
-		return false;
-
-	if (imm->get_type()==BaseImmovable::FLAG)
-		return true;
-
-	if (imm->get_type()==BaseImmovable::ROAD && (fc.field->get_caps()&BUILDCAPS_FLAG)!=0)
-		return true;
-
+	if (upcast(PlayerImmovable const, pimm, fc.field->get_immovable()))
+		return
+			pimm->get_economy() != economy
+			and
+			(dynamic_cast<Flag const *>(pimm)
+			 or
+			 (dynamic_cast<Road const *>(pimm) &&
+			  fc.field->get_caps() & BUILDCAPS_FLAG));
 	return false;
 }
 
-bool DefaultAI::connect_flag_to_another_economy (Flag* flag)
+bool DefaultAI::connect_flag_to_another_economy (Flag & flag)
 {
 	FindNodeWithFlagOrRoad functor;
 	CheckStepRoadAI check(player, MOVECAPS_WALK, true);
 	std::vector<Coords> reachable;
 
 	// first look for possible destinations
-	functor.economy=flag->get_economy();
+	functor.economy = flag.get_economy();
 	Map & map = game().map();
 	map.find_reachable_fields
-		(Area<FCoords>(map.get_fcoords(flag->get_position()), 16),
+		(Area<FCoords>(map.get_fcoords(flag.get_position()), 16), //  FIXME magic number
 		 &reachable,
 		 check,
 		 functor);
@@ -1043,7 +1041,7 @@ bool DefaultAI::connect_flag_to_another_economy (Flag* flag)
 	Coords closest;
 	container_iterate_const(std::vector<Coords>, reachable, i) {
 		int32_t const distance =
-			map.calc_distance(flag->get_position(), *i.current);
+			map.calc_distance(flag.get_position(), *i.current);
 		if (distance < closest_distance) {
 			closest = *i.current;
 			closest_distance = distance;
@@ -1058,7 +1056,7 @@ bool DefaultAI::connect_flag_to_another_economy (Flag* flag)
 	// and finally build the road
 	Path & path = *new Path();
 	check.set_openend (false);
-	if (map.findpath(flag->get_position(), closest, 0, path, check) < 0) {
+	if (map.findpath(flag.get_position(), closest, 0, path, check) < 0) {
 		delete &path;
 		return false;
 	}
@@ -1068,15 +1066,13 @@ bool DefaultAI::connect_flag_to_another_economy (Flag* flag)
 }
 
 struct NearFlag {
-	Flag * flag;
-	int32_t   cost;
-	int32_t   distance;
+	Flag const * flag;
+	int32_t  cost;
+	int32_t  distance;
 
-	NearFlag (Flag * const f, int32_t const c, int32_t const d) {
-		flag     = f;
-		cost     = c;
-		distance = d;
-	}
+	NearFlag (Flag const & f, int32_t const c, int32_t const d) :
+		flag(&f), cost(c), distance(d)
+	{}
 
 	bool operator< (NearFlag const & f) const {return cost > f.cost;}
 
@@ -1084,12 +1080,12 @@ struct NearFlag {
 };
 
 struct CompareDistance {
-	bool operator() (const NearFlag& a, const NearFlag& b) const {
+	bool operator() (NearFlag const & a, NearFlag const & b) const {
 		return a.distance < b.distance;
 	}
 };
 
-bool DefaultAI::improve_roads (Flag* flag)
+bool DefaultAI::improve_roads (Flag & flag)
 {
 	std::priority_queue<NearFlag> queue;
 	std::vector<NearFlag> nearflags;
@@ -1110,21 +1106,22 @@ bool DefaultAI::improve_roads (Flag* flag)
 		NearFlag & nf = nearflags.back();
 
 		for (uint8_t i = 1; i <= 6; ++i) {
-		Road* road=nf.flag->get_road(i);
+		Road * const road = nf.flag->get_road(i);
 
 		if (!road) continue;
 
-		Flag* endflag=road->get_flag(Road::FlagStart);
-		if (endflag==nf.flag)
+		Flag * endflag = road->get_flag(Road::FlagStart);
+		if (endflag == nf.flag)
 			endflag = road->get_flag(Road::FlagEnd);
 
 			int32_t dist =
-				map.calc_distance(flag->get_position(), endflag->get_position());
+				map.calc_distance(flag.get_position(), endflag->get_position());
 		if (dist > 16) //  out of range
 			continue;
 
 			queue.push
-				(NearFlag(endflag, nf.cost+road->get_path().get_nsteps(), dist));
+				(NearFlag
+				 	(*endflag, nf.cost + road->get_path().get_nsteps(), dist));
 		}
 	}
 
@@ -1140,7 +1137,7 @@ bool DefaultAI::improve_roads (Flag* flag)
 			Path & path = *new Path();
 			if
 				(map.findpath
-				 	(flag->get_position(), nf.flag->get_position(), 0, path, check)
+				 	(flag.get_position(), nf.flag->get_position(), 0, path, check)
 				 >=
 				 0
 				 and
@@ -1158,62 +1155,45 @@ bool DefaultAI::improve_roads (Flag* flag)
 }
 
 
-void DefaultAI::receive(const NoteImmovable& note)
+void DefaultAI::receive(NoteImmovable const & note)
 {
 	if (note.lg == LOSE)
-		lose_immovable(note.pi);
+		lose_immovable(*note.pi);
 	else
-		gain_immovable(note.pi);
+		gain_immovable(*note.pi);
 }
 
-void DefaultAI::receive(const NoteField& note)
+void DefaultAI::receive(NoteField const & note)
 {
 	if (note.lg == GAIN)
 		unusable_fields.push_back(note.fc);
 }
 
 // this is called whenever we gain ownership of a PlayerImmovable
-void DefaultAI::gain_immovable (PlayerImmovable* pi)
+void DefaultAI::gain_immovable (PlayerImmovable & pi)
 {
-	switch (pi->get_type()) {
-	case BaseImmovable::BUILDING:
-		gain_building (static_cast<Building*>(pi));
-		break;
-	case BaseImmovable::FLAG:
-		new_flags.push_back (static_cast<Flag*>(pi));
-		break;
-	case BaseImmovable::ROAD:
-		roads.push_front (static_cast<Road*>(pi));
-		break;
-	}
+	if      (upcast(Building,       building, &pi))
+		gain_building (*building);
+	else if (upcast(Flag     const, flag,     &pi))
+		new_flags.push_back  (flag);
+	else if (upcast(Road     const, road,     &pi))
+		roads    .push_front (road);
 }
 
 // this is called whenever we lose ownership of a PlayerImmovable
-void DefaultAI::lose_immovable (PlayerImmovable* pi)
+void DefaultAI::lose_immovable (PlayerImmovable const & pi)
 {
-	switch (pi->get_type()) {
-	case BaseImmovable::BUILDING:
-		lose_building (static_cast<Building*>(pi));
-		break;
-	case BaseImmovable::FLAG:
-		for
-			(std::list<EconomyObserver *>::iterator i = economies.begin();
-			 i!=economies.end();
-			 ++i)
-			for
-				(std::list<Flag *>::iterator j = (*i)->flags.begin();
-				 j != (*i)->flags.end();
-				 ++j)
-			if (*j==pi) {
-				(*i)->flags.erase (j);
-				break;
-			}
-
-		break;
-	case BaseImmovable::ROAD:
-		roads.remove (static_cast<Road*>(pi));
-		break;
-	}
+	if      (upcast(Building const, building, &pi))
+		lose_building (*building);
+	else if (upcast(Flag     const, flag,     &pi))
+		container_iterate_const(std::list<EconomyObserver *>, economies, i)
+			container_iterate(std::list<Flag const *>, (*i.current)->flags, j)
+				if (*j.current == flag) {
+					(*i.current)->flags.erase (j.current);
+					return;
+				}
+	else if (upcast(Road      const, road,     &pi))
+		roads.remove (road);
 }
 
 
@@ -1234,22 +1214,22 @@ bool CheckStepRoadAI::allowed
 	}
 
 	// Check for blocking immovables
-	BaseImmovable *imm = map->get_immovable(end);
-	if (imm && imm->get_size() >= BaseImmovable::SMALL) {
-		if (id!=CheckStep::stepLast && !openend)
-			return false;
+	if (BaseImmovable const * const imm = map->get_immovable(end))
+		if (imm->get_size() >= BaseImmovable::SMALL) {
+			if (id != CheckStep::stepLast && !openend)
+				return false;
 
-		if (imm->get_type()==Map_Object::FLAG)
-			return true;
+			if (dynamic_cast<Flag const *>(imm))
+				return true;
 
-		if ((imm->get_type() != Map_Object::ROAD || !(endcaps & BUILDCAPS_FLAG)))
-			return false;
-	}
+			if (not dynamic_cast<Road const *>(imm) || !(endcaps & BUILDCAPS_FLAG))
+				return false;
+		}
 
 	return true;
 }
 
-bool CheckStepRoadAI::reachabledest(Map* map, FCoords dest) const
+bool CheckStepRoadAI::reachabledest(Map* map, FCoords const dest) const
 {
 	uint8_t caps = dest.field->get_caps();
 
@@ -1288,55 +1268,42 @@ void DefaultAI::construct_roads ()
 		return;
 	}
 
-	for
-		(std::list<EconomyObserver *>::iterator i = economies.begin();
-		 i != economies.end();
-		 ++i)
-		for
-			(std::list<Flag *>::iterator j = (*i)->flags.begin();
-			 j != (*i)->flags.end();
-			 ++j)
+	container_iterate_const(std::list<EconomyObserver *>, economies, i)
+		container_iterate_const(std::list<Flag const *>, (*i.current)->flags, j)
 		{
 			queue.push (spots.size());
 
 			spots.push_back(WalkableSpot());
-			spots.back().coords  = (*j)->get_position();
+			spots.back().coords  = (*j.current)->get_position();
 			spots.back().hasflag = true;
 			spots.back().cost    = 0;
-			spots.back().eco     = (*i)->economy;
+			spots.back().eco     = &(*i.current)->economy;
 			spots.back().from    = -1;
 		}
 
-	for
-		(std::list<BuildableField *>::iterator i = buildable_fields.begin();
-		 i != buildable_fields.end();
-		 ++i)
-	{
+	container_iterate_const(std::list<BuildableField *>, buildable_fields, i) {
 		spots.push_back(WalkableSpot());
-		spots.back().coords=(*i)->coords;
-		spots.back().hasflag=false;
-		spots.back().cost=-1;
-		spots.back().eco=0;
-		spots.back().from=-1;
+		spots.back().coords  = (*i.current)->coords;
+		spots.back().hasflag = false;
+		spots.back().cost    = -1;
+		spots.back().eco     = 0;
+		spots.back().from    = -1;
 	}
 
-	for
-		(std::list<FCoords>::iterator i = unusable_fields.begin();
-		 i != unusable_fields.end();
-		 ++i)
-	{
-		if ((player->get_buildcaps(*i)&MOVECAPS_WALK)==0)
+
+	container_iterate_const(std::list<FCoords>, unusable_fields, i) {
+		if ((player->get_buildcaps(*i.current) & MOVECAPS_WALK) == 0)
 			continue;
 
-		if (BaseImmovable * const imm = map.get_immovable(*i)) {
+		if (BaseImmovable * const imm = map.get_immovable(*i.current)) {
 			if (upcast(Road, road, imm)) {
-				if ((player->get_buildcaps(*i) & BUILDCAPS_FLAG) == 0)
+				if ((player->get_buildcaps(*i.current) & BUILDCAPS_FLAG) == 0)
 					continue;
 
 				queue.push (spots.size());
 
 				spots.push_back(WalkableSpot());
-				spots.back().coords  = *i;
+				spots.back().coords  = *i.current;
 				spots.back().hasflag = false;
 				spots.back().cost    = 0;
 				spots.back().eco = road->get_flag(Road::FlagStart)->get_economy();
@@ -1349,11 +1316,11 @@ void DefaultAI::construct_roads ()
 		}
 
 		spots.push_back(WalkableSpot());
-		spots.back().coords=*i;
-		spots.back().hasflag=false;
-		spots.back().cost=-1;
-		spots.back().eco=0;
-		spots.back().from=-1;
+		spots.back().coords  = *i.current;
+		spots.back().hasflag = false;
+		spots.back().cost    = -1;
+		spots.back().eco     = 0;
+		spots.back().from    = -1;
 	}
 
 	const clock_t time_before = clock();
@@ -1367,7 +1334,8 @@ void DefaultAI::construct_roads ()
 				if (spots[k].coords == nc)
 					break;
 
-			spots[i].neighbours[j]=(k<static_cast<int32_t>(spots.size())) ? k : -1;
+			spots[i].neighbours[j] =
+				k < static_cast<int32_t>(spots.size()) ? k : -1;
 		}
 
 	log
@@ -1384,8 +1352,8 @@ void DefaultAI::construct_roads ()
 
 			if (to.cost < 0) {
 				to.cost = from.cost + 1;
-				to.eco=from.eco;
-				to.from=&from - &spots.front();
+				to.eco  = from.eco;
+				to.from = &from - &spots.front();
 
 				queue.push (&to - &spots.front());
 				continue;
@@ -1410,7 +1378,7 @@ void DefaultAI::construct_roads ()
 				pc.push_front (from.coords);
 				i = from.from;
 				hasflag = from.hasflag;
-				while (i>=0) {
+				while (i >= 0) {
 					pc.push_front (spots[i].coords);
 					hasflag = spots[i].hasflag;
 					i = spots[i].from;
@@ -1429,7 +1397,8 @@ void DefaultAI::construct_roads ()
 					(std::list<Coords>::iterator c = pc.begin(); c != pc.end(); ++c)
 				{
 					const int32_t n = map.is_neighbour(path.get_end(), *c);
-					assert (n>=1 && n<=6);
+					assert (1 <= n);
+					assert      (n <= 6);
 
 					path.append (map, n);
 					assert (path.get_end() == *c);

@@ -45,10 +45,12 @@ struct Coords {
 	/// Returns a special value indicating invalidity.
 	static Coords Null() throw () {return Coords(-1, -1);}
 
-	bool operator==(const Coords other) const throw ()
-	{return x == other.x and y == other.y;}
-	bool operator!=(const Coords other) const throw ()
-	{return not (*this == other);}
+	bool operator== (Coords const other) const throw () {
+		return x == other.x and y == other.y;
+	}
+	bool operator!= (Coords const other) const throw () {
+		return not (*this == other);
+	}
 
 	__attribute__((deprecated)) bool is_valid () const throw ()
 	{return x != -1 and y != -1;}
@@ -82,10 +84,12 @@ struct Area : public _Coords_type
 		: Coords_type(center), radius(Radius)
 	{}
 
-	bool operator==(const Area other) const throw ()
-	{return Coords_type::operator==(other) and radius == other.radius;}
-	bool operator!=(const Area other) const throw ()
-	{return Coords_type::operator!=(other) or  radius != other.radius;}
+	bool operator== (Area const other) const throw () {
+		return Coords_type::operator== (other) and radius == other.radius;
+	}
+	bool operator!= (Area const other) const throw () {
+		return Coords_type::operator!= (other) or  radius != other.radius;
+	}
 
 	Radius_type radius;
 };
@@ -96,10 +100,13 @@ template <typename Area_type = Area<> > struct HollowArea : public Area_type {
 		: Area_type(area), hole_radius(Hole_Radius)
 	{}
 
-	bool operator==(const HollowArea other) const throw ()
-	{return Area_type::operator==(other) and hole_radius == other.hole_radius;}
-	bool operator!=(const HollowArea other) const throw ()
-	{return not (*this == other);}
+	bool operator== (HollowArea const other) const throw () {
+		return
+			Area_type::operator== (other) and hole_radius == other.hole_radius;
+	}
+	bool operator!= (HollowArea const other) const throw () {
+		return not (*this == other);
+	}
 
 	typename Area_type::Radius_type hole_radius;
 };
@@ -131,10 +138,12 @@ template <typename Coords_type = Coords> struct TCoords : public Coords_type {
 		: Coords_type(C), t(T)
 	{}
 
-	bool operator==(const TCoords other) const throw ()
-	{return Coords_type::operator==(other) and t == other.t;}
-	bool operator!=(const TCoords other) const throw ()
-	{return Coords_type::operator!=(other) or  t != other.t;}
+	bool operator== (TCoords const other) const throw () {
+		return Coords_type::operator== (other) and t == other.t;
+	}
+	bool operator!= (TCoords const other) const throw () {
+		return Coords_type::operator!= (other) or  t != other.t;
+	}
 
 	TriangleIndex t;
 };
@@ -151,10 +160,12 @@ struct Node_and_Triangle {
 			: node(Node), triangle(Triangle)
 	{}
 
-	bool operator==(const Node_and_Triangle<> other) const throw ()
-	{return node == other.node and triangle == other.triangle;}
-	bool operator!=(const Node_and_Triangle<> other) const throw ()
-	{return not (*this == other);}
+	bool operator== (Node_and_Triangle<> const other) const throw () {
+		return node == other.node and triangle == other.triangle;
+	}
+	bool operator!= (Node_and_Triangle<> const other) const throw () {
+		return not (*this == other);
+	}
 
 	Node_Coords_type              node;
 	TCoords<Triangle_Coords_type> triangle;

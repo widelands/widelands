@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -339,7 +339,7 @@ void Map::cleanup() {
 		Manager<Event>::Index nr_events = mem().size();
 		for (Manager<Trigger>::Index e_idx = 0; e_idx < nr_events; ++e_idx) {
 			Trigger const & event = mtm()[e_idx];
-			Trigger::Referencers const referencers =event.referencers();
+			Trigger::Referencers const referencers = event.referencers();
 			container_iterate_const(Trigger::Referencers, referencers, i)
 				log
 					("ERROR: event %s is still referenced by %s\n",
@@ -351,7 +351,7 @@ void Map::cleanup() {
 		Manager<Trigger>::Index nr_triggers = mtm().size();
 		for (Manager<Trigger>::Index t_idx = 0; t_idx < nr_triggers; ++t_idx) {
 			Trigger const & trigger = mtm()[t_idx];
-			Trigger::Referencers const referencers =trigger.referencers();
+			Trigger::Referencers const referencers = trigger.referencers();
 			container_iterate_const(Trigger::Referencers, referencers, i)
 				log
 					("ERROR: trigger %s is still referenced by %s\n",
@@ -428,9 +428,9 @@ void Map::set_size(const uint32_t w, const uint32_t h)
 	m_height = h;
 
 	m_fields = static_cast<Field *>(malloc(sizeof(Field) * w * h));
-	memset(m_fields, 0, sizeof(Field)*w*h);
+	memset(m_fields, 0, sizeof(Field) * w * h);
 
-	m_pathfieldmgr->setSize(w*h);
+	m_pathfieldmgr->setSize(w * h);
 
 	if (not m_overlay_manager) m_overlay_manager = new Overlay_Manager();
 }
@@ -509,7 +509,7 @@ void Map::set_starting_pos(Player_Number const plnum, Coords const c)
 	assert(1 <= plnum);
 	assert     (plnum <= get_nrplayers());
 
-	m_starting_pos[plnum-1] = c;
+	m_starting_pos[plnum - 1] = c;
 }
 
 /*
@@ -605,18 +605,18 @@ template<typename functorT>
 void Map::find_reachable
 	(Area<FCoords> const area, CheckStep const & checkstep, functorT & functor)
 {
-	std::vector<Field*> queue;
+	std::vector<Field *> queue;
 	boost::shared_ptr<Pathfields> pathfields = m_pathfieldmgr->allocate();
 
 	queue.push_back(area.field);
 
 	while (queue.size()) {
-		Pathfield* curpf;
+		Pathfield * curpf;
 		FCoords cur;
 
 		// Pop the last item from the queue
 		cur.field = queue[queue.size() - 1];
-		curpf = &pathfields->fields[cur.field-m_fields];
+		curpf = &pathfields->fields[cur.field - m_fields];
 		get_coords(*cur.field, cur);
 		queue.pop_back();
 
@@ -630,7 +630,7 @@ void Map::find_reachable
 			FCoords neighb;
 
 			get_neighbour(cur, dir, &neighb);
-			neighbpf = &pathfields->fields[neighb.field-m_fields];
+			neighbpf = &pathfields->fields[neighb.field - m_fields];
 
 			// Have we already visited this field?
 			if (neighbpf->cycle == pathfields->cycle)
@@ -682,7 +682,7 @@ The actual logic behind find_bobs and find_reachable_bobs.
 ===============
 */
 struct FindBobsCallback {
-	FindBobsCallback(std::vector<Bob*>* list, const FindBob& functor)
+	FindBobsCallback(std::vector<Bob *> * const list, FindBob const & functor)
 		: m_list(list), m_functor(functor), m_found(0) {}
 
 	void operator()(const Map &, const FCoords cur) {
@@ -766,11 +766,12 @@ The actual logic behind find_immovables and find_reachable_immovables.
 ===============
 */
 struct FindImmovablesCallback {
-	FindImmovablesCallback(std::vector<ImmovableFound>* list, const FindImmovable& functor)
+	FindImmovablesCallback
+		(std::vector<ImmovableFound> * const list, FindImmovable const & functor)
 		: m_list(list), m_functor(functor), m_found(0) {}
 
 	void operator()(const Map &, const FCoords cur) {
-		BaseImmovable *imm = cur.field->get_immovable();
+		BaseImmovable * const imm = cur.field->get_immovable();
 
 		if (!imm)
 			return;
@@ -851,7 +852,7 @@ uint32_t Map::find_reachable_immovables
  */
 uint32_t Map::find_reachable_immovables_unique
 	(const Area<FCoords> area,
-	 std::vector<BaseImmovable*> * list,
+	 std::vector<BaseImmovable *> * list,
 	 const CheckStep & checkstep,
 	 const FindImmovable & functor)
 {
@@ -865,7 +866,7 @@ uint32_t Map::find_reachable_immovables_unique
 		 it != duplist.end();
 		 ++it)
 	{
-		BaseImmovable* obj = it->object;
+		BaseImmovable * const obj = it->object;
 		if (std::find(list->begin(), list->end(), obj) == list->end()) {
 			if (functor.accept(obj))
 				list->push_back(obj);
@@ -883,7 +884,8 @@ The actual logic behind find_fields and find_reachable_fields.
 ===============
 */
 struct FindNodesCallback {
-	FindNodesCallback(std::vector<Coords>* list, const FindNode& functor)
+	FindNodesCallback
+		(std::vector<Coords> * const list, FindNode const & functor)
 		: m_list(list), m_functor(functor), m_found(0) {}
 
 	void operator()(const Map & map, const FCoords cur) {
@@ -1528,11 +1530,14 @@ static int32_t calc_cost_d(int32_t slope)
 	return CALC_COST_D(slope);
 }
 
-int32_t Map::calc_cost(int32_t slope) const
+int32_t Map::calc_cost(int32_t const slope) const
 {
-	int32_t f = 2*SLOPE_COST_DIVISOR + calc_cost_d(slope) - CALC_COST_D(0);
-
-	return (BASE_COST_PER_FIELD * f) / (2*SLOPE_COST_DIVISOR);
+	return
+		BASE_COST_PER_FIELD
+		*
+		(2 * SLOPE_COST_DIVISOR + calc_cost_d(slope) - CALC_COST_D(0))
+		/
+		(2 * SLOPE_COST_DIVISOR);
 }
 
 
@@ -1655,7 +1660,7 @@ void Map::get_neighbour
 /**
  * Returns the correct initialized loader for the given mapfile
 */
-Map_Loader* Map::get_correct_loader(const char* filename) {
+Map_Loader * Map::get_correct_loader(char const * const filename) {
 	Map_Loader * result = 0;
 
 	if
@@ -1687,7 +1692,7 @@ Map_Loader* Map::get_correct_loader(const char* filename) {
  * Provides the flexible priority queue to maintain the open list.
  */
 class StarQueue {
-	std::vector<Pathfield*> m_data;
+	std::vector<Pathfield *> m_data;
 
 public:
 	void flush() {m_data.clear();}
@@ -1704,18 +1709,18 @@ public:
 	//       put slot[_size] in its place and stop
 	//     if only the left child is there
 	//       arrange left child and slot[_size] correctly and stop
-	Pathfield* pop()
+	Pathfield * pop()
 	{
 		if (m_data.empty())
 			return 0;
 
-		Pathfield* head = m_data[0];
+		Pathfield * const head = m_data[0];
 
-		uint32_t nsize = m_data.size()-1;
+		uint32_t nsize = m_data.size() - 1;
 		uint32_t fix = 0;
 		while (fix < nsize) {
-			uint32_t l = fix*2 + 1;
-			uint32_t r = fix*2 + 2;
+			uint32_t l = fix * 2 + 1;
+			uint32_t r = fix * 2 + 2;
 			if (l >= nsize) {
 				m_data[fix] = m_data[nsize];
 				m_data[fix]->heap_index = fix;
@@ -1812,8 +1817,8 @@ public:
 	// Recursively check integrity
 	void debug(uint32_t node, const char *str)
 	{
-		uint32_t l = node*2 + 1;
-		uint32_t r = node*2 + 2;
+		uint32_t l = node * 2 + 1;
+		uint32_t r = node * 2 + 2;
 		if (m_data[node]->heap_index != static_cast<int32_t>(node)) {
 			fprintf(stderr, "%s: heap_index integrity!\n", str);
 			exit(-1);
@@ -1904,7 +1909,7 @@ int32_t Map::findpath
 	StarQueue Open;
 	Pathfield *curpf;
 
-	curpf = &pathfields->fields[start.field-m_fields];
+	curpf = &pathfields->fields[start.field - m_fields];
 	curpf->cycle = pathfields->cycle;
 	curpf->real_cost = 0;
 	curpf->estim_cost = calc_cost_lowerbound(start, end);
@@ -1914,7 +1919,7 @@ int32_t Map::findpath
 
 	while ((curpf = Open.pop()))
 	{
-		cur.field = m_fields + (curpf-pathfields->fields.get());
+		cur.field = m_fields + (curpf - pathfields->fields.get());
 		get_coords(*cur.field, cur);
 
 		if (upper_cost_limit && curpf->real_cost > upper_cost_limit)
@@ -1942,7 +1947,7 @@ int32_t Map::findpath
 			int32_t cost;
 
 			get_neighbour(cur, *direction, &neighb);
-			neighbpf = &pathfields->fields[neighb.field-m_fields];
+			neighbpf = &pathfields->fields[neighb.field - m_fields];
 
 			// Is the field Closed already?
 			if (neighbpf->cycle == pathfields->cycle && neighbpf->heap_index < 0)
@@ -1976,7 +1981,7 @@ int32_t Map::findpath
 				neighbpf->estim_cost = calc_cost_lowerbound(neighb, end);
 				neighbpf->backlink = *direction;
 				Open.push(neighbpf);
-			} else if (neighbpf->cost() > cost+neighbpf->estim_cost) {
+			} else if (neighbpf->cost() > cost + neighbpf->estim_cost) {
 				// found a better path to a field that's already Open
 				neighbpf->real_cost = cost;
 				neighbpf->backlink = *direction;
@@ -2000,7 +2005,7 @@ int32_t Map::findpath
 
 		// Reverse logic! (WALK_NW needs to find the SE neighbour)
 		get_neighbour(cur, get_reverse_dir(curpf->backlink), &cur);
-		curpf = &pathfields->fields[cur.field-m_fields];
+		curpf = &pathfields->fields[cur.field - m_fields];
 	}
 
 	return result;
@@ -2177,12 +2182,12 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 		const int32_t diff = height - f.get_height();
 		if (diff > MAX_FIELD_HEIGHT_DIFF) {
 			++area;
-			f.set_height(height-MAX_FIELD_HEIGHT_DIFF);
+			f.set_height(height - MAX_FIELD_HEIGHT_DIFF);
 			check[i] = true;
 		}
 		if (diff < -MAX_FIELD_HEIGHT_DIFF) {
 			++area;
-			f.set_height(height+MAX_FIELD_HEIGHT_DIFF);
+			f.set_height(height + MAX_FIELD_HEIGHT_DIFF);
 			check[i] = true;
 		}
 	}
@@ -2230,10 +2235,9 @@ bool FindBobAttribute::accept(Bob *bob) const
 
 bool FindBobEnemySoldier::accept(Bob *imm) const
 {
-	if (upcast(Soldier, soldier, imm)) {
+	if (upcast(Soldier, soldier, imm))
 		if (soldier->isOnBattlefield() && soldier->get_owner() != player)
 			return true;
-	}
 
 	return false;
 }
@@ -2360,8 +2364,8 @@ Truncate the path after the given number of steps
 void CoordPath::truncate(const std::vector<char>::size_type after) {
 	assert(after <= m_path.size());
 
-	m_path.erase(m_path.begin()+after, m_path.end());
-	m_coords.erase(m_coords.begin()+after+1, m_coords.end());
+	m_path.erase(m_path.begin() + after, m_path.end());
+	m_coords.erase(m_coords.begin() + after + 1, m_coords.end());
 }
 
 /*
@@ -2374,8 +2378,8 @@ Opposite of truncate: remove the first n steps of the path.
 void CoordPath::starttrim(const std::vector<char>::size_type before) {
 	assert(before <= m_path.size());
 
-	m_path.erase(m_path.begin(), m_path.begin()+before);
-	m_coords.erase(m_coords.begin(), m_coords.begin()+before);
+	m_path.erase(m_path.begin(), m_path.begin() + before);
+	m_coords.erase(m_coords.begin(), m_coords.begin() + before);
 }
 
 /*
@@ -2412,7 +2416,8 @@ void CoordPath::append(const CoordPath &tail)
 	assert(tail.get_start() == get_end());
 
 	m_path.insert(m_path.end(), tail.m_path.begin(), tail.m_path.end());
-	m_coords.insert(m_coords.end(), tail.m_coords.begin()+1, tail.m_coords.end());
+	m_coords.insert
+		(m_coords.end(), tail.m_coords.begin() + 1, tail.m_coords.end());
 }
 
 };

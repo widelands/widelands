@@ -56,7 +56,7 @@ private:
 
 	template<typename T>
 	struct Capsule : public BaseCapsule {
-		Capsule(const T& _m) : m(_m) {}
+		Capsule(T const & _m) : m(_m) {}
 
 		bool check(Map_Object const * const obj) const {
 			return m.check(obj);
@@ -66,9 +66,7 @@ private:
 			m.write(fw, egbase, mos);
 		}
 
-		const RequirementsStorage& storage() const {
-			return T::storage;
-		}
+		RequirementsStorage const & storage() const {return T::storage;}
 
 		T m;
 	};
@@ -76,9 +74,7 @@ private:
 public:
 	Requirements() {}
 
-	template<typename T>
-	Requirements(const T& req)
-		: m(new Capsule<T>(req)) {}
+	template<typename T> Requirements(T const & req) : m(new Capsule<T>(req)) {}
 
 	/**
 	 * \return \c true if the object satisfies the requirements.
@@ -132,7 +128,7 @@ private:
  * is met. Defaults to \c false if no sub-requirement is added.
  */
 struct RequireOr {
-	void add(const Requirements& req);
+	void add(Requirements const &);
 
 	bool check(Map_Object const *) const;
 	void write(FileWrite *, Editor_Game_Base * egbase, Map_Map_Object_Saver *) const;
@@ -149,7 +145,7 @@ private:
  * Defaults to \c true if no sub-requirement is added.
  */
 struct RequireAnd {
-	void add(const Requirements& req);
+	void add(Requirements const &);
 
 	bool check(Map_Object const *) const;
 	void write(FileWrite *, Editor_Game_Base * egbase, Map_Map_Object_Saver *) const;
@@ -165,7 +161,8 @@ private:
  * Require that a \ref tAttribute lies in the given, inclusive, range.
  */
 struct RequireAttribute {
-	RequireAttribute(tAttribute _at, int32_t _min, int32_t _max)
+	RequireAttribute
+		(tAttribute const _at, int32_t const _min, int32_t const _max)
 		: at(_at), min(_min), max(_max) {}
 
 	bool check(Map_Object const *) const;

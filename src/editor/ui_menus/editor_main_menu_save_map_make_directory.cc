@@ -28,7 +28,9 @@
 #include "ui_window.h"
 
 
-Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory(UI::Panel* parent, const char* dirname) :
+Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory
+(UI::Panel * const parent, char const * dirname)
+:
 UI::Window(parent, 0, 0, 230, 120, _("Make Directory"))
 {
 	int32_t const spacing =  5;
@@ -88,6 +90,6 @@ void Main_Menu_Save_Map_Make_Directory::edit_changed() {
 	std::string const & text = m_edit->text();
 	if (text.size()) {
 		m_ok_button->set_enabled(true);
-		m_dirname=text;
+		m_dirname = text;
 	}
 }

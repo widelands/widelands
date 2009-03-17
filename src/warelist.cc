@@ -97,7 +97,7 @@ WareList::count_type WareList::stock(Ware_Index const id) const {
  * Two WareLists are only equal when they contain the exact same stock of
  * all wares types.
 */
-bool WareList::operator==(const WareList &wl) const
+bool WareList::operator== (WareList const & wl) const
 {
 	uint32_t i = 0;
 

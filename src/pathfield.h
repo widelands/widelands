@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,7 +68,7 @@ struct PathfieldManager {
 	boost::shared_ptr<Pathfields> allocate();
 
 private:
-	void clear(const boost::shared_ptr<Pathfields>& pf);
+	void clear(boost::shared_ptr<Pathfields> const & pf);
 
 	typedef std::vector<boost::shared_ptr<Pathfields> > List;
 

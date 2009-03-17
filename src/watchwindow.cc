@@ -65,8 +65,8 @@ struct WatchWindow : public UI::Window {
 	void act_mainview_goto();
 
 	void add_view(Widelands::Coords);
-	void next_view(bool first=false);
-	void show_view(bool first=false);
+	void next_view(bool first = false);
+	void show_view(bool first = false);
 	Point calc_coords(Widelands::Coords);
 	void save_coords();
 	void set_view(int32_t index);
@@ -179,14 +179,14 @@ Point WatchWindow::calc_coords(Widelands::Coords const coords) {
 }
 
 //Switch to next view
-void WatchWindow::next_view(bool first) {
+void WatchWindow::next_view(bool const first) {
 	if (!first && m_views.size() == 1)
 		return;
 	if (!first)
 		save_coords();
-	if (first || (static_cast<uint32_t>(m_cur_index) == m_views.size()-1 && m_cur_index != 0))
+	if (first || (static_cast<uint32_t>(m_cur_index) == m_views.size() - 1 && m_cur_index != 0))
 		m_cur_index = 0;
-	else if (static_cast<uint32_t>(m_cur_index) < m_views.size()-1)
+	else if (static_cast<uint32_t>(m_cur_index) < m_views.size() - 1)
 		++m_cur_index;
 	show_view(first);
 }
@@ -399,15 +399,15 @@ Open a watch window.
 void show_watch_window
 	(Interactive_Player & parent, Widelands::Coords const coords)
 {
-	WatchWindow* win;
+	WatchWindow * win;
 	if (g_options.pull_section("global").get_bool("single_watchwin", false)) {
 		if (g_watch_window != NULL)
 			g_watch_window->add_view(coords);
 		else
-			g_watch_window = new WatchWindow(parent, 250, 150, 200, 200, coords, true);
+			g_watch_window =
+				new WatchWindow(parent, 250, 150, 200, 200, coords, true);
 		win = g_watch_window;
-	}
-	else
+	} else
 		win = new WatchWindow(parent, 250, 150, 200, 200, coords, false);
 	win->closed.set(&parent, &Interactive_Player::need_complete_redraw);
 }

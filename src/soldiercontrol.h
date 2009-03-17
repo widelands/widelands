@@ -42,12 +42,12 @@ struct SoldierControl {
 	/**
 	 * \return a list of soldiers that are currently present in the building.
 	 */
-	virtual std::vector<Soldier*> presentSoldiers() const = 0;
+	virtual std::vector<Soldier *> presentSoldiers() const = 0;
 
 	/**
 	 * \return a list of soldiers that are currently stationed in the building.
 	 */
-	virtual std::vector<Soldier*> stationedSoldiers() const = 0;
+	virtual std::vector<Soldier *> stationedSoldiers() const = 0;
 
 	/**
 	 * \return the minimum number of soldiers that this building can be

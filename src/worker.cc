@@ -86,7 +86,6 @@ bool Worker::run_createitem(Game* g, State* state, const Action* action)
  * it (in a radius of action.iparam1 around current location)
  *
  * \todo Lots of magic numbers in here
- * \todo Document parameters g and state
  */
 bool Worker::run_mine(Game* g, State* state, const Action* action)
 {
@@ -149,7 +148,7 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 		if (fres != res)
 			amount = 0;
 
-		pick -= 8*amount;
+		pick -= 8 * amount;
 		if (pick < 0) {
 			assert(amount > 0);
 
@@ -250,7 +249,7 @@ bool Worker::run_breed(Game* g, State* state, const Action* action)
 		if (fres != res)
 			amount = 0;
 
-		pick -= 8*amount;
+		pick -= 8 * amount;
 		if (pick < 0) {
 			assert(amount > 0);
 
@@ -412,7 +411,7 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
 				pop_task(g);
 				return true;
 			}
-			std::vector<Bob*> list;
+			std::vector<Bob *> list;
 			if (action->iparam2 < 0)
 				map.find_reachable_bobs
 					(area, &list, cstep);
@@ -462,7 +461,7 @@ bool Worker::run_findobject(Game* g, State* state, const Action* action)
  * sparam1 = Resource
  */
 struct FindNodeSpace {
-	FindNodeSpace(BaseImmovable* ignoreimm)
+	FindNodeSpace(BaseImmovable * const ignoreimm)
 		: ignoreimmovable(ignoreimm) {}
 
 	bool accept(const Map& map, const FCoords& coords) const {
@@ -482,7 +481,7 @@ struct FindNodeSpace {
 	}
 
 private:
-	BaseImmovable* ignoreimmovable;
+	BaseImmovable * ignoreimmovable;
 };
 
 bool Worker::run_findspace(Game* g, State* state, const Action* action)
@@ -834,20 +833,15 @@ void Worker::log_general_info(Editor_Game_Base* egbase)
 {
 	Bob::log_general_info(egbase);
 
-	PlayerImmovable* loc=static_cast<PlayerImmovable*>(m_location.get(egbase));
-
-	molog("m_location: %p\n", loc);
-	if (loc) {
-		molog("* Owner: (%p)\n", loc->get_owner());
-		molog("** Owner (plrnr): %i\n", loc->get_owner()->get_player_number());
+	if (upcast(PlayerImmovable, loc, m_location.get(egbase))) {
+		molog("* Owner: (%p)\n", &loc->owner());
+		molog("** Owner (plrnr): %i\n", loc->owner().get_player_number());
 		molog("* Economy: %p\n", loc->get_economy());
 	}
 
 	molog("Economy: %p\n", m_economy);
 
-	WareInstance* ware=static_cast<WareInstance*>(m_carried_item.get(egbase));
-	molog("m_carried_item: %p\n", ware);
-	if (ware) {
+	if (upcast(WareInstance, ware, m_carried_item.get(egbase))) {
 		molog
 			("* m_carried_item->get_ware() (id): %i\n",
 			 ware->descr_index().value());
@@ -1066,9 +1060,8 @@ void Worker::create_needed_experience(Game & game)
  */
 Ware_Index Worker::gain_experience(Game & game) {
 	return
-		m_needed_exp == -1              ? Ware_Index::Null() :
-		++m_current_exp == m_needed_exp ? level(game)          :
-		Ware_Index::Null();
+		m_needed_exp == -1 or ++m_current_exp < m_needed_exp ?
+		Ware_Index::Null() : level(game);
 }
 
 
@@ -2212,7 +2205,7 @@ void Worker::geologist_update(Game* g, State* state)
 			// Only run towards fields that are on a mountain (or not)
 			// depending on position of center
 			bool is_target_mountain;
-			uint32_t n=list.size();
+			uint32_t n = list.size();
 			uint32_t i=g->logic_rand() % list.size();
 			do {
 				target =
@@ -2225,7 +2218,8 @@ void Worker::geologist_update(Game* g, State* state)
 					(world.terrain_descr(target.field->terrain_r()).get_is()
 					 &
 					 TERRAIN_MOUNTAIN);
-				if (i==0) i=list.size();
+				if (i == 0)
+					i = list.size();
 				--i;
 				--n;
 			} while ((is_center_mountain != is_target_mountain) && n);

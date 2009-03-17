@@ -206,7 +206,7 @@ void Map_Players_View_Data_Packet::Read
 
 					f_player_field.time_node_last_unseen = gametime;
 
-					if (f_vision) {//  node
+					if (f_vision) { //  node
 						//  owner
 						f_player_field.owner = f.field->get_owned_by();
 						assert(f_player_field.owner < 0x20);
@@ -231,7 +231,7 @@ void Map_Players_View_Data_Packet::Read
 							map_object_descr;
 					}
 
-					{//  triangles
+					{ //  triangles
 						//  Must be initialized because the rendering code is
 						//  accessing it even for triangles that the player does not
 						//  see (it is the darkening that actually hides the ground
@@ -248,7 +248,7 @@ void Map_Players_View_Data_Packet::Read
 						f_player_field.terrains = terrains;
 					}
 
-					{//  edges
+					{ //  edges
 						uint8_t mask = 0;
 						if (f_vision | bl_vision) mask  = Road_Mask << Road_SouthWest;
 						if (f_vision | br_vision) mask |= Road_Mask << Road_SouthEast;
@@ -512,7 +512,7 @@ void Map_Players_View_Data_Packet::Read
 						 triangle_immovable_kinds_file, triangle_immovables_file);
 				}
 
-				{//  edges
+				{ //  edges
 					uint8_t mask = 0;
 					if (f_seen | bl_seen) mask  = Road_Mask << Road_SouthWest;
 					else if (f_everseen | bl_everseen)
@@ -730,7 +730,7 @@ throw (_wexception)
 
 					if (not f_seen) {
 
-						if (f_everseen) {//  node
+						if (f_everseen) { //  node
 							unseen_times_file.Unsigned32
 								(f_player_field.time_node_last_unseen);
 							assert(f_player_field.owner < 0x20);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,12 +26,12 @@
 namespace Widelands {
 
 
-FindNodeAnd::Subfunctor::Subfunctor(const FindNode& _ff, bool _negate)
+FindNodeAnd::Subfunctor::Subfunctor(FindNode const & _ff, bool const _negate)
 	: negate(_negate), findfield(_ff)
 {
 }
 
-void FindNodeAnd::add(const FindNode& findfield, bool negate)
+void FindNodeAnd::add(FindNode const & findfield, bool const negate)
 {
 	m_subfunctors.push_back(Subfunctor(findfield, negate));
 }
@@ -100,12 +100,9 @@ bool FindNodeImmovableSize::accept(const Map &, const FCoords& coord) const {
 
 bool FindNodeImmovableAttribute::accept(const Map &, const FCoords& coord) const
 {
-	BaseImmovable* imm = coord.field->get_immovable();
-
-	if (!imm)
-		return false;
-
-	return imm->has_attribute(m_attribute);
+	if (BaseImmovable * const imm = coord.field->get_immovable())
+		return imm->has_attribute(m_attribute);
+	return false;
 }
 
 

@@ -49,7 +49,7 @@ struct StreamRead {
 	 * \return the number of bytes that were actually read. Will return 0 at
 	 * end of stream.
 	 */
-	virtual size_t Data(void* const data, const size_t bufsize) = 0;
+	virtual size_t Data(void * const data, size_t bufsize) = 0;
 
 	/**
 	 * \return \c true if the end of file / end of stream has been reached.
@@ -75,8 +75,8 @@ struct StreamRead {
 #define data_error(...) _data_error(__VA_ARGS__)
 
 private:
-	StreamRead & operator=(StreamRead const &);
-	explicit StreamRead   (StreamRead const &);
+	StreamRead & operator= (StreamRead const &);
+	explicit StreamRead    (StreamRead const &);
 };
 
 #endif

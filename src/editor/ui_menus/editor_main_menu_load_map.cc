@@ -94,7 +94,8 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 	new UI::Textarea
 		(this, posx, posy, 70, 20, _("Players: "), Align_CenterLeft);
 	m_nrplayers =
-		new UI::Textarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
+		new UI::Textarea
+			(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
 	posy += 20 + spacing;
 
 
@@ -262,7 +263,7 @@ void Main_Menu_Load_Map::fill_list() {
 					 	(PicMod_Game,
 					 	 dynamic_cast<WL_Map_Loader const *>(m_ml) ?
 					 	 "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
-			} catch (_wexception&) {} //  we simply skip illegal entries
+			} catch (_wexception const &) {} //  we simply skip illegal entries
 			delete m_ml;
 		}
 	}

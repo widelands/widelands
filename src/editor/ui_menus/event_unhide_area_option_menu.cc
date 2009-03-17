@@ -167,10 +167,10 @@ m_player_area(event.m_player_area)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, this, 14);
 
-	new UI::Textarea(this, spacing, posy+20, 20, 20, "Y: ", Align_CenterLeft);
+	new UI::Textarea(this, spacing, posy + 20, 20, 20, "Y: ", Align_CenterLeft);
 	m_y_ta =
 		new UI::Textarea
-		(this, spacing+20, posy+20, 20, 20, "Y: ", Align_CenterLeft);
+		(this, spacing + 20, posy + 20, 20, 20, "Y: ", Align_CenterLeft);
 	spacing = oldspacing;
 
 	posy += 60 + spacing;
@@ -181,14 +181,14 @@ m_player_area(event.m_player_area)
 
 	new UI::IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
-		 spacing+90, posy, 20, 20,
+		 spacing + 90, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, this, 15);
 
 	new UI::IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
-		 spacing+110, posy, 20, 20,
+		 spacing + 110, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, this, 16);
@@ -282,7 +282,7 @@ bool Event_Unhide_Area_Option_Menu::handle_mouserelease(const Uint8, int32_t, in
 
 
 void Event_Unhide_Area_Option_Menu::clicked_ok() {
-	const std::string& name = m_name->text();
+	std::string const & name = m_name->text();
 	if (name.size()) {
 		if
 			(Widelands::Event * const registered_event =

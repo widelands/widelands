@@ -52,7 +52,12 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 	int32_t       posy    = offsy;
 	UI::Textarea * ta =
 		new UI::Textarea(this, posx, posy - 2, _("Map Name:"), Align_Left);
-	m_name=new UI::EditBox(this, posx+ta->get_w()+spacing, posy, get_inner_w()-(posx+ta->get_w()+spacing)-spacing, 20, 1, 0);
+	m_name =
+		new UI::EditBox
+			(this,
+			 posx + ta->get_w() + spacing, posy,
+			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
+			 1, 0);
 	m_name->changedid.set(this, &Main_Menu_Map_Options::changed);
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("Size:"));
@@ -72,11 +77,11 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 		 posx + ta->get_w() + spacing, posy - 2,
 		 "\"Greenland\"", Align_Left);
 	posy += height + spacing;
-	ta = new UI::Textarea(this, posx, posy-2, _("Author:"), Align_Left);
+	ta = new UI::Textarea(this, posx, posy - 2, _("Author:"), Align_Left);
 	m_author =
 		new UI::EditBox
 		(this,
-		 posx + ta->get_w()+spacing, posy,
+		 posx + ta->get_w() + spacing, posy,
 		 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20, 1, 1);
 	m_author->changedid.set(this, &Main_Menu_Map_Options::changed);
 	posy += height + spacing;

@@ -143,7 +143,7 @@ public:
 	virtual bool fetch_from_flag(Game* g);
 	virtual bool get_building_work(Game* g, Worker* w, bool success);
 
-	virtual void set_economy(Economy* e);
+	virtual void set_economy(Economy *);
 
 	std::vector<WaresQueue *> const & warequeues() const {
 		return m_input_queues;
@@ -201,7 +201,7 @@ protected:  // TrainingSite must have access to this stuff
 	int32_t                      m_post_timer;    ///< Time to schedule after ends
 
 	ProductionProgram::ActProduce::Items m_produced_items;
-	std::vector<WaresQueue*> m_input_queues; ///< input queues for all inputs
+	std::vector<WaresQueue *> m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
 	bool                     m_statistics_changed;
 	char                     m_statistics_buf[40];

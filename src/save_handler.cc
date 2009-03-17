@@ -42,7 +42,7 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	if (autosaveInterval <= 0)
 		return; // no autosave requested
 
-	int32_t elapsed = (realtime-m_lastSaveTime)/1000;
+	int32_t const elapsed = (realtime - m_lastSaveTime) / 1000;
 	if (elapsed < autosaveInterval)
 		return;
 
@@ -97,20 +97,21 @@ void SaveHandler::initialize(int32_t currenttime) {
  */
 std::string SaveHandler::create_file_name(std::string dir, std::string filename) {
 	// ok, first check if the extension matches (ignoring case)
-	bool assign_extension=true;
+	bool assign_extension = true;
 	if (filename.size() >= strlen(WLGF_SUFFIX)) {
 		char buffer[10]; // enough for the extension
-		filename.copy(buffer, sizeof(WLGF_SUFFIX), filename.size()-strlen(WLGF_SUFFIX));
+		filename.copy
+			(buffer, sizeof(WLGF_SUFFIX), filename.size() - strlen(WLGF_SUFFIX));
 		if (!strncasecmp(buffer, WLGF_SUFFIX, strlen(WLGF_SUFFIX)))
-			assign_extension=false;
+			assign_extension = false;
 	}
 	if (assign_extension)
-		filename+=WLGF_SUFFIX;
+		filename += WLGF_SUFFIX;
 
 	// Now append directory name
-	std::string complete_filename=dir;
-	complete_filename+="/";
-	complete_filename+=filename;
+	std::string complete_filename = dir;
+	complete_filename += "/";
+	complete_filename += filename;
 
 	return complete_filename;
 }
@@ -131,26 +132,26 @@ bool SaveHandler::save_game
 	g_fs->EnsureDirectoryExists(get_base_dir());
 
 	// Make a filesystem out of this
-	FileSystem* fs = 0;
+	FileSystem * fs = 0;
 	if (!binary) {
 		fs = g_fs->CreateSubFileSystem(complete_filename, FileSystem::DIR);
 	} else {
 		fs = g_fs->CreateSubFileSystem(complete_filename, FileSystem::ZIP);
 	}
 
-	bool ret = true;
+	bool result = true;
 	Game_Saver gs(*fs, game);
 	try {
 		gs.save();
-	} catch (std::exception& exe) {
+	} catch (std::exception const & e) {
 		if (error)
-			*error = exe.what();
-		ret = false;
+			*error = e.what();
+		result = false;
 	}
 	delete fs;
 
-	if (ret)
+	if (result)
 		m_lastSaveTime = WLApplication::get()->get_time();
 
-	return ret;
+	return result;
 }

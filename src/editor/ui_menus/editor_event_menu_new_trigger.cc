@@ -88,7 +88,7 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 		 std::string(),
 		 false);
 
-	posx=(get_inner_w()/2)+spacing;
+	posx = get_inner_w() / 2 + spacing;
 
 	new UI::IDButton<Editor_Event_Menu_New_Trigger, int32_t>
 		(this,

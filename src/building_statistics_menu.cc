@@ -214,7 +214,9 @@ void Building_Statistics_Menu::draw(RenderTarget & dst) {
 /*
  * validate if this pointer is ok
  */
-int32_t Building_Statistics_Menu::validate_pointer(int32_t* id, int32_t size) {
+int32_t Building_Statistics_Menu::validate_pointer
+	(int32_t * const id, int32_t const size)
+{
 	if (*id < 0)
 		*id = size - 1;
 	if (size <= *id)

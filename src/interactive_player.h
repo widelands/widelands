@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,7 +81,7 @@ struct Interactive_Player : public Interactive_GameBase, public DebugConsole::Ha
 	}
 
 private:
-	void cmdSwitchPlayer(const std::vector<std::string>& args);
+	void cmdSwitchPlayer(std::vector<std::string> const & args);
 
 	Widelands::Player_Number m_player_number;
 	bool                     m_auto_roadbuild_mode;

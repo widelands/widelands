@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,8 +68,6 @@ m_heal_incr_per_medic(0)
 
 /**
 ===============
-MilitarySite_Descr::create_object
-
 Create a new building of this type
 ===============
 */
@@ -131,12 +129,12 @@ std::string MilitarySite::get_statistics_string()
 		snprintf
 			(buffer, sizeof(buffer),
 			 ngettext("%u(+%u) soldier", "%u(+%u) soldiers", total),
-			 present, total-present);
+			 present, total - present);
 	}
 	str = buffer;
 
 	if (m_capacity > total) {
-		snprintf(buffer, sizeof(buffer), " (+%u)", m_capacity-total);
+		snprintf(buffer, sizeof(buffer), " (+%u)", m_capacity - total);
 		str += buffer;
 	}
 
@@ -201,7 +199,7 @@ Change the economy for the wares queues.
 Note that the workers are dealt with in the PlayerImmovable code.
 ===============
 */
-void MilitarySite::set_economy(Economy* e)
+void MilitarySite::set_economy(Economy * const e)
 {
 	ProductionSite::set_economy(e);
 
@@ -267,7 +265,7 @@ void MilitarySite::request_soldier_callback
  */
 void MilitarySite::update_soldier_request()
 {
-	std::vector<Soldier*> present = presentSoldiers();
+	std::vector<Soldier *> present = presentSoldiers();
 	uint32_t stationed = stationedSoldiers().size();
 
 	if (stationed < m_capacity) {
@@ -318,7 +316,7 @@ void MilitarySite::act(Game* g, uint32_t data)
 
 	if (g->get_gametime() - m_nexthealtime >= 0) {
 		uint32_t total_heal = descr().get_heal_per_second();
-		std::vector<Soldier*> soldiers = presentSoldiers();
+		std::vector<Soldier *> soldiers = presentSoldiers();
 
 		for (uint32_t i = 0; i < soldiers.size(); ++i) {
 			Soldier *s = soldiers[i];
@@ -399,10 +397,10 @@ bool MilitarySite::isPresent(Soldier & soldier) const
 
 std::vector<Soldier *> MilitarySite::presentSoldiers() const
 {
-	std::vector<Soldier*> soldiers;
+	std::vector<Soldier *> soldiers;
 
-	const std::vector<Worker*>& w = get_workers();
-	container_iterate_const(std::vector<Worker*>, w, i)
+	std::vector<Worker *> const & w = get_workers();
+	container_iterate_const(std::vector<Worker *>, w, i)
 		if (upcast(Soldier, soldier, *i.current))
 			if (isPresent(*soldier))
 				soldiers.push_back(soldier);
@@ -501,50 +499,39 @@ void MilitarySite::aggressor(Soldier & enemy)
 	// We're dealing with a soldier that we might want to keep busy
 	// Now would be the time to implement some player-definable
 	// policy as to how many soldiers are allowed to leave as defenders
-	std::vector<Soldier*> present = presentSoldiers();
+	std::vector<Soldier *> present = presentSoldiers();
 
-	if (present.size() > 1) {
-		for
-			(std::vector<Soldier*>::const_iterator it = present.begin();
-			 it != present.end();
-			 ++it)
-		{
-			if (!haveSoldierJob(**it)) {
+	if (1 < present.size())
+		container_iterate_const(std::vector<Soldier *>, present, i)
+			if (!haveSoldierJob(**i.current)) {
 				SoldierJob sj;
-				sj.soldier = *it;
+				sj.soldier  = *i.current;
 				sj.enemy = &enemy;
 				sj.stayhome = false;
 				m_soldierjobs.push_back(sj);
-				(*it)->update_task_buildingwork(&game);
+				(*i.current)->update_task_buildingwork(&game);
 				return;
 			}
-		}
-	}
 }
 
 bool MilitarySite::attack(Soldier & enemy)
 {
 	upcast(Game, g, &owner().egbase());
-	std::vector<Soldier*> present = presentSoldiers();
+	std::vector<Soldier *> present = presentSoldiers();
 
-	Soldier* defender = 0;
+	Soldier * defender = 0;
 
 	if (present.size()) {
 		defender = present[0];
 	} else {
 		// If one of our stationed soldiers is currently walking into the
 		// building, give us another chance.
-		std::vector<Soldier*> stationed = stationedSoldiers();
-		for
-			(std::vector<Soldier*>::const_iterator it = stationed.begin();
-			 it != stationed.end();
-			 ++it)
-		{
-			if ((*it)->get_position() == get_position()) {
-				defender = *it;
+		std::vector<Soldier *> stationed = stationedSoldiers();
+		container_iterate_const(std::vector<Soldier *>, stationed, i)
+			if ((*i.current)->get_position() == get_position()) {
+				defender = *i.current;
 				break;
 			}
-		}
 	}
 
 	if (defender) {
@@ -572,7 +559,7 @@ bool MilitarySite::attack(Soldier & enemy)
 
    Easy to use, overwrite with given requirements.
 */
-void MilitarySite::set_requirements (const Requirements& r)
+void MilitarySite::set_requirements (Requirements const & r)
 {
 	m_soldier_requirements = r;
 }
@@ -618,21 +605,17 @@ bool MilitarySite::haveSoldierJob(Soldier & soldier)
  * \return the enemy, if any, that the given soldier was scheduled
  * to attack, and remove the job.
  */
-Map_Object* MilitarySite::popSoldierJob(Soldier* soldier, bool* stayhome)
+Map_Object * MilitarySite::popSoldierJob
+	(Soldier * const soldier, bool * const stayhome)
 {
-	for
-		(std::vector<SoldierJob>::iterator it = m_soldierjobs.begin();
-		 it != m_soldierjobs.end();
-		 ++it)
-	{
-		if (it->soldier == soldier) {
-			Map_Object* enemy = it->enemy.get(&owner().egbase());
+	container_iterate(std::vector<SoldierJob>, m_soldierjobs, i)
+		if (i.current->soldier == soldier) {
+			Map_Object * const enemy = i.current->enemy.get(&owner().egbase());
 			if (stayhome)
-				*stayhome = it->stayhome;
-			m_soldierjobs.erase(it);
+				*stayhome = i.current->stayhome;
+			m_soldierjobs.erase(i.current);
 			return enemy;
 		}
-	}
 	return 0;
 }
 

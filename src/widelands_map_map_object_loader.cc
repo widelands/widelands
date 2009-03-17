@@ -51,7 +51,7 @@ int32_t Map_Map_Object_Loader::get_nr_unloaded_objects()
 	std::map<Map_Object *, bool>::const_iterator const loaded_obj_end =
 		m_loaded_obj.end();
 	for
-		(std::map<Map_Object*, bool>::const_iterator it = m_loaded_obj.begin();
+		(std::map<Map_Object *, bool>::const_iterator it = m_loaded_obj.begin();
 		 it != loaded_obj_end;
 		 ++it)
 		if (!it->second)

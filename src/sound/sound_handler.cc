@@ -743,7 +743,7 @@ void Sound_Handler::music_finished_callback()
 /** Callback to notify \ref Sound_Handler that a sound effect has finished
  * playing.
 */
-void Sound_Handler::fx_finished_callback(int32_t channel)
+void Sound_Handler::fx_finished_callback(int32_t const channel)
 {
 	//DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
 

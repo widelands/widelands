@@ -79,7 +79,7 @@ void EventChain::clear_events() {
 /**
  * Add an event
  */
-void EventChain::add_event(Event* ev) {
+void EventChain::add_event(Event * const ev) {
 	m_events.push_back(ev);
 	ev->reference(*this);
 }

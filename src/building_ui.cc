@@ -67,27 +67,27 @@ using Widelands::atrDefense;
 using Widelands::atrEvade;
 using Widelands::atrHP;
 
-static const char* pic_ok = "pics/menu_okay.png";
-static const char* pic_cancel = "pics/menu_abort.png";
-static const char* pic_debug = "pics/menu_debug.png";
+static char const * pic_ok                 = "pics/menu_okay.png";
+static char const * pic_cancel             = "pics/menu_abort.png";
+static char const * pic_debug              = "pics/menu_debug.png";
 
-static const char* pic_bulldoze = "pics/menu_bld_bulldoze.png";
-static const char* pic_queue_background = "pics/queue_background.png";
+static char const * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
+static char const * pic_queue_background   = "pics/queue_background.png";
 
-static const char* pic_list_worker = "pics/menu_list_workers.png";
+static char const * pic_list_worker        = "pics/menu_list_workers.png";
 
-static const char* pic_priority_low = "pics/low_priority_button.png";
-static const char* pic_priority_normal = "pics/normal_priority_button.png";
-static const char* pic_priority_high = "pics/high_priority_button.png";
-static const char* pic_priority_low_on = "pics/low_priority_on.png";
-static const char* pic_priority_normal_on = "pics/normal_priority_on.png";
-static const char* pic_priority_high_on = "pics/high_priority_on.png";
+static char const * pic_priority_low       = "pics/low_priority_button.png";
+static char const * pic_priority_normal    = "pics/normal_priority_button.png";
+static char const * pic_priority_high      = "pics/high_priority_button.png";
+static char const * pic_priority_low_on    = "pics/low_priority_on.png";
+static char const * pic_priority_normal_on = "pics/normal_priority_on.png";
+static char const * pic_priority_high_on   = "pics/high_priority_on.png";
 
-static const char* pic_tab_military = "pics/menu_tab_military.png";
-static const char* pic_tab_training = "pics/menu_tab_training.png";
-static const char* pic_up_train = "pics/menu_up_train.png";
-static const char* pic_down_train = "pics/menu_down_train.png";
-static const char* pic_drop_soldier = "pics/menu_drop_soldier.png";
+static char const * pic_tab_military       = "pics/menu_tab_military.png";
+static char const * pic_tab_training       = "pics/menu_tab_training.png";
+static char const * pic_up_train           = "pics/menu_up_train.png";
+static char const * pic_down_train         = "pics/menu_down_train.png";
+static char const * pic_drop_soldier       = "pics/menu_drop_soldier.png";
 
 /*
 ==============================================================================
@@ -104,7 +104,7 @@ Building::show_options
 Create the building's options window if necessary.
 ===============
 */
-void Building::show_options(Interactive_Player *plr)
+void Building::show_options(Interactive_Player * const plr)
 {
 	if (m_optionswindow)
 		m_optionswindow->move_to_top();
@@ -135,7 +135,7 @@ class BulldozeConfirm
  * \todo move this into it's own set of files
  */
 struct BulldozeConfirm : public UI::Window {
-	BulldozeConfirm(Interactive_Base* parent, Building* building, Widelands::PlayerImmovable* todestroy = 0);
+	BulldozeConfirm(Interactive_Base * parent, Building * building, Widelands::PlayerImmovable * todestroy = 0);
 	virtual ~BulldozeConfirm();
 
 	virtual void think();
@@ -160,7 +160,7 @@ Otherwise, todestroy is destroyed when the user confirms it. This is useful to
 confirm building destruction when the building's base flag is removed.
 ===============
 */
-BulldozeConfirm::BulldozeConfirm(Interactive_Base* parent, Building* building, Widelands::PlayerImmovable* todestroy)
+BulldozeConfirm::BulldozeConfirm(Interactive_Base * parent, Building * building, Widelands::PlayerImmovable * todestroy)
 	:
 	UI::Window(parent, 0, 0, 200, 120, _("Destroy building?"))
 {
@@ -239,7 +239,7 @@ void BulldozeConfirm::bulldoze()
 				(*todestroy,
 				 get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
 			m_iabase->need_complete_redraw();
-		} else {// Editor
+		} else { //  Editor
 			todestroy->get_owner()->bulldoze(*todestroy);
 			m_iabase->need_complete_redraw();
 		}
@@ -287,7 +287,7 @@ struct WaresQueueDisplay : public UI::Panel {
 	};
 
 public:
-	WaresQueueDisplay(UI::Panel* parent, int32_t x, int32_t y, uint32_t maxw, Widelands::WaresQueue* queue, Widelands::Game* g);
+	WaresQueueDisplay(UI::Panel * parent, int32_t x, int32_t y, uint32_t maxw, Widelands::WaresQueue *, Widelands::Game *);
 	~WaresQueueDisplay();
 
 	virtual void think();
@@ -360,14 +360,14 @@ Recalculate the panel's size.
 */
 void WaresQueueDisplay::recalc_size()
 {
-	m_display_size = (m_max_width - 2*Border) / CellWidth;
+	m_display_size = (m_max_width - 2 * Border) / CellWidth;
 
 	m_cache_size = m_queue->get_size();
 
 	if (m_cache_size < m_display_size)
 		m_display_size = m_cache_size;
 
-	set_size(m_display_size*CellWidth + 2*Border, Height);
+	set_size(m_display_size * CellWidth + 2 * Border, Height);
 }
 
 
@@ -432,16 +432,16 @@ struct Building_Window : public UI::Window {
 		Width = 4 * 34 //  4 normally sized buttons
 	};
 
-	Building_Window(Interactive_Player* parent, Building* building, UI::Window** registry);
+	Building_Window(Interactive_Player * parent, Building * building, UI::Window * * registry);
 	virtual ~Building_Window();
 
-	Interactive_Player* get_player() {return m_player;}
-	Building* get_building() {return m_building;}
+	Interactive_Player * get_player() {return m_player;}
+	Building * get_building() {return m_building;}
 
 	virtual void draw(RenderTarget &);
 	virtual void think();
 
-	UI::Panel* create_capsbuttons(UI::Panel* parent);
+	UI::Panel * create_capsbuttons(UI::Panel * parent);
 
 protected:
 	void setup_capsbuttons();
@@ -477,7 +477,7 @@ Building_Window::Building_Window
 Create the window, add it to the registry.
 ===============
 */
-Building_Window::Building_Window(Interactive_Player* parent, Building* building, UI::Window** registry)
+Building_Window::Building_Window(Interactive_Player * parent, Building * building, UI::Window * * registry)
 :
 UI::Window(parent, 0, 0, Width, 0, building->descname().c_str()),
 m_workarea_job_id(Overlay_Manager::Job_Id::Null())
@@ -565,7 +565,7 @@ Create the capsbuttons panel with the given parent window, set it up and return
 it.
 ===============
 */
-UI::Panel* Building_Window::create_capsbuttons(UI::Panel* parent)
+UI::Panel * Building_Window::create_capsbuttons(UI::Panel * const parent)
 {
 	delete m_capsbuttons;
 
@@ -798,7 +798,7 @@ ConstructionSite UI IMPLEMENTATION
 */
 
 struct ConstructionSite_Window : public Building_Window {
-	ConstructionSite_Window(Interactive_Player* parent, Widelands::ConstructionSite* cs, UI::Window** registry);
+	ConstructionSite_Window(Interactive_Player * parent, Widelands::ConstructionSite * cs, UI::Window * * registry);
 	virtual ~ConstructionSite_Window();
 
 	ConstructionSite * get_constructionsize() {
@@ -825,34 +825,37 @@ ConstructionSite_Window::ConstructionSite_Window
 	 UI::Window *                * const registry)
 	: Building_Window(parent, cs, registry)
 {
-	UI::Box* box = new UI::Box(this, 0, 0, UI::Box::Vertical);
+	UI::Box & box = *new UI::Box(this, 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
 	m_progress =
 		new UI::Progress_Bar
-		(box,
-		 0, 0, UI::Progress_Bar::DefaultWidth, UI::Progress_Bar::DefaultHeight,
-		 UI::Progress_Bar::Horizontal);
+			(&box,
+			 0, 0,
+			 UI::Progress_Bar::DefaultWidth, UI::Progress_Bar::DefaultHeight,
+			 UI::Progress_Bar::Horizontal);
 	m_progress->set_total(1 << 16);
-	box->add(m_progress, UI::Box::AlignCenter);
+	box.add(m_progress, UI::Box::AlignCenter);
 
-	box->add_space(8);
+	box.add_space(8);
 
 	// Add the wares queue
-	for (uint32_t i = 0; i < cs->get_nrwaresqueues(); ++i) {
-		WaresQueueDisplay* wqd =
-			new WaresQueueDisplay
-			(box, 0, 0, get_w(), cs->get_waresqueue(i), parent->get_game());
+	for (uint32_t i = 0; i < cs->get_nrwaresqueues(); ++i)
+		box.add
+			(new WaresQueueDisplay
+			 	(&box,
+			 	 0, 0,
+			 	 get_w(),
+			 	 cs->get_waresqueue(i),
+			 	 parent->get_game()),
+			 UI::Box::AlignLeft);
 
-		box->add(wqd, UI::Box::AlignLeft);
-	}
-
-	box->add_space(8);
+	box.add_space(8);
 
 	// Add the caps button
-	box->add(create_capsbuttons(box), UI::Box::AlignCenter);
+	box.add(create_capsbuttons(&box), UI::Box::AlignCenter);
 
-	fit_inner(*box);
+	fit_inner(box);
 	move_inside_parent();
 }
 
@@ -944,7 +947,7 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
 	int32_t const spacing = 5;
 	int32_t const nr_buttons = 4; // one more, turn page button is bigger
 	int32_t const button_w =
-		(get_inner_w() - (nr_buttons+1)*spacing) / nr_buttons;
+		(get_inner_w() - (nr_buttons + 1) * spacing) / nr_buttons;
 	int32_t       posx = spacing;
 	int32_t       posy = m_waresdisplay->get_h() + spacing;
 	m_curpage = 0;
@@ -1105,14 +1108,16 @@ UI::Window(parent, 0, 0, 320, 125, _("Worker Listing"))
 	posx = get_inner_w() / 2 + spacing;
 	new UI::Textarea(this, posx, posy, 150, 20, _("Type: "), Align_CenterLeft);
 	m_type =
-		new UI::Textarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
+	new UI::Textarea(this, posx, posy, 150, 20, _("Type: "), Align_CenterLeft);
+	m_type =
+		new UI::Textarea(this, posx + 80, posy, 200, 20, "---", Align_CenterLeft);
 	posy += 20 + spacing;
 
 	//  experience
 	new UI::Textarea
 		(this, posx, posy, 150, 20, _("Experience: "), Align_CenterLeft);
 	m_experience =
-		new UI::Textarea(this, posx+80, posy, 200, 20, "---", Align_CenterLeft);
+		new UI::Textarea(this, posx + 80, posy, 200, 20, "---", Align_CenterLeft);
 	posy += 20 + spacing;
 
 	// is working to become
@@ -1120,7 +1125,7 @@ UI::Window(parent, 0, 0, 320, 125, _("Worker Listing"))
 		(this, posx, posy, 70, 20, _("Trying to become: "), Align_CenterLeft);
 	posy += 20;
 	m_becomes =
-		new UI::Textarea(this, posx+25, posy, 200, 20, "---", Align_CenterLeft);
+		new UI::Textarea(this, posx + 25, posy, 200, 20, "---", Align_CenterLeft);
 	posy += 20 + spacing;
 
 	center_to_parent();
@@ -1216,14 +1221,15 @@ void ProductionSite_Window_ListWorkerWindow::update()
 }
 
 struct PriorityButtonInfo {
-	UI::Basic_Button* button;
+	UI::Basic_Button * button;
 	int32_t picture_enabled;
 	int32_t picture_disabled;
 
 	PriorityButtonInfo() {}
 
 	PriorityButtonInfo
-		(UI::Basic_Button* btn, int32_t pic_enabled, int32_t pic_disabled)
+		(UI::Basic_Button * const btn,
+		 int32_t const pic_enabled, int32_t const pic_disabled)
 		:
 		button(btn), picture_enabled(pic_enabled), picture_disabled(pic_disabled)
 	{}
@@ -1247,7 +1253,7 @@ private:
 };
 
 struct ProductionSite_Window : public Building_Window {
-	ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, UI::Window** registry);
+	ProductionSite_Window(Interactive_Player * parent, ProductionSite * ps, UI::Window * * registry);
 	virtual ~ProductionSite_Window();
 
 	ProductionSite * get_productionsite() {
@@ -1265,10 +1271,11 @@ public:
 protected:
 	UI::Box* create_production_box(UI::Panel* ptr, ProductionSite* ps);
 
-	void create_ware_queue_panel(UI::Box* box, ProductionSite * ps, Widelands::WaresQueue * const wq);
+	void create_ware_queue_panel
+		(UI::Box *, ProductionSite *, Widelands::WaresQueue *);
 
-	UI::Basic_Button* create_priority_button
-		(UI::Box* box, PriorityButtonHelper & helper,
+	UI::Basic_Button * create_priority_button
+		(UI::Box *, PriorityButtonHelper &,
 		 int32_t priority, int32_t x, int32_t y, int32_t w, int32_t h,
 		 const char * picture1, const char * picture2,
 		 const std::string & tooltip);
@@ -1311,8 +1318,8 @@ Create the window and its panels, add it to the registry.
 ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, UI::Window** registry)
 	: Building_Window(parent, ps, registry)
 {
-	m_parent=parent;
-	m_reg=registry;
+	m_parent = parent;
+	m_reg = registry;
 
 	UI::Box * prod_box = 0;
 	if (ps->get_building_type() == Building::PRODUCTIONSITE) {
@@ -1348,15 +1355,16 @@ UI::Basic_Button * ProductionSite_Window::create_priority_button
 	return button;
 }
 
-void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite * ps, Widelands::WaresQueue * const wq)
+void ProductionSite_Window::create_ware_queue_panel
+	(UI::Box * const box, ProductionSite * const ps, Widelands::WaresQueue * const wq)
 {
 	const int32_t priority_buttons_width = WaresQueueDisplay::Height / 3;
-	UI::Box* hbox = new UI::Box (box, 0, 0, UI::Box::Horizontal);
-	WaresQueueDisplay* wqd =
+	UI::Box * hbox = new UI::Box (box, 0, 0, UI::Box::Horizontal);
+	WaresQueueDisplay * wqd =
 		new WaresQueueDisplay
-		(hbox, 0, 0,
-		 get_w() - priority_buttons_width,
-		 wq, m_parent->get_game());
+			(hbox, 0, 0,
+			 get_w() - priority_buttons_width,
+			 wq, m_parent->get_game());
 
 	hbox->add(wqd, UI::Box::AlignTop);
 
@@ -1365,7 +1373,7 @@ void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite
 			(PriorityButtonHelper(get_player()->game(), ps, Widelands::Request::WARE, wq->get_ware()));
 		PriorityButtonHelper & helper = m_priority_helpers.back();
 
-		UI::Box* vbox = new UI::Box (hbox, 0, 0, UI::Box::Vertical);
+		UI::Box * vbox = new UI::Box (hbox, 0, 0, UI::Box::Vertical);
 		// Add priority buttons
 		vbox->add
 			(create_priority_button
@@ -1402,8 +1410,8 @@ void ProductionSite_Window::create_ware_queue_panel(UI::Box* box, ProductionSite
 	box->add(hbox, UI::Box::AlignLeft);
 }
 
-UI::Box*
-ProductionSite_Window::create_production_box (UI::Panel* parent, ProductionSite* ps)
+UI::Box * ProductionSite_Window::create_production_box
+	(UI::Panel * const parent, ProductionSite * const ps)
 {
 	UI::Box * const box =
 		new UI::Box
@@ -1719,7 +1727,7 @@ TrainingSite UI IMPLEMENTATION
 */
 
 struct TrainingSite_Window : public ProductionSite_Window {
-	TrainingSite_Window(Interactive_Player* parent, TrainingSite* ps, UI::Window** registry);
+	TrainingSite_Window(Interactive_Player * parent, TrainingSite * ps, UI::Window * * registry);
 	virtual ~TrainingSite_Window();
 
 	TrainingSite * get_trainingsite() {
@@ -1734,11 +1742,11 @@ struct TrainingSite_Window : public ProductionSite_Window {
 private:
 	void update();
 
-	void add_tab(const char* picname, UI::Panel* panel);
+	void add_tab(char const * picname, UI::Panel * panel);
 
 	Widelands::Coords      m_ms_location;
 	Interactive_Player   * m_parent;
-	UI::Window**           m_reg;
+	UI::Window         * * m_reg;
 	UI::Table<Soldier &> * m_table;
 	UI::Textarea         * m_capacity;
 
@@ -1754,7 +1762,8 @@ TrainingSite_Window::TrainingSite_Window
 Create the window and its panels, add it to the registry.
 ===============
 */
-TrainingSite_Window::TrainingSite_Window(Interactive_Player* parent, TrainingSite* ms, UI::Window** registry)
+TrainingSite_Window::TrainingSite_Window
+	(Interactive_Player * const parent, TrainingSite * const ms, UI::Window * * const registry)
 	: ProductionSite_Window(parent, ms, registry)
 {
 	m_parent = parent;
@@ -1787,7 +1796,7 @@ Deinitialize, remove from registry
 */
 TrainingSite_Window::~TrainingSite_Window() {}
 
-UI::Box* TrainingSite_Window::create_military_box (UI::Panel* panel)
+UI::Box * TrainingSite_Window::create_military_box (UI::Panel * const panel)
 {
 	UI::Box * sold_box = new UI::Box (panel, 0, 0, UI::Box::Vertical);
 
@@ -1841,12 +1850,10 @@ UI::Box* TrainingSite_Window::create_military_box (UI::Panel* panel)
 
 /*
 ===============
-TrainingSite_Window::add_tab
-
 Convenience function: Adds a new tab to the main tab panel
 ===============
 */
-void TrainingSite_Window::add_tab(const char* picname, UI::Panel* panel)
+void TrainingSite_Window::add_tab(char const * picname, UI::Panel * panel)
 {
 	m_tabpanel->add(g_gr->get_picture(PicMod_Game,   picname), panel);
 }
@@ -1886,7 +1893,7 @@ FIXME What if a soldier have been removed and another added? This needs review.
 =============
 */
 void TrainingSite_Window::update() {
-	std::vector<Soldier*> soldiers = get_trainingsite()->presentSoldiers();
+	std::vector<Soldier *> soldiers = get_trainingsite()->presentSoldiers();
 
 	if (soldiers.size() != m_table->size())
 		m_table->clear();

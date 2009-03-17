@@ -33,14 +33,14 @@
 
 
 struct PlayerDescriptionGroupImpl {
-	GameSettingsProvider* settings;
+	GameSettingsProvider * settings;
 	uint32_t plnum;
 
-	UI::Textarea* plr_name;
-	UI::Checkbox* btnEnablePlayer;
-	UI::Basic_Button* btnPlayerType;
-	UI::Basic_Button* btnPlayerTribe;
-	UI::Basic_Button* btnPlayerInit;
+	UI::Textarea     * plr_name;
+	UI::Checkbox     * btnEnablePlayer;
+	UI::Basic_Button * btnPlayerType;
+	UI::Basic_Button * btnPlayerTribe;
+	UI::Basic_Button * btnPlayerInit;
 };
 
 PlayerDescriptionGroup::PlayerDescriptionGroup
@@ -105,7 +105,7 @@ PlayerDescriptionGroup::~PlayerDescriptionGroup()
  */
 void PlayerDescriptionGroup::refresh()
 {
-	const GameSettings& settings = d->settings->settings();
+	GameSettings const & settings = d->settings->settings();
 
 	if (d->plnum >= settings.players.size()) {
 		set_visible(false);
@@ -114,7 +114,7 @@ void PlayerDescriptionGroup::refresh()
 
 	set_visible(true);
 
-	const PlayerSettings& player = settings.players[d->plnum];
+	PlayerSettings const & player = settings.players[d->plnum];
 	bool stateaccess = d->settings->canChangePlayerState(d->plnum);
 	bool tribeaccess = d->settings->canChangePlayerTribe(d->plnum);
 	bool const initaccess  = d->settings->canChangePlayerInit(d->plnum);
@@ -195,7 +195,7 @@ void PlayerDescriptionGroup::refresh()
  */
 void PlayerDescriptionGroup::enable_pdg(bool enable)
 {
-	const GameSettings& settings = d->settings->settings();
+	GameSettings const & settings = d->settings->settings();
 
 	if (d->plnum >= settings.players.size())
 		return;
@@ -232,7 +232,7 @@ void PlayerDescriptionGroup::show_tribe_button(bool show)
  */
 void PlayerDescriptionGroup::enable_player(bool on)
 {
-	const GameSettings& settings = d->settings->settings();
+	GameSettings const & settings = d->settings->settings();
 
 	if (d->plnum >= settings.players.size())
 		return;
@@ -257,20 +257,19 @@ void PlayerDescriptionGroup::toggle_playertype()
  */
 void PlayerDescriptionGroup::toggle_playertribe()
 {
-	const GameSettings& settings = d->settings->settings();
+	GameSettings const & settings = d->settings->settings();
 
 	if (d->plnum >= settings.players.size())
 		return;
 
-	const std::string& currenttribe = settings.players[d->plnum].tribe;
+	std::string const & currenttribe = settings.players[d->plnum].tribe;
 	std::string nexttribe = settings.tribes.at(0).name;
 
-	for (uint32_t i = 0; i < settings.tribes.size()-1; ++i) {
+	for (uint32_t i = 0; i < settings.tribes.size() - 1; ++i)
 		if (settings.tribes[i].name == currenttribe) {
 			nexttribe = settings.tribes.at(i + 1).name;
 			break;
 		}
-	}
 
 	d->settings->setPlayerTribe(d->plnum, nexttribe);
 }

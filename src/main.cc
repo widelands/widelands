@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,45 +38,39 @@ using std::flush;
 /**
  * Cross-platform entry point for SDL applications.
  */
-int main(int argc, char* argv[])
+int main(int argc, char * argv[])
 {
-	WLApplication *g_app=0;
+	WLApplication * g_app = 0;
 	try {
-		g_app=WLApplication::get(argc, const_cast<const char**>(argv));
+		g_app = WLApplication::get(argc, const_cast<char const * *>(argv));
 		//TODO: handle exceptions from the constructor
 		g_app->run();
 
 		delete g_app;
 
 		return 0;
-	}
-	catch (Parameter_error &e) { //handle wrong commandline parameters
+	} catch (Parameter_error const & e) {
+		//  handle wrong commandline parameters
 		cerr<<endl<<e.what()<<endl<<endl;
 		WLApplication::show_usage();
 		delete g_app;
 
 		return 0;
-	}
-	catch (_wexception &e) {
-		cerr<<endl<<
-		"Caught exception (of type '"<<typeid(e).name()<<
-		"') in outermost handler!"<<endl<<
-		"The exception said: "<<e.what()<<endl<<endl<<
-		"This should not happen. Please file a bug report "<<
-		"on version: "<<build_id()<<"."<<endl<<endl<<
-		flush;
+	} catch (_wexception const & e) {
+		cerr
+			<< "\nCaught exception (of type '" << typeid(e).name()
+			<< "') in outermost handler!\nThe exception said: " << e.what()
+			<< "\n\nThis should not happen. Please file a bug report on version: "
+			<< build_id() << ".\n\n" << flush;
 		delete g_app;
 
 		return 1;
-	}
-	catch (std::exception &e) {
-		cerr<<endl<<
-		"Caught exception (of type '"<<typeid(e).name()<<
-		"') in outermost handler!"<<endl<<
-		"The exception said: "<<e.what()<<endl<<endl<<
-		"This should not happen. Please file a bug report "<<
-		"on version: "<<build_id()<<"."<<endl<<endl<<
-		flush;
+	} catch (std::exception const & e) {
+		cerr
+			<< "\nCaught exception (of type '" << typeid(e).name()
+			<< "') in outermost handler!\nThe exception said: " << e.what()
+			<< "\n\nThis should not happen. Please file a bug report on version: "
+			<< build_id() <<".\n\n" << flush;
 		delete g_app;
 
 		return 1;

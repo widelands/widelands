@@ -69,7 +69,7 @@ struct IdleWareSupply : public Supply {
 	IdleWareSupply(WareInstance* ware);
 	virtual ~IdleWareSupply();
 
-	void set_economy(Economy* e);
+	void set_economy(Economy *);
 
 	//  implementation of Supply
 	virtual PlayerImmovable* get_position(Game* g);
@@ -101,7 +101,7 @@ IdleWareSupply::~IdleWareSupply()
 /**
  * Add/remove self from economies as necessary.
 */
-void IdleWareSupply::set_economy(Economy* e)
+void IdleWareSupply::set_economy(Economy * const e)
 {
 	if (e == m_economy)
 		return;
@@ -257,9 +257,8 @@ void WareInstance::set_location(Editor_Game_Base* g, Map_Object* location)
 
 	m_location = location;
 
-	if (location)
-	{
-		Economy* eco = 0;
+	if (location) {
+		Economy * eco = 0;
 
 		if (upcast(PlayerImmovable const, playerimmovable, location))
 			eco = playerimmovable->get_economy();
@@ -322,19 +321,18 @@ void WareInstance::update(Game * game)
 	}
 
 	// Deal with transfers
-	if (m_transfer)
-	{
-		bool success;
+	if (m_transfer) {
 		upcast(PlayerImmovable, location, loc);
 		if (not location)
 			return; // wait
 
+		bool success;
 		PlayerImmovable * const nextstep =
 			m_transfer->get_next_step(location, &success);
 		m_transfer_nextstep = nextstep;
 
 		if (!nextstep) {
-			Transfer* t = m_transfer;
+			Transfer * const t = m_transfer;
 
 			m_transfer = 0;
 
@@ -607,23 +605,23 @@ void Flag::detach_building(Editor_Game_Base *g)
 /**
  * Call this only from the Road init!
 */
-void Flag::attach_road(int32_t dir, Road *road)
+void Flag::attach_road(int32_t const dir, Road * const road)
 {
-	assert(!m_roads[dir-1] || m_roads[dir-1]==road);
+	assert(!m_roads[dir - 1] || m_roads[dir - 1] == road);
 
-	m_roads[dir-1] = road;
-	m_roads[dir-1]->set_economy(get_economy());
+	m_roads[dir - 1] = road;
+	m_roads[dir - 1]->set_economy(get_economy());
 }
 
 /**
  * Call this only from the Road init!
 */
-void Flag::detach_road(int32_t dir)
+void Flag::detach_road(int32_t const dir)
 {
-	assert(m_roads[dir-1]);
+	assert(m_roads[dir - 1]);
 
-	m_roads[dir-1]->set_economy(0);
-	m_roads[dir-1] = 0;
+	m_roads[dir - 1]->set_economy(0);
+	m_roads[dir - 1] = 0;
 }
 
 /**
@@ -917,8 +915,8 @@ void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 	dynamic_cast<Flag const &>(*nextstep);
 
 	for (int32_t dir = 1; dir <= 6; ++dir) {
-		Road* road = get_road(dir);
-		Flag* other;
+		Road * const road = get_road(dir);
+		Flag *       other;
 		Road::FlagId flagid;
 
 		if (!road)
@@ -1362,7 +1360,7 @@ void Road::cleanup(Editor_Game_Base *gg)
  * Workers' economies are fixed by PlayerImmovable, but we need to handle
  * any requests ourselves.
 */
-void Road::set_economy(Economy *e)
+void Road::set_economy(Economy * const e)
 {
 	PlayerImmovable::set_economy(e);
 	if (m_carrier_request)
@@ -2233,10 +2231,7 @@ void Economy::check_split(Flag *f1, Flag *f2)
  * This is more flexible than a standard priority_queue (fast boost() to
  * adjust cost)
 */
-class FlagQueue {
-	std::vector<Flag*> m_data;
-
-public:
+struct FlagQueue {
 	FlagQueue() {}
 	~FlagQueue() {}
 
@@ -2254,18 +2249,18 @@ public:
 	//       put slot[_size] in its place and stop
 	//     if only the left child is there
 	//       arrange left child and slot[_size] correctly and stop
-	Flag* pop()
+	Flag * pop()
 	{
 		if (m_data.empty())
 			return 0;
 
-		Flag* head = m_data[0];
+		Flag * head = m_data[0];
 
-		uint32_t nsize = m_data.size()-1;
+		uint32_t const nsize = m_data.size() - 1;
 		uint32_t fix = 0;
 		while (fix < nsize) {
-			uint32_t l = fix*2 + 1;
-			uint32_t r = fix*2 + 2;
+			uint32_t l = fix * 2 + 1;
+			uint32_t r = fix * 2 + 2;
 			if (l >= nsize) {
 				m_data[fix] = m_data[nsize];
 				m_data[fix]->mpf_heapindex = fix;
@@ -2386,6 +2381,8 @@ public:
 		}
 	}
 
+private:
+	std::vector<Flag *> m_data;
 };
 
 /**
@@ -2458,11 +2455,11 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_
 
 			if (wait)
 				wait_cost =
-				(current->m_item_filled + neighbour->m_item_filled)
-				*
-				neighbours[i].cost
-				/
-				2;
+					(current->m_item_filled + neighbour->m_item_filled)
+					*
+					neighbours[i].cost
+					/
+					2;
 			cost = current->mpf_realcost + neighbours[i].cost + wait_cost;
 
 			if (neighbour->mpf_cycle != mpf_cycle) {
@@ -2655,13 +2652,13 @@ void Economy::add_warehouse(Warehouse *wh)
 void Economy::remove_warehouse(Warehouse *wh)
 {
 	uint32_t i;
-	for (i = 0; i < m_warehouses.size(); ++i) {
+	for (i = 0; i < m_warehouses.size(); ++i)
 		if (m_warehouses[i] == wh) {
 			if (i < m_warehouses.size() - 1)
-				m_warehouses[i] = m_warehouses[m_warehouses.size()-1];
+				m_warehouses[i] = m_warehouses[m_warehouses.size() - 1];
 			break;
 		}
-	}
+
 
 	//  This assert was modified, since on loading, warehouses might try to
 	//  remove themselves from their own economy, though they weren't added
@@ -2714,8 +2711,7 @@ void Economy::remove_request(Request* req)
 		return;
 	}
 
-	if (it != m_requests.end()-1)
-		*it = *m_requests.rbegin();
+	*it = *m_requests.rbegin();
 
 	m_requests.pop_back();
 }
@@ -2967,10 +2963,12 @@ struct RequestSupplyPair {
 	uint32_t pairid;
 
 	struct Compare {
-		bool operator()(const RequestSupplyPair& p1, const RequestSupplyPair& p2) {
-			if (p1.priority != p2.priority)
-				return p1.priority < p2.priority;
-			return p1.pairid < p2.pairid;
+		bool operator()
+			(RequestSupplyPair const & p1, RequestSupplyPair const & p2)
+		{
+			return
+				p1.priority == p2.priority ? p1.pairid < p2.pairid :
+				p1.priority <  p2.priority;
 		}
 	};
 };
@@ -3118,7 +3116,7 @@ void Economy::create_requested_workers(Game* g)
  * Balance Requests and Supplies by collecting and weighing pairs, and
  * starting transfers for them.
 */
-void Economy::balance_requestsupply(uint32_t timerid)
+void Economy::balance_requestsupply(uint32_t const timerid)
 {
 	if (m_request_timerid != timerid)
 		return;
@@ -3167,10 +3165,8 @@ void Economy::balance_requestsupply(uint32_t timerid)
 			}
 		}
 
-		if (rsps.nexttimer > 0) { //  restart the timer, if necessary
-			log("  nexttimer: %i\n", rsps.nexttimer);
+		if (rsps.nexttimer > 0) //  restart the timer, if necessary
 			start_request_timer(rsps.nexttimer);
-		}
 	}
 }
 
@@ -3178,7 +3174,7 @@ void Economy::balance_requestsupply(uint32_t timerid)
 
 void Economy::Read(FileRead & fr, Game &, Map_Map_Object_Loader *)
 {
-	uint16_t version = fr.Unsigned16();
+	uint16_t const version = fr.Unsigned16();
 
 	try {
 		if (1 <= version and version <= CURRENT_ECONOMY_VERSION) {
@@ -3223,7 +3219,7 @@ void Economy::Read(FileRead & fr, Game &, Map_Map_Object_Loader *)
 		} else {
 			throw wexception("unknown version %u", version);
 		}
-	} catch (std::exception& e) {
+	} catch (std::exception const & e) {
 		throw wexception("economy: %s", e.what());
 	}
 }
@@ -3248,9 +3244,7 @@ void Economy::Write(FileWrite & fw, Game &, Map_Map_Object_Saver *)
 
 
 Cmd_Call_Economy_Balance::Cmd_Call_Economy_Balance
-	(int32_t starttime,
-	 Economy* economy,
-	 uint32_t timerid)
+	(int32_t const starttime, Economy * const economy, uint32_t const timerid)
 	: GameLogicCommand(starttime)
 {
 	m_flag = economy->get_arbitrary_flag();
@@ -3285,8 +3279,10 @@ void Cmd_Call_Economy_Balance::Read
 			m_timerid = fr.Unsigned32();
 		} else if (packet_version == 1 || packet_version == 2) {
 			GameLogicCommand::Read(fr, egbase, mol);
-			Player* player = egbase.get_player(fr.Unsigned8());
-			Economy* economy = fr.Unsigned8 () ? player->get_economy_by_number(fr.Unsigned16()) : 0;
+			Player * const player = egbase.get_player(fr.Unsigned8());
+			Economy * const economy =
+				fr.Unsigned8 () ?
+				player->get_economy_by_number(fr.Unsigned16()) : 0;
 			m_flag = economy->get_arbitrary_flag();
 			if (packet_version >= 2)
 				m_timerid = fr.Unsigned32();

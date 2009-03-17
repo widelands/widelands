@@ -97,8 +97,8 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 	int32_t const space_at_bottom = 15;
 	int32_t const space_at_right  =  5;
 
-	float const xline_length = get_inner_w() - space_at_right-spacing;
-	float const yline_length = get_inner_h() - space_at_bottom-spacing;
+	float const xline_length = get_inner_w() - space_at_right  - spacing;
+	float const yline_length = get_inner_h() - space_at_bottom - spacing;
 
 	// Draw coordinate system
 	// X Axis
@@ -249,10 +249,10 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 				sub = xline_length / static_cast<float>(NR_SAMPLES);
 			}
 
-			posx = get_inner_w()-space_at_right;
+			posx = get_inner_w() - space_at_right;
 
-			int32_t lx = get_inner_w()-space_at_right;
-			int32_t ly = get_inner_h()-space_at_bottom;
+			int32_t lx = get_inner_w() - space_at_right;
+			int32_t ly = get_inner_h() - space_at_bottom;
 			for (int32_t i = dataset->size() - 1; i > 0 and posx > spacing; --i) {
 				int32_t const curx = static_cast<int32_t>(posx);
 				int32_t       cury = get_inner_h() - space_at_bottom;

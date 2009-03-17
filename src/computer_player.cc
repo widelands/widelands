@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,9 +53,10 @@ struct EmptyAI : Computer_Player {
 EmptyAI::EmptyAIImpl EmptyAI::implementation;
 #endif
 
-const Computer_Player::ImplementationVector& Computer_Player::getImplementations()
+Computer_Player::ImplementationVector const &
+Computer_Player::getImplementations()
 {
-	static std::vector<const Computer_Player::Implementation*> impls;
+	static std::vector<Computer_Player::Implementation const *> impls;
 
 	if (!impls.size()) {
 		impls.push_back(&DefaultAI::implementation);
@@ -70,7 +71,7 @@ const Computer_Player::ImplementationVector& Computer_Player::getImplementations
 const Computer_Player::Implementation * Computer_Player::getImplementation
 	(const std::string & name)
 {
-	const ImplementationVector& vec = getImplementations();
+	ImplementationVector const & vec = getImplementations();
 
 	for
 		(ImplementationVector::const_iterator it = vec.begin();

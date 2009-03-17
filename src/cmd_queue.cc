@@ -62,7 +62,7 @@ Cmd_Queue::queue
 Insert a new command into the queue; it will be executed at the given time
 ===============
 */
-void Cmd_Queue::enqueue (Command* cmd)
+void Cmd_Queue::enqueue (Command * const cmd)
 {
 	cmditem ci;
 
@@ -70,7 +70,7 @@ void Cmd_Queue::enqueue (Command* cmd)
 	if (upcast(PlayerCommand, plcmd, cmd)) {
 		ci.category = cat_playercommand;
 		ci.serial = plcmd->get_cmdserial();
-	} else if (dynamic_cast<GameLogicCommand*>(cmd)) {
+	} else if (dynamic_cast<GameLogicCommand *>(cmd)) {
 		ci.category = cat_gamelogic;
 		ci.serial = nextserial++;
 	} else {
@@ -85,8 +85,7 @@ void Cmd_Queue::enqueue (Command* cmd)
 	m_cmds.push(ci);
 }
 
-/** Cmd_Queue::run_queue(int32_t interval)
- *
+/**
  * Run all commands scheduled for the next interval milliseconds, and update the
  * internal time as well.
  * the game_time_var represents the current game time, which we update and with

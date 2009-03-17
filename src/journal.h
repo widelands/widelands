@@ -70,12 +70,12 @@ public:
 	Journal();
 	~Journal();
 
-	void start_recording(std::string filename="widelands.jnl");
+	void start_recording(std::string const & filename = "widelands.jnl");
 	void stop_recording();
 	///True if events are being recorded
 	bool is_recording() {return m_record;}
 
-	void start_playback(std::string filename="widelands.jnl");
+	void start_playback (std::string const & filename = "widelands.jnl");
 	void stop_playback();
 	///True if events are being played back
 	bool is_playingback() {return m_playback;}

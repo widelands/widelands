@@ -603,13 +603,10 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 		return false;
 
 	// Start program if we haven't already done so
-	if (!state)
-	{
+	if (!state) {
 		m_program_timer = true;
 		m_program_time = schedule_act(g, 10);
-	}
-	else if (state->ip < state->program->get_size())
-	{
+	} else if (state->ip < state->program->get_size()) {
 		ProductionProgram::Action const & action = (*state->program)[state->ip];
 
 		if (upcast(ProductionProgram::ActWorker const, worker_action, &action)) {

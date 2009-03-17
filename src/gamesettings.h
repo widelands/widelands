@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -94,7 +94,7 @@ struct GameSettings {
 struct GameSettingsProvider {
 	virtual ~GameSettingsProvider() {}
 
-	virtual const GameSettings& settings() = 0;
+	virtual GameSettings const & settings() = 0;
 
 	virtual void setScenario(bool set) = 0;
 	virtual bool canChangeMap() = 0;
@@ -104,14 +104,14 @@ struct GameSettingsProvider {
 
 	virtual bool canLaunch() = 0;
 
-	virtual void setMap(const std::string& mapname, const std::string& mapfilename, uint32_t maxplayers, bool savegame = false) = 0;
-	virtual void setPlayerState (uint8_t number, PlayerSettings::State state) = 0;
-	virtual void setPlayerAI    (uint8_t number, const std::string& ai) = 0;
+	virtual void setMap(std::string const & mapname, std::string const & mapfilename, uint32_t maxplayers, bool savegame = false) = 0;
+	virtual void setPlayerState (uint8_t number, PlayerSettings::State) = 0;
+	virtual void setPlayerAI    (uint8_t number, std::string const &) = 0;
 	virtual void nextPlayerState(uint8_t number) = 0;
-	virtual void setPlayerTribe (uint8_t number, const std::string& tribe) = 0;
+	virtual void setPlayerTribe (uint8_t number, std::string const &) = 0;
 	virtual void setPlayerInit  (uint8_t number, uint8_t index) = 0;
-	virtual void setPlayerName  (uint8_t number, const std::string& name) = 0;
-	virtual void setPlayer      (uint8_t number, PlayerSettings ps) = 0;
+	virtual void setPlayerName  (uint8_t number, std::string const &) = 0;
+	virtual void setPlayer      (uint8_t number, PlayerSettings) = 0;
 	virtual void setPlayerNumber(int32_t number) = 0;
 };
 

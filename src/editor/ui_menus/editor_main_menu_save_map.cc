@@ -82,28 +82,33 @@ m_parent  (parent) //  FIXME redundant (base has parent pointer)
 	posy += 20;
 	new UI::Textarea(this, posx, posy, 150, 20, _("Name: "), Align_CenterLeft);
 	m_name =
-		new UI::Textarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
+		new UI::Textarea
+			(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea(this, posx, posy, 150, 20, _("Author: "), Align_CenterLeft);
 	m_author =
-		new UI::Textarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
+		new UI::Textarea
+			(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea(this, posx, posy, 70, 20, _("Size: "), Align_CenterLeft);
 	m_size =
-		new UI::Textarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
+		new UI::Textarea
+			(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea(this, posx, posy, 70, 20, _("World: "), Align_CenterLeft);
 	m_world =
-		new UI::Textarea(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
+		new UI::Textarea
+			(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
 		(this, posx, posy, 70, 20, _("Players: "), Align_CenterLeft);
-	m_nrplayers = new UI::Textarea
-		(this, posx+70, posy, 200, 20, "---", Align_CenterLeft);
+	m_nrplayers =
+		new UI::Textarea
+			(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea(this, posx, posy, 70, 20, _("Descr: "), Align_CenterLeft);
@@ -272,7 +277,7 @@ void Main_Menu_Save_Map::fill_list() {
 
 	// First, we add all directories. We manually add the parent directory
 	if (m_curdir != m_basedir) {
-		m_parentdir=g_fs->FS_CanonicalizeName(m_curdir+"/..");
+		m_parentdir = g_fs->FS_CanonicalizeName(m_curdir + "/..");
 		m_ls->add
 			("<parent>",
 			 m_parentdir.c_str(),
@@ -345,9 +350,10 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 	bool assign_extension = true;
 	if (filename.size() >= strlen(WLMF_SUFFIX)) {
 		char buffer[10]; //  enough for the extension
-		filename.copy(buffer, sizeof(WLMF_SUFFIX), filename.size()-strlen(WLMF_SUFFIX));
+		filename.copy
+			(buffer, sizeof(WLMF_SUFFIX), filename.size() - strlen(WLMF_SUFFIX));
 		if (!strncasecmp(buffer, WLMF_SUFFIX, strlen(WLMF_SUFFIX)))
-			assign_extension=false;
+			assign_extension = false;
 	}
 	if (assign_extension)
 		filename += WLMF_SUFFIX;

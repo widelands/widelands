@@ -723,7 +723,7 @@ void ProductionProgram::ActMine::execute
 	}
 
 	//  how much is digged
-	int32_t digged_percentage=100;
+	int32_t digged_percentage = 100;
 	if (totalstart)
 		digged_percentage = 100 - totalres * 100 / totalstart;
 	if (not totalres)

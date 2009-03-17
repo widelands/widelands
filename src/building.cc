@@ -161,14 +161,14 @@ m_vision_range   (0)
 	if ((m_stopable = global_s.get_bool("stopable", true))) {
 		if (global_s.get_string("stopicon")) {
 			m_stop_icon = directory;
-			m_stop_icon+="/";
+			m_stop_icon += "/";
 			m_stop_icon += global_s.get_string("stopicon");
 		}
 		else
 			m_stop_icon = "pics/stop.png";
 		if (global_s.get_string("continueicon")) {
 			m_continue_icon = directory;
-			m_continue_icon+="/";
+			m_continue_icon += "/";
 			m_continue_icon += global_s.get_string("continueicon");
 		}
 		else
@@ -262,8 +262,6 @@ void Building_Descr::load_graphics()
 
 /*
 ===============
-Building_Descr::create_constructionsite
-
 Create a construction site for this type of building
 
 if old != 0 this is an enhancement from an older building
@@ -281,7 +279,8 @@ Building * Building_Descr::create_constructionsite
 		ConstructionSite & csite = *static_cast<ConstructionSite *>
 			(descr->create_object());
 		csite.set_building(*this);
-		if (old) csite.set_previous_building(old);
+		if (old)
+			csite.set_previous_building(old);
 
 		return &csite;
 	} else
@@ -313,14 +312,6 @@ Building::~Building()
 		hide_options();
 }
 
-/*
-===============
-Building::get_type
-Building::get_size
-Building::get_passable
-Building::get_base_flag
-===============
-*/
 int32_t Building::get_type() const throw () {return BUILDING;}
 
 int32_t Building::get_size() const throw () {return descr().get_size();}
@@ -543,8 +534,6 @@ void Building::postfill
 
 /*
 ===============
-Building::get_building_work [virtual]
-
 This function is called by workers in the buildingwork task.
 Give the worker w a new task.
 success is true if the previous task was finished successfully (without a

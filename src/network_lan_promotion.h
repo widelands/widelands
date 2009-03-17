@@ -56,10 +56,10 @@ protected:
 
 	bool avail ();
 
-	ssize_t recv (void*, size_t, sockaddr_in*);
+	ssize_t recv (void *, size_t, sockaddr_in *);
 
-	void send (const void*, size_t, const sockaddr_in*);
-	void broadcast (const void*, size_t, uint16_t);
+	void send (void const *, size_t, sockaddr_in const *);
+	void broadcast (void const *, size_t, uint16_t);
 
 private:
 	int32_t                  sock;
@@ -73,7 +73,7 @@ struct LAN_Game_Promoter : public LAN_Base {
 
 	void run ();
 
-	void set_map (const char*);
+	void set_map (char const *);
 
 private:
 	LAN_Game_Info gameinfo;
@@ -93,12 +93,12 @@ struct LAN_Game_Finder:LAN_Base {
 	void reset ();
 	void run ();
 
-	void set_callback (void(*)(int32_t, const LAN_Open_Game*, void*), void*);
+	void set_callback (void(*)(int32_t, LAN_Open_Game const *, void *), void *);
 
 private:
 	std::list<LAN_Open_Game *> opengames;
 
-	void (*callback) (int32_t, const LAN_Open_Game*, void*);
+	void (*callback) (int32_t, LAN_Open_Game const *, void *);
 	void                     * userdata;
 };
 

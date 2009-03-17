@@ -114,7 +114,7 @@ void Map_Bobdata_Data_Packet::Read
 
 					bob.m_anim =
 						fr.Unsigned8() ? bob_descr.get_animation(fr.CString()) : 0;
-					bob.m_animstart=fr.Signed32();
+					bob.m_animstart = fr.Signed32();
 
 					{
 						//  FIXME Use StreamRead::Direction8 in the next packet

@@ -55,7 +55,7 @@ m_game    (game)
 		new UI::Multiline_Textarea
 		(this,
 		 posx, posy,
-		 get_inner_w() - posx-spacing, get_inner_h() - posy - 2 * spacing - 50,
+		 get_inner_w() - posx - spacing, get_inner_h() - posy - 2 * spacing - 50,
 		 "", Align_Left);
 
 	if (m_text)

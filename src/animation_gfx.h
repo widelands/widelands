@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 struct Surface;
 
 struct AnimationGfx { /// The graphics belonging to an animation.
-	AnimationGfx(const AnimationData* data);
+	AnimationGfx(AnimationData const * data);
 	~AnimationGfx();
 
 	const Point get_hotspot() const throw () {return m_hotspot;}
@@ -45,12 +45,13 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 		assert(player);
 
 		// Encode for this player
-		if (not m_plrframes[plyr].size()) encode(plyr, player->get_playercolor());
+		if (not m_plrframes[plyr].size())
+			encode(plyr, player->get_playercolor());
 		return m_plrframes[plyr][i];
 	}
 
 private:
-	void encode(uint8_t plyr, const RGBColor*);
+	void encode(uint8_t plyr, RGBColor const *);
 
 	Frames m_plrframes[MAX_PLAYERS + 1];
 	Frames m_pcmasks;

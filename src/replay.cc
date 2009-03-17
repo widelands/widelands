@@ -47,7 +47,7 @@ enum {
 
 
 struct Cmd_ReplaySyncRead : public Command {
-	Cmd_ReplaySyncRead(uint32_t time, const md5_checksum& hash)
+	Cmd_ReplaySyncRead(uint32_t const time, md5_checksum const & hash)
 		: Command(time), m_hash(hash)
 	{}
 
@@ -182,8 +182,7 @@ Command* ReplayReader::GetNextCommand(uint32_t time)
 		default:
 			throw wexception("Unknown packet %u", pkt);
 		}
-	}
-	catch (_wexception& e) {
+	} catch (_wexception const & e) {
 		log("REPLAY: Caught exception %s\n", e.what());
 		delete m_cmdlog;
 		m_cmdlog = 0;

@@ -51,7 +51,8 @@ struct Tribe_Descr;
 class Flag;
 struct AttackController;
 
-struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField> {
+struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>
+{
 	friend struct ::Fullscreen_Menu_LaunchGame;
 	friend struct ::Interactive_Base;
 	friend class Game_Game_Class_Data_Packet;
@@ -59,9 +60,9 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField> {
 	Editor_Game_Base();
 	virtual ~Editor_Game_Base();
 
-	void set_map(Map* map);
+	void set_map(Map *);
 	Map & map() const throw () {return *m_map;}
-	Map *get_map() {return m_map;}
+	Map * get_map() {return m_map;}
 	Map & get_map() const {return *m_map;}
 	const Object_Manager & objects() const {return m_objects;}
 	Object_Manager       & objects()       {return m_objects;}
@@ -118,8 +119,8 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField> {
 	// safe system for storing pointers to non-Map_Object C++ objects
 	// unlike objects in the Object_Manager, these pointers need not be
 	// synchronized across the network, and they are not saved in savegames
-	uint32_t add_trackpointer(void* ptr);
-	void* get_trackpointer(uint32_t serial);
+	uint32_t add_trackpointer(void *);
+	void * get_trackpointer(uint32_t serial);
 	void remove_trackpointer(uint32_t serial);
 
 	// Manually load a tribe into memory. Used by the editor
@@ -134,8 +135,8 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField> {
 	void inform_players_about_immovable(Map_Index, Map_Object_Descr const *);
 	void inform_players_about_road     (FCoords,   Map_Object_Descr const *);
 
-	void receive(const NoteImmovable& note);
-	void receive(const NoteField& note);
+	void receive(NoteImmovable const &);
+	void receive(NoteField     const &);
 
 	void cleanup_objects() throw () {
 		objects().cleanup(this);
@@ -199,8 +200,8 @@ private:
 	std::map<uint32_t, void *>     m_trackpointers;
 
 private:
-	Editor_Game_Base & operator=(Editor_Game_Base const &);
-	explicit Editor_Game_Base   (Editor_Game_Base const &);
+	Editor_Game_Base & operator= (Editor_Game_Base const &);
+	explicit Editor_Game_Base    (Editor_Game_Base const &);
 };
 
 #define iterate_players_existing(p, nr_players, egbase, player)               \

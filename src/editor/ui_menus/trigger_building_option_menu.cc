@@ -515,7 +515,7 @@ void Trigger_Building_Option_Menu::clicked_decrement_radius() {
 
 
 void Trigger_Building_Option_Menu::clicked_ok() {
-	const std::string& name = m_name.text();
+	std::string const & name = m_name.text();
 	if (name.size()) {
 		if
 			(Widelands::Trigger * const registered_trigger =

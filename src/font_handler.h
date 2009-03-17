@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,7 +70,7 @@ enum Widget_Cache {
  *
  * This class generates font Pictures out of strings and returns them
  */
-typedef std::string (*Varibale_Callback)(std::string, void* data);
+typedef std::string (*Varibale_Callback)(std::string, void * data);
 struct Font_Handler {
 	Font_Handler();
 	~Font_Handler();
@@ -119,7 +119,7 @@ struct Font_Handler {
 	void get_size_from_cache(const uint32_t widget_cache_id, uint32_t & w, uint32_t & h);
 
 	// Register a callback which is used whenever the tag <variable name="kljdf"> appears
-	void register_variable_callback(Varibale_Callback, void* cbdata);
+	void register_variable_callback(Varibale_Callback, void * cbdata);
 	void unregister_variable_callback();
 
 private:
@@ -133,7 +133,7 @@ private:
 		uint32_t      w;
 		uint32_t      h;
 
-		bool operator== (const _Cache_Infos& who) const {
+		bool operator== (_Cache_Infos const & who) const {
 			return
 				str == who.str &&
 				f   == who.f   &&
@@ -146,10 +146,10 @@ private:
 private:
 	static const uint32_t CACHE_ARRAY_SIZE = 500;
 
-	Font_Loader* m_font_loader;
+	Font_Loader           * m_font_loader;
 	std::list<_Cache_Infos> m_cache;
 	Varibale_Callback m_varcallback;
-	void* m_cbdata;
+	void                  * m_cbdata;
 
 private:
 	uint32_t create_text_surface
@@ -165,7 +165,7 @@ private:
 		 const std::string & text,
 		 const Align align, const int32_t wrap, const int32_t style = TTF_STYLE_NORMAL,
 		 const int32_t line_spacing = 0);
-	SDL_Surface* create_sdl_text_surface
+	SDL_Surface * create_sdl_text_surface
 		(TTF_Font &, const RGBColor fg, const RGBColor bg,
 		 const std::string & text,
 		 const Align align, const int32_t wrap, const int32_t line_spacing = 0);
@@ -174,12 +174,12 @@ private:
 		 std::string text,
 		 const Align align, const int32_t wrap, const int32_t line_spacing = 0,
 		 const int32_t caret = -1);
-	SDL_Surface* create_single_line_text_surface
+	SDL_Surface * create_single_line_text_surface
 		(TTF_Font &, const RGBColor fg, const RGBColor bg,
 		 std::string text,
 		 const Align align, const int32_t caret = -1);
-	SDL_Surface* create_empty_sdl_surface(uint32_t w, uint32_t h);
-	SDL_Surface* join_sdl_surfaces
+	SDL_Surface * create_empty_sdl_surface(uint32_t w, uint32_t h);
+	SDL_Surface * join_sdl_surfaces
 		(const uint32_t w, const uint32_t h,
 		 const std::vector<SDL_Surface *> & surfaces,
 		 const RGBColor bg,
@@ -187,14 +187,15 @@ private:
 		 const int32_t spacing        = 0,
 		 const bool vertical      = false,
 		 const bool keep_surfaces = false);
-	SDL_Surface* load_image(std::string file);
-	SDL_Surface* render_space(Text_Block &block, RGBColor bg, int32_t style = TTF_STYLE_NORMAL);
+	SDL_Surface * load_image(std::string file);
+	SDL_Surface * render_space
+		(Text_Block &, RGBColor bg, int32_t style = TTF_STYLE_NORMAL);
 	void render_caret
 		(TTF_Font &,
 		 SDL_Surface & line,
 		 const std::string & text_caret_pos);
 };
 
-extern Font_Handler* g_fh; // the default font
+extern Font_Handler * g_fh; // the default font
 
 #endif

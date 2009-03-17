@@ -57,15 +57,16 @@ typedef int32_t (*Overlay_Callback_Function)
 	(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
 struct Overlay_Manager {
 	struct Job_Id { //  Boxing
-		static Job_Id Null() throw ()//  Constant value for no job.
+		static Job_Id Null() throw () //  Constant value for no job.
 		{Job_Id result; result.id = 0; return result;}
 		operator bool() const throw () {return id;}
 		bool operator<(const Job_Id other) const throw () {return id < other.id;}
 	private:
 		friend class Overlay_Manager;
 		Job_Id operator++() throw () {++id; return *this;}
-		bool operator==(const Job_Id other) const throw ()
-		{return id == other.id;}
+		bool operator== (Job_Id const other) const throw () {
+			return id == other.id;
+		}
 		uint32_t id;
 	};
 	struct Overlay_Info {
