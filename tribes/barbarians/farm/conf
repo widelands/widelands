@@ -1,7 +1,6 @@
 soundfx=../../../sound/farm/farm_animal
 size=big
 output=wheat
-stopable=yes
 
 [buildcost]
 trunk=4

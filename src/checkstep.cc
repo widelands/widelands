@@ -37,12 +37,13 @@ CheckStep::CheckStep()
 }
 
 struct CheckStepAlwaysFalse {
-	bool allowed(Map*, const FCoords&, const FCoords&, int32_t, CheckStep::StepId) const {
+	bool allowed
+		(Map &, FCoords const &, FCoords const &, int32_t, CheckStep::StepId)
+		const
+	{
 		return false;
 	}
-	bool reachabledest(Map*, const FCoords&) const {
-		return false;
-	}
+	bool reachabledest(Map &, FCoords const &) const {return false;}
 };
 
 CheckStep const & CheckStep::alwaysfalse()
@@ -57,7 +58,10 @@ void CheckStepAnd::add(CheckStep const & sub)
 	subs.push_back(sub);
 }
 
-bool CheckStepAnd::allowed(Map* map, FCoords start, FCoords end, int32_t dir, CheckStep::StepId id) const
+bool CheckStepAnd::allowed
+	(Map & map, FCoords const start, FCoords const end, int32_t const dir,
+	 CheckStep::StepId const id)
+	const
 {
 	for
 		(std::vector<CheckStep>::const_iterator it = subs.begin();
@@ -71,7 +75,7 @@ bool CheckStepAnd::allowed(Map* map, FCoords start, FCoords end, int32_t dir, Ch
 	return true;
 }
 
-bool CheckStepAnd::reachabledest(Map* map, FCoords dest) const
+bool CheckStepAnd::reachabledest(Map & map, FCoords const dest) const
 {
 	for
 		(std::vector<CheckStep>::const_iterator it = subs.begin();
@@ -89,7 +93,7 @@ CheckStepDefault
 ===============
 */
 bool CheckStepDefault::allowed
-	(Map *, FCoords start, FCoords end, int32_t, CheckStep::StepId) const
+	(Map &, FCoords start, FCoords end, int32_t, CheckStep::StepId) const
 {
 	uint8_t endcaps = end.field->get_caps();
 
@@ -105,7 +109,7 @@ bool CheckStepDefault::allowed
 	return false;
 }
 
-bool CheckStepDefault::reachabledest(Map* map, FCoords dest) const
+bool CheckStepDefault::reachabledest(Map & map, FCoords const dest) const
 {
 	uint8_t caps = dest.field->get_caps();
 
@@ -113,7 +117,7 @@ bool CheckStepDefault::reachabledest(Map* map, FCoords dest) const
 		if (!((m_movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
 			return false;
 
-		if (!map->can_reach_by_water(dest))
+		if (!map.can_reach_by_water(dest))
 			return false;
 	}
 
@@ -127,7 +131,7 @@ CheckStepWalkOn
 ===============
 */
 bool CheckStepWalkOn::allowed
-	(Map *, FCoords start, FCoords end, int32_t, CheckStep::StepId id) const
+	(Map &, FCoords start, FCoords end, int32_t, CheckStep::StepId id) const
 {
 	uint8_t startcaps = start.field->get_caps();
 	uint8_t endcaps = end.field->get_caps();
@@ -152,14 +156,16 @@ bool CheckStepWalkOn::allowed
 	return false;
 }
 
-bool CheckStepWalkOn::reachabledest(Map *, FCoords) const {
+bool CheckStepWalkOn::reachabledest(Map &, FCoords) const {
 	// Don't bother solving this.
 	return true;
 }
 
 
 bool CheckStepRoad::allowed
-	(Map* map, FCoords start, FCoords end, int32_t, CheckStep::StepId id) const
+	(Map & map, FCoords const start, FCoords const end, int32_t,
+	 CheckStep::StepId const id)
+	const
 {
 	uint8_t const endcaps = m_player.get_buildcaps(end);
 
@@ -174,23 +180,21 @@ bool CheckStepRoad::allowed
 		return false;
 
 	// Check for blocking immovables
-	BaseImmovable *imm = map->get_immovable(end);
-	if (imm && imm->get_size() >= BaseImmovable::SMALL) {
-		if (id != CheckStep::stepLast)
-			return false;
+	if (BaseImmovable const * const imm = map.get_immovable(end))
+		if (imm->get_size() >= BaseImmovable::SMALL) {
+			if (id != CheckStep::stepLast)
+				return false;
 
-		if
-			(not
-			 (dynamic_cast<const Flag *>(imm)
-			  or
-			  (dynamic_cast<const Road *>(imm) and endcaps & BUILDCAPS_FLAG)))
-			return false;
-	}
+			return
+				dynamic_cast<Flag const *>(imm)
+				or
+				(dynamic_cast<Road const *>(imm) and endcaps & BUILDCAPS_FLAG);
+		}
 
 	return true;
 }
 
-bool CheckStepRoad::reachabledest(Map* map, FCoords dest) const
+bool CheckStepRoad::reachabledest(Map & map, FCoords const dest) const
 {
 	uint8_t caps = dest.field->get_caps();
 
@@ -198,7 +202,7 @@ bool CheckStepRoad::reachabledest(Map* map, FCoords dest) const
 		if (!((m_movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
 			return false;
 
-		if (!map->can_reach_by_water(dest))
+		if (!map.can_reach_by_water(dest))
 			return false;
 	}
 
@@ -207,12 +211,12 @@ bool CheckStepRoad::reachabledest(Map* map, FCoords dest) const
 
 
 bool CheckStepLimited::allowed
-	(Map *, FCoords, FCoords const end, int32_t, CheckStep::StepId) const
+	(Map &, FCoords, FCoords const end, int32_t, CheckStep::StepId) const
 {
 	return m_allowed_locations.find(end) != m_allowed_locations.end();
 }
 
-bool CheckStepLimited::reachabledest(Map *, FCoords) const {
+bool CheckStepLimited::reachabledest(Map &, FCoords) const {
 	return true;
 }
 

@@ -1,5 +1,4 @@
 size=small
-stopable=yes
 output=water
 
 [buildcost]

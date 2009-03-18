@@ -71,10 +71,6 @@ struct Building_Descr : public Map_Object_Descr {
 	bool get_ismine() const {return m_mine;}
 	virtual uint32_t get_ui_anim() const throw () {return get_animation("idle");}
 
-	bool get_stopable() const {return m_stopable;}
-	const std::string & get_stop_icon() const throw () {return m_stop_icon;}
-	const std::string & get_continue_icon() const throw ()
-	{return m_continue_icon;}
 	typedef std::set<Building_Index> Enhancements;
 	Enhancements const & enhancements() const throw () {return m_enhancements;}
 	void add_enhancement(Building_Index const i) {
@@ -110,9 +106,6 @@ struct Building_Descr : public Map_Object_Descr {
 protected:
 	virtual Building * create_object() const = 0;
 	Building * create_constructionsite(const Building_Descr * const) const;
-	bool         m_stopable;
-	std::string  m_stop_icon;
-	std::string  m_continue_icon;
 
 private:
 	const Tribe_Descr & m_tribe;
@@ -139,7 +132,6 @@ public:
 	// Player capabilities: which commands can a player issue for this building?
 	enum {
 		PCap_Bulldoze = 0, // can bulldoze/remove this buildings
-		PCap_Stopable = 1, // is stopable
 		PCap_Enhancable = 3, // can be enhanced to something
 	};
 
@@ -202,13 +194,6 @@ public:
 	uint32_t get_conquers() const throw () {return descr().get_conquers();}
 	virtual uint32_t vision_range() const throw () {return descr().vision_range();}
 
-	const std::string & get_stop_icon    () const throw ()
-	{return descr().get_stop_icon();}
-	const std::string & get_continue_icon() const throw ()
-	{return descr().get_continue_icon();}
-	bool get_stop() const throw () {return m_stop;}
-	virtual void set_stop(bool stop);
-
 	int32_t get_base_priority() const {return m_priority;}
 	virtual int32_t get_priority(int32_t type, Ware_Index ware_index, bool adjust = true) const;
 	void set_priority(int32_t new_priority);
@@ -261,7 +246,6 @@ protected:
 	Leave_Queue m_leave_queue; //  FIFO queue of workers leaving the building
 	uint32_t        m_leave_time;  //  when to wake the next one from leave queue
 	Object_Ptr  m_leave_allow; //  worker that is allowed to leave now
-	bool        m_stop;
 
 	//  The player who has defeated this building.
 	Player_Number           m_defeating_player;

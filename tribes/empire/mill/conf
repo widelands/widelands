@@ -1,6 +1,5 @@
 size=medium
 output=flour
-stopable=yes
 soundfx=../../../sound/mill/mill_turning
 
 [buildcost]

@@ -60,9 +60,9 @@ struct CheckStepRoadAI {
 	void set_openend (bool const oe) {openend = oe;}
 
 	bool allowed
-		(Map* map, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
+		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
 		const;
-	bool reachabledest(Map* map, FCoords dest) const;
+	bool reachabledest(Map &, FCoords dest) const;
 
 //private:
 	Player * player;
@@ -1197,9 +1197,8 @@ void DefaultAI::lose_immovable (PlayerImmovable const & pi)
 }
 
 
-/* CheckStepRoadAI */
 bool CheckStepRoadAI::allowed
-	(Map * const map, FCoords, FCoords end, int32_t, CheckStep::StepId const id)
+	(Map & map, FCoords, FCoords end, int32_t, CheckStep::StepId const id)
 	const
 {
 	uint8_t endcaps = player->get_buildcaps(end);
@@ -1214,7 +1213,7 @@ bool CheckStepRoadAI::allowed
 	}
 
 	// Check for blocking immovables
-	if (BaseImmovable const * const imm = map->get_immovable(end))
+	if (BaseImmovable const * const imm = map.get_immovable(end))
 		if (imm->get_size() >= BaseImmovable::SMALL) {
 			if (id != CheckStep::stepLast && !openend)
 				return false;
@@ -1229,7 +1228,7 @@ bool CheckStepRoadAI::allowed
 	return true;
 }
 
-bool CheckStepRoadAI::reachabledest(Map* map, FCoords const dest) const
+bool CheckStepRoadAI::reachabledest(Map & map, FCoords const dest) const
 {
 	uint8_t caps = dest.field->get_caps();
 
@@ -1237,7 +1236,7 @@ bool CheckStepRoadAI::reachabledest(Map* map, FCoords const dest) const
 		if (!((movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
 			return false;
 
-		if (!map->can_reach_by_water(dest))
+		if (!map.can_reach_by_water(dest))
 			return false;
 	}
 

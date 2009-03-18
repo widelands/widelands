@@ -594,21 +594,20 @@ void Building_Window::setup_capsbuttons()
 
 	x = 0;
 
-	if (m_capscache & (1 << Building::PCap_Stopable)) {
-		const bool stopped = m_building->get_stop();
-		new UI::Button<Building_Window>
-			(m_capsbuttons,
-			 x, 0, 34, 34,
-			 4,
-			 g_gr->get_picture
-			 	(PicMod_Game,
-			 	 (stopped ?
-			 	  m_building->get_continue_icon() : m_building->get_stop_icon())
-			 	 .c_str()),
-			 &Building_Window::act_start_stop, this,
-			 stopped ? _("Continue") : _("Stop"));
-		x += 34;
-	}
+	if (upcast(ProductionSite const, productionsite, m_building))
+		if (not dynamic_cast<MilitarySite const *>(productionsite)) {
+			bool const is_stopped = productionsite->is_stopped();
+			new UI::Button<Building_Window>
+				(m_capsbuttons,
+				 x, 0, 34, 34,
+				 4,
+				 g_gr->get_picture
+				 (PicMod_Game,
+				  	(is_stopped ? "pics/continue.png" : "pics/stop.png")),
+				 &Building_Window::act_start_stop, this,
+				 is_stopped ? _("Continue") : _("Stop"));
+			x += 34;
+		}
 
 	if (m_capscache & 1 << Building::PCap_Enhancable) {
 		std::set<Building_Index> const & enhancements =
@@ -688,7 +687,7 @@ void Building_Window::act_bulldoze()
 }
 
 void Building_Window::act_start_stop() {
-	if (m_building && m_building->get_playercaps() & (1 << Building::PCap_Stopable))
+	if (dynamic_cast<ProductionSite const *>(m_building))
 		m_player->game().send_player_start_stop_building (*m_building);
 
 	die();

@@ -1,6 +1,5 @@
 size=mine
 output=raw_stone
-stopable=yes
 
 [buildcost]
 trunk=4

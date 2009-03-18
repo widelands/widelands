@@ -3,7 +3,6 @@ buildable=no
 enhanced_building=yes
 output=marble
 output=stone
-stopable=yes
 
 [buildcost]
 trunk=4

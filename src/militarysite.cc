@@ -54,9 +54,6 @@ m_num_medics         (0),
 m_heal_per_second    (0),
 m_heal_incr_per_medic(0)
 {
-	if (global_s.get_val("stopable"))
-		throw wexception("key stopable is not allowed for militarysite");
-
 	m_conquer_radius      = global_s.get_safe_int("conquers");
 	m_num_soldiers        = global_s.get_safe_int("max_soldiers");
 	m_num_medics          = global_s.get_safe_int("max_medics");

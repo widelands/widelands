@@ -350,7 +350,6 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 		// Put the real building in place
 		Building * const bld =
 			m_building->create(*g, owner(), m_position, false);
-		bld->set_stop(get_stop());
 		if (Worker * const builder = m_builder.get(g))
 			builder->reset_tasks(dynamic_cast<Game *>(g));
 	}

@@ -1,6 +1,5 @@
 size=mine
 output=goldore
-stopable=yes
 
 [buildcost]
 trunk=7

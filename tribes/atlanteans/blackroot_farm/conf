@@ -1,5 +1,4 @@
 size=big
-stopable=yes
 output=blackroot
 
 [buildcost]

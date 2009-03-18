@@ -323,9 +323,6 @@ void Tribe_Descr::writeHTMLBuildings(std::string const & directory) {
 		fw.Text("</td><td>");
 		fw.Text
 			(building_descr.get_enhanced_building() ? _("Yes") : _("No"));
-		fw.Text("</td><td>");
-		fw.Text
-			(building_descr.get_stopable         () ? _("Yes") : _("No"));
 		fw.Text("</td><td align=\"right\">");
 		char buffer[32];
 		sprintf(buffer, "%u", building_descr.get_conquers());
@@ -394,13 +391,6 @@ void Building_Descr::writeHTML(::FileWrite & fw) const {
 			("</p>\n"
 			 "<p>");
 		fw.Text(_("Is enhanced."));
-	}
-
-	if (m_stopable) {
-		fw.Text("</p><p><img src=\"../../../pics/stop.png\" alt=\"");
-		fw.Text(_("Stop"));
-		fw.Text("\"/>");
-		fw.Text(_("Is stopable."));
 	}
 
 	if (uint32_t const c = get_conquers()) {

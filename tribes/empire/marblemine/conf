@@ -1,7 +1,6 @@
 size=mine
 output=marble
 output=stone
-stopable=yes
 enhancement=deep_marblemine
 
 [buildcost]

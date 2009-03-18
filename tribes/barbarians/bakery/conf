@@ -1,6 +1,5 @@
 size=medium
 output=pittabread
-stopable=yes
 
 [buildcost]
 trunk=2

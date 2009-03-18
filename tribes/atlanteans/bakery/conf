@@ -1,6 +1,5 @@
 size=medium
 output=bread
-stopable=yes
 
 [buildcost]
 trunk=2

@@ -56,7 +56,8 @@ ProductionSite_Descr::ProductionSite_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
 	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
-	: Building_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
+	:
+	Building_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
 {
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))
@@ -173,14 +174,15 @@ IMPLEMENTATION
 
 ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
 	Building            (ps_descr),
-	m_working_positions(new Working_Position[ps_descr.nr_working_positions()]),
-m_fetchfromflag     (0),
-m_program_timer     (false),
-m_program_time      (0),
-m_post_timer        (50),
-m_statistics        (STATISTICS_VECTOR_LENGTH, false),
-m_statistics_changed(true),
-m_last_stat_percent (0)
+	m_working_positions (new Working_Position[ps_descr.nr_working_positions()]),
+	m_fetchfromflag     (0),
+	m_program_timer     (false),
+	m_program_time      (0),
+	m_post_timer        (50),
+	m_statistics        (STATISTICS_VECTOR_LENGTH, false),
+	m_statistics_changed(true),
+	m_last_stat_percent (0),
+	m_is_stopped        (false)
 {}
 
 ProductionSite::~ProductionSite() {
@@ -209,7 +211,7 @@ std::string ProductionSite::get_statistics_string()
 	if (m_statistics_changed)
 		calc_statistics();
 
-	if (m_stop)
+	if (m_is_stopped)
 		return _("(stopped)");
 
 	return m_statistics_buf;
@@ -496,7 +498,7 @@ void ProductionSite::program_act(Game & game)
 	molog
 		("PSITE: program %s#%i\n", state.program->get_name().c_str(), state.ip);
 #endif
-	if (m_stop) {
+	if (m_is_stopped) {
 		program_end(game, Failed);
 		m_program_timer = true;
 		m_program_time = schedule_act(&game, 20000);
@@ -516,6 +518,19 @@ bool ProductionSite::fetch_from_flag(Game* g)
 		m_working_positions[0].worker->update_task_buildingwork(g);
 
 	return true;
+}
+
+
+void ProductionSite::log_general_info(Editor_Game_Base * const egbase) {
+	Building::log_general_info(egbase);
+
+	molog("m_is_stopped: %u\n", m_is_stopped);
+}
+
+
+void ProductionSite::set_stopped(bool const stopped) {
+	m_is_stopped = stopped;
+	get_economy()->rebalance_supply();
 }
 
 /**

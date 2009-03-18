@@ -121,7 +121,27 @@ throw (_wexception)
 					else
 						building.m_leave_allow = 0;
 
-					building.m_stop = fr.Unsigned8();
+					if (fr.Unsigned8()) {
+						if (upcast(ProductionSite, productionsite, &building))
+							if (dynamic_cast<MilitarySite const *>(productionsite))
+								log
+									("WARNING: Found a stopped %s at (%i, %i) in the "
+									 "savegame. Militarysites are not stopable. "
+									 "Ignoring.",
+									 building.descname().c_str(),
+									 building.get_position().x,
+									 building.get_position().y);
+							else
+								productionsite->set_stopped(true);
+						else
+							log
+								("WARNING: Found a stopped %s at (%i, %i) in the "
+								 "savegame. Only productionsites are stopable. "
+								 "Ignoring.",
+								 building.descname().c_str(),
+								 building.get_position().x,
+								 building.get_position().y);
+					}
 
 					//  Set economy now, some stuff below will count on this.
 					building.set_economy(building.m_flag->get_economy());
@@ -698,7 +718,12 @@ throw (_wexception)
 				fw.Unsigned32(os->get_object_file_index(building->m_leave_allow.get(egbase)));
 			} else
 				fw.Unsigned32(0);
-			fw.Unsigned8(building->m_stop);
+			{
+				bool is_stopped = false;
+				if (upcast(ProductionSite const, productionsite, building))
+					is_stopped = productionsite->is_stopped();
+				fw.Unsigned8(is_stopped);
+			}
 
 			if (upcast(ConstructionSite const, constructionsite, building))
 				write_constructionsite(*constructionsite, fw, egbase, os);

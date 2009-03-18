@@ -543,20 +543,18 @@ struct BlockedTracker {
 };
 
 struct CheckStepBlocked {
-	CheckStepBlocked(BlockedTracker& tracker)
-		: m_tracker(tracker) {}
+	CheckStepBlocked(BlockedTracker & tracker) : m_tracker(tracker) {}
 
-	bool allowed(Map*, FCoords, FCoords end, int32_t, CheckStep::StepId) const {
+	bool allowed(Map &, FCoords, FCoords end, int32_t, CheckStep::StepId) const
+	{
 		if (end == m_tracker.m_finaldest)
 			return true;
 
 		return !m_tracker.isBlocked(end);
 	}
-	bool reachabledest(Map*, FCoords) const {
-		return true;
-	}
+	bool reachabledest(Map &, FCoords) const {return true;}
 
-	BlockedTracker& m_tracker;
+	BlockedTracker & m_tracker;
 };
 
 /**
@@ -898,7 +896,7 @@ int32_t Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
 	if (!force) {
 		CheckStepDefault cstep(descr().movecaps());
 
-		if (!cstep.allowed(&map, m_position, newf, dir, CheckStep::stepNormal))
+		if (!cstep.allowed(map, m_position, newf, dir, CheckStep::stepNormal))
 			return -1;
 	}
 

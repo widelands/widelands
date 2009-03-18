@@ -1,6 +1,5 @@
 size=mine
 output=coal
-stopable=yes
 enhancement=deep_coalmine
 
 [buildcost]

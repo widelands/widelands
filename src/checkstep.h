@@ -41,17 +41,27 @@ struct CheckStep {
 private:
 	struct BaseCapsule {
 		virtual ~BaseCapsule() {}
-		virtual bool allowed(Map* map, const FCoords& start, const FCoords& end, int32_t dir, StepId id) const = 0;
-		virtual bool reachabledest(Map* map, const FCoords& dest) const = 0;
+		virtual bool allowed
+			(Map &, FCoords const & start, FCoords const & end,
+			 int32_t dir,
+			 StepId  id)
+			const
+			= 0;
+		virtual bool reachabledest(Map &, FCoords const & dest) const = 0;
 	};
 	template<typename T>
 	struct Capsule : public BaseCapsule {
-		Capsule(const T& _op) : op(_op) {}
+		Capsule(T const & _op) : op(_op) {}
 
-		bool allowed(Map* map, const FCoords& start, const FCoords& end, int32_t dir, StepId id) const {
+		bool allowed
+			(Map & map, FCoords const & start, FCoords const & end,
+			 int32_t const dir,
+			 StepId  const id)
+			const
+		{
 			return op.allowed(map, start, end, dir, id);
 		}
-		bool reachabledest(Map* map, const FCoords& dest) const {
+		bool reachabledest(Map & map, FCoords const & dest) const {
 			return op.reachabledest(map, dest);
 		}
 
@@ -72,7 +82,12 @@ public:
 	 * \return \c true true if moving from start to end (single step in the given
 	 * direction) is allowed.
 	 */
-	bool allowed(Map* map, const FCoords& start, const FCoords& end, int32_t dir, StepId id) const {
+	bool allowed
+		(Map & map, FCoords const & start, FCoords const & end,
+		 int32_t const dir,
+		 StepId  const id)
+		const
+	{
 		return capsule->allowed(map, start, end, dir, id);
 	}
 
@@ -80,7 +95,7 @@ public:
 	 * \return \c true if the destination field can be reached at all
 	 * (e.g. return false for land-based bobs when dest is in water).
 	 */
-	bool reachabledest(Map* map, const FCoords& dest) const {
+	bool reachabledest(Map & map, FCoords const & dest) const {
 		return capsule->reachabledest(map, dest);
 	}
 };
@@ -93,8 +108,12 @@ public:
 struct CheckStepAnd {
 	void add(CheckStep const & sub);
 
-	bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, CheckStep::StepId id) const;
-	bool reachabledest(Map* map, FCoords dest) const;
+	bool allowed
+		(Map &, FCoords start, FCoords end,
+		 int32_t           dir,
+		 CheckStep::StepId id)
+		const;
+	bool reachabledest(Map &, FCoords dest) const;
 
 private:
 	std::vector<CheckStep> subs;
@@ -110,8 +129,10 @@ private:
 struct CheckStepDefault {
 	CheckStepDefault(uint8_t movecaps) : m_movecaps(movecaps) {}
 
-	bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, CheckStep::StepId id) const;
-	bool reachabledest(Map* map, FCoords dest) const;
+	bool allowed
+		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
+		const;
+	bool reachabledest(Map &, FCoords dest) const;
 
 private:
 	uint8_t m_movecaps;
@@ -126,8 +147,10 @@ private:
 struct CheckStepWalkOn {
 	CheckStepWalkOn(uint8_t movecaps, bool onlyend) : m_movecaps(movecaps), m_onlyend(onlyend) {}
 
-	bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, CheckStep::StepId id) const;
-	bool reachabledest(Map* map, FCoords dest) const;
+	bool allowed
+		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
+		const;
+	bool reachabledest(Map &, FCoords dest) const;
 
 private:
 	uint8_t m_movecaps;
@@ -147,8 +170,10 @@ struct CheckStepRoad {
 		: m_player(player), m_movecaps(movecaps)
 	{}
 
-	bool allowed(Map* map, FCoords start, FCoords end, int32_t dir, CheckStep::StepId id) const;
-	bool reachabledest(Map* map, FCoords dest) const;
+	bool allowed
+		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
+		const;
+	bool reachabledest(Map &, FCoords dest) const;
 
 private:
 	Player const & m_player;
@@ -161,8 +186,10 @@ private:
  */
 struct CheckStepLimited {
 	void add_allowed_location(Coords const c) {m_allowed_locations.insert(c);}
-	bool allowed(Map *, FCoords start, FCoords end, int32_t dir, CheckStep::StepId id) const;
-	bool reachabledest(Map *, FCoords dest) const;
+	bool allowed
+		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
+		const;
+	bool reachabledest(Map &, FCoords dest) const;
 
 private:
 	// It is OK to use Coords::ordering_functor because the ordering of the set

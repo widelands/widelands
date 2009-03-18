@@ -158,23 +158,6 @@ m_vision_range   (0)
 			}
 	}
 
-	if ((m_stopable = global_s.get_bool("stopable", true))) {
-		if (global_s.get_string("stopicon")) {
-			m_stop_icon = directory;
-			m_stop_icon += "/";
-			m_stop_icon += global_s.get_string("stopicon");
-		}
-		else
-			m_stop_icon = "pics/stop.png";
-		if (global_s.get_string("continueicon")) {
-			m_continue_icon = directory;
-			m_continue_icon += "/";
-			m_continue_icon += global_s.get_string("continueicon");
-		}
-		else
-			m_continue_icon = "pics/continue.png";
-	}
-
 	{ //  parse basic animation data
 		Section & idle_s = prof.get_safe_section("idle");
 		if (!is_animation_known("idle"))
@@ -301,7 +284,6 @@ Building::Building(const Building_Descr & building_descr) :
 PlayerImmovable(building_descr),
 m_optionswindow(0),
 m_flag         (0),
-m_stop            (false),
 m_defeating_player(0),
 m_priority (DEFAULT_PRIORITY)
 {}
@@ -337,8 +319,8 @@ uint32_t Building::get_playercaps() const throw () {
 	uint32_t caps = 0;
 	if (descr().buildable() or descr().get_enhanced_building())
 		caps                                |= 1 << PCap_Bulldoze;
-	if (descr().get_stopable())       caps |= 1 << PCap_Stopable;
-	if (descr().enhancements().size()) caps |= 1 << PCap_Enhancable;
+	if (descr().enhancements().size())
+		caps |= 1 << PCap_Enhancable;
 	return caps;
 }
 
@@ -732,11 +714,6 @@ void Building::draw_help
 	}
 }
 
-void Building::set_stop(bool stop) {
-	m_stop = stop;
-	get_economy()->rebalance_supply();
-}
-
 /**
 * Get priority of a requested ware.
 * Currently always returns base priority - to be extended later
@@ -811,7 +788,6 @@ void Building::log_general_info(Editor_Game_Base* egbase) {
 	molog("m_animstart: %i\n", m_animstart);
 
 	molog("m_leave_time: %i\n", m_leave_time);
-	molog("m_stop: %i\n", m_stop);
 
 	molog
 		("m_leave_queue.size(): %lu\n",

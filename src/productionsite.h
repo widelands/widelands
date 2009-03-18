@@ -113,6 +113,11 @@ public:
 	ProductionSite(const ProductionSite_Descr & descr);
 	virtual ~ProductionSite();
 
+	void log_general_info(Editor_Game_Base *);
+
+	bool is_stopped() const {return m_is_stopped;}
+	void set_stopped(bool);
+
 	struct Working_Position {
 		Working_Position(Request * const wr = 0, Worker * const w = 0)
 			: worker_request(wr), worker(w)
@@ -206,6 +211,7 @@ protected:  // TrainingSite must have access to this stuff
 	bool                     m_statistics_changed;
 	char                     m_statistics_buf[40];
 	int8_t                   m_last_stat_percent;
+	bool                      m_is_stopped;
 };
 
 /**

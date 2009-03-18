@@ -429,8 +429,8 @@ void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
 void Player::start_stop_building(PlayerImmovable* imm) {
 	if (imm->get_owner() != this)
 		return;
-	if (upcast(Building, building, imm))
-		building->set_stop(!building->get_stop());
+	if (upcast(ProductionSite, productionsite, imm))
+		productionsite->set_stopped(!productionsite->is_stopped());
 }
 
 /*

@@ -2,7 +2,6 @@ size=mine
 output=diamond
 output=quartz
 output=stone
-stopable=yes
 
 [buildcost]
 trunk=7

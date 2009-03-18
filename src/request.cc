@@ -19,9 +19,9 @@
 
 #include "request.h"
 
-#include "building.h"
 #include "game.h"
 #include "player.h"
+#include "productionsite.h"
 #include "soldier.h"
 #include "transport.h"
 #include "tribe.h"
@@ -635,15 +635,12 @@ int32_t Request::get_priority (int32_t cost)
 	bool is_construction_site = false;
 	int32_t modifier = DEFAULT_PRIORITY;
 
-	/* determine the type of building */
-	const Building * const building =
-		dynamic_cast<const Building *>(get_target());
-
-	if (0x0 != building) {
+	if (upcast(Building const, building, get_target())) {
 		//log("Tex: %s %i %i\n", building->get_name(), building->get_building_type(), building->get_type());
 		//assert(building->get_building_type() != Building::WAREHOUSE);
-		if (building->get_stop())
-			return -1;
+		if (upcast(ProductionSite const, productionsite, building))
+			if (productionsite->is_stopped())
+				return -1;
 
 		modifier = building->get_priority(get_type(), get_index());
 		switch (building->get_building_type()) {

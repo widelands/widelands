@@ -1,6 +1,5 @@
 soundfx=../../../sound/farm/farm_animal
 size=big
-stopable=yes
 output=corn
 
 [buildcost]

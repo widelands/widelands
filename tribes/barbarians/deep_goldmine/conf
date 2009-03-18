@@ -2,7 +2,6 @@ size=mine
 buildable=no
 enhanced_building=yes
 output=goldstone
-stopable=yes
 enhancement=deeper_goldmine
 
 [buildcost]

@@ -1,7 +1,6 @@
 size=medium
 output=cornflour
 output=blackrootflour
-stopable=yes
 
 [buildcost]
 trunk=3

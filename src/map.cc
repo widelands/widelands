@@ -644,7 +644,7 @@ void Map::find_reachable
 			if
 				(not
 				 checkstep.allowed
-				 	(this,
+				 	(*this,
 				 	 cur,
 				 	 neighb,
 				 	 dir,
@@ -1896,7 +1896,7 @@ int32_t Map::findpath
 		return 0; // duh...
 	}
 
-	if (not checkstep.reachabledest(this, end))
+	if (not checkstep.reachabledest(*this, end))
 		return -1;
 
 	if (!persist)
@@ -1957,7 +1957,7 @@ int32_t Map::findpath
 			if
 				(not
 				 checkstep.allowed
-				 	(this,
+				 	(*this,
 				 	 cur,
 				 	 neighb,
 				 	 *direction,

@@ -1,6 +1,5 @@
 size=mine
 output=ironore
-stopable=yes
 enhancement=deep_oremine
 
 [buildcost]

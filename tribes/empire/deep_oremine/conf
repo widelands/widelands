@@ -2,7 +2,6 @@ size=mine
 buildable=no
 enhanced_building=yes
 output=ironore
-stopable=yes
 
 [buildcost]
 trunk=4
