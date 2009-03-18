@@ -26,7 +26,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 8,
+	NETWORK_PROTOCOL_VERSION = 9,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -307,6 +307,7 @@ enum {
 	 * chat messages.
 	 *
 	 * The host sends this message with the following payload:
+	 * \li Signed16: playernumber - only used for colorization of messages.
 	 * \li String: sender (may be empty to indicate system messages)
 	 * \li String: the message
 	 */

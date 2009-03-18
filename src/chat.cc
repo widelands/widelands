@@ -22,13 +22,30 @@
 
 std::string ChatMessage::toPrintable() const
 {
+	std::string message = "<p font-size=14 font-face=FreeSerif font-color=#";
+	message += color();
 	if ((msg.size() > 3) & (msg.substr(0, 3) == "/me")) {
-		return
-			"-> " + (sender.size() ? sender : "***") +
+		message += " font-style=italic>-> " + (sender.size() ? sender : "***") +
 			msg.substr(3, msg.length() - 1);
-	}
-	if (sender.size())
-		return sender + ": " + msg;
+	} else if (sender.size())
+		message += " font-decoration=underline>" + sender +
+			":</p><p font-size=14 font-face=FreeSerif> " + msg;
 	else
-		return "*** " + msg;
+		message += " font-weight=bold>*** " + msg;
+	return message + "<br></p>";
+}
+
+std::string ChatMessage::color() const
+{
+	switch (playern) {
+		case 0: return "0000ff";
+		case 1: return "ff0000";
+		case 2: return "ffff00";
+		case 3: return "00ff00";
+		case 4: return "333333";
+		case 5: return "c37a00";
+		case 6: return "a300c3";
+		case 7: return "ffffff";
+		default: return "999999";
+	}
 }

@@ -34,6 +34,11 @@ struct ChatMessage {
 	int32_t time;
 
 	/**
+	 * The playercolor (just used to colorize the senders name).
+	 */
+	int16_t playern;
+
+	/**
 	 * A string identifying the sender of the message.
 	 *
 	 * This string is empty for system-generated messages.
@@ -54,6 +59,11 @@ struct ChatMessage {
 	 * \return a string that can be displayed to the user.
 	 */
 	std::string toPrintable() const;
+
+	/**
+	 * \returns the color of the sender
+	 */
+	std::string color() const;
 };
 
 

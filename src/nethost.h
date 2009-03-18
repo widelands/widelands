@@ -41,6 +41,7 @@ struct NetHost : public GameController, private SyncCallback {
 
 	void run();
 	std::string const & getLocalPlayername() const;
+	int16_t getLocalPlayerposition();
 
 	// GameController interface
 	void think();
@@ -69,11 +70,11 @@ struct NetHost : public GameController, private SyncCallback {
 	void setPlayer      (uint8_t number, PlayerSettings);
 	void setPlayerNumber(int32_t number);
 
-	//  just visible stuff for the select mapmenu
+	// just visible stuff for the select mapmenu
 	void setMultiplayerGameSettings();
 
 	// Chat-related stuff
-	void send(ChatMessage const & msg);
+	void send(ChatMessage msg);
 
 private:
 	void sendSystemChat(char const * fmt, ...) PRINTF_FORMAT(2, 3);

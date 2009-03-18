@@ -141,6 +141,7 @@ struct HostChatProvider : public ChatProvider {
 	void send(std::string const & msg) {
 		ChatMessage c;
 		c.time = WLApplication::get()->get_time();
+		c.playern = h->getLocalPlayerposition();
 		c.sender = h->getLocalPlayername();
 		c.msg = msg;
 		h->send(c);
@@ -276,6 +277,11 @@ NetHost::~NetHost ()
 std::string const & NetHost::getLocalPlayername() const
 {
 	return d->localplayername;
+}
+
+int16_t NetHost::getLocalPlayerposition()
+{
+	return d->settings.users[0].position;
 }
 
 void NetHost::clearComputerPlayers()
@@ -442,13 +448,20 @@ void NetHost::sendPlayerCommand(Widelands::PlayerCommand* pc)
  * The message is sent to clients as needed, and it is forwarded
  * to our local \ref ChatProvider.
  */
-void NetHost::send(ChatMessage const & msg)
+void NetHost::send(ChatMessage msg)
 {
 	if (msg.msg.size() == 0)
 		return;
 
+	// Make sure that msg is free of richtext formation tags. Such tags could not
+	// just be abused by the user, but could also break the whole text formation.
+	for (uint32_t i = 0; i < msg.msg.size(); ++i)
+		if (msg.msg.substr(i, 1) == "<")
+			msg.msg.replace(i, 1, "{");
+
 	SendPacket s;
 	s.Unsigned8(NETCMD_CHAT);
+	s.Signed16(msg.playern);
 	s.String(msg.sender);
 	s.String(msg.msg);
 	broadcast(s);
@@ -470,6 +483,7 @@ void NetHost::sendSystemChat(char const * fmt, ...)
 	ChatMessage c;
 	c.time = WLApplication::get()->get_time();
 	c.msg = buffer;
+	c.playern = -2; // == System message
 	// c.sender remains empty to indicate a system message
 	send(c);
 }
@@ -1335,6 +1349,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	case NETCMD_CHAT: {
 		ChatMessage c;
 		c.time = WLApplication::get()->get_time();
+		c.playern = d->settings.users[client.usernum].position;
 		c.sender = d->settings.users[client.usernum].name;
 		c.msg = r.String();
 		send(c);

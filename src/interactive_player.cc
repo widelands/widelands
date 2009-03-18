@@ -36,7 +36,6 @@
 #include "game_main_menu_save_game.h"
 #include "game_objectives_menu.h"
 #include "game_options_menu.h"
-#include "graphic.h"
 #include "general_statistics_menu.h"
 #include "helper.h"
 #include "i18n.h"
@@ -72,6 +71,13 @@ ChatDisplay::ChatDisplay
 {
 	m_chat = 0;
 }
+ChatDisplay::~ChatDisplay()
+{
+	// Finally delete all left message pictures
+	for (uint32_t i = 0; i < m_cache_id.size(); ++i)
+		if (m_cache_id[i])
+			g_fh->delete_widget_cache(m_cache_id[i]);
+}
 
 void ChatDisplay::setChatProvider(ChatProvider* chat)
 {
@@ -87,6 +93,13 @@ void ChatDisplay::draw(RenderTarget & dst)
 {
 	if (!m_chat)
 		return;
+
+	// delete pictures of all old messages that we won't use again
+	// this is important to save space
+	for (uint32_t i = 0; i < m_cache_id.size(); ++i)
+		if (m_cache_id[i])
+			g_fh->delete_widget_cache(m_cache_id[i]);
+	m_cache_id.resize(0);
 
 	int32_t now = WLApplication::get()->get_time();
 
@@ -115,13 +128,19 @@ void ChatDisplay::draw(RenderTarget & dst)
 		 it != displaylist.end();
 		 ++it)
 	{
-		g_fh->draw_string
+		uint32_t picid;
+		std::string text = "<rt>";
+		text += it->text;
+		text += "</rt>";
+		g_fh->draw_richtext
 			(dst,
-			 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
+			 RGBColor(55, 55, 55),
 			 Point(0, get_inner_h() -55 -y),
-			 it->text,
-			 Align_Left);
+			 text,
+			 get_w(),
+			 m_cache_mode, &picid);
 		y += it->h;
+		m_cache_id.push_back(picid);
 	}
 }
 

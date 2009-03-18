@@ -1449,7 +1449,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	}
 
 	virtual void setPlayerNumber(int32_t number) {
-		if (number >= s.players.size())
+		if (number >= static_cast<int32_t>(s.players.size()))
 			return;
 
 		s.playernum = number;

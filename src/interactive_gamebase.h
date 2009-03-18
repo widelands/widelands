@@ -22,17 +22,21 @@
 
 #include "interactive_base.h"
 #include "game.h"
+#include "graphic.h"
 
 struct ChatProvider;
 
 struct ChatDisplay : public UI::Panel {
 	ChatDisplay(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h);
+	~ChatDisplay();
 
 	void setChatProvider(ChatProvider *);
 	virtual void draw(RenderTarget &);
 
 private:
 	ChatProvider * m_chat;
+	std::vector<uint32_t> m_cache_id;
+	Widget_Cache          m_cache_mode;
 };
 
 struct Interactive_GameBase : public Interactive_Base {

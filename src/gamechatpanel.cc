@@ -49,11 +49,12 @@ void GameChatPanel::recalculate()
 {
 	const std::vector<ChatMessage> msgs = m_chat.getMessages();
 
-	std::string str;
+	std::string str = "<rt>";
 	for (uint32_t i = 0; i < msgs.size(); ++i) {
 		str += msgs[i].toPrintable();
 		str += '\n';
 	}
+	str += "</rt>";
 
 	chatbox.set_text(str);
 }
