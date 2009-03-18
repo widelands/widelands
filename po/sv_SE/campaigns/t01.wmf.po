@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3509\n"
+"Project-Id-Version: Widelands svn3725\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:41+0000\n"
+"POT-Creation-Date: 2009-03-18 22:53+0000\n"
 "PO-Revision-Date: 2008-11-14 21:42+0100\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
 "Language-Team: swedish <sv@li.org>\n"
@@ -15,212 +15,212 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
 
-#: ../../../campaigns/t01.wmf/event:10
+#: ../../../campaigns/t01.wmf/event:23
 #, fuzzy
 msgid "Thron sighs..."
 msgstr "Thron talar..."
 
-#: ../../../campaigns/t01.wmf/event:12
+#: ../../../campaigns/t01.wmf/event:25
 #, fuzzy
 msgid " \"It's been months and we are still hiding where the forests are old and dark.<br> My warriors hunt at day and lay awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
 msgstr "Det har gått flera månader och vi gömmer oss fortfarande i den gamla mörka skogen. Mina krigare jagar på dagen och ligger vakna på natten - och lyssnar på den grymma slakten som ekar bortom den urtida skogen."
 
-#: ../../../campaigns/t01.wmf/event:14 ../../../campaigns/t01.wmf/event:27
-#: ../../../campaigns/t01.wmf/event:40 ../../../campaigns/t01.wmf/event:53
+#: ../../../campaigns/t01.wmf/event:27 ../../../campaigns/t01.wmf/event:40
+#: ../../../campaigns/t01.wmf/event:53 ../../../campaigns/t01.wmf/event:66
 #, fuzzy
 msgid "The story begins"
 msgstr "Sagan börjar..."
 
-#: ../../../campaigns/t01.wmf/event:19 ../../../campaigns/t01.wmf/event:32
-#: ../../../campaigns/t01.wmf/event:45 ../../../campaigns/t01.wmf/event:58
-#: ../../../campaigns/t01.wmf/event:97 ../../../campaigns/t01.wmf/event:113
-#: ../../../campaigns/t01.wmf/event:128 ../../../campaigns/t01.wmf/event:144
-#: ../../../campaigns/t01.wmf/event:159 ../../../campaigns/t01.wmf/event:175
-#: ../../../campaigns/t01.wmf/event:190 ../../../campaigns/t01.wmf/event:220
-#: ../../../campaigns/t01.wmf/event:235 ../../../campaigns/t01.wmf/event:250
-#: ../../../campaigns/t01.wmf/event:265 ../../../campaigns/t01.wmf/event:297
+#: ../../../campaigns/t01.wmf/event:32 ../../../campaigns/t01.wmf/event:45
+#: ../../../campaigns/t01.wmf/event:58 ../../../campaigns/t01.wmf/event:71
+#: ../../../campaigns/t01.wmf/event:110 ../../../campaigns/t01.wmf/event:126
+#: ../../../campaigns/t01.wmf/event:141 ../../../campaigns/t01.wmf/event:157
+#: ../../../campaigns/t01.wmf/event:172 ../../../campaigns/t01.wmf/event:188
+#: ../../../campaigns/t01.wmf/event:203 ../../../campaigns/t01.wmf/event:233
+#: ../../../campaigns/t01.wmf/event:248 ../../../campaigns/t01.wmf/event:263
+#: ../../../campaigns/t01.wmf/event:278 ../../../campaigns/t01.wmf/event:310
 msgid "OK"
 msgstr "Nästa"
 
-#: ../../../campaigns/t01.wmf/event:25
+#: ../../../campaigns/t01.wmf/event:38
 #, fuzzy
 msgid " \"We can see the raging flames that swallow Al'thunran, miles away, from here.<br> The red lights flash in the darkness and dance to the rhythm of the wardrums that haunt me even in my nightmares.\" "
 msgstr "Vi kan se rasande flammor som äter upp Al'thunran, långt härifrån. Det röda ljuset glimmar i mörkret och dansar till rytmen av krigstrummor som jagar mig i mina mardrömmar."
 
-#: ../../../campaigns/t01.wmf/event:38
+#: ../../../campaigns/t01.wmf/event:51
 #, fuzzy
 msgid " \"My father's bones lay peacefully in the grounds he cleared from the senseless bloodspilling that has once risen among us.<br> Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, not to let greed or despair destroy our bonds as well.\" "
 msgstr "Min fars skelett vilar lugnt och stilla i marken som han befriade från den känslolösa blodspillan som en gång har uppstått runt omkring oss.<br>Boldreth, min lojale kompanjon och vän är en källa av trygghet och fred för mig i dessa mörka tider. Han håller mitt humör uppe och mina krigare medvetna, att inte låta girighet eller misströstan förstöra våra band i mellan oss."
 
-#: ../../../campaigns/t01.wmf/event:51
+#: ../../../campaigns/t01.wmf/event:64
 #, fuzzy
 msgid " \"As father told me, there will be times to fight and times to lay and wait, trying not to sleep or die before the right time comes. And so I do... wait.\" "
 msgstr "Min far berättade för mig, det kommer tider för krig och tider att sitta och vänta, försök inte att sova eller dö innan tiden är inne. Och det gjorde jag... väntade."
 
-#: ../../../campaigns/t01.wmf/event:89
+#: ../../../campaigns/t01.wmf/event:102
 #, fuzzy
 msgid "An old man says..."
 msgstr "En gammal man närmar sig..."
 
-#: ../../../campaigns/t01.wmf/event:91
+#: ../../../campaigns/t01.wmf/event:104
 msgid " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my council through these darkened days.\" "
 msgstr "\"Var hälsad, hövding. Jag är Khantrukh och jag har sett många vintrar flyga förbi. Tillåt mig att hjälpa dig med mina råd i dessa mörka stunder.\""
 
-#: ../../../campaigns/t01.wmf/event:93
+#: ../../../campaigns/t01.wmf/event:106
 msgid "Somebody comes upon to you"
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:103
+#: ../../../campaigns/t01.wmf/event:116
 msgid "Khantrukh continues..."
 msgstr "Khantrukh fortsätter..."
 
-#: ../../../campaigns/t01.wmf/event:105
+#: ../../../campaigns/t01.wmf/event:118
 #, fuzzy
 msgid " \"None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...<br> We should prepare, in case we have to face the winter in these harsh lands. I believe to the east of our campside are a few places where we could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr " \"Ingen förutom gudarna vet hur länge vi måste hålla oss gömda här. Krigarna hoppas på att vi ska kunna marchera tillbaka vilken dag som hälst nu, men jag tvivlar starkt på att det kommer hända inom en snar framtid. Och dagarna börjar redan bli kallare och mörkare...<br>Vi borde förbereda oss, i fall att vi måste stanna över vintern i detta ogästvänliga landet. Jag tror att det finns lite plats öster om vårt läger där vi kan sätta upp några skogshuggare. \" <br><br>--NYA MÅL--<br>- tryck MELLANSLAG för att se var du kan bygga. De röda prickarna visar var små byggnader - som en skogshuggare - kan byggas.<br>- bygg en skogshuggare vid den närmaste högra röda pricken om ditt huvudkvarter genom att trycka på den och välja skogshuggare."
 
-#: ../../../campaigns/t01.wmf/event:106 ../../../campaigns/t01.wmf/objective:7
+#: ../../../campaigns/t01.wmf/event:119 ../../../campaigns/t01.wmf/objective:7
 msgid "* Press SPACE to see where you can build.<br> The red spots show you, where a small building - like a lumberjack's hut - may be built.<br>"
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:107
+#: ../../../campaigns/t01.wmf/event:120
 msgid "* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting lumberjack's hut.<br>"
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:109 ../../../campaigns/t01.wmf/event:124
-#: ../../../campaigns/t01.wmf/event:140 ../../../campaigns/t01.wmf/event:155
-#: ../../../campaigns/t01.wmf/event:171 ../../../campaigns/t01.wmf/event:186
+#: ../../../campaigns/t01.wmf/event:122 ../../../campaigns/t01.wmf/event:137
+#: ../../../campaigns/t01.wmf/event:153 ../../../campaigns/t01.wmf/event:168
+#: ../../../campaigns/t01.wmf/event:184 ../../../campaigns/t01.wmf/event:199
 #, fuzzy
 msgid "The advisor"
 msgstr "Rådgivare"
 
-#: ../../../campaigns/t01.wmf/event:119
+#: ../../../campaigns/t01.wmf/event:132
 msgid "The elder remarks..."
 msgstr "Den vise påpekar..."
 
-#: ../../../campaigns/t01.wmf/event:121
+#: ../../../campaigns/t01.wmf/event:134
 msgid " \"Obviously, it would be too draining for our people to walk all the way to the lumberjack's hut through the wilderness. We will have to make a path between our hall and the lumberjack's hut. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:122
+#: ../../../campaigns/t01.wmf/event:135
 msgid "* Build a road between your headquarters and the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You are expected to connect it to another flag with a road.<br> If you click on a flag little symbols will appear around it to show you in which directions you can build the road.<br> The colour of those symbols indicate how steep the road will be. Green is flat, yellow is steep and red is very steep. The steeper the step is, the harder it will be for your people to walk on it.<br> You can click on any of those symbols to build the first step of the road to it. New symbols will appear to show you where the next step can go, and so on. But you can also click further away to build several steps at once. Click on the flag at the headquarters to finish the road."
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:135
+#: ../../../campaigns/t01.wmf/event:148
 #, fuzzy
 msgid "Khantrukh remembers..."
 msgstr "Khantrukh talar..."
 
-#: ../../../campaigns/t01.wmf/event:137
+#: ../../../campaigns/t01.wmf/event:150
 msgid " \"There is an old saying:<br> 'A burden divided is easier to endure.'<br> A crossroad on the way between our site and the lumberjack's hut would ease the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:138
+#: ../../../campaigns/t01.wmf/event:151
 #, fuzzy
 msgid "* Place a flag in the mid of the road.<br> There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
 msgstr " \"Det finns ett gammalt talesätt: 'Delad börda är lättare att bära.' En vägkorsning mellan vårt huvudkvarter och skogshuggaren skulle underlätta arbetet för våra Transportörer.\"<br><br>--NYA MÅL--<BR>Där är en flagg-symbol i mitten på vägen du nyss byggde. Genom att klicka på den och i den rutan som kom fram klickar du på flagg-knappen, så har du placerat en flagga där, och där igenom har du delat upp arbetet med att transportera stockar på två transportörer. När mycket varor transporteras mellan två punkter, så gör flera flaggor mellan dem så att det går fortare att nå fram till deras slutpunkt och där igenom förbättras din infrastruktur. Placera en flagga mitt på vägen."
 
-#: ../../../campaigns/t01.wmf/event:150
+#: ../../../campaigns/t01.wmf/event:163
 msgid "The old man looks to the sky..."
 msgstr "Den gamle mannen ser upp i skyn..."
 
-#: ../../../campaigns/t01.wmf/event:152
+#: ../../../campaigns/t01.wmf/event:165
 #, fuzzy
 msgid " \"The northern winds tell us, the coming winter will be a long and cruel one. One lumberjack's hut will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Nordanvinden berättar, att den kommande vinter kommer vara lång och elendig. En skogshuggare kommer inte vara tillräckligt för vårt folks behov. Fler träd väntar på oss söder om vår nya korsning - låt oss bygga en andra skogshuggare där!\"<br><br>--NYA MÅL--<br>- Placera en skogshuggare söder om den flaggan som du ska sätta på vägen. Efteråt förbinder du flaggan med den nya skogshuggaren. Notera att, istället för att bygga en väg steg för steg, kan du klicka direkt på destinationen så byggs hela vägen på en gång."
 
-#: ../../../campaigns/t01.wmf/event:153
+#: ../../../campaigns/t01.wmf/event:166
 #, fuzzy
 msgid "* Place a lumberjack's hut directly south of the flag you just placed on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
 msgstr " \"Nordanvinden berättar, att den kommande vinter kommer vara lång och elendig. En skogshuggare kommer inte vara tillräckligt för vårt folks behov. Fler träd väntar på oss söder om vår nya korsning - låt oss bygga en andra skogshuggare där!\"<br><br>--NYA MÅL--<br>- Placera en skogshuggare söder om den flaggan som du ska sätta på vägen. Efteråt förbinder du flaggan med den nya skogshuggaren. Notera att, istället för att bygga en väg steg för steg, kan du klicka direkt på destinationen så byggs hela vägen på en gång."
 
-#: ../../../campaigns/t01.wmf/event:166
+#: ../../../campaigns/t01.wmf/event:179
 msgid "Khantrukh nods..."
 msgstr "Khantrukh nickar..."
 
-#: ../../../campaigns/t01.wmf/event:168
+#: ../../../campaigns/t01.wmf/event:181
 #, fuzzy
 msgid " \"Of course, if we intended to build a bigger settlement much more lumberjack's huts would be advisable, but this should do for now.<br> But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give back again.<br> So, in order to replace the trees we chop down, we should build a ranger's hut, preferably close to the lumberjack's hut.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Självklart, om vi vill bygga ett större rike behöver vi fler skogshuggare, men det borde räcka för tillfället.<br>Men glöm aldrig - skogarna är vårt arv, anförtrodda till oss av våra förfäder. Vi måste alltid respektera och sköta om dem. Det vi tar måste vi ge tillbaka igen.<br>Så, för att ersätta träden vi hugger ner, borde vi bygga en Skogsplanterare, helst nära Skogshuggaren.\"<br><br>-- NYA MÅL--<br>- Bygg en Skogsplanterare öster om den första Skogshuggaren."
 
-#: ../../../campaigns/t01.wmf/event:169
+#: ../../../campaigns/t01.wmf/event:182
 #: ../../../campaigns/t01.wmf/objective:26
 #, fuzzy
 msgid "* Build a ranger's hut to the east of the first lumberjack's hut."
 msgstr "- Bygg en Skogsplanterare öster om Skogshuggaren."
 
-#: ../../../campaigns/t01.wmf/event:181
+#: ../../../campaigns/t01.wmf/event:194
 msgid "The elder speaks..."
 msgstr "Den vise talar..."
 
-#: ../../../campaigns/t01.wmf/event:183
+#: ../../../campaigns/t01.wmf/event:196
 #, fuzzy
 msgid " \"I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations.<br> I would advise that we obtain stones for the future - who knows what fortifications we might be forced to build very soon? And - like a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Jag är mycket medveten, hövding, att varken du eller dina krigare vill stanna länge i detta övergivna landet. Men ändå, vårt krig för att ta tillbaka vårt hemland kan ta lång tid och det verkar klokt att förbereda sig. Jag skulle råda att vi lagrar sten för framtida bruk - vem vet vilka befästningar vi snart kan bli tvingade att bygga? Och - som en gåva av ödet - där är förträfliga stenblock i närheten...\"<br><br>-- NYTT MÅL--<br> - Bygg två Stenhuggare sydväst om ditt huvudkvarter."
 
-#: ../../../campaigns/t01.wmf/event:184
+#: ../../../campaigns/t01.wmf/event:197
 #: ../../../campaigns/t01.wmf/objective:34
 #, fuzzy
 msgid "* Build two quarries south-west of your headquarters."
 msgstr "- Bygg två Stenhuggare sydväst om ditt Huvudkvarter."
 
-#: ../../../campaigns/t01.wmf/event:211 ../../../campaigns/t01.wmf/event:226
+#: ../../../campaigns/t01.wmf/event:224 ../../../campaigns/t01.wmf/event:239
 msgid "Thron speaks..."
 msgstr "Thron talar..."
 
-#: ../../../campaigns/t01.wmf/event:213
+#: ../../../campaigns/t01.wmf/event:226
 #, fuzzy
 msgid " \"In another sleepless night I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br> They are a constant reminder why we had to hide here... and why we must return in the end!\" "
 msgstr "Under an annan sömnlös natt gick jag upp på kullen och blickade åt norr. Eldarna brinner fortfarande, stillar sin hunger på min fars arv. <br>De är en konstant påminnelse om varför vi måste gömma oss här. <br>Och en påminnelse om varför vi tillslut måste återvända."
 
-#: ../../../campaigns/t01.wmf/event:215
+#: ../../../campaigns/t01.wmf/event:228
 #, fuzzy
 msgid "In the night"
 msgstr "Under natten..."
 
-#: ../../../campaigns/t01.wmf/event:228
+#: ../../../campaigns/t01.wmf/event:241
 #, fuzzy
 msgid " \"Once again I went up to my father's tomb, in a sacred grove at the feet of the great spire of Kal'mavrath. I just stood there and did not feel neither the hours pass nor the cold rain pouring down from a darkened sky...<br> Somehow it felt like farewell. For the first time I wondered what the future might hold for me...\" "
 msgstr "Ännu en gång gick jag upp till min fars grav, i en helig lund nedanför Kal'mavraths stora spira. Jag bara stod där utan en tanke på tiden eller regnet som öste ner från den mörknande himmeln... <br>>På något vis kändes det som jag tog farväl. För första gången undrade jag vad framtiden hade för planer för mig..."
 
-#: ../../../campaigns/t01.wmf/event:230
+#: ../../../campaigns/t01.wmf/event:243
 msgid "At the grave"
 msgstr "Vid graven"
 
-#: ../../../campaigns/t01.wmf/event:241
+#: ../../../campaigns/t01.wmf/event:254
 msgid "Thron says thoughtfully..."
 msgstr "Thron säger tankfullt..."
 
-#: ../../../campaigns/t01.wmf/event:243
+#: ../../../campaigns/t01.wmf/event:256
 #, fuzzy
 msgid " \"Some time ago, Boldreth came to me. His advise was to move to some place closer home - to strike at the first sign of my brothers forces wavering.<br> But I look over the forests and I still see black smoke rising to the sky and I know - it is too early yet and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed a too rash return would cause both on our and the other side...\" "
 msgstr "För en tid sedan kom Boldreth till mig. Han rådde mig att flytta till ett ställe närmare mitt hem - för att kunna slå till vid första antydan från mina bröders arméer.<br>Men jag tittade över skogen och jag såg fortfarande svart rök som steg mot skyn och jag visste - det är ännu för tidigt och det han hoppas på kommer inte att hända inom en snar framtid. Han kan ha rätt, men jag är rädd för att om vi flyttar tillbaka för tidigt kommer det spillas för mycket blod både på deras sida och våran..."
 
-#: ../../../campaigns/t01.wmf/event:245
+#: ../../../campaigns/t01.wmf/event:258
 #, fuzzy
 msgid "The other day"
 msgstr "Här om dagen..."
 
-#: ../../../campaigns/t01.wmf/event:256
+#: ../../../campaigns/t01.wmf/event:269
 #, fuzzy
 msgid "Thron looks furious..."
 msgstr "Den gamle mannen ser upp i skyn..."
 
-#: ../../../campaigns/t01.wmf/event:258
+#: ../../../campaigns/t01.wmf/event:271
 #, fuzzy
 msgid " \"Today, my warriors picked up an old man, wandering sick and wounded through the dark forest. We listened in horror when he told us of the atrocities taking place in Al'thunran.<br> I hereby renew my oath - I will stop this madness at any cost!\" "
 msgstr "Idag plockade mina krigare upp en gammal man, som vandrade sjuk och skadad genom den mörka skogen. Vi lyssnade med fasa när han berättade för oss om 'atrocities taking place in Al'thunran.'<br>Härmed förnyar jag min ed - jag ska stoppa dessa galenskaper till vilket pris som helst!"
 
-#: ../../../campaigns/t01.wmf/event:260
+#: ../../../campaigns/t01.wmf/event:273
 msgid "The oath"
 msgstr "Eden"
 
-#: ../../../campaigns/t01.wmf/event:291
+#: ../../../campaigns/t01.wmf/event:304
 #, fuzzy
 msgid " \"Very well done, chieftain. We now have all we need to face the winter and may prepare ourselves for the battles ahead.<br><br>--------------------- VICTORY! ----------------------<br><br> You may continue if you wish. Otherwise, move on to the next mission.\" "
 msgstr "Mycket bra gjort, hövding. Vi har nu allt för att möta vintern och kan förbereda oss för kommande strider.<br><br>SEGER!<br><br> Du kan fortsätta spela om du vill. Annars kan du fortsätta med nästa uppdrag."
 
-#: ../../../campaigns/t01.wmf/event:293
+#: ../../../campaigns/t01.wmf/event:306
 msgid "Mission Complete"
 msgstr "Uppdrag Slutfört"
 
