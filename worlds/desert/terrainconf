@@ -32,11 +32,11 @@ is=green
 [mountainmeadow]
 is=green
 
-[bergwiese]
+[highmountainmeadow]
 is=green
 
 [mountain1]
-resources=coal, iron, gold, granit 
+resources=coal, iron, gold, granit
 is=mountain
 
 [mountain2]
