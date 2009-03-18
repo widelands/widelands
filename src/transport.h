@@ -655,9 +655,9 @@ private:
 
 	void start_request_timer(int32_t delta = 200);
 
-	Supply * find_best_supply(Game*, Request*, int32_t * pcost);
-	void process_requests(Game* g, RSPairStruct* s);
-	void create_requested_workers(Game* g);
+	Supply * find_best_supply(Game &, Request const &, int32_t & pcost);
+	void process_requests(Game &, RSPairStruct &);
+	void create_requested_workers(Game &);
 
 	typedef std::vector<Request*> RequestList;
 

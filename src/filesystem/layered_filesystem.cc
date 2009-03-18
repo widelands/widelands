@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -127,10 +127,8 @@ bool LayeredFileSystem::FileExists(std::string const & path) {
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
 		 ++it)
-	{
 		if ((*it)->FileExists(path))
 			return true;
-	}
 
 	return false;
 }
@@ -144,10 +142,8 @@ bool LayeredFileSystem::IsDirectory(std::string const & path) {
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
 		 ++it)
-	{
 		if ((*it)->IsDirectory(path))
 			return true;
-	}
 
 	return false;
 }
@@ -165,10 +161,8 @@ void * LayeredFileSystem::Load(const std::string & fname, size_t & length) {
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
 		 ++it)
-	{
 		if ((*it)->FileExists(fname))
 			return (*it)->Load(fname, length);
-	}
 
 	throw FileNotFound_error("Could not find file", fname);
 }
@@ -185,13 +179,8 @@ void LayeredFileSystem::Write
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
 		 ++it)
-	{
 		if ((*it)->IsWritable())
-		{
-			(*it)->Write(fname, data, length);
-			return;
-		}
-	}
+			return (*it)->Write(fname, data, length);
 
 	throw wexception("LayeredFileSystem: No writable filesystem!");
 }
@@ -205,10 +194,8 @@ StreamRead  * LayeredFileSystem::OpenStreamRead (const std::string & fname) {
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
 		 ++it)
-	{
 		if ((*it)->FileExists(fname))
 			return (*it)->OpenStreamRead(fname);
-	}
 
 	throw FileNotFound_error("Could not find file", fname);
 }
@@ -221,10 +208,8 @@ StreamWrite * LayeredFileSystem::OpenStreamWrite(std::string const & fname) {
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
 		 ++it)
-	{
 		if ((*it)->IsWritable())
 			return (*it)->OpenStreamWrite(fname);
-	}
 
 	throw wexception("LayeredFileSystem: No writable filesystem!");
 }
@@ -237,13 +222,8 @@ void LayeredFileSystem::MakeDirectory(std::string const & dirname) {
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
 		 ++it)
-	{
 		if ((*it)->IsWritable())
-		{
-			(*it)->MakeDirectory(dirname);
-			return;
-		}
-	}
+			return (*it)->MakeDirectory(dirname);
 
 	throw wexception("LayeredFileSystem: No writable filesystem!");
 }
@@ -256,13 +236,8 @@ void LayeredFileSystem::EnsureDirectoryExists(std::string const & dirname) {
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
 		 ++it)
-	{
 		if ((*it)->IsWritable())
-		{
-			(*it)->EnsureDirectoryExists(dirname);
-			return;
-		}
-	}
+			return (*it)->EnsureDirectoryExists(dirname);
 
 	throw wexception("LayeredFileSystem: No writable filesystem!");
 }
@@ -276,15 +251,8 @@ FileSystem * LayeredFileSystem::MakeSubFileSystem(std::string const & dirname)
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
 		 ++it)
-	{
-		if (!(*it)->IsWritable())
-			continue;
-
-		if (!(*it)->FileExists(dirname))
-			continue;
-
-		return (*it)->MakeSubFileSystem(dirname);
-	}
+		if ((*it)->IsWritable() and (*it)->FileExists(dirname))
+			return (*it)->MakeSubFileSystem(dirname);
 
 	printf("dirname %s\n", dirname.c_str());
 	throw wexception("LayeredFileSystem: Wasn't able to make sub filesystem!");
@@ -300,15 +268,8 @@ FileSystem * LayeredFileSystem::CreateSubFileSystem
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
 		 ++it)
-	{
-		if (!(*it)->IsWritable())
-			continue;
-
-		if ((*it)->FileExists(dirname))
-			continue;
-
-		return (*it)->CreateSubFileSystem(dirname, type);
-	}
+		if ((*it)->IsWritable() and not (*it)->FileExists(dirname))
+			return (*it)->CreateSubFileSystem(dirname, type);
 
 	printf("dirname %s\n", dirname.c_str());
 	throw wexception("LayeredFileSystem: Wasn't able to create sub filesystem!");
@@ -325,15 +286,10 @@ void LayeredFileSystem::Unlink(std::string const & file) {
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
 		 ++it)
-	{
-		if (!(*it)->IsWritable())
-			continue;
-		if (!(*it)->FileExists(file))
-			continue;
-
-		(*it)->Unlink(file);
-		return;
-	}
+		if ((*it)->IsWritable() and (*it)->FileExists(file)) {
+			(*it)->Unlink(file);
+			return;
+		}
 }
 
 void LayeredFileSystem::Rename
@@ -346,13 +302,8 @@ void LayeredFileSystem::Rename
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
 		 ++it)
-	{
-		if (!(*it)->IsWritable())
-			continue;
-		if (!(*it)->FileExists(old_name))
-			continue;
-
-		(*it)->Rename(old_name, new_name);
-		return;
-	}
+		if ((*it)->IsWritable() and (*it)->FileExists(old_name)) {
+			(*it)->Rename(old_name, new_name);
+			return;
+		}
 }

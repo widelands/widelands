@@ -742,7 +742,7 @@ Worker * Warehouse::launch_worker(Game * game, Ware_Index ware, const Requiremen
 			}
 		}
 
-		if (can_create_worker(game, ware)) {
+		if (can_create_worker(*game, ware)) {
 			// don't want to use an upgraded worker, so create new one.
 			create_worker(game, ware);
 		} else {
@@ -899,12 +899,7 @@ Building * Warehouse_Descr::create_object() const
 {return new Warehouse(*this);}
 
 
-/*
-===============
-Warehouse::can_create_worker
-===============
-*/
-bool Warehouse::can_create_worker(Game *, Ware_Index const worker) const {
+bool Warehouse::can_create_worker(Game &, Ware_Index const worker) const {
 	if (not (worker < m_supply->get_workers().get_nrwareids()))
 		throw wexception
 			("Worker type %d doesn't exists! (max is %d)",
@@ -942,7 +937,7 @@ bool Warehouse::can_create_worker(Game *, Ware_Index const worker) const {
 
 
 void Warehouse::create_worker(Game * game, Ware_Index const worker) {
-	assert(can_create_worker (game, worker));
+	assert(can_create_worker (*game, worker));
 
 	const Tribe_Descr & tribe = owner().tribe();
 	Worker_Descr const & w_desc = *tribe.get_worker_descr(worker);

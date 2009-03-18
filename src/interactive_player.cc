@@ -123,23 +123,16 @@ void ChatDisplay::draw(RenderTarget & dst)
 
 	uint32_t y = 0;
 
-	for
-		(std::vector<Displayed>::const_iterator it = displaylist.begin();
-		 it != displaylist.end();
-		 ++it)
-	{
+	container_iterate_const(std::vector<Displayed>, displaylist, i) {
 		uint32_t picid;
-		std::string text = "<rt>";
-		text += it->text;
-		text += "</rt>";
 		g_fh->draw_richtext
 			(dst,
 			 RGBColor(55, 55, 55),
 			 Point(0, get_inner_h() -55 -y),
-			 text,
+			 "<rt>" + i.current->text + "</rt>",
 			 get_w(),
 			 m_cache_mode, &picid);
-		y += it->h;
+		y += i.current->h;
 		m_cache_id.push_back(picid);
 	}
 }

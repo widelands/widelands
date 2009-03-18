@@ -51,13 +51,8 @@ struct Console : public ChatProvider, public Handler {
 
 	void cmdLs(std::vector<std::string> const &)
 	{
-		for
-			(CommandMap::const_iterator it = commands.begin();
-			 it != commands.end();
-			 ++it)
-		{
-			write(it->first);
-		}
+		container_iterate_const(CommandMap, commands, i)
+			write(i.current->first);
 	}
 
 	void send(std::string const & msg)
@@ -129,13 +124,9 @@ Handler::~Handler()
 {
 	// This check is an evil hack to account for the singleton-nature
 	// of the Console
-	if (this != &g_console) {
-		for
-			(std::vector<std::string>::const_iterator it = m_commands.begin();
-			 it != m_commands.end();
-			 ++it)
-			g_console.commands.erase(*it);
-	}
+	if (this != &g_console)
+		container_iterate_const(std::vector<std::string>, m_commands, i)
+			g_console.commands.erase(*i.current);
 }
 
 void Handler::addCommand(std::string const & cmd, HandlerFn const & fun)

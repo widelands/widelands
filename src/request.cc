@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -577,9 +577,9 @@ void Request::Write
 /**
  * Figure out the flag we need to deliver to.
 */
-Flag *Request::get_target_flag()
+Flag & Request::target_flag() const
 {
-	return get_target()->get_base_flag();
+	return *get_target()->get_base_flag();
 }
 
 /**
@@ -587,14 +587,14 @@ Flag *Request::get_target_flag()
  * be delivered. nr is in the range [0..m_count[
 */
 int32_t Request::get_base_required_time
-	(Editor_Game_Base * g, uint32_t const nr)
+	(Editor_Game_Base & egbase, uint32_t const nr) const
 {
 	if (m_count <= nr)
 		log
 			("Request::get_base_required_time: WARNING nr = %u but count is %u, "
 			 "which is not allowed according to the comment for this function\n",
 			 nr, m_count);
-	int32_t const curtime = g->get_gametime();
+	int32_t const curtime = egbase.get_gametime();
 
 	if (!nr || !m_required_interval)
 		return m_required_time;
@@ -615,10 +615,10 @@ int32_t Request::get_base_required_time
  * Can be in the past, indicating that we have been idling, waiting for the
  * ware.
 */
-int32_t Request::get_required_time()
+int32_t Request::get_required_time() const
 {
 	return
-		get_base_required_time(&m_economy->owner().egbase(), m_transfers.size());
+		get_base_required_time(m_economy->owner().egbase(), m_transfers.size());
 }
 
 //#define MAX_IDLE_PRIORITY           100
@@ -629,7 +629,7 @@ int32_t Request::get_required_time()
 /**
  * Return the request priority used to sort requests or -1 to skip request
  */
-int32_t Request::get_priority (int32_t cost)
+int32_t Request::get_priority (int32_t cost) const
 {
 	int MAX_IDLE_PRIORITY = 100;
 	bool is_construction_site = false;
@@ -815,27 +815,27 @@ void Request::start_transfer(Game* g, Supply* supp)
  * This will call a callback function in the target, which is then responsible
  * for removing and deleting the request.
 */
-void Request::transfer_finish(Game *g, Transfer* t)
+void Request::transfer_finish(Game & game, Transfer & t)
 {
-	Worker* w = t->m_worker;
+	Worker * const w = t.m_worker;
 
-	if (t->m_item)
-		t->m_item->destroy(g);
+	if (t.m_item)
+		t.m_item->destroy(&game);
 
-	t->m_worker = 0;
-	t->m_item = 0;
+	t.m_worker = 0;
+	t.m_item = 0;
 
 	remove_transfer(find_transfer(t));
 
 	if (!m_idle) {
-		set_required_time(get_base_required_time(g, 1));
+		set_required_time(get_base_required_time(game, 1));
 		--m_count;
 	}
 
 	// the callback functions are likely to delete us,
 	// therefore we musn't access member variables behind this
 	// point
-	(*m_callbackfn)(g, this, m_index, w, m_callbackdata);
+	(*m_callbackfn)(&game, this, m_index, w, m_callbackdata);
 }
 
 /**
@@ -844,11 +844,11 @@ void Request::transfer_finish(Game *g, Transfer* t)
  *
  * Re-open the request.
 */
-void Request::transfer_fail(Game *, Transfer * t) {
-	bool wasopen = is_open();
+void Request::transfer_fail(Game &, Transfer & t) {
+	bool const wasopen = is_open();
 
-	t->m_worker = 0;
-	t->m_item = 0;
+	t.m_worker = 0;
+	t.m_item = 0;
 
 	remove_transfer(find_transfer(t));
 
@@ -885,9 +885,10 @@ void Request::remove_transfer(uint32_t idx)
  * Lookup a \ref Transfer in the transfers array.
  * \throw wexception if the \ref Transfer is not registered with us.
  */
-uint32_t Request::find_transfer(Transfer* t)
+uint32_t Request::find_transfer(Transfer & t)
 {
-	TransferList::iterator it = std::find(m_transfers.begin(), m_transfers.end(), t);
+	TransferList::const_iterator const it =
+		std::find(m_transfers.begin(), m_transfers.end(), &t);
 
 	if (it == m_transfers.end())
 		throw wexception("Request::find_transfer(): not found");

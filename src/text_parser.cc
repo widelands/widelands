@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2005, 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2005, 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -147,22 +147,18 @@ bool Text_Parser::parse_textblock
 	split_words(block_text, &unwrapped_words);
 
 	//Handle user defined line breaks, and save them
-	for
-		(std::vector<std::string>::const_iterator it = unwrapped_words.begin();
-		 it != unwrapped_words.end();
-		 ++it)
-	{
-		std::string line = *it;
-		for (;;) {
-			SSS_T next_break = line.find("<br>");
-			if (next_break == std::string::npos)
+	container_iterate_const(std::vector<std::string>, unwrapped_words, i)
+		for (std::string line = *i.current;;) {
+			std::string::size_type const next_break = line.find("<br>");
+			if (next_break == std::string::npos) {
+				if (line.size())
+					words.push_back(line);
 				break;
-			if (next_break) words.push_back(line.substr(0, next_break));
+			} else if (next_break)
+				words.push_back(line.substr(0, next_break));
 			line_breaks.push_back(words.size());
 			line.erase(0, next_break + 4);
 		}
-		if (line.size()) words.push_back(line);
-	}
 	return extract_more;
 }
 

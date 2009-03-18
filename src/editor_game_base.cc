@@ -379,12 +379,10 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 	// Find all immovables that need fixing
 	m.find_immovables(area, &immovables, FindImmovablePlayerImmovable());
 
-	for
-		(std::vector<ImmovableFound>::const_iterator it = immovables.begin();
-		 it != immovables.end(); ++it)
-	{
-		PlayerImmovable & imm = dynamic_cast<PlayerImmovable &>(*it->object);
-		if (not m[it->coords].is_interior(imm.owner().get_player_number())) {
+	container_iterate_const(std::vector<ImmovableFound>, immovables, i) {
+		PlayerImmovable & imm =
+			dynamic_cast<PlayerImmovable &>(*i.current->object);
+		if (not m[i.current->coords].is_interior(imm.owner().get_player_number())) {
 			if (std::find(burnlist.begin(), burnlist.end(), &imm) == burnlist.end())
 				burnlist.push_back(&imm);
 		}
@@ -392,24 +390,17 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 
 	// Fix all immovables
 	if (upcast(Game, game, this))
-		for
-			(std::vector<PlayerImmovable *>::const_iterator it = burnlist.begin();
-			 it != burnlist.end();
-			 ++it)
-		{
-			if (upcast(Building, building, *it))
+		container_iterate_const(std::vector<PlayerImmovable *>, burnlist, i) {
+			if (upcast(Building, building, *i.current))
 				building->set_defeating_player(area.player_number);
-			else if (upcast(Flag,     flag,     *it))
+			else if (upcast(Flag,     flag,     *i.current))
 				if (Building * const flag_building = flag->get_building())
 					flag_building->set_defeating_player(area.player_number);
-			(*it)->schedule_destroy(game);
+			(*i.current)->schedule_destroy(game);
 		}
 	else
-		for
-			(std::vector<PlayerImmovable *>::const_iterator it = burnlist.begin();
-			 it != burnlist.end();
-			 ++it)
-			(*it)->remove(this);
+		container_iterate_const(std::vector<PlayerImmovable *>, burnlist, i)
+			(*i.current)->remove(this);
 }
 
 

@@ -655,15 +655,10 @@ void Player::enemyflagaction
 					std::vector<Soldier *> attackers;
 					findAttackSoldiers(flag, &attackers, count);
 					assert(attackers.size() <= count);
-					std::vector<Soldier *>::const_iterator const attackers_end =
-						attackers.end();
-					for
-						(std::vector<Soldier *>::const_iterator it =
-						 	attackers.begin();
-						 it != attackers_end;
-						 ++it)
-						dynamic_cast<MilitarySite &>(*(*it)->get_location(&egbase()))
-							.sendAttacker(**it, *building);
+					container_iterate_const(std::vector<Soldier *>, attackers, i)
+						dynamic_cast<MilitarySite &>
+							(*(*i.current)->get_location(&egbase()))
+						.sendAttacker(**i.current, *building);
 				}
 }
 

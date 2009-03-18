@@ -749,16 +749,9 @@ void NetHost::setDesiredSpeed(uint32_t speed)
 // Send the packet to all properly connected clients
 void NetHost::broadcast(SendPacket & packet)
 {
-	for
-		(std::vector<Client>::iterator it = d->clients.begin();
-		 it != d->clients.end();
-		 ++it)
-	{
-		if (it->playernum == -2)
-			continue;
-
-		packet.send(it->sock);
-	}
+	container_iterate_const(std::vector<Client>, d->clients, i)
+		if (i.current->playernum != -2)
+			packet.send(i.current->sock);
 }
 
 void NetHost::writeSettingMap(SendPacket & packet)

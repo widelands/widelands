@@ -486,25 +486,25 @@ void TrainingSite::find_and_start_next_program(Game & game)
 		uint32_t maxprio = 0;
 		uint32_t maxcredit = 0;
 
-		for (std::vector<Upgrade>::iterator it = m_upgrades.begin(); it != m_upgrades.end(); ++it) {
-			if (it->credit >= 10) {
-				it->credit -= 10;
-				return start_upgrade(game, *it);
+		container_iterate(std::vector<Upgrade>, m_upgrades, i) {
+			if (i.current->credit >= 10) {
+				i.current->credit -= 10;
+				return start_upgrade(game, *i.current);
 			}
 
-			if (it->prio > maxprio)
-				maxprio = it->prio;
-			if (it->credit > maxcredit)
-				maxcredit = it->credit;
+			if (maxprio   < i.current->prio)
+				maxprio    = i.current->prio;
+			if (maxcredit < i.current->credit)
+				maxcredit  = i.current->credit;
 		}
 
 		if (maxprio == 0)
 			return program_start(game, "sleep");
 
-		uint32_t multiplier = 1 + (10-maxcredit) / maxprio;
+		uint32_t const multiplier = 1 + (10 - maxcredit) / maxprio;
 
-		for (std::vector<Upgrade>::iterator it = m_upgrades.begin(); it != m_upgrades.end(); ++it)
-			it->credit += multiplier * it->prio;
+		container_iterate(std::vector<Upgrade>, m_upgrades, i)
+			i.current->credit += multiplier * i.current->prio;
 	}
 }
 
@@ -580,10 +580,9 @@ TrainingSite::Upgrade* TrainingSite::get_upgrade(enum tAttribute atr)
  */
 int32_t TrainingSite::get_pri(tAttribute atr)
 {
-	for (std::vector<Upgrade>::const_iterator it = m_upgrades.begin(); it != m_upgrades.end(); ++it) {
-		if (it->attribute == atr)
-			return it->prio;
-	}
+	container_iterate_const(std::vector<Upgrade>, m_upgrades, i)
+		if (i.current->attribute == atr)
+			return i.current->prio;
 
 	return 0;
 }
@@ -596,12 +595,11 @@ void TrainingSite::set_pri(tAttribute atr, int32_t prio)
 	if (prio < 0)
 		prio = 0;
 
-	for (std::vector<Upgrade>::iterator it = m_upgrades.begin(); it != m_upgrades.end(); ++it) {
-		if (it->attribute == atr) {
-			it->prio = prio;
+	container_iterate(std::vector<Upgrade>, m_upgrades, i)
+		if (i.current->attribute == atr) {
+			i.current->prio = prio;
 			return;
 		}
-	}
 }
 
 /**

@@ -561,8 +561,8 @@ void Flag::set_economy(Economy *e)
 	if (m_building)
 		m_building->set_economy(e);
 
-	for (std::list<FlagJob>::const_iterator it = m_flag_jobs.begin(); it != m_flag_jobs.end(); ++it)
-		it->request->set_economy(e);
+	container_iterate_const(std::list<FlagJob>, m_flag_jobs, i)
+		i.current->request->set_economy(e);
 
 	for (int8_t i = 0; i < 6; ++i) {
 		if (m_roads[i])
@@ -1066,17 +1066,15 @@ void Flag::flag_job_request_callback
 
 	assert(w);
 
-	for (std::list<FlagJob>::iterator it = flag->m_flag_jobs.begin(); it != flag->m_flag_jobs.end(); ++it) {
-		if (it->request != rq)
-			continue;
+	container_iterate(std::list<FlagJob>, flag->m_flag_jobs, i)
+		if (i.current->request == rq) {
+			delete rq;
 
-		delete rq;
+			w->start_task_program(g, i.current->program);
 
-		w->start_task_program(g, it->program);
-
-		flag->m_flag_jobs.erase(it);
-		return;
-	}
+			flag->m_flag_jobs.erase(i.current);
+			return;
+		}
 
 	flag->molog("BUG: flag_job_request_callback: worker not found in list\n");
 }
@@ -1483,9 +1481,9 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 	const std::vector<Worker*> workers = get_workers();
 	std::vector<Worker*> reassigned_workers;
 
-	for (std::vector<Worker*>::const_iterator it = workers.begin(); it != workers.end(); ++it) {
-		Worker* w = *it;
-		int32_t idx = path.get_index(w->get_position());
+	container_iterate_const(std::vector<Worker *>, workers, i) {
+		Worker & w = **i.current;
+		int32_t idx = path.get_index(w.get_position());
 
 		// Careful! If the worker is currently inside the building at our
 		// starting flag, we *must not* reassign him.
@@ -1496,22 +1494,22 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 			Map const & map = g->map();
 			if
 				(dynamic_cast<Building const *>
-				 	(map.get_immovable(w->get_position())))
+				 	(map.get_immovable(w.get_position())))
 			{
 				Coords pos;
-				map.get_brn(w->get_position(), &pos);
+				map.get_brn(w.get_position(), &pos);
 				if (pos == path.get_start())
 					idx = 0;
 			}
 		}
 
-		molog("Split: check %u -> idx %i\n", w->serial(), idx);
+		molog("Split: check %u -> idx %i\n", w.serial(), idx);
 
 		if (idx < 0)
 		{
-			reassigned_workers.push_back(w);
+			reassigned_workers.push_back(&w);
 
-			if (carrier == w) {
+			if (carrier == &w) {
 				// Reassign the carrier. Note that the final steps of reassigning
 				// are done in newroad->init()
 				m_carrier = 0;
@@ -1521,7 +1519,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 
 		// Cause a worker update in any case
 		if (upcast(Game, game, g))
-			w->send_signal(game, "road");
+			w.send_signal(game, "road");
 	}
 
 	// Initialize the new road
@@ -1529,8 +1527,8 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 
 	// Actually reassign workers after the new road has initialized,
 	// so that the reassignment is safe
-	for (std::vector<Worker*>::const_iterator it = reassigned_workers.begin(); it != reassigned_workers.end(); ++it)
-		(*it)->set_location(newroad);
+	container_iterate_const(std::vector<Worker *>, reassigned_workers, i)
+		(*i.current)->set_location(newroad);
 
 	// Do the following only if in game
 	if (upcast(Game, game, g)) {
@@ -1789,7 +1787,7 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
  */
 void Transfer::has_finished()
 {
-	m_request->transfer_finish(m_game, this);
+	m_request->transfer_finish(*m_game, *this);
 }
 
 /**
@@ -1798,7 +1796,7 @@ void Transfer::has_finished()
 */
 void Transfer::has_failed()
 {
-	m_request->transfer_fail(m_game, this);
+	m_request->transfer_fail(*m_game, *this);
 }
 
 void Transfer::tlog(const char* fmt, ...)
@@ -2882,27 +2880,27 @@ void Economy::start_request_timer(int32_t delta)
  * Find the supply that is best suited to fulfill the given request.
  * \return 0 if no supply is found, the best supply otherwise
 */
-Supply* Economy::find_best_supply(Game* g, Request* req, int32_t* pcost)
+Supply * Economy::find_best_supply
+	(Game & game, Request const & req, int32_t & cost)
 {
-	assert(pcost != 0);
-	assert(req->is_open());
+	assert(req.is_open());
 
 	Route buf_route0, buf_route1;
 	Supply *best_supply = 0;
 	Route *best_route = 0;
 	int32_t best_cost = -1;
-	Flag * const target_flag = req->get_target_flag();
+	Flag & target_flag = req.target_flag();
 
 	for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i) {
 		Supply & supp = m_supplies[i];
 		Route* route;
 
 		// idle requests only get active supplies
-		if (req->is_idle() and not supp.is_active()) {
+		if (req.is_idle() and not supp.is_active()) {
 			/* unless the warehouse REALLY needs the supply */
-			if (req->get_priority(0) > 100) { //  100 is the 'real idle' priority
+			if (req.get_priority(0) > 100) { //  100 is the 'real idle' priority
 				//check if the supply is at current target
-				if (target_flag == (&supp)->get_position(g)->get_base_flag()) {
+				if (&target_flag == supp.get_position(&game)->get_base_flag()) {
 					//assert(false);
 					continue;
 				}
@@ -2912,7 +2910,7 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int32_t* pcost)
 		}
 
 		// Check requirements
-		if (!supp.nr_supplies(g, req))
+		if (!supp.nr_supplies(&game, &req))
 			continue;
 
 		route = (best_route != &buf_route0) ? &buf_route0 : &buf_route1;
@@ -2923,8 +2921,8 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int32_t* pcost)
 		if
 			(!
 			 find_route
-			 	(supp.get_position(g)->get_base_flag(),
-			 	 target_flag,
+			 	(supp.get_position(&game)->get_base_flag(),
+			 	 &target_flag,
 			 	 route,
 			 	 false,
 			 	 cost_cutoff))
@@ -2942,7 +2940,7 @@ Supply* Economy::find_best_supply(Game* g, Request* req, int32_t* pcost)
 	if (!best_route)
 		return 0;
 
-	*pcost = best_cost;
+	cost = best_cost;
 	return best_supply;
 }
 
@@ -2989,41 +2987,42 @@ struct RSPairStruct {
 /**
  * Walk all Requests and find potential transfer candidates.
 */
-void Economy::process_requests(Game* g, RSPairStruct* s)
+void Economy::process_requests(Game & game, RSPairStruct & s)
 {
-	for (RequestList::iterator it = m_requests.begin(); it != m_requests.end(); ++it) {
-		Request* req = *it;
+	container_iterate_const(RequestList, m_requests, i) {
+		Request & req = **i.current;
 		int32_t cost; // estimated time in milliseconds to fulfill Request
 
 		// We somehow get desynced request lists that don't trigger desync
 		// alerts, so add info to the sync stream here.
 		{
-			::StreamWrite & ss = g->syncstream();
-			ss.Unsigned8 (req->get_type  ());
-			ss.Unsigned8 (req->get_index ().value());
-			ss.Unsigned32(req->get_target()->serial());
+			::StreamWrite & ss = game.syncstream();
+			ss.Unsigned8 (req.get_type  ());
+			ss.Unsigned8 (req.get_index ().value());
+			ss.Unsigned32(req.get_target()->serial());
 		}
 
-		Ware_Index ware_index = req->get_index();
-		Supply* supp = find_best_supply(g, req, &cost);
+		Ware_Index const ware_index = req.get_index();
+		Supply * const supp = find_best_supply(game, req, cost);
 
 		if (!supp)
 			continue;
 
-		if (!req->is_idle() and not supp->is_active()) {
+		if (!req.is_idle() and not supp->is_active()) {
 			// Calculate the time the building will be forced to idle waiting
 			// for the request
-			int32_t idletime = g->get_gametime() + 15000 + 2*cost - req->get_required_time();
+			int32_t const idletime =
+				game.get_gametime() + 15000 + 2 * cost - req.get_required_time();
 			// If the building wouldn't have to idle, we wait with the request
 			if (idletime < -200) {
-				if (s->nexttimer < 0 || s->nexttimer > (-idletime))
-					s->nexttimer = -idletime;
+				if (s.nexttimer < 0 || s.nexttimer > -idletime)
+					s.nexttimer = -idletime;
 
 				continue;
 			}
 		}
 
-		int32_t priority = req->get_priority (cost);
+		int32_t const priority = req.get_priority (cost);
 		if (priority < 0)
 			continue;
 
@@ -3033,7 +3032,7 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		rsp.is_item = false;
 		rsp.is_worker = false;
 
-		switch (req->get_type()) {
+		switch (req.get_type()) {
 		case Request::WARE:    rsp.is_item    = true; break;
 		case Request::WORKER:  rsp.is_worker  = true; break;
 		default:
@@ -3041,40 +3040,35 @@ void Economy::process_requests(Game* g, RSPairStruct* s)
 		}
 
 		rsp.ware = ware_index;
-		rsp.request = req;
+		rsp.request  = &req;
 		rsp.supply = supp;
 		rsp.priority = priority;
-		rsp.pairid = ++s->pairid;
+		rsp.pairid = ++s.pairid;
 
-		log
-			("REQ: %u (%i, %s) <- %u (ware %i), priority %i\n",
-			 req->get_target()->serial(),
-			 req->get_required_time(), req->describe().c_str(),
-			 supp->get_position(g)->serial(), rsp.ware.value(), rsp.priority);
-
-		s->queue.push(rsp);
+		s.queue.push(rsp);
 	}
 
 	// TODO: This function should be called from time to time
-	create_requested_workers (g);
+	create_requested_workers (game);
 }
+
 
 /**
  * Walk all Requests and find requests of workers than aren't supplied. Then
  * try to create the worker at warehouses.
 */
-void Economy::create_requested_workers(Game* g)
+void Economy::create_requested_workers(Game & game)
 {
 	/*
 		Find the request of workers that can not be supplied
 	*/
 	if (get_nr_warehouses() > 0) {
 		Tribe_Descr const & tribe = owner().tribe();
-		for (RequestList::iterator it = m_requests.begin(); it != m_requests.end(); ++it) {
-			Request* req = *it;
+		container_iterate_const(RequestList, m_requests, j) {
+			Request const & req = **j.current;
 
-			if (!req->is_idle() && req->get_type() == Request::WORKER) {
-				Ware_Index index = req->get_index();
+			if (!req.is_idle() && req.get_type() == Request::WORKER) {
+				Ware_Index const index = req.get_index();
 				int32_t num_wares = 0;
 				Worker_Descr* w_desc=get_owner()->tribe().get_worker_descr(index);
 
@@ -3083,15 +3077,15 @@ void Economy::create_requested_workers(Game* g)
 					continue;
 
 				for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i)
-					num_wares += m_supplies[i].nr_supplies(g, req);
+					num_wares += m_supplies[i].nr_supplies(&game, &req);
 
 				// If there aren't enough supplies...
 				if (num_wares == 0) {
 					bool created_worker = false;
 					uint32_t n_wh = 0;
 					while (n_wh < get_nr_warehouses()) {
-						if (m_warehouses[n_wh]->can_create_worker(g, index)) {
-							m_warehouses[n_wh]->create_worker(g, index);
+						if (m_warehouses[n_wh]->can_create_worker(game, index)) {
+							m_warehouses[n_wh]->create_worker(&game, index);
 							created_worker = true;
 							//break;
 						} // if (m_warehouses[n_wh]
@@ -3127,10 +3121,10 @@ void Economy::balance_requestsupply(uint32_t const timerid)
 
 	if (upcast(Game, game, &m_owner->egbase())) {
 
-	// Try to fulfill non-idle Requests
-	process_requests(game, &rsps);
+		//  Try to fulfill non-idle Requests.
+		process_requests(*game, rsps);
 
-	// Now execute request/supply pairs
+		//  Now execute request/supply pairs.
 		while (rsps.queue.size()) {
 			RequestSupplyPair rsp = rsps.queue.top();
 

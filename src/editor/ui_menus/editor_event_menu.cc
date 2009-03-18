@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -274,12 +274,9 @@ void Editor_Event_Menu::clicked_del_event() {
 		std::ostringstream s(_("Can't delete Event. It is in use by "));
 		Widelands::Event::Referencers::const_iterator
 			event_referencers_end = event_referencers.end();
-		for
-			(Widelands::Event::Referencers::const_iterator it =
-			 event_referencers.begin();
-			 it != event_referencers_end;
-			 ++it)
-			s << it->first->identifier() << '\n';
+		container_iterate_const
+			(Widelands::Event::Referencers, event_referencers, i)
+			s << i.current->first->identifier() << '\n';
 		UI::MessageBox mmb
 			(&eia(), _("Error!"), s.str(), UI::MessageBox::OK);
 		mmb.run();
@@ -316,12 +313,9 @@ void Editor_Event_Menu::clicked_del_trigger() {
 		std::ostringstream s(_("Can't delete Trigger. It is in use by "));
 		Widelands::Trigger::Referencers::const_iterator const
 			trigger_referencers_end = trigger_referencers.end();
-		for
-			(Widelands::Trigger::Referencers::const_iterator it =
-			 trigger_referencers.begin();
-			 it != trigger_referencers_end;
-			 ++it)
-			s << it->first->identifier() << '\n';
+		container_iterate_const
+			(Widelands::Trigger::Referencers, trigger_referencers, i)
+			s << i.current->first->identifier() << '\n';
 		UI::MessageBox messagebox
 			(&eia(), _("Error!"), s.str(), UI::MessageBox::OK);
 		messagebox.run();

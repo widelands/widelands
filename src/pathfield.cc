@@ -21,21 +21,19 @@
 
 #include "wexception.h"
 
+#include "container_iterate.h"
 
 namespace Widelands {
 
-Pathfields::Pathfields(uint16_t nrfields)
+Pathfields::Pathfields(uint16_t const nrfields)
 	: fields(new Pathfield[nrfields]), cycle(0)
-{
-}
+{}
 
 
-PathfieldManager::PathfieldManager()
-{
-	m_nrfields = 0;
-}
+PathfieldManager::PathfieldManager() : m_nrfields(0) {}
 
-void PathfieldManager::setSize(uint32_t nrfields)
+
+void PathfieldManager::setSize(uint32_t const nrfields)
 {
 	if (m_nrfields != nrfields)
 		m_list.clear();
@@ -45,14 +43,13 @@ void PathfieldManager::setSize(uint32_t nrfields)
 
 boost::shared_ptr<Pathfields> PathfieldManager::allocate()
 {
-	for (List::iterator it = m_list.begin(); it != m_list.end(); ++it) {
-		if (it->use_count() == 1) {
-			++(*it)->cycle;
-			if (!(*it)->cycle)
-				clear(*it);
-			return *it;
+	container_iterate_const(List, m_list, i)
+		if (i.current->use_count() == 1) {
+			++(*i.current)->cycle;
+			if (!(*i.current)->cycle)
+				clear(*i.current);
+			return *i.current;
 		}
-	}
 
 	if (m_list.size() >= 8)
 		throw wexception("PathfieldManager::allocate: unbounded nesting?");

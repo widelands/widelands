@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -403,15 +403,11 @@ void FieldDebugWindow::think()
 	m_ui_bobs.clear();
 
 	m_map.find_bobs(Widelands::Area<Widelands::FCoords>(m_coords, 0), &bobs);
-	for
-		(std::vector<Widelands::Bob *>::iterator it = bobs.begin();
-		 it != bobs.end();
-		 ++it)
-	{
+	container_iterate_const(std::vector<Widelands::Bob *>, bobs, i) {
 		snprintf
 			(buffer, sizeof(buffer),
-			 "%s (%u)", (*it)->name().c_str(), (*it)->serial());
-		m_ui_bobs.add(buffer, (*it)->serial());
+			 "%s (%u)", (*i.current)->name().c_str(), (*i.current)->serial());
+		m_ui_bobs.add(buffer, (*i.current)->serial());
 	}
 }
 

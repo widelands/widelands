@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -908,19 +908,10 @@ void FieldActionWindow::building_icon_mouse_in
 #if 0
 		//  This is debug output.
 		//  Improvement suggestion: add to sign explanation window instead.
-		for
-			(Workarea_Info::const_iterator it = workarea_info.begin();
-			 it != workarea_info.end();
-			 ++it)
-		{
-			const int32_t radius = it->first;
-			log("Radius: %i\n", radius);
-			const std::set<std::string> & descriptions = it->second;
-			for
-				(std::set<std::string>::const_iterator de = descriptions.begin();
-				 de != descriptions.end();
-				 ++de)
-				log("        %s\n", de->c_str());
+		container_iterate_const(Workarea_Info, workarea_info, i) {
+			log("Radius: %i\n", i.current->first);
+			container_iterate_const(std::set<std::string>, i.current->second, j)
+				log("        %s\n", j.current->c_str());
 		}
 #endif
 

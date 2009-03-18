@@ -73,14 +73,9 @@ const Computer_Player::Implementation * Computer_Player::getImplementation
 {
 	ImplementationVector const & vec = getImplementations();
 
-	for
-		(ImplementationVector::const_iterator it = vec.begin();
-		 it != vec.end();
-		 ++it)
-	{
-		if ((*it)->name == name)
-			return *it;
-	}
+	container_iterate_const(ImplementationVector, vec, i)
+		if ((*i.current)->name == name)
+			return *i.current;
 
 	return vec[0];
 }

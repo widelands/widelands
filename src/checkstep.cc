@@ -63,25 +63,17 @@ bool CheckStepAnd::allowed
 	 CheckStep::StepId const id)
 	const
 {
-	for
-		(std::vector<CheckStep>::const_iterator it = subs.begin();
-		 it != subs.end();
-		 ++it)
-	{
-		if (!it->allowed(map, start, end, dir, id))
+	container_iterate_const(std::vector<CheckStep>, subs, i)
+		if (!i.current->allowed(map, start, end, dir, id))
 			return false;
-	}
 
 	return true;
 }
 
 bool CheckStepAnd::reachabledest(Map & map, FCoords const dest) const
 {
-	for
-		(std::vector<CheckStep>::const_iterator it = subs.begin();
-		 it != subs.end();
-		 ++it)
-		if (!it->reachabledest(map, dest))
+	container_iterate_const(std::vector<CheckStep>, subs, i)
+		if (!i.current->reachabledest(map, dest))
 			return false;
 
 	return true;

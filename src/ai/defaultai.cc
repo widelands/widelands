@@ -691,11 +691,9 @@ void DefaultAI::check_productionsite (ProductionSiteObserver & site)
 	Workarea_Info::size_type radius = 0;
 
 	Workarea_Info const & workarea_info = site.bo->desc->m_workarea_info;
-	for
-		(Workarea_Info::const_iterator it = workarea_info.begin();
-		 it != workarea_info.end();
-		 ++it)
-		if (it->first > radius) radius = it->first;
+	container_iterate_const(Workarea_Info, workarea_info, i)
+		if (radius < i.current->first)
+			radius = i.current->first;
 
 	Map & map = game().map();
 	if
@@ -1415,23 +1413,20 @@ void DefaultAI::construct_roads ()
 bool DefaultAI::check_supply(BuildingObserver const &bo)
 {
 	size_t supplied = 0;
-	for (size_t i = 0; i < bo.inputs.size(); ++i)
-		for
-			(std::list<BuildingObserver>::iterator it = buildings.begin();
-			 it != buildings.end();
-			 ++it)
-		{
+	container_iterate_const(std::vector<int16_t>, bo.inputs, i)
+		container_iterate_const(std::list<BuildingObserver>, buildings, j)
 			if
-				(it->cnt_built &&
-				 std::find(it->outputs.begin(), it->outputs.end(), bo.inputs[i])
+				(j.current->cnt_built &&
+				 std::find
+				 	(j.current->outputs.begin(), j.current->outputs.end(),
+				 	 *i.current)
 				 !=
-				 it->outputs.end()
+				 j.current->outputs.end()
 				 &&
-				 check_supply(*it))
+				 check_supply(*j.current))
 			{
 				++supplied;
 				break;
 			}
-		}
 	return supplied == bo.inputs.size();
 }

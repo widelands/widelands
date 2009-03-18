@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -77,11 +77,11 @@ struct Request : public Trackable {
 	bool is_open() const
 	{return m_idle || m_count > m_transfers.size();}
 	Economy * get_economy() const throw () {return m_economy;}
-	int32_t get_required_time();
-	int32_t get_last_request_time() {return m_last_request_time;}
-	int32_t get_priority(int32_t cost);
+	int32_t get_required_time() const;
+	int32_t get_last_request_time() const {return m_last_request_time;}
+	int32_t get_priority(int32_t cost) const;
 
-	Flag * get_target_flag();
+	Flag & target_flag() const;
 
 	void set_economy(Economy *);
 	void set_idle(bool idle);
@@ -99,19 +99,19 @@ struct Request : public Trackable {
 	Worker * get_transfer_worker();
 
 	//  callbacks for WareInstance/Worker code
-	void transfer_finish(Game* g, Transfer* t);
-	void transfer_fail(Game* g, Transfer* t);
+	void transfer_finish(Game &, Transfer &);
+	void transfer_fail  (Game &, Transfer &);
 
 	void set_requirements (const Requirements& r) {m_requirements = r;}
 	const Requirements& get_requirements () const {return m_requirements;}
 
 private:
-	int32_t get_base_required_time(Editor_Game_Base *, uint32_t nr);
+	int32_t get_base_required_time(Editor_Game_Base &, uint32_t nr) const;
 public:
 	void cancel_transfer(uint32_t idx);
 private:
 	void remove_transfer(uint32_t idx);
-	uint32_t find_transfer(Transfer *);
+	uint32_t find_transfer(Transfer &);
 
 	typedef std::vector<Transfer *> TransferList;
 

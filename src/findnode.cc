@@ -23,34 +23,30 @@
 #include "immovable.h"
 #include "wexception.h"
 
+#include "container_iterate.h"
+
 namespace Widelands {
 
 
 FindNodeAnd::Subfunctor::Subfunctor(FindNode const & _ff, bool const _negate)
 	: negate(_negate), findfield(_ff)
-{
-}
+{}
 
 void FindNodeAnd::add(FindNode const & findfield, bool const negate)
 {
 	m_subfunctors.push_back(Subfunctor(findfield, negate));
 }
 
-bool FindNodeAnd::accept(const Map & map, const FCoords& coord) const {
-	for
-		(std::vector<Subfunctor>::const_iterator it = m_subfunctors.begin();
-		 it != m_subfunctors.end();
-		 ++it)
-	{
-		if (it->findfield.accept(map, coord) == it->negate)
+bool FindNodeAnd::accept(Map const & map, FCoords const & coord) const {
+	container_iterate_const(std::vector<Subfunctor>, m_subfunctors, i)
+		if (i.current->findfield.accept(map, coord) == i.current->negate)
 			return false;
-	}
 
 	return true;
 }
 
 
-bool FindNodeCaps::accept(const Map &, const FCoords& coord) const {
+bool FindNodeCaps::accept(Map const &, FCoords const & coord) const {
 	uint8_t fieldcaps = coord.field->get_caps();
 
 	if ((fieldcaps & BUILDCAPS_SIZEMASK) < (m_mincaps & BUILDCAPS_SIZEMASK))
@@ -62,11 +58,11 @@ bool FindNodeCaps::accept(const Map &, const FCoords& coord) const {
 	return true;
 }
 
-bool FindNodeSize::accept(const Map &, const FCoords& coord) const {
+bool FindNodeSize::accept(Map const &, FCoords const & coord) const {
 	if (BaseImmovable const * const immovable = coord.field->get_immovable())
 		if (immovable->get_size() > BaseImmovable::NONE)
 			return false;
-	uint8_t fieldcaps = coord.field->get_caps();
+	uint8_t const fieldcaps = coord.field->get_caps();
 
 	switch (m_size) {
 	case sizeBuild:  return (fieldcaps & (BUILDCAPS_SIZEMASK | BUILDCAPS_FLAG | BUILDCAPS_MINE));
@@ -81,7 +77,7 @@ bool FindNodeSize::accept(const Map &, const FCoords& coord) const {
 	}
 }
 
-bool FindNodeImmovableSize::accept(const Map &, const FCoords& coord) const {
+bool FindNodeImmovableSize::accept(Map const &, FCoords const & coord) const {
 	int32_t size = BaseImmovable::NONE;
 
 	if (BaseImmovable * const imm = coord.field->get_immovable())
@@ -98,7 +94,8 @@ bool FindNodeImmovableSize::accept(const Map &, const FCoords& coord) const {
 }
 
 
-bool FindNodeImmovableAttribute::accept(const Map &, const FCoords& coord) const
+bool FindNodeImmovableAttribute::accept
+	(Map const &, FCoords const & coord) const
 {
 	if (BaseImmovable * const imm = coord.field->get_immovable())
 		return imm->has_attribute(m_attribute);
@@ -106,18 +103,21 @@ bool FindNodeImmovableAttribute::accept(const Map &, const FCoords& coord) const
 }
 
 
-bool FindNodeResource::accept(const Map &, const FCoords& coord) const {
+bool FindNodeResource::accept(Map const &, FCoords const & coord) const {
 	return
-		((m_resource == coord.field->get_resources()) &&
-		 coord.field->get_resources_amount());
+		m_resource == coord.field->get_resources() &&
+		coord.field->get_resources_amount();
 }
 
 
-bool FindNodeResourceBreedable::accept(const Map &, const FCoords& coord) const {
+bool FindNodeResourceBreedable::accept
+	(Map const &, FCoords const & coord) const
+{
 	return
-		((m_resource == coord.field->get_resources()) &&
-		 (coord.field->get_resources_amount() < coord.field->get_starting_res_amount()));
+		m_resource == coord.field->get_resources() &&
+		coord.field->get_resources_amount   ()
+		<
+		coord.field->get_starting_res_amount();
 }
-
 
 }

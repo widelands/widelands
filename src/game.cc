@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -577,11 +577,8 @@ void Game::cleanup_for_load
 	m_state = gs_notrunning;
 
 	Editor_Game_Base::cleanup_for_load(flush_graphics, flush_animations);
-	for
-		(std::vector<Tribe_Descr*>::iterator it = m_tribes.begin();
-		 it != m_tribes.end();
-		 ++it)
-		delete *it;
+	container_iterate_const(std::vector<Tribe_Descr *>, m_tribes, i)
+		delete *i.current;
 	m_tribes.clear();
 	cmdqueue().flush();
 

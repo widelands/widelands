@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,13 @@
 #ifndef NOTIFICATION_H
 #define NOTIFICATION_H
 
-#include <algorithm>
-#include <vector>
 
 #include "widelands_geometry.h"
+
+#include "container_iterate.h"
+
+#include <algorithm>
+#include <vector>
 
 namespace Widelands {
 
@@ -55,8 +58,8 @@ public:
 
 protected:
 	void send(T const & note) {
-		for (typename Links::iterator it = m_links.begin(); it != m_links.end(); ++it)
-			(*it)->receive(note);
+		container_iterate_const(typename Links, m_links, i)
+			(*i.current)->receive(note);
 	}
 
 private:
