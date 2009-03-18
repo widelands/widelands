@@ -862,7 +862,7 @@ void Request::transfer_fail(Game &, Transfer & t) {
  * \note This does *not* update whether the \ref Request is registered with the
  * \ref Economy or not.
 */
-void Request::cancel_transfer(uint32_t idx)
+void Request::cancel_transfer(uint32_t const idx)
 {
 	remove_transfer(idx);
 }
@@ -872,11 +872,11 @@ void Request::cancel_transfer(uint32_t idx)
  * This does not update the Transfer's worker or item, and it does not update
  * whether the Request is registered with the Economy.
  */
-void Request::remove_transfer(uint32_t idx)
+void Request::remove_transfer(uint32_t const idx)
 {
-	Transfer* t = m_transfers[idx];
+	Transfer * const t = m_transfers[idx];
 
-	m_transfers.erase(m_transfers.begin()+idx);
+	m_transfers.erase(m_transfers.begin() + idx);
 
 	delete t;
 }
