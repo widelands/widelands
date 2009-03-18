@@ -18,7 +18,9 @@
  */
 
 #include "chat.h"
+#include "editor_game_base.h"
 
+using namespace Widelands;
 
 std::string ChatMessage::toPrintable() const
 {
@@ -37,15 +39,11 @@ std::string ChatMessage::toPrintable() const
 
 std::string ChatMessage::color() const
 {
-	switch (playern) {
-		case 0: return "0000ff";
-		case 1: return "ff0000";
-		case 2: return "ffff00";
-		case 3: return "00ff00";
-		case 4: return "333333";
-		case 5: return "c37a00";
-		case 6: return "a300c3";
-		case 7: return "ffffff";
-		default: return "999999";
+	if ((playern >= 0) && playern < MAX_PLAYERS) {
+		const uint8_t * cols = g_playercolors[playern];
+		char buf[sizeof("ffffff")];
+		snprintf(buf, sizeof(buf), "%.2x%.2x%.2x", cols[9], cols[10], cols[11]);
+		return buf;
 	}
+	return "999999";
 }
