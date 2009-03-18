@@ -126,7 +126,7 @@ throw (_wexception)
 							if (dynamic_cast<MilitarySite const *>(productionsite))
 								log
 									("WARNING: Found a stopped %s at (%i, %i) in the "
-									 "savegame. Militarysites are not stopable. "
+									 "savegame. Militarysites are not stoppable. "
 									 "Ignoring.",
 									 building.descname().c_str(),
 									 building.get_position().x,
@@ -136,7 +136,7 @@ throw (_wexception)
 						else
 							log
 								("WARNING: Found a stopped %s at (%i, %i) in the "
-								 "savegame. Only productionsites are stopable. "
+								 "savegame. Only productionsites are stoppable. "
 								 "Ignoring.",
 								 building.descname().c_str(),
 								 building.get_position().x,
