@@ -82,7 +82,7 @@ uint32_t Fullscreen_Menu_Base::gr_x() {
 }
 
 uint32_t Fullscreen_Menu_Base::gr_y() {
-	return g_options.pull_section("global").get_int("yres", MENU_XRES);
+	return g_options.pull_section("global").get_int("yres", MENU_YRES);
 }
 
 
