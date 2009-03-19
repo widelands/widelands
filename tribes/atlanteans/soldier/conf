@@ -8,11 +8,11 @@ max_defense_level=2
 hp=120-130
 hp_incr_per_level=40
 attack=14-16
-attack_incr_per_level=3
+attack_incr_per_level=7
 defense=6
 defense_incr_per_level=4
 evade=30
-evade_incr_per_level=10
+evade_incr_per_level=15
 
 hp_level_0_pic=hp_level0.png
 hp_level_1_pic=hp_level1.png
