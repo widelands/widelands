@@ -1,4 +1,4 @@
-#  Larch
+#  Pomegranate
 #
 #  Characteristics suitable to model:
 #    * Spreading: far
@@ -12,12 +12,28 @@ program=program
 program=fall
 picture=idle_0.png
 
+[terrain affinity]
+desert1=              2
+desert2=              2
+desert3=              2
+desert4=              4
+drysoil=             25
+beach=               10
+steppe=             150
+meadow=             255
+mountainmeadow=     235
+highmountainmeadow= 120
+mountain1=            2
+mountain2=            2
+mountain3=            2
+mountain4=            2
+
 [idle]
 pics=idle_?.png
 hotspot=24 60
 
 [program]
-animate=idle 110000
+animate=idle 1455000
 transform=deadtree3 34
 seed=tree7_t 120
 

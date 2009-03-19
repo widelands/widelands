@@ -2,8 +2,24 @@ size=small
 program=program
 picture=s3tree3_00.png
 
+[terrain affinity]
+desert1=             15
+desert2=             20
+desert3=             25
+desert4=             75
+drysoil=            150
+beach=              200
+steppe=             196
+meadow=             255
+mountainmeadow=      50
+highmountainmeadow=   7
+mountain1=            2
+mountain2=            2
+mountain3=            2
+mountain4=            2
+
 [program]
-animate=medium 110000
+animate=medium 60000
 remove=23
 transform=tree3
 

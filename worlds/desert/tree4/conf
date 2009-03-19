@@ -1,4 +1,11 @@
-#  Maple
+#  Roystonea regia
+#
+# It is a large palm which reaches a height of 20–30 m tall and a stem diameter
+# of about 47 cm. The stem is stout, smooth and grey-white in colour. Trees have
+# about 15 leaves which can be up to 4 m long. The flowers are white with
+# pinkish anthers. The fruit are spheroid to ellipsoid in shape, 8.9–15 mm long
+# and 7–10.9 mm wide. They are green when immature, turning red and eventually
+# purplish-black as they mature. (source: Wikipedia)
 #
 #  Characteristics suitable to model:
 #    * Spreading: medium
@@ -12,6 +19,22 @@ program=program
 program=fall
 picture=idle_0.png
 
+[terrain affinity]
+desert1=              2
+desert2=              2
+desert3=              2
+desert4=             20
+drysoil=             50
+beach=              100
+steppe=             100
+meadow=             255
+mountainmeadow=     150
+highmountainmeadow=  25
+mountain1=            2
+mountain2=            2
+mountain3=            2
+mountain4=            2
+
 [idle]
 pics=idle_?.png
 sfx=0 ../../../sound/animals/bird4
@@ -19,7 +42,7 @@ fps=10
 hotspot=24 60
 
 [program]
-animate=idle 120000
+animate=idle 1550000
 transform=deadtree4 39
 seed=tree4_t 126
 

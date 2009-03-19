@@ -1,4 +1,4 @@
-#  Rowan
+#  Ficus
 #
 #  Characteristics suitable to model:
 #    * Spreading: far
@@ -12,12 +12,28 @@ program=program
 program=fall
 picture=idle_0.png
 
+[terrain affinity]
+desert1=              2
+desert2=              2
+desert3=              2
+desert4=             20
+drysoil=             45
+beach=               20
+steppe=             150
+meadow=             255
+mountainmeadow=     235
+highmountainmeadow= 100
+mountain1=            2
+mountain2=            2
+mountain3=            2
+mountain4=            2
+
 [idle]
 pics=idle_?.png
 hotspot=24 60
 
 [program]
-animate=idle 66000
+animate=idle 1432000
 transform=deadtree4 48
 seed=tree8_t 200
 

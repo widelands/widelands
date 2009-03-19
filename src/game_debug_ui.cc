@@ -403,11 +403,11 @@ void FieldDebugWindow::think()
 	m_ui_bobs.clear();
 
 	m_map.find_bobs(Widelands::Area<Widelands::FCoords>(m_coords, 0), &bobs);
-	container_iterate_const(std::vector<Widelands::Bob *>, bobs, i) {
+	container_iterate_const(std::vector<Widelands::Bob *>, bobs, j) {
 		snprintf
 			(buffer, sizeof(buffer),
-			 "%s (%u)", (*i.current)->name().c_str(), (*i.current)->serial());
-		m_ui_bobs.add(buffer, (*i.current)->serial());
+			 "%s (%u)", (*j.current)->name().c_str(), (*j.current)->serial());
+		m_ui_bobs.add(buffer, (*j.current)->serial());
 	}
 }
 

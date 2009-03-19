@@ -1,8 +1,24 @@
 program=program
 picture=s1tree8_00.png
 
+[terrain affinity]
+desert1=              2
+desert2=              2
+desert3=              2
+desert4=             20
+drysoil=             45
+beach=               20
+steppe=             150
+meadow=             255
+mountainmeadow=     235
+highmountainmeadow= 100
+mountain1=            2
+mountain2=            2
+mountain3=            2
+mountain4=            2
+
 [program]
-animate=tiny 132000
+animate=tiny 60000
 remove=40
 transform=tree8_s
 

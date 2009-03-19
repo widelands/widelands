@@ -2,8 +2,24 @@ size=small
 program=program
 picture=s2tree5_00.png
 
+[terrain affinity]
+desert1=              2
+desert2=              2
+desert3=              2
+desert4=             20
+drysoil=             50
+beach=               20
+steppe=             190
+meadow=             255
+mountainmeadow=     150
+highmountainmeadow=  30
+mountain1=            2
+mountain2=            2
+mountain3=            2
+mountain4=            2
+
 [program]
-animate=small 88000
+animate=small 40000
 remove=25
 transform=tree5_m
 

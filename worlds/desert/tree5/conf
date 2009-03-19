@@ -1,4 +1,9 @@
-#  Birch
+#  Oil palm
+#
+#  Mature trees are single-stemmed, and grow to 20 m tall. The leaves are
+#  pinnate, and reach between 3-5 m long. A young tree produces about 30 leaves
+#  a year. Established trees over 10 years produce about 20 leaves a year.
+#  (source: Wikipedia)
 #
 #  Characteristics suitable to model:
 #    * Spreading: far
@@ -12,6 +17,22 @@ program=program
 program=fall
 picture=idle_0.png
 
+[terrain affinity]
+desert1=              2
+desert2=              2
+desert3=              2
+desert4=             20
+drysoil=             50
+beach=               20
+steppe=             190
+meadow=             255
+mountainmeadow=     150
+highmountainmeadow=  30
+mountain1=            2
+mountain2=            2
+mountain3=            2
+mountain4=            2
+
 [idle]
 pics=idle_?.png
 sfx=0 ../../../sound/animals/bird5
@@ -19,7 +40,7 @@ fps=10
 hotspot=24 60
 
 [program]
-animate=idle 44000
+animate=idle 800000
 transform=deadtree2 50
 seed=tree5_t 180
 

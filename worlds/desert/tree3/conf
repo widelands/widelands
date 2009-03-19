@@ -1,4 +1,6 @@
-#  Spruce
+#  Coconut
+#
+#  It is a large palm, growing to 30 m tall (source: Wikipedia)
 #
 #  Characteristics suitable to model:
 #    * Spreading: far
@@ -12,6 +14,22 @@ program=program
 program=fall
 picture=idle_0.png
 
+[terrain affinity]
+desert1=             15
+desert2=             20
+desert3=             25
+desert4=             75
+drysoil=            150
+beach=              200
+steppe=             196
+meadow=             255
+mountainmeadow=      50
+highmountainmeadow=   7
+mountain1=            2
+mountain2=            2
+mountain3=            2
+mountain4=            2
+
 [idle]
 pics=idle_?.png
 sfx=0 ../../../sound/animals/bird3
@@ -19,7 +37,7 @@ fps=10
 hotspot=24 60
 
 [program]
-animate=idle 110000
+animate=idle 1550000
 transform=deadtree3 36
 seed=tree3_t 160
 

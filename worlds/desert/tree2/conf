@@ -1,16 +1,34 @@
-#  Oak
+#  Borassus
+#
+# They are tall palms, capable of growing up to 30 m high. (source: Wikipedia)
 #
 #  Characteristics suitable to model:
 #    * Spreading: medium
-#    * Seeding:   low
-#    * Growth:    slow
-#    * Longevity: long
+#    * Seeding:   medium
+#    * Growth:    medium
+#    * Longevity: medium
 
 size=small
 attrib=tree
 program=program
 program=fall
 picture=idle_0.png
+
+[terrain affinity]
+desert1=             10
+desert2=             10
+desert3=             10
+desert4=             75
+drysoil=            150
+beach=              150
+steppe=             196
+meadow=             255
+mountainmeadow=      50
+highmountainmeadow=   7
+mountain1=            2
+mountain2=            2
+mountain3=            2
+mountain4=            2
 
 [idle]
 pics=idle_?.png
@@ -19,7 +37,7 @@ fps=10
 hotspot=24 60
 
 [program]
-animate=idle 200000
+animate=idle 2000000
 transform=deadtree2 25
 seed=tree2_t 126
 

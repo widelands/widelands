@@ -1,11 +1,9 @@
-#  Aspen
-#  Grows in clonal colonies. Spreading by means of root suckers. New stems
-#  appear up to 30-40 m away. A stem can live for 40-150 years. Spreading about
-#  1 m per year. Fast growing (source: Wikipedia)
+#  Date Palm (Phoenix)
+#  It is a large solitary palm, 10-20(-40) m tall. Fast growing (source: Wikipedia)
 #
 #  Characteristics suitable to model:
 #    * Spreading: short
-#    * Seeding:   high
+#    * Seeding:   medium
 #    * Growth:    fast
 #    * Longevity: short
 
@@ -15,6 +13,22 @@ program=program
 program=fall
 picture=idle_0.png
 
+[terrain affinity]
+desert1=             20
+desert2=             20
+desert3=             20
+desert4=             75
+drysoil=            150
+beach=              150
+steppe=             196
+meadow=             255
+mountainmeadow=      50
+highmountainmeadow=   7
+mountain1=            2
+mountain2=            2
+mountain3=            2
+mountain4=            2
+
 [idle]
 pics=idle_?.png
 sfx=0 ../../../sound/animals/bird1
@@ -22,7 +36,7 @@ fps=10
 hotspot=24 60
 
 [program]
-animate=idle 61000
+animate=idle 1050000
 transform=deadtree2 32
 seed=tree1_t 70
 
