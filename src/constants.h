@@ -30,11 +30,15 @@
 
 /** \name Textures
  * textures have a fixed size and are squares
- * TEXTURE_HEIGHT is just defined for easier understandement of the code*/
+ * TEXTURE_HEIGHT is just defined for easier understandement of the code
+ */
 //@{
 #define TEXTURE_WIDTH 64
 #define TEXTURE_HEIGHT TEXTURE_WIDTH
 //@}
+
+#define XRES 800 ///< Fullscreen Menu Width
+#define YRES 600 ///< Fullscreen Menu Height
 
 /// \name Fonts
 /// Font constants, defined including size

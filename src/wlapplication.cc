@@ -752,13 +752,8 @@ bool WLApplication::init_hardware() {
 	SDL_EnableUNICODE(1); //needed by helper.h:is_printable()
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-	uint32_t xres = 800;
-	uint32_t yres = 600;
-	if (m_loadgame_filename.size() or m_scenario_filename.size()) {
-		// main menu will not be shown, so set in-game resolution
-		xres = s.get_int("xres", xres);
-		yres = s.get_int("yres", yres);
-	}
+	uint32_t xres = s.get_int("xres", XRES);
+	uint32_t yres = s.get_int("yres", YRES);
 
 	init_graphics(xres, yres, s.get_int("depth", 16), m_gfx_fullscreen);
 

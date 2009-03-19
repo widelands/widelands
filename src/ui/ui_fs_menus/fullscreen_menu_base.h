@@ -23,9 +23,6 @@
 #include "ui_panel.h"
 #include <string>
 
-#define MENU_XRES 800 ///< Fullscreen Menu Width
-#define MENU_YRES 600 ///< Fullscreen Menu Height
-
 /**
  * This class is the base class for a fullscreen menu.
  * A fullscreen menu is a menu which takes the full screen; it has the size
