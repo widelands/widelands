@@ -1,0 +1,11 @@
+# The interim headquarters of the barbarians is a simple stone building thatched
+# with reed and coated with many different wares.
+
+size=big
+buildable=no
+subtype=HQ
+conquers=9
+
+[idle]
+pics=hq_i_??.png
+hotspot=49 71

@@ -6,7 +6,7 @@ packet_version=2
 [Headquarters]
 type=building
 version=2
-building=headquarters
+building=interim_headquarters
 point=12 10
 axe=6
 bakingtray=2

@@ -6,7 +6,7 @@ packet_version=2
 [Headquarters 1]
 type=building
 version=2
-building=headquarters_shipwreck
+building=headquarters
 point=16 21
 helm=4
 wood_lance=5
