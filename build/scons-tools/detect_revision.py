@@ -66,7 +66,7 @@ def detect_revision():
     
     if __has_bzr and not is_git_workdir:
         try:
-            b = Branch().open(".")
+            b = BzrDir.open(".").open_branch()
             revno, nick = b.revno(), b.nick
             if svn_revnum=='':
                 revstring = "unofficial-bzr-%s-%s" % (nick,revno)

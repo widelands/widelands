@@ -179,7 +179,7 @@ Default('tags')
 
 ################################################################ C++ style-check
 
-env.Execute('utils/spurious_source_code/detect')
+# env.Execute('utils/spurious_source_code/detect')
 
 ################################################################## PNG shrinking
 
