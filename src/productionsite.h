@@ -98,7 +98,7 @@ class ProductionSite : public Building {
 	friend struct Map_Buildingdata_Data_Packet;
 	friend struct ProductionProgram::ActReturn;
 	friend struct ProductionProgram::ActReturn::Workers_Need_Experience;
-    friend struct ProductionProgram::ActCall;
+	friend struct ProductionProgram::ActCall;
 	friend struct ProductionProgram::ActWorker;
 	friend struct ProductionProgram::ActSleep;
 	friend struct ProductionProgram::ActAnimate;

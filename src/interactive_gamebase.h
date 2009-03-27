@@ -55,7 +55,8 @@ struct Interactive_GameBase : public Interactive_Base {
 		UI::UniqueWindow::Registry stock;
 	};
 
-	Interactive_GameBase(Widelands::Game & _game) : Interactive_Base(_game) {}
+	Interactive_GameBase
+		(Widelands::Game &, Section & global_s, bool chatenabled = false);
 	Widelands::Game * get_game() const;
 	Widelands::Game &     game() const;
 
@@ -66,7 +67,7 @@ protected:
 	Game_Main_Menu_Windows m_mainm_windows;
 	ChatProvider           * m_chatProvider;
 	ChatDisplay            * m_chatDisplay;
-	bool                   chatenabled;
+	bool                     m_chatenabled;
 };
 
 #endif

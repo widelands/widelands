@@ -58,9 +58,11 @@ struct InteractiveBaseInternals {
 	InteractiveBaseInternals() : mm(0) {}
 };
 
-Interactive_Base::Interactive_Base(Editor_Game_Base & the_egbase)
-:
-Map_View(0, 0, 0, get_xres(), get_yres(), *this),
+Interactive_Base::Interactive_Base
+	(Editor_Game_Base & the_egbase, Section & global_s)
+	:
+	Map_View(0, 0, 0, get_xres(), get_yres(), *this),
+	m_show_workarea_preview(global_s.get_bool("workareapreview", false)),
 m(new InteractiveBaseInternals),
 m_egbase                      (the_egbase),
 #ifdef DEBUG //  not in releases
@@ -80,21 +82,17 @@ m_label_speed                 (this, get_w(), 0, std::string(), Align_TopRight)
 {
 	warpview.set(this, &Interactive_Player::mainview_move);
 
-	{
-		Section & s = g_options.pull_section("global");
-		set_border_snap_distance(s.get_int("border_snap_distance", 0));
-		set_panel_snap_distance (s.get_int("panel_snap_distance", 10));
-		set_snap_windows_only_when_overlapping
-			(s.get_bool("snap_windows_only_when_overlapping", false));
-		set_dock_windows_to_edges(s.get_bool("dock_windows_to_edges", false));
+	set_border_snap_distance(global_s.get_int("border_snap_distance", 0));
+	set_panel_snap_distance (global_s.get_int("panel_snap_distance", 10));
+	set_snap_windows_only_when_overlapping
+		(global_s.get_bool("snap_windows_only_when_overlapping", false));
+	set_dock_windows_to_edges
+		(global_s.get_bool("dock_windows_to_edges", false));
 
-		// Switch to the new graphics system now, if necessary
-		WLApplication::get()->init_graphics
-			(get_xres(), get_yres(),
-			 s.get_int("depth", 16), s.get_bool("fullscreen", false));
-
-		m_show_workarea_preview = s.get_bool("workareapreview", false);
-	}
+	//  Switch to the new graphics system now, if necessary.
+	WLApplication::get()->init_graphics
+		(get_xres(), get_yres(),
+		 global_s.get_int("depth", 16), global_s.get_bool("fullscreen", false));
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will given
 	//  funny results.

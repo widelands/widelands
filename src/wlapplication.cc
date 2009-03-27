@@ -1490,7 +1490,9 @@ bool WLApplication::new_game()
 			loaderUI.step(_("Preparing game"));
 
 			game.set_game_controller(ctrl.get());
-			game.set_iabase(new Interactive_Player(game, pn, false, false));
+			game.set_iabase
+				(new Interactive_Player
+				 	(game, g_options.pull_section("global"), pn, false, false));
 			game.init_newgame(loaderUI, sp.settings());
 			game.run(loaderUI, Widelands::Game::NewNonScenario);
 		} catch (...) {
@@ -1677,7 +1679,8 @@ void WLApplication::replay()
 
 		loaderUI.step(_("Loading..."));
 
-		game.set_iabase(new Interactive_Spectator(&game));
+		game.set_iabase
+			(new Interactive_Spectator(game, g_options.pull_section("global")));
 		game.set_write_replay(false);
 		ReplayGameController rgc(game, fname);
 

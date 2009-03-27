@@ -43,7 +43,12 @@ struct Textarea;
  * cares for input and so on.
  */
 struct Interactive_Player : public Interactive_GameBase, public DebugConsole::Handler {
-	Interactive_Player(Widelands::Game &, Widelands::Player_Number, bool, bool);
+	Interactive_Player
+		(Widelands::Game &,
+		 Section         & global_s,
+		 Widelands::Player_Number,
+		 bool              scenario,
+		 bool              multiplayer);
 
 	void start();
 

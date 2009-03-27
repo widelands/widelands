@@ -29,6 +29,7 @@
 #include "network_protocol.h"
 #include "network_system.h"
 #include "playercommand.h"
+#include "profile.h"
 #include "warning.h"
 #include "wexception.h"
 #include "wlapplication.h"
@@ -151,9 +152,13 @@ void NetClient::run ()
 		uint8_t pn = d->playernum + 1;
 		Interactive_GameBase * igb;
 		if (pn > 0)
-			igb = new Interactive_Player(game, pn, false, true);
+			igb =
+				new Interactive_Player
+					(game, g_options.pull_section("global"), pn, false, true);
 		else
-			igb = new Interactive_Spectator(&game, true);
+			igb =
+				new Interactive_Spectator
+					(game, g_options.pull_section("global"), true);
 		game.set_iabase(igb);
 		igb->set_chat_provider(this);
 		if (!d->settings.savegame) //  new map

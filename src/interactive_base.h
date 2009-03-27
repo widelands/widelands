@@ -51,7 +51,7 @@ struct Interactive_Base : public Map_View {
 		dfSpeed          = 8, ///< show game speed and speed controls
 	};
 
-	Interactive_Base(Widelands::Editor_Game_Base &);
+	Interactive_Base(Widelands::Editor_Game_Base &, Section & global_s);
 	virtual ~Interactive_Base();
 
 	Widelands::Editor_Game_Base & egbase() const {return m_egbase;}

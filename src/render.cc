@@ -252,19 +252,20 @@ inline static uint32_t calc_minimap_color
 		}
 	}
 
-	if (see_details) {
-	upcast(PlayerImmovable const, immovable, f.field->get_immovable());
-	if (flags & MiniMap::Roads and dynamic_cast<const Road *>(immovable))
-		pixelcolor = blend_color(format, pixelcolor, 255, 255, 255);
-	if
-		((flags & MiniMap::Flags and dynamic_cast<const Flag *>(immovable))
-		 or
-		 (flags & MiniMap::Bldns
-		  and
-		  dynamic_cast<const Widelands::Building *>(immovable)))
-		pixelcolor = SDL_MapRGB
-		(&const_cast<SDL_PixelFormat &>(format), 255, 255, 255);
-	}
+	if (see_details)
+		if (upcast(PlayerImmovable const, immovable, f.field->get_immovable())) {
+			if (flags & MiniMap::Roads and dynamic_cast<Road const *>(immovable))
+				pixelcolor = blend_color(format, pixelcolor, 255, 255, 255);
+			if
+				((flags & MiniMap::Flags and dynamic_cast<Flag const *>(immovable))
+				 or
+				 (flags & MiniMap::Bldns
+				  and
+				  dynamic_cast<Widelands::Building const *>(immovable)))
+				pixelcolor =
+					SDL_MapRGB
+						(&const_cast<SDL_PixelFormat &>(format), 255, 255, 255);
+		}
 
 	return pixelcolor;
 }

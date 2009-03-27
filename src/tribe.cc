@@ -470,7 +470,9 @@ Ware_Index Tribe_Descr::safe_worker_index(const char * const workername) const {
 /*
  * Return the given building or die trying
  */
-Building_Index Tribe_Descr::safe_building_index(const char *buildingname) const {
+Building_Index Tribe_Descr::safe_building_index
+	(char const * const buildingname) const
+{
 	Building_Index const result = building_index(buildingname);
 
 	if (not result)

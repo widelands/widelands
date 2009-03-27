@@ -263,7 +263,7 @@ void MilitarySite::request_soldier_callback
 void MilitarySite::update_soldier_request()
 {
 	std::vector<Soldier *> present = presentSoldiers();
-	uint32_t stationed = stationedSoldiers().size();
+	uint32_t const stationed = stationedSoldiers().size();
 
 	if (stationed < m_capacity) {
 		if (!m_soldier_request) {

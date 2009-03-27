@@ -38,6 +38,7 @@
 #include "network.h"
 #include "player.h"
 #include "playercommand.h"
+#include "profile.h"
 #include "replay.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
@@ -266,7 +267,9 @@ bool Game::run_splayer_scenario_direct(const char* mapname) {
 			 map().get_scenario_player_name (p));
 	}
 
-	set_iabase(new Interactive_Player(*this, 1, true, false));
+	set_iabase
+		(new Interactive_Player
+		 	(*this, g_options.pull_section("global"), 1, true, false));
 
 	loaderUI.step (_("Loading a map"));
 
@@ -390,7 +393,9 @@ bool Game::run_load_game(std::string filename) {
 		loaderUI.set_background(background);
 		player_nr = gpdp.get_player_nr();
 
-		set_iabase(new Interactive_Player(*this, player_nr, true, false));
+		set_iabase
+			(new Interactive_Player
+			 	(*this, g_options.pull_section("global"), player_nr, true, false));
 
 		loaderUI.step(_("Loading..."));
 		gl.load_game();

@@ -37,9 +37,9 @@
  * Setup the replay UI for the given game.
  */
 Interactive_Spectator::Interactive_Spectator
-		(Widelands::Game * const g, bool multiplayer)
-:
-Interactive_GameBase(*g),
+	(Widelands::Game & _game, Section & global_s, bool const multiplayer)
+	:
+	Interactive_GameBase(_game, global_s, multiplayer),
 
 #define INIT_BTN(picture, callback, tooltip)                                  \
  TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
@@ -47,17 +47,19 @@ Interactive_GameBase(*g),
  &Interactive_Spectator::callback, this,                                      \
  tooltip                                                                      \
 
-m_toggle_chat   (INIT_BTN("menu_chat", toggle_chat,   _("Chat"))),
-m_exit          (INIT_BTN("menu_exit_game", exit_btn, _("Exit Replay"))),
-m_save          (INIT_BTN("menu_save_game", save_btn, _("Save Game"))),
-m_toggle_options_menu
-	(INIT_BTN("menu_options_menu", toggle_options_menu, _("Options"))),
-m_toggle_statistics
-	(INIT_BTN("menu_general_stats", toggle_statistics,  _("Statistics"))),
-m_toggle_minimap(INIT_BTN("menu_toggle_minimap", toggle_minimap, _("Minimap")))
+	m_toggle_chat
+		(INIT_BTN("menu_chat",           toggle_chat,         _("Chat"))),
+	m_exit
+		(INIT_BTN("menu_exit_game",      exit_btn,            _("Exit Replay"))),
+	m_save
+		(INIT_BTN("menu_save_game",      save_btn,            _("Save Game"))),
+	m_toggle_options_menu
+		(INIT_BTN("menu_options_menu",   toggle_options_menu, _("Options"))),
+	m_toggle_statistics
+		(INIT_BTN("menu_general_stats",  toggle_statistics,   _("Statistics"))),
+	m_toggle_minimap
+		(INIT_BTN("menu_toggle_minimap", toggle_minimap,      _("Minimap")))
 {
-	chatenabled = multiplayer;
-
 	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 	if (!multiplayer) {
 		m_toolbar.add(&m_exit,                UI::Box::AlignLeft);
@@ -131,7 +133,7 @@ void Interactive_Spectator::toggle_chat()
 
 void Interactive_Spectator::exit_btn()
 {
-	if (chatenabled) // == multiplayer
+	if (m_chatenabled) //  == multiplayer
 		return;
 	end_modal(0);
 }
@@ -139,7 +141,7 @@ void Interactive_Spectator::exit_btn()
 
 void Interactive_Spectator::save_btn()
 {
-	if (chatenabled) // == multiplayer
+	if (m_chatenabled) //  == multiplayer
 		return;
 	if (m_mainm_windows.savegame.window)
 		delete m_mainm_windows.savegame.window;
@@ -151,7 +153,7 @@ void Interactive_Spectator::save_btn()
 
 
 void Interactive_Spectator::toggle_options_menu() {
-	if (!chatenabled) // == !multiplayer
+	if (!m_chatenabled) //  == !multiplayer
 		return;
 	if (m_options.window)
 		delete m_options.window;
@@ -203,7 +205,7 @@ bool Interactive_Spectator::handle_key(bool down, SDL_keysym code)
 			return true;
 
 		case SDLK_RETURN:
-			if (!m_chatProvider | !chatenabled)
+			if (!m_chatProvider | !m_chatenabled)
 				break;
 
 			if (!m_chat.window)

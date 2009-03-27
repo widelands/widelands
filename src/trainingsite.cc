@@ -290,8 +290,13 @@ void TrainingSite::update_soldier_request() {
 	if (m_soldiers.size() < m_capacity) {
 		if (!m_soldier_request) {
 			Ware_Index soldierid = get_owner()->tribe().safe_worker_index("soldier");
-			m_soldier_request = new Request
-				(this, soldierid, &TrainingSite::request_soldier_callback, this, Request::WORKER);
+			m_soldier_request =
+				new Request
+					(this,
+					 soldierid,
+					 &TrainingSite::request_soldier_callback,
+					 this,
+					 Request::WORKER);
 
 			RequireOr r;
 

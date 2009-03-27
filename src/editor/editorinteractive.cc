@@ -49,7 +49,7 @@
 using Widelands::Building;
 
 Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
-Interactive_Base(e),
+Interactive_Base(e, g_options.pull_section("global")),
 m_need_save     (false),
 m_realtime      (WLApplication::get()->get_time()),
 

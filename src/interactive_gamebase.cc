@@ -20,6 +20,10 @@
 #include "interactive_gamebase.h"
 
 #include "game.h"
+Interactive_GameBase::Interactive_GameBase
+	(Widelands::Game & _game, Section & global_s, bool const chatenabled)
+	: Interactive_Base(_game, global_s), m_chatenabled(chatenabled)
+{}
 
 /// \return a pointer to the running \ref Game instance.
 Widelands::Game * Interactive_GameBase::get_game() const
@@ -38,7 +42,7 @@ void Interactive_GameBase::set_chat_provider(ChatProvider* chat)
 	m_chatProvider = chat;
 	m_chatDisplay->setChatProvider(chat);
 
-	chatenabled = true;
+	m_chatenabled = true;
 }
 
 ChatProvider* Interactive_GameBase::get_chat_provider()

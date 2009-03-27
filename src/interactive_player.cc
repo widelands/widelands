@@ -156,12 +156,14 @@ Initialize
 ===============
 */
 Interactive_Player::Interactive_Player
-	(Widelands::Game        &       g,
+	(Widelands::Game        &       _game,
+	 Section                &       global_s,
 	 Widelands::Player_Number const plyn,
 	 bool                     const scenario,
 	 bool                     const multiplayer)
-:
-Interactive_GameBase(g),
+	:
+	Interactive_GameBase (_game, global_s),
+	m_auto_roadbuild_mode(global_s.get_bool("auto_roadbuild_mode", true)),
 m_flag_to_connect(Widelands::Coords::Null()),
 
 #define INIT_BTN(picture, callback, tooltip)                                  \
@@ -192,11 +194,6 @@ m_toggle_resources
 m_toggle_help
 	(INIT_BTN("menu_help",             toggle_help,         _("Ware help")))
 {
-	chatenabled = false; // is set to true by set_chat_provider()
-
-	m_auto_roadbuild_mode =
-		g_options.pull_section("global").get_bool("auto_roadbuild_mode", true);
-
 	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_options_menu,    UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_statistics_menu, UI::Box::AlignLeft);
@@ -265,8 +262,8 @@ void Interactive_Player::think()
 			m_flag_to_connect = Widelands::Coords::Null();
 		}
 	}
-	m_toggle_chat.set_visible(chatenabled);
-	m_toggle_chat.set_enabled(chatenabled);
+	m_toggle_chat.set_visible(m_chatenabled);
+	m_toggle_chat.set_enabled(m_chatenabled);
 }
 
 
@@ -404,7 +401,7 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 			return true;
 
 		case SDLK_RETURN:
-			if (!m_chatProvider | !chatenabled)
+			if (!m_chatProvider | !m_chatenabled)
 				break;
 
 			if (!m_chat.window)

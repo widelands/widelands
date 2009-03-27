@@ -32,6 +32,7 @@
 #include "network_system.h"
 #include "player.h"
 #include "playercommand.h"
+#include "profile.h"
 #include "tribe.h"
 #include "wexception.h"
 #include "wlapplication.h"
@@ -343,14 +344,18 @@ void NetHost::run()
 
 		loaderUI.step(_("Preparing game"));
 
-		uint8_t pn = d->settings.playernum + 1;
+		uint8_t const pn = d->settings.playernum + 1;
 		d->game = &game;
 		game.set_game_controller(this);
 		Interactive_GameBase * igb;
 		if (pn > 0)
-			igb = new Interactive_Player(game, pn, false, true);
+			igb =
+				new Interactive_Player
+					(game, g_options.pull_section("global"), pn, false, true);
 		else
-			igb = new Interactive_Spectator(d->game, true);
+			igb =
+				new Interactive_Spectator
+					(*d->game, g_options.pull_section("global"), true);
 		igb->set_chat_provider(&d->chat);
 		game.set_iabase(igb);
 		if (!d->settings.savegame) //  new game
