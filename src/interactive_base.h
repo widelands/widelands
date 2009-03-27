@@ -88,7 +88,7 @@ struct Interactive_Base : public Map_View {
 	virtual void start() = 0;
 
 	//  display flags
-	uint32_t get_display_flags();
+	uint32_t get_display_flags() const;
 	void set_display_flags(uint32_t flags);
 	bool get_display_flag(uint32_t flag);
 	void set_display_flag(uint32_t flag, bool on);

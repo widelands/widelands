@@ -179,11 +179,6 @@ uint32_t ConstructionSite::get_ui_anim() const
 {return building().get_animation("idle");}
 
 
-/// Print the name of the building we build.
-const std::string & ConstructionSite::census_string() const throw ()
-{return building().descname();}
-
-
 /*
 ===============
 ConstructionSite::get_statistics_string

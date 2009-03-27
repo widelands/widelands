@@ -25,7 +25,7 @@
 #include "font_handler.h"
 #include "game.h"
 #include "graphic.h"
-#include "interactive_base.h"
+#include "interactive_gamebase.h"
 #include "layered_filesystem.h"
 #include "map.h"
 #include "player.h"
@@ -39,6 +39,8 @@
 #include "worker.h"
 
 #include "upcast.h"
+
+#include <sstream>
 
 #include <stdio.h>
 
@@ -474,19 +476,53 @@ Return the animation ID that is used for the building in UI items
 uint32_t Building::get_ui_anim() const {return descr().get_ui_anim();}
 
 
-/*
-===============
-Building::get_census_string [virtual]
-
-Return the overlay string that is displayed on the map view when
-enabled by the player.
-
-Default is the descriptive name of the building, but e.g. construction
-sites may want to override this.
-===============
-*/
-const std::string & Building::census_string() const throw ()
-{return descname();}
+#define FORMAT(key, value) case key: result << value; break
+std::string Building::info_string(std::string const & format) {
+	std::ostringstream result;
+	container_iterate_const(std::string, format, i)
+		if (*i.current == '%') {
+			if (++i.current == i.end) { //  unterminated format sequence
+				result << '%';
+				break;
+			}
+			switch (*i.current) {
+			FORMAT('%', '%');
+			FORMAT('i', serial());
+			FORMAT('t', get_statistics_string());
+			FORMAT
+				('s',
+				 (descr().get_ismine()                  ? _("mine")   :
+				  get_size  () == BaseImmovable::SMALL  ? _("small")  :
+				  get_size  () == BaseImmovable::MEDIUM ? _("medium") : _("big")));
+			FORMAT
+				('S',
+				 (descr().get_ismine()                  ? _("Mine")   :
+				  get_size  () == BaseImmovable::SMALL  ? _("Small")  :
+				  get_size  () == BaseImmovable::MEDIUM ? _("Medium") : _("Big")));
+			FORMAT('x', get_position().x);
+			FORMAT('y', get_position().y);
+			FORMAT('c', '(' << get_position().x << ", " << get_position().y << ')');
+			FORMAT('A', descname());
+			FORMAT('a', name());
+			case 'N':
+				if (upcast(ConstructionSite const, constructionsite, this))
+					result << constructionsite->building().descname();
+				else
+					result << descname();
+				break;
+			case 'n':
+				if (upcast(ConstructionSite const, constructionsite, this))
+					result << constructionsite->building().name();
+				else
+					result << name();
+				break;
+			default: //  invalid format sequence
+				result << *i.current;
+			}
+		} else
+			result << *i.current;
+	return result.str();
+}
 
 
 /*
@@ -688,7 +724,9 @@ void Building::draw_help
 	 FCoords,
 	 Point                    const pos)
 {
-	const uint32_t dpyflags = game.get_iabase()->get_display_flags();
+	Interactive_GameBase const & igbase =
+		dynamic_cast<Interactive_GameBase const &>(*game.get_iabase());
+	uint32_t const dpyflags = igbase.get_display_flags();
 
 	if (dpyflags & Interactive_Base::dfShowCensus)
 	{
@@ -698,7 +736,7 @@ void Building::draw_help
 			 UI_FONT_SMALL,
 			 UI_FONT_SMALL_CLR,
 			 pos - Point(0, 45),
-			 census_string().c_str(),
+			 info_string(igbase.building_census_format()).c_str(),
 			 Align_Center);
 	}
 
@@ -709,7 +747,7 @@ void Building::draw_help
 			 UI_FONT_SMALL,
 			 UI_FONT_SMALL_CLR,
 			 pos - Point(0, 35),
-			 get_statistics_string().c_str(),
+			 info_string(igbase.building_statistics_format()).c_str(),
 			 Align_Center);
 	}
 }

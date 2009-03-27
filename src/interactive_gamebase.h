@@ -63,10 +63,23 @@ struct Interactive_GameBase : public Interactive_Base {
 	// Chat messages
 	void set_chat_provider(ChatProvider* chat);
 	ChatProvider* get_chat_provider();
+
+	std::string const & building_census_format      () const {
+		return m_building_census_format;
+	}
+	std::string const & building_statistics_format  () const {
+		return m_building_statistics_format;
+	}
+	std::string const & building_window_title_format() const {
+		return m_building_window_title_format;
+	}
 protected:
 	Game_Main_Menu_Windows m_mainm_windows;
 	ChatProvider           * m_chatProvider;
 	ChatDisplay            * m_chatDisplay;
+	std::string              m_building_census_format;
+	std::string              m_building_statistics_format;
+	std::string              m_building_window_title_format;
 	bool                     m_chatenabled;
 };
 

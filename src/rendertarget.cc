@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -351,7 +351,8 @@ void RenderTarget::rendermap
 	 Player                      const &       player,
 	 Point                                     viewofs)
 {
-	if (player.see_all()) return rendermap(egbase, viewofs);
+	if (player.see_all())
+		return rendermap(egbase, viewofs);
 
 	RENDERMAP_INITIALIZANTONS;
 

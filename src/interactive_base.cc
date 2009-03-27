@@ -444,7 +444,7 @@ Interactive_Base::get_display_flags
 Return display flags (dfXXX) that modify the view of the map.
 ===============
 */
-uint32_t Interactive_Base::get_display_flags()
+uint32_t Interactive_Base::get_display_flags() const
 {
 	return m_display_flags;
 }

@@ -71,7 +71,6 @@ public:
 	virtual int32_t get_size() const throw ();
 	virtual uint32_t get_playercaps() const throw ();
 	virtual uint32_t get_ui_anim() const;
-	virtual const std::string & census_string() const throw ();
 	virtual std::string get_statistics_string();
 	uint32_t get_built_per64k();
 

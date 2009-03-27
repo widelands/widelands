@@ -478,8 +478,11 @@ Create the window, add it to the registry.
 ===============
 */
 Building_Window::Building_Window(Interactive_Player * parent, Building * building, UI::Window * * registry)
-:
-UI::Window(parent, 0, 0, Width, 0, building->descname().c_str()),
+	:
+	UI::Window
+		(parent,
+		 0, 0, Width, 0,
+		 building->info_string(parent->building_window_title_format()).c_str()),
 m_workarea_job_id(Overlay_Manager::Job_Id::Null())
 {
 	m_registry = registry;

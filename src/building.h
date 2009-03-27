@@ -164,7 +164,7 @@ public:
 	const std::string & descname() const throw () {return descr().descname();}
 	__attribute__ ((deprecated)) const char * get_descname() const throw () {return descr().descname().c_str();}
 
-	virtual const std::string & census_string() const throw ();
+	std::string info_string(std::string const & format);
 	virtual std::string get_statistics_string();
 
 	/// Fills the building with things that it would normally request

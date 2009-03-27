@@ -19,10 +19,20 @@
 
 #include "interactive_gamebase.h"
 
+#include "profile.h"
+
 #include "game.h"
 Interactive_GameBase::Interactive_GameBase
 	(Widelands::Game & _game, Section & global_s, bool const chatenabled)
-	: Interactive_Base(_game, global_s), m_chatenabled(chatenabled)
+	:
+	Interactive_Base(_game, global_s),
+	m_building_census_format
+		(global_s.get_string("building_census_format",       "%N")),
+	m_building_statistics_format
+		(global_s.get_string("building_statistics_format",   "%t")),
+	m_building_window_title_format
+		(global_s.get_string("building_window_title_format", "%A")),
+	m_chatenabled(chatenabled)
 {}
 
 /// \return a pointer to the running \ref Game instance.
