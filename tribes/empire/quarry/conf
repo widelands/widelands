@@ -11,14 +11,24 @@ stonemason=1
 
 [programs]
 mine_stone=_Mine stone
+stone=_Mine stone (only for compatibility with old savegames (build13))
 mine_marble=_Mine marble
+marble=_Mine marble (only for compatibility with old savegames (build13))
 work=_Work
 
 [mine_stone]
 sleep=25000
 worker=cut_stone
 
+[stone]
+sleep=25000
+worker=cut_stone
+
 [mine_marble]
+sleep=25000
+worker=cut_marble
+
+[marble]
 sleep=25000
 worker=cut_marble
 
