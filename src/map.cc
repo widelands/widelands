@@ -2314,18 +2314,12 @@ CoordPath::CoordPath(const Map & map, const Path & path) {
 }
 
 
-/*
-===============
-CoordPath::get_index
-
-After which step does the field appear in this path?
-Return -1 if field is not part of this path.
-===============
-*/
-int32_t CoordPath::get_index(Coords field) const
+/// After which step does the node appear in this path?
+/// \return -1 if node is not part of this path.
+int32_t CoordPath::get_index(Coords const c) const
 {
 	for (uint32_t i = 0; i < m_coords.size(); ++i)
-		if (m_coords[i] == field)
+		if (m_coords[i] == c)
 			return i;
 
 	return -1;

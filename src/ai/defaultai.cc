@@ -244,13 +244,13 @@ void DefaultAI::think ()
 	{
 		BuildableField * bf = buildable_fields.front();
 
-		// check whether we lost ownership of the field
+		//  check whether we lost ownership of the node
 		if (bf->coords.field->get_owned_by() != get_player_number()) {
 			buildable_fields.pop_front();
 			continue;
 		}
 
-		// check whether we can still construct regular buildings on the field
+		//  check whether we can still construct regular buildings on the node
 		if ((player->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK) == 0) {
 			unusable_fields.push_back (bf->coords);
 			delete bf;
@@ -275,13 +275,13 @@ void DefaultAI::think ()
 	{
 		MineableField * mf = mineable_fields.front();
 
-		// check whether we lost ownership of the field
+		//  check whether we lost ownership of the node
 		if (mf->coords.field->get_owned_by() != get_player_number()) {
 			mineable_fields.pop_front();
 			continue;
 		}
 
-		// check whether we can still construct regular buildings on the field
+		//  check whether we can still construct regular buildings on the node
 		if ((player->get_buildcaps(mf->coords) & BUILDCAPS_MINE) == 0) {
 			unusable_fields.push_back (mf->coords);
 			delete mf;
@@ -301,7 +301,7 @@ void DefaultAI::think ()
 		(std::list<FCoords>::iterator i = unusable_fields.begin();
 		 i != unusable_fields.end();)
 	{
-		// check whether we lost ownership of the field
+		//  check whether we lost ownership of the node
 		if (i->field->get_owned_by() != get_player_number()) {
 			i = unusable_fields.erase(i);
 			continue;

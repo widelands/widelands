@@ -243,6 +243,11 @@ struct Bob : public Map_Object {
 
 	uint32_t vision_range() const {return descr().vision_range();}
 
+	/// Check whether this bob should be able to move onto the given node.
+	///
+	/// \param commit indicates whether this function is called from the
+	///    \ref start_walk function, i.e. whether the bob will actually move
+	///    onto the \p to node if this function allows it to.
 	virtual bool checkFieldBlocked(Game* g, const FCoords& field, bool commit);
 
 	virtual void draw

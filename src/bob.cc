@@ -775,13 +775,11 @@ void Bob::move_update(Game* g, State* state)
 }
 
 
-/**
- * Calculates the actual position to draw on from the base field position.
- * This function takes walking etc. into account.
- *
- * pos is the location, in pixels, of the field m_position (height is already
- * taken into account).
- */
+/// Calculates the actual position to draw on from the base node position.
+/// This function takes walking etc. into account.
+///
+/// pos is the location, in pixels, of the node m_position (height is already
+/// taken into account).
 Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 {
 	const Map & map = game.get_map();
@@ -846,15 +844,9 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 }
 
 
-/**
- * Draw the map object.
- *
- * posx/posy is the on-bitmap position of the field we're currently on.
- *
- * It LERPs between start and end position when we're walking.
- * Note that the current node is actually the node we are walking to, not
- * the one we start from.
- */
+/// It LERPs between start and end position when we are walking.
+/// Note that the current node is actually the node that we are walking to, not
+/// the the one that we start from.
 void Bob::draw
 	(Editor_Game_Base const & egbase, RenderTarget & dst, Point const pos) const
 {
@@ -921,16 +913,8 @@ int32_t Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
 }
 
 
-/**
- * Check whether this bob should be able to move onto the given field.
- *
- * \param commit indicates whether this function is called from the \ref start_walk
- *    function, i.e. whether the bob will actually move onto the \p to field if this
- *    function allows it to.
- */
 bool Bob::checkFieldBlocked(Game*, const FCoords&, bool commit)
 {
-	static_cast<void>(commit);
 	return false;
 }
 

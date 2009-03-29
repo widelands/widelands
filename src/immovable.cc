@@ -442,10 +442,6 @@ void Immovable::act(Game * game, uint32_t const data)
 }
 
 
-/**
- * Draw the immovable at the given position.
- * coords is the field that draw() was called for.
-*/
 void Immovable::draw
 	(Editor_Game_Base const &       game,
 	 RenderTarget           &       dst,

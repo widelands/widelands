@@ -210,14 +210,13 @@ public:
 	bool is_border() const throw ()
 	{return owner_info_and_selections & Border_Bitmask;}
 
-	/**
-	 * Returns true when the field is owned by player_number and is not a border
-	 * field. This is fast; only one compare (and a mask because the byte is
-	 * shared with selection).
-	 *
-	 * player_number must be in the range 1 .. Player_Number_Bitmask or the
-	 * behaviour is undefined
-	 */
+	///
+	/// Returns true when the node is owned by player_number and is not a border
+	/// node. This is fast; only one compare (and a mask because the byte is
+	/// shared with selection).
+	///
+	/// player_number must be in the range 1 .. Player_Number_Bitmask or the
+	/// behaviour is undefined.
 	bool is_interior(const Player_Number player_number) const throw () {
 		assert(0 < player_number);
 		assert    (player_number <= Player_Number_Bitmask);

@@ -39,7 +39,7 @@ struct Map_View : public UI::Panel {
 	UI::Signal2<int32_t, int32_t> warpview; // x/y in screen coordinates
 	UI::Signal fieldclicked;
 
-	void warp_mouse_to_field(Widelands::Coords c);
+	void warp_mouse_to_node(Widelands::Coords);
 
 	// Function to set the viewpoint
 	void set_viewpoint(Point vp);

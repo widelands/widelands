@@ -118,64 +118,60 @@ struct Player :
 			time_triangle_last_surveyed[0] = Never();
 			time_triangle_last_surveyed[1] = Never();
 
-			//  Initialized for debug purpouses only.
+			//  Initialized for debug purposes only.
 			map_object_descr[0] = map_object_descr[1] = map_object_descr[2] = 0;
 		}
 
-		/**
-		 * Military influence is exerted by buildings with the help of soldiers.
-		 * When the first soldier enters a building, it starts to exert military
-		 * influence on the nodes within its conquer radius. When a building
-		 * starts to exert military influence, it adds influence values to the
-		 * nodes. When the last soldier leaves the building, it stops to exert
-		 * military influence. Then the same values are subtracted from the nodes.
-		 * Adding and subtracting influence values affects land ownership
-		 * according to certain rules.
-		 *
-		 * This is not saved/loaded. It is recalculated during the loading process
-		 * by adding influence values to the nodes surrounding a building when the
-		 * first soldier located in it is loaded.
-		 */
+		/// Military influence is exerted by buildings with the help of soldiers.
+		/// When the first soldier enters a building, it starts to exert military
+		/// influence on the nodes within its conquer radius. When a building
+		/// starts to exert military influence, it adds influence values to the
+		/// nodes. When the last soldier leaves the building, it stops to exert
+		/// military influence. Then the same values are subtracted from the
+		/// nodes. Adding and subtracting military influence values affects land
+		/// ownership according to certain rules.
+		///
+		/// This is not saved/loaded. It is recalculated during the loading
+		/// process by adding influence values to the nodes surrounding a
+		/// building when the first soldier located in it is loaded.
 		Military_Influence military_influence;
 
-		/**
-		 * Indicates whether the player is currently seeing this node or
-		 * has ever seen it.
-		 *
-		 * The value is
-		 *  0    if the player has never seen the node
-		 *  1    if the player does not currently see the node, but has
-		 *       seen it previously
-		 *  1+n  if the player currently sees the node, where
-		 *        n is the number of objects that can see the node.
-		 *
-		 * Note a fundamental difference between seeing a node, and having
-		 * knownledge about resources. A node is considered continuously seen by a
-		 * player as long as it is within vision range of any person of that
-		 * player. If something on the node changes, the game engine will inform
-		 * that player about it. But resource knowledge is not continuous. It is
-		 * instant (given at the time when the geological survey completes) and
-		 * immediately starts aging. Mining implies geological surveying, so a
-		 * player will be informed about resource changes that he causes himself
-		 * by mining.
-		 *
-		 * Buildings do not see on their own. Only people can see. But as soon as
-		 * a person enters a building, the person stops seeing. If it is the only
-		 * person in the building, the building itself starts to see (some
-		 * buildings, such as fortresses usually see much further than persons
-		 * standing on the ground). As soon as a person leaves a building, the
-		 * person begins to see on its own. If the building becomes empty of
-		 * people, it stops seeing.
-		 *
-		 * Only the Boolean representation of this value (whether the field has
-		 * ever been seen) is saved/loaded. The complete value is then obtained by
-		 * the calls to see_node or see_area peformed by all the building and
-		 * worker objects that can see the node.
-		 *
-		 * \note Never change this variable directly. Instead, use the functions
-		 * \ref see_node and \ref unsee_node or, more conveniently, \ref see_area
-		 * and \ref unsee_area .
-		 */
+		/// Indicates whether the player is currently seeing this node or has
+		/// has ever seen it.
+		///
+		/// The value is
+		///  0    if the player has never seen the node
+		///  1    if the player does not currently see the node, but has seen it
+		///       previously
+		///  1+n  if the player currently sees the node, where n is the number of
+		///       objects that can see the node.
+		///
+		/// Note a fundamental difference between seeing a node, and having
+		/// knownledge about resources. A node is considered continuously seen by
+		/// a player as long as it is within vision range of any person of that
+		/// player. If something on the node changes, the game engine will inform
+		/// that player about it. But resource knowledge is not continuous. It is
+		/// instant (given at the time when the geological survey completes) and
+		/// immediately starts aging. Mining implies geological surveying, so a
+		/// player will be informed about resource changes that he causes himself
+		/// by mining.
+		///
+		/// Buildings do not see on their own. Only people can see. But as soon
+		/// as a person enters a building, the person stops seeing. If it is the
+		/// only person in the building, the building itself starts to see (some
+		/// buildings, such as fortresses usually see much further than persons
+		/// standing on the ground). As soon as a person leaves a building, the
+		/// person begins to see on its own. If the building becomes empty of
+		/// people, it stops seeing.
+		///
+		/// Only the Boolean representation of this value (whether the node has
+		/// ever been seen) is saved/loaded. The complete value is then obtained
+		/// by the calls to see_node or see_area peformed by all the building and
+		/// worker objects that can see the node.
+		///
+		/// \note Never change this variable directly. Instead, use the functions
+		/// \ref see_node and \ref unsee_node or, more conveniently,
+		/// \ref see_area and \ref unsee_area .
 		Vision vision;
 
 

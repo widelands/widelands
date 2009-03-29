@@ -305,20 +305,18 @@ struct Map {
 	 */
 	bool can_reach_by_water(Coords) const;
 
-	/**
-	 * Sets the height to a value. Recalculates brightness. Changes the
-	 * surrounding nodes if necessary. Returns the radius that covers all changes
-	 * that were made.
-	 *
-	 * Do not call this to set the height of each node in an area to the same
-	 * value, because it adjusts the heights of surrounding nodes in each call,
-	 * so it will be terribly slow. Use set_height for Area for that purpouse
-	 * instead.
-	 */
-	uint32_t set_height(FCoords, Player_Number new_value);
+	/// Sets the height to a value. Recalculates brightness. Changes the
+	/// surrounding nodes if necessary. Returns the radius that covers all
+	/// changes that were made.
+	///
+	/// Do not call this to set the height of each node in an area to the same
+	/// value, because it adjusts the heights of surrounding nodes in each call,
+	/// so it will be terribly slow. Use set_height for Area for that purpose
+	/// instead.
+	uint32_t set_height(FCoords, Field::Height);
 
 	/// Changes the height of the nodes in an Area by a difference.
-	uint32_t change_height(Area<FCoords>, int16_t const difference);
+	uint32_t change_height(Area<FCoords>, int16_t difference);
 
 	/**
 	 * Ensures that the height of each node within radius from fc is in
@@ -336,8 +334,7 @@ struct Map {
 	uint32_t set_height(Area<FCoords>, interval<Field::Height> height_interval);
 
 	//  change terrain of a triangle, recalculate buildcaps
-	int32_t change_terrain
-		(const TCoords<FCoords>, Terrain_Index const terrain);
+	int32_t change_terrain(TCoords<FCoords>, Terrain_Index);
 
 	Manager<Variable>   const & mvm() const {return m_mvm;}
 	Manager<Variable>         & mvm()       {return m_mvm;}

@@ -44,14 +44,8 @@ m_complete_redraw_needed(true)
 {}
 
 
-/*
-===============
-Map_View::warp_mouse_to_field
-
-Moves the mouse cursor so that it is directly above the given field
-===============
-*/
-void Map_View::warp_mouse_to_field(Widelands::Coords const c) {
+/// Moves the mouse cursor so that it is directly above the given node
+void Map_View::warp_mouse_to_node(Widelands::Coords const c) {
 	Widelands::Map const & map = intbase().egbase().map();
 	Point p;
 	MapviewPixelFunctions::get_save_pix(map, c, p.x, p.y);
@@ -60,12 +54,12 @@ void Map_View::warp_mouse_to_field(Widelands::Coords const c) {
 	//  If the user has scrolled the field outside the viewable area, he most
 	//  surely doesn't want to jump there.
 	if (p.x < get_w() and p.y < get_h()) {
-
 		if      (p.x <= 0)
-			warp_mouse_to_field(Widelands::Coords(c.x + map.get_width (), c.y));
+			warp_mouse_to_node(Widelands::Coords(c.x + map.get_width (), c.y));
 		else if (p.y <= 0)
-			warp_mouse_to_field(Widelands::Coords(c.x, c.y + map.get_height()));
-		else set_mouse_pos(p);
+			warp_mouse_to_node(Widelands::Coords(c.x, c.y + map.get_height()));
+		else
+			set_mouse_pos(p);
 	}
 }
 

@@ -136,7 +136,7 @@ bool CheckStepWalkOn::allowed
 	if (endcaps & m_movecaps)
 		return true;
 
-	// We can't move onto the field using normal rules.
+	//  We can't move onto the node using normal rules.
 	// If onlyend is true, exception rules only apply for the last step.
 	if (m_onlyend && id != CheckStep::stepLast)
 		return false;
