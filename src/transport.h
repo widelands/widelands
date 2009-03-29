@@ -588,7 +588,6 @@ struct Economy {
 	static void check_split(Flag *f1, Flag *f2);
 
 	bool find_route(Flag *start, Flag *end, Route *route, bool wait, int32_t cost_cutoff = -1);
-	Warehouse *find_nearest_warehouse(Flag *base, Route *route);
 
 	std::vector<Flag *>::size_type get_nrflags() const {return m_flags.size();}
 	void add_flag(Flag *flag);

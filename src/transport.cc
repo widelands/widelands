@@ -1489,8 +1489,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 		// starting flag, we *must not* reassign him.
 		// If he is in the building at our end flag or at the other road's
 		// end flag, he can be reassigned to the other road.
-		if (idx < 0)
-		{
+		if (idx < 0) {
 			Map const & map = g->map();
 			if
 				(dynamic_cast<Building const *>
@@ -1505,8 +1504,7 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 
 		molog("Split: check %u -> idx %i\n", w.serial(), idx);
 
-		if (idx < 0)
-		{
+		if (idx < 0) {
 			reassigned_workers.push_back(&w);
 
 			if (carrier == &w) {
@@ -2500,32 +2498,6 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_
 	return true;
 }
 
-/**
- * Find the nearest warehouse, starting from the given start flag.
- * Returns the best warehouse (or 0 if none can be found) and stores the route
- * to it in the given route.
-*/
-Warehouse *Economy::find_nearest_warehouse(Flag *start, Route *route)
-{
-	int32_t best_totalcost = -1;
-	Warehouse *best_warehouse = 0;
-
-	assert(start->get_economy() == this);
-
-	for (uint32_t i = 0; i < m_warehouses.size(); ++i) {
-		Warehouse *wh = m_warehouses[i];
-		Route buf_route;
-
-		if (!find_route(start, wh->get_base_flag(), &buf_route, false, best_totalcost))
-			continue;
-
-		best_totalcost = buf_route.get_totalcost();
-		best_warehouse = wh;
-		*route = buf_route;
-	}
-
-	return best_warehouse;
-}
 
 /**
  * Add a flag to the flag array.

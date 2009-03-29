@@ -517,7 +517,7 @@ std::string Building::info_string(std::string const & format) {
 					result << name();
 				break;
 			default: //  invalid format sequence
-				result << *i.current;
+				result << '%' << *i.current;
 			}
 		} else
 			result << *i.current;

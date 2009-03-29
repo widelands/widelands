@@ -257,20 +257,12 @@ public:
 	/// change the height. Map::change_height does this. This function is not
 	/// private, because the loader will use them directly But realize, most of
 	/// the times you will need Map::set_field_height().
-	void set_height(Height h) {
-		if (static_cast<int8_t>(h) < 0) h = 0;
-		if (h > MAX_FIELD_HEIGHT) h = MAX_FIELD_HEIGHT;
-		height = h;
+	void set_height(Height const h) {
+		height =
+			static_cast<int8_t>(h) < 0 ? 0 :
+			MAX_FIELD_HEIGHT       < h ? MAX_FIELD_HEIGHT : h;
 	}
 };
-//TODO:
-/**
- * \todo This following line is wrong on 64bit systems.
- * Question: does anything rely on this size? If yes, that needs to be fixed
- * ASAP! Or is it just a paranoia check? In that case it still needs fixing.
- *
- * compile_assert(sizeof(Field) == 12 + 2 * sizeof(void *));
- */
 
 };
 
