@@ -90,7 +90,7 @@ NetClient::NetClient (IPaddress * const svaddr, std::string const & playername)
 			(_("Could not establish connection to host"),
 			 _
 			 	("Widelands could not establish a connection to the given "
-			 	 "adress.\n"
+			 	 "address.\n"
 			 	 "Either no Widelands server was running at the supposed port or\n"
 			 	 "the server shut down as you tried to connect."));
 

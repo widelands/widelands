@@ -1259,7 +1259,7 @@ void WLApplication::mainmenu_multiplayer()
 
 			if (not host_address)
 				throw warning
-					("Invalid Adress",
+					("Invalid Address",
 					 _("The address of the game server is invalid"));
 
 			peer.host = addr;

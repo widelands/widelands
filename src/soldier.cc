@@ -189,9 +189,10 @@ void Soldier_Descr::load_graphics() {
  * Get random animation of specified type
  */
 uint32_t Soldier_Descr::get_rand_anim(const char * const animation_name) const {
-	// Todo: This is thought to get a random animation like attack_1 attack_2 attack_3 ...
-	// Randimly trhought this method. By now only gets attack, but isn't very difficult
-	// to remake allowing the attack_1 and so.
+	//  TODO This is thought to get a random animation like attack_1 attack_2
+	//  TODO attack_3 ...
+	//  TODO Randomly through this method. By now only gets attack, but is not
+	//  TODO very difficult to remake allowing the attack_1 and so.
 	return get_animation(animation_name);
 }
 

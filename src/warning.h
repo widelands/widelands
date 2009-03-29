@@ -34,21 +34,15 @@
 #endif
 #endif
 
-/** class warning
- *
- * Similiar exception class as wexception, but without the debug output
- * This class is thought for normal warnings like "map could not be found"
- * Args are title, message
- */
+/// Similar exception type as wexception, but without the debug output.
+/// Intended for normal warnings like "map could not be found".
 struct warning : public std::exception {
-	explicit warning (const char * et, const char * em, ...)
+	explicit warning (char const * title, char const * message, ...)
 		throw () PRINTF_FORMAT(3, 4);
 	virtual ~warning() throw ();
 
-	/**
-     * The target of the returned pointer remains valid during the lifetime of
-	 * the warning object.
-	 */
+	/// The target of the returned pointer remains valid during the lifetime of
+	/// the warning object.
 	virtual const char * title() const throw ();
 	virtual const char * what() const throw ();
 protected:
