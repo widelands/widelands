@@ -1183,14 +1183,14 @@ void DefaultAI::lose_immovable (PlayerImmovable const & pi)
 {
 	if      (upcast(Building const, building, &pi))
 		lose_building (*building);
-	else if (upcast(Flag     const, flag,     &pi))
+	else if   (upcast(Flag     const, flag,     &pi)) {
 		container_iterate_const(std::list<EconomyObserver *>, economies, i)
 			container_iterate(std::list<Flag const *>, (*i.current)->flags, j)
 				if (*j.current == flag) {
 					(*i.current)->flags.erase (j.current);
 					return;
 				}
-	else if (upcast(Road      const, road,     &pi))
+	} else if (upcast(Road     const, road,     &pi))
 		roads.remove (road);
 }
 
