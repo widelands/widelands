@@ -67,10 +67,8 @@ using boost::format;
 ChatDisplay::ChatDisplay
 	(UI::Panel * const parent,
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h)
-: UI::Panel(parent, x, y, w, h)
-{
-	m_chat = 0;
-}
+	: UI::Panel(parent, x, y, w, h), m_chat(0)
+{}
 ChatDisplay::~ChatDisplay()
 {
 	// Finally delete all left message pictures
@@ -79,9 +77,9 @@ ChatDisplay::~ChatDisplay()
 			g_fh->delete_widget_cache(m_cache_id[i]);
 }
 
-void ChatDisplay::setChatProvider(ChatProvider* chat)
+void ChatDisplay::setChatProvider(ChatProvider & chat)
 {
-	m_chat = chat;
+	m_chat = &chat;
 }
 
 struct Displayed {

@@ -27,7 +27,7 @@
 
 #include "helper.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 
 /*

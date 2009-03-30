@@ -112,7 +112,7 @@ Widelands::Player * Interactive_Spectator::get_player() const throw ()
  */
 void Interactive_Spectator::start()
 {
-	Widelands::Map & map = get_game()->map();
+	Widelands::Map & map = game().map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	overlay_manager.show_buildhelp(false);
 

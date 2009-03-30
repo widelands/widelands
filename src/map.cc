@@ -40,8 +40,7 @@
 #include "log.h"
 
 #include <algorithm>
-
-#include <stdio.h>
+#include <cstdio>
 
 namespace Widelands {
 
@@ -1766,7 +1765,7 @@ public:
 	void push(Pathfield *t)
 	{
 		uint32_t slot = m_data.size();
-		m_data.push_back(0);
+		m_data.push_back(static_cast<Pathfield *>(0));
 
 		while (slot > 0) {
 			uint32_t parent = (slot - 1) / 2;

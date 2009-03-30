@@ -22,9 +22,8 @@
 
 #include <cassert>
 #include <cstddef>
-#include <limits>
-
 #include <stdint.h>
+#include <limits>
 
 namespace Widelands {
 

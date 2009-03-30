@@ -22,13 +22,13 @@
 
 #include "filesystem_exceptions.h"
 
-#include <set>
-#include <string>
+#include <stdint.h>
 #include <cstring>
+#include <set>
 #include <stdexcept>
+#include <string>
 #include <vector>
 
-#include <stdint.h>
 
 typedef std::set<std::string> filenameset_t;
 

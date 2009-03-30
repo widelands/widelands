@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,15 +47,15 @@ Widelands::Game & Interactive_GameBase::    game() const
 	return dynamic_cast<Widelands::Game &>(egbase());
 }
 
-void Interactive_GameBase::set_chat_provider(ChatProvider* chat)
+void Interactive_GameBase::set_chat_provider(ChatProvider & chat)
 {
-	m_chatProvider = chat;
+	m_chatProvider = &chat;
 	m_chatDisplay->setChatProvider(chat);
 
 	m_chatenabled = true;
 }
 
-ChatProvider* Interactive_GameBase::get_chat_provider()
+ChatProvider * Interactive_GameBase::get_chat_provider()
 {
 	return m_chatProvider;
 }

@@ -23,9 +23,10 @@
 #include "wexception.h"
 #include "zip_filesystem.h"
 
-#include <assert.h>
-#include <errno.h>
 #include <sys/stat.h>
+
+#include <cassert>
+#include <cerrno>
 
 #ifdef __WIN32__
 #include <windows.h>

@@ -30,11 +30,12 @@
 
 #include "log.h"
 
+#include "container_iterate.h"
+
 #include <cstdarg>
+#include <cstdio>
 #include <string>
 #include <cstring>
-
-#include <stdio.h>
 
 namespace Widelands {
 
@@ -231,41 +232,29 @@ Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
  * Add this animation for this map object under this name
  */
 bool Map_Object_Descr::is_animation_known(char const * const animname) const {
-	std::map<std::string, uint32_t>::const_iterator i = m_anims.begin();
-	while (i!=m_anims.end()) {
-		if (i->first == animname)
+	container_iterate_const(Anims, m_anims, i)
+		if (i.current->first == animname)
 			return true;
-		++i;
-	}
 	return false;
 }
 
 void Map_Object_Descr::add_animation
 	(char const * const animname, uint32_t const anim)
 {
-	std::string use_name = animname;
-	std::map<std::string, uint32_t>::iterator i=m_anims.begin();
-
-	while (i!=m_anims.end()) {
 #ifndef NDEBUG
-		if (i->first == animname)
+	container_iterate_const(Anims, m_anims, i)
+		if (i.current->first == animname)
 			throw wexception
 				("adding already existing animation \"%s\"", animname);
 #endif
-		++i;
-	}
-	m_anims.insert(std::pair<std::string, uint32_t>(use_name, anim));
+	m_anims.insert(std::pair<std::string, uint32_t>(animname, anim));
 }
 
-std::string Map_Object_Descr::get_animation_name(uint32_t anim) const {
-	for
-		(std::map<std::string, uint32_t>::const_iterator it = m_anims.begin();
-		 it != m_anims.end();
-		 ++it)
-	{
-		if (it->second == anim)
-			return it->first;
-	}
+
+std::string Map_Object_Descr::get_animation_name(uint32_t const anim) const {
+	container_iterate_const(Anims, m_anims, i)
+		if (i.current->second == anim)
+			return i.current->first;
 
 	// Never here
 	assert(false);
@@ -276,12 +265,10 @@ std::string Map_Object_Descr::get_animation_name(uint32_t anim) const {
 /**
  * Search for the attribute in the attribute list
  */
-bool Map_Object_Descr::has_attribute(uint32_t attr) const throw () {
-	for (uint32_t i = 0; i < m_attributes.size(); ++i) {
-		if (m_attributes[i] == attr)
+bool Map_Object_Descr::has_attribute(uint32_t const attr) const throw () {
+	container_iterate_const(Attributes, m_attributes, i)
+		if (*i.current == attr)
 			return true;
-	}
-
 	return false;
 }
 
@@ -289,7 +276,7 @@ bool Map_Object_Descr::has_attribute(uint32_t attr) const throw () {
 /**
  * Add an attribute to the attribute list if it's not already there
  */
-void Map_Object_Descr::add_attribute(uint32_t attr)
+void Map_Object_Descr::add_attribute(uint32_t const attr)
 {
 	if (!has_attribute(attr))
 		m_attributes.push_back(attr);

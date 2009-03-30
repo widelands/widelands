@@ -32,6 +32,7 @@
 #include "zip_filesystem.h"
 
 #include <cassert>
+#include <cerrno>
 #include <climits>
 #include <cstdio>
 #include <cstdlib>
@@ -39,7 +40,6 @@
 #include <string>
 #include <vector>
 
-#include <errno.h>
 #ifdef _WIN32
 #include <windows.h>
 #include <io.h>

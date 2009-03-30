@@ -43,7 +43,7 @@ ingame_music_volume_label
 ingame_music_volume
 	(this,
 	 hmargin(),
-	 vmargin() + 2 * (STATEBOX_HEIGHT+vspacing()) + vbigspacing()
+	 vmargin() + 2 * (STATEBOX_HEIGHT + vspacing()) + vbigspacing()
 	 + 1 * vspacing() + ingame_music_volume_label.get_h(),
 	 get_inner_w() - 2 * hmargin(), slideh(),
 	 0, g_sound_handler.get_max_volume(), g_sound_handler.get_music_volume(),

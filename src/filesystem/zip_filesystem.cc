@@ -24,12 +24,11 @@
 #include "wexception.h"
 
 #include <cassert>
-#include <string>
+#include <cerrno>
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
-
-#include <errno.h>
+#include <string>
 
 /**
  * Initialize the real file-system

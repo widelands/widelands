@@ -56,7 +56,7 @@ struct PlayerDescriptionGroup;
 struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_LaunchGame(GameSettingsProvider *, GameController * = 0);
 
-	void setChatProvider(ChatProvider *);
+	void setChatProvider(ChatProvider &);
 
 	void start();
 	void think();

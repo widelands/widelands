@@ -34,7 +34,8 @@
 
 #include <SDL.h>
 
-#include <errno.h>
+#include <cerrno>
+
 #ifdef _WIN32
 #include <windows.h>
 #endif

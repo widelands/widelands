@@ -130,7 +130,7 @@ void NetClient::run ()
 	setScenario(false); //  FIXME no scenario for multiplayer
 	{
 		Fullscreen_Menu_LaunchGame lgm(this, this);
-		lgm.setChatProvider(this);
+		lgm.setChatProvider(*this);
 		d->modal = &lgm;
 		int32_t code = lgm.run();
 		d->modal = 0;
@@ -160,7 +160,7 @@ void NetClient::run ()
 				new Interactive_Spectator
 					(game, g_options.pull_section("global"), true);
 		game.set_iabase(igb);
-		igb->set_chat_provider(this);
+		igb->set_chat_provider(*this);
 		if (!d->settings.savegame) //  new map
 			game.init_newgame(loaderUI, d->settings);
 		else // savegame

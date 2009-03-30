@@ -26,7 +26,7 @@
 #include "i18n.h"
 #include "layered_filesystem.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 
 Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Widelands::Game & g) :

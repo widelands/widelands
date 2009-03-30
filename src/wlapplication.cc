@@ -62,21 +62,21 @@
 #include "timestring.h"
 
 #include <boost/scoped_ptr.hpp>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+#include <cerrno>
+#include <cstring>
 #include <iostream>
 #include <stdexcept>
 #include <string>
-#include <cstring>
-
-#include <errno.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 
 #ifdef DEBUG
 #ifndef __WIN32__
 int32_t WLApplication::pid_me   = 0;
 int32_t WLApplication::pid_peer = 0;
 volatile int32_t WLApplication::may_run = 0;
-#include <signal.h>
+#include <csignal>
 #endif // WIN32
 #endif // DEBUG
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2008 by the Widelands Development Team
+ * Copyright (C) 2004-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,8 +22,8 @@
 #include "build_id.h"
 #include "constants.h"
 
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 
 /*** class LAN_Base ***/
 

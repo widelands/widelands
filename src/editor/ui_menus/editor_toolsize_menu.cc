@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include "i18n.h"
 #include "editor_tool.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 inline Editor_Interactive & Editor_Toolsize_Menu::eia() {
 	return dynamic_cast<Editor_Interactive &>(*get_parent());

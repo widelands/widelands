@@ -20,9 +20,8 @@
 #ifndef JOURNAL_EXCEPTIONS_H
 #define JOURNAL_EXCEPTIONS_H
 
-#include <stdexcept>
-
 #include <stdint.h>
+#include <stdexcept>
 
 /**
  * Thrown for IO-errors occurring with a journal file (unable to open file for any

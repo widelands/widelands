@@ -426,12 +426,14 @@ void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
 	imm.destroy(&egbase());
 }
 
+
 void Player::start_stop_building(PlayerImmovable* imm) {
 	if (imm->get_owner() != this)
 		return;
 	if (upcast(ProductionSite, productionsite, imm))
 		productionsite->set_stopped(!productionsite->is_stopped());
 }
+
 
 /*
  * enhance this building, remove it, but give the constructionsite
@@ -441,7 +443,7 @@ void Player::enhance_building
 	(Building * building, Building_Index const index_of_new_building)
 {
 	if
-		(building->get_owner() == this
+		(&building->owner() == this
 		 and
 		 building->descr().enhancements().count(index_of_new_building))
 	{
@@ -506,37 +508,33 @@ void Player::add_economy(Economy * const eco)
 }
 
 
-void Player::remove_economy(Economy * const eco) {
-	if (!has_economy(eco)) return;
-	std::vector<Economy*>::iterator i = m_economies.begin();
-	while (i!=m_economies.end()) {
-		if (*i == eco) {
-			m_economies.erase(i);
+void Player::remove_economy(Economy & economy) {
+	container_iterate(Economies, m_economies, i)
+		if (*i.current == &economy) {
+			m_economies.erase(i.current);
 			return;
 		}
-		++i;
-	}
-	assert(false); // Never here
 }
 
 bool Player::has_economy(Economy * const economy) const throw () {
-	container_iterate_const(std::vector<Economy *>, m_economies, i)
+	container_iterate_const(Economies, m_economies, i)
 		if (*i.current == economy)
 			return true;
 	return false;
 }
 
-std::vector<Economy *>::size_type Player::get_economy_number
+Player::Economies::size_type Player::get_economy_number
 	(Economy const * const economy) const
 throw ()
 {
-	economy_vector::const_iterator const
+	Economies::const_iterator const
 		economies_end = m_economies.end(), economies_begin = m_economies.begin();
 	for
-		(std::vector<Economy *>::const_iterator it = economies_begin;
+		(Economies::const_iterator it = economies_begin;
 		 it != economies_end;
 		 ++it)
-		if (*it == economy) return it - economies_begin;
+		if (*it == economy)
+			return it - economies_begin;
 	assert(false); // never here
 	return 0;
 }
@@ -545,25 +543,20 @@ throw ()
 
 /*
 ==========
-Player::change_training_options
-
 Change the training priotity values
 ==========
 */
-void Player::change_training_options(PlayerImmovable* imm, int32_t atr, int32_t val) {
-	if (imm->get_owner() != this)
-		return;
-	if (upcast(TrainingSite, ts, imm)) {
-		tAttribute attr = static_cast<tAttribute>(atr);
-		int32_t prio = ts->get_pri(attr);
-		ts->set_pri(attr, prio+val);
+void Player::change_training_options
+	(TrainingSite & trainingsite, int32_t const atr, int32_t const val)
+{
+	if (trainingsite.get_owner() == this) {
+		tAttribute const attr = static_cast<tAttribute>(atr);
+		trainingsite.set_pri(attr, trainingsite.get_pri(attr) + val);
 	}
 }
 
 /*
 ===========
-Player::drop_soldier
-
 Forces the drop of given soldier at given house
 ===========
 */
@@ -594,8 +587,8 @@ uint32_t Player::findAttackSoldiers
 	if (soldiers)
 		soldiers->clear();
 
-	Map& map = egbase().map();
-	std::vector<BaseImmovable*> immovables;
+	Map & map = egbase().map();
+	std::vector<BaseImmovable *> immovables;
 
 	map.find_reachable_immovables_unique
 		(Area<FCoords>(map.get_fcoords(flag.get_position()), 25),
@@ -680,11 +673,11 @@ throw ()
 	assert            (&field < m_fields + map.max_index());
 	assert(field.vision <= 1);
 
-	{// discover everything (above the ground) in this field
+	{ // discover everything (above the ground) in this field
 		field.terrains = f.field->get_terrains();
 		field.roads    = f.field->get_roads   ();
 		field.owner    = f.field->get_owned_by();
-		{//  map_object_descr[TCoords::None]
+		{ //  map_object_descr[TCoords::None]
 
 			const Map_Object_Descr * map_object_descr;
 			if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
@@ -700,7 +693,7 @@ throw ()
 			field.map_object_descr[TCoords<>::None] = map_object_descr;
 		}
 	}
-	{//  discover the D triangle and the SW edge of the top right neighbour field
+	{ //  discover the D triangle and the SW edge of the top right neighbour
 		FCoords tr = map.tr_n(f);
 		Field & tr_field = m_fields[tr.field - &first_map_field];
 		if (tr_field.vision <= 1) {
@@ -709,7 +702,7 @@ throw ()
 			tr_field.roads |= Road_Mask << Road_SouthWest & tr.field->get_roads();
 		}
 	}
-	{//  discover both triangles and the SE edge of the top left  neighbour field
+	{ //  discover both triangles and the SE edge of the top left  neighbour
 		FCoords tl = map.tl_n(f);
 		Field & tl_field = m_fields[tl.field - &first_map_field];
 		if (tl_field.vision <= 1) {
@@ -718,7 +711,7 @@ throw ()
 			tl_field.roads |= Road_Mask << Road_SouthEast & tl.field->get_roads();
 		}
 	}
-	{//  discover the R triangle and the  E edge of the     left  neighbour field
+	{ //  discover the R triangle and the  E edge of the     left  neighbour
 		FCoords l = map.l_n(f);
 		Field & l_field = m_fields[l.field - &first_map_field];
 		if (l_field.vision <= 1) {
@@ -799,12 +792,13 @@ const std::vector<uint32_t> * Player::get_ware_production_statistics
  * Add or remove the given building from building statistics.
  * Only to be called by \ref receive
  */
-void Player::update_building_statistics(Building* building, losegain_t lg)
+void Player::update_building_statistics
+	(Building & building, losegain_t const lg)
 {
-	upcast(ConstructionSite const, constructionsite, building);
+	upcast(ConstructionSite const, constructionsite, &building);
 	const std::string & building_name =
 		constructionsite ?
-		constructionsite->building().name() : building->name();
+		constructionsite->building().name() : building.name();
 
 	Building_Index const nr_buildings = tribe().get_nrbuildings();
 
@@ -818,10 +812,10 @@ void Player::update_building_statistics(Building* building, losegain_t lg)
 	if (lg == GAIN) {
 		Building_Stats new_building;
 		new_building.is_constructionsite = constructionsite;
-		new_building.pos = building->get_position();
+		new_building.pos = building.get_position();
 		stat.push_back(new_building);
 	} else {
-		const Coords building_position = building->get_position();
+		Coords const building_position = building.get_position();
 		for (uint32_t i = 0; i < stat.size(); ++i) {
 			if (stat[i].pos == building_position) {
 				stat.erase(stat.begin() + i);
@@ -840,7 +834,7 @@ void Player::update_building_statistics(Building* building, losegain_t lg)
 void Player::receive(const NoteImmovable& note)
 {
 	if (upcast(Building, building, note.pi))
-		update_building_statistics(building, note.lg);
+		update_building_statistics(*building, note.lg);
 
 	NoteSender<NoteImmovable>::send(note);
 }

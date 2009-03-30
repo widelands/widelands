@@ -78,7 +78,7 @@ struct ImmovableAction;
 struct Immovable_Descr : public Map_Object_Descr {
 	friend struct Map_Immovabledata_Data_Packet; // For writing (get_program)
 
-	typedef std::map<std::string, ImmovableProgram*> Programs;
+	typedef std::map<std::string, ImmovableProgram *> Programs;
 
 	Immovable_Descr
 		(char const * name, char const * descname,
@@ -87,13 +87,13 @@ struct Immovable_Descr : public Map_Object_Descr {
 	~Immovable_Descr();
 
 	int32_t get_size() const throw () {return m_size;}
-	const char* get_picture() const {return m_picture.c_str();}
-	const ImmovableProgram* get_program(std::string programname) const;
-	const EncodeData& get_default_encodedata() const {return m_default_encodedata;}
+	char const * get_picture() const {return m_picture.c_str();}
+	ImmovableProgram const * get_program(std::string const &) const;
+	EncodeData const & get_default_encodedata() const {return m_default_encodedata;}
 
 	Immovable & create(Editor_Game_Base &, Coords) const;
 
-	const Tribe_Descr* get_owner_tribe() const throw () {return m_owner_tribe;}
+	Tribe_Descr const * get_owner_tribe() const throw () {return m_owner_tribe;}
 
 	/// How well the terrain around f suits an immovable of this type.
 	uint32_t terrain_suitability(FCoords, Map const &) const;
@@ -216,7 +216,7 @@ struct PlayerImmovable : public BaseImmovable {
 	void log_general_info(Editor_Game_Base*);
 
 protected:
-	void set_owner(Player *owner);
+	void set_owner(Player *);
 
 	virtual void init(Editor_Game_Base *g);
 	virtual void cleanup(Editor_Game_Base *g);

@@ -1,0 +1,1 @@
+^# *include +["<](assert|complex|type|errno|fenv|float|inttypes|iso646|limits|locale|math|setjmp|signal|starg|stdbool|stddef|stdio|stdlib|string|tgmath|time|wchar|wctype)\.h[">]

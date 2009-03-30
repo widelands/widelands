@@ -31,7 +31,8 @@
 #include "wlapplication.h"
 
 #include <libintl.h>
-#include <stdio.h>
+
+#include <cstdio>
 
 
 Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt)

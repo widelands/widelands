@@ -23,7 +23,6 @@
 #include "compile_assert.h"
 
 #include <cmath>
-
 #include <stdint.h>
 
 namespace Widelands {

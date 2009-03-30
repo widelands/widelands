@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2008 by The Widelands Development Team
+ * Copyright (C) 2002, 2008-2009 by The Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,8 +40,5 @@ void show_bulldoze_confirm
 	(Interactive_Base           * player,
 	 Widelands::Building        * building,
 	 Widelands::PlayerImmovable * todestroy);
-
-// battle.cc
-//void show_attack_dialog((Interactive_Base* player, Building* building);
 
 #endif

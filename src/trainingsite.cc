@@ -34,7 +34,7 @@
 
 #include "upcast.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 namespace Widelands {
 

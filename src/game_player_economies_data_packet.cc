@@ -49,7 +49,7 @@ throw (_wexception)
 		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 			iterate_players_existing(p, nr_players, game, player)
 				try {
-					Player::economy_vector & economies = player->m_economies;
+					Player::Economies & economies = player->m_economies;
 					uint16_t const nr_economies = economies.size();
 					if (packet_version == 1) {
 						uint16_t const nr_economies_from_file = fr.Unsigned16();
@@ -60,8 +60,8 @@ throw (_wexception)
 								 nr_economies_from_file, nr_economies);
 					}
 
-					Player::economy_vector ecos(nr_economies);
-					container_iterate(Player::economy_vector, ecos, i)
+					Player::Economies ecos(nr_economies);
+					container_iterate(Player::Economies, ecos, i)
 						if
 							(upcast
 							 	(Flag const,
@@ -103,8 +103,8 @@ throw (_wexception)
 	Field const & field_0 = map[0];
 	Player_Number const nr_players = map.get_nrplayers();
 	iterate_players_existing_const(p, nr_players, game, player) {
-		Player::economy_vector const & economies = player->m_economies;
-		container_iterate_const(Player::economy_vector, economies, i) {
+		Player::Economies const & economies = player->m_economies;
+		container_iterate_const(Player::Economies, economies, i) {
 			// Walk the map so that we find a representant.
 			for (Field const * field = &field_0;; ++field) {
 				assert(field < &map[map.max_index()]); //  should never reach end

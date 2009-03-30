@@ -225,13 +225,13 @@ void Game::set_write_replay(bool wr)
  * Set whether the syncstream dump should be copied to a permanent location
  * at the end of the game.
  */
-void Game::save_syncstream(bool save)
+void Game::save_syncstream(bool const save)
 {
 	m->syncwrapper.m_syncstreamsave = save;
 }
 
 
-bool Game::run_splayer_scenario_direct(const char* mapname) {
+bool Game::run_splayer_scenario_direct(char const * const mapname) {
 	assert(!get_map());
 
 	set_map(new Map);
@@ -328,7 +328,7 @@ void Game::init_newgame(UI::ProgressWindow & loaderUI, const GameSettings& setti
 			 playersettings.initialization_index,
 			 playersettings.tribe,
 			 playersettings.name);
-		get_player(i+1)->setAI(playersettings.ai);
+		get_player(i + 1)->setAI(playersettings.ai);
 	}
 
 	loaderUI.step(_("Loading map"));

@@ -36,8 +36,9 @@
 #include "upcast.h"
 
 #include <libintl.h>
-#include <locale.h>
-#include <stdio.h>
+
+#include <clocale>
+#include <cstdio>
 
 namespace Widelands {
 

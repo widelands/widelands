@@ -25,9 +25,8 @@
 #include "log.h"
 
 #include <cassert>
-#include <map>
-
 #include <stdint.h>
+#include <map>
 
 template<typename Subtype> struct Referenced {
 	typedef std::map<Referencer<Subtype> const *, uint32_t> Referencers;

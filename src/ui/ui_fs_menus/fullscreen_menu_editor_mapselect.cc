@@ -31,7 +31,7 @@
 
 #include "log.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 using Widelands::WL_Map_Loader;
 

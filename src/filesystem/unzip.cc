@@ -47,22 +47,14 @@ woven in by Terry Thorsen 1/2003.
   version without encryption capabilities).
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "zlib.h"
 #include "unzip.h"
+#include "zlib.h"
 
-#ifdef STDC
-#  include <stddef.h>
-#  include <string.h>
-#  include <stdlib.h>
-#endif
-#ifdef NO_ERRNO_H
-extern int32_t errno;
-#else
-#   include <errno.h>
-#endif
+#include <cerrno>
+#include <cstddef>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 
 #ifndef local
@@ -84,13 +76,6 @@ extern int32_t errno;
 
 #ifndef UNZ_MAXFILENAMEINZIP
 #define UNZ_MAXFILENAMEINZIP (256)
-#endif
-
-#ifndef ALLOC
-# define ALLOC(size) (malloc(size))
-#endif
-#ifndef TRYFREE
-# define TRYFREE(p) {if (p) free(p);}
 #endif
 
 #define SIZECENTRALDIRITEM (0x2e)
@@ -338,7 +323,7 @@ local uLong unzlocal_SearchCentralDir
 	if (uMaxBack > uSizeFile)
 		uMaxBack = uSizeFile;
 
-	buf = static_cast<unsigned char *>(ALLOC(BUFREADCOMMENT + 4));
+	buf = static_cast<unsigned char *>(malloc(BUFREADCOMMENT + 4));
 	if (buf == NULL)
 		return 0;
 
@@ -380,7 +365,7 @@ local uLong unzlocal_SearchCentralDir
 		if (uPosFound != 0)
 			break;
 	}
-	TRYFREE(buf);
+	free(buf);
 	return uPosFound;
 }
 
@@ -517,7 +502,7 @@ extern unzFile ZEXPORT unzOpen2
 	us.encrypted               = 0;
 
 
-	s = static_cast<unz_s *>(ALLOC(sizeof(unz_s)));
+	s = static_cast<unz_s *>(malloc(sizeof(unz_s)));
 	*s = us;
 	unzGoToFirstFile(static_cast<unzFile>(s));
 	return static_cast<unzFile>(s);
@@ -544,7 +529,7 @@ extern int32_t ZEXPORT unzClose (unzFile file)
 		unzCloseCurrentFile(file);
 
 	ZCLOSE(s->z_filefunc, s->filestream);
-	TRYFREE(s);
+	free(s);
 	return UNZ_OK;
 }
 
@@ -1163,20 +1148,21 @@ extern int32_t ZEXPORT unzOpenCurrentFile3
 		 UNZ_OK)
 		return UNZ_BADZIPFILE;
 
-	pfile_in_zip_read_info = static_cast<file_in_zip_read_info_s *>
-		ALLOC(sizeof(file_in_zip_read_info_s));
+	pfile_in_zip_read_info =
+		static_cast<file_in_zip_read_info_s *>
+			(malloc(sizeof(file_in_zip_read_info_s)));
 	if (pfile_in_zip_read_info == NULL)
 		return UNZ_INTERNALERROR;
 
 	pfile_in_zip_read_info->read_buffer             =
-		static_cast<char *>(ALLOC(UNZ_BUFSIZE));
+		static_cast<char *>(malloc(UNZ_BUFSIZE));
 	pfile_in_zip_read_info->offset_local_extrafield = offset_local_extrafield;
 	pfile_in_zip_read_info->size_local_extrafield   = size_local_extrafield;
 	pfile_in_zip_read_info->pos_local_extrafield    = 0;
 	pfile_in_zip_read_info->raw                     = raw;
 
 	if (pfile_in_zip_read_info->read_buffer == NULL) {
-		TRYFREE(pfile_in_zip_read_info);
+		free(pfile_in_zip_read_info);
 		return UNZ_INTERNALERROR;
 	}
 
@@ -1566,13 +1552,13 @@ extern int32_t ZEXPORT unzCloseCurrentFile (unzFile file)
 	}
 
 
-	TRYFREE(pfile_in_zip_read_info->read_buffer);
+	free(pfile_in_zip_read_info->read_buffer);
 	pfile_in_zip_read_info->read_buffer = NULL;
 	if (pfile_in_zip_read_info->stream_initialised)
 		inflateEnd(&pfile_in_zip_read_info->stream);
 
 	pfile_in_zip_read_info->stream_initialised = 0;
-	TRYFREE(pfile_in_zip_read_info);
+	free(pfile_in_zip_read_info);
 
 	s->pfile_in_zip_read = NULL;
 
@@ -1656,28 +1642,8 @@ extern int32_t ZEXPORT unzSetOffset (unzFile file, uLong pos)
 */
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include "zlib.h"
 #include "zip.h"
 
-#ifdef STDC
-#  include <stddef.h>
-#  include <string.h>
-#  include <stdlib.h>
-#endif
-#ifdef NO_ERRNO_H
-extern int32_t errno;
-#else
-#   include <errno.h>
-#endif
-
-
-#ifndef local
-#  define local static
-#endif
 /* compile with -Dlocal if your debugger can't find static symbols */
 
 #ifndef VERSIONMADEBY
@@ -1690,13 +1656,6 @@ extern int32_t errno;
 
 #ifndef Z_MAXFILENAMEINZIP
 #define Z_MAXFILENAMEINZIP (256)
-#endif
-
-#ifndef ALLOC
-# define ALLOC(size) (malloc(size))
-#endif
-#ifndef TRYFREE
-# define TRYFREE(p) {if (p) free(p);}
 #endif
 
 /*
@@ -1796,7 +1755,7 @@ local linkedlist_datablock_internal * allocate_new_datablock()
 {
 	linkedlist_datablock_internal * const ldi =
 		static_cast<linkedlist_datablock_internal *>
-		ALLOC(sizeof(linkedlist_datablock_internal));
+			(malloc(sizeof(linkedlist_datablock_internal)));
 	if (ldi != NULL) {
 		ldi->next_datablock       = NULL;
 		ldi->filled_in_this_block = 0;
@@ -1809,7 +1768,7 @@ local void free_datablock(linkedlist_datablock_internal * ldi)
 {
 	while (ldi != NULL) {
 		linkedlist_datablock_internal * const ldinext = ldi->next_datablock;
-		TRYFREE(ldi);
+		free(ldi);
 		ldi = ldinext;
 	}
 }
@@ -2061,7 +2020,7 @@ local uLong ziplocal_SearchCentralDir
 	if (uMaxBack > uSizeFile)
 		uMaxBack = uSizeFile;
 
-	buf = static_cast<unsigned char *>(ALLOC(BUFREADCOMMENT + 4));
+	buf = static_cast<unsigned char *>(malloc(BUFREADCOMMENT + 4));
 	if (buf == NULL)
 		return 0;
 
@@ -2103,7 +2062,7 @@ local uLong ziplocal_SearchCentralDir
 		if (uPosFound)
 			break;
 	}
-	TRYFREE(buf);
+	free(buf);
 	return uPosFound;
 }
 #endif /* !NO_ADDFILEINEXISTINGZIP*/
@@ -2148,7 +2107,7 @@ extern zipFile ZEXPORT zipOpen2
 	init_linkedlist(&(ziinit.central_dir));
 
 
-	zi = static_cast<zip_internal *>(ALLOC(sizeof(zip_internal)));
+	zi = static_cast<zip_internal *>(malloc(sizeof(zip_internal)));
 	if (zi == NULL) {
 		ZCLOSE(ziinit.z_filefunc, ziinit.filestream);
 		return NULL;
@@ -2279,7 +2238,7 @@ extern zipFile ZEXPORT zipOpen2
 		{
 			uLong size_central_dir_to_read = size_central_dir;
 			size_t buf_size = SIZEDATA_INDATABLOCK;
-			void * const buf_read = ALLOC(buf_size);
+			void * const buf_read = malloc(buf_size);
 			if
 				(ZSEEK
 				 	(ziinit.z_filefunc, ziinit.filestream,
@@ -2308,7 +2267,7 @@ extern zipFile ZEXPORT zipOpen2
 							 static_cast<uLong>(read_this));
 				size_central_dir_to_read -= read_this;
 			}
-			TRYFREE(buf_read);
+			free(buf_read);
 		}
 		ziinit.begin_pos = byte_before_the_zipfile;
 		ziinit.number_entry = number_entry_CD;
@@ -2325,7 +2284,7 @@ extern zipFile ZEXPORT zipOpen2
 #    endif /* !NO_ADDFILEINEXISTINGZIP*/
 
 	if (err != ZIP_OK) {
-		TRYFREE(zi);
+		free(zi);
 		return NULL;
 	} else {
 		*zi = ziinit;
@@ -2412,7 +2371,7 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3
 		size_extrafield_global +
 		size_comment;
 	zi->ci.central_header       =
-		static_cast<char *>(ALLOC(static_cast<uInt>(zi->ci.size_centralheader)));
+		static_cast<char *>(malloc(static_cast<uInt>(zi->ci.size_centralheader)));
 
 	ziplocal_putValue_inmemory
 		(zi->ci.central_header +  0,
@@ -2958,7 +2917,7 @@ extern int32_t ZEXPORT zipClose
 	if (ZCLOSE(zi->z_filefunc, zi->filestream) != 0 and err == ZIP_OK)
 		err = ZIP_ERRNO;
 
-	TRYFREE(zi);
+	free(zi);
 
 	return err;
 }
@@ -2970,10 +2929,6 @@ extern int32_t ZEXPORT zipClose
 
    Copyright (C) 1998-2004 Gilles Vollant
 */
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 #include "zlib.h"
 #include "ioapi.h"

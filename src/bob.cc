@@ -974,7 +974,7 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
 	// in pathfinding even when two paths have the same length, and in
 	// randomly generated movements.
 	if (upcast(Game, game, g)) {
-		StreamWrite& ss = game->syncstream();
+		StreamWrite & ss = game->syncstream();
 		ss.Unsigned32(serial());
 		ss.Signed16(coords.x);
 		ss.Signed16(coords.y);

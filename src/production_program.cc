@@ -32,8 +32,6 @@
 #include "helper.h"
 #include "upcast.h"
 
-#include <stdio.h>
-
 namespace Widelands {
 
 ProductionProgram::Action::~Action() {}

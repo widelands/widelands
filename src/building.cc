@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,9 +40,8 @@
 
 #include "upcast.h"
 
+#include <cstdio>
 #include <sstream>
-
-#include <stdio.h>
 
 namespace Widelands {
 
@@ -639,21 +638,19 @@ void Building::act(Game* g, uint32_t data)
 		bool wakeup = false;
 
 		// Wake up one worker
-		while (m_leave_queue.size())
-		{
+		while (m_leave_queue.size()) {
 			upcast(Worker, worker, m_leave_queue[0].get(g));
 
 			m_leave_queue.erase(m_leave_queue.begin());
 
-			if (!worker)
-				continue;
+			if (worker) {
+				m_leave_allow = worker;
 
-			m_leave_allow = worker;
-
-			if (worker->wakeup_leave_building(g, this)) {
-				m_leave_time = time + BUILDING_LEAVE_INTERVAL;
-				wakeup = true;
-				break;
+				if (worker->wakeup_leave_building(g, this)) {
+					m_leave_time = time + BUILDING_LEAVE_INTERVAL;
+					wakeup = true;
+					break;
+				}
 			}
 		}
 

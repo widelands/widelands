@@ -29,13 +29,12 @@
 
 #include "log.h"
 
-#include <cstdarg>
-#include <cstring>
 #include <cctype>
+#include <cstdarg>
+#include <cstdio>
+#include <cstring>
 #include <limits>
 #include <string>
-
-#include <stdio.h>
 
 #define TRUE_WORDS 4
 char const * trueWords[TRUE_WORDS] =

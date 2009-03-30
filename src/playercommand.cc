@@ -581,7 +581,8 @@ void Cmd_SetWarePriority::Write(FileWrite& fw, Editor_Game_Base& egbase, Map_Map
 	fw.Signed32(m_priority);
 }
 
-void Cmd_SetWarePriority::Read(FileRead& fr, Editor_Game_Base& egbase, Map_Map_Object_Loader& mol)
+void Cmd_SetWarePriority::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -808,10 +809,9 @@ PlayerCommand (0, des.Unsigned8())
 
 void Cmd_ChangeTrainingOptions::execute (Game* g)
 {
-	/* � Maybe we must check that the building is a training house ? */
-	if (upcast(Building, building, g->objects().get_object(serial)))
+	if (upcast(TrainingSite, trainingsite, g->objects().get_object(serial)))
 		g->get_player(get_sender())->change_training_options
-			(building, attribute, value);
+			(*trainingsite, attribute, value);
 }
 
 void Cmd_ChangeTrainingOptions::serialize (StreamWrite & ser) {

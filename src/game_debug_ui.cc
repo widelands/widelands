@@ -34,7 +34,7 @@
 #include "ui_tabpanel.h"
 #include "ui_window.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 struct MapObjectDebugPanel
 : public UI::Panel, public Widelands::Map_Object::LogSink
@@ -88,7 +88,7 @@ MapObjectDebugPanel::~MapObjectDebugPanel()
 {
 	if (Widelands::Map_Object * const obj = m_object.get(&m_egbase))
 		if (obj->get_logsink() == this)
-		obj->set_logsink(0);
+			obj->set_logsink(0);
 }
 
 

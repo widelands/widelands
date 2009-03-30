@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,9 +29,9 @@ namespace Widelands {
 
 struct Cmd_Incorporate : public GameLogicCommand {
 	Cmd_Incorporate() : GameLogicCommand(0) {} // For savegame loading
-	Cmd_Incorporate (int32_t t, Worker * const w)
-		: GameLogicCommand(t)
-	{worker = w;}
+	Cmd_Incorporate (int32_t const t, Worker * const w)
+		: GameLogicCommand(t), worker(w)
+	{}
 
 
 	void execute (Game * g) {worker->incorporate(g);}

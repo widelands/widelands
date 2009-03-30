@@ -393,18 +393,18 @@ struct Player :
 
 	// Economy stuff
 	void    add_economy(Economy *);
-	void remove_economy(Economy *);
+	void remove_economy(Economy &);
 	bool    has_economy(Economy *) const throw ();
-	typedef std::vector<Economy *> economy_vector;
-	economy_vector::size_type get_economy_number(Economy const *) const
-		throw (); //  for savegames
-	Economy * get_economy_by_number(economy_vector::size_type const i) const
-	{return m_economies[i];} //  for loading
+	typedef std::vector<Economy *> Economies;
+	Economies::size_type get_economy_number(Economy const *) const throw ();
+	Economy * get_economy_by_number(Economies::size_type const i) const {
+		return m_economies[i];
+	}
 	uint32_t get_nr_economies() const {return m_economies.size();}
 
 	// Military stuff
 	void drop_soldier(PlayerImmovable &, Soldier &);
-	void change_training_options(PlayerImmovable* imm, int32_t atr, int32_t val);
+	void change_training_options(TrainingSite &, int32_t atr, int32_t val);
 
 	uint32_t findAttackSoldiers
 		(Flag                   &,
@@ -467,7 +467,7 @@ struct Player :
 	const std::string & getAI() const;
 
 private:
-	void update_building_statistics(Building *, losegain_t);
+	void update_building_statistics(Building &, losegain_t);
 
 	/**
 	 * Called when a node becomes seen (not only the first time) before the
@@ -493,7 +493,7 @@ private:
 
 	Field *               m_fields;
 	std::vector<bool>     m_allowed_buildings;
-	economy_vector        m_economies;
+	Economies             m_economies;
 	std::string           m_name; // Player name
 	std::string           m_ai; /**< Name of preferred AI implementation */
 

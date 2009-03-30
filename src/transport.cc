@@ -53,9 +53,9 @@
 
 #include "upcast.h"
 
-#include <cstdarg>
 #include <algorithm>
-#include <stdio.h>
+#include <cstdarg>
+#include <cstdio>
 
 namespace Widelands {
 
@@ -2132,7 +2132,7 @@ Economy::~Economy()
 {
 	assert(!m_rebuilding);
 
-	m_owner->remove_economy(this);
+	m_owner->remove_economy(*this);
 
 	if (m_requests.size())
 		log("Warning: Economy still has requests left on destruction\n");
@@ -2308,7 +2308,7 @@ struct FlagQueue {
 	void push(Flag *t)
 	{
 		uint32_t slot = m_data.size();
-		m_data.push_back(0);
+		m_data.push_back(static_cast<Flag *>(0));
 
 		while (slot > 0) {
 			uint32_t parent = (slot - 1) / 2;

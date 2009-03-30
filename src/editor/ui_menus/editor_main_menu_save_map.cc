@@ -41,9 +41,9 @@
 
 #include "upcast.h"
 
-#include <string>
+#include <cstdio>
 #include <cstring>
-#include <stdio.h>
+#include <string>
 
 /*
 ===============

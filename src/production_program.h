@@ -31,12 +31,12 @@
 #include "container_iterate.h"
 
 #include <cassert>
+#include <stdint.h>
 #include <cstring>
 #include <set>
 #include <string>
 #include <vector>
 
-#include <stdint.h>
 
 struct EncodeData;
 struct Profile;

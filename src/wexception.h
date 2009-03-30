@@ -20,11 +20,10 @@
 #ifndef WEXCEPTION_H
 #define WEXCEPTION_H
 
-#include <string>
+#include <stdint.h>
 #include <cstring>
 #include <exception>
-
-#include <stdint.h>
+#include <string>
 
 #ifndef PRINTF_FORMAT
 #ifdef __GNUC__

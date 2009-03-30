@@ -113,7 +113,8 @@ private:
 	Request * m_builder_request;
 	OPtr<Worker> m_builder;
 
-	std::vector<WaresQueue *> m_wares;
+	typedef std::vector<WaresQueue *> Wares;
+	Wares m_wares;
 
 	int32_t m_fetchfromflag; // # of items to fetch from flag
 

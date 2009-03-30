@@ -187,7 +187,6 @@ void Carrier::transport_update(Game* g, State* state)
 /**
  * Deliver all wares addressed to the building the carrier is already into
  *
- * \param g Game the carrier lives on
  * \param state UNDOCUMENTED
  *
  * \todo Upgrade this function to really support many-wares-at-a-time
@@ -387,9 +386,8 @@ bool Carrier::notify_ware(Game* g, int32_t flag)
 	State* state = get_state();
 
 	// Check if we've already acked something
-	if (m_acked_ware >= 0) {
+	if (m_acked_ware >= 0)
 		return false;
-	}
 
 	// If we are currently in a transport.
 	// Explanation:

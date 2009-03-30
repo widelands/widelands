@@ -77,13 +77,14 @@ struct Map_Object_Descr {
 private:
 	typedef std::map<std::string, uint32_t> Anims;
 	typedef std::map<std::string, uint32_t> AttribMap;
+	typedef std::vector<uint32_t>           Attributes;
 
 	Map_Object_Descr & operator= (Map_Object_Descr const &);
 	explicit Map_Object_Descr    (Map_Object_Descr const &);
 
 	std::string const m_name;
 	std::string const m_descname;       ///< Descriptive name
-		std::vector<uint32_t>           m_attributes;
+	Attributes        m_attributes;
 	Anims             m_anims;
 	static uint32_t   s_dyn_attribhigh; ///< highest attribute ID used
 	static AttribMap  s_dyn_attribs;

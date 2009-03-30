@@ -26,7 +26,7 @@
 #include "profile.h"
 #include "wexception.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 namespace Widelands {
 

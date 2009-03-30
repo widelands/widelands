@@ -321,7 +321,7 @@ void NetHost::run()
 	HostGameSettingsProvider hp(this);
 	{
 		Fullscreen_Menu_LaunchGame lgm(&hp, this);
-		lgm.setChatProvider(&d->chat);
+		lgm.setChatProvider(d->chat);
 		const int32_t code = lgm.run();
 
 		if (code <= 0)
@@ -356,7 +356,7 @@ void NetHost::run()
 			igb =
 				new Interactive_Spectator
 					(*d->game, g_options.pull_section("global"), true);
-		igb->set_chat_provider(&d->chat);
+		igb->set_chat_provider(d->chat);
 		game.set_iabase(igb);
 		if (!d->settings.savegame) //  new game
 			game.init_newgame(loaderUI, d->settings);

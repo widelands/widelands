@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,7 @@
 
 #include "upcast.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 namespace Widelands {
 
@@ -279,10 +279,10 @@ Immovable_Descr::~Immovable_Descr()
 /**
  * Find the program of the given name.
 */
-const ImmovableProgram* Immovable_Descr::get_program
-	(std::string programname) const
+ImmovableProgram const * Immovable_Descr::get_program
+	(std::string const & programname) const
 {
-	Programs::const_iterator it = m_programs.find(programname);
+	Programs::const_iterator const it = m_programs.find(programname);
 
 	if (it == m_programs.end())
 		throw wexception
@@ -463,7 +463,7 @@ Load/save support
 
 #define IMMOVABLE_SAVEGAME_VERSION 1
 
-void Immovable::Loader::load(FileRead& fr)
+void Immovable::Loader::load(FileRead & fr)
 {
 	BaseImmovable::Loader::load(fr);
 
@@ -474,11 +474,10 @@ void Immovable::Loader::load(FileRead& fr)
 	imm.set_position(&egbase(), imm.m_position);
 
 	// Animation
-	const char* animname = fr.CString();
+	char const * const animname = fr.CString();
 	try {
 		imm.m_anim = imm.descr().get_animation(animname);
-	}
-	catch (Map_Object_Descr::Animation_Nonexistent&) {
+	} catch (Map_Object_Descr::Animation_Nonexistent const &) {
 		imm.m_anim = imm.descr().main_animation();
 		log
 			("Warning: Animation \"%s\" not found, using animation %s).\n",
@@ -564,7 +563,7 @@ void Immovable::save
 	fw.Signed32(m_program_step);
 }
 
-Map_Object::Loader* Immovable::load
+Map_Object::Loader * Immovable::load
 	(Editor_Game_Base * egbase, Map_Map_Object_Loader * mol, FileRead & fr)
 {
 	std::auto_ptr<Loader> loader(new Loader);
@@ -578,7 +577,7 @@ Map_Object::Loader* Immovable::load
 
 		const char * const owner = fr.CString ();
 		const char * const name  = fr.CString ();
-		Immovable* imm = 0;
+		Immovable * imm = 0;
 
 		if (strcmp(owner, "world")) {
 			// It is a tribe immovable
@@ -982,8 +981,8 @@ void PlayerImmovable::remove_worker(Worker *w)
 {
 	for (uint32_t i = 0; i < m_workers.size(); ++i) {
 		if (m_workers[i] == w) {
-			if (i < m_workers.size()-1)
-				m_workers[i] = m_workers[m_workers.size()-1];
+			if (i < m_workers.size() - 1)
+				m_workers[i] = m_workers[m_workers.size() - 1];
 			m_workers.pop_back();
 			return;
 		}

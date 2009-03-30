@@ -181,19 +181,16 @@ void Fullscreen_Menu_LaunchGame::think()
 /**
  * Set a new chat provider.
  *
- * This automatically creates and display a chat panel when appropriate.
+ * This automatically creates and displays a chat panel when appropriate.
  */
-void Fullscreen_Menu_LaunchGame::setChatProvider(ChatProvider * const chat)
+void Fullscreen_Menu_LaunchGame::setChatProvider(ChatProvider & chat)
 {
 	delete m_chat;
 	m_chat =
-		chat ?
 		new GameChatPanel
 			(this,
 			 m_xres * 5 / 100, m_yres * 13 / 20, m_xres * 25 / 40, m_yres * 3 / 10,
-			 *chat)
-		:
-		0;
+			 chat);
 }
 
 

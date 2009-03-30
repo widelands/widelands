@@ -39,7 +39,7 @@ namespace Widelands {
  *
  * Note that the order in which nodes are returned is not guarantueed.
  */
-template <typename Area_type= Area<> > struct MapDifferenceRegion {
+template <typename Area_type = Area<> > struct MapDifferenceRegion {
 	MapDifferenceRegion
 		(const Map & map, Area_type area, Direction direction)
 		: m_area(area), m_remaining_in_edge(area.radius), m_passed_corner(false)

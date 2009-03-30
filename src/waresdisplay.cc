@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@
 #include "tribe.h"
 #include "worker.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 WaresDisplay::WaresDisplay
 	(UI::Panel * const parent,

@@ -215,10 +215,10 @@ static std::string speedString(uint32_t const speed)
 void Interactive_Base::update_speedlabel()
 {
 	if (get_display_flag(dfSpeed)) {
-		upcast(Game, g, &m_egbase);
-		if (g && g->gameController()) {
-			uint32_t real = g->gameController()->realSpeed();
-			uint32_t desired = g->gameController()->desiredSpeed();
+		upcast(Game, game, &m_egbase);
+		if (game && game->gameController()) {
+			uint32_t const real    = game->gameController()->realSpeed   ();
+			uint32_t const desired = game->gameController()->desiredSpeed();
 			if (real == desired)
 				m_label_speed.set_text
 					(real == 1000 ? std::string() : speedString(real));
@@ -804,11 +804,9 @@ bool Interactive_Base::handle_key(bool down, SDL_keysym code)
 			break;
 
 		if (down)
-			if (upcast(Game, g, &m_egbase))
-				if (GameController* ctrl = g->gameController()) {
-					int32_t speed = ctrl->desiredSpeed();
-					ctrl->setDesiredSpeed(speed+1000);
-				}
+			if (upcast(Game, game, &m_egbase))
+				if (GameController * const ctrl = game->gameController())
+					ctrl->setDesiredSpeed(ctrl->desiredSpeed() + 1000);
 		return true;
 
 	case SDLK_PAGEDOWN:
@@ -816,10 +814,10 @@ bool Interactive_Base::handle_key(bool down, SDL_keysym code)
 			break;
 
 		if (down)
-			if (upcast(Widelands::Game, g, &m_egbase))
-				if (GameController* ctrl = g->gameController()) {
-					int32_t speed = ctrl->desiredSpeed();
-					ctrl->setDesiredSpeed(std::max(0, speed - 1000));
+			if (upcast(Widelands::Game, game, &m_egbase))
+				if (GameController * const ctrl = game->gameController()) {
+					uint32_t const speed = ctrl->desiredSpeed();
+					ctrl->setDesiredSpeed(1000 < speed ? speed - 1000 : 0);
 				}
 		return true;
 

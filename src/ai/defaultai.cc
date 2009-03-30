@@ -22,7 +22,7 @@
 
 #include "defaultai.h"
 
-#include <time.h>
+#include <ctime>
 
 #include "checkstep.h"
 #include "computer_player_hints.h"
