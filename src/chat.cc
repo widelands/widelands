@@ -37,6 +37,11 @@ std::string ChatMessage::toPrintable() const
 	return message + "<br></p>";
 }
 
+std::string ChatMessage::toPlainString() const
+{
+	return (sender + ": " + msg);
+}
+
 std::string ChatMessage::color() const
 {
 	if ((playern >= 0) && playern < MAX_PLAYERS) {

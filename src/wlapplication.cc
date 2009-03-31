@@ -313,6 +313,8 @@ void WLApplication::run()
 		g_sound_handler.change_music("menu", 1000);
 		mainmenu();
 
+		delete g_gr;
+		g_gr = 0;
 	}
 
 	g_sound_handler.stop_music(500);

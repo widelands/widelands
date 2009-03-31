@@ -539,8 +539,13 @@ void Fullscreen_Menu_LaunchGame::safe_place_for_host(uint8_t newplayernumber)
 	GameSettings settings = m_settings->settings();
 
 	// Check whether the host would still keep a valid position and return if yes.
-	if ((settings.playernum < newplayernumber) | settings.multiplayer)
+	if (settings.playernum < newplayernumber)
 		return;
+
+	if (settings.multiplayer) {
+		m_settings->setPlayerNumber(-1);
+		return;
+	}
 
 	// Check if a still valid place is open.
 	for (uint8_t i = 0; i < newplayernumber; ++i) {

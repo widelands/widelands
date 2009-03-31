@@ -56,9 +56,15 @@ struct ChatMessage {
 
 
 	/**
-	 * \return a string that can be displayed to the user.
+	 * \return a richtext string that can be displayed to the user.
 	 */
 	std::string toPrintable() const;
+
+	/**
+	 * \return a plain string containing the sender + message.
+	 */
+	std::string toPlainString() const;
+
 
 	/**
 	 * \returns the color of the sender

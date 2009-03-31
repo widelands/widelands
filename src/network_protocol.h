@@ -26,7 +26,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 9,
+	NETWORK_PROTOCOL_VERSION = 10,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -77,6 +77,7 @@ enum {
 	 * sent by the client, with the following payload:
 	 * \li Unsigned8: protocol version
 	 * \li String: player name
+	 * \li String: build_id of the client
 	 *
 	 * If the host accepts, it replies with a HELLO command with the following
 	 * payload:

@@ -48,3 +48,11 @@ sec=6
 [Tip 10]
 text=_Use priority buttons in building window to adjust delivery of a specific ware.
 sec=5
+
+[Tip 11]
+text=_"Use the 'configure economy' menu to adjust the target quantity of a specific ware."
+sec=5
+
+[Tip 12]
+text=_Our computer players are too boring? Visit our website at www.widelands.org and meet other players to play online.
+sec=6

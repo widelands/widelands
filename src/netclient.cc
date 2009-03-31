@@ -19,6 +19,7 @@
 
 #include "netclient.h"
 
+#include "build_id.h"
 #include "fullscreen_menu_launchgame.h"
 #include "game.h"
 #include "game_tips.h"
@@ -124,6 +125,7 @@ void NetClient::run ()
 	s.Unsigned8(NETCMD_HELLO);
 	s.Unsigned8(NETWORK_PROTOCOL_VERSION);
 	s.String(d->localplayername);
+	s.String(build_id());
 	s.send(d->sock);
 
 	d->settings.multiplayer = true;

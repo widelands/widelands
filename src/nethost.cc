@@ -19,6 +19,7 @@
 
 #include "nethost.h"
 
+#include "build_id.h"
 #include "chat.h"
 #include "computer_player.h"
 #include "fullscreen_menu_launchgame.h"
@@ -167,6 +168,7 @@ struct Client {
 	Deserializer deserializer;
 	int32_t playernum; // -1 as long as the client is not connected to a position
 	int32_t usernum;
+	std::string build_id;
 	md5_checksum syncreport;
 	bool syncreport_arrived;
 	int32_t time; // last time report
@@ -473,7 +475,7 @@ void NetHost::send(ChatMessage msg)
 
 	d->chat.receive(msg);
 
-	log("[Host]: chat: %s\n", msg.toPrintable().c_str());
+	log("[Host]: chat: %s\n", msg.toPlainString().c_str());
 }
 
 void NetHost::sendSystemChat(char const * fmt, ...)
@@ -525,9 +527,29 @@ void NetHost::setMap(std::string const & mapname, std::string const & mapfilenam
 
 	uint32_t oldplayers = d->settings.players.size();
 
+	SendPacket s;
+
 	while (oldplayers > maxplayers) {
 		--oldplayers;
-		disconnectPlayer(oldplayers, _("Host has changed to a map that supports fewer players."));
+		for (uint32_t i = 1; i < d->settings.users.size(); ++i) {
+			if (d->settings.users[i].position == oldplayers) {
+				d->settings.users[i].position = -1;
+
+				// for local settings
+				uint32_t j = 0;
+				for (; j < d->clients.size(); ++j)
+					if (d->clients[j].usernum == static_cast<int32_t>(i))
+						break;
+				d->clients[j].playernum = -1;
+
+				// Broadcast change
+				s.reset();
+				s.Unsigned8(NETCMD_SETTING_USER);
+				s.Unsigned32(i);
+				writeSettingUser(s, i);
+				broadcast(s);
+			}
+		}
 	}
 
 	d->settings.players.resize(maxplayers);
@@ -541,7 +563,7 @@ void NetHost::setMap(std::string const & mapname, std::string const & mapfilenam
 	}
 
 	// Broadcast new map info
-	SendPacket s;
+	s.reset();
 	s.Unsigned8(NETCMD_SETTING_MAP);
 	writeSettingMap(s);
 	broadcast(s);
@@ -886,6 +908,13 @@ void NetHost::welcomeClient
 	s.Unsigned8(NETWORK_PROTOCOL_VERSION);
 	s.Unsigned32(client.usernum);
 	s.send(client.sock);
+
+	// even if the network protocol is the same, the data might be different.
+	if (client.build_id != build_id())
+		sendSystemChat
+			(_
+			  ("WARNING: %s uses version: %s, while Host uses version: %s"),
+			   effective_name.c_str(), client.build_id.c_str(), build_id().c_str());
 
 	s.reset();
 	s.Unsigned8(NETCMD_SETTING_MAP);
@@ -1239,6 +1268,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			throw DisconnectException(_("Server uses a different protocol version."));
 
 		std::string playername = r.String();
+		client.build_id = r.String();
 
 		welcomeClient(i, playername);
 		return;
