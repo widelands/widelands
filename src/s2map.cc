@@ -163,9 +163,11 @@ uint8_t *S2_Map_Loader::load_s2mf_section(FileRead *file, int32_t width, int32_t
 	dh = file->Unsigned16();
 
 	one = file->Unsigned16();
-	assert(one == 1);
+	if (one != 1)
+		throw wexception("expected 1 but found %u", one);
 	size = file->Signed32();
-	assert(size == dw * dh);
+	if (size != dw * dh)
+		throw wexception("expected %u but found %u", dw * dh, size);
 
 	if (dw < width || dh < height) {
 		cerr << "Section not big enough" << endl;
