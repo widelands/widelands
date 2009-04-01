@@ -113,7 +113,6 @@ m_is_savegame  (false)
 
 	m_title  .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_mapname.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_lobby  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_notes  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	uint32_t y = m_yres / 4;
@@ -138,9 +137,11 @@ m_is_savegame  (false)
 
 	if (m_settings->settings().multiplayer) {
 		m_lobby_list =
-			new UI::BaseListselect
+			new UI::Listselect<int32_t>
 				(this, m_xres * 7 / 10, m_yres * 6 / 10, m_butw, m_yres * 7 / 20);
+		m_lobby_list->set_font(m_fn, m_fs);
 		m_lobby.set_text(_("Lobby:"));
+		m_lobby.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	}
 }
 

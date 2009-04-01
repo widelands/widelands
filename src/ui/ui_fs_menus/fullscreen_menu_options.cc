@@ -22,6 +22,7 @@
 #include "fullscreen_menu_options.h"
 
 #include "constants.h"
+#include "filesystem/layered_filesystem.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "languages.h"
@@ -52,16 +53,23 @@ m_fn
 	(ui_fn()),
 
 // Buttons
+m_advanced_options
+	(this,
+	 m_xres * 9 / 80, m_yres * 19 / 20, m_butw, m_buth,
+	 2,
+	 &Fullscreen_Menu_Options::advanced_options, this,
+	 _("Advanced Options"), std::string(), true, false,
+	 m_fn, m_fs),
 m_cancel
 	(this,
-	 m_xres * 41 / 80, m_yres * 19 / 20, m_butw, m_buth,
+	 m_xres * 51 / 80, m_yres * 19 / 20, m_butw, m_buth,
 	 0,
 	 &Fullscreen_Menu_Options::end_modal, this, om_cancel,
 	 _("Cancel"), std::string(), true, false,
 	 m_fn, m_fs),
 m_apply
 	(this,
-	 m_xres / 4,   m_yres * 19 / 20, m_butw, m_buth,
+	 m_xres * 3 / 8, m_yres * 19 / 20, m_butw, m_buth,
 	 2,
 	 &Fullscreen_Menu_Options::end_modal, this, om_ok,
 	 _("Apply"), std::string(), true, false,
@@ -219,7 +227,9 @@ m_value_autosave
 m_label_minute
 	(this,
 	 m_xres * 49 / 80, m_yres * 8333 / 10000,
-	 _("min."), Align_VCenter)
+	 _("min."), Align_VCenter),
+
+os(opt)
 {
 	m_title           .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_label_fullscreen.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -317,6 +327,12 @@ m_label_minute
 			 available_languages[i].abbrev == opt.language);
 }
 
+void Fullscreen_Menu_Options::advanced_options() {
+	Fullscreen_Menu_Advanced_Options aom(os);
+	if (aom.run() == Fullscreen_Menu_Advanced_Options::om_ok)
+		os = aom.get_values();
+}
+
 void Fullscreen_Menu_Options::autosaveChange(int32_t const arg) {
 	if (arg == plus)
 		++m_asvalue;
@@ -358,24 +374,147 @@ void Fullscreen_Menu_Options::update_maxfps() {
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	const uint32_t res_index = m_reslist.selection_index();
-	Options_Ctrl::Options_Struct opt = {
-		m_resolutions[res_index].xres,
-		m_resolutions[res_index].yres,
-		m_resolutions[res_index].depth,
-		m_inputgrab                         .get_state   (),
-		m_fullscreen                        .get_state   (),
-		m_single_watchwin                   .get_state   (),
-		m_auto_roadbuild_mode               .get_state   (),
-		m_show_workarea_preview             .get_state   (),
-		m_snap_windows_only_when_overlapping.get_state   (),
-		m_dock_windows_to_edges             .get_state   (),
-		m_music                             .get_state   (),
-		m_fx                                .get_state   (),
-		m_language_list                     .get_selected(),
-		m_autosave.get_state() ? m_asvalue : 0,
-		m_maxfps
-	};
-	return opt;
+
+	// Write all data from UI elements
+	os.xres                  = m_resolutions[res_index].xres;
+	os.yres                  = m_resolutions[res_index].yres;
+	os.depth                 = m_resolutions[res_index].depth;
+	os.inputgrab             = m_inputgrab.get_state();
+	os.fullscreen            = m_fullscreen.get_state();
+	os.single_watchwin       = m_single_watchwin.get_state();
+	os.auto_roadbuild_mode   = m_auto_roadbuild_mode.get_state();
+	os.show_warea            = m_show_workarea_preview.get_state();
+	os.snap_windows_only_when_overlapping
+		= m_snap_windows_only_when_overlapping.get_state();
+	os.dock_windows_to_edges = m_dock_windows_to_edges.get_state();
+	os.music                 = m_music.get_state();
+	os.fx                    = m_fx.get_state();
+	os.language              = m_language_list.get_selected();
+	os.autosave              = m_autosave.get_state() ? m_asvalue : 0;
+	os.maxfps                = m_maxfps;
+
+	return os;
+}
+
+
+/**
+ * The advanced option menu
+ */
+Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
+(Options_Ctrl::Options_Struct opt)
+:
+Fullscreen_Menu_Base("optionsmenu.jpg"),
+
+// Values for alignment and size
+m_vbutw
+	(m_yres * 333 / 10000),
+m_butw
+	(m_xres / 4),
+m_buth
+	(m_yres * 9 / 200),
+m_fs
+	(fs_small()),
+m_fn
+	(ui_fn()),
+
+// Buttons
+m_cancel
+	(this,
+	 m_xres * 41 / 80, m_yres * 19 / 20, m_butw, m_buth,
+	 0,
+	 &Fullscreen_Menu_Advanced_Options::end_modal, this, om_cancel,
+	 _("Cancel"), std::string(), true, false,
+	 m_fn, m_fs),
+m_apply
+	(this,
+	 m_xres / 4,   m_yres * 19 / 20, m_butw, m_buth,
+	 2,
+	 &Fullscreen_Menu_Advanced_Options::end_modal, this, om_ok,
+	 _("Apply"), std::string(), true, false,
+	 m_fn, m_fs),
+
+// Title
+m_title
+	(this,
+	 m_xres / 2, m_yres / 40,
+	 _("Advanced Options"), Align_HCenter),
+
+// First options block
+m_ui_font_list
+	(this,
+	 m_xres      / 10, m_yres * 1667 / 10000,
+	 m_xres * 20 / 80, m_yres * 2833 / 10000,
+	 Align_Left, true),
+m_label_ui_font
+	(this,
+	 m_xres * 1063 / 10000, m_yres * 1417 / 10000,
+	 _("Main menu font:"), Align_VCenter),
+
+// Second options block
+m_nozip (this, Point(m_xres * 19 / 200, m_yres * 5833 / 10000)),
+m_label_nozip
+	(this,
+	 m_xres * 1313 / 10000, m_yres * 3 / 5,
+	 _("Do not zip widelands data files (maps, replays and savegames)."), Align_VCenter),
+os(opt)
+{
+	m_title      .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	m_label_nozip.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_nozip      .set_state(opt.nozip);
+
+	m_label_ui_font   .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_ui_font_list    .set_font(m_fn, m_fs);
+
+	// Fill the font list.
+	{ // For use of string ui_font take a look at fullscreen_menu_base.cc
+		bool did_select_a_font = false;
+		bool cmpbool = !strcmp("serif", opt.ui_font.c_str());
+		did_select_a_font = cmpbool;
+		m_ui_font_list.add
+			(_("FreeSerif (Default)"),
+			  "serif", -1, cmpbool);
+		cmpbool = !strcmp("sans", opt.ui_font.c_str());
+		did_select_a_font |= cmpbool;
+		m_ui_font_list.add
+			("FreeSans", "sans", -1, cmpbool);
+		cmpbool = !strcmp(UI_FONT_NAME_WIDELANDS, opt.ui_font.c_str());
+		did_select_a_font |= cmpbool;
+		m_ui_font_list.add
+			("Widelands", UI_FONT_NAME_WIDELANDS, -1, cmpbool);
+
+		// Fill with all left *.ttf files we find in fonts
+		filenameset_t files;
+		g_fs->FindFiles("fonts/", "*.ttf", &files);
+
+		for
+			(filenameset_t::iterator pname = files.begin();
+			 pname != files.end();
+			 ++pname)
+		{
+			char const * const path = pname->c_str();
+			char const * const name = FileSystem::FS_Filename(path);
+			if (!strcmp(name, UI_FONT_NAME_SERIF))
+				continue;
+			if (!strcmp(name, UI_FONT_NAME_SANS))
+				continue;
+			if (g_fs->IsDirectory(name))
+				continue;
+			cmpbool = !strcmp(name, opt.ui_font.c_str());
+			did_select_a_font |= cmpbool;
+			m_ui_font_list.add(name, name, -1, cmpbool);
+		}
+
+		if (!did_select_a_font)
+			m_ui_font_list.select(0);
+	}
+
+}
+
+Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
+	// Write all data from UI elements
+	os.nozip         = m_nozip.get_state();
+	os.ui_font       = m_ui_font_list.get_selected();
+	return os;
 }
 
 
@@ -406,11 +545,17 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section & s) {
 	opt.snap_windows_only_when_overlapping
 		= s.get_bool("snap_windows_only_when_overlapping", false);
 	opt.dock_windows_to_edges =  s.get_bool("dock_windows_to_edges", false);
-	opt.language              =  s.get_string("language", "");
-	opt.music                 = !s.get_bool("disable_music", false);
-	opt.fx                    = !s.get_bool("disable_fx", false);
+	opt.language              =  s.get_string("language",               "");
+	opt.music                 = !s.get_bool("disable_music",         false);
+	opt.fx                    = !s.get_bool("disable_fx",            false);
 	opt.autosave = s.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
-	opt.maxfps                =  s.get_int("maxfps", 25);
+	opt.maxfps                =  s.get_int("maxfps",                    25);
+
+	opt.nozip                 =  s.get_bool("nozip",                 false);
+	opt.ui_font               =  s.get_string("ui_font",           "serif");
+	opt.speed_of_new_game     =  s.get_int("speed_of_new_game",          1);
+	opt.border_snap_distance  =  s.get_int("border_snap_distance",       0);
+	opt.panel_snap_distance   =  s.get_int("panel_snap_distance",        0);
 	return opt;
 }
 
@@ -433,6 +578,13 @@ void Options_Ctrl::save_options() {
 	m_opt_section.set_string("language",            opt.language);
 	m_opt_section.set_int("autosave",               opt.autosave * 60);
 	m_opt_section.set_int("maxfps",                 opt.maxfps);
+
+	m_opt_section.set_bool("nozip",                 opt.nozip);
+	m_opt_section.set_string("ui_font",             opt.ui_font);
+	m_opt_section.set_int("speed_of_new_game",      opt.speed_of_new_game);
+	m_opt_section.set_int("border_snap_distance",   opt.border_snap_distance);
+	m_opt_section.set_int("panel_snap_distance",    opt.panel_snap_distance);
+
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
 	g_sound_handler.set_disable_music(!opt.music);

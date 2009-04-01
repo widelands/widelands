@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,6 +53,13 @@ struct Options_Ctrl {
 		std::string language;
 		int32_t autosave; // autosave interval in minutes
 		uint32_t maxfps;
+
+		// advanced options
+		bool nozip;
+		std::string ui_font;
+		int32_t speed_of_new_game;
+		int32_t border_snap_distance;
+		int32_t panel_snap_distance;
 	};
 
 	Options_Ctrl(Section &);
@@ -86,6 +93,7 @@ private:
 	uint32_t                          m_buth;
 	uint32_t                          m_fs;
 	std::string                       m_fn;
+	UI::Button<Fullscreen_Menu_Options> m_advanced_options;
 	UI::IDButton<Fullscreen_Menu_Options, int32_t>
 		m_cancel, m_apply, m_fps_plus, m_fps_minus, m_autosave_plus,
 		m_autosave_minus, m_autosave_tenplus, m_autosave_tenminus;
@@ -120,8 +128,11 @@ private:
 	UI::Textarea                      m_value_autosave;
 	UI::Textarea                      m_label_minute;
 
+	Options_Ctrl::Options_Struct os;
+
 	int32_t m_maxfps;
 	int32_t m_asvalue;
+	void advanced_options();
 	void maxFpsChange(int32_t);
 	void update_maxfps();
 	void autosaveChange(int32_t);
@@ -133,6 +144,35 @@ private:
 		int32_t depth;
 	};
 	std::vector<res> m_resolutions;
+};
+
+/**
+ * Fullscreen Optionsmenu. A modal optionsmenu
+ */
+
+struct Fullscreen_Menu_Advanced_Options : public Fullscreen_Menu_Base {
+	Fullscreen_Menu_Advanced_Options(Options_Ctrl::Options_Struct opt);
+	Options_Ctrl::Options_Struct get_values();
+	enum {
+		om_cancel =   0,
+		om_ok     =   1
+	};
+
+private:
+	uint32_t                          m_vbutw;
+	uint32_t                          m_butw;
+	uint32_t                          m_buth;
+	uint32_t                          m_fs;
+	std::string                       m_fn;
+
+	UI::IDButton<Fullscreen_Menu_Advanced_Options, int32_t> m_cancel, m_apply;
+	UI::Textarea                      m_title;
+	UI::Listselect<std::string>       m_ui_font_list;
+	UI::Textarea                      m_label_ui_font;
+	UI::Checkbox                      m_nozip;
+	UI::Textarea                      m_label_nozip;
+
+	Options_Ctrl::Options_Struct os;
 };
 
 #endif

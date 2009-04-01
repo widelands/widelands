@@ -82,20 +82,20 @@ private:
 	UI::Button  <Fullscreen_Menu_LaunchGame> m_select_map, m_select_save;
 	UI::Button  <Fullscreen_Menu_LaunchGame> m_back, m_ok;
 	UI::IDButton<Fullscreen_Menu_LaunchGame, uint8_t> * m_pos[MAX_PLAYERS];
-	UI::Textarea             m_title, m_mapname, m_lobby;
-	UI::Multiline_Textarea   m_notes;
-	UI::BaseListselect     * m_lobby_list;
-	GameSettingsProvider   * m_settings;
-	GameController         * m_ctrl; // optional
-	GameChatPanel          * m_chat;
-	PlayerDescriptionGroup * m_players[MAX_PLAYERS];
-	std::string              m_filename;
-	std::string              m_filename_proof; // locale variable to check UI state
-	std::string              m_player_save_name[MAX_PLAYERS];
-	std::string              m_player_save_tribe[MAX_PLAYERS];
-	int8_t                   m_nr_players;
-	bool                     m_is_scenario;
-	bool                     m_is_savegame;
+	UI::Textarea              m_title, m_mapname, m_lobby;
+	UI::Multiline_Textarea    m_notes;
+	UI::Listselect<int32_t> * m_lobby_list;
+	GameSettingsProvider    * m_settings;
+	GameController          * m_ctrl; // optional
+	GameChatPanel           * m_chat;
+	PlayerDescriptionGroup  * m_players[MAX_PLAYERS];
+	std::string               m_filename;
+	std::string               m_filename_proof; // locale variable to check UI state
+	std::string               m_player_save_name[MAX_PLAYERS];
+	std::string               m_player_save_tribe[MAX_PLAYERS];
+	int8_t                    m_nr_players;
+	bool                      m_is_scenario;
+	bool                      m_is_savegame;
 };
 
 

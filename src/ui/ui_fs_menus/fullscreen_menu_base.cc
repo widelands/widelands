@@ -98,10 +98,10 @@ std::string Fullscreen_Menu_Base::ui_fn() {
 	std::string style
 		(g_options.pull_section("global").get_string
 		 	("ui_font", UI_FONT_NAME_SERIF));
+	if (style.empty() | (style == "serif"))
+		return UI_FONT_NAME_SERIF;
 	if (style == "sans")
 		return UI_FONT_NAME_SANS;
-	if (style == "serif")
-		return UI_FONT_NAME_SERIF;
 	std::string temp(g_fs->FS_CanonicalizeName("fonts/" + style));
 	if (g_fs->FileExists(temp))
 		return style;
