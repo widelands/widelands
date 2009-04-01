@@ -553,7 +553,7 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section & s) {
 
 	opt.nozip                 =  s.get_bool("nozip",                 false);
 	opt.ui_font               =  s.get_string("ui_font",           "serif");
-	opt.speed_of_new_game     =  s.get_int("speed_of_new_game",          1);
+	opt.speed_of_new_game     =  s.get_int("speed_of_new_game",       1000);
 	opt.border_snap_distance  =  s.get_int("border_snap_distance",       0);
 	opt.panel_snap_distance   =  s.get_int("panel_snap_distance",        0);
 	return opt;
