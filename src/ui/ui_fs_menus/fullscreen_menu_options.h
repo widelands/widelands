@@ -126,7 +126,6 @@ private:
 	UI::Checkbox                      m_autosave;
 	UI::Textarea                      m_label_autosave;
 	UI::Textarea                      m_value_autosave;
-	UI::Textarea                      m_label_minute;
 
 	Options_Ctrl::Options_Struct os;
 
@@ -155,7 +154,9 @@ struct Fullscreen_Menu_Advanced_Options : public Fullscreen_Menu_Base {
 	Options_Ctrl::Options_Struct get_values();
 	enum {
 		om_cancel =   0,
-		om_ok     =   1
+		om_ok     =   1,
+		plus      =   1,
+		minus     =  -1
 	};
 
 private:
@@ -165,14 +166,20 @@ private:
 	uint32_t                          m_fs;
 	std::string                       m_fn;
 
-	UI::IDButton<Fullscreen_Menu_Advanced_Options, int32_t> m_cancel, m_apply;
+	UI::IDButton<Fullscreen_Menu_Advanced_Options, int32_t>
+		m_cancel, m_apply, m_speed_plus, m_speed_minus;
 	UI::Textarea                      m_title;
 	UI::Listselect<std::string>       m_ui_font_list;
 	UI::Textarea                      m_label_ui_font;
 	UI::Checkbox                      m_nozip;
 	UI::Textarea                      m_label_nozip;
+	UI::Textarea                      m_label_speed;
+	UI::Textarea                      m_value_speed;
 
 	Options_Ctrl::Options_Struct os;
+
+	void speedChange(int32_t const);
+	void speedUpdate();
 };
 
 #endif

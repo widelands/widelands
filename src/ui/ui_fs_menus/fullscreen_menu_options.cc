@@ -222,15 +222,18 @@ m_label_autosave
 	 _("Save game automatically every"), Align_VCenter),
 m_value_autosave
 	(this,
-	 m_xres * 761 / 1250, m_yres * 8117 / 10000,
-	 "15", Align_Right),
-m_label_minute
-	(this,
-	 m_xres * 49 / 80, m_yres * 8333 / 10000,
-	 _("min."), Align_VCenter),
+	 m_xres * 770 / 1250, m_yres * 8333 / 10000,
+	 "15 min.", Align_Center),
 
 os(opt)
 {
+	m_fps_plus.set_repeating(true);
+	m_fps_minus.set_repeating(true);
+	m_autosave_plus.set_repeating(true);
+	m_autosave_minus.set_repeating(true);
+	m_autosave_tenplus.set_repeating(true);
+	m_autosave_tenminus.set_repeating(true);
+
 	m_title           .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_label_fullscreen.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_fullscreen      .set_state(opt.fullscreen);
@@ -264,7 +267,6 @@ os(opt)
 	m_dock_windows_to_edges             .set_state(opt.dock_windows_to_edges);
 	m_label_autosave             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_value_autosave             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_label_minute               .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_autosave                          .set_state(opt.autosave > 0);
 	m_autosave.changed.set(this, &Fullscreen_Menu_Options::update_autosave);
 	m_asvalue = opt.autosave / 60;
@@ -351,7 +353,7 @@ void Fullscreen_Menu_Options::update_autosave() {
 	m_autosave_tenplus.set_enabled (m_autosave.get_state() & (m_asvalue < 291));
 	m_autosave_tenminus.set_enabled(m_autosave.get_state() & (m_asvalue >  10));
 	char text[32];
-	snprintf(text, sizeof(text), "%i", m_asvalue);
+	snprintf(text, sizeof(text), _("%i min."), m_asvalue);
 	m_value_autosave.set_text(text);
 }
 
@@ -432,6 +434,21 @@ m_apply
 	 &Fullscreen_Menu_Advanced_Options::end_modal, this, om_ok,
 	 _("Apply"), std::string(), true, false,
 	 m_fn, m_fs),
+m_speed_plus
+	(this,
+	 m_xres * 2719 / 5000, m_yres * 63 / 100, m_vbutw, m_vbutw,
+	 1,
+	 &Fullscreen_Menu_Advanced_Options::speedChange, this, plus,
+	 "+", _("Increase new game speed"), true, false,
+	 m_fn, m_fs),
+m_speed_minus
+	(this,
+	 m_xres * 53 / 80, m_yres * 63 / 100, m_vbutw, m_vbutw,
+	 1,
+	 &Fullscreen_Menu_Advanced_Options::speedChange, this, minus,
+	 "-", _("Decrease new game speed"), true, false,
+	 m_fn, m_fs),
+
 
 // Title
 m_title
@@ -456,11 +473,25 @@ m_label_nozip
 	(this,
 	 m_xres * 1313 / 10000, m_yres * 3 / 5,
 	 _("Do not zip widelands data files (maps, replays and savegames)."), Align_VCenter),
+m_label_speed
+	(this,
+	 m_xres * 1313 / 10000, m_yres * 6467 / 10000,
+	 _("Speed of a new game:"), Align_VCenter),
+m_value_speed
+	(this,
+	 m_xres * 770 / 1250, m_yres * 6467 / 10000,
+	 "1x", Align_Center),
+
 os(opt)
 {
+	m_speed_plus.set_repeating(true);
+	m_speed_minus.set_repeating(true);
+
 	m_title      .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_label_nozip.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_nozip      .set_state(opt.nozip);
+	m_label_speed.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_value_speed.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	m_label_ui_font   .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_ui_font_list    .set_font(m_fn, m_fs);
@@ -507,14 +538,33 @@ os(opt)
 		if (!did_select_a_font)
 			m_ui_font_list.select(0);
 	}
-
+	speedUpdate();
 }
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
-	// Write all data from UI elements
+	// Write all remaining data from UI elements
 	os.nozip         = m_nozip.get_state();
 	os.ui_font       = m_ui_font_list.get_selected();
 	return os;
+}
+
+void Fullscreen_Menu_Advanced_Options::speedChange(int32_t const arg) {
+	if (arg == plus)
+		os.speed_of_new_game += 1000;
+	if (arg == minus)
+		os.speed_of_new_game -= 1000;
+	speedUpdate();
+}
+
+void Fullscreen_Menu_Advanced_Options::speedUpdate() {
+	m_speed_plus.set_enabled(os.speed_of_new_game < 100000);
+	m_speed_minus.set_enabled(os.speed_of_new_game > 0);
+	char text[32];
+	if (os.speed_of_new_game == 0)
+		snprintf(text, sizeof(text), _("Pause"));
+	else
+		snprintf(text, sizeof(text), "%ix", os.speed_of_new_game/1000);
+	m_value_speed.set_text(text);
 }
 
 

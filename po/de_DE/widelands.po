@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3749\n"
+"Project-Id-Version: Widelands svn3753\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-01 17:54+0200\n"
-"PO-Revision-Date: 2009-04-01 18:03+0100\n"
+"POT-Creation-Date: 2009-04-01 20:43+0200\n"
+"PO-Revision-Date: 2009-04-01 20:45+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1133,7 +1133,7 @@ msgstr "Zurücksetzen"
 msgid "Reset target quantity to default value"
 msgstr "Setze Zielwert auf Standard zurück"
 
-#: ../../src/s2map.cc:224
+#: ../../src/s2map.cc:226
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte-Siedler-II-Karte. Kein Kommentar definiert!"
 
@@ -1499,7 +1499,7 @@ msgstr "OK"
 
 #: ../../src/game_main_menu_save_game.cc:87
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:68
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:426
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:428
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:98
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:128
@@ -2065,12 +2065,12 @@ msgid "<parent>"
 msgstr "<--"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:61
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:440
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:457
 msgid "Advanced Options"
 msgstr "Erweiterte Optionen"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:75
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:433
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:435
 msgid "Apply"
 msgstr "Übernehmen"
 
@@ -2158,25 +2158,43 @@ msgstr "Fenster an den Rand andockbar"
 msgid "Save game automatically every"
 msgstr "Speichere das Spiel automatisch alle"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:230
-msgid "min."
-msgstr "min."
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:321
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:323
 msgid "System default language"
 msgstr "Systemstandard"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:451
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:356
+#, c-format
+msgid "%i min."
+msgstr "%i min."
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:442
+msgid "Increase new game speed"
+msgstr "Erhöhe die Startgeschwindigkeit"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:449
+msgid "Decrease new game speed"
+msgstr "Verringere die Startgeschwindigkeit"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:468
 msgid "Main menu font:"
 msgstr "Hauptmenü Schrift:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:458
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:475
 msgid "Do not zip widelands data files (maps, replays and savegames)."
-msgstr "Verpacke die Widelands Daten (Karten, Spielaufzeichnungen und Speicherungen) nicht in ein zip-Format."
+msgstr "Packe die Daten (Karten, Spielaufzeichnungen und Speicherungen) nicht als zip-Dateien."
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:474
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:479
+msgid "Speed of a new game:"
+msgstr "Startgeschwindigkeit für neue Spiele:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:505
 msgid "FreeSerif (Default)"
 msgstr "FreeSerif (Standard)"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:564
+#, c-format
+msgid "Pause"
+msgstr "Pause"
 
 #: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:48
 msgid "Single Player"
