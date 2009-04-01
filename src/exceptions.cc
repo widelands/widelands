@@ -21,6 +21,7 @@
 #include "wexception.h"
 
 #include <cstdarg>
+#include <cstdio>
 #include <sstream>
 
 /*
