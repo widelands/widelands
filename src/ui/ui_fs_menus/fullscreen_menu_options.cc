@@ -434,20 +434,12 @@ m_apply
 	 &Fullscreen_Menu_Advanced_Options::end_modal, this, om_ok,
 	 _("Apply"), std::string(), true, false,
 	 m_fn, m_fs),
-m_speed_plus
+
+// Spinboxes
+m_spinbox_speed
 	(this,
-	 m_xres * 2719 / 5000, m_yres * 63 / 100, m_vbutw, m_vbutw,
-	 1,
-	 &Fullscreen_Menu_Advanced_Options::speedChange, this, plus,
-	 "+", _("Increase new game speed"), true, false,
-	 m_fn, m_fs),
-m_speed_minus
-	(this,
-	 m_xres * 53 / 80, m_yres * 63 / 100, m_vbutw, m_vbutw,
-	 1,
-	 &Fullscreen_Menu_Advanced_Options::speedChange, this, minus,
-	 "-", _("Decrease new game speed"), true, false,
-	 m_fn, m_fs),
+	 m_xres * 2719 / 5000, m_yres * 63 / 100, m_xres / 5, m_vbutw,
+	 opt.speed_of_new_game / 1000, 0, 100, "x", 1),
 
 
 // Title
@@ -477,24 +469,19 @@ m_label_speed
 	(this,
 	 m_xres * 1313 / 10000, m_yres * 6467 / 10000,
 	 _("Speed of a new game:"), Align_VCenter),
-m_value_speed
-	(this,
-	 m_xres * 77 / 125, m_yres * 6467 / 10000,
-	 "1x", Align_Center),
 
 os(opt)
 {
-	m_speed_plus.set_repeating(true);
-	m_speed_minus.set_repeating(true);
+	m_title        .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	m_label_nozip  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_nozip        .set_state(opt.nozip);
+	m_label_speed  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_spinbox_speed.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
-	m_title      .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
-	m_label_nozip.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_nozip      .set_state(opt.nozip);
-	m_label_speed.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_value_speed.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_spinbox_speed.add_replacement(0, _("Pause"));
 
-	m_label_ui_font   .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_ui_font_list    .set_font(m_fn, m_fs);
+	m_label_ui_font.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_ui_font_list .set_font(m_fn, m_fs);
 
 	// Fill the font list.
 	{ // For use of string ui_font take a look at fullscreen_menu_base.cc
@@ -534,33 +521,14 @@ os(opt)
 		if (!did_select_a_font)
 			m_ui_font_list.select(0);
 	}
-	speedUpdate();
 }
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 	// Write all remaining data from UI elements
-	os.nozip         = m_nozip.get_state();
-	os.ui_font       = m_ui_font_list.get_selected();
+	os.nozip             = m_nozip.get_state();
+	os.ui_font           = m_ui_font_list.get_selected();
+	os.speed_of_new_game = m_spinbox_speed.getValue() * 1000;
 	return os;
-}
-
-void Fullscreen_Menu_Advanced_Options::speedChange(int32_t const arg) {
-	if (arg == plus)
-		os.speed_of_new_game += 1000;
-	if (arg == minus)
-		os.speed_of_new_game -= 1000;
-	speedUpdate();
-}
-
-void Fullscreen_Menu_Advanced_Options::speedUpdate() {
-	m_speed_plus.set_enabled(os.speed_of_new_game < 100000);
-	m_speed_minus.set_enabled(os.speed_of_new_game > 0);
-	char text[32];
-	if (os.speed_of_new_game == 0)
-		snprintf(text, sizeof(text), _("Pause"));
-	else
-		snprintf(text, sizeof(text), "%ix", os.speed_of_new_game / 1000);
-	m_value_speed.set_text(text);
 }
 
 

@@ -25,6 +25,7 @@
 #include "ui_button.h"
 #include "ui_checkbox.h"
 #include "ui_listselect.h"
+#include "ui_spinbox.h"
 #include "ui_textarea.h"
 
 #include <string>
@@ -166,20 +167,16 @@ private:
 	uint32_t                          m_fs;
 	std::string                       m_fn;
 
-	UI::IDButton<Fullscreen_Menu_Advanced_Options, int32_t>
-		m_cancel, m_apply, m_speed_plus, m_speed_minus;
+	UI::IDButton<Fullscreen_Menu_Advanced_Options, int32_t> m_cancel, m_apply;
+	UI::SpinBox                       m_spinbox_speed;
 	UI::Textarea                      m_title;
 	UI::Listselect<std::string>       m_ui_font_list;
 	UI::Textarea                      m_label_ui_font;
 	UI::Checkbox                      m_nozip;
 	UI::Textarea                      m_label_nozip;
 	UI::Textarea                      m_label_speed;
-	UI::Textarea                      m_value_speed;
 
 	Options_Ctrl::Options_Struct os;
-
-	void speedChange(int32_t);
-	void speedUpdate();
 };
 
 #endif
