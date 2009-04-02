@@ -81,11 +81,7 @@ struct Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
 	Options_Ctrl::Options_Struct get_values();
 	enum {
 		om_cancel =   0,
-		om_ok     =   1,
-		plus      =   1,
-		minus     =  -1,
-		plusTen   =  10,
-		minusTen  = -10
+		om_ok     =   1
 	};
 
 private:
@@ -95,9 +91,8 @@ private:
 	uint32_t                          m_fs;
 	std::string                       m_fn;
 	UI::Button<Fullscreen_Menu_Options> m_advanced_options;
-	UI::IDButton<Fullscreen_Menu_Options, int32_t>
-		m_cancel, m_apply, m_fps_plus, m_fps_minus, m_autosave_plus,
-		m_autosave_minus, m_autosave_tenplus, m_autosave_tenminus;
+	UI::IDButton<Fullscreen_Menu_Options, int32_t> m_cancel, m_apply;
+	UI::SpinBox                       m_sb_maxfps, m_sb_autosave;
 	UI::Textarea                      m_title;
 	UI::Checkbox                      m_fullscreen;
 	UI::Textarea                      m_label_fullscreen;
@@ -108,7 +103,6 @@ private:
 	UI::Checkbox                      m_fx;
 	UI::Textarea                      m_label_fx;
 	UI::Textarea                      m_label_maxfps;
-	UI::Textarea                      m_value_maxfps;
 	UI::Listselect<void *>            m_reslist;
 	UI::Textarea                      m_label_resolution;
 	UI::Textarea                      m_label_language;
@@ -124,19 +118,11 @@ private:
 	UI::Textarea                      m_label_snap_windows_only_when_overlapping;
 	UI::Checkbox                      m_dock_windows_to_edges;
 	UI::Textarea                      m_label_dock_windows_to_edges;
-	UI::Checkbox                      m_autosave;
 	UI::Textarea                      m_label_autosave;
-	UI::Textarea                      m_value_autosave;
 
 	Options_Ctrl::Options_Struct os;
 
-	int32_t m_maxfps;
-	int32_t m_asvalue;
 	void advanced_options();
-	void maxFpsChange(int32_t);
-	void update_maxfps();
-	void autosaveChange(int32_t);
-	void update_autosave();
 
 	struct res {
 		int32_t xres;
@@ -155,26 +141,24 @@ struct Fullscreen_Menu_Advanced_Options : public Fullscreen_Menu_Base {
 	Options_Ctrl::Options_Struct get_values();
 	enum {
 		om_cancel =   0,
-		om_ok     =   1,
-		plus      =   1,
-		minus     =  -1
+		om_ok     =   1
 	};
 
 private:
-	uint32_t                          m_vbutw;
-	uint32_t                          m_butw;
-	uint32_t                          m_buth;
-	uint32_t                          m_fs;
-	std::string                       m_fn;
+	uint32_t                    m_vbutw;
+	uint32_t                    m_butw;
+	uint32_t                    m_buth;
+	uint32_t                    m_fs;
+	std::string                 m_fn;
 
 	UI::IDButton<Fullscreen_Menu_Advanced_Options, int32_t> m_cancel, m_apply;
-	UI::SpinBox                       m_spinbox_speed;
-	UI::Textarea                      m_title;
-	UI::Listselect<std::string>       m_ui_font_list;
-	UI::Textarea                      m_label_ui_font;
-	UI::Checkbox                      m_nozip;
-	UI::Textarea                      m_label_nozip;
-	UI::Textarea                      m_label_speed;
+	UI::SpinBox                 m_sb_speed, m_sb_dis_panel, m_sb_dis_border;
+	UI::Textarea                m_title;
+	UI::Listselect<std::string> m_ui_font_list;
+	UI::Textarea                m_label_ui_font;
+	UI::Checkbox                m_nozip;
+	UI::Textarea                m_label_nozip, m_label_speed;
+	UI::Textarea                m_label_snap_dis_panel, m_label_snap_dis_border;
 
 	Options_Ctrl::Options_Struct os;
 };

@@ -106,25 +106,23 @@ SpinBox::SpinBox
 		butw = butw * 3 / 4;
 		textw = w - butw * 32 / 5;
 	}
-	int32_t posbut1 = butw * 21 / 10;
-	int32_t posbut2 = w - butw * 21 / 10;
 
 	char buf[64];
 	snprintf(buf, sizeof(buf), "%i%s", sbi->value, sbi->unit.c_str());
 
 	sbi->text = new UI::Textarea
-		(this, w / 2, 0, textw, h, buf, Align_Center);
+		(this, butw * 16 / 5, 0, textw, h, buf, Align_Center);
 	sbi->text->set_font(sbi->fontname, sbi->fontsize, sbi->fontcolor);
 	sbi->butPlus = new IDButton<SpinBox, int32_t>
 		(this,
-		 posbut1, 0, butw, butw,
+		 butw * 21 / 10, 0, butw, butw,
 		 sbi->background,
 		 &SpinBox::changeValue, this, 1,
 		 "+", _("Increase the value"),
 		 true, false, sbi->fontname, sbi->fontsize);
 	sbi->butMinus = new IDButton<SpinBox, int32_t>
 		(this,
-		 posbut2, 0, butw, butw,
+		 w - butw * 31 / 10, 0, butw, butw,
 		 sbi->background,
 		 &SpinBox::changeValue, this, -1,
 		 "-", _("Decrease the value"),
@@ -141,7 +139,7 @@ SpinBox::SpinBox
 			 true, false, sbi->fontname, sbi->fontsize);
 		sbi->butTenMinus = new IDButton<SpinBox, int32_t>
 			(this,
-			 w - butw, 0, butw * 2, butw,
+			 w - 2 * butw, 0, butw * 2, butw,
 			 sbi->background,
 			 &SpinBox::changeValue, this, -10,
 			 "--", _("Decrease the value by 10"),

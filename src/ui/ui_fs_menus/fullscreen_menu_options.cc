@@ -74,48 +74,16 @@ m_apply
 	 &Fullscreen_Menu_Options::end_modal, this, om_ok,
 	 _("Apply"), std::string(), true, false,
 	 m_fn, m_fs),
-m_fps_plus
+
+// Spinboxes
+m_sb_maxfps
 	(this,
-	 m_xres * 2719 / 5000, m_yres * 3833 / 10000, m_vbutw, m_vbutw,
-	 1,
-	 &Fullscreen_Menu_Options::maxFpsChange, this, plus,
-	 "+", _("Increase maximum FPS"), true, false,
-	 m_fn, m_fs),
-m_fps_minus
+	 m_xres / 2, m_yres * 3833 / 10000, m_xres / 5, m_vbutw,
+	 opt.maxfps, 0, 100, "", 1),
+m_sb_autosave
 	(this,
-	 m_xres * 1547 / 2500, m_yres * 3833 / 10000, m_vbutw, m_vbutw,
-	 1,
-	 &Fullscreen_Menu_Options::maxFpsChange, this, minus,
-	 "-", _("Decrease maximum FPS"), true, false,
-	 m_fn, m_fs),
-m_autosave_plus
-	(this,
-	 m_xres * 2719 / 5000, m_yres * 8167 / 10000, m_vbutw, m_vbutw,
-	 1,
-	 &Fullscreen_Menu_Options::autosaveChange, this, plus,
-	 "+", _("Increase autosave interval"), true, false,
-	 m_fn, m_fs),
-m_autosave_minus
-	(this,
-	 m_xres * 53 / 80, m_yres * 8167 / 10000, m_vbutw, m_vbutw,
-	 1,
-	 &Fullscreen_Menu_Options::autosaveChange, this, minus,
-	 "-", _("Decrease autosave interval"), true, false,
-	 m_fn, m_fs),
-m_autosave_tenplus
-	(this,
-	 m_xres * 5063 / 10000, m_yres * 8167 / 10000, m_vbutw * 5 / 4, m_vbutw,
-	 1,
-	 &Fullscreen_Menu_Options::autosaveChange, this, plusTen,
-	 "++", _("Increase autosave interval at 10"), true, false,
-	 m_fn, m_fs),
-m_autosave_tenminus
-	(this,
-	 m_xres * 3469 / 5000, m_yres * 8167 / 10000, m_vbutw * 5 / 4, m_vbutw,
-	 1,
-	 &Fullscreen_Menu_Options::autosaveChange, this, minusTen,
-	 "--", _("Decrease autosave interval at 10"), true, false,
-	 m_fn, m_fs),
+	 m_xres * 6767 / 10000, m_yres * 8167 / 10000, m_xres / 4, m_vbutw,
+	 opt.autosave/60, 0, 100, _("min."), 1, true),
 
 // Title
 m_title
@@ -152,10 +120,6 @@ m_label_maxfps
 	(this,
 	 m_xres * 3563 / 10000, m_yres * 2 / 5,
 	 _("Maximum FPS:"), Align_VCenter),
-m_value_maxfps
-	(this,
-	 m_xres * 6063 / 10000, m_yres * 3783 / 10000,
-	 "25", Align_Right),
 
 m_reslist
 	(this,
@@ -215,25 +179,17 @@ m_label_dock_windows_to_edges
 	 m_xres * 1313 / 10000, m_yres * 7867 / 10000,
 	 _("Dock windows to edges"), Align_VCenter),
 
-m_autosave (this, Point(m_xres * 19 / 200, m_yres * 8167 / 10000)),
 m_label_autosave
 	(this,
 	 m_xres * 1313 / 10000, m_yres * 8333 / 10000,
 	 _("Save game automatically every"), Align_VCenter),
-m_value_autosave
-	(this,
-	 m_xres * 77 / 125, m_yres * 8333 / 10000,
-	 "15 min.", Align_Center),
 
 os(opt)
 {
-	m_fps_plus.set_repeating(true);
-	m_fps_minus.set_repeating(true);
-	m_autosave_plus.set_repeating(true);
-	m_autosave_minus.set_repeating(true);
-	m_autosave_tenplus.set_repeating(true);
-	m_autosave_tenminus.set_repeating(true);
+	m_sb_autosave     .add_replacement(0, _("Off"));
 
+	m_sb_maxfps       .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_sb_autosave     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_title           .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_label_fullscreen.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_fullscreen      .set_state(opt.fullscreen);
@@ -246,33 +202,25 @@ os(opt)
 	m_fx              .set_state(opt.fx);
 	m_fx              .set_enabled(not g_sound_handler.m_lock_audio_disabling);
 	m_label_maxfps    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_value_maxfps    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_resolution.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_reslist         .set_font(m_fn, m_fs);
 	m_label_language  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_language_list   .set_font(m_fn, m_fs);
 
-	m_label_game_options.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
-	m_label_single_watchwin      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_game_options                .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	m_label_single_watchwin             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_single_watchwin                   .set_state(opt.single_watchwin);
-	m_label_auto_roadbuild_mode  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_auto_roadbuild_mode         .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_auto_roadbuild_mode               .set_state(opt.auto_roadbuild_mode);
-	m_label_show_workarea_preview.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_show_workarea_preview       .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_show_workarea_preview             .set_state(opt.show_warea);
 	m_label_snap_windows_only_when_overlapping.set_font
 		(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_snap_windows_only_when_overlapping.set_state
 		(opt.snap_windows_only_when_overlapping);
-	m_label_dock_windows_to_edges.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_dock_windows_to_edges       .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_dock_windows_to_edges             .set_state(opt.dock_windows_to_edges);
-	m_label_autosave             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_value_autosave             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_autosave                          .set_state(opt.autosave > 0);
-	m_autosave.changed.set(this, &Fullscreen_Menu_Options::update_autosave);
-	m_asvalue = opt.autosave / 60;
-	update_autosave();
-	m_maxfps = opt.maxfps;
-	update_maxfps();
+	m_label_autosave                    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
 	SDL_PixelFormat & fmt = *SDL_GetVideoInfo()->vfmt;
@@ -335,44 +283,6 @@ void Fullscreen_Menu_Options::advanced_options() {
 		os = aom.get_values();
 }
 
-void Fullscreen_Menu_Options::autosaveChange(int32_t const arg) {
-	if (arg == plus)
-		++m_asvalue;
-	if (arg == minus)
-		--m_asvalue;
-	if (arg == plusTen)
-		m_asvalue += 10;
-	if (arg == minusTen)
-		m_asvalue -= 10;
-	update_autosave();
-}
-
-void Fullscreen_Menu_Options::update_autosave() {
-	m_autosave_plus.set_enabled    (m_autosave.get_state() & (m_asvalue < 300));
-	m_autosave_minus.set_enabled   (m_autosave.get_state() & (m_asvalue >   1));
-	m_autosave_tenplus.set_enabled (m_autosave.get_state() & (m_asvalue < 291));
-	m_autosave_tenminus.set_enabled(m_autosave.get_state() & (m_asvalue >  10));
-	char text[32];
-	snprintf(text, sizeof(text), _("%i min."), m_asvalue);
-	m_value_autosave.set_text(text);
-}
-
-void Fullscreen_Menu_Options::maxFpsChange(int32_t const arg) {
-	if (arg == plus)
-		++m_maxfps;
-	if (arg == minus)
-		--m_maxfps;
-	update_maxfps();
-}
-
-void Fullscreen_Menu_Options::update_maxfps() {
-	m_fps_plus.set_enabled(m_maxfps < 99);
-	m_fps_minus.set_enabled(m_maxfps > 5);
-	char text[32];
-	snprintf(text, sizeof(text), "%i", m_maxfps);
-	m_value_maxfps.set_text(text);
-}
-
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	const uint32_t res_index = m_reslist.selection_index();
@@ -392,8 +302,8 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	os.music                 = m_music.get_state();
 	os.fx                    = m_fx.get_state();
 	os.language              = m_language_list.get_selected();
-	os.autosave              = m_autosave.get_state() ? m_asvalue : 0;
-	os.maxfps                = m_maxfps;
+	os.autosave              = m_sb_autosave.getValue();
+	os.maxfps                = m_sb_maxfps.getValue();
 
 	return os;
 }
@@ -436,10 +346,18 @@ m_apply
 	 m_fn, m_fs),
 
 // Spinboxes
-m_spinbox_speed
+m_sb_speed
 	(this,
-	 m_xres * 2719 / 5000, m_yres * 63 / 100, m_xres / 5, m_vbutw,
+	 m_xres * 18 / 25, m_yres * 63 / 100, m_xres / 4, m_vbutw,
 	 opt.speed_of_new_game / 1000, 0, 100, "x", 1),
+m_sb_dis_panel
+	(this,
+	 m_xres * 18 / 25, m_yres * 6768 / 10000, m_xres / 4, m_vbutw,
+	 opt.border_snap_distance, 0, 100, "px.", 1),
+m_sb_dis_border
+	(this,
+	 m_xres * 18 / 25, m_yres * 7235 / 10000, m_xres / 4, m_vbutw,
+	 opt.panel_snap_distance, 0, 100, "px.", 1),
 
 
 // Title
@@ -469,16 +387,28 @@ m_label_speed
 	(this,
 	 m_xres * 1313 / 10000, m_yres * 6467 / 10000,
 	 _("Speed of a new game:"), Align_VCenter),
+m_label_snap_dis_panel
+	(this,
+	 m_xres * 1313 / 10000, m_yres * 6933 / 10000,
+	 _("Distance for windows to snap to other panels:"), Align_VCenter),
+m_label_snap_dis_border
+	(this,
+	 m_xres * 1313 / 10000, m_yres * 37 / 50,
+	 _("Distance for windows to snap to borders:"), Align_VCenter),
 
 os(opt)
 {
-	m_title        .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
-	m_label_nozip  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_nozip        .set_state(opt.nozip);
-	m_label_speed  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_spinbox_speed.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_title                .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	m_label_nozip          .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_nozip                .set_state(opt.nozip);
+	m_label_speed          .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_snap_dis_border.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_snap_dis_panel .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_sb_speed             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_sb_dis_border        .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_sb_dis_panel         .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
-	m_spinbox_speed.add_replacement(0, _("Pause"));
+	m_sb_speed.add_replacement(0, _("Pause"));
 
 	m_label_ui_font.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_ui_font_list .set_font(m_fn, m_fs);
@@ -525,9 +455,11 @@ os(opt)
 
 Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 	// Write all remaining data from UI elements
-	os.nozip             = m_nozip.get_state();
-	os.ui_font           = m_ui_font_list.get_selected();
-	os.speed_of_new_game = m_spinbox_speed.getValue() * 1000;
+	os.nozip                = m_nozip.get_state();
+	os.ui_font              = m_ui_font_list.get_selected();
+	os.speed_of_new_game    = m_sb_speed.getValue() * 1000;
+	os.panel_snap_distance  = m_sb_dis_panel.getValue();
+	os.border_snap_distance = m_sb_dis_border.getValue();
 	return os;
 }
 
