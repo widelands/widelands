@@ -290,12 +290,12 @@ bool Worker::run_setdescription(Game* g, State* state, const Action* action)
 
 	const std::vector<std::string> list(split_string(action->sparamv[idx], ":"));
 	std::string bob;
-	if (list.size()==1) {
+	if (list.size() == 1) {
 		state->svar1 = "world";
-		bob=list[0];
+		bob = list[0];
 	} else {
 		state->svar1 = "tribe";
-		bob=list[1];
+		bob = list[1];
 	}
 
 	state->ivar2 =
@@ -331,12 +331,12 @@ bool Worker::run_setbobdescription(Game* g, State* state, const Action* action)
 
 	const std::vector<std::string> list(split_string(action->sparamv[idx], ":"));
 	std::string bob;
-	if (list.size()==1) {
+	if (list.size() == 1) {
 		state->svar1 = "world";
-		bob=list[0];
+		bob = list[0];
 	} else {
 		state->svar1 = "tribe";
-		bob=list[1];
+		bob = list[1];
 	}
 
 	state->ivar2 =
@@ -464,7 +464,7 @@ struct FindNodeSpace {
 	FindNodeSpace(BaseImmovable * const ignoreimm)
 		: ignoreimmovable(ignoreimm) {}
 
-	bool accept(const Map& map, const FCoords& coords) const {
+	bool accept(Map const & map, FCoords const & coords) const {
 		if (!(coords.field->get_caps() & MOVECAPS_WALK))
 			return false;
 
@@ -1128,23 +1128,16 @@ const Bob::Task Worker::taskTransfer = {
  */
 void Worker::start_task_transfer(Game* g, Transfer* t)
 {
-	State* state;
-
 	// hackish override for gowarehouse
-	state = get_state(&taskGowarehouse);
-	if (state) {
+	if (State * const state = get_state(taskGowarehouse)) {
 		assert(!state->transfer);
 
 		state->transfer = t;
 		send_signal(g, "transfer");
-		return;
-	}
-
-	// just start a normal transfer
+	} else { //  just start a normal transfer
 	push_task(g, taskTransfer);
-
-	state = get_state();
-	state->transfer = t;
+		get_state()->transfer = t;
+	}
 }
 
 
@@ -1635,7 +1628,7 @@ void Worker::gowarehouse_update(Game* g, State* state)
 	// idle on a flag until the end of days (actually, until either the
 	// flag is removed or a warehouse connects to the Economy).
 	if (!m_supply)
-		m_supply = new IdleWorkerSupply(this);
+		m_supply = new IdleWorkerSupply(*this);
 	return start_task_idle(g, get_animation("idle"), 1000);
 }
 
@@ -1866,7 +1859,7 @@ void Worker::waitforcapacity_update(Game * g, State *)
 		return pop_task(g);
 	}
 
-	skip_act(); // wait indefinitely
+	return skip_act(); //  wait indefinitely
 }
 
 

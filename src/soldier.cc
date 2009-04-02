@@ -431,7 +431,7 @@ void Soldier::start_animation
  */
 bool Soldier::isOnBattlefield()
 {
-	return get_state(&taskAttack) || get_state(&taskDefense);
+	return get_state(taskAttack) || get_state(taskDefense);
 }
 
 
@@ -700,7 +700,7 @@ void Soldier::defense_pop(Game* g, State*)
  */
 bool Soldier::stayHome()
 {
-	if (State * const state = get_state(&taskDefense))
+	if (State const * const state = get_state(taskDefense))
 		return state->ivar1;
 	return false;
 }
@@ -838,7 +838,7 @@ bool Soldier::checkFieldBlocked(Game* g, const FCoords& field, bool commit)
 		if (commit && soldiers.size() == 1) {
 			Soldier & soldier = dynamic_cast<Soldier &>(*soldiers[0]);
 			if (soldier.get_owner() != get_owner() && soldier.canBeChallenged()) {
-				molog("[checkFieldBlocked] attacking a soldier\n");
+				molog("[checkNodeBlocked] attacking a soldier\n");
 				new Battle(*g, *this, soldier);
 			}
 		}
@@ -861,15 +861,13 @@ void Soldier::sendSpaceSignals(Game* g)
 
 	g->map().find_bobs(Area<FCoords>(get_position(), 1), &soldiers, FindSoldierOnBattlefield());
 
-	for (uint32_t i = 0; i < soldiers.size(); ++i) {
-		if (upcast(Soldier, soldier, soldiers[i])) {
+	container_iterate_const(std::vector<Bob *>, soldiers, i)
+		if (upcast(Soldier, soldier, *i.current))
 			if (soldier != this)
 				soldier->send_signal(g, "wakeup");
-		}
-	}
 
 	if (get_position().field->get_owned_by() != get_owner()->get_player_number()) {
-		std::vector<BaseImmovable*> attackables;
+		std::vector<BaseImmovable *> attackables;
 		g->map().find_reachable_immovables_unique
 			(Area<FCoords>(get_position(), MaxProtectionRadius),
 			 &attackables,

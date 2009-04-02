@@ -68,7 +68,7 @@ public:
 	const DirAnimations & get_right_walk_anims(const bool carries_ware)
 		const throw ()
 	{return carries_ware ? m_walkload_anims : m_walk_anims;}
-	WorkerProgram const * get_program(std::string const & programname) const;
+	WorkerProgram const * get_program(std::string const &) const;
 
 	virtual Worker_Type get_worker_type() const {return NORMAL;}
 

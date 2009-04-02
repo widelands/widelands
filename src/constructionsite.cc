@@ -264,16 +264,16 @@ Note that the workers are dealt with in the PlayerImmovable code.
 void ConstructionSite::set_economy(Economy * const e)
 {
 	if (Economy * const old = get_economy())
-		for (size_t i = 0; i < m_wares.size(); ++i)
-			m_wares[i]->remove_from_economy(old);
+		container_iterate_const(Wares, m_wares, i)
+			(*i.current)->remove_from_economy(*old);
 
 	Building::set_economy(e);
 	if (m_builder_request)
 		m_builder_request->set_economy(e);
 
 	if (e)
-		for (size_t i = 0; i < m_wares.size(); ++i)
-			m_wares[i]->add_to_economy(e);
+		container_iterate_const(Wares, m_wares, i)
+			(*i.current)->add_to_economy(*e);
 }
 
 

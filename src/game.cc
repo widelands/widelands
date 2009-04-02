@@ -339,7 +339,7 @@ void Game::init_newgame(UI::ProgressWindow & loaderUI, const GameSettings& setti
 /**
  * Initialize the savegame based on the given settings.
  * At return the game is at the same state like a map loaded with Game::init()
- * Only difference is, that players are already initialised.
+ * Only difference is, that players are already initialized.
  * run(loaderUI, true) takes care about this difference.
  */
 void Game::init_savegame(UI::ProgressWindow & loaderUI, const GameSettings& settings) {

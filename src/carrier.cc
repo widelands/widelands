@@ -406,12 +406,9 @@ bool Carrier::notify_ware(Game* g, int32_t flag)
 	//
 	// (Maybe the need for this lengthy explanation is proof that the
 	// ack system needs to be reworked.)
-	State* transport = get_state(&taskTransport);
-
-	if (transport) {
+	if (State const * const transport = get_state(taskTransport))
 		if ((transport->ivar1 == -1 && find_closest_flag(g) != flag) || flag == transport->ivar1)
 			return false;
-	}
 
 	// Ack it if we haven't
 	m_acked_ware = flag;

@@ -97,7 +97,7 @@ void Map_Bobdata_Data_Packet::Read
 								("owning player %u does not exist", read_owner);
 					}
 
-					//  basic initialisation
+					//  basic initialization
 					bob.set_position(egbase, fr.Coords32(extent));
 
 					Transfer * trans = 0;

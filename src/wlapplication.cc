@@ -1236,7 +1236,7 @@ void WLApplication::mainmenu_multiplayer()
 	//  the use of the Winsock DLL by Widelands.
 	WSADATA wsaData;
 	if (WSAStartup(MAKEWORD(1, 1), &wsaData) != 0)
-		throw wexception("Initialisation of Wsock2-library failed");
+		throw wexception("initialization of Wsock2-library failed");
 #endif
 	for (;;) { // stay in menu until player clicks "back" button
 		int32_t menu_result;
@@ -1482,7 +1482,7 @@ bool WLApplication::new_game()
 			throw;
 		}
 	} else { // normal singleplayer
-		uint8_t pn = sp.settings().playernum + 1;
+		uint8_t const pn = sp.settings().playernum + 1;
 		boost::scoped_ptr<GameController> ctrl
 				(GameController::createSinglePlayer(&game, true, pn));
 		try {

@@ -91,7 +91,7 @@ bool MiniMap::View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	Widelands::Coords c
 		(m_viewx + 1 - get_w() / 2 + x, m_viewy + 1 - get_h() / 2 + y);
 
-	m_iabase.egbase().map().normalize_coords(&c);
+	m_iabase.egbase().map().normalize_coords(c);
 
 	assert(dynamic_cast<const MiniMap *>(get_parent()));
 	static_cast<const MiniMap *>(get_parent())->warpview.call

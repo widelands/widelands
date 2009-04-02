@@ -43,32 +43,32 @@ throw (_wexception)
 
 	fr.Open(fs, "binary/resource");
 
-	Map* map=egbase->get_map();
-	World* world=egbase->get_map()->get_world();
+	Map   & map   = egbase->map();
+	World & world = map.world();
 
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
-		int32_t nr_res=fr.Unsigned16();
-		if (nr_res > world->get_nr_resources())
+		int32_t const nr_res = fr.Unsigned16();
+		if (world.get_nr_resources() < nr_res)
 			log
 				("WARNING: Number of resources in map (%i) is bigger than in world "
 				 "(%i)",
-				 nr_res, world->get_nr_resources());
+				 nr_res, world.get_nr_resources());
 
 		// construct ids and map
-		std::map<uint8_t, int32_t> smap;
-		for (int32_t i = 0; i < nr_res; ++i) {
-			int32_t id=fr.Unsigned16();
+		std::map<uint8_t, uint8_t> smap;
+		for (uint8_t i = 0; i < nr_res; ++i) {
+			uint8_t const id = fr.Unsigned16();
 			char const * const buffer = fr.CString();
-			int32_t res=world->get_resource(buffer);
+			int32_t const res = world.get_resource(buffer);
 			if (res == -1)
 				throw wexception
 					("Resource '%s' exists in map, not in world!", buffer);
 			smap[id] = res;
 		}
 
-		for (uint16_t y = 0; y < map->get_height(); ++y) {
-			for (uint16_t x = 0; x < map->get_width(); ++x) {
+		for (uint16_t y = 0; y < map.get_height(); ++y) {
+			for (uint16_t x = 0; x < map.get_width(); ++x) {
 				uint8_t const id           = fr.Unsigned8();
 				uint8_t const found_amount = fr.Unsigned8();
 				uint8_t const amount       = found_amount;
@@ -88,8 +88,8 @@ throw (_wexception)
 
 				if (0xa < set_id)
 					throw "Unknown resource in map file. It is not in world!\n";
-				egbase->map()[Coords(x, y)].set_resources(set_id, set_amount);
-				egbase->map()[Coords(x, y)].set_starting_res_amount(set_start_amount);
+				map[Coords(x, y)].set_resources(set_id, set_amount);
+				map[Coords(x, y)].set_starting_res_amount(set_start_amount);
 			}
 		}
 	} else
@@ -117,23 +117,23 @@ throw (_wexception)
 	// of the resources at run time doesn't matter.
 	// (saved like terrains)
 	// Write the number of resources
-	World* world=egbase->get_map()->get_world();
-	int32_t nr_res=world->get_nr_resources();
+	Map   const & map   = egbase->map ();
+	World const & world = map   .world();
+	uint8_t const nr_res = world.get_nr_resources();
 	fw.Unsigned16(nr_res);
 
 	//  write all resources names and their id's
 	std::map<std::string, uint8_t> smap;
 	for (int32_t i = 0; i < nr_res; ++i) {
-		Resource_Descr* res=world->get_resource(i);
-		smap[res->name().c_str()] = i;
+		Resource_Descr const & res = *world.get_resource(i);
+		smap[res.name().c_str()] = i;
 		fw.Unsigned16(i);
-		fw.CString(res->name().c_str());
+		fw.CString(res.name().c_str());
 	}
 
 	//  Now, all resouces as uint8_ts in order
 	//  - resource id
 	//  - amount
-	Map const & map = egbase->map();
 	for (uint16_t y = 0; y < map.get_height(); ++y) {
 		for (uint16_t x = 0; x < map.get_width(); ++x) {
 			Field const & f = map[Coords(x, y)];

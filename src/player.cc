@@ -332,7 +332,7 @@ void Player::build(Coords c, Building_Index idx)
 
 	// Validate build position
 	const Map & map = egbase().map();
-	map.normalize_coords(&c);
+	map.normalize_coords(c);
 	buildcaps = get_buildcaps(map.get_fcoords(c));
 
 	if (descr->get_ismine())
@@ -500,11 +500,10 @@ void Player::allow_building(Building_Index const i, bool const allow) {
 /*
  * Economy stuff below
  */
-void Player::add_economy(Economy * const eco)
+void Player::add_economy(Economy & economy)
 {
-	if (has_economy(eco))
-		return;
-	m_economies.push_back(eco);
+	if (not has_economy(economy))
+		m_economies.push_back(&economy);
 }
 
 
@@ -516,9 +515,9 @@ void Player::remove_economy(Economy & economy) {
 		}
 }
 
-bool Player::has_economy(Economy * const economy) const throw () {
+bool Player::has_economy(Economy & economy) const throw () {
 	container_iterate_const(Economies, m_economies, i)
-		if (*i.current == economy)
+		if (*i.current == &economy)
 			return true;
 	return false;
 }

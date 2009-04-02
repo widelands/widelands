@@ -71,17 +71,14 @@ Request::Request
 			 "worker types",
 			 index.value(), target->get_owner()->tribe().get_nrworkers().value());
 	if (m_economy)
-		m_economy->add_request(this);
+		m_economy->add_request(*this);
 }
 
 Request::~Request()
 {
 	// Remove from the economy
-	if (is_open())
-	{
-		if (m_economy)
-			m_economy->remove_request(this);
-	}
+	if (is_open() and m_economy)
+		m_economy->remove_request(*this);
 
 	// Cancel all ongoing transfers
 	while (m_transfers.size())
@@ -511,14 +508,14 @@ void Request::Read
 						m_transfers.push_back(trans);
 
 						if (fr->Unsigned8())
-							m_requirements.Read (fr, egbase, mol);
+							m_requirements.Read (*fr, *egbase, mol);
 					}
 				} catch (_wexception const & e) {
 					throw wexception("transfer %u: %s", i, e.what());
 				}
 
 			if (!is_open() && m_economy)
-				m_economy->remove_request(this);
+				m_economy->remove_request(*this);
 		} else
 			throw wexception("unknown/unhandled version %u", version);
 	} catch (_wexception const & e) {
@@ -570,7 +567,7 @@ void Request::Write
 		fw->Unsigned8(trans.is_idle());
 
 		fw->Unsigned8(true); // for version compatibility
-		m_requirements.Write (fw, egbase, mos);
+		m_requirements.Write (*fw, *egbase, mos);
 	}
 }
 
@@ -703,12 +700,12 @@ void Request::set_economy(Economy* e)
 		return;
 
 	if (m_economy && is_open())
-		m_economy->remove_request(this);
+		m_economy->remove_request(*this);
 
 	m_economy = e;
 
 	if (m_economy && is_open())
-		m_economy->add_request(this);
+		m_economy->add_request(*this);
 }
 
 /**
@@ -726,9 +723,9 @@ void Request::set_idle(bool idle)
 	// Idle requests are always added to the economy
 	if (m_economy) {
 		if (wasopen && !is_open())
-			m_economy->remove_request(this);
+			m_economy->remove_request(*this);
 		else if (!wasopen && is_open())
-			m_economy->add_request(this);
+			m_economy->add_request(*this);
 	}
 }
 
@@ -750,9 +747,9 @@ void Request::set_count(uint32_t const count)
 	// Update the economy
 	if (m_economy) {
 		if (wasopen && !is_open())
-			m_economy->remove_request(this);
+			m_economy->remove_request(*this);
 		else if (!wasopen && is_open())
-			m_economy->add_request(this);
+			m_economy->add_request(*this);
 	}
 }
 
@@ -807,7 +804,7 @@ void Request::start_transfer(Game* g, Supply* supp)
 
 	m_transfers.push_back(t);
 	if (!is_open())
-		m_economy->remove_request(this);
+		m_economy->remove_request(*this);
 }
 
 /**
@@ -853,7 +850,7 @@ void Request::transfer_fail(Game &, Transfer & t) {
 	remove_transfer(find_transfer(t));
 
 	if (!wasopen)
-		m_economy->add_request(this);
+		m_economy->add_request(*this);
 }
 
 /**

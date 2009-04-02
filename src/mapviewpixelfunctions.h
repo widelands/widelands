@@ -122,7 +122,7 @@ inline void MapviewPixelFunctions::get_save_pix
 	 int32_t & px, int32_t & py)
 {
 	Widelands::Coords c1 = c;
-	map.normalize_coords(&c1);
+	map.normalize_coords(c1);
 	Widelands::FCoords fc = map.get_fcoords(c1);
 	fc.x = c.x;
 	fc.y = c.y;

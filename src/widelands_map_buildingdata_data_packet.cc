@@ -971,7 +971,7 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 	// upgrades
 	fw.Unsigned8(trainingsite.m_upgrades.size());
 	for (uint8_t i = 0; i < trainingsite.m_upgrades.size(); ++i) {
-		const TrainingSite::Upgrade& upgrade = trainingsite.m_upgrades[i];
+		TrainingSite::Upgrade const & upgrade = trainingsite.m_upgrades[i];
 		fw.Unsigned8(upgrade.attribute);
 		fw.Unsigned8(upgrade.prio);
 		fw.Unsigned8(upgrade.credit);

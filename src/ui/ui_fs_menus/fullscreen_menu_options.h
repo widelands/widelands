@@ -178,7 +178,7 @@ private:
 
 	Options_Ctrl::Options_Struct os;
 
-	void speedChange(int32_t const);
+	void speedChange(int32_t);
 	void speedUpdate();
 };
 

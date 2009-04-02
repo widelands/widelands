@@ -232,8 +232,6 @@ void MilitarySite::cleanup(Editor_Game_Base* g)
 
 /*
 ===============
-MilitarySite::request_soldier_callback [static]
-
 Called when our soldier arrives.
 ===============
 */
@@ -389,7 +387,7 @@ bool MilitarySite::isPresent(Soldier & soldier) const
 {
 	return
 		soldier.get_location(&owner().egbase()) == this                     &&
-		soldier.get_state() == soldier.get_state(&Worker::taskBuildingwork) &&
+		soldier.get_state() == soldier.get_state(Worker::taskBuildingwork) &&
 		soldier.get_position() == get_position();
 }
 

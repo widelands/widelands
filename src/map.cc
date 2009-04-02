@@ -1875,8 +1875,8 @@ int32_t Map::findpath
 	int32_t upper_cost_limit;
 	FCoords cur;
 
-	normalize_coords(&instart);
-	normalize_coords(&inend);
+	normalize_coords(instart);
+	normalize_coords(inend);
 
 	start = FCoords(instart, &operator[](instart));
 	end   = FCoords(inend,   &operator[](inend));

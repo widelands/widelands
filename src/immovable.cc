@@ -979,14 +979,11 @@ void PlayerImmovable::add_worker(Worker *w)
 */
 void PlayerImmovable::remove_worker(Worker *w)
 {
-	for (uint32_t i = 0; i < m_workers.size(); ++i) {
-		if (m_workers[i] == w) {
-			if (i < m_workers.size() - 1)
-				m_workers[i] = m_workers[m_workers.size() - 1];
-			m_workers.pop_back();
-			return;
+	container_iterate(Workers, m_workers, i)
+		if (*i.current == w) {
+			*i.current = *(i.end - 1);
+			return m_workers.pop_back();
 		}
-	}
 
 	throw wexception("PlayerImmovable::remove_worker: not in list");
 }

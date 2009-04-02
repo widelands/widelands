@@ -87,7 +87,7 @@ public:
 	char const * type_name() const throw () {return "ware";}
 
 	Map_Object* get_location(Editor_Game_Base* g) {return m_location.get(g);}
-	Economy* get_economy() const throw () {return m_economy;}
+	Economy * get_economy() const throw () {return m_economy;}
 	Ware_Index descr_index() const throw () {return m_descr_index;}
 
 	void init(Editor_Game_Base* g);
@@ -236,7 +236,8 @@ private:
 	typedef std::vector<OPtr<Worker> > CapacityWaitQueue;
 	CapacityWaitQueue m_capacity_wait; ///< workers waiting for capacity
 
-	std::list<FlagJob>      m_flag_jobs;
+	typedef std::list<FlagJob> FlagJobs;
+	FlagJobs m_flag_jobs;
 
 	// The following are only used during pathfinding
 	uint32_t                    mpf_cycle;
@@ -469,15 +470,16 @@ struct SupplyList {
 	SupplyList();
 	~SupplyList();
 
-	void add_supply(Supply* supp);
-	void remove_supply(Supply* supp);
+	void add_supply(Supply &);
+	void remove_supply(Supply &);
 
 	size_t get_nrsupplies() const {return m_supplies.size();}
 	Supply const & operator[](size_t const idx) const {return *m_supplies[idx];}
 	Supply & operator[](size_t const idx) {return *m_supplies[idx];}
 
 private:
-	std::vector<Supply *> m_supplies;
+	typedef std::vector<Supply *> Supplies;
+	Supplies m_supplies;
 };
 
 
@@ -507,8 +509,8 @@ struct WaresQueue {
 
 	void set_callback(callback_t *, void * data);
 
-	void remove_from_economy(Economy* e);
-	void add_to_economy(Economy* e);
+	void remove_from_economy(Economy &);
+	void add_to_economy(Economy &);
 
 	void set_size            (uint32_t) throw ();
 	void set_filled          (uint32_t) throw ();
@@ -578,21 +580,20 @@ struct Economy {
 		Time     last_modified;
 	};
 
-	Economy(Player *player);
+	Economy(Player &);
 	~Economy();
 
-	Player & owner() const throw () {return *m_owner;}
-	Player *get_owner() const {return m_owner;}
+	Player & owner() const throw () {return m_owner;}
 
-	static void check_merge(Flag *f1, Flag *f2);
-	static void check_split(Flag *f1, Flag *f2);
+	static void check_merge(Flag &, Flag &);
+	static void check_split(Flag &, Flag &);
 
 	bool find_route(Flag *start, Flag *end, Route *route, bool wait, int32_t cost_cutoff = -1);
 
 	std::vector<Flag *>::size_type get_nrflags() const {return m_flags.size();}
-	void add_flag(Flag *flag);
-	void remove_flag(Flag *flag);
-	Flag* get_arbitrary_flag();
+	void    add_flag(Flag &);
+	void remove_flag(Flag &);
+	Flag & get_arbitrary_flag();
 
 	void    add_wares  (Ware_Index, uint32_t count = 1);
 	void remove_wares  (Ware_Index, uint32_t count = 1);
@@ -604,13 +605,12 @@ struct Economy {
 	void remove_warehouse(Warehouse *wh);
 	uint32_t get_nr_warehouses() const {return m_warehouses.size();}
 
-	void add_request(Request* req);
-	bool have_request(Request* req);
-	void remove_request(Request* req);
+	void    add_request(Request &);
+	bool   have_request(Request &);
+	void remove_request(Request &);
 
-	void add_supply(Supply *);
-	bool have_supply(Supply *);
-	void remove_supply(Supply *);
+	void    add_supply(Supply &);
+	void remove_supply(Supply &);
 
 	/// information about this economy
 	WareList::count_type stock_ware  (Ware_Index const i) {
@@ -647,10 +647,10 @@ struct Economy {
 	void Write(FileWrite &, Game &, Map_Map_Object_Saver  *);
 
 private:
-	void do_remove_flag(Flag *f);
+	void do_remove_flag(Flag &);
 
-	void do_merge(Economy *e);
-	void do_split(Flag *f);
+	void do_merge(Economy &);
+	void do_split(Flag &);
 
 	void start_request_timer(int32_t delta = 200);
 
@@ -658,14 +658,15 @@ private:
 	void process_requests(Game &, RSPairStruct &);
 	void create_requested_workers(Game &);
 
-	typedef std::vector<Request*> RequestList;
+	typedef std::vector<Request *> RequestList;
 
-	Player* m_owner;
+	Player & m_owner;
 
 	/// True while rebuilding Economies (i.e. during split/merge)
 	bool m_rebuilding;
 
-	std::vector<Flag *>      m_flags;
+	typedef std::vector<Flag *> Flags;
+	Flags m_flags;
 	WareList m_wares;     ///< virtual storage with all wares in this Economy
 	WareList m_workers;   ///< virtual storage with all workers in this Economy
 	std::vector<Warehouse *> m_warehouses;

@@ -295,8 +295,8 @@ struct Bob : public Map_Object {
 	{assert(m_stack.size()); return m_stack[m_stack.size() - 1];}
 
 	std::string get_signal() {return m_signal;}
-	State* get_state(const Task* task);
-	const State* get_state(const Task* task) const;
+	State       * get_state(Task const &);
+	State const * get_state(Task const &) const;
 	void push_task(Game* g, const Task & task);
 	void pop_task(Game* g);
 

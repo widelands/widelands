@@ -129,7 +129,7 @@ struct Tribe_Descr {
 		(const Resource_Descr * const res, const uint32_t amount) const;
 
 		void postload(Editor_Game_Base*);
-		void load_graphics();
+	void load_graphics();
 
 	struct Initialization {
 		std::string          name;

@@ -271,7 +271,8 @@ void TrainingSite::add_worker(Worker* w)
 void TrainingSite::remove_worker(Worker* w)
 {
 	if (upcast(Soldier, soldier, w)) {
-		std::vector<Soldier*>::iterator it = std::find(m_soldiers.begin(), m_soldiers.end(), soldier);
+		std::vector<Soldier *>::iterator const it =
+			std::find(m_soldiers.begin(), m_soldiers.end(), soldier);
 		if (it != m_soldiers.end()) {
 			m_soldiers.erase(it);
 			if (upcast(Game, game, &owner().egbase()))
@@ -430,7 +431,7 @@ void TrainingSite::dropSoldier(Soldier & soldier)
  */
 void TrainingSite::drop_unupgradable_soldiers(Game *)
 {
-	std::vector<Soldier*> droplist;
+	std::vector<Soldier *> droplist;
 
 	for (uint32_t i = 0; i < m_soldiers.size(); ++i) {
 		std::vector<Upgrade>::iterator it = m_upgrades.begin();
@@ -570,7 +571,7 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 	return program_start(game, buf);
 }
 
-TrainingSite::Upgrade* TrainingSite::get_upgrade(enum tAttribute atr)
+TrainingSite::Upgrade * TrainingSite::get_upgrade(tAttribute const atr)
 {
 	container_iterate(std::vector<Upgrade>, m_upgrades, i)
 		if (i.current->attribute == atr)

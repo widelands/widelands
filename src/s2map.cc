@@ -139,14 +139,12 @@ int32_t S2_Map_Loader::load_map_complete
 /// Returns a pointer to the (packed) contents of the section. 0 if the read
 /// failed.
 /// If successful, you must free the returned pointer.
-uint8_t *S2_Map_Loader::load_s2mf_section(FileRead *file, int32_t width, int32_t height)
+uint8_t * S2_Map_Loader::load_s2mf_section
+	(FileRead & fr, int32_t const width, int32_t const height)
 {
-	uint16_t dw, dh;
 	char buffer[256];
-	uint16_t one;
-	int32_t size;
 
-	memcpy(buffer, file->Data(6), 6);
+	memcpy(buffer, fr.Data(6), 6);
 	if
 		(buffer[0] != 0x10 or
 		 buffer[1] != 0x27 or
@@ -159,13 +157,15 @@ uint8_t *S2_Map_Loader::load_s2mf_section(FileRead *file, int32_t width, int32_t
 		return 0;
 	}
 
-	dw = file->Unsigned16();
-	dh = file->Unsigned16();
+	uint16_t const dw = fr.Unsigned16();
+	uint16_t const dh = fr.Unsigned16();
 
-	one = file->Unsigned16();
-	if (one != 1)
-		throw wexception("expected 1 but found %u", one);
-	size = file->Signed32();
+	{
+		uint16_t const one = fr.Unsigned16();
+		if (one != 1)
+			throw wexception("expected 1 but found %u", one);
+	}
+	int32_t const size = fr.Signed32();
 	if (size != dw * dh)
 		throw wexception("expected %u but found %u", dw * dh, size);
 
@@ -174,18 +174,18 @@ uint8_t *S2_Map_Loader::load_s2mf_section(FileRead *file, int32_t width, int32_t
 		return 0;
 	}
 
-	uint8_t *section = static_cast<uint8_t *>(malloc(dw * dh));
+	uint8_t * const section = static_cast<uint8_t *>(malloc(size));
 
 	try {
 		int32_t y = 0;
 		for (; y < height; ++y) {
 			uint8_t const * const ptr =
-				reinterpret_cast<uint8_t *>(file->Data(width));
-			memcpy(section + y*width, ptr, width);
-			file->Data(dw - width); //  skip the alignment junk
+				reinterpret_cast<uint8_t *>(fr.Data(width));
+			memcpy(section + y * width, ptr, width);
+			fr.Data(dw - width); //  skip the alignment junk
 		}
 		while (y < dh) {
-			file->Data(dw); // more alignment junk
+			fr.Data(dw); //  more alignment junk
 			++y;
 		}
 	} catch (...) {
@@ -202,12 +202,12 @@ uint8_t *S2_Map_Loader::load_s2mf_section(FileRead *file, int32_t width, int32_t
  */
 void S2_Map_Loader::load_s2mf_header()
 {
-	FileRead file;
+	FileRead fr;
 
-	file.Open(*g_fs, m_filename);
+	fr.Open(*g_fs, m_filename);
 
 	S2MapDescrHeader header;
-	memcpy(&header, file.Data(sizeof(header)), sizeof(header));
+	memcpy(&header, fr.Data(sizeof(header)), sizeof(header));
 
 	//  Header must be swapped for big-endian Systems, works at the moment only //  FIXME generalize
 	//  for PowerPC architecture                                               //  FIXME generalize
@@ -249,11 +249,11 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 	uint8_t *pc;
 
 	try {
-		FileRead file;
-		file.Open(*g_fs, m_filename);
+		FileRead fr;
+		fr.Open(*g_fs, m_filename);
 
 		S2MapDescrHeader header;
-		memcpy(&header, file.Data(sizeof(header)), sizeof(header));
+		memcpy(&header, fr.Data(sizeof(header)), sizeof(header));
 
 		//  Header must be swapped for big-endian Systems, works at the moment //  FIXME generalize
 		//  only for PowerPC architecture.                                    //  FIXME generalize
@@ -273,7 +273,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 
 
 		//  SWD-SECTION 1: Heights
-		section = load_s2mf_section(&file, mapwidth, mapheight);
+		section = load_s2mf_section(fr, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 1 (Heights) not found");
 
@@ -287,7 +287,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 
 
 		//  SWD-SECTION 2: Terrain 1
-		section = load_s2mf_section(&file, mapwidth, mapheight);
+		section = load_s2mf_section(fr, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 2 (Terrain 1) not found");
 
@@ -332,7 +332,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 
 
 		//  SWD-SECTION 3: Terrain 2
-		section = load_s2mf_section(&file, mapwidth, mapheight);
+		section = load_s2mf_section(fr, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 3 (Terrain 2) not found");
 
@@ -379,7 +379,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 		//  SWD-SECTION 4: Existing Roads
 		//  As loading of Roads at game-start is not supported, yet - we simply
 		//  skip it.
-		section = load_s2mf_section(&file, mapwidth, mapheight);
+		section = load_s2mf_section(fr, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 4 (Existing Roads) not found");
 		free(section);
@@ -387,7 +387,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 
 
 		//  SWD-SECTION 5: Bobs
-		bobs = load_s2mf_section(&file, mapwidth, mapheight);
+		bobs = load_s2mf_section(fr, mapwidth, mapheight);
 		if (!bobs)
 			throw wexception("Section 5 (Bobs) not found");
 
@@ -403,7 +403,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 		//   owner == 4 -> grey
 		//   owner == 6 -> green
 		//   owner == 6 -> orange
-		section = load_s2mf_section(&file, mapwidth, mapheight);
+		section = load_s2mf_section(fr, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 6 (Ways) not found");
 
@@ -430,7 +430,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 		//  0x05 + 0x08 == duck
 		//  0x06        == sheep
 		//  0x09        == donkey
-		section = load_s2mf_section(&file, mapwidth, mapheight);
+		section = load_s2mf_section(fr, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 7 (Animals) not found");
 
@@ -458,7 +458,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 				}
 
 				if (bobname) {
-					int32_t idx = m_map.world().get_bob(bobname);
+					int32_t const idx = m_map.world().get_bob(bobname);
 					if (idx < 0)
 						throw wexception("Missing bob type %s", bobname);
 					for (uint32_t z = 0; z < CRITTER_PER_DEFINITION; ++z)
@@ -472,7 +472,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 
 		//  SWD-SECTION 8: Unknown
 		//  Skipped
-		section = load_s2mf_section(&file, mapwidth, mapheight);
+		section = load_s2mf_section(fr, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 8 (Unknown) not found");
 		free(section);
@@ -490,14 +490,14 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 		//  0x0d == mining
 		//  0x68 == trees
 		//  0x78 == no buildings
-		buildings = load_s2mf_section(&file, mapwidth, mapheight);
+		buildings = load_s2mf_section(fr, mapwidth, mapheight);
 		if (!buildings)
 			throw wexception("Section 9 (Buildings) not found");
 
 
 		//  SWD-SECTION 10: Unknown
 		//  Skipped
-		section = load_s2mf_section(&file, mapwidth, mapheight);
+		section = load_s2mf_section(fr, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 10 (Unknown) not found");
 		free(section);
@@ -508,7 +508,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 		//  In this section the positions of the Mapeditor tools seem to be
 		//  saved. But as this is unusable for playing or the WL-Editor, we just
 		//  skip it!
-		section = load_s2mf_section(&file, mapwidth, mapheight);
+		section = load_s2mf_section(fr, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 11 (Tool Position) not found");
 		free(section);
@@ -524,7 +524,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 		//  0x49-4f == iron 1-7
 		//  0x41-47 == cowl 1-7
 		//  0x59-5f == stones 1-7
-		section = load_s2mf_section(&file, mapwidth, mapheight);
+		section = load_s2mf_section(fr, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 12 (Resources) not found");
 
@@ -567,7 +567,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 		//  It seems as if the Settlers2 Mapeditor saves the highlights and
 		//  shadows from slopes to this section.
 		//  But as this is unusable for the WL engine, we just skip it.
-		section = load_s2mf_section(&file, mapwidth, mapheight);
+		section = load_s2mf_section(fr, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 13 (Highlights and Shadows) not found");
 		free(section);
@@ -584,13 +584,13 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 		//
 		//  Unusable (and if it was needed, it would have to be recomputed anyway
 		//  to verify it) so we simply skip it.
-		section = load_s2mf_section(&file, mapwidth, mapheight);
+		section = load_s2mf_section(fr, mapwidth, mapheight);
 		if (!section)
 			throw wexception("Section 14 (Island id) not found");
 		free(section);
 		section = 0;
 
-		file.Close();
+		fr.Close();
 
 
 		//  Map is completely read into memory.
@@ -598,7 +598,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 		uint8_t c;
 		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
 			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x) {
-				const char *bobname = 0;
+				char const * bobname = 0;
 
 				Widelands::Coords const location(x, y);
 				Widelands::Map_Index const index =
@@ -616,7 +616,8 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 						break;
 					}
 					if (bobname) {
-						int32_t idx = m_map.world().get_immovable_index(bobname);
+						int32_t const idx =
+							m_map.world().get_immovable_index(bobname);
 						if (idx < 0)
 							throw wexception("Missing immovable type %s", bobname);
 						game->create_immovable(Widelands::Coords(x, y), idx, 0);
@@ -734,7 +735,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 		// To allow a loading of settlers 2 maps in the majority of cases, check
 		// all startingpositions and try to make it widelands-compatible, if
 		// it's size is too small.
-		m_map.recalc_whole_map(); // without this buildcaps won't be initialised
+		m_map.recalc_whole_map(); //  to initialize buildcaps
 
 		char msg[128];
 		const Widelands::Player_Number nr_players = m_map.get_nrplayers();
@@ -748,8 +749,9 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 
 			Widelands::Coords starting_pos = m_map.get_starting_pos(p);
 			if (!starting_pos) {
-				// Do not throw exception, else map won't be loadable in editor
-				// Player initialisation will keep track about missing starting pos.
+				//  Do not throw exception, else map will not be loadable in the
+				//  editor. Player initialization will keep track of wrong starting
+				//  positions.
 				log("Has no starting position.\n");
 				continue;
 			}
@@ -860,8 +862,9 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 							("   Starting position was successfully fixed during 2nd "
 							 "try!\n");
 					} else {
-						// Do not throw exception, else map won't be loadable in editor
-						// Player initialisation will keep track about wrong starting pos.
+						//  Do not throw exception, else map will not be loadable in
+						//  the editor. Player initialization will keep track of
+						//  wrong starting positions.
 						log("invalid starting position, that couldn't be fixed.\n");
 						log("   Please try to fix it manually in the editor.\n");
 					}

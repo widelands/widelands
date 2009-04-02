@@ -90,10 +90,10 @@ Worker_Descr::Worker_Descr
 	if (char const * const becomes_name = global_s.get_string("becomes"))
 		m_becomes = tribe().safe_worker_index(becomes_name);
 	std::string const exp = global_s.get_string("experience", "");
-	m_min_experience=m_max_experience=-1;
+	m_min_experience = m_max_experience = -1;
 	if (exp.size()) {
 		std::vector<std::string> list(split_string(exp, "-"));
-		if (list.size()!=2)
+		if (list.size() != 2)
 			throw wexception
 				("Parse error in experience string: \"%s\" (must be \"min-max\")",
 				 exp.c_str());
@@ -133,7 +133,7 @@ Worker_Descr::Worker_Descr
 			m_programs[program_name.c_str()] = program;
 		}
 
-		catch (std::exception& e) {
+		catch (std::exception const & e) {
 			delete program;
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}

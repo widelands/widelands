@@ -66,7 +66,7 @@ Map_Object_Descr g_flag_descr("flag", "Flag");
  * Whenever a WareInstance is idle, it issues an IdleWareSupply.
 */
 struct IdleWareSupply : public Supply {
-	IdleWareSupply(WareInstance* ware);
+	IdleWareSupply(WareInstance &);
 	virtual ~IdleWareSupply();
 
 	void set_economy(Economy *);
@@ -80,15 +80,18 @@ struct IdleWareSupply : public Supply {
 	virtual Worker* launch_worker(Game* g, const Request*) __attribute__ ((noreturn));
 
 private:
-	WareInstance * m_ware;
+	WareInstance & m_ware;
 	Economy      * m_economy;
 };
 
 /**
  * Initialize the Supply and update the economy.
 */
-IdleWareSupply::IdleWareSupply(WareInstance* ware) : m_ware(ware), m_economy(0)
-{set_economy(m_ware->get_economy());}
+IdleWareSupply::IdleWareSupply(WareInstance & ware) :
+	m_ware(ware), m_economy(0)
+{
+	set_economy(ware.get_economy());
+}
 
 /**
  * Cleanup.
@@ -103,18 +106,12 @@ IdleWareSupply::~IdleWareSupply()
 */
 void IdleWareSupply::set_economy(Economy * const e)
 {
-	if (e == m_economy)
-		return;
-
-	Ware_Index const ware = m_ware->descr_index();
-
-	if (m_economy)
-		m_economy->remove_supply(this);
-
-	m_economy = e;
-
-	if (m_economy)
-		m_economy->add_supply(this);
+	if (m_economy != e) {
+		if (m_economy)
+			m_economy->remove_supply(*this);
+		if ((m_economy = e))
+			m_economy->   add_supply(*this);
+	}
 }
 
 /**
@@ -122,7 +119,7 @@ void IdleWareSupply::set_economy(Economy * const e)
 */
 PlayerImmovable* IdleWareSupply::get_position(Game* g)
 {
-	Map_Object * const loc = m_ware->get_location(g);
+	Map_Object * const loc = m_ware.get_location(g);
 
 	if (upcast(PlayerImmovable, playerimmovable, loc))
 		return playerimmovable;
@@ -135,12 +132,14 @@ PlayerImmovable* IdleWareSupply::get_position(Game* g)
 
 bool IdleWareSupply::is_active()  const throw ()
 {
-	return not m_ware->is_moving();
+	return not m_ware.is_moving();
 }
 
 uint32_t IdleWareSupply::nr_supplies(Game *, Request const * req) const
 {
-	if (req->get_type() == Request::WARE && req->get_index() == m_ware->descr_index())
+	if
+		(req->get_type() == Request::WARE &&
+		 req->get_index() == m_ware.descr_index())
 		return 1;
 
 	return 0;
@@ -152,14 +151,14 @@ uint32_t IdleWareSupply::nr_supplies(Game *, Request const * req) const
 WareInstance & IdleWareSupply::launch_item(Game *, const Request* req) {
 	if (req->get_type() != Request::WARE)
 		throw wexception("IdleWareSupply::launch_item : called for non-item request");
-	if (req->get_index() != m_ware->descr_index())
+	if (req->get_index() != m_ware.descr_index())
 		throw wexception
 			("IdleWareSupply: ware(%u) (type = %i) requested for %i",
-			 m_ware->serial(),
-			 m_ware->descr_index().value(),
+			 m_ware.serial(),
+			 m_ware.descr_index().value(),
 			 req->get_index().value());
 
-	return *m_ware;
+	return m_ware;
 }
 
 Worker* IdleWareSupply::launch_worker(Game *, const Request*)
@@ -314,7 +313,7 @@ void WareInstance::update(Game * game)
 	// Update whether we have a Supply or not
 	if (!m_transfer || m_transfer->is_idle()) {
 		if (!m_supply)
-			m_supply = new IdleWareSupply(this);
+			m_supply = new IdleWareSupply(*this);
 	} else {
 		delete m_supply;
 		m_supply = 0;
@@ -508,7 +507,7 @@ Flag *Flag::create(Editor_Game_Base *g, Player *owner, Coords coords)
 
 	upcast(Road, road, imm);
 	//  we split a road, or a new, standalone flag is created
-	(road ? road->get_economy() : new Economy(owner))->add_flag(flag);
+	(road ? road->get_economy() : new Economy(*owner))->add_flag(*flag);
 
 	if (road)
 		road->presplit(g, coords);
@@ -802,7 +801,6 @@ void Flag::wake_up_capacity_queue(Game* g)
 */
 WareInstance* Flag::fetch_pending_item(Game* g, PlayerImmovable* dest)
 {
-	WareInstance* item;
 	int32_t best_index = -1;
 
 	for (int32_t i = 0; i < m_item_filled; ++i) {
@@ -818,9 +816,11 @@ WareInstance* Flag::fetch_pending_item(Game* g, PlayerImmovable* dest)
 		return 0;
 
 	// move the other items up the list and return this one
-	item = m_items[best_index].item;
+	WareInstance * const item = m_items[best_index].item;
 	--m_item_filled;
-	memmove(&m_items[best_index], &m_items[best_index+1], sizeof(m_items[0]) * (m_item_filled - best_index));
+	memmove
+		(&m_items[best_index], &m_items[best_index + 1],
+		 sizeof(m_items[0]) * (m_item_filled - best_index));
 
 	item->set_location(g, 0);
 
@@ -841,7 +841,9 @@ void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
 			continue;
 
 		--m_item_filled;
-		memmove(&m_items[i], &m_items[i+1], sizeof(m_items[0]) * (m_item_filled - i));
+		memmove
+			(&m_items[i], &m_items[i + 1],
+			 sizeof(m_items[0]) * (m_item_filled - i));
 
 		if (upcast(Game, game, g))
 			wake_up_capacity_queue(game);
@@ -871,10 +873,10 @@ void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
 void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 {
 	PendingItem* pi = 0;
-	int32_t i;
+	int32_t i = 0;
 
 	// Find the PendingItem entry
-	for (i = 0; i < m_item_filled; ++i) {
+	for (; i < m_item_filled; ++i) {
 		if (m_items[i].item != item)
 			continue;
 
@@ -899,8 +901,7 @@ void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 	pi->pending = false;
 
 	// Deal with the building case
-	if (nextstep == get_building())
-	{
+	if (nextstep == get_building()) {
 		molog("Flag::call_carrier(%u): Tell building to fetch this item\n", item->serial());
 
 		if (!get_building()->fetch_from_flag(g)) {
@@ -1009,7 +1010,7 @@ void Flag::cleanup(Editor_Game_Base *g)
 		}
 	}
 
-	get_economy()->remove_flag(this);
+	get_economy()->remove_flag(*this);
 
 	unset_position(g, m_position);
 
@@ -1306,7 +1307,7 @@ void Road::link_into_flags(Editor_Game_Base* gg) {
 	m_flags[FlagEnd]->attach_road(dir, this);
 	m_flagidx[FlagEnd] = dir;
 
-	Economy::check_merge(m_flags[FlagStart], m_flags[FlagEnd]);
+	Economy::check_merge(*m_flags[FlagStart], *m_flags[FlagEnd]);
 
 	// Mark Fields
 	mark_map(gg);
@@ -1346,7 +1347,7 @@ void Road::cleanup(Editor_Game_Base *gg)
 	m_flags[FlagStart]->detach_road(m_flagidx[FlagStart]);
 	m_flags[FlagEnd]->detach_road(m_flagidx[FlagEnd]);
 
-	Economy::check_split(m_flags[FlagStart], m_flags[FlagEnd]);
+	Economy::check_split(*m_flags[FlagStart], *m_flags[FlagEnd]);
 
 	m_flags[FlagStart]->update_items(g, m_flags[FlagEnd]);
 	m_flags[FlagEnd]->update_items(g, m_flags[FlagStart]);
@@ -1478,8 +1479,8 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 	// The algorithm is pretty simplistic, and has a bias towards keeping
 	// the worker around; there's obviously nothing wrong with that.
 	upcast(Carrier, carrier, m_carrier.get(g));
-	const std::vector<Worker*> workers = get_workers();
-	std::vector<Worker*> reassigned_workers;
+	std::vector<Worker *> const workers = get_workers();
+	std::vector<Worker *> reassigned_workers;
 
 	container_iterate_const(std::vector<Worker *>, workers, i) {
 		Worker & w = **i.current;
@@ -1600,11 +1601,11 @@ void Route::starttrim(int32_t count)
 /**
  * Keep the first count steps, truncate the rest.
 */
-void Route::truncate(int32_t count)
+void Route::truncate(int32_t const count)
 {
 	assert(count < static_cast<int32_t>(m_route.size()));
 
-	m_route.erase(m_route.begin()+count+1, m_route.end());
+	m_route.erase(m_route.begin() + count + 1, m_route.end());
 }
 
 
@@ -1614,7 +1615,7 @@ void Route::truncate(int32_t count)
  * \param data the caller must provide and manage this buffer that
  * stores information for a later call to \ref load_pointers
  */
-void Route::load(LoadData& data, FileRead& fr)
+void Route::load(LoadData & data, FileRead & fr)
 {
 	m_route.clear();
 
@@ -1797,7 +1798,7 @@ void Transfer::has_failed()
 	m_request->transfer_fail(*m_game, *this);
 }
 
-void Transfer::tlog(const char* fmt, ...)
+void Transfer::tlog(char const * const fmt, ...)
 {
 	char buffer[1024];
 	va_list va;
@@ -1844,24 +1845,21 @@ SupplyList::~SupplyList()
 /**
  * Add a supply to the list.
 */
-void SupplyList::add_supply(Supply* supp)
+void SupplyList::add_supply(Supply & supp)
 {
-	m_supplies.push_back(supp);
+	m_supplies.push_back(&supp);
 }
 
 /**
  * Remove a supply from the list.
 */
-void SupplyList::remove_supply(Supply* supp)
+void SupplyList::remove_supply(Supply & supp)
 {
-	for (uint32_t idx = 0; idx < m_supplies.size(); ++idx) {
-		if (m_supplies[idx] == supp) {
-			if (idx != m_supplies.size()-1)
-				m_supplies[idx] = m_supplies[m_supplies.size()-1];
-			m_supplies.pop_back();
-			return;
+	container_iterate(Supplies, m_supplies, i)
+		if (*i.current == &supp) {
+			*i.current = *(i.end - 1);
+			return m_supplies.pop_back();
 		}
-	}
 
 	throw wexception("SupplyList::remove: not in list");
 }
@@ -1984,27 +1982,25 @@ void WaresQueue::request_callback
 /**
  * Remove the wares in this queue from the given economy (used in accounting).
 */
-void WaresQueue::remove_from_economy(Economy* e)
+void WaresQueue::remove_from_economy(Economy & e)
 {
-	if (not m_ware)
-		return;
-
-	e->remove_wares(m_ware, m_filled);
-	if (m_request)
-		m_request->set_economy(0);
+	if (m_ware) {
+		e.remove_wares(m_ware, m_filled);
+		if (m_request)
+			m_request->set_economy(0);
+	}
 }
 
 /**
  * Add the wares in this queue to the given economy (used in accounting)
 */
-void WaresQueue::add_to_economy(Economy* e)
+void WaresQueue::add_to_economy(Economy & e)
 {
-	if (not m_ware)
-		return;
-
-	e->add_wares(m_ware, m_filled);
-	if (m_request)
-		m_request->set_economy(e);
+	if (m_ware) {
+		e.add_wares(m_ware, m_filled);
+		if (m_request)
+			m_request->set_economy(&e);
+	}
 }
 
 /**
@@ -2090,7 +2086,7 @@ void WaresQueue::Read
 		}
 
 		//  Now Economy stuff. We have to add our filled items to the economy.
-		add_to_economy(m_owner.get_economy());
+		add_to_economy(*m_owner.get_economy());
 	} else
 		throw wexception
 			("WaresQueue::Read: Unknown WaresQueueVersion %u!", packet_version);
@@ -2104,18 +2100,18 @@ Economy IMPLEMENTATION
 ==============================================================================
 */
 
-Economy::Economy(Player *player) :
-m_owner(player),
+Economy::Economy(Player & player) :
+	m_owner(player),
 m_rebuilding(false),
 m_request_timerid(0),
 mpf_cycle(0)
 {
-	Tribe_Descr const & tribe = player->tribe();
+	Tribe_Descr const & tribe = player.tribe();
 	Ware_Index const nr_wares = tribe.get_nrwares();
-	m_workers.set_nrwares(player->tribe().get_nrworkers());
+	m_workers.set_nrwares(tribe.get_nrworkers());
 	m_wares.set_nrwares(nr_wares);
 
-	player->add_economy(this);
+	player.add_economy(*this);
 
 	m_target_quantities = new Target_Quantity[nr_wares.value()];
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
@@ -2132,7 +2128,7 @@ Economy::~Economy()
 {
 	assert(!m_rebuilding);
 
-	m_owner->remove_economy(*this);
+	m_owner.remove_economy(*this);
 
 	if (m_requests.size())
 		log("Warning: Economy still has requests left on destruction\n");
@@ -2148,11 +2144,10 @@ Economy::~Economy()
 /**
  * \return an arbitrary flag in this economy, or 0 if no flag exists
  */
-Flag* Economy::get_arbitrary_flag()
+Flag & Economy::get_arbitrary_flag()
 {
-	if (m_flags.size())
-		return m_flags[0];
-	return 0;
+	assert(m_flags.size());
+	return *m_flags[0];
 }
 
 /**
@@ -2161,18 +2156,15 @@ Flag* Economy::get_arbitrary_flag()
  * Since we could merge into both directions, we preserve the economy that is
  * currently bigger (should be more efficient).
 */
-void Economy::check_merge(Flag *f1, Flag *f2)
+void Economy::check_merge(Flag & f1, Flag & f2)
 {
-	Economy *e1 = f1->get_economy();
-	Economy *e2 = f2->get_economy();
-
-	if (e1 == e2)
-		return;
-
-	if (e2->get_nrflags() > e1->get_nrflags())
-		std::swap(e1, e2);
-
-	e1->do_merge(e2);
+	Economy * e1 = f1.get_economy();
+	Economy * e2 = f2.get_economy();
+	if (e1 != e2) {
+		if (e1->get_nrflags() < e2->get_nrflags())
+			std::swap(e1, e2);
+		e1->do_merge(*e2);
+	}
 }
 
 /// If the two flags can no longer reach each other (pathfinding!), the economy
@@ -2205,20 +2197,18 @@ void Economy::check_merge(Flag *f1, Flag *f2)
 /// NOTE Many roads are built when a new building has just been placed. For
 /// NOTE those cases, the guess is bad because the user typically builds from
 /// NOTE the new building's flag to some existing flag (at the headquarter or
-/// NOTE somewhere in his larger road NOTE network). This is also what the user
+/// NOTE somewhere in his larger road network). This is also what the user
 /// NOTE interface makes the player do when it enters roadbuilding mode after
 /// NOTE placing a flag that is not connected with roads.               --sigra
-void Economy::check_split(Flag *f1, Flag *f2)
+void Economy::check_split(Flag & f1, Flag & f2)
 {
-	assert(f1 != f2);
-	assert(f1->get_economy() == f2->get_economy());
+	assert(&f1 != &f2);
+	assert(f1.get_economy() == f2.get_economy());
 
-	Economy *e = f1->get_economy();
+	Economy & e = *f1.get_economy();
 
-	if (e->find_route(f1, f2, 0, false))
-		return;
-
-	e->do_split(f2);
+	if (not e.find_route(&f1, &f2, 0, false))
+		e.do_split(f2);
 }
 
 /**
@@ -2353,10 +2343,10 @@ struct FlagQueue {
 	}
 
 	// Recursively check integrity
-	void debug(uint32_t node, const char *str)
+	void debug(uint32_t node, char const * const str)
 	{
-		uint32_t l = node*2 + 1;
-		uint32_t r = node*2 + 2;
+		uint32_t l = node * 2 + 1;
+		uint32_t r = node * 2 + 2;
 		if (m_data[node]->mpf_heapindex != static_cast<int32_t>(node)) {
 			fprintf(stderr, "%s: mpf_heapindex integrity!\n", str);
 			abort();
@@ -2441,11 +2431,11 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_
 		current->get_neighbours(&neighbours);
 
 		for (uint32_t i = 0; i < neighbours.size(); ++i) {
-			Flag *neighbour = neighbours[i].flag;
+			Flag * const neighbour = neighbours[i].flag;
 			int32_t cost;
 			int32_t wait_cost = 0;
 
-			// don't need to find the optimal path if we're just checking connectivity
+			//  No need to find the optimal path when only checking connectivity.
 			if (neighbour == end && !route)
 				return true;
 
@@ -2466,7 +2456,7 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_
 					(neighbour->get_position(), end->get_position());
 				neighbour->mpf_backlink = current;
 				Open.push(neighbour);
-			} else if (neighbour->cost() > cost+neighbour->mpf_estimate) {
+			} else if (cost + neighbour->mpf_estimate < neighbour->cost()) {
 				// found a better path to a field that's already Open
 				neighbour->mpf_realcost = cost;
 				neighbour->mpf_backlink = current;
@@ -2481,17 +2471,13 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_
 
 	// Unwind the path to form the route
 	if (route) {
-		Flag *flag;
-
 		route->clear();
 		route->m_totalcost = end->mpf_realcost;
 
-		flag = end;
-		for (;;) {
+		for (Flag * flag = end;; flag = flag->mpf_backlink) {
 			route->m_route.insert(route->m_route.begin(), flag);
 			if (flag == start)
 				break;
-			flag = flag->mpf_backlink;
 		}
 	}
 
@@ -2503,27 +2489,27 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_
  * Add a flag to the flag array.
  * Only call from Flag init and split/merger code!
 */
-void Economy::add_flag(Flag *flag)
+void Economy::add_flag(Flag & flag)
 {
-	assert(flag->get_economy() == 0);
+	assert(flag.get_economy() == 0);
 
-	m_flags.push_back(flag);
-	flag->set_economy(this);
-	flag->mpf_cycle = 0;
+	m_flags.push_back(&flag);
+	flag.set_economy(this);
+	flag.mpf_cycle = 0;
 }
 
 /**
  * Remove a flag from the flag array.
  * Only call from Flag cleanup and split/merger code!
 */
-void Economy::remove_flag(Flag *flag)
+void Economy::remove_flag(Flag & flag)
 {
-	assert(flag->get_economy() == this);
+	assert(flag.get_economy() == this);
 
 	do_remove_flag(flag);
 
 	// automatically delete the economy when it becomes empty.
-	if (!m_flags.size())
+	if (m_flags.empty())
 		delete this;
 }
 
@@ -2531,21 +2517,17 @@ void Economy::remove_flag(Flag *flag)
  * Remove the flag, but don't delete the economy automatically.
  * This is called from the merge code.
 */
-void Economy::do_remove_flag(Flag *flag)
+void Economy::do_remove_flag(Flag & flag)
 {
-	flag->set_economy(0);
+	flag.set_economy(0);
 
 	// fast remove
-	uint32_t i;
-	for (i = 0; i < m_flags.size(); ++i) {
-		if (m_flags[i] == flag) {
-			if (i < m_flags.size()-1)
-				m_flags[i] = m_flags[m_flags.size()-1];
-			break;
+	container_iterate(Flags, m_flags, i)
+		if (*i.current == &flag) {
+			*i.current = *(i.end - 1);
+			return m_flags.pop_back();
 		}
-	}
-	assert(i != m_flags.size());
-	m_flags.pop_back();
+	throw wexception("trying to remove nonexistent flag");
 }
 
 /**
@@ -2579,7 +2561,7 @@ void Economy::add_workers(Ware_Index const id, uint32_t const count)
 */
 void Economy::remove_wares(Ware_Index const id, uint32_t const count)
 {
-	assert(id < m_owner->tribe().get_nrwares());
+	assert(id < m_owner.tribe().get_nrwares());
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_wares.stock(id));
 
 	m_wares.remove(id, count);
@@ -2643,15 +2625,14 @@ void Economy::remove_warehouse(Warehouse *wh)
  * Consider the request, try to fulfill it immediately or queue it for later.
  * Important: This must only be called by the \ref Request class.
 */
-void Economy::add_request(Request* req)
+void Economy::add_request(Request & req)
 {
-	assert(req->is_open());
+	assert(req.is_open());
 	assert(!have_request(req));
 
-	if (!get_owner()) // our owner is deleted, we are cleaning up. So ignore this
-		return;
+	assert(&owner());
 
-	m_requests.push_back(req);
+	m_requests.push_back(&req);
 
 	// Try to fulfill the request
 	start_request_timer();
@@ -2661,23 +2642,25 @@ void Economy::add_request(Request* req)
  * \return true if the given Request is registered with the \ref Economy, false
  * otherwise
 */
-bool Economy::have_request(Request* req)
+bool Economy::have_request(Request & req)
 {
-	RequestList::iterator it = std::find(m_requests.begin(), m_requests.end(), req);
-
-	return it != m_requests.end();
+	return
+		std::find(m_requests.begin(), m_requests.end(), &req)
+		!=
+		m_requests.end();
 }
 
 /**
  * Remove the request from this economy.
  * Important: This must only be called by the \ref Request class.
 */
-void Economy::remove_request(Request* req)
+void Economy::remove_request(Request & req)
 {
-	RequestList::iterator it = std::find(m_requests.begin(), m_requests.end(), req);
+	RequestList::iterator const it =
+		std::find(m_requests.begin(), m_requests.end(), &req);
 
 	if (it == m_requests.end()) {
-		log("WARNING: remove_request(%p) not in list\n", req);
+		log("WARNING: remove_request(%p) not in list\n", &req);
 		return;
 	}
 
@@ -2689,29 +2672,17 @@ void Economy::remove_request(Request* req)
 /**
  * Add a supply to our list of supplies.
 */
-void Economy::add_supply(Supply * const supply)
+void Economy::add_supply(Supply & supply)
 {
 	m_supplies.add_supply(supply);
 	start_request_timer();
 }
 
-/**
- * \return true if the given supply is registered with the economy, false
- * otherwise
-*/
-bool Economy::have_supply(Supply * const supply)
-{
-	for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i)
-		if (&m_supplies[i] == supply)
-			return true;
-
-	return false;
-}
 
 /**
  * Remove a supply from our list of supplies.
 */
-void Economy::remove_supply(Supply * const supply)
+void Economy::remove_supply(Supply & supply)
 {
 	m_supplies.remove_supply(supply);
 }
@@ -2737,11 +2708,11 @@ bool Economy::needs_ware(Ware_Index const ware_type) const {
  * Also transfer all wares and wares request. Try to resolve the new ware
  * requests if possible.
 */
-void Economy::do_merge(Economy *e)
+void Economy::do_merge(Economy & e)
 {
-	for (Ware_Index::value_t i = m_owner->tribe().get_nrwares().value(); i;) {
+	for (Ware_Index::value_t i = m_owner.tribe().get_nrwares().value(); i;) {
 		--i;
-		Target_Quantity other_tq = e->m_target_quantities[i];
+		Target_Quantity other_tq = e.m_target_quantities[i];
 		Target_Quantity & this_tq = m_target_quantities[i];
 		if (this_tq.last_modified < other_tq.last_modified)
 			this_tq = other_tq;
@@ -2752,11 +2723,11 @@ void Economy::do_merge(Economy *e)
 	//  window for *this where the options window for e is, to give the user
 	//  some continuity.
 	if
-		(e->m_optionswindow_registry.window and
+		(e.m_optionswindow_registry.window and
 		 not m_optionswindow_registry.window)
 	{
-		m_optionswindow_registry.x = e->m_optionswindow_registry.x;
-		m_optionswindow_registry.x = e->m_optionswindow_registry.x;
+		m_optionswindow_registry.x = e.m_optionswindow_registry.x;
+		m_optionswindow_registry.x = e.m_optionswindow_registry.x;
 		show_options_window();
 	}
 
@@ -2765,12 +2736,12 @@ void Economy::do_merge(Economy *e)
 
 	// Be careful around here. The last e->remove_flag() will cause the other
 	// economy to delete itself.
-	for (std::vector<Flag *>::size_type i = e->get_nrflags(); i--;) {
-		assert(i+1 == e->get_nrflags());
+	for (std::vector<Flag *>::size_type i = e.get_nrflags(); i--;) {
+		assert(i + 1 == e.get_nrflags());
 
-		Flag *flag = e->m_flags[0];
+		Flag & flag = *e.m_flags[0];
 
-		e->do_remove_flag(flag);
+		e.do_remove_flag(flag);
 		add_flag(flag);
 	}
 
@@ -2778,55 +2749,54 @@ void Economy::do_merge(Economy *e)
 	m_rebuilding = false;
 
 	// implicitly delete the economy
-	delete e;
+	delete &e;
 }
 
-/**
- * Flag f and all its direct and indirect neighbours are put into a new economy.
-*/
-void Economy::do_split(Flag *f)
+/// Flag initial_flag and all its direct and indirect neighbours are put into a
+/// new economy.
+void Economy::do_split(Flag & initial_flag)
 {
-	Economy *e = new Economy(m_owner);
+	Economy & e = *new Economy(m_owner);
 
-	for (Ware_Index::value_t i = m_owner->tribe().get_nrwares().value(); i;) {
+	for (Ware_Index::value_t i = m_owner.tribe().get_nrwares().value(); i;) {
 		--i;
-		e->m_target_quantities[i] = m_target_quantities[i];
+		e.m_target_quantities[i] = m_target_quantities[i];
 	}
 
 	m_rebuilding = true;
-	e->m_rebuilding = true;
+	e.m_rebuilding = true;
 
 	// Use a vector instead of a set to ensure parallel simulation
-	std::vector<Flag*> open;
+	std::vector<Flag *> open;
 
-	open.push_back(f);
+	open.push_back(&initial_flag);
 	while (open.size()) {
-		f = *open.rbegin();
+		Flag & flag = **open.rbegin();
 		open.pop_back();
 
-		if (f->get_economy() != this)
+		if (flag.get_economy() != this)
 			continue;
 
 		// move this flag to the new economy
-		remove_flag(f);
-		e->add_flag(f);
+		remove_flag(flag);
+		e.add_flag(flag);
 
 		//  check all neighbours; if they aren't in the new economy yet, add them
 		// to the list (note: roads and buildings are reassigned via Flag::set_economy)
 		Neighbour_list neighbours;
-		f->get_neighbours(&neighbours);
+		flag.get_neighbours(&neighbours);
 
 		for (uint32_t i = 0; i < neighbours.size(); ++i) {
-			Flag *n = neighbours[i].flag;
+			Flag & n = *neighbours[i].flag;
 
-			if (n->get_economy() == this)
-				open.push_back(n);
+			if (n.get_economy() == this)
+				open.push_back(&n);
 		}
 	}
 
 	// Fix Supply/Request after rebuilding
 	m_rebuilding = false;
-	e->m_rebuilding = false;
+	e.m_rebuilding = false;
 
 	// As long as rebalance commands are tied to specific flags, we
 	// need this, because the flag that rebalance commands for us were
@@ -2837,14 +2807,12 @@ void Economy::do_split(Flag *f)
 /**
  * Make sure the request timer is running.
  */
-void Economy::start_request_timer(int32_t delta)
+void Economy::start_request_timer(int32_t const delta)
 {
-	if (upcast(Game, game, &m_owner->egbase()))
+	if (upcast(Game, game, &m_owner.egbase()))
 		game->cmdqueue().enqueue
 			(new Cmd_Call_Economy_Balance
-			 	(game->get_gametime() + delta,
-			 	 this,
-			 	 m_request_timerid));
+			 	(game->get_gametime() + delta, this, m_request_timerid));
 }
 
 
@@ -2865,7 +2833,6 @@ Supply * Economy::find_best_supply
 
 	for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i) {
 		Supply & supp = m_supplies[i];
-		Route* route;
 
 		// idle requests only get active supplies
 		if (req.is_idle() and not supp.is_active()) {
@@ -2885,7 +2852,8 @@ Supply * Economy::find_best_supply
 		if (!supp.nr_supplies(&game, &req))
 			continue;
 
-		route = (best_route != &buf_route0) ? &buf_route0 : &buf_route1;
+		Route * const route =
+			best_route != &buf_route0 ? &buf_route0 : &buf_route1;
 		// will be cleared by find_route()
 
 		int32_t cost_cutoff = best_cost;
@@ -3042,7 +3010,7 @@ void Economy::create_requested_workers(Game & game)
 			if (!req.is_idle() && req.get_type() == Request::WORKER) {
 				Ware_Index const index = req.get_index();
 				int32_t num_wares = 0;
-				Worker_Descr* w_desc=get_owner()->tribe().get_worker_descr(index);
+				Worker_Descr * const w_desc = tribe.get_worker_descr(index);
 
 				// Ignore it if is a worker that cann't be buildable
 				if (!w_desc->buildable())
@@ -3063,14 +3031,14 @@ void Economy::create_requested_workers(Game & game)
 						} // if (m_warehouses[n_wh]
 						++n_wh;
 					} // while (n_wh < get_nr_warehouses())
-					if (! created_worker) {
-						Warehouse* nearest = m_warehouses[0];//fix to nearest warehouse
+					if (! created_worker) { //  fix to nearest warehouse
+						Warehouse & nearest = *m_warehouses[0];
 						Worker_Descr::Buildcost const & cost = w_desc->buildcost();
 						container_iterate_const(Worker_Descr::Buildcost, cost, bc_it)
 							if
 								(Ware_Index const w_id =
 								 	tribe.ware_index(bc_it.current->first.c_str()))
-								nearest->set_needed(w_id, bc_it.current->second);
+								nearest.set_needed(w_id, bc_it.current->second);
 					}
 				} // if (num_wares == 0)
 			} // if (req->is_open())
@@ -3091,7 +3059,7 @@ void Economy::balance_requestsupply(uint32_t const timerid)
 	RSPairStruct rsps;
 	rsps.nexttimer = -1;
 
-	if (upcast(Game, game, &m_owner->egbase())) {
+	if (upcast(Game, game, &m_owner.egbase())) {
 
 		//  Try to fulfill non-idle Requests.
 		process_requests(*game, rsps);
@@ -3105,7 +3073,7 @@ void Economy::balance_requestsupply(uint32_t const timerid)
 			if
 				(!rsp.request               ||
 				 !rsp.supply                ||
-				 !have_request(rsp.request) ||
+				 !have_request(*rsp.request) ||
 				 !rsp.supply->nr_supplies(game, rsp.request))
 			{
 				log("NO: ware %i, priority %i\n", rsp.ware.value(), rsp.priority);
@@ -3125,10 +3093,8 @@ void Economy::balance_requestsupply(uint32_t const timerid)
 			rsp.request->set_last_request_time(owner().egbase().get_gametime());
 
 			//  for multiple wares
-			if (rsp.request && have_request(rsp.request)) {
-				log("  request is still around, reschedule timer\n");
+			if (rsp.request && have_request(*rsp.request))
 				rsps.nexttimer = 200;
-			}
 		}
 
 		if (rsps.nexttimer > 0) //  restart the timer, if necessary
@@ -3213,7 +3179,7 @@ Cmd_Call_Economy_Balance::Cmd_Call_Economy_Balance
 	(int32_t const starttime, Economy * const economy, uint32_t const timerid)
 	: GameLogicCommand(starttime)
 {
-	m_flag = economy->get_arbitrary_flag();
+	m_flag = &economy->get_arbitrary_flag();
 	m_timerid = timerid;
 }
 
@@ -3249,7 +3215,7 @@ void Cmd_Call_Economy_Balance::Read
 			Economy * const economy =
 				fr.Unsigned8 () ?
 				player->get_economy_by_number(fr.Unsigned16()) : 0;
-			m_flag = economy->get_arbitrary_flag();
+			m_flag = &economy->get_arbitrary_flag();
 			if (packet_version >= 2)
 				m_timerid = fr.Unsigned32();
 			else

@@ -330,12 +330,11 @@ void ProductionSite::init(Editor_Game_Base* g)
  *
  * \note Workers are dealt with in the PlayerImmovable code.
  */
-void ProductionSite::set_economy(Economy* e)
+void ProductionSite::set_economy(Economy * const e)
 {
-	if (Economy * const old = get_economy()) {
-		for (uint32_t i = 0; i < m_input_queues.size(); ++i)
-			m_input_queues[i]->remove_from_economy(old);
-	}
+	if (Economy * const old = get_economy())
+		container_iterate_const(Input_Queues, m_input_queues, i)
+			(*i.current)->remove_from_economy(*old);
 
 	Building::set_economy(e);
 	for (uint32_t i = descr().nr_working_positions(); i;)
@@ -343,8 +342,8 @@ void ProductionSite::set_economy(Economy* e)
 			r->set_economy(e);
 
 	if (e)
-		container_iterate_const(std::vector<WaresQueue *>, m_input_queues, i)
-			(*i.current)->add_to_economy(e);
+		container_iterate_const(Input_Queues, m_input_queues, i)
+			(*i.current)->add_to_economy(*e);
 }
 
 /**

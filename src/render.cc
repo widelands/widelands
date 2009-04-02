@@ -286,7 +286,7 @@ static void draw_minimap_int
 	if (not player or player->see_all()) for (uint32_t y = 0; y < rc.h; ++y) {
 		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
 		Widelands::FCoords f(Widelands::Coords(viewpoint.x, viewpoint.y + y), 0);
-		map.normalize_coords(&f);
+		map.normalize_coords(f);
 		f.field = &map[f];
 		Widelands::Map_Index i = Widelands::Map::get_index(f, mapwidth);
 		for (uint32_t x = 0; x < rc.w; ++x, pix += sizeof(T)) {
@@ -301,7 +301,7 @@ static void draw_minimap_int
 			Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
 			Widelands::FCoords f
 				(Widelands::Coords(viewpoint.x, viewpoint.y + y), 0);
-			map.normalize_coords(&f);
+			map.normalize_coords(f);
 			f.field = &map[f];
 			Widelands::Map_Index i = Widelands::Map::get_index(f, mapwidth);
 			for (uint32_t x = 0; x < rc.w; ++x, pix += sizeof(T)) {

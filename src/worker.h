@@ -98,8 +98,8 @@ public:
 		m_location = &location;
 	}
 
-	void set_location(PlayerImmovable *location);
-	void set_economy(Economy *economy);
+	void set_location(PlayerImmovable *);
+	void set_economy(Economy *);
 
 	WareInstance * get_carried_item(Editor_Game_Base * egbase) {
 		return reinterpret_cast<WareInstance *>(m_carried_item.get(egbase));

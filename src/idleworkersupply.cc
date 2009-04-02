@@ -32,9 +32,9 @@ namespace Widelands {
 /**
  * Automatically register with the worker's economy.
  */
-IdleWorkerSupply::IdleWorkerSupply(Worker* w): m_worker (w), m_economy(0)
+IdleWorkerSupply::IdleWorkerSupply(Worker & w) : m_worker (w), m_economy(0)
 {
-	set_economy(w->get_economy());
+	set_economy(w.get_economy());
 }
 
 
@@ -52,25 +52,21 @@ IdleWorkerSupply::~IdleWorkerSupply()
  */
 void IdleWorkerSupply::set_economy(Economy * const e)
 {
-	if (m_economy == e)
-		return;
-
-	if (m_economy)
-		m_economy->remove_supply(this);
-
-	m_economy = e;
-
-	if (m_economy)
-		m_economy->add_supply(this);
+	if (m_economy != e) {
+		if (m_economy)
+			m_economy->remove_supply(*this);
+		if ((m_economy = e))
+			m_economy->   add_supply(*this);
+	}
 }
 
 
 /**
  * Return the worker's position.
  */
-PlayerImmovable* IdleWorkerSupply::get_position(Game* g)
+PlayerImmovable * IdleWorkerSupply::get_position(Game * game)
 {
-	return m_worker->get_location(g);
+	return m_worker.get_location(game);
 }
 
 
@@ -78,10 +74,10 @@ uint32_t IdleWorkerSupply::nr_supplies(Game *, Request const * req) const
 {
 	assert
 		(req->get_type() != Request::WORKER or
-		 req->get_index() < m_worker->descr().tribe().get_nrworkers());
+		 req->get_index() < m_worker.descr().tribe().get_nrworkers());
 	if
 		(req->get_type() == Request::WORKER &&
-		 m_worker->descr().can_act_as(req->get_index()) &&
+		 m_worker.descr().can_act_as(req->get_index()) &&
 		 req->get_requirements().check(m_worker))
 		return 1;
 
@@ -102,11 +98,11 @@ Worker* IdleWorkerSupply::launch_worker(Game *, const Request* req)
 	if (req->get_type() != Request::WORKER)
 		throw wexception("IdleWorkerSupply: not a worker request");
 	if
-		(!m_worker->descr().can_act_as(req->get_index()) ||
+		(!m_worker.descr().can_act_as(req->get_index()) ||
 		 !req->get_requirements().check(m_worker))
 		throw wexception("IdleWorkerSupply: worker type mismatch");
 
-	return m_worker;
+	return &m_worker;
 }
 
 

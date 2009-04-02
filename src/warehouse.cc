@@ -89,7 +89,7 @@ void WarehouseSupply::set_economy(Economy * const e)
 		return;
 
 	if (m_economy) {
-		m_economy->remove_supply(this);
+		m_economy->remove_supply(*this);
 		for
 			(Ware_Index i = Ware_Index::First(); i < m_wares.get_nrwareids(); ++i)
 			if (m_wares.stock(i))
@@ -115,7 +115,7 @@ void WarehouseSupply::set_economy(Economy * const e)
 			 ++i)
 			if (m_workers.stock(i))
 				m_economy->add_workers(i, m_workers.stock(i));
-		m_economy->add_supply(this);
+		m_economy->add_supply(*this);
 	}
 }
 
@@ -695,7 +695,7 @@ uint32_t Warehouse::count_workers(Game* g, Ware_Index ware, const Requirements& 
 		if (Map_Object const * const w = i.current->get(g))
 			if (std::find(subs.begin(), subs.end(), &w->descr()) != subs.end())
 				//  This is one of the workers in our sum.
-				if (!req.check(w))
+				if (!req.check(*w))
 					--sum;
 
 	return sum;
@@ -722,7 +722,7 @@ Worker * Warehouse::launch_worker(Game * game, Ware_Index ware, const Requiremen
 					if (worker->name() == workername) {
 						--unincorporated;
 
-						if (req.check(worker)) {
+						if (req.check(*worker)) {
 							worker->reset_tasks(game);  //  forget everything you did
 							worker->set_location(this); //  back in a economy
 							m_incorporated_workers.erase(i.current);
@@ -768,6 +768,10 @@ void Warehouse::incorporate_worker(Game* g, Worker* w)
 	WareInstance * const item = w->fetch_carried_item(g); // rescue an item
 
 	//  We remove carriers, but we keep other workers around.
+	//  FIXME Remove all workers that do not have properties such as experience.
+	//  FIXME And even such workers should be removed and only a small record
+	//  FIXME with the experience (and possibly other data that must survive)
+	//  FIXME may be kept.
 	if (dynamic_cast<Carrier const *>(w)) {
 		w->remove(g);
 		w = 0;
@@ -871,8 +875,6 @@ void Warehouse::incorporate_item(Game* g, WareInstance* item)
 
 /*
 ===============
-Warehouse::idle_request_cb [static]
-
 Called when a transfer for one of the idle Requests completes.
 ===============
 */
@@ -890,11 +892,6 @@ void Warehouse::idle_request_cb
 }
 
 
-/*
-===============
-Warehouse_Descr::create_object
-===============
-*/
 Building * Warehouse_Descr::create_object() const
 {return new Warehouse(*this);}
 

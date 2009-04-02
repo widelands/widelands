@@ -25,7 +25,7 @@
 namespace Widelands {
 
 struct IdleWorkerSupply : public Supply {
-	IdleWorkerSupply(Worker *);
+	IdleWorkerSupply(Worker &);
 	~IdleWorkerSupply();
 
 	void set_economy(Economy *);
@@ -41,7 +41,7 @@ struct IdleWorkerSupply : public Supply {
 	virtual Worker * launch_worker(Game *, const Request*);
 
 private:
-	Worker  * m_worker;
+	Worker  & m_worker;
 	Economy * m_economy;
 };
 

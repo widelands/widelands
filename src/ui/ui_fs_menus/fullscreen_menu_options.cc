@@ -222,7 +222,7 @@ m_label_autosave
 	 _("Save game automatically every"), Align_VCenter),
 m_value_autosave
 	(this,
-	 m_xres * 770 / 1250, m_yres * 8333 / 10000,
+	 m_xres * 77 / 125, m_yres * 8333 / 10000,
 	 "15 min.", Align_Center),
 
 os(opt)
@@ -459,8 +459,8 @@ m_title
 // First options block
 m_ui_font_list
 	(this,
-	 m_xres      / 10, m_yres * 1667 / 10000,
-	 m_xres * 20 / 80, m_yres * 2833 / 10000,
+	 m_xres / 10, m_yres * 1667 / 10000,
+	 m_xres /  4, m_yres * 2833 / 10000,
 	 Align_Left, true),
 m_label_ui_font
 	(this,
@@ -479,7 +479,7 @@ m_label_speed
 	 _("Speed of a new game:"), Align_VCenter),
 m_value_speed
 	(this,
-	 m_xres * 770 / 1250, m_yres * 6467 / 10000,
+	 m_xres * 77 / 125, m_yres * 6467 / 10000,
 	 "1x", Align_Center),
 
 os(opt)
@@ -501,17 +501,13 @@ os(opt)
 		bool did_select_a_font = false;
 		bool cmpbool = !strcmp("serif", opt.ui_font.c_str());
 		did_select_a_font = cmpbool;
-		m_ui_font_list.add
-			(_("FreeSerif (Default)"),
-			  "serif", -1, cmpbool);
+		m_ui_font_list.add(_("FreeSerif (Default)"), "serif", -1, cmpbool);
 		cmpbool = !strcmp("sans", opt.ui_font.c_str());
 		did_select_a_font |= cmpbool;
-		m_ui_font_list.add
-			("FreeSans", "sans", -1, cmpbool);
+		m_ui_font_list.add("FreeSans", "sans", -1, cmpbool);
 		cmpbool = !strcmp(UI_FONT_NAME_WIDELANDS, opt.ui_font.c_str());
 		did_select_a_font |= cmpbool;
-		m_ui_font_list.add
-			("Widelands", UI_FONT_NAME_WIDELANDS, -1, cmpbool);
+		m_ui_font_list.add("Widelands", UI_FONT_NAME_WIDELANDS, -1, cmpbool);
 
 		// Fill with all left *.ttf files we find in fonts
 		filenameset_t files;
@@ -563,7 +559,7 @@ void Fullscreen_Menu_Advanced_Options::speedUpdate() {
 	if (os.speed_of_new_game == 0)
 		snprintf(text, sizeof(text), _("Pause"));
 	else
-		snprintf(text, sizeof(text), "%ix", os.speed_of_new_game/1000);
+		snprintf(text, sizeof(text), "%ix", os.speed_of_new_game / 1000);
 	m_value_speed.set_text(text);
 }
 

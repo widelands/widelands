@@ -103,7 +103,7 @@ typedef struct
 	z_stream stream;            /* zLib stream structure for inflate */
 
 	uLong pos_in_zipfile;       /* position in byte on the zipfile, for fseek*/
-	uLong stream_initialised;   /* flag set if stream structure is initialised*/
+	uLong stream_initialized;   /* flag set if stream structure is initialized*/
 
 	uLong offset_local_extrafield; //  offset of the local extra field
 	uInt  size_local_extrafield; //  size of the local extra field
@@ -1166,7 +1166,7 @@ extern int32_t ZEXPORT unzOpenCurrentFile3
 		return UNZ_INTERNALERROR;
 	}
 
-	pfile_in_zip_read_info->stream_initialised = 0;
+	pfile_in_zip_read_info->stream_initialized = 0;
 
 	if (method != NULL)
 		*method = static_cast<int32_t>(s->cur_file_info.compression_method);
@@ -1206,7 +1206,7 @@ extern int32_t ZEXPORT unzOpenCurrentFile3
 
 		err = inflateInit2(&pfile_in_zip_read_info->stream, -MAX_WBITS);
 		if (err == Z_OK)
-			pfile_in_zip_read_info->stream_initialised = 1;
+			pfile_in_zip_read_info->stream_initialized = 1;
 		else
 			return err;
 		//  windowBits is passed < 0 to tell that there is no zlib header. Note
@@ -1554,10 +1554,10 @@ extern int32_t ZEXPORT unzCloseCurrentFile (unzFile file)
 
 	free(pfile_in_zip_read_info->read_buffer);
 	pfile_in_zip_read_info->read_buffer = NULL;
-	if (pfile_in_zip_read_info->stream_initialised)
+	if (pfile_in_zip_read_info->stream_initialized)
 		inflateEnd(&pfile_in_zip_read_info->stream);
 
-	pfile_in_zip_read_info->stream_initialised = 0;
+	pfile_in_zip_read_info->stream_initialized = 0;
 	free(pfile_in_zip_read_info);
 
 	s->pfile_in_zip_read = NULL;
@@ -1719,7 +1719,7 @@ typedef struct linkedlist_data_s
 typedef struct
 {
 	z_stream stream;            /* zLib stream structure for inflate */
-	int32_t stream_initialised; /* 1 is stream is initialised */
+	int32_t stream_initialized; /* 1 is stream is initialized */
 	uInt pos_in_buffered_data;  /* last written byte in buffered_data */
 
 	uLong pos_local_header;     /* offset of the local header of the file
@@ -2101,7 +2101,7 @@ extern zipFile ZEXPORT zipOpen2
 		return NULL;
 	ziinit.begin_pos = ZTELL(ziinit.z_filefunc, ziinit.filestream);
 	ziinit.in_opened_file_inzip = 0;
-	ziinit.ci.stream_initialised = 0;
+	ziinit.ci.stream_initialized = 0;
 	ziinit.number_entry = 0;
 	ziinit.add_position_when_writting_offset = 0;
 	init_linkedlist(&(ziinit.central_dir));
@@ -2361,7 +2361,7 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3
 	zi->ci.crc32                = 0;
 	zi->ci.method               = method;
 	zi->ci.encrypt              = 0;
-	zi->ci.stream_initialised   = 0;
+	zi->ci.stream_initialized   = 0;
 	zi->ci.pos_in_buffered_data = 0;
 	zi->ci.raw                  = raw;
 	zi->ci.pos_local_header     = ZTELL(zi->z_filefunc, zi->filestream);
@@ -2570,7 +2570,7 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3
 			(&zi->ci.stream, level, Z_DEFLATED, windowBits, memLevel, strategy);
 
 		if (err == Z_OK)
-			zi->ci.stream_initialised = 1;
+			zi->ci.stream_initialized = 1;
 	}
 
 	if (err == Z_OK)
@@ -2734,7 +2734,7 @@ extern int32_t ZEXPORT zipCloseFileInZipRaw (zipFile file, uLong uncompressed_si
 
 	if ((zi->ci.method == Z_DEFLATED) && (!zi->ci.raw)) {
 		err = deflateEnd(&zi->ci.stream);
-		zi->ci.stream_initialised = 0;
+		zi->ci.stream_initialized = 0;
 	}
 
 	if (!zi->ci.raw) {

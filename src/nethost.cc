@@ -912,9 +912,8 @@ void NetHost::welcomeClient
 	// even if the network protocol is the same, the data might be different.
 	if (client.build_id != build_id())
 		sendSystemChat
-			(_
-			  ("WARNING: %s uses version: %s, while Host uses version: %s"),
-			   effective_name.c_str(), client.build_id.c_str(), build_id().c_str());
+			(_("WARNING: %s uses version: %s, while Host uses version: %s"),
+			 effective_name.c_str(), client.build_id.c_str(), build_id().c_str());
 
 	s.reset();
 	s.Unsigned8(NETCMD_SETTING_MAP);

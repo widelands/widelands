@@ -151,9 +151,8 @@ public:
 
 	virtual void set_economy(Economy *);
 
-	std::vector<WaresQueue *> const & warequeues() const {
-		return m_input_queues;
-	}
+	typedef std::vector<WaresQueue *> Input_Queues;
+	Input_Queues const & warequeues() const {return m_input_queues;}
 	std::vector<Worker *> const & workers() const;
 
 protected:
@@ -207,7 +206,7 @@ protected:  // TrainingSite must have access to this stuff
 	int32_t                      m_post_timer;    ///< Time to schedule after ends
 
 	ProductionProgram::ActProduce::Items m_produced_items;
-	std::vector<WaresQueue *> m_input_queues; ///< input queues for all inputs
+	Input_Queues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
 	bool                     m_statistics_changed;
 	char                     m_statistics_buf[40];

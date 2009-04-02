@@ -255,15 +255,14 @@ void Map_Flagdata_Data_Packet::Write
 		fw.Unsigned16(capacity_wait.size());
 		container_iterate_const(std::vector<OPtr<Worker> >, capacity_wait, i) {
 			Worker const * const obj = i.current->get(egbase);
-			// This is a very crude hack to support old and broken savegames,
-			// where workers weren't correctly removed from the capacity wait queue.
-			// See bug #1919495.
-			if (obj && obj->get_state(&Worker::taskWaitforcapacity)) {
+				//  This is a very crude hack to support old and broken savegames,
+				//  where workers were not correctly removed from the capacity wait
+				//  queue. See bug #1919495.
+				if (obj && obj->get_state(Worker::taskWaitforcapacity)) {
 				assert(os->is_object_known(obj));
 				fw.Unsigned32(os->get_object_file_index(obj));
-			} else {
-				fw.Unsigned32(0);
-			}
+				} else
+					fw.Unsigned32(0);
 		}
 		const std::list<Flag::FlagJob> & flag_jobs = flag->m_flag_jobs;
 		fw.Unsigned16(flag_jobs.size());

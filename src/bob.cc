@@ -315,28 +315,28 @@ void Bob::pop_task(Game* g)
  * Get the bottom-most (usually the only) state of this task from the stack.
  * \return 0 if this task is not running at all.
  */
-Bob::State* Bob::get_state(const Task* task)
+Bob::State * Bob::get_state(Task const & task)
 {
 	std::vector<State>::iterator it = m_stack.end();
 
 	while (it != m_stack.begin()) {
 		--it;
 
-		if (it->task == task)
+		if (it->task == &task)
 			return &*it;
 	}
 
 	return 0;
 }
 
-const Bob::State* Bob::get_state(const Task* task) const
+Bob::State const * Bob::get_state(Task const & task) const
 {
 	std::vector<State>::const_iterator it = m_stack.end();
 
 	while (it != m_stack.begin()) {
 		--it;
 
-		if (it->task == task)
+		if (it->task == &task)
 			return &*it;
 	}
 
@@ -892,8 +892,8 @@ int32_t Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
 			return -1;
 	}
 
-	// Always call checkFieldBlocked, because it might communicate
-	// with other bobs (as is the case for soldiers on the battlefield)
+	//  Always call checkNodeBlocked, because it might communicate with other
+	//  bobs (as is the case for soldiers on the battlefield).
 	if (checkFieldBlocked(g, newf, true)) {
 		if (!force)
 			return -2;

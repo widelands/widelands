@@ -247,7 +247,7 @@ struct Map {
 	Field & operator[](Coords) const;
 	Field * get_field(Coords) const __attribute__((deprecated));
 	FCoords get_fcoords(Coords) const;
-	void normalize_coords(Coords *) const;
+	void normalize_coords(Coords &) const;
 	FCoords get_fcoords(Field &) const;
 	void get_coords(Field & f, Coords & c) const;
 
@@ -348,7 +348,7 @@ struct Map {
 	Manager<Objective>        & mom()       {return m_mom;}
 
 	/// Returns the military influence on a location from an area.
-	Military_Influence calc_influence(const Coords a, const Area<>) const;
+	Military_Influence calc_influence(Coords, Area<>) const;
 
 private:
 	void set_size(uint32_t w, uint32_t h);
@@ -491,12 +491,12 @@ inline FCoords Map::get_fcoords(const Coords c) const
 	return FCoords(c, &operator[](c));
 }
 
-inline void Map::normalize_coords(Coords * c) const
+inline void Map::normalize_coords(Coords & c) const
 {
-	while (c->x < 0)         c->x += m_width;
-	while (c->x >= m_width)  c->x -= m_width;
-	while (c->y < 0)         c->y += m_height;
-	while (c->y >= m_height) c->y -= m_height;
+	while (c.x < 0)         c.x += m_width;
+	while (c.x >= m_width)  c.x -= m_width;
+	while (c.y < 0)         c.y += m_height;
+	while (c.y >= m_height) c.y -= m_height;
 }
 
 

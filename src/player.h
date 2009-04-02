@@ -392,9 +392,9 @@ struct Player :
 		(Building *, Building_Index index_of_new_building);
 
 	// Economy stuff
-	void    add_economy(Economy *);
+	void    add_economy(Economy &);
 	void remove_economy(Economy &);
-	bool    has_economy(Economy *) const throw ();
+	bool    has_economy(Economy &) const throw ();
 	typedef std::vector<Economy *> Economies;
 	Economies::size_type get_economy_number(Economy const *) const throw ();
 	Economy * get_economy_by_number(Economies::size_type const i) const {

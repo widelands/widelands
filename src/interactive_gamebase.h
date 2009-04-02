@@ -62,7 +62,7 @@ struct Interactive_GameBase : public Interactive_Base {
 
 	// Chat messages
 	void set_chat_provider(ChatProvider &);
-	ChatProvider* get_chat_provider();
+	ChatProvider * get_chat_provider();
 
 	std::string const & building_census_format      () const {
 		return m_building_census_format;

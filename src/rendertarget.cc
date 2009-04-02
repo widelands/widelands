@@ -374,8 +374,8 @@ void RenderTarget::rendermap
 		int32_t br_posx = r_posx - TRIANGLE_WIDTH / 2;
 
 		// Calculate safe (bounded) field coordinates and get field pointers
-		map.normalize_coords(&r);
-		map.normalize_coords(&br);
+		map.normalize_coords(r);
+		map.normalize_coords(br);
 		Widelands::Map_Index  r_index = Map::get_index (r, mapwidth);
 		r.field = &map[r_index];
 		Widelands::Map_Index br_index = Map::get_index(br, mapwidth);
@@ -484,8 +484,8 @@ void RenderTarget::rendermap
 					(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 
 				// Calculate safe (bounded) field coordinates and get field pointers
-				map.normalize_coords(&r);
-				map.normalize_coords(&br);
+				map.normalize_coords(r);
+				map.normalize_coords(br);
 				Widelands::Map_Index  r_index = Map::get_index (r, mapwidth);
 				r.field = &map[r_index];
 				Widelands::Map_Index br_index = Map::get_index(br, mapwidth);
@@ -641,8 +641,8 @@ void RenderTarget::rendermap
 					viewofs.x;
 
 				//  Calculate safe (bounded) field coordinates.
-				map.normalize_coords(&r);
-				map.normalize_coords(&b);
+				map.normalize_coords(r);
+				map.normalize_coords(b);
 
 				//  Get field pointers.
 				r.field = &map[Map::get_index(r, mapwidth)];
@@ -711,8 +711,8 @@ void RenderTarget::rendermap
 					viewofs.x;
 
 				//  Calculate safe (bounded) field coordinates.
-				map.normalize_coords(&f);
-				map.normalize_coords(&br);
+				map.normalize_coords(f);
+				map.normalize_coords(br);
 
 				//  Get field pointers.
 				f.field  = &map[Map::get_index(f,  mapwidth)];
@@ -792,8 +792,8 @@ void RenderTarget::rendermap
 		int32_t br_posx = r_posx - TRIANGLE_WIDTH / 2;
 
 		// Calculate safe (bounded) field coordinates and get field pointers
-		map.normalize_coords(&r);
-		map.normalize_coords(&br);
+		map.normalize_coords(r);
+		map.normalize_coords(br);
 		Widelands::Map_Index  r_index = Map::get_index (r, mapwidth);
 		r.field = &map[r_index];
 		Widelands::Map_Index br_index = Map::get_index(br, mapwidth);
@@ -883,8 +883,8 @@ void RenderTarget::rendermap
 				FCoords br(Coords(linear_fx - not row_is_forward2, linear_fy2 + 1));
 
 				// Calculate safe (bounded) field coordinates and get field pointers
-				map.normalize_coords(&r);
-				map.normalize_coords(&br);
+				map.normalize_coords(r);
+				map.normalize_coords(br);
 				Widelands::Map_Index  r_index = Map::get_index (r, mapwidth);
 				r.field = &map[r_index];
 				Widelands::Map_Index br_index = Map::get_index(br, mapwidth);
@@ -1011,8 +1011,8 @@ void RenderTarget::rendermap
 					viewofs.x;
 
 				//  Calculate safe (bounded) field coordinates.
-				map.normalize_coords(&r);
-				map.normalize_coords(&b);
+				map.normalize_coords(r);
+				map.normalize_coords(b);
 
 				//  Get field pointers.
 				r.field = &map[Map::get_index(r, mapwidth)];
@@ -1076,8 +1076,8 @@ void RenderTarget::rendermap
 					viewofs.x;
 
 				//  Calculate safe (bounded) field coordinates.
-				map.normalize_coords(&f);
-				map.normalize_coords(&br);
+				map.normalize_coords(f);
+				map.normalize_coords(br);
 
 				//  Get field pointers.
 				f.field  = &map[Map::get_index(f,  mapwidth)];

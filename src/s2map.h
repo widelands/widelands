@@ -152,7 +152,7 @@ struct S2_Map_Loader : public Widelands::Map_Loader {
 private:
 	char  m_filename[256];
 
-	uint8_t * load_s2mf_section(FileRead *, int32_t width, int32_t height);
+	uint8_t * load_s2mf_section(FileRead &, int32_t width, int32_t height);
 	void load_s2mf_header();
 	void load_s2mf(Widelands::Editor_Game_Base *);
 };
