@@ -44,6 +44,7 @@ namespace Widelands {
 
 class Flag;
 struct Tribe_Descr;
+struct WaresQueue;
 
 class Building;
 
@@ -166,6 +167,9 @@ public:
 
 	std::string info_string(std::string const & format);
 	virtual std::string get_statistics_string();
+
+	/// \Returns the queue for a ware type or \throws _wexception.
+	virtual WaresQueue & waresqueue(Ware_Index) __attribute__ ((noreturn));
 
 	/// Fills the building with things that it would normally request
 	/// (wares/workers/soldiers).

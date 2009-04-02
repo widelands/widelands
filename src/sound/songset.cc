@@ -91,7 +91,7 @@ Mix_Music * Songset::get_song()
 #else
 #warning Please update your SDL_mixer library to at least version 1.2.6!!!
 
-#ifdef __WIN32__
+#ifdef WIN32
 	// Hack for windows, works because cwd is directory where
 	// executable is in
 	m_m = Mix_LoadMUS(filename.c_str());
@@ -112,8 +112,8 @@ Mix_Music * Songset::get_song()
 	m_m = Mix_LoadMUS(tempfile);
 	//TODO: this should use a RWopsified version!
 
-#endif // __WIN32__
-#endif // NEW_SDL_MIXER == 1
+#endif
+#endif
 
 	if (m_m)
 		log("Sound_Handler: loaded song \"%s\"\n", filename.c_str());

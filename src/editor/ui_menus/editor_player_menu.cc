@@ -243,7 +243,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 			(&parent,
 			 _("Error!"),
 			 _
-			 	("Can't remove player. It is referenced in some place. Remove "
+			 	("Can not remove player. It is referenced in some place. Remove "
 			 	 "all buildings, bobs, triggers and events that depend on this "
 			 	 "player and try again."),
 			 UI::MessageBox::OK);
@@ -262,7 +262,7 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 		std::string t = m_plr_set_tribes_buts[n]->get_title();
 		if (!Widelands::Tribe_Descr::exists_tribe(t))
 			throw wexception
-				("Map defines tribe %s, but it doesn't exist!", t.c_str());
+				("Map defines tribe %s, but it does not exist!", t.c_str());
 		uint32_t i;
 		for (i = 0; i < m_tribes.size(); ++i)
 			if (m_tribes[i] == t)
@@ -275,9 +275,9 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 			(&parent,
 			 _("Error!"),
 			 _
-			 	("Can't change player tribe. It is referenced in some place. "
-			 	 "Remove all buildings, bobs, triggers and events that depend on "
-			 	 "this tribe and try again."),
+			 	("Can not change player tribe. It is referenced in some place. "
+			 	 "Remove all bobs, triggers and events that depend on this tribe "
+			 	 "and try again."),
 			 UI::MessageBox::OK);
 		mmb.run();
 	}

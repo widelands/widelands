@@ -155,7 +155,7 @@ void Bob::init(Editor_Game_Base* gg)
  */
 void Bob::cleanup(Editor_Game_Base *gg)
 {
-	while (m_stack.size())
+	while (m_stack.size()) //  bobs in the editor do not have tasks
 		do_pop_task(dynamic_cast<Game*>(gg));
 
 	set_owner(0); // implicitly remove ourselves from owner's map

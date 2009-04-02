@@ -472,8 +472,6 @@ void Carrier::find_pending_item(Game* g)
 			(g, road.get_flag(Road::FlagStart));
 		if (!ok)
 			throw wexception("Carrier::find_pending_item: end flag is messed up");
-
-		return;
 	}
 }
 

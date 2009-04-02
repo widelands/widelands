@@ -17,8 +17,9 @@
  *
  */
 
-#include "game.h"
 #include "idleworkersupply.h"
+
+#include "game.h"
 #include "player.h"
 #include "request.h"
 #include "requirements.h"

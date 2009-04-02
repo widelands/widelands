@@ -360,7 +360,7 @@ void FieldDebugWindow::think()
 		switch (vision) {
 		case 0: str += "  never seen\n"; break;
 		case 1: {
-			const AnimationData* data = 0;
+			AnimationData const * data = 0;
 			if (player_field.map_object_descr[Widelands::TCoords<>::None])
 				data = g_anim.get_animation
 					(player_field.map_object_descr[Widelands::TCoords<>::None]->main_animation());

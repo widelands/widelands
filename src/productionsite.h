@@ -134,6 +134,8 @@ public:
 	virtual std::string get_statistics_string();
 	int8_t get_statistics_percent() {return m_last_stat_percent;}
 
+	virtual WaresQueue & waresqueue(Ware_Index);
+
 	void prefill
 		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
 

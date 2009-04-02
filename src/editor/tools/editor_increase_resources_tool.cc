@@ -19,12 +19,11 @@
 
 #include "editor_increase_resources_tool.h"
 
+#include "editorinteractive.h"
+#include "field.h"
 #include "graphic.h"
 #include "map.h"
-#include "field.h"
-#include "editorinteractive.h"
 #include "world.h"
-#include "map.h"
 #include "overlay_manager.h"
 #include "worlddata.h"
 

@@ -17,10 +17,11 @@
  *
  */
 
+#include "worker_program.h"
+
 #include "helper.h"
 #include "profile.h"
 #include "findnode.h"
-#include "worker_program.h"
 
 namespace Widelands {
 

@@ -37,11 +37,12 @@
 
 struct md5_checksum;
 
-class StreamRead;
-class StreamWrite;
-
-
 namespace Widelands {
+struct Command;
+struct Game;
+struct PlayerCommand;
+struct StreamRead;
+struct StreamWrite;
 
 /**
  * Read game replays from disk.

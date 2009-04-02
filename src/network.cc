@@ -28,10 +28,6 @@ Cmd_NetCheckSync::Cmd_NetCheckSync(int32_t const dt, SyncCallback * const cb) :
 Command (dt), m_callback(cb)
 {}
 
-int32_t Cmd_NetCheckSync::get_id()
-{
-	return QUEUE_CMD_NETCHECKSYNC;
-}
 
 void Cmd_NetCheckSync::execute (Widelands::Game *) {
 	m_callback->syncreport();
@@ -43,7 +39,7 @@ NetworkTime::NetworkTime()
 	reset(0);
 }
 
-void NetworkTime::reset(int32_t ntime)
+void NetworkTime::reset(int32_t const ntime)
 {
 	m_networktime = m_time = ntime;
 	m_lastframe = WLApplication::get()->get_time();
@@ -56,9 +52,9 @@ void NetworkTime::fastforward()
 	m_lastframe = WLApplication::get()->get_time();
 }
 
-void NetworkTime::think(uint32_t speed)
+void NetworkTime::think(uint32_t const speed)
 {
-	int32_t curtime = WLApplication::get()->get_time();
+	int32_t const curtime = WLApplication::get()->get_time();
 	int32_t delta = curtime - m_lastframe;
 	m_lastframe = curtime;
 
@@ -71,7 +67,7 @@ void NetworkTime::think(uint32_t speed)
 
 	delta = (delta * speed) / 1000;
 
-	int32_t behind = m_networktime - m_time;
+	int32_t const behind = m_networktime - m_time;
 
 	// Play catch up
 	uint32_t speedup = 0;
@@ -103,17 +99,14 @@ int32_t NetworkTime::networktime() const
 	return m_networktime;
 }
 
-void NetworkTime::recv(int32_t ntime)
+void NetworkTime::recv(int32_t const ntime)
 {
-	if (ntime - m_networktime < 0)
+	if (ntime < m_networktime)
 		throw wexception("NetworkTime: Time appears to be running backwards.");
 
-	uint32_t behind = m_networktime - m_time;
+	uint32_t const behind = m_networktime - m_time;
 
-	if (behind < m_latency)
-		m_latency = behind;
-	else
-		m_latency = ((m_latency * 7) + behind) / 8;
+	m_latency = behind < m_latency ? behind : ((m_latency * 7) + behind) / 8;
 
 #if 0
 	log
@@ -142,9 +135,9 @@ void SendPacket::Data(const void * const data, const size_t size)
 
 void SendPacket::send (TCPsocket sock)
 {
-	uint32_t length = buffer.size();
+	uint32_t const length = buffer.size();
 
-	assert (length<0x10000);
+	assert (length < 0x10000);
 
 	// update packet length
 	buffer[0] = length >> 8;
@@ -164,7 +157,7 @@ void SendPacket::reset ()
 
 RecvPacket::RecvPacket (Deserializer & des)
 {
-	uint16_t size = des.queue[0] << 8 | des.queue[1];
+	uint16_t const size = des.queue[0] << 8 | des.queue[1];
 
 	// The following should be caught by Deserializer::read and ::avail
 	assert(des.queue.size() >= static_cast<size_t>(size));
@@ -195,21 +188,13 @@ bool RecvPacket::EndOfFile() const
 bool Deserializer::read (TCPsocket sock)
 {
 	uint8_t buffer[512];
-	int32_t bytes;
-
-	bytes = SDLNet_TCP_Recv(sock, buffer, sizeof(buffer));
+	int32_t const bytes = SDLNet_TCP_Recv(sock, buffer, sizeof(buffer));
 	if (bytes <= 0)
 		return false;
 
 	queue.insert(queue.end(), &buffer[0], &buffer[bytes]);
 
-	if (queue.size() >= 2) {
-		uint16_t size = queue[0] << 8 | queue[1];
-		if (size < 2)
-			return false;
-	}
-
-	return true;
+	return queue.size() < 2 or 2 <= (queue[0] << 8 | queue[1]);
 }
 
 /**
@@ -220,7 +205,7 @@ bool Deserializer::avail() const
 	if (queue.size() < 2)
 		return false;
 
-	uint16_t size = queue[0] << 8 | queue[1];
+	uint16_t const size = queue[0] << 8 | queue[1];
 	if (size < 2)
 		return false;
 

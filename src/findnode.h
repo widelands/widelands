@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,14 +39,16 @@ private:
 			if (--refcount == 0)
 				delete this;
 		}
-		virtual bool accept(const Map &, const FCoords& coord) const = 0;
+		virtual bool accept(Map const &, FCoords const & coord) const = 0;
 
 		int refcount;
 	};
 	template<typename T>
 	struct Capsule : public BaseCapsule {
 		Capsule(T const & _op) : op(_op) {}
-		bool accept(const Map & map, const FCoords& coord) const {return op.accept(map, coord);}
+		bool accept(Map const & map, FCoords const & coord) const {
+			return op.accept(map, coord);
+		}
 
 		const T op;
 	};
@@ -62,7 +64,7 @@ public:
 		capsule->deref();
 		capsule = 0;
 	}
-	FindNode& operator= (FindNode const & o) {
+	FindNode & operator= (FindNode const & o) {
 		capsule->deref();
 		capsule = o.capsule;
 		capsule->addref();
@@ -75,7 +77,7 @@ public:
 	}
 
 	// Return true if this node should be returned by find_fields()
-	bool accept(const Map & map, const FCoords& coord) const {
+	bool accept(Map const & map, FCoords const & coord) const {
 		return capsule->accept(map, coord);
 	}
 };
@@ -83,7 +85,7 @@ public:
 struct FindNodeCaps {
 	FindNodeCaps(uint8_t mincaps) : m_mincaps(mincaps) {}
 
-	bool accept(Map const &, const FCoords&) const;
+	bool accept(Map const &, FCoords const &) const;
 
 private:
 	uint8_t m_mincaps;
@@ -95,7 +97,7 @@ struct FindNodeAnd {
 
 	void add(FindNode const &, bool negate = false);
 
-	bool accept(Map const &, const FCoords&) const;
+	bool accept(Map const &, FCoords const &) const;
 
 private:
 	struct Subfunctor {
@@ -122,7 +124,7 @@ struct FindNodeSize {
 
 	FindNodeSize(Size size) : m_size(size) {}
 
-	bool accept(Map const &, const FCoords&) const;
+	bool accept(Map const &, FCoords const &) const;
 
 private:
 	Size m_size;
@@ -139,7 +141,7 @@ struct FindNodeImmovableSize {
 
 	FindNodeImmovableSize(uint32_t sizes) : m_sizes(sizes) {}
 
-	bool accept(Map const &, const FCoords&) const;
+	bool accept(Map const &, FCoords const &) const;
 
 private:
 	uint32_t m_sizes;
@@ -149,7 +151,7 @@ private:
 struct FindNodeImmovableAttribute {
 	FindNodeImmovableAttribute(uint32_t attrib) : m_attribute(attrib) {}
 
-	bool accept(Map const &, const FCoords&) const;
+	bool accept(Map const &, FCoords const &) const;
 
 private:
 	uint32_t m_attribute;
@@ -160,7 +162,7 @@ private:
 struct FindNodeResource {
 	FindNodeResource(uint8_t res) : m_resource(res) {}
 
-	bool accept(Map const &, const FCoords&) const;
+	bool accept(Map const &, FCoords const &) const;
 
 private:
 	uint8_t m_resource;
@@ -171,7 +173,7 @@ private:
 struct FindNodeResourceBreedable {
 	FindNodeResourceBreedable(uint8_t res) : m_resource(res) {}
 
-	bool accept(Map const &, const FCoords&) const;
+	bool accept(Map const &, FCoords const &) const;
 
 private:
 	uint8_t m_resource;

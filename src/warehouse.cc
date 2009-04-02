@@ -750,7 +750,8 @@ Worker * Warehouse::launch_worker(Game * game, Ware_Index ware, const Requiremen
 		}
 	} while (ware != Ware_Index::Null());
 
-	throw wexception("Warehouse::launch_worker: Worker doesn't actually exist");
+	throw wexception
+		("Warehouse::launch_worker: worker does not actually exist");
 }
 
 
@@ -899,7 +900,7 @@ Building * Warehouse_Descr::create_object() const
 bool Warehouse::can_create_worker(Game &, Ware_Index const worker) const {
 	if (not (worker < m_supply->get_workers().get_nrwareids()))
 		throw wexception
-			("Worker type %d doesn't exists! (max is %d)",
+			("worker type %d does not exists (max is %d)",
 			 worker.value(), m_supply->get_workers().get_nrwareids().value());
 
 	const Tribe_Descr & tribe = owner().tribe();

@@ -89,7 +89,7 @@ void Sound_Handler::init()
 	//Windows Music has crickling inside if the buffer has another size
 	//than 4k, but other systems work fine with less, some crash
 	//with big buffers.
-#ifdef __WIN32__
+#ifdef WIN32
 	const uint16_t bufsize = 4096;
 #else
 	const uint16_t bufsize = 1024;
@@ -119,8 +119,8 @@ void Sound_Handler::init()
 
 void Sound_Handler::shutdown()
 {
-	Mix_ChannelFinished(NULL);
-	Mix_HookMusicFinished(NULL);
+	Mix_ChannelFinished(0);
+	Mix_HookMusicFinished(0);
 
 	Mix_CloseAudio();
 }
@@ -245,7 +245,7 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 		void *buf;
 
 		//create a tempfile
-#ifdef __WIN32__
+#ifdef WIN32
 		char szTempName[1024];
 		char lpPathBuffer[1024];
 
@@ -263,18 +263,18 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 		tempfile = mktemp(strdup("/tmp/widelands-sfx.XXXXXXXX"));
 #endif
 
-		if (tempfile == NULL) {
+		if (not tempfile) {
 			log
 				("Could not create tempfile /tmp/widelands-sfx.XXXXXXXX! Cannot "
 				 "load music.");
-			return NULL;
+			return 0;
 		}
 
 		f = fopen(tempfile, "w+");
 
-		if (f == NULL) {
+		if (not f) {
 			log("Could not open %s for writing! Cannot load music.", tempfile);
-			return NULL;
+			return 0;
 		}
 
 		// Note: SDL_RWFromFP is not available under windows
@@ -285,11 +285,9 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 				("SDL_RWFromFP failed miserably on %s: %s.\n",
 				 tempfile, SDL_GetError());
 		}
-		buf = malloc(fr->GetSize());
-
-		if (buf == NULL) {
+		if (not (buf = malloc(fr->GetSize()))) {
 			log("Could not write to %s! Cannot load music.", tempfile);
-			return NULL;
+			return 0;
 		}
 
 		//write music from src to a tempfile
@@ -307,7 +305,7 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 
 		free(buf);
 
-#ifdef __WIN32__
+#ifdef WIN32
 		DeleteFile(tempfile);
 
 #else

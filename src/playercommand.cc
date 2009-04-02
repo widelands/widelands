@@ -181,20 +181,20 @@ void Cmd_Bulldoze::Write
 Cmd_Build::Cmd_Build (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
-	id = Building_Index(static_cast<Building_Index::value_t>(des.Signed16()));
+	bi = Building_Index(static_cast<Building_Index::value_t>(des.Signed16()));
 	coords = des.Coords32  ();
 }
 
 void Cmd_Build::execute (Game* g)
 {
 	Player *player = g->get_player(get_sender());
-	player->build(coords, id);
+	player->build(coords, bi);
 }
 
 void Cmd_Build::serialize (StreamWrite & ser) {
 	ser.Unsigned8 (PLCMD_BUILD);
 	ser.Unsigned8 (get_sender());
-	ser.Signed16  (id.value());
+	ser.Signed16  (bi.value());
 	ser.Coords32  (coords);
 }
 #define PLAYER_CMD_BUILD_VERSION 1
@@ -205,7 +205,9 @@ void Cmd_Build::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == PLAYER_CMD_BUILD_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
-			id     = Building_Index(static_cast<Building_Index::value_t>(fr.Unsigned16()));
+			bi     =
+				Building_Index
+					(static_cast<Building_Index::value_t>(fr.Unsigned16()));
 			coords = fr.Coords32  (egbase.map().extent());
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
@@ -221,7 +223,7 @@ void Cmd_Build::Write
 	fw.Unsigned16(PLAYER_CMD_BUILD_VERSION);
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
-	fw.Unsigned16(id.value());
+	fw.Unsigned16(bi.value());
 	fw.Coords32  (coords);
 }
 
@@ -484,13 +486,13 @@ Cmd_EnhanceBuilding::Cmd_EnhanceBuilding (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
 	serial = des.Unsigned32();
-	id = Building_Index(static_cast<Building_Index::value_t>(des.Unsigned16()));
+	bi = Building_Index(static_cast<Building_Index::value_t>(des.Unsigned16()));
 }
 
 void Cmd_EnhanceBuilding::execute (Game* g)
 {
 	if (upcast(Building, building, g->objects().get_object(serial)))
-		g->get_player(get_sender())->enhance_building(building, id);
+		g->get_player(get_sender())->enhance_building(building, bi);
 }
 
 void Cmd_EnhanceBuilding::serialize (StreamWrite & ser)
@@ -498,7 +500,7 @@ void Cmd_EnhanceBuilding::serialize (StreamWrite & ser)
 	ser.Unsigned8 (PLCMD_ENHANCEBUILDING);
 	ser.Unsigned8 (get_sender());
 	ser.Unsigned32(serial);
-	ser.Unsigned16(id.value());
+	ser.Unsigned16(bi.value());
 }
 #define PLAYER_CMD_ENHANCEBUILDING_VERSION 1
 void Cmd_EnhanceBuilding::Read
@@ -514,7 +516,7 @@ void Cmd_EnhanceBuilding::Read
 			} catch (_wexception const & e) {
 				throw wexception("building %u: %s", building_serial, e.what());
 			}
-			id =
+			bi =
 				Building_Index
 					(static_cast<Building_Index::value_t>(fr.Unsigned16()));
 		} else
@@ -537,7 +539,7 @@ void Cmd_EnhanceBuilding::Write
 	fw.Unsigned32(mos.get_object_file_index(obj));
 
 	// Now id
-	fw.Unsigned16(id.value());
+	fw.Unsigned16(bi.value());
 }
 
 

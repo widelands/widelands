@@ -112,7 +112,7 @@ int32_t Cmd_Queue::run_queue(int32_t interval, int32_t* game_time_var)
 			static uint8_t const tag[] = {0xde, 0xad, 0x00};
 			ss.Data(tag, 3); // provide an easy-to-find pattern as debugging aid
 			ss.Unsigned32(c->get_duetime());
-			ss.Unsigned32(c->get_id());
+			ss.Unsigned32(c->id());
 		}
 
 		c->execute (&m_game);

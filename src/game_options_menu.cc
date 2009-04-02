@@ -20,7 +20,6 @@
 #include "game_options_menu.h"
 
 #include "fullscreen_menu_fileview.h"
-#include "game_options_menu.h"
 #include "game_options_sound_menu.h"
 #include "game_main_menu_save_game.h"
 #include "graphic.h"

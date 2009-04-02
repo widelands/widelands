@@ -357,7 +357,8 @@ m_texture           (0)
 		int32_t const res = resources->get_index(resource.c_str());;
 		if (res == -1)
 			throw wexception
-				("Terrain %s has valid resource %s which doesn't exist in world!",
+				("terrain type %s has valid resource type %s, which does not "
+				 "exist in world",
 				 s->get_name(), resource.c_str());
 		m_default_resources = res;
 		m_default_amount    = amount;
@@ -385,8 +386,8 @@ m_texture           (0)
 				const int32_t res = resources->get_index(curres.c_str());;
 				if (res == -1)
 					throw wexception
-						("Terrain %s has valid resource %s which doesn't exist in "
-						 "world!",
+						("terrain type %s has valid resource type %s which does not "
+						 "exist in world",
 						 s->get_name(), curres.c_str());
 				m_valid_resources[cur_res++] = res;
 				curres = "";

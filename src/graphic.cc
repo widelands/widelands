@@ -88,7 +88,7 @@ Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen)
 	SDL_Surface * sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
 
 	if (!sdlsurface)
-		throw wexception("Couldn't set video mode: %s", SDL_GetError());
+		throw wexception("could not set video mode: %s", SDL_GetError());
 
 	assert(sdlsurface->format->BytesPerPixel == 2 || sdlsurface->format->BytesPerPixel == 4);
 
@@ -267,7 +267,7 @@ uint32_t Graphic::get_picture(uint8_t const module, char const * const fname) {
 			bmp = LoadImage(fname);
 			//log("Graphic::get_picture(): loading picture '%s'\n", fname);
 		} catch (std::exception const & e) {
-			log("WARNING: Couldn't open %s: %s\n", fname, e.what());
+			log("WARNING: Could not open %s: %s\n", fname, e.what());
 			return 0;
 		}
 
@@ -328,7 +328,7 @@ uint32_t Graphic::get_resized_picture
 {
 	if (index >= m_pictures.size() or !m_pictures[index].module)
 		throw wexception
-			("get_resized_picture(%i): picture doesn't exist", index);
+			("get_resized_picture(%i): picture does not exist", index);
 
 	Surface * const orig = m_pictures[index].surface;
 	if (orig->get_w() == w and orig->get_h() == h)
@@ -410,7 +410,7 @@ SDL_Surface * Graphic::resize
 void Graphic::get_picture_size(const uint32_t pic, uint32_t & w, uint32_t & h)
 {
 	if (pic >= m_pictures.size() || !m_pictures[pic].module)
-		throw wexception("get_picture_size(%i): picture doesn't exist", pic);
+		throw wexception("get_picture_size(%i): picture does not exist", pic);
 
 	Surface & bmp = *m_pictures[pic].surface;
 
@@ -429,7 +429,7 @@ void Graphic::save_png(uint32_t pic_index, StreamWrite * const sw)
 			(PNG_LIBPNG_VER_STRING, static_cast<png_voidp>(0), 0, 0);
 
 	if (!png_ptr)
-		throw wexception("Graphic::save_png: Couldn't create png struct!");
+		throw wexception("Graphic::save_png: could not create png struct");
 
 	//  Set another write function. This is potentially dangerouse because the
 	//  flush function is internally called by png_write_end(), this will crash
@@ -445,14 +445,14 @@ void Graphic::save_png(uint32_t pic_index, StreamWrite * const sw)
 	png_infop info_ptr = png_create_info_struct(png_ptr);
 
 	if (!info_ptr) {
-		png_destroy_write_struct(&png_ptr, static_cast<png_infopp>(NULL));
-		throw wexception("Graphic::save_png: Couldn't create png info struct!");
+		png_destroy_write_struct(&png_ptr, static_cast<png_infopp>(0));
+		throw wexception("Graphic::save_png: could not create png info struct");
 	}
 
 	// Set jump for error
 	if (setjmp(png_jmpbuf(png_ptr))) {
 		png_destroy_write_struct(&png_ptr, &info_ptr);
-		throw wexception("Graphic::save_png: Couldn't set png setjmp!");
+		throw wexception("Graphic::save_png: could not set png setjmp");
 	}
 
 	// Fill info struct
@@ -667,7 +667,7 @@ void Graphic::get_animation_size
 	Surface * frame;
 
 	if (!data || !gfx) {
-		log("WARNING: Animation %i doesn't exist\n", anim);
+		log("WARNING: Animation %u does not exist\n", anim);
 		w = h = 0;
 	} else {
 		// Get the frame and its data. Ignore playerclrs.

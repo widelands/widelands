@@ -17,12 +17,13 @@
  *
  */
 
+#include "profile.h"
+
 #include "build_id.h"
 #include "fileread.h"
 #include "filewrite.h"
 #include "i18n.h"
 #include "player.h"
-#include "profile.h"
 #include "tribe.h"
 #include "wexception.h"
 #include "wlapplication.h"

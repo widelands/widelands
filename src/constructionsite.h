@@ -74,6 +74,8 @@ public:
 	virtual std::string get_statistics_string();
 	uint32_t get_built_per64k();
 
+	virtual WaresQueue & waresqueue(Ware_Index);
+
 	void set_building         (const Building_Descr &);
 	void set_previous_building(const Building_Descr * const);
 	const Building_Descr & building() const throw () {return *m_building;}

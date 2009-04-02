@@ -692,7 +692,7 @@ struct Cmd_Call_Economy_Balance : public GameLogicCommand {
 
 	void execute (Game *);
 
-	virtual int32_t get_id() {return QUEUE_CMD_CALL_ECONOMY_BALANCE;}
+	virtual uint8_t id() const {return QUEUE_CMD_CALL_ECONOMY_BALANCE;}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);

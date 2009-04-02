@@ -271,7 +271,7 @@ void Editor_Event_Menu::clicked_del_event() {
 		eia().set_need_save(true);
 		update();
 	} else {
-		std::ostringstream s(_("Can't delete Event. It is in use by "));
+		std::ostringstream s(_("Can not delete event. It is in use by "));
 		Widelands::Event::Referencers::const_iterator
 			event_referencers_end = event_referencers.end();
 		container_iterate_const
@@ -310,7 +310,7 @@ void Editor_Event_Menu::clicked_del_trigger() {
 		eia().set_need_save(true);
 		update();
 	} else {
-		std::ostringstream s(_("Can't delete Trigger. It is in use by "));
+		std::ostringstream s(_("Can not delete trigger. It is in use by "));
 		Widelands::Trigger::Referencers::const_iterator const
 			trigger_referencers_end = trigger_referencers.end();
 		container_iterate_const

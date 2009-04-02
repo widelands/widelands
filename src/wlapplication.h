@@ -189,7 +189,7 @@ struct WLApplication {
 	void replay();
 
 #ifdef DEBUG
-#ifndef __WIN32__
+#ifndef WIN32
 	//not all of these need to be public, but I consider signal handling
 	//a public interface
 	//@{

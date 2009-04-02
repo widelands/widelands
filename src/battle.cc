@@ -84,11 +84,14 @@ void Battle::init (Editor_Game_Base* eg)
 void Battle::cleanup (Editor_Game_Base* eg)
 {
 	if (upcast(Game, g, eg)) {
-		if (m_first)
+		if (m_first) {
 			m_first->setBattle(g, 0);
-		if (m_second)
+			m_first  = 0;
+		}
+		if (m_second) {
 			m_second->setBattle(g, 0);
-		m_first = m_second = 0;
+			m_second = 0;
+		}
 	}
 
 	Map_Object::cleanup(eg);
@@ -100,16 +103,14 @@ void Battle::cleanup (Editor_Game_Base* eg)
  */
 void Battle::cancel(Game* g, Soldier* soldier)
 {
-	if (soldier != m_first && soldier != m_second)
-		return;
-
 	if (soldier == m_first) {
 		m_first = 0;
 		soldier->setBattle(g, 0);
 	} else if (soldier == m_second) {
 		m_second = 0;
 		soldier->setBattle(g, 0);
-	}
+	} else
+		return;
 
 	schedule_destroy(g);
 }

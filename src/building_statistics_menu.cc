@@ -28,9 +28,9 @@
 #include "productionsite.h"
 #include "rendertarget.h"
 #include "tribe.h"
-#include "ui_button.h"
-#include "tribe.h"
 #include "wui_plot_area.h"
+
+#include "ui_button.h"
 
 #include "upcast.h"
 

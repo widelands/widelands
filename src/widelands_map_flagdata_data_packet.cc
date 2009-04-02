@@ -201,9 +201,8 @@ void Map_Flagdata_Data_Packet::Write
 
 	const Map & map = egbase->map();
 	const Field & fields_end = map[map.max_index()];
-	for (Field * field = &map[0]; field < &fields_end; ++field) if //  FIXME field should be "const Field *"
-		(upcast(Flag, flag, field->get_immovable()))
-	{
+	for (Field * field = &map[0]; field < &fields_end; ++field)
+		if (upcast(Flag const, flag, field->get_immovable())) {
 		assert(os->is_object_known(flag));
 		assert(!os->is_object_saved(flag));
 
@@ -250,8 +249,9 @@ void Map_Flagdata_Data_Packet::Write
 			fw.Unsigned32(os->get_object_file_index(flag->m_always_call_for_flag));
 		} else fw.Unsigned32(0);
 
-		//  worker waiting for capacity
-		const std::vector<OPtr<Worker> > & capacity_wait = flag->m_capacity_wait;
+			//  worker waiting for capacity
+			std::vector<OPtr<Worker> > const & capacity_wait =
+				flag->m_capacity_wait;
 		fw.Unsigned16(capacity_wait.size());
 		container_iterate_const(std::vector<OPtr<Worker> >, capacity_wait, i) {
 			Worker const * const obj = i.current->get(egbase);
@@ -279,7 +279,7 @@ void Map_Flagdata_Data_Packet::Write
 
 		os->mark_object_as_saved(flag);
 
-	}
+		}
 
 	fw.Unsigned32(0xffffffff); // End of flags
 

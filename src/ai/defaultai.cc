@@ -225,7 +225,7 @@ DefaultAI::BuildingObserver & DefaultAI::get_building_observer
 		if (!strcmp(i->name, name))
 			return *i;
 
-	throw wexception("Help: I don't know what to do with a %s", name);
+	throw wexception("Help: I do not know what to do with a %s", name);
 }
 
 void DefaultAI::think ()

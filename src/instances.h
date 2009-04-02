@@ -440,7 +440,7 @@ struct Cmd_Destroy_Map_Object : public GameLogicCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_DESTROY_MAPOBJECT;} ///< Get this command id
+	virtual uint8_t id() const {return QUEUE_CMD_DESTROY_MAPOBJECT;}
 
 private:
 	Serial obj_serial;
@@ -455,7 +455,7 @@ struct Cmd_Act : public GameLogicCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_ACT;} ///< Get this command id
+	virtual uint8_t id() const {return QUEUE_CMD_ACT;}
 
 private:
 	Serial obj_serial;

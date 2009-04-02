@@ -17,6 +17,8 @@
  *
  */
 
+#include "replay.h"
+
 #include "game.h"
 #include "game_loader.h"
 #include "gamecontroller.h"
@@ -24,7 +26,6 @@
 #include "md5.h"
 #include "playercommand.h"
 #include "random.h"
-#include "replay.h"
 #include "save_handler.h"
 #include "streamwrite.h"
 #include "wexception.h"
@@ -47,11 +48,11 @@ enum {
 
 
 struct Cmd_ReplaySyncRead : public Command {
-	Cmd_ReplaySyncRead(uint32_t const time, md5_checksum const & hash)
-		: Command(time), m_hash(hash)
+	Cmd_ReplaySyncRead(uint32_t const _duetime, md5_checksum const & hash)
+		: Command(_duetime), m_hash(hash)
 	{}
 
-	int32_t get_id() {return QUEUE_CMD_REPLAYSYNCREAD;}
+	virtual uint8_t id() const {return QUEUE_CMD_REPLAYSYNCREAD;}
 
 	void execute(Game* g)
 	{
@@ -205,9 +206,9 @@ bool ReplayReader::EndOfReplay()
  * the replay.
  */
 struct Cmd_ReplaySyncWrite : public Command {
-	Cmd_ReplaySyncWrite(uint32_t t) : Command(t) {}
+	Cmd_ReplaySyncWrite(uint32_t const _duetime) : Command(_duetime) {}
 
-	int32_t get_id() {return QUEUE_CMD_REPLAYSYNCWRITE;}
+	virtual uint8_t id() const {return QUEUE_CMD_REPLAYSYNCWRITE;}
 
 	void execute(Game* g) {
 		if (ReplayWriter* rw = g->get_replaywriter()) {

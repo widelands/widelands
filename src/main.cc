@@ -18,11 +18,12 @@
  */
 
 //config.h must be included first of all!
-#include "config.h"
 #include "build_id.h"
 
 #include "wexception.h"
 #include "wlapplication.h"
+
+#include <config.h>
 
 #include <iostream>
 #include <stdexcept>

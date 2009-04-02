@@ -286,7 +286,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 		m_notes.set_text
 				(_("WARNING!!! Host selected file \"")
 				 + m_filename
-				 + _("\" for this game, but you don't have it.")
+				 + _("\" for this game, but you do not have it.")
 				 + _(" Please add it manually."));
 		for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
 			m_players[i]->refresh();

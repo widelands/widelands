@@ -44,8 +44,7 @@ struct Critter_Bob_Descr : public Bob::Descr {
 	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
 	__attribute__ ((deprecated)) const char * get_descname() const throw () {return descname().c_str();}
 
-	Critter_BobProgram const * get_program
-		(std::string const & programname) const;
+	Critter_BobProgram const * get_program(std::string const &) const;
 
 private:
 	DirAnimations m_walk_anims;

@@ -255,7 +255,7 @@ FileSystem * LayeredFileSystem::MakeSubFileSystem(std::string const & dirname)
 			return (*it)->MakeSubFileSystem(dirname);
 
 	printf("dirname %s\n", dirname.c_str());
-	throw wexception("LayeredFileSystem: Wasn't able to make sub filesystem!");
+	throw wexception("LayeredFileSystem: unable to create sub filesystem");
 }
 
 /**
@@ -272,7 +272,7 @@ FileSystem * LayeredFileSystem::CreateSubFileSystem
 			return (*it)->CreateSubFileSystem(dirname, type);
 
 	printf("dirname %s\n", dirname.c_str());
-	throw wexception("LayeredFileSystem: Wasn't able to create sub filesystem!");
+	throw wexception("LayeredFileSystem: unable to create sub filesystem");
 }
 
 /**

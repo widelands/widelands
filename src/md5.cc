@@ -21,10 +21,9 @@
  *
  */
 
-#include <cassert>
-
 #include "md5.h"
 
+#include <cassert>
 
 /**
  * Create a hex string out of the MD5 checksum.

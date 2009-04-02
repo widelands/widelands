@@ -129,9 +129,7 @@ throw (_wexception)
 
 		if (upcast(GameLogicCommand, cmd, it.cmd)) {
 			// The id (aka command type)
-			assert(0 < cmd->get_id());
-			assert    (cmd->get_id() < 0x8000);
-			fw.Unsigned16(cmd->get_id());
+			fw.Unsigned16(cmd->id());
 
 			// Serial number
 			fw.Signed32(it.category);

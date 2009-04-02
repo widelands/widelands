@@ -68,10 +68,10 @@ struct Command {
 	virtual ~Command ();
 
 	virtual void execute (Game*) = 0;
-	virtual int32_t get_id() = 0;
+	virtual uint8_t id() const = 0;
 
 	int32_t get_duetime() const {return m_duetime;}
-	void set_duetime(int32_t t) {m_duetime = t;}
+	void set_duetime(int32_t const t) {m_duetime = t;}
 
 private:
 	int32_t m_duetime;

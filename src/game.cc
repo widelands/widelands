@@ -174,12 +174,10 @@ Game::Game() :
 
 Game::~Game()
 {
+	assert(this == g_sound_handler.m_the_game);
+	g_sound_handler.m_the_game = 0;
 	delete m_replaywriter;
-	m_replaywriter = 0;
-	g_sound_handler.m_the_game = NULL;
-
 	delete m;
-	m = 0;
 }
 
 
@@ -197,23 +195,23 @@ bool Game::get_allow_cheats()
  * \note This function may return 0 (in particular, it will return 0 during
  * playback)
  */
-Interactive_Player* Game::get_ipl()
+Interactive_Player * Game::get_ipl()
 {
 	return dynamic_cast<Interactive_Player*>(get_iabase());
 }
 
 
-void Game::set_game_controller(GameController* ctrl)
+void Game::set_game_controller(GameController * const ctrl)
 {
 	m->ctrl = ctrl;
 }
 
-GameController* Game::gameController()
+GameController * Game::gameController()
 {
 	return m->ctrl;
 }
 
-void Game::set_write_replay(bool wr)
+void Game::set_write_replay(bool const wr)
 {
 	assert(m_state == gs_notrunning);
 
@@ -282,10 +280,10 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	set_game_controller(GameController::createSinglePlayer(this, true, 1));
 	try {
-		bool ret = run(loaderUI, NewScenario);
+		bool const result = run(loaderUI, NewScenario);
 		delete m->ctrl;
 		m->ctrl = 0;
-		return ret;
+		return result;
 	} catch (...) {
 		delete m->ctrl;
 		m->ctrl = 0;
@@ -297,7 +295,9 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 /**
  * Initialize the game based on the given settings.
  */
-void Game::init_newgame(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
+void Game::init_newgame
+	(UI::ProgressWindow & loaderUI, GameSettings const & settings)
+{
 	g_gr->flush(PicMod_Menu);
 
 	loaderUI.step(_("Preloading map"));
@@ -342,7 +342,9 @@ void Game::init_newgame(UI::ProgressWindow & loaderUI, const GameSettings& setti
  * Only difference is, that players are already initialized.
  * run(loaderUI, true) takes care about this difference.
  */
-void Game::init_savegame(UI::ProgressWindow & loaderUI, const GameSettings& settings) {
+void Game::init_savegame
+	(UI::ProgressWindow & loaderUI, GameSettings const & settings)
+{
 	g_gr->flush(PicMod_Menu);
 
 	loaderUI.step(_("Preloading map"));
@@ -403,10 +405,10 @@ bool Game::run_load_game(std::string filename) {
 
 	set_game_controller(GameController::createSinglePlayer(this, true, player_nr));
 	try {
-		bool const ret = run(loaderUI, Loaded);
+		bool const result = run(loaderUI, Loaded);
 		delete m->ctrl;
 		m->ctrl = 0;
-		return ret;
+		return result;
 	} catch (...) {
 		delete m->ctrl;
 		m->ctrl = 0;

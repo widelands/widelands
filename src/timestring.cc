@@ -22,7 +22,7 @@
 #include <ctime>
 
 char timestring_buffer[] =
-#ifdef __WIN32__
+#ifdef WIN32
 "YYYY-MM-DDThh.mm.ss"; //  ':' is not a valid file name character under Windows
 #else
 "YYYY-MM-DDThh:mm:ss"; //  use proper ISO 8601 format on all other systems

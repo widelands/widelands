@@ -23,6 +23,8 @@
 #include "bob.h"
 #include "immovable.h"
 
+#include "filewrite.h"
+
 namespace Widelands {
 
 /// \todo (Antonio Trueba#1#): Get rid of forward class declaration (chicked-and-egg problem)

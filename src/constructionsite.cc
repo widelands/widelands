@@ -59,13 +59,6 @@ ConstructionSite_Descr::ConstructionSite_Descr
 }
 
 
-/*
-===============
-ConstructionSite_Descr::create_object
-
-Allocate a ConstructionSite
-===============
-*/
 Building* ConstructionSite_Descr::create_object() const
 {return new ConstructionSite(*this);}
 
@@ -198,8 +191,6 @@ std::string ConstructionSite::get_statistics_string()
 
 /*
 ===============
-ConstructionSite::get_built_per64k
-
 Return the completion "percentage", where 2^16 = completely built,
 0 = nothing built.
 ===============
@@ -226,6 +217,16 @@ uint32_t ConstructionSite::get_built_per64k()
 	assert(total <= (1 << 16));
 
 	return total;
+}
+
+
+WaresQueue & ConstructionSite::waresqueue(Ware_Index const wi) {
+	container_iterate_const(Wares, m_wares, i)
+		if ((*i.current)->get_ware() == wi)
+			return **i.current;
+	throw wexception
+		("%s (%u) (building %s) has no WaresQueue for %u",
+		 name().c_str(), serial(), m_building->name().c_str(), wi.value());
 }
 
 
@@ -279,8 +280,6 @@ void ConstructionSite::set_economy(Economy * const e)
 
 /*
 ===============
-ConstructionSite::init
-
 Initialize the construction site by starting orders
 ===============
 */

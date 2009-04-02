@@ -362,7 +362,7 @@ void WareInstance::update(Game * game)
 			}
 
 			throw wexception
-				("MO(%u): ware: can't move from building %u to %u (not a "
+				("MO(%u): ware: can not move from building %u to %u (not a "
 				 "warehouse)",
 				 serial(), location->serial(), nextstep->serial());
 
@@ -2736,8 +2736,8 @@ void Economy::do_merge(Economy & e)
 
 	// Be careful around here. The last e->remove_flag() will cause the other
 	// economy to delete itself.
-	for (std::vector<Flag *>::size_type i = e.get_nrflags(); i--;) {
-		assert(i + 1 == e.get_nrflags());
+	for (std::vector<Flag *>::size_type i = e.get_nrflags() + 1; --i;) {
+		assert(i == e.get_nrflags());
 
 		Flag & flag = *e.m_flags[0];
 
@@ -2868,7 +2868,8 @@ Supply * Economy::find_best_supply
 			 	 cost_cutoff))
 		{
 			if (!best_route)
-				throw wexception("Economy::find_best_supply: COULDN'T FIND A ROUTE!");
+				throw wexception
+					("Economy::find_best_supply: COULD NOT FIND A ROUTE!");
 			continue;
 		}
 

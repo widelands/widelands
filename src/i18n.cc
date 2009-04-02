@@ -20,7 +20,7 @@
 #include "i18n.h"
 #include "log.h"
 
-#include "config.h"
+#include <config.h>
 
 #include <libintl.h>
 

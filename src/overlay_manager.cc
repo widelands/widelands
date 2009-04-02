@@ -236,8 +236,10 @@ void Overlay_Manager::remove_overlay(const Job_Id jobid) {
 	for (Registered_Overlays_Map * j = m_overlays; j != overlays_end; ++j)
 		for (Registered_Overlays_Map::iterator it = j->begin(); it != j->end();) {
 			it->second.jobids.erase(jobid);
-			if (it->second.jobids.empty()) j->erase(it++); //  This is necessary!
-			else ++it;
+			if (it->second.jobids.empty())
+				j->erase(it++); //  This is necessary!
+			else
+				++it;
 		}
 }
 

@@ -96,7 +96,7 @@ int32_t ZipFilesystem::FindFiles
 	for (;;) {
 		unzGetCurrentFileInfo
 			(m_unzipfile, &file_info, filename_inzip, sizeof(filename_inzip),
-			 NULL, 0, NULL, 0);
+			 0, 0, 0, 0);
 
 		std::string complete_filename = &filename_inzip[m_basename.size()];
 		std::string filename = FS_Filename(complete_filename.c_str());
@@ -142,7 +142,7 @@ bool ZipFilesystem::FileExists(std::string const & path_in) {
 	for (;;) {
 		unzGetCurrentFileInfo
 			(m_unzipfile, &file_info, filename_inzip, sizeof(filename_inzip),
-			 NULL, 0, NULL, 0);
+			 0, 0, 0, 0);
 
 		std::string complete_filename = &filename_inzip[m_basename.size()];
 		if (complete_filename[complete_filename.size() - 1] == '/')
@@ -172,7 +172,7 @@ bool ZipFilesystem::IsDirectory(std::string const & path) {
 
 	unzGetCurrentFileInfo
 		(m_unzipfile, &file_info, filename_inzip, sizeof(filename_inzip),
-		 NULL, 0, NULL, 0);
+		 0, 0, 0, 0);
 
 	return filename_inzip[strlen(filename_inzip) - 1] == '/';
 }
@@ -208,7 +208,7 @@ FileSystem * ZipFilesystem::CreateSubFileSystem
 		throw ZipOperation_error
 			("ZipFilesystem::CreateSubFileSystem",
 			 path, m_zipfilename,
-			 "can't create ZipFilesystem inside another ZipFilesystem");
+			 "can not create ZipFilesystem inside another ZipFilesystem");
 
 	EnsureDirectoryExists(path);
 
@@ -273,7 +273,7 @@ void ZipFilesystem::MakeDirectory(std::string const & dirname) {
 		 	(m_zipfile,
 		 	 complete_file.c_str(),
 		 	 &zi,
-		 	 NULL, 0, NULL, 0, NULL /* comment*/,
+		 	 0, 0, 0, 0, 0 /* comment*/,
 		 	 Z_DEFLATED,
 		 	 Z_BEST_COMPRESSION,
 		 	 0,
@@ -306,7 +306,7 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 			("ZipFilesystem::Load",
 			 fname,
 			 m_zipfilename,
-			 "couldn't open file from zipfile");
+			 "could not open file from zipfile");
 
 	char buffer[1024];
 	size_t totallen = 0;
@@ -361,7 +361,7 @@ void ZipFilesystem::Write
 	switch
 		(zipOpenNewFileInZip3
 		 	(m_zipfile, complete_file.c_str(), &zi,
-		 	 NULL, 0, NULL, 0, NULL /* comment*/,
+		 	 0, 0, 0, 0, 0 /* comment*/,
 		 	 Z_DEFLATED,
 		 	 Z_BEST_COMPRESSION, 0,
 		 	 -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY,

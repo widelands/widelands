@@ -28,7 +28,7 @@
 #include <cassert>
 #include <cerrno>
 
-#ifdef __WIN32__
+#ifdef WIN32
 #include <windows.h>
 #include <dos.h>
 #else
@@ -45,7 +45,7 @@ RealFSImpl::RealFSImpl(std::string const & Directory)
 : m_directory(Directory)
 {
 	// TODO: check OS permissions on whether the directory is writable!
-#ifdef __WIN32__
+#ifdef WIN32
 	m_root = Directory;
 #else
 	m_root = "";
@@ -126,7 +126,7 @@ int32_t RealFSImpl::FindFiles
 		buf = m_directory + '/' + pattern;
 	ofs = m_directory.length() + 1;
 
-	if (glob(buf.c_str(), 0, NULL, &gl))
+	if (glob(buf.c_str(), 0, 0, &gl))
 		return 0;
 
 	count = gl.gl_pathc;
@@ -194,7 +194,7 @@ FileSystem * RealFSImpl::CreateSubFileSystem
 {
 	if (FileExists(path))
 		throw wexception
-			("Path %s already exists. Can't create a filesystem from it!",
+			("path %s already exists, can not create a filesystem from it",
 			 path.c_str());
 
 	std::string fullname;
@@ -232,7 +232,7 @@ void RealFSImpl::m_unlink_file(std::string const & file) {
 
 	fullname = FS_CanonicalizeName(file);
 
-#ifndef __WIN32__
+#ifndef WIN32
 	unlink(fullname.c_str());
 #else
 	DeleteFile(fullname.c_str());
@@ -274,7 +274,7 @@ void RealFSImpl::m_unlink_directory(std::string const & file) {
 	std::string fullname;
 
 	fullname = FS_CanonicalizeName(file);
-#ifndef __WIN32__
+#ifndef WIN32
 	rmdir(fullname.c_str());
 #else
 	RemoveDirectory(fullname.c_str());
@@ -330,7 +330,7 @@ void RealFSImpl::MakeDirectory(std::string const & dirname) {
 		 ==
 		 -1)
 		throw DirectoryCannotCreate_error
-			("Couldn't create directory %s: %s",
+			("could not create directory %s: %s",
 			 dirname.c_str(), strerror(errno));
 }
 
@@ -344,8 +344,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 	FILE * file = 0;
 	void * data = 0;
 
-	try
-	{
+	try {
 		//debug info
 		//printf("------------------------------------------\n");
 		//printf("RealFSImpl::Load():\n");
@@ -355,7 +354,8 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		//printf("------------------------------------------\n");
 
 		file = fopen(fullname.c_str(), "rb");
-		if (file == NULL) throw File_error("RealFSImpl::Load", fullname.c_str());
+		if (not file)
+			throw File_error("RealFSImpl::Load", fullname.c_str());
 
 		// determine the size of the file (rather quirky, but it doesn't require
 		// potentially unportable functions)
@@ -411,7 +411,9 @@ void RealFSImpl::Write
 
 	FILE * const f = fopen(fullname.c_str(), "wb");
 	if (!f)
-		throw wexception("Couldn't open %s (%s) for writing", fname.c_str(), fullname.c_str());
+		throw wexception
+			("could not open %s (%s) for writing",
+			 fname.c_str(), fullname.c_str());
 
 	size_t const c = fwrite(data, length, 1, f);
 	fclose(f);
@@ -443,7 +445,7 @@ struct RealFSStreamRead : public StreamRead {
 		: m_file(fopen(fname.c_str(), "rb"))
 	{
 		if (!m_file)
-			throw wexception("Couldn't open %s for reading", fname.c_str());
+			throw wexception("could not open %s for reading", fname.c_str());
 	}
 
 	~RealFSStreamRead()
@@ -487,7 +489,7 @@ struct RealFSStreamWrite : public StreamWrite {
 	{
 		m_file = fopen(fname.c_str(), "wb");
 		if (!m_file)
-			throw wexception("Couldn't open %s for writing", fname.c_str());
+			throw wexception("could not open %s for writing", fname.c_str());
 	}
 
 	~RealFSStreamWrite() {fclose(m_file);}

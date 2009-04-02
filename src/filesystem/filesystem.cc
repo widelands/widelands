@@ -21,7 +21,6 @@
 
 #include "filesystem.h"
 
-#include "config.h"
 #include "constants.h"
 #ifdef USE_DATAFILE
 #include "datafile.h"
@@ -30,6 +29,8 @@
 #include "layered_filesystem.h"
 #include "zip_exceptions.h"
 #include "zip_filesystem.h"
+
+#include <config.h>
 
 #include <cassert>
 #include <cerrno>
@@ -40,21 +41,20 @@
 #include <string>
 #include <vector>
 
-#ifdef _WIN32
+#ifdef WIN32
 #include <windows.h>
 #include <io.h>
 #define stat _stat
-#include <sys/stat.h>
 #else
 #include <glob.h>
-#include <sys/stat.h>
 #include <sys/types.h>
 #endif
+#include <sys/stat.h>
 #include <unistd.h>
 
 FileSystem::FileSystem()
 {
-#ifdef __WIN32__
+#ifdef WIN32
 	m_root = getWorkingDirectory();
 	m_filesep = '\\';
 #else
@@ -154,7 +154,7 @@ std::string FileSystem::AbsolutePath(std::string const & path) const {
  * on locale OS.
  */
 std::string FileSystem::fixCrossFile(std::string path) {
-#ifdef __WIN32__
+#ifdef WIN32
 	// We simply make it absolut.
 	return FS_CanonicalizeName(path);
 #else
@@ -174,16 +174,16 @@ std::string FileSystem::fixCrossFile(std::string path) {
  * \return The process' current working directory
  */
 std::string FileSystem::getWorkingDirectory() const {
-#ifndef __WIN32__
+#ifndef WIN32
 	char cwd[PATH_MAX + 1];
 	getcwd(cwd, PATH_MAX);
 
 	return std::string(cwd);
 #else
 	char filename[_MAX_PATH + 1];
-	GetModuleFileName(NULL, filename, _MAX_PATH);
+	GetModuleFileName(0, filename, _MAX_PATH);
 	std::string exedir(filename);
-	exedir = exedir.substr(0, exedir.rfind("\\"));
+	exedir = exedir.substr(0, exedir.rfind('\\'));
 	return exedir;
 #endif
 }
@@ -195,7 +195,7 @@ std::string FileSystem::getWorkingDirectory() const {
 std::string FileSystem::getTempDirectory() {
 	const char *tmpdir;
 
-#ifdef __WIN32__
+#ifdef WIN32
 	tmpdir = ".";
 #else
 	tmpdir = "/tmp";
@@ -220,7 +220,7 @@ std::string FileSystem::GetHomedir()
 	if (homedir.empty()) {
 		printf
 			("\nWARNING: either we can not detect your home directory "
-			 "or you don't have one! Please contact the developers.\n\n");
+			 "or you do not have one! Please contact the developers.\n\n");
 
 		//TODO: is it really a good idea to set homedir to "." then ??
 
@@ -276,7 +276,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	std::vector<std::string> components;
 	std::vector<std::string>::iterator i;
 
-#ifdef __WIN32__
+#ifdef WIN32
 	// remove all slashes with backslashes so following can work.
 	std::string fixedpath(path);
 	std::string temp;
@@ -372,7 +372,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	}
 
 	std::string canonpath = "";
-#ifndef __WIN32__
+#ifndef WIN32
 	canonpath = absolute ? "/" : "./";
 
 	for (i = components.begin(); i != components.end(); ++i)

@@ -17,6 +17,8 @@
  *
  */
 
+#include "worker_descr.h"
+
 #include "carrier.h"
 #include "graphic.h"
 #include "helper.h"
@@ -27,7 +29,6 @@
 #include "tribe.h"
 #include "wexception.h"
 #include "worker.h"
-#include "worker_descr.h"
 #include "worker_program.h"
 
 namespace Widelands {

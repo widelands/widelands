@@ -235,7 +235,7 @@ NetHost::NetHost (std::string const & playername)
 
 	// create a listening socket
 	IPaddress myaddr;
-	SDLNet_ResolveHost (&myaddr, NULL, WIDELANDS_PORT);
+	SDLNet_ResolveHost (&myaddr, 0, WIDELANDS_PORT);
 	d->svsock = SDLNet_TCP_Open(&myaddr);
 
 	d->sockset = SDLNet_AllocSocketSet(16);
@@ -1350,14 +1350,14 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			*Widelands::PlayerCommand::deserialize(r);
 		log
 			("[Host] client %i (%i) sent player command %i for %i, time = %i\n",
-			 i, client.playernum, plcmd.get_id(), plcmd.get_sender(), time);
+			 i, client.playernum, plcmd.id(), plcmd.get_sender(), time);
 		recvClientTime(i, time);
 		if (plcmd.get_sender() != client.playernum + 1)
 			throw DisconnectException
 				(_
 				 	("Client %i (%i) sent a playercommand (%i) for a different "
 				 	 "player (%i)."),
-				 i, client.playernum, plcmd.get_id(), plcmd.get_sender());
+				 i, client.playernum, plcmd.id(), plcmd.get_sender());
 		sendPlayerCommand(&plcmd);
 	} break;
 

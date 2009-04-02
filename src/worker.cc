@@ -96,9 +96,9 @@ bool Worker::run_mine(Game* g, State* state, const Action* action)
 		map.get_world()->get_resource(action->sparam1.c_str());
 	if (static_cast<int8_t>(res)==-1) //FIXME: ARGH!!
 		throw wexception
-			(" Worker::run_mine: Should mine resource %s, which "
-			 "doesn't exist in world. Tribe is not compatible with "
-			 "world!!\n",  action->sparam1.c_str());
+			("should mine resource %s, which does not exist in world. Tribe is "
+			 "not compatible with world",
+			 action->sparam1.c_str());
 
 	// Select one of the fields randomly
 	uint32_t totalres = 0;
@@ -197,9 +197,9 @@ bool Worker::run_breed(Game* g, State* state, const Action* action)
 		map.get_world()->get_resource(action->sparam1.c_str());
 	if (static_cast<int8_t>(res)==-1) //FIXME: ARGH!!
 		throw wexception
-			(" Worker::run_breed: Should breed resource %s, which "
-			 "doesn't exist in world. Tribe is not compatible with "
-			 "world!!\n",  action->sparam1.c_str());
+			("should breed resource type %s, which does not exist in world, "
+			 "tribe is not compatible with world",
+			 action->sparam1.c_str());
 
 	// Select one of the fields randomly
 	uint32_t totalres = 0;
@@ -597,7 +597,7 @@ bool Worker::run_walk(Game* g, State* state, const Action* action)
 		 	 descr().get_right_walk_anims(does_carry_ware()),
 		 	 forceonlast, max_steps))
 	{
-		molog("  couldn't find path\n");
+		molog("  could not find path\n");
 		send_signal(g, "fail");
 		pop_task(g);
 		return true;
@@ -1883,7 +1883,7 @@ bool Worker::wakeup_flag_capacity(Game* g, Flag* flag)
 
 		if (state->objvar1.get(g) != flag)
 			throw wexception
-				("MO(%u): wakeup_flag_capacity: Flags don't match.", serial());
+				("MO(%u): wakeup_flag_capacity: flags do not match", serial());
 
 		send_signal(g, "wakeup");
 		return true;
@@ -1974,7 +1974,8 @@ bool Worker::wakeup_leave_building(Game* g, Building* building)
 
 	if (state && state->task == &taskLeavebuilding) {
 		if (state->objvar1.get(g) != building)
-			throw wexception("MO(%u): [waitleavebuilding]: buildings don't match", serial());
+			throw wexception
+				("MO(%u): [waitleavebuilding]: buildings do not match", serial());
 
 		send_signal(g, "wakeup");
 		return true;
@@ -2028,7 +2029,7 @@ void Worker::fugitive_update(Game* g, State* state)
 	PlayerImmovable *location = get_location(g);
 
 	if (location && location->get_owner() == get_owner()) {
-		molog("[fugitive]: we're on location\n");
+		molog("[fugitive]: we are on location\n");
 
 		if (dynamic_cast<Warehouse const *>(location))
 			return schedule_incorporate(g);
@@ -2231,7 +2232,7 @@ void Worker::geologist_update(Game* g, State* state)
 					 	 descr().get_right_walk_anims(does_carry_ware())))
 				{
 
-					molog("[geologist]: BUG: couldn't find path\n");
+					molog("[geologist]: BUG: could not find path\n");
 					send_signal(g, "fail");
 					return pop_task(g);
 				}
@@ -2244,7 +2245,7 @@ void Worker::geologist_update(Game* g, State* state)
 	}
 
 	if (get_position() == owner_area) {
-		molog("[geologist]: We're home\n");
+		molog("[geologist]: We are home\n");
 		return pop_task(g);
 	}
 
@@ -2254,7 +2255,7 @@ void Worker::geologist_update(Game* g, State* state)
 		 start_task_movepath
 		 	(g, owner_area, 0, descr().get_right_walk_anims(does_carry_ware())))
 	{
-		molog("[geologist]: Couldn't find path home\n");
+		molog("[geologist]: could not find path home\n");
 		send_signal(g, "fail");
 		return pop_task(g);
 	}

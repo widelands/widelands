@@ -45,7 +45,7 @@ struct Cmd_NetCheckSync : public Widelands::Command {
 
 	virtual void execute (Widelands::Game *);
 
-	virtual int32_t get_id();
+	virtual uint8_t id() const {return QUEUE_CMD_NETCHECKSYNC;}
 
 private:
 	SyncCallback * m_callback;

@@ -546,12 +546,12 @@ void Map::set_world_name(const char *string)
 	snprintf(m_worldname, sizeof(m_worldname), "%s", string);
 }
 
-void Map::set_background(const char * string)
+void Map::set_background(char const * const string)
 {
-	if (NULL == string)
-		m_background.clear();
-	else
+	if (string)
 		m_background = string;
+	else
+		m_background.clear();
 }
 
 /*

@@ -282,7 +282,7 @@ void MilitarySite::update_soldier_request()
 		m_soldier_request = 0;
 	}
 
-	if (present.size() > m_capacity) {
+	if (m_capacity < present.size())
 		if (upcast(Game, g, &owner().egbase())) {
 			for (uint32_t i = 0; i < present.size()-m_capacity; ++i) {
 				Soldier* soldier = present[i];
@@ -290,7 +290,6 @@ void MilitarySite::update_soldier_request()
 				soldier->start_task_leavebuilding(g, true);
 			}
 		}
-	}
 }
 
 
@@ -406,10 +405,10 @@ std::vector<Soldier *> MilitarySite::presentSoldiers() const
 
 std::vector<Soldier *> MilitarySite::stationedSoldiers() const
 {
-	std::vector<Soldier*> soldiers;
+	std::vector<Soldier *> soldiers;
 
-	const std::vector<Worker*>& w = get_workers();
-	container_iterate_const(std::vector<Worker*>, w, i)
+	std::vector<Worker *> const & w = get_workers();
+	container_iterate_const(std::vector<Worker *>, w, i)
 		if (upcast(Soldier, soldier, *i.current))
 			soldiers.push_back(soldier);
 

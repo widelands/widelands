@@ -1213,7 +1213,7 @@ void RenderTarget::drawanimrect
 {
 	AnimationData const * data = g_anim.get_animation(animation);
 	if (!data || !g_gr) {
-		log("WARNING: Animation %i doesn't exist\n", animation);
+		log("WARNING: Animation %u does not exist\n", animation);
 		return;
 	}
 

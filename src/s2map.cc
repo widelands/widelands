@@ -67,7 +67,7 @@ int32_t S2_Map_Loader::preload_map(bool scenario) {
 	load_s2mf_header();
 
 	if (not Widelands::World::exists_world(m_map.get_world_name()))
-		throw wexception("%s: World doesn't exist!", m_map.get_world_name());
+		throw wexception("world %s does not exist", m_map.get_world_name());
 
 	if (scenario) {
 		//  Load this as scenario. There is no such a thing as S2 scenario,
@@ -549,8 +549,8 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 					nres = m_map.world().get_resource(res);
 					if (nres == -1)
 						throw wexception
-							("World doesn't define Resource %s, you can not play "
-							 "settler maps here!",
+							("world does not define resource type %s, you can not "
+							 "play settler maps here",
 							 res);
 				}
 				const int32_t real_amount = static_cast<int32_t>
@@ -865,7 +865,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 						//  Do not throw exception, else map will not be loadable in
 						//  the editor. Player initialization will keep track of
 						//  wrong starting positions.
-						log("invalid starting position, that couldn't be fixed.\n");
+						log("invalid starting position, that could not be fixed.\n");
 						log("   Please try to fix it manually in the editor.\n");
 					}
 				}

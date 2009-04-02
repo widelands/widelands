@@ -20,6 +20,7 @@
 #ifndef FXSET_H
 #define FXSET_H
 
+#include <config.h> //  must be included before SDL_mixer.h due to USE_RWOPS!!
 #include <SDL_mixer.h>
 
 #include <vector>

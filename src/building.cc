@@ -541,6 +541,13 @@ std::string Building::get_statistics_string()
 }
 
 
+WaresQueue & Building::waresqueue(Ware_Index const wi) {
+	throw wexception
+		("%s (%u) has no WaresQueue for %u",
+		 name().c_str(), serial(), wi.value());
+}
+
+
 void Building::prefill
 	(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *)
 {}

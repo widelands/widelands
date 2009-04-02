@@ -72,13 +72,13 @@
 #include <string>
 
 #ifdef DEBUG
-#ifndef __WIN32__
+#ifndef WIN32
 int32_t WLApplication::pid_me   = 0;
 int32_t WLApplication::pid_peer = 0;
 volatile int32_t WLApplication::may_run = 0;
 #include <csignal>
-#endif // WIN32
-#endif // DEBUG
+#endif
+#endif
 
 //Always specifying namespaces is good, but let's not go too far ;-)
 using std::cout;
@@ -111,7 +111,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 	}
 
 	try {
-#ifndef __WIN32__
+#ifndef WIN32
 		// if that fails, search it where the FHS forces us to put it (obviously UNIX-only)
 		g_fs->AddFileSystem(FileSystem::Create("/usr/share/games/widelands"));
 #else
@@ -169,7 +169,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 
 	// finally, the user's config directory
 	// TODO: implement this for Windows (yes, NT-based ones are actually multi-user)
-#ifndef __WIN32__
+#ifndef WIN32
 	std::string path = FileSystem::GetHomedir();
 
 	//If we don't have a home directory don't do anything
@@ -741,7 +741,7 @@ bool WLApplication::init_hardware() {
 	//  NOTE privacy/powermanagement settings on the sly. The workaround was
 	//  NOTE introduced in SDL 1.2.13, so it will not work for older versions.
 	//  NOTE -> there is no such stdlib-function on win32
-	#ifndef __WIN32__
+	#ifndef WIN32
 	setenv("SDL_VIDEO_ALLOW_SCREENSAVER", "1", 0);
 	#endif
 
@@ -852,7 +852,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 
 	if (m_commandline.count("double")>0) {
 #ifdef DEBUG
-#ifndef __WIN32__
+#ifndef WIN32
 		init_double_game();
 #else
 		cout << _("\nSorry, no double-instance debugging on WIN32.\n\n");
@@ -1015,7 +1015,7 @@ void WLApplication::show_usage()
 			 "                      panel.\n"
 			 "\n");
 #ifdef DEBUG
-#ifndef __WIN32__
+#ifndef WIN32
 	cout
 		<<
 		_
@@ -1033,7 +1033,7 @@ void WLApplication::show_usage()
 }
 
 #ifdef DEBUG
-#ifndef __WIN32__
+#ifndef WIN32
 /**
  * Fork off a second game to test network gaming
  *
@@ -1231,7 +1231,7 @@ void WLApplication::mainmenu_singleplayer()
  */
 void WLApplication::mainmenu_multiplayer()
 {
-#if __WIN32__
+#if WIN32
 	//  The Winsock2 library needs to get called through WSAStartup, to initiate
 	//  the use of the Winsock DLL by Widelands.
 	WSADATA wsaData;
@@ -1605,7 +1605,7 @@ struct ReplayGameController : public GameController {
 				 UI::MessageBox::OK);
 			mmb.run();
 		}
-		virtual int32_t get_id() {return QUEUE_CMD_REPLAYEND;}
+		virtual uint8_t id() const {return QUEUE_CMD_REPLAYEND;}
 	};
 
 	void think() {

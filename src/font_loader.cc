@@ -62,12 +62,12 @@ TTF_Font * Font_Loader::open_font(std::string const & name, int32_t const size)
 
 	SDL_RWops * const ops = SDL_RWFromMem(fr.Data(0), fr.GetSize());
 	if (!ops)
-		throw wexception("Couldn't load font!: RWops Pointer invalid");
+		throw wexception("could not load font!: RWops Pointer invalid");
 
 	if (TTF_Font * const font = TTF_OpenFontIndexRW(ops, 1, size, 0))
 		return font;
 	else
-		throw wexception("Couldn't load font!: %s", TTF_GetError());
+		throw wexception("could not load font!: %s", TTF_GetError());
 }
 
 /*

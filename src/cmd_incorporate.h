@@ -33,14 +33,12 @@ struct Cmd_Incorporate : public GameLogicCommand {
 		: GameLogicCommand(t), worker(w)
 	{}
 
-
 	void execute (Game * g) {worker->incorporate(g);}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	/// Get this command ID
-	virtual int32_t get_id() {return QUEUE_CMD_INCORPORATE;}
+	virtual uint8_t id() const {return QUEUE_CMD_INCORPORATE;}
 
 
 private:

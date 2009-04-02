@@ -60,7 +60,7 @@ struct WatchWindow : public UI::Window {
 	UI::Signal1<Point> warp_mainview;
 	UI::Signal         closed;
 
-	void start_tracking(Point pos);
+	void start_tracking(Point);
 	void toggle_tracking();
 	void act_mainview_goto();
 
@@ -90,7 +90,7 @@ private:
 };
 
 
-static WatchWindow *g_watch_window = NULL;
+static WatchWindow * g_watch_window = 0;
 
 /*
 ===============
@@ -242,12 +242,10 @@ void WatchWindow::toggle_buttons() {
 //Draws the current view
 void WatchWindow::show_view(bool) {
 	m_mapview.set_viewpoint(m_views[m_cur_index].view_point);
-	//Tracking turned of by default
-	//start_tracking(m_views[m_cur_index].view_point);
 }
 
 WatchWindow::~WatchWindow() {
-	g_watch_window = NULL;
+	g_watch_window = 0;
 	closed.call();
 }
 
@@ -401,7 +399,7 @@ void show_watch_window
 {
 	WatchWindow * win;
 	if (g_options.pull_section("global").get_bool("single_watchwin", false)) {
-		if (g_watch_window != NULL)
+		if (g_watch_window)
 			g_watch_window->add_view(coords);
 		else
 			g_watch_window =

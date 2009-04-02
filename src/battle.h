@@ -67,8 +67,8 @@ struct Battle : public Map_Object {
 private:
 	void calculateTurn(Game &);
 
-	Soldier* m_first;
-	Soldier* m_second;
+	Soldier * m_first;
+	Soldier * m_second;
 
 	/**
 	 * Gametime when the battle was created.

@@ -17,9 +17,10 @@
  *
  */
 
+#include "item_ware_descr.h"
+
 #include "graphic.h"
 #include "i18n.h"
-#include "item_ware_descr.h"
 #include "profile.h"
 
 namespace Widelands {

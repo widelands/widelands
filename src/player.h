@@ -384,7 +384,7 @@ struct Player :
 		 uint32_t      const * ware_counts,
 		 uint32_t      const * worker_counts,
 		 Soldier_Counts const & soldier_counts);
-	void build(Coords c, Building_Index idx);
+	void build(Coords, Building_Index);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable* imm);

@@ -198,9 +198,9 @@ struct Bob : public Map_Object {
 		Bob * create(Editor_Game_Base *, Player * owner, Coords) const;
 		bool is_world_bob() const {return not m_owner_tribe;}
 
-		const char* get_picture() const {return m_picture.c_str();}
+		char const * get_picture() const {return m_picture.c_str();}
 
-		const EncodeData& get_default_encodedata() const {return m_default_encodedata;}
+		EncodeData const & get_default_encodedata() const {return m_default_encodedata;}
 
 		Tribe_Descr const * get_owner_tribe() const throw () {
 			return m_owner_tribe;

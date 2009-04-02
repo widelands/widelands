@@ -384,7 +384,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 		int32_t idx = get_immovable_index("resi_none");
 		if (idx == -1)
 			throw wexception
-				("Tribe %s doesn't declare a resource indicator resi_none!",
+				("tribe %s does not declare a resource indicator resi_none!",
 				 name().c_str());
 		return idx;
 	}
@@ -403,7 +403,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 
 	if (not num_indicators)
 		throw wexception
-			("Tribe %s doesn't declar a resource indicator for resource %s!",
+			("tribe %s does not declare a resource indicator for resource %s",
 			 name().c_str(),
 			 res->name().c_str());
 

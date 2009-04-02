@@ -213,7 +213,7 @@ void Main_Menu_Load_Map::fill_list() {
 
 	//  First, we add all directories. We manually add the parent directory.
 	if (m_curdir != m_basedir) {
-#ifndef __WIN32__
+#ifndef WIN32
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind("/"));
 #else
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind("\\"));

@@ -10,6 +10,7 @@
 #  * grep with a set of regular expressions
 #  * whitespace_checker (with detect_spurious_indentation.py as an inferior
 #    fallback)
+#  * krazy2 with a selected set of checks
 #
 #  Results are cached (there are separate caches for colour/nocolour). The
 #  check commands do not write directly to a file at the cahce file location
@@ -33,6 +34,61 @@ if [ ! -f $CHECKER ]; then
 	unset CHECKER
 fi
 
+KRAZY2=$(which krazy2 2>/dev/null)
+if [ -z $KRAZY2 ]; then
+	KRAZY2=/usr/local/Krazy2/bin/krazy2
+	if [ ! -f $KRAZY2 ]; then
+		echo "WARNING: krazy2 does not exist!"
+		echo "WARNING:    Get it from:"
+		echo "WARNING:       svn://anonsvn.kde.org/home/kde/trunk/quality/krazy2"
+		echo "WARNING:    Else you will submit code with i. a. spelling errors!"
+		unset KRAZY2
+	fi
+fi
+
+# Which C++ checks from krazy2 should we use?
+#       captruefalse: use (fallback: regexps/using_macro_TRUE_FALSE)
+#           constref: undecided
+#       contractions: use
+#          copyright: use
+#                cpp: undecided (complains about __APPLE__ and __GNUC__)
+#  doublequote_chars: only for Qt
+#           doxytags: undecided
+#           dpointer: only for shared libraries with binary compatibility reqs
+#    emptystrcompare: only for Qt
+#    endswithnewline: taken care of by whitespace_checker
+#           explicit: use
+#            foreach: undecided
+#       i18ncheckarg: only for Qt
+#          iconnames: only for KDE
+#           includes: use
+#             inline: use
+#            license: use
+#      nullstrassign: only for Qt
+#     nullstrcompare: only for Qt
+#        passbyvalue: use
+#          postfixop: use
+#         qbytearray: only for Qt
+#           qclasses: only for Qt
+#           qconnect: only for Qt
+#           qmethods: only for Qt
+#            qminmax: only for Qt
+#            qobject: only for Qt
+#       sigsandslots: only for Qt
+#           spelling: use
+#            strings: use
+#           syscalls: only for Qt
+#           typedefs: only for Qt
+#          camelcase: undecided
+#            defines: undecided
+#             kdebug: only for KDE
+#       multiclasses: undecided
+#               null: use
+#             qenums: only for Qt
+#              style: gives false positives
+#        tipsandthis: only for Qt
+KRAZY2CHECKS=captruefalse,contractions,copyright,explicit,includes,inline,license,passbyvalue,postfixop,strings,null
+
 #  Make sure that several instances of this script running concurrently each
 #  have a separate temporary directory.
 TMP_DIR=/tmp/spurious_source_code_detect.$PPID
@@ -42,7 +98,7 @@ mkdir $TMP_DIR || { echo "ERROR: could not create $TMP_DIR"; exit; }
 
 REGEXPS_FILE=$TMP_DIR/regexps
 for r in utils/spurious_source_code/regexps/*; do
-	[[ -d $r && ! -f $r/disabled && ( ! $CHECKER || ! -f $r/redundant_with_whitespace_checker ) ]] &&
+	[[ -d $r && ! -f $r/disabled && ( ! $CHECKER || ! -f $r/redundant_with_whitespace_checker ) && ( ! $KRAZY2 || ! -f $r/redundant_with_krazy2 ) ]] &&
 		cat $r/regexps >> $REGEXPS_FILE
 done
 
@@ -67,6 +123,7 @@ RESULT_FILE=$TMP_DIR/result
 function check {
 	egrep --with-filename --line-number $([ $COLOUR ] && echo --colour=always) -f $REGEXPS_FILE $1 >  $RESULT_FILE
 	([[ $CHECKER ]] && $CHECKER $1 || utils/detect_spurious_indentation.py $1)                     >> $RESULT_FILE
+	([[ $KRAZY2 ]] && $KRAZY2 --export=textedit --check=$KRAZY2CHECKS $1 2>/dev/null)              >> $RESULT_FILE
 }
 
 

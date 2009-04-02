@@ -628,19 +628,13 @@ uint32_t Player::findAttackSoldiers
 void Player::enemyflagaction
 	(Flag & flag, Player_Number const attacker, uint32_t const count)
 {
-	upcast(Game, game, &egbase());
-	assert(game);
-
-	if (attacker != get_player_number()) {
-		log("Player (%d) is not the sender of an attack (%d)\n", attacker, get_player_number());
-		return;
-	}
-	if (count == 0) {
-		log("enemyflagaction: count == %i\n", count);
-		return;
-	}
-
-	if (&flag.owner() != this)
+	if      (attacker != get_player_number())
+		log
+			("Player (%d) is not the sender of an attack (%d)\n",
+			 attacker, get_player_number());
+	else if (count == 0)
+		log("enemyflagaction: count is 0\n");
+	else if (&flag.owner() != this)
 		if (Building * const building = flag.get_building())
 			if (upcast(Attackable, attackable, building))
 				if (attackable->canAttack()) {
@@ -830,7 +824,7 @@ void Player::update_building_statistics
 }
 
 
-void Player::receive(const NoteImmovable& note)
+void Player::receive(NoteImmovable const & note)
 {
 	if (upcast(Building, building, note.pi))
 		update_building_statistics(*building, note.lg);
@@ -839,7 +833,7 @@ void Player::receive(const NoteImmovable& note)
 }
 
 
-void Player::receive(const NoteField& note)
+void Player::receive(NoteField const & note)
 {
 	NoteSender<NoteField>::send(note);
 }
@@ -866,7 +860,7 @@ const std::string & Player::getAI() const
  * it.
  * \todo Document parameter fr
  */
-void Player::ReadStatistics(FileRead& fr, uint32_t version)
+void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 {
 	if (version == 0) {
 		uint16_t nr_wares = fr.Unsigned16();
@@ -899,7 +893,7 @@ void Player::ReadStatistics(FileRead& fr, uint32_t version)
 /**
  * Write statistics data to the give file
  */
-void Player::WriteStatistics(FileWrite& fw) const {
+void Player::WriteStatistics(FileWrite & fw) const {
 	fw.Unsigned16(m_current_statistics.size());
 	fw.Unsigned16(m_ware_productions[0].size());
 

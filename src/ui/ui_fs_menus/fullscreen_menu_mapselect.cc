@@ -26,7 +26,6 @@
 #include "layered_filesystem.h"
 #include "map.h"
 #include "profile.h"
-#include "widelands_map_loader.h"
 #include "s2map.h"
 #include "wexception.h"
 #include "widelands_map_loader.h"
@@ -258,7 +257,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 	//about the absolute filesystem top!) we manually add ".."
 	if (m_curdir != m_basedir) {
 		MapData map;
-#ifndef __WIN32__
+#ifndef WIN32
 		map.filename = m_curdir.substr(0, m_curdir.rfind("/"));
 #else
 		map.filename = m_curdir.substr(0, m_curdir.rfind("\\"));

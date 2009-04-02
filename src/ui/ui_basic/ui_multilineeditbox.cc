@@ -19,7 +19,6 @@
 
 #include "ui_multilineeditbox.h"
 
-#include "font_handler.h"
 #include "ui_scrollbar.h"
 #include "constants.h"
 #include "font_handler.h"

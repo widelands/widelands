@@ -71,7 +71,7 @@ struct Cmd_Bulldoze:public PlayerCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_BULLDOZE;} // Get this command id
+	virtual uint8_t id() const {return QUEUE_CMD_BULLDOZE;}
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite &);
@@ -84,12 +84,11 @@ private:
 struct Cmd_Build:public PlayerCommand {
 	Cmd_Build() : PlayerCommand() {} // For savegame loading
 	Cmd_Build
-		(int32_t        const t,
+		(int32_t        const _duetime,
 		 int32_t        const p,
 		 Coords         const c,
 		 Building_Index const i)
-		:
-		PlayerCommand(t, p), coords(c), id(i)
+		: PlayerCommand(_duetime, p), coords(c), bi(i)
 	{}
 
 	Cmd_Build (StreamRead &);
@@ -97,14 +96,14 @@ struct Cmd_Build:public PlayerCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_BUILD;} // Get this command id
+	virtual uint8_t id() const {return QUEUE_CMD_BUILD;}
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite &);
 
 private:
 	Coords         coords;
-	Building_Index id;
+	Building_Index bi;
 };
 
 struct Cmd_BuildFlag:public PlayerCommand {
@@ -118,7 +117,7 @@ struct Cmd_BuildFlag:public PlayerCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_FLAG;} // Get this command id
+	virtual uint8_t id() const {return QUEUE_CMD_FLAG;}
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite &);
@@ -137,7 +136,7 @@ struct Cmd_BuildRoad:public PlayerCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_BUILDROAD;} // Get this command id
+	virtual uint8_t id() const {return QUEUE_CMD_BUILDROAD;}
 
 	virtual void execute (Game* g);
 	virtual void serialize (StreamWrite &);
@@ -158,7 +157,7 @@ struct Cmd_FlagAction:public PlayerCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_FLAGACTION;} // Get this command id
+	virtual uint8_t id() const {return QUEUE_CMD_FLAGACTION;}
 
 
 	Cmd_FlagAction (StreamRead &);
@@ -179,7 +178,7 @@ struct Cmd_StartStopBuilding : public PlayerCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_STOPBUILDING;} // Get this command id
+	virtual uint8_t id() const {return QUEUE_CMD_STOPBUILDING;}
 
 	Cmd_StartStopBuilding (StreamRead &);
 
@@ -193,18 +192,18 @@ private:
 struct Cmd_EnhanceBuilding:public PlayerCommand {
 	Cmd_EnhanceBuilding() : PlayerCommand() {} // For savegame loading
 	Cmd_EnhanceBuilding
-		(int32_t        const t,
+		(int32_t        const _duetime,
 		 int32_t        const p,
 		 Building     &       b,
 		 Building_Index const i)
-		: PlayerCommand(t, p), serial(b.serial()), id(i)
+		: PlayerCommand(_duetime, p), serial(b.serial()), bi(i)
 	{}
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_ENHANCEBUILDING;} // Get this command id
+	virtual uint8_t id() const {return QUEUE_CMD_ENHANCEBUILDING;}
 
 	Cmd_EnhanceBuilding (StreamRead &);
 
@@ -213,7 +212,7 @@ struct Cmd_EnhanceBuilding:public PlayerCommand {
 
 private:
 	Serial serial;
-	Building_Index id;
+	Building_Index bi;
 };
 
 struct Cmd_SetWarePriority : public PlayerCommand {
@@ -227,7 +226,7 @@ struct Cmd_SetWarePriority : public PlayerCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_SETWAREPRIORITY;}
+	virtual uint8_t id() const {return QUEUE_CMD_SETWAREPRIORITY;}
 
 	Cmd_SetWarePriority(StreamRead &);
 
@@ -277,7 +276,7 @@ struct Cmd_SetTargetQuantity : public Cmd_ChangeTargetQuantity {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_SETTARGETQUANTITY;}
+	virtual uint8_t id() const {return QUEUE_CMD_SETTARGETQUANTITY;}
 
 	Cmd_SetTargetQuantity(StreamRead &);
 
@@ -298,7 +297,7 @@ struct Cmd_ResetTargetQuantity : public Cmd_ChangeTargetQuantity {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_RESETTARGETQUANTITY;}
+	virtual uint8_t id() const {return QUEUE_CMD_RESETTARGETQUANTITY;}
 
 	Cmd_ResetTargetQuantity(StreamRead &);
 
@@ -325,7 +324,7 @@ struct Cmd_ChangeTrainingOptions : public PlayerCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_CHANGETRAININGOPTIONS;} // Get this command id
+	virtual uint8_t id() const {return QUEUE_CMD_CHANGETRAININGOPTIONS;}
 
 	Cmd_ChangeTrainingOptions (StreamRead &);
 
@@ -352,7 +351,7 @@ struct Cmd_DropSoldier : public PlayerCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_DROPSOLDIER;} // Get this command id
+	virtual uint8_t id() const {return QUEUE_CMD_DROPSOLDIER;}
 
 	Cmd_DropSoldier(StreamRead &);
 
@@ -375,7 +374,7 @@ struct Cmd_ChangeSoldierCapacity : public PlayerCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_CHANGESOLDIERCAPACITY;} // Get this command id
+	virtual uint8_t id() const {return QUEUE_CMD_CHANGESOLDIERCAPACITY;}
 
 	Cmd_ChangeSoldierCapacity (StreamRead &);
 
@@ -402,7 +401,7 @@ struct Cmd_EnemyFlagAction : public PlayerCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual int32_t get_id() {return QUEUE_CMD_ENEMYFLAGACTION;} // Get this command id
+	virtual uint8_t id() const {return QUEUE_CMD_ENEMYFLAGACTION;}
 
 	Cmd_EnemyFlagAction (StreamRead &);
 

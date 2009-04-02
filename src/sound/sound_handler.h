@@ -20,9 +20,6 @@
 #ifndef SOUND_HANDLER_H
 #define SOUND_HANDLER_H
 
-//config.h *must* be included before SDL_mixer.h due to USE_RWOPS !!
-#include "config.h"
-
 #include "fileread.h"
 #include "fxset.h"
 #include "widelands_geometry.h"
