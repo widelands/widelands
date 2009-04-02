@@ -155,7 +155,7 @@ stronghold=_Stronghold
 
 [warehouse types]
 headquarters=_Headquarters
-interim_headquarters=_Headquarters
+headquarters_interim=_Headquarters
 warehouse=_Warehouse
 
 [productionsite types]
