@@ -1110,8 +1110,6 @@ UI::Window(parent, 0, 0, 320, 125, _("Worker Listing"))
 	posx = get_inner_w() / 2 + spacing;
 	new UI::Textarea(this, posx, posy, 150, 20, _("Type: "), Align_CenterLeft);
 	m_type =
-	new UI::Textarea(this, posx, posy, 150, 20, _("Type: "), Align_CenterLeft);
-	m_type =
 		new UI::Textarea(this, posx + 80, posy, 200, 20, "---", Align_CenterLeft);
 	posy += 20 + spacing;
 
