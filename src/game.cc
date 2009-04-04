@@ -547,7 +547,7 @@ void Game::think()
 
 	if (m_state == gs_running) {
 		if
-			(not m_general_stats.size()
+			(m_general_stats.empty()
 			 or
 			 get_gametime() - m_last_stats_update > STATISTICS_SAMPLE_TIME)
 		{

@@ -91,14 +91,6 @@ void EventChain::add_event(Event * const ev) {
 
 namespace Widelands {
 
-/**
- * Check trigger cmd
- */
-Cmd_CheckEventChain::Cmd_CheckEventChain (int32_t t, int32_t tid) : GameLogicCommand (t)
-{
-	m_eventchain_id=tid;
-}
-
 void Cmd_CheckEventChain::execute (Game * game) {
 	++m_eventchain_id;
 

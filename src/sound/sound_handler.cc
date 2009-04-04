@@ -253,10 +253,10 @@ Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
 		GetTempPath(1024, lpPathBuffer);
 		// Create a temporary file.
 		GetTempFileName
-		(lpPathBuffer, //  directory for tmp files
-		 "widelands",  //  temp file name prefix
-		 0,            //  create unique name
-		 szTempName);  //  buffer for name
+			(lpPathBuffer, //  directory for tmp files
+			 "widelands",  //  temp file name prefix
+			 0,            //  create unique name
+			 szTempName);  //  buffer for name
 		tempfile = szTempName;
 #else
 		//manpage recommends a minimum suffix length of 6

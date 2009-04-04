@@ -58,7 +58,7 @@ Computer_Player::getImplementations()
 {
 	static std::vector<Computer_Player::Implementation const *> impls;
 
-	if (!impls.size()) {
+	if (impls.empty()) {
 		impls.push_back(&DefaultAI::implementation);
 #ifdef DEBUG
 		impls.push_back(&EmptyAI::implementation);

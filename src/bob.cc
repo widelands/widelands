@@ -188,11 +188,11 @@ void Bob::act(Game* g, uint32_t data)
 	++m_actid;
 	m_actscheduled = false;
 
-	if (!m_stack.size()) {
+	if (m_stack.empty()) {
 		m_signal = "";
 		init_auto_task(g);
 
-		if (!m_stack.size())
+		if (m_stack.empty())
 			throw wexception
 				("MO(%u): init_auto_task() failed to set a task", serial());
 		if (!m_actscheduled)
@@ -269,7 +269,7 @@ void Bob::skip_act()
  */
 void Bob::push_task(Game* g, const Task & task)
 {
-	assert(m_in_act || !m_stack.size());
+	assert(m_in_act || m_stack.empty());
 
 	m_stack.push_back(State(&task));
 	schedule_act(g, 10);

@@ -111,8 +111,8 @@ enum {
  */
 struct RequirementsStorage {
 	typedef
-		Requirements
-		(*Reader)(FileRead &, Editor_Game_Base &, Map_Map_Object_Loader *);
+		Requirements (*Reader)
+			(FileRead &, Editor_Game_Base &, Map_Map_Object_Loader *);
 
 	RequirementsStorage(uint32_t _id, Reader reader);
 	uint32_t id() const;

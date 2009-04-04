@@ -30,8 +30,8 @@ struct Point {
 	static Point invalid() throw () {
 		return
 			Point
-			(std::numeric_limits<int32_t>::max(),
-			 std::numeric_limits<int32_t>::max());
+				(std::numeric_limits<int32_t>::max(),
+				 std::numeric_limits<int32_t>::max());
 	}
 
 	bool operator== (Point const other) const throw () {

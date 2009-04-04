@@ -599,7 +599,7 @@ FieldActionWindow::add_buttons_road
 Buttons used during road building: Set flag here and Abort
 ===============
 */
-void FieldActionWindow::add_buttons_road(bool flag)
+void FieldActionWindow::add_buttons_road(bool const flag)
 {
 	UI::Box & buildbox = *new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
@@ -998,8 +998,6 @@ void show_field_action
 	 Widelands::Player          * const player,
 	 UI::UniqueWindow::Registry * const registry)
 {
-	FieldActionWindow *faw;
-
 	// Force closing of old fieldaction windows. This is necessary because
 	// show_field_action() does not always open a FieldActionWindow (e.g.
 	// connecting the road we are building to an existing flag)
@@ -1007,10 +1005,9 @@ void show_field_action
 	*registry = UI::UniqueWindow::Registry();
 
 	if (!iabase->is_building_road()) {
-		faw = new FieldActionWindow(iabase, player, registry);
-		faw->add_buttons_auto();
-		faw->init();
-		return;
+		FieldActionWindow & w = *new FieldActionWindow(iabase, player, registry);
+		w.add_buttons_auto();
+		return w.init();
 	}
 
 	Widelands::Map const & map = player->egbase().map();
@@ -1021,25 +1018,19 @@ void show_field_action
 
 	// if user clicked on the same field again, build a flag
 	if (target == iabase->get_build_road_end()) {
-		faw = new FieldActionWindow(iabase, player, registry);
-
-		bool flag = false;
-		if
+		FieldActionWindow & w = *new FieldActionWindow(iabase, player, registry);
+		w.add_buttons_road
 			(target != iabase->get_build_road_start()
 			 and
-			 player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG)
-			flag = true;
-		faw->add_buttons_road(flag);
-		faw->init();
-		return;
+			 player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG);
+		return w.init();
 	}
 
 	// append or take away from the road
 	if (!iabase->append_build_road(target)) {
-		faw = new FieldActionWindow(iabase, player, registry);
-		faw->add_buttons_road(false);
-		faw->init();
-		return;
+		FieldActionWindow & w = *new FieldActionWindow(iabase, player, registry);
+		w.add_buttons_road(false);
+		return w.init();
 	}
 
 	// did he click on a flag or a road where a flag can be built?

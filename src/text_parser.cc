@@ -227,7 +227,7 @@ bool Text_Parser::extract_format_block
 }
 
 void Text_Parser::parse_richtexttext_attributes(std::string format, Richtext_Block *element) {
-	if (!format.size())
+	if (format.empty())
 		return;
 	if (format[0] == ' ')
 		format.erase(0, 1);
@@ -256,7 +256,7 @@ void Text_Parser::parse_richtexttext_attributes(std::string format, Richtext_Blo
 }
 
 void Text_Parser::parse_text_attributes(std::string format, Text_Block *element) {
-	if (!format.size())
+	if (format.empty())
 		return;
 	if (format[0] == ' ')
 		format.erase(0, 1);

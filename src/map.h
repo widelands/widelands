@@ -398,8 +398,7 @@ private:
 	void check_neighbour_heights(FCoords, uint32_t & radius);
 
 	template<typename functorT>
-		void find_reachable
-		(const Area<FCoords>, const CheckStep &, functorT &);
+		void find_reachable(Area<FCoords>, CheckStep const &, functorT &);
 
 	template<typename functorT> void find(const Area<FCoords>, functorT &) const;
 

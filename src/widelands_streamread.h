@@ -54,9 +54,9 @@ struct StreamRead : public ::StreamRead {
 			(Direction const D)
 			:
 			_data_error
-			("direction is %u but must be one of {0 (idle), 1 (northeast), 2 "
-			 "(east), 3 (southeast), 4 (southwest), 5 (west), 6 (northwest)}",
-			 D),
+				("direction is %u but must be one of {0 (idle), 1 (northeast), 2 "
+				 "(east), 3 (southeast), 4 (southwest), 5 (west), 6 (northwest)}",
+				 D),
 			direction(D)
 		{}
 		Direction direction;
@@ -66,8 +66,8 @@ struct StreamRead : public ::StreamRead {
 			(Map_Index const Max, Map_Index const I)
 			:
 			_data_error
-			("index is %u but max index is only %u",
-			 I, Max),
+				("index is %u but max index is only %u",
+				 I, Max),
 			max(Max), i(I)
 		{}
 		Map_Index const max, i;
@@ -77,8 +77,8 @@ struct StreamRead : public ::StreamRead {
 			(uint16_t const W, const X_Coordinate X)
 			:
 			_data_error
-			("x coordinate is %i but width is only %u",
-			 X, W),
+				("x coordinate is %i but width is only %u",
+				 X, W),
 			w(W), x(X)
 		{}
 		uint16_t     const w;
@@ -89,8 +89,8 @@ struct StreamRead : public ::StreamRead {
 			(uint16_t const H, const Y_Coordinate Y)
 			:
 			_data_error
-			("y coordinate is %i but height is only %u",
-			 Y, H),
+				("y coordinate is %i but height is only %u",
+				 Y, H),
 			h(H), y(Y)
 		{}
 		uint16_t     h;
@@ -101,8 +101,8 @@ struct StreamRead : public ::StreamRead {
 			(Player_Number const N, Player_Number const P)
 			:
 			_data_error
-			("player number is %u but there are only %u players",
-			 P, N),
+				("player number is %u but there are only %u players",
+				 P, N),
 			nr_players(N), player_number(P)
 		{}
 		Player_Number nr_players, player_number;
@@ -112,8 +112,8 @@ struct StreamRead : public ::StreamRead {
 			(char const * const Name)
 			:
 			_data_error
-			("tribe \"%s\" does not exist",
-			 Name),
+				("tribe \"%s\" does not exist",
+				 Name),
 			name(Name) {}
 		char const * const name;
 	};
@@ -122,8 +122,8 @@ struct StreamRead : public ::StreamRead {
 			(std::string const & Tribename, char const * const Name)
 			:
 			_data_error
-			("tribe %s does not define immovable type \"%s\"",
-			 Tribename.c_str(), Name),
+				("tribe %s does not define immovable type \"%s\"",
+				 Tribename.c_str(), Name),
 			tribename(Tribename), name(Name)
 		{}
 		std::string const & tribename;
@@ -134,8 +134,8 @@ struct StreamRead : public ::StreamRead {
 			(char const * const Worldname, char const * const Name)
 			:
 			_data_error
-			("world %s does not define immovable type \"%s\"",
-			 Worldname, Name),
+				("world %s does not define immovable type \"%s\"",
+				 Worldname, Name),
 			worldname(Worldname), name(Name)
 		{}
 		char const * const worldname, * const name;
@@ -145,8 +145,8 @@ struct StreamRead : public ::StreamRead {
 			(std::string const & Tribename, char const * const Name)
 			:
 			_data_error
-			("tribe %s does not define building type \"%s\"",
-			 Tribename.c_str(), Name),
+				("tribe %s does not define building type \"%s\"",
+				 Tribename.c_str(), Name),
 			tribename(Tribename), name(Name)
 		{}
 		std::string const & tribename;

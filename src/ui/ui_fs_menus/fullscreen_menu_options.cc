@@ -232,7 +232,7 @@ os(opt)
 			if (640 <= modes[i]->w and 480 <= modes[i]->h) {
 				res const this_res = {modes[i]->w, modes[i]->h, 16};
 			if
-				(not m_resolutions.size()
+				(m_resolutions.empty()
 				 or
 				 this_res.xres != m_resolutions[m_resolutions.size() - 1].xres
 				 or
@@ -247,7 +247,7 @@ os(opt)
 			if (640 <= modes[i]->w and 480 <= modes[i]->h) {
 				res const this_res = {modes[i]->w, modes[i]->h, 32};
 				if
-					(not m_resolutions.size()
+					(m_resolutions.empty()
 					 or
 					 this_res.xres != m_resolutions[m_resolutions.size() - 1].xres
 					 or

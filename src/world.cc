@@ -84,7 +84,7 @@ void Resource_Descr::parse(Section *s, std::string basedir)
 
 		m_editor_pics.push_back(i);
 	}
-	if (!m_editor_pics.size())
+	if (m_editor_pics.empty())
 		throw wexception("Resource '%s' has no editor_pic", m_name.c_str());
 }
 
@@ -290,10 +290,10 @@ bool World::exists_world(std::string worldname)
 	FileRead f;
 	return
 		f.TryOpen
-		(*
-		 std::auto_ptr<FileSystem>
-		 	(g_fs->MakeSubFileSystem("worlds/" + worldname)),
-		 "conf");
+			(*
+			 std::auto_ptr<FileSystem>
+			 	(g_fs->MakeSubFileSystem("worlds/" + worldname)),
+			 "conf");
 }
 
 void World::get_all_worlds(std::vector<std::string> & result) {

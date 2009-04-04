@@ -209,8 +209,8 @@ inline static uint32_t blend_color
 	SDL_GetRGB(clr1, &const_cast<SDL_PixelFormat &>(format), &r1, &g1, &b1);
 	return
 		SDL_MapRGB
-		(&const_cast<SDL_PixelFormat &>(format),
-		 (r1 + r2) / 2, (g1 + g2) / 2, (b1 + b2) / 2);
+			(&const_cast<SDL_PixelFormat &>(format),
+			 (r1 + r2) / 2, (g1 + g2) / 2, (b1 + b2) / 2);
 }
 
 /*
@@ -234,8 +234,8 @@ inline static uint32_t calc_minimap_color
 		pixelcolor =
 			g_gr->
 			get_maptexture_data
-			(egbase.map().world()
-			 .terrain_descr(f.field->terrain_d()).get_texture())
+				(egbase.map().world()
+				 .terrain_descr(f.field->terrain_d()).get_texture())
 			->get_minimap_color(f.field->get_brightness());
 	}
 

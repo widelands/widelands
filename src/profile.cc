@@ -693,10 +693,10 @@ Profile::Profile(int32_t error_level)
  * of that name.
  */
 Profile::Profile
-(char const * const filename,
- char const * const global_section,
- int32_t      const error_level)
-: m_filename(filename), m_error_level(error_level)
+	(char const * const filename,
+	 char const * const global_section,
+	 int32_t      const error_level)
+	: m_filename(filename), m_error_level(error_level)
 {
 	read(filename, global_section);
 }

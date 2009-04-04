@@ -51,7 +51,7 @@ void Trigger_Building::Read(Section & s, Editor_Game_Base & egbase) {
 				(m_player_area.player_number, this);
 			m_building_type =
 				&s.get_safe_Building_Type
-				("building", egbase, m_player_area.player_number);
+					("building", egbase, m_player_area.player_number);
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (std::exception const & e) {

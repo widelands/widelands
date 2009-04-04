@@ -63,26 +63,26 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 	ta = new UI::Textarea(this, posx, posy - 2, _("Size:"));
 	m_size =
 		new UI::Textarea
-		(this, posx + ta->get_w() + spacing, posy - 2, "512x512", Align_Left);
+			(this, posx + ta->get_w() + spacing, posy - 2, "512x512", Align_Left);
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("Nr Players:"));
 	m_nrplayers =
 		new UI::Textarea
-		(this, posx + ta->get_w() + spacing, posy - 2, "1", Align_Left);
+			(this, posx + ta->get_w() + spacing, posy - 2, "1", Align_Left);
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("World:"));
 	m_world =
 		new UI::Textarea
-		(this,
-		 posx + ta->get_w() + spacing, posy - 2,
-		 "\"Greenland\"", Align_Left);
+			(this,
+			 posx + ta->get_w() + spacing, posy - 2,
+			 "\"Greenland\"", Align_Left);
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("Author:"), Align_Left);
 	m_author =
 		new UI::EditBox
-		(this,
-		 posx + ta->get_w() + spacing, posy,
-		 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20, 1, 1);
+			(this,
+			 posx + ta->get_w() + spacing, posy,
+			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20, 1, 1);
 	m_author->changedid.set(this, &Main_Menu_Map_Options::changed);
 	posy += height + spacing;
 	m_descr = new UI::Multiline_Editbox

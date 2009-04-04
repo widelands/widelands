@@ -388,9 +388,9 @@ void RenderTarget::rendermap
 		Widelands::Map_Index tr_index = tr.field - &map[0];
 		const Texture * f_r_texture =
 			g_gr->get_maptexture_data
-			(world
-			 .terrain_descr(first_player_field[f.field - &map[0]].terrains.r)
-			 .get_texture());
+				(world
+				 .terrain_descr(first_player_field[f.field - &map[0]].terrains.r)
+				 .get_texture());
 
 		uint32_t count = dx;
 
@@ -410,14 +410,14 @@ void RenderTarget::rendermap
 			br_posx += TRIANGLE_WIDTH;
 			const Texture & tr_d_texture =
 				*g_gr->get_maptexture_data
-				(world.terrain_descr(first_player_field[tr_index].terrains.d)
-				 .get_texture());
+					(world.terrain_descr(first_player_field[tr_index].terrains.d)
+					 .get_texture());
 			const Texture & f_d_texture =
 				*g_gr->get_maptexture_data
-				(world.terrain_descr(f_player_field.terrains.d).get_texture());
+					(world.terrain_descr(f_player_field.terrains.d).get_texture());
 			f_r_texture =
 				g_gr->get_maptexture_data
-				(world.terrain_descr(f_player_field.terrains.r).get_texture());
+					(world.terrain_descr(f_player_field.terrains.r).get_texture());
 
 			uint8_t const roads =
 				f_player_field.roads | overlay_manager.get_road_overlay(f);
@@ -733,7 +733,7 @@ void RenderTarget::rendermap
 							overlay_info
 							+
 							overlay_manager.get_overlays
-							(TCoords<>(f, TCoords<>::D), overlay_info);
+								(TCoords<>(f, TCoords<>::D), overlay_info);
 
 						for
 							(const Overlay_Manager::Overlay_Info * it = overlay_info;
@@ -803,7 +803,7 @@ void RenderTarget::rendermap
 		map.get_ln(r, &f);
 		const Texture * f_r_texture =
 			g_gr->get_maptexture_data
-			(world.terrain_descr(f.field->terrain_r()).get_texture());
+				(world.terrain_descr(f.field->terrain_r()).get_texture());
 
 		uint32_t count = dx;
 
@@ -819,13 +819,13 @@ void RenderTarget::rendermap
 			br_posx += TRIANGLE_WIDTH;
 			const Texture & tr_d_texture =
 				*g_gr->get_maptexture_data
-				(world.terrain_descr(tr.field->terrain_d()).get_texture());
+					(world.terrain_descr(tr.field->terrain_d()).get_texture());
 			const Texture & f_d_texture =
 				*g_gr->get_maptexture_data
-				(world.terrain_descr(f.field->terrain_d()).get_texture());
+					(world.terrain_descr(f.field->terrain_d()).get_texture());
 			f_r_texture =
 				g_gr->get_maptexture_data
-				(world.terrain_descr(f.field->terrain_r()).get_texture());
+					(world.terrain_descr(f.field->terrain_r()).get_texture());
 
 			const uint8_t roads =
 				f.field->get_roads() | overlay_manager.get_road_overlay(f);

@@ -32,7 +32,7 @@ int32_t Editor_Increase_Height_Tool::handle_click_impl
 {
 	return
 		map.change_height
-		(Widelands::Area<Widelands::FCoords>
-		 	(map.get_fcoords(center.node), parent.get_sel_radius()),
-		 m_change_by);
+			(Widelands::Area<Widelands::FCoords>
+			 	(map.get_fcoords(center.node), parent.get_sel_radius()),
+			 m_change_by);
 }

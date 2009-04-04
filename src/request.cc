@@ -478,7 +478,7 @@ void Request::Read
 			if (3 <= version)
 				m_last_request_time = fr->Unsigned32();
 
-			assert(!m_transfers.size());
+			assert(m_transfers.empty());
 
 			uint16_t const nr_transfers = fr->Unsigned16();
 			for (uint16_t i = 0; i < nr_transfers; ++i)
@@ -655,77 +655,63 @@ int32_t Request::get_priority (int32_t cost) const
 	}
 
 
-	if (is_idle()) {
-		// idle requests are prioritized only by cost
-		int32_t weighted_cost = cost * MAX_IDLE_PRIORITY / PRIORITY_MAX_COST;
+	if (is_idle()) //  idle requests are prioritized only by cost
 		return
-			weighted_cost > MAX_IDLE_PRIORITY ?
-			0 : MAX_IDLE_PRIORITY - weighted_cost;
-	}
-
-
-
-
-
-	Editor_Game_Base& g = m_economy->owner().egbase();
+			std::max
+				(0,
+				 MAX_IDLE_PRIORITY - cost * MAX_IDLE_PRIORITY / PRIORITY_MAX_COST);
 
 	if (cost > PRIORITY_MAX_COST)
 		cost = PRIORITY_MAX_COST;
 
-	int32_t wait_time = is_construction_site
-		? g.get_gametime() - get_required_time()
-		: g.get_gametime() - get_last_request_time();
-	int32_t distance = PRIORITY_MAX_COST - cost;
-
 	// priority is higher if building waits for ware a long time
 	// additional factor - cost to deliver, so nearer building
 	// with same priority will get ware first
-	int32_t priority =
-		(wait_time * WAITTIME_WEIGHT_IN_PRIORITY +
-		 distance  * COST_WEIGHT_IN_PRIORITY)
-		* modifier
-		+ MAX_IDLE_PRIORITY;
-
-	if (priority <= MAX_IDLE_PRIORITY)
-		return MAX_IDLE_PRIORITY + 1; // make sure idle request are lower
-	return priority;
+	//  make sure that idle request are lower
+	return
+		MAX_IDLE_PRIORITY
+		+
+		std::max
+			(1,
+			 ((m_economy->owner().egbase().get_gametime() -
+			   (is_construction_site ?
+			    get_required_time() : get_last_request_time()))
+			  *
+			  WAITTIME_WEIGHT_IN_PRIORITY
+			  +
+			  (PRIORITY_MAX_COST - cost) * COST_WEIGHT_IN_PRIORITY)
+			 *
+			 modifier);
 }
 
 /**
  * Change the Economy we belong to.
 */
-void Request::set_economy(Economy* e)
+void Request::set_economy(Economy * const e)
 {
-	if (m_economy == e)
-		return;
-
-	if (m_economy && is_open())
-		m_economy->remove_request(*this);
-
-	m_economy = e;
-
-	if (m_economy && is_open())
-		m_economy->add_request(*this);
+	if (m_economy != e) {
+		if (m_economy && is_open())
+			m_economy->remove_request(*this);
+		m_economy = e;
+		if (m_economy && is_open())
+			m_economy->   add_request(*this);
+	}
 }
 
 /**
  * Make a Request idle or not idle.
 */
-void Request::set_idle(bool idle)
+void Request::set_idle(bool const idle)
 {
-	bool wasopen = is_open();
-
-	if (m_idle == idle)
-		return;
-
-	m_idle = idle;
-
-	// Idle requests are always added to the economy
-	if (m_economy) {
-		if (wasopen && !is_open())
-			m_economy->remove_request(*this);
-		else if (!wasopen && is_open())
-			m_economy->add_request(*this);
+	if (m_idle != idle) {
+		bool const wasopen = is_open();
+		m_idle = idle;
+		if (m_economy) { //  Idle requests are always added to the economy.
+			if       (wasopen && !is_open())
+				m_economy->remove_request(*this);
+			else if (!wasopen &&  is_open())
+				m_economy->   add_request(*this);
+		}
 	}
 }
 
@@ -734,7 +720,7 @@ void Request::set_idle(bool idle)
 */
 void Request::set_count(uint32_t const count)
 {
-	bool wasopen = is_open();
+	bool const wasopen = is_open();
 
 	m_count = count;
 
@@ -757,7 +743,7 @@ void Request::set_count(uint32_t const count)
  * Change the time at which the first item to be delivered is needed.
  * Default is the gametime of the Request creation.
 */
-void Request::set_required_time(int32_t time)
+void Request::set_required_time(int32_t const time)
 {
 	m_required_time = time;
 }
@@ -765,7 +751,7 @@ void Request::set_required_time(int32_t time)
 /**
  * Change the time between desired delivery of items.
 */
-void Request::set_required_interval(int32_t interval)
+void Request::set_required_interval(int32_t const interval)
 {
 	m_required_interval = interval;
 }

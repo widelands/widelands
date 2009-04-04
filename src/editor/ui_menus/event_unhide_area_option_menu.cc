@@ -60,9 +60,9 @@ m_player_area(event.m_player_area)
 		(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
 	m_name =
 		new UI::EditBox
-		(this,
-		 spacing + 60, posy, get_inner_w() - 2 * spacing - 60, 20,
-		 0, 0);
+			(this,
+			 spacing + 60, posy, get_inner_w() - 2 * spacing - 60, 20,
+			 0, 0);
 	m_name->setText(event.name());
 	posy += 20 + spacing;
 
@@ -119,7 +119,7 @@ m_player_area(event.m_player_area)
 		(this, spacing + 20, posy + 20, 20, 20, "X: ", Align_CenterLeft);
 	m_x_ta =
 		new UI::Textarea
-		(this, spacing + 40, posy + 20, 20, 20, "X: ", Align_CenterLeft);
+			(this, spacing + 40, posy + 20, 20, 20, "X: ", Align_CenterLeft);
 
 	//  Y
 	int32_t const oldspacing = spacing;
@@ -170,7 +170,7 @@ m_player_area(event.m_player_area)
 	new UI::Textarea(this, spacing, posy + 20, 20, 20, "Y: ", Align_CenterLeft);
 	m_y_ta =
 		new UI::Textarea
-		(this, spacing + 20, posy + 20, 20, 20, "Y: ", Align_CenterLeft);
+			(this, spacing + 20, posy + 20, 20, 20, "Y: ", Align_CenterLeft);
 	spacing = oldspacing;
 
 	posy += 60 + spacing;

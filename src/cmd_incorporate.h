@@ -40,7 +40,6 @@ struct Cmd_Incorporate : public GameLogicCommand {
 
 	virtual uint8_t id() const {return QUEUE_CMD_INCORPORATE;}
 
-
 private:
 	Worker * worker;
 };

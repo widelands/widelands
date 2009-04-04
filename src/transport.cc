@@ -2615,7 +2615,7 @@ void Economy::remove_warehouse(Warehouse *wh)
 	//  This assert was modified, since on loading, warehouses might try to
 	//  remove themselves from their own economy, though they weren't added
 	//  (since they weren't initialized)
-	assert(i != m_warehouses.size() || !m_warehouses.size());
+	assert(i != m_warehouses.size() || m_warehouses.empty());
 
 	if (m_warehouses.size())
 		m_warehouses.pop_back();

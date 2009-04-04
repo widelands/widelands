@@ -467,7 +467,7 @@ void ProductionSite::act(Game* g, uint32_t data)
 	{
 		m_program_timer = false;
 
-		if (!m_program.size())
+		if (m_program.empty())
 			return find_and_start_next_program(*g);
 
 		State* state = get_current_program();

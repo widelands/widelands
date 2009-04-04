@@ -39,8 +39,8 @@ struct ZipOperation_error : public std::logic_error {
 	throw ()
 		:
 		std::logic_error
-		(thrower + ": " + message + " (working on '" + filename +
-		 "' in zipfile '" + zipfilename + "')"),
+			(thrower + ": " + message + " (working on '" + filename +
+			 "' in zipfile '" + zipfilename + "')"),
 		m_thrower(thrower), m_filename(filename), m_zipfilename(zipfilename)
 	{}
 

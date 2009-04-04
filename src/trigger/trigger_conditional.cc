@@ -50,7 +50,7 @@ TriggerConditional & TriggerConditional_Factory::create_from_infix
 			break;
 		case RPAREN: // append everything to our postfix notation
 			for (;;) {
-				if (!tempstack.size()) { // Mismatched parathesis
+				if (tempstack.empty()) { // Mismatched parathesis
 					ALIVE();
 					log("Missmatched parenthesis!\n");
 					throw SyntaxError();

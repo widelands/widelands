@@ -103,8 +103,8 @@ void Carrier::road_update(Game* g, State* state)
 	// Be bored. There's nothing good on TV, either.
 	// TODO: idle animations
 	set_animation(g, descr().get_animation("idle"));
-	skip_act(); // wait until signal
 	state->ivar1 = 1; // we're available immediately after an idle phase
+	return skip_act(); //  wait until signal
 }
 
 

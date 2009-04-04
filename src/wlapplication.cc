@@ -501,9 +501,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 				if (c < 32 || c >= 128)
 					c = 0;
 
-				cb->key
-				(ev.type == SDL_KEYDOWN,
-				 ev.key.keysym);
+				cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
 			}
 			break;
 		case SDL_MOUSEBUTTONDOWN:
@@ -546,9 +544,9 @@ void WLApplication::handle_input(const InputCallback *cb)
 
 			if ((ev.motion.xrel or ev.motion.yrel) and cb and cb->mouse_move)
 				cb->mouse_move
-				(ev.motion.state,
-				 ev.motion.x,    ev.motion.y,
-				 ev.motion.xrel, ev.motion.yrel);
+					(ev.motion.state,
+					 ev.motion.x,    ev.motion.y,
+					 ev.motion.xrel, ev.motion.yrel);
 			break;
 
 		case SDL_QUIT:

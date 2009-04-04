@@ -68,7 +68,7 @@ struct Console : public ChatProvider, public Handler {
 			pos = end;
 		}
 
-		if (!arg.size())
+		if (arg.empty())
 			return;
 
 		CommandMap::const_iterator it = commands.find(arg[0]);

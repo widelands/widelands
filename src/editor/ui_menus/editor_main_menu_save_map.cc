@@ -114,11 +114,11 @@ m_parent  (parent) //  FIXME redundant (base has parent pointer)
 	new UI::Textarea(this, posx, posy, 70, 20, _("Descr: "), Align_CenterLeft);
 	m_descr =
 		new UI::Multiline_Textarea
-		(this,
-		 posx + 70, posy,
-		 get_inner_w() - posx - spacing - 70,
-		 get_inner_h() - posy - spacing - 40,
-		 "---", Align_CenterLeft);
+			(this,
+			 posx + 70, posy,
+			 get_inner_w() - posx - spacing - 70,
+			 get_inner_h() - posy - spacing - 40,
+			 "---", Align_CenterLeft);
 
 
 	posx = 5;
@@ -377,7 +377,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 
 	FileSystem & fs =
 		*g_fs->CreateSubFileSystem
-		(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
+			(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
 	Widelands::Map_Saver wms(fs, m_parent->egbase());
 	try {
 		wms.save();

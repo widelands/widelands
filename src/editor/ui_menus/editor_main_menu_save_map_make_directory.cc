@@ -27,9 +27,8 @@
 #include "ui_textarea.h"
 #include "ui_window.h"
 
-
 Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory
-(UI::Panel * const parent, char const * dirname)
+	(UI::Panel * const parent, char const * dirname)
 :
 UI::Window(parent, 0, 0, 230, 120, _("Make Directory"))
 {
@@ -45,7 +44,7 @@ UI::Window(parent, 0, 0, 230, 120, _("Make Directory"))
 
 	m_edit =
 		new UI::EditBox
-		(this, spacing, posy, get_inner_w() - 2 * spacing, 20, 1, 0);
+			(this, spacing, posy, get_inner_w() - 2 * spacing, 20, 1, 0);
 	m_edit->setText(dirname);
 	m_dirname = dirname;
 	m_edit->changed.set(this, &Main_Menu_Save_Map_Make_Directory::edit_changed);

@@ -74,8 +74,7 @@ struct Request : public Trackable {
 	int32_t get_type() const {return m_type;}
 	bool is_idle() const {return m_idle;}
 	uint32_t get_count() const {return m_count;}
-	bool is_open() const
-	{return m_idle || m_count > m_transfers.size();}
+	bool is_open() const {return m_idle || m_transfers.size() < m_count;}
 	Economy * get_economy() const throw () {return m_economy;}
 	int32_t get_required_time() const;
 	int32_t get_last_request_time() const {return m_last_request_time;}
@@ -102,8 +101,8 @@ struct Request : public Trackable {
 	void transfer_finish(Game &, Transfer &);
 	void transfer_fail  (Game &, Transfer &);
 
-	void set_requirements (const Requirements& r) {m_requirements = r;}
-	const Requirements& get_requirements () const {return m_requirements;}
+	void set_requirements (Requirements const & r) {m_requirements = r;}
+	Requirements const & get_requirements () const {return m_requirements;}
 
 private:
 	int32_t get_base_required_time(Editor_Game_Base &, uint32_t nr) const;

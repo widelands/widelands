@@ -84,7 +84,7 @@ m_trigger (trigger)
 
 	m_textareas[0] =
 		new UI::Textarea
-		(this, posx, posy + 20, width, height, "9", Align_Center);
+			(this, posx, posy + 20, width, height, "9", Align_Center);
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -106,7 +106,7 @@ m_trigger (trigger)
 
 	m_textareas[1] =
 		new UI::Textarea
-		(this, posx, posy + 20, width, height, "9", Align_Center);
+			(this, posx, posy + 20, width, height, "9", Align_Center);
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -154,7 +154,7 @@ m_trigger (trigger)
 
 	m_textareas[3] =
 		new UI::Textarea
-		(this, posx, posy + 20, width, height, "9", Align_Center);
+			(this, posx, posy + 20, width, height, "9", Align_Center);
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -179,7 +179,7 @@ m_trigger (trigger)
 
 	m_textareas[4] =
 		new UI::Textarea
-		(this, posx, posy + 20, width, height, "9", Align_Center);
+			(this, posx, posy + 20, width, height, "9", Align_Center);
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -200,7 +200,7 @@ m_trigger (trigger)
 
 	m_textareas[5] =
 		new UI::Textarea
-		(this, posx, posy + 20, width, height, "9", Align_Center);
+			(this, posx, posy + 20, width, height, "9", Align_Center);
 
 	new UI::IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,

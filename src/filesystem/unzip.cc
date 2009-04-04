@@ -1239,7 +1239,7 @@ extern int32_t ZEXPORT unzOpenCurrentFile (unzFile file)
 }
 
 extern int32_t ZEXPORT unzOpenCurrentFilePassword
-(unzFile file, char const * const password)
+	(unzFile file, char const * const password)
 {
 	return unzOpenCurrentFile3(file, 0, 0, 0, password);
 }
@@ -1629,8 +1629,8 @@ extern int32_t ZEXPORT unzSetOffset (unzFile file, uLong pos)
 	s->num_file = s->gi.number_entry; //  hack
 	int32_t const err =
 		unzlocal_GetCurrentFileInfoInternal
-		(file, &s->cur_file_info, &s->cur_file_info_internal,
-		 0, 0, 0, 0, 0, 0);
+			(file, &s->cur_file_info, &s->cur_file_info_internal,
+			 0, 0, 0, 0, 0, 0);
 	s->current_file_ok = err == UNZ_OK;
 	return err;
 }
@@ -2463,10 +2463,10 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3
 	//  write the local header
 	err =
 		ziplocal_putValue
-		(&zi->z_filefunc,
-		 zi->filestream,
-		 static_cast<uLong>(LOCALHEADERMAGIC),
-		 4);
+			(&zi->z_filefunc,
+			 zi->filestream,
+			 static_cast<uLong>(LOCALHEADERMAGIC),
+			 4);
 
 	// version needed to extract
 	if (err == ZIP_OK)
@@ -2475,23 +2475,26 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3
 	if (err == ZIP_OK)
 		err =
 			ziplocal_putValue
-			(&zi->z_filefunc, zi->filestream, static_cast<uLong>(zi->ci.flag), 2);
+				(&zi->z_filefunc,
+				 zi->filestream,
+				 static_cast<uLong>(zi->ci.flag),
+				 2);
 
 	if (err == ZIP_OK)
 		err =
 			ziplocal_putValue
-			(&zi->z_filefunc,
-			 zi->filestream,
-			 static_cast<uLong>(zi->ci.method),
-			 2);
+				(&zi->z_filefunc,
+				 zi->filestream,
+				 static_cast<uLong>(zi->ci.method),
+				 2);
 
 	if (err == ZIP_OK)
 		err =
 			ziplocal_putValue
-			(&zi->z_filefunc,
-			 zi->filestream,
-			 static_cast<uLong>(zi->ci.dosDate),
-			 4);
+				(&zi->z_filefunc,
+				 zi->filestream,
+				 static_cast<uLong>(zi->ci.dosDate),
+				 4);
 
 	//  crc 32, unknown
 	if (err == ZIP_OK)
@@ -2513,10 +2516,10 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3
 	if (err == ZIP_OK)
 		err =
 			ziplocal_putValue
-			(&zi->z_filefunc,
-			 zi->filestream,
-			 0UL,
-			 4);
+				(&zi->z_filefunc,
+				 zi->filestream,
+				 0UL,
+				 4);
 
 	if (err == ZIP_OK)
 		err =
@@ -2755,9 +2758,9 @@ extern int32_t ZEXPORT zipCloseFileInZipRaw (zipFile file, uLong uncompressed_si
 	if (err == ZIP_OK)
 		err =
 			add_data_in_datablock
-			(&zi->central_dir,
-			 zi->ci.central_header,
-			 static_cast<uLong>(zi->ci.size_centralheader));
+				(&zi->central_dir,
+				 zi->ci.central_header,
+				 static_cast<uLong>(zi->ci.size_centralheader));
 	free(zi->ci.central_header);
 
 	if (err == ZIP_OK) {
@@ -2776,12 +2779,12 @@ extern int32_t ZEXPORT zipCloseFileInZipRaw (zipFile file, uLong uncompressed_si
 		if (err == ZIP_OK) /* compressed size, unknown */
 			err =
 				ziplocal_putValue
-				(&zi->z_filefunc, zi->filestream, compressed_size, 4);
+					(&zi->z_filefunc, zi->filestream,   compressed_size, 4);
 
 		if (err == ZIP_OK) /* uncompressed size, unknown */
 			err =
 				ziplocal_putValue
-				(&zi->z_filefunc, zi->filestream, uncompressed_size, 4);
+					(&zi->z_filefunc, zi->filestream, uncompressed_size, 4);
 
 		if
 			(ZSEEK
@@ -2845,10 +2848,10 @@ extern int32_t ZEXPORT zipClose
 	if (err == ZIP_OK)
 		err =
 			ziplocal_putValue
-			(&zi->z_filefunc,
-			 zi->filestream,
-			 static_cast<uLong>(ENDHEADERMAGIC),
-			 4);
+				(&zi->z_filefunc,
+				 zi->filestream,
+				 static_cast<uLong>(ENDHEADERMAGIC),
+				 4);
 
 	//  number of this disk
 	if (err == ZIP_OK)
@@ -2862,47 +2865,47 @@ extern int32_t ZEXPORT zipClose
 	if (err == ZIP_OK)
 		err =
 			ziplocal_putValue
-			(&zi->z_filefunc,
-			 zi->filestream,
-			 static_cast<uLong>(zi->number_entry),
-			 2);
+				(&zi->z_filefunc,
+				 zi->filestream,
+				 static_cast<uLong>(zi->number_entry),
+				 2);
 
 	//  total number of entries in the central dir
 	if (err == ZIP_OK)
 		err =
 			ziplocal_putValue
-			(&zi->z_filefunc,
-			 zi->filestream,
-			 static_cast<uLong>(zi->number_entry),
-			 2);
+				(&zi->z_filefunc,
+				 zi->filestream,
+				 static_cast<uLong>(zi->number_entry),
+				 2);
 
 	//  size of the central directory
 	if (err == ZIP_OK)
 		err = ziplocal_putValue
-		(&zi->z_filefunc,
-		 zi->filestream,
-		 static_cast<uLong>(size_centraldir),
-		 4);
+			(&zi->z_filefunc,
+			 zi->filestream,
+			 static_cast<uLong>(size_centraldir),
+			 4);
 
 	//  offset of start of central directory with respect to the starting disk
 	//  number
 	if (err == ZIP_OK)
 		err =
 			ziplocal_putValue
-			(&zi->z_filefunc,
-			 zi->filestream,
-			 static_cast<uLong>
-			 	(centraldir_pos_inzip - zi->add_position_when_writting_offset),
-			 4);
+				(&zi->z_filefunc,
+				 zi->filestream,
+				 static_cast<uLong>
+				 (centraldir_pos_inzip - zi->add_position_when_writting_offset),
+				 4);
 
 	//  zipfile comment length
 	if (err == ZIP_OK)
 		err =
 			ziplocal_putValue
-			(&zi->z_filefunc,
-			 zi->filestream,
-			 static_cast<uLong>(size_global_comment),
-			 2);
+				(&zi->z_filefunc,
+				 zi->filestream,
+				 static_cast<uLong>(size_global_comment),
+				 2);
 
 	if
 		(err == ZIP_OK

@@ -30,7 +30,9 @@ struct EventChain;
 
 struct Cmd_CheckEventChain : public GameLogicCommand {
 	Cmd_CheckEventChain() : GameLogicCommand(0) {} // For savegame loading
-	Cmd_CheckEventChain(int32_t, int32_t);
+	Cmd_CheckEventChain(int32_t const _duetime, uint16_t const _eventchain_id) :
+		GameLogicCommand(_duetime), m_eventchain_id(m_eventchain_id)
+	{}
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);

@@ -506,10 +506,10 @@ uint32_t Graphic::create_surface(int32_t w, int32_t h)
 	const SDL_PixelFormat & format = m_screen.format();
 	SDL_Surface & surf =
 		*SDL_CreateRGBSurface
-		(SDL_SWSURFACE,
-		 w, h,
-		 format.BitsPerPixel,
-		 format.Rmask, format.Gmask, format.Bmask, format.Amask);
+			(SDL_SWSURFACE,
+			 w, h,
+			 format.BitsPerPixel,
+			 format.Rmask, format.Gmask, format.Bmask, format.Amask);
 
 	const std::vector<Picture>::size_type id = find_free_picture();
 	Picture & pic = m_pictures[id];
@@ -601,7 +601,7 @@ uint32_t Graphic::get_maptexture(const char & fnametempl, const uint32_t frameti
 {
 	try {
 		m_maptextures.push_back
-		(new Texture(fnametempl, frametime, m_screen.format()));
+			(new Texture(fnametempl, frametime, m_screen.format()));
 	} catch (std::exception const & e) {
 		log("Failed to load maptexture %s: %s\n", &fnametempl, e.what());
 		return 0;
@@ -632,7 +632,7 @@ void Graphic::reset_texture_animation_reminder()
  * Load all animations that are registered with the AnimationManager
 */
 void Graphic::load_animations(UI::ProgressWindow & loader_ui) {
-	assert(!m_animations.size());
+	assert(m_animations.empty());
 
 	const std::string step_description = _("Loading animations: %d%% complete");
 	uint32_t last_shown = 100;
@@ -788,6 +788,6 @@ Surface * Graphic::get_road_texture(int32_t const roadtex)
 
 	return
 		get_picture_surface
-		(roadtex == Widelands::Road_Normal ?
-		 m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
+			(roadtex == Widelands::Road_Normal ?
+			 m_roadtextures->pic_road_normal : m_roadtextures->pic_road_busy);
 }

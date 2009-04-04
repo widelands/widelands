@@ -2244,10 +2244,8 @@ void Worker::geologist_update(Game* g, State* state)
 		state->ivar1 = 0;
 	}
 
-	if (get_position() == owner_area) {
-		molog("[geologist]: We are home\n");
+	if (get_position() == owner_area)
 		return pop_task(g);
-	}
 
 	molog("[geologist]: Return home\n");
 	if

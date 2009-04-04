@@ -146,7 +146,7 @@ void Font_Handler::draw_string
 			g_gr->free_surface(*widget_cache_id);
 		*widget_cache_id =
 			create_text_surface
-			(font, fg, bg, text, align, wrap, caret, transparent);
+				(font, fg, bg, text, align, wrap, caret, transparent);
 		g_gr->get_picture_size(*widget_cache_id, w, h);
 		picid = *widget_cache_id;
 	}
@@ -187,7 +187,7 @@ SDL_Surface * Font_Handler::create_single_line_text_surface
 	SDL_Color sdl_fg = {fg.r(), fg.g(), fg.b(), 0};
 	SDL_Color sdl_bg = {bg.r(), bg.g(), bg.b(), 0};
 
-	if (!text.size())
+	if (text.empty())
 		text = " ";
 
 	if
@@ -460,15 +460,15 @@ void Font_Handler::draw_richtext
 
 					SDL_Surface * rend_word =
 						draw_string_sdl_surface
-						(text_it->get_font_face (),
-						 text_it->get_font_size (),
-						 text_it->get_font_color(),
-						 bg,
-						 str_word,
-						 Align_Left,
-						 -1,
-						 font_style,
-						 text_it->get_line_spacing());
+							(text_it->get_font_face (),
+							 text_it->get_font_size (),
+							 text_it->get_font_color(),
+							 bg,
+							 str_word,
+							 Align_Left,
+							 -1,
+							 font_style,
+							 text_it->get_line_spacing());
 
 					//is there a break before this word
 					//TODO: comparison between signed and unsigned !
@@ -543,7 +543,7 @@ void Font_Handler::draw_richtext
 				rend_cur_words.clear();
 				block_h += cur_line_h;
 			}
-			if (!rend_lines.size() && rend_cur_images.size()) {
+			if (rend_lines.empty() && rend_cur_images.size()) {
 				rend_lines.push_back(create_empty_sdl_surface(1, 1));
 			}
 			if (rend_lines.size()) {
@@ -702,11 +702,10 @@ uint32_t Font_Handler::convert_sdl_surface
 {
 	Surface & surf = *new Surface();
 
-	if (transparent) {
+	if (transparent)
 		SDL_SetColorKey
-		(&surface, SDL_SRCCOLORKEY,
-		 SDL_MapRGB(surface.format, bg.r(), bg.g(), bg.b()));
-	}
+			(&surface, SDL_SRCCOLORKEY,
+			 SDL_MapRGB(surface.format, bg.r(), bg.g(), bg.b()));
 
 	surf.set_sdl_surface(surface);
 

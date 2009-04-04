@@ -61,31 +61,31 @@ m_realtime      (WLApplication::get()->get_time()),
 
 m_toggle_main_menu
 	(INIT_BUTTON
-	 ("menu_toggle_menu",              toggle_mainmenu,       _("Menu"))),
+	 	("menu_toggle_menu",             toggle_mainmenu,       _("Menu"))),
 m_toggle_tool_menu
 	(INIT_BUTTON
-	 ("editor_menu_toggle_tool_menu",  tool_menu_btn,         _("Tool"))),
+	 	("editor_menu_toggle_tool_menu", tool_menu_btn,         _("Tool"))),
 m_toggle_toolsize_menu
 	(INIT_BUTTON
-	 ("editor_menu_set_toolsize_menu", toolsize_menu_btn,     _("Toolsize"))),
+	 	("editor_menu_set_toolsize_menu", toolsize_menu_btn,    _("Toolsize"))),
 m_toggle_minimap
 	(INIT_BUTTON
-	 ("menu_toggle_minimap",           toggle_minimap,        _("Minimap"))),
+	 	("menu_toggle_minimap",          toggle_minimap,        _("Minimap"))),
 m_toggle_buildhelp
 	(INIT_BUTTON
-	 ("menu_toggle_buildhelp",         toggle_buildhelp,      _("Buildhelp"))),
+	 	("menu_toggle_buildhelp",        toggle_buildhelp,      _("Buildhelp"))),
 m_toggle_player_menu
 	(INIT_BUTTON
-	 ("editor_menu_player_menu",       toggle_playermenu,     _("Players"))),
+	 	("editor_menu_player_menu",      toggle_playermenu,     _("Players"))),
 m_toggle_event_menu
 	(INIT_BUTTON
-	 ("menu_toggle_event_menu",        toggle_eventmenu,      _("Events"))),
+	 	("menu_toggle_event_menu",       toggle_eventmenu,      _("Events"))),
 m_toggle_variables_menu
 	(INIT_BUTTON
-	 ("menu_toggle_variables_menu",    toggle_variablesmenu,  _("Variables"))),
+	 	("menu_toggle_variables_menu",   toggle_variablesmenu,  _("Variables"))),
 m_toggle_objectives_menu
 	(INIT_BUTTON
-	 ("menu_toggle_objectives_menu",   toggle_objectivesmenu, _("Objectives")))
+	 	("menu_toggle_objectives_menu",  toggle_objectivesmenu, _("Objectives")))
 {
 	m_toolbar.add(&m_toggle_main_menu,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_tool_menu,       UI::Box::AlignLeft);
@@ -170,7 +170,7 @@ void Editor_Interactive::load(std::string const & filename) {
 		if (const uint8_t amount = fc.field->get_resources_amount()) {
 			const std::string & immname =
 				world.get_resource(fc.field->get_resources())->get_editor_pic
-				(amount);
+					(amount);
 			if (immname.size())
 				overlay_manager.register_overlay
 					(fc, g_gr->get_picture(PicMod_Game, immname.c_str()), 4);

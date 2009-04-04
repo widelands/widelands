@@ -253,9 +253,10 @@ void Overlay_Manager::register_road_overlay
 	Registered_Road_Overlays_Map::iterator it = m_road_overlays.find(c);
 	if (it == m_road_overlays.end())
 		m_road_overlays.insert
-		(std::pair<const Widelands::Coords,
-		 Registered_Road_Overlays>(c, overlay));
-	else it->second = overlay;
+			(std::pair<const Widelands::Coords,
+			 Registered_Road_Overlays>(c, overlay));
+	else
+		it->second = overlay;
 }
 
 /*

@@ -65,9 +65,9 @@ m_event   (event)
 	new UI::Textarea(this, pos.x, pos.y, 50, 20, _("Name:"), Align_CenterLeft);
 	m_name =
 		new UI::EditBox
-		(this,
-		 spacing + 60, pos.y, get_inner_w() / 2 - 60 - 2 * spacing, 20,
-		 0, 0);
+			(this,
+			 spacing + 60, pos.y, get_inner_w() / 2 - 60 - 2 * spacing, 20,
+			 0, 0);
 	m_name->setText(event.name());
 	pos.y += 20 + spacing;
 
@@ -87,7 +87,7 @@ m_event   (event)
 	pos.x += 100;
 	m_window_title =
 		new UI::EditBox
-		(this, pos.x, pos.y, get_inner_w() - 100 - 2 * spacing, 20, 0, 2);
+			(this, pos.x, pos.y, get_inner_w() - 100 - 2 * spacing, 20, 0, 2);
 	m_window_title->setText(m_event.get_window_title());
 
 	pos.x  =      spacing;
@@ -96,7 +96,9 @@ m_event   (event)
 	pos.y += 20 + spacing;
 	m_text =
 		new UI::Multiline_Editbox
-		(this, pos.x, pos.y, get_inner_w() - 2 * spacing, 80, event.get_text());
+			(this,
+			 pos.x, pos.y, get_inner_w() - 2 * spacing, 80,
+			 event.get_text());
 
 	pos.y += 80 + spacing;
 
@@ -172,9 +174,9 @@ m_event   (event)
 		(this, pos.x, pos.y, 100, 20, _("Current: "), Align_CenterLeft);
 	m_current_trigger_ta =
 		new UI::Textarea
-		(this,
-		 pos.x + 15, pos.y + 15 + spacing, get_inner_w() / 2, 20,
-		 _("No trigger selected!"), Align_CenterLeft);
+			(this,
+			 pos.x + 15, pos.y + 15 + spacing, get_inner_w() / 2, 20,
+			 _("No trigger selected!"), Align_CenterLeft);
 
 	pos = Point(get_inner_w() / 2 - 60 - spacing, get_inner_h() - 30);
 	new UI::Button<Event_Message_Box_Option_Menu>
@@ -317,7 +319,7 @@ void Event_Message_Box_Option_Menu::update() {
 	if (m_ls_selected >= m_nr_buttons)
 		m_buttons_ls->select(0);
 
-	if (!m_button_triggers.size()) //  No triggers, no other buttons.
+	if (m_button_triggers.empty()) //  No triggers, no other buttons.
 		m_nr_buttons = 1;
 
 	m_buttons_ls->clear();

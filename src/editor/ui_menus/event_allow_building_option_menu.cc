@@ -241,7 +241,7 @@ void Event_Allow_Building_Option_Menu::clicked_change_player(const bool up) {
 		{
 			Widelands::Building_Index i =
 				new_tribe.building_index
-				(old_tribe.get_building_descr(m_building)->name().c_str());
+					(old_tribe.get_building_descr(m_building)->name().c_str());
 			m_building = i ? i : Widelands::Building_Index::First();
 		}
 		update_label_building

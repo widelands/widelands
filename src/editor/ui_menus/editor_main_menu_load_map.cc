@@ -69,26 +69,26 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 	new UI::Textarea(this, posx, posy, 150, 20, _("Name: "), Align_CenterLeft);
 	m_name =
 		new UI::Textarea
-		(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
+			(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
 		(this, posx, posy, 150, 20, _("Author: "), Align_CenterLeft);
 	m_author =
 		new UI::Textarea
-		(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
+			(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea(this, posx, posy, 70, 20, _("Size: "), Align_CenterLeft);
 	m_size =
 		new UI::Textarea
-		(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
+			(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea(this, posx, posy, 70, 20, _("World: "), Align_CenterLeft);
 	m_world =
 		new UI::Textarea
-		(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
+			(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
@@ -102,11 +102,11 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 	new UI::Textarea(this, posx, posy, 70, 20, _("Descr: "), Align_CenterLeft);
 	m_descr =
 		new UI::Multiline_Textarea
-		(this,
-		 posx + 70, posy,
-		 get_inner_w() - posx - spacing - 70,
-		 get_inner_h() - posy - spacing - 40,
-		 "---", Align_CenterLeft);
+			(this,
+			 posx + 70, posy,
+			 get_inner_w() - posx - spacing - 70,
+			 get_inner_h() - posy - spacing - 40,
+			 "---", Align_CenterLeft);
 
 	posx = 5;
 	posy = get_inner_h() - 30;

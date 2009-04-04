@@ -264,11 +264,11 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
 		tok.push_back((*m_construction)[i]);
 
 	try {
-		if (!tok.size())
+		if (tok.empty())
 			throw Widelands::TriggerConditional_Factory::SyntaxError();
 		TriggerConditional & cond =
 			Widelands::TriggerConditional_Factory::create_from_infix
-			(*m_event_chain, tok);
+				(*m_event_chain, tok);
 		m_given_cond = &cond;
 		end_modal(1);
 	} catch (Widelands::TriggerConditional_Factory::SyntaxError) {

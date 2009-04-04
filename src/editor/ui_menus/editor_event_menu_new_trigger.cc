@@ -55,9 +55,9 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 		(this, spacing, offsy, _("Available Trigger types: "), Align_Left);
 	m_trigger_type_list =
 		new UI::BaseListselect
-		(this,
-		 spacing, offsy + 20,
-		 get_inner_w() / 2 - 2 * spacing, get_inner_h() - offsy - 55);
+			(this,
+			 spacing, offsy + 20,
+			 get_inner_w() / 2 - 2 * spacing, get_inner_h() - offsy - 55);
 	m_trigger_type_list->selected.set(this, &Editor_Event_Menu_New_Trigger::selected);
 	m_trigger_type_list->double_clicked.set(this, &Editor_Event_Menu_New_Trigger::double_clicked);
 	for (uint32_t i = 0; i < nr_trigger_types(); ++i)
@@ -71,10 +71,10 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 		 _("Description: "), Align_Left);
 	m_description =
 		new UI::Multiline_Textarea
-		(this,
-		 get_inner_w() / 2 + spacing, offsy + 20,
-		 get_inner_w() / 2 - 2 * spacing, get_inner_h() - offsy - 55,
-		 "", Align_Left);
+			(this,
+			 get_inner_w() / 2 + spacing, offsy + 20,
+			 get_inner_w() / 2 - 2 * spacing, get_inner_h() - offsy - 55,
+			 "", Align_Left);
 
 	posy = get_inner_h() - 30;
 	posx = get_inner_w() / 2 - 80 - spacing;

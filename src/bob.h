@@ -125,7 +125,7 @@ struct Bob : public Map_Object {
 
 	/// \see class Bob for in-depth explanation
 	struct Task {
-		const char* name;
+		char const * name;
 
 		/**
 		 * Called to update the current task and schedule the next

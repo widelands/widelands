@@ -75,7 +75,7 @@ Multiline_Textarea::~Multiline_Textarea() {
 */
 void Multiline_Textarea::set_text(const std::string & text) {
 	m_text = text;
-	if (not text.size()) { //  clear the field
+	if (text.empty()) { //  clear the field
 		m_textheight = 0;
 		m_textpos    = 0;
 		m_scrollbar.set_steps(1);

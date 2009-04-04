@@ -201,9 +201,9 @@ void GameTips::show_tip(int32_t index) {
 			 (yres - m_height) / 2 + GAMETIPS_TEXTAREA_BORDER);
 		tips_area =
 			Rect
-			(pt,
-			 m_width - 2 * GAMETIPS_TEXTAREA_BORDER,
-			 m_height - 2 * GAMETIPS_TEXTAREA_BORDER);
+				(pt,
+				 m_width  - 2 * GAMETIPS_TEXTAREA_BORDER,
+				 m_height - 2 * GAMETIPS_TEXTAREA_BORDER);
 		rt.fill_rect(tips_area, m_bgcolor);
 
 		tips_area.x -= GAMETIPS_TEXTAREA_BORDER;

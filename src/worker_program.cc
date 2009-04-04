@@ -67,7 +67,7 @@ void WorkerProgram::parse
 				break;
 
 			const std::vector<std::string> cmd(split_string(string, " \t\r\n"));
-			if (!cmd.size())
+			if (cmd.empty())
 				continue;
 
 			// Find the appropriate parser

@@ -597,9 +597,8 @@ bool Building::leave_check_and_wait(Game* g, Worker* w)
 	// Check time and queue
 	uint32_t time = g->get_gametime();
 
-	if (!m_leave_queue.size())
-	{
-		if (static_cast<int32_t>(time - m_leave_time) >= 0) {
+	if (m_leave_queue.empty()) {
+		if (m_leave_time <= time) {
 			m_leave_time = time + BUILDING_LEAVE_INTERVAL;
 			return true;
 		}

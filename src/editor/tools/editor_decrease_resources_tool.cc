@@ -61,7 +61,7 @@ int32_t Editor_Decrease_Resources_Tool::handle_click_impl
 			//  Ok, we're doing something. First remove the current overlays.
 			std::string str =
 				map.world().get_resource(res)->get_editor_pic
-				(mr.location().field->get_resources_amount());
+					(mr.location().field->get_resources_amount());
 			picid = g_gr->get_picture(PicMod_Menu, str.c_str());
 			map.overlay_manager().remove_overlay(mr.location(), picid);
 			if (!amount) {

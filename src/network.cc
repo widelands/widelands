@@ -125,7 +125,7 @@ SendPacket::SendPacket () {}
 
 void SendPacket::Data(const void * const data, const size_t size)
 {
-	if (!buffer.size()) {
+	if (buffer.empty()) {
 		buffer.push_back (0); //  this will finally be the length of the packet
 		buffer.push_back (0);
 	}

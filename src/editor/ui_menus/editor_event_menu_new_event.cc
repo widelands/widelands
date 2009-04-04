@@ -73,10 +73,10 @@ Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event
 		 _("Description: "), Align_Left);
 	m_description =
 		new UI::Multiline_Textarea
-		(this,
-		 get_inner_w() / 2 + spacing, offsy + 20,
-		 get_inner_w() / 2 - 2 * spacing, get_inner_h() - offsy - 55,
-		 "", Align_Left);
+			(this,
+			 get_inner_w() / 2 + spacing, offsy + 20,
+			 get_inner_w() / 2 - 2 * spacing, get_inner_h() - offsy - 55,
+			 "", Align_Left);
 
 	posy = get_inner_h() - 30;
 	posx = get_inner_w() / 2 - 80 - spacing;
