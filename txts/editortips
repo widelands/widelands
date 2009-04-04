@@ -14,7 +14,7 @@ text=_"You can find general help for the editor as well as a short tutorial in o
 sec=6
 
 [Tip 2]
-text=_"You can select multiple nature objects (bobs) if you hold down CTRL during selection. If you than click on the map, one of the selected objects will be randomly placed."
+text=_"You can select multiple nature object (bob) types if you hold down CTRL during selection. If you then click on the map, an instance of one of the selected object types will be placed."
 sec=7
 
 [Tip 3]
