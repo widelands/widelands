@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ struct Carrier : public Worker {
 		virtual Worker_Type get_worker_type() const {return CARRIER;}
 
 	protected:
-		virtual Bob * create_object() const {return new Carrier(*this);}
+		virtual Bob & create_object() const {return *new Carrier(*this);}
 	};
 
 
@@ -50,32 +50,32 @@ struct Carrier : public Worker {
 	{}
 	virtual ~Carrier() {};
 
-	bool notify_ware(Game *, int32_t flag);
+	bool notify_ware(Game &, int32_t flag);
 
-	void start_task_road(Game*);
-	void update_task_road(Game *);
-	void start_task_transport(Game*, int32_t fromflag);
-	bool start_task_walktoflag(Game *, int32_t flag, bool offset = false);
+	void start_task_road(Game &);
+	void update_task_road(Game &);
+	void start_task_transport(Game &, int32_t fromflag);
+	bool start_task_walktoflag(Game &, int32_t flag, bool offset = false);
 
 
 private:
 	MO_DESCR(Descr);
 
-	void find_pending_item(Game * g);
-	int32_t find_closest_flag(Game * g);
+	void find_pending_item(Game &);
+	int32_t find_closest_flag(Game &);
 
 	// internal task stuff
-	void road_update        (Game *, State *);
-	void transport_update   (Game *, State *);
+	void road_update        (Game &, State &);
+	void transport_update   (Game &, State &);
 
 	static Task taskRoad;
 	static Task taskTransport;
 
-	void deliver_to_building(Game *, State *);
-	void pickup_from_flag   (Game *, State *);
-	void drop_item          (Game *, State *);
-	void enter_building     (Game *, State *);
-	bool swap_or_wait       (Game *, State *);
+	void deliver_to_building(Game &, State &);
+	void pickup_from_flag   (Game &, State &);
+	void drop_item          (Game &, State &);
+	void enter_building     (Game &, State &);
+	bool swap_or_wait       (Game &, State &);
 
 	/// -1: no ware acked; 0/1: acked ware for start/end flag of road
 	int32_t m_acked_ware;

@@ -313,7 +313,7 @@ void WatchWindow::toggle_tracking()
 
 	if
 		(Widelands::Map_Object const * const obj =
-		 m_views[m_cur_index].tracking.get(m_game))
+		 m_views[m_cur_index].tracking.get(*m_game))
 		m_views[m_cur_index].tracking = 0;
 	else
 		start_tracking
@@ -355,7 +355,7 @@ void WatchWindow::think()
 		return;
 	}
 
-	if (upcast(Widelands::Bob, bob, m_views[m_cur_index].tracking.get(m_game)))
+	if (upcast(Widelands::Bob, bob, m_views[m_cur_index].tracking.get(*m_game)))
 	{
 		Point pos;
 

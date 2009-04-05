@@ -54,7 +54,7 @@ public:
 		 Tribe_Descr const &, EncodeData const *);
 	virtual ~Worker_Descr();
 
-	virtual Bob * create_object() const;
+	virtual Bob & create_object() const;
 
 	virtual void load_graphics();
 

@@ -33,7 +33,7 @@ struct Cmd_Incorporate : public GameLogicCommand {
 		: GameLogicCommand(t), worker(w)
 	{}
 
-	void execute (Game * g) {worker->incorporate(g);}
+	void execute (Game & game) {worker->incorporate(game);}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);

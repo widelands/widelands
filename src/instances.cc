@@ -39,20 +39,17 @@
 
 namespace Widelands {
 
-Cmd_Destroy_Map_Object::Cmd_Destroy_Map_Object(int32_t t, Map_Object* o)
-	: GameLogicCommand(t)
+Cmd_Destroy_Map_Object::Cmd_Destroy_Map_Object
+	(int32_t const t, Map_Object & o)
+	: GameLogicCommand(t), obj_serial(o.serial())
+{}
+
+void Cmd_Destroy_Map_Object::execute(Game & game)
 {
-	obj_serial = o->serial();
-}
+	game.syncstream().Unsigned32(obj_serial);
 
-void Cmd_Destroy_Map_Object::execute(Game* g)
-{
-	g->syncstream().Unsigned32(obj_serial);
-
-	Map_Object* obj = g->objects().get_object(obj_serial);
-
-	if (obj)
-		obj->destroy (g);
+	if (Map_Object * obj = game.objects().get_object(obj_serial))
+		obj->destroy (game);
 }
 
 #define CMD_DESTROY_MAP_OBJECT_VERSION 1
@@ -89,27 +86,24 @@ void Cmd_Destroy_Map_Object::Write
 	// Now serial
 	if (const Map_Object * const obj = egbase.objects().get_object(obj_serial)) {
 		// The object might have vanished
-		assert(mos.is_object_known(obj));
-		fw.Unsigned32(mos.get_object_file_index(obj));
+		assert(mos.is_object_known(*obj));
+		fw.Unsigned32(mos.get_object_file_index(*obj));
 	} else
 		fw.Unsigned32(0);
 
 }
 
-Cmd_Act::Cmd_Act(int32_t t, Map_Object* o, int32_t a) : GameLogicCommand(t)
+Cmd_Act::Cmd_Act(int32_t const t, Map_Object & o, int32_t const a) :
+	GameLogicCommand(t), obj_serial(o.serial()), arg(a)
+{}
+
+
+void Cmd_Act::execute(Game & game)
 {
-	obj_serial = o->serial();
-	arg = a;
-}
+	game.syncstream().Unsigned32(obj_serial);
 
-
-void Cmd_Act::execute(Game* g)
-{
-	g->syncstream().Unsigned32(obj_serial);
-
-	Map_Object* obj = g->objects().get_object(obj_serial);
-	if (obj)
-		obj->act(g, arg);
+	if (Map_Object * const obj = game.objects().get_object(obj_serial))
+		obj->act(game, arg);
 	// the object must queue the next CMD_ACT itself if necessary
 }
 
@@ -148,8 +142,8 @@ void Cmd_Act::Write
 	// Now serial
 	if (const Map_Object * const obj = egbase.objects().get_object(obj_serial)) {
 		// Object might have dissappeared
-		assert(mos.is_object_known(obj));
-		fw.Unsigned32(mos.get_object_file_index(obj));
+		assert(mos.is_object_known(*obj));
+		fw.Unsigned32(mos.get_object_file_index(*obj));
 	} else
 		fw.Unsigned32(0);
 
@@ -174,11 +168,11 @@ Object_Manager::~Object_Manager()
 /**
  * Clear all objects
  */
-void Object_Manager::cleanup(Editor_Game_Base *g)
+void Object_Manager::cleanup(Editor_Game_Base & egbase)
 {
 	while (!m_objects.empty()) {
 		objmap_t::iterator it = m_objects.begin();
-		it->second->remove(g);
+		it->second->remove(egbase);
 	}
 	m_lastserial = 0;
 }
@@ -202,17 +196,18 @@ void Object_Manager::remove(Map_Object *obj)
 	m_objects.erase(obj->m_serial);
 }
 
-Map_Object * Object_Ptr::get(const Editor_Game_Base * const game)
+Map_Object * Object_Ptr::get(Editor_Game_Base const & egbase)
 {
 	if (!m_serial) return 0;
-	Map_Object* obj = game->objects().get_object(m_serial);
+	Map_Object * const obj = egbase.objects().get_object(m_serial);
 	if (!obj)
 		m_serial = 0;
 	return obj;
 }
 
-const Map_Object * Object_Ptr::get(const Editor_Game_Base * const game) const
-{return m_serial ? game->objects().get_object(m_serial) : 0;}
+Map_Object const * Object_Ptr::get(Editor_Game_Base const & egbase) const {
+	return m_serial ? egbase.objects().get_object(m_serial) : 0;
+}
 
 
 
@@ -327,9 +322,9 @@ m_descr(the_descr), m_serial(0), m_logsink(0)
  * Call this function if you want to remove the object immediately, without
  * any effects.
  */
-void Map_Object::remove(Editor_Game_Base *g)
+void Map_Object::remove(Editor_Game_Base & egbase)
 {
-	cleanup(g);
+	cleanup(egbase);
 	delete this;
 }
 
@@ -343,18 +338,19 @@ void Map_Object::remove(Editor_Game_Base *g)
  * \warning This function will immediately delete the memory allocated for the object.
  * Therefore, it may be safer to call schedule_destroy() instead.
  */
-void Map_Object::destroy(Editor_Game_Base* g)
+void Map_Object::destroy(Editor_Game_Base & egbase)
 {
-	remove(g);
+	remove(egbase);
 }
 
 /**
  * Schedule the object for immediate destruction.
  * This can be used to safely destroy the object from within an act function.
  */
-void Map_Object::schedule_destroy(Game *g)
+void Map_Object::schedule_destroy(Game & game)
 {
-	g->cmdqueue().enqueue (new Cmd_Destroy_Map_Object(g->get_gametime(), this));
+	game.cmdqueue().enqueue
+		(new Cmd_Destroy_Map_Object(game.get_gametime(), *this));
 }
 
 /**
@@ -362,17 +358,17 @@ void Map_Object::schedule_destroy(Game *g)
  *
  * \warning Make sure you call this from derived classes!
  */
-void Map_Object::init(Editor_Game_Base* g)
+void Map_Object::init(Editor_Game_Base & egbase)
 {
-	g->objects().insert(this);
+	egbase.objects().insert(this);
 }
 
 /**
  * \warning Make sure you call this from derived classes!
  */
-void Map_Object::cleanup(Editor_Game_Base *g)
+void Map_Object::cleanup(Editor_Game_Base & egbase)
 {
-	g->objects().remove(this);
+	egbase.objects().remove(this);
 }
 
 /**
@@ -396,12 +392,13 @@ bool Map_Object::have_tattributes() const
  *
  * \return The absolute gametime at which the CMD_ACT will occur.
  */
-uint32_t Map_Object::schedule_act(Game* g, uint32_t tdelta, uint32_t data)
+uint32_t Map_Object::schedule_act
+	(Game & game, uint32_t const tdelta, uint32_t const data)
 {
 	if (tdelta < Forever()) {
-		uint32_t const time = g->get_gametime() + tdelta;
+		uint32_t const time = game.get_gametime() + tdelta;
 
-		g->cmdqueue().enqueue (new Cmd_Act(time, this, data));
+		game.cmdqueue().enqueue (new Cmd_Act(time, *this, data));
 
 		return time;
 	} else
@@ -412,7 +409,7 @@ uint32_t Map_Object::schedule_act(Game* g, uint32_t tdelta, uint32_t data)
 /**
  * Called when a CMD_ACT triggers.
  */
-void Map_Object::act(Game *, uint32_t) {}
+void Map_Object::act(Game &, uint32_t) {}
 
 
 /**
@@ -426,7 +423,7 @@ void Map_Object::set_logsink(LogSink * const sink)
 /**
  * General infos, nothing todo for a no object
  */
-void Map_Object::log_general_info(Editor_Game_Base*) {}
+void Map_Object::log_general_info(Editor_Game_Base const &) {}
 
 /**
  * Prints a log message prepended by the object's serial number.
@@ -509,12 +506,12 @@ void Map_Object::Loader::load_finish() {}
  * Save the Map_Object to the given file.
  */
 void Map_Object::save
-	(Editor_Game_Base *, Map_Map_Object_Saver * mos, FileWrite & fw)
+	(Editor_Game_Base &, Map_Map_Object_Saver * mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_Map_Object);
 	fw.Unsigned8(CURRENT_SAVEGAME_VERSION);
 
-	fw.Unsigned32(mos->get_object_file_index(this));
+	fw.Unsigned32(mos->get_object_file_index(*this));
 }
 
 };

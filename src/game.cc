@@ -65,111 +65,47 @@ namespace Widelands {
 /// Define this to get lots of debugging output concerned with syncs
 //#define SYNC_DEBUG
 
-struct SyncWrapper : public StreamWrite {
-	SyncWrapper(Game* g, StreamWrite* target)
-	{
-		m_game = g;
-		m_target = target;
-		m_counter = 0;
+Game::SyncWrapper::~SyncWrapper() {
+	if (m_dump) {
+		delete m_dump;
 		m_dump = 0;
-		m_syncstreamsave = false;
+
+		if (!m_syncstreamsave)
+			g_fs->Unlink(m_dumpfname);
 	}
+}
 
-	~SyncWrapper()
-	{
-		if (m_dump) {
-			delete m_dump;
-			m_dump = 0;
+void Game::SyncWrapper::StartDump(std::string const & fname) {
+	m_dumpfname = fname + ".wss";
+	m_dump = g_fs->OpenStreamWrite(m_dumpfname);
+}
 
-			if (!m_syncstreamsave)
-				g_fs->Unlink(m_dumpfname);
-		}
-	}
-
-	/**
-	 * Start dumping the entire syncstream into a file.
-	 *
-	 * Note that this file is deleted at the end of the game, unless
-	 * \ref m_syncstreamsave has been set.
-	 */
-	void StartDump(const std::string& fname)
-	{
-		m_dumpfname = fname + ".wss";
-		m_dump = g_fs->OpenStreamWrite(m_dumpfname);
-	}
-
-	void Data(const void * const data, const size_t size)
-	{
-		assert(m_target);
-
+void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 #ifdef SYNC_DEBUG
-		log("[sync:%08u t=%6u]", m_counter, m_game->get_gametime());
-		for (size_t i = 0; i < size; ++i)
-			log(" %02x", (static_cast<uint8_t const *>(data))[i]);
-		log("\n");
+	log("[sync:%08u t=%6u]", m_counter, m_game.get_gametime());
+	for (size_t i = 0; i < size; ++i)
+		log(" %02x", (static_cast<uint8_t const *>(data))[i]);
+	log("\n");
 #endif
 
-		if (m_dump)
-			m_dump->Data(data, size);
+	if (m_dump)
+		m_dump->Data(data, size);
 
-		m_target->Data(data, size);
-		m_counter += size;
-	}
-
-	void Flush()
-	{
-		assert(m_target);
-
-		m_target->Flush();
-	}
-
-public:
-	Game* m_game;
-	StreamWrite* m_target;
-	uint32_t m_counter;
-	::StreamWrite* m_dump;
-	std::string m_dumpfname;
-	bool m_syncstreamsave;
-};
-
-struct GameInternals {
-	MD5Checksum<StreamWrite> synchash;
-	SyncWrapper syncwrapper;
-	GameController* ctrl;
-
-	/**
-	 * Whether a replay writer should be created.
-	 * Defaults to \c true, and should only be set to \c false
-	 * for playing back replays.
-	 */
-	bool writereplay;
-
-	GameInternals(Game* g)
-		: syncwrapper(g, &synchash)
-	{
-		static_cast<void>(g);
-	}
-
-	void SyncReset()
-	{
-		syncwrapper.m_counter = 0;
-
-		synchash.Reset();
-		log("[sync] Reset\n");
-	}
-};
+	m_target.Data(data, size);
+	m_counter += size;
+}
 
 
 Game::Game() :
-	m                  (new GameInternals(this)),
+	m_syncwrapper      (*this, m_synchash),
+	m_ctrl             (0),
+	m_writereplay      (true),
 	m_state            (gs_notrunning),
 	m_cmdqueue         (*this),
-	m_replaywriter     (0)
+	m_replaywriter     (0),
+	m_last_stats_update(0)
 {
-	m->ctrl = 0;
-	m->writereplay = true;
 	g_sound_handler.m_the_game = this;
-	m_last_stats_update = 0;
 }
 
 Game::~Game()
@@ -177,7 +113,14 @@ Game::~Game()
 	assert(this == g_sound_handler.m_the_game);
 	g_sound_handler.m_the_game = 0;
 	delete m_replaywriter;
-	delete m;
+}
+
+
+void Game::SyncReset() {
+	m_syncwrapper.m_counter = 0;
+
+	m_synchash.Reset();
+	log("[sync] Reset\n");
 }
 
 
@@ -197,25 +140,25 @@ bool Game::get_allow_cheats()
  */
 Interactive_Player * Game::get_ipl()
 {
-	return dynamic_cast<Interactive_Player*>(get_iabase());
+	return dynamic_cast<Interactive_Player *>(get_ibase());
 }
 
 
 void Game::set_game_controller(GameController * const ctrl)
 {
-	m->ctrl = ctrl;
+	m_ctrl = ctrl;
 }
 
 GameController * Game::gameController()
 {
-	return m->ctrl;
+	return m_ctrl;
 }
 
 void Game::set_write_replay(bool const wr)
 {
 	assert(m_state == gs_notrunning);
 
-	m->writereplay = wr;
+	m_writereplay = wr;
 }
 
 
@@ -225,7 +168,7 @@ void Game::set_write_replay(bool const wr)
  */
 void Game::save_syncstream(bool const save)
 {
-	m->syncwrapper.m_syncstreamsave = save;
+	m_syncwrapper.m_syncstreamsave = save;
 }
 
 
@@ -265,7 +208,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 			 map().get_scenario_player_name (p));
 	}
 
-	set_iabase
+	set_ibase
 		(new Interactive_Player
 		 	(*this, g_options.pull_section("global"), 1, true, false));
 
@@ -274,19 +217,19 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 	// Reload campaign textdomain
 	{
 		i18n::Textdomain textdomain(mapname);
-		maploader->load_map_complete(this, true);
+		maploader->load_map_complete(*this, true);
 	}
 	maploader.reset();
 
-	set_game_controller(GameController::createSinglePlayer(this, true, 1));
+	set_game_controller(GameController::createSinglePlayer(*this, true, 1));
 	try {
 		bool const result = run(loaderUI, NewScenario);
-		delete m->ctrl;
-		m->ctrl = 0;
+		delete m_ctrl;
+		m_ctrl = 0;
 		return result;
 	} catch (...) {
-		delete m->ctrl;
-		m->ctrl = 0;
+		delete m_ctrl;
+		m_ctrl = 0;
 		throw;
 	}
 }
@@ -332,7 +275,7 @@ void Game::init_newgame
 	}
 
 	loaderUI.step(_("Loading map"));
-	maploader->load_map_complete(this, settings.scenario);
+	maploader->load_map_complete(*this, settings.scenario);
 }
 
 
@@ -395,7 +338,7 @@ bool Game::run_load_game(std::string filename) {
 		loaderUI.set_background(background);
 		player_nr = gpdp.get_player_nr();
 
-		set_iabase
+		set_ibase
 			(new Interactive_Player
 			 	(*this, g_options.pull_section("global"), player_nr, true, false));
 
@@ -403,15 +346,16 @@ bool Game::run_load_game(std::string filename) {
 		gl.load_game();
 	}
 
-	set_game_controller(GameController::createSinglePlayer(this, true, player_nr));
+	set_game_controller
+		(GameController::createSinglePlayer(*this, true, player_nr));
 	try {
 		bool const result = run(loaderUI, Loaded);
-		delete m->ctrl;
-		m->ctrl = 0;
+		delete m_ctrl;
+		m_ctrl = 0;
 		return result;
 	} catch (...) {
-		delete m->ctrl;
-		m->ctrl = 0;
+		delete m_ctrl;
+		m_ctrl = 0;
 		throw;
 	}
 }
@@ -427,9 +371,9 @@ void Game::postload()
 {
 	Editor_Game_Base::postload();
 
-	assert(get_iabase() != 0);
+	assert(get_ibase() != 0);
 
-	get_iabase()->postload();
+	get_ibase()->postload();
 }
 
 
@@ -492,23 +436,25 @@ bool Game::run
 		enqueue_command (new Cmd_CheckEventChain(get_gametime(), -1));
 	}
 
-	if (m->writereplay) {
+	if (m_writereplay) {
 		log("Starting replay writer\n");
 
 		// Derive a replay filename from the current time
 		std::string fname(REPLAY_DIR);
 		fname += '/';
 		fname += timestring();
-		if (m->ctrl)
-			fname += ' ' + m->ctrl->getGameDescription();
+		if (m_ctrl) {
+			fname += ' ';
+			fname += m_ctrl->getGameDescription();
+		}
 		fname += REPLAY_SUFFIX;
 
 		m_replaywriter = new ReplayWriter(*this, fname);
-		m->syncwrapper.StartDump(fname);
+		m_syncwrapper.StartDump(fname);
 		log("Replay writer has started\n");
 	}
 
-	m->SyncReset();
+	SyncReset();
 
 	load_graphics(loader_ui);
 
@@ -516,13 +462,13 @@ bool Game::run
 
 	m_state = gs_running;
 
-	get_iabase()->run();
+	get_ibase()->run();
 
 	g_sound_handler.change_music("menu", 1000, 0);
 
 	cleanup_objects();
-	delete get_iabase();
-	set_iabase(0);
+	delete get_ibase();
+	set_ibase(0);
 
 	g_gr->flush(PicMod_Game);
 	g_anim.flush();
@@ -541,9 +487,9 @@ bool Game::run
  */
 void Game::think()
 {
-	assert(m->ctrl != 0);
+	assert(m_ctrl);
 
-	m->ctrl->think();
+	m_ctrl->think();
 
 	if (m_state == gs_running) {
 		if
@@ -560,9 +506,7 @@ void Game::think()
 			m_last_stats_update = get_gametime();
 		}
 
-		int32_t frametime = m->ctrl->getFrametime();
-
-		cmdqueue().run_queue(frametime, get_game_time_pointer());
+		cmdqueue().run_queue(m_ctrl->getFrametime(), get_game_time_pointer());
 
 		g_gr->animate_maptextures(get_gametime());
 
@@ -607,7 +551,7 @@ void Game::cleanup_for_load
  */
 StreamWrite & Game::syncstream()
 {
-	return m->syncwrapper;
+	return m_syncwrapper;
 }
 
 
@@ -620,7 +564,7 @@ StreamWrite & Game::syncstream()
  */
 md5_checksum Game::get_sync_hash() const
 {
-	MD5Checksum<StreamWrite> copy(m->synchash);
+	MD5Checksum<StreamWrite> copy(m_synchash);
 
 	copy.FinishChecksum();
 	return copy.GetChecksum();
@@ -646,9 +590,9 @@ uint32_t Game::logic_rand()
  * It takes the appropriate action, i.e. either add to the cmd_queue or send
  * across the network.
  */
-void Game::send_player_command (PlayerCommand* pc)
+void Game::send_player_command (PlayerCommand & pc)
 {
-	m->ctrl->sendPlayerCommand(pc);
+	m_ctrl->sendPlayerCommand(pc);
 }
 
 
@@ -672,7 +616,7 @@ void Game::enqueue_command (Command * const cmd)
 void Game::send_player_bulldoze (PlayerImmovable & pi, bool const recurse)
 {
 	send_player_command
-		(new Cmd_Bulldoze
+		(*new Cmd_Bulldoze
 		 	(get_gametime(), pi.owner().get_player_number(), pi, recurse));
 }
 
@@ -680,30 +624,30 @@ void Game::send_player_build
 	(int32_t const pid, Coords const coords, Building_Index const id)
 {
 	assert(id);
-	send_player_command (new Cmd_Build(get_gametime(), pid, coords, id));
+	send_player_command (*new Cmd_Build(get_gametime(), pid, coords, id));
 }
 
 void Game::send_player_build_flag (int32_t const pid, Coords const coords)
 {
-	send_player_command (new Cmd_BuildFlag(get_gametime(), pid, coords));
+	send_player_command (*new Cmd_BuildFlag(get_gametime(), pid, coords));
 }
 
 void Game::send_player_build_road (int32_t pid, Path & path)
 {
-	send_player_command (new Cmd_BuildRoad(get_gametime(), pid, path));
+	send_player_command (*new Cmd_BuildRoad(get_gametime(), pid, path));
 }
 
 void Game::send_player_flagaction (Flag & flag)
 {
 	send_player_command
-		(new Cmd_FlagAction
+		(*new Cmd_FlagAction
 		 	(get_gametime(), flag.owner().get_player_number(), flag));
 }
 
 void Game::send_player_start_stop_building (Building & building)
 {
 	send_player_command
-		(new Cmd_StartStopBuilding
+		(*new Cmd_StartStopBuilding
 		 	(get_gametime(), building.owner().get_player_number(), building));
 }
 
@@ -713,23 +657,31 @@ void Game::send_player_enhance_building
 	assert(id);
 
 	send_player_command
-		(new Cmd_EnhanceBuilding
+		(*new Cmd_EnhanceBuilding
 		 	(get_gametime(), building.owner().get_player_number(), building, id));
 }
 
 void Game::send_player_set_ware_priority
-	(PlayerImmovable* imm, int32_t type, Ware_Index index, int32_t prio)
+	(PlayerImmovable &       imm,
+	 int32_t           const type,
+	 Ware_Index        const index,
+	 int32_t           const prio)
 {
 	send_player_command
-		(new Cmd_SetWarePriority
-		 (get_gametime(), imm->get_owner()->get_player_number(), imm, type, index, prio));
+		(*new Cmd_SetWarePriority
+		 	(get_gametime(),
+		 	 imm.owner().get_player_number(),
+		 	 imm,
+		 	 type,
+		 	 index,
+		 	 prio));
 }
 
 void Game::send_player_change_training_options
 	(TrainingSite & ts, int32_t const atr, int32_t const val)
 {
 	send_player_command
-		(new Cmd_ChangeTrainingOptions
+		(*new Cmd_ChangeTrainingOptions
 		 	(get_gametime(), ts.owner().get_player_number(), ts, atr, val));
 }
 
@@ -737,7 +689,7 @@ void Game::send_player_drop_soldier (Building & b, int32_t const ser)
 {
 	assert(ser != -1);
 	send_player_command
-		(new Cmd_DropSoldier
+		(*new Cmd_DropSoldier
 		 	(get_gametime(), b.owner().get_player_number(), b, ser));
 }
 
@@ -745,7 +697,7 @@ void Game::send_player_change_soldier_capacity
 	(Building & b, int32_t const val)
 {
 	send_player_command
-		(new Cmd_ChangeSoldierCapacity
+		(*new Cmd_ChangeSoldierCapacity
 		 	(get_gametime(), b.owner().get_player_number(), b, val));
 }
 
@@ -762,7 +714,7 @@ void Game::send_player_enemyflagaction
 		 	(Map::get_index
 		 	 	(flag.get_building()->get_position(), map().get_width())))
 		send_player_command
-			(new Cmd_EnemyFlagAction
+			(*new Cmd_EnemyFlagAction
 			 	(get_gametime(), who_attacks, flag, num_soldiers));
 }
 
@@ -826,7 +778,7 @@ void Game::sample_statistics()
 			// Now, walk the bobs
 		for (Bob const * b = fc.field->get_first_bob(); b; b = b->get_next_bob())
 			if (upcast(Soldier const, s, b))
-				miltary_strength[s->get_owner()->get_player_number() - 1] +=
+				miltary_strength[s->owner().get_player_number() - 1] +=
 					s->get_level(atrTotal) + 1; //  So that level 0 also counts.
 	}
 
@@ -836,7 +788,7 @@ void Game::sample_statistics()
 		uint32_t wastock = 0;
 
 		for (uint32_t j = 0; j < plr->get_nr_economies(); ++j) {
-			Economy* eco = plr->get_economy_by_number(j);
+			Economy * const eco = plr->get_economy_by_number(j);
 			const Tribe_Descr & tribe = plr->tribe();
 			Ware_Index const tribe_wares = tribe.get_nrwares();
 			for
@@ -964,7 +916,7 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 /**
  * Write general statistics to the given file.
  */
-void Game::WriteStatistics(FileWrite& fw)
+void Game::WriteStatistics(FileWrite & fw)
 {
 	fw.Unsigned32(m_last_stats_update);
 

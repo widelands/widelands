@@ -41,7 +41,7 @@ namespace Widelands {
 
 void Map_Waredata_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
@@ -139,8 +139,8 @@ throw (_wexception)
 							ware.m_transfer_nextstep = static_cast<Map_Object *>(0);
 
 						//  Do some kind of init.
-						if (upcast(Game, game, egbase))
-							ware.set_location(game, &location);
+						if (upcast(Game, game, &egbase))
+							ware.set_location(*game, &location);
 					} catch (_wexception const & e) {
 						throw wexception
 							("location %u: %s", location_serial, e.what());
@@ -160,7 +160,7 @@ throw (_wexception)
 
 void Map_Waredata_Data_Packet::Write
 	(FileSystem           &       fs,
-	 Editor_Game_Base     *       egbase,
+	 Editor_Game_Base     &       egbase,
 	 Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
@@ -171,14 +171,14 @@ throw (_wexception)
 	//  We transverse the map and whenever we find a suitable object, we check
 	//  if it has wares of some kind.
 	std::vector<uint32_t> ids;
-	Map   const & map        = egbase->map();
+	Map   const & map        = egbase.map();
 	Field const & fields_end = map[map.max_index()];
 	for (Field const * field = &map[0]; field < &fields_end; ++field) {
 		// First, check for Flags
 		if (upcast(Flag const, fl, field->get_immovable()))
 			for (int32_t i = 0; i < fl->m_item_filled; ++i) {
-				assert(os->is_object_known(fl->m_items[i].item));
-				write_ware(&fw, egbase, os, fl->m_items[i].item);
+				assert(os->is_object_known(*fl->m_items[i].item));
+				write_ware(&fw, egbase, os, *fl->m_items[i].item);
 			}
 
 		//  Now, check for workers.
@@ -186,10 +186,10 @@ throw (_wexception)
 			if (upcast(Worker const, worker, b))
 				if
 					(WareInstance const * const ware =
-					 worker->get_carried_item(egbase))
+					 	worker->get_carried_item(egbase))
 				{
-					assert(os->is_object_known(ware));
-					write_ware(&fw, egbase, os, ware);
+					assert(os->is_object_known(*ware));
+					write_ware(&fw, egbase, os, *ware);
 				}
 	}
 	fw.Unsigned32(0xffffffff); // End of wares
@@ -202,15 +202,15 @@ throw (_wexception)
  */
 void Map_Waredata_Data_Packet::write_ware
 	(FileWrite            * fw,
-	 Editor_Game_Base     * egbase,
+	 Editor_Game_Base     & egbase,
 	 Map_Map_Object_Saver * os,
-	 WareInstance   const * ware)
+	 WareInstance   const & ware)
 {
 	fw->Unsigned32(os->get_object_file_index(ware));
 
-	if (Map_Object const * const obj = ware->m_location.get(egbase)) {
-		assert(os->is_object_known(obj));
-		fw->Unsigned32(os->get_object_file_index(obj));
+	if (Map_Object const * const obj = ware.m_location.get(egbase)) {
+		assert(os->is_object_known(*obj));
+		fw->Unsigned32(os->get_object_file_index(*obj));
 	} else
 		fw->Unsigned32(0);
 
@@ -218,11 +218,11 @@ void Map_Waredata_Data_Packet::write_ware
 
 	//  FIXME We can not assume that ware index is the same when the game is
 	//  FIXME loaded again. This must be changed to write the name instead.
-	fw->Signed32(ware->descr_index().value());
+	fw->Signed32(ware.descr_index().value());
 
-	if (Map_Object const * const obj = ware->m_transfer_nextstep.get(egbase)) {
-		assert(os->is_object_known(obj));
-		fw->Unsigned32(os->get_object_file_index(obj));
+	if (Map_Object const * const obj = ware.m_transfer_nextstep.get(egbase)) {
+		assert(os->is_object_known(*obj));
+		fw->Unsigned32(os->get_object_file_index(*obj));
 	} else
 		fw->Unsigned32(0);
 

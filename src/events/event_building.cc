@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,7 +87,7 @@ Event_Building::Event_Building
 				Map const & map = egbase.map();
 				m_player   = s.get_Player_Number("player", map.get_nrplayers(), 1);
 				m_location = s.get_safe_Coords("point", map.extent());
-				egbase.get_iabase()->reference_player_tribe(m_player, this);
+				egbase.get_ibase()->reference_player_tribe(m_player, this);
 				tribe =
 					&egbase.manually_load_tribe
 						(map.get_scenario_player_tribe(m_player));
@@ -412,13 +412,13 @@ void Event_Building::set_player(Player_Number const p) {m_player = p;}
 void Event_Building::set_position(Coords const c) {m_location = c;}
 
 
-Event::State Event_Building::run(Game * game) {
-	Player & player = game->player(m_player);
+Event::State Event_Building::run(Game & game) {
+	Player & player = game.player(m_player);
 	Building_Descr const & descr =
 		*player.tribe().get_building_descr(m_building);
 	std::vector<Coords> best_positions;
 	int32_t best_suitability = std::numeric_limits<int32_t>::min();
-	Map const & map = game->map();
+	Map const & map = game.map();
 	MapFringeRegion<Area<FCoords> > mr
 		(map, Area<FCoords>(map.get_fcoords(m_location), m_distance_min));
 	do {
@@ -444,7 +444,7 @@ Event::State Event_Building::run(Game * game) {
 			 m_player, m_required_suitability, best_suitability);
 	assert(best_positions.size());
 	player.force_building
-		(best_positions[game->logic_rand() % best_positions.size()], m_building,
+		(best_positions[game.logic_rand() % best_positions.size()], m_building,
 		 m_ware_counts, m_worker_counts, m_soldier_counts);
 	return m_state = DONE;
 }

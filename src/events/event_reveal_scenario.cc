@@ -37,7 +37,7 @@ void Event_Reveal_Scenario::Write(Section & s, Editor_Game_Base & egbase) const
 }
 
 
-Event::State Event_Reveal_Scenario::run(Game *) {
+Event::State Event_Reveal_Scenario::run(Game &) {
 	Campaign_visibility_save cvs;
 	cvs.set_map_visibility(reveal, true);
 	return m_state = DONE;

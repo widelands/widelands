@@ -33,7 +33,7 @@ namespace Widelands {
 
 void Map_Heights_Data_Packet::Read
 	(FileSystem            & fs,
-	 Editor_Game_Base      * egbase,
+	 Editor_Game_Base      & egbase,
 	 bool,
 	 Map_Map_Object_Loader * const)
 throw (_wexception)
@@ -45,7 +45,7 @@ throw (_wexception)
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			Map & map = egbase->map();
+			Map & map = egbase.map();
 			Map_Index const max_index = map.max_index();
 			for (Map_Index i = 0; i < max_index; ++i)
 				map[i].set_height(fr.Unsigned8());
@@ -62,7 +62,7 @@ throw (_wexception)
  */
 void Map_Heights_Data_Packet::Write
 	(FileSystem           & fs,
-	 Editor_Game_Base     * egbase,
+	 Editor_Game_Base     & egbase,
 	 Map_Map_Object_Saver * const)
 	throw (_wexception)
 {
@@ -70,7 +70,7 @@ void Map_Heights_Data_Packet::Write
 
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	Map & map = egbase->map();
+	Map & map = egbase.map();
 	Map_Index const max_index = map.max_index();
 	for (Map_Index i = 0; i < max_index; ++i)
 		fw.Unsigned8(map[i].get_height());

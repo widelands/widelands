@@ -199,7 +199,7 @@ uint32_t Soldier_Descr::get_rand_anim(const char * const animation_name) const {
 /**
  * Create a new soldier
  */
-Bob * Soldier_Descr::create_object() const {return new Soldier(*this);}
+Bob & Soldier_Descr::create_object() const {return *new Soldier(*this);}
 
 /*
 ==============================
@@ -216,7 +216,7 @@ Soldier::Soldier(const Soldier_Descr & soldier_descr) : Worker(soldier_descr)
 }
 
 
-void Soldier::init(Editor_Game_Base* gg)
+void Soldier::init(Editor_Game_Base & egbase)
 {
 	m_hp_level      = 0;
 	m_attack_level  = 0;
@@ -228,7 +228,7 @@ void Soldier::init(Editor_Game_Base* gg)
 	m_max_attack    = descr().get_max_attack();
 	m_defense       = descr().get_defense   ();
 	m_evade         = descr().get_evade     ();
-	if (upcast(Game, game, gg)) {
+	if (upcast(Game, game, &egbase)) {
 		const uint32_t min_hp = descr().get_min_hp();
 		assert(min_hp);
 		assert(min_hp <= descr().get_max_hp());
@@ -236,12 +236,12 @@ void Soldier::init(Editor_Game_Base* gg)
 	}
 	m_hp_current    = m_hp_max;
 
-	Worker::init(gg);
+	Worker::init(egbase);
 }
 
-void Soldier::cleanup(Editor_Game_Base* gg)
+void Soldier::cleanup(Editor_Game_Base & egbase)
 {
-	Worker::cleanup(gg);
+	Worker::cleanup(egbase);
 }
 
 /*
@@ -374,9 +374,9 @@ void Soldier::draw
 		//FIXME:
 		//Draw bar in playercolor, should be removed when soldier is correctly painted
 		RGBColor color
-			(get_owner()->get_playercolor()->r(),
-			 get_owner()->get_playercolor()->g(),
-			 get_owner()->get_playercolor()->b());
+			(owner().get_playercolor()->r(),
+			 owner().get_playercolor()->g(),
+			 owner().get_playercolor()->b());
 		/*if (fraction <= 0.15)
 			color = RGBColor(255, 0, 0);
 		else if (fraction <= 0.5)
@@ -419,10 +419,10 @@ void Soldier::draw
  *
  */
 void Soldier::start_animation
-	(Editor_Game_Base * gg, char const * const animname, uint32_t const time)
+	(Editor_Game_Base & egbase, char const * const animname, uint32_t const time)
 {
-	if (upcast(Game, game, gg))
-		return start_task_idle (game, descr().get_rand_anim(animname), time);
+	if (upcast(Game, game, &egbase))
+		return start_task_idle (*game, descr().get_rand_anim(animname), time);
 }
 
 
@@ -454,7 +454,7 @@ bool Soldier::canBeChallenged()
 		return false;
 	if (!m_battle)
 		return true;
-	return !m_battle->locked(dynamic_cast<Game*>(&get_owner()->egbase()));
+	return !m_battle->locked(dynamic_cast<Game &>(owner().egbase()));
 }
 
 /**
@@ -462,11 +462,11 @@ bool Soldier::canBeChallenged()
  *
  * \note must only be called by the \ref Battle object
  */
-void Soldier::setBattle(Game* g, Battle* battle)
+void Soldier::setBattle(Game & game, Battle * const battle)
 {
 	if (m_battle != battle) {
 		m_battle = battle;
-		send_signal(g, "battle");
+		send_signal(game, "battle");
 	}
 }
 
@@ -485,17 +485,16 @@ Bob::Task Soldier::taskAttack = {
 	static_cast<Bob::Ptr>(&Soldier::attack_pop)
 };
 
-void Soldier::startTaskAttack(Game* g, Building* building)
+void Soldier::startTaskAttack(Game & game, Building & building)
 {
-	assert(dynamic_cast<Attackable*>(building));
+	dynamic_cast<Attackable const &>(building);
 
-	push_task(g, taskAttack);
+	push_task(game, taskAttack);
 
-	State* s = get_state();
-	s->objvar1 = building;
+	top_state().objvar1 = &building;
 }
 
-void Soldier::attack_update(Game* g, State* state)
+void Soldier::attack_update(Game & game, State & state)
 {
 	std::string signal = get_signal();
 
@@ -504,67 +503,69 @@ void Soldier::attack_update(Game* g, State* state)
 			signal_handled();
 		} else if (signal == "fail") {
 			signal_handled();
-			if (state->objvar1.get(g)) {
+			if (state.objvar1.get(game)) {
 				molog("[attack] failed to reach enemy\n");
-				state->objvar1 = 0;
+				state.objvar1 = 0;
 			} else {
 				molog("[attack] unexpected fail\n");
-				return pop_task(g);
+				return pop_task(game);
 			}
 		} else {
 			molog("[attack] cancelled by unexpected signal '%s'\n", signal.c_str());
-			return pop_task(g);
+			return pop_task(game);
 		}
 	}
 
-	PlayerImmovable* location = get_location(g);
+	PlayerImmovable * const location = get_location(game);
 
-	BaseImmovable* imm = g->map()[get_position()].get_immovable();
-	upcast(Building, enemy, state->objvar1.get(g));
+	BaseImmovable * const imm = game.map()[get_position()].get_immovable();
+	upcast(Building, enemy, state.objvar1.get(game));
 	if (imm == location) {
 		if (!enemy) {
 			molog("[attack] returned home\n");
-			return pop_task(g);
+			return pop_task(game);
 		}
 
-		return start_task_leavebuilding(g, false);
+		return start_task_leavebuilding(game, false);
 	}
 
 	if (m_battle)
-		return startTaskBattle(g);
+		return startTaskBattle(game);
 
 	if (signal == "blocked")
 		// Wait before we try again. Note that this must come *after*
 		// we check for a battle
-		return start_task_idle(g, get_animation("idle"), 5000);
+		return start_task_idle(game, get_animation("idle"), 5000);
 
 	if (!location) {
 		molog("[attack] our location disappeared during a battle\n");
-		return pop_task(g);
+		return pop_task(game);
 	}
 
 	if (!enemy) {
-		Flag* baseflag = location->get_base_flag();
-		if (imm == baseflag)
+		Flag & baseflag = location->base_flag();
+		if (imm == &baseflag)
 			return
 				start_task_move
-					(g,
+					(game,
 					 WALK_NW,
 					 &descr().get_right_walk_anims(does_carry_ware()),
 					 true);
 
 		if
 			(start_task_movepath
-			 	(g, baseflag->get_position(), 0,
+			 	(game,
+			 	 baseflag.get_position(),
+			 	 0,
 			 	 descr().get_right_walk_anims(does_carry_ware())))
 			return;
 		else {
 			molog("[attack] failed to return home\n");
-			return pop_task(g);
+			return pop_task(game);
 		}
 	}
 
-	if (enemy->get_owner() == get_owner()) {
+	if (&enemy->owner() == &owner()) {
 		if (upcast(SoldierControl, ctrl, enemy)) {
 			if (ctrl->stationedSoldiers().size() < ctrl->soldierCapacity()) {
 				molog("[attack] enemy belongs to us now, move in\n");
@@ -572,21 +573,23 @@ void Soldier::attack_update(Game* g, State* state)
 			}
 		}
 
-		state->objvar1 = 0;
-		return schedule_act(g, 10);
+		state.objvar1 = 0;
+		return schedule_act(game, 10);
 	}
 
 	// At this point, we know that the enemy building still stands,
 	// and that we're outside in the plains.
-	if (imm != enemy->get_base_flag()) {
+	if (imm != &enemy->base_flag()) {
 		if
 			(start_task_movepath
-			 	(g, enemy->get_base_flag()->get_position(), 2,
+			 	(game,
+			 	 enemy->base_flag().get_position(),
+			 	 2,
 			 	 descr().get_right_walk_anims(does_carry_ware())))
 			return;
 		else {
 			molog("[attack] failed to move towards building flag\n");
-			return pop_task(g);
+			return pop_task(game);
 		}
 	}
 
@@ -595,13 +598,13 @@ void Soldier::attack_update(Game* g, State* state)
 
 	molog("[attack] attacking target building\n");
 	//  give the enemy soldier some time to act
-	schedule_act(g, attackable->attack(*this) ? 1000 : 10);
+	schedule_act(game, attackable->attack(*this) ? 1000 : 10);
 }
 
-void Soldier::attack_pop(Game* g, State*)
+void Soldier::attack_pop(Game & game, State &)
 {
 	if (m_battle)
-		m_battle->cancel(g, this);
+		m_battle->cancel(game, *this);
 }
 
 
@@ -619,16 +622,16 @@ Bob::Task Soldier::taskDefense = {
 	static_cast<Bob::Ptr>(&Soldier::defense_pop)
 };
 
-void Soldier::startTaskDefense(Game* g, bool stayhome)
+void Soldier::startTaskDefense(Game & game, bool const stayhome)
 {
-	push_task(g, taskDefense);
+	push_task(game, taskDefense);
 
-	State* state = get_state();
-	state->ivar1 = stayhome;
-	state->ivar2 = 0;
+	State & state = top_state();
+	state.ivar1 = stayhome;
+	state.ivar2 = 0;
 }
 
-void Soldier::defense_update(Game* g, State* state)
+void Soldier::defense_update(Game & game, State & state)
 {
 	std::string signal = get_signal();
 
@@ -637,60 +640,65 @@ void Soldier::defense_update(Game* g, State* state)
 			signal_handled();
 		} else {
 			molog("[defense] cancelled by signal '%s'\n", signal.c_str());
-			return pop_task(g);
+			return pop_task(game);
 		}
 	}
 
-	PlayerImmovable* location = get_location(g);
-	BaseImmovable* position = g->map()[get_position()].get_immovable();
+	PlayerImmovable * const location = get_location(game);
+	BaseImmovable * const position = game.map()[get_position()].get_immovable();
 	if (m_battle) {
 		if (position == location)
-			return start_task_leavebuilding(g, false);
+			return start_task_leavebuilding(game, false);
 
-		state->ivar2 = 0;
-		return startTaskBattle(g);
+		state.ivar2 = 0;
+		return startTaskBattle(game);
 	}
 
 	if (!location) {
 		molog("[defense] location disappeared during battle\n");
-		return pop_task(g);
+		return pop_task(game);
 	}
 
 	if (signal == "blocked")
 		// Wait before we try again. Note that this must come *after*
 		// we check for a battle
-		return start_task_idle(g, get_animation("idle"), 5000);
+		return start_task_idle(game, get_animation("idle"), 5000);
 
 	if (position == location) {
 		molog("[defense] returned home\n");
-		return pop_task(g);
+		return pop_task(game);
 	}
 
-	Flag* baseflag = location->get_base_flag();
-	if (position == baseflag) {
-		if (state->ivar1 && !state->ivar2) {
-			state->ivar2 = 1;
-			return start_task_idle(g, get_animation("idle"), 250);
+	Flag & baseflag = location->base_flag();
+	if (position == &baseflag) {
+		if (state.ivar1 && !state.ivar2) {
+			state.ivar2 = 1;
+			return start_task_idle(game, get_animation("idle"), 250);
 		}
 		return
 			start_task_move
-				(g,
+				(game,
 				 WALK_NW,
 				 &descr().get_right_walk_anims(does_carry_ware()),
 				 true);
 	}
 
 	molog("[defense] return home\n");
-	start_task_movepath
-		(g, baseflag->get_position(), 0,
-		 descr().get_right_walk_anims(does_carry_ware()));
-	return;
+	if
+		(start_task_movepath
+		 	(game,
+		 	 baseflag.get_position(),
+		 	 0,
+		 	 descr().get_right_walk_anims(does_carry_ware())))
+		return;
+	else
+		molog("[defense] could not find way home");
 }
 
-void Soldier::defense_pop(Game* g, State*)
+void Soldier::defense_pop(Game & game, State &)
 {
 	if (m_battle)
-		m_battle->cancel(g, this);
+		m_battle->cancel(game, *this);
 }
 
 
@@ -717,55 +725,54 @@ Bob::Task Soldier::taskBattle = {
 	static_cast<Bob::Ptr>(&Soldier::battle_pop)
 };
 
-void Soldier::startTaskBattle(Game* g)
+void Soldier::startTaskBattle(Game & game)
 {
 	assert(m_battle);
 
-	push_task(g, taskBattle);
+	push_task(game, taskBattle);
 }
 
-void Soldier::battle_update(Game* g, State*)
+void Soldier::battle_update(Game & game, State &)
 {
 	std::string signal = get_signal();
 	molog
 		("[battle] update for player %u's soldier: signal = \"%s\"\n",
-		 get_owner()->get_player_number(), signal.c_str());
+		 owner().get_player_number(), signal.c_str());
 
 	if (signal.size()) {
 		if (signal == "blocked") {
 			signal_handled();
-			return start_task_idle(g, get_animation("idle"), 5000);
+			return start_task_idle(game, get_animation("idle"), 5000);
 		} else if (signal == "location" || signal == "battle" || signal == "wakeup") {
 			signal_handled();
 		} else {
 			molog("[battle] interrupted by unexpected signal '%s'\n", signal.c_str());
-			return pop_task(g);
+			return pop_task(game);
 		}
 	}
 
 	if (!m_battle) {
 		molog("[battle] is over\n");
-		sendSpaceSignals(g);
-		return pop_task(g);
+		sendSpaceSignals(game);
+		return pop_task(game);
 	}
 
 	if (!m_battle->opponent(*this)) {
 		molog("[battle] no opponent, starting task idle\n");
-		return start_task_idle(g, get_animation("idle"), -1);
+		return start_task_idle(game, get_animation("idle"), -1);
 	}
 
 	if (stayHome()) {
 		if (this == m_battle->first()) {
 			molog("[battle] stayHome, so reverse roles\n");
-			new Battle(*g, *m_battle->second(), *m_battle->first());
-			skip_act(); // we will get a signal via setBattle()
-			return;
+			new Battle(game, *m_battle->second(), *m_battle->first());
+			return skip_act(); //  we will get a signal via setBattle()
 		}
 	} else {
 		Soldier & opponent = *m_battle->opponent(*this);
 
 		if (opponent.get_position() != get_position()) {
-			Map& map = g->map();
+			Map & map = game.map();
 			uint32_t const dist =
 				map.calc_distance(get_position(), opponent.get_position());
 
@@ -774,31 +781,36 @@ void Soldier::battle_update(Game* g, State*)
 				//  opponent's change of position.
 				Coords dest = opponent.get_position();
 				if (upcast(Building, building, map[dest].get_immovable()))
-					dest = building->get_base_flag()->get_position();
+					dest = building->base_flag().get_position();
 				start_task_movepath
-					(g, dest, 0,
+					(game,
+					 dest,
+					 0,
 					 descr().get_right_walk_anims(does_carry_ware()),
-					 false, (dist+3)/4);
+					 false, (dist + 3) / 4);
 				molog
 					("player %u's soldier started task_movepath\n",
-					 get_owner()->get_player_number());
+					 owner().get_player_number());
+				molog
+					("player %u's soldier started task_movepath\n",
+					 owner().get_player_number());
 				return;
 			}
 		}
 	}
 
-	m_battle->getBattleWork(*g, *this);
+	m_battle->getBattleWork(game, *this);
 }
 
-void Soldier::battle_pop(Game* g, State*)
+void Soldier::battle_pop(Game & game, State &)
 {
 	if (m_battle)
-		m_battle->cancel(g, this);
+		m_battle->cancel(game, *this);
 }
 
 
 struct FindSoldierOnBattlefield : public FindBob {
-	bool accept(Bob* bob) const
+	bool accept(Bob * const bob) const
 	{
 		if (upcast(Soldier, soldier, bob))
 			return soldier->isOnBattlefield();
@@ -808,25 +820,27 @@ struct FindSoldierOnBattlefield : public FindBob {
 
 
 /**
- * Override \ref Bob::checkFieldBlocked.
+ * Override \ref Bob::checkNodeBlocked.
  *
  * As long as we're on the battlefield, check for other soldiers.
  */
-bool Soldier::checkFieldBlocked(Game* g, const FCoords& field, bool commit)
+bool Soldier::checkNodeBlocked
+	(Game & game, FCoords const & field, bool const commit)
 {
 	if (!isOnBattlefield())
 		return false;
 
-	if (upcast(Building, building, get_location(g))) {
+	if (upcast(Building, building, get_location(game))) {
 		if (field == building->get_position()) {
 			if (commit)
-				sendSpaceSignals(g);
+				sendSpaceSignals(game);
 			return false; // we can always walk home
 		}
 	}
 
 	std::vector<Bob *> soldiers;
-	g->map().find_bobs(Area<FCoords>(field, 0), &soldiers, FindSoldierOnBattlefield());
+	game.map().find_bobs
+		(Area<FCoords>(field, 0), &soldiers, FindSoldierOnBattlefield());
 
 	if
 		(soldiers.size() &&
@@ -839,14 +853,14 @@ bool Soldier::checkFieldBlocked(Game* g, const FCoords& field, bool commit)
 			Soldier & soldier = dynamic_cast<Soldier &>(*soldiers[0]);
 			if (soldier.get_owner() != get_owner() && soldier.canBeChallenged()) {
 				molog("[checkNodeBlocked] attacking a soldier\n");
-				new Battle(*g, *this, soldier);
+				new Battle(game, *this, soldier);
 			}
 		}
 		return true;
 	}
 
 	if (commit)
-		sendSpaceSignals(g);
+		sendSpaceSignals(game);
 	return false;
 }
 
@@ -855,20 +869,23 @@ bool Soldier::checkFieldBlocked(Game* g, const FCoords& field, bool commit)
  * Send a "wakeup" signal to all surrounding soldiers that are out in the open,
  * so that they may repeat pathfinding.
  */
-void Soldier::sendSpaceSignals(Game* g)
+void Soldier::sendSpaceSignals(Game & game)
 {
 	std::vector<Bob *> soldiers;
 
-	g->map().find_bobs(Area<FCoords>(get_position(), 1), &soldiers, FindSoldierOnBattlefield());
+	game.map().find_bobs
+		(Area<FCoords>(get_position(), 1),
+		 &soldiers,
+		 FindSoldierOnBattlefield());
 
 	container_iterate_const(std::vector<Bob *>, soldiers, i)
 		if (upcast(Soldier, soldier, *i.current))
 			if (soldier != this)
-				soldier->send_signal(g, "wakeup");
+				soldier->send_signal(game, "wakeup");
 
-	if (get_position().field->get_owned_by() != get_owner()->get_player_number()) {
+	if (get_position().field->get_owned_by() != owner().get_player_number()) {
 		std::vector<BaseImmovable *> attackables;
-		g->map().find_reachable_immovables_unique
+		game.map().find_reachable_immovables_unique
 			(Area<FCoords>(get_position(), MaxProtectionRadius),
 			 &attackables,
 			 CheckStepWalkOn(descr().movecaps(), false),
@@ -884,7 +901,7 @@ void Soldier::sendSpaceSignals(Game* g)
 }
 
 
-void Soldier::log_general_info(Editor_Game_Base* egbase)
+void Soldier::log_general_info(Editor_Game_Base const & egbase)
 {
 	Worker::log_general_info(egbase);
 	molog("[Soldier]\n");

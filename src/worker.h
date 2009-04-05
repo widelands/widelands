@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ class Worker : public Bob {
 	MO_DESCR(Worker_Descr);
 
 	struct Action {
-		typedef bool (Worker::*execute_t)(Game *, Bob::State *, const Action *);
+		typedef bool (Worker::*execute_t)(Game &, Bob::State &, Action const &);
 
 		enum {
 			walkObject, //  walk to objvar1
@@ -81,8 +81,9 @@ public:
 	Tribe_Descr const & tribe() const throw () {return descr().tribe();}
 	const std::string & descname() const throw () {return descr().descname();}
 
-	PlayerImmovable * get_location(Editor_Game_Base * egbase) {
-		return reinterpret_cast<PlayerImmovable *>(m_location.get(egbase));
+	Player & owner() const {assert(get_owner()); return *get_owner();}
+	PlayerImmovable * get_location(Editor_Game_Base & egbase) {
+		return dynamic_cast<PlayerImmovable *>(m_location.get(egbase));
 	}
 	Economy * get_economy() const throw () {return m_economy;}
 
@@ -101,23 +102,25 @@ public:
 	void set_location(PlayerImmovable *);
 	void set_economy(Economy *);
 
-	WareInstance * get_carried_item(Editor_Game_Base * egbase) {
+	WareInstance       * get_carried_item(Editor_Game_Base       & egbase) {
 		return reinterpret_cast<WareInstance *>(m_carried_item.get(egbase));
 	}
-	const WareInstance * get_carried_item(const Editor_Game_Base * game) const {
-		return reinterpret_cast<const WareInstance *>(m_carried_item.get(game));
+	WareInstance const * get_carried_item(Editor_Game_Base const & egbase) const
+	{
+		return
+			reinterpret_cast<WareInstance const *>(m_carried_item.get(egbase));
 	}
-	void set_carried_item(Game* g, WareInstance* item);
-	WareInstance* fetch_carried_item(Game* g);
+	void set_carried_item(Game &, WareInstance *);
+	WareInstance * fetch_carried_item(Game &);
 
-	void schedule_incorporate(Game *g);
-	void incorporate(Game *g);
+	void schedule_incorporate(Game &);
+	void incorporate(Game &);
 
-	virtual void init(Editor_Game_Base *g);
-	virtual void cleanup(Editor_Game_Base *g);
+	virtual void init(Editor_Game_Base &);
+	virtual void cleanup(Editor_Game_Base &);
 
-	bool wakeup_flag_capacity(Game* g, Flag* flag);
-	bool wakeup_leave_building(Game* g, Building* building);
+	bool wakeup_flag_capacity(Game &, Flag &);
+	bool wakeup_leave_building(Game &, Building &);
 
 
 	/// This should be called whenever the worker has done work that he gains
@@ -136,36 +139,36 @@ public:
 	bool needs_experience() const {return m_needed_exp != -1;}
 
 	// debug
-	void log_general_info(Editor_Game_Base*);
+	virtual void log_general_info(Editor_Game_Base const &);
 
 	// worker-specific tasks
-	void start_task_transfer(Game* g, Transfer* t);
-	void cancel_task_transfer(Game* g);
+	void start_task_transfer(Game &, Transfer *);
+	void cancel_task_transfer(Game &);
 
-	void start_task_buildingwork(Game* g);
-	void update_task_buildingwork(Game* g);
+	void start_task_buildingwork(Game &);
+	void update_task_buildingwork(Game &);
 
-	void start_task_return(Game* g, bool dropitem);
-	void start_task_program(Game* g, const std::string & programname);
+	void start_task_return(Game & game, bool dropitem);
+	void start_task_program(Game & game, std::string const & programname);
 
-	void start_task_gowarehouse(Game* g);
+	void start_task_gowarehouse(Game &);
 	void start_task_dropoff(Game &, WareInstance &);
-	void start_task_fetchfromflag(Game* g);
+	void start_task_fetchfromflag(Game &);
 
-	bool start_task_waitforcapacity(Game* g, Flag* flag);
-	void start_task_leavebuilding(Game* g, bool changelocation);
-	void start_task_fugitive(Game* g);
+	bool start_task_waitforcapacity(Game &, Flag &);
+	void start_task_leavebuilding(Game &, bool changelocation);
+	void start_task_fugitive(Game &);
 
 	void start_task_geologist
-			(Game* g,
-			 const int32_t attempts, const int32_t radius,
-			 const std::string & subcommand);
+		(Game &,
+		 uint8_t attempts, uint8_t radius,
+		 std::string const & subcommand);
 
 
 protected:
 	void draw_inner(Editor_Game_Base const &, RenderTarget &, Point) const;
 	virtual void draw(Editor_Game_Base const &, RenderTarget &, Point) const;
-	virtual void init_auto_task(Game* g);
+	virtual void init_auto_task(Game &);
 
 	bool does_carry_ware() {return m_carried_item.is_set();}
 
@@ -184,41 +187,41 @@ public:
 
 private:
 	// task details
-	void transfer_update(Game* g, State* state);
-	void transfer_signalimmediate(Game* g, State* state, const std::string& signal);
-	void buildingwork_update(Game* g, State* state);
-	void return_update(Game* g, State* state);
-	void program_update(Game* g, State* state);
-	void gowarehouse_update(Game* g, State* state);
-	void gowarehouse_signalimmediate(Game* g, State* state, const std::string& signal);
-	void gowarehouse_pop(Game* g, State* state);
-	void dropoff_update(Game* g, State* state);
-	void fetchfromflag_update(Game* g, State* state);
-	void waitforcapacity_update(Game* g, State* state);
-	void waitforcapacity_pop(Game* g, State* state);
-	void leavebuilding_update(Game* g, State* state);
-	void leavebuilding_pop(Game* g, State* state);
-	void fugitive_update(Game* g, State* state);
-	void geologist_update(Game* g, State* state);
+	void transfer_update(Game &, State &);
+	void transfer_signalimmediate(Game &, State &, std::string const & signal);
+	void buildingwork_update(Game &, State &);
+	void return_update(Game &, State &);
+	void program_update(Game &, State &);
+	void gowarehouse_update(Game &, State &);
+	void gowarehouse_signalimmediate(Game &, State &, std::string const & signal);
+	void gowarehouse_pop(Game & game, State & state);
+	void dropoff_update(Game &, State &);
+	void fetchfromflag_update(Game &, State &);
+	void waitforcapacity_update(Game &, State &);
+	void waitforcapacity_pop(Game & game, State & state);
+	void leavebuilding_update(Game &, State &);
+	void leavebuilding_pop(Game & game, State & state);
+	void fugitive_update(Game &, State &);
+	void geologist_update(Game &, State &);
 
 	// Program commands
-	bool run_mine(Game* g, State* state, const Action* act);
-	bool run_breed(Game* g, State* state, const Action* act);
-	bool run_createitem(Game* g, State* state, const Action* act);
-	bool run_setdescription(Game* g, State* state, const Action* act);
-	bool run_setbobdescription(Game* g, State* state, const Action* act);
-	bool run_findobject(Game* g, State* state, const Action* act);
-	bool run_findspace(Game* g, State* state, const Action* act);
-	bool run_walk(Game* g, State* state, const Action* act);
-	bool run_animation(Game* g, State* state, const Action* act);
-	bool run_return(Game* g, State* state, const Action* act);
-	bool run_object(Game* g, State* state, const Action* act);
-	bool run_plant(Game* g, State* state, const Action* act);
-	bool run_create_bob(Game* g, State* state, const Action* act);
-	bool run_removeobject(Game* g, State* state, const Action* act);
-	bool run_geologist(Game* g, State* state, const Action* act);
-	bool run_geologist_find(Game* g, State* state, const Action* act);
-	bool run_playFX(Game* g, State* state, const Action* act);
+	bool run_mine             (Game &, State &, Action const &);
+	bool run_breed            (Game &, State &, Action const &);
+	bool run_createitem       (Game &, State &, Action const &);
+	bool run_setdescription   (Game &, State &, Action const &);
+	bool run_setbobdescription(Game &, State &, Action const &);
+	bool run_findobject       (Game &, State &, Action const &);
+	bool run_findspace        (Game &, State &, Action const &);
+	bool run_walk             (Game &, State &, Action const &);
+	bool run_animation        (Game &, State &, Action const &);
+	bool run_return           (Game &, State &, Action const &);
+	bool run_object           (Game &, State &, Action const &);
+	bool run_plant            (Game &, State &, Action const &);
+	bool run_create_bob       (Game &, State &, Action const &);
+	bool run_removeobject     (Game &, State &, Action const &);
+	bool run_geologist        (Game &, State &, Action const &);
+	bool run_geologist_find   (Game &, State &, Action const &);
+	bool run_playFX           (Game &, State &, Action const &);
 
 	Object_Ptr         m_location;     ///< meta location of the worker, a PlayerImmovable
 	Economy          * m_economy;      ///< economy this worker is registered in

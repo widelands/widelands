@@ -181,7 +181,7 @@ Create a building of this type. Does not perform any sanity checks.
 if old != 0 this is an enhancing
 ===============
 */
-Building* Building_Descr::create
+Building & Building_Descr::create
 	(Editor_Game_Base     &       egbase,
 	 Player               &       owner,
 	 Coords                 const pos,
@@ -192,12 +192,12 @@ Building* Building_Descr::create
 	 Building_Descr const * const old)
 	const
 {
-	Building* b = construct ? create_constructionsite(old) : create_object();
-	b->m_position = pos;
-	b->set_owner(&owner);
-	b->prefill(dynamic_cast<Game &>(egbase), ware_counts, worker_counts, soldier_counts);
-	b->init(&egbase);
-	b->postfill(dynamic_cast<Game &>(egbase), ware_counts, worker_counts, soldier_counts);
+	Building & b = construct ? create_constructionsite(old) : create_object();
+	b.m_position = pos;
+	b.set_owner(&owner);
+	b.prefill(dynamic_cast<Game &>(egbase), ware_counts, worker_counts, soldier_counts);
+	b.init(egbase);
+	b.postfill(dynamic_cast<Game &>(egbase), ware_counts, worker_counts, soldier_counts);
 
 	return b;
 }
@@ -251,7 +251,7 @@ Create a construction site for this type of building
 if old != 0 this is an enhancement from an older building
 ===============
 */
-Building * Building_Descr::create_constructionsite
+Building & Building_Descr::create_constructionsite
 	(Building_Descr const * const old) const
 {
 	if
@@ -260,13 +260,13 @@ Building * Building_Descr::create_constructionsite
 		 		(m_tribe.building_index("constructionsite")))
 	{
 
-		ConstructionSite & csite = *static_cast<ConstructionSite *>
-			(descr->create_object());
+		ConstructionSite & csite =
+			dynamic_cast<ConstructionSite &>(descr->create_object());
 		csite.set_building(*this);
 		if (old)
 			csite.set_previous_building(old);
 
-		return &csite;
+		return csite;
 	} else
 		throw wexception
 			("Tribe %s has no constructionsite", m_tribe.name().c_str());
@@ -301,9 +301,9 @@ int32_t Building::get_size() const throw () {return descr().get_size();}
 
 bool Building::get_passable() const throw () {return false;}
 
-Flag* Building::get_base_flag()
+Flag & Building::base_flag()
 {
-	return m_flag;
+	return *m_flag;
 }
 
 
@@ -336,10 +336,10 @@ Building::start_animation
 Start the given animation
 ===============
 */
-void Building::start_animation(Editor_Game_Base* g, uint32_t anim)
+void Building::start_animation(Editor_Game_Base & egbase, uint32_t const anim)
 {
 	m_anim = anim;
-	m_animstart = g->get_gametime();
+	m_animstart = egbase.get_gametime();
 }
 
 /*
@@ -349,42 +349,43 @@ Building::init
 Common building initialization code. You must call this from derived class' init.
 ===============
 */
-void Building::init(Editor_Game_Base* g)
+void Building::init(Editor_Game_Base & egbase)
 {
-	PlayerImmovable::init(g);
+	PlayerImmovable::init(egbase);
 
 	// Set the building onto the map
-	Map* map = g->get_map();
+	Map & map = egbase.map();
 	Coords neighb;
 
-	set_position(g, m_position);
+	set_position(egbase, m_position);
 
 	if (get_size() == BIG) {
-		map->get_ln(m_position, &neighb);
-		set_position(g, neighb);
+		map.get_ln(m_position, &neighb);
+		set_position(egbase, neighb);
 
-		map->get_tln(m_position, &neighb);
-		set_position(g, neighb);
+		map.get_tln(m_position, &neighb);
+		set_position(egbase, neighb);
 
-		map->get_trn(m_position, &neighb);
-		set_position(g, neighb);
+		map.get_trn(m_position, &neighb);
+		set_position(egbase, neighb);
 	}
 
 	// Make sure the flag is there
 
 
-	map->get_brn(m_position, &neighb);
+	map.get_brn(m_position, &neighb);
 	{
-		Flag * flag = dynamic_cast<Flag *>(map->get_immovable(neighb));
-		if (not flag) flag = Flag::create(g, &owner(), neighb);
+		Flag * flag = dynamic_cast<Flag *>(map.get_immovable(neighb));
+		if (not flag)
+			flag = new Flag(egbase, owner(), neighb);
 		m_flag = flag;
-		flag->attach_building(g, this);
+		flag->attach_building(egbase, *this);
 	}
 
 	// Start the animation
-	start_animation(g, descr().get_animation("idle"));
+	start_animation(egbase, descr().get_animation("idle"));
 
-	m_leave_time = g->get_gametime();
+	m_leave_time = egbase.get_gametime();
 }
 
 /*
@@ -394,10 +395,10 @@ Building::cleanup
 Cleanup the building
 ===============
 */
-void Building::cleanup(Editor_Game_Base* g)
+void Building::cleanup(Editor_Game_Base & egbase)
 {
 	if (m_defeating_player) {
-		Player & defeating_player = g->player(m_defeating_player);
+		Player & defeating_player = egbase.player(m_defeating_player);
 		if (descr().get_conquers()) {
 			owner()         .count_msite_lost        ();
 			defeating_player.count_msite_defeated    ();
@@ -408,26 +409,26 @@ void Building::cleanup(Editor_Game_Base* g)
 	}
 
 	// Remove from flag
-	m_flag->detach_building(g);
+	m_flag->detach_building(egbase);
 
 	// Unset the building
-	unset_position(g, m_position);
+	unset_position(egbase, m_position);
 
 	if (get_size() == BIG) {
-		Map* map = g->get_map();
+		Map & map = egbase.map();
 		Coords neighb;
 
-		map->get_ln(m_position, &neighb);
-		unset_position(g, neighb);
+		map.get_ln(m_position, &neighb);
+		unset_position(egbase, neighb);
 
-		map->get_tln(m_position, &neighb);
-		unset_position(g, neighb);
+		map.get_tln(m_position, &neighb);
+		unset_position(egbase, neighb);
 
-		map->get_trn(m_position, &neighb);
-		unset_position(g, neighb);
+		map.get_trn(m_position, &neighb);
+		unset_position(egbase, neighb);
 	}
 
-	PlayerImmovable::cleanup(g);
+	PlayerImmovable::cleanup(egbase);
 }
 
 
@@ -453,14 +454,15 @@ Remove the building from the world now, and create a fire in its place if
 applicable.
 ===============
 */
-void Building::destroy(Editor_Game_Base* g)
+void Building::destroy(Editor_Game_Base & egbase)
 {
 	const bool fire           = burn_on_destroy();
 	const Coords pos          = m_position;
-	const Tribe_Descr & tribe = descr().tribe();
-	PlayerImmovable::destroy(g);
+	Tribe_Descr const & t = tribe();
+	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
-	if (fire) g->create_immovable(pos, "destroyed_building", &tribe);
+	if (fire)
+		egbase.create_immovable(pos, "destroyed_building", &t);
 }
 
 
@@ -565,11 +567,11 @@ signal).
 Return false if there's nothing to be done.
 ===============
 */
-bool Building::get_building_work(Game *, Worker * w, bool)
+bool Building::get_building_work(Game &, Worker & worker, bool)
 {
 	throw wexception
 		("MO(%u): get_building_work() for unknown worker %u",
-		 serial(), w->serial());
+		 serial(), worker.serial());
 }
 
 
@@ -585,17 +587,15 @@ bool Building::get_building_work(Game *, Worker * w, bool)
  *
  * \see Worker::start_task_leavebuilding(), leave_skip()
  */
-bool Building::leave_check_and_wait(Game* g, Worker* w)
+bool Building::leave_check_and_wait(Game & game, Worker & w)
 {
-	Map_Object* allow = m_leave_allow.get(g);
-
-	if (w == allow) {
+	if (&w == m_leave_allow.get(game)) {
 		m_leave_allow = 0;
 		return true;
 	}
 
 	// Check time and queue
-	uint32_t time = g->get_gametime();
+	uint32_t const time = game.get_gametime();
 
 	if (m_leave_queue.empty()) {
 		if (m_leave_time <= time) {
@@ -603,10 +603,10 @@ bool Building::leave_check_and_wait(Game* g, Worker* w)
 			return true;
 		}
 
-		schedule_act(g, m_leave_time - time);
+		schedule_act(game, m_leave_time - time);
 	}
 
-	m_leave_queue.push_back(w);
+	m_leave_queue.push_back(&w);
 	return false;
 }
 
@@ -619,9 +619,10 @@ bool Building::leave_check_and_wait(Game* g, Worker* w)
  *
  * \see Building::leave_check_and_wait()
  */
-void Building::leave_skip(Game *, Worker * w)
+void Building::leave_skip(Game &, Worker & w)
 {
-	Leave_Queue::iterator it = std::find(m_leave_queue.begin(), m_leave_queue.end(), Object_Ptr(w));
+	Leave_Queue::iterator const it =
+		std::find(m_leave_queue.begin(), m_leave_queue.end(), Object_Ptr(&w));
 
 	if (it != m_leave_queue.end())
 		m_leave_queue.erase(it);
@@ -635,9 +636,9 @@ Building::act
 Advance the leave queue.
 ===============
 */
-void Building::act(Game* g, uint32_t data)
+void Building::act(Game & game, uint32_t const data)
 {
-	uint32_t time = g->get_gametime();
+	uint32_t const time = game.get_gametime();
 
 	if (static_cast<int32_t>(time - m_leave_time) >= 0)
 	{
@@ -645,14 +646,14 @@ void Building::act(Game* g, uint32_t data)
 
 		// Wake up one worker
 		while (m_leave_queue.size()) {
-			upcast(Worker, worker, m_leave_queue[0].get(g));
+			upcast(Worker, worker, m_leave_queue[0].get(game));
 
 			m_leave_queue.erase(m_leave_queue.begin());
 
 			if (worker) {
 				m_leave_allow = worker;
 
-				if (worker->wakeup_leave_building(g, this)) {
+				if (worker->wakeup_leave_building(game, *this)) {
 					m_leave_time = time + BUILDING_LEAVE_INTERVAL;
 					wakeup = true;
 					break;
@@ -661,13 +662,13 @@ void Building::act(Game* g, uint32_t data)
 		}
 
 		if (m_leave_queue.size())
-			schedule_act(g, m_leave_time - time);
+			schedule_act(game, m_leave_time - time);
 
 		if (!wakeup)
 			m_leave_time = time; // make sure leave_time doesn't get too far behind
 	}
 
-	PlayerImmovable::act(g, data);
+	PlayerImmovable::act(game, data);
 }
 
 
@@ -681,7 +682,7 @@ Return true if we can service that request (even if it is delayed), or false
 otherwise.
 ===============
 */
-bool Building::fetch_from_flag(Game *)
+bool Building::fetch_from_flag(Game &)
 {
 	molog("TODO: Implement Building::fetch_from_flag\n");
 
@@ -728,7 +729,7 @@ void Building::draw_help
 	 Point                    const pos)
 {
 	Interactive_GameBase const & igbase =
-		dynamic_cast<Interactive_GameBase const &>(*game.get_iabase());
+		dynamic_cast<Interactive_GameBase const &>(*game.get_ibase());
 	uint32_t const dpyflags = igbase.get_display_flags();
 
 	if (dpyflags & Interactive_Base::dfShowCensus)
@@ -816,7 +817,7 @@ void Building::set_priority
 /**
  * Log basic infos
  */
-void Building::log_general_info(Editor_Game_Base* egbase) {
+void Building::log_general_info(Editor_Game_Base const & egbase) {
 	PlayerImmovable::log_general_info(egbase);
 
 	molog("m_position: (%i, %i)\n", m_position.x, m_position.y);
@@ -837,7 +838,7 @@ void Building::log_general_info(Editor_Game_Base* egbase) {
 }
 
 
-void Building::add_worker(Worker * worker) {
+void Building::add_worker(Worker & worker) {
 	if (not get_workers().size()) {
 		//  The first worker will enter the building so it should start seeing.
 		Player & player = owner();
@@ -849,7 +850,7 @@ void Building::add_worker(Worker * worker) {
 }
 
 
-void Building::remove_worker(Worker * worker) {
+void Building::remove_worker(Worker & worker) {
 	PlayerImmovable::remove_worker(worker);
 	if (not get_workers().size()) {
 		//  The last worker has left the building so it should stop seeing.

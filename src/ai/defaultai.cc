@@ -1108,9 +1108,9 @@ bool DefaultAI::improve_roads (Flag & flag)
 
 		if (!road) continue;
 
-		Flag * endflag = road->get_flag(Road::FlagStart);
+		Flag * endflag = &road->get_flag(Road::FlagStart);
 		if (endflag == nf.flag)
-			endflag = road->get_flag(Road::FlagEnd);
+			endflag = &road->get_flag(Road::FlagEnd);
 
 			int32_t dist =
 				map.calc_distance(flag.get_position(), endflag->get_position());
@@ -1303,7 +1303,7 @@ void DefaultAI::construct_roads ()
 				spots.back().coords  = *i.current;
 				spots.back().hasflag = false;
 				spots.back().cost    = 0;
-				spots.back().eco = road->get_flag(Road::FlagStart)->get_economy();
+				spots.back().eco = road->get_flag(Road::FlagStart).get_economy();
 				spots.back().from    = -1;
 
 				continue;

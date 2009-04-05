@@ -146,21 +146,21 @@ inline static const Map_Object_Descr * read_unseen_immovable
 
 void Map_Players_View_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const)
 	throw (_wexception)
 {
 	if (skip) return;
 
-	const Map & map = egbase->map();
+	Map const & map = egbase.map();
 	const X_Coordinate mapwidth  = map.get_width ();
 	const Y_Coordinate mapheight = map.get_height();
 	Field & first_field = map[0];
 	const Player_Number nr_players = map.get_nrplayers();
-	iterate_players_existing_const(plnum, nr_players, *egbase, player) {
+	iterate_players_existing_const(plnum, nr_players, egbase, player) {
 		Player::Field * const player_fields = player->m_fields;
-		const uint32_t gametime = egbase->get_gametime();
+		uint32_t const gametime = egbase.get_gametime();
 
 		char unseen_times_filename[FILENAME_SIZE];
 		snprintf
@@ -435,7 +435,7 @@ void Map_Players_View_Data_Packet::Read
 
 					f_player_field.map_object_descr[TCoords<>::None] =
 						read_unseen_immovable
-						(*egbase, node_immovable_kinds_file, node_immovables_file);
+							(egbase, node_immovable_kinds_file, node_immovables_file);
 					break;
 				}
 				default:
@@ -479,15 +479,15 @@ void Map_Players_View_Data_Packet::Read
 					try {f_player_field.terrains.d = terrains_file.get();}
 					catch (const FileRead::File_Boundary_Exceeded) {
 						throw wexception
-						("Map_Players_View_Data_Packet::Read: player %u: in \"%s\": "
-						 "node (%i, %i) t = D: unexpected end of file while reading "
-						 "terrain",
-						 plnum, terrains_filename, f.x, f.y);
+							("Map_Players_View_Data_Packet::Read: player %u: in "
+							 "\"%s\": node (%i, %i) t = D: unexpected end of file "
+							 "while reading terrain",
+							 plnum, terrains_filename, f.x, f.y);
 					}
 					f_player_field.map_object_descr[TCoords<>::D] =
 						read_unseen_immovable
-						(*egbase,
-						 triangle_immovable_kinds_file, triangle_immovables_file);
+							(egbase,
+							 triangle_immovable_kinds_file, triangle_immovables_file);
 				}
 				if  (f_seen | br_seen | r_seen) {
 					//  The player currently sees the R triangle. Therefore his
@@ -501,15 +501,15 @@ void Map_Players_View_Data_Packet::Read
 					try {f_player_field.terrains.r = terrains_file.get();}
 					catch (const FileRead::File_Boundary_Exceeded) {
 						throw wexception
-						("Map_Players_View_Data_Packet::Read: player %u: in \"%s\": "
-						 "node (%i, %i) t = R: unexpected end of file while reading "
-						 "terrain",
-						 plnum, terrains_filename, f.x, f.y);
+							("Map_Players_View_Data_Packet::Read: player %u: in "
+							 "\"%s\": node (%i, %i) t = R: unexpected end of file "
+							 "while reading terrain",
+							 plnum, terrains_filename, f.x, f.y);
 					}
 					f_player_field.map_object_descr[TCoords<>::R] =
 						read_unseen_immovable
-						(*egbase,
-						 triangle_immovable_kinds_file, triangle_immovables_file);
+							(egbase,
+							 triangle_immovable_kinds_file, triangle_immovables_file);
 				}
 
 				{ //  edges
@@ -677,16 +677,16 @@ inline static void write_unseen_immovable
 	(file).Write(fs, filename);                                                \
 
 void Map_Players_View_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	fs.EnsureDirectoryExists("player");
-	const Map & map = egbase->map();
+	Map const & map = egbase.map();
 	const X_Coordinate mapwidth  = map.get_width ();
 	const Y_Coordinate mapheight = map.get_height();
 	Field & first_field = map[0]; //  FIXME make this const when FCoords has been templatized so it can have "const Field * field;"
 	const Player_Number nr_players = map.get_nrplayers();
-	iterate_players_existing_const(plnum, nr_players, *egbase, player)
+	iterate_players_existing_const(plnum, nr_players, egbase, player)
 		if (const Player::Field * const player_fields = player->m_fields) {
 			FileWrite                   unseen_times_file;
 			BitOutBuffer<2>     node_immovable_kinds_file;

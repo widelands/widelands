@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,16 +31,16 @@ Event_Conquer_Area::Event_Conquer_Area(Section & s, Editor_Game_Base & egbase)
 {}
 
 
-Event::State Event_Conquer_Area::run(Game* game) {
+Event::State Event_Conquer_Area::run(Game & game) {
 	assert(m_player_area);
 	assert(0 < m_player_area.player_number);
-	assert    (m_player_area.player_number <= game->map().get_nrplayers());
+	assert    (m_player_area.player_number <= game.map().get_nrplayers());
 
-	game->conquer_area_no_building
+	game.conquer_area_no_building
 		(Player_Area<Area<FCoords> >
 		 	(m_player_area.player_number,
 		 	 Area<FCoords>
-		 	 	(game->map().get_fcoords(m_player_area), m_player_area.radius)));
+		 	 	(game.map().get_fcoords(m_player_area), m_player_area.radius)));
 
 	return m_state = DONE;
 }

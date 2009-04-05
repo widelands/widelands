@@ -55,7 +55,7 @@ namespace Widelands {
 
 void Map_Bobdata_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const ol)
 	throw (_wexception)
@@ -69,7 +69,7 @@ void Map_Bobdata_Data_Packet::Read
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION || packet_version == 1) {
-			Map   const &       map        = egbase->map();
+			Map   const &       map        = egbase.map();
 			Extent        const extent     = map.extent();
 			Player_Number const nr_players = map.get_nrplayers();
 			for (;;) {
@@ -90,7 +90,7 @@ void Map_Bobdata_Data_Packet::Read
 							throw wexception
 								("owner number is %u but there are only %u players",
 								 read_owner, nr_players);
-						if (Player * const owner = egbase->get_player(read_owner))
+						if (Player * const owner = egbase.get_player(read_owner))
 							bob.set_owner(owner);
 						else
 							throw wexception
@@ -334,7 +334,7 @@ void Map_Bobdata_Data_Packet::Read
 }
 
 void Map_Bobdata_Data_Packet::read_critter_bob
-	(FileRead * fr, Editor_Game_Base *, Map_Map_Object_Loader *, Critter_Bob *)
+	(FileRead * fr, Editor_Game_Base &, Map_Map_Object_Loader *, Critter_Bob *)
 {
 	try {
 		uint16_t const packet_version = fr->Unsigned16();
@@ -349,7 +349,7 @@ void Map_Bobdata_Data_Packet::read_critter_bob
 
 void Map_Bobdata_Data_Packet::read_worker_bob
 	(FileRead              * fr,
-	 Editor_Game_Base      * egbase,
+	 Editor_Game_Base      & egbase,
 	 Map_Map_Object_Loader * ol,
 	 Worker                * worker)
 {
@@ -467,12 +467,12 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 
 			if (oldsoldier_fix)
 				if (upcast(Soldier, soldier, worker))
-					if (upcast(Game, g, egbase))
+					if (upcast(Game, game, &egbase))
 						if (upcast(MilitarySite, ms, soldier->get_location(egbase)))
 							if (soldier->get_position() == ms->get_position()) {
 								// Fix behaviour of soldiers in buildings
-								soldier->reset_tasks(g);
-								soldier->start_task_buildingwork(g);
+								soldier->reset_tasks(*game);
+								soldier->start_task_buildingwork(*game);
 								ms->update_soldier_request();
 							}
 		} else
@@ -486,7 +486,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 
 void Map_Bobdata_Data_Packet::Write
 	(FileSystem           &       fs,
-	 Editor_Game_Base     *       egbase,
+	 Editor_Game_Base     &       egbase,
 	 Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
@@ -494,7 +494,7 @@ throw (_wexception)
 
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	Map & map = egbase->map();
+	Map & map = egbase.map();
 	for (uint16_t y = 0; y < map.get_height(); ++y) {
 		for (uint16_t x = 0; x < map.get_width(); ++x) {
 
@@ -506,8 +506,8 @@ throw (_wexception)
 			for (uint32_t i = 0; i < bobarr.size(); ++i) {
 				Bob        const & bob   = *bobarr[i];
 				Bob::Descr const & descr = bob.descr();
-				assert(os->is_object_known(&bob));
-				uint32_t const reg = os->get_object_file_index(&bob);
+				assert(os->is_object_known(bob));
+				uint32_t const reg = os->get_object_file_index(bob);
 
 				fw.Unsigned32(reg);
 				//  BOB STUFF
@@ -557,8 +557,8 @@ throw (_wexception)
 					fw.Signed32(s.ivar3);
 
 					if (Map_Object const * const obj = s.objvar1.get(egbase)) {
-						assert(os->is_object_known(obj));
-						fw.Unsigned32(os->get_object_file_index(obj));
+						assert(os->is_object_known(*obj));
+						fw.Unsigned32(os->get_object_file_index(*obj));
 					} else
 						fw.Unsigned32(0);
 
@@ -628,7 +628,7 @@ throw (_wexception)
 				else
 					assert(false);
 
-				os->mark_object_as_saved(&bob);
+				os->mark_object_as_saved(bob);
 			}
 
 		}
@@ -642,14 +642,14 @@ throw (_wexception)
 
 void Map_Bobdata_Data_Packet::write_critter_bob
 	(FileWrite            * fw,
-	 Editor_Game_Base     *,
+	 Editor_Game_Base     &,
 	 Map_Map_Object_Saver *,
 	 Critter_Bob    const &)
 {fw->Unsigned16(CRITTER_BOB_PACKET_VERSION);}
 
 void Map_Bobdata_Data_Packet::write_worker_bob
 	(FileWrite            * fw,
-	 Editor_Game_Base     * egbase,
+	 Editor_Game_Base     & egbase,
 	 Map_Map_Object_Saver * os,
 	 Worker         const & worker)
 {
@@ -668,7 +668,7 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 		fw->Unsigned32(soldier->m_defense_level);
 		fw->Unsigned32(soldier->m_evade_level);
 		if (soldier->m_battle)
-			fw->Unsigned32(os->get_object_file_index(soldier->m_battle));
+			fw->Unsigned32(os->get_object_file_index(*soldier->m_battle));
 		else
 			fw->Unsigned32(0);
 	} else if (upcast(Carrier const, carrier, &worker)) {
@@ -677,8 +677,8 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 	}
 
 	if (Map_Object const * const loca = worker.m_location.get(egbase)) {
-		assert(os->is_object_known(loca));
-		fw->Unsigned32(os->get_object_file_index(loca));
+		assert(os->is_object_known(*loca));
+		fw->Unsigned32(os->get_object_file_index(*loca));
 	} else
 		fw->Unsigned32(0);
 
@@ -686,10 +686,10 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 
 	if
 		(Map_Object const * const carried_item =
-		 worker.m_carried_item.get(egbase))
+		 	worker.m_carried_item.get(egbase))
 	{
-		assert(os->is_object_known(carried_item));
-		fw->Unsigned32(os->get_object_file_index(carried_item));
+		assert(os->is_object_known(*carried_item));
+		fw->Unsigned32(os->get_object_file_index(*carried_item));
 	} else
 		fw->Unsigned32(0);
 

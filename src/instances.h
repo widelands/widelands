@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -220,13 +220,13 @@ public:
 	 */
 	virtual bool have_tattributes() const;
 
-	void remove(Editor_Game_Base*);
-	virtual void destroy(Editor_Game_Base*);
+	void remove(Editor_Game_Base &);
+	virtual void destroy(Editor_Game_Base &);
 
 	//  The next functions are really only needed in games, not in the editor.
-	void schedule_destroy(Game *g);
-	uint32_t schedule_act(Game* g, uint32_t tdelta, uint32_t data = 0);
-	virtual void act(Game*, uint32_t data);
+	void schedule_destroy(Game &);
+	uint32_t schedule_act(Game &, uint32_t tdelta, uint32_t data = 0);
+	virtual void act(Game &, uint32_t data);
 
 	// implementation is in game_debug_ui.cc
 	virtual void create_debug_panels
@@ -236,7 +236,7 @@ public:
 	void set_logsink(LogSink *);
 
 	/// Called when a new logsink is set. Used to give general information.
-	virtual void log_general_info(Editor_Game_Base *);
+	virtual void log_general_info(Editor_Game_Base const &);
 
 	// saving and loading
 	/**
@@ -274,11 +274,11 @@ public:
 		virtual ~Loader() {}
 
 		void init
-			(Editor_Game_Base      * const e,
+			(Editor_Game_Base      & e,
 			 Map_Map_Object_Loader * const m,
 			 Map_Object            * const object)
 		{
-			m_egbase = e;
+			m_egbase = &e;
 			m_mol = m;
 			m_object = object;
 		}
@@ -300,13 +300,13 @@ public:
 	/// to the new Map_Object saving system
 	virtual bool has_new_save_support() {return false;}
 
-	virtual void save(Editor_Game_Base *, Map_Map_Object_Saver *, FileWrite &);
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver *, FileWrite &);
 	// Pure Map_Objects cannot be loaded
 
 protected:
 	/// init for editor and game
-	virtual void init(Editor_Game_Base*);
-	virtual void cleanup(Editor_Game_Base*);
+	virtual void init(Editor_Game_Base &);
+	virtual void cleanup(Editor_Game_Base &);
 
 	void molog(char const * fmt, ...) const
 		__attribute__((format(printf, 2, 3)));
@@ -336,7 +336,7 @@ struct Object_Manager {
 	Object_Manager() {m_lastserial = 0;}
 	~Object_Manager();
 
-	void cleanup(Editor_Game_Base *g);
+	void cleanup(Editor_Game_Base &);
 
 	Map_Object * get_object(Serial const serial) const {
 		const objmap_t::const_iterator it = m_objects.find(serial);
@@ -386,8 +386,8 @@ struct Object_Ptr {
 
 	// dammit... without a Editor_Game_Base object, we can't implement a Map_Object* operator
 	// (would be _really_ nice)
-	Map_Object * get(const Editor_Game_Base * const g);
-	const Map_Object * get(const Editor_Game_Base * const g) const;
+	Map_Object * get(Editor_Game_Base const &);
+	Map_Object const * get(Editor_Game_Base const & egbase) const;
 
 	bool operator<  (Object_Ptr const other) const throw () {
 		return m_serial < other.m_serial;
@@ -413,14 +413,17 @@ struct OPtr {
 
 	bool is_set() const {return m.is_set();}
 
-	T* get(const Editor_Game_Base* const g)
-	{
-		return static_cast<T*>(m.get(g));
+	T       * get(Editor_Game_Base const &       egbase)       {
+		return static_cast<T *>(m.get(egbase));
 	}
-
-	const T* get(const Editor_Game_Base* const g) const
-	{
-		return static_cast<const T*>(m.get(g));
+	T       * get(Editor_Game_Base const * const egbase)       {
+		return get(egbase);
+	}
+	T const * get(Editor_Game_Base const &       egbase) const {
+		return static_cast<T const *>(m.get(egbase));
+	}
+	T const * get(Editor_Game_Base const * const egbase) const {
+		return get(egbase);
 	}
 
 	bool operator<  (OPtr<T> const & other) const {return m <  other.m;}
@@ -434,8 +437,8 @@ private:
 
 struct Cmd_Destroy_Map_Object : public GameLogicCommand {
 	Cmd_Destroy_Map_Object() : GameLogicCommand(0) {} ///< For savegame loading
-	Cmd_Destroy_Map_Object (int32_t t, Map_Object *);
-	virtual void execute (Game* g);
+	Cmd_Destroy_Map_Object (int32_t t, Map_Object &);
+	virtual void execute (Game &);
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
@@ -448,9 +451,9 @@ private:
 
 struct Cmd_Act : public GameLogicCommand {
 	Cmd_Act() : GameLogicCommand(0) {} ///< For savegame loading
-	Cmd_Act (int32_t t, Map_Object *, int32_t a);
+	Cmd_Act (int32_t t, Map_Object &, int32_t a);
 
-	virtual void execute (Game* g);
+	virtual void execute (Game &);
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);

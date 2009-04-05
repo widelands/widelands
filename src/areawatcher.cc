@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,10 @@
 
 namespace Widelands {
 
-void AreaWatcher::act(Game * game, uint32_t)
-{game->player(player_number).remove_areawatcher(*this); remove(game);}
+void AreaWatcher::act(Game & game, uint32_t) {
+	game.player(player_number).remove_areawatcher(*this);
+	remove(game);
+}
 
 
 Map_Object_Descr g_areawatcher_descr("areawatcher", "Areawatcher");
@@ -40,7 +42,7 @@ AreaWatcher & AreaWatcher::create
 	(Editor_Game_Base & egbase, Player_Area<> const player_area)
 {
 	AreaWatcher & result = *new AreaWatcher(player_area);
-	result.init(&egbase);
+	result.init(egbase);
 	return result;
 }
 

@@ -29,7 +29,7 @@ Command (dt), m_callback(cb)
 {}
 
 
-void Cmd_NetCheckSync::execute (Widelands::Game *) {
+void Cmd_NetCheckSync::execute (Widelands::Game &) {
 	m_callback->syncreport();
 }
 

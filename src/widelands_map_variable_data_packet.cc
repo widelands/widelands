@@ -33,7 +33,7 @@ namespace Widelands {
 
 void Map_Variable_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const)
 throw (_wexception)
@@ -43,7 +43,7 @@ throw (_wexception)
 
 	Profile prof;
 	try {prof.read("variable", 0, fs);} catch (...) {return;}
-	Manager<Variable> & mvm = egbase->map().mvm();
+	Manager<Variable> & mvm = egbase.map().mvm();
 
 	try {
 		int32_t const packet_version =
@@ -85,7 +85,7 @@ throw (_wexception)
 
 
 void Map_Variable_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	Profile prof;
@@ -93,7 +93,7 @@ throw (_wexception)
 		("packet_version", CURRENT_PACKET_VERSION);
 
 	//  Now, all positions in order, first x, then y.
-	Manager<Variable> const & mvm = egbase->map().mvm();
+	Manager<Variable> const & mvm = egbase.map().mvm();
 	Manager<Variable>::Index const nr_variables = mvm.size();
 	for (Manager<Variable>::Index i = 0; i < nr_variables; ++i) {
 		Variable const & variable = mvm[i];

@@ -37,8 +37,8 @@ void show_field_action
 
 // building_ui.cc
 void show_bulldoze_confirm
-	(Interactive_Base           * player,
-	 Widelands::Building        * building,
+	(Interactive_Base           & player,
+	 Widelands::Building        & building,
 	 Widelands::PlayerImmovable * todestroy);
 
 #endif

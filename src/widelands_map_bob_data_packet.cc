@@ -40,7 +40,7 @@ namespace Widelands {
 
 void Map_Bob_Data_Packet::ReadBob
 	(FileRead              &       fr,
-	 Editor_Game_Base      * const egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const ol,
 	 Coords                  const coords)
@@ -59,7 +59,7 @@ void Map_Bob_Data_Packet::ReadBob
 			if (subtype != Bob::CRITTER)
 				throw wexception("world bob is not a critter!");
 
-			Map   const & map   = egbase->map();
+			Map   const & map   = egbase.map();
 			World const & world = map.world();
 			int32_t const idx = world.get_bob(name);
 			if (idx == -1)
@@ -75,21 +75,22 @@ void Map_Bob_Data_Packet::ReadBob
 					 descr.name().c_str(), coords.x, coords.y,
 					 map[coords].get_caps() & (MOVECAPS_WALK | MOVECAPS_SWIM),
 					 descr.movecaps());
-			ol->register_object<Bob>(serial, *descr.create(egbase, 0, coords));
+			ol->register_object<Bob>(serial, descr.create(egbase, 0, coords));
 		} else {
 			if (skip)
 				return; // We do no load player bobs when no scenario
 
 			// Make sure that the correct tribe is known and loaded
-			egbase->manually_load_tribe(owner);
+			egbase.manually_load_tribe(owner);
 
-			if (Tribe_Descr const * const tribe = egbase->get_tribe(owner)) {
+			if (Tribe_Descr const * const tribe = egbase.get_tribe(owner)) {
 				if        (subtype == Bob::WORKER)  {
 					const Ware_Index idx = tribe->worker_index(name);
 					if (idx) {
 						Bob & bob =
 							ol->register_object<Bob>
-							(serial, *tribe->get_worker_descr(idx)->create_object());
+								(serial,
+								 tribe->get_worker_descr(idx)->create_object());
 						bob.set_position(egbase, coords);
 						bob.init(egbase);
 					} else
@@ -99,7 +100,7 @@ void Map_Bob_Data_Packet::ReadBob
 					int32_t const idx = tribe->get_bob(name);
 					if (idx != -1)
 						ol->register_object<Bob>
-							(serial, *egbase->create_bob(coords, idx, tribe));
+							(serial, egbase.create_bob(coords, idx, tribe));
 					else
 						throw wexception
 							("tribe %s does not define defines bob type \"%s\"",
@@ -117,7 +118,7 @@ void Map_Bob_Data_Packet::ReadBob
 
 void Map_Bob_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
@@ -125,17 +126,17 @@ throw (_wexception)
 	FileRead fr;
 	fr.Open(fs, "binary/bob");
 
-	Map* map = egbase->get_map();
-	map->recalc_whole_map(); //  for movecaps checks in ReadBob
+	Map & map = egbase.map();
+	map.recalc_whole_map(); //  for movecaps checks in ReadBob
 
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION)
-			for (uint16_t y = 0; y < map->get_height(); ++y) {
-				for (uint16_t x = 0; x < map->get_width(); ++x) {
+			for (uint16_t y = 0; y < map.get_height(); ++y) {
+				for (uint16_t x = 0; x < map.get_width(); ++x) {
 					uint32_t const nr_bobs = fr.Unsigned32();
 
-					assert(!egbase->map()[Coords(x, y)].get_first_bob());
+					assert(!map[Coords(x, y)].get_first_bob());
 
 					for (uint32_t i = 0; i < nr_bobs; ++i)
 						ReadBob(fr, egbase, skip, ol, Coords(x, y));
@@ -151,7 +152,7 @@ throw (_wexception)
 
 void Map_Bob_Data_Packet::Write
 	(FileSystem           &       fs,
-	 Editor_Game_Base     *       egbase,
+	 Editor_Game_Base     &       egbase,
 	 Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
@@ -170,18 +171,22 @@ throw (_wexception)
 	//      bob2
 	//      ...
 	//      bobn
-	Map* map=egbase->get_map();
-	for (uint16_t y = 0; y < map->get_height(); ++y) {
-		for (uint16_t x = 0; x < map->get_width(); ++x) {
-			std::vector<Bob*> bobarr;
+	Map & map = egbase.map();
+	for (uint16_t y = 0; y < map.get_height(); ++y) {
+		for (uint16_t x = 0; x < map.get_width(); ++x) {
+			std::vector<Bob *> bobarr;
 
-			map->find_bobs(Area<FCoords>(map->get_fcoords(Coords(x, y)), 0), &bobarr); //  FIXME clean up this mess!
+			map.find_bobs //  FIXME clean up this mess!
+				(Area<FCoords>(map.get_fcoords(Coords(x, y)), 0), &bobarr);
 			fw.Unsigned32(bobarr.size());
 
 			for (uint32_t i = 0; i < bobarr.size(); ++i) {
 				// write serial number
-				assert(not os->is_object_known(bobarr[i])); // a bob can't be owned by two fields
-				Serial const reg = os->register_object(bobarr[i]);
+
+				//  a bob can not be owned by two nodes
+				assert(not os->is_object_known(*bobarr[i]));
+
+				Serial const reg = os->register_object(*bobarr[i]);
 
 				// Write its owner
 				std::string owner_tribe = bobarr[i]->descr().get_owner_tribe() ? bobarr[i]->descr().get_owner_tribe()->name() : "world";

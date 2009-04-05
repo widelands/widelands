@@ -54,19 +54,19 @@ struct Cmd_ReplaySyncRead : public Command {
 
 	virtual uint8_t id() const {return QUEUE_CMD_REPLAYSYNCREAD;}
 
-	void execute(Game* g)
+	void execute(Game & game)
 	{
-		md5_checksum myhash = g->get_sync_hash();
+		md5_checksum const myhash = game.get_sync_hash();
 
 		if (m_hash != myhash) {
 			log
 				("REPLAY: Lost synchronization at time %u\n"
 				 "I have:     %s\n"
 				 "Replay has: %s\n",
-				 get_duetime(), myhash.str().c_str(), m_hash.str().c_str());
+				 duetime(), myhash.str().c_str(), m_hash.str().c_str());
 
 			// There has to be a better way to do this.
-			g->gameController()->setDesiredSpeed(0);
+			game.gameController()->setDesiredSpeed(0);
 		} else {
 			log("REPLAY: Sync checked successfully.\n");
 		}
@@ -139,7 +139,7 @@ ReplayReader::~ReplayReader()
  * \return a \ref Command that should be enqueued in the command queue
  * or 0 if there are no remaining commands before the given time.
  */
-Command* ReplayReader::GetNextCommand(uint32_t time)
+Command * ReplayReader::GetNextCommand(uint32_t const time)
 {
 	if (!m_cmdlog)
 		return 0;
@@ -156,11 +156,11 @@ Command* ReplayReader::GetNextCommand(uint32_t time)
 
 			uint32_t duetime = m_cmdlog->Unsigned32();
 			uint32_t cmdserial = m_cmdlog->Unsigned32();
-			PlayerCommand* cmd = PlayerCommand::deserialize(*m_cmdlog);
-			cmd->set_duetime(duetime);
-			cmd->set_cmdserial(cmdserial);
+			PlayerCommand & cmd = *PlayerCommand::deserialize(*m_cmdlog);
+			cmd.set_duetime  (duetime);
+			cmd.set_cmdserial(cmdserial);
 
-			return cmd;
+			return &cmd;
 		}
 
 		case pkt_syncreport: {
@@ -210,11 +210,12 @@ struct Cmd_ReplaySyncWrite : public Command {
 
 	virtual uint8_t id() const {return QUEUE_CMD_REPLAYSYNCWRITE;}
 
-	void execute(Game* g) {
-		if (ReplayWriter* rw = g->get_replaywriter()) {
-			rw->SendSync (g->get_sync_hash());
+	void execute(Game & game) {
+		if (ReplayWriter * const rw = game.get_replaywriter()) {
+			rw->SendSync (game.get_sync_hash());
 
-			g->enqueue_command (new Cmd_ReplaySyncWrite(get_duetime()+SYNC_INTERVAL));
+			game.enqueue_command
+				(new Cmd_ReplaySyncWrite(duetime() + SYNC_INTERVAL));
 		}
 	}
 };
@@ -231,10 +232,10 @@ ReplayWriter::ReplayWriter(Game & game, std::string const & filename)
 {
 	g_fs->EnsureDirectoryExists(REPLAY_DIR);
 
-	SaveHandler * const savehandler = m_game.get_save_handler();
+	SaveHandler & save_handler = m_game.save_handler();
 
 	std::string error;
-	if (!savehandler->save_game(m_game, filename + WLGF_SUFFIX, &error))
+	if (!save_handler.save_game(m_game, filename + WLGF_SUFFIX, &error))
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 
 	log("Reloading the game from replay\n");
@@ -276,15 +277,15 @@ ReplayWriter::~ReplayWriter()
 /**
  * Call this whenever a new player command has entered the command queue.
  */
-void ReplayWriter::SendPlayerCommand(PlayerCommand* cmd)
+void ReplayWriter::SendPlayerCommand(PlayerCommand * cmd)
 {
 	m_cmdlog->Unsigned8(pkt_playercommand);
 	// The semantics of the timestamp is
 	// "There will be no more player commands that are due *before* the
 	// given time".
 	m_cmdlog->Unsigned32(m_game.get_gametime());
-	m_cmdlog->Unsigned32(cmd->get_duetime());
-	m_cmdlog->Unsigned32(cmd->get_cmdserial());
+	m_cmdlog->Unsigned32(cmd->duetime());
+	m_cmdlog->Unsigned32(cmd->cmdserial());
 	cmd->serialize(*m_cmdlog);
 
 	m_cmdlog->Flush();
@@ -294,7 +295,7 @@ void ReplayWriter::SendPlayerCommand(PlayerCommand* cmd)
 /**
  * Store a synchronization hash for the current game time in the replay.
  */
-void ReplayWriter::SendSync(const md5_checksum& hash)
+void ReplayWriter::SendSync(md5_checksum const & hash)
 {
 	m_cmdlog->Unsigned8(pkt_syncreport);
 	m_cmdlog->Unsigned32(m_game.get_gametime());

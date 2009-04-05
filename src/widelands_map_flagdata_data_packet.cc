@@ -46,7 +46,7 @@ Map_Flagdata_Data_Packet::~Map_Flagdata_Data_Packet() {}
 
 void Map_Flagdata_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
@@ -60,7 +60,7 @@ throw (_wexception)
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			Extent const extent = egbase->map().extent();
+			Extent const extent = egbase.map().extent();
 			for (;;) {
 				Serial const serial = fr.Unsigned32();
 				//  FIXME Just test EndOfFile instead in the next packet version.
@@ -163,11 +163,11 @@ throw (_wexception)
 							if (fr.Unsigned8()) {
 								f.request =
 									new Request
-									(&flag,
-									 Ware_Index::First(),
-									 &Flag::flag_job_request_callback, &flag,
-									 Request::WORKER);
-								f.request->Read(&fr, egbase, ol);
+										(flag,
+										 Ware_Index::First(),
+										 Flag::flag_job_request_callback,
+										 Request::WORKER);
+								f.request->Read(fr, egbase, ol);
 							} else {
 								f.request = 0;
 							}
@@ -191,7 +191,7 @@ throw (_wexception)
 
 void Map_Flagdata_Data_Packet::Write
 	(FileSystem           &       fs,
-	 Editor_Game_Base     *       egbase,
+	 Editor_Game_Base     &       egbase,
 	 Map_Map_Object_Saver * const os)
 	throw (_wexception)
 {
@@ -199,85 +199,90 @@ void Map_Flagdata_Data_Packet::Write
 
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	const Map & map = egbase->map();
+	Map const & map = egbase.map();
 	const Field & fields_end = map[map.max_index()];
 	for (Field * field = &map[0]; field < &fields_end; ++field)
 		if (upcast(Flag const, flag, field->get_immovable())) {
-		assert(os->is_object_known(flag));
-		assert(!os->is_object_saved(flag));
+			assert(os->is_object_known(*flag));
+			assert(!os->is_object_saved(*flag));
 
-		fw.Unsigned32(os->get_object_file_index(flag));
+			fw.Unsigned32(os->get_object_file_index(*flag));
 
-		//  Owner is already written in the existanz packet.
+			//  Owner is already written in the existanz packet.
 
-		fw.Coords32  (flag->m_position);
+			fw.Coords32  (flag->m_position);
 
-		//  Animation is set by creator.
-		fw.Unsigned16(flag->m_animstart);
+			//  Animation is set by creator.
+			fw.Unsigned16(flag->m_animstart);
 
-		//  FIXME This should not be explicitly written to file. A flag's
-		//  FIXME building is always the one to the northwest (if any). There is
-		//  FIXME no way that a flag could have a building somewhere else or not
-		//  FIXME have the building to the northwest.
-		//  Building is not used, it is set by Building_Data packet through
-		//  attach building.
-		if (flag->m_building) {
-			assert(os->is_object_known(flag->m_building));
-			fw.Unsigned32(os->get_object_file_index(flag->m_building));
-		} else fw.Unsigned32(0);
+			//  FIXME This should not be explicitly written to file. A flag's
+			//  FIXME building is always the one to the northwest (if any). There
+			//  FIXME is no way that a flag could have a building somewhere else
+			//  FIXME or not have the building to the northwest.
+			//  Building is not used, it is set by Building_Data packet through
+			//  attach building.
+			if (Building const * const building = flag->m_building) {
+				assert(os->is_object_known(*building));
+				fw.Unsigned32(os->get_object_file_index(*building));
+			} else
+				fw.Unsigned32(0);
 
-		//  Roads are not saved, they are set on load.
+			//  Roads are not saved, they are set on load.
 
-		for (uint32_t i = 0; i < 6; ++i)
-			fw.Unsigned32(flag->m_items_pending[i]);
+			for (uint32_t i = 0; i < 6; ++i)
+				fw.Unsigned32(flag->m_items_pending[i]);
 
-		fw.Unsigned32(flag->m_item_capacity);
+			fw.Unsigned32(flag->m_item_capacity);
 
-		fw.Unsigned32(flag->m_item_filled);
+			fw.Unsigned32(flag->m_item_filled);
 
-		for (int32_t i = 0; i < flag->m_item_filled; ++i) {
-			fw.Unsigned8(flag->m_items[i].pending);
-			assert(os->is_object_known(flag->m_items[i].item));
-			fw.Unsigned32(os->get_object_file_index(flag->m_items[i].item));
-			fw.Unsigned32
-				(os->is_object_known      (flag->m_items[i].nextstep) ?
-				 os->get_object_file_index(flag->m_items[i].nextstep) : 0);
-		}
+			for (int32_t i = 0; i < flag->m_item_filled; ++i) {
+				fw.Unsigned8(flag->m_items[i].pending);
+				assert(os->is_object_known(*flag->m_items[i].item));
+				fw.Unsigned32(os->get_object_file_index(*flag->m_items[i].item));
+				fw.Unsigned32
+					(os->is_object_known      (*flag->m_items[i].nextstep) ?
+					 os->get_object_file_index(*flag->m_items[i].nextstep) : 0);
+			}
 
-		if (flag->m_always_call_for_flag) {
-			assert(os->is_object_known(flag->m_always_call_for_flag));
-			fw.Unsigned32(os->get_object_file_index(flag->m_always_call_for_flag));
-		} else fw.Unsigned32(0);
+			if (Flag const * const always_call_for = flag->m_always_call_for_flag)
+			{
+				assert(os->is_object_known(*always_call_for));
+				fw.Unsigned32(os->get_object_file_index(*always_call_for));
+			} else
+				fw.Unsigned32(0);
 
 			//  worker waiting for capacity
 			std::vector<OPtr<Worker> > const & capacity_wait =
 				flag->m_capacity_wait;
-		fw.Unsigned16(capacity_wait.size());
-		container_iterate_const(std::vector<OPtr<Worker> >, capacity_wait, i) {
-			Worker const * const obj = i.current->get(egbase);
+			fw.Unsigned16(capacity_wait.size());
+			container_iterate_const(std::vector<OPtr<Worker> >, capacity_wait, i)
+			{
+				Worker const * const obj = i.current->get(egbase);
 				//  This is a very crude hack to support old and broken savegames,
 				//  where workers were not correctly removed from the capacity wait
 				//  queue. See bug #1919495.
 				if (obj && obj->get_state(Worker::taskWaitforcapacity)) {
-				assert(os->is_object_known(obj));
-				fw.Unsigned32(os->get_object_file_index(obj));
-				} else
+					assert(os->is_object_known(*obj));
+					fw.Unsigned32(os->get_object_file_index(*obj));
+				} else {
 					fw.Unsigned32(0);
-		}
-		const std::list<Flag::FlagJob> & flag_jobs = flag->m_flag_jobs;
-		fw.Unsigned16(flag_jobs.size());
-		container_iterate_const(std::list<Flag::FlagJob>, flag_jobs, i) {
-			if (i.current->request) {
-				fw.Unsigned8(1);
-				i.current->request->Write(&fw, egbase, os);
-			} else
-				fw.Unsigned8(0);
+				}
+			}
+			Flag::FlagJobs const & flag_jobs = flag->m_flag_jobs;
+			fw.Unsigned16(flag_jobs.size());
+			container_iterate_const(Flag::FlagJobs, flag_jobs, i) {
+				if (i.current->request) {
+					fw.Unsigned8(1);
+					i.current->request->Write(fw, egbase, os);
+				} else
+					fw.Unsigned8(0);
 
 
-			fw.String(i.current->program);
-		}
+				fw.String(i.current->program);
+			}
 
-		os->mark_object_as_saved(flag);
+			os->mark_object_as_saved(*flag);
 
 		}
 

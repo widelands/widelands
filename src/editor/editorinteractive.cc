@@ -139,7 +139,7 @@ void Editor_Interactive::load(std::string const & filename) {
 
 	loader_ui.step (_("Loading world data"));
 	ml->load_world();
-	ml->load_map_complete(&egbase(), true);
+	ml->load_map_complete(egbase(), true);
 	egbase().load_graphics(loader_ui);
 
 	//  update all the visualizations
@@ -204,7 +204,7 @@ void Editor_Interactive::think()
 	m_realtime = WLApplication::get()->get_time();
 	frametime = m_realtime - lasttime;
 
-	*egbase().get_game_time_pointer() += frametime;
+	egbase().get_game_time_pointer() += frametime;
 
 	g_gr->animate_maptextures(egbase().get_gametime());
 }
@@ -540,7 +540,7 @@ void Editor_Interactive::run_editor(std::string const & filename)
 {
 	Widelands::Editor_Game_Base editor;
 	Editor_Interactive eia(editor);
-	editor.set_iabase(&eia); //TODO: get rid of this
+	editor.set_ibase(&eia); //  TODO get rid of this
 	{
 		UI::ProgressWindow loader_ui("pics/editor.jpg");
 		GameTips editortips (loader_ui, "txts/editortips");

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,8 +57,8 @@ void Cmd_Incorporate::Write
 	GameLogicCommand::Write(fw, egbase, mos);
 
 	// Now serial
-	assert(mos.is_object_known(worker));
-	fw.Unsigned32(mos.get_object_file_index(worker));
+	assert(mos.is_object_known(*worker));
+	fw.Unsigned32(mos.get_object_file_index(*worker));
 }
 
 };

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,8 +63,8 @@ struct BaseImmovable : public Map_Object {
 	virtual std::string const & name() const throw ();
 
 protected:
-	void set_position(Editor_Game_Base *g, Coords c);
-	void unset_position(Editor_Game_Base *g, Coords c);
+	void set_position(Editor_Game_Base &, Coords);
+	void unset_position(Editor_Game_Base &, Coords);
 };
 
 
@@ -134,18 +134,18 @@ public:
 
 	void program_step(Game & game, uint32_t const delay = 1) {
 		if (delay)
-			m_program_step = schedule_act(&game, delay);
+			m_program_step = schedule_act(game, delay);
 		increment_program_pointer();
 	}
 
-	void init(Editor_Game_Base *g);
-	void cleanup(Editor_Game_Base *g);
-	void act(Game *g, uint32_t data);
+	void init(Editor_Game_Base &);
+	void cleanup(Editor_Game_Base &);
+	void act(Game &, uint32_t data);
 
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
-	void switch_program(Game* g, std::string programname);
+	void switch_program(Game & game, std::string const & programname);
 
 	const Tribe_Descr * get_owner_tribe() const throw ()
 	{return descr().get_owner_tribe();}
@@ -173,9 +173,9 @@ public:
 	/// \todo Remove as soon as we fully support the new system
 	virtual bool has_new_save_support() {return true;}
 
-	virtual void save(Editor_Game_Base *, Map_Map_Object_Saver *, FileWrite &);
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver *, FileWrite &);
 	static Map_Object::Loader * load
-		(Editor_Game_Base *, Map_Map_Object_Loader *, FileRead &);
+		(Editor_Game_Base &, Map_Map_Object_Loader *, FileRead &);
 
 private:
 	void increment_program_pointer();
@@ -199,12 +199,12 @@ struct PlayerImmovable : public BaseImmovable {
 	Economy * get_economy() const throw () {return m_economy;}
 	Economy & economy() const throw () {return *m_economy;}
 
-	virtual Flag *get_base_flag() = 0;
+	virtual Flag & base_flag() = 0;
 
 	virtual void set_economy(Economy *e);
 
-	virtual void add_worker(Worker *w);
-	virtual void remove_worker(Worker *w);
+	virtual void    add_worker(Worker &);
+	virtual void remove_worker(Worker &);
 
 	typedef std::vector<Worker *> Workers;
 
@@ -215,13 +215,13 @@ struct PlayerImmovable : public BaseImmovable {
 	 */
 	Workers const & get_workers() const {return m_workers;}
 
-	void log_general_info(Editor_Game_Base*);
+	virtual void log_general_info(Editor_Game_Base const &);
 
 protected:
 	void set_owner(Player *);
 
-	virtual void init(Editor_Game_Base *g);
-	virtual void cleanup(Editor_Game_Base *g);
+	virtual void init   (Editor_Game_Base &);
+	virtual void cleanup(Editor_Game_Base &);
 
 private:
 	Player              * m_owner;

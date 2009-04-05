@@ -38,12 +38,15 @@ namespace Widelands {
  */
 struct PlayerCommand : public GameLogicCommand {
 	PlayerCommand (int32_t time, Player_Number);
-	PlayerCommand() : GameLogicCommand(0), sender(0), cmdserial(0) {} // For savegame loading
+
+	/// For savegame loading
+	PlayerCommand() : GameLogicCommand(0), m_sender(0), m_cmdserial(0) {}
+
 	virtual ~PlayerCommand ();
 
-	Player_Number get_sender() const {return sender;}
-	uint32_t get_cmdserial() const {return cmdserial;}
-	void set_cmdserial(uint32_t s) {cmdserial = s;}
+	Player_Number sender   () const {return m_sender;}
+	uint32_t      cmdserial() const {return m_cmdserial;}
+	void set_cmdserial(uint32_t const s) {m_cmdserial = s;}
 
 	virtual void serialize (StreamWrite &) = 0;
 	static Widelands::PlayerCommand * deserialize (StreamRead &);
@@ -53,8 +56,8 @@ struct PlayerCommand : public GameLogicCommand {
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
 private:
-	Player_Number sender;
-	uint32_t cmdserial;
+	Player_Number m_sender;
+	uint32_t      m_cmdserial;
 };
 
 struct Cmd_Bulldoze:public PlayerCommand {
@@ -73,7 +76,7 @@ struct Cmd_Bulldoze:public PlayerCommand {
 
 	virtual uint8_t id() const {return QUEUE_CMD_BULLDOZE;}
 
-	virtual void execute (Game* g);
+	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
 
 private:
@@ -98,7 +101,7 @@ struct Cmd_Build:public PlayerCommand {
 
 	virtual uint8_t id() const {return QUEUE_CMD_BUILD;}
 
-	virtual void execute (Game* g);
+	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
 
 private:
@@ -119,7 +122,7 @@ struct Cmd_BuildFlag:public PlayerCommand {
 
 	virtual uint8_t id() const {return QUEUE_CMD_FLAG;}
 
-	virtual void execute (Game* g);
+	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
 
 private:
@@ -138,7 +141,7 @@ struct Cmd_BuildRoad:public PlayerCommand {
 
 	virtual uint8_t id() const {return QUEUE_CMD_BUILDROAD;}
 
-	virtual void execute (Game* g);
+	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
 
 private:
@@ -162,7 +165,7 @@ struct Cmd_FlagAction:public PlayerCommand {
 
 	Cmd_FlagAction (StreamRead &);
 
-	virtual void execute (Game* g);
+	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
 
 private:
@@ -182,7 +185,7 @@ struct Cmd_StartStopBuilding : public PlayerCommand {
 
 	Cmd_StartStopBuilding (StreamRead &);
 
-	virtual void execute (Game* g);
+	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
 
 private:
@@ -207,7 +210,7 @@ struct Cmd_EnhanceBuilding:public PlayerCommand {
 
 	Cmd_EnhanceBuilding (StreamRead &);
 
-	virtual void execute (Game* g);
+	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
 
 private:
@@ -219,7 +222,7 @@ struct Cmd_SetWarePriority : public PlayerCommand {
 	Cmd_SetWarePriority() : PlayerCommand() {} // For savegame loading
 	Cmd_SetWarePriority
 		(int32_t duetime, Player_Number sender,
-		 PlayerImmovable* imm,
+		 PlayerImmovable &,
 		 int32_t type, Ware_Index index, int32_t priority);
 
 	// Write these commands to a file (for savegames)
@@ -230,7 +233,7 @@ struct Cmd_SetWarePriority : public PlayerCommand {
 
 	Cmd_SetWarePriority(StreamRead &);
 
-	virtual void execute (Game* g);
+	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
 
 private:
@@ -280,7 +283,7 @@ struct Cmd_SetTargetQuantity : public Cmd_ChangeTargetQuantity {
 
 	Cmd_SetTargetQuantity(StreamRead &);
 
-	virtual void execute (Game *);
+	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
 
 private:
@@ -301,7 +304,7 @@ struct Cmd_ResetTargetQuantity : public Cmd_ChangeTargetQuantity {
 
 	Cmd_ResetTargetQuantity(StreamRead &);
 
-	virtual void execute (Game *);
+	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
 
 private:
@@ -328,7 +331,7 @@ struct Cmd_ChangeTrainingOptions : public PlayerCommand {
 
 	Cmd_ChangeTrainingOptions (StreamRead &);
 
-	virtual void execute (Game* g);
+	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
 
 private:
@@ -355,7 +358,7 @@ struct Cmd_DropSoldier : public PlayerCommand {
 
 	Cmd_DropSoldier(StreamRead &);
 
-	virtual void execute (Game* g);
+	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
 
 private:
@@ -378,7 +381,7 @@ struct Cmd_ChangeSoldierCapacity : public PlayerCommand {
 
 	Cmd_ChangeSoldierCapacity (StreamRead &);
 
-	virtual void execute (Game* g);
+	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
 
 private:
@@ -405,7 +408,7 @@ struct Cmd_EnemyFlagAction : public PlayerCommand {
 
 	Cmd_EnemyFlagAction (StreamRead &);
 
-	virtual void execute (Game* g);
+	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
 
 private:

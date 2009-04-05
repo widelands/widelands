@@ -40,7 +40,7 @@ struct Event_Set_Timer : public Event, public Referencer<Trigger> {
 
 	int32_t option_menu(Editor_Interactive &);
 
-	State run(Game *);
+	State run(Game &);
 
 	void Write(Section &, Editor_Game_Base &) const;
 

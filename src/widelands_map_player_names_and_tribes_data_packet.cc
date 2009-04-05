@@ -32,7 +32,7 @@ namespace Widelands {
 
 
 Map_Player_Names_And_Tribes_Data_Packet::
-	~Map_Player_Names_And_Tribes_Data_Packet
+~Map_Player_Names_And_Tribes_Data_Packet
 	()
 {}
 
@@ -43,12 +43,12 @@ Map_Player_Names_And_Tribes_Data_Packet::
  */
 void Map_Player_Names_And_Tribes_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-	Pre_Read(fs, egbase->get_map(), skip);
+	Pre_Read(fs, egbase.get_map(), skip);
 }
 
 
@@ -82,7 +82,7 @@ void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 
 void Map_Player_Names_And_Tribes_Data_Packet::Write
 	(FileSystem           &       fs,
-	 Editor_Game_Base     *       egbase,
+	 Editor_Game_Base     &       egbase,
 	 Map_Map_Object_Saver * const)
 throw (_wexception)
 {
@@ -91,7 +91,7 @@ throw (_wexception)
 	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
-	Map const & map = egbase->map();
+	Map const & map = egbase.map();
 	std::string name, tribe;
 	Player_Number const nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {

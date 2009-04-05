@@ -27,11 +27,12 @@
 #include "wlapplication.h"
 
 struct SinglePlayerGameController : public GameController {
-	SinglePlayerGameController(Widelands::Game* game, bool useai, Widelands::Player_Number local);
+	SinglePlayerGameController
+		(Widelands::Game &, bool useai, Widelands::Player_Number local);
 	~SinglePlayerGameController();
 
 	void think();
-	void sendPlayerCommand(Widelands::PlayerCommand* pc);
+	void sendPlayerCommand(Widelands::PlayerCommand &);
 	int32_t getFrametime();
 	std::string getGameDescription();
 
@@ -50,23 +51,21 @@ private:
 	std::vector<Computer_Player *> m_computerplayers;
 };
 
-SinglePlayerGameController::SinglePlayerGameController(Widelands::Game* game, bool useai, Widelands::Player_Number local)
-: m_game(*game), m_useai(useai), m_local(local)
-{
-	m_lastframe = WLApplication::get()->get_time();
-	m_time = m_game.get_gametime();
-	{
-		int32_t const speed_of_new_game =
-			g_options.pull_section("global").get_int("speed_of_new_game", 1000);
-		if (speed_of_new_game < 0)
-			throw wexception
-				("in config section [global]: speed_of_new_game = %i: must be "
-				 "non-negative",
-				 speed_of_new_game);
-		m_speed = speed_of_new_game;
-	}
-	m_player_cmdserial = 0;
-}
+SinglePlayerGameController::SinglePlayerGameController
+	(Widelands::Game        &       game,
+	 bool                     const useai,
+	 Widelands::Player_Number const local)
+	:
+	m_game            (game),
+	m_useai           (useai),
+	m_lastframe       (WLApplication::get()->get_time()),
+	m_time            (m_game.get_gametime()),
+	m_speed
+		(g_options.pull_section("global").get_natural
+		 	("speed_of_new_game", 1000)),
+	m_player_cmdserial(0),
+	m_local           (local)
+{}
 
 SinglePlayerGameController::~SinglePlayerGameController()
 {
@@ -107,10 +106,11 @@ void SinglePlayerGameController::think()
 	}
 }
 
-void SinglePlayerGameController::sendPlayerCommand(Widelands::PlayerCommand* pc)
+void SinglePlayerGameController::sendPlayerCommand
+	(Widelands::PlayerCommand & pc)
 {
-	pc->set_cmdserial(++m_player_cmdserial);
-	m_game.enqueue_command (pc);
+	pc.set_cmdserial(++m_player_cmdserial);
+	m_game.enqueue_command (&pc);
 }
 
 int32_t SinglePlayerGameController::getFrametime()
@@ -139,8 +139,10 @@ void SinglePlayerGameController::setDesiredSpeed(uint32_t const speed)
 }
 
 
-GameController* GameController::createSinglePlayer
-	(Widelands::Game* game, bool cpls, Widelands::Player_Number local)
+GameController * GameController::createSinglePlayer
+	(Widelands::Game        &       game,
+	 bool                     const cpls,
+	 Widelands::Player_Number const local)
 {
 	return new SinglePlayerGameController(game, cpls, local);
 }

@@ -95,8 +95,8 @@ void Event_Road::Write(Section & s, Editor_Game_Base &) const {
 }
 
 
-Event::State Event_Road::run(Game * game) {
-	game->player(m_player).force_road(m_path, m_fill);
+Event::State Event_Road::run(Game & game) {
+	game.player(m_player).force_road(m_path, m_fill);
 	return m_state = DONE;
 }
 

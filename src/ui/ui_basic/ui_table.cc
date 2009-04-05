@@ -99,10 +99,10 @@ void Table<void *>::add_column
 	if (not m_scrollbar) {
 		m_scrollbar =
 			new Scrollbar
-			(get_parent(),
-			 get_x() + get_w() - 24, get_y() + m_headerheight,
-			 24,                     get_h() - m_headerheight,
-			 false);
+				(get_parent(),
+				 get_x() + get_w() - 24, get_y() + m_headerheight,
+				 24,                     get_h() - m_headerheight,
+				 false);
 		m_scrollbar->moved.set(this, &Table::set_scrollpos);
 		m_scrollbar->set_steps(1);
 		uint32_t lineheight = g_fh->get_fontheight(m_fontname, m_fontsize);

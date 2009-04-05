@@ -64,9 +64,9 @@ Slider::Slider
 	m_y_gap       (y_gap),
 	m_bar_size    (bar_size),
 	m_cursor_pos
-	(m_value <= m_min_value ? 0              :
-	 m_value >= m_max_value ? get_bar_size() :
-	 (m_value - m_min_value) * get_bar_size() / (m_max_value - m_min_value)),
+		(m_value <= m_min_value ? 0              :
+		 m_value >= m_max_value ? get_bar_size() :
+		 (m_value - m_min_value) * get_bar_size() / (m_max_value - m_min_value)),
 	m_cursor_size (cursor_size)
 {
 	//  cursor initial position

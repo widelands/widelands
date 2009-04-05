@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ struct Critter_Bob_Descr : public Bob::Descr {
 		 Tribe_Descr const *, EncodeData const * = 0);
 	virtual ~Critter_Bob_Descr();
 
-	Bob * create_object() const;
+	Bob & create_object() const;
 
 	bool is_swimming() const throw () {return m_swimming;}
 	uint32_t movecaps() const throw ();
@@ -66,18 +66,18 @@ public:
 	char const * type_name() const throw () {return "critter";}
 	virtual Bob::Type get_bob_type() const throw () {return Bob::CRITTER;}
 
-	virtual void init_auto_task(Game* g);
+	virtual void init_auto_task(Game &);
 
-	void start_task_program(Game* g, const std::string & name);
+	void start_task_program(Game &, std::string const & name);
 	const std::string & descname() const throw () {return descr().descname();}
 	__attribute__ ((deprecated)) const char * get_descname() const throw ()  {return descname().c_str();}
 
 private:
-	void roam_update(Game* g, State* state);
-	void program_update(Game* g, State* state);
+	void roam_update   (Game &, State &);
+	void program_update(Game &, State &);
 
 private:
-	bool run_remove(Game *, State *, Critter_BobAction const *);
+	bool run_remove(Game &, State &, Critter_BobAction const &);
 
 private:
 	static Task taskRoam;

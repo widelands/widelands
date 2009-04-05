@@ -186,11 +186,11 @@ Worker & Worker_Descr::create
 	 Coords             const coords)
 const
 {
-	Worker & worker = dynamic_cast<Worker &>(*create_object());
+	Worker & worker = dynamic_cast<Worker &>(create_object());
 	worker.set_owner(&owner);
 	worker.set_location(location);
-	worker.set_position(&egbase, coords);
-	worker.init(&egbase);
+	worker.set_position(egbase, coords);
+	worker.init(egbase);
 	return worker;
 }
 
@@ -201,9 +201,9 @@ uint32_t Worker_Descr::movecaps() const throw () {return MOVECAPS_WALK;}
 /**
  * Create a generic worker of this type.
  */
-Bob * Worker_Descr::create_object() const
+Bob & Worker_Descr::create_object() const
 {
-	return new Worker(*this);
+	return *new Worker(*this);
 }
 
 

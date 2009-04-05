@@ -109,7 +109,7 @@ void Building::show_options(Interactive_Player * const plr)
 	if (m_optionswindow)
 		m_optionswindow->move_to_top();
 	else
-		create_options_window(plr, &m_optionswindow);
+		create_options_window(*plr, m_optionswindow);
 }
 
 /*
@@ -208,7 +208,7 @@ Make sure the building still exists and can in fact be bulldozed.
 */
 void BulldozeConfirm::think()
 {
-	Widelands::Editor_Game_Base * const egbase = &m_iabase->egbase();
+	Widelands::Editor_Game_Base const & egbase = m_iabase->egbase();
 	upcast(Building,        building,  m_building .get(egbase));
 	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(egbase));
 
@@ -229,18 +229,18 @@ Issue the CMD_BULLDOZE command for this building.
 */
 void BulldozeConfirm::bulldoze()
 {
-	Widelands::Editor_Game_Base * const egbase = &m_iabase->egbase();
+	Widelands::Editor_Game_Base & egbase = m_iabase->egbase();
 	upcast(Building,        building,  m_building .get(egbase));
 	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(egbase));
 
 	if (todestroy && building && building->get_playercaps() & (1 << Building::PCap_Bulldoze)) {
-		if (upcast(Widelands::Game, game, egbase)) {
+		if (upcast(Widelands::Game, game, &egbase)) {
 			game->send_player_bulldoze
 				(*todestroy,
 				 get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
 			m_iabase->need_complete_redraw();
 		} else { //  Editor
-			todestroy->get_owner()->bulldoze(*todestroy);
+			todestroy->owner().bulldoze(*todestroy);
 			m_iabase->need_complete_redraw();
 		}
 	}
@@ -259,9 +259,9 @@ todestroy is the immovable that will be bulldozed if the user confirms the
 dialog.
 ===============
 */
-void show_bulldoze_confirm(Interactive_Base* player, Building* building, Widelands::PlayerImmovable* todestroy)
+void show_bulldoze_confirm(Interactive_Base & player, Building & building, Widelands::PlayerImmovable * todestroy)
 {
-	new BulldozeConfirm(player, building, todestroy);
+	new BulldozeConfirm(&player, &building, todestroy);
 }
 
 
@@ -605,8 +605,8 @@ void Building_Window::setup_capsbuttons()
 				 x, 0, 34, 34,
 				 4,
 				 g_gr->get_picture
-				 (PicMod_Game,
-				  	(is_stopped ? "pics/continue.png" : "pics/stop.png")),
+				 	(PicMod_Game,
+				 	 (is_stopped ? "pics/continue.png" : "pics/stop.png")),
 				 &Building_Window::act_start_stop, this,
 				 is_stopped ? _("Continue") : _("Stop"));
 			x += 34;
@@ -893,9 +893,10 @@ ConstructionSite::create_options_window
 Create the status window describing the construction site.
 ===============
 */
-UI::Window *ConstructionSite::create_options_window(Interactive_Player *plr, UI::Window **registry)
+void ConstructionSite::create_options_window
+	(Interactive_Player & plr, UI::Window * & registry)
 {
-	return new ConstructionSite_Window(plr, this, registry);
+	new ConstructionSite_Window(&plr, this, &registry);
 }
 
 
@@ -1048,9 +1049,10 @@ Warehouse::create_options_window
 Create the warehouse information window
 ===============
 */
-UI::Window *Warehouse::create_options_window(Interactive_Player *plr, UI::Window **registry)
+void Warehouse::create_options_window
+	(Interactive_Player & plr, UI::Window * & registry)
 {
-	return new Warehouse_Window(plr, this, registry);
+	new Warehouse_Window(&plr, this, &registry);
 }
 
 
@@ -1086,7 +1088,7 @@ private:
 /*
  * Constructor
  */
-ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(Interactive_Player* parent, ProductionSite* ps)
+ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(Interactive_Player * parent, ProductionSite * ps)
 :
 UI::Window(parent, 0, 0, 320, 125, _("Worker Listing"))
 {
@@ -1246,7 +1248,7 @@ struct PriorityButtonHelper : std::map<int32_t, PriorityButtonInfo> {
 	void update_buttons ();
 
 private:
-	Widelands::Game& m_game;
+	Widelands::Game & m_game;
 	ProductionSite * m_ps;
 	int32_t m_ware_type;
 	Widelands::Ware_Index m_ware_index;
@@ -1269,7 +1271,7 @@ private:
 public:
 	void list_worker_clicked();
 protected:
-	UI::Box* create_production_box(UI::Panel* ptr, ProductionSite* ps);
+	UI::Box * create_production_box(UI::Panel * ptr, ProductionSite * ps);
 
 	void create_ware_queue_panel
 		(UI::Box *, ProductionSite *, Widelands::WaresQueue *);
@@ -1295,7 +1297,7 @@ m_ware_index(ware_index)
 {}
 
 void PriorityButtonHelper::button_clicked (int32_t priority) {
-	m_game.send_player_set_ware_priority(m_ps, m_ware_type, m_ware_index, priority);
+	m_game.send_player_set_ware_priority(*m_ps, m_ware_type, m_ware_index, priority);
 }
 
 void PriorityButtonHelper::update_buttons () {
@@ -1315,7 +1317,7 @@ ProductionSite_Window::ProductionSite_Window
 Create the window and its panels, add it to the registry.
 ===============
 */
-ProductionSite_Window::ProductionSite_Window(Interactive_Player* parent, ProductionSite* ps, UI::Window** registry)
+ProductionSite_Window::ProductionSite_Window(Interactive_Player * parent, ProductionSite * ps, UI::Window * * registry)
 	: Building_Window(parent, ps, registry)
 {
 	m_parent = parent;
@@ -1337,12 +1339,12 @@ UI::Basic_Button * ProductionSite_Window::create_priority_button
 {
 	int32_t const pic_enabled  =
 		g_gr->get_resized_picture
-		(g_gr->get_picture(PicMod_Game,  picture1),
-		 w, h, Graphic::ResizeMode_Clip);
+			(g_gr->get_picture(PicMod_Game,  picture1),
+			 w, h, Graphic::ResizeMode_Clip);
 	int32_t const pic_disabled =
 		g_gr->get_resized_picture
-		(g_gr->get_picture(PicMod_Game,  picture2),
-		 w, h, Graphic::ResizeMode_Clip);
+			(g_gr->get_picture(PicMod_Game,  picture2),
+			 w, h, Graphic::ResizeMode_Clip);
 	UI::IDButton<PriorityButtonHelper, int32_t> * button =
 		new UI::IDButton<PriorityButtonHelper, int32_t>
 		(box,
@@ -1461,7 +1463,7 @@ void ProductionSite_Window::list_worker_clicked() {
 
 	*m_reg =
 		new ProductionSite_Window_ListWorkerWindow
-		(m_parent, get_productionsite());
+			(m_parent, get_productionsite());
 	die();
 }
 
@@ -1488,9 +1490,9 @@ ProductionSite::create_options_window
 Create the production site information window.
 ===============
 */
-UI::Window* ProductionSite::create_options_window(Interactive_Player* plr, UI::Window** registry)
+void ProductionSite::create_options_window(Interactive_Player & plr, UI::Window * & registry)
 {
-	return new ProductionSite_Window(plr, this, registry);
+	new ProductionSite_Window(&plr, this, &registry);
 }
 
 
@@ -1707,9 +1709,9 @@ MilitarySite::create_options_window
 Create the production site information window.
 ===============
 */
-UI::Window* MilitarySite::create_options_window(Interactive_Player* plr, UI::Window** registry)
+void MilitarySite::create_options_window(Interactive_Player & plr, UI::Window * & registry)
 {
-	return new MilitarySite_Window(*plr, *this, *registry);
+	new MilitarySite_Window(plr, *this, registry);
 }
 
 
@@ -1947,7 +1949,7 @@ TrainingSite::create_options_window
 Create the training site information window.
 ===============
 */
-UI::Window* TrainingSite::create_options_window(Interactive_Player* plr, UI::Window** registry)
+void TrainingSite::create_options_window(Interactive_Player & plr, UI::Window * & registry)
 {
-	return new TrainingSite_Window(plr, this, registry);
+	new TrainingSite_Window(&plr, this, &registry);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -86,14 +86,13 @@ Bob::Descr::Descr
 /**
  * Create a bob of this type
  */
-Bob * Bob::Descr::create
-	(Editor_Game_Base * const egbase, Player * const owner, Coords const coords)
-	const
+Bob & Bob::Descr::create
+	(Editor_Game_Base & egbase, Player * const owner, Coords const coords) const
 {
-	Bob *bob = create_object();
-	bob->set_owner(owner);
-	bob->set_position(egbase, coords);
-	bob->init(egbase);
+	Bob & bob = create_object();
+	bob.set_owner(owner);
+	bob.set_position(egbase, coords);
+	bob.init(egbase);
 
 	return bob;
 }
@@ -138,25 +137,25 @@ Bob::~Bob()
  *
  * \note Make sure you call this from derived classes!
  */
-void Bob::init(Editor_Game_Base* gg)
+void Bob::init(Editor_Game_Base & egbase)
 {
-	Map_Object::init(gg);
+	Map_Object::init(egbase);
 
-	if (upcast(Game, game, gg))
-		schedule_act(game, 1);
+	if (upcast(Game, game, &egbase))
+		schedule_act(*game, 1);
 	else
 		// In editor: play idle task forever
-		set_animation(gg, descr().get_animation("idle"));
+		set_animation(egbase, descr().get_animation("idle"));
 }
 
 
 /**
  * Perform independent cleanup as necessary.
  */
-void Bob::cleanup(Editor_Game_Base *gg)
+void Bob::cleanup(Editor_Game_Base & egbase)
 {
 	while (m_stack.size()) //  bobs in the editor do not have tasks
-		do_pop_task(dynamic_cast<Game*>(gg));
+		do_pop_task(dynamic_cast<Game &>(egbase));
 
 	set_owner(0); // implicitly remove ourselves from owner's map
 
@@ -167,7 +166,7 @@ void Bob::cleanup(Editor_Game_Base *gg)
 			m_linknext->m_linkpprev = m_linkpprev;
 	}
 
-	Map_Object::cleanup(gg);
+	Map_Object::cleanup(egbase);
 }
 
 
@@ -177,7 +176,7 @@ void Bob::cleanup(Editor_Game_Base *gg)
  *
  * Change to the next task if necessary.
  */
-void Bob::act(Game* g, uint32_t data)
+void Bob::act(Game & game, uint32_t const data)
 {
 	// Eliminate spurious calls of act().
 	// These calls are to be expected and perfectly normal, e.g. when a carrier's
@@ -190,7 +189,7 @@ void Bob::act(Game* g, uint32_t data)
 
 	if (m_stack.empty()) {
 		m_signal = "";
-		init_auto_task(g);
+		init_auto_task(game);
 
 		if (m_stack.empty())
 			throw wexception
@@ -202,14 +201,14 @@ void Bob::act(Game* g, uint32_t data)
 		return;
 	}
 
-	do_act(g);
+	do_act(game);
 }
 
 
 /**
  * Perform the actual call to update() as appropriate.
  */
-void Bob::do_act(Game* g)
+void Bob::do_act(Game & game)
 {
 	assert(!m_in_act);
 	assert(m_stack.size());
@@ -218,7 +217,7 @@ void Bob::do_act(Game* g)
 
 	const Task & task = *top_state().task;
 
-	(this->*task.update)(g, &top_state());
+	(this->*task.update)(game, top_state());
 
 	if (!m_actscheduled)
 		throw wexception
@@ -231,9 +230,9 @@ void Bob::do_act(Game* g)
 /**
  * Kill self ASAP.
  */
-void Bob::schedule_destroy(Game* g)
+void Bob::schedule_destroy(Game & game)
 {
-	Map_Object::schedule_destroy(g);
+	Map_Object::schedule_destroy(game);
 	++m_actid; // to skip over any updates that may be scheduled
 	m_actscheduled = true;
 }
@@ -243,9 +242,9 @@ void Bob::schedule_destroy(Game* g)
  * Schedule a new act for the current task. All other pending acts are
  * cancelled.
  */
-void Bob::schedule_act(Game* g, uint32_t tdelta)
+void Bob::schedule_act(Game & game, uint32_t tdelta)
 {
-	Map_Object::schedule_act(g, tdelta, m_actid);
+	Map_Object::schedule_act(game, tdelta, m_actid);
 	m_actscheduled = true;
 }
 
@@ -267,29 +266,29 @@ void Bob::skip_act()
  * push_task() itself does not call any functions of the task, so the caller
  * can fill the state information with parameters for the task.
  */
-void Bob::push_task(Game* g, const Task & task)
+void Bob::push_task(Game & game, Task const & task)
 {
 	assert(m_in_act || m_stack.empty());
 
 	m_stack.push_back(State(&task));
-	schedule_act(g, 10);
+	schedule_act(game, 10);
 }
 
 
 /**
  * Actually pop the top-most task, but don't schedule anything.
  */
-void Bob::do_pop_task(Game* g)
+void Bob::do_pop_task(Game & game)
 {
-	State* state = get_state();
+	State & state = top_state();
 
-	if (state->task->pop)
-		(this->*state->task->pop)(g, state);
+	if (state.task->pop)
+		(this->*state.task->pop)(game, state);
 
-	delete state->path;
-	delete state->route;
-	if (state->transfer)
-		state->transfer->has_failed();
+	delete state.path;
+	delete state.route;
+	if (state.transfer)
+		state.transfer->has_failed();
 
 	m_stack.pop_back();
 }
@@ -301,13 +300,13 @@ void Bob::do_pop_task(Game* g)
  * pop_task() itself does not call any parent task functions, but it ensures
  * that it will happen.
  */
-void Bob::pop_task(Game* g)
+void Bob::pop_task(Game & game)
 {
 	assert(m_in_act);
 
-	do_pop_task(g);
+	do_pop_task(game);
 
-	schedule_act(g, 10);
+	schedule_act(game, 10);
 }
 
 
@@ -366,19 +365,19 @@ void Bob::signal_handled()
  * \param g the \ref Game object
  * \param sig the signal string
  */
-void Bob::send_signal(Game* g, std::string sig)
+void Bob::send_signal(Game & game, char const * const sig)
 {
-	assert(sig.size()); //  use set_signal() for signal removal
+	assert(*sig); //  use set_signal() for signal removal
 
 	for (uint32_t i = 0; i < m_stack.size(); ++i) {
-		State* state = &m_stack[i];
+		State & state = m_stack[i];
 
-		if (state->task->signal_immediate)
-			(this->*state->task->signal_immediate)(g, state, sig);
+		if (state.task->signal_immediate)
+			(this->*state.task->signal_immediate)(game, state, sig);
 	}
 
 	m_signal = sig;
-	schedule_act(g, 10);
+	schedule_act(game, 10);
 }
 
 
@@ -388,15 +387,15 @@ void Bob::send_signal(Game* g, std::string sig)
  * The state stack is emptied completely, and an init auto task is scheduled
  * as if the Bob has just been created and initialized.
  */
-void Bob::reset_tasks(Game* g)
+void Bob::reset_tasks(Game & game)
 {
 	while (m_stack.size())
-		do_pop_task(g);
+		do_pop_task(game);
 
 	m_signal.clear();
 
 	++m_actid;
-	schedule_act(g, 10);
+	schedule_act(game, 10);
 }
 
 
@@ -424,32 +423,29 @@ Bob::Task Bob::taskIdle = {
  *
  * This task always succeeds unless interrupted.
  */
-void Bob::start_task_idle(Game* g, uint32_t anim, int32_t timeout)
+void Bob::start_task_idle(Game & game, uint32_t anim, int32_t timeout)
 {
-	State* state;
-
 	assert(timeout < 0 || timeout > 0);
 
-	set_animation(g, anim);
+	set_animation(game, anim);
 
-	push_task(g, taskIdle);
+	push_task(game, taskIdle);
 
-	state = get_state();
-	state->ivar1 = timeout;
+	top_state().ivar1 = timeout;
 }
 
 
-void Bob::idle_update(Game* g, State* state)
+void Bob::idle_update(Game & game, State & state)
 {
-	if (!state->ivar1 || get_signal().size())
-		return pop_task(g);
+	if (!state.ivar1 || get_signal().size())
+		return pop_task(game);
 
-	if (state->ivar1 > 0)
-		schedule_act(g, state->ivar1);
+	if (state.ivar1 > 0)
+		schedule_act(game, state.ivar1);
 	else
 		skip_act();
 
-	state->ivar1 = 0;
+	state.ivar1 = 0;
 }
 
 
@@ -477,7 +473,7 @@ struct BlockedTracker {
 	};
 	// Distance-based ordering as a heuristic for unblock()
 	struct CoordOrdering {
-		bool operator()(const CoordData& a, const CoordData& b) const throw () {
+		bool operator()(CoordData const & a, CoordData const & b) const throw () {
 			if (a.dist != b.dist)
 				return a.dist < b.dist;
 			return a.coord.all < b.coord.all;
@@ -485,8 +481,8 @@ struct BlockedTracker {
 	};
 	typedef std::map<CoordData, bool, CoordOrdering> Cache;
 
-	BlockedTracker(Game* game, Bob* bob, const Coords& finaldest)
-		: m_game(game), m_bob(bob), m_map(game->map()), m_finaldest(finaldest)
+	BlockedTracker(Game & game, Bob & bob, Coords const finaldest)
+		: m_game(game), m_bob(bob), m_map(game.map()), m_finaldest(finaldest)
 	{
 		nrblocked = 0;
 		disabled = false;
@@ -505,7 +501,7 @@ struct BlockedTracker {
 			 ++it)
 		{
 			if (it->second) {
-				if (static_cast<int32_t>(m_game->logic_rand() % origblocked) < unblockprob) {
+				if (static_cast<int32_t>(m_game.logic_rand() % origblocked) < unblockprob) {
 					it->second = false;
 					--nrblocked;
 					unblockprob -= 2;
@@ -514,7 +510,7 @@ struct BlockedTracker {
 		}
 	}
 
-	bool isBlocked(const FCoords& field) {
+	bool isBlocked(FCoords const & field) {
 		if (disabled)
 			return false;
 
@@ -526,16 +522,16 @@ struct BlockedTracker {
 		if (it != nodes.end())
 			return it->second;
 
-		bool blocked = m_bob->checkFieldBlocked(m_game, field, false);
+		bool const blocked = m_bob.checkNodeBlocked(m_game, field, false);
 		nodes.insert(std::make_pair(cd, blocked));
 		if (blocked)
 			++nrblocked;
 		return blocked;
 	}
 
-	Game* m_game;
-	Bob* m_bob;
-	Map& m_map;
+	Game & m_game;
+	Bob  & m_bob;
+	Map  & m_map;
 	Coords m_finaldest;
 	Cache nodes;
 	int nrblocked;
@@ -569,7 +565,7 @@ struct CheckStepBlocked {
  * returns as a success
  */
 bool Bob::start_task_movepath
-	(Game                * game,
+	(Game                & game,
 	 Coords          const dest,
 	 int32_t         const persist,
 	 DirAnimations const & anims,
@@ -577,7 +573,7 @@ bool Bob::start_task_movepath
 	 int32_t         const only_step)
 {
 	Path path;
-	BlockedTracker tracker(game, this, dest);
+	BlockedTracker tracker(game, *this, dest);
 	CheckStepAnd cstep;
 
 	if (forceonlast)
@@ -586,17 +582,18 @@ bool Bob::start_task_movepath
 		cstep.add(CheckStepDefault(descr().movecaps()));
 	cstep.add(CheckStepBlocked(tracker));
 
-	if (game->map().findpath(m_position, dest, persist, path, cstep) < 0) {
+	Map & map = game.map();
+	if (map.findpath(m_position, dest, persist, path, cstep) < 0) {
 		if (!tracker.nrblocked)
 			return false;
 
 		tracker.unblock();
-		if (game->map().findpath(m_position, dest, persist, path, cstep) < 0) {
+		if (map.findpath(m_position, dest, persist, path, cstep) < 0) {
 			if (!tracker.nrblocked)
 				return false;
 
 			tracker.disabled = true;
-			if (game->map().findpath(m_position, dest, persist, path, cstep) < 0)
+			if (map.findpath(m_position, dest, persist, path, cstep) < 0)
 				return false;
 		}
 	}
@@ -616,7 +613,7 @@ bool Bob::start_task_movepath
  * Start moving along the given, precalculated path.
  */
 void Bob::start_task_movepath
-	(Game                *       g,
+	(Game                &       game,
 	 Path          const &       path,
 	 DirAnimations const &       anims,
 	 bool                  const forceonlast,
@@ -624,7 +621,7 @@ void Bob::start_task_movepath
 {
 	assert(path.get_start() == get_position());
 
-	push_task(g, taskMovepath);
+	push_task(game, taskMovepath);
 	State & state  = top_state();
 	state.path     = new Path(path);
 	state.ivar1    = 0;
@@ -642,15 +639,14 @@ void Bob::start_task_movepath
  * the given path index.
  */
 bool Bob::start_task_movepath
-	(Game                *       g,
-	 Map           const &       map,
+	(Game                &       game,
 	 Path          const &       origpath,
 	 int32_t               const index,
 	 DirAnimations const &       anims,
 	 bool                  const forceonlast,
 	 int32_t               const only_step)
 {
-	CoordPath path(map, origpath);
+	CoordPath path(game.map(), origpath);
 	int32_t curidx = path.get_index(get_position());
 
 	if (curidx == -1)
@@ -666,7 +662,7 @@ bool Bob::start_task_movepath
 			path.starttrim(index);
 			path.reverse();
 		}
-		start_task_movepath(g, path, anims, forceonlast, only_step);
+		start_task_movepath(game, path, anims, forceonlast, only_step);
 		return true;
 	}
 
@@ -674,49 +670,47 @@ bool Bob::start_task_movepath
 }
 
 
-void Bob::movepath_update(Game* g, State* state)
+void Bob::movepath_update(Game & game, State & state)
 {
-	if (get_signal().size()) {
-		molog("[movepath]: Interrupted by signal '%s'.\n", get_signal().c_str());
-		return pop_task(g);
-	}
+	if (get_signal().size())
+		return pop_task(game);
 
-	assert(state->ivar1 >= 0);
-	const Path * const path = state->path;
+	assert(state.ivar1 >= 0);
+	Path const * const path = state.path;
 
 	if (!path)
 		// probably success; this can happen when loading a game
 		// that contains a zero-length path.
-		return pop_task(g);
+		return pop_task(game);
 
 	if
-		(static_cast<const Path::Step_Vector::size_type>(state->ivar1)
+		(static_cast<Path::Step_Vector::size_type>(state.ivar1)
 		 >=
 		 path->get_nsteps())
 	{
 		assert(m_position == path->get_end());
-		return pop_task(g); // success
-	} else if (state->ivar1 == state->ivar3)
+		return pop_task(game); //  success
+	} else if (state.ivar1 == state.ivar3)
 		// We have stepped all steps that we were asked for.
 		// This is some kind of success, though we do not are were we wanted
 		// to go
-		return pop_task(g);
+		return pop_task(game);
 
-	const Direction dir = (*path)[state->ivar1];
+	Direction const dir = (*path)[state.ivar1];
 	bool forcemove = false;
 
 	if
-		(state->ivar2
+		(state.ivar2
 		 and
-		 static_cast<const Path::Step_Vector::size_type>(state->ivar1) + 1
+		 static_cast<Path::Step_Vector::size_type>(state.ivar1) + 1
 		 ==
 		 path->get_nsteps())
 	{
 		forcemove = true;
 	}
 
-	++state->ivar1;
-	return start_task_move(g, dir, state->diranims, forcemove);
+	++state.ivar1;
+	return start_task_move(game, dir, state.diranims, forcemove);
 	// Note: state pointer is invalid beyond this point
 }
 
@@ -738,9 +732,13 @@ Bob::Task Bob::taskMove = {
 /**
  * Move into the given direction, without passability checks.
  */
-void Bob::start_task_move(Game* g, const int32_t dir, const DirAnimations* anims, bool forcemove)
+void Bob::start_task_move
+	(Game                &       game,
+	 int32_t               const dir,
+	 DirAnimations const * const anims,
+	 bool                  const forcemove)
 {
-	push_task(g, taskMove);
+	push_task(game, taskMove);
 	State & state  = top_state();
 	state.ivar1    = dir;
 	state.ivar2    = forcemove;
@@ -748,30 +746,30 @@ void Bob::start_task_move(Game* g, const int32_t dir, const DirAnimations* anims
 }
 
 
-void Bob::move_update(Game* g, State* state)
+void Bob::move_update(Game & game, State & state)
 {
-	if (state->diranims) {
+	if (state.diranims) {
 		int32_t const tdelta =
 			start_walk
-				(g,
-				 static_cast<WalkingDir>(state->ivar1),
-				 state->diranims->get_animation(state->ivar1),
-				 state->ivar2);
-		state->diranims = 0;
+				(game,
+				 static_cast<WalkingDir>(state.ivar1),
+				 state.diranims->get_animation(state.ivar1),
+				 state.ivar2);
+		state.diranims = 0;
 
 		if (tdelta < 0) {
-			send_signal(g, tdelta == -2 ? "blocked" : "fail");
-			return pop_task(g);
+			send_signal(game, tdelta == -2 ? "blocked" : "fail");
+			return pop_task(game);
 		} else
-			return schedule_act(g, tdelta);
+			return schedule_act(game, tdelta);
 	} else
-		if (g->get_gametime() - m_walkend >= 0) {
+		if (game.get_gametime() - m_walkend >= 0) {
 			end_walk();
-			return pop_task(g);
+			return pop_task(game);
 		} else
 			// Only end the task once we've actually completed the step
 			// Ignore signals until then
-			return schedule_act(g, m_walkend - g->get_gametime());
+			return schedule_act(game, m_walkend - game.get_gametime());
 }
 
 
@@ -862,10 +860,10 @@ void Bob::draw
 /**
  * Set a looping animation, starting now.
  */
-void Bob::set_animation(Editor_Game_Base* g, uint32_t anim)
+void Bob::set_animation(Editor_Game_Base & egbase, uint32_t const anim)
 {
 	m_anim = anim;
-	m_animstart = g->get_gametime();
+	m_animstart = egbase.get_gametime();
 }
 
 
@@ -877,11 +875,12 @@ void Bob::set_animation(Editor_Game_Base* g, uint32_t anim)
  * call end_walk() after this time, so schedule a task_act(). Returns -1
  * if the step is forbidden, and -2 if it is currently blocked.
  */
-int32_t Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
+int32_t Bob::start_walk
+	(Game & game, WalkingDir const dir, uint32_t const a, bool const force)
 {
 	FCoords newf;
 
-	Map & map = g->map();
+	Map & map = game.map();
 	map.get_neighbour(m_position, dir, &newf);
 
 	// Move capability check
@@ -894,26 +893,24 @@ int32_t Bob::start_walk(Game *g, WalkingDir dir, uint32_t a, bool force)
 
 	//  Always call checkNodeBlocked, because it might communicate with other
 	//  bobs (as is the case for soldiers on the battlefield).
-	if (checkFieldBlocked(g, newf, true)) {
-		if (!force)
-			return -2;
-	}
+	if (checkNodeBlocked(game, newf, true) and !force)
+		return -2;
 
 	// Move is go
 	int32_t const tdelta = map.calc_cost(m_position, dir);
 
 	m_walking = dir;
-	m_walkstart = g->get_gametime();
+	m_walkstart = game.get_gametime();
 	m_walkend = m_walkstart + tdelta;
 
-	set_position(g, newf);
-	set_animation(g, a);
+	set_position(game, newf);
+	set_animation(game, a);
 
 	return tdelta; // yep, we were successful
 }
 
 
-bool Bob::checkFieldBlocked(Game*, const FCoords&, bool commit)
+bool Bob::checkNodeBlocked(Game &, FCoords const &, bool)
 {
 	return false;
 }
@@ -924,9 +921,9 @@ bool Bob::checkFieldBlocked(Game*, const FCoords&, bool commit)
  *
  * This will update the owner's viewing area.
  */
-void Bob::set_owner(Player* player)
+void Bob::set_owner(Player * const player)
 {
-	if (m_owner != 0 && m_position.field)
+	if (m_owner && m_position.field)
 		m_owner->unsee_area(Area<FCoords>(get_position(), vision_range()));
 
 	m_owner = player;
@@ -942,7 +939,7 @@ void Bob::set_owner(Player* player)
  * Performs the necessary (un)linking in the \ref Field structures and
  * updates the owner's viewing area, if the bob has an owner.
  */
-void Bob::set_position(Editor_Game_Base* g, Coords coords)
+void Bob::set_position(Editor_Game_Base & egbase, Coords const coords)
 {
 	FCoords oldposition = m_position;
 
@@ -952,7 +949,7 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
 			m_linknext->m_linkpprev = m_linkpprev;
 	}
 
-	m_position = g->map().get_fcoords(coords);
+	m_position = egbase.map().get_fcoords(coords);
 
 	m_linknext = m_position.field->bobs;
 	m_linkpprev = &m_position.field->bobs;
@@ -973,7 +970,7 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
 	// it involves coordinates and will thus additionally highlight desyncs
 	// in pathfinding even when two paths have the same length, and in
 	// randomly generated movements.
-	if (upcast(Game, game, g)) {
+	if (upcast(Game, game, &egbase)) {
 		StreamWrite & ss = game->syncstream();
 		ss.Unsigned32(serial());
 		ss.Signed16(coords.x);
@@ -982,7 +979,7 @@ void Bob::set_position(Editor_Game_Base* g, Coords coords)
 }
 
 /// Give debug information.
-void Bob::log_general_info(Editor_Game_Base* egbase)
+void Bob::log_general_info(Editor_Game_Base const & egbase)
 {
 	molog("Owner: %p\n", m_owner);
 	molog("Postition: (%i, %i)\n", m_position.x, m_position.y);

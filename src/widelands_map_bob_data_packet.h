@@ -38,17 +38,17 @@ struct StreamRead;
 struct Map_Bob_Data_Packet : public Map_Data_Packet {
 	virtual void Read
 		(FileSystem &,
-		 Editor_Game_Base*,
+		 Editor_Game_Base      &,
 		 const bool,
 		 Map_Map_Object_Loader * = 0)
 		throw (_wexception);
-	void Write(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * = 0)
+	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * = 0)
 		throw (_wexception);
 
 private:
 	void ReadBob
 		(FileRead              &,
-		 Editor_Game_Base      *,
+		 Editor_Game_Base      &,
 		 bool skip,
 		 Map_Map_Object_Loader *,
 		 Coords);

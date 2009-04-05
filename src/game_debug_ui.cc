@@ -86,7 +86,7 @@ Unregister logger.
 */
 MapObjectDebugPanel::~MapObjectDebugPanel()
 {
-	if (Widelands::Map_Object * const obj = m_object.get(&m_egbase))
+	if (Widelands::Map_Object * const obj = m_object.get(m_egbase))
 		if (obj->get_logsink() == this)
 			obj->set_logsink(0);
 }
@@ -141,8 +141,8 @@ collect_debug_tabs().
 struct MapObjectDebugWindow : public UI::Window {
 	MapObjectDebugWindow(Interactive_Base & parent, Widelands::Map_Object &);
 
-	Interactive_Base * get_iabase() {
-		return dynamic_cast<Interactive_Base *>(get_parent());
+	Interactive_Base & ibase() {
+		return dynamic_cast<Interactive_Base &>(*get_parent());
 	}
 
 	virtual void think();
@@ -196,10 +196,10 @@ Remove self when the object disappears.
 */
 void MapObjectDebugWindow::think()
 {
-	Widelands::Editor_Game_Base & egbase = get_iabase()->egbase();
-	if (Widelands::Map_Object * const obj = m_object.get(&egbase)) {
+	Widelands::Editor_Game_Base & egbase = ibase().egbase();
+	if (Widelands::Map_Object * const obj = m_object.get(egbase)) {
 		if (m_log_general_info)  {
-			obj->log_general_info(&egbase);
+			obj->log_general_info(egbase);
 			m_log_general_info = false;
 		}
 		UI::Window::think();
@@ -239,8 +239,8 @@ struct FieldDebugWindow : public UI::Window {
 	FieldDebugWindow(Interactive_Base & parent, Widelands::Coords);
 	~FieldDebugWindow();
 
-	Interactive_Base * get_iabase() {
-		return dynamic_cast<Interactive_Base *>(get_parent());
+	Interactive_Base & ibase() {
+		return dynamic_cast<Interactive_Base &>(*get_parent());
 	}
 
 	virtual void think();
@@ -422,7 +422,7 @@ Open the debug window for the immovable on our position.
 void FieldDebugWindow::open_immovable()
 {
 	if (Widelands::BaseImmovable * const imm = m_coords.field->get_immovable())
-		show_mapobject_debug(*get_iabase(), *imm);
+		show_mapobject_debug(ibase(), *imm);
 }
 
 
@@ -437,8 +437,8 @@ void FieldDebugWindow::open_bob(const uint32_t index) {
 	if (index != UI::Listselect<intptr_t>::no_selection_index())
 		if
 			(Widelands::Map_Object * const object =
-			 get_iabase()->egbase().objects().get_object(m_ui_bobs.get_selected()))
-			show_mapobject_debug(*get_iabase(), *object);
+			 	ibase().egbase().objects().get_object(m_ui_bobs.get_selected()))
+			show_mapobject_debug(ibase(), *object);
 }
 
 

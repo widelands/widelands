@@ -19,8 +19,12 @@
 
 #include "widelands_map_map_object_saver.h"
 
+#include "areawatcher.h"
 #include "bob.h"
-#include "instances.h"
+#include "battle.h"
+#include "building.h"
+#include "transport.h"
+#include "item_ware_descr.h"
 #include "wexception.h"
 
 #include "container_iterate.h"
@@ -42,19 +46,21 @@ m_lastserial   (0)
  * Return a pointer to the record for the given object.
  * Create a record if that hasn't been done yet.
  */
-Map_Map_Object_Saver::MapObjectRec*
-Map_Map_Object_Saver::get_object_record(const Map_Object* obj)
+Map_Map_Object_Saver::MapObjectRec &
+Map_Map_Object_Saver::get_object_record(Map_Object const & obj)
 {
-	Map_Object_Map::iterator it = m_objects.find(obj);
+	Map_Object_Map::iterator it = m_objects.find(&obj);
 
 	if (it != m_objects.end())
-		return &it->second;
+		return it->second;
 
 	MapObjectRec rec;
 	rec.fileserial = ++m_lastserial;
 	rec.registered = false;
 	rec.saved = false;
-	return &m_objects.insert(std::pair<const Map_Object*, MapObjectRec>(obj, rec)).first->second;
+	return
+		m_objects.insert(std::pair<Map_Object const *, MapObjectRec>(&obj, rec))
+		.first->second;
 }
 
 
@@ -62,9 +68,9 @@ Map_Map_Object_Saver::get_object_record(const Map_Object* obj)
  * Returns true if this object has already been registered.
  * \deprecated since get_object_file_index supports unregistered objects now
  */
-bool Map_Map_Object_Saver::is_object_known(const Map_Object * const obj) const
+bool Map_Map_Object_Saver::is_object_known(Map_Object const & obj) const
 {
-	Map_Object_Map::const_iterator it = m_objects.find(obj);
+	Map_Object_Map::const_iterator it = m_objects.find(&obj);
 
 	if (it == m_objects.end())
 		return false;
@@ -72,56 +78,51 @@ bool Map_Map_Object_Saver::is_object_known(const Map_Object * const obj) const
 	return it->second.registered;
 }
 
-bool Map_Map_Object_Saver::is_object_saved(const Map_Object * const obj) throw ()
+bool Map_Map_Object_Saver::is_object_saved(Map_Object const & obj) throw ()
 {
-	MapObjectRec* rec = get_object_record(obj);
-	return rec->saved;
+	return get_object_record(obj).saved;
 }
 
 
 /*
  * Registers this object as a new one
  */
-Serial Map_Map_Object_Saver::register_object(Map_Object const * const obj) {
-	MapObjectRec* rec = get_object_record(obj);
+Serial Map_Map_Object_Saver::register_object(Map_Object const & obj) {
+	MapObjectRec & rec = get_object_record(obj);
 
-	assert(!rec->registered);
+	assert(!rec.registered);
 
-	switch (obj->get_type()) {
-	case Map_Object::AREAWATCHER:                                 break;
-	case Map_Object::FLAG:             ++m_nr_flags;              break;
-	case Map_Object::ROAD:             ++m_nr_roads;              break;
-	case Map_Object::BUILDING:         ++m_nr_buildings;          break;
-	case Map_Object::IMMOVABLE:        ++m_nr_immovables;         break;
-	case Map_Object::WARE:             ++m_nr_wares;              break;
-	case Map_Object::BOB:              ++m_nr_bobs;               break;
-	case Map_Object::BATTLE:           ++m_nr_battles;            break;
-	default:
+	if      (dynamic_cast<AreaWatcher  const *>(&obj));
+	else if (dynamic_cast<Flag         const *>(&obj)) ++m_nr_flags;
+	else if (dynamic_cast<Road         const *>(&obj)) ++m_nr_roads;
+	else if (dynamic_cast<Building     const *>(&obj)) ++m_nr_buildings;
+	else if (dynamic_cast<Immovable    const *>(&obj)) ++m_nr_immovables;
+	else if (dynamic_cast<WareInstance const *>(&obj)) ++m_nr_wares;
+	else if (dynamic_cast<Bob          const *>(&obj)) ++m_nr_bobs;
+	else if (dynamic_cast<Battle       const *>(&obj)) ++m_nr_battles;
+	else
 		throw wexception("Map_Map_Object_Saver: Unknown MapObject type");
-	}
 
-	rec->registered = true;
-	return rec->fileserial;
+	rec.registered = true;
+	return rec.fileserial;
 }
 
 /*
  * Returns the file index for this map object. This is used on load
  * to regenerate the dependencies between the objects.
  */
-uint32_t Map_Map_Object_Saver::get_object_file_index
-	(Map_Object const * const obj)
+uint32_t Map_Map_Object_Saver::get_object_file_index(Map_Object const & obj)
 {
-	MapObjectRec* rec = get_object_record(obj);
-	return rec->fileserial;
+	return get_object_record(obj).fileserial;
 }
 
 /*
  * mark this object as saved
  */
-void Map_Map_Object_Saver::mark_object_as_saved(Map_Object const * const obj) {
-	MapObjectRec* rec = get_object_record(obj);
-	assert(rec->registered);
-	rec->saved = true;
+void Map_Map_Object_Saver::mark_object_as_saved(Map_Object const & obj) {
+	MapObjectRec & rec = get_object_record(obj);
+	assert(rec.registered);
+	rec.saved = true;
 }
 
 /*

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2004, 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ enum {
 /*** class PlayerCommand ***/
 
 PlayerCommand::PlayerCommand (int32_t const time, Player_Number const s)
-	: GameLogicCommand (time), sender(s), cmdserial(0)
+	: GameLogicCommand (time), m_sender(s), m_cmdserial(0)
 {}
 
 PlayerCommand::~PlayerCommand () {}
@@ -97,8 +97,8 @@ void PlayerCommand::Write
 
 	GameLogicCommand::Write(fw, egbase, mos);
 	// Now sender
-	fw.Unsigned8 (sender);
-	fw.Unsigned32 (cmdserial);
+	fw.Unsigned8  (sender   ());
+	fw.Unsigned32 (cmdserial());
 }
 
 void PlayerCommand::Read
@@ -108,8 +108,8 @@ void PlayerCommand::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (1 <= packet_version and packet_version <= PLAYER_COMMAND_VERSION) {
 			GameLogicCommand::Read(fr, egbase, mol);
-			sender    = fr.Unsigned8 ();
-			cmdserial = 1 < packet_version ? fr.Unsigned32() : 0;
+			m_sender    = fr.Unsigned8 ();
+			m_cmdserial = 1 < packet_version ? fr.Unsigned32() : 0;
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
@@ -125,16 +125,16 @@ Cmd_Bulldoze::Cmd_Bulldoze (StreamRead & des) :
 	recurse       (des.Unsigned8())
 {}
 
-void Cmd_Bulldoze::execute (Game* g)
+void Cmd_Bulldoze::execute (Game & game)
 {
-	if (upcast(PlayerImmovable, pimm, g->objects().get_object(serial)))
-		g->get_player(get_sender())->bulldoze(*pimm, recurse);
+	if (upcast(PlayerImmovable, pimm, game.objects().get_object(serial)))
+		game.player(sender()).bulldoze(*pimm, recurse);
 }
 
 void Cmd_Bulldoze::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_BULLDOZE);
-	ser.Unsigned8 (get_sender());
+	ser.Unsigned8 (sender());
 	ser.Unsigned32(serial);
 	ser.Unsigned8 (recurse);
 }
@@ -170,7 +170,7 @@ void Cmd_Bulldoze::Write
 	// Write base classes
 	PlayerCommand::Write(fw, egbase, mos);
 	// Now serial
-	const Map_Object * const obj = egbase.objects().get_object(serial);
+	Map_Object const & obj = *egbase.objects().get_object(serial);
 	assert(mos.is_object_known(obj));
 	fw.Unsigned32(mos.get_object_file_index(obj));
 	fw.Unsigned8(recurse);
@@ -185,15 +185,14 @@ PlayerCommand (0, des.Unsigned8())
 	coords = des.Coords32  ();
 }
 
-void Cmd_Build::execute (Game* g)
+void Cmd_Build::execute (Game & game)
 {
-	Player *player = g->get_player(get_sender());
-	player->build(coords, bi);
+	game.player(sender()).build(coords, bi);
 }
 
 void Cmd_Build::serialize (StreamWrite & ser) {
 	ser.Unsigned8 (PLCMD_BUILD);
-	ser.Unsigned8 (get_sender());
+	ser.Unsigned8 (sender());
 	ser.Signed16  (bi.value());
 	ser.Coords32  (coords);
 }
@@ -236,16 +235,15 @@ PlayerCommand (0, des.Unsigned8())
 	coords = des.Coords32  ();
 }
 
-void Cmd_BuildFlag::execute (Game* g)
+void Cmd_BuildFlag::execute (Game & game)
 {
-	Player *player = g->get_player(get_sender());
-	player->build_flag(coords);
+	game.player(sender()).build_flag(coords);
 }
 
 void Cmd_BuildFlag::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_BUILDFLAG);
-	ser.Unsigned8 (get_sender());
+	ser.Unsigned8 (sender());
 	ser.Coords32  (coords);
 }
 #define PLAYER_CMD_BUILDFLAG_VERSION 1
@@ -304,24 +302,23 @@ Cmd_BuildRoad::~Cmd_BuildRoad ()
 	delete[] steps;
 }
 
-void Cmd_BuildRoad::execute (Game* g)
+void Cmd_BuildRoad::execute (Game & game)
 {
 	if (path == 0) {
 		assert (steps);
 
 		path = new Path(start);
 		for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
-			path->append (g->map(), steps[i]);
+			path->append (game.map(), steps[i]);
 	}
 
-	Player *player = g->get_player(get_sender());
-	player->build_road(*path);
+	game.player(sender()).build_road(*path);
 }
 
 void Cmd_BuildRoad::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_BUILDROAD);
-	ser.Unsigned8 (get_sender());
+	ser.Unsigned8 (sender());
 	ser.Coords32  (start);
 	ser.Unsigned16(nsteps);
 
@@ -372,10 +369,10 @@ PlayerCommand (0, des.Unsigned8())
 	serial = des.Unsigned32();
 }
 
-void Cmd_FlagAction::execute (Game* g)
+void Cmd_FlagAction::execute (Game & game)
 {
-	Player & player = g->player(get_sender());
-	if (upcast(Flag, flag, g->objects().get_object(serial)))
+	Player & player = game.player(sender());
+	if (upcast(Flag, flag, game.objects().get_object(serial)))
 		if (&flag->owner() == &player)
 			player.flagaction (*flag);
 }
@@ -383,7 +380,7 @@ void Cmd_FlagAction::execute (Game* g)
 void Cmd_FlagAction::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_FLAGACTION);
-	ser.Unsigned8 (get_sender());
+	ser.Unsigned8 (sender());
 	ser.Unsigned8 (0);
 	ser.Unsigned32(serial);
 }
@@ -420,7 +417,7 @@ void Cmd_FlagAction::Write
 	fw.Unsigned8 (0);
 
 	// Now serial
-	const Map_Object * const obj = egbase.objects().get_object(serial);
+	Map_Object const & obj = *egbase.objects().get_object(serial);
 	assert(mos.is_object_known(obj));
 	fw.Unsigned32(mos.get_object_file_index(obj));
 }
@@ -433,16 +430,16 @@ PlayerCommand (0, des.Unsigned8())
 	serial = des.Unsigned32();
 }
 
-void Cmd_StartStopBuilding::execute (Game* g)
+void Cmd_StartStopBuilding::execute (Game & game)
 {
-	if (upcast(Building, building, g->objects().get_object(serial)))
-		g->get_player(get_sender())->start_stop_building(building);
+	if (upcast(Building, building, game.objects().get_object(serial)))
+		game.player(sender()).start_stop_building(*building);
 }
 
 void Cmd_StartStopBuilding::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_STARTSTOPBUILDING);
-	ser.Unsigned8 (get_sender());
+	ser.Unsigned8 (sender());
 	ser.Unsigned32(serial);
 }
 #define PLAYER_CMD_STOPBUILDING_VERSION 1
@@ -474,7 +471,7 @@ void Cmd_StartStopBuilding::Write
 	PlayerCommand::Write(fw, egbase, mos);
 
 	// Now serial
-	const Map_Object * const obj = egbase.objects().get_object(serial);
+	Map_Object const & obj = *egbase.objects().get_object(serial);
 	assert(mos.is_object_known(obj));
 	fw.Unsigned32(mos.get_object_file_index(obj));
 }
@@ -489,16 +486,16 @@ PlayerCommand (0, des.Unsigned8())
 	bi = Building_Index(static_cast<Building_Index::value_t>(des.Unsigned16()));
 }
 
-void Cmd_EnhanceBuilding::execute (Game* g)
+void Cmd_EnhanceBuilding::execute (Game & game)
 {
-	if (upcast(Building, building, g->objects().get_object(serial)))
-		g->get_player(get_sender())->enhance_building(building, bi);
+	if (upcast(Building, building, game.objects().get_object(serial)))
+		game.player(sender()).enhance_building(building, bi);
 }
 
 void Cmd_EnhanceBuilding::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_ENHANCEBUILDING);
-	ser.Unsigned8 (get_sender());
+	ser.Unsigned8 (sender());
 	ser.Unsigned32(serial);
 	ser.Unsigned16(bi.value());
 }
@@ -534,7 +531,7 @@ void Cmd_EnhanceBuilding::Write
 	PlayerCommand::Write(fw, egbase, mos);
 
 	// Now serial
-	const Map_Object * const obj = egbase.objects().get_object(serial);
+	Map_Object const & obj = *egbase.objects().get_object(serial);
 	assert(mos.is_object_known(obj));
 	fw.Unsigned32(mos.get_object_file_index(obj));
 
@@ -545,24 +542,24 @@ void Cmd_EnhanceBuilding::Write
 
 /*** class Cmd_SetWarePriority ***/
 Cmd_SetWarePriority::Cmd_SetWarePriority
-	(int32_t const duetime, Player_Number const _sender,
-	 PlayerImmovable* imm,
+	(int32_t const _duetime, Player_Number const _sender,
+	 PlayerImmovable & imm,
 	 int32_t const type, Ware_Index const index, int32_t const priority)
-	: PlayerCommand(duetime, _sender)
-{
-	m_serial = imm->serial();
-	m_type = type;
-	m_index = index;
-	m_priority = priority;
-}
+	:
+	PlayerCommand(_duetime, _sender),
+	m_serial     (imm.serial()),
+	m_type       (type),
+	m_index      (index),
+	m_priority   (priority)
+{}
 
-void Cmd_SetWarePriority::execute(Game* g)
+void Cmd_SetWarePriority::execute(Game & game)
 {
-	upcast(ProductionSite, psite, g->objects().get_object(m_serial));
+	upcast(ProductionSite, psite, game.objects().get_object(m_serial));
 
 	if (!psite)
 		return;
-	if (psite->get_owner()->get_player_number() != get_sender())
+	if (psite->owner().get_player_number() != sender())
 		return;
 
 	psite->set_priority(m_type, m_index, m_priority);
@@ -570,13 +567,14 @@ void Cmd_SetWarePriority::execute(Game* g)
 
 #define PLAYER_CMD_SETWAREPRIORITY_VERSION 1
 
-void Cmd_SetWarePriority::Write(FileWrite& fw, Editor_Game_Base& egbase, Map_Map_Object_Saver& mos)
+void Cmd_SetWarePriority::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	fw.Unsigned16(PLAYER_CMD_SETWAREPRIORITY_VERSION);
 
 	PlayerCommand::Write(fw, egbase, mos);
 
-	const Map_Object * const obj = egbase.objects().get_object(m_serial);
+	Map_Object const & obj = *egbase.objects().get_object(m_serial);
 	fw.Unsigned32(mos.get_object_file_index(obj));
 	fw.Unsigned8(m_type);
 	fw.Signed32(m_index.value());
@@ -618,7 +616,7 @@ Cmd_SetWarePriority::Cmd_SetWarePriority(StreamRead & des) :
 void Cmd_SetWarePriority::serialize(StreamWrite & ser)
 {
 	ser.Unsigned8(PLCMD_SETWAREPRIORITY);
-	ser.Unsigned8(get_sender());
+	ser.Unsigned8(sender());
 	ser.Unsigned32(m_serial);
 	ser.Unsigned8(m_type);
 	ser.Signed32(m_index.value());
@@ -627,10 +625,10 @@ void Cmd_SetWarePriority::serialize(StreamWrite & ser)
 
 
 Cmd_ChangeTargetQuantity::Cmd_ChangeTargetQuantity
-	(int32_t const duetime, Player_Number const _sender,
+	(int32_t const _duetime, Player_Number const _sender,
 	 uint32_t const _economy, Ware_Index const _ware_type)
 	:
-	PlayerCommand(duetime, _sender),
+	PlayerCommand(_duetime, _sender),
 	m_economy (_economy), m_ware_type(_ware_type)
 {}
 
@@ -640,7 +638,7 @@ void Cmd_ChangeTargetQuantity::Write
 	PlayerCommand::Write(fw, egbase, mos);
 	fw.Unsigned32(economy());
 	fw.CString
-		(egbase.player(get_sender()).tribe().get_ware_descr(ware_type())->name());
+		(egbase.player(sender()).tribe().get_ware_descr(ware_type())->name());
 }
 
 void Cmd_ChangeTargetQuantity::Read
@@ -650,7 +648,7 @@ void Cmd_ChangeTargetQuantity::Read
 		PlayerCommand::Read(fr, egbase, mol);
 		m_economy   = fr.Unsigned32();
 		m_ware_type =
-			egbase.player(get_sender()).tribe().ware_index(fr.CString());
+			egbase.player(sender()).tribe().ware_index(fr.CString());
 	} catch (_wexception const & e) {
 		throw wexception("change target quantity: %s", e.what());
 	}
@@ -665,25 +663,25 @@ Cmd_ChangeTargetQuantity::Cmd_ChangeTargetQuantity(StreamRead & des)
 
 void Cmd_ChangeTargetQuantity::serialize(StreamWrite & ser)
 {
-	ser.Unsigned8 (get_sender());
+	ser.Unsigned8 (sender());
 	ser.Unsigned32(economy());
 	ser.Unsigned8 (ware_type().value());
 }
 
 
 Cmd_SetTargetQuantity::Cmd_SetTargetQuantity
-	(int32_t const duetime, Player_Number const _sender,
+	(int32_t const _duetime, Player_Number const _sender,
 	 uint32_t const _economy,
 	 Ware_Index const _ware_type,
 	 uint32_t const _permanent, uint32_t const _temporary)
 	:
-	Cmd_ChangeTargetQuantity(duetime, _sender, _economy, _ware_type),
+	Cmd_ChangeTargetQuantity(_duetime, _sender, _economy, _ware_type),
 	m_permanent(_permanent), m_temporary(_temporary)
 {}
 
-void Cmd_SetTargetQuantity::execute(Game * game)
+void Cmd_SetTargetQuantity::execute(Game & game)
 {
-	Player & player = game->player(get_sender());
+	Player & player = game.player(sender());
 	if
 		(economy  () < player.get_nr_economies() and
 		 ware_type() < player.tribe().get_nrwares())
@@ -693,7 +691,7 @@ void Cmd_SetTargetQuantity::execute(Game * game)
 				[ware_type().value()];
 		tq.permanent     = m_permanent;
 		tq.temporary     = m_temporary;
-		tq.last_modified = get_duetime();
+		tq.last_modified = duetime();
 	}
 }
 
@@ -741,16 +739,16 @@ void Cmd_SetTargetQuantity::serialize(StreamWrite & ser)
 
 
 Cmd_ResetTargetQuantity::Cmd_ResetTargetQuantity
-	(int32_t const duetime, Player_Number const _sender,
+	(int32_t const _duetime, Player_Number const _sender,
 	 uint32_t const _economy,
 	 Ware_Index const _ware_type)
 	:
-	Cmd_ChangeTargetQuantity(duetime, _sender, _economy, _ware_type)
+	Cmd_ChangeTargetQuantity(_duetime, _sender, _economy, _ware_type)
 {}
 
-void Cmd_ResetTargetQuantity::execute(Game * game)
+void Cmd_ResetTargetQuantity::execute(Game & game)
 {
-	Player & player = game->player(get_sender());
+	Player & player = game.player(sender());
 	Tribe_Descr const & tribe = player.tribe();
 	if
 		(economy  () < player.get_nr_economies() and
@@ -809,16 +807,16 @@ PlayerCommand (0, des.Unsigned8())
 	value     = des.Unsigned16();  //  New vale
 }
 
-void Cmd_ChangeTrainingOptions::execute (Game* g)
+void Cmd_ChangeTrainingOptions::execute (Game & game)
 {
-	if (upcast(TrainingSite, trainingsite, g->objects().get_object(serial)))
-		g->get_player(get_sender())->change_training_options
+	if (upcast(TrainingSite, trainingsite, game.objects().get_object(serial)))
+		game.player(sender()).change_training_options
 			(*trainingsite, attribute, value);
 }
 
 void Cmd_ChangeTrainingOptions::serialize (StreamWrite & ser) {
 	ser.Unsigned8 (PLCMD_CHANGETRAININGOPTIONS);
-	ser.Unsigned8 (get_sender());
+	ser.Unsigned8 (sender());
 	ser.Unsigned32(serial);
 	ser.Unsigned16(attribute);
 	ser.Unsigned16(value);
@@ -858,7 +856,7 @@ void Cmd_ChangeTrainingOptions::Write
 	PlayerCommand::Write(fw, egbase, mos);
 
 	// Now serial
-	const Map_Object * const obj = egbase.objects().get_object(serial);
+	Map_Object const & obj = *egbase.objects().get_object(serial);
 	assert(mos.is_object_known(obj));
 	fw.Unsigned32(mos.get_object_file_index(obj));
 
@@ -875,17 +873,17 @@ PlayerCommand (0, des.Unsigned8())
 	soldier = des.Unsigned32(); //  Serial of soldier
 }
 
-void Cmd_DropSoldier::execute (Game* g)
+void Cmd_DropSoldier::execute (Game & game)
 {
-	if (upcast(PlayerImmovable, player_imm, g->objects().get_object(serial)))
-		if (upcast(Soldier, s, g->objects().get_object(soldier)))
-			g->player(get_sender()).drop_soldier(*player_imm, *s);
+	if (upcast(PlayerImmovable, player_imm, game.objects().get_object(serial)))
+		if (upcast(Soldier, s, game.objects().get_object(soldier)))
+			game.player(sender()).drop_soldier(*player_imm, *s);
 }
 
 void Cmd_DropSoldier::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_DROPSOLDIER);
-	ser.Unsigned8 (get_sender());
+	ser.Unsigned8 (sender());
 	ser.Unsigned32(serial);
 	ser.Unsigned32(soldier);
 }
@@ -926,13 +924,13 @@ void Cmd_DropSoldier::Write
 	PlayerCommand::Write(fw, egbase, mos);
 
 	{ //  site serial
-		const Map_Object * const obj = egbase.objects().get_object(serial);
+		Map_Object const & obj = *egbase.objects().get_object(serial);
 		assert(mos.is_object_known(obj));
 		fw.Unsigned32(mos.get_object_file_index(obj));
 	}
 
 	{ //  soldier serial
-		const Map_Object * const obj = egbase.objects().get_object(soldier);
+		Map_Object const & obj = *egbase.objects().get_object(soldier);
 		assert(mos.is_object_known(obj));
 		fw.Unsigned32(mos.get_object_file_index(obj));
 	}
@@ -949,10 +947,10 @@ PlayerCommand (0, des.Unsigned8())
 	val    = des.Signed16();
 }
 
-void Cmd_ChangeSoldierCapacity::execute (Game* g)
+void Cmd_ChangeSoldierCapacity::execute (Game & game)
 {
-	if (upcast(Building, building, g->objects().get_object(serial)))
-		if (building->get_owner() == g->get_player(get_sender()))
+	if (upcast(Building, building, game.objects().get_object(serial)))
+		if (&building->owner() == game.get_player(sender()))
 			if (upcast(SoldierControl, ctrl, building))
 				ctrl->changeSoldierCapacity(val);
 }
@@ -960,7 +958,7 @@ void Cmd_ChangeSoldierCapacity::execute (Game* g)
 void Cmd_ChangeSoldierCapacity::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_CHANGESOLDIERCAPACITY);
-	ser.Unsigned8 (get_sender());
+	ser.Unsigned8 (sender());
 	ser.Unsigned32(serial);
 	ser.Signed16(val);
 }
@@ -997,7 +995,7 @@ void Cmd_ChangeSoldierCapacity::Write
 	PlayerCommand::Write(fw, egbase, mos);
 
 	// Now serial
-	const Map_Object * const obj = egbase.objects().get_object(serial);
+	Map_Object const & obj = *egbase.objects().get_object(serial);
 	assert(mos.is_object_known(obj));
 	fw.Unsigned32(mos.get_object_file_index(obj));
 
@@ -1018,39 +1016,37 @@ PlayerCommand (0, des.Unsigned8())
 	des         .Unsigned8 ();
 }
 
-void Cmd_EnemyFlagAction::execute (Game* g)
+void Cmd_EnemyFlagAction::execute (Game & game)
 {
-	Player & player = *g->get_player(get_sender());
-	Map_Object* obj = g->objects().get_object(serial);
-	PlayerImmovable* imm = static_cast<PlayerImmovable*>(obj);
+	Player & player = game.player(sender());
+	PlayerImmovable & imm =
+		dynamic_cast<PlayerImmovable &>(*game.objects().get_object(serial));
 
 	log
 		("player(%u)    imm->owner (%d) number = %u\n",
-		 player.get_player_number(),
-		 imm->owner().get_player_number(),
-		 number);
+		 player.get_player_number(), imm.owner().get_player_number(), number);
 
-	if (upcast(Flag, flag, obj)) {
+	if (upcast(Flag, flag, &imm)) {
 		if (Building const * const building = flag->get_building())
 			if
-				(imm->get_owner() != &player
+				(&imm.owner() != &player
 				 and
 				 1
 				 <
 				 player.vision
 				 	(Map::get_index
-				 	 	(building->get_position(), g->map().get_width())))
-				player.enemyflagaction (*flag, get_sender(), number);
+				 	 	(building->get_position(), game.map().get_width())))
+				player.enemyflagaction (*flag, sender(), number);
 	} else
 		log ("Cmd_EnemyFlagAction Player invalid or not seeing target.\n");
 }
 
 void Cmd_EnemyFlagAction::serialize (StreamWrite & ser) {
 	ser.Unsigned8 (PLCMD_ENEMYFLAGACTION);
-	ser.Unsigned8 (get_sender());
+	ser.Unsigned8 (sender());
 	ser.Unsigned8 (1);
 	ser.Unsigned32(serial);
-	ser.Unsigned8 (get_sender());
+	ser.Unsigned8 (sender());
 	ser.Unsigned8 (number);
 	ser.Unsigned8 (0);
 }
@@ -1090,12 +1086,12 @@ void Cmd_EnemyFlagAction::Write
 	fw.Unsigned8 (0);
 
 	// Now serial
-	const Map_Object * const obj = egbase.objects().get_object(serial);
+	Map_Object const & obj = *egbase.objects().get_object(serial);
 	assert(mos.is_object_known(obj));
 	fw.Unsigned32(mos.get_object_file_index(obj));
 
 	// Now param
-	fw.Unsigned8 (get_sender());
+	fw.Unsigned8 (sender());
 	fw.Unsigned8 (number);
 	fw.Unsigned8 (0);
 }

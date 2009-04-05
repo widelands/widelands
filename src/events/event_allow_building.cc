@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,7 +56,7 @@ Event_Allow_Building::Event_Allow_Building
 			if (not tribe) {
 				Map const & map = egbase.map();
 				m_player = s.get_Player_Number("player", map.get_nrplayers(), 1);
-				egbase.get_iabase()->reference_player_tribe(m_player, this);
+				egbase.get_ibase()->reference_player_tribe(m_player, this);
 				tribe =
 					&egbase.manually_load_tribe
 						(map.get_scenario_player_tribe(m_player));
@@ -86,8 +86,8 @@ void Event_Allow_Building::Write(Section & s, Editor_Game_Base & egbase) const
 void Event_Allow_Building::set_player(Player_Number const p) {m_player = p;}
 
 
-Event::State Event_Allow_Building::run(Game* game) {
-	game->player(m_player).allow_building(m_building, m_allow);
+Event::State Event_Allow_Building::run(Game & game) {
+	game.player(m_player).allow_building(m_building, m_allow);
 	return m_state = DONE;
 }
 

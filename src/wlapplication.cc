@@ -1482,7 +1482,7 @@ bool WLApplication::new_game()
 	} else { // normal singleplayer
 		uint8_t const pn = sp.settings().playernum + 1;
 		boost::scoped_ptr<GameController> ctrl
-				(GameController::createSinglePlayer(&game, true, pn));
+			(GameController::createSinglePlayer(game, true, pn));
 		try {
 			UI::ProgressWindow loaderUI;
 			GameTips tips (loaderUI);
@@ -1490,7 +1490,7 @@ bool WLApplication::new_game()
 			loaderUI.step(_("Preparing game"));
 
 			game.set_game_controller(ctrl.get());
-			game.set_iabase
+			game.set_ibase
 				(new Interactive_Player
 				 	(game, g_options.pull_section("global"), pn, false, false));
 			game.init_newgame(loaderUI, sp.settings());
@@ -1590,11 +1590,11 @@ struct ReplayGameController : public GameController {
 	}
 
 	struct Cmd_ReplayEnd : public Widelands::Command {
-		Cmd_ReplayEnd (int32_t const duetime) : Widelands::Command(duetime) {}
-		virtual void execute (Widelands::Game * game) {
-			game->gameController()->setDesiredSpeed(0);
+		Cmd_ReplayEnd (int32_t const _duetime) : Widelands::Command(_duetime) {}
+		virtual void execute (Widelands::Game & game) {
+			game.gameController()->setDesiredSpeed(0);
 			UI::MessageBox mmb
-				(game->get_iabase(),
+				(game.get_ibase(),
 				 _("End of replay"),
 				 _
 				 	("The end of the replay has been reached and the game has "
@@ -1635,7 +1635,7 @@ struct ReplayGameController : public GameController {
 		}
 	}
 
-	__attribute__((noreturn)) void sendPlayerCommand(Widelands::PlayerCommand *)
+	__attribute__((noreturn)) void sendPlayerCommand(Widelands::PlayerCommand &)
 	{
 		throw wexception("Trying to send a player command during replay");
 	}
@@ -1679,7 +1679,7 @@ void WLApplication::replay()
 
 		loaderUI.step(_("Loading..."));
 
-		game.set_iabase
+		game.set_ibase
 			(new Interactive_Spectator(game, g_options.pull_section("global")));
 		game.set_write_replay(false);
 		ReplayGameController rgc(game, fname);
@@ -1698,7 +1698,7 @@ void WLApplication::replay()
 void WLApplication::emergency_save(Widelands::Game & game) {
 	if (game.is_loaded()) {
 		try {
-			SaveHandler & save_handler = *game.get_save_handler();
+			SaveHandler & save_handler = game.save_handler();
 			std::string error;
 			if
 				(!

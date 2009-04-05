@@ -41,7 +41,7 @@ struct Building_Statistics_Menu : public UI::UniqueWindow {
 	void draw(RenderTarget &);
 
 private:
-	Interactive_Player & iaplayer() const;
+	Interactive_Player & iplayer() const;
 	enum Jump_Targets {
 		Prev_Owned,        Next_Owned,
 		Prev_Construction, Next_Construction,

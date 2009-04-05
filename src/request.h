@@ -57,19 +57,18 @@ struct Request : public Trackable {
 	friend class RequestList;
 
 	typedef void (*callback_t)
-		(Game *, Request *, Ware_Index, Worker *, void * data);
+		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
 	enum Type {
 		WARE    = 0,
 		WORKER  = 1
 	};
 
-	Request
-		(PlayerImmovable * target, Ware_Index, callback_t, void * cbdata, Type);
+	Request(PlayerImmovable & target, Ware_Index, callback_t, Type);
 	~Request();
 
 	std::string describe() const;
-	PlayerImmovable * get_target() const throw () {return m_target;}
+	PlayerImmovable & target() const throw () {return m_target;}
 	Ware_Index get_index() const {return m_index;}
 	int32_t get_type() const {return m_type;}
 	bool is_idle() const {return m_idle;}
@@ -90,11 +89,11 @@ struct Request : public Trackable {
 
 	void set_last_request_time(int32_t time) {m_last_request_time = time;}
 
-	void start_transfer(Game *g, Supply* supp);
+	void start_transfer(Game &, Supply &);
 
 
-	void Write(FileWrite *, Editor_Game_Base *, Map_Map_Object_Saver  *) const;
-	void Read (FileRead  *, Editor_Game_Base *, Map_Map_Object_Loader *);
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  *) const;
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader *);
 	Worker * get_transfer_worker();
 
 	//  callbacks for WareInstance/Worker code
@@ -115,14 +114,13 @@ private:
 	typedef std::vector<Transfer *> TransferList;
 
 	Type              m_type;
-	PlayerImmovable * m_target;            //  who requested it?
+	PlayerImmovable & m_target;            //  who requested it?
 	Economy         * m_economy;
 	Ware_Index        m_index;             //  the index of the ware descr
 	bool              m_idle;
 	uint32_t          m_count;             //  how many do we need in total
 
 	callback_t        m_callbackfn;        //  called on request success
-	void            * m_callbackdata;
 
 	int32_t           m_required_time; //  when do we need the first ware (can be in the past)
 	int32_t           m_required_interval; //  time between items

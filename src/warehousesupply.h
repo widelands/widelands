@@ -51,12 +51,12 @@ struct WarehouseSupply : public Supply {
 	void remove_workers(Ware_Index, uint32_t count);
 
 	// Supply implementation
-	virtual PlayerImmovable* get_position(Game* g);
+	virtual PlayerImmovable * get_position(Game &);
 	virtual bool is_active() const throw ();
 
-	virtual uint32_t nr_supplies(Game *, Request const *) const;
-	virtual WareInstance & launch_item(Game *, const Request*);
-	virtual Worker* launch_worker(Game* g, const Request*);
+	virtual uint32_t nr_supplies(Game const &, Request const &) const;
+	virtual WareInstance & launch_item(Game &, Request const &);
+	virtual Worker & launch_worker(Game &, Request const &);
 
 private:
 	Economy   * m_economy;

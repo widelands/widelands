@@ -195,7 +195,7 @@ static void dosave
 	Widelands::Game & game = igbase.game();
 
 	std::string error;
-	if (!game.get_save_handler()->save_game(game, complete_filename, &error)) {
+	if (!game.save_handler().save_game(game, complete_filename, &error)) {
 		std::string s =
 			_
 			("Game Saving Error!\nSaved Game-File may be corrupt!\n\n"
@@ -251,7 +251,7 @@ called when the ok button has been clicked
 */
 void Game_Main_Menu_Save_Game::clicked_ok() {
 	std::string const complete_filename =
-		igbase().game().get_save_handler()->create_file_name
+		igbase().game().save_handler().create_file_name
 			(m_curdir, m_editbox.text());
 
 	//  Check if file exists. If it does, show a warning.

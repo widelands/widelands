@@ -69,8 +69,9 @@ m_heal_incr_per_medic(0)
 Create a new building of this type
 ===============
 */
-Building * MilitarySite_Descr::create_object() const
-{return new MilitarySite(*this);}
+Building & MilitarySite_Descr::create_object() const {
+	return *new MilitarySite(*this);
+}
 
 
 /*
@@ -148,10 +149,9 @@ void MilitarySite::prefill
 {
 	ProductionSite::prefill(game, ware_counts, worker_counts, soldier_counts);
 	if (soldier_counts and soldier_counts->size()) {
-		Tribe_Descr const & tribe = owner().tribe();
 		Soldier_Descr const & soldier_descr =
 			dynamic_cast<Soldier_Descr const &>
-				(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+				(*tribe().get_worker_descr(tribe().worker_index("soldier")));
 		container_iterate_const(Soldier_Counts, *soldier_counts, i) {
 			Soldier_Strength const ss = i.current->first;
 			for (uint32_t j = i.current->second; j; --j) {
@@ -159,7 +159,7 @@ void MilitarySite::prefill
 					static_cast<Soldier &>
 						(soldier_descr.create(game, owner(), 0, get_position()));
 				soldier.set_level(ss.hp, ss.attack, ss.defense, ss.evade);
-				Building::add_worker(&soldier);
+				Building::add_worker(soldier);
 				log
 					("MilitarySite::prefill: added soldier (economy = %p)\n",
 					 soldier.get_economy());
@@ -170,22 +170,22 @@ void MilitarySite::prefill
 }
 
 
-void MilitarySite::init(Editor_Game_Base* g)
+void MilitarySite::init(Editor_Game_Base & egbase)
 {
-	ProductionSite::init(g);
-	Game & game = dynamic_cast<Game &>(*g);
+	ProductionSite::init(egbase);
+	Game & game = dynamic_cast<Game &>(egbase);
 	std::vector<Worker *> const & ws = get_workers();
 	container_iterate_const(std::vector<Worker *>, ws, i)
 		if (upcast(Soldier, soldier, *i.current)) {
 			soldier->set_location_initially(*this);
 			assert(not soldier->get_state()); //  Should be newly created.
-			soldier->start_task_buildingwork(&game);
+			soldier->start_task_buildingwork(game);
 		}
 	update_soldier_request();
 
 	//  schedule the first healing
 	m_nexthealtime = game.get_gametime() + 1000;
-	schedule_act(&game, 1000);
+	schedule_act(game, 1000);
 }
 
 
@@ -210,18 +210,18 @@ void MilitarySite::set_economy(Economy * const e)
 Cleanup after a military site is removed
 ===============
 */
-void MilitarySite::cleanup(Editor_Game_Base* g)
+void MilitarySite::cleanup(Editor_Game_Base & egbase)
 {
 	// unconquer land
 	if (m_didconquer)
-		g->unconquer_area
+		egbase.unconquer_area
 			(Player_Area<Area<FCoords> >
 			 	(owner().get_player_number(),
 			 	 Area<FCoords>
-			 	 	(g->map().get_fcoords(get_position()), get_conquers())),
+			 	 	(egbase.map().get_fcoords(get_position()), get_conquers())),
 			 m_defeating_player);
 
-	ProductionSite::cleanup(g);
+	ProductionSite::cleanup(egbase);
 
 	// Note that removing workers during ProductionSite::cleanup can generate
 	// new requests; that's why we delete it at the end of this function.
@@ -236,19 +236,23 @@ Called when our soldier arrives.
 ===============
 */
 void MilitarySite::request_soldier_callback
-	(Game * g, Request *, Ware_Index, Worker * w, void * data)
+	(Game            &       game,
+	 Request         &,
+	 Ware_Index,
+	 Worker          * const w,
+	 PlayerImmovable &       target)
 {
-	MilitarySite & msite = *static_cast<MilitarySite *>(data);
+	MilitarySite & msite = dynamic_cast<MilitarySite &>(target);
 	Soldier & s = dynamic_cast<Soldier &>(*w);
 
-	assert(s.get_location(g) == &msite);
+	assert(s.get_location(game) == &msite);
 
 	if (not msite.m_didconquer)
-		msite.conquer_area(*g);
+		msite.conquer_area(game);
 
 	// Bind the worker into this house, hide him on the map
-	s.reset_tasks(g);
-	s.start_task_buildingwork(g);
+	s.reset_tasks(game);
+	s.start_task_buildingwork(game);
 
 	// Make sure the request count is reduced or the request is deleted.
 	msite.update_soldier_request();
@@ -268,10 +272,9 @@ void MilitarySite::update_soldier_request()
 		if (!m_soldier_request) {
 			m_soldier_request =
 				new Request
-					(this,
-					 owner().tribe().safe_worker_index("soldier"),
-					 &MilitarySite::request_soldier_callback,
-					 this,
+					(*this,
+					 tribe().safe_worker_index("soldier"),
+					 MilitarySite::request_soldier_callback,
 					 Request::WORKER);
 			m_soldier_request->set_requirements (m_soldier_requirements);
 		}
@@ -283,13 +286,12 @@ void MilitarySite::update_soldier_request()
 	}
 
 	if (m_capacity < present.size())
-		if (upcast(Game, g, &owner().egbase())) {
-			for (uint32_t i = 0; i < present.size()-m_capacity; ++i) {
-				Soldier* soldier = present[i];
-				soldier->reset_tasks(g);
-				soldier->start_task_leavebuilding(g, true);
+		if (upcast(Game, game, &owner().egbase()))
+			for (uint32_t i = 0; i < present.size() - m_capacity; ++i) {
+				Soldier & soldier = *present[i];
+				soldier.reset_tasks(*game);
+				soldier.start_task_leavebuilding(*game, true);
 			}
-		}
 }
 
 
@@ -300,16 +302,16 @@ MilitarySite::act
 Advance the program state if applicable.
 ===============
 */
-void MilitarySite::act(Game* g, uint32_t data)
+void MilitarySite::act(Game & game, uint32_t const data)
 {
 	// TODO: do all kinds of stuff, but if you do nothing, let
 	// ProductionSite::act() handle all this. Also note, that some ProductionSite
 	// commands rely, that ProductionSite::act() is not called for a certain
 	// period (like cmdAnimation). This should be reworked.
 	// Maybe a new queueing system like MilitaryAct could be introduced.
-	ProductionSite::act(g, data);
+	ProductionSite::act(game, data);
 
-	if (g->get_gametime() - m_nexthealtime >= 0) {
+	if (m_nexthealtime <= game.get_gametime()) {
 		uint32_t total_heal = descr().get_heal_per_second();
 		std::vector<Soldier *> soldiers = presentSoldiers();
 
@@ -323,8 +325,8 @@ void MilitarySite::act(Game* g, uint32_t data)
 			}
 		}
 
-		m_nexthealtime = g->get_gametime() + 1000;
-		schedule_act(g, 1000);
+		m_nexthealtime = game.get_gametime() + 1000;
+		schedule_act(game, 1000);
 	}
 }
 
@@ -335,11 +337,11 @@ void MilitarySite::act(Game* g, uint32_t data)
  * After the removal of the worker, check whether we need to request
  * new soldiers.
  */
-void MilitarySite::remove_worker(Worker* w)
+void MilitarySite::remove_worker(Worker & w)
 {
 	ProductionSite::remove_worker(w);
 
-	if (upcast(Soldier, soldier, w))
+	if (upcast(Soldier, soldier, &w))
 		popSoldierJob(soldier);
 
 	update_soldier_request();
@@ -349,25 +351,25 @@ void MilitarySite::remove_worker(Worker* w)
 /**
  * Called by soldiers in the building.
  */
-bool MilitarySite::get_building_work(Game* g, Worker* w, bool)
+bool MilitarySite::get_building_work(Game & game, Worker & worker, bool)
 {
-	if (upcast(Soldier, soldier, w)) {
+	if (upcast(Soldier, soldier, &worker)) {
 		// Evict soldiers that have returned home if the capacity is too low
 		if (m_capacity < presentSoldiers().size()) {
-			w->reset_tasks(g);
-			w->start_task_leavebuilding(g, true);
+			worker.reset_tasks(game);
+			worker.start_task_leavebuilding(game, true);
 			return true;
 		}
 
 		bool stayhome;
-		if (Map_Object* enemy = popSoldierJob(soldier, &stayhome)) {
+		if (Map_Object * const enemy = popSoldierJob(soldier, &stayhome)) {
 			if (upcast(Building, building, enemy)) {
-				soldier->startTaskAttack(g, building);
+				soldier->startTaskAttack(game, *building);
 				return true;
 			} else if (upcast(Soldier, opponent, enemy)) {
 				if (!opponent->getBattle()) {
-					soldier->startTaskDefense(g, stayhome);
-					new Battle(*g, *soldier, *opponent);
+					soldier->startTaskDefense(game, stayhome);
+					new Battle(game, *soldier, *opponent);
 					return true;
 				}
 			} else
@@ -385,7 +387,7 @@ bool MilitarySite::get_building_work(Game* g, Worker* w, bool)
 bool MilitarySite::isPresent(Soldier & soldier) const
 {
 	return
-		soldier.get_location(&owner().egbase()) == this                     &&
+		soldier.get_location(owner().egbase()) == this                     &&
 		soldier.get_state() == soldier.get_state(Worker::taskBuildingwork) &&
 		soldier.get_position() == get_position();
 }
@@ -449,8 +451,8 @@ void MilitarySite::dropSoldier(Soldier & soldier)
 		return;
 	}
 
-	soldier.reset_tasks(&game);
-	soldier.start_task_leavebuilding(&game, true);
+	soldier.reset_tasks(game);
+	soldier.start_task_leavebuilding(game, true);
 
 	update_soldier_request();
 }
@@ -486,9 +488,9 @@ void MilitarySite::aggressor(Soldier & enemy)
 
 	if
 		(map.find_bobs
-		 	(Area<FCoords>(map.get_fcoords(get_base_flag()->get_position()), 2),
+		 	(Area<FCoords>(map.get_fcoords(base_flag().get_position()), 2),
 		 	 0,
-		 	 FindBobEnemySoldier(&owner())))
+		 	 FindBobEnemySoldier(owner())))
 		return;
 
 	// We're dealing with a soldier that we might want to keep busy
@@ -504,14 +506,14 @@ void MilitarySite::aggressor(Soldier & enemy)
 				sj.enemy = &enemy;
 				sj.stayhome = false;
 				m_soldierjobs.push_back(sj);
-				(*i.current)->update_task_buildingwork(&game);
+				(*i.current)->update_task_buildingwork(game);
 				return;
 			}
 }
 
 bool MilitarySite::attack(Soldier & enemy)
 {
-	upcast(Game, g, &owner().egbase());
+	Game & game = dynamic_cast<Game &>(owner().egbase());
 	std::vector<Soldier *> present = presentSoldiers();
 
 	Soldier * defender = 0;
@@ -538,12 +540,12 @@ bool MilitarySite::attack(Soldier & enemy)
 		sj.stayhome = true;
 		m_soldierjobs.push_back(sj);
 
-		defender->update_task_buildingwork(g);
+		defender->update_task_buildingwork(game);
 		return true;
 	} else {
 		//TODO: Conquer building
-		set_defeating_player(enemy.get_owner()->get_player_number());
-		schedule_destroy(g);
+		set_defeating_player(enemy.owner().get_player_number());
+		schedule_destroy(game);
 		return false;
 	}
 }
@@ -582,7 +584,7 @@ void MilitarySite::sendAttacker(Soldier & soldier, Building & target)
 	sj.stayhome = false;
 	m_soldierjobs.push_back(sj);
 
-	soldier.update_task_buildingwork(&dynamic_cast<Game &>(owner().egbase()));
+	soldier.update_task_buildingwork(dynamic_cast<Game &>(owner().egbase()));
 }
 
 
@@ -605,7 +607,7 @@ Map_Object * MilitarySite::popSoldierJob
 {
 	container_iterate(std::vector<SoldierJob>, m_soldierjobs, i)
 		if (i.current->soldier == soldier) {
-			Map_Object * const enemy = i.current->enemy.get(&owner().egbase());
+			Map_Object * const enemy = i.current->enemy.get(owner().egbase());
 			if (stayhome)
 				*stayhome = i.current->stayhome;
 			m_soldierjobs.erase(i.current);

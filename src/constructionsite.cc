@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,7 +51,7 @@ ConstructionSite_Descr::ConstructionSite_Descr
 */
 ConstructionSite_Descr::ConstructionSite_Descr
 	(char const * const _name, char const * const _descname,
-	 std::string  const& directory, Profile & prof, Section & global_s,
+	 std::string const & directory, Profile & prof, Section & global_s,
 	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
 	: Building_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
 {
@@ -59,8 +59,9 @@ ConstructionSite_Descr::ConstructionSite_Descr
 }
 
 
-Building* ConstructionSite_Descr::create_object() const
-{return new ConstructionSite(*this);}
+Building & ConstructionSite_Descr::create_object() const {
+	return *new ConstructionSite(*this);
+}
 
 
 /*
@@ -105,7 +106,7 @@ int32_t ConstructionSite::get_size() const throw ()
 /*
  * Write infos over this constructionsite
  */
-void ConstructionSite::log_general_info(Editor_Game_Base* egbase) {
+void ConstructionSite::log_general_info(Editor_Game_Base const & egbase) {
 	Building::log_general_info(egbase);
 
 	molog("m_building: %p\n", m_building);
@@ -283,11 +284,11 @@ void ConstructionSite::set_economy(Economy * const e)
 Initialize the construction site by starting orders
 ===============
 */
-void ConstructionSite::init(Editor_Game_Base* g)
+void ConstructionSite::init(Editor_Game_Base & egbase)
 {
-	Building::init(g);
+	Building::init(egbase);
 
-	if (upcast(Game, game, g)) {
+	if (upcast(Game, game, &egbase)) {
 		// TODO: figure out whether planing is necessary
 
 		// Initialize the wares queues
@@ -300,14 +301,14 @@ void ConstructionSite::init(Editor_Game_Base* g)
 			WaresQueue & wq =
 				*(m_wares[i] = new WaresQueue(*this, it->first, it->second));
 
-			wq.set_callback(&ConstructionSite::wares_queue_callback, this);
+			wq.set_callback(ConstructionSite::wares_queue_callback, this);
 			wq.set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
 			wq.update();
 
 			m_work_steps += it->second;
 		}
 
-		request_builder(game);
+		request_builder(*game);
 
 		g_sound_handler.play_fx("create_construction_site", m_position, 255);
 	}
@@ -322,7 +323,7 @@ Release worker and material (if any is left).
 If construction was finished successfully, place the building at our position.
 ===============
 */
-void ConstructionSite::cleanup(Editor_Game_Base* g)
+void ConstructionSite::cleanup(Editor_Game_Base & egbase)
 {
 	// Release worker
 	if (m_builder_request) {
@@ -337,13 +338,13 @@ void ConstructionSite::cleanup(Editor_Game_Base* g)
 	}
 	m_wares.clear();
 
-	Building::cleanup(g);
+	Building::cleanup(egbase);
 
 	if (m_work_steps <= m_work_completed) {
 		// Put the real building in place
-			m_building->create(*g, owner(), m_position, false);
-		if (Worker * const builder = m_builder.get(g))
-			builder->reset_tasks(dynamic_cast<Game *>(g));
+		m_building->create(egbase, owner(), m_position, false);
+		if (Worker * const builder = m_builder.get(egbase))
+			builder->reset_tasks(dynamic_cast<Game &>(egbase));
 	}
 }
 
@@ -371,15 +372,15 @@ ConstructionSite::request_builder
 Issue a request for the builder.
 ===============
 */
-void ConstructionSite::request_builder(Game *) {
+void ConstructionSite::request_builder(Game &) {
 	assert(!m_builder.is_set() && !m_builder_request);
 
 	m_builder_request =
 		new Request
-		(this,
-		 get_owner()->tribe().safe_worker_index("builder"),
-		 &ConstructionSite::request_builder_callback, this,
-		 Request::WORKER);
+			(*this,
+			 tribe().safe_worker_index("builder"),
+			 ConstructionSite::request_builder_callback,
+			 Request::WORKER);
 }
 
 
@@ -389,18 +390,22 @@ Called by transfer code when the builder has arrived on site.
 ===============
 */
 void ConstructionSite::request_builder_callback
-	(Game * g, Request * rq, Ware_Index, Worker * const w, void * const data)
+	(Game            &       game,
+	 Request         &       rq,
+	 Ware_Index,
+	 Worker          * const w,
+	 PlayerImmovable &       target)
 {
 	assert(w);
 
-	ConstructionSite & cs = *static_cast<ConstructionSite *>(data);
+	ConstructionSite & cs = dynamic_cast<ConstructionSite &>(target);
 
 	cs.m_builder = w;
 
-	delete rq;
+	delete &rq;
 	cs.m_builder_request = 0;
 
-	w->start_task_buildingwork(g);
+	w->start_task_buildingwork(game);
 }
 
 
@@ -411,13 +416,12 @@ ConstructionSite::fetch_from_flag
 Remember the item on the flag. The worker will be sent from get_building_work().
 ===============
 */
-bool ConstructionSite::fetch_from_flag(Game* g)
+bool ConstructionSite::fetch_from_flag(Game & game)
 {
 	++m_fetchfromflag;
 
-	Worker* builder = m_builder.get(g);
-	if (builder)
-		builder->update_task_buildingwork(g);
+	if (Worker * const builder = m_builder.get(game))
+		builder->update_task_buildingwork(game);
 
 	return true;
 }
@@ -428,29 +432,32 @@ bool ConstructionSite::fetch_from_flag(Game* g)
 Called by our builder to get instructions.
 ===============
 */
-bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
-	if (w != m_builder.get(g)) {
+bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
+	if (&worker != m_builder.get(game)) {
 		// Not our construction worker; e.g. a miner leaving a mine
 		// that is supposed to be enhanced. Make him return to a warehouse
-		w->pop_task(g);
-		w->start_task_leavebuilding(g, true);
+		worker.pop_task(game);
+		worker.start_task_leavebuilding(game, true);
 		return true;
 	}
 
 	if (not m_work_steps) //  Happens for building without buildcost.
-		schedule_destroy(g); //  Complete the building immediately.
+		schedule_destroy(game); //  Complete the building immediately.
 
 	// Check if one step has completed
 	if (m_working) {
-		if (static_cast<int32_t>(g->get_gametime() - m_work_steptime) < 0) {
-			w->start_task_idle(g, w->get_animation("idle"), m_work_steptime - g->get_gametime());
+		if (static_cast<int32_t>(game.get_gametime() - m_work_steptime) < 0) {
+			worker.start_task_idle
+				(game,
+				 worker.get_animation("idle"),
+				 m_work_steptime - game.get_gametime());
 			return true;
 		} else {
 			//TODO(fweber): cause "construction sounds" to be played - perhaps dependent on kind of construction?
 
 			++m_work_completed;
 			if (m_work_completed >= m_work_steps)
-				schedule_destroy(g);
+				schedule_destroy(game);
 
 			m_working = false;
 		}
@@ -459,7 +466,7 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 	// Fetch items from flag
 	if (m_fetchfromflag) {
 		--m_fetchfromflag;
-		w->start_task_fetchfromflag(g);
+		worker.start_task_fetchfromflag(game);
 		return true;
 	}
 
@@ -467,19 +474,20 @@ bool ConstructionSite::get_building_work(Game * g, Worker * w, bool) {
 	if (m_work_completed < m_work_steps)
 	{
 		for (uint32_t i = 0; i < m_wares.size(); ++i) {
-			WaresQueue* wq = m_wares[i];
+			WaresQueue & wq = *m_wares[i];
 
-			if (!wq->get_filled())
+			if (!wq.get_filled())
 				continue;
 
-			wq->set_filled(wq->get_filled() - 1);
-			wq->set_size(wq->get_size() - 1);
-			wq->update();
+			wq.set_filled(wq.get_filled() - 1);
+			wq.set_size(wq.get_size() - 1);
+			wq.update();
 
 			m_working = true;
-			m_work_steptime = g->get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
+			m_work_steptime = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
 
-			w->start_task_idle(g, w->get_animation("idle"), CONSTRUCTIONSITE_STEP_TIME);
+			worker.start_task_idle
+				(game, worker.get_animation("idle"), CONSTRUCTIONSITE_STEP_TIME);
 			return true;
 		}
 	}
@@ -494,13 +502,13 @@ Called by WaresQueue code when an item has arrived
 ===============
 */
 void ConstructionSite::wares_queue_callback
-	(Game * g, WaresQueue *, Ware_Index, void * data)
+	(Game & game, WaresQueue *, Ware_Index, void * const data)
 {
 	ConstructionSite & cs = *static_cast<ConstructionSite *>(data);
 
 	if (!cs.m_working)
-		if (Worker * const builder = cs.m_builder.get(g))
-			builder->update_task_buildingwork(g);
+		if (Worker * const builder = cs.m_builder.get(game))
+			builder->update_task_buildingwork(game);
 }
 
 

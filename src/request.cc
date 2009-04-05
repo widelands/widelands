@@ -42,34 +42,33 @@ Request IMPLEMENTATION
 */
 
 Request::Request
-	(PlayerImmovable * target,
+	(PlayerImmovable & _target,
 	 Ware_Index const index,
-	 callback_t cbfn,
-	 void * const cbdata,
-	 Type w)
+	 callback_t const cbfn,
+	 Type       const w)
 	:
 	m_type             (w),
-	m_target           (target),
-	m_economy          (m_target->get_economy()),
+	m_target           (_target),
+	m_economy          (_target.get_economy()),
 	m_index            (index),
 	m_idle             (false),
 	m_count            (1),
 	m_callbackfn       (cbfn),
-	m_callbackdata     (cbdata),
-	m_required_time    (target->owner().egbase().get_gametime()),
+	m_required_time    (_target.owner().egbase().get_gametime()),
 	m_required_interval(0),
 	m_last_request_time(m_required_time)
 {
-	if (w == WARE   and target->get_owner()->tribe().get_nrwares  () <= index)
+	assert(m_type == WARE or m_type == WORKER);
+	if (w == WARE   and _target.owner().tribe().get_nrwares  () <= index)
 		throw wexception
 			("creating ware request with index %u, but tribe has only %u "
 			 "ware types",
-			 index.value(), target->get_owner()->tribe().get_nrwares  ().value());
-	if (w == WORKER and target->get_owner()->tribe().get_nrworkers() <= index)
+			 index.value(), _target.owner().tribe().get_nrwares  ().value());
+	if (w == WORKER and _target.owner().tribe().get_nrworkers() <= index)
 		throw wexception
 			("creating worker request with index %u, but tribe has only %u "
 			 "worker types",
-			 index.value(), target->get_owner()->tribe().get_nrworkers().value());
+			 index.value(), _target.owner().tribe().get_nrworkers().value());
 	if (m_economy)
 		m_economy->add_request(*this);
 }
@@ -318,21 +317,21 @@ static char const * old_atlantean_worker_types[] = {
  * them through the data in the file
  */
 void Request::Read
-	(FileRead * fr, Editor_Game_Base * egbase, Map_Map_Object_Loader * mol)
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader * mol)
 {
 	try {
-		uint16_t const version = fr->Unsigned16();
+		uint16_t const version = fr.Unsigned16();
 		if (2 <= version and version <= REQUEST_VERSION) {
-			Tribe_Descr const & tribe = m_target->owner().tribe();
+			Tribe_Descr const & tribe = m_target.owner().tribe();
 			if (version <= 3) {
 				//  Unfortunately, old versions wrote the index. The best thing
 				//  that we can do with that is to look it up in a table.
-				m_type = static_cast<Type>(fr->Unsigned8());
+				m_type = static_cast<Type>(fr.Unsigned8());
 				if (m_type != WARE and m_type != WORKER)
 					throw wexception
 						("type is %u but must be %u (ware) or %u (worker)",
 						 m_type, WARE, WORKER);
-				uint32_t const index = fr->Unsigned32();
+				uint32_t const index = fr.Unsigned32();
 				if        (tribe.name() == "barbarians") {
 					if (m_type == WARE) {
 						if
@@ -348,7 +347,7 @@ void Request::Read
 							("WARNING: Interpreting a request saved in an old broken "
 							 "format: A barbarian %s has a request for a ware of "
 							 "type %u. This is interpreted as %s.\n",
-							 m_target->descr().descname().c_str(),
+							 m_target.descr().descname().c_str(),
 							 index, old_barbarian_ware_types[index]);
 						m_index =
 							tribe.safe_ware_index
@@ -367,7 +366,7 @@ void Request::Read
 							("WARNING: Interpreting a request saved in an old broken "
 							 "format: A barbarian %s has a request for a worker of "
 							 "type %u. This is interpreted as %s.\n",
-							 m_target->descr().descname().c_str(),
+							 m_target.descr().descname().c_str(),
 							 index, old_barbarian_worker_types[index]);
 						m_index =
 							tribe.safe_worker_index
@@ -388,7 +387,7 @@ void Request::Read
 							("WARNING: Interpreting a request saved in an old broken "
 							 "format: An empire %s has a request for a ware of "
 							 "type %u. This is interpreted as %s.\n",
-							 m_target->descr().descname().c_str(),
+							 m_target.descr().descname().c_str(),
 							 index, old_empire_ware_types[index]);
 						m_index =
 							tribe.safe_ware_index
@@ -407,7 +406,7 @@ void Request::Read
 							("WARNING: Interpreting a request saved in an old broken "
 							 "format: An empire %s has a request for a ware of "
 							 "type %u. This is interpreted as %s.\n",
-							 m_target->descr().descname().c_str(),
+							 m_target.descr().descname().c_str(),
 							 index, old_empire_worker_types[index]);
 						m_index =
 							tribe.safe_worker_index
@@ -428,7 +427,7 @@ void Request::Read
 							("WARNING: Interpreting a request saved in an old broken "
 							 "format: An atlantean %s has a request for a ware of "
 							 "type %u. This is interpreted as %s.\n",
-							 m_target->descr().descname().c_str(),
+							 m_target.descr().descname().c_str(),
 							 index, old_atlantean_ware_types[index]);
 						m_index =
 							tribe.safe_ware_index
@@ -447,7 +446,7 @@ void Request::Read
 							("WARNING: Interpreting a request saved in an old broken "
 							 "format: An atlantean %s has a request for a ware of "
 							 "type %u. This is interpreted as %s.\n",
-							 m_target->descr().descname().c_str(),
+							 m_target.descr().descname().c_str(),
 							 index, old_atlantean_worker_types[index]);
 						m_index =
 							tribe.safe_worker_index
@@ -458,7 +457,7 @@ void Request::Read
 						("no backwards compatibility support for tribe %s",
 						 tribe.name().c_str());
 			} else {
-				char const * const type_name = fr->CString();
+				char const * const type_name = fr.CString();
 				if (Ware_Index const wai = tribe.ware_index(type_name)) {
 					m_type = WARE;
 					m_index = wai;
@@ -468,47 +467,40 @@ void Request::Read
 				} else
 					throw wexception("request for unknown type \"%s\"", type_name);
 			}
-			m_idle              = fr->Unsigned8();
-			m_count             = fr->Unsigned32();
+			m_idle              = fr.Unsigned8();
+			m_count             = fr.Unsigned32();
 			if (0 == m_count)
 				throw wexception("count is 0");
-			m_required_time     = fr->Unsigned32();
-			m_required_interval = fr->Unsigned32();
+			m_required_time     = fr.Unsigned32();
+			m_required_interval = fr.Unsigned32();
 
 			if (3 <= version)
-				m_last_request_time = fr->Unsigned32();
+				m_last_request_time = fr.Unsigned32();
 
 			assert(m_transfers.empty());
 
-			uint16_t const nr_transfers = fr->Unsigned16();
+			uint16_t const nr_transfers = fr.Unsigned16();
 			for (uint16_t i = 0; i < nr_transfers; ++i)
 				try {
-					uint8_t const what_is = fr->Unsigned8();
+					uint8_t const what_is = fr.Unsigned8();
 					if (what_is != WARE and what_is != WORKER and what_is != 2)
 						throw wexception
 							("type is %u but must be one of {%u (WARE), %u (WORKER), "
 							 "%u (SOLDIER)}",
 							 what_is, WARE, WORKER, 2);
-					uint32_t const reg = fr->Unsigned32();
-					if (upcast(Game, game, egbase)) {
+					uint32_t const reg = fr.Unsigned32();
+					if (upcast(Game, game, &egbase)) {
 						if (not mol->is_object_known(reg))
 							throw wexception("%u is not known", reg);
 						Transfer * const trans =
 							what_is == WARE ?
-							new Transfer
-								(game,
-								 this,
-								 &mol->get<WareInstance>(reg))
-							:
-							new Transfer
-								(game,
-								 this,
-								 &mol->get<Worker>(reg));
-						trans->set_idle(fr->Unsigned8());
+							new Transfer(*game, *this, mol->get<WareInstance>(reg)) :
+							new Transfer(*game, *this, mol->get<Worker>      (reg));
+						trans->set_idle(fr.Unsigned8());
 						m_transfers.push_back(trans);
 
-						if (fr->Unsigned8())
-							m_requirements.Read (*fr, *egbase, mol);
+						if (fr.Unsigned8())
+							m_requirements.Read (fr, egbase, mol);
 					}
 				} catch (_wexception const & e) {
 					throw wexception("transfer %u: %s", i, e.what());
@@ -527,47 +519,47 @@ void Request::Read
  * Write this request to a file
  */
 void Request::Write
-	(FileWrite * fw, Editor_Game_Base * egbase, Map_Map_Object_Saver * mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver * mos)
 	const
 {
-	fw->Unsigned16(REQUEST_VERSION);
+	fw.Unsigned16(REQUEST_VERSION);
 
 	//  Target and econmy should be set. Same is true for callback stuff.
 
 	assert(m_type == WARE or m_type == WORKER);
-	Tribe_Descr const & tribe = m_target->owner().tribe();
+	Tribe_Descr const & tribe = m_target.owner().tribe();
 	assert(m_type != WARE   or m_index < tribe.get_nrwares  ());
 	assert(m_type != WORKER or m_index < tribe.get_nrworkers());
-	fw->CString
+	fw.CString
 		(m_type == WARE                          ?
 		 tribe.get_ware_descr  (m_index)->name() :
 		 tribe.get_worker_descr(m_index)->name());
 
-	fw->Unsigned8(m_idle);
+	fw.Unsigned8(m_idle);
 
-	fw->Unsigned32(m_count);
+	fw.Unsigned32(m_count);
 
-	fw->Unsigned32(m_required_time);
-	fw->Unsigned32(m_required_interval);
+	fw.Unsigned32(m_required_time);
+	fw.Unsigned32(m_required_interval);
 
-	fw->Unsigned32(m_last_request_time);
+	fw.Unsigned32(m_last_request_time);
 
-	fw->Unsigned16(m_transfers.size()); //  Write number of current transfers.
+	fw.Unsigned16(m_transfers.size()); //  Write number of current transfers.
 	for (uint32_t i = 0; i < m_transfers.size(); ++i) {
 		Transfer & trans = *m_transfers[i];
 		//  is this a ware (or a worker)
-		fw->Unsigned8(m_type);
+		fw.Unsigned8(m_type);
 		if        (trans.m_item) { //  write ware/worker
-			assert(mos->is_object_known(trans.m_item));
-			fw->Unsigned32(mos->get_object_file_index(trans.m_item));
+			assert(mos->is_object_known(*trans.m_item));
+			fw.Unsigned32(mos->get_object_file_index(*trans.m_item));
 		} else if (trans.m_worker) {
-			assert(mos->is_object_known(trans.m_worker));
-			fw->Unsigned32(mos->get_object_file_index(trans.m_worker));
+			assert(mos->is_object_known(*trans.m_worker));
+			fw.Unsigned32(mos->get_object_file_index(*trans.m_worker));
 		}
-		fw->Unsigned8(trans.is_idle());
+		fw.Unsigned8(trans.is_idle());
 
-		fw->Unsigned8(true); // for version compatibility
-		m_requirements.Write (*fw, *egbase, mos);
+		fw.Unsigned8(true); //  for version compatibility
+		m_requirements.Write (fw, egbase, mos);
 	}
 }
 
@@ -576,7 +568,7 @@ void Request::Write
 */
 Flag & Request::target_flag() const
 {
-	return *get_target()->get_base_flag();
+	return target().base_flag();
 }
 
 /**
@@ -632,7 +624,7 @@ int32_t Request::get_priority (int32_t cost) const
 	bool is_construction_site = false;
 	int32_t modifier = DEFAULT_PRIORITY;
 
-	if (upcast(Building const, building, get_target())) {
+	if (upcast(Building const, building, &target())) {
 		//log("Tex: %s %i %i\n", building->get_name(), building->get_building_type(), building->get_type());
 		//assert(building->get_building_type() != Building::WAREHOUSE);
 		if (upcast(ProductionSite const, productionsite, building))
@@ -761,29 +753,29 @@ void Request::set_required_interval(int32_t const interval)
  * This function does not take ownership of route, i.e. the caller is
  * responsible for its deletion.
 */
-void Request::start_transfer(Game* g, Supply* supp)
+void Request::start_transfer(Game & game, Supply & supp)
 {
 	assert(is_open());
 
-	::StreamWrite & ss = g->syncstream();
+	::StreamWrite & ss = game.syncstream();
 	ss.Unsigned32(0x01decafa); // appears as facade01 in sync stream
-	ss.Unsigned32(get_target()->serial());
-	ss.Unsigned32(supp->get_position(g)->serial());
+	ss.Unsigned32(target().serial());
+	ss.Unsigned32(supp.get_position(game)->serial());
 
 	Transfer * t;
 	if (get_type() == WORKER) {
 		//  Begin the transfer of a soldier or worker.
 		//  launch_worker() creates or starts the worker
-		Worker* s = supp->launch_worker(g, this);
-		ss.Unsigned32(s->serial());
-		t = new Transfer(g, this, s);
+		Worker & s = supp.launch_worker(game, *this);
+		ss.Unsigned32(s.serial());
+		t = new Transfer(game, *this, s);
 	} else {
 		//  Begin the transfer of an item. The item itself is passive.
 		//  launch_item() ensures the WareInstance is transported out of the warehouse
 		//  Once it's on the flag, the flag code will decide what to do with it.
-		WareInstance & item = supp->launch_item(g, this);
+		WareInstance & item = supp.launch_item(game, *this);
 		ss.Unsigned32(item.serial());
-		t = new Transfer(g, this, &item);
+		t = new Transfer(game, *this, item);
 	}
 
 	t->set_idle(m_idle);
@@ -803,7 +795,7 @@ void Request::transfer_finish(Game & game, Transfer & t)
 	Worker * const w = t.m_worker;
 
 	if (t.m_item)
-		t.m_item->destroy(&game);
+		t.m_item->destroy(game);
 
 	t.m_worker = 0;
 	t.m_item = 0;
@@ -818,7 +810,7 @@ void Request::transfer_finish(Game & game, Transfer & t)
 	// the callback functions are likely to delete us,
 	// therefore we musn't access member variables behind this
 	// point
-	(*m_callbackfn)(&game, this, m_index, w, m_callbackdata);
+	(*m_callbackfn)(game, *this, m_index, w, m_target);
 }
 
 /**

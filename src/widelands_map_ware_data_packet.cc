@@ -42,7 +42,7 @@ namespace Widelands {
 
 void Map_Ware_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
@@ -80,7 +80,7 @@ throw (_wexception)
 
 void Map_Ware_Data_Packet::Write
 	(FileSystem           &       fs,
-	 Editor_Game_Base     *       egbase,
+	 Editor_Game_Base     &       egbase,
 	 Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
@@ -91,7 +91,7 @@ throw (_wexception)
 
 	//  Traverse the map and whenever we find a suitable object, check if it has
 	//  wares.
-	const Map & map = egbase->map();
+	Map const & map = egbase.map();
 	std::vector<uint32_t> ids;
 	Field * field = &map[0];
 	const Field * const fields_end = field + map.max_index();
@@ -102,18 +102,18 @@ throw (_wexception)
 			const Flag::PendingItem * item = flag->m_items;
 			const Flag::PendingItem & items_end =  *(item + flag->m_item_filled);
 			for (; item < &items_end; ++item) {
-				assert(not os->is_object_known(item->item));
-				ids.push_back(os->register_object(item->item));
+				assert(not os->is_object_known(*item->item));
+				ids.push_back(os->register_object(*item->item));
 			}
 		}
 
 		//  check for workers
-		for (const Bob * b = field->get_first_bob(); b; b = b->get_next_bob())
-			if (upcast(Worker const, w, b))
+		for (Bob * b = field->get_first_bob(); b; b = b->get_next_bob())
+			if (upcast(Worker, w, b))
 				if (const WareInstance * const ware = w->get_carried_item(egbase))
 				{
-					assert(!os->is_object_known(ware));
-					ids.push_back(os->register_object(ware));
+					assert(!os->is_object_known(*ware));
+					ids.push_back(os->register_object(*ware));
 				}
 	}
 

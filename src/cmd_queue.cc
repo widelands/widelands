@@ -69,7 +69,7 @@ void Cmd_Queue::enqueue (Command * const cmd)
 	ci.cmd = cmd;
 	if (upcast(PlayerCommand, plcmd, cmd)) {
 		ci.category = cat_playercommand;
-		ci.serial = plcmd->get_cmdserial();
+		ci.serial = plcmd->cmdserial();
 	} else if (dynamic_cast<GameLogicCommand *>(cmd)) {
 		ci.category = cat_gamelogic;
 		ci.serial = nextserial++;
@@ -92,36 +92,35 @@ void Cmd_Queue::enqueue (Command * const cmd)
  * which we must mess around (to run all queued cmd.s) and which we update (add
  * the interval)
  */
-int32_t Cmd_Queue::run_queue(int32_t interval, int32_t* game_time_var)
-{
-	int32_t final = *game_time_var + interval;
+int32_t Cmd_Queue::run_queue(int32_t const interval, int32_t & game_time_var) {
+	int32_t const final = game_time_var + interval;
 	int32_t cnt = 0;
 
 	while (!m_cmds.empty()) {
-		Command* c = m_cmds.top().cmd;
-		if (final - c->get_duetime() <= 0)
+		Command & c = *m_cmds.top().cmd;
+		if (final <= c.duetime())
 			break;
 
 		m_cmds.pop();
 
-		assert(c->get_duetime() - *game_time_var >= 0);
-		*game_time_var = c->get_duetime();
+		assert(game_time_var <= c.duetime());
+		game_time_var = c.duetime();
 
-		if (dynamic_cast<GameLogicCommand*>(c)) {
+		if (dynamic_cast<GameLogicCommand *>(&c)) {
 			StreamWrite & ss = m_game.syncstream();
 			static uint8_t const tag[] = {0xde, 0xad, 0x00};
 			ss.Data(tag, 3); // provide an easy-to-find pattern as debugging aid
-			ss.Unsigned32(c->get_duetime());
-			ss.Unsigned32(c->id());
+			ss.Unsigned32(c.duetime());
+			ss.Unsigned32(c.id());
 		}
 
-		c->execute (&m_game);
+		c.execute (m_game);
 
-		delete c;
+		delete &c;
 	}
 
-	assert(final - *game_time_var >= 0);
-	*game_time_var = final;
+	assert(final - game_time_var >= 0);
+	game_time_var = final;
 
 	return cnt;
 }
@@ -129,10 +128,6 @@ int32_t Cmd_Queue::run_queue(int32_t interval, int32_t* game_time_var)
 
 Command::~Command () {}
 
-
-GameLogicCommand::GameLogicCommand (int32_t const duetime)
-	: Command(duetime)
-{}
 
 #define BASE_CMD_VERSION 1
 
@@ -148,7 +143,7 @@ void GameLogicCommand::Write
 	fw.Unsigned16(BASE_CMD_VERSION);
 
 	// Write duetime
-	fw.Unsigned32(get_duetime());
+	fw.Unsigned32(duetime());
 }
 
 /**

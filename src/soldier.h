@@ -79,7 +79,7 @@ struct Soldier_Descr : public Worker_Descr {
 #endif
 
 protected:
-	virtual Bob * create_object() const;
+	virtual Bob & create_object() const;
 
 	//  start values
 	uint32_t m_min_hp;
@@ -119,8 +119,8 @@ class Soldier : public Worker {
 public:
 	Soldier(const Soldier_Descr &);
 
-	virtual void init(Editor_Game_Base *);
-	virtual void cleanup(Editor_Game_Base *);
+	virtual void init(Editor_Game_Base &);
+	virtual void cleanup(Editor_Game_Base &);
 
 	void set_level
 		(uint32_t hp, uint32_t attack, uint32_t defense, uint32_t evade);
@@ -169,34 +169,34 @@ public:
 
 	/// Sets a random animation of desired type and start playing it.
 	void start_animation
-		(Editor_Game_Base*, const char * const animname, const uint32_t time);
+		(Editor_Game_Base &, char const * animname, uint32_t time);
 
 	/// Heal quantity of hit points instantly
 	void heal (uint32_t);
 	void damage (uint32_t); /// Damage quantity of hit points
 
-	void log_general_info(Editor_Game_Base *);
+	virtual void log_general_info(Editor_Game_Base const &);
 
 	bool isOnBattlefield();
 	Battle * getBattle();
 	bool canBeChallenged();
-	virtual bool checkFieldBlocked(Game* g, const FCoords& field, bool commit);
+	virtual bool checkNodeBlocked(Game &, FCoords const &, bool commit);
 
-	void setBattle(Game* g, Battle* battle);
+	void setBattle(Game &, Battle *);
 
-	void startTaskAttack(Game* g, Building* building);
-	void startTaskDefense(Game* g, bool stayhome);
-	void startTaskBattle(Game* g);
+	void startTaskAttack(Game & game, Building &);
+	void startTaskDefense(Game & game, bool stayhome);
+	void startTaskBattle(Game &);
 
 private:
-	void attack_update(Game*, State*);
-	void attack_pop(Game*, State*);
-	void defense_update(Game*, State*);
-	void defense_pop(Game*, State*);
-	void battle_update(Game*, State*);
-	void battle_pop(Game*, State*);
+	void attack_update(Game &, State &);
+	void attack_pop(Game &, State &);
+	void defense_update(Game &, State &);
+	void defense_pop(Game &, State &);
+	void battle_update(Game &, State &);
+	void battle_pop(Game &, State &);
 
-	void sendSpaceSignals(Game*);
+	void sendSpaceSignals(Game &);
 	bool stayHome();
 
 protected:

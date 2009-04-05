@@ -177,15 +177,15 @@ template <typename T, typename ID> struct IDButton : public Basic_Button {
 		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
 		:
 		Basic_Button
-		(parent,
-		 x, y, w, h,
-		 _enabled, flat,
-		 background_pictute_id,
-		 0,
-		 title_text,
-		 tooltip_text,
-		 fontname,
-		 fontsize),
+			(parent,
+			 x, y, w, h,
+			 _enabled, flat,
+			 background_pictute_id,
+			 0,
+			 title_text,
+			 tooltip_text,
+			 fontname,
+			 fontsize),
 		_callback_function     (callback_function),
 		_callback_argument_this(callback_argument_this),
 		_callback_argument_id  (callback_argument_id)
@@ -205,15 +205,15 @@ template <typename T, typename ID> struct IDButton : public Basic_Button {
 		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL)
 		:
 		Basic_Button
-		(parent,
-		 x, y, w, h,
-		 _enabled, flat,
-		 background_pictute_id,
-		 foreground_picture_id,
-		 std::string(),
-		 tooltip_text,
-		 fontname,
-		 fontsize),
+			(parent,
+			 x, y, w, h,
+			 _enabled, flat,
+			 background_pictute_id,
+			 foreground_picture_id,
+			 std::string(),
+			 tooltip_text,
+			 fontname,
+			 fontsize),
 		_callback_function     (callback_function),
 		_callback_argument_this(callback_argument_this),
 		_callback_argument_id  (callback_argument_id)

@@ -2230,7 +2230,7 @@ bool FindBobAttribute::accept(Bob *bob) const
 bool FindBobEnemySoldier::accept(Bob *imm) const
 {
 	if (upcast(Soldier, soldier, imm))
-		if (soldier->isOnBattlefield() && soldier->get_owner() != player)
+		if (soldier->isOnBattlefield() && &soldier->owner() != &player)
 			return true;
 
 	return false;

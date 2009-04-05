@@ -61,7 +61,7 @@
 #define UPDATE_TIME 1000  // 1 second, real time
 
 
-inline Interactive_Player & Building_Statistics_Menu::iaplayer() const {
+inline Interactive_Player & Building_Statistics_Menu::iplayer() const {
 	return dynamic_cast<Interactive_Player &>(*get_parent());
 }
 
@@ -184,7 +184,7 @@ Building_Statistics_Menu::~Building_Statistics_Menu() {}
  * Update this statistic
  */
 void Building_Statistics_Menu::think() {
-	Widelands::Game const & game = iaplayer().game();
+	Widelands::Game const & game = iplayer().game();
 	int32_t const gametime = game.get_gametime();
 
 	if ((gametime - m_lastupdate) > UPDATE_TIME) {
@@ -199,7 +199,7 @@ void Building_Statistics_Menu::think() {
  * Draw this window
  */
 void Building_Statistics_Menu::draw(RenderTarget & dst) {
-	Widelands::Player const & player = iaplayer().player();
+	Widelands::Player const & player = iplayer().player();
 	if (m_anim)
 		dst.drawanim
 			(FLAG_POINT - Point(TRIANGLE_WIDTH / 2, TRIANGLE_HEIGHT),
@@ -229,10 +229,10 @@ int32_t Building_Statistics_Menu::validate_pointer
 void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 	assert(m_table.has_selection());
 	const std::vector<Widelands::Player::Building_Stats> & vec =
-		iaplayer().get_player()->get_building_statistics
+		iplayer().get_player()->get_building_statistics
 			(Widelands::Building_Index
 			 	(static_cast<size_t>(m_table.get_selected())));
-	Widelands::Map const & map = iaplayer().egbase().map();
+	Widelands::Map const & map = iplayer().egbase().map();
 
 	bool found = true; //  we think, we always find a proper building
 
@@ -316,7 +316,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 	validate_pointer(&m_last_building_index, vec.size());
 
 	if (found)
-		iaplayer().move_view_to(vec[m_last_building_index].pos);
+		iplayer().move_view_to(vec[m_last_building_index].pos);
 }
 
 /*
@@ -334,8 +334,8 @@ void Building_Statistics_Menu::update() {
 	m_in_build.set_text("");
 	m_progbar .set_state(0);
 
-	Widelands::Tribe_Descr const & tribe = iaplayer().player().tribe();
-	Widelands::Map         const & map   = iaplayer().game().map();
+	Widelands::Tribe_Descr const & tribe = iplayer().player().tribe();
+	Widelands::Map         const & map   = iplayer().game().map();
 	Widelands::Building_Index      const nr_buildings = tribe.get_nrbuildings();
 	for
 		(Widelands::Building_Index i = Widelands::Building_Index::First();
@@ -347,7 +347,7 @@ void Building_Statistics_Menu::update() {
 			continue;
 
 		std::vector<Widelands::Player::Building_Stats> const & vec =
-			iaplayer().get_player()->get_building_statistics(i);
+			iplayer().get_player()->get_building_statistics(i);
 
 		//  walk all entries, add new ones if needed
 		UI::Table<const intptr_t>::Entry_Record * te = 0;
@@ -362,7 +362,7 @@ void Building_Statistics_Menu::update() {
 
 		//  If not in list, add new one, as long as this building is enabled.
 		if (not te) {
-			if (! iaplayer().player().is_building_allowed(i))
+			if (! iplayer().player().is_building_allowed(i))
 				continue;
 			te = &m_table.add(i.value());
 		}

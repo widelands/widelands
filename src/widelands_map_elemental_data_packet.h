@@ -33,16 +33,16 @@ struct Map;
 struct Map_Elemental_Data_Packet : public Map_Data_Packet {
 	virtual void Read
 		(FileSystem &,
-		 Editor_Game_Base*,
+		 Editor_Game_Base      &,
 		 const bool,
 		 Map_Map_Object_Loader * = 0)
 		throw (_wexception);
-	void Write(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * = 0)
+	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * = 0)
 		throw (_wexception);
 
 	//  The following function prereads a given map without the need of a
 	//  properly configured Editor_Game_Base object.
-	void Pre_Read(FileSystem &, Map*) throw (_wexception);
+	void Pre_Read(FileSystem &, Map *) throw (_wexception);
 
 	uint32_t get_version() {return m_version;}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,7 @@ struct ProductionSite_Descr : public Building_Descr {
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void writeHTMLProduction(::FileWrite &) const;
 #endif
-	virtual Building * create_object() const;
+	virtual Building & create_object() const;
 
 	uint32_t nr_working_positions() const {
 		uint32_t result = 0;
@@ -114,7 +114,7 @@ public:
 	ProductionSite(const ProductionSite_Descr & descr);
 	virtual ~ProductionSite();
 
-	void log_general_info(Editor_Game_Base *);
+	void log_general_info(Editor_Game_Base &);
 
 	bool is_stopped() const {return m_is_stopped;}
 	void set_stopped(bool);
@@ -142,14 +142,14 @@ public:
 	virtual int32_t get_building_type() const throw ()
 	{return Building::PRODUCTIONSITE;}
 	char const * type_name() const throw () {return "productionsite";}
-	virtual void init(Editor_Game_Base* g);
-	virtual void cleanup(Editor_Game_Base* g);
-	virtual void act(Game* g, uint32_t data);
+	virtual void init(Editor_Game_Base &);
+	virtual void cleanup(Editor_Game_Base &);
+	virtual void act(Game &, uint32_t data);
 
-	virtual void remove_worker(Worker* w);
+	virtual void remove_worker(Worker &);
 
-	virtual bool fetch_from_flag(Game* g);
-	virtual bool get_building_work(Game* g, Worker* w, bool success);
+	virtual bool fetch_from_flag(Game &);
+	virtual bool get_building_work(Game &, Worker &, bool success);
 
 	virtual void set_economy(Economy *);
 
@@ -158,8 +158,8 @@ public:
 	std::vector<Worker *> const & workers() const;
 
 protected:
-	virtual UI::Window * create_options_window
-		(Interactive_Player *, UI::Window * * registry);
+	virtual void create_options_window
+		(Interactive_Player &, UI::Window * & registry);
 
 protected:
 	struct State {
@@ -171,7 +171,7 @@ protected:
 
 	Request & request_worker(Ware_Index);
 	static void request_worker_callback
-		(Game *, Request *, Ware_Index, Worker *, void * data);
+		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
 	/**
 	 * Determine the next program to be run when the last program has finished.
@@ -179,7 +179,8 @@ protected:
 	 */
 	virtual void find_and_start_next_program(Game &);
 
-	State* get_current_program() {return m_program.size() ? &*m_program.rbegin() : 0;}
+	State & top_state() {assert(m_stack.size()); return *m_stack.rbegin();}
+	State * get_state() {return m_stack.size() ? &*m_stack.rbegin() : 0;}
 	void program_act(Game &);
 
 	/// \param phase can be used to pass a value on to the next step in the
@@ -202,7 +203,8 @@ protected:  // TrainingSite must have access to this stuff
 
 	int32_t m_fetchfromflag; ///< Number of items to fetch from flag
 
-	std::vector<State>        m_program; ///<  program stack
+	typedef std::vector<State> Stack;
+	Stack        m_stack; ///<  program stack
 	bool                     m_program_timer; ///< execute next instruction based on pointer
 	int32_t                       m_program_time; ///< timer time
 	int32_t                      m_post_timer;    ///< Time to schedule after ends

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,67 +60,67 @@ Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
 		ss.Unsigned32(Second.serial());
 	}
 
-	init(&game);
+	init(game);
 }
 
 
-void Battle::init (Editor_Game_Base* eg)
+void Battle::init (Editor_Game_Base & egbase)
 {
-	Map_Object::init(eg);
+	Map_Object::init(egbase);
 
-	m_creationtime = eg->get_gametime();
+	m_creationtime = egbase.get_gametime();
 
-	if (upcast(Game, g, eg)) {
+	if (upcast(Game, game, &egbase)) {
 		if (m_first->getBattle())
-			m_first->getBattle()->cancel(g, m_first);
-		m_first->setBattle(g, this);
+			m_first->getBattle()->cancel(*game, *m_first);
+		m_first->setBattle(*game, this);
 		if (m_second->getBattle())
-			m_second->getBattle()->cancel(g, m_second);
-		m_second->setBattle(g, this);
+			m_second->getBattle()->cancel(*game, *m_second);
+		m_second->setBattle(*game, this);
 	}
 }
 
 
-void Battle::cleanup (Editor_Game_Base* eg)
+void Battle::cleanup (Editor_Game_Base & egbase)
 {
-	if (upcast(Game, g, eg)) {
+	if (upcast(Game, game, &egbase)) {
 		if (m_first) {
-			m_first->setBattle(g, 0);
+			m_first ->setBattle(*game, 0);
 			m_first  = 0;
 		}
 		if (m_second) {
-			m_second->setBattle(g, 0);
+			m_second->setBattle(*game, 0);
 			m_second = 0;
 		}
 	}
 
-	Map_Object::cleanup(eg);
+	Map_Object::cleanup(egbase);
 }
 
 
 /**
  * Called by one of the soldiers if it has to cancel the battle immediately.
  */
-void Battle::cancel(Game* g, Soldier* soldier)
+void Battle::cancel(Game & game, Soldier & soldier)
 {
-	if (soldier == m_first) {
+	if        (&soldier == m_first)  {
 		m_first = 0;
-		soldier->setBattle(g, 0);
-	} else if (soldier == m_second) {
+		soldier.setBattle(game, 0);
+	} else if (&soldier == m_second) {
 		m_second = 0;
-		soldier->setBattle(g, 0);
+		soldier.setBattle(game, 0);
 	} else
 		return;
 
-	schedule_destroy(g);
+	schedule_destroy(game);
 }
 
 
-bool Battle::locked(Game* g)
+bool Battle::locked(Game & game)
 {
 	if (!m_first || !m_second)
 		return false;
-	if (g->get_gametime() - m_creationtime < 1000)
+	if (game.get_gametime() - m_creationtime < 1000)
 		return true; // don't change battles around willy-nilly
 	return m_first->get_position() == m_second->get_position();
 }
@@ -137,10 +137,10 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 {
 	if (soldier.get_current_hitpoints() < 1) {
 		molog("soldier %u has died\n", soldier.serial());
-		soldier          . get_owner()->count_casualty();
-		opponent(soldier)->get_owner()->count_kill    ();
-		soldier.schedule_destroy(&game);
-		destroy(&game);
+		soldier          . owner().count_casualty();
+		opponent(soldier)->owner().count_kill    ();
+		soldier.schedule_destroy(game);
+		destroy(game);
 		return;
 	}
 
@@ -184,7 +184,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 		assert(m_readyflags == thisflag);
 		return
 			soldier.start_task_idle
-				(&game, soldier.descr().get_animation("idle"), -1);
+				(game, soldier.descr().get_animation("idle"), -1);
 	} else if (m_readyflags != 3) {                               //  codepath b
 		//  Only one of us was ready before and the other becomes ready now.
 		//  Time for one of us to hurt the other. Which one is on turn is decided
@@ -195,7 +195,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 		m_readyflags |= thisflag; //  FIXME simplify to a plain assignment (3)
 		assert(m_readyflags == 3);
 		calculateTurn(game);
-		opponent(soldier)->send_signal(&game, "wakeup");
+		opponent(soldier)->send_signal(game, "wakeup");
 	} else {                                                      //  codepath c
 		//  Both of us were already ready. That means that we already fought and
 		//  it is time to rest.
@@ -203,13 +203,13 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	}
 
 	//  common to codepaths b and c
-	soldier.start_task_idle(&game, soldier.descr().get_animation("idle"), 1000);
+	soldier.start_task_idle(game, soldier.descr().get_animation("idle"), 1000);
 }
 
 void Battle::calculateTurn(Game & game)
 {
-	Soldier* attacker;
-	Soldier* defender;
+	Soldier * attacker;
+	Soldier * defender;
 
 	if (m_first_strikes) {
 		attacker = m_first;
@@ -223,16 +223,12 @@ void Battle::calculateTurn(Game & game)
 
 	uint32_t const hit = game.logic_rand() % 100;
 	if (hit > defender->get_evade()) {
-		uint32_t attack =
+		uint32_t const attack =
 			attacker->get_min_attack() +
 			(game.logic_rand()
 			 %
 			 (attacker->get_max_attack() - attacker->get_min_attack() - 1));
-
-		uint32_t defend = defender->get_defense();
-		defend = (attack * defend) / 100;
-
-		defender->damage(attack-defend);
+		defender->damage(attack - (attack * defender->get_defense()) / 100);
 	}
 }
 
@@ -284,7 +280,7 @@ void Battle::Loader::load_pointers()
 }
 
 void Battle::save
-	(Editor_Game_Base * egbase, Map_Map_Object_Saver * mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, Map_Map_Object_Saver * mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_Battle);
 	fw.Unsigned8(BATTLE_SAVEGAME_VERSION);
@@ -296,13 +292,13 @@ void Battle::save
 	fw.Unsigned8(m_first_strikes);
 
 	// And now, the serials of the soldiers !
-	fw.Unsigned32(m_first ? mos->get_object_file_index(m_first) : 0);
-	fw.Unsigned32(m_second ? mos->get_object_file_index(m_second) : 0);
+	fw.Unsigned32(m_first  ? mos->get_object_file_index(*m_first)  : 0);
+	fw.Unsigned32(m_second ? mos->get_object_file_index(*m_second) : 0);
 }
 
 
-Map_Object::Loader* Battle::load
-	(Editor_Game_Base * egbase, Map_Map_Object_Loader * mol, FileRead & fr)
+Map_Object::Loader * Battle::load
+	(Editor_Game_Base & egbase, Map_Map_Object_Loader * mol, FileRead & fr)
 {
 	std::auto_ptr<Loader> loader(new Loader);
 

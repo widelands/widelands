@@ -36,7 +36,7 @@ struct GameObjectivesMenu : public UI::UniqueWindow {
 	void think();
 
 private:
-	Interactive_Player & iaplayer() const;
+	Interactive_Player & iplayer() const;
 	void                 selected(uint32_t);
 
 	typedef UI::Listselect<Widelands::Objective &> list_type;

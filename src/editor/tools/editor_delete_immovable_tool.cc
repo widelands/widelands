@@ -34,6 +34,7 @@ int32_t Editor_Delete_Immovable_Tool::handle_click_impl
 	 Widelands::Node_and_Triangle<> const center,
 	 Editor_Interactive           &       parent)
 {
+	Widelands::Editor_Game_Base & egbase = parent.egbase();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 		 Widelands::Area<Widelands::FCoords>
@@ -43,7 +44,7 @@ int32_t Editor_Delete_Immovable_Tool::handle_click_impl
 		 	(Widelands::Immovable,
 		 	 immovable,
 		 	 mr.location().field->get_immovable()))
-		immovable->remove(&parent.egbase()); //  Delete no buildings or stuff.
+		immovable->remove(egbase); //  Delete no buildings or stuff.
 	while (mr.advance(map));
 	return mr.radius() + 2;
 }

@@ -65,27 +65,27 @@ void IdleWorkerSupply::set_economy(Economy * const e)
 /**
  * Return the worker's position.
  */
-PlayerImmovable * IdleWorkerSupply::get_position(Game * game)
+PlayerImmovable * IdleWorkerSupply::get_position(Game & game)
 {
 	return m_worker.get_location(game);
 }
 
 
-uint32_t IdleWorkerSupply::nr_supplies(Game *, Request const * req) const
+uint32_t IdleWorkerSupply::nr_supplies(Game const &, Request const & req) const
 {
 	assert
-		(req->get_type() != Request::WORKER or
-		 req->get_index() < m_worker.descr().tribe().get_nrworkers());
+		(req.get_type() != Request::WORKER or
+		 req.get_index() < m_worker.descr().tribe().get_nrworkers());
 	if
-		(req->get_type() == Request::WORKER &&
-		 m_worker.descr().can_act_as(req->get_index()) &&
-		 req->get_requirements().check(m_worker))
+		(req.get_type() == Request::WORKER &&
+		 m_worker.descr().can_act_as(req.get_index()) &&
+		 req.get_requirements().check(m_worker))
 		return 1;
 
 	return 0;
 }
 
-WareInstance & IdleWorkerSupply::launch_item(Game *, const Request*)
+WareInstance & IdleWorkerSupply::launch_item(Game &, Request const &)
 {
 	throw wexception("IdleWorkerSupply::launch_item() makes no sense.");
 }
@@ -94,16 +94,16 @@ WareInstance & IdleWorkerSupply::launch_item(Game *, const Request*)
 /**
  * No need to explicitly launch the worker.
  */
-Worker* IdleWorkerSupply::launch_worker(Game *, const Request* req)
+Worker & IdleWorkerSupply::launch_worker(Game &, Request const & req)
 {
-	if (req->get_type() != Request::WORKER)
+	if (req.get_type() != Request::WORKER)
 		throw wexception("IdleWorkerSupply: not a worker request");
 	if
-		(!m_worker.descr().can_act_as(req->get_index()) ||
-		 !req->get_requirements().check(m_worker))
+		(!m_worker.descr().can_act_as(req.get_index()) ||
+		 !req.get_requirements().check(m_worker))
 		throw wexception("IdleWorkerSupply: worker type mismatch");
 
-	return &m_worker;
+	return m_worker;
 }
 
 

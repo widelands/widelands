@@ -36,7 +36,7 @@ void Event_Reveal_Campaign::Write(Section & s, Editor_Game_Base & egbase) const
 }
 
 
-Event::State Event_Reveal_Campaign::run(Game *) {
+Event::State Event_Reveal_Campaign::run(Game &) {
 	Campaign_visibility_save cvs;
 	cvs.set_campaign_visibility(reveal, true);
 	return m_state = DONE;

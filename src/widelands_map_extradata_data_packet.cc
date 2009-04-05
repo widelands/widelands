@@ -37,7 +37,7 @@ namespace Widelands {
 
 void Map_Extradata_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const)
 throw (_wexception)
@@ -51,7 +51,7 @@ throw (_wexception)
 		int32_t const packet_version =
 			prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			Map & map = egbase->map();
+			Map & map = egbase.map();
 			//  Nothing more. But read all pics.
 			if (fs.FileExists("pics") and fs.IsDirectory("pics")) {
 				filenameset_t pictures;
@@ -98,7 +98,7 @@ throw (_wexception)
 
 
 void Map_Extradata_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	Profile prof;
@@ -107,7 +107,7 @@ throw (_wexception)
 
 	//  Nothing more. All pics in the dir pic are loaded as pictures.
 	const Map::Extradata_Infos & extradatainfos =
-		egbase->map().m_extradatainfos;
+		egbase.map().m_extradatainfos;
 	for (uint32_t i = 0; i < extradatainfos.size(); ++i) {
 		const Map::Extradata_Info & edi = extradatainfos[i];
 		assert(edi.type == Map::Extradata_Info::PIC);

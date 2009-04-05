@@ -40,17 +40,17 @@ namespace Widelands {
 
 void Map_Players_AreaWatchers_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
 	if (skip) return;
 
-	const Map & map = egbase->map();
-	const Extent extent = egbase->map().extent();
+	Map const & map = egbase.map();
+	Extent const extent = map.extent();
 	const Player_Number nr_players = map.get_nrplayers();
-	iterate_players_existing(p, nr_players, *egbase, player) {
+	iterate_players_existing(p, nr_players, egbase, player) {
 		char filename[FILENAME_SIZE];
 		snprintf(filename, sizeof(filename), FILENAME_TEMPLATE, p);
 		FileRead fr;
@@ -98,23 +98,23 @@ throw (_wexception)
 
 void Map_Players_AreaWatchers_Data_Packet::Write
 	(FileSystem           &       fs,
-	 Editor_Game_Base     *       egbase,
+	 Editor_Game_Base     &       egbase,
 	 Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
 	fs.EnsureDirectoryExists("player");
-	const Map & map = egbase->map();
+	Map const & map = egbase.map();
 	const Player_Number nr_players = map.get_nrplayers();
-	iterate_players_existing_const(p, nr_players, *egbase, player) {
+	iterate_players_existing_const(p, nr_players, egbase, player) {
 		FileWrite fw;
 		fw.Unsigned16(CURRENT_PACKET_VERSION);
 		const Player::AreaWatchers & areawatchers = player->areawatchers();
 		container_iterate_const(Player::AreaWatchers, areawatchers, i) {
 			const AreaWatcher & areawatcher =
 				dynamic_cast<AreaWatcher const &>(*i.current->get(egbase));
-			fw.Unsigned32(os->register_object(&areawatcher));
+			fw.Unsigned32(os->register_object(areawatcher));
 			fw.Area48    (areawatcher);
-			os->mark_object_as_saved(&areawatcher);
+			os->mark_object_as_saved(areawatcher);
 		}
 		char filename[FILENAME_SIZE];
 		snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, p);

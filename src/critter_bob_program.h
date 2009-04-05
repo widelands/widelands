@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,9 @@
 namespace Widelands {
 
 struct Critter_BobAction {
-	typedef bool (Critter_Bob::*execute_t)(Game* g, Bob::State* state, const Critter_BobAction* act);
+	typedef
+		bool (Critter_Bob::*execute_t)
+			(Game &, Bob::State &, Critter_BobAction const &);
 
 	enum {
 		walkObject, //  walk to objvar1
@@ -48,20 +50,21 @@ struct Critter_BobProgram : public BobProgramBase {
 		EncodeData  const * encdata;
 	};
 
-	typedef void (Critter_BobProgram::*parse_t)(Critter_BobAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	typedef
+		void (Critter_BobProgram::*parse_t)
+			(Critter_BobAction *, Parser *, std::vector<std::string> const & cmd);
 
 	Critter_BobProgram(const std::string & name) : m_name(name) {}
 	virtual ~Critter_BobProgram() {}
 
 	std::string get_name() const {return m_name;}
 	int32_t get_size() const {return m_actions.size();}
-	const Critter_BobAction* get_action(int32_t idx) const {
-		assert(idx >= 0);
-		assert(static_cast<uint32_t>(idx) < m_actions.size());
-		return &m_actions[idx];
+	Critter_BobAction const & operator[] (size_t const idx) const {
+		assert(idx < m_actions.size());
+		return m_actions[idx];
 	}
 
-	void parse(Parser* parser, std::string name);
+	void parse(Parser *, char const * name);
 
 private:
 	struct ParseMap {
@@ -70,7 +73,8 @@ private:
 	};
 
 private:
-	void parse_remove(Critter_BobAction* act, Parser* parser, const std::vector<std::string>& cmd);
+	void parse_remove
+		(Critter_BobAction *, Parser *, std::vector<std::string> const & cmd);
 
 private:
 	std::string                    m_name;

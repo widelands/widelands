@@ -93,8 +93,9 @@ m_max_evade         (0)
  * Create a new training site
  * \return  the new training site
  */
-Building * TrainingSite_Descr::create_object() const
-{return new TrainingSite(*this);}
+Building & TrainingSite_Descr::create_object() const {
+	return *new TrainingSite(*this);
+}
 
 /**
  * \param at the attribute to investigate
@@ -167,12 +168,9 @@ TrainingSite::~TrainingSite() {}
  */
 std::string TrainingSite::get_statistics_string()
 {
-	State *state;
-	state = get_current_program(); //may also be NULL if there is no current program
-
-	if (state) {
+	if (State * const state = get_state())
 		return state->program->descname();
-	} else if (m_result == Completed)
+	else if (m_result == Completed)
 		return _("Resting");
 	else
 		return _("Not Working");
@@ -187,10 +185,9 @@ void TrainingSite::prefill
 {
 	ProductionSite::prefill(game, ware_counts, worker_counts, soldier_counts);
 	if (soldier_counts and soldier_counts->size()) {
-		Tribe_Descr const & tribe = owner().tribe();
 		Soldier_Descr const & soldier_descr =
 			dynamic_cast<Soldier_Descr const &>
-				(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+				(*tribe().get_worker_descr(tribe().worker_index("soldier")));
 		container_iterate_const(Soldier_Counts, *soldier_counts, i) {
 			Soldier_Strength const ss = i.current->first;
 			for (uint32_t j = i.current->second; j; --j) {
@@ -198,7 +195,7 @@ void TrainingSite::prefill
 					static_cast<Soldier &>
 						(soldier_descr.create(game, owner(), 0, get_position()));
 				soldier.set_level(ss.hp, ss.attack, ss.defense, ss.evade);
-				Building::add_worker(&soldier);
+				Building::add_worker(soldier);
 				m_soldiers.push_back(&soldier);
 				log
 					("TrainingSite::prefill: added soldier (economy = %p)\n",
@@ -211,16 +208,14 @@ void TrainingSite::prefill
 /**
  * Setup the building and request soldiers
  */
-void TrainingSite::init(Editor_Game_Base * g)
+void TrainingSite::init(Editor_Game_Base & egbase)
 {
-	assert(g);
-
-	ProductionSite::init(g);
-	Game & game = dynamic_cast<Game &>(*g);
+	ProductionSite::init(egbase);
+	Game & game = dynamic_cast<Game &>(egbase);
 	container_iterate_const(std::vector<Soldier *>, m_soldiers, i) {
 		(*i.current)->set_location_initially(*this);
 		assert(not (*i.current)->get_state()); //  Should be newly created.
-		(*i.current)->start_task_idle(&game, 0, -1);
+		(*i.current)->start_task_idle(game, 0, -1);
 	}
 	update_soldier_request();
 }
@@ -243,40 +238,38 @@ void TrainingSite::set_economy(Economy * e)
  *
  * Cancel all soldier requests and release all soldiers
  */
-void TrainingSite::cleanup(Editor_Game_Base * g)
+void TrainingSite::cleanup(Editor_Game_Base & egbase)
 {
-	assert(g);
-
 	delete m_soldier_request;
 	m_soldier_request = 0;
 
-	ProductionSite::cleanup(g);
+	ProductionSite::cleanup(egbase);
 }
 
 
-void TrainingSite::add_worker(Worker* w)
+void TrainingSite::add_worker(Worker & w)
 {
 	ProductionSite::add_worker(w);
 
-	if (upcast(Soldier, soldier, w)) {
+	if (upcast(Soldier, soldier, &w)) {
 		// Note that the given Soldier might already be in the array
 		// for loadgames.
 		if (std::find(m_soldiers.begin(), m_soldiers.end(), soldier) == m_soldiers.end())
 			m_soldiers.push_back(soldier);
 		if (upcast(Game, game, &owner().egbase()))
-			schedule_act(game, 100);
+			schedule_act(*game, 100);
 	}
 }
 
-void TrainingSite::remove_worker(Worker* w)
+void TrainingSite::remove_worker(Worker & w)
 {
-	if (upcast(Soldier, soldier, w)) {
+	if (upcast(Soldier, soldier, &w)) {
 		std::vector<Soldier *>::iterator const it =
 			std::find(m_soldiers.begin(), m_soldiers.end(), soldier);
 		if (it != m_soldiers.end()) {
 			m_soldiers.erase(it);
 			if (upcast(Game, game, &owner().egbase()))
-				schedule_act(game, 100);
+				schedule_act(*game, 100);
 		}
 	}
 
@@ -290,13 +283,11 @@ void TrainingSite::remove_worker(Worker* w)
 void TrainingSite::update_soldier_request() {
 	if (m_soldiers.size() < m_capacity) {
 		if (!m_soldier_request) {
-			Ware_Index soldierid = get_owner()->tribe().safe_worker_index("soldier");
 			m_soldier_request =
 				new Request
-					(this,
-					 soldierid,
-					 &TrainingSite::request_soldier_callback,
-					 this,
+					(*this,
+					 tribe().safe_worker_index("soldier"),
+					 TrainingSite::request_soldier_callback,
 					 Request::WORKER);
 
 			RequireOr r;
@@ -346,24 +337,26 @@ void TrainingSite::update_soldier_request() {
  * we only need to update the request structure.
  */
 void TrainingSite::request_soldier_callback
-	(Game * g,
+	(Game            &       game,
 #ifndef NDEBUG
-	 Request * rq,
+	 Request         &       rq,
 #else
-	 Request *,
+	 Request         &,
 #endif
-	 Ware_Index, Worker * w, void * data)
+	 Ware_Index,
+	 Worker          * const w,
+	 PlayerImmovable &       target)
 {
-	TrainingSite* const tsite = static_cast<TrainingSite *>(data);
-	Soldier* s = dynamic_cast<Soldier*>(w);
+	TrainingSite & tsite = dynamic_cast<TrainingSite &>(target);
+	Soldier      & s     = dynamic_cast<Soldier &>(*w);
 
-	assert(s->get_location(g) == tsite);
-	assert(tsite->m_soldier_request == rq);
+	assert(s.get_location(game) == &tsite);
+	assert(tsite.m_soldier_request == &rq);
 
 	// bind the worker into this house, hide him on the map
-	s->start_task_idle(g, 0, -1);
+	s.start_task_idle(game, 0, -1);
 
-	tsite->update_soldier_request();
+	tsite.update_soldier_request();
 }
 
 
@@ -418,18 +411,18 @@ void TrainingSite::dropSoldier(Soldier & soldier)
 
 	m_soldiers.erase(it);
 
-	soldier.reset_tasks(&game);
-	soldier.start_task_leavebuilding(&game, true);
+	soldier.reset_tasks(game);
+	soldier.start_task_leavebuilding(game, true);
 
 	// Schedule, so that we can call new soldiers on next act()
-	schedule_act(&game, 100);
+	schedule_act(game, 100);
 }
 
 
 /**
  * Drop all the soldiers that can not be upgraded further at this building.
  */
-void TrainingSite::drop_unupgradable_soldiers(Game *)
+void TrainingSite::drop_unupgradable_soldiers(Game &)
 {
 	std::vector<Soldier *> droplist;
 
@@ -454,11 +447,9 @@ void TrainingSite::drop_unupgradable_soldiers(Game *)
 /**
  * In addition to advancing the program, update soldier status.
  */
-void TrainingSite::act(Game * g, uint32_t data)
+void TrainingSite::act(Game & game, uint32_t const data)
 {
-	assert(g);
-
-	ProductionSite::act(g, data);
+	ProductionSite::act(game, data);
 
 	update_soldier_request();
 }
@@ -471,7 +462,7 @@ void TrainingSite::program_end(Game & game, Program_Result const result)
 
 	if (m_current_upgrade) {
 		if (m_result == Completed) {
-			drop_unupgradable_soldiers(&game);
+			drop_unupgradable_soldiers(game);
 			m_current_upgrade->lastsuccess = true;
 		}
 		m_current_upgrade = 0;

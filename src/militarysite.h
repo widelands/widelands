@@ -35,7 +35,7 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 		 std::string const & directory, Profile &,  Section & global_s,
 		 Tribe_Descr const & tribe, EncodeData const *);
 
-	virtual Building * create_object() const;
+	virtual Building & create_object() const;
 
 	virtual bool is_only_production_site() const throw () {return false;}
 
@@ -77,13 +77,13 @@ public:
 	char const * type_name() const throw () {return "militarysite";}
 	virtual std::string get_statistics_string();
 
-	virtual void init(Editor_Game_Base* g);
-	virtual void cleanup(Editor_Game_Base* g);
-	virtual void act(Game* g, uint32_t data);
-	virtual void remove_worker(Worker*);
+	virtual void init(Editor_Game_Base &);
+	virtual void cleanup(Editor_Game_Base &);
+	virtual void act(Game &, uint32_t data);
+	virtual void remove_worker(Worker &);
 
 	virtual void set_economy(Economy *);
-	virtual bool get_building_work(Game* g, Worker* w, bool success);
+	virtual bool get_building_work(Game &, Worker &, bool success);
 
 	// Begin implementation of SoldierControl
 	virtual std::vector<Soldier *> presentSoldiers() const;
@@ -119,13 +119,13 @@ public:
 protected:
 	void conquer_area(Game &);
 
-	virtual UI::Window * create_options_window
-		(Interactive_Player * plr, UI::Window * * registry);
+	virtual void create_options_window
+		(Interactive_Player &, UI::Window * & registry);
 
 private:
 	bool isPresent(Soldier &) const;
 	static void request_soldier_callback
-		(Game *, Request *, Ware_Index, Worker *, void * data);
+		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
 	Map_Object * popSoldierJob(Soldier *, bool * stayhome = 0);
 	bool haveSoldierJob(Soldier &);
@@ -142,7 +142,7 @@ private:
 	int32_t m_nexthealtime;
 
 	struct SoldierJob {
-		Soldier* soldier;
+		Soldier * soldier;
 		Object_Ptr enemy;
 		bool stayhome;
 	};

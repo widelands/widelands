@@ -39,7 +39,7 @@ namespace Widelands {
 
 void Map_Allowed_Buildings_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const)
 throw (_wexception)
@@ -53,11 +53,11 @@ throw (_wexception)
 		int32_t const packet_version =
 			prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			Player_Number const nr_players = egbase->map().get_nrplayers();
-			upcast(Game const, game, egbase);
+			Player_Number const nr_players = egbase.map().get_nrplayers();
+			upcast(Game const, game, &egbase);
 
 			//  Now read all players and buildings.
-			iterate_players_existing(p, nr_players, *egbase, player) {
+			iterate_players_existing(p, nr_players, egbase, player) {
 				Tribe_Descr const & tribe = player->tribe();
 				//  All building types default to false in the game (not in the
 				//  editor).
@@ -95,15 +95,15 @@ throw (_wexception)
 
 
 void Map_Allowed_Buildings_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	Profile prof;
 	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
-	const Player_Number nr_players = egbase->map().get_nrplayers();
-	iterate_players_existing_const(p, nr_players, *egbase, player) {
+	Player_Number const nr_players = egbase.map().get_nrplayers();
+	iterate_players_existing_const(p, nr_players, egbase, player) {
 		const Tribe_Descr & tribe = player->tribe();
 		char buffer[10];
 		snprintf(buffer, sizeof(buffer), "player_%u", p);

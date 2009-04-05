@@ -37,7 +37,7 @@ namespace Widelands {
 
 void Map_Terrain_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool,
 	 Map_Map_Object_Loader * const)
 throw (_wexception)
@@ -45,7 +45,7 @@ throw (_wexception)
 	FileRead fr;
 	fr.Open(fs, "binary/terrain");
 
-	Map & map = egbase->map();
+	Map & map = egbase.map();
 	World & world = map.world();
 
 	try {
@@ -86,7 +86,7 @@ throw (_wexception)
 
 
 void Map_Terrain_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 
@@ -96,7 +96,7 @@ throw (_wexception)
 
 	//  This is a bit more complicated saved so that the order of loading of the
 	//  terrains at run time does not matter. This is slow like hell.
-	const Map & map = egbase->map();
+	Map const & map = egbase.map();
 	const World & world = map.world();
 	Terrain_Index const nr_terrains = world.get_nr_terrains();
 	fw.Unsigned16(nr_terrains);

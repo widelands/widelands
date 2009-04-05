@@ -35,7 +35,7 @@ struct Event_Reveal_Objective : public Event {
 
 	int32_t option_menu(Editor_Interactive &);
 
-	State run(Game *);
+	State run(Game &);
 
 	void Write(Section &, Editor_Game_Base &) const;
 

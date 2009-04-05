@@ -359,7 +359,7 @@ void NetHost::run()
 				new Interactive_Spectator
 					(*d->game, g_options.pull_section("global"), true);
 		igb->set_chat_provider(d->chat);
-		game.set_iabase(igb);
+		game.set_ibase(igb);
 		if (!d->settings.savegame) //  new game
 			game.init_newgame(loaderUI, d->settings);
 		else // savegame
@@ -436,16 +436,16 @@ void NetHost::think()
 	}
 }
 
-void NetHost::sendPlayerCommand(Widelands::PlayerCommand* pc)
+void NetHost::sendPlayerCommand(Widelands::PlayerCommand & pc)
 {
-	pc->set_duetime(d->committed_networktime+1);
+	pc.set_duetime(d->committed_networktime + 1);
 
 	SendPacket s;
 	s.Unsigned8(NETCMD_PLAYERCOMMAND);
-	s.Signed32(pc->get_duetime());
-	pc->serialize(s);
+	s.Signed32(pc.duetime());
+	pc.serialize(s);
 	broadcast(s);
-	d->game->enqueue_command(pc);
+	d->game->enqueue_command(&pc);
 
 	committedNetworkTime(d->committed_networktime + 1);
 }
@@ -1350,15 +1350,15 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			*Widelands::PlayerCommand::deserialize(r);
 		log
 			("[Host] client %i (%i) sent player command %i for %i, time = %i\n",
-			 i, client.playernum, plcmd.id(), plcmd.get_sender(), time);
+			 i, client.playernum, plcmd.id(), plcmd.sender(), time);
 		recvClientTime(i, time);
-		if (plcmd.get_sender() != client.playernum + 1)
+		if (plcmd.sender() != client.playernum + 1)
 			throw DisconnectException
 				(_
 				 	("Client %i (%i) sent a playercommand (%i) for a different "
 				 	 "player (%i)."),
-				 i, client.playernum, plcmd.id(), plcmd.get_sender());
-		sendPlayerCommand(&plcmd);
+				 i, client.playernum, plcmd.id(), plcmd.sender());
+		sendPlayerCommand(plcmd);
 	} break;
 
 	case NETCMD_SYNCREPORT: {

@@ -58,11 +58,11 @@ std::string const & BaseImmovable::name() const throw () {
  *
  * Only call this during init.
 */
-void BaseImmovable::set_position(Editor_Game_Base * egbase, Coords const c)
+void BaseImmovable::set_position(Editor_Game_Base & egbase, Coords const c)
 {
 	assert(c);
 
-	Map & map = egbase->map();
+	Map & map = egbase.map();
 	FCoords f = map.get_fcoords(c);
 	if (f.field->immovable && f.field->immovable != this) {
 		assert(f.field->immovable->get_size() == NONE);
@@ -82,15 +82,15 @@ void BaseImmovable::set_position(Editor_Game_Base * egbase, Coords const c)
  *
  * Only call this during cleanup.
 */
-void BaseImmovable::unset_position(Editor_Game_Base * egbase, Coords const c)
+void BaseImmovable::unset_position(Editor_Game_Base & egbase, Coords const c)
 {
-	Map & map = egbase->map();
+	Map & map = egbase.map();
 	FCoords f = map.get_fcoords(c);
 
 	assert(f.field->immovable == this);
 
 	f.field->immovable = 0;
-	egbase->inform_players_about_immovable(f.field - &map[0], 0);
+	egbase.inform_players_about_immovable(f.field - &map[0], 0);
 
 	if (get_size() >= SMALL)
 		map.recalc_for_field_area(Area<FCoords>(f, 2));
@@ -301,7 +301,7 @@ Immovable & Immovable_Descr::create
 {
 	Immovable & result = *new Immovable(*this);
 	result.m_position = coords;
-	result.init(&egbase);
+	result.init(egbase);
 	return result;
 }
 
@@ -359,11 +359,11 @@ void Immovable::increment_program_pointer() {
 /**
  * Actually initialize the immovable.
 */
-void Immovable::init(Editor_Game_Base *g)
+void Immovable::init(Editor_Game_Base & egbase)
 {
-	BaseImmovable::init(g);
+	BaseImmovable::init(egbase);
 
-	set_position(g, m_position);
+	set_position(egbase, m_position);
 
 	//  Set animation data according to current program state.
 	ImmovableProgram const * prog = m_program;
@@ -374,33 +374,33 @@ void Immovable::init(Editor_Game_Base *g)
 		 	(ImmovableProgram::ActAnimate const,
 		 	 act_animate,
 		 	 &(*prog)[m_program_ptr]))
-		start_animation(*g, act_animate->animation());
+		start_animation(egbase, act_animate->animation());
 
-	if (upcast(Game, game, g))
-		switch_program(game, "program");
+	if (upcast(Game, game, &egbase))
+		switch_program(*game, "program");
 }
 
 
 /**
  * Cleanup before destruction
 */
-void Immovable::cleanup(Editor_Game_Base *g)
+void Immovable::cleanup(Editor_Game_Base & egbase)
 {
-	unset_position(g, m_position);
+	unset_position(egbase, m_position);
 
-	BaseImmovable::cleanup(g);
+	BaseImmovable::cleanup(egbase);
 }
 
 
 /**
  * Switch the currently running program.
 */
-void Immovable::switch_program(Game* g, std::string programname)
+void Immovable::switch_program(Game & game, std::string const & programname)
 {
 	m_program = descr().get_program(programname);
 	m_program_ptr = 0;
 	m_program_step = 0;
-	schedule_act(g, 1);
+	schedule_act(game, 1);
 }
 
 
@@ -432,13 +432,13 @@ uint32_t Immovable_Descr::terrain_suitability
 /**
  * Run program timer.
 */
-void Immovable::act(Game * game, uint32_t const data)
+void Immovable::act(Game & game, uint32_t const data)
 {
 	BaseImmovable::act(game, data);
 
-	if (m_program_step <= game->get_gametime())
+	if (m_program_step <= game.get_gametime())
 		//  Might delete itself!
-		(*m_program)[m_program_ptr].execute(*game, *this);
+		(*m_program)[m_program_ptr].execute(game, *this);
 }
 
 
@@ -471,7 +471,7 @@ void Immovable::Loader::load(FileRead & fr)
 
 	// Position
 	imm.m_position = fr.Coords32(egbase().map().extent());
-	imm.set_position(&egbase(), imm.m_position);
+	imm.set_position(egbase(), imm.m_position);
 
 	// Animation
 	char const * const animname = fr.CString();
@@ -520,7 +520,7 @@ void Immovable::Loader::load_finish()
 
 	upcast(Immovable, imm, get_object());
 	if (upcast(Game, game, &egbase()))
-		imm->schedule_act(game, 1);
+		imm->schedule_act(*game, 1);
 
 	egbase().inform_players_about_immovable
 			(Map::get_index(imm->m_position, egbase().map().get_width()),
@@ -528,7 +528,7 @@ void Immovable::Loader::load_finish()
 }
 
 void Immovable::save
-	(Editor_Game_Base * egbase, Map_Map_Object_Saver * mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, Map_Map_Object_Saver * mos, FileWrite & fw)
 {
 	// This is in front because it is required to obtain the descriptiong
 	// necessary to create the Immovable
@@ -564,7 +564,7 @@ void Immovable::save
 }
 
 Map_Object::Loader * Immovable::load
-	(Editor_Game_Base * egbase, Map_Map_Object_Loader * mol, FileRead & fr)
+	(Editor_Game_Base & egbase, Map_Map_Object_Loader * mol, FileRead & fr)
 {
 	std::auto_ptr<Loader> loader(new Loader);
 
@@ -581,9 +581,9 @@ Map_Object::Loader * Immovable::load
 
 		if (strcmp(owner, "world")) {
 			// It is a tribe immovable
-			egbase->manually_load_tribe(owner);
+			egbase.manually_load_tribe(owner);
 
-			if (const Tribe_Descr * const tribe = egbase->get_tribe(owner)) {
+			if (Tribe_Descr const * const tribe = egbase.get_tribe(owner)) {
 				const int32_t idx = tribe->get_immovable_index(name);
 				if (idx != -1)
 					imm = new Immovable(*tribe->get_immovable_descr(idx));
@@ -595,11 +595,12 @@ Map_Object::Loader * Immovable::load
 				throw wexception("Unknown tribe %s!", owner);
 		} else {
 			// World immovable
-			int32_t const idx = egbase->map().world().get_immovable_index(name);
+			World const & world = egbase.map().world();
+			int32_t const idx = world.get_immovable_index(name);
 			if (idx == -1)
 				throw wexception("Unknown world immovable %s in map!", name);
 
-			imm = new Immovable(*egbase->map().world().get_immovable_descr(idx));
+			imm = new Immovable(*world.get_immovable_descr(idx));
 		}
 
 		loader->init(egbase, mol, imm);
@@ -749,7 +750,7 @@ void ImmovableProgram::ActTransform::execute
 		Coords const c = immovable.get_position();
 		Tribe_Descr const * const owner_tribe =
 			tribe ? immovable.descr().get_owner_tribe() : 0;
-		immovable.remove(&game); //  Now immovable is a dangling reference!
+		immovable.remove(game); //  Now immovable is a dangling reference!
 		game.create_immovable(c, type_name, owner_tribe);
 	} else
 		immovable.program_step(game);
@@ -801,7 +802,7 @@ void ImmovableProgram::ActGrow::execute
 	if (game.logic_rand() % (6 * 255) < descr.terrain_suitability(f, map)) {
 		Tribe_Descr const * const owner_tribe =
 			tribe ? immovable.descr().get_owner_tribe() : 0;
-		immovable.remove(&game); //  Now immovable is a dangling reference!
+		immovable.remove(game); //  Now immovable is a dangling reference!
 		game.create_immovable(f, type_name, owner_tribe);
 	} else
 		immovable.program_step(game);
@@ -833,7 +834,7 @@ void ImmovableProgram::ActRemove::execute
 	(Game & game, Immovable & immovable) const
 {
 	if (probability == 0 or game.logic_rand() % 256 < probability)
-		immovable.remove(&game); //  Now immovable is a dangling reference!
+		immovable.remove(game); //  Now immovable is a dangling reference!
 	else
 		immovable.program_step(game);
 }
@@ -967,9 +968,9 @@ void PlayerImmovable::set_economy(Economy *e)
  *
  * This should only be called from Worker::set_location.
 */
-void PlayerImmovable::add_worker(Worker *w)
+void PlayerImmovable::add_worker(Worker & w)
 {
-	m_workers.push_back(w);
+	m_workers.push_back(&w);
 }
 
 /**
@@ -977,10 +978,10 @@ void PlayerImmovable::add_worker(Worker *w)
  *
  * This should only be called from Worker::set_location.
 */
-void PlayerImmovable::remove_worker(Worker *w)
+void PlayerImmovable::remove_worker(Worker & w)
 {
 	container_iterate(Workers, m_workers, i)
-		if (*i.current == w) {
+		if (*i.current == &w) {
 			*i.current = *(i.end - 1);
 			return m_workers.pop_back();
 		}
@@ -1007,15 +1008,15 @@ void PlayerImmovable::set_owner(Player * const new_owner) {
 /**
  * Initialize the immovable.
 */
-void PlayerImmovable::init(Editor_Game_Base *g)
+void PlayerImmovable::init(Editor_Game_Base & egbase)
 {
-	BaseImmovable::init(g);
+	BaseImmovable::init(egbase);
 }
 
 /**
  * Release workers
 */
-void PlayerImmovable::cleanup(Editor_Game_Base *g)
+void PlayerImmovable::cleanup(Editor_Game_Base & egbase)
 {
 	while (m_workers.size())
 		m_workers[0]->set_location(0);
@@ -1023,13 +1024,13 @@ void PlayerImmovable::cleanup(Editor_Game_Base *g)
 	if (m_owner)
 		m_owner->egbase().receive(NoteImmovable(this, LOSE));
 
-	BaseImmovable::cleanup(g);
+	BaseImmovable::cleanup(egbase);
 }
 
 /**
  * Dump general information
  */
-void PlayerImmovable::log_general_info(Editor_Game_Base* egbase)
+void PlayerImmovable::log_general_info(Editor_Game_Base const & egbase)
 {
 	BaseImmovable::log_general_info(egbase);
 

@@ -56,7 +56,7 @@ throw (_wexception)
 
 
 void Game_Map_Data_Packet::Read_Complete(Game & game) {
-	m_wml->load_map_complete(&game, true);
+	m_wml->load_map_complete(game, true);
 	m_mol = m_wml->get_map_object_loader();
 }
 

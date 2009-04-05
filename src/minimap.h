@@ -67,7 +67,7 @@ private:
 		bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 	private:
-		Interactive_Base & m_iabase;
+		Interactive_Base & m_ibase;
 		int32_t                m_viewx, m_viewy;
 		uint32_t               m_pic_map_spot;
 	public:

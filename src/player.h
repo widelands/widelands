@@ -387,7 +387,7 @@ struct Player :
 	void build(Coords, Building_Index);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
-	void start_stop_building(PlayerImmovable* imm);
+	void start_stop_building(PlayerImmovable &);
 	void enhance_building
 		(Building *, Building_Index index_of_new_building);
 

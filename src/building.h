@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,7 +79,7 @@ struct Building_Descr : public Map_Object_Descr {
 		m_enhancements.insert(i);
 	}
 
-	Building * create
+	Building & create
 		(Editor_Game_Base &,
 		 Player &,
 		 Coords,
@@ -105,8 +105,8 @@ struct Building_Descr : public Map_Object_Descr {
 	const BuildingHints & hints() const throw () {return m_hints;}
 
 protected:
-	virtual Building * create_object() const = 0;
-	Building * create_constructionsite(const Building_Descr * const) const;
+	virtual Building & create_object() const = 0;
+	Building & create_constructionsite(Building_Descr const * const old) const;
 
 private:
 	const Tribe_Descr & m_tribe;
@@ -148,6 +148,7 @@ public:
 	Building(const Building_Descr &);
 	virtual ~Building();
 
+	Tribe_Descr const & tribe() const throw () {return descr().tribe();}
 	virtual int32_t get_building_type() const throw () = 0;
 
 	virtual int32_t  get_type    () const throw ();
@@ -156,7 +157,7 @@ public:
 	virtual bool get_passable() const throw ();
 	virtual uint32_t get_ui_anim () const;
 
-	virtual Flag* get_base_flag();
+	virtual Flag & base_flag();
 	virtual uint32_t get_playercaps() const throw ();
 	virtual Coords get_position() const throw () {return m_position;}
 
@@ -185,16 +186,17 @@ public:
 		 Soldier_Counts const * worker_types);
 
 	virtual bool burn_on_destroy();
-	virtual void destroy(Editor_Game_Base*);
+	virtual void destroy(Editor_Game_Base &);
 
 	void show_options(Interactive_Player *);
 	void hide_options();
 
-	virtual bool fetch_from_flag(Game* g);
-	virtual bool get_building_work(Game* g, Worker* w, bool success) __attribute__ ((noreturn));
+	virtual bool fetch_from_flag(Game &);
+	virtual bool get_building_work(Game &, Worker &, bool success)
+		__attribute__ ((noreturn));
 
-	bool leave_check_and_wait(Game* g, Worker* w);
-	void leave_skip(Game* g, Worker* w);
+	bool leave_check_and_wait(Game &, Worker &);
+	void leave_skip(Game &, Worker &);
 	uint32_t get_conquers() const throw () {return descr().get_conquers();}
 	virtual uint32_t vision_range() const throw () {return descr().vision_range();}
 
@@ -210,7 +212,7 @@ public:
 		return descr().enhancements();
 	}
 
-	void log_general_info(Editor_Game_Base *);
+	virtual void log_general_info(Editor_Game_Base const &);
 
 	//  Use on training sites only.
 	virtual void change_train_priority(uint32_t, int32_t) {};
@@ -220,23 +222,23 @@ public:
 	void set_defeating_player(const Player_Number player_number) throw ()
 	{m_defeating_player = player_number;}
 
-	void    add_worker(Worker *);
-	void remove_worker(Worker *);
+	void    add_worker(Worker &);
+	void remove_worker(Worker &);
 
 protected:
-	void start_animation(Editor_Game_Base* g, uint32_t anim);
+	void start_animation(Editor_Game_Base &, uint32_t anim);
 
-	virtual void init(Editor_Game_Base* g);
-	virtual void cleanup(Editor_Game_Base* g);
-	virtual void act(Game* g, uint32_t data);
+	virtual void init(Editor_Game_Base &);
+	virtual void cleanup(Editor_Game_Base &);
+	virtual void act(Game &, uint32_t data);
 
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 	void draw_help
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
-	virtual UI::Window* create_options_window
-		(Interactive_Player * plr, UI::Window * * registry)
+	virtual void create_options_window
+		(Interactive_Player &, UI::Window * & registry)
 		= 0;
 
 	UI::Window * m_optionswindow;

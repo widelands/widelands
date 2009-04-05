@@ -67,8 +67,8 @@ void ProgressWindow::draw_background
 	uint32_t const background_original =
 		g_gr->get_picture(PicMod_Menu, m_background.c_str());
 	uint32_t const background_resized  =
-		g_gr->get_resized_picture
-		(background_original, xres, yres, Graphic::ResizeMode_Loose); //  FIXME memory leak!!!
+		g_gr->get_resized_picture //  FIXME memory leak!!!
+			(background_original, xres, yres, Graphic::ResizeMode_Loose);
 
 	if (background_resized > 0) {
 		uint32_t w = 0;

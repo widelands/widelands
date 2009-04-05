@@ -83,7 +83,7 @@ m_sb_maxfps
 m_sb_autosave
 	(this,
 	 m_xres * 6767 / 10000, m_yres * 8167 / 10000, m_xres / 4, m_vbutw,
-	 opt.autosave/60, 0, 100, _("min."), 1, true),
+	 opt.autosave / 60, 0, 100, _("min."), 1, true),
 
 // Title
 m_title
@@ -313,7 +313,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
  * The advanced option menu
  */
 Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
-(Options_Ctrl::Options_Struct opt)
+	(Options_Ctrl::Options_Struct const opt)
 :
 Fullscreen_Menu_Base("optionsmenu.jpg"),
 

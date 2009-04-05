@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 		 std::string const & directory, Profile &, Section & global_s,
 		 Tribe_Descr const & tribe, EncodeData const *);
 
-	virtual Building * create_object() const;
+	virtual Building & create_object() const;
 
 	uint32_t get_max_number_of_soldiers() const throw () {
 		return m_num_soldiers;
@@ -119,12 +119,12 @@ public:
 	char const * type_name() const throw () {return "trainingsite";}
 	virtual std::string get_statistics_string();
 
-	virtual void init(Editor_Game_Base * g);
-	virtual void cleanup(Editor_Game_Base * g);
-	virtual void act(Game * g, uint32_t data);
+	virtual void init(Editor_Game_Base &);
+	virtual void cleanup(Editor_Game_Base &);
+	virtual void act(Game &, uint32_t data);
 
-	virtual void add_worker(Worker* w);
-	virtual void remove_worker(Worker* w);
+	virtual void add_worker   (Worker &);
+	virtual void remove_worker(Worker &);
 
 	bool get_build_heros() {
 		return m_build_heros;
@@ -153,20 +153,21 @@ public:
 	void set_pri(enum tAttribute atr, int32_t prio);
 
 protected:
-	virtual UI::Window *create_options_window(Interactive_Player * plr, UI::Window ** registry);
+	virtual void create_options_window
+		(Interactive_Player &, UI::Window * & registry);
 	virtual void program_end(Game &, Program_Result);
 
 private:
 	void update_soldier_request();
 	static void request_soldier_callback
-		(Game *, Request *, Ware_Index, Worker *, void * data);
+		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
 	void find_and_start_next_program(Game &);
 	void start_upgrade(Game &, Upgrade &);
 	void add_upgrade(tAttribute, std::string const & prefix);
 	void calc_upgrades();
 
-	void drop_unupgradable_soldiers(Game * g);
+	void drop_unupgradable_soldiers(Game &);
 	Upgrade * get_upgrade(tAttribute);
 
 private:

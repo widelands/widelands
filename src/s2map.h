@@ -147,14 +147,14 @@ struct S2_Map_Loader : public Widelands::Map_Loader {
 	virtual int32_t preload_map(bool);
 	void load_world();
 	virtual int32_t load_map_complete
-		(Widelands::Editor_Game_Base *, bool scenario);
+		(Widelands::Editor_Game_Base &, bool scenario);
 
 private:
 	char  m_filename[256];
 
 	uint8_t * load_s2mf_section(FileRead &, int32_t width, int32_t height);
 	void load_s2mf_header();
-	void load_s2mf(Widelands::Editor_Game_Base *);
+	void load_s2mf(Widelands::Editor_Game_Base &);
 };
 
 

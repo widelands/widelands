@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -119,8 +119,8 @@ struct Bob : public Map_Object {
 	friend struct Map_Bob_Data_Packet;
 
 	struct State;
-	typedef void (Bob::*Ptr)(Game*, State*);
-	typedef void (Bob::*PtrSignal)(Game*, State*, const std::string&);
+	typedef void (Bob::*Ptr)(Game &, State &);
+	typedef void (Bob::*PtrSignal)(Game &, State &, std::string const &);
 	enum Type {CRITTER, WORKER};
 
 	/// \see class Bob for in-depth explanation
@@ -195,7 +195,7 @@ struct Bob : public Map_Object {
 			 Tribe_Descr const *, EncodeData const *);
 
 		virtual ~Descr() {};
-		Bob * create(Editor_Game_Base *, Player * owner, Coords) const;
+		Bob & create(Editor_Game_Base &, Player * owner, Coords) const;
 		bool is_world_bob() const {return not m_owner_tribe;}
 
 		char const * get_picture() const {return m_picture.c_str();}
@@ -210,7 +210,7 @@ struct Bob : public Map_Object {
 		uint32_t vision_range() const;
 
 	protected:
-		virtual Bob * create_object() const = 0;
+		virtual Bob & create_object() const = 0;
 
 		std::string         m_picture;
 		EncodeData          m_default_encodedata;
@@ -227,17 +227,17 @@ struct Bob : public Map_Object {
 	virtual Type get_bob_type() const throw () = 0;
 	const std::string & name() const throw () {return descr().name();}
 
-	virtual void init(Editor_Game_Base*);
-	virtual void cleanup(Editor_Game_Base*);
-	virtual void act(Game*, uint32_t data);
-	void schedule_destroy(Game* g);
-	void schedule_act(Game* g, uint32_t tdelta);
+	virtual void init(Editor_Game_Base &);
+	virtual void cleanup(Editor_Game_Base &);
+	virtual void act(Game &, uint32_t data);
+	void schedule_destroy(Game &);
+	void schedule_act(Game &, uint32_t tdelta);
 	void skip_act();
 	Point calc_drawpos(Editor_Game_Base const &, Point) const;
 	void set_owner(Player *player);
 	Player * get_owner() const {return m_owner;}
-	void set_position(Editor_Game_Base* g, Coords f);
-	const FCoords& get_position() const {return m_position;}
+	void set_position(Editor_Game_Base &, Coords);
+	FCoords const & get_position() const {return m_position;}
 	Bob * get_next_bob() const throw () {return m_linknext;}
 	bool is_world_bob() const throw () {return descr().is_world_bob();}
 
@@ -248,21 +248,21 @@ struct Bob : public Map_Object {
 	/// \param commit indicates whether this function is called from the
 	///    \ref start_walk function, i.e. whether the bob will actually move
 	///    onto the \p to node if this function allows it to.
-	virtual bool checkFieldBlocked(Game* g, const FCoords& field, bool commit);
+	virtual bool checkNodeBlocked(Game &, FCoords const &, bool commit);
 
 	virtual void draw
 		(Editor_Game_Base const &, RenderTarget &, Point) const;
 
 	// For debug
-	virtual void log_general_info(Editor_Game_Base* egbase);
+	virtual void log_general_info(Editor_Game_Base const &);
 
 	// default tasks
-	void reset_tasks(Game*);
-	void send_signal(Game*, std::string sig);
-	void start_task_idle(Game*, uint32_t anim, int32_t timeout);
+	void reset_tasks(Game &);
+	void send_signal(Game &, char const *);
+	void start_task_idle(Game &, uint32_t anim, int32_t timeout);
 
 	bool start_task_movepath
-		(Game                *,
+		(Game                &,
 		 const Coords          dest,
 		 const int32_t         persist,
 		 const DirAnimations &,
@@ -270,43 +270,40 @@ struct Bob : public Map_Object {
 		 const int32_t         only_step = -1);
 
 	void start_task_movepath
-		(Game*,
+		(Game                &,
 		 const Path          &,
 		 const DirAnimations &,
 		 const bool            forceonlast  = false,
 		 const int32_t         only_step = -1);
 
 	bool start_task_movepath
-		(Game*,
-		 const Map           &,
+		(Game                &,
 		 const Path          &,
 		 const int32_t         index,
 		 const DirAnimations &,
 		 const bool            forceonlast = false,
 		 const int32_t         only_step = -1);
 
-	void start_task_move(Game* g, int32_t dir, DirAnimations const *, bool);
+	void start_task_move(Game & game, int32_t dir, DirAnimations const *, bool);
 
 	// higher level handling (task-based)
-	State* get_state()
-	{return m_stack.size() ? &m_stack[m_stack.size() - 1] : 0;}
+	State & top_state() {assert(m_stack.size()); return *m_stack.rbegin();}
+	State * get_state() {return m_stack.size() ? &*m_stack.rbegin() : 0;}
 
-	State & top_state()
-	{assert(m_stack.size()); return m_stack[m_stack.size() - 1];}
 
 	std::string get_signal() {return m_signal;}
 	State       * get_state(Task const &);
 	State const * get_state(Task const &) const;
-	void push_task(Game* g, const Task & task);
-	void pop_task(Game* g);
+	void push_task(Game & game, Task const & task);
+	void pop_task(Game &);
 
 	void signal_handled();
 
 	/// Automatically select a task.
-	virtual void init_auto_task(Game*) {};
+	virtual void init_auto_task(Game &) {};
 
 	// low level animation and walking handling
-	void set_animation(Editor_Game_Base* g, uint32_t anim);
+	void set_animation(Editor_Game_Base &, uint32_t anim);
 
 	/// \return true if we're currently walking
 	bool is_walking() {return m_walking != IDLE;}
@@ -318,13 +315,13 @@ protected:
 
 
 private:
-	void do_act(Game* g);
-	void do_pop_task(Game* g);
-	void idle_update(Game* g, State* state);
-	void movepath_update(Game* g, State* state);
-	void move_update(Game* g, State* state);
+	void do_act(Game &);
+	void do_pop_task(Game &);
+	void idle_update(Game &, State &);
+	void movepath_update(Game &, State &);
+	void move_update(Game &, State &);
 
-	int32_t start_walk(Game* g, WalkingDir dir, uint32_t anim, bool force = false);
+	int32_t start_walk(Game & game, WalkingDir dir, uint32_t anim, bool force = false);
 
 	/**
 	 * Call this from your task_act() function that was scheduled after

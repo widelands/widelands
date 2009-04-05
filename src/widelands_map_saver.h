@@ -50,7 +50,7 @@ struct Map_Saver {
 	Map_Map_Object_Saver * get_map_object_saver() {return m_mos;}
 
 private:
-	Editor_Game_Base               * m_egbase;
+	Editor_Game_Base     & m_egbase;
 	FileSystem & m_fs;
 	Map_Map_Object_Saver * m_mos;
 };

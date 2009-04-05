@@ -61,9 +61,9 @@ Critter_BobProgram::parse
 Parse a program
 ===============
 */
-void Critter_BobProgram::parse(Parser* parser, std::string name)
+void Critter_BobProgram::parse(Parser * parser, char const * const name)
 {
-	Section & program_s = parser->prof->get_safe_section(name.c_str());
+	Section & program_s = parser->prof->get_safe_section(name);
 
 	for (uint32_t idx = 0;; ++idx) {
 		try
@@ -129,11 +129,11 @@ void Critter_BobProgram::parse_remove
 	act->function = &Critter_Bob::run_remove;
 }
 
-bool Critter_Bob::run_remove(Game * g, State * state, const Critter_BobAction *)
+bool Critter_Bob::run_remove(Game & game, State & state, Critter_BobAction const &)
 {
-	++state->ivar1;
+	++state.ivar1;
 	// Bye, bye cruel world
-	schedule_destroy(g);
+	schedule_destroy(game);
 	return true;
 }
 
@@ -263,8 +263,10 @@ Critter_Bob::start_task_program
 Start the given program.
 ===============
 */
-void Critter_Bob::start_task_program(Game* g, const std::string & programname) {
-	push_task(g, taskProgram);
+void Critter_Bob::start_task_program
+	(Game & game, std::string const & programname)
+{
+	push_task(game, taskProgram);
 	State & state = top_state();
 	state.program = descr().get_program(programname);
 	state.ivar1   = 0;
@@ -276,25 +278,23 @@ void Critter_Bob::start_task_program(Game* g, const std::string & programname) {
 Critter_Bob::program_update
 ===============
 */
-void Critter_Bob::program_update(Game* g, State* state)
+void Critter_Bob::program_update(Game & game, State & state)
 {
 	if (get_signal().size()) {
 		molog("[program]: Interrupted by signal '%s'\n", get_signal().c_str());
-		return pop_task(g);
+		return pop_task(game);
 	}
-
-	const Critter_BobAction* action;
 
 	for (;;) {
 		Critter_BobProgram const & program =
-			dynamic_cast<Critter_BobProgram const &>(*state->program);
+			dynamic_cast<Critter_BobProgram const &>(*state.program);
 
-		if (state->ivar1 >= program.get_size())
-			return pop_task(g);
+		if (state.ivar1 >= program.get_size())
+			return pop_task(game);
 
-		action = program.get_action(state->ivar1);
+		Critter_BobAction const & action = program[state.ivar1];
 
-		if ((this->*(action->function))(g, state, action))
+		if ((this->*(action.function))(game, state, action))
 			return;
 	}
 }
@@ -317,38 +317,40 @@ Bob::Task Critter_Bob::taskRoam = {
 	0
 };
 
-void Critter_Bob::roam_update(Game* g, State* state)
+void Critter_Bob::roam_update(Game & game, State & state)
 {
 	if (get_signal().size())
-		return pop_task(g);
+		return pop_task(game);
 
 	// alternately move and idle
 	Time idle_time_min = 1000;
 	Time idle_time_rnd = CRITTER_MAX_WAIT_TIME_BETWEEN_WALK;
-	if (state->ivar1) {
-		state->ivar1 = 0;
+	if (state.ivar1) {
+		state.ivar1 = 0;
 		if
 			(start_task_movepath
-			 	(g,
-			 	 g->random_location(get_position(), 2), //  Pick a random target.
+			 	(game,
+			 	 game.random_location(get_position(), 2), //  Pick a random target.
 			 	 3,
 			 	 descr().get_walk_anims()))
 			return;
 		idle_time_min = 1, idle_time_rnd = 1000;
 	}
-	state->ivar1 = 1;
+	state.ivar1 = 1;
 	return
 		start_task_idle
-			(g,
+			(game,
 			 descr().get_animation("idle"),
-			 idle_time_min + g->logic_rand() % idle_time_rnd);
+			 idle_time_min + game.logic_rand() % idle_time_rnd);
 }
 
-void Critter_Bob::init_auto_task(Game *g) {
-	push_task(g, taskRoam);
+void Critter_Bob::init_auto_task(Game & game) {
+	push_task(game, taskRoam);
 	top_state().ivar1 = 0;
 }
 
-Bob * Critter_Bob_Descr::create_object() const {return new Critter_Bob(*this);}
+Bob & Critter_Bob_Descr::create_object() const {
+	return *new Critter_Bob(*this);
+}
 
 };

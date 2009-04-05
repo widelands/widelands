@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,8 +67,8 @@ bool ProductionProgram::ActReturn::Economy_Needs::evaluate
 		("ActReturn::Economy_Needs::evaluate(%s): (called from %s:%u) "
 		 "economy_needs(%s) = %u\n",
 		 ps.descname().c_str(),
-		 const_cast<ProductionSite &>(ps).get_current_program()->program->get_name().c_str(),
-		 const_cast<ProductionSite &>(ps).get_current_program()->ip,
+		 const_cast<ProductionSite &>(ps).top_state().program->get_name().c_str(),
+		 const_cast<ProductionSite &>(ps).top_state().ip,
 		 ps.descr().tribe().get_ware_descr(ware_type)->descname().c_str(),
 		 ps.get_economy()->needs_ware(ware_type));
 #endif
@@ -119,7 +119,7 @@ ProductionProgram::ActReturn::Condition * create_workers_condition
 
 
 ProductionProgram::ActReturn::Condition *
-	ProductionProgram::ActReturn::create_condition
+ProductionProgram::ActReturn::create_condition
 	(char * & parameters, Tribe_Descr const & tribe)
 {
 	try {
@@ -268,7 +268,7 @@ ProductionProgram::ActCall::ActCall
 void ProductionProgram::ActCall::execute
 	(Game & game, ProductionSite & ps) const
 {
-	switch (ps.get_current_program()->phase) {
+	switch (ps.top_state().phase) {
 	case None: // The program has not yet been called.
 		//ps.molog("%s  Call %s\n", ps.descname().c_str(), m_program->get_name().c_str());
 		return ps.program_start(game, m_program->name());
@@ -280,9 +280,9 @@ void ProductionProgram::ActCall::execute
 		case Ignore:
 			return ps.program_step(game);
 		case Repeat:
-			ps.get_current_program()->phase = None;
+			ps.top_state().phase = None;
 			ps.m_program_timer = true;
-			ps.m_program_time  = ps.schedule_act(&game, 10);
+			ps.m_program_time  = ps.schedule_act(game, 10);
 			return;
 		case Fail:
 			return ps.program_end(game, Failed);
@@ -337,7 +337,7 @@ void ProductionProgram::ActWorker::execute
 	//ps.molog("  Worker(%s)\n", m_program.c_str());
 
 	// Always main worker is doing stuff
-	ps.m_working_positions[0].worker->update_task_buildingwork(&game);
+	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 }
 
 
@@ -363,8 +363,7 @@ void ProductionProgram::ActSleep::execute
 	(Game & game, ProductionSite & ps) const
 {
 	return
-		ps.program_step
-			(game, m_duration ? m_duration : ps.get_current_program()->phase);
+		ps.program_step(game, m_duration ? m_duration : ps.top_state().phase);
 }
 
 
@@ -403,10 +402,9 @@ ProductionProgram::ActAnimate::ActAnimate
 void ProductionProgram::ActAnimate::execute
 	(Game & game, ProductionSite & ps) const
 {
-	ps.start_animation(&game, m_id);
+	ps.start_animation(game, m_id);
 	return
-		ps.program_step
-			(game, m_duration ? m_duration : ps.get_current_program()->phase);
+		ps.program_step(game, m_duration ? m_duration : ps.top_state().phase);
 }
 
 
@@ -622,7 +620,7 @@ void ProductionProgram::ActProduce::execute
 	//ps.molog("  Produce\n");
 	assert(ps.m_produced_items.empty());
 	ps.m_produced_items = m_items;
-	ps.m_working_positions[0].worker->update_task_buildingwork(&game);
+	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 }
 
 

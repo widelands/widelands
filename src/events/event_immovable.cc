@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,12 +55,12 @@ void Event_Immovable::Write(Section & s, Editor_Game_Base &) const {
 void Event_Immovable::set_position(Coords const c) {m_location = c;}
 
 
-Event::State Event_Immovable::run(Game * game) {
-	Map const & map = game->map();
+Event::State Event_Immovable::run(Game & game) {
+	Map const & map = game.map();
 	if (BaseImmovable * const immovable = map[m_location].get_immovable())
 		immovable->remove(game);
-	m_immovable_type->create(*game, m_location);
-	game->inform_players_about_immovable
+	m_immovable_type->create(game, m_location);
+	game.inform_players_about_immovable
 		(Map::get_index(m_location, map.get_width()), m_immovable_type);
 	return m_state = DONE;
 }

@@ -371,7 +371,7 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
 	assert(m_the_game);
 	assert(position);
 
-	Interactive_Base const & ibase = *m_the_game->get_iabase();
+	Interactive_Base const & ibase = *m_the_game->get_ibase();
 	Point const vp = ibase.get_viewpoint();
 
 	int32_t const xres = ibase.get_xres();

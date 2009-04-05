@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,12 +36,12 @@ class Map_Object;
 struct Map_Map_Object_Saver {
 	Map_Map_Object_Saver();
 
-	bool is_object_known(const Map_Object * const) const;
-	Serial register_object(const Map_Object * const);
+	bool is_object_known(Map_Object const &) const;
+	Serial register_object(Map_Object const &);
 
-	uint32_t get_object_file_index(const Map_Object * const);
+	uint32_t get_object_file_index(Map_Object const &);
 
-	void mark_object_as_saved(const Map_Object * const);
+	void mark_object_as_saved(Map_Object const &);
 
 	// Information functions
 	uint32_t get_nr_unsaved_objects() const throw ();
@@ -53,7 +53,7 @@ struct Map_Map_Object_Saver {
 	uint32_t get_nr_immovables     () const throw () {return m_nr_immovables;}
 	uint32_t get_nr_battles        () const throw () {return m_nr_battles;}
 
-	bool is_object_saved(const Map_Object * const obj) throw ();
+	bool is_object_saved(Map_Object const &) throw ();
 
 private:
 	struct MapObjectRec {
@@ -63,7 +63,7 @@ private:
 	};
 	typedef std::map<const Map_Object *, MapObjectRec> Map_Object_Map;
 
-	MapObjectRec* get_object_record(const Map_Object *);
+	MapObjectRec & get_object_record(Map_Object const &);
 
 	Map_Object_Map m_objects;
 	uint32_t m_nr_roads;

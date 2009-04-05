@@ -71,13 +71,14 @@ struct FakeAttackController : public BaseImmovable {
 		}
 
 		virtual void load_finish() {
-			get_object()->remove(&egbase());
+			get_object()->remove(egbase());
 		}
 	};
 };
 
 
-Map_Object::Loader* loadAttackController(Editor_Game_Base *egbase, Map_Map_Object_Loader *mol, FileRead & fr)
+Map_Object::Loader * loadAttackController
+	(Editor_Game_Base & egbase, Map_Map_Object_Loader * const mol, FileRead & fr)
 {
 	std::auto_ptr<FakeAttackController::Loader> loader
 		(new FakeAttackController::Loader);
@@ -118,13 +119,12 @@ struct FakeBattle : public BaseImmovable {
 			fr.Unsigned32();
 		}
 
-		virtual void load_finish() {
-			get_object()->remove(&egbase());
-		}
+		virtual void load_finish() {get_object()->remove(egbase());}
 	};
 };
 
-Map_Object::Loader* loadBattle(Editor_Game_Base * egbase, Map_Map_Object_Loader * mol, FileRead & fr)
+Map_Object::Loader * loadBattle
+	(Editor_Game_Base & egbase, Map_Map_Object_Loader * mol, FileRead & fr)
 {
 	std::auto_ptr<FakeBattle::Loader> loader(new FakeBattle::Loader);
 

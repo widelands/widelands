@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,9 +40,9 @@ struct Battle : public Map_Object {
 	virtual int32_t get_type() const throw () {return BATTLE;}
 	char const * type_name() const throw () {return "battle";}
 
-	void init(Editor_Game_Base*);
-	void cleanup(Editor_Game_Base*);
-	void cancel(Game*, Soldier*);
+	void init(Editor_Game_Base &);
+	void cleanup(Editor_Game_Base &);
+	void cancel(Game &, Soldier &);
 
 	Soldier * first() {return m_first;}
 	Soldier * second() {return m_second;}
@@ -50,7 +50,7 @@ struct Battle : public Map_Object {
 	/**
 	 * \return \c true if the battle should not be interrupted.
 	 */
-	bool locked(Game* g);
+	bool locked(Game &);
 
 	/**
 	 * \param soldier must be one of the soldier involved in this battle
@@ -100,9 +100,9 @@ public:
 	// Remove as soon as we fully support the new system
 	virtual bool has_new_save_support() {return true;}
 
-	virtual void save(Editor_Game_Base *, Map_Map_Object_Saver *, FileWrite &);
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver *, FileWrite &);
 	static Map_Object::Loader * load
-		(Editor_Game_Base *, Map_Map_Object_Loader*, FileRead &);
+		(Editor_Game_Base &, Map_Map_Object_Loader *, FileRead &);
 };
 
 };

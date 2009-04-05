@@ -47,7 +47,7 @@ struct NetClient :
 
 	// GameController interface
 	void think();
-	void sendPlayerCommand(Widelands::PlayerCommand* pc);
+	void sendPlayerCommand(Widelands::PlayerCommand &);
 	int32_t getFrametime();
 	std::string getGameDescription();
 

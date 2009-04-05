@@ -39,7 +39,7 @@ struct Event_Conquer_Area : public Event_Player_Area {
 
 	void Write(Section &, Editor_Game_Base &) const;
 
-	State run(Game *);
+	State run(Game &);
 };
 
 };

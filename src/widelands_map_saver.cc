@@ -63,7 +63,7 @@
 namespace Widelands {
 
 Map_Saver::Map_Saver(FileSystem & fs, Editor_Game_Base & egbase)
-	: m_egbase(&egbase), m_fs(fs), m_mos(0)
+	: m_egbase(egbase), m_fs(fs), m_mos(0)
 {}
 
 
@@ -116,7 +116,7 @@ void Map_Saver::save() throw (_wexception) {
 	{Map_Extradata_Data_Packet               p; p.Write(m_fs, m_egbase, m_mos);}
 	log("done!\n ");
 
-	const Map & map = *m_egbase->get_map();
+	Map const & map = m_egbase.map();
 
 	if (map.mtm().size()) {
 		log("Writing Trigger Data ... ");
@@ -138,7 +138,7 @@ void Map_Saver::save() throw (_wexception) {
 
 	//  allowed buildings
 	const Player_Number nr_players = map.get_nrplayers();
-	iterate_players_existing_const(plnum, nr_players, *m_egbase, player) {
+	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
 		Building_Index const nr_buildings = player->tribe().get_nrbuildings();
 		for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i)
 			if (not player->is_building_allowed(i)) {

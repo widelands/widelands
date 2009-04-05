@@ -101,7 +101,7 @@ void Player::create_default_infrastructure() {
 			Event & event = **i.current;
 			event.set_player(get_player_number());
 			event.set_position(starting_pos);
-			event.run(&game);
+			event.run(game);
 		}
 	} else
 		throw warning
@@ -175,7 +175,7 @@ void Player::build_flag(Coords const c) {
 	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
 	if (buildcaps & BUILDCAPS_FLAG)
-		Flag::create(&egbase(), this, c);
+		new Flag(egbase(), *this, c);
 }
 
 
@@ -187,18 +187,17 @@ Flag & Player::force_flag(FCoords const c) {
 			if (&existing_flag->owner() == this)
 				return *existing_flag;
 		} else if (not dynamic_cast<Road const *>(immovable)) //  A road is OK.
-			immovable->remove(&egbase()); //  Make room for the flag.
+			immovable->remove(egbase()); //  Make room for the flag.
 	}
 	MapRegion<Area<FCoords> > mr(map, Area<FCoords>(c, 1));
 	do if (upcast(Flag, flag, mr.location().field->get_immovable()))
-		flag->remove(&egbase()); //  Remove all flags that are too close.
+		flag->remove(egbase()); //  Remove all flags that are too close.
 	while (mr.advance(map));
 
 	//  Make sure that the player owns the area around.
 	egbase().conquer_area_no_building
 		(Player_Area<Area<FCoords> >(get_player_number(), Area<FCoords>(c, 1)));
-
-	return *Flag::create(&egbase(), this, c);
+	return *new Flag(egbase(), *this, c);
 }
 
 /*
@@ -262,7 +261,7 @@ void Player::force_road(Path const & path, bool const create_carrier) {
 		if (BaseImmovable * const immovable = c.field->get_immovable()) {
 			assert(immovable != &start);
 			assert(immovable != &end);
-			immovable->remove(&egbase());
+			immovable->remove(egbase());
 		}
 	}
 	Road::create(egbase(), start, end, path, create_carrier);
@@ -282,7 +281,7 @@ void Player::force_building
 	map.get_brn(c[0], &c[1]);
 	force_flag(c[1]);
 	if (BaseImmovable * const immovable = c[0].field->get_immovable())
-		immovable->remove(&egbase());
+		immovable->remove(egbase());
 	Building_Descr const & descr = *tribe().get_building_descr(idx);
 	{
 		size_t nr_locations = 1;
@@ -300,7 +299,7 @@ void Player::force_building
 				 	(get_player_number(), Area<FCoords>(c[i], 1)));
 
 			if (BaseImmovable * const immovable = c[i].field->get_immovable())
-				immovable->remove(&egbase());
+				immovable->remove(egbase());
 		}
 	}
 	descr.create
@@ -319,14 +318,13 @@ Place a construction site, checking that it's legal to do so.
 void Player::build(Coords c, Building_Index idx)
 {
 	int32_t buildcaps;
-	Building_Descr* descr;
 
 	// Validate building type
 	if (not (idx and idx < tribe().get_nrbuildings()))
 		return;
-	descr = tribe().get_building_descr(idx);
+	Building_Descr & descr = *tribe().get_building_descr(idx);
 
-	if (!descr->buildable())
+	if (!descr.buildable())
 		return;
 
 
@@ -335,16 +333,14 @@ void Player::build(Coords c, Building_Index idx)
 	map.normalize_coords(c);
 	buildcaps = get_buildcaps(map.get_fcoords(c));
 
-	if (descr->get_ismine())
-		{
+	if (descr.get_ismine()) {
 		if (!(buildcaps & BUILDCAPS_MINE))
 			return;
-		}
-	else
-		{
-		if ((buildcaps & BUILDCAPS_SIZEMASK) < (descr->get_size() - BaseImmovable::SMALL + 1))
-			return;
-		}
+	} else if
+		((buildcaps & BUILDCAPS_SIZEMASK)
+		 <
+		 descr.get_size() - BaseImmovable::SMALL + 1)
+		return;
 
 	egbase().warp_constructionsite(c, m_plnum, idx);
 }
@@ -368,8 +364,8 @@ void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
 		if (!(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
 			return;
 		if (recurse) {
-			Flag & flag = *building->get_base_flag();
-			building->destroy(&egbase());
+			Flag & flag = building->base_flag();
+			building->destroy(egbase());
 			//  Now imm and building are dangling reference/pointer! Do not use!
 			if (flag.is_dead_end())
 				dynamic_cast<Game &>(egbase()).send_player_bulldoze(flag, true);
@@ -390,11 +386,11 @@ void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
 		if (recurse)
 			for (uint8_t primary_road_id = 6; primary_road_id; --primary_road_id)
 				if (Road * const primary_road = flag->get_road(primary_road_id)) {
-					Flag & primary_start = *primary_road->get_flag(Road::FlagStart);
+					Flag & primary_start = primary_road->get_flag(Road::FlagStart);
 					Flag & primary_other =
 						flag == &primary_start ?
-						*primary_road->get_flag(Road::FlagEnd) : primary_start;
-					primary_road->destroy(&egbase());
+						primary_road->get_flag(Road::FlagEnd) : primary_start;
+					primary_road->destroy(egbase());
 					log
 						("destroying road from (%i, %i) going in dir %u\n",
 						 flag->get_position().x, flag->get_position().y,
@@ -407,10 +403,10 @@ void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
 				}
 	} else if (upcast(Road, road, &imm)) {
 		if (recurse) {
-			Flag & start = *road->get_flag(Road::FlagStart);
-			Flag & end   = *road->get_flag(Road::FlagEnd);
+			Flag & start = road->get_flag(Road::FlagStart);
+			Flag & end   = road->get_flag(Road::FlagEnd);
 			while (Road * const r = start.get_road(&end)) //  destroy every road
-				r->destroy(&egbase()); //  between start and end, not just selected
+				r->destroy(egbase()); //  between start and end, not just selected
 			//  Now imm and road are dangling reference/pointer! Do not use!
 			if (start.is_dead_end())
 				dynamic_cast<Game &>(egbase()).send_player_bulldoze(start, true);
@@ -423,15 +419,14 @@ void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
 			("Player::bulldoze(%u): bad immovable type", imm.serial());
 
 	// Now destroy it
-	imm.destroy(&egbase());
+	imm.destroy(egbase());
 }
 
 
-void Player::start_stop_building(PlayerImmovable* imm) {
-	if (imm->get_owner() != this)
-		return;
-	if (upcast(ProductionSite, productionsite, imm))
-		productionsite->set_stopped(!productionsite->is_stopped());
+void Player::start_stop_building(PlayerImmovable & imm) {
+	if (&imm.owner() == this)
+		if (upcast(ProductionSite, productionsite, &imm))
+			productionsite->set_stopped(!productionsite->is_stopped());
 }
 
 
@@ -456,11 +451,12 @@ void Player::enhance_building
 		//  the building.
 		const std::vector<Worker  *> workers  = building->get_workers();
 
-		building->remove(&egbase()); //  no fire or stuff
+		building->remove(egbase()); //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
 		//  pointer.
-		building = egbase().warp_constructionsite
-			(position, m_plnum, index_of_new_building, index_of_old_building);
+		building =
+			&egbase().warp_constructionsite
+				(position, m_plnum, index_of_new_building, index_of_old_building);
 		//  Hereafter building points to the new building.
 
 		// Reassign the workers and soldiers.
@@ -643,7 +639,7 @@ void Player::enemyflagaction
 					assert(attackers.size() <= count);
 					container_iterate_const(std::vector<Soldier *>, attackers, i)
 						dynamic_cast<MilitarySite &>
-							(*(*i.current)->get_location(&egbase()))
+							(*(*i.current)->get_location(egbase()))
 						.sendAttacker(**i.current, *building);
 				}
 }

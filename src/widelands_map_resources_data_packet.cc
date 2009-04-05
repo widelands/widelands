@@ -34,7 +34,7 @@ namespace Widelands {
 
 void Map_Resources_Data_Packet::Read
 	(FileSystem            & fs,
-	 Editor_Game_Base      * egbase,
+	 Editor_Game_Base      & egbase,
 	 bool,
 	 Map_Map_Object_Loader * const)
 throw (_wexception)
@@ -43,7 +43,7 @@ throw (_wexception)
 
 	fr.Open(fs, "binary/resource");
 
-	Map   & map   = egbase->map();
+	Map   & map   = egbase.map();
 	World & world = map.world();
 
 	const uint16_t packet_version = fr.Unsigned16();
@@ -106,7 +106,7 @@ throw (_wexception)
  * in nearly all cases.
  */
 void Map_Resources_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -117,7 +117,7 @@ throw (_wexception)
 	// of the resources at run time doesn't matter.
 	// (saved like terrains)
 	// Write the number of resources
-	Map   const & map   = egbase->map ();
+	Map   const & map   = egbase.map  ();
 	World const & world = map   .world();
 	uint8_t const nr_res = world.get_nr_resources();
 	fw.Unsigned16(nr_res);

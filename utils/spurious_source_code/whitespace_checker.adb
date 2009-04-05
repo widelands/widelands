@@ -70,16 +70,70 @@ procedure Whitespace_Checker is
 
    Giving_Up           : exception;
    The_File            : Character_IO.File_Type;
-   Previous_Character  : Character;
-   Current_Character   : Character := LF; --  So empty file has newline at end.
    Current_Line_Number : Line_Number := 1;
 
+   --  Small window of the file. The moste recently read character is always
+   --  in Read_Characters (0), the previously read in Read_Characters (1) and
+   --  so on. Initialize with LF so that an empty file has newline at end.
+   Read_Characters     : array (0 .. 10) of Character := (others => LF);
 
+   type Token is (',', ';', '{', '}', Identifier, Other);
+   Previous_Token : Token := ';';
+   procedure Set_Previous_Token; pragma Inline (Set_Previous_Token);
+   procedure Set_Previous_Token is
+   begin
+      case Read_Characters (1) is
+         when ' '                      =>
+            null;
+         when ','                      =>
+            Previous_Token := ',';
+         when ';'                      =>
+            Previous_Token := ';';
+         when '{'                      =>
+            Previous_Token := '{';
+         when '}'                      =>
+            Previous_Token := '}';
+         when 'A' .. 'Z' | 'a' .. 'z'  =>
+            if
+              (Read_Characters (1) = 'r' and then
+               Read_Characters (2) = 'o' and then
+               (Read_Characters (3) = ' ' or else
+                Read_Characters (3) = HT))
+              or else
+              (Read_Characters (1) = 'r' and then
+               Read_Characters (2) = 'o' and then
+               Read_Characters (3) = 'x' and then
+               (Read_Characters (4) = ' ' or else
+                Read_Characters (4) = HT))
+              or else
+              (Read_Characters (1) = 'd' and then
+               Read_Characters (2) = 'n' and then
+               Read_Characters (3) = 'a' and then
+               (Read_Characters (4) = ' ' or else
+                Read_Characters (4) = HT))
+              or else
+              (Read_Characters (1) = 't' and then
+               Read_Characters (2) = 'o' and then
+               Read_Characters (3) = 'n' and then
+               (Read_Characters (4) = ' ' or else
+                Read_Characters (4) = HT or else
+                Read_Characters (4) = '('))
+            then
+               Previous_Token := Other;
+            else
+               Previous_Token := Identifier;
+            end if;
+         when others                   =>
+            Previous_Token := Other;
+      end case;
+   end Set_Previous_Token;
 
    procedure Next_Character; pragma Inline (Next_Character);
    procedure Next_Character is begin
-      Previous_Character := Current_Character;
-      Read (The_File, Current_Character);
+      for I in reverse 0 .. Read_Characters'Last - 1 loop
+         Read_Characters (I + 1) := Read_Characters (I);
+      end loop;
+      Read (The_File, Read_Characters (0));
    end Next_Character;
 
    procedure Next_Line; pragma Inline (Next_Line);
@@ -88,6 +142,9 @@ procedure Whitespace_Checker is
          Raise_Exception (Giving_Up'Identity, "too many lines");
       end if;
       Current_Line_Number := Current_Line_Number + 1;
+--        Put_Line
+--          ("DEBUG: moving to line" & Current_Line_Number'Img & " with Previous_Token = " &
+--           Previous_Token'Img);
    end Next_Line;
 
    procedure Put_Error
@@ -109,10 +166,10 @@ procedure Whitespace_Checker is
       --  When this is called, "/*" has just been read. Therefore current
       --  character is '*'. We change that to ' ' so that it does not think
       --  that the comment is over if it reads a '/' immediately.
-      Current_Character := ' ';
+      Read_Characters (0) := ' ';
       loop
          Next_Character;
-         case Current_Character is
+         case Read_Characters (0) is
             when LF     =>
                Next_Line;
                HT_Is_Allowed := True;
@@ -123,7 +180,7 @@ procedure Whitespace_Checker is
             when ' '    =>
                null;
             when '/'    =>
-               exit when Previous_Character = '*';
+               exit when Read_Characters (1) = '*';
             when others =>
                HT_Is_Allowed := False;
          end case;
@@ -134,9 +191,9 @@ procedure Whitespace_Checker is
    procedure Read_Macro is begin
       loop
          Next_Character;
-         if Current_Character = LF then
+         if Read_Characters (0) = LF then
             Next_Line;
-            exit when Previous_Character /= '\';
+            exit when Read_Characters (1) /= '\';
          end if;
       end loop;
    end Read_Macro;
@@ -150,49 +207,166 @@ procedure Whitespace_Checker is
       Depth_Parentheses_Increase : Integer := 0;
    begin
       Read_Code_Loop : loop
-         case Previous_Character is
+         case Read_Characters (1) is
             when '(' | '[' =>
-               case Current_Character is
+               case Read_Characters (0) is
                   when HT | ' ' | '#' | '?' | '%' | ',' =>
                      Put_Error
-                       ('"' & Previous_Character & Current_Character &
+                       ('"' & Read_Characters (1) & Read_Characters (0) &
                         """ is not allowed");
                   when others                                 =>
                      null;
                end case;
             when '}'       =>
-               case Current_Character  is
+               case Read_Characters (0)  is
                   when LF | ' ' | ';' | ',' =>
                      null;
                   when others               =>
                      Put_Error
-                       ("""}" & Current_Character & """ is not allowed");
+                       ("""}" & Read_Characters (0) & """ is not allowed");
                end case;
             when ','       =>
-               case Current_Character is
+               case Read_Characters (0) is
                   when LF | ' ' =>
                      null;
                   when others   =>
                      Put_Error
-                       ("""," & Current_Character & """ is not allowed");
+                       ("""," & Read_Characters (0) & """ is not allowed");
+               end case;
+            when '='       =>
+               case Read_Characters (0) is
+                  when LF | ' ' | '=' =>
+                     null;
+                  when others         =>
+                     Put_Error
+                       ("""=" & Read_Characters (0) & """ is not allowed");
+               end case;
+            when '/'       =>
+               case Read_Characters (0) is
+                  when LF  | ' ' | '=' | '*' | '/' | ',' | ';' | ')' | '}' =>
+                     null;
+                  when others                                              =>
+                     Put_Error
+                       ("""/" & Read_Characters (0) & """ is not allowed");
+               end case;
+            when '-'       =>
+               --  Check that there is padding before '-'.
+               case Read_Characters (0) is
+                  when '-' | '>' =>
+                     null; --  Might be -- or ->, so do not require padding.
+                  when others    =>
+                     case Read_Characters (2) is
+                        when HT | ' ' | '-' | '{' | '(' | '[' =>
+                           null;
+                        when 'e' | 'E'                        =>
+                           --  It might be a float with syntax like 1.0e-5,
+                           if
+                             not (Read_Characters (3) in '0' .. '9') or
+                             not (Read_Characters (0) in '0' .. '9')
+                           then
+                              Put_Error
+                                ('"' & Read_Characters (2) & '-' &
+                                 Read_Characters (0) & """ is not allowed");
+                           end if;
+                        when 'r'                              =>
+                           --  Might be operator-, operator-= or operator--.
+                           if
+                             Read_Characters  (3) /= 'o'        or else
+                             Read_Characters  (4) /= 't'        or else
+                             Read_Characters  (5) /= 'a'        or else
+                             Read_Characters  (6) /= 'r'        or else
+                             Read_Characters  (7) /= 'e'        or else
+                             Read_Characters  (8) /= 'p'        or else
+                             Read_Characters  (9) /= 'o'        or else
+                             Read_Characters (10)  = '_'        or else
+                             Read_Characters (10) in 'A' .. 'Z' or else
+                             Read_Characters (10) in 'a' .. 'z' or else
+                             Read_Characters (10) in '0' .. '9'
+                           then
+                              Put_Error
+                                ("""r-" & Read_Characters (0) &
+                                 " is not allowed");
+                           end if;
+                        when others                           =>
+                           Put_Error
+                             ('"' & Read_Characters (2) & '-' &
+                              Read_Characters (0) & """ is not allowed");
+                     end case;
+               end case;
+            when '+'       =>
+               --  Check that there is padding before '+', unless it is ++.
+               if Read_Characters (0) /= '+' then
+                  case Read_Characters (2) is
+                     when HT | ' ' | '+' =>
+                        null;
+                     when 'r'                              =>
+                        --  Might be operator+, operator+= or operator++.
+                        if
+                          Read_Characters  (3) /= 'o'        or else
+                          Read_Characters  (4) /= 't'        or else
+                          Read_Characters  (5) /= 'a'        or else
+                          Read_Characters  (6) /= 'r'        or else
+                          Read_Characters  (7) /= 'e'        or else
+                          Read_Characters  (8) /= 'p'        or else
+                          Read_Characters  (9) /= 'o'        or else
+                          Read_Characters (10)  = '_'        or else
+                          Read_Characters (10) in 'A' .. 'Z' or else
+                          Read_Characters (10) in 'a' .. 'z' or else
+                          Read_Characters (10) in '0' .. '9'
+                        then
+                           Put_Error
+                             ("""r+" & Read_Characters (0) &
+                              " is not allowed");
+                        end if;
+                     when others         =>
+                        Put_Error
+                          ('"' & Read_Characters (2) & Read_Characters (1) &
+                           Read_Characters (0) & """ is not allowed");
+                  end case;
+               end if;
+
+               --  Check padding after '+' (ignore the useless unary +).
+               if Read_Characters (2) /= '+' then
+                  case Read_Characters (0) is
+                     when LF | ' ' | '=' | '+' =>
+                        null;
+                     when others               =>
+                        Put_Error
+                          ('"' & Read_Characters (2) & '+' &
+                           Read_Characters (0) & """ is not allowed");
+                  end case;
+               end if;
+            when '%' | '^' =>
+               --  Check padding after the operator.
+               case Read_Characters (0) is
+                  when LF | ' ' | '=' =>
+                     null;
+                  when others         =>
+                     Put_Error
+                       ('"' & Read_Characters (1) & Read_Characters (0) &
+                        """ is not allowed");
                end case;
             when others    =>
                null;
          end case;
-         case Current_Character is
+         case Read_Characters (0) is
+            when ' '       =>
+               Set_Previous_Token;
             when HT        =>
                Put_Error ("indentation is only allowed at line begin");
-            when LF        =>
-               if Previous_Character = ' ' then
+            when LF              =>
+               Set_Previous_Token;
+               if Read_Characters (1) = ' ' then
                   Put_Error ("trailing whitespace");
                end if;
                exit Read_Code_Loop;
             when '{'       =>
-               case Previous_Character is
+               case Read_Characters (1) is
                   when LF | HT | ' ' =>
                      null;
                   when others        =>
-                     Put_Error ("""" & Previous_Character & "{"" not allowed");
+                     Put_Error
+                       ("""" & Read_Characters (1) & "{"" not allowed");
                end case;
                if Next_Brace_Level = Brace_Index'Last then
                   Raise_Exception
@@ -202,11 +376,11 @@ procedure Whitespace_Checker is
                  := (Current_Line_Number, Next_Leading_Whitespace_Index);
                Next_Brace_Level := Next_Brace_Level + 1;
             when '}'       =>
-               case Previous_Character is
+               case Read_Characters (1) is
                   when ',' | '?' =>
                      Put_Error
-                       ("""" & Previous_Character & Current_Character &
-                        """ not allowed");
+                       ("""" & Read_Characters (1) & Read_Characters (0) &
+                        """ is not allowed");
                   when others                =>
                      null;
                end case;
@@ -238,17 +412,17 @@ procedure Whitespace_Checker is
                Depth_Parentheses_Increase := Depth_Parentheses_Increase + 1;
             when ')' | ']' =>
                Depth_Parentheses_Increase := Depth_Parentheses_Increase - 1;
-               case Previous_Character is
+               case Read_Characters (1) is
                   when ',' | ' ' | ':' | '?' =>
                      Put_Error
-                       ("""" & Previous_Character & Current_Character &
+                       ("""" & Read_Characters (1) & Read_Characters (0) &
                         """ not allowed");
                   when others                =>
                      null;
                end case;
             when '''       =>
                Next_Character;
-               case Current_Character is
+               case Read_Characters (0) is
                   when LF     =>
                      Put_Error ("unterminated character constant");
                      exit Read_Code_Loop;
@@ -257,20 +431,20 @@ procedure Whitespace_Checker is
                        (Giving_Up'Identity, "invalid character constant");
                   when '\'    =>
                      Next_Character;
-                     case Current_Character is
+                     case Read_Characters (0) is
                         when '0' | ''' | '\' | 'n' | 'r' | 't' | 'v' =>
                            null;
                         when others                                  =>
                            Put_Error
                              ("illegal escaped character constant: " &
-                              Current_Character'Img);
-                           exit Read_Code_Loop when Current_Character = LF;
+                              Read_Characters (0)'Img);
+                           exit Read_Code_Loop when Read_Characters (0) = LF;
                      end case;
                   when others =>
                      null;
                end case;
                Next_Character;
-               if Current_Character /= ''' then
+               if Read_Characters (0) /= ''' then
                   Raise_Exception
                     (Giving_Up'Identity,
                      "expected closing '\'' of character constant");
@@ -278,50 +452,190 @@ procedure Whitespace_Checker is
             when '"'       =>
                loop
                   Next_Character;
-                  case Current_Character is
+                  case Read_Characters (0) is
                      when LF     =>
                         Put_Error ("unterminated string constant");
                         exit Read_Code_Loop;
                      when '\'    =>
                         Next_Character;
-                        case Current_Character is
+                        case Read_Characters (0) is
                            when '0' | '"' | '\' | 'n' | 'r' | 't' | 'v' =>
                               null;
                            when others                                  =>
                               Put_Error
                                 ("illegal escaped character in string " &
-                                 "constant: " & Current_Character'Img);
-                              exit Read_Code_Loop when Current_Character = LF;
+                                 "constant: " & Read_Characters (0)'Img);
+                              exit Read_Code_Loop when
+                                Read_Characters (0) = LF;
                         end case;
                      when others =>
-                        exit when Current_Character = '"';
+                        exit when Read_Characters (0) = '"';
                   end case;
                end loop;
             when '*'       =>
-               if Previous_Character = '/' then --  /* comment */
-                  Read_Multiline_Comment;
-               end if;
-            when '/'       =>
-               if Previous_Character = '/' then --  // comment
-                  Previous_Line_Ended_With_Comment := True;
-                  loop
-                     Next_Character;
-                     if Current_Character = HT then
+               case Read_Characters (1) is
+                  when '/' => --  /* comment */
+                     Read_Multiline_Comment;
+                  when HT | ' ' | '{' | '(' | ':' | '>' | '*' | '&' | '!' =>
+                     null;
+                  when  '+' | '-'                                         =>
+                     if Read_Characters (2) /= Read_Characters (1) then
                         Put_Error
-                          ("indentation is only allowed at line begin");
+                          ('"' & Read_Characters (2) & Read_Characters (1) &
+                           "*"" is not allowed");
                      end if;
-                     exit Read_Code_Loop when Current_Character = LF;
-                  end loop;
-               end if;
+                  when 'r'    => --  allow "r*" for "operator*"
+                     if
+                        Read_Characters (2) /= 'o'        or else
+                        Read_Characters (3) /= 't'        or else
+                        Read_Characters (4) /= 'a'        or else
+                        Read_Characters (5) /= 'r'        or else
+                        Read_Characters (6) /= 'e'        or else
+                        Read_Characters (7) /= 'p'        or else
+                        Read_Characters (8) /= 'o'        or else
+                        Read_Characters (9)  = '_'        or else
+                        Read_Characters (9) in 'A' .. 'Z' or else
+                        Read_Characters (9) in 'a' .. 'z' or else
+                        Read_Characters (9) in '0' .. '9'
+                     then
+                        Put_Error ("""r*"" is not allowed");
+                     end if;
+                  when others =>
+                     Put_Error
+                       ('"' & Read_Characters (1) & "*"" is not allowed");
+               end case;
+            when '/'       =>
+               case Read_Characters (1) is
+                  when '/' => --  // comment
+                     Previous_Line_Ended_With_Comment := True;
+                     loop
+                        Next_Character;
+                        if Read_Characters (0) = HT then
+                           Put_Error
+                             ("indentation is only allowed at line begin");
+                        end if;
+                        exit Read_Code_Loop when Read_Characters (0) = LF;
+                     end loop;
+                  when LF | HT | ' ' =>
+                     null;
+                  when 'r'                              =>
+                     --  Might be operator/ or operator/=
+                     if
+                       Read_Characters (2) /= 'o'        or else
+                       Read_Characters (3) /= 't'        or else
+                       Read_Characters (4) /= 'a'        or else
+                       Read_Characters (5) /= 'r'        or else
+                       Read_Characters (6) /= 'e'        or else
+                       Read_Characters (7) /= 'p'        or else
+                       Read_Characters (8) /= 'o'        or else
+                       Read_Characters (9)  = '_'        or else
+                       Read_Characters (9) in 'A' .. 'Z' or else
+                       Read_Characters (9) in 'a' .. 'z' or else
+                       Read_Characters (9) in '0' .. '9'
+                     then
+                        Put_Error ("""r/"" is not allowed");
+                     end if;
+                  when others   =>
+                     Put_Error
+                       ('"' & Read_Characters (1) & "/"" is not allowed");
+               end case;
             when ';' | ',' =>
-               if
-                 Previous_Character = LF or
-                 Previous_Character = HT or
-                 Previous_Character = ' '
-               then
-                  Put_Error
-                    ("illegal whitespace before '" & Current_Character & ''');
-               end if;
+               case Read_Characters (1) is
+                  when LF | HT | ' ' =>
+                     Put_Error
+                       ("illegal whitespace before '" & Read_Characters (0) &
+                        ''');
+                  when others        =>
+                     null;
+               end case;
+            when '='       =>
+               case Read_Characters (1) is
+                  when
+                    HT  | ' ' | '=' | '+' | '-' | '*' | '/' | '%' | '<' | '>' |
+                    '!' | '&' | '|' | '^' | '~' =>
+                     null;
+                  when 'r'    => --  allow "r(" for "operator=("
+                     if
+                        Read_Characters (2) /= 'o'        or else
+                        Read_Characters (3) /= 't'        or else
+                        Read_Characters (4) /= 'a'        or else
+                        Read_Characters (5) /= 'r'        or else
+                        Read_Characters (6) /= 'e'        or else
+                        Read_Characters (7) /= 'p'        or else
+                        Read_Characters (8) /= 'o'        or else
+                        Read_Characters (9)  = '_'        or else
+                        Read_Characters (9) in 'A' .. 'Z' or else
+                        Read_Characters (9) in 'a' .. 'z' or else
+                        Read_Characters (9) in '0' .. '9'
+                     then
+                        Put_Error ("""r="" is not allowed");
+                     end if;
+                  when others =>
+                     Put_Error
+                       ('"' & Read_Characters (1) & "="" is not allowed");
+               end case;
+            when '%' | '^' =>
+               --  Check that there is padding before the operator.
+               case Read_Characters (1) is
+                  when HT | ' ' =>
+                     null;
+                  when 'r'                              =>
+                     --  Might be operatorX or operatorX=
+                     if
+                       Read_Characters (2) /= 'o'        or else
+                       Read_Characters (3) /= 't'        or else
+                       Read_Characters (4) /= 'a'        or else
+                       Read_Characters (5) /= 'r'        or else
+                       Read_Characters (6) /= 'e'        or else
+                       Read_Characters (7) /= 'p'        or else
+                       Read_Characters (8) /= 'o'        or else
+                       Read_Characters (9)  = '_'        or else
+                       Read_Characters (9) in 'A' .. 'Z' or else
+                       Read_Characters (9) in 'a' .. 'z' or else
+                       Read_Characters (9) in '0' .. '9'
+                     then
+                        Put_Error
+                          ("""r" & Read_Characters (0) & """ is not allowed");
+                     end if;
+                  when others         =>
+                     Put_Error
+                       ('"' & Read_Characters (1) & Read_Characters (0) &
+                        """ is not allowed");
+               end case;
+            when '&'       =>
+               case Read_Characters (1) is
+                  when HT | ' ' | '(' | '[' | '&' =>
+                     null;
+                  when others                     =>
+                     Put_Error
+                       ('"' & Read_Characters (1) & Read_Characters (0) &
+                        """ is not allowed");
+               end case;
+            when '!'       =>
+               case Read_Characters (1) is
+                  when
+                    HT  | ' ' | '(' | '!' => --  allow "(!" for "(!c)" (! used as ¬) and "!!"
+                     null;
+                  when 'r'                => --  allow "r!" for "operator!="
+                     if
+                        Read_Characters (2) /= 'o'        or else
+                        Read_Characters (3) /= 't'        or else
+                        Read_Characters (4) /= 'a'        or else
+                        Read_Characters (5) /= 'r'        or else
+                        Read_Characters (6) /= 'e'        or else
+                        Read_Characters (7) /= 'p'        or else
+                        Read_Characters (8) /= 'o'        or else
+                        Read_Characters (9)  = '_'        or else
+                        Read_Characters (9) in 'A' .. 'Z' or else
+                        Read_Characters (9) in 'a' .. 'z' or else
+                        Read_Characters (9) in '0' .. '9'
+                     then
+                        Put_Error ("""r!"" is not allowed");
+                     end if;
+                  when others       =>
+                     Put_Error
+                       ('"' & Read_Characters (1) & "!"" is not allowed");
+               end case;
             when others    =>
                null;
          end case;
@@ -342,7 +656,7 @@ begin
       begin
          Read_Leading_Whitespace : loop
             Next_Character;
-            case Current_Character is
+            case Read_Characters (0) is
                when HT     =>
                   pragma Assert
                     (Current_Leading_Whitespace_Index
@@ -372,6 +686,10 @@ begin
                         "previous line");
                   end if;
                when ' '    =>
+                  pragma Assert
+                    (Current_Leading_Whitespace_Index
+                     <=
+                     Next_Leading_Whitespace_Index);
                   Space_In_Leading_Whitespace := True;
                   if
                     Current_Leading_Whitespace_Index
@@ -381,7 +699,7 @@ begin
                      Put_Error
                        ("found ' ' as leading whitespace character #"   &
                         Leading_Whitespace_Index
-                        (Current_Leading_Whitespace_Index + 1)
+                           (Current_Leading_Whitespace_Index + 1)
                         'Img                                            &
                         " but only" & Next_Leading_Whitespace_Index'Img &
                         " leading whitespace characters are allowed");
@@ -406,27 +724,35 @@ begin
             Current_Leading_Whitespace_Index
               := Current_Leading_Whitespace_Index + 1;
          end loop Read_Leading_Whitespace;
-         if Current_Character = '(' or Current_Character = '[' then
+         if Read_Characters (0) = '(' or Read_Characters (0) = '[' then
             Indentation_Increase_Allowed := 2; --  hack for Nicolai's style
+            if
+              not Previous_Line_Ended_With_Comment and then
+              Previous_Token = Identifier          and then
+              Indentation_Increase < 1
+            then
+               Put_Error ("indentation is too shallow");
+            end if;
          end if;
          if Indentation_Increase_Allowed < Indentation_Increase then
             Put_Error ("indentation is too deep");
          end if;
-         if Current_Character /= LF and Current_Character /= '#' then
+         if Read_Characters (0) /= LF and Read_Characters (0) /= '#' then
             Next_Leading_Whitespace_Index := Current_Leading_Whitespace_Index;
          end if;
       end;
-      while Current_Character = '(' or Current_Character = '[' loop
+      while Read_Characters (0) = '(' or Read_Characters (0) = '[' loop
          Leading_Whitespace (Next_Leading_Whitespace_Index) := Space;
          Next_Leading_Whitespace_Index :=  Next_Leading_Whitespace_Index + 1;
          Next_Character;
       end loop;
-      case Current_Character is
+      case Read_Characters (0) is
          when LF        =>
-            if    Previous_Character = ' ' or Previous_Character = HT  then
+            if    Read_Characters (1) = ' ' or Read_Characters (1) = HT  then
                Put_Error ("trailing whitespace");
-            elsif Previous_Character = '(' or Previous_Character = '[' then
-               Put_Error ("empty '" & Previous_Character & "' at end of line");
+            elsif Read_Characters (1) = '(' or Read_Characters (1) = '[' then
+               Put_Error
+                 ("empty '" & Read_Characters (1) & "' at end of line");
             end if;
             Next_Line;
          when '#'       =>
@@ -461,7 +787,7 @@ begin
                Depth_Parentheses_Increase_After_Line_Begin : Integer
                  := Read_Code;
             begin
-               pragma Assert (Current_Character = LF);
+               pragma Assert (Read_Characters (0) = LF);
                if 0 < Depth_Parentheses_Increase_After_Line_Begin then
                   Put_Error
                     ("parenthesis not closed before end of line must be at " &
@@ -500,7 +826,7 @@ begin
                end if;
             end;
 
-            case Previous_Character is
+            case Read_Characters (1) is
                when ',' | ';' | '}' =>
                   if Previous_Line_Ended_With_Comment then
                      Previous_Line_Ended_With_Comment := False;

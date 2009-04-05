@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,13 +64,13 @@ struct Game;
  * the same for all parallel simulation.
  */
 struct Command {
-	Command (int32_t const duetime) : m_duetime(duetime) {}
+	Command (int32_t const _duetime) : m_duetime(_duetime) {}
 	virtual ~Command ();
 
-	virtual void execute (Game*) = 0;
+	virtual void execute (Game &) = 0;
 	virtual uint8_t id() const = 0;
 
-	int32_t get_duetime() const {return m_duetime;}
+	int32_t duetime() const {return m_duetime;}
 	void set_duetime(int32_t const t) {m_duetime = t;}
 
 private:
@@ -86,7 +86,7 @@ private:
  * for all instances of a game to ensure parallel simulation.
  */
 struct GameLogicCommand : public Command {
-	GameLogicCommand (int32_t duetime);
+	GameLogicCommand (int32_t const _duetime) : Command(_duetime) {}
 
 	// Write these commands to a file (for savegames)
 	virtual void Write
@@ -117,8 +117,8 @@ class Cmd_Queue {
 
 		bool operator< (cmditem const & c) const
 		{
-			if (cmd->get_duetime() != c.cmd->get_duetime())
-				return cmd->get_duetime() > c.cmd->get_duetime();
+			if (cmd->duetime() != c.cmd->duetime())
+				return cmd->duetime() > c.cmd->duetime();
 			else if (category != c.category)
 				return category > c.category;
 			else
@@ -138,7 +138,7 @@ public:
 	/// <b>delete</b> when the command has been executed.
 	void enqueue (Command *);
 
-	int32_t run_queue (int32_t interval, int32_t* game_time_var);
+	int32_t run_queue (int32_t interval, int32_t & game_time_var);
 
 	void flush(); // delete all commands in the queue now
 

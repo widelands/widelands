@@ -35,7 +35,7 @@ int32_t Editor_Place_Bob_Tool::handle_click_impl
 	 Widelands::Node_and_Triangle<> const center,
 	 Editor_Interactive           &       parent)
 {
-	Widelands::Editor_Game_Base & editor = parent.egbase();
+	Widelands::Editor_Game_Base & egbase = parent.egbase();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 		 Widelands::Area<Widelands::FCoords>
@@ -46,8 +46,8 @@ int32_t Editor_Place_Bob_Tool::handle_click_impl
 				*map.world().get_bob_descr(get_random_enabled());
 			if (mr.location().field->get_caps() & descr.movecaps()) {
 				if (Bob * const bob = mr.location().field->get_first_bob())
-					bob->remove(&editor); //  There is already a bob. Remove it.
-				descr.create(&editor, 0, mr.location());
+					bob->remove(egbase); //  There is already a bob. Remove it.
+				descr.create(egbase, 0, mr.location());
 			}
 		} while (mr.advance(map));
 		return mr.radius() + 2;

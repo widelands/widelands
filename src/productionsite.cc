@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -160,8 +160,9 @@ const ProductionProgram * ProductionSite_Descr::get_program
 /**
  * Create a new building of this type
  */
-Building* ProductionSite_Descr::create_object() const
-{return new ProductionSite(*this);}
+Building & ProductionSite_Descr::create_object() const {
+	return *new ProductionSite(*this);
+}
 
 
 /*
@@ -254,17 +255,17 @@ void ProductionSite::prefill
 					 ware_counts ? ware_counts[i.i] : 0);
 	}
 	if (worker_counts) {
-		Tribe_Descr const & tribe = owner().tribe();
 		Working_Position * wp = m_working_positions;
 		Ware_Types const & descr_working_positions = descr().working_positions();
 		container_iterate_const(Ware_Types, descr_working_positions, i) {
 			uint32_t nr_workers = *worker_counts;
 			assert(nr_workers <= i.current->second);
 			wp += i.current->second - nr_workers;
-			Worker_Descr const & wdes = *tribe.get_worker_descr(i.current->first);
+			Worker_Descr const & wdes =
+				*tribe().get_worker_descr(i.current->first);
 			while (nr_workers--) {
 				Worker & worker = wdes.create(game, owner(), 0, get_position());
-				worker.start_task_idle(&game, 0, -1);
+				worker.start_task_idle(game, 0, -1);
 				wp->worker = &worker;
 				++wp;
 			}
@@ -311,11 +312,11 @@ void ProductionSite::calc_statistics()
 /**
  * Initialize the production site.
  */
-void ProductionSite::init(Editor_Game_Base* g)
+void ProductionSite::init(Editor_Game_Base & egbase)
 {
-	Building::init(g);
+	Building::init(egbase);
 
-	Game & game = dynamic_cast<Game &>(*g);
+	Game & game = dynamic_cast<Game &>(egbase);
 
 	//  Request missing wares.
 	container_iterate_const(std::vector<WaresQueue *>, m_input_queues, i)
@@ -359,7 +360,7 @@ void ProductionSite::set_economy(Economy * const e)
 /**
  * Cleanup after a production site is removed
  */
-void ProductionSite::cleanup(Editor_Game_Base* g)
+void ProductionSite::cleanup(Editor_Game_Base & egbase)
 {
 	for (uint32_t i = descr().nr_working_positions(); i;) {
 		--i;
@@ -371,7 +372,7 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 		m_working_positions[i].worker = 0;
 
 		// Actually remove the worker
-		if (g->objects().object_still_available(w))
+		if (egbase.objects().object_still_available(w))
 			w->set_location(0);
 	}
 
@@ -383,26 +384,26 @@ void ProductionSite::cleanup(Editor_Game_Base* g)
 	m_input_queues.clear();
 
 
-	Building::cleanup(g);
+	Building::cleanup(egbase);
 }
 
 
 /**
  * Intercept remove_worker() calls to unassign our worker, if necessary.
  */
-void ProductionSite::remove_worker(Worker* w)
+void ProductionSite::remove_worker(Worker & w)
 {
-	molog("%s leaving\n", w->descname().c_str());
+	molog("%s leaving\n", w.descname().c_str());
 	Working_Position * current = m_working_positions;
 	for
 		(Working_Position * const end = current + descr().nr_working_positions();
 		 current < end;
 		 ++current)
-		if (current->worker == w) {
+		if (current->worker == &w) {
 			*current =
 				Working_Position
 					(&request_worker
-					 	(descr().tribe().worker_index(w->name().c_str())),
+					 	(descr().tribe().worker_index(w.name().c_str())),
 					 0);
 			break;
 		}
@@ -417,10 +418,9 @@ void ProductionSite::remove_worker(Worker* w)
 Request & ProductionSite::request_worker(Ware_Index const wareid) {
 	return
 		*new Request
-			(this,
+			(*this,
 			 wareid,
-			 &ProductionSite::request_worker_callback,
-			 this,
+			 ProductionSite::request_worker_callback,
 			 Request::WORKER);
 }
 
@@ -429,17 +429,21 @@ Request & ProductionSite::request_worker(Ware_Index const wareid) {
  * Called when our worker arrives.
  */
 void ProductionSite::request_worker_callback
-	(Game * g, Request * rq, Ware_Index, Worker * const w, void * const data)
+	(Game            &       game,
+	 Request         &       rq,
+	 Ware_Index,
+	 Worker          * const w,
+	 PlayerImmovable &       target)
 {
-	ProductionSite & psite = *static_cast<ProductionSite *>(data);
+	ProductionSite & psite = dynamic_cast<ProductionSite &>(target);
 
 	assert(w);
-	assert(w->get_location(g) == &psite);
+	assert(w->get_location(game) == &psite);
 
 	for (Working_Position * wp = psite.m_working_positions;; ++wp)
 		//  Assume that rq must be in worker_requests.
-		if (wp->worker_request == rq) {
-			delete rq;
+		if (wp->worker_request == &rq) {
+			delete &rq;
 			*wp = Working_Position(0, w);
 			break;
 		}
@@ -448,41 +452,38 @@ void ProductionSite::request_worker_callback
 	// the others only idle. Still, we need to wake up the
 	// primary worker if the worker that has just arrived is
 	// the last one we need to start working.
-	w->start_task_idle(g, 0, -1);
-	psite.try_start_working(*g);
+	w->start_task_idle(game, 0, -1);
+	psite.try_start_working(game);
 }
 
 
 /**
  * Advance the program state if applicable.
  */
-void ProductionSite::act(Game* g, uint32_t data)
+void ProductionSite::act(Game & game, uint32_t const data)
 {
-	Building::act(g, data);
+	Building::act(game, data);
 
 	if
 		(m_program_timer
 		 and
-		 static_cast<int32_t>(g->get_gametime() - m_program_time) >= 0)
+		 static_cast<int32_t>(game.get_gametime() - m_program_time) >= 0)
 	{
 		m_program_timer = false;
 
-		if (m_program.empty())
-			return find_and_start_next_program(*g);
+		if (m_stack.empty())
+			return find_and_start_next_program(game);
 
-		State* state = get_current_program();
-
-		assert(state);
-
-		if (state->ip >= state->program->get_size())
-			return program_end(*g, Completed);
+		State & state = top_state();
+		if (state.program->get_size() <= state.ip)
+			return program_end(game, Completed);
 
 		if (m_anim != descr().get_animation("idle")) {
 			// Restart idle animation, which is the default
-			start_animation(g, descr().get_animation("idle"));
+			start_animation(game, descr().get_animation("idle"));
 		}
 
-		return program_act(*g);
+		return program_act(game);
 	}
 }
 
@@ -501,8 +502,7 @@ void ProductionSite::find_and_start_next_program(Game & game)
  */
 void ProductionSite::program_act(Game & game)
 {
-	assert(get_current_program());
-	State & state = *get_current_program();
+	State & state = top_state();
 #if 0
 	molog
 		("PSITE: program %s#%i\n", state.program->get_name().c_str(), state.ip);
@@ -510,7 +510,7 @@ void ProductionSite::program_act(Game & game)
 	if (m_is_stopped) {
 		program_end(game, Failed);
 		m_program_timer = true;
-		m_program_time = schedule_act(&game, 20000);
+		m_program_time = schedule_act(game, 20000);
 	} else
 		(*state.program)[state.ip].execute(game, *this);
 }
@@ -519,18 +519,18 @@ void ProductionSite::program_act(Game & game)
 /**
  * Remember that we need to fetch an item from the flag.
  */
-bool ProductionSite::fetch_from_flag(Game* g)
+bool ProductionSite::fetch_from_flag(Game & game)
 {
 	++m_fetchfromflag;
 
 	if (can_start_working())
-		m_working_positions[0].worker->update_task_buildingwork(g);
+		m_working_positions[0].worker->update_task_buildingwork(game);
 
 	return true;
 }
 
 
-void ProductionSite::log_general_info(Editor_Game_Base * const egbase) {
+void ProductionSite::log_general_info(Editor_Game_Base & egbase) {
 	Building::log_general_info(egbase);
 
 	molog("m_is_stopped: %u\n", m_is_stopped);
@@ -558,8 +558,8 @@ bool ProductionSite::can_start_working() const throw ()
 void ProductionSite::try_start_working(Game & game) {
 	if (can_start_working() and descr().working_positions().size()) {
 		Worker & main_worker = *m_working_positions[0].worker;
-		main_worker.reset_tasks(&game);
-		main_worker.start_task_buildingwork(&game);
+		main_worker.reset_tasks(game);
+		main_worker.start_task_buildingwork(game);
 	}
 }
 
@@ -568,12 +568,13 @@ void ProductionSite::try_start_working(Game & game) {
  *
  * \note We assume that the worker is inside the building when this is called.
  */
-bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
+bool ProductionSite::get_building_work
+	(Game & game, Worker & worker, bool const success)
 {
 	assert(descr().working_positions().size());
-	assert(w == m_working_positions[0].worker);
+	assert(&worker == m_working_positions[0].worker);
 
-	State* state = get_current_program();
+	State * state = get_state();
 
 	// If unsuccessful: Check if we need to abort current program
 	if (!success && state)
@@ -581,20 +582,20 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 			(dynamic_cast<ProductionProgram::ActWorker const *>
 			 	(&(*state->program)[state->ip]))
 		{
-			program_end(*g, Failed);
+			program_end(game, Failed);
 			state = 0;
 		}
 
 	// Default actions first
-	if (WareInstance * const item = w->fetch_carried_item(g)) {
+	if (WareInstance * const item = worker.fetch_carried_item(game)) {
 
-		w->start_task_dropoff(*g, *item);
+		worker.start_task_dropoff(game, *item);
 		return true;
 	}
 
 	if (m_fetchfromflag) {
 		--m_fetchfromflag;
-		w->start_task_fetchfromflag(g);
+		worker.start_task_fetchfromflag(game);
 		return true;
 	}
 
@@ -605,14 +606,13 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 			*m_produced_items.rbegin();
 		{
 			Ware_Index const ware_index = ware_type_with_count.first;
-			Tribe_Descr const & tribe = owner().tribe();
 			Item_Ware_Descr const & item_ware_descr =
-				*tribe.get_ware_descr(ware_type_with_count.first);
+				*tribe().get_ware_descr(ware_type_with_count.first);
 			{
 				WareInstance & item =
 					*new WareInstance(ware_index, &item_ware_descr);
-				item.init(g);
-				w->start_task_dropoff(*g, item);
+				item.init(game);
+				worker.start_task_dropoff(game, item);
 			}
 			owner().ware_produced(ware_index); //  for statistics
 		}
@@ -629,22 +629,22 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 	// Start program if we haven't already done so
 	if (!state) {
 		m_program_timer = true;
-		m_program_time = schedule_act(g, 10);
+		m_program_time = schedule_act(game, 10);
 	} else if (state->ip < state->program->get_size()) {
 		ProductionProgram::Action const & action = (*state->program)[state->ip];
 
 		if (upcast(ProductionProgram::ActWorker const, worker_action, &action)) {
 			if (state->phase == 0) {
-				w->start_task_program(g, worker_action->program());
+				worker.start_task_program(game, worker_action->program());
 				++state->phase;
 				return true;
 			} else
-				program_step(*g);
+				program_step(game);
 		} else if (dynamic_cast<ProductionProgram::ActProduce const *>(&action))
 		{
 			//  All the wares that we produced have been carried out, so continue
 			//  with the program.
-			program_step(*g);
+			program_step(game);
 		}
 	}
 	return false;
@@ -657,14 +657,11 @@ bool ProductionSite::get_building_work(Game* g, Worker* w, bool success)
 void ProductionSite::program_step
 	(Game & game, uint32_t const delay, uint32_t const phase)
 {
-	State* state = get_current_program();
-
-	assert(state);
-
-	++state->ip;
-	state->phase = phase;
+	State & state = top_state();
+	++state.ip;
+	state.phase = phase;
 	m_program_timer = true;
-	m_program_time  = schedule_act(&game, delay);
+	m_program_time  = schedule_act(game, delay);
 }
 
 
@@ -680,10 +677,10 @@ void ProductionSite::program_start
 	state.ip = 0;
 	state.phase = 0;
 
-	m_program.push_back(state);
+	m_stack.push_back(state);
 
 	m_program_timer = true;
-	m_program_time = schedule_act(&game, 10);
+	m_program_time = schedule_act(game, 10);
 }
 
 
@@ -695,11 +692,11 @@ void ProductionSite::program_start
  */
 void ProductionSite::program_end(Game & game, Program_Result const result)
 {
-	assert(m_program.size());
+	assert(m_stack.size());
 
-	m_program.pop_back();
-	if (m_program.size())
-		m_program.rbegin()->phase = result;
+	m_stack.pop_back();
+	if (m_stack.size())
+		top_state().phase = result;
 
 	if (result != Skipped) {
 		m_statistics_changed = true;
@@ -712,7 +709,7 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 	}
 
 	m_program_timer = true;
-	m_program_time = schedule_act(&game, m_post_timer);
+	m_program_time = schedule_act(game, m_post_timer);
 }
 
 };

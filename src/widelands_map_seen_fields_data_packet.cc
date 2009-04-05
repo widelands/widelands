@@ -35,7 +35,7 @@ namespace Widelands {
 
 void Map_Seen_Fields_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const)
 throw (_wexception)
@@ -48,7 +48,7 @@ throw (_wexception)
 
 
 	compile_assert(MAX_PLAYERS < 32);
-	Map & map = egbase->map();
+	Map & map = egbase.map();
 	const Player_Number nr_players = map.get_nrplayers();
 	Map_Index const max_index = map.max_index();
 	try {
@@ -58,7 +58,7 @@ throw (_wexception)
 				uint32_t const data = fr.Unsigned16();
 				for (uint8_t j = 0; j < nr_players; ++j) {
 					bool const see = data & (1 << j);
-					if (Player * const player = egbase->get_player(j + 1))
+					if (Player * const player = egbase.get_player(j + 1))
 						player->m_fields[i].vision = see ? 1 : 0;
 					else if (see)
 						log
@@ -72,7 +72,7 @@ throw (_wexception)
 				uint32_t const data = fr.Unsigned32();
 				for (uint8_t j = 0; j < nr_players; ++j) {
 					bool see = data & (1 << j);
-					if (Player * const player = egbase->get_player(j + 1))
+					if (Player * const player = egbase.get_player(j + 1))
 						player->m_fields[i].vision = see ? 1 : 0;
 					else if (see)
 					log
@@ -90,7 +90,7 @@ throw (_wexception)
 
 
 void Map_Seen_Fields_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -98,14 +98,14 @@ throw (_wexception)
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
 	compile_assert(MAX_PLAYERS < 32);
-	Map & map = egbase->map();
+	Map & map = egbase.map();
 	const Player_Number nr_players = map.get_nrplayers();
 	Map_Index const max_index = map.max_index();
 	for (Map_Index i = 0; i < max_index; ++i) {
 		uint32_t data = 0;
 		for (uint8_t j = 0; j < nr_players; ++j) {
 			const uint8_t player_index = j + 1;
-			if (const Player * const player = egbase->get_player(player_index))
+			if (Player const * const player = egbase.get_player(player_index))
 				data |= ((0 < player->vision(i)) << j);
 		}
 		fw.Unsigned32(data);

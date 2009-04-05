@@ -112,16 +112,16 @@ struct HorizontalSlider : public Slider {
 		 const bool enabled = true)
 		:
 		Slider
-		(parent,
-		 x, y, w, h,
-		 min_value, max_value, value,
-		 background_picture_id,
-		 tooltip_text,
-		 cursor_size,
-		 enabled,
-		 cursor_size / 2,
-		 h / 2 - 2,
-		 w - cursor_size)
+			(parent,
+			 x, y, w, h,
+			 min_value, max_value, value,
+			 background_picture_id,
+			 tooltip_text,
+			 cursor_size,
+			 enabled,
+			 cursor_size / 2,
+			 h / 2 - 2,
+			 w - cursor_size)
 	{}
 
 protected:
@@ -146,16 +146,16 @@ struct VerticalSlider : public Slider {
 		 const bool enabled = true)
 		:
 		Slider
-		(parent,
-		 x, y, w, h,
-		 min_value, max_value, value,
-		 background_picture_id,
-		 tooltip_text,
-		 cursor_size,
-		 enabled,
-		 w / 2 - 2,
-		 cursor_size / 2,
-		 h - cursor_size)
+			(parent,
+			 x, y, w, h,
+			 min_value, max_value, value,
+			 background_picture_id,
+			 tooltip_text,
+			 cursor_size,
+			 enabled,
+			 w / 2 - 2,
+			 cursor_size / 2,
+			 h - cursor_size)
 	{}
 
 protected:

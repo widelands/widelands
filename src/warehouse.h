@@ -55,7 +55,7 @@ struct Warehouse_Descr : public Building_Descr {
 		 std::string const & directory, Profile &, Section & global_s,
 		 Tribe_Descr const &, EncodeData const *);
 
-	virtual Building * create_object() const;
+	virtual Building & create_object() const;
 
 	int32_t get_subtype() const {return m_subtype;}
 	virtual uint32_t get_conquers() const {return m_conquers;}
@@ -82,10 +82,10 @@ public:
 
 	virtual int32_t get_building_type() const throw () {return Building::WAREHOUSE;}
 	char const * type_name() const throw () {return "warehouse";}
-	virtual void init(Editor_Game_Base *g);
-	virtual void cleanup(Editor_Game_Base *g);
+	virtual void init(Editor_Game_Base &);
+	virtual void cleanup(Editor_Game_Base &);
 
-	virtual void act(Game *g, uint32_t data);
+	virtual void act(Game & game, uint32_t data);
 
 	virtual void set_economy(Economy *);
 	virtual int32_t get_priority(int32_t type, Ware_Index ware_index, bool adjust = true) const;
@@ -98,18 +98,18 @@ public:
 	void insert_workers(Ware_Index, uint32_t count);
 	void remove_workers(Ware_Index, uint32_t count);
 
-	virtual bool fetch_from_flag(Game* g);
+	virtual bool fetch_from_flag(Game &);
 
-	uint32_t count_workers(Game* g, Ware_Index, const Requirements&);
-	Worker* launch_worker(Game* g, Ware_Index, const Requirements&);
-	void incorporate_worker(Game *g, Worker *w);
+	uint32_t count_workers(Game const &, Ware_Index, Requirements const &);
+	Worker & launch_worker(Game &, Ware_Index, Requirements const &);
+	void incorporate_worker(Game &, Worker &);
 
-	WareInstance & launch_item(Game *, Ware_Index);
-	void do_launch_item(Game *, WareInstance &);
-	void incorporate_item(Game* g, WareInstance* item);
+	WareInstance & launch_item(Game &, Ware_Index);
+	void do_launch_item(Game &, WareInstance &);
+	void incorporate_item(Game &, WareInstance &);
 
 	bool can_create_worker(Game &, Ware_Index) const;
-	void     create_worker(Game *, Ware_Index);
+	void     create_worker(Game &, Ware_Index);
 
 	// Begin Attackable implementation
 	virtual bool canAttack();
@@ -118,12 +118,15 @@ public:
 	// End Attackable implementation
 
 protected:
-	virtual UI::Window *create_options_window(Interactive_Player *plr, UI::Window **registry);
+
+	/// Create the warehouse information window.
+	virtual void create_options_window
+		(Interactive_Player &, UI::Window * & registry);
 
 private:
 	static void idle_request_cb
-		(Game *, Request *, Ware_Index, Worker *, void * data);
-	void sort_worker_in(Editor_Game_Base*, std::string, Worker*);
+		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+	void sort_worker_in(Editor_Game_Base &, std::string const &, Worker &);
 
 	WarehouseSupply       * m_supply;
 	std::vector<Request *>  m_requests; // one idle request per ware type

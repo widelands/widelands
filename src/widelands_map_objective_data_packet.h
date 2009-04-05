@@ -30,12 +30,12 @@ namespace Widelands {
 struct Map_Objective_Data_Packet : public Map_Data_Packet {
 	virtual void Read
 		(FileSystem &,
-		 Editor_Game_Base*,
+		 Editor_Game_Base      &,
 		 const bool,
 		 Map_Map_Object_Loader * = 0)
 		throw (_wexception);
 	virtual void Write
-		(FileSystem &, Editor_Game_Base *, Map_Map_Object_Saver * = 0)
+		(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * = 0)
 		throw (_wexception);
 };
 

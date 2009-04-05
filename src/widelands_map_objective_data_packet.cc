@@ -32,7 +32,7 @@ namespace Widelands {
 
 void Map_Objective_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const)
 throw (_wexception)
@@ -42,7 +42,7 @@ throw (_wexception)
 
 	Profile prof;
 	try {prof.read("objective", 0, fs);} catch (...) {return;}
-	Map & map = egbase->map();
+	Map & map = egbase.map();
 	Manager<Objective> & mom = map.mom();
 	Manager<Trigger>   & mtm = map.mtm();
 
@@ -82,14 +82,14 @@ throw (_wexception)
 
 
 void Map_Objective_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	Profile prof;
 	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
-	Manager<Objective> const & mom = egbase->map().mom();
+	Manager<Objective> const & mom = egbase.map().mom();
 	Manager<Objective>::Index const nr_objectives = mom.size();
 	for (Manager<Objective>::Index i = 0; i < nr_objectives; ++i) {
 		Objective const & objective = mom[i];

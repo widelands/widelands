@@ -63,7 +63,7 @@ void Event_Reveal_Objective::Write(Section & s, Editor_Game_Base &) const
 /*
  * check if trigger conditions are done
  */
-Event::State Event_Reveal_Objective::run(Game *) {
+Event::State Event_Reveal_Objective::run(Game &) {
 	assert(m_objective);
 
 	m_objective->set_is_visible(true);

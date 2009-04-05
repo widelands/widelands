@@ -40,7 +40,7 @@ namespace Widelands {
 
 void Map_Flag_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
@@ -51,7 +51,7 @@ throw (_wexception)
 	FileRead fr;
 	try {fr.Open(fs, "binary/flag");} catch (...) {return;}
 
-	Map const & map = egbase->map();
+	Map const & map = egbase.map();
 	Player_Number const nr_players = map.get_nrplayers();
 
 	try {
@@ -73,10 +73,8 @@ throw (_wexception)
 						try {
 							ol->register_object<Flag>
 								(serial,
-								 *Flag::create
-								 	(egbase,
-								 	 egbase->get_safe_player(owner),
-								 	 Coords(x, y)));
+								 *new Flag
+								 	(egbase, egbase.player(owner), Coords(x, y)));
 						} catch (_wexception const & e) {
 							throw wexception
 								("%u (at (%i, %i), owned by player %u): %s",
@@ -94,7 +92,7 @@ throw (_wexception)
 
 void Map_Flag_Data_Packet::Write
 	(FileSystem           &       fs,
-	 Editor_Game_Base     *       egbase,
+	 Editor_Game_Base     &       egbase,
 	 Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
@@ -104,17 +102,17 @@ throw (_wexception)
 
 	//  Write flags and owner, register this with the map_object_saver so that
 	//  it's data can be saved later.
-	Map   const & map        = egbase->map();
+	Map   const & map        = egbase.map();
 	Field const & fields_end = map[map.max_index()];
 	for (Field const * field = &map[0]; field < &fields_end; ++field)
 		if (upcast(Flag const, flag, field->get_immovable())) { //  we only write flags
 			//  Flags can't life on multiply positions, therefore this flag
 			//  shouldn't be registered.
-			assert(!os->is_object_known(flag));
+			assert(!os->is_object_known(*flag));
 
 			fw.Unsigned8(1);
 			fw.Unsigned8(flag->owner().get_player_number());
-			fw.Unsigned32(os->register_object(flag));
+			fw.Unsigned32(os->register_object(*flag));
 		} else //  no existence, no owner
 			fw.Unsigned8(0);
 

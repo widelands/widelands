@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -162,7 +162,7 @@ private:
 				Widelands::Player & player = e.owner();
 				Game & game = dynamic_cast<Game &>(player.egbase());
 				game.send_player_command
-					(new Widelands::Cmd_SetTargetQuantity
+					(*new Widelands::Cmd_SetTargetQuantity
 					 	(game.get_gametime(), player.get_player_number(),
 					 	 player.get_economy_number(&e), m_ware_type,
 					 	 tq.permanent - 1, tq.temporary));
@@ -176,7 +176,7 @@ private:
 			Widelands::Player & player = e.owner();
 			Game & game = dynamic_cast<Game &>(player.egbase());
 			game.send_player_command
-				(new Widelands::Cmd_SetTargetQuantity
+				(*new Widelands::Cmd_SetTargetQuantity
 				 	(game.get_gametime(), player.get_player_number(),
 				 	 player.get_economy_number(&e), m_ware_type,
 				 	 new_permanent, std::max(new_permanent, tq.temporary)));
@@ -190,7 +190,7 @@ private:
 				Widelands::Player & player = e.owner();
 				Game   & game   = dynamic_cast<Game &>(player.egbase());
 				game.send_player_command
-					(new Widelands::Cmd_SetTargetQuantity
+					(*new Widelands::Cmd_SetTargetQuantity
 					 	(game.get_gametime(), player.get_player_number(),
 					 	 player.get_economy_number(&e), m_ware_type,
 					 	 std::min(tq.permanent, new_temporary), new_temporary));
@@ -203,7 +203,7 @@ private:
 			Widelands::Player & player = e.owner();
 			Game & game = dynamic_cast<Game &>(player.egbase());
 			game.send_player_command
-				(new Widelands::Cmd_SetTargetQuantity
+				(*new Widelands::Cmd_SetTargetQuantity
 				 	(game.get_gametime(), player.get_player_number(),
 				 	 player.get_economy_number(&e), m_ware_type,
 				 	 tq.permanent, tq.temporary + 1));
@@ -213,7 +213,7 @@ private:
 			Widelands::Player & player = e.owner();
 			Game & game = dynamic_cast<Game &>(player.egbase());
 			game.send_player_command
-				(new Widelands::Cmd_ResetTargetQuantity
+				(*new Widelands::Cmd_ResetTargetQuantity
 				 	(game.get_gametime(), player.get_player_number(),
 				 	 player.get_economy_number(&e), m_ware_type));
 		}
@@ -237,6 +237,6 @@ void Economy::show_options_window() {
 		m_optionswindow_registry.window->move_to_top();
 	else
 		new Economy_Options_Window
-			(dynamic_cast<Interactive_Player &>(*owner().egbase().get_iabase()),
+			(dynamic_cast<Interactive_Player &>(*owner().egbase().get_ibase()),
 			 *this);
 }

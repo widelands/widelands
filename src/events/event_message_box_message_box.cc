@@ -34,11 +34,11 @@
  * The message box itself
  */
 Message_Box_Event_Message_Box::Message_Box_Event_Message_Box
-	(Widelands::Game              * game,
+	(Widelands::Game              & game,
 	 Widelands::Event_Message_Box * event,
 	 int32_t gposx, int32_t gposy, int32_t w, int32_t h)
 :
-UI::Window(game->get_iabase(), 0, 0, 600, 400, event->get_window_title()),
+UI::Window(game.get_ibase(), 0, 0, 600, 400, event->get_window_title()),
 m_game    (game)
 {
 
@@ -53,10 +53,11 @@ m_game    (game)
 	set_inner_size(w, h);
 	m_text =
 		new UI::Multiline_Textarea
-		(this,
-		 posx, posy,
-		 get_inner_w() - posx - spacing, get_inner_h() - posy - 2 * spacing - 50,
-		 "", Align_Left);
+			(this,
+			 posx, posy,
+			 get_inner_w() - posx -     spacing,
+			 get_inner_h() - posy - 2 * spacing - 50,
+			 "", Align_Left);
 
 	if (m_text)
 		m_text->set_text(event->get_text());
@@ -133,7 +134,7 @@ void Message_Box_Event_Message_Box::clicked(int32_t i) {
 			//  FIXME game state, whitout passing the command queue. This fails
 			//  FIXME horribly with replays or network games. (bug #2326416)
 			t->set_time(0);
-			t->check_set_conditions(*m_game); // forcefully update this trigger
+			t->check_set_conditions(m_game); //  forcefully update this trigger
 		}
 		clicked(-1);
 		return;

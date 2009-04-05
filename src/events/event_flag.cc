@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,8 +57,8 @@ void Event_Flag::set_player(Player_Number const p) {m_player = p;}
 void Event_Flag::set_position(Coords const c) {m_location = c;}
 
 
-Event::State Event_Flag::run(Game * game) {
-	game->player(m_player).force_flag(game->map().get_fcoords(m_location));
+Event::State Event_Flag::run(Game & game) {
+	game.player(m_player).force_flag(game.map().get_fcoords(m_location));
 	return m_state = DONE;
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,16 +32,16 @@
 MiniMap::View::View
 	(UI::Panel & parent, int8_t * flags,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-	 Interactive_Base & iabase)
+	 Interactive_Base & ibase)
 :
 UI::Panel       (&parent, x, y, 10, 10),
-m_iabase      (iabase),
+m_ibase       (ibase),
 m_viewx       (0),
 m_viewy       (0),
 m_pic_map_spot(g_gr->get_picture(PicMod_Game, "pics/map_spot.png")),
 m_flags       (flags)
 {
-	Widelands::Map const & map = iabase.egbase().map();
+	Widelands::Map const & map = ibase.egbase().map();
 	set_size(w ? w : map.get_width(), h ? h : map.get_height());
 }
 
@@ -70,8 +70,8 @@ Redraw the view of the map
 void MiniMap::View::draw(RenderTarget & dst)
 {
 	dst.renderminimap
-		(m_iabase.egbase(),
-		 m_iabase.get_player(),
+		(m_ibase.egbase(),
+		 m_ibase.get_player(),
 		 Point(m_viewx - get_w() / 2, m_viewy - get_h() / 2),
 		 *m_flags);
 }
@@ -91,7 +91,7 @@ bool MiniMap::View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	Widelands::Coords c
 		(m_viewx + 1 - get_w() / 2 + x, m_viewy + 1 - get_h() / 2 + y);
 
-	m_iabase.egbase().map().normalize_coords(c);
+	m_ibase.egbase().map().normalize_coords(c);
 
 	assert(dynamic_cast<const MiniMap *>(get_parent()));
 	static_cast<const MiniMap *>(get_parent())->warpview.call
@@ -129,11 +129,10 @@ inline uint32_t MiniMap::number_of_button_rows    () const throw () {return 2;}
 inline uint32_t MiniMap::but_w() const throw ()
 {return m_view.get_w() / number_of_buttons_per_row();}
 inline uint32_t MiniMap::but_h() const throw () {return 20;}
-MiniMap::MiniMap
-	(Interactive_Base & iabase, Registry * registry)
+MiniMap::MiniMap(Interactive_Base & ibase, Registry * const registry)
 :
-UI::UniqueWindow(&iabase, registry, 0, 0, _("Map")),
-m_view(*this, &registry->flags, 0, 0, 0, 0, iabase),
+	UI::UniqueWindow(&ibase, registry, 0, 0, _("Map")),
+	m_view(*this, &registry->flags, 0, 0, 0, 0, ibase),
 
 button_terrn
 	(this,

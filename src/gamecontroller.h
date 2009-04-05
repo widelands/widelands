@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ struct GameController {
 	virtual ~GameController() {}
 
 	virtual void think() = 0;
-	virtual void sendPlayerCommand(Widelands::PlayerCommand* pc) = 0;
+	virtual void sendPlayerCommand(Widelands::PlayerCommand &) = 0;
 	virtual int32_t getFrametime() = 0;
 	virtual std::string getGameDescription() = 0;
 
@@ -70,7 +70,8 @@ struct GameController {
 	 * \return newly allocated \ref GameController object, must be freed
 	 * by the caller.
 	 */
-	static GameController* createSinglePlayer(Widelands::Game* game, bool cpls, Widelands::Player_Number local);
+	static GameController * createSinglePlayer
+		(Widelands::Game &, bool cpls, Widelands::Player_Number local);
 };
 
 #endif // GAMECONTROLLER_H

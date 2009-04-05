@@ -47,7 +47,7 @@ void Trigger_Building::Read(Section & s, Editor_Game_Base & egbase) {
 		uint32_t const packet_version = s.get_safe_positive("version");
 		if (packet_version <= PACKET_VERSION) {
 			Trigger_Player_Area::Read(s, egbase);
-			egbase.get_iabase()->reference_player_tribe
+			egbase.get_ibase()->reference_player_tribe
 				(m_player_area.player_number, this);
 			m_building_type =
 				&s.get_safe_Building_Type

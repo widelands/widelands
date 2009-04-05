@@ -198,7 +198,7 @@ void Event_Message_Box::Write(Section & s, Editor_Game_Base &) const {
 /**
  * Check if trigger conditions are done
  */
-Event::State Event_Message_Box::run(Game * game) {
+Event::State Event_Message_Box::run(Game & game) {
 	Message_Box_Event_Message_Box * mb =
 		new Message_Box_Event_Message_Box
 			(game, this, get_posx(), get_posy(), get_w(), get_h());

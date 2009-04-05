@@ -77,11 +77,11 @@ void Event_Set_Timer::Write(Section & s, Editor_Game_Base &) const {
 }
 
 
-Event::State Event_Set_Timer::run(Game * game) {
+Event::State Event_Set_Timer::run(Game & game) {
 	assert(m_trigger);
 
-	m_trigger->set_time(game->get_gametime() + m_duration);
-	m_trigger->check_set_conditions(*game); // forcefully update this trigger
+	m_trigger->set_time(game.get_gametime() + m_duration);
+	m_trigger->check_set_conditions(game); //  forcefully update this trigger
 
 	return m_state = DONE;
 }

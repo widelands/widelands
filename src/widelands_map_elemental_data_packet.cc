@@ -31,7 +31,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 
 
-void Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map* map)
+void Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map * map)
 throw (_wexception)
 {
 	Profile prof;
@@ -60,15 +60,15 @@ throw (_wexception)
 
 void Map_Elemental_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool,
 	 Map_Map_Object_Loader * const)
 throw (_wexception)
-{Pre_Read(fs, &egbase->map());}
+{Pre_Read(fs, &egbase.map());}
 
 
 void Map_Elemental_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 
@@ -76,7 +76,7 @@ throw (_wexception)
 	Section & s = prof.create_section("global");
 
 	s.set_int   ("packet_version", CURRENT_PACKET_VERSION);
-	Map const & map = egbase->map();
+	Map const & map = egbase.map();
 	s.set_int   ("map_w",          map.get_width      ());
 	s.set_int   ("map_h",          map.get_height     ());
 	s.set_int   ("nr_players",     map.get_nrplayers  ());

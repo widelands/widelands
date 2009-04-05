@@ -37,7 +37,7 @@ namespace Widelands {
 
 void Map_EventChain_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const)
 throw (_wexception)
@@ -50,7 +50,7 @@ throw (_wexception)
 	if (!fr.TryOpen(fs, "event_chain"))
 		return;
 
-	Map                 & map = egbase->map();
+	Map                 & map = egbase.map();
 	Manager<EventChain> & mcm = map.mcm();
 	Manager<Event>      & mem = map.mem();
 	Manager<Trigger>    & mtm = map.mtm();
@@ -185,7 +185,7 @@ throw (_wexception)
 
 void Map_EventChain_Data_Packet::Write
 	(FileSystem           &       fs,
-	 Editor_Game_Base     *       egbase,
+	 Editor_Game_Base     &       egbase,
 	 Map_Map_Object_Saver * const)
 throw (_wexception)
 {
@@ -193,7 +193,7 @@ throw (_wexception)
 	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
-	Manager<EventChain> const & mcm = egbase->map().mcm();
+	Manager<EventChain> const & mcm = egbase.map().mcm();
 	Manager<EventChain>::Index const nr_eventchains = mcm.size();
 	for (Manager<EventChain>::Index i = 0; i < nr_eventchains; ++i) {
 		EventChain const & e = mcm[i];

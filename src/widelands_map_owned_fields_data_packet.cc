@@ -33,7 +33,7 @@ namespace Widelands {
 
 void Map_Owned_Fields_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const)
 	throw (_wexception)
@@ -44,7 +44,7 @@ void Map_Owned_Fields_Data_Packet::Read
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			Map & map = egbase->map();
+			Map & map = egbase.map();
 			Map_Index const max_index = map.max_index();
 			for (Map_Index i = 0; i < max_index; ++i)
 				map[i].set_owned_by(fr.Unsigned8());
@@ -57,14 +57,14 @@ void Map_Owned_Fields_Data_Packet::Read
 
 
 void Map_Owned_Fields_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	FileWrite fw;
 
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	Map & map = egbase->map();
+	Map & map = egbase.map();
 	Map_Index const max_index = map.max_index();
 	for (Map_Index i = 0; i < max_index; ++i)
 		fw.Unsigned8(map[i].get_owned_by());

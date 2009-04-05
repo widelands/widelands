@@ -106,11 +106,11 @@ struct FindBobAttribute : public FindBob {
 	virtual ~FindBobAttribute() {}  // make gcc shut up
 };
 struct FindBobEnemySoldier : public FindBob {
-	FindBobEnemySoldier(Player* _player) : player(_player) {}
+	FindBobEnemySoldier(Player & _player) : player(_player) {}
 
 	virtual bool accept(Bob *) const;
 
-	Player* player;
+	Player & player;
 };
 
 /** class Map

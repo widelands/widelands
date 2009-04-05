@@ -40,7 +40,7 @@ namespace Widelands {
 
 void Map_Road_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
@@ -73,7 +73,7 @@ throw (_wexception)
 
 void Map_Road_Data_Packet::Write
 	(FileSystem           &       fs,
-	 Editor_Game_Base     *       egbase,
+	 Editor_Game_Base     &       egbase,
 	 Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
@@ -83,14 +83,14 @@ throw (_wexception)
 
 	//  Write roads. Register this with the map_object_saver so that its data
 	//  can be saved later.
-	Map const & map = egbase->map();
+	Map const & map = egbase.map();
 	Field * field = &map[0];
 	Field const * const fields_end = field + map.max_index();
 	for (; field < fields_end; ++field)
 		if (upcast(Road const, road, field->get_immovable())) // only roads
 			//  Roads can life on multiple positions.
-			if (not os->is_object_known(road))
-				fw.Unsigned32(os->register_object(road));
+			if (not os->is_object_known(*road))
+				fw.Unsigned32(os->register_object(*road));
 	fw.Unsigned32(0xffffffff);
 
 	fw.Write(fs, "binary/road");

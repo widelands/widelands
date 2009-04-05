@@ -45,7 +45,7 @@ namespace Widelands {
 
 void Map_Building_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
@@ -53,11 +53,11 @@ throw (_wexception)
 	if (skip) return;
 	FileRead fr;
 	try {fr.Open(fs, "binary/building");} catch (...) {return;}
-	Interactive_Base & iabase = *egbase->get_iabase();
+	Interactive_Base & ibase = *egbase.get_ibase();
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version >= LOWEST_SUPPORTED_VERSION) {
-			Map & map = egbase->map();
+			Map & map = egbase.map();
 			X_Coordinate const width  = map.get_width ();
 			Y_Coordinate const height = map.get_height();
 			FCoords c;
@@ -72,7 +72,7 @@ throw (_wexception)
 						//  No building lives on more than one main place.
 
 						//  Get the tribe and the building index.
-						if (Player * const player = egbase->get_safe_player(p)) {
+						if (Player * const player = egbase.get_safe_player(p)) {
 							Tribe_Descr const & tribe = player->tribe();
 							Building_Index const index = tribe.building_index(name);
 							if (not index)
@@ -85,18 +85,17 @@ throw (_wexception)
 							Building & building =
 								ol->register_object<Building>
 									(serial,
-									 *
 									 (is_constructionsite ?
-									  egbase->warp_constructionsite
+									  egbase.warp_constructionsite
 									  	(c, p, index, Building_Index::Null())
 									  :
-									  egbase->warp_building(c, p, index)));
+									  egbase.warp_building(c, p, index)));
 
 							if (packet_version >= PRIORITIES_INTRODUCED_IN_VERSION)
 								read_priorities (building, fr);
 
 							//  Reference the players tribe if in editor.
-							iabase.reference_player_tribe(p, &tribe);
+							ibase.reference_player_tribe(p, &tribe);
 						} else
 							throw wexception("player %u does not exist", p);
 					}
@@ -113,7 +112,7 @@ throw (_wexception)
  */
 void Map_Building_Data_Packet::Write
 	(FileSystem           &       fs,
-	 Editor_Game_Base     *       egbase,
+	 Editor_Game_Base     &       egbase,
 	 Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
@@ -124,18 +123,18 @@ throw (_wexception)
 
 	// Write buildings and owner, register this with the map_object_saver so that
 	// it's data can be saved later.
-	Map const &  map    = egbase->map();
+	Map const &  map    = egbase.map();
 	Extent const extent = map.extent();
 	iterate_Map_FCoords(map, extent, fc) {
 		upcast(Building const, building, fc.field->get_immovable());
 		if (building and building->get_position() == fc) {
 			//  We only write Buildings.
 			//  Buildings can life on only one main position.
-			assert(!os->is_object_known(building));
+			assert(!os->is_object_known(*building));
 
 			fw.Unsigned8(1);
 			fw.Unsigned8(building->owner().get_player_number());
-			fw.Unsigned32(os->register_object(building));
+			fw.Unsigned32(os->register_object(*building));
 
 			upcast(ConstructionSite const, constructionsite, building);
 			fw.CString
@@ -172,7 +171,7 @@ void Map_Building_Data_Packet::write_priorities
 	std::map<int32_t, std::map<Ware_Index, int32_t> > type_to_priorities;
 	std::map<int32_t, std::map<Ware_Index, int32_t> >::iterator it;
 
-	const Tribe_Descr & tribe = building.get_owner()->tribe();
+	Tribe_Descr const & tribe = building.tribe();
 	building.collect_priorities(type_to_priorities);
 	for (it = type_to_priorities.begin(); it != type_to_priorities.end(); ++it)
 	{
@@ -210,7 +209,7 @@ void Map_Building_Data_Packet::read_priorities
 {
 	building.set_priority(fr.Unsigned32());
 
-	const Tribe_Descr & tribe = building.get_owner()->tribe();
+	Tribe_Descr const & tribe = building.tribe();
 	int32_t ware_type = -1;
 	// read ware type
 	while (0xff != (ware_type = fr.Unsigned8())) {

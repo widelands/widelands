@@ -32,7 +32,7 @@ namespace Widelands {
 
 void Map_Player_Position_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool,
 	 Map_Map_Object_Loader * const)
 throw (_wexception)
@@ -47,7 +47,7 @@ throw (_wexception)
 			//  Read all the positions
 			//  This could bring trouble if one player position/ is not set (this
 			//  is possible in the editor), is also -1, -1.
-			Map               & map        = *egbase->get_map ();
+			Map               & map        = egbase.map();
 			Extent        const extent     = map.extent       ();
 			Player_Number const nr_players = map.get_nrplayers();
 			iterate_player_numbers(p, nr_players)
@@ -75,7 +75,7 @@ throw (_wexception)
 
 
 void Map_Player_Position_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base * egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	Profile prof;
@@ -84,7 +84,7 @@ throw (_wexception)
 	s.set_int("packet_version", CURRENT_PACKET_VERSION);
 
 	// Now, all positions in order
-	const Map & map = *egbase->get_map();
+	Map const & map = egbase.map();
 	const Player_Number nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
 		char buffer[10];

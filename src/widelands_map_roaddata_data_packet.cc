@@ -43,7 +43,7 @@ namespace Widelands {
 
 void Map_Roaddata_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
@@ -56,7 +56,7 @@ throw (_wexception)
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			Map         const & map        = egbase->map();
+			Map   const &       map        = egbase.map();
 			Extent        const extent     = map.extent       ();
 			Player_Number const nr_players = map.get_nrplayers();
 			for (;;) {
@@ -72,7 +72,7 @@ throw (_wexception)
 					Road & road = ol->get<Road>(serial);
 					if (ol->is_object_loaded(&road))
 						throw wexception("already loaded");
-					Player & plr = egbase->player(fr.Player_Number8(nr_players));
+					Player & plr = egbase.player(fr.Player_Number8(nr_players));
 
 					road.set_owner(&plr);
 					road.m_type = fr.Unsigned32();
@@ -105,7 +105,7 @@ throw (_wexception)
 					Path p(road.m_flags[0]->get_position());
 					for (Path::Step_Vector::size_type i = nr_steps; i; --i)
 						try {
-							p.append(egbase->map(), fr.Direction8());
+							p.append(egbase.map(), fr.Direction8());
 						} catch (_wexception const & e) {
 							throw wexception
 								("step #%lu: %s",
@@ -134,16 +134,14 @@ throw (_wexception)
 					delete road.m_carrier_request; road.m_carrier_request = 0;
 
 					if (fr.Unsigned8()) {
-						if (dynamic_cast<Game const *>(egbase)) {
-							road.m_carrier_request =
-								new Request
-									(&road,
-									 Ware_Index::First(),
-									 &Road::request_carrier_callback,
-									 &road,
-									 Request::WORKER);
-							road.m_carrier_request->Read(&fr, egbase, ol);
-						}
+						if (dynamic_cast<Game const *>(&egbase))
+							(road.m_carrier_request =
+							 	new Request
+							 		(road,
+							 		 Ware_Index::First(),
+							 		 Road::request_carrier_callback,
+							 		 Request::WORKER))
+							->Read(fr, egbase, ol);
 					} else
 						road.m_carrier_request = 0;
 
@@ -162,7 +160,7 @@ throw (_wexception)
 
 void Map_Roaddata_Data_Packet::Write
 	(FileSystem           &       fs,
-	 Editor_Game_Base     *       egbase,
+	 Editor_Game_Base     &       egbase,
 	 Map_Map_Object_Saver * const os)
 throw (_wexception)
 {
@@ -170,14 +168,14 @@ throw (_wexception)
 
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	Map   const & map        = egbase->map();
+	Map   const & map        = egbase.map();
 	Field const & fields_end = map[map.max_index()];
 	for (Field const * field = &map[0]; field < &fields_end; ++field)
 		if (upcast(Road const, r, field->get_immovable()))
-			if (not os->is_object_saved(r)) {
-				assert(os->is_object_known(r));
+			if (not os->is_object_saved(*r)) {
+				assert(os->is_object_known(*r));
 
-				fw.Unsigned32(os->get_object_file_index(r));
+				fw.Unsigned32(os->get_object_file_index(*r));
 
 				//  First, write PlayerImmovable Stuff
 				//  Theres only the owner
@@ -186,10 +184,10 @@ throw (_wexception)
 				fw.Unsigned32(r->m_type);
 
 				//  serial of flags
-				assert(os->is_object_known(r->m_flags[0]));
-				assert(os->is_object_known(r->m_flags[1]));
-				fw.Unsigned32(os->get_object_file_index(r->m_flags[0]));
-				fw.Unsigned32(os->get_object_file_index(r->m_flags[1]));
+				assert(os->is_object_known(*r->m_flags[0]));
+				assert(os->is_object_known(*r->m_flags[1]));
+				fw.Unsigned32(os->get_object_file_index(*r->m_flags[0]));
+				fw.Unsigned32(os->get_object_file_index(*r->m_flags[1]));
 
 				fw.Unsigned32(r->m_flagidx[0]);
 				fw.Unsigned32(r->m_flagidx[1]);
@@ -208,18 +206,19 @@ throw (_wexception)
 				fw.Unsigned32(r->m_desire_carriers);
 
 				if (r->m_carrier.get(egbase)) {
-					assert(os->is_object_known(r->m_carrier.get(egbase)));
-					fw.Unsigned32(os->get_object_file_index(r->m_carrier.get(egbase)));
+					assert(os->is_object_known(*r->m_carrier.get(egbase)));
+					fw.Unsigned32
+						(os->get_object_file_index(*r->m_carrier.get(egbase)));
 				} else
 					fw.Unsigned32(0);
 
 				if (r->m_carrier_request) {
 					fw.Unsigned8(1);
-					r->m_carrier_request->Write(&fw, egbase, os);
+					r->m_carrier_request->Write(fw, egbase, os);
 				} else
 					fw.Unsigned8(0);
 
-				os->mark_object_as_saved(r);
+				os->mark_object_as_saved(*r);
 			}
 
 	fw.Unsigned32(0xFFFFFFFF); // End of roads

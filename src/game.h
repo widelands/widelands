@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,8 +60,6 @@ struct Map_Loader;
 struct PlayerCommand;
 struct ReplayReader;
 struct ReplayWriter;
-
-struct GameInternals;
 
 struct Game : public Editor_Game_Base {
 	struct General_Stats {
@@ -140,7 +138,7 @@ struct Game : public Editor_Game_Base {
 
 	void enqueue_command (Command * const);
 
-	void send_player_command (Widelands::PlayerCommand *);
+	void send_player_command (Widelands::PlayerCommand &);
 
 	void send_player_bulldoze (PlayerImmovable &, bool recurse = false);
 	void send_player_build      (int32_t, Coords, Building_Index);
@@ -149,7 +147,8 @@ struct Game : public Editor_Game_Base {
 	void send_player_flagaction (Flag &);
 	void send_player_start_stop_building (Building &);
 	void send_player_enhance_building (Building &, Building_Index);
-	void send_player_set_ware_priority (PlayerImmovable*, int32_t type, Ware_Index index, int32_t prio);
+	void send_player_set_ware_priority
+		(PlayerImmovable &, int32_t type, Ware_Index index, int32_t prio);
 	void send_player_change_training_options(TrainingSite &, int32_t, int32_t);
 	void send_player_drop_soldier(Building &, int32_t);
 	void send_player_change_soldier_capacity(Building &, int32_t);
@@ -158,7 +157,7 @@ struct Game : public Editor_Game_Base {
 
 	Interactive_Player * get_ipl();
 
-	SaveHandler* get_save_handler() {return &m_savehandler;}
+	SaveHandler & save_handler() {return m_savehandler;}
 
 	// Statistics
 	const General_Stats_vector & get_general_statistics() const {
@@ -172,7 +171,46 @@ private:
 	void sample_statistics();
 
 private:
-	GameInternals* m;
+	void SyncReset();
+
+	MD5Checksum<StreamWrite> m_synchash;
+
+	struct SyncWrapper : public StreamWrite {
+		SyncWrapper(Game & game, StreamWrite & target) :
+			m_game          (game),
+			m_target        (target),
+			m_counter       (0),
+			m_dump          (0),
+			m_syncstreamsave(false)
+		{}
+
+		~SyncWrapper();
+
+		/// Start dumping the entire syncstream into a file.
+		///
+		/// Note that this file is deleted at the end of the game, unless
+		/// \ref m_syncstreamsave has been set.
+		void StartDump(std::string const & fname);
+
+		void Data(void const * data, size_t size);
+
+		void Flush() {m_target.Flush();}
+
+	public:
+		Game        &   m_game;
+		StreamWrite &   m_target;
+		uint32_t        m_counter;
+		::StreamWrite * m_dump;
+		std::string     m_dumpfname;
+		bool            m_syncstreamsave;
+	}                    m_syncwrapper;
+
+	GameController     * m_ctrl;
+
+	/// Whether a replay writer should be created.
+	/// Defaults to \c true, and should only be set to \c false for playing back
+	/// replays.
+	bool                 m_writereplay;
 
 	int32_t                            m_state;
 

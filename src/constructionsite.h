@@ -54,7 +54,7 @@ struct ConstructionSite_Descr : public Building_Descr {
 		 std::string const & directory, Profile &, Section & global_s,
 		 Tribe_Descr const & tribe, EncodeData const *);
 
-	virtual Building * create_object() const;
+	virtual Building & create_object() const;
 };
 
 class ConstructionSite : public Building {
@@ -80,8 +80,8 @@ public:
 	void set_previous_building(const Building_Descr * const);
 	const Building_Descr & building() const throw () {return *m_building;}
 
-	virtual void init(Editor_Game_Base* g);
-	virtual void cleanup(Editor_Game_Base* g);
+	virtual void init   (Editor_Game_Base &);
+	virtual void cleanup(Editor_Game_Base &);
 
 	virtual bool burn_on_destroy();
 
@@ -90,20 +90,20 @@ public:
 	uint32_t get_nrwaresqueues() {return m_wares.size();}
 	WaresQueue * get_waresqueue(uint32_t const idx) {return m_wares[idx];}
 
-	virtual bool fetch_from_flag(Game* g);
-	virtual bool get_building_work(Game* g, Worker* w, bool success);
+	virtual bool fetch_from_flag(Game &);
+	virtual bool get_building_work(Game &, Worker &, bool success);
 
-	void log_general_info(Editor_Game_Base *);
+	virtual void log_general_info(Editor_Game_Base const &);
 
 protected:
-	virtual UI::Window* create_options_window
-		(Interactive_Player * plr, UI::Window * * registry);
+	virtual void create_options_window
+		(Interactive_Player &, UI::Window * & registry);
 
-	void request_builder(Game* g);
+	void request_builder(Game &);
 	static void request_builder_callback
-		(Game *, Request *, Ware_Index, Worker *, void * data);
+		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 	static void wares_queue_callback
-		(Game *, WaresQueue *, Ware_Index, void * data);
+		(Game &, WaresQueue *, Ware_Index, void * data);
 
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);

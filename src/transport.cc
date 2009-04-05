@@ -72,12 +72,13 @@ struct IdleWareSupply : public Supply {
 	void set_economy(Economy *);
 
 	//  implementation of Supply
-	virtual PlayerImmovable* get_position(Game* g);
+	virtual PlayerImmovable * get_position(Game &);
 	virtual bool is_active() const throw ();
 
-	virtual uint32_t nr_supplies(Game *, Request const *) const;
-	virtual WareInstance & launch_item(Game * g, const Request*);
-	virtual Worker* launch_worker(Game* g, const Request*) __attribute__ ((noreturn));
+	virtual uint32_t nr_supplies(Game const &, Request const &) const;
+	virtual WareInstance & launch_item(Game &, Request const &);
+	virtual Worker & launch_worker(Game &, Request const &)
+		__attribute__ ((noreturn));
 
 private:
 	WareInstance & m_ware;
@@ -117,15 +118,15 @@ void IdleWareSupply::set_economy(Economy * const e)
 /**
  * Figure out the player immovable that this ware belongs to.
 */
-PlayerImmovable* IdleWareSupply::get_position(Game* g)
+PlayerImmovable * IdleWareSupply::get_position(Game & game)
 {
-	Map_Object * const loc = m_ware.get_location(g);
+	Map_Object * const loc = m_ware.get_location(game);
 
 	if (upcast(PlayerImmovable, playerimmovable, loc))
 		return playerimmovable;
 
 	if (upcast(Worker, worker, loc))
-		return worker->get_location(g);
+		return worker->get_location(game);
 
 	return 0;
 }
@@ -135,11 +136,11 @@ bool IdleWareSupply::is_active()  const throw ()
 	return not m_ware.is_moving();
 }
 
-uint32_t IdleWareSupply::nr_supplies(Game *, Request const * req) const
+uint32_t IdleWareSupply::nr_supplies(Game const &, Request const & req) const
 {
 	if
-		(req->get_type() == Request::WARE &&
-		 req->get_index() == m_ware.descr_index())
+		(req.get_type() == Request::WARE &&
+		 req.get_index() == m_ware.descr_index())
 		return 1;
 
 	return 0;
@@ -148,20 +149,20 @@ uint32_t IdleWareSupply::nr_supplies(Game *, Request const * req) const
 /**
  * The item is already "launched", so we only need to return it.
 */
-WareInstance & IdleWareSupply::launch_item(Game *, const Request* req) {
-	if (req->get_type() != Request::WARE)
+WareInstance & IdleWareSupply::launch_item(Game &, Request const & req) {
+	if (req.get_type() != Request::WARE)
 		throw wexception("IdleWareSupply::launch_item : called for non-item request");
-	if (req->get_index() != m_ware.descr_index())
+	if (req.get_index() != m_ware.descr_index())
 		throw wexception
 			("IdleWareSupply: ware(%u) (type = %i) requested for %i",
 			 m_ware.serial(),
 			 m_ware.descr_index().value(),
-			 req->get_index().value());
+			 req.get_index().value());
 
 	return m_ware;
 }
 
-Worker* IdleWareSupply::launch_worker(Game *, const Request*)
+Worker & IdleWareSupply::launch_worker(Game &, Request const &)
 {
 	throw wexception("IdleWareSupply::launch_worker makes no sense");
 }
@@ -199,36 +200,36 @@ int32_t WareInstance::get_type() const throw ()
 	return WARE;
 }
 
-void WareInstance::init(Editor_Game_Base* g)
+void WareInstance::init(Editor_Game_Base & egbase)
 {
-	Map_Object::init(g);
+	Map_Object::init(egbase);
 }
 
-void WareInstance::cleanup(Editor_Game_Base* g)
+void WareInstance::cleanup(Editor_Game_Base & egbase)
 {
 	//molog("WareInstance::cleanup\n");
 
 	// Unlink from our current location, if necessary
-	if (upcast(Flag, flag, m_location.get(g)))
-		flag->remove_item(g, this);
+	if (upcast(Flag, flag, m_location.get(egbase)))
+		flag->remove_item(egbase, this);
 
 	delete m_supply;
 	m_supply = 0;
 
-	if (upcast(Game, game, g)) {
+	if (upcast(Game, game, &egbase)) {
 		cancel_moving();
-		set_location(game, 0);
+		set_location(*game, 0);
 	}
 
 	//molog("  done\n");
 
-	Map_Object::cleanup(g);
+	Map_Object::cleanup(egbase);
 }
 
 /**
  * Ware accounting
 */
-void WareInstance::set_economy(Economy* e)
+void WareInstance::set_economy(Economy * const e)
 {
 	if (m_descr_index == Ware_Index::Null() or m_economy == e)
 		return;
@@ -247,9 +248,10 @@ void WareInstance::set_economy(Economy* e)
  * Once you've assigned a ware to its new location, you usually have to call
  * \ref update() as well.
 */
-void WareInstance::set_location(Editor_Game_Base* g, Map_Object* location)
+void WareInstance::set_location
+	(Editor_Game_Base & egbase, Map_Object * const location)
 {
-	Map_Object* oldlocation = m_location.get(g);
+	Map_Object * const oldlocation = m_location.get(egbase);
 
 	if (oldlocation == location)
 		return;
@@ -280,9 +282,9 @@ void WareInstance::set_location(Editor_Game_Base* g, Map_Object* location)
 /**
  * Handle delayed updates.
  */
-void WareInstance::act(Game* g, uint32_t)
+void WareInstance::act(Game & game, uint32_t)
 {
-	update(g);
+	update(game);
 }
 
 /**
@@ -297,7 +299,7 @@ void WareInstance::act(Game* g, uint32_t)
  *       it only once, \em unless the instance is deleted as a side-effect of
  *       \ref update().
  */
-void WareInstance::update(Game * game)
+void WareInstance::update(Game & game)
 {
 	Map_Object * const loc = m_location.get(game);
 
@@ -327,7 +329,7 @@ void WareInstance::update(Game * game)
 
 		bool success;
 		PlayerImmovable * const nextstep =
-			m_transfer->get_next_step(location, &success);
+			m_transfer->get_next_step(location, success);
 		m_transfer_nextstep = nextstep;
 
 		if (!nextstep) {
@@ -348,7 +350,7 @@ void WareInstance::update(Game * game)
 		}
 
 		if (upcast(Building, building, location)) {
-			if (nextstep != location->get_base_flag())
+			if (nextstep != &location->base_flag())
 				throw wexception("MO(%u): ware: move from building to non-baseflag", serial());
 
 			// There are some situations where we might end up in a warehouse as
@@ -369,12 +371,12 @@ void WareInstance::update(Game * game)
 		} else if (upcast(Flag, flag, location)) {
 			flag->call_carrier
 				(game,
-				 this,
+				 *this,
 				 dynamic_cast<Building const *>(nextstep)
 				 &&
-				 nextstep->get_base_flag() != location
+				 &nextstep->base_flag() != location
 				 ?
-				 nextstep->get_base_flag() : nextstep);
+				 &nextstep->base_flag() : nextstep);
 		}
 	}
 }
@@ -384,10 +386,8 @@ void WareInstance::update(Game * game)
  *
  * \param t the new transfer (non-zero; use \ref cancel_transfer to stop a transfer).
  */
-void WareInstance::set_transfer(Game* g, Transfer* t)
+void WareInstance::set_transfer(Game & game, Transfer & t)
 {
-	assert(t != 0);
-
 	// Reset current transfer
 	if (m_transfer) {
 		m_transfer->has_failed();
@@ -395,7 +395,7 @@ void WareInstance::set_transfer(Game* g, Transfer* t)
 	}
 
 	// Set transfer state
-	m_transfer = t;
+	m_transfer = &t;
 
 	delete m_supply;
 	m_supply = 0;
@@ -405,17 +405,17 @@ void WareInstance::set_transfer(Game* g, Transfer* t)
 	// the Transfer object in a way that is not valid yet (note that this
 	// function is called in the Transfer constructor before the Transfer
 	// is linked to the corresponding Request).
-	schedule_act(g, 1, 0);
+	schedule_act(game, 1, 0);
 }
 
 /**
  * The transfer has been cancelled, just stop moving.
 */
-void WareInstance::cancel_transfer(Game* g)
+void WareInstance::cancel_transfer(Game & game)
 {
 	m_transfer = 0;
 
-	update(g);
+	update(game);
 }
 
 /**
@@ -441,11 +441,11 @@ void WareInstance::cancel_moving() {
  * Return the next flag we should be moving to, or the final target if the route
  * has been completed successfully.
 */
-PlayerImmovable* WareInstance::get_next_move_step(Game* g)
+PlayerImmovable * WareInstance::get_next_move_step(Game & game)
 {
 	return
 		m_transfer ?
-		dynamic_cast<PlayerImmovable *>(m_transfer_nextstep.get(g)) : 0;
+		dynamic_cast<PlayerImmovable *>(m_transfer_nextstep.get(game)) : 0;
 }
 
 
@@ -497,24 +497,31 @@ Flag::~Flag()
 /**
  * Create a flag at the given location
 */
-Flag *Flag::create(Editor_Game_Base *g, Player *owner, Coords coords)
+Flag::Flag
+	(Editor_Game_Base & egbase, Player & owning_player, Coords const coords)
+	:
+	PlayerImmovable       (g_flag_descr),
+	m_anim                (0),
+	m_building            (0),
+	m_item_capacity       (8),
+	m_item_filled         (0),
+	m_items               (new PendingItem[m_item_capacity]),
+	m_always_call_for_flag(0)
 {
-	BaseImmovable * const imm = g->map().get_immovable(coords);
+	for (uint32_t i = 0; i < 6; ++i) m_roads[i] = 0;
 
-	Flag *flag = new Flag();
-	flag->set_owner(owner);
-	flag->m_position = coords;
+	set_owner(&owning_player);
+	m_position = coords;
 
-	upcast(Road, road, imm);
+	upcast(Road, road, egbase.map().get_immovable(coords));
 	//  we split a road, or a new, standalone flag is created
-	(road ? road->get_economy() : new Economy(*owner))->add_flag(*flag);
+	(road ? road->get_economy() : new Economy(owning_player))->add_flag(*this);
 
 	if (road)
-		road->presplit(g, coords);
-	flag->init(g);
+		road->presplit(egbase, coords);
+	init(egbase);
 	if (road)
-		road->postsplit(g, flag);
-	return flag;
+		road->postsplit(egbase, *this);
 }
 
 int32_t Flag::get_type() const throw ()
@@ -537,9 +544,9 @@ static std::string const flag_name = "flag";
 std::string const & Flag::name() const throw () {return flag_name;}
 
 
-Flag *Flag::get_base_flag()
+Flag & Flag::base_flag()
 {
-	return this;
+	return *this;
 }
 
 /**
@@ -560,7 +567,7 @@ void Flag::set_economy(Economy *e)
 	if (m_building)
 		m_building->set_economy(e);
 
-	container_iterate_const(std::list<FlagJob>, m_flag_jobs, i)
+	container_iterate_const(FlagJobs, m_flag_jobs, i)
 		i.current->request->set_economy(e);
 
 	for (int8_t i = 0; i < 6; ++i) {
@@ -572,30 +579,30 @@ void Flag::set_economy(Economy *e)
 /**
  * Call this only from the Building init!
 */
-void Flag::attach_building(Editor_Game_Base *g, Building *building)
+void Flag::attach_building(Editor_Game_Base & egbase, Building & building)
 {
-	assert(!m_building || m_building==building);
+	assert(!m_building || m_building == &building);
 
-	m_building = building;
+	m_building = &building;
 
-	const Map  & map = g->map();
-	g->set_road
+	Map const & map = egbase.map();
+	egbase.set_road
 		(map.get_fcoords(map.tl_n(m_position)), Road_SouthEast, Road_Normal);
 
-	m_building->set_economy(get_economy());
+	building.set_economy(get_economy());
 }
 
 /**
  * Call this only from the Building cleanup!
 */
-void Flag::detach_building(Editor_Game_Base *g)
+void Flag::detach_building(Editor_Game_Base & egbase)
 {
 	assert(m_building);
 
 	m_building->set_economy(0);
 
-	const Map & map = g->map();
-	g->set_road
+	Map const & map = egbase.map();
+	egbase.set_road
 		(map.get_fcoords(map.tl_n(m_position)), Road_SouthEast, Road_None);
 
 	m_building = 0;
@@ -635,11 +642,11 @@ void Flag::get_neighbours(Neighbour_list *neighbours)
 
 		Neighbour n;
 		n.road = road;
-		n.flag = road->get_flag(Road::FlagEnd);
+		n.flag = &road->get_flag(Road::FlagEnd);
 		if (n.flag != this)
 			n.cost = road->get_cost(Road::FlagStart);
 		else {
-			n.flag = road->get_flag(Road::FlagStart);
+			n.flag = &road->get_flag(Road::FlagStart);
 			n.cost = road->get_cost(Road::FlagEnd);
 		}
 
@@ -663,7 +670,9 @@ Road *Flag::get_road(Flag *flag)
 		if (!road)
 			continue;
 
-		if (road->get_flag(Road::FlagStart) == flag || road->get_flag(Road::FlagEnd) == flag)
+		if
+			(&road->get_flag(Road::FlagStart) == flag ||
+			 &road->get_flag(Road::FlagEnd)   == flag)
 			return road;
 	}
 
@@ -677,9 +686,8 @@ bool Flag::is_dead_end() const {
 	Flag const * first_other_flag = 0;
 	for (uint8_t road_id = 6; road_id; --road_id)
 		if (Road * const road = get_road(road_id)) {
-			Flag & start = *road->get_flag(Road::FlagStart);
-			Flag & other =
-				this == &start ? *road->get_flag(Road::FlagEnd) : start;
+			Flag & start = road->get_flag(Road::FlagStart);
+			Flag & other = this == &start ? road->get_flag(Road::FlagEnd) : start;
 			if (first_other_flag) {
 				if (&other != first_other_flag)
 					return false;
@@ -704,35 +712,35 @@ bool Flag::has_capacity()
  *
  * The capacity queue is a simple FIFO queue.
  */
-void Flag::wait_for_capacity(Game *, Worker* bob)
+void Flag::wait_for_capacity(Game &, Worker & bob)
 {
-	m_capacity_wait.push_back(bob);
+	m_capacity_wait.push_back(&bob);
 }
 
 /**
  * Remove the worker from the list of workers waiting for free capacity.
  */
-void Flag::skip_wait_for_capacity(Game * g, Worker* w)
+void Flag::skip_wait_for_capacity(Game &, Worker & w)
 {
-	CapacityWaitQueue::iterator it = std::find(m_capacity_wait.begin(), m_capacity_wait.end(), w);
+	CapacityWaitQueue::iterator const it =
+		std::find(m_capacity_wait.begin(), m_capacity_wait.end(), &w);
 	if (it != m_capacity_wait.end())
 		m_capacity_wait.erase(it);
 }
 
 
-void Flag::add_item(Game* g, WareInstance* item)
+void Flag::add_item(Game & game, WareInstance & item)
 {
-	PendingItem* pi;
 
 	assert(m_item_filled < m_item_capacity);
 
-	pi = &m_items[m_item_filled++];
-	pi->item = item;
-	pi->pending = false;
-	pi->nextstep = 0;
+	PendingItem & pi = m_items[m_item_filled++];
+	pi.item     = &item;
+	pi.pending  = false;
+	pi.nextstep = 0;
 
-	item->set_location(g, this);
-	item->update(g); // will call call_carrier() if necessary
+	item.set_location(game, this);
+	item.update(game); //  will call call_carrier() if necessary
 }
 
 /**
@@ -741,14 +749,14 @@ void Flag::add_item(Game* g, WareInstance* item)
  * \note Due to fetch_from_flag() semantics, this function makes no sense
  * for a  building destination.
 */
-bool Flag::has_pending_item(Game *, Flag * dest) {
+bool Flag::has_pending_item(Game &, Flag & dest) {
 	int32_t i;
 
 	for (i = 0; i < m_item_filled; ++i) {
 		if (!m_items[i].pending)
 			continue;
 
-		if (m_items[i].nextstep != dest)
+		if (m_items[i].nextstep != &dest)
 			continue;
 
 		return true;
@@ -762,14 +770,14 @@ bool Flag::has_pending_item(Game *, Flag * dest) {
  * item.
  * \return true if an item is actually waiting for the carrier.
 */
-bool Flag::ack_pending_item(Game *, Flag * destflag) {
+bool Flag::ack_pending_item(Game &, Flag & destflag) {
 	int32_t i;
 
 	for (i = 0; i < m_item_filled; ++i) {
 		if (!m_items[i].pending)
 			continue;
 
-		if (m_items[i].nextstep != destflag)
+		if (m_items[i].nextstep != &destflag)
 			continue;
 
 		m_items[i].pending = false;
@@ -782,12 +790,12 @@ bool Flag::ack_pending_item(Game *, Flag * destflag) {
 /**
  * Wake one sleeper from the capacity queue.
 */
-void Flag::wake_up_capacity_queue(Game* g)
+void Flag::wake_up_capacity_queue(Game & game)
 {
 	while (m_capacity_wait.size()) {
-		Worker* w = m_capacity_wait[0].get(g);
+		Worker * const w = m_capacity_wait[0].get(game);
 		m_capacity_wait.erase(m_capacity_wait.begin());
-		if (w and w->wakeup_flag_capacity(g, this))
+		if (w and w->wakeup_flag_capacity(game, *this))
 			break;
 	}
 }
@@ -799,12 +807,12 @@ void Flag::wake_up_capacity_queue(Game* g)
  * This function may return 0 even if \ref ack_pending_item() has already been
  * called successfully.
 */
-WareInstance* Flag::fetch_pending_item(Game* g, PlayerImmovable* dest)
+WareInstance * Flag::fetch_pending_item(Game & game, PlayerImmovable & dest)
 {
 	int32_t best_index = -1;
 
 	for (int32_t i = 0; i < m_item_filled; ++i) {
-		if (m_items[i].nextstep != dest)
+		if (m_items[i].nextstep != &dest)
 			continue;
 
 		// We prefer to retrieve items that have already been acked
@@ -822,10 +830,10 @@ WareInstance* Flag::fetch_pending_item(Game* g, PlayerImmovable* dest)
 		(&m_items[best_index], &m_items[best_index + 1],
 		 sizeof(m_items[0]) * (m_item_filled - best_index));
 
-	item->set_location(g, 0);
+	item->set_location(game, 0);
 
 	// wake up capacity wait queue
-	wake_up_capacity_queue(g);
+	wake_up_capacity_queue(game);
 
 	return item;
 }
@@ -834,7 +842,7 @@ WareInstance* Flag::fetch_pending_item(Game* g, PlayerImmovable* dest)
  * Force a removal of the given item from this flag.
  * Called by \ref WareInstance::cleanup()
 */
-void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
+void Flag::remove_item(Editor_Game_Base & egbase, WareInstance * const item)
 {
 	for (int32_t i = 0; i < m_item_filled; ++i) {
 		if (m_items[i].item != item)
@@ -845,8 +853,8 @@ void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
 			(&m_items[i], &m_items[i + 1],
 			 sizeof(m_items[0]) * (m_item_filled - i));
 
-		if (upcast(Game, game, g))
-			wake_up_capacity_queue(game);
+		if (upcast(Game, game, &egbase))
+			wake_up_capacity_queue(*game);
 
 		return;
 	}
@@ -870,14 +878,15 @@ void Flag::remove_item(Editor_Game_Base* g, WareInstance* item)
  * update_items() to ensure that new carriers are called when roads are
  * split, for example.
 */
-void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
+void Flag::call_carrier
+	(Game & game, WareInstance & item, PlayerImmovable * const nextstep)
 {
-	PendingItem* pi = 0;
+	PendingItem * pi = 0;
 	int32_t i = 0;
 
 	// Find the PendingItem entry
 	for (; i < m_item_filled; ++i) {
-		if (m_items[i].item != item)
+		if (m_items[i].item != &item)
 			continue;
 
 		pi = &m_items[i];
@@ -902,11 +911,13 @@ void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 
 	// Deal with the building case
 	if (nextstep == get_building()) {
-		molog("Flag::call_carrier(%u): Tell building to fetch this item\n", item->serial());
+		molog
+			("Flag::call_carrier(%u): Tell building to fetch this item\n",
+			 item.serial());
 
-		if (!get_building()->fetch_from_flag(g)) {
+		if (!get_building()->fetch_from_flag(game)) {
 			pi->item->cancel_moving();
-			pi->item->update(g);
+			pi->item->update(game);
 		}
 
 		return;
@@ -923,19 +934,19 @@ void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
 		if (!road)
 			continue;
 
-		if (road->get_flag(Road::FlagStart) == this) {
+		if (&road->get_flag(Road::FlagStart) == this) {
 			flagid = Road::FlagStart;
-			other = road->get_flag(Road::FlagEnd);
+			other = &road->get_flag(Road::FlagEnd);
 		} else {
 			flagid = Road::FlagEnd;
-			other = road->get_flag(Road::FlagStart);
+			other = &road->get_flag(Road::FlagStart);
 		}
 
 		if (other != nextstep)
 			continue;
 
 		// Yes, this is the road we want; inform it
-		if (road->notify_ware(g, flagid))
+		if (road->notify_ware(game, flagid))
 			return;
 
 		// If the road doesn't react to the ware immediately, we try other roads:
@@ -957,30 +968,30 @@ void Flag::call_carrier(Game* g, WareInstance* item, PlayerImmovable* nextstep)
  * fragile.
  * A similar thing can happen when a road is split.
 */
-void Flag::update_items(Game* g, Flag* other)
+void Flag::update_items(Game & game, Flag * const other)
 {
 	m_always_call_for_flag = other;
 
 	for (int32_t i = 0; i < m_item_filled; ++i)
-		m_items[i].item->update(g);
+		m_items[i].item->update(game);
 
 	m_always_call_for_flag = 0;
 }
 
-void Flag::init(Editor_Game_Base *g)
+void Flag::init(Editor_Game_Base & egbase)
 {
-	PlayerImmovable::init(g);
+	PlayerImmovable::init(egbase);
 
-	set_position(g, m_position);
+	set_position(egbase, m_position);
 
 	m_anim = owner().tribe().get_flag_anim();
-	m_animstart = g->get_gametime();
+	m_animstart = egbase.get_gametime();
 }
 
 /**
  * Detach building and free roads.
 */
-void Flag::cleanup(Editor_Game_Base *g)
+void Flag::cleanup(Editor_Game_Base & egbase)
 {
 	//molog("Flag::cleanup\n");
 
@@ -990,33 +1001,33 @@ void Flag::cleanup(Editor_Game_Base *g)
 	}
 
 	while (m_item_filled) {
-		WareInstance* item = m_items[--m_item_filled].item;
+		WareInstance & item = *m_items[--m_item_filled].item;
 
-		item->set_location(dynamic_cast<Game *>(g), 0);
-		item->destroy     (dynamic_cast<Game *>(g));
+		item.set_location(dynamic_cast<Game &>(egbase), 0);
+		item.destroy     (dynamic_cast<Game &>(egbase));
 	}
 
 	//molog("  items destroyed\n");
 
 	if (m_building) {
-		m_building->remove(g); // immediate death
+		m_building->remove(egbase); //  immediate death
 		assert(!m_building);
 	}
 
 	for (int8_t i = 0; i < 6; ++i) {
 		if (m_roads[i]) {
-			m_roads[i]->remove(g); // immediate death
+			m_roads[i]->remove(egbase); //  immediate death
 			assert(!m_roads[i]);
 		}
 	}
 
 	get_economy()->remove_flag(*this);
 
-	unset_position(g, m_position);
+	unset_position(egbase, m_position);
 
 	//molog("  done\n");
 
-	PlayerImmovable::cleanup(g);
+	PlayerImmovable::cleanup(egbase);
 }
 
 /**
@@ -1026,14 +1037,14 @@ void Flag::cleanup(Editor_Game_Base *g)
  * \ref Flag::cleanup(). This function is needed to ensure a fire is created
  * when a player removes a flag.
 */
-void Flag::destroy(Editor_Game_Base* g)
+void Flag::destroy(Editor_Game_Base & egbase)
 {
 	if (m_building) {
-		m_building->destroy(g);
+		m_building->destroy(egbase);
 		assert(!m_building);
 	}
 
-	PlayerImmovable::destroy(g);
+	PlayerImmovable::destroy(egbase);
 }
 
 /**
@@ -1047,10 +1058,7 @@ void Flag::add_flag_job
 
 	j.request =
 		new Request
-			(this,
-			 workerware,
-			 &Flag::flag_job_request_callback, this,
-			 Request::WORKER);
+			(*this, workerware, Flag::flag_job_request_callback, Request::WORKER);
 	j.program = programname;
 
 	m_flag_jobs.push_back(j);
@@ -1061,23 +1069,27 @@ void Flag::add_flag_job
  * the flag. Give him his job.
 */
 void Flag::flag_job_request_callback
-	(Game * g, Request * rq, Ware_Index, Worker * w, void * data)
+	(Game            &       game,
+	 Request         &       rq,
+	 Ware_Index,
+	 Worker          * const w,
+	 PlayerImmovable &       target)
 {
-	Flag * const flag = static_cast<Flag *>(data);
+	Flag & flag = dynamic_cast<Flag &>(target);
 
 	assert(w);
 
-	container_iterate(std::list<FlagJob>, flag->m_flag_jobs, i)
-		if (i.current->request == rq) {
-			delete rq;
+	container_iterate(FlagJobs, flag.m_flag_jobs, i)
+		if (i.current->request == &rq) {
+			delete &rq;
 
-			w->start_task_program(g, i.current->program);
+			w->start_task_program(game, i.current->program);
 
-			flag->m_flag_jobs.erase(i.current);
+			flag.m_flag_jobs.erase(i.current);
 			return;
 		}
 
-	flag->molog("BUG: flag_job_request_callback: worker not found in list\n");
+	flag.molog("BUG: flag_job_request_callback: worker not found in list\n");
 }
 
 /*
@@ -1135,7 +1147,7 @@ void Road::create
 	road.m_flags[FlagStart] = &start;
 	road.m_flags[FlagEnd]   = &end;
 	// m_flagidx is set when attach_road() is called, i.e. in init()
-	road.set_path(&egbase, path);
+	road.set_path(egbase, path);
 	if (create_carrier) {
 		Coords idle_position = start.get_position();
 		{
@@ -1149,11 +1161,11 @@ void Road::create
 			dynamic_cast<Carrier &>
 				(tribe.get_worker_descr(tribe.worker_index("carrier"))->create
 				 	(egbase, owner, &start, idle_position));
-		carrier.start_task_road(dynamic_cast<Game*>(&egbase));
+		carrier.start_task_road(dynamic_cast<Game &>(egbase));
 		road.m_carrier = &carrier;
 	}
 	log("Road::create: &road = %p\n", &road);
-	road.init(&egbase);
+	road.init(egbase);
 }
 
 int32_t Road::get_type() const throw ()
@@ -1176,9 +1188,9 @@ static std::string const road_name = "road";
 std::string const & Road::name() const throw () {return road_name;}
 
 
-Flag *Road::get_base_flag()
+Flag & Road::base_flag()
 {
-	return m_flags[FlagStart];
+	return *m_flags[FlagStart];
 }
 
 /**
@@ -1193,14 +1205,14 @@ int32_t Road::get_cost(FlagId fromflag)
  * Set the new path, calculate costs.
  * You have to set start and end flags before calling this function.
 */
-void Road::set_path(Editor_Game_Base *g, const Path &path)
+void Road::set_path(Editor_Game_Base & egbase, Path const & path)
 {
 	assert(path.get_nsteps() >= 2);
 	assert(path.get_start() == m_flags[FlagStart]->get_position());
 	assert(path.get_end() == m_flags[FlagEnd]->get_position());
 
 	m_path = path;
-	g->map().calc_cost(path, &m_cost[FlagStart], &m_cost[FlagEnd]);
+	egbase.map().calc_cost(path, &m_cost[FlagStart], &m_cost[FlagEnd]);
 
 	// Figure out where carriers should idle
 	m_idle_index = path.get_nsteps() / 2;
@@ -1209,22 +1221,23 @@ void Road::set_path(Editor_Game_Base *g, const Path &path)
 /**
  * Add road markings to the map
 */
-void Road::mark_map(Editor_Game_Base *g)
+void Road::mark_map(Editor_Game_Base & egbase)
 {
-	Map & map = g->map();
+	Map & map = egbase.map();
 	FCoords curf = map.get_fcoords(m_path.get_start());
 
 	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
 	for (Path::Step_Vector::size_type steps = 0; steps <= nr_steps; ++steps) {
 		if (steps > 0 && steps < m_path.get_nsteps())
-			set_position(g, curf);
+			set_position(egbase, curf);
 
 		// mark the road that leads up to this field
 		if (steps > 0) {
 			const Direction dir  = get_reverse_dir(m_path[steps - 1]);
 			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
-			if (rdir <= 4) g->set_road(curf, rdir, m_type);
+			if (rdir <= 4)
+				egbase.set_road(curf, rdir, m_type);
 		}
 
 		// mark the road that leads away from this field
@@ -1232,7 +1245,8 @@ void Road::mark_map(Editor_Game_Base *g)
 			const Direction dir  = m_path[steps];
 			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
-			if (rdir <= 4) g->set_road(curf, rdir, m_type);
+			if (rdir <= 4)
+				egbase.set_road(curf, rdir, m_type);
 
 			map.get_neighbour(curf, dir, &curf);
 		}
@@ -1242,8 +1256,8 @@ void Road::mark_map(Editor_Game_Base *g)
 /**
  * Remove road markings from the map
 */
-void Road::unmark_map(Editor_Game_Base * egbase) {
-	Map & map = egbase->map();
+void Road::unmark_map(Editor_Game_Base & egbase) {
+	Map & map = egbase.map();
 	FCoords curf(m_path.get_start(), &map[m_path.get_start()]);
 
 	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
@@ -1257,7 +1271,7 @@ void Road::unmark_map(Editor_Game_Base * egbase) {
 			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
 			if (rdir <= 4)
-				egbase->set_road(curf, rdir, Road_None);
+				egbase.set_road(curf, rdir, Road_None);
 		}
 
 		// mark the road that leads away from this field
@@ -1266,7 +1280,7 @@ void Road::unmark_map(Editor_Game_Base * egbase) {
 			const Direction rdir = 2 * (dir - Map_Object::WALK_E);
 
 			if (rdir <= 4)
-				egbase->set_road(curf, rdir, Road_None);
+				egbase.set_road(curf, rdir, Road_None);
 
 			map.get_neighbour(curf, dir, &curf);
 		}
@@ -1276,11 +1290,12 @@ void Road::unmark_map(Editor_Game_Base * egbase) {
 /**
  * Initialize the road.
 */
-void Road::init(Editor_Game_Base *gg)
+void Road::init(Editor_Game_Base & egbase)
 {
-	PlayerImmovable::init(gg);
+	PlayerImmovable::init(egbase);
 
-	if (m_path.get_nsteps() >=2) link_into_flags(gg);
+	if (2 <= m_path.get_nsteps())
+		link_into_flags(egbase);
 }
 
 /**
@@ -1290,7 +1305,7 @@ void Road::init(Editor_Game_Base *gg)
  * we needed to have this road already registered
  * as Map Object, thats why this is moved
  */
-void Road::link_into_flags(Editor_Game_Base* gg) {
+void Road::link_into_flags(Editor_Game_Base & egbase) {
 	assert(m_path.get_nsteps() >= 2);
 
 	// Link into the flags (this will also set our economy)
@@ -1310,27 +1325,27 @@ void Road::link_into_flags(Editor_Game_Base* gg) {
 	Economy::check_merge(*m_flags[FlagStart], *m_flags[FlagEnd]);
 
 	// Mark Fields
-	mark_map(gg);
+	mark_map(egbase);
 
-	if (upcast(Game, game, gg)) {
+	if (upcast(Game, game, &egbase)) {
 		Carrier * const carrier =
-			static_cast<Carrier *>(m_carrier.get(game));
+			static_cast<Carrier *>(m_carrier.get(*game));
 		m_desire_carriers = 1;
 		if (carrier) {
 			//  This happens after a road split. Tell the carrier what's going on.
 			carrier->set_location    (this);
-			carrier->update_task_road(game);
+			carrier->update_task_road(*game);
 		} else if (not m_carrier_request)
-			request_carrier(game);
+			request_carrier(*game);
 	}
 }
 
 /**
  * Cleanup the road
 */
-void Road::cleanup(Editor_Game_Base *gg)
+void Road::cleanup(Editor_Game_Base & egbase)
 {
-	Game* g = static_cast<Game*>(gg);
+	Game & game = dynamic_cast<Game &>(egbase);
 
 	// Release carrier
 	m_desire_carriers = 0;
@@ -1341,7 +1356,7 @@ void Road::cleanup(Editor_Game_Base *gg)
 	m_carrier = 0; // carrier will be released via PlayerImmovable::cleanup
 
 	// Unmark Fields
-	unmark_map(g);
+	unmark_map(game);
 
 	// Unlink from flags (also clears the economy)
 	m_flags[FlagStart]->detach_road(m_flagidx[FlagStart]);
@@ -1349,10 +1364,10 @@ void Road::cleanup(Editor_Game_Base *gg)
 
 	Economy::check_split(*m_flags[FlagStart], *m_flags[FlagEnd]);
 
-	m_flags[FlagStart]->update_items(g, m_flags[FlagEnd]);
-	m_flags[FlagEnd]->update_items(g, m_flags[FlagStart]);
+	m_flags[FlagStart]->update_items(game, m_flags[FlagEnd]);
+	m_flags[FlagEnd]->update_items(game, m_flags[FlagStart]);
 
-	PlayerImmovable::cleanup(g);
+	PlayerImmovable::cleanup(game);
 }
 
 /**
@@ -1374,52 +1389,57 @@ void Road::set_economy(Economy * const e)
 */
 void Road::request_carrier
 #ifndef NDEBUG
-	(Game * g)
+	(Game & game)
 #else
-	(Game *)
+	(Game &)
 #endif
 {
-	assert(!m_carrier.get(g) && !m_carrier_request);
+	assert(!m_carrier.get(game) && !m_carrier_request);
 
 	m_carrier_request =
 		new Request
-			(this,
-			 get_owner()->tribe().safe_worker_index("carrier"),
-			 &Road::request_carrier_callback, this, Request::WORKER);
+			(*this,
+			 owner().tribe().safe_worker_index("carrier"),
+			 Road::request_carrier_callback,
+			 Request::WORKER);
 }
 
 /**
  * The carrier has arrived successfully.
 */
 void Road::request_carrier_callback
-	(Game * g, Request * rq, Ware_Index, Worker * w, void * data)
+	(Game            &       game,
+	 Request         &       rq,
+	 Ware_Index,
+	 Worker          * const w,
+	 PlayerImmovable &       target)
 {
 	assert(w);
 
-	Road    & road    = *static_cast<Road *>(data);
+	Road    & road    = dynamic_cast<Road    &>(target);
 	Carrier & carrier = dynamic_cast<Carrier &>(*w);
 
-	delete rq;
+	delete &rq;
 	road.m_carrier_request = 0;
 
 	road.m_carrier = &carrier;
-	carrier.start_task_road(g);
+	carrier.start_task_road(game);
 }
 
 /**
  * If we lost our carrier, re-request it.
 */
-void Road::remove_worker(Worker *w)
+void Road::remove_worker(Worker & w)
 {
 	Editor_Game_Base & egbase = owner().egbase();
-	Carrier * carrier = dynamic_cast<Carrier *>(m_carrier.get(&egbase));
+	Carrier * carrier = dynamic_cast<Carrier *>(m_carrier.get(egbase));
 
-	if (carrier == w)
+	if (carrier == &w)
 		m_carrier = carrier = 0;
 
 	if (not carrier and not m_carrier_request and m_desire_carriers)
 		if (upcast(Game, game, &egbase))
-			request_carrier(game);
+			request_carrier(*game);
 
 	PlayerImmovable::remove_worker(w);
 }
@@ -1429,7 +1449,7 @@ void Road::remove_worker(Worker *w)
  * the new flag initializes. We remove markings to avoid interference with the
  * flag.
 */
-void Road::presplit(Editor_Game_Base * g, Coords) {unmark_map(g);}
+void Road::presplit(Editor_Game_Base & egbase, Coords) {unmark_map(egbase);}
 
 /**
  * The flag that splits this road has been initialized. Perform the actual
@@ -1438,17 +1458,18 @@ void Road::presplit(Editor_Game_Base * g, Coords) {unmark_map(g);}
  * After the split, this road will span [start...new flag]. A new road will
  * be created to span [new flag...end]
 */
-void Road::postsplit(Editor_Game_Base *g, Flag *flag)
+void Road::postsplit(Editor_Game_Base & egbase, Flag & flag)
 {
-	Flag *oldend = m_flags[FlagEnd];
+	Flag & oldend = *m_flags[FlagEnd];
 
 	// detach from end
-	m_flags[FlagEnd]->detach_road(m_flagidx[FlagEnd]);
+	oldend.detach_road(m_flagidx[FlagEnd]);
 
 	// build our new path and the new road's path
-	CoordPath path(g->map(), m_path);
+	Map & map = egbase.map();
+	CoordPath path(map, m_path);
 	CoordPath secondpath(path);
-	int32_t index = path.get_index(flag->get_position());
+	int32_t const index = path.get_index(flag.get_position());
 
 	assert(index > 0);
 	assert(static_cast<uint32_t>(index) < path.get_nsteps() - 1);
@@ -1457,28 +1478,28 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 	secondpath.starttrim(index);
 
 	// change road size and reattach
-	m_flags[FlagEnd] = flag;
-	set_path(g, path);
+	m_flags[FlagEnd] = &flag;
+	set_path(egbase, path);
 
 	const Direction dir = get_reverse_dir(m_path[m_path.get_nsteps() - 1]);
 	m_flags[FlagEnd]->attach_road(dir, this);
 	m_flagidx[FlagEnd] = dir;
 
 	// recreate road markings
-	mark_map(g);
+	mark_map(egbase);
 
 	// create the new road
-	Road *newroad = new Road();
-	newroad->set_owner(get_owner());
-	newroad->m_type = m_type;
-	newroad->m_flags[FlagStart] = flag; // flagidx will be set on init()
-	newroad->m_flags[FlagEnd] = oldend;
-	newroad->set_path(g, secondpath);
+	Road & newroad = *new Road();
+	newroad.set_owner(get_owner());
+	newroad.m_type = m_type;
+	newroad.m_flags[FlagStart] = &flag; //  flagidx will be set on init()
+	newroad.m_flags[FlagEnd] = &oldend;
+	newroad.set_path(egbase, secondpath);
 
 	// Find workers on this road that need to be reassigned
 	// The algorithm is pretty simplistic, and has a bias towards keeping
 	// the worker around; there's obviously nothing wrong with that.
-	upcast(Carrier, carrier, m_carrier.get(g));
+	upcast(Carrier, carrier, m_carrier.get(egbase));
 	std::vector<Worker *> const workers = get_workers();
 	std::vector<Worker *> reassigned_workers;
 
@@ -1491,7 +1512,6 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 		// If he is in the building at our end flag or at the other road's
 		// end flag, he can be reassigned to the other road.
 		if (idx < 0) {
-			Map const & map = g->map();
 			if
 				(dynamic_cast<Building const *>
 				 	(map.get_immovable(w.get_position())))
@@ -1512,35 +1532,35 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
 				// Reassign the carrier. Note that the final steps of reassigning
 				// are done in newroad->init()
 				m_carrier = 0;
-				newroad->m_carrier = carrier;
+				newroad.m_carrier = carrier;
 			}
 		}
 
 		// Cause a worker update in any case
-		if (upcast(Game, game, g))
-			w.send_signal(game, "road");
+		if (upcast(Game, game, &egbase))
+			w.send_signal(*game, "road");
 	}
 
 	// Initialize the new road
-	newroad->init(g);
+	newroad.init(egbase);
 
 	// Actually reassign workers after the new road has initialized,
 	// so that the reassignment is safe
 	container_iterate_const(std::vector<Worker *>, reassigned_workers, i)
-		(*i.current)->set_location(newroad);
+		(*i.current)->set_location(&newroad);
 
 	// Do the following only if in game
-	if (upcast(Game, game, g)) {
+	if (upcast(Game, game, &egbase)) {
 
 		// Request a new carrier for this road if necessary
 		// This must be done _after_ the new road initializes, otherwise request
 		// routing might not work correctly
-		if (!m_carrier.get(g) && !m_carrier_request)
-			request_carrier(game);
+		if (!m_carrier.get(egbase) && !m_carrier_request)
+			request_carrier(*game);
 
 		// Make sure items waiting on the original endpoint flags are dealt with
-		m_flags[FlagStart]->update_items(static_cast<Game*>(g), oldend);
-		oldend->update_items(game, m_flags[FlagStart]);
+		m_flags[FlagStart]->update_items(*game, &oldend);
+		oldend.update_items(*game, m_flags[FlagStart]);
 	}
 }
 
@@ -1548,10 +1568,10 @@ void Road::postsplit(Editor_Game_Base *g, Flag *flag)
  * Called by Flag code: an item should be picked up from the given flag.
  * \return true if a carrier has been sent on its way, false otherwise.
  */
-bool Road::notify_ware(Game* g, FlagId flagid)
+bool Road::notify_ware(Game & game, FlagId const flagid)
 {
-	if (upcast(Carrier, carrier, m_carrier.get(g)))
-		return carrier->notify_ware(g, flagid);
+	if (upcast(Carrier, carrier, m_carrier.get(game)))
+		return carrier->notify_ware(game, flagid);
 	return false;
 }
 
@@ -1581,11 +1601,11 @@ void Route::clear()
  * idx == 0 is the start flag, idx == get_nrsteps() is the end flag.
  * Every route has at least one flag.
 */
-Flag * Route::get_flag
-	(Editor_Game_Base * const g, std::vector<Flag *>::size_type const idx)
+Flag & Route::get_flag
+	(Editor_Game_Base & egbase, std::vector<Flag *>::size_type const idx)
 {
 	assert(idx < m_route.size());
-	return dynamic_cast<Flag *>(m_route[idx].get(g));
+	return dynamic_cast<Flag &>(*m_route[idx].get(egbase));
 }
 
 /**
@@ -1595,7 +1615,7 @@ void Route::starttrim(int32_t count)
 {
 	assert(count < static_cast<int32_t>(m_route.size()));
 
-	m_route.erase(m_route.begin(), m_route.begin()+count);
+	m_route.erase(m_route.begin(), m_route.begin() + count);
 }
 
 /**
@@ -1646,14 +1666,14 @@ void Route::load_pointers(const LoadData & data, Map_Map_Object_Loader & mol) {
  * Save the route to the given file.
  */
 void Route::save
-	(FileWrite & fw, Editor_Game_Base * egbase, Map_Map_Object_Saver * mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver * mos)
 {
 	fw.Signed32(get_totalcost());
 	fw.Unsigned16(m_route.size());
 	for (std::vector<Object_Ptr>::size_type idx = 0; idx < m_route.size(); ++idx) {
-		Flag* f = get_flag(egbase, idx);
-		assert(mos->is_object_known(f));
-		fw.Unsigned32(mos->get_object_file_index(f));
+		Flag & flag = get_flag(egbase, idx);
+		assert(mos->is_object_known(flag));
+		fw.Unsigned32(mos->get_object_file_index(flag));
 	}
 }
 
@@ -1667,24 +1687,24 @@ Transfer IMPLEMENTATION
 */
 
 
-Transfer::Transfer(Game* g, Request* req, WareInstance* it) :
-	m_game(g),
+Transfer::Transfer(Game & game, Request & req, WareInstance & it) :
+	m_game(game),
 	m_request(req),
-	m_item(it),
+	m_item   (&it),
 	m_worker(0),
 	m_idle(false)
 {
-	m_item->set_transfer(g, this);
+	m_item->set_transfer(game, *this);
 }
 
-Transfer::Transfer(Game* g, Request* req, Worker* w) :
-	m_game(g),
+Transfer::Transfer(Game & game, Request & req, Worker & w) :
+	m_game(game),
 	m_request(req),
 	m_item(0),
-	m_worker(w),
+	m_worker (&w),
 	m_idle(false)
 {
-	m_worker->start_task_transfer(g, this);
+	m_worker->start_task_transfer(game, this);
 }
 
 /**
@@ -1713,70 +1733,67 @@ void Transfer::set_idle(bool idle)
 /**
  * Determine where we should be going from our current location.
 */
-PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psuccess)
+PlayerImmovable * Transfer::get_next_step
+	(PlayerImmovable * const location, bool & success)
 {
-	PlayerImmovable * const destination = m_request->get_target();
-	Flag* locflag;
-	Flag* destflag;
+	PlayerImmovable & destination = m_request.target();
 
 	// Catch the simplest cases
-	if (not location or location->get_economy() != destination->get_economy()) {
+	if (not location or location->get_economy() != destination.get_economy()) {
 		tlog("no location or economy mismatch -> fail\n");
 
-		*psuccess = false;
+		success = false;
 		return 0;
 	}
 
-	*psuccess = true;
+	success = true;
 
-	if (location == destination)
+	if (location == &destination)
 		return 0;
 
-	locflag = location->get_base_flag();
-	destflag = destination->get_base_flag();
+	Flag & locflag  = location  ->base_flag();
+	Flag & destflag = destination.base_flag();
 
-	if (locflag == destflag)
-		return locflag == location ? destination : locflag;
+	if (&locflag == &destflag)
+		return &locflag == location ? &destination : &locflag;
 
 	// Brute force: recalculate the best route every time
-	if (!locflag->get_economy()->find_route(locflag, destflag, &m_route, m_item))
+	if (!locflag.get_economy()->find_route(locflag, destflag, &m_route, m_item))
 		throw wexception("Transfer::get_next_step: inconsistent economy");
 
 	if (m_route.get_nrsteps() >= 1)
 		if (upcast(Road const, road, location))
-			if (road->get_flag(Road::FlagEnd) == m_route.get_flag(m_game, 1)) {
-				tlog("trim start flag (road)\n");
+			if (&road->get_flag(Road::FlagEnd) == &m_route.get_flag(m_game, 1))
 				m_route.starttrim(1);
-			}
 
 	if (m_route.get_nrsteps() >= 1)
-		if (upcast(Road const, road, destination))
+		if (upcast(Road const, road, &destination))
 			if
-				(road->get_flag(Road::FlagEnd)
+				(&road->get_flag(Road::FlagEnd)
 				 ==
-				 m_route.get_flag(m_game, m_route.get_nrsteps() - 1))
+				 &m_route.get_flag(m_game, m_route.get_nrsteps() - 1))
 				m_route.truncate(m_route.get_nrsteps() - 1);
 
 	// Now decide where we want to go
 	if (dynamic_cast<Flag const *>(location)) {
-		assert(m_route.get_flag(m_game, 0) == location);
+		assert(&m_route.get_flag(m_game, 0) == location);
 
 		// special rule to get items into buildings
 		if (m_item and m_route.get_nrsteps() == 1)
-			if (dynamic_cast<Building const *>(destination)) {
-				assert(m_route.get_flag(m_game, 1) == destination->get_base_flag());
+			if (dynamic_cast<Building const *>(&destination)) {
+				assert(&m_route.get_flag(m_game, 1) == &destination.base_flag());
 
-				return destination;
+				return &destination;
 			}
 
 		if (m_route.get_nrsteps() >= 1) {
-			return m_route.get_flag(m_game, 1);
+			return &m_route.get_flag(m_game, 1);
 		}
 
-		return destination;
+		return &destination;
 	}
 
-	return m_route.get_flag(m_game, 0);
+	return &m_route.get_flag(m_game, 0);
 }
 
 /**
@@ -1786,7 +1803,7 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* location, bool* psucce
  */
 void Transfer::has_finished()
 {
-	m_request->transfer_finish(*m_game, *this);
+	m_request.transfer_finish(m_game, *this);
 }
 
 /**
@@ -1795,7 +1812,7 @@ void Transfer::has_finished()
 */
 void Transfer::has_failed()
 {
-	m_request->transfer_fail(*m_game, *this);
+	m_request.transfer_fail(m_game, *this);
 }
 
 void Transfer::tlog(char const * const fmt, ...)
@@ -1927,9 +1944,9 @@ void WaresQueue::update() {
 		if (!m_request)
 			m_request =
 				new Request
-					(&m_owner,
+					(m_owner,
 					 m_ware,
-					 &WaresQueue::request_callback, this,
+					 WaresQueue::request_callback,
 					 Request::WARE);
 
 		m_request->set_count(m_size - m_filled);
@@ -1945,7 +1962,7 @@ void WaresQueue::update() {
 /**
  * Set the callback function that is called when an item has arrived.
 */
-void WaresQueue::set_callback(callback_t* fn, void* data)
+void WaresQueue::set_callback(callback_t * const fn, void * const data)
 {
 	m_callback_fn = fn;
 	m_callback_data = data;
@@ -1955,17 +1972,17 @@ void WaresQueue::set_callback(callback_t* fn, void* data)
  * Called when an item arrives at the owning building.
 */
 void WaresQueue::request_callback
-	(Game     *       game,
-	 Request  *,
-	 Ware_Index const ware,
+	(Game            &       game,
+	 Request         &,
+	 Ware_Index        const ware,
 #ifndef NDEBUG
-	 Worker   * const w,
+	 Worker          * const w,
 #else
-	 Worker   *,
+	 Worker          *,
 #endif
-	 void     * const data)
+	 PlayerImmovable & target)
 {
-	WaresQueue & wq = *static_cast<WaresQueue *>(data);
+	WaresQueue & wq = dynamic_cast<Building &>(target).waresqueue(ware);
 
 	assert(!w); // WaresQueue can't hold workers
 	assert(wq.m_filled < wq.m_size);
@@ -2043,47 +2060,45 @@ void WaresQueue::set_consume_interval(const uint32_t time) throw ()
  */
 #define WARES_QUEUE_DATA_PACKET_VERSION 1
 void WaresQueue::Write
-	(FileWrite * fw, Editor_Game_Base * egbase, Map_Map_Object_Saver * os)
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver * os)
 {
 
-	fw->Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
+	fw.Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
 
 	//  Owner and callback is not saved, but this should be obvious on load.
-	fw->CString
+	fw.CString
 		(owner().tribe().get_ware_descr(m_ware)->name().c_str());
-	fw->Signed32(m_size);
-	fw->Signed32(m_filled);
-	fw->Signed32(m_consume_interval);
+	fw.Signed32(m_size);
+	fw.Signed32(m_filled);
+	fw.Signed32(m_consume_interval);
 	if (m_request) {
-		fw->Unsigned8(1);
+		fw.Unsigned8(1);
 		m_request->Write(fw, egbase, os);
 	} else
-		fw->Unsigned8(0);
+		fw.Unsigned8(0);
 }
 
 
 void WaresQueue::Read
-	(FileRead * fr, Editor_Game_Base * egbase, Map_Map_Object_Loader * ol)
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader * ol)
 {
-	const uint16_t packet_version = fr->Unsigned16();
+	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION) {
-		m_ware = owner().tribe().ware_index(fr->CString());
-		m_size = fr->Signed32();
-		m_filled = fr->Signed32();
-		m_consume_interval = fr->Signed32();
-		bool request = fr->Unsigned8();
 		delete m_request;
-		if (request) {
+		m_ware             = owner().tribe().ware_index(fr.CString  ());
+		m_size             =                            fr.Signed32 ();
+		m_filled           =                            fr.Signed32 ();
+		m_consume_interval =                            fr.Signed32 ();
+		if                                             (fr.Unsigned8()) {
 			m_request =
 				new Request
-					(&m_owner,
+					(m_owner,
 					 Ware_Index::First(),
-					 &WaresQueue::request_callback, this,
+					 WaresQueue::request_callback,
 					 Request::WORKER);
 			m_request->Read(fr, egbase, ol);
-		} else {
+		} else
 			m_request = 0;
-		}
 
 		//  Now Economy stuff. We have to add our filled items to the economy.
 		add_to_economy(*m_owner.get_economy());
@@ -2207,7 +2222,7 @@ void Economy::check_split(Flag & f1, Flag & f2)
 
 	Economy & e = *f1.get_economy();
 
-	if (not e.find_route(&f1, &f2, 0, false))
+	if (not e.find_route(f1, f2, 0, false))
 		e.do_split(f2);
 }
 
@@ -2391,10 +2406,14 @@ private:
  *
  * \todo Document parameter wait
 */
-bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_t cost_cutoff)
+bool Economy::find_route
+	(Flag & start, Flag & end,
+	 Route * const route,
+	 bool    const wait,
+	 int32_t const cost_cutoff)
 {
-	assert(start->get_economy() == this);
-	assert(end->get_economy() == this);
+	assert(start.get_economy() == this);
+	assert(end  .get_economy() == this);
 
 	Map & map = owner().egbase().map();
 
@@ -2410,16 +2429,16 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_
 	FlagQueue Open;
 	Flag *current;
 
-	start->mpf_cycle = mpf_cycle;
-	start->mpf_backlink = 0;
-	start->mpf_realcost = 0;
-	start->mpf_estimate = map.calc_cost_estimate
-		(start->get_position(), end->get_position());
+	start.mpf_cycle    = mpf_cycle;
+	start.mpf_backlink = 0;
+	start.mpf_realcost = 0;
+	start.mpf_estimate =
+		map.calc_cost_estimate(start.get_position(), end.get_position());
 
-	Open.push(start);
+	Open.push(&start);
 
 	while ((current = Open.pop())) {
-		if (current == end)
+		if (current == &end)
 			break; // found our goal
 
 		if (cost_cutoff >= 0 && current->mpf_realcost > cost_cutoff)
@@ -2436,7 +2455,7 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_
 			int32_t wait_cost = 0;
 
 			//  No need to find the optimal path when only checking connectivity.
-			if (neighbour == end && !route)
+			if (neighbour == &end && !route)
 				return true;
 
 			if (wait)
@@ -2453,7 +2472,7 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_
 				neighbour->mpf_cycle = mpf_cycle;
 				neighbour->mpf_realcost = cost;
 				neighbour->mpf_estimate = map.calc_cost_estimate
-					(neighbour->get_position(), end->get_position());
+					(neighbour->get_position(), end.get_position());
 				neighbour->mpf_backlink = current;
 				Open.push(neighbour);
 			} else if (cost + neighbour->mpf_estimate < neighbour->cost()) {
@@ -2472,11 +2491,11 @@ bool Economy::find_route(Flag *start, Flag *end, Route *route, bool wait, int32_
 	// Unwind the path to form the route
 	if (route) {
 		route->clear();
-		route->m_totalcost = end->mpf_realcost;
+		route->m_totalcost = end.mpf_realcost;
 
-		for (Flag * flag = end;; flag = flag->mpf_backlink) {
+		for (Flag * flag = &end;; flag = flag->mpf_backlink) {
 			route->m_route.insert(route->m_route.begin(), flag);
-			if (flag == start)
+			if (flag == &start)
 				break;
 		}
 	}
@@ -2839,7 +2858,7 @@ Supply * Economy::find_best_supply
 			/* unless the warehouse REALLY needs the supply */
 			if (req.get_priority(0) > 100) { //  100 is the 'real idle' priority
 				//check if the supply is at current target
-				if (&target_flag == supp.get_position(&game)->get_base_flag()) {
+				if (&target_flag == &supp.get_position(game)->base_flag()) {
 					//assert(false);
 					continue;
 				}
@@ -2849,23 +2868,21 @@ Supply * Economy::find_best_supply
 		}
 
 		// Check requirements
-		if (!supp.nr_supplies(&game, &req))
+		if (!supp.nr_supplies(game, req))
 			continue;
 
 		Route * const route =
 			best_route != &buf_route0 ? &buf_route0 : &buf_route1;
 		// will be cleared by find_route()
 
-		int32_t cost_cutoff = best_cost;
-
 		if
 			(!
 			 find_route
-			 	(supp.get_position(&game)->get_base_flag(),
-			 	 &target_flag,
+			 	(supp.get_position(game)->base_flag(),
+			 	 target_flag,
 			 	 route,
 			 	 false,
-			 	 cost_cutoff))
+			 	 best_cost))
 		{
 			if (!best_route)
 				throw wexception
@@ -2940,7 +2957,7 @@ void Economy::process_requests(Game & game, RSPairStruct & s)
 			::StreamWrite & ss = game.syncstream();
 			ss.Unsigned8 (req.get_type  ());
 			ss.Unsigned8 (req.get_index ().value());
-			ss.Unsigned32(req.get_target()->serial());
+			ss.Unsigned32(req.target    ().serial());
 		}
 
 		Ware_Index const ware_index = req.get_index();
@@ -3018,7 +3035,7 @@ void Economy::create_requested_workers(Game & game)
 					continue;
 
 				for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i)
-					num_wares += m_supplies[i].nr_supplies(&game, &req);
+					num_wares += m_supplies[i].nr_supplies(game, req);
 
 				// If there aren't enough supplies...
 				if (num_wares == 0) {
@@ -3026,7 +3043,7 @@ void Economy::create_requested_workers(Game & game)
 					uint32_t n_wh = 0;
 					while (n_wh < get_nr_warehouses()) {
 						if (m_warehouses[n_wh]->can_create_worker(game, index)) {
-							m_warehouses[n_wh]->create_worker(&game, index);
+							m_warehouses[n_wh]->create_worker(game, index);
 							created_worker = true;
 							//break;
 						} // if (m_warehouses[n_wh]
@@ -3075,22 +3092,13 @@ void Economy::balance_requestsupply(uint32_t const timerid)
 				(!rsp.request               ||
 				 !rsp.supply                ||
 				 !have_request(*rsp.request) ||
-				 !rsp.supply->nr_supplies(game, rsp.request))
+				 !rsp.supply->nr_supplies(*game, *rsp.request))
 			{
-				log("NO: ware %i, priority %i\n", rsp.ware.value(), rsp.priority);
-
 				rsps.nexttimer = 200;
 				continue;
 			}
 
-			log
-				("HANDLE: %u -> %u, ware %i, priority %i\n",
-				 rsp.request->get_target()->serial(),
-				 rsp.supply->get_position(game)->serial(),
-				 rsp.ware.value(),
-				 rsp.priority);
-
-			rsp.request->start_transfer(game, rsp.supply);
+			rsp.request->start_transfer(*game, *rsp.supply);
 			rsp.request->set_last_request_time(owner().egbase().get_gametime());
 
 			//  for multiple wares
@@ -3188,9 +3196,9 @@ Cmd_Call_Economy_Balance::Cmd_Call_Economy_Balance
  * Called by Cmd_Queue as requested by start_request_timer().
  * Call economy functions to balance supply and request.
  */
-void Cmd_Call_Economy_Balance::execute(Game* g)
+void Cmd_Call_Economy_Balance::execute(Game & game)
 {
-	if (Flag * const flag = m_flag.get(g))
+	if (Flag * const flag = m_flag.get(game))
 		flag->get_economy()->balance_requestsupply(m_timerid);
 }
 
@@ -3234,8 +3242,8 @@ void Cmd_Call_Economy_Balance::Write
 
 	// Write Base Commands
 	GameLogicCommand::Write(fw, egbase, mos);
-	if (Flag* flag = m_flag.get(&egbase))
-		fw.Unsigned32(mos.get_object_file_index(flag));
+	if (Flag * const flag = m_flag.get(egbase))
+		fw.Unsigned32(mos.get_object_file_index(*flag));
 	else
 		fw.Unsigned32(0);
 	fw.Unsigned32(m_timerid);

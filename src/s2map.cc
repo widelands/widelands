@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2003, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -114,14 +114,14 @@ void S2_Map_Loader::load_world() {
  * the Map* can't be set to another one.
  */
 int32_t S2_Map_Loader::load_map_complete
-	(Widelands::Editor_Game_Base * const game, bool)
+	(Widelands::Editor_Game_Base & egbase, bool)
 {
 	if (get_state() == STATE_PRELOADED)
 		load_world();
 	assert(get_state() == STATE_WORLD_LOADED);
 
 	m_map.set_size(m_map.m_width, m_map.m_height);
-	load_s2mf(game);
+	load_s2mf(egbase);
 
 	m_map.recalc_whole_map();
 
@@ -240,7 +240,7 @@ void S2_Map_Loader::load_s2mf_header()
 /**
  * This loads a given file as a settlers 2 map file
  */
-void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
+void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 {
 	uint8_t * section = 0;
 	uint8_t *bobs = 0;
@@ -269,7 +269,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 		Widelands::Y_Coordinate const mapheight = m_map.get_height();
 		assert(mapwidth  == header.w);
 		assert(mapheight == header.h);
-		game->allocate_player_maps(); // initalises player_fields.vision
+		egbase.allocate_player_maps(); //  initalizes player_fields.vision
 
 
 		//  SWD-SECTION 1: Heights
@@ -462,7 +462,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 					if (idx < 0)
 						throw wexception("Missing bob type %s", bobname);
 					for (uint32_t z = 0; z < CRITTER_PER_DEFINITION; ++z)
-						game->create_bob(Widelands::Coords(x, y), idx);
+						egbase.create_bob(Widelands::Coords(x, y), idx);
 				}
 			}
 		}
@@ -620,7 +620,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 							m_map.world().get_immovable_index(bobname);
 						if (idx < 0)
 							throw wexception("Missing immovable type %s", bobname);
-						game->create_immovable(Widelands::Coords(x, y), idx, 0);
+						egbase.create_immovable(Widelands::Coords(x, y), idx, 0);
 						continue;
 					}
 				}
@@ -726,7 +726,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base * const game)
 					int32_t idx = m_map.world().get_immovable_index(bobname);
 					if (idx < 0)
 						throw wexception("Missing immovable type %s", bobname);
-					game->create_immovable(Widelands::Coords(x, y), idx, 0);
+					egbase.create_immovable(Widelands::Coords(x, y), idx, 0);
 				}
 			}
 

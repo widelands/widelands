@@ -32,13 +32,14 @@ int32_t Editor_Delete_Bob_Tool::handle_click_impl
 	 Widelands::Node_and_Triangle<> const center,
 	 Editor_Interactive           &       parent)
 {
+	Widelands::Editor_Game_Base & egbase = parent.egbase();
 	const int32_t radius = parent.get_sel_radius();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 		 Widelands::Area<Widelands::FCoords>
 		 	(map.get_fcoords(center.node), radius));
 	do if (Widelands::Bob * const bob = mr.location().field->get_first_bob())
-		bob->remove(&parent.egbase());
+		bob->remove(egbase);
 	while (mr.advance(map));
 	return radius + 2;
 }

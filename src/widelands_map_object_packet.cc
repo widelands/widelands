@@ -46,7 +46,7 @@ Map_Object_Packet::~Map_Object_Packet() {
 
 void Map_Object_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 Map_Map_Object_Loader * const ol)
 {
 	try {
@@ -115,34 +115,34 @@ void Map_Object_Packet::LoadFinish() {
 
 void Map_Object_Packet::Write
 	(FileSystem           &       fs,
-	 Editor_Game_Base     *       egbase,
+	 Editor_Game_Base     &       egbase,
 	 Map_Map_Object_Saver * const os)
 {
 	FileWrite fw;
 
 	fw.Unsigned8(CURRENT_PACKET_VERSION);
 
-	const Object_Manager::objmap_t& objs = egbase->objects().get_objects();
+	Object_Manager::objmap_t const & objs = egbase.objects().get_objects();
 	for
 		(Object_Manager::objmap_t::const_iterator cit = objs.begin();
 		 cit != objs.end();
 		 ++cit)
 	{
-		Map_Object* obj = cit->second;
+		Map_Object & obj = *cit->second;
 
 		// These checks can be eliminated and the object saver simplified
 		// once all Map_Objects are saved using the new system
 		if (os->is_object_known(obj))
 			continue;
 
-		if (!obj->has_new_save_support())
+		if (!obj.has_new_save_support())
 			throw wexception
 				("MO(%u of type %s) without new style save support not saved "
 				 "explicitly",
-				 obj->serial(), obj->descr().descname().c_str());
+				 obj.serial(), obj.descr().descname().c_str());
 
 		os->register_object(obj);
-		obj->save(egbase, os, fw);
+		obj.save(egbase, os, fw);
 		os->mark_object_as_saved(obj);
 	}
 

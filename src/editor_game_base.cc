@@ -108,7 +108,7 @@ initialization
 */
 Editor_Game_Base::Editor_Game_Base() :
 m_gametime          (0),
-m_iabase            (0),
+m_ibase             (0),
 m_map               (0),
 m_lasttrackserial   (0)
 {
@@ -141,7 +141,7 @@ void Editor_Game_Base::think()
 
 void Editor_Game_Base::receive(NoteImmovable const & note)
 {
-	note.pi->get_owner()->receive(note);
+	note.pi->owner().receive(note);
 }
 
 void Editor_Game_Base::receive(NoteField const & note)
@@ -291,7 +291,7 @@ void Editor_Game_Base::do_conquer_area
 		Map_Index const index = mr.location().field - &first_field;
 		const Military_Influence influence =
 			map().calc_influence
-			(mr.location(), Area<>(player_area, player_area.radius));
+				(mr.location(), Area<>(player_area, player_area.radius));
 
 		const Player_Number owner = mr.location().field->get_owned_by();
 		if (conquer) {
@@ -396,11 +396,11 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 			else if (upcast(Flag,     flag,     *i.current))
 				if (Building * const flag_building = flag->get_building())
 					flag_building->set_defeating_player(area.player_number);
-			(*i.current)->schedule_destroy(game);
+			(*i.current)->schedule_destroy(*game);
 		}
 	else
 		container_iterate_const(std::vector<PlayerImmovable *>, burnlist, i)
-			(*i.current)->remove(this);
+			(*i.current)->remove(*this);
 }
 
 
@@ -555,7 +555,7 @@ void Editor_Game_Base::postload()
 			 not dynamic_cast<const Game *>(this))
 		{ // if this is editor, load the tribe anyways
 			// the tribe is used, postload it
-			m_tribes[id]->postload(this);
+			m_tribes[id]->postload(*this);
 			++id;
 		} else {
 			delete m_tribes[id]; // the tribe is no longer used, remove it
@@ -602,7 +602,7 @@ owner is the player number of the building's owner.
 idx is the building type index.
 ===============
 */
-Building * Editor_Game_Base::warp_building
+Building & Editor_Game_Base::warp_building
 	(Coords const c, Player_Number const owner, Building_Index const i)
 {
 	Player & plr = player(owner);
@@ -617,7 +617,7 @@ Create a building site at the given x/y location for the given building type.
 if oldi != -1 this is a constructionsite coming from an enhancing action
 ===============
 */
-Building * Editor_Game_Base::warp_constructionsite
+Building & Editor_Game_Base::warp_constructionsite
 	(Coords const c, Player_Number const owner,
 	 Building_Index idx, Building_Index old_id)
 {
@@ -639,7 +639,7 @@ Instantly create a bob at the given x/y location.
 idx is the bob type.
 ===============
 */
-Bob * Editor_Game_Base::create_bob
+Bob & Editor_Game_Base::create_bob
 	(Coords const c,
 	 Bob::Descr::Index const idx, Tribe_Descr const * const tribe)
 {
@@ -649,7 +649,9 @@ Bob * Editor_Game_Base::create_bob
 		 tribe->get_bob_descr(idx)
 		 :
 		 m_map->get_world()->get_bob_descr(idx));
-	return descr.create(this, 0, c); // The bob knows for itself it is a world or a tribe bob
+
+	//  The bob knows for itself whether it is a world or a tribe bob.
+	return descr.create(*this, 0, c);
 }
 
 

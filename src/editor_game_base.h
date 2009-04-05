@@ -104,17 +104,17 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>
 	void set_road(FCoords, uint8_t direction, uint8_t roadtype);
 
 	// warping stuff. instantly creating map_objects
-	Building * warp_building(Coords, Player_Number, Building_Index);
-	Building * warp_constructionsite
+	Building & warp_building(Coords, Player_Number, Building_Index);
+	Building & warp_constructionsite
 		(Coords, Player_Number, Building_Index,
 		 Building_Index oldid = Building_Index::Null());
-	Bob * create_bob(Coords, Bob::Descr::Index, const Tribe_Descr * const = 0);
+	Bob & create_bob(Coords, Bob::Descr::Index, Tribe_Descr const * const = 0);
 	Immovable & create_immovable(Coords, int32_t idx, Tribe_Descr const *);
 	Immovable & create_immovable
 		(Coords, std::string const & name, Tribe_Descr const *);
 
 	int32_t get_gametime() const {return m_gametime;}
-	Interactive_Base * get_iabase() const {return m_iabase;}
+	Interactive_Base * get_ibase() const {return m_ibase;}
 
 	// safe system for storing pointers to non-Map_Object C++ objects
 	// unlike objects in the Object_Manager, these pointers need not be
@@ -139,13 +139,13 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>
 	void receive(NoteField     const &);
 
 	void cleanup_objects() throw () {
-		objects().cleanup(this);
+		objects().cleanup(*this);
 	}
 
 	// next function is used to update the current gametime,
 	// for queue runs e.g.
-	int32_t* get_game_time_pointer() {return &m_gametime;}
-	void set_iabase(Interactive_Base* b) {m_iabase=b;}
+	int32_t & get_game_time_pointer() {return m_gametime;}
+	void set_ibase(Interactive_Base * const b) {m_ibase = b;}
 
 protected:
 	/**
@@ -193,7 +193,7 @@ protected:
 	typedef std::vector<Tribe_Descr *> Tribe_Vector;
 	Tribe_Vector           m_tribes;
 private:
-	Interactive_Base         * m_iabase;
+	Interactive_Base         * m_ibase;
 	Map                      * m_map;
 
 	uint32_t                       m_lasttrackserial;

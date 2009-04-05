@@ -161,7 +161,7 @@ void NetClient::run ()
 			igb =
 				new Interactive_Spectator
 					(game, g_options.pull_section("global"), true);
-		game.set_iabase(igb);
+		game.set_ibase(igb);
 		igb->set_chat_provider(*this);
 		if (!d->settings.savegame) //  new map
 			game.init_newgame(loaderUI, d->settings);
@@ -171,7 +171,7 @@ void NetClient::run ()
 		d->lasttimestamp = game.get_gametime();
 		d->lasttimestamp_realtime = WLApplication::get()->get_time();
 
-		d->modal = game.get_iabase();
+		d->modal = game.get_ibase();
 		game.run
 			(loaderUI,
 			 d->settings.savegame ?
@@ -212,7 +212,7 @@ void NetClient::think()
 	}
 }
 
-void NetClient::sendPlayerCommand(Widelands::PlayerCommand* pc)
+void NetClient::sendPlayerCommand(Widelands::PlayerCommand & pc)
 {
 	assert(d->game);
 
@@ -221,13 +221,13 @@ void NetClient::sendPlayerCommand(Widelands::PlayerCommand* pc)
 	SendPacket s;
 	s.Unsigned8(NETCMD_PLAYERCOMMAND);
 	s.Signed32(d->game->get_gametime());
-	pc->serialize(s);
+	pc.serialize(s);
 	s.send(d->sock);
 
 	d->lasttimestamp = d->game->get_gametime();
 	d->lasttimestamp_realtime = WLApplication::get()->get_time();
 
-	delete pc;
+	delete &pc;
 }
 
 int32_t NetClient::getFrametime()

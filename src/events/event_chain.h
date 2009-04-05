@@ -83,7 +83,7 @@ struct EventChain
 	void add_event(Event *);
 
 
-	State run(Game *);
+	State run(Game &);
 
 private:
 	bool                         m_repeating;

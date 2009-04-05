@@ -47,7 +47,7 @@ struct Map_Loader {
 
 	virtual int32_t preload_map(bool as_scenario) = 0;
 	virtual void load_world() = 0;
-	virtual int32_t load_map_complete(Editor_Game_Base *, bool as_scenario) = 0;
+	virtual int32_t load_map_complete(Editor_Game_Base &, bool as_scenario) = 0;
 
 	Map & map() {return m_map;}
 

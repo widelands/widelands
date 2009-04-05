@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ namespace Widelands {
 
 void Map_Event_Data_Packet::Read
 	(FileSystem            &       fs,
-	 Editor_Game_Base      *       egbase,
+	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader * const)
 throw (_wexception)
@@ -53,11 +53,11 @@ throw (_wexception)
 		uint32_t const packet_version =
 			prof.get_safe_section("global").get_safe_positive("packet_version");
 		if (packet_version <= CURRENT_PACKET_VERSION) {
-			Manager<Event> & mem = egbase->map().mem();
+			Manager<Event> & mem = egbase.map().mem();
 			while (Section * const s = prof.get_next_section(0))
 				try {
 					try {
-						mem.register_new(Event_Factory::create(*s, *egbase));
+						mem.register_new(Event_Factory::create(*s, egbase));
 					} catch (Manager<Event>::Already_Exists) {
 						throw wexception("duplicated");
 					}
@@ -75,7 +75,7 @@ throw (_wexception)
 
 void Map_Event_Data_Packet::Write
 	(FileSystem           &       fs,
-	 Editor_Game_Base     *       egbase,
+	 Editor_Game_Base     &       egbase,
 	 Map_Map_Object_Saver * const)
 throw (_wexception)
 {
@@ -83,7 +83,7 @@ throw (_wexception)
 	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
-	Manager<Event> const & mem = egbase->map().mem();
+	Manager<Event> const & mem = egbase.map().mem();
 	Manager<Event>::Index const nr_events = mem.size();
 	for (Manager<Event>::Index i = 0; i < nr_events; ++i) {
 		Event const & e = mem[i];
@@ -95,7 +95,7 @@ throw (_wexception)
 		default:
 			assert(false);
 		}
-		e.Write(s, *egbase);
+		e.Write(s, egbase);
 	}
 
 	prof.write("event", false, fs);

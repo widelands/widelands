@@ -112,7 +112,7 @@ void WL_Map_Loader::load_world() {
  * Load the complete map and make sure that it runs without problems
  */
 int32_t WL_Map_Loader::load_map_complete
-	(Editor_Game_Base * egbase, bool const scenario)
+	(Editor_Game_Base & egbase, bool const scenario)
 {
 	//  This is needed to ensure that world is loaded for multiplayer clients,
 	//  hosts do world loading while creating the game and the states are not
@@ -134,7 +134,7 @@ int32_t WL_Map_Loader::load_map_complete
 	{Map_Elemental_Data_Packet       p; p.Read(m_fs, egbase, !scenario, m_mol);}
 	log("done!\n ");
 
-	egbase->allocate_player_maps(); //  Can do this now that map size is known.
+	egbase.allocate_player_maps(); //  Can do this now that map size is known.
 
 	//  now player names and tribes
 	log("Reading Player Names And Tribe Data ... ");

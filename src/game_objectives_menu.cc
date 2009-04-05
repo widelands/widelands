@@ -24,7 +24,7 @@
 #include "trigger/trigger_time.h"
 
 
-inline Interactive_Player & GameObjectivesMenu::iaplayer() const {
+inline Interactive_Player & GameObjectivesMenu::iplayer() const {
 	return dynamic_cast<Interactive_Player &>(*get_parent());
 }
 
@@ -45,7 +45,7 @@ objectivetext(this, 5, 130, get_inner_w() - 10, 240, "", Align_Left, 1)
 
 void GameObjectivesMenu::think() {
 	//  Adjust the list according to the game state.
-	Manager<Widelands::Objective> & mom = iaplayer().game().map().mom();
+	Manager<Widelands::Objective> & mom = iplayer().game().map().mom();
 	Manager<Widelands::Objective>::Index const nr_objectives = mom.size();
 	for (Manager<Widelands::Objective>::Index i = 0; i < nr_objectives; ++i) {
 		bool const should_show =

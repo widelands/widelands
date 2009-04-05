@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2002-2008 by the Widelands Development Team
+* Copyright (C) 2002-2009 by the Widelands Development Team
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ struct Cmd_CheckEventChain : public GameLogicCommand {
 
 	virtual uint8_t id() const {return QUEUE_CMD_CHECK_EVENTCHAIN;}
 
-	virtual void execute(Game *);
+	virtual void execute(Game &);
 
 private:
 	Manager<EventChain>::Index m_eventchain_id;

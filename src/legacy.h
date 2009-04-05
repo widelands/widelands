@@ -35,14 +35,16 @@ namespace Legacy {
  *
  * AttackControllers have been outdated since build-12 (April 2008).
  */
-Map_Object::Loader* loadAttackController(Editor_Game_Base *, Map_Map_Object_Loader *, FileRead &);
+Map_Object::Loader * loadAttackController
+	(Editor_Game_Base &, Map_Map_Object_Loader *, FileRead &);
 
 /**
  * Deal with old Battle objects in savegames.
  *
  * These old Battle objects have been outdated since build-12 (April 2008).
  */
-Map_Object::Loader* loadBattle(Editor_Game_Base *, Map_Map_Object_Loader *, FileRead &);
+Map_Object::Loader * loadBattle
+	(Editor_Game_Base &, Map_Map_Object_Loader *, FileRead &);
 
 }
 
