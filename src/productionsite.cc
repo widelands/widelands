@@ -38,6 +38,8 @@
 
 #include "upcast.h"
 
+#include <libintl.h>
+
 namespace Widelands {
 
 static const size_t STATISTICS_VECTOR_LENGTH = 10;
@@ -205,7 +207,11 @@ std::string ProductionSite::get_statistics_string()
 	else if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
 		char buffer[1000];
 		snprintf
-			(buffer, sizeof(buffer), _("Waiting for %u workers!"), nr_requests);
+			(buffer, sizeof(buffer),
+			 ngettext
+			 	("Waiting for one worker!", "Waiting for %u workers!",
+			 	 nr_requests),
+			 nr_requests);
 		return buffer;
 	}
 
@@ -291,8 +297,8 @@ void ProductionSite::calc_statistics()
 				++lastOk;
 		}
 	}
-	double percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
-	double lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
+	uint32_t const percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
+	uint32_t const lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	const std::string trend =
 		lastPercOk > percOk ? _("UP") : lastPercOk < percOk ? _("DOWN") : "=";
@@ -300,8 +306,8 @@ void ProductionSite::calc_statistics()
 	if (0 < percOk and percOk < 100)
 		snprintf
 			(m_statistics_buf, sizeof(m_statistics_buf),
-			 "%.0f%% %s", percOk, trend.c_str());
-	else snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%.0f%%", percOk);
+			 "%d%% %s", percOk, trend.c_str());
+	else snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%d%%", percOk);
 
 	m_last_stat_percent = static_cast<char>(percOk); //FIXME: ARGH!
 
