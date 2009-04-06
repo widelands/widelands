@@ -236,7 +236,7 @@ public:
 	bool m_lock_audio_disabling;
 
 protected:
-	Mix_Chunk * RWopsify_MixLoadWAV(FileRead * fr);
+	Mix_Chunk * RWopsify_MixLoadWAV(FileRead &);
 	void load_one_fx(const char * filename, std::string const & fx_name);
 	int32_t stereo_position(Widelands::Coords position);
 	bool play_or_not

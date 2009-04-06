@@ -1929,7 +1929,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# test for config.h, we use the default config.h since we do not really need any options\n\nSRCDIR=$PROJECT_DIR/../../src\n\nif [ ! -e $SRCDIR/config.h ]; then\n   cat > $SRCDIR/config.h << EOF\n/*\n * Created by XCode on the fly\n */\n#ifndef CONFIG_H\n#define CONFIG_H\n\n#define HAS_GETENV\n#define NEW_SDL_MIXER 1\n\n// The following lines are not needed. \n// We set them to save paths\n#define INSTALL_PREFIX \"/tmp\"\n#define INSTALL_BINDIR \"/tmp\"\n#define INSTALL_DATADIR \"/tmp\"\n\n#define INSTALL_LOCALEDIR \"Widelands.app/Contents/Resources/locale\"\n\n#endif\nEOF\n\nfi\n";
+			shellScript = "# test for config.h, we use the default config.h since we do not really need any options\n\nSRCDIR=$PROJECT_DIR/../../src\n\nif [ ! -e $SRCDIR/config.h ]; then\n   cat > $SRCDIR/config.h << EOF\n/*\n * Created by XCode on the fly\n */\n#ifndef CONFIG_H\n#define CONFIG_H\n\n#define HAS_GETENV\n\n// The following lines are not needed. \n// We set them to save paths\n#define INSTALL_PREFIX \"/tmp\"\n#define INSTALL_BINDIR \"/tmp\"\n#define INSTALL_DATADIR \"/tmp\"\n\n#define INSTALL_LOCALEDIR \"Widelands.app/Contents/Resources/locale\"\n\n#endif\nEOF\n\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

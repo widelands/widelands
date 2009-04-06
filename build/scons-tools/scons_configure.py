@@ -248,7 +248,7 @@ int main()
 ################################################################################
 
 def configure_is_needed(targets):
-	"""Do we need to run autoconfiguration? If we're building the default target 
+	"""Do we need to run autoconfiguration? If we're building the default target
 	   (==no target given at commandline): yes. If we're _only_ building targets
 	   that don't need configuration: no."""
 
@@ -364,17 +364,14 @@ def do_configure_libraries(conf, env):
 		print 'Could not find the SDL_mixer library! Is it installed?'
 		env.Exit(1)
 
-	if conf.TryLink(""" #define USE_RWOPS
+	if not conf.TryLink(""" #define USE_RWOPS
 			#include <SDL_mixer.h>
 			int main(){
 				Mix_LoadMUS_RW("foo.ogg");
 			}
 			""", '.c'):
-		env.NEW_SDL_MIXER=True
-		print 'SDL_mixer supports Mix_LoadMUS_RW(). Good'
-	else:
-		print 'Your SDL_mixer does not support Mix_LoadMUS_RW(). Widelands will run without problems, but consider updating SDL_mixer anyway.'
-		env.NEW_SDL_MIXER=False
+		print 'Your SDL_mixer does not support Mix_LoadMUS_RW(). Update SDL_mixer.'
+		env.Exit(1)
 
 def do_configure_debugtools(conf, env):
 	if conf.CheckLib('efence', symbol='EF_newFrame', language='C', autoadd=0):
@@ -512,13 +509,6 @@ def generate_configh_content(env):
 
 	if env.HAS_PARAGUI==True:
 		data+="#define HAS_PARAGUI\n\n"
-	
-	if env.NEW_SDL_MIXER==True:
-		data+="#define NEW_SDL_MIXER 1\n"
-		data+="//next line is needed by SDL_mixer\n"
-		data+="#define USE_RWOPS\n"
-	else:
-		data+="#define NEW_SDL_MIXER 0\n"
 
 	return data
 

@@ -225,101 +225,10 @@ void Sound_Handler::load_fx
  * \note This should be phased out when RWops support in Mix_LoadWAV has been
  * available for a sufficiently long time
 */
-Mix_Chunk *Sound_Handler::RWopsify_MixLoadWAV(FileRead * fr)
+Mix_Chunk * Sound_Handler::RWopsify_MixLoadWAV(FileRead & fr)
 {
-	char *tempfile;
-	SDL_RWops *target;
-	SDL_RWops *src;
-
-	assert(fr);
-
-	//  direct access to member variable is necessary here
-	src = SDL_RWFromMem(fr->Data(fr->GetSize(), 0), fr->GetSize());
-
-	if (NEW_SDL_MIXER == 1) {
-		//SDL_mixer will free the RWops "src" itself
-		Mix_Chunk *m = Mix_LoadWAV_RW(src, 1);
-		return m;
-	} else {
-		FILE *f;
-		void *buf;
-
-		//create a tempfile
-#ifdef WIN32
-		char szTempName[1024];
-		char lpPathBuffer[1024];
-
-		// Get the temp path.
-		GetTempPath(1024, lpPathBuffer);
-		// Create a temporary file.
-		GetTempFileName
-			(lpPathBuffer, //  directory for tmp files
-			 "widelands",  //  temp file name prefix
-			 0,            //  create unique name
-			 szTempName);  //  buffer for name
-		tempfile = szTempName;
-#else
-		//manpage recommends a minimum suffix length of 6
-		tempfile = mktemp(strdup("/tmp/widelands-sfx.XXXXXXXX"));
-#endif
-
-		if (not tempfile) {
-			log
-				("Could not create tempfile /tmp/widelands-sfx.XXXXXXXX! Cannot "
-				 "load music.");
-			return 0;
-		}
-
-		f = fopen(tempfile, "w+");
-
-		if (not f) {
-			log("Could not open %s for writing! Cannot load music.", tempfile);
-			return 0;
-		}
-
-		// Note: SDL_RWFromFP is not available under windows
-		target = SDL_RWFromFP(f, 0);
-		if (!target) {
-			fclose(f);
-			log
-				("SDL_RWFromFP failed miserably on %s: %s.\n",
-				 tempfile, SDL_GetError());
-		}
-		if (not (buf = malloc(fr->GetSize()))) {
-			log("Could not write to %s! Cannot load music.", tempfile);
-			return 0;
-		}
-
-		//write music from src to a tempfile
-		SDL_RWread(src, buf, fr->GetSize(), 1);
-
-		SDL_RWwrite(target, buf, fr->GetSize(), 1);
-
-		//load music from tempfile
-		Mix_Chunk *m = Mix_LoadWAV(tempfile);
-
-		//remove the RWops on the tempfile
-		SDL_RWclose(target);
-
-		fclose(f);
-
-		free(buf);
-
-#ifdef WIN32
-		DeleteFile(tempfile);
-
-#else
-		unlink(tempfile);
-
-		free(tempfile);
-
-#endif
-		return m;
-	}
-
-	SDL_RWclose(src);
-	SDL_FreeRW(src);
-	return 0;
+	return
+		Mix_LoadWAV_RW(SDL_RWFromMem(fr.Data(fr.GetSize(), 0), fr.GetSize()), 1);
 }
 
 /** Add exactly one file to the given fxset.
@@ -339,7 +248,7 @@ void Sound_Handler::load_one_fx
 		return;
 	}
 
-	if (Mix_Chunk * const m = RWopsify_MixLoadWAV(&fr)) {
+	if (Mix_Chunk * const m = RWopsify_MixLoadWAV(fr)) {
 		//make sure that requested FXset exists
 
 		if (m_fxs.count(fx_name) == 0)

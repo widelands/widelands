@@ -315,9 +315,9 @@ void Map_Bobdata_Data_Packet::Read
 					bob.m_signal          = fr.CString  ();
 
 					if      (upcast(Critter_Bob, critter_bob, &bob))
-						read_critter_bob(&fr, egbase, ol, critter_bob);
+						read_critter_bob(fr, egbase, ol, *critter_bob);
 					else if (upcast(Worker,      worker,      &bob))
-						read_worker_bob(&fr, egbase, ol, worker);
+						read_worker_bob (fr, egbase, ol, *worker);
 					else
 						assert(false);
 
@@ -334,10 +334,10 @@ void Map_Bobdata_Data_Packet::Read
 }
 
 void Map_Bobdata_Data_Packet::read_critter_bob
-	(FileRead * fr, Editor_Game_Base &, Map_Map_Object_Loader *, Critter_Bob *)
+	(FileRead & fr, Editor_Game_Base &, Map_Map_Object_Loader *, Critter_Bob &)
 {
 	try {
-		uint16_t const packet_version = fr->Unsigned16();
+		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CRITTER_BOB_PACKET_VERSION) {
 			// No data for critter bob currently
 		} else
@@ -348,20 +348,20 @@ void Map_Bobdata_Data_Packet::read_critter_bob
 }
 
 void Map_Bobdata_Data_Packet::read_worker_bob
-	(FileRead              * fr,
+	(FileRead              & fr,
 	 Editor_Game_Base      & egbase,
 	 Map_Map_Object_Loader * ol,
-	 Worker                * worker)
+	 Worker                & worker)
 {
 	try {
-		uint16_t const packet_version = fr->Unsigned16();
+		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == WORKER_BOB_PACKET_VERSION) {
 			bool oldsoldier_fix = false;
 
-			if (upcast(Soldier, soldier, worker)) {
+			if (upcast(Soldier, soldier, &worker)) {
 				try {
 					uint16_t const soldier_worker_bob_packet_version =
-						fr->Unsigned16();
+						fr.Unsigned16();
 					if
 						(2 <= soldier_worker_bob_packet_version
 						 and
@@ -380,31 +380,29 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 								soldier_worker_bob_packet_version < 3 ? min_hp : 0;
 
 							soldier->m_hp_current =
-								broken_hp_compensation + fr->Unsigned32();
+								broken_hp_compensation + fr.Unsigned32();
 							soldier->m_hp_max =
-								broken_hp_compensation + fr->Unsigned32();
+								broken_hp_compensation + fr.Unsigned32();
 						}
 						if (soldier->m_hp_max < min_hp)
 							throw wexception
 								("m_hp_max = %u but must be at least %u",
 								 soldier->m_hp_max, min_hp);
-						soldier->m_min_attack    = fr->Unsigned32();
-						soldier->m_max_attack    = fr->Unsigned32();
-						soldier->m_defense       = fr->Unsigned32();
-						soldier->m_evade         = fr->Unsigned32();
-						soldier->m_hp_level      = fr->Unsigned32();
-						soldier->m_attack_level  = fr->Unsigned32();
-						soldier->m_defense_level = fr->Unsigned32();
-						soldier->m_evade_level   = fr->Unsigned32();
+						soldier->m_min_attack    = fr.Unsigned32();
+						soldier->m_max_attack    = fr.Unsigned32();
+						soldier->m_defense       = fr.Unsigned32();
+						soldier->m_evade         = fr.Unsigned32();
+						soldier->m_hp_level      = fr.Unsigned32();
+						soldier->m_attack_level  = fr.Unsigned32();
+						soldier->m_defense_level = fr.Unsigned32();
+						soldier->m_evade_level   = fr.Unsigned32();
 						if (soldier_worker_bob_packet_version <= 3) {
-							fr->Unsigned8 (); // old soldier->m_marked
+							fr.Unsigned8 (); // old soldier->m_marked
 							oldsoldier_fix = true;
 						}
-						if (soldier_worker_bob_packet_version >= 5) {
-							Serial battle = fr->Unsigned32();
-							if (battle)
+						if (soldier_worker_bob_packet_version >= 5)
+							if (Serial const battle = fr.Unsigned32())
 								soldier->m_battle = &ol->get<Battle>(battle);
-						}
 					} else
 						throw wexception
 							("unknown/unhandled version %u",
@@ -412,15 +410,15 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 				} catch (_wexception const & e) {
 					throw wexception("soldier: %s", e.what());
 				}
-			} else if (upcast(Carrier, carrier, worker)) {
+			} else if (upcast(Carrier, carrier, &worker)) {
 				try {
 					uint16_t const carrier_worker_bob_packet_version =
-						fr->Unsigned16();
+						fr.Unsigned16();
 					if
 						(carrier_worker_bob_packet_version
 						 ==
 						 CARRIER_WORKER_BOB_PACKET_VERSION)
-						carrier->m_acked_ware = fr->Signed32();
+						carrier->m_acked_ware = fr.Signed32();
 					else
 						throw wexception
 							("unknown/unhandled version %u",
@@ -430,43 +428,43 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 				}
 			}
 
-			if (uint32_t const location_serial = fr->Unsigned32()) {
+			if (uint32_t const location_serial = fr.Unsigned32()) {
 				try {
-					worker->set_location(&ol->get<PlayerImmovable>(location_serial));
+					worker.set_location(&ol->get<PlayerImmovable>(location_serial));
 				} catch (_wexception const & e) {
 					throw wexception
 						("location (%u): %s", location_serial, e.what());
 				}
 			} else
-				worker->m_location = 0;
+				worker.m_location = 0;
 
-			if (uint32_t const carried_item_serial = fr->Unsigned32()) {
+			if (uint32_t const carried_item_serial = fr.Unsigned32()) {
 				try {
-					worker->m_carried_item =
+					worker.m_carried_item =
 						&ol->get<Map_Object>(carried_item_serial);
 				} catch (_wexception const & e) {
 					throw wexception
 						("carried item (%u): %s", carried_item_serial, e.what());
 				}
 			} else
-				worker->m_carried_item = 0;
+				worker.m_carried_item = 0;
 
 			// Skip supply
 
-			worker->m_needed_exp  = fr->Signed32();
-			worker->m_current_exp = fr->Signed32();
+			worker.m_needed_exp  = fr.Signed32();
+			worker.m_current_exp = fr.Signed32();
 
 			Economy * economy = 0;
-			if (Map_Object * const location = worker->m_location.get(egbase))
+			if (Map_Object * const location = worker.m_location.get(egbase))
 				economy = dynamic_cast<PlayerImmovable &>(*location).get_economy();
-			worker->set_economy(economy);
+			worker.set_economy(economy);
 			if
 				(Map_Object * const carried_item =
-				 worker->m_carried_item.get(egbase))
+				 	worker.m_carried_item.get(egbase))
 				dynamic_cast<WareInstance &>(*carried_item).set_economy(economy);
 
 			if (oldsoldier_fix)
-				if (upcast(Soldier, soldier, worker))
+				if (upcast(Soldier, soldier, &worker))
 					if (upcast(Game, game, &egbase))
 						if (upcast(MilitarySite, ms, soldier->get_location(egbase)))
 							if (soldier->get_position() == ms->get_position()) {
@@ -479,7 +477,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
 		throw wexception
-			("worker %p (%u): %s", worker, worker->serial(), e.what());
+			("worker %p (%u): %s", &worker, worker.serial(), e.what());
 	}
 }
 
