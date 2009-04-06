@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3769\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 18:24+0000\n"
-"PO-Revision-Date: 2008-10-26 16:54+0100\n"
-"Last-Translator: Jacek Wolszczak <shutdownrunner@o2.pl>\n"
+"POT-Creation-Date: 2009-04-06 15:49+0000\n"
+"PO-Revision-Date: 2009-04-02 18:51+0100\n"
+"Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,7 +73,7 @@ msgstr ""
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
-msgstr ""
+msgstr "Wyspa komet"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid "A few miles in front of Gerion Coast lies a small unnamed island. Until now, you have not seen any reason, to ship there, but yesterday a big fireball came from the sky and touched down in it's middle. Is this a sign of the Gods? You believe it is and you hope, that your tribe will find the treasure of this island, before other tribes will follow."
@@ -88,8 +88,9 @@ msgid "Long after a meteor crashed into a couple of mountains life blossoms in t
 msgstr ""
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
+#, fuzzy
 msgid "Dry Riverbed"
-msgstr ""
+msgstr "Suche koryto rzeki"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid "It is a long time ago, since the last rain drop touched these grounds. No wonder, that here is not much water left in this dry riverbed. Everyone knows: soon there will be a war. A war about the last water."
@@ -113,15 +114,16 @@ msgstr ""
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finish Lakes"
-msgstr ""
+msgstr "Fińskie jeziora"
 
 #: ../../maps/Finlakes.wmf/elemental:11
 msgid "These are the beautiful finish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
 msgstr ""
 
 #: ../../maps/Firegames.wmf/elemental:7
+#, fuzzy
 msgid "Firegames"
-msgstr ""
+msgstr "Gry z ogniem"
 
 #: ../../maps/Firegames.wmf/elemental:9
 msgid "Is this a test by the Gods or an evil plan by someone else, that you and your tribe woke up on this island among fire and lava? Until now it seems as if you are alone, but no-one knows, what might happen if you meet an opponent tribe?"
@@ -143,9 +145,11 @@ msgstr "Cztery góry"
 msgid "Each tribe is surrounded by four mighty mounains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional watersources. Hint 3: Each mountain contains only one resource."
 msgstr ""
 
+# Glacier - Lodowiec
 #: ../../maps/Glacier Lake.wmf/elemental:7
+#, fuzzy
 msgid "Glacier Lake"
-msgstr ""
+msgstr "Lodowe jezioro"
 
 #: ../../maps/Glacier Lake.wmf/elemental:9
 msgid "A long time your tribe dwelled on this beautiful and lonely glacier lake. Noone disturbed you and the resources were enough for your whole tribe, but a few month ago another tribe came over the mountains and settled down. And you are sure, that there is only place enough for one tribe."
@@ -193,7 +197,7 @@ msgstr ""
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
-msgstr ""
+msgstr "Mistyczny labirynt"
 
 #: ../../maps/Mystical Maze.wmf/elemental:11
 msgid "There are two big questions around: Who created this unbelievable big maze and what can be found inside?"
@@ -241,7 +245,7 @@ msgstr ""
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
-msgstr ""
+msgstr "Trojkąt oaz"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid "There is something mystical, like a grey atmosphere, about this three Oasis, which noone found out, yet. Perhaps you will be the one, but be aware of the others, who are searching, too!"
@@ -285,6 +289,14 @@ msgstr "Trzej wojownicy"
 
 #: ../../maps/Three Warriors.wmf/elemental:11
 msgid "Mighty mountains divide this land into three fertile valleys. But a path connects the valleys and thus seems a fight inescapable! Hint: Water can be found around the lakes."
+msgstr ""
+
+#: ../../maps/Twinkling Waves.wmf/elemental:9
+msgid "Twinkling Waves"
+msgstr ""
+
+#: ../../maps/Twinkling Waves.wmf/elemental:11
+msgid "Many beautiful, green islands await the ones brave enough to pass the thousand waves, twinkling in the sun."
 msgstr ""
 
 #: ../../maps/Two frontiers.wmf/elemental:7
