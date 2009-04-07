@@ -418,7 +418,7 @@ void RealFSImpl::Write
 	size_t const c = fwrite(data, length, 1, f);
 	fclose(f);
 
-	if (c != 1)
+	if (length and c != 1) // data might be 0 blocks long
 		throw wexception("Write to %s (%s) failed", fname.c_str(), fullname.c_str());
 }
 
