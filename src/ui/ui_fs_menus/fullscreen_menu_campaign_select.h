@@ -94,7 +94,7 @@ private:
 	UI::Multiline_Textarea                               tamapdescr;
 	UI::Button<Fullscreen_Menu_CampaignMapSelect>        b_ok;
 	UI::IDButton<Fullscreen_Menu_CampaignMapSelect, int32_t> back;
-	UI::Listselect<const char *>                         m_list;
+	UI::Listselect<std::string>                          m_list;
 	int32_t                                              campaign;
 	std::string                                          campmapfile;
 

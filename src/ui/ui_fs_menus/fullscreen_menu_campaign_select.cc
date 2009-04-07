@@ -23,6 +23,8 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "profile.h"
+#include "wexception.h"
+#include "widelands_map_loader.h"
 
 
 /*
@@ -331,49 +333,34 @@ void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint32_t const i) {
 /**
  * an entry of the maplist got selected.
  */
-void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t const i) {
-	if (m_list.get_selected()) { //gets false, if the selected entry has no value.
-		// Load maps textdomain to translate the strings from cconfig
-		i18n::grab_textdomain("maps");
+void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
+	campmapfile = m_list.get_selected();
 
-		// read in the campaign config
-		Profile prof("campaigns/cconfig");
-		Section & global_s = prof.get_safe_section("global");
+	// Load maps textdomain to translate the strings from map
+	i18n::grab_textdomain("maps");
 
-		// Release maps texdoamin
+	Widelands::Map map;
+
+	Widelands::Map_Loader *const ml
+		= map.get_correct_loader(campmapfile.c_str());
+	if (!ml) {
 		i18n::release_textdomain();
-
-		// Get section of campaign-maps
-		char csection[12];
-		sprintf(csection, "campsect%i", campaign);
-		std::string const campsection = global_s.get_string(csection);
-		std::string mapsection;
-		char number[4];
-
-		// Create the entry we use to load the section of the map
-		mapsection = campsection;
-		sprintf(number, "%02i", i);
-		mapsection += number;
-
-		// Load the section of the map
-		Section & s = prof.get_safe_section(mapsection.c_str());
-
-		// Put the path to the map into campmapfile
-		campmapfile = s.get_string("path");
-
-		// enable OK button
-		b_ok.set_enabled(true);
-
-		tamapname .set_text(s.get_string("name",   _("[No value found]")));
-		taauthor  .set_text(s.get_string("author", _("[No value found]")));
-		tamapdescr.set_text(s.get_string("descr",  _("[No value found]")));
-
-	} else { // normally never here
-		b_ok.set_enabled(false);
-		tamapname .set_text(_("[Invalid entry]"));
-		taauthor  .set_text("");
-		tamapdescr.set_text("");
+		throw wexception
+			(_("Invalid path to file in cconfig: %s"), campmapfile.c_str());
 	}
+
+	map.set_filename(campmapfile.c_str());
+	ml->preload_map(true);
+
+	tamapname .set_text(map.get_name());
+	taauthor  .set_text(map.get_author());
+	tamapdescr.set_text(map.get_description());
+
+	// Release maps textdomain
+	i18n::release_textdomain();
+
+	// enable OK button
+	b_ok.set_enabled(true);
 }
 
 
@@ -398,7 +385,7 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list()
 	Profile prof("campaigns/cconfig");
 	Section & global_s = prof.get_safe_section("global");
 
-	// Release maps texdoamin
+	// Release maps textdomain
 	i18n::release_textdomain();
 
 	// Read in campvis-file
