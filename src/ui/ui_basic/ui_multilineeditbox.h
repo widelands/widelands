@@ -35,7 +35,6 @@ struct Scrollbar;
 struct Multiline_Editbox : public Multiline_Textarea {
 	Multiline_Editbox
 		(Panel *, int32_t x, int32_t y, uint32_t w, uint32_t h, char const *);
-	~Multiline_Editbox();
 
 	Signal changed;
 

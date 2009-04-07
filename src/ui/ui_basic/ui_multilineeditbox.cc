@@ -49,13 +49,6 @@ Multiline_Editbox::Multiline_Editbox
 
 
 /**
- * Free allocated resources
-*/
-Multiline_Editbox::~Multiline_Editbox() {
-	changed.call();
-}
-
-/**
  * A key event must be handled
 */
 bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
