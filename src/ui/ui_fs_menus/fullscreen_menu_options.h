@@ -65,11 +65,12 @@ struct Options_Ctrl {
 
 	Options_Ctrl(Section &);
 	~Options_Ctrl();
-	Options_Ctrl::Options_Struct options_struct(Section &);
+	void handle_menu();
+	Options_Ctrl::Options_Struct options_struct();
 	void save_options();
 private:
-	Fullscreen_Menu_Options *m_opt_dialog;
 	Section & m_opt_section;
+	Fullscreen_Menu_Options *m_opt_dialog;
 };
 
 /**
@@ -80,8 +81,9 @@ struct Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt);
 	Options_Ctrl::Options_Struct get_values();
 	enum {
-		om_cancel =   0,
-		om_ok     =   1
+		om_cancel  = 0,
+		om_ok      = 1,
+		om_restart = 2
 	};
 
 private:

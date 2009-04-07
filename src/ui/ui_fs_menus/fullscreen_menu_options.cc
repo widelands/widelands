@@ -279,8 +279,10 @@ os(opt)
 
 void Fullscreen_Menu_Options::advanced_options() {
 	Fullscreen_Menu_Advanced_Options aom(os);
-	if (aom.run() == Fullscreen_Menu_Advanced_Options::om_ok)
+	if (aom.run() == Fullscreen_Menu_Advanced_Options::om_ok) {
 		os = aom.get_values();
+		end_modal(om_restart);
+	}
 }
 
 
@@ -468,40 +470,53 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
  * Handles communication between window class and options
  */
 Options_Ctrl::Options_Ctrl(Section & s)
-: m_opt_dialog(new Fullscreen_Menu_Options(options_struct(s))), m_opt_section(s)
+: m_opt_section(s), m_opt_dialog(new Fullscreen_Menu_Options(options_struct()))
 {
-	if (m_opt_dialog->run() == Fullscreen_Menu_Options::om_ok)
-		save_options();
+	handle_menu();
 }
 
 Options_Ctrl::~Options_Ctrl() {
 	delete m_opt_dialog;
 }
 
-Options_Ctrl::Options_Struct Options_Ctrl::options_struct(Section & s) {
-	Options_Struct opt;
-	opt.xres                  =  s.get_int ("xres",                    640);
-	opt.yres                  =  s.get_int ("yres",                    480);
-	opt.depth                 =  s.get_int ("depth",                    16);
-	opt.inputgrab             =  s.get_bool("inputgrab",             false);
-	opt.fullscreen            =  s.get_bool("fullscreen",            false);
-	opt.single_watchwin       =  s.get_bool("single_watchwin",       false);
-	opt.auto_roadbuild_mode   =  s.get_bool("auto_roadbuild_mode",    true);
-	opt.show_warea            =  s.get_bool("workareapreview",       false);
-	opt.snap_windows_only_when_overlapping
-		= s.get_bool("snap_windows_only_when_overlapping", false);
-	opt.dock_windows_to_edges =  s.get_bool("dock_windows_to_edges", false);
-	opt.language              =  s.get_string("language",               "");
-	opt.music                 = !s.get_bool("disable_music",         false);
-	opt.fx                    = !s.get_bool("disable_fx",            false);
-	opt.autosave = s.get_int("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
-	opt.maxfps                =  s.get_int("maxfps",                    25);
+void Options_Ctrl::handle_menu()
+{
+	int32_t i = m_opt_dialog->run();
+	if (i != Fullscreen_Menu_Options::om_cancel)
+		save_options();
+	if (i == Fullscreen_Menu_Options::om_restart) {
+		delete m_opt_dialog;
+		m_opt_dialog = new Fullscreen_Menu_Options(options_struct());
+		handle_menu(); // Restart general options menu
+	}
+}
 
-	opt.nozip                 =  s.get_bool("nozip",                 false);
-	opt.ui_font               =  s.get_string("ui_font",           "serif");
-	opt.speed_of_new_game     =  s.get_int("speed_of_new_game",       1000);
-	opt.border_snap_distance  =  s.get_int("border_snap_distance",       0);
-	opt.panel_snap_distance   =  s.get_int("panel_snap_distance",        0);
+Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
+	Options_Struct opt;
+	opt.xres                = m_opt_section.get_int ("xres",                 640);
+	opt.yres                = m_opt_section.get_int ("yres",                 480);
+	opt.depth               = m_opt_section.get_int ("depth",                 16);
+	opt.inputgrab           = m_opt_section.get_bool("inputgrab",          false);
+	opt.fullscreen          = m_opt_section.get_bool("fullscreen",         false);
+	opt.single_watchwin     = m_opt_section.get_bool("single_watchwin",    false);
+	opt.auto_roadbuild_mode = m_opt_section.get_bool("auto_roadbuild_mode", true);
+	opt.show_warea          = m_opt_section.get_bool("workareapreview",    false);
+	opt.snap_windows_only_when_overlapping
+		= m_opt_section.get_bool("snap_windows_only_when_overlapping",      false);
+	opt.dock_windows_to_edges
+		= m_opt_section.get_bool("dock_windows_to_edges",                   false);
+	opt.language              =  m_opt_section.get_string("language",         "");
+	opt.music                 = !m_opt_section.get_bool("disable_music",   false);
+	opt.fx                    = !m_opt_section.get_bool("disable_fx",      false);
+	opt.autosave
+		= m_opt_section.get_int("autosave",        DEFAULT_AUTOSAVE_INTERVAL * 60);
+	opt.maxfps                =  m_opt_section.get_int("maxfps",              25);
+
+	opt.nozip                 =  m_opt_section.get_bool("nozip",           false);
+	opt.ui_font               =  m_opt_section.get_string("ui_font",     "serif");
+	opt.speed_of_new_game     =  m_opt_section.get_int("speed_of_new_game", 1000);
+	opt.border_snap_distance  =  m_opt_section.get_int("border_snap_distance", 0);
+	opt.panel_snap_distance   =  m_opt_section.get_int("panel_snap_distance",  0);
 	return opt;
 }
 
