@@ -35,6 +35,10 @@ struct Trigger_Player_Area : public Trigger {
 	friend struct ::Trigger_Building_Option_Menu;
 	Trigger_Player_Area(char const * Name, bool set);
 
+	virtual void reorigin(Coords const new_origin, Extent const extent) {
+		m_player_area.reorigin(new_origin, extent);
+	}
+
 	void Read (Section &, Editor_Game_Base       &);
 	void Write(Section &, Editor_Game_Base const &) const;
 

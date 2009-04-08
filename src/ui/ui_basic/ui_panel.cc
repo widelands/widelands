@@ -671,7 +671,7 @@ void Panel::check_child_death()
 */
 void Panel::do_draw(RenderTarget & dst)
 {
-	if (!get_visible())
+	if (!is_visible())
 		return;
 
 	if (!_cache)
@@ -737,7 +737,7 @@ inline Panel * Panel::child_at_mouse_cursor
 {
 
 	for (; child; child = child->_next) {
-		if (!child->get_handle_mouse() || !child->get_visible())
+		if (!child->get_handle_mouse() || !child->is_visible())
 			continue;
 		if
 			(x < child->_x + static_cast<int32_t>(child->_w) and x >= child->_x

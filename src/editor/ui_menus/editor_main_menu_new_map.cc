@@ -70,19 +70,19 @@ m_currentworld(0)
 	m_width =
 		new UI::Textarea(this, posx + spacing + 20, posy, buffer, Align_Left);
 
-	new UI::IDButton<Main_Menu_New_Map, int32_t>
+	new UI::Callback_IDButton<Main_Menu_New_Map, int32_t>
 		(this,
 		 posx, posy, 20, 20,
 		 1,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 &Main_Menu_New_Map::button_clicked, this, 0);
+		 &Main_Menu_New_Map::button_clicked, *this, 0);
 
-	new UI::IDButton<Main_Menu_New_Map, int32_t>
+	new UI::Callback_IDButton<Main_Menu_New_Map, int32_t>
 		(this,
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 1,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 &Main_Menu_New_Map::button_clicked, this, 1);
+		 &Main_Menu_New_Map::button_clicked, *this, 1);
 
 	posy += 20 + spacing + spacing;
 
@@ -92,19 +92,19 @@ m_currentworld(0)
 	m_height =
 		new UI::Textarea(this, posx + spacing + 20, posy, buffer, Align_Left);
 
-	new UI::IDButton<Main_Menu_New_Map, int32_t>
+	new UI::Callback_IDButton<Main_Menu_New_Map, int32_t>
 		(this,
 		 posx, posy, 20, 20,
 		 1,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 &Main_Menu_New_Map::button_clicked, this, 2);
+		 &Main_Menu_New_Map::button_clicked, *this, 2);
 
-	new UI::IDButton<Main_Menu_New_Map, int32_t>
+	new UI::Callback_IDButton<Main_Menu_New_Map, int32_t>
 		(this,
 		 get_inner_w() - spacing - 20, posy, 20, 20,
 		 1,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 &Main_Menu_New_Map::button_clicked, this, 3);
+		 &Main_Menu_New_Map::button_clicked, *this, 3);
 
 	posy += 20 + spacing + spacing;
 
@@ -114,20 +114,20 @@ m_currentworld(0)
 	while (strcmp(map.get_world_name(), m_worlds[m_currentworld].c_str()))
 		++m_currentworld;
 
-	m_world = new UI::IDButton<Main_Menu_New_Map, int32_t>
+	m_world = new UI::Callback_IDButton<Main_Menu_New_Map, int32_t>
 		(this,
 		 posx, posy, width, height,
 		 1,
-		 &Main_Menu_New_Map::button_clicked, this, 4,
+		 &Main_Menu_New_Map::button_clicked, *this, 4,
 		 Widelands::World::World(m_worlds[m_currentworld].c_str()).get_name());
 
 	posy += height + spacing + spacing + spacing;
 
-	new UI::Button<Main_Menu_New_Map>
+	new UI::Callback_Button<Main_Menu_New_Map>
 		(this,
 		 posx, posy, width, height,
 		 0,
-		 &Main_Menu_New_Map::clicked_create_map, this,
+		 &Main_Menu_New_Map::clicked_create_map, *this,
 		 _("Create Map"));
 
 	posy += height + spacing;

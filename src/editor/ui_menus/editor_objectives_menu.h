@@ -26,7 +26,7 @@
 struct Editor_Interactive;
 namespace Widelands {struct Objective;};
 namespace UI {
-template <typename T> struct Button;
+template <typename T> struct Callback_Button;
 template <typename T> struct Table;
 struct Textarea;
 };
@@ -38,8 +38,8 @@ struct Editor_Objectives_Menu : public UI::UniqueWindow {
 private:
 	Editor_Interactive                 * m_parent;
 	UI::Table<Widelands::Objective &> m_table;
-	UI::Button<Editor_Objectives_Menu> * m_edit_button;
-	UI::Button<Editor_Objectives_Menu> * m_delete_button;
+	UI::Callback_Button<Editor_Objectives_Menu> * m_edit_button;
+	UI::Callback_Button<Editor_Objectives_Menu> * m_delete_button;
 	UI::Textarea                       * m_trigger;
 
 	void insert_objective(Widelands::Objective &);

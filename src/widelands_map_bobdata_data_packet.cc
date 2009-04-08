@@ -620,9 +620,9 @@ throw (_wexception)
 				fw.CString(bob.m_signal.c_str());
 
 				if      (upcast(Critter_Bob const, critter_bob, &bob))
-					write_critter_bob(&fw, egbase, os, *critter_bob);
+					write_critter_bob(fw, egbase, os, *critter_bob);
 				else if (upcast(Worker      const, worker,      &bob))
-					write_worker_bob (&fw, egbase, os, *worker);
+					write_worker_bob (fw, egbase, os, *worker);
 				else
 					assert(false);
 
@@ -639,46 +639,48 @@ throw (_wexception)
 }
 
 void Map_Bobdata_Data_Packet::write_critter_bob
-	(FileWrite            * fw,
+	(FileWrite            & fw,
 	 Editor_Game_Base     &,
 	 Map_Map_Object_Saver *,
 	 Critter_Bob    const &)
-{fw->Unsigned16(CRITTER_BOB_PACKET_VERSION);}
+{
+	fw.Unsigned16(CRITTER_BOB_PACKET_VERSION);
+}
 
 void Map_Bobdata_Data_Packet::write_worker_bob
-	(FileWrite            * fw,
+	(FileWrite            & fw,
 	 Editor_Game_Base     & egbase,
 	 Map_Map_Object_Saver * os,
 	 Worker         const & worker)
 {
-	fw->Unsigned16(WORKER_BOB_PACKET_VERSION);
+	fw.Unsigned16(WORKER_BOB_PACKET_VERSION);
 
 	if (upcast(Soldier const, soldier, &worker)) {
-		fw->Unsigned16(SOLDIER_WORKER_BOB_PACKET_VERSION);
-		fw->Unsigned32(soldier->m_hp_current);
-		fw->Unsigned32(soldier->m_hp_max);
-		fw->Unsigned32(soldier->m_min_attack);
-		fw->Unsigned32(soldier->m_max_attack);
-		fw->Unsigned32(soldier->m_defense);
-		fw->Unsigned32(soldier->m_evade);
-		fw->Unsigned32(soldier->m_hp_level);
-		fw->Unsigned32(soldier->m_attack_level);
-		fw->Unsigned32(soldier->m_defense_level);
-		fw->Unsigned32(soldier->m_evade_level);
+		fw.Unsigned16(SOLDIER_WORKER_BOB_PACKET_VERSION);
+		fw.Unsigned32(soldier->m_hp_current);
+		fw.Unsigned32(soldier->m_hp_max);
+		fw.Unsigned32(soldier->m_min_attack);
+		fw.Unsigned32(soldier->m_max_attack);
+		fw.Unsigned32(soldier->m_defense);
+		fw.Unsigned32(soldier->m_evade);
+		fw.Unsigned32(soldier->m_hp_level);
+		fw.Unsigned32(soldier->m_attack_level);
+		fw.Unsigned32(soldier->m_defense_level);
+		fw.Unsigned32(soldier->m_evade_level);
 		if (soldier->m_battle)
-			fw->Unsigned32(os->get_object_file_index(*soldier->m_battle));
+			fw.Unsigned32(os->get_object_file_index(*soldier->m_battle));
 		else
-			fw->Unsigned32(0);
+			fw.Unsigned32(0);
 	} else if (upcast(Carrier const, carrier, &worker)) {
-		fw->Unsigned16(CARRIER_WORKER_BOB_PACKET_VERSION);
-		fw->Signed32(carrier->m_acked_ware);
+		fw.Unsigned16(CARRIER_WORKER_BOB_PACKET_VERSION);
+		fw.Signed32(carrier->m_acked_ware);
 	}
 
 	if (Map_Object const * const loca = worker.m_location.get(egbase)) {
 		assert(os->is_object_known(*loca));
-		fw->Unsigned32(os->get_object_file_index(*loca));
+		fw.Unsigned32(os->get_object_file_index(*loca));
 	} else
-		fw->Unsigned32(0);
+		fw.Unsigned32(0);
 
 	//  Economy is not our beer.
 
@@ -687,12 +689,12 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 		 	worker.m_carried_item.get(egbase))
 	{
 		assert(os->is_object_known(*carried_item));
-		fw->Unsigned32(os->get_object_file_index(*carried_item));
+		fw.Unsigned32(os->get_object_file_index(*carried_item));
 	} else
-		fw->Unsigned32(0);
+		fw.Unsigned32(0);
 
-	fw->Signed32(worker.m_needed_exp);
-	fw->Signed32(worker.m_current_exp);
+	fw.Signed32(worker.m_needed_exp);
+	fw.Signed32(worker.m_current_exp);
 }
 
 };

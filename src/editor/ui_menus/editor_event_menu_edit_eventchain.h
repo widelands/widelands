@@ -29,7 +29,7 @@ struct EventChain;
 };
 namespace UI {
 template <typename T> struct Listselect;
-template <typename T> struct Button;
+template <typename T> struct Callback_Button;
 struct Checkbox;
 struct EditBox;
 };
@@ -62,10 +62,10 @@ private:
 
 	UI::Listselect<Widelands::Event &> *m_available_events;
 	UI::Listselect<Widelands::Event &> *m_events;
-	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_insert_btn;
-	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_delete_btn;
-	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_mvup_btn;
-	UI::Button<Editor_Event_Menu_Edit_EventChain> * m_mvdown_btn;
+	UI::Callback_Button<Editor_Event_Menu_Edit_EventChain> * m_insert_btn;
+	UI::Callback_Button<Editor_Event_Menu_Edit_EventChain> * m_delete_btn;
+	UI::Callback_Button<Editor_Event_Menu_Edit_EventChain> * m_mvup_btn;
+	UI::Callback_Button<Editor_Event_Menu_Edit_EventChain> * m_mvdown_btn;
 	UI::Checkbox                                  * m_morethanonce;
 	UI::EditBox                                   * m_name;
 	Widelands::EventChain              & m_event_chain;

@@ -107,14 +107,14 @@ m_back
 	(this,
 	 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
 	 0,
-	 &Fullscreen_Menu_MapSelect::end_modal, this, 0,
+	 &Fullscreen_Menu_MapSelect::end_modal, *this, 0,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs),
 m_ok
 	(this,
 	 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
 	 2,
-	 &Fullscreen_Menu_MapSelect::ok, this,
+	 &Fullscreen_Menu_MapSelect::ok, *this,
 	 _("OK"), std::string(), false, false,
 	 m_fn, m_fs),
 
@@ -195,11 +195,9 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 
 		// get translated worldsname
 		std::string worldpath("worlds/" + map.world);
-		i18n::grab_textdomain(worldpath);
-		Profile prof((worldpath + "/conf").c_str());
+		Profile prof((worldpath + "/conf").c_str(), 0, worldpath.c_str());
 		Section & global = prof.get_safe_section("world");
 		std::string world(global.get_safe_string("name"));
-		i18n::release_textdomain();
 
 		m_name      .set_text(map.name);
 		m_author    .set_text(map.author);

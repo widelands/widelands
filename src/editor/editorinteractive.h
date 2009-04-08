@@ -26,6 +26,7 @@
 #include "editor_noise_height_tool.h"
 #include "editor_place_immovable_tool.h"
 #include "editor_place_bob_tool.h"
+#include "editor_set_origin_tool.h"
 #include "editor_set_terrain_tool.h"
 #include "editor_set_starting_pos_tool.h"
 #include "interactive_base.h"
@@ -49,6 +50,7 @@ private:
 	Editor_Interactive(Widelands::Editor_Game_Base &);
 
 public:
+	void register_overlays();
 	void load(std::string const & filename);
 
 	// leaf functions from base class
@@ -93,6 +95,7 @@ public:
 		Editor_Decrease_Resources_Tool  decrease_resources;
 		Editor_Set_Resources_Tool       set_resources;
 		Editor_Increase_Resources_Tool  increase_resources;
+		Editor_Set_Origin_Tool          set_origin;
 	} tools;
 
 	void select_tool(Editor_Tool &, Editor_Tool::Tool_Index);
@@ -146,15 +149,15 @@ private:
 	UI::UniqueWindow::Registry m_bobmenu;
 	UI::UniqueWindow::Registry m_resourcesmenu;
 
-	UI::Button<Editor_Interactive> m_toggle_main_menu;
-	UI::Button<Editor_Interactive> m_toggle_tool_menu;
-	UI::Button<Editor_Interactive> m_toggle_toolsize_menu;
-	UI::Button<Editor_Interactive> m_toggle_minimap;
-	UI::Button<Editor_Interactive> m_toggle_buildhelp;
-	UI::Button<Editor_Interactive> m_toggle_player_menu;
-	UI::Button<Editor_Interactive> m_toggle_event_menu;
-	UI::Button<Editor_Interactive> m_toggle_variables_menu;
-	UI::Button<Editor_Interactive> m_toggle_objectives_menu;
+	UI::Callback_Button<Editor_Interactive> m_toggle_main_menu;
+	UI::Callback_Button<Editor_Interactive> m_toggle_tool_menu;
+	UI::Callback_Button<Editor_Interactive> m_toggle_toolsize_menu;
+	UI::Callback_Button<Editor_Interactive> m_toggle_minimap;
+	UI::Callback_Button<Editor_Interactive> m_toggle_buildhelp;
+	UI::Callback_Button<Editor_Interactive> m_toggle_player_menu;
+	UI::Callback_Button<Editor_Interactive> m_toggle_event_menu;
+	UI::Callback_Button<Editor_Interactive> m_toggle_variables_menu;
+	UI::Callback_Button<Editor_Interactive> m_toggle_objectives_menu;
 };
 
 #endif

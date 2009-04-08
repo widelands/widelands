@@ -476,9 +476,9 @@ procedure Whitespace_Checker is
                case Read_Characters (1) is
                   when '/' => --  /* comment */
                      Read_Multiline_Comment;
-                  when HT | ' ' | '{' | '(' | ':' | '>' | '*' | '&' | '!' =>
+                  when HT | ' ' | '{' | '(' | '.' | ':' | '>' | '*' | '&' | '!' =>
                      null;
-                  when  '+' | '-'                                         =>
+                  when  '+' | '-'                                               =>
                      if Read_Characters (2) /= Read_Characters (1) then
                         Put_Error
                           ('"' & Read_Characters (2) & Read_Characters (1) &
@@ -500,7 +500,7 @@ procedure Whitespace_Checker is
                      then
                         Put_Error ("""r*"" is not allowed");
                      end if;
-                  when others =>
+                  when others                                                   =>
                      Put_Error
                        ('"' & Read_Characters (1) & "*"" is not allowed");
                end case;

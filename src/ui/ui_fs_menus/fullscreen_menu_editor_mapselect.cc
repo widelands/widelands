@@ -94,20 +94,20 @@ m_label_descr
 m_descr (this, m_xres * 71 / 100, m_yres * 13 / 25, m_xres / 4, m_yres * 63 / 200, std::string()),
 
 // Buttons
-m_back
-	(this,
-	 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
-	 0,
-	 &Fullscreen_Menu_Editor_MapSelect::end_modal, this, 0,
-	 _("Back"), std::string(), true, false,
-	 m_fn, m_fs),
-m_ok
-	(this,
-	 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
-	 2,
-	 &Fullscreen_Menu_Editor_MapSelect::ok, this,
-	 _("OK"), std::string(), false, false,
-	 m_fn, m_fs),
+	m_back
+		(this,
+		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
+		 0,
+		 &Fullscreen_Menu_Editor_MapSelect::end_modal, *this, 0,
+		 _("Back"), std::string(), true, false,
+		 m_fn, m_fs),
+	m_ok
+		(this,
+		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
+		 2,
+		 &Fullscreen_Menu_Editor_MapSelect::ok, *this,
+		 _("OK"), std::string(), false, false,
+		 m_fn, m_fs),
 
 // Map list
 m_list(this, m_xres * 47 / 2500, m_yres * 3417 / 10000, m_xres * 711 / 1250, m_yres * 6083 / 10000),

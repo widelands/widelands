@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,30 +17,24 @@
  *
  */
 
-#ifndef EDITOR_TOOLSIZE_MENU_H
-#define EDITOR_TOOLSIZE_MENU_H
+#include "editor_set_origin_tool.h"
 
-#include "ui_button.h"
-#include "ui_textarea.h"
-#include "ui_unique_window.h"
+#include "editorinteractive.h"
+#include "map.h"
+#include "mapviewpixelconstants.h"
+#include "overlay_manager.h"
 
-
-struct Editor_Interactive;
-
-
-/// The tool size window/menu.
-struct Editor_Toolsize_Menu : public UI::UniqueWindow {
-	Editor_Toolsize_Menu(Editor_Interactive *, UI::UniqueWindow::Registry *);
-	void update(uint32_t);
-
-private:
-	Editor_Interactive & eia();
-	void decrease_radius();
-	void increase_radius();
-
-	UI::Textarea                                   m_textarea;
-	UI::Callback_Button<Editor_Toolsize_Menu> m_increase, m_decrease;
-};
-
-
-#endif
+int32_t Editor_Set_Origin_Tool::handle_click_impl
+	(Widelands::Map               &       map,
+	 Widelands::Node_and_Triangle<> const center,
+	 Editor_Interactive           &       eia)
+{
+	map.set_origin(center.node);
+	map.overlay_manager().reset();
+	eia.register_overlays();
+	eia.set_rel_viewpoint
+		(Point
+		 	(-(center.node.x * 2 + (center.node.y & 1)) * (TRIANGLE_WIDTH / 2),
+		 	 - center.node.y *                             TRIANGLE_HEIGHT));
+	return 0;
+}

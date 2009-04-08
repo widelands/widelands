@@ -60,7 +60,7 @@ struct Interactive_Player : public Interactive_GameBase, public DebugConsole::Ha
 	void toggle_resources ();
 	void toggle_help      ();
 
-	void field_action();
+	virtual void node_action();
 
 	bool handle_key(bool down, SDL_keysym);
 
@@ -92,14 +92,14 @@ private:
 	bool                     m_auto_roadbuild_mode;
 	Widelands::Coords        m_flag_to_connect;
 
-	UI::Button<Interactive_Player> m_toggle_chat;
-	UI::Button<Interactive_Player> m_toggle_options_menu;
-	UI::Button<Interactive_Player> m_toggle_statistics_menu;
-	UI::Button<Interactive_Player> m_toggle_objectives;
-	UI::Button<Interactive_Player> m_toggle_minimap;
-	UI::Button<Interactive_Player> m_toggle_buildhelp;
-	//UI::Button<Interactive_Player> m_toggle_resources;
-	UI::Button<Interactive_Player> m_toggle_help;
+	UI::Callback_Button<Interactive_Player> m_toggle_chat;
+	UI::Callback_Button<Interactive_Player> m_toggle_options_menu;
+	UI::Callback_Button<Interactive_Player> m_toggle_statistics_menu;
+	UI::Callback_Button<Interactive_Player> m_toggle_objectives;
+	UI::Callback_Button<Interactive_Player> m_toggle_minimap;
+	UI::Callback_Button<Interactive_Player> m_toggle_buildhelp;
+	//  UI::Callback_Button<Interactive_Player> m_toggle_resources;
+	UI::Callback_Button<Interactive_Player> m_toggle_help;
 
 
 	UI::UniqueWindow::Registry m_chat;

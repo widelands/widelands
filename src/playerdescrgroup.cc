@@ -38,9 +38,9 @@ struct PlayerDescriptionGroupImpl {
 
 	UI::Textarea     * plr_name;
 	UI::Checkbox     * btnEnablePlayer;
-	UI::Basic_Button * btnPlayerType;
-	UI::Basic_Button * btnPlayerTribe;
-	UI::Basic_Button * btnPlayerInit;
+	UI::Callback_Button<PlayerDescriptionGroup> * btnPlayerType;
+	UI::Callback_Button<PlayerDescriptionGroup> * btnPlayerTribe;
+	UI::Callback_Button<PlayerDescriptionGroup> * btnPlayerInit;
 };
 
 PlayerDescriptionGroup::PlayerDescriptionGroup
@@ -61,31 +61,28 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnEnablePlayer = new UI::Checkbox(this, Point(w * 29 / 125 - 23, 0));
 	d->btnEnablePlayer->changedto.set
 		(this, &PlayerDescriptionGroup::enable_player);
-	d->btnPlayerType = new UI::Button<PlayerDescriptionGroup>
+	d->btnPlayerType = new UI::Callback_Button<PlayerDescriptionGroup>
 		(this,
 		 w * 29 / 125, 0, w * 19 / 100, h,
 		 1,
-		 &PlayerDescriptionGroup::toggle_playertype, this,
-		 "",
-		 std::string(),
+		 &PlayerDescriptionGroup::toggle_playertype, *this,
+		 std::string(), std::string(),
 		 true, false,
 		 fname, fsize);
-	d->btnPlayerTribe = new UI::Button<PlayerDescriptionGroup>
+	d->btnPlayerTribe = new UI::Callback_Button<PlayerDescriptionGroup>
 		(this,
 		 w * 43 / 100, 0, w * 6 / 25, h,
 		 1,
-		 &PlayerDescriptionGroup::toggle_playertribe, this,
-		 "",
-		 std::string(),
+		 &PlayerDescriptionGroup::toggle_playertribe, *this,
+		 std::string(), std::string(),
 		 true, false,
 		 fname, fsize);
-	d->btnPlayerInit = new UI::Button<PlayerDescriptionGroup>
+	d->btnPlayerInit = new UI::Callback_Button<PlayerDescriptionGroup>
 		(this,
 		 w * 27 / 40, 0, w * 8 / 25, h,
 		 1,
-		 &PlayerDescriptionGroup::toggle_playerinit, this,
-		 "",
-		 _("Initialization"),
+		 &PlayerDescriptionGroup::toggle_playerinit, *this,
+		 std::string(), _("Initialization"),
 		 true, false,
 		 fname, fsize);
 
@@ -154,14 +151,10 @@ void PlayerDescriptionGroup::refresh()
 				title = _("Human");
 			// get translated tribesname
 			std::string tribepath("tribes/" + player.tribe);
-			i18n::grab_textdomain(tribepath);
-			Profile prof((tribepath + "/conf").c_str());
+			Profile prof((tribepath + "/conf").c_str(), 0, tribepath.c_str());
 			Section & global = prof.get_safe_section("tribe");
-			std::string tribe(global.get_safe_string("name"));
-			i18n::release_textdomain();
-
+			d->btnPlayerTribe->set_title(global.get_safe_string("name"));
 			d->btnPlayerType->set_title(title);
-			d->btnPlayerTribe->set_title(tribe);
 			for
 				(struct {
 				 	std::vector<TribeBasicInfo>::const_iterator       current;

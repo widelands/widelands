@@ -71,11 +71,11 @@ m_game    (game)
 	m_trigger.resize(event->get_nr_buttons());
 	for (int32_t i = 0; i < event->get_nr_buttons(); ++i) {
 		posx += space;
-		new UI::IDButton<Message_Box_Event_Message_Box, int32_t>
+		new UI::Callback_IDButton<Message_Box_Event_Message_Box, int32_t>
 			(this,
 			 posx, posy, but_width, 20,
 			 0,
-			 &Message_Box_Event_Message_Box::clicked, this, i,
+			 &Message_Box_Event_Message_Box::clicked, *this, i,
 			 event->get_button_name(i));
 		posx += but_width;
 		m_trigger[i] = event->get_button_trigger(i);

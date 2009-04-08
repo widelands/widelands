@@ -37,25 +37,27 @@ m_butx
 title(this, m_xres / 2, m_yres * 3 / 40, _("Editor Menu"), Align_HCenter),
 
 // Buttons
-new_map
-	(this,
-	 m_butx, m_yres * 6 / 25, m_butw, m_buth,
-	 1,
-	 &Fullscreen_Menu_Editor::end_modal, this, New_Map,
-	 _("New Map"), std::string(), true, false,
-	 ui_fn(), fs_small()),
-load_map
-	(this,
-	 m_butx, m_yres * 61 / 200, m_butw, m_buth,
-	 1,
-	 &Fullscreen_Menu_Editor::end_modal, this, Load_Map,
-	 _("Load Map"), std::string(), true, false,
-	 ui_fn(), fs_small()),
-back
-	(this,
-	 m_butx, m_yres * 3 / 4, m_butw, m_buth,
-	 0,
-	 &Fullscreen_Menu_Editor::end_modal, this, Back,
-	 _("Back"), std::string(), true, false,
-	 ui_fn(), fs_small())
-{title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);}
+	new_map
+		(this,
+		 m_butx, m_yres * 6 / 25, m_butw, m_buth,
+		 1,
+		 &Fullscreen_Menu_Editor::end_modal, *this, New_Map,
+		 _("New Map"), std::string(), true, false,
+		 ui_fn(), fs_small()),
+	load_map
+		(this,
+		 m_butx, m_yres * 61 / 200, m_butw, m_buth,
+		 1,
+		 &Fullscreen_Menu_Editor::end_modal, *this, Load_Map,
+		 _("Load Map"), std::string(), true, false,
+		 ui_fn(), fs_small()),
+	back
+		(this,
+		 m_butx, m_yres * 3 / 4, m_butw, m_buth,
+		 0,
+		 &Fullscreen_Menu_Editor::end_modal, *this, Back,
+		 _("Back"), std::string(), true, false,
+		 ui_fn(), fs_small())
+{
+	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
+}

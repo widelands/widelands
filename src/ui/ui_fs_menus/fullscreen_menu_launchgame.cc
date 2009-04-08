@@ -57,28 +57,28 @@ m_select_map
 	(this,
 	 m_xres * 7 / 10, m_yres * 7 / 20, m_butw, m_buth,
 	 1,
-	 &Fullscreen_Menu_LaunchGame::select_map, this,
+	 &Fullscreen_Menu_LaunchGame::select_map, *this,
 	 _("Select map"), std::string(), false, false,
 	 m_fn, m_fs),
 m_select_save
 	(this,
 	 m_xres * 7 / 10, m_yres * 4 / 10, m_butw, m_buth,
 	 1,
-	 &Fullscreen_Menu_LaunchGame::select_savegame, this,
+	 &Fullscreen_Menu_LaunchGame::select_savegame, *this,
 	 _("Select Savegame"), std::string(), false, false,
 	 m_fn, m_fs),
 m_back
 	(this,
 	 m_xres * 7 / 10, m_yres * 9 / 20, m_butw, m_buth,
 	 0,
-	 &Fullscreen_Menu_LaunchGame::back_clicked, this,
+	 &Fullscreen_Menu_LaunchGame::back_clicked, *this,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs),
 m_ok
 	(this,
 	 m_xres * 7 / 10, m_yres * 1 / 2, m_butw, m_buth,
 	 2,
-	 &Fullscreen_Menu_LaunchGame::start_clicked, this,
+	 &Fullscreen_Menu_LaunchGame::start_clicked, *this,
 	 _("Start game"), std::string(), false, false,
 	 m_fn, m_fs),
 
@@ -120,12 +120,12 @@ m_is_savegame  (false)
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
 		sprintf(posIco, "pics/fsel_editor_set_player_0%i_pos.png", i + 1);
 		m_pos[i] =
-			new UI::IDButton<Fullscreen_Menu_LaunchGame, uint8_t>
+			new UI::Callback_IDButton<Fullscreen_Menu_LaunchGame, uint8_t>
 				(this,
 				 m_xres / 100, y += m_buth, m_yres * 17 / 500, m_yres * 17 / 500,
 				 1,
 				 g_gr->get_picture(PicMod_Game, posIco),
-				 &Fullscreen_Menu_LaunchGame::switch_to_position, this, i,
+				 &Fullscreen_Menu_LaunchGame::switch_to_position, *this, i,
 				 _("Switch to position"), false);
 		m_players[i] =
 			new PlayerDescriptionGroup
@@ -508,12 +508,10 @@ void Fullscreen_Menu_LaunchGame::load_previous_playerdata()
 
 		// get translated tribename
 		strbuf = "tribes/" + m_player_save_tribe[i - 1];
-		i18n::grab_textdomain(strbuf);
 		strbuf += "/conf";
-		Profile tribe(strbuf.c_str());
+		Profile tribe(strbuf.c_str(), 0, strbuf.c_str());
 		Section & global = tribe.get_safe_section("tribe");
 		m_player_save_tribe[i - 1] = global.get_safe_string("name");
-		i18n::release_textdomain();
 	}
 	m_filename_proof = m_filename;
 }

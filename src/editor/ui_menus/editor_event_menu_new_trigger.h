@@ -27,7 +27,7 @@ namespace Widelands {namespace Trigger_Factory {struct Type_Descr;};};
 namespace UI {
 struct BaseListselect;
 struct Multiline_Textarea;
-template <typename T> struct Button;
+template <typename T> struct Callback_Button;
 };
 
 /**
@@ -48,7 +48,7 @@ private:
 
 	UI::BaseListselect * m_trigger_type_list;
 	UI::Multiline_Textarea                    * m_description;
-	UI::Button<Editor_Event_Menu_New_Trigger> * m_ok_button;
+	UI::Callback_Button<Editor_Event_Menu_New_Trigger> * m_ok_button;
 };
 
 #endif

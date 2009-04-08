@@ -50,9 +50,11 @@ private:
 	Editor_Interactive    & m_parent;
 	Variable           * m_variable;
 	enum Variable_Type {Integer_Type, String_Type};
-	UI::IDButton<New_Variable_Window, const Variable_Type> button_integer;
-	UI::IDButton<New_Variable_Window, const Variable_Type> button_string;
-	UI::IDButton<New_Variable_Window, int32_t>                 button_back;
+	UI::Callback_IDButton<New_Variable_Window, Variable_Type const>
+		button_integer;
+	UI::Callback_IDButton<New_Variable_Window, Variable_Type const>
+		button_string;
+	UI::Callback_IDButton<New_Variable_Window, int32_t>                 button_back;
 
 	void clicked_new(Variable_Type);
 };
@@ -65,19 +67,19 @@ button_integer
 	(this,
 	 5, 5, 60, 20,
 	 0,
-	 &New_Variable_Window::clicked_new, this, Integer_Type,
+	 &New_Variable_Window::clicked_new, *this, Integer_Type,
 	 _("Integer")),
 button_string
 	(this,
 	 70, 5, 60, 20,
 	 0,
-	 &New_Variable_Window::clicked_new, this, String_Type,
+	 &New_Variable_Window::clicked_new, *this, String_Type,
 	 _("String")),
 button_back
 	(this,
 	 (get_inner_w() - 80) / 2, 30, 80, 20,
 	 1,
-	 &New_Variable_Window::end_modal, this, 0,
+	 &New_Variable_Window::end_modal, *this, 0,
 	 _("Back"))
 {center_to_parent();}
 
@@ -141,8 +143,8 @@ private:
 	UI::EditBox                              m_name;
 	UI::Textarea                             m_label_value;
 	UI::EditBox                              m_value;
-	UI::Button<Edit_Variable_Window>         m_ok;
-	UI::IDButton<Edit_Variable_Window, int32_t>  m_back;
+	UI::Callback_Button<Edit_Variable_Window>         m_ok;
+	UI::Callback_IDButton<Edit_Variable_Window, int32_t>  m_back;
 
 	void clicked_ok();
 };
@@ -168,13 +170,13 @@ m_ok
 	(this,
 	 get_inner_w() / 2 - 80 - spacing, 60, 80, 20,
 	 1,
-	 &Edit_Variable_Window::clicked_ok, this,
+	 &Edit_Variable_Window::clicked_ok, *this,
 	 _("Ok")),
 m_back
 	(this,
 	 get_inner_w() / 2 + spacing, 60, 80, 20,
 	 1,
-	 &Edit_Variable_Window::end_modal, this, 0,
+	 &Edit_Variable_Window::end_modal, *this, 0,
 	 _("Back"))
 {
 	m_name .setText(m_te.get_string(1));
@@ -249,13 +251,13 @@ m_button_new
 	(this,
 	 get_inner_w() / 2 - 180 - spacing, get_inner_h() - 30, 120, 20,
 	 0,
-	 &Editor_Variables_Menu::clicked_new, this,
+	 &Editor_Variables_Menu::clicked_new, *this,
 	 _("New")),
 m_button_edit
 	(this,
 	 get_inner_w() / 2 - 60, get_inner_h() - 30, 120, 20,
 	 0,
-	 &Editor_Variables_Menu::clicked_edit, this,
+	 &Editor_Variables_Menu::clicked_edit, *this,
 	 _("Edit"),
 	 std::string(),
 	 false),
@@ -263,7 +265,7 @@ m_button_del
 	(this,
 	 get_inner_w() / 2 + 60 + spacing, get_inner_h() - 30, 120, 20,
 	 0,
-	 &Editor_Variables_Menu::clicked_del, this,
+	 &Editor_Variables_Menu::clicked_del, *this,
 	 _("Delete"),
 	 std::string(),
 	 false)

@@ -125,7 +125,7 @@ private:
 
 	FieldCaps       caps                    : 7;
 	Buildhelp_Index buildhelp_overlay_index : 3;
-	uint8_t           roads                   : 6;
+	uint8_t         roads                   : 6;
 
 	/**
 	 * A field can be selected in one of 2 selections. This allows the user to

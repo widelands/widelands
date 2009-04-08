@@ -56,7 +56,7 @@ m_realtime      (WLApplication::get()->get_time()),
 #define INIT_BUTTON(picture, callback, tooltip)                               \
  TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
- &Editor_Interactive::callback, this,                                         \
+ &Editor_Interactive::callback, *this,                                        \
  tooltip                                                                      \
 
 m_toggle_main_menu
@@ -110,6 +110,44 @@ m_toggle_objectives_menu
 }
 
 
+void Editor_Interactive::register_overlays() {
+	Widelands::Map & map = egbase().map();
+
+	//  Starting locations
+	Widelands::Player_Number const nr_players = map.get_nrplayers();
+	assert(nr_players <= 99); //  2 decimal digits
+	char fname[] = "pics/editor_player_00_starting_pos.png";
+	iterate_player_numbers(p, nr_players) {
+		if (fname[20] == '9') {fname[20] = '0'; ++fname[19];} else ++fname[20];
+		if (Widelands::Coords const sp = map.get_starting_pos(p)) {
+			uint32_t const picid = g_gr->get_picture(PicMod_Game, fname);
+			uint32_t w, h;
+			g_gr->get_picture_size(picid, w, h);
+			map.overlay_manager().register_overlay
+				(sp, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
+		}
+	}
+
+	//  Resources: we do not calculate default resources, therefore we do not
+	//  expect to meet them here.
+	Widelands::World const &       world           = map.world();
+	Overlay_Manager        &       overlay_manager = map.overlay_manager();
+	Widelands::Extent        const extent          = map.extent();
+	iterate_Map_FCoords(map, extent, fc) {
+		if (uint8_t const amount = fc.field->get_resources_amount()) {
+			std::string const & immname =
+				world.get_resource(fc.field->get_resources())->get_editor_pic
+					(amount);
+			if (immname.size())
+				overlay_manager.register_overlay
+					(fc, g_gr->get_picture(PicMod_Game, immname.c_str()), 4);
+		}
+	}
+
+	need_complete_redraw();
+}
+
+
 void Editor_Interactive::load(std::string const & filename) {
 	assert(filename.size());
 
@@ -119,8 +157,9 @@ void Editor_Interactive::load(std::string const & filename) {
 	// Instead, delete and re-create the egbase.
 	egbase().cleanup_for_load(true, false);
 
-	Widelands::Map_Loader * const ml = map.get_correct_loader(filename.c_str());
-	if (not ml)
+	std::auto_ptr<Widelands::Map_Loader> const ml
+		(map.get_correct_loader(filename.c_str()));
+	if (not ml.get())
 		throw warning
 			(_("Unsupported format"),
 			 _
@@ -141,46 +180,9 @@ void Editor_Interactive::load(std::string const & filename) {
 	ml->load_world();
 	ml->load_map_complete(egbase(), true);
 	egbase().load_graphics(loader_ui);
-
-	//  update all the visualizations
-	// Player positions
-	std::string text;
-	Widelands::Player_Number const nr_players = map.get_nrplayers();
-	assert(nr_players <= 99); //  2 decimal digits
-	char fname[] = "pics/editor_player_00_starting_pos.png";
-	iterate_player_numbers(p, nr_players) {
-		if (fname[20] == '9') {fname[20] = '0'; ++fname[19];} else ++fname[20];
-		if (Widelands::Coords const sp = map.get_starting_pos(p))
-			//  Have overlay on starting position only when it has no building.
-			if (not dynamic_cast<const Building *>(map[sp].get_immovable())) {
-				uint32_t const picid = g_gr->get_picture(PicMod_Game, fname);
-				uint32_t w, h;
-				g_gr->get_picture_size(picid, w, h);
-				map.overlay_manager().register_overlay
-					(sp, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
-			}
-	}
-
-	//  Resources. we do not calculate default resources, therefore we do not
-	//  expect to meet them here.
-	Widelands::World const &       world           = map.world();
-	Overlay_Manager        &       overlay_manager = map.overlay_manager();
-	Widelands::Extent        const extent          = map.extent();
-	iterate_Map_FCoords(map, extent, fc) {
-		if (const uint8_t amount = fc.field->get_resources_amount()) {
-			const std::string & immname =
-				world.get_resource(fc.field->get_resources())->get_editor_pic
-					(amount);
-			if (immname.size())
-				overlay_manager.register_overlay
-					(fc, g_gr->get_picture(PicMod_Game, immname.c_str()), 4);
-		}
-	}
+	register_overlays();
 
 	set_need_save(false);
-	need_complete_redraw();
-
-	delete ml;
 }
 
 
@@ -465,8 +467,10 @@ void Editor_Interactive::select_tool
 	tools.current_pointer = &primary;
 	tools.use_tool        = which;
 
-	if (const char * sel_pic = primary.get_sel(which)) set_sel_picture(sel_pic);
-	else                                             unset_sel_picture();
+	if (char const * const sel_pic = primary.get_sel(which))
+		set_sel_picture(sel_pic);
+	else
+		unset_sel_picture();
 	set_sel_triangles(primary.operates_on_triangles());
 }
 

@@ -108,25 +108,25 @@ m_event   (event)
 		 _("Number of Buttons: "), Align_CenterLeft);
 
 	pos.x += 140;
-	new UI::Button<Event_Message_Box_Option_Menu>
+	new UI::Callback_Button<Event_Message_Box_Option_Menu>
 		(this,
 		 pos.x, pos.y, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Event_Message_Box_Option_Menu::clicked_number_of_buttons_decrease,
-		 this);
+		 *this);
 
 	m_nr_buttons_ta =
 		new UI::Textarea(this, spacing + 160 + spacing, pos.y, 15, 20, "1", Align_CenterLeft);
 
 	pos.x += 30 + spacing;
-	new UI::Button<Event_Message_Box_Option_Menu>
+	new UI::Callback_Button<Event_Message_Box_Option_Menu>
 		(this,
 		 pos.x, pos.y, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Message_Box_Option_Menu::clicked_number_of_buttons_increase,
-		 this);
+		 *this);
 
 	pos.x  =      spacing;
 	pos.y += 20 + spacing;
@@ -153,20 +153,20 @@ m_event   (event)
 		(this, pos.x, pos.y, 100, 20, _("Select Trigger: "), Align_CenterLeft);
 
 	pos.x += 110;
-	new UI::Button<Event_Message_Box_Option_Menu>
+	new UI::Callback_Button<Event_Message_Box_Option_Menu>
 		(this,
 		 pos.x, pos.y, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 &Event_Message_Box_Option_Menu::clicked_trigger_sel_decrease, this);
+		 &Event_Message_Box_Option_Menu::clicked_trigger_sel_decrease, *this);
 
 	pos.x += 20 + spacing;
-	new UI::Button<Event_Message_Box_Option_Menu>
+	new UI::Callback_Button<Event_Message_Box_Option_Menu>
 		(this,
 		 pos.x, pos.y, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 &Event_Message_Box_Option_Menu::clicked_trigger_sel_increase, this);
+		 &Event_Message_Box_Option_Menu::clicked_trigger_sel_increase, *this);
 
 	pos.x  =      spacing;
 	pos.y += 20 + spacing;
@@ -179,17 +179,17 @@ m_event   (event)
 			 _("No trigger selected!"), Align_CenterLeft);
 
 	pos = Point(get_inner_w() / 2 - 60 - spacing, get_inner_h() - 30);
-	new UI::Button<Event_Message_Box_Option_Menu>
+	new UI::Callback_Button<Event_Message_Box_Option_Menu>
 		(this,
 		 pos.x, pos.y, 60, 20, 0,
-		 &Event_Message_Box_Option_Menu::clicked_ok, this,
+		 &Event_Message_Box_Option_Menu::clicked_ok, *this,
 		 _("Ok"));
 	pos.x = get_inner_w() / 2 + spacing;
-	new UI::IDButton<Event_Message_Box_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Message_Box_Option_Menu, int32_t>
 		(this,
 		 pos.x, pos.y, 60, 20,
 		 1,
-		 &Event_Message_Box_Option_Menu::end_modal, this, 0,
+		 &Event_Message_Box_Option_Menu::end_modal, *this, 0,
 		 _("Cancel"));
 
 	Manager<Widelands::Trigger> const & mtm = parent.egbase().map().mtm();

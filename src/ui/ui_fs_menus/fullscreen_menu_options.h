@@ -92,8 +92,8 @@ private:
 	uint32_t                          m_buth;
 	uint32_t                          m_fs;
 	std::string                       m_fn;
-	UI::Button<Fullscreen_Menu_Options> m_advanced_options;
-	UI::IDButton<Fullscreen_Menu_Options, int32_t> m_cancel, m_apply;
+	UI::Callback_Button<Fullscreen_Menu_Options> m_advanced_options;
+	UI::Callback_IDButton<Fullscreen_Menu_Options, int32_t> m_cancel, m_apply;
 	UI::SpinBox                       m_sb_maxfps, m_sb_autosave;
 	UI::Textarea                      m_title;
 	UI::Checkbox                      m_fullscreen;
@@ -153,7 +153,7 @@ private:
 	uint32_t                    m_fs;
 	std::string                 m_fn;
 
-	UI::IDButton<Fullscreen_Menu_Advanced_Options, int32_t> m_cancel, m_apply;
+	UI::Callback_IDButton<Fullscreen_Menu_Advanced_Options, int32_t> m_cancel, m_apply;
 	UI::SpinBox                 m_sb_speed, m_sb_dis_panel, m_sb_dis_border;
 	UI::Textarea                m_title;
 	UI::Listselect<std::string> m_ui_font_list;

@@ -419,76 +419,76 @@ m_parent(&parent)
 	pos.x  = spacing;
 	pos.y += spacing + spacing;
 
-	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
+	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
 		 4,
-		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_15_MINS,
+		 &WUIPlot_Area::set_time, *m_plot, WUIPlot_Area::TIME_15_MINS,
 		 _("15 m"));
 
 	pos.x += button_size + spacing;
 
-	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
+	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
 		 4,
-		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_30_MINS,
+		 &WUIPlot_Area::set_time, *m_plot, WUIPlot_Area::TIME_30_MINS,
 		 _("30 m"));
 
 	pos.x += button_size + spacing;
 
-	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
+	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
 		 4,
-		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_ONE_HOUR,
+		 &WUIPlot_Area::set_time, *m_plot, WUIPlot_Area::TIME_ONE_HOUR,
 		 _("1 h"));
 
 	pos.x += button_size + spacing;
 
-	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
+	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
 		 4,
-		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_TWO_HOURS,
+		 &WUIPlot_Area::set_time, *m_plot, WUIPlot_Area::TIME_TWO_HOURS,
 		 _("2 h"));
 
 	pos.y += 25 + spacing;
 	pos.x  =      spacing;
 
-	new UI::Button<Ware_Statistics_Menu>
+	new UI::Callback_Button<Ware_Statistics_Menu>
 		(this,
 		 pos.x, pos.y, 32, 32,
 		 4,
 		 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
-		 &Ware_Statistics_Menu::clicked_help, this,
+		 &Ware_Statistics_Menu::clicked_help, *this,
 		 _("Help"));
 
 	pos.x += button_size + spacing;
 
-	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
+	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
 		 4,
-		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_FOUR_HOURS,
+		 &WUIPlot_Area::set_time, *m_plot, WUIPlot_Area::TIME_FOUR_HOURS,
 		 _("4 h"));
 
 	pos.x += button_size + spacing;
 
-	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
+	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
 		 4,
-		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_EIGHT_HOURS,
+		 &WUIPlot_Area::set_time, *m_plot, WUIPlot_Area::TIME_EIGHT_HOURS,
 		 _("8 h"));
 
 	pos.x += button_size + spacing;
 
-	new UI::IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
+	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
 		 4,
-		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_16_HOURS,
+		 &WUIPlot_Area::set_time, *m_plot, WUIPlot_Area::TIME_16_HOURS,
 		 _("16 h"));
 
 	pos += Point(button_size + spacing, 32 + spacing);

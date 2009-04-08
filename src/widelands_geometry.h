@@ -29,6 +29,11 @@ namespace Widelands {
 
 typedef uint32_t Map_Index;
 
+struct Extent {
+	Extent(uint16_t const W, uint16_t const H) throw () : w(W), h(H) {}
+	uint16_t w, h;
+};
+
 typedef int16_t Coordinate;
 typedef Coordinate X_Coordinate;
 typedef Coordinate Y_Coordinate;
@@ -64,14 +69,22 @@ struct Coords {
 		{return a.all < b.all;}
 	};
 
+	void reorigin(Coords new_origin, Extent const extent) {
+		if (*this) {
+			if (y < new_origin.y)
+				y += extent.h;
+			y -= new_origin.y;
+			if (y & 1 and new_origin.y & 1 and ++new_origin.x == extent.w)
+				new_origin.x = 0;
+			if (x < new_origin.x)
+				x += extent.w;
+			x -= new_origin.x;
+		}
+	}
+
 	union {struct {X_Coordinate x; Y_Coordinate y;}; uint32_t all;};
 };
 compile_assert(sizeof(Coords) == 4);
-
-struct Extent {
-	Extent(const uint16_t W, const uint16_t H) throw () : w(W), h(H) {}
-	uint16_t w, h;
-};
 
 template <typename _Coords_type = Coords, typename _Radius_type = uint16_t>
 struct Area : public _Coords_type

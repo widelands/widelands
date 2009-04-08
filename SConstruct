@@ -173,21 +173,19 @@ if env['build']=='release':
 
 ########################################################################### tags
 
-filelist=simpleglob('*.h', 'src', recursive=True)+simpleglob('*.cc', 'src', recursive=True)
-Alias('tags', env.ctags(source=filelist))
-Default('tags')
+Alias('tags', env.ctags(source=simpleglob('*.h', 'src', recursive=True)+simpleglob('*.cc', 'src', recursive=True)))
 
 ################################################################ C++ style-check
 
-# env.Execute('utils/spurious_source_code/detect')
+if env['build'] == 'debug' or env['build'] == 'profile':
+	Alias('stylecheck', env.Execute('utils/spurious_source_code/detect'))
 
 ################################################################## PNG shrinking
 
 # finding files takes quite long, so don't execute it if it's unneccessary
 if ('shrink' in BUILD_TARGETS):
 	print "Assembling file list for image compactification..."
-	shrink=env.PNGShrink(simpleglob('*.png', '.', recursive=True))
-	Alias("shrink", shrink)
+	Alias('shrink', env.PNGShrink(simpleglob('*.png', '.', recursive=True)))
 
 ########################################################## Install and uninstall
 

@@ -80,11 +80,11 @@ private:
 	uint32_t but_h                    () const throw ();
 
 	View     m_view;
-	UI::IDButton<MiniMap, Layers> button_terrn;
-	UI::IDButton<MiniMap, Layers> button_owner;
-	UI::IDButton<MiniMap, Layers> button_flags;
-	UI::IDButton<MiniMap, Layers> button_roads;
-	UI::IDButton<MiniMap, Layers> button_bldns;
+	UI::Callback_IDButton<MiniMap, Layers> button_terrn;
+	UI::Callback_IDButton<MiniMap, Layers> button_owner;
+	UI::Callback_IDButton<MiniMap, Layers> button_flags;
+	UI::Callback_IDButton<MiniMap, Layers> button_roads;
+	UI::Callback_IDButton<MiniMap, Layers> button_bldns;
 };
 
 #endif

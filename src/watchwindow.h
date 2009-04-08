@@ -22,8 +22,8 @@
 
 #include "widelands_geometry.h"
 
-struct Interactive_Player;
+struct Interactive_GameBase;
 
-void show_watch_window(Interactive_Player & parent, Widelands::Coords coords);
+void show_watch_window(Interactive_GameBase &, Widelands::Coords);
 
 #endif

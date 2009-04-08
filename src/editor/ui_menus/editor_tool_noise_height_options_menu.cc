@@ -58,7 +58,7 @@ m_lower_increase
 	 width, height,
 	 0,
 	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase, this,
+	 &Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase, *this,
 	 std::string(),
 	 noise_tool.get_interval().min < MAX_FIELD_HEIGHT),
 m_lower_decrease
@@ -68,7 +68,7 @@ m_lower_decrease
 	 width, height,
 	 0,
 	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease, this,
+	 &Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease, *this,
 	 std::string(),
 	 0 < noise_tool.get_interval().min),
 m_upper_increase
@@ -80,7 +80,7 @@ m_upper_increase
 	 width, height,
 	 0,
 	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_upper_increase, this,
+	 &Editor_Tool_Noise_Height_Options_Menu::clicked_upper_increase, *this,
 	 std::string(),
 	 noise_tool.get_interval().max < MAX_FIELD_HEIGHT),
 m_upper_decrease
@@ -90,7 +90,7 @@ m_upper_decrease
 	 width, height,
 	 0,
 	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease, this,
+	 &Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease, *this,
 	 std::string(),
 	 0 < noise_tool.get_interval().max),
 m_set_label
@@ -106,7 +106,7 @@ m_setto_increase
 	 width, height,
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_setto_increase, this,
+	 &Editor_Tool_Noise_Height_Options_Menu::clicked_setto_increase, *this,
 	 std::string(),
 	 noise_tool.set_tool().get_interval().max < MAX_FIELD_HEIGHT),
 m_setto_decrease
@@ -114,7 +114,7 @@ m_setto_decrease
 	 get_inner_w() / 2, m_setto_increase.get_y(), width, height,
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease, this,
+	 &Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease, *this,
 	 std::string(),
 	 0 < noise_tool.set_tool().get_interval().min)
 {

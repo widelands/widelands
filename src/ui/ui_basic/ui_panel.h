@@ -116,7 +116,7 @@ struct Panel : public Object {
 	void move_to_top();
 
 	// Drawing, visibility
-	bool get_visible() const {return (_flags & pf_visible) ? true : false;}
+	bool is_visible() const {return _flags & pf_visible;}
 	void set_visible(bool on);
 
 	virtual void draw        (RenderTarget &);

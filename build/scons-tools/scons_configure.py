@@ -252,7 +252,7 @@ def configure_is_needed(targets):
 	   (==no target given at commandline): yes. If we're _only_ building targets
 	   that don't need configuration: no."""
 
-	NOCONFTARGETS=["clean", "dist", "distclean", "indent", "install", "longlines", "precommit", "shrink", "tags", "uninst", "uninstall"]
+	NOCONFTARGETS=["clean", "dist", "distclean", "indent", "install", "longlines", "precommit", "shrink", "stylecheck", "tags", "uninst", "uninstall"]
 	is_needed=False
 
 	if targets==[]:
@@ -274,19 +274,19 @@ def do_configure_basic_compiling(conf, env):
 		print "yes"
 
 	if not conf.CheckCompilerAttribute('deprecated', env):
-		print "Your compiler does not support __attribute__((deprecated)) which is neccessary for widelands. Please get a decent compiler."
+		print "Your compiler does not support __attribute__((deprecated)) which is necessary for Widelands. Please get a decent compiler."
 		env.Exit(1)
 
 	if not conf.CheckCompilerAttribute('noreturn', env):
-		print "Your compiler does not support __attribute__((noreturn)) which is neccessary for widelands. Please get a decent compiler."
+		print "Your compiler does not support __attribute__((noreturn)) which is necessary for Widelands. Please get a decent compiler."
 		env.Exit(1)
 
 	if not conf.CheckCompilerAttribute('noinline', env):
-		print "Your compiler does not support __attribute__((noinline)) which is neccessary for widelands. Please get a decent compiler."
+		print "Your compiler does not support __attribute__((noinline)) which is necessary for Widelands. Please get a decent compiler."
 		env.Exit(1)
 
 	if not conf.CheckCompilerAttribute('format(printf, 2, 3)', env):
-		print "Your compiler does not support __attribute__((format(printf, 2, 3))) which is neccessary for widelands. Please get a decent compiler."
+		print "Your compiler does not support __attribute__((format(printf, 2, 3))) which is necessary for Widelands. Please get a decent compiler."
 		env.Exit(1)
 
 def do_configure_locale(conf, env):

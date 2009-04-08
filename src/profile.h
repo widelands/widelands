@@ -233,6 +233,11 @@ struct Profile {
 		(char const * filename,
 		 char const * global_section = 0,
 		 int32_t      error_level    = err_throw);
+	Profile
+		(char const * filename,
+		 char const * global_section,
+		 char const * textdomain,
+		 int32_t      error_level    = err_throw);
 	~Profile();
 
 	void error(const char *fmt, ...) const __attribute__((format(printf, 2, 3)));

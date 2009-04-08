@@ -79,7 +79,7 @@ m_forbid_button
 	 + (list_height - middle_button_height * 2 - vspacing) / 2,
 	 middle_button_width, middle_button_height,
 	 1,
-	 &Editor_Player_Menu_Allowed_Buildings_Menu::clicked, this, false,
+	 &Editor_Player_Menu_Allowed_Buildings_Menu::clicked, *this, false,
 	 ("->"),
 	 _("Forbid"),
 	 false),
@@ -89,7 +89,7 @@ m_allow_button
 	 m_forbid_button.get_y() + middle_button_height + vspacing,
 	 middle_button_width, middle_button_height,
 	 1,
-	 &Editor_Player_Menu_Allowed_Buildings_Menu::clicked, this, true,
+	 &Editor_Player_Menu_Allowed_Buildings_Menu::clicked, *this, true,
 	 _("<-"),
 	 _("Allow"),
 	 false)

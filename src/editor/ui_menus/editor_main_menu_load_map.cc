@@ -111,20 +111,20 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 	posx = 5;
 	posy = get_inner_h() - 30;
 
-	m_ok_btn = new UI::Button<Main_Menu_Load_Map>
+	m_ok_btn = new UI::Callback_Button<Main_Menu_Load_Map>
 		(this,
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
 		 0,
-		 &Main_Menu_Load_Map::clicked_ok, this,
+		 &Main_Menu_Load_Map::clicked_ok, *this,
 		 _("OK"),
 		 std::string(),
 		 false);
 
-	new UI::Button<Main_Menu_Load_Map>
+	new UI::Callback_Button<Main_Menu_Load_Map>
 		(this,
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
 		 1,
-		 &Main_Menu_Load_Map::die, this,
+		 &Main_Menu_Load_Map::die, *this,
 		 _("Cancel"));
 
 	m_basedir = "maps";

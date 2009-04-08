@@ -373,16 +373,19 @@ void Interactive_Base::minimap_warp(int32_t x, int32_t y)
 ===============
 Interactive_Base::move_view_to
 
-Move the mainview to the given position (in field coordinates)
+Move the mainview to the given position (in node coordinates)
 ===============
 */
 void Interactive_Base::move_view_to(const Coords c)
 {
-	int32_t x = c.x * TRIANGLE_WIDTH;
-	int32_t y = c.y * TRIANGLE_HEIGHT;
+	assert(0 <= c.x);
+	assert     (c.x < egbase().map().get_width ());
+	assert(0 <= c.y);
+	assert     (c.y < egbase().map().get_height());
 
-	if (m->minimap.window) m->mm->set_view_pos(x, y);
-
+	uint32_t const x = c.x * TRIANGLE_WIDTH, y = c.y * TRIANGLE_HEIGHT;
+	if (m->minimap.window)
+		m->mm->set_view_pos(x, y);
 	minimap_warp(x, y);
 }
 
@@ -396,7 +399,8 @@ Center the mainview on the given position (in pixels)
 */
 void Interactive_Base::move_view_to_point(Point pos)
 {
-	if (m->minimap.window) m->mm->set_view_pos(pos.x, pos.y);
+	if (m->minimap.window)
+		m->mm->set_view_pos(pos.x, pos.y);
 
 	set_viewpoint(pos - Point(get_w() / 2, get_h() / 2));
 }

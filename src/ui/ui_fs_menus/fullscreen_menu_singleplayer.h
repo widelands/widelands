@@ -41,10 +41,10 @@ private:
 	uint32_t                                            m_fs;
 	std::string                                         m_fn;
 	UI::Textarea                                        title;
-	UI::IDButton<Fullscreen_Menu_SinglePlayer, int32_t> new_game;
-	UI::IDButton<Fullscreen_Menu_SinglePlayer, int32_t> campaign;
-	UI::IDButton<Fullscreen_Menu_SinglePlayer, int32_t> load_game;
-	UI::IDButton<Fullscreen_Menu_SinglePlayer, int32_t> back;
+	UI::Callback_IDButton<Fullscreen_Menu_SinglePlayer, int32_t> new_game;
+	UI::Callback_IDButton<Fullscreen_Menu_SinglePlayer, int32_t> campaign;
+	UI::Callback_IDButton<Fullscreen_Menu_SinglePlayer, int32_t> load_game;
+	UI::Callback_IDButton<Fullscreen_Menu_SinglePlayer, int32_t> back;
 };
 
 #endif

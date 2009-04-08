@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,30 +17,20 @@
  *
  */
 
-#ifndef EDITOR_TOOLSIZE_MENU_H
-#define EDITOR_TOOLSIZE_MENU_H
+#ifndef EDITOR_SET_ORIGIN_TOOL_H
+#define EDITOR_SET_ORIGIN_TOOL_H
 
-#include "ui_button.h"
-#include "ui_textarea.h"
-#include "ui_unique_window.h"
+#include "editor_tool.h"
 
+#include "widelands.h"
 
-struct Editor_Interactive;
+/// Sets the starting position of players.
+struct Editor_Set_Origin_Tool : public Editor_Tool {
+	Editor_Set_Origin_Tool() : Editor_Tool(*this, *this) {}
 
-
-/// The tool size window/menu.
-struct Editor_Toolsize_Menu : public UI::UniqueWindow {
-	Editor_Toolsize_Menu(Editor_Interactive *, UI::UniqueWindow::Registry *);
-	void update(uint32_t);
-
-private:
-	Editor_Interactive & eia();
-	void decrease_radius();
-	void increase_radius();
-
-	UI::Textarea                                   m_textarea;
-	UI::Callback_Button<Editor_Toolsize_Menu> m_increase, m_decrease;
+	int32_t handle_click_impl
+		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
+	char const * get_sel_impl() const throw () {return "pics/fsel.png";}
 };
-
 
 #endif

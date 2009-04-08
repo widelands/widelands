@@ -29,7 +29,7 @@ struct EventChain;
 struct Trigger;
 };
 namespace UI {
-template <typename T> struct Button;
+template <typename T> struct Callback_Button;
 template <typename T> struct Listselect;
 };
 
@@ -43,12 +43,12 @@ private:
 	UI::Listselect<Widelands::Event      *> * m_event_list;
 	UI::Listselect<Widelands::EventChain *> * m_eventchain_list;
 	UI::Listselect<Widelands::Trigger    *> * m_trigger_list;
-	UI::Button    <Editor_Event_Menu>       * m_btn_del_event;
-	UI::Button    <Editor_Event_Menu>       * m_btn_edit_event;
-	UI::Button    <Editor_Event_Menu>       * m_btn_del_trigger;
-	UI::Button    <Editor_Event_Menu>       * m_btn_edit_trigger;
-	UI::Button    <Editor_Event_Menu>       * m_btn_del_eventchain;
-	UI::Button    <Editor_Event_Menu>       * m_btn_edit_eventchain;
+	UI::Callback_Button<Editor_Event_Menu>  * m_btn_del_event;
+	UI::Callback_Button<Editor_Event_Menu>  * m_btn_edit_event;
+	UI::Callback_Button<Editor_Event_Menu>  * m_btn_del_trigger;
+	UI::Callback_Button<Editor_Event_Menu>  * m_btn_edit_trigger;
+	UI::Callback_Button<Editor_Event_Menu>  * m_btn_del_eventchain;
+	UI::Callback_Button<Editor_Event_Menu>  * m_btn_edit_eventchain;
 	void trigger_list_selected    (uint32_t);
 	void event_list_selected      (uint32_t);
 	void eventchain_list_selected (uint32_t);

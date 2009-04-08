@@ -28,7 +28,7 @@
 namespace Widelands {struct Building_Descr;};
 struct Interactive_Player;
 namespace UI {
-template <typename T, typename ID> struct IDButton;
+template <typename T, typename ID> struct Callback_IDButton;
 struct Progress_Bar;
 struct Textarea;
 };
@@ -59,7 +59,7 @@ private:
 	uint32_t                  m_anim;
 	uint32_t                  m_lastupdate;
 	uint32_t                  m_end_of_table_y;
-	UI::IDButton<Building_Statistics_Menu, Jump_Targets> * m_btn[6];
+	UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets> * m_btn[6];
 	int32_t                   m_last_building_index;
 
 	void clicked_help();

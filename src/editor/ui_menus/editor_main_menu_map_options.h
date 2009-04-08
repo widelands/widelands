@@ -20,6 +20,7 @@
 #ifndef EDITOR_MAIN_MENU_MAP_OPTIONS_H
 #define EDITOR_MAIN_MENU_MAP_OPTIONS_H
 
+#include "ui_button.h"
 #include "ui_window.h"
 
 struct Editor_Interactive;
@@ -35,16 +36,19 @@ struct Textarea;
  * author, name and description
 */
 struct Main_Menu_Map_Options : public UI::Window {
-	Main_Menu_Map_Options(Editor_Interactive *);
-	virtual ~Main_Menu_Map_Options();
+	Main_Menu_Map_Options(Editor_Interactive &);
 
 private:
+	Editor_Interactive & eia();
 	void changed(int32_t);
 	void editbox_changed();
-	Editor_Interactive  * m_parent; //  FIXME redundant (base has parent pointer)
 	UI::Multiline_Editbox * m_descr;
 	UI::Textarea * m_world, * m_nrplayers, * m_size;
 	UI::EditBox * m_name, * m_author;
+	struct Enable_Set_Origin_Tool_Button : UI::Button {
+		Enable_Set_Origin_Tool_Button(Main_Menu_Map_Options &);
+		virtual void clicked() const;
+	} m_enable_set_origin_tool;
 	void update();
 };
 

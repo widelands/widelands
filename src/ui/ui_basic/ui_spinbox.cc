@@ -63,10 +63,10 @@ struct SpinBoxImpl {
 
 	/// The UI parts
 	Textarea * text;
-	IDButton<SpinBox, int32_t> * butPlus;
-	IDButton<SpinBox, int32_t> * butMinus;
-	IDButton<SpinBox, int32_t> * butTenPlus;
-	IDButton<SpinBox, int32_t> * butTenMinus;
+	Callback_IDButton<SpinBox, int32_t> * butPlus;
+	Callback_IDButton<SpinBox, int32_t> * butMinus;
+	Callback_IDButton<SpinBox, int32_t> * butTenPlus;
+	Callback_IDButton<SpinBox, int32_t> * butTenMinus;
 };
 
 /**
@@ -113,37 +113,41 @@ SpinBox::SpinBox
 	sbi->text = new UI::Textarea
 		(this, butw * 16 / 5, 0, textw, h, buf, Align_Center);
 	sbi->text->set_font(sbi->fontname, sbi->fontsize, sbi->fontcolor);
-	sbi->butPlus = new IDButton<SpinBox, int32_t>
-		(this,
-		 butw * 21 / 10, 0, butw, butw,
-		 sbi->background,
-		 &SpinBox::changeValue, this, 1,
-		 "+", _("Increase the value"),
-		 true, false, sbi->fontname, sbi->fontsize);
-	sbi->butMinus = new IDButton<SpinBox, int32_t>
-		(this,
-		 w - butw * 31 / 10, 0, butw, butw,
-		 sbi->background,
-		 &SpinBox::changeValue, this, -1,
-		 "-", _("Decrease the value"),
-		 true, false, sbi->fontname, sbi->fontsize);
+	sbi->butPlus =
+		new Callback_IDButton<SpinBox, int32_t>
+			(this,
+			 butw * 21 / 10, 0, butw, butw,
+			 sbi->background,
+			 &SpinBox::changeValue, *this, 1,
+			 "+", _("Increase the value"),
+			 true, false, sbi->fontname, sbi->fontsize);
+	sbi->butMinus =
+		new Callback_IDButton<SpinBox, int32_t>
+			(this,
+			 w - butw * 31 / 10, 0, butw, butw,
+			 sbi->background,
+			 &SpinBox::changeValue, *this, -1,
+			 "-", _("Decrease the value"),
+			 true, false, sbi->fontname, sbi->fontsize);
 	sbi->butPlus->set_repeating(true);
 	sbi->butMinus->set_repeating(true);
 	if (m_big) {
-		sbi->butTenPlus = new IDButton<SpinBox, int32_t>
-			(this,
-			 0, 0, butw * 2, butw,
-			 sbi->background,
-			 &SpinBox::changeValue, this, 10,
-			 "++", _("Increase the value by 10"),
-			 true, false, sbi->fontname, sbi->fontsize);
-		sbi->butTenMinus = new IDButton<SpinBox, int32_t>
-			(this,
-			 w - 2 * butw, 0, butw * 2, butw,
-			 sbi->background,
-			 &SpinBox::changeValue, this, -10,
-			 "--", _("Decrease the value by 10"),
-			 true, false, sbi->fontname, sbi->fontsize);
+		sbi->butTenPlus =
+			new Callback_IDButton<SpinBox, int32_t>
+				(this,
+				 0, 0, butw * 2, butw,
+				 sbi->background,
+				 &SpinBox::changeValue, *this, 10,
+				 "++", _("Increase the value by 10"),
+				 true, false, sbi->fontname, sbi->fontsize);
+		sbi->butTenMinus =
+			new Callback_IDButton<SpinBox, int32_t>
+				(this,
+				 w - 2 * butw, 0, butw * 2, butw,
+				 sbi->background,
+				 &SpinBox::changeValue, *this, -10,
+				 "--", _("Decrease the value by 10"),
+				 true, false, sbi->fontname, sbi->fontsize);
 		sbi->butTenPlus->set_repeating(true);
 		sbi->butTenMinus->set_repeating(true);
 	}

@@ -701,6 +701,18 @@ Profile::Profile
 	read(filename, global_section);
 }
 
+
+Profile::Profile
+	(char const * const filename,
+	 char const * const global_section,
+	 char const * const textdomain,
+	 int32_t      const error_level)
+	: m_filename(filename), m_error_level(error_level)
+{
+	i18n::Textdomain td(textdomain);
+	read(filename, global_section);
+}
+
 /** Profile::~Profile()
  *
  * Free allocated resources

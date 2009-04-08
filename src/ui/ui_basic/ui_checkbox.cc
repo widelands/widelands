@@ -66,7 +66,7 @@ Statebox::~Statebox() {
  *
  * Args: enabled  true if the checkbox should be enabled, false otherwise
  */
-void Statebox::set_enabled(bool enabled)
+void Statebox::set_enabled(bool const enabled)
 {
 	set_flags(Is_Enabled, enabled);
 

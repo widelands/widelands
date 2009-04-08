@@ -75,7 +75,7 @@ m_button_ok
 	(this,
 	 DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
 	 4,
-	 &Game_Main_Menu_Save_Game::clicked_ok, this,
+	 &Game_Main_Menu_Save_Game::clicked_ok, *this,
 	 _("OK"),
 	 std::string(),
 	 false),
@@ -83,7 +83,7 @@ m_button_cancel
 	(this,
 	 DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
 	 4,
-	 &Game_Main_Menu_Save_Game::die, this,
+	 &Game_Main_Menu_Save_Game::die, *this,
 	 _("Cancel")),
 m_curdir(SaveHandler::get_base_dir())
 {

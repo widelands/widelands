@@ -350,6 +350,9 @@ struct Map {
 	/// Returns the military influence on a location from an area.
 	Military_Influence calc_influence(Coords, Area<>) const;
 
+	/// Translate the whole map so that the given point becomes the new origin.
+	void set_origin(Coords);
+
 private:
 	void set_size(uint32_t w, uint32_t h);
 	void load_world();
@@ -476,8 +479,13 @@ Field arithmetics
 ==============================================================================
 */
 
-inline Map_Index Map::get_index(Coords const c, X_Coordinate const width)
-{return c.y * width + c.x;}
+inline Map_Index Map::get_index(Coords const c, X_Coordinate const width) {
+	assert(0 < width);
+	assert(0 <= c.x);
+	assert     (c.x < width);
+	assert(0 <= c.y);
+	return c.y * width + c.x;
+}
 
 inline Field & Map::operator[](Map_Index const i) const {return m_fields[i];}
 inline Field & Map::operator[](const Coords c) const

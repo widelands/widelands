@@ -124,25 +124,25 @@ m_parent  (parent) //  FIXME redundant (base has parent pointer)
 	posx = 5;
 	posy = get_inner_h() - 30;
 
-	m_ok_btn = new UI::Button<Main_Menu_Save_Map>
+	m_ok_btn = new UI::Callback_Button<Main_Menu_Save_Map>
 		(this,
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
 		 0,
-		 &Main_Menu_Save_Map::clicked_ok, this,
+		 &Main_Menu_Save_Map::clicked_ok, *this,
 		 _("OK"));
 
-	new UI::Button<Main_Menu_Save_Map>
+	new UI::Callback_Button<Main_Menu_Save_Map>
 		(this,
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
 		 1,
-		 &Main_Menu_Save_Map::die, this,
+		 &Main_Menu_Save_Map::die, *this,
 		 _("Cancel"));
 
-	new UI::Button<Main_Menu_Save_Map>
+	new UI::Callback_Button<Main_Menu_Save_Map>
 		(this,
 		 spacing, posy, 120, 20,
 		 1,
-		 &Main_Menu_Save_Map::clicked_make_directory, this,
+		 &Main_Menu_Save_Map::clicked_make_directory, *this,
 		 _("Make Directory"));
 
 

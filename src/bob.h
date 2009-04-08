@@ -115,6 +115,7 @@ struct BobProgramBase {
  * is always called just before the task is popped from the stack.
  */
 struct Bob : public Map_Object {
+	friend struct Map;
 	friend struct Map_Bobdata_Data_Packet;
 	friend struct Map_Bob_Data_Packet;
 
@@ -336,7 +337,7 @@ private:
 
 	Player   * m_owner; ///< can be 0
 	FCoords    m_position; ///< where are we right now?
-	Bob      * m_linknext; ///< next object on this field
+	Bob      * m_linknext; ///< next object on this node
 	Bob    * * m_linkpprev;
 	uint32_t       m_anim;
 	int32_t        m_animstart; ///< gametime when the animation was started

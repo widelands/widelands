@@ -85,7 +85,7 @@ void BaseImmovable::set_position(Editor_Game_Base & egbase, Coords const c)
 void BaseImmovable::unset_position(Editor_Game_Base & egbase, Coords const c)
 {
 	Map & map = egbase.map();
-	FCoords f = map.get_fcoords(c);
+	FCoords const f = map.get_fcoords(c);
 
 	assert(f.field->immovable == this);
 

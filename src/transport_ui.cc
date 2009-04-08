@@ -63,11 +63,11 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 			 b;
 			 b = dynamic_cast<Ware_Type_Box *>(b->get_next_sibling()))
 		{
-			Ware_Index const i = b->m_ware_type;
+			Ware_Index const i = b->ware_type;
 			Economy::Target_Quantity const & tq = economy().target_quantity(i);
-			b->m_decrease_permanent.set_enabled(1 < tq.permanent);
-			b->m_decrease_temporary.set_enabled(1 < tq.temporary);
-			b->m_reset             .set_enabled(tq.last_modified);
+			b->decrease_permanent.set_enabled(1 < tq.permanent);
+			b->decrease_temporary.set_enabled(1 < tq.temporary);
+			b->reset             .set_enabled(tq.last_modified);
 		}
 	}
 
@@ -78,55 +78,29 @@ private:
 		Ware_Type_Box
 			(UI::Box               &       parent,
 			 Ware_Index              const _ware_type,
-			 Item_Ware_Descr const &       descr)
+			 Item_Ware_Descr const &       _descr)
 			:
 			UI::Panel  (&parent, 0, 0, 420, 24),
-			m_ware_type(_ware_type),
-			m_descr    (descr),
-			m_decrease_permanent
-				(this, 190, 0, 24, 24, 0,
-				 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-				 &Ware_Type_Box::decrease_permanent, this,
-				 _("Decrease permanent target quantity"),
-				 true),
-			m_increase_permanent
-				(this, 214, 0, 24, 24, 0,
-				 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-				 &Ware_Type_Box::increase_permanent, this,
-				 _("Increase permanent target quantity")),
-			m_decrease_temporary
-				(this, 280, 0, 24, 24, 0,
-				 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-				 &Ware_Type_Box::decrease_temporary, this,
-				 _("Decrease temporary target quantity")),
-			m_increase_temporary
-				(this, 304, 0, 24, 24, 0,
-				 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-				 &Ware_Type_Box::increase_temporary, this,
-				 _("Increase temporary target quantity")),
-			m_reset
-				(this, 330, 0, 90, 24, 0,
-				 &Ware_Type_Box::reset, this,
-				 _("Reset"),
-				 _("Reset target quantity to default value"))
-		{
-			m_decrease_permanent.set_repeating(true);
-			m_increase_permanent.set_repeating(true);
-			m_decrease_temporary.set_repeating(true);
-			m_increase_temporary.set_repeating(true);
-		}
+			decrease_permanent(*this),
+			increase_permanent(*this),
+			decrease_temporary(*this),
+			increase_temporary(*this),
+			reset             (*this),
+			ware_type         (_ware_type),
+			descr             (_descr)
+		{}
 
 		virtual void draw(RenderTarget & dst) {
-			dst.blit(Point(0, 0), m_descr.icon());
+			dst.blit(Point(0, 0), descr.icon());
 			g_fh->draw_string
 				(dst,
 				 UI_FONT_NAME, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG, UI_FONT_CLR_BG,
 				 Point(26, 12),
-				 m_descr.descname().c_str(),
+				 descr.descname().c_str(),
 				 Align_CenterLeft,
 				 -1);
 			Economy::Target_Quantity const & tq =
-				economy().target_quantity(m_ware_type);
+				economy().target_quantity(ware_type);
 			char buffer[32];
 			sprintf(buffer, "%u", tq.permanent);
 			g_fh->draw_string
@@ -147,84 +121,145 @@ private:
 			UI::Panel::draw(dst);
 		}
 
-		Economy & economy() {
+		Economy & economy() const {
 			return
 				dynamic_cast<Economy_Options_Window &>
 					(*dynamic_cast<UI::Box &>(*get_parent()).get_parent())
 				.economy();
 		}
 
-		void decrease_permanent() {
-			Economy & e = economy();
-			Economy::Target_Quantity const & tq = e.target_quantity(m_ware_type);
-			assert(tq.permanent <= tq.temporary);
-			if (1 < tq.permanent) {
+		struct Decrease_Permanent : public UI::Button {
+			Decrease_Permanent(Ware_Type_Box & parent) :
+				UI::Button
+					(&parent, 190, 0, 24, 24, 0,
+					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+					 _("Decrease permanent target quantity"),
+					 true)
+			{
+				set_repeating(true);
+			}
+			virtual void clicked() const {
+				Ware_Type_Box const & parent =
+					dynamic_cast<Ware_Type_Box &>(*get_parent());
+				Economy & e = parent.economy();
+				Ware_Index const ware_type = parent.ware_type;
+				Economy::Target_Quantity const & tq = e.target_quantity(ware_type);
+				assert(tq.permanent <= tq.temporary);
+				if (1 < tq.permanent) {
+					Widelands::Player & player = e.owner();
+					Game & game = dynamic_cast<Game &>(player.egbase());
+					game.send_player_command
+						(*new Widelands::Cmd_SetTargetQuantity
+						 	(game.get_gametime(), player.get_player_number(),
+						 	 player.get_economy_number(&e), ware_type,
+						 	 tq.permanent - 1, tq.temporary));
+				}
+			}
+		} decrease_permanent;
+
+		struct Increase_Permanent : public UI::Button {
+			Increase_Permanent(Ware_Type_Box & parent) :
+				UI::Button
+					(&parent, 214, 0, 24, 24, 0,
+					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+					 _("Increase permanent target quantity"))
+			{
+				set_repeating(true);
+			}
+			virtual void clicked() const {
+				Ware_Type_Box const & parent =
+					dynamic_cast<Ware_Type_Box &>(*get_parent());
+				Economy & e = parent.economy();
+				Ware_Index const ware_type = parent.ware_type;
+				Economy::Target_Quantity const & tq = e.target_quantity(ware_type);
+				assert(tq.permanent <= tq.temporary);
+				uint32_t const new_permanent = tq.permanent + 1;
 				Widelands::Player & player = e.owner();
 				Game & game = dynamic_cast<Game &>(player.egbase());
 				game.send_player_command
 					(*new Widelands::Cmd_SetTargetQuantity
 					 	(game.get_gametime(), player.get_player_number(),
-					 	 player.get_economy_number(&e), m_ware_type,
-					 	 tq.permanent - 1, tq.temporary));
+					 	 player.get_economy_number(&e), ware_type,
+					 	 new_permanent, std::max(new_permanent, tq.temporary)));
 			}
-		}
-		void increase_permanent() {
-			Economy & e = economy();
-			Economy::Target_Quantity const & tq = e.target_quantity(m_ware_type);
-			assert(tq.permanent <= tq.temporary);
-			uint32_t const new_permanent = tq.permanent + 1;
-			Widelands::Player & player = e.owner();
-			Game & game = dynamic_cast<Game &>(player.egbase());
-			game.send_player_command
-				(*new Widelands::Cmd_SetTargetQuantity
-				 	(game.get_gametime(), player.get_player_number(),
-				 	 player.get_economy_number(&e), m_ware_type,
-				 	 new_permanent, std::max(new_permanent, tq.temporary)));
-		}
-		void decrease_temporary() {
-			Economy & e = economy();
-			Economy::Target_Quantity const & tq = e.target_quantity(m_ware_type);
-			assert(tq.permanent <= tq.temporary);
-			if (1 < tq.temporary) {
-				uint32_t const new_temporary = tq.temporary - 1;
+		} increase_permanent;
+
+		struct Decrease_Temporary : public UI::Button {
+			Decrease_Temporary(Ware_Type_Box & parent) :
+				UI::Button
+					(&parent, 280, 0, 24, 24, 0,
+					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+					 _("Decrease temporary target quantity"))
+			{
+				set_repeating(true);
+			}
+			virtual void clicked() const {
+				Ware_Type_Box const & parent =
+					dynamic_cast<Ware_Type_Box &>(*get_parent());
+				Economy & e = parent.economy();
+				Ware_Index const ware_type = parent.ware_type;
+				Economy::Target_Quantity const & tq = e.target_quantity(ware_type);
+				assert(tq.permanent <= tq.temporary);
+				if (1 < tq.temporary) {
+					uint32_t const new_temporary = tq.temporary - 1;
+					Widelands::Player & player = e.owner();
+					Game   & game   = dynamic_cast<Game &>(player.egbase());
+					game.send_player_command
+						(*new Widelands::Cmd_SetTargetQuantity
+						 	(game.get_gametime(), player.get_player_number(),
+						 	 player.get_economy_number(&e), ware_type,
+						 	 std::min(tq.permanent, new_temporary), new_temporary));
+				}
+			}
+		} decrease_temporary;
+
+		struct Increase_Temporary : public UI::Button {
+			Increase_Temporary(Ware_Type_Box & parent) :
+				UI::Button
+					(&parent, 304, 0, 24, 24, 0,
+					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+					 _("Increase temporary target quantity"))
+			{
+				set_repeating(true);
+			}
+			virtual void clicked() const {
+				Ware_Type_Box const & parent =
+					dynamic_cast<Ware_Type_Box &>(*get_parent());
+				Economy & e = parent.economy();
+				Ware_Index const ware_type = parent.ware_type;
+				Economy::Target_Quantity const & tq = e.target_quantity(ware_type);
+				assert(tq.permanent <= tq.temporary);
 				Widelands::Player & player = e.owner();
-				Game   & game   = dynamic_cast<Game &>(player.egbase());
+				Game & game = dynamic_cast<Game &>(player.egbase());
 				game.send_player_command
 					(*new Widelands::Cmd_SetTargetQuantity
 					 	(game.get_gametime(), player.get_player_number(),
-					 	 player.get_economy_number(&e), m_ware_type,
-					 	 std::min(tq.permanent, new_temporary), new_temporary));
+					 	 player.get_economy_number(&e), ware_type,
+					 	 tq.permanent, tq.temporary + 1));
 			}
-		}
-		void increase_temporary() {
-			Economy & e = economy();
-			Economy::Target_Quantity const & tq = e.target_quantity(m_ware_type);
-			assert(tq.permanent <= tq.temporary);
-			Widelands::Player & player = e.owner();
-			Game & game = dynamic_cast<Game &>(player.egbase());
-			game.send_player_command
-				(*new Widelands::Cmd_SetTargetQuantity
-				 	(game.get_gametime(), player.get_player_number(),
-				 	 player.get_economy_number(&e), m_ware_type,
-				 	 tq.permanent, tq.temporary + 1));
-		}
-		void reset             () {
-			Economy & e = economy();
-			Widelands::Player & player = e.owner();
-			Game & game = dynamic_cast<Game &>(player.egbase());
-			game.send_player_command
-				(*new Widelands::Cmd_ResetTargetQuantity
-				 	(game.get_gametime(), player.get_player_number(),
-				 	 player.get_economy_number(&e), m_ware_type));
-		}
+		} increase_temporary;
 
-		Ware_Index const          m_ware_type;
-		Item_Ware_Descr const &   m_descr;
-		UI::Button<Ware_Type_Box> m_decrease_permanent;
-		UI::Button<Ware_Type_Box> m_increase_permanent;
-		UI::Button<Ware_Type_Box> m_decrease_temporary;
-		UI::Button<Ware_Type_Box> m_increase_temporary;
-		UI::Button<Ware_Type_Box> m_reset;
+		struct Reset : UI::Button {
+			Reset(Ware_Type_Box & parent) :
+				UI::Button
+					(&parent, 330, 0, 90, 24, 0,
+					 _("Reset"), _("Reset target quantity to default value"))
+			{}
+			virtual void clicked() const {
+				Ware_Type_Box const & parent =
+					dynamic_cast<Ware_Type_Box &>(*get_parent());
+				Economy & e = parent.economy();
+				Widelands::Player & player = e.owner();
+				Game & game = dynamic_cast<Game &>(player.egbase());
+				game.send_player_command
+					(*new Widelands::Cmd_ResetTargetQuantity
+					 	(game.get_gametime(), player.get_player_number(),
+					 	 player.get_economy_number(&e), parent.ware_type));
+			}
+		} reset;
+
+		Ware_Index              const ware_type;
+		Item_Ware_Descr const &       descr;
 	};
 
 	UI::Box           m_box;

@@ -44,7 +44,7 @@ Interactive_Spectator::Interactive_Spectator
 #define INIT_BTN(picture, callback, tooltip)                                  \
  TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
- &Interactive_Spectator::callback, this,                                      \
+ &Interactive_Spectator::callback, *this,                                     \
  tooltip                                                                      \
 
 	m_toggle_chat
@@ -89,7 +89,7 @@ Interactive_Spectator::Interactive_Spectator
 	adjust_toolbar_position();
 
 	// Setup all screen elements
-	fieldclicked.set(this, &Interactive_Spectator::field_action);
+	fieldclicked.set(this, &Interactive_Spectator::node_action);
 
 	set_display_flag(dfSpeed, true);
 }
@@ -174,7 +174,7 @@ void Interactive_Spectator::toggle_statistics() {
  * Observer has clicked on the given field; bring up the context menu.
  * \todo Implement
  */
-void Interactive_Spectator::field_action() {}
+void Interactive_Spectator::node_action() {}
 
 
 /**

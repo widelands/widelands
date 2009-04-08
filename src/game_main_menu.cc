@@ -43,28 +43,28 @@ general_stats
 	 posx(0, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 4,
 	 g_gr->get_picture(PicMod_Game, "pics/menu_general_stats.png"),
-	 &GameMainMenu::clicked_general_stats, this,
+	 &GameMainMenu::clicked_general_stats, *this,
 	 _("General Statistics")),
 ware_stats
 	(this,
 	 posx(1, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 4,
 	 g_gr->get_picture(PicMod_Game, "pics/menu_ware_stats.png"),
-	 &GameMainMenu::clicked_ware_stats, this,
+	 &GameMainMenu::clicked_ware_stats, *this,
 	 _("Ware Statistics")),
 building_stats
 	(this,
 	 posx(2, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 4,
 	 g_gr->get_picture(PicMod_Game, "pics/menu_building_stats.png"),
-	 &GameMainMenu::clicked_building_stats, this,
+	 &GameMainMenu::clicked_building_stats, *this,
 	 _("Building Statistics")),
 stock
 	(this,
 	 posx(3, 4), posy(0, 3), buttonw(4), buttonh(1),
 	 4,
 	 g_gr->get_picture(PicMod_Game, "pics/menu_stock.png"),
-	 &GameMainMenu::clicked_stock, this,
+	 &GameMainMenu::clicked_stock, *this,
 	 _("Stock"))
 {
 	if (get_usedefaultpos())

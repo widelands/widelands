@@ -26,7 +26,7 @@
 
 struct Editor_Interactive;
 namespace UI {
-template <typename T> struct Button;
+template <typename T> struct Callback_Button;
 struct EditBox;
 template <typename T> struct Listselect;
 struct Multiline_Textarea;
@@ -55,7 +55,7 @@ private:
 	UI::Multiline_Textarea * m_descr;
 	Editor_Interactive * m_parent; //  FIXME redundant (base stores parent pointer)
 	UI::Listselect<const char *> * m_ls;
-	UI::Button<Main_Menu_Save_Map> * m_ok_btn;
+	UI::Callback_Button<Main_Menu_Save_Map> * m_ok_btn;
 
 	std::string   m_basedir;
 	std::string   m_curdir;

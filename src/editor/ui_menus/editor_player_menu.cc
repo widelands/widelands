@@ -44,7 +44,7 @@ m_add_player
 	 5, 5, 20, 20,
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-	 &Editor_Player_Menu::clicked_add_player, this,
+	 &Editor_Player_Menu::clicked_add_player, *this,
 	 _("Add player"),
 	 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
 m_remove_last_player
@@ -52,7 +52,7 @@ m_remove_last_player
 	 get_inner_w() - 5 - 20, 5, 20, 20,
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-	 &Editor_Player_Menu::clicked_remove_last_player, this,
+	 &Editor_Player_Menu::clicked_remove_last_player, *this,
 	 _("Remove last player"),
 	 1 < parent.egbase().map().get_nrplayers())
 {
@@ -140,13 +140,13 @@ void Editor_Player_Menu::update() {
 
 		if (!m_plr_set_tribes_buts[p - 1]) {
 			m_plr_set_tribes_buts[p - 1] =
-				new UI::IDButton
+				new UI::Callback_IDButton
 				<Editor_Player_Menu, Widelands::Player_Number const>
-				(this,
-				 posx, posy, 140, size,
-				 0,
-				 &Editor_Player_Menu::player_tribe_clicked, this, p - 1,
-				 std::string());
+					(this,
+					 posx, posy, 140, size,
+					 0,
+					 &Editor_Player_Menu::player_tribe_clicked, *this, p - 1,
+					 std::string());
 			posx += 140 + spacing;
 		}
 		if (map.get_scenario_player_tribe(p) != "<undefined>")
@@ -160,14 +160,14 @@ void Editor_Player_Menu::update() {
 		//  Set Starting pos button.
 		if (!m_plr_set_pos_buts[p - 1]) {
 			m_plr_set_pos_buts[p - 1] =
-				new UI::IDButton
+				new UI::Callback_IDButton
 				<Editor_Player_Menu, Widelands::Player_Number const>
-				(this,
-				 posx, posy, size, size,
-				 0,
-				 0, //  set below
-				 &Editor_Player_Menu::set_starting_pos_clicked, this, p,
-				 std::string());
+					(this,
+					 posx, posy, size, size,
+					 0,
+					 0, //  set below
+					 &Editor_Player_Menu::set_starting_pos_clicked, *this, p,
+					 std::string());
 			posx += size + spacing;
 		}
 		char text[] = "pics/fsel_editor_set_player_00_pos.png";

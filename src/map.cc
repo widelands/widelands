@@ -412,10 +412,150 @@ void Map::create_empty_map
 	recalc_whole_map();
 }
 
+
+void Map::set_origin(Coords const new_origin) {
+	assert(0 <= new_origin.x);
+	assert     (new_origin.x < m_width);
+	assert(0 <= new_origin.y);
+	assert     (new_origin.y < m_height);
+
+	for (uint8_t i = get_nrplayers();              i;)
+		m_starting_pos[--i].reorigin(new_origin, extent());
+	for (Manager<Event>  ::Index i = mtm().size(); i;)
+		mtm()         [--i].reorigin(new_origin, extent());
+	for (Manager<Trigger>::Index i = mem().size(); i;)
+		mem()         [--i].reorigin(new_origin, extent());
+
+
+	//  Rearrange the fields. This is done in 2 steps. First each column is
+	//  rotated. Then each row is rotated. How to rotate an array is described
+	//  at [http://home.tiac.net/~cri/2004/frotate.html].
+	uint16_t const w = m_width, h = m_height;
+
+
+	{ //  Rotate each column. This code is divided into 4 cases:
+		uint16_t const k = new_origin.y, nk = h - k;
+		//    * k = 0:
+		//        Do nothing.
+		//    * k = nk:
+		//        The new origin divides the column in 2 halves, which should
+		//        just be swapped.
+		//    * k < nk:
+		//        The new origin is in the first half. Increment = k.
+		//        Ascending run.
+		//    * k > nk:
+		//        The new origin is in the second half. Decrement = nk.
+		//        Descending run.
+		if        (k == nk) { //  swap first and last halves
+			for (X_Coordinate x = 0; x < w; ++x)
+				for (Y_Coordinate y1 = 0, y2 = k; y2 < h; ++y1, ++y2)
+					std::swap
+						(operator[] (Coords(x, y1)), operator[] (Coords(x, y2)));
+		} else if (k <  nk) { //  ascending run
+			for (X_Coordinate x = 0; x < w; ++x)
+				for (uint16_t first = 0, count = 0; count < k; ++first) {
+					Field const t = operator[](Coords(x, first));
+					uint16_t const last = first + nk;
+					for (uint16_t index = first;;) {
+						++count;
+						while (index < nk) {
+							Field & dst = operator[](Coords(x, index));
+							dst = operator[](Coords(x, index += k));
+						}
+						if (index == last)
+							break;
+						Field & dst = operator[](Coords(x, index));
+						dst = operator[] (Coords(x, index -= nk));
+					}
+					operator[] (Coords(x, last)) = t;
+				}
+		} else if (k >  nk) { //  descending run
+			for (X_Coordinate x = 0; x < w; ++x)
+				for (uint16_t first = h - 1, count = 0; count < nk; --first) {
+					Field const t = operator[](Coords(x, first));
+					uint16_t const last = first - k;
+					for (uint16_t index = first;;) {
+						++count;
+						while (index >= nk) {
+							Field & dst = operator[] (Coords(x, index));
+							dst = operator[] (Coords(x, index -= nk));
+						}
+						if (index == last)
+							break;
+						Field & dst = operator[] (Coords(x, index));
+						dst = operator[] (Coords(x, index += k));
+					}
+					operator[] (Coords(x, last)) = t;
+				}
+		}
+	}
+
+	for (uint8_t i = 2; i;) { //  Rotate each odd row, then each even.
+		--i;
+		uint16_t k = new_origin.x;
+		if (i and new_origin.y & 1 and ++k == w)
+			k = 0;
+		uint16_t const nk = w - k;
+		if      (k == nk)
+			for (Y_Coordinate y = i; y < h; y += 2)
+				for (X_Coordinate x1 = 0, x2 = k; x2 < w; ++x1, ++x2)
+					std::swap
+						(operator[] (Coords(x1, y)), operator[] (Coords(x2, y)));
+		else if (k <  nk)
+			for (Y_Coordinate y = i; y < h; y += 2)
+				for (uint16_t first = 0, count = 0; count < k; ++first) {
+					Field const t = operator[] (Coords(first, y));
+					uint16_t const last = first + nk;
+					for (uint16_t index = first;;) {
+						++count;
+						while (index < nk) {
+							Field & dst = operator[] (Coords(index, y));
+							dst = operator[] (Coords(index += k, y));
+						}
+						if (index == last)
+							break;
+						Field & dst = operator[] (Coords(index, y));
+						dst = operator[] (Coords(index -= nk, y));
+					}
+					operator[] (Coords(last, y)) = t;
+				}
+		else if (k >  nk)
+			for (Y_Coordinate y = i; y < h; y += 2)
+				for (uint16_t first = w - 1, count = 0; count < nk; --first) {
+					Field const t = operator[] (Coords(first, y));
+					uint16_t const last = first - k;
+					for (uint16_t index = first;;) {
+						++count;
+						while (index >= nk) {
+							Field & dst = operator[] (Coords(index, y));
+							dst = operator[] (Coords(index -= nk, y));
+						}
+						if (index == last)
+							break;
+						Field & dst = operator[] (Coords(index, y));
+						dst = operator[] (Coords(index += k, y));
+					}
+					operator[] (Coords(last, y)) = t;
+				}
+	}
+
+	//  Inform immovables and bobs about their new coordinates.
+	for (FCoords c(Coords(0, 0), m_fields); c.y < h; ++c.y)
+		for (c.x = 0; c.x < w; ++c.x, ++c.field) {
+			assert(c.field == &operator[] (c));
+			if (upcast(Immovable, immovable, c.field->get_immovable()))
+				immovable->m_position = c;
+			for
+				(Bob * bob = c.field->get_first_bob();
+				 bob;
+				 bob = bob->get_next_bob())
+				bob->m_position = c;
+		}
+}
+
+
 /*
 ===============
-Map::set_size [private]
-
 Set the size of the map. This should only happen once during initial load.
 ===============
 */
@@ -431,7 +571,8 @@ void Map::set_size(const uint32_t w, const uint32_t h)
 
 	m_pathfieldmgr->setSize(w * h);
 
-	if (not m_overlay_manager) m_overlay_manager = new Overlay_Manager();
+	if (not m_overlay_manager)
+		m_overlay_manager = new Overlay_Manager();
 }
 
 /*

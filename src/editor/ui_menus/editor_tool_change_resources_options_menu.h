@@ -44,11 +44,13 @@ private:
 	void clicked_button(Button);
 	void update();
 	UI::Textarea                     m_change_by_label;
-	UI::IDButton<Editor_Tool_Change_Resources_Options_Menu, const Button>
+	UI::Callback_IDButton
+	<Editor_Tool_Change_Resources_Options_Menu, Button const>
 		m_change_by_increase, m_change_by_decrease;
 	UI::Textarea                     m_change_by_value;
 	UI::Textarea                     m_set_to_label;
-	UI::IDButton<Editor_Tool_Change_Resources_Options_Menu, const Button>
+	UI::Callback_IDButton
+	<Editor_Tool_Change_Resources_Options_Menu, Button const>
 		m_set_to_increase,    m_set_to_decrease;
 	UI::Textarea                     m_set_to_value;
 	UI::Textarea                     m_cur_selection;

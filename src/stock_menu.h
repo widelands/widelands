@@ -41,8 +41,8 @@ struct Stock_Menu : public UI::UniqueWindow {
 private:
 	Interactive_Player &  m_player;
 	WaresDisplay          waresdisplay;
-	UI::Button<Stock_Menu> help;
-	UI::Button<Stock_Menu> switchpage;
+	UI::Callback_Button<Stock_Menu> help;
+	UI::Callback_Button<Stock_Menu> switchpage;
 	enum {Wares, Workers} current_page;
 	void fill_waredisplay_with_wares  ();
 	void fill_waredisplay_with_workers();

@@ -25,7 +25,7 @@
 struct Editor_Interactive;
 namespace Widelands {struct Event_Descr;};
 namespace UI {
-template <typename T> struct Button;
+template <typename T> struct Callback_Button;
 struct BaseListselect;
 struct Multiline_Textarea;
 };
@@ -48,7 +48,7 @@ private:
 
 	UI::BaseListselect * m_event_type_list;
 	UI::Multiline_Textarea        * m_description;
-	UI::Button<Editor_Event_Menu_New_Event> * m_ok_button;
+	UI::Callback_Button<Editor_Event_Menu_New_Event> * m_ok_button;
 };
 
 #endif

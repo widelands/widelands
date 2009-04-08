@@ -48,28 +48,28 @@ new_game
 	(this,
 	 m_butx, m_yres * 6 / 25, m_butw, m_buth,
 	 1,
-	 &Fullscreen_Menu_SinglePlayer::end_modal, this, New_Game,
+	 &Fullscreen_Menu_SinglePlayer::end_modal, *this, New_Game,
 	 _("New Game"), std::string(), true, false,
 	 m_fn, m_fs),
 campaign
 	(this,
 	 m_butx, m_yres * 61 / 200, m_butw, m_buth,
 	 1,
-	 &Fullscreen_Menu_SinglePlayer::end_modal, this, Campaign,
+	 &Fullscreen_Menu_SinglePlayer::end_modal, *this, Campaign,
 	 _("Campaigns"), std::string(), true, false,
 	 m_fn, m_fs),
 load_game
 	(this,
 	 m_butx, m_yres * 87 / 200, m_butw, m_buth,
 	 1,
-	 &Fullscreen_Menu_SinglePlayer::end_modal, this, Load_Game,
+	 &Fullscreen_Menu_SinglePlayer::end_modal, *this, Load_Game,
 	 _("Load Game"), std::string(), true, false,
 	 m_fn, m_fs),
 back
 	(this,
 	 m_butx, m_yres * 3 / 4, m_butw, m_buth,
 	 0,
-	 &Fullscreen_Menu_SinglePlayer::end_modal, this, Back,
+	 &Fullscreen_Menu_SinglePlayer::end_modal, *this, Back,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs)
 {title.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);}

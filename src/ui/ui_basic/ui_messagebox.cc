@@ -77,25 +77,25 @@ MessageBox::MessageBox
 	d->textarea->set_size(width - 10, height - 50);
 
 	if (type == OK) {
-		new Button<MessageBox>
+		new Callback_Button<MessageBox>
 			(this,
 			 (get_inner_w() - 60) / 2, get_inner_h() - 30, 60, 20,
 			 0,
-			 &MessageBox::pressedOk, this,
+			 &MessageBox::pressedOk, *this,
 			 _("OK"));
 	} else if (type == YESNO) {
-		new Button<MessageBox>
+		new Callback_Button<MessageBox>
 			(this,
 			 (get_inner_w() / 2 - 60) / 2, get_inner_h() - 30, 60, 20,
 			 0,
-			 &MessageBox::pressedYes, this,
+			 &MessageBox::pressedYes, *this,
 			 _("Yes"));
-		new Button<MessageBox>
+		new Callback_Button<MessageBox>
 			(this,
 			 (get_inner_w() / 2 - 60) / 2 + get_inner_w() / 2, get_inner_h() - 30,
 			 60, 20,
 			 1,
-			 &MessageBox::pressedNo, this,
+			 &MessageBox::pressedNo, *this,
 			 _("No"));
 	}
 }

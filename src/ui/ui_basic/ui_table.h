@@ -33,7 +33,7 @@
 
 namespace UI {
 struct Scrollbar;
-template <typename T, typename ID> struct IDButton;
+template <typename T, typename ID> struct Callback_IDButton;
 
 /**
  * A table with columns and lines. The entriess can be sorted by colums by
@@ -225,7 +225,7 @@ private:
 	struct Column;
 	typedef std::vector<Column> Columns;
 	struct Column {
-		IDButton<Table, Columns::size_type> * btn;
+		Callback_IDButton<Table, Columns::size_type> * btn;
 		uint32_t                              width;
 		Align                                 alignment;
 	};

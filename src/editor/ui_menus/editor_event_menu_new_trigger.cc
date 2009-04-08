@@ -79,22 +79,22 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 	posy = get_inner_h() - 30;
 	posx = get_inner_w() / 2 - 80 - spacing;
 
-	m_ok_button = new UI::Button<Editor_Event_Menu_New_Trigger>
+	m_ok_button = new UI::Callback_Button<Editor_Event_Menu_New_Trigger>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
-		 &Editor_Event_Menu_New_Trigger::clicked_ok, this,
+		 &Editor_Event_Menu_New_Trigger::clicked_ok, *this,
 		 _("Ok"),
 		 std::string(),
 		 false);
 
 	posx = get_inner_w() / 2 + spacing;
 
-	new UI::IDButton<Editor_Event_Menu_New_Trigger, int32_t>
+	new UI::Callback_IDButton<Editor_Event_Menu_New_Trigger, int32_t>
 		(this,
 		 posx, posy, 80, 20,
 		 1,
-		 &Editor_Event_Menu_New_Trigger::end_modal, this, 0,
+		 &Editor_Event_Menu_New_Trigger::end_modal, *this, 0,
 		 _("Cancel"));
 
 	center_to_parent();

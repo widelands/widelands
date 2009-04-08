@@ -35,6 +35,10 @@ struct Event_Player_Area : public Event {
 	{}
 	Event_Player_Area(Section &, Editor_Game_Base &);
 
+	virtual void reorigin(Coords const new_origin, Extent const extent) {
+		m_player_area.reorigin(new_origin, extent);
+	}
+
 	void Write(Section &, Editor_Game_Base &) const;
 
 	void set_player(Player_Number);

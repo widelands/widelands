@@ -83,16 +83,16 @@ void Table<void *>::add_column
 	{
 		Column const c = {
 			title.size() ?
-			new IDButton<Table, Columns::size_type>
-			(this,
-			 complete_width, 0, width, m_headerheight,
-			 3,
-			 &Table::header_button_clicked, this, m_columns.size(),
-			 title, "", true, false, m_fontname, m_fontsize)
-			:
-			0,
-			width,
-			alignment
+				new Callback_IDButton<Table, Columns::size_type>
+					(this,
+					 complete_width, 0, width, m_headerheight,
+					 3,
+					 &Table::header_button_clicked, *this, m_columns.size(),
+					 title, "", true, false, m_fontname, m_fontsize)
+				:
+				0,
+				width,
+				alignment
 		};
 		m_columns.push_back(c);
 	}

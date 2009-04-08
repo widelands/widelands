@@ -73,6 +73,9 @@ struct Interactive_GameBase : public Interactive_Base {
 	std::string const & building_window_title_format() const {
 		return m_building_window_title_format;
 	}
+
+	virtual void node_action() = 0;
+
 protected:
 	Game_Main_Menu_Windows m_mainm_windows;
 	ChatProvider           * m_chatProvider;

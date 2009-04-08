@@ -37,10 +37,10 @@ struct Editor_Tool_Noise_Height_Options_Menu : public Editor_Tool_Options_Menu {
 private:
 	Editor_Noise_Height_Tool & m_noise_tool;
 	UI::Textarea m_lower_label, m_upper_label;
-	UI::Button<Editor_Tool_Noise_Height_Options_Menu>
+	UI::Callback_Button<Editor_Tool_Noise_Height_Options_Menu>
 		m_lower_increase, m_lower_decrease, m_upper_increase, m_upper_decrease;
 	UI::Textarea m_set_label;
-	UI::Button<Editor_Tool_Noise_Height_Options_Menu>
+	UI::Callback_Button<Editor_Tool_Noise_Height_Options_Menu>
 		m_setto_increase, m_setto_decrease;
 
 	void clicked_lower_decrease();

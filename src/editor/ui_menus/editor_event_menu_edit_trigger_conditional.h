@@ -27,7 +27,7 @@
 struct Editor_Interactive;
 namespace UI {
 template <typename T> struct Listselect;
-template <typename T> struct Button;
+template <typename T> struct Callback_Button;
 };
 
 /**
@@ -61,10 +61,10 @@ private:
 	UI::Listselect<Widelands::Trigger                  &> * m_trigger_list;
 	UI::Listselect<Widelands::TriggerConditional_Factory::Token &>
 		* m_construction;
-	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_insert_btn;
-	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_delete_btn;
-	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_mvup_btn;
-	UI::Button<Editor_Event_Menu_Edit_TriggerConditional> * m_mvdown_btn;
+	UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional> * m_insert_btn;
+	UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional> * m_delete_btn;
+	UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional> * m_mvup_btn;
+	UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional> * m_mvdown_btn;
 	Widelands::TriggerConditional                         * m_given_cond;
 	Widelands::EventChain                                 * m_event_chain;
 };

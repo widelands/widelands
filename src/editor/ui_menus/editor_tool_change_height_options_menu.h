@@ -37,11 +37,11 @@ struct Editor_Tool_Change_Height_Options_Menu : public Editor_Tool_Options_Menu 
 private:
 	Editor_Increase_Height_Tool & m_increase_tool;
 	UI::Textarea                  m_change_by_label;
-	UI::Button<Editor_Tool_Change_Height_Options_Menu>
+	UI::Callback_Button<Editor_Tool_Change_Height_Options_Menu>
 		m_change_by_increase, m_change_by_decrease;
 	UI::Textarea                  m_change_by_value;
 	UI::Textarea                  m_set_to_label;
-	UI::Button<Editor_Tool_Change_Height_Options_Menu>
+	UI::Callback_Button<Editor_Tool_Change_Height_Options_Menu>
 		m_set_to_increase,     m_set_to_decrease;
 	UI::Textarea                  m_set_to_value;
 

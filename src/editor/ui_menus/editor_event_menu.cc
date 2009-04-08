@@ -92,61 +92,61 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 	posy = get_inner_h() - 30;
 	posx = spacing;
 
-	new UI::Button<Editor_Event_Menu>
+	new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 90, 20, 4,
-		 &Editor_Event_Menu::clicked_new_eventchain, this,
+		 &Editor_Event_Menu::clicked_new_eventchain, *this,
 		 _("New Event Chain"));
 
 	posx += 90 + spacing;
 
-	m_btn_edit_eventchain = new UI::Button<Editor_Event_Menu>
+	m_btn_edit_eventchain = new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 50, 20,
 		 0,
-		 &Editor_Event_Menu::clicked_edit_eventchain, this,
+		 &Editor_Event_Menu::clicked_edit_eventchain, *this,
 		 _("Edit"),
 		 std::string(),
 		 false);
 
 	posx += 50 + spacing;
 
-	m_btn_del_eventchain = new UI::Button<Editor_Event_Menu>
+	m_btn_del_eventchain = new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 50, 20,
 		 0,
-		 &Editor_Event_Menu::clicked_del_eventchain, this,
+		 &Editor_Event_Menu::clicked_del_eventchain, *this,
 		 _("Del"),
 		 std::string(),
 		 false);
 
 	posx = spacing + ls_width + spacing;
 
-	new UI::Button<Editor_Event_Menu>
+	new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 90, 20,
 		 4,
-		 &Editor_Event_Menu::clicked_new_event, this,
+		 &Editor_Event_Menu::clicked_new_event, *this,
 		 _("New Event"));
 
 	posx += 90 + spacing;
 
-	m_btn_edit_event = new UI::Button<Editor_Event_Menu>
+	m_btn_edit_event = new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 50, 20,
 		 0,
-		 &Editor_Event_Menu::clicked_edit_event, this,
+		 &Editor_Event_Menu::clicked_edit_event, *this,
 		 _("Edit"),
 		 std::string(),
 		 false);
 
 	posx += 50 + spacing;
 
-	m_btn_del_event = new UI::Button<Editor_Event_Menu>
+	m_btn_del_event = new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 50, 20,
 		 0,
-		 &Editor_Event_Menu::clicked_del_event, this,
+		 &Editor_Event_Menu::clicked_del_event, *this,
 		 _("Del"),
 		 std::string(),
 		 false);
@@ -154,31 +154,31 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 
 	posx = 3 * spacing + 2 * ls_width;
 
-	new UI::Button<Editor_Event_Menu>
+	new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 90, 20,
 		 4,
-		 &Editor_Event_Menu::clicked_new_trigger, this,
+		 &Editor_Event_Menu::clicked_new_trigger, *this,
 		 _("New Trigger"));
 
 	posx += 90 + spacing;
 
-	m_btn_edit_trigger = new UI::Button<Editor_Event_Menu>
+	m_btn_edit_trigger = new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 50, 20,
 		 0,
-		 &Editor_Event_Menu::clicked_edit_trigger, this,
+		 &Editor_Event_Menu::clicked_edit_trigger, *this,
 		 _("Edit"),
 		 std::string(),
 		 false);
 
 	posx += 50 + spacing;
 
-	m_btn_del_trigger = new UI::Button<Editor_Event_Menu>
+	m_btn_del_trigger = new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 50, 20,
 		 0,
-		 &Editor_Event_Menu::clicked_del_trigger, this,
+		 &Editor_Event_Menu::clicked_del_trigger, *this,
 		 _("Del"),
 		 std::string(),
 		 false);

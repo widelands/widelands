@@ -101,19 +101,19 @@ m_te      (te)
 	pos.x  = get_inner_w() / 2 - 80 - spacing;
 	pos.y += editbox_height + spacing + spacing;
 
-	new UI::Button<Edit_Objective_Window>
+	new UI::Callback_Button<Edit_Objective_Window>
 		(this,
 		 pos.x, pos.y, 80, 20,
 		 1,
-		 &Edit_Objective_Window::clicked_ok, this,
+		 &Edit_Objective_Window::clicked_ok, *this,
 		 _("Ok"));
 
 	pos.x += 80 + 2 * spacing;
-	new UI::IDButton<Edit_Objective_Window, int32_t>
+	new UI::Callback_IDButton<Edit_Objective_Window, int32_t>
 		(this,
 		 pos.x, pos.y, 80, 20,
 		 1,
-		 &Edit_Objective_Window::end_modal, this, 0,
+		 &Edit_Objective_Window::end_modal, *this, 0,
 		 _("Back"));
 
 	set_inner_size(get_inner_w(), pos.y + 20 + spacing);
@@ -168,31 +168,31 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 
 	int32_t posx = spacing;
 
-	new UI::Button<Editor_Objectives_Menu>
+	new UI::Callback_Button<Editor_Objectives_Menu>
 		(this,
 		 spacing, get_inner_h() - 30, 60, 20,
 		 0,
-		 &Editor_Objectives_Menu::clicked_new, this,
+		 &Editor_Objectives_Menu::clicked_new, *this,
 		 _("New"));
 
 	posx += 60 + spacing;
 
-	m_edit_button = new UI::Button<Editor_Objectives_Menu>
+	m_edit_button = new UI::Callback_Button<Editor_Objectives_Menu>
 		(this,
 		 posx, get_inner_h() - 30, 60, 20,
 		 0,
-		 &Editor_Objectives_Menu::clicked_edit, this,
+		 &Editor_Objectives_Menu::clicked_edit, *this,
 		 _("Edit"),
 		 std::string(),
 		 false);
 
 	posx += 60 + spacing;
 
-	m_delete_button = new UI::Button<Editor_Objectives_Menu>
+	m_delete_button = new UI::Callback_Button<Editor_Objectives_Menu>
 		(this,
 		 posx, get_inner_h() - 30, 60, 20,
 		 0,
-		 &Editor_Objectives_Menu::clicked_del, this,
+		 &Editor_Objectives_Menu::clicked_del, *this,
 		 _("Delete"),
 		 std::string(),
 		 false);

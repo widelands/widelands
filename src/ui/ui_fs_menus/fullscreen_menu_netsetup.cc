@@ -65,21 +65,21 @@ joingame
 	(this,
 	 m_xres * 16 / 25, m_yres * 5333 / 10000, m_butw, m_buth,
 	 1,
-	 &Fullscreen_Menu_NetSetup::clicked_joingame, this,
+	 &Fullscreen_Menu_NetSetup::clicked_joingame, *this,
 	 _("Join this game"), std::string(), true, false,
 	 m_fn, m_fs),
 hostgame
 	(this,
 	 m_xres * 16 / 25, m_yres * 6083 / 10000, m_butw, m_buth,
 	 1,
-	 &Fullscreen_Menu_NetSetup::clicked_hostgame, this,
+	 &Fullscreen_Menu_NetSetup::clicked_hostgame, *this,
 	 _("Host a new game"), std::string(), true, false,
 	 m_fn, m_fs),
 back
 	(this,
 	 m_xres * 16 / 25, m_yres * 8333 / 10000, m_butw, m_buth,
 	 0,
-	 &Fullscreen_Menu_NetSetup::end_modal, this, CANCEL,
+	 &Fullscreen_Menu_NetSetup::end_modal, *this, CANCEL,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs),
 loadlasthost
@@ -87,7 +87,7 @@ loadlasthost
 	 m_xres * 171 / 200, m_yres * 19 / 40, m_buth, m_buth,
 	 1,
 	 g_gr->get_picture(PicMod_UI, "pics/menu_load_game.png"),
-	 &Fullscreen_Menu_NetSetup::clicked_lasthost, this,
+	 &Fullscreen_Menu_NetSetup::clicked_lasthost, *this,
 	 _("Load previous host"), true, false,
 	 m_fn, m_fs),
 

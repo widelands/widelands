@@ -28,19 +28,15 @@
 
 namespace UI {
 
-/**
- * Initialize a Basic_Button
-*/
-Basic_Button::Basic_Button
+Button::Button //  for textual buttons
 	(Panel * const parent,
-	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 const bool _enabled, const bool flat,
-	 const uint32_t background_picture_id,
-	 const uint32_t foreground_picture_id,
-	 const std::string & title_text,
-	 const std::string & tooltip_text,
-	 const std::string & fontname,
-	 const uint32_t      fontsize)
+	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
+	 uint32_t background_picture_id,
+	 std::string const & title_text,
+	 std::string const & tooltip_text,
+	 bool const _enabled, bool const flat,
+	 std::string const & fontname,
+	 uint32_t const      fontsize)
 	:
 	Panel           (parent, x, y, w, h, tooltip_text),
 	m_highlighted   (false),
@@ -50,6 +46,39 @@ Basic_Button::Basic_Button
 	m_flat          (flat),
 	m_title         (title_text),
 	m_pic_background(background_picture_id),
+	m_pic_custom    (0),
+	m_pic_custom_disabled(0),
+	m_fontname      (fontname),
+	m_fontsize      (fontsize),
+	m_clr_down      (229, 161, 2),
+	m_draw_caret    (false)
+{
+	set_think(false);
+
+	if (4 < background_picture_id)
+		background_picture_id = 0;
+	char background_pic_filename[] = "pics/but0.png";
+	background_pic_filename[8] += background_picture_id;
+	m_pic_background = g_gr->get_picture(PicMod_UI, background_pic_filename);
+}
+
+
+Button::Button //  for pictorial buttons
+	(Panel * const parent,
+	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
+	 uint32_t background_picture_id,
+	 const uint32_t foreground_picture_id,
+	 const std::string & tooltip_text,
+	 bool const _enabled, bool const flat,
+	 const std::string & fontname,
+	 const uint32_t      fontsize)
+	:
+	Panel           (parent, x, y, w, h, tooltip_text),
+	m_highlighted   (false),
+	m_pressed       (false),
+	m_enabled       (_enabled),
+	m_repeating     (false),
+	m_flat          (flat),
 	m_pic_custom    (foreground_picture_id),
 	m_pic_custom_disabled(g_gr->create_grayed_out_pic(foreground_picture_id)),
 	m_fontname      (fontname),
@@ -59,32 +88,24 @@ Basic_Button::Basic_Button
 {
 	set_think(false);
 
-	switch (background_picture_id) {
-	default:
-	case 0:
-		m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but0.png"); break;
-	case 1:
-		m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but1.png"); break;
-	case 2:
-		m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but2.png"); break;
-	case 3:
-		m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but3.png"); break;
-	case 4:
-		m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but4.png"); break;
-	}
+	if (4 < background_picture_id)
+		background_picture_id = 0;
+	char background_pic_filename[] = "pics/but0.png";
+	background_pic_filename[8] += background_picture_id;
+	m_pic_background = g_gr->get_picture(PicMod_UI, background_pic_filename);
 }
 
 
-Basic_Button::~Basic_Button() {
+Button::~Button() {
 	if (m_pic_custom_disabled)
 		g_gr->free_surface(m_pic_custom_disabled);
 }
 
 
 /**
- * Sets a new picture for the Basic_Button.
+ * Sets a new picture for the Button.
 */
-void Basic_Button::set_pic(uint32_t picid)
+void Button::set_pic(uint32_t picid)
 {
 	m_title.clear();
 
@@ -98,9 +119,9 @@ void Basic_Button::set_pic(uint32_t picid)
 
 
 /**
- * Set a text title for the Basic_Button
+ * Set a text title for the Button
 */
-void Basic_Button::set_title(const std::string & title) {
+void Button::set_title(std::string const & title) {
 	m_pic_custom = 0;
 	m_title      = title;
 
@@ -113,7 +134,7 @@ void Basic_Button::set_title(const std::string & title) {
  * Enable/Disable the button (disabled buttons can't be clicked).
  * Buttons are enabled by default
 */
-void Basic_Button::set_enabled(bool on)
+void Button::set_enabled(bool on)
 {
 	// disabled buttons should look different...
 	if (on)
@@ -134,7 +155,7 @@ void Basic_Button::set_enabled(bool on)
 /**
  * Redraw the button
 */
-void Basic_Button::draw(RenderTarget & dst)
+void Button::draw(RenderTarget & dst)
 {
 	// Draw the background
 	if (not m_flat)
@@ -221,7 +242,7 @@ void Basic_Button::draw(RenderTarget & dst)
 	}
 }
 
-void Basic_Button::think()
+void Button::think()
 {
 	assert(m_repeating);
 	assert(m_pressed);
@@ -235,7 +256,7 @@ void Basic_Button::think()
 			if (m_time_nextact < time)
 				m_time_nextact = time;
 			play_click();
-			send_signal_clicked();
+			clicked();
 			//  The button may not exist at this point (for example if the button
 			//  closed the dialog that it is part of). So member variables may no
 			//  longer be accessed.
@@ -246,7 +267,7 @@ void Basic_Button::think()
 /**
  * Update highlighted status
 */
-void Basic_Button::handle_mousein(bool const inside)
+void Button::handle_mousein(bool const inside)
 {
 	m_highlighted = inside && m_enabled;
 	update(0, 0, get_w(), get_h());
@@ -256,7 +277,7 @@ void Basic_Button::handle_mousein(bool const inside)
 /**
  * Update the pressed status of the button
 */
-bool Basic_Button::handle_mousepress(const Uint8 btn, int32_t, int32_t) {
+bool Button::handle_mousepress(Uint8 const btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
@@ -274,7 +295,7 @@ bool Basic_Button::handle_mousepress(const Uint8 btn, int32_t, int32_t) {
 
 	return true;
 }
-bool Basic_Button::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
+bool Button::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
@@ -285,7 +306,7 @@ bool Basic_Button::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 		update(0, 0, get_w(), get_h());
 		if (m_highlighted && m_enabled) {
 			play_click();
-			send_signal_clicked();
+			clicked();
 			//  The button may not exist at this point (for example if the button
 			//  closed the dialog that it is part of). So member variables may no
 			//  longer be accessed.

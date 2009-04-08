@@ -167,7 +167,7 @@ m_flag_to_connect(Widelands::Coords::Null()),
 #define INIT_BTN(picture, callback, tooltip)                                  \
  TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
  g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
- &Interactive_Player::callback, this,                                         \
+ &Interactive_Player::callback, *this,                                        \
  tooltip                                                                      \
 
 m_toggle_chat
@@ -202,7 +202,7 @@ m_toggle_help
 	m_toolbar.add(&m_toggle_objectives,      UI::Box::AlignLeft);
 
 	set_player_number(plyn);
-	fieldclicked.set(this, &Interactive_Player::field_action);
+	fieldclicked.set(this, &Interactive_Player::node_action);
 
 
 	// TODO : instead of making unneeded buttons invisible after generation,
@@ -325,14 +325,9 @@ void Interactive_Player::toggle_help        () {
 		new EncyclopediaWindow(*this, m_encyclopedia);
 }
 
-/*
-===============
-Interactive_Player::field_action
 
-Player has clicked on the given field; bring up the context menu.
-===============
-*/
-void Interactive_Player::field_action()
+/// Player has clicked on the given node; bring up the context menu.
+void Interactive_Player::node_action()
 {
 	Map const & map = egbase().map();
 #ifndef DEBUG

@@ -39,9 +39,9 @@ private:
 	uint32_t                                      m_buth;
 	uint32_t                                      m_butx;
 	UI::Textarea                                  title;
-	UI::IDButton<Fullscreen_Menu_Editor, int32_t> new_map;
-	UI::IDButton<Fullscreen_Menu_Editor, int32_t> load_map;
-	UI::IDButton<Fullscreen_Menu_Editor, int32_t> back;
+	UI::Callback_IDButton<Fullscreen_Menu_Editor, int32_t> new_map;
+	UI::Callback_IDButton<Fullscreen_Menu_Editor, int32_t> load_map;
+	UI::Callback_IDButton<Fullscreen_Menu_Editor, int32_t> back;
 };
 
 #endif

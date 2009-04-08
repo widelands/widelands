@@ -79,8 +79,8 @@ private:
 	UI::Textarea m_label_nr_players, m_nr_players;
 	UI::Textarea m_label_descr;
 	UI::Multiline_Textarea m_descr;
-	UI::IDButton<Fullscreen_Menu_MapSelect, int32_t> m_back;
-	UI::  Button<Fullscreen_Menu_MapSelect>          m_ok;
+	UI::Callback_IDButton<Fullscreen_Menu_MapSelect, int32_t> m_back;
+	UI::Callback_Button<Fullscreen_Menu_MapSelect>            m_ok;
 	UI::Checkbox                                     m_load_map_as_scenario;
 	UI::Listselect<MapData>                          m_list;
 	std::string                                      m_curdir, m_basedir;

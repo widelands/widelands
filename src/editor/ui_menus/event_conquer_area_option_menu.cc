@@ -70,47 +70,47 @@ m_player_area(event.m_player_area)
 	posy += 20 + spacing;
 	//  X
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 20, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 3);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 3);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 20, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 4);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 4);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 40, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 5);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 5);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 40, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 6);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 6);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 60, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 7);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 7);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 60, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 8);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 8);
 
 	new UI::Textarea
 		(this, spacing + 20, posy + 20, 20, 20, "X: ", Align_CenterLeft);
@@ -122,47 +122,47 @@ m_player_area(event.m_player_area)
 	int32_t const oldspacing = spacing;
 	spacing = get_inner_w() / 2 + spacing;
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 9);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 9);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 10);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 10);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 20, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 11);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 11);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 20, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 12);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 12);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 40, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 13);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 13);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 40, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 14);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 14);
 
 	new UI::Textarea(this, spacing, posy + 20, 20, 20, "Y: ", Align_CenterLeft);
 	m_y_ta =
@@ -176,65 +176,65 @@ m_player_area(event.m_player_area)
 	m_player_ta =
 		new UI::Textarea(this, spacing + 70, posy, 20, 20, "2", Align_Center);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 90, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 15);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 15);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 110, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 16);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 16);
 
 	posy += 20 + spacing;
 	new UI::Textarea
 		(this, spacing, posy + 20, 70, 20, _("Area: "), Align_CenterLeft);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 70, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 17);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 17);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 70, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 18);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 18);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 90, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 19);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 19);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 90, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 20);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 20);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 110, posy, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 21);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 21);
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 110, posy + 40, 20, 20,
 		 0,
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-		 &Event_Conquer_Area_Option_Menu::clicked, this, 22);
+		 &Event_Conquer_Area_Option_Menu::clicked, *this, 22);
 
 	m_area_ta =
 		new UI::Textarea
@@ -244,20 +244,20 @@ m_player_area(event.m_player_area)
 	posx = get_inner_w() / 2 - 60 -spacing;
 	posy = get_inner_h() - 20 - spacing;
 
-	new UI::Button<Event_Conquer_Area_Option_Menu>
+	new UI::Callback_Button<Event_Conquer_Area_Option_Menu>
 		(this,
 		 posx, posy, 60, 20,
 		 0,
-		 &Event_Conquer_Area_Option_Menu::clicked_ok, this,
+		 &Event_Conquer_Area_Option_Menu::clicked_ok, *this,
 		 _("Ok"));
 
 	posx = get_inner_w() / 2 + spacing;
 
-	new UI::IDButton<Event_Conquer_Area_Option_Menu, int32_t>
+	new UI::Callback_IDButton<Event_Conquer_Area_Option_Menu, int32_t>
 		(this,
 		 posx, posy, 60, 20,
 		 1,
-		 &Event_Conquer_Area_Option_Menu::end_modal, this, 0,
+		 &Event_Conquer_Area_Option_Menu::end_modal, *this, 0,
 		 _("Cancel"));
 
 	center_to_parent();

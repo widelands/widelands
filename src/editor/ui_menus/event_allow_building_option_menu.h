@@ -59,15 +59,15 @@ private:
 	UI::Textarea                                            m_label_name;
 	UI::EditBox                                             m_name;
 	UI::Textarea                                            m_label_player;
-	UI::IDButton<Event_Allow_Building_Option_Menu, bool>    m_decrement_player;
-	UI::IDButton<Event_Allow_Building_Option_Menu, bool>    m_increment_player;
+	UI::Callback_IDButton<Event_Allow_Building_Option_Menu, bool>    m_decrement_player;
+	UI::Callback_IDButton<Event_Allow_Building_Option_Menu, bool>    m_increment_player;
 	UI::Textarea                                            m_label_building;
-	UI::Button<Event_Allow_Building_Option_Menu>            m_decrement_building;
-	UI::Button<Event_Allow_Building_Option_Menu>            m_increment_building;
+	UI::Callback_Button<Event_Allow_Building_Option_Menu>            m_decrement_building;
+	UI::Callback_Button<Event_Allow_Building_Option_Menu>            m_increment_building;
 	UI::Textarea                                            m_label_allow;
 	UI::Checkbox                                            m_allow;
-	UI::Button<Event_Allow_Building_Option_Menu>            m_button_ok;
-	UI::IDButton<Event_Allow_Building_Option_Menu, int32_t> m_button_cancel;
+	UI::Callback_Button<Event_Allow_Building_Option_Menu>            m_button_ok;
+	UI::Callback_IDButton<Event_Allow_Building_Option_Menu, int32_t> m_button_cancel;
 };
 
 #endif

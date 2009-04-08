@@ -139,35 +139,35 @@ button_terrn
 	 but_w() * 0, m_view.get_h() + but_h() * 0, but_w(), but_h(),
 	 0,
 	 g_gr->get_picture(PicMod_UI, "pics/button_terrn.png"),
-	 &MiniMap::toggle, this, Terrn,
+	 &MiniMap::toggle, *this, Terrn,
 	 _("Terrain")),
 button_owner
 	(this,
 	 but_w() * 1, m_view.get_h() + but_h() * 0, but_w(), but_h(),
 	 0,
 	 g_gr->get_picture(PicMod_UI, "pics/button_owner.png"),
-	 &MiniMap::toggle, this, Owner,
+	 &MiniMap::toggle, *this, Owner,
 	 _("Owner")),
 button_flags
 	(this,
 	 but_w() * 2, m_view.get_h() + but_h() * 0, but_w(), but_h(),
 	 0,
 	 g_gr->get_picture(PicMod_UI, "pics/button_flags.png"),
-	 &MiniMap::toggle, this, Flags,
+	 &MiniMap::toggle, *this, Flags,
 	 _("Flags")),
 button_roads
 	(this,
 	 but_w() * 0, m_view.get_h() + but_h() * 1, but_w(), but_h(),
 	 0,
 	 g_gr->get_picture(PicMod_UI, "pics/button_roads.png"),
-	 &MiniMap::toggle, this, Roads,
+	 &MiniMap::toggle, *this, Roads,
 	 _("Roads")),
 button_bldns
 	(this,
 	 but_w() * 1, m_view.get_h() + but_h() * 1, but_w(), but_h(),
 	 0,
 	 g_gr->get_picture(PicMod_UI, "pics/button_bldns.png"),
-	 &MiniMap::toggle, this, Bldns,
+	 &MiniMap::toggle, *this, Bldns,
 	 _("Buildings"))
 {
 	set_inner_size

@@ -115,6 +115,7 @@ private:
 class Immovable : public BaseImmovable {
 	friend struct Immovable_Descr;
 	friend class ImmovableProgram;
+	friend struct Map;
 	friend struct Map_Immovabledata_Data_Packet; // for writing (obsolete since build-11)
 
 	MO_DESCR(Immovable_Descr);

@@ -43,19 +43,15 @@ close_button
 	(this,
 	 m_xres * 3 / 8, m_yres * 9 / 10, m_xres / 4, m_yres * 9 / 200,
 	 0,
-	 &Fullscreen_Menu_TextView::end_modal, this, 0,
+	 &Fullscreen_Menu_TextView::end_modal, *this, 0,
 	 _("Close"), std::string(), true, false,
 	 ui_fn(), fs_small())
 {
-	{
-		i18n::Textdomain textdomain("texts");
+	Profile prof(filename.c_str(), "global", "texts"); //  section-less file
+	Section & section = prof.get_safe_section("global");
 
-		Profile prof(filename.c_str(), "global"); //  section-less file
-		Section & section = prof.get_safe_section("global");
-
-		title   .set_text(section.get_safe_string("title"));
-		textview.set_text(section.get_safe_string("text"));
-	}
+	title   .set_text(section.get_safe_string("title"));
+	textview.set_text(section.get_safe_string("text"));
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 	title.set_pos
@@ -87,11 +83,8 @@ FileViewWindow::FileViewWindow
 	 std::string          const & filename)
 : UI::UniqueWindow(&parent, &reg, 0, 0, ""), textview(this, 0, 0, 560, 240)
 {
-	i18n::grab_textdomain("texts");
-
-	Profile prof(filename.c_str(), "global"); // section-less file
+	Profile prof(filename.c_str(), "global", "texts"); // section-less file
 	Section & s = prof.get_safe_section("global");
-	i18n::release_textdomain();
 
 	set_title(s.get_safe_string("title"));
 

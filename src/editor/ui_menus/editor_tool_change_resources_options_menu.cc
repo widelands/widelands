@@ -53,7 +53,7 @@ m_change_by_increase
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 	 &Editor_Tool_Change_Resources_Options_Menu::clicked_button,
-	 this, Change_By_Increase),
+	 *this, Change_By_Increase),
 m_change_by_decrease
 	(this,
 	 get_inner_w() - hmargin() - width, m_change_by_increase.get_y(),
@@ -61,7 +61,7 @@ m_change_by_decrease
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 	 &Editor_Tool_Change_Resources_Options_Menu::clicked_button,
-	 this, Change_By_Decrease),
+	 *this, Change_By_Decrease),
 m_change_by_value
 	(this,
 	 m_change_by_increase.get_x() + m_change_by_increase.get_w() + hspacing(),
@@ -84,14 +84,14 @@ m_set_to_increase
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 	 &Editor_Tool_Change_Resources_Options_Menu::clicked_button,
-	 this, Set_To_Increase),
+	 *this, Set_To_Increase),
 m_set_to_decrease
 	(this,
 	 m_change_by_decrease.get_x(), m_set_to_increase.get_y(), width, height,
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 	 &Editor_Tool_Change_Resources_Options_Menu::clicked_button,
-	 this, Set_To_Decrease),
+	 *this, Set_To_Decrease),
 m_set_to_value
 	(this,
 	 m_change_by_value.get_x(), m_set_to_increase.get_y(),

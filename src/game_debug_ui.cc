@@ -253,7 +253,7 @@ private:
 	Widelands::FCoords const     m_coords;
 
 	UI::Multiline_Textarea       m_ui_field;
-	UI::Button<FieldDebugWindow> m_ui_immovable;
+	UI::Callback_Button<FieldDebugWindow> m_ui_immovable;
 	UI::Listselect<intptr_t>    m_ui_bobs;
 };
 
@@ -279,7 +279,7 @@ m_ui_immovable
 	(this,
 	 0, 280, 200, 24,
 	 0,
-	 &FieldDebugWindow::open_immovable, this,
+	 &FieldDebugWindow::open_immovable, *this,
 	 ""),
 
 m_ui_bobs(this, 0, 304, 200, 96)

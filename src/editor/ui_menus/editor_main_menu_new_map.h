@@ -26,7 +26,7 @@
 
 struct Editor_Interactive;
 namespace UI {
-template <typename T, typename ID> struct IDButton;
+template <typename T, typename ID> struct Callback_IDButton;
 struct Textarea;
 };
 
@@ -41,7 +41,7 @@ struct Main_Menu_New_Map : public UI::Window {
 private:
 	Editor_Interactive * m_parent;
 	UI::Textarea * m_width, * m_height;
-	UI::IDButton<Main_Menu_New_Map, int32_t> * m_world;
+	UI::Callback_IDButton<Main_Menu_New_Map, int32_t> * m_world;
 	int32_t m_w, m_h;
 	std::vector<std::string>::size_type m_currentworld;
 	std::vector<std::string> m_worlds;

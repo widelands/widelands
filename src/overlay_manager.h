@@ -87,21 +87,22 @@ struct Overlay_Manager {
 		m_callback = func; m_callback_data = data; m_callback_data_i = iparam1;
 	}
 
-	//  Get a job id that is hopefully unused. This function is guaranteed to
-	//  never return Job_Id::Null(). All other values are valid and may be returned.
-	//  The first call can return any valid value. Other calls increment the
-	//  value that was returned in the last call. If the result is Job_Id::Null() it
-	//  is incremented again. Then the result is returned. Since Job_Id is
-	//  modular, it can wrap around. This means that the function can return a
-	//  value that it has returned before. If that job id is still in use, the
-	//  logic will fail, since the overlay manager will consider all jobs with a
-	//  certain job id as the same job. Therefore a call to
-	//  remove_overlay(const Job_Id) will remove all overlays that were added
-	//  during any job with that id. But the range of Job_Id should be large
-	//  enough to ensure that this will not be a problem in practice.
+	/// Get a job id that is hopefully unused. This function is guaranteed to
+	/// never return Job_Id::Null(). All other values are valid and may be
+	/// returned. The first call can return any valid value. Other calls
+	/// increment the value that was returned in the last call. If the result is
+	/// Job_Id::Null() it is incremented again. Then the result is returned.
+	/// Since Job_Id is modular, it can wrap around. This means that the
+	/// function can return a value that it has returned before. If that job id
+	/// is still in use, the logic will fail, since the overlay manager will
+	/// consider all jobs with a certain job id as the same job. Therefore a
+	/// call to remove_overlay(Job_Id) will remove all overlays that were added
+	/// during any job with that id. But the range of Job_Id should be large
+	/// enough to ensure that this will not be a problem in practice.
 	Job_Id get_a_job_id() {
 		++m_current_job_id;
-		if (m_current_job_id == Job_Id::Null()) ++m_current_job_id;
+		if (m_current_job_id == Job_Id::Null())
+			++m_current_job_id;
 		return m_current_job_id;
 	}
 
@@ -141,8 +142,10 @@ struct Overlay_Manager {
 	void remove_road_overlay(Widelands::Coords);
 	void remove_road_overlay(Job_Id);
 	uint8_t get_road_overlay(const Widelands::Coords c) const {
-		Registered_Road_Overlays_Map::const_iterator it = m_road_overlays.find(c);
-		if (it != m_road_overlays.end()) return it->second.where;
+		Registered_Road_Overlays_Map::const_iterator const it =
+			m_road_overlays.find(c);
+		if (it != m_road_overlays.end())
+			return it->second.where;
 		return 0;
 	}
 

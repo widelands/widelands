@@ -50,7 +50,7 @@ m_change_by_increase
 	 width, height,
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-	 &Editor_Tool_Change_Height_Options_Menu::clicked_change_by_increment, this,
+	 &Editor_Tool_Change_Height_Options_Menu::clicked_change_by_increment, *this,
 	 std::string(),
 	 increase_tool.get_change_by() < MAX_FIELD_HEIGHT_DIFF),
 m_change_by_decrease
@@ -59,7 +59,7 @@ m_change_by_decrease
 	 width, height,
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-	 &Editor_Tool_Change_Height_Options_Menu::clicked_change_by_decrement, this,
+	 &Editor_Tool_Change_Height_Options_Menu::clicked_change_by_decrement, *this,
 	 std::string(),
 	 1 < increase_tool.get_change_by()),
 m_change_by_value
@@ -83,7 +83,7 @@ m_set_to_increase
 	 width, height,
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-	 &Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment, this,
+	 &Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment, *this,
 	 std::string(),
 	 increase_tool.set_tool().get_interval().min < MAX_FIELD_HEIGHT),
 m_set_to_decrease
@@ -91,7 +91,7 @@ m_set_to_decrease
 	 m_change_by_decrease.get_x(), m_set_to_increase.get_y(), width, height,
 	 1,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-	 &Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement, this,
+	 &Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement, *this,
 	 std::string(),
 	 0 < increase_tool.set_tool().get_interval().min),
 m_set_to_value

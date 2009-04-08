@@ -132,30 +132,46 @@ void Editor_Tool_Menu::changed_to() {
 
 	if (UI::Window * const window = current_registry_pointer->window) {
 		// There is already a window. If it is minimal, restore it.
-		if (window->is_minimal()) window->restore(); else delete window;
-	} else switch (n) { //  create window
-	case 0:
-		new Editor_Tool_Change_Height_Options_Menu
-			(parent, parent.tools.increase_height, *current_registry_pointer);
-		break;
-	case 1:
-		new Editor_Tool_Noise_Height_Options_Menu
-			(parent, parent.tools.noise_height, *current_registry_pointer);
-		break;
-	case 2:
-		new Editor_Tool_Set_Terrain_Tool_Options_Menu
-			(parent, parent.tools.set_terrain, *current_registry_pointer);
-		break;
-	case 3:
-		new Editor_Tool_Place_Immovable_Options_Menu
-			(parent, parent.tools.place_immovable, *current_registry_pointer);
-		break;
-	case 4:
-		new Editor_Tool_Place_Bob_Options_Menu
-			(parent, parent.tools.place_bob, *current_registry_pointer);
-		break;
-	case 5:
-		new Editor_Tool_Change_Resources_Options_Menu
-			(parent, parent.tools.increase_resources, *current_registry_pointer);
-	}
+		if (window->is_minimal())
+			window->restore();
+		else
+			delete window;
+	} else
+		switch (n) { //  create window
+		case 0:
+			new Editor_Tool_Change_Height_Options_Menu
+				(parent,
+				 parent.tools.increase_height,
+				 *current_registry_pointer);
+			break;
+		case 1:
+			new Editor_Tool_Noise_Height_Options_Menu
+				(parent,
+				 parent.tools.noise_height,
+				 *current_registry_pointer);
+			break;
+		case 2:
+			new Editor_Tool_Set_Terrain_Tool_Options_Menu
+				(parent,
+				 parent.tools.set_terrain,
+				 *current_registry_pointer);
+			break;
+		case 3:
+			new Editor_Tool_Place_Immovable_Options_Menu
+				(parent,
+				 parent.tools.place_immovable,
+				 *current_registry_pointer);
+			break;
+		case 4:
+			new Editor_Tool_Place_Bob_Options_Menu
+				(parent,
+				 parent.tools.place_bob,
+				 *current_registry_pointer);
+			break;
+		case 5:
+			new Editor_Tool_Change_Resources_Options_Menu
+				(parent,
+				 parent.tools.increase_resources,
+				 *current_registry_pointer);
+		}
 }

@@ -49,7 +49,7 @@ private:
 	UI::Listselect<std::string> m_ls;
 	UI::EditBox m_editbox;
 	UI::Textarea m_name_label, m_name, m_gametime_label, m_gametime;
-	UI::Button<Game_Main_Menu_Save_Game> m_button_ok, m_button_cancel;
+	UI::Callback_Button<Game_Main_Menu_Save_Game> m_button_ok, m_button_cancel;
 	std::string m_curdir;
 	std::string m_parentdir;
 	std::string m_filename;

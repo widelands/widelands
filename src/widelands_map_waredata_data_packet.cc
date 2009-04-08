@@ -178,7 +178,7 @@ throw (_wexception)
 		if (upcast(Flag const, fl, field->get_immovable()))
 			for (int32_t i = 0; i < fl->m_item_filled; ++i) {
 				assert(os->is_object_known(*fl->m_items[i].item));
-				write_ware(&fw, egbase, os, *fl->m_items[i].item);
+				write_ware(fw, egbase, os, *fl->m_items[i].item);
 			}
 
 		//  Now, check for workers.
@@ -189,7 +189,7 @@ throw (_wexception)
 					 	worker->get_carried_item(egbase))
 				{
 					assert(os->is_object_known(*ware));
-					write_ware(&fw, egbase, os, *ware);
+					write_ware(fw, egbase, os, *ware);
 				}
 	}
 	fw.Unsigned32(0xffffffff); // End of wares
@@ -201,30 +201,30 @@ throw (_wexception)
  * Write this ware instances data to disk
  */
 void Map_Waredata_Data_Packet::write_ware
-	(FileWrite            * fw,
+	(FileWrite            & fw,
 	 Editor_Game_Base     & egbase,
 	 Map_Map_Object_Saver * os,
 	 WareInstance   const & ware)
 {
-	fw->Unsigned32(os->get_object_file_index(ware));
+	fw.Unsigned32(os->get_object_file_index(ware));
 
 	if (Map_Object const * const obj = ware.m_location.get(egbase)) {
 		assert(os->is_object_known(*obj));
-		fw->Unsigned32(os->get_object_file_index(*obj));
+		fw.Unsigned32(os->get_object_file_index(*obj));
 	} else
-		fw->Unsigned32(0);
+		fw.Unsigned32(0);
 
 	// Economy is set by set_location()
 
 	//  FIXME We can not assume that ware index is the same when the game is
 	//  FIXME loaded again. This must be changed to write the name instead.
-	fw->Signed32(ware.descr_index().value());
+	fw.Signed32(ware.descr_index().value());
 
 	if (Map_Object const * const obj = ware.m_transfer_nextstep.get(egbase)) {
 		assert(os->is_object_known(*obj));
-		fw->Unsigned32(os->get_object_file_index(*obj));
+		fw.Unsigned32(os->get_object_file_index(*obj));
 	} else
-		fw->Unsigned32(0);
+		fw.Unsigned32(0);
 
 	os->mark_object_as_saved(ware);
 }

@@ -48,8 +48,8 @@ private:
 	uint32_t    m_fs;
 	std::string m_fn;
 
-	UI::IDButton<Fullscreen_Menu_LoadReplay, int32_t> m_back;
-	UI::Button<Fullscreen_Menu_LoadReplay> m_ok;
+	UI::Callback_IDButton<Fullscreen_Menu_LoadReplay, int32_t> m_back;
+	UI::Callback_Button<Fullscreen_Menu_LoadReplay>            m_ok;
 	UI::Listselect<std::string> m_list;
 	UI::Textarea m_title;
 	std::string m_filename;

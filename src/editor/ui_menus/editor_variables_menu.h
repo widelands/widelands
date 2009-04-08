@@ -34,9 +34,9 @@ struct Editor_Variables_Menu : public UI::UniqueWindow {
 private:
 	Editor_Interactive                & m_parent;
 	UI::Table<Widelands::Variable &> m_table;
-	UI::Button<Editor_Variables_Menu> m_button_new;
-	UI::Button<Editor_Variables_Menu> m_button_edit;
-	UI::Button<Editor_Variables_Menu> m_button_del;
+	UI::Callback_Button<Editor_Variables_Menu> m_button_new;
+	UI::Callback_Button<Editor_Variables_Menu> m_button_edit;
+	UI::Callback_Button<Editor_Variables_Menu> m_button_del;
 
 private:
 	void insert_variable(Widelands::Variable &);

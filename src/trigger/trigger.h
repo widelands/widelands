@@ -22,6 +22,7 @@
 
 #include "named.h"
 #include "referenced.h"
+#include "widelands_geometry.h"
 
 #include <map>
 #include <string>
@@ -42,6 +43,8 @@ struct Trigger : public Named, public Referenced<Trigger> {
 		: Named(Name), m_is_set(set)
 	{}
 	virtual ~Trigger() {}
+
+	virtual void reorigin(Coords, Extent) {} /// Translate stored coordinates;
 
 	virtual int32_t option_menu(Editor_Interactive &) = 0;
 

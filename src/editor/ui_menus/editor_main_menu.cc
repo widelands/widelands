@@ -45,37 +45,37 @@ m_button_new_map
 	(this,
 	 hmargin, vmargin + 0 * (height + vspacing), width, height,
 	 1,
-	 &Editor_Main_Menu::new_map_btn, this,
+	 &Editor_Main_Menu::new_map_btn, *this,
 	 _("New Map")),
 m_button_load_map
 	(this,
 	 hmargin, vmargin + 1 * (height + vspacing), width, height,
 	 1,
-	 &Editor_Main_Menu::load_btn, this,
+	 &Editor_Main_Menu::load_btn, *this,
 	 _("Load Map")),
 m_button_save_map
 	(this,
 	 hmargin, vmargin + 2 * (height + vspacing), width, height,
 	 1,
-	 &Editor_Main_Menu::save_btn, this,
+	 &Editor_Main_Menu::save_btn, *this,
 	 _("Save Map")),
 m_button_map_options
 	(this,
 	 hmargin, vmargin + 3 * (height + vspacing), width, height,
 	 1,
-	 &Editor_Main_Menu::map_options_btn, this,
+	 &Editor_Main_Menu::map_options_btn, *this,
 	 _("Map Options")),
 m_button_view_readme
 	(this,
 	 hmargin, vmargin + 4 * (height + vspacing), width, height,
 	 1,
-	 &Editor_Main_Menu::readme_btn, this,
+	 &Editor_Main_Menu::readme_btn, *this,
 	 _("View Readme")),
 m_button_exit_editor
 	(this,
 	 hmargin, vmargin + 5 * (height + vspacing), width, height,
 	 0,
-	 &Editor_Main_Menu::exit_btn, this,
+	 &Editor_Main_Menu::exit_btn, *this,
 	 _("Exit Editor"))
 {
 	// Put in the default position, if necessary
@@ -100,7 +100,7 @@ void Editor_Main_Menu::save_btn() {
 	die();
 }
 void Editor_Main_Menu::map_options_btn() {
-	new Main_Menu_Map_Options(&m_parent);
+	new Main_Menu_Map_Options(m_parent);
 	die();
 }
 void Editor_Main_Menu::exit_btn() {m_parent.exit();}

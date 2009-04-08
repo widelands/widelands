@@ -25,7 +25,7 @@
 struct Editor_Interactive;
 namespace Widelands {struct Trigger_Time;}
 namespace UI {
-template <typename T> struct Button;
+template <typename T> struct Callback_Button;
 struct Textarea;
 struct EditBox;
 };

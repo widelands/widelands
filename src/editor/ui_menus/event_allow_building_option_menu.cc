@@ -87,13 +87,13 @@ m_decrement_player
 	 get_inner_w() - 2 * (spacing + 20), m_label_player.get_y(), 20, 20,
 	 0,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
-	 &Event_Allow_Building_Option_Menu::clicked_change_player, this, false),
+	 &Event_Allow_Building_Option_Menu::clicked_change_player, *this, false),
 m_increment_player
 	(this,
 	 get_inner_w() - 1 * (spacing + 20), m_label_player.get_y(), 20, 20,
 	 0,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
-	 &Event_Allow_Building_Option_Menu::clicked_change_player, this, true),
+	 &Event_Allow_Building_Option_Menu::clicked_change_player, *this, true),
 m_label_building
 	(this,
 	 spacing, m_label_player.get_y() + m_label_player.get_h() + spacing,
@@ -104,13 +104,13 @@ m_decrement_building
 	 get_inner_w() - 2 * (spacing + 20), m_label_building.get_y(), button_size,
 	 0,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_left.png"),
-	 &Event_Allow_Building_Option_Menu::clicked_decrement_building, this),
+	 &Event_Allow_Building_Option_Menu::clicked_decrement_building, *this),
 m_increment_building
 	(this,
 	 get_inner_w() - 1 * (spacing + 20), m_label_building.get_y(), button_size,
 	 0,
 	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_right.png"),
-	 &Event_Allow_Building_Option_Menu::clicked_increment_building, this),
+	 &Event_Allow_Building_Option_Menu::clicked_increment_building, *this),
 m_label_allow
 	(this,
 	 spacing,
@@ -124,14 +124,14 @@ m_button_ok
 	 m_label_allow.get_y() + m_label_allow.get_h() + spacing,
 	 3 * button_width, button_height,
 	 0,
-	 &Event_Allow_Building_Option_Menu::clicked_ok, this,
+	 &Event_Allow_Building_Option_Menu::clicked_ok, *this,
 	 _("Ok")),
 m_button_cancel
 	(this,
 	 m_button_ok.get_x() + m_button_ok.get_w() + spacing, m_button_ok.get_y(),
 	 3 * button_width, button_height,
 	 1,
-	 &Event_Allow_Building_Option_Menu::end_modal, this, 0,
+	 &Event_Allow_Building_Option_Menu::end_modal, *this, 0,
 	 _("Cancel"))
 {
 	if (m_player == 0)

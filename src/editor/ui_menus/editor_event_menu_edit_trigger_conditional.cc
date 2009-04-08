@@ -67,115 +67,115 @@ m_event_chain(chain)
 
 	posy = 35;
 
-	new UI::IDButton
+	new UI::Callback_IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
 		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
-		 this, Widelands::TriggerConditional_Factory::LPAREN,
+		 *this, Widelands::TriggerConditional_Factory::LPAREN,
 		 _("("));
 
 	posy += 20 + spacing;
 
-	new UI::IDButton
+	new UI::Callback_IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
 		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
-		 this, Widelands::TriggerConditional_Factory::RPAREN,
+		 *this, Widelands::TriggerConditional_Factory::RPAREN,
 		 _(")"));
 
 	posy += 20 + spacing;
 
-	new UI::IDButton
+	new UI::Callback_IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
 		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
-		 this, Widelands::TriggerConditional_Factory::AND,
+		 *this, Widelands::TriggerConditional_Factory::AND,
 		 _("AND"));
 
 	posy += 20 + spacing;
 
-	new UI::IDButton
+	new UI::Callback_IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
 		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
-		 this, Widelands::TriggerConditional_Factory::OR,
+		 *this, Widelands::TriggerConditional_Factory::OR,
 		 _("OR"));
 
 	posy += 20 + spacing;
 
-	new UI::IDButton
+	new UI::Callback_IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
 		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
-		 this, Widelands::TriggerConditional_Factory::XOR,
+		 *this, Widelands::TriggerConditional_Factory::XOR,
 		 _("XOR"));
 
 	posy += 20 + spacing;
 
-	new UI::IDButton
+	new UI::Callback_IDButton
 		<Editor_Event_Menu_Edit_TriggerConditional,
 		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
-		 this, Widelands::TriggerConditional_Factory::NOT,
+		 *this, Widelands::TriggerConditional_Factory::NOT,
 		 _("NOT"));
 
 	posy += 20 + spacing + spacing;
 
-	m_insert_btn = new UI::Button<Editor_Event_Menu_Edit_TriggerConditional>
+	m_insert_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
-		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_ins_trigger, this,
+		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_ins_trigger, *this,
 		 _("<-"),
 		 _("Insert"),
 		 false);
 
 	posy += 20 + spacing + spacing;
 
-	m_delete_btn = new UI::Button<Editor_Event_Menu_Edit_TriggerConditional>
+	m_delete_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
-		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_del_trigger, this,
+		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_del_trigger, *this,
 		 _("Delete"),
 		 std::string(),
 		 false);
 
 	posy += 20 + spacing + spacing + spacing;
 
-	m_mvup_btn = new UI::Button<Editor_Event_Menu_Edit_TriggerConditional>
+	m_mvup_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
 		 posx + 5, posy, 24, 24,
 		 0,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_move_up, this,
+		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_move_up, *this,
 		 std::string(),
 		 false);
 
-	m_mvdown_btn = new UI::Button<Editor_Event_Menu_Edit_TriggerConditional>
+	m_mvdown_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
 		 posx + 51, posy, 24, 24,
 		 0,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_move_down, this,
+		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_move_down, *this,
 		 std::string(),
 		 false);
 
@@ -201,20 +201,20 @@ m_event_chain(chain)
 	posy = get_inner_h() - 30;
 	posx = get_inner_w() / 2 - 80 - spacing;
 
-	new UI::Button<Editor_Event_Menu_Edit_TriggerConditional>
+	new UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
-		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_ok, this,
+		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_ok, *this,
 		 _("Ok"));
 
 	posx = get_inner_w() / 2 + spacing;
 
-	new UI::IDButton<Editor_Event_Menu_Edit_TriggerConditional, int32_t>
+	new UI::Callback_IDButton<Editor_Event_Menu_Edit_TriggerConditional, int32_t>
 		(this,
 		 posx, posy, 80, 20,
 		 1,
-		 &Editor_Event_Menu_Edit_TriggerConditional::end_modal, this, 0,
+		 &Editor_Event_Menu_Edit_TriggerConditional::end_modal, *this, 0,
 		 _("Cancel"));
 
 	if (cond) { //  add conditional

@@ -35,7 +35,7 @@ struct Editor_Interactive;
 namespace UI {
 struct Textarea;
 struct EditBox;
-template <typename T, typename ID> struct IDButton;
+template <typename T, typename ID> struct Callback_IDButton;
 };
 
 struct Editor_Player_Menu : public UI::UniqueWindow {
@@ -47,9 +47,9 @@ private:
 	UI::UniqueWindow::Registry m_allow_buildings_menu;
 	UI::Textarea * m_nr_of_players_ta;
 	UI::EditBox * m_plr_names[MAX_PLAYERS];
-	UI::Button<Editor_Player_Menu>
+	UI::Callback_Button<Editor_Player_Menu>
 		m_add_player, m_remove_last_player;
-	UI::IDButton<Editor_Player_Menu, Widelands::Player_Number const>
+	UI::Callback_IDButton<Editor_Player_Menu, Widelands::Player_Number const>
 		//* m_plr_allowed_buildings       [MAX_PLAYERS],
 		* m_plr_set_pos_buts            [MAX_PLAYERS],
 		* m_plr_set_tribes_buts         [MAX_PLAYERS];

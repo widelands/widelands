@@ -42,7 +42,7 @@ m_increase
 	 60, 25, 20, 20,
 	 0,
 	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-	 &Editor_Toolsize_Menu::increase_radius, this,
+	 &Editor_Toolsize_Menu::increase_radius, *this,
 	 std::string(),
 	 parent->get_sel_radius() < MAX_TOOL_AREA),
 m_decrease
@@ -50,7 +50,7 @@ m_decrease
 	 80, 25, 20, 20,
 	 0,
 	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-	 &Editor_Toolsize_Menu::decrease_radius, this,
+	 &Editor_Toolsize_Menu::decrease_radius, *this,
 	 std::string(),
 	 0 < parent->get_sel_radius())
 {

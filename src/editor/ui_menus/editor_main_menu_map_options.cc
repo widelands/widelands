@@ -31,21 +31,39 @@
 
 #include <cstdio>
 
+inline Editor_Interactive & Main_Menu_Map_Options::eia() {
+	return dynamic_cast<Editor_Interactive &>(*get_parent());
+}
+
+
+Main_Menu_Map_Options::Enable_Set_Origin_Tool_Button::
+Enable_Set_Origin_Tool_Button(Main_Menu_Map_Options & parent)
+	:
+	UI::Button
+		(&parent,
+		 5, parent.get_inner_h() - 25, parent.get_inner_w() - 10, 20,
+		 0,
+		 _("Set origin"),
+		 _
+		 	("Set the position that will have the coordinates (0, 0). This will "
+		 	 "be the top-left corner of a generated minimap."))
+{}
+
+
 /**
  * Create all the buttons etc...
 */
-Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive *parent)
+Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 	:
-UI::Window
-	(parent,
-	 (parent->get_w() - 200) / 2, (parent->get_h() - 300) / 2, 200, 300,
-	 _("Map Options")),
-
-m_parent(parent) //  FIXME redundant (base stores parent pointer)
+	UI::Window
+		(&parent,
+		 (parent.get_w() - 200) / 2, (parent.get_h() - 300) / 2, 200, 305,
+		 _("Map Options")),
+	m_enable_set_origin_tool(*this)
 {
 
 	int32_t const offsx   =  5;
-	int32_t const offsy   = 30;
+	int32_t const offsy   =  5;
 	int32_t const spacing =  3;
 	int32_t const height  = 20;
 	int32_t       posx    = offsx;
@@ -88,7 +106,7 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 	m_descr = new UI::Multiline_Editbox
 		(this,
 		 posx, posy,
-		 get_inner_w() - spacing - posx, get_inner_h() - spacing - posy,
+		 get_inner_w() - spacing - posx, get_inner_h() - 25 - spacing - posy,
 		 _("Nothing defined!"));
 	m_descr->changed.set(this, &Main_Menu_Map_Options::editbox_changed);
 	update();
@@ -99,7 +117,7 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
  * set values
 */
 void Main_Menu_Map_Options::update() {
-	Widelands::Map const & map = m_parent->egbase().map();
+	Widelands::Map const & map = eia().egbase().map();
 
 	char buf[200];
 	sprintf(buf, "%ix%i", map.get_width(), map.get_height());
@@ -112,19 +130,15 @@ void Main_Menu_Map_Options::update() {
 	m_descr ->set_text(map.get_description());
 }
 
-/**
- * Unregister from the registry pointer
-*/
-Main_Menu_Map_Options::~Main_Menu_Map_Options() {}
 
 /**
  * Called when one of the editboxes are changed
 */
 void Main_Menu_Map_Options::changed(int32_t const id) {
 	if        (id == 0) {
-		m_parent->egbase().map().set_name(m_name->text().c_str());
+		eia().egbase().map().set_name(m_name->text().c_str());
 	} else if (id == 1) {
-		m_parent->egbase().map().set_author(m_author->text().c_str());
+		eia().egbase().map().set_author(m_author->text().c_str());
 		g_options.pull_section("global").set_string
 			("realname", m_author->text());
 	}
@@ -134,5 +148,13 @@ void Main_Menu_Map_Options::changed(int32_t const id) {
 /**
  * Called when the editbox has changed
  */
-void Main_Menu_Map_Options::editbox_changed()
-{m_parent->egbase().map().set_description(m_descr->get_text().c_str());}
+void Main_Menu_Map_Options::editbox_changed() {
+	eia().egbase().map().set_description(m_descr->get_text().c_str());
+}
+
+
+void Main_Menu_Map_Options::Enable_Set_Origin_Tool_Button::clicked() const {
+	Editor_Interactive & eia =
+		dynamic_cast<Main_Menu_Map_Options &>(*get_parent()).eia();
+	eia.select_tool(eia.tools.set_origin, Editor_Tool::First);
+}

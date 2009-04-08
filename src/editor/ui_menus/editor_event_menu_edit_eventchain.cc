@@ -78,62 +78,62 @@ m_event_chain(chain)
 
 	pos.y = 75;
 
-	new UI::Button<Editor_Event_Menu_Edit_EventChain>
+	new UI::Callback_Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
 		 pos.x, pos.y, 80, 20,
 		 0,
 		 &Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional,
-		 this,
+		 *this,
 		 _("Conditional"));
 
 	pos.y += 20 + spacing + spacing;
 
-	new UI::Button<Editor_Event_Menu_Edit_EventChain>
+	new UI::Callback_Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
 		 pos.x, pos.y, 80, 20,
 		 0,
-		 &Editor_Event_Menu_Edit_EventChain::clicked_new_event, this,
+		 &Editor_Event_Menu_Edit_EventChain::clicked_new_event, *this,
 		 _("New Event"));
 
 	pos.y += 20 + spacing + spacing;
 
-	m_insert_btn = new UI::Button<Editor_Event_Menu_Edit_EventChain>
+	m_insert_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
 		 pos.x, pos.y, 80, 20,
 		 0,
-		 &Editor_Event_Menu_Edit_EventChain::clicked_ins_event, this,
+		 &Editor_Event_Menu_Edit_EventChain::clicked_ins_event, *this,
 		 "<-",
 		 _("Insert"),
 		 false);
 
 	pos.y += 20 + spacing + spacing;
 
-	m_delete_btn = new UI::Button<Editor_Event_Menu_Edit_EventChain>
+	m_delete_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
 		 pos.x, pos.y, 80, 20,
 		 0,
-		 &Editor_Event_Menu_Edit_EventChain::clicked_del_event, this,
+		 &Editor_Event_Menu_Edit_EventChain::clicked_del_event, *this,
 		 _("Delete"),
 		 std::string(),
 		 false);
 
 	pos.y += 20 + spacing + spacing + spacing;
 
-	m_mvup_btn = new UI::Button<Editor_Event_Menu_Edit_EventChain>
+	m_mvup_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
 		 pos.x + 5, pos.y, 24, 24,
 		 0,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-		 &Editor_Event_Menu_Edit_EventChain::clicked_move_up, this,
+		 &Editor_Event_Menu_Edit_EventChain::clicked_move_up, *this,
 		 _("Up"),
 		 false);
 
-	m_mvdown_btn = new UI::Button<Editor_Event_Menu_Edit_EventChain>
+	m_mvdown_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
 		 pos.x + 51, pos.y, 24, 24,
 		 0,
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-		 &Editor_Event_Menu_Edit_EventChain::clicked_move_down, this,
+		 &Editor_Event_Menu_Edit_EventChain::clicked_move_down, *this,
 		 std::string(),
 		 false);
 
@@ -157,20 +157,20 @@ m_event_chain(chain)
 
 	pos = Point(get_inner_w() / 2 - 80 - spacing, get_inner_h() - 30);
 
-	new UI::Button<Editor_Event_Menu_Edit_EventChain>
+	new UI::Callback_Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
 		 pos.x, pos.y, 80, 20,
 		 0,
-		 &Editor_Event_Menu_Edit_EventChain::clicked_ok, this,
+		 &Editor_Event_Menu_Edit_EventChain::clicked_ok, *this,
 		 _("Ok"));
 
 	pos.x = get_inner_w() / 2 + spacing;
 
-	new UI::IDButton<Editor_Event_Menu_Edit_EventChain, int32_t>
+	new UI::Callback_IDButton<Editor_Event_Menu_Edit_EventChain, int32_t>
 		(this,
 		 pos.x, pos.y, 80, 20,
 		 1,
-		 &Editor_Event_Menu_Edit_EventChain::end_modal, this, 0,
+		 &Editor_Event_Menu_Edit_EventChain::end_modal, *this, 0,
 		 _("Cancel"));
 
 	for (uint32_t i = 0; i < m_event_chain.get_nr_events(); ++i) {

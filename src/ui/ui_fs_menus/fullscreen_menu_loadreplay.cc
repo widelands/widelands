@@ -46,14 +46,14 @@ m_back
 	(this,
 	 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
 	 0,
-	 &Fullscreen_Menu_LoadReplay::end_modal, this, 0,
+	 &Fullscreen_Menu_LoadReplay::end_modal, *this, 0,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs),
 m_ok
 	(this,
 	 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
 	 2,
-	 &Fullscreen_Menu_LoadReplay::clicked_ok, this,
+	 &Fullscreen_Menu_LoadReplay::clicked_ok, *this,
 	 _("OK"), std::string(), false, false,
 	 m_fn, m_fs),
 
