@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3780\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:33+0000\n"
+"POT-Creation-Date: 2009-04-08 17:02+0000\n"
 "PO-Revision-Date: 2007-03-24 05:51+0200\n"
 "Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
 "Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
@@ -16,117 +16,6 @@ msgstr ""
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-SourceCharset: utf-8\n"
-
-#: ../../../worlds/desert/bobs/bunny/conf:1
-msgid "Bunny"
-msgstr "Jänis"
-
-#: ../../../worlds/desert/bobs/bush1/conf:1
-#: ../../../worlds/desert/bobs/bush4/conf:1
-#: ../../../worlds/desert/bobs/bush5/conf:1
-msgid "Bush"
-msgstr "Puska"
-
-#: ../../../worlds/desert/bobs/cactus1/conf:1
-#: ../../../worlds/desert/bobs/cactus2/conf:1
-#: ../../../worlds/desert/bobs/cactus3/conf:1
-#: ../../../worlds/desert/bobs/cactus4/conf:1
-msgid "Cactus"
-msgstr "Kaktus"
-
-#: ../../../worlds/desert/bobs/deadtree1/conf:1
-#: ../../../worlds/desert/bobs/deadtree2/conf:1
-#: ../../../worlds/desert/bobs/deadtree3/conf:1
-#: ../../../worlds/desert/bobs/deadtree4/conf:1
-msgid "Dead Tree"
-msgstr "Kuollut puu"
-
-#: ../../../worlds/desert/bobs/deer/conf:1
-msgid "Deer"
-msgstr "Peura"
-
-#: ../../../worlds/desert/bobs/duck/conf:1
-msgid "Duck"
-msgstr "Ankka"
-
-#: ../../../worlds/desert/bobs/fox/conf:1
-msgid "Fox"
-msgstr "Kettu"
-
-#: ../../../worlds/desert/bobs/grass1/conf:1
-#: ../../../worlds/desert/bobs/grass2/conf:1
-#: ../../../worlds/desert/bobs/grass3/conf:1
-msgid "Grass"
-msgstr "Ruohoa"
-
-#: ../../../worlds/desert/bobs/mushroom1/conf:1
-#: ../../../worlds/desert/bobs/mushroom2/conf:1
-msgid "Mushroom"
-msgstr "Sieni"
-
-#: ../../../worlds/desert/bobs/pebble1/conf:1
-#: ../../../worlds/desert/bobs/pebble2/conf:1
-#: ../../../worlds/desert/bobs/pebble3/conf:1
-#: ../../../worlds/desert/bobs/pebble4/conf:1
-#: ../../../worlds/desert/bobs/pebble5/conf:1
-#: ../../../worlds/desert/bobs/pebble6/conf:1
-msgid "Pebble"
-msgstr "Sora"
-
-#: ../../../worlds/desert/bobs/ruin1/conf:1
-#: ../../../worlds/desert/bobs/ruin2/conf:1
-#: ../../../worlds/desert/bobs/ruin3/conf:1
-#: ../../../worlds/desert/bobs/ruin4/conf:1
-#: ../../../worlds/desert/bobs/ruin5/conf:1
-msgid "ruins"
-msgstr "rauniot"
-
-#: ../../../worlds/desert/bobs/sheep/conf:1
-msgid "Sheep"
-msgstr "Lammas"
-
-#: ../../../worlds/desert/bobs/skeleton1/conf:1
-#: ../../../worlds/desert/bobs/skeleton2/conf:1
-#: ../../../worlds/desert/bobs/skeleton3/conf:1
-msgid "Skeleton"
-msgstr "Luuranko"
-
-#: ../../../worlds/desert/bobs/skeleton4/conf:1
-msgid "Shell"
-msgstr "Kuori"
-
-#: ../../../worlds/desert/bobs/sstones1/conf:1
-#: ../../../worlds/desert/bobs/sstones2/conf:1
-#: ../../../worlds/desert/bobs/sstones3/conf:1
-#: ../../../worlds/desert/bobs/sstones4/conf:1
-#: ../../../worlds/desert/bobs/sstones5/conf:1
-#: ../../../worlds/desert/bobs/sstones6/conf:1
-#: ../../../worlds/desert/bobs/sstones7/conf:1
-msgid "Standing Stones"
-msgstr ""
-
-#: ../../../worlds/desert/bobs/stones1/conf:1
-#: ../../../worlds/desert/bobs/stones2/conf:1
-#: ../../../worlds/desert/bobs/stones3/conf:1
-#: ../../../worlds/desert/bobs/stones4/conf:1
-#: ../../../worlds/desert/bobs/stones5/conf:1
-#: ../../../worlds/desert/bobs/stones6/conf:1
-msgid "Stones"
-msgstr "Kiviä"
-
-#: ../../../worlds/desert/bobs/tree1/conf:5
-#: ../../../worlds/desert/bobs/tree2/conf:5
-#: ../../../worlds/desert/bobs/tree3/conf:5
-#: ../../../worlds/desert/bobs/tree4/conf:5
-#: ../../../worlds/desert/bobs/tree5/conf:5
-msgid "Palm"
-msgstr "Palmu"
-
-#: ../../../worlds/desert/bobs/tree6/conf:5
-#: ../../../worlds/desert/bobs/tree7/conf:4
-#: ../../../worlds/desert/bobs/tree8/conf:4
-msgid "Tree"
-msgstr "Puu"
 
 #: ../../../worlds/desert/conf:2
 msgid "The Widelands Development Team"
@@ -139,6 +28,157 @@ msgstr "Aavikko"
 #: ../../../worlds/desert/conf:4
 msgid "This is the wide and sandy country of the bedouins"
 msgstr ""
+
+#: ../../../worlds/desert/conf:7 ../../../worlds/desert/conf:8
+#: ../../../worlds/desert/conf:9
+msgid "Bush"
+msgstr "Puska"
+
+#: ../../../worlds/desert/conf:10 ../../../worlds/desert/conf:11
+#: ../../../worlds/desert/conf:12 ../../../worlds/desert/conf:13
+msgid "Cactus"
+msgstr "Kaktus"
+
+#: ../../../worlds/desert/conf:14 ../../../worlds/desert/conf:15
+#: ../../../worlds/desert/conf:16 ../../../worlds/desert/conf:17
+msgid "Dead Tree"
+msgstr "Kuollut puu"
+
+#: ../../../worlds/desert/conf:18 ../../../worlds/desert/conf:19
+#: ../../../worlds/desert/conf:20
+msgid "Grass"
+msgstr "Ruohoa"
+
+#: ../../../worlds/desert/conf:21 ../../../worlds/desert/conf:22
+msgid "Mushroom"
+msgstr "Sieni"
+
+#: ../../../worlds/desert/conf:23 ../../../worlds/desert/conf:24
+#: ../../../worlds/desert/conf:25 ../../../worlds/desert/conf:26
+#: ../../../worlds/desert/conf:27 ../../../worlds/desert/conf:28
+msgid "Pebble"
+msgstr "Sora"
+
+#: ../../../worlds/desert/conf:29 ../../../worlds/desert/conf:30
+#: ../../../worlds/desert/conf:31 ../../../worlds/desert/conf:32
+#: ../../../worlds/desert/conf:33
+msgid "ruins"
+msgstr "rauniot"
+
+#: ../../../worlds/desert/conf:34 ../../../worlds/desert/conf:35
+#: ../../../worlds/desert/conf:36
+msgid "Skeleton"
+msgstr "Luuranko"
+
+#: ../../../worlds/desert/conf:37
+msgid "Shell"
+msgstr "Kuori"
+
+#: ../../../worlds/desert/conf:38 ../../../worlds/desert/conf:39
+#: ../../../worlds/desert/conf:40 ../../../worlds/desert/conf:41
+#: ../../../worlds/desert/conf:42 ../../../worlds/desert/conf:43
+#: ../../../worlds/desert/conf:44
+msgid "Standing Stones"
+msgstr ""
+
+#: ../../../worlds/desert/conf:45 ../../../worlds/desert/conf:46
+#: ../../../worlds/desert/conf:47 ../../../worlds/desert/conf:48
+#: ../../../worlds/desert/conf:49 ../../../worlds/desert/conf:50
+msgid "Stones"
+msgstr "Kiviä"
+
+#: ../../../worlds/desert/conf:51 ../../../worlds/desert/conf:55
+#: ../../../worlds/desert/conf:59 ../../../worlds/desert/conf:63
+#: ../../../worlds/desert/conf:67
+msgid "Palm"
+msgstr "Palmu"
+
+#: ../../../worlds/desert/conf:52 ../../../worlds/desert/conf:56
+#: ../../../worlds/desert/conf:60 ../../../worlds/desert/conf:64
+#: ../../../worlds/desert/conf:68
+msgid "Palm medium"
+msgstr ""
+
+#: ../../../worlds/desert/conf:53 ../../../worlds/desert/conf:57
+#: ../../../worlds/desert/conf:61 ../../../worlds/desert/conf:65
+#: ../../../worlds/desert/conf:69
+msgid "Palm small"
+msgstr ""
+
+#: ../../../worlds/desert/conf:54 ../../../worlds/desert/conf:58
+#: ../../../worlds/desert/conf:62 ../../../worlds/desert/conf:66
+#: ../../../worlds/desert/conf:70
+#, fuzzy
+msgid "Palm tiny"
+msgstr "Palmu"
+
+#: ../../../worlds/desert/conf:71
+msgid "Beech"
+msgstr ""
+
+#: ../../../worlds/desert/conf:72
+msgid "Beech medium"
+msgstr ""
+
+#: ../../../worlds/desert/conf:73
+msgid "Beech small"
+msgstr ""
+
+#: ../../../worlds/desert/conf:74
+msgid "Beech tiny"
+msgstr ""
+
+#: ../../../worlds/desert/conf:75
+msgid "Larch"
+msgstr ""
+
+#: ../../../worlds/desert/conf:76
+msgid "Larch medium"
+msgstr ""
+
+#: ../../../worlds/desert/conf:77
+msgid "Larch small"
+msgstr ""
+
+#: ../../../worlds/desert/conf:78
+msgid "Larch tiny"
+msgstr ""
+
+#: ../../../worlds/desert/conf:79
+msgid "Rowan"
+msgstr ""
+
+#: ../../../worlds/desert/conf:80
+msgid "Rowan medium"
+msgstr ""
+
+#: ../../../worlds/desert/conf:81
+msgid "Rowan small"
+msgstr ""
+
+#: ../../../worlds/desert/conf:82
+msgid "Rowan tiny"
+msgstr ""
+
+#: ../../../worlds/desert/conf:85
+msgid "Bunny"
+msgstr "Jänis"
+
+#: ../../../worlds/desert/conf:86
+msgid "Deer"
+msgstr "Peura"
+
+#: ../../../worlds/desert/conf:87
+msgid "Duck"
+msgstr "Ankka"
+
+#: ../../../worlds/desert/conf:88
+msgid "Fox"
+msgstr "Kettu"
+
+#: ../../../worlds/desert/conf:89
+msgid "Sheep"
+msgstr "Lammas"
 
 #: ../../../worlds/desert/resconf:4
 msgid "Coal"
@@ -163,6 +203,9 @@ msgstr "Vesi"
 #: ../../../worlds/desert/resconf:41
 msgid "Fish"
 msgstr "Kala"
+
+#~ msgid "Tree"
+#~ msgstr "Puu"
 
 #~ msgid "Desert Fox"
 #~ msgstr "Aavikkokettu"

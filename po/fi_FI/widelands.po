@@ -1,138 +1,780 @@
 # Widelands po/fi_FI/widelands.po
 # Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn3780\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 18:33+0100\n"
-"PO-Revision-Date: 2007-03-24 06:30+0200\n"
-"Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
-"Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"POT-Creation-Date: 2009-04-08 19:02+0200\n"
+"PO-Revision-Date: 2009-04-06 16:01+0300\n"
+"Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
+"Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2 plural=(n!=1)\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../../src/ware_statistics_menu.cc:355 ../../src/game_main_menu.cc:54
-msgid "Ware Statistics"
+#: ../../src/editor_game_base.cc:582 ../../src/editor/editorinteractive.cc:179
+msgid "Loading world data"
+msgstr "Lataan maailma-asetuksia"
+
+#: ../../src/editor_game_base.cc:586
+#, c-format
+msgid "Loading tribe: %s"
+msgstr "Lataan heimoa: %s"
+
+#: ../../src/graphic.cc:637
+#, c-format
+msgid "Loading animations: %d%% complete"
+msgstr "Lataan animaatioita:  %d%% valmis"
+
+#: ../../src/writeHTML.cc:38
+msgid "Requesters"
+msgstr "Tilaajat"
+
+#: ../../src/writeHTML.cc:53
+msgid "Providers"
+msgstr "Tuottajat"
+
+#: ../../src/writeHTML.cc:68
+msgid "Successors"
+msgstr "Seuraajat"
+
+#: ../../src/writeHTML.cc:83
+msgid "Predecessors"
+msgstr "Edeltäjät"
+
+#: ../../src/writeHTML.cc:98
+msgid "Employers"
+msgstr "Työnantajat"
+
+#: ../../src/writeHTML.cc:254 ../../src/writeHTML.cc:260
+msgid "Building types"
+msgstr "Rakennustyypit"
+
+#: ../../src/writeHTML.cc:265 ../../src/writeHTML.cc:498
+#: ../../src/writeHTML.cc:1264
+msgid "Icon"
+msgstr "Kuvake"
+
+#: ../../src/writeHTML.cc:267 ../../src/writeHTML.cc:500
+#: ../../src/writeHTML.cc:1266 ../../src/building_statistics_menu.cc:111
+#: ../../src/building_ui.cc:1583 ../../src/building_ui.cc:1804
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:76
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:164
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:163
+msgid "Name"
+msgstr "Nimi"
+
+#: ../../src/writeHTML.cc:269 ../../src/building_statistics_menu.cc:112
+msgid "Size"
+msgstr "Koko"
+
+#: ../../src/writeHTML.cc:271 ../../src/writeHTML.cc:502
+msgid "Buildable"
+msgstr "Rakennettavissa"
+
+#: ../../src/writeHTML.cc:273
+msgid "Enhanced"
+msgstr "Paranneltu"
+
+#: ../../src/writeHTML.cc:276 ../../src/building_ui.cc:611
+msgid "Stop"
+msgstr "Pysäytä"
+
+#: ../../src/writeHTML.cc:278
+msgid "Conquer<br/>range"
+msgstr "Valtaus-<br/>alue"
+
+#: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:504
+msgid "Vision<br/>range"
+msgstr "Näkymän<br/>laajuus"
+
+#: ../../src/writeHTML.cc:305 ../../src/writeHTML.cc:361
+#: ../../src/building.cc:500
+msgid "Mine"
+msgstr "Kaivos"
+
+#: ../../src/writeHTML.cc:309 ../../src/writeHTML.cc:377
+#: ../../src/building.cc:501
+msgid "Small"
+msgstr "Pieni"
+
+#: ../../src/writeHTML.cc:313 ../../src/writeHTML.cc:371
+#: ../../src/building.cc:502
+msgid "Medium"
+msgstr "Keskik."
+
+#: ../../src/writeHTML.cc:318 ../../src/writeHTML.cc:366
+#: ../../src/building.cc:502
+msgid "Big"
+msgstr "Suuri"
+
+#: ../../src/writeHTML.cc:322 ../../src/writeHTML.cc:325
+#: ../../src/writeHTML.cc:532 ../../src/ui/ui_basic/ui_messagebox.cc:92
+#: ../../src/editor/tools/editor_info_tool.cc:75
+#: ../../src/editor/tools/editor_info_tool.cc:76
+msgid "Yes"
+msgstr "Kyllä"
+
+#: ../../src/writeHTML.cc:322 ../../src/writeHTML.cc:325
+#: ../../src/writeHTML.cc:532 ../../src/ui/ui_basic/ui_messagebox.cc:99
+#: ../../src/editor/tools/editor_info_tool.cc:75
+#: ../../src/editor/tools/editor_info_tool.cc:76
+msgid "No"
+msgstr "Ei"
+
+# Ei näin: whut?
+#: ../../src/writeHTML.cc:340
+msgid "building_types.xhtml"
+msgstr "building_types_fi.xhtml"
+
+#: ../../src/writeHTML.cc:363
+msgid "Is mine."
+msgstr "On kaivos."
+
+#: ../../src/writeHTML.cc:368
+msgid "Is big."
+msgstr "On suuri."
+
+#: ../../src/writeHTML.cc:373
+msgid "Is medium."
+msgstr "On keskikokoinen."
+
+#: ../../src/writeHTML.cc:379
+msgid "Is small."
+msgstr "On pieni."
+
+#: ../../src/writeHTML.cc:386
+msgid "Is not buildable."
+msgstr "Ei ole rakennettavissa."
+
+#: ../../src/writeHTML.cc:393
+msgid "Is enhanced."
+msgstr "On paranneltu."
+
+#: ../../src/writeHTML.cc:400
+#, c-format
+msgid "Conquer range is %u."
+msgstr "Valloitusalue on %u."
+
+#: ../../src/writeHTML.cc:408 ../../src/writeHTML.cc:640
+#, c-format
+msgid "Vision range is %u."
+msgstr "Näkymän laajuus on %u."
+
+#: ../../src/writeHTML.cc:416 ../../src/writeHTML.cc:646
+msgid "Build cost"
+msgstr "Rakennuskustannukset"
+
+# Ei näin: genetiivi
+#: ../../src/writeHTML.cc:426
+msgid "'s constructionsite"
+msgstr ": rakennustyömaa"
+
+#: ../../src/writeHTML.cc:437
+msgid "Enhancements"
+msgstr "Parannukset"
+
+#: ../../src/writeHTML.cc:447
+msgid "'s enhancement"
+msgstr ": parannus"
+
+#: ../../src/writeHTML.cc:487 ../../src/writeHTML.cc:493
+msgid "Worker types"
+msgstr "Työläisten tyypit"
+
+#: ../../src/writeHTML.cc:506
+msgid "Minimum<br/>needed<br/>experience"
+msgstr "Pienin<br/>tarvittu</br>kokemus"
+
+#: ../../src/writeHTML.cc:508
+msgid "Maximum<br/>needed<br/>experience"
+msgstr "Suurin<br/>vaadittu<br/>kokemus"
+
+#: ../../src/writeHTML.cc:510
+msgid "Becomes"
+msgstr "Tulee"
+
+# Ei näin: whut
+#: ../../src/writeHTML.cc:568
+msgid "worker_types.xhtml"
+msgstr "worker_types_fi.xhtml"
+
+#: ../../src/writeHTML.cc:575
+msgid "Combat Properties"
+msgstr "Taisteluominaisuudet"
+
+#: ../../src/writeHTML.cc:582
+#, c-format
+msgid "Hitpoints is between %u and %u, plus %u for each level above 0 (maximum level is %u)."
+msgstr "Voimapisteitä välillä %u - %u, + %u jokaista nollan yläpuolella olevaa tasoa kohti (korkein taso on %u)."
+
+#: ../../src/writeHTML.cc:592
+#, c-format
+msgid "Attack is between %u and %u, plus %u for each level above 0 (maximum level is %u)."
+msgstr "Hyökkäysvoima on välilä %u - %u, + %u jokaista nollan yläpuolella olevaa tasoa kohti (korkein taso on %u)."
+
+#: ../../src/writeHTML.cc:602
+#, c-format
+msgid "Defense is %u, plus %u for each level above 0 (maximum level is %u)."
+msgstr "Puolustusvoima on %u, + %u jokaista nollan yläpuolella olevaa tasoa kohti (korkein taso on %u)."
+
+#: ../../src/writeHTML.cc:612
+#, c-format
+msgid "Evade is %u, plus %u for each level above 0 (maximum level is %u)."
+msgstr "Välttökyky on %u, + %u jokaista nollan yläpuolella olevaa tasoa kohti (korkein taso on %u)."
+
+#: ../../src/writeHTML.cc:657 ../../src/writeHTML.cc:667
+msgid "'s creation"
+msgstr ": luonti"
+
+#: ../../src/writeHTML.cc:681
+#, c-format
+msgid "Needs experience from working between %u and %u times to become"
+msgstr "Tarvitsee %u - %u onnistunutta työkierrosta noustakseen seuraavalle tasolle, joka on "
+
+#: ../../src/writeHTML.cc:689
+msgid "'s promotion"
+msgstr ": korotus"
+
+#: ../../src/writeHTML.cc:699 ../../src/writeHTML.cc:827
+msgid "Programs"
+msgstr "Ohjelmat"
+
+# TODO: need trans comment to not translate
+#: ../../src/writeHTML.cc:736 ../../src/writeHTML.cc:1143
+#: ../../src/building.cc:495
+msgid "mine"
 msgstr ""
 
-#: ../../src/ware_statistics_menu.cc:427
+#: ../../src/writeHTML.cc:737
+msgid "breed"
+msgstr ""
+
+#: ../../src/writeHTML.cc:738
+msgid "createitem"
+msgstr ""
+
+#: ../../src/writeHTML.cc:739
+msgid "setdescription"
+msgstr ""
+
+#: ../../src/writeHTML.cc:740
+msgid "setbobdescription"
+msgstr ""
+
+#: ../../src/writeHTML.cc:741
+msgid "findobject"
+msgstr ""
+
+#: ../../src/writeHTML.cc:742
+msgid "findspace"
+msgstr ""
+
+#: ../../src/writeHTML.cc:743
+msgid "walk"
+msgstr ""
+
+#: ../../src/writeHTML.cc:744
+msgid "animation"
+msgstr ""
+
+#: ../../src/writeHTML.cc:745 ../../src/writeHTML.cc:867
+msgid "return"
+msgstr ""
+
+#: ../../src/writeHTML.cc:746
+msgid "object"
+msgstr ""
+
+#: ../../src/writeHTML.cc:747
+msgid "plant"
+msgstr ""
+
+#: ../../src/writeHTML.cc:748
+msgid "create_bob"
+msgstr ""
+
+#: ../../src/writeHTML.cc:749
+msgid "removeobject"
+msgstr ""
+
+#: ../../src/writeHTML.cc:750
+msgid "geologist"
+msgstr ""
+
+#: ../../src/writeHTML.cc:751
+msgid "geologist_find"
+msgstr ""
+
+#: ../../src/writeHTML.cc:752 ../../src/writeHTML.cc:1218
+msgid "playFX"
+msgstr ""
+
+#: ../../src/writeHTML.cc:753
+msgid "UNKNOWN"
+msgstr ""
+
+#: ../../src/writeHTML.cc:760
+msgid "Production"
+msgstr "Tuotanto"
+
+#: ../../src/writeHTML.cc:764 ../../src/general_statistics_menu.cc:152
+msgid "Workers"
+msgstr "Työläislista"
+
+#: ../../src/writeHTML.cc:774
+msgid "'s employee"
+msgstr ": työläinen"
+
+#: ../../src/writeHTML.cc:784
+msgid "Inputs"
+msgstr "Raaka-aineet"
+
+#: ../../src/writeHTML.cc:794
+msgid "'s input"
+msgstr ": raaka-aineet"
+
+#: ../../src/writeHTML.cc:806
+msgid "Output"
+msgstr "Tuote"
+
+#: ../../src/writeHTML.cc:816
+msgid "'s output"
+msgstr ": tuote"
+
+# Ei näin: whut?
+#: ../../src/writeHTML.cc:863 ../../src/writeHTML.cc:944
+#: ../../src/writeHTML.cc:974 ../../src/writeHTML.cc:1002
+#: ../../src/writeHTML.cc:1022 ../../src/writeHTML.cc:1043
+#: ../../src/writeHTML.cc:1094 ../../src/writeHTML.cc:1139
+#: ../../src/writeHTML.cc:1166 ../../src/writeHTML.cc:1190
+#: ../../src/writeHTML.cc:1214
+msgid "productionsite_program_reference.xhtml"
+msgstr ""
+
+#: ../../src/writeHTML.cc:865
+msgid "Documentation for program command return"
+msgstr "Ohjeistus ohjelmakomennolle 'return'"
+
+# Ei näin: whut?
+#: ../../src/writeHTML.cc:871
+msgid "failed"
+msgstr ""
+
+#: ../../src/writeHTML.cc:872
+msgid "completed"
+msgstr ""
+
+#: ../../src/writeHTML.cc:873
+msgid "skipped"
+msgstr ""
+
+#: ../../src/writeHTML.cc:931
+msgid "workers of this site"
+msgstr ""
+
+#: ../../src/writeHTML.cc:946
+msgid "Documentation for program command call"
+msgstr "Ohjeistus ohjelmakomennolle 'call'"
+
+#: ../../src/writeHTML.cc:948
+msgid "call"
+msgstr ""
+
+#: ../../src/writeHTML.cc:955
+#, c-format
+msgid "site's program %s"
+msgstr ""
+
+#: ../../src/writeHTML.cc:976
+msgid "Documentation for program command worker"
+msgstr "Ohjeistus ohjelmakomennolle 'worker'<"
+
+#: ../../src/writeHTML.cc:978
+msgid "worker"
+msgstr ""
+
+#: ../../src/writeHTML.cc:989
+#, c-format
+msgid "%s's program %s"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1004
+msgid "Documentation for program command sleep"
+msgstr "Ohjeistus ohjelmakomennolle 'sleep'"
+
+#: ../../src/writeHTML.cc:1006
+msgid "sleep"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1012 ../../src/writeHTML.cc:1032
+#, c-format
+msgid " %u.%03u s"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1024
+msgid "Documentation for program command animate"
+msgstr "Ohjeistus ohjelmakomennolle 'animate'"
+
+#: ../../src/writeHTML.cc:1026
+msgid "animate"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1045
+msgid "Documentation for program command consume"
+msgstr "Ohjeistus ohjelmakomennolle 'consume'"
+
+#: ../../src/writeHTML.cc:1047
+msgid "consume"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1096
+msgid "Documentation for program command produce"
+msgstr "Ohjeistus ohjelmakomennolle 'produce'"
+
+#: ../../src/writeHTML.cc:1098
+msgid "produce"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1141
+msgid "Documentation for program command mine"
+msgstr "Ohjeistus ohjelmakomennolle 'mine'"
+
+#: ../../src/writeHTML.cc:1168
+msgid "Documentation for program command check_soldier"
+msgstr "Ohjeistus ohjelmakomennolle 'check_soldier'"
+
+#: ../../src/writeHTML.cc:1170
+msgid "check soldier"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1176 ../../src/writeHTML.cc:1200
+msgid "hp"
+msgstr "vp"
+
+#: ../../src/writeHTML.cc:1177 ../../src/writeHTML.cc:1201
+msgid "attack"
+msgstr "hyökkäys"
+
+#: ../../src/writeHTML.cc:1178 ../../src/writeHTML.cc:1202
+msgid "defense"
+msgstr "puolustus"
+
+#: ../../src/writeHTML.cc:1179 ../../src/writeHTML.cc:1203
+msgid "evade"
+msgstr "välttö"
+
+#: ../../src/writeHTML.cc:1192
+msgid "Documentation for program command train"
+msgstr "Ohjeistus ohjelmakomennolle 'train'"
+
+#: ../../src/writeHTML.cc:1194
+msgid "train"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1216
+msgid "Documentation for program command playFX"
+msgstr "Ohjeistus ohjelmakomennolle 'playFX'"
+
+#: ../../src/writeHTML.cc:1253 ../../src/writeHTML.cc:1259
+msgid "Ware types"
+msgstr "Tavaratyypit"
+
+# Ei näin: whut?
+#: ../../src/writeHTML.cc:1293
+msgid "ware_types.xhtml"
+msgstr ""
+
+#: ../../src/minimap.cc:134
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:117
+msgid "Map"
+msgstr "Kartta"
+
+#: ../../src/minimap.cc:143 ../../src/editor/ui_menus/editor_tool_menu.cc:66
+msgid "Terrain"
+msgstr "Maasto"
+
+#: ../../src/minimap.cc:150
+msgid "Owner"
+msgstr "Omistaja"
+
+#: ../../src/minimap.cc:157
+msgid "Flags"
+msgstr "Liput"
+
+#: ../../src/minimap.cc:164
+msgid "Roads"
+msgstr "Tiet"
+
+#: ../../src/minimap.cc:171 ../../src/general_statistics_menu.cc:158
+msgid "Buildings"
+msgstr "Rakennukset"
+
+#: ../../src/game_objectives_menu.cc:36
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:160
+msgid "Objectives Menu"
+msgstr "Tavoitevalikko"
+
+#: ../../src/constructionsite.cc:188
+#, c-format
+msgid "%u%% built"
+msgstr "%u%% rakennettu"
+
+#: ../../src/netclient.cc:91
+msgid "Could not establish connection to host"
+msgstr "Yhteyttä koneeseen ei voitu muodostaa"
+
+#: ../../src/netclient.cc:93
+#, fuzzy
+msgid ""
+"Widelands could not establish a connection to the given address.\n"
+"Either no Widelands server was running at the supposed port or\n"
+"the server shut down as you tried to connect."
+msgstr ""
+"Widelands ei kyennyt muodostamaan yhteyttä annettuun osoitteeseen.\n"
+"Joko oletetussa portissa ei ole käynnissä Widelands-palvelinta tai\n"
+"palvelin sulkeutui kun yritit ottaa yhteyttä."
+
+#: ../../src/netclient.cc:114
+msgid "Client has left the game."
+msgstr "Asiakasohjelma on poistunut pelistä."
+
+#: ../../src/netclient.cc:150 ../../src/wlapplication.cc:1490
+#: ../../src/nethost.cc:347
+msgid "Preparing game"
+msgstr "Valmistelen peliä"
+
+#: ../../src/netclient.cc:185
+msgid "Client crashed and performed an emergency save."
+msgstr "Asiakasohjelma kaatui ja teki hätätallennuksen."
+
+#: ../../src/netclient.cc:371
+msgid "Server sent a player update for a player that does not exist."
+msgstr "Palvelin lähetti pelaajapäivityksen olemattomalle pelaajalle."
+
+#: ../../src/netclient.cc:388
+msgid "Server sent an user update for a user that does not exist."
+msgstr ""
+
+#: ../../src/netclient.cc:464
+#, c-format
+msgid "Expected a HELLO packet from server, but received command number %u. Maybe the server is running a different version of Widelands?"
+msgstr ""
+
+#: ../../src/netclient.cc:470
+msgid "Server uses a different protocol version"
+msgstr ""
+
+#: ../../src/netclient.cc:540
+msgid "Unexpectedly received LAUNCH command from server."
+msgstr ""
+
+#: ../../src/netclient.cc:557
+msgid "Server sent a PLAYERCOMMAND even though no game is running."
+msgstr ""
+
+#: ../../src/netclient.cc:569
+msgid "Server sent a SYNCREQUEST even though no game is running."
+msgstr ""
+
+#: ../../src/netclient.cc:591
+#, c-format
+msgid "Server sent an unknown command (command number %u)"
+msgstr ""
+
+#: ../../src/netclient.cc:620
+msgid "Server sent malformed commands: "
+msgstr ""
+
+#: ../../src/netclient.cc:651
+msgid " An automatic savegame will be created."
+msgstr "Automaattinen pelitallenne luodaan."
+
+#: ../../src/warehouse.cc:290 ../../src/militarysite.cc:64
+msgid " conquer"
+msgstr " valloita"
+
+#: ../../src/general_statistics_menu.cc:52 ../../src/game_main_menu.cc:47
+msgid "General Statistics"
+msgstr "Yleistilastot"
+
+#: ../../src/general_statistics_menu.cc:146
+msgid "Land"
+msgstr "Maa-alue"
+
+#: ../../src/general_statistics_menu.cc:164
+msgid "Wares"
+msgstr "Tuotteet"
+
+#: ../../src/general_statistics_menu.cc:170
+msgid "Productivity"
+msgstr "Tuottavuus"
+
+#: ../../src/general_statistics_menu.cc:176
+msgid "Casualties"
+msgstr "Kuolonuhrit"
+
+#: ../../src/general_statistics_menu.cc:182
+msgid "Kills"
+msgstr "Tapot"
+
+#: ../../src/general_statistics_menu.cc:188
+msgid "Military buildings lost"
+msgstr "Menetetyt sotilasrakennukset"
+
+#: ../../src/general_statistics_menu.cc:194
+msgid "Military buildings defeated"
+msgstr "Voitetut sotilasrakennukset"
+
+#: ../../src/general_statistics_menu.cc:200
+msgid "Civilian buildings lost"
+msgstr "Menetetyt siviilirakennukset"
+
+#: ../../src/general_statistics_menu.cc:206
+msgid "Military"
+msgstr "Armeija"
+
 #: ../../src/general_statistics_menu.cc:224
+#: ../../src/ware_statistics_menu.cc:427
 msgid "15 m"
-msgstr "15 m"
+msgstr "15 min"
 
-#: ../../src/ware_statistics_menu.cc:436
 #: ../../src/general_statistics_menu.cc:233
+#: ../../src/ware_statistics_menu.cc:436
 msgid "30 m"
-msgstr "30 m"
+msgstr "30 min"
 
-#: ../../src/ware_statistics_menu.cc:445
 #: ../../src/general_statistics_menu.cc:242
+#: ../../src/ware_statistics_menu.cc:445
 msgid "1 h"
 msgstr "1 h"
 
-#: ../../src/ware_statistics_menu.cc:454
 #: ../../src/general_statistics_menu.cc:251
+#: ../../src/ware_statistics_menu.cc:454
 msgid "2 h"
 msgstr "2 h"
 
-#: ../../src/ware_statistics_menu.cc:465
 #: ../../src/general_statistics_menu.cc:262
+#: ../../src/ware_statistics_menu.cc:465
 msgid "Help"
-msgstr "Apua"
+msgstr "Ohje"
 
-#: ../../src/ware_statistics_menu.cc:474
 #: ../../src/general_statistics_menu.cc:271
+#: ../../src/ware_statistics_menu.cc:474
 msgid "4 h"
 msgstr "4 h"
 
-#: ../../src/ware_statistics_menu.cc:483
 #: ../../src/general_statistics_menu.cc:279
+#: ../../src/ware_statistics_menu.cc:483
 msgid "8 h"
 msgstr "8 h"
 
-#: ../../src/ware_statistics_menu.cc:492
 #: ../../src/general_statistics_menu.cc:288
+#: ../../src/ware_statistics_menu.cc:492
 msgid "16 h"
 msgstr "16 h"
 
-#: ../../src/interactive_spectator.cc:44
-#: ../../src/editor/editorinteractive.cc:63
-msgid "Menu"
-msgstr "Valikko"
+#: ../../src/militarysite.cc:125
+#, c-format
+msgid "%u soldier"
+msgid_plural "%u soldiers"
+msgstr[0] "%u sotilas"
+msgstr[1] "%u sotilasta"
 
-#: ../../src/interactive_spectator.cc:45 ../../src/interactive_player.cc:162
-#: ../../src/editor/editorinteractive.cc:72
-msgid "Minimap"
-msgstr "Minikartta"
+#: ../../src/militarysite.cc:130
+#, c-format
+msgid "%u(+%u) soldier"
+msgid_plural "%u(+%u) soldiers"
+msgstr[0] "%u(+%u) sotilas"
+msgstr[1] "%u(+%u) sotilasta"
 
-#: ../../src/interactive_player.cc:154
+#: ../../src/building.cc:496 ../../src/editor/tools/editor_info_tool.cc:61
+msgid "small"
+msgstr "pieni"
+
+#: ../../src/building.cc:497 ../../src/editor/tools/editor_info_tool.cc:62
+msgid "medium"
+msgstr "keski"
+
+#: ../../src/building.cc:497 ../../src/editor/tools/editor_info_tool.cc:63
+msgid "big"
+msgstr "iso"
+
+#: ../../src/interactive_player.cc:174 ../../src/interactive_spectator.cc:51
 msgid "Chat"
-msgstr "Viestintä"
+msgstr "Keskustelu"
 
-#: ../../src/interactive_player.cc:156 ../../src/game_options_menu.cc:48
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:51
+#: ../../src/interactive_player.cc:176 ../../src/interactive_spectator.cc:57
+#: ../../src/game_options_menu.cc:42
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:69
 msgid "Options"
 msgstr "Asetukset"
 
-#: ../../src/interactive_player.cc:158
-#, fuzzy
+#: ../../src/interactive_player.cc:178 ../../src/interactive_spectator.cc:59
 msgid "Statistics"
-msgstr "Yleiset statistiikat"
+msgstr "Tilastot"
 
-#: ../../src/interactive_player.cc:160
-#: ../../src/editor/editorinteractive.cc:87
+#: ../../src/interactive_player.cc:180
+#: ../../src/editor/editorinteractive.cc:88
 msgid "Objectives"
-msgstr "Päämäärät"
+msgstr "Tavoitteet"
 
-#: ../../src/interactive_player.cc:164
-#: ../../src/editor/editorinteractive.cc:75
+#: ../../src/interactive_player.cc:182 ../../src/interactive_spectator.cc:61
+#: ../../src/editor/editorinteractive.cc:73
+msgid "Minimap"
+msgstr "Minikartta"
+
+#: ../../src/interactive_player.cc:184
+#: ../../src/editor/editorinteractive.cc:76
 msgid "Buildhelp"
-msgstr "Rakenusapu"
+msgstr "Rakennusapu"
 
-#: ../../src/interactive_player.cc:170
+#: ../../src/interactive_player.cc:190
 msgid "Resource information"
-msgstr ""
+msgstr "Resurssitietoa"
 
-#: ../../src/interactive_player.cc:173
+#: ../../src/interactive_player.cc:193
 msgid "Ware help"
-msgstr ""
+msgstr "Tuoteohje"
 
-#: ../../src/wlapplication.cc:852
+#: ../../src/wlapplication.cc:856
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:855
+#: ../../src/wlapplication.cc:859
 msgid "--double is disabled. This is not a debug build!"
 msgstr ""
 
-#: ../../src/wlapplication.cc:945
-#, fuzzy
+#: ../../src/wlapplication.cc:949
 msgid "This is Widelands-"
-msgstr "Widelands"
+msgstr "Tämä on Widelands-"
 
-#: ../../src/wlapplication.cc:946
+#: ../../src/wlapplication.cc:950
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
+"Käyttö: widelands <asetus0>=<arvo0> ... <asetusN>=<arvoN>\n"
+"\n"
 
-#: ../../src/wlapplication.cc:947
-#, fuzzy
+#: ../../src/wlapplication.cc:951
 msgid ""
 "Options:\n"
 "\n"
-msgstr "Asetukset"
+msgstr ""
+"Asetukset: \n"
+"\n"
 
-#: ../../src/wlapplication.cc:951
+#: ../../src/wlapplication.cc:955
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -142,11 +784,18 @@ msgid ""
 "\n"
 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
 "                      of using the SDL\n"
+" --language=[de_DE|sv_SE|...]\n"
+"                      The locale to use.\n"
+"\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:960
+#: ../../src/wlapplication.cc:966
 msgid ""
+"Sound options:\n"
 " --nosound            Starts the game with sound disabled.\n"
+" --disable_fx         Disable sound effects.\n"
+" --disable_music      Disable music.\n"
+"\n"
 " --nozip              Do not save files as binary zip archives.\n"
 "\n"
 " --editor             Directly starts the Widelands editor.\n"
@@ -155,302 +804,659 @@ msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map.\n"
 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
+" --speed_of_new_game  The speed that the new game will run at\n"
+"                      when started, with factor 1000 (0 is pause,\n"
+"                      1000 is normal speed).\n"
+" --auto_roadbuild_mode=[yes|no]\n"
+"                      Whether to enter roadbuilding mode\n"
+"                      automatically after placing a flag that is\n"
+"                      not connected to a road.\n"
+" --write_HTML=[yes|no]\n"
+"                      Write HTML-helpfiles for parsed game data.\n"
+"\n"
+"Graphic options:\n"
+" --fullscreen=[yes|no]\n"
+"                      Whether to use the whole display for the\n"
+"                      game screen.\n"
+" --depth=[16|32]      Color depth in number of bits per pixel.\n"
+" --xres=[...]         Width of the window in pixel.\n"
+" --yres=[...]         Height of the window in pixel.\n"
+"\n"
+"Options for the internal window manager:\n"
+" --border_snap_distance=[0 ...]\n"
+"                      Move a window to the edge of the screen\n"
+"                      when the edge of the window comes within\n"
+"                      this distance from the edge of the screen.\n"
+" --dock_windows_to_edges=[yes|no]\n"
+"                      Eliminate a window's border towards the\n"
+"                      edge of the screen when the edge of the\n"
+"                      window is next to the edge of the screen.\n"
+" --panel_snap_distance=[0 ...]\n"
+"                      Move a window to the edge of the panel when\n"
+"                      the edge of the window comes within this\n"
+"                      distance from the edge of the panel.\n"
+" --snap_windows_only_when_overlapping=[yes|no]\n"
+"                      Only move a window to the edge of a panel\n"
+"                      if the window is overlapping with the\n"
+"                      panel.\n"
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:973
+#: ../../src/wlapplication.cc:1020
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:977
+#: ../../src/wlapplication.cc:1024
 msgid " --help               Show this help\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:981
+#: ../../src/wlapplication.cc:1028
+#, fuzzy
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        http://www.sourceforge.net/projects/widelands\n"
 "\n"
 "Hope you enjoy this game!\n"
 "\n"
-msgstr ""
+msgstr "dfadf"
 
-#: ../../src/wlapplication.cc:1121
+#: ../../src/wlapplication.cc:1166
+msgid "Warning: "
+msgstr "Varoitus: "
+
+#: ../../src/wlapplication.cc:1170
 msgid "Unexpected error during the game"
-msgstr ""
+msgstr "Odottamaton virhe pelin aikana"
 
-#: ../../src/wlapplication.cc:1125
+#: ../../src/wlapplication.cc:1174
 msgid ""
 "\n"
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build "
 msgstr ""
+"\n"
+"\n"
+"Ole hyvä ja raportoi tämä ongelma auttaaksesi meitä parantamaan Widelandsiä. Löydät asiaankuuluvat viestit ohjelman perustulosteesta (stdout, Windowsissa tiedosto stdout.txt). Käytät versiota "
 
-#: ../../src/wlapplication.cc:1131
+#: ../../src/wlapplication.cc:1180
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often - though not always - possible to load it and continue playing.\n"
 msgstr ""
+". Ole hyvä ja liitä tämä tieto raporttiisi.\n"
+"\n"
+"Widelands pyrkii tallentamaan pelin automaattisesti virheiden sattuessa. Usein - ei aina - peliä voi täten jatkaa tallennuksesta.\n"
+"\n"
 
-#: ../../src/wlapplication.cc:1308 ../../src/nethost.cc:699
+#: ../../src/wlapplication.cc:1263
+msgid "The address of the game server is invalid"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1363 ../../src/nethost.cc:890
 msgid "Player"
 msgstr "Pelaaja"
 
-#: ../../src/wlapplication.cc:1383 ../../src/nethost.cc:300
-#: ../../src/netclient.cc:137
-msgid "Preparing game"
-msgstr ""
-
-#: ../../src/wlapplication.cc:1516
+#: ../../src/wlapplication.cc:1598
 msgid "End of replay"
-msgstr ""
+msgstr "Uudelleenpeluun loppu"
 
-#: ../../src/wlapplication.cc:1518
+#: ../../src/wlapplication.cc:1600
 msgid "The end of the replay has been reached and the game has been paused. You may unpause the game and continue watching if you want to."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1570 ../../src/game.cc:366 ../../src/game.cc:403
+#: ../../src/wlapplication.cc:1680 ../../src/game.cc:307 ../../src/game.cc:345
 msgid "Loading..."
-msgstr ""
+msgstr "Lataan..."
 
-#: ../../src/nethost.cc:231
-msgid "Server has left the game."
-msgstr ""
+#: ../../src/playerdescrgroup.cc:85
+msgid "Initialization"
+msgstr "Valmistelu"
 
-#: ../../src/nethost.cc:288
-msgid "The game has started just after you tried to connect."
-msgstr ""
+#: ../../src/playerdescrgroup.cc:136
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:185
+msgid "Open"
+msgstr "Auki"
 
-#: ../../src/nethost.cc:336
-msgid "Server has crashed and performed an emergency save."
-msgstr ""
-
-#: ../../src/nethost.cc:464
-msgid "Host has changed to a map that supports fewer players."
-msgstr ""
-
-#: ../../src/nethost.cc:514
-msgid "You were kicked by the host."
-msgstr ""
-
-#: ../../src/nethost.cc:640 ../../src/playerdescrgroup.cc:125
+#: ../../src/playerdescrgroup.cc:147 ../../src/nethost.cc:830
 msgid "Computer"
 msgstr "Tekoäly"
 
-#: ../../src/nethost.cc:685
-msgid "There are no open player slots left."
+#: ../../src/playerdescrgroup.cc:149
+msgid "AI: "
+msgstr "AI: "
+
+#: ../../src/playerdescrgroup.cc:151
+msgid "Human"
+msgstr "Ihminen"
+
+#: ../../src/game.cc:186
+msgid "Preloading a map"
+msgstr "Esilataan karttaa"
+
+#: ../../src/game.cc:197
+msgid "Loading a world"
+msgstr "Lataan maailmaa"
+
+#: ../../src/game.cc:203
+#, c-format
+msgid "Adding player %u"
+msgstr "Lisään pelaajan %u"
+
+#: ../../src/game.cc:215
+msgid "Loading a map"
+msgstr "Lataan karttaa"
+
+#: ../../src/game.cc:246 ../../src/game.cc:293 ../../src/game.cc:325
+msgid "Preloading map"
+msgstr "Esilataan karttaa"
+
+#: ../../src/game.cc:260
+msgid "Configuring players"
+msgstr "Säädän pelaajien asetuksia"
+
+# Ei näin: turhaa toistoa
+#: ../../src/game.cc:277
+msgid "Loading map"
+msgstr "Lataa kartta"
+
+#: ../../src/game.cc:405
+msgid "Creating player infrastructure"
+msgstr "Luon pelaajainfrastruktuuria"
+
+#: ../../src/game_main_menu.cc:38
+#: ../../src/editor/ui_menus/editor_main_menu.cc:42
+msgid "Main Menu"
+msgstr "Päävalikko"
+
+#: ../../src/game_main_menu.cc:54 ../../src/ware_statistics_menu.cc:355
+msgid "Ware Statistics"
+msgstr "Tuotetilastot"
+
+#: ../../src/game_main_menu.cc:61 ../../src/building_statistics_menu.cc:80
+msgid "Building Statistics"
+msgstr "Rakennustilastot"
+
+#: ../../src/game_main_menu.cc:68 ../../src/stock_menu.cc:32
+#: ../../src/waresdisplay.cc:42
+msgid "Stock"
+msgstr "Varasto"
+
+#: ../../src/transport_ui.cc:42
+msgid "Target quantities"
+msgstr "Tavoitemäärät"
+
+#: ../../src/transport_ui.cc:136
+msgid "Decrease permanent target quantity"
+msgstr "Pienennä pysyvää tavoitemäärää"
+
+#: ../../src/transport_ui.cc:165
+msgid "Increase permanent target quantity"
+msgstr "Kasvata pysyvää tavoitemäärää"
+
+#: ../../src/transport_ui.cc:192
+msgid "Decrease temporary target quantity"
+msgstr "Pienennä väliaikaista tavoitemäärää"
+
+#: ../../src/transport_ui.cc:221
+msgid "Increase temporary target quantity"
+msgstr "Kasvata väliaikaista tavoitemäärää"
+
+#: ../../src/transport_ui.cc:246
+msgid "Reset"
+msgstr "Tyhjää"
+
+#: ../../src/transport_ui.cc:246
+msgid "Reset target quantity to default value"
+msgstr "Palauta tavoitemäärä oletusarvoon"
+
+#: ../../src/s2map.cc:226
+msgid "Bluebyte Settlers II Map. No comment defined!"
+msgstr "Kartta on Bluebyten Settlers II -muotoinen; kommenttia ei ole määritelty."
+
+#: ../../src/player.cc:108
+msgid "Missing starting position"
+msgstr "Aloitussijainti puuttuu"
+
+#: ../../src/player.cc:110
+#, c-format
+msgid ""
+"Widelands could not start the game, because player %u has no starting position.\n"
+"You can manually add a starting position with Widelands Editor, to fix this problem."
 msgstr ""
 
-#: ../../src/nethost.cc:765
+# Ei näin: trans
+#: ../../src/interactive_base.cc:204
+#, c-format
+msgid "%u.%ux"
+msgstr "%u %ux"
+
+#: ../../src/interactive_base.cc:207
+msgid "PAUSE"
+msgstr "PYSÄYTETTY"
+
+# Ei näin: trans-comment!
+#: ../../src/interactive_base.cc:227
+#, c-format
+msgid "%s (%s)"
+msgstr "%s (%s)"
+
+#: ../../src/interactive_base.cc:232
+msgid "NO GAME CONTROLLER"
+msgstr ""
+
+#: ../../src/productionsite.cc:206
+msgid "(not occupied)"
+msgstr "(tyhjillään)"
+
+# Ei näin: plural mngmt
+#: ../../src/productionsite.cc:212
+#, fuzzy, c-format
+msgid "Waiting for one worker!"
+msgid_plural "Waiting for %u workers!"
+msgstr[0] "Odottaa %u työntekijää"
+msgstr[1] "Odottaa %u työntekijää"
+
+#: ../../src/productionsite.cc:222
+msgid "(stopped)"
+msgstr "(pysäytetty)"
+
+# Todo: vaihda: U+21E7 upwards white arrow = shift ja U+21E9 downwards white arrow, tai U+2B06 upwards black arrow ja U+2B07 downwards black arrow
+#: ../../src/productionsite.cc:304
+msgid "UP"
+msgstr "ylös"
+
+#: ../../src/productionsite.cc:304
+msgid "DOWN"
+msgstr "alas"
+
+#: ../../src/encyclopedia_window.cc:60
+msgid "Tribe ware encyclopedia"
+msgstr "Heimon tuoteopas"
+
+#: ../../src/encyclopedia_window.cc:78
+msgid "Consumed ware type(s)"
+msgstr "Kulutetut tuotetyypit"
+
+#: ../../src/encyclopedia_window.cc:79
+msgid "Quantity"
+msgstr "Vaadittu määrä"
+
+# Ei näin, paitsi jos pakko
+#: ../../src/encyclopedia_window.cc:186
+msgid " or "
+msgstr " tai "
+
+#: ../../src/watchwindow.cc:95
+msgid "Follow"
+msgstr "Seuraa"
+
+#: ../../src/watchwindow.cc:157
+msgid "Center mainview on this"
+msgstr "Keskitä päänäkymä tähän"
+
+#: ../../src/watchwindow.cc:181
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:47
+msgid "Close"
+msgstr "Sulje"
+
+#: ../../src/watchwindow.cc:241 ../../src/fieldaction.cc:464
+msgid "Watch"
+msgstr "Tarkkailunäkymä"
+
+#: ../../src/fieldaction.cc:248
+msgid "Build small buildings"
+msgstr "Pienet rakennukset"
+
+#: ../../src/fieldaction.cc:249
+msgid "Build medium buildings"
+msgstr "Keskikokoiset rakennukset"
+
+#: ../../src/fieldaction.cc:250
+msgid "Build large buildings"
+msgstr "Suuret rakennukset"
+
+#: ../../src/fieldaction.cc:284
+msgid "Action"
+msgstr "Toiminto"
+
+#: ../../src/fieldaction.cc:391
+msgid "Build road"
+msgstr "Rakenna tie"
+
+#: ../../src/fieldaction.cc:399
+msgid "Destroy this flag"
+msgstr "Poista tämä lippu"
+
+#: ../../src/fieldaction.cc:406
+msgid "Configure economy"
+msgstr "Muuta talouden asetuksia"
+
+#: ../../src/fieldaction.cc:411
+msgid "Send geologist to explore site"
+msgstr "Lähetä geologi tutkimaan aluetta"
+
+#: ../../src/fieldaction.cc:425
+msgid "Put a flag"
+msgstr "Aseta lippu"
+
+#: ../../src/fieldaction.cc:428
+msgid "Destroy a road"
+msgstr "Poista tie"
+
+#: ../../src/fieldaction.cc:445
+msgid "Watch field in a separate window"
+msgstr "Tarkkaile aluetta erillisessä ikkunassa"
+
+#: ../../src/fieldaction.cc:450
+msgid "Toggle building statistics display"
+msgstr "Näytä/piilota rakennusten tuotantotiedot"
+
+#: ../../src/fieldaction.cc:452
+msgid "Toggle building label display"
+msgstr "Näytä/piilota rakennusten nimet"
+
+#: ../../src/fieldaction.cc:455
+msgid "Debug window"
+msgstr "Debug-ikkuna"
+
+#: ../../src/fieldaction.cc:460 ../../src/fieldaction.cc:614
+msgid "Build roads"
+msgstr "Rakenna teitä"
+
+#: ../../src/fieldaction.cc:487
+msgid "Send less soldiers"
+msgstr "Lähetä vähemmän sotilaita"
+
+#: ../../src/fieldaction.cc:498
+msgid "Send more soldiers"
+msgstr "Lähetä enemmän sotilaita"
+
+#: ../../src/fieldaction.cc:505
+msgid "Start attack"
+msgstr "Aloita hyökkäys"
+
+#: ../../src/fieldaction.cc:512
+msgid "Attack"
+msgstr "Hyökkää"
+
+#: ../../src/fieldaction.cc:588
+msgid "Build mines"
+msgstr "Rakenna kaivoksia"
+
+#: ../../src/fieldaction.cc:606
+msgid "Build flag"
+msgstr "Pystytä lippu"
+
+#: ../../src/fieldaction.cc:610
+msgid "Cancel road"
+msgstr "Peruuta tie"
+
+#: ../../src/nethost.cc:266
+msgid "Server has left the game."
+msgstr "Palvelin on poistunut pelistä."
+
+#: ../../src/nethost.cc:335
+msgid "The game has started just after you tried to connect."
+msgstr ""
+
+#: ../../src/nethost.cc:392
+msgid "Server has crashed and performed an emergency save."
+msgstr ""
+
+#: ../../src/nethost.cc:601
+#, c-format
+msgid "Host sent player %s to the lobby!"
+msgstr ""
+
+#: ../../src/nethost.cc:915
+#, c-format
+msgid "WARNING: %s uses version: %s, while Host uses version: %s"
+msgstr ""
+
+#: ../../src/nethost.cc:951
+#, c-format
+msgid "%s has joined the game"
+msgstr "%s on liittynyt peliin"
+
+#: ../../src/nethost.cc:972
 msgid "Client reports time to host that is running backwards."
 msgstr ""
 
-#: ../../src/nethost.cc:767
+#: ../../src/nethost.cc:974
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr ""
 
-#: ../../src/nethost.cc:770
+#: ../../src/nethost.cc:977
 msgid "Client did not submit sync report in time."
 msgstr ""
 
-#: ../../src/nethost.cc:939
+#: ../../src/nethost.cc:1153
 msgid "Client and host have become desynchronized."
 msgstr ""
 
-#: ../../src/nethost.cc:978
+#: ../../src/nethost.cc:1194
+msgid "New User"
+msgstr "Uusi käyttäjä"
+
+#: ../../src/nethost.cc:1199
 msgid "The game has already started."
-msgstr ""
+msgstr "Peli on jo alkanut."
 
-#: ../../src/nethost.cc:989
+#: ../../src/nethost.cc:1211
 msgid "Connection to client lost."
-msgstr ""
+msgstr "Yhteys asiakasohjelmaan menetettiin."
 
-#: ../../src/nethost.cc:1003
+#: ../../src/nethost.cc:1225
 msgid "Client sent malformed commands: "
 msgstr ""
 
-#: ../../src/nethost.cc:1036
+#: ../../src/nethost.cc:1258
 msgid "Game is running already, but client has not connected fully"
 msgstr ""
 
-#: ../../src/nethost.cc:1040
+#: ../../src/nethost.cc:1262
 #, c-format
 msgid "First command sent by client is %u instead of HELLO. Most likely the client is running an incompatible version."
 msgstr ""
 
-#: ../../src/nethost.cc:1045
+#: ../../src/nethost.cc:1267
 msgid "Server uses a different protocol version."
 msgstr ""
 
-#: ../../src/nethost.cc:1070
+#: ../../src/nethost.cc:1340
 msgid "Client sent TIME command even though game is not running."
 msgstr ""
 
-#: ../../src/nethost.cc:1077
+#: ../../src/nethost.cc:1347
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr ""
 
-#: ../../src/nethost.cc:1086
-msgid "Client tries to sent a playercommand for a different player."
+#: ../../src/nethost.cc:1358
+#, c-format
+msgid "Client %i (%i) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
 
-#: ../../src/nethost.cc:1093
+#: ../../src/nethost.cc:1367
 msgid "Client sent unexpected synchronization report."
 msgstr ""
 
-#: ../../src/nethost.cc:1118
+#: ../../src/nethost.cc:1393
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr ""
 
-#: ../../src/netclient.cc:102
-msgid "Client has left the game."
-msgstr ""
-
-#: ../../src/netclient.cc:165
-msgid "Client crashed and performed an emergency save."
-msgstr ""
-
-#: ../../src/netclient.cc:313
-msgid "Server sent a player update for a player that does not exist."
-msgstr ""
-
-#: ../../src/netclient.cc:383
+#: ../../src/nethost.cc:1433
 #, c-format
-msgid "Expected a HELLO packet from server, but received command number %u. Maybe the server is running a different version of Widelands?"
-msgstr ""
+msgid "%s has left the game (%s)"
+msgstr "%s on poistunut pelistä (%s)"
 
-#: ../../src/netclient.cc:389
-msgid "Server uses a different protocol version"
-msgstr ""
+#: ../../src/game_debug_ui.cc:271
+msgid "Debug Field"
+msgstr "Debug-kenttä"
 
-#: ../../src/netclient.cc:432
-msgid "Unexpectedly received LAUNCH command from server."
-msgstr ""
-
-#: ../../src/netclient.cc:449
-msgid "Server sent a PLAYERCOMMAND even though no game is running."
-msgstr ""
-
-#: ../../src/netclient.cc:460
-msgid "Server sent a SYNCREQUEST even though no game is running."
-msgstr ""
-
-#: ../../src/netclient.cc:481
+#: ../../src/game_debug_ui.cc:320
 #, c-format
-msgid "Server sent an unknown command (command number %u)"
-msgstr ""
+msgid "%i, %i - height: %u\n"
+msgstr "%i, %i - korkeus: %u\n"
 
-#: ../../src/netclient.cc:510
-msgid "Server sent malformed commands: "
-msgstr ""
+#: ../../src/stock_menu.cc:71
+msgid "Show wares"
+msgstr "Näytä tuotteet"
 
-#: ../../src/netclient.cc:540
-msgid " An automatic savegame will be created."
-msgstr ""
+#: ../../src/stock_menu.cc:76
+msgid "Show workers"
+msgstr "Näytä työntekijät"
 
-#: ../../src/watchwindow.cc:108 ../../src/fieldaction.cc:448
-msgid "Watch"
-msgstr "Katso"
+#: ../../src/game_chat_menu.cc:44
+msgid "Chat Menu"
+msgstr "Keskusteluvalikko"
 
-#: ../../src/watchwindow.cc:122
-msgid "Follow"
-msgstr "Seuraa"
+#: ../../src/interactive_spectator.cc:53
+msgid "Exit Replay"
+msgstr "Poistu toistosta"
 
-#: ../../src/watchwindow.cc:129
-msgid "Center mainview on this"
-msgstr ""
+#: ../../src/interactive_spectator.cc:55
+#: ../../src/game_main_menu_save_game.cc:63 ../../src/game_options_menu.cc:85
+msgid "Save Game"
+msgstr "Tallenna peli"
 
-#: ../../src/watchwindow.cc:146
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:38
-msgid "Close"
-msgstr "Sulje"
-
-#: ../../src/game.cc:245
-msgid "Preloading a map"
-msgstr ""
-
-#: ../../src/game.cc:256
-msgid "Loading a world"
-msgstr ""
-
-#: ../../src/game.cc:262
-#, fuzzy, c-format
-msgid "Adding player %u"
-msgstr "Lisää pelaaja"
-
-#: ../../src/game.cc:271
-#, fuzzy
-msgid "Loading a map"
-msgstr "Lataa kartta"
-
-#: ../../src/game.cc:305 ../../src/game.cc:352 ../../src/game.cc:384
-#, fuzzy
-msgid "Preloading map"
-msgstr "Lataa kartta"
-
-#: ../../src/game.cc:319
-msgid "Configuring players"
-msgstr ""
-
-#: ../../src/game.cc:332
-#, fuzzy
-msgid "Loading map"
-msgstr "Lataa kartta"
-
-#: ../../src/game.cc:458
-#, fuzzy
-msgid "Creating player infrastructure"
-msgstr "Luo infrastruktuuri"
-
-#: ../../src/game_objectives_menu.cc:36
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:160
-msgid "Objectives Menu"
-msgstr ""
-
-#: ../../src/map.cc:409
+#: ../../src/map.cc:399
 msgid "Player 1"
 msgstr "Pelaaja 1"
 
-#: ../../src/building_statistics_menu.cc:80 ../../src/game_main_menu.cc:61
-msgid "Building Statistics"
-msgstr "Rakennuksen statistiikat"
+#: ../../src/game_options_sound_menu.cc:27 ../../src/game_options_menu.cc:76
+msgid "Sound Options"
+msgstr "Ääniasetukset"
+
+#: ../../src/game_options_sound_menu.cc:32
+msgid "Ingame Music"
+msgstr "Pelimusiikki"
+
+#: ../../src/game_options_sound_menu.cc:38
+msgid "Sound FX"
+msgstr "Äänitehosteet"
+
+#: ../../src/game_options_sound_menu.cc:42
+msgid "Ingame Music Volume"
+msgstr "Pelimusiikin äänenvoimakkuus"
+
+#: ../../src/game_options_sound_menu.cc:56
+msgid "Sound FX Volume"
+msgstr "Äänitehosteiden äänenvoimakkuus"
+
+#: ../../src/trainingsite.cc:174
+msgid "Resting"
+msgstr "Lepotauolla"
+
+#: ../../src/trainingsite.cc:176
+msgid "Not Working"
+msgstr "Ei työskentele"
+
+#: ../../src/widelands_map_loader.cc:89
+#, fuzzy
+msgid "Invalid World"
+msgstr "[Epäkelpo arvo]"
+
+#: ../../src/widelands_map_loader.cc:91
+#, c-format
+msgid "The world \"%s\" set by the map, does not exist on your filesystem."
+msgstr ""
+
+#: ../../src/game_main_menu_save_game.cc:67
+msgid "Map Name: "
+msgstr "Kartan nimi:"
+
+#: ../../src/game_main_menu_save_game.cc:71
+msgid "Game Time: "
+msgstr "Peliaika:"
+
+#: ../../src/game_main_menu_save_game.cc:79
+#: ../../src/ui/ui_basic/ui_messagebox.cc:85
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:57
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:61
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:118
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:68
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:275
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:109
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:60
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:119
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:132
+msgid "OK"
+msgstr "OK"
+
+#: ../../src/game_main_menu_save_game.cc:87
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:68
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:340
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:98
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:69
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:128
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:234
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:193
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:174
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:135
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:100
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:261
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:296
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:139
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:190
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:263
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:218
+msgid "Cancel"
+msgstr "Peruuta"
+
+# Ei näin: trans
+#: ../../src/game_main_menu_save_game.cc:140
+#, c-format
+msgid "%02ud%02uh%02u'%u\"%03u"
+msgstr "%02u d %02u h %02u min %u,%03u s"
+
+#: ../../src/game_main_menu_save_game.cc:201
+#, fuzzy
+msgid ""
+"Game Saving Error!\n"
+"Saved Game-File may be corrupt!\n"
+"\n"
+"Reason given:\n"
+msgstr "fdsf"
+
+#: ../../src/game_main_menu_save_game.cc:205
+#: ../../src/game_main_menu_save_game.cc:216
+msgid "Save Game Error!!"
+msgstr "Virhe peliä tallennettaessa!"
+
+# Ei näin: jako, ja iso f
+#: ../../src/game_main_menu_save_game.cc:217
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:368
+msgid "A File with the name "
+msgstr "Tiedosto "
+
+#: ../../src/game_main_menu_save_game.cc:221
+msgid " already exists. Overwrite?"
+msgstr " on jo olemassa. Kirjoitetaanko yli?"
 
 #: ../../src/building_statistics_menu.cc:90
 msgid "Total Productivity: "
-msgstr ""
+msgstr "Kokonaistuottavuus: "
 
 #: ../../src/building_statistics_menu.cc:92
 msgid "Owned: "
-msgstr "Omistaja:"
+msgstr "Omistaja: "
 
 #: ../../src/building_statistics_menu.cc:98
 msgid "In Build: "
-msgstr "Rakennuksessa:"
+msgstr "Rakennetaan: "
 
 #: ../../src/building_statistics_menu.cc:104
 msgid "Jump to unproductive: "
-msgstr ""
-
-#: ../../src/building_statistics_menu.cc:111 ../../src/building_ui.cc:1566
-#: ../../src/building_ui.cc:1951
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:161
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:76
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:164
-msgid "Name"
-msgstr "Nimi"
-
-#: ../../src/building_statistics_menu.cc:112
-msgid "Size"
-msgstr "Koko"
+msgstr "Hyppää tuottamattomaan: "
 
 #: ../../src/building_statistics_menu.cc:113
 msgid "Prod"
-msgstr ""
+msgstr "Tuot"
 
 #: ../../src/building_statistics_menu.cc:114
 msgid "Owned"
@@ -463,334 +1469,32 @@ msgstr "Rakenna"
 #: ../../src/building_statistics_menu.cc:127
 #: ../../src/building_statistics_menu.cc:145
 #: ../../src/building_statistics_menu.cc:163
-#, fuzzy
 msgid "Show previous"
-msgstr "Näytä työntekijät"
+msgstr "Näytä edellinen"
 
 #: ../../src/building_statistics_menu.cc:136
 #: ../../src/building_statistics_menu.cc:154
 #: ../../src/building_statistics_menu.cc:172
 msgid "Show next"
-msgstr ""
+msgstr "Näytä seuraava"
 
-#: ../../src/waresdisplay.cc:42 ../../src/stock_menu.cc:32
-#: ../../src/game_main_menu.cc:68
-msgid "Stock"
-msgstr "Varasto"
-
-#: ../../src/minimap.cc:135
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:69
-msgid "Map"
-msgstr "Kartta"
-
-#: ../../src/minimap.cc:144 ../../src/editor/ui_menus/editor_tool_menu.cc:66
-msgid "Terrain"
-msgstr ""
-
-#: ../../src/minimap.cc:151
-msgid "Owner"
-msgstr "Omistaja"
-
-#: ../../src/minimap.cc:158
-msgid "Flags"
-msgstr "Liput"
-
-#: ../../src/minimap.cc:165
-msgid "Roads"
-msgstr "Tiet"
-
-#: ../../src/minimap.cc:172 ../../src/general_statistics_menu.cc:158
-msgid "Buildings"
-msgstr "Rakennukset"
-
-#: ../../src/item_ware_descr.cc:40 ../../src/worker_descr.cc:122
-msgid "Doh... someone forgot the help text!"
-msgstr ""
-
-#: ../../src/stock_menu.cc:71
-msgid "Show wares"
-msgstr ""
-
-#: ../../src/stock_menu.cc:76
-msgid "Show workers"
-msgstr "Näytä työntekijät"
-
-#: ../../src/productionsite.cc:199
-msgid "(not occupied)"
-msgstr "(odottaa työntekijää)"
-
-#: ../../src/productionsite.cc:204
-#, c-format
-msgid "Waiting for %u workers!"
-msgstr ""
-
-#: ../../src/productionsite.cc:212
-msgid "(stopped)"
-msgstr "(pysäytetty)"
-
-#: ../../src/productionsite.cc:257
-msgid "UP"
-msgstr "YLÖS"
-
-#: ../../src/productionsite.cc:257
-msgid "DOWN"
-msgstr "ALAS"
-
-#: ../../src/graphic.cc:663
-#, c-format
-msgid "Loading animations: %d%% complete"
-msgstr ""
-
-#: ../../src/game_options_sound_menu.cc:27 ../../src/game_options_menu.cc:82
-#, fuzzy
-msgid "Sound Options"
-msgstr "Asetukset"
-
-#: ../../src/game_options_sound_menu.cc:32
-msgid "Ingame Music"
-msgstr "Pelimusiikki"
-
-#: ../../src/game_options_sound_menu.cc:38
-msgid "Sound FX"
-msgstr "Äänitehosteet"
-
-#: ../../src/game_options_sound_menu.cc:42
-#, fuzzy
-msgid "Ingame Music Volume"
-msgstr "Pelimusiikki"
-
-#: ../../src/game_options_sound_menu.cc:56
-#, fuzzy
-msgid "Sound FX Volume"
-msgstr "Äänitehosteet"
-
-#: ../../src/encyclopedia_window.cc:59
-msgid "Tribe ware encyclopedia"
-msgstr ""
-
-#: ../../src/encyclopedia_window.cc:77
-msgid "Consumed ware type(s)"
-msgstr ""
-
-#: ../../src/encyclopedia_window.cc:78
-msgid "Quantity"
-msgstr ""
-
-#: ../../src/encyclopedia_window.cc:193
-#, fuzzy
-msgid " or "
-msgstr " satama"
-
-#: ../../src/game_main_menu_save_game.cc:62 ../../src/game_options_menu.cc:91
-msgid "Save Game"
-msgstr "Tallenna peli"
-
-#: ../../src/game_main_menu_save_game.cc:66
-msgid "Map Name: "
-msgstr "Kartan nimi:"
-
-#: ../../src/game_main_menu_save_game.cc:70
-msgid "Game Time: "
-msgstr "Peliaika:"
-
-#: ../../src/game_main_menu_save_game.cc:78
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:41
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:46
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:70
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:50
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:232
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:66
-#: ../../src/ui/ui_basic/ui_messagebox.cc:85
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:59
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:127
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:118
-msgid "OK"
-msgstr "OK"
-
-#: ../../src/game_main_menu_save_game.cc:86
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:45
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:78
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:68
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:188
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:263
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:93
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:216
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:134
-#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:98
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:127
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:256
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:135
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:191
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:296
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:233
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:174
-msgid "Cancel"
-msgstr "Peruuta"
-
-#: ../../src/game_main_menu_save_game.cc:139
-#, c-format
-msgid "%02ud%02uh%02u'%u\"%03u"
-msgstr ""
-
-#: ../../src/game_main_menu_save_game.cc:200
-msgid ""
-"Game Saving Error!\n"
-"Saved Game-File may be corrupt!\n"
-"\n"
-"Reason given:\n"
-msgstr ""
-
-#: ../../src/game_main_menu_save_game.cc:204
-#: ../../src/game_main_menu_save_game.cc:215
-msgid "Save Game Error!!"
-msgstr "Peliä tallentaessa tapahtui virhe!"
-
-#: ../../src/game_main_menu_save_game.cc:216
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:356
-msgid "A File with the name "
-msgstr ""
-
-#: ../../src/game_main_menu_save_game.cc:220
-msgid " already exists. Overwrite?"
-msgstr " on jo olemassa. Kirjoitetaanko yli?"
-
-#: ../../src/militarysite.cc:79 ../../src/warehouse.cc:309
-msgid " conquer"
-msgstr ""
-
-#: ../../src/militarysite.cc:141
-#, fuzzy, c-format
-msgid "%u soldier"
-msgid_plural "%u soldiers"
-msgstr[0] "%d soldiers"
-msgstr[1] "%d soldiers"
-
-#: ../../src/militarysite.cc:146
-#, fuzzy, c-format
-msgid "%u(+%u) soldier"
-msgid_plural "%u(+%u) soldiers"
-msgstr[0] "%d soldiers"
-msgstr[1] "%d soldiers"
-
-#: ../../src/s2map.cc:226
-msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr ""
-
-#: ../../src/playerdescrgroup.cc:117
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:138
-msgid "Open"
-msgstr "Auki"
-
-#: ../../src/playerdescrgroup.cc:127
-msgid "Human"
-msgstr "Ihminen"
-
-#: ../../src/trainingsite.cc:208
-msgid "Resting"
-msgstr "Lepää"
-
-#: ../../src/trainingsite.cc:210
-msgid "Not Working"
-msgstr "Ei toimi"
-
-#: ../../src/interactive_base.cc:196
-#, c-format
-msgid "%u.%ux"
-msgstr ""
-
-#: ../../src/interactive_base.cc:199
-msgid "PAUSE"
-msgstr "PAUSSI"
-
-#: ../../src/interactive_base.cc:219
-#, c-format
-msgid "%s (%s)"
-msgstr ""
-
-#: ../../src/interactive_base.cc:224
-msgid "NO GAME CONTROLLER"
-msgstr ""
-
-#: ../../src/game_options_menu.cc:58
+#: ../../src/game_options_menu.cc:52
 msgid "README"
-msgstr "LUEMINUT"
+msgstr "Lue minut"
 
-#: ../../src/game_options_menu.cc:66
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:69
+#: ../../src/game_options_menu.cc:60
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:90
 msgid "License"
 msgstr "Lisenssi"
 
-#: ../../src/game_options_menu.cc:74
+#: ../../src/game_options_menu.cc:68
 msgid "Authors"
 msgstr "Tekijät"
 
-#: ../../src/game_options_menu.cc:101
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:75
+#: ../../src/game_options_menu.cc:95
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:97
 msgid "Exit Game"
 msgstr "Poistu pelistä"
-
-#: ../../src/editor_game_base.cc:573 ../../src/editor/editorinteractive.cc:134
-msgid "Loading world data"
-msgstr ""
-
-#: ../../src/editor_game_base.cc:582
-#, c-format
-msgid "Loading tribe: %s"
-msgstr ""
-
-#: ../../src/general_statistics_menu.cc:52 ../../src/game_main_menu.cc:47
-msgid "General Statistics"
-msgstr "Yleiset statistiikat"
-
-#: ../../src/general_statistics_menu.cc:146
-msgid "Land"
-msgstr "Maa"
-
-#: ../../src/general_statistics_menu.cc:152
-msgid "Workers"
-msgstr "Työläislista"
-
-#: ../../src/general_statistics_menu.cc:164
-msgid "Wares"
-msgstr ""
-
-#: ../../src/general_statistics_menu.cc:170
-msgid "Productivity"
-msgstr ""
-
-#: ../../src/general_statistics_menu.cc:176
-msgid "Casualties"
-msgstr ""
-
-#: ../../src/general_statistics_menu.cc:182
-msgid "Kills"
-msgstr "Tapot"
-
-#: ../../src/general_statistics_menu.cc:188
-#, fuzzy
-msgid "Military buildings lost"
-msgstr "Sallitut rakennukset"
-
-#: ../../src/general_statistics_menu.cc:194
-msgid "Military buildings defeated"
-msgstr ""
-
-#: ../../src/general_statistics_menu.cc:200
-msgid "Civilian buildings lost"
-msgstr ""
-
-#: ../../src/general_statistics_menu.cc:206
-msgid "Military"
-msgstr "Armeija"
-
-#: ../../src/game_debug_ui.cc:271
-msgid "Debug Field"
-msgstr ""
-
-#: ../../src/game_debug_ui.cc:320
-#, c-format
-msgid "%i, %i - height: %u\n"
-msgstr ""
 
 #: ../../src/building_ui.cc:165
 msgid "Destroy building?"
@@ -798,39 +1502,35 @@ msgstr "Tuhoa rakennus?"
 
 #: ../../src/building_ui.cc:179
 msgid "Do you really want to destroy this "
-msgstr ""
+msgstr "Haluatko varmasti, että "
 
 #: ../../src/building_ui.cc:181
 msgid "?"
-msgstr "?"
+msgstr " tuhotaan?"
 
-#: ../../src/building_ui.cc:607 ../../src/events/event_message_box.cc:49
+#: ../../src/building_ui.cc:611 ../../src/events/event_message_box.cc:49
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:55
 msgid "Continue"
 msgstr "Jatka"
 
-#: ../../src/building_ui.cc:607
-msgid "Stop"
-msgstr "Pysäytä"
-
-#: ../../src/building_ui.cc:630
+#: ../../src/building_ui.cc:626
 #, c-format
 msgid "Enhance to %s"
-msgstr ""
+msgstr "Paranna rakennukseksi %s"
 
-#: ../../src/building_ui.cc:649
+#: ../../src/building_ui.cc:646
 msgid "Destroy"
 msgstr "Tuhoa"
 
-#: ../../src/building_ui.cc:660 ../../src/building_ui.cc:767
+#: ../../src/building_ui.cc:657 ../../src/building_ui.cc:762
 msgid "Show workarea"
 msgstr "Näytä työalue"
 
-#: ../../src/building_ui.cc:671
+#: ../../src/building_ui.cc:668
 msgid "Debug"
-msgstr "Debug"
+msgstr ""
 
-#: ../../src/building_ui.cc:794
+#: ../../src/building_ui.cc:789
 msgid "Hide workarea"
 msgstr "Piilota työalue"
 
@@ -840,838 +1540,737 @@ msgstr "Työläislista"
 
 #: ../../src/building_ui.cc:1113
 msgid "Type: "
-msgstr "Tyyppi:"
+msgstr "Tyyppi: "
 
 #: ../../src/building_ui.cc:1120
 msgid "Experience: "
-msgstr "Kokemus:"
+msgstr "Kokemus: "
 
 #: ../../src/building_ui.cc:1127
 msgid "Trying to become: "
-msgstr "Yrittää tulla:"
+msgstr "Seuraava osaamistaso: "
 
-#: ../../src/building_ui.cc:1373
+#: ../../src/building_ui.cc:1176
+msgid "(vacant)"
+msgstr "(tyhjillään)"
+
+#: ../../src/building_ui.cc:1176
+msgid "(coming)"
+msgstr "(tulossa)"
+
+#: ../../src/building_ui.cc:1389
 msgid "Highest priority"
-msgstr ""
+msgstr "Korkein prioriteetti"
 
-#: ../../src/building_ui.cc:1382
+#: ../../src/building_ui.cc:1398
 msgid "Normal priority"
-msgstr ""
+msgstr "Tavallinen prioriteetti"
 
-#: ../../src/building_ui.cc:1391
+#: ../../src/building_ui.cc:1407
 msgid "Lowest priority"
-msgstr ""
+msgstr "Matalin prioriteetti"
 
-#: ../../src/building_ui.cc:1425
+#: ../../src/building_ui.cc:1447
 msgid "Show worker listing"
 msgstr "Näytä työläislista"
 
-#: ../../src/building_ui.cc:1551 ../../src/building_ui.cc:1980
+#: ../../src/building_ui.cc:1568 ../../src/building_ui.cc:1824
 msgid "Capacity"
 msgstr "Kapasiteetti"
 
-#: ../../src/building_ui.cc:1567 ../../src/building_ui.cc:1952
+#: ../../src/building_ui.cc:1584 ../../src/building_ui.cc:1805
 msgid "HP"
-msgstr ""
+msgstr "VP"
 
-#: ../../src/building_ui.cc:1568 ../../src/building_ui.cc:1953
+#: ../../src/building_ui.cc:1585 ../../src/building_ui.cc:1806
 msgid "AT"
-msgstr ""
+msgstr "Hy"
 
-#: ../../src/building_ui.cc:1569 ../../src/building_ui.cc:1954
+#: ../../src/building_ui.cc:1586 ../../src/building_ui.cc:1807
 msgid "DE"
-msgstr ""
+msgstr "Pu"
 
-#: ../../src/building_ui.cc:1570 ../../src/building_ui.cc:1955
+#: ../../src/building_ui.cc:1587 ../../src/building_ui.cc:1808
 msgid "EV"
-msgstr ""
+msgstr "Vä"
 
-#: ../../src/building_ui.cc:1571 ../../src/building_ui.cc:1956
+#: ../../src/building_ui.cc:1588 ../../src/building_ui.cc:1809
 msgid "Level"
 msgstr "Taso"
 
-#: ../../src/building_ui.cc:1673
-#, fuzzy, c-format
-msgid "Capacity: %2d"
-msgstr "Kapasiteetti"
+#: ../../src/building_ui.cc:1691
+#, c-format
+msgid "Capacity: %2u"
+msgstr "Kapasiteetti: %2u"
 
-#: ../../src/building_ui.cc:1738
-msgid "Training Options"
-msgstr ""
-
-#: ../../src/building_ui.cc:1762
-msgid "Training mode : "
-msgstr ""
-
-#: ../../src/building_ui.cc:1763
-msgid "Balanced"
-msgstr "Tasavertaiset"
-
-#: ../../src/building_ui.cc:1778
-#, fuzzy
-msgid "Hit points"
-msgstr "Osumapisteet"
-
-#: ../../src/building_ui.cc:1780 ../../src/fieldaction.cc:494
-msgid "Attack"
-msgstr "Hyökkää"
-
-#: ../../src/building_ui.cc:1782
-msgid "Defense"
-msgstr "Puolusta"
-
-#: ../../src/building_ui.cc:1784
-msgid "Evade"
-msgstr "Väistä"
-
-#: ../../src/building_ui.cc:1856
-msgid "Make heroes"
-msgstr "Luo sankareita"
-
-#: ../../src/building_ui.cc:1858
-msgid "Balanced army"
-msgstr "Tasapainotettu armeija"
-
-#: ../../src/building_ui.cc:1990
+#: ../../src/building_ui.cc:1834
 msgid "xx"
 msgstr "xx"
 
-#: ../../src/game_chat_menu.cc:44
-msgid "Chat Menu"
-msgstr "Viestintävalikko"
-
-#: ../../src/game_main_menu.cc:38
-#: ../../src/editor/ui_menus/editor_main_menu.cc:42
-msgid "Main Menu"
-msgstr "Päävalikko"
-
-#: ../../src/constructionsite.cc:216
-#, fuzzy, c-format
-msgid "%u%% built"
-msgstr "rakennettu"
-
-#: ../../src/fieldaction.cc:242
-#, fuzzy
-msgid "Build small buildings"
-msgstr "Rakenna kaivoksia"
-
-#: ../../src/fieldaction.cc:243
-#, fuzzy
-msgid "Build medium buildings"
-msgstr "Sallitut rakennukset"
-
-#: ../../src/fieldaction.cc:244
-#, fuzzy
-msgid "Build large buildings"
-msgstr "Sallitut rakennukset"
-
-#: ../../src/fieldaction.cc:278
-msgid "Action"
-msgstr "Toiminta"
-
-#: ../../src/fieldaction.cc:378
-#, fuzzy
-msgid "Build road"
-msgstr "Rakenna teitä"
-
-#: ../../src/fieldaction.cc:386
-#, fuzzy
-msgid "Destroy this flag"
-msgstr "Tuhoa rakennus?"
-
-#: ../../src/fieldaction.cc:393
-msgid "Send geologist to explore site"
-msgstr ""
-
-#: ../../src/fieldaction.cc:409
-#, fuzzy
-msgid "Put a flag"
-msgstr " lippu"
-
-#: ../../src/fieldaction.cc:412
-#, fuzzy
-msgid "Destroy a road"
-msgstr "Tuhoa"
-
-#: ../../src/fieldaction.cc:429
-msgid "Watch field in a separate window"
-msgstr ""
-
-#: ../../src/fieldaction.cc:434
-#, fuzzy
-msgid "Toggle building statistics display"
-msgstr "Rakennusstatistiikat"
-
-#: ../../src/fieldaction.cc:436
-msgid "Toggle building label display"
-msgstr ""
-
-#: ../../src/fieldaction.cc:439
-msgid "Debug window"
-msgstr ""
-
-#: ../../src/fieldaction.cc:444 ../../src/fieldaction.cc:596
-msgid "Build roads"
-msgstr "Rakenna teitä"
-
-#: ../../src/fieldaction.cc:469
-#, fuzzy
-msgid "Send less soldiers"
-msgstr "%d soldiers"
-
-#: ../../src/fieldaction.cc:480
-#, fuzzy
-msgid "Send more soldiers"
-msgstr "%d soldiers"
-
-#: ../../src/fieldaction.cc:487
-#, fuzzy
-msgid "Start attack"
-msgstr "Aloita peli"
-
-#: ../../src/fieldaction.cc:570
-msgid "Build mines"
-msgstr "Rakenna kaivoksia"
-
-#: ../../src/fieldaction.cc:588
-#, fuzzy
-msgid "Build flag"
-msgstr "Rakenna"
-
-#: ../../src/fieldaction.cc:592
-#, fuzzy
-msgid "Cancel road"
-msgstr "Peruuta"
-
 #: ../../src/events/event_message_box.cc:42
 msgid "No text defined"
-msgstr ""
+msgstr "Tekstiä ei ole määritelty"
 
 #: ../../src/events/event_message_box.cc:43
 msgid "Window Title"
-msgstr ""
-
-#: ../../src/events/event_factory.cc:46
-#, fuzzy
-msgid "Allow building type"
-msgstr "Salli rakentaminen:"
+msgstr "Ikkunan otsikko"
 
 #: ../../src/events/event_factory.cc:48
-msgid "Allows (or forbids) the construction of a building type for a player"
+msgid "Allow building type"
+msgstr "Salli rakennustyyppi"
+
+#: ../../src/events/event_factory.cc:50
+msgid "Allows (or forbids) the construction of a building type for a player."
 msgstr ""
 
-#: ../../src/events/event_factory.cc:51
-#, fuzzy
+#: ../../src/events/event_factory.cc:54
 msgid "Create building"
-msgstr "Tuhoa rakennus?"
+msgstr "Lisää rakennus"
 
-#: ../../src/events/event_factory.cc:52
+#: ../../src/events/event_factory.cc:55
 msgid "Create a building and optionally place workers in it"
 msgstr ""
 
-#: ../../src/events/event_factory.cc:55
+#: ../../src/events/event_factory.cc:58
 msgid "Conquer area"
+msgstr "Valtaa alue"
+
+#: ../../src/events/event_factory.cc:60
+msgid "Gives ownership of all unowned locations whithin an area to the player."
 msgstr ""
 
-#: ../../src/events/event_factory.cc:57
-msgid "Gives ownership of all unowned locations whithin an area to the player"
-msgstr ""
-
-#: ../../src/events/event_factory.cc:61
-#, fuzzy
+#: ../../src/events/event_factory.cc:64
 msgid "Create flag"
-msgstr "Luo kartta"
-
-#: ../../src/events/event_factory.cc:62
-#, fuzzy
-msgid "Create a flag"
-msgstr " lippu"
+msgstr "Lisää lippu"
 
 #: ../../src/events/event_factory.cc:65
-#, fuzzy
-msgid "Create immovable"
-msgstr "Luo kartta"
+msgid "Create a flag."
+msgstr "Lisää lipun."
 
-#: ../../src/events/event_factory.cc:66
-msgid "Create an immovable"
-msgstr ""
+#: ../../src/events/event_factory.cc:68
+msgid "Create immovable"
+msgstr "Luo liikkumaton karttaobjekti"
 
 #: ../../src/events/event_factory.cc:69
+msgid "Create an immovable."
+msgstr ""
+
+#: ../../src/events/event_factory.cc:72
 msgid "Show message box"
+msgstr "Näytä viesti-ikkuna"
+
+#: ../../src/events/event_factory.cc:74
+msgid "Show a message box. It can be modal or and have a picture. An events can be assigned to each button to give the user chose the course of the game."
 msgstr ""
 
-#: ../../src/events/event_factory.cc:71
-msgid "This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user"
-msgstr ""
-
-#: ../../src/events/event_factory.cc:76
+#: ../../src/events/event_factory.cc:79
 msgid "Move view"
-msgstr ""
-
-#: ../../src/events/event_factory.cc:77
-msgid "This Event centers the Players View on a certain location"
-msgstr ""
+msgstr "Siirrä näkymää"
 
 #: ../../src/events/event_factory.cc:80
-#, fuzzy
-msgid "Reveal campaign"
-msgstr "Valitse kartta"
-
-#: ../../src/events/event_factory.cc:81
-#, fuzzy
-msgid "Reveal a campaign"
-msgstr "Valitse kartta"
-
-#: ../../src/events/event_factory.cc:84
-#, fuzzy
-msgid "Reveal objective"
-msgstr "Muokkaa päämäärää"
-
-#: ../../src/events/event_factory.cc:85
-msgid "Reveal an objective"
+msgid "Center the player's view on a certain location."
 msgstr ""
 
-#: ../../src/events/event_factory.cc:88
-#, fuzzy
-msgid "Reveal scenario"
-msgstr "Seuraava skenaario"
+#: ../../src/events/event_factory.cc:83
+msgid "Reveal campaign"
+msgstr "Paljasta kampanja"
 
-#: ../../src/events/event_factory.cc:89
-#, fuzzy
-msgid "Reveal a scenario"
-msgstr "Seuraava skenaario"
+#: ../../src/events/event_factory.cc:84
+msgid "Reveal a campaign."
+msgstr "Paljasta kampanja."
+
+#: ../../src/events/event_factory.cc:87
+msgid "Reveal objective"
+msgstr "Paljasta tavoite"
+
+#: ../../src/events/event_factory.cc:88
+msgid "Reveal an objective."
+msgstr ""
+
+# TODO: anglismi
+#: ../../src/events/event_factory.cc:91
+msgid "Reveal scenario"
+msgstr "Paljasta skenaario"
 
 #: ../../src/events/event_factory.cc:92
-#, fuzzy
-msgid "Create road"
-msgstr "Luo kartta"
+msgid "Reveal a scenario."
+msgstr ""
 
-#: ../../src/events/event_factory.cc:93
+#: ../../src/events/event_factory.cc:95
+msgid "Create road"
+msgstr "Lisää tie"
+
+#: ../../src/events/event_factory.cc:96
 msgid "Create a road and optionally place a carrier on it"
 msgstr ""
 
-#: ../../src/events/event_factory.cc:96
-msgid "Set null trigger"
-msgstr ""
-
-#: ../../src/events/event_factory.cc:97
-msgid "Manually set a Null Trigger to a given value"
-msgstr ""
+#: ../../src/events/event_factory.cc:99
+msgid "Set timer"
+msgstr "Aseta ajastin"
 
 #: ../../src/events/event_factory.cc:100
-#, fuzzy
-msgid "Unhide area"
-msgstr "Piilota työalue"
+msgid "Set a timer to trigger after a certain duration."
+msgstr ""
 
-#: ../../src/events/event_factory.cc:102
+#: ../../src/events/event_factory.cc:103
+msgid "Unhide area"
+msgstr "Tuo alue näkyviin"
+
+#: ../../src/events/event_factory.cc:105
 msgid "Gives vision for a specified amount of time of all locations whithin an area to the player."
 msgstr ""
 
-#: ../../src/trigger/trigger_factory.cc:39
+#: ../../src/trigger/trigger_factory.cc:38
 msgid "Building Trigger"
-msgstr ""
+msgstr "Rakennusliipaisin"
 
-#: ../../src/trigger/trigger_factory.cc:41
+#: ../../src/trigger/trigger_factory.cc:40
 msgid "Triggers when the player has the specified number of buildings of the specified type in the specified area."
 msgstr ""
 
-#: ../../src/trigger/trigger_factory.cc:45
+#: ../../src/trigger/trigger_factory.cc:44
 msgid "Military influence Trigger"
-msgstr ""
+msgstr "Vaikutusalueliipaisin"
 
-#: ../../src/trigger/trigger_factory.cc:47
+#: ../../src/trigger/trigger_factory.cc:46
 msgid "Triggers when the player has some (or highest) military influence over the specified number of nodes in the specified area."
 msgstr ""
 
-#: ../../src/trigger/trigger_factory.cc:51
-msgid "Null Trigger"
-msgstr ""
-
-#: ../../src/trigger/trigger_factory.cc:53
-msgid "Never triggers by itself. It is useful to pass it to some event which changes triggers"
-msgstr ""
-
-#: ../../src/trigger/trigger_factory.cc:57
+#: ../../src/trigger/trigger_factory.cc:50
 msgid "Ownership Trigger"
-msgstr ""
+msgstr "Omistusliipaisin"
 
-#: ../../src/trigger/trigger_factory.cc:59
+#: ../../src/trigger/trigger_factory.cc:52
 msgid "Triggers when the the player owns at least the specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
 msgstr ""
 
-#: ../../src/trigger/trigger_factory.cc:64
+#: ../../src/trigger/trigger_factory.cc:57
 msgid "Time Trigger"
+msgstr "Aikaliipaisin"
+
+#: ../../src/trigger/trigger_factory.cc:59
+msgid "Triggers at a certain time. The time can be set to a value in ms. If the trigger has no time is set, a time can be set for it with an event."
 msgstr ""
+
+#: ../../src/trigger/trigger_factory.cc:64
+msgid "Vision Trigger"
+msgstr "Näkymäliipaisin"
 
 #: ../../src/trigger/trigger_factory.cc:66
-msgid "This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when the wait time is over for repeating events"
-msgstr ""
-
-#: ../../src/trigger/trigger_factory.cc:71
-msgid "Vision Trigger"
-msgstr ""
-
-#: ../../src/trigger/trigger_factory.cc:73
 msgid "Triggers when the the player sees (or has seen) at least a specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:66
+#: ../../src/editor/editorinteractive.cc:64
+msgid "Menu"
+msgstr "Päävalikko"
+
+#: ../../src/editor/editorinteractive.cc:67
 msgid "Tool"
-msgstr ""
+msgstr "Työkaluvalikko"
 
-#: ../../src/editor/editorinteractive.cc:69
+#: ../../src/editor/editorinteractive.cc:70
 msgid "Toolsize"
-msgstr ""
+msgstr "Työkalun koko"
 
-#: ../../src/editor/editorinteractive.cc:78
+#: ../../src/editor/editorinteractive.cc:79
 msgid "Players"
 msgstr "Pelaajat"
 
-#: ../../src/editor/editorinteractive.cc:81
+#: ../../src/editor/editorinteractive.cc:82
 msgid "Events"
 msgstr "Tapahtumat"
 
-#: ../../src/editor/editorinteractive.cc:84
+#: ../../src/editor/editorinteractive.cc:85
 msgid "Variables"
 msgstr "Muuttujat"
 
-#: ../../src/editor/editorinteractive.cc:212
+#: ../../src/editor/editorinteractive.cc:164
+msgid "Unsupported format"
+msgstr "Epäyhteensopiva tiedostomuoto"
+
+#: ../../src/editor/editorinteractive.cc:166
+#, c-format
+msgid "Widelands could not load the file \"%s\". The file format seems to be incompatible."
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:220
 msgid "Map unsaved"
-msgstr ""
+msgstr "Karttaa ei tallennettu"
 
-#: ../../src/editor/editorinteractive.cc:213
+#: ../../src/editor/editorinteractive.cc:221
 msgid "The Map is unsaved, do you really want to quit?"
-msgstr ""
+msgstr "Karttaa ei ole tallennettu. Haluatko varmasti lopettaa?"
 
-#: ../../src/editor/editorinteractive.cc:545
+#: ../../src/editor/editorinteractive.cc:559
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:184
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:182
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:189
 #: ../../src/map.h:163
 msgid "No Name"
 msgstr "Ei nimeä"
 
-#: ../../src/editor/editorinteractive.cc:547
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:140
+#: ../../src/editor/editorinteractive.cc:561
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:187
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:185
 #: ../../src/map.h:164
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:51
-msgid "Apply"
-msgstr "Käytä"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:58
-msgid "Increase maximum FPS"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:66
-msgid "Decrease maximum FPS"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:74
-msgid "Increase autosave interval"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:82
-msgid "Decrease autosave interval"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:90
-msgid "Increase autosave interval at 10"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:98
-msgid "Decrease autosave interval at 10"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:100
-msgid "General Options"
-msgstr "Yleisasetukset"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:102
-msgid "Fullscreen"
-msgstr "Koko ruutu"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:104
-msgid "Grab Input"
-msgstr "Nappaa syöte"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:106
-msgid "Enable Music"
-msgstr "Musiikki päälle"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:108
-msgid "Enable Sound"
-msgstr "Äänet päälle"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:109
+# TODO: not informative enough
+#: ../../src/ui/ui_basic/ui_spinbox.cc:122
 #, fuzzy
-msgid "Maximum FPS:"
-msgstr "Maksimi: %u"
+msgid "Increase the value"
+msgstr "Nosta/laske arvoa"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:112
-msgid "In-game resolution"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:113
-msgid "Language"
-msgstr "Kieli"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:116
-msgid "In-game Options"
-msgstr "Peliasetukset"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:119
-msgid "Use single Watchwindow Mode"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:122
-msgid "Start roadbuilding after placing flag"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:125
-msgid "Show buildings area preview"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:128
-msgid "Snap windows only when overlapping"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:131
-msgid "Dock windows to edges"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:134
-msgid "Save game automatically every"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:138
+# TODO: not informative enough
+#: ../../src/ui/ui_basic/ui_spinbox.cc:130
 #, fuzzy
-msgid "min."
-msgstr " kaivos"
+msgid "Decrease the value"
+msgstr "Nosta/laske arvoa"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:206
-msgid "System default language"
-msgstr "Järjestelmän vakiokieli"
+# Todo: BY, not at
+#: ../../src/ui/ui_basic/ui_spinbox.cc:141
+#, fuzzy
+msgid "Increase the value by 10"
+msgstr "Pidennä automaattisten tallennusten väliä 10:llä"
 
-# Edellinen?
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:37
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:53
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:63
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:51
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:40
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:64
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:54
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:236
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:47
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:60
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:81
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:178
+#: ../../src/ui/ui_basic/ui_spinbox.cc:149
+#, fuzzy
+msgid "Decrease the value by 10"
+msgstr "Lyhennä automaattisten tallennusten väliä 10:llä"
+
+#: ../../src/ui/ui_basic/ui_progresswindow.cc:42
+msgid "Preparing..."
+msgstr "Valmistelen..."
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:50
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:73
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:54
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:59
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:111
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:75
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:282
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:83
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:75
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:102
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:117
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:83
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:180
 msgid "Back"
 msgstr "Takaisin"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:45
-#, fuzzy
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:68
 msgid "Choose a replay!"
-msgstr "Valitse tallennettu peli!"
+msgstr "Valitse toistettava peli."
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:28
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:44
 msgid "Single Player Menu"
 msgstr "Yksinpelivalikko"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:35
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:52
 msgid "New Game"
 msgstr "Uusi peli"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:41
-msgid "Load Game"
-msgstr "Lataa peli"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:47
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:59
 msgid "Campaigns"
 msgstr "Kampanjat"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:47
-msgid "Select map"
-msgstr "Valitse kartta"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:66
+msgid "Load Game"
+msgstr "Lataa peli"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:55
-#, fuzzy
-msgid "Select Savegame"
-msgstr "Tallenna peli"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:69
-msgid "Start game"
-msgstr "Aloita peli"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:72
-msgid "Launch Game"
-msgstr "Käynnistä peli"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:182
-msgid "(no map)"
-msgstr "(ei kenttää)"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:201
-msgid "WARNING!!! Host selected file \""
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:203
-msgid "\" for this game, but you don't have it."
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:204
-msgid " Please add it manually."
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:221
-msgid "Original:"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:313
-#, fuzzy
-msgid "(Save): "
-msgstr "Tallenna kartta"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:30
-msgid "Begin Network Game"
-msgstr "Aloita verkkopeli"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:31
-msgid "List of games in your local network:"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:32
-msgid "Your nickname:"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:33
-msgid "Host to connect:"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:39
-#, fuzzy
-msgid "Join this game"
-msgstr "Liity peliin"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:45
-#, fuzzy
-msgid "Host a new game"
-msgstr "Isännöi uutta peliä"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:57
-msgid "Load previous host"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:66
-msgid "nobody"
-msgstr "ei kukaan"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:68
-msgid "Host"
-msgstr "Isäntä"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:70
-msgid "State"
-msgstr "Tila"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:139
-msgid "Closed"
-msgstr "Suljettu"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:51
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:69
 msgid "Choose saved game!"
 msgstr "Valitse tallennettu peli!"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:54
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:54
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:71
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:72
 msgid "Map Name:"
 msgstr "Kartan nimi:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:56
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:73
 msgid "Gametime:"
 msgstr "Peliaika:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:44
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:221
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:42
-msgid "Choose your map!"
-msgstr "Valitse karttasi!"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:46
-msgid "Load Map as scenario: "
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:47
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:223
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:43
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:56
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:57
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:60
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:59
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:71
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:65
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:107
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:69
-msgid "Name:"
-msgstr "Nimi:"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:49
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:225
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:45
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:75
-msgid "Author:"
-msgstr "Tekijä:"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:51
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:47
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:58
-msgid "Size:"
-msgstr "Koko:"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:53
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:49
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:68
-msgid "World:"
-msgstr "Maailma:"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:55
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:51
-msgid "Players:"
-msgstr "Pelaajat:"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:57
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:53
-msgid "Descr:"
-msgstr "Kuvaus:"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:151
-#, fuzzy
-msgid "(directory)"
-msgstr "Luo hakemisto"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:203
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:165
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:221
-msgid "<parent>"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:39
-#, fuzzy
-msgid "Select a campaign"
-msgstr "Valitse kartta"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:41
-#, fuzzy
-msgid "Campaign:"
-msgstr "Kampanjat"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:43
-msgid "Difficulty:"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:45
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:227
-#, fuzzy
-msgid "Description:"
-msgstr "Kuvaus:"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:80
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:121
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:123
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:194
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:301
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:302
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:303
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:365
-msgid "[No value found]"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:81
-msgid "Easy living"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:82
-msgid "Be vigilant"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:83
-msgid "Hard struggle"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:127
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:307
-msgid "[Invalid entry]"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:33
-msgid "Single Player"
-msgstr "Yksinpeli"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:39
-msgid "Multi Player"
-msgstr "Moninpeli"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:45
-msgid "Watch Replay"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:57
-msgid "Editor"
-msgstr "Muokkain"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
-#: ../../src/editor/ui_menus/editor_main_menu.cc:73
-msgid "View Readme"
-msgstr "Näytä LUEMINUT"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:79
-#, fuzzy
-msgid "Version "
-msgstr "Versio"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:83
-msgid "(C) 2002-2008 by the Widelands Development Team"
-msgstr "(C) 2002-2008 Widelands-kehittäjätiimi"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:28
-#, fuzzy
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:37
 msgid "Editor Menu"
-msgstr "Muokkain"
+msgstr "Muokkaimen valikko"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:35
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:51
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:45
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:50
 #: ../../src/editor/ui_menus/editor_main_menu.cc:49
 msgid "New Map"
 msgstr "Uusi kartta"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:41
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:52
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:51
 #: ../../src/editor/ui_menus/editor_main_menu.cc:55
 msgid "Load Map"
 msgstr "Lataa kartta"
 
-#: ../../src/ui/ui_basic/ui_messagebox.cc:92
-#: ../../src/editor/tools/editor_info_tool.cc:75
-#: ../../src/editor/tools/editor_info_tool.cc:76
-msgid "Yes"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:58
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:258
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:57
+msgid "Choose your map!"
+msgstr "Valitse karttasi!"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:63
+msgid "Load Map as scenario: "
+msgstr "Lataa kartta skenaariona: "
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:68
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:259
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:62
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:69
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:65
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:71
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:59
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:107
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:57
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:60
+msgid "Name:"
+msgstr "Nimi:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:74
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:261
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:68
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:98
+msgid "Author:"
+msgstr "Tekijä:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:80
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:74
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:81
+msgid "Size:"
+msgstr "Koko:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:86
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:80
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:91
+msgid "World:"
+msgstr "Maailma:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:92
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:86
+msgid "Players:"
+msgstr "Pelaajat:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:98
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:92
+msgid "Descr:"
+msgstr "Kuvaus:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:212
+msgid "(directory)"
+msgstr "(hakemisto)"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:264
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:224
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:222
+msgid "<parent>"
+msgstr "<ylähakemisto>"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:61
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:369
+#, fuzzy
+msgid "Advanced Options"
+msgstr "Ääniasetukset"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:75
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:347
+msgid "Apply"
+msgstr "Käytä"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:86
+msgid "min."
+msgstr "min välein"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:92
+msgid "General Options"
+msgstr "Yleisasetukset"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:99
+msgid "Fullscreen"
+msgstr "Koko ruutu"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:105
+msgid "Grab Input"
+msgstr "Nappaa syöte"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:111
+msgid "Enable Music"
+msgstr "Soita taustamusiikkia"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:117
+msgid "Enable Sound"
+msgstr "Soita äånitehosteet"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:122
+msgid "Maximum FPS:"
+msgstr "Korkein näytön päivitysnopeus (FPS):"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:132
+msgid "In-game resolution"
+msgstr "Pelin kuvantarkkuus"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:137
+msgid "Language"
+msgstr "Kieli"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:148
+msgid "In-game Options"
+msgstr "Peliasetukset"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:155
+msgid "Use single Watchwindow Mode"
+msgstr "Käytä vain yhtä tarkkailuikkunaa"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:161
+msgid "Start roadbuilding after placing flag"
+msgstr "Aloita tien rakentaminen lipun asettamisen jälkeen"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:167
+msgid "Show buildings area preview"
+msgstr "Näytä rakennuksen työalueen esikatselu"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:174
+msgid "Snap windows only when overlapping"
+msgstr "Tasaa ikkunat vain kun ne menevät päällekkäin"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:180
+msgid "Dock windows to edges"
+msgstr "Kytke ikkunat ruudun laitoihin"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:185
+msgid "Save game automatically every"
+msgstr "Tallenna peli automaattisesti"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:189
+msgid "Off"
 msgstr ""
 
-#: ../../src/ui/ui_basic/ui_messagebox.cc:99
-#: ../../src/editor/tools/editor_info_tool.cc:75
-#: ../../src/editor/tools/editor_info_tool.cc:76
-msgid "No"
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:271
+msgid "System default language"
+msgstr "Järjestelmän oletuskieli"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:380
+#, fuzzy
+msgid "Main menu font:"
+msgstr "Päävalikko"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:387
+msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr ""
 
-#: ../../src/ui/ui_basic/ui_progresswindow.cc:41
-msgid "Preparing..."
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:391
+#, fuzzy
+msgid "Speed of a new game:"
+msgstr "Isännöi uutta peliä"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:395
+msgid "Distance for windows to snap to other panels:"
 msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:399
+msgid "Distance for windows to snap to borders:"
+msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:413
+#, fuzzy
+msgid "Pause"
+msgstr "Arvo"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:423
+msgid "FreeSerif (Default)"
+msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:48
+msgid "Single Player"
+msgstr "Yksinpeli"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:55
+msgid "Multi Player"
+msgstr "Moninpeli"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:62
+msgid "Watch Replay"
+msgstr "Katso pelin toisto"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:76
+msgid "Editor"
+msgstr "Muokkain"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:83
+#: ../../src/editor/ui_menus/editor_main_menu.cc:73
+msgid "View Readme"
+msgstr "Lueminut-ohje"
+
+# Todo: ei näin
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:104
+msgid "Version "
+msgstr "Versio "
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:108
+msgid "by the Widelands Development Team"
+msgstr "Widelands-kehittäjätiimi"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:54
+msgid "Select a campaign"
+msgstr "Valitse kampanja"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:55
+msgid "Campaign:"
+msgstr "Kampanja:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:57
+msgid "Difficulty:"
+msgstr "Vaikeustaso:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:59
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:263
+msgid "Description:"
+msgstr "Kuvaus:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:112
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:154
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:156
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:215
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:397
+msgid "[No value found]"
+msgstr "[Arvo puuttuu]"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:113
+msgid "Easy living"
+msgstr "Leppoisaa menoa"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:114
+msgid "Be vigilant"
+msgstr "Haasteellisempaa touhua"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:115
+msgid "Hard struggle"
+msgstr "Työlästä vääntöä"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:159
+msgid "[Invalid entry]"
+msgstr "[Epäkelpo arvo]"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:337
+#, c-format
+msgid "Invalid path to file in cconfig: %s"
+msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:49
+msgid "Begin Network Game"
+msgstr "Aloita verkkopeli"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:53
+msgid "List of games in your local network:"
+msgstr "Lista peleistä paikallisverkossasi:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:57
+msgid "Your nickname:"
+msgstr "Nimimerkkisi:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:61
+msgid "Host to connect:"
+msgstr "Osoite, johon yhdistetään:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:69
+msgid "Join this game"
+msgstr "Liity peliin"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:76
+msgid "Host a new game"
+msgstr "Isännöi uutta peliä"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:91
+msgid "Load previous host"
+msgstr "Lataa edellinen pelipalvelin"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:112
+msgid "nobody"
+msgstr "ei kukaan"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:116
+msgid "Host"
+msgstr "Palvelin"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:118
+msgid "State"
+msgstr "Tila"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:186
+msgid "Closed"
+msgstr "Suljettu"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_intro.cc:32
+msgid "Press a key or click to continue ..."
+msgstr "Paina näppäintä tai napsauta hiirellä jatkaaksesi."
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:61
+msgid "Select map"
+msgstr "Valitse kartta"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:68
+msgid "Select Savegame"
+msgstr "Valitse tallennettu peli"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:82
+msgid "Start game"
+msgstr "Aloita peli"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:89
+msgid "Launch Game"
+msgstr "Käynnistä peli"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:129
+msgid "Switch to position"
+msgstr "Siirry sijaintiin"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:143
+msgid "Lobby:"
+msgstr "Aula:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:225
+msgid "File not found"
+msgstr "Tiedostoa ei löytynyt"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:227
+#, c-format
+msgid ""
+"Widelands  tried to start a game with a file that could not be found at given path.\n"
+"The file was: %s\n"
+"If this happens in a network game, the host might have selected a file that you do not have. In that case you should ask the host to send you the file."
+msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:252
+msgid "(no map)"
+msgstr "(ei kenttää)"
+
+# TODO: Ei näin
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:287
+msgid "WARNING!!! Host selected file \""
+msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:289
+msgid "\" for this game, but you do not have it."
+msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:290
+msgid " Please add it manually."
+msgstr ""
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:307
+msgid "Original:"
+msgstr "Alkuperäinen:"
+
+#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:411
+msgid "(Save): "
+msgstr "(Tallennus): "
 
 #: ../../src/editor/tools/editor_info_tool.cc:43
 msgid "Field Information"
-msgstr ""
+msgstr "Tietoa kentästä"
 
 #: ../../src/editor/tools/editor_info_tool.cc:55
 #, c-format
@@ -1681,18 +2280,6 @@ msgid ""
 " Height: %u\n"
 " Caps: "
 msgstr ""
-
-#: ../../src/editor/tools/editor_info_tool.cc:61
-msgid "small"
-msgstr "pieni"
-
-#: ../../src/editor/tools/editor_info_tool.cc:62
-msgid "medium"
-msgstr "keski"
-
-#: ../../src/editor/tools/editor_info_tool.cc:63
-msgid "big"
-msgstr "iso"
 
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " flag"
@@ -1753,11 +2340,12 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:98
 #: ../../src/editor/tools/editor_info_tool.cc:109
-#, fuzzy
 msgid ""
 "\n"
 " Descr: "
-msgstr "Kuvaus:"
+msgstr ""
+"\n"
+"Kuvaus: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:102
 #, fuzzy, c-format
@@ -1773,59 +2361,285 @@ msgid ""
 msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:107
-#, fuzzy
 msgid ""
 "\n"
 " Author: "
-msgstr "Tekijä:"
-
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:47
-msgid "Null Trigger Options"
 msgstr ""
+"\n"
+"Tekijä: "
 
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:69
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:179
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:254
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:82
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:207
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:44
+#: ../../src/editor/ui_menus/editor_event_menu.cc:162
+msgid "New Trigger"
+msgstr "Uusi liipaisin"
+
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:55
+msgid "Available Trigger types: "
+msgstr "Käytettävissä olevat liipaisintyypit: "
+
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:71
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:73
+msgid "Description: "
+msgstr "Kuvaus: "
+
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:87
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:247
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:172
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:128
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:184
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:109
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:289
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:224
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:225
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:186
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:165
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:128
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:89
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:252
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:174
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:289
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:181
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:254
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:209
 msgid "Ok"
 msgstr "Ok"
 
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:112
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:146
+msgid "Make Directory"
+msgstr "Luo hakemisto"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:42
+msgid "Enter Directory Name: "
+msgstr "Anna hakemistonimi: "
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:67
+msgid "Edit Objective"
+msgstr "Muokkaa tavoitetta"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:84
+msgid "Visible at Begin: "
+msgstr "Näkyvissä pelin alussa: "
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:93
+msgid "Objective text: "
+msgstr "Tavoiteteksti: "
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:165
+msgid "Visible"
+msgstr "Näkyy"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:176
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:255
+msgid "New"
+msgstr "Uusi"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:185
+#: ../../src/editor/ui_menus/editor_event_menu.cc:108
+#: ../../src/editor/ui_menus/editor_event_menu.cc:139
+#: ../../src/editor/ui_menus/editor_event_menu.cc:171
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:261
+msgid "Edit"
+msgstr "Muokkaa"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:196
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:116
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:269
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:158
+msgid "Delete"
+msgstr "Poista"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:234
+#: ../../src/editor/ui_menus/editor_event_menu.cc:344
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:109
+#, c-format
+msgid "Unnamed%u"
+msgstr "Nimetön%u"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:255
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:306
+msgid "Trigger: "
+msgstr "Liipaisin: "
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:278
+msgid "The objective was deleted, but not its trigger, because it is still referenced by:\n"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:291
+msgid "Note"
+msgstr "Huomio"
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:69
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:55
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:83
+msgid "Name: "
+msgstr "Nimi: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:76
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:89
+msgid "Author: "
+msgstr "Tekijä: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:82
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:95
+msgid "Size: "
+msgstr "Koko: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:88
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:101
+msgid "World: "
+msgstr "Maailma: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:95
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:108
+msgid "Players: "
+msgstr "Pelaajat: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:102
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:114
+msgid "Descr: "
+msgstr "Kuvaus: "
+
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:48
+msgid "Trigger Option Menu"
+msgstr "Liipaisinasetusten valikko"
+
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:272
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:528
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:271
 #, c-format
 msgid "There is another trigger registered with the name \"%s\". Choose another name."
 msgstr ""
 
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:117
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:225
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:300
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:295
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:277
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:253
 #: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:195
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:251
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:300
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:533
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:276
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:227
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:300
 msgid "Name in use"
+msgstr "Nimi käytössä"
+
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:43
+msgid "Terrain Select"
+msgstr "Maaston valinta"
+
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:156
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:204
+msgid "Current:"
+msgstr "Nykyinen:"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:47
+msgid "Message Box Event Options"
+msgstr "Viesti-ikkunatapahtuman asetukset"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:56
+msgid "Button 1"
+msgstr "Painike 1"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:57
+msgid "Button 2"
+msgstr "Painike 2"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:58
+msgid "Button 3"
+msgstr "Painike 3"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:77
+msgid "Is Modal: "
+msgstr "Estää muun toiminnan (modaalinen): "
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:86
+msgid "Window Title:"
+msgstr "Ikkunan otsikko:"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:95
+msgid "Text:"
+msgstr "Teksti:"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:108
+msgid "Number of Buttons: "
+msgstr "Painikkeiden määrä: "
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:134
+msgid "Button Name: "
+msgstr "Painikkeen nimi:"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:153
+msgid "Select Trigger: "
+msgstr "Valitse liipaisin: "
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:174
+msgid "Current: "
+msgstr "Nykyinen: "
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:179
+msgid "No trigger selected!"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:141
-msgid "Make Directory"
-msgstr "Luo hakemisto"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
-msgid "Enter Directory Name: "
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:248
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:190
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:295
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:222
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:295
+#, c-format
+msgid "There is another event registered with the name \"%s\". Choose another name."
 msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:46
+#, fuzzy
+msgid "Set origin"
+msgstr "Merkkijono"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:48
+msgid "Set the position that will have the coordinates (0, 0). This will be the top-left corner of a generated minimap."
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:61
+#: ../../src/editor/ui_menus/editor_main_menu.cc:67
+msgid "Map Options"
+msgstr "Kartta-asetukset"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:86
+msgid "Nr Players:"
+msgstr "Pelaajien lkm:"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:110
+msgid "Nothing defined!"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:48
+msgid "Edit Event Chain"
+msgstr "Muokkaa tapahtumaketjua"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:65
+msgid "Runs multiple times"
+msgstr "Ajetaan useita kertoja"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:71
+msgid "Events: "
+msgstr "Tapahtumat:"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:87
+msgid "Conditional"
+msgstr "Ehdollinen"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:96
+#: ../../src/editor/ui_menus/editor_event_menu.cc:130
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:44
+msgid "New Event"
+msgstr "Uusi tapahtuma"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:106
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:148
+msgid "Insert"
+msgstr "Lisää"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:128
+msgid "Up"
+msgstr "Ylös"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:142
+msgid "Available Events: "
+msgstr "Käytettävissä olevat tapahtumat: "
+
+#: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:46
+msgid "Bobs Menu"
+msgstr "Liikkuvat karttaobjektit"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:54
 msgid "Event Menu"
@@ -1833,27 +2647,19 @@ msgstr "Tapahtumavalikko"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:63
 msgid "Event Chains: "
-msgstr ""
+msgstr "Tapahtumaketjut: "
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:73
 msgid "Registered Events: "
-msgstr ""
+msgstr "Rekisteröidyt tapahtumat: "
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:82
 msgid "Registered Triggers"
-msgstr ""
+msgstr "Rekisteröidyt liipaisimet"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:99
 msgid "New Event Chain"
 msgstr "Uusi tapahtumaketju"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:108
-#: ../../src/editor/ui_menus/editor_event_menu.cc:139
-#: ../../src/editor/ui_menus/editor_event_menu.cc:171
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:259
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:185
-msgid "Edit"
-msgstr "Muokkaa"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:119
 #: ../../src/editor/ui_menus/editor_event_menu.cc:150
@@ -1861,94 +2667,258 @@ msgstr "Muokkaa"
 msgid "Del"
 msgstr "Poista"
 
-#: ../../src/editor/ui_menus/editor_event_menu.cc:130
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:44
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:96
-msgid "New Event"
-msgstr "Uusi tapahtuma"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:162
-#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:44
-msgid "New Trigger"
-msgstr ""
-
+# TODO: ks. 313
 #: ../../src/editor/ui_menus/editor_event_menu.cc:274
-msgid "Can't delete Event. It is in use by "
-msgstr ""
+#, fuzzy
+msgid "Can not delete event. It is in use by "
+msgstr "Tapahtumaa ei voi poistaa. Sitä käyttää "
 
-#: ../../src/editor/ui_menus/editor_event_menu.cc:284
-#: ../../src/editor/ui_menus/editor_event_menu.cc:326
+#: ../../src/editor/ui_menus/editor_event_menu.cc:281
+#: ../../src/editor/ui_menus/editor_event_menu.cc:320
 #: ../../src/editor/ui_menus/editor_player_menu.cc:244
 #: ../../src/editor/ui_menus/editor_player_menu.cc:276
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:274
 msgid "Error!"
 msgstr "Virhe!"
 
-#: ../../src/editor/ui_menus/editor_event_menu.cc:316
-msgid "Can't delete Trigger. It is in use by "
-msgstr ""
+# TODO: ei näin ellei oo pakko
+#: ../../src/editor/ui_menus/editor_event_menu.cc:313
+#, fuzzy
+msgid "Can not delete trigger. It is in use by "
+msgstr "Liipaisinta ei voi poistaa; sitä käyttää "
 
-#: ../../src/editor/ui_menus/editor_event_menu.cc:350
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:107
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:235
-#, c-format
-msgid "Unnamed%u"
-msgstr "Nimetön %u"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:357
+#: ../../src/editor/ui_menus/editor_event_menu.cc:351
 msgid "Unnamed"
 msgstr "Nimetön"
 
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:47
-msgid "Move View Event Options"
-msgstr ""
-
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:67
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:72
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:67
-msgid "Current position: "
-msgstr ""
-
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:220
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:295
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:290
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:190
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:246
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:45
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:49
 #, c-format
-msgid "There is another event registered with the name \"%s\". Choose another name."
-msgstr ""
+msgid "Player: %u"
+msgstr "Pelaaja: %u"
 
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:49
-msgid "Unhide Area Event Options"
-msgstr ""
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:55
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:68
+#, c-format
+msgid "Building: %s"
+msgstr "Rakennus: %s"
 
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:178
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:173
-msgid "Player: "
-msgstr "Pelaaja:"
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:67
+msgid "Allow Building Event Options"
+msgstr "Rakennuksen sallimistapahtuman asetukset"
 
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:198
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:192
-msgid "Area: "
-msgstr "Alue:"
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:119
+msgid "Allow Building: "
+msgstr "Salli rakennus: "
 
+# TODO: resource names untranslateable, ditto on upper left corner up/down/right.. and animal bobs.
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:43
 msgid "Resources Tools Options"
-msgstr ""
+msgstr "Resurssityökalun asetukset"
 
+# TODO: not informative enough
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:47
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:46
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:45
 msgid "In-/Decrease Value"
 msgstr "Nosta/laske arvoa"
 
+# TODO: not informative enough
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:79
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:79
 msgid "Set Value"
 msgstr "Aseta arvo"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:101
 msgid "Current Selection"
+msgstr "Nykyinen valinta"
+
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:69
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:163
+#, c-format
+msgid "Width: %u"
+msgstr "Leveys: %u"
+
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:91
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:167
+#, c-format
+msgid "Height: %u"
+msgstr "Korkeus: %u"
+
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
+msgid "Create Map"
+msgstr "Luo kartta"
+
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:40
+msgid "Height Tools Options"
+msgstr "Korkeustyökalun asetukset"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:45
+msgid "Tool Menu"
+msgstr "Työkaluvalikko"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:64
+msgid "Change height"
+msgstr "Muuta korkeutta"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:65
+msgid "Noise height"
+msgstr "Arvo korkeuden muutos"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:67
+msgid "Immovable"
+msgstr "Liikkumaton karttaobjekti"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:68
+msgid "Bob"
+msgstr "Liikkuva karttaobjekti"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:69
+msgid "Resource"
+msgstr "Resurssi"
+
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:54
+msgid "Available Event types: "
+msgstr "Käytettävissä olevat tapahtumat:"
+
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:49
+msgid "Conquer Area Event Options"
+msgstr "Alueenvaltaustapahtuman asetukset"
+
+# TODO: what do you mean, current?
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:69
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:69
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:72
+msgid "Current position: "
+msgstr "Nykysijainti: "
+
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:175
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:178
+msgid "Player: "
+msgstr "Pelaaja: "
+
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:195
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:198
+msgid "Area: "
+msgstr "Alue: "
+
+#: ../../src/editor/ui_menus/editor_main_menu.cc:61
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:57
+msgid "Save Map"
+msgstr "Tallenna kartta"
+
+#: ../../src/editor/ui_menus/editor_main_menu.cc:79
+msgid "Exit Editor"
+msgstr "Poistu editorista"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:63
+msgid "New Variable"
+msgstr "Uusi muuttuja"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:71
+msgid "Integer"
+msgstr "Kokonaisluku"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:77
+msgid "String"
+msgstr "Merkkijono"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:157
+msgid "Edit Variable"
+msgstr "Muokkaa muuttujaa"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:166
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:275
+msgid "Value"
+msgstr "Arvo"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:216
+#, c-format
+msgid "\"%s\" is not a valid integer!"
 msgstr ""
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:218
+msgid "Parse error!"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:247
+msgid "Variables Menu"
+msgstr "Muuttujavalikko"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:274
+msgid "Variable"
+msgstr "Muuttuja"
+
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
+msgid "Noise Height Options"
+msgstr "Korkeuden arvonta-asetukset"
+
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:130
+#, c-format
+msgid "Minimum: %u"
+msgstr "Minimi: %u"
+
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:132
+#, c-format
+msgid "Maximum: %u"
+msgstr "Maksimi: %u"
+
+# TODO: the original is not explanatory enough!
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:137
+#, c-format
+msgid "Set value: %u"
+msgstr "Aseta arvo: %u"
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:58
+#, fuzzy, c-format
+msgid "How many: %u"
+msgstr "Kuinka monta:"
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:78
+#, c-format
+msgid "(X, Y): (%i, %i)"
+msgstr ""
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:87
+#, c-format
+msgid "Radius: %u"
+msgstr "Säde: %u"
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:99
+msgid "Building Trigger Options"
+msgstr "Rakennusliipaisimen asetukset"
+
+#: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:44
+msgid "Immovable Bobs Menu"
+msgstr "Liikkumattomat karttaobjektit"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:209
+msgid "unnamed"
+msgstr "nimetön"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:370
+msgid " exists already. Overwrite?"
+msgstr " on jo olemassa. Kirjoitetaanko yli?"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:372
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:392
+msgid "Save Map Error!!"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:388
+msgid ""
+"Map Saving Error!\n"
+"Saved Map-File may be corrupt!\n"
+"\n"
+"Reason given:\n"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:38
+msgid "Toolsize Menu"
+msgstr "Työkalun koko -valikko"
+
+#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:71
+#, c-format
+msgid "Current Size: %u"
+msgstr "Nykykoko: %u"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:55
 msgid "Allowed Buildings"
@@ -1967,7 +2937,7 @@ msgid "Forbid"
 msgstr "Kiellä"
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:93
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:145
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:147
 msgid "<-"
 msgstr "<-"
 
@@ -1975,208 +2945,17 @@ msgstr "<-"
 msgid "Allow"
 msgstr "Salli"
 
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:70
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:163
-#, fuzzy, c-format
-msgid "Width: %u"
-msgstr "Leveys"
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:47
+msgid "Move View Event Options"
+msgstr "Näkymän siirto -tapahtuman asetukset"
 
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:92
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:167
-#, fuzzy, c-format
-msgid "Height: %u"
-msgstr "Korkeus"
-
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:132
-msgid "Create Map"
-msgstr "Luo kartta"
-
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:54
-#, fuzzy
-msgid "Available Event types: "
-msgstr "Saatavillaolevat tapahtumat:"
-
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:66
-#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:71
-msgid "Description: "
-msgstr "Kuvaus:"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:46
-msgid "Edit Trigger Conditional"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:58
-msgid "Trigger Conditional: "
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:76
-msgid "("
-msgstr "("
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:88
-msgid ")"
-msgstr ")"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:100
-msgid "AND"
-msgstr "JA"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:112
-msgid "OR"
-msgstr "TAI"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:124
-msgid "XOR"
-msgstr "XOR"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:136
-msgid "NOT"
-msgstr "EI"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:146
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:106
-msgid "Insert"
-msgstr "Lisää"
-
-# Poista? Hävitä?
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:156
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:267
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:196
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:116
-msgid "Delete"
-msgstr "Tuhoa"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:183
-msgid "Available Triggers: "
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:281
-msgid "Syntax Error"
-msgstr "Syntaksivirhe"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:283
-msgid "Your conditional contains at least one syntax error. Please correct!\n"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:42
-#: ../../src/editor/ui_menus/editor_main_menu.cc:67
-msgid "Map Options"
-msgstr "Kartta-asetukset"
-
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:63
-msgid "Nr Players:"
-msgstr "# pelaajaa:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:87
-msgid "Nothing defined!"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:57
-#: ../../src/editor/ui_menus/editor_main_menu.cc:61
-msgid "Save Map"
-msgstr "Tallenna kartta"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:83
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:69
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:55
-msgid "Name: "
-msgstr "Nimi:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:88
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:76
-msgid "Author: "
-msgstr "Tekijä:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:93
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:82
-msgid "Size: "
-msgstr "Koko:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:98
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:88
-msgid "World: "
-msgstr "Maailma:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:104
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:95
-msgid "Players: "
-msgstr "Pelaajat:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:109
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:101
-msgid "Descr: "
-msgstr "Kuvaus:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:202
-msgid "unnamed"
-msgstr "nimetön"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:358
-msgid " exists already. Overwrite?"
-msgstr " on jo olemassa. Kirjoitetaanko yli?"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:360
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
-msgid "Save Map Error!!"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:376
-msgid ""
-"Map Saving Error!\n"
-"Saved Map-File may be corrupt!\n"
-"\n"
-"Reason given:\n"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:38
-msgid "Toolsize Menu"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:60
-#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:70
-#, c-format
-msgid "Current Size: %u"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
-msgid "Noise Height Options"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:130
-#, c-format
-msgid "Minimum: %u"
-msgstr "Minimi: %u"
-
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:132
-#, c-format
-msgid "Maximum: %u"
-msgstr "Maksimi: %u"
-
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:137
-#, c-format
-msgid "Set value: %u"
-msgstr "Aseta arvo: %u"
-
-#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:55
-#, fuzzy
-msgid "Available Trigger types: "
-msgstr "Saatavillaolevat tapahtumat:"
-
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:41
-msgid "Height Tools Options"
-msgstr ""
-
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:49
-msgid "Conquer Area Event Options"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:44
-msgid "Immovable Bobs Menu"
-msgstr ""
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:49
+msgid "Unhide Area Event Options"
+msgstr "Piilota aluetapahtuma-asetukset"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:41
 msgid "Player Options"
-msgstr "Pelaajan asetukset"
+msgstr "Pelaaja-asetukset"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:48
 msgid "Add player"
@@ -2192,421 +2971,77 @@ msgstr "Pelaajien määrä"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:191
 msgid "Player "
-msgstr "Pelaaja"
+msgstr "Pelaaja "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:246
-msgid "Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this player and try again."
+msgid "Can not remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this player and try again."
 msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:278
-msgid "Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again."
+msgid "Can not change player tribe. It is referenced in some place. Remove all bobs, triggers and events that depend on this tribe and try again."
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:61
-msgid "New Variable"
-msgstr "Uusi muuttuja"
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:46
+msgid "Edit Trigger Conditional"
+msgstr "Muokkaa laukeamisehtoa"
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:69
-msgid "Integer"
-msgstr "Kokonaisluku"
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:58
+msgid "Trigger Conditional: "
+msgstr "Laukeamisrhto: "
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:75
-msgid "String"
-msgstr "Merkkijono"
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:78
+msgid "("
+msgstr "("
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:155
-msgid "Edit Variable"
-msgstr "Muokkaa muuttujaa"
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:90
+msgid ")"
+msgstr ")"
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:164
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:273
-msgid "Value"
-msgstr "Arvo"
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:102
+msgid "AND"
+msgstr "JA"
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:214
-#, c-format
-msgid "\"%s\" is not a valid integer!"
-msgstr ""
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:114
+msgid "OR"
+msgstr "TAI"
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:216
-msgid "Parse error!"
-msgstr ""
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:126
+msgid "XOR"
+msgstr "XOR"
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:245
-msgid "Variables Menu"
-msgstr ""
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:138
+msgid "NOT"
+msgstr "EI"
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:253
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:176
-msgid "New"
-msgstr "Uusi"
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:185
+msgid "Available Triggers: "
+msgstr "Käytettävissä olevat liipaisimet: "
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:272
-msgid "Variable"
-msgstr "Muuttuja"
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:277
+msgid "Syntax Error"
+msgstr "Syntaksivirhe"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:45
-msgid "Tool Menu"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:64
-#, fuzzy
-msgid "Change height"
-msgstr "korkeus:"
-
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:65
-#, fuzzy
-msgid "Noise height"
-msgstr "korkeus:"
-
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:67
-msgid "Immovable"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:68
-msgid "Bob"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:69
-msgid "Resource"
-msgstr ""
-
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:45
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:49
-#, fuzzy, c-format
-msgid "Player: %u"
-msgstr "Pelaaja:"
-
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:55
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:68
-#, fuzzy, c-format
-msgid "Building: %s"
-msgstr "Rakennus:"
-
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:67
-msgid "Allow Building Event Options"
-msgstr ""
-
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:119
-msgid "Allow Building: "
-msgstr "Salli rakentaminen:"
-
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:47
-msgid "Message Box Event Options"
-msgstr ""
-
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:56
-msgid "Button 1"
-msgstr "Nappula 1"
-
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:57
-msgid "Button 2"
-msgstr "Nappula 2"
-
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:58
-msgid "Button 3"
-msgstr "Nappula 3"
-
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:77
-msgid "Is Modal: "
-msgstr ""
-
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:86
-msgid "Window Title:"
-msgstr ""
-
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:95
-msgid "Text:"
-msgstr "Teksti:"
-
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:106
-msgid "Number of Buttons: "
-msgstr ""
-
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:132
-msgid "Button Name: "
-msgstr "Painikkeen nimi:"
-
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:151
-msgid "Select Trigger: "
-msgstr ""
-
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:172
-msgid "Current: "
-msgstr "Nykyinen:"
-
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:177
-msgid "No trigger selected!"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_main_menu.cc:79
-msgid "Exit Editor"
-msgstr "Poistu editorista"
-
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:43
-msgid "Terrain Select"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:156
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:208
-msgid "Current:"
-msgstr "Nykyinen:"
-
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:67
-msgid "Edit Objective"
-msgstr "Muokkaa päämäärää"
-
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:84
-msgid "Visible at Begin: "
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:93
-msgid "Objective text: "
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:165
-msgid "Visible"
-msgstr "Näkyvissä"
-
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:203
-msgid "Trigger: "
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:264
-msgid "Can't delete Objective, because it's trigger is in use by "
-msgstr ""
-
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:58
-#, fuzzy, c-format
-msgid "How many: %u"
-msgstr "Kuinka monta:"
-
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:78
-#, c-format
-msgid "(X, Y): (%i, %i)"
-msgstr ""
-
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:87
-#, fuzzy, c-format
-msgid "Radius: %u"
-msgstr "Maksimi: %u"
-
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:99
-msgid "Building Trigger Options"
-msgstr ""
-
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:48
-msgid "Trigger Option Menu"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:46
-msgid "Bobs Menu"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:48
-msgid "Edit Event Chain"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:65
-msgid "Runs multiple times"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:71
-msgid "Events: "
-msgstr "Tapahtumat:"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:87
-msgid "Conditional"
-msgstr "Ehdollinen"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:128
-msgid "Up"
-msgstr "Ylös"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:142
-msgid "Available Events: "
-msgstr "Saatavillaolevat tapahtumat:"
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:279
+msgid "Your conditional contains at least one syntax error. Please correct!\n"
+msgstr "Ehtolauseessasi on ainakin yksi syntaksivirhe. Ole hyvä ja korjaa se.\n"
 
 #: ../../src/objective.h:47
 msgid "no descr"
 msgstr "ei kuvausta"
 
+# TODO: äs don't work in the edit menu
 #: ../../src/map.h:165
 msgid "no description defined"
-msgstr ""
+msgstr "Kuvausta ei ole määritelty."
 
-#~ msgid "<undefined>"
-#~ msgstr "<ei arvoa>"
+#~ msgid "Increase maximum FPS"
+#~ msgstr "Korota maksimipäivitystaajuutta (fps)"
 
-#~ msgid "Message: "
-#~ msgstr "Viesti:"
+#~ msgid "Decrease maximum FPS"
+#~ msgstr "Laske maksimipäivitystaajuutta (fps)"
 
-#~ msgid "Load Game Error!!"
-#~ msgstr "Peliä ladatessa tapahtui virhe!"
+#~ msgid "Increase autosave interval"
+#~ msgstr "Pidennä automaattisten tallennusten väliä"
 
-#, fuzzy
-#~ msgid "Initializing a network game"
-#~ msgstr "Aloitetaan verkkopeli"
-
-#~ msgid "Server is full!\n"
-#~ msgstr "Palvelin on täynnä!\n"
-
-#~ msgid "!! CRITICAL ERROR !!"
-#~ msgstr "!! KRIITTINEN VIRHE !!"
-
-#~ msgid "Exit"
-#~ msgstr "Pois"
-
-#~ msgid "!! Continue execution !!"
-#~ msgstr "!! Jatka ajamista !!"
-
-# Kaatuu?
-#~ msgid "Crash"
-#~ msgstr "Kaatuminen"
-
-#~ msgid "Widelands"
-#~ msgstr "Widelands"
-
-#~ msgid "Consumed"
-#~ msgstr "Käytetty"
-
-#~ msgid "Group"
-#~ msgstr "Ryhmä"
-
-#, fuzzy
-#~ msgid "%u soldier (+%u)"
-#~ msgid_plural "%u soldiers (+%u)"
-#~ msgstr[0] "%d soldiers (+%d)"
-#~ msgstr[1] "%d soldiers (+%d)"
-
-#~ msgid "Player 2"
-#~ msgstr "Pelaaja 2"
-
-#~ msgid "Player 3"
-#~ msgstr "Pelaaja 3"
-
-#~ msgid "Player 4"
-#~ msgstr "Pelaaja 4"
-
-#~ msgid "Player 5"
-#~ msgstr "Pelaaja 5"
-
-#~ msgid "Player 6"
-#~ msgstr "Pelaaja 6"
-
-#~ msgid "Player 7"
-#~ msgstr "Pelaaja 7"
-
-#~ msgid "Player 8"
-#~ msgstr "Pelaaja 8"
-
-#~ msgid "Load game"
-#~ msgstr "Lataa peli"
-
-#~ msgid "Exit game"
-#~ msgstr "Poistu pelistä"
-
-#~ msgid "I have no name"
-#~ msgstr "Minulla ei ole nimeä"
-
-#~ msgid "Starting network game"
-#~ msgstr "Aloitetaan verkkopeli"
-
-#~ msgid "Status"
-#~ msgstr "Tila"
-
-#~ msgid "Waiting"
-#~ msgstr "Odottaa"
-
-#~ msgid "Ready"
-#~ msgstr "Valmis"
-
-#~ msgid "Send"
-#~ msgstr "Lähetä"
-
-#~ msgid "General statistics"
-#~ msgstr "Yleiset statistiikat"
-
-#~ msgid "Building statistics"
-#~ msgstr "Rakennusstatistiikat"
-
-#~ msgid "Allow Building"
-#~ msgstr "Salli rakentaminen"
-
-#~ msgid "<unset>"
-#~ msgstr "<asettamaton>"
-
-#~ msgid "Lobby"
-#~ msgstr "Aula"
-
-#~ msgid "Critical Connection Error!"
-#~ msgstr "Kriittinen yhteysvirhe!"
-
-#~ msgid "Internet Options"
-#~ msgstr "Internetasetukset"
-
-#~ msgid "Run Game"
-#~ msgstr "Käynnistä peli"
-
-#~ msgid "Play in Internet"
-#~ msgstr "Pelaa verkossa"
-
-#~ msgid "LAN games"
-#~ msgstr "Lähiverkkopelit"
-
-#~ msgid "Coordinates"
-#~ msgstr "Koordinaatit"
-
-#~ msgid "Owned by"
-#~ msgstr "Omistaja"
-
-#~ msgid "Has resources: Yes"
-#~ msgstr "Omistaa resursseja: Kyllä"
-
-#~ msgid " Has resources: No\n"
-#~ msgstr " Omistaa resursseja: Ei\n"
-
-#~ msgid "Start resources amount"
-#~ msgstr "Alkuresurssien määrä"
-
-#~ msgid "Author"
-#~ msgstr "Tekijä"
-
-#~ msgid "Descr"
-#~ msgstr "Kuvaus"
-
-#~ msgid "I"
-#~ msgstr "I"
-
-#~ msgid "Make infrastructure"
-#~ msgstr "Luo infrastruktuuri"
-
-#~ msgid "B"
-#~ msgstr "B"
-
-#~ msgid "Allow/forbid buildidngs"
-#~ msgstr "Salli/kiellä rakennukset"
-
-#~ msgid "Headquarters"
-#~ msgstr "Päämaja"
-
-#~ msgid "Optional"
-#~ msgstr "Ei pakollinen"
-
-#~ msgid "Usage: "
-#~ msgstr "Käyttö:"
-
-#~ msgid "Empire Tutorial Campaign"
-#~ msgstr "Tutoriaalikampanja"
-
-#~ msgid "Testtext"
-#~ msgstr "Testiteksti"
-
-#~ msgid "greenland"
-#~ msgstr "ruohomaa"
-
-#~ msgid "blackland"
-#~ msgstr "mustamaa"
-
-#~ msgid "winterland"
-#~ msgstr "talvimaa"
+#~ msgid "Decrease autosave interval"
+#~ msgstr "Lyhennä automaattisten tallennusten väliä"
