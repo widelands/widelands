@@ -24,7 +24,7 @@ remove=30
 seed=tree1_t 60
 animate=medium 20000
 remove=20
-transform=tree1
+grow=tree1
 
 [medium]
 pics=s3tree1_??.png

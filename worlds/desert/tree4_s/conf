@@ -21,7 +21,7 @@ mountain4=            2
 [program]
 animate=small 52500
 remove=19
-transform=tree4_m
+grow=tree4_m
 
 [small]
 pics=s2tree4_??.png

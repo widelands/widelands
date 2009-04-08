@@ -12,13 +12,29 @@ program=program
 program=fall
 picture=idle_0.png
 
+[terrain affinity]
+ice_flows=      2
+ice_flows2=     2
+ice=           10
+strand=        20
+snow=          50
+taiga=         50
+tundra_taiga= 120
+tundra=       220
+tundra2=      255
+tundra3=      255
+mountain1=      5
+mountain2=      5
+mountain3=      5
+mountain4=      5
+
 [idle]
 pics=idle_?.png
 hotspot=24 60
 
 [program]
-animate=idle 154000
-transform=deadtree2 33
+animate=idle 1525000
+transform=deadtree2 20
 seed=tree6_t 90
 
 [fall]

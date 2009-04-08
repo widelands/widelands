@@ -1,10 +1,26 @@
 program=program
 picture=s1tree2_00.png
 
+[terrain affinity]
+ice_flows=      2
+ice_flows2=     2
+ice=           10
+strand=        20
+snow=          70
+taiga=         90
+tundra_taiga= 150
+tundra=       200
+tundra2=      250
+tundra3=      250
+mountain1=      7
+mountain2=      7
+mountain3=      7
+mountain4=      7
+
 [program]
-animate=tiny 260000
+animate=tiny 72500
 remove=80
-transform=tree2_s
+grow=tree2_s
 
 [tiny]
 pics=s1tree2_??.png

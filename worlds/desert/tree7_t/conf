@@ -20,7 +20,7 @@ mountain4=            2
 [program]
 animate=tiny 60000
 remove=44
-transform=tree7_s
+grow=tree7_s
 
 [tiny]
 pics=s1tree7_??.png

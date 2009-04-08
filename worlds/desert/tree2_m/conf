@@ -21,7 +21,7 @@ mountain4=            2
 [program]
 animate=medium 65000
 remove=40
-transform=tree2
+grow=tree2
 
 [medium]
 pics=s3tree2_??.png
