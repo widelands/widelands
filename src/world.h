@@ -33,8 +33,8 @@ namespace Widelands {
 
 struct Editor_Game_Base;
 
-#define WORLD_NAME_LEN 30
-#define WORLD_AUTHOR_LEN 30
+#define WORLD_NAME_LEN 128
+#define WORLD_AUTHOR_LEN 128
 #define WORLD_DESCR_LEN 1024
 
 struct World_Descr_Header {
