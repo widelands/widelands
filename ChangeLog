@@ -1,9 +1,11 @@
 ### Build 14 (until now)
+- Fix bug in build13 that the editor save dialog would use the name of the list item from
+  the second last (instead of the last) click. (svn:r3781)
 - Added an editor tool to set a new origin in the map. This will make it possible to get
   an island properly centered, instead of divided in 4 corners when a minimap is generated
-  with an external tool, such as the one used in the map download section at
-  <http://wl.widelands.org/maps/>. The button that enables the tool is in the map options
-  dialog. (svn:r3778)
+  with an external tool, such as the one used in the
+  [map download section](http://wl.widelands.org/maps/). The button that enables the tool
+  is in the map options dialog. (svn:r3778)
 - Allow longer text for a world's name and author (to avoid having it cut off like "The
   Widelands Development Tea"). (svn:r3777)
 - Do not crash when writing an empty file. (svn:r3773)
