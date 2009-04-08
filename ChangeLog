@@ -2,13 +2,13 @@
 - Added an editor tool to set a new origin in the map. This will make it possible to get
   an island properly centered, instead of divided in 4 corners when a minimap is generated
   with an external tool, such as the one used in the map download section at
-  [http://wl.widelands.org/maps/]. The button that enables the tool is in the map options
-  dialog. (svn:3778)
+  <http://wl.widelands.org/maps/>. The button that enables the tool is in the map options
+  dialog. (svn:r3778)
 - Allow longer text for a world's name and author (to avoid having it cut off like "The
-  Widelands Development Tea"). (svn:3777)
-- Do not crash when writing an empty file. (svn:3773)
-- Added a new in game song. (svn:3758)
-- Make more configuration options configurable in the options menu. (svn:2753)
+  Widelands Development Tea"). (svn:r3777)
+- Do not crash when writing an empty file. (svn:r3773)
+- Added a new in game song. (svn:r3758)
+- Make more configuration options configurable in the options menu. (svn:r2753)
 - Fix bugs in the S2 map loader. Trying to load an invalid file could cause failed
   assertions in debug builds and probably other bugs in release builds. (svn:r3750)
 - Added new loading screen. (svn:r3748)
