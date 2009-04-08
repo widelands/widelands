@@ -710,8 +710,8 @@ bool Worker::run_plant(Game & game, State & state, Action const &)
  */
 bool Worker::run_create_bob(Game & game, State & state, Action const &)
 {
-	Coords pos = get_position();
-
+	game.create_bob
+		(get_position(), state.ivar2, state.svar1 == "world" ? 0 : &tribe());
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;
