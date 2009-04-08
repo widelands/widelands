@@ -18,7 +18,9 @@ coal=8
 
 [programs]
 produce_steel_shield=_Produce steel shield
+produce_s_shield=_Produce steel shield (only for compatibility with old savegames (build13))
 produce_advanced_shield=_Produce advanced shield
+produce_a_shield=_Produce advanced shield (only for compatibility with old savegames (build13))
 work=_Work
 
 [produce_steel_shield]
@@ -28,7 +30,21 @@ consume=iron:2 coal:2
 animate=working 35000
 produce=steel_shield
 
+[produce_s_shield]
+return=skipped unless economy needs steel_shield
+sleep=32000
+consume=iron:2 coal:2
+animate=working 35000
+produce=steel_shield
+
 [produce_advanced_shield]
+return=skipped unless economy needs advanced_shield
+sleep=32000
+consume=iron:2 coal:2 gold
+animate=working 45000
+produce=advanced_shield
+
+[produce_a_shield]
 return=skipped unless economy needs advanced_shield
 sleep=32000
 consume=iron:2 coal:2 gold
