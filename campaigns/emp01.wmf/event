@@ -5,7 +5,7 @@ packet_version=1
 type=building
 version=2
 building=headquarters_shipwreck
-point=7 62
+point=6 62
 helm=4
 wood_lance=5
 axe=6
@@ -278,7 +278,12 @@ is_modal=true
 width=400
 height=350
 button_00=_OK
-button_00_trigger=End Trigger
+
+[Set time to final event]
+type=set_timer
+version=1
+trigger=End Trigger
+duration=25000
 
 [Diary page 4]
 type=message_box

@@ -24,6 +24,7 @@
 #include "map.h"
 #include "player.h"
 #include "tribe.h"
+#include "warning.h"
 #include "widelands_map_allowed_buildings_data_packet.h"
 #include "widelands_map_bob_data_packet.h"
 #include "widelands_map_bobdata_data_packet.h"
@@ -84,11 +85,10 @@ int32_t WL_Map_Loader::preload_map(bool const scenario) {
 	{Map_Elemental_Data_Packet mp; mp.Pre_Read(m_fs, &m_map);}
 
 	if (not World::exists_world(m_map.get_world_name()))
-		//  TODO Throw something more meaningful than wexception and handle the
-		//  TODO actual problem instead of ignoring it (e.g. in
-		//  TODO fullscreen_menu_mapselect.cc:285).
-		throw wexception
-			("world \"%s\" does not exist", m_map.get_world_name());
+		throw warning
+			(_("Invalid World"),
+			 _("The world \"%s\" set by the map, does not exist on you filesystem."),
+			 m_map.get_world_name());
 
 	{
 		Map_Player_Names_And_Tribes_Data_Packet p;

@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3662\n"
+"Project-Id-Version: Widelands svn3773\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-03-01 11:50+0000\n"
+"POT-Creation-Date: 2009-04-08 07:06+0000\n"
 "PO-Revision-Date: 2008-12-13 14:11+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -441,155 +441,155 @@ msgstr "Wachposten"
 msgid "Stronghold"
 msgstr "Bastion"
 
-#: ../../../tribes/barbarians/conf:157
+#: ../../../tribes/barbarians/conf:157 ../../../tribes/barbarians/conf:158
 msgid "Headquarters"
 msgstr "Hauptquartier"
 
-#: ../../../tribes/barbarians/conf:158
+#: ../../../tribes/barbarians/conf:159
 msgid "Warehouse"
 msgstr "Warenlager"
 
-#: ../../../tribes/barbarians/conf:161
+#: ../../../tribes/barbarians/conf:162
 msgid "War Mill"
 msgstr "Waffenschmiede"
 
-#: ../../../tribes/barbarians/conf:162
+#: ../../../tribes/barbarians/conf:163
 msgid "Axefactory"
 msgstr "Axtfabrik"
 
-#: ../../../tribes/barbarians/conf:163
+#: ../../../tribes/barbarians/conf:164
 msgid "Bakery"
 msgstr "Bäckerei"
 
-#: ../../../tribes/barbarians/conf:164
+#: ../../../tribes/barbarians/conf:165
 msgid "Big Inn"
 msgstr "Gaststätte"
 
-#: ../../../tribes/barbarians/conf:165
+#: ../../../tribes/barbarians/conf:166
 msgid "Brewery"
 msgstr "Brauerei"
 
-#: ../../../tribes/barbarians/conf:166
+#: ../../../tribes/barbarians/conf:167
 msgid "Charcoal Burner's House"
 msgstr "Köhlerei"
 
-#: ../../../tribes/barbarians/conf:167
+#: ../../../tribes/barbarians/conf:168
 msgid "Deeper Coal Mine"
 msgstr "Tiefere Kohlenmine"
 
-#: ../../../tribes/barbarians/conf:168
+#: ../../../tribes/barbarians/conf:169
 msgid "Deep Coal Mine"
 msgstr "Tiefe Kohlenmine"
 
-#: ../../../tribes/barbarians/conf:169
+#: ../../../tribes/barbarians/conf:170
 msgid "Coal mine"
 msgstr "Kohlenmine"
 
-#: ../../../tribes/barbarians/conf:170
+#: ../../../tribes/barbarians/conf:171
 msgid "Deeper Gold Mine"
 msgstr "Tiefere Goldmine"
 
-#: ../../../tribes/barbarians/conf:171
+#: ../../../tribes/barbarians/conf:172
 msgid "Deeper Iron Ore Mine"
 msgstr "Tiefere Eisenmine"
 
-#: ../../../tribes/barbarians/conf:172
+#: ../../../tribes/barbarians/conf:173
 msgid "Deep Gold Mine"
 msgstr "Tiefe Goldmine"
 
-#: ../../../tribes/barbarians/conf:173
+#: ../../../tribes/barbarians/conf:174
 msgid "Deep Iron Ore Mine"
 msgstr "Tiefe Eisenmine"
 
-#: ../../../tribes/barbarians/conf:174
+#: ../../../tribes/barbarians/conf:175
 msgid "Farm"
 msgstr "Bauernhof"
 
-#: ../../../tribes/barbarians/conf:175
+#: ../../../tribes/barbarians/conf:176
 msgid "Fernery"
 msgstr "Reet- und Flachshof"
 
-#: ../../../tribes/barbarians/conf:176
+#: ../../../tribes/barbarians/conf:177
 msgid "Fisher's Hut"
 msgstr "Fischerhütte"
 
-#: ../../../tribes/barbarians/conf:177
+#: ../../../tribes/barbarians/conf:178
 msgid "Gamekeeper's Hut"
 msgstr "Wildhüterhütte"
 
-#: ../../../tribes/barbarians/conf:178
+#: ../../../tribes/barbarians/conf:179
 msgid "Gold Mine"
 msgstr "Goldmine"
 
-#: ../../../tribes/barbarians/conf:179
+#: ../../../tribes/barbarians/conf:180
 msgid "Granite Mine"
 msgstr "Granitmine"
 
-#: ../../../tribes/barbarians/conf:180
+#: ../../../tribes/barbarians/conf:181
 msgid "Wood Hardener"
 msgstr "Holzhärter"
 
-#: ../../../tribes/barbarians/conf:181
+#: ../../../tribes/barbarians/conf:182
 msgid "Helmsmithy"
 msgstr "Helmschmiede"
 
-#: ../../../tribes/barbarians/conf:182
+#: ../../../tribes/barbarians/conf:183
 msgid "Hunter's Hut"
 msgstr "Jagdhütte"
 
-#: ../../../tribes/barbarians/conf:183
+#: ../../../tribes/barbarians/conf:184
 msgid "Inn"
 msgstr "Wirtshaus"
 
-#: ../../../tribes/barbarians/conf:184
+#: ../../../tribes/barbarians/conf:185
 msgid "Lime Kiln"
 msgstr "Kalkbrennerei"
 
-#: ../../../tribes/barbarians/conf:185
+#: ../../../tribes/barbarians/conf:186
 msgid "Lumberjack's Hut"
 msgstr "Holzfällerhütte"
 
-#: ../../../tribes/barbarians/conf:186
+#: ../../../tribes/barbarians/conf:187
 msgid "Metalwork Shop"
 msgstr "Schmiede"
 
-#: ../../../tribes/barbarians/conf:187
+#: ../../../tribes/barbarians/conf:188
 msgid "Micro Brewery"
 msgstr "Kleinbrauerei"
 
-#: ../../../tribes/barbarians/conf:188
+#: ../../../tribes/barbarians/conf:189
 msgid "Iron Ore Mine"
 msgstr "Eisenmine"
 
-#: ../../../tribes/barbarians/conf:189
+#: ../../../tribes/barbarians/conf:190
 msgid "Quarry"
 msgstr "Steinbruch"
 
-#: ../../../tribes/barbarians/conf:190
+#: ../../../tribes/barbarians/conf:191
 msgid "Ranger's Hut"
 msgstr "Försterhütte"
 
-#: ../../../tribes/barbarians/conf:191
+#: ../../../tribes/barbarians/conf:192
 msgid "Smelting Works"
 msgstr "Hochofen"
 
-#: ../../../tribes/barbarians/conf:192
+#: ../../../tribes/barbarians/conf:193
 msgid "Tavern"
 msgstr "Taverne"
 
-#: ../../../tribes/barbarians/conf:193
+#: ../../../tribes/barbarians/conf:194
 msgid "Weaving-Mill"
 msgstr "Weberei"
 
-#: ../../../tribes/barbarians/conf:194
+#: ../../../tribes/barbarians/conf:195
 msgid "Well"
 msgstr "Brunnen"
 
-#: ../../../tribes/barbarians/conf:197
+#: ../../../tribes/barbarians/conf:198
 msgid "Headquarters medium"
 msgstr "norm. Hauptquartier"
 
-#: ../../../tribes/barbarians/conf:198
+#: ../../../tribes/barbarians/conf:199
 msgid "Citadel village"
 msgstr "Zitadellen Dorf"
 

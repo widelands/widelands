@@ -89,6 +89,7 @@ conditional_element_00=trigger
 conditional_element_00_data=Quarry complete
 event=Goto Home
 event=Saledus 4
+event=Set time to final event
 current_event=0
 state=init
 
@@ -96,9 +97,6 @@ state=init
 repeating=false
 conditional_element_00=trigger
 conditional_element_00_data=End Trigger
-conditional_element_01=AND
-conditional_element_02=trigger
-conditional_element_02_data=Quarry complete
 event=Diary page 4
 event=Reveal Empiretut02
 current_event=0

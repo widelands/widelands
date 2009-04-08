@@ -62,7 +62,7 @@ area=100
 building=quarry
 
 [End Trigger]
-type=null
+type=time
 
 [Extra Barracks 1]
 type=building

@@ -294,6 +294,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 	//Add map files(compressed maps) and directories(uncompressed)
 	{
 		Widelands::Map map; //  Map_Loader needs a place to put it's preload data
+		i18n::Textdomain td("maps");
 
 		for
 			(filenameset_t::iterator pname = files.begin();

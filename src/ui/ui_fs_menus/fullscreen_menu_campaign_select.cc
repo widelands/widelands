@@ -336,8 +336,8 @@ void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint32_t const i) {
 void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 	campmapfile = m_list.get_selected();
 
-	// Load maps textdomain to translate the strings from map
-	i18n::grab_textdomain("maps");
+	// Load the maps textdomain to translate the strings from map
+	i18n::Textdomain td(campmapfile.c_str());
 
 	Widelands::Map map;
 
@@ -355,9 +355,6 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 	tamapname .set_text(map.get_name());
 	taauthor  .set_text(map.get_author());
 	tamapdescr.set_text(map.get_description());
-
-	// Release maps textdomain
-	i18n::release_textdomain();
 
 	// enable OK button
 	b_ok.set_enabled(true);

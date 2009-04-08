@@ -21,7 +21,6 @@
 
 #include "editor_game_base.h"
 #include "filesystem.h"
-#include "i18n.h"
 #include "map.h"
 #include "profile.h"
 #include "world.h"
@@ -35,7 +34,6 @@ void Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map * map)
 throw (_wexception)
 {
 	Profile prof;
-	i18n::Textdomain textdomain("maps");
 	prof.read("elemental", 0, fs);
 	Section & s = prof.get_safe_section("global");
 
