@@ -76,6 +76,7 @@ m_parent  (parent) //  FIXME redundant (base has parent pointer)
 			 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
 			 get_inner_w() / 2 - spacing, 20,
 			 1, 0);
+	m_editbox->setText(parent->egbase().map().get_name());
 	m_editbox->changed.set(this, &Main_Menu_Save_Map::edit_box_changed);
 
 	posx = get_inner_w() / 2 + spacing;
@@ -229,9 +230,9 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 	if (Widelands::WL_Map_Loader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			Widelands::Map_Loader * const ml = map.get_correct_loader(name);
+			std::auto_ptr<Widelands::Map_Loader> const ml
+				(map.get_correct_loader(name));
 			ml->preload_map(true); // This has worked before, no problem
-			delete ml;
 		}
 
 

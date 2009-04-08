@@ -1,4 +1,7 @@
 ### Build 14 (until now)
+- In the editor save dialog; initialize the name box with the map name and do not react
+  (for example by playing a sound) to clicks in the empty area below the last file in the
+  listbox (affects all listboxes in the UI). (svn:r3783)
 - Fix bug in build13 that the editor save dialog would use the name of the list item from
   the second last (instead of the last) click. (svn:r3781)
 - Added an editor tool to set a new origin in the map. This will make it possible to get

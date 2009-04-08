@@ -366,14 +366,13 @@ bool BaseListselect::handle_mousepress(const Uint8 btn, int32_t, int32_t y)
 
 		m_last_selection  = m_selection;
 		m_last_click_time = time;
-		play_click();
 
 		y = (y + m_scrollpos) / get_lineheight();
-		if (y >= 0 and y < static_cast<int32_t>(m_entry_records.size()))
-			select(y);
-
-		if (m_selection != no_selection_index())
-			clicked.call(m_selection);
+		if (y < 0 or static_cast<int32_t>(m_entry_records.size()) <= y)
+			return false;
+		play_click();
+		select(y);
+		clicked.call(m_selection);
 
 		if //  check if doubleclicked
 			(time - real_last_click_time < DOUBLE_CLICK_INTERVAL
