@@ -206,8 +206,8 @@ button_00_trigger=Order7
 [Show Al'thunran]
 type=unhide_area
 version=2
-point=51 46
-area=14
+point=50 48
+area=6
 duration=5000
 
 [Show Grave]
