@@ -105,7 +105,7 @@ void Campaign_visibility_save::update_campvis(std::string const & savepath)
 		("version", cconf_s.get_int("version", 1));
 
 	// Write down visibility of campaigns
-	Section & campv_s = campvisr.get_safe_section("campaigns");
+	Section & campv_c = campvisr.get_safe_section("campaigns");
 	{
 		Section & vis = campvisw.pull_section("campaigns");
 		sprintf(cvisible, "campvisi%i", i);
@@ -113,7 +113,7 @@ void Campaign_visibility_save::update_campvis(std::string const & savepath)
 		while (cconf_s.get_string(csection)) {
 			vis.set_bool
 				(csection,
-				 cconf_s.get_bool(cvisible) || campv_s.get_bool(csection));
+				 cconf_s.get_bool(cvisible) || campv_c.get_bool(csection));
 
 			++i;
 			sprintf(cvisible, "campvisi%i", i);
@@ -122,7 +122,7 @@ void Campaign_visibility_save::update_campvis(std::string const & savepath)
 	}
 
 	// Write down visibility of campaign maps
-	campv_s = campvisr.get_safe_section("campmaps");
+	Section & campv_m = campvisr.get_safe_section("campmaps");
 	Section & vis = campvisw.pull_section("campmaps");
 	i = 0;
 
@@ -135,9 +135,15 @@ void Campaign_visibility_save::update_campvis(std::string const & savepath)
 		cms += number;
 
 		while (Section * const s = cconfig.get_section(cms.c_str())) {
-			vis.set_bool
-				(cms.c_str(),
-				 s->get_bool("visible") || campv_s.get_bool(cms.c_str()));
+			bool visible = s->get_bool("visible") || campv_m.get_bool(cms.c_str());
+			if (!visible) {
+				std::string newvisi = s->get_string("newvisi");
+				if (!newvisi.empty()) {
+					visible  = campv_m.get_bool(newvisi.c_str(), false);
+					visible |= campv_c.get_bool(newvisi.c_str(), false);
+				}
+			}
+			vis.set_bool (cms.c_str(), visible);
 
 			++imap;
 			cms = mapsection;

@@ -20,6 +20,7 @@
 #include "trigger_factory.h"
 
 #include "trigger_building.h"
+#include "trigger_defeated.h"
 #include "trigger_military_influence.h"
 #include "trigger_ownership.h"
 #include "trigger_time.h"
@@ -41,6 +42,12 @@ Type_Descr TRIGGER_TYPE_DESCRIPTIONS[] = {
 			 "the specified type in the specified area.")
 	},
 	{
+		"defeated",           _("Defeated Player Trigger"),
+		_
+			("Triggers when the player was defeated. The trigger is set to true, "
+			 "if the player has 0 workers.")
+	},
+	{
 		"military_influence", _("Military influence Trigger"),
 		_
 			("Triggers when the player has some (or highest) military influence "
@@ -54,7 +61,7 @@ Type_Descr TRIGGER_TYPE_DESCRIPTIONS[] = {
 			 "it becomes unset when this no longer holds.")
 	},
 	{
-		"time",          _("Time Trigger"),
+		"time",               _("Time Trigger"),
 		_
 			("Triggers at a certain time. The time can be set to a value in ms. "
 			 "If the trigger has no time is set, a time can be set for it with "
@@ -79,10 +86,11 @@ Trigger & create(size_t const id) {
 Trigger & create(size_t const id, char const * const name, bool const set) {
 	switch (id) {
 	case 0: return *new Trigger_Building          (name, set);
-	case 1: return *new Trigger_Military_Influence(name, set);
-	case 2: return *new Trigger_Ownership         (name, set);
-	case 3: return *new Trigger_Time              (name, set);
-	case 4: return *new Trigger_Vision            (name, set);
+	case 1: return *new Trigger_Defeated          (name, set);
+	case 2: return *new Trigger_Military_Influence(name, set);
+	case 3: return *new Trigger_Ownership         (name, set);
+	case 4: return *new Trigger_Time              (name, set);
+	case 5: return *new Trigger_Vision            (name, set);
 	default:
 		assert(false);
 	}
