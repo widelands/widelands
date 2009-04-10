@@ -1,0 +1,326 @@
+[global]
+packet_version="2"
+
+
+# Time triggers
+
+[Begin]
+type="time"
+version="2"
+time="0"
+
+[Story Timer 0]
+type="time"
+version="2"
+time="2000"
+
+[Story Timer 1]
+type="time"
+version="2"
+time="12000"
+
+[Story Timer 2]
+type="time"
+version="2"
+time="240000"
+
+
+# Time triggers to set via event
+
+[Food infrastructure complete]
+type="time"
+version="2"
+
+[Basic defense complete]
+type="time"
+version="2"
+
+[Mining economy complete]
+type="time"
+version="2"
+
+[Wait Time]
+type="time"
+version="2"
+
+[Trainingssites complete]
+type="time"
+version="2"
+
+[Weapon productions complete]
+type="time"
+version="2"
+
+[Wait Time 2]
+type="time"
+version="2"
+
+[Enemy 2 and 3 defeated]
+type="time"
+version="2"
+
+
+# Building triggers
+
+[Fisher's hut completed]
+type="building"
+version="3"
+point="56 35"
+area="80"
+building="fishers_hut"
+
+[Hunter's hut completed]
+type="building"
+version="3"
+point="56 35"
+area="80"
+building="hunters_hut"
+
+[Well completed]
+type="building"
+version="3"
+point="56 35"
+area="80"
+building="well"
+
+[Farm completed]
+type="building"
+version="3"
+point="56 35"
+area="80"
+building="farm"
+
+[Bakery completed]
+type="building"
+version="3"
+point="56 35"
+area="80"
+building="bakery"
+
+[Donjon completed]
+type="building"
+version="3"
+point="65 28"
+area="20"
+building="donjon"
+
+[Coal Mine completed]
+type="building"
+version="3"
+point="82 20"
+area="30"
+building="coalmine"
+
+[Ore Mine completed]
+type="building"
+version="3"
+point="78 100"
+area="60"
+building="oremine"
+
+[Tavern completed]
+type="building"
+version="3"
+point="64 12"
+area="60"
+building="tavern"
+
+[Smelter completed]
+type="building"
+version="3"
+point="64 12"
+area="60"
+building="smelting_works"
+
+[Metalworks completed]
+type="building"
+version="3"
+point="64 12"
+area="60"
+building="metalworks"
+
+[Burner completed]
+type="building"
+version="3"
+point="64 12"
+area="60"
+building="burners_house"
+
+[Fortress completed]
+type="building"
+version="3"
+point="85 1"
+area="20"
+building="fortress"
+
+[Warehouse completed]
+type="building"
+version="3"
+point="64 12"
+area="50"
+building="warehouse"
+
+[Trainingscamp completed]
+type="building"
+version="3"
+point="64 12"
+area="50"
+building="trainingscamp"
+
+[Battlearena completed]
+type="building"
+version="3"
+point="64 12"
+area="50"
+building="battlearena"
+
+[Axefactory completed]
+type="building"
+version="3"
+point="64 12"
+area="50"
+building="axefactory"
+
+[War Mill completed]
+type="building"
+version="3"
+point="64 12"
+area="50"
+building="warmill"
+
+[Helmsmithy completed]
+type="building"
+version="3"
+point="64 12"
+area="50"
+building="helmsmithy"
+
+
+# Vision triggers
+
+[Expanded east]
+type="vision"
+version="3"
+point="65 28"
+
+[Discovered Mountain]
+type="vision"
+version="3"
+point="71 14"
+
+[Discovered Frontier1]
+type="vision"
+version="3"
+point="81 108"
+
+[Discovered Frontier2]
+type="vision"
+version="3"
+point="85 1"
+
+[Discovered Frontier3]
+type="vision"
+version="3"
+point="85 11"
+
+[Enemy1 in sight1]
+type="vision"
+version="3"
+point="95 91"
+
+[Enemy1 in sight2]
+type="vision"
+version="3"
+point="96 107"
+
+[Enemy1 in sight3]
+type="vision"
+version="3"
+point="96 8"
+
+[Enemy1 in sight4]
+type="vision"
+version="3"
+point="96 19"
+
+[See higher area 1]
+type="vision"
+version="3"
+point="111 88"
+
+[See higher area 2]
+type="vision"
+version="3"
+point="110 97"
+
+[See higher area 3]
+type="vision"
+version="3"
+point="111 110"
+
+[See higher area 4]
+type="vision"
+version="3"
+point="111 7"
+
+[See higher area 5]
+type="vision"
+version="3"
+point="114 14"
+
+[See higher area 6]
+type="vision"
+version="3"
+point="116 21"
+
+
+# Military influence triggers
+
+[Contact with Kalitath0]
+type="military_influence"
+version="3"
+point="86 88"
+
+[Contact with Kalitath1]
+type="military_influence"
+version="3"
+point="93 93"
+
+[Contact with Kalitath2]
+type="military_influence"
+version="3"
+point="93 105"
+
+[Contact with Kalitath3]
+type="military_influence"
+version="3"
+point="94 2"
+
+[Contact with Kalitath4]
+type="military_influence"
+version="3"
+point="94 12"
+
+[Contact with Kalitath5]
+type="military_influence"
+version="3"
+point="91 20"
+
+
+
+# Player defeated triggers
+
+[Player 2 defeated]
+type="defeated"
+version="1"
+player="2"
+
+[Player 3 defeated]
+type="defeated"
+version="1"
+player="3"
+
+[Player 4 defeated]
+type="defeated"
+version="1"
+player="4"

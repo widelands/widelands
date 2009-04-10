@@ -19,7 +19,7 @@
 #####
 
 [global]
-version = 2
+version = 3
 # Barbarian Tutorial Campaign
 campname0=_"(Tutorial) Barbarians - The second Empire"
 campsect0=barbariantut
@@ -40,6 +40,9 @@ campvisi1=0
 # Naming MUST be the name of the campaign-section + "??" where ?? is an increasing number.
 #
 # name      = name of the map.
+# * newvisi = the name of a campaign or a scenario that must be visible, to show
+#             this entry as well - this string unhides the map, if the player
+#             completed the requierements with an older cconfig version.
 # visible   = is this map visible(1), or does it need another map to be played first(0).
 # path      = path to the map.
 #####
@@ -53,6 +56,12 @@ path="campaigns/t01.wmf"
 name=_"Tutorial2 - A Place to call Home"
 visible=0
 path="campaigns/t02.wmf"
+
+[barbariantut02]
+name=_"Tutorial3 - This land is our land"
+newvisi="campsect1"
+visible=0
+path="campaigns/t03.wmf"
 
 
 [empiretut00]

@@ -1,0 +1,17 @@
+[global]
+packet_version=1
+
+[player_1]
+lumberjacks_hut=true
+quarry=true
+rangers_hut=true
+hardener=true
+lime_kiln=true
+fernery=true
+sentry=true
+
+[player_2]
+
+[player_3]
+
+[player_4]

@@ -1,0 +1,91 @@
+[global]
+packet_version="1"
+
+[Build Small Food Economy]
+name=_"Build up a small food economy"
+descr=""<rt><p line-spacing=3 font-size=12>"
+	_"* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a farm and a bakery - to provide your people with food."
+	 "</p></rt>""
+visible="false"
+trigger="Food infrastructure complete"
+
+[Build a donjon]
+name=_"Build a donjon"
+descr=""<rt><p line-spacing=3 font-size=12>"
+	_"* Build a donjon at the northeast of your territory to get a farther visual range and to protect your people from sudden attacks of enemies."
+	 "</p></rt>""
+visible="false"
+trigger="Donjon completed"
+
+[Explore further]
+name=_"Explore further"
+descr=""<rt><p line-spacing=3 font-size=12>"
+	_"* Build more military buildings to explore the area around the headquarters and to ensure the safety of your people."
+	 "</p></rt>""
+visible="false"
+trigger="Basic defense complete"
+
+[Build mining economy]
+name=_"Build mines"
+descr=""<rt><p line-spacing=3 font-size=12>"
+	_"* Expand your territory to the mountains, send geologists to search for ore and coal and build a mining economy with mines, taverns, smelting works and metalworks."
+	 "</p></rt>""
+visible="false"
+trigger="Mining economy complete"
+
+[Build a fortress]
+name=_"Build a fortress"
+descr=""<rt><p line-spacing=3 font-size=12>"
+	_"* Build a fortress to the east of the mountains"
+	 "</p></rt>""
+visible="false"
+trigger="Fortress completed"
+
+[Build a warehouse]
+name=_"Build a warehouse"
+descr=""<rt><p line-spacing=3 font-size=12>"
+	_"* Build a warehouse to the west of the mountains"
+	 "</p></rt>""
+visible="false"
+trigger="Warehouse completed"
+
+[Build trainingssites]
+name=_"Build trainingssites"
+descr=""<rt><p line-spacing=3 font-size=12>"
+	_"* Build a battle arena and a trainings camp to the west of the mountains."
+	 "</p></rt>""
+visible="false"
+trigger="Trainingssites complete"
+
+[Build weapon productions]
+name=_"Build weapon productions"
+descr=""<rt><p line-spacing=3 font-size=12>"
+	_"* As soon as the blacksmith reaches his next level (master blacksmith) enhance your metalworks to an axefactory or even a war mill and build up another metalworks to ensure the production of tools."
+	 "</p></rt>""
+visible="false"
+trigger="Weapon productions complete"
+
+[Build a helmsmithy]
+name=_"Build a helmsmithy"
+descr=""<rt><p line-spacing=3 font-size=12>"
+	_"* Build a helmsmithy to the west of the mountains to provide your soldiers with better armor."
+	 "</p></rt>""
+visible="false"
+trigger="Helmsmithy completed"
+
+[Destroy Kalitaths army]
+name=_"Destroy Kalitaths army"
+descr=""<rt><p line-spacing=3 font-size=12>"
+	_"* Destroy Kalitaths army and expand your territory to the east.
+	 "</p></rt>""
+visible="false"
+trigger="Player 2 defeated"
+
+[Military assault on Al’thunran]
+name=_"Military assault on Al’thunran"
+descr=""<rt><p line-spacing=3 font-size=12>"
+	_"* Destroy all enforcements of Thron’s two brothers to liberate the throne-circle."
+	 "</p></rt>""
+visible="false"
+trigger="Enemy 2 and 3 defeated"
+

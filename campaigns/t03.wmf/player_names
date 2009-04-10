@@ -1,0 +1,20 @@
+# Automatically created by Widelands svn3769
+
+[global]
+packet_version="1"
+
+[player_1]
+name="Thron"
+tribe="barbarians"
+
+[player_2]
+name="Kalitat"
+tribe="barbarians"
+
+[player_3]
+name="First Brother"
+tribe="barbarians"
+
+[player_4]
+name="Second Brother"
+tribe="barbarians"

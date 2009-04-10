@@ -591,10 +591,10 @@ is_modal=true
 posy=1
 button_00=_Continue
 
-[Reveal Empiretut]
-type=reveal_campaign
+[Reveal next scenario]
+type=reveal_scenario
 version=2
-entry=campsect1
+entry=barbariantut02
 
 [Village Tree 1]
 type=immovable
