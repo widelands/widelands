@@ -234,6 +234,8 @@ event="Enable Deeper Coal Mine"
 event="Enable Deeper Ore Mine"
 event="Enable Deeper Gold Mine"
 event="Enable Warehouse"
+event="Enable Microbrewery"
+event="Enable Brewery"
 current_event="0"
 state="init"
 

@@ -793,6 +793,18 @@ player=1
 version="2"
 building="warehouse"
 
+[Enable Microbrewery]
+type="allow_building"
+player=1
+version="2"
+building="micro-brewery"
+
+[Enable Brewery]
+type="allow_building"
+player=1
+version="2"
+building="brewery"
+
 [Set Trainingssites complete trigger]
 type=set_timer
 version=1
