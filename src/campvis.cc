@@ -137,7 +137,7 @@ void Campaign_visibility_save::update_campvis(std::string const & savepath)
 		while (Section * const s = cconfig.get_section(cms.c_str())) {
 			bool visible = s->get_bool("visible") || campv_m.get_bool(cms.c_str());
 			if (!visible) {
-				std::string newvisi = s->get_string("newvisi");
+				std::string newvisi = s->get_string("newvisi", "");
 				if (!newvisi.empty()) {
 					visible  = campv_m.get_bool(newvisi.c_str(), false);
 					visible |= campv_c.get_bool(newvisi.c_str(), false);
