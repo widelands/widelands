@@ -23,19 +23,20 @@ work=_Work
 
 [smoke_meat]
 return=skipped unless economy needs smoked_meat
-consume=meat trunk
-sleep=15000
-animate=working 15000
-produce=smoked_meat
+consume=meat:2 trunk
+sleep=30000
+animate=working 30000
+produce=smoked_meat:2
 
 [smoke_fish]
 return=skipped unless economy needs smoked_fish
-consume=fish trunk
-sleep=15000
-animate=working 15000
-produce=smoked_fish
+consume=fish:2 trunk
+sleep=30000
+animate=working 30000
+produce=smoked_fish:2
 
 [work]
+call=smoke_fish
 call=smoke_meat
 call=smoke_fish
 return=skipped

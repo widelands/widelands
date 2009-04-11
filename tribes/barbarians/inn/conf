@@ -2,6 +2,7 @@ size=medium
 buildable=no
 enhanced_building=yes
 enhancement=big_inn
+output=ration
 output=snack
 
 [buildcost]
@@ -19,14 +20,28 @@ meat=4
 beer=4
 
 [programs]
+produce_ration=_Produce ration
+produce_snack=_Produce snack
 work=_Work
 
-[work]
+[produce_ration]
+return=skipped unless economy needs ration
+consume=fish,pittabread,meat
+sleep=14000
+animate=working 19000
+produce=ration
+
+[produce_snack]
 return=skipped unless economy needs snack
 consume=pittabread fish,meat beer
 sleep=15000
 animate=working 20000
 produce=snack
+
+[work]
+call=produce_ration
+call=produce_snack
+return=skipped
 
 [idle]
 pics=inn_i_??.png  # ???

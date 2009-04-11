@@ -37,6 +37,7 @@ produce=gold
 [work]
 call=smelt_iron
 call=smelt_gold
+call=smelt_iron
 return=skipped
 
 [idle]

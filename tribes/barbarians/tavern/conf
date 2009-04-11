@@ -17,14 +17,20 @@ pittabread=4
 meat=4
 
 [programs]
+produce_ration=_Produce ration
 work=_Work
 
-[work]
+[produce_ration]
 return=skipped unless economy needs ration
 consume=fish,pittabread,meat
 sleep=14000
 animate=working 19000
 produce=ration
+
+[work]
+call=produce_ration
+return=skipped
+
 
 [idle]
 pics=tavern_i_??.png  # ???
