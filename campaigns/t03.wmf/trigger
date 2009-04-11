@@ -273,38 +273,35 @@ type="vision"
 version="3"
 point="116 21"
 
-
-# Military influence triggers
-
 [Contact with Kalitath0]
-type="military_influence"
+type="vision"
 version="3"
-point="86 88"
+point="92 91"
 
 [Contact with Kalitath1]
-type="military_influence"
+type="vision"
 version="3"
-point="93 93"
+point="102 103"
 
 [Contact with Kalitath2]
-type="military_influence"
+type="vision"
 version="3"
-point="93 105"
+point="103 0"
 
 [Contact with Kalitath3]
-type="military_influence"
+type="vision"
 version="3"
-point="94 2"
+point="103 11"
 
 [Contact with Kalitath4]
-type="military_influence"
+type="vision"
 version="3"
-point="94 12"
+point="103 17"
 
 [Contact with Kalitath5]
-type="military_influence"
+type="vision"
 version="3"
-point="91 20"
+point="96 30"
 
 
 
