@@ -1,18 +1,18 @@
 help=_Defend and Conquer!
 max_hp_level=1
-max_evade_level=2
 max_attack_level=4
 max_defense_level=2
+max_evade_level=2
 
 # initial values and per level increasements
 hp=120-150
 hp_incr_per_level=40
-attack=14-16
+attack=12-16
 attack_incr_per_level=8
 defense=6
-defense_incr_per_level=6
-evade=35
-evade_incr_per_level=20
+defense_incr_per_level=8
+evade=30
+evade_incr_per_level=17
 
 hp_level_0_pic=hp_level0.png
 hp_level_1_pic=hp_level1.png

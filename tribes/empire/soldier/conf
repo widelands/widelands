@@ -3,19 +3,19 @@ help=_Defend and Conquer!
 
 # SOLDIER SPECIFIC STUFF STARTS HERE
 max_hp_level=4
-max_evade_level=2
 max_attack_level=4
 max_defense_level=0
+max_evade_level=2
 
 # initial values and per level increasements
-hp=110-140
-hp_incr_per_level=25
-attack=11-15
-attack_incr_per_level=7
+hp=110-150
+hp_incr_per_level=21
+attack=13-15
+attack_incr_per_level=8
 defense=5
 defense_incr_per_level=5
 evade=30
-evade_incr_per_level=15
+evade_incr_per_level=16
 
 hp_level_0_pic=hp_level0.png
 hp_level_1_pic=hp_level1.png
