@@ -241,6 +241,7 @@ WatchWindow::WatchWindow
 	UI::Window(&parent, x, y, w, h, _("Watch")),
 	mapview   (this, 0, 0, 200, 166, parent),
 	last_visit(game().get_gametime()),
+	single_window(_single_window),
 	follow    (*this,            h),
 	go_to     (*this,            h),
 	close     (*this,         w, h, _single_window)
