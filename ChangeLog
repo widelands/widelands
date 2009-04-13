@@ -1,4 +1,7 @@
 ### Build 14 (until now)
+- Some improvements of tribes economy and soldier balance (svn:3793, svn:3796)
+- Added third barbarian campaign (svn:r3790) and improved the already existing ones (svn:3775, svn:3788)
+- Added a new trigger for scenario maps: Player defeated (svn:3789)
 - In the editor save dialog; initialize the name box with the map name and do not react
   (for example by playing a sound) to clicks in the empty area below the last file in the
   listbox (affects all listboxes in the UI). (svn:r3783)
@@ -16,7 +19,7 @@
 - Make more configuration options configurable in the options menu. (svn:r2753)
 - Fix bugs in the S2 map loader. Trying to load an invalid file could cause failed
   assertions in debug builds and probably other bugs in release builds. (svn:r3750)
-- Added new loading screen. (svn:r3748)
+- Added new loading screens for winterland and for barbarian campaigns. (svn:r3748, svn:3797)
 - Allow configuring which information about a building is shown in the mapview's building
   census and statistics displays and the building window title. (svn:r3741)
 - Added colorized chatmessages. (svn:r3725)

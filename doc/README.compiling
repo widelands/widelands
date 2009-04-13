@@ -119,26 +119,12 @@ under Windows and compiling Widelands.
  - unpack it, edit the makefile user variables and run make
  - if there were no problems, you're done. start developing and commit your
    changes
-   
-Bloodshed's DevCpp
-------------------
-Since Build10, we support a DevCpp-Project file for Bloodshed's free GPLed IDE.
-DevCpp uses mingw and can be set up to use an already installed mingw-environment
-(like the one you can set up via the instructions above).
-You can get the newest version of DevCpp at http://www.bloodshed.net
-
-The mingw-version, that comes with DevCpp does not include all needed librarys so you
-have to install few manually. For few librarys dev-packages are available, so you 
-might check http://devpaks.org/ for the librarys you need.
-
-If everything is set up correctly, you can open the [Widelands]/build/win32/Widelands.dev,
-can change and save anything and of course can compile Widelands.
 
 InnoSetup
 ------------------
 Since Build10 we support an Innosetup file, which can be used for compiling a Setup
 (like the official Widelands-Setup available on sourceforge.net-mirrors).
-Innosetup can be downloaded from http://www.jrsoftware.org 
+Innosetup can be downloaded from http://www.jrsoftware.org
 
 If you've installed InnoSetup, you just need to open [Widelands]/build/win32/Widelands.iss.
 You might change few settings or directly start packing/compiling the setup.
