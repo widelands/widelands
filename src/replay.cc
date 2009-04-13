@@ -128,7 +128,6 @@ ReplayReader::ReplayReader(Game & game, std::string const & filename)
 ReplayReader::~ReplayReader()
 {
 	delete m_cmdlog;
-	m_cmdlog = 0;
 }
 
 
@@ -270,7 +269,6 @@ ReplayWriter::~ReplayWriter()
 	m_cmdlog->Unsigned32(m_game.get_gametime());
 
 	delete m_cmdlog;
-	m_cmdlog = 0;
 }
 
 

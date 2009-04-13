@@ -86,12 +86,14 @@ int32_t Descr_Maintainer<T>::add(T * const item) {
 template <typename T>
 T * Descr_Maintainer<T>::exists(char const * const name) {
 	for (typename T::Index i = 0; i < nitems; ++i)
-		if (name == items[i]->name()) return items[i];
+		if (name == items[i]->name())
+			return items[i];
 	return 0;
 }
 
 template<typename T> Descr_Maintainer<T>::~Descr_Maintainer() {
-	for (typename T::Index i = 0; i < nitems; ++i) delete items[i];
+	for (typename T::Index i = 0; i < nitems; ++i)
+		delete items[i];
 	free(items);
 }
 /// This template is used to have a typesafe maintainer for Bob_Descr,

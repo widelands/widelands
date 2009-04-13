@@ -304,13 +304,7 @@ FieldActionWindow::FieldActionWindow
 	}
 }
 
-/*
-===============
-FieldActionWindow::~FieldActionWindow
 
-Free allocated resources, remove from registry.
-===============
-*/
 FieldActionWindow::~FieldActionWindow()
 {
 	if (m_workarea_preview_job_id)

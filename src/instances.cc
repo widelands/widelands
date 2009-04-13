@@ -152,10 +152,6 @@ void Cmd_Act::Write
 }
 
 
-/** Object_Manager::~Object_Manager()
- *
- * Remove all map objects
- */
 Object_Manager::~Object_Manager()
 {
 	// better not throw an exception in a destructor...

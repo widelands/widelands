@@ -44,7 +44,6 @@ namespace UI {
  */
 struct Window : public Panel {
 	Window(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const char *title);
-	~Window();
 
 	void set_title(const char *text);
 

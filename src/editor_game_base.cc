@@ -115,13 +115,7 @@ m_lasttrackserial   (0)
 	memset(m_players, 0, sizeof(m_players));
 }
 
-/*
-============
-Editor_Game_Base::~Editor_Game_Base()
 
-last few cleanups
-============
-*/
 Editor_Game_Base::~Editor_Game_Base() {
 	const Player * const * const players_end = m_players + MAX_PLAYERS;
 	for (Player * * p = m_players; p < players_end; ++p)

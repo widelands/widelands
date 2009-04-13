@@ -496,13 +496,6 @@ m_parent(&parent)
 	set_inner_size(get_inner_w(), pos.y);
 }
 
-/*
-===============
-
-Unregister from the registry pointer
-===============
-*/
-Ware_Statistics_Menu::~Ware_Statistics_Menu() {}
 
 /**
  * Called when the ok button has been clicked

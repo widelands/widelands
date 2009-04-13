@@ -49,9 +49,6 @@ S2_Map_Loader::S2_Map_Loader(const char * filename, Widelands::Map & M)
 }
 
 
-S2_Map_Loader::~S2_Map_Loader() {}
-
-
 /**
  * load the header
  *

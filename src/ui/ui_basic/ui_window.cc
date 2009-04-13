@@ -83,11 +83,6 @@ m_pic_background(g_gr->get_picture(PicMod_UI, "pics/win_bg.png"))
 	set_top_on_click(true);
 }
 
-/**
- * Resource cleanup
- */
-Window::~Window() {}
-
 
 /**
  * Replace the current title with a new one

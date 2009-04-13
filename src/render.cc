@@ -608,13 +608,6 @@ end:
 }
 
 
-/*
-===============
-AnimationGfx::~AnimationGfx
-
-Free all resources
-===============
-*/
 AnimationGfx::~AnimationGfx()
 {
 	for (Widelands::Player_Number i = 0; i <= MAX_PLAYERS; ++i) {

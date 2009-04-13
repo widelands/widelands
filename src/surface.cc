@@ -27,7 +27,6 @@
 Surface::~Surface() {
 	if (m_surface)
 		SDL_FreeSurface(m_surface);
-	m_surface = 0;
 }
 
 void Surface::set_sdl_surface(SDL_Surface & surface)

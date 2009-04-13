@@ -26,9 +26,6 @@ Computer_Player::Computer_Player(Widelands::Game & g, const Widelands::Player_Nu
 {
 }
 
-Computer_Player::~Computer_Player()
-{
-}
 
 #ifdef DEBUG
 struct EmptyAI : Computer_Player {

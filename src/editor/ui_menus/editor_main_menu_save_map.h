@@ -38,7 +38,6 @@ struct Textarea;
 */
 struct Main_Menu_Save_Map : public UI::Window {
 	Main_Menu_Save_Map(Editor_Interactive *);
-	virtual ~Main_Menu_Save_Map();
 
 private:
 	void clicked_ok            ();

@@ -53,7 +53,6 @@ struct BaseImmovable : public Map_Object {
 	};
 
 	BaseImmovable(const Map_Object_Descr &);
-	virtual ~BaseImmovable();
 
 	virtual int32_t  get_size    () const throw () = 0;
 	virtual bool get_passable() const throw () = 0;
@@ -122,7 +121,6 @@ class Immovable : public BaseImmovable {
 
 public:
 	Immovable(const Immovable_Descr &);
-	~Immovable();
 
 	Coords get_position() const {return m_position;}
 

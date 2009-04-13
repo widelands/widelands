@@ -32,7 +32,6 @@ namespace Widelands {
 struct Trigger_Vision : public Trigger_Player_Area {
 	friend struct ::Trigger_Vision_Option_Menu;
 	Trigger_Vision(char const * Name, bool set);
-	virtual ~Trigger_Vision();
 
 	int32_t option_menu(Editor_Interactive &);
 

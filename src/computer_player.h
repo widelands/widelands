@@ -31,7 +31,6 @@
  */
 struct Computer_Player : Widelands::NoteReceiver<Widelands::NoteImmovable>, Widelands::NoteReceiver<Widelands::NoteField> {
 	Computer_Player(Widelands::Game &, const Widelands::Player_Number);
-	~Computer_Player ();
 
 	virtual void think () = 0;
 

@@ -47,6 +47,7 @@ Cmd_Queue::~Cmd_Queue()
 /*
  * flushs all commands from the queue. Needed for
  * game loading (while in game)
+ * FIXME ...but game loading while in game is not possible!
  */
 void Cmd_Queue::flush() {
 	while (!m_cmds.empty()) {

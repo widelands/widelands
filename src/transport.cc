@@ -1849,16 +1849,6 @@ SupplyList IMPLEMENTATION
 ==============================================================================
 */
 
-
-SupplyList::SupplyList()
-{}
-
-/**
- * A supply list should be empty when it's destroyed.
-*/
-SupplyList::~SupplyList()
-{}
-
 /**
  * Add a supply to the list.
 */

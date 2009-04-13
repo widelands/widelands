@@ -231,8 +231,6 @@ Critter_Bob::Critter_Bob(const Critter_Bob_Descr & critter_bob_descr) :
 Bob(critter_bob_descr)
 {}
 
-Critter_Bob::~Critter_Bob() {}
-
 
 /*
 ==============================

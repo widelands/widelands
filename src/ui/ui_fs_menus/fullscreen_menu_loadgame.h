@@ -40,7 +40,6 @@ struct RenderTarget;
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_LoadGame(Widelands::Game &);
-	~Fullscreen_Menu_LoadGame();
 
 	const std::string & filename() {return m_filename;}
 

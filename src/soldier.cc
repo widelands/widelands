@@ -43,21 +43,6 @@
 
 namespace Widelands {
 
-
-/*
-==============================================================
-
-SOLDIER DESCRIPTION IMPLEMENTATION
-
-==============================================================
-*/
-
-/*
-===============
-Soldier_Descr::Soldier_Descr
-Soldier_Descr::~Soldier_Descr
-===============
-*/
 Soldier_Descr::Soldier_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,

@@ -64,9 +64,6 @@ struct AnimationData {
 * counted from 0.
 */
 struct AnimationManager {
-	AnimationManager();
-	~AnimationManager();
-
 	void flush();
 	uint32_t get
 		(std::string const & directory,
@@ -104,7 +101,6 @@ struct DirAnimations {
 		 const uint32_t dir4 = 0,
 		 const uint32_t dir5 = 0,
 		 const uint32_t dir6 = 0);
-	~DirAnimations();
 
 	void parse
 		(Widelands::Map_Object_Descr &,

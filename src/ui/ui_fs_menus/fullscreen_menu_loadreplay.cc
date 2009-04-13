@@ -74,7 +74,6 @@ m_title
 	fill_list();
 }
 
-Fullscreen_Menu_LoadReplay::~Fullscreen_Menu_LoadReplay() {}
 
 void Fullscreen_Menu_LoadReplay::clicked_ok()
 {

@@ -28,7 +28,6 @@
 /// \todo const correctness
 struct RealFSImpl : public FileSystem {
 	RealFSImpl(std::string const & Directory);
-	~RealFSImpl();
 
 	virtual int32_t FindFiles
 		(std::string const & path,

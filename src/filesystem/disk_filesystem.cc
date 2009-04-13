@@ -53,7 +53,6 @@ RealFSImpl::RealFSImpl(std::string const & Directory)
 #endif
 }
 
-RealFSImpl::~RealFSImpl() {}
 
 /**
  * Return true if this directory is writable.

@@ -153,8 +153,6 @@ SpinBox::SpinBox
 	}
 }
 
-SpinBox::~SpinBox() {}
-
 
 /**
  * private function - takes care about all updates in the UI elements

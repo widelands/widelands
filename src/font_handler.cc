@@ -48,9 +48,7 @@ Font_Handler::Font_Handler() {
 	m_cbdata = 0;
 }
 
-/**
- * Plain Destructor
- */
+
 Font_Handler::~Font_Handler() {
 	delete m_font_loader;
 	TTF_Quit();

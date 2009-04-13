@@ -173,12 +173,6 @@ m_last_building_index(0)
 		 false);
 }
 
-/*
-===============
-Unregister from the registry pointer
-===============
-*/
-Building_Statistics_Menu::~Building_Statistics_Menu() {}
 
 /*
  * Update this statistic

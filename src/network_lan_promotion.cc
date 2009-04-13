@@ -204,10 +204,9 @@ void LAN_Game_Promoter::set_map (char const * map)
 
 /*** class LAN_Game_Finder ***/
 
-LAN_Game_Finder::LAN_Game_Finder ()
+LAN_Game_Finder::LAN_Game_Finder () :
+	callback(0)
 {
-	callback = 0;
-
 	bind (WIDELANDS_LAN_DISCOVERY_PORT);
 
 	reset();
@@ -225,7 +224,6 @@ void LAN_Game_Finder::reset ()
 	broadcast (magic, 8, WIDELANDS_LAN_PROMOTION_PORT);
 }
 
-LAN_Game_Finder::~LAN_Game_Finder () {}
 
 void LAN_Game_Finder::run ()
 {

@@ -40,10 +40,6 @@ namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
-
-Map_Flagdata_Data_Packet::~Map_Flagdata_Data_Packet() {}
-
-
 void Map_Flagdata_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,

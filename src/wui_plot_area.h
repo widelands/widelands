@@ -51,7 +51,6 @@ struct WUIPlot_Area : public UI::Panel {
 
 	WUIPlot_Area
 		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
-	~WUIPlot_Area();
 
 	virtual void draw(RenderTarget &);
 

@@ -100,11 +100,6 @@ AnimationManager IMPLEMENTATION
 
 AnimationManager g_anim;
 
-
-AnimationManager:: AnimationManager() {}
-
-AnimationManager::~AnimationManager() {}
-
 /*
 ===============
 AnimationManager::flush
@@ -281,12 +276,6 @@ DirAnimations IMPLEMENTAION
 ==============================================================================
 */
 
-/*
-===============
-DirAnimations::DirAnimations
-DirAnimations::~DirAnimations
-===============
-*/
 DirAnimations::DirAnimations
 	(uint32_t const dir1,
 	 uint32_t const dir2,
@@ -303,7 +292,6 @@ DirAnimations::DirAnimations
 	m_animations[5] = dir6;
 }
 
-DirAnimations::~DirAnimations() {}
 
 /*
 ===============

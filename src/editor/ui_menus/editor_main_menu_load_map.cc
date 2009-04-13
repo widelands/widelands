@@ -136,14 +136,7 @@ m_parent(parent) //  FIXME redundant (base stores parent pointer)
 	move_to_top();
 }
 
-/**
- * Unregister from the registry pointer
-*/
-Main_Menu_Load_Map::~Main_Menu_Load_Map() {}
 
-/**
- * Called when the ok button has been clicked
-*/
 void Main_Menu_Load_Map::clicked_ok() {
 	std::string filename(m_ls->get_selected());
 

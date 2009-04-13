@@ -142,7 +142,6 @@ struct S2MapDescrHeader {
 
 struct S2_Map_Loader : public Widelands::Map_Loader {
 	S2_Map_Loader(const char *, Widelands::Map &);
-	virtual ~S2_Map_Loader();
 
 	virtual int32_t preload_map(bool);
 	void load_world();

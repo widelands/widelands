@@ -60,8 +60,6 @@ PlayerCommand::PlayerCommand (int32_t const time, Player_Number const s)
 	: GameLogicCommand (time), m_sender(s), m_cmdserial(0)
 {}
 
-PlayerCommand::~PlayerCommand () {}
-
 PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 {
 	switch (des.Unsigned8()) {

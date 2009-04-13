@@ -287,10 +287,6 @@ m_button_del
 		center_to_parent();
 }
 
-/**
- * Unregister from the registry pointer
-*/
-Editor_Variables_Menu::~Editor_Variables_Menu() {}
 
 /**
  * A Button has been clicked

@@ -79,8 +79,6 @@ m_log    (this, 0, 0, 280, 150, "")
 
 /*
 ===============
-MapObjectDebugPanel::~MapObjectDebugPanel
-
 Unregister logger.
 ===============
 */
@@ -237,7 +235,6 @@ FieldDebugWindow
 
 struct FieldDebugWindow : public UI::Window {
 	FieldDebugWindow(Interactive_Base & parent, Widelands::Coords);
-	~FieldDebugWindow();
 
 	Interactive_Base & ibase() {
 		return dynamic_cast<Interactive_Base &>(*get_parent());
@@ -295,13 +292,8 @@ m_ui_bobs(this, 0, 304, 200, 96)
 }
 
 
-FieldDebugWindow::~FieldDebugWindow() {}
-
-
 /*
 ===============
-FieldDebugWindow::think
-
 Gather information about the field and update the UI elements.
 This is done every frame in order to have up to date information all the time.
 ===============

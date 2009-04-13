@@ -38,7 +38,6 @@ struct SpinBox : public Panel {
 		 int32_t startval, int32_t minval, int32_t maxval, std::string unit = "",
 		 uint32_t buttonbackground = 2, bool big = false,
 		 Align align = Align_Center);
-	virtual ~SpinBox();
 
 	void setValue(int32_t);
 	void setUnit(std::string);

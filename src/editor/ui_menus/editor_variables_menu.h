@@ -29,7 +29,6 @@ namespace Widelands {struct Variable;};
 
 struct Editor_Variables_Menu : public UI::UniqueWindow {
 	Editor_Variables_Menu(Editor_Interactive &, UI::UniqueWindow::Registry *);
-	virtual ~Editor_Variables_Menu();
 
 private:
 	Editor_Interactive                & m_parent;

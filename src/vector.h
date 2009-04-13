@@ -33,7 +33,8 @@ struct Vector {
 
 	void normalize() {
 		const float f = static_cast<float>(sqrt(x * x + y * y + z * z));
-		if (f == 0) return;
+		if (f == 0)
+			return;
 		x /= f;
 		y /= f;
 		z /= f;

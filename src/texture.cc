@@ -147,9 +147,7 @@ is_32bit   (format.BytesPerPixel == 4)
 		throw wexception("%s: texture has no frames", &fnametmpl);
 }
 
-/**
- * Clean up.
- */
+
 Texture::~Texture ()
 {
 	delete m_colormap;

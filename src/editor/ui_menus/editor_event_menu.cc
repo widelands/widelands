@@ -189,10 +189,6 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 	update();
 }
 
-/**
- * Unregister from the registry pointer
-*/
-Editor_Event_Menu::~Editor_Event_Menu() {}
 
 /**
  * Update all lists and stuff

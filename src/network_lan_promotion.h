@@ -88,7 +88,6 @@ struct LAN_Game_Finder:LAN_Base {
 	};
 
 	LAN_Game_Finder ();
-	~LAN_Game_Finder ();
 
 	void reset ();
 	void run ();

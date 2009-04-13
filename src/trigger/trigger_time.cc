@@ -65,7 +65,7 @@ void Trigger_Time::check_set_conditions(Game const & game) {
 /**
  * Reset this trigger. This is only valid for non one timers
  */
-void Trigger_Time::reset_trigger       (Game const & game) {
+void Trigger_Time::reset_trigger       (Game const &) {
 	// save new start time
 	// NOTE: if it took a while for an event to note us,
 	// this time the trigger wasn't counting

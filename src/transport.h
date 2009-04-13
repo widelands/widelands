@@ -469,9 +469,6 @@ struct Supply : public Trackable {
  * SupplyList is used in the Economy to keep track of supplies.
  */
 struct SupplyList {
-	SupplyList();
-	~SupplyList();
-
 	void add_supply(Supply &);
 	void remove_supply(Supply &);
 

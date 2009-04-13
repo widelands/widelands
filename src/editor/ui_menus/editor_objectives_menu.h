@@ -33,7 +33,6 @@ struct Textarea;
 
 struct Editor_Objectives_Menu : public UI::UniqueWindow {
 	Editor_Objectives_Menu(Editor_Interactive *, UI::UniqueWindow::Registry *);
-	virtual ~Editor_Objectives_Menu();
 
 private:
 	Editor_Interactive                 * m_parent;

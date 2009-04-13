@@ -85,7 +85,6 @@ m_tagametime    (this, m_xres * 71 / 100, m_yres * 3 / 8, std::string())
 	fill_list();
 }
 
-Fullscreen_Menu_LoadGame::~Fullscreen_Menu_LoadGame() {}
 
 void Fullscreen_Menu_LoadGame::clicked_ok()
 {

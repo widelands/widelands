@@ -216,10 +216,6 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 		center_to_parent();
 }
 
-/**
- * Unregister from the registry pointer
-*/
-Editor_Objectives_Menu::~Editor_Objectives_Menu() {}
 
 /**
  * A Button has been clicked

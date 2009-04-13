@@ -99,13 +99,7 @@ m_label_speed                 (this, get_w(), 0, std::string(), Align_TopRight)
 	m_label_speed.set_visible(false);
 }
 
-/*
-===============
-Interactive_Base::~Interactive_Base
 
-cleanups
-===============
-*/
 Interactive_Base::~Interactive_Base()
 {
 	if (m_buildroad)

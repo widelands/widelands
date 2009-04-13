@@ -80,9 +80,6 @@ m_plotmode(PLOTMODE_ABSOLUTE)
 {}
 
 
-WUIPlot_Area::~WUIPlot_Area() {}
-
-
 /*
  * Draw this. This is the main function
  */

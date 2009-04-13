@@ -40,9 +40,6 @@ Trigger_Vision::Trigger_Vision(char const * const Name, bool const set)
 {}
 
 
-Trigger_Vision::~Trigger_Vision() {}
-
-
 void Trigger_Vision::Read(Section & s, Editor_Game_Base & egbase) {
 	try {
 		uint32_t const packet_version = s.get_safe_positive("version");

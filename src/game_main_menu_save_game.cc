@@ -97,13 +97,6 @@ m_curdir(SaveHandler::get_base_dir())
 	move_to_top();
 }
 
-/*
-===============
-Unregister from the registry pointer
-===============
-*/
-Game_Main_Menu_Save_Game::~Game_Main_Menu_Save_Game() {}
-
 
 /**
  * called when a item is selected

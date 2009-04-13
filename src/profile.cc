@@ -713,11 +713,6 @@ Profile::Profile
 	read(filename, global_section);
 }
 
-/** Profile::~Profile()
- *
- * Free allocated resources
- */
-Profile::~Profile() {}
 
 /** Profile::error(const char *fmt, ...)
  *

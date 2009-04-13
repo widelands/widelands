@@ -157,18 +157,7 @@ m_parent  (parent) //  FIXME redundant (base has parent pointer)
 	move_to_top();
 }
 
-/*
-===============
-Unregister from the registry pointer
-===============
-*/
-Main_Menu_Save_Map::~Main_Menu_Save_Map() {}
 
-/*
-===========
-called when the ok button has been clicked
-===========
-*/
 void Main_Menu_Save_Map::clicked_ok() {
 	assert(m_ok_btn->enabled());
 	std::string filename = m_editbox->text();

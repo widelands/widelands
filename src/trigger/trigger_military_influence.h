@@ -32,7 +32,6 @@ namespace Widelands {
 struct Trigger_Military_Influence : public Trigger_Player_Area {
 	friend struct ::Trigger_Military_Influence_Option_Menu;
 	Trigger_Military_Influence(char const * Name, bool set);
-	virtual ~Trigger_Military_Influence();
 
 	int32_t option_menu(Editor_Interactive &);
 

@@ -34,7 +34,6 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
 	friend struct SaveWarnMessageBox;
 	Game_Main_Menu_Save_Game
 		(Interactive_GameBase &, UI::UniqueWindow::Registry & registry);
-	virtual ~Game_Main_Menu_Save_Game();
 
 private:
 	Interactive_GameBase & igbase();

@@ -34,9 +34,6 @@ Trigger_Military_Influence::Trigger_Military_Influence
 {}
 
 
-Trigger_Military_Influence::~Trigger_Military_Influence() {}
-
-
 void Trigger_Military_Influence::Read(Section & s, Editor_Game_Base & egbase) {
 	try {
 		uint32_t const packet_version = s.get_safe_positive("version");

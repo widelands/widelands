@@ -48,9 +48,6 @@ RenderTarget::RenderTarget(Surface * const bmp)
 	reset();
 }
 
-RenderTarget::~RenderTarget()
-{
-}
 
 /**
  * Retrieve the current window setting.

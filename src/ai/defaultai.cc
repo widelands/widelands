@@ -210,7 +210,6 @@ void DefaultAI::late_initialization ()
 	}
 }
 
-DefaultAI::~DefaultAI () {}
 
 DefaultAI::BuildingObserver & DefaultAI::get_building_observer
 	(char const * const name)

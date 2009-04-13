@@ -28,8 +28,6 @@ namespace Widelands {
  * This packet cares for the data of flags
  */
 struct Map_Flagdata_Data_Packet : public Map_Data_Packet {
-	virtual ~Map_Flagdata_Data_Packet();
-
 	virtual void Read
 		(FileSystem &,
 		 Editor_Game_Base      &,

@@ -42,8 +42,6 @@ struct PlayerCommand : public GameLogicCommand {
 	/// For savegame loading
 	PlayerCommand() : GameLogicCommand(0), m_sender(0), m_cmdserial(0) {}
 
-	virtual ~PlayerCommand ();
-
 	Player_Number sender   () const {return m_sender;}
 	uint32_t      cmdserial() const {return m_cmdserial;}
 	void set_cmdserial(uint32_t const s) {m_cmdserial = s;}

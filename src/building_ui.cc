@@ -136,7 +136,6 @@ class BulldozeConfirm
  */
 struct BulldozeConfirm : public UI::Window {
 	BulldozeConfirm(Interactive_Base * parent, Building * building, Widelands::PlayerImmovable * todestroy = 0);
-	virtual ~BulldozeConfirm();
 
 	virtual void think();
 
@@ -196,9 +195,6 @@ BulldozeConfirm::BulldozeConfirm(Interactive_Base * parent, Building * building,
 	 	 &BulldozeConfirm::die, *this))
 		->center_mouse();
 }
-
-
-BulldozeConfirm::~BulldozeConfirm() {}
 
 
 /*
@@ -341,11 +337,6 @@ m_display_size(0)
 }
 
 
-/*
-===============
-Cleanup
-===============
-*/
 WaresQueueDisplay::~WaresQueueDisplay() {
 	g_gr->free_surface(m_pic_background);
 }
@@ -508,13 +499,6 @@ m_workarea_job_id(Overlay_Manager::Job_Id::Null())
 }
 
 
-/*
-===============
-Building_Window::~Building_Window
-
-Add to registry
-===============
-*/
 Building_Window::~Building_Window()
 {
 	if (m_workarea_job_id)
@@ -801,7 +785,6 @@ ConstructionSite UI IMPLEMENTATION
 
 struct ConstructionSite_Window : public Building_Window {
 	ConstructionSite_Window(Interactive_Player * parent, Widelands::ConstructionSite * cs, UI::Window * * registry);
-	virtual ~ConstructionSite_Window();
 
 	ConstructionSite * get_constructionsize() {
 		return dynamic_cast<ConstructionSite *>(get_building());
@@ -864,14 +847,6 @@ ConstructionSite_Window::ConstructionSite_Window
 
 /*
 ===============
-Deinitialize
-===============
-*/
-ConstructionSite_Window::~ConstructionSite_Window() {}
-
-
-/*
-===============
 ConstructionSite_Window::think
 
 Make sure the window is redrawn when necessary.
@@ -910,7 +885,6 @@ Warehouse UI IMPLEMENTATION
 
 struct Warehouse_Window : public Building_Window {
 	Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI::Window **registry);
-	virtual ~Warehouse_Window();
 
 	Warehouse * get_warehouse() {
 		return dynamic_cast<Warehouse *>(get_building());
@@ -996,13 +970,6 @@ Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI
 }
 
 
-/*
-===============
-Deinitialize, remove from registry
-===============
-*/
-Warehouse_Window::~Warehouse_Window() {}
-
 /**
  * \todo Implement help
  */
@@ -1070,7 +1037,6 @@ ProductionSite UI IMPLEMENTATION
 struct ProductionSite_Window_ListWorkerWindow : public UI::Window {
 	ProductionSite_Window_ListWorkerWindow
 		(Interactive_Player *, ProductionSite *);
-	virtual ~ProductionSite_Window_ListWorkerWindow();
 
 	virtual void think();
 
@@ -1133,11 +1099,6 @@ UI::Window(parent, 0, 0, 320, 125, _("Worker Listing"))
 	center_to_parent();
 	move_to_top();
 }
-
-
-ProductionSite_Window_ListWorkerWindow::~ProductionSite_Window_ListWorkerWindow
-	()
-{}
 
 
 void ProductionSite_Window_ListWorkerWindow::think() {
@@ -1256,7 +1217,6 @@ private:
 
 struct ProductionSite_Window : public Building_Window {
 	ProductionSite_Window(Interactive_Player * parent, ProductionSite * ps, UI::Window * * registry);
-	virtual ~ProductionSite_Window();
 
 	ProductionSite * get_productionsite() {
 		return dynamic_cast<ProductionSite *>(get_building());
@@ -1450,12 +1410,6 @@ UI::Box * ProductionSite_Window::create_production_box
 	return box;
 }
 
-/*
-===============
-Deinitialize, remove from registry
-===============
-*/
-ProductionSite_Window::~ProductionSite_Window() {}
 
 /*
  * List worker button has been clicked
@@ -1727,7 +1681,6 @@ TrainingSite UI IMPLEMENTATION
 
 struct TrainingSite_Window : public ProductionSite_Window {
 	TrainingSite_Window(Interactive_Player * parent, TrainingSite * ps, UI::Window * * registry);
-	virtual ~TrainingSite_Window();
 
 	TrainingSite * get_trainingsite() {
 		return dynamic_cast<TrainingSite *>(get_building());
@@ -1787,13 +1740,6 @@ TrainingSite_Window::TrainingSite_Window
 	fit_inner (*m_tabpanel);
 }
 
-
-/*
-===============
-Deinitialize, remove from registry
-===============
-*/
-TrainingSite_Window::~TrainingSite_Window() {}
 
 UI::Box * TrainingSite_Window::create_military_box (UI::Panel * const panel)
 {

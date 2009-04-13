@@ -38,7 +38,6 @@ template <typename T> struct Callback_Button;
 */
 struct Main_Menu_Load_Map : public UI::Window {
 	Main_Menu_Load_Map(Editor_Interactive *);
-	virtual ~Main_Menu_Load_Map();
 
 private:
 	void clicked_ok();

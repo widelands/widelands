@@ -116,7 +116,6 @@ NetClient::~NetClient ()
 	SDLNet_FreeSocketSet (d->sockset);
 
 	delete d;
-	d = 0;
 }
 
 void NetClient::run ()

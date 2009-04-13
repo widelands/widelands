@@ -159,9 +159,6 @@ m_result         (Failed)
 }
 
 
-TrainingSite::~TrainingSite() {}
-
-
 /**
  * Retrieve the training program that is currently running.
  * \return  the name of the current program

@@ -46,7 +46,6 @@ BaseImmovable::BaseImmovable(const Map_Object_Descr & mo_descr) :
 Map_Object(&mo_descr)
 {}
 
-BaseImmovable::~BaseImmovable() {}
 
 static std::string const base_immovable_name = "unknown";
 std::string const & BaseImmovable::name() const throw () {
@@ -322,7 +321,6 @@ m_program_ptr (0),
 m_program_step(0)
 {}
 
-Immovable::~Immovable() {}
 
 int32_t Immovable::get_type() const throw ()
 {

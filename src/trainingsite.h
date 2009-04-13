@@ -109,7 +109,6 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 
 public:
 	TrainingSite(TrainingSite_Descr const &);
-	virtual ~TrainingSite();
 
 	void prefill
 		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);

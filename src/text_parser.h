@@ -107,8 +107,6 @@ private:
 };
 
 struct Text_Parser {
-	Text_Parser ();
-	~Text_Parser();
 	void parse
 		(std::string & text,
 		 std::vector<Richtext_Block> & blocks,

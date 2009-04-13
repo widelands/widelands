@@ -238,7 +238,6 @@ struct Profile {
 		 char const * global_section,
 		 char const * textdomain,
 		 int32_t      error_level    = err_throw);
-	~Profile();
 
 	void error(const char *fmt, ...) const __attribute__((format(printf, 2, 3)));
 	void check_used() const;

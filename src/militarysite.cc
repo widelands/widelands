@@ -96,11 +96,6 @@ m_nexthealtime(0)
 {}
 
 
-/**
-===============
-MilitarySite::~MilitarySite
-===============
-*/
 MilitarySite::~MilitarySite()
 {
 	assert(!m_soldier_request);

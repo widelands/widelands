@@ -46,8 +46,7 @@ static const int32_t CARRIER_SPAWN_INTERVAL = 2500;
 
 WarehouseSupply::~WarehouseSupply()
 {
-	if (m_economy)
-	{
+	if (m_economy) {
 		log
 			("WarehouseSupply::~WarehouseSupply: Warehouse %u still belongs to "
 			 "an economy",
@@ -314,13 +313,6 @@ m_next_carrier_spawn(0)
 {}
 
 
-/*
-===============
-Warehouse::Warehouse
-
-Cleanup
-===============
-*/
 Warehouse::~Warehouse()
 {
 	delete m_supply;
@@ -375,7 +367,9 @@ void Warehouse::postfill
 Warehouse::get_priority
 warehouses determine how badly they want a certain ware
 */
-int32_t Warehouse::get_priority(int32_t type, Ware_Index ware_index, bool adjust) const {
+int32_t Warehouse::get_priority
+	(int32_t const type, Ware_Index const ware_index, bool) const
+{
 	return
 		type == Request::WARE and m_target_supply[ware_index] > 0 ? 500000 : 100;
 }
