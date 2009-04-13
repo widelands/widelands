@@ -62,7 +62,6 @@ struct WatchWindow : public UI::Window {
 	}
 
 	UI::Signal1<Point> warp_mainview;
-	UI::Signal         closed;
 
 	void add_view(Widelands::Coords);
 	void next_view(bool first = false);
@@ -324,7 +323,15 @@ void WatchWindow::show_view(bool) {
 
 WatchWindow::~WatchWindow() {
 	g_watch_window = 0;
-	closed.call();
+
+	//  If we are destructed because our parent is destructed, our parent may
+	//  not be an Interactive_GameBase any more (it may just be an UI::Panel).
+	//  Then calling Interactive_GameBase::need_complete_redraw on our parent
+	//  would be erroneous. Therefore this check is required. (As always, great
+	//  care is required when destructors are misused to do anything else than
+	//  releasing resources.)
+	if (upcast(Interactive_GameBase, igbase, get_parent()))
+		igbase->need_complete_redraw();
 }
 
 
@@ -384,15 +391,12 @@ Open a watch window.
 void show_watch_window
 	(Interactive_GameBase & parent, Widelands::Coords const coords)
 {
-	WatchWindow * win;
 	if (g_options.pull_section("global").get_bool("single_watchwin", false)) {
 		if (g_watch_window)
 			g_watch_window->add_view(coords);
 		else
 			g_watch_window =
 				new WatchWindow(parent, 250, 150, 200, 200, coords, true);
-		win = g_watch_window;
 	} else
-		win = new WatchWindow(parent, 250, 150, 200, 200, coords, false);
-	win->closed.set(&parent, &Interactive_GameBase::need_complete_redraw);
+		new WatchWindow(parent, 250, 150, 200, 200, coords, false);
 }
