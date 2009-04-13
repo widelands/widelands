@@ -83,37 +83,7 @@ Mix_Music * Songset::get_song()
 	else
 		return 0;
 
-	//TODO: review the #ifdef'ed blocks
-
-#if NEW_SDL_MIXER == 1
 	m_m = Mix_LoadMUS_RW(m_rwops);
-
-#else
-#warning Please update your SDL_mixer library to at least version 1.2.6!!!
-
-#ifdef WIN32
-	// Hack for windows, works because cwd is directory where
-	// executable is in
-	m_m = Mix_LoadMUS(filename.c_str());
-
-#else
-	// We have to go the long way. We are pretty sure, we're not under windows
-	// so we have a /tmp dir and mktemp (hopefully)
-	// This solution is terribly slow, but we hope that there are only
-	// a few sound musics around
-	char tempfilebuf[256] = "/tmp/wl_tempmusic.XXXXXXXX";
-	char * tempfile = tempfilebuf;
-	tempfile = mktemp(tempfilebuf);
-
-	FILE * const f = fopen(tempfile, "w");
-	fwrite(m_fr.Data(0), m_fr.GetSize(), 1, f);
-	fclose(f);
-
-	m_m = Mix_LoadMUS(tempfile);
-	//TODO: this should use a RWopsified version!
-
-#endif
-#endif
 
 	if (m_m)
 		log("Sound_Handler: loaded song \"%s\"\n", filename.c_str());
