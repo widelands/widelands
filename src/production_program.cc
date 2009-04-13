@@ -528,7 +528,7 @@ void ProductionProgram::ActConsume::execute
 					//  therefore erase the group.
 					consumption_quantities[i] += it->second;
 					nr_available              -= it->second;
-					l_groups.erase(it);
+					it = l_groups.erase(it);
 					//  No increment here, erase moved next element to the position
 					//  pointed to by it.
 #if 0

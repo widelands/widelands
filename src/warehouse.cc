@@ -528,7 +528,7 @@ void Warehouse::act(Game & game, uint32_t const data)
 
 				//  Soldier dead ...
 				if (not soldier or soldier->get_current_hitpoints() == 0) {
-					m_incorporated_workers.erase(it);
+					it = m_incorporated_workers.erase(it);
 					m_supply->remove_workers(ware, 1);
 					continue;
 				}
