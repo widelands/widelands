@@ -20,7 +20,7 @@
 #ifndef BASIC_FILEWRITE_H
 #define BASIC_FILEWRITE_H
 
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "machdep.h"
 
 #include <cassert>

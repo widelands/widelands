@@ -23,8 +23,8 @@ Rendering functions of the 16-bit software renderer.
 
 #include "building.h"
 #include "editor_game_base.h"
-#include "filesystem.h"
-#include "layered_filesystem.h"
+#include "io/filesystem/filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "map.h"
 #include "minimap.h"
 #include "player.h"

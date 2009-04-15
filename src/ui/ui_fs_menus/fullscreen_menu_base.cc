@@ -19,7 +19,7 @@
 
 #include "fullscreen_menu_base.h"
 
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "graphic.h"
 #include "log.h"
 #include "profile.h"

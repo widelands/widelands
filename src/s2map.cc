@@ -22,7 +22,7 @@
 #include "editor_game_base.h"
 #include "field.h"
 #include "i18n.h"
-#include "layered_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "map.h"
 #include "map_loader.h"
 #include "wexception.h"

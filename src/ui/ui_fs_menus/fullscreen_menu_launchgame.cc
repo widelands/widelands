@@ -29,7 +29,7 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "instances.h"
-#include "layered_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "map.h"
 #include "map_loader.h"
 #include "player.h"

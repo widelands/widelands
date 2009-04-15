@@ -20,7 +20,7 @@
 #include "trigger_defeated.h"
 
 #include "editorinteractive.h"
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "game.h"
 #include "map.h"
 #include "player.h"

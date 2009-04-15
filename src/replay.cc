@@ -22,7 +22,7 @@
 #include "game.h"
 #include "game_loader.h"
 #include "gamecontroller.h"
-#include "layered_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "md5.h"
 #include "playercommand.h"
 #include "random.h"

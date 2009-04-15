@@ -20,7 +20,7 @@
 #include "event_reveal_objective.h"
 
 #include "editor_game_base.h"
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "game.h"
 #include "i18n.h"
 #include "interactive_base.h"

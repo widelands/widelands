@@ -27,7 +27,7 @@
 #include "tribe.h"
 #include "worker_program.h"
 
-#include "disk_filesystem.h"
+#include "io/filesystem/disk_filesystem.h"
 #include "i18n.h"
 
 #include "upcast.h"

@@ -22,7 +22,7 @@
 #include "fileread.h"
 #include "font_handler.h"
 #include "graphic.h"
-#include "layered_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "rgbcolor.h"
 #include "wexception.h"
 

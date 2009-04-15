@@ -21,7 +21,7 @@
 
 #include "font_handler.h"
 #include "i18n.h"
-#include "layered_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 
 #include <sys/time.h>
 

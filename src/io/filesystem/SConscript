@@ -12,8 +12,6 @@ srcenv.Append(INDENTLIST=[
 	'io/filesystem/zip_exceptions.h',
 	])
 
-srcenv.Append(CPPPATH=['#/src/io/filesystem'])
-
 lib=srcenv.StaticLibrary(target='filesystem', source=SRC)
 Return('lib')
 

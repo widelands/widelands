@@ -22,7 +22,7 @@
 #include "game.h"
 #include "wexception.h"
 #include "wlapplication.h"
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "game_saver.h"
 #include "profile.h"
 

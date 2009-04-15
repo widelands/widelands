@@ -24,7 +24,7 @@
 #include "graphic.h"
 #include "helper.h"
 #include "i18n.h"
-#include "layered_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "parse_map_object_types.h"
 #include "profile.h"
 #include "wexception.h"

@@ -20,7 +20,7 @@
 #include "fullscreen_menu_fileview.h"
 
 #include "constants.h"
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "i18n.h"
 #include "profile.h"
 

@@ -18,7 +18,7 @@
  */
 
 #include "campvis.h"
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "profile.h"
 #include "wexception.h"
 

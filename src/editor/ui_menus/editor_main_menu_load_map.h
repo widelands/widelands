@@ -20,7 +20,7 @@
 #ifndef EDITOR_MAIN_MENU_LOAD_MAP_H
 #define EDITOR_MAIN_MENU_LOAD_MAP_H
 
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 
 #include "ui_window.h"
 

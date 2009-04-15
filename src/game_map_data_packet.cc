@@ -19,7 +19,7 @@
 
 #include "game_map_data_packet.h"
 
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "game.h"
 #include "map_io/widelands_map_loader.h"
 #include "map_io/widelands_map_saver.h"

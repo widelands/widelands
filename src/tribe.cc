@@ -31,7 +31,7 @@
 #include "helper.h"
 #include "i18n.h"
 #include "immovable.h"
-#include "layered_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "militarysite.h"
 #include "parse_map_object_types.h"
 #include "profile.h"
@@ -43,7 +43,7 @@
 #include "widelands_fileread.h"
 #include "world.h"
 
-#include "disk_filesystem.h"
+#include "io/filesystem/disk_filesystem.h"
 
 #include "upcast.h"
 

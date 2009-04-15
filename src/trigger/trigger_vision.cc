@@ -21,7 +21,7 @@
 
 #include "building.h"
 #include "editorinteractive.h"
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "game.h"
 #include "i18n.h"
 #include "map.h"

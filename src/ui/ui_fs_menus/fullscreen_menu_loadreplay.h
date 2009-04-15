@@ -20,7 +20,7 @@
 #ifndef FULLSCREEN_MENU_LOADREPLAY_H
 #define FULLSCREEN_MENU_LOADREPLAY_H
 
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "fullscreen_menu_base.h"
 
 #include "ui_button.h"

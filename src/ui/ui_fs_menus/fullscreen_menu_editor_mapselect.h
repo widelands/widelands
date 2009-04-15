@@ -21,7 +21,7 @@
 #define FULLSCREEN_MENU_EDITOR_MAPSELECT_H
 
 #include "fullscreen_menu_mapselect.h"
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 
 /**
  * Select a Map in Fullscreen Mode. It's a modal fullscreen menu

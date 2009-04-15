@@ -19,7 +19,7 @@
 
 #include "game_loader.h"
 
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "game.h"
 #include "game_cmd_queue_data_packet.h"
 #include "game_game_class_data_packet.h"

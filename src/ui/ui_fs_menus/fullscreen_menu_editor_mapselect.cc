@@ -22,7 +22,7 @@
 #include "editor_game_base.h"
 #include "graphic.h"
 #include "i18n.h"
-#include "layered_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "map.h"
 #include "profile.h"
 #include "s2map.h"

@@ -24,7 +24,7 @@
 #include "game_preload_data_packet.h"
 #include "graphic.h"
 #include "i18n.h"
-#include "layered_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 
 #include <cstdio>
 

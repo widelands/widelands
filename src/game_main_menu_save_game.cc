@@ -19,7 +19,7 @@
 
 #include "game_main_menu_save_game.h"
 
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "constants.h"
 #include "game.h"
 #include "game_loader.h"
@@ -27,7 +27,7 @@
 #include "game_saver.h"
 #include "i18n.h"
 #include "interactive_gamebase.h"
-#include "layered_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "profile.h"
 
 Interactive_GameBase & Game_Main_Menu_Save_Game::igbase() {

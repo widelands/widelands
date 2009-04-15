@@ -22,7 +22,7 @@
 #include "fullscreen_menu_options.h"
 
 #include "constants.h"
-#include "filesystem/layered_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "languages.h"

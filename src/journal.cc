@@ -20,7 +20,7 @@
 #include "journal.h"
 
 #include "log.h"
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "machdep.h"
 
 #include <cassert>

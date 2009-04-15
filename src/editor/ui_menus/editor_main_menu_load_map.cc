@@ -22,7 +22,7 @@
 #include "building.h"
 #include "graphic.h"
 #include "i18n.h"
-#include "layered_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "editorinteractive.h"
 #include "map_io/widelands_map_loader.h"
 #include "wexception.h"
