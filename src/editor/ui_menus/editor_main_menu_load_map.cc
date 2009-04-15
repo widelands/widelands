@@ -24,7 +24,7 @@
 #include "i18n.h"
 #include "layered_filesystem.h"
 #include "editorinteractive.h"
-#include "widelands_map_loader.h"
+#include "map_io/widelands_map_loader.h"
 #include "wexception.h"
 #include "editor_game_base.h"
 #include "editor_set_starting_pos_tool.h"

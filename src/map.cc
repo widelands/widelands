@@ -33,7 +33,7 @@
 #include "pathfield.h"
 #include "soldier.h"
 #include "upcast.h"
-#include "widelands_map_loader.h"
+#include "map_io/widelands_map_loader.h"
 #include "worlddata.h"
 #include "wexception.h"
 

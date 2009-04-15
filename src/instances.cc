@@ -25,8 +25,8 @@
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_map_object_saver.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 
 #include "log.h"
 

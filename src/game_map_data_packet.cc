@@ -21,8 +21,8 @@
 
 #include "filesystem.h"
 #include "game.h"
-#include "widelands_map_loader.h"
-#include "widelands_map_saver.h"
+#include "map_io/widelands_map_loader.h"
+#include "map_io/widelands_map_saver.h"
 
 namespace Widelands {
 

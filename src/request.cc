@@ -26,8 +26,8 @@
 #include "transport.h"
 #include "tribe.h"
 #include "upcast.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_map_object_saver.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "worker.h"
 
 

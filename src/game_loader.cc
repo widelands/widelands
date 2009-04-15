@@ -28,7 +28,7 @@
 #include "game_interactive_player_data_packet.h"
 #include "game_player_economies_data_packet.h"
 #include "game_player_info_data_packet.h"
-#include "widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_loader.h"
 
 #include "log.h"
 

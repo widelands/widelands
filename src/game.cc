@@ -46,7 +46,7 @@
 #include "tribe.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-#include "widelands_map_loader.h"
+#include "map_io/widelands_map_loader.h"
 #include "wlapplication.h"
 
 #include "ui_progresswindow.h"

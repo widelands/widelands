@@ -38,7 +38,7 @@
 #include "profile.h"
 #include "tribe.h"
 #include "warning.h"
-#include "widelands_map_loader.h"
+#include "map_io/widelands_map_loader.h"
 #include "wlapplication.h"
 
 #include "ui_messagebox.h"

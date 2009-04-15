@@ -28,8 +28,8 @@
 #include "layered_filesystem.h"
 #include "profile.h"
 #include "wexception.h"
-#include "widelands_map_loader.h"
-#include "widelands_map_saver.h"
+#include "map_io/widelands_map_loader.h"
+#include "map_io/widelands_map_saver.h"
 #include "zip_filesystem.h"
 
 #include "ui_button.h"
