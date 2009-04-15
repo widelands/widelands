@@ -20,7 +20,6 @@
 #include "widelands_map_player_position_data_packet.h"
 
 #include "editor_game_base.h"
-#include "filesystem.h"
 #include "map.h"
 #include "profile.h"
 #include "widelands_map_data_packet_ids.h"

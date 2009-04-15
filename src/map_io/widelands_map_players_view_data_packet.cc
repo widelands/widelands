@@ -30,9 +30,6 @@
 #include "widelands_streamread_inlines.h"
 #include "widelands_streamwrite_inlines.h"
 
-#include "filesystem.h"
-#include "zip_exceptions.h"
-
 #include "log.h"
 
 #include "upcast.h"
@@ -169,11 +166,8 @@ void Map_Players_View_Data_Packet::Read
 			 plnum, UNSEEN_TIMES_CURRENT_PACKET_VERSION);
 		FileRead unseen_times_file;
 		struct Not_Found {};
-		try {
-			try {unseen_times_file.Open(fs, unseen_times_filename);}
-			catch (const File_error         &) {throw Not_Found();}
-			catch (const ZipOperation_error &) {throw Not_Found();}
-		} catch (const Not_Found) {
+		
+        if(!unseen_times_file.TryOpen(fs, unseen_times_filename)) {
 			log
 				("Map_Players_View_Data_Packet::Read: WARNING: Could not open "
 				 "\"%s\" for reading. Assuming that the game is from an old "

@@ -22,7 +22,6 @@
 #include "editor_game_base.h"
 #include "map.h"
 
-#include "filesystem.h"
 #include "profile.h"
 
 #include "upcast.h"

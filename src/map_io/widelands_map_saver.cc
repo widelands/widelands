@@ -20,7 +20,6 @@
 #include "widelands_map_saver.h"
 
 #include "editor_game_base.h"
-#include "filesystem.h"
 #include "map.h"
 #include "player.h"
 #include "tribe.h"

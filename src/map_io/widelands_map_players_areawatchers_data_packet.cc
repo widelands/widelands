@@ -27,9 +27,6 @@
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 
-#include "filesystem.h"
-#include "zip_exceptions.h"
-
 namespace Widelands {
 
 #define CURRENT_PACKET_VERSION   1
@@ -55,12 +52,11 @@ throw (_wexception)
 		snprintf(filename, sizeof(filename), FILENAME_TEMPLATE, p);
 		FileRead fr;
 		struct Not_Found {};
-		try {
-			try {fr.Open(fs, filename);}
-			catch (const File_error         &) {throw Not_Found();}
-			catch (const ZipOperation_error &) {throw Not_Found();}
-		} catch (Not_Found) {continue;}
-		try {
+			
+        if(!fr.TryOpen(fs, filename))
+            continue;
+		
+        try {
 			uint16_t const packet_version = fr.Unsigned16();
 			if (packet_version == CURRENT_PACKET_VERSION) {
 				while (not fr.EndOfFile()) {
