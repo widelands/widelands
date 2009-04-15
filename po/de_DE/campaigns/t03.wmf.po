@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3807\n"
+"Project-Id-Version: Widelands svn3815\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-15 12:22+0000\n"
+"POT-Creation-Date: 2009-04-15 16:43+0000\n"
 "PO-Revision-Date: YYYY-MM-DD hh:mm+ZZZZ\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -19,15 +19,48 @@ msgid "Tutorial3 - This land is our land"
 msgstr ""
 
 #: ../../../campaigns/t03.wmf/elemental:9
-msgid "Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the handling of military and training site buildings and will finally introduces fighting."
+msgid "Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the handling of military and training site buildings and will finally introduce fighting."
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:293
+msgid "Thron looks worried..."
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:295
+msgid " \"The last days we came closer to our capital. Many people have already joined us on our march and set their hopes on me. However, I fear that we are not strong enough to take up the battle with my brothers.<br>For now we rest at the borders of the old forest and prepare for the coming days.\" "
 msgstr ""
 
 #: ../../../campaigns/t03.wmf/event:297
 msgid "Close to home"
 msgstr ""
 
+#: ../../../campaigns/t03.wmf/event:308
+msgid "Boldreth speaks:"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:310
+msgid " \"This morning I found Thron trouble-minded. He returned from his patrol late last night and sat back against a tree watching over the encampment. The number of quarrels and disputes keeps growing and the winter has us firmly under control. We should put food in our storage to survive the long, cold winter!\" "
+msgstr ""
+
 #: ../../../campaigns/t03.wmf/event:312
 msgid "Winter ahead"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:323
+msgid "Khantrukh nods"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:325
+msgid " \"Boldreth is right! We don't have enough food to survive a long, cold winter. We should start to build a well, a fisher's and a hunter's hut. And if we find enough space, we should as well build up a farm and a bakery! One of our farmers seems to be very clever he already got some crops to grow in this cold soil.\" "
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:327 ../../../campaigns/t03.wmf/event:905
+#: ../../../campaigns/t03.wmf/event:979
+msgid "-- NEW OBJECTIVE --"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:329 ../../../campaigns/t03.wmf/objective:7
+msgid "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a farm and a bakery - to provide your people with food."
 msgstr ""
 
 #: ../../../campaigns/t03.wmf/event:331
@@ -66,8 +99,25 @@ msgstr ""
 msgid "Enhanced economy and training"
 msgstr ""
 
+#: ../../../campaigns/t03.wmf/event:824 ../../../campaigns/t03.wmf/event:1016
+msgid "Thron looks worried."
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:826
+msgid " \"The news that a patrol brought is not good to hear. Our spies tell us, that the wartribes still rage in battle but some of the elder soldiers and tribe leaders seem to grow tired of this senseless war. Kalitat, son of Kun is the first warleader to leave Al’thunran, thus leaving his side weak and vulnerable. As my scouts report, he has set foot on the lower grounds around the capitol, securing the outer fortification rings.\" "
+msgstr ""
+
 #: ../../../campaigns/t03.wmf/event:828 ../../../campaigns/t03.wmf/event:877
+#: ../../../campaigns/t03.wmf/event:1024
 msgid "Another cold day"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:839
+msgid "Boldreth shakes his head."
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:841
+msgid " \"Thron seeks to believe that Kalitat is tired of fighting and will be willing to join us, once we march to re-establish law and order in Al’thunran. But I don’t think so. Kalitat is son to one of the mightiest generals of our forces and his family never quite liked the thought to bow before the banner of Chat’Karuth. Why should he march with his son to reclaim his heritage and the throne?\" "
 msgstr ""
 
 #: ../../../campaigns/t03.wmf/event:843
@@ -78,6 +128,73 @@ msgstr ""
 msgid "The story continues"
 msgstr ""
 
+#: ../../../campaigns/t03.wmf/event:873
+msgid "Thron speaks confidently."
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:875
+msgid " \"The frontier line of my forces has expanded to the edge of the forests. We have a long and cold winter and so many miles behind us. The fortification that we erected around Ondun will guarantee us fast supply of man and goods and once Al’thunran is in my hands, the two cities will be linked by a good and defendable infrastructure. Still I hope I will not walk alone on this mission, I hope Kailitat son of Kun will follow my call.\" "
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:901
+msgid "Boldreth shouts out."
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:903
+msgid " \"This BASTARD! Only one man of our frontier patrol came back alive. He carried a message of Kalitath telling us that he will punish every move of our troops with their blood. We will not accept his behaviour. From now on there is war between Kalitath and us!\" "
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:907
+#: ../../../campaigns/t03.wmf/objective:79
+msgid "* Destroy Kalitaths army and expand your territory to the east."
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:909
+#: ../../../campaigns/t03.wmf/objective:81
+msgid "-> To attack an enemy you must click on the door of an advarse military building. A menu will pop up allowing you to select the number of soldiers that should attack. When you are ready with setting the number, click on the cross ('start attack')"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:911
+msgid "Your loyal companion"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:963
+msgid "Thron speaks:"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:965
+msgid " \"The traitor has left his armies dying where they lay as he saw that he would not keep my forces back. Kalitat disappeared in the mess of the war, but I don’t care now. Shall he flee and be forgotten for all times as a tribeleader that would not bow before the wooden throne, that is mine to take now. Even more his flight brought us a big benefit: All year Kalitath was to busy fighting so that he did not even care to store enough food for all his men. Now that he fled the hunger brought some of his younger followers to desert. This group helds a strong fortification on the main ring. But there is more news: My scouts reported, that the two raging tribes of my brothers are in chaos and have barely noticed the new danger that is about to strike them. However they would not care if they noticed I guess, blinded by rage and hate, there is no sense left in them at all I believe.\" "
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:967
+msgid "Renegade fortification"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:977
+msgid " \"So may it be, the generals are out to set up my troops and Boldreth himself will lead the first strike. I will ride by his side, to free Al’thunran of this war and bring peace back in our capital. When the young sun rises above the trees tomorrow morning, I will order the assault. By dusk, I will celebrate my victory in the wooden halls of the warlord and sacrifice a newborn lamb in the honour of my father whose eyes lie upon me today.<br>So may it be!\" "
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:981
+#: ../../../campaigns/t03.wmf/objective:89
+msgid "* Destroy all enforcements of Thron’s two brothers to liberate the throne-circle."
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:983
+msgid "Military assault"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:1018
+msgid " \"My brothers and their soldiers are dead and left fire and destruction behind. In none of all the ruins I found any man or woman of the normal folk and so I just may hope that they fled from this cruel battleground and started a better life somewhere else. Nothing is left from that beauty I remember, only ruins remain from the old capital. I am sorrowful but also relieved. I never hoped to ever see Al'thunrans old beauty again - some month ago I even wondered whether I will ever be able to set my feet near to Al'thunran again. Now the old town is back in my hands and I will not hesitate to rebuild it with all forces my people have. I can't wait to see it again in it's old beauty.\" "
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:1020
+msgid "--------------------- VICTORY! ----------------------"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:1022
+msgid "You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
+msgstr ""
+
 #: ../../../campaigns/t03.wmf/objective:5
 msgid "Build up a small food economy"
 msgstr ""
@@ -86,32 +203,64 @@ msgstr ""
 msgid "Build a donjon"
 msgstr ""
 
+#: ../../../campaigns/t03.wmf/objective:15
+msgid "* Build a donjon at the northeast of your territory to get a farther visual range and to protect your people from sudden attacks of enemies."
+msgstr ""
+
 #: ../../../campaigns/t03.wmf/objective:21
 msgid "Explore further"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/objective:23
+msgid "* Build more military buildings to explore the area around the headquarters and to ensure the safety of your people."
 msgstr ""
 
 #: ../../../campaigns/t03.wmf/objective:29
 msgid "Build mines"
 msgstr ""
 
+#: ../../../campaigns/t03.wmf/objective:31
+msgid "* Expand your territory to the mountains, send geologists to search for ore and coal and build a mining economy with mines, taverns, smelting works and metalworks."
+msgstr ""
+
 #: ../../../campaigns/t03.wmf/objective:37
 msgid "Build a fortress"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/objective:39
+msgid "* Build a fortress to the east of the mountains"
 msgstr ""
 
 #: ../../../campaigns/t03.wmf/objective:45
 msgid "Build a warehouse"
 msgstr ""
 
+#: ../../../campaigns/t03.wmf/objective:47
+msgid "* Build a warehouse to the west of the mountains"
+msgstr ""
+
 #: ../../../campaigns/t03.wmf/objective:53
 msgid "Build trainingssites"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/objective:55
+msgid "* Build a battle arena and a trainings camp to the west of the mountains."
 msgstr ""
 
 #: ../../../campaigns/t03.wmf/objective:61
 msgid "Build weapon productions"
 msgstr ""
 
+#: ../../../campaigns/t03.wmf/objective:63
+msgid "* As soon as the blacksmith reaches his next level (master blacksmith) enhance your metalworks to an axefactory or even a war mill and build up another metalworks to ensure the production of tools."
+msgstr ""
+
 #: ../../../campaigns/t03.wmf/objective:69
 msgid "Build a helmsmithy"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/objective:71
+msgid "* Build a helmsmithy to the west of the mountains to provide your soldiers with better armor."
 msgstr ""
 
 #: ../../../campaigns/t03.wmf/objective:77
