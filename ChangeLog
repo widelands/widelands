@@ -1,7 +1,8 @@
 ### Build 14 (until now)
-- Some improvements of tribes economy and soldier balance (svn:3793, svn:3796)
-- Added third barbarian campaign (svn:r3790) and improved the already existing ones (svn:3775, svn:3788)
-- Added a new trigger for scenario maps: Player defeated (svn:3789)
+- Fix bug #2351257 - wrong game tips are shown. (svn:r3809)
+- Some improvements of tribes economy and soldier balance (svn:r3793, svn:r3796)
+- Added third barbarian campaign (svn:r3790) and improved the already existing ones (svn:r3775, svn:r3788)
+- Added a new trigger for scenario maps: Player defeated (svn:r3789)
 - In the editor save dialog; initialize the name box with the map name and do not react
   (for example by playing a sound) to clicks in the empty area below the last file in the
   listbox (affects all listboxes in the UI). (svn:r3783)
@@ -15,7 +16,7 @@
 - Allow longer text for a world's name and author (to avoid having it cut off like "The
   Widelands Development Tea"). (svn:r3777)
 - Do not crash when writing an empty file. (svn:r3773)
-- Added a new in game song. (svn:r3758)
+- Added two new in game and one new menu song. (svn:r3758, svn:r3800)
 - Make more configuration options configurable in the options menu. (svn:r2753)
 - Fix bugs in the S2 map loader. Trying to load an invalid file could cause failed
   assertions in debug builds and probably other bugs in release builds. (svn:r3750)
