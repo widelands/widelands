@@ -24,13 +24,13 @@ Export('srcenv')
 libs=[]
 libs+=SConscript('filesystem/SConscript')
 libs+=SConscript('sound/SConscript')
-libs+=SConscript('map_io/SConscript')
 libs+=SConscript('ui/ui_basic/SConscript')
 libs+=SConscript('ui/ui_fs_menus/SConscript')
 libs+=list(SConscript('editor/SConscript'))
 libs+=SConscript('trigger/SConscript')
 libs+=SConscript('events/SConscript')
 libs+=SConscript('ai/SConscript')
+libs+=SConscript('map_io/SConscript')
 libs.reverse()
 
 srcenv.Append(INDENTLIST=[
