@@ -144,7 +144,13 @@ void NetClient::run ()
 	Widelands::Game game;
 	try {
 		UI::ProgressWindow loaderUI("pics/progress.png");
-		GameTips tips (loaderUI);
+		std::vector<std::string> tipstext;
+		tipstext.push_back("general_game");
+		tipstext.push_back("multiplayer");
+		std::string tribe = getPlayersTribe();
+		if (!tribe.empty())
+			tipstext.push_back(tribe);
+		GameTips tips (loaderUI, tipstext);
 
 		loaderUI.step(_("Preparing game"));
 

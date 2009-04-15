@@ -1,0 +1,123 @@
+# Widelands po/de_DE/campaigns/t03.wmf.po
+# Copyright (C) 2005-2009 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svn3807\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2009-04-15 12:22+0000\n"
+"PO-Revision-Date: YYYY-MM-DD hh:mm+ZZZZ\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../campaigns/t03.wmf/elemental:7
+msgid "Tutorial3 - This land is our land"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/elemental:9
+msgid "Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the handling of military and training site buildings and will finally introduces fighting."
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:297
+msgid "Close to home"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:312
+msgid "Winter ahead"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:331
+msgid "The advisor"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:397
+msgid "Food economy completed"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:440
+msgid "Tracks"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:475
+msgid "Further explorations"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:547
+msgid "Mountains found"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:613
+msgid "Mining economy completed"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:636
+msgid "Fortress needed"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:660
+msgid "Fortress completed"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:685
+msgid "Enhanced economy and training"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:828 ../../../campaigns/t03.wmf/event:877
+msgid "Another cold day"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:843
+msgid "Doubts"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/event:856 ../../../campaigns/t03.wmf/event:890
+msgid "The story continues"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/objective:5
+msgid "Build up a small food economy"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/objective:13
+msgid "Build a donjon"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/objective:21
+msgid "Explore further"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/objective:29
+msgid "Build mines"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/objective:37
+msgid "Build a fortress"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/objective:45
+msgid "Build a warehouse"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/objective:53
+msgid "Build trainingssites"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/objective:61
+msgid "Build weapon productions"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/objective:69
+msgid "Build a helmsmithy"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/objective:77
+msgid "Destroy Kalitaths army"
+msgstr ""
+
+#: ../../../campaigns/t03.wmf/objective:87
+msgid "Military assault on Al’thunran"
+msgstr ""

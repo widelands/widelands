@@ -1,14 +1,3 @@
-[global]
-background=pics/tips_bg.png
-width=400
-height=160
-padding-left=48
-padding-top=28
-padding-right=48
-padding-bottom=28
-background-color=dfd1ad
-text-color=21211b
-
 [Tip 1]
 text=_"You can find general help for the editor as well as a short tutorial in our wiki at www.widelands.org"
 sec=6

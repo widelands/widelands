@@ -29,8 +29,8 @@
 /// Displays game tips in progress window
 struct GameTips : public UI::IProgressVisualization {
 	GameTips
-		(UI::ProgressWindow & progressWindow,
-		 std::string filename = "txts/gametips");
+		(UI::ProgressWindow & progressWindow, std::vector<std::string>,
+		 std::string style = "default");
 	virtual ~GameTips();
 
 	virtual void update(bool repaint);
@@ -41,6 +41,8 @@ private:
 		std::string  text;
 		int32_t          interval;
 	};
+	void load_style(std::string);
+	void load_tips(std::string);
 
 	void show_tip(int32_t index);
 	RGBColor color_from_hex(const char * hexcode, const RGBColor & def);

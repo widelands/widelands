@@ -1,0 +1,31 @@
+[Tip 1]
+text=_The building process will only start after a road is built to the construction site.
+sec=4
+
+[Tip 2]
+text=_Be sure to send a geologist to survey sites before building a well or a mine.
+sec=4
+
+[Tip 3]
+text=_Your territory can be expanded by building various military buildings - Sentry, Fortress, Barracks, etc.
+sec=5
+
+[Tip 4]
+text=_Miners will only work if supplied with food.
+sec=3
+
+[Tip 5]
+text=_Split your roads into shorter sections by planting some flags. This will speed up transportation of your wares.
+sec=6
+
+[Tip 6]
+text=_Any further questions? Our FAQs, the wiki and of course our community forums can be found at www.widelands.org.
+sec=6
+
+[Tip 7]
+text=_Use priority buttons in building window to adjust delivery of a specific ware.
+sec=5
+
+[Tip 8]
+text=_"Use the 'configure economy' menu to adjust the target quantity of a specific ware."
+sec=5

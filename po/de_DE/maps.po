@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3773\n"
+"Project-Id-Version: Widelands svn3807\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-08 07:06+0000\n"
+"POT-Creation-Date: 2009-04-15 12:22+0000\n"
 "PO-Revision-Date: 2009-03-10 12:27+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -32,19 +32,23 @@ msgstr "Imperium - Die Monate im Exil"
 msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
 msgstr "Vor sechs Monaten, wurde Lutius - ein junger General des Imperiums - mit 150 Soldaten an die Grenze zwischen den nördlichen Wäldern geschickt. In diesem Gebiet, wo sich das Einflussgebiet der Barbaren und imperiale Grenzen schneiden, sollte er für die Sicherheit des Imperiums sorgen. Zu erst war alles ruhig. Er sprach sogar mit einigen Kindern der Barbaren und träumte von einem friedlichen Miteinander mit diesem archaischen Volk. Schon bald fühlte er sich immer sicherer und seine Soldaten ließen immer mehr die Aufmerksamkeit von ihrem potentiellen Feind fallen. Das war ihr Fehler. In einer Nacht im März wurde seine unvorbereitete Truppe von 100 barbarischen Kriegern angegriffen und total aufgerieben. Nur mit dem puren Leben, konnten Lutius und eine kleine Gruppe seiner Soldaten entkommen."
 
-#: ../../campaigns/cconfig:48
+#: ../../campaigns/cconfig:51
 msgid "Tutorial1 - Eyes in the Dark"
 msgstr "Tutorial1 - Augen im Dunkeln"
 
-#: ../../campaigns/cconfig:53
+#: ../../campaigns/cconfig:56
 msgid "Tutorial2 - A Place to call Home"
 msgstr "Tutorial2 - Ein Ort wie zuhause"
 
-#: ../../campaigns/cconfig:59
+#: ../../campaigns/cconfig:61
+msgid "Tutorial3 - This land is our land"
+msgstr ""
+
+#: ../../campaigns/cconfig:68
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
 msgstr "Tutorial1 - Die Strände von Malac' Mor"
 
-#: ../../campaigns/cconfig:64
+#: ../../campaigns/cconfig:73
 msgid "Empire Tutorial2 - An outpost for exile"
 msgstr "Tutorial2 - Ein Außenposten für das Exil"
 

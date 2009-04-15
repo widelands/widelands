@@ -32,7 +32,9 @@
 #define GAMETIPS_TEXTAREA_BORDER      2
 #define GAMETIPS_DEFAULT_PADDING      15
 
-GameTips::GameTips(UI::ProgressWindow & progressWindow, std::string filename)
+GameTips::GameTips
+	(UI::ProgressWindow & progressWindow, std::vector<std::string> names,
+	  std::string style)
 :
 m_lastUpdated   (0),
 m_updateAfter   (0),
@@ -40,11 +42,31 @@ m_progressWindow(progressWindow),
 m_registered    (false),
 m_lastTip       (0)
 {
+	// Load the style used for the tips
+	load_style(style);
+
 	// Loading texts-locals, for translating the tips
 	i18n::Textdomain textdomain("texts");
 
-	// Skip, if no triggers saved
-	// Load the TrueType Font
+	for (uint8_t i = 0; i < names.size(); ++i)
+		load_tips(names[i]);
+
+	if (m_tips.size() > 0) {
+		// add visualization only if any tips are loaded
+		m_progressWindow.add_visualization(this);
+		m_registered = true;
+		m_lastTip = m_tips.size();
+	}
+}
+
+GameTips::~GameTips() {
+	stop();
+}
+
+/// Loads the style to be used in tips out of \var filename
+void GameTips::load_style(std::string name)
+{
+	std::string filename = "txts/tips/style/" + name;
 	try {
 		Profile prof(filename.c_str());
 		if (Section * const s = prof.get_section("global")) {
@@ -65,10 +87,19 @@ m_lastTip       (0)
 				color_from_hex
 					(s->get_string("text-color"),       GAMETIPS_FONT_COLOR_FG);
 		}
+	} catch (std::exception &) {
+		// just ignore - tips do not impact game
+		return;
+	}
+}
 
+/// Loads tips out of \var filename
+void GameTips::load_tips(std::string name)
+{
+	std::string filename = "txts/tips/" + name + ".tip";
+	try {
+		Profile prof(filename.c_str());
 		while (Section * const s = prof.get_next_section(0)) {
-
-
 			char const * const text = s->get_string("text");
 			if (0 == text)
 				continue;
@@ -83,17 +114,6 @@ m_lastTip       (0)
 		// just ignore - tips do not impact game
 		return;
 	}
-
-	if (m_tips.size() > 0) {
-		// add visualization only if any tips are loaded
-		m_progressWindow.add_visualization(this);
-		m_registered = true;
-		m_lastTip = m_tips.size();
-	}
-}
-
-GameTips::~GameTips() {
-	stop();
 }
 
 /// convert 2-char hex string into uint32_t

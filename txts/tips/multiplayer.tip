@@ -1,0 +1,7 @@
+[Tip 1]
+text=_"You can use 'Page up' and 'Page down' keys to adjust your wished speed - the real speed is than democratically set."
+sec=5
+
+[Tip 2]
+text=_"You can use '/me' at the beginning of a chatmessage: '/me is tired' will be printed as '-> Nickname is tired'"
+sec=5

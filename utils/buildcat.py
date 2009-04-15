@@ -1,4 +1,5 @@
 #!/usr/bin/python -tt
+# -*- coding: utf-8 -*-
 
 ##############################################################################
 #
@@ -32,7 +33,11 @@ HEADER_YEAR = strftime("%Y",gmtime())
 # corresponding source paths list. Note that paths MUST be relative to po/pot,
 # to let .po[t] comments point to somewhere useful
 MAINPOTS = [( "maps", ["../../maps/*/elemental", "../../campaigns/cconfig"] ),
-			( "texts", ["../../txts/*"] ),
+			( "texts", ["../../txts/COPYING",
+						  "../../txts/README",
+						  "../../txts/developers",
+						  "../../txts/editor_readme",
+						  "../../txts/tips/*.tip"] ),
 			( "widelands", ["../../src/*.cc",
 							"../../src/*/*.cc",
 							"../../src/*/*/*.cc",

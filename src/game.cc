@@ -181,7 +181,6 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 	if (not maploader.get())
 		throw wexception("could not load \"%s\"", mapname);
 	UI::ProgressWindow loaderUI;
-	GameTips tips (loaderUI);
 
 	loaderUI.step (_("Preloading a map"));
 	{
@@ -319,7 +318,10 @@ void Game::init_savegame
  */
 bool Game::run_load_game(std::string filename) {
 	UI::ProgressWindow loaderUI;
-	GameTips tips (loaderUI);
+	std::vector<std::string> tipstext;
+	tipstext.push_back("general_game");
+	tipstext.push_back("singleplayer");
+	GameTips tips (loaderUI, tipstext);
 	int8_t player_nr;
 
 	loaderUI.step(_("Preloading map"));

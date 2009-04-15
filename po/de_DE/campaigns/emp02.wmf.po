@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3773\n"
+"Project-Id-Version: Widelands svn3807\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-08 07:06+0000\n"
+"POT-Creation-Date: 2009-04-15 12:22+0000\n"
 "PO-Revision-Date: 2009-04-08 09:01+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -17,18 +17,13 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../../../campaigns/emp02.wmf/elemental:11
-msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediteran island, looking like paradise."
-msgstr "Schließlich war das Schiff wieder fahrtauglich. Und so fuhren Lutius und seine Leute erneut auf hohe See, um sich wieder auf die Suche nach einen Platz für ihren Neuanfang zu machen. Und so vergingen einige Tage auf dem Meer, bis sie schließlich eine grüne, mediterrane Insel erreichten, die dem Paradies sehr nahe kam."
-
-#: ../../../campaigns/emp02.wmf/elemental~:9
 #: ../../../campaigns/emp02.wmf/elemental:9
 msgid "Empire Tutorial2 - An outpost for exile"
 msgstr "Imperiales Tutorial 2 - Ein Außenposten fürs Exil"
 
-#: ../../../campaigns/emp02.wmf/elemental~:11
-msgid "Second mission of the Empire campaign"
-msgstr "Zweite Mission der imperialen Kampagne"
+#: ../../../campaigns/emp02.wmf/elemental:11
+msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediteran island, looking like paradise."
+msgstr "Schließlich war das Schiff wieder fahrtauglich. Und so fuhren Lutius und seine Leute erneut auf hohe See, um sich wieder auf die Suche nach einen Platz für ihren Neuanfang zu machen. Und so vergingen einige Tage auf dem Meer, bis sie schließlich eine grüne, mediterrane Insel erreichten, die dem Paradies sehr nahe kam."
 
 #: ../../../campaigns/emp02.wmf/event:109
 #: ../../../campaigns/emp02.wmf/event:136
@@ -279,6 +274,9 @@ msgstr "* Sobald du genug Soldaten hast, greife die Barbaren an und zerstöre al
 #: ../../../campaigns/emp02.wmf/objective:66
 msgid "* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 msgstr "* Wenn du das erreicht hast, errichte eine Festung auf der Inselzunge (nahe der Stelle, wo die Barbaren ihr Hauptquartier hatten), um neue Besiedlungsversuche von anderen Stämmen zu verhindern."
+
+#~ msgid "Second mission of the Empire campaign"
+#~ msgstr "Zweite Mission der imperialen Kampagne"
 
 #~ msgid "That's good. The first large military building is complete and the mining infrastructure is getting better and better. Now we should think of preparing ourselves for battle.<br>As soon as we have enough soldiers we should attack and remove the barbarian threat. Then, when this island is ours again, I will build a large fortress where the barbarian headquarters stands now, to prevent new settlements of these barbarians in future<br><br>"
 #~ msgstr "Das ist gut. Das erste Gebäude unseres Verteidigungswalls wurde gerade fertiggestellt und unsere Bergbau-Infrastruktur wird besser und besser. Nun sollten wir uns auf einen größeren Kampf vorbereiten.<br>Sobald wir genügend Soldaten haben, sollten wir die Barbaren angreifen und vertreiben. Sobald wir sie vertrieben haben und die Insel wieder Unser ist, werde ich eine Festung an der Stelle ihres Hauptquartiers errichten; diese Demonstration unserer Macht wird neue Besiedlungsversuche der Barbaren verhindern."

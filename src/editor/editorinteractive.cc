@@ -168,7 +168,9 @@ void Editor_Interactive::load(std::string const & filename) {
 			 filename.c_str());
 
 	UI::ProgressWindow loader_ui("pics/editor.jpg");
-	GameTips editortips (loader_ui, "txts/editortips");
+	std::vector<std::string> tipstext;
+	tipstext.push_back("editor");
+	GameTips editortips (loader_ui, tipstext);
 	{
 		std::string const old_world_name = map.get_world_name();
 		ml->preload_map(true);
@@ -547,7 +549,9 @@ void Editor_Interactive::run_editor(std::string const & filename)
 	editor.set_ibase(&eia); //  TODO get rid of this
 	{
 		UI::ProgressWindow loader_ui("pics/editor.jpg");
-		GameTips editortips (loader_ui, "txts/editortips");
+		std::vector<std::string> tipstext;
+		tipstext.push_back("editor");
+		GameTips editortips (loader_ui, tipstext);
 		g_gr->flush(PicMod_Menu);
 
 		{

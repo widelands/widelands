@@ -113,6 +113,11 @@ struct GameSettingsProvider {
 	virtual void setPlayerName  (uint8_t number, std::string const &) = 0;
 	virtual void setPlayer      (uint8_t number, PlayerSettings) = 0;
 	virtual void setPlayerNumber(int32_t number) = 0;
+	const std::string getPlayersTribe() {
+		if (settings().playernum < 0)
+			return std::string();
+		return settings().players[settings().playernum].tribe;
+	}
 };
 
 

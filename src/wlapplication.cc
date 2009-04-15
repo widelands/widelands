@@ -1485,7 +1485,13 @@ bool WLApplication::new_game()
 			(GameController::createSinglePlayer(game, true, pn));
 		try {
 			UI::ProgressWindow loaderUI;
-			GameTips tips (loaderUI);
+			std::vector<std::string> tipstext;
+			tipstext.push_back("general_game");
+			tipstext.push_back("singleplayer");
+			std::string tribe = sp.getPlayersTribe();
+			if (!tribe.empty())
+				tipstext.push_back(tribe);
+			GameTips tips (loaderUI, tipstext);
 
 			loaderUI.step(_("Preparing game"));
 
@@ -1675,7 +1681,9 @@ void WLApplication::replay()
 	Widelands::Game game;
 	try {
 		UI::ProgressWindow loaderUI;
-		GameTips tips (loaderUI);
+		std::vector<std::string> tipstext;
+		tipstext.push_back("general_game");
+		GameTips tips (loaderUI, tipstext);
 
 		loaderUI.step(_("Loading..."));
 

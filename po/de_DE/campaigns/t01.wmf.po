@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3773\n"
+"Project-Id-Version: Widelands svn3807\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-08 07:06+0000\n"
+"POT-Creation-Date: 2009-04-15 12:22+0000\n"
 "PO-Revision-Date: 2009-04-08 08:58+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -15,10 +15,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
+#: ../../../campaigns/t01.wmf/elemental~:7
 #: ../../../campaigns/t01.wmf/elemental:7
 msgid "Tutorial1 - Eyes in the Dark"
 msgstr "Tutorial1 - Augen im Dunklen"
 
+#: ../../../campaigns/t01.wmf/elemental~:9
 #: ../../../campaigns/t01.wmf/elemental:9
 msgid "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic gameplay and control as well as basic production buildings (wood, stone, etc.) will be introduced."
 msgstr "Erste Mission des Tutorials der Barbaren. In dieser Karte werden die Grundzüge des Spiels, wie Kontrollen und Spielsteuerungen gezeigt. Auch der Aufbau einer Grundwirtschaft (Holz, Steine, etc.) wird erklärt."
