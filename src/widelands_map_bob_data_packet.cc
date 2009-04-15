@@ -19,22 +19,14 @@
 
 #include "widelands_map_bob_data_packet.h"
 
-#include "editor_game_base.h"
-#include "map.h"
 #include "player.h"
 #include "tribe.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
-#include "widelands_map_data_packet_ids.h"
+
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
-#include "world.h"
-
-#include <map>
 
 namespace Widelands {
 
-//   - workers are also handled here, registering through Map_Object_Loader/Saver
 #define CURRENT_PACKET_VERSION 1
 
 

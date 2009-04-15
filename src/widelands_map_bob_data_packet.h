@@ -28,12 +28,13 @@ namespace Widelands {
 
 struct StreamRead;
 
-/*
+/**
  * This data packet contains the various bobs on
  * the map (animals for now)
  *
  * Only world animals are valid, no tribe animals are
- * written
+ * written. Workers are also instantiated here. The real
+ * data for each bob is written in another packet (bobdata package)
  */
 struct Map_Bob_Data_Packet : public Map_Data_Packet {
 	virtual void Read

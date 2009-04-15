@@ -24,7 +24,7 @@
 
 namespace Widelands {
 
-/*
+/**
  * If present, this contains all buildings that are allowed to be build
  * by players. If absent, all buildings are allowed per default
  */

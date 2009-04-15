@@ -19,23 +19,15 @@
 
 #include "widelands_map_allowed_buildings_data_packet.h"
 
-#include "editorinteractive.h"
-#include "editor_game_base.h"
-#include "filesystem.h"
 #include "game.h"
-#include "map.h"
 #include "player.h"
 #include "profile.h"
 #include "tribe.h"
-#include "widelands_map_data_packet_ids.h"
-#include "world.h"
-
 #include "upcast.h"
 
 namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
-
 
 void Map_Allowed_Buildings_Data_Packet::Read
 	(FileSystem            &       fs,
@@ -112,7 +104,7 @@ throw (_wexception)
 		//  Write for all buildings if it is enabled.
 		Building_Index const nr_buildings = tribe.get_nrbuildings();
 		for (Building_Index b = Building_Index::First(); b < nr_buildings; ++b)
-			if (bool const allowed = player->is_building_allowed(b))
+			if (player->is_building_allowed(b))
 				section.set_bool
 					(tribe.get_building_descr(b)->name().c_str(), true);
 	}
@@ -120,4 +112,4 @@ throw (_wexception)
 	prof.write("allowed_buildings", false, fs);
 }
 
-};
+}; // namespace
