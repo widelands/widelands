@@ -32,12 +32,10 @@
  */
 std::string Campaign_visibility_save::get_path()
 {
-	std::string savepath;
-	if (char const * const buf = getenv("HOME")) {
-		savepath  = std::string(buf);
-		savepath += "/.widelands";
-		g_fs->EnsureDirectoryExists(savepath);
-	}
+	std::string savepath = FileSystem::GetHomedir();
+	savepath += "/.widelands";
+	g_fs->EnsureDirectoryExists(savepath);
+
 	savepath += "/save";
 	g_fs->EnsureDirectoryExists(savepath); // Make sure save directory exists
 	savepath += "/campvis"; // add the name of save-file

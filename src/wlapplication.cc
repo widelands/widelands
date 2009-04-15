@@ -167,9 +167,6 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		}
 	}
 
-	// finally, the user's config directory
-	// TODO: implement this for Windows (yes, NT-based ones are actually multi-user)
-#ifndef WIN32
 	std::string path = FileSystem::GetHomedir();
 
 	//If we don't have a home directory don't do anything
@@ -189,7 +186,6 @@ void WLApplication::setup_searchpaths(std::string argv0)
 	} else {
 		//TODO: complain
 	}
-#endif
 }
 
 WLApplication * WLApplication::the_singleton = 0;

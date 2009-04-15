@@ -211,10 +211,28 @@ std::string FileSystem::getTempDirectory() {
 std::string FileSystem::GetHomedir()
 {
 	std::string homedir;
+#ifdef WIN32
+	// trying to get it compatible to ALL windows versions
 
+	// first of all the newest one:
+	homedir = getenv("APPDATA");
+	if (!homedir.empty())
+		return homedir;
+	homedir = getenv("HOMEPATH");
+	if (!homedir.empty())
+		return homedir;
+	homedir = getenv("HOME");
+	if (!homedir.empty())
+		return homedir;
+	homedir = getenv("USERPROFILE");
+	if (!homedir.empty())
+		return homedir;
+
+#else
 #ifdef HAS_GETENV
 	if (char const * const h = getenv("HOME"))
 		homedir = h;
+#endif
 #endif
 
 	if (homedir.empty()) {
@@ -288,25 +306,12 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	}
 
 	bool absolute = pathIsAbsolute(fixedpath);
-
 	components = FS_Tokenize(fixedpath);
 
-	//tilde expansion
-	if (*components.begin() == "~") {
-		components.erase(components.begin());
-		std::vector<std::string> homecomponents;
-		// On win32 we use widelands dir. to save/load _all_ data
-		homecomponents = FS_Tokenize(getWorkingDirectory());
-		components.insert
-			(components.begin(), homecomponents.begin(), homecomponents.end());
-
-		absolute = true;
-	}
 #else
-
 	bool absolute = pathIsAbsolute(path);
-
 	components = FS_Tokenize(path);
+#endif
 
 	//tilde expansion
 	if (*components.begin() == "~") {
@@ -319,7 +324,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 		absolute = true;
 	}
 
-#endif
+
 
 
 	//make relative paths absolute (so that "../../foo" can work)
