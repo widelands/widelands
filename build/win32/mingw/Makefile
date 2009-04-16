@@ -139,7 +139,7 @@ dist:
 
 # WIDELANDS MAIN PROGRAM BUILD RULES
 
-SUBDIRS=../../../src ../../../src/ai ../../../src/ui/ui_fs_menus ../../../src/ui/ui_basic ../../../src/editor ../../../src/editor/ui_menus ../../../src/editor/tools ../../../src/filesystem ../../../src/events ../../../src/sound ../../../src/trigger ../../../src/map_io
+SUBDIRS=../../../src ../../../src/ai ../../../src/ui/ui_fs_menus ../../../src/ui/ui_basic ../../../src/editor ../../../src/editor/ui_menus ../../../src/editor/tools ./../../src/io ../../../src/io/filesystem ../../../src/events ../../../src/sound ../../../src/trigger ../../../src/map_io
 
 CFLAGS += $(patsubst %,-I%,$(SUBDIRS))
 CXXFLAGS += $(patsubst %,-I%,$(SUBDIRS))

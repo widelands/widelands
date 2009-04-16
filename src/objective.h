@@ -31,9 +31,9 @@ namespace Widelands {
 
 /// The Map Objective manager keeps all objectives in order.
 ///
-/// A Map (or scenario) objective is a objectives that has to be fulfilled to
+/// A Map (or scenario) objective is an objective that has to be fulfilled to
 /// end a scenario successfully.
-/// Each objectives has a trigger assigned to it, which is used to check the
+/// Each objective has a trigger assigned to it, which is used to check the
 /// objective's condition.
 /// But note, the objectives itself doesn't check it's conditions, the map
 /// designer is responsible for checking it and setting it's trigger up.
