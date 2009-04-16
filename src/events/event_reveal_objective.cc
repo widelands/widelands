@@ -61,7 +61,7 @@ void Event_Reveal_Objective::Write(Section & s, Editor_Game_Base &) const
 }
 
 /*
- * check if trigger conditions are done
+ * run event -> reveal the objective
  */
 Event::State Event_Reveal_Objective::run(Game &) {
 	assert(m_objective);

@@ -48,8 +48,12 @@ void GameObjectivesMenu::think() {
 	Manager<Widelands::Objective> & mom = iplayer().game().map().mom();
 	Manager<Widelands::Objective>::Index const nr_objectives = mom.size();
 	for (Manager<Widelands::Objective>::Index i = 0; i < nr_objectives; ++i) {
-		bool const should_show =
+		bool should_show =
 			mom[i].get_is_visible() and not mom[i].get_trigger()->is_set();
+		if (should_show) {
+			mom[i].get_trigger()->check_set_conditions(iplayer().game());
+			should_show &= !mom[i].get_trigger()->is_set();
+		}
 		uint32_t const list_size = list.size();
 		for (uint32_t j = 0;; ++j)
 			if (j == list_size) { //  the objective is not in our list
