@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3448\n"
+"Project-Id-Version: Widelands svn3697\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-27 19:26+0000\n"
-"PO-Revision-Date: 2008-10-26 22:24+0100\n"
-"Last-Translator: Pietertje <pienter.ouwerkerk@xs4all.nl>\n"
+"POT-Creation-Date: 2009-03-11 20:33+0000\n"
+"PO-Revision-Date: 2009-03-11 21:36+0100\n"
+"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -286,6 +286,14 @@ msgstr "Drie Strijders"
 msgid "Mighty mountains divide this land into three fertile valleys. But a path connects the valleys and thus seems a fight inescapable! Hint: Water can be found around the lakes."
 msgstr "Machtige bergen verdelen het land in drie vruchtbare valleien. Maar een pad verbindt de valleien en dus lijkt een gevecht onvermijdelijk! Hint: Water kan rond de meren worden gevonden."
 
+#: ../../maps/Twinkling Waves.wmf/elemental:9
+msgid "Twinkling Waves"
+msgstr "Schitterende Golven"
+
+#: ../../maps/Twinkling Waves.wmf/elemental:11
+msgid "Many beautiful, green islands await the ones brave enough to pass the thousand waves, twinkling in the sun."
+msgstr "Vele prachtige groene eilanden wachten op de dapperen die de duizenden golven, die schitteren in de zon, durven te trotseren."
+
 #: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"
 msgstr "Twee Grenzen"
@@ -309,3 +317,4 @@ msgstr "Wisentenvallei"
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid "It seems as if this magical valley was inhabitated by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can you tribe live in peace with your neighbours?"
 msgstr "Het lijkt erop dat deze magische vallei sinds het begin der tijden bewoond werd door wisenten. Toen je stam naar deze plek kwam, was je er zeker van dat het genoeg ruimte bood voor een vreedzaam bestaan. Maar kan je stam in vrede leven met je buren?"
+
