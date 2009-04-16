@@ -42,6 +42,7 @@
 #include <vector>
 
 #ifdef WIN32
+#include "log.h"
 #include <windows.h>
 #include <io.h>
 #define stat _stat
@@ -212,22 +213,26 @@ std::string FileSystem::GetHomedir()
 {
 	std::string homedir;
 #ifdef WIN32
-	// trying to get it compatible to ALL windows versions
-
-	// first of all the newest one:
-	homedir = getenv("APPDATA");
-	if (!homedir.empty())
-		return homedir;
-	homedir = getenv("HOMEPATH");
-	if (!homedir.empty())
-		return homedir;
-	homedir = getenv("HOME");
-	if (!homedir.empty())
-		return homedir;
+	// trying to get it compatible to ALL windows versions...
+	// Could anybody please hit the Megasoft devs for not keeping
+	// their own "standards"?
 	homedir = getenv("USERPROFILE");
 	if (!homedir.empty())
-		return homedir;
-
+		if (check_writeable_for_data(homedir.c_str()))
+			return homedir;
+	homedir = getenv("HOMEPATH");
+	if (!homedir.empty())
+		if (check_writeable_for_data(homedir.c_str()))
+			return homedir;
+	homedir = getenv("HOME");
+	if (!homedir.empty())
+		if (check_writeable_for_data(homedir.c_str()))
+			return homedir;
+	homedir = getenv("APPDATA");
+	if (!homedir.empty())
+		if (check_writeable_for_data(homedir.c_str()))
+			return homedir;
+	log("None of the directories was useable - falling back to \".\"\n");
 #else
 #ifdef HAS_GETENV
 	if (char const * const h = getenv("HOME"))
@@ -466,3 +471,23 @@ throw (FileType_error, FileNotFound_error, FileAccessDenied_error)
 		("FileSystem::Create", root,
 		 "cannot create virtual filesystem from file or directory");
 }
+
+#ifdef WIN32
+/// hack that is unfortunally needed for windows to check whether
+/// widelands can write in the directory
+bool FileSystem::check_writeable_for_data(char const * path)
+{
+	RealFSImpl fs(path);
+	if (fs.IsDirectory(".widelands"))
+		return true;
+	try {
+		// throws an exception if not writable
+		fs.EnsureDirectoryExists(".widelands");
+		fs.Unlink(".widelands");
+		return true;
+	} catch (...) {
+		log("Directory %s is not writeable - next try\n", path);
+		return false;
+	}
+}
+#endif

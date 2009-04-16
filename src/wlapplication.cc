@@ -171,8 +171,8 @@ void WLApplication::setup_searchpaths(std::string argv0)
 
 	//If we don't have a home directory don't do anything
 	if (path.size()) {
+		RealFSImpl(path).EnsureDirectoryExists(".widelands");
 		path += "/.widelands";
-		RealFSImpl("").EnsureDirectoryExists(path);
 		try {
 			g_fs->AddFileSystem(FileSystem::Create(path.c_str()));
 		}

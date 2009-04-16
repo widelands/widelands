@@ -32,11 +32,7 @@
  */
 std::string Campaign_visibility_save::get_path()
 {
-	std::string savepath = FileSystem::GetHomedir();
-	savepath += "/.widelands";
-	g_fs->EnsureDirectoryExists(savepath);
-
-	savepath += "/save";
+	std::string savepath = "save";
 	g_fs->EnsureDirectoryExists(savepath); // Make sure save directory exists
 	savepath += "/campvis"; // add the name of save-file
 
