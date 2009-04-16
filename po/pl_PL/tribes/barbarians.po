@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3769\n"
+"Project-Id-Version: Widelands svn3816\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-06 15:49+0000\n"
-"PO-Revision-Date: 2009-04-03 18:44+0100\n"
+"POT-Creation-Date: 2009-04-15 16:51+0000\n"
+"PO-Revision-Date: 2009-04-15 20:22+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -29,105 +29,103 @@ msgstr "Potężne ludy ze wschodnich ziem!"
 
 #: ../../../tribes/barbarians/conf:36
 msgid "Ashes"
-msgstr ""
+msgstr "Popiół"
 
 #: ../../../tribes/barbarians/conf:37
 msgid "Destroyed building"
-msgstr ""
+msgstr "Zniszczny budynek"
 
 #: ../../../tribes/barbarians/conf:38
 msgid "Field medium"
-msgstr ""
+msgstr "Średnie pole"
 
 #: ../../../tribes/barbarians/conf:39
 msgid "Field small"
-msgstr ""
+msgstr "Małe pole"
 
 #: ../../../tribes/barbarians/conf:40
 msgid "Field tiny"
-msgstr ""
+msgstr "Rosnące pole"
 
 #: ../../../tribes/barbarians/conf:41
 msgid "Field ripe"
-msgstr ""
+msgstr "Dojrzałe pole"
 
 #: ../../../tribes/barbarians/conf:42
 msgid "Field harvested"
-msgstr ""
+msgstr "Zebrane pole"
 
 #: ../../../tribes/barbarians/conf:43
 msgid "Flax medium"
-msgstr ""
+msgstr "Średni len"
 
 #: ../../../tribes/barbarians/conf:44
 msgid "Flax small"
-msgstr ""
+msgstr "Krótki len"
 
 #: ../../../tribes/barbarians/conf:45
-#, fuzzy
 msgid "Flax tiny"
-msgstr "Len"
+msgstr "Wyrastający len"
 
 #: ../../../tribes/barbarians/conf:46
-#, fuzzy
 msgid "Flax ripe"
-msgstr "Len"
+msgstr "Dojrzały len"
 
 #: ../../../tribes/barbarians/conf:47
 msgid "Reed medium"
-msgstr ""
+msgstr "Średnia trzcina"
 
 #: ../../../tribes/barbarians/conf:48
 msgid "Reed small"
-msgstr ""
+msgstr "Mała trzcina"
 
 #: ../../../tribes/barbarians/conf:49
 msgid "Reed tiny"
-msgstr ""
+msgstr "Ledwo zasadzona trzcina"
 
 #: ../../../tribes/barbarians/conf:50
 msgid "Reed ripe"
-msgstr ""
+msgstr "Dojrzała trzcina"
 
 #: ../../../tribes/barbarians/conf:51
 msgid "Resource indicator coal little"
-msgstr ""
+msgstr "Wskaźnik zasobów mało węgla"
 
 #: ../../../tribes/barbarians/conf:52
 msgid "Resource indicator coal much"
-msgstr ""
+msgstr "Wskaźnik zasobów dużo węgla"
 
 #: ../../../tribes/barbarians/conf:53
 msgid "Resource indicator gold litte"
-msgstr ""
+msgstr "Wskaźnik zasobów mało złota"
 
 #: ../../../tribes/barbarians/conf:54
 msgid "Resource indicator gold much"
-msgstr ""
+msgstr "Wskaźnik zasobów dużo złota"
 
 #: ../../../tribes/barbarians/conf:55
 msgid "Resource indicator granit little"
-msgstr ""
+msgstr "Wskaźnik zasobów mało granitu"
 
 #: ../../../tribes/barbarians/conf:56
 msgid "Resource indicator granit much"
-msgstr ""
+msgstr "Wskaźnik zasobów dużo granitu"
 
 #: ../../../tribes/barbarians/conf:57
 msgid "Resource indicator iron little"
-msgstr ""
+msgstr "Wskaźnik zasobów troche żelaza"
 
 #: ../../../tribes/barbarians/conf:58
 msgid "Resource indicator iron much"
-msgstr ""
+msgstr "Wskaźnik zasobów dużo żelaza"
 
 #: ../../../tribes/barbarians/conf:59
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "Wskaźnik zasobów brak"
 
 #: ../../../tribes/barbarians/conf:60
 msgid "Resource indicator water"
-msgstr ""
+msgstr "Wskaźnik zasobów wody"
 
 #: ../../../tribes/barbarians/conf:63
 msgid "Deer"
@@ -386,9 +384,8 @@ msgid "Miner"
 msgstr "Górnik"
 
 #: ../../../tribes/barbarians/conf:135
-#, fuzzy
 msgid "Ranger"
-msgstr "Leśniczówka"
+msgstr "Leśniczy"
 
 #: ../../../tribes/barbarians/conf:136
 msgid "Smelter"
@@ -442,7 +439,8 @@ msgstr "Strażnica"
 msgid "Stronghold"
 msgstr "Twierdza"
 
-#: ../../../tribes/barbarians/conf:157 ../../../tribes/barbarians/conf:158
+#: ../../../tribes/barbarians/conf:157
+#: ../../../tribes/barbarians/conf:158
 msgid "Headquarters"
 msgstr "Kwatera główna"
 
@@ -471,7 +469,6 @@ msgid "Brewery"
 msgstr "Browar"
 
 #: ../../../tribes/barbarians/conf:167
-#, fuzzy
 msgid "Charcoal Burner's House"
 msgstr "Smolarnia"
 
@@ -599,138 +596,94 @@ msgstr "Cytadela"
 
 #~ msgid "The Axe is the basic weapon and tool for the barbarians. All young soldiers are equipped with this basic weapon, but also the lumberjack is using the same model."
 #~ msgstr "Topór jest podstawową bronią i narzędziem Barbarzyńców. Wszyscy młodzi żołnierze są wyposażeni w tą podstawową broń. Drwal używa dokładnie tego samego modelu."
-
 #~ msgid "The peel is the tool of the baker, each baker needs its own. It is produced in the metal works like all tools."
 #~ msgstr "Blacha to narzędzie piekarza. Wytwarza ją rzemieślink."
-
 #~ msgid "This is the second most dangerous weapon, the barbarians are able to produce. Only trained warriors are able to yield such a weapon. It is produce in the axe factory."
 #~ msgstr "To druga najgroźniejsza broń, jaką barbarzyńcy są w stanie wytworzyć.Tylko przeszkoleni żołnierze mogą ją nosić. Produkowany w fabryce toporów"
-
 #~ msgid "Young warriors need some encouragement. This drink makes a man fearless and strong."
 #~ msgstr "Młodzi wojownicy potrzebują czegoś na zachętę. Ten napój dodaje człowiekowi siły i odwagi."
-
 #~ msgid "Fire-hardened wood, hard as iron and can not burn, used for military buildings."
 #~ msgstr "Zahartowane ogniem drewno, wytrzymałe jak żelazo i niepalne, używane przy budynkach wojskowych."
-
 #~ msgid "Warriors with a fundamental fighting knowledge gain a broad axe. It is produced in the axe factory."
 #~ msgstr "Wojownicy znający podstawy walki otrzymują taki topór. Produkowany jest w fabryce toporów."
-
 #~ msgid "The bronze axe is considered a hard to handle weapon: it makes a lot of damage, but it's durability is not the best. Only skilled warriors can use this. Produced in the axe factory."
 #~ msgstr "Topór z brązu uznany jest za broń najtrudniejszą do władania. Zadaje dużo obrażeń, ale nie jest bardzo wytrzymały. Tylko najlepsi wojownicy nogą się nim posługiwać. Produkowany w fabryce toporów."
-
 #~ msgid "Cloth is needed for barbarian ships. It is produced out of flax."
 #~ msgstr "Tkanina potrzebna jest do budowy statków Barbarzyńców. Wytwarza się ją z lnu."
-
 #~ msgid "The fires of the barbarians are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
 #~ msgstr "Barbarzyńcy zazwyczaj palą drewno,. lecz tam gdzie potrzeba wysokiej temperatury, używają węgla."
-
 #~ msgid "The fire tongs are the tool of the smelter, working in the smelting works. Produced in the metal works."
 #~ msgstr "Szczypce są używane przez hutnika. Produkowane się je w hucie."
-
 #~ msgid "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
 #~ msgstr "Oprócz chleba i mięsa Barbarzyńcy jedzą także ryby."
-
 #~ msgid "Fishing rods are needed by barbarian fishers, to catch fish."
 #~ msgstr "Wędki jest niezbędna do łowienia ryb."
-
 #~ msgid "Flax is a beautiful flower, which are used to make cloth."
 #~ msgstr "Len to piękna roślina używana do produkcji tkanin."
-
 #~ msgid "Gold is the most valuable of all metals; only very important things are garnished with it."
 #~ msgstr "Złoto to najcenniejszy kruszec. Tylko najważniejsze przedmioty są nim dekorowane."
-
 #~ msgid "This is the yellow goldstone."
 #~ msgstr "To żółta skała złotonośna."
-
 #~ msgid "Raw stone can be enhanced to grout which delivers solid, non burning build material."
 #~ msgstr "Surowy kamień może przerobić na fugę, przez co uzyskuje się mocny, niepalny materiał."
-
 #~ msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the blacksmiths and the helmsmiths. Make sure you always got some in reserve! Build at the metal works."
 #~ msgstr "Młotek to podstawowe narzędzie. Używane przez geologa, budowniczego, kowala i płatnerza. Upewnij się że zawsze masz jakiś w magazynie! Produkowany w narzędziowni."
-
 #~ msgid "Basic defence of a warrior"
 #~ msgstr "Podstawowy pancerz wojownika."
-
 #~ msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters. Produced in the metal works."
 #~ msgstr "Włócznia jest wystarczająco lekka, by nią rzucać, lecz również dostatecznie ciężka, żeby zabić zwierzę. Używają jej tylko myśliwi."
-
 #~ msgid "Weapons and tools are made of iron."
 #~ msgstr "Broń i narzędzia produkowane są z żelaza."
-
 #~ msgid "This is the red iron ore."
 #~ msgstr "To jest czerwona ruda żelaza."
-
 #~ msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
 #~ msgstr "Jak przygotować posiłek, przekąskę, lub rację, kiedy w kuchni nie ma narzędzi?"
-
 #~ msgid "An enhanced version of the helmet."
 #~ msgstr "Ulepszona wersja hełmu."
-
 #~ msgid "A real meal which satisfies all miners needs"
 #~ msgstr "Prawdziwy posiłek, który w pełni nasyci górników."
-
 #~ msgid "Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong."
 #~ msgstr "Mięso zawiera dużo energii. Używane w karczmach i tawernach do przygotowania posiłków oraz w obozie treningowym do utrzymania żołnierzy w świetnej formie."
-
 #~ msgid "This pick is used by the stonemasons and the miners. It is produced in the metal works."
 #~ msgstr "Kilof używany jest przez kamieniarzy i górników. Produkowany w narzędziowni."
-
 #~ msgid "The barbarian backers are best in making this flat and tasty pitta bread."
 #~ msgstr "Barbarzyńscy piekarze są najlepsi w pieczeniu tego płaskiego i smacznego chleba."
-
 #~ msgid "A small bite to keep miners strong and working."
 #~ msgstr "Drobna przekąska do podtrzymywania sił górników oraz ich zapału do pracy."
-
 #~ msgid "Raw Stones are the secondary build material of the barbarians."
 #~ msgstr "Kamienie to drugi podstawowy budulec barbarzyńców."
-
 #~ msgid "The scythe is the tool of the farmers. It is produced in the metal works."
 #~ msgstr "Kosa jest narzędziem farmerów. Produkowana jest w warsztacie."
-
 #~ msgid "Real warriors consider the sharp axe the first real weapon, after being able to handle an ordinary axe, this weapon is tackled. It is heavier and sharper than the ordinary axe. Build in the axe factory."
 #~ msgstr "Prawdziwi wojownicy uznają ostry topór za pierwszą prawdziwą broń po tym jak nauczyli się władać zwykłym toporem. Ta broń jest cięższa i ostrzejsza od normalnego topora. Produkowana w fabryce toporów."
-
 #~ msgid "The shovel is needed for proper handling of plants. Therefore the ferner and the ranger use it. Build at the metal works."
 #~ msgstr "Łopata potrzebna jest do właściwego zajmowania się roślinami. Używają jej paprotnik i leśniczy. Produkowana w narzędziowni."
-
 #~ msgid "A bit bigger, for the advanced miners. They will need a big morsel."
 #~ msgstr "Powiększona przekąska dla doświadczonych górników. Aby na nią zasłużyć, muszą pracować ciężej."
-
 #~ msgid "Only this beer is acceptable for the old warriors. Some say, the whole power of the barbarians is in this ale."
 #~ msgstr "Starzy wojownicy piją tylko takie piwo. Niektórzy mówią, że to właśnie z niego babarzyńcy czerpią swą siłę."
-
 #~ msgid "Thatch reed is used to make the roofs of buildings waterproof."
 #~ msgstr "Strzecha jest używana do budowy wodoodpornych dachów."
-
 #~ msgid "Trunks are the primary build material of the barbarians."
 #~ msgstr "Belki to podstawowy budulec barbarzyńców."
-
 #~ msgid "An enhanced mask for barbarian warriors."
 #~ msgstr "Ulepszona maska dla barbarzyńskich wojowników."
-
 #~ msgid "The warriors axe is the most dangerous of all weapons. Only a few warriors ever were able to handle those huge and powerful axes. Build at the axe factory."
 #~ msgstr "Topór bojowy to najniebezpieczniejsza ze wszystkich broni. Tylko kilku wojowników było kiedykolwiek w stanie władać tym potężnym orężem. Produkowany w fabryce toporów."
-
 #~ msgid "Water is the most essential essence for life! This water is used in many places, be it to make bread or beer or to produce grout."
 #~ msgstr "Woda to esencja życia! Używana do pieczenia chleba oraz warzenia piwa."
-
 #~ msgid "Wheat is essential for surviving. Delicious pitta bread and strong ales can be made of this wheat."
 #~ msgstr "Pszenica jest niezbędna do przeżycia, można z niej zrobić dobre piwo lub chleb."
-
 #~ msgid "Forester"
 #~ msgstr "Leśnik"
-
 #~ msgid "Stonegrinder"
 #~ msgstr "Kamieniarz"
-
 #~ msgid "Bakingtray"
 #~ msgstr "Blacha"
-
 #~ msgid "Coalearth"
 #~ msgstr "Skała węglowa "
-
 #~ msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
 #~ msgstr "Ta skała wywożona jest z głębokich kopalń. Trzeba ją przerobić aby uzyskać prawdziwy węgiel."
-
 #~ msgid "Grindstone"
 #~ msgstr "Toczek"
+
