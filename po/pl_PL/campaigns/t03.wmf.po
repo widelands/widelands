@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3816\n"
+"Project-Id-Version: Widelands svn3825\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-15 18:28+0000\n"
+"POT-Creation-Date: 2009-04-16 19:21+0000\n"
 "PO-Revision-Date: 2009-04-15 20:25+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -61,7 +61,8 @@ msgstr ""
 msgid "-- NEW OBJECTIVE --"
 msgstr "-- NOWE ZADANIE --"
 
-#: ../../../campaigns/t03.wmf/event:329
+#: ../../../campaigns/t03.wmf/event:329 ../../../campaigns/t03.wmf/event~:329
+#: ../../../campaigns/t03.wmf/objective:7
 #, fuzzy
 msgid "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a farm and a bakery, to provide your people with food."
 msgstr "* Zbuduj gospodarke żywnościową - domek rybaka, chate myśliwego, studnie, farme i piekarnie, aby zapewnić jedzenie swoim ludziom"
@@ -212,11 +213,6 @@ msgstr "--------------------WYCIĘSTWO! --------------------"
 msgid "You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
 msgstr "Dokończyłeś tą misję. Możesz kontynuować grę jeżeli chcesz lub przejść do kolejnej misji."
 
-#: ../../../campaigns/t03.wmf/event~:329
-#: ../../../campaigns/t03.wmf/objective:7
-msgid "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a farm and a bakery - to provide your people with food."
-msgstr "* Zbuduj gospodarke żywnościową - domek rybaka, chate myśliwego, studnie, farme i piekarnie, aby zapewnić jedzenie swoim ludziom"
-
 #: ../../../campaigns/t03.wmf/objective:5
 msgid "Build up a small food economy"
 msgstr "Zbuduj mała gospodarkę żywnościową"
@@ -251,7 +247,8 @@ msgid "Build a fortress"
 msgstr "Zbuduj fortecę"
 
 #: ../../../campaigns/t03.wmf/objective:39
-msgid "* Build a fortress to the east of the mountains"
+#, fuzzy
+msgid "* Build a fortress to the east of the mountains."
 msgstr "* Zbuduj fortece na wschód od gór"
 
 #: ../../../campaigns/t03.wmf/objective:45
@@ -259,7 +256,8 @@ msgid "Build a warehouse"
 msgstr "Zbuduj magazyn"
 
 #: ../../../campaigns/t03.wmf/objective:47
-msgid "* Build a warehouse to the west of the mountains"
+#, fuzzy
+msgid "* Build a warehouse to the west of the mountains."
 msgstr "* Zbuduj magazyb na zachód od gór"
 
 #: ../../../campaigns/t03.wmf/objective:53
@@ -293,3 +291,6 @@ msgstr "Zniszcz armię Kalitaths'a"
 #: ../../../campaigns/t03.wmf/objective:87
 msgid "Military assault on Al’thunran"
 msgstr "Atak na Al'thunran"
+
+#~ msgid "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a farm and a bakery - to provide your people with food."
+#~ msgstr "* Zbuduj gospodarke żywnościową - domek rybaka, chate myśliwego, studnie, farme i piekarnie, aby zapewnić jedzenie swoim ludziom"

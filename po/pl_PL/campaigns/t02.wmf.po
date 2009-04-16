@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3769\n"
+"Project-Id-Version: Widelands svn3825\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-06 15:49+0000\n"
+"POT-Creation-Date: 2009-04-16 19:21+0000\n"
 "PO-Revision-Date: 2009-04-03 18:42+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: polish <pl@li.org>\n"
@@ -14,6 +14,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
+
+#: ../../../campaigns/t02.wmf/elemental:7
+msgid "Tutorial2 - A Place to call Home"
+msgstr ""
+
+#: ../../../campaigns/t02.wmf/elemental:9
+msgid "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the higher production buildings, including mining and the military expansions will be introduced."
+msgstr ""
 
 #: ../../../campaigns/t02.wmf/event:134
 #, fuzzy

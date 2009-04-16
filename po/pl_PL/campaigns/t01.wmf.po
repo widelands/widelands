@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3769\n"
+"Project-Id-Version: Widelands svn3825\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-06 15:49+0000\n"
+"POT-Creation-Date: 2009-04-16 19:21+0000\n"
 "PO-Revision-Date: 2009-04-03 18:36+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: polish <pl@li.org>\n"
@@ -14,6 +14,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
+
+#: ../../../campaigns/t01.wmf/elemental:7
+msgid "Tutorial1 - Eyes in the Dark"
+msgstr ""
+
+#: ../../../campaigns/t01.wmf/elemental:9
+msgid "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic gameplay and control as well as basic production buildings (wood, stone, etc.) will be introduced."
+msgstr ""
 
 # What about/a co naprz. wzdycha (sighs)
 #: ../../../campaigns/t01.wmf/event:23
