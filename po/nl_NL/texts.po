@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3697\n"
+"Project-Id-Version: Widelands svn3448\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-03-11 20:33+0000\n"
-"PO-Revision-Date: 2009-02-16 22:52+0100\n"
-"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
+"POT-Creation-Date: 2008-10-27 19:26+0000\n"
+"PO-Revision-Date: 2008-10-27 20:09+0100\n"
+"Last-Translator: Pietertje <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -233,98 +233,94 @@ msgid "F5           Reveals the entire map (only in debug-builds)"
 msgstr "F5           Onthul de hele kaart (alleen in debug-builds)"
 
 #: ../../txts/README:62
-msgid "F6           Shows the debug console (only in debug-builds)"
-msgstr "F6           Toont de debugconsole (alleen in debug-builds)"
-
-#: ../../txts/README:64
 msgid "F10         Quit the game immediately"
 msgstr "F10         Verlaat het spel onmiddelijk"
 
-#: ../../txts/README:66
+#: ../../txts/README:64
 msgid "F11         Take a screenshot"
 msgstr "F11         Maak een schermafdruk"
 
-#: ../../txts/README:69
+#: ../../txts/README:67
 msgid "When finishing a road, if Ctrl is down, place flags along the road. Default is to place flags from end to start. If Shift is also down, place flags from start to end instead."
 msgstr "Als je een weg afsluit, worden er vlaggen geplaatst op de weg als Ctrl in ingedrukt. Standaard worden ze geplaatst van eind naar begin. Als Shift ook is ingedrukt, worden ze van begin naar eind geplaatst."
 
-#: ../../txts/README:74
+#: ../../txts/README:72
 msgid "Online Help"
 msgstr "Online Hulp"
 
-#: ../../txts/README:78
+#: ../../txts/README:76
 msgid "If you need documentation or help for Widelands or the Widelands Editor, be sure to visit our homepage. You can find an up to date online help at:"
 msgstr "Als je documentatie of hulp nodig hebt voor Widelands of de Widelands Editor, bezoek dan zeker onze homepage. Je kunt actuele online hulp vinden op:"
 
-#: ../../txts/README:86
+#: ../../txts/README:84
 msgid "Reporting Bugs"
 msgstr "Bugs doorgeven"
 
-#: ../../txts/README:90
+#: ../../txts/README:88
 msgid "If you want to report bugs, please send your report to the mailing list, <widelands-public@list.sourceforge.net><br>To subscribe, visit the following page:"
 msgstr "Als je bugs wilt doorgeven, zend dan alsjeblieft je rapport naar de mailing list: <widelands-public@list.sourceforge.net><br>Om je af te melden, bezoek de volgende pagina:"
 
-#: ../../txts/README:95
+#: ../../txts/README:93
 msgid "Please provide enough background information. Tell us:"
 msgstr "Voorzie ons van voldoende achtergrondinformatie. vertel ons:"
 
-#: ../../txts/README:98
+#: ../../txts/README:96
 msgid "- what version of Widelands did you use (i.e. the build number, or whether it's<br>a custom compile from SVN)"
 msgstr "- welke versie van Widelands je speelt (dus het build nummer of dat het een eigen compilatie is van de SVN)"
 
-#: ../../txts/README:100
+#: ../../txts/README:98
 msgid "- how to reproduce the bug"
 msgstr "- hoe de bug te reproduceren"
 
-#: ../../txts/README:102
+#: ../../txts/README:100
 msgid "- which map you were playing"
 msgstr "- welke kaart je speelde"
 
-#: ../../txts/README:104
+#: ../../txts/README:102
 msgid "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-game. For more explanation, see the section on Replays below."
 msgstr "- stuur ons een gecomprimeerde (zip, gzip, bzip2) herhaling als de bug zich voordeed in het spel. Voor meer uitleg, zie de paragrafen over Herhalingen hieronder."
 
-#: ../../txts/README:106
+#: ../../txts/README:104
 msgid "- send us a compressed (zip, gzip, bzip2) session record if possible, unless the<br>bug is trivial to reproduce. In fact, it may be a good idea to always record<br>your sessions in case a bug surfaces. For more explanation, see below."
 msgstr "- Zend ons een ingepakte (zip, gzip, bzip2) sessieopname indien mogelijk, tenzij de bug heel eenvoudig te reproduceren is. Het kan altijd een goed idee zijn om je spel op te nemen voor het geval er een bug bovenkomt. Voor meer uitleg, zie hieronder."
 
-#: ../../txts/README:111
+#: ../../txts/README:109
 msgid "Replays</p>"
 msgstr "Herhalingen</p>"
 
-#: ../../txts/README:114
+#: ../../txts/README:112
 msgid "Widelands records every game you play in two files. One of these files has a .wrpl.wgf extension and contains an initial savegame. The other file has just a .wrpl extension and contains all commands that were issued by all players, such as building a road or attacking an enemy. The rest of the filenames will tell you the time you started the game."
 msgstr "Widelands slaat elk spel dat je speelt op in twee bestanden. Eén van deze bestanden heeft een wrlp.wgf extensie en bevat een initieel opgeslagen spel. Het andere bestand heeft enkel een .wrpl extensie en bevat alle commando's die door de speler gegeven zijn, zoals het aanleggen van een weg of aanvallen van een vijand. Het restant van de bestandsnamen vertellen je wanneer het spel is begonnen."
 
-#: ../../txts/README:116
+#: ../../txts/README:114
 msgid "Using the Watch Replay option in the main menu, a previously played game will be precisely reconstructed for you to watch. Note, however, that even small changes in the game data files or the Widelands executable can cause a replay to become incompatible and to 'go out of sync'. This is similar to how network games will suffer from desynchronization problems if one of the players has a different version of the game."
 msgstr "Als je de Speel Herhaling optie in het hoofdmenu gebruikt, zal een eerder gespeeld spel exact worden gereconstrueerd om naar te kijken. Let er wel op dat zelfs kleine wijzigingen in de gegevensbestanden van het spel of het Widelands programma ertoe kunnen leiden dat herhalingen niet meer bruikbaar zijn en 'out of sync' gaan. Dit is vergelijkbaar met hoe netwerkspellen tegen synchronisatieproblemen aan kunnen lopen als één van de spelers een andere versie van het spel heeft."
 
-#: ../../txts/README:118
+#: ../../txts/README:116
 msgid "Replays are a very useful tool to find bugs in the game logic code, so we ask you to attach replay files to all bug reports that you submit. The replay files are saved in the ~/.widelands/replays directory in your home on Linux and in the replays subdirectory of your Widelands installation on Windows."
 msgstr "Herhalingen vormen een zeer bruikbaar gereedschap om bugs in de programmacode te vinden en daarom vragen we je om de herhalingsbestanden mee te sturen met alle foutrapporten die je instuurt. De herhalingsbestanden worden opgeslagen in de map ~/.widelands/replays in je home op Linux en in de replays submap van je Widelands installatie op Windows."
 
-#: ../../txts/README:122
+#: ../../txts/README:120
 msgid "Creating a Session Record</p>"
 msgstr "Een sessieverslag opnemen</p>"
 
-#: ../../txts/README:125
+#: ../../txts/README:123
 msgid "Widelands can record all your keypresses and mouse movements to a file. It can then replay an entire session from starting the game to exiting it. This is really helpful for debugging problems."
 msgstr "Widelands kan al je toetsaanslagen en muisbewegingen opslaan naar een bestand. Het kan dan een complete sessie naspelen van begin tot eind. Dit is zeer waardevol bij het debuggen van problemen."
 
-#: ../../txts/README:128
+#: ../../txts/README:126
 msgid "To create a session record, start the game with the --record parameter. On Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
 msgstr "Om een sessieverslag op te nemen, start het spel met de --record parameter. Onder Linux, start Widelands eenvoudig als volgt: % ./widelands --record=bestandsnaam.rec"
 
-#: ../../txts/README:131
+#: ../../txts/README:129
 msgid "On Windows, create a shortcut to the file widelands.exe (right-click on widelands.exe and choose Create Shortcut). Then edit the shortcut (right-click on the newly created shortcut and choose Properties). The Target field should read something like c:\\games\\widelands\\widelands.exe. Change this to c:\\games\\widelands\\widelands.exe --record=filename.rec."
 msgstr "Onder Windows, maak een snelkoppeling naar het bestand widelands.exe (rechtsklik op widelands.exe en kies Maak Snelkoppeling). Bewerk dan de snelkoppeling (rechtsklikken op nieuwe snelkoppeling en kies Eigenschappen) In het Doel veld moet iets staan als c:\\games\\widelands\\widelands.exe. voeg hierachter de tekst ' --record=bestandsnaam.rec' toe."
 
-#: ../../txts/README:134
+#: ../../txts/README:132
 msgid "A binary file called filename.rec will be created. To play it back, perform the same steps as outlined above, but replace --record with --playback."
 msgstr "Een binair bestand genaamd bestandsnaam.rec zal worden aangemaakt. Om het af te spelen, doe hetzelfde als boven, maar vervang --record door --playback."
 
-#: ../../txts/README:137
+#: ../../txts/README:135
 msgid "Note that while recorded files are platform independent, they generally won't work across different versions of Widelands, because the user interface and the order in which low-level functions can be called may change between versions. Session records are not intended to serve as demo files; they are mostly a debugging tool which helps us to track down bugs."
 msgstr "Let erop dat, hoewel de opnamebestanden platformonafhankelijk zijn, ze in het algemeen niet uitgewisseld kunnen worden tussen verschillende versies van Widelands, omdat de gebruikersinterface en de volgorde waarin achterliggende functies worden aangeroepen, kunnen verschillen per versie. Sessieopnames zijn ook niet bedoeld als demo's, maar zijn voornamelijk bedoeld als debug gereedschap om bugs op te sporen."
 
@@ -344,7 +340,7 @@ msgstr "Leider"
 msgid "Elders"
 msgstr "Ouderlingen"
 
-#: ../../txts/developers:19 ../../txts/developers:285
+#: ../../txts/developers:19 ../../txts/developers:282
 msgid "Graphics"
 msgstr "Afbeeldingen"
 
@@ -352,15 +348,15 @@ msgstr "Afbeeldingen"
 msgid "vacant"
 msgstr "vacant"
 
-#: ../../txts/developers:26 ../../txts/developers:278
+#: ../../txts/developers:26 ../../txts/developers:275
 msgid "Homepage"
 msgstr "Homepage"
 
-#: ../../txts/developers:33 ../../txts/developers:291
+#: ../../txts/developers:33 ../../txts/developers:288
 msgid "Sound"
 msgstr "Geluid"
 
-#: ../../txts/developers:40 ../../txts/developers:296
+#: ../../txts/developers:40 ../../txts/developers:293
 msgid "Translation"
 msgstr "Vertaling"
 
@@ -368,119 +364,119 @@ msgstr "Vertaling"
 msgid "Coders"
 msgstr "Programmeurs"
 
-#: ../../txts/developers:73
+#: ../../txts/developers:72
 msgid "Graphicians"
 msgstr "Grafici"
 
-#: ../../txts/developers:97
+#: ../../txts/developers:96
 msgid "Musicians"
 msgstr "Musici"
 
-#: ../../txts/developers:106
+#: ../../txts/developers:103
 msgid "Sound Effects"
 msgstr "Geluidseffecten"
 
-#: ../../txts/developers:113
+#: ../../txts/developers:110
 msgid "Maps and Missions"
 msgstr "Kaarten en missies"
 
-#: ../../txts/developers:126
+#: ../../txts/developers:123
 msgid "Campaign Story"
 msgstr "Campagneverhaal"
 
-#: ../../txts/developers:129
+#: ../../txts/developers:126
 msgid "Barbarian"
 msgstr "Barbaren"
 
-#: ../../txts/developers:134
+#: ../../txts/developers:131
 msgid "Empire"
 msgstr "Keizerrijk"
 
-#: ../../txts/developers:140
+#: ../../txts/developers:137
 msgid "Translators"
 msgstr "Vertalers"
 
-#: ../../txts/developers:144
+#: ../../txts/developers:141
 msgid "Czech"
 msgstr "Tsjechisch"
 
-#: ../../txts/developers:150
+#: ../../txts/developers:147
 msgid "Dansk"
 msgstr "Deens"
 
-#: ../../txts/developers:155
+#: ../../txts/developers:152
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: ../../txts/developers:161
+#: ../../txts/developers:158
 msgid "Finnish"
 msgstr "Fins"
 
-#: ../../txts/developers:166
+#: ../../txts/developers:163
 msgid "French"
 msgstr "Frans"
 
-#: ../../txts/developers:173
+#: ../../txts/developers:170
 msgid "Galician"
 msgstr "Galicisch"
 
-#: ../../txts/developers:178
+#: ../../txts/developers:175
 msgid "German"
 msgstr "Duits"
 
-#: ../../txts/developers:187
+#: ../../txts/developers:184
 msgid "Hebrew"
 msgstr "Hebreeuws"
 
-#: ../../txts/developers:192
+#: ../../txts/developers:189
 msgid "Hungarian"
 msgstr "Hongaars"
 
-#: ../../txts/developers:197
+#: ../../txts/developers:194
 msgid "Polish"
 msgstr "Pools"
 
-#: ../../txts/developers:204
+#: ../../txts/developers:201
 msgid "Russian"
 msgstr "Russisch"
 
-#: ../../txts/developers:209
+#: ../../txts/developers:206
 msgid "Slovak"
 msgstr "Slowaaks"
 
-#: ../../txts/developers:214
+#: ../../txts/developers:211
 msgid "Spanish"
 msgstr "Spaans"
 
-#: ../../txts/developers:219
+#: ../../txts/developers:216
 msgid "Swedish"
 msgstr "Zweeds"
 
-#: ../../txts/developers:227
+#: ../../txts/developers:224
 msgid "Packagers"
 msgstr "Pakketmakers"
 
-#: ../../txts/developers:231
+#: ../../txts/developers:228
 msgid "Linux Distributions"
 msgstr "Linux Distributies"
 
-#: ../../txts/developers:242
+#: ../../txts/developers:239
 msgid "Other Unix Distributions"
 msgstr "Andere Unix Distributies"
 
-#: ../../txts/developers:251
+#: ../../txts/developers:248
 msgid "Non Unix Distributions"
 msgstr "Niet-Unix Distributies"
 
-#: ../../txts/developers:262
+#: ../../txts/developers:259
 msgid "Wiki and Enduser-Documentation"
 msgstr "Wiki en Eindgebruikersdocumentatie"
 
-#: ../../txts/developers:274
+#: ../../txts/developers:271
 msgid "Former elders"
 msgstr "Voormalige ouderlingen"
 
-#: ../../txts/developers:302
+#: ../../txts/developers:299
 msgid "Other"
 msgstr "Overige"
 
