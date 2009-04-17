@@ -76,6 +76,18 @@ static NSString *getApplicationName(void)
     event.type = SDL_QUIT;
     SDL_PushEvent(&event);
 }
+
+/* Overrides the sendEvent method in NSApplication to be sure Cocoa
+ * ignores keystrokes that do not involve the command key.
+ */
+- (void)sendEvent:(NSEvent *)anEvent
+{
+	if([anEvent type] ==  NSKeyDown || [anEvent type] == NSKeyUp) {
+		if( [anEvent modifierFlags] & NSCommandKeyMask ) 
+			[super sendEvent: anEvent];
+	} else 
+		[super sendEvent: anEvent];
+}
 @end
 
 /* The main class of the application, the application's delegate */
@@ -296,6 +308,9 @@ static void CustomApplicationMain (int argc, char **argv)
     /* Set the main menu to contain the real app name instead of "SDL App" */
     [self fixMenu:[NSApp mainMenu] withAppName:getApplicationName()];
 #endif
+	 
+    /* To get Cocoa to hear keystrokes (such as Cmd-Q, Cmd-H) */
+    setenv ("SDL_ENABLEAPPEVENTS", "1", 1);
 
     /* Hand off to main application code */
     gCalledAppMainline = TRUE;
