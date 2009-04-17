@@ -71,7 +71,10 @@ struct CheckStepRoadAI {
 };
 
 DefaultAI::DefaultAI(Game & g, const Player_Number pid) :
-Computer_Player(g, pid), tribe(0)
+Computer_Player(g, pid),
+m_buildable_changed(true),
+m_mineable_changed(true),
+tribe(0)
 {}
 
 // when DefaultAI is constructed, some information is not yet available (e.g. world)
@@ -235,67 +238,19 @@ void DefaultAI::think ()
 	const int32_t gametime = game().get_gametime();
 	//printf("DefaultAI: Staring planner at GT %i.\n", gametime);
 
-	// update statistics about buildable fields
-	while
-		(not buildable_fields.empty()
-		 and
-		 buildable_fields.front()->next_update_due <= gametime)
-	{
-		BuildableField * bf = buildable_fields.front();
-
-		//  check whether we lost ownership of the node
-		if (bf->coords.field->get_owned_by() != get_player_number()) {
-			buildable_fields.pop_front();
-			continue;
-		}
-
-		//  check whether we can still construct regular buildings on the node
-		if ((player->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK) == 0) {
-			unusable_fields.push_back (bf->coords);
-			delete bf;
-
-			buildable_fields.pop_front();
-			continue;
-		}
-
-		update_buildable_field (*bf);
-		bf->next_update_due = gametime + FIELD_UPDATE_INTERVAL;
-
-		buildable_fields.push_back (bf);
-		buildable_fields.pop_front ();
+	if (m_buildable_changed) {
+		// update statistics about buildable fields
+		update_all_buildable_fields(gametime);
 	}
-	//printf("DefaultAI: Done looking for buildable fields. %i found.\n", buildable_fields.size());
-
-	// do the same for mineable fields
-	while
-		(not mineable_fields.empty()
-		 and
-		 mineable_fields.front()->next_update_due <= gametime)
-	{
-		MineableField * mf = mineable_fields.front();
-
-		//  check whether we lost ownership of the node
-		if (mf->coords.field->get_owned_by() != get_player_number()) {
-			mineable_fields.pop_front();
-			continue;
-		}
-
-		//  check whether we can still construct regular buildings on the node
-		if ((player->get_buildcaps(mf->coords) & BUILDCAPS_MINE) == 0) {
-			unusable_fields.push_back (mf->coords);
-			delete mf;
-
-			mineable_fields.pop_front();
-			continue;
-		}
-
-		update_mineable_field (*mf);
-		mf->next_update_due = gametime + FIELD_UPDATE_INTERVAL;
-
-		mineable_fields.push_back (mf);
-		mineable_fields.pop_front ();
+	if (m_mineable_changed) {
+		// do the same for mineable fields
+		update_all_mineable_fields(gametime);
 	}
-	//printf("DefaultAI: Done looking for minenable fields. %i found.\n", mineable_fields.size());
+	m_buildable_changed = false;
+	m_mineable_changed = false;
+
+	// unfortunally this needs to stay here as many things might change the state
+	// of the field - f.e. new spread trees.
 	for
 		(std::list<FCoords>::iterator i = unusable_fields.begin();
 		 i != unusable_fields.end();)
@@ -337,6 +292,8 @@ void DefaultAI::think ()
 			//Inhibiting roadbuilding is not a good idea, it causes
 			//computer players to get into deadlock at certain circumstances.
 			// printf("DefaultAI: Built something, waiting until road can be built.\n");
+			m_buildable_changed = true;
+			m_mineable_changed = true;
 			return;
 		}
 	}
@@ -434,6 +391,8 @@ void DefaultAI::think ()
 					const Coords c = cp.get_coords()[i];
 					if (map[c].get_caps() & BUILDCAPS_FLAG) {
 						game().send_player_build_flag (get_player_number(), c);
+						m_buildable_changed = true;
+						m_mineable_changed = true;
 						return;
 					}
 				}
@@ -441,6 +400,8 @@ void DefaultAI::think ()
 					const Coords c = cp.get_coords()[j];
 					if (map[c].get_caps() & BUILDCAPS_FLAG) {
 						game().send_player_build_flag (get_player_number(), c);
+						m_buildable_changed = true;
+						m_mineable_changed = true;
 						return;
 					}
 				}
@@ -451,6 +412,85 @@ void DefaultAI::think ()
 		roads.pop_front ();
 	}
 	//printf("DefaultAI: Done inspecting road infrastructure.\n");
+}
+
+/**
+ * Checks ALL available buildable fields.
+ *
+ * this shouldn't be used often, as it might hang the game for some 100 milliseconds
+ * if the area the computer owns is big.
+ */
+void DefaultAI::update_all_buildable_fields(const int32_t gametime)
+{
+	while
+		(not buildable_fields.empty()
+		 and
+		 buildable_fields.front()->next_update_due <= gametime)
+	{
+		BuildableField * bf = buildable_fields.front();
+
+		//  check whether we lost ownership of the node
+		if (bf->coords.field->get_owned_by() != get_player_number()) {
+			buildable_fields.pop_front();
+			continue;
+		}
+
+		//  check whether we can still construct regular buildings on the node
+		if ((player->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK) == 0) {
+			unusable_fields.push_back (bf->coords);
+			delete bf;
+
+			buildable_fields.pop_front();
+			continue;
+		}
+
+		update_buildable_field (*bf);
+		bf->next_update_due = gametime + FIELD_UPDATE_INTERVAL;
+
+		buildable_fields.push_back (bf);
+		buildable_fields.pop_front ();
+	}
+	//printf("DefaultAI: Done looking for buildable fields. %i found.\n", buildable_fields.size());
+}
+
+
+/**
+ * Checks ALL available mineable fields.
+ *
+ * this shouldn't be used often, as it might hang the game for some 100 milliseconds
+ * if the area the computer owns is big.
+ */
+void DefaultAI::update_all_mineable_fields(const int32_t gametime)
+{
+	while
+		(not mineable_fields.empty()
+		 and
+		 mineable_fields.front()->next_update_due <= gametime)
+	{
+		MineableField * mf = mineable_fields.front();
+
+		//  check whether we lost ownership of the node
+		if (mf->coords.field->get_owned_by() != get_player_number()) {
+			mineable_fields.pop_front();
+			continue;
+		}
+
+		//  check whether we can still construct regular buildings on the node
+		if ((player->get_buildcaps(mf->coords) & BUILDCAPS_MINE) == 0) {
+			unusable_fields.push_back (mf->coords);
+			delete mf;
+
+			mineable_fields.pop_front();
+			continue;
+		}
+
+		update_mineable_field (*mf);
+		mf->next_update_due = gametime + FIELD_UPDATE_INTERVAL;
+
+		mineable_fields.push_back (mf);
+		mineable_fields.pop_front ();
+	}
+	//printf("DefaultAI: Done looking for minenable fields. %i found.\n", mineable_fields.size());
 }
 
 bool DefaultAI::construct_building ()
@@ -710,6 +750,8 @@ void DefaultAI::check_productionsite (ProductionSiteObserver & site)
 			("ComputerPlayer(%d): out of resources, destructing\n",
 			 get_player_number());
 		game().send_player_bulldoze (*site.site);
+		m_buildable_changed = true;
+		m_mineable_changed = true;
 		return;
 	}
 
@@ -728,6 +770,8 @@ void DefaultAI::check_productionsite (ProductionSiteObserver & site)
 			("ComputerPlayer(%d): out of resources, destructing\n",
 			 get_player_number());
 		game().send_player_bulldoze (*site.site);
+		m_buildable_changed = true;
+		m_mineable_changed = true;
 		return;
 	}
 }
@@ -995,6 +1039,8 @@ void DefaultAI::lose_building (Building const & b)
 				--wares[bo.inputs[i]].consumers;
 		}
 	}
+	m_buildable_changed = true;
+	m_mineable_changed = true;
 }
 
 // Road building
@@ -1059,6 +1105,8 @@ bool DefaultAI::connect_flag_to_another_economy (Flag & flag)
 	}
 
 	game().send_player_build_road (get_player_number(), path);
+	m_buildable_changed = true;
+	m_mineable_changed = true;
 	return true;
 }
 
@@ -1141,6 +1189,8 @@ bool DefaultAI::improve_roads (Flag & flag)
 				 static_cast<int32_t>(2 * path.get_nsteps() + 2) < nf.cost)
 			{
 				game().send_player_build_road (get_player_number(), path);
+				m_buildable_changed = true;
+				m_mineable_changed = true;
 				return true;
 			}
 
@@ -1402,6 +1452,8 @@ void DefaultAI::construct_roads ()
 
 				game().send_player_build_road (get_player_number(), path);
 				return;
+				m_buildable_changed = true;
+				m_mineable_changed = true;
 			}
 		}
 	}

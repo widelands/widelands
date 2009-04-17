@@ -48,6 +48,9 @@ struct DefaultAI : Computer_Player {
 	static Implementation implementation;
 
 private:
+	void update_all_buildable_fields (int32_t);
+	void update_all_mineable_fields  (int32_t);
+
 	void gain_immovable (Widelands::PlayerImmovable       &);
 	void lose_immovable (Widelands::PlayerImmovable const &);
 	void gain_building  (Widelands::Building              &);
@@ -155,28 +158,7 @@ private:
 		uint8_t preciousness;
 	};
 
-	Widelands::Player               * player;
-	Widelands::Tribe_Descr const    * tribe;
-
-	std::list<BuildingObserver>       buildings;
-	int32_t                               total_constructionsites;
-
-	std::list<Widelands::FCoords>     unusable_fields;
-	std::list<BuildableField *>       buildable_fields;
-	std::list<MineableField *>        mineable_fields;
-	std::list<Widelands::Flag const *> new_flags;
-	std::list<Widelands::Road const *> roads;
-	std::list<EconomyObserver *>      economies;
-	std::list<ProductionSiteObserver> productionsites;
-
-	std::vector<WareObserver>         wares;
-
 	EconomyObserver * get_economy_observer (Widelands::Economy &);
-
-	int32_t                              next_road_due;
-	int32_t                              next_construction_due;
-	int32_t                              next_productionsite_check_due;
-	int32_t                              inhibit_road_building;
 
 	void late_initialization ();
 
@@ -189,6 +171,32 @@ private:
 	BuildingObserver & get_building_observer(char const *);
 
 	bool check_supply(BuildingObserver const &);
+
+// Variables of default AI
+private:
+	bool m_buildable_changed;
+	bool m_mineable_changed;
+
+	Widelands::Player               * player;
+	Widelands::Tribe_Descr const    * tribe;
+
+	std::list<BuildingObserver>       buildings;
+	int32_t                           total_constructionsites;
+
+	std::list<Widelands::FCoords>     unusable_fields;
+	std::list<BuildableField *>       buildable_fields;
+	std::list<MineableField *>        mineable_fields;
+	std::list<Widelands::Flag const *> new_flags;
+	std::list<Widelands::Road const *> roads;
+	std::list<EconomyObserver *>      economies;
+	std::list<ProductionSiteObserver> productionsites;
+
+	std::vector<WareObserver>         wares;
+
+	int32_t next_road_due;
+	int32_t next_construction_due;
+	int32_t next_productionsite_check_due;
+	int32_t inhibit_road_building;
 };
 
 #endif // DEFAULTAI_H
