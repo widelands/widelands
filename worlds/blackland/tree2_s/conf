@@ -2,8 +2,22 @@ size=small
 program=program
 picture=s2tree2_00.png
 
+[terrain affinity]
+strand=      128
+hardground1= 220
+hardground2= 220
+hardground3= 220
+hardground4= 220
+ashes=       128
+ashes2=       64
+hardlava=     32
+mountain1=     8
+mountain2=     8
+mountain3=     8
+mountain4=     8
+
 [program]
-animate=small 260000
+animate=small 72500
 remove=70
 transform=tree2_m
 

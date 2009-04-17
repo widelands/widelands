@@ -12,12 +12,26 @@ program=program
 program=fall
 picture=idle_0.png
 
+[terrain affinity]
+strand=       32
+hardground1= 196
+hardground2= 196
+hardground3= 196
+hardground4= 196
+ashes=       156
+ashes2=      128
+hardlava=     92
+mountain1=     8
+mountain2=     8
+mountain3=     8
+mountain4=     8
+
 [idle]
 pics=idle_?.png
 hotspot=24 60
 
 [program]
-animate=idle 44000
+animate=idle 800000
 transform=deadtree2 50
 seed=tree5_t 180
 

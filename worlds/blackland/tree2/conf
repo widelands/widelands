@@ -12,6 +12,20 @@ program=program
 program=fall
 picture=idle_0.png
 
+[terrain affinity]
+strand=      128
+hardground1= 220
+hardground2= 220
+hardground3= 220
+hardground4= 220
+ashes=       128
+ashes2=       64
+hardlava=     32
+mountain1=     8
+mountain2=     8
+mountain3=     8
+mountain4=     8
+
 [idle]
 pics=idle_?.png
 sfx=0 ../../../sound/animals/bird2
@@ -19,7 +33,7 @@ fps=10
 hotspot=24 60
 
 [program]
-animate=idle 200000
+animate=idle 2250000
 transform=deadtree2 25
 seed=tree2_t 126
 

@@ -1,8 +1,22 @@
 program=program
 picture=s1tree3_00.png
 
+[terrain affinity]
+strand=       16
+hardground1= 200
+hardground2= 200
+hardground3= 225
+hardground4= 225
+ashes=       200
+ashes2=      128
+hardlava=    220
+mountain1=     7
+mountain2=     7
+mountain3=     7
+mountain4=     7
+
 [program]
-animate=tiny 110000
+animate=tiny 55000
 remove=42
 transform=tree3_s
 
