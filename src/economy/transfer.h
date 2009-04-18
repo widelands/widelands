@@ -23,8 +23,11 @@
 #include "route.h"
 
 namespace Widelands {
-
-struct Route;
+struct Game;
+struct PlayerImmovable;
+struct Request;
+struct WareInstance;
+struct Worker;
 
 /**
  * Whenever an item or worker is transferred to fulfill a Request,
