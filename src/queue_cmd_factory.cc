@@ -25,7 +25,7 @@
 #include "queue_cmd_ids.h"
 #include "playercommand.h"
 #include "instances.h"
-#include "transport.h"
+#include "economy/transport.h"
 #include "wexception.h"
 
 namespace Widelands {

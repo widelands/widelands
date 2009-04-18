@@ -31,7 +31,7 @@
 #include "soldier.h"
 #include "soldiercontrol.h"
 #include "sound/sound_handler.h"
-#include "transport.h"
+#include "economy/transport.h"
 #include "trainingsite.h"
 #include "tribe.h"
 #include "warehouse.h"

@@ -30,7 +30,7 @@ Rendering functions of the 16-bit software renderer.
 #include "player.h"
 #include "rgbcolor.h"
 #include "graphic.h"
-#include "transport.h"
+#include "economy/transport.h"
 #include "wexception.h"
 #include "world.h"
 

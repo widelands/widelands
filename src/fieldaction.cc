@@ -31,7 +31,7 @@
 #include "overlay_manager.h"
 #include "player.h"
 #include "soldier.h"
-#include "transport.h"
+#include "economy/transport.h"
 #include "tribe.h"
 #include "warehouse.h"
 #include "watchwindow.h"

@@ -23,7 +23,7 @@
 #include "bob.h"
 #include "battle.h"
 #include "building.h"
-#include "transport.h"
+#include "economy/transport.h"
 #include "item_ware_descr.h"
 #include "wexception.h"
 

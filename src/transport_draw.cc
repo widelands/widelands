@@ -17,7 +17,7 @@
  *
  */
 
-#include "transport.h"
+#include "economy/transport.h"
 
 #include "editor_game_base.h"
 #include "rendertarget.h"

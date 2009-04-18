@@ -47,7 +47,7 @@
 #include "overlay_manager.h"
 #include "soldier.h"
 #include "stock_menu.h"
-#include "transport.h"
+#include "economy/transport.h"
 #include "tribe.h"
 #include "ware_statistics_menu.h"
 #include "wlapplication.h"

@@ -25,7 +25,7 @@
 #include "field.h"
 #include "instances.h" //for g_flag_descr
 #include "player.h"
-#include "transport.h"
+#include "economy/transport.h"
 #include "tribe.h"
 #include "widelands_streamread_inlines.h"
 #include "widelands_streamwrite_inlines.h"

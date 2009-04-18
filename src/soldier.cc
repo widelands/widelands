@@ -32,7 +32,7 @@
 #include "profile.h"
 #include "rendertarget.h"
 #include "rgbcolor.h"
-#include "transport.h"
+#include "economy/transport.h"
 #include "tribe.h"
 #include "warehouse.h"
 #include "wexception.h"

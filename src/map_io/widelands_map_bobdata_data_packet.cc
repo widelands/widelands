@@ -29,7 +29,7 @@
 #include "militarysite.h"
 #include "player.h"
 #include "soldier.h"
-#include "transport.h"
+#include "economy/transport.h"
 #include "tribe.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"

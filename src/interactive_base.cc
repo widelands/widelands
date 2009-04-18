@@ -35,7 +35,7 @@
 #include "overlay_manager.h"
 #include "player.h"
 #include "profile.h"
-#include "transport.h"
+#include "economy/transport.h"
 #include "wlapplication.h"
 
 #include "upcast.h"

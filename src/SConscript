@@ -30,6 +30,7 @@ libs+=list(SConscript('editor/SConscript'))
 libs+=SConscript('trigger/SConscript')
 libs+=SConscript('events/SConscript')
 libs+=SConscript('ai/SConscript')
+libs+=SConscript('economy/SConscript')
 libs+=SConscript('map_io/SConscript')
 libs.reverse()
 

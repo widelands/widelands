@@ -26,7 +26,7 @@
 #include "player.h"
 #include "profile.h"
 #include "rendertarget.h"
-#include "transport.h"
+#include "economy/transport.h"
 #include "tribe.h"
 #include "wexception.h"
 

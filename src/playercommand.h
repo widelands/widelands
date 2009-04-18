@@ -23,7 +23,7 @@
 
 #include "cmd_queue.h"
 #include "trainingsite.h"
-#include "transport.h"
+#include "economy/transport.h"
 
 namespace Widelands {
 

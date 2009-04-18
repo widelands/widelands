@@ -22,7 +22,7 @@
 #include "editor_game_base.h"
 #include "map.h"
 #include "player.h"
-#include "transport.h"
+#include "economy/transport.h"
 #include "tribe.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"

@@ -23,7 +23,7 @@
 #include "i18n.h"
 #include "interactive_player.h"
 #include "player.h"
-#include "transport.h"
+#include "economy/transport.h"
 
 
 Stock_Menu::Stock_Menu

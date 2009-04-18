@@ -13,5 +13,7 @@ SConscript('ui/ui_fs_menus/SConscript.dist')
 SConscript('io/SConscript.dist')
 SConscript('sound/SConscript.dist')
 SConscript('trigger/SConscript.dist')
+SConscript('map_io/SConscript.dist')
+SConscript('economy/SConscript.dist')
 SConscript('events/SConscript.dist')
 

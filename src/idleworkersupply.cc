@@ -21,7 +21,7 @@
 
 #include "game.h"
 #include "player.h"
-#include "request.h"
+#include "economy/request.h"
 #include "requirements.h"
 #include "soldier.h"
 #include "tribe.h"

@@ -24,7 +24,7 @@
 #include "interactive_base.h"
 #include "map.h"
 #include "player.h"
-#include "request.h"
+#include "economy/request.h"
 #include "tribe.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"

@@ -24,7 +24,7 @@
 #include "game.h"
 #include "map.h"
 #include "player.h"
-#include "transport.h"
+#include "economy/transport.h"
 #include "tribe.h"
 #include "widelands_fileread.h"
 #include "widelands_map_data_packet_ids.h"

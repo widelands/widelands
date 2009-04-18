@@ -20,7 +20,7 @@
 #ifndef IDLEWORKERSUPPLY_H
 #define IDLEWORKERSUPPLY_H
 
-#include "transport.h"
+#include "economy/transport.h"
 
 namespace Widelands {
 

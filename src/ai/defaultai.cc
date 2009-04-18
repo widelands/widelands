@@ -28,7 +28,7 @@
 #include "computer_player_hints.h"
 #include "map.h"
 #include "world.h"
-#include "transport.h"
+#include "economy/transport.h"
 #include "player.h"
 #include "profile.h"
 #include "findnode.h"

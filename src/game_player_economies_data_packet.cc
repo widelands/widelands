@@ -21,7 +21,7 @@
 
 #include "game.h"
 #include "player.h"
-#include "transport.h"
+#include "economy/transport.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
 
