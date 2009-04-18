@@ -342,84 +342,13 @@ private:
 	Request *  m_carrier_request;
 };
 
-
-/**
- * Route stores a route from flag to flag.
- * The number of steps is the number of flags stored minus one.
- */
-struct Route {
-	friend struct Economy;
-	friend struct Request;
-
-	Route();
-
-	void clear();
-
-	int32_t get_totalcost() const {return m_totalcost;}
-	int32_t get_nrsteps() const {return m_route.size() - 1;}
-	Flag & get_flag(Editor_Game_Base &, std::vector<Flag *>::size_type);
-
-	void starttrim(int32_t count);
-	void truncate(int32_t count);
-
-	struct LoadData {
-		std::vector<uint32_t> flags;
-	};
-
-	void load(LoadData &, FileRead &);
-	void load_pointers(LoadData const &, Map_Map_Object_Loader &);
-	void save(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver *);
-
-private:
-	int32_t                     m_totalcost;
-	std::vector<Object_Ptr> m_route; ///< includes start and end flags
-};
+}
 
 
-/**
- * Whenever an item or worker is transferred to fulfill a Request,
- * a Transfer is allocated to describe this transfer.
- *
- * Transfers are always created and destroyed by a Request instance.
- *
- * Call get_next_step() to find out where you should go next. If
- * get_next_step() returns 0, the transfer is complete or cannot be
- * completed. Call finish() if success is true, fail() otherwise.
- * Call fail() if something really bad has happened (e.g. the worker
- * or ware was destroyed).
- *
- * \todo The mentioned function fail() does not exist!
- */
-struct Transfer {
-	friend struct Request;
+#include "route.h"
+#include "transfer.h"
 
-	Transfer(Game &, Request &, WareInstance &);
-	Transfer(Game &, Request &, Worker       &);
-	~Transfer();
-
-	Request & request() const {return m_request;}
-	bool is_idle() const {return m_idle;}
-
-	void set_idle(bool idle);
-
-public:
-	/// Called by the controlled ware or worker
-	PlayerImmovable * get_next_step(PlayerImmovable *, bool & psuccess);
-	void has_finished();
-	void has_failed();
-
-private:
-	void tlog(char const * fmt, ...) PRINTF_FORMAT(2, 3);
-
-	Game         & m_game;
-	Request      & m_request;
-	WareInstance * m_item;    ///< non-null if ware is an item
-	Worker       * m_worker;  ///< non-null if ware is a worker
-	Route          m_route;
-
-	bool m_idle; ///< an idle transfer can be fail()ed if the item feels like it
-};
-
+namespace Widelands {
 
 /**
  * A Supply is a virtual base class representing something that can offer
