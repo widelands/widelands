@@ -110,7 +110,6 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 		Building_Descr const & descr = *tribe.get_building_descr(i);
 		if (upcast(ProductionSite_Descr const, de, &descr)) {
 
-			const char * const name = de->name().c_str();
 			if
 				((descr.buildable() or descr.get_enhanced_building())
 				 and

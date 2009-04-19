@@ -31,6 +31,9 @@
 
 namespace Widelands {
 
+struct Road;
+struct Building;
+
 struct Neighbour {
 	Flag * flag;
 	Road * road;

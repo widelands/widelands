@@ -112,6 +112,8 @@ protected:
 	std::vector<std::string> m_defense_pics_fn;
 };
 
+class Building;
+
 class Soldier : public Worker {
 	friend struct Map_Bobdata_Data_Packet;
 	MO_DESCR(Soldier_Descr);

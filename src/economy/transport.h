@@ -37,26 +37,6 @@
 
 #include <list>
 
-struct Interactive_Player;
-
-namespace Widelands {
-
-class Building;
-struct Economy;
-class Flag;
-class IdleWareSupply;
-struct Item_Ware_Descr;
-struct Request;
-struct Requirements;
-struct Road;
-class Soldier;
-struct Transfer;
-class Warehouse;
-struct Map_Map_Object_Loader;
-struct Map_Map_Object_Saver;
-
-}
-
 #include "ware_instance.h"
 #include "flag.h"
 #include "road.h"
@@ -186,6 +166,7 @@ private:
 struct RSPairStruct;
 struct Cmd_SetTargetQuantity;
 struct Cmd_ResetTargetQuantity;
+struct Warehouse;
 
 struct Economy {
 	friend struct Request;
