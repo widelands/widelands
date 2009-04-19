@@ -44,25 +44,9 @@
 #include "transfer.h"
 
 #include "supply.h"
+#include "supply_list.h"
 
 namespace Widelands {
-
-
-/**
- * SupplyList is used in the Economy to keep track of supplies.
- */
-struct SupplyList {
-	void add_supply(Supply &);
-	void remove_supply(Supply &);
-
-	size_t get_nrsupplies() const {return m_supplies.size();}
-	Supply const & operator[](size_t const idx) const {return *m_supplies[idx];}
-	Supply & operator[](size_t const idx) {return *m_supplies[idx];}
-
-private:
-	typedef std::vector<Supply *> Supplies;
-	Supplies m_supplies;
-};
 
 
 /**
