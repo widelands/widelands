@@ -24,11 +24,11 @@
 #include "game.h"
 #include "instances.h"
 #include "player.h"
+#include "request.h"
 #include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
 #include "worker.h"
-
 
 
 namespace Widelands { 

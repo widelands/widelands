@@ -25,9 +25,6 @@
 #include "worker.h"
 #include "upcast.h"
 
-// Needed for WareInstance & Road
-#include "transport.h"
-
 namespace Widelands {
 
 Transfer::Transfer(Game & game, Request & req, WareInstance & it) :

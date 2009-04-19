@@ -24,6 +24,7 @@
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "player.h"
+#include "request.h"
 #include "tribe.h"
 #include "wexception.h"
 #include "widelands_fileread.h"

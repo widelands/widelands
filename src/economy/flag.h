@@ -20,19 +20,16 @@
 #ifndef S__FLAG_H
 #define S__FLAG_H
 
-#include "ware_instance.h"
-#include "request.h"
+#include <vector>
+#include <list>
+
 #include "immovable.h"
 
-// Needed for Road (at the very least)
-#include "transport.h"
-
-#include <vector>
-
 namespace Widelands {
-
-struct Road;
 struct Building;
+struct Request;
+struct Road;
+struct WareInstance;
 
 struct Neighbour {
 	Flag * flag;

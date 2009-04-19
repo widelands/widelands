@@ -23,7 +23,6 @@
 #include "player.h"
 #include "productionsite.h"
 #include "soldier.h"
-#include "transport.h"
 #include "tribe.h"
 #include "upcast.h"
 #include "map_io/widelands_map_map_object_loader.h"

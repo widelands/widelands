@@ -21,16 +21,13 @@
 #define S__ROAD_H
 
 #include "immovable.h"
-class Request;
 
 // For Path
 #include "map.h"
 
-// For Request
-#include "transport.h"
-
-
 namespace Widelands {
+
+struct Request;
 
 /**
  * Road is a special object which connects two flags.

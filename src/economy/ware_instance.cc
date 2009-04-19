@@ -26,9 +26,6 @@
 #include "upcast.h"
 #include "worker.h"
 
-// For Economy
-#include "transport.h"
-
 namespace Widelands {
 
     

@@ -21,6 +21,7 @@
 
 #include "game.h"
 #include "player.h"
+#include "request.h"
 #include "tribe.h"
 #include "upcast.h"
 #include "warehouse.h"
