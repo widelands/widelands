@@ -49,6 +49,8 @@
 #include "map_io/widelands_map_loader.h"
 #include "wlapplication.h"
 
+#include "economy/economy.h"
+
 #include "ui_progresswindow.h"
 
 #include "log.h"

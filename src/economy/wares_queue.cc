@@ -19,6 +19,9 @@
 
 #include "wares_queue.h"
 
+// Package includes
+#include "economy.h"
+
 #include "editor_game_base.h"
 #include "game.h"
 #include "map_io/widelands_map_map_object_loader.h"

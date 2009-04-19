@@ -22,6 +22,8 @@
 #include "areawatcher.h"
 #include "battle.h"
 #include "building.h"
+#include "economy/flag.h"
+#include "findimmovable.h"
 #include "font_handler.h"
 #include "game.h"
 #include "graphic.h"
@@ -31,14 +33,12 @@
 #include "mapregion.h"
 #include "player.h"
 #include "tribe.h"
+#include "ui_progresswindow.h"
+#include "upcast.h"
 #include "wexception.h"
 #include "worker.h"
 #include "world.h"
-#include "findimmovable.h"
 
-#include "ui_progresswindow.h"
-
-#include "upcast.h"
 
 #include <set>
 #include <algorithm>

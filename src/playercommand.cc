@@ -19,6 +19,8 @@
 
 #include "playercommand.h"
 
+#include "economy/economy.h"
+
 #include "log.h"
 #include "game.h"
 #include "instances.h"

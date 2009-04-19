@@ -39,6 +39,7 @@ class.
 #include "tribe.h"
 #include "warehouse.h"
 #include "waresdisplay.h"
+#include "economy/wares_queue.h"
 
 #include "ui_box.h"
 #include "ui_button.h"

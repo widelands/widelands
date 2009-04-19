@@ -19,6 +19,11 @@
 
 #include "economy.h"
 
+// Package includes
+#include "flag.h"
+#include "route.h"
+#include "cmd_call_economy_balance.h"
+
 #include "game.h"
 #include "player.h"
 #include "request.h"

@@ -21,8 +21,8 @@
 
 #include "map.h"
 #include "player.h"
-#include "economy/transport.h"
-
+#include "economy/flag.h"
+#include "economy/road.h"
 
 namespace Widelands {
 

@@ -19,7 +19,10 @@
 
 #include "production_program.h"
 
+#include "economy/economy.h"
+#include "economy/wares_queue.h"
 #include "game.h"
+#include "helper.h"
 #include "mapregion.h"
 #include "productionsite.h"
 #include "profile.h"
@@ -27,10 +30,8 @@
 #include "soldiercontrol.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
-#include "worker_program.h"
-
-#include "helper.h"
 #include "upcast.h"
+#include "worker_program.h"
 
 namespace Widelands {
 

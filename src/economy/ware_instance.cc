@@ -19,6 +19,11 @@
 
 #include "ware_instance.h"
 
+// Package includes
+#include "economy.h"
+#include "flag.h"
+#include "transfer.h"
+
 #include "game.h"
 #include "warehouse.h"
 #include "request.h"

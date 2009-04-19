@@ -21,6 +21,10 @@
 #include "game.h"
 #include "wexception.h"
 
+#include "economy/road.h"
+#include "economy/ware_instance.h"
+#include "economy/flag.h"
+
 #include "upcast.h"
 
 namespace Widelands {

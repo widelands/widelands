@@ -21,6 +21,7 @@
 #define SOLDIER_H
 
 #include "worker.h"
+#include "tattribute.h"
 
 struct RGBColor;
 

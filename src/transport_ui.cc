@@ -17,17 +17,16 @@
  *
  */
 
+#include "economy/economy.h"
+#include "graphic.h"
 #include "interactive_player.h"
 #include "item_ware_descr.h"
 #include "player.h"
 #include "playercommand.h"
-#include "tribe.h"
-
-#include "ui_unique_window.h"
-#include "ui_button.h"
-
-#include "graphic.h"
 #include "rendertarget.h"
+#include "tribe.h"
+#include "ui_button.h"
+#include "ui_unique_window.h"
 
 using Widelands::Economy;
 using Widelands::Game;

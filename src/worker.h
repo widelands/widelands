@@ -24,6 +24,7 @@
 #include "worker_descr.h"
 
 namespace Widelands {
+struct Building;
 
 /**
  * Worker is the base class for all humans (and actually potential non-humans,

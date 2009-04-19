@@ -19,14 +19,15 @@
 
 #include "idleworkersupply.h"
 
+#include "economy/economy.h"
+#include "economy/request.h"
 #include "game.h"
 #include "player.h"
-#include "economy/request.h"
 #include "requirements.h"
 #include "soldier.h"
 #include "tribe.h"
-#include "worker.h"
 #include "wexception.h"
+#include "worker.h"
 
 namespace Widelands {
 

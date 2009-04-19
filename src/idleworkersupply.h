@@ -20,9 +20,11 @@
 #ifndef IDLEWORKERSUPPLY_H
 #define IDLEWORKERSUPPLY_H
 
-#include "economy/transport.h"
+#include "economy/supply.h"
 
 namespace Widelands {
+struct Worker;
+struct Economy;
 
 struct IdleWorkerSupply : public Supply {
 	IdleWorkerSupply(Worker &);

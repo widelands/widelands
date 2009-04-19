@@ -20,7 +20,8 @@
 #ifndef WAREHOUSESUPPLY_H
 #define WAREHOUSESUPPLY_H
 
-#include "economy/transport.h" // unfortunately necessary for Supply
+#include "economy/supply.h" 
+#include "warelist.h" 
 
 namespace Widelands {
 

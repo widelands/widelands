@@ -19,6 +19,12 @@
 
 #include "transfer.h"
 
+// Package includes
+#include "economy.h"
+#include "flag.h"
+#include "road.h"
+#include "ware_instance.h"
+
 #include "game.h"
 #include "immovable.h"
 #include "request.h"

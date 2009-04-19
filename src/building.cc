@@ -20,25 +20,24 @@
 #include "building.h"
 
 #include "constructionsite.h"
+#include "economy/flag.h"
+#include "economy/request.h"
 #include "editor_game_base.h"
-#include "io/filesystem/filesystem.h"
 #include "font_handler.h"
 #include "game.h"
 #include "graphic.h"
 #include "interactive_gamebase.h"
+#include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"
 #include "player.h"
 #include "profile.h"
 #include "rendertarget.h"
-#include "economy/request.h"
 #include "sound/sound_handler.h"
-#include "economy/transport.h"
 #include "tribe.h"
+#include "upcast.h"
 #include "wexception.h"
 #include "worker.h"
-
-#include "upcast.h"
 
 #include <cstdio>
 #include <sstream>

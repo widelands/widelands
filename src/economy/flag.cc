@@ -19,6 +19,11 @@
 
 #include "flag.h"
 
+// Package includes
+#include "road.h"
+#include "economy.h"
+#include "ware_instance.h"
+
 #include "building.h"
 #include "editor_game_base.h"
 #include "game.h"

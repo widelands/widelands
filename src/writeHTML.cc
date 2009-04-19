@@ -26,6 +26,7 @@
 #include "soldier.h"
 #include "tribe.h"
 #include "worker_program.h"
+#include "world.h"
 
 #include "io/filesystem/disk_filesystem.h"
 #include "i18n.h"

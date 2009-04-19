@@ -21,16 +21,16 @@
 
 #include "checkstep.h"
 #include "critter_bob.h"
+#include "economy/route.h"
+#include "economy/transfer.h"
 #include "game.h"
 #include "mapviewpixelconstants.h"
 #include "player.h"
 #include "profile.h"
 #include "rendertarget.h"
-#include "economy/transport.h"
 #include "tribe.h"
-#include "wexception.h"
-
 #include "upcast.h"
+#include "wexception.h"
 
 namespace Widelands {
 

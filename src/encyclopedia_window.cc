@@ -29,6 +29,7 @@
 #include "production_program.h"
 #include "tribe.h"
 #include "warelist.h"
+#include "economy/economy.h"
 
 #include "ui_window.h"
 #include "ui_unique_window.h"

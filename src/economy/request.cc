@@ -19,6 +19,11 @@
 
 #include "request.h"
 
+// Package includes
+#include "economy.h"
+#include "transfer.h"
+#include "ware_instance.h"
+
 #include "game.h"
 #include "player.h"
 #include "productionsite.h"
