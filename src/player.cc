@@ -19,19 +19,21 @@
 
 #include "player.h"
 
+
 #include "checkstep.h"
 #include "cmd_queue.h"
 #include "constructionsite.h"
+#include "economy/flag.h"
+#include "economy/road.h"
 #include "event.h"
 #include "findimmovable.h"
+#include "game.h"
 #include "i18n.h"
 #include "log.h"
-#include "game.h"
 #include "militarysite.h"
 #include "soldier.h"
 #include "soldiercontrol.h"
 #include "sound/sound_handler.h"
-#include "economy/transport.h"
 #include "trainingsite.h"
 #include "tribe.h"
 #include "warehouse.h"
@@ -39,7 +41,6 @@
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-
 #include "upcast.h"
 
 namespace Widelands {

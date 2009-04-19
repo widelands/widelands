@@ -19,13 +19,13 @@
 
 #include "game_player_economies_data_packet.h"
 
+#include "economy/economy.h"
+#include "economy/flag.h"
 #include "game.h"
 #include "player.h"
-#include "economy/transport.h"
+#include "upcast.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-
-#include "upcast.h"
 
 namespace Widelands {
 

@@ -25,9 +25,9 @@
 #include "i18n.h"
 #include "player.h"
 #include "profile.h"
+#include "economy/flag.h"
 #include "economy/request.h"
 #include "soldier.h"
-#include "economy/transport.h"
 #include "tribe.h"
 #include "worker.h"
 

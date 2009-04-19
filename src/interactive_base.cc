@@ -22,6 +22,8 @@
 #include "checkstep.h"
 #include "cmd_queue.h"
 #include "constants.h"
+#include "economy/flag.h"
+#include "economy/road.h"
 #include "font_handler.h"
 #include "game.h"
 #include "gamecontroller.h"
@@ -35,10 +37,8 @@
 #include "overlay_manager.h"
 #include "player.h"
 #include "profile.h"
-#include "economy/transport.h"
-#include "wlapplication.h"
-
 #include "upcast.h"
+#include "wlapplication.h"
 
 using Widelands::Area;
 using Widelands::CoordPath;

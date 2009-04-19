@@ -20,18 +20,20 @@
 #include "widelands_map_buildingdata_data_packet.h"
 
 #include "constructionsite.h"
+#include "economy/flag.h"
+#include "economy/request.h"
+#include "economy/wares_queue.h"
 #include "editor_game_base.h"
 #include "game.h"
 #include "map.h"
 #include "militarysite.h"
 #include "player.h"
-#include "productionsite.h"
 #include "production_program.h"
-#include "economy/request.h"
+#include "productionsite.h"
 #include "soldier.h"
 #include "trainingsite.h"
-#include "economy/transport.h"
 #include "tribe.h"
+#include "upcast.h"
 #include "warehouse.h"
 #include "warehousesupply.h"
 #include "widelands_fileread.h"
@@ -40,8 +42,6 @@
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "worker.h"
-
-#include "upcast.h"
 
 #include <map>
 

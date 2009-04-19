@@ -19,17 +19,16 @@
 
 #include "widelands_map_flag_data_packet.h"
 
+#include "economy/flag.h"
 #include "editor_game_base.h"
 #include "map.h"
 #include "player.h"
-#include "economy/transport.h"
+#include "upcast.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
-
-#include "upcast.h"
 
 #include <map>
 

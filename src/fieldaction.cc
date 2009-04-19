@@ -21,6 +21,9 @@
 
 #include "attackable.h"
 #include "cmd_queue.h"
+#include "economy/economy.h"
+#include "economy/flag.h"
+#include "economy/road.h"
 #include "editorinteractive.h"
 #include "game_debug_ui.h"
 #include "graphic.h"
@@ -31,7 +34,6 @@
 #include "overlay_manager.h"
 #include "player.h"
 #include "soldier.h"
-#include "economy/transport.h"
 #include "tribe.h"
 #include "warehouse.h"
 #include "watchwindow.h"

@@ -21,22 +21,22 @@
 Rendering functions of the 16-bit software renderer.
 */
 
+#include "graphic.h"
+
 #include "building.h"
+#include "economy/flag.h"
+#include "economy/road.h"
 #include "editor_game_base.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
 #include "map.h"
 #include "minimap.h"
 #include "player.h"
 #include "rgbcolor.h"
-#include "graphic.h"
-#include "economy/transport.h"
+#include "upcast.h"
 #include "wexception.h"
 #include "world.h"
-
-#include "log.h"
-
-#include "upcast.h"
 
 #include <SDL.h>
 

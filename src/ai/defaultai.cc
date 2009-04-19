@@ -26,21 +26,20 @@
 
 #include "checkstep.h"
 #include "computer_player_hints.h"
-#include "map.h"
-#include "world.h"
-#include "economy/transport.h"
-#include "player.h"
-#include "profile.h"
-#include "findnode.h"
-#include "tribe.h"
 #include "constructionsite.h"
-#include "productionsite.h"
-#include "militarysite.h"
+#include "economy/flag.h"
+#include "economy/road.h"
 #include "findimmovable.h"
-
+#include "findnode.h"
 #include "log.h"
-
+#include "map.h"
+#include "militarysite.h"
+#include "player.h"
+#include "productionsite.h"
+#include "profile.h"
+#include "tribe.h"
 #include "upcast.h"
+#include "world.h"
 
 #include <algorithm>
 #include <queue>

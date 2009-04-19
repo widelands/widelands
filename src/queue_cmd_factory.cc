@@ -21,11 +21,11 @@
 
 #include "cmd_check_eventchain.h"
 #include "cmd_incorporate.h"
+#include "economy/cmd_call_economy_balance.h"
 #include "events/event_chain.h"
-#include "queue_cmd_ids.h"
-#include "playercommand.h"
 #include "instances.h"
-#include "economy/transport.h"
+#include "playercommand.h"
+#include "queue_cmd_ids.h"
 #include "wexception.h"
 
 namespace Widelands {

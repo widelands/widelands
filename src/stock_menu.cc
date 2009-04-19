@@ -19,12 +19,11 @@
 
 #include "stock_menu.h"
 
+#include "economy/economy.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "player.h"
-#include "economy/transport.h"
-
 
 Stock_Menu::Stock_Menu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)

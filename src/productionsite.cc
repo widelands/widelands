@@ -19,6 +19,10 @@
 
 #include "productionsite.h"
 
+#include "economy/economy.h"
+#include "economy/request.h"
+#include "economy/ware_instance.h"
+#include "economy/wares_queue.h"
 #include "editor_game_base.h"
 #include "game.h"
 #include "helper.h"
@@ -28,15 +32,12 @@
 #include "player.h"
 #include "production_program.h"
 #include "profile.h"
-#include "economy/request.h"
-#include "economy/transport.h"
 #include "tribe.h"
+#include "upcast.h"
+#include "warelist.h"
 #include "wexception.h"
 #include "worker.h"
-#include "warelist.h"
 #include "world.h"
-
-#include "upcast.h"
 
 #include <libintl.h>
 

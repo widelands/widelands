@@ -24,21 +24,21 @@
 
 #include "battle.h"
 #include "carrier.h"
+#include "economy/economy.h"
+#include "economy/flag.h"
+#include "economy/request.h"
+#include "economy/ware_instance.h"
 #include "editor_game_base.h"
 #include "game.h"
+#include "log.h"
 #include "player.h"
 #include "profile.h"
-#include "economy/request.h"
 #include "requirements.h"
 #include "soldier.h"
-#include "economy/transport.h"
+#include "tribe.h"
+#include "upcast.h"
 #include "wexception.h"
 #include "worker.h"
-#include "tribe.h"
-
-#include "log.h"
-
-#include "upcast.h"
 
 namespace Widelands {
 

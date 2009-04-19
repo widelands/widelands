@@ -22,6 +22,7 @@
 #include "attackable.h"
 #include "battle.h"
 #include "checkstep.h"
+#include "economy/flag.h"
 #include "editor_game_base.h"
 #include "findimmovable.h"
 #include "game.h"
@@ -32,12 +33,10 @@
 #include "profile.h"
 #include "rendertarget.h"
 #include "rgbcolor.h"
-#include "economy/transport.h"
 #include "tribe.h"
+#include "upcast.h"
 #include "warehouse.h"
 #include "wexception.h"
-
-#include "upcast.h"
 
 #include <cstdio>
 

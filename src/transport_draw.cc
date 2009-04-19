@@ -17,8 +17,9 @@
  *
  */
 
-#include "economy/transport.h"
-
+#include "economy/flag.h"
+#include "economy/road.h"
+#include "economy/ware_instance.h"
 #include "editor_game_base.h"
 #include "rendertarget.h"
 

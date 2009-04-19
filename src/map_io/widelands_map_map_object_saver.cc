@@ -20,14 +20,15 @@
 #include "widelands_map_map_object_saver.h"
 
 #include "areawatcher.h"
-#include "bob.h"
 #include "battle.h"
+#include "bob.h"
 #include "building.h"
-#include "economy/transport.h"
+#include "container_iterate.h"
+#include "economy/flag.h"
+#include "economy/road.h"
+#include "economy/ware_instance.h"
 #include "item_ware_descr.h"
 #include "wexception.h"
-
-#include "container_iterate.h"
 
 namespace Widelands {
 

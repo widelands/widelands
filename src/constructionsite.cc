@@ -20,22 +20,22 @@
 #include "constructionsite.h"
 
 #include "animation.h"
+#include "economy/request.h"
+#include "economy/wares_queue.h"
 #include "editor_game_base.h"
 #include "game.h"
 #include "graphic.h"
 #include "i18n.h"
 #include "player.h"
 #include "rendertarget.h"
-#include "economy/request.h"
 #include "sound/sound_handler.h"
-#include "economy/transport.h"
 #include "tribe.h"
+#include "upcast.h"
 #include "wexception.h"
 #include "worker.h"
 
 #include "ui_object.h" //only needed for i18n function _()
 
-#include "upcast.h"
 
 #include <cstdio>
 
