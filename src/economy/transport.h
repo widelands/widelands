@@ -62,64 +62,11 @@ struct Neighbour {
 };
 typedef std::vector<Neighbour> Neighbour_list;
 
-/**
- * WareInstance represents one item while it is being carried around.
- *
- * The WareInstance never draws itself; the carrying worker or the current flag
- * location are responsible for that.
- *
- * The location of a ware can be one of the following:
- * \li a flag
- * \li a worker that is currently carrying the ware
- * \li a building; this should only be temporary until the ware is incorporated
- *     into the building somehow
- */
-class WareInstance : public Map_Object {
-	friend struct Map_Waredata_Data_Packet;
+}
 
-	MO_DESCR(Item_Ware_Descr);
+#include "ware_instance.h"
 
-public:
-	WareInstance(Ware_Index, const Item_Ware_Descr * const);
-	~WareInstance();
-
-	virtual int32_t get_type() const throw ();
-	char const * type_name() const throw () {return "ware";}
-
-	Map_Object * get_location(Editor_Game_Base & egbase) {
-		return m_location.get(egbase);
-	}
-	Economy * get_economy() const throw () {return m_economy;}
-	Ware_Index descr_index() const throw () {return m_descr_index;}
-
-	void init(Editor_Game_Base &);
-	void cleanup(Editor_Game_Base &);
-	void act(Game &, uint32_t data);
-	void update(Game &);
-
-	void set_location(Editor_Game_Base &, Map_Object * loc);
-	void set_economy(Economy *);
-
-	bool is_moving() const throw ();
-	void cancel_moving();
-
-	PlayerImmovable * get_next_move_step(Game &);
-
-	void set_transfer(Game &, Transfer &);
-	void cancel_transfer(Game &);
-
-private:
-	Object_Ptr        m_location;
-	Economy         * m_economy;
-	Ware_Index       m_descr_index;
-
-	IdleWareSupply  * m_supply;
-	Transfer       * m_transfer;
-	Object_Ptr        m_transfer_nextstep; ///< cached PlayerImmovable, can be 0
-};
-
-
-
+namespace Widelands {
 /**
  * Flag represents a flag, obviously.
  * A flag itself doesn't do much. However, it can have up to 6 roads attached
