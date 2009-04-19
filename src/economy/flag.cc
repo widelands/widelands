@@ -215,24 +215,24 @@ void Flag::detach_road(int32_t const dir)
 /**
  * Return neighbouring flags.
 */
-void Flag::get_neighbours(Neighbour_list *neighbours)
+void Flag::get_neighbours(RoutingNodeNeighbours *neighbours)
 {
 	for (int8_t i = 0; i < 6; ++i) {
 		Road *road = m_roads[i];
 		if (!road)
 			continue;
 
-		Neighbour n;
-		n.road = road;
-		n.flag = &road->get_flag(Road::FlagEnd);
-		if (n.flag != this)
-			n.cost = road->get_cost(Road::FlagStart);
+        Flag* f = &road->get_flag(Road::FlagEnd);
+        int32_t nb_cost;
+		if (f != this)
+			nb_cost = road->get_cost(Road::FlagStart);
 		else {
-			n.flag = &road->get_flag(Road::FlagStart);
-			n.cost = road->get_cost(Road::FlagEnd);
+			f = &road->get_flag(Road::FlagStart);
+			nb_cost = road->get_cost(Road::FlagEnd);
 		}
+        RoutingNodeNeighbour n( f, nb_cost );
 
-		assert(n.flag != this);
+		assert(n.get_neighbour() != this);
 		neighbours->push_back(n);
 	}
 

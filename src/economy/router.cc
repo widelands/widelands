@@ -34,9 +34,9 @@ namespace Widelands {
  * This is more flexible than a standard priority_queue (fast boost() to
  * adjust cost)
 */
-struct FlagQueue {
-	FlagQueue() {}
-	~FlagQueue() {}
+struct RoutingNodeQueue {
+	RoutingNodeQueue() {}
+	~RoutingNodeQueue() {}
 
 	void flush() {m_data.clear();}
 
@@ -52,12 +52,12 @@ struct FlagQueue {
 	//       put slot[_size] in its place and stop
 	//     if only the left child is there
 	//       arrange left child and slot[_size] correctly and stop
-	Flag * pop()
+	RoutingNode * pop()
 	{
 		if (m_data.empty())
 			return 0;
 
-		Flag * head = m_data[0];
+		RoutingNode * head = m_data[0];
 
 		uint32_t const nsize = m_data.size() - 1;
 		uint32_t fix = 0;
@@ -112,10 +112,10 @@ struct FlagQueue {
 	//  1. Put the new node in the last slot
 	//  2. If parent slot is worse than self, exchange places and recurse
 	// Note that I rearranged this a bit so swap isn't necessary
-	void push(Flag *t)
+	void push(RoutingNode *t)
 	{
 		uint32_t slot = m_data.size();
-		m_data.push_back(static_cast<Flag *>(0));
+		m_data.push_back(static_cast<RoutingNode *>(0));
 
 		while (slot > 0) {
 			uint32_t parent = (slot - 1) / 2;
@@ -136,7 +136,7 @@ struct FlagQueue {
 	// Rearrange the tree after a node has become better, i.e. move the
 	// node up
 	// Pushing algorithm is basically the same as in push()
-	void boost(Flag *t)
+	void boost(RoutingNode *t)
 	{
 		uint32_t slot = t->mpf_heapindex;
 
@@ -185,7 +185,7 @@ struct FlagQueue {
 	}
 
 private:
-	std::vector<Flag *> m_data;
+	std::vector<RoutingNode *> m_data;
 };
 
 /*************************************************************************/
@@ -216,7 +216,7 @@ Router::Router( void ) :
  * \todo Document parameter wait
 */
 bool Router::find_route
-	(Flag & start, Flag & end,
+	(RoutingNode & start, RoutingNode & end,
 	 Route * const route,
 	 bool    const wait,
 	 int32_t const cost_cutoff,
@@ -232,8 +232,8 @@ bool Router::find_route
 	}
 
 	// Add the starting flag into the open list
-	FlagQueue Open;
-	Flag *current;
+	RoutingNodeQueue Open;
+	RoutingNode *current;
 
 	start.mpf_cycle    = mpf_cycle;
 	start.mpf_backlink = 0;
@@ -251,12 +251,12 @@ bool Router::find_route
 			return false;
 
 		// Loop through all neighbouring flags
-		Neighbour_list neighbours;
+		RoutingNodeNeighbours neighbours;
 
 		current->get_neighbours(&neighbours);
 
 		for (uint32_t i = 0; i < neighbours.size(); ++i) {
-			Flag * const neighbour = neighbours[i].flag;
+			RoutingNode * const neighbour = neighbours[i].get_neighbour();
 			int32_t cost;
 			int32_t wait_cost = 0;
 
@@ -266,12 +266,12 @@ bool Router::find_route
 
 			if (wait)
 				wait_cost =
-					(current->m_item_filled + neighbour->m_item_filled)
+					( ((Flag*)current)->m_item_filled + ((Flag*)neighbour)->m_item_filled)
 					*
-					neighbours[i].cost
+					neighbours[i].get_cost()
 					/
 					2;
-			cost = current->mpf_realcost + neighbours[i].cost + wait_cost;
+			cost = current->mpf_realcost + neighbours[i].get_cost() + wait_cost;
 
 			if (neighbour->mpf_cycle != mpf_cycle) {
 				// add to open list
@@ -299,8 +299,8 @@ bool Router::find_route
 		route->clear();
 		route->m_totalcost = end.mpf_realcost;
 
-		for (Flag * flag = &end;; flag = (Flag*)flag->mpf_backlink) {
-			route->m_route.insert(route->m_route.begin(), flag);
+		for (RoutingNode * flag = &end;; flag = (RoutingNode*)flag->mpf_backlink) {
+			route->m_route.insert(route->m_route.begin(), (Flag*)flag);
 			if (flag == &start)
 				break;
 		}

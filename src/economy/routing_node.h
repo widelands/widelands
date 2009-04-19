@@ -28,14 +28,22 @@ class RoutingNode;
 struct Flag;
 struct Road;
 
-struct Neighbour {
-	Flag * flag;
-	Road * road;
-	int32_t    cost;
+/***
+ * /todo The get functions should be declared const 
+ */
+class RoutingNodeNeighbour {
+    RoutingNode* m_nb;
+    int32_t m_cost;
+
+public:
+    RoutingNodeNeighbour( RoutingNode* f, int32_t cost ) : 
+        m_nb(f),
+        m_cost(cost) {
+    }
+    RoutingNode* get_neighbour(void) { return m_nb; } 
+    int32_t get_cost(void) { return m_cost; }
 };
-typedef std::vector<Neighbour> Neighbour_list;
-
-
+typedef std::vector<RoutingNodeNeighbour> RoutingNodeNeighbours;
 
 /**
  * A routing node is a field with a cost attached to it
@@ -46,7 +54,7 @@ typedef std::vector<Neighbour> Neighbour_list;
  */
 class RoutingNode {
     friend class Router;
-    friend class FlagQueue;
+    friend class RoutingNodeQueue;
 
 private:
 	uint32_t                    mpf_cycle;
@@ -63,7 +71,7 @@ public:
 
 	int32_t cost() const {return mpf_realcost + mpf_estimate;}
 	
-	virtual void get_neighbours(Neighbour_list *) = 0;
+	virtual void get_neighbours(RoutingNodeNeighbours *) = 0;
     virtual Coords get_position() const = 0; 
 };
 

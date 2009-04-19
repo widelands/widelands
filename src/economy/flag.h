@@ -32,6 +32,8 @@ struct Request;
 struct Road;
 struct WareInstance;
 
+
+
 /**
  * Flag represents a flag, obviously.
  * A flag itself doesn't do much. However, it can have up to 6 roads attached
@@ -97,7 +99,7 @@ public:
 	void attach_road(int32_t dir, Road *road);
 	void detach_road(int32_t dir);
 
-	void get_neighbours(Neighbour_list *);
+	void get_neighbours(RoutingNodeNeighbours *);
 	Road * get_road(Flag *);
 
 	bool is_dead_end() const;

@@ -468,11 +468,12 @@ void Economy::do_split(Flag & initial_flag)
 
 		//  check all neighbours; if they aren't in the new economy yet, add them
 		// to the list (note: roads and buildings are reassigned via Flag::set_economy)
-		Neighbour_list neighbours;
+		RoutingNodeNeighbours neighbours;
 		flag.get_neighbours(&neighbours);
 
 		for (uint32_t i = 0; i < neighbours.size(); ++i) {
-			Flag & n = *neighbours[i].flag;
+            /// \todo the next line shouldn't need any casts at all
+			Flag & n = *((Flag*)neighbours[i].get_neighbour());
 
 			if (n.get_economy() == this)
 				open.push_back(&n);
