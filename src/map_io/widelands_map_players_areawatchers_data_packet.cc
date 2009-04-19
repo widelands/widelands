@@ -52,11 +52,11 @@ throw (_wexception)
 		snprintf(filename, sizeof(filename), FILENAME_TEMPLATE, p);
 		FileRead fr;
 		struct Not_Found {};
-			
-        if(!fr.TryOpen(fs, filename))
-            continue;
-		
-        try {
+
+		if (!fr.TryOpen(fs, filename))
+			continue;
+
+		try {
 			uint16_t const packet_version = fr.Unsigned16();
 			if (packet_version == CURRENT_PACKET_VERSION) {
 				while (not fr.EndOfFile()) {

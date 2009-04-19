@@ -33,7 +33,7 @@
 #include "warehousesupply.h"
 #include "wexception.h"
 
-namespace Widelands { 
+namespace Widelands {
 Economy::Economy(Player & player) :
 	m_owner(player),
 m_rebuilding(false),

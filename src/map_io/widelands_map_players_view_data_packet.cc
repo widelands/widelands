@@ -166,8 +166,8 @@ void Map_Players_View_Data_Packet::Read
 			 plnum, UNSEEN_TIMES_CURRENT_PACKET_VERSION);
 		FileRead unseen_times_file;
 		struct Not_Found {};
-		
-        if(!unseen_times_file.TryOpen(fs, unseen_times_filename)) {
+
+		if (!unseen_times_file.TryOpen(fs, unseen_times_filename)) {
 			log
 				("Map_Players_View_Data_Packet::Read: WARNING: Could not open "
 				 "\"%s\" for reading. Assuming that the game is from an old "

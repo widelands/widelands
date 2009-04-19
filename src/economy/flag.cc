@@ -36,7 +36,7 @@
 #include "worker.h"
 
 
-namespace Widelands { 
+namespace Widelands {
 
 Map_Object_Descr g_flag_descr("flag", "Flag");
 

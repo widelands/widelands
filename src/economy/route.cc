@@ -34,7 +34,7 @@ Route IMPLEMENTATION
 ==============================================================================
 */
 
-namespace Widelands { 
+namespace Widelands {
 Route::Route() : m_totalcost(0)
 {}
 

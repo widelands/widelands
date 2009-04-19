@@ -33,7 +33,7 @@
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
 
-namespace Widelands { 
+namespace Widelands {
 
 /**
  * Pre-initialize a WaresQueue

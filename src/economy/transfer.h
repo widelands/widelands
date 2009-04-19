@@ -68,7 +68,7 @@ private:
 	Request      & m_request;
 	WareInstance * m_item;    ///< non-null if ware is an item
 	Worker       * m_worker;  ///< non-null if ware is a worker
-	Route        m_route; 
+	Route        m_route;
 
 	bool m_idle; ///< an idle transfer can be fail()ed if the item feels like it
 };

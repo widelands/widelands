@@ -42,7 +42,7 @@ struct RSPairStruct;
 struct Cmd_SetTargetQuantity;
 struct Cmd_ResetTargetQuantity;
 struct Warehouse;
-struct Request; 
+struct Request;
 struct Supply;
 struct Map_Map_Object_Saver;
 struct Map_Map_Object_Loader;

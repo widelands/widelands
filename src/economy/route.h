@@ -27,7 +27,7 @@
 
 namespace Widelands {
 
-struct Flag; 
+struct Flag;
 struct Editor_Game_Base;
 struct Map_Map_Object_Saver;
 struct Map_Map_Object_Loader;

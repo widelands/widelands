@@ -33,7 +33,7 @@
 
 namespace Widelands {
 
-    
+
 /**
  * Whenever a WareInstance is idle, it issues an IdleWareSupply.
  *

@@ -34,7 +34,7 @@
 
 GameTips::GameTips
 	(UI::ProgressWindow & progressWindow, std::vector<std::string> names,
-	  std::string style)
+	 std::string style)
 :
 m_lastUpdated   (0),
 m_updateAfter   (0),
