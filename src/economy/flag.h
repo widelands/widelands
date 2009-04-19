@@ -24,20 +24,13 @@
 #include <list>
 
 #include "immovable.h"
+#include "routing_node.h"
 
 namespace Widelands {
 struct Building;
 struct Request;
 struct Road;
 struct WareInstance;
-
-struct Neighbour {
-	Flag * flag;
-	Road * road;
-	int32_t    cost;
-};
-typedef std::vector<Neighbour> Neighbour_list;
-
 
 /**
  * Flag represents a flag, obviously.
@@ -54,7 +47,7 @@ typedef std::vector<Neighbour> Neighbour_list;
  * Important: Do not access m_roads directly. get_road() and others use
  * Map_Object::WALK_xx in all "direction" parameters.
  */
-class Flag : public PlayerImmovable {
+class Flag : public PlayerImmovable, public RoutingNode {
 	friend struct Economy;
 	friend struct Router;
 	friend class FlagQueue;
@@ -160,15 +153,6 @@ private:
 
 	typedef std::list<FlagJob> FlagJobs;
 	FlagJobs m_flag_jobs;
-
-	// The following are only used during pathfinding
-	uint32_t                    mpf_cycle;
-	int32_t                     mpf_heapindex;
-	int32_t                     mpf_realcost; ///< real cost of getting to this flag
-	Flag                  * mpf_backlink; ///< flag where we came from
-	int32_t                     mpf_estimate; ///< estimate of cost to destination
-
-	int32_t cost() const {return mpf_realcost + mpf_estimate;}
 };
 
 }

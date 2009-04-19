@@ -299,7 +299,7 @@ bool Router::find_route
 		route->clear();
 		route->m_totalcost = end.mpf_realcost;
 
-		for (Flag * flag = &end;; flag = flag->mpf_backlink) {
+		for (Flag * flag = &end;; flag = (Flag*)flag->mpf_backlink) {
 			route->m_route.insert(route->m_route.begin(), flag);
 			if (flag == &start)
 				break;

@@ -179,7 +179,8 @@ void Economy::add_flag(Flag & flag)
 
 	m_flags.push_back(&flag);
 	flag.set_economy(this);
-	flag.mpf_cycle = 0;
+	
+    flag.reset_path_finding_cycle();
 }
 
 /**
