@@ -17,49 +17,15 @@
  *
  */
 
-/**
- * @file
- * The entire transport subsystem comes into this file.
- *
- * What does _not_ belong in here: road renderer, client-side road building.
- *
- * What _does_ belong in here:
- * Flags, Roads, the logic behind ware pulls and pushes.
- *
- * \todo split this up into two files per class (.h and .cc)
-*/
+#include "cmd_call_economy_balance.h"
 
-#include "transport.h"
-
-#include "building.h"
-#include "carrier.h"
-#include "editor_game_base.h"
 #include "game.h"
-#include "instances.h"
-#include "log.h"
-#include "player.h"
-#include "request.h"
-#include "soldier.h"
-#include "tribe.h"
-#include <vector>
-#include "warehouse.h"
-#include "warehousesupply.h"
-#include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "worker.h"
-
-#include "upcast.h"
-
-#include <algorithm>
-#include <cstdarg>
-#include <cstdio>
+#include "player.h"
+#include "wexception.h"
 
 namespace Widelands {
-
-
 
 Cmd_Call_Economy_Balance::Cmd_Call_Economy_Balance
 	(int32_t const starttime, Economy * const economy, uint32_t const timerid)
