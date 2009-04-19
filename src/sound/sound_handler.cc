@@ -207,30 +207,6 @@ void Sound_Handler::load_fx
 	}
 }
 
-/** A wrapper for Mix_LoadWAV that supports RWops
- *
- * In short: always use this instead of Mix_LoadWAV_RW(), because the latter
- * does not work on many systems.
- *
- * For Mix_LoadWAV, there is only preliminary RWops support even in (now
- * current) SDL_mixer-1.2.6 for Linux. In older SDL versions and on other OSes
- * there is no support at all. Widelands' layered filesystem, however, is
- * utterly dependant on RWops. That's the reason for this wrapper. If RWops
- * support is available in Mix_LoadWAV we use it, otherwise we use "normal"
- * RWops (that are available on every platform) to create a tempfile that
- * Mix_LoadWAV can read from.
- *
- * \param fr  Pointer to a FileRead RWops with the
- * \return   a pointer to the loaded sample; NULL if any error ocurred
- * \note This should be phased out when RWops support in Mix_LoadWAV has been
- * available for a sufficiently long time
-*/
-Mix_Chunk * Sound_Handler::RWopsify_MixLoadWAV(FileRead & fr)
-{
-	return
-		Mix_LoadWAV_RW(SDL_RWFromMem(fr.Data(fr.GetSize(), 0), fr.GetSize()), 1);
-}
-
 /** Add exactly one file to the given fxset.
  * \param filename  the effect to be loaded
  * \param fx_name   the fxset to add the file to
@@ -248,7 +224,7 @@ void Sound_Handler::load_one_fx
 		return;
 	}
 
-	if (Mix_Chunk * const m = RWopsify_MixLoadWAV(fr)) {
+	if (Mix_Chunk * const m = Mix_LoadWAV_RW(SDL_RWFromMem(fr.Data(fr.GetSize(), 0), fr.GetSize()), 1)) {
 		//make sure that requested FXset exists
 
 		if (m_fxs.count(fx_name) == 0)
