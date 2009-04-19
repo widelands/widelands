@@ -436,8 +436,7 @@ m_texture           (0)
 
 Terrain_Descr::~Terrain_Descr()
 {
-	if (m_picnametempl)
-		free(m_picnametempl);
+	free(m_picnametempl);
 	delete[] m_valid_resources;
 	m_nr_valid_resources = 0;
 	m_valid_resources    = 0;

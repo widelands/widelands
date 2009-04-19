@@ -624,8 +624,7 @@ Could happen multiple times in the map editor.
 */
 void Map::set_nrplayers(Player_Number const nrplayers) {
 	if (!nrplayers) {
-		if (m_starting_pos)
-			free(m_starting_pos);
+		free(m_starting_pos);
 		m_starting_pos = 0;
 		m_nrplayers = 0;
 		return;
