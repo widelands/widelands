@@ -37,7 +37,7 @@ struct Map_Map_Object_Loader;
  * The number of steps is the number of flags stored minus one.
  */
 struct Route {
-	friend struct Economy;
+	friend struct Router;
 	friend struct Request;
 
 	Route();

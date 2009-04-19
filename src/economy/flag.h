@@ -56,6 +56,7 @@ typedef std::vector<Neighbour> Neighbour_list;
  */
 class Flag : public PlayerImmovable {
 	friend struct Economy;
+	friend struct Router;
 	friend class FlagQueue;
 	friend struct Map_Ware_Data_Packet;     // has to look at pending items
 	friend struct Map_Waredata_Data_Packet; // has to look at pending items

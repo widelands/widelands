@@ -46,6 +46,7 @@ struct Request;
 struct Supply;
 struct Map_Map_Object_Saver;
 struct Map_Map_Object_Loader;
+struct Router;
 
 struct Economy {
 	friend struct Request;
@@ -181,15 +182,14 @@ private:
 	RequestList m_requests; ///< requests
 	SupplyList m_supplies;
 
-	Target_Quantity        * m_target_quantities;
+    Target_Quantity        * m_target_quantities;
+    Router                 * m_router;
 
 	/**
 	 * ID for the next request balancing timer. Used to throttle
 	 * excessive calls to the request/supply balancing logic.
 	 */
 	uint32_t m_request_timerid;
-
-	uint32_t mpf_cycle;       ///< pathfinding cycle, see Flag::mpf_cycle
 };
 
 }
