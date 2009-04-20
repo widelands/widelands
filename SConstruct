@@ -73,7 +73,7 @@ SConsEnvironment.InstallData = lambda env, dest, files: InstallPerm(env, dest, f
 # CLI options setup
 
 def cli_options():
-	opts=Options('build/scons-config.py', ARGUMENTS)
+	opts=Variables('build/scons-config.py', ARGUMENTS)
 	opts.Add('build', 'debug / profile / release(default)', 'debug')
 	opts.Add('build_id', 'To get a default value (SVN revision), leave this empty', '') #change this before/after preparing a release
 	opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
@@ -86,11 +86,11 @@ def cli_options():
 	opts.Add('extra_lib_path', '', '')
 	opts.Add('extra_compile_flags', '(does not work with build-widelands.sh!)', '')
 	opts.Add('extra_link_flags', '(does not work with build-widelands.sh!)', '')
-	opts.AddOptions(
-		BoolOption('enable_sdl_parachute', 'Enable SDL parachute?', False),
-		BoolOption('enable_efence', 'Use the efence memory debugger?', False),
-		BoolOption('enable_ggz', 'Use the GGZ Gamingzone?', False),
-		BoolOption('prefer_localdata', 'Useful for developers. Use data and locales from ./ at runtime', True),
+	opts.AddVariables(
+		BoolVariable('enable_sdl_parachute', 'Enable SDL parachute?', False),
+		BoolVariable('enable_efence', 'Use the efence memory debugger?', False),
+		BoolVariable('enable_ggz', 'Use the GGZ Gamingzone?', False),
+		BoolVariable('prefer_localdata', 'Useful for developers. Use data and locales from ./ at runtime', True),
 		)
 	return opts
 
