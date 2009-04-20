@@ -164,8 +164,10 @@ bool Economy::find_route
 	assert(end  .get_economy() == this);
 	
     Map & map = owner().egbase().map();
-    
-    return m_router->find_route( start, end, route, wait, cost_cutoff, map, m_flags );
+   
+    std::vector<RoutingNode*>& nodes = *((std::vector<RoutingNode*>*)(&m_flags));
+
+    return m_router->find_route( start, end, route, wait, cost_cutoff, map, nodes );
 }
 
 

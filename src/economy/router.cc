@@ -196,7 +196,7 @@ Router::Router( void ) :
 }
 
 /**
- * Calcaluate a route between two flags.
+ * Calculate a route between two flags.
  *
  * The calculated route is stored in route if it exists.
  *
@@ -221,17 +221,17 @@ bool Router::find_route
 	 bool    const wait,
 	 int32_t const cost_cutoff,
      Map& map,
-     Flags& flags)
+     std::vector<RoutingNode*>& nodes)
 {
 	// advance the path-finding cycle
 	++mpf_cycle;
 	if (!mpf_cycle) { // reset all cycle fields
-		for (uint32_t i = 0; i < flags.size(); ++i)
-			flags[i]->mpf_cycle = 0;
+		for (uint32_t i = 0; i < nodes.size(); ++i)
+			nodes[i]->mpf_cycle = 0;
 		++mpf_cycle;
 	}
 
-	// Add the starting flag into the open list
+	// Add the starting node into the open list
 	RoutingNodeQueue Open;
 	RoutingNode *current;
 
@@ -250,7 +250,7 @@ bool Router::find_route
 		if (cost_cutoff >= 0 && current->mpf_realcost > cost_cutoff)
 			return false;
 
-		// Loop through all neighbouring flags
+		// Loop through all neighbouring nodes
 		RoutingNodeNeighbours neighbours;
 
 		current->get_neighbours(&neighbours);
@@ -299,9 +299,9 @@ bool Router::find_route
 		route->clear();
 		route->m_totalcost = end.mpf_realcost;
 
-		for (RoutingNode * flag = &end;; flag = (RoutingNode*)flag->mpf_backlink) {
-			route->m_route.insert(route->m_route.begin(), (Flag*)flag);
-			if (flag == &start)
+		for (RoutingNode * node = &end;; node = node->mpf_backlink) {
+			route->m_route.insert(route->m_route.begin(), (Flag*)node);
+			if (node == &start)
 				break;
 		}
 	}

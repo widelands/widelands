@@ -24,18 +24,16 @@
 #include <vector>
 
 namespace Widelands {
-class Flag;
 class Route;
 class Map;
 class RoutingNode;
 
 /**
- * This class finds the best route between flags in an economy. 
+ * This class finds the best route between Nodes (Flags) in an economy. 
  * The functionality was split from Economy
  */
 class Router {
 private:
-	typedef std::vector<Flag*> Flags;
 	uint32_t mpf_cycle;       ///< pathfinding cycle, see Flag::mpf_cycle
 
 public:
@@ -47,7 +45,7 @@ public:
 		 bool    wait,
 		 int32_t cost_cutoff,
          Map& map,
-         Flags& flags);
+         std::vector<RoutingNode*>& nodes);
 
 
 };
