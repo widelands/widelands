@@ -20,12 +20,12 @@
 #ifndef S__ROUTING_NODE_H
 #define S__ROUTING_NODE_H
 
-// Only for Neighbour_list
 #include <vector>
+
+#include "widelands_geometry.h"
 
 namespace Widelands {
 class RoutingNode;
-struct Flag;
 struct Road;
 
 /***

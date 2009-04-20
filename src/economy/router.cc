@@ -21,7 +21,7 @@
 #include "router.h"
 
 // Package includes
-#include "flag.h"
+#include "routing_node.h"
 #include "route.h"
 
 #include "map.h"
@@ -196,11 +196,11 @@ Router::Router( void ) :
 }
 
 /**
- * Calculate a route between two flags.
+ * Calculate a route between two nodes.
  *
  * The calculated route is stored in route if it exists.
  *
- * For two flags from the same economy, this function should always be
+ * For two nodes (Flags) from the same economy, this function should always be
  * successful, except when it's called from check_split()
  *
  * \note route will be cleared before storing the result.
@@ -300,7 +300,7 @@ bool Router::find_route
 		route->m_totalcost = end.mpf_realcost;
 
 		for (RoutingNode * node = &end;; node = node->mpf_backlink) {
-			route->m_route.insert(route->m_route.begin(), (Flag*)node);
+			route->insert_node(node);
 			if (node == &start)
 				break;
 		}

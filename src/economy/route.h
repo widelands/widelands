@@ -26,11 +26,11 @@
 #include "instances.h"
 
 namespace Widelands {
-
 struct Flag;
 struct Editor_Game_Base;
 struct Map_Map_Object_Saver;
 struct Map_Map_Object_Loader;
+struct RoutingNode;
 
 /**
  * Route stores a route from flag to flag.
@@ -58,6 +58,8 @@ struct Route {
 	void load(LoadData &, FileRead &);
 	void load_pointers(LoadData const &, Map_Map_Object_Loader &);
 	void save(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver *);
+
+    void insert_node(RoutingNode* node);
 
 private:
 	int32_t                     m_totalcost;

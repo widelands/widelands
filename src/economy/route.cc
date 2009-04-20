@@ -128,4 +128,11 @@ void Route::save
 	}
 }
 
+void Route::insert_node(RoutingNode* node) {
+    // we are sure that node is a Flag, since it is the only
+    // RoutingNode ever used in the path finder (outside tests)
+    // That's why we can make this cast
+    m_route.insert(m_route.begin(), static_cast<Flag*>(node));
+}
+
 }
