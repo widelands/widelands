@@ -177,8 +177,8 @@ Alias('tags', env.ctags(source=simpleglob('*.h', 'src', recursive=True)+simplegl
 
 ################################################################ C++ style-check
 
-if env['build'] == 'debug' or env['build'] == 'profile':
-        Alias('stylecheck', env.Execute('utils/spurious_source_code/detect'))
+# if env['build'] == 'debug' or env['build'] == 'profile':
+#         Alias('stylecheck', env.Execute('utils/spurious_source_code/detect'))
 
 ################################################################## PNG shrinking
 

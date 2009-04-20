@@ -70,7 +70,8 @@ public:
     void reset_path_finding_cycle(void) { mpf_cycle = 0; }
 
 	int32_t cost() const {return mpf_realcost + mpf_estimate;}
-	
+
+    virtual int32_t get_waitcost(void) = 0; 
 	virtual void get_neighbours(RoutingNodeNeighbours *) = 0;
     virtual Coords get_position() const = 0; 
 };

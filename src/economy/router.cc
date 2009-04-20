@@ -266,7 +266,7 @@ bool Router::find_route
 
 			if (wait)
 				wait_cost =
-					( ((Flag*)current)->m_item_filled + ((Flag*)neighbour)->m_item_filled)
+					( current->get_waitcost() + neighbour->get_waitcost())
 					*
 					neighbours[i].get_cost()
 					/

@@ -83,6 +83,8 @@ public:
 	virtual Flag & base_flag();
 
 	Coords get_position() const {return m_position;}
+	void get_neighbours(RoutingNodeNeighbours *);
+    int32_t get_waitcost(void) { return m_item_filled; }
 
 	virtual void set_economy(Economy *);
 
@@ -99,7 +101,6 @@ public:
 	void attach_road(int32_t dir, Road *road);
 	void detach_road(int32_t dir);
 
-	void get_neighbours(RoutingNodeNeighbours *);
 	Road * get_road(Flag *);
 
 	bool is_dead_end() const;
@@ -119,6 +120,7 @@ public:
 
 	void add_flag_job
 		(Game &, Ware_Index workerware, std::string const & programname);
+
 
 protected:
 	virtual void init(Editor_Game_Base &);
