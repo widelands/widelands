@@ -19,8 +19,11 @@
 
 #include "widelands_geometry.h"
 
-#include "../routing_node.h"
+#include "../iroute.h"
+#include "../itransport_cost_calculator.h"
 #include "../router.h"
+#include "../routing_node.h"
+
 
 #include <exception>
 
@@ -66,6 +69,15 @@ void DummyRoutingNode::get_neighbours(RoutingNodeNeighbours* n ) {
         n->push_back(nb);
     }
 }
+
+class DummyTransportCostCalculator : public ITransportCostCalculator {
+	int32_t calc_cost_estimate(Coords c1, Coords c2) const { return 100; } // TODO fix this 
+};
+class DummyRoute : public IRoute {
+	void init( int32_t ) { } // TODO: fix this class some more
+    void insert_node(RoutingNode* node) { } 
+};
+
 /// End of helper classes }}}
 BOOST_AUTO_TEST_SUITE( Routing )
 
@@ -116,9 +128,55 @@ BOOST_FIXTURE_TEST_CASE( dummynode_illegalneighbour_access, DummyNode_DefaultNod
 // }}} End of DummyRoutingNode Test cases
 
 // {{{ Router Test-Cases 
-BOOST_AUTO_TEST_CASE( instantiate_router ) {
- //   Router r; This will fail for a while longer
+BOOST_AUTO_TEST_CASE( router_instantiatiation ) {
+    Router r; 
 }
+BOOST_AUTO_TEST_CASE( router_findroute_seperatedNodes_exceptFail) {
+    DummyRoutingNode d0(0,Coords(0,0));
+    DummyRoutingNode d1(0,Coords(15,0));
+
+    std::vector<RoutingNode*> vec;
+    vec.push_back(&d0);
+    vec.push_back(&d1);
+
+    Router r; 
+    DummyRoute route;
+    DummyTransportCostCalculator cc;
+
+    bool rval = r.find_route( d0, d1, 
+        &route, 
+        false, 
+        100000000,
+        cc,
+        vec);
+
+    BOOST_CHECK_EQUAL(rval,false);
+}
+BOOST_AUTO_TEST_CASE( router_findroute_connectedNodes_exceptSuccess) {
+    DummyRoutingNode d0(0,Coords(0,0));
+    DummyRoutingNode d1(0,Coords(15,0));
+
+    std::vector<RoutingNode*> vec;
+    vec.push_back(&d0);
+    vec.push_back(&d1);
+
+    d0.add_neighbour(&d1);
+    d1.add_neighbour(&d0);
+
+    Router r; 
+    DummyRoute route;
+    DummyTransportCostCalculator cc;
+
+    bool rval = r.find_route( d0, d1, 
+        &route, 
+        false, 
+        100000000,
+        cc,
+        vec);
+
+    BOOST_CHECK_EQUAL(rval,true);
+}
+
 // }}}
 
 BOOST_AUTO_TEST_SUITE_END()

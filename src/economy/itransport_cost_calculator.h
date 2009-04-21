@@ -17,40 +17,29 @@
  *
  */
 
-#ifndef S__ROUTER_H
-#define S__ROUTER_H
+#ifndef S__ITRANSPORT_COST_CALCULATOR_H
+#define S__ITRANSPORT_COST_CALCULATOR_H
 
-#include <stdint.h>
-#include <vector>
+#include "widelands_geometry.h"
 
 namespace Widelands {
-class IRoute;
-class ITransportCostCalculator;
-class RoutingNode;
 
 /**
- * This class finds the best route between Nodes (Flags) in an economy. 
- * The functionality was split from Economy
+ * This class provides the interface to get cost and cost estimations
+ * for certain transport properties (node->node). 
+ *
+ * At the time of this writing, Map implements all of this functionality
+ * but most economy code doesn't need all of maps functionality
  */
-class Router {
-private:
-	uint32_t mpf_cycle;       ///< pathfinding cycle, see Flag::mpf_cycle
-
+class ITransportCostCalculator {
 public:
-    Router();
+    virtual ~ITransportCostCalculator() { }
 
-    bool find_route
-		(RoutingNode & start, RoutingNode & end,
-		 IRoute * route,
-		 bool    wait,
-		 int32_t cost_cutoff,
-         ITransportCostCalculator& cost_calculator,
-         std::vector<RoutingNode*>& nodes);
-
-
+	virtual int32_t calc_cost_estimate(Coords, Coords) const = 0;
 };
 
 }
+
 #endif 
 
 

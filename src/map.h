@@ -20,11 +20,12 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "economy/itransport_cost_calculator.h"
 #include "events/event_chain.h"
 #include "field.h"
-#include "widelands_geometry.h"
 #include "objective.h"
 #include "variable.h"
+#include "widelands_geometry.h"
 #include "world.h"
 
 #include "interval.h"
@@ -127,7 +128,7 @@ struct FindBobEnemySoldier : public FindBob {
  *
  * Warning: width and height must be even
  */
-struct Map {
+struct Map : public ITransportCostCalculator {
 	friend struct Editor_Game_Base;
 	friend struct Map_Loader;
 	friend struct ::S2_Map_Loader;
@@ -146,7 +147,7 @@ struct Map {
 	};
 
 	Map ();
-	~Map();
+	virtual ~Map();
 
 	Overlay_Manager * get_overlay_manager()       {return  m_overlay_manager;}
 	Overlay_Manager & get_overlay_manager() const {return *m_overlay_manager;}

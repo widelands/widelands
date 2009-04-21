@@ -23,8 +23,8 @@
 // Package includes
 #include "routing_node.h"
 #include "iroute.h"
+#include "itransport_cost_calculator.h"
 
-#include "map.h"
 
 namespace Widelands {
 
@@ -220,7 +220,7 @@ bool Router::find_route
 	 IRoute * const route,
 	 bool    const wait,
 	 int32_t const cost_cutoff,
-     Map& map,
+     ITransportCostCalculator& cost_calculator, 
      std::vector<RoutingNode*>& nodes)
 {
 	// advance the path-finding cycle
@@ -239,7 +239,7 @@ bool Router::find_route
 	start.mpf_backlink = 0;
 	start.mpf_realcost = 0;
 	start.mpf_estimate =
-		map.calc_cost_estimate(start.get_position(), end.get_position());
+		cost_calculator.calc_cost_estimate(start.get_position(), end.get_position());
 
 	Open.push(&start);
 
@@ -277,7 +277,7 @@ bool Router::find_route
 				// add to open list
 				neighbour->mpf_cycle = mpf_cycle;
 				neighbour->mpf_realcost = cost;
-				neighbour->mpf_estimate = map.calc_cost_estimate
+				neighbour->mpf_estimate = cost_calculator.calc_cost_estimate
 					(neighbour->get_position(), end.get_position());
 				neighbour->mpf_backlink = current;
 				Open.push(neighbour);
