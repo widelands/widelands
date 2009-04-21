@@ -1,0 +1,8 @@
+
+Import("*")
+
+tenv = testEnv.Clone()
+tenv.AppendUnique(LIBS=[economy])
+
+tenv.addUnitTest("test_economy", simpleglob("*.cc"))
+

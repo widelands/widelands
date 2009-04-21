@@ -2,6 +2,13 @@ Import('*')
 
 SRC=simpleglob("*.cc")
 
-lib=srcenv.StaticLibrary(target='economy', source=SRC)
-Return('lib')
+economy=srcenv.StaticLibrary(target='economy', source=SRC)
+
+###########################################################################
+#                                  Tests                                  #
+###########################################################################
+SConscript("test/SConscript", "BUILDDIR testEnv simpleglob economy")
+
+
+Return('economy')
 

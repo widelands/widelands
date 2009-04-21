@@ -1,6 +1,8 @@
 Import('*')
 from Distribute import distadd
 
+SConscript('tests/SConscript.dist')
+
 distadd(env, 'src/economy/SConscript')
 distadd(env, 'src/economy/SConscript.dist')
 distadd(env, 'src/economy/*.h')

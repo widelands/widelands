@@ -134,6 +134,13 @@ env.Append(CPPPATH=[os.path.join('#', BUILDDIR)])
 
 print_build_info(env)
 
+# We now copy env to get our test Environment
+testEnv = env.Clone()
+testEnv.Tool("UnitTest", toolpath=['build/scons-tools'],
+    LIBS=["boost_unit_test_framework-mt"],
+    CXXFLAGS=["-DBOOST_TEST_DYN_LINK"])
+
+
 if env.enable_configuration:
 	# Generate build_id.cc - scons itself will decide whether a recompile is needed
 	Command(os.path.join(BUILDDIR, "build_id.cc"), [Value(get_build_id(env))], generate_buildid_file)
@@ -144,11 +151,12 @@ if env.enable_configuration:
 	Command(os.path.join(BUILDDIR, "config.h"), [Value(generate_configh_content(env))], generate_configh_file)
 
 env=conf.Finish()
+
 print # Pretty output
 
 #######################################################################
 
-Export('env', 'BUILDDIR', 'PhonyTarget', 'simpleglob')
+Export('env', 'testEnv', 'BUILDDIR', 'PhonyTarget', 'simpleglob')
 
 SConscript('build/SConscript')
 SConscript('campaigns/SConscript')
@@ -174,6 +182,10 @@ if env['build']=='release':
 ########################################################################### tags
 
 Alias('tags', env.ctags(source=simpleglob('*.h', 'src', recursive=True)+simpleglob('*.cc', 'src', recursive=True)))
+
+################################################################ Unit tests
+if env['build'] == 'debug' or env['build'] == 'profile':
+        Default("test")
 
 ################################################################ C++ style-check
 
