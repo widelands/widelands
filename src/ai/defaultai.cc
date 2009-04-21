@@ -24,7 +24,6 @@
 
 #include <ctime>
 
-#include "checkstep.h"
 #include "computer_player_hints.h"
 #include "constructionsite.h"
 #include "economy/economy.h"
@@ -51,24 +50,6 @@
 using namespace Widelands;
 
 DefaultAI::Implementation DefaultAI::implementation;
-
-struct CheckStepRoadAI {
-	CheckStepRoadAI(Player * const pl, uint8_t const mc, bool const oe)
-		: player(pl), movecaps(mc), openend(oe)
-	{}
-
-	void set_openend (bool const oe) {openend = oe;}
-
-	bool allowed
-		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
-		const;
-	bool reachabledest(Map &, FCoords dest) const;
-
-//private:
-	Player * player;
-	uint8_t    movecaps;
-	bool     openend;
-};
 
 /// Constructor of DefaultAI
 DefaultAI::DefaultAI(Game & g, const Player_Number pid) :
@@ -734,7 +715,7 @@ bool DefaultAI::construct_building ()
 					prio += bf->trees_nearby - 6 * bf->tree_consumers_nearby - 2;
 
 				if (j->need_stones)
-					prio += bf->stones_nearby - 6 * bf->stone_consumers_nearby - 2;
+					prio += bf->stones_nearby - 6 * bf->stone_consumers_nearby;
 
 				if
 					((j->need_trees || j->need_stones)
@@ -760,6 +741,16 @@ bool DefaultAI::construct_building ()
 					if (!check_supply(*j) && j->get_total_count() > 0)
 						prio -= 12;
 
+					// Check if the produced wares are needed
+					container_iterate(std::list<EconomyObserver *>, economies, l) {
+						for (uint32_t m = 0; m < j->outputs.size(); ++m) {
+							Ware_Index wt(static_cast<size_t>(j->outputs[m]));
+							if ((*l.current)->economy.needs_ware(wt)) {
+								prio += 2 * wares[j->outputs[m]].preciousness;
+							}
+						}
+					}
+
 					// normalize by output count so that multipurpose
 					// buildings are not too good
 					int32_t output_prio = 0;
@@ -768,16 +759,6 @@ bool DefaultAI::construct_building ()
 						output_prio -= 12 * wo.producers;
 						output_prio +=  8 * wo.consumers;
 						output_prio +=  4 * wo.preciousness;
-
-					// Check if the produced wares are needed
-					container_iterate(std::list<EconomyObserver *>, economies, l) {
-						for (uint32_t m = 0; m < j->outputs.size(); ++m) {
-							Ware_Index wt(static_cast<size_t>(j->outputs[k]));
-							if ((*l.current)->economy.needs_ware(wt)) {
-								prio += 2 * wares[j->outputs[m]].preciousness;
-							}
-						}
-					}
 
 						if (j->get_total_count() == 0 && wo.consumers > 0)
 							output_prio += 8; // add a big bonus

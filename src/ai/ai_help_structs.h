@@ -17,6 +17,7 @@
  *
  */
 
+#include "checkstep.h"
 #include "computer_player_hints.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -29,9 +30,26 @@ namespace Widelands {
 
 struct ProductionSite;
 
+struct CheckStepRoadAI {
+	CheckStepRoadAI(Player * const pl, uint8_t const mc, bool const oe)
+		: player(pl), movecaps(mc), openend(oe)
+	{}
 
-struct FindNodeUnowned
-{
+	void set_openend (bool const oe) {openend = oe;}
+
+	bool allowed
+		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
+		const;
+	bool reachabledest(Map &, FCoords dest) const;
+
+//private:
+	Player * player;
+	uint8_t    movecaps;
+	bool     openend;
+};
+
+
+struct FindNodeUnowned {
 	bool accept (const Map &, const FCoords fc) const {
 		// when looking for unowned terrain to acquire, we are actually
 		// only interested in fields we can walk on
@@ -41,8 +59,7 @@ struct FindNodeUnowned
 };
 
 
-struct FindNodeWater
-{
+struct FindNodeWater {
 	bool accept(Map const & map, FCoords const & coord) const {
 		return
 			(map.world().terrain_descr(coord.field->terrain_d()).get_is() & TERRAIN_WATER) ||
