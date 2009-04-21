@@ -33,7 +33,7 @@ struct Road;
  */
 class RoutingNodeNeighbour {
     RoutingNode* m_nb;
-    int32_t m_cost;
+    int32_t m_cost; /// Cost to get from me to the neighbour (Cost for road)
 
 public:
     RoutingNodeNeighbour( RoutingNode* f, int32_t cost ) : 
