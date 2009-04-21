@@ -159,12 +159,12 @@ bool Economy::find_route
 	 Route * const route,
 	 bool    const wait,
 	 int32_t const cost_cutoff) {
-	
+
     assert(start.get_economy() == this);
 	assert(end  .get_economy() == this);
-	
+
     Map & map = owner().egbase().map();
-   
+
     std::vector<RoutingNode*>& nodes = *((std::vector<RoutingNode*>*)(&m_flags));
 
     return m_router->find_route( start, end, route, wait, cost_cutoff, map, nodes );
@@ -181,7 +181,7 @@ void Economy::add_flag(Flag & flag)
 
 	m_flags.push_back(&flag);
 	flag.set_economy(this);
-	
+
     flag.reset_path_finding_cycle();
 }
 

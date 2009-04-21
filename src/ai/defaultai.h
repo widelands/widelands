@@ -20,13 +20,12 @@
 #ifndef DEFAULTAI_H
 #define DEFAULTAI_H
 
+#include "ai/ai_help_structs.h"
 #include "computer_player.h"
 
-#include <list>
 #include <map>
 
 namespace Widelands {
-struct ProductionSite;
 struct Road;
 }
 
@@ -48,8 +47,14 @@ struct DefaultAI : Computer_Player {
 	static Implementation implementation;
 
 private:
-	void update_all_buildable_fields (int32_t);
-	void update_all_mineable_fields  (int32_t);
+	void late_initialization ();
+
+	void update_all_buildable_fields     (int32_t);
+	void update_all_mineable_fields      (int32_t);
+	void update_all_not_buildable_fields ();
+
+	void update_buildable_field (BuildableField &);
+	void update_mineable_field (MineableField &);
 
 	void gain_immovable (Widelands::PlayerImmovable       &);
 	void lose_immovable (Widelands::PlayerImmovable const &);
@@ -62,118 +67,18 @@ private:
 	bool connect_flag_to_another_economy (Widelands::Flag &);
 	bool improve_roads                   (Widelands::Flag &);
 
-	struct BuildableField {
-		Widelands::FCoords coords;
+	EconomyObserver  * get_economy_observer (Widelands::Economy &);
+	BuildingObserver & get_building_observer(char const *);
 
-		int32_t          next_update_due;
-
-		bool          reachable;
-		bool          preferred;
-		bool          avoid_military;
-
-		uint8_t unowned_land_nearby;
-
-		uint8_t trees_nearby;
-		uint8_t stones_nearby;
-		uint8_t tree_consumers_nearby;
-		uint8_t stone_consumers_nearby;
-		uint8_t water_nearby;
-
-		int16_t         military_influence;
-		std::vector<uint8_t> consumers_nearby;
-		std::vector<uint8_t> producers_nearby;
-
-		BuildableField (Widelands::FCoords const & fc)
-			:
-			coords             (fc),
-			next_update_due    (0),
-			reachable          (false),
-			preferred          (false),
-			unowned_land_nearby(0),
-			trees_nearby       (0),
-			stones_nearby      (0)
-		{}
-	};
-
-	struct MineableField {
-		Widelands::FCoords coords;
-
-		int32_t    next_update_due;
-
-		bool    reachable;
-		bool    preferred;
-
-		int32_t     mines_nearby;
-
-		MineableField (Widelands::FCoords const & fc)
-			: coords(fc), next_update_due(0)
-		{}
-	};
-
-	struct EconomyObserver {
-		Widelands::Economy         & economy;
-		std::list<Widelands::Flag const *> flags;
-
-		EconomyObserver (Widelands::Economy & e) : economy(e) {}
-	};
-
-	struct BuildingObserver {
-		char                      const * name;
-		Widelands::Building_Index         id;
-		Widelands::Building_Descr const * desc;
-		BuildingHints             const * hints;
-
-		enum {
-			BORING,
-			CONSTRUCTIONSITE,
-			PRODUCTIONSITE,
-			MILITARYSITE,
-			MINE
-		}                                 type;
-
-		bool                              is_buildable;
-
-		bool                              need_trees;
-		bool                              need_stones;
-		bool                              need_water;
-
-		std::vector<int16_t>              inputs;
-		std::vector<int16_t>              outputs;
-		int16_t                           production_hint;
-
-		int32_t                           cnt_built;
-		int32_t                           cnt_under_construction;
-
-		int32_t get_total_count() {return cnt_built + cnt_under_construction;}
-	};
-
-	struct ProductionSiteObserver {
-		Widelands::ProductionSite * site;
-		BuildingObserver * bo;
-	};
-
-	struct WareObserver {
-		uint8_t producers;
-		uint8_t consumers;
-		uint8_t preciousness;
-	};
-
-	EconomyObserver * get_economy_observer (Widelands::Economy &);
-
-	void late_initialization ();
-
-	void update_buildable_field (BuildableField &);
-	void update_mineable_field (MineableField &);
 	void consider_productionsite_influence
 		(BuildableField &, Widelands::Coords, BuildingObserver const &);
-	void check_productionsite (ProductionSiteObserver &);
-
-	BuildingObserver & get_building_observer(char const *);
+	bool check_productionsite (ProductionSiteObserver &);
 
 	bool check_supply(BuildingObserver const &);
 
-// Variables of default AI
+
 private:
+// Variables of default AI
 	bool m_buildable_changed;
 	bool m_mineable_changed;
 
