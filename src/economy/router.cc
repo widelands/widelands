@@ -22,7 +22,7 @@
 
 // Package includes
 #include "routing_node.h"
-#include "route.h"
+#include "iroute.h"
 
 #include "map.h"
 
@@ -217,7 +217,7 @@ Router::Router( void ) :
 */
 bool Router::find_route
 	(RoutingNode & start, RoutingNode & end,
-	 Route * const route,
+	 IRoute * const route,
 	 bool    const wait,
 	 int32_t const cost_cutoff,
      Map& map,
@@ -296,8 +296,7 @@ bool Router::find_route
 
 	// Unwind the path to form the route
 	if (route) {
-		route->clear();
-		route->m_totalcost = end.mpf_realcost;
+		route->init( end.mpf_realcost );
 
 		for (RoutingNode * node = &end;; node = node->mpf_backlink) {
 			route->insert_node(node);

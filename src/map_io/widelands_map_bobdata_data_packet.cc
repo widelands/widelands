@@ -279,7 +279,7 @@ void Map_Bobdata_Data_Packet::Read
 										delete state.route;
 										state.route = 0; // in case we get an exception further down
 									} else
-										state.route->clear();
+										state.route->init(0);
 								}
 
 								if (has_route) {

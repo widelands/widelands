@@ -25,7 +25,11 @@
 // Needed for Object_Ptr
 #include "instances.h"
 
+#include "iroute.h"
+
+
 namespace Widelands {
+
 struct Flag;
 struct Editor_Game_Base;
 struct Map_Map_Object_Saver;
@@ -36,20 +40,20 @@ struct RoutingNode;
  * Route stores a route from flag to flag.
  * The number of steps is the number of flags stored minus one.
  */
-struct Route {
+struct Route : public IRoute {
 	friend struct Router;
 	friend struct Request;
 
 	Route();
 
-	void clear();
+	void init( int32_t );
 
 	int32_t get_totalcost() const {return m_totalcost;}
 	int32_t get_nrsteps() const {return m_route.size() - 1;}
 	Flag & get_flag(Editor_Game_Base &, std::vector<Flag *>::size_type);
 
-	void starttrim(int32_t count);
-	void truncate(int32_t count);
+    void starttrim(int32_t count);
+    void truncate(int32_t const count);
 
 	struct LoadData {
 		std::vector<uint32_t> flags;

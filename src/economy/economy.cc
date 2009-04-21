@@ -152,7 +152,8 @@ void Economy::check_split(Flag & f1, Flag & f2)
 /**
  * Calcaluate a route between two flags.
  *
- * This functionality has been moved to Router()
+ * This functionality has been moved to Router(). This is currently 
+ * merely a delegator.
 */
 bool Economy::find_route
 	(Flag & start, Flag & end,

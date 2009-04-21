@@ -39,9 +39,10 @@ Route::Route() : m_totalcost(0)
 {}
 
 /**
- * Completely clear the route
+ * Completely clear the route and intialize it
+ * to its totalcost
 */
-void Route::clear()
+void Route::init( int32_t m_totalcost )
 {
 	m_totalcost = 0;
 	m_route.clear();

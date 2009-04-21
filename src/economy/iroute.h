@@ -17,37 +17,29 @@
  *
  */
 
-#ifndef S__ROUTER_H
-#define S__ROUTER_H
+#ifndef S__IROUTE_H
+#define S__IROUTE_H
 
-#include <stdint.h>
-#include <vector>
-
-namespace Widelands {
-class IRoute;
-class Map;
+namespace Widelands { 
 class RoutingNode;
 
 /**
- * This class finds the best route between Nodes (Flags) in an economy. 
- * The functionality was split from Economy
- */
-class Router {
-private:
-	uint32_t mpf_cycle;       ///< pathfinding cycle, see Flag::mpf_cycle
-
+ * This class represents a Route Interface, a virtual base class 
+ * for a Route used for routing of wares for workers. 
+ *
+ * This class was introduced to hide the implementation of route
+ * and hide some ugly helper functions. It is therefore not a complete
+ * interface, it only shows what was needed for refactoring. 
+ *
+ * Most parts of the code still use the Route class directly and not this
+ * interface
+ **/
+class IRoute {
 public:
-    Router();
+    virtual ~IRoute() { };
 
-    bool find_route
-		(RoutingNode & start, RoutingNode & end,
-		 IRoute * route,
-		 bool    wait,
-		 int32_t cost_cutoff,
-         Map& map,
-         std::vector<RoutingNode*>& nodes);
-
-
+	virtual void init( int32_t ) = 0;
+    virtual void insert_node(RoutingNode* node) = 0;
 };
 
 }
