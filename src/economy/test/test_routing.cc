@@ -38,7 +38,7 @@ using namespace Widelands;
 class BadAccess : public std::exception {};
 class DummyRoutingNode : public RoutingNode {
 public:
-    DummyRoutingNode( int32_t wcost = 1, Coords pos = Coords(0,0) ) :
+    DummyRoutingNode( int32_t rcost = 1, int32_t wcost = 0, Coords pos = Coords(0,0) ) :
          _waitcost(wcost), _position(pos) {
     }
     void add_neighbour( DummyRoutingNode* nb ) {
@@ -66,7 +66,7 @@ private:
 void DummyRoutingNode::get_neighbours(RoutingNodeNeighbours* n ) {
     for (Neigbours::iterator i = _neighbours.begin(); i != _neighbours.end();
             i++) {
-        RoutingNodeNeighbour nb(*i, 0);
+        RoutingNodeNeighbour nb(*i, 1000); // second parameter is walktime in ms from this flag to the neighbour. only depends on slope
         n->push_back(nb);
     }
 }
@@ -159,7 +159,7 @@ BOOST_AUTO_TEST_SUITE( Routing )
  */
 BOOST_AUTO_TEST_CASE( dummynode_creation ) {
     DummyRoutingNode d0;
-    DummyRoutingNode d1(0,Coords(15,0));
+    DummyRoutingNode d1(0,0,Coords(15,0));
 
     BOOST_CHECK_EQUAL(d0.get_position().y,d1.get_position().y);
     BOOST_CHECK_EQUAL(d0.get_position().x,0);
@@ -362,8 +362,10 @@ struct ComplexRouterFixture {
     /**
      * Convenience function
      */
-    DummyRoutingNode* new_node_w_neighbour( DummyRoutingNode* d, Coords pos = Coords(0,0), int32_t waitcost = 0 ) {
-        DummyRoutingNode* d0 = new DummyRoutingNode(waitcost, pos);
+    DummyRoutingNode* new_node_w_neighbour( DummyRoutingNode* d, 
+			Coords pos = Coords(0,0), 
+			int32_t roadcost = 1, int32_t waitcost = 0 ) {
+        DummyRoutingNode* d0 = new DummyRoutingNode(roadcost, waitcost, pos);
 
         d0->add_neighbour(d);
         d->add_neighbour(d0);
@@ -518,7 +520,7 @@ BOOST_FIXTURE_TEST_CASE( priced_routing, DistanceRoutingFixture) {
     BOOST_CHECK( route.has_chain(chain) );
 
     // Make the middle node on the short path very expensive
-    d1->set_waitcost( 1000 );
+    d1->set_waitcost( 6 );
 
     // Same result without wait
     rval = r.find_route( *start, *end,
@@ -550,9 +552,7 @@ BOOST_FIXTURE_TEST_CASE( priced_routing, DistanceRoutingFixture) {
     BOOST_CHECK( rval );
     route.print();
 
-    /// \todo: Currently this test fails, though it should pass. There must be some kind
-    // of bug around
-    // BOOST_CHECK( route.has_chain(chain) );
+    BOOST_CHECK( route.has_chain(chain) );
 
 }
 

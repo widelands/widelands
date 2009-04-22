@@ -29,7 +29,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 namespace Widelands {
 
 /**
@@ -262,6 +261,9 @@ bool Router::find_route
 
 		current->get_neighbours(&neighbours);
 
+		// \todo: I think the next line is buggy; the ++i always skips
+		// one neighbour. Maybe it is intentional though and I just don't
+		// understand it
 		for (uint32_t i = 0; i < neighbours.size(); ++i) {
 			RoutingNode * const neighbour = neighbours[i].get_neighbour();
 			int32_t cost;
@@ -271,11 +273,17 @@ bool Router::find_route
 			if (neighbour == &end && !route)
 				return true;
 
-			if (wait)
+			/*
+			 * If this is a ware transport (so we have to wait on full flags)
+			 * add a weighting factor depending on the fullness of the two 
+			 * flags onto the general cost
+			 */
+			if (wait) {
 				wait_cost =
 					( current->get_waitcost() + neighbour->get_waitcost())
 					*
 					neighbours[i].get_cost() / 2;
+			}
 			cost = current->mpf_realcost + neighbours[i].get_cost() + wait_cost;
 
 			if (neighbour->mpf_cycle != mpf_cycle) {
