@@ -56,23 +56,23 @@ private:
 	void update_buildable_field (BuildableField &);
 	void update_mineable_field (MineableField &);
 
-	void gain_immovable (Widelands::PlayerImmovable       &);
-	void lose_immovable (Widelands::PlayerImmovable const &);
-	void gain_building  (Widelands::Building              &);
-	void lose_building  (Widelands::Building        const &);
-
 	bool construct_building ();
 	void construct_roads    ();
+	bool improve_roads      ();
 
-	bool connect_flag_to_another_economy (Widelands::Flag &);
-	bool improve_roads                   (Widelands::Flag &);
+	void check_economies      ();
+	bool check_productionsite (ProductionSiteObserver &);
+
+	void consider_productionsite_influence
+		(BuildableField &, Widelands::Coords, BuildingObserver const &);
 
 	EconomyObserver  * get_economy_observer (Widelands::Economy &);
 	BuildingObserver & get_building_observer(char const *);
 
-	void consider_productionsite_influence
-		(BuildableField &, Widelands::Coords, BuildingObserver const &);
-	bool check_productionsite (ProductionSiteObserver &);
+	void gain_immovable (Widelands::PlayerImmovable       &);
+	void lose_immovable (Widelands::PlayerImmovable const &);
+	void gain_building  (Widelands::Building              &);
+	void lose_building  (Widelands::Building        const &);
 
 	bool check_supply(BuildingObserver const &);
 
