@@ -20,29 +20,27 @@
 #ifndef S__IROUTE_H
 #define S__IROUTE_H
 
-namespace Widelands { 
+namespace Widelands {
 class RoutingNode;
 
 /**
- * This class represents a Route Interface, a virtual base class 
- * for a Route used for routing of wares for workers. 
+ * This class represents a Route Interface, a virtual base class
+ * for a Route used for routing of wares for workers.
  *
  * This class was introduced to hide the implementation of route
  * and hide some ugly helper functions. It is therefore not a complete
- * interface, it only shows what was needed for refactoring. 
+ * interface, it only shows what was needed for refactoring.
  *
  * Most parts of the code still use the Route class directly and not this
  * interface
  **/
 class IRoute {
 public:
-    virtual ~IRoute() { };
+	virtual ~IRoute() {};
 
-	virtual void init( int32_t ) = 0;
-    virtual void insert_as_first(RoutingNode* node) = 0;
+	virtual void init(int32_t) = 0;
+	virtual void insert_as_first(RoutingNode * node) = 0;
 };
 
 }
-#endif 
-
-
+#endif
