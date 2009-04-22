@@ -39,7 +39,7 @@ public:
     virtual ~IRoute() { };
 
 	virtual void init( int32_t ) = 0;
-    virtual void insert_node(RoutingNode* node) = 0;
+    virtual void insert_as_first(RoutingNode* node) = 0;
 };
 
 }

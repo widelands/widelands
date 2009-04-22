@@ -80,8 +80,8 @@ public:
 	void init( int32_t ) { 
         nodes.clear();
     } 
-    void insert_node(RoutingNode* node) { 
-        nodes.push_back(node);
+    void insert_as_first(RoutingNode* node) { 
+        nodes.insert(nodes.begin(), node);
     } 
 
     int32_t get_length(void) { return nodes.size(); }
@@ -127,6 +127,11 @@ public:
         return false; 
     }
 
+    bool print(void) {
+        for(Nodes::iterator i = nodes.begin(); i < nodes.end(); i++) {
+            BOOST_MESSAGE( *i );
+        }
+    }
 private:
     Nodes nodes;
 };
@@ -212,17 +217,17 @@ BOOST_AUTO_TEST_CASE( DummyRoute_emptyatstart ) {
 BOOST_AUTO_TEST_CASE( DummyRoute_addnode ) {
     DummyRoute r;
     DummyRoutingNode d(0,Coords(0,0));
-    r.insert_node( &d );
+    r.insert_as_first( &d );
     
     BOOST_CHECK_EQUAL( r.get_length(), 1 );
 }
 BOOST_FIXTURE_TEST_CASE( DummyRoute_hasnode, SimpleRouterFixture ) {
     BOOST_CHECK_EQUAL( route.has_node(d0), false );
     BOOST_CHECK_EQUAL( route.has_node(d1), false );
-    route.insert_node( d0 );
+    route.insert_as_first( d0 );
     BOOST_CHECK_EQUAL( route.has_node(d0), true );
     BOOST_CHECK_EQUAL( route.has_node(d1), false );
-    route.insert_node( d1 );
+    route.insert_as_first( d1 );
     BOOST_CHECK_EQUAL( route.has_node(d0), true );
     BOOST_CHECK_EQUAL( route.has_node(d1), true );
 }
@@ -230,21 +235,21 @@ BOOST_FIXTURE_TEST_CASE( DummyRoute_haschain, SimpleRouterFixture ) {
     std::vector<RoutingNode*> chain;
 
     chain.push_back(d0);
-    route.insert_node(d0);
+    route.insert_as_first(d0);
     BOOST_CHECK_EQUAL( route.has_chain(chain), true );
 
-    route.insert_node(d1);
-    chain.push_back(d1);
+    route.insert_as_first(d1);
+    chain.insert(chain.begin(), d1);
     BOOST_CHECK_EQUAL( route.has_chain(chain), true );
 }
 BOOST_FIXTURE_TEST_CASE( DummyRoute_chainisunidirectional, SimpleRouterFixture ) {
     std::vector<RoutingNode*> chain;
     // Chains are unidirectional. Check that
     chain.clear();
-    chain.push_back(d1);
     chain.push_back(d0);
-    route.insert_node(d0);
-    route.insert_node(d1);
+    chain.push_back(d1);
+    route.insert_as_first(d0);
+    route.insert_as_first(d1);
     BOOST_CHECK_EQUAL( route.has_chain(chain), false );
 }
 BOOST_FIXTURE_TEST_CASE( DummyRoute_haschain_checksubchain, SimpleRouterFixture ) {
@@ -256,12 +261,15 @@ BOOST_FIXTURE_TEST_CASE( DummyRoute_haschain_checksubchain, SimpleRouterFixture 
     chain.push_back(d0);
     chain.push_back(d1);
 
-    route.insert_node(&d);
-    route.insert_node(d0);
-    route.insert_node(&d);
+    route.insert_as_first(&d);
+    route.insert_as_first(d0);
+    route.insert_as_first(&d); // d -> d0 -> d
     BOOST_CHECK_EQUAL( route.has_chain(chain), false );
-    route.insert_node(d0);
-    route.insert_node(d1);
+    route.insert_as_first(d1);
+    route.insert_as_first(d0);
+    route.insert_as_first(&d);
+    route.insert_as_first(d0);
+    route.insert_as_first(d1); // d1 d0 d d0 d1 d d0 d
     BOOST_CHECK_EQUAL( route.has_chain(chain), true );
 }
 BOOST_FIXTURE_TEST_CASE( DummyRoute_haschain_checksubchain_endisnotstart, SimpleRouterFixture ) {
@@ -273,33 +281,39 @@ BOOST_FIXTURE_TEST_CASE( DummyRoute_haschain_checksubchain_endisnotstart, Simple
     chain.push_back(d0);
     chain.push_back(d1);
 
-    route.insert_node(&d);
-    route.insert_node(d0);
-    route.insert_node(d0);
+    route.insert_as_first(&d);
+    route.insert_as_first(d0);
+    route.insert_as_first(d0);
     BOOST_CHECK_EQUAL( route.has_chain(chain), false );
-    route.insert_node(d0);
-    route.insert_node(d0);
-    route.insert_node(&d);
-    route.insert_node(d0);
+    route.insert_as_first(d0);
+    route.insert_as_first(d0);
+    route.insert_as_first(&d);
+    route.insert_as_first(d0);
     BOOST_CHECK_EQUAL( route.has_chain(chain), false );
-    route.insert_node(d1);
-    route.insert_node(d0);
-    route.insert_node(&d);
-    route.insert_node(d0);
-    route.insert_node(d1);
+    route.insert_as_first(d1);
+    route.insert_as_first(d0);
+    route.insert_as_first(&d);
+    route.insert_as_first(d0);
+    route.insert_as_first(d1);
     BOOST_CHECK_EQUAL( route.has_chain(chain), true );
 }
 BOOST_FIXTURE_TEST_CASE( DummyRoute_init, SimpleRouterFixture ) {
-    route.insert_node( d0 );
+    route.insert_as_first( d0 );
     BOOST_CHECK_EQUAL( route.get_length(), 1 );
     route.init(0);
     BOOST_CHECK_EQUAL( route.get_length(), 0 );
-    route.insert_node( d1 );
+    route.insert_as_first( d1 );
     BOOST_CHECK_EQUAL( route.get_length(), 1 );
 }
 // }}}
 
 // {{{ Router Test-Cases 
+/*************************************************************************/
+/*                           EQUAL COST TESTS                            */
+/*************************************************************************/
+/****************/
+/* SIMPLE TESTS */
+/****************/
 BOOST_FIXTURE_TEST_CASE( router_findroute_seperatedNodes_exceptFail, SimpleRouterFixture) {
     bool rval = r.find_route( *d0, *d1, 
         &route, 
@@ -321,6 +335,140 @@ BOOST_FIXTURE_TEST_CASE( router_findroute_connectedNodes_exceptSuccess, SimpleRo
         vec);
 
     BOOST_CHECK_EQUAL(rval,true);
+}
+
+struct ComplexRouterFixture {
+    typedef std::vector<RoutingNode*> Nodes;
+
+    ComplexRouterFixture() {
+        d0 = new DummyRoutingNode(0,Coords(0,0));
+        nodes.push_back(d0);
+    }
+    ~ComplexRouterFixture() { 
+        while(nodes.size()) {
+            RoutingNode* n = nodes.back();
+            delete n;
+            nodes.pop_back();
+        }
+    }
+  
+    /**
+     * Convenience function
+     */
+    DummyRoutingNode* new_node_w_neighbour( DummyRoutingNode* d ) {
+        DummyRoutingNode* d0 = new DummyRoutingNode(0,Coords(0,0));
+
+        d0->add_neighbour(d);
+        d->add_neighbour(d0);
+
+        nodes.push_back(d0);
+        return d0;
+    }
+
+    /**
+     * Add a triangle of nodes (each node is connected to the
+     * other two) starting at the already existing node.
+     *
+     * \return The argument Node
+     */
+    DummyRoutingNode* add_triangle( DummyRoutingNode* d ) {
+        DummyRoutingNode* d0 = new DummyRoutingNode(0,Coords(0,0));
+        DummyRoutingNode* d1 = new DummyRoutingNode(0,Coords(0,0));
+
+        d->add_neighbour(d0); d->add_neighbour(d1);
+        d0->add_neighbour(d); d0->add_neighbour(d1);
+        d1->add_neighbour(d0); d1->add_neighbour(d);
+        
+        nodes.push_back(d0);
+        nodes.push_back(d1);
+        return d;
+    }
+
+    /**
+     * Add a dead end to confuse the router
+     *
+     * \arg d The node to attach the dead end to
+     */
+    DummyRoutingNode* add_dead_end( DummyRoutingNode* d ) {
+
+        // Some random dead ends
+        DummyRoutingNode* d0 = new_node_w_neighbour(d);
+        d0 = new_node_w_neighbour(d0);
+        
+        DummyRoutingNode* d1 = new_node_w_neighbour(d0);
+        new_node_w_neighbour(d1);
+        new_node_w_neighbour(d1);
+        d1 = new_node_w_neighbour(d1);
+        d1 = new_node_w_neighbour(d1);
+    
+        new_node_w_neighbour(d);
+        new_node_w_neighbour(d0);
+
+        return d;
+    }
+
+
+    
+    DummyRoutingNode* d0;
+    Nodes nodes;
+    Router r; 
+    DummyRoute route;
+    DummyTransportCostCalculator cc;
+};
+
+BOOST_FIXTURE_TEST_CASE( triangle_test, ComplexRouterFixture ) {
+    add_triangle(d0);
+
+    BOOST_CHECK_EQUAL( nodes.size(), 3 );
+}
+
+BOOST_FIXTURE_TEST_CASE( find_long_route, ComplexRouterFixture ) {
+    DummyRoutingNode* d1 = new_node_w_neighbour(d0);
+    DummyRoutingNode* d2 = new_node_w_neighbour(d1);
+    DummyRoutingNode* d3 = new_node_w_neighbour(d2);
+    DummyRoutingNode* d4 = new_node_w_neighbour(d3);
+    DummyRoutingNode* d5 = new_node_w_neighbour(d4);
+    
+    bool rval = r.find_route( *d0, *d5, 
+        &route, 
+        false, 
+        100000000,
+        cc,
+        nodes);
+    
+    BOOST_CHECK_EQUAL( rval, true );
+
+    Nodes chain;
+    chain.push_back(d0);
+    chain.push_back(d1);
+    chain.push_back(d2);
+    chain.push_back(d3);
+    chain.push_back(d4);
+    chain.push_back(d5);
+
+    add_dead_end(d0);
+    add_dead_end(d3);
+    add_dead_end(d5);
+
+    BOOST_CHECK( route.has_chain(chain));
+    
+    // directly connect d0 -> d5
+    d0->add_neighbour(d5);
+    
+    rval = r.find_route( *d0, *d5, 
+        &route, 
+        false, 
+        100000000,
+        cc,
+        nodes);
+    
+    BOOST_CHECK_EQUAL( rval, true );
+
+    chain.clear();
+    chain.push_back(d0);
+    chain.push_back(d5);
+    
+    BOOST_CHECK( route.has_chain(chain));
 }
 
 // }}}

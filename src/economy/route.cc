@@ -129,7 +129,10 @@ void Route::save
 	}
 }
 
-void Route::insert_node(RoutingNode* node) {
+/**
+ * Insert this node as the very first item into the Route
+ */
+void Route::insert_as_first(RoutingNode* node) {
     // we are sure that node is a Flag, since it is the only
     // RoutingNode ever used in the path finder (outside tests)
     // That's why we can make this cast

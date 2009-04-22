@@ -200,14 +200,18 @@ Router::Router( void ) :
 }
 
 /**
- * Calculate a route between two nodes.
+ * Calculate a route between two nodes. This is using the A* algorithm, 
+ * the closedset is 'emulated' by giving each node an index field of when 
+ * it was last touched in routing (mpf_cycle). The router itself also 
+ * has such a field and increases it every time find_route is called. 
  *
  * The calculated route is stored in route if it exists.
  *
  * For two nodes (Flags) from the same economy, this function should always be
- * successful, except when it's called from check_split()
+ * successful, except when it's called from check_split() or if cost_cutoff 
+ * is specified and no cheap route could be found. 
  *
- * \note route will be cleared before storing the result.
+ * \note route will be init()ed before storing the result.
  *
  * \param start, end start and endpoint of the route
  * \param route the calculated route
@@ -303,7 +307,7 @@ bool Router::find_route
 		route->init( end.mpf_realcost );
 
 		for (RoutingNode * node = &end;; node = node->mpf_backlink) {
-			route->insert_node(node);
+			route->insert_as_first(node);
 			if (node == &start)
 				break;
 		}
