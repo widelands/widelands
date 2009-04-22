@@ -185,6 +185,8 @@ struct BuildingObserver {
 	bool                              need_stones;
 	bool                              need_water;
 
+	int32_t                           mines;
+
 	std::vector<int16_t>              inputs;
 	std::vector<int16_t>              outputs;
 	int16_t                           production_hint;

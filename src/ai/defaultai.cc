@@ -181,8 +181,12 @@ void DefaultAI::late_initialization ()
 	// Building hints for computer player
 	std::string stoneproducer = "quarry";
 	std::string trunkproducer = "lumberjack";
-	std::string forester = "forester";
-	std::string fisher = "fisher";
+	std::string forester      = "forester";
+	std::string fisher        = "fisher";
+	std::string coalmine      = "coalmine";
+	std::string oremine       = "oremine";
+	std::string goldmine      = "goldmine";
+	std::string granitmine    = "granitmine";
 
 	// Read the computerplayer hints of the tribe
 	// FIXME: this is only a temporary workaround. Better define all this stuff
@@ -207,6 +211,10 @@ void DefaultAI::late_initialization ()
 		trunkproducer = hints.get_safe_string("trunkproducer");
 		forester      = hints.get_safe_string("forester");
 		fisher        = hints.get_safe_string("fisher");
+		coalmine      = hints.get_safe_string("coalmine");
+		oremine       = hints.get_safe_string("oremine");
+		goldmine      = hints.get_safe_string("goldmine");
+		granitmine    = hints.get_safe_string("granitmine");
 
 	} else {
 		log("   WARNING: No computerplayer hints for tribe %s found\n", tribe->name().c_str());
@@ -215,6 +223,7 @@ void DefaultAI::late_initialization ()
 
 	// collect information about which buildings our tribe can construct
 	Building_Index const nr_buildings = tribe->get_nrbuildings();
+	const World & world = game().map().world();
 	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i) {
 		const Building_Descr & bld = *tribe->get_building_descr(i);
 		const std::string & building_name = bld.name();
@@ -238,6 +247,16 @@ void DefaultAI::late_initialization ()
 		if (building_name == forester)
 			bo.production_hint = tribe->safe_ware_index("trunk").value();
 		bo.need_water = (building_name == fisher);
+
+		// mines
+		if (building_name == coalmine)
+			bo.mines = world.get_resource("coal");
+		if (building_name == oremine)
+			bo.mines = world.get_resource("iron");
+		if (building_name == goldmine)
+			bo.mines = world.get_resource("gold");
+		if (building_name == granitmine)
+			bo.mines = world.get_resource("granit");
 
 		if (typeid(bld) == typeid(ConstructionSite_Descr)) {
 			bo.type = BuildingObserver::CONSTRUCTIONSITE;
@@ -677,15 +696,18 @@ bool DefaultAI::construct_building ()
 					if (!check_supply(*j) && j->get_total_count() > 0)
 						prio -= 12;
 
+#if 0 //FIXME segfault in economy.h -> target_quantity(Ware_Index const i)
 					// Check if the produced wares are needed
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
 						for (uint32_t m = 0; m < j->outputs.size(); ++m) {
 							Ware_Index wt(static_cast<size_t>(j->outputs[m]));
 							if ((*l.current)->economy.needs_ware(wt)) {
-								prio += 2 * wares[j->outputs[m]].preciousness;
+								prio += 1;
+								prio += wares[j->outputs[m]].preciousness;
 							}
 						}
 					}
+#endif
 
 					// normalize by output count so that multipurpose
 					// buildings are not too good
@@ -758,9 +780,7 @@ bool DefaultAI::construct_building ()
 		}
 	}
 
-#if 0 //FIXME
 	// then try all mines
-	const World & world = game().map().world();
 	for (std::list<BuildingObserver>::iterator i = buildings.begin(); i != buildings.end(); ++i) {
 		if (!i->is_buildable || i->type != BuildingObserver::MINE)
 			continue;
@@ -769,14 +789,10 @@ bool DefaultAI::construct_building ()
 			MineableField * mf = *j;
 			int32_t prio = -1;
 
-			if (i->hints->get_need_map_resource() != 0) {
-				int32_t res = world.get_resource(i->hints->get_need_map_resource());
-
-				if (mf->coords.field->get_resources() != res)
-					continue;
-
+			if (mf->coords.field->get_resources() != i->mines)
+				continue;
+			else
 				prio += mf->coords.field->get_resources_amount();
-			}
 
 			WareObserver & output = wares[i->outputs[0]];
 			if (output.consumers>0)
@@ -786,14 +802,13 @@ bool DefaultAI::construct_building ()
 			prio -= i->cnt_built * 3;
 			prio -= i->cnt_under_construction * 8;
 
-			if (prio>proposed_priority) {
+			if (prio > proposed_priority) {
 				proposed_building = i->id;
 				proposed_priority = prio;
 				proposed_coords = mf->coords;
 			}
 		}
 	}
-#endif
 
 	if (not proposed_building)
 		return false;
