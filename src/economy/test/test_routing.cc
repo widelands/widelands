@@ -74,11 +74,69 @@ class DummyTransportCostCalculator : public ITransportCostCalculator {
 	int32_t calc_cost_estimate(Coords c1, Coords c2) const { return 100; } // TODO fix this 
 };
 class DummyRoute : public IRoute {
-	void init( int32_t ) { } // TODO: fix this class some more
-    void insert_node(RoutingNode* node) { } 
+public:
+    typedef std::vector<RoutingNode*> Nodes;
+
+	void init( int32_t ) { 
+        nodes.clear();
+    } 
+    void insert_node(RoutingNode* node) { 
+        nodes.push_back(node);
+    } 
+
+    int32_t get_length(void) { return nodes.size(); }
+
+    bool has_node(RoutingNode* n) {
+        for( Nodes::iterator i = nodes.begin(); i != nodes.end(); i++) {
+            if(*i == n)
+                return true;
+        }
+        return false; 
+    }
+    bool has_chain(Nodes& n) {
+        bool chain_begin_found = false;
+        
+        Nodes::iterator j = n.begin();
+        Nodes::iterator i = nodes.begin();
+        while( i < nodes.end() && j < n.end()) {
+            if(!chain_begin_found) {
+                if(*i == *j) {
+                    chain_begin_found = true;
+                    ++j;
+                }
+                if(j == n.end()) 
+                        return true;
+            } else {
+                if(*i != *j) {
+                    j = n.begin();
+                    chain_begin_found=false;
+                    if(*i == *j) {
+                        chain_begin_found = true;
+                        j++;
+                    }
+                } else {
+                    j++;
+                    if(j == n.end()) {
+                        return true;
+                    }
+                }
+            }
+            ++i;
+        }
+
+        return false; 
+    }
+
+private:
+    Nodes nodes;
 };
 
 /// End of helper classes }}}
+
+
+/*************************************************************************/
+/*                                 TESTS                                 */
+/*************************************************************************/
 BOOST_AUTO_TEST_SUITE( Routing )
 
 /// {{{ DummyRoutingNode Test Cases
@@ -127,23 +185,123 @@ BOOST_FIXTURE_TEST_CASE( dummynode_illegalneighbour_access, DummyNode_DefaultNod
 }
 // }}} End of DummyRoutingNode Test cases
 
-// {{{ Router Test-Cases 
-BOOST_AUTO_TEST_CASE( router_instantiatiation ) {
-    Router r; 
-}
-BOOST_AUTO_TEST_CASE( router_findroute_seperatedNodes_exceptFail) {
-    DummyRoutingNode d0(0,Coords(0,0));
-    DummyRoutingNode d1(0,Coords(15,0));
-
+struct SimpleRouterFixture {
+    SimpleRouterFixture( void ) {
+        d0 = new DummyRoutingNode(0,Coords(0,0));
+        d1 = new DummyRoutingNode(0,Coords(15,0));
+        vec.push_back(d0);
+        vec.push_back(d1);
+    }
+    ~SimpleRouterFixture( ) {
+        delete d0; 
+        delete d1;
+    }
+    DummyRoutingNode* d0;
+    DummyRoutingNode* d1;
     std::vector<RoutingNode*> vec;
-    vec.push_back(&d0);
-    vec.push_back(&d1);
-
     Router r; 
     DummyRoute route;
     DummyTransportCostCalculator cc;
+};
 
-    bool rval = r.find_route( d0, d1, 
+// {{{ DummyRoute Testing
+BOOST_AUTO_TEST_CASE( DummyRoute_emptyatstart ) {
+    DummyRoute r;
+    BOOST_CHECK_EQUAL( r.get_length(), 0 );
+}
+BOOST_AUTO_TEST_CASE( DummyRoute_addnode ) {
+    DummyRoute r;
+    DummyRoutingNode d(0,Coords(0,0));
+    r.insert_node( &d );
+    
+    BOOST_CHECK_EQUAL( r.get_length(), 1 );
+}
+BOOST_FIXTURE_TEST_CASE( DummyRoute_hasnode, SimpleRouterFixture ) {
+    BOOST_CHECK_EQUAL( route.has_node(d0), false );
+    BOOST_CHECK_EQUAL( route.has_node(d1), false );
+    route.insert_node( d0 );
+    BOOST_CHECK_EQUAL( route.has_node(d0), true );
+    BOOST_CHECK_EQUAL( route.has_node(d1), false );
+    route.insert_node( d1 );
+    BOOST_CHECK_EQUAL( route.has_node(d0), true );
+    BOOST_CHECK_EQUAL( route.has_node(d1), true );
+}
+BOOST_FIXTURE_TEST_CASE( DummyRoute_haschain, SimpleRouterFixture ) {
+    std::vector<RoutingNode*> chain;
+
+    chain.push_back(d0);
+    route.insert_node(d0);
+    BOOST_CHECK_EQUAL( route.has_chain(chain), true );
+
+    route.insert_node(d1);
+    chain.push_back(d1);
+    BOOST_CHECK_EQUAL( route.has_chain(chain), true );
+}
+BOOST_FIXTURE_TEST_CASE( DummyRoute_chainisunidirectional, SimpleRouterFixture ) {
+    std::vector<RoutingNode*> chain;
+    // Chains are unidirectional. Check that
+    chain.clear();
+    chain.push_back(d1);
+    chain.push_back(d0);
+    route.insert_node(d0);
+    route.insert_node(d1);
+    BOOST_CHECK_EQUAL( route.has_chain(chain), false );
+}
+BOOST_FIXTURE_TEST_CASE( DummyRoute_haschain_checksubchain, SimpleRouterFixture ) {
+    // Do not get confused when a partial chain is found
+    DummyRoutingNode d(0,Coords(0,0));
+    std::vector<RoutingNode*> chain;
+    
+    chain.push_back(&d);
+    chain.push_back(d0);
+    chain.push_back(d1);
+
+    route.insert_node(&d);
+    route.insert_node(d0);
+    route.insert_node(&d);
+    BOOST_CHECK_EQUAL( route.has_chain(chain), false );
+    route.insert_node(d0);
+    route.insert_node(d1);
+    BOOST_CHECK_EQUAL( route.has_chain(chain), true );
+}
+BOOST_FIXTURE_TEST_CASE( DummyRoute_haschain_checksubchain_endisnotstart, SimpleRouterFixture ) {
+    // Do not get confused when a partial chain is found
+    DummyRoutingNode d(0,Coords(0,0));
+    std::vector<RoutingNode*> chain;
+    
+    chain.push_back(&d);
+    chain.push_back(d0);
+    chain.push_back(d1);
+
+    route.insert_node(&d);
+    route.insert_node(d0);
+    route.insert_node(d0);
+    BOOST_CHECK_EQUAL( route.has_chain(chain), false );
+    route.insert_node(d0);
+    route.insert_node(d0);
+    route.insert_node(&d);
+    route.insert_node(d0);
+    BOOST_CHECK_EQUAL( route.has_chain(chain), false );
+    route.insert_node(d1);
+    route.insert_node(d0);
+    route.insert_node(&d);
+    route.insert_node(d0);
+    route.insert_node(d1);
+    BOOST_CHECK_EQUAL( route.has_chain(chain), true );
+}
+BOOST_FIXTURE_TEST_CASE( DummyRoute_init, SimpleRouterFixture ) {
+    route.insert_node( d0 );
+    BOOST_CHECK_EQUAL( route.get_length(), 1 );
+    route.init(0);
+    BOOST_CHECK_EQUAL( route.get_length(), 0 );
+    route.insert_node( d1 );
+    BOOST_CHECK_EQUAL( route.get_length(), 1 );
+}
+// }}}
+
+// {{{ Router Test-Cases 
+BOOST_FIXTURE_TEST_CASE( router_findroute_seperatedNodes_exceptFail, SimpleRouterFixture) {
+    bool rval = r.find_route( *d0, *d1, 
         &route, 
         false, 
         100000000,
@@ -152,22 +310,10 @@ BOOST_AUTO_TEST_CASE( router_findroute_seperatedNodes_exceptFail) {
 
     BOOST_CHECK_EQUAL(rval,false);
 }
-BOOST_AUTO_TEST_CASE( router_findroute_connectedNodes_exceptSuccess) {
-    DummyRoutingNode d0(0,Coords(0,0));
-    DummyRoutingNode d1(0,Coords(15,0));
-
-    std::vector<RoutingNode*> vec;
-    vec.push_back(&d0);
-    vec.push_back(&d1);
-
-    d0.add_neighbour(&d1);
-    d1.add_neighbour(&d0);
-
-    Router r; 
-    DummyRoute route;
-    DummyTransportCostCalculator cc;
-
-    bool rval = r.find_route( d0, d1, 
+BOOST_FIXTURE_TEST_CASE( router_findroute_connectedNodes_exceptSuccess, SimpleRouterFixture) {
+    d0->add_neighbour(d1);
+    d1->add_neighbour(d0);
+    bool rval = r.find_route( *d0, *d1, 
         &route, 
         false, 
         100000000,
