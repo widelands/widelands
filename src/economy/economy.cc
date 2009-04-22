@@ -56,7 +56,7 @@ m_request_timerid(0)
 		m_target_quantities[i.value()] = tq;
 	}
 
-    m_router = new Router();
+	m_router = new Router();
 }
 
 Economy::~Economy()
@@ -74,7 +74,7 @@ Economy::~Economy()
 
 	delete[] m_target_quantities;
 
-    delete m_router;
+	delete m_router;
 }
 
 
@@ -159,16 +159,16 @@ bool Economy::find_route
 	(Flag & start, Flag & end,
 	 Route * const route,
 	 bool    const wait,
-	 int32_t const cost_cutoff) {
-
-    assert(start.get_economy() == this);
+	 int32_t const cost_cutoff)
+{
+	assert(start.get_economy() == this);
 	assert(end  .get_economy() == this);
 
-    Map & map = owner().egbase().map();
+	Map & map = owner().egbase().map();
 
-    std::vector<RoutingNode*>& nodes = *((std::vector<RoutingNode*>*)(&m_flags));
+	std::vector<RoutingNode *> & nodes = *((std::vector<RoutingNode *>*)(&m_flags));
 
-    return m_router->find_route( start, end, route, wait, cost_cutoff, map, nodes );
+	return m_router->find_route(start, end, route, wait, cost_cutoff, map, nodes);
 }
 
 
@@ -183,7 +183,7 @@ void Economy::add_flag(Flag & flag)
 	m_flags.push_back(&flag);
 	flag.set_economy(this);
 
-    flag.reset_path_finding_cycle();
+	flag.reset_path_finding_cycle();
 }
 
 /**
@@ -475,8 +475,8 @@ void Economy::do_split(Flag & initial_flag)
 		flag.get_neighbours(&neighbours);
 
 		for (uint32_t i = 0; i < neighbours.size(); ++i) {
-            /// \todo the next line shouldn't need any casts at all
-			Flag & n = *((Flag*)neighbours[i].get_neighbour());
+			/// \todo the next line shouldn't need any casts at all
+			Flag & n = *((Flag *)neighbours[i].get_neighbour());
 
 			if (n.get_economy() == this)
 				open.push_back(&n);
