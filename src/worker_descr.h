@@ -23,7 +23,7 @@
 #include "bob.h"
 #include "immovable.h"
 
-#include "filewrite.h"
+#include "io/filewrite.h"
 
 namespace Widelands {
 

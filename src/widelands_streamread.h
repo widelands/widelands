@@ -20,7 +20,7 @@
 #ifndef WIDELANDS_STREAMREAD_H
 #define WIDELANDS_STREAMREAD_H
 
-#include "streamread.h"
+#include "io/streamread.h"
 
 #include "widelands.h"
 #include "widelands_geometry.h"

@@ -19,7 +19,7 @@
 
 #include "game_tips.h"
 
-#include "fileread.h"
+#include "io/fileread.h"
 #include "font_handler.h"
 #include "i18n.h"
 #include "profile.h"

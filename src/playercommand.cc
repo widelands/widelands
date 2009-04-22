@@ -26,7 +26,7 @@
 #include "instances.h"
 #include "player.h"
 #include "soldier.h"
-#include "streamwrite.h"
+#include "io/streamwrite.h"
 #include "tribe.h"
 #include "wexception.h"
 #include "widelands_fileread.h"

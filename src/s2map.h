@@ -22,7 +22,7 @@
 
 #include "map_loader.h"
 
-#include "fileread.h"
+#include "io/fileread.h"
 
 struct S2MapDescrHeader {
 	char    magic[10]; // "WORLD_V1.0"

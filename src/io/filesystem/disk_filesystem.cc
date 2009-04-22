@@ -35,8 +35,8 @@
 #include <glob.h>
 #endif
 
-#include "streamread.h"
-#include "streamwrite.h"
+#include "io/streamread.h"
+#include "io/streamwrite.h"
 
 /**
  * Initialize the real file-system

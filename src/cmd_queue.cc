@@ -19,7 +19,7 @@
 
 #include "cmd_queue.h"
 
-#include "filewrite.h"
+#include "io/filewrite.h"
 #include "game.h"
 #include "instances.h"
 #include "machdep.h"

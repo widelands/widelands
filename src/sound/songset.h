@@ -20,7 +20,7 @@
 #ifndef SONGSET_H
 #define SONGSET_H
 
-#include "fileread.h"
+#include "io/fileread.h"
 
 #include <config.h> //  must be included before SDL_mixer.h!
 #include <SDL_mixer.h>

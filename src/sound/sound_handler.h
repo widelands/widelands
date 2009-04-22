@@ -20,7 +20,7 @@
 #ifndef SOUND_HANDLER_H
 #define SOUND_HANDLER_H
 
-#include "fileread.h"
+#include "io/fileread.h"
 #include "fxset.h"
 #include "widelands_geometry.h"
 #include "random.h"

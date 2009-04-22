@@ -27,7 +27,7 @@
 #include "playercommand.h"
 #include "random.h"
 #include "save_handler.h"
-#include "streamwrite.h"
+#include "io/streamwrite.h"
 #include "wexception.h"
 
 #include "log.h"

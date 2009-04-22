@@ -20,7 +20,7 @@
 #ifndef WIDELANDS_STREAMWRITE_H
 #define WIDELANDS_STREAMWRITE_H
 
-#include "streamwrite.h"
+#include "io/streamwrite.h"
 
 #include "widelands.h"
 #include "widelands_geometry.h"

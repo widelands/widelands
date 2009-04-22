@@ -25,7 +25,7 @@
 #include <string>
 #include <cstring>
 
-#include "streamwrite.h"
+#include "io/streamwrite.h"
 
 /* Structure to save state of computation between the single steps.  */
 struct md5_ctx {

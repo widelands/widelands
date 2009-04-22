@@ -25,7 +25,7 @@
 #include "widelands.h"
 #include "writeHTML.h"
 
-#include "filewrite.h"
+#include "io/filewrite.h"
 #include "log.h"
 
 #include "container_iterate.h"

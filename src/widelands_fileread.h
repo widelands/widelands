@@ -20,7 +20,7 @@
 #ifndef WIDELANDS_FILEREAD_H
 #define WIDELANDS_FILEREAD_H
 
-#include "basic_fileread.h"
+#include "io/basic_fileread.h"
 #include "widelands_streamread.h"
 
 namespace Widelands {typedef basic_FileRead<StreamRead> FileRead;};

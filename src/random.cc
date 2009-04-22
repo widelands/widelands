@@ -18,8 +18,8 @@
  */
 
 #include "random.h"
-#include "streamread.h"
-#include "streamwrite.h"
+#include "io/streamread.h"
+#include "io/streamwrite.h"
 #include "wexception.h"
 
 #include <cstdio>

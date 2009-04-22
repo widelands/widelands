@@ -5,7 +5,7 @@ SRC=simpleglob("*.cc")
 # Ordering is important in the following calls!
 libs=[]
 libs+=SConscript('filesystem/SConscript')
-# libs+=srcenv.StaticLibrary(target='io', source=SRC)
+libs+=srcenv.StaticLibrary(target='io', source=SRC)
 
 Return('libs')
 

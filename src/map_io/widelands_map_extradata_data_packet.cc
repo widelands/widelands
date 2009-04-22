@@ -20,7 +20,7 @@
 #include "widelands_map_extradata_data_packet.h"
 
 #include "editor_game_base.h"
-#include "filewrite.h"
+#include "io/filewrite.h"
 #include "graphic.h" // Since we are laying about the path of the pictures
 #include "map.h"
 #include "profile.h"

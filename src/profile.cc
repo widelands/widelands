@@ -20,8 +20,8 @@
 #include "profile.h"
 
 #include "build_id.h"
-#include "fileread.h"
-#include "filewrite.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "i18n.h"
 #include "player.h"
 #include "tribe.h"

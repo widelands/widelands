@@ -19,7 +19,7 @@
 
 #include "sound_handler.h"
 
-#include "fileread.h"
+#include "io/fileread.h"
 #include "game.h"
 #include "i18n.h"
 #include "interactive_base.h"

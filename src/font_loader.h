@@ -20,7 +20,7 @@
 #ifndef FONT_LOADER_H
 #define FONT_LOADER_H
 
-#include "fileread.h"
+#include "io/fileread.h"
 #include "rgbcolor.h"
 
 #include <SDL_ttf.h>

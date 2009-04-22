@@ -28,7 +28,7 @@
 #include "ware_types.h"
 #include "widelands.h"
 
-#include "filewrite.h"
+#include "io/filewrite.h"
 
 #include <string>
 #include <cstring>

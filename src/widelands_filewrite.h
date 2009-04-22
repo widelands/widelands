@@ -20,7 +20,7 @@
 #ifndef WIDELANDS_FILEWRITE_H
 #define WIDELANDS_FILEWRITE_H
 
-#include "basic_filewrite.h"
+#include "io/basic_filewrite.h"
 #include "widelands_streamwrite.h"
 
 namespace Widelands {typedef basic_FileWrite<StreamWrite> FileWrite;};
