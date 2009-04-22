@@ -19,8 +19,8 @@
 
 #include "widelands_map_players_view_data_packet.h"
 
-#include "bitinbuffer.h"
-#include "bitoutbuffer.h"
+#include "io/bitinbuffer.h"
+#include "io/bitoutbuffer.h"
 #include "editor_game_base.h"
 #include "field.h"
 #include "instances.h" //for g_flag_descr
