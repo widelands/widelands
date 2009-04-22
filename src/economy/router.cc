@@ -214,14 +214,13 @@ Router::Router( void ) :
  * \note route will be init()ed before storing the result.
  *
  * \param start, end start and endpoint of the route
- * \param route the calculated route
- * \param wait UNDOCUMENTED
+ * \param route the calculated route, can be 0 to only check connectivity
+ * \param wait If true, the cost for waiting on a flag is considered (if this route is 
+ *        for a ware)
  * \param cost_cutoff maximum cost for desirable routes. If no route cheaper
  * than this can be found, return false
  *
  * \return true if a route has been found, false otherwise
- *
- * \todo Document parameter wait
 */
 bool Router::find_route
 	(RoutingNode & start, RoutingNode & end,
@@ -276,9 +275,7 @@ bool Router::find_route
 				wait_cost =
 					( current->get_waitcost() + neighbour->get_waitcost())
 					*
-					neighbours[i].get_cost()
-					/
-					2;
+					neighbours[i].get_cost() / 2;
 			cost = current->mpf_realcost + neighbours[i].get_cost() + wait_cost;
 
 			if (neighbour->mpf_cycle != mpf_cycle) {
