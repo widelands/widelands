@@ -20,7 +20,7 @@
 #ifndef S2MAP_H
 #define S2MAP_H
 
-#include "map_loader.h"
+#include "map_io/map_loader.h"
 
 #include "io/fileread.h"
 

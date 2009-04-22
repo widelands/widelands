@@ -31,7 +31,7 @@
 #include "instances.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"
-#include "map_loader.h"
+#include "map_io/map_loader.h"
 #include "player.h"
 #include "playerdescrgroup.h"
 #include "profile.h"

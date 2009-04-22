@@ -30,7 +30,7 @@
 #include "editor_set_starting_pos_tool.h"
 #include "overlay_manager.h"
 #include "world.h"
-#include "map_loader.h"
+#include "map_io/map_loader.h"
 
 #include "ui_button.h"
 #include "ui_editbox.h"

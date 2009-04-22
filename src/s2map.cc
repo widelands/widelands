@@ -24,7 +24,7 @@
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"
-#include "map_loader.h"
+#include "map_io/map_loader.h"
 #include "wexception.h"
 #include "world.h"
 
