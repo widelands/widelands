@@ -35,7 +35,7 @@
 #include "graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "network.h"
+#include "network/network.h"
 #include "player.h"
 #include "playercommand.h"
 #include "profile.h"

@@ -21,7 +21,7 @@
 #include "constants.h"
 #include "graphic.h"
 #include "i18n.h"
-#include "network.h"
+#include "network/network.h"
 #include "profile.h"
 
 Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()

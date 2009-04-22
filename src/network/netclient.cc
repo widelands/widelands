@@ -26,7 +26,6 @@
 #include "i18n.h"
 #include "interactive_player.h"
 #include "interactive_spectator.h"
-#include "io/filesystem/layered_filesystem.h"
 #include "network_protocol.h"
 #include "network_system.h"
 #include "playercommand.h"

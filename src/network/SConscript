@@ -1,0 +1,10 @@
+Import('*')
+
+SRC=simpleglob("*.cc")
+
+# Ordering is important in the following calls!
+libs=[]
+libs+=srcenv.StaticLibrary(target='network', source=SRC)
+
+Return('libs')
+

@@ -20,7 +20,7 @@
 #ifndef FULLSCREEN_MENU_NETSETUP_H
 #define FULLSCREEN_MENU_NETSETUP_H
 
-#include "network_lan_promotion.h"
+#include "network/network_lan_promotion.h"
 
 #include "ui_button.h"
 #include "ui_textarea.h"
