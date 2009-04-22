@@ -43,19 +43,6 @@ def parse_cli(env, buildtargets):
 	env.efence=0
 	env.profile=0
 
-	# Crosscompile config must be done before anything else!
-	#if env['cross']:
-	#	print 'Cross-compiling does not work yet!'
-	#	env.Exit(1)
-	#	#TARGET='i586-mingw32msvc'
-	#	#PREFIX='/usr/local/cross-tools'
-	#	#env['ENV']['PATH']=PREFIX+'/'+TARGET+'/bin:'+PREFIX+'/bin'+env['ENV']['PATH']
-	#	#env['CXX']=TARGET+'-g++'
-	#	### manually overwrite
-	#	###env['sdlconfig']=PREFIX+'/bin/'+TARGET+'-sdl_config'
-	#	#env['sdlconfig']=PREFIX+'/'+TARGET+'/bin/'+TARGET+'-sdl-config'
-	#else:
-	#	TARGET='native'
 	TARGET='native'
 
 	BUILDDIR='build/'+TARGET+'-'+env['build']
@@ -306,7 +293,7 @@ def do_configure_locale(conf, env):
 		env.Exit(1)
 
 	if not conf.CheckFunc('getenv'):
-		print '--> Your system does not support getenv(). Tilde epansion in filenames will not work.'
+		print '--> Your system does not support getenv(). Tilde expansion in filenames will not work.'
 		env.HAS_GETENV=False
 	else:
 		env.HAS_GETENV=True
@@ -437,7 +424,7 @@ def do_configure_compiler_features(conf, env):
 	conf.CheckCompilerFlag('-pipe', env)
 
 	if env.optimize:
-		# !!!! -fomit-frame-pointer breaks execeptions !!!!
+		# !!!! -fomit-frame-pointer breaks exceptions !!!!
 		conf.CheckCompilerFlag('-fexpensive-optimizations', env)
 		conf.CheckCompilerFlag('-finline-functions', env)
 		conf.CheckCompilerFlag('-ffast-math', env)
