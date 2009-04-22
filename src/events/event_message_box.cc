@@ -21,7 +21,6 @@
 
 #include "editor_game_base.h"
 #include "event_message_box_message_box.h"
-#include "io/filesystem/filesystem.h"
 #include "game.h"
 #include "graphic.h"
 #include "i18n.h"

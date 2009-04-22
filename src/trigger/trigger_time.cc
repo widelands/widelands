@@ -19,7 +19,6 @@
 
 #include "trigger_time.h"
 
-#include "io/filesystem/filesystem.h"
 #include "game.h"
 #include "profile.h"
 #include "wexception.h"
