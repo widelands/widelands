@@ -44,7 +44,7 @@ Route::Route() : m_totalcost(0)
 */
 void Route::init( int32_t totalcost )
 {
-	m_totalcost = 0; // shouldn't this be \arg totalcost?
+	m_totalcost = totalcost;
 	m_route.clear();
 }
 
