@@ -799,8 +799,8 @@ bool DefaultAI::construct_building ()
 				prio *= 2;
 
 			prio -= 2 * mf->mines_nearby * mf->mines_nearby;
-			prio -= i->cnt_built * 3;
-			prio -= i->cnt_under_construction * 8;
+			prio /= 1 + i->cnt_built;
+			prio /= 1 + i->cnt_under_construction * 4;
 
 			if (prio > proposed_priority) {
 				proposed_building = i->id;
