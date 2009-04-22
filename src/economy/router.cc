@@ -25,6 +25,10 @@
 #include "iroute.h"
 #include "itransport_cost_calculator.h"
 
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 
 namespace Widelands {
 
@@ -220,7 +224,7 @@ bool Router::find_route
 	 IRoute * const route,
 	 bool    const wait,
 	 int32_t const cost_cutoff,
-     ITransportCostCalculator& cost_calculator, 
+     ITransportCostCalculator& cost_calculator,
      std::vector<RoutingNode*>& nodes)
 {
 	// advance the path-finding cycle
