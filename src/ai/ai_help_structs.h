@@ -42,9 +42,8 @@ struct CheckStepRoadAI {
 		const;
 	bool reachabledest(Map &, FCoords dest) const;
 
-//private:
 	Player * player;
-	uint8_t    movecaps;
+	uint8_t  movecaps;
 	bool     openend;
 };
 
@@ -113,11 +112,11 @@ struct WalkableSpot {
 struct BuildableField {
 	Widelands::FCoords coords;
 
-	int32_t          next_update_due;
+	int32_t next_update_due;
 
-	bool          reachable;
-	bool          preferred;
-	bool          avoid_military;
+	bool    reachable;
+	bool    preferred;
+	bool    avoid_military;
 
 	uint8_t unowned_land_nearby;
 
@@ -127,7 +126,8 @@ struct BuildableField {
 	uint8_t stone_consumers_nearby;
 	uint8_t water_nearby;
 
-	int16_t         military_influence;
+	int16_t military_influence;
+
 	std::vector<uint8_t> consumers_nearby;
 	std::vector<uint8_t> producers_nearby;
 
@@ -146,12 +146,12 @@ struct BuildableField {
 struct MineableField {
 	Widelands::FCoords coords;
 
-	int32_t    next_update_due;
+	int32_t next_update_due;
 
 	bool    reachable;
 	bool    preferred;
 
-	int32_t     mines_nearby;
+	int32_t mines_nearby;
 
 	MineableField (Widelands::FCoords const & fc)
 		: coords(fc), next_update_due(0)

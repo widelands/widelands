@@ -295,7 +295,7 @@ void DefaultAI::late_initialization ()
 		bo.cnt_under_construction = 0;
 		bo.production_hint        = -1;
 
-		bo.is_buildable           = bld.buildable();
+		bo.is_buildable = bld.buildable() & player->is_building_allowed(i);
 
 		bo.need_trees             = building_name == trunkproducer;
 		bo.need_stones            = building_name == stoneproducer;
