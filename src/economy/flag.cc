@@ -222,15 +222,15 @@ void Flag::get_neighbours(RoutingNodeNeighbours *neighbours)
 		if (!road)
 			continue;
 
-        Flag* f = &road->get_flag(Road::FlagEnd);
-        int32_t nb_cost;
+		Flag * f = &road->get_flag(Road::FlagEnd);
+		int32_t nb_cost;
 		if (f != this)
 			nb_cost = road->get_cost(Road::FlagStart);
 		else {
 			f = &road->get_flag(Road::FlagStart);
 			nb_cost = road->get_cost(Road::FlagEnd);
 		}
-        RoutingNodeNeighbour n( f, nb_cost );
+		RoutingNodeNeighbour n(f, nb_cost);
 
 		assert(n.get_neighbour() != this);
 		neighbours->push_back(n);

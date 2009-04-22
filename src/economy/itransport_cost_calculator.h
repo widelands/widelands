@@ -26,20 +26,18 @@ namespace Widelands {
 
 /**
  * This class provides the interface to get cost and cost estimations
- * for certain transport properties (node->node). 
+ * for certain transport properties (node->node).
  *
  * At the time of this writing, Map implements all of this functionality
  * but most economy code doesn't need all of maps functionality
  */
 class ITransportCostCalculator {
 public:
-    virtual ~ITransportCostCalculator() { }
+	virtual ~ITransportCostCalculator() {}
 
 	virtual int32_t calc_cost_estimate(Coords, Coords) const = 0;
 };
 
 }
 
-#endif 
-
-
+#endif

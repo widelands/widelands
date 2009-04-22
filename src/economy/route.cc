@@ -42,7 +42,7 @@ Route::Route() : m_totalcost(0)
  * Completely clear the route and intialize it
  * to its totalcost
 */
-void Route::init( int32_t totalcost )
+void Route::init(int32_t totalcost)
 {
 	m_totalcost = totalcost;
 	m_route.clear();
@@ -132,11 +132,11 @@ void Route::save
 /**
  * Insert this node as the very first item into the Route
  */
-void Route::insert_as_first(RoutingNode* node) {
-    // we are sure that node is a Flag, since it is the only
-    // RoutingNode ever used in the path finder (outside tests)
-    // That's why we can make this cast
-    m_route.insert(m_route.begin(), static_cast<Flag*>(node));
+void Route::insert_as_first(RoutingNode * node) {
+	// we are sure that node is a Flag, since it is the only
+	// RoutingNode ever used in the path finder (outside tests)
+	// That's why we can make this cast
+	m_route.insert(m_route.begin(), static_cast<Flag *>(node));
 }
 
 }

@@ -182,8 +182,8 @@ private:
 	RequestList m_requests; ///< requests
 	SupplyList m_supplies;
 
-    Target_Quantity        * m_target_quantities;
-    Router                 * m_router;
+	Target_Quantity        * m_target_quantities;
+	Router                 * m_router;
 
 	/**
 	 * ID for the next request balancing timer. Used to throttle
@@ -193,6 +193,4 @@ private:
 };
 
 }
-#endif 
-
-
+#endif
