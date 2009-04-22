@@ -189,8 +189,8 @@ if env['build'] == 'debug' or env['build'] == 'profile':
 
 ################################################################ C++ style-check
 
-# if env['build'] == 'debug' or env['build'] == 'profile':
-#         Alias('stylecheck', env.Execute('utils/spurious_source_code/detect'))
+if env['build'] == 'debug' or env['build'] == 'profile':
+        Alias('stylecheck', env.Execute('utils/spurious_source_code/detect'))
 
 ################################################################## PNG shrinking
 
