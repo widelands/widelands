@@ -107,7 +107,7 @@ endif
 OBJECT_DIR:=../../$(TARGET)-$(BUILD)
 CFLAGS:=-Wall $(shell $(SDL_CONFIG) --cflags) $(ADD_CFLAGS)
 CXXFLAGS:=$(CFLAGS)
-LDFLAGS:=$(shell $(SDL_CONFIG) --libs) icon.o $(ADD_LDFLAGS) -lz -lpng -lSDL_image -lSDL_mixer -lSDL_ttf -lSDL_net  -lSDL_gfx -lwsock32
+LDFLAGS:=$(shell $(SDL_CONFIG) --libs) icon.o $(ADD_LDFLAGS) -lz -lpng -lSDL_image -lSDL_mixer -lSDL_ttf -lSDL_net -lSDL_gfx -lwsock32
 
 ##############################################################################
 # Building
@@ -139,7 +139,7 @@ dist:
 
 # WIDELANDS MAIN PROGRAM BUILD RULES
 
-SUBDIRS=../../../src ../../../src/ai ../../../src/ui/ui_fs_menus ../../../src/ui/ui_basic ../../../src/editor ../../../src/editor/ui_menus ../../../src/editor/tools ./../../src/io ../../../src/io/filesystem ../../../src/events ../../../src/sound ../../../src/trigger ../../../src/map_io
+SUBDIRS=../../../src ../../../src/io ../../../src/io/filesystem ../../../src/network ../../../src/economy ../../../src/ai ../../../src/ui/ui_fs_menus ../../../src/ui/ui_basic ../../../src/editor ../../../src/editor/ui_menus ../../../src/editor/tools ../../../src/events ../../../src/sound ../../../src/trigger ../../../src/map_io
 
 CFLAGS += $(patsubst %,-I%,$(SUBDIRS))
 CXXFLAGS += $(patsubst %,-I%,$(SUBDIRS))
