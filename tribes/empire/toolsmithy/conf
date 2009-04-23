@@ -148,6 +148,7 @@ call=produce_scythe
 call=produce_shovel
 call=produce_hunting_spear
 call=produce_basket
+call=produce_saw
 call=produce_axe
 return=skipped
 
