@@ -1,5 +1,6 @@
 help=_Fire-hardened wood, hard as iron and can not burn, used for military buildings.
 default_target_quantity=30
+preciousness=5
 
 # This wood is black and shiny, like vulcanic glass. These are planks,
 # not trunks any longer

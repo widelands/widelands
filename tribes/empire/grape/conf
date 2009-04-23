@@ -1,4 +1,5 @@
 help=_These grapes are the basic for tasty wine.
+preciousness=2
 
 [idle]
 pics=grape_idle.png

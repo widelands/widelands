@@ -1,7 +1,6 @@
 # Hints for the computer player
 
 [global]
-numofwares=5
 stoneproducer=quarry
 trunkproducer=woodcutters_house
 forester=foresters_house
@@ -10,13 +9,3 @@ coalmine=coalmine
 oremine=oremine
 goldmine=goldmine
 granitmine=crystalmine
-ware_n_0=trunk
-ware_p_0=6
-ware_n_1=stone
-ware_p_1=5
-ware_n_2=planks
-ware_p_2=4
-ware_n_3=quartz
-ware_p_3=3
-ware_n_4=diamond
-ware_p_4=3

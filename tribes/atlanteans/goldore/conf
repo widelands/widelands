@@ -1,4 +1,5 @@
 help=_This is the yellow gold ore.
+preciousness=2
 
 [idle]
 pics=idle.png

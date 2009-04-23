@@ -1,4 +1,5 @@
 help=_The bronze axe is considered a hard to handle weapon: it makes a lot of damage, but it's durability is not the best. Only skilled warriors can use this. Produced in the axe factory.
+preciousness=1
 
 [idle]
 pics=idle.png

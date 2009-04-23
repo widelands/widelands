@@ -1,4 +1,5 @@
 help=_The warriors axe is the most dangerous of all weapons. Only a few warriors ever were able to handle those huge and powerful axes. Build at the axe factory.
+preciousness=1
 
 [idle]
 pics=idle.png

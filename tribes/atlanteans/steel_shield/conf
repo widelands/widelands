@@ -1,4 +1,5 @@
 help=_This steel shield is used by experienced soldiers.
+preciousness=1
 
 # A shield with the sign of the Atlanteans on it.
 [idle]

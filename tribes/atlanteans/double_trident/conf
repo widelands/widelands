@@ -1,4 +1,5 @@
 help=_Already one of the best tridents of the Atlanteans. Only used by very good fighters.
+preciousness=1
 
 # A simple double trident
 [idle]

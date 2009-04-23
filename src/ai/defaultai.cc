@@ -137,8 +137,6 @@ void DefaultAI::think ()
 			//inhibit_road_building = gametime + 2500;
 			//Inhibiting roadbuilding is not a good idea, it causes
 			//computer players to get into deadlock at certain circumstances.
-			m_buildable_changed = true;
-			m_mineable_changed = true;
 			return;
 		}
 	}
@@ -180,7 +178,7 @@ void DefaultAI::late_initialization ()
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
 		wares[i].producers    = 0;
 		wares[i].consumers    = 0;
-		wares[i].preciousness = 0;
+		wares[i].preciousness = tribe->get_ware_descr(i)->preciousness();
 	}
 
 	// Building hints for computer player
@@ -201,17 +199,6 @@ void DefaultAI::late_initialization ()
 		Profile prof(tribehints.c_str());
 		Section & hints = prof.get_safe_section("global");
 
-		char warename[32];
-		char wareprec[32];
-		for (int32_t i = 0; i < hints.get_safe_int("numofwares"); ++i) {
-			sprintf(warename, "ware_n_%i", i);
-			sprintf(wareprec, "ware_p_%i", i);
-			int32_t const wprec = hints.get_safe_int(wareprec);
-			wares[tribe->safe_ware_index(hints.get_safe_string(warename)).value()]
-				.preciousness
-				=
-				wprec;
-		}
 		stoneproducer = hints.get_safe_string("stoneproducer");
 		trunkproducer = hints.get_safe_string("trunkproducer");
 		forester      = hints.get_safe_string("forester");
@@ -597,6 +584,9 @@ void DefaultAI::update_mineable_field (MineableField & field)
  */
 bool DefaultAI::construct_building ()
 {
+	bool mine = false; // just used for easy checking whether a mine or something
+	                   // else was build.
+
 	int32_t spots_avail[4];
 
 	for (int32_t i = 0; i < 4; ++i)
@@ -810,6 +800,7 @@ bool DefaultAI::construct_building ()
 				proposed_building = i->id;
 				proposed_priority = prio;
 				proposed_coords = mf->coords;
+				mine = true;
 			}
 		}
 	}
@@ -822,7 +813,14 @@ bool DefaultAI::construct_building ()
 		return false;
 
 	// if we want to construct a new building, send the command now
-	game().send_player_build (get_player_number(), proposed_coords, proposed_building);
+	game().send_player_build
+		(get_player_number(), proposed_coords, proposed_building);
+
+	// set the type of update that is needed
+	if (mine)
+		m_mineable_changed = true;
+	else
+		m_buildable_changed = true;
 
 	return true;
 }

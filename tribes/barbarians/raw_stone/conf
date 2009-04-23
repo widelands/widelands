@@ -1,4 +1,5 @@
 help=_Raw Stones are the secondary build material of the barbarians.
+preciousness=8
 
 # The stonemasons of the barbarians are not very talented workers,
 # therefore the stones miss a certain profesionality: rough, hard edges

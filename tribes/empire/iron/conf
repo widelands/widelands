@@ -1,4 +1,5 @@
 help=_Weapons and tools are made of iron.
+preciousness=4
 
 [idle]
 pics=idle.png

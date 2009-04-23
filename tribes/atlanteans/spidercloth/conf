@@ -1,5 +1,6 @@
 help=_Cloth made out of spideryarn.
 default_target_quantity=10
+preciousness=1
 
 [idle]
 pics=idle.png

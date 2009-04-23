@@ -1,4 +1,5 @@
 help=_This is an advanced trident for more experienced soldiers.
+preciousness=1
 
 # A simple, but long trident.
 [idle]

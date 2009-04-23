@@ -1,4 +1,5 @@
 help=_This is the basic weapon for atlantian soldiers.
+preciousness=1
 
 # A simple trident
 [idle]

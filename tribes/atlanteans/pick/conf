@@ -1,5 +1,6 @@
 help=_Picks are used by stonecutters and miners. It is produced by the toolsmith.
 default_target_quantity=2
+preciousness=1
 
 [idle]
 pics=idle.png

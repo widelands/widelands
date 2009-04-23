@@ -1,4 +1,5 @@
 help=_This is the most dangerous weapon of the atlantian military. Only the best of the best soldiers may use it.
+preciousness=1
 
 # A golden doubled trident
 [idle]

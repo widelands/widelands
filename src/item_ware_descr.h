@@ -92,11 +92,15 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	void writeHTML(::FileWrite &) const;
 #endif
 
+	/// returns the preciousness of the ware. It is used by the computer player
+	uint8_t preciousness() {return m_preciousness;}
+
 private:
 	std::string m_helptext;   ///< Long descriptive text
 	uint32_t    m_default_target_quantity;
 	std::string m_icon_fname; ///< Filename of ware's main picture
 	uint32_t    m_icon;       ///< Index of ware's picture in picture stack
+	uint8_t     m_preciousness;
 };
 
 };

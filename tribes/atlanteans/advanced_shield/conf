@@ -1,4 +1,5 @@
 help=_These shields are used by the best soldiers of the Atlanteans.
+preciousness=1
 
 # A golden shield with the sign of the Atlanteans
 [idle]

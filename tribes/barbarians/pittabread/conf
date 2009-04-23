@@ -1,4 +1,5 @@
 help=_The barbarian bakers are best in making this flat and tasty pitta bread.
+preciousness=3
 
 [idle]
 pics=bread_idle.png

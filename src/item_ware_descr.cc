@@ -38,6 +38,9 @@ Item_Ware_Descr::Item_Ware_Descr
 		global_s.get_positive
 			("default_target_quantity", std::numeric_limits<uint32_t>::max());
 	add_animation("idle", g_anim.get(directory, prof.get_safe_section("idle")));
+
+	m_preciousness =
+		static_cast<uint8_t>(global_s.get_natural("preciousness", 0));
 }
 
 

@@ -1,4 +1,5 @@
 help=_Wheat is essential for surviving. Delicious pitta bread and strong ales can be made of this wheat.
+preciousness=5
 
 [idle]
 pics=wheat_idle.png

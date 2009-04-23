@@ -1,4 +1,5 @@
 help=_The fires of the barbarians are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used.
+preciousness=1
 
 [idle]
 pics=idle.png

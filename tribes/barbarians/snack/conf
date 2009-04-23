@@ -1,4 +1,5 @@
 help=_A bit bigger, for the advanced miners. They will need a big morsel.
+preciousness=2
 
 [idle]
 pics=idle.png

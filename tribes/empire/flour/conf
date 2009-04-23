@@ -1,4 +1,5 @@
 help=_Flour is produced out of wheat and is needed for the tasty Empire bread.
+preciousness=3
 
 [idle]
 pics=flour_idle.png

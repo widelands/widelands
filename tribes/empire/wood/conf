@@ -1,5 +1,6 @@
 help=_Stones and wood are the basic build material of the Empire.
 default_target_quantity=20
+preciousness=7
 
 # These are planks created out of trunks.
 # The roman sawmiller know exactly, howto cut the trunks.
