@@ -57,7 +57,7 @@ private:
 	void update_mineable_field (MineableField &);
 
 	bool construct_building ();
-	void construct_roads    ();
+	bool construct_roads    ();
 	bool improve_roads      ();
 
 	void check_economies      ();

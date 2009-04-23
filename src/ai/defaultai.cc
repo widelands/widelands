@@ -112,7 +112,25 @@ void DefaultAI::think ()
 	// empty economy is left.
 	check_economies();
 
-	// now build something if possible
+	// improve existing roads
+	if (improve_roads()) {
+		m_buildable_changed = true;
+		m_mineable_changed = true;
+	}
+
+	// build some roads if needed
+	if (next_road_due <= gametime) {
+		next_road_due = gametime + 1000;
+		if(construct_roads ()) {
+			m_buildable_changed = true;
+			m_mineable_changed = true;
+			return;
+		}
+	} else
+		return; // don't build new buildings as long as the cp has not tried to
+		        // connect all economies.
+
+	// finally try to build something if possible
 	if (next_construction_due <= gametime) {
 		next_construction_due = gametime + 2000;
 		if (construct_building()) {
@@ -123,19 +141,6 @@ void DefaultAI::think ()
 			m_mineable_changed = true;
 			return;
 		}
-	}
-
-
-	// build some roads if needed
-	if (next_road_due <= gametime) {
-		next_road_due = gametime + 1000;
-		construct_roads ();
-	}
-
-	// improve existing roads
-	if (improve_roads()) {
-		m_buildable_changed = true;
-		m_mineable_changed = true;
 	}
 }
 
@@ -696,18 +701,17 @@ bool DefaultAI::construct_building ()
 					if (!check_supply(*j) && j->get_total_count() > 0)
 						prio -= 12;
 
-#if 0 //FIXME segfault in economy.h -> target_quantity(Ware_Index const i)
+//#if 0 //FIXME segfault in economy.h -> target_quantity(Ware_Index const i)
 					// Check if the produced wares are needed
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
 						for (uint32_t m = 0; m < j->outputs.size(); ++m) {
 							Ware_Index wt(static_cast<size_t>(j->outputs[m]));
 							if ((*l.current)->economy.needs_ware(wt)) {
-								prio += 1;
-								prio += wares[j->outputs[m]].preciousness;
+								prio += 1 + wares[j->outputs[m]].preciousness;
 							}
 						}
 					}
-#endif
+//#endif
 
 					// normalize by output count so that multipurpose
 					// buildings are not too good
@@ -827,7 +831,7 @@ bool DefaultAI::construct_building ()
  * This function searches for places where a new road is needed to connect two
  * economies. It then sends the request to build the road.
  */
-void DefaultAI::construct_roads ()
+bool DefaultAI::construct_roads ()
 {
 	std::vector<WalkableSpot> spots;
 	std::queue<int32_t> queue;
@@ -835,7 +839,7 @@ void DefaultAI::construct_roads ()
 
 	if (economies.size() < 2) {
 		// only one economy, no need for new roads
-		return;
+		return false;
 	}
 
 	container_iterate_const(std::list<EconomyObserver *>, economies, i)
@@ -966,12 +970,11 @@ void DefaultAI::construct_roads ()
 				}
 
 				game().send_player_build_road (get_player_number(), path);
-				return;
-				m_buildable_changed = true;
-				m_mineable_changed = true;
+				return true;
 			}
 		}
 	}
+	return false;
 }
 
 /// improves current road system
