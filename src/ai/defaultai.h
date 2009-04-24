@@ -29,6 +29,38 @@ namespace Widelands {
 struct Road;
 }
 
+/**
+ * Default Widelands Computer Player (defaultAI)
+ *
+ * The behaviour of defaultAI is controlled via \ref DefaultAI::think() and all
+ * functions called by \ref DefaultAI::think().
+ * At the moment defaultAI should be able to build up a basic infrastructure
+ * including food, mining and smithing infrastructure and a basic street net.
+ * It should be able to expand it's territory and to recruit some soldiers from
+ * the weapons made out of it's mined ressources.
+ * It does only construct buildable and allowed (scenario mode) buildings.
+ * It behaves after preciousness of a ware, which can be defined in wares conf
+ * file. The higher the preciousness, the more will defaultAI care for that ware
+ * and will try to build up an infrastructure to create that ware.
+ *
+ * \ToDo What it does not do until now is:
+ * - Building and using trainings sites
+ * - Higher the military presence at the frontier to other players
+ * - Attacking a near enemy, if strong enough
+ * - Enhancing buildings
+ *
+ * \ToDo Other things left to implement / improve:
+ * - remove cphints from tribes directory and instead read "requieres_object"
+ *   and "mines" from buildings conf file.
+ * - Improve update code - currently the whole buildable area owned by defaultAI
+ *   is rechecked after construction of a building or a road. Instead it would
+ *   be better to write down the changed coordinates and only check those and
+ *   surrounding ones.
+ * - Improve road building - f.e. doubled roads at high traffic points and
+ *   connection of flags that would improve transportation flow.
+ * - General improvements of defaultAI logic for construction of buildings.
+ *
+ */
 struct DefaultAI : Computer_Player {
 	DefaultAI(Widelands::Game &, const Widelands::Player_Number);
 
