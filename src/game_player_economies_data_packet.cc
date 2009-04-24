@@ -19,7 +19,7 @@
 
 #include "game_player_economies_data_packet.h"
 
-#include "economy/economy.h"
+#include "economy/economy_data_packet.h"
 #include "economy/flag.h"
 #include "game.h"
 #include "player.h"
@@ -33,7 +33,7 @@ namespace Widelands {
 
 
 void Game_Player_Economies_Data_Packet::Read
-	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const mol)
+	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const )
 throw (_wexception)
 {
 	FileRead fr;
@@ -73,8 +73,10 @@ throw (_wexception)
 							 	 .get_immovable()))
 						{
 							*i.current = flag->get_economy();
-							if (packet_version >= 3)
-								flag->get_economy()->Read(fr, game, mol);
+							if (packet_version >= 3) {
+								EconomyDataPacket d(flag->get_economy());
+								d.Read(fr);
+							}
 						} else
 							throw wexception
 								("there is no flag at the specified location");
@@ -92,7 +94,7 @@ throw (_wexception)
  * Write Function
  */
 void Game_Player_Economies_Data_Packet::Write
-	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const mos)
+	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const )
 throw (_wexception)
 {
 	FileWrite fw;
@@ -111,7 +113,9 @@ throw (_wexception)
 				if (upcast(Flag const, flag, field->get_immovable())) {
 					if (flag->get_economy() == *i.current) {
 						fw.Map_Index32(field - &field_0);
-						flag->get_economy()->Write(fw, game, mos);
+						
+						EconomyDataPacket d(flag->get_economy());
+						d.Write(fw);
 						break;
 					}
 				}

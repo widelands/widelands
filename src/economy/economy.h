@@ -22,9 +22,6 @@
 
 #include <vector>
 
-#include "widelands_filewrite.h"
-#include "widelands_fileread.h"
-
 #include "supply_list.h"
 #include "ui_unique_window.h"
 #include "warelist.h"
@@ -44,14 +41,13 @@ struct Cmd_ResetTargetQuantity;
 struct Warehouse;
 struct Request;
 struct Supply;
-struct Map_Map_Object_Saver;
-struct Map_Map_Object_Loader;
 struct Router;
 
 struct Economy {
 	friend struct Request;
 	friend struct Cmd_SetTargetQuantity;
 	friend struct Cmd_ResetTargetQuantity;
+	friend struct EconomyDataPacket;
 
 	/// Configurable target quantity for the supply of a ware type in the
 	/// economy.
@@ -150,9 +146,6 @@ struct Economy {
 	void balance_requestsupply(uint32_t timerid); ///< called by \ref Cmd_Call_Economy_Balance
 
 	void rebalance_supply() {start_request_timer();}
-
-	void Read (FileRead  &, Game &, Map_Map_Object_Loader *);
-	void Write(FileWrite &, Game &, Map_Map_Object_Saver  *);
 
 private:
 	void do_remove_flag(Flag &);
