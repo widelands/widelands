@@ -416,6 +416,25 @@ struct ComplexRouterFixture {
         return d;
     }
 
+	/** 
+	 * Add a chain of nodes
+	 *
+	 * \arg n number of entries in the chain
+	 * \arg start First node in chain
+	 * \arg chain All nodes will be appended to this chain. If n = 3 then n->size() will be 4 at return
+	 *
+	 * \return The last node in the chain
+	 */
+	DummyRoutingNode* add_chain( int n, DummyRoutingNode* start, Nodes* chain ) {
+        DummyRoutingNode* last = start;
+		chain->push_back(start);
+		for( int i = 0; i < n; i++) {
+			last = new_node_w_neighbour(last);
+			chain->push_back(last);
+		}
+		return last;
+	}
+
     DummyRoutingNode* d0;
     Nodes nodes;
     Router r; 
@@ -430,11 +449,11 @@ BOOST_FIXTURE_TEST_CASE( triangle_test, ComplexRouterFixture ) {
 }
 
 BOOST_FIXTURE_TEST_CASE( find_long_route, ComplexRouterFixture ) {
-    DummyRoutingNode* d1 = new_node_w_neighbour(d0);
-    DummyRoutingNode* d2 = new_node_w_neighbour(d1);
-    DummyRoutingNode* d3 = new_node_w_neighbour(d2);
-    DummyRoutingNode* d4 = new_node_w_neighbour(d3);
-    DummyRoutingNode* d5 = new_node_w_neighbour(d4);
+    Nodes chain;
+    
+	DummyRoutingNode* d5 = add_chain(5,d0,&chain);
+
+	new_node_w_neighbour(d0);
     
     bool rval = r.find_route( *d0, *d5, 
         &route, 
@@ -445,17 +464,9 @@ BOOST_FIXTURE_TEST_CASE( find_long_route, ComplexRouterFixture ) {
     
     BOOST_CHECK_EQUAL( rval, true );
 
-    Nodes chain;
-    chain.push_back(d0);
-    chain.push_back(d1);
-    chain.push_back(d2);
-    chain.push_back(d3);
-    chain.push_back(d4);
-    chain.push_back(d5);
-
-    add_dead_end(d0);
-    add_dead_end(d3);
-    add_dead_end(d5);
+    add_dead_end(static_cast<DummyRoutingNode*>(chain[0]));
+    add_dead_end(static_cast<DummyRoutingNode*>(chain[3]));
+    add_dead_end(static_cast<DummyRoutingNode*>(chain[5]));
 
     BOOST_CHECK( route.has_chain(chain));
     
@@ -540,7 +551,6 @@ BOOST_FIXTURE_TEST_CASE( priced_routing, DistanceRoutingFixture) {
         cc,
         nodes);
 
-    // Same result without wait
     chain.clear(); 
     chain.push_back(start);
     chain.push_back(d2);
@@ -550,11 +560,24 @@ BOOST_FIXTURE_TEST_CASE( priced_routing, DistanceRoutingFixture) {
     chain.push_back(end);
 
     BOOST_CHECK( rval );
-    route.print();
 
     BOOST_CHECK( route.has_chain(chain) );
-
 }
+BOOST_FIXTURE_TEST_CASE( cutoff, DistanceRoutingFixture ) {
+    Nodes chain;
+	
+	RoutingNode* end = add_chain(4, d0, &chain);
+
+    bool rval = r.find_route( *d0, *end,
+        &route,
+        false,
+        1000,
+        cc,
+        nodes);
+
+    BOOST_CHECK_EQUAL( rval, false );
+}
+
 
 // }}}
 
