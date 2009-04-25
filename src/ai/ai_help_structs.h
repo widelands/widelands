@@ -194,7 +194,7 @@ struct BuildingObserver {
 	int32_t                           cnt_built;
 	int32_t                           cnt_under_construction;
 
-	int32_t get_total_count() {return cnt_built + cnt_under_construction;}
+	int32_t total_count() {return cnt_built + cnt_under_construction;}
 };
 
 struct ProductionSiteObserver {

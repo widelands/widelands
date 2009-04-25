@@ -140,7 +140,7 @@ struct Game : public Editor_Game_Base {
 
 	void send_player_command (Widelands::PlayerCommand &);
 
-	void send_player_bulldoze (PlayerImmovable &, bool recurse = false);
+	void send_player_bulldoze   (PlayerImmovable &, bool recurse = false);
 	void send_player_build      (int32_t, Coords, Building_Index);
 	void send_player_build_flag (int32_t, Coords);
 	void send_player_build_road (int32_t, Path &);

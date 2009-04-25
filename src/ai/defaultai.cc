@@ -83,7 +83,7 @@ void DefaultAI::think ()
 	m_buildable_changed = false;
 	m_mineable_changed = false;
 
-	// This must be checked every time as changes of bobs in AI terrain aren't
+	// This must be checked every time as changes of bobs in AI area aren't
 	// handled by the AI itself.
 	update_all_not_buildable_fields();
 
@@ -116,6 +116,7 @@ void DefaultAI::think ()
 	if (improve_roads()) {
 		m_buildable_changed = true;
 		m_mineable_changed = true;
+		return;
 	}
 
 	// build some roads if needed
@@ -432,7 +433,7 @@ void DefaultAI::update_buildable_field (BuildableField & field)
 	Map & map = game().map();
 
 	field.unowned_land_nearby =
-		map.find_fields(Area<FCoords>(field.coords, 8), 0, find_unowned);
+		map.find_fields(Area<FCoords>(field.coords, 7), 0, find_unowned);
 
 	// collect information about resources in the area
 	std::vector<ImmovableFound> immovables;
@@ -440,7 +441,8 @@ void DefaultAI::update_buildable_field (BuildableField & field)
 	int32_t const tree_attr  = Map_Object_Descr::get_attribute_id("tree");
 	int32_t const stone_attr = Map_Object_Descr::get_attribute_id("stone");
 
-	map.find_immovables (Area<FCoords>(field.coords, 10), &immovables); //  FIXME magic number
+	// Search in a radius of 7
+	map.find_immovables (Area<FCoords>(field.coords, 7), &immovables);
 
 	field.reachable      = false;
 	field.preferred      = false;
@@ -472,7 +474,7 @@ void DefaultAI::update_buildable_field (BuildableField & field)
 			  fse.field->get_caps() & BUILDCAPS_FLAG))
 		field.preferred = true;
 
-	for (uint32_t i = 0;i < immovables.size(); ++i) {
+	for (uint32_t i = 0; i < immovables.size(); ++i) {
 		const BaseImmovable & base_immovable = *immovables[i].object;
 		if (dynamic_cast<const Flag *>(&base_immovable))
 			field.reachable = true;
@@ -648,111 +650,98 @@ bool DefaultAI::construct_building ()
 			int32_t prio = 0;
 
 			if (j->type == BuildingObserver::MILITARYSITE) {
-				prio  = bf->unowned_land_nearby - bf->military_influence * 2;
+				prio  = bf->unowned_land_nearby - bf->military_influence * 4;
 				prio  = prio > 0 ? prio : 1;
 				prio *= expand_factor;
-				prio /= 4;
+				prio /= 2;
 
 				if (bf->avoid_military) {
-					prio /= 3;
-					prio -= 6;
+					prio /= 5;
 				}
 
 			}
 
 			if (j->type == BuildingObserver::PRODUCTIONSITE) {
-				if (j->need_trees)
-					prio += bf->trees_nearby - 6 * bf->tree_consumers_nearby - 2;
+				if (j->need_trees) {
+					prio += bf->trees_nearby - 2;
+					prio /= 2 * (1 + bf->tree_consumers_nearby);
+					if (j->total_count() == 0)
+						prio *= 8; // big bonus for the basics
+				} else if (j->need_stones) {
+					prio +=
+						bf->stones_nearby * 3 / 2 - 6 * bf->stone_consumers_nearby;
+					if (j->total_count() == 0)
+						prio *= 8; // big bonus for the basics
+				} else if (j->production_hint >= 0) {
+					// production hint associates forester with trunk production
+					prio -= 6 * (j->cnt_built + j->cnt_under_construction);
+					prio += 4 * wares[j->production_hint].consumers;
+					prio += 2 * wares[j->production_hint].preciousness;
 
-				if (j->need_stones)
-					prio += bf->stones_nearby - 6 * bf->stone_consumers_nearby;
-
-				if
-					((j->need_trees || j->need_stones)
-					 &&
-					 j->cnt_built == 0
-					 &&
-					 j->cnt_under_construction == 0)
-					prio *= 4; // big bonus for the basics
-
-				if (!j->need_trees && !j->need_stones) {
-					if (j->cnt_built + j->cnt_under_construction == 0)
+					// add bonus near buildings outputting production_hint ware
+					if (bf->producers_nearby[j->production_hint] > 0)
+						prio += 2;
+				} else {
+					if (j->total_count() == 0)
 						prio += 2;
 
-					// Pull type economy, build consumeres until
-					// input resource usage is overbooked 2 to 1,
-					// then throttle down.
-					for (uint32_t k = 0; k < j->inputs.size(); ++k) {
-						prio += 8 * wares[j->inputs[k]].producers;
-						prio -= 4 * wares[j->inputs[k]].consumers;
-					}
-
 					// don't make more than one building, if supply line is broken.
-					if (!check_supply(*j) && j->get_total_count() > 0)
+					if (!check_supply(*j) && j->total_count() > 0)
 						prio -= 12;
 
-//#if 0 //FIXME segfault in economy.h -> target_quantity(Ware_Index const i)
 					// Check if the produced wares are needed
-					container_iterate(std::list<EconomyObserver *>, economies, l) {
+						container_iterate(std::list<EconomyObserver *>, economies, l) {
 						for (uint32_t m = 0; m < j->outputs.size(); ++m) {
 							Ware_Index wt(static_cast<size_t>(j->outputs[m]));
+							//FIXME segfault in economy.h -> target_quantity(Ware_Index const i)
 							if ((*l.current)->economy.needs_ware(wt)) {
 								prio += 1 + wares[j->outputs[m]].preciousness;
 							}
 						}
 					}
-//#endif
+
+					// If the produced wares are needed, check if current economy can
+					// supply enough material for production.
+					if (prio > 0)
+						for (uint32_t k = 0; k < j->inputs.size(); ++k) {
+							prio += 2 * wares[j->inputs[k]].producers;
+							prio -= 4 * wares[j->inputs[k]].consumers;
+						}
 
 					// normalize by output count so that multipurpose
 					// buildings are not too good
 					int32_t output_prio = 0;
 					for (uint32_t k = 0; k < j->outputs.size(); ++k) {
 						WareObserver & wo = wares[j->outputs[k]];
-						output_prio -= 12 * wo.producers;
-						output_prio +=  8 * wo.consumers;
-						output_prio +=  4 * wo.preciousness;
-
-						if (j->get_total_count() == 0 && wo.consumers > 0)
-							output_prio += 8; // add a big bonus
-						// kick first building priority with preciousness
-						// to get economy running
-						if (j->get_total_count() == 0)
-							prio += wo.preciousness;
+						if (j->total_count() == 0 && wo.consumers > 0)
+							output_prio += 8 + wo.preciousness; // add a big bonus
 					}
 
-					if (j->outputs.size()>0)
+					if (j->outputs.size() > 0)
 						output_prio = static_cast<int32_t>
 							(ceil(output_prio / sqrt(j->outputs.size())));
 					prio += output_prio;
 
-					// production hint associates forester with trunk production
-					if (j->production_hint >= 0) {
-						prio -= 6 * (j->cnt_built + j->cnt_under_construction);
-						prio += 4 * wares[j->production_hint].consumers;
-						prio += 2 * wares[j->production_hint].preciousness;
-
-						// add bonus near buildings outputting hinted ware
-						if (bf->producers_nearby[j->production_hint] > 0)
-							++prio;
-					}
-
 					int32_t iosum = 0;
 					for (size_t k = 0; k < j->inputs.size(); ++k)
-						if (bf->producers_nearby[j->inputs[k]]>0) ++iosum;
-						else if (bf->consumers_nearby[j->inputs[k]]>0) --iosum;
-					if (iosum < -2) iosum = -2;
+						if (bf->producers_nearby[j->inputs[k]]>0)
+							++iosum;
+						else if (bf->consumers_nearby[j->inputs[k]]>0)
+							--iosum;
+					if (iosum < -2)
+						iosum = -2;
 					for (size_t k = 0; k < j->outputs.size(); ++k)
 						if (bf->consumers_nearby[j->outputs[k]] > 0)
 							++iosum;
 					prio += 2 * iosum;
 				}
-				prio -=
-					2 * j->cnt_under_construction * (j->cnt_under_construction + 1);
 			}
 
+			prio -=
+				2 * j->cnt_under_construction * (j->cnt_under_construction + 1);
+
 			// add big penalty if water is needed, but is not near
-			if (j->need_water)
-			{
+			if (j->need_water) {
 				int effect = bf->water_nearby - 12;
 				prio += effect > 0 ? static_cast<int>(sqrt(effect)) : effect;
 				// if same producers are nearby, then give some penalty
@@ -764,7 +753,7 @@ bool DefaultAI::construct_building ()
 			// Prefer road side fields
 			prio += bf->preferred ?  1 : 0;
 
-			//  don't waste good land for small huts
+			// don't waste good land for small huts
 			prio -= (maxsize - j->desc->get_size()) * 3;
 			if (prio > proposed_priority) {
 				proposed_building = j->id;
@@ -788,12 +777,18 @@ bool DefaultAI::construct_building ()
 			else
 				prio += mf->coords.field->get_resources_amount();
 
-			WareObserver & output = wares[i->outputs[0]];
-			if (output.consumers>0)
-				prio *= 2;
+			// Check if the produced wares are needed
+			container_iterate(std::list<EconomyObserver *>, economies, l) {
+				for (uint32_t m = 0; m < i->outputs.size(); ++m) {
+					Ware_Index wt(static_cast<size_t>(i->outputs[m]));
+					if ((*l.current)->economy.needs_ware(wt)) {
+						prio *= 2;
+					}
+				}
+			}
 
 			prio -= 2 * mf->mines_nearby * mf->mines_nearby;
-			prio /= 1 + i->cnt_built;
+			prio /= 1 + i->cnt_built * 2;
 			prio /= 1 + i->cnt_under_construction * 4;
 
 			if (prio > proposed_priority) {
@@ -831,14 +826,14 @@ bool DefaultAI::construct_building ()
  */
 bool DefaultAI::construct_roads ()
 {
-	std::vector<WalkableSpot> spots;
-	std::queue<int32_t> queue;
-	Map & map = game().map();
-
 	if (economies.size() < 2) {
 		// only one economy, no need for new roads
 		return false;
 	}
+
+	std::vector<WalkableSpot> spots;
+	std::queue<int32_t> queue;
+	Map & map = game().map();
 
 	container_iterate_const(std::list<EconomyObserver *>, economies, i)
 		container_iterate_const(std::list<Flag const *>, (*i.current)->flags, j)
@@ -897,7 +892,7 @@ bool DefaultAI::construct_roads ()
 
 	int32_t i, j, k;
 	for (i = 0; i < static_cast<int32_t>(spots.size()); ++i)
-		for (j = 0; j < 6; ++j) {
+		for (j = 0; j < 6; ++j) { // the 6 different directions
 			Coords nc;
 			map.get_neighbour (spots[i].coords, j + 1, &nc);
 
@@ -913,64 +908,65 @@ bool DefaultAI::construct_roads ()
 		WalkableSpot & from = spots[queue.front()];
 		queue.pop();
 
-		for (i = 0; i < 6; ++i) if (from.neighbours[i] >= 0) {
-			WalkableSpot &to = spots[from.neighbours[i]];
+		for (i = 0; i < 6; ++i) // the 6 different directions
+			if (from.neighbours[i] >= 0) {
+				WalkableSpot &to = spots[from.neighbours[i]];
 
-			if (to.cost < 0) {
-				to.cost = from.cost + 1;
-				to.eco  = from.eco;
-				to.from = &from - &spots.front();
+				if (to.cost < 0) {
+					to.cost = from.cost + 1;
+					to.eco  = from.eco;
+					to.from = &from - &spots.front();
 
-				queue.push (&to - &spots.front());
-				continue;
+					queue.push (&to - &spots.front());
+					continue;
+				}
+
+				if (from.eco != to.eco and to.cost > 0) {
+					std::list<Coords> pc;
+					bool hasflag;
+
+					pc.push_back (to.coords);
+					i = to.from;
+					hasflag = to.hasflag;
+					while (0 <= i) {
+						pc.push_back (spots[i].coords);
+						hasflag = spots[i].hasflag;
+						i = spots[i].from;
+					}
+
+					if (!hasflag)
+						game().send_player_build_flag (get_player_number(), pc.back());
+
+					pc.push_front (from.coords);
+					i = from.from;
+					hasflag = from.hasflag;
+					while (i >= 0) {
+						pc.push_front (spots[i].coords);
+						hasflag = spots[i].hasflag;
+						i = spots[i].from;
+					}
+
+					if (!hasflag)
+						game().send_player_build_flag (get_player_number(), pc.front());
+
+					Path & path = *new Path(pc.front());
+					pc.pop_front();
+
+					for
+						(std::list<Coords>::iterator c = pc.begin(); c != pc.end(); ++c)
+					{
+						const int32_t n = map.is_neighbour(path.get_end(), *c);
+						assert (1 <= n);
+						assert (n <= 6); // one of the 6 directions
+
+						path.append (map, n);
+						assert (path.get_end() == *c);
+					}
+
+					game().send_player_build_road (get_player_number(), path);
+					return true;
+				}
 			}
-
-			if (from.eco != to.eco and to.cost > 0) {
-				std::list<Coords> pc;
-				bool hasflag;
-
-				pc.push_back (to.coords);
-				i = to.from;
-				hasflag = to.hasflag;
-				while (0 <= i) {
-					pc.push_back (spots[i].coords);
-					hasflag = spots[i].hasflag;
-					i = spots[i].from;
-				}
-
-				if (!hasflag)
-					game().send_player_build_flag (get_player_number(), pc.back());
-
-				pc.push_front (from.coords);
-				i = from.from;
-				hasflag = from.hasflag;
-				while (i >= 0) {
-					pc.push_front (spots[i].coords);
-					hasflag = spots[i].hasflag;
-					i = spots[i].from;
-				}
-
-				if (!hasflag)
-					game().send_player_build_flag (get_player_number(), pc.front());
-
-				Path & path = *new Path(pc.front());
-				pc.pop_front();
-
-				for
-					(std::list<Coords>::iterator c = pc.begin(); c != pc.end(); ++c)
-				{
-					const int32_t n = map.is_neighbour(path.get_end(), *c);
-					assert (1 <= n);
-					assert      (n <= 6);
-
-					path.append (map, n);
-					assert (path.get_end() == *c);
-				}
-
-				game().send_player_build_road (get_player_number(), path);
-				return true;
-			}
-		}
 	}
 	return false;
 }
@@ -978,6 +974,15 @@ bool DefaultAI::construct_roads ()
 /// improves current road system
 bool DefaultAI::improve_roads ()
 {
+	// Remove dead end roads
+	container_iterate(std::list<EconomyObserver *>, economies, i)
+		container_iterate(std::list<Flag const *>, (*i.current)->flags, j)
+			if ((*j.current)->is_dead_end()) {
+				game().send_player_bulldoze(*const_cast<Flag *>((*j.current)));
+				j.current = (*i.current)->flags.erase(j.current);
+				return true;
+			}
+
 	// force a split on roads that are longer than 3 parts
 	// actually we do not care for loss of building capabilities - normal maps
 	// should have enough space and the computer can expand it's territory.
@@ -1161,7 +1166,7 @@ void DefaultAI::gain_immovable (PlayerImmovable & pi)
 /// this is called whenever we lose ownership of a PlayerImmovable
 void DefaultAI::lose_immovable (PlayerImmovable const & pi)
 {
-	if      (upcast(Building const, building, &pi))
+	if        (upcast(Building const, building, &pi))
 		lose_building (*building);
 	else if   (upcast(Flag     const, flag,     &pi)) {
 		container_iterate_const(std::list<EconomyObserver *>, economies, i)
