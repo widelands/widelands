@@ -34,7 +34,7 @@ using Widelands::Item_Ware_Descr;
 using Widelands::Ware_Index;
 
 struct Economy_Options_Window : public UI::UniqueWindow {
-	Economy_Options_Window(Interactive_Player & parent, Economy & _econome)
+	Economy_Options_Window(Interactive_Player & parent, Economy & _economy)
 
 		:
 		UI::UniqueWindow
