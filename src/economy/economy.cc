@@ -100,7 +100,7 @@ void Economy::check_merge(Flag & f1, Flag & f2)
 	if (e1 != e2) {
 		if (e1->get_nrflags() < e2->get_nrflags())
 			std::swap(e1, e2);
-		e1->do_merge(*e2);
+		e1->_merge(*e2);
 	}
 }
 
@@ -145,7 +145,7 @@ void Economy::check_split(Flag & f1, Flag & f2)
 	Economy & e = *f1.get_economy();
 
 	if (not e.find_route(f1, f2, 0, false))
-		e.do_split(f2);
+		e._split(f2);
 }
 
 
@@ -194,7 +194,7 @@ void Economy::remove_flag(Flag & flag)
 {
 	assert(flag.get_economy() == this);
 
-	do_remove_flag(flag);
+	_remove_flag(flag);
 
 	// automatically delete the economy when it becomes empty.
 	if (m_flags.empty())
@@ -205,7 +205,7 @@ void Economy::remove_flag(Flag & flag)
  * Remove the flag, but don't delete the economy automatically.
  * This is called from the merge code.
 */
-void Economy::do_remove_flag(Flag & flag)
+void Economy::_remove_flag(Flag & flag)
 {
 	flag.set_economy(0);
 
@@ -323,7 +323,7 @@ void Economy::add_request(Request & req)
 	m_requests.push_back(&req);
 
 	// Try to fulfill the request
-	start_request_timer();
+	_start_request_timer();
 }
 
 /**
@@ -363,7 +363,7 @@ void Economy::remove_request(Request & req)
 void Economy::add_supply(Supply & supply)
 {
 	m_supplies.add_supply(supply);
-	start_request_timer();
+	_start_request_timer();
 }
 
 
@@ -396,7 +396,7 @@ bool Economy::needs_ware(Ware_Index const ware_type) const {
  * Also transfer all wares and wares request. Try to resolve the new ware
  * requests if possible.
 */
-void Economy::do_merge(Economy & e)
+void Economy::_merge(Economy & e)
 {
 	for (Ware_Index::value_t i = m_owner.tribe().get_nrwares().value(); i;) {
 		--i;
@@ -429,7 +429,7 @@ void Economy::do_merge(Economy & e)
 
 		Flag & flag = *e.m_flags[0];
 
-		e.do_remove_flag(flag);
+		e._remove_flag(flag);
 		add_flag(flag);
 	}
 
@@ -442,7 +442,7 @@ void Economy::do_merge(Economy & e)
 
 /// Flag initial_flag and all its direct and indirect neighbours are put into a
 /// new economy.
-void Economy::do_split(Flag & initial_flag)
+void Economy::_split(Flag & initial_flag)
 {
 	Economy & e = *new Economy(m_owner);
 
@@ -490,13 +490,13 @@ void Economy::do_split(Flag & initial_flag)
 	// As long as rebalance commands are tied to specific flags, we
 	// need this, because the flag that rebalance commands for us were
 	// tied to might have been moved into the other economy
-	start_request_timer();
+	_start_request_timer();
 }
 
 /**
  * Make sure the request timer is running.
  */
-void Economy::start_request_timer(int32_t const delta)
+void Economy::_start_request_timer(int32_t const delta)
 {
 	if (upcast(Game, game, &m_owner.egbase()))
 		game->cmdqueue().enqueue
@@ -615,7 +615,7 @@ struct RSPairStruct {
 /**
  * Walk all Requests and find potential transfer candidates.
 */
-void Economy::process_requests(Game & game, RSPairStruct & s)
+void Economy::_process_requests(Game & game, RSPairStruct & s)
 {
 	container_iterate_const(RequestList, m_requests, i) {
 		Request & req = **i.current;
@@ -677,7 +677,7 @@ void Economy::process_requests(Game & game, RSPairStruct & s)
 	}
 
 	// TODO: This function should be called from time to time
-	create_requested_workers (game);
+	_create_requested_workers (game);
 }
 
 
@@ -685,7 +685,7 @@ void Economy::process_requests(Game & game, RSPairStruct & s)
  * Walk all Requests and find requests of workers than aren't supplied. Then
  * try to create the worker at warehouses.
 */
-void Economy::create_requested_workers(Game & game)
+void Economy::_create_requested_workers(Game & game)
 {
 	/*
 		Find the request of workers that can not be supplied
@@ -750,7 +750,7 @@ void Economy::balance_requestsupply(uint32_t const timerid)
 	if (upcast(Game, game, &m_owner.egbase())) {
 
 		//  Try to fulfill non-idle Requests.
-		process_requests(*game, rsps);
+		_process_requests(*game, rsps);
 
 		//  Now execute request/supply pairs.
 		while (rsps.queue.size()) {
@@ -777,7 +777,7 @@ void Economy::balance_requestsupply(uint32_t const timerid)
 		}
 
 		if (rsps.nexttimer > 0) //  restart the timer, if necessary
-			start_request_timer(rsps.nexttimer);
+			_start_request_timer(rsps.nexttimer);
 	}
 }
 

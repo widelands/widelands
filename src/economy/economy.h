@@ -145,20 +145,26 @@ struct Economy {
 
 	void balance_requestsupply(uint32_t timerid); ///< called by \ref Cmd_Call_Economy_Balance
 
-	void rebalance_supply() {start_request_timer();}
+	void rebalance_supply() { _start_request_timer();}
 
 private:
-	void do_remove_flag(Flag &);
+/*************/
+/* Functions */
+/*************/
+	void _remove_flag(Flag &);
 
-	void do_merge(Economy &);
-	void do_split(Flag &);
+	void _merge(Economy &);
+	void _split(Flag &);
 
-	void start_request_timer(int32_t delta = 200);
+	void _start_request_timer(int32_t delta = 200);
 
-	Supply * find_best_supply(Game &, Request const &, int32_t & cost);
-	void process_requests(Game &, RSPairStruct &);
-	void create_requested_workers(Game &);
+	Supply * _find_best_supply(Game &, Request const &, int32_t & cost);
+	void _process_requests(Game &, RSPairStruct &);
+	void _create_requested_workers(Game &);
 
+/*************/
+/* Variables */
+/*************/
 	typedef std::vector<Request *> RequestList;
 
 	Player & m_owner;
