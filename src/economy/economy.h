@@ -25,7 +25,7 @@
 #include "supply_list.h"
 #include "ui_unique_window.h"
 #include "warelist.h"
-#include "widelands.h"
+
 
 /**
  * Economy represents a network of Flag through which wares can be transported.
@@ -36,15 +36,12 @@ struct Game;
 struct Flag;
 struct Route;
 struct RSPairStruct;
-struct Cmd_SetTargetQuantity;
-struct Cmd_ResetTargetQuantity;
 struct Warehouse;
 struct Request;
 struct Supply;
 struct Router;
 
 struct Economy {
-	friend struct Request;
 	friend struct EconomyDataPacket;
 
 	/// Configurable target quantity for the supply of a ware type in the
