@@ -941,7 +941,7 @@ PlayerImmovable::~PlayerImmovable()
 {
 	if (m_workers.size())
 		log
-			("Building::~Building: %lu workers left!\n",
+			("PlayerImmovable::~PlayerImmovable: %lu workers left!\n",
 			 static_cast<long unsigned int>(m_workers.size()));
 }
 
