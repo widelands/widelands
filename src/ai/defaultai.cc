@@ -122,7 +122,7 @@ void DefaultAI::think ()
 	// build some roads if needed
 	if (next_road_due <= gametime) {
 		next_road_due = gametime + 1000;
-		if(construct_roads ()) {
+		if (construct_roads ()) {
 			m_buildable_changed = true;
 			m_mineable_changed = true;
 			return;
@@ -690,7 +690,7 @@ bool DefaultAI::construct_building ()
 						prio -= 12;
 
 					// Check if the produced wares are needed
-						container_iterate(std::list<EconomyObserver *>, economies, l) {
+					container_iterate(std::list<EconomyObserver *>, economies, l) {
 						for (uint32_t m = 0; m < j->outputs.size(); ++m) {
 							Ware_Index wt(static_cast<size_t>(j->outputs[m]));
 							//FIXME segfault in economy.h -> target_quantity(Ware_Index const i)

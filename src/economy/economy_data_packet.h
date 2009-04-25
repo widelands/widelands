@@ -25,23 +25,23 @@
 
 namespace Widelands {
 class Economy;
-class Game; 
+class Game;
 class Map_Map_Object_Loader;
 class Map_Map_Object_Saver;
 
 class EconomyDataPacket {
 	public:
-		EconomyDataPacket(Economy* e) : m_eco(e) { }
+		EconomyDataPacket(Economy * e) : m_eco(e) {}
 
 		void Read(FileRead &);
 		void Write(FileWrite &);
-	
+
 	private:
-		Economy* m_eco; 
+		Economy * m_eco;
 };
 
 }
 
-#endif 
+#endif
 
 

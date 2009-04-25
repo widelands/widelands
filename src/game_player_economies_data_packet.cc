@@ -33,7 +33,7 @@ namespace Widelands {
 
 
 void Game_Player_Economies_Data_Packet::Read
-	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const )
+	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const)
 throw (_wexception)
 {
 	FileRead fr;
@@ -94,7 +94,7 @@ throw (_wexception)
  * Write Function
  */
 void Game_Player_Economies_Data_Packet::Write
-	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const )
+	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -113,7 +113,7 @@ throw (_wexception)
 				if (upcast(Flag const, flag, field->get_immovable())) {
 					if (flag->get_economy() == *i.current) {
 						fw.Map_Index32(field - &field_0);
-						
+
 						EconomyDataPacket d(flag->get_economy());
 						d.Write(fw);
 						break;
