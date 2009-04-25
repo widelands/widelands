@@ -45,8 +45,6 @@ struct Router;
 
 struct Economy {
 	friend struct Request;
-	friend struct Cmd_SetTargetQuantity;
-	friend struct Cmd_ResetTargetQuantity;
 	friend struct EconomyDataPacket;
 
 	/// Configurable target quantity for the supply of a ware type in the
@@ -98,6 +96,8 @@ struct Economy {
 	void    add_flag(Flag &);
 	void remove_flag(Flag &);
 	Flag & get_arbitrary_flag();
+
+	void set_target_quantity( Ware_Index, uint32_t, uint32_t, Time );
 
 	void    add_wares  (Ware_Index, uint32_t count = 1);
 	void remove_wares  (Ware_Index, uint32_t count = 1);

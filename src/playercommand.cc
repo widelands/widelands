@@ -686,12 +686,8 @@ void Cmd_SetTargetQuantity::execute(Game & game)
 		(economy  () < player.get_nr_economies() and
 		 ware_type() < player.tribe().get_nrwares())
 	{
-		Economy::Target_Quantity & tq =
-			player.get_economy_by_number(economy())->m_target_quantities
-				[ware_type().value()];
-		tq.permanent     = m_permanent;
-		tq.temporary     = m_temporary;
-		tq.last_modified = duetime();
+		player.get_economy_by_number(economy())->set_target_quantity( 
+				ware_type(),  m_permanent, m_temporary, duetime() );
 	}
 }
 
@@ -754,12 +750,9 @@ void Cmd_ResetTargetQuantity::execute(Game & game)
 		(economy  () < player.get_nr_economies() and
 		 ware_type() < tribe.get_nrwares())
 	{
-		Economy::Target_Quantity & tq =
-			player.get_economy_by_number(economy())->m_target_quantities
-				[ware_type().value()];
-		tq.temporary = tq.permanent =
-			tribe.get_ware_descr(ware_type())->default_target_quantity();
-		tq.last_modified = 0;
+		int32_t count = tribe.get_ware_descr(ware_type())->default_target_quantity();
+		player.get_economy_by_number(economy())->set_target_quantity( 
+				ware_type(),  count, count, 0 );
 	}
 }
 
