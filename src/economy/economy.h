@@ -110,7 +110,6 @@ struct Economy {
 	uint32_t get_nr_warehouses() const {return m_warehouses.size();}
 
 	void    add_request(Request &);
-	bool   have_request(Request &);
 	void remove_request(Request &);
 
 	void    add_supply(Supply &);
@@ -161,6 +160,8 @@ private:
 	Supply * _find_best_supply(Game &, Request const &, int32_t & cost);
 	void _process_requests(Game &, RSPairStruct &);
 	void _create_requested_workers(Game &);
+	
+	bool   _has_request(Request &);
 
 /*************/
 /* Variables */

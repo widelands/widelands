@@ -316,7 +316,7 @@ void Economy::remove_warehouse(Warehouse *wh)
 void Economy::add_request(Request & req)
 {
 	assert(req.is_open());
-	assert(!have_request(req));
+	assert(!_has_request(req));
 
 	assert(&owner());
 
@@ -330,7 +330,7 @@ void Economy::add_request(Request & req)
  * \return true if the given Request is registered with the \ref Economy, false
  * otherwise
 */
-bool Economy::have_request(Request & req)
+bool Economy::_has_request(Request & req)
 {
 	return
 		std::find(m_requests.begin(), m_requests.end(), &req)
@@ -509,7 +509,7 @@ void Economy::_start_request_timer(int32_t const delta)
  * Find the supply that is best suited to fulfill the given request.
  * \return 0 if no supply is found, the best supply otherwise
 */
-Supply * Economy::find_best_supply
+Supply * Economy::_find_best_supply
 	(Game & game, Request const & req, int32_t & cost)
 {
 	assert(req.is_open());
@@ -631,7 +631,7 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 		}
 
 		Ware_Index const ware_index = req.get_index();
-		Supply * const supp = find_best_supply(game, req, cost);
+		Supply * const supp = _find_best_supply(game, req, cost);
 
 		if (!supp)
 			continue;
@@ -761,7 +761,7 @@ void Economy::balance_requestsupply(uint32_t const timerid)
 			if
 				(!rsp.request               ||
 				 !rsp.supply                ||
-				 !have_request(*rsp.request) ||
+				 !_has_request(*rsp.request) ||
 				 !rsp.supply->nr_supplies(*game, *rsp.request))
 			{
 				rsps.nexttimer = 200;
@@ -772,7 +772,7 @@ void Economy::balance_requestsupply(uint32_t const timerid)
 			rsp.request->set_last_request_time(owner().egbase().get_gametime());
 
 			//  for multiple wares
-			if (rsp.request && have_request(*rsp.request))
+			if (rsp.request && _has_request(*rsp.request))
 				rsps.nexttimer = 200;
 		}
 
