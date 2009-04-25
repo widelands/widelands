@@ -437,7 +437,7 @@ bool Game::run
 
 		// Everything prepared, send the first trigger event
 		// We lie about the sender here. Hey, what is one lie in a lifetime?
-		enqueue_command (new Cmd_CheckEventChain(get_gametime(), -1));
+		enqueue_command (new Cmd_CheckEventChain(get_gametime(), static_cast<uint16_t>(-1)));
 	}
 
 	if (m_writereplay) {
@@ -876,7 +876,7 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 		const Player_Number nr_players = map().get_nrplayers();
 		m_general_stats.resize(nr_players);
 
-		iterate_players_existing(p, nr_players, *this, plr) {
+		iterate_players_existing_novar(p, nr_players, *this) {
 			m_general_stats[p - 1].land_size       .resize(entries);
 			m_general_stats[p - 1].nr_workers      .resize(entries);
 			m_general_stats[p - 1].nr_buildings    .resize(entries);
@@ -891,7 +891,7 @@ void Game::ReadStatistics(FileRead & fr, uint32_t const version)
 			m_general_stats[p - 1].miltary_strength.resize(entries);
 		}
 
-		iterate_players_existing(p, nr_players, *this, plr)
+		iterate_players_existing_novar(p, nr_players, *this)
 			for (uint32_t j = 0; j < m_general_stats[p - 1].land_size.size(); ++j)
 			{
 				m_general_stats[p - 1].land_size       [j] = fr.Unsigned32();
@@ -929,7 +929,7 @@ void Game::WriteStatistics(FileWrite & fw)
 	uint32_t entries = 0;
 
 	const Player_Number nr_players = map().get_nrplayers();
-	iterate_players_existing(p, nr_players, *this, plr)
+	iterate_players_existing_novar(p, nr_players, *this)
 		if (m_general_stats.size()) {
 			entries = m_general_stats[p - 1].land_size.size();
 			break;
@@ -937,7 +937,7 @@ void Game::WriteStatistics(FileWrite & fw)
 
 	fw.Unsigned16(entries);
 
-	iterate_players_existing(p, nr_players, *this, plr)
+	iterate_players_existing_novar(p, nr_players, *this)
 		for (uint32_t j = 0; j < entries; ++j) {
 			fw.Unsigned32(m_general_stats[p - 1].land_size       [j]);
 			fw.Unsigned32(m_general_stats[p - 1].nr_workers      [j]);
