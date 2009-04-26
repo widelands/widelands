@@ -22,10 +22,11 @@
 
 #include <vector>
 
+#include "map.h"
 #include "widelands.h"
 #include "widelands_geometry.h"
 
-namespace Widelands { 
+namespace Widelands {
 
 /** class Path
  *
@@ -87,8 +88,8 @@ private:
 	std::vector<Coords>  m_coords; //  m_coords.size() == m_path.size() + 1
 };
 
-} 
+}
 
-#endif 
+#endif
 
 

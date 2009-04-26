@@ -17,9 +17,9 @@
  *
  */
 
-#include <algorithm>
-
 #include "path.h"
+
+#include <algorithm>
 
 #include "map.h"
 #include "instances.h"
