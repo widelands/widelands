@@ -25,6 +25,8 @@
 #include "constants.h"
 #include "world.h"
 
+#include "roadtype.h"
+
 #include "widelands.h"
 
 #include <cassert>
@@ -78,27 +80,6 @@ enum FieldCaps {
 	/// their path. Without this clause, harbours would be kind of impossible ;)
 	/// This clause stops ducks from "swimwalking" along the coast.
 	MOVECAPS_SWIM = 64,
-};
-
-/** \todo: This are two enums in one. They do not have a true logical connection.
- *
- * The first 5 enums define what kind of roads this are, the other three in which
- * direction they point for a field. Still, the first few are needed for the 
- * drawing code to keep around what kind of road it should draw. I guess that is 
- * the reason why it was combined in the first place. Still it is ugly. 
- *
- * SirVer 
- */
-enum Roads {
-	Road_None = 0,
-	Road_Normal = 1,
-	Road_Busy = 2,
-	Road_Water = 3,
-	Road_Mask = 3,
-
-	Road_East      = 0, //  shift values
-	Road_SouthEast = 2,
-	Road_SouthWest = 4,
 };
 
 struct Terrain_Descr;

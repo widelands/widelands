@@ -38,6 +38,7 @@
 #include "wexception.h"
 #include "worker.h"
 #include "world.h"
+#include "roadtype.h"
 
 
 #include <set>

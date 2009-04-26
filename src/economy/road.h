@@ -22,12 +22,9 @@
 
 #include "immovable.h"
 #include "path.h"
-
-/// \todo: for Road_Normal. This shouldn't be here
-#include "field.h"
+#include "roadtype.h"
 
 namespace Widelands {
-
 struct Request;
 
 /**
