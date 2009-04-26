@@ -217,17 +217,17 @@ void Economy::_remove_flag(Flag & flag)
 		}
 	throw wexception("trying to remove nonexistent flag");
 }
-	
+
 /**
- * Set the target quantities for the given Ware_Index to the 
+ * Set the target quantities for the given Ware_Index to the
  * numbers given in permanent and temporary. Also update the last
- * modification time. 
+ * modification time.
  *
  * This is called from Cmd_ResetTargetQuantity and Cmd_SetTargetQuantity
  */
-void Economy::set_target_quantity( Ware_Index ware_type, uint32_t permanent, uint32_t temporary, Time mod_time) {
+void Economy::set_target_quantity(Ware_Index ware_type, uint32_t permanent, uint32_t temporary, Time mod_time) {
 	Target_Quantity & tq = m_target_quantities[ware_type.value()];
-	tq.temporary = temporary; 
+	tq.temporary = temporary;
 	tq.permanent = permanent;
 	tq.last_modified = mod_time;
 }

@@ -63,8 +63,11 @@ private:
 	Coords _position;
 };
 void DummyRoutingNode::get_neighbours(RoutingNodeNeighbours * n) {
-	for (Neigbours::iterator i = _neighbours.begin(); i != _neighbours.end();
-			i++) {
+	for
+		(Neigbours::iterator i = _neighbours.begin();
+		 i != _neighbours.end();
+		 i++)
+	{
 		RoutingNodeNeighbour nb(*i, 1000); // second parameter is walktime in ms from this flag to the neighbour. only depends on slope
 		n->push_back(nb);
 	}
@@ -320,24 +323,26 @@ BOOST_FIXTURE_TEST_CASE(DummyRoute_init, SimpleRouterFixture) {
 /* SIMPLE TESTS */
 /****************/
 BOOST_FIXTURE_TEST_CASE(router_findroute_seperatedNodes_exceptFail, SimpleRouterFixture) {
-	bool rval = r.find_route(*d0, *d1,
-			&route,
-			false,
-			-1,
-			cc,
-			vec);
+	bool rval = r.find_route
+		(*d0, *d1,
+		 &route,
+		 false,
+		 -1,
+		 cc,
+		 vec);
 
 	BOOST_CHECK_EQUAL(rval, false);
 }
 BOOST_FIXTURE_TEST_CASE(router_findroute_connectedNodes_exceptSuccess, SimpleRouterFixture) {
 	d0->add_neighbour(d1);
 	d1->add_neighbour(d0);
-	bool rval = r.find_route(*d0, *d1,
-			&route,
-			false,
-			-1,
-			cc,
-			vec);
+	bool rval = r.find_route
+		(*d0, *d1,
+		 &route,
+		 false,
+		 -1,
+		 cc,
+		 vec);
 
 	BOOST_CHECK_EQUAL(rval, true);
 }
@@ -360,9 +365,10 @@ struct ComplexRouterFixture {
 	/**
 	  * Convenience function
 	  */
-	DummyRoutingNode * new_node_w_neighbour(DummyRoutingNode * d,
-			Coords pos = Coords(0, 0),
-			int32_t roadcost = 1, int32_t waitcost = 0)
+	DummyRoutingNode * new_node_w_neighbour
+		(DummyRoutingNode * d,
+		 Coords pos = Coords(0, 0),
+		 int32_t roadcost = 1, int32_t waitcost = 0)
 	{
 		DummyRoutingNode * d0 = new DummyRoutingNode(roadcost, waitcost, pos);
 
@@ -454,12 +460,13 @@ BOOST_FIXTURE_TEST_CASE(find_long_route, ComplexRouterFixture) {
 
 	new_node_w_neighbour(d0);
 
-	bool rval = r.find_route(*d0, *d5,
-			&route,
-			false,
-			-1,
-			cc,
-			nodes);
+	bool rval = r.find_route
+		(*d0, *d5,
+		 &route,
+		 false,
+		 -1,
+		 cc,
+		 nodes);
 
 	BOOST_CHECK_EQUAL(rval, true);
 
@@ -472,12 +479,13 @@ BOOST_FIXTURE_TEST_CASE(find_long_route, ComplexRouterFixture) {
 	// directly connect d0 -> d5
 	d0->add_neighbour(d5);
 
-	rval = r.find_route(*d0, *d5,
-			&route,
-			false,
-			-1,
-			cc,
-			nodes);
+	rval = r.find_route
+		(*d0, *d5,
+		 &route,
+		 false,
+		 -1,
+		 cc,
+		 nodes);
 
 	BOOST_CHECK_EQUAL(rval, true);
 
@@ -519,12 +527,13 @@ BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 	chain.push_back(d1);
 	chain.push_back(end);
 
-	bool rval = r.find_route(*start, *end,
-		&route,
-		false,
-		-1,
-		cc,
-		nodes);
+	bool rval = r.find_route
+		(*start, *end,
+		 &route,
+		 false,
+		 -1,
+		 cc,
+		 nodes);
 
 	BOOST_CHECK(rval);
 	BOOST_CHECK(route.has_chain(chain));
@@ -533,22 +542,24 @@ BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 	d1->set_waitcost(6);
 
 	// Same result without wait
-	rval = r.find_route(*start, *end,
-		&route,
-		false,
-		-1,
-		cc,
-		nodes);
+	rval = r.find_route
+		(*start, *end,
+		 &route,
+		 false,
+		 -1,
+		 cc,
+		 nodes);
 	BOOST_CHECK(rval);
 	BOOST_CHECK(route.has_chain(chain));
 
 	// With wait, we take the long route
-	rval = r.find_route(*start, *end,
-		&route,
-		true,
-		-1,
-		cc,
-		nodes);
+	rval = r.find_route
+		(*start, *end,
+		 &route,
+		 true,
+		 -1,
+		 cc,
+		 nodes);
 
 	chain.clear();
 	chain.push_back(start);
@@ -567,12 +578,13 @@ BOOST_FIXTURE_TEST_CASE(cutoff, DistanceRoutingFixture) {
 
 	RoutingNode * end = add_chain(4, d0, &chain);
 
-	bool rval = r.find_route(*d0, *end,
-		&route,
-		false,
-		1000,
-		cc,
-		nodes);
+	bool rval = r.find_route
+		(*d0, *end,
+		 &route,
+		 false,
+		 1000,
+		 cc,
+		 nodes);
 
 	BOOST_CHECK_EQUAL(rval, false);
 }

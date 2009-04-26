@@ -84,7 +84,7 @@ public:
 
 	Coords get_position() const {return m_position;}
 	void get_neighbours(RoutingNodeNeighbours *);
-	int32_t get_waitcost(void) { return m_item_filled; }
+	int32_t get_waitcost() {return m_item_filled;}
 
 	virtual void set_economy(Economy *);
 

@@ -94,7 +94,7 @@ struct Economy {
 	void remove_flag(Flag &);
 	Flag & get_arbitrary_flag();
 
-	void set_target_quantity( Ware_Index, uint32_t, uint32_t, Time );
+	void set_target_quantity(Ware_Index, uint32_t, uint32_t, Time);
 
 	void    add_wares  (Ware_Index, uint32_t count = 1);
 	void remove_wares  (Ware_Index, uint32_t count = 1);
@@ -141,7 +141,7 @@ struct Economy {
 
 	void balance_requestsupply(uint32_t timerid); ///< called by \ref Cmd_Call_Economy_Balance
 
-	void rebalance_supply() { _start_request_timer();}
+	void rebalance_supply() {_start_request_timer();}
 
 private:
 /*************/
@@ -157,7 +157,7 @@ private:
 	Supply * _find_best_supply(Game &, Request const &, int32_t & cost);
 	void _process_requests(Game &, RSPairStruct &);
 	void _create_requested_workers(Game &);
-	
+
 	bool   _has_request(Request &);
 
 /*************/
