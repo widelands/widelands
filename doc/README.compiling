@@ -54,19 +54,12 @@ scons
 Using scons for building is the preferred way starting with Widelands-build10.
 We still support make, but the motivation to do so is dwindling rapidly.
 
-If you already have scons installed on your machine, change to the Widelands
-directory and execute "scons". That's it.
+Change to the Widelands directory and execute "scons". That's it.
 
 This will use the default build type, which is "release" for published releases
 (who'd have guessed? *g*) and "debug" anytime else. If you want to change the
 build type, execute e.g. "scons build=debug". To see all available types, do
 "scons -h"
-
-If you don't have scons installed, you can still build Widelands: just replace
-"scons" with "./build-widelands.sh" in the above instructions. This is a
-wrapper around a minimal version of scons that we deliver together with
-widelands. You can even use this for development, but we recommend a full
-install anyway.
 
 Several other build targets are available :-) but mostly not documented yet :-(
 

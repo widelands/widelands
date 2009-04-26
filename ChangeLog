@@ -1,4 +1,7 @@
 ### Build 14 (until now)
+- Throw out the bundled version of scons. Scons is widely available by now and
+  the bundled version caused more trouble than it was worth: many incompati-
+  bilities, where a distro-supplied version would have worked (svn:r3929)
 - Fix bug #2351257 - wrong game tips are shown. (svn:r3809)
 - Some improvements of tribes economy and soldier balance (svn:r3793, svn:r3796)
 - Added third barbarian campaign (svn:r3790) and improved the already existing ones (svn:r3775, svn:r3788)

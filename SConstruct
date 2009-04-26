@@ -84,8 +84,8 @@ def cli_options():
 	opts.Add('localedir', '(absolute or relative to install_prefix)', 'share/games/widelands/locale')
 	opts.Add('extra_include_path', '', '')
 	opts.Add('extra_lib_path', '', '')
-	opts.Add('extra_compile_flags', '(does not work with build-widelands.sh!)', '')
-	opts.Add('extra_link_flags', '(does not work with build-widelands.sh!)', '')
+	opts.Add('extra_compile_flags', '', '')
+	opts.Add('extra_link_flags', '', '')
 	opts.AddVariables(
 		BoolVariable('enable_sdl_parachute', 'Enable SDL parachute?', False),
 		BoolVariable('enable_efence', 'Use the efence memory debugger?', False),
@@ -215,12 +215,12 @@ instadd(env, 'COPYING', 'doc')
 instadd(env, 'CREDITS', 'doc')
 instadd(env, 'widelands', filetype='binary')
 
-install=env.Install('installtarget', 'build-widelands.sh') # the second argument is a (neccessary) dummy
+install=env.Install('installtarget', 'COPYING') # the second argument is a (neccessary) dummy
 Alias('install', install)
 AlwaysBuild(install)
 env.AddPreAction(install, Action(buildlocale))
 
-uninstall=env.Uninstall('uninstalltarget', 'build-widelands.sh') # the second argument is a (neccessary) dummy
+uninstall=env.Uninstall('uninstalltarget', 'COPYING') # the second argument is a (neccessary) dummy
 Alias('uninstall', uninstall)
 Alias('uninst', uninstall)
 AlwaysBuild(uninstall)
@@ -232,9 +232,8 @@ distadd(env, 'COPYING')
 distadd(env, 'CREDITS')
 distadd(env, 'Makefile')
 distadd(env, 'SConstruct')
-distadd(env, 'build-widelands.sh')
 
-dist=env.DistPackage('widelands-'+get_build_id(env), 'build-widelands.sh') # the second argument is a (neccessary) dummy
+dist=env.DistPackage('widelands-'+get_build_id(env), 'COPYING') # the second argument is a (neccessary) dummy
 Alias('dist', dist)
 AlwaysBuild(dist)
 
