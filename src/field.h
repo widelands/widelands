@@ -80,11 +80,13 @@ enum FieldCaps {
 	MOVECAPS_SWIM = 64,
 };
 
-/** \todo: This are two enums in one. As far as I can say they have no connection
- * The first 5 enums define what kind of roads this are, the other three in which
- * direction the point for a field. 
+/** \todo: This are two enums in one. They do not have a true logical connection.
  *
- * Imho the first 5 should be in road.h, the others can remain here. 
+ * The first 5 enums define what kind of roads this are, the other three in which
+ * direction they point for a field. Still, the first few are needed for the 
+ * drawing code to keep around what kind of road it should draw. I guess that is 
+ * the reason why it was combined in the first place. Still it is ugly. 
+ *
  * SirVer 
  */
 enum Roads {
