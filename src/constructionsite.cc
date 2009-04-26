@@ -19,7 +19,7 @@
 
 #include "constructionsite.h"
 
-#include "animation.h"
+#include "graphic/animation.h"
 #include "economy/request.h"
 #include "economy/wares_queue.h"
 #include "editor_game_base.h"
@@ -27,7 +27,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "player.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
 #include "upcast.h"

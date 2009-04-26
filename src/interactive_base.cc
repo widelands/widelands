@@ -34,7 +34,7 @@
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
 #include "minimap.h"
-#include "overlay_manager.h"
+#include "graphic/overlay_manager.h"
 #include "player.h"
 #include "profile.h"
 #include "upcast.h"

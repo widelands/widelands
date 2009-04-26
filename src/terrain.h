@@ -23,7 +23,7 @@
 #include "graphic/graphic.h"
 #include "mapviewpixelconstants.h"
 #include "random.h"
-#include "surface.h"
+#include "graphic/surface.h"
 
 #include "vertex.h"
 

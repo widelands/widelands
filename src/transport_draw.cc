@@ -21,7 +21,7 @@
 #include "economy/road.h"
 #include "economy/ware_instance.h"
 #include "editor_game_base.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 
 namespace Widelands {
 

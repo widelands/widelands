@@ -21,7 +21,7 @@
 
 #include "ui_panel.h"
 #include "ui_signal.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 #include "graphic/graphic.h"
 
 #include "rgbcolor.h"

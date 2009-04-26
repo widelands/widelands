@@ -24,7 +24,7 @@
 #include "graphic/graphic.h"
 #include "map.h"
 #include "world.h"
-#include "overlay_manager.h"
+#include "graphic/overlay_manager.h"
 #include "worlddata.h"
 
 using Widelands::TCoords;

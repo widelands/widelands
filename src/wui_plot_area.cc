@@ -23,7 +23,7 @@
 #include "font_loader.h"
 #include "font_handler.h"
 #include "graphic/graphic.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 #include "rgbcolor.h"
 
 #include "ui_panel.h"

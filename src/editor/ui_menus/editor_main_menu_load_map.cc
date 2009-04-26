@@ -28,7 +28,7 @@
 #include "wexception.h"
 #include "editor_game_base.h"
 #include "editor_set_starting_pos_tool.h"
-#include "overlay_manager.h"
+#include "graphic/overlay_manager.h"
 #include "world.h"
 #include "map_io/map_loader.h"
 

@@ -42,7 +42,7 @@
 #include "helper.h"
 #include "i18n.h"
 #include "immovable.h"
-#include "overlay_manager.h"
+#include "graphic/overlay_manager.h"
 #include "player.h"
 #include "productionsite.h"
 #include "profile.h"

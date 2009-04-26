@@ -21,7 +21,7 @@
 
 #include "constants.h"
 #include "font_handler.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 #include "rgbcolor.h"
 
 #include <cstdio>

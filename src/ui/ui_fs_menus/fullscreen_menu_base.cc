@@ -23,7 +23,7 @@
 #include "graphic/graphic.h"
 #include "log.h"
 #include "profile.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 #include "wlapplication.h"
 
 #include <cstdio>

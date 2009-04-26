@@ -23,7 +23,7 @@
 #include "font_handler.h"
 #include "graphic/graphic.h"
 #include "profile.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
 

@@ -24,9 +24,9 @@
 #include "interactive_player.h"
 #include "map.h"
 #include "mapviewpixelfunctions.h"
-#include "overlay_manager.h"
+#include "graphic/overlay_manager.h"
 #include "player.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 #include "wlapplication.h"
 
 #include "upcast.h"

@@ -25,7 +25,7 @@
 #include "editor_game_base.h"
 #include "map.h"
 #include "mapview.h"
-#include "overlay_manager.h"
+#include "graphic/overlay_manager.h"
 
 #include "ui_box.h"
 #include "ui_textarea.h"

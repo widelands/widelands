@@ -23,7 +23,7 @@
 #include "item_ware_descr.h"
 #include "player.h"
 #include "playercommand.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 #include "tribe.h"
 #include "ui_button.h"
 #include "ui_unique_window.h"

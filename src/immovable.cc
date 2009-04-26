@@ -28,7 +28,7 @@
 #include "map.h"
 #include "mapfringeregion.h"
 #include "profile.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
 #include "wexception.h"

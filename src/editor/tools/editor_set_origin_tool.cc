@@ -22,7 +22,7 @@
 #include "editorinteractive.h"
 #include "map.h"
 #include "mapviewpixelconstants.h"
-#include "overlay_manager.h"
+#include "graphic/overlay_manager.h"
 
 int32_t Editor_Set_Origin_Tool::handle_click_impl
 	(Widelands::Map               &       map,

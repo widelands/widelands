@@ -31,7 +31,7 @@
 #include "militarysite.h"
 #include "player.h"
 #include "profile.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 #include "rgbcolor.h"
 #include "tribe.h"
 #include "upcast.h"

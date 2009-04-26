@@ -20,7 +20,7 @@
 #ifndef TRIBE_H
 #define TRIBE_H
 
-#include "animation.h"
+#include "graphic/animation.h"
 #include "bob.h"
 #include "building.h"
 #include "descr_maintainer.h"

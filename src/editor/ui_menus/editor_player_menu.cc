@@ -24,7 +24,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "map.h"
-#include "overlay_manager.h"
+#include "graphic/overlay_manager.h"
 #include "player.h"
 #include "tribe.h"
 #include "warehouse.h"

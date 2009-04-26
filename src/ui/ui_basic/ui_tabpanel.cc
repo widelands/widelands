@@ -22,7 +22,7 @@
 #include "ui_constants.h"
 
 #include "graphic/graphic.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 
 namespace UI {
 #define TP_BUTTON_WIDTH     34

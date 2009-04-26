@@ -25,8 +25,8 @@
 #include "font_loader.h"
 #include "graphic/graphic.h"
 #include "helper.h"
-#include "rendertarget.h"
-#include "surface.h"
+#include "graphic/rendertarget.h"
+#include "graphic/surface.h"
 #include "wexception.h"
 #include "text_parser.h"
 

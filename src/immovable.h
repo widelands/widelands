@@ -20,7 +20,7 @@
 #ifndef IMMOVABLE_H
 #define IMMOVABLE_H
 
-#include "animation.h"
+#include "graphic/animation.h"
 #include "instances.h"
 #include "widelands_geometry.h"
 

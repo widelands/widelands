@@ -22,7 +22,7 @@
 #include "game.h"
 #include "interactive_player.h"
 #include "mapview.h"
-#include "overlay_manager.h"
+#include "graphic/overlay_manager.h"
 #include "player.h"
 #include "tribe.h"
 #include "widelands_fileread.h"

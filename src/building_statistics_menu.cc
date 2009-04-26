@@ -26,7 +26,7 @@
 #include "mapviewpixelconstants.h"
 #include "player.h"
 #include "productionsite.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 #include "tribe.h"
 #include "wui_plot_area.h"
 

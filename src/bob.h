@@ -20,7 +20,7 @@
 #ifndef BOB_H
 #define BOB_H
 
-#include "animation.h"
+#include "graphic/animation.h"
 #include "writeHTML.h"
 
 #include <cassert>

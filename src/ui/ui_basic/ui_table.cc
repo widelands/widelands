@@ -20,7 +20,7 @@
 #include "ui_table.h"
 
 #include "graphic/graphic.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 #include "ui_button.h"
 #include "ui_constants.h"
 #include "ui_scrollbar.h"

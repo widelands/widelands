@@ -24,7 +24,7 @@
 #include "editor_tool.h"
 #include "graphic/graphic.h"
 #include "map.h"
-#include "overlay_manager.h"
+#include "graphic/overlay_manager.h"
 
 // global variable to pass data from callback to class
 static int32_t m_current_player;

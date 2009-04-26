@@ -33,7 +33,7 @@
 #include "i18n.h"
 #include "interactive_base.h"
 #include "map.h"
-#include "overlay_manager.h"
+#include "graphic/overlay_manager.h"
 #include "player.h"
 #include "profile.h"
 #include "tribe.h"

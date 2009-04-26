@@ -31,7 +31,7 @@
 #include "interactive_player.h"
 #include "maphollowregion.h"
 #include "militarysite.h"
-#include "overlay_manager.h"
+#include "graphic/overlay_manager.h"
 #include "player.h"
 #include "soldier.h"
 #include "tribe.h"

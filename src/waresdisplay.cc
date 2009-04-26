@@ -24,7 +24,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "player.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 #include "tribe.h"
 #include "worker.h"
 

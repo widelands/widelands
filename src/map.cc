@@ -29,7 +29,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "map_io/widelands_map_loader.h"
 #include "mapfringeregion.h"
-#include "overlay_manager.h"
+#include "graphic/overlay_manager.h"
 #include "pathfield.h"
 #include "player.h"
 #include "s2map.h"

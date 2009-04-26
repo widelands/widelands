@@ -26,7 +26,7 @@
 #include "field.h"
 #include "editorinteractive.h"
 #include "world.h"
-#include "overlay_manager.h"
+#include "graphic/overlay_manager.h"
 
 /**
  * Sets the resources of the current to a fixed value

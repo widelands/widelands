@@ -26,7 +26,7 @@
 #include "interactive_player.h"
 #include "map.h"
 #include "mapviewpixelconstants.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 
 
 MiniMap::View::View

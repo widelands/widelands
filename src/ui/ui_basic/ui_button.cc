@@ -23,7 +23,7 @@
 
 #include "font_handler.h"
 #include "graphic/graphic.h"
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 #include "wlapplication.h"
 
 namespace UI {
