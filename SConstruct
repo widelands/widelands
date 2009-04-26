@@ -91,6 +91,7 @@ def cli_options():
 		BoolVariable('enable_efence', 'Use the efence memory debugger?', False),
 		BoolVariable('enable_ggz', 'Use the GGZ Gamingzone?', False),
 		BoolVariable('prefer_localdata', 'Useful for developers. Use data and locales from ./ at runtime', True),
+		BoolVariable('pretty_compile_output', 'Suppress link and compile commands, only print a very short info text and occurring errors and warnings.', True),
 		)
 	return opts
 
@@ -131,6 +132,12 @@ conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',
 
 BUILDDIR=parse_cli(env, BUILD_TARGETS)
 env.Append(CPPPATH=[os.path.join('#', BUILDDIR)])
+
+# Setup pretty compile output
+if env['pretty_compile_output']:
+    env.Append(CXXCOMSTR="Compiling ==> '$TARGET'");
+    env.Append(LINKCOMSTR="Linking ==> '$TARGET'");
+
 
 print_build_info(env)
 
