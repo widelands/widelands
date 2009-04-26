@@ -21,7 +21,7 @@
 #define EVENT_ROAD_H
 
 #include "event.h"
-#include "map.h"
+#include "path.h"
 
 struct Event_Road_Option_Menu;
 

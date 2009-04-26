@@ -24,23 +24,23 @@
 #include "carrier.h"
 #include "critter_bob.h"
 #include "critter_bob_program.h"
-#include "economy/transfer.h"
 #include "economy/route.h"
+#include "economy/transfer.h"
 #include "economy/ware_instance.h"
 #include "game.h"
 #include "map.h"
 #include "militarysite.h"
+#include "path.h"
 #include "player.h"
 #include "soldier.h"
 #include "tribe.h"
+#include "upcast.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
 #include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "worker_program.h"
-
-#include "upcast.h"
 
 namespace Widelands {
 

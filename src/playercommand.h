@@ -20,9 +20,8 @@
 #ifndef PLAYERCOMMAND_H
 #define PLAYERCOMMAND_H
 
-// For Path
-#include "map.h"
 #include "cmd_queue.h"
+#include "path.h"
 #include "trainingsite.h"
 
 #include "economy/flag.h"

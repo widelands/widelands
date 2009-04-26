@@ -21,9 +21,10 @@
 #define S__ROAD_H
 
 #include "immovable.h"
+#include "path.h"
 
-// For Path
-#include "map.h"
+/// \todo: for Road_Normal. This shouldn't be here
+#include "field.h"
 
 namespace Widelands {
 
@@ -87,6 +88,9 @@ struct Road : public PlayerImmovable {
 protected:
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
+	
+	virtual void draw
+		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
 private:
 	void _set_path(Editor_Game_Base &, Path const &);
@@ -99,9 +103,6 @@ private:
 	void _request_carrier(Game &);
 	static void _request_carrier_callback
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
-
-	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
 private:
 	int32_t    m_type;       ///< use Field::Road_XXX

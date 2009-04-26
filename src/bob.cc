@@ -25,6 +25,7 @@
 #include "economy/transfer.h"
 #include "game.h"
 #include "mapviewpixelconstants.h"
+#include "path.h"
 #include "player.h"
 #include "profile.h"
 #include "rendertarget.h"

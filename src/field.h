@@ -80,6 +80,13 @@ enum FieldCaps {
 	MOVECAPS_SWIM = 64,
 };
 
+/** \todo: This are two enums in one. As far as I can say they have no connection
+ * The first 5 enums define what kind of roads this are, the other three in which
+ * direction the point for a field. 
+ *
+ * Imho the first 5 should be in road.h, the others can remain here. 
+ * SirVer 
+ */
 enum Roads {
 	Road_None = 0,
 	Road_Normal = 1,
