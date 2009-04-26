@@ -137,6 +137,8 @@ env.Append(CPPPATH=[os.path.join('#', BUILDDIR)])
 if env['pretty_compile_output']:
     env.Append(CXXCOMSTR="Compiling ==> '$TARGET'");
     env.Append(LINKCOMSTR="Linking ==> '$TARGET'");
+    env.Append(ARCOMSTR="ar ==> '$TARGET'");
+    env.Append(RANLIBCOMSTR="ranlib ==> '$TARGET'");
 
 
 print_build_info(env)
