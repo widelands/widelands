@@ -1,0 +1,8 @@
+Import('*')
+from Distribute import distadd
+
+distadd(env, 'src/game_io/SConscript')
+distadd(env, 'src/game_io/SConscript.dist')
+distadd(env, 'src/game_io/*.h')
+distadd(env, 'src/game_io/*.cc')
+

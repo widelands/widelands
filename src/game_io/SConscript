@@ -1,0 +1,8 @@
+Import('*')
+
+SRC=simpleglob("*.cc")
+
+game_io=srcenv.StaticLibrary(target='game_io', source=SRC)
+
+Return('game_io')
+

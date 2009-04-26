@@ -35,6 +35,7 @@ libs+=SConscript('ai/SConscript')
 libs+=SConscript('wui/SConscript')
 libs+=SConscript('economy/SConscript')
 libs+=SConscript('map_io/SConscript')
+libs+=SConscript('game_io/SConscript')
 libs.reverse()
 
 srcenv.Append(INDENTLIST=[

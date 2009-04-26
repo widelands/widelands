@@ -20,8 +20,8 @@
 #include "fullscreen_menu_loadreplay.h"
 
 #include "game.h"
-#include "game_loader.h"
-#include "game_preload_data_packet.h"
+#include "game_io/game_loader.h"
+#include "game_io/game_preload_data_packet.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "replay.h"

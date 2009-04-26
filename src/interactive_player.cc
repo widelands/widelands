@@ -33,7 +33,7 @@
 #include "fieldaction.h"
 #include "font_handler.h"
 #include "wui/game_chat_menu.h"
-#include "game_loader.h"
+#include "game_io/game_loader.h"
 #include "wui/game_main_menu.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_objectives_menu.h"
