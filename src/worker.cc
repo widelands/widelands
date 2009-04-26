@@ -1522,7 +1522,7 @@ void Worker::program_update(Game & game, State & state)
 		WorkerProgram const * program =
 			static_cast<WorkerProgram const *>(state.program);
 
-		if (state.ivar1 >= program->get_size())
+		if (static_cast<uint32_t>(state.ivar1) >= program->get_size())
 			return pop_task(game);
 
 		Action const & action = *program->get_action(state.ivar1);

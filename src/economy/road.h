@@ -84,7 +84,7 @@ struct Road : public PlayerImmovable {
 	bool notify_ware(Game & game, FlagId flagid);
 	virtual void remove_worker(Worker &);
 
-protected:
+private:
 	void set_path(Editor_Game_Base &, Path const &);
 
 	void mark_map(Editor_Game_Base &);
@@ -104,7 +104,7 @@ protected:
 
 private:
 	int32_t    m_type;       ///< use Field::Road_XXX
-	Flag     * m_flags  [2]; ///< start and end flag
+	Flag         * m_flags  [2]; ///< start and end flag
 	int32_t    m_flagidx[2]; ///< index of this road in the flag's road array
 
 	/// cost for walking this road (0 = from start to end, 1 = from end to start)

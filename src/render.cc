@@ -394,7 +394,7 @@ AnimationGfx::AnimationGfx(AnimationData const * data)
 	size_t const picnametempl_size = data->picnametempl.size();
 	if (sizeof(filename) < picnametempl_size + 3 + 4 + 1)
 		throw wexception
-			("buffer too small (%u) for picture name temlplate of size %u\n",
+			("buffer too small (%lu) for picture name temlplate of size %lu\n",
 			 sizeof(filename), picnametempl_size);
 	strcpy(filename, data->picnametempl.c_str());
 
@@ -587,7 +587,7 @@ end:
 		throw wexception("Animation %s has no frames", data->picnametempl.c_str());
 	if (m_pcmasks.size() and m_pcmasks.size() < m_plrframes[0].size())
 		throw wexception
-			("animation has %u frames but playercolor mask has only %u frames",
+			("animation has %zu frames but playercolor mask has only %zu frames",
 			 m_plrframes[0].size(), m_pcmasks.size());
 #ifdef VALIDATE_ANIMATION_CROPPING
 	if
