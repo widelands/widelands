@@ -28,7 +28,7 @@
 #include "productionsite.h"
 #include "graphic/rendertarget.h"
 #include "tribe.h"
-#include "wui_plot_area.h"
+#include "wui/plot_area.h"
 
 #include "ui_button.h"
 

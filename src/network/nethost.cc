@@ -24,7 +24,7 @@
 #include "computer_player.h"
 #include "fullscreen_menu_launchgame.h"
 #include "game.h"
-#include "game_tips.h"
+#include "wui/game_tips.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "interactive_spectator.h"

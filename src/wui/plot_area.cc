@@ -17,7 +17,7 @@
  *
  */
 
-#include "wui_plot_area.h"
+#include "plot_area.h"
 
 #include "constants.h"
 #include "font_loader.h"

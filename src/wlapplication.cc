@@ -36,7 +36,7 @@
 #include "fullscreen_menu_options.h"
 #include "fullscreen_menu_singleplayer.h"
 #include "game.h"
-#include "game_tips.h"
+#include "wui/game_tips.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "i18n.h"

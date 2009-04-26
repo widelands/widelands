@@ -27,7 +27,7 @@
 #include "rgbcolor.h"
 #include "tribe.h"
 #include "warelist.h"
-#include "wui_plot_area.h"
+#include "wui/plot_area.h"
 
 #include "ui_button.h"
 #include "ui_checkbox.h"

@@ -22,7 +22,7 @@
 
 #include "constants.h"
 
-#include "wui_plot_area.h"
+#include "wui/plot_area.h"
 
 #include "ui_radiobutton.h"
 #include "ui_unique_window.h"

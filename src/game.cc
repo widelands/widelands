@@ -28,7 +28,7 @@
 #include "interactive_spectator.h"
 #include "fullscreen_menu_launchgame.h"
 #include "game_loader.h"
-#include "game_tips.h"
+#include "wui/game_tips.h"
 #include "game_preload_data_packet.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"

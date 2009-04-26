@@ -20,11 +20,11 @@
 #include "interactive_spectator.h"
 
 #include "chat.h"
-#include "game_chat_menu.h"
-#include "game_main_menu_save_game.h"
-#include "game_options_menu.h"
+#include "wui/game_chat_menu.h"
+#include "wui/game_main_menu_save_game.h"
+#include "wui/game_options_menu.h"
 #include "gamecontroller.h"
-#include "general_statistics_menu.h"
+#include "wui/general_statistics_menu.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 
