@@ -1,5 +1,6 @@
 help=_Only this beer is acceptable for the old warriors. Some say, the whole power of the barbarians is in this ale.
 preciousness=2
+default_target_quantity=10
 
 [idle]
 pics=idle.png

@@ -1,5 +1,6 @@
 help=_This is the yellow goldstone.
 preciousness=2
+default_target_quantity=30
 
 [idle]
 pics=idle.png

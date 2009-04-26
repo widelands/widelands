@@ -1,5 +1,6 @@
 help=_Young warriors need some encouragement. This drink makes a man fearless and strong.
 preciousness=2
+default_target_quantity=15
 
 [idle]
 pics=idle.png

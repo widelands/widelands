@@ -1,5 +1,6 @@
 help=_Gold is the most valuable of all metals; only very important things are garnished with it.
 preciousness=2
+default_target_quantity=15
 
 [idle]
 pics=idle.png
