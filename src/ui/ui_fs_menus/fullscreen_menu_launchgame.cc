@@ -23,7 +23,7 @@
 #include "fullscreen_menu_loadgame.h"
 #include "fullscreen_menu_mapselect.h"
 #include "game.h"
-#include "gamechatpanel.h"
+#include "wui/gamechatpanel.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
