@@ -84,16 +84,17 @@ struct Road : public PlayerImmovable {
 	bool notify_ware(Game & game, FlagId flagid);
 	virtual void remove_worker(Worker &);
 
-private:
-	void set_path(Editor_Game_Base &, Path const &);
-
-	void mark_map(Editor_Game_Base &);
-	void unmark_map(Editor_Game_Base &);
-
+protected:
 	virtual void init(Editor_Game_Base &);
-	void link_into_flags(Editor_Game_Base &);
-	void check_for_carrier(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
+
+private:
+	void _set_path(Editor_Game_Base &, Path const &);
+
+	void _mark_map(Editor_Game_Base &);
+	void _unmark_map(Editor_Game_Base &);
+
+	void _link_into_flags(Editor_Game_Base &);
 
 	void request_carrier(Game &);
 	static void request_carrier_callback
@@ -104,7 +105,7 @@ private:
 
 private:
 	int32_t    m_type;       ///< use Field::Road_XXX
-	Flag         * m_flags  [2]; ///< start and end flag
+	Flag      *m_flags  [2]; ///< start and end flag
 	int32_t    m_flagidx[2]; ///< index of this road in the flag's road array
 
 	/// cost for walking this road (0 = from start to end, 1 = from end to start)

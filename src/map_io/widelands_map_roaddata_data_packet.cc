@@ -112,11 +112,11 @@ throw (_wexception)
 								 static_cast<long unsigned int>(nr_steps - i),
 								 e.what());
 						}
-					road.set_path(egbase, p);
+					road._set_path(egbase, p);
 
 					//  Now that all rudimentary data is set, init this road. Then
 					//  overwrite the initialization values.
-					road.link_into_flags(egbase);
+					road._link_into_flags(egbase);
 
 					road.m_idle_index      = fr.Unsigned32();
 					road.m_desire_carriers = fr.Unsigned32();

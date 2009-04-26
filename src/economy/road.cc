@@ -84,7 +84,7 @@ void Road::create
 	road.m_flags[FlagStart] = &start;
 	road.m_flags[FlagEnd]   = &end;
 	// m_flagidx is set when attach_road() is called, i.e. in init()
-	road.set_path(egbase, path);
+	road._set_path(egbase, path);
 	if (create_carrier) {
 		Coords idle_position = start.get_position();
 		{
@@ -142,7 +142,7 @@ int32_t Road::get_cost(FlagId fromflag)
  * Set the new path, calculate costs.
  * You have to set start and end flags before calling this function.
 */
-void Road::set_path(Editor_Game_Base & egbase, Path const & path)
+void Road::_set_path(Editor_Game_Base & egbase, Path const & path)
 {
 	assert(path.get_nsteps() >= 2);
 	assert(path.get_start() == m_flags[FlagStart]->get_position());
@@ -158,7 +158,7 @@ void Road::set_path(Editor_Game_Base & egbase, Path const & path)
 /**
  * Add road markings to the map
 */
-void Road::mark_map(Editor_Game_Base & egbase)
+void Road::_mark_map(Editor_Game_Base & egbase)
 {
 	Map & map = egbase.map();
 	FCoords curf = map.get_fcoords(m_path.get_start());
@@ -193,7 +193,7 @@ void Road::mark_map(Editor_Game_Base & egbase)
 /**
  * Remove road markings from the map
 */
-void Road::unmark_map(Editor_Game_Base & egbase) {
+void Road::_unmark_map(Editor_Game_Base & egbase) {
 	Map & map = egbase.map();
 	FCoords curf(m_path.get_start(), &map[m_path.get_start()]);
 
@@ -232,7 +232,7 @@ void Road::init(Editor_Game_Base & egbase)
 	PlayerImmovable::init(egbase);
 
 	if (2 <= m_path.get_nsteps())
-		link_into_flags(egbase);
+		_link_into_flags(egbase);
 }
 
 /**
@@ -242,11 +242,10 @@ void Road::init(Editor_Game_Base & egbase)
  * we needed to have this road already registered
  * as Map Object, thats why this is moved
  */
-void Road::link_into_flags(Editor_Game_Base & egbase) {
+void Road::_link_into_flags(Editor_Game_Base & egbase) {
 	assert(m_path.get_nsteps() >= 2);
 
 	// Link into the flags (this will also set our economy)
-
 	{
 		const Direction dir = m_path[0];
 		m_flags[FlagStart]->attach_road(dir, this);
@@ -262,7 +261,7 @@ void Road::link_into_flags(Editor_Game_Base & egbase) {
 	Economy::check_merge(*m_flags[FlagStart], *m_flags[FlagEnd]);
 
 	// Mark Fields
-	mark_map(egbase);
+	_mark_map(egbase);
 
 	if (upcast(Game, game, &egbase)) {
 		Carrier * const carrier =
@@ -293,7 +292,7 @@ void Road::cleanup(Editor_Game_Base & egbase)
 	m_carrier = 0; // carrier will be released via PlayerImmovable::cleanup
 
 	// Unmark Fields
-	unmark_map(game);
+	_unmark_map(game);
 
 	// Unlink from flags (also clears the economy)
 	m_flags[FlagStart]->detach_road(m_flagidx[FlagStart]);
@@ -386,7 +385,7 @@ void Road::remove_worker(Worker & w)
  * the new flag initializes. We remove markings to avoid interference with the
  * flag.
 */
-void Road::presplit(Editor_Game_Base & egbase, Coords) {unmark_map(egbase);}
+void Road::presplit(Editor_Game_Base & egbase, Coords) {_unmark_map(egbase);}
 
 /**
  * The flag that splits this road has been initialized. Perform the actual
@@ -416,14 +415,14 @@ void Road::postsplit(Editor_Game_Base & egbase, Flag & flag)
 
 	// change road size and reattach
 	m_flags[FlagEnd] = &flag;
-	set_path(egbase, path);
+	_set_path(egbase, path);
 
 	const Direction dir = get_reverse_dir(m_path[m_path.get_nsteps() - 1]);
 	m_flags[FlagEnd]->attach_road(dir, this);
 	m_flagidx[FlagEnd] = dir;
 
 	// recreate road markings
-	mark_map(egbase);
+	_mark_map(egbase);
 
 	// create the new road
 	Road & newroad = *new Road();
@@ -431,7 +430,7 @@ void Road::postsplit(Editor_Game_Base & egbase, Flag & flag)
 	newroad.m_type = m_type;
 	newroad.m_flags[FlagStart] = &flag; //  flagidx will be set on init()
 	newroad.m_flags[FlagEnd] = &oldend;
-	newroad.set_path(egbase, secondpath);
+	newroad._set_path(egbase, secondpath);
 
 	// Find workers on this road that need to be reassigned
 	// The algorithm is pretty simplistic, and has a bias towards keeping
