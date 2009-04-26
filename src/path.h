@@ -22,7 +22,6 @@
 
 #include <vector>
 
-#include "map.h"
 #include "widelands.h"
 #include "widelands_geometry.h"
 
