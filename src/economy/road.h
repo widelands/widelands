@@ -33,8 +33,8 @@ struct Request;
  * Road is a special object which connects two flags.
  * The Road itself is never rendered; however, the appropriate Field::roads are
  * set to represent the road visually.
- * The actual steps involved in a road are stored as a Path from the staring flag
- * to the ending flag. Apart from that, however, the two flags are treated
+ * The actual steps involved in a road are stored as a Path from the starting
+ * flag to the ending flag. Apart from that, however, the two flags are treated
  * exactly the same, as far as most transactions are concerned. There are minor
  * exceptions: placement of carriers if the path's length is odd, splitting
  * a road when a flag is inserted.
@@ -103,18 +103,18 @@ protected:
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
 
 private:
-	int32_t        m_type;       ///< use Field::Road_XXX
+	int32_t    m_type;       ///< use Field::Road_XXX
 	Flag     * m_flags  [2]; ///< start and end flag
-	int32_t        m_flagidx[2]; ///< index of this road in the flag's road array
+	int32_t    m_flagidx[2]; ///< index of this road in the flag's road array
 
 	/// cost for walking this road (0 = from start to end, 1 = from end to start)
-	int32_t        m_cost   [2];
+	int32_t    m_cost   [2];
 
 	Path       m_path;       ///< path goes from start to end
 	uint32_t   m_idle_index; ///< index into path where carriers should idle
 
 	///< total number of carriers we want (currently limited to 0 or 1)
-	uint32_t       m_desire_carriers;
+	uint32_t   m_desire_carriers;
 
 	Object_Ptr m_carrier;    ///< our carrier
 	Request *  m_carrier_request;
@@ -122,6 +122,6 @@ private:
 
 }
 
-#endif 
+#endif
 
 

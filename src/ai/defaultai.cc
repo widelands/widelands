@@ -110,7 +110,8 @@ void DefaultAI::think ()
 	// check if anything in the economies changed.
 	// This needs to be done before new buildings are placed, to ensure that no
 	// empty economy is left.
-	check_economies();
+	if (check_economies())
+		return;
 
 	// improve existing roads
 	if (improve_roads()) {
@@ -663,13 +664,13 @@ bool DefaultAI::construct_building ()
 
 			if (j->type == BuildingObserver::PRODUCTIONSITE) {
 				if (j->need_trees) {
-					prio += bf->trees_nearby - 2;
+					prio += bf->trees_nearby;
 					prio /= 2 * (1 + bf->tree_consumers_nearby);
 					if (j->total_count() == 0)
 						prio *= 8; // big bonus for the basics
 				} else if (j->need_stones) {
-					prio +=
-						bf->stones_nearby * 3 / 2 - 6 * bf->stone_consumers_nearby;
+					prio += bf->stones_nearby * 3 / 2;
+					prio /= 2 * (1 + bf->stone_consumers_nearby);
 					if (j->total_count() == 0)
 						prio *= 8; // big bonus for the basics
 				} else if (j->production_hint >= 0) {
@@ -681,6 +682,9 @@ bool DefaultAI::construct_building ()
 					// add bonus near buildings outputting production_hint ware
 					if (bf->producers_nearby[j->production_hint] > 0)
 						prio += 2;
+					// don't build a forester if there are already a lot of trees
+					// FIXME: should be generalised for fish_breeder, etc.
+					prio -= bf->trees_nearby;
 				} else {
 					if (j->total_count() == 0)
 						prio += 2;
@@ -693,47 +697,48 @@ bool DefaultAI::construct_building ()
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
 						for (uint32_t m = 0; m < j->outputs.size(); ++m) {
 							Ware_Index wt(static_cast<size_t>(j->outputs[m]));
-							//FIXME segfault in economy.h -> target_quantity(Ware_Index const i)
 							if ((*l.current)->economy.needs_ware(wt)) {
 								prio += 1 + wares[j->outputs[m]].preciousness;
 							}
 						}
 					}
 
-					// If the produced wares are needed, check if current economy can
-					// supply enough material for production.
-					if (prio > 0)
+					// If the produced wares are needed
+					if (prio > 0) {
+						// check if current economy can supply enough material for
+						// production.
 						for (uint32_t k = 0; k < j->inputs.size(); ++k) {
 							prio += 2 * wares[j->inputs[k]].producers;
 							prio -= 4 * wares[j->inputs[k]].consumers;
 						}
 
-					// normalize by output count so that multipurpose
-					// buildings are not too good
-					int32_t output_prio = 0;
-					for (uint32_t k = 0; k < j->outputs.size(); ++k) {
-						WareObserver & wo = wares[j->outputs[k]];
-						if (j->total_count() == 0 && wo.consumers > 0)
-							output_prio += 8 + wo.preciousness; // add a big bonus
+						// normalize by output count so that multipurpose
+						// buildings are not too good
+						int32_t output_prio = 0;
+						for (uint32_t k = 0; k < j->outputs.size(); ++k) {
+							WareObserver & wo = wares[j->outputs[k]];
+							if (j->total_count() == 0 && wo.consumers > 0)
+								output_prio += 8 + wo.preciousness; // add a big bonus
+						}
+
+						if (j->outputs.size() > 0)
+							output_prio = static_cast<int32_t>
+								(ceil(output_prio / sqrt(j->outputs.size())));
+						prio += output_prio;
+
+						int32_t iosum = 0;
+						for (size_t k = 0; k < j->inputs.size(); ++k)
+							if (bf->producers_nearby[j->inputs[k]]>0)
+								++iosum;
+							else if (bf->consumers_nearby[j->inputs[k]]>0)
+								--iosum;
+						if (iosum < -2)
+							iosum = -2;
+						for (size_t k = 0; k < j->outputs.size(); ++k)
+							if (bf->consumers_nearby[j->outputs[k]] > 0)
+								++iosum;
+						prio += 2 * iosum;
 					}
-
-					if (j->outputs.size() > 0)
-						output_prio = static_cast<int32_t>
-							(ceil(output_prio / sqrt(j->outputs.size())));
-					prio += output_prio;
-
-					int32_t iosum = 0;
-					for (size_t k = 0; k < j->inputs.size(); ++k)
-						if (bf->producers_nearby[j->inputs[k]]>0)
-							++iosum;
-						else if (bf->consumers_nearby[j->inputs[k]]>0)
-							--iosum;
-					if (iosum < -2)
-						iosum = -2;
-					for (size_t k = 0; k < j->outputs.size(); ++k)
-						if (bf->consumers_nearby[j->outputs[k]] > 0)
-							++iosum;
-					prio += 2 * iosum;
 				}
 			}
 
@@ -776,6 +781,13 @@ bool DefaultAI::construct_building ()
 				continue;
 			else
 				prio += mf->coords.field->get_resources_amount();
+
+			// If the produced wares are needed, check if current economy can
+			// supply enough material for production.
+			for (uint32_t k = 0; k < i->inputs.size(); ++k) {
+				prio += 2 * wares[i->inputs[k]].producers;
+				prio -= 4 * wares[i->inputs[k]].consumers;
+			}
 
 			// Check if the produced wares are needed
 			container_iterate(std::list<EconomyObserver *>, economies, l) {
@@ -1023,8 +1035,10 @@ bool DefaultAI::improve_roads ()
 /**
  * Checks if anything in one of the economies changed and takes care for these
  * changes.
+ *
+ * \returns true, if something was changed.
  */
-void DefaultAI::check_economies ()
+bool DefaultAI::check_economies ()
 {
 	while (!new_flags.empty()) {
 		Flag const & flag = *new_flags.front();
@@ -1044,13 +1058,14 @@ void DefaultAI::check_economies ()
 			}
 		}
 
-		// if there are no more flags in this economy, we no longer need its observer
+		// if there are no more flags in this economy, we no longer need it's observer
 		if ((*i.current)->flags.empty()) {
 			delete *i.current;
-			i.current = economies.erase(i.current);
-			continue;
+			economies.erase(i.current);
+			return true;
 		}
 	}
+	return false;
 }
 
 /**

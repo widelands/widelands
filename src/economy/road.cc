@@ -512,11 +512,4 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 	return false;
 }
 
-
-
-
-
-
-
 }
-

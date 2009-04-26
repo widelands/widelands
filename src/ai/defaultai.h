@@ -92,7 +92,7 @@ private:
 	bool construct_roads    ();
 	bool improve_roads      ();
 
-	void check_economies      ();
+	bool check_economies      ();
 	bool check_productionsite (ProductionSiteObserver &);
 
 	void consider_productionsite_influence
