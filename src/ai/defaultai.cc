@@ -114,9 +114,10 @@ void DefaultAI::think ()
 		return;
 
 	// improve existing roads
-	if (improve_roads()) {
+	if (improve_roads(gametime)) {
 		m_buildable_changed = true;
 		m_mineable_changed = true;
+		inhibit_road_building = gametime + 2500;
 		return;
 	}
 
@@ -136,9 +137,6 @@ void DefaultAI::think ()
 	if (next_construction_due <= gametime) {
 		next_construction_due = gametime + 2000;
 		if (construct_building()) {
-			//inhibit_road_building = gametime + 2500;
-			//Inhibiting roadbuilding is not a good idea, it causes
-			//computer players to get into deadlock at certain circumstances.
 			return;
 		}
 	}
@@ -648,7 +646,9 @@ bool DefaultAI::construct_building ()
 			if (j->desc->get_size() > maxsize)
 				continue;
 
-			int32_t prio = 0;
+			// some randomness to avoid that defaultAI is building always the same
+			// (always == another game but same map with defaultAI on same coords)
+			int32_t prio = time(NULL) % 3 - 1;
 
 			if (j->type == BuildingObserver::MILITARYSITE) {
 				prio  = bf->unowned_land_nearby - bf->military_influence * 4;
@@ -664,7 +664,7 @@ bool DefaultAI::construct_building ()
 
 			if (j->type == BuildingObserver::PRODUCTIONSITE) {
 				if (j->need_trees) {
-					prio += bf->trees_nearby;
+					prio += bf->trees_nearby * 3 / 2;
 					prio /= 2 * (1 + bf->tree_consumers_nearby);
 					if (j->total_count() == 0)
 						prio *= 8; // big bonus for the basics
@@ -984,7 +984,7 @@ bool DefaultAI::construct_roads ()
 }
 
 /// improves current road system
-bool DefaultAI::improve_roads ()
+bool DefaultAI::improve_roads (int32_t gametime)
 {
 	// Remove dead end roads
 	container_iterate(std::list<EconomyObserver *>, economies, i)
@@ -1028,6 +1028,149 @@ bool DefaultAI::improve_roads ()
 		roads.push_back (roads.front());
 		roads.pop_front ();
 	}
+
+	if (!economies.empty() & (inhibit_road_building <= gametime)) {
+		EconomyObserver * eco = economies.front();
+		bool finish = false;
+
+		// try to connect to another economy
+		if (economies.size() > 1)
+			finish = connect_flag_to_another_economy(*eco->flags.front());
+
+		if (!finish)
+			finish = improve_transportation_ways(*eco->flags.front());
+
+		// cycle through flags one at a time
+		eco->flags.push_back(eco->flags.front());
+		eco->flags.pop_front();
+
+		// and cycle through economies
+		economies.push_back(eco);
+		economies.pop_front();
+
+		if (finish)
+			return true;
+	}
+
+	return false;
+}
+
+
+/// connects a specific flag to another economy
+bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
+{
+	FindNodeWithFlagOrRoad functor;
+	CheckStepRoadAI check(player, MOVECAPS_WALK, true);
+	std::vector<Coords> reachable;
+
+	// first look for possible destinations
+	functor.economy = flag.get_economy();
+	Map & map = game().map();
+	map.find_reachable_fields
+		(Area<FCoords>(map.get_fcoords(flag.get_position()), 16),
+		 &reachable,
+		 check,
+		 functor);
+
+	if (reachable.empty())
+		return false;
+
+	// then choose the one closest to the originating flag
+	int32_t closest_distance = std::numeric_limits<int32_t>::max();
+	Coords closest;
+	container_iterate_const(std::vector<Coords>, reachable, i) {
+		int32_t const distance =
+			map.calc_distance(flag.get_position(), *i.current);
+		if (distance < closest_distance) {
+			closest = *i.current;
+			closest_distance = distance;
+		}
+	}
+	assert(closest_distance != std::numeric_limits<int32_t>::max());
+
+	// if we join a road and there is no flag yet, build one
+	if (dynamic_cast<const Road *> (map[closest].get_immovable()))
+		game().send_player_build_flag (get_player_number(), closest);
+
+	// and finally build the road
+	Path & path = *new Path();
+	check.set_openend (false);
+	if (map.findpath(flag.get_position(), closest, 0, path, check) < 0) {
+		delete &path;
+		return false;
+	}
+
+	game().send_player_build_road (get_player_number(), path);
+	return true;
+}
+
+/// adds alternative ways to already existing ones
+bool DefaultAI::improve_transportation_ways (const Flag & flag)
+{
+	std::priority_queue<NearFlag> queue;
+	std::vector<NearFlag> nearflags;
+
+	queue.push (NearFlag(flag, 0, 0));
+	Map & map = game().map();
+
+	while (!queue.empty()) {
+		std::vector<NearFlag>::iterator f = find(nearflags.begin(), nearflags.end(), queue.top().flag);
+		if (f != nearflags.end()) {
+			queue.pop ();
+			continue;
+		}
+
+		nearflags.push_back (queue.top());
+		queue.pop ();
+
+		NearFlag & nf = nearflags.back();
+
+		for (uint8_t i = 1; i <= 6; ++i) {
+		Road * const road = nf.flag->get_road(i);
+
+		if (!road) continue;
+
+		Flag * endflag = &road->get_flag(Road::FlagStart);
+		if (endflag == nf.flag)
+			endflag = &road->get_flag(Road::FlagEnd);
+
+			int32_t dist =
+				map.calc_distance(flag.get_position(), endflag->get_position());
+		if (dist > 16) //  out of range
+			continue;
+
+			queue.push
+				(NearFlag
+				 	(*endflag, nf.cost + road->get_path().get_nsteps(), dist));
+		}
+	}
+
+	std::sort (nearflags.begin(), nearflags.end(), CompareDistance());
+
+	CheckStepRoadAI check(player, MOVECAPS_WALK, false);
+
+	for (uint32_t i = 1; i < nearflags.size(); ++i) {
+		NearFlag & nf = nearflags[i];
+
+		if (2 * nf.distance + 2 < nf.cost) {
+
+			Path & path = *new Path();
+			if
+				(map.findpath
+				 	(flag.get_position(), nf.flag->get_position(), 0, path, check)
+				 >=
+				 0
+				 and
+				 static_cast<int32_t>(2 * path.get_nsteps() + 2) < nf.cost)
+			{
+				game().send_player_build_road (get_player_number(), path);
+				return true;
+			}
+
+			delete &path;
+		}
+	}
+
 	return false;
 }
 
@@ -1049,13 +1192,13 @@ bool DefaultAI::check_economies ()
 
 	container_iterate(std::list<EconomyObserver *>, economies, i) {
 		// check if any flag has changed its economy
-		container_iterate(std::list<Flag const *>, (*i.current)->flags, j) {
-			if (&(*i.current)->economy != &(*j.current)->economy()) {
-				get_economy_observer((*j.current)->economy())->flags.push_back
-					(*j.current);
-				j.current = (*i.current)->flags.erase(j.current);
-				continue;
-			}
+		std::list<Flag const *> &fl = (*i.current)->flags;
+		for (std::list<Flag const *>::iterator j = fl.begin();j != fl.end();) {
+			if (&(*i.current)->economy != &(*j)->economy()) {
+				get_economy_observer((*j)->economy())->flags.push_back(*j);
+				j = fl.erase(j);
+			} else
+				++j;
 		}
 
 		// if there are no more flags in this economy, we no longer need it's observer
@@ -1194,6 +1337,7 @@ void DefaultAI::lose_immovable (PlayerImmovable const & pi)
 		roads.remove (road);
 }
 
+/// this is called whenever we gain a new building
 void DefaultAI::gain_building (Building & b)
 {
 	BuildingObserver & bo = get_building_observer(b.name().c_str());
@@ -1224,6 +1368,7 @@ void DefaultAI::gain_building (Building & b)
 	}
 }
 
+/// this is called whenever we lose a building
 void DefaultAI::lose_building (Building const & b)
 {
 	BuildingObserver & bo = get_building_observer(b.name().c_str());

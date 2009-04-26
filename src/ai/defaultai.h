@@ -27,6 +27,7 @@
 
 namespace Widelands {
 struct Road;
+struct Flag;
 }
 
 /**
@@ -90,7 +91,10 @@ private:
 
 	bool construct_building ();
 	bool construct_roads    ();
-	bool improve_roads      ();
+	bool improve_roads      (int32_t);
+
+	bool improve_transportation_ways (const Widelands::Flag &);
+	bool connect_flag_to_another_economy (const Widelands::Flag &);
 
 	bool check_economies      ();
 	bool check_productionsite (ProductionSiteObserver &);
