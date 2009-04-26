@@ -272,7 +272,7 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 			carrier->set_location    (this);
 			carrier->update_task_road(*game);
 		} else if (not m_carrier_request)
-			request_carrier(*game);
+			_request_carrier(*game);
 	}
 }
 
@@ -323,7 +323,7 @@ void Road::set_economy(Economy * const e)
  * Only call this if the road can handle a new carrier, and if no request has
  * been issued.
 */
-void Road::request_carrier
+void Road::_request_carrier
 #ifndef NDEBUG
 	(Game & game)
 #else
@@ -336,14 +336,14 @@ void Road::request_carrier
 		new Request
 			(*this,
 			 owner().tribe().safe_worker_index("carrier"),
-			 Road::request_carrier_callback,
+			 Road::_request_carrier_callback,
 			 Request::WORKER);
 }
 
 /**
  * The carrier has arrived successfully.
 */
-void Road::request_carrier_callback
+void Road::_request_carrier_callback
 	(Game            &       game,
 	 Request         &       rq,
 	 Ware_Index,
@@ -375,7 +375,7 @@ void Road::remove_worker(Worker & w)
 
 	if (not carrier and not m_carrier_request and m_desire_carriers)
 		if (upcast(Game, game, &egbase))
-			request_carrier(*game);
+			_request_carrier(*game);
 
 	PlayerImmovable::remove_worker(w);
 }
@@ -492,7 +492,7 @@ void Road::postsplit(Editor_Game_Base & egbase, Flag & flag)
 		// This must be done _after_ the new road initializes, otherwise request
 		// routing might not work correctly
 		if (!m_carrier.get(egbase) && !m_carrier_request)
-			request_carrier(*game);
+			_request_carrier(*game);
 
 		// Make sure items waiting on the original endpoint flags are dealt with
 		m_flags[FlagStart]->update_items(*game, &oldend);

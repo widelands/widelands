@@ -139,7 +139,7 @@ throw (_wexception)
 							 	new Request
 							 		(road,
 							 		 Ware_Index::First(),
-							 		 Road::request_carrier_callback,
+							 		 Road::_request_carrier_callback,
 							 		 Request::WORKER))
 							->Read(fr, egbase, ol);
 					} else

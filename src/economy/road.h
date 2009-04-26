@@ -96,8 +96,8 @@ private:
 
 	void _link_into_flags(Editor_Game_Base &);
 
-	void request_carrier(Game &);
-	static void request_carrier_callback
+	void _request_carrier(Game &);
+	static void _request_carrier_callback
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
 	virtual void draw
