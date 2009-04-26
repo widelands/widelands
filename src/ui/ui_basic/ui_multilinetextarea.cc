@@ -21,7 +21,7 @@
 
 #include "font_handler.h"
 #include "constants.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "text_parser.h"
 
 namespace UI {

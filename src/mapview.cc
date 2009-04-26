@@ -19,7 +19,7 @@
 
 #include "mapview.h"
 
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "interactive_base.h"
 #include "interactive_player.h"
 #include "map.h"

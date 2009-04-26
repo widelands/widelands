@@ -32,7 +32,7 @@
 #include "game_preload_data_packet.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "network/network.h"

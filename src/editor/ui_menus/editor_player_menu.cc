@@ -21,7 +21,7 @@
 
 #include "editorinteractive.h"
 #include "editor_set_starting_pos_tool.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "map.h"
 #include "overlay_manager.h"

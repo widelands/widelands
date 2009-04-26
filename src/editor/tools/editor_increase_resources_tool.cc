@@ -21,7 +21,7 @@
 
 #include "editorinteractive.h"
 #include "field.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "map.h"
 #include "world.h"
 #include "overlay_manager.h"

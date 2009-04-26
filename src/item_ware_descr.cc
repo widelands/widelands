@@ -19,7 +19,7 @@
 
 #include "item_ware_descr.h"
 
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "profile.h"
 

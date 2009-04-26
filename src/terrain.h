@@ -20,7 +20,7 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
 
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "mapviewpixelconstants.h"
 #include "random.h"
 #include "surface.h"

@@ -20,7 +20,7 @@
 #ifndef UI_PROGRESSWINDOW_H
 #define UI_PROGRESSWINDOW_H
 
-#include "graphic.h"
+#include "graphic/graphic.h"
 
 #include <string>
 #include <cstring>

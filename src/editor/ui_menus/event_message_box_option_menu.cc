@@ -22,7 +22,7 @@
 #include "events/event_message_box.h"
 #include "i18n.h"
 #include "editorinteractive.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "map.h"
 #include "trigger/trigger_time.h"
 

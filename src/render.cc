@@ -21,7 +21,7 @@
 Rendering functions of the 16-bit software renderer.
 */
 
-#include "graphic.h"
+#include "graphic/graphic.h"
 
 #include "building.h"
 #include "economy/flag.h"

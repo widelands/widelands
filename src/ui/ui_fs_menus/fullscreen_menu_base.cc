@@ -20,7 +20,7 @@
 #include "fullscreen_menu_base.h"
 
 #include "io/filesystem/filesystem.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "log.h"
 #include "profile.h"
 #include "rendertarget.h"

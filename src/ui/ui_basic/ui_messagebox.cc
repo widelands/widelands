@@ -24,7 +24,7 @@
 #include "ui_window.h"
 #include "ui_multilinetextarea.h"
 #include "ui_button.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "wlapplication.h"
 
 namespace UI {

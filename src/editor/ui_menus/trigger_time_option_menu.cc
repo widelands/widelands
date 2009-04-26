@@ -19,7 +19,7 @@
 
 #include "trigger_time_option_menu.h"
 
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "trigger/trigger_time.h"
 #include "editorinteractive.h"

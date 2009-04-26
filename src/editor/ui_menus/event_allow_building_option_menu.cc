@@ -22,7 +22,7 @@
 #include "editor_game_base.h"
 #include "editorinteractive.h"
 #include "events/event_allow_building.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "map.h"
 #include "player.h"

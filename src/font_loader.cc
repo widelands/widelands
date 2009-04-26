@@ -21,7 +21,7 @@
 
 #include "io/fileread.h"
 #include "font_handler.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "rgbcolor.h"
 #include "wexception.h"

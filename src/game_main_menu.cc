@@ -21,7 +21,7 @@
 
 #include "building_statistics_menu.h"
 #include "general_statistics_menu.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "stock_menu.h"

@@ -21,7 +21,7 @@
 
 #include "constants.h"
 #include "font_handler.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "profile.h"
 #include "rendertarget.h"
 #include "sound/sound_handler.h"

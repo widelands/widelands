@@ -20,7 +20,7 @@
 #include "stock_menu.h"
 
 #include "economy/economy.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "player.h"

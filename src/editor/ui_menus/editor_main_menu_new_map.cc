@@ -19,7 +19,7 @@
 
 #include "editor_main_menu_new_map.h"
 
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "editorinteractive.h"
 #include "map.h"

@@ -1,0 +1,8 @@
+Import('*')
+
+SRC=simpleglob("*.cc")
+
+graphic=srcenv.StaticLibrary(target='graphic', source=SRC)
+
+Return('graphic')
+

@@ -22,7 +22,7 @@
 #include "editor_increase_height_tool.h"
 #include "editor_set_height_tool.h"
 #include "editorinteractive.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 
 #include "ui_button.h"

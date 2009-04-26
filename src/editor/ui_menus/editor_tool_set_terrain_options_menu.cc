@@ -21,7 +21,7 @@
 
 #include "editor_set_terrain_tool.h"
 #include "editorinteractive.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "map.h"
 #include "rendertarget.h"

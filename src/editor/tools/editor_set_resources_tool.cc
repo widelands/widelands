@@ -21,7 +21,7 @@
 
 #include "editor_increase_resources_tool.h"
 #include "editor_decrease_resources_tool.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "map.h"
 #include "field.h"
 #include "editorinteractive.h"

@@ -21,7 +21,7 @@
 #include "bob.h"
 #include "building.h"
 #include "field.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "instances.h"
 #include "interactive_base.h"

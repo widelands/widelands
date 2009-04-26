@@ -21,7 +21,7 @@
 
 #include "event_message_box.h"
 #include "game.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "editorinteractive.h"
 #include "constants.h"
 #include "trigger/trigger_time.h"

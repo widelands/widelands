@@ -20,7 +20,7 @@
 #include "editor_main_menu_load_map.h"
 
 #include "building.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "editorinteractive.h"

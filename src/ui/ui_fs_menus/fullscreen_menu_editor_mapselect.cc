@@ -20,7 +20,7 @@
 #include "fullscreen_menu_editor_mapselect.h"
 
 #include "editor_game_base.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"

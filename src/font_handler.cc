@@ -23,7 +23,7 @@
 
 #include "io/filesystem/filesystem.h"
 #include "font_loader.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "helper.h"
 #include "rendertarget.h"
 #include "surface.h"

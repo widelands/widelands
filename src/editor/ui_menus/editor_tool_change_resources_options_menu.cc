@@ -27,7 +27,7 @@
 #include "map.h"
 #include "widelands.h"
 #include "world.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "overlay_manager.h"
 
 #include <cstdio>

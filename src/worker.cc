@@ -31,7 +31,7 @@
 #include "findimmovable.h"
 #include "findnode.h"
 #include "game.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "helper.h"
 #include "interactive_player.h"
 #include "player.h"

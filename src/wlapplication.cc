@@ -38,7 +38,7 @@
 #include "game.h"
 #include "game_tips.h"
 #include "gamesettings.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "interactive_spectator.h"

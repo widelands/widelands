@@ -25,7 +25,7 @@
 #include "game_options_menu.h"
 #include "gamecontroller.h"
 #include "general_statistics_menu.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 
 #include "ui_editbox.h"

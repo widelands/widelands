@@ -26,7 +26,7 @@
 #include "editor_game_base.h"
 #include "findimmovable.h"
 #include "game.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "helper.h"
 #include "militarysite.h"
 #include "player.h"

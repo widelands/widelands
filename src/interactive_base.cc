@@ -27,7 +27,7 @@
 #include "font_handler.h"
 #include "game.h"
 #include "gamecontroller.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "immovable.h"
 #include "interactive_player.h"
 #include "maptriangleregion.h"

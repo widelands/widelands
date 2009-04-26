@@ -21,7 +21,7 @@
 
 #include "editor_game_base.h"
 #include "game.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "player.h"

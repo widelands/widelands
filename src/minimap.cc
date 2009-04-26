@@ -21,7 +21,7 @@
 
 #include "minimap.h"
 
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "map.h"

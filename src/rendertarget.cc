@@ -19,7 +19,7 @@
 
 #include "rendertarget.h"
 
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "mapviewpixelconstants.h"
 #include "overlay_manager.h"
 #include "surface.h"

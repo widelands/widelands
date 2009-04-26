@@ -21,7 +21,7 @@
 
 #include "editor_game_base.h"
 #include "font_handler.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "player.h"
 #include "rendertarget.h"

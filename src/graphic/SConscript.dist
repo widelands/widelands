@@ -1,0 +1,8 @@
+Import('*')
+from Distribute import distadd
+
+distadd(env, 'src/graphic/SConscript')
+distadd(env, 'src/graphic/SConscript.dist')
+distadd(env, 'src/graphic/*.h')
+distadd(env, 'src/graphic/*.cc')
+

@@ -19,7 +19,7 @@
 
 #include "fullscreen_menu_netsetup.h"
 #include "constants.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "network/network.h"
 #include "profile.h"

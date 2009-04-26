@@ -19,7 +19,7 @@
 
 #include "editor_toolsize_menu.h"
 #include "editorinteractive.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "editor_tool.h"
 

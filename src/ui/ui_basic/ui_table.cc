@@ -19,7 +19,7 @@
 
 #include "ui_table.h"
 
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "rendertarget.h"
 #include "ui_button.h"
 #include "ui_constants.h"

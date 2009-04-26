@@ -23,7 +23,7 @@
 #include "editorinteractive.h"
 #include "editor_main_menu_save_map_make_directory.h"
 #include "io/filesystem/filesystem.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "profile.h"

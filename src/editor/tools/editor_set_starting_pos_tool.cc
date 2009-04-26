@@ -22,7 +22,7 @@
 #include "building.h"
 #include "editorinteractive.h"
 #include "editor_tool.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "map.h"
 #include "overlay_manager.h"
 

@@ -23,7 +23,7 @@
 #include "events/event_unhide_area.h"
 #include "editorinteractive.h"
 #include "map.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 
 #include "ui_messagebox.h"
 #include "ui_window.h"

@@ -20,7 +20,7 @@
 #include "ui_window.h"
 
 #include "font_handler.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "rendertarget.h"
 #include "wlapplication.h"
 

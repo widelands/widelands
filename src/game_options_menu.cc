@@ -22,7 +22,7 @@
 #include "fullscreen_menu_fileview.h"
 #include "game_options_sound_menu.h"
 #include "game_main_menu_save_game.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "sound/sound_handler.h"
 

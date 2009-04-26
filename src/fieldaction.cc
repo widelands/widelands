@@ -26,7 +26,7 @@
 #include "economy/road.h"
 #include "editorinteractive.h"
 #include "game_debug_ui.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "maphollowregion.h"

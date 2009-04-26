@@ -19,7 +19,7 @@
 
 #include "ui_box.h"
 
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "wexception.h"
 
 #include "ui_scrollbar.h"

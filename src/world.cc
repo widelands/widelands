@@ -21,7 +21,7 @@
 
 #include "constants.h"
 #include "critter_bob.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"

@@ -20,7 +20,7 @@
 #include "editor_tool_menu.h"
 
 #include "editorinteractive.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "ui_radiobutton.h"
 #include "ui_textarea.h"

@@ -21,7 +21,7 @@
 
 #include "editorinteractive.h"
 #include "editor_place_immovable_tool.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "map.h"
 #include "wlapplication.h"

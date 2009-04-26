@@ -20,7 +20,7 @@
 #include "texture.h"
 
 #include "constants.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "wexception.h"
 

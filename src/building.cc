@@ -25,7 +25,7 @@
 #include "editor_game_base.h"
 #include "font_handler.h"
 #include "game.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "interactive_gamebase.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"

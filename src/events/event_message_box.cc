@@ -22,7 +22,7 @@
 #include "editor_game_base.h"
 #include "event_message_box_message_box.h"
 #include "game.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "map.h"
 #include "profile.h"

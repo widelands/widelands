@@ -22,7 +22,7 @@
 
 #include "interactive_base.h"
 #include "game.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 
 struct ChatProvider;
 

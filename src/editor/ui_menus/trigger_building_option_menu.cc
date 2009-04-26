@@ -22,7 +22,7 @@
 #include "i18n.h"
 #include "editorinteractive.h"
 #include "map.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "player.h"
 #include "tribe.h"
 

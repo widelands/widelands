@@ -20,7 +20,7 @@
 #include "ui_listselect.h"
 
 #include "constants.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "rendertarget.h"
 #include "wlapplication.h"
 

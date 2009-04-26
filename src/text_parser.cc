@@ -20,7 +20,7 @@
 #include "text_parser.h"
 
 #include "constants.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "helper.h"
 
 #include <vector>

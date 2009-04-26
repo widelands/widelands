@@ -22,7 +22,7 @@
 #include "constants.h"
 #include "font_loader.h"
 #include "font_handler.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "rendertarget.h"
 #include "rgbcolor.h"
 

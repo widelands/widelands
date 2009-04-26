@@ -19,7 +19,7 @@
 
 #include "event_move_view_option_menu.h"
 
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "events/event_move_view.h"
 #include "editorinteractive.h"
 #include "i18n.h"

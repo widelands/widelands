@@ -19,7 +19,7 @@
 
 #include "ui_textarea.h"
 
-#include "graphic.h"
+#include "graphic/graphic.h"
 
 namespace UI {
 

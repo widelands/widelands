@@ -22,6 +22,7 @@ Export('srcenv')
 # ordering (ordering of compilation is always controlled directly by scons
 # itself, though)
 libs=[]
+libs+=SConscript('graphic/SConscript')
 libs+=SConscript('sound/SConscript')
 libs+=list(SConscript('io/SConscript'))
 libs+=SConscript('ui/ui_basic/SConscript')

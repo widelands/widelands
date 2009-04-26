@@ -19,7 +19,7 @@
 
 #include "ui_checkbox.h"
 
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "rendertarget.h"
 
 namespace UI {

@@ -29,7 +29,7 @@
 #include "editor_tool_menu.h"
 #include "editor_toolsize_menu.h"
 #include "game_tips.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "interactive_base.h"
 #include "map.h"

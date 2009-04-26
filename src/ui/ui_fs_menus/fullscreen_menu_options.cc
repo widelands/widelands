@@ -23,7 +23,7 @@
 
 #include "constants.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "languages.h"
 #include "profile.h"

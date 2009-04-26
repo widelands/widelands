@@ -26,7 +26,7 @@
 #include "gamechatpanel.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "instances.h"
 #include "io/filesystem/layered_filesystem.h"

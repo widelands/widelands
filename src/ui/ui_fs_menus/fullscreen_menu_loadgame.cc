@@ -22,7 +22,7 @@
 #include "game.h"
 #include "game_loader.h"
 #include "game_preload_data_packet.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 

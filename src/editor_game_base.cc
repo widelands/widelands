@@ -26,7 +26,7 @@
 #include "findimmovable.h"
 #include "font_handler.h"
 #include "game.h"
-#include "graphic.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "instances.h"
 #include "interactive_base.h"
