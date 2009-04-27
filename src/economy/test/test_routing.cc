@@ -36,14 +36,14 @@ using namespace Widelands;
 /******************/
 /// Helper classes {{{
 class BadAccess : public std::exception {};
-class DummyRoutingNode : public RoutingNode {
+class TestingRoutingNode : public RoutingNode {
 public:
-	DummyRoutingNode(int32_t rcost = 1, int32_t wcost = 0, Coords pos = Coords(0, 0)) :
+	TestingRoutingNode(int32_t rcost = 1, int32_t wcost = 0, Coords pos = Coords(0, 0)) :
 		_waitcost(wcost), _position(pos) {}
-	void add_neighbour(DummyRoutingNode * nb) {
+	void add_neighbour(TestingRoutingNode * nb) {
 		_neighbours.push_back(nb);
 	}
-	DummyRoutingNode * get_neighbour(uint8_t idx) {
+	TestingRoutingNode * get_neighbour(uint8_t idx) {
 		if (idx >= _neighbours.size())
 			throw BadAccess();
 		return _neighbours[idx];
@@ -55,14 +55,17 @@ public:
 
 	void get_neighbours(RoutingNodeNeighbours *);
 
+	// test functionality
+	bool all_members_zeroed(void);
+
 private:
-	typedef std::vector<DummyRoutingNode *> Neigbours;
+	typedef std::vector<TestingRoutingNode *> Neigbours;
 
 	Neigbours _neighbours;
 	int32_t _waitcost;
 	Coords _position;
 };
-void DummyRoutingNode::get_neighbours(RoutingNodeNeighbours * n) {
+void TestingRoutingNode::get_neighbours(RoutingNodeNeighbours * n) {
 	for
 		(Neigbours::iterator i = _neighbours.begin();
 		 i != _neighbours.end();
@@ -72,8 +75,16 @@ void DummyRoutingNode::get_neighbours(RoutingNodeNeighbours * n) {
 		n->push_back(nb);
 	}
 }
+bool TestingRoutingNode::all_members_zeroed(void) {
+	bool integers_zero =  (
+			!mpf_cycle && !mpf_heapindex & !mpf_realcost && !mpf_estimate
+	);
+	bool pointers_zero = (mpf_backlink == 0);
 
-class DummyTransportCostCalculator : public ITransportCostCalculator {
+	return pointers_zero && integers_zero;
+}
+
+class TestingTransportCostCalculator : public ITransportCostCalculator {
 	int32_t calc_cost_estimate(Coords c1, Coords c2) const {
 		// We use an euclidian metric here. It is much easier for
 		// test cases
@@ -82,7 +93,7 @@ class DummyTransportCostCalculator : public ITransportCostCalculator {
 		return static_cast<int32_t>((xd * xd + yd * yd) * 1000);
 	}
 };
-class DummyRoute : public IRoute {
+class TestingRoute : public IRoute {
 public:
 	typedef std::vector<RoutingNode *> Nodes;
 
@@ -153,56 +164,66 @@ private:
 /*************************************************************************/
 BOOST_AUTO_TEST_SUITE(Routing)
 
-/// {{{ DummyRoutingNode Test Cases
+// {{{ TestingRoutingNode Test Cases
 /*
- * First test the DummyRoutingNode class, so that we
+ * First test the TestingRoutingNode class, so that we
  * are sure it works in the other tests
  *
  */
-BOOST_AUTO_TEST_CASE(dummynode_creation) {
-	DummyRoutingNode d0;
-	DummyRoutingNode d1(0, 0, Coords(15, 0));
+BOOST_AUTO_TEST_CASE(testingnode_creation) {
+	TestingRoutingNode d0;
+	TestingRoutingNode d1(0, 0, Coords(15, 0));
 
 	BOOST_CHECK_EQUAL(d0.get_position().y, d1.get_position().y);
 	BOOST_CHECK_EQUAL(d0.get_position().x, 0);
 	BOOST_CHECK_EQUAL(d1.get_position().x, 15);
 }
-struct DummyNode_DefaultNodes_Fixture {
-	DummyNode_DefaultNodes_Fixture() {
-		d0 = new DummyRoutingNode();
-		d1 = new DummyRoutingNode(1, Coords(15, 0));
+struct TestingNode_DefaultNodes_Fixture {
+	TestingNode_DefaultNodes_Fixture() {
+		d0 = new TestingRoutingNode();
+		d1 = new TestingRoutingNode(1, Coords(15, 0));
 		nodes.push_back(d0);
 		nodes.push_back(d1);
 	}
-	~DummyNode_DefaultNodes_Fixture() {
+	~TestingNode_DefaultNodes_Fixture() {
 		while (nodes.size()) {
-			DummyRoutingNode * n = nodes.back();
+			TestingRoutingNode * n = nodes.back();
 			delete n;
 			nodes.pop_back();
 		}
 	}
-	std::vector<DummyRoutingNode *> nodes;
-	DummyRoutingNode * d0;
-	DummyRoutingNode * d1;
+	std::vector<TestingRoutingNode *> nodes;
+	TestingRoutingNode * d0;
+	TestingRoutingNode * d1;
 };
-BOOST_FIXTURE_TEST_CASE(dummynode_neighbour_attaching, DummyNode_DefaultNodes_Fixture) {
+BOOST_FIXTURE_TEST_CASE(testingnode_neighbour_attaching, TestingNode_DefaultNodes_Fixture) {
 	d0->add_neighbour(d1);
 
 	BOOST_CHECK_EQUAL(d0->get_neighbour(0), d1);
 }
-BOOST_FIXTURE_TEST_CASE(dummynode_illegalneighbour_access, DummyNode_DefaultNodes_Fixture) {
+BOOST_FIXTURE_TEST_CASE(testingnode_illegalneighbour_access, TestingNode_DefaultNodes_Fixture) {
 	try {
 		d0->get_neighbour(0);
 		BOOST_ERROR("BadAccess not thrown");
 	} catch (BadAccess &) {
 	}
 }
-// }}} End of DummyRoutingNode Test cases
+// }}} End of TestingRoutingNode Test cases
+
+// {{{ RoutingNode Tests 
+/* 
+ * Now test the routing nodes functionality
+ */
+BOOST_AUTO_TEST_CASE(RoutingNode_InitializeMemberVariables) {
+	TestingRoutingNode d0(0, 0, Coords(15, 0));
+
+	BOOST_CHECK(d0.all_members_zeroed());
+}
 
 struct SimpleRouterFixture {
 	SimpleRouterFixture() {
-		d0 = new DummyRoutingNode();
-		d1 = new DummyRoutingNode(1, Coords(15, 0));
+		d0 = new TestingRoutingNode();
+		d1 = new TestingRoutingNode(1, Coords(15, 0));
 		vec.push_back(d0);
 		vec.push_back(d1);
 	}
@@ -210,27 +231,28 @@ struct SimpleRouterFixture {
 		delete d0;
 		delete d1;
 	}
-	DummyRoutingNode * d0;
-	DummyRoutingNode * d1;
+	TestingRoutingNode * d0;
+	TestingRoutingNode * d1;
 	std::vector<RoutingNode *> vec;
 	Router r;
-	DummyRoute route;
-	DummyTransportCostCalculator cc;
+	TestingRoute route;
+	TestingTransportCostCalculator cc;
 };
 
-/// {{{ DummyRoute Testing
-BOOST_AUTO_TEST_CASE(DummyRoute_emptyatstart) {
-	DummyRoute r;
+
+// {{{ TestingRoute Testing
+BOOST_AUTO_TEST_CASE(TestingRoute_emptyatstart) {
+	TestingRoute r;
 	BOOST_CHECK_EQUAL(r.get_length(), 0);
 }
-BOOST_AUTO_TEST_CASE(DummyRoute_addnode) {
-	DummyRoute r;
-	DummyRoutingNode d;
+BOOST_AUTO_TEST_CASE(TestingRoute_addnode) {
+	TestingRoute r;
+	TestingRoutingNode d;
 	r.insert_as_first(&d);
 
 	BOOST_CHECK_EQUAL(r.get_length(), 1);
 }
-BOOST_FIXTURE_TEST_CASE(DummyRoute_hasnode, SimpleRouterFixture) {
+BOOST_FIXTURE_TEST_CASE(TestingRoute_hasnode, SimpleRouterFixture) {
 	BOOST_CHECK_EQUAL(route.has_node(d0), false);
 	BOOST_CHECK_EQUAL(route.has_node(d1), false);
 	route.insert_as_first(d0);
@@ -240,7 +262,7 @@ BOOST_FIXTURE_TEST_CASE(DummyRoute_hasnode, SimpleRouterFixture) {
 	BOOST_CHECK_EQUAL(route.has_node(d0), true);
 	BOOST_CHECK_EQUAL(route.has_node(d1), true);
 }
-BOOST_FIXTURE_TEST_CASE(DummyRoute_haschain, SimpleRouterFixture) {
+BOOST_FIXTURE_TEST_CASE(TestingRoute_haschain, SimpleRouterFixture) {
 	std::vector<RoutingNode *> chain;
 
 	chain.push_back(d0);
@@ -251,7 +273,7 @@ BOOST_FIXTURE_TEST_CASE(DummyRoute_haschain, SimpleRouterFixture) {
 	chain.insert(chain.begin(), d1);
 	BOOST_CHECK_EQUAL(route.has_chain(chain), true);
 }
-BOOST_FIXTURE_TEST_CASE(DummyRoute_chainisunidirectional, SimpleRouterFixture) {
+BOOST_FIXTURE_TEST_CASE(TestingRoute_chainisunidirectional, SimpleRouterFixture) {
 	std::vector<RoutingNode *> chain;
 	// Chains are unidirectional. Check that chain.clear();
 	chain.push_back(d0);
@@ -260,9 +282,9 @@ BOOST_FIXTURE_TEST_CASE(DummyRoute_chainisunidirectional, SimpleRouterFixture) {
 	route.insert_as_first(d1);
 	BOOST_CHECK_EQUAL(route.has_chain(chain), false);
 }
-BOOST_FIXTURE_TEST_CASE(DummyRoute_haschain_checksubchain, SimpleRouterFixture) {
+BOOST_FIXTURE_TEST_CASE(TestingRoute_haschain_checksubchain, SimpleRouterFixture) {
 	// Do not get confused when a partial chain is found
-	DummyRoutingNode d;
+	TestingRoutingNode d;
 	std::vector<RoutingNode *> chain;
 
 	chain.push_back(&d);
@@ -280,9 +302,9 @@ BOOST_FIXTURE_TEST_CASE(DummyRoute_haschain_checksubchain, SimpleRouterFixture) 
 	route.insert_as_first(d1); // d1 d0 d d0 d1 d d0 d
 	BOOST_CHECK_EQUAL(route.has_chain(chain), true);
 }
-BOOST_FIXTURE_TEST_CASE(DummyRoute_haschain_checksubchain_endisnotstart, SimpleRouterFixture) {
+BOOST_FIXTURE_TEST_CASE(TestingRoute_haschain_checksubchain_endisnotstart, SimpleRouterFixture) {
 	// Do not get confused when a partial chain is found
-	DummyRoutingNode d;
+	TestingRoutingNode d;
 	std::vector<RoutingNode *> chain;
 
 	chain.push_back(&d);
@@ -305,7 +327,7 @@ BOOST_FIXTURE_TEST_CASE(DummyRoute_haschain_checksubchain_endisnotstart, SimpleR
 	route.insert_as_first(d1);
 	BOOST_CHECK_EQUAL(route.has_chain(chain), true);
 }
-BOOST_FIXTURE_TEST_CASE(DummyRoute_init, SimpleRouterFixture) {
+BOOST_FIXTURE_TEST_CASE(TestingRoute_init, SimpleRouterFixture) {
 	route.insert_as_first(d0);
 	BOOST_CHECK_EQUAL(route.get_length(), 1);
 	route.init(0);
@@ -315,7 +337,7 @@ BOOST_FIXTURE_TEST_CASE(DummyRoute_init, SimpleRouterFixture) {
 }
 // }}}
 
-/// {{{ Router Test-Cases
+// {{{ Router Test-Cases
 /*************************************************************************/
 /*                           EQUAL COST TESTS                            */
 /*************************************************************************/
@@ -336,6 +358,7 @@ BOOST_FIXTURE_TEST_CASE(router_findroute_seperatedNodes_exceptFail, SimpleRouter
 BOOST_FIXTURE_TEST_CASE(router_findroute_connectedNodes_exceptSuccess, SimpleRouterFixture) {
 	d0->add_neighbour(d1);
 	d1->add_neighbour(d0);
+	
 	bool rval = r.find_route
 		(*d0, *d1,
 		 &route,
@@ -351,7 +374,7 @@ struct ComplexRouterFixture {
 	typedef std::vector<RoutingNode *> Nodes;
 
 	ComplexRouterFixture() {
-		d0 = new DummyRoutingNode();
+		d0 = new TestingRoutingNode();
 		nodes.push_back(d0);
 	}
 	~ComplexRouterFixture() {
@@ -365,12 +388,12 @@ struct ComplexRouterFixture {
 	/**
 	  * Convenience function
 	  */
-	DummyRoutingNode * new_node_w_neighbour
-		(DummyRoutingNode * d,
+	TestingRoutingNode * new_node_w_neighbour
+		(TestingRoutingNode * d,
 		 Coords pos = Coords(0, 0),
 		 int32_t roadcost = 1, int32_t waitcost = 0)
 	{
-		DummyRoutingNode * d0 = new DummyRoutingNode(roadcost, waitcost, pos);
+		TestingRoutingNode * d0 = new TestingRoutingNode(roadcost, waitcost, pos);
 
 		d0->add_neighbour(d);
 		d->add_neighbour(d0);
@@ -385,9 +408,9 @@ struct ComplexRouterFixture {
 	  *
 	  * \return The argument Node
 	  */
-	DummyRoutingNode * add_triangle(DummyRoutingNode * d) {
-		DummyRoutingNode * d0 = new DummyRoutingNode();
-		DummyRoutingNode * d1 = new DummyRoutingNode();
+	TestingRoutingNode * add_triangle(TestingRoutingNode * d) {
+		TestingRoutingNode * d0 = new TestingRoutingNode();
+		TestingRoutingNode * d1 = new TestingRoutingNode();
 
 		d->add_neighbour(d0); d->add_neighbour(d1);
 		d0->add_neighbour(d); d0->add_neighbour(d1);
@@ -403,13 +426,13 @@ struct ComplexRouterFixture {
 	  *
 	  * \arg d The node to attach the dead end to
 	  */
-	DummyRoutingNode * add_dead_end(DummyRoutingNode * d) {
+	TestingRoutingNode * add_dead_end(TestingRoutingNode * d) {
 
 		// Some random dead ends
-		DummyRoutingNode * d0 = new_node_w_neighbour(d);
+		TestingRoutingNode * d0 = new_node_w_neighbour(d);
 		d0 = new_node_w_neighbour(d0);
 
-		DummyRoutingNode * d1 = new_node_w_neighbour(d0);
+		TestingRoutingNode * d1 = new_node_w_neighbour(d0);
 		new_node_w_neighbour(d1);
 		new_node_w_neighbour(d1);
 		d1 = new_node_w_neighbour(d1);
@@ -430,8 +453,8 @@ struct ComplexRouterFixture {
 	 *
 	 * \return The last node in the chain
 	 */
-	DummyRoutingNode * add_chain(int n, DummyRoutingNode * start, Nodes * chain) {
-		DummyRoutingNode * last = start;
+	TestingRoutingNode * add_chain(int n, TestingRoutingNode * start, Nodes * chain) {
+		TestingRoutingNode * last = start;
 		chain->push_back(start);
 		for (int i = 0; i < n; i++) {
 			last = new_node_w_neighbour(last);
@@ -440,11 +463,11 @@ struct ComplexRouterFixture {
 		return last;
 	}
 
-	DummyRoutingNode * d0;
+	TestingRoutingNode * d0;
 	Nodes nodes;
 	Router r;
-	DummyRoute route;
-	DummyTransportCostCalculator cc;
+	TestingRoute route;
+	TestingTransportCostCalculator cc;
 };
 
 BOOST_FIXTURE_TEST_CASE(triangle_test, ComplexRouterFixture) {
@@ -456,7 +479,7 @@ BOOST_FIXTURE_TEST_CASE(triangle_test, ComplexRouterFixture) {
 BOOST_FIXTURE_TEST_CASE(find_long_route, ComplexRouterFixture) {
 	Nodes chain;
 
-	DummyRoutingNode * d5 = add_chain(5, d0, &chain);
+	TestingRoutingNode * d5 = add_chain(5, d0, &chain);
 
 	new_node_w_neighbour(d0);
 
@@ -470,9 +493,9 @@ BOOST_FIXTURE_TEST_CASE(find_long_route, ComplexRouterFixture) {
 
 	BOOST_CHECK_EQUAL(rval, true);
 
-	add_dead_end(static_cast<DummyRoutingNode *>(chain[0]));
-	add_dead_end(static_cast<DummyRoutingNode *>(chain[3]));
-	add_dead_end(static_cast<DummyRoutingNode *>(chain[5]));
+	add_dead_end(static_cast<TestingRoutingNode *>(chain[0]));
+	add_dead_end(static_cast<TestingRoutingNode *>(chain[3]));
+	add_dead_end(static_cast<TestingRoutingNode *>(chain[5]));
 
 	BOOST_CHECK(route.has_chain(chain));
 
@@ -517,9 +540,9 @@ struct DistanceRoutingFixture : public ComplexRouterFixture {
 			d5->add_neighbour(end);
 		}
 
-	DummyRoutingNode * start;
-	DummyRoutingNode * end;
-	DummyRoutingNode *d1, *d2, *d3, *d4, *d5;
+	TestingRoutingNode * start;
+	TestingRoutingNode * end;
+	TestingRoutingNode *d1, *d2, *d3, *d4, *d5;
 };
 BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 	Nodes chain;

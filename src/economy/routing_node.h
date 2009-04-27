@@ -56,7 +56,7 @@ class RoutingNode {
     friend class Router;
     friend class RoutingNodeQueue;
 
-private:
+protected: // The variables are only protected so that Test classes can read them
 	uint32_t                    mpf_cycle;
 	int32_t                     mpf_heapindex;
 	int32_t                     mpf_realcost; ///< real cost of getting to this flag
@@ -64,7 +64,8 @@ private:
 	int32_t                     mpf_estimate; ///< estimate of cost to destination
 
 public:
-    RoutingNode() {} 
+    RoutingNode() : mpf_cycle(0), mpf_heapindex(0), 
+        mpf_realcost(0), mpf_backlink(0), mpf_estimate(0) {} 
     virtual ~RoutingNode() {}
 
     void reset_path_finding_cycle(void) { mpf_cycle = 0; }
