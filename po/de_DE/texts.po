@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3807\n"
+"Project-Id-Version: Widelands svn3932\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-15 12:22+0000\n"
-"PO-Revision-Date: 2009-04-15 14:18+0100\n"
+"POT-Creation-Date: 2009-04-27 16:07+0000\n"
+"PO-Revision-Date: 2009-04-27 17:13+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -349,7 +349,7 @@ msgstr "Häuptling"
 msgid "Elders"
 msgstr "Ältesten"
 
-#: ../../txts/developers:19 ../../txts/developers:289
+#: ../../txts/developers:19 ../../txts/developers:290
 msgid "Graphics"
 msgstr "Grafik"
 
@@ -357,15 +357,15 @@ msgstr "Grafik"
 msgid "vacant"
 msgstr "unbesetzt"
 
-#: ../../txts/developers:26 ../../txts/developers:282
+#: ../../txts/developers:26 ../../txts/developers:283
 msgid "Homepage"
 msgstr "Homepage"
 
-#: ../../txts/developers:33 ../../txts/developers:295
+#: ../../txts/developers:33 ../../txts/developers:296
 msgid "Sound"
 msgstr "Geräusche"
 
-#: ../../txts/developers:40 ../../txts/developers:300
+#: ../../txts/developers:40 ../../txts/developers:301
 msgid "Translation"
 msgstr "Übersetzer"
 
@@ -433,59 +433,59 @@ msgstr "Galizisch"
 msgid "German"
 msgstr "Deutsch"
 
-#: ../../txts/developers:190
+#: ../../txts/developers:191
 msgid "Hebrew"
 msgstr "Hebräisch"
 
-#: ../../txts/developers:195
+#: ../../txts/developers:196
 msgid "Hungarian"
 msgstr "Ungarisch"
 
-#: ../../txts/developers:200
+#: ../../txts/developers:201
 msgid "Polish"
 msgstr "Polnisch"
 
-#: ../../txts/developers:208
+#: ../../txts/developers:209
 msgid "Russian"
 msgstr "Russisch"
 
-#: ../../txts/developers:213
+#: ../../txts/developers:214
 msgid "Slovak"
 msgstr "Slovakisch"
 
-#: ../../txts/developers:218
+#: ../../txts/developers:219
 msgid "Spanish"
 msgstr "Spanisch"
 
-#: ../../txts/developers:223
+#: ../../txts/developers:224
 msgid "Swedish"
 msgstr "Schwedisch"
 
-#: ../../txts/developers:231
+#: ../../txts/developers:232
 msgid "Packagers"
 msgstr "Packer"
 
-#: ../../txts/developers:235
+#: ../../txts/developers:236
 msgid "Linux Distributions"
 msgstr "Linux Distributionen"
 
-#: ../../txts/developers:246
+#: ../../txts/developers:247
 msgid "Other Unix Distributions"
 msgstr "Andere Unix Distributionen"
 
-#: ../../txts/developers:255
+#: ../../txts/developers:256
 msgid "Non Unix Distributions"
 msgstr "Nicht Unix Distributionen"
 
-#: ../../txts/developers:266
+#: ../../txts/developers:267
 msgid "Wiki and Enduser-Documentation"
 msgstr "Wiki und Endbenutzer-Dokumentation"
 
-#: ../../txts/developers:278
+#: ../../txts/developers:279
 msgid "Former elders"
 msgstr "Ehemalige Ältesten"
 
-#: ../../txts/developers:306
+#: ../../txts/developers:307
 msgid "Other"
 msgstr "Andere"
 
@@ -498,7 +498,7 @@ msgid "README for the Editor"
 msgstr "Lies Mich des Editors"
 
 #: ../../txts/editor_readme:10
-msgid "This Editor is intended for players who'd like to design their own maps to use with Widelands.<br>As you can see, this Editor is heavy work in progress and as the Editor becomes better and better this text will also get longer and more complete."
+msgid "This Editor is intended for players who would like to design their own maps to use with Widelands.<br>As you can see, this Editor is heavy work in progress and as the Editor becomes better and better this text will also get longer and more complete."
 msgstr "Der Editor ist für Spieler gedacht, die gerne ihre eigenen Karten erstellen und spielen würden.<br>Wie Du sehen kannst, wird am Editor noch hart gearbeitet. Und so wird mit dem immer besser werdenden Editor auch dieser Text schon bald länger und länger werden. "
 
 #: ../../txts/editor_readme:12
