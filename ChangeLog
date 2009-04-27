@@ -1,4 +1,5 @@
 ### Build 14 (until now)
+- Improved computer player behaviour (many different svn rev.)
 - Throw out the bundled version of scons. Scons is widely available by now and
   the bundled version caused more trouble than it was worth: many incompati-
   bilities, where a distro-supplied version would have worked (svn:r3929)

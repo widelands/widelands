@@ -159,10 +159,13 @@ struct MineableField {
 };
 
 struct EconomyObserver {
-	Widelands::Economy         & economy;
+	Widelands::Economy               & economy;
 	std::list<Widelands::Flag const *> flags;
+	int32_t                            next_connection_try;
 
-	EconomyObserver (Widelands::Economy & e) : economy(e) {}
+	EconomyObserver (Widelands::Economy & e) : economy(e) {
+		next_connection_try = 0;
+	}
 };
 
 struct BuildingObserver {

@@ -57,9 +57,6 @@ struct Flag;
  *   is rechecked after construction of a building or a road. Instead it would
  *   be better to write down the changed coordinates and only check those and
  *   surrounding ones.
- * - Improve road building - f.e. doubled roads at high traffic points and
- *   connection of flags that would improve transportation flow.
- * - General improvements of defaultAI logic for construction of buildings.
  *
  */
 struct DefaultAI : Computer_Player {
@@ -90,7 +87,7 @@ private:
 	void update_mineable_field (MineableField &);
 
 	bool construct_building ();
-	bool construct_roads    ();
+	bool construct_roads    (int32_t);
 	bool improve_roads      (int32_t);
 
 	bool improve_transportation_ways (const Widelands::Flag &);

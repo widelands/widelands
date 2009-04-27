@@ -124,7 +124,7 @@ void DefaultAI::think ()
 	// build some roads if needed
 	if (next_road_due <= gametime) {
 		next_road_due = gametime + 1000;
-		if (construct_roads ()) {
+		if (construct_roads (gametime)) {
 			m_buildable_changed = true;
 			m_mineable_changed = true;
 			return;
@@ -836,7 +836,7 @@ bool DefaultAI::construct_building ()
  * This function searches for places where a new road is needed to connect two
  * economies. It then sends the request to build the road.
  */
-bool DefaultAI::construct_roads ()
+bool DefaultAI::construct_roads (int32_t gametime)
 {
 	if (economies.size() < 2) {
 		// only one economy, no need for new roads
@@ -847,18 +847,38 @@ bool DefaultAI::construct_roads ()
 	std::queue<int32_t> queue;
 	Map & map = game().map();
 
-	container_iterate_const(std::list<EconomyObserver *>, economies, i)
-		container_iterate_const(std::list<Flag const *>, (*i.current)->flags, j)
-		{
-			queue.push (spots.size());
+	uint32_t economies_to_connect = 0;
+	EconomyObserver * eo_to_connect;
 
-			spots.push_back(WalkableSpot());
-			spots.back().coords  = (*j.current)->get_position();
-			spots.back().hasflag = true;
-			spots.back().cost    = 0;
-			spots.back().eco     = &(*i.current)->economy;
-			spots.back().from    = -1;
+	{ // fetch first two economies that might be connectable
+		std::list<EconomyObserver *> &eo = economies;
+		std::list<EconomyObserver *>::iterator i = eo.begin();
+		while ((economies_to_connect < 2) && (i != eo.end())) {
+			// Do not try to connect economies that already failed in last time.
+			if ((*i)->next_connection_try <= gametime) {
+				container_iterate_const(std::list<Flag const *>, (*i)->flags, j)
+				{
+					queue.push (spots.size());
+
+					spots.push_back(WalkableSpot());
+					spots.back().coords  = (*j.current)->get_position();
+					spots.back().hasflag = true;
+					spots.back().cost    = 0;
+					spots.back().eco     = &(*i)->economy;
+					spots.back().from    = -1;
+				}
+				if (economies_to_connect == 1)
+					eo_to_connect = (*i);
+
+				++ economies_to_connect;
+			}
+			++i;
 		}
+	}
+
+	// No need to connect, if only one economy
+	if (economies_to_connect < 2)
+		return false;
 
 	container_iterate_const(std::list<BuildableField *>, buildable_fields, i) {
 		spots.push_back(WalkableSpot());
@@ -922,7 +942,7 @@ bool DefaultAI::construct_roads ()
 
 		for (i = 0; i < 6; ++i) // the 6 different directions
 			if (from.neighbours[i] >= 0) {
-				WalkableSpot &to = spots[from.neighbours[i]];
+				WalkableSpot & to = spots[from.neighbours[i]];
 
 				if (to.cost < 0) {
 					to.cost = from.cost + 1;
@@ -980,6 +1000,8 @@ bool DefaultAI::construct_roads ()
 				}
 			}
 	}
+	// Unable to connect, so we let this economy wait for 30 seconds if it fails.
+	eo_to_connect->next_connection_try = gametime + 30000;
 	return false;
 }
 
@@ -1023,6 +1045,8 @@ bool DefaultAI::improve_roads (int32_t gametime)
 					}
 				}
 			}
+			// Unable to set a flag - perhaps the road was build stupid
+			game().send_player_bulldoze (*const_cast<Road *>(roads.front()));
 		}
 
 		roads.push_back (roads.front());
@@ -1276,7 +1300,7 @@ void DefaultAI::consider_productionsite_influence
 }
 
 
-/// \returns the economy observer
+/// \returns the economy observer containing \arg economy
 EconomyObserver * DefaultAI::get_economy_observer
 	(Economy & economy)
 {
