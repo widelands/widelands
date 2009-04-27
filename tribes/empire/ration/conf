@@ -1,4 +1,5 @@
 help=_A small bite to keep miners strong and working.
+default_target_quantity=20
 preciousness=2
 
 [idle]

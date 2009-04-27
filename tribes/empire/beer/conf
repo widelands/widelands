@@ -1,4 +1,5 @@
 help=_Young soldiers and miners need some encouragement. This drink makes a man fearless and strong.
+default_target_quantity=15
 preciousness=2
 
 [idle]

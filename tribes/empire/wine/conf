@@ -1,4 +1,5 @@
 help=_This wine gives enough power, to mine marble or gold. And furthermore, our soldiers like it, too.
+default_target_quantity=10
 preciousness=2
 
 [idle]

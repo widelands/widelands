@@ -1,4 +1,5 @@
 help=_The hammer is an essential tool. It is needed by the geologist, the worker, the armour- and weaponsmith. Make sure you always got some in reserve! It is produced by the toolsmith.
+default_target_quantity=2
 preciousness=1
 
 [idle]

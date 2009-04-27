@@ -1,4 +1,5 @@
 help=_Cloth is needed for Empire ships and few bigger buildings. It is produced out of wool.
+default_target_quantity=5
 preciousness=1
 
 [idle]

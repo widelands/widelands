@@ -1,4 +1,5 @@
 help=_Stones and wood are the basic build material of the Empire.
+default_target_quantity=25
 preciousness=10
 
 # The roman workers know how to work on stones.
