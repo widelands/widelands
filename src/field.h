@@ -111,7 +111,7 @@ struct Field {
 
 private:
 	Height height;
-	int8_t   brightness;
+	int8_t brightness;
 
 	FieldCaps       caps                    : 7;
 	Buildhelp_Index buildhelp_overlay_index : 3;
@@ -164,10 +164,10 @@ public:
 	Height get_height() const throw () {return height;}
 	FieldCaps get_caps() const {return caps;}
 
-	Terrains             get_terrains() const throw () {return terrains;}
+	Terrains      get_terrains() const throw () {return terrains;}
 	Terrain_Index terrain_d   () const throw () {return terrains.d;}
 	Terrain_Index terrain_r   () const throw () {return terrains.r;}
-	void set_terrains (const Terrains             i) throw () {terrains   = i;}
+	void          set_terrains(const Terrains i) throw () {terrains = i;}
 	void set_terrain
 		(const TCoords<FCoords>::TriangleIndex t, Terrain_Index const i)
 		throw ()

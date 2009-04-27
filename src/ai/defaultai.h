@@ -109,6 +109,8 @@ private:
 
 	bool check_supply(BuildingObserver const &);
 
+	bool consider_attack(int32_t);
+
 
 private:
 // Variables of default AI
@@ -134,6 +136,7 @@ private:
 	int32_t next_road_due;
 	int32_t next_construction_due;
 	int32_t next_productionsite_check_due;
+	int32_t next_attack_consideration_due;
 	int32_t inhibit_road_building;
 };
 

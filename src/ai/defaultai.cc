@@ -56,7 +56,8 @@ DefaultAI::DefaultAI(Game & g, const Player_Number pid) :
 Computer_Player(g, pid),
 m_buildable_changed(true),
 m_mineable_changed(true),
-tribe(0)
+tribe(0),
+next_attack_consideration_due(60000)
 {}
 
 
@@ -133,13 +134,20 @@ void DefaultAI::think ()
 		return; // don't build new buildings as long as the cp has not tried to
 		        // connect all economies.
 
-	// finally try to build something if possible
+	// Now try to build something if possible
 	if (next_construction_due <= gametime) {
 		next_construction_due = gametime + 2000;
 		if (construct_building()) {
 			return;
 		}
 	}
+
+	// Finally consider to attack another player
+	if (next_attack_consideration_due <= gametime)
+		if (consider_attack(gametime)) {
+			m_buildable_changed = true;
+			m_mineable_changed = true;
+		}
 }
 
 
@@ -295,7 +303,7 @@ void DefaultAI::late_initialization ()
 			if (f.field->get_owned_by() != get_player_number())
 				continue;
 
-			unusable_fields.push_back (map.get_fcoords(Coords(x, y)));
+			unusable_fields.push_back (f);
 
 			if (upcast(PlayerImmovable, imm, f.field->get_immovable()))
 				// Guard by a set because immovables might be on several fields at once
@@ -1454,3 +1462,54 @@ bool DefaultAI::check_supply(BuildingObserver const &bo)
 	return supplied == bo.inputs.size();
 }
 
+
+/**
+ * Checks all fields hold by another play for opposing military buildings
+ * and consideres, whether an attack would make sense. If yes it attacks with
+ * all available forces.
+ *
+ * \returns true, if attack was started.
+ */
+bool DefaultAI::consider_attack(int32_t gametime) {
+	next_attack_consideration_due = gametime + 25000;
+
+	// Check all fields and make a list of possible targets.
+	Map & map = game().map();
+	uint16_t pn = get_player_number();
+
+	MilitarySite * target;
+	int32_t        chance = 0;
+	int32_t        attackers = 0;
+
+	for (Y_Coordinate y = 0; y < map.get_height(); ++y) {
+		for (X_Coordinate x = 0; x < map.get_width(); ++x) {
+			FCoords f = map.get_fcoords(Coords(x, y));
+
+			if ((f.field->get_owned_by() == 0) | (f.field->get_owned_by() == pn))
+				continue;
+
+			if (upcast(MilitarySite, bld, f.field->get_immovable())) {
+				if (bld->canAttack()) {
+					int32_t ta = player->findAttackSoldiers(bld->base_flag());
+					if (ta < 1)
+						continue;
+
+					int32_t tc = ta - bld->presentSoldiers().size();
+					if (tc > chance) {
+						target = bld;
+						chance = tc;
+						attackers = ta;
+					}
+				}
+			}
+		}
+	}
+
+	// Return if chance is too low
+	if (chance < 3)
+		return false;
+
+	// Attack the selected target.
+	game().send_player_enemyflagaction(target->base_flag(), pn, attackers);
+	return true;
+}
