@@ -1,0 +1,38 @@
+#!/usr/bin/python -tt
+
+
+import re
+class EvalMatches( object ):
+    def __init__(self):
+        # This matches (and groups) all indentations at line begin
+        self._regexp=re.compile(r"^([ \t]*)", re.MULTILINE)
+    
+    def __call__(self, data):
+        indents = self._regexp.findall(data)
+        
+        errors = []
+        curline = 2
+        for prev,cur in zip(indents[::1],indents[1::1]):
+            if (len(cur) != 0 and len(prev)!= 0) \
+               and len(cur)-len(prev) > 1:
+                errors.append( (curline, "Indent difference to big to previous line: len(cur): %i len(prev): %i!" % (len(cur),len(prev)) ))
+            curline += 1
+        
+        return errors
+
+
+is_multiline = True
+error_msg = ""
+
+evaluate_matches = EvalMatches()
+
+allowed = [
+"""\tHallo {
+		Anything;
+}""", 
+]
+forbidden = [
+"""\tHallo {
+			Anything;
+}""",
+]

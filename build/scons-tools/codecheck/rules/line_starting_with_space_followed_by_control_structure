@@ -1,0 +1,38 @@
+#!/usr/bin/python
+
+
+"""
+Lines with control structures affect how editors indent the controlled lines
+following them. So an existing line of that kind that is badly indented can
+cause newly added code to become badly indented. Therefore it is especially
+important that the control structures are correctly indented. 
+
+This does not yet include for loops, because there are still too many of them
+that need fixing and they should eventually be replaced with iteration macros
+anyway. 
+
+I disagree with the macros. I do not think they add to the clarity of the code.
+  -- SirVer
+"""
+
+regexp=r"""^	* +(\{|case|else|try|(catch|if|switch|while) *\()"""
+error_msg = "Control structures shouldn't start a line. Move them to the end of the previous line"
+
+forbidden = [
+    '   {',
+    '   else',
+    '   if (a)',
+    '   switch (a)',
+    '   while (a)',
+]
+
+allowed = [
+    '	{',
+    '	}',
+    '	else',
+    '	if (a)',
+    '	switch (a)',
+    '	while (a)',
+]
+
+

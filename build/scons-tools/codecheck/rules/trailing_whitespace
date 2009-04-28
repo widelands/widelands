@@ -1,0 +1,28 @@
+#!/usr/bin/python
+
+"""
+A tab or space followed by the end of the line.
+"""
+
+
+regexp = r'[^\s][ \t]+$'
+error_msg = "Trailing whitespace at end of line"
+
+forbidden = [
+    """e; """,
+    """e;	""",
+]
+
+allowed =  [
+    "\t\t",
+    "    ",
+    "e;",
+    "e;",
+    "(o)	hi",
+]
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+#!/usr/bin/python
+
+
+"""
+This catches a space before a closing grouping token (bracket, brace or
+parenthesis), semicolon or comma. Characters inside "" and after // are
+ignored.
+"""
+
+
+regexp = r"""^([^/#"']|/([^/"']|"([^"]|\\")*"|'(\\[\'nt]|[^\'])')|"([^"\]|\\"|\\[^"])*"|'(\\[\'nt]|[^\'])')*/? []);,]"""
+error_msg = "No space before ), }, ; allowed!"
+
+forbidden = [
+    ' )',
+    '	/ )',
+    '; ;',
+]
+
+allowed = [
+    '// }',
+    '// )',
+    '	// )',
+    '" )"',
+    '" \")"',
+    '	 " \")"',
+]
+
+
+

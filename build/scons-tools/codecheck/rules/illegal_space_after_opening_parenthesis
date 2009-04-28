@@ -1,0 +1,29 @@
+#!/usr/bin/python
+
+
+"""
+This catches an opening parenthesis followed by a space or end of line.
+"""
+
+regexp=r"""^([^/]|/[^/])*/?\(( |$|\n)"""
+error_msg="No space or newline allowed after openening parenthesis"
+
+forbidden = [
+    '( h',
+    '( ',
+    '(',
+    '/(',
+    '/ /(',
+    '/ / (',
+    '/ / /(',
+    '/ / /(\nadjh',
+]
+
+allowed = [
+    '(h',
+    '//(',
+    '// (',
+    '// (',
+]
+
+

@@ -1,0 +1,30 @@
+#!/usr/bin/python
+
+
+"""
+This catches lines starting with (possibly some tabs and) a space and ending
+with an opening brace. It implies wrong indentation (the indentation of lines
+ending with { is especially important since editors indent following lines the
+same way).
+"""
+
+regexp=r"""^\t* .*{(\n|$)"""
+error_msg = "Wrong indentation on this line. Check for tab/space mixup!"
+
+forbidden = [
+    ' {',
+    ' {',
+    ' {\nlala',
+    '\t {\nandmore',
+    '\t {',
+    '\t y) {',
+    '\t if (b) {',
+]
+
+allowed = [
+    '{',
+    '\t{',
+    '\tif (b) {',
+]
+
+

@@ -1,0 +1,31 @@
+#!/usr/bin/python
+
+
+"""
+Thic catches use of the contrived syntax for dereference and member selection:
+(*pointer).member
+
+Use the more convenient syntax instead:
+pointer->member
+"""
+
+
+regexp = r"""[^]_A-Za-z0-9 >] *\(\*[a-zA-Z_][_a-zA-Z_]*\)\."""
+error_msg = "Don't use (*a).member, user a->member"
+
+forbidden = [
+    '+ (*abc).def',
+    '* (*abc).def',
+    '/ ((*abc).def)',
+]
+
+allowed = [
+    'abc->def',
+    '_cast<T>(*abc).def',
+    '_cast<T> (*abc).def',
+    'operator [] (*p).jkl',
+    'QString("%1 %2").arg(*it).arg(8)',
+    'some_string.arg(*it).arg(8)',
+]
+
+

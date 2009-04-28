@@ -1,0 +1,47 @@
+#!/usr/bin/python
+
+
+"""
+This catches use of SDL integer names ([SU]int(8|16|32|64))in places that
+should not use them. They should only be used to interact with SDL code. C99
+integer names (u?int(8|16|32|64)_t) should be used elsewhere.
+"""
+
+
+regexp = r"""[SU]int(?:8|16|32|64)[^_].*(?:Uns|S)igned(?:8|16|32|64)"""
+error_msg ="Do not use SDL types. Use c99 types (e.g. uint32_t)"
+
+
+forbidden = [
+    'Sint8  T::Unsigned64()',
+    'Uint8  T::  Signed64()',
+    'Sint16 T::Unsigned32()',
+    'Uint16 T::  Signed32()',
+    'Sint32 T::Unsigned16()',
+    'Uint32 T::  Signed16()',
+    'Sint64 T::Unsigned8 ()',
+    'Uint64 T::  Signed8 ()',
+    'Sint8  T::  Signed8 ()',
+    'Uint8  T::Unsigned8 ()',
+    'Sint16 T::  Signed16()',
+    'Uint16 T::Unsigned16()',
+    'Sint32 T::  Signed32()',
+    'Uint32 T::Unsigned32()',
+    'Sint64 T::  Signed64()',
+    'Uint64 T::Unsigned64()',
+    'Uint8 version = fr.Unsigned8();',
+]
+
+allowed = [
+    'uint8_t',
+    'int8_t',
+    'uint16_t',
+    'int16_t',
+    'uint32_t',
+    'int32_t',
+    'uint64_t',
+    'int64_t',
+    'int8_t version = fr.Unsigned8();',
+]
+
+

@@ -1,0 +1,38 @@
+#!/usr/bin/python
+
+
+"""
+This catches a numerical constant used as a loop condition. Instead of while
+(true) or while (1), one should write for (;;). But it avoids catching some
+cases that are used in macro definitions (see
+[http://vivekkutal.blogspot.com/2006/03/do-while0.html]): 
+    #define macro(...) do {...} while (false)
+"""
+
+regexp =r"""(^.?|[^}].|.[^ ])while *\((true|false|0x[\da-fA-F]+|\d+(\.\d*)?)\)"""
+error_msg="Do not use numerical constants in loop condition!"
+
+forbidden = [
+    'while (false)',
+    'while (true)',
+    'while (0)',
+    'while (1)',
+    'while (00)',
+    'while (01)',
+    'while (00)',
+    'while (01.1)',
+    'while (1.01)',
+    'while (0xf)',
+    'while (0x9d)',
+    ' while (0x9d)',
+    '  while (0x9d)',
+]
+
+allowed = [
+    'for (;;)',
+    'while (a)',
+    'while (1 + b)',
+    '} while(false)',
+]
+
+

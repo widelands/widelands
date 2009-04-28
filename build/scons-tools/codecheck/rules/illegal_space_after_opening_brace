@@ -1,0 +1,49 @@
+#!/usr/bin/python
+
+
+"""
+This catches an opening brace followed by a space, but it allows it if a
+comment begins there, such as "{ //  comment". 
+"""
+
+regexp=r"""(?x) 
+^\s* 
+(?!///?)  # No comment 
+(?!/\*)  # No comment 
+(.*)
+
+\{\s # Finally, check for the space
+
+
+(?!\s*///?) # No comment after space
+(?!\s*/\*) # No comment after space
+[^\\]*
+
+([^\\]$|$)  # Make some extra work that '\' at the end of line is ok 
+"""
+
+error_msg = "No space after opening brace allowed!"
+
+forbidden = [
+    '{ ',
+    '{ /',
+    '{ / /',
+    '{ h',
+    '{ "h"',
+]
+
+allowed = [
+    "if(blah) {                \\",
+    '\tif ((m_readyflags | thisflag) != 3) {  //  codepath a',
+    r'// { This is ok',
+    r'/// {{{ Like this',
+    r'/* {{{ And this this',
+    r'{ // And this also',
+    r'{',
+    r'{/',
+    r'{/ /',
+    r'{h',
+    r'{"h"',
+]
+
+

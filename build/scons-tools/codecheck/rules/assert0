@@ -1,0 +1,22 @@
+#!/usr/bin/env python -tt
+# encoding: utf-8
+#
+
+"""
+The purpouse of this is simply to encourage the use "assert(false)" everywhere
+when an unconditional assert is desired, for consistency, instead of
+intermixing it with assert(0) here and there.
+"""
+
+error_msg="Use assert(false) here."
+
+regexp = r"""assert *\( *0 *\)"""
+
+allowed = [
+    "assert(false)",
+]
+forbidden = [
+    "assert(0)",
+]
+
+

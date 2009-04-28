@@ -1,0 +1,23 @@
+#!/usr/bin/python
+
+
+"""
+This catches a tab that comes after the first non-whitespace character on a
+line. Tabs should only be used for indentation.  
+"""
+
+
+regexp = r"""[^\t ].*[\t]"""
+error_msg = "Tabs are only allowed as the first characters in line"
+
+forbidden = [
+    "a	{",
+]
+
+
+allowed = [
+    "	 	h;",
+]
+
+
+
