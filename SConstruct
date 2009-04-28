@@ -204,10 +204,9 @@ if env['build'] == 'debug' or env['build'] == 'profile':
 
 
 ################################################################ C++ style-check
-# Done in src/SConscript, alias stylecheck
 
 if env['build'] == 'debug' or env['build'] == 'profile':
-        Alias('stylecheck', env.Execute('utils/spurious_source_code/detect'))
+        Alias('stylecheck_old', env.Execute('utils/spurious_source_code/detect'))
 
 
 ################################################################## PNG shrinking
