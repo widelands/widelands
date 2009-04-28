@@ -106,6 +106,7 @@ env=Environment(options=opts)
 env.Tool("ctags", toolpath=['build/scons-tools'])
 env.Tool("PNGShrink", toolpath=['build/scons-tools'])
 env.Tool("astyle", toolpath=['build/scons-tools'])
+env.Tool("CodeCheck", toolpath=['build/scons-tools'])
 env.Tool("Distribute", toolpath=['build/scons-tools'])
 env.Help(opts.GenerateHelpText(env))
 
@@ -184,22 +185,30 @@ SConscript('utils/SConscript')
 SConscript('worlds/SConscript')
 SConscript('global/SConscript')
 
+
+################################################################ Unit tests & style checking
+if env['build'] == 'debug' or env['build'] == 'profile':
+        Default('stylecheck')
+
+# If those passes, build the binary
 Default(thebinary)
 if env['build']=='release':
 	Default(buildlocale)
 
-########################################################################### tags
-
-Alias('tags', env.ctags(source=simpleglob('*.h', 'src', recursive=True)+simpleglob('*.cc', 'src', recursive=True)))
-
-################################################################ Unit tests
+# After, maybe build the tests
 if env['build'] == 'debug' or env['build'] == 'profile':
         Default("test")
 
+########################################################################### tags
+# Done in src/SConscript, alias tags
+
+
 ################################################################ C++ style-check
+# Done in src/SConscript, alias stylecheck
 
 if env['build'] == 'debug' or env['build'] == 'profile':
         Alias('stylecheck', env.Execute('utils/spurious_source_code/detect'))
+
 
 ################################################################## PNG shrinking
 
@@ -264,6 +273,7 @@ distcleanactions=[
 	Delete('build/scons-tools/Distribute.pyc'),
 	Delete('build/scons-tools/ctags.pyc'),
 	Delete('build/scons-tools/astyle.pyc'),
+	Delete('build/scons-tools/CodeCheck.pyc'),
 	Delete('build/scons-tools/PNGShrink.pyc'),
 #	Delete('build/scons-signatures.dblite')) # This can not work, how to get rid of this file?
 	Delete('utils/scons.py'),
