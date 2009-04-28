@@ -57,7 +57,8 @@ Computer_Player(g, pid),
 m_buildable_changed(true),
 m_mineable_changed(true),
 tribe(0),
-next_attack_consideration_due(60000)
+next_attack_consideration_due(60000),
+time_of_last_construction(0)
 {}
 
 
@@ -137,7 +138,8 @@ void DefaultAI::think ()
 	// Now try to build something if possible
 	if (next_construction_due <= gametime) {
 		next_construction_due = gametime + 2000;
-		if (construct_building()) {
+		if (construct_building(gametime)) {
+			time_of_last_construction = gametime;
 			return;
 		}
 	}
@@ -552,7 +554,7 @@ void DefaultAI::update_mineable_field (MineableField & field)
 
 	field.reachable    = false;
 	field.preferred    = false;
-	field.mines_nearby = true;
+	field.mines_nearby = 1;
 
 	FCoords fse;
 	map.get_neighbour (field.coords, Map_Object::WALK_SE, &fse);
@@ -591,7 +593,7 @@ void DefaultAI::update_mineable_field (MineableField & field)
  * \ToDo: this function holds a lot of calculations that are hard to understand
  * at first and even second view - explain what's going on here
  */
-bool DefaultAI::construct_building ()
+bool DefaultAI::construct_building (int32_t gametime)
 {
 	bool mine = false; // just used for easy checking whether a mine or something
 	                   // else was build.
@@ -672,34 +674,42 @@ bool DefaultAI::construct_building ()
 
 			if (j->type == BuildingObserver::PRODUCTIONSITE) {
 				if (j->need_trees) {
+					// Priority of woodcutters depend on the number of near trees
 					prio += bf->trees_nearby * 3 / 2;
 					prio /= 2 * (1 + bf->tree_consumers_nearby);
 					if (j->total_count() == 0)
 						prio *= 8; // big bonus for the basics
 				} else if (j->need_stones) {
+					// Priority of quarries depend on the number of near stones
 					prio += bf->stones_nearby * 3 / 2;
 					prio /= 2 * (1 + bf->stone_consumers_nearby);
 					if (j->total_count() == 0)
 						prio *= 8; // big bonus for the basics
 				} else if (j->production_hint >= 0) {
-					// production hint associates forester with trunk production
-					prio -= 6 * (j->cnt_built + j->cnt_under_construction);
-					prio += 4 * wares[j->production_hint].consumers;
-					prio += 2 * wares[j->production_hint].preciousness;
-
+					// production hint (f.e. associate forester with trunks)
 					// add bonus near buildings outputting production_hint ware
-					if (bf->producers_nearby[j->production_hint] > 0)
-						prio += 2;
+					prio += 2 * bf->producers_nearby[j->production_hint];
+
+					// Do not build too many of these buildings, but still care
+					// to build at least one.
+					if (j->total_count() > 1)
+						prio -= 10 * (j->total_count());
+					else
+						prio += 5;
+
+					if (prio < 0)
+						continue;
+
+					// Calculate the need for this building
+					prio += 4 * wares[j->production_hint].consumers;
+					prio += wares[j->production_hint].preciousness;
+
 					// don't build a forester if there are already a lot of trees
 					// FIXME: should be generalised for fish_breeder, etc.
 					prio -= bf->trees_nearby;
 				} else {
 					if (j->total_count() == 0)
 						prio += 2;
-
-					// don't make more than one building, if supply line is broken.
-					if (!check_supply(*j) && j->total_count() > 0)
-						prio -= 12;
 
 					// Check if the produced wares are needed
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
@@ -720,8 +730,6 @@ bool DefaultAI::construct_building ()
 							prio -= 4 * wares[j->inputs[k]].consumers;
 						}
 
-						// normalize by output count so that multipurpose
-						// buildings are not too good
 						int32_t output_prio = 0;
 						for (uint32_t k = 0; k < j->outputs.size(); ++k) {
 							WareObserver & wo = wares[j->outputs[k]];
@@ -747,11 +755,21 @@ bool DefaultAI::construct_building ()
 								++iosum;
 						prio += 2 * iosum;
 					}
+					// don't make more than one building, if supply line is broken.
+					if (!check_supply(*j) && j->total_count() > 0)
+						prio -= 12;
+
 				}
 			}
 
-			prio -=
-				2 * j->cnt_under_construction * (j->cnt_under_construction + 1);
+			if (time_of_last_construction - gametime > 60000)
+				// give it a last chance - perhaps it needs a sawmill, but prio of
+				// it is too low as too many buildings are under construction.
+				prio -= 2;
+			else
+				// avoid to have too many construction sites
+				prio -=
+					2 * j->cnt_under_construction * (j->cnt_under_construction + 1);
 
 			// add big penalty if water is needed, but is not near
 			if (j->need_water) {
@@ -788,13 +806,13 @@ bool DefaultAI::construct_building ()
 			if (mf->coords.field->get_resources() != i->mines)
 				continue;
 			else
-				prio += mf->coords.field->get_resources_amount();
+				prio += mf->coords.field->get_resources_amount() * 2 / 3;
 
 			// If the produced wares are needed, check if current economy can
 			// supply enough material for production.
 			for (uint32_t k = 0; k < i->inputs.size(); ++k) {
 				prio += 2 * wares[i->inputs[k]].producers;
-				prio -= 4 * wares[i->inputs[k]].consumers;
+				prio -= 6 * wares[i->inputs[k]].consumers;
 			}
 
 			// Check if the produced wares are needed
@@ -808,8 +826,8 @@ bool DefaultAI::construct_building ()
 			}
 
 			prio -= 2 * mf->mines_nearby * mf->mines_nearby;
-			prio /= 1 + i->cnt_built * 2;
-			prio /= 1 + i->cnt_under_construction * 4;
+			prio /= 1 + i->cnt_built * 3;
+			prio /= 1 + i->cnt_under_construction * 7;
 
 			if (prio > proposed_priority) {
 				proposed_building = i->id;
@@ -1471,9 +1489,10 @@ bool DefaultAI::check_supply(BuildingObserver const &bo)
  * \returns true, if attack was started.
  */
 bool DefaultAI::consider_attack(int32_t gametime) {
-	next_attack_consideration_due = gametime + 25000;
+	next_attack_consideration_due = (gametime % 51 + 10) * 1000 + gametime;
 
 	// Check all fields and make a list of possible targets.
+	// \FIXME this takes much too long on big maps
 	Map & map = game().map();
 	uint16_t pn = get_player_number();
 

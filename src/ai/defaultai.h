@@ -47,7 +47,6 @@ struct Flag;
  * \ToDo What it does not do until now is:
  * - Building and using trainings sites
  * - Higher the military presence at the frontier to other players
- * - Attacking a near enemy, if strong enough
  * - Enhancing buildings
  *
  * \ToDo Other things left to implement / improve:
@@ -57,6 +56,7 @@ struct Flag;
  *   is rechecked after construction of a building or a road. Instead it would
  *   be better to write down the changed coordinates and only check those and
  *   surrounding ones.
+ * - improvements and speedups in the whole defaultAI code.
  *
  */
 struct DefaultAI : Computer_Player {
@@ -86,7 +86,7 @@ private:
 	void update_buildable_field (BuildableField &);
 	void update_mineable_field (MineableField &);
 
-	bool construct_building ();
+	bool construct_building (int32_t);
 	bool construct_roads    (int32_t);
 	bool improve_roads      (int32_t);
 
@@ -138,6 +138,7 @@ private:
 	int32_t next_productionsite_check_due;
 	int32_t next_attack_consideration_due;
 	int32_t inhibit_road_building;
+	int32_t time_of_last_construction;
 };
 
 #endif // DEFAULTAI_H
