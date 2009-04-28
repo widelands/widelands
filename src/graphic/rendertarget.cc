@@ -674,20 +674,20 @@ void RenderTarget::rendermap
 							 ++it)
 							blit
 								(Point
-								 	(posx,
-								 	 posy
-								 	 +
-								 	 (TRIANGLE_HEIGHT
-								 	  -
-								 	  (f.field->get_height()
-								 	   +
-								 	   r.field->get_height()
-								 	   +
-								 	   b.field->get_height())
-								 	  *
-								 	  HEIGHT_FACTOR)
-								 	 /
-								 	 3)
+								 (posx,
+								  posy
+								  +
+								  (TRIANGLE_HEIGHT
+									-
+									(f.field->get_height()
+									 +
+									 r.field->get_height()
+									 +
+									 b.field->get_height())
+									*
+									HEIGHT_FACTOR)
+								  /
+								  3)
 								 -
 								 it->hotspot,
 								 it->picid);
@@ -738,20 +738,20 @@ void RenderTarget::rendermap
 							 ++it)
 							blit
 								(Point
-								 	(posx,
-								 	 posy
-								 	 +
-								 	 ((TRIANGLE_HEIGHT * 2)
-								 	  -
-								 	  (f.field->get_height()
-								 	   +
-								 	   bl.field->get_height()
-								 	   +
-								 	   br.field->get_height())
-								 	  *
-								 	  HEIGHT_FACTOR)
-								 	 /
-								 	 3)
+								 (posx,
+								  posy
+								  +
+								  ((TRIANGLE_HEIGHT * 2)
+									-
+									(f.field->get_height()
+									 +
+									 bl.field->get_height()
+									 +
+									 br.field->get_height())
+									*
+									HEIGHT_FACTOR)
+								  /
+								  3)
 								 -
 								 it->hotspot,
 								 it->picid);
@@ -1040,20 +1040,20 @@ void RenderTarget::rendermap
 							 ++it)
 							blit
 								(Point
-								 	(posx,
-								 	 posy
-								 	 +
-								 	 (TRIANGLE_HEIGHT
-								 	  -
-								 	  (f.field->get_height()
-								 	   +
-								 	   r.field->get_height()
-								 	   +
-								 	   b.field->get_height())
-								 	  *
-								 	  HEIGHT_FACTOR)
-								 	 /
-								 	 3)
+								 (posx,
+								  posy
+								  +
+								  (TRIANGLE_HEIGHT
+									-
+									(f.field->get_height()
+									 +
+									 r.field->get_height()
+									 +
+									 b.field->get_height())
+									*
+									HEIGHT_FACTOR)
+								  /
+								  3)
 								 -
 								 it->hotspot,
 								 it->picid);
@@ -1103,20 +1103,20 @@ void RenderTarget::rendermap
 							 ++it)
 							blit
 								(Point
-								 	(posx,
-								 	 posy
-								 	 +
-								 	 ((TRIANGLE_HEIGHT * 2)
-								 	  -
-								 	  (f.field->get_height()
-								 	   +
-								 	   bl.field->get_height()
-								 	   +
-								 	   br.field->get_height())
-								 	  *
-								 	  HEIGHT_FACTOR)
-								 	 /
-								 	 3)
+								 (posx,
+								  posy
+								  +
+								  ((TRIANGLE_HEIGHT * 2)
+									-
+									(f.field->get_height()
+									 +
+									 bl.field->get_height()
+									 +
+									 br.field->get_height())
+									*
+									HEIGHT_FACTOR)
+								  /
+								  3)
 								 -
 								 it->hotspot,
 								 it->picid);
@@ -1216,9 +1216,9 @@ void RenderTarget::drawanimrect
 
 	// Get the frame and its data
 	Surface * const frame = g_gr->get_animation(animation)->get_frame
-			((time / data->frametime) % g_gr->nr_frames(animation),
-			 player ? player->get_player_number() : 0,
-			 player);
+		((time / data->frametime) % g_gr->nr_frames(animation),
+		 player ? player->get_player_number() : 0,
+		 player);
 
 	dst -= g_gr->get_animation(animation)->get_hotspot();
 
