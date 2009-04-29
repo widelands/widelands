@@ -13,10 +13,11 @@ error_msg="Garbage tokens after include."
 regexp = r"""(?x)
 ^\#include\s*
 ((".*?")|(<.*?>))
-[^\s]*$"""
+[^\s]+$"""
 
 allowed = [
-    "assert(false)",
+    r'#include "file.h"',
+    r"""#include <file.h>""",
     r"""#include <file.h>  \t""", # Trailing whitespaces are not of interest for this rule
     r"""#include "file.h" \t """,
 ]
