@@ -97,23 +97,63 @@ def _parse_rules():
     
     return checkers, mlcheckers
 
+ansicolor = {
+    "default" : '\033[0m',
+
+    "black" : '\033[30m',
+    "red" : '\033[31m',
+    "green" : '\033[32m',
+    "yellow" : '\033[33m',
+    "blue" : '\033[34m',
+    "magenta" : '\033[35m',
+    "purple" : '\033[35m',
+    "cyan" : '\033[36m',
+    "white" : '\033[37m',
+
+    "reset" : '\033[0;0m',
+    "bold" : '\033[1m',
+        
+    "blackbg" : '\033[40m',
+    "redbg" : '\033[41m',
+    "greenbg" : '\033[42m',
+    "yellowbg" : '\033[43m',
+    "bluebg" : '\033[44m',
+    "magentabg" : '\033[45m',
+    "cyanbg" : '\033[46m',
+    "whitebg" : '\033[47m',
+}
+
 class CodeChecker(object):
     _checkers,_mlcheckers = _parse_rules()
     
-    def __init__(self, benchmark = False):
+    def __init__(self, benchmark = False, color = False):
         """
         benchmark - Run benchmarks on each rule. Print milliseconds after run
         """
         self._benchmark = benchmark
+        self._color = color
 
     @property
     def benchmark_results(self):
         return self._bench_results
 
-    @staticmethod 
-    def _print_errors(errors):
+    def use_color():
+        def fget(self):
+            return self._color
+        def fset(self, value):
+            self._color = value
+        return locals()
+    use_color = property(**use_color())
+
+    def _print_errors(self,errors):
         for e in errors:
-            print "%s:%i: %s" % (e)
+            fn,l,msg = e
+            if self._color:
+                fn = '%s%s%s' % (ansicolor["green"], fn, ansicolor["reset"])
+                l = '%s%s%s' % (ansicolor["cyan"], l, ansicolor["reset"])
+                msg = '%s%s%s%s' % (ansicolor["yellow"], ansicolor["bold"], msg, ansicolor["reset"])
+
+            print "%s:%s: %s" % (fn,l,msg)
     
     def check_file(self,fn, print_errors = True):
         errors = []
@@ -165,24 +205,28 @@ if __name__ == '__main__':
         print """
  -h,   --help            Print help and exit
  -b,   --benchmark       Benchmark each rule
+ -c,   --color           Print warnings in color
 """
 
     def main():
-        opts, files = getopt.getopt(sys.argv[1:], "hb", ["help", "benchmark"])
+        opts, files = getopt.getopt(sys.argv[1:], "hbc", ["help", "benchmark","color", "colour"])
        
         benchmark = False
+        color = False
         for o,a in opts:
             if o in ('-h','--help'):
                 usage()
                 sys.exit(0)
             if o in ('-b','--benchmark'):
                 benchmark = True
+            if o in ('-c','--colour','--color'):
+                color = True
         
         if not len(files):
             usage()
             sys.exit(0)
 
-        d = CodeChecker( benchmark = benchmark )
+        d = CodeChecker( benchmark = benchmark, color = color )
         for filename in files:
             print "Checking %s ..." % filename
             errors = d.check_file(filename)

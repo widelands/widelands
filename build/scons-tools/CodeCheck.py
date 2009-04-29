@@ -18,6 +18,8 @@ def codeCheckAction(target, source, env):
         if len(target)!=1 and len(source)!=1:
             raise RuntimeError, "CodeChecker Builder was called with more than one target or source"
 
+        d.use_color = env["USE_COLOR"]
+
         for s,t in zip(source,target):
             app = str(s.path)
             d.check_file(app)

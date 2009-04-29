@@ -6,6 +6,7 @@ import shutil, fnmatch, time, glob
 import SCons
 from SCons.Script.SConscript import SConsEnvironment
 
+from ColorizeGcc import overwrite_spawn_function
 from scons_configure import *
 from Distribute import *
 
@@ -36,6 +37,7 @@ def simpleglob(pattern='*', directory='.', recursive=False):
                         entries+=(simpleglob(pattern, os.path.join(directory, entry), recursive))
 
 	return entries
+
 
 ########################### Create a phony target (not (yet) a feature of scons)
 
@@ -92,6 +94,7 @@ def cli_options():
 		BoolVariable('enable_ggz', 'Use the GGZ Gamingzone?', False),
 		BoolVariable('prefer_localdata', 'Useful for developers. Use data and locales from ./ at runtime', True),
 		BoolVariable('pretty_compile_output', 'Suppress link and compile commands, only print a very short info text and occurring errors and warnings.', True),
+		BoolVariable('colored_compile_output', 'Show style warnings and (gcc) compile warnings in color. Disabled if output is not a tty', True),
 		)
 	return opts
 
@@ -140,7 +143,25 @@ if env['pretty_compile_output']:
     env.Append(LINKCOMSTR="Linking ==> '$TARGET'");
     env.Append(ARCOMSTR="ar ==> '$TARGET'");
     env.Append(RANLIBCOMSTR="ranlib ==> '$TARGET'");
-
+env["USE_COLOR"]=False
+if env['colored_compile_output']:
+    if not os.isatty(1): # No tty, no color. Sorry
+        env["USE_COLOR"]=False
+    elif "TERM" in os.environ:
+        color_terms = ("xterm-color",)
+        nocolor_terms = ("dumb",)
+        
+        # Try to get terminal settings from environment
+        # Note: we do not use scons environment, since 
+        # we *really* want the users terminal here
+        t = os.environ["TERM"]
+        if t in nocolor_terms:
+            env["USE_COLOR"] = False
+        elif t in color_terms:
+            env["USE_COLOR"] = True
+        else:
+            print "\nUnknown TERM. Disabling colors. Please add your TERM in SConstruct"
+            env["USE_COLOR"] = True
 
 print_build_info(env)
 
@@ -161,6 +182,9 @@ if env.enable_configuration:
 	Command(os.path.join(BUILDDIR, "config.h"), [Value(generate_configh_content(env))], generate_configh_file)
 
 env=conf.Finish()
+
+# Overwriting Spawn to provide some color output
+overwrite_spawn_function(env)
 
 print # Pretty output
 
@@ -206,7 +230,7 @@ if env['build'] == 'debug' or env['build'] == 'profile':
 ################################################################ C++ style-check
 
 if env['build'] == 'debug' or env['build'] == 'profile':
-        Alias('stylecheck_old', env.Execute('utils/spurious_source_code/detect'))
+        Alias('old-stylecheck', env.Execute('utils/spurious_source_code/detect'))
 
 
 ################################################################## PNG shrinking
