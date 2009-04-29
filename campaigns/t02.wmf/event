@@ -316,7 +316,7 @@ text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF00
 _"Boldreth exclaims..."
 "</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>"
 _" "Just look at that! The great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br> Now that's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!"<br><br>-- NEW OBJECTIVE --<br> "
-_"* Build a coal mine and an iron ore mine.<br> Place a flag up on the mountain's flank in the east (on mountain terrain, though, not mountain meadow). When you click at the flag, you can send Geologists there. Because the flag is on mountains, the Geologists will search for ores; otherwise, they will search for water. Then build a mine for both kinds of resource he will find, choosing the mine to be built appropriately:<br> Black - coal<br> Red - iron ore<br> Yellow - gold<br> Grey - granite<br> Mines may only be built on mountain terrain. Suitable places for mines are displayed with a hammer and pick symbol."
+_"* Build a coal mine and an iron ore mine.<br> Place a flag up on the mountain's flank to the east (on mountain terrain though, not mountain meadow). When you click at implied flag you can send Geologists there. Because the flag is on mountains, the Geologists will search for ores; otherwise, they will search for water. Then build a mine for both kinds of resource he will find, choosing the mine to be built appropriately:<br> Black - coal<br> Red - iron ore<br> Yellow - gold<br> Grey - granite<br> Mines may only be built on mountain terrain. Suitable places for mines are displayed as hammer and pick."
 "</p></rt>""
 window_title=_Your loyal companion
 is_modal=true
@@ -367,7 +367,7 @@ text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080
 _"The elder jumps into the air..."
 "</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
 _" "Wisdom commands to seek variety.<br> North of the great mountain is a large plain - why don't we use the space Mother Nature gave us and build a farm? I sure would enjoy a freshly baken pitta bread for a change..."<br><br>-- NEW OBJECTIVE --<br> "
-_"* Build a well, a farm and a bakery.<br> Other ways to produce food - different kinds of food - are fishers and farms. The wheat of the latter has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source."
+_"* Build a well, a farm and a bakery.<br> Other ways to produce food - different kinds of food - are fishers and hunters. The wheat of the farms has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source."
 "</p></rt>""
 window_title=_The advisor
 is_modal=true
@@ -459,7 +459,7 @@ text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF00
 _"Boldreth smiles..."
 "</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>"
 _" "Well, old friend, this should ensure that our fortifications do not break down with our foes' first battle cry! Now we can expand safely!<br> Still, it would not hurt to assemble some grout for our further campaign; thus we could, in times of need, build a fortress as the world has not seen before!"<br><br>-- NEW OBJECTIVE --<br> "
-_"* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better buildings may require also other improved materials besides blackwood. One of those is grout, which is produced out of raw stone, water and coal by a lime-burner. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain - by clicking on the implied flag and the Geologist-symbol in the consequently appearing menu. Coal can be obtained by building a charcoal burner or a coal mine."
+_"* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better buildings may require also other improved materials besides blackwood. One of those is grout, which is produced out of raw stone, water and coal by a lime-burner. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain, by clicking on the implied flag and the Geologist-symbol in the consequently appearing menu. Coal can be obtained by building a charcoal burner or a coal mine."
 "</p></rt>""
 window_title=_Your loyal companion
 is_modal=true
@@ -472,7 +472,7 @@ text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080
 _"Khantrukh steps in..."
 "</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
 _" "Chieftain, this is a disgrace! It is well that we can produce grout for mighty fortifications and great buildings now - only this does not prevent our roofs from becoming leaky! Maybe the young ones like spending their nights in the rain, but I just can't find any sleep with these raindrops dripping on my face!<br> Now this is a problem we should do something about!"<br><br>-- NEW OBJECTIVE --<br> "
-_"* Build a fernery.<br> The third material necessary for improved buildings is thatch reed, used to cover roofs. Thatch reed is grown by a fernery."
+_"* Build a fernery.<br> The third material necessary for improved buildings is thatch reed, used to cover roofs. Thatch reed is planted by a fernery, around the building."
 "</p></rt>""
 window_title=_The advisor
 is_modal=true

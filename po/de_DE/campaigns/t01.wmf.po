@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3807\n"
+"Project-Id-Version: Widelands svn3946\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-15 12:22+0000\n"
+"POT-Creation-Date: 2009-04-29 16:30+0000\n"
 "PO-Revision-Date: 2009-04-08 08:58+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -15,12 +15,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../../../campaigns/t01.wmf/elemental~:7
 #: ../../../campaigns/t01.wmf/elemental:7
 msgid "Tutorial1 - Eyes in the Dark"
 msgstr "Tutorial1 - Augen im Dunklen"
 
-#: ../../../campaigns/t01.wmf/elemental~:9
 #: ../../../campaigns/t01.wmf/elemental:9
 msgid "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic gameplay and control as well as basic production buildings (wood, stone, etc.) will be introduced."
 msgstr "Erste Mission des Tutorials der Barbaren. In dieser Karte werden die Grundzüge des Spiels, wie Kontrollen und Spielsteuerungen gezeigt. Auch der Aufbau einer Grundwirtschaft (Holz, Steine, etc.) wird erklärt."
@@ -81,11 +79,11 @@ msgstr "Khantrukh fährt fort..."
 msgid " \"None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...<br> We should prepare, in case we have to face the winter in these harsh lands. I believe to the east of our campside are a few places where we could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr " \"Niemand außer den Göttern weiß, wie lange wir hier noch versteckt bleiben müssen. Die Krieger hoffen, dass wir irgendwann glorreich heimwärts marschieren, doch ich bin absolut sicher, dass dies nicht in nächster Zeit geschehen wird. Und die Tage werden längst schon kürzer und kälter...<br>Wir sollten uns besser schnell auf den Winter in diesen Landen vorbereiten. Ich denke im Osten unseres Quartiers gibt es einige Plätze auf denen wir eine Holzfällerhütte aufbauen könnten.\"<br><br>--NEUER AUFTRAG--<br> "
 
-#: ../../../campaigns/t01.wmf/event:119
+#: ../../../campaigns/t01.wmf/event:119 ../../../campaigns/t01.wmf/objective:7
 msgid "* Press SPACE to see where you can build.<br> The red spots show you where a small building - like a lumberjack's hut - may be built.<br>"
 msgstr "* Drücke LEERTASTE um zu sehen, wo du bauen kannst.<br> Die roten Haussymbole zeigen dir, wo du kleine Gebäude - wie z.B. Holzfäller - bauen kannst.<br>"
 
-#: ../../../campaigns/t01.wmf/event:120
+#: ../../../campaigns/t01.wmf/event:120 ../../../campaigns/t01.wmf/objective:8
 msgid "* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting lumberjack's hut.<br>"
 msgstr "* Baue einen Holzfäller auf dem roten Haussymbol rechts neben deinem Hauptquartier indem du darauf klickst und die Holzfällerhütte auswählst.<br>"
 
@@ -103,7 +101,7 @@ msgstr "Der Alte merkt an..."
 msgid " \"Obviously, it would be too draining for our people to walk all the way to the lumberjack's hut through the wilderness. We will have to make a path between our hall and the lumberjack's hut. It's not a hard guess that the men would appreciate a way as short and even as possible - the wood surely will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Es scheint offensichtlich, dass es zu schwer für unsere Leute wird, müssten sie die ganze Strecke bis zum Holzfäller durch die Wildnis laufen. Wir sollten einen Pfad zwischen unserem Hauptquartier und dem Holzfäller anlegen. Und logisch, dass die Männer einen möglichst kurzen und ebenen Weg bevorzugen werden. Das Holz wird auch dann schwer genug sein.\"<br><br>--NEUER AUFTRAG--<br>- "
 
-#: ../../../campaigns/t01.wmf/event:135
+#: ../../../campaigns/t01.wmf/event:135 ../../../campaigns/t01.wmf/objective:9
 msgid "* Build a road between your headquarters and the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You should connect it to another flag with a road.<br> If you click on a flag, little symbols will appear around it to show you in which directions you can build the road.<br> The colour of those symbols indicate how steep the road will be. Green is flat, yellow is steep and red is very steep. The steeper the step is, the harder it will be for your people to walk on it.<br> You can click on any of the symbols to build the first step of the road there. New symbols will appear to show you where the next step can go, and so on. However, you can also click further away to build several steps at once. Click on the flag at the headquarters to finish the road."
 msgstr "* Baue eine Straße zwischen Deinem Hauptquartier und dem Holzfäller.<br> Wenn du eine Holzfällerhütte gebaut hast, wird ihr auch direkt eine Flagge zugeordnet. Du musst diese Flagge zu einer anderen Flagge mit einer Straße verbinden. Wenn du auf eine Flagge klickst, erscheinen kleine Symbole die dir zeigen, in welche Richtungen du die Straße bauen kannst. Die Farbe zeigen an, wie steil die Straße wird. Grün heißt flach, rot ist sehr steil. Je höher die Steigung ist, desto schwieriger wird es für deine Träger. Du kannst auf jedes der Symbole klicken, um ein Stück Straße in diese Richtung zu bauen. Neue Symbole erscheinen, in welche Richtung es weitergehen kann, usw. Du kannst aber auch direkt weiter weg klicken, um ein größeres Stück Straße auf einmal zu bauen. Klicke auf die Flagge deines Hauptquartiers um die Straße zu vervollständigen."
 
@@ -116,6 +114,7 @@ msgid " \"There is an old saying:<br> 'A burden divided is easier to endure.'<br
 msgstr " \"Es gibt ein altes Sprichwort, das besagt: 'Geteilte Last ist halbe Last.' Ein Trägerwechsel zwischen dem Holzfäller und unserem Lager würde die Arbeit unserer Träger vereinfachen.\"<br><br>--NEUER AUFTRAG--<br>"
 
 #: ../../../campaigns/t01.wmf/event:151
+#: ../../../campaigns/t01.wmf/objective:17
 msgid "* Place a flag in the middle of the road.<br> There is a flag symbol in the mid of the way you just built. You place a flag there by clicking on the symbol and then clicking on the flag button in the consequently appearing menu. This splits the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
 msgstr "* Setze eine Flagge in die Mitte des Weges.<br>Es gibt ein Flaggensymbol in der Mitte des Weges, den Du eben gebaut hast. Wenn Du es anklickst und im aufspringenden Menü das Flaggensymbol wählst, setzt Du dort eine Flagge. Das teilt die Arbeit des Holztragens auf zwei Träger auf. Wenn viele Waren zwischen zwei Punkten transportiert werden, ist das Hinzufügen von Flaggen sinnvoll, da der Transport so viel schneller voran geht.<br>"
 
@@ -128,6 +127,7 @@ msgid " \"The northern winds tell us that the coming winter will be a long and c
 msgstr " \"Die nördlichen Winde zeigen uns, dass der kommende Winter lang und hart werden wird. Ein Holzfäller allein wird nicht genug sein, um den Bedarf unserer Leute zu decken. Südlich unseres neuen Straßenabschnitts warten noch so viele Bäume auf unsere Axthiebe!\"<br><br>-- NEUER AUFTRAG --<br>"
 
 #: ../../../campaigns/t01.wmf/event:166
+#: ../../../campaigns/t01.wmf/objective:18
 msgid "* Place a lumberjack's hut directly south of the flag you just placed on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
 msgstr "* Setze eine Holzfällerhütte direkt südlich der Flagge, die du auf den Weg setzt. Verbinde danach diese Flagge mit der neuen Holzfällerhütte. Tipp: Anstelle eine Straße Stück für Stück zu bauen, kannst du auch direkt auf das Ziel klicken, um den Weg komplett zu bauen."
 
@@ -153,6 +153,7 @@ msgid " \"I am well aware, chieftain, that neither you nor your warriors have th
 msgstr " \"Ich bin sicher, dass weder Du noch Deine Krieger den Wunsch haben, lange an diesem üblen Ort zu verweilen. Doch auch unser Krieg um die Heimat zurück zu erobern, wird eine lange Zeit dauern und es scheint weise, uns vorzubereiten. Ich würde anweisen, dass wir bereits jetzt Felsen für die Zukunft schlagen. Wer weiß schon genau, welche Festung wir schon bald bauen müssen? Und - wie ein Geschenk der Götter - gibt es tatsächlich große Felsen in unmittelbarer Nähe.\"<br><br>-- NEUER AUFTRAG --<br>"
 
 #: ../../../campaigns/t01.wmf/event:197
+#: ../../../campaigns/t01.wmf/objective:34
 msgid "* Build two quarries southwest of your headquarters."
 msgstr "* Baue zwei Steinbrüche südwestlich deines Hauptquartiers."
 
@@ -212,29 +213,9 @@ msgstr "Mission erfüllt"
 msgid "Build a lumberjack's hut"
 msgstr "Baue eine Holzfällerhütte"
 
-#: ../../../campaigns/t01.wmf/objective:7
-msgid "* Press SPACE to see where you can build.<br> The red spots show you, where a small building - like a lumberjack's hut - may be built.<br>"
-msgstr "* Drücke LEERTASTE um zu sehen, wo du bauen kannst.<br> Die roten Haussymbole zeigen dir, wo du kleine Gebäude - wie z.B. Holzfäller - bauen kannst.<br>"
-
-#: ../../../campaigns/t01.wmf/objective:8
-msgid "* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting Lumberjacks Hut.<br>"
-msgstr "* Baue eine Holzfällerhütte auf dem roten Haussymbol rechts neben deinem Hauptquartier indem du darauf klickst und die Holzfällerhütte auswählst.<br>"
-
-#: ../../../campaigns/t01.wmf/objective:9
-msgid "* Build a road between your headquarters and the lumberjack's hut.<br> You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
-msgstr "Baue eine Straße zwischen Deinem Hauptquartier und dem Holzfäller.<br> Dies kannst Du machen, indem Du auf die Flagge eines der beiden Gebäude klickst und den Straßenknopf drückst. Um die Flagge sollten daraufhin Symbole erscheinen, die aufzeigen, wie steil der Weg in diese Richtung wäre. Je steiler der Weg ist, desto schwerer wird es für Deine Leute auf ihm zu laufen. Wenn Du nun eines der Symbole anklickst, baust Du einen Teil der Straße und musst dann die nächste Richtung angeben. Baue eine Straße zwischen den beiden Flaggen der beiden Gebäude und versuch sie möglichst eben zu halten."
-
 #: ../../../campaigns/t01.wmf/objective:15
 msgid "Build another lumberjack's hut"
 msgstr "Baue eine weitere Holzfällerhütte"
-
-#: ../../../campaigns/t01.wmf/objective:17
-msgid "* Place a flag in the mid of the road.<br> There is a flag symbol in the mid of the way you just built.<br> By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
-msgstr "* Setze eine Flagge in die Mitte des Weges.<br>Es gibt ein Flaggensymbol in der Mitte des Weges, den Du eben gebaut hast. Wenn Du es anklickst und im aufspringenden Menü das Flaggensymbol wählst, setzt Du dort eine Flagge. Das teilt die Arbeit des Holztragens auf zwei Träger auf. Wenn viele Waren zwischen zwei Punkten transportiert werden, ist das Hinzufügen von Flaggen sinnvoll, da der Transport so viel schneller voran geht.<br>"
-
-#: ../../../campaigns/t01.wmf/objective:18
-msgid "* Place a lumberjack's hut directly south of the flag you are about to place on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
-msgstr "* Setze eine Holzfällerhütte direkt südlich der Flagge, die du auf den Weg setzt. Verbinde danach diese Flagge mit der neuen Holzfällerhütte. Tipp: Anstelle eine Straße Stück für Stück zu bauen, kannst du auch direkt auf das Ziel klicken um den Weg komplett zu bauen."
 
 #: ../../../campaigns/t01.wmf/objective:24
 msgid "Build a ranger's hut"
@@ -244,9 +225,23 @@ msgstr "Baue eine Försterhütte"
 msgid "Build two quarries"
 msgstr "Baue zwei Steinbrüche"
 
-#: ../../../campaigns/t01.wmf/objective:34
-msgid "* Build two quarries south-west of your headquarters."
-msgstr "* Baue 2 Steinbrüche südwestlich deines Hauptquartiers."
+#~ msgid "* Press SPACE to see where you can build.<br> The red spots show you, where a small building - like a lumberjack's hut - may be built.<br>"
+#~ msgstr "* Drücke LEERTASTE um zu sehen, wo du bauen kannst.<br> Die roten Haussymbole zeigen dir, wo du kleine Gebäude - wie z.B. Holzfäller - bauen kannst.<br>"
+
+#~ msgid "* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting Lumberjacks Hut.<br>"
+#~ msgstr "* Baue eine Holzfällerhütte auf dem roten Haussymbol rechts neben deinem Hauptquartier indem du darauf klickst und die Holzfällerhütte auswählst.<br>"
+
+#~ msgid "* Build a road between your headquarters and the lumberjack's hut.<br> You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
+#~ msgstr "Baue eine Straße zwischen Deinem Hauptquartier und dem Holzfäller.<br> Dies kannst Du machen, indem Du auf die Flagge eines der beiden Gebäude klickst und den Straßenknopf drückst. Um die Flagge sollten daraufhin Symbole erscheinen, die aufzeigen, wie steil der Weg in diese Richtung wäre. Je steiler der Weg ist, desto schwerer wird es für Deine Leute auf ihm zu laufen. Wenn Du nun eines der Symbole anklickst, baust Du einen Teil der Straße und musst dann die nächste Richtung angeben. Baue eine Straße zwischen den beiden Flaggen der beiden Gebäude und versuch sie möglichst eben zu halten."
+
+#~ msgid "* Place a flag in the mid of the road.<br> There is a flag symbol in the mid of the way you just built.<br> By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
+#~ msgstr "* Setze eine Flagge in die Mitte des Weges.<br>Es gibt ein Flaggensymbol in der Mitte des Weges, den Du eben gebaut hast. Wenn Du es anklickst und im aufspringenden Menü das Flaggensymbol wählst, setzt Du dort eine Flagge. Das teilt die Arbeit des Holztragens auf zwei Träger auf. Wenn viele Waren zwischen zwei Punkten transportiert werden, ist das Hinzufügen von Flaggen sinnvoll, da der Transport so viel schneller voran geht.<br>"
+
+#~ msgid "* Place a lumberjack's hut directly south of the flag you are about to place on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+#~ msgstr "* Setze eine Holzfällerhütte direkt südlich der Flagge, die du auf den Weg setzt. Verbinde danach diese Flagge mit der neuen Holzfällerhütte. Tipp: Anstelle eine Straße Stück für Stück zu bauen, kannst du auch direkt auf das Ziel klicken um den Weg komplett zu bauen."
+
+#~ msgid "* Build two quarries south-west of your headquarters."
+#~ msgstr "* Baue 2 Steinbrüche südwestlich deines Hauptquartiers."
 
 #~ msgid "Another evening..."
 #~ msgstr "Eines Abends..."
