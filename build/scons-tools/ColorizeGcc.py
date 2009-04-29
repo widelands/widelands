@@ -197,7 +197,6 @@ class GccColorizer:
 
 
 import subprocess
-from ColorGcc import GccColorizer
 import os, string
 
 class BetterSpawn(object):
