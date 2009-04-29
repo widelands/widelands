@@ -22,12 +22,13 @@ class CheckingRule(object):
     """
     def __init__(self, name, vars ):
         self.name = name
-        self._error_msg = vars["error_msg"]
         self._is_multiline = vars.get('is_multiline',False)
         if self._is_multiline:
             self._evaluate_matches = vars['evaluate_matches']
+            self._error_msg = None
         else:
             self._regexp = re.compile(vars["regexp"])
+            self._error_msg = vars["error_msg"]
        
         def _to_tuple(a):
             if isinstance(a,str):

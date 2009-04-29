@@ -5,18 +5,31 @@ import re
 class EvalMatches( object ):
     def __init__(self):
         # This matches (and groups) all indentations at line begin
-        self._regexp=re.compile(r"^([ \t]*)", re.MULTILINE)
+        self._regexp=re.compile(r"^((\t*).*$)", re.MULTILINE)
     
     def __call__(self, data):
         indents = self._regexp.findall(data)
         
         errors = []
-        curline = 2
-        for prev,cur in zip(indents[::1],indents[1::1]):
-            if (len(cur) != 0 and len(prev)!= 0) \
-               and len(cur)-len(prev) > 1:
-                errors.append( (curline, "Indent difference to big to previous line: len(cur): %i len(prev): %i!" % (len(cur),len(prev)) ))
-            curline += 1
+        curline = 1
+
+        allowed_indend = 100
+
+        for lineno,(line,indent) in enumerate(indents):
+            lineno += 1 
+            line = line.strip()
+            if len(line) and line[0] == '#': # Skip macros
+                continue
+            
+            if len(line) and line[0] == '(': # param lists can be indented twice
+                allowed_indend += 1
+
+            cindend = len(indent)
+            if cindend > allowed_indend:
+                errors.append( (lineno, "Indent is too deep" ) )
+           
+            if cindend:  # Empty lines are ignored
+                allowed_indend = cindend + 1
         
         return errors
 
@@ -28,11 +41,21 @@ evaluate_matches = EvalMatches()
 
 allowed = [
 """\tHallo {
-		Anything;
-}""", 
+\t\tAnything;
+}""",
+"\t\t\n# Macro is ok",
+"\t\t\t\n\n\t", # Empty line is fine 
+"\t\t\t\n\n\t\t\t", # in fact, indent is ignored here
+"""def function
+		(int param1, int param2) {
+	return 0;
+}""", # Nicolais indenting style
+
 ]
+
 forbidden = [
 """\tHallo {
 			Anything;
 }""",
+    "\t\n\n\t\t\t", # Empty line, wrong indent after 
 ]
