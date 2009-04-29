@@ -29,55 +29,62 @@ class RoutingNode;
 struct Road;
 
 /***
- * /todo The get functions should be declared const 
+ * /todo The get functions should be declared const
  */
 class RoutingNodeNeighbour {
-    RoutingNode* m_nb;
-    int32_t m_cost; /// Cost to get from me to the neighbour (Cost for road)
+	RoutingNode* m_nb;
+	int32_t m_cost; /// Cost to get from me to the neighbour (Cost for road)
 
 public:
-    RoutingNodeNeighbour( RoutingNode* f, int32_t cost ) : 
-        m_nb(f),
-        m_cost(cost) {
-    }
-    RoutingNode* get_neighbour(void) { return m_nb; } 
-    int32_t get_cost(void) { return m_cost; }
+	RoutingNodeNeighbour(RoutingNode* f, int32_t cost) :
+		m_nb(f),
+		m_cost(cost) {
+	}
+	RoutingNode* get_neighbour() {
+		return m_nb;
+	}
+	int32_t get_cost() {
+		return m_cost;
+	}
 };
 typedef std::vector<RoutingNodeNeighbour> RoutingNodeNeighbours;
 
 /**
  * A routing node is a field with a cost attached to it
- * plus some status variables needed for path finding. 
+ * plus some status variables needed for path finding.
  *
- * The only routing Node in Widelands is a Flag currently, 
+ * The only routing Node in Widelands is a Flag currently,
  * this interface has been extracted to reduce coupling
  */
 class RoutingNode {
-    friend class Router;
-    friend class RoutingNodeQueue;
+	friend class Router;
+	friend class RoutingNodeQueue;
 
-protected: // The variables are only protected so that Test classes can read them
-	uint32_t                    mpf_cycle;
-	int32_t                     mpf_heapindex;
-	int32_t                     mpf_realcost; ///< real cost of getting to this flag
-	RoutingNode                *mpf_backlink; ///< flag where we came from
-	int32_t                     mpf_estimate; ///< estimate of cost to destination
+// The variables are only protected so that Test classes can use them
+protected:
+	uint32_t      mpf_cycle;
+	int32_t       mpf_heapindex;
+	int32_t       mpf_realcost; ///< real cost of getting to this flag
+	RoutingNode  *mpf_backlink; ///< flag where we came from
+	int32_t       mpf_estimate; ///< estimate of cost to destination
 
 public:
-    RoutingNode() : mpf_cycle(0), mpf_heapindex(0), 
-        mpf_realcost(0), mpf_backlink(0), mpf_estimate(0) {} 
-    virtual ~RoutingNode() {}
+	RoutingNode() : mpf_cycle(0), mpf_heapindex(0),
+		mpf_realcost(0), mpf_backlink(0), mpf_estimate(0) {}
+	virtual ~RoutingNode() {}
 
-    void reset_path_finding_cycle(void) { mpf_cycle = 0; }
+	void reset_path_finding_cycle() {
+		mpf_cycle = 0;
+	}
 
 	int32_t cost() const {return mpf_realcost + mpf_estimate;}
 
-    virtual int32_t get_waitcost(void) = 0; 
+	virtual int32_t get_waitcost() = 0;
 	virtual void get_neighbours(RoutingNodeNeighbours *) = 0;
-    virtual Coords get_position() const = 0; 
+	virtual Coords get_position() const = 0;
 };
 
 }
-#endif 
+#endif
 
 

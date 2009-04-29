@@ -166,9 +166,11 @@ bool Economy::find_route
 
 	Map & map = owner().egbase().map();
 
-	std::vector<RoutingNode *> & nodes = *((std::vector<RoutingNode *>*)(&m_flags));
+	std::vector<RoutingNode *> & nodes =
+	   *reinterpret_cast<std::vector<RoutingNode *>*>(&m_flags);
 
-	return m_router->find_route(start, end, route, wait, cost_cutoff, map, nodes);
+	return
+	   m_router->find_route(start, end, route, wait, cost_cutoff, map, nodes);
 }
 
 
@@ -225,7 +227,10 @@ void Economy::_remove_flag(Flag & flag)
  *
  * This is called from Cmd_ResetTargetQuantity and Cmd_SetTargetQuantity
  */
-void Economy::set_target_quantity(Ware_Index ware_type, uint32_t permanent, uint32_t temporary, Time mod_time) {
+void Economy::set_target_quantity
+	  (Ware_Index ware_type, uint32_t permanent,
+	   uint32_t temporary, Time mod_time)
+{
 	Target_Quantity & tq = m_target_quantities[ware_type.value()];
 	tq.temporary = temporary;
 	tq.permanent = permanent;
@@ -484,14 +489,15 @@ void Economy::_split(Flag & initial_flag)
 		remove_flag(flag);
 		e.add_flag(flag);
 
-		//  check all neighbours; if they aren't in the new economy yet, add them
-		// to the list (note: roads and buildings are reassigned via Flag::set_economy)
+		//  check all neighbours; if they aren't in the new economy yet, add
+		//  them to the list (note: roads and buildings are reassigned via
+		//  Flag::set_economy)
 		RoutingNodeNeighbours neighbours;
 		flag.get_neighbours(&neighbours);
 
 		for (uint32_t i = 0; i < neighbours.size(); ++i) {
 			/// \todo the next line shouldn't need any casts at all
-			Flag & n = *((Flag *)neighbours[i].get_neighbour());
+			Flag &n = *dynamic_cast<Flag *>(neighbours[i].get_neighbour());
 
 			if (n.get_economy() == this)
 				open.push_back(&n);
@@ -598,8 +604,8 @@ struct RequestSupplyPair {
 	/**
 	 * pairid is an explicit tie-breaker for comparison.
 	 *
-	 * Without it, the pair priority queue would use an implicit, system dependent
-	 * tie breaker, which in turn causes desyncs.
+	 * Without it, the pair priority queue would use an implicit, system
+	 * dependent tie breaker, which in turn causes desyncs.
 	 */
 	uint32_t pairid;
 

@@ -155,7 +155,8 @@ void Transfer::has_finished()
 
 /**
  * Transfer failed for reasons beyond our control.
- * This Transfer object will be deleted indirectly by m_request->transfer_fail().
+ * This Transfer object will be deleted indirectly by
+ * m_request->transfer_fail().
 */
 void Transfer::has_failed()
 {

@@ -122,7 +122,11 @@ void Route::save
 {
 	fw.Signed32(get_totalcost());
 	fw.Unsigned16(m_route.size());
-	for (std::vector<Object_Ptr>::size_type idx = 0; idx < m_route.size(); ++idx) {
+	for
+	   (std::vector<Object_Ptr>::size_type idx = 0;
+		idx < m_route.size();
+		++idx)
+	{
 		Flag & flag = get_flag(egbase, idx);
 		assert(mos->is_object_known(flag));
 		fw.Unsigned32(mos->get_object_file_index(flag));

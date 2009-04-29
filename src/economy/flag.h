@@ -136,21 +136,21 @@ protected:
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
 private:
-	Coords                  m_position;
-	uint32_t                    m_anim;
-	int32_t                     m_animstart;
+	Coords       m_position;
+	uint32_t     m_anim;
+	int32_t      m_animstart;
 
-	Building * m_building; ///< attached building (replaces road WALK_NW)
-	Road                  * m_roads[6];      ///< Map_Object::WALK_xx - 1 as index
-	int32_t                     m_items_pending[6];
+	Building    *m_building; ///< attached building (replaces road WALK_NW)
+	Road        *m_roads[6];      ///< Map_Object::WALK_xx - 1 as index
+	int32_t      m_items_pending[6];
 
-	int32_t                     m_item_capacity; ///< size of m_items array
-	int32_t m_item_filled; ///< number of items currently on the flag
-	PendingItem           * m_items;         ///< items currently on the flag
+	int32_t      m_item_capacity; ///< size of m_items array
+	int32_t      m_item_filled; ///< number of items currently on the flag
+	PendingItem *m_items;         ///< items currently on the flag
 
 	/// call_carrier() will always call a carrier when the destination is
 	/// the given flag
-	Flag                  * m_always_call_for_flag;
+	Flag        *m_always_call_for_flag;
 
 	typedef std::vector<OPtr<Worker> > CapacityWaitQueue;
 	CapacityWaitQueue m_capacity_wait; ///< workers waiting for capacity

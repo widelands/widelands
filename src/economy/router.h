@@ -29,7 +29,7 @@ class ITransportCostCalculator;
 class RoutingNode;
 
 /**
- * This class finds the best route between Nodes (Flags) in an economy. 
+ * This class finds the best route between Nodes (Flags) in an economy.
  * The functionality was split from Economy
  */
 class Router {
@@ -51,6 +51,6 @@ public:
 };
 
 }
-#endif 
+#endif
 
 

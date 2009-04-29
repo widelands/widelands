@@ -25,9 +25,9 @@
 #include "iroute.h"
 #include "itransport_cost_calculator.h"
 
-#include <assert.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cassert>
+#include <cstdio>
+#include <cstdlib>
 
 namespace Widelands {
 
@@ -47,10 +47,9 @@ struct RoutingNodeQueue {
 	// Basic idea behind the algorithm:
 	//  1. the top slot of the tree is empty
 	//  2. if this slot has both children:
-	//       fill this slot with one of its children or with slot[_size], whichever
-	//       is best;
-	//       if we filled with slot[_size], stop
-	//       otherwise, repeat the algorithm with the child slot
+	//       fill this slot with one of its children or with slot[_size],
+	//       whichever is best; if we filled with slot[_size], stop otherwise,
+	//       repeat the algorithm with the child slot
 	//     if it doesn't have any children (l >= _size)
 	//       put slot[_size] in its place and stop
 	//     if only the left child is there
@@ -85,7 +84,10 @@ struct RoutingNodeQueue {
 				break;
 			}
 
-			if (m_data[nsize]->cost() <= m_data[l]->cost() && m_data[nsize]->cost() <= m_data[r]->cost()) {
+			if
+			   (m_data[nsize]->cost() <= m_data[l]->cost() &&
+				m_data[nsize]->cost() <= m_data[r]->cost())
+			{
 				m_data[fix] = m_data[nsize];
 				m_data[fix]->mpf_heapindex = fix;
 				break;
@@ -194,30 +196,30 @@ private:
 /*************************************************************************/
 /*                         Router Implementation                         */
 /*************************************************************************/
-Router::Router( void ) :
-    mpf_cycle(0) {
+Router::Router() :
+	mpf_cycle(0) {
 }
 
 /**
- * Calculate a route between two nodes. This is using the A* algorithm, 
- * the closedset is 'emulated' by giving each node an index field of when 
- * it was last touched in routing (mpf_cycle). The router itself also 
- * has such a field and increases it every time find_route is called. 
+ * Calculate a route between two nodes. This is using the A* algorithm, the
+ * closedset is 'emulated' by giving each node an index field of when it was
+ * last touched in routing (mpf_cycle). The router itself also has such a field
+ * and increases it every time find_route is called.
  *
  * The calculated route is stored in route if it exists.
  *
  * For two nodes (Flags) from the same economy, this function should always be
- * successful, except when it's called from check_split() or if cost_cutoff 
- * is specified and no cheap route could be found. 
+ * successful, except when it's called from check_split() or if cost_cutoff is
+ * specified and no cheap route could be found.
  *
  * \note route will be init()ed before storing the result.
  *
  * \param start, end start and endpoint of the route
  * \param route the calculated route, can be 0 to only check connectivity
- * \param wait If true, the cost for waiting on a flag is considered (if this route is 
- *        for a ware)
+ * \param wait If true, the cost for waiting on a flag is considered (if this
+ *        route is for a ware)
  * \param cost_cutoff maximum cost for desirable routes. If no route cheaper
- * than this can be found, return false
+ *        than this can be found, return false
  *
  * \return true if a route has been found, false otherwise
 */
@@ -226,8 +228,8 @@ bool Router::find_route
 	 IRoute * const route,
 	 bool    const wait,
 	 int32_t const cost_cutoff,
-     ITransportCostCalculator& cost_calculator,
-     std::vector<RoutingNode*>& nodes)
+	 ITransportCostCalculator& cost_calculator,
+	 std::vector<RoutingNode*>& nodes)
 {
 	// advance the path-finding cycle
 	++mpf_cycle;
@@ -245,7 +247,8 @@ bool Router::find_route
 	start.mpf_backlink = 0;
 	start.mpf_realcost = 0;
 	start.mpf_estimate =
-		cost_calculator.calc_cost_estimate(start.get_position(), end.get_position());
+	   cost_calculator.calc_cost_estimate
+		 (start.get_position(), end.get_position());
 
 	Open.push(&start);
 
@@ -275,14 +278,13 @@ bool Router::find_route
 
 			/*
 			 * If this is a ware transport (so we have to wait on full flags)
-			 * add a weighting factor depending on the fullness of the two 
+			 * add a weighting factor depending on the fullness of the two
 			 * flags onto the general cost
 			 */
 			if (wait) {
 				wait_cost =
-					( current->get_waitcost() + neighbour->get_waitcost())
-					*
-					neighbours[i].get_cost() / 2;
+					(current->get_waitcost() + neighbour->get_waitcost())
+					* neighbours[i].get_cost() / 2;
 			}
 			cost = current->mpf_realcost + neighbours[i].get_cost() + wait_cost;
 
@@ -298,8 +300,10 @@ bool Router::find_route
 				// found a better path to a field that's already Open
 				neighbour->mpf_realcost = cost;
 				neighbour->mpf_backlink = current;
-				if (neighbour->mpf_heapindex != -1) // This neighbour is already 'popped', skip it
+				if (neighbour->mpf_heapindex != -1) {
+					// This neighbour is already 'popped', skip it
 					Open.boost(neighbour);
+				}
 			}
 		}
 	}
@@ -309,7 +313,7 @@ bool Router::find_route
 
 	// Unwind the path to form the route
 	if (route) {
-		route->init( end.mpf_realcost );
+		route->init(end.mpf_realcost);
 
 		for (RoutingNode * node = &end;; node = node->mpf_backlink) {
 			route->insert_as_first(node);

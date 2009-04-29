@@ -122,7 +122,8 @@ private:
 
 	callback_t        m_callbackfn;        //  called on request success
 
-	int32_t           m_required_time; //  when do we need the first ware (can be in the past)
+	//  when do we need the first ware (can be in the past)
+	int32_t           m_required_time;
 	int32_t           m_required_interval; //  time between items
 	int32_t           m_last_request_time;
 

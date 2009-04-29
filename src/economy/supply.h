@@ -74,6 +74,6 @@ struct Supply : public Trackable {
 };
 
 }
-#endif 
+#endif
 
 

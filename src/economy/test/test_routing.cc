@@ -38,8 +38,9 @@ using namespace Widelands;
 class BadAccess : public std::exception {};
 class TestingRoutingNode : public RoutingNode {
 public:
-	TestingRoutingNode(int32_t rcost = 1, int32_t wcost = 0, Coords pos = Coords(0, 0)) :
-		_waitcost(wcost), _position(pos) {}
+	TestingRoutingNode
+		(int32_t rcost = 1, int32_t wcost = 0, Coords pos = Coords(0, 0)) :
+			_waitcost(wcost), _position(pos) {}
 	void add_neighbour(TestingRoutingNode * nb) {
 		_neighbours.push_back(nb);
 	}
@@ -56,7 +57,7 @@ public:
 	void get_neighbours(RoutingNodeNeighbours *);
 
 	// test functionality
-	bool all_members_zeroed(void);
+	bool all_members_zeroed();
 
 private:
 	typedef std::vector<TestingRoutingNode *> Neigbours;
@@ -71,14 +72,15 @@ void TestingRoutingNode::get_neighbours(RoutingNodeNeighbours * n) {
 		 i != _neighbours.end();
 		 i++)
 	{
-		RoutingNodeNeighbour nb(*i, 1000); // second parameter is walktime in ms from this flag to the neighbour. only depends on slope
+		// second parameter is walktime in ms from this flag to the neighbour.
+		// only depends on slope
+		RoutingNodeNeighbour nb(*i, 1000);
 		n->push_back(nb);
 	}
 }
-bool TestingRoutingNode::all_members_zeroed(void) {
-	bool integers_zero =  (
-			!mpf_cycle && !mpf_heapindex & !mpf_realcost && !mpf_estimate
-	);
+bool TestingRoutingNode::all_members_zeroed() {
+	bool integers_zero =
+		!mpf_cycle && !mpf_heapindex & !mpf_realcost && !mpf_estimate;
 	bool pointers_zero = (mpf_backlink == 0);
 
 	return pointers_zero && integers_zero;
@@ -196,12 +198,16 @@ struct TestingNode_DefaultNodes_Fixture {
 	TestingRoutingNode * d0;
 	TestingRoutingNode * d1;
 };
-BOOST_FIXTURE_TEST_CASE(testingnode_neighbour_attaching, TestingNode_DefaultNodes_Fixture) {
+BOOST_FIXTURE_TEST_CASE
+	(testingnode_neighbour_attaching, TestingNode_DefaultNodes_Fixture)
+{
 	d0->add_neighbour(d1);
 
 	BOOST_CHECK_EQUAL(d0->get_neighbour(0), d1);
 }
-BOOST_FIXTURE_TEST_CASE(testingnode_illegalneighbour_access, TestingNode_DefaultNodes_Fixture) {
+BOOST_FIXTURE_TEST_CASE
+	(testingnode_illegalneighbour_access, TestingNode_DefaultNodes_Fixture)
+{
 	try {
 		d0->get_neighbour(0);
 		BOOST_ERROR("BadAccess not thrown");
@@ -210,8 +216,8 @@ BOOST_FIXTURE_TEST_CASE(testingnode_illegalneighbour_access, TestingNode_Default
 }
 // }}} End of TestingRoutingNode Test cases
 
-// {{{ RoutingNode Tests 
-/* 
+// {{{ RoutingNode Tests
+/*
  * Now test the routing nodes functionality
  */
 BOOST_AUTO_TEST_CASE(RoutingNode_InitializeMemberVariables) {
@@ -273,7 +279,9 @@ BOOST_FIXTURE_TEST_CASE(TestingRoute_haschain, SimpleRouterFixture) {
 	chain.insert(chain.begin(), d1);
 	BOOST_CHECK_EQUAL(route.has_chain(chain), true);
 }
-BOOST_FIXTURE_TEST_CASE(TestingRoute_chainisunidirectional, SimpleRouterFixture) {
+BOOST_FIXTURE_TEST_CASE
+	(TestingRoute_chainisunidirectional, SimpleRouterFixture)
+{
 	std::vector<RoutingNode *> chain;
 	// Chains are unidirectional. Check that chain.clear();
 	chain.push_back(d0);
@@ -282,7 +290,9 @@ BOOST_FIXTURE_TEST_CASE(TestingRoute_chainisunidirectional, SimpleRouterFixture)
 	route.insert_as_first(d1);
 	BOOST_CHECK_EQUAL(route.has_chain(chain), false);
 }
-BOOST_FIXTURE_TEST_CASE(TestingRoute_haschain_checksubchain, SimpleRouterFixture) {
+BOOST_FIXTURE_TEST_CASE
+	(TestingRoute_haschain_checksubchain, SimpleRouterFixture)
+{
 	// Do not get confused when a partial chain is found
 	TestingRoutingNode d;
 	std::vector<RoutingNode *> chain;
@@ -302,7 +312,9 @@ BOOST_FIXTURE_TEST_CASE(TestingRoute_haschain_checksubchain, SimpleRouterFixture
 	route.insert_as_first(d1); // d1 d0 d d0 d1 d d0 d
 	BOOST_CHECK_EQUAL(route.has_chain(chain), true);
 }
-BOOST_FIXTURE_TEST_CASE(TestingRoute_haschain_checksubchain_endisnotstart, SimpleRouterFixture) {
+BOOST_FIXTURE_TEST_CASE
+	(TestingRoute_haschain_checksubchain_endisnotstart, SimpleRouterFixture)
+{
 	// Do not get confused when a partial chain is found
 	TestingRoutingNode d;
 	std::vector<RoutingNode *> chain;
@@ -344,7 +356,9 @@ BOOST_FIXTURE_TEST_CASE(TestingRoute_init, SimpleRouterFixture) {
 /****************/
 /* SIMPLE TESTS */
 /****************/
-BOOST_FIXTURE_TEST_CASE(router_findroute_seperatedNodes_exceptFail, SimpleRouterFixture) {
+BOOST_FIXTURE_TEST_CASE
+	(router_findroute_seperatedNodes_exceptFail, SimpleRouterFixture)
+{
 	bool rval = r.find_route
 		(*d0, *d1,
 		 &route,
@@ -355,7 +369,9 @@ BOOST_FIXTURE_TEST_CASE(router_findroute_seperatedNodes_exceptFail, SimpleRouter
 
 	BOOST_CHECK_EQUAL(rval, false);
 }
-BOOST_FIXTURE_TEST_CASE(router_findroute_connectedNodes_exceptSuccess, SimpleRouterFixture) {
+BOOST_FIXTURE_TEST_CASE
+	(router_findroute_connectedNodes_exceptSuccess, SimpleRouterFixture)
+{
 	d0->add_neighbour(d1);
 	d1->add_neighbour(d0);
 	
@@ -449,11 +465,14 @@ struct ComplexRouterFixture {
 	 *
 	 * \arg n number of entries in the chain
 	 * \arg start First node in chain
-	 * \arg chain All nodes will be appended to this chain. If n = 3 then n->size() will be 4 at return
+	 * \arg chain All nodes will be appended to this chain. If n = 3 then
+	 *      n->size() will be 4 at return
 	 *
 	 * \return The last node in the chain
 	 */
-	TestingRoutingNode * add_chain(int n, TestingRoutingNode * start, Nodes * chain) {
+	TestingRoutingNode *add_chain
+		(int n, TestingRoutingNode * start, Nodes * chain)
+	{
 		TestingRoutingNode * last = start;
 		chain->push_back(start);
 		for (int i = 0; i < n; i++) {

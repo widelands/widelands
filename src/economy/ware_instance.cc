@@ -37,7 +37,7 @@ namespace Widelands {
 /**
  * Whenever a WareInstance is idle, it issues an IdleWareSupply.
  *
- * \todo This maybe shouldn't be here. 
+ * \todo This maybe shouldn't be here.
 */
 struct IdleWareSupply : public Supply {
 	IdleWareSupply(WareInstance &);
@@ -125,7 +125,8 @@ uint32_t IdleWareSupply::nr_supplies(Game const &, Request const & req) const
 */
 WareInstance & IdleWareSupply::launch_item(Game &, Request const & req) {
 	if (req.get_type() != Request::WARE)
-		throw wexception("IdleWareSupply::launch_item : called for non-item request");
+		throw wexception
+			("IdleWareSupply::launch_item : called for non-item request");
 	if (req.get_index() != m_ware.descr_index())
 		throw wexception
 			("IdleWareSupply: ware(%u) (type = %i) requested for %i",
@@ -236,7 +237,8 @@ void WareInstance::set_location
 
 		if (oldlocation && get_economy()) {
 			if (get_economy() != eco)
-				throw wexception("WareInstance::set_location() implies change of economy");
+				throw wexception
+					("WareInstance::set_location() implies change of economy");
 		} else {
 			set_economy(eco);
 		}
@@ -319,13 +321,17 @@ void WareInstance::update(Game & game)
 
 		if (upcast(Building, building, location)) {
 			if (nextstep != &location->base_flag())
-				throw wexception("MO(%u): ware: move from building to non-baseflag", serial());
+				throw wexception
+					("MO(%u): ware: move from building to non-baseflag", serial());
 
-			// There are some situations where we might end up in a warehouse as
-			// part of a requested route, and we need to move out of it again, e.g.:
-			//  - we were requested just when we were being carried into the warehouse
-			//  - we were carried into a harbour/warehouse to be shipped across the sea,
-			//    but a better, land-based route has been found
+			// There are some situations where we might end up in a warehouse
+			// as part of a requested route, and we need to move out of it
+			// again, e.g.:
+			//  - we were requested just when we were being carried into the
+			//    warehouse
+			//  - we were carried into a harbour/warehouse to be
+			//    shipped across the sea, but a better, land-based route has been
+			//    found
 			if (upcast(Warehouse, warehouse, building)) {
 				warehouse->do_launch_item(game, *this);
 				return;
@@ -352,7 +358,8 @@ void WareInstance::update(Game & game)
 /**
  * Set ware state so that it follows the given transfer.
  *
- * \param t the new transfer (non-zero; use \ref cancel_transfer to stop a transfer).
+ * \param t the new transfer (non-zero; use \ref cancel_transfer to stop a
+ *          transfer).
  */
 void WareInstance::set_transfer(Game & game, Transfer & t)
 {

@@ -53,7 +53,7 @@ struct Route : public IRoute {
 	Flag & get_flag(Editor_Game_Base &, std::vector<Flag *>::size_type);
 
 	void starttrim(int32_t count);
-	void truncate(int32_t const count);
+	void truncate(int32_t count);
 
 	struct LoadData {
 		std::vector<uint32_t> flags;

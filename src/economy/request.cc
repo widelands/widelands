@@ -629,7 +629,8 @@ int32_t Request::get_priority (int32_t cost) const
 	int32_t modifier = DEFAULT_PRIORITY;
 
 	if (upcast(Building const, building, &target())) {
-		//log("Tex: %s %i %i\n", building->get_name(), building->get_building_type(), building->get_type());
+		//log("Tex: %s %i %i\n", building->get_name(),
+		//building->get_building_type(), building->get_type());
 		//assert(building->get_building_type() != Building::WAREHOUSE);
 		if (upcast(ProductionSite const, productionsite, building))
 			if (productionsite->is_stopped())
@@ -775,8 +776,9 @@ void Request::start_transfer(Game & game, Supply & supp)
 		t = new Transfer(game, *this, s);
 	} else {
 		//  Begin the transfer of an item. The item itself is passive.
-		//  launch_item() ensures the WareInstance is transported out of the warehouse
-		//  Once it's on the flag, the flag code will decide what to do with it.
+		//  launch_item() ensures the WareInstance is transported out of the
+		//  warehouse Once it's on the flag, the flag code will decide what to
+		//  do with it.
 		WareInstance & item = supp.launch_item(game, *this);
 		ss.Unsigned32(item.serial());
 		t = new Transfer(game, *this, item);
