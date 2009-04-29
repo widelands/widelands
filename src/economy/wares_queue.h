@@ -82,11 +82,11 @@ private:
 	Ware_Index        m_ware;    ///< ware ID
 	uint32_t m_size;             ///< nr of items that fit into the queue
 	uint32_t m_filled;           ///< nr of items that are currently in the queue
-	uint32_t m_filled;           ///< nr of items that are currently in the queue
-	Request         * m_request; ///< currently pending request
 	
 	///< time in ms between consumption at full speed
 	uint32_t m_consume_interval;
+	
+	Request         * m_request; ///< currently pending request
 
 	callback_t      * m_callback_fn;
 	void            * m_callback_data;
