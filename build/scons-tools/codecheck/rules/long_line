@@ -5,7 +5,7 @@ class EvalMatches( object ):
         errors = []
         curline = 1
         for l in data.splitlines():
-            l = l.replace("\t"," "*3)
+            l = l.expandtabs(3)
             if len(l) > 80:
                 errors.append( (curline, "Line is too long! Keep it < 80 chars (with tab width of 3)"))
             curline += 1
@@ -19,7 +19,10 @@ evaluate_matches = EvalMatches()
 allowed = [
     "\t\tResonable sized line",
     " "*80,
-    '\t\t' + 74*"a"
+    '\t\t' + 74*"a", 
+    # When tabs are correctly expanded, the next line is only 79 chars long
+    # when tabs are replaced, it is 81
+    """\t\t\t \t \t (Coords(s.get_safe_int("pointy_x"), s.get_safe_int("point_y")))""" 
 ]
 forbidden = [
     " "*80+"a",
