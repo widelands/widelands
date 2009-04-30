@@ -65,7 +65,7 @@ class SConsCodeChecker(object):
             Return output string which will be seen when running checks
             '''
             # SILENCE!
-            return None 
+            return None
             # return 'Checking for style crimes in ' + str(source[0])
 
 def codecheck_emitter( target,sources,env ):

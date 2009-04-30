@@ -148,7 +148,7 @@ if env.enable_configuration:
 
 env=conf.Finish()
 
-# We only add this tool now, because it adds an emitter to Object which 
+# We only add this tool now, because it adds an emitter to Object which
 # breaks configuration.
 env.Tool("CodeCheck", toolpath=['build/scons-tools'])
 
@@ -165,9 +165,9 @@ if env['colored_compile_output']:
     elif "TERM" in os.environ:
         color_terms = ("xterm-color",)
         nocolor_terms = ("dumb",)
-        
+
         # Try to get terminal settings from environment
-        # Note: we do not use scons environment, since 
+        # Note: we do not use scons environment, since
         # we *really* want the users terminal here
         t = os.environ["TERM"]
         if t in nocolor_terms:
@@ -181,13 +181,12 @@ if env['colored_compile_output']:
 
 # We now copy env to get our test Environment
 # TODO Doing this after configuration means that all
-# test exectutables are linked agains boots,SDL,... and 
+# test exectutables are linked agains boots,SDL,... and
 # have the DEFINES from config. That's bad.
 testEnv = env.Clone()
 testEnv.Tool("UnitTest", toolpath=['build/scons-tools'],
-    LIBS=["boost_unit_test_framework-mt"],
-    CXXFLAGS=["-DBOOST_TEST_DYN_LINK"])
-
+    LIBS=["boost_unit_test_framework-mt"])
+testEnv.Append(CXXFLAGS=["-DBOOST_TEST_DYN_LINK"])
 
 # Overwriting Spawn to provide some color output
 overwrite_spawn_function(env)
@@ -215,8 +214,6 @@ SConscript('utils/SConscript')
 SConscript('worlds/SConscript')
 SConscript('global/SConscript')
 
-
-################################################################ Unit tests & style checking
 Default(thebinary)
 if env['build']=='release':
 	Default(buildlocale)
@@ -226,14 +223,21 @@ if env['build'] == 'debug' or env['build'] == 'profile':
     Default("test")
 
 ########################################################################### tags
-# Done in src/SConscript, alias tags
-
+# Tags
+all_code_files=simpleglob('*.h', 'src', recursive=True)+simpleglob('*.cc', 'src', recursive=True)
+all_code_files.sort()
+Alias('tags', env.ctags(source=all_code_files))
 
 ################################################################ C++ style-check
-
 if env['build'] == 'debug' or env['build'] == 'profile':
         Alias('old-stylecheck', env.Execute('utils/spurious_source_code/detect'))
 
+# Style Checks
+PhonyTarget('stylecheck',
+    Action('./build/scons-tools/codecheck/CodeCheck.py %s %s' %
+        ('-c' if env["USE_COLOR"] else '',
+         ' '.join(all_code_files)), lambda *Silence: None)
+)
 
 ################################################################## PNG shrinking
 
