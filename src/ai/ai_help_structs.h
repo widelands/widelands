@@ -29,6 +29,7 @@
 namespace Widelands {
 
 struct ProductionSite;
+struct MilitarySite;
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player * const pl, uint8_t const mc, bool const oe)
@@ -53,16 +54,27 @@ struct FindNodeUnowned {
 		// when looking for unowned terrain to acquire, we are actually
 		// only interested in fields we can walk on
 		return
-			fc.field->get_owned_by() == 0 && (fc.field->get_caps() & MOVECAPS_WALK);
+			fc.field->get_caps() & MOVECAPS_WALK
+			&& fc.field->get_owned_by() != playernum
+			&& !onlyenemies | (fc.field->get_owned_by() != 0);
 	}
+
+	int8_t playernum;
+	bool onlyenemies;
+
+	FindNodeUnowned(int8_t pn, bool oe = false)
+		: playernum(pn), onlyenemies(oe)
+	{}
 };
 
 
 struct FindNodeWater {
 	bool accept(Map const & map, FCoords const & coord) const {
 		return
-			(map.world().terrain_descr(coord.field->terrain_d()).get_is() & TERRAIN_WATER) ||
-			(map.world().terrain_descr(coord.field->terrain_r()).get_is() & TERRAIN_WATER);
+			(map.world().terrain_descr(coord.field->terrain_d()).get_is()
+			& TERRAIN_WATER) |
+			(map.world().terrain_descr(coord.field->terrain_r()).get_is()
+			& TERRAIN_WATER);
 	}
 };
 
@@ -202,6 +214,11 @@ struct BuildingObserver {
 
 struct ProductionSiteObserver {
 	Widelands::ProductionSite * site;
+	BuildingObserver * bo;
+};
+
+struct MilitarySiteObserver {
+	Widelands::MilitarySite * site;
 	BuildingObserver * bo;
 };
 

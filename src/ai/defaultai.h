@@ -69,7 +69,8 @@ struct DefaultAI : Computer_Player {
 
 	struct Implementation : public Computer_Player::Implementation {
 		Implementation() {name = "default";}
-		Computer_Player * instantiate(Widelands::Game & g, const Widelands::Player_Number p) const
+		Computer_Player * instantiate
+			(Widelands::Game & g, const Widelands::Player_Number p) const
 		{
 			return new DefaultAI(g, p);
 		}
@@ -93,8 +94,8 @@ private:
 	bool improve_transportation_ways (const Widelands::Flag &);
 	bool connect_flag_to_another_economy (const Widelands::Flag &);
 
-	bool check_economies      ();
-	bool check_productionsite (ProductionSiteObserver &);
+	bool check_economies       ();
+	bool check_productionsites (int32_t);
 
 	void consider_productionsite_influence
 		(BuildableField &, Widelands::Coords, BuildingObserver const &);
@@ -109,7 +110,7 @@ private:
 
 	bool check_supply(BuildingObserver const &);
 
-	bool consider_attack(int32_t);
+	bool military_consideration(int32_t);
 
 
 private:
@@ -130,13 +131,14 @@ private:
 	std::list<Widelands::Road const *> roads;
 	std::list<EconomyObserver *>      economies;
 	std::list<ProductionSiteObserver> productionsites;
+	std::list<MilitarySiteObserver>   militarysites;
 
 	std::vector<WareObserver>         wares;
 
 	int32_t next_road_due;
 	int32_t next_construction_due;
 	int32_t next_productionsite_check_due;
-	int32_t next_attack_consideration_due;
+	int32_t next_military_consideration_due;
 	int32_t inhibit_road_building;
 	int32_t time_of_last_construction;
 };

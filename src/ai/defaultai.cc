@@ -39,6 +39,7 @@
 #include "profile.h"
 #include "tribe.h"
 #include "upcast.h"
+#include "warehouse.h"
 #include "world.h"
 
 #include <algorithm>
@@ -57,7 +58,7 @@ Computer_Player(g, pid),
 m_buildable_changed(true),
 m_mineable_changed(true),
 tribe(0),
-next_attack_consideration_due(60000),
+next_military_consideration_due(300000),
 time_of_last_construction(0)
 {}
 
@@ -93,26 +94,24 @@ void DefaultAI::think ()
 	if (next_construction_due == 0) next_construction_due = gametime + 1000;
 
 	// verify that our production sites are doing well
-	if
-		(next_productionsite_check_due <= gametime
-		 and
-		 not productionsites.empty())
-	{
-		next_productionsite_check_due = gametime + 2000;
-
-		if (check_productionsite(productionsites.front())) {
-			m_buildable_changed = true;
-			m_mineable_changed = true;
-		}
-
-		productionsites.push_back (productionsites.front());
-		productionsites.pop_front ();
-	}
+	check_productionsites(gametime);
 
 	// check if anything in the economies changed.
 	// This needs to be done before new buildings are placed, to ensure that no
 	// empty economy is left.
 	if (check_economies())
+		return;
+
+	// if there are more than one economy try to connect them with a road.
+	if (next_road_due <= gametime) {
+		next_road_due = gametime + 1000;
+		if (construct_roads (gametime)) {
+			m_buildable_changed = true;
+			m_mineable_changed = true;
+			return;
+		}
+	} else
+		// only go on, after defaultAI tried to connect all economies.
 		return;
 
 	// improve existing roads
@@ -123,18 +122,6 @@ void DefaultAI::think ()
 		return;
 	}
 
-	// build some roads if needed
-	if (next_road_due <= gametime) {
-		next_road_due = gametime + 1000;
-		if (construct_roads (gametime)) {
-			m_buildable_changed = true;
-			m_mineable_changed = true;
-			return;
-		}
-	} else
-		return; // don't build new buildings as long as the cp has not tried to
-		        // connect all economies.
-
 	// Now try to build something if possible
 	if (next_construction_due <= gametime) {
 		next_construction_due = gametime + 2000;
@@ -144,12 +131,9 @@ void DefaultAI::think ()
 		}
 	}
 
-	// Finally consider to attack another player
-	if (next_attack_consideration_due <= gametime)
-		if (consider_attack(gametime)) {
-			m_buildable_changed = true;
-			m_mineable_changed = true;
-		}
+	// Finally consider military actions
+	if (next_military_consideration_due <= gametime)
+		military_consideration(gametime);
 }
 
 
@@ -219,8 +203,9 @@ void DefaultAI::late_initialization ()
 		granitmine    = hints.get_safe_string("granitmine");
 
 	} else {
-		log("   WARNING: No computerplayer hints for tribe %s found\n", tribe->name().c_str());
-		log("   This will lead to stupid behaviour of said player!\n");
+		log("   WARNING: No computerplayer hints for tribe %s found\n"
+			 "   This will lead to stupid behaviour of said player!\n",
+			 tribe->name().c_str());
 	}
 
 	// collect information about which buildings our tribe can construct
@@ -308,7 +293,7 @@ void DefaultAI::late_initialization ()
 			unusable_fields.push_back (f);
 
 			if (upcast(PlayerImmovable, imm, f.field->get_immovable()))
-				// Guard by a set because immovables might be on several fields at once
+				// Guard by a set - immovables might be on several fields at once
 				if (&imm->owner() == player and not found_immovables.count(imm)) {
 					found_immovables.insert(imm);
 					gain_immovable(*imm);
@@ -395,41 +380,49 @@ void DefaultAI::update_all_mineable_fields(const int32_t gametime)
 }
 
 /**
- * Checks ALL fields that weren't buildable the last time.
+ * Checks up to 50 fields that weren't buildable the last time.
  *
- * this might hang the game for some 100
  * milliseconds if the area the computer owns is big.
  */
 void DefaultAI::update_all_not_buildable_fields()
 {
-	for
-		(std::list<FCoords>::iterator i = unusable_fields.begin();
-		 i != unusable_fields.end();)
-	{
+	int32_t pn = get_player_number();
+	uint32_t maxchecks = unusable_fields.size();
+	if (maxchecks > 50)
+		maxchecks = 50;
+
+	for (uint32_t i = 0; i < maxchecks; ++i) {
 		//  check whether we lost ownership of the node
-		if (i->field->get_owned_by() != get_player_number()) {
-			i = unusable_fields.erase(i);
+		if (unusable_fields.front().field->get_owned_by() != pn) {
+			unusable_fields.pop_front();
 			continue;
 		}
 
 		// check whether building capabilities have improved
-		if ((player->get_buildcaps(*i) & BUILDCAPS_SIZEMASK) != 0) {
-			buildable_fields.push_back (new BuildableField(*i));
-			i = unusable_fields.erase(i);
+		if ((player->get_buildcaps(unusable_fields.front())
+			& BUILDCAPS_SIZEMASK) != 0) {
+
+			buildable_fields.push_back
+				(new BuildableField(unusable_fields.front()));
+			unusable_fields.pop_front();
 
 			update_buildable_field (*buildable_fields.back());
 			continue;
 		}
 
-		if ((player->get_buildcaps(*i) & BUILDCAPS_MINE) != 0) {
-			mineable_fields.push_back (new MineableField(*i));
-			i = unusable_fields.erase(i);
+		if ((player->get_buildcaps(unusable_fields.front())
+			& BUILDCAPS_MINE) != 0) {
+
+			mineable_fields.push_back
+				(new MineableField(unusable_fields.front()));
+			unusable_fields.pop_front();
 
 			update_mineable_field (*mineable_fields.back());
 			continue;
 		}
 
-		++i;
+		unusable_fields.push_back(unusable_fields.front());
+		unusable_fields.pop_front();
 	}
 }
 
@@ -438,7 +431,7 @@ void DefaultAI::update_all_not_buildable_fields()
 void DefaultAI::update_buildable_field (BuildableField & field)
 {
 	// look if there is any unowned land nearby
-	FindNodeUnowned find_unowned;
+	FindNodeUnowned find_unowned(get_player_number());
 	Map & map = game().map();
 
 	field.unowned_land_nearby =
@@ -488,7 +481,8 @@ void DefaultAI::update_buildable_field (BuildableField & field)
 		if (dynamic_cast<const Flag *>(&base_immovable))
 			field.reachable = true;
 		if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
-			if (player_immovable->owner().get_player_number() != get_player_number())
+			if (player_immovable->owner().get_player_number()
+				 != get_player_number())
 				continue;
 
 		if (upcast(Building const, building, &base_immovable)) {
@@ -706,7 +700,7 @@ bool DefaultAI::construct_building (int32_t gametime)
 
 					// don't build a forester if there are already a lot of trees
 					// FIXME: should be generalised for fish_breeder, etc.
-					prio -= bf->trees_nearby;
+					prio -= bf->trees_nearby -2;
 				} else {
 					if (j->total_count() == 0)
 						prio += 2;
@@ -716,7 +710,7 @@ bool DefaultAI::construct_building (int32_t gametime)
 						for (uint32_t m = 0; m < j->outputs.size(); ++m) {
 							Ware_Index wt(static_cast<size_t>(j->outputs[m]));
 							if ((*l.current)->economy.needs_ware(wt)) {
-								prio += 1 + wares[j->outputs[m]].preciousness;
+								prio += 2 + wares[j->outputs[m]].preciousness;
 							}
 						}
 					}
@@ -755,7 +749,8 @@ bool DefaultAI::construct_building (int32_t gametime)
 								++iosum;
 						prio += 2 * iosum;
 					}
-					// don't make more than one building, if supply line is broken.
+					// do not construct more than one building,
+					// if supply line is already broken.
 					if (!check_supply(*j) && j->total_count() > 0)
 						prio -= 12;
 
@@ -795,11 +790,15 @@ bool DefaultAI::construct_building (int32_t gametime)
 	}
 
 	// then try all mines
-	for (std::list<BuildingObserver>::iterator i = buildings.begin(); i != buildings.end(); ++i) {
+	for (std::list<BuildingObserver>::iterator i = buildings.begin();
+		i != buildings.end(); ++i) {
+
 		if (!i->is_buildable || i->type != BuildingObserver::MINE)
 			continue;
 
-		for (std::list<MineableField *>::iterator j = mineable_fields.begin(); j != mineable_fields.end(); ++j) {
+		for (std::list<MineableField *>::iterator j = mineable_fields.begin();
+			j != mineable_fields.end(); ++j) {
+
 			MineableField * mf = *j;
 			int32_t prio = -1;
 
@@ -869,10 +868,6 @@ bool DefaultAI::construct_roads (int32_t gametime)
 		return false;
 	}
 
-	std::vector<WalkableSpot> spots;
-	std::queue<int32_t> queue;
-	Map & map = game().map();
-
 	uint32_t economies_to_connect = 0;
 	EconomyObserver * eo_to_connect;
 
@@ -882,20 +877,8 @@ bool DefaultAI::construct_roads (int32_t gametime)
 		while ((economies_to_connect < 2) && (i != eo.end())) {
 			// Do not try to connect economies that already failed in last time.
 			if ((*i)->next_connection_try <= gametime) {
-				container_iterate_const(std::list<Flag const *>, (*i)->flags, j)
-				{
-					queue.push (spots.size());
-
-					spots.push_back(WalkableSpot());
-					spots.back().coords  = (*j.current)->get_position();
-					spots.back().hasflag = true;
-					spots.back().cost    = 0;
-					spots.back().eco     = &(*i)->economy;
-					spots.back().from    = -1;
-				}
 				if (economies_to_connect == 1)
 					eo_to_connect = (*i);
-
 				++ economies_to_connect;
 			}
 			++i;
@@ -903,129 +886,18 @@ bool DefaultAI::construct_roads (int32_t gametime)
 	}
 
 	// No need to connect, if only one economy
-	if (economies_to_connect < 2)
+	if ((economies_to_connect < 2) | eo_to_connect->flags.empty())
 		return false;
 
-	container_iterate_const(std::list<BuildableField *>, buildable_fields, i) {
-		spots.push_back(WalkableSpot());
-		spots.back().coords  = (*i.current)->coords;
-		spots.back().hasflag = false;
-		spots.back().cost    = -1;
-		spots.back().eco     = 0;
-		spots.back().from    = -1;
-	}
+	// Try to connect - this should work fine as in nearly all cases we simply
+	// connect a constructionsite
+	bool done = connect_flag_to_another_economy(*eo_to_connect->flags.front());
+	eo_to_connect->flags.push_back(eo_to_connect->flags.front());
+	eo_to_connect->flags.pop_front();
 
+	if (done)
+		return true;
 
-	container_iterate_const(std::list<FCoords>, unusable_fields, i) {
-		if ((player->get_buildcaps(*i.current) & MOVECAPS_WALK) == 0)
-			continue;
-
-		if (BaseImmovable * const imm = map.get_immovable(*i.current)) {
-			if (upcast(Road, road, imm)) {
-				if ((player->get_buildcaps(*i.current) & BUILDCAPS_FLAG) == 0)
-					continue;
-
-				queue.push (spots.size());
-
-				spots.push_back(WalkableSpot());
-				spots.back().coords  = *i.current;
-				spots.back().hasflag = false;
-				spots.back().cost    = 0;
-				spots.back().eco = road->get_flag(Road::FlagStart).get_economy();
-				spots.back().from    = -1;
-
-				continue;
-			}
-
-			if (imm->get_size() >= BaseImmovable::SMALL) continue;
-		}
-
-		spots.push_back(WalkableSpot());
-		spots.back().coords  = *i.current;
-		spots.back().hasflag = false;
-		spots.back().cost    = -1;
-		spots.back().eco     = 0;
-		spots.back().from    = -1;
-	}
-
-	int32_t i, j, k;
-	for (i = 0; i < static_cast<int32_t>(spots.size()); ++i)
-		for (j = 0; j < 6; ++j) { // the 6 different directions
-			Coords nc;
-			map.get_neighbour (spots[i].coords, j + 1, &nc);
-
-			for (k = 0; k < static_cast<int32_t>(spots.size()); ++k)
-				if (spots[k].coords == nc)
-					break;
-
-			spots[i].neighbours[j] =
-				k < static_cast<int32_t>(spots.size()) ? k : -1;
-		}
-
-	while (!queue.empty()) {
-		WalkableSpot & from = spots[queue.front()];
-		queue.pop();
-
-		for (i = 0; i < 6; ++i) // the 6 different directions
-			if (from.neighbours[i] >= 0) {
-				WalkableSpot & to = spots[from.neighbours[i]];
-
-				if (to.cost < 0) {
-					to.cost = from.cost + 1;
-					to.eco  = from.eco;
-					to.from = &from - &spots.front();
-
-					queue.push (&to - &spots.front());
-					continue;
-				}
-
-				if (from.eco != to.eco and to.cost > 0) {
-					std::list<Coords> pc;
-					bool hasflag;
-
-					pc.push_back (to.coords);
-					i = to.from;
-					hasflag = to.hasflag;
-					while (0 <= i) {
-						pc.push_back (spots[i].coords);
-						hasflag = spots[i].hasflag;
-						i = spots[i].from;
-					}
-
-					if (!hasflag)
-						game().send_player_build_flag (get_player_number(), pc.back());
-
-					pc.push_front (from.coords);
-					i = from.from;
-					hasflag = from.hasflag;
-					while (i >= 0) {
-						pc.push_front (spots[i].coords);
-						hasflag = spots[i].hasflag;
-						i = spots[i].from;
-					}
-
-					if (!hasflag)
-						game().send_player_build_flag (get_player_number(), pc.front());
-
-					Path & path = *new Path(pc.front());
-					pc.pop_front();
-
-					for
-						(std::list<Coords>::iterator c = pc.begin(); c != pc.end(); ++c)
-					{
-						const int32_t n = map.is_neighbour(path.get_end(), *c);
-						assert (1 <= n);
-						assert (n <= 6); // one of the 6 directions
-
-						path.append (map, n);
-						assert (path.get_end() == *c);
-					}
-
-					game().send_player_build_road (get_player_number(), path);
-					return true;
-				}
-			}
-	}
 	// Unable to connect, so we let this economy wait for 30 seconds if it fails.
 	eo_to_connect->next_connection_try = gametime + 30000;
 	return false;
@@ -1164,7 +1036,8 @@ bool DefaultAI::improve_transportation_ways (const Flag & flag)
 	Map & map = game().map();
 
 	while (!queue.empty()) {
-		std::vector<NearFlag>::iterator f = find(nearflags.begin(), nearflags.end(), queue.top().flag);
+		std::vector<NearFlag>::iterator f =
+			find(nearflags.begin(), nearflags.end(), queue.top().flag);
 		if (f != nearflags.end()) {
 			queue.pop ();
 			continue;
@@ -1251,7 +1124,8 @@ bool DefaultAI::check_economies ()
 				++j;
 		}
 
-		// if there are no more flags in this economy, we no longer need it's observer
+		// if there are no more flags in this economy,
+		// we no longer need it's observer
 		if ((*i.current)->flags.empty()) {
 			delete *i.current;
 			economies.erase(i.current);
@@ -1262,13 +1136,20 @@ bool DefaultAI::check_economies ()
 }
 
 /**
- * checks the productionsites and takes care about buildings that run out of
- * ressources.
+ * checks the first productionsite in list, takes care if it runs out of
+ * ressources and finally reenques it at the end of the list.
  *
  * \returns true, if something was changed.
  */
-bool DefaultAI::check_productionsite (ProductionSiteObserver & site)
+bool DefaultAI::check_productionsites(int32_t gametime)
 {
+	if ((next_productionsite_check_due > gametime) | productionsites.empty())
+		return false;
+
+	// Get link to productionsite that should be checked
+	ProductionSiteObserver & site = productionsites.front();
+	bool changed = false;
+
 	// Get max radius of recursive workarea
 	Workarea_Info::size_type radius = 0;
 
@@ -1305,9 +1186,13 @@ bool DefaultAI::check_productionsite (ProductionSiteObserver & site)
 		 0)
 	{
 		game().send_player_bulldoze (*site.site);
-		return true;
+		changed = true;
 	}
-	return false;
+	// Reorder and set new values;
+	productionsites.push_back(productionsites.front());
+	productionsites.pop_front();
+	next_productionsite_check_due = gametime + 2000;
+	return changed;
 }
 
 
@@ -1405,8 +1290,7 @@ void DefaultAI::gain_building (Building & b)
 
 		if (bo.type == BuildingObserver::PRODUCTIONSITE) {
 			productionsites.push_back (ProductionSiteObserver());
-			productionsites.back().site =
-				&dynamic_cast<ProductionSite &>(b);
+			productionsites.back().site = &dynamic_cast<ProductionSite &>(b);
 			productionsites.back().bo = &bo;
 
 			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
@@ -1414,6 +1298,10 @@ void DefaultAI::gain_building (Building & b)
 
 			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
 				++wares[bo.inputs[i]].consumers;
+		} else if (bo.type == BuildingObserver::MILITARYSITE) {
+			militarysites.push_back (MilitarySiteObserver());
+			militarysites.back().site = &dynamic_cast<MilitarySite &>(b);
+			militarysites.back().bo = &bo;
 		}
 	}
 }
@@ -1441,7 +1329,7 @@ void DefaultAI::lose_building (Building const & b)
 				 i != productionsites.end();
 				 ++i)
 				if (i->site == &b) {
-					productionsites.erase (i);
+					productionsites.erase(i);
 					break;
 				}
 
@@ -1450,6 +1338,16 @@ void DefaultAI::lose_building (Building const & b)
 
 			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
 				--wares[bo.inputs[i]].consumers;
+		} else if (bo.type == BuildingObserver::MILITARYSITE) {
+			for
+				(std::list<MilitarySiteObserver>::iterator i =
+				 militarysites.begin();
+				 i != militarysites.end();
+				 ++i)
+				if (i->site == &b) {
+					militarysites.erase(i);
+					break;
+				}
 		}
 	}
 	m_buildable_changed = true;
@@ -1482,32 +1380,65 @@ bool DefaultAI::check_supply(BuildingObserver const &bo)
 
 
 /**
- * Checks all fields hold by another play for opposing military buildings
- * and consideres, whether an attack would make sense. If yes it attacks with
- * all available forces.
+ * Updates the first military building in list and reenques it at the end of
+ * the list afterwards. If a militarysite is in secure area but holds more than
+ * one soldier, the number of stationed soldiers is decreased. If the building
+ * is near a border, the number of stationed soldiers is maximized.
+ * Further the defaultAi "considers" via this function whether to attack an
+ * enemy, if opposing military buildings are in sight. In case of an attack it
+ * sends all available forces.
  *
  * \returns true, if attack was started.
  */
-bool DefaultAI::consider_attack(int32_t gametime) {
-	next_attack_consideration_due = (gametime % 51 + 10) * 1000 + gametime;
+bool DefaultAI::military_consideration(int32_t gametime) {
+	next_military_consideration_due = (gametime % 7) * 1000 + gametime;
 
-	// Check all fields and make a list of possible targets.
-	// \FIXME this takes much too long on big maps
+	// Only useable, if it owns at least one militarysite
+	if (militarysites.empty())
+		return false;
+
 	Map & map = game().map();
 	uint16_t pn = get_player_number();
 
-	MilitarySite * target;
-	int32_t        chance = 0;
-	int32_t        attackers = 0;
+	Building * target;
+	int32_t    chance = 0;
+	int32_t    attackers = 0;
 
-	for (Y_Coordinate y = 0; y < map.get_height(); ++y) {
-		for (X_Coordinate x = 0; x < map.get_width(); ++x) {
-			FCoords f = map.get_fcoords(Coords(x, y));
+	// Check next militarysite
+	MilitarySite * ms = militarysites.front().site;
+	uint32_t vision = ms->vision_range();
+	FCoords f = map.get_fcoords(ms->get_position());
 
-			if ((f.field->get_owned_by() == 0) | (f.field->get_owned_by() == pn))
-				continue;
+	// look if there is any enemy land nearby
+	FindNodeUnowned find_unowned(pn, true);
 
-			if (upcast(MilitarySite, bld, f.field->get_immovable())) {
+	if (map.find_fields(Area<FCoords>(f, vision), 0, find_unowned) == 0) {
+		// If no enemy in sight - decrease the number of stationed soldiers
+		// as long as it is > 1
+		uint32_t j = ms->soldierCapacity();
+		if (j > 1)
+			ms->setSoldierCapacity(j - 1);
+		militarysites.push_back(militarysites.front());
+		militarysites.pop_front();
+		return false; //continue;
+	} else {
+		// If an enemy is in sight and the number of stationed soldier is not
+		// at maximum - set it to maximum.
+		uint32_t j = ms->maxSoldierCapacity();
+		if (j > ms->soldierCapacity())
+			ms->setSoldierCapacity(j);
+	}
+
+	// Search in a radius of the vision of the militarysite and collect
+	// information about immovables in the area
+	std::vector<ImmovableFound> immovables;
+	map.find_immovables(Area<FCoords>(f, vision), &immovables);
+
+	for (uint32_t j = 0; j < immovables.size(); ++j) {
+		if (!strcmp(immovables[j].object->type_name(), "militarysite")) {
+			if (upcast(MilitarySite, bld, immovables[j].object)) {
+				if (bld->owner().get_player_number() == pn)
+					continue;
 				if (bld->canAttack()) {
 					int32_t ta = player->findAttackSoldiers(bld->base_flag());
 					if (ta < 1)
@@ -1521,10 +1452,32 @@ bool DefaultAI::consider_attack(int32_t gametime) {
 					}
 				}
 			}
-		}
+		} else if (!strcmp(immovables[j].object->type_name(), "warehouse"))
+			if (upcast(Warehouse, bld, immovables[j].object)) {
+				if (bld->owner().get_player_number() == pn)
+					continue;
+				if (bld->canAttack()) {
+					int32_t ta = player->findAttackSoldiers(bld->base_flag());
+					if (ta < 1)
+						continue;
+
+					// extra priority push!
+					int32_t tc = ta * 2;
+					if (tc > chance) {
+						target = bld;
+						chance = tc;
+						attackers = ta;
+					}
+				}
+			}
 	}
 
-	// Return if chance is too low
+	// Reenque militarysite at the end of list
+	militarysites.push_back(militarysites.front());
+	militarysites.pop_front();
+
+
+	// Return if chance to win is too low
 	if (chance < 3)
 		return false;
 
