@@ -149,7 +149,7 @@ public:
 		return false;
 	}
 
-	bool print() {
+	void print() {
 		for (Nodes::iterator i = nodes.begin(); i < nodes.end(); i++) {
 			BOOST_MESSAGE(*i);
 		}
@@ -409,13 +409,13 @@ struct ComplexRouterFixture {
 		 Coords pos = Coords(0, 0),
 		 int32_t roadcost = 1, int32_t waitcost = 0)
 	{
-		TestingRoutingNode * d0 = new TestingRoutingNode(roadcost, waitcost, pos);
+		TestingRoutingNode * dnew = new TestingRoutingNode(roadcost, waitcost, pos);
 
-		d0->add_neighbour(d);
-		d->add_neighbour(d0);
+		dnew->add_neighbour(d);
+		d->add_neighbour(dnew);
 
-		nodes.push_back(d0);
-		return d0;
+		nodes.push_back(dnew);
+		return dnew;
 	}
 
 	/**
@@ -425,15 +425,15 @@ struct ComplexRouterFixture {
 	  * \return The argument Node
 	  */
 	TestingRoutingNode * add_triangle(TestingRoutingNode * d) {
-		TestingRoutingNode * d0 = new TestingRoutingNode();
-		TestingRoutingNode * d1 = new TestingRoutingNode();
+		TestingRoutingNode * dnew_1 = new TestingRoutingNode();
+		TestingRoutingNode * dnew_2 = new TestingRoutingNode();
 
-		d->add_neighbour(d0); d->add_neighbour(d1);
-		d0->add_neighbour(d); d0->add_neighbour(d1);
-		d1->add_neighbour(d0); d1->add_neighbour(d);
+		d->add_neighbour(dnew_1); d->add_neighbour(dnew_2);
+		dnew_1->add_neighbour(d); dnew_1->add_neighbour(dnew_2);
+		dnew_2->add_neighbour(dnew_1); dnew_2->add_neighbour(d);
 
-		nodes.push_back(d0);
-		nodes.push_back(d1);
+		nodes.push_back(dnew_1);
+		nodes.push_back(dnew_2);
 		return d;
 	}
 
@@ -445,17 +445,17 @@ struct ComplexRouterFixture {
 	TestingRoutingNode * add_dead_end(TestingRoutingNode * d) {
 
 		// Some random dead ends
-		TestingRoutingNode * d0 = new_node_w_neighbour(d);
-		d0 = new_node_w_neighbour(d0);
+		TestingRoutingNode * d_new = new_node_w_neighbour(d);
+        d_new = new_node_w_neighbour(d_new);
 
-		TestingRoutingNode * d1 = new_node_w_neighbour(d0);
-		new_node_w_neighbour(d1);
-		new_node_w_neighbour(d1);
-		d1 = new_node_w_neighbour(d1);
-		d1 = new_node_w_neighbour(d1);
+		TestingRoutingNode * dnew_2 = new_node_w_neighbour(d_new);
+		new_node_w_neighbour(dnew_2);
+		new_node_w_neighbour(dnew_2);
+		dnew_2 = new_node_w_neighbour(dnew_2);
+		dnew_2 = new_node_w_neighbour(dnew_2);
 
 		new_node_w_neighbour(d);
-		new_node_w_neighbour(d0);
+		new_node_w_neighbour(d_new);
 
 		return d;
 	}
@@ -618,10 +618,10 @@ BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 BOOST_FIXTURE_TEST_CASE(cutoff, DistanceRoutingFixture) {
 	Nodes chain;
 
-	RoutingNode * end = add_chain(4, d0, &chain);
+	RoutingNode * end_node = add_chain(4, d0, &chain);
 
 	bool rval = r.find_route
-		(*d0, *end,
+		(*d0, *end_node,
 		 &route,
 		 false,
 		 1000,
