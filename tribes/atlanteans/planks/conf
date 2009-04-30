@@ -1,5 +1,5 @@
 help=_Planks are an important build material of the Atlanteans.
-default_target_quantity=20
+default_target_quantity=40
 preciousness=7
 
 [idle]
