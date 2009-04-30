@@ -56,8 +56,8 @@ env.Alias("indent", indent)
 all_code_files=simpleglob('*.h', '.', recursive=True)+simpleglob('*.cc', '.', recursive=True)
 Alias('tags', env.ctags(source=all_code_files))
 # Style Checks
-style_checks = [ env.CodeCheck(s+'.stylecheck',s) for s in all_code_files ]
-Alias("stylecheck", style_checks)
+# style_checks = [ env.CodeCheck(s+'.stylecheck',s) for s in all_code_files ]
+# Alias("stylecheck", style_checks)
 
 binary=srcenv.Program(target='widelands', source=SRC+libs)
 copybinary=srcenv.Command('#/widelands', binary, Copy('widelands', os.path.join(BUILDDIR, 'widelands')))

@@ -133,6 +133,12 @@ class CodeChecker(object):
         """
         self._benchmark = benchmark
         self._color = color
+        
+        # We keep a cache of file names/error strings
+        # so that (e.g.) a header is requested twice in one
+        # run of the program, we just return the cached errors.
+        # They will not have changed while the program was running
+        self._cache = {}
 
     @property
     def benchmark_results(self):
@@ -147,6 +153,7 @@ class CodeChecker(object):
     use_color = property(**use_color())
 
     def _print_errors(self,errors):
+        output = ""
         for e in errors:
             fn,l,msg = e
             if self._color:
@@ -154,9 +161,16 @@ class CodeChecker(object):
                 l = '%s%s%s' % (ansicolor["cyan"], l, ansicolor["reset"])
                 msg = '%s%s%s%s' % (ansicolor["yellow"], ansicolor["bold"], msg, ansicolor["reset"])
 
-            print "%s:%s: %s" % (fn,l,msg)
+            output += "%s:%s: %s\n" % (fn,l,msg)
+
+        print output.rstrip()
+        
+        return output
     
     def check_file(self,fn, print_errors = True):
+        if print_errors and fn in self._cache:
+            print self._cache[fn].rstrip()
+            return 
         errors = []
        
         bm = defaultdict(lambda: 0.)
@@ -187,7 +201,7 @@ class CodeChecker(object):
         errors.sort(key=lambda a: a[1])
 
         if len(errors) and print_errors:
-            self._print_errors(errors)
+            self._cache[fn] = self._print_errors(errors)
        
         if self._benchmark:
             self._bench_results = [ (v,k) for k,v in bm.items() ]

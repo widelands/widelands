@@ -38,7 +38,6 @@ def simpleglob(pattern='*', directory='.', recursive=False):
 
 	return entries
 
-
 ########################### Create a phony target (not (yet) a feature of scons)
 
 # taken from scons' wiki
@@ -109,7 +108,6 @@ env=Environment(options=opts)
 env.Tool("ctags", toolpath=['build/scons-tools'])
 env.Tool("PNGShrink", toolpath=['build/scons-tools'])
 env.Tool("astyle", toolpath=['build/scons-tools'])
-env.Tool("CodeCheck", toolpath=['build/scons-tools'])
 env.Tool("Distribute", toolpath=['build/scons-tools'])
 env.Help(opts.GenerateHelpText(env))
 
@@ -137,6 +135,23 @@ conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',
 BUILDDIR=parse_cli(env, BUILD_TARGETS)
 env.Append(CPPPATH=[os.path.join('#', BUILDDIR)])
 
+print_build_info(env)
+
+if env.enable_configuration:
+	# Generate build_id.cc - scons itself will decide whether a recompile is needed
+	Command(os.path.join(BUILDDIR, "build_id.cc"), [Value(get_build_id(env))], generate_buildid_file)
+
+	do_configure(conf, env)
+
+	# Generate config.h - scons itself will decide whether a recompile is needed
+	Command(os.path.join(BUILDDIR, "config.h"), [Value(generate_configh_content(env))], generate_configh_file)
+
+env=conf.Finish()
+
+# We only add this tool now, because it adds an emitter to Object which 
+# breaks configuration.
+env.Tool("CodeCheck", toolpath=['build/scons-tools'])
+
 # Setup pretty compile output
 if env['pretty_compile_output']:
     env.Append(CXXCOMSTR="Compiling ==> '$TARGET'");
@@ -163,25 +178,16 @@ if env['colored_compile_output']:
             print "\nUnknown TERM. Disabling colors. Please add your TERM in SConstruct"
             env["USE_COLOR"] = True
 
-print_build_info(env)
 
 # We now copy env to get our test Environment
+# TODO Doing this after configuration means that all
+# test exectutables are linked agains boots,SDL,... and 
+# have the DEFINES from config. That's bad.
 testEnv = env.Clone()
 testEnv.Tool("UnitTest", toolpath=['build/scons-tools'],
     LIBS=["boost_unit_test_framework-mt"],
     CXXFLAGS=["-DBOOST_TEST_DYN_LINK"])
 
-
-if env.enable_configuration:
-	# Generate build_id.cc - scons itself will decide whether a recompile is needed
-	Command(os.path.join(BUILDDIR, "build_id.cc"), [Value(get_build_id(env))], generate_buildid_file)
-
-	do_configure(conf, env)
-
-	# Generate config.h - scons itself will decide whether a recompile is needed
-	Command(os.path.join(BUILDDIR, "config.h"), [Value(generate_configh_content(env))], generate_configh_file)
-
-env=conf.Finish()
 
 # Overwriting Spawn to provide some color output
 overwrite_spawn_function(env)
@@ -211,17 +217,13 @@ SConscript('global/SConscript')
 
 
 ################################################################ Unit tests & style checking
-if env['build'] == 'debug' or env['build'] == 'profile':
-        Default('stylecheck')
-
-# If those passes, build the binary
 Default(thebinary)
 if env['build']=='release':
 	Default(buildlocale)
 
-# After, maybe build the tests
+# Also build tests by default
 if env['build'] == 'debug' or env['build'] == 'profile':
-        Default("test")
+    Default("test")
 
 ########################################################################### tags
 # Done in src/SConscript, alias tags
