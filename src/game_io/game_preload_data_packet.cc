@@ -46,7 +46,7 @@ throw (_wexception)
 		} else if (packet_version == 1) {
 			m_gametime   = s.get_safe_int   ("gametime");
 			m_mapname    = s.get_safe_string("mapname");
-			m_background = "pics/progress_bg.png";
+			m_background = "pics/progress.png";
 			// Of course this is wrong, but at least player 1 is always in game
 			// so widelands won't crash with this setting.
 			m_player_nr  = 1;

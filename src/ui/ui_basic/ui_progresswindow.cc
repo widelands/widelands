@@ -58,7 +58,7 @@ void ProgressWindow::draw_background
 	// Load background graphics
 	Rect wnd_rect(Point(0, 0), xres, yres);
 	const uint32_t pic_tile =
-		g_gr->get_picture(PicMod_Menu, "pics/progress_bg.png");
+		g_gr->get_picture(PicMod_Menu, "pics/progress.png");
 	if (pic_tile > 0) {
 		rt.tile(wnd_rect, pic_tile, Point(0, 0));
 		g_gr->update_fullscreen();
