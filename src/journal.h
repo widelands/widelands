@@ -38,10 +38,11 @@
  * and always if there is a nonrecoverable error and you have already dealt with
  * it.
  *
- * \todo The idea of writing enums into a file is bad: enums are int32_t and int32_t varies
- * in size (typ. 32/64bit). Our own codes only need 8bit, so we force IO down to
- * this value. The same happens with keyboard events at 32bits. Cutting off bits
- * is not a good solution, but in this case it'll do until a better way comes along.
+ * \todo The idea of writing enums into a file is bad: enums are int32_t and
+ * int32_t varies in size (typ. 32/64bit). Our own codes only need 8bit, so we
+ * force IO down to this value. The same happens with keyboard events at
+ * 32 bits. Cutting off bits is not a good solution, but in this case it'll do
+ * until a better way comes along.
  */
 struct Journal {
 	/// change this and I will ensure your death will be a most unpleasant one

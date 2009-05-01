@@ -43,9 +43,9 @@ struct MessageBoxImpl;
  * been interrupted in an unusual way).
  *
  * Using it as a non-modal dialog box is slightly more complicated. You have
- * to add this dialog box as a child to the current fullscreen panel, and connect
- * the signals \ref yes and \ref no or \ref ok, depending on the messagebox type,
- * to a function that deletes the message box.
+ * to add this dialog box as a child to the current fullscreen panel, and
+ * connect the signals \ref yes and \ref no or \ref ok, depending on the
+ * messagebox type, to a function that deletes the message box.
 */
 struct MessageBox : public Window {
 	enum MB_Type {

@@ -121,7 +121,8 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 
 	//  register sel overlay position
 	if (m_sel.triangles) {
-		assert(center.triangle.t == TCoords<>::D or center.triangle.t == TCoords<>::R);
+		assert(center.triangle.t == TCoords<>::D or
+		       center.triangle.t == TCoords<>::R);
 		Widelands::MapTriangleRegion<> mr
 			(map, Area<TCoords<> >(center.triangle, m_sel.radius));
 		do
@@ -553,7 +554,7 @@ void Interactive_Base::finish_build_road()
 		if (upcast(Game, game, &egbase())) {
 			game->send_player_build_road
 				(m_road_build_player, *new Widelands::Path(*m_buildroad));
-			if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) { //  place flags
+			if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) { //place flags
 				Map const & map = game->map();
 				std::vector<Coords>         const &       c_vector =
 					m_buildroad->get_coords();
@@ -561,14 +562,16 @@ void Interactive_Base::finish_build_road()
 					c_vector.begin() + 2;
 				std::vector<Coords>::const_iterator const last     =
 					c_vector.end  () - 2;
-				if (get_key_state(SDLK_LSHIFT) || get_key_state(SDLK_RSHIFT)) { //  start to end
+
+				// start to end
+				if (get_key_state(SDLK_LSHIFT) || get_key_state(SDLK_RSHIFT)) {
 					for
 						(std::vector<Coords>::const_iterator it = first;
 						 it <= last;
 						 ++it)
 						game->send_player_build_flag
 							(m_road_build_player, map.get_fcoords(*it));
-				} else            { //  end to start
+				} else { //  end to start
 					for
 						(std::vector<Coords>::const_iterator it = last;
 						 first <= it;

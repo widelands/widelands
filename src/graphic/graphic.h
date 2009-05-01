@@ -100,7 +100,11 @@ struct Graphic {
 
 	void load_animations(UI::ProgressWindow & loader_ui);
 	AnimationGfx::Index nr_frames(uint32_t const anim = 0) const;
-	void get_animation_size(const uint32_t anim, const uint32_t time, uint32_t & w, uint32_t & h);
+	void get_animation_size
+		(const uint32_t anim,
+		 const uint32_t time,
+		 uint32_t & w,
+		 uint32_t & h);
 
 	void screenshot(const char & fname) const;
 	char const * get_maptexture_picture (uint32_t id);
@@ -111,7 +115,10 @@ struct Graphic {
 
 protected:
 	/// Static function for png writing
-	static void m_png_write_function (png_structp png_ptr, png_bytep data, png_size_t length);
+	static void m_png_write_function
+		(png_structp png_ptr,
+		 png_bytep data,
+		 png_size_t length);
 	static void m_png_flush_function (png_structp png_ptr);
 
 	std::vector<Picture>::size_type find_free_picture();

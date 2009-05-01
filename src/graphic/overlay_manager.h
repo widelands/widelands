@@ -194,7 +194,9 @@ private:
 	Overlay_Info m_buildhelp_infos[Widelands::Field::Buildhelp_None];
 	bool m_are_graphics_loaded;
 	bool m_showbuildhelp;
-	Overlay_Callback_Function m_callback;           // this callback is used to define we're overlays are set and were not
+
+	// this callback is used to define we're overlays are set and were not
+	Overlay_Callback_Function m_callback;
 	// since we only care for map stuff, not for player stuff or editor issues
 	void * m_callback_data;
 	int32_t m_callback_data_i;

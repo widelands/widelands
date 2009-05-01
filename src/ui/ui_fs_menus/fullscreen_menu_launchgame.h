@@ -81,7 +81,8 @@ private:
 
 	UI::Callback_Button<Fullscreen_Menu_LaunchGame> m_select_map, m_select_save;
 	UI::Callback_Button<Fullscreen_Menu_LaunchGame> m_back, m_ok;
-	UI::Callback_IDButton<Fullscreen_Menu_LaunchGame, uint8_t> * m_pos[MAX_PLAYERS];
+	UI::Callback_IDButton<Fullscreen_Menu_LaunchGame,
+		uint8_t> * m_pos[MAX_PLAYERS];
 	UI::Textarea              m_title, m_mapname, m_lobby;
 	UI::Multiline_Textarea    m_notes;
 	UI::Listselect<int32_t> * m_lobby_list;
@@ -90,7 +91,7 @@ private:
 	GameChatPanel           * m_chat;
 	PlayerDescriptionGroup  * m_players[MAX_PLAYERS];
 	std::string               m_filename;
-	std::string               m_filename_proof; // locale variable to check UI state
+	std::string            m_filename_proof; // locale variable to check UI state
 	std::string               m_player_save_name[MAX_PLAYERS];
 	std::string               m_player_save_tribe[MAX_PLAYERS];
 	int8_t                    m_nr_players;

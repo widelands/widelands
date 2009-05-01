@@ -80,7 +80,9 @@ public:
 	void postfill
 		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
 
-	virtual int32_t get_building_type() const throw () {return Building::WAREHOUSE;}
+	virtual int32_t get_building_type() const throw () {
+		return Building::WAREHOUSE;
+	}
 	char const * type_name() const throw () {return "warehouse";}
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
@@ -88,7 +90,8 @@ public:
 	virtual void act(Game & game, uint32_t data);
 
 	virtual void set_economy(Economy *);
-	virtual int32_t get_priority(int32_t type, Ware_Index ware_index, bool adjust = true) const;
+	virtual int32_t get_priority(int32_t type, Ware_Index ware_index,
+		bool adjust = true) const;
 	void set_needed(Ware_Index, int value = 1);
 
 	const WareList &get_wares() const;
@@ -130,7 +133,9 @@ private:
 
 	WarehouseSupply       * m_supply;
 	std::vector<Request *>  m_requests; // one idle request per ware type
-	std::vector<Object_Ptr> m_incorporated_workers; // Workers who live here at the moment
+
+	// Workers who live here at the moment
+	std::vector<Object_Ptr> m_incorporated_workers;
 	int32_t                 m_next_carrier_spawn; //  time of next carrier growth
 	int32_t                 m_next_military_act; // time of next military action
 

@@ -141,9 +141,9 @@ private:
 
 	uint32_t m_display_flags;
 
-	uint32_t                    m_lastframe;         //  system time (milliseconds)
-	uint32_t                    m_frametime;         //  in millseconds
-	uint32_t                    m_avg_usframetime;   //  in microseconds!
+	uint32_t          m_lastframe;         //  system time (milliseconds)
+	uint32_t          m_frametime;         //  in millseconds
+	uint32_t          m_avg_usframetime;   //  in microseconds!
 
 	Overlay_Manager::Job_Id m_jobid;
 	Overlay_Manager::Job_Id m_road_buildhelp_overlay_jobid;

@@ -102,8 +102,8 @@ public:
 
 
 /**
- * CheckStep implementation that returns the logic and of all sub-implementations
- * that have been added via \ref add().
+ * CheckStep implementation that returns the logic and of all
+ * sub-implementations that have been added via \ref add().
  */
 struct CheckStepAnd {
 	void add(CheckStep const & sub);
@@ -123,8 +123,8 @@ private:
  * Implements the default step checking behaviours that should be used for all
  * normal bobs.
  *
- * Simply check whether the movecaps are matching (basic exceptions for water bobs
- * moving onto the shore).
+ * Simply check whether the movecaps are matching (basic exceptions for water
+ * bobs moving onto the shore).
  */
 struct CheckStepDefault {
 	CheckStepDefault(uint8_t movecaps) : m_movecaps(movecaps) {}
@@ -140,12 +140,13 @@ private:
 
 
 /**
- * Implements the default step checking behaviours with one exception: we can move
- * from a walkable field onto an unwalkable one.
+ * Implements the default step checking behaviours with one exception: we can
+ * move from a walkable field onto an unwalkable one.
  * If onlyend is true, we can only do this on the final step.
  */
 struct CheckStepWalkOn {
-	CheckStepWalkOn(uint8_t movecaps, bool onlyend) : m_movecaps(movecaps), m_onlyend(onlyend) {}
+	CheckStepWalkOn(uint8_t movecaps, bool onlyend) :
+		m_movecaps(movecaps), m_onlyend(onlyend) {}
 
 	bool allowed
 		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
@@ -193,7 +194,8 @@ struct CheckStepLimited {
 
 private:
 	// It is OK to use Coords::ordering_functor because the ordering of the set
-	// does not matter, as long as it is system independent (for parallel simulation).
+	// does not matter, as long as it is system independent (for parallel
+	// simulation).
 	// The only thing that matters is whether a location is in the set.
 	std::set<Coords, Coords::ordering_functor> m_allowed_locations;
 };

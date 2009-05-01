@@ -94,7 +94,8 @@ void WLApplication::setup_searchpaths(std::string argv0)
 	try {
 #ifdef __APPLE__
 		// on mac, the default data dir is relative to the current directory
-		g_fs->AddFileSystem(FileSystem::Create("Widelands.app/Contents/Resources/"));
+		g_fs->AddFileSystem
+			(FileSystem::Create("Widelands.app/Contents/Resources/"));
 #else
 		// first, try the data directory used in the last scons invocation
 		g_fs->AddFileSystem //  see config.h
@@ -112,7 +113,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 
 	try {
 #ifndef WIN32
-		// if that fails, search it where the FHS forces us to put it (obviously UNIX-only)
+		// if that fails, search in FHS standard location (obviously UNIX-only)
 		g_fs->AddFileSystem(FileSystem::Create("/usr/share/games/widelands"));
 #else
 		//TODO: is there a "default dir" for this on win32 and mac ?
@@ -144,7 +145,8 @@ void WLApplication::setup_searchpaths(std::string argv0)
 	std::string::size_type slash = argv0.rfind('/');
 	std::string::size_type backslash = argv0.rfind('\\');
 
-	if (backslash != std::string::npos && (slash == std::string::npos || backslash > slash))
+	if (backslash != std::string::npos &&
+	    (slash == std::string::npos || backslash > slash))
 		slash = backslash;
 
 	if (slash != std::string::npos) {
@@ -216,8 +218,9 @@ WLApplication * WLApplication::get(int const argc, char const * * argv) {
  * This constructor is protected \e on \e purpose !
  * Use WLApplication::get() instead and look at the class description.
  *
- * For easier access, we repackage argc/argv into an STL map here. If you specify
- * the same option more than once, only the last occurrence is effective.
+ * For easier access, we repackage argc/argv into an STL map here.
+ * If you specify the same option more than once, only the last occurrence
+ * is effective.
  *
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
@@ -465,7 +468,8 @@ void WLApplication::handle_input(const InputCallback *cb)
 		// CAREFUL: Record files do not save the entire SDL_Event structure.
 		// Therefore, playbacks are incomplete. When you change the following
 		// code so that it uses previously unused fields in SDL_Event,
-		// please also take a look at Journal::read_event and Journal::record_event
+		// please also take a look at Journal::read_event and
+		// Journal::record_event
 
 		switch (ev.type) {
 		case SDL_KEYDOWN:
@@ -481,7 +485,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 				if (ev.type == SDL_KEYDOWN)
 					for (uint32_t nr = 0; nr < 10000; ++nr) {
 						char buffer[256];
-						snprintf(buffer, sizeof(buffer), "shot%04u.bmp", nr); //  FIXME
+						snprintf(buffer, sizeof(buffer), "shot%04u.bmp", nr); // FIXME
 						if (g_fs->FileExists(buffer)) continue;
 						g_gr->screenshot(*buffer);
 						break;
@@ -645,7 +649,8 @@ void WLApplication::init_graphics
  */
 bool WLApplication::init_settings() {
 
-	//create a journal so that handle_commandline_parameters can open the journal files
+	//create a journal so that handle_commandline_parameters can open the
+	//journal files
 	journal = new Journal();
 
 	//read in the configuration file
@@ -823,7 +828,8 @@ void WLApplication::parse_commandline(const int argc, const char **argv)
 /**
  * Parse the command line given in m_commandline
  *
- * \return false if there were errors during parsing \e or if "--help" was given,
+ * \return false if there were errors during parsing \e or if "--help"
+ * was given,
  * true otherwise.
 */
 void WLApplication::handle_commandline_parameters() throw (Parameter_error)
@@ -1237,7 +1243,7 @@ void WLApplication::mainmenu_multiplayer()
 		uint16_t port;
 		bool host_address;
 		{
-			Fullscreen_Menu_NetSetup ns; // must be reinitalised, else graphics look strange.
+			Fullscreen_Menu_NetSetup ns; // reinitalise, else graphics look strange
 			menu_result = ns.run();
 			playername = ns.get_playername();
 			host_address = ns.get_host_address(addr, port);
@@ -1328,7 +1334,9 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	virtual GameSettings const & settings() {return s;}
 
 	virtual bool canChangeMap() {return true;}
-	virtual bool canChangePlayerState(uint8_t number) {return (!s.scenario & (number != s.playernum));}
+	virtual bool canChangePlayerState(uint8_t number) {
+		return (!s.scenario & (number != s.playernum));
+	}
 	virtual bool canChangePlayerTribe(uint8_t) {return !s.scenario;}
 	virtual bool canChangePlayerInit (uint8_t) {return true;}
 
@@ -1340,7 +1348,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		return s.mapfilename;
 	}
 
-	virtual void setMap(std::string const & mapname, std::string const & mapfilename, uint32_t maxplayers, bool savegame) {
+	virtual void setMap(std::string const & mapname,
+		std::string const & mapfilename, uint32_t maxplayers, bool savegame) {
 		s.mapname = mapname;
 		s.mapfilename = mapfilename;
 		s.savegame = savegame;
@@ -1350,7 +1359,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 
 		while (oldplayers < maxplayers) {
 			PlayerSettings & player = s.players[oldplayers];
-			player.state = (oldplayers == 0) ? PlayerSettings::stateHuman : PlayerSettings::stateComputer;
+			player.state = (oldplayers == 0) ? PlayerSettings::stateHuman :
+				PlayerSettings::stateComputer;
 			player.tribe                = s.tribes.at(0).name;
 			player.initialization_index = 0;
 			char buf[200];

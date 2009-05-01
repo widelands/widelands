@@ -34,8 +34,8 @@ class Soldier;
  *
  * Soldiers are \em stationed in a building if that building is their
  * \ref Worker::location. Stationed soldiers are \em present in a building
- * if their current position is inside the building. So for a \ref TrainingSite,
- * the two concepts are equal. However, they're different for a \ref MilitarySite,
+ * if their current position is inside the building. So for a TrainingSite,
+ * the two concepts are equal. However, they're different for a MilitarySite,
  * where soldiers can be outside in combat.
  */
 struct SoldierControl {

@@ -63,7 +63,10 @@ struct NetHost : public GameController, private SyncCallback {
 		 std::string const & mapfilename,
 		 uint32_t            maxplayers,
 		 bool                savegame = false);
-	void setPlayerState (uint8_t number, PlayerSettings::State state, bool host = false);
+	void setPlayerState
+		(uint8_t number,
+		 PlayerSettings::State state,
+		 bool host = false);
 	void setPlayerTribe (uint8_t number, std::string const & tribe);
 	void setPlayerInit  (uint8_t number, uint8_t index);
 	void setPlayerName  (uint8_t number, std::string const & name);
@@ -106,8 +109,14 @@ private:
 	void writeSettingUser(SendPacket &, uint32_t number);
 	void writeSettingAllUsers(SendPacket &);
 
-	void disconnectPlayer(uint8_t number, std::string const & reason, bool sendreason = true);
-	void disconnectClient(uint32_t number, std::string const & reason, bool sendreason = true);
+	void disconnectPlayer
+		(uint8_t number,
+		 std::string const & reason,
+		 bool sendreason = true);
+	void disconnectClient
+		(uint32_t number,
+		 std::string const & reason,
+		 bool sendreason = true);
 	void reaper();
 
 	NetHostImpl * d;

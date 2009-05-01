@@ -77,8 +77,9 @@ struct ChatMessage {
  * Provides the chatting interface during a game.
  *
  * Use this interface to send chat messages and to access the list of
- * received chat messages. Note that this class is a \ref Widelands::NoteSender<ChatMessage>
- * and sends a notification every time a new message is received.
+ * received chat messages. Note that this class is a
+ * Widelands::NoteSender<ChatMessage> and sends a notification every
+ * time a new message is received.
  */
 struct ChatProvider : public Widelands::NoteSender<ChatMessage> {
 	virtual ~ChatProvider() {}
@@ -99,7 +100,9 @@ struct ChatProvider : public Widelands::NoteSender<ChatMessage> {
 	virtual std::vector<ChatMessage> const & getMessages() const = 0;
 
 protected:
-	void send(ChatMessage const & c) {Widelands::NoteSender<ChatMessage>::send(c);}
+	void send(ChatMessage const & c) {
+		Widelands::NoteSender<ChatMessage>::send(c);
+	}
 };
 
 #endif // CHAT_H

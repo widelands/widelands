@@ -95,7 +95,8 @@ ReplayReader::ReplayReader(Game & game, std::string const & filename)
 
 	try {
 		uint32_t const magic = m_cmdlog->Unsigned32();
-		if (magic == 0x2E21A100) // Note: This was never released as part of a build
+		if (magic == 0x2E21A100)
+			// Note: This was never released as part of a build
 			throw wexception
 				("%s is a replay from a version that is known to have desync "
 				 "problems",

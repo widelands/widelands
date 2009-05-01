@@ -110,15 +110,17 @@ protected:
 private:
 	const Tribe_Descr & m_tribe;
 	bool         m_buildable;       // the player can build this himself
-	Buildcost m_buildcost;
-	uint32_t         m_buildicon;       // if buildable: picture in the build dialog
-	std::string         m_buildicon_fname; // filename for this icon
-	int32_t          m_size;            // size of the building
+	Buildcost    m_buildcost;
+	uint32_t     m_buildicon;       // if buildable: picture in the build dialog
+	std::string  m_buildicon_fname; // filename for this icon
+	int32_t      m_size;            // size of the building
 	bool         m_mine;
 	Enhancements m_enhancements;
 	bool         m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints       m_hints; //  hints (knowledge) for computer players
-	uint32_t m_vision_range; // for migration, 0 is the default, meaning get_conquers() + 4
+	
+	// for migration, 0 is the default, meaning get_conquers() + 4
+	uint32_t m_vision_range;
 };
 
 
@@ -195,10 +197,13 @@ public:
 	bool leave_check_and_wait(Game &, Worker &);
 	void leave_skip(Game &, Worker &);
 	uint32_t get_conquers() const throw () {return descr().get_conquers();}
-	virtual uint32_t vision_range() const throw () {return descr().vision_range();}
+	virtual uint32_t vision_range() const throw () {
+		return descr().vision_range();
+	}
 
 	int32_t get_base_priority() const {return m_priority;}
-	virtual int32_t get_priority(int32_t type, Ware_Index ware_index, bool adjust = true) const;
+	virtual int32_t get_priority(int32_t type, Ware_Index ware_index,
+	                             bool adjust = true) const;
 	void set_priority(int32_t new_priority);
 	void set_priority(int32_t type, Ware_Index ware_index, int32_t new_priority);
 

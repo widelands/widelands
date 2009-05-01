@@ -39,11 +39,17 @@ namespace UI {
  *     width must be 20 and the top and bot pics MUST have a width of 100, while
  *     the height must be 20
  *
- * A click with the middle mouse button (or STRG+LClick) minimizes a window. Minimize means, that
- * the window is only the caption bar, nothing inside. Another click on this bar resizes the window again
+ * A click with the middle mouse button (or STRG+LClick) minimizes a window.
+ * Minimize means, that the window is only the caption bar, nothing inside.
+ * Another click on this bar resizes the window again
  */
 struct Window : public Panel {
-	Window(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const char *title);
+	Window(Panel *parent,
+		int32_t x,
+		int32_t y,
+		uint32_t w,
+		uint32_t h,
+		const char *title);
 
 	void set_title(const char *text);
 
@@ -76,7 +82,8 @@ private:
 	bool _is_minimal;
 	uint32_t _oldw, _oldh;  // if it is, these are the old formats
 	bool _dragging, _docked_left, _docked_right, _docked_bottom;
-	int32_t _drag_start_win_x, _drag_start_win_y, _drag_start_mouse_x, _drag_start_mouse_y;
+	int32_t _drag_start_win_x, _drag_start_win_y;
+	int32_t _drag_start_mouse_x, _drag_start_mouse_y;
 
 	std::string m_title;
 

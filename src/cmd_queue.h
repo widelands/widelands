@@ -34,8 +34,8 @@ struct Map_Map_Object_Loader;
 
 // Define here all the possible users
 #define SENDER_MAPOBJECT 0
-#define SENDER_PLAYER1 1 // those are just place holder, a player can send commands with
-#define SENDER_PLAYER2 2 // it's player number
+#define SENDER_PLAYER1 1 // those are just place holder, a player can send
+#define SENDER_PLAYER2 2 // commands with it's player number
 #define SENDER_PLAYER3 3
 #define SENDER_PLAYER4 4
 #define SENDER_PLAYER5 5

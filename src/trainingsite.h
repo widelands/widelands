@@ -104,7 +104,9 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 		uint32_t prio; // relative priority
 		uint32_t credit; // whenever an upgrade gets credit >= 10, it can be run
 		int32_t lastattempt; // level of the last attempt in this upgrade category
-		bool lastsuccess; // whether the last attempt in this upgrade category was successful
+
+		// whether the last attempt in this upgrade category was successful
+		bool lastsuccess;
 	};
 
 public:
@@ -170,16 +172,17 @@ private:
 	Upgrade * get_upgrade(tAttribute);
 
 private:
-	/** Open requests for soldiers. The soldiers can be under way or unavailable*/
+	/// Open requests for soldiers. The soldiers can be under way or unavailable
 	Request * m_soldier_request;
 
 	/** The soldiers currently at the training site*/
 	std::vector<Soldier *> m_soldiers;
 
 	/** Number of soldiers that should be trained concurrently.
-	 * Equal or less to maximum number of soldiers supported by a training site. There is no
-	 * guarantee there really are m_capacity soldiers in the building - some of them might
-	 * still be under way or even not yet available*/
+	 * Equal or less to maximum number of soldiers supported by a training site.
+	 * There is no guarantee there really are m_capacity soldiers in the
+	 * building - some of them might still be under way or even not yet
+	 * available*/
 	uint32_t m_capacity;
 
 	/** True, \b always upgrade already experienced soldiers first, when possible

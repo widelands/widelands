@@ -42,7 +42,8 @@ TrainingSite_Descr::TrainingSite_Descr
 	 std::string const & directory, Profile & prof, Section & global_s,
 	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
 :
-	ProductionSite_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata),
+	ProductionSite_Descr(_name, _descname, directory,
+		prof, global_s, _tribe, encdata),
 
 	//  FIXME This is currently hardcoded for "soldier" but should allow any
 	//  FIXME soldier type name.
@@ -98,7 +99,8 @@ Building & TrainingSite_Descr::create_object() const {
 
 /**
  * \param at the attribute to investigate
- * \return  the minimum level to which this building can downgrade a specified attribute
+ * \return  the minimum level to which this building can downgrade a
+ * specified attribute
  */
 int32_t TrainingSite_Descr::get_min_level(const tAttribute at) const {
 	switch (at) {
@@ -116,7 +118,8 @@ int32_t TrainingSite_Descr::get_min_level(const tAttribute at) const {
 }
 
 /**
- * Returns the maximum level to which this building can upgrade a specified attribute
+ * Returns the maximum level to which this building can upgrade a
+ * specified attribute
  * \param at  the attribute to investigate
  * \return  the maximum level to be attained at this site
  */
@@ -219,7 +222,8 @@ void TrainingSite::init(Editor_Game_Base & egbase)
 /**
  * Change the economy this site belongs to.
  * \par e  The new economy. Can be 0 (unconnected buildings have no economy).
- * \note the worker (but not the soldiers) is dealt with in the PlayerImmovable code.
+ * \note the worker (but not the soldiers) is dealt with in the
+ * PlayerImmovable code.
  */
 void TrainingSite::set_economy(Economy * e)
 {
@@ -388,11 +392,11 @@ void TrainingSite::setSoldierCapacity(uint32_t const capacity) {
 /**
  * Drop a given soldier.
  *
- * 'Dropping' means releasing the soldier from the site. The soldier then becomes available
- * to the economy.
+ * 'Dropping' means releasing the soldier from the site. The soldier then
+ * becomes available to the economy.
  *
- * \note This is called from player commands, so we need to verify that the soldier
- * is actually stationed here, without breaking anything if he isn't.
+ * \note This is called from player commands, so we need to verify that the
+ * soldier is actually stationed here, without breaking anything if he isn't.
  */
 void TrainingSite::dropSoldier(Soldier & soldier)
 {

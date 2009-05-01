@@ -106,7 +106,9 @@ struct Terrain_Descr {
 	int8_t get_default_resources() const
 		throw ()
 	{return m_default_resources;}
-	int32_t get_default_resources_amount() const throw () {return m_default_amount;}
+	int32_t get_default_resources_amount() const throw () {
+		return m_default_amount;
+	}
 
 private:
 	const std::string m_name;
@@ -171,7 +173,9 @@ struct World {
 		return immovables.get(index);
 	}
 
-	int32_t get_resource(const char * const name) const {return m_resources.get_index(name);}
+	int32_t get_resource(const char * const name) const {
+		return m_resources.get_index(name);
+	}
 	Resource_Descr * get_resource(const Resource_Index res) const throw ()
 		{assert(res < m_resources.get_nitems()); return m_resources.get(res);}
 	int32_t get_nr_resources() const {return m_resources.get_nitems();}

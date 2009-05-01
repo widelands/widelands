@@ -51,7 +51,8 @@ private:
 };
 
 /**
- * Shows an ASCII-File in a Fullscreen Menu. Waits for the button Ok to be clicked.
+ * Shows an ASCII-File in a Fullscreen Menu. Waits for the button Ok
+ * to be clicked.
  */
 struct Fullscreen_Menu_FileView : public Fullscreen_Menu_TextView
 {Fullscreen_Menu_FileView(const std::string & filename);};

@@ -196,7 +196,10 @@ private:
 	void return_update(Game &, State &);
 	void program_update(Game &, State &);
 	void gowarehouse_update(Game &, State &);
-	void gowarehouse_signalimmediate(Game &, State &, std::string const & signal);
+	void gowarehouse_signalimmediate
+		(Game &,
+		 State &,
+		 std::string const & signal);
 	void gowarehouse_pop(Game & game, State & state);
 	void dropoff_update(Game &, State &);
 	void fetchfromflag_update(Game &, State &);
@@ -226,10 +229,10 @@ private:
 	bool run_geologist_find   (Game &, State &, Action const &);
 	bool run_playFX           (Game &, State &, Action const &);
 
-	Object_Ptr         m_location;     ///< meta location of the worker, a PlayerImmovable
+	Object_Ptr    m_location; ///< meta location of the worker, a PlayerImmovable
 	Economy          * m_economy;      ///< economy this worker is registered in
 	Object_Ptr         m_carried_item; ///< item we are carrying
-	IdleWorkerSupply * m_supply;       ///< supply while gowarehouse and not transfer
+	IdleWorkerSupply * m_supply;   ///< supply while gowarehouse and not transfer
 	int32_t                m_needed_exp;   ///< experience for next level
 	int32_t                m_current_exp;  ///< current experience
 };

@@ -37,7 +37,8 @@ class StreamWrite;
 
 
 /**
- * FileSystem is an abstract base class representing certain filesystem operations.
+ * FileSystem is an abstract base class representing certain filesystem
+ * operations.
  * \todo const correctness
  */
 struct FileSystem {

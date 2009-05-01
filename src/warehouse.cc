@@ -208,7 +208,8 @@ Warehouse supplies are never active.
 bool WarehouseSupply::is_active() const throw () {return false;}
 
 
-uint32_t WarehouseSupply::nr_supplies(Game const & game, Request const & req) const {
+uint32_t WarehouseSupply::nr_supplies
+(Game const & game, Request const & req) const {
 	if (req.get_type() == Request::WARE) {
 		return m_wares.stock(req.get_index());
 	} else {

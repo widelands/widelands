@@ -41,7 +41,14 @@ struct Scrollbar;
  * Use the \ref Listselect template to use arbitrary IDs.
  */
 struct BaseListselect : public Panel {
-	BaseListselect(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, Align align = Align_Left, bool show_check = false);
+	BaseListselect
+		(Panel *parent,
+		 int32_t x,
+		 int32_t y,
+		 uint32_t w,
+		 uint32_t h,
+		 Align align = Align_Left,
+		 bool show_check = false);
 	~BaseListselect();
 
 	Signal1<uint32_t> selected;
@@ -49,7 +56,9 @@ struct BaseListselect : public Panel {
 	Signal1<uint32_t> double_clicked;
 
 	void clear();
-	void sort(const uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
+	void sort
+		(const uint32_t Begin = 0,
+		 uint32_t End = std::numeric_limits<uint32_t>::max());
 	void add
 		(const char * const name,
 		 uint32_t value,

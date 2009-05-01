@@ -34,7 +34,8 @@ struct Radiogroup;
 };
 
 struct General_Statistics_Menu : public UI::UniqueWindow {
-	General_Statistics_Menu(Interactive_GameBase &, UI::UniqueWindow::Registry &);
+	General_Statistics_Menu(Interactive_GameBase &,
+	UI::UniqueWindow::Registry &);
 
 private:
 	WUIPlot_Area         m_plot;

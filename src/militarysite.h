@@ -61,7 +61,8 @@ private:
 	uint32_t m_heal_incr_per_medic;
 };
 
-class MilitarySite : public ProductionSite, public SoldierControl, public Attackable {
+class MilitarySite : public ProductionSite, public SoldierControl,
+	public Attackable {
 	friend struct Map_Buildingdata_Data_Packet;
 	MO_DESCR(MilitarySite_Descr);
 

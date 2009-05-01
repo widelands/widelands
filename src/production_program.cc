@@ -271,7 +271,8 @@ void ProductionProgram::ActCall::execute
 {
 	switch (ps.top_state().phase) {
 	case None: // The program has not yet been called.
-		//ps.molog("%s  Call %s\n", ps.descname().c_str(), m_program->get_name().c_str());
+		//ps.molog("%s  Call %s\n", ps.descname().c_str(),
+		//         m_program->get_name().c_str());
 		return ps.program_start(game, m_program->name());
 	case Completed:
 	case Skipped:
@@ -381,9 +382,11 @@ ProductionProgram::ActAnimate::ActAnimate
 		if (descr.is_animation_known(animation_name))
 			m_id = descr.get_animation(animation_name);
 		else {
-			m_id =
-				g_anim.get
-					(directory.c_str(), prof.get_safe_section(animation_name), 0, encdata);
+			m_id = g_anim.get
+				(directory.c_str(),
+				 prof.get_safe_section(animation_name),
+				 0,
+				 encdata);
 			descr.add_animation(animation_name, m_id);
 		}
 		if (not reached_end) { //  The next parameter is the duration.
@@ -940,7 +943,8 @@ void ProductionProgram::ActTrain::execute
 }
 
 
-//TODO: check if fx exists, load fx, lots of other checks for aprameter correctness
+//TODO: check if fx exists, load fx, lots of other checks for
+//parameter correctness
 ProductionProgram::ActPlayFX::ActPlayFX
 	(char * parameters, ProductionSite_Descr const &)
 {
@@ -989,7 +993,8 @@ ProductionProgram::ProductionProgram
 		else if (not strcmp(v->get_name(), "sleep"))
 			action = new ActSleep (v->get_string(),  *building);
 		else if (not strcmp(v->get_name(), "animate"))
-			action = new ActAnimate(v->get_string(), *building, directory, prof, encdata);
+			action = new ActAnimate(v->get_string(), *building,
+				directory, prof, encdata);
 		else if (not strcmp(v->get_name(), "consume"))
 			action = new ActConsume(v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "produce"))

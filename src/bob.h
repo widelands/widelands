@@ -27,7 +27,8 @@
 
 namespace Widelands {
 
-/// \todo (Antonio Trueba#1#): Get rid of forward declarations (cleanup of other headers needed)
+/// \todo (Antonio Trueba#1#): Get rid of forward declarations
+/// (cleanup of other headers needed)
 struct Map;
 struct Route;
 struct Transfer;
@@ -56,8 +57,8 @@ struct BobProgramBase {
  * currently being executed.
  *
  * Upon initialization, an object has no Task at all. A CMD_ACT will be
- * scheduled automatically. When it is executed, \ref init_auto_task() is called to
- * automatically select a fallback Task.
+ * scheduled automatically. When it is executed, \ref init_auto_task() is
+ * called to automatically select a fallback Task.
  *
  * However, the creator of the Bob can choose to push a specific Task
  * immediately after creating the Bob. This will override the fallback
@@ -68,9 +69,9 @@ struct BobProgramBase {
  * returned by get_state(). Every Task on the Task stack has its own
  * State structure, i.e. push_task() does not destroy the current Task's State.
  *
- * In order to start a new sub-task, you have to call \ref push_task(), and then fill
- * the State structure returned by get_state() with any parameters that the Task
- * may need.
+ * In order to start a new sub-task, you have to call \ref push_task(), and then
+ * fill the State structure returned by get_state() with any parameters that the
+ * Task may need.
  *
  * A Task is ended by \ref pop_task(). Note, however, that pop_task() can only
  * be called from a Task's update() function. If you want to interrupt the
@@ -88,12 +89,13 @@ struct BobProgramBase {
  * these situations as appropriate.
  *
  * One of the following things must happen during update():
- * \li Call \ref schedule_act() to schedule the next call to update()
- * \li Call \ref skip_act() if you really don't want to act until a signal occurs.
- * \li Call \ref pop_task() to end the current task
+ * \li Call schedule_act() to schedule the next call to update()
+ * \li Call skip_act() if you really don't want to act until a signal occurs.
+ * \li Call pop_task() to end the current task
  * \li Send a new signal via \ref send_signal(). Note that in this case,
- *     the update() function will be called again after some delay, and it remains
- *     the responsibility of the update() function to deal with the signal.
+ *     the update() function will be called again after some delay, and it
+ *     remains the responsibility of the update() function to deal with the
+ *     signal.
  * The last case is mostly useful when signals are sent from functions that
  * can be called at any time, such as \ref set_location().
  *
@@ -101,8 +103,8 @@ struct BobProgramBase {
  * by the new signal and the signal_immediate() functions of all Tasks on the
  * stack are called if available. Note that these functions are not supposed
  * to perform any actions besides bookkeeping actions that must be performed
- * in all situations (for example, one might zero some pointer in signal_immediate()
- * to avoid dangling pointers).
+ * in all situations (for example, one might zero some pointer in
+ * signal_immediate() to avoid dangling pointers).
  *
  * Then, \ref send_signal() schedules a future call to the top-most task's
  * update() function. Often, update() functions will just call \ref pop_task()
@@ -111,8 +113,8 @@ struct BobProgramBase {
  *
  * If a task maintains state outside of its \ref State structure, it may have
  * to do certain bookkeeping tasks whenever the task is popped from the stack.
- * To this end, a task may have a \ref Task::pop method. If this method exists, it
- * is always called just before the task is popped from the stack.
+ * To this end, a task may have a \ref Task::pop method. If this method
+ * exists, it is always called just before the task is popped from the stack.
  */
 struct Bob : public Map_Object {
 	friend struct Map;
@@ -201,7 +203,9 @@ struct Bob : public Map_Object {
 
 		char const * get_picture() const {return m_picture.c_str();}
 
-		EncodeData const & get_default_encodedata() const {return m_default_encodedata;}
+		EncodeData const & get_default_encodedata() const {
+			return m_default_encodedata;
+		}
 
 		Tribe_Descr const * get_owner_tribe() const throw () {
 			return m_owner_tribe;
@@ -322,7 +326,10 @@ private:
 	void movepath_update(Game &, State &);
 	void move_update(Game &, State &);
 
-	int32_t start_walk(Game & game, WalkingDir dir, uint32_t anim, bool force = false);
+	int32_t start_walk(Game & game,
+		WalkingDir dir,
+		uint32_t anim,
+		bool force = false);
 
 	/**
 	 * Call this from your task_act() function that was scheduled after
@@ -372,3 +379,4 @@ private:
 };
 
 #endif
+

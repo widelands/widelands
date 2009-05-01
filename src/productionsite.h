@@ -205,9 +205,9 @@ protected:  // TrainingSite must have access to this stuff
 
 	typedef std::vector<State> Stack;
 	Stack        m_stack; ///<  program stack
-	bool                     m_program_timer; ///< execute next instruction based on pointer
-	int32_t                       m_program_time; ///< timer time
-	int32_t                      m_post_timer;    ///< Time to schedule after ends
+	bool         m_program_timer; ///< execute next instruction based on pointer
+	int32_t      m_program_time; ///< timer time
+	int32_t      m_post_timer;    ///< Time to schedule after ends
 
 	ProductionProgram::ActProduce::Items m_produced_items;
 	Input_Queues m_input_queues; ///< input queues for all inputs

@@ -257,8 +257,10 @@ struct Player :
 		 *     (time_node_last_unseen for A,
 		 *      time_node_last_unseen for B,
 		 *      time_node_last_unseen for C)
-		 * and is only valid if all of {A, B, C} are currently not seen (i.e. \ref vision <= 1)
-		 * and at least one of them has been seen at least once (i.e. \ref vision == 1).
+		 * and is only valid if all of {A, B, C} are currently not seen
+		 * (i.e. \ref vision <= 1)
+		 * and at least one of them has been seen at least once
+		 * (i.e. \ref vision == 1).
 		 *
 		 * The corresponding value for an edge between the nodes A and B is
 		 *   max(time_node_last_unseen for A, time_node_last_unseen for B)

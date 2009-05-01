@@ -127,10 +127,11 @@ extern Map_Object_Descr g_flag_descr;
  * be fully created.
 */
 
-/// If you find a better way to do this that doesn't cost a virtual function or additional
-/// member variable, go ahead
+/// If you find a better way to do this that doesn't cost a virtual function
+/// or additional member variable, go ahead
 #define MO_DESCR(type) \
-public: const type & descr() const {return dynamic_cast<const type &>(*m_descr);}
+public: const type & descr() const { \
+return dynamic_cast<const type &>(*m_descr);}
 
 class Map_Object {
 	friend struct Object_Manager;
@@ -155,7 +156,8 @@ public:
 		ROAD
 	};
 	/// Some default, globally valid, attributes.
-	/// Other attributes (such as "harvestable corn") could be allocated dynamically (?)
+	/// Other attributes (such as "harvestable corn") could be
+	/// allocated dynamically (?)
 	enum Attribute {
 		CONSTRUCTIONSITE = 1, ///< assume BUILDING
 		WORKER,               ///< assume BOB
@@ -383,8 +385,8 @@ struct Object_Ptr {
 
 	bool is_set() const {return m_serial;}
 
-	// dammit... without a Editor_Game_Base object, we can't implement a Map_Object* operator
-	// (would be _really_ nice)
+	// dammit... without a Editor_Game_Base object, we can't implement a
+	// Map_Object* operator (would be _really_ nice)
 	Map_Object * get(Editor_Game_Base const &);
 	Map_Object const * get(Editor_Game_Base const & egbase) const;
 

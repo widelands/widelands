@@ -109,7 +109,7 @@ protected:
 
 private:
 	const Building_Descr * m_building; // type of building that is being built
-	const Building_Descr * m_prev_building; // Building that was standing here before
+	const Building_Descr * m_prev_building; // Building standing here earlier
 
 	Request * m_builder_request;
 	OPtr<Worker> m_builder;

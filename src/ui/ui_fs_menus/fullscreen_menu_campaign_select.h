@@ -60,7 +60,9 @@ private:
 	UI::Callback_Button<Fullscreen_Menu_CampaignSelect> b_ok;
 	UI::Callback_IDButton<Fullscreen_Menu_CampaignSelect, int32_t> back;
 	UI::Listselect<const char *>                      m_list;
-// Variables used for exchange between the two Campaign UIs and Game::run_campaign
+	
+	/// Variables used for exchange between the two Campaign UIs and
+	/// Game::run_campaign
 	int32_t                                           campaign;
 };
 /*

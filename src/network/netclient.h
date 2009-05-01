@@ -67,7 +67,11 @@ struct NetClient :
 
 	virtual bool canLaunch();
 
-	virtual void setMap(std::string const & mapname, std::string const & mapfilename, uint32_t maxplayers, bool savegame = false);
+	virtual void setMap
+		(std::string const & mapname,
+		 std::string const & mapfilename,
+		 uint32_t maxplayers,
+		 bool savegame = false);
 	virtual void setPlayerState (uint8_t number, PlayerSettings::State state);
 	virtual void setPlayerAI    (uint8_t number, std::string const & ai);
 	virtual void nextPlayerState(uint8_t number);

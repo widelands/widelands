@@ -42,7 +42,8 @@ struct RGBColor : protected SDL_Color {
 };
 
 struct RGBAColor {
-	// Colors are very straightforward; there's no need to encapsulate them further.
+	// Colors are very straightforward; there's no need to encapsulate
+	// them further.
 	Uint8 r;
 	Uint8 g;
 	Uint8 b;

@@ -117,10 +117,16 @@ struct Font_Handler {
 		 Widget_Cache widget_cache = Widget_Cache_None,
 		 uint32_t * const widget_cache_id = 0,
 		 bool transparent = true);
-	void get_size_from_cache(const uint32_t widget_cache_id, uint32_t & w, uint32_t & h);
+	void get_size_from_cache
+		(const uint32_t widget_cache_id,
+		 uint32_t & w,
+		 uint32_t & h);
 
-	// Register a callback which is used whenever the tag <variable name="kljdf"> appears
+	/// Register a callback which is used whenever the
+	/// tag<variable name="kljdf"> appears
 	void register_variable_callback(Varibale_Callback, void * cbdata);
+
+	/// Unegister a callback registered with register_variable_callback()
 	void unregister_variable_callback();
 
 private:
@@ -164,7 +170,8 @@ private:
 		(const std::string & fontname, const int32_t fontsize,
 		 const RGBColor fg, const RGBColor bg,
 		 const std::string & text,
-		 const Align align, const int32_t wrap, const int32_t style = TTF_STYLE_NORMAL,
+		 const Align align, const int32_t wrap,
+		 const int32_t style = TTF_STYLE_NORMAL,
 		 const int32_t line_spacing = 0);
 	SDL_Surface * create_sdl_text_surface
 		(TTF_Font &, const RGBColor fg, const RGBColor bg,

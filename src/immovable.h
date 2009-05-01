@@ -46,7 +46,7 @@ class Worker;
  */
 struct BaseImmovable : public Map_Object {
 	enum {
-		NONE,   ///< not robust (i.e. removable just by building something over it)
+		NONE,   ///< not robust (i.e. removable by building something over it)
 		SMALL,  ///< small building or robust map element, including trees
 		MEDIUM, ///< medium size building
 		BIG     ///< big building
@@ -88,7 +88,9 @@ struct Immovable_Descr : public Map_Object_Descr {
 	int32_t get_size() const throw () {return m_size;}
 	char const * get_picture() const {return m_picture.c_str();}
 	ImmovableProgram const * get_program(std::string const &) const;
-	EncodeData const & get_default_encodedata() const {return m_default_encodedata;}
+	EncodeData const & get_default_encodedata() const {
+		return m_default_encodedata;
+	}
 
 	Immovable & create(Editor_Game_Base &, Coords) const;
 
@@ -103,9 +105,9 @@ protected:
 	EncodeData    m_default_encodedata;
 
 	Programs    m_programs;
-	/**
-	 * the tribe to which this Immovable_Descr belongs or 0 if it is a world immovable
-	 */
+
+	/// The tribe to which this Immovable_Descr belongs or 0 if it is a
+	/// world immovable
 	const Tribe_Descr * const m_owner_tribe;
 private:
 	uint8_t m_terrain_affinity[16];
@@ -115,7 +117,9 @@ class Immovable : public BaseImmovable {
 	friend struct Immovable_Descr;
 	friend class ImmovableProgram;
 	friend struct Map;
-	friend struct Map_Immovabledata_Data_Packet; // for writing (obsolete since build-11)
+
+	// for writing (obsolete since build-11)
+	friend struct Map_Immovabledata_Data_Packet;
 
 	MO_DESCR(Immovable_Descr);
 
@@ -185,8 +189,8 @@ private:
  * building, flag or road
  *
  * A PlayerImmovable can also house a number of workers, which are automatically
- * turned into fugitives when the immovable is destroyed, and their economy is also
- * adjusted automatically.
+ * turned into fugitives when the immovable is destroyed, and their economy is
+ * also adjusted automatically.
  */
 struct PlayerImmovable : public BaseImmovable {
 	PlayerImmovable(const Map_Object_Descr &);

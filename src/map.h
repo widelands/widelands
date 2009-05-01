@@ -358,7 +358,9 @@ private:
 	void load_world();
 	void recalc_border(FCoords);
 
-	Player_Number m_nrplayers; // # of players this map supports (!= Game's number of players)
+	/// # of players this map supports (!= Game's number of players!)
+	Player_Number m_nrplayers;
+
 	X_Coordinate m_width;
 	Y_Coordinate m_height;
 	char        m_filename    [256];
@@ -375,7 +377,7 @@ private:
 	Overlay_Manager * m_overlay_manager;
 
 	boost::scoped_ptr<PathfieldManager> m_pathfieldmgr;
-	std::vector<std::string> m_scenario_tribes; // o nly alloced when needed
+	std::vector<std::string> m_scenario_tribes; // only alloced when needed
 	std::vector<std::string>  m_scenario_names;
 
 	Manager<Variable>   m_mvm;
@@ -393,7 +395,9 @@ private:
 		Type        type;
 	};
 	typedef std::vector<Extradata_Info> Extradata_Infos;
-	Extradata_Infos m_extradatainfos; // Only for caching of extradata for writing and reading
+
+	/// Extradata cache only for reading/writing
+	Extradata_Infos m_extradatainfos;
 
 	void recalc_brightness(FCoords);
 	void recalc_fieldcaps_pass1(FCoords);

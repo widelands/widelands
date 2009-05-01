@@ -49,7 +49,8 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	log("Autosave: interval elapsed (%d s), saving\n", elapsed);
 
 	// save the game
-	std::string complete_filename = create_file_name (get_base_dir(), "wl_autosave");
+	std::string complete_filename =
+		create_file_name (get_base_dir(), "wl_autosave");
 	std::string backup_filename;
 
 	// always overwrite a file
@@ -95,7 +96,8 @@ void SaveHandler::initialize(int32_t currenttime) {
 /*
  * Calculate the name of the save file
  */
-std::string SaveHandler::create_file_name(std::string dir, std::string filename) {
+std::string SaveHandler::create_file_name(std::string dir,
+	std::string filename) {
 	// ok, first check if the extension matches (ignoring case)
 	bool assign_extension = true;
 	if (filename.size() >= strlen(WLGF_SUFFIX)) {

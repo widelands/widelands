@@ -382,9 +382,9 @@ void Game::postload()
  *
  * The setup and loading of a game happens (or rather: will happen) in three
  * stages.
- * 1.  First of all, the host (or single player) configures the game. During this
- *     time, only short descriptions of the game data (such as map headers)are
- *     loaded to minimize loading times.
+ * 1.  First of all, the host (or single player) configures the game. During
+ *     this time, only short descriptions of the game data (such as map
+ *     headers)are loaded to minimize loading times.
  * 2a. Once the game is about to start and the configuration screen is finished,
  *     all logic data (map, tribe information, building information) is loaded
  *     during postload.
@@ -433,7 +433,9 @@ bool Game::run
 
 		// Everything prepared, send the first trigger event
 		// We lie about the sender here. Hey, what is one lie in a lifetime?
-		enqueue_command (new Cmd_CheckEventChain(get_gametime(), static_cast<uint16_t>(-1)));
+		enqueue_command
+			(new Cmd_CheckEventChain(get_gametime(),
+			 static_cast<uint16_t>(-1)));
 	}
 
 	if (m_writereplay) {
@@ -601,7 +603,8 @@ void Game::send_player_command (PlayerCommand & pc)
  *
  * \note In a network game, player commands are only allowed to enter the
  * command queue after being accepted by the networking logic via
- * \ref send_player_command, so you must never enqueue a player command directly.
+ * \ref send_player_command, so you must never enqueue a player command
+ * directly.
  */
 void Game::enqueue_command (Command * const cmd)
 {

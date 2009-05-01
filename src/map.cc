@@ -394,7 +394,8 @@ void Map::create_empty_map
 	set_description(description);
 	set_nrplayers(1);
 	// Set first tribe found as the "basic" tribe
-	// <undefined> (as set before) is useless and will lead to a crash -> Widelands will search for tribe "<undefined>"
+	// <undefined> (as set before) is useless and will lead to a
+	// crash -> Widelands will search for tribe "<undefined>"
 	std::vector<std::string> tribes;
 	Tribe_Descr::get_all_tribenames(tribes);
 	set_scenario_player_tribe(1, tribes[0]);
@@ -854,7 +855,8 @@ Map::find_bobs
 
 Find Bobs in the given area. Only finds objects for which
 functor.accept() returns true (the default functor always returns true)
-If list is non-zero, pointers to the relevant objects will be stored in the list.
+If list is non-zero, pointers to the relevant objects will be stored in
+the list.
 
 Returns the number of objects found.
 ===============
@@ -1179,12 +1181,12 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
 
 	const World & w = world();
 
-	uint8_t const tr_d_terrain_is = w.terrain_descr(tr.field->terrain_d()).get_is();
-	uint8_t const tl_r_terrain_is = w.terrain_descr(tl.field->terrain_r()).get_is();
-	uint8_t const tl_d_terrain_is = w.terrain_descr(tl.field->terrain_d()).get_is();
-	uint8_t const  l_r_terrain_is = w.terrain_descr (l.field->terrain_r()).get_is();
-	uint8_t const  f_d_terrain_is = w.terrain_descr (f.field->terrain_d()).get_is();
-	uint8_t const  f_r_terrain_is = w.terrain_descr (f.field->terrain_r()).get_is();
+	uint8_t const tr_d_terrain_is=w.terrain_descr(tr.field->terrain_d()).get_is();
+	uint8_t const tl_r_terrain_is=w.terrain_descr(tl.field->terrain_r()).get_is();
+	uint8_t const tl_d_terrain_is=w.terrain_descr(tl.field->terrain_d()).get_is();
+	uint8_t const  l_r_terrain_is=w.terrain_descr (l.field->terrain_r()).get_is();
+	uint8_t const  f_d_terrain_is=w.terrain_descr (f.field->terrain_d()).get_is();
+	uint8_t const  f_r_terrain_is=w.terrain_descr (f.field->terrain_r()).get_is();
 
 	//  1b) Collect some information about the neighbours
 	uint8_t cnt_unpassable = 0;
