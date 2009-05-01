@@ -5,7 +5,7 @@ import re
 from collections import defaultdict
 
 class EvalMatches( object ):
-    _indent_words = re.compile(r'\b(for|typedef|#define|else|while|return|if)\b')
+    _indent_words = re.compile(r'\b(for|define|typedef|else|while|return|if|template)\b')
     _regexp=re.compile(r"^(([\t ]*).*$)", re.MULTILINE)
 
     def __init__(self):
