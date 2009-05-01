@@ -24,7 +24,6 @@
 #include "player.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-#include "widelands_map_data_packet_ids.h"
 
 #include "log.h"
 

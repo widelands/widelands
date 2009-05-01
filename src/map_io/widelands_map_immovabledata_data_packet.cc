@@ -27,7 +27,6 @@
 #include "tribe.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-#include "widelands_map_data_packet_ids.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 

@@ -29,7 +29,6 @@
 #include "widelands_map_bobdata_data_packet.h"
 #include "widelands_map_building_data_packet.h"
 #include "widelands_map_buildingdata_data_packet.h"
-#include "widelands_map_data_packet_ids.h"
 #include "widelands_map_elemental_data_packet.h"
 #include "widelands_map_event_data_packet.h"
 #include "widelands_map_event_chain_data_packet.h"

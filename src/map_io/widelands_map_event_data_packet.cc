@@ -25,7 +25,6 @@
 #include "map.h"
 #include "profile.h"
 #include "widelands_fileread.h"
-#include "widelands_map_data_packet_ids.h"
 #include "world.h"
 
 namespace Widelands {
