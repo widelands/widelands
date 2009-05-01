@@ -5,7 +5,7 @@ import re
 from collections import defaultdict
 
 class EvalMatches( object ):
-    _indent_words = re.compile(r'\b(for|else|while|return|if)\b')
+    _indent_words = re.compile(r'\b(for|typedef|#define|else|while|return|if)\b')
     _regexp=re.compile(r"^(([\t ]*).*$)", re.MULTILINE)
 
     def __init__(self):
@@ -61,7 +61,7 @@ class EvalMatches( object ):
             if len(line) and line[0] == '(': # param lists can be indented twice
                 allowed_indent += '\t\t'
                     
-            has_unmatched_opening_brace = False
+            nr_unmatched_opening_braces = 0
              
             # Check for braces
             for (opening,closing) in bracesets:
@@ -71,18 +71,20 @@ class EvalMatches( object ):
                 diff = n_opening - n_closing
                 if diff > 0: # Opening brace
                     if opening == '(':
-                        has_unmatched_opening_brace = True
-                    opening_braces[opening].append(
-                        (lineno,indent)
-                    )
+                        nr_unmatched_opening_braces = diff
+                    for i in range(diff):
+                        opening_braces[opening].append(
+                            (lineno,indent)
+                        )
                 elif diff < 0: # Closing brace
                     try:
-                        cor_lineno,cor_indent = opening_braces[opening].pop()
-                         
-                        closing_brace_handlers[opening](
-                            cor_lineno, cor_indent,
-                            lineno, indent, errors
-                        )
+                        for i in range(-diff):
+                            cor_lineno,cor_indent = opening_braces[opening].pop()
+                            
+                            closing_brace_handlers[opening](
+                                cor_lineno, cor_indent,
+                                lineno, indent, errors
+                            )
                     except IndexError: # Pop from empty list. Unabalenced paren.
                         pass
 
@@ -92,8 +94,13 @@ class EvalMatches( object ):
                 errors.append( (lineno, "Indent is too deep (allowed are %i)" % len(allowed_indent) ) )
             else:
                 minlen = min(len(allowed_indent),cindent)
-                if allowed_indent[:minlen] != indent[:minlen]:
+                for current,allowed in zip(indent[:minlen],allowed_indent[:minlen]):
+                    if current == allowed:
+                        continue
+                    if current == "\t" and allowed == " ":
+                        continue
                     errors.append( (lineno, "Indent is invalid. Check for tab/spaces mixup") )
+                    break
             
             # Empty lines are ignored
             if len(line):
@@ -101,9 +108,9 @@ class EvalMatches( object ):
                 # a { or a ) as last character or some conditional keyword 
                 # on the line
                 
-                if has_unmatched_opening_brace:
-                    allowed_indent = indent + ' ' + '\t'
-                elif line[-1] in ("{:=),"):
+                if nr_unmatched_opening_braces:
+                    allowed_indent = indent + ' ' * nr_unmatched_opening_braces + '\t'
+                elif line[-1] in ("{:=),?+-*/"):
                     allowed_indent = indent + '\t'
                 elif self._indent_words.search(line):
                     allowed_indent = indent + '\t'
@@ -181,6 +188,12 @@ public:
 \t\t\ttry {
 """,
 
+# Double indent for double open braces
+"""
+\t((player->get_buildcaps(unusable_fields.front())
+\t  & BUILDCAPS_SIZEMASK) != 0)
+""",
+
 # Ignore content of strings
 # Deliberately with syntax error on second line
 """
@@ -202,13 +215,27 @@ if
 """\tRoutingNode() : mpf_cycle(0), mpf_heapindex(0),
 \t\tmpf_realcost(0), mpf_backlink(0), mpf_estimate(0) {}""",
 
+# = is also an indent character, do not confused by the comment
+"""\tconst bool is_selected = //  Is this entry selected?
+\t\tm_table.has_selection() and m_table.get_selected() == i.value();
+""",
+
+# ? is also an indent char
+"""\tbo.type = bld.get_ismine() ?
+\t\tBuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
+""",
+
 # Checking some problems with comments
 """
 /*************/
 /* Functions */
 /*************/
-	void _remove_flag(Flag &);
+\tvoid _remove_flag(Flag &);
 """,
+
+# This occured as bug
+"""\tint32_t start_walk(Game & game,
+\t\tWalkingDir dir) """,
 ]
 
 ###################

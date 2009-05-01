@@ -14,8 +14,8 @@ error_msg="TypeName* or TypeName& are forbidden. Insert a space after TypeName."
 
 regexp = r"""(?x)
 (
-    ([^\s/*(\>]\*(?!/))|   # Extra care for end of comment
-    ([^\s&(\>]&)
+    ([^\s&/*(\>]\*(?!/))|   # Extra care for end of comment
+    ([^\s*&(\>]&)
 )
 """
 
@@ -30,6 +30,7 @@ allowed = [
     "std::vector<RoutingNode *>& nodes",
 	"/* warehouses can determine max idle priority*/",
 	"blah // I *wanna* do that",
+    "&*m_stack.rbegin()",
 ]
 forbidden = [
     "RoutingNode* a;",

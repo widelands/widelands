@@ -53,7 +53,7 @@ $)
                 else:
                     self._in_comment = True
                 
-                line = line[:start_idx+2].strip()
+                line = line[:start_idx].strip()
 
         if self._in_comment:
             stop_idx = line.find('*/')
@@ -66,7 +66,7 @@ $)
         # Single line comments
         idx = line.find('//')
         if idx != -1:
-            line = line[:idx+2].strip()
+            line = line[:idx].strip()
        
         self._comm_cache[given_line] = line
 
