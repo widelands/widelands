@@ -166,6 +166,7 @@ private:
 /*************************************************************************/
 BOOST_AUTO_TEST_SUITE(Routing)
 
+// {{{ TestingRoutingNode Test Cases
 /*
  * First test the TestingRoutingNode class, so that we
  * are sure it works in the other tests
