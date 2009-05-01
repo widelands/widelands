@@ -1181,12 +1181,18 @@ void Map::recalc_fieldcaps_pass1(FCoords f)
 
 	const World & w = world();
 
-	uint8_t const tr_d_terrain_is=w.terrain_descr(tr.field->terrain_d()).get_is();
-	uint8_t const tl_r_terrain_is=w.terrain_descr(tl.field->terrain_r()).get_is();
-	uint8_t const tl_d_terrain_is=w.terrain_descr(tl.field->terrain_d()).get_is();
-	uint8_t const  l_r_terrain_is=w.terrain_descr (l.field->terrain_r()).get_is();
-	uint8_t const  f_d_terrain_is=w.terrain_descr (f.field->terrain_d()).get_is();
-	uint8_t const  f_r_terrain_is=w.terrain_descr (f.field->terrain_r()).get_is();
+	uint8_t const tr_d_terrain_is =
+		w.terrain_descr(tr.field->terrain_d()).get_is();
+	uint8_t const tl_r_terrain_is =
+		w.terrain_descr(tl.field->terrain_r()).get_is();
+	uint8_t const tl_d_terrain_is =
+		w.terrain_descr(tl.field->terrain_d()).get_is();
+	uint8_t const  l_r_terrain_is =
+		w.terrain_descr (l.field->terrain_r()).get_is();
+	uint8_t const  f_d_terrain_is =
+		w.terrain_descr (f.field->terrain_d()).get_is();
+	uint8_t const  f_r_terrain_is =
+		w.terrain_descr (f.field->terrain_r()).get_is();
 
 	//  1b) Collect some information about the neighbours
 	uint8_t cnt_unpassable = 0;
@@ -1289,12 +1295,18 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 
 	const World & w = world();
 
-	uint8_t const tr_d_terrain_is = w.terrain_descr(tr.field->terrain_d()).get_is();
-	uint8_t const tl_r_terrain_is = w.terrain_descr(tl.field->terrain_r()).get_is();
-	uint8_t const tl_d_terrain_is = w.terrain_descr(tl.field->terrain_d()).get_is();
-	uint8_t const  l_r_terrain_is = w.terrain_descr (l.field->terrain_r()).get_is();
-	uint8_t const  f_d_terrain_is = w.terrain_descr (f.field->terrain_d()).get_is();
-	uint8_t const  f_r_terrain_is = w.terrain_descr (f.field->terrain_r()).get_is();
+	uint8_t const tr_d_terrain_is =
+		w.terrain_descr(tr.field->terrain_d()).get_is();
+	uint8_t const tl_r_terrain_is =
+		w.terrain_descr(tl.field->terrain_r()).get_is();
+	uint8_t const tl_d_terrain_is =
+		w.terrain_descr(tl.field->terrain_d()).get_is();
+	uint8_t const  l_r_terrain_is =
+		w.terrain_descr (l.field->terrain_r()).get_is();
+	uint8_t const  f_d_terrain_is =
+		w.terrain_descr (f.field->terrain_d()).get_is();
+	uint8_t const  f_r_terrain_is =
+		w.terrain_descr (f.field->terrain_r()).get_is();
 
 	// 1b) Collect some information about the neighbours
 	int32_t cnt_unpassable = 0;
@@ -1737,7 +1749,8 @@ If either of the forward or backward pointers is set, it will be filled in
 with the cost of walking in said direction.
 ===============
 */
-void Map::calc_cost(const Path & path, int32_t *forward, int32_t *backward) const
+void Map::calc_cost
+	(Path const & path, int32_t * const forward, int32_t * const backward) const
 {
 	Coords coords = path.get_start();
 

@@ -210,7 +210,8 @@ void Carrier::deliver_to_building(Game & game, State & state)
 				item->set_location(game, building);
 				item->update      (game);
 			} else {
-				molog("[Carrier]: Building switch from under us, return to road.\n");
+				molog
+					("[Carrier]: Building switch from under us, return to road.\n");
 
 				state.ivar1 =
 					&building->base_flag()
@@ -288,7 +289,9 @@ void Carrier::drop_item(Game & game, State & state)
 				(game, road.get_flag(static_cast<Road::FlagId>(state.ivar1)));
 
 		if (!other && !flag.has_capacity()) {
-			molog("[Carrier]: strange: acked ware from busy flag no longer present.\n");
+			molog
+				("[Carrier]: strange: acked ware from busy flag no longer "
+				 "present.\n");
 
 			m_acked_ware = -1;
 			set_animation(game, descr().get_animation("idle"));
@@ -403,7 +406,9 @@ bool Carrier::notify_ware(Game & game, int32_t const flag)
 	// (Maybe the need for this lengthy explanation is proof that the
 	// ack system needs to be reworked.)
 	if (State const * const transport = get_state(taskTransport))
-		if ((transport->ivar1 == -1 && find_closest_flag(game) != flag) || flag == transport->ivar1)
+		if
+			((transport->ivar1 == -1 && find_closest_flag(game) != flag) ||
+			 flag == transport->ivar1)
 			return false;
 
 	// Ack it if we haven't

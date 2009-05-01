@@ -129,7 +129,8 @@ void Critter_BobProgram::parse_remove
 	act->function = &Critter_Bob::run_remove;
 }
 
-bool Critter_Bob::run_remove(Game & game, State & state, Critter_BobAction const &)
+bool Critter_Bob::run_remove
+	(Game & game, State & state, Critter_BobAction const &)
 {
 	++state.ivar1;
 	// Bye, bye cruel world

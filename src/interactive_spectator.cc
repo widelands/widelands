@@ -197,8 +197,8 @@ bool Interactive_Spectator::handle_key(bool down, SDL_keysym code)
 				game().gameController()->setDesiredSpeed(0);
 				new Game_Main_Menu_Save_Game(*this, m_mainm_windows.savegame);
 			} else
-				set_display_flag(dfShowStatistics,
-					!get_display_flag(dfShowStatistics));
+				set_display_flag
+					(dfShowStatistics, !get_display_flag(dfShowStatistics));
 			return true;
 
 		case SDLK_f:

@@ -326,10 +326,8 @@ private:
 	void movepath_update(Game &, State &);
 	void move_update(Game &, State &);
 
-	int32_t start_walk(Game & game,
-		WalkingDir dir,
-		uint32_t anim,
-		bool force = false);
+	int32_t start_walk
+		(Game & game, WalkingDir, uint32_t anim, bool force = false);
 
 	/**
 	 * Call this from your task_act() function that was scheduled after

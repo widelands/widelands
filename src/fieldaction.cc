@@ -92,8 +92,9 @@ BuildGrid::BuildGrid
 	 int32_t const x, int32_t const y,
 	 int32_t                        cols)
 :
-UI::Icon_Grid(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, Grid_Horizontal, cols),
-m_tribe(tribe)
+	UI::Icon_Grid
+		(parent, x, y, BG_CELL_WIDTH, BG_CELL_HEIGHT, Grid_Horizontal, cols),
+	m_tribe(tribe)
 {
 	clicked.set(this, &BuildGrid::clickslot);
 	mouseout.set(this, &BuildGrid::mouseoutslot);
@@ -203,10 +204,12 @@ struct FieldActionWindow : public UI::UniqueWindow {
 	void building_icon_mouse_out(Widelands::Building_Index::value_t);
 	void building_icon_mouse_in (Widelands::Building_Index::value_t);
 	void act_geologist();
-	void act_attack();         /// Launch the attack
-	void act_attack_more();    /// Increase the number of soldiers to be launched
-	void act_attack_less();    /// Decrease the number of soldiers to be launched
-	uint32_t get_max_attackers();  /// Total number of attackers available for a specific enemy flag
+	void act_attack();      /// Launch the attack
+	void act_attack_more(); /// Increase the number of soldiers to be launched
+	void act_attack_less(); /// Decrease the number of soldiers to be launched
+
+	/// Total number of attackers available for a specific enemy flag
+	uint32_t get_max_attackers();
 
 private:
 	uint32_t add_tab
@@ -384,7 +387,11 @@ void FieldActionWindow::add_buttons_auto()
 
 		if (upcast(Widelands::Flag, flag, imm)) {
 			// Add flag actions
-			add_button(buildbox, pic_buildroad, &FieldActionWindow::act_buildroad, _("Build road"));
+			add_button
+				(buildbox,
+				 pic_buildroad,
+				 &FieldActionWindow::act_buildroad,
+				 _("Build road"));
 
 			Building * const building = flag->get_building();
 
@@ -392,7 +399,11 @@ void FieldActionWindow::add_buttons_auto()
 				(!building
 				 ||
 				 building->get_playercaps() & (1 << Building::PCap_Bulldoze))
-				add_button(buildbox, pic_ripflag, &FieldActionWindow::act_ripflag, _("Destroy this flag"));
+				add_button
+					(buildbox,
+					 pic_ripflag,
+					 &FieldActionWindow::act_ripflag,
+					 _("Destroy this flag"));
 
 			if (dynamic_cast<Game const *>(&ibase().egbase())) {
 				add_button
@@ -418,10 +429,18 @@ void FieldActionWindow::add_buttons_auto()
 
 			// Add build actions
 			if (buildcaps & Widelands::BUILDCAPS_FLAG)
-				add_button(buildbox, pic_buildflag, &FieldActionWindow::act_buildflag, _("Put a flag"));
+				add_button
+					(buildbox,
+					 pic_buildflag,
+					 &FieldActionWindow::act_buildflag,
+					 _("Put a flag"));
 
 			if (dynamic_cast<Widelands::Road const *>(imm))
-				add_button(buildbox, pic_remroad, &FieldActionWindow::act_removeroad, _("Destroy a road"));
+				add_button
+					(buildbox,
+					 pic_remroad,
+					 &FieldActionWindow::act_removeroad,
+					 _("Destroy a road"));
 		}
 	} else if
 		(1
@@ -445,10 +464,18 @@ void FieldActionWindow::add_buttons_auto()
 			 &FieldActionWindow::act_show_statistics,
 			 _("Toggle building statistics display"));
 	}
-	add_button(watchbox, pic_showcensus, &FieldActionWindow::act_show_census, _("Toggle building label display"));
+	add_button
+		(watchbox,
+		 pic_showcensus,
+		 &FieldActionWindow::act_show_census,
+		 _("Toggle building label display"));
 
 	if (ibase().get_display_flag(Interactive_Base::dfDebug))
-		add_button(watchbox, pic_debug, &FieldActionWindow::act_debug, _("Debug window"));
+		add_button
+			(watchbox,
+			 pic_debug,
+			 &FieldActionWindow::act_debug,
+			 _("Debug window"));
 
 	// Add tabs
 	if (buildbox && buildbox->get_nritems()) {
@@ -534,9 +561,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 		Widelands::Building_Descr const & descr = *tribe.get_building_descr(id);
 		BuildGrid * * ppgrid;
 
-		//  Some buildings cannot be built (i.e. construction site, HQ) and not
-		//  allowed buildings. The rules are different in editor and game:
-		//  enhanced buildings _are_ buildable in the editor
+		//  Some building types cannot be built (i.e. construction site) and not
+		//  allowed buildings.
 		if (dynamic_cast<Game const *>(&ibase().egbase())) {
 			if (!descr.buildable() || !m_plr->is_building_allowed(id))
 				continue;
@@ -842,13 +868,6 @@ void FieldActionWindow::act_build(Widelands::Building_Index::value_t const idx)
 }
 
 
-/*
-===============
-FieldActionWindow::building_icon_mouse_out
-
-The mouse pointer has moved away from the icon for the building with the index idx.
-===============
-*/
 void FieldActionWindow::building_icon_mouse_out
 	(Widelands::Building_Index::value_t)
 {
@@ -859,13 +878,6 @@ void FieldActionWindow::building_icon_mouse_out
 }
 
 
-/*
-===============
-FieldActionWindow::building_icon_mouse_in
-
-The mouse pointer has moved to the icon for the building with the index idx.
-===============
-*/
 void FieldActionWindow::building_icon_mouse_in
 	(Widelands::Building_Index::value_t const idx)
 {

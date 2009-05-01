@@ -48,7 +48,7 @@ struct Flag;
  * - Using production hints of buildings other than foresters (f.e. gamekeeper)
  * - Building and using trainings sites
  * - Enhancing mines
- * - Check mines whether they are out of ressources
+ * - Check mines whether they are out of resources
  *
  * \ToDo Other things left to implement / improve:
  * - remove cphints from tribes directory and instead read "requieres_object"

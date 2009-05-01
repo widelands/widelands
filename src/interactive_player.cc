@@ -224,9 +224,7 @@ m_toggle_help
 
 	addCommand
 		("switchplayer",
-		 boost::bind(&Interactive_Player::cmdSwitchPlayer,
-			 this,
-			 _1));
+		 boost::bind(&Interactive_Player::cmdSwitchPlayer, this, _1));
 }
 
 
@@ -386,8 +384,8 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				new Game_Main_Menu_Save_Game(*this, m_mainm_windows.savegame);
 			else
-				set_display_flag(dfShowStatistics,
-					!get_display_flag(dfShowStatistics));
+				set_display_flag
+					(dfShowStatistics, !get_display_flag(dfShowStatistics));
 			return true;
 
 		case SDLK_f:
@@ -412,7 +410,8 @@ bool Interactive_Player::handle_key(bool down, SDL_keysym code)
 			if (get_display_flag(dfDebug)) {
 				new GameChatMenu
 					(this, m_debugconsole, *DebugConsole::getChatProvider());
-				dynamic_cast<GameChatMenu &>(*m_debugconsole.window).enter_chat_message(false);
+				dynamic_cast<GameChatMenu &>(*m_debugconsole.window)
+					.enter_chat_message(false);
 			}
 			return true;
 #ifdef DEBUG //  only in debug builds
@@ -456,8 +455,9 @@ void Interactive_Player::cmdSwitchPlayer(std::vector<std::string> const & args)
 		return;
 	}
 
-	DebugConsole::write(str(format("Switching from #%1% to #%2%.") %
-		static_cast<int>(m_player_number) %
-		n));
+	DebugConsole::write
+		(str
+		 	(format("Switching from #%1% to #%2%.")
+		 	 % static_cast<int>(m_player_number) % n));
 	m_player_number = n;
 }

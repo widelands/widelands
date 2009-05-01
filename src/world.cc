@@ -93,13 +93,13 @@ void Resource_Descr::parse(Section *s, std::string basedir)
  * Get the correct editor pic for this amount of this resource
  */
 const std::string & Resource_Descr::get_editor_pic
-(const uint32_t amount) const {
+	(uint32_t const amount) const
+{
 	uint32_t bestmatch = 0;
 
 	assert(m_editor_pics.size());
 
-	for (uint32_t i = 1; i < m_editor_pics.size(); ++i)
-	{
+	for (uint32_t i = 1; i < m_editor_pics.size(); ++i) {
 		const int32_t diff1 =
 			m_editor_pics[bestmatch].upperlimit - static_cast<int32_t>(amount);
 		const int32_t diff2 =
@@ -131,9 +131,11 @@ const std::string & Resource_Descr::get_editor_pic
 		}
 
 		// This is higher than the actual amount
-		if (m_editor_pics[bestmatch].upperlimit < 0 ||
-			diff1 > diff2 ||
-			diff1 < 0) {
+		if
+			(m_editor_pics[bestmatch].upperlimit < 0     ||
+			 diff2                               < diff1 ||
+			 diff1                               < 0)
+		{
 			bestmatch = i;
 			continue;
 		}

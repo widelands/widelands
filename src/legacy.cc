@@ -35,7 +35,8 @@ struct FakeAttackController : public BaseImmovable {
 	virtual int32_t get_type() const throw () {return BATTLE;}
 	virtual int32_t get_size() const throw () {return SMALL;}
 	virtual bool get_passable() const throw () {return true;}
-	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point) {}
+	virtual void draw (Editor_Game_Base const &, RenderTarget &, FCoords, Point)
+	{}
 
 	struct Loader : public BaseImmovable::Loader {
 		virtual void load(FileRead & fr) {
@@ -66,7 +67,8 @@ struct FakeAttackController : public BaseImmovable {
 					fr.Unsigned32();
 			} catch (_wexception const & e) {
 				throw wexception
-					("Error in legacy AttackController: binary/mapobjects:%s", e.what());
+					("Error in legacy AttackController: binary/mapobjects:%s",
+					 e.what());
 			}
 		}
 
@@ -106,7 +108,8 @@ struct FakeBattle : public BaseImmovable {
 	virtual int32_t get_type() const throw () {return BATTLE;}
 	virtual int32_t get_size() const throw () {return SMALL;}
 	virtual bool get_passable() const throw () {return true;}
-	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords, const Point) {}
+	virtual void draw (Editor_Game_Base const &, RenderTarget &, FCoords, Point)
+	{}
 
 	struct Loader : public BaseImmovable::Loader {
 		virtual void load(FileRead & fr) {

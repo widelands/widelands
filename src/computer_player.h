@@ -29,8 +29,10 @@
  * Instances of actual AI implementation can be created via the
  * \ref Implementation interface.
  */
-struct Computer_Player : Widelands::NoteReceiver<Widelands::NoteImmovable>,
-	Widelands::NoteReceiver<Widelands::NoteField> {
+struct Computer_Player :
+	Widelands::NoteReceiver<Widelands::NoteImmovable>,
+	Widelands::NoteReceiver<Widelands::NoteField>
+{
 	Computer_Player(Widelands::Game &, const Widelands::Player_Number);
 
 	virtual void think () = 0;

@@ -247,7 +247,9 @@ bool Worker::run_breed(Game & game, State & state, Action const & action)
 
 	do {
 		uint8_t fres  = mr.location().field->get_resources();
-		uint32_t amount = mr.location().field->get_starting_res_amount() - mr.location().field->get_resources_amount();
+		uint32_t amount =
+			mr.location().field->get_starting_res_amount() -
+			mr.location().field->get_resources_amount   ();
 
 		if (fres != res)
 			amount = 0;
@@ -287,7 +289,8 @@ bool Worker::run_breed(Game & game, State & state, Action const & action)
  *
  * sparamv = possible bobs
  */
-bool Worker::run_setdescription(Game & game, State & state, Action const & action)
+bool Worker::run_setdescription
+	(Game & game, State & state, Action const & action)
 {
 	uint32_t const idx = game.logic_rand() % action.sparamv.size();
 
@@ -328,7 +331,8 @@ bool Worker::run_setdescription(Game & game, State & state, Action const & actio
  *
  * sparamv = possible bobs
  */
-bool Worker::run_setbobdescription(Game & game, State & state, Action const & action)
+bool Worker::run_setbobdescription
+	(Game & game, State & state, Action const & action)
 {
 	int32_t const idx = game.logic_rand() % action.sparamv.size();
 
@@ -471,7 +475,11 @@ struct FindNodeSpace {
 		if (!(coords.field->get_caps() & MOVECAPS_WALK))
 			return false;
 
-		for (uint8_t dir = Map_Object::FIRST_DIRECTION; dir <= Map_Object::LAST_DIRECTION; ++dir) {
+		for
+			(uint8_t dir = Map_Object::FIRST_DIRECTION;
+			 dir <= Map_Object::LAST_DIRECTION;
+			 ++dir)
+		{
 			FCoords neighb = map.get_neighbour(coords, dir);
 
 			if
@@ -1691,7 +1699,8 @@ void Worker::dropoff_update(Game & game, State &)
 			return;
 		}
 
-		throw wexception("MO(%u): [dropoff]: not on building or on flag - fishy", serial());
+		throw wexception
+			("MO(%u): [dropoff]: not on building or on flag - fishy", serial());
 	}
 
 	// We don't have the item any more, return home
@@ -1704,7 +1713,8 @@ void Worker::dropoff_update(Game & game, State &)
 				 true);
 
 	if (location->get_type() != Map_Object::BUILDING)
-		throw wexception("MO(%u): [dropoff]: not on building on return", serial());
+		throw wexception
+			("MO(%u): [dropoff]: not on building on return", serial());
 
 	if (dynamic_cast<Warehouse const *>(location)) {
 		schedule_incorporate(game);
@@ -1775,7 +1785,8 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 	}
 
 	if (not dynamic_cast<Building const *>(location))
-		throw wexception("MO(%u): [fetchfromflag]: building disappeared", serial());
+		throw wexception
+			("MO(%u): [fetchfromflag]: building disappeared", serial());
 
 	assert(location == &employer);
 

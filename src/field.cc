@@ -27,7 +27,13 @@ namespace Widelands {
  * Set the field's brightness based upon the slopes.
  * Slopes are calulated as this field's height - neighbour's height.
  */
-void Field::set_brightness(int32_t l, int32_t r, int32_t tl, int32_t tr, int32_t bl, int32_t br)
+void Field::set_brightness
+	(int32_t const l,
+	 int32_t const r,
+	 int32_t const tl,
+	 int32_t const tr,
+	 int32_t const bl,
+	 int32_t const br)
 {
 	static float flatbrightness = 0; // HACK to normalize flat terrain to zero brightness
 	if (!flatbrightness)

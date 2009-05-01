@@ -42,8 +42,9 @@ struct Textarea;
  * to the player and draws the user interface,
  * cares for input and so on.
  */
-struct Interactive_Player : public Interactive_GameBase,
-	public DebugConsole::Handler {
+struct Interactive_Player :
+	public Interactive_GameBase, public DebugConsole::Handler
+{
 	Interactive_Player
 		(Widelands::Game &,
 		 Section         & global_s,

@@ -44,7 +44,8 @@ void Cmd_CheckEventChain::execute (Game & game) {
 		else
 			return
 				game.enqueue_command
-					(new Cmd_CheckEventChain(game.get_gametime() + 30000, static_cast<uint16_t>(-1)));
+					(new Cmd_CheckEventChain
+					 	(game.get_gametime() + 30000, static_cast<uint16_t>(-1)));
 	}
 
 	EventChain & evchain = mcm[m_eventchain_id];

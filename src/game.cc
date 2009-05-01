@@ -413,7 +413,8 @@ bool Game::run
 		}
 
 		if (get_ipl())
-			get_ipl()->move_view_to(map().get_starting_pos(get_ipl()->get_player_number()));
+			get_ipl()->move_view_to
+				(map().get_starting_pos(get_ipl()->get_player_number()));
 
 		// Prepare the map, set default textures
 		map().recalc_default_resources();
@@ -434,8 +435,7 @@ bool Game::run
 		// Everything prepared, send the first trigger event
 		// We lie about the sender here. Hey, what is one lie in a lifetime?
 		enqueue_command
-			(new Cmd_CheckEventChain(get_gametime(),
-			 static_cast<uint16_t>(-1)));
+			(new Cmd_CheckEventChain(get_gametime(), static_cast<uint16_t>(-1)));
 	}
 
 	if (m_writereplay) {

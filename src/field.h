@@ -179,7 +179,8 @@ public:
 	const BaseImmovable * get_immovable() const throw () {return immovable;}
 	BaseImmovable * get_immovable() {return immovable;}
 
-	void set_brightness(int32_t l, int32_t r, int32_t tl, int32_t tr, int32_t bl, int32_t br);
+	void set_brightness
+		(int32_t l, int32_t r, int32_t tl, int32_t tr, int32_t bl, int32_t br);
 	int8_t get_brightness() const {return brightness;}
 
 	/**

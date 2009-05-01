@@ -121,8 +121,9 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 
 	//  register sel overlay position
 	if (m_sel.triangles) {
-		assert(center.triangle.t == TCoords<>::D or
-		       center.triangle.t == TCoords<>::R);
+		assert
+			(center.triangle.t == TCoords<>::D or
+			 center.triangle.t == TCoords<>::R);
 		Widelands::MapTriangleRegion<> mr
 			(map, Area<TCoords<> >(center.triangle, m_sel.radius));
 		do
@@ -742,7 +743,8 @@ void Interactive_Base::roadb_add_overlay()
 		if (m_buildroad->get_index(neighb) >= 0)
 			continue; // the road can't cross itself
 
-		int32_t slope = abs(endpos.field->get_height() - neighb.field->get_height());
+		int32_t const slope =
+			abs(endpos.field->get_height() - neighb.field->get_height());
 		int32_t icon;
 
 		if (slope < 2)

@@ -99,7 +99,7 @@ protected:
 	uint32_t          m_icon;       ///< Pointer to icon into picture stack
 	DirAnimations m_walk_anims;
 	DirAnimations m_walkload_anims;
-	Buildcost     m_buildcost;      ///< What and how much we need to build this worker
+	Buildcost     m_buildcost;
 	int32_t           m_max_experience;
 	int32_t           m_min_experience;
 	Ware_Index    m_becomes;       /// Type that this type can become (or Null).

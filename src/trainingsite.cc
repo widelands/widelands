@@ -42,8 +42,7 @@ TrainingSite_Descr::TrainingSite_Descr
 	 std::string const & directory, Profile & prof, Section & global_s,
 	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
 :
-	ProductionSite_Descr(_name, _descname, directory,
-		prof, global_s, _tribe, encdata),
+	ProductionSite_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata),
 
 	//  FIXME This is currently hardcoded for "soldier" but should allow any
 	//  FIXME soldier type name.

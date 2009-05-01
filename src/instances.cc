@@ -216,7 +216,8 @@ Map_Object_Descr IMPLEMENTATION
 ==============================================================================
 */
 
-uint32_t Map_Object_Descr::s_dyn_attribhigh = Map_Object::HIGHEST_FIXED_ATTRIBUTE;
+uint32_t Map_Object_Descr::s_dyn_attribhigh =
+	Map_Object::HIGHEST_FIXED_ATTRIBUTE;
 Map_Object_Descr::AttribMap Map_Object_Descr::s_dyn_attribs;
 
 /**

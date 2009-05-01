@@ -83,8 +83,14 @@ void Text_Parser::parse
 		std::string unparsed_text;
 		std::string richtext_format;
 
-		more_richtext_blocks = extract_format_block
-			(text, unparsed_text, richtext_format, std::string("<rt"), std::string(">"), std::string("</rt>"));
+		more_richtext_blocks =
+			extract_format_block
+				(text,
+				 unparsed_text,
+				 richtext_format,
+				 std::string("<rt"),
+				 std::string(">"),
+				 std::string("</rt>"));
 		parse_richtexttext_attributes(richtext_format, &new_richtext_block);
 
 		std::vector<Text_Block> text_blocks;

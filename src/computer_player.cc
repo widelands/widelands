@@ -21,7 +21,8 @@
 
 #include "ai/defaultai.h"
 
-Computer_Player::Computer_Player(Widelands::Game & g, const Widelands::Player_Number pid)
+Computer_Player::Computer_Player
+	(Widelands::Game & g, Widelands::Player_Number const pid)
 	: m_game(g), player_number(pid)
 {
 }

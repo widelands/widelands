@@ -63,15 +63,15 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 	log(" done\n");
 
 	log("Game: Reading Game Class Data ... ");
-	{Game_Game_Class_Data_Packet                   p; p.Read(m_fs, m_game, 0);}
+	{Game_Game_Class_Data_Packet                  p; p.Read(m_fs, m_game, 0);}
 	log(" done\n");
 
 	log("Game: Reading Map Data ... ");
-	Game_Map_Data_Packet M;                           M.Read(m_fs, m_game, 0);
+	Game_Map_Data_Packet M;                          M.Read(m_fs, m_game, 0);
 	log(" done\n");
 
 	log("Game: Reading Player Info ... ");
-	{Game_Player_Info_Data_Packet                  p; p.Read(m_fs, m_game, 0);}
+	{Game_Player_Info_Data_Packet                 p; p.Read(m_fs, m_game, 0);}
 	log(" done\n");
 
 	log("Game: Reading Map Data Complete!\n");
@@ -81,18 +81,18 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 	Map_Map_Object_Loader * const mol = M.get_map_object_loader();
 
 	log("Game: Reading Player Economies Info ... ");
-	{Game_Player_Economies_Data_Packet             p; p.Read(m_fs, m_game, mol);}
+	{Game_Player_Economies_Data_Packet            p; p.Read(m_fs, m_game, mol);}
 	log(" done\n");
 
 	log("Game: Reading Command Queue Data ... ");
-	{Game_Cmd_Queue_Data_Packet                    p; p.Read(m_fs, m_game, mol);}
+	{Game_Cmd_Queue_Data_Packet                   p; p.Read(m_fs, m_game, mol);}
 	log(" done\n");
 
 	// Only read and use interactive player data, if we load a singleplayer game.
 	// In multiplayer games every client needs to create a new interactive player.
 	if (!multiplayer) {
 		log("Game: Reading Interactive Player Data ... ");
-		{Game_Interactive_Player_Data_Packet           p; p.Read(m_fs, m_game, mol);}
+		{Game_Interactive_Player_Data_Packet       p; p.Read(m_fs, m_game, mol);}
 		log(" done\n");
 	}
 

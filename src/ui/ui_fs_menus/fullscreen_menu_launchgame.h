@@ -81,8 +81,8 @@ private:
 
 	UI::Callback_Button<Fullscreen_Menu_LaunchGame> m_select_map, m_select_save;
 	UI::Callback_Button<Fullscreen_Menu_LaunchGame> m_back, m_ok;
-	UI::Callback_IDButton<Fullscreen_Menu_LaunchGame,
-		uint8_t> * m_pos[MAX_PLAYERS];
+	UI::Callback_IDButton<Fullscreen_Menu_LaunchGame, uint8_t> *
+		m_pos[MAX_PLAYERS];
 	UI::Textarea              m_title, m_mapname, m_lobby;
 	UI::Multiline_Textarea    m_notes;
 	UI::Listselect<int32_t> * m_lobby_list;

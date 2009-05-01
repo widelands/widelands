@@ -213,15 +213,6 @@ void Editor_Game_Base::conquer_area(Player_Area<Area<FCoords> > player_area) {
 }
 
 
-/*
-===============
-Editor_Game_Base::conquer_area_no_building
-
-Conquers the given area for that player; assumes that there is no military building there
-(so there is nothing on coords that could possibly be attacked!) and this area is not reclaimed
-and might be consumed..
-===============
-*/
 void Editor_Game_Base::conquer_area_no_building
 	(Player_Area<Area<FCoords> > player_area)
 {
@@ -377,10 +368,11 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 	container_iterate_const(std::vector<ImmovableFound>, immovables, i) {
 		PlayerImmovable & imm =
 			dynamic_cast<PlayerImmovable &>(*i.current->object);
-		if (not m[i.current->coords].is_interior(imm.owner().get_player_number())) {
+		if
+			(not
+			 m[i.current->coords].is_interior(imm.owner().get_player_number()))
 			if (std::find(burnlist.begin(), burnlist.end(), &imm) == burnlist.end())
 				burnlist.push_back(&imm);
-		}
 	}
 
 	// Fix all immovables
@@ -399,13 +391,6 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 }
 
 
-/*
-===============
-Editor_Game_Base::remove_player
-
-Remove the player with the given number
-===============
-*/
 void Editor_Game_Base::remove_player(const Player_Number plnum) {
 	assert(1 <= plnum);
 	assert     (plnum <= MAX_PLAYERS);
@@ -760,8 +745,8 @@ void Editor_Game_Base::cleanup_for_load
 {
 	cleanup_objects(); /// Clean all the stuff up, so we can load.
 
-	// We do not flush the animations in the editor since all tribes are loaded and
-	// animations can not change a lot, or?
+	//  We do not flush the animations in the editor since all tribes are loaded
+	//  and animations can not change a lot, or?
 	// TODO: check this when another world is needed
 	if (flush_animations)
 		g_anim.flush();

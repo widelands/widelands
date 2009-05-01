@@ -90,8 +90,8 @@ public:
 	virtual void act(Game & game, uint32_t data);
 
 	virtual void set_economy(Economy *);
-	virtual int32_t get_priority(int32_t type, Ware_Index ware_index,
-		bool adjust = true) const;
+	virtual int32_t get_priority
+		(int32_t type, Ware_Index ware_index, bool adjust = true) const;
 	void set_needed(Ware_Index, int value = 1);
 
 	const WareList &get_wares() const;

@@ -145,8 +145,9 @@ void WLApplication::setup_searchpaths(std::string argv0)
 	std::string::size_type slash = argv0.rfind('/');
 	std::string::size_type backslash = argv0.rfind('\\');
 
-	if (backslash != std::string::npos &&
-	    (slash == std::string::npos || backslash > slash))
+	if
+		(backslash != std::string::npos &&
+		 (slash == std::string::npos || backslash > slash))
 		slash = backslash;
 
 	if (slash != std::string::npos) {
@@ -1348,8 +1349,12 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		return s.mapfilename;
 	}
 
-	virtual void setMap(std::string const & mapname,
-		std::string const & mapfilename, uint32_t maxplayers, bool savegame) {
+	virtual void setMap
+		(std::string const &       mapname,
+		 std::string const &       mapfilename,
+		 uint32_t            const maxplayers,
+		 bool                const savegame)
+	{
 		s.mapname = mapname;
 		s.mapfilename = mapfilename;
 		s.savegame = savegame;

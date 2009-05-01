@@ -873,18 +873,17 @@ bool DefaultAI::construct_roads (int32_t gametime)
 	uint32_t economies_to_connect = 0;
 	EconomyObserver * eo_to_connect;
 
-	{ // fetch first two economies that might be connectable
-		std::list<EconomyObserver *>::iterator i = economies.begin();
-		while ((economies_to_connect < 2) && (i != economies.end())) {
-			// Do not try to connect economies that already failed in last time.
-			if ((*i)->next_connection_try <= gametime) {
-				if (economies_to_connect == 1)
-					eo_to_connect = (*i);
-				++ economies_to_connect;
-			}
-			++i;
+	//  fetch first two economies that might be connectable
+	for
+		(std::list<EconomyObserver *>::iterator i = economies.begin();
+		 economies_to_connect < 2 && i != economies.end();
+		 ++i)
+		//  Do not try to connect economies that already failed in last time.
+		if ((*i)->next_connection_try <= gametime) {
+			if (economies_to_connect == 1)
+				eo_to_connect = *i;
+			++economies_to_connect;
 		}
-	}
 
 	// No need to connect, if only one economy
 	if (economies_to_connect < 2)

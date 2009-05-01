@@ -209,12 +209,12 @@ bool WarehouseSupply::is_active() const throw () {return false;}
 
 
 uint32_t WarehouseSupply::nr_supplies
-(Game const & game, Request const & req) const {
-	if (req.get_type() == Request::WARE) {
-		return m_wares.stock(req.get_index());
-	} else {
-		return m_warehouse->count_workers(game, req.get_index(), req.get_requirements());
-	}
+	(Game const & game, Request const & req) const
+{
+	return
+		req.get_type() == Request::WARE ? m_wares.stock(req.get_index()) :
+		m_warehouse->count_workers
+			(game, req.get_index(), req.get_requirements());
 }
 
 
@@ -225,9 +225,11 @@ Launch a ware as item.
 */
 WareInstance & WarehouseSupply::launch_item(Game & game, Request const & req) {
 	if (req.get_type() != Request::WARE)
-		throw wexception("WarehouseSupply::launch_item: called for non-ware request");
+		throw wexception
+			("WarehouseSupply::launch_item: called for non-ware request");
 	if (!m_wares.stock(req.get_index()))
-		throw wexception("WarehouseSupply::launch_item: called for non-existing ware");
+		throw wexception
+			("WarehouseSupply::launch_item: called for non-existing ware");
 
 	return m_warehouse->launch_item(game, req.get_index());
 }
@@ -256,8 +258,6 @@ Warehouse building
 
 /*
 ===============
-Warehouse_Descr::Warehouse_Descr
-
 Initialize with sane defaults
 ===============
 */

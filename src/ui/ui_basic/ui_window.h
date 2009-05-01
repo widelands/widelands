@@ -44,14 +44,15 @@ namespace UI {
  * Another click on this bar resizes the window again
  */
 struct Window : public Panel {
-	Window(Panel *parent,
-		int32_t x,
-		int32_t y,
-		uint32_t w,
-		uint32_t h,
-		const char *title);
+	Window
+		(Panel      * parent,
+		 int32_t      x,
+		 int32_t      y,
+		 uint32_t     w,
+		 uint32_t     h,
+		 char const * title);
 
-	void set_title(const char *text);
+	void set_title(char const * text);
 
 	void move_to_mouse();
 	virtual void move_inside_parent();

@@ -56,9 +56,12 @@ throw (_wexception)
 
 				plr->set_viewpoint(Point(x, y));
 
-				const uint32_t loaded_df = Interactive_Base::dfShowCensus | Interactive_Base::dfShowStatistics;
-				uint32_t olddf = plr->get_display_flags();
-				uint32_t realdf = (olddf & ~loaded_df) | (display_flags & loaded_df);
+				uint32_t const loaded_df =
+					Interactive_Base::dfShowCensus |
+					Interactive_Base::dfShowStatistics;
+				uint32_t const olddf = plr->get_display_flags();
+				uint32_t const realdf =
+					(olddf & ~loaded_df) | (display_flags & loaded_df);
 				plr->set_display_flags(realdf);
 
 				if (packet_version == 1) {

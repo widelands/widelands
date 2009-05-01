@@ -501,8 +501,8 @@ void Soldier::attack_update(Game & game, State & state)
 				return pop_task(game);
 			}
 		} else {
-			molog("[attack] cancelled by unexpected signal '%s'\n",
-				signal.c_str());
+			molog
+				("[attack] cancelled by unexpected signal '%s'\n", signal.c_str());
 			return pop_task(game);
 		}
 	}
@@ -734,13 +734,13 @@ void Soldier::battle_update(Game & game, State &)
 		if (signal == "blocked") {
 			signal_handled();
 			return start_task_idle(game, get_animation("idle"), 5000);
-		} else if (signal == "location" ||
-			signal == "battle" ||
-			signal == "wakeup") {
+		} else if
+			(signal == "location" || signal == "battle" || signal == "wakeup")
 			signal_handled();
-		} else {
-			molog("[battle] interrupted by unexpected signal '%s'\n",
-				signal.c_str());
+		else {
+			molog
+				("[battle] interrupted by unexpected signal '%s'\n",
+				 signal.c_str());
 			return pop_task(game);
 		}
 	}
@@ -899,8 +899,9 @@ void Soldier::log_general_info(Editor_Game_Base const & egbase)
 {
 	Worker::log_general_info(egbase);
 	molog("[Soldier]\n");
-	molog("Levels: %d/%d/%d/%d\n", m_hp_level, m_attack_level,
-		m_defense_level, m_evade_level);
+	molog
+		("Levels: %d/%d/%d/%d\n",
+		 m_hp_level, m_attack_level, m_defense_level, m_evade_level);
 	molog ("HitPoints: %d/%d\n", m_hp_current, m_hp_max);
 	molog ("Attack :  %d-%d\n", m_min_attack, m_max_attack);
 	molog ("Defense : %d%%\n", m_defense);

@@ -96,8 +96,9 @@ void SaveHandler::initialize(int32_t currenttime) {
 /*
  * Calculate the name of the save file
  */
-std::string SaveHandler::create_file_name(std::string dir,
-	std::string filename) {
+std::string SaveHandler::create_file_name
+	(std::string dir, std::string filename)
+{
 	// ok, first check if the extension matches (ignoring case)
 	bool assign_extension = true;
 	if (filename.size() >= strlen(WLGF_SUFFIX)) {

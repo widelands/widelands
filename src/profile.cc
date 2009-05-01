@@ -631,8 +631,7 @@ void Section::set_string_duplicate
 	create_val_duplicate(name, string).mark_used();
 }
 
-/** Section::set_Coords(const char * const name, const Coords value, const bool duplicate = false)
- *
+/**
  * Modifies/Creates the given key.
  * If duplicate is true, a duplicate key will be created if the key already
  * exists.

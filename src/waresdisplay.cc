@@ -50,7 +50,9 @@ WaresDisplay::~WaresDisplay()
 }
 
 
-bool WaresDisplay::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int32_t) {
+bool WaresDisplay::handle_mousemove
+	(Uint8, int32_t const x, int32_t const y, int32_t, int32_t)
+{
 	assert(m_warelists.size());
 
 	Widelands::Ware_Index const index =

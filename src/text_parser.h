@@ -22,7 +22,7 @@
 
 #include "font_handler.h"
 
-inline bool is_richtext(std::string text) {
+inline bool is_richtext(std::string const & text) {
 	return text.substr(0, 3) == "<rt";
 }
 
@@ -30,35 +30,36 @@ struct Text_Block {
 	Text_Block();
 	Text_Block(const Text_Block & src);
 
-	void set_font_size(const int32_t font_size) throw () {m_font_size = font_size;}
+	void set_font_size(int32_t const font_size) {m_font_size = font_size;}
 	int32_t get_font_size() const throw () {return m_font_size;}
 
-	void set_font_color(const RGBColor font_color) throw () {m_font_color = font_color;}
+	void set_font_color(RGBColor const font_color) {m_font_color = font_color;}
 	RGBColor get_font_color() const throw () {return m_font_color;}
 
-	void set_font_weight(const std::string & font_weight) throw ()
-	{m_font_weight = font_weight;};
+	void set_font_weight(std::string const & font_weight) {
+		m_font_weight = font_weight;
+	}
 	const std::string & get_font_weight() const throw () {return m_font_weight;}
 
-	void set_font_style(const std::string & font_style) throw ()
-	{m_font_style = font_style;}
+	void set_font_style(std::string const & font_style) {
+		m_font_style = font_style;
+	}
 	const std::string & get_font_style() const throw () {return m_font_style;}
 
 	void set_font_decoration(const std::string & font_decoration) throw ()
 	{m_font_decoration = font_decoration;}
-	const std::string & get_font_decoration() const throw ()
-	{return m_font_decoration;}
+	std::string const & get_font_decoration() const {return m_font_decoration;}
 
-	void set_font_face(const std::string & font_face) throw ()
-	{m_font_face = font_face;}
+	void set_font_face(std::string const & font_face) {m_font_face = font_face;}
 	const std::string & get_font_face() const throw () {return m_font_face;}
 
-	void set_line_spacing(const int32_t line_spacing) throw ()
-	{m_line_spacing = line_spacing;};
-	int32_t get_line_spacing() const throw () {return m_line_spacing;};
+	void set_line_spacing(int32_t const line_spacing) {
+		m_line_spacing = line_spacing;
+	}
+	int32_t get_line_spacing() const {return m_line_spacing;}
 
 	void set_words(const std::vector<std::string> & words) {m_words = words;}
-	const std::vector<std::string> & get_words() const throw () {return m_words;}
+	std::vector<std::string> const & get_words() const {return m_words;}
 
 	void set_line_breaks
 		(const std::vector<std::vector<std::string>::size_type> & line_breaks)

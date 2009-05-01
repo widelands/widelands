@@ -136,7 +136,10 @@ class BulldozeConfirm
  * \todo move this into it's own set of files
  */
 struct BulldozeConfirm : public UI::Window {
-	BulldozeConfirm(Interactive_Base * parent, Building * building, Widelands::PlayerImmovable * todestroy = 0);
+	BulldozeConfirm
+		(Interactive_Base           * parent,
+		 Building                   * building,
+		 Widelands::PlayerImmovable * todestroy = 0);
 
 	virtual void think();
 
@@ -160,7 +163,10 @@ Otherwise, todestroy is destroyed when the user confirms it. This is useful to
 confirm building destruction when the building's base flag is removed.
 ===============
 */
-BulldozeConfirm::BulldozeConfirm(Interactive_Base * parent, Building * building, Widelands::PlayerImmovable * todestroy)
+BulldozeConfirm::BulldozeConfirm
+	(Interactive_Base           * parent,
+	 Building                   * building,
+	 Widelands::PlayerImmovable * todestroy)
 	:
 	UI::Window(parent, 0, 0, 200, 120, _("Destroy building?"))
 {
@@ -256,7 +262,10 @@ todestroy is the immovable that will be bulldozed if the user confirms the
 dialog.
 ===============
 */
-void show_bulldoze_confirm(Interactive_Base & player, Building & building, Widelands::PlayerImmovable * todestroy)
+void show_bulldoze_confirm
+	(Interactive_Base           &       player,
+	 Building                   &       building,
+	 Widelands::PlayerImmovable * const todestroy)
 {
 	new BulldozeConfirm(&player, &building, todestroy);
 }
@@ -284,7 +293,12 @@ struct WaresQueueDisplay : public UI::Panel {
 	};
 
 public:
-	WaresQueueDisplay(UI::Panel * parent, int32_t x, int32_t y, uint32_t maxw, Widelands::WaresQueue *, Widelands::Game *);
+	WaresQueueDisplay
+		(UI::Panel             * parent,
+		 int32_t x, int32_t y,
+		 uint32_t                maxw,
+		 Widelands::WaresQueue *,
+		 Widelands::Game       *);
 	~WaresQueueDisplay();
 
 	virtual void think();
@@ -413,8 +427,6 @@ class Building_Window
 */
 
 /*
-class Building_Window
----------------------
 Baseclass providing common tools for building windows.
 */
 struct Building_Window : public UI::Window {
@@ -469,7 +481,10 @@ Building_Window::Building_Window
 Create the window, add it to the registry.
 ===============
 */
-Building_Window::Building_Window(Interactive_Player * parent, Building * building, UI::Window * * registry)
+Building_Window::Building_Window
+	(Interactive_Player * const parent,
+	 Building           * const building,
+	 UI::Window *       * const registry)
 	:
 	UI::Window
 		(parent,
@@ -1606,8 +1621,6 @@ void MilitarySite_Window::think()
 
 /*
 ==============
-MilitarySite_Window::update()
-
 Update the listselect, maybe there are new soldiers
 =============
 */
@@ -1621,10 +1634,14 @@ void MilitarySite_Window::update() {
 		Soldier & s = *soldiers[i];
 		UI::Table<Soldier &>::Entry_Record * er = m_table.find(s);
 		if (not er)                          er = &m_table.add(s);
-		const uint32_t hl = s.get_hp_level     (), mhl = s.get_max_hp_level     ();
-		const uint32_t al = s.get_attack_level (), mal = s.get_max_attack_level ();
-		const uint32_t dl = s.get_defense_level(), mdl = s.get_max_defense_level();
-		const uint32_t el = s.get_evade_level  (), mel = s.get_max_evade_level  ();
+		uint32_t const  hl = s.get_hp_level         ();
+		uint32_t const mhl = s.get_max_hp_level     ();
+		uint32_t const  al = s.get_attack_level     ();
+		uint32_t const mal = s.get_max_attack_level ();
+		uint32_t const  dl = s.get_defense_level    ();
+		uint32_t const mdl = s.get_max_defense_level();
+		uint32_t const  el = s.get_evade_level      ();
+		uint32_t const mel = s.get_max_evade_level  ();
 		er->set_string(0, s.descname().c_str());
 		char buffer[sizeof("4294967295 / 4294967295")];
 		sprintf(buffer,  "%u / %u", hl,                mhl);
@@ -1768,7 +1785,8 @@ UI::Box * TrainingSite_Window::create_military_box (UI::Panel * const panel)
 
 	//  add TrainingSite options and capacity buttons
 	UI::Box * box = new UI::Box (sold_box, 0, 0, UI::Box::Horizontal);
-	box->add (new UI::Textarea (box, 0, 11, _("Capacity"), Align_Left), Align_Left);
+	box->add
+		(new UI::Textarea (box, 0, 11, _("Capacity"), Align_Left), Align_Left);
 	box->add
 		(new UI::Callback_Button<TrainingSite_Window>
 		 	(box,
@@ -1832,8 +1850,6 @@ void TrainingSite_Window::think()
 
 /*
 ==============
-TrainingSite_Window::update()
-
 Update the listselect, maybe there are new soldiers
 FIXME What if a soldier have been removed and another added? This needs review.
 =============
@@ -1848,10 +1864,14 @@ void TrainingSite_Window::update() {
 		Soldier & s = *soldiers[i];
 		UI::Table<Soldier &>::Entry_Record * er = m_table->find(s);
 		if (not er)                           er = &m_table->add(s);
-		const uint32_t hl = s.get_hp_level     (), mhl = s.get_max_hp_level     ();
-		const uint32_t al = s.get_attack_level (), mal = s.get_max_attack_level ();
-		const uint32_t dl = s.get_defense_level(), mdl = s.get_max_defense_level();
-		const uint32_t el = s.get_evade_level  (), mel = s.get_max_evade_level  ();
+		uint32_t const  hl = s.get_hp_level         ();
+		uint32_t const mhl = s.get_max_hp_level     ();
+		uint32_t const  al = s.get_attack_level     ();
+		uint32_t const mal = s.get_max_attack_level ();
+		uint32_t const  dl = s.get_defense_level    ();
+		uint32_t const mdl = s.get_max_defense_level();
+		uint32_t const  el = s.get_evade_level      ();
+		uint32_t const mel = s.get_max_evade_level  ();
 		er->set_string(0, s.descname().c_str());
 		char buffer[sizeof("4294967295 / 4294967295")];
 		sprintf(buffer,  "%u / %u", hl,                mhl);
@@ -1878,8 +1898,6 @@ void TrainingSite_Window::update() {
 
 /*
 ==============
-TrainingSite_Window::drop_button_clicked()
-
 Handle the click at drop soldier. Enqueue a command at command queue to get out selected
 soldier from this training site.
 =============

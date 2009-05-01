@@ -132,8 +132,7 @@ m_vision_range   (0)
 			if (build_s->get_int("fps", -1) != -1)
 				throw wexception("fps defined for build animation!");
 			if (!is_animation_known("build"))
-				add_animation("build", g_anim.get(directory.c_str(),
-				              *build_s, 0, encdata));
+				add_animation("build", g_anim.get(directory.c_str(), *build_s, 0, encdata));
 		}
 
 		// Get costs
@@ -162,8 +161,7 @@ m_vision_range   (0)
 	{ //  parse basic animation data
 		Section & idle_s = prof.get_safe_section("idle");
 		if (!is_animation_known("idle"))
-			add_animation("idle", g_anim.get(directory.c_str(),
-			              idle_s, 0, encdata));
+			add_animation("idle", g_anim.get(directory.c_str(), idle_s, 0, encdata));
 	}
 
 	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
@@ -196,11 +194,13 @@ Building & Building_Descr::create
 	Building & b = construct ? create_constructionsite(old) : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
-	b.prefill(dynamic_cast<Game &>(egbase), ware_counts, worker_counts,
-	          soldier_counts);
+	b.prefill
+		(dynamic_cast<Game &>(egbase),
+		 ware_counts, worker_counts, soldier_counts);
 	b.init(egbase);
-	b.postfill(dynamic_cast<Game &>(egbase), ware_counts, worker_counts,
-	           soldier_counts);
+	b.postfill
+		(dynamic_cast<Game &>(egbase),
+		 ware_counts, worker_counts, soldier_counts);
 
 	return b;
 }
@@ -506,8 +506,8 @@ std::string Building::info_string(std::string const & format) {
 				  get_size  () == BaseImmovable::MEDIUM ? _("Medium") : _("Big")));
 			FORMAT('x', get_position().x);
 			FORMAT('y', get_position().y);
-			FORMAT('c', '(' << get_position().x << ", " <<
-			       get_position().y << ')');
+			FORMAT
+				('c', '(' << get_position().x << ", " << get_position().y << ')');
 			FORMAT('A', descname());
 			FORMAT('a', name());
 			case 'N':
