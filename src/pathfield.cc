@@ -25,7 +25,7 @@
 
 namespace Widelands {
 
-Pathfields::Pathfields(uint16_t const nrfields)
+Pathfields::Pathfields(uint32_t const nrfields)
 	: fields(new Pathfield[nrfields]), cycle(0)
 {}
 

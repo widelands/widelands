@@ -51,7 +51,7 @@ struct Pathfields {
 	boost::scoped_array<Pathfield> fields;
 	uint16_t cycle;
 
-	Pathfields(uint16_t nrfields);
+	Pathfields(uint32_t nrfields);
 };
 
 /**
