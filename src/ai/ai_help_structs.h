@@ -56,7 +56,7 @@ struct FindNodeUnowned {
 		return
 			fc.field->get_caps() & MOVECAPS_WALK
 			&& fc.field->get_owned_by() != playernum
-			&& !onlyenemies || (fc.field->get_owned_by() != 0);
+			&& (!onlyenemies || (fc.field->get_owned_by() != 0));
 	}
 
 	int8_t playernum;

@@ -24,7 +24,6 @@
 
 #include <ctime>
 
-#include "computer_player_hints.h"
 #include "constructionsite.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
