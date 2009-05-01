@@ -191,6 +191,8 @@ struct BuildingObserver {
 		CONSTRUCTIONSITE,
 		PRODUCTIONSITE,
 		MILITARYSITE,
+		WAREHOUSE,
+		TRAININGSSITE,
 		MINE
 	}                                 type;
 

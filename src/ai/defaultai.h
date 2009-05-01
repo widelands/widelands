@@ -45,9 +45,10 @@ struct Flag;
  * and will try to build up an infrastructure to create that ware.
  *
  * \ToDo What it does not do until now is:
+ * - Using production hints of buildings other than foresters (f.e. gamekeeper)
  * - Building and using trainings sites
- * - Higher the military presence at the frontier to other players
  * - Enhancing buildings
+ * - Check mines whether they are out of ressources
  *
  * \ToDo Other things left to implement / improve:
  * - remove cphints from tribes directory and instead read "requieres_object"
@@ -55,7 +56,9 @@ struct Flag;
  * - Improve update code - currently the whole buildable area owned by defaultAI
  *   is rechecked after construction of a building or a road. Instead it would
  *   be better to write down the changed coordinates and only check those and
- *   surrounding ones.
+ *   surrounding ones. Same applies for other parts of the code:
+ *   e.g. check_militarysite checks the whole visible area for enemy area, but
+ *   it would already be enough, if it checks the outer circle ring.
  * - improvements and speedups in the whole defaultAI code.
  *
  */
@@ -96,6 +99,7 @@ private:
 
 	bool check_economies       ();
 	bool check_productionsites (int32_t);
+	bool check_militarysites   (int32_t);
 
 	void consider_productionsite_influence
 		(BuildableField &, Widelands::Coords, BuildingObserver const &);
@@ -108,9 +112,9 @@ private:
 	void gain_building  (Widelands::Building              &);
 	void lose_building  (Widelands::Building        const &);
 
-	bool check_supply(BuildingObserver const &);
+	bool check_supply (BuildingObserver const &);
 
-	bool military_consideration(int32_t);
+	bool consider_attack (int32_t);
 
 
 private:
@@ -138,9 +142,12 @@ private:
 	int32_t next_road_due;
 	int32_t next_construction_due;
 	int32_t next_productionsite_check_due;
-	int32_t next_military_consideration_due;
+	int32_t next_militarysite_check_due;
+	int32_t next_attack_consideration_due;
 	int32_t inhibit_road_building;
 	int32_t time_of_last_construction;
+
+	uint16_t numof_warehouses;
 };
 
 #endif // DEFAULTAI_H

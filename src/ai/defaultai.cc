@@ -58,8 +58,10 @@ Computer_Player(g, pid),
 m_buildable_changed(true),
 m_mineable_changed(true),
 tribe(0),
-next_military_consideration_due(300000),
-time_of_last_construction(0)
+next_militarysite_check_due(0),
+next_attack_consideration_due(300000),
+time_of_last_construction(0),
+numof_warehouses(0)
 {}
 
 
@@ -95,6 +97,10 @@ void DefaultAI::think ()
 
 	// verify that our production sites are doing well
 	check_productionsites(gametime);
+
+	// consider whether a change of the soldier capacity of some militarysites
+	// would make sense.
+	check_militarysites(gametime);
 
 	// check if anything in the economies changed.
 	// This needs to be done before new buildings are placed, to ensure that no
@@ -132,8 +138,8 @@ void DefaultAI::think ()
 	}
 
 	// Finally consider military actions
-	if (next_military_consideration_due <= gametime)
-		military_consideration(gametime);
+	if (next_attack_consideration_due <= gametime)
+		consider_attack(gametime);
 }
 
 
@@ -245,16 +251,6 @@ void DefaultAI::late_initialization ()
 		if (building_name == granitmine)
 			bo.mines = world.get_resource("granit");
 
-		if (typeid(bld) == typeid(ConstructionSite_Descr)) {
-			bo.type = BuildingObserver::CONSTRUCTIONSITE;
-			continue;
-		}
-
-		if (typeid(bld) == typeid(MilitarySite_Descr)) {
-			bo.type = BuildingObserver::MILITARYSITE;
-			continue;
-		}
-
 		if (typeid(bld) == typeid(ProductionSite_Descr)) {
 			const ProductionSite_Descr & prod =
 				static_cast<const ProductionSite_Descr &>(bld);
@@ -269,6 +265,21 @@ void DefaultAI::late_initialization ()
 				(ProductionSite_Descr::Output, prod.output(), j)
 				bo.outputs.push_back(j.current->     value());
 
+			continue;
+		}
+
+		if (typeid(bld) == typeid(MilitarySite_Descr)) {
+			bo.type = BuildingObserver::MILITARYSITE;
+			continue;
+		}
+
+		if (typeid(bld) == typeid(Warehouse_Descr)) {
+			bo.type = BuildingObserver::WAREHOUSE;
+			continue;
+		}
+
+		if (typeid(bld) == typeid(ConstructionSite_Descr)) {
+			bo.type = BuildingObserver::CONSTRUCTIONSITE;
 			continue;
 		}
 	}
@@ -592,7 +603,7 @@ void DefaultAI::update_mineable_field (MineableField & field)
  * \ToDo: this function holds a lot of calculations that are hard to understand
  * at first and even second view - explain what's going on here
  */
-bool DefaultAI::construct_building (int32_t gametime)
+bool DefaultAI::construct_building (int32_t ) // (int32_t gametime)
 {
 	//  Just used for easy checking whether a mine or something else was built.
 	bool mine = false;
@@ -655,21 +666,7 @@ bool DefaultAI::construct_building (int32_t gametime)
 			if (j->desc->get_size() > maxsize)
 				continue;
 
-			// some randomness to avoid that defaultAI is building always the same
-			// (always == another game but same map with defaultAI on same coords)
-			int32_t prio = time(0) % 3 - 1;
-
-			if (j->type == BuildingObserver::MILITARYSITE) {
-				prio  = bf->unowned_land_nearby - bf->military_influence * 4;
-				prio  = prio > 0 ? prio : 1;
-				prio *= expand_factor;
-				prio /= 2;
-
-				if (bf->avoid_military) {
-					prio /= 5;
-				}
-
-			}
+			int32_t prio = 0;
 
 			if (j->type == BuildingObserver::PRODUCTIONSITE) {
 				if (j->need_trees) {
@@ -722,6 +719,11 @@ bool DefaultAI::construct_building (int32_t gametime)
 
 					// If the produced wares are needed
 					if (prio > 0) {
+						// some randomness to avoid that defaultAI is building always
+						// the same (always == another game but same map with
+						// defaultAI on same coords)
+						prio += time(0) % 3 - 1;
+
 						// check if current economy can supply enough material for
 						// production.
 						for (uint32_t k = 0; k < j->inputs.size(); ++k) {
@@ -760,16 +762,25 @@ bool DefaultAI::construct_building (int32_t gametime)
 						prio -= 12;
 
 				}
+			} else if (j->type == BuildingObserver::MILITARYSITE) {
+				prio  = bf->unowned_land_nearby - bf->military_influence * 4;
+				prio  = prio > 0 ? prio : 1;
+				prio *= expand_factor;
+				prio /= 2;
+
+				if (bf->avoid_military) {
+					prio /= 5;
+				}
+
+			} else if (j->type == BuildingObserver::WAREHOUSE) {
+				// Build one warehouse (hq included) for ~every 25 productionsites
+				prio += productionsites.size();
+				prio -= (j->cnt_under_construction + numof_warehouses) * 25;
 			}
 
-			if (time_of_last_construction - gametime > 60000)
-				// give it a last chance - perhaps it needs a sawmill, but prio of
-				// it is too low as too many buildings are under construction.
-				prio -= 2;
-			else
-				// avoid to have too many construction sites
-				prio -=
-					2 * j->cnt_under_construction * (j->cnt_under_construction + 1);
+			// avoid to have too many construction sites
+			prio -=
+				2 * j->cnt_under_construction * (j->cnt_under_construction + 1);
 
 			// add big penalty if water is needed, but is not near
 			if (j->need_water) {
@@ -1206,6 +1217,55 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 	return changed;
 }
 
+/**
+ * Updates the first military building in list and reenques it at the end of
+ * the list afterwards. If a militarysite is in secure area but holds more than
+ * one soldier, the number of stationed soldiers is decreased. If the building
+ * is near a border, the number of stationed soldiers is maximized
+ *
+ * \returns true if something was changed
+ */
+bool DefaultAI::check_militarysites  (int32_t gametime)
+{
+	if (next_militarysite_check_due > gametime)
+		return false;
+
+	// Only useable, if defaultAI owns at least one militarysite
+	if (militarysites.empty())
+		return false;
+
+	// Check next militarysite
+	bool changed = false;
+	Map & map = game().map();
+	uint16_t pn = get_player_number();
+	MilitarySite * ms = militarysites.front().site;
+	uint32_t vision = ms->vision_range();
+	FCoords f = map.get_fcoords(ms->get_position());
+
+	// look if there is any enemy land nearby
+	FindNodeUnowned find_unowned(pn, true);
+
+	if (map.find_fields(Area<FCoords>(f, vision), 0, find_unowned) == 0) {
+		// If no enemy in sight - decrease the number of stationed soldiers
+		// as long as it is > 1
+		uint32_t j = ms->soldierCapacity();
+		if (j > 1)
+			game().send_player_change_soldier_capacity(*ms, -1);
+	} else {
+		// If an enemy is in sight and the number of stationed soldier is not
+		// at maximum - set it to maximum.
+		uint32_t j = ms->maxSoldierCapacity();
+		uint32_t k = ms->soldierCapacity();
+		if (j > k)
+			game().send_player_change_soldier_capacity(*ms, j - k);
+		changed = true;
+	}
+	militarysites.push_back(militarysites.front());
+	militarysites.pop_front();
+	next_militarysite_check_due = gametime + 1000;
+	return changed;
+}
+
 
 void DefaultAI::consider_productionsite_influence
 	(BuildableField & field, Coords, BuildingObserver const & bo)
@@ -1313,7 +1373,8 @@ void DefaultAI::gain_building (Building & b)
 			militarysites.push_back (MilitarySiteObserver());
 			militarysites.back().site = &dynamic_cast<MilitarySite &>(b);
 			militarysites.back().bo = &bo;
-		}
+		} else if (bo.type == BuildingObserver::WAREHOUSE)
+			++numof_warehouses;
 	}
 }
 
@@ -1359,6 +1420,9 @@ void DefaultAI::lose_building (Building const & b)
 					militarysites.erase(i);
 					break;
 				}
+		} else if (bo.type == BuildingObserver::WAREHOUSE) {
+			assert(numof_warehouses > 0);
+			--numof_warehouses;
 		}
 	}
 	m_buildable_changed = true;
@@ -1391,19 +1455,13 @@ bool DefaultAI::check_supply(BuildingObserver const &bo)
 
 
 /**
- * Updates the first military building in list and reenques it at the end of
- * the list afterwards. If a militarysite is in secure area but holds more than
- * one soldier, the number of stationed soldiers is decreased. If the building
- * is near a border, the number of stationed soldiers is maximized.
- * Further the defaultAi "considers" via this function whether to attack an
+ * The defaultAi "considers" via this function whether to attack an
  * enemy, if opposing military buildings are in sight. In case of an attack it
  * sends all available forces.
  *
  * \returns true, if attack was started.
  */
-bool DefaultAI::military_consideration(int32_t gametime) {
-	next_military_consideration_due = (gametime % 7) * 1000 + gametime;
-
+bool DefaultAI::consider_attack(int32_t gametime) {
 	// Only useable, if it owns at least one militarysite
 	if (militarysites.empty())
 		return false;
@@ -1420,79 +1478,61 @@ bool DefaultAI::military_consideration(int32_t gametime) {
 	uint32_t vision = ms->vision_range();
 	FCoords f = map.get_fcoords(ms->get_position());
 
-	// look if there is any enemy land nearby
-	FindNodeUnowned find_unowned(pn, true);
-
-	if (map.find_fields(Area<FCoords>(f, vision), 0, find_unowned) == 0) {
-		// If no enemy in sight - decrease the number of stationed soldiers
-		// as long as it is > 1
-		uint32_t j = ms->soldierCapacity();
-		if (j > 1)
-			ms->setSoldierCapacity(j - 1);
-		militarysites.push_back(militarysites.front());
-		militarysites.pop_front();
-		return false; //continue;
-	} else {
-		// If an enemy is in sight and the number of stationed soldier is not
-		// at maximum - set it to maximum.
-		uint32_t j = ms->maxSoldierCapacity();
-		if (j > ms->soldierCapacity())
-			ms->setSoldierCapacity(j);
-	}
-
 	// Search in a radius of the vision of the militarysite and collect
 	// information about immovables in the area
 	std::vector<ImmovableFound> immovables;
-	map.find_immovables(Area<FCoords>(f, vision), &immovables);
+	map.find_immovables
+		(Area<FCoords>(f, vision), &immovables, FindImmovableAttackable());
 
 	for (uint32_t j = 0; j < immovables.size(); ++j) {
-		if (!strcmp(immovables[j].object->type_name(), "militarysite")) {
-			if (upcast(MilitarySite, bld, immovables[j].object)) {
-				if (bld->owner().get_player_number() == pn)
+		if (upcast(MilitarySite, bld, immovables[j].object)) {
+			if (bld->owner().get_player_number() == pn)
+				continue;
+			if (bld->canAttack()) {
+				int32_t ta = player->findAttackSoldiers(bld->base_flag());
+				if (ta < 1)
 					continue;
-				if (bld->canAttack()) {
-					int32_t ta = player->findAttackSoldiers(bld->base_flag());
-					if (ta < 1)
-						continue;
 
-					int32_t tc = ta - bld->presentSoldiers().size();
-					if (tc > chance) {
-						target = bld;
-						chance = tc;
-						attackers = ta;
-					}
+				int32_t tc = ta - bld->presentSoldiers().size();
+				if (tc > chance) {
+					target = bld;
+					chance = tc;
+					attackers = ta;
 				}
 			}
-		} else if (!strcmp(immovables[j].object->type_name(), "warehouse"))
-			if (upcast(Warehouse, bld, immovables[j].object)) {
-				if (bld->owner().get_player_number() == pn)
+		} else if (upcast(Warehouse, wh, immovables[j].object)) {
+			if (wh->owner().get_player_number() == pn)
+				continue;
+			if (wh->canAttack()) {
+				int32_t ta = player->findAttackSoldiers(wh->base_flag());
+				if (ta < 1)
 					continue;
-				if (bld->canAttack()) {
-					int32_t ta = player->findAttackSoldiers(bld->base_flag());
-					if (ta < 1)
-						continue;
 
-					// extra priority push!
-					int32_t tc = ta * 2;
-					if (tc > chance) {
-						target = bld;
-						chance = tc;
-						attackers = ta;
-					}
+				// extra priority push!
+				int32_t tc = ta * 2;
+				if (tc > chance) {
+					target = wh;
+					chance = tc;
+					attackers = ta;
 				}
 			}
+		}
 	}
 
 	// Reenque militarysite at the end of list
 	militarysites.push_back(militarysites.front());
 	militarysites.pop_front();
 
-
 	// Return if chance to win is too low
-	if (chance < 3)
+	if (chance < 3) {
+		next_attack_consideration_due = (gametime % 7) * 1000 + gametime;
 		return false;
+	}
 
 	// Attack the selected target.
 	game().send_player_enemyflagaction(target->base_flag(), pn, attackers);
+
+	// Don't attack to fast again - homecoming soldiers must get healed first
+	next_attack_consideration_due = (gametime % 51 + 10) * 1000 + gametime;
 	return true;
 }
