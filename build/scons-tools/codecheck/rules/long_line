@@ -1,7 +1,7 @@
 #!/usr/bin/python -tt
 
 class EvalMatches( object ):
-    def __call__(self, data):
+    def __call__(self, token_stripper, data):
         errors = []
         curline = 1
         for l in data.splitlines():
@@ -13,6 +13,8 @@ class EvalMatches( object ):
 
 
 is_multiline = True
+strip_comments = False
+strip_strings = False
 
 evaluate_matches = EvalMatches()
 

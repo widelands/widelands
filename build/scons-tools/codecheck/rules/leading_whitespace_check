@@ -2,35 +2,118 @@
 
 
 import re
+from collections import defaultdict
+
 class EvalMatches( object ):
+    _indent_words = re.compile(r'\b(for|else|while|return|if)\b')
+    _regexp=re.compile(r"^(([\t ]*).*$)", re.MULTILINE)
+
     def __init__(self):
-        # This matches (and groups) all indentations at line begin
-        self._regexp=re.compile(r"^((\t*).*$)", re.MULTILINE)
+        pass
+                    
+    def _handle_closing_curly_brace(self, cor_lineno, cor_indent, lineno, indent, errors):
+        if len(cor_indent) != len(indent):
+            errors.append((cor_lineno,"Invalid indent for {} braces"))
+            errors.append((cor_lineno,"Opening brace has an indent of %i" % len(cor_indent)))
+            errors.append((lineno,"Closing brace has an indent of %i" % len(indent)))
     
-    def __call__(self, data):
+    def _handle_closing_round_brace(self, cor_lineno, cor_indent, lineno, indent, errors):
+        if len(indent) <= len(cor_indent) or \
+           not indent.startswith(cor_indent):
+            errors.append(
+                (lineno,"Closing parenthesis without matching leading alignment")
+            )
+            errors.append((cor_lineno,"Opening brace has an indent of %i" % len(cor_indent)))
+            errors.append((lineno,"Closing brace has an indent of %i" % len(indent)))
+    
+    def __call__(self, token_stripper, data):
         indents = self._regexp.findall(data)
         
         errors = []
+        
         curline = 1
-
-        allowed_indend = 100
+        allowed_indent = "\t"*100
+        opening_braces = defaultdict( list )
+        
+        bracesets = (
+            ('(', ')'),
+            ('{', '}'),
+        )
+        closing_brace_handlers = {
+            '{': self._handle_closing_curly_brace,
+            '(': self._handle_closing_round_brace,
+        }
 
         for lineno,(line,indent) in enumerate(indents):
             lineno += 1 
+            line = token_stripper.strip_strings(token_stripper.strip_comments(line))
+            if not len(line):
+                indent= ""
             line = line.strip()
+
             if len(line) and line[0] == '#': # Skip macros
                 continue
+
+            # print "line:", line
+            # print "  indent: '%s'" % indent.replace('\t','\\t')
+            # print "  allowed_indent: '%s'" % allowed_indent.replace('\t','\\t')
             
             if len(line) and line[0] == '(': # param lists can be indented twice
-                allowed_indend += 1
+                allowed_indent += '\t\t'
+                    
+            has_unmatched_opening_brace = False
+             
+            # Check for braces
+            for (opening,closing) in bracesets:
+                n_opening = line.count(opening)
+                n_closing = line.count(closing)
+                
+                diff = n_opening - n_closing
+                if diff > 0: # Opening brace
+                    if opening == '(':
+                        has_unmatched_opening_brace = True
+                    opening_braces[opening].append(
+                        (lineno,indent)
+                    )
+                elif diff < 0: # Closing brace
+                    try:
+                        cor_lineno,cor_indent = opening_braces[opening].pop()
+                         
+                        closing_brace_handlers[opening](
+                            cor_lineno, cor_indent,
+                            lineno, indent, errors
+                        )
+                    except IndexError: # Pop from empty list. Unabalenced paren.
+                        pass
 
-            cindend = len(indent)
-            if cindend > allowed_indend:
-                errors.append( (lineno, "Indent is too deep" ) )
-           
-            if cindend:  # Empty lines are ignored
-                allowed_indend = cindend + 1
+            # Check indent relative to previous line
+            cindent = len(indent)
+            if cindent > len(allowed_indent):
+                errors.append( (lineno, "Indent is too deep (allowed are %i)" % len(allowed_indent) ) )
+            else:
+                minlen = min(len(allowed_indent),cindent)
+                if allowed_indent[:minlen] != indent[:minlen]:
+                    errors.append( (lineno, "Indent is invalid. Check for tab/spaces mixup") )
+            
+            # Empty lines are ignored
+            if len(line):
+                # Otherwise, indent is only allowed to increase, when we have 
+                # a { or a ) as last character or some conditional keyword 
+                # on the line
+                
+                if has_unmatched_opening_brace:
+                    allowed_indent = indent + ' ' + '\t'
+                elif line[-1] in ("{:=),"):
+                    allowed_indent = indent + '\t'
+                elif self._indent_words.search(line):
+                    allowed_indent = indent + '\t'
+                else:
+                    allowed_indent = indent
+            
+            # print "  allowed_indent: '%s'" % allowed_indent.replace('\t','\\t')
         
+        # print "errors:", errors
+
         return errors
 
 
@@ -39,23 +122,131 @@ error_msg = ""
 
 evaluate_matches = EvalMatches()
 
-allowed = [
-"""\tHallo {
-\t\tAnything;
-}""",
-"\t\t\n# Macro is ok",
-"\t\t\t\n\n\t", # Empty line is fine 
-"\t\t\t\n\n\t\t\t", # in fact, indent is ignored here
-"""def function
-		(int param1, int param2) {
-	return 0;
-}""", # Nicolais indenting style
 
+#################
+# ALLOWED TESTS #
+#################
+allowed = [
+"""Hallo {
+\tAnything;
+}""",
+"\t\tHi\n# Macro is ignored\n\t\tIs ok",
+"\t\t\t\n\n\t", # Empty line is fine
+"\t\t\t\n\n\t\t\t", # in fact, indent is ignored here
+
+# Test nicolais indenting style for parameter lists
+"""void function
+\t\t(int param1, int param2)
+{
+\treturn 0;
+}""",
+
+# Correct alignment
+"""if
+\t(a < b &&
+\t b > a)""",
+
+# Another correct alignement
+"""\t(new Cmd_Call_Economy_Balance
+\t \t(game->get_gametime() + delta, this, m_request_timerid))
+""",
+
+# Indent after :
+"""
+public:
+\tRouter();
+""",
+
+# Indent after =
+"""
+\tint blah =
+\t\t300+50;
+""",
+
+# Indent after return
+"\treturn\n\t\tm_router->find_route(start, end, route, wait, cost_cutoff, map, nodes);",
+
+# Looks awfull, but is valid
+"""
+\t\t\telse if
+\t\t\t\t(tribe.get_ware_descr(ware_type)->default_target_quantity()
+\t\t\t\t ==
+\t\t\t\t std::numeric_limits<uint32_t>::max())
+\t\t\t\tlog
+""",
+
+# Indent after if
+"""
+\t\tif (2 <= version)
+\t\t\ttry {
+""",
+
+# Ignore content of strings
+# Deliberately with syntax error on second line
+"""
+if
+\t("type is %u but must be one of {%u (WARE), %u (WORKER), "
+\t "blah },
+\t a, b)
+""",
+
+# Ignore content of strings
+"""
+if
+\t("type is %u but must be one of {%u (WARE), %u (WORKER), "
+\t "blah }",
+\t a, b)
+""",
+
+# , is also an indent character
+"""\tRoutingNode() : mpf_cycle(0), mpf_heapindex(0),
+\t\tmpf_realcost(0), mpf_backlink(0), mpf_estimate(0) {}""",
+
+# Checking some problems with comments
+"""
+/*************/
+/* Functions */
+/*************/
+	void _remove_flag(Flag &);
+""",
 ]
 
+###################
+# FORBIDDEN TESTS #
+###################
 forbidden = [
 """\tHallo {
-			Anything;
+\t\t\tAnything;
+\t}""",
+
+# Should also fail when there is no whitespace in front
+"""Hallo {
+\t\tAnything;
 }""",
-    "\t\n\n\t\t\t", # Empty line, wrong indent after 
+
+"\tHi\n\n\t\t\tHi", # Empty line, wrong indent after
+
+# Opening brace has other leading whitespaces as closing brace
+"""RoutingNodeNeighbour(RoutingNode* f, int32_t cost) :
+\t\tm_cost(cost) {
+\t}
+""",
+
+# 4 Spaces == too much indent
+"""
+public:
+    Router();
+""",
+
+# Alignment error
+"""if
+\t(a < b &&
+\tb > a)""",
+
+# Another alignment Error
+"""
+\tstart.mpf_estimate =
+\t\tcost_calculator.calc_cost_estimate
+\t\t (start.get_position(), end.get_position());
+"""
 ]

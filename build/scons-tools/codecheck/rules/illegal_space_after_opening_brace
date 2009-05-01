@@ -37,7 +37,7 @@ allowed = [
     '\tif ((m_readyflags | thisflag) != 3) {  //  codepath a',
     r'// { This is ok',
     r'/// {{{ Like this',
-    r'/* {{{ And this this',
+    r'/* {{{ And this this */',
     r'{ // And this also',
     r'{',
     r'{/',

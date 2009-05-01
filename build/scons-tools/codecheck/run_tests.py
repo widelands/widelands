@@ -5,20 +5,21 @@
 import unittest
 import new
 
-from CodeCheck import CodeChecker
+from CodeCheck import CodeChecker, TokenStripper
 
 class RuleTest(unittest.TestCase):
     "Base class for RuleTesting"
     def __init__( self, checker, val ):
         unittest.TestCase.__init__(self)
+        self.ts = TokenStripper()
         self.c = checker
         self.tv = val
         
     def runTest(self):
         if self.c.multiline:
-            self.rv = self.c.check_text(self.tv)
+            self.rv = self.c.check_text(self.ts, self.tv)
         else:
-            self.rv = self.c.check_line(self.tv)
+            self.rv = self.c.check_line(self.ts, self.tv)
         self._do_test()
 
 class AllowedTest(RuleTest):
@@ -58,13 +59,20 @@ def _make_tests_from_checker( c ):
     return allowed_tests + forbidden_tests
 
 if __name__ == '__main__':
+    import sys
+    
     d = CodeChecker()
-
+    
     suite = unittest.TestSuite()
     
-    for checker in d._checkers:
-        suite.addTests( _make_tests_from_checker(checker) )
-    for checker in d._mlcheckers:
-        suite.addTests( _make_tests_from_checker(checker) )
+    if len(sys.argv) > 1:
+        for checker in (d._checkers + d._mlcheckers):
+            if checker.name in sys.argv:
+                suite.addTests( _make_tests_from_checker(checker) )
+    else:
+        for checker in d._checkers:
+            suite.addTests( _make_tests_from_checker(checker) )
+        for checker in d._mlcheckers:
+            suite.addTests( _make_tests_from_checker(checker) )
 
     unittest.TextTestRunner(verbosity=1).run(suite)

@@ -10,11 +10,90 @@ around). En plus, we also replace the spurious code checking done with grep
 which is currently also around. 
 """
 
-import os
-from glob import glob
-import re
 from collections import defaultdict
+from glob import glob
 from time import time
+import os
+import re
+
+class TokenStripper(object):
+    """
+    This class knows how to remove certain
+    strings from given lines
+    """
+    _literal_strings = re.compile(r'''(?x)
+".*?
+(
+    (\\\\")|
+    ([^\\]")   |       # End of string
+$)
+    ''')
+
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self._in_comment = False
+        self._comm_cache = {}
+        self._str_cache = {}
+
+    def strip_comments(self,given_line):
+        cached_line = self._comm_cache.get(given_line,None)
+        if cached_line:
+            return cached_line
+        line = given_line
+
+        # Multiline comments
+        start_idx = given_line.find('/*')
+        if not self._in_comment:
+            if start_idx != -1:
+                stop_idx = line.find("*/") 
+                if stop_idx != -1:
+                    line = line[stop_idx+2:]
+                else:
+                    self._in_comment = True
+                
+                line = line[:start_idx+2].strip()
+
+        if self._in_comment:
+            stop_idx = line.find('*/')
+            if stop_idx == -1:
+                line = "" 
+            else:
+                line = line[stop_idx+2:].strip()
+                self._in_comment = False
+
+        # Single line comments
+        idx = line.find('//')
+        if idx != -1:
+            line = line[:idx+2].strip()
+       
+        self._comm_cache[given_line] = line
+
+        return line
+        
+    def strip_strings(self,line):
+        r"""
+        Strips all cstring literals from line. String contents
+        are replace by spaces. 
+
+        >>> _do_strip_strings(r'"Hallo"')
+        '"     "'
+        >>> _do_strip_strings(r'blah "string with \"escaped\" text" more blah')
+        'blah "                            " more blah'
+        >>> _do_strip_strings(r'blah "string with \\"upsy" \\"upsyagain"\\text" more blah')
+        'blah "              "upsy"   "upsyagain"      " more blah'
+        """
+        cached_line = self._str_cache.get(line,None)
+        if cached_line:
+            return cached_line
+
+        # Strings are replaced with blanks 
+        newline = self._literal_strings.sub(lambda k: '"%s"' % ((len(k.group(0))-2)*" "),line)
+         
+        self._str_cache[line] = newline
+
+        return newline
 
 class CheckingRule(object):
     """
@@ -26,9 +105,13 @@ class CheckingRule(object):
         if self._is_multiline:
             self._evaluate_matches = vars['evaluate_matches']
             self._error_msg = None
+            self._strip_comments = False
+            self._strip_strings = False
         else:
             self._regexp = re.compile(vars["regexp"])
             self._error_msg = vars["error_msg"]
+            self._strip_comments = vars.get('strip_comments',True)
+            self._strip_strings = vars.get('strip_strings',True)
        
         def _to_tuple(a):
             if isinstance(a,str):
@@ -38,7 +121,7 @@ class CheckingRule(object):
 
         self.allowed = _to_tuple(vars["allowed"])
         self.forbidden  = _to_tuple(vars["forbidden"])
-
+    
     @property
     def multiline(self):
         return self._is_multiline
@@ -47,24 +130,31 @@ class CheckingRule(object):
     def error_msg(self):
         return self._error_msg
 
-    def check_text(self, data):
+    def check_text(self, token_stripper, data):
         if not self._is_multiline:
             raise RuntimeError("I am not a Multiline rule. Call check_line!")
         
+        token_stripper = TokenStripper()
+
         # Delegate work to Rule
-        matches = self._evaluate_matches(data)
+        matches = self._evaluate_matches(token_stripper, data)
         
         return matches
 
-    def check_line(self,line):
+    def check_line(self,token_stripper,line):
         if self._is_multiline:
             raise RuntimeError("I am a Multiline rule. Call check_text!")
         
+        if self._strip_comments:
+            line = token_stripper.strip_comments(line)
+        if self._strip_strings:
+            line = token_stripper.strip_strings(line)
+
         m = self._regexp.search( line )
         if m:
             return True
         return False
-    
+
 ###################
 # Helper function #
 ###################
@@ -174,28 +264,30 @@ class CodeChecker(object):
         errors = []
        
         bm = defaultdict(lambda: 0.)
-         
+            
+        token_stripper = TokenStripper()
+
         # Check line by line (currently)
         data = open(fn).read()
         for lidx,line in enumerate(data.splitlines(False)):
             for c in self._checkers:
                 if self._benchmark:
                     start = time()
-                    if c.check_line(line):
+                    if c.check_line(token_stripper,line):
                         errors.append( (fn,lidx+1,c.error_msg) )
                     bm[c.name] += time()-start
                 else:
-                    if c.check_line(line):
+                    if c.check_line(token_stripper,line):
                         errors.append( (fn,lidx+1,c.error_msg) )
 
         for c in self._mlcheckers:
             if self._benchmark:
                 start = time()
-                e =  c.check_text( data )
+                e =  c.check_text( token_stripper, data )
                 errors.extend( [ (fn,lidx,em) for lidx,em in e ] )
                 bm[c.name] += time()-start
             else:
-                e =  c.check_text( data )
+                e =  c.check_text( token_stripper, data )
                 errors.extend( [ (fn,lidx,em) for lidx,em in e ] )
        
         errors.sort(key=lambda a: a[1])

@@ -1,0 +1,40 @@
+#!/usr/bin/env python -tt
+# encoding: utf-8
+#
+
+"""
+Checking for forbidden
+TypeName* and TypeName& which should have a space before
+"""
+
+# We're no longer passed any comments, therefore
+# checking for them is not really needed
+
+error_msg="TypeName* or TypeName& are forbidden. Insert a space after TypeName."
+
+regexp = r"""(?x)
+(
+    ([^\s/*(\>]\*(?!/))|   # Extra care for end of comment
+    ([^\s&(\>]&)
+)
+"""
+
+allowed = [
+    "RoutingNode * a;",
+    "Blahtype & b;",
+    "/** Some comment",
+    "std::vector<RoutingNode *> & nodes",
+    "if (a && b)",
+	"\tOpen.push(&start);"
+    "\t\t*reinterpret_cast<std::vector<RoutingNode *>*>(&m_flags);",
+    "std::vector<RoutingNode *>& nodes",
+	"/* warehouses can determine max idle priority*/",
+	"blah // I *wanna* do that",
+]
+forbidden = [
+    "RoutingNode* a;",
+    "Blahtype& b;",
+    "std::vector<RoutingNode*> & nodes",
+]
+
+
