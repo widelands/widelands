@@ -118,7 +118,7 @@ private:
 	Enhancements m_enhancements;
 	bool         m_enhanced_building; // if it is one, it is bulldozable
 	BuildingHints       m_hints; //  hints (knowledge) for computer players
-	
+
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t m_vision_range;
 };
