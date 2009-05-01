@@ -908,7 +908,7 @@ bool DefaultAI::construct_roads (int32_t gametime)
 	}
 
 	// No need to connect, if only one economy
-	if ((economies_to_connect < 2) | eo_to_connect->flags.empty())
+	if ((economies_to_connect < 2) || eo_to_connect->flags.empty())
 		return false;
 
 	// Try to connect - this should work fine as in nearly all cases we simply
