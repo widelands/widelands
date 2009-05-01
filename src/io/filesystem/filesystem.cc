@@ -439,7 +439,7 @@ char const * FileSystem::FS_Filename(char const * p, char const * & extension)
 /// \throw FileTypeError if root is neither a directory or regular file
 /// \todo throw FileTypeError if root is not a zipfile (exception from
 /// ZipFilesystem)
-FileSystem * FileSystem::Create(std::string const & root)
+FileSystem & FileSystem::Create(std::string const & root)
 throw (FileType_error, FileNotFound_error, FileAccessDenied_error)
 {
 	struct stat statinfo;
@@ -461,10 +461,10 @@ throw (FileType_error, FileNotFound_error, FileAccessDenied_error)
 	}
 
 	if (S_ISDIR(statinfo.st_mode)) {
-		return new RealFSImpl(root);
+		return *new RealFSImpl(root);
 	}
 	if (S_ISREG(statinfo.st_mode)) { //TODO: ensure root is a zipfile
-		return new ZipFilesystem(root);
+		return *new ZipFilesystem(root);
 	}
 
 	throw FileType_error

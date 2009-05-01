@@ -366,7 +366,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 	}
 
 	FileSystem & fs =
-		*g_fs->CreateSubFileSystem
+		g_fs->CreateSubFileSystem
 			(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
 	Widelands::Map_Saver wms(fs, m_parent->egbase());
 	try {

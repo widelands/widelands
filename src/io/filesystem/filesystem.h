@@ -89,13 +89,13 @@ struct FileSystem {
 	 */
 	virtual StreamWrite * OpenStreamWrite(std::string const & fname) = 0;
 
-	virtual FileSystem * MakeSubFileSystem(std::string const & dirname) = 0;
-	virtual FileSystem * CreateSubFileSystem
-		(std::string const & dirname, const Type) = 0;
+	virtual FileSystem &   MakeSubFileSystem(std::string const & dirname) = 0;
+	virtual FileSystem & CreateSubFileSystem
+		(std::string const & dirname, Type) = 0;
 	virtual void Unlink(std::string const &) = 0;
 	virtual void Rename(std::string const &, std::string const &) = 0;
 
-	static FileSystem *Create(std::string const & root)
+	static FileSystem & Create(std::string const & root)
 	throw (FileType_error, FileNotFound_error, FileAccessDenied_error);
 
 	///Retrieve the filesystem root's name == the mountpoint inside a
@@ -109,7 +109,11 @@ struct FileSystem {
 	std::string FS_CanonicalizeName(std::string const & path) const;
 	static std::string AutoExtension
 		(std::string const & filename, std::string const & extension);
-	static const char *FS_RelativePath(char *buf, const int32_t buflen, const char *basefile, const char *filename);
+	static char const * FS_RelativePath
+		(char       * buf,
+		 int32_t      buflen,
+		 char const * basefile,
+		 char const * filename);
 	bool pathIsAbsolute(std::string const & path) const;
 	std::string              AbsolutePath(std::string const & path) const;
 	std::vector<std::string> FS_Tokenize (std::string const & path) const;

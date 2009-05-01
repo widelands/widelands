@@ -403,9 +403,9 @@ void Fullscreen_Menu_LaunchGame::select_savegame()
 	m_filename = lsgm.filename();
 
 	// Read the needed data from file "elemental" of the used map.
-	FileSystem *l_fs = g_fs->MakeSubFileSystem(m_filename.c_str());
+	FileSystem & l_fs = g_fs->MakeSubFileSystem(m_filename.c_str());
 	Profile prof;
-	prof.read("map/elemental", 0, *l_fs);
+	prof.read("map/elemental", 0, l_fs);
 	Section & s = prof.get_safe_section("global");
 
 	std::string mapname = _("(Save): ") + std::string(s.get_safe_string("name"));
@@ -489,9 +489,9 @@ void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t pos)
  */
 void Fullscreen_Menu_LaunchGame::load_previous_playerdata()
 {
-	FileSystem *l_fs = g_fs->MakeSubFileSystem(m_filename.c_str());
+	FileSystem & l_fs = g_fs->MakeSubFileSystem(m_filename.c_str());
 	Profile prof;
-	prof.read("map/player_names", 0, *l_fs);
+	prof.read("map/player_names", 0, l_fs);
 	std::string strbuf;
 	char buf[32];
 

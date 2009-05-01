@@ -130,7 +130,6 @@ extern Map_Object_Descr g_flag_descr;
 /// If you find a better way to do this that doesn't cost a virtual function or additional
 /// member variable, go ahead
 #define MO_DESCR(type) \
-public: __attribute__ ((deprecated)) type const * get_descr() const {return dynamic_cast<type const *>(m_descr);}\
 public: const type & descr() const {return dynamic_cast<const type &>(*m_descr);}
 
 class Map_Object {
@@ -185,7 +184,7 @@ public:
 	};
 
 protected:
-	Map_Object(const Map_Object_Descr * const descr);
+	Map_Object(Map_Object_Descr const * descr);
 	virtual ~Map_Object() {}
 
 public:

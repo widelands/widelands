@@ -39,7 +39,7 @@ Route::Route() : m_totalcost(0)
 {}
 
 /**
- * Completely clear the route and intialize it
+ * Completely clear the route and initialize it
  * to its totalcost
 */
 void Route::init(int32_t totalcost)
@@ -123,9 +123,9 @@ void Route::save
 	fw.Signed32(get_totalcost());
 	fw.Unsigned16(m_route.size());
 	for
-	   (std::vector<Object_Ptr>::size_type idx = 0;
-		idx < m_route.size();
-		++idx)
+		(std::vector<Object_Ptr>::size_type idx = 0;
+		 idx < m_route.size();
+		 ++idx)
 	{
 		Flag & flag = get_flag(egbase, idx);
 		assert(mos->is_object_known(flag));

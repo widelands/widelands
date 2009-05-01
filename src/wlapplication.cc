@@ -175,12 +175,10 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		path += "/.widelands";
 		try {
 			g_fs->AddFileSystem(FileSystem::Create(path.c_str()));
-		}
-		catch (FileNotFound_error e) {}
-		catch (FileAccessDenied_error e) {
+		} catch (FileNotFound_error     const & e) {
+		} catch (FileAccessDenied_error const & e) {
 			log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
-		}
-		catch (FileType_error e) {
+		} catch (FileType_error         const & e) {
 			//TODO: handle me
 		}
 	} else {

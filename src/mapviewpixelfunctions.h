@@ -29,9 +29,14 @@ namespace Widelands {struct Map;}
 namespace MapviewPixelFunctions {
 
 float calc_brightness
-	(const int32_t l, const int32_t r, const int32_t tl, const int32_t tr, const int32_t bl, const int32_t br);
+	(int32_t const l,
+	 int32_t const r,
+	 int32_t const tl,
+	 int32_t const tr,
+	 int32_t const bl,
+	 int32_t const br);
 
-uint32_t calc_pix_distance(Widelands::Map const &, Point a, Point b);
+uint32_t calc_pix_distance(Widelands::Map const &, Point, Point);
 
 uint32_t get_map_end_screen_x(Widelands::Map const &);
 uint32_t get_map_end_screen_y(Widelands::Map const &);

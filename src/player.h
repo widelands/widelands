@@ -87,7 +87,6 @@ struct Player :
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
 	Player_Number get_player_number() const throw () {return m_plnum;}
 	RGBColor const * get_playercolor() const {return m_playercolor;}
-	__attribute__ ((deprecated)) const Tribe_Descr * get_tribe() const throw () {return &tribe();}
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 
 	const std::string & get_name() const throw () {return m_name;}

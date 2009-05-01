@@ -88,7 +88,8 @@ public:
 
 	// For Save/Load Games
 	void Read(FileRead &, Editor_Game_Base &, Map_Map_Object_Loader *);
-	void Write(FileWrite &, Editor_Game_Base & egbase, Map_Map_Object_Saver *) const;
+	void Write
+		(FileWrite &, Editor_Game_Base & egbase, Map_Map_Object_Saver *) const;
 
 private:
 	boost::shared_ptr<BaseCapsule> m;

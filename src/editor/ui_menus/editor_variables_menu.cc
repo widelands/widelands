@@ -300,7 +300,8 @@ void Editor_Variables_Menu::clicked_new() {
 }
 void Editor_Variables_Menu::clicked_edit() {
 	Edit_Variable_Window evw(m_parent, m_table.get_selected_record());
-	if (evw.run()) m_table.sort();
+	if (evw.run())
+		m_table.sort();
 }
 void Editor_Variables_Menu::clicked_del()      {
 	//  Otherwise, delete button should be disabled.
@@ -316,7 +317,7 @@ void Editor_Variables_Menu::clicked_del()      {
 /**
  * The table has been selected
  */
-void Editor_Variables_Menu::table_selected(uint32_t n) {
+void Editor_Variables_Menu::table_selected(uint32_t const n) {
 	assert(n < UI::Table<Variable &>::no_selection_index());
 	m_button_edit.set_enabled(true);
 

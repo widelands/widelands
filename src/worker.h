@@ -75,7 +75,9 @@ public:
 	char const * type_name() const throw () {return "worker";}
 	virtual Bob::Type get_bob_type() const throw () {return Bob::WORKER;}
 
-	uint32_t get_animation(const char * const str) const {return descr().get_animation(str);}
+	uint32_t get_animation(char const * const str) const {
+		return descr().get_animation(str);
+	}
 	uint32_t icon() const throw () {return descr().icon();}
 	Ware_Index becomes() const throw () {return descr().becomes();}
 	const Tribe_Descr * get_tribe() const throw () {return descr().get_tribe();}

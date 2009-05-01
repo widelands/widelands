@@ -91,7 +91,6 @@ struct Terrain_Descr {
 	uint32_t         get_texture() const throw () {return m_texture;}
 	uint8_t        get_is     () const throw () {return m_is;}
 	const std::string & name() const throw () {return m_name;}
-	__attribute__ ((deprecated)) const char * get_name   () const throw () {return m_name.c_str();}
 	int32_t resource_value(const Resource_Index resource) const throw () {
 		return
 			resource == get_default_resources() or is_resource_valid(resource) ?

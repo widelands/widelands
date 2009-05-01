@@ -70,7 +70,6 @@ struct Tribe_Descr {
 
 
 	const std::string & name() const throw () {return m_name;}
-	__attribute__ ((deprecated)) const std::string & get_name() const throw () {return m_name;}
 	const World & world() const throw () {return m_world;}
 
 	Ware_Index get_nrworkers() const {return m_workers.get_nitems();}
@@ -110,7 +109,9 @@ struct Tribe_Descr {
 	Building_Index building_index(char const * const buildingname) const {
 		return m_buildings.get_index(buildingname);
 	}
-	int32_t get_immovable_index(char const * l) const {return m_immovables.get_index(l);}
+	int32_t get_immovable_index(char const * const l) const {
+		return m_immovables.get_index(l);
+	}
 	int32_t get_nr_immovables() {return m_immovables.get_nitems();}
 	Immovable_Descr * get_immovable_descr(int32_t const index) const {
 		return m_immovables.get(index);

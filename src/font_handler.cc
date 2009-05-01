@@ -148,7 +148,7 @@ void Font_Handler::draw_string
 		g_gr->get_picture_size(*widget_cache_id, w, h);
 		picid = *widget_cache_id;
 	}
-	do_align(align, &dstpoint.x, &dstpoint.y, w, h);
+	do_align(align, dstpoint.x, dstpoint.y, w, h);
 	dst.blit(dstpoint, picid);
 }
 
@@ -712,21 +712,25 @@ uint32_t Font_Handler::convert_sdl_surface
 }
 
 //Sets dstx and dsty to values for a specified align
-void Font_Handler::do_align(Align align, int32_t *dstx, int32_t *dsty, int32_t w, int32_t h) {
+void Font_Handler::do_align
+	(Align const align,
+	 int32_t & dstx, int32_t & dsty,
+	 int32_t const w, int32_t const h)
+{
 	//Vertical Align
 	if (align & (Align_VCenter|Align_Bottom)) {
 		if (align & Align_VCenter)
-			*dsty -= (h + 1) / 2; //  +1 for slight bias to top
+			dsty -= (h + 1) / 2; //  +1 for slight bias to top
 		else
-			*dsty -= h;
+			dsty -= h;
 	}
 
 	//Horizontal Align
 	if ((align & Align_Horizontal) != Align_Left) {
 		if (align & Align_HCenter)
-			*dstx -= w / 2;
+			dstx -= w / 2;
 		else if (align & Align_Right)
-			*dstx -= w;
+			dstx -= w;
 	}
 }
 

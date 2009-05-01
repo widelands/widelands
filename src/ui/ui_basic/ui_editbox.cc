@@ -130,7 +130,7 @@ uint32_t EditBox::maxLength() const
  * If the current string is longer than the new maximum length,
  * its end is cut off to fit into the maximum length.
  */
-void EditBox::setMaxLength(uint32_t n)
+void EditBox::setMaxLength(uint32_t const n)
 {
 	m->maxLength = n;
 

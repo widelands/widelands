@@ -56,9 +56,6 @@ struct Coords {
 		return not (*this == other);
 	}
 
-	__attribute__((deprecated)) bool is_valid () const throw ()
-	{return x != -1 and y != -1;}
-
 	operator bool() const throw () {return *this != Null();}
 
 	/**

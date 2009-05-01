@@ -40,7 +40,7 @@ class Surface;
 struct Graphic;
 
 ///\todo Get rid of this global function
-SDL_Surface * LoadImage(char const * const filename);
+SDL_Surface * LoadImage(char const * filename);
 
 /**
  * A renderer to get pixels to a 16bit framebuffer.

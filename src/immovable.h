@@ -141,8 +141,7 @@ public:
 	void cleanup(Editor_Game_Base &);
 	void act(Game &, uint32_t data);
 
-	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
+	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
 
 	void switch_program(Game & game, std::string const & programname);
 

@@ -44,7 +44,7 @@ throw (_wexception)
 	//  Now Load the map as it would be a normal map saving.
 	delete m_wml;
 
-	m_wml = new WL_Map_Loader(*fs.MakeSubFileSystem("map"), &game.map());
+	m_wml = new WL_Map_Loader(fs.MakeSubFileSystem("map"), &game.map());
 
 	m_wml->preload_map(true);
 	m_wml->load_world();
@@ -66,15 +66,14 @@ void Game_Map_Data_Packet::Write
 throw (_wexception)
 {
 
-	FileSystem * const mapfs = fs.CreateSubFileSystem("map", FileSystem::DIR);
+	std::auto_ptr<FileSystem> mapfs
+		(&fs.CreateSubFileSystem("map", FileSystem::DIR));
 
 	//  Now Write the map as it would be a normal map saving.
 	delete m_wms;
 	m_wms = new Map_Saver(*mapfs, game);
 	m_wms->save();
 	m_mos = m_wms->get_map_object_saver();
-
-	delete mapfs;
 }
 
 };

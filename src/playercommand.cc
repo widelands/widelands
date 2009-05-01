@@ -750,7 +750,8 @@ void Cmd_ResetTargetQuantity::execute(Game & game)
 		(economy  () < player.get_nr_economies() and
 		 ware_type() < tribe.get_nrwares())
 	{
-		int32_t count = tribe.get_ware_descr(ware_type())->default_target_quantity();
+		int32_t const count =
+			tribe.get_ware_descr(ware_type())->default_target_quantity();
 		player.get_economy_by_number(economy())->set_target_quantity
 			(ware_type(),  count, count, 0);
 	}

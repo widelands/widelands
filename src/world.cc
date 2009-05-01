@@ -154,8 +154,8 @@ World::World(std::string const & name) : m_basedir("worlds/" + name + '/') {
 	try {
 		i18n::Textdomain textdomain(m_basedir);
 
-		FileSystem & fs = *g_fs->MakeSubFileSystem(m_basedir);
-		g_fs->AddFileSystem(&fs);
+		FileSystem & fs = g_fs->MakeSubFileSystem(m_basedir);
+		g_fs->AddFileSystem(fs);
 
 		{
 			Profile root_conf((m_basedir + "conf").c_str());
@@ -175,7 +175,7 @@ World::World(std::string const & name) : m_basedir("worlds/" + name + '/') {
 			global_root_conf.check_used();
 		}
 
-		g_fs->RemoveFileSystem(&fs);
+		g_fs->RemoveFileSystem(fs);
 	} catch (std::exception const & e) {
 		// tag with world name
 		throw wexception("Error loading world %s: %s", name.c_str(), e.what());
@@ -292,7 +292,7 @@ bool World::exists_world(std::string worldname)
 		f.TryOpen
 			(*
 			 std::auto_ptr<FileSystem>
-			 	(g_fs->MakeSubFileSystem("worlds/" + worldname)),
+			 	(&g_fs->MakeSubFileSystem("worlds/" + worldname)),
 			 "conf");
 }
 

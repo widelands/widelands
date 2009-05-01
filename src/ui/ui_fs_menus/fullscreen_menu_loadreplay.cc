@@ -113,9 +113,8 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 
 		try {
 			Widelands::Game_Preload_Data_Packet gpdp;
-			std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(savename));
 			Widelands::Game game;
-			Widelands::Game_Loader gl(*fs, game);
+			Widelands::Game_Loader gl(savename, game);
 			gl.preload_game(gpdp);
 
 			char const * extension, * fname =

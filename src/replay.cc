@@ -86,9 +86,7 @@ ReplayReader::ReplayReader(Game & game, std::string const & filename)
 	m_replaytime = 0;
 
 	{
-		std::auto_ptr<FileSystem> const fs
-			(g_fs->MakeSubFileSystem(filename + WLGF_SUFFIX));
-		Game_Loader gl(*fs, game);
+		Game_Loader gl(filename + WLGF_SUFFIX, game);
 		gl.load_game();
 	}
 
@@ -238,14 +236,12 @@ ReplayWriter::ReplayWriter(Game & game, std::string const & filename)
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 
 	log("Reloading the game from replay\n");
+	game.cleanup_for_load(true, true);
 	{
-		std::auto_ptr<FileSystem> const fs
-			(g_fs->MakeSubFileSystem(filename + WLGF_SUFFIX));
-		Game_Loader gl(*fs, game);
-		game.cleanup_for_load(true, true);
+		Game_Loader gl(filename + WLGF_SUFFIX, game);
 		gl.load_game();
-		game.postload();
 	}
+	game.postload();
 	log("Done reloading the game from replay\n");
 
 	game.enqueue_command

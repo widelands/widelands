@@ -45,8 +45,8 @@ struct LayeredFileSystem : public FileSystem {
 	LayeredFileSystem();
 	virtual ~LayeredFileSystem();
 
-	virtual void AddFileSystem(FileSystem * const fs);
-	virtual void RemoveFileSystem(FileSystem * const fs);
+	virtual void    AddFileSystem(FileSystem &);
+	virtual void RemoveFileSystem(FileSystem &);
 
 	virtual int32_t FindFiles
 		(std::string const & path,
@@ -67,8 +67,8 @@ struct LayeredFileSystem : public FileSystem {
 	virtual StreamRead  * OpenStreamRead (std::string const & fname);
 	virtual StreamWrite * OpenStreamWrite(std::string const & fname);
 
-	virtual FileSystem * MakeSubFileSystem(std::string const & dirname);
-	virtual FileSystem * CreateSubFileSystem
+	virtual FileSystem &   MakeSubFileSystem(std::string const & dirname);
+	virtual FileSystem & CreateSubFileSystem
 		(std::string const & dirname, Type);
 	virtual void Unlink(std::string const & file);
 	virtual void Rename(std::string const &, std::string const &);

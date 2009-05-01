@@ -109,7 +109,7 @@ public:
 	int32_t get_length() {return nodes.size();}
 
 	bool has_node(RoutingNode * n) {
-		for (Nodes::iterator i = nodes.begin(); i != nodes.end(); i++) {
+		for (Nodes::iterator i = nodes.begin(); i != nodes.end(); ++i) {
 			if (*i == n)
 				return true;
 		}
@@ -150,7 +150,7 @@ public:
 	}
 
 	void print() {
-		for (Nodes::iterator i = nodes.begin(); i < nodes.end(); i++) {
+		for (Nodes::iterator i = nodes.begin(); i < nodes.end(); ++i) {
 			BOOST_MESSAGE(*i);
 		}
 	}
@@ -166,7 +166,6 @@ private:
 /*************************************************************************/
 BOOST_AUTO_TEST_SUITE(Routing)
 
-// {{{ TestingRoutingNode Test Cases
 /*
  * First test the TestingRoutingNode class, so that we
  * are sure it works in the other tests
@@ -374,7 +373,7 @@ BOOST_FIXTURE_TEST_CASE
 {
 	d0->add_neighbour(d1);
 	d1->add_neighbour(d0);
-	
+
 	bool rval = r.find_route
 		(*d0, *d1,
 		 &route,
@@ -446,7 +445,7 @@ struct ComplexRouterFixture {
 
 		// Some random dead ends
 		TestingRoutingNode * d_new = new_node_w_neighbour(d);
-        d_new = new_node_w_neighbour(d_new);
+		d_new = new_node_w_neighbour(d_new);
 
 		TestingRoutingNode * dnew_2 = new_node_w_neighbour(d_new);
 		new_node_w_neighbour(dnew_2);

@@ -53,8 +53,8 @@ struct ZipFilesystem : public FileSystem {
 	virtual StreamWrite * OpenStreamWrite
 		(const std::string & fname) __attribute__ ((noreturn));
 
-	virtual FileSystem *   MakeSubFileSystem(std::string const & dirname);
-	virtual FileSystem * CreateSubFileSystem
+	virtual FileSystem &   MakeSubFileSystem(std::string const & dirname);
+	virtual FileSystem & CreateSubFileSystem
 		(std::string const & dirname, Type);
 	virtual void Unlink(std::string const & filename)
 		__attribute__ ((noreturn));

@@ -174,21 +174,21 @@ bool RealFSImpl::IsDirectory(std::string const & path) {
 /**
  * Create a sub filesystem out of this filesystem
  */
-FileSystem * RealFSImpl::MakeSubFileSystem(std::string const & path) {
+FileSystem & RealFSImpl::MakeSubFileSystem(std::string const & path) {
 	assert(FileExists(path)); //TODO: throw an exception instead
 	std::string const fullname = FS_CanonicalizeName(path);
 	//printf("RealFSImpl MakeSubFileSystem path %s fullname %s\n", path.c_str(), fullname.c_str());
 
 	if (IsDirectory(path))
-		return new RealFSImpl   (fullname);
+		return *new RealFSImpl   (fullname);
 	else
-		return new ZipFilesystem(fullname);
+		return *new ZipFilesystem(fullname);
 }
 
 /**
  * Create a sub filesystem out of this filesystem
  */
-FileSystem * RealFSImpl::CreateSubFileSystem
+FileSystem & RealFSImpl::CreateSubFileSystem
 	(std::string const & path, Type const fs)
 {
 	if (FileExists(path))
@@ -202,9 +202,9 @@ FileSystem * RealFSImpl::CreateSubFileSystem
 
 	if (fs == FileSystem::DIR) {
 		EnsureDirectoryExists(path);
-		return new RealFSImpl(fullname);
+		return *new RealFSImpl(fullname);
 	} else
-		return new ZipFilesystem(fullname);
+		return *new ZipFilesystem(fullname);
 }
 
 /**
@@ -292,7 +292,7 @@ void RealFSImpl::EnsureDirectoryExists(std::string const & dirname) {
 		MakeDirectory(dirname);
 	} catch (DirectoryCannotCreate_error const & e) {
 		// need more work to do it right
-		// itterate through all possible directories
+		//  iterate through all possible directories
 		size_t it = 0;
 		while (it != dirname.size() && it != std::string::npos) {
 			it = dirname.find('/', it);

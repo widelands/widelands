@@ -101,7 +101,8 @@ struct Font_Handler {
 	std::string word_wrap_text
 		(const std::string & font, const int32_t size,
 		 const std::string & unwrapped_text, const int32_t max_width);
-	void do_align(Align align, int32_t *dstx, int32_t *dsty, int32_t w, int32_t h);
+	void do_align
+		(Align align, int32_t & dstx, int32_t & dsty, int32_t w, int32_t h);
 	// This deletes all cached pictures, it is called
 	// from the graphics code before the graphics are flushed,
 	// to make sure that everything is forgotten

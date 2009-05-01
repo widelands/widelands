@@ -26,10 +26,10 @@
 
 struct Editor_Tool_Options_Menu : public UI::UniqueWindow {
 	Editor_Tool_Options_Menu
-		(Editor_Interactive         &       parent,
+		(Editor_Interactive         & parent,
 		 UI::UniqueWindow::Registry &,
 		 const uint32_t widht, const uint32_t height,
-		 const char                 * const title);
+		 char const                 * title);
 
 	/**
 	 * Selects the correct tool from the parent.

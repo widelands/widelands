@@ -48,7 +48,6 @@ private:
 
 	UI::Textarea * m_name, * m_author, * m_size, * m_world, * m_nrplayers;
 	UI::Multiline_Textarea * m_descr;
-	Editor_Interactive * m_parent;
 	UI::Listselect<const char *> * m_ls;
 	UI::Callback_Button<Main_Menu_Load_Map> * m_ok_btn;
 

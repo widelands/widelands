@@ -127,8 +127,7 @@ protected:
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void destroy(Editor_Game_Base &);
 
-	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
+	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
 
 	void wake_up_capacity_queue(Game &);
 
@@ -140,17 +139,17 @@ private:
 	uint32_t     m_anim;
 	int32_t      m_animstart;
 
-	Building    *m_building; ///< attached building (replaces road WALK_NW)
-	Road        *m_roads[6];      ///< Map_Object::WALK_xx - 1 as index
+	Building    * m_building; ///< attached building (replaces road WALK_NW)
+	Road        * m_roads[6]; ///< Map_Object::WALK_xx - 1 as index
 	int32_t      m_items_pending[6];
 
 	int32_t      m_item_capacity; ///< size of m_items array
 	int32_t      m_item_filled; ///< number of items currently on the flag
-	PendingItem *m_items;         ///< items currently on the flag
+	PendingItem * m_items;    ///< items currently on the flag
 
 	/// call_carrier() will always call a carrier when the destination is
 	/// the given flag
-	Flag        *m_always_call_for_flag;
+	Flag        * m_always_call_for_flag;
 
 	typedef std::vector<OPtr<Worker> > CapacityWaitQueue;
 	CapacityWaitQueue m_capacity_wait; ///< workers waiting for capacity

@@ -32,22 +32,19 @@ class RoutingNode;
  * This class finds the best route between Nodes (Flags) in an economy.
  * The functionality was split from Economy
  */
-class Router {
-private:
-	uint32_t mpf_cycle;       ///< pathfinding cycle, see Flag::mpf_cycle
+struct Router {
+	Router();
 
-public:
-    Router();
-
-    bool find_route
+	bool find_route
 		(RoutingNode & start, RoutingNode & end,
 		 IRoute * route,
 		 bool    wait,
 		 int32_t cost_cutoff,
-         ITransportCostCalculator& cost_calculator,
-         std::vector<RoutingNode*>& nodes);
+		 ITransportCostCalculator   & cost_calculator,
+		 std::vector<RoutingNode *> & nodes);
 
-
+private:
+	uint32_t mpf_cycle;       ///< pathfinding cycle, see Flag::mpf_cycle
 };
 
 }

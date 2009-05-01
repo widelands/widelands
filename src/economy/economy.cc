@@ -167,10 +167,10 @@ bool Economy::find_route
 	Map & map = owner().egbase().map();
 
 	std::vector<RoutingNode *> & nodes =
-	   *reinterpret_cast<std::vector<RoutingNode *>*>(&m_flags);
+		*reinterpret_cast<std::vector<RoutingNode *> *>(&m_flags);
 
 	return
-	   m_router->find_route(start, end, route, wait, cost_cutoff, map, nodes);
+		m_router->find_route(start, end, route, wait, cost_cutoff, map, nodes);
 }
 
 
@@ -228,8 +228,10 @@ void Economy::_remove_flag(Flag & flag)
  * This is called from Cmd_ResetTargetQuantity and Cmd_SetTargetQuantity
  */
 void Economy::set_target_quantity
-	  (Ware_Index ware_type, uint32_t permanent,
-	   uint32_t temporary, Time mod_time)
+	(Ware_Index const ware_type,
+	 uint32_t   const permanent,
+	 uint32_t   const temporary,
+	 Time       const mod_time)
 {
 	Target_Quantity & tq = m_target_quantities[ware_type.value()];
 	tq.temporary = temporary;

@@ -38,7 +38,7 @@ struct Flag;
  * At the moment defaultAI should be able to build up a basic infrastructure
  * including food, mining and smithing infrastructure and a basic street net.
  * It should be able to expand it's territory and to recruit some soldiers from
- * the weapons made out of it's mined ressources.
+ * the weapons made out of it's mined resources.
  * It does only construct buildable and allowed (scenario mode) buildings.
  * It behaves after preciousness of a ware, which can be defined in wares conf
  * file. The higher the preciousness, the more will defaultAI care for that ware

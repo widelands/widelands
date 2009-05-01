@@ -52,7 +52,7 @@ struct EditBox : public Panel {
 	std::string const & text() const;
 	void setText(std::string const &);
 	uint32_t maxLength() const;
-	void setMaxLength(uint32_t n);
+	void setMaxLength(uint32_t);
 	Align align() const;
 	void setAlign(Align);
 	void set_font(std::string const & name, int32_t size, RGBColor color) {

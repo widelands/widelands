@@ -104,8 +104,7 @@ m_curdir(SaveHandler::get_base_dir())
 void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	std::string const & name = m_ls.get_selected();
 
-	std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
-	Widelands::Game_Loader gl(*fs, igbase().game());
+	Widelands::Game_Loader gl(name, igbase().game());
 	Widelands::Game_Preload_Data_Packet gpdp;
 	gl.preload_game(gpdp); //  This has worked before, no problem
 
@@ -158,8 +157,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
 		char const * const name = pname->c_str();
 
 		try {
-			std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
-			Widelands::Game_Loader gl(*fs, igbase().game());
+			Widelands::Game_Loader gl(name, igbase().game());
 			gl.preload_game(gpdp);
 			char const * extension, * fname =
 				FileSystem::FS_Filename(name, extension);

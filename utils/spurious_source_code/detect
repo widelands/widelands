@@ -87,7 +87,7 @@ fi
 #             qenums: only for Qt
 #              style: gives false positives
 #        tipsandthis: only for Qt
-KRAZY2CHECKS=captruefalse,contractions,copyright,explicit,includes,inline,license,passbyvalue,postfixop,strings,null
+KRAZY2CHECKS=captruefalse,contractions,copyright,explicit,includes,inline,license,passbyvalue,postfixop,spelling,strings,null
 
 #  Make sure that several instances of this script running concurrently each
 #  have a separate temporary directory.

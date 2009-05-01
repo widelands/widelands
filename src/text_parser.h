@@ -118,7 +118,7 @@ private:
 		 std::string                                       & block_format,
 		 std::vector<std::string>                          & words,
 		 std::vector<std::vector<std::string>::size_type>  & line_breaks,
-		 Varibale_Callback vcb, void * const vcdata);
+		 Varibale_Callback vcb, void * vcdata);
 		void parse_text_attributes(std::string format, Text_Block *element);
 	bool extract_format_block
 		(std      ::string & block,

@@ -63,8 +63,8 @@ struct Section {
 		char * m_name;
 		char * m_value;
 
-		Value(const char * const nname, const char * const nval);
-		Value(const Value &o);
+		Value(char const * nname, char const * nval);
+		Value(Value const &);
 		~Value();
 
 		Value & operator= (Value const &);
@@ -88,7 +88,7 @@ struct Section {
 
 	typedef std::vector<Value> Value_list;
 
-	Section(Profile * const, const char * const name);
+	Section(Profile *, char const * name);
 	Section(const Section &);
 	~Section();
 

@@ -48,8 +48,7 @@ using Widelands::WL_Map_Loader;
 */
 Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
 :
-UI::Window(parent, 0, 0, 500, 300, _("Load Map")),
-m_parent(parent) //  FIXME redundant (base stores parent pointer)
+	UI::Window(parent, 0, 0, 500, 300, _("Load Map"))
 {
 	int32_t const spacing =  5;
 	int32_t const offsx   = spacing;
@@ -150,7 +149,7 @@ void Main_Menu_Load_Map::clicked_ok() {
 		m_mapfiles.clear();
 		fill_list();
 	} else {
-		m_parent->load(filename);
+		dynamic_cast<Editor_Interactive &>(*get_parent()).load(filename);
 		die();
 	}
 }

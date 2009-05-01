@@ -61,23 +61,22 @@ bool LayeredFileSystem::IsWritable() const {
  * Add a new filesystem to the top of the stack
  * \todo use FileSystem & instead of pointer, throw on failure
  */
-void LayeredFileSystem::AddFileSystem(FileSystem * const fs)
+void LayeredFileSystem::AddFileSystem(FileSystem & fs)
 {
-	m_filesystems.push_back(fs);
+	m_filesystems.push_back(&fs);
 }
 
 /**
  * Remove a filesystem from the stack
  * \param fs The filesystem to be removed
  */
-void LayeredFileSystem::RemoveFileSystem(FileSystem * const fs)
+void LayeredFileSystem::RemoveFileSystem(FileSystem & fs)
 {
-	if (m_filesystems.back() == fs) {
-		m_filesystems.pop_back();
-	} else
+	if (m_filesystems.back() != &fs)
 		throw std::logic_error
 			("LayeredFileSystem::RemoveFileSystem: interspersed add/remove "
 			 "detected!");
+	m_filesystems.pop_back();
 }
 
 /**
@@ -245,7 +244,7 @@ void LayeredFileSystem::EnsureDirectoryExists(std::string const & dirname) {
 /**
  * Create a subfilesystem from an existing file/directory
  */
-FileSystem * LayeredFileSystem::MakeSubFileSystem(std::string const & dirname)
+FileSystem & LayeredFileSystem::MakeSubFileSystem(std::string const & dirname)
 {
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
@@ -261,7 +260,7 @@ FileSystem * LayeredFileSystem::MakeSubFileSystem(std::string const & dirname)
 /**
  * Create a subfilesystem from a new file/directory
  */
-FileSystem * LayeredFileSystem::CreateSubFileSystem
+FileSystem & LayeredFileSystem::CreateSubFileSystem
 	(std::string const & dirname, Type const type)
 {
 	for

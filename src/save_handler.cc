@@ -134,9 +134,9 @@ bool SaveHandler::save_game
 	// Make a filesystem out of this
 	FileSystem * fs = 0;
 	if (!binary) {
-		fs = g_fs->CreateSubFileSystem(complete_filename, FileSystem::DIR);
+		fs = &g_fs->CreateSubFileSystem(complete_filename, FileSystem::DIR);
 	} else {
-		fs = g_fs->CreateSubFileSystem(complete_filename, FileSystem::ZIP);
+		fs = &g_fs->CreateSubFileSystem(complete_filename, FileSystem::ZIP);
 	}
 
 	bool result = true;

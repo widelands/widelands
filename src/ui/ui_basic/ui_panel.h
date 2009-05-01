@@ -60,7 +60,7 @@ struct Panel : public Object {
 		 const std::string & tooltip_text = std::string());
 	virtual ~Panel();
 
-	Panel *get_parent() const {return _parent;}
+	Panel * get_parent() const {return _parent;}
 
 	void free_children();
 

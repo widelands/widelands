@@ -202,11 +202,11 @@ void DefaultAI::late_initialization ()
 		goldmine      = hints.get_safe_string("goldmine");
 		granitmine    = hints.get_safe_string("granitmine");
 
-	} else {
-		log("   WARNING: No computerplayer hints for tribe %s found\n"
+	} else
+		log
+			("   WARNING: No computerplayer hints for tribe %s found\n"
 			 "   This will lead to stupid behaviour of said player!\n",
 			 tribe->name().c_str());
-	}
 
 	// collect information about which buildings our tribe can construct
 	Building_Index const nr_buildings = tribe->get_nrbuildings();
@@ -399,8 +399,10 @@ void DefaultAI::update_all_not_buildable_fields()
 		}
 
 		// check whether building capabilities have improved
-		if ((player->get_buildcaps(unusable_fields.front())
-			& BUILDCAPS_SIZEMASK) != 0) {
+		if
+			((player->get_buildcaps(unusable_fields.front())
+			  & BUILDCAPS_SIZEMASK) != 0)
+		{
 
 			buildable_fields.push_back
 				(new BuildableField(unusable_fields.front()));
@@ -410,8 +412,10 @@ void DefaultAI::update_all_not_buildable_fields()
 			continue;
 		}
 
-		if ((player->get_buildcaps(unusable_fields.front())
-			& BUILDCAPS_MINE) != 0) {
+		if
+			((player->get_buildcaps(unusable_fields.front())
+			  & BUILDCAPS_MINE) != 0)
+		{
 
 			mineable_fields.push_back
 				(new MineableField(unusable_fields.front()));
@@ -481,7 +485,8 @@ void DefaultAI::update_buildable_field (BuildableField & field)
 		if (dynamic_cast<const Flag *>(&base_immovable))
 			field.reachable = true;
 		if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
-			if (player_immovable->owner().get_player_number()
+			if
+				(player_immovable->owner().get_player_number()
 				 != get_player_number())
 				continue;
 
@@ -589,8 +594,8 @@ void DefaultAI::update_mineable_field (MineableField & field)
  */
 bool DefaultAI::construct_building (int32_t gametime)
 {
-	bool mine = false; // just used for easy checking whether a mine or something
-	                   // else was build.
+	//  Just used for easy checking whether a mine or something else was built.
+	bool mine = false;
 
 	int32_t spots_avail[4];
 
@@ -652,7 +657,7 @@ bool DefaultAI::construct_building (int32_t gametime)
 
 			// some randomness to avoid that defaultAI is building always the same
 			// (always == another game but same map with defaultAI on same coords)
-			int32_t prio = time(NULL) % 3 - 1;
+			int32_t prio = time(0) % 3 - 1;
 
 			if (j->type == BuildingObserver::MILITARYSITE) {
 				prio  = bf->unowned_land_nearby - bf->military_influence * 4;
@@ -790,14 +795,20 @@ bool DefaultAI::construct_building (int32_t gametime)
 	}
 
 	// then try all mines
-	for (std::list<BuildingObserver>::iterator i = buildings.begin();
-		i != buildings.end(); ++i) {
+	for
+		(std::list<BuildingObserver>::iterator i = buildings.begin();
+		 i != buildings.end();
+		 ++i)
+	{
 
 		if (!i->is_buildable || i->type != BuildingObserver::MINE)
 			continue;
 
-		for (std::list<MineableField *>::iterator j = mineable_fields.begin();
-			j != mineable_fields.end(); ++j) {
+		for
+			(std::list<MineableField *>::iterator j = mineable_fields.begin();
+			 j != mineable_fields.end();
+			 ++j)
+		{
 
 			MineableField * mf = *j;
 			int32_t prio = -1;
@@ -1137,7 +1148,7 @@ bool DefaultAI::check_economies ()
 
 /**
  * checks the first productionsite in list, takes care if it runs out of
- * ressources and finally reenques it at the end of the list.
+ * resources and finally reenqueues it at the end of the list.
  *
  * \returns true, if something was changed.
  */

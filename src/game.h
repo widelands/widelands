@@ -97,8 +97,8 @@ struct Game : public Editor_Game_Base {
 	GameController * gameController();
 	void set_write_replay(bool wr);
 	void save_syncstream(bool save);
-	void init_newgame(UI::ProgressWindow & loader_ui, GameSettings const & settings);
-	void init_savegame(UI::ProgressWindow & loader_ui, GameSettings const & settings);
+	void init_newgame (UI::ProgressWindow &, GameSettings const &);
+	void init_savegame(UI::ProgressWindow &, GameSettings const &);
 	bool run_splayer_scenario_direct(char const * mapname);
 	bool run_load_game (std::string filename);
 	enum Start_Game_Type {NewScenario, NewNonScenario, Loaded};

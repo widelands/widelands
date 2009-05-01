@@ -85,8 +85,8 @@ struct RoutingNodeQueue {
 			}
 
 			if
-			   (m_data[nsize]->cost() <= m_data[l]->cost() &&
-				m_data[nsize]->cost() <= m_data[r]->cost())
+				(m_data[nsize]->cost() <= m_data[l]->cost() &&
+				 m_data[nsize]->cost() <= m_data[r]->cost())
 			{
 				m_data[fix] = m_data[nsize];
 				m_data[fix]->mpf_heapindex = fix;
@@ -196,9 +196,7 @@ private:
 /*************************************************************************/
 /*                         Router Implementation                         */
 /*************************************************************************/
-Router::Router() :
-	mpf_cycle(0) {
-}
+Router::Router() : mpf_cycle(0) {}
 
 /**
  * Calculate a route between two nodes. This is using the A* algorithm, the
@@ -228,8 +226,8 @@ bool Router::find_route
 	 IRoute * const route,
 	 bool    const wait,
 	 int32_t const cost_cutoff,
-	 ITransportCostCalculator& cost_calculator,
-	 std::vector<RoutingNode*>& nodes)
+	 ITransportCostCalculator   & cost_calculator,
+	 std::vector<RoutingNode *> & nodes)
 {
 	// advance the path-finding cycle
 	++mpf_cycle;
@@ -247,8 +245,8 @@ bool Router::find_route
 	start.mpf_backlink = 0;
 	start.mpf_realcost = 0;
 	start.mpf_estimate =
-	   cost_calculator.calc_cost_estimate
-		 (start.get_position(), end.get_position());
+		cost_calculator.calc_cost_estimate
+			(start.get_position(), end.get_position());
 
 	Open.push(&start);
 

@@ -21,6 +21,7 @@
 #define GAME_LOADER_H
 
 #include <stdint.h>
+#include <string>
 
 struct FileSystem;
 
@@ -34,7 +35,8 @@ struct Game_Preload_Data_Packet;
  * of a game out to a file.
  */
 struct Game_Loader {
-	Game_Loader(FileSystem &, Game &);
+	Game_Loader(std::string const & path, Game &);
+	~Game_Loader();
 
 	int32_t preload_game(Game_Preload_Data_Packet &);
 	int32_t    load_game(bool multiplayer = false);

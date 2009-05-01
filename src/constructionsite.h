@@ -105,8 +105,7 @@ protected:
 	static void wares_queue_callback
 		(Game &, WaresQueue *, Ware_Index, void * data);
 
-	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
+	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
 
 private:
 	const Building_Descr * m_building; // type of building that is being built

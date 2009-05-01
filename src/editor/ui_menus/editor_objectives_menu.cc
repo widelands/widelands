@@ -294,7 +294,7 @@ void Editor_Objectives_Menu::clicked_del() {
 /**
  * The table has been selected
  */
-void Editor_Objectives_Menu::table_selected(uint32_t n) {
+void Editor_Objectives_Menu::table_selected(uint32_t const n) {
 	m_edit_button->set_enabled(true);
 	m_delete_button->set_enabled(true);
 

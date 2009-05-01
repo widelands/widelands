@@ -296,9 +296,7 @@ void Game::init_savegame
 	assert(!get_map());
 	set_map(new Map);
 	try {
-		std::auto_ptr<FileSystem> const fs
-				(g_fs->MakeSubFileSystem(settings.mapfilename.c_str()));
-		Game_Loader gl(*fs, *this);
+		Game_Loader gl(settings.mapfilename, *this);
 
 		Widelands::Game_Preload_Data_Packet gpdp;
 		gl.preload_game(gpdp);
@@ -332,9 +330,7 @@ bool Game::run_load_game(std::string filename) {
 	set_map(new Map);
 
 	{
-		std::auto_ptr<FileSystem> const fs
-			(g_fs->MakeSubFileSystem(filename.c_str()));
-		Game_Loader gl(*fs, *this);
+		Game_Loader gl(filename, *this);
 
 		Widelands::Game_Preload_Data_Packet gpdp;
 		gl.preload_game(gpdp);

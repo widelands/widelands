@@ -98,7 +98,6 @@ struct Building_Descr : public Map_Object_Descr {
 	virtual uint32_t vision_range() const throw ();
 
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
-	__attribute__ ((deprecated)) const Tribe_Descr * get_tribe() const throw () {return &m_tribe;}
 	Workarea_Info m_workarea_info;
 
 	virtual int32_t suitability(Map const &, FCoords) const;
@@ -162,9 +161,7 @@ public:
 	virtual Coords get_position() const throw () {return m_position;}
 
 	std::string const & name() const throw ();
-	__attribute__ ((deprecated)) const char * get_name    () const throw () {return descr().name().c_str();}
 	const std::string & descname() const throw () {return descr().descname();}
-	__attribute__ ((deprecated)) const char * get_descname() const throw () {return descr().descname().c_str();}
 
 	std::string info_string(std::string const & format);
 	virtual std::string get_statistics_string();
@@ -232,10 +229,8 @@ protected:
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void act(Game &, uint32_t data);
 
-	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
-	void draw_help
-		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
+	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
+	void draw_help(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
 
 	virtual void create_options_window
 		(Interactive_Player &, UI::Window * & registry)

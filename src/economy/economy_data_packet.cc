@@ -90,7 +90,7 @@ void EconomyDataPacket::Write(FileWrite & fw)
 	for (Ware_Index i = tribe.get_nrwares(); i.value();) {
 		--i;
 		Economy::Target_Quantity const &tq =
-		   m_eco->m_target_quantities[i.value()];
+			m_eco->m_target_quantities[i.value()];
 		if (Time const last_modified = tq.last_modified) {
 			fw.Unsigned32(last_modified);
 			fw.CString(tribe.get_ware_descr(i)->name());

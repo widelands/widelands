@@ -246,7 +246,6 @@ struct Map : public ITransportCostCalculator {
 	Map_Index max_index() const {return m_width * m_height;}
 	Field & operator[](Map_Index) const;
 	Field & operator[](Coords) const;
-	Field * get_field(Coords) const __attribute__((deprecated));
 	FCoords get_fcoords(Coords) const;
 	void normalize_coords(Coords &) const;
 	FCoords get_fcoords(Field &) const;
@@ -429,8 +428,6 @@ inline Map_Index Map::get_index(Coords const c, X_Coordinate const width) {
 inline Field & Map::operator[](Map_Index const i) const {return m_fields[i];}
 inline Field & Map::operator[](const Coords c) const
 {return operator[](get_index(c, m_width));}
-
-inline Field * Map::get_field(const Coords c) const {return &operator[](c);}
 
 inline FCoords Map::get_fcoords(const Coords c) const
 {

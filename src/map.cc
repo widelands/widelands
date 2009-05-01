@@ -1804,7 +1804,7 @@ Map_Loader * Map::get_correct_loader(char const * const filename) {
 		 strcasecmp
 		 	(filename + (strlen(filename) - strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
 		try {
-			result = new WL_Map_Loader(*g_fs->MakeSubFileSystem(filename), this);
+			result = new WL_Map_Loader(g_fs->MakeSubFileSystem(filename), this);
 		} catch (...) {
 			//  If this fails, it is an illegal file (maybe old plain binary map
 			//  format)

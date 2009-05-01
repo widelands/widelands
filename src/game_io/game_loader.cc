@@ -19,7 +19,7 @@
 
 #include "game_loader.h"
 
-#include "io/filesystem/filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "game.h"
 #include "game_cmd_queue_data_packet.h"
 #include "game_game_class_data_packet.h"
@@ -34,9 +34,14 @@
 
 namespace Widelands {
 
-Game_Loader::Game_Loader(FileSystem & fs, Game & game) : m_fs(fs), m_game(game)
+Game_Loader::Game_Loader(std::string const & path, Game & game) :
+	m_fs(g_fs->MakeSubFileSystem(path)), m_game(game)
 {}
 
+
+Game_Loader::~Game_Loader() {
+	delete &m_fs;
+}
 
 /*
  * This function preloads a game

@@ -143,20 +143,6 @@ struct ProductionProgram {
 			Condition * const operand;
 		};
 
-#if 0
-		/// Tests whether the site has at least count wares of any of the types
-		/// in ware_types.
-		struct Site_Has : public Condition {
-			Site_Has
-				(Tribe_Descr const &,
-				 std::vector<std::string> const & tokens, size_t const start);
-			virtual bool evaluate(ProductionSite const &) const;
-		private:
-			std::vector<std::string> ware_types;
-			uint8_t                  count;
-		};
-#endif
-
 		/// Tests whether the economy needs a ware of type ware_type.
 		struct Economy_Needs : public Condition {
 			Economy_Needs(char * & parameters, Tribe_Descr const &);

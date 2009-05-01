@@ -94,8 +94,7 @@ void Fullscreen_Menu_LoadGame::clicked_ok()
 
 void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
 	if (const char * const name = m_list.get_selected()) {
-		std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
-		Widelands::Game_Loader gl(*fs, m_game);
+		Widelands::Game_Loader gl(name, m_game);
 		Widelands::Game_Preload_Data_Packet gpdp;
 		gl.preload_game(gpdp); //  This has worked before, no problem
 
@@ -138,8 +137,7 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 		char const * const name = i.current->c_str();
 
 		try {
-			std::auto_ptr<FileSystem> const fs(g_fs->MakeSubFileSystem(name));
-			Widelands::Game_Loader gl(*fs, m_game);
+			Widelands::Game_Loader gl(name, m_game);
 			gl.preload_game(gpdp);
 
 			char const * extension, * fname =

@@ -42,7 +42,6 @@ struct Critter_Bob_Descr : public Bob::Descr {
 	bool is_swimming() const throw () {return m_swimming;}
 	uint32_t movecaps() const throw ();
 	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
-	__attribute__ ((deprecated)) const char * get_descname() const throw () {return descname().c_str();}
 
 	Critter_BobProgram const * get_program(std::string const &) const;
 
@@ -69,7 +68,6 @@ public:
 
 	void start_task_program(Game &, std::string const & name);
 	const std::string & descname() const throw () {return descr().descname();}
-	__attribute__ ((deprecated)) const char * get_descname() const throw ()  {return descname().c_str();}
 
 private:
 	void roam_update   (Game &, State &);
