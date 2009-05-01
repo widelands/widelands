@@ -95,19 +95,6 @@ void DefaultAI::think ()
 	// wait a moment so that all fields are classified
 	if (next_construction_due == 0) next_construction_due = gametime + 1000;
 
-	// verify that our production sites are doing well
-	check_productionsites(gametime);
-
-	// consider whether a change of the soldier capacity of some militarysites
-	// would make sense.
-	check_militarysites(gametime);
-
-	// check if anything in the economies changed.
-	// This needs to be done before new buildings are placed, to ensure that no
-	// empty economy is left.
-	if (check_economies())
-		return;
-
 	// if there are more than one economy try to connect them with a road.
 	if (next_road_due <= gametime) {
 		next_road_due = gametime + 1000;
@@ -128,6 +115,12 @@ void DefaultAI::think ()
 		return;
 	}
 
+	// check if anything in the economies changed.
+	// This needs to be done before new buildings are placed, to ensure that no
+	// empty economy is left.
+	if (check_economies())
+		return;
+
 	// Now try to build something if possible
 	if (next_construction_due <= gametime) {
 		next_construction_due = gametime + 2000;
@@ -136,6 +129,15 @@ void DefaultAI::think ()
 			return;
 		}
 	}
+
+	// verify that our production sites are doing well
+	if (check_productionsites(gametime))
+		return;
+
+	// consider whether a change of the soldier capacity of some militarysites
+	// would make sense.
+	if (check_militarysites(gametime))
+		return;
 
 	// Finally consider military actions
 	if (next_attack_consideration_due <= gametime)
@@ -603,7 +605,7 @@ void DefaultAI::update_mineable_field (MineableField & field)
  * \ToDo: this function holds a lot of calculations that are hard to understand
  * at first and even second view - explain what's going on here
  */
-bool DefaultAI::construct_building (int32_t ) // (int32_t gametime)
+bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 {
 	//  Just used for easy checking whether a mine or something else was built.
 	bool mine = false;
@@ -704,44 +706,21 @@ bool DefaultAI::construct_building (int32_t ) // (int32_t gametime)
 					// FIXME: should be generalised for fish_breeder, etc.
 					prio -= bf->trees_nearby -2;
 				} else {
-					if (j->total_count() == 0)
-						prio += 2;
-
 					// Check if the produced wares are needed
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
 						for (uint32_t m = 0; m < j->outputs.size(); ++m) {
 							Ware_Index wt(static_cast<size_t>(j->outputs[m]));
 							if ((*l.current)->economy.needs_ware(wt)) {
-								prio += 2 + wares[j->outputs[m]].preciousness;
+								prio += 1 + wares[j->outputs[m]].preciousness;
+								if (j->total_count() == 0)
+									prio *= 4; // big bonus, this site might be elemental
 							}
 						}
 					}
 
 					// If the produced wares are needed
 					if (prio > 0) {
-						// some randomness to avoid that defaultAI is building always
-						// the same (always == another game but same map with
-						// defaultAI on same coords)
-						prio += time(0) % 3 - 1;
-
-						// check if current economy can supply enough material for
-						// production.
-						for (uint32_t k = 0; k < j->inputs.size(); ++k) {
-							prio += 2 * wares[j->inputs[k]].producers;
-							prio -= 4 * wares[j->inputs[k]].consumers;
-						}
-
-						int32_t output_prio = 0;
-						for (uint32_t k = 0; k < j->outputs.size(); ++k) {
-							WareObserver & wo = wares[j->outputs[k]];
-							if (j->total_count() == 0 && wo.consumers > 0)
-								output_prio += 8 + wo.preciousness; // add a big bonus
-						}
-
-						if (j->outputs.size() > 0)
-							output_prio = static_cast<int32_t>
-								(ceil(output_prio / sqrt(j->outputs.size())));
-						prio += output_prio;
+						prio = calculate_need_for_ps(*j, prio);
 
 						int32_t iosum = 0;
 						for (size_t k = 0; k < j->inputs.size(); ++k)
@@ -756,6 +735,7 @@ bool DefaultAI::construct_building (int32_t ) // (int32_t gametime)
 								++iosum;
 						prio += 2 * iosum;
 					}
+
 					// do not construct more than one building,
 					// if supply line is already broken.
 					if (!check_supply(*j) && j->total_count() > 0)
@@ -862,11 +842,11 @@ bool DefaultAI::construct_building (int32_t ) // (int32_t gametime)
 	if (not proposed_building)
 		return false;
 
-	//  do not have too many construction sites
+	// do not have too many construction sites
 	if (proposed_priority < total_constructionsites * total_constructionsites)
 		return false;
 
-	// if we want to construct a new building, send the command now
+	// send the command to construct a new building
 	game().send_player_build
 		(get_player_number(), proposed_coords, proposed_building);
 
@@ -894,9 +874,8 @@ bool DefaultAI::construct_roads (int32_t gametime)
 	EconomyObserver * eo_to_connect;
 
 	{ // fetch first two economies that might be connectable
-		std::list<EconomyObserver *> &eo = economies;
-		std::list<EconomyObserver *>::iterator i = eo.begin();
-		while ((economies_to_connect < 2) && (i != eo.end())) {
+		std::list<EconomyObserver *>::iterator i = economies.begin();
+		while ((economies_to_connect < 2) && (i != economies.end())) {
 			// Do not try to connect economies that already failed in last time.
 			if ((*i)->next_connection_try <= gametime) {
 				if (economies_to_connect == 1)
@@ -908,8 +887,11 @@ bool DefaultAI::construct_roads (int32_t gametime)
 	}
 
 	// No need to connect, if only one economy
-	if ((economies_to_connect < 2) || eo_to_connect->flags.empty())
+	if (economies_to_connect < 2)
 		return false;
+
+	if (eo_to_connect->flags.empty())
+		return check_economies();
 
 	// Try to connect - this should work fine as in nearly all cases we simply
 	// connect a constructionsite
@@ -1165,8 +1147,9 @@ bool DefaultAI::check_economies ()
  */
 bool DefaultAI::check_productionsites(int32_t gametime)
 {
-	if ((next_productionsite_check_due > gametime) | productionsites.empty())
+	if ((next_productionsite_check_due > gametime) || productionsites.empty())
 		return false;
+	next_productionsite_check_due = gametime + 5000;
 
 	// Get link to productionsite that should be checked
 	ProductionSiteObserver & site = productionsites.front();
@@ -1181,6 +1164,8 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 			radius = i.current->first;
 
 	Map & map = game().map();
+
+	// Lumberjack / Woodcutter handling
 	if
 		(site.bo->need_trees
 		 and
@@ -1197,6 +1182,7 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		}
 	}
 
+	// Quarry handling
 	if
 		(site.bo->need_stones
 		 and
@@ -1208,12 +1194,74 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		 0)
 	{
 		game().send_player_bulldoze (*site.site);
+		return true;
+	}
+
+	// Check whether building is enhanceable and if wares of the enhanced
+	// buildings are needed. If yes consider an upgrade.
+	std::set<Building_Index> enhancements = site.site->enhancements();
+	int32_t maxprio = 0;
+	Building_Index enbld;
+	container_iterate_const(std::set<Building_Index>, enhancements, x) {
+		// Only enhance buildings that are allowed (scenario mode)
+		if (player->is_building_allowed((*x.current))) {
+			const Building_Descr & bld = *tribe->get_building_descr((*x.current));
+			BuildingObserver & en_bo = get_building_observer(bld.name().c_str());
+
+			// Don't enhance this building, if there is already one of same type
+			// under construction
+			if (en_bo.cnt_under_construction > 0)
+				continue;
+
+			//if (site.site->workers()
+
+			int32_t prio = 0; // priority for enhancement
+
+			// Find new outputs of enhanced building
+			std::vector<int16_t> & current_outputs = site.bo->outputs;
+			std::vector<int16_t> new_outputs;
+			for (uint16_t i = 0; i < en_bo.outputs.size(); ++i) {
+				for (uint16_t j = 0; j < current_outputs.size(); ++j)
+					if (current_outputs[j] == en_bo.outputs[i]) {
+						Ware_Index wt(static_cast<size_t>(current_outputs[j]));
+						if (site.site->economy().needs_ware(wt))
+							prio -= (2 + wares[current_outputs[j]].preciousness) / 2;
+						continue;
+					}
+				new_outputs.push_back(static_cast<int16_t>(i));
+			}
+
+			// Check if the new wares are needed in economy of the building
+			for (uint32_t i = 0; i < new_outputs.size(); ++i) {
+				Ware_Index wt(static_cast<size_t>(new_outputs[i]));
+				if (site.site->economy().needs_ware(wt))
+					prio += 2 + wares[new_outputs[i]].preciousness;
+			}
+
+			// Compare the number of buildings of current type with the number
+			// of buildings of enhanced type
+			prio += (site.bo->total_count() - en_bo.total_count()) * 2;
+
+			// If the new wares are needed
+			if (prio > 0) {
+				prio = calculate_need_for_ps(en_bo, prio);
+				if (prio > maxprio) {
+					maxprio = prio;
+					enbld = (*x.current);
+				}
+			}
+		}
+	}
+
+	// Enhance if enhanced building is useful
+	if (maxprio > 0) {
+		game().send_player_enhance_building(*site.site, enbld);
 		changed = true;
 	}
+
 	// Reorder and set new values;
 	productionsites.push_back(productionsites.front());
 	productionsites.pop_front();
-	next_productionsite_check_due = gametime + 2000;
 	return changed;
 }
 
@@ -1264,6 +1312,42 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
 	militarysites.pop_front();
 	next_militarysite_check_due = gametime + 1000;
 	return changed;
+}
+
+
+/**
+ * calculates how much a productionsite of type \arg bo is needed inside it's
+ * economy. \arg prio is initial value for this calculation
+ *
+ * \returns the calculated priority
+ */
+int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
+{
+	// some randomness to avoid that defaultAI is building always
+	// the same (always == another game but same map with
+	// defaultAI on same coords)
+	prio += time(0) % 3 - 1;
+
+	// check if current economy can supply enough material for
+	// production.
+	for (uint32_t k = 0; k < bo.inputs.size(); ++k) {
+		prio += 2 * wares[bo.inputs[k]].producers;
+		prio -= 4 * wares[bo.inputs[k]].consumers;
+	}
+
+	int32_t output_prio = 0;
+	for (uint32_t k = 0; k < bo.outputs.size(); ++k) {
+		WareObserver & wo = wares[bo.outputs[k]];
+		if (bo.total_count() == 0 && wo.consumers > 0)
+			output_prio += 8 + wo.preciousness; // add a big bonus
+	}
+
+	if (bo.outputs.size() > 0)
+		output_prio = static_cast<int32_t>
+			(ceil(output_prio / sqrt(bo.outputs.size())));
+	prio += output_prio;
+
+	return prio;
 }
 
 

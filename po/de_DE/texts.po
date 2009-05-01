@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3932\n"
+"Project-Id-Version: Widelands svn3964\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-27 16:07+0000\n"
-"PO-Revision-Date: 2009-04-27 17:13+0100\n"
+"POT-Creation-Date: 2009-05-01 17:57+0000\n"
+"PO-Revision-Date: 2009-05-01 19:57+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -169,7 +169,8 @@ msgstr "Lies Mich"
 msgid "an open source strategy game"
 msgstr "Ein Open Source Strategiespiel"
 
-#: ../../txts/README:9 ../../txts/editor_readme:7
+#: ../../txts/README:9
+#: ../../txts/editor_readme:7
 msgid "Introduction"
 msgstr "Einführung"
 
@@ -349,23 +350,29 @@ msgstr "Häuptling"
 msgid "Elders"
 msgstr "Ältesten"
 
-#: ../../txts/developers:19 ../../txts/developers:290
+#: ../../txts/developers:19
+#: ../../txts/developers:290
 msgid "Graphics"
 msgstr "Grafik"
 
-#: ../../txts/developers:22 ../../txts/developers:29 ../../txts/developers:36
+#: ../../txts/developers:22
+#: ../../txts/developers:29
+#: ../../txts/developers:36
 msgid "vacant"
 msgstr "unbesetzt"
 
-#: ../../txts/developers:26 ../../txts/developers:283
+#: ../../txts/developers:26
+#: ../../txts/developers:283
 msgid "Homepage"
 msgstr "Homepage"
 
-#: ../../txts/developers:33 ../../txts/developers:296
+#: ../../txts/developers:33
+#: ../../txts/developers:296
 msgid "Sound"
 msgstr "Geräusche"
 
-#: ../../txts/developers:40 ../../txts/developers:301
+#: ../../txts/developers:40
+#: ../../txts/developers:301
 msgid "Translation"
 msgstr "Übersetzer"
 
@@ -573,12 +580,14 @@ msgstr "ALT(gehalten)     Wählt das zweite alternative Werkzeug aus"
 msgid "Always build a forester's and a fish breeder's house, so you will not run out of trunks and food."
 msgstr "Baue immer ein Förster- und ein Fischzüchterhaus, damit du nie ohne Holz oder Nahrung da stehst."
 
-#: ../../txts/tips/barbarians.tip:2 ../../txts/tips/atlanteans.tip:2
+#: ../../txts/tips/barbarians.tip:2
+#: ../../txts/tips/atlanteans.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid "Some buildings, such as the farm, have a very small working area. If the building is surrounded with trees or roads, production will stop."
 msgstr "Manche Gebäude wie zum Beispiel Bauernhöfe haben nur einen kleinen Arbeitsbereich. Diese Gebäude können nicht produzieren, wenn sie von Straßen und/oder Bäumen eingekreist sind."
 
-#: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
+#: ../../txts/tips/barbarians.tip:6
+#: ../../txts/tips/empire.tip:6
 msgid "Keep an eye on your fishers. After fish resources are exhausted in their working area, they will stop to fish."
 msgstr "Beobachte deine Fischer. Wenn die Fischressourcen schwinden, werden die Fischer aufhören zu arbeiten."
 
@@ -663,7 +672,7 @@ msgid "You can use 'Page up' and 'Page down' keys to adjust your wished speed - 
 msgstr "Du kannst die 'Bild hoch' und 'Bild runter' Tasten benutzen, um die von dir gewünschte Geschwindigkeit zu setzen. Die tatsächliche Geschwindigkeit wird demokratisch gesetzt."
 
 #: ../../txts/tips/multiplayer.tip:6
-msgid "You can use '/me' at the beginning of a chatmessage: '/me is tired' will be printed as '-> Nickname is tired'"
+msgid "You can use '/me' at the beginning of a chatmessage: '/me is tired' will be printed as '-> Nickname is tired'."
 msgstr "Du kannst '/me' am Anfang deiner Chatnachrichten benutzen: '/me ist müde' wird als '-> Benutzer ist müde' angezeigt."
 
 #: ../../txts/tips/singleplayer.tip:2
@@ -672,3 +681,4 @@ msgstr "Unsere Computer Spieler sind zu langweilig? Besuche unsere Webseite unte
 
 #~ msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
 #~ msgstr "Irgendwelche Fragen? Dann triff uns auf www.widelands.org. Dort findest du unsere FAQs, das Wiki und natürlich unsere Community Foren."
+

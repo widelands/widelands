@@ -47,7 +47,7 @@ struct Flag;
  * \ToDo What it does not do until now is:
  * - Using production hints of buildings other than foresters (f.e. gamekeeper)
  * - Building and using trainings sites
- * - Enhancing buildings
+ * - Enhancing mines
  * - Check mines whether they are out of ressources
  *
  * \ToDo Other things left to implement / improve:
@@ -100,6 +100,8 @@ private:
 	bool check_economies       ();
 	bool check_productionsites (int32_t);
 	bool check_militarysites   (int32_t);
+
+	int32_t calculate_need_for_ps(BuildingObserver &, int32_t);
 
 	void consider_productionsite_influence
 		(BuildableField &, Widelands::Coords, BuildingObserver const &);

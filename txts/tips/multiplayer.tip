@@ -3,5 +3,5 @@ text=_"You can use 'Page up' and 'Page down' keys to adjust your wished speed - 
 sec=5
 
 [Tip 2]
-text=_"You can use '/me' at the beginning of a chatmessage: '/me is tired' will be printed as '-> Nickname is tired'"
+text=_"You can use '/me' at the beginning of a chatmessage: '/me is tired' will be printed as '-> Nickname is tired'."
 sec=5
