@@ -44,6 +44,29 @@ ranger="1"
 stonemason="2"
 0/0/0/0="45"
 
+[Place enemy warehouse]
+type="building"
+version="2"
+player="2"
+point="100 25"
+building="warehouse"
+trunk="200"
+carrier="40"
+builder="1"
+lumberjack="4"
+
+[Place enemy warehouse2]
+type="building"
+version="2"
+player="4"
+point="132 110"
+building="warehouse"
+trunk="10"
+carrier="40"
+builder="1"
+blacksmith="1"
+master-blacksmith="1"
+
 [Place enemy donjon1]
 type="building"
 version="2"
