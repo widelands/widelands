@@ -19,7 +19,7 @@
 
 #include "nethost.h"
 
-#include "build_id.h"
+#include "build_info.h"
 #include "chat.h"
 #include "computer_player.h"
 #include "fullscreen_menu_launchgame.h"

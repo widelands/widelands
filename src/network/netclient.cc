@@ -19,7 +19,7 @@
 
 #include "netclient.h"
 
-#include "build_id.h"
+#include "build_info.h"
 #include "fullscreen_menu_launchgame.h"
 #include "game.h"
 #include "wui/game_tips.h"

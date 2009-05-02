@@ -1,6 +1,0 @@
-#include "build_id.h"
-
-std::string build_id()
-{
-	return "UNKNOWN";
-}

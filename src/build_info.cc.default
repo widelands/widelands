@@ -1,0 +1,11 @@
+#include "build_info.h"
+
+std::string build_id()
+{
+	return "UNKNOWN";
+}
+
+std::string build_type()
+{
+	return "UNKNOWN";
+}

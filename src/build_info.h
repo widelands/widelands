@@ -8,5 +8,9 @@
 ///or is automagically created from the checkout's revision number
 std::string build_id();
 
+///\return the build type, which is set during the scons call (either manually
+///or to a default value)
+std::string build_type();
+
 #endif
 

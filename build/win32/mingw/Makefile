@@ -174,8 +174,8 @@ win32tool:
 	@echo "===> Copying configuration files to \"src\""
 	@rm -rf ../../../src/config.h
 	@cp -r ./config.h ../../../src
-	@rm -rf ../../../src/build_id.cc
-	@cp -r ./build_id.cc ../../../src
+	@rm -rf ../../../src/build_info.cc
+	@cp -r ./build_info.cc ../../../src
 	@rm -rf ../../../src/wlversion.h
 	@cp -r ./wlversion.h ../../../src
-	@touch ../../../src/build_id.cc
+	@touch ../../../src/build_info.cc

@@ -19,7 +19,7 @@
 
 #include "network_lan_promotion.h"
 
-#include "build_id.h"
+#include "build_info.h"
 #include "constants.h"
 
 #include <cstdio>

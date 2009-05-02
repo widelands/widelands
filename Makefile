@@ -235,6 +235,6 @@ update up:
 src/config.h:
 	@cp src/config.h.default $@
 
-src/build_id.cc:
-	sed -e "s/UNKNOWN/$(VERSION)/" src/build_id.cc.default > $@
+src/build_info.cc:
+	sed -e "s/UNKNOWN/$(VERSION)/" src/build_info.cc.default > $@
 

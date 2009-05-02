@@ -19,7 +19,7 @@
 
 #include "wlapplication.h"
 
-#include "build_id.h"
+#include "build_info.h"
 #include "computer_player.h"
 #include "editorinteractive.h"
 #include "font_handler.h"
@@ -947,7 +947,7 @@ void WLApplication::show_usage()
 {
 	i18n::Textdomain textdomain("widelands"); //  uses system standard language
 
-	cout << _("This is Widelands-") << build_id() << "\n\n";
+	cout << _("This is Widelands-") << build_id() << "(" << build_type() << ")" << "\n\n";
 	cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n\n");
 	cout << _("Options:\n\n");
 	cout
@@ -1175,7 +1175,7 @@ void WLApplication::mainmenu()
 					("\n\nPlease report this problem to help us improve Widelands. "
 					 "You will find related messages in the standard output "
 					 "(stdout.txt on Windows). You are using build ");
-			message += build_id();
+			message += build_id() + "(" + build_type() + ")";
 			message +=
 				_
 					(". Please add this information to your report.\n\n"

@@ -18,7 +18,7 @@
  */
 
 //config.h must be included first of all!
-#include "build_id.h"
+#include "build_info.h"
 
 #include "wexception.h"
 #include "wlapplication.h"
@@ -61,8 +61,9 @@ int main(int argc, char * argv[])
 		cerr
 			<< "\nCaught exception (of type '" << typeid(e).name()
 			<< "') in outermost handler!\nThe exception said: " << e.what()
-			<< "\n\nThis should not happen. Please file a bug report on version: "
-			<< build_id() << ".\n\n" << flush;
+			<< "\n\nThis should not happen. Please file a bug report on version "
+			<< build_id() << "(" << build_type() << ")" << ".\n"
+			<< "and remember to specify your operating system.\n\n" << flush;
 		delete g_app;
 
 		return 1;
@@ -70,8 +71,9 @@ int main(int argc, char * argv[])
 		cerr
 			<< "\nCaught exception (of type '" << typeid(e).name()
 			<< "') in outermost handler!\nThe exception said: " << e.what()
-			<< "\n\nThis should not happen. Please file a bug report on version: "
-			<< build_id() <<".\n\n" << flush;
+			<< "\n\nThis should not happen. Please file a bug report on version "
+			<< build_id() << "(" << build_type() << ")" <<".\n"
+			<< "and remember to specify your operating system.\n\n" << flush;
 		delete g_app;
 
 		return 1;

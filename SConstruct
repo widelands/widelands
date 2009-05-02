@@ -138,8 +138,8 @@ env.Append(CPPPATH=[os.path.join('#', BUILDDIR)])
 print_build_info(env)
 
 if env.enable_configuration:
-	# Generate build_id.cc - scons itself will decide whether a recompile is needed
-	Command(os.path.join(BUILDDIR, "build_id.cc"), [Value(get_build_id(env))], generate_buildid_file)
+	# Generate build_info.cc - scons itself will decide whether a recompile is needed
+	Command(os.path.join(BUILDDIR, "build_info.cc"), [Value(get_build_id(env)),Value(env['build'])], generate_buildinfo_file)
 
 	do_configure(conf, env)
 

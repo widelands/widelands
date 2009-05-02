@@ -19,9 +19,9 @@
 
 #include "graphic.h"
 
-#include "build_id.h"
+#include "build_info.h"
 #include "io/fileread.h"
-#include "io/filesystem/layered_filesystem.h"io/filesystem/
+#include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
 #include "font_handler.h"
 #include "i18n.h"
@@ -92,8 +92,9 @@ Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen)
 
 	assert(sdlsurface->format->BytesPerPixel == 2 || sdlsurface->format->BytesPerPixel == 4);
 
-	SDL_WM_SetCaption
-		((std::string("Widelands ") + build_id()).c_str(), "Widelands");
+	std::string caption=std::string("Widelands ") + build_id();
+	caption+="(" + build_type() + ")";
+	SDL_WM_SetCaption(caption.c_str(), "Widelands");
 
 	m_screen.set_sdl_surface(*sdlsurface);
 

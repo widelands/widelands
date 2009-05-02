@@ -20,18 +20,23 @@ def get_build_id(env):
 
 	return env['build_id']
 
-def generate_buildid_file(env, target, source):
-	build_id_file=open(target[0].path, "w")
+def generate_buildinfo_file(env, target, source):
+	build_info_file=open(target[0].path, "w")
 
-	build_id_file.write("""#include "build_id.h"
+	build_info_file.write("""#include "build_info.h"
 
 std::string build_id()
 {
 	return \""""+source[0].get_contents()+"""\";
 }
+
+std::string build_type()
+{
+	return \""""+source[1].get_contents()+"""\";
+}
 """)
 
-	build_id_file.close()
+	build_info_file.close()
 
 ################################################################################
 

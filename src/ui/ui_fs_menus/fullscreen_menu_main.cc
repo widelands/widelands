@@ -19,7 +19,7 @@
 
 #include "fullscreen_menu_main.h"
 
-#include "../../build_id.h"
+#include "../../build_info.h"
 #include "i18n.h"
 
 Fullscreen_Menu_Main::Fullscreen_Menu_Main()
@@ -101,7 +101,7 @@ exit
 version
 	(this,
 	 m_xres, m_yres,
-	 std::string(_("Version ")) + build_id(), Align_BottomRight),
+	 std::string(_("Version ")) + build_id() + "(" + build_type() + ")", Align_BottomRight),
 copyright
 	(this,
 	 0, m_yres,
