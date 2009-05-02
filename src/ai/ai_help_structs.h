@@ -18,7 +18,6 @@
  */
 
 #include "checkstep.h"
-#include "computer_player_hints.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "findnode.h"
@@ -184,7 +183,6 @@ struct BuildingObserver {
 	char                      const * name;
 	Widelands::Building_Index         id;
 	Widelands::Building_Descr const * desc;
-	BuildingHints             const * hints;
 
 	enum {
 		BORING,

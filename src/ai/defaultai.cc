@@ -24,7 +24,7 @@
 
 #include <ctime>
 
-#include "computer_player_hints.h"
+#include "ai/ai_hints.h"
 #include "constructionsite.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -183,45 +183,13 @@ void DefaultAI::late_initialization ()
 		wares[i].preciousness = tribe->get_ware_descr(i)->preciousness();
 	}
 
-	// Building hints for computer player
-	std::string stoneproducer = "quarry";
-	std::string trunkproducer = "lumberjack";
-	std::string forester      = "forester";
-	std::string fisher        = "fisher";
-	std::string coalmine      = "coalmine";
-	std::string oremine       = "oremine";
-	std::string goldmine      = "goldmine";
-	std::string granitmine    = "granitmine";
-
-	// Read the computerplayer hints of the tribe
-	// FIXME: this is only a temporary workaround. Better define all this stuff
-	//        in each buildings conf-file.
-	std::string tribehints = "tribes/" + tribe->name() + "/cphints";
-	if (g_fs->FileExists(tribehints)) {
-		Profile prof(tribehints.c_str());
-		Section & hints = prof.get_safe_section("global");
-
-		stoneproducer = hints.get_safe_string("stoneproducer");
-		trunkproducer = hints.get_safe_string("trunkproducer");
-		forester      = hints.get_safe_string("forester");
-		fisher        = hints.get_safe_string("fisher");
-		coalmine      = hints.get_safe_string("coalmine");
-		oremine       = hints.get_safe_string("oremine");
-		goldmine      = hints.get_safe_string("goldmine");
-		granitmine    = hints.get_safe_string("granitmine");
-
-	} else
-		log
-			("   WARNING: No computerplayer hints for tribe %s found\n"
-			 "   This will lead to stupid behaviour of said player!\n",
-			 tribe->name().c_str());
-
-	// collect information about which buildings our tribe can construct
+	// collect information about the different buildings our tribe can construct
 	Building_Index const nr_buildings = tribe->get_nrbuildings();
 	const World & world = game().map().world();
 	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i) {
-		const Building_Descr & bld = *tribe->get_building_descr(i);
+		Building_Descr & bld = *tribe->get_building_descr(i);
 		const std::string & building_name = bld.name();
+		BuildingHints * bh = &bld.hints();
 
 		buildings.resize (buildings.size() + 1);
 
@@ -229,7 +197,6 @@ void DefaultAI::late_initialization ()
 		bo.name                   = building_name.c_str();
 		bo.id                     = i;
 		bo.desc                   = &bld;
-		bo.hints                  = &bld.hints();
 		bo.type                   = BuildingObserver::BORING;
 		bo.cnt_built              = 0;
 		bo.cnt_under_construction = 0;
@@ -237,28 +204,20 @@ void DefaultAI::late_initialization ()
 
 		bo.is_buildable = bld.buildable() & player->is_building_allowed(i);
 
-		bo.need_trees             = building_name == trunkproducer;
-		bo.need_stones            = building_name == stoneproducer;
-		if (building_name == forester)
-			bo.production_hint = tribe->safe_ware_index("trunk").value();
-		bo.need_water = (building_name == fisher);
+		bo.need_trees             = bh->is_trunkproducer();
+		bo.need_stones            = bh->is_stoneproducer();
+		bo.need_water             = bh->get_needs_water();
 
-		// mines
-		if (building_name == coalmine)
-			bo.mines = world.get_resource("coal");
-		if (building_name == oremine)
-			bo.mines = world.get_resource("iron");
-		if (building_name == goldmine)
-			bo.mines = world.get_resource("gold");
-		if (building_name == granitmine)
-			bo.mines = world.get_resource("granit");
+		if (char const * const s = bh->get_renews_map_resource())
+			bo.production_hint = tribe->safe_ware_index(strdup(s)).value();
 
+		// Read all interesting data from ware producing buildings
 		if (typeid(bld) == typeid(ProductionSite_Descr)) {
 			const ProductionSite_Descr & prod =
 				static_cast<const ProductionSite_Descr &>(bld);
 
 			bo.type = bld.get_ismine() ?
-				BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
+			BuildingObserver::MINE : BuildingObserver::PRODUCTIONSITE;
 
 			container_iterate_const(Ware_Types, prod.inputs(), j)
 				bo.inputs.push_back(j.current->first.value());
@@ -266,6 +225,12 @@ void DefaultAI::late_initialization ()
 			container_iterate_const
 				(ProductionSite_Descr::Output, prod.output(), j)
 				bo.outputs.push_back(j.current->     value());
+
+			if (bo.type == BuildingObserver::MINE) {
+				// get the resource needed by the mine
+				if (char const * const s = bh->get_mines())
+					bo.mines = world.get_resource(strdup(s));
+			}
 
 			continue;
 		}
@@ -414,7 +379,7 @@ void DefaultAI::update_all_not_buildable_fields()
 		// check whether building capabilities have improved
 		if
 			((player->get_buildcaps(unusable_fields.front())
-			  & BUILDCAPS_SIZEMASK) != 0)
+			 & BUILDCAPS_SIZEMASK) != 0)
 		{
 
 			buildable_fields.push_back
@@ -427,7 +392,7 @@ void DefaultAI::update_all_not_buildable_fields()
 
 		if
 			((player->get_buildcaps(unusable_fields.front())
-			  & BUILDCAPS_MINE) != 0)
+			 & BUILDCAPS_MINE) != 0)
 		{
 
 			mineable_fields.push_back
@@ -673,13 +638,15 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			if (j->type == BuildingObserver::PRODUCTIONSITE) {
 				if (j->need_trees) {
 					// Priority of woodcutters depend on the number of near trees
-					prio += bf->trees_nearby * 3 / 2;
+					prio += bf->trees_nearby * 5 / 3;
 					prio /= 2 * (1 + bf->tree_consumers_nearby);
+					if (j->total_count() < 2)
+						prio *= 4; // big bonus for the basics
 					if (j->total_count() == 0)
-						prio *= 8; // big bonus for the basics
+						prio *= 2; // even more for the absolute basics
 				} else if (j->need_stones) {
 					// Priority of quarries depend on the number of near stones
-					prio += bf->stones_nearby * 3 / 2;
+					prio += bf->stones_nearby * 5 / 3;
 					prio /= 2 * (1 + bf->stone_consumers_nearby);
 					if (j->total_count() == 0)
 						prio *= 8; // big bonus for the basics
@@ -701,10 +668,6 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// Calculate the need for this building
 					prio += 4 * wares[j->production_hint].consumers;
 					prio += wares[j->production_hint].preciousness;
-
-					// don't build a forester if there are already a lot of trees
-					// FIXME: should be generalised for fish_breeder, etc.
-					prio -= bf->trees_nearby -2;
 				} else {
 					// Check if the produced wares are needed
 					container_iterate(std::list<EconomyObserver *>, economies, l) {

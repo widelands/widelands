@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef COMPUTER_PLAYER_HINTS_H
-#define COMPUTER_PLAYER_HINTS_H
+#ifndef AI_HINTS_H
+#define AI_HINTS_H
 
 class Profile;
 
@@ -27,11 +27,27 @@ struct BuildingHints {
 
 	void parse (Profile &);
 
-	const char * get_need_map_resource() const throw ()
-	{return need_map_resource;}
+	const char * get_renews_map_resource() const throw ()
+	{return renews_map_resource;}
+
+	const char * get_mines() const throw ()
+	{return mines;}
+
+	bool is_trunkproducer()
+	{return trunkproducer;}
+
+	bool is_stoneproducer()
+	{return stoneproducer;}
+
+	bool get_needs_water()
+	{return needs_water;}
 
 private:
-	char * need_map_resource;
+	char * renews_map_resource;
+	char * mines;
+	bool   trunkproducer;
+	bool   stoneproducer;
+	bool   needs_water;
 };
 
 #endif

@@ -7,6 +7,9 @@ trunk=3
 [working positions]
 lumberjack=1
 
+[aihints]
+trunkproducer=true
+
 [programs]
 work=_Work
 

@@ -8,6 +8,9 @@ stone=1
 [working positions]
 forester=1
 
+[aihints]
+renews_map_resource=trunk
+
 [programs]
 work=_Work
 

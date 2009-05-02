@@ -11,6 +11,9 @@ wood=2
 master-miner=1
 miner=1
 
+[aihints]
+mines=coal
+
 [inputs]
 meal=6
 beer=6

@@ -8,6 +8,9 @@ planks=1
 [working positions]
 woodcutter=1
 
+[aihints]
+trunkproducer=true
+
 [programs]
 work=_Work
 

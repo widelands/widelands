@@ -1,5 +1,6 @@
 help=_This yarn, made of gold, is used for weaving exclusive cloth.
 preciousness=2
+default_target_quantity=5
 
 # Goldyarn
 [idle]

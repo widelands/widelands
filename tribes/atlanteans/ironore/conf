@@ -1,5 +1,6 @@
 help=_This is red iron ore.
 preciousness=4
+default_target_quantity=20
 
 [idle]
 pics=idle.png

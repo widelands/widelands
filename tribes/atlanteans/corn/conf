@@ -1,5 +1,6 @@
 help=_This corn is the base of the fine cornflour, that every atlatian baker needs for a good bread.
 preciousness=3
+default_target_quantity=20
 
 # Simply corn
 [idle]

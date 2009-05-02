@@ -9,6 +9,9 @@ wood=1
 [working positions]
 stonemason=1
 
+[aihints]
+stoneproducer=true
+
 [programs]
 mine_stone=_Mine stone
 stone=_Mine stone (only for compatibility with old savegames (build13))

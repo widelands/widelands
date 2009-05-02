@@ -12,6 +12,9 @@ raw_stone=2
 chief-miner=1
 miner=1
 
+[aihints]
+mines=gold
+
 [inputs]
 snack=6
 

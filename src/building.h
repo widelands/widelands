@@ -20,7 +20,7 @@
 #ifndef BUILDING_H
 #define BUILDING_H
 
-#include "computer_player_hints.h"
+#include "ai/ai_hints.h"
 #include "immovable.h"
 #include "soldier_counts.h"
 #include "workarea_info.h"
@@ -101,7 +101,7 @@ struct Building_Descr : public Map_Object_Descr {
 	Workarea_Info m_workarea_info;
 
 	virtual int32_t suitability(Map const &, FCoords) const;
-	const BuildingHints & hints() const throw () {return m_hints;}
+	BuildingHints & hints() throw () {return m_hints;}
 
 protected:
 	virtual Building & create_object() const = 0;
@@ -242,7 +242,7 @@ protected:
 		= 0;
 
 	UI::Window * m_optionswindow;
-	Coords    m_position;
+	Coords       m_position;
 	Flag       * m_flag;
 
 	uint32_t m_anim;
@@ -250,7 +250,7 @@ protected:
 
 	typedef std::vector<Object_Ptr> Leave_Queue;
 	Leave_Queue m_leave_queue; //  FIFO queue of workers leaving the building
-	uint32_t        m_leave_time;  //  when to wake the next one from leave queue
+	uint32_t    m_leave_time;  //  when to wake the next one from leave queue
 	Object_Ptr  m_leave_allow; //  worker that is allowed to leave now
 
 	//  The player who has defeated this building.

@@ -8,6 +8,9 @@ planks=1
 [working positions]
 stonecutter=1
 
+[aihints]
+stoneproducer=true
+
 [programs]
 work=_Work
 

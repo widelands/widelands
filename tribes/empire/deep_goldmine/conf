@@ -11,6 +11,9 @@ wood=2
 master-miner=1
 miner=1
 
+[aihints]
+mines=gold
+
 [inputs]
 meal=6
 wine=6

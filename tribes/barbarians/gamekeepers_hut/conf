@@ -7,6 +7,9 @@ raw_stone=1
 [working positions]
 gamekeeper=1
 
+[aihints]
+renews_map_resource=meat
+
 [programs]
 work=_Work
 

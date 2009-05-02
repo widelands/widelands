@@ -11,6 +11,9 @@ spidercloth=1
 [working positions]
 miner=3
 
+[aihints]
+mines=granit
+
 [inputs]
 bread=6
 smoked_fish=6

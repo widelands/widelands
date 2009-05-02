@@ -7,6 +7,9 @@ trunk=4
 [working positions]
 stonemason=1
 
+[aihints]
+stoneproducer=true
+
 [programs]
 work=_Work
 

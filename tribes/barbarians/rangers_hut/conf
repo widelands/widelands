@@ -6,6 +6,9 @@ trunk=4
 [working positions]
 ranger=1
 
+[aihints]
+renews_map_resource=trunk
+
 [programs]
 work=_Work
 

@@ -1,5 +1,6 @@
 help=_Gold is one of the most valuable materials only important things are garnished with it.
 preciousness=2
+default_target_quantity=10
 
 [idle]
 pics=idle.png

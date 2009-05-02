@@ -51,8 +51,6 @@ struct Flag;
  * - Check mines whether they are out of resources
  *
  * \ToDo Other things left to implement / improve:
- * - remove cphints from tribes directory and instead read "requieres_object"
- *   and "mines" from buildings conf file.
  * - Improve update code - currently the whole buildable area owned by defaultAI
  *   is rechecked after construction of a building or a road. Instead it would
  *   be better to write down the changed coordinates and only check those and
@@ -120,7 +118,7 @@ private:
 
 
 private:
-// Variables of default AI
+	// Variables of default AI
 	bool m_buildable_changed;
 	bool m_mineable_changed;
 

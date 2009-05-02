@@ -10,6 +10,9 @@ wood=2
 [working positions]
 miner=1
 
+[aihints]
+mines=granit
+
 [inputs]
 ration=6
 wine=6

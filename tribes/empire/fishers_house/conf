@@ -9,6 +9,9 @@ stone=1
 [working positions]
 fisher=1
 
+[aihints]
+needs_water=true
+
 [programs]
 work=_Work
 

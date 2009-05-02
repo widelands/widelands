@@ -8,6 +8,10 @@ stone=1
 [working positions]
 fish_breeder=1
 
+[aihints]
+needs_water=true
+renews_map_resource=fish
+
 [programs]
 work=_Work
 

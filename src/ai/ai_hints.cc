@@ -17,19 +17,35 @@
  *
  */
 
-#include "computer_player_hints.h"
+#include "ai/ai_hints.h"
 
 #include "profile.h"
 
 #include <cstring>
 
 
-BuildingHints::BuildingHints () : need_map_resource(0) {}
+BuildingHints::BuildingHints ()
+:
+renews_map_resource(0),
+mines(0),
+trunkproducer(false),
+stoneproducer(false),
+needs_water(false)
+{}
 
 
 void BuildingHints::parse (Profile & prof)
 {
-	if (Section * const hints = prof.get_section("aihints"))
-		if (char const * const s = hints->get_string("need_map_resource"))
-			need_map_resource = strdup(s);
+	if (Section * const hints = prof.get_section("aihints")) {
+		if (char const * const s = hints->get_string("renews_map_resource"))
+			renews_map_resource = strdup(s);
+		if (char const * const s = hints->get_string("mines"))
+			mines = strdup(s);
+		if (const bool b = hints->get_bool("trunkproducer"))
+			trunkproducer = b;
+		if (const bool b = hints->get_bool("stoneproducer"))
+			stoneproducer = b;
+		if (const bool b = hints->get_bool("needs_water"))
+			needs_water   = b;
+	}
 }

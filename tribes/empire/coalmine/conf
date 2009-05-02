@@ -9,6 +9,9 @@ wood=2
 [working positions]
 miner=1
 
+[aihints]
+mines=coal
+
 [inputs]
 ration=6
 beer=6

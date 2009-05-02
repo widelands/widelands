@@ -8,6 +8,9 @@ raw_stone=2
 [working positions]
 miner=1
 
+[aihints]
+mines=granit
+
 [inputs]
 ration=8
 
