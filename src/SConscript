@@ -1,4 +1,4 @@
-import os
+import os, shutil
 
 Import('*')
 
@@ -52,7 +52,19 @@ srcenv.Append(INDENTLIST=[
 indent=srcenv.astyle(source=srcenv['INDENTLIST'])
 env.Alias("indent", indent)
 
+def link_or_copy(target, source, env):
+	src=source[0].get_path()
+	dst=target[0].get_path()
+
+	if os.path.lexists(dst):
+		os.remove(dst)
+
+	if 'symlink' in dir(os):
+		os.symlink(src, dst)
+	else:
+		shutil.copy2(src, dst)
+
 binary=srcenv.Program(target='widelands', source=SRC+libs)
-copybinary=srcenv.Command('#/widelands', binary, Copy('widelands', os.path.join(BUILDDIR, 'widelands')))
+copybinary=srcenv.Command('#/widelands', binary, Action(link_or_copy))
 
 Return('copybinary')
