@@ -834,7 +834,7 @@ bool DefaultAI::construct_roads (int32_t gametime)
 	}
 
 	uint32_t economies_to_connect = 0;
-	EconomyObserver * eo_to_connect;
+	EconomyObserver * eo_to_connect = economies.front(); // dummy initialisation
 
 	//  fetch first two economies that might be connectable
 	for
@@ -1517,14 +1517,14 @@ bool DefaultAI::consider_attack(int32_t gametime) {
 	Map & map = game().map();
 	uint16_t pn = get_player_number();
 
-	Building * target;
-	int32_t    chance = 0;
-	int32_t    attackers = 0;
-
 	// Check next militarysite
 	MilitarySite * ms = militarysites.front().site;
 	uint32_t vision = ms->vision_range();
 	FCoords f = map.get_fcoords(ms->get_position());
+
+	Building * target = ms; // dummy initialisation to silence the compiler
+	int32_t    chance = 0;
+	int32_t    attackers = 0;
 
 	// Search in a radius of the vision of the militarysite and collect
 	// information about immovables in the area
