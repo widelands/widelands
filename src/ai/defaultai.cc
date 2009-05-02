@@ -1258,9 +1258,11 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
 	if (map.find_fields(Area<FCoords>(f, vision), 0, find_unowned) == 0) {
 		// If no enemy in sight - decrease the number of stationed soldiers
 		// as long as it is > 1
-		uint32_t j = ms->soldierCapacity();
-		if (j > 1)
-			game().send_player_change_soldier_capacity(*ms, -1);
+		if (ms->economy().get_nr_warehouses() > 0) {
+			uint32_t j = ms->soldierCapacity();
+			if (j > 1)
+				game().send_player_change_soldier_capacity(*ms, -1);
+		}
 	} else {
 		// If an enemy is in sight and the number of stationed soldier is not
 		// at maximum - set it to maximum.
