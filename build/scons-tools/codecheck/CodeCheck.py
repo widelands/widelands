@@ -311,28 +311,12 @@ if __name__ == '__main__':
         print "Usage: %s <options> <files>" % os.path.basename(sys.argv[0])
         print """
  -h,   --help            Print help and exit
- -b,   --benchmark       Benchmark each rule
  -c,   --color           Print warnings in color
+ -b,   --benchmark       Benchmark each rule
+ -p,   --profile         Run with cProfile. Creates "Profile.prof" file
 """
-
-    def main():
-        opts, files = getopt.getopt(sys.argv[1:], "hbc", ["help", "benchmark","color", "colour"])
-       
-        benchmark = False
-        color = False
-        for o,a in opts:
-            if o in ('-h','--help'):
-                usage()
-                sys.exit(0)
-            if o in ('-b','--benchmark'):
-                benchmark = True
-            if o in ('-c','--colour','--color'):
-                color = True
         
-        if not len(files):
-            usage()
-            sys.exit(0)
-
+    def check_files(files,color,benchmark):
         d = CodeChecker( benchmark = benchmark, color = color )
         for filename in files:
             print "Checking %s ..." % filename
@@ -352,8 +336,32 @@ if __name__ == '__main__':
                 time = ("%4.2fms"% (time*1000.)).rjust(8)
                 print "%s %s    %s" % (percentage,time,n)
 
-    # import cProfile
-    # cProfile.runctx("main()",globals(),locals(),"Profile.prof")
+    def main():
+        opts, files = getopt.getopt(sys.argv[1:], "hbcp", ["help", "benchmark","color", "colour", "profile"])
+       
+        benchmark = False
+        color = False
+        profile = False
+        for o,a in opts:
+            if o in ('-h','--help'):
+                usage()
+                sys.exit(0)
+            if o in ('-b','--benchmark'):
+                benchmark = True
+            if o in ('-c','--colour','--color'):
+                color = True
+            if o in ('-p','--profile'):
+                profile = True
+        
+        if not len(files):
+            usage()
+            sys.exit(0)
+        
+        if profile:
+            import cProfile
+            cProfile.runctx("check_files(files,color,benchmark)",globals(),locals(),"Profile.prof")
+        else:
+            check_files(files,color,benchmark)
 
     main()
 
