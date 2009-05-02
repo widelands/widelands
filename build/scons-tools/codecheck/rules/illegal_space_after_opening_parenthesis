@@ -6,7 +6,7 @@ This catches an opening parenthesis followed by a space or end of line.
 """
 
 regexp=r"""^([^/]|/[^/])*/?\(( |$|\n)"""
-error_msg="No space or newline allowed after openening parenthesis"
+error_msg="No space or newline allowed after opening parenthesis"
 
 forbidden = [
     '( h',
@@ -17,6 +17,10 @@ forbidden = [
     '/ / (',
     '/ / /(',
     '/ / /(\nadjh',
+
+# TestCases by Eric
+## illegal_character_after_opening_parenthesis.cc
+    'void f( float) {',
 ]
 
 allowed = [

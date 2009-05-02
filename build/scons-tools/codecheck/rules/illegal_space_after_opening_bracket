@@ -1,0 +1,22 @@
+#!/usr/bin/python
+
+
+"""
+This catches an opening [ followed by a space or end of line.
+"""
+
+regexp=r"""^([^/]|/[^/])*/?\[( |$|\n)"""
+error_msg="No space or newline allowed after opening bracket"
+
+forbidden = [
+	'\tfloat a[ 2];',
+]
+
+allowed = [
+    '[h',
+    '//[',
+    '// [',
+    '// [',
+]
+
+
