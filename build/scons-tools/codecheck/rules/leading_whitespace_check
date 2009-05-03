@@ -31,6 +31,8 @@ class EvalMatches( object ):
         
         curline = 1
         allowed_indent = "\t"*100
+        required_indent = ""
+        last_indent = ""
         opening_braces = defaultdict( list )
         
         bracesets = (
@@ -54,10 +56,12 @@ class EvalMatches( object ):
 
             # print "line:", line
             # print "  indent: '%s'" % indent.replace('\t','\\t')
+            # print "  required_indent: '%s'" % required_indent.replace('\t','\\t')
             # print "  allowed_indent: '%s'" % allowed_indent.replace('\t','\\t')
             
             if len(line) and line[0] == '(': # param lists can be indented twice
                 allowed_indent += '\t\t'
+                required_indent = last_indent + '\t'
                     
             nr_unmatched_opening_braces = 0
              
@@ -85,11 +89,16 @@ class EvalMatches( object ):
                             )
                     except IndexError: # Pop from empty list. Unabalenced paren.
                         pass
+            
+            
+            cindent = len(indent)
+
+            if cindent < len(required_indent):
+                errors.append( (lineno, "Indentation is too shallow"))
 
             # Check indent relative to previous line
-            cindent = len(indent)
             if cindent > len(allowed_indent):
-                errors.append( (lineno, "Indent is too deep (allowed are %i)" % len(allowed_indent) ) )
+                errors.append( (lineno, "Indentation is too deep (allowed are %i)" % len(allowed_indent) ) )
             else:
                 minlen = min(len(allowed_indent),cindent)
                 for current,allowed in zip(indent[:minlen],allowed_indent[:minlen]):
@@ -108,14 +117,22 @@ class EvalMatches( object ):
                 
                 if nr_unmatched_opening_braces:
                     allowed_indent = indent + ' ' * nr_unmatched_opening_braces + '\t'
+                    required_indent = indent
                 elif line[-1] in ("{:=),?+-*/"):
                     allowed_indent = indent + '\t'
-                elif self._indent_words.search(line):
+                    required_indent = indent
+                    required_indent = ""
+                elif self._indent_words.search(line) and line[-1] != ';':
                     allowed_indent = indent + '\t'
+                    required_indent = indent + '\t'
                 else:
                     allowed_indent = indent
+                    required_indent = ""
             
             # print "  allowed_indent: '%s'" % allowed_indent.replace('\t','\\t')
+            # print "  required_indent: '%s'" % required_indent.replace('\t','\\t')
+            
+            last_indent = indent
         
         # print "errors:", errors
 
@@ -235,6 +252,13 @@ if
 """\tint32_t start_walk(Game & game,
 \t\tWalkingDir dir) """,
 
+# Erics Tests
+## leading_whitespace_not_matching_previous_line.cc
+"""float g(float, float) {
+\tg
+\t\t(0.0,
+\t\t\tg(1.1, 2.2));
+}""",
 ]
 
 ###################
@@ -284,4 +308,34 @@ public:
 \t\tg(1.1, 2.2));
 }""",
 
+## leading_whitespace_not_matching_previous_line.cc
+"""void f() {
+\tfloat a;
+   float b;
+}""",
+
+
+## indentation_too_shallow
+"""void f
+(float)
+{
+}""",
+
+## indentation_too_deep
+"""float a;
+\tfloat b;
+""",
+
+"""void f() {
+\t\tfloat c;
+}""",
+
+"""}
+\tvoid g() {
+""",
+
+"""void g() {
+\t\t\t{
+\t\t\t}
+\t}""",
 ]
