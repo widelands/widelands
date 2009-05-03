@@ -47,5 +47,7 @@ void BuildingHints::parse (Profile & prof)
 			stoneproducer = b;
 		if (const bool b = hints->get_bool("needs_water"))
 			needs_water   = b;
+		mines_percent
+		= static_cast<uint8_t>(hints->get_int("mines_percent", 100));
 	}
 }

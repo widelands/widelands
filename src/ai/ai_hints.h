@@ -20,8 +20,13 @@
 #ifndef AI_HINTS_H
 #define AI_HINTS_H
 
+#include <SDL_types.h>
+
 class Profile;
 
+/// This struct is used to read out the data given in [aihints] section of a
+/// buildings conf file. It is used to tell the computer player about the
+/// special properties of a building.
 struct BuildingHints {
 	BuildingHints ();
 
@@ -42,12 +47,16 @@ struct BuildingHints {
 	bool get_needs_water()
 	{return needs_water;}
 
+	uint8_t get_mines_percent()
+	{return mines_percent;}
+
 private:
-	char * renews_map_resource;
-	char * mines;
-	bool   trunkproducer;
-	bool   stoneproducer;
-	bool   needs_water;
+	char  * renews_map_resource;
+	char  * mines;
+	bool    trunkproducer;
+	bool    stoneproducer;
+	bool    needs_water;
+	uint8_t mines_percent;
 };
 
 #endif

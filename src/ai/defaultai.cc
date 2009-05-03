@@ -37,6 +37,7 @@
 #include "player.h"
 #include "productionsite.h"
 #include "profile.h"
+#include "trainingsite.h"
 #include "tribe.h"
 #include "upcast.h"
 #include "warehouse.h"
@@ -58,6 +59,8 @@ Computer_Player(g, pid),
 m_buildable_changed(true),
 m_mineable_changed(true),
 tribe(0),
+next_productionsite_check_due(0),
+next_mine_check_due(0),
 next_militarysite_check_due(0),
 next_attack_consideration_due(300000),
 time_of_last_construction(0),
@@ -134,6 +137,10 @@ void DefaultAI::think ()
 	if (check_productionsites(gametime))
 		return;
 
+	// Check the mines and consider upgrading or destroying one
+	if (check_mines(gametime))
+		return;
+
 	// consider whether a change of the soldier capacity of some militarysites
 	// would make sense.
 	if (check_militarysites(gametime))
@@ -144,7 +151,7 @@ void DefaultAI::think ()
 		consider_attack(gametime);
 }
 
-
+/// called by Widelands game engine when an immovable changed
 void DefaultAI::receive(NoteImmovable const & note)
 {
 	if (note.lg == LOSE)
@@ -153,6 +160,7 @@ void DefaultAI::receive(NoteImmovable const & note)
 		gain_immovable(*note.pi);
 }
 
+/// called by Widelands game engine when a field changed
 void DefaultAI::receive(NoteField const & note)
 {
 	if (note.lg == GAIN)
@@ -230,6 +238,7 @@ void DefaultAI::late_initialization ()
 				// get the resource needed by the mine
 				if (char const * const s = bh->get_mines())
 					bo.mines = world.get_resource(strdup(s));
+				bo.mines_percent = bh->get_mines_percent();
 			}
 
 			continue;
@@ -242,6 +251,11 @@ void DefaultAI::late_initialization ()
 
 		if (typeid(bld) == typeid(Warehouse_Descr)) {
 			bo.type = BuildingObserver::WAREHOUSE;
+			continue;
+		}
+
+		if (typeid(bld) == typeid(TrainingSite_Descr)) {
+			bo.type = BuildingObserver::TRAININGSITE;
 			continue;
 		}
 
@@ -567,8 +581,16 @@ void DefaultAI::update_mineable_field (MineableField & field)
 /**
  * constructs the most needed building
  *
- * \ToDo: this function holds a lot of calculations that are hard to understand
- * at first and even second view - explain what's going on here
+ * The need for a productionsite or a mine is calculated by the need for
+ * their produced wares. The need for trunkproducers (like lumberjack's huts),
+ * stoneproducers (like quarries) and ressource refreshing buildings (like
+ * forester's houses, gamekeeper's huts or fishbreeder houses) are calculated
+ * seperately as these buildings should have another priority (on one hand they
+ * are important for the basic infrastructure, but there is no need for a lot
+ * of these buildings.
+ * Militarysites, warehouses and trainingssites have a different calculation,
+ * that (should) depend on the initialisation type (Agressive, Normal,
+ * Defensive)
  */
 bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 {
@@ -719,6 +741,12 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				// Build one warehouse (hq included) for ~every 25 productionsites
 				prio += productionsites.size();
 				prio -= (j->cnt_under_construction + numof_warehouses) * 25;
+
+			} else if (j->type == BuildingObserver::TRAININGSITE) {
+				// start building trainingsites when there are already ~50 other
+				// buildings. That should be enough for a working economy.
+				prio += productionsites.size() + militarysites.size();
+				prio += mines.size() - ((j->total_count() + 1) * 50);
 			}
 
 			// avoid to have too many construction sites
@@ -772,11 +800,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			else
 				prio += mf->coords.field->get_resources_amount() * 2 / 3;
 
-			// If the produced wares are needed, check if current economy can
-			// supply enough material for production.
+			// Check if current economy can supply enough material for production.
 			for (uint32_t k = 0; k < i->inputs.size(); ++k) {
 				prio += 2 * wares[i->inputs[k]].producers;
-				prio -= 6 * wares[i->inputs[k]].consumers;
+				prio -= 4 * wares[i->inputs[k]].consumers;
 			}
 
 			// Check if the produced wares are needed
@@ -790,8 +817,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			}
 
 			prio -= 2 * mf->mines_nearby * mf->mines_nearby;
-			prio /= 1 + i->cnt_built * 3;
-			prio /= 1 + i->cnt_under_construction * 7;
+			prio /= 1 + i->cnt_built * 2;
+			prio /= 1 + i->cnt_under_construction * 4;
 
 			if (prio > proposed_priority) {
 				proposed_building = i->id;
@@ -1175,8 +1202,6 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 			if (en_bo.cnt_under_construction > 0)
 				continue;
 
-			//if (site.site->workers()
-
 			int32_t prio = 0; // priority for enhancement
 
 			// Find new outputs of enhanced building
@@ -1224,6 +1249,75 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 	// Reorder and set new values;
 	productionsites.push_back(productionsites.front());
 	productionsites.pop_front();
+	return changed;
+}
+
+/**
+ * checks the first mine in list, takes care if it runs out of
+ * resources and finally reenqueues it at the end of the list.
+ *
+ * \returns true, if something was changed.
+ */
+bool DefaultAI::check_mines(int32_t gametime)
+{
+	if ((next_mine_check_due > gametime) || mines.empty())
+		return false;
+	next_mine_check_due = gametime + 5200;
+
+	// Get link to productionsite that should be checked
+	ProductionSiteObserver & site = mines.front();
+	Map & map = game().map();
+	Field * field = map.get_fcoords(site.site->get_position()).field;
+
+	// Check if mine ran out of resources
+	uint8_t current = field->get_resources_amount();
+	if (current < 1) {
+		game().send_player_bulldoze (*site.site);
+		return true;
+	}
+
+	// Check whether building is enhanceable and if wares of the enhanced
+	// buildings are needed. If yes consider an upgrade.
+	std::set<Building_Index> enhancements = site.site->enhancements();
+	int32_t maxprio = 0;
+	Building_Index enbld;
+	bool changed = false;
+	container_iterate_const(std::set<Building_Index>, enhancements, x) {
+		// Only enhance buildings that are allowed (scenario mode)
+		if (player->is_building_allowed((*x.current))) {
+			const Building_Descr & bld = *tribe->get_building_descr((*x.current));
+			BuildingObserver & en_bo = get_building_observer(bld.name().c_str());
+
+			// Don't enhance this building, if there is already one of same type
+			// under construction
+			if (en_bo.cnt_under_construction > 0)
+				continue;
+
+			// Check if mine needs an enhancement to mine more resources
+			int32_t prio = 0;
+			uint8_t until = field->get_starting_res_amount();
+			until = (until * (100 - site.bo->mines_percent)) / 100;
+			if (until >= current) {
+				// add some randomness - just for the case if more than one
+				// enhancement is available (not in any tribe yet)
+				prio = time(0) % 3 + 1;
+				if (prio > maxprio) {
+					maxprio = prio;
+					enbld = (*x.current);
+				}
+			}
+		}
+	}
+
+	// Enhance if enhanced building is useful
+	if (maxprio > 0) {
+		game().send_player_enhance_building(*site.site, enbld);
+		changed = true;
+	}
+
+	// Reorder and set new values;
+	mines.push_back(mines.front());
+	mines.pop_front();
 	return changed;
 }
 
@@ -1331,8 +1425,7 @@ void DefaultAI::consider_productionsite_influence
 
 
 /// \returns the economy observer containing \arg economy
-EconomyObserver * DefaultAI::get_economy_observer
-	(Economy & economy)
+EconomyObserver * DefaultAI::get_economy_observer (Economy & economy)
 {
 	for
 		(std::list<EconomyObserver *>::iterator i = economies.begin();
@@ -1347,8 +1440,7 @@ EconomyObserver * DefaultAI::get_economy_observer
 }
 
 /// \returns the building observer
-BuildingObserver & DefaultAI::get_building_observer
-	(char const * const name)
+BuildingObserver & DefaultAI::get_building_observer (char const * const name)
 {
 	if (tribe == 0)
 		late_initialization ();
@@ -1417,6 +1509,16 @@ void DefaultAI::gain_building (Building & b)
 
 			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
 				++wares[bo.inputs[i]].consumers;
+		} else if (bo.type == BuildingObserver::MINE) {
+			mines.push_back (ProductionSiteObserver());
+			mines.back().site = &dynamic_cast<ProductionSite &>(b);
+			mines.back().bo = &bo;
+
+			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
+				++wares[bo.outputs[i]].producers;
+
+			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
+				++wares[bo.inputs[i]].consumers;
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
 			militarysites.push_back (MilitarySiteObserver());
 			militarysites.back().site = &dynamic_cast<MilitarySite &>(b);
@@ -1450,6 +1552,22 @@ void DefaultAI::lose_building (Building const & b)
 				 ++i)
 				if (i->site == &b) {
 					productionsites.erase(i);
+					break;
+				}
+
+			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
+				--wares[bo.outputs[i]].producers;
+
+			for (uint32_t i = 0; i < bo.inputs.size(); ++i)
+				--wares[bo.inputs[i]].consumers;
+		} else if (bo.type == BuildingObserver::MINE) {
+			for
+				(std::list<ProductionSiteObserver>::iterator i =
+				 mines.begin();
+				 i != mines.end();
+				 ++i)
+				if (i->site == &b) {
+					mines.erase(i);
 					break;
 				}
 

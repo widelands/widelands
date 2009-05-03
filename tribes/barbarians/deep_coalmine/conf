@@ -14,6 +14,7 @@ miner=1
 
 [aihints]
 mines=coal
+mines_percent=60
 
 [inputs]
 snack=6

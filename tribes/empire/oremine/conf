@@ -11,6 +11,7 @@ miner=1
 
 [aihints]
 mines=iron
+mines_percent=50
 
 [inputs]
 ration=6

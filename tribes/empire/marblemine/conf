@@ -12,6 +12,7 @@ miner=1
 
 [aihints]
 mines=granit
+mines_percent=50
 
 [inputs]
 ration=6
@@ -19,7 +20,7 @@ wine=6
 
 [programs]
 mine_marble=_Mine marble
-mine_stone=_MIne stone
+mine_stone=_Mine stone
 work=_Work
 
 [mine_marble]

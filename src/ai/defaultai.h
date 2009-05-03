@@ -44,13 +44,8 @@ struct Flag;
  * file. The higher the preciousness, the more will defaultAI care for that ware
  * and will try to build up an infrastructure to create that ware.
  *
- * \ToDo What it does not do until now is:
- * - Using production hints of buildings other than foresters (f.e. gamekeeper)
- * - Building and using trainings sites
- * - Enhancing mines
- * - Check mines whether they are out of resources
- *
- * \ToDo Other things left to implement / improve:
+ * \ToDo Improvements:
+ * - Implement different initialisation types (Agressive, Normal, Defensive)
  * - Improve update code - currently the whole buildable area owned by defaultAI
  *   is rechecked after construction of a building or a road. Instead it would
  *   be better to write down the changed coordinates and only check those and
@@ -58,6 +53,9 @@ struct Flag;
  *   e.g. check_militarysite checks the whole visible area for enemy area, but
  *   it would already be enough, if it checks the outer circle ring.
  * - improvements and speedups in the whole defaultAI code.
+ * - handling of trainingssites (if supply line is broken - send some soldiers
+ *   out, to have some more forces. Reincrease the number of soldiers that
+ *   should be trained if inputs get filled again.).
  *
  */
 struct DefaultAI : Computer_Player {
@@ -97,6 +95,7 @@ private:
 
 	bool check_economies       ();
 	bool check_productionsites (int32_t);
+	bool check_mines           (int32_t);
 	bool check_militarysites   (int32_t);
 
 	int32_t calculate_need_for_ps(BuildingObserver &, int32_t);
@@ -135,6 +134,7 @@ private:
 	std::list<Widelands::Road const *> roads;
 	std::list<EconomyObserver *>      economies;
 	std::list<ProductionSiteObserver> productionsites;
+	std::list<ProductionSiteObserver> mines;
 	std::list<MilitarySiteObserver>   militarysites;
 
 	std::vector<WareObserver>         wares;
@@ -142,6 +142,7 @@ private:
 	int32_t next_road_due;
 	int32_t next_construction_due;
 	int32_t next_productionsite_check_due;
+	int32_t next_mine_check_due;
 	int32_t next_militarysite_check_due;
 	int32_t next_attack_consideration_due;
 	int32_t inhibit_road_building;

@@ -11,6 +11,7 @@ miner=1
 
 [aihints]
 mines=gold
+mines_percent=30
 
 [inputs]
 ration=6

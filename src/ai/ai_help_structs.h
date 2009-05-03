@@ -17,6 +17,9 @@
  *
  */
 
+#ifndef AI_HELP_STRUCTS_H
+#define AI_HELP_STRUCTS_H
+
 #include "checkstep.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -190,7 +193,7 @@ struct BuildingObserver {
 		PRODUCTIONSITE,
 		MILITARYSITE,
 		WAREHOUSE,
-		TRAININGSSITE,
+		TRAININGSITE,
 		MINE
 	}                                 type;
 
@@ -201,6 +204,7 @@ struct BuildingObserver {
 	bool                              need_water;
 
 	int32_t                           mines;
+	uint16_t                          mines_percent;
 
 	std::vector<int16_t>              inputs;
 	std::vector<int16_t>              outputs;
@@ -227,3 +231,5 @@ struct WareObserver {
 	uint8_t consumers;
 	uint8_t preciousness;
 };
+
+#endif
