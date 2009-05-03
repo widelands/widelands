@@ -14,7 +14,7 @@ def generate(env):
 		env['BUILDERS']['ctags']=SCons.Builder.Builder(action=env.Action(complain_ctags))
 
 def find_ctags(env):
-	b=env.WhereIs('ctags')
+	b=env.WhereIs('ctags', path=env['PATH'])
 	if b==None:
 		print 'Searching for ctags:       not found. Tags will not be built'
 	else:

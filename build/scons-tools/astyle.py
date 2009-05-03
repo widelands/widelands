@@ -19,8 +19,8 @@ def generate(env):
 		env['BUILDERS']['astyle']=SCons.Builder.Builder(action=env.Action(complain_astyle))
 
 def find_astyle(env):
-	binary=env.WhereIs('astyle')
-	buggy_binary=env.WhereIs('buggy-astyle')
+	binary=env.WhereIs('astyle', path=env['PATH'])
+	buggy_binary=env.WhereIs('buggy-astyle', path=env['PATH'])
 
 	if binary==None:
 		print 'Searching for astyle:      not found. Cannot perform source indenting.'

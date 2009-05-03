@@ -105,6 +105,9 @@ def cli_options():
 opts=cli_options()
 
 env=Environment(options=opts)
+
+BUILDDIR=parse_cli(env, BUILD_TARGETS) # must parse CLI before anything else, PATH might get changed
+
 env.Tool("ctags", toolpath=['build/scons-tools'])
 env.Tool("PNGShrink", toolpath=['build/scons-tools'])
 env.Tool("astyle", toolpath=['build/scons-tools'])
@@ -132,7 +135,6 @@ conf=env.Configure(conf_dir='#/build/sconf_temp',log_file='#build/config.log',
 #
 # Parse commandline and autoconfigure
 
-BUILDDIR=parse_cli(env, BUILD_TARGETS)
 env.Append(CPPPATH=[os.path.join('#', BUILDDIR)])
 
 print_build_info(env)
