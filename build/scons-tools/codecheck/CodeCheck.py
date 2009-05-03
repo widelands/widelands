@@ -25,7 +25,7 @@ class TokenStripper(object):
 ".*?
 (
     (\\\\")|
-    ([^\\]")   |       # End of string
+    ((?<!\\)")   |       # End of string
 $)
     ''')
     _literal_chars = re.compile(r"'[\\]?.'")

@@ -8,6 +8,9 @@ A tab or space followed by the end of the line.
 regexp = r'[ \t]+$'
 error_msg = "Trailing whitespace at end of line"
 
+strip_comments = False
+strip_strings = False
+
 forbidden = [
     """e; """,
     """e;	""",

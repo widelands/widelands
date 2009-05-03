@@ -14,6 +14,7 @@ blah
 def check_function(token_stripper, data):
     errors = []
     for lineno,line in enumerate(data.splitlines()):
+        line = token_stripper.strip_strings(token_stripper.strip_comments(line)).strip()
         lineno += 1
         opening_parens = line.count('(')
         closing_parens = line.count(')')
@@ -37,6 +38,8 @@ allowed = [
 \t\t(0.0 +
 \t\t g(1.1, 2.2));
 }""",
+
+"""\tstd::string newvisi = s->get_string("newvisi", "");""",
 ]
 forbidden = [
 """float g(float, float) {
