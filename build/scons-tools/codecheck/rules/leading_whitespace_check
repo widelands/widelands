@@ -5,7 +5,7 @@ import re
 from collections import defaultdict
 
 class EvalMatches( object ):
-    _indent_words = re.compile(r'\b(for|define|typedef|else|do|while|return|if|template|new)\b\s*$')
+    _indent_words = re.compile(r'\b(for|define|typedef|else|do|while|return|if|new|const)\b\s*$')
     _regexp=re.compile(r"^(([\t ]*).*$)", re.MULTILINE)
 
     def __init__(self):
@@ -30,6 +30,7 @@ class EvalMatches( object ):
         errors = []
         
         curline = 1
+        in_macro = False
         allowed_indent = "\t"*100
         required_indent = ""
         last_indent = ""
@@ -53,9 +54,13 @@ class EvalMatches( object ):
                 indent= ""
             line = line.strip()
 
-            if len(line) and line[0] == '#': # Skip macros
+            if in_macro or (len(line) and line[0] == '#'): # Skip macros
                 indent = ""
                 line = ""
+                in_macro = True
+            
+            if len(line) and line[-1] != '\\':
+                in_macro = False
 
             # print "line:", line
             # print "  indent: '%s'" % indent.replace('\t','\\t')
@@ -66,8 +71,10 @@ class EvalMatches( object ):
                 if line[0] == '(': # param lists can be indented twice
                     allowed_indent += '\t\t'
                     required_indent = last_indent + '\t'
-                elif line[0] in '{}' and len(required_indent): # { and } can be at last indent too
+                elif line[0] == '}' and len(required_indent): # } can be at last indent too
                     required_indent = required_indent[:-1]
+                elif line[0] == '{' and len(required_indent): # { can be at two done (at parameter definitions)
+                    required_indent = required_indent[:-2]
                     
             nr_unmatched_opening_braces = 0
              
@@ -141,6 +148,7 @@ class EvalMatches( object ):
             # print "  required_indent: '%s'" % required_indent.replace('\t','\\t')
             
             last_indent = indent
+
         
         # print "errors:", errors
 
@@ -259,7 +267,6 @@ if
 # This occured as bug
 """\tint32_t start_walk(Game & game,
 \t\tWalkingDir dir) """,
-
 
 ## Not to shallow
 """\tuint32_t const attack =

@@ -35,8 +35,20 @@ $)
 
     def reset(self):
         self._in_comment = False
+        self._in_macro = False
         self._comm_cache = {}
         self._str_cache = {}
+    
+    def strip_macros(self,given_line):
+        line = given_line
+        if given_line[0] == '#' or self._in_macro:
+            self._in_macro = True
+            line = ""
+
+        if len(given_line) and given_line[-1] != '\\':
+            self._in_macro = False
+
+        return line
 
     def strip_comments(self,given_line):
         cached_line = self._comm_cache.get(given_line,None)
