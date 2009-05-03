@@ -447,8 +447,8 @@ struct Player :
 	const AreaWatchers & areawatchers() const throw () {return m_areawatchers;}
 
 	// Statistics
-	Building_Stats_vector const & get_building_statistics
-		(Building_Index const i) const
+	Building_Stats_vector const &
+		get_building_statistics (Building_Index const i) const
 	{
 		return m_building_stats[i];
 	}

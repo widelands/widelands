@@ -114,22 +114,20 @@ typedef char const * zipcharpc;
 
 extern zipFile ZEXPORT zipOpen OF((const char *pathname, int32_t append));
 /*
-  Create a zipfile.
-     pathname contain on Windows XP a filename like "c:\\zlib\\zlib113.zip" or on
-       an Unix computer "zlib/zlib113.zip".
-     if the file pathname exist and append==APPEND_STATUS_CREATEAFTER, the zip
-       will be created at the end of the file.
-         (useful if the file contain a self extractor code)
-     if the file pathname exist and append==APPEND_STATUS_ADDINZIP, we will
-       add files in existing zip (be sure you don't add file that doesn't exist)
-     If the zipfile cannot be opened, the return value is NULL.
-     Else, the return value is a zipFile Handle, usable with other function
-       of this zip package.
+  Create a zipfile.  pathname contain on Windows XP a filename like
+  "c:\\zlib\\zlib113.zip" or on an Unix computer "zlib/zlib113.zip".  if the
+  file pathname exist and append==APPEND_STATUS_CREATEAFTER, the zip will be
+  created at the end of the file.  (useful if the file contain a self extractor
+  code) if the file pathname exist and append==APPEND_STATUS_ADDINZIP, we will
+  add files in existing zip (be sure you don't add file that doesn't exist) If
+  the zipfile cannot be opened, the return value is NULL.  Else, the return
+  value is a zipFile Handle, usable with other function of this zip package.
 */
 
 /* Note : there is no delete function into a zipfile.
-   If you want delete file into a zipfile, you must open a zipfile, and create another
-   Of couse, you can use RAW reading and writing to copy the file you did not want delte
+	If you want delete file into a zipfile, you must open a zipfile, and create
+	another Of couse, you can use RAW reading and writing to copy the file you
+	did not want delte
 */
 
 extern zipFile ZEXPORT zipOpen2 OF

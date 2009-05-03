@@ -74,7 +74,7 @@ int32_t RealFSImpl::FindFiles
 	(std::string const & path,
 	 std::string const & pattern,
 	 filenameset_t     * results,
-	 uint32_t            depth)
+	 uint32_t            )
 #ifdef _WIN32
 {
 	std::string buf;
@@ -177,7 +177,8 @@ bool RealFSImpl::IsDirectory(std::string const & path) {
 FileSystem & RealFSImpl::MakeSubFileSystem(std::string const & path) {
 	assert(FileExists(path)); //TODO: throw an exception instead
 	std::string const fullname = FS_CanonicalizeName(path);
-	//printf("RealFSImpl MakeSubFileSystem path %s fullname %s\n", path.c_str(), fullname.c_str());
+	//printf("RealFSImpl MakeSubFileSystem path %s fullname %s\n",
+	//path.c_str(), fullname.c_str());
 
 	if (IsDirectory(path))
 		return *new RealFSImpl   (fullname);
@@ -255,7 +256,9 @@ void RealFSImpl::m_unlink_directory(std::string const & file) {
 		 ++pname)
 	{
 		std::string filename = FS_Filename(pname->c_str());
-		if (filename == ".svn") // HACK: ignore SVN directory for this might be a campaign directory or similar
+		// HACK: ignore SVN directory for this might be a
+		// campaign directory or similar
+		if (filename == ".svn")
 			continue;
 		if (filename == "..")
 			continue;
@@ -418,7 +421,8 @@ void RealFSImpl::Write
 	fclose(f);
 
 	if (length and c != 1) // data might be 0 blocks long
-		throw wexception("Write to %s (%s) failed", fname.c_str(), fullname.c_str());
+		throw wexception
+			("Write to %s (%s) failed", fname.c_str(), fullname.c_str());
 }
 
 // rename a file or directory

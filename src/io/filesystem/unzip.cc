@@ -19,32 +19,33 @@
    Read unzip.h for more info
 */
 
-/* Decryption code comes from crypt.c by Info-ZIP but has been greatly reduced in terms of
-compatibility with older software. The following is from the original crypt.c. Code
-woven in by Terry Thorsen 1/2003.
+/* Decryption code comes from crypt.c by Info-ZIP but has been greatly reduced
+ * in terms of
+compatibility with older software. The following is from the original crypt.c.
+Code woven in by Terry Thorsen 1/2003.
 */
 /*
   Copyright (c) 1990-2000 Info-ZIP.  All rights reserved.
 
-  See the accompanying file LICENSE, version 2000-Apr-09 or later
-  (the contents of which are also included in zip.h) for terms of use.
-  If, for some reason, all these files are missing, the Info-ZIP license
-  also may be found at:  ftp://ftp.info-zip.org/pub/infozip/license.html
+  See the accompanying file LICENSE, version 2000-Apr-09 or later (the contents
+  of which are also included in zip.h) for terms of use.  If, for some reason,
+  all these files are missing, the Info-ZIP license also may be found at:
+ftp://ftp.info-zip.org/pub/infozip/license.html
 */
 /*
   crypt.c (full version) by Info-ZIP.      Last revised:  [see crypt.h]
 
   The encryption/decryption parts of this source code (as opposed to the
-  non-echoing password parts) were originally written in Europe.  The
-  whole source package can be freely distributed, including from the USA.
-  (Prior to January 2000, re-export from the US was a violation of US law.)
+  non-echoing password parts) were originally written in Europe.  The whole
+  source package can be freely distributed, including from the USA.  (Prior to
+  January 2000, re-export from the US was a violation of US law.)
  */
 
 /*
-  This encryption code is a direct transcription of the algorithm from
-  Roger Schlafly, described by Phil Katz in the file appnote.txt.  This
-  file (appnote.txt) is distributed with the PKZIP program (even in the
-  version without encryption capabilities).
+  This encryption code is a direct transcription of the algorithm from Roger
+  Schlafly, described by Phil Katz in the file appnote.txt.  This file
+  (appnote.txt) is distributed with the PKZIP program (even in the version
+  without encryption capabilities).
  */
 
 #include "unzip.h"
@@ -514,10 +515,10 @@ extern unzFile ZEXPORT unzOpen (char const * path)
 }
 
 /*
-  Close a ZipFile opened with unzipOpen.
-  If there is files inside the .Zip opened with unzipOpenCurrentFile (see later),
-    these files MUST be closed with unzipCloseCurrentFile before call unzipClose.
-  return UNZ_OK if there is no problem. */
+  Close a ZipFile opened with unzipOpen.  If there is files inside the .Zip
+  opened with unzipOpenCurrentFile (see later), these files MUST be closed with
+  unzipCloseCurrentFile before call unzipClose.  return UNZ_OK if there is no
+  problem. */
 extern int32_t ZEXPORT unzClose (unzFile file)
 {
 	if (not file)
@@ -1263,7 +1264,8 @@ extern int32_t ZEXPORT unzOpenCurrentFile2
   return <0 with error code if there is an error
     (UNZ_ERRNO for IO error, or zLib error for uncompress error)
 */
-extern int32_t ZEXPORT unzReadCurrentFile  (unzFile file, voidp buf, unsigned len)
+extern int32_t ZEXPORT unzReadCurrentFile
+		(unzFile file, voidp buf, unsigned len)
 {
 	int32_t                   err   = UNZ_OK;
 	uInt                      iRead = 0;
@@ -1474,7 +1476,8 @@ extern int32_t ZEXPORT unzeof (unzFile file)
   the return value is the number of bytes copied in buf, or (if <0)
     the error code
 */
-extern int32_t ZEXPORT unzGetLocalExtrafield (unzFile file, voidp buf, unsigned len)
+extern int32_t ZEXPORT unzGetLocalExtrafield
+		(unzFile file, voidp buf, unsigned len)
 {
 	file_in_zip_read_info_s * pfile_in_zip_read_info;
 	uInt read_now;
@@ -2701,7 +2704,8 @@ extern int32_t ZEXPORT zipWriteInFileInZip
 	return err;
 }
 
-extern int32_t ZEXPORT zipCloseFileInZipRaw (zipFile file, uLong uncompressed_size, uLong crc32)
+extern int32_t ZEXPORT zipCloseFileInZipRaw
+		(zipFile file, uLong uncompressed_size, uLong crc32)
 {
 	zip_internal * zi;
 	uLong compressed_size;
@@ -3012,7 +3016,8 @@ long ZCALLBACK ftell_file_func (voidpf, voidpf stream) {
 	return ftell(static_cast<FILE *>(stream));
 }
 
-long ZCALLBACK fseek_file_func (voidpf, voidpf stream, uLong offset, int32_t origin)
+long ZCALLBACK fseek_file_func
+		(voidpf, voidpf stream, uLong offset, int32_t origin)
 {
 	int32_t fseek_origin = 0;
 	switch (origin) {

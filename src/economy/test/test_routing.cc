@@ -39,7 +39,7 @@ class BadAccess : public std::exception {};
 class TestingRoutingNode : public RoutingNode {
 public:
 	TestingRoutingNode
-		(int32_t rcost = 1, int32_t wcost = 0, Coords pos = Coords(0, 0)) :
+		(int32_t wcost = 0, Coords pos = Coords(0, 0)) :
 			_waitcost(wcost), _position(pos) {}
 	void add_neighbour(TestingRoutingNode * nb) {
 		_neighbours.push_back(nb);
@@ -174,7 +174,7 @@ BOOST_AUTO_TEST_SUITE(Routing)
  */
 BOOST_AUTO_TEST_CASE(testingnode_creation) {
 	TestingRoutingNode d0;
-	TestingRoutingNode d1(0, 0, Coords(15, 0));
+	TestingRoutingNode d1(0, Coords(15, 0));
 
 	BOOST_CHECK_EQUAL(d0.get_position().y, d1.get_position().y);
 	BOOST_CHECK_EQUAL(d0.get_position().x, 0);
@@ -221,7 +221,7 @@ BOOST_FIXTURE_TEST_CASE
  * Now test the routing nodes functionality
  */
 BOOST_AUTO_TEST_CASE(RoutingNode_InitializeMemberVariables) {
-	TestingRoutingNode d0(0, 0, Coords(15, 0));
+	TestingRoutingNode d0(0, Coords(15, 0));
 
 	BOOST_CHECK(d0.all_members_zeroed());
 }
@@ -409,7 +409,8 @@ struct ComplexRouterFixture {
 		 Coords pos = Coords(0, 0),
 		 int32_t roadcost = 1, int32_t waitcost = 0)
 	{
-		TestingRoutingNode * dnew = new TestingRoutingNode(roadcost, waitcost, pos);
+		TestingRoutingNode * dnew = new TestingRoutingNode
+			(waitcost, pos);
 
 		dnew->add_neighbour(d);
 		d->add_neighbour(dnew);

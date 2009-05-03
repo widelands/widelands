@@ -312,7 +312,8 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 	size_t totallen = 0;
 	unzOpenCurrentFile(m_unzipfile);
 	for (;;) {
-		const int32_t len =  unzReadCurrentFile(m_unzipfile, buffer, sizeof(buffer));
+		const int32_t len =
+			unzReadCurrentFile(m_unzipfile, buffer, sizeof(buffer));
 		if (len == 0)
 			break;
 		if (len < 0) {

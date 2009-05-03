@@ -34,8 +34,9 @@ struct Carrier : public Worker {
 		Descr
 			(char const * const _name, char const * const _descname,
 			 std::string const & directory, Profile & prof, Section & global_s,
-			 Tribe_Descr const & _tribe, EncodeData const * encdata)
-			: Worker_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
+			 Tribe_Descr const & _tribe, EncodeData const * encdata) : 
+				Worker_Descr(_name, _descname, directory,
+								 prof, global_s, _tribe, encdata)
 		{};
 
 		virtual Worker_Type get_worker_type() const {return CARRIER;}

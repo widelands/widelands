@@ -88,7 +88,9 @@ std::string FileSystem::AutoExtension
  * Basically concatenates the two strings, but removes the filename part
  * of basefile (if any)
  */
-const char *FileSystem::FS_RelativePath(char *buf, const int32_t buflen, const char *basefile, const char *filename)
+const char *FileSystem::FS_RelativePath
+		(char *buf, const int32_t buflen,
+		 const char *basefile, const char *filename)
 {
 	const char *p;
 	int32_t endbase;
@@ -139,7 +141,8 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
 }
 
 /**
- * Prepend FS root and/or working directory (if necessary) to make path absolute.
+ * Prepend FS root and/or working directory (if necessary) to make path
+ * absolute.
  * \param path A path that might or might not be absolute
  * \return An absolute path
  */

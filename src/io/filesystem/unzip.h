@@ -3,10 +3,10 @@
 
    Copyright (C) 1998-2004 Gilles Vollant
 
-   This unzip package allow extract file from .ZIP file, compatible with PKZip 2.04g
-     WinZip, InfoZip tools and compatible.
-   Encryption and multi volume ZipFile (span) are not supported.
-   Old compressions used by old PKZip 1.x are not supported
+	This unzip package allow extract file from .ZIP file, compatible with PKZip
+	2.04g WinZip, InfoZip tools and compatible.  Encryption and multi volume
+	ZipFile (span) are not supported.  Old compressions used by old PKZip 1.x
+	are not supported
 
 
    I WAIT FEEDBACK at mail info@winimage.com
@@ -153,9 +153,9 @@ extern unzFile ZEXPORT unzOpen2 OF
 
 extern int32_t ZEXPORT unzClose OF((unzFile file));
 /*
-  Close a ZipFile opened with unzipOpen.
-  If there is files inside the .Zip opened with unzOpenCurrentFile (see later),
-    these files MUST be closed with unzipCloseCurrentFile before call unzipClose.
+  Close a ZipFile opened with unzipOpen.  If there is files inside the .Zip
+  opened with unzOpenCurrentFile (see later), these files MUST be closed with
+  unzipCloseCurrentFile before call unzipClose.
   return UNZ_OK if there is no problem. */
 
 extern int32_t ZEXPORT unzGetGlobalInfo OF
