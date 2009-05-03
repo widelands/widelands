@@ -28,6 +28,7 @@ class TokenStripper(object):
     ([^\\]")   |       # End of string
 $)
     ''')
+    _literal_chars = re.compile(r"'[\\]?.'")
 
     def __init__(self):
         self.reset()
@@ -47,13 +48,13 @@ $)
         start_idx = given_line.find('/*')
         if not self._in_comment:
             if start_idx != -1:
-                stop_idx = line.find("*/") 
+                stop_idx = line.find("*/",start_idx+2) 
                 if stop_idx != -1:
-                    line = line[stop_idx+2:]
+                    line = line[:start_idx] + line[stop_idx+2:]
                 else:
+                    line = line[:start_idx].strip()
                     self._in_comment = True
                 
-                line = line[:start_idx].strip()
 
         if self._in_comment:
             stop_idx = line.find('*/')
@@ -90,6 +91,7 @@ $)
 
         # Strings are replaced with blanks 
         newline = self._literal_strings.sub(lambda k: '"%s"' % ((len(k.group(0))-2)*" "),line)
+        newline = self._literal_chars.sub(lambda k: "'%s'" % ((len(k.group(0))-2)*" "),newline)
          
         self._str_cache[line] = newline
 

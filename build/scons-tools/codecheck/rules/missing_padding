@@ -7,18 +7,46 @@ Checking for forbidden
 TypeName* and TypeName& which should have a space before
 """
 
-# We're no longer passed any comments, therefore
-# checking for them is not really needed
 
-error_msg="Missing padding for operator (+-*/=%^&). Needs a space before and after."
+import re
 
-regexp = r"""(?x)
-(
-    ([^\s&/*(\>]\*(?!/))|   # Extra care for end of comment
-    ([^\s*&(\>][&+\-*/^%=])| # All other operators and with space before
-    ([+\-/^%=][^\s&+\-*/^%=*])  # Check for space before
-)
+# It is easier to search for invalids than for 'NOT' invalids
+regexp = re.compile(r"""(?x)
+([^\s](?:(?:&&)|(?:\|\|)))|
+((?:(?:&&)|(?:\|\|))[^\s])|
+([^\s>(&*:!{+\-[.](?<!operator)[*&])|          # Type*, Type&, operator
+([+\-*/|^&!<]?={1,2}[^\s=])|   # '+= a', 'a== a', 'a!= a'
+([^\s=!+-/^*/&|^<>r%][+\-*/^&|!<>%]?={1,2})|   # ' +=a', ' ==a', ' !=a', doesn't match 'r=' for operator=
+
+([^-<]>[^\s=&>*(:,);])|    # 'a >b'
+
+([^\s][/^\%](?!=))|    # '/ a'
+([/^\%][^=\s])|
+([^\s\-eE([{]-[^\s=\->])|    # -> and -= and unary -, also 8e-1
+([^\s+]\+[^\s=+])      # += 
 """
+)
+
+error_msg="Missing padding for operator. Needs a space before and after."
+def match_function( token_stripper, data ):
+    errors = []
+    for lineno,line in enumerate(data.splitlines(True)):
+        line = token_stripper.strip_strings(token_stripper.strip_comments(line)).strip()
+        if not len(line) or line[0] == '#':
+            continue
+        
+        lineno += 1 
+
+        if regexp.search(line):
+            errors.append( (lineno, error_msg) )
+
+    return errors
+
+
+    # ([/^%][^\s&*/^%>])  # Check for space after
+is_multiline = True
+
+evaluate_matches = match_function
 
 allowed = [
     "RoutingNode * a;",
@@ -26,76 +54,161 @@ allowed = [
     "/** Some comment",
     "std::vector<RoutingNode *> & nodes",
     "if (a && b)",
-	"\tOpen.push(&start);"
+    "\tOpen.push(&start);",
     "\t\t*reinterpret_cast<std::vector<RoutingNode *>*>(&m_flags);",
     "std::vector<RoutingNode *>& nodes",
-	"/* warehouses can determine max idle priority*/",
-	"blah // I *wanna* do that",
+        "/* warehouses can determine max idle priority*/",
+        "blah // I *wanna* do that",
     "&*m_stack.rbegin()",
+    
+    "(std::set<std::string>, j.current->second, i)",
+    
+    # > < 
+	"r = (palette[i].r * shade) >> 8;",
+    "std::vector<High>",
+	"std::vector<State>::iterator it = m_stack.end();",
+
+    "v->get_string()", # pointers are fine
+
+    # Allow includes
+    "#include <sys/types.h>",
+    
+
+    # Ignore strings & comments
+	"\tif (*i.current == '%') {",
+    "if (calc_linewidth(font, cur_word) > (max_width /*/ 2*/)) {",
+    
+    
+    # * Pointer to pointer
+	"func(int **r);",
+    "void (a::*b)",
+	"if (!*ppgrid) {",
+    "void MiniMap::toggle(Layers button) {*m_view.m_flags ^= button;}",
+    "m_loaded_obj[&object] = false;",
+    "m_loaded_obj[*object] = false;",
+	"(_callback_argument_this.*_callback_function)();",
+    "friend struct Table<void *>;",
+    
+    # Unary minus
+    "-1",
+	"func(-1);",
+    "8.46126929e-5",
+    "-8.46126929e-5",
+   
+    # Operator=
+    "int someclass::operator= (int)",
+    "int someclass::operator* (int)",
+    
+    # increment, decrement
+    "incr++;",
+    "++incr;",
+    "--decr;",
+    "decr--;",
+    "++*digit_to_increment;",
+    
+    # +=, -= 
+    "result += it",
+    "result -= it",
+
+    # Logical
+    "a && b",
+    "a || b",
+
+    # compares
+    "a == b",
+    "a != b",
+	"a >= b", 
+    "b <= a", 
+    "b < a", 
+    "b > a", 
+	"AreaWatcher(const Player_Area<>);",
+	"void func (Player_Area<Area>);",
+	"friend class NoteReceiver<T>;",
+    
+    'a %= a;',
+    
 ]
 forbidden = [
     "RoutingNode* a;",
     "Blahtype& b;",
     "std::vector<RoutingNode*> & nodes",
-    
+
+    " a== b",
+    " a ==b",
+    " a !=b",
+    " a!= b",
+	"a>= b", 
+	"a >=b", 
+    "b<= a", 
+    "b <=a", 
+    #"b< a",  could also be std::vector<a  
+    #"b <a", could also be std::vector<hai>
+    #"b> a", could also be std::vector<hallo> hi;
+    "b >a", 
+
+    ' a&& b',
+    ' a &&b',
+    ' a|| b',
+    ' a ||b',
+
     'char a = a^ a;',
     'char a = a ^a;',
 
     # Erics tests
     ## missing_padding.cc
     'char a=a;',
-    'char a= a^a;',
-    'char a= a%a;',
-    'char a= a/a;',
-    'char a= a*a;',
-    'char a= a+a;',
-    'char a= a-a;',
-    'char A=A;',
-    'char A= A^A;',
-    'char A= A%A;',
-    'char A= A/A;',
-    'char A= A*A;',
-    'char A= A+A;',
-    'char A= A-A;',
-    
-    'char b=b;',
-    'char b= b^b;',
-    'char b= b%b;',
-    'char b= b/b;',
-    'char b= b*b;',
-    'char b= b+b;',
-    'char b= b-b;',
-    'char B=B;',
-    'char B= B^B;',
-    'char B= B%B;',
-    'char B= B/B;',
-    'char B= B*B;',
-    'char B= B+B;',
-    'char B= B-B;',
-    
-    'char _=_;',
-    'char _= _^_;',
-    'char _= _%_;',
-    'char _= _/_;',
-    'char _= _*_;',
-    'char _= _+_;',
-    'char _= _-_;',
+    'char a = a^a;',
+    'char a = a%a;',
+    'char a = a/a;',
+    'char a = a*a;',
+    'char a = a+a;',
+    'char a = a-a;',
+    'char A =A;',
+    'char A = A^A;',
+    'char A = A%A;',
+    'char A = A/A;',
+    'char A = A*A;',
+    'char A = A+A;',
+    'char A = A-A;',
 
-    'char x0=010;',
-    'char x0= 010^010;',
-    'char x0= 010%010;',
-    'char x0= 010/010;',
-    'char x0= 010*010;',
-    'char x0= 010+010;',
-    'char x0= 010-010;',
-    
-    'char x1=1;',
-    'char x1= 1^1;',
-    'char x1= 1%1;',
-    'char x1= 1/1;',
-    'char x1= 1*1;',
-    'char x1= 1+1;',
-    'char x1= 1-1;',
+    'char b=b;',
+    'char b = b^b;',
+    'char b = b%b;',
+    'char b = b/b;',
+    'char b = b*b;',
+    'char b = b+b;',
+    'char b = b-b;',
+    'char B =B;',
+    'char B = B^B;',
+    'char B = B%B;',
+    'char B = B/B;',
+    'char B = B*B;',
+    'char B = B+B;',
+    'char B = B-B;',
+
+    'char _ =_;',
+    'char _ = _^_;',
+    'char _ = _%_;',
+    'char _ = _/_;',
+    'char _ = _*_;',
+    'char _ = _+_;',
+    'char _ = _-_;',
+
+    'char x0 =010;',
+    'char x0 = 010^010;',
+    'char x0 = 010%010;',
+    'char x0 = 010/010;',
+    'char x0 = 010*010;',
+    'char x0 = 010+010;',
+    'char x0 = 010-010;',
+
+    'char x1 =1;',
+    'char x1 = 1^1;',
+    'char x1 = 1%1;',
+    'char x1 = 1/1;',
+    'char x1 = 1*1;',
+    'char x1 = 1+1;',
+    'char x1 = 1-1;',
 
     'char const * str ="";',
 
@@ -116,7 +229,10 @@ forbidden = [
     'a+= a;',
     'a +=a;',
     'a+=a;',
-    
+    'a%=a;',
+    'a%= a;',
+    'a %=a;',
+
     'A^= A;',
     'A ^=A;',
     'A^=A;',
@@ -132,7 +248,7 @@ forbidden = [
     'A+= A;',
     'A +=A;',
     'A+=A;',
-    
+
     '_^= _;',
     '_ ^=_;',
     '_^=_;',
@@ -148,7 +264,7 @@ forbidden = [
     '_+= _;',
     '_ +=_;',
     '_+=_;',
-    
+
     'type_a& aa = aa;',
     'type_A& AA = AA;',
     'type_b& bb = bb;',
