@@ -12,6 +12,10 @@ error_msg = "Tabs are only allowed as the first characters in line"
 
 forbidden = [
     "a	{",
+
+    # Erics test
+    ## misused_tab.cc
+    'void\tf();',
 ]
 
 

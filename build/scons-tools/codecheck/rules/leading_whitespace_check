@@ -23,8 +23,6 @@ class EvalMatches( object ):
             errors.append(
                 (lineno,"Closing parenthesis without matching leading alignment")
             )
-            errors.append((cor_lineno,"Opening brace has an indent of %i" % len(cor_indent)))
-            errors.append((lineno,"Closing brace has an indent of %i" % len(indent)))
     
     def __call__(self, token_stripper, data):
         indents = self._regexp.findall(data)
@@ -236,6 +234,7 @@ if
 # This occured as bug
 """\tint32_t start_walk(Game & game,
 \t\tWalkingDir dir) """,
+
 ]
 
 ###################
@@ -275,5 +274,14 @@ public:
 \tstart.mpf_estimate =
 \t\tcost_calculator.calc_cost_estimate
 \t\t (start.get_position(), end.get_position());
-"""
+""",
+
+# Erics Tests
+## closing_parenthesis_without_matching_leading_alignment.cc
+"""float g(float, float) {
+\treturn
+\t\t(0.0 +
+\t\tg(1.1, 2.2));
+}""",
+
 ]
