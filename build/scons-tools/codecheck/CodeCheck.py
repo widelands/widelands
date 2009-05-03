@@ -41,7 +41,7 @@ $)
     
     def strip_macros(self,given_line):
         line = given_line
-        if given_line[0] == '#' or self._in_macro:
+        if self._in_macro or (len(given_line) and given_line[0] == '#'):
             self._in_macro = True
             line = ""
 
