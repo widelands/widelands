@@ -76,7 +76,8 @@ int32_t Icon_Grid::add
 		if (rows <= 1)
 			set_size(m_cell_width * m_items.size(), m_cell_height + m_font_height);
 		else
-			set_size(m_cell_width * m_columns, m_cell_height * rows + m_font_height);
+			set_size
+				(m_cell_width * m_columns, m_cell_height * rows + m_font_height);
 	}
 	else
 	{
@@ -85,7 +86,8 @@ int32_t Icon_Grid::add
 		if (cols <= 1)
 			set_size(m_cell_width, m_cell_height * m_items.size() + m_font_height);
 		else
-			set_size(m_cell_width * cols, m_cell_height * m_columns + m_font_height);
+			set_size
+				(m_cell_width * cols, m_cell_height * m_columns + m_font_height);
 	}
 
 	return m_items.size() - 1;
@@ -272,7 +274,8 @@ void Icon_Grid::handle_mousein(bool inside)
 /**
  * Update highlight under the mouse and send signals.
 */
-bool Icon_Grid::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int32_t) {
+bool Icon_Grid::handle_mousemove
+		(const Uint8, int32_t x, int32_t y, int32_t, int32_t) {
 	int32_t hl = index_for_point(x, y);
 
 	if (hl != m_highlight) {

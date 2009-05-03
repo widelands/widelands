@@ -51,8 +51,10 @@ MessageBox::MessageBox
 		 5, 5, 30, 30,
 		 text.c_str(), Align_Center);
 
-	const int32_t outerwidth = parent ? parent->get_inner_w() : g_gr->get_xres();
-	const int32_t outerheight = parent ? parent->get_inner_h() : g_gr->get_yres();
+	const int32_t outerwidth = parent ?
+		parent->get_inner_w() : g_gr->get_xres();
+	const int32_t outerheight = parent ?
+		parent->get_inner_h() : g_gr->get_yres();
 	const int32_t maxwidth = outerwidth - 80;
 	const int32_t maxheight = outerheight - 60;
 	int32_t width, height;

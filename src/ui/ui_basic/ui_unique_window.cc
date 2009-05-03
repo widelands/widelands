@@ -30,7 +30,8 @@ UniqueWindow IMPLEMENTATION
 
 
 /**
- * In order to avoid dangling pointers, we need to kill our contained window here.
+ * In order to avoid dangling pointers, we need to kill our contained window
+ * here.
 */
 UniqueWindow::Registry::~Registry() {delete window;}
 

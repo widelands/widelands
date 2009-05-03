@@ -335,27 +335,33 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End) {
 	assert(m_sort_column < m_columns.size());
 	if (End > size()) End = size();
 	if (get_sort_descending())
-		for (uint32_t i = Begin; i != End; ++i) for (uint32_t j = i; j != End; ++j) {
-			Entry_Record * const eri = m_entry_records[i];
-			Entry_Record * const erj = m_entry_records[j];
-			if (eri->get_string(m_sort_column) > erj->get_string(m_sort_column)) {
-				if      (m_selection == i) m_selection = j;
-				else if (m_selection == j) m_selection = i;
-				m_entry_records[i] = erj;
-				m_entry_records[j] = eri;
+		for (uint32_t i = Begin; i != End; ++i)
+			for (uint32_t j = i; j != End; ++j) {
+				Entry_Record * const eri = m_entry_records[i];
+				Entry_Record * const erj = m_entry_records[j];
+				if
+					(eri->get_string(m_sort_column) > erj->get_string(m_sort_column))
+				{
+					if      (m_selection == i) m_selection = j;
+					else if (m_selection == j) m_selection = i;
+					m_entry_records[i] = erj;
+					m_entry_records[j] = eri;
+				}
 			}
-		}
 	else
-		for (uint32_t i = Begin; i != End; ++i) for (uint32_t j = i; j != End; ++j) {
-			Entry_Record * const eri = m_entry_records[i];
-			Entry_Record * const erj = m_entry_records[j];
-			if (eri->get_string(m_sort_column) < erj->get_string(m_sort_column)) {
-				if      (m_selection == i) m_selection = j;
-				else if (m_selection == j) m_selection = i;
-				m_entry_records[i] = erj;
-				m_entry_records[j] = eri;
+		for (uint32_t i = Begin; i != End; ++i)
+			for (uint32_t j = i; j != End; ++j) {
+				Entry_Record * const eri = m_entry_records[i];
+				Entry_Record * const erj = m_entry_records[j];
+				if
+					(eri->get_string(m_sort_column) < erj->get_string(m_sort_column))
+				{
+					if      (m_selection == i) m_selection = j;
+					else if (m_selection == j) m_selection = i;
+					m_entry_records[i] = erj;
+					m_entry_records[j] = eri;
+				}
 			}
-		}
 }
 
 

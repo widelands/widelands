@@ -39,7 +39,8 @@ namespace UI {
 /// Width to use as the corner. This must be >= VT_B_PIXMAP_THICKNESS.
 #define HZ_B_CORNER_PIXMAP_LEN 20
 
-#define HZ_B_MIDDLE_PIXMAP_LEN (HZ_B_TOTAL_PIXMAP_LEN - 2 * HZ_B_CORNER_PIXMAP_LEN)
+#define HZ_B_MIDDLE_PIXMAP_LEN \
+	(HZ_B_TOTAL_PIXMAP_LEN - 2 * HZ_B_CORNER_PIXMAP_LEN)
 
 /// Width/height the vertical border graphics must have.
 #define VT_B_PIXMAP_THICKNESS 20
@@ -48,7 +49,8 @@ namespace UI {
 /// Height to use as the thingy.
 #define VT_B_THINGY_PIXMAP_LEN 20
 
-#define VT_B_MIDDLE_PIXMAP_LEN (VT_B_TOTAL_PIXMAP_LEN - 2 * VT_B_THINGY_PIXMAP_LEN)
+#define VT_B_MIDDLE_PIXMAP_LEN \
+	(VT_B_TOTAL_PIXMAP_LEN - 2 * VT_B_THINGY_PIXMAP_LEN)
 
 
 /**
@@ -63,22 +65,34 @@ namespace UI {
  * \param h height of the inner rectangle of the window
  * \param title string to display in the window title
  */
-Window::Window(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, const char *title) :
-Panel(parent, x, y, w + VT_B_PIXMAP_THICKNESS * 2, TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
-_is_minimal(false), _dragging(false),
-_docked_left(false), _docked_right(false), _docked_bottom(false),
-_drag_start_win_x(0), _drag_start_win_y(0), _drag_start_mouse_x(0), _drag_start_mouse_y(0),
-m_pic_lborder   (g_gr->get_picture(PicMod_UI, "pics/win_l_border.png")),
-m_pic_rborder   (g_gr->get_picture(PicMod_UI, "pics/win_r_border.png")),
-m_pic_top       (g_gr->get_picture(PicMod_UI, "pics/win_top.png")),
-m_pic_bottom    (g_gr->get_picture(PicMod_UI, "pics/win_bot.png")),
-m_pic_background(g_gr->get_picture(PicMod_UI, "pics/win_bg.png"))
+Window::Window
+	(Panel *parent, int32_t x, int32_t y, uint32_t w,
+	 uint32_t h, const char *title) :
+		Panel
+			(parent, x, y, w + VT_B_PIXMAP_THICKNESS * 2,
+			 TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
+		_is_minimal(false), _dragging(false),
+		_docked_left(false), _docked_right(false), _docked_bottom(false),
+		_drag_start_win_x(0), _drag_start_win_y(0),
+		_drag_start_mouse_x(0), _drag_start_mouse_y(0),
+		m_pic_lborder
+			(g_gr->get_picture(PicMod_UI, "pics/win_l_border.png")),
+		m_pic_rborder
+			(g_gr->get_picture(PicMod_UI, "pics/win_r_border.png")),
+		m_pic_top
+			(g_gr->get_picture(PicMod_UI, "pics/win_top.png")),
+		m_pic_bottom
+			(g_gr->get_picture(PicMod_UI, "pics/win_bot.png")),
+		m_pic_background
+			(g_gr->get_picture(PicMod_UI, "pics/win_bg.png"))
 {
 
 	if (title)
 		set_title(title);
 
-	set_border(VT_B_PIXMAP_THICKNESS, VT_B_PIXMAP_THICKNESS, TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
+	set_border
+		(VT_B_PIXMAP_THICKNESS, VT_B_PIXMAP_THICKNESS,
+		 TP_B_PIXMAP_THICKNESS, BT_B_PIXMAP_THICKNESS);
 	set_cache(true);
 	set_top_on_click(true);
 }
@@ -159,10 +173,14 @@ void Window::draw_border(RenderTarget & dst)
 	assert(HZ_B_CORNER_PIXMAP_LEN >= VT_B_PIXMAP_THICKNESS);
 	assert(HZ_B_MIDDLE_PIXMAP_LEN > 0);
 
-	const uint32_t hidden_width_left  = _docked_left  ? VT_B_PIXMAP_THICKNESS : 0;
-	const uint32_t hidden_width_right = _docked_right ? VT_B_PIXMAP_THICKNESS : 0;
-	const int32_t hz_bar_end = get_w() - HZ_B_CORNER_PIXMAP_LEN + hidden_width_right;
-	const int32_t hz_bar_end_minus_middle = hz_bar_end - HZ_B_MIDDLE_PIXMAP_LEN;
+	const uint32_t hidden_width_left  = _docked_left  ?
+		VT_B_PIXMAP_THICKNESS : 0;
+	const uint32_t hidden_width_right = _docked_right ?
+		VT_B_PIXMAP_THICKNESS : 0;
+	const int32_t hz_bar_end = get_w() -
+		HZ_B_CORNER_PIXMAP_LEN + hidden_width_right;
+	const int32_t hz_bar_end_minus_middle = hz_bar_end -
+		HZ_B_MIDDLE_PIXMAP_LEN;
 
 	{ //  Top border.
 		int32_t pos = HZ_B_CORNER_PIXMAP_LEN - hidden_width_left;
@@ -202,8 +220,10 @@ void Window::draw_border(RenderTarget & dst)
 			 m_title.c_str(), Align_Center);
 
 	if (not _is_minimal) {
-		const int32_t vt_bar_end = get_h() - (_docked_bottom ? 0 : BT_B_PIXMAP_THICKNESS) - VT_B_THINGY_PIXMAP_LEN;
-		const int32_t vt_bar_end_minus_middle = vt_bar_end - VT_B_MIDDLE_PIXMAP_LEN;
+		const int32_t vt_bar_end = get_h() -
+			(_docked_bottom ? 0 : BT_B_PIXMAP_THICKNESS) - VT_B_THINGY_PIXMAP_LEN;
+		const int32_t vt_bar_end_minus_middle =
+			vt_bar_end - VT_B_MIDDLE_PIXMAP_LEN;
 
 		if (not _docked_left) {
 
@@ -377,7 +397,9 @@ inline void Window::undock_left() {
 	assert(_docked_left);
 	_docked_left = false;
 	set_size(VT_B_PIXMAP_THICKNESS + get_inner_w() + get_rborder(), get_h());
-	set_border(VT_B_PIXMAP_THICKNESS, get_rborder(), get_tborder(), get_bborder());
+	set_border
+		(VT_B_PIXMAP_THICKNESS, get_rborder(),
+		 get_tborder(), get_bborder());
 }
 
 inline void Window::dock_right() {
@@ -391,7 +413,9 @@ inline void Window::undock_right() {
 	assert(_docked_right);
 	_docked_right = false;
 	set_size(get_lborder() + get_inner_w() + VT_B_PIXMAP_THICKNESS, get_h());
-	set_border(get_lborder(), VT_B_PIXMAP_THICKNESS, get_tborder(), get_bborder());
+	set_border
+		(get_lborder(), VT_B_PIXMAP_THICKNESS,
+		 get_tborder(), get_bborder());
 }
 
 inline void Window::dock_bottom() {
@@ -406,7 +430,9 @@ inline void Window::undock_bottom() {
 	assert(_docked_bottom);
 	_docked_bottom = false;
 	set_size(get_w(), get_tborder() + get_inner_h() + BT_B_PIXMAP_THICKNESS);
-	set_border(get_lborder(), get_rborder(), get_tborder(), BT_B_PIXMAP_THICKNESS);
+	set_border
+		(get_lborder(), get_rborder(),
+		 get_tborder(), BT_B_PIXMAP_THICKNESS);
 }
 
 
@@ -414,12 +440,16 @@ inline void Window::undock_bottom() {
  * Drag the mouse if the left mouse button is clicked.
  * Ensure that the window isn't dragged out of the screen.
  */
-bool Window::handle_mousemove(const Uint8, int32_t mx, int32_t my, int32_t, int32_t) {
+bool Window::handle_mousemove
+		(const Uint8, int32_t mx, int32_t my, int32_t, int32_t)
+{
 	if (_dragging) {
 		const int32_t mouse_x = get_x() + get_lborder() + mx;
 		const int32_t mouse_y = get_y() + get_tborder() + my;
-		int32_t left = std::max(0, _drag_start_win_x + mouse_x - _drag_start_mouse_x);
-		int32_t top  = std::max(0, _drag_start_win_y + mouse_y - _drag_start_mouse_y);
+		int32_t left = std::max
+			(0, _drag_start_win_x + mouse_x - _drag_start_mouse_x);
+		int32_t top  = std::max
+			(0, _drag_start_win_y + mouse_y - _drag_start_mouse_y);
 		int32_t new_left = left, new_top = top;
 
 		if (const Panel * const parent = get_parent()) {

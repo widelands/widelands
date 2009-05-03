@@ -36,10 +36,10 @@ struct RenderTarget;
 namespace UI {
 /**
  * Panel is a basic rectangular UI element.
- * The outer rectangle is defined by (_x, _y, _w, _h) and encloses the entire panel,
- * including both border and inner area/rectangle.
- * The inner rectangle is the outer rectangle minus the border sizes.
- * Child panel coordinates are always relative to the inner rectangle.
+ * The outer rectangle is defined by (_x, _y, _w, _h) and encloses the entire
+ * panel, including both border and inner area/rectangle.  The inner rectangle
+ * is the outer rectangle minus the border sizes.  Child panel coordinates are
+ * always relative to the inner rectangle.
  */
 struct Panel : public Object {
 	enum {
@@ -50,8 +50,10 @@ struct Panel : public Object {
 		pf_child_die = 16, ///< a child needs to die
 		pf_visible = 32, ///< render the panel
 		pf_can_focus = 64, ///< can receive the keyboard focus
-		pf_snap_windows_only_when_overlapping = 128, ///< children should snap only when overlapping the snap target
-		pf_dock_windows_to_edges = 256, ///< children should snap to the edges of this panel
+		/// children should snap only when overlapping the snap target
+		pf_snap_windows_only_when_overlapping = 128,
+		/// children should snap to the edges of this panel
+		pf_dock_windows_to_edges = 256,
 	}; ///<\todo Turn this into separate bool flags
 
 	Panel
@@ -85,12 +87,16 @@ struct Panel : public Object {
 
 	virtual bool is_snap_target() const {return false;}
 	uint16_t get_border_snap_distance() const {return _border_snap_distance;}
-	void set_border_snap_distance(const uint8_t value) {_border_snap_distance = value;}
+	void set_border_snap_distance(const uint8_t value)
+		{_border_snap_distance = value;}
 	uint8_t get_panel_snap_distance () const {return _panel_snap_distance;}
-	void set_panel_snap_distance(const uint8_t value) {_panel_snap_distance = value;}
-	bool get_snap_windows_only_when_overlapping() const {return _flags & pf_snap_windows_only_when_overlapping;}
+	void set_panel_snap_distance(const uint8_t value)
+		{_panel_snap_distance = value;}
+	bool get_snap_windows_only_when_overlapping() const
+		{return _flags & pf_snap_windows_only_when_overlapping;}
 	void set_snap_windows_only_when_overlapping(const bool on = true);
-	bool get_dock_windows_to_edges() const {return _flags & pf_dock_windows_to_edges;}
+	bool get_dock_windows_to_edges() const
+		{return _flags & pf_dock_windows_to_edges;}
 	void set_dock_windows_to_edges(const bool on = true);
 	void set_inner_size(uint32_t nw, uint32_t nh);
 	void fit_inner(Panel & inner);
@@ -154,12 +160,14 @@ struct Panel : public Object {
 	bool get_key_state(SDLKey) const;
 
 	void set_handle_mouse(bool yes);
-	bool get_handle_mouse() const {return (_flags & pf_handle_mouse) ? true : false;}
+	bool get_handle_mouse() const
+		{return (_flags & pf_handle_mouse) ? true : false;}
 	void grab_mouse(bool grab);
 
 	void set_can_focus(bool yes);
 	bool get_can_focus() const {return (_flags & pf_can_focus) ? true : false;}
-	bool has_focus() const {assert(get_can_focus()); return (_parent->_focus == this);}
+	bool has_focus() const
+		{assert(get_can_focus()); return (_parent->_focus == this);}
 	void focus();
 
 	void set_think(bool yes);
@@ -169,7 +177,8 @@ struct Panel : public Object {
 		if (on) _flags |= pf_top_on_click;
 		else _flags &= ~pf_top_on_click;
 	}
-	bool get_top_on_click() const {return (_flags & pf_top_on_click) ? true : false;}
+	bool get_top_on_click()
+		const {return (_flags & pf_top_on_click) ? true : false;}
 
 protected:
 	void die();
@@ -183,11 +192,13 @@ private:
 	void do_draw(RenderTarget &);
 	void do_think();
 
-	Panel * child_at_mouse_cursor(int32_t mouse_x, int32_t mouse_y, Panel * child);
+	Panel * child_at_mouse_cursor
+		(int32_t mouse_x, int32_t mouse_y, Panel * child);
 	void do_mousein(bool inside);
 	bool do_mousepress  (const Uint8 btn, int32_t x, int32_t y);
 	bool do_mouserelease(const Uint8 btn, int32_t x, int32_t y);
-	bool do_mousemove(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	bool do_mousemove
+		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool do_key(bool down, SDL_keysym code);
 
 	Panel *_parent;

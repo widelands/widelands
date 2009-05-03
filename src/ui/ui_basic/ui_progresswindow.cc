@@ -114,7 +114,8 @@ void ProgressWindow::set_background(const std::string & file_name) {
 			if (g_fs->IsDirectory("worlds/" + file_name)) {
 				filenameset_t files;
 				int32_t intbuf = g_fs->FindFiles
-						(("worlds/" + file_name + "/pics/"), ("loading_??.jpg"), &files);
+						(("worlds/" + file_name + "/pics/"),
+						 ("loading_??.jpg"), &files);
 				intbuf = (intbuf == 0) ? -1 : time(0) % intbuf; // some randomness
 				if ((intbuf < 0) | (intbuf > 99))
 					m_background = "pics/progress.png";
@@ -146,7 +147,8 @@ void ProgressWindow::step(const std::string & description) {
 
 	rt.fill_rect(m_label_rectangle, PROGRESS_FONT_COLOR_BG);
 	g_fh->draw_string
-		(rt, UI_FONT_SMALL, PROGRESS_FONT_COLOR, m_label_center, description, Align_Center);
+		(rt, UI_FONT_SMALL, PROGRESS_FONT_COLOR,
+		 m_label_center, description, Align_Center);
 	g_gr->update_rectangle(m_label_rectangle);
 
 	update(repaint);

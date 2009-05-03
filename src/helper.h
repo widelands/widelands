@@ -123,7 +123,8 @@ inline bool match_force_skip(char * & candidate, char const * pattern) {
 /**
  * Convert std::string to any sstream-compatible type
  *
- * \see http://www.experts-exchange.com/Programming/Programming_Languages/Cplusplus/Q_20670737.html
+ * \see http://www.experts-exchange.com/Programming/
+ *    Programming_Languages/Cplusplus/Q_20670737.html
  * \author AssafLavie on http://www.experts-exchange.com
  */
 template<typename T> T stringTo(std::string const & s) {
@@ -133,14 +134,16 @@ template<typename T> T stringTo(std::string const & s) {
 	return x;
 }
 
-/// Convert any sstream-compatible type to std::string
-///
-/// \note In a just world, this would be implemented with gnu::autosprintf. But
-/// many distributions don't carry that lib despite the fact that it is part of
-/// glibc :-(
-///
-/// \see http://www.experts-exchange.com/Programming/Programming_Languages/Cplusplus/Q_20670737.html
-/// \author AssafLavie on http://www.experts-exchange.com
+/* Convert any sstream-compatible type to std::string
+ *
+ * \note In a just world, this would be implemented with gnu::autosprintf. But
+ * many distributions don't carry that lib despite the fact that it is part of
+ * glibc :-(
+ *
+ * \see http://www.experts-exchange.com/Programming/
+ *	Programming_Languages/Cplusplus/Q_20670737.html
+ * \author AssafLavie on http://www.experts-exchange.com
+ */
 template<typename T> std::string toString(T const & x) {
 	std::ostringstream oss;
 	oss << x;

@@ -198,7 +198,9 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 /**
  * Handle mousebutton events
  */
-bool Multiline_Editbox::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
+bool Multiline_Editbox::handle_mousepress
+		(const Uint8 btn, int32_t x, int32_t y)
+{
 	if (btn == SDL_BUTTON_LEFT and not has_focus()) {
 		focus();
 		Multiline_Textarea::set_text(get_text().c_str());
@@ -230,7 +232,8 @@ void Multiline_Editbox::draw(RenderTarget & dst)
 			 get_eff_w(),
 			 m_cache_mode,
 			 &m_cache_id,
-			 (has_focus() ? static_cast<int32_t>(m_cur_pos) : -1)); //  explicit cast is necessary to avoid a compiler warning
+			 //  explicit cast is necessary to avoid a compiler warning
+			 (has_focus() ? static_cast<int32_t>(m_cur_pos) : -1));
 		draw_scrollbar();
 
 		uint32_t w; // just to run g_fh->get_size_from_cache

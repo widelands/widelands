@@ -274,12 +274,22 @@ bool EditBox::handle_key(bool down, SDL_keysym code)
 					if (code.unicode < 0x80)         // 1 byte char
 						m->text.insert(m->text.begin() + m->caret++, 1, code.unicode);
 					else if (code.unicode < 0x800) { // 2 byte char
-						m->text.insert(m->text.begin() + m->caret++, (((code.unicode & 0x7c0) >> 6) | 0xc0));
-						m->text.insert(m->text.begin() + m->caret++, ((code.unicode & 0x3f) | 0x80));
+						m->text.insert
+							(m->text.begin() + m->caret++,
+							 (((code.unicode & 0x7c0) >> 6) | 0xc0));
+						m->text.insert
+							(m->text.begin() + m->caret++,
+							 ((code.unicode & 0x3f) | 0x80));
 					} else {                         // 3 byte char
-						m->text.insert(m->text.begin() + m->caret++, (((code.unicode & 0xf000) >> 12) | 0xe0));
-						m->text.insert(m->text.begin() + m->caret++, (((code.unicode & 0xfc0) >> 6) | 0x80));
-						m->text.insert(m->text.begin() + m->caret++, ((code.unicode & 0x3f) | 0x80));
+						m->text.insert
+							(m->text.begin() + m->caret++,
+							 (((code.unicode & 0xf000) >> 12) | 0xe0));
+						m->text.insert
+							(m->text.begin() + m->caret++,
+							 (((code.unicode & 0xfc0) >> 6) | 0x80));
+						m->text.insert
+							(m->text.begin() + m->caret++,
+							 ((code.unicode & 0x3f) | 0x80));
 					}
 					changed.call();
 					changedid.call(m->id);

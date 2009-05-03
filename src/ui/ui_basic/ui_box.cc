@@ -119,7 +119,9 @@ void Box::resize()
 			pagesize = get_h() - Scrollbar::Size;
 		}
 		if (!m_scrollbar) {
-			m_scrollbar = new Scrollbar(this, sb_x, sb_y, sb_w, sb_h, m_orientation == Horizontal);
+			m_scrollbar = new Scrollbar
+					(this, sb_x, sb_y, sb_w,
+					 sb_h, m_orientation == Horizontal);
 			m_scrollbar->moved.set(this, &Box::scrollbar_moved);
 		} else {
 			m_scrollbar->set_pos(Point(sb_x, sb_y));

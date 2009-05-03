@@ -57,7 +57,8 @@ m_fontsize(UI_FONT_SIZE_SMALL)
 
 	m_scrollbar.moved.set(this, &BaseListselect::set_scrollpos);
 	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(m_fontname, m_fontsize));
-	m_scrollbar.set_pagesize(h - 2 * g_fh->get_fontheight(m_fontname, m_fontsize));
+	m_scrollbar.set_pagesize
+		(h - 2 * g_fh->get_fontheight(m_fontname, m_fontsize));
 	m_scrollbar.set_steps(1);
 
 	if (show_check) {
@@ -208,7 +209,8 @@ void BaseListselect::set_scrollpos(const int32_t i)
  * Define a special color that will be used to display the item at the given
  * index.
  */
-void BaseListselect::set_entry_color(const uint32_t n, const RGBColor col) throw ()
+void BaseListselect::set_entry_color
+	(const uint32_t n, const RGBColor col) throw ()
 {
 	assert(n < m_entry_records.size());
 
@@ -307,7 +309,8 @@ void BaseListselect::draw(RenderTarget & dst)
 
 		if (idx == m_selection) {
 			assert(2 <= get_eff_w());
-			// dst->fill_rect(1, y, get_eff_w()-2, g_font->get_fontheight(), m_selcolor);
+			// dst->fill_rect(1, y, get_eff_w()-2,
+			// 	g_font->get_fontheight(), m_selcolor);
 			dst.brighten_rect
 				(Rect(Point(1, y), get_eff_w() - 2, m_lineheight),
 				 -ms_darken_value);
@@ -332,7 +335,9 @@ void BaseListselect::draw(RenderTarget & dst)
 			 Point
 			 	(x,
 			 	 y +
-			 	 (get_lineheight() - g_fh->get_fontheight(m_fontname, m_fontsize)) / 2),
+			 	 (get_lineheight() -
+				  g_fh->get_fontheight(m_fontname, m_fontsize)
+				 ) / 2),
 			 er.name, m_align,
 			 -1);
 

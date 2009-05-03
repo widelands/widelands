@@ -329,7 +329,9 @@ void HorizontalSlider::draw(RenderTarget & dst) {
  * \param x The new X position of mouse pointer.
  * \param y The new Y position of mouse pointer.
  */
-bool HorizontalSlider::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int32_t) {
+bool HorizontalSlider::handle_mousemove
+		(const Uint8, int32_t x, int32_t y, int32_t, int32_t)
+{
 	cursor_moved(x, x, y);
 	return true;
 }
@@ -342,7 +344,9 @@ bool HorizontalSlider::handle_mousemove(const Uint8, int32_t x, int32_t y, int32
  * \param x The X position of mouse pointer.
  * \param y The Y position of mouse pointer.
  */
-bool HorizontalSlider::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
+bool HorizontalSlider::handle_mousepress
+		(const Uint8 btn, int32_t x, int32_t y)
+{
 	if (btn != SDL_BUTTON_LEFT) return false;
 
 
@@ -401,7 +405,9 @@ void VerticalSlider::draw(RenderTarget & dst) {
  * \param x The new X position of mouse pointer.
  * \param y The new Y position of mouse pointer.
  */
-bool VerticalSlider::handle_mousemove(const Uint8, int32_t x, int32_t y, int32_t, int32_t) {
+bool VerticalSlider::handle_mousemove
+		(const Uint8, int32_t x, int32_t y, int32_t, int32_t)
+{
 	cursor_moved(y, x, y);
 	return true;
 }

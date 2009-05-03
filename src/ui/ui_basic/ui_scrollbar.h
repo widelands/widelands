@@ -40,11 +40,14 @@ struct Scrollbar : public Panel {
 	};
 
 	enum {
-		Size = 24, ///< default width for vertical scrollbars, height for horizontal scrollbars
+	 	///< default width for vertical scrollbars,
+		// height for horizontal scrollbar
+ 		Size = 24,
 	};
 
 public:
-	Scrollbar(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool horiz);
+	Scrollbar
+		(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool horiz);
 
 	Signal1<int32_t> moved;
 
@@ -88,7 +91,7 @@ private:
 	uint32_t m_pagesize;
 	uint32_t m_steps;
 
-	Area m_pressed;        ///< area that the user clicked on (None if mouse is up)
+	Area m_pressed; ///< area that the user clicked on (None if mouse is up)
 	int32_t  m_time_nextact;
 	int32_t  m_knob_grabdelta; ///< only while m_pressed == Knob
 

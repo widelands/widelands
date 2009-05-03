@@ -28,12 +28,19 @@ namespace UI {
  *
  * The graphics (see m_pic_*) are used in the following manner: (Example)
  *
- *  <--20leftmostpixel_of_top--><60Pixels as often as possible to reach window with from top><20rightmost pixel of top>
+ * top:
+ *  <--20leftmostpixel_of_top-->
+ *     <60Pixels as often as possible to reach window with from top>
+ *  <20rightmost pixel of top>
+ * site:
  *  ^
  *  20 topmost pixels of l_border                       <--- > same for r_border
  *  as often as needed: 60 pixels of l_border           <--- > same for r_border
  *  20 bottom pixels of l_border                        <--- > same for r_border
- *  <--20leftmostpixel_of_bot--><60Pixels as often as possible to reach window with from bot><20rightmost pixel of bot>
+ * bottom:
+ *  <--20leftmostpixel_of_bot-->
+ *     <60Pixels as often as possible to reach window with from bot>
+ *  <20rightmost pixel of bot>
  *
  * So: the l_border and the r_border pics MUST have a height of 100, while the
  *     width must be 20 and the top and bot pics MUST have a width of 100, while

@@ -30,8 +30,8 @@ namespace UI {
 struct Panel;
 
 /**
- * A group of radiobuttons. At most one of them is checked at any time.
- * State is -1 if none is checked, otherwise it's the index of the checked button.
+ * A group of radiobuttons. At most one of them is checked at any time.  State
+ * is -1 if none is checked, otherwise it's the index of the checked button.
  */
 struct Radiobutton;
 
