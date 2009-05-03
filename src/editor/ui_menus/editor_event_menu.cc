@@ -263,7 +263,9 @@ void Editor_Event_Menu::clicked_del_event() {
 		event.referencers();
 	if (event_referencers.empty()) {
 		eia().egbase().map().mem().remove(event);
-		eia().unreference_player_tribe(0, &event);  // Remove all references done by this event
+
+		// Remove all references done by this event
+		eia().unreference_player_tribe(0, &event);
 		eia().set_need_save(true);
 		update();
 	} else {
@@ -301,7 +303,8 @@ void Editor_Event_Menu::clicked_del_trigger() {
 	Widelands::Trigger::Referencers const & trigger_referencers =
 		trigger.referencers();
 	if (trigger_referencers.empty()) {
-		eia().unreference_player_tribe(0, &trigger);  // Remove all references done by this trigger
+		// Remove all references done by this trigger
+		eia().unreference_player_tribe(0, &trigger);
 		eia().egbase().map().mtm().remove(trigger);
 		eia().set_need_save(true);
 		update();
@@ -391,7 +394,9 @@ void Editor_Event_Menu::eventchain_list_selected(uint32_t) {
 /**
  * Listbox was double clicked
  */
-void Editor_Event_Menu::trigger_double_clicked(uint32_t) {clicked_edit_trigger();}
-void Editor_Event_Menu::event_double_clicked  (uint32_t) {clicked_edit_event  ();}
+void Editor_Event_Menu::trigger_double_clicked(uint32_t)
+	{clicked_edit_trigger();}
+void Editor_Event_Menu::event_double_clicked(uint32_t)
+	{clicked_edit_event  ();}
 void Editor_Event_Menu::eventchain_double_clicked(uint32_t)
-{clicked_edit_eventchain();}
+	{clicked_edit_eventchain();}

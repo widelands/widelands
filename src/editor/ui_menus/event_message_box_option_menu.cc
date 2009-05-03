@@ -117,7 +117,8 @@ m_event   (event)
 		 *this);
 
 	m_nr_buttons_ta =
-		new UI::Textarea(this, spacing + 160 + spacing, pos.y, 15, 20, "1", Align_CenterLeft);
+		new UI::Textarea
+			(this, spacing + 160 + spacing, pos.y, 15, 20, "1", Align_CenterLeft);
 
 	pos.x += 30 + spacing;
 	new UI::Callback_Button<Event_Message_Box_Option_Menu>
@@ -228,10 +229,19 @@ m_event   (event)
  * we simulate a cancel click
  * We are not draggable.
  */
-bool Event_Message_Box_Option_Menu::handle_mousepress(const Uint8 btn, int32_t, int32_t)
-{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
-bool Event_Message_Box_Option_Menu::handle_mouserelease(const Uint8, int32_t, int32_t)
-{return false;}
+bool Event_Message_Box_Option_Menu::
+	handle_mousepress(const Uint8 btn, int32_t, int32_t)
+{
+	if (btn == SDL_BUTTON_RIGHT) {
+		end_modal(0); return true;
+	}
+	return false;
+}
+bool Event_Message_Box_Option_Menu::
+	handle_mouserelease(const Uint8, int32_t, int32_t)
+{
+	return false;
+}
 
 
 void Event_Message_Box_Option_Menu::clicked_ok() {

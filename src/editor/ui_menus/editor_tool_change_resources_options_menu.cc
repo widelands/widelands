@@ -34,7 +34,8 @@
 
 #define width  20
 #define height 20
-Editor_Tool_Change_Resources_Options_Menu::Editor_Tool_Change_Resources_Options_Menu
+Editor_Tool_Change_Resources_Options_Menu::
+	Editor_Tool_Change_Resources_Options_Menu
 	(Editor_Interactive             & parent,
 	 Editor_Increase_Resources_Tool & increase_tool,
 	 UI::UniqueWindow::Registry     & registry)

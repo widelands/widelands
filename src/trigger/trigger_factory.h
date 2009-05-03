@@ -47,7 +47,8 @@ Trigger & create(size_t, char const * const name, bool set);
 /// Creates an event of the type with the given type name.
 ///
 /// \Throws _wexception if there is no event type with the given name.
-Trigger & create (char const * type_name, char const * name = "", bool set = false);
+Trigger & create
+	(char const * type_name, char const * name = "", bool set = false);
 
 struct Type_Descr {
 	char const * const id;       /// The identifier that is written to files.
@@ -55,11 +56,13 @@ struct Type_Descr {
 	std::string  const helptext; /// Help text for the user (localized).
 };
 
-/// \Returns the description of the trigger type with the given index. The return
-/// value is a reference to an item in the static array of trigger type
-/// descriptions.
-///
-/// Assumes that the given index is less than the number of event types.
+/**
+ * \Returns the description of the trigger type with the given index. The
+ * return value is a reference to an item in the static array of trigger type
+ * descriptions.
+ *
+ * Assumes that the given index is less than the number of event types.
+ */
 Type_Descr const & type_descr(size_t);
 
 /// \Returns the number of trigger types, which is a compile-time constant.

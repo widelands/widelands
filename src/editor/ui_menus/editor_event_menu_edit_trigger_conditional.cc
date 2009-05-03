@@ -38,14 +38,14 @@ inline Editor_Interactive & Editor_Event_Menu_Edit_TriggerConditional::eia() {
 }
 
 
-Editor_Event_Menu_Edit_TriggerConditional::Editor_Event_Menu_Edit_TriggerConditional
-	(Editor_Interactive    &       parent,
-	 TriggerConditional    * const cond,
-	 Widelands::EventChain *       chain)
-:
-UI::Window   (&parent, 0, 0, 465, 340, _("Edit Trigger Conditional")),
-m_given_cond (cond),
-m_event_chain(chain)
+Editor_Event_Menu_Edit_TriggerConditional::
+		Editor_Event_Menu_Edit_TriggerConditional
+			(Editor_Interactive & parent,
+			 TriggerConditional * const cond,
+			 Widelands::EventChain * chain) :
+	UI::Window   (&parent, 0, 0, 465, 340, _("Edit Trigger Conditional")),
+	m_given_cond (cond),
+	m_event_chain(chain)
 {
 	int32_t const offsx    =   5;
 	int32_t const offsy    =  25;
@@ -139,7 +139,8 @@ m_event_chain(chain)
 
 	posy += 20 + spacing + spacing;
 
-	m_insert_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
+	m_insert_btn = new
+		UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
@@ -150,7 +151,8 @@ m_event_chain(chain)
 
 	posy += 20 + spacing + spacing;
 
-	m_delete_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
+	m_delete_btn = new
+		UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
 		 posx, posy, 80, 20,
 		 0,
@@ -161,7 +163,8 @@ m_event_chain(chain)
 
 	posy += 20 + spacing + spacing + spacing;
 
-	m_mvup_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
+	m_mvup_btn = new
+		UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
 		 posx + 5, posy, 24, 24,
 		 0,
@@ -170,7 +173,8 @@ m_event_chain(chain)
 		 std::string(),
 		 false);
 
-	m_mvdown_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
+	m_mvdown_btn = new
+		UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
 		 posx + 51, posy, 24, 24,
 		 0,
@@ -189,7 +193,8 @@ m_event_chain(chain)
 		 posx, offsy + 20, ls_width, get_inner_h() - offsy - 55);
 	m_trigger_list->selected.set
 		(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_selected);
-	m_trigger_list->double_clicked.set(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked);
+	m_trigger_list->double_clicked.set
+		(this, &Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked);
 	Manager<Widelands::Trigger> & mtm = parent.egbase().map().mtm();
 	Manager<Widelands::Trigger>::Index const nr_triggers = mtm.size();
 	for (Manager<Widelands::Trigger>::Index i = 0; i < nr_triggers; ++i) {

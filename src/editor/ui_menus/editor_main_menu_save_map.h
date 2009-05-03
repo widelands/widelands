@@ -52,7 +52,8 @@ private:
 	UI::EditBox * m_editbox;
 	UI::Textarea * m_name, * m_author, * m_size, * m_world, * m_nrplayers;
 	UI::Multiline_Textarea * m_descr;
-	Editor_Interactive * m_parent; //  FIXME redundant (base stores parent pointer)
+	/// \todo redundant (base stores parent pointer)
+	Editor_Interactive * m_parent;
 	UI::Listselect<const char *> * m_ls;
 	UI::Callback_Button<Main_Menu_Save_Map> * m_ok_btn;
 

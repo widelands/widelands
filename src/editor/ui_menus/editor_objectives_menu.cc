@@ -155,7 +155,8 @@ void Edit_Objective_Window::clicked_ok() {
  * Create all the buttons etc...
 */
 #define spacing 5
-Editor_Objectives_Menu::Editor_Objectives_Menu(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
+Editor_Objectives_Menu::Editor_Objectives_Menu
+		(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
 :
 UI::UniqueWindow(parent, registry, 410, 330, _("Objectives Menu")),
 m_parent(parent),

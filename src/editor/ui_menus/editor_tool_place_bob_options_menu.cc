@@ -131,7 +131,9 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked
 		for (uint32_t i = 0; m_pit.get_nr_enabled(); ++i) m_pit.enable(i, false);
 		//  disable all checkboxes
 		//  TODO The uint32_t cast is ugly!
-		for (uint32_t i = 0; i < m_checkboxes.size(); ++i, i += i == static_cast<uint32_t>(n)) {
+		for
+			(uint32_t i = 0; i < m_checkboxes.size();
+			 ++i, i += i == static_cast<uint32_t>(n)) {
 			m_checkboxes[i]->changedtoid.set
 				(this,
 				 static_cast

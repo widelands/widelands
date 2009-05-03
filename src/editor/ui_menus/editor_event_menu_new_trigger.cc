@@ -58,8 +58,10 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 			(this,
 			 spacing, offsy + 20,
 			 get_inner_w() / 2 - 2 * spacing, get_inner_h() - offsy - 55);
-	m_trigger_type_list->selected.set(this, &Editor_Event_Menu_New_Trigger::selected);
-	m_trigger_type_list->double_clicked.set(this, &Editor_Event_Menu_New_Trigger::double_clicked);
+	m_trigger_type_list->selected.set
+		(this, &Editor_Event_Menu_New_Trigger::selected);
+	m_trigger_type_list->double_clicked.set
+		(this, &Editor_Event_Menu_New_Trigger::double_clicked);
 	for (uint32_t i = 0; i < nr_trigger_types(); ++i)
 		m_trigger_type_list->add(_(type_descr(i).name), i);
 	m_trigger_type_list->sort();

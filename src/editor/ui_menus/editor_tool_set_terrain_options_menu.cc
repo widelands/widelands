@@ -62,14 +62,18 @@ m_tool(tool)
 
 	m_checkboxes.resize(nr_terrains);
 
-	const uint32_t green = g_gr->get_picture(PicMod_Game, "pics/terrain_green.png");
-	const uint32_t water = g_gr->get_picture(PicMod_Game, "pics/terrain_water.png");
+	const uint32_t green =
+		g_gr->get_picture(PicMod_Game, "pics/terrain_green.png");
+	const uint32_t water =
+		g_gr->get_picture(PicMod_Game, "pics/terrain_water.png");
 	const uint32_t mountain =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_mountain.png");
-	const uint32_t dead =  g_gr->get_picture(PicMod_Game, "pics/terrain_dead.png");
+	const uint32_t dead =
+		g_gr->get_picture(PicMod_Game, "pics/terrain_dead.png");
 	const uint32_t unpassable =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_unpassable.png");
-	const uint32_t dry =   g_gr->get_picture(PicMod_Game, "pics/terrain_dry.png");
+	const uint32_t dry =
+		g_gr->get_picture(PicMod_Game, "pics/terrain_dry.png");
 	uint32_t small_picw, small_pich;
 	g_gr->get_picture_size(dry, small_picw, small_pich);
 
@@ -148,7 +152,8 @@ m_tool(tool)
 	pos.y += TEXTURE_HEIGHT + vspacing();
 
 	set_inner_size
-		(terrains_in_row * (TEXTURE_WIDTH + hspacing()) + 2 * hmargin() - hspacing(),
+		(terrains_in_row * (TEXTURE_WIDTH + hspacing()) +
+		 2 * hmargin() - hspacing(),
 		 pos.y + m_cur_selection.get_h() + vmargin());
 	pos.x = get_inner_w() / 2;
 	m_cur_selection.set_pos(pos);
@@ -165,7 +170,8 @@ m_tool(tool)
 }
 
 
-Editor_Tool_Set_Terrain_Tool_Options_Menu::~Editor_Tool_Set_Terrain_Tool_Options_Menu()  {
+Editor_Tool_Set_Terrain_Tool_Options_Menu::
+	~Editor_Tool_Set_Terrain_Tool_Options_Menu()  {
 	container_iterate_const(std::vector<uint32_t>, m_surfaces, i)
 		g_gr->free_surface(*i.current);
 }
@@ -181,11 +187,15 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int32_t n, bool t) {
 		m_checkboxes[n]->set_state(true);
 	else {
 		if (not multiselect) {
-			for (uint32_t i = 0; m_tool.get_nr_enabled(); ++i) m_tool.enable(i, false);
+			for (uint32_t i = 0; m_tool.get_nr_enabled(); ++i)
+				m_tool.enable(i, false);
 			//  disable all checkboxes
 			const uint32_t size = m_checkboxes.size();
 			//TODO: the uint32_t cast is ugly!
-			for (uint32_t i = 0; i < size; ++i, i += i == static_cast<uint32_t>(n)) {
+			for
+				(uint32_t i = 0; i < size;
+				 ++i, i += i == static_cast<uint32_t>(n))
+			{
 				m_checkboxes[i]->changedtoid.set
 					(this,
 					 static_cast

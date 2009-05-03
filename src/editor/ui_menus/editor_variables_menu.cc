@@ -54,7 +54,8 @@ private:
 		button_integer;
 	UI::Callback_IDButton<New_Variable_Window, Variable_Type const>
 		button_string;
-	UI::Callback_IDButton<New_Variable_Window, int32_t>                 button_back;
+	UI::Callback_IDButton<New_Variable_Window, int32_t>
+		button_back;
 
 	void clicked_new(Variable_Type);
 };
@@ -335,7 +336,7 @@ void Editor_Variables_Menu::table_dblclicked(uint32_t) {clicked_edit();}
 void Editor_Variables_Menu::insert_variable(Variable & var) {
 	char const * pic         = "nothing";
 	char const * type_string = " ";
-	if        (upcast(Widelands::Variable_String const, svar, &var)) {
+	if (upcast(Widelands::Variable_String const, svar, &var)) {
 		pic = "pics/map_variable_string.png";
 		type_string = "S";
 	} else if (upcast(Widelands::Variable_Int    const, ivar, &var)) {

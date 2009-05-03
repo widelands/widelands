@@ -66,7 +66,9 @@ m_player_area(event.m_player_area)
 	posy += 20 + spacing;
 
 	//  Set Field Buttons
-	new UI::Textarea(this, spacing, posy, get_inner_w(), 15, _("Current position: "), Align_CenterLeft);
+	new UI::Textarea
+		(this, spacing, posy, get_inner_w(),
+		 15, _("Current position: "), Align_CenterLeft);
 	posy += 20 + spacing;
 	//  X
 

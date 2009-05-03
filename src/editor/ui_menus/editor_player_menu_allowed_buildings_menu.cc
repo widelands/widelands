@@ -40,7 +40,8 @@ using Widelands::Building_Index;
 #define middle_button_width  40
 #define middle_button_height 20
 #define label_height         20
-Editor_Player_Menu_Allowed_Buildings_Menu::Editor_Player_Menu_Allowed_Buildings_Menu
+Editor_Player_Menu_Allowed_Buildings_Menu::
+	Editor_Player_Menu_Allowed_Buildings_Menu
 	(UI::Panel                  * parent,
 	 Widelands::Player          & player,
 	 UI::UniqueWindow::Registry * registry)
@@ -94,10 +95,16 @@ m_allow_button
 	 _("Allow"),
 	 false)
 {
-	m_allowed.selected.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected);
-	m_allowed.double_clicked.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked);
-	m_forbidden.selected.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_selected);
-	m_forbidden.double_clicked.set(this, &Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked);
+	m_allowed.selected.set
+		(this, &Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected);
+	m_allowed.double_clicked.set
+		(this, &Editor_Player_Menu_Allowed_Buildings_Menu::
+		 allowed_double_clicked);
+	m_forbidden.selected.set
+		(this, &Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_selected);
+	m_forbidden.double_clicked.set
+		(this, &Editor_Player_Menu_Allowed_Buildings_Menu::
+		 forbidden_double_clicked);
 
 	Widelands::Tribe_Descr const & tribe = player.tribe();
 	Building_Index const nr_buildings = tribe.get_nrbuildings();
@@ -153,18 +160,27 @@ void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(const bool allow) {
 	m_player.allow_building(building_index, allow);
 }
 
-void Editor_Player_Menu_Allowed_Buildings_Menu::allowed_selected(uint32_t index) {
+void Editor_Player_Menu_Allowed_Buildings_Menu::
+	allowed_selected(uint32_t index)
+{
 	m_forbid_button.set_enabled
 		(index != UI::Listselect<intptr_t>::no_selection_index());
 }
 
-void Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_selected(uint32_t index) {
+void Editor_Player_Menu_Allowed_Buildings_Menu::
+	forbidden_selected(uint32_t index)
+{
 	m_allow_button.set_enabled
 		(index != UI::Listselect<intptr_t>::no_selection_index());
 }
 
 void Editor_Player_Menu_Allowed_Buildings_Menu::allowed_double_clicked(uint32_t)
-{clicked(false);}
+{
+	clicked(false);
+}
 
-void Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked(uint32_t)
-{clicked(true);}
+void Editor_Player_Menu_Allowed_Buildings_Menu::
+	forbidden_double_clicked(uint32_t)
+{
+	clicked(true);
+}

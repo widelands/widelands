@@ -30,7 +30,8 @@ struct Editor_Interactive;
 struct Editor_Place_Immovable_Tool;
 namespace UI {struct Checkbox;};
 
-struct Editor_Tool_Place_Immovable_Options_Menu : public Editor_Tool_Options_Menu {
+struct Editor_Tool_Place_Immovable_Options_Menu :
+	public Editor_Tool_Options_Menu {
 	Editor_Tool_Place_Immovable_Options_Menu
 		(Editor_Interactive          &,
 		 Editor_Place_Immovable_Tool &,

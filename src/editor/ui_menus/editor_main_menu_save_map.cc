@@ -283,7 +283,7 @@ void Main_Menu_Save_Map::fill_list() {
 		const char * const name = pname->c_str();
 		if
 			(strcmp(FileSystem::FS_Filename(name), ".")    and
-			 strcmp(FileSystem::FS_Filename(name), "..")   and // Upsy, appeared again. ignore
+			 strcmp(FileSystem::FS_Filename(name), "..")   and
 			 strcmp(FileSystem::FS_Filename(name), ".svn") and
 			 g_fs->IsDirectory(name)                       and
 			 not Widelands::WL_Map_Loader::is_widelands_map(name))

@@ -72,8 +72,10 @@ m_event_chain(chain)
 	m_events =
 		new UI::Listselect<Widelands::Event &>
 			(this, spacing, lsoffsy + 20, ls_width, get_inner_h() - lsoffsy - 55);
-	m_events->selected.set(this, &Editor_Event_Menu_Edit_EventChain::cs_selected);
-	m_events->double_clicked.set(this, &Editor_Event_Menu_Edit_EventChain::cs_double_clicked);
+	m_events->selected.set
+		(this, &Editor_Event_Menu_Edit_EventChain::cs_selected);
+	m_events->double_clicked.set
+		(this, &Editor_Event_Menu_Edit_EventChain::cs_double_clicked);
 	pos.x += ls_width + spacing;
 
 	pos.y = 75;

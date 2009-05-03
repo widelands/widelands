@@ -36,7 +36,8 @@
 
 using Widelands::Immovable_Descr;
 
-Editor_Tool_Place_Immovable_Options_Menu::Editor_Tool_Place_Immovable_Options_Menu
+Editor_Tool_Place_Immovable_Options_Menu::
+	Editor_Tool_Place_Immovable_Options_Menu
 	(Editor_Interactive          & parent,
 	 Editor_Place_Immovable_Tool & pit,
 	 UI::UniqueWindow::Registry  & registry)
@@ -49,7 +50,8 @@ m_pit     (pit)
 	Widelands::World const & world = parent.egbase().map().world();
 	const Immovable_Descr::Index nr_immovables = world.get_nr_immovables();
 	const uint32_t immovables_in_row = std::min
-		(static_cast<uint32_t>(ceil(sqrt(static_cast<float>(nr_immovables)))), 6U);
+		(static_cast<uint32_t>
+		 (ceil(sqrt(static_cast<float>(nr_immovables)))), 6U);
 
 
 	m_tabpanel.set_snapparent(true);
@@ -65,7 +67,8 @@ m_pit     (pit)
 		if (h > height) height = h;
 	}
 
-	//box->set_inner_size((immovables_in_row)*(width+1+space)+xstart, (immovables_in_row)*(height+1+space)+ystart+yend);
+	//box->set_inner_size((immovables_in_row)*(width+1+space)+xstart,
+	//	                   (immovables_in_row)*(height+1+space)+ystart+yend);
 	const uint32_t tab_icon =
 		g_gr->get_picture(PicMod_Game, "pics/list_first_entry.png");
 
@@ -90,7 +93,8 @@ m_pit     (pit)
 		cb.set_size(width, height);
 		cb.set_id(i);
 		cb.set_state(m_pit.is_enabled(i));
-		cb.changedtoid.set(this, &Editor_Tool_Place_Immovable_Options_Menu::clicked);
+		cb.changedtoid.set
+			(this, &Editor_Tool_Place_Immovable_Options_Menu::clicked);
 		m_checkboxes.push_back(&cb);
 		box->add(&cb, Align_Left);
 		box->add_space(space);
@@ -122,11 +126,13 @@ void Editor_Tool_Place_Immovable_Options_Menu::clicked(int32_t n, bool t) {
 		m_checkboxes[n]->set_state(true);
 	else {
 		if (not multiselect) {
-			for (uint32_t i = 0; m_pit.get_nr_enabled(); ++i) m_pit.enable(i, false);
+			for (uint32_t i = 0; m_pit.get_nr_enabled(); ++i)
+				m_pit.enable(i, false);
 			//  Disable all checkboxes
 			const uint32_t size = m_checkboxes.size();
 			//TODO: the uint32_t cast is ugly!
-			for (uint32_t i = 0; i < size; ++i, i += i == static_cast<uint32_t>(n)) {
+			for (uint32_t i = 0; i < size; ++i, i += i == static_cast<uint32_t>(n))
+			{
 				m_checkboxes[i]->changedtoid.set
 					(this,
 					 static_cast

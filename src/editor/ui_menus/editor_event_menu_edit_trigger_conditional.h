@@ -61,10 +61,14 @@ private:
 	UI::Listselect<Widelands::Trigger                  &> * m_trigger_list;
 	UI::Listselect<Widelands::TriggerConditional_Factory::Token &>
 		* m_construction;
-	UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional> * m_insert_btn;
-	UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional> * m_delete_btn;
-	UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional> * m_mvup_btn;
-	UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional> * m_mvdown_btn;
+	UI::Callback_Button
+		<Editor_Event_Menu_Edit_TriggerConditional> * m_insert_btn;
+	UI::Callback_Button
+		<Editor_Event_Menu_Edit_TriggerConditional> * m_delete_btn;
+	UI::Callback_Button
+		<Editor_Event_Menu_Edit_TriggerConditional> * m_mvup_btn;
+	UI::Callback_Button
+		<Editor_Event_Menu_Edit_TriggerConditional> * m_mvdown_btn;
 	Widelands::TriggerConditional                         * m_given_cond;
 	Widelands::EventChain                                 * m_event_chain;
 };

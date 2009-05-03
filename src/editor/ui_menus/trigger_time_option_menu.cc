@@ -246,10 +246,20 @@ m_trigger (trigger)
  * we simulate a cancel click
  * We are not draggable.
  */
-bool Trigger_Time_Option_Menu::handle_mousepress(const Uint8 btn, int32_t, int32_t)
-{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
-bool Trigger_Time_Option_Menu::handle_mouserelease(const Uint8, int32_t, int32_t)
-{return false;}
+bool Trigger_Time_Option_Menu::
+	handle_mousepress(const Uint8 btn, int32_t, int32_t)
+{
+	if (btn == SDL_BUTTON_RIGHT) {
+		end_modal(0);
+		return true;
+	}
+	return false;
+}
+bool Trigger_Time_Option_Menu::
+	handle_mouserelease(const Uint8, int32_t, int32_t)
+{
+	return false;
+}
 
 
 void Trigger_Time_Option_Menu::clicked_ok() {

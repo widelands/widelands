@@ -28,7 +28,9 @@
 struct Editor_Interactive;
 struct Editor_Increase_Height_Tool;
 
-struct Editor_Tool_Change_Height_Options_Menu : public Editor_Tool_Options_Menu {
+struct Editor_Tool_Change_Height_Options_Menu :
+	public Editor_Tool_Options_Menu
+{
 	Editor_Tool_Change_Height_Options_Menu
 		(Editor_Interactive          &,
 		 Editor_Increase_Height_Tool &,
