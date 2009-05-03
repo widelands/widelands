@@ -224,7 +224,10 @@ void Sound_Handler::load_one_fx
 		return;
 	}
 
-	if (Mix_Chunk * const m = Mix_LoadWAV_RW(SDL_RWFromMem(fr.Data(fr.GetSize(), 0), fr.GetSize()), 1)) {
+	if
+		(Mix_Chunk * const m =
+		 Mix_LoadWAV_RW(SDL_RWFromMem(fr.Data(fr.GetSize(), 0), fr.GetSize()), 1))
+	{
 		//make sure that requested FXset exists
 
 		if (m_fxs.count(fx_name) == 0)
@@ -346,7 +349,8 @@ bool Sound_Handler::play_or_not
 		probability *= evaluation; //  decrease probability
 	}
 
-	//printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX %s ticks: %i ev: %f prob: %f\n", fx_name.c_str(), ticks_since_last_play, evaluation, probability);
+	//printf("XXXXX %s ticks: %i ev: %f prob: %f\n",
+	//       fx_name.c_str(), ticks_since_last_play, evaluation, probability);
 
 	//finally: the decision
 	//  float division! not integer
@@ -488,8 +492,8 @@ void Sound_Handler::start_music
 }
 
 /** Stop playing a songset.
- * \param fadeout_ms Song will fade from 100% to 0% during fadeout_ms milliseconds
- * starting from now.
+ * \param fadeout_ms Song will fade from 100% to 0% during fadeout_ms
+ *                   milliseconds starting from now.
 */
 void Sound_Handler::stop_music(int32_t fadeout_ms)
 {
@@ -531,8 +535,14 @@ void Sound_Handler::change_music
 
 bool Sound_Handler::get_disable_music() const throw () {return m_disable_music;}
 bool Sound_Handler::get_disable_fx   () const throw () {return m_disable_fx;}
-int32_t  Sound_Handler::get_music_volume () const throw () {return m_music_volume;}
-int32_t  Sound_Handler::get_fx_volume    () const throw () {return m_fx_volume;}
+int32_t  Sound_Handler::get_music_volume() const throw ()
+{
+	return m_music_volume;
+}
+int32_t  Sound_Handler::get_fx_volume() const throw ()
+{
+	return m_fx_volume;
+}
 
 
 /** Normal set_* function, but the music must be started/stopped accordingly
