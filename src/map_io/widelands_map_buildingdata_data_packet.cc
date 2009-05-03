@@ -334,7 +334,10 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION || packet_version == 2) {
+		if
+			(packet_version == CURRENT_MILITARYSITE_PACKET_VERSION ||
+			 packet_version == 2)
+		{
 			read_productionsite(militarysite, fr, egbase, ol);
 
 			if (packet_version >= 3) {
@@ -547,7 +550,9 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("productionsite (%s): %s", productionsite.descname().c_str(), e.what());
+		throw wexception
+			("productionsite (%s): %s",
+			 productionsite.descname().c_str(), e.what());
 	}
 }
 
@@ -623,7 +628,8 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 				for (uint16_t i = 0; i < nr_soldiers; ++i) {
 					uint32_t const soldier_serial = fr.Unsigned32();
 					try {
-						trainingsite.m_soldiers.push_back(&ol->get<Soldier>(soldier_serial));
+						trainingsite.m_soldiers.push_back
+							(&ol->get<Soldier>(soldier_serial));
 					} catch (_wexception const & e) {
 						throw wexception
 							("soldier #%u (%u): %s", i, soldier_serial, e.what());
@@ -759,7 +765,8 @@ void Map_Buildingdata_Data_Packet::write_constructionsite
 	//  descriptions
 	fw.String(constructionsite.m_building->name());
 	//  FIXME Just write the string without the 1 first:
-	//  FIXME   fw.CString(constructionsite.m_prev_building ? constructionsite.m_prev_building->name().c_str() : "");
+	//  FIXME   fw.CString(constructionsite.m_prev_building ?
+	//  constructionsite.m_prev_building->name().c_str() : "");
 	//  FIXME When reading, the empty string should mean no prev_building.
 	if (constructionsite.m_prev_building) {
 		fw.Unsigned8(1);
@@ -848,7 +855,8 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 		Worker const & obj = *it->second;
 		assert(os->is_object_known(obj));
 		fw.Unsigned32(os->get_object_file_index(obj));
-		fw.String(obj.name()); //  FIXME is this really needed? If not, remove in the next packet version.
+		// \todo is this really needed? If not, remove in the next packet version.
+		fw.String(obj.name());
 	}
 
 	fw.Unsigned32(warehouse.m_next_carrier_spawn);

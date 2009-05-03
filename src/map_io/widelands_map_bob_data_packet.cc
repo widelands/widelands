@@ -181,7 +181,9 @@ throw (_wexception)
 				Serial const reg = os->register_object(*bobarr[i]);
 
 				// Write its owner
-				std::string owner_tribe = bobarr[i]->descr().get_owner_tribe() ? bobarr[i]->descr().get_owner_tribe()->name() : "world";
+				std::string owner_tribe =
+					bobarr[i]->descr().get_owner_tribe() ?
+					bobarr[i]->descr().get_owner_tribe()->name() : "world";
 				fw.String(owner_tribe);
 				// Write it's name
 				fw.String(bobarr[i]->name());

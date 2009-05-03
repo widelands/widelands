@@ -44,10 +44,12 @@ extern const Map_Object_Descr g_road_descr;
 #define UNSEEN_TIMES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/unseen_times_%u"
 
 #define NODE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION     1
-#define NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/node_immovable_kinds_%u"
+#define NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE \
+	DIRNAME_TEMPLATE "/node_immovable_kinds_%u"
 
 #define NODE_IMMOVABLES_CURRENT_PACKET_VERSION          1
-#define NODE_IMMOVABLES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/node_immovables_%u"
+#define NODE_IMMOVABLES_FILENAME_TEMPLATE \
+	DIRNAME_TEMPLATE "/node_immovables_%u"
 
 #define ROADS_CURRENT_PACKET_VERSION                    1
 #define ROADS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/roads_%u"
@@ -56,10 +58,12 @@ extern const Map_Object_Descr g_road_descr;
 #define TERRAINS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/terrains_%u"
 
 #define TRIANGLE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION 1
-#define TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/triangle_immovable_kinds_%u"
+#define TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE \
+	DIRNAME_TEMPLATE "/triangle_immovable_kinds_%u"
 
 #define TRIANGLE_IMMOVABLES_CURRENT_PACKET_VERSION      1
-#define TRIANGLE_IMMOVABLES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/triangle_immovables_%u"
+#define TRIANGLE_IMMOVABLES_FILENAME_TEMPLATE \
+	DIRNAME_TEMPLATE "/triangle_immovables_%u"
 
 #define OWNERS_CURRENT_PACKET_VERSION                   0
 #define OWNERS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/owners_%u"
@@ -289,8 +293,8 @@ void Map_Players_View_Data_Packet::Read
 					uint32_t file_vision = vision_file.Unsigned32();
 					if (file_vision != f_player_field.vision)
 						throw wexception
-								("player %u, node (%i, %i): vision mismatch (%u vs. %u)",
-								 plnum, f.x, f.y, f_player_field.vision, file_vision);
+							("player %u, node (%i, %i): vision mismatch (%u vs. %u)",
+							 plnum, f.x, f.y, f_player_field.vision, file_vision);
 				} while (r.x);
 			}
 
@@ -677,7 +681,9 @@ throw (_wexception)
 	Map const & map = egbase.map();
 	const X_Coordinate mapwidth  = map.get_width ();
 	const Y_Coordinate mapheight = map.get_height();
-	Field & first_field = map[0]; //  FIXME make this const when FCoords has been templatized so it can have "const Field * field;"
+	// \todo make first_field const when FCoords has been templatized so it can
+	// have "const Field * field;"
+	Field & first_field = map[0];
 	const Player_Number nr_players = map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player)
 		if (const Player::Field * const player_fields = player->m_fields) {

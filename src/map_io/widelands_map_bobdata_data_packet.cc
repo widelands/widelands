@@ -148,7 +148,10 @@ void Map_Bobdata_Data_Packet::Read
 									task = &Bob::taskIdle;
 								else if (not strcmp(taskname, "movepath"))
 									task = &Bob::taskMovepath;
-								else if (packet_version == 1 && not strcmp(taskname, "forcemove")) {
+								else if
+									(packet_version == 1 &&
+									 not strcmp(taskname, "forcemove"))
+								{
 									task = &Bob::taskMove;
 									task_forcemove_hack = true;
 								} else if (not strcmp(taskname, "move"))
@@ -193,8 +196,11 @@ void Map_Bobdata_Data_Packet::Read
 									task = &Soldier::taskDefense;
 								else if (not strcmp(taskname, "battle"))
 									task = &Soldier::taskBattle;
-								else if (not strcmp(taskname, "moveToBattle") || not strcmp(taskname, "moveHome"))
-									task = &Worker::taskBuildingwork; // Weird hack to support legacy games
+								else if
+									(not strcmp(taskname, "moveToBattle") ||
+									 not strcmp(taskname, "moveHome"))
+									 // Weird hack to support legacy games
+									task = &Worker::taskBuildingwork;
 								else if (*taskname == '\0')
 									continue; // Skip task
 								else
@@ -223,8 +229,8 @@ void Map_Bobdata_Data_Packet::Read
 							} else
 								state.objvar1 = 0;
 							state.svar1 = fr.CString();
-							state.coords.x = fr.Signed32(); //  FIXME fix format to use
-							state.coords.y = fr.Signed32(); //  FIXME FileRead::Coords32
+							state.coords.x = fr.Signed32(); //\todo fix format to use
+							state.coords.y = fr.Signed32(); //\todo FileRead::Coords32
 
 							if (fr.Unsigned8()) {
 								const uint32_t ans[6] = {
@@ -276,7 +282,8 @@ void Map_Bobdata_Data_Packet::Read
 								if (i < old_stacksize && state.route) {
 									if (!has_route) {
 										delete state.route;
-										state.route = 0; // in case we get an exception further down
+										// in case we get an exception further down
+										state.route = 0;
 									} else
 										state.route->init(0);
 								}
@@ -522,12 +529,14 @@ throw (_wexception)
 				fw.Unsigned8(bob.m_stack.size() && bob.m_stack[0].transfer);
 
 				fw.Unsigned32(bob.m_actid);
-				// Don't have to save m_actscheduled, as that's only used for integrity checks
+				// Don't have to save m_actscheduled, as that's only used for
+				// integrity checks
 
-				//  Animation
-				//  FIXME Just write the string without the 1 first:
-				//  FIXME   fw.CString(bob->m_anim ? bob->descr().get_animation_name(bob->m_anim).c_str() : "");
-				//  FIXME When reading, the empty string should mean no animation.
+				// Animation
+				// \todo Just write the string without the 1 first:
+				// \todo fw.CString(bob->m_anim ?
+				//    bob->descr().get_animation_name(bob->m_anim).c_str() : "");
+				// \todo When reading, the empty string should mean no animation.
 				if (bob.m_anim) {
 					fw.Unsigned8(1);
 					fw.CString(descr.get_animation_name(bob.m_anim).c_str());

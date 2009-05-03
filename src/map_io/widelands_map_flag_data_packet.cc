@@ -103,7 +103,8 @@ throw (_wexception)
 	Map   const & map        = egbase.map();
 	Field const & fields_end = map[map.max_index()];
 	for (Field const * field = &map[0]; field < &fields_end; ++field)
-		if (upcast(Flag const, flag, field->get_immovable())) { //  we only write flags
+		//  we only write flags, so the upcast is safe
+		if (upcast(Flag const, flag, field->get_immovable())) {
 			//  Flags can't life on multiply positions, therefore this flag
 			//  shouldn't be registered.
 			assert(!os->is_object_known(*flag));

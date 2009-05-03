@@ -25,8 +25,8 @@
 namespace Widelands {
 
 /*
- * This packet contains all extra data in the map. This can currently be one of the
- * followings
+ * This packet contains all extra data in the map. This can currently be one of
+ * the followings
  *   - Images
  */
 struct Map_Extradata_Data_Packet : public Map_Data_Packet {

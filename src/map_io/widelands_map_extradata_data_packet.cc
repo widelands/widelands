@@ -21,7 +21,9 @@
 
 #include "editor_game_base.h"
 #include "io/filewrite.h"
-#include "graphic/graphic.h" // Since we are lying about the path of the pictures
+// Since we are lying about the path of the pictures
+// we also include graphic.h
+#include "graphic/graphic.h"
 #include "map.h"
 #include "profile.h"
 #include "widelands_fileread.h"
