@@ -18,7 +18,7 @@ forbidden = [
     '/ / /(',
     '/ / /(\nadjh',
 
-# TestCases by Eric
+# TestCases by Erik
 ## illegal_character_after_opening_parenthesis.cc
     'void f( float) {',
 ]

@@ -154,7 +154,7 @@ forbidden = [
     'char a = a^ a;',
     'char a = a ^a;',
 
-    # Erics tests
+    # Eriks tests
     ## missing_padding.cc
     'char a=a;',
     'char a = a^a;',

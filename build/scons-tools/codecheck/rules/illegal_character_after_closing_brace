@@ -23,7 +23,7 @@ forbidden = [
     r'"\\"}a;',
     r"\''}a;",
     
-# Test cases by eric
+# Test cases by erik
 ## illegal_character_after_closing_brace.cc
 "\tstruct {}A;",
 "\tstruct {}B;",

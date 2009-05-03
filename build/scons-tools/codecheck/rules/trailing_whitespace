@@ -15,7 +15,7 @@ forbidden = [
     """e; """,
     """e;	""",
 
-# Test cases by eric
+# Test cases by Erik
 ## trailing_whitespace_and_missing_newline_at_eof.cc
     "void f() { ",
     

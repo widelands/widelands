@@ -9,7 +9,7 @@ same way).
 """
 
 regexp=r"""^\t* .*{(\n|$)"""
-error_msg = "Wrong indentation on this line. Check for tab/space mixup!"
+error_msg = "Wrong indentation on this line. Check for tab/spaces or move { to the next line."
 
 forbidden = [
     ' {',

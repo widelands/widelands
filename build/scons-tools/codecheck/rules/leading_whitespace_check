@@ -137,6 +137,9 @@ class EvalMatches( object ):
                 elif line[-1] in ":=),?+-*/{":
                     allowed_indent = indent + '\t'
                     required_indent = ""
+                elif line[-1] == ';' and brace_diff['(']:
+                    allowed_indent = indent + '\t'
+                    required_indent = ""
                 elif self._indent_words.search(line) and line[-1] != ';':
                     allowed_indent = indent + '\t'
                     required_indent = indent + '\t'
@@ -242,6 +245,13 @@ if
 \t a, b)
 """,
 
+# ; is also an indent character
+"""
+\tfor
+\t\t(uint32_t i = 0; i < size;
+\t\t ++i, i += i == static_cast<uint32_t>(n)) {
+""",
+
 # , is also an indent character
 """\tRoutingNode() : mpf_cycle(0), mpf_heapindex(0),
 \t\tmpf_realcost(0), mpf_backlink(0), mpf_estimate(0) {}""",
@@ -328,7 +338,7 @@ int blah1() {return 0815;}""",
 
 
 
-# Erics Tests
+# Eriks Tests
 ## leading_whitespace_not_matching_previous_line.cc
 """float g(float, float) {
 \tg
@@ -376,7 +386,7 @@ public:
 \t\t (start.get_position(), end.get_position());
 """,
 
-# Erics Tests
+# Eriks Tests
 ## closing_parenthesis_without_matching_leading_alignment.cc
 """float g(float, float) {
 \treturn

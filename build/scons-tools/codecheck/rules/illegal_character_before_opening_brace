@@ -15,7 +15,7 @@ forbidden = [
     '/ /{',
     'if (condition){',
 
-    # Erics Tests
+    # Eriks Tests
     ## illegal_character_before_opening_brace.cc
     'struct A{};',
     'struct B{};',
