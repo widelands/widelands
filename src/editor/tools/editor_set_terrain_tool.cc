@@ -35,7 +35,6 @@ int32_t Editor_Set_Terrain_Tool::handle_click_impl
 	uint16_t const radius = parent.get_sel_radius();
 	if (get_nr_enabled()) {
 		int32_t max = 0;
-		Widelands::World const & world = map.world();
 		Widelands::MapTriangleRegion<TCoords<Widelands::FCoords> > mr
 			(map,
 			 Widelands::Area<TCoords<Widelands::FCoords> >

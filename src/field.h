@@ -45,12 +45,16 @@ namespace Widelands {
 // No. In fact, you should view Field more as a plain old structure rather than
 // a class. If you think of Fields as a class you get into a whole lot of
 // problems (like the 6 neighbour field pointers we used to have). - Nicolai
-// Probably it would be better to make Field a struct, rather than a class (things wouldn't
-// change much, it's just a question of style and code understanding)
+// Probably it would be better to make Field a struct, rather than a class
+// (things wouldn't change much, it's just a question of style and code
+// understanding)
+// Making it a struct doesn't add anything. struct is used interchangeably with
+// class all around the code
 
 enum FieldCaps {
 	CAPS_NONE = 0,
-	/** can we build normal buildings? (use BUILDCAPS_SIZEMASK for binary masking)*/
+	/** can we build normal buildings? (use BUILDCAPS_SIZEMASK for binary
+	 * masking)*/
 	BUILDCAPS_SMALL = 1,
 	BUILDCAPS_MEDIUM = 2,
 	BUILDCAPS_BIG = 3,
@@ -59,11 +63,14 @@ enum FieldCaps {
 	/** can we build a flag on this field?*/
 	BUILDCAPS_FLAG = 4,
 
-	/** can we build a mine on this field (completely independent from build size!)*/
+	/** can we build a mine on this field (completely independent from build
+	 * size!)*/
 	BUILDCAPS_MINE = 8,
 
-	/** (only if BUILDCAPS_BIG): can we build a harbour on this field?
-	 * this should be automatically set for BUILDCAPS_BIG fields that have a swimmable second-order neighbour*/
+	/** (only if BUILDCAPS_BIG): can we build a harbour on this field?  this
+	 * should be automatically set for BUILDCAPS_BIG fields that have a
+	 * swimmable second-order neighbour
+	 */
 	BUILDCAPS_PORT = 16,
 
 	/** can we build any building on this field?*/
@@ -230,7 +237,8 @@ public:
 		roads |= type << dir;
 	}
 
-	uint8_t get_resources() const {return m_resources;} ///<\todo This should return Resource_Index
+	/// \todo This should return Resource_Index
+	uint8_t get_resources() const {return m_resources;}
 	uint8_t get_resources_amount() const {return m_res_amount;}
 	void set_resources(uint8_t const res, uint8_t const amount) {
 		m_resources  = res;
@@ -241,7 +249,8 @@ public:
 	void set_starting_res_amount(int32_t const amount) {
 		m_starting_res_amount = amount;
 	}
-	int32_t get_starting_res_amount() const {return m_starting_res_amount;} ///<\todo This should return uint8_t
+	/// \todo This should return uint8_t
+	int32_t get_starting_res_amount() const {return m_starting_res_amount;}
 
 	/// \note you must reset this field's + neighbor's brightness when you
 	/// change the height. Map::change_height does this. This function is not
