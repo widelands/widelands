@@ -90,8 +90,8 @@ $)
             return cached_line
 
         # Strings are replaced with blanks 
-        newline = self._literal_strings.sub(lambda k: '"%s"' % ((len(k.group(0))-2)*" "),line)
-        newline = self._literal_chars.sub(lambda k: "'%s'" % ((len(k.group(0))-2)*" "),newline)
+        newline = self._literal_chars.sub(lambda k: "'%s'" % ((len(k.group(0))-2)*" "),line)
+        newline = self._literal_strings.sub(lambda k: '"%s"' % ((len(k.group(0))-2)*" "),newline)
          
         self._str_cache[line] = newline
 

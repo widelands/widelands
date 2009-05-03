@@ -5,7 +5,7 @@ import re
 from collections import defaultdict
 
 class EvalMatches( object ):
-    _indent_words = re.compile(r'\b(for|define|typedef|else|while|return|if|template)\b')
+    _indent_words = re.compile(r'\b(for|define|typedef|else|while|return|if|template)\b\s*$')
     _regexp=re.compile(r"^(([\t ]*).*$)", re.MULTILINE)
 
     def __init__(self):
@@ -36,13 +36,15 @@ class EvalMatches( object ):
         opening_braces = defaultdict( list )
         
         bracesets = (
-            ('(', ')'),
             ('{', '}'),
+            ('(', ')'),
         )
+        
         closing_brace_handlers = {
             '{': self._handle_closing_curly_brace,
             '(': self._handle_closing_round_brace,
         }
+        brace_diff = {}
 
         for lineno,(line,indent) in enumerate(indents):
             lineno += 1 
@@ -52,16 +54,20 @@ class EvalMatches( object ):
             line = line.strip()
 
             if len(line) and line[0] == '#': # Skip macros
-                continue
+                indent = ""
+                line = ""
 
             # print "line:", line
             # print "  indent: '%s'" % indent.replace('\t','\\t')
             # print "  required_indent: '%s'" % required_indent.replace('\t','\\t')
             # print "  allowed_indent: '%s'" % allowed_indent.replace('\t','\\t')
             
-            if len(line) and line[0] == '(': # param lists can be indented twice
-                allowed_indent += '\t\t'
-                required_indent = last_indent + '\t'
+            if len(line):
+                if line[0] == '(': # param lists can be indented twice
+                    allowed_indent += '\t\t'
+                    required_indent = last_indent + '\t'
+                elif line[0] in '{}' and len(required_indent): # { and } can be at last indent too
+                    required_indent = required_indent[:-1]
                     
             nr_unmatched_opening_braces = 0
              
@@ -71,6 +77,9 @@ class EvalMatches( object ):
                 n_closing = line.count(closing)
                 
                 diff = n_opening - n_closing
+
+                brace_diff[opening] = diff
+
                 if diff > 0: # Opening brace
                     if opening == '(':
                         nr_unmatched_opening_braces = diff
@@ -93,7 +102,7 @@ class EvalMatches( object ):
             
             cindent = len(indent)
 
-            if cindent < len(required_indent):
+            if len(line) and cindent < len(required_indent) and not brace_diff['('] and not (line[-1] in ';,*/+-&:|'):
                 errors.append( (lineno, "Indentation is too shallow"))
 
             # Check indent relative to previous line
@@ -118,9 +127,8 @@ class EvalMatches( object ):
                 if nr_unmatched_opening_braces:
                     allowed_indent = indent + ' ' * nr_unmatched_opening_braces + '\t'
                     required_indent = indent
-                elif line[-1] in ("{:=),?+-*/"):
+                elif line[-1] in ":=),?+-*/{":
                     allowed_indent = indent + '\t'
-                    required_indent = indent
                     required_indent = ""
                 elif self._indent_words.search(line) and line[-1] != ';':
                     allowed_indent = indent + '\t'
@@ -251,6 +259,67 @@ if
 # This occured as bug
 """\tint32_t start_walk(Game & game,
 \t\tWalkingDir dir) """,
+
+
+## Not to shallow
+"""\tuint32_t const attack =
+\t\tattacker->get_min_attack() +
+\t\t(game.logic_rand()
+\t\t %
+\t\t (attacker->get_max_attack() - attacker->get_min_attack() - 1));""",
+
+"""else
+\t// In editor: play idle task forever
+\tset_animation(egbase, descr().get_animation("idle"));
+""",
+
+"""int blah () {return 0815;}
+int blah1() {return 0815;}""",
+
+"""\tfloat f =
+\t\tstatic_cast<float>(game.get_gametime() - m_walkstart)
+\t\t/
+\t\t(m_walkend - m_walkstart);""",
+
+"""
+\tdst.drawanim
+\t\t(pos,
+\t\t (g_gr->nr_frames(a) - 1) * FRAME_LENGTH,
+\t\t get_owner());""",
+
+"""else
+{
+\tHi""",
+
+"""#ifndef NDEBUG
+	(Game & game)
+#else
+	(Game &)
+#endif""",
+
+"""} else {
+\tm_name     ->set_text("");
+}""",
+
+# This was a problem with string substitution
+"""
+\tif
+\t\t(a
+\t\t (tail[1] == '\'' or tail[1] == '"'))
+\t{
+\t\treading_multiline = true;
+\t\ttail += 2;
+\t}""",
+
+
+# Not too deep
+"""try {
+\tanim = building().get_animation("build");
+} catch (Map_Object_Descr::Animation_Nonexistent) {
+\tanim = building().get_animation("idle");
+}""",
+
+
 
 # Erics Tests
 ## leading_whitespace_not_matching_previous_line.cc
