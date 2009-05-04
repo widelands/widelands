@@ -4,3 +4,8 @@ operator!=(b) or
 (I const) const;
 (I const) const
 (I)const
+(a) % (b)
+(a) / (b)
+(a) * (b)
+(a) + (b)
+(a) - (b)
