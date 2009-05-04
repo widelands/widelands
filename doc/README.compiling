@@ -63,6 +63,10 @@ build type, execute e.g. "scons build=debug". To see all available types, do
 
 Several other build targets are available :-) but mostly not documented yet :-(
 
+some available scons flags are:
+build=debug|release
+build_id=<IDNAME>
+
 make
 ------------------
 Edit src/config.h.default to your liking and check the Makefile for more
