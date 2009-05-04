@@ -739,14 +739,23 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 			} else if (j->type == BuildingObserver::WAREHOUSE) {
 				// Build one warehouse (hq included) for ~every 25 productionsites
-				prio += productionsites.size();
+				// and mines. Militarysites are slightly important as well, to
+				// have a bigger chance for a warehouses (containing waiting
+				// soldiers or wares needed for soldier training) near the frontier.
+				prio += productionsites.size() + mines.size();
+				prio += militarysites.size() / 3;
 				prio -= (j->cnt_under_construction + numof_warehouses) * 25;
+				prio *= 2;
 
 			} else if (j->type == BuildingObserver::TRAININGSITE) {
-				// start building trainingsites when there are already ~50 other
-				// buildings. That should be enough for a working economy.
+				// Start building trainingsites when there are already more than 50
+				// other buildings. That should be enough for a working economy.
+				// On the other hand only build more trainingssites of the same type
+				// if the economy is really big.
 				prio += productionsites.size() + militarysites.size();
-				prio += mines.size() - ((j->total_count() + 1) * 50);
+				prio += mines.size();
+				prio  = prio / (j->total_count() + 1);
+				prio -= (j->total_count() + 1) * 50;
 			}
 
 			// avoid to have too many construction sites
@@ -1138,7 +1147,7 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 {
 	if ((next_productionsite_check_due > gametime) || productionsites.empty())
 		return false;
-	next_productionsite_check_due = gametime + 5000;
+	next_productionsite_check_due = gametime + 2400;
 
 	// Get link to productionsite that should be checked
 	ProductionSiteObserver & site = productionsites.front();
@@ -1268,6 +1277,11 @@ bool DefaultAI::check_mines(int32_t gametime)
 	ProductionSiteObserver & site = mines.front();
 	Map & map = game().map();
 	Field * field = map.get_fcoords(site.site->get_position()).field;
+
+	// Don't try to enhance as long as stats are not down to 0% - it is possible,
+	// that some neighbour fields still have resources
+	if (site.site->get_statistics_percent() > 0)
+		return false;
 
 	// Check if mine ran out of resources
 	uint8_t current = field->get_resources_amount();
