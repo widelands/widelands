@@ -42,9 +42,9 @@ using Widelands::Building_Index;
 #define label_height         20
 Editor_Player_Menu_Allowed_Buildings_Menu::
 	Editor_Player_Menu_Allowed_Buildings_Menu
-	(UI::Panel                  * parent,
-	 Widelands::Player          & player,
-	 UI::UniqueWindow::Registry * registry)
+		(UI::Panel                  * parent,
+		 Widelands::Player          & player,
+		 UI::UniqueWindow::Registry * registry)
 :
 UI::UniqueWindow
 	(parent,

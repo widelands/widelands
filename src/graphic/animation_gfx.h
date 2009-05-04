@@ -31,7 +31,11 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 	const Point get_hotspot() const throw () {return m_hotspot;}
 	typedef std::vector<Surface *> Frames;
 	typedef Frames::size_type Index;
-	Index nr_frames() const {assert((*m_plrframes)[0]); return m_plrframes[0].size();}
+	Index nr_frames() const
+	{
+		assert((*m_plrframes)[0]); return m_plrframes[0].size();
+	}
+
 	Surface * get_frame
 		(Index                     const i,
 		 Widelands::Player_Number  const plyr,

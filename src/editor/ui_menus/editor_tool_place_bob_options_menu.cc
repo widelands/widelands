@@ -133,16 +133,17 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked
 		//  TODO The uint32_t cast is ugly!
 		for
 			(uint32_t i = 0; i < m_checkboxes.size();
-			 ++i, i += i == static_cast<uint32_t>(n)) {
-			m_checkboxes[i]->changedtoid.set
-				(this,
-				 static_cast
-				 	<void (Editor_Tool_Place_Bob_Options_Menu::*)(int32_t, bool)>
-				 	(0));
-			m_checkboxes[i]->set_state(false);
-			m_checkboxes[i]->changedtoid.set
-				(this, &Editor_Tool_Place_Bob_Options_Menu::clicked);
-		}
+			 ++i, i += i == static_cast<uint32_t>(n))
+			{
+				m_checkboxes[i]->changedtoid.set
+					(this,
+					 static_cast
+					 <void (Editor_Tool_Place_Bob_Options_Menu::*)(int32_t, bool)>
+					 (0));
+				m_checkboxes[i]->set_state(false);
+				m_checkboxes[i]->changedtoid.set
+					(this, &Editor_Tool_Place_Bob_Options_Menu::clicked);
+			}
 	}
 
 	m_pit.enable(n, t);

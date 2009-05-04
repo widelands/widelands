@@ -624,7 +624,9 @@ struct RequestSupplyPair {
 
 typedef
 	std::priority_queue
-	<RequestSupplyPair, std::vector<RequestSupplyPair>, RequestSupplyPair::Compare>
+	<RequestSupplyPair,
+	std::vector<RequestSupplyPair>,
+	RequestSupplyPair::Compare>
 	RSPairQueue;
 
 struct RSPairStruct {

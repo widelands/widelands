@@ -53,7 +53,7 @@ ConstructionSite_Descr::ConstructionSite_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
 	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
-	: Building_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
+: Building_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata)
 {
 	add_attribute(Map_Object::CONSTRUCTIONSITE);
 }
@@ -453,7 +453,8 @@ bool ConstructionSite::get_building_work(Game & game, Worker & worker, bool) {
 				 m_work_steptime - game.get_gametime());
 			return true;
 		} else {
-			//TODO(fweber): cause "construction sounds" to be played - perhaps dependent on kind of construction?
+			//TODO(fweber): cause "construction sounds" to be played -
+			//perhaps dependent on kind of construction?
 
 			++m_work_completed;
 			if (m_work_completed >= m_work_steps)
@@ -570,7 +571,8 @@ void ConstructionSite::draw
 	assert(h * anim_pic <= lines);
 	lines -= h * anim_pic; //  This won't work if pictures have various sizes.
 
-	// NoLog("drawing lines %i/%i from pic %i/%i\n", lines, h, anim_pic, nr_pics);
+	// NoLog("drawing lines %i/%i from pic %i/%i\n", lines, h, anim_pic,
+	// nr_pics);
 	if (anim_pic) //  not the first pic
 		//  draw the prev pic from top to where next image will be drawing
 		dst.drawanimrect

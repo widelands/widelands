@@ -35,8 +35,9 @@ struct Road_Textures {
 /** class Texture
 *
 * Texture represents are terrain texture, which is strictly
-* TEXTURE_WIDTH by TEXTURE_HEIGHT pixels in size. It uses 8 bit color, and a pointer
-* to the corresponding palette and color lookup table is provided.
+* TEXTURE_WIDTH by TEXTURE_HEIGHT pixels in size. It uses 8 bit color, and
+* a pointer to the corresponding palette and color lookup table is
+* provided.
 *
 * Currently, this is initialized from a 16 bit bitmap. This should be
 * changed to load 8 bit bitmaps directly.

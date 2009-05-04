@@ -24,7 +24,8 @@
 #include <cstring>
 
 /*
- * This file simply contains the languages which are available as translations in widelands.
+ * This file simply contains the languages which are available as
+ * translations in widelands.
  *
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  * !!!!!! NOTE This file must be saved as utf-8 encoded file !!!!!

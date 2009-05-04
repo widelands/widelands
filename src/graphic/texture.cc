@@ -82,7 +82,11 @@ is_32bit   (format.BytesPerPixel == 4)
 
 		if (surf->w != TEXTURE_WIDTH || surf->h != TEXTURE_HEIGHT) {
 			SDL_FreeSurface(surf);
-			log("WARNING: %s: texture must be %ix%i pixels big\n", fname, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+			log
+				("WARNING: %s: texture must be %ix%i pixels big\n",
+				 fname,
+				 TEXTURE_WIDTH,
+				 TEXTURE_HEIGHT);
 			break;
 		}
 

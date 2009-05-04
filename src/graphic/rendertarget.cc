@@ -140,7 +140,8 @@ int32_t RenderTarget::get_h() const
  * This function is still quite slow, since it draws
  * every pixel as a rectangle. So use it with care
  */
-void RenderTarget::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2, RGBColor color)
+void RenderTarget::draw_line
+	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, RGBColor color)
 {
 	int32_t dx = x2 - x1;      /* the horizontal distance of the line */
 	int32_t dy = y2 - y1;      /* the vertical distance of the line */
@@ -324,10 +325,10 @@ static inline Sint8 node_brightness
 	int32_t maxfx, maxfy;                                                      \
                                                                               \
 	/* hack to prevent negative numbers */                                     \
-	minfx = (viewofs.x + (TRIANGLE_WIDTH>>1)) / TRIANGLE_WIDTH - 1;            \
+	minfx = (viewofs.x + (TRIANGLE_WIDTH >> 1)) / TRIANGLE_WIDTH - 1;          \
                                                                               \
 	minfy = viewofs.y / TRIANGLE_HEIGHT;                                       \
-	maxfx = (viewofs.x + (TRIANGLE_WIDTH>>1) + m_rect.w) / TRIANGLE_WIDTH;     \
+	maxfx = (viewofs.x + (TRIANGLE_WIDTH >> 1) + m_rect.w) / TRIANGLE_WIDTH;   \
 	maxfy = (viewofs.y + m_rect.h) / TRIANGLE_HEIGHT;                          \
 	maxfx +=  1; /* because of big buildings */                                \
 	maxfy += 10; /* because of heights */                                      \
@@ -523,7 +524,10 @@ void RenderTarget::rendermap
 					move_r(mapwidth, br, br_index);
 					r_player_field  = first_player_field +  r_index;
 					br_player_field = first_player_field + br_index;
-					const uint8_t tr_owner_number = tr.field->get_owned_by(); //  FIXME PPoV
+
+					//  FIXME PPoV
+					const uint8_t tr_owner_number = tr.field->get_owned_by();
+
 					const bool f_is_border = r_is_border;
 					const uint8_t l_owner_number = f_owner_number;
 					const uint8_t bl_owner_number = br_owner_number;
@@ -615,8 +619,10 @@ void RenderTarget::rendermap
 							(const Map_Object_Descr * const map_object_descr =
 							 f_player_field.map_object_descr[TCoords<>::None])
 						{
-							if (const uint32_t picid = map_object_descr->main_animation())
-								drawanim(f_pos, picid, 0);
+							if
+								(const uint32_t picid =
+								 map_object_descr->main_animation())
+									drawanim(f_pos, picid, 0);
 							else if (map_object_descr == &Widelands::g_flag_descr) {
 								const Player & owner = egbase.player(f_owner_number);
 								drawanim
@@ -1192,7 +1198,8 @@ void RenderTarget::drawanim
 
 	doblit(dst, frame, srcrc);
 
-	// Look if there's a sound effect registered for this frame and trigger the effect
+	// Look if there's a sound effect registered for this frame and trigger
+	// the effect
 	uint32_t stereo_position = 128; //  see Sound_Handler::stereo_position()
 
 	g_anim.trigger_soundfx(animation, framenumber, stereo_position);

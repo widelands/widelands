@@ -90,10 +90,12 @@ Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen)
 	if (!sdlsurface)
 		throw wexception("could not set video mode: %s", SDL_GetError());
 
-	assert(sdlsurface->format->BytesPerPixel == 2 || sdlsurface->format->BytesPerPixel == 4);
+	assert
+		(sdlsurface->format->BytesPerPixel == 2 ||
+		 sdlsurface->format->BytesPerPixel == 4);
 
-	std::string caption=std::string("Widelands ") + build_id();
-	caption+="(" + build_type() + ")";
+	std::string caption = std::string("Widelands ") + build_id();
+	caption += "(" + build_type() + ")";
 	SDL_WM_SetCaption(caption.c_str(), "Widelands");
 
 	m_screen.set_sdl_surface(*sdlsurface);
@@ -552,7 +554,11 @@ uint32_t Graphic::create_grayed_out_pic(uint32_t const picid) {
 		for (uint32_t y = 0; y < h; ++y)
 			for (uint32_t x = 0; x < w; ++x) {
 				uint8_t r, g, b, a;
-				SDL_GetRGBA(s.get_pixel(x, y), &const_cast<SDL_PixelFormat &>(format), &r, &g, &b, &a); //  FIXME need for const_cast is SDL bug #421
+
+				//  FIXME need for const_cast is SDL bug #421
+				SDL_GetRGBA
+					(s.get_pixel(x, y),
+					 &const_cast<SDL_PixelFormat &>(format), &r, &g, &b, &a);
 
 				//  Halve the opacity to give some difference for pictures that are
 				//  grayscale to begin with.
@@ -564,7 +570,13 @@ uint32_t Graphic::create_grayed_out_pic(uint32_t const picid) {
 					 luminance_table_b[b] +
 					 8388608U) //  compensate for truncation:  .5 * 2^24
 					>> 24;
-				s.set_pixel(x, y, SDL_MapRGBA(&const_cast<SDL_PixelFormat &>(format), gray, gray, gray, a)); // NOTE const_cast is needed for SDL-1.2 older than revision 3008
+
+				// NOTE const_cast is needed for SDL-1.2 older than revision 3008
+				s.set_pixel
+					(x, y, SDL_MapRGBA
+					 	(&const_cast<SDL_PixelFormat &>(format),
+					 	 gray, gray, gray, a));
+
 			}
 		return get_picture(PicSurface, s);
 	} else
@@ -598,7 +610,8 @@ RenderTarget * Graphic::get_surface_renderer(uint32_t const pic) {
  * \note Terrain textures are not reused, even if fnametempl matches.
  * These textures are freed when PicMod_Game is flushed.
 */
-uint32_t Graphic::get_maptexture(const char & fnametempl, const uint32_t frametime)
+uint32_t Graphic::get_maptexture
+	(const char & fnametempl, const uint32_t frametime)
 {
 	try {
 		m_maptextures.push_back
@@ -779,11 +792,17 @@ Texture * Graphic::get_maptexture_data(uint32_t id)
 Surface * Graphic::get_road_texture(int32_t const roadtex)
 {
 	if (not m_roadtextures) {
+
 		// Load the road textures
 		m_roadtextures = new Road_Textures();
-		m_roadtextures->pic_road_normal = get_picture(PicMod_Game, ROAD_NORMAL_PIC);
-		m_roadtextures->pic_road_busy   = get_picture(PicMod_Game, ROAD_BUSY_PIC);
-		get_picture_surface(m_roadtextures->pic_road_normal)->force_disable_alpha();
+		m_roadtextures->pic_road_normal =
+			get_picture(PicMod_Game, ROAD_NORMAL_PIC);
+
+		m_roadtextures->pic_road_busy = get_picture(PicMod_Game, ROAD_BUSY_PIC);
+
+		get_picture_surface
+			(m_roadtextures->pic_road_normal)->force_disable_alpha();
+
 		get_picture_surface(m_roadtextures->pic_road_busy)->force_disable_alpha();
 	}
 

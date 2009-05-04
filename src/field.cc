@@ -35,12 +35,15 @@ void Field::set_brightness
 	 int32_t const bl,
 	 int32_t const br)
 {
-	static float flatbrightness = 0; // HACK to normalize flat terrain to zero brightness
+	// HACK to normalize flat terrain to zero brightness
+	static float flatbrightness = 0;
+
 	if (!flatbrightness)
 		flatbrightness = MapviewPixelFunctions::calc_brightness(0, 0, 0, 0, 0, 0);
 
 	float b =
-		MapviewPixelFunctions::calc_brightness(l, r, tl, tr, bl, br) - flatbrightness;
+		MapviewPixelFunctions::calc_brightness
+			(l, r, tl, tr, bl, br) - flatbrightness;
 
 	if (b > 0)
 		b *= 1.5;

@@ -82,7 +82,8 @@ struct AnimationManager {
 	// for use by the graphics subsystem
 	uint32_t get_nranimations() const;
 	AnimationData const * get_animation(uint32_t id) const;
-	void trigger_soundfx(uint32_t animation, uint32_t framenumber, uint32_t stereo_position);
+	void trigger_soundfx
+		(uint32_t animation, uint32_t framenumber, uint32_t stereo_position);
 
 private:
 	std::vector<AnimationData> m_animations;

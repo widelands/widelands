@@ -199,8 +199,8 @@ void Map_Bobdata_Data_Packet::Read
 								else if
 									(not strcmp(taskname, "moveToBattle") ||
 									 not strcmp(taskname, "moveHome"))
-									 // Weird hack to support legacy games
-									task = &Worker::taskBuildingwork;
+										// Weird hack to support legacy games
+										task = &Worker::taskBuildingwork;
 								else if (*taskname == '\0')
 									continue; // Skip task
 								else

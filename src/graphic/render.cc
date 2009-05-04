@@ -334,7 +334,8 @@ void Surface::draw_minimap
 	 uint32_t                            const flags)
 {
 	//TODO: this const_cast is evil and should be exorcised.
-	Uint8 * const pixels = const_cast<Uint8 *>(static_cast<const Uint8 *>(get_pixels()));
+	Uint8 * const pixels = const_cast<Uint8 *>
+		(static_cast<const Uint8 *>(get_pixels()));
 	const uint16_t pitch = get_pitch();
 	Widelands::X_Coordinate const w = egbase.map().get_width();
 	switch (format().BytesPerPixel) {
@@ -584,7 +585,10 @@ AnimationGfx::AnimationGfx(AnimationData const * data)
 	}
 end:
 	if (m_plrframes[0].empty())
-		throw wexception("Animation %s has no frames", data->picnametempl.c_str());
+		throw wexception
+			("Animation %s has no frames",
+			 data->picnametempl.c_str());
+
 	if (m_pcmasks.size() and m_pcmasks.size() < m_plrframes[0].size())
 		throw wexception
 			("animation has %zu frames but playercolor mask has only %zu frames",

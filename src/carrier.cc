@@ -455,7 +455,9 @@ void Carrier::find_pending_item(Game & game)
 			(!
 			 road.get_flag(Road::FlagStart).ack_pending_item
 			 	(game, road.get_flag(Road::FlagEnd)))
-			throw wexception("Carrier::find_pending_item: start flag is messed up");
+			throw wexception
+				("Carrier::find_pending_item: start flag is messed up");
+
 	} else if (haveitembits == 2) {
 		m_acked_ware = 1;
 		if
@@ -473,7 +475,9 @@ void Carrier::find_pending_item(Game & game)
 int32_t Carrier::find_closest_flag(Game & game)
 {
 	Map & map = game.map();
-	CoordPath startpath(map, dynamic_cast<Road &>(*get_location(game)).get_path());
+	CoordPath startpath
+		(map, dynamic_cast<Road &>(*get_location(game)).get_path());
+
 	CoordPath endpath;
 	int32_t startcost, endcost;
 	int32_t curidx = -1;

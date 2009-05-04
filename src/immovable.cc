@@ -626,7 +626,11 @@ ImmovableProgram::ActAnimate::ActAnimate
 		else {
 			m_id =
 				g_anim.get
-					(directory.c_str(), prof.get_safe_section(animation_name), 0, &descr.get_default_encodedata());
+					(directory.c_str(),
+					 prof.get_safe_section(animation_name),
+					 0,
+					 &descr.get_default_encodedata());
+
 			descr.add_animation(animation_name, m_id);
 		}
 		if (not reached_end) { //  The next parameter is the duration.
@@ -680,7 +684,8 @@ ImmovableProgram::ActPlayFX::ActPlayFX
 	}
 }
 
-/** Demand from the g_sound_handler to play a certain sound effect. Whether the effect actually gets played
+/** Demand from the g_sound_handler to play a certain sound effect.
+ * Whether the effect actually gets played
  * is decided only by the sound server*/
 void ImmovableProgram::ActPlayFX::execute
 	(Game & game, Immovable & immovable) const

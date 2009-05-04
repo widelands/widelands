@@ -31,7 +31,8 @@ void log(const char * const fmt, ...) {
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	//TODO: use iostreams instead of vprintf because other parts of Widelands use iostreams
+	//TODO: use iostreams instead of vprintf because other parts of
+	//      Widelands use iostreams
 	std::cout << buffer;
 	std::cout.flush();
 }

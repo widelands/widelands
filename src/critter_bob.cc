@@ -226,7 +226,9 @@ class Critter_Bob
 //
 // Implementation
 //
-#define CRITTER_MAX_WAIT_TIME_BETWEEN_WALK 2000 // wait up to 12 seconds between moves
+
+// wait up to 12 seconds between moves
+#define CRITTER_MAX_WAIT_TIME_BETWEEN_WALK 2000
 
 Critter_Bob::Critter_Bob(const Critter_Bob_Descr & critter_bob_descr) :
 Bob(critter_bob_descr)

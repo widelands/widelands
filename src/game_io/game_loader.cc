@@ -89,7 +89,8 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 	log(" done\n");
 
 	// Only read and use interactive player data, if we load a singleplayer game.
-	// In multiplayer games every client needs to create a new interactive player.
+	// In multiplayer games every client needs to create a new interactive
+	// player.
 	if (!multiplayer) {
 		log("Game: Reading Interactive Player Data ... ");
 		{Game_Interactive_Player_Data_Packet       p; p.Read(m_fs, m_game, mol);}

@@ -36,9 +36,9 @@
 #define height 20
 Editor_Tool_Change_Resources_Options_Menu::
 	Editor_Tool_Change_Resources_Options_Menu
-	(Editor_Interactive             & parent,
-	 Editor_Increase_Resources_Tool & increase_tool,
-	 UI::UniqueWindow::Registry     & registry)
+		(Editor_Interactive             & parent,
+		 Editor_Increase_Resources_Tool & increase_tool,
+		 UI::UniqueWindow::Registry     & registry)
 :
 Editor_Tool_Options_Menu
 	(parent, registry, 164, 120, _("Resources Tools Options")),

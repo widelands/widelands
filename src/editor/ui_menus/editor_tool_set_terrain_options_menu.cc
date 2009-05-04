@@ -172,9 +172,9 @@ m_tool(tool)
 
 Editor_Tool_Set_Terrain_Tool_Options_Menu::
 	~Editor_Tool_Set_Terrain_Tool_Options_Menu()  {
-	container_iterate_const(std::vector<uint32_t>, m_surfaces, i)
-		g_gr->free_surface(*i.current);
-}
+		container_iterate_const(std::vector<uint32_t>, m_surfaces, i)
+			g_gr->free_surface(*i.current);
+	}
 
 
 void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int32_t n, bool t) {

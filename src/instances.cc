@@ -332,8 +332,9 @@ void Map_Object::remove(Editor_Game_Base & egbase)
  * \li Create a burning fire (buildings)
  * \li ...
  *
- * \warning This function will immediately delete the memory allocated for the object.
- * Therefore, it may be safer to call schedule_destroy() instead.
+ * \warning This function will immediately delete the memory allocated for
+ * the object. Therefore, it may be safer to call schedule_destroy()
+ * instead.
  */
 void Map_Object::destroy(Editor_Game_Base & egbase)
 {

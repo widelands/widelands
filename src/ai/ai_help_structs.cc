@@ -53,8 +53,11 @@ bool CheckStepRoadAI::allowed
 		return false;
 		//uint8_t startcaps = player->get_buildcaps(start);
 
-		//if (!((endcaps & MOVECAPS_WALK) && (startcaps & movecaps & MOVECAPS_SWIM)))
-			//return false;
+		//if
+		// (!((endcaps & MOVECAPS_WALK)
+		//    &&
+		//    (startcaps & movecaps & MOVECAPS_SWIM)))
+		//return false;
 	}
 
 	// Check for blocking immovables

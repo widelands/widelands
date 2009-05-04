@@ -555,7 +555,8 @@ void Interactive_Base::finish_build_road()
 		if (upcast(Game, game, &egbase())) {
 			game->send_player_build_road
 				(m_road_build_player, *new Widelands::Path(*m_buildroad));
-			if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) { //place flags
+			if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
+				// place flags
 				Map const & map = game->map();
 				std::vector<Coords>         const &       c_vector =
 					m_buildroad->get_coords();
@@ -708,7 +709,7 @@ void Interactive_Base::roadb_add_overlay()
 		int32_t const shift = 2 * (dir - Map_Object::WALK_E);
 
 		uint8_t set_to = overlay_manager.get_road_overlay(c);
-		set_to|=  Widelands::Road_Normal << shift;
+		set_to |=  Widelands::Road_Normal << shift;
 		overlay_manager.register_road_overlay(c, set_to, m_jobid);
 	}
 

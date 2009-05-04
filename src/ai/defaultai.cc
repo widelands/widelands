@@ -393,7 +393,7 @@ void DefaultAI::update_all_not_buildable_fields()
 		// check whether building capabilities have improved
 		if
 			((player->get_buildcaps(unusable_fields.front())
-			 & BUILDCAPS_SIZEMASK) != 0)
+			  & BUILDCAPS_SIZEMASK) != 0)
 		{
 
 			buildable_fields.push_back
@@ -406,7 +406,7 @@ void DefaultAI::update_all_not_buildable_fields()
 
 		if
 			((player->get_buildcaps(unusable_fields.front())
-			 & BUILDCAPS_MINE) != 0)
+			  & BUILDCAPS_MINE) != 0)
 		{
 
 			mineable_fields.push_back
@@ -585,11 +585,11 @@ void DefaultAI::update_mineable_field (MineableField & field)
  * their produced wares. The need for trunkproducers (like lumberjack's huts),
  * stoneproducers (like quarries) and ressource refreshing buildings (like
  * forester's houses, gamekeeper's huts or fishbreeder houses) are calculated
- * seperately as these buildings should have another priority (on one hand they
+ * separately as these buildings should have another priority (on one hand they
  * are important for the basic infrastructure, but there is no need for a lot
  * of these buildings.
  * Militarysites, warehouses and trainingssites have a different calculation,
- * that (should) depend on the initialisation type (Agressive, Normal,
+ * that (should) depend on the initialisation type (Aggressive, Normal,
  * Defensive)
  */
 bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
@@ -709,9 +709,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 						int32_t iosum = 0;
 						for (size_t k = 0; k < j->inputs.size(); ++k)
-							if (bf->producers_nearby[j->inputs[k]]>0)
+							if (bf->producers_nearby[j->inputs[k]] > 0)
 								++iosum;
-							else if (bf->consumers_nearby[j->inputs[k]]>0)
+							else if (bf->consumers_nearby[j->inputs[k]] > 0)
 								--iosum;
 						if (iosum < -2)
 							iosum = -2;

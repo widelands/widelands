@@ -588,8 +588,11 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 		if (!*ppgrid) {
 			*ppgrid = new BuildGrid(&m_tabpanel, tribe, 0, 0, 5);
 			(*ppgrid)->buildclicked.set(this, &FieldActionWindow::act_build);
-			(*ppgrid)->buildmouseout.set(this, &FieldActionWindow::building_icon_mouse_out);
-			(*ppgrid)->buildmousein.set(this, &FieldActionWindow::building_icon_mouse_in);
+			(*ppgrid)->buildmouseout.set
+				(this, &FieldActionWindow::building_icon_mouse_out);
+
+			(*ppgrid)->buildmousein.set
+				(this, &FieldActionWindow::building_icon_mouse_in);
 		}
 
 		// Add it to the grid
@@ -942,10 +945,10 @@ void FieldActionWindow::act_geologist()
 }
 
 /**
- * Here there are a problem: the sender of an event is always the owner of were is done this even.
- * But for attacks, the owner of an event is the player who start an attack, so is needed to get an
- * extra parameter to the send_player_enemyflagaction, the player number
- *
+ * Here there are a problem: the sender of an event is always the owner of
+ * were is done this even. But for attacks, the owner of an event is the
+ * player who start an attack, so is needed to get an extra parameter to
+ * the send_player_enemyflagaction, the player number
  */
 void FieldActionWindow::act_attack ()
 {

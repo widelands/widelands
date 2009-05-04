@@ -236,7 +236,12 @@ void BulldozeConfirm::bulldoze()
 	upcast(Building,        building,  m_building .get(egbase));
 	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(egbase));
 
-	if (todestroy && building && building->get_playercaps() & (1 << Building::PCap_Bulldoze)) {
+	if
+		(todestroy &&
+		 building &&
+		 building->get_playercaps() &
+		 (1 << Building::PCap_Bulldoze))
+	{
 		if (upcast(Widelands::Game, game, &egbase)) {
 			game->send_player_bulldoze
 				(*todestroy,
@@ -436,7 +441,11 @@ struct Building_Window : public UI::Window {
 		Width = 4 * 34 //  4 normally sized buttons
 	};
 
-	Building_Window(Interactive_Player * parent, Building * building, UI::Window * * registry);
+	Building_Window
+		(Interactive_Player * parent,
+		 Building           * building,
+		 UI::Window         * * registry);
+
 	virtual ~Building_Window();
 
 	Interactive_Player * get_player() {return m_player;}
@@ -624,7 +633,8 @@ void Building_Window::setup_capsbuttons()
 				snprintf
 					(buffer, sizeof(buffer),
 					 _("Enhance to %s"), building.descname().c_str());
-				new UI::Callback_IDButton<Building_Window, Widelands::Building_Index>
+				new UI::Callback_IDButton
+					<Building_Window, Widelands::Building_Index>
 					(m_capsbuttons,
 					 x, 0, 34, 34,
 					 4,
@@ -800,7 +810,10 @@ ConstructionSite UI IMPLEMENTATION
 */
 
 struct ConstructionSite_Window : public Building_Window {
-	ConstructionSite_Window(Interactive_Player * parent, Widelands::ConstructionSite * cs, UI::Window * * registry);
+	ConstructionSite_Window
+		(Interactive_Player          * parent,
+		 Widelands::ConstructionSite * cs,
+		 UI::Window                  * * registry);
 
 	ConstructionSite * get_constructionsize() {
 		return dynamic_cast<ConstructionSite *>(get_building());
@@ -900,7 +913,10 @@ Warehouse UI IMPLEMENTATION
 */
 
 struct Warehouse_Window : public Building_Window {
-	Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI::Window **registry);
+	Warehouse_Window
+		(Interactive_Player * parent,
+		 Warehouse          * wh,
+		 UI::Window         * * registry);
 
 	Warehouse * get_warehouse() {
 		return dynamic_cast<Warehouse *>(get_building());
@@ -926,14 +942,18 @@ Warehouse_Window::Warehouse_Window
 Open the window, create the window buttons and add to the registry.
 ===============
 */
-Warehouse_Window::Warehouse_Window(Interactive_Player *parent, Warehouse *wh, UI::Window **registry)
-	: Building_Window(parent, wh, registry)
+Warehouse_Window::Warehouse_Window
+	(Interactive_Player * parent,
+	 Warehouse          * wh,
+	 UI::Window         * * registry)
+: Building_Window(parent, wh, registry)
 {
 	m_parent = parent;
 
 	// Add wares display
 	m_waresdisplay = new WaresDisplay(this, 0, 0, parent->player().tribe());
-	m_waresdisplay->add_warelist(&get_warehouse()->get_wares(), WaresDisplay::WARE);
+	m_waresdisplay->add_warelist
+		(&get_warehouse()->get_wares(), WaresDisplay::WARE);
 
 	set_inner_size(m_waresdisplay->get_w(), 0);
 
@@ -1070,7 +1090,9 @@ private:
 /*
  * Constructor
  */
-ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow(Interactive_Player * parent, ProductionSite * ps)
+ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow
+	(Interactive_Player * parent,
+	 ProductionSite     * ps)
 :
 UI::Window(parent, 0, 0, 320, 125, _("Worker Listing"))
 {
@@ -1232,7 +1254,10 @@ private:
 };
 
 struct ProductionSite_Window : public Building_Window {
-	ProductionSite_Window(Interactive_Player * parent, ProductionSite * ps, UI::Window * * registry);
+	ProductionSite_Window
+		(Interactive_Player * parent,
+		 ProductionSite     * ps,
+		 UI::Window         * * registry);
 
 	ProductionSite * get_productionsite() {
 		return dynamic_cast<ProductionSite *>(get_building());
@@ -1274,11 +1299,17 @@ m_ware_index(ware_index)
 {}
 
 void PriorityButtonHelper::button_clicked (int32_t priority) {
-	m_game.send_player_set_ware_priority(*m_ps, m_ware_type, m_ware_index, priority);
+	m_game.send_player_set_ware_priority
+		(* m_ps,
+		 m_ware_type,
+		 m_ware_index,
+		 priority);
 }
 
 void PriorityButtonHelper::update_buttons () {
-	const int32_t priority = m_ps->get_priority(m_ware_type, m_ware_index, false);
+	const int32_t priority = m_ps->get_priority
+		(m_ware_type, m_ware_index, false);
+
 	for (iterator it = begin(); it != end(); ++it) {
 		bool const enable = it->first != priority;
 		it->second.button->set_enabled(enable);
@@ -1294,8 +1325,11 @@ ProductionSite_Window::ProductionSite_Window
 Create the window and its panels, add it to the registry.
 ===============
 */
-ProductionSite_Window::ProductionSite_Window(Interactive_Player * parent, ProductionSite * ps, UI::Window * * registry)
-	: Building_Window(parent, ps, registry)
+ProductionSite_Window::ProductionSite_Window
+	(Interactive_Player * parent,
+	 ProductionSite     * ps,
+	 UI::Window         * * registry)
+: Building_Window(parent, ps, registry)
 {
 	m_parent = parent;
 	m_reg = registry;
@@ -1336,7 +1370,9 @@ ProductionSite_Window::create_priority_button
 }
 
 void ProductionSite_Window::create_ware_queue_panel
-	(UI::Box * const box, ProductionSite * const ps, Widelands::WaresQueue * const wq)
+	(UI::Box               * const box,
+	 ProductionSite        * const ps,
+	 Widelands::WaresQueue * const wq)
 {
 	const int32_t priority_buttons_width = WaresQueueDisplay::Height / 3;
 	UI::Box * hbox = new UI::Box (box, 0, 0, UI::Box::Horizontal);
@@ -1350,7 +1386,12 @@ void ProductionSite_Window::create_ware_queue_panel
 
 	if (wq->get_ware()) {
 		m_priority_helpers.push_back
-			(PriorityButtonHelper(get_player()->game(), ps, Widelands::Request::WARE, wq->get_ware()));
+			(PriorityButtonHelper
+			 	(get_player()->game(),
+			 	 ps,
+			 	 Widelands::Request::WARE,
+			 	 wq->get_ware()));
+
 		PriorityButtonHelper & helper = m_priority_helpers.back();
 
 		UI::Box * vbox = new UI::Box (hbox, 0, 0, UI::Box::Vertical);
@@ -1462,7 +1503,9 @@ ProductionSite::create_options_window
 Create the production site information window.
 ===============
 */
-void ProductionSite::create_options_window(Interactive_Player & plr, UI::Window * & registry)
+void ProductionSite::create_options_window
+	(Interactive_Player & plr,
+	 UI::Window         * & registry)
 {
 	new ProductionSite_Window(&plr, this, &registry);
 }
@@ -1683,7 +1726,9 @@ MilitarySite::create_options_window
 Create the production site information window.
 ===============
 */
-void MilitarySite::create_options_window(Interactive_Player & plr, UI::Window * & registry)
+void MilitarySite::create_options_window
+	(Interactive_Player & plr,
+	 UI::Window         * & registry)
 {
 	new MilitarySite_Window(plr, *this, registry);
 }
@@ -1698,7 +1743,10 @@ TrainingSite UI IMPLEMENTATION
 */
 
 struct TrainingSite_Window : public ProductionSite_Window {
-	TrainingSite_Window(Interactive_Player * parent, TrainingSite * ps, UI::Window * * registry);
+	TrainingSite_Window
+		(Interactive_Player * parent,
+		 TrainingSite       * ps,
+		 UI::Window         * * registry);
 
 	TrainingSite * get_trainingsite() {
 		return dynamic_cast<TrainingSite *>(get_building());
@@ -1733,8 +1781,10 @@ Create the window and its panels, add it to the registry.
 ===============
 */
 TrainingSite_Window::TrainingSite_Window
-	(Interactive_Player * const parent, TrainingSite * const ms, UI::Window * * const registry)
-	: ProductionSite_Window(parent, ms, registry)
+	(Interactive_Player * const parent,
+	 TrainingSite       * const ms,
+	 UI::Window         * * const registry)
+: ProductionSite_Window(parent, ms, registry)
 {
 	m_parent = parent;
 	m_reg = registry;
@@ -1898,8 +1948,8 @@ void TrainingSite_Window::update() {
 
 /*
 ==============
-Handle the click at drop soldier. Enqueue a command at command queue to get out selected
-soldier from this training site.
+Handle the click at drop soldier. Enqueue a command at command queue to
+get out selected soldier from this training site.
 =============
 */
 void TrainingSite_Window::drop_button_clicked()
@@ -1916,7 +1966,9 @@ TrainingSite::create_options_window
 Create the training site information window.
 ===============
 */
-void TrainingSite::create_options_window(Interactive_Player & plr, UI::Window * & registry)
+void TrainingSite::create_options_window
+	(Interactive_Player & plr,
+	 UI::Window         * & registry)
 {
 	new TrainingSite_Window(&plr, this, &registry);
 }

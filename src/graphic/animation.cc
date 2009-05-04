@@ -122,8 +122,8 @@ void AnimationManager::flush()
  * The animation resides in the given directory and is described by the given
  * section.
  *
- * The sound effects reside in the given directory and are described by the given
- * section.
+ * The sound effects reside in the given directory and are described by
+ * the given section.
  *
  * This function looks for pictures in this order:
  *    key 'pics', if present
@@ -244,18 +244,21 @@ AnimationData const * AnimationManager::get_animation(uint32_t const id) const
 
 /**
  * Find out if there is a sound effect registered for the animation's frame and
- * try to play it. This is used to have sound effects that are tightly synchronized
- * to an animation, for example when a geologist is shown hammering on rocks.
+ * try to play it. This is used to have sound effects that are tightly
+ * synchronized to an animation, for example when a geologist is shown
+ * hammering on rocks.
  *
  * \par animation    The animation to check.
  * \par framenumber  The framenumber currently on display.
  *
- * \note uint32_t animation is an ID number that starts at 1, not a vector index that starts at 0 !
+ * \note uint32_t animation is an ID number that starts at 1, not a vector
+ *       index that starts at 0 !
  *
  * \sa AnimationManager::get
  * \sa RenderTargetImpl::drawanim
 */
-void AnimationManager::trigger_soundfx(uint32_t animation, uint32_t framenumber, uint32_t stereo_position)
+void AnimationManager::trigger_soundfx
+	(uint32_t animation, uint32_t framenumber, uint32_t stereo_position)
 {
 	assert(animation); //  animation must not be zero!
 	assert(animation <= m_animations.size());
@@ -302,8 +305,8 @@ sectnametempl is of the form "foowalk_??", where ?? will be replaced with
 nw, ne, e, se, sw and w to get the section names for the animations.
 
 If defaults is not zero, the additional sections are not actually necessary.
-If they don't exist, the data is taken from defaults and the bitmaps foowalk_??_nn.bmp
-are used.
+If they don't exist, the data is taken from defaults and the bitmaps
+foowalk_??_nn.bmp are used.
 ===============
 */
 void DirAnimations::parse
@@ -324,7 +327,10 @@ void DirAnimations::parse
 	snprintf(sectnamebase, sizeof(sectnamebase), "%s", sectnametempl);
 	repl = strstr(sectnamebase, "??");
 	if (!repl)
-		throw wexception("DirAnimations section name template %s does not contain %%s", sectnametempl);
+		throw wexception
+			("DirAnimations section name template %s does not contain %%s",
+			 sectnametempl);
+
 	strncpy(repl, "%s", 2);
 
 	if
@@ -334,7 +340,10 @@ void DirAnimations::parse
 		snprintf(dirpictempl, sizeof(dirpictempl), "%s", string);
 		repl = strstr(dirpictempl, "!!");
 		if (!repl)
-			throw wexception("DirAnimations dirpics name templates %s does not contain !!", dirpictempl);
+			throw wexception
+				("DirAnimations dirpics name templates %s does not contain !!",
+				 dirpictempl);
+
 		strncpy(repl, "%s", 2);
 	} else {
 		snprintf(dirpictempl, sizeof(dirpictempl), "%s_??.png", sectnamebase);
@@ -351,7 +360,10 @@ void DirAnimations::parse
 		Section * s = prof.get_section(sectname);
 		if (!s) {
 			if (!defaults)
-				throw wexception("Section [%s] missing and no default supplied", sectname);
+				throw wexception
+					("Section [%s] missing and no default supplied",
+					 sectname);
+
 			s = defaults;
 		}
 

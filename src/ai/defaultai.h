@@ -45,7 +45,7 @@ struct Flag;
  * and will try to build up an infrastructure to create that ware.
  *
  * \ToDo Improvements:
- * - Implement different initialisation types (Agressive, Normal, Defensive)
+ * - Implement different initialisation types (Aggressive, Normal, Defensive)
  * - Improve update code - currently the whole buildable area owned by defaultAI
  *   is rechecked after construction of a building or a road. Instead it would
  *   be better to write down the changed coordinates and only check those and

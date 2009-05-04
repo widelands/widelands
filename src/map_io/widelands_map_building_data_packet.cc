@@ -194,8 +194,8 @@ void Map_Building_Data_Packet::write_priorities
 			else
 				throw
 					wexception
-					("unrecognized ware type %d while writing priorities",
-					 ware_type);
+						("unrecognized ware type %d while writing priorities",
+						 ware_type);
 
 			fw.CString(name.c_str());
 			fw.Unsigned32(it2->second);
@@ -226,8 +226,8 @@ void Map_Building_Data_Packet::read_priorities
 			else
 				throw
 					wexception
-					("unrecognized ware type %d while reading priorities",
-					 ware_type);
+						("unrecognized ware type %d while reading priorities",
+						 ware_type);
 
 			building.set_priority(ware_type, idx, fr.Unsigned32());
 		}

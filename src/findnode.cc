@@ -65,7 +65,12 @@ bool FindNodeSize::accept(Map const &, FCoords const & coord) const {
 	uint8_t const fieldcaps = coord.field->get_caps();
 
 	switch (m_size) {
-	case sizeBuild:  return (fieldcaps & (BUILDCAPS_SIZEMASK | BUILDCAPS_FLAG | BUILDCAPS_MINE));
+	case sizeBuild:  return
+		(fieldcaps &
+		 	(BUILDCAPS_SIZEMASK |
+		 	 BUILDCAPS_FLAG |
+		 	 BUILDCAPS_MINE));
+
 	case sizeMine:   return (fieldcaps & BUILDCAPS_MINE);
 	case sizePort:   return (fieldcaps & BUILDCAPS_PORT);
 	case sizeSmall:  return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_SMALL;

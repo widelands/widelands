@@ -127,7 +127,7 @@ void Scrollbar::set_pagesize(int32_t pagesize)
  * Change the current scrolling position.
  *
  * \param pos the new position, which will be snapped to the range [0,
- * 		     get_steps()-1]
+ *            get_steps()-1]
  */
 void Scrollbar::set_scrollpos(int32_t pos)
 {

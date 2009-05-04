@@ -141,7 +141,7 @@ template<typename T> T stringTo(std::string const & s) {
  * glibc :-(
  *
  * \see http://www.experts-exchange.com/Programming/
- *	Programming_Languages/Cplusplus/Q_20670737.html
+ * Programming_Languages/Cplusplus/Q_20670737.html
  * \author AssafLavie on http://www.experts-exchange.com
  */
 template<typename T> std::string toString(T const & x) {

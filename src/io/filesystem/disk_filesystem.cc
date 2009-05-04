@@ -74,7 +74,7 @@ int32_t RealFSImpl::FindFiles
 	(std::string const & path,
 	 std::string const & pattern,
 	 filenameset_t     * results,
-	 uint32_t            )
+	 uint32_t)
 #ifdef _WIN32
 {
 	std::string buf;

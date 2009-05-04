@@ -40,9 +40,9 @@ struct Scrollbar : public Panel {
 	};
 
 	enum {
-	 	///< default width for vertical scrollbars,
+		///< default width for vertical scrollbars,
 		// height for horizontal scrollbar
- 		Size = 24,
+		Size = 24,
 	};
 
 public:

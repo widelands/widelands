@@ -132,7 +132,9 @@ m_vision_range   (0)
 			if (build_s->get_int("fps", -1) != -1)
 				throw wexception("fps defined for build animation!");
 			if (!is_animation_known("build"))
-				add_animation("build", g_anim.get(directory.c_str(), *build_s, 0, encdata));
+				add_animation
+					("build",
+					 g_anim.get(directory.c_str(), *build_s, 0, encdata));
 		}
 
 		// Get costs
@@ -161,7 +163,9 @@ m_vision_range   (0)
 	{ //  parse basic animation data
 		Section & idle_s = prof.get_safe_section("idle");
 		if (!is_animation_known("idle"))
-			add_animation("idle", g_anim.get(directory.c_str(), idle_s, 0, encdata));
+			add_animation
+				("idle",
+				 g_anim.get(directory.c_str(), idle_s, 0, encdata));
 	}
 
 	while (Section::Value const * const v = global_s.get_next_val("soundfx"))

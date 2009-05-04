@@ -75,7 +75,8 @@ throw (_wexception)
 	Map const & map = game.map();
 	s.set_string("mapname",        map.get_name());  // Name of map
 	if (ipl) {
-		s.set_int   ("player_nr",   ipl->get_player_number()); // player that saved the game.
+		// player that saved the game.
+		s.set_int   ("player_nr",   ipl->get_player_number());
 
 		std::string bg             (map.get_background());
 		if (bg.empty())

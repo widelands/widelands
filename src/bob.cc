@@ -502,7 +502,12 @@ struct BlockedTracker {
 			 ++it)
 		{
 			if (it->second) {
-				if (static_cast<int32_t>(m_game.logic_rand() % origblocked) < unblockprob) {
+				if
+					(static_cast<int32_t>
+					 	(m_game.logic_rand() % origblocked)
+					 	<
+					 	unblockprob)
+				{
 					it->second = false;
 					--nrblocked;
 					unblockprob -= 2;

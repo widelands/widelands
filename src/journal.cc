@@ -223,7 +223,8 @@ void Journal::start_recording(std::string const & filename)
 		assert(false); //TODO: barf in a controlled way
 
 	try {
-		m_recordstream.open(m_recordname.c_str(), std::ios::binary|std::ios::trunc);
+		m_recordstream.open
+			(m_recordname.c_str(), std::ios::binary|std::ios::trunc);
 		write(RFC_MAGIC);
 		m_recordstream << std::flush;
 		m_record = true;
@@ -305,8 +306,8 @@ void Journal::stop_playback()
 }
 
 /**
- * Record an event into the playback file. This entails serializing the event and
- * writing it out.
+ * Record an event into the playback file. This entails serializing the
+ * event and writing it out.
  *
  * \param e The event to be recorded
  */
@@ -387,9 +388,9 @@ void Journal::record_event(SDL_Event *e)
 }
 
 /**
- * Get an event from the playback file. This entails creating an empty event with
- * sensible default values (not all parameters get recorded) and deserializing
- * the event record.
+ * Get an event from the playback file. This entails creating an empty
+ * event with sensible default values (not all parameters get recorded)
+ * and deserializing the event record.
  *
  * \param e The event being returned
  */

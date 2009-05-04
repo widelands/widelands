@@ -831,7 +831,13 @@ struct FindBobsCallback {
 		Bob *bob;
 
 		for (bob = cur.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
-			if (m_list && std::find(m_list->begin(), m_list->end(), bob) != m_list->end())
+			if
+				(m_list && std::find
+				 	(m_list->begin(),
+				 	 m_list->end(),
+				 	 bob)
+				 	!=
+				 	m_list->end())
 				continue;
 
 			if (m_functor.accept(bob)) {
@@ -882,7 +888,8 @@ Find Bobs that are reachable by moving within the given radius (also see
 find_reachable()).
 Only finds objects for which functor.accept() returns true (the default functor
 always returns true).
-If list is non-zero, pointers to the relevant objects will be stored in the list.
+If list is non-zero, pointers to the relevant objects will be stored in
+the list.
 
 Returns the number of objects found.
 ===============
@@ -1366,11 +1373,12 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 		 (immovable and immovable->get_size() >= BaseImmovable::SMALL))
 		goto end;
 
-	// 3) We can only build something if there is a flag on the bottom-right neighbour
-	//    (or if we could build a flag on the bottom-right neighbour)
+	// 3) We can only build something if there is a flag on the
+	// bottom-right neighbour (or if we could build a flag on the
+	// bottom-right neighbour)
 	//
-	// NOTE: This dependency on the bottom-right neighbour is the reason why the caps
-	// calculation is split into two passes
+	// NOTE: This dependency on the bottom-right neighbour is the reason
+	// why the caps calculation is split into two passes
 	{
 		const FCoords br = br_n(f);
 		if
@@ -1380,13 +1388,20 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 			 	(Area<FCoords>(br, 0), 0, FindImmovableType(Map_Object::FLAG)))
 			goto end;
 
-	// === passability and flags allow us to build something beyond this point ===
+	// === passability and flags allow us to build something beyond this
+	// point ===
 
-	// 4) Reduce building size based on nearby objects (incl. buildings) and roads.
+	// 4) Reduce building size based on nearby objects (incl. buildings)
+	// and roads.
 	//
-	// Small object: allow medium-sized first-order neighbour, big second-order neighbour
-	// Medium object: allow small-sized first-order neighbour, big second-order neighbour
-	// Big object: allow no first-order neighbours, small second-order neighbours
+	// Small object: allow medium-sized first-order neighbour, big
+	// second-order neighbour
+	//
+	// Medium object: allow small-sized first-order neighbour, big
+	// second-order neighbour
+	//
+	// Big object: allow no first-order neighbours, small second-order
+	// neighbours
 	//
 	// Small buildings: same as small objects
 	// Medium buildings: allow only medium second-order neighbours
@@ -1514,7 +1529,8 @@ uint32_t Map::calc_distance(const Coords a, const Coords b) const
 
 	dist = abs(dy);
 
-	if (static_cast<X_Coordinate>(dist) >= m_width) // no need to worry about x movement at all
+	if (static_cast<X_Coordinate>(dist) >= m_width)
+		// no need to worry about x movement at all
 		return dist;
 
 	// [lx..rx] is the x-range we can cover simply by walking vertically
@@ -1662,7 +1678,8 @@ The cost is in milliseconds it takes to walk.
 The time is calculated as BASE_COST_PER_FIELD * f, where
 
 f = 1.0 + d(Slope) - d(0)
-d = (Slope + SLOPE_COST_STEPS)*(Slope + SLOPE_COST_STEPS - 1) / (2*SLOPE_COST_DIVISOR)
+d = (Slope + SLOPE_COST_STEPS)*(Slope + SLOPE_COST_STEPS - 1)
+       / (2*SLOPE_COST_DIVISOR)
 
 Note that the actual calculations multiply through by (2*SLOPE_COST_DIVISOR)
 to avoid using floating point numbers in game logic code.
@@ -1670,7 +1687,8 @@ to avoid using floating point numbers in game logic code.
 Slope is limited to the range [ -SLOPE_COST_STEPS; +oo [
 ===============
 */
-#define CALC_COST_D(slope) (((slope) + SLOPE_COST_STEPS) * ((slope) + SLOPE_COST_STEPS - 1))
+#define CALC_COST_D(slope)                                             \
+	(((slope) + SLOPE_COST_STEPS) * ((slope) + SLOPE_COST_STEPS - 1))
 
 static int32_t calc_cost_d(int32_t slope)
 {
@@ -1852,8 +1870,8 @@ public:
 	// Basic idea behind the algorithm:
 	//  1. the top slot of the tree is empty
 	//  2. if this slot has both children:
-	//       fill this slot with one of its children or with slot[_size], whichever
-	//       is best;
+	//       fill this slot with one of its children or with slot[_size],
+	//       whichever is best;
 	//       if we filled with slot[_size], stop
 	//       otherwise, repeat the algorithm with the child slot
 	//     if it doesn't have any children (l >= _size)
@@ -1890,11 +1908,14 @@ public:
 				break;
 			}
 
-			if (m_data[nsize]->cost() <= m_data[l]->cost() && m_data[nsize]->cost() <= m_data[r]->cost()) {
-				m_data[fix] = m_data[nsize];
-				m_data[fix]->heap_index = fix;
-				break;
-			}
+			if
+				(m_data[nsize]->cost() <= m_data[l]->cost() &&
+				 m_data[nsize]->cost() <= m_data[r]->cost())
+				{
+					m_data[fix] = m_data[nsize];
+					m_data[fix]->heap_index = fix;
+					break;
+				}
 			if (m_data[l]->cost() <= m_data[r]->cost()) {
 				m_data[fix] = m_data[l];
 				m_data[fix]->heap_index = fix;
@@ -2053,7 +2074,8 @@ int32_t Map::findpath
 	if (!persist)
 		upper_cost_limit = 0;
 	else
-		upper_cost_limit = persist * calc_cost_estimate(start, end); // assume flat terrain
+		// assume flat terrain
+		upper_cost_limit = persist * calc_cost_estimate(start, end);
 
 	// Actual pathfinding
 	boost::shared_ptr<Pathfields> pathfields = m_pathfieldmgr->allocate();

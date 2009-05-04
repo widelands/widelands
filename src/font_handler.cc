@@ -75,9 +75,10 @@ uint32_t Font_Handler::get_fontheight
  *
  * The whole text block is rendered in one Surface, this surface is cached
  * for reuse.
- * This is a really fast approach for static texts, but for text areas which keep changing
- * (like Multiline editboxes or chat windows, debug windows ...) this is the death, for a whole new
- * surface is rendered with everything that has been written so far.
+ * This is a really fast approach for static texts, but for text areas
+ * which keep changing (like Multiline editboxes or chat windows, debug
+ * windows ...) this is the death, for a whole new surface is rendered
+ * with everything that has been written so far.
  */
 // TODO: rename this to draw text
 void Font_Handler::draw_string
@@ -209,8 +210,8 @@ SDL_Surface * Font_Handler::create_single_line_text_surface
 }
 
 /*
- * This function renders a longer (multiline) text passage, which should not change.
- * If it changes, this function is highly unperformant.
+ * This function renders a longer (multiline) text passage, which should
+ * not change. If it changes, this function is highly unperformant.
  *
  * This function also completely ignores vertical aligement.
  * Horizontal alignment is now recognized correctly
@@ -383,7 +384,9 @@ void Font_Handler::draw_richtext
 			int32_t cur_line_h = 0;
 			int32_t block_h = 0;
 
-			std::vector<Text_Block> cur_text_blocks = richtext_it->get_text_blocks();
+			std::vector<Text_Block> cur_text_blocks =
+				richtext_it->get_text_blocks();
+
 			std::vector<std::string> cur_block_images = richtext_it->get_images();
 
 			std::vector<SDL_Surface *> rend_lines;
@@ -477,8 +480,12 @@ void Font_Handler::draw_richtext
 					bool const break_before =
 						line_breaks.size() && line_breaks[0] == word_cnt;
 
-					//Word doesn't fit into current line, or a break was inserted before
-					if (((cur_line_w + rend_word->w) > text_width_left) || break_before) {
+					//Word doesn't fit into current line, or a break was
+					//inserted before
+					if
+						(((cur_line_w + rend_word->w)
+						  > text_width_left) || break_before)
+					{
 						SDL_Surface * const rend_line =
 							join_sdl_surfaces
 								(cur_line_w, cur_line_h,
@@ -495,7 +502,8 @@ void Font_Handler::draw_richtext
 						if (str_word != " ")
 							rend_cur_words.push_back(rend_word);
 
-						//Setting line height and width of new word = first in new line
+						//Setting line height and width of new word = first in
+						//new line
 						cur_line_h = rend_word->h;
 						cur_line_w = rend_word->w;
 
@@ -773,7 +781,8 @@ void Font_Handler::delete_widget_cache(uint32_t const widget_cache_id) {
 	g_gr->free_surface(widget_cache_id);
 }
 
-//Inserts linebreaks into a text, so it doesn't get bigger than max_width when rendered
+//Inserts linebreaks into a text, so it doesn't get bigger than max_width
+//when rendered
 //Method taken from Wesnoth.
 //http://www.wesnoth.org
 std::string Font_Handler::word_wrap_text

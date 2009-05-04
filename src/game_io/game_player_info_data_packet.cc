@@ -47,7 +47,9 @@ throw (_wexception)
 				if (fr.Unsigned8()) {
 					bool    const see_all = fr.Unsigned8();
 					if (packet_version <= 2)
-						fr.Signed32(); // Used to be the player type, not needed anymore
+						// Used to be the player type, not needed anymore
+						fr.Signed32();
+
 					int32_t const plnum   = fr.Signed32();
 					std::string tribe = fr.CString();
 

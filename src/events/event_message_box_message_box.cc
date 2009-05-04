@@ -101,7 +101,8 @@ m_game    (game)
  *
  * We are not draggable.
  */
-bool Message_Box_Event_Message_Box::handle_mousepress(const Uint8 btn, int32_t, int32_t)
+bool Message_Box_Event_Message_Box::handle_mousepress
+	(const Uint8 btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_RIGHT && m_trigger.size() == 1) {
 		play_click();
@@ -112,8 +113,11 @@ bool Message_Box_Event_Message_Box::handle_mousepress(const Uint8 btn, int32_t, 
 }
 
 
-bool Message_Box_Event_Message_Box::handle_mouserelease(const Uint8, int32_t, int32_t)
-{return false;}
+bool Message_Box_Event_Message_Box::handle_mouserelease
+	(const Uint8, int32_t, int32_t)
+{
+	return false;
+}
 
 /**
  * Clicked

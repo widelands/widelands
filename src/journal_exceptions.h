@@ -24,12 +24,12 @@
 #include <stdexcept>
 
 /**
- * Thrown for IO-errors occurring with a journal file (unable to open file for any
- * reason, out of space, etc.) that a) are unrecoverable and b) have already been
- * dealt with.
+ * Thrown for IO-errors occurring with a journal file (unable to open file
+ * for any reason, out of space, etc.) that a) are unrecoverable and b)
+ * have already been dealt with.
  *
- * This is a purely informational exception. Do not throw it unless it can safely
- * be ignored.
+ * This is a purely informational exception. Do not throw it unless it can
+ * safely be ignored.
  *
  * \todo add offset into journal file if applicable
  * \todo Rework as proposed by Erik, see filesystem_exceptions.h. Before that:
@@ -73,7 +73,8 @@ struct BadRecord_error : public Journalfile_error {
 };
 
 /**
- * Thrown if the journal file contains an event record with an unknown event type
+ * Thrown if the journal file contains an event record with an unknown
+ * event type
  * \todo add offset into journal file
  */
 struct BadEvent_error : public Journalfile_error {

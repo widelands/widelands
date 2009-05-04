@@ -310,7 +310,7 @@ void BaseListselect::draw(RenderTarget & dst)
 		if (idx == m_selection) {
 			assert(2 <= get_eff_w());
 			// dst->fill_rect(1, y, get_eff_w()-2,
-			// 	g_font->get_fontheight(), m_selcolor);
+			//    g_font->get_fontheight(), m_selcolor);
 			dst.brighten_rect
 				(Rect(Point(1, y), get_eff_w() - 2, m_lineheight),
 				 -ms_darken_value);
@@ -336,10 +336,9 @@ void BaseListselect::draw(RenderTarget & dst)
 			 	(x,
 			 	 y +
 			 	 (get_lineheight() -
-				  g_fh->get_fontheight(m_fontname, m_fontsize)
-				 ) / 2),
-			 er.name, m_align,
-			 -1);
+			 	  	g_fh->get_fontheight(m_fontname, m_fontsize)) / 2),
+			 	er.name, m_align,
+			 	-1);
 
 		// Now draw pictures
 		if (er.picid != -1) {
