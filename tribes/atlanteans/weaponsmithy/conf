@@ -1,5 +1,5 @@
 soundfx=../../../sound/smiths/smith
-soundfx=../../../sound/smith/sharpening
+soundfx=../../../sound/smiths/sharpening
 size=medium
 output=light_trident
 output=long_trident
