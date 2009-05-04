@@ -439,9 +439,10 @@ void WLApplication::handle_input(const InputCallback *cb)
 	// by 0x407F78F: (within /usr/lib/libSDL-1.2.so.0.11.0)
 	// by 0x404FB12: SDL_PumpEvents (in /usr/lib/libSDL-1.2.so.0.11.0)
 	// by 0x404FFC3: SDL_PollEvent (in /usr/lib/libSDL-1.2.so.0.11.0)
-	// by 0x8252545: WLApplication::poll_event(SDL_Event*, bool) (wlapplication.cc:309)
-	// by 0x8252EB6: WLApplication::handle_input(InputCallback const*) (wlapplication.cc:459)
-	// by 0x828B56E: UI::Panel::run() (ui_panel.cc:148)
+	// by 0x8252545: WLApplication::poll_event(SDL_Event*, bool)
+	//     (wlapplication.cc:309)
+	// by 0x8252EB6: WLApplication::handle_input(InputCallback const*)
+	// (wlapplication.cc:459) by 0x828B56E: UI::Panel::run() (ui_panel.cc:148)
 	// by 0x8252FAB: WLApplication::run() (wlapplication.cc:212)
 	// by 0x81427A6: main (main.cc:39)
 
@@ -835,21 +836,21 @@ void WLApplication::parse_commandline(const int argc, const char **argv)
 */
 void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 {
-	if (m_commandline.count("help")>0 || m_commandline.count("version")>0) {
+	if (m_commandline.count("help") > 0 || m_commandline.count("version") > 0) {
 		throw Parameter_error(); //no message on purpose
 	}
 
-	if (m_commandline.count("nosound")>0) {
+	if (m_commandline.count("nosound") > 0) {
 		g_sound_handler.m_nosound = true;
 		m_commandline.erase("nosound");
 	}
 
-	if (m_commandline.count("nozip")>0) {
+	if (m_commandline.count("nozip") > 0) {
 		g_options.pull_section("global").create_val("nozip", "true");
 		m_commandline.erase("nozip");
 	}
 
-	if (m_commandline.count("double")>0) {
+	if (m_commandline.count("double") > 0) {
 #ifdef DEBUG
 #ifndef WIN32
 		init_double_game();
@@ -863,7 +864,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_commandline.erase("double");
 	}
 
-	if (m_commandline.count("editor")>0) {
+	if (m_commandline.count("editor") > 0) {
 		m_editor_filename = m_commandline["editor"];
 		if (m_editor_filename.size() and *m_editor_filename.rbegin() == '/')
 			m_editor_filename.erase(m_editor_filename.size() - 1);
@@ -891,7 +892,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 
 	//Note: it should be possible to record and playback at the same time,
 	//but why would you?
-	if (m_commandline.count("record")>0) {
+	if (m_commandline.count("record") > 0) {
 		if (m_commandline["record"].empty())
 			throw Parameter_error("ERROR: --record needs a filename!");
 
@@ -905,7 +906,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_commandline.erase("record");
 	}
 
-	if (m_commandline.count("playback")>0) {
+	if (m_commandline.count("playback") > 0) {
 		if (m_commandline["playback"].empty())
 			throw Parameter_error("ERROR: --playback needs a filename!");
 
@@ -947,7 +948,8 @@ void WLApplication::show_usage()
 {
 	i18n::Textdomain textdomain("widelands"); //  uses system standard language
 
-	cout << _("This is Widelands-") << build_id() << "(" << build_type() << ")" << "\n\n";
+	cout << _("This is Widelands-") << build_id() << "(" << build_type() << ")"
+		<< "\n\n";
 	cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n\n");
 	cout << _("Options:\n\n");
 	cout
@@ -1396,7 +1398,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		Computer_Player::ImplementationVector const & impls =
 			Computer_Player::getImplementations();
 		if (impls.size() > 1) {
-			Computer_Player::ImplementationVector::const_iterator it = impls.begin();
+			Computer_Player::ImplementationVector::const_iterator it =
+				impls.begin();
 			do {
 				++it;
 				if ((*(it - 1))->name == s.players[number].ai)

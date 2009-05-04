@@ -66,7 +66,10 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 	virtual bool canLaunch() {return h->canLaunch();}
 
-	virtual void setMap(std::string const & mapname, std::string const & mapfilename, uint32_t maxplayers, bool savegame = false) {
+	virtual void setMap(std::string const & mapname,
+			std::string const & mapfilename, uint32_t maxplayers,
+			bool savegame = false)
+	{
 		h->setMap(mapname, mapfilename, maxplayers, savegame);
 	}
 	virtual void setPlayerState(uint8_t number, PlayerSettings::State state) {
@@ -100,7 +103,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		if (number >= h->settings().players.size())
 			return;
 
-		if (number == settings().playernum || settings().players[number].state == PlayerSettings::stateComputer)
+		if (number == settings().playernum ||
+			 settings().players[number].state == PlayerSettings::stateComputer)
 			h->setPlayerTribe(number, tribe);
 	}
 
@@ -192,8 +196,8 @@ struct NetHostImpl {
 	/// The game itself; only non-null while game is running
 	Widelands::Game * game;
 
-	/// If we were to send out a plain networktime packet, this would be the time.
-	/// However, we have not yet committed to this networktime.
+	/// If we were to send out a plain networktime packet, this would be the
+	/// time.  However, we have not yet committed to this networktime.
 	int32_t pseudo_networktime;
 	int32_t last_heartbeat;
 
@@ -297,7 +301,8 @@ void NetHost::clearComputerPlayers()
 void NetHost::initComputerPlayer(Widelands::Player_Number p)
 {
 	std::string ainame = d->game->get_player(p)->getAI();
-	Computer_Player * ai = Computer_Player::getImplementation(ainame)->instantiate(*d->game, p);
+	Computer_Player * ai = Computer_Player::getImplementation
+		(ainame)->instantiate(*d->game, p);
 	d->computerplayers.push_back(ai);
 }
 
@@ -332,7 +337,8 @@ void NetHost::run()
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		if (d->clients[i].playernum == -2)
-			disconnectClient(i, _("The game has started just after you tried to connect."));
+			disconnectClient
+				(i, _("The game has started just after you tried to connect."));
 	}
 
 	SendPacket s;
@@ -395,7 +401,8 @@ void NetHost::run()
 		d->game = 0;
 
 		while (d->clients.size() > 0) {
-			disconnectClient(0, _("Server has crashed and performed an emergency save."));
+			disconnectClient
+				(0, _("Server has crashed and performed an emergency save."));
 			reaper();
 		}
 		throw;
@@ -525,7 +532,8 @@ bool NetHost::canLaunch()
 	return d->settings.mapname.size() != 0 && d->settings.players.size() >= 1;
 }
 
-void NetHost::setMap(std::string const & mapname, std::string const & mapfilename, uint32_t maxplayers, bool savegame)
+void NetHost::setMap(std::string const & mapname,
+		std::string const & mapfilename, uint32_t maxplayers, bool savegame)
 {
 	d->settings.mapname = mapname;
 	d->settings.mapfilename = mapfilename;
@@ -857,7 +865,9 @@ bool NetHost::haveUserName(std::string const & name, int32_t ignoreplayer) {
 
 	// Computer players are not handled like human users,
 	// so make sure no cp owns this name.
-	if (ignoreplayer <= static_cast<int32_t>(d->settings.users.size()) && ignoreplayer >= 0)
+	if
+		(ignoreplayer <= static_cast<int32_t>(d->settings.users.size())
+		 && ignoreplayer >= 0)
 		ignoreplayer = d->settings.users[ignoreplayer].position;
 	for (uint32_t i = 0; i < d->settings.players.size(); ++i) {
 		if (static_cast<int32_t>(i) != ignoreplayer) {
@@ -964,7 +974,8 @@ void NetHost::committedNetworkTime(int32_t time)
 	d->committed_networktime = time;
 	d->time.recv(time);
 
-	if (!d->syncreport_pending && d->committed_networktime - d->syncreport_time >= SYNCREPORT_INTERVAL)
+	if (!d->syncreport_pending &&
+		 d->committed_networktime - d->syncreport_time >= SYNCREPORT_INTERVAL)
 		requestSyncReports();
 }
 
@@ -975,12 +986,15 @@ void NetHost::recvClientTime(uint32_t number, int32_t time)
 	Client & client = d->clients[number];
 
 	if (time - client.time < 0)
-		throw DisconnectException(_("Client reports time to host that is running backwards."));
+		throw DisconnectException
+			(_("Client reports time to host that is running backwards."));
 	if (d->committed_networktime - time < 0)
-		throw DisconnectException(_("Client simulates beyond the game time allowed by the host."));
+		throw DisconnectException
+			(_("Client simulates beyond the game time allowed by the host."));
 	if (d->syncreport_pending && !client.syncreport_arrived) {
 		if (time - d->syncreport_time > 0)
-			throw DisconnectException(_("Client did not submit sync report in time."));
+			throw DisconnectException
+				(_("Client did not submit sync report in time."));
 	}
 
 	client.time = time;
@@ -1195,7 +1209,8 @@ void NetHost::handle_network ()
 		// Now we wait for the client to say Hi in the right language,
 		// unless the game has already started
 		if (d->game) {
-			// the following lines are needed to avoid segfaults in disconnectClient
+			// the following lines are needed to avoid segfaults in
+			// disconnectClient
 			UserSettings newuser;
 			newuser.name = _("New User"); // shown in later disconnect msg.
 			d->clients[d->clients.size() - 1].usernum = d->settings.users.size();
@@ -1219,7 +1234,8 @@ void NetHost::handle_network ()
 					}
 
 					// Handle all available packets immediately after each read,
-					// so that we don't miss any commands (especially a DISCONNECT...)
+					// so that we don't miss any commands (especially a
+					// DISCONNECT...)
 					while (client.sock && client.deserializer.avail()) {
 						RecvPacket r(client.deserializer);
 						handle_packet(i, r);
@@ -1270,7 +1286,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 				 cmd);
 		uint8_t version = r.Unsigned8();
 		if (version != NETWORK_PROTOCOL_VERSION)
-			throw DisconnectException(_("Server uses a different protocol version."));
+			throw DisconnectException
+				(_("Server uses a different protocol version."));
 
 		std::string playername = r.String();
 		client.build_id = r.String();
@@ -1313,7 +1330,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 				PlayerSettings position = d->settings.players[pos];
 				PlayerSettings player   = d->settings.players[client.playernum];
 				int8_t maxplayers = d->settings.players.size();
-				if ((pos < maxplayers) & (position.state == PlayerSettings::stateOpen)) {
+				if ((pos < maxplayers) &
+					 (position.state == PlayerSettings::stateOpen)) {
 					const PlayerSettings oldOnPos = position;
 					setPlayer(pos, player);
 					setPlayer(client.playernum, oldOnPos);
@@ -1350,7 +1368,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	case NETCMD_PLAYERCOMMAND: {
 		if (!d->game)
 			throw DisconnectException
-				(_("Client sent PLAYERCOMMAND command even though game is not running."));
+				(_("Client sent PLAYERCOMMAND command even though "
+					"game is not running."));
 		int32_t time = r.Signed32();
 		Widelands::PlayerCommand & plcmd =
 			*Widelands::PlayerCommand::deserialize(r);
@@ -1396,12 +1415,14 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	}
 
 	default:
-		throw DisconnectException(_("Client sent unknown command number %u"), cmd);
+		throw DisconnectException
+			(_("Client sent unknown command number %u"), cmd);
 	}
 }
 
 
-void NetHost::disconnectPlayer(uint8_t number, std::string const & reason, bool sendreason)
+void NetHost::disconnectPlayer
+		(uint8_t number, std::string const & reason, bool sendreason)
 {
 	log("[Host]: disconnectPlayer(%u, %s)\n", number, reason.c_str());
 

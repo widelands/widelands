@@ -260,7 +260,7 @@ static Requirements readAttribute
 	return RequireAttribute(at, min, max);
 }
 
-const RequirementsStorage RequireAttribute::storage(requirementIdAttribute, readAttribute);
-
+const RequirementsStorage RequireAttribute::
+	storage(requirementIdAttribute, readAttribute);
 }
 

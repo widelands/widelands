@@ -206,12 +206,13 @@ void S2_Map_Loader::load_s2mf_header()
 	S2MapDescrHeader header;
 	memcpy(&header, fr.Data(sizeof(header)), sizeof(header));
 
-	//  Header must be swapped for big-endian Systems, works at the moment only //  FIXME generalize
-	//  for PowerPC architecture                                               //  FIXME generalize
-#if defined(__ppc__)                                                          //  FIXME generalize
-	header.w = Swap16(header.w);                                               //  FIXME generalize
-	header.h = Swap16(header.h);                                               //  FIXME generalize
-#endif                                                                        //  FIXME generalize
+	//  Header must be swapped for big-endian Systems, works at the moment only
+	//  for PowerPC architecture
+	//  \todo: Generalize this
+#if defined(__ppc__)
+	header.w = Swap16(header.w);
+	header.h = Swap16(header.h);
+#endif
 
 	//  don't really set size, but make the structures valid
 	m_map.m_width  = header.w;
@@ -252,12 +253,14 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		S2MapDescrHeader header;
 		memcpy(&header, fr.Data(sizeof(header)), sizeof(header));
 
-		//  Header must be swapped for big-endian Systems, works at the moment //  FIXME generalize
-		//  only for PowerPC architecture.                                    //  FIXME generalize
-#if defined(__ppc__)                                                        //  FIXME generalize
-		header.w = Swap16(header.w);                                          //  FIXME generalize
-		header.h = Swap16(header.h);                                          //  FIXME generalize
-#endif                                                                      //  FIXME generalize
+		//  Header must be swapped for big-endian Systems, works at the moment
+		//  only for PowerPC architecture.
+		//
+		//  \todo Generalize
+#if defined(__ppc__)
+		header.w = Swap16(header.w);
+		header.h = Swap16(header.h);
+#endif
 
 		//  The header must already have been processed.
 		assert(m_map.m_world);
@@ -727,11 +730,11 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				}
 			}
 
-		// WORKAROUND: unfortunally the widelands-engine is not complete compatible
-		// to the one of settlers 2 : space for buildings is differently defined.
-		// To allow a loading of settlers 2 maps in the majority of cases, check
-		// all startingpositions and try to make it widelands-compatible, if
-		// it's size is too small.
+		// WORKAROUND: unfortunately the widelands-engine is not complete
+		// compatible to the one of settlers 2 : space for buildings is
+		// differently defined.  To allow a loading of settlers 2 maps in the
+		// majority of cases, check all startingpositions and try to make it
+		// widelands-compatible, if it's size is too small.
 		m_map.recalc_whole_map(); //  to initialize buildcaps
 
 		char msg[128];

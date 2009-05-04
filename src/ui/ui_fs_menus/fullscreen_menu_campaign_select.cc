@@ -57,7 +57,8 @@ tacampname       (this, m_xres * 61 / 100, m_yres * 3 / 8, ""),
 label_difficulty (this, m_xres * 3 / 5,  m_yres * 17 / 40, _("Difficulty:")),
 tadifficulty     (this, m_xres * 61 / 100, m_yres * 23 / 50, ""),
 label_campdescr  (this, m_xres * 3 / 5,  m_yres * 51 / 100, _("Description:")),
-tacampdescr      (this, m_xres * 61 / 100, m_yres * 11 / 20, m_xres * 9 / 25, m_yres * 7 / 25, ""),
+tacampdescr      (this, m_xres * 61 / 100,
+		m_yres * 11 / 20, m_xres * 9 / 25, m_yres * 7 / 25, ""),
 
 // Buttons
 b_ok

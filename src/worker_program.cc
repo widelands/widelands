@@ -374,7 +374,8 @@ void WorkerProgram::parse_findspace
 		} else if (key == "space") {
 			act->iparam3 = 1;
 		} else
-			throw wexception("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
+			throw wexception
+				("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
 	}
 
 	if (act->iparam1 <= 0)
@@ -591,7 +592,7 @@ void WorkerProgram::parse_playFX
 	 Parser                         *,
 	 std::vector<std::string> const & cmd)
 {
-	if (cmd.size()<2 || cmd.size()>3)
+	if (cmd.size() < 2 || cmd.size() > 3)
 		throw wexception("Usage: playFX <fx_name> [priority]");
 
 	act->sparam1 = cmd[1];

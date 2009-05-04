@@ -110,7 +110,8 @@ void NetworkTime::recv(int32_t const ntime)
 
 #if 0
 	log
-		("NetworkTime: New networktime %i (local time %i), behind %i, latency %u\n",
+		("NetworkTime: New networktime %i (local time %i), behind %i, latency
+		 %u\n",
 		 ntime, m_time, m_networktime - m_time, m_latency);
 #endif
 

@@ -688,7 +688,8 @@ Profile::Profile(int32_t error_level)
 
 /**
  * Parses an ini-style file into sections and key-value pairs.
- * If global_section is not null, keys outside of sections are put into a section
+ * If global_section is not null, keys outside of sections are put into a
+ * section
  * of that name.
  */
 Profile::Profile
@@ -716,7 +717,8 @@ Profile::Profile
 /** Profile::error(const char *fmt, ...)
  *
  * Output an error message.
- * Depending on the error level, it is thrown as a wexception, logged or ignored.
+ * Depending on the error level, it is thrown as a wexception, logged or
+ * ignored.
  */
 void Profile::error(const char *fmt, ...) const
 {

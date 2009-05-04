@@ -145,9 +145,9 @@ template<typename T> static void render_edge_lists
 			ty += FIXTOI(static_cast<long long>(adjust) * dtydx);
 			b  += FIXTOI(static_cast<long long>(adjust) * dbdx);
 
-			// Technically, we should clamp b at every pixel, but that's too expensive.
-			// The following seems to be enough to get rid of artifacts along the border
-			// between seen and unseen fields.
+			// Technically, we should clamp b at every pixel, but that's too
+			// expensive.  The following seems to be enough to get rid of
+			// artifacts along the border between seen and unseen fields.
 			if (b < ITOFIX(-128))
 				b = ITOFIX(-128);
 
@@ -167,7 +167,7 @@ template<typename T> static void render_edge_lists
 						 	[(tx & (TEXTURE_WIDTH - 1)) |
 						 	 ((ty >> 10) & ((TEXTURE_HEIGHT - 1) << 6))]
 						 |
-						 ((b>>8) & 0xFF00)];
+						 (( b>> 8) & 0xFF00)];
 
 				b += dbdx;
 				++tx;

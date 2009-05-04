@@ -42,7 +42,8 @@ TrainingSite_Descr::TrainingSite_Descr
 	 std::string const & directory, Profile & prof, Section & global_s,
 	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
 :
-	ProductionSite_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata),
+	ProductionSite_Descr(_name, _descname, directory,
+			prof, global_s, _tribe, encdata),
 
 	//  FIXME This is currently hardcoded for "soldier" but should allow any
 	//  FIXME soldier type name.
@@ -253,7 +254,9 @@ void TrainingSite::add_worker(Worker & w)
 	if (upcast(Soldier, soldier, &w)) {
 		// Note that the given Soldier might already be in the array
 		// for loadgames.
-		if (std::find(m_soldiers.begin(), m_soldiers.end(), soldier) == m_soldiers.end())
+		if
+			(std::find(m_soldiers.begin(), m_soldiers.end(), soldier) ==
+			 m_soldiers.end())
 			m_soldiers.push_back(soldier);
 		if (upcast(Game, game, &owner().egbase()))
 			schedule_act(*game, 100);

@@ -212,7 +212,8 @@ bool Worker::run_breed(Game & game, State & state, Action const & action)
 		(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
 	do {
 		uint8_t fres  = mr.location().field->get_resources();
-		uint32_t amount = mr.location().field->get_starting_res_amount() - mr.location().field->get_resources_amount();
+		uint32_t amount = mr.location().field->get_starting_res_amount() -
+			mr.location().field->get_resources_amount();
 
 		// In the future, we might want to support amount = 0 for
 		// fields that can produce an infinite amount of resources.
@@ -260,7 +261,8 @@ bool Worker::run_breed(Game & game, State & state, Action const & action)
 
 			--amount;
 
-			mr.location().field->set_resources(res, mr.location().field->get_starting_res_amount() - amount);
+			mr.location().field->set_resources
+				(res, mr.location().field->get_starting_res_amount() - amount);
 			break;
 		}
 	} while (mr.advance(map));
@@ -509,7 +511,8 @@ bool Worker::run_findspace(Game & game, State & state, Action const & action)
 	functor.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
 	if (action.sparam1.size()) {
 		if (action.iparam4)
-			functor.add(FindNodeResourceBreedable(w->get_resource(action.sparam1.c_str())));
+			functor.add(FindNodeResourceBreedable
+					(w->get_resource(action.sparam1.c_str())));
 		else
 			functor.add(FindNodeResource(w->get_resource(action.sparam1.c_str())));
 	}
@@ -910,7 +913,8 @@ void Worker::set_economy(Economy *economy)
 		return;
 
 	if (m_economy)
-		m_economy->remove_workers(descr().tribe().worker_index(name().c_str()), 1);
+		m_economy->remove_workers
+			(descr().tribe().worker_index(name().c_str()), 1);
 
 	m_economy = economy;
 
@@ -1430,7 +1434,8 @@ void Worker::start_task_return(Game & game, bool const dropitem)
 	PlayerImmovable * const location = get_location(game);
 
 	if (!location || location->get_type() != BUILDING)
-		throw wexception("MO(%u): start_task_return(): not owned by building", serial());
+		throw wexception
+			("MO(%u): start_task_return(): not owned by building", serial());
 
 	push_task(game, taskReturn);
 	top_state().ivar1 = dropitem ? 1 : 0;
@@ -2067,7 +2072,8 @@ void Worker::fugitive_update(Game & game, State & state)
 		{
 			molog("[fugitive]: try to move to flag\n");
 
-			//  warehouse could be on a different island, so check for failure FIXME ???
+			//  \todo FIXME ??? \todo
+			//  warehouse could be on a different island, so check for failure
 			if
 				(start_task_movepath
 				 	(game,

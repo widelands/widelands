@@ -57,7 +57,8 @@ void Trigger_Time::Write(Section & s, Editor_Game_Base const &) const {
  * Check if trigger conditions are done
  */
 void Trigger_Time::check_set_conditions(Game const & game) {
-	if (m_time != Never() and m_time <= game.get_gametime()) //  FIXME simplify this when Time is unsigned
+	//  \todo simplify this when Time is unsigned
+	if (m_time != Never() and m_time <= game.get_gametime())
 		set_trigger(true);
 }
 

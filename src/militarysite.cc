@@ -48,7 +48,8 @@ MilitarySite_Descr::MilitarySite_Descr
 	 std::string const & directory, Profile & prof,  Section & global_s,
 	 Tribe_Descr const & _tribe, EncodeData  const * const encdata)
 :
-	ProductionSite_Descr (_name, _descname, directory, prof, global_s, _tribe, encdata),
+	ProductionSite_Descr (_name, _descname, directory,
+			prof, global_s, _tribe, encdata),
 m_conquer_radius     (0),
 m_num_soldiers       (0),
 m_num_medics         (0),

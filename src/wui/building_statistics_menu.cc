@@ -118,7 +118,8 @@ m_last_building_index(0)
 	//  toggle when to run button
 	m_progbar.set_total(100);
 
-	m_btn[Prev_Owned] = new UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
+	m_btn[Prev_Owned] = new
+			UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
 		(this,
 		 JUMP_PREV_BUTTON_X, OWNED_Y, 24, 24,
 		 4,
@@ -127,7 +128,8 @@ m_last_building_index(0)
 		 _("Show previous"),
 		 false);
 
-	m_btn[Next_Owned] = new UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
+	m_btn[Next_Owned] = new
+			UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
 		(this,
 		 JUMP_NEXT_BUTTON_X, OWNED_Y, 24, 24,
 		 4,
@@ -136,7 +138,8 @@ m_last_building_index(0)
 		 _("Show next"),
 		 false);
 
-	m_btn[Prev_Construction] = new UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
+	m_btn[Prev_Construction] = new
+			UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
 		(this,
 		 JUMP_PREV_BUTTON_X, IN_BUILD_Y, 24, 24,
 		 4,
@@ -145,7 +148,8 @@ m_last_building_index(0)
 		 _("Show previous"),
 		 false);
 
-	m_btn[Next_Construction] = new UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
+	m_btn[Next_Construction] = new
+			UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
 		(this,
 		 JUMP_NEXT_BUTTON_X, IN_BUILD_Y, 24, 24,
 		 4,
@@ -154,7 +158,8 @@ m_last_building_index(0)
 		 _("Show next"),
 		 false);
 
-	m_btn[Prev_Unproductive] = new UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
+	m_btn[Prev_Unproductive] = new
+			UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
 		(this,
 		 JUMP_PREV_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
 		 4,
@@ -163,7 +168,8 @@ m_last_building_index(0)
 		 _("Show previous"),
 		 false);
 
-	m_btn[Next_Unproductive] = new UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
+	m_btn[Next_Unproductive] = new
+			UI::Callback_IDButton<Building_Statistics_Menu, Jump_Targets>
 		(this,
 		 JUMP_NEXT_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
 		 4,

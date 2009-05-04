@@ -229,7 +229,9 @@ bool Text_Parser::extract_format_block
 	return block.find(block_start) != std::string::npos;
 }
 
-void Text_Parser::parse_richtexttext_attributes(std::string format, Richtext_Block *element) {
+void Text_Parser::parse_richtexttext_attributes
+		(std::string format, Richtext_Block *element)
+{
 	if (format.empty())
 		return;
 	if (format[0] == ' ')
@@ -258,7 +260,9 @@ void Text_Parser::parse_richtexttext_attributes(std::string format, Richtext_Blo
 	}
 }
 
-void Text_Parser::parse_text_attributes(std::string format, Text_Block *element) {
+void Text_Parser::parse_text_attributes
+	(std::string format, Text_Block *element)
+{
 	if (format.empty())
 		return;
 	if (format[0] == ' ')

@@ -993,7 +993,8 @@ ProductionProgram::ProductionProgram
 		else if (not strcmp(v->get_name(), "sleep"))
 			action = new ActSleep (v->get_string(),  *building);
 		else if (not strcmp(v->get_name(), "animate"))
-			action = new ActAnimate(v->get_string(), *building, directory, prof, encdata);
+			action = new
+				ActAnimate(v->get_string(), *building, directory, prof, encdata);
 		else if (not strcmp(v->get_name(), "consume"))
 			action = new ActConsume(v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "produce"))

@@ -112,7 +112,8 @@ void set_locale(std::string name) {
 	// ubuntu are very problematic with setting language variables.
 	// If this doesn't solve the problem on your linux-distribution, here comes
 	// a quote from
-	// http://www.gnu.org/software/automake/manual/gettext/Locale-Environment-Variables.html
+	// http://www.gnu.org/software/automake/manual/
+	// 	gettext/Locale-Environment-Variables.html
 	//
 	//   Some systems, unfortunately, set LC_ALL in /etc/profile or in similar
 	//   initialization files. As a user, you therefore have to unset this

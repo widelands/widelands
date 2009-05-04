@@ -40,7 +40,8 @@
 
 struct NetClientImpl {
 	GameSettings settings;
-	int32_t playernum; // is -1 as long as not assigned to a position (else 0-based)
+	// playernum is -1 as long as not assigned to a position (else 0-based)
+	int32_t playernum;
 	std::string localplayername;
 
 	/// The socket that connects us to the host
@@ -201,7 +202,10 @@ void NetClient::think()
 		else
 			d->time.think(d->realspeed);
 
-		if (d->server_is_waiting && d->game->get_gametime() == d->time.networktime()) {
+		if
+			(d->server_is_waiting &&
+			 d->game->get_gametime() == d->time.networktime()) 
+		{
 			sendTime();
 			d->server_is_waiting = false;
 		} else if (d->game->get_gametime() != d->lasttimestamp) {
@@ -471,7 +475,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 				 cmd);
 		uint8_t version = packet.Unsigned8();
 		if (version != NETWORK_PROTOCOL_VERSION)
-			throw DisconnectException(_("Server uses a different protocol version"));
+			throw DisconnectException
+				(_("Server uses a different protocol version"));
 		d->settings.usernum = packet.Unsigned32();
 		d->playernum = -1;
 		return;
@@ -491,7 +496,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 		d->settings.mapname = packet.String();
 		d->settings.mapfilename = g_fs->FileSystem::fixCrossFile(packet.String());
 		d->settings.savegame = packet.Unsigned8() == 1;
-		log("[Client] SETTING_MAP '%s' '%s'\n", d->settings.mapname.c_str(), d->settings.mapfilename.c_str());
+		log("[Client] SETTING_MAP '%s' '%s'\n", d->settings.mapname.c_str(),
+				d->settings.mapfilename.c_str());
 		break;
 
 	case NETCMD_SETTING_TRIBES: {
@@ -541,13 +547,15 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 	case NETCMD_LAUNCH: {
 		if (!d->modal || d->game)
-			throw DisconnectException(_("Unexpectedly received LAUNCH command from server."));
+			throw DisconnectException
+				(_("Unexpectedly received LAUNCH command from server."));
 		d->modal->end_modal(1);
 		break;
 	}
 	case NETCMD_SETSPEED:
 		d->realspeed = packet.Unsigned16();
-		log("[Client] speed: %u.%03u\n", d->realspeed / 1000, d->realspeed % 1000);
+		log("[Client] speed: %u.%03u\n", d->realspeed / 1000,
+				d->realspeed % 1000);
 		break;
 	case NETCMD_TIME:
 		d->time.recv(packet.Signed32());
@@ -558,7 +566,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 		break;
 	case NETCMD_PLAYERCOMMAND: {
 		if (!d->game)
-			throw DisconnectException(_("Server sent a PLAYERCOMMAND even though no game is running."));
+			throw DisconnectException
+				(_("Server sent a PLAYERCOMMAND even though no game is running."));
 
 		int32_t time = packet.Signed32();
 		Widelands::PlayerCommand & plcmd =
@@ -570,7 +579,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 	case NETCMD_SYNCREQUEST: {
 		if (!d->game)
-			throw DisconnectException(_("Server sent a SYNCREQUEST even though no game is running."));
+			throw DisconnectException
+				(_("Server sent a SYNCREQUEST even though no game is running."));
 		int32_t time = packet.Signed32();
 		d->time.recv(time);
 		d->game->enqueue_command(new Cmd_NetCheckSync(time, this));
@@ -587,12 +597,14 @@ void NetClient::handle_packet(RecvPacket & packet)
 		break;
 	}
 	case NETCMD_INFO_DESYNC:
-		log("[Client] received NETCMD_INFO_DESYNC. Trying to salvage some information for debugging.\n");
+		log("[Client] received NETCMD_INFO_DESYNC. "
+			 "Trying to salvage some information for debugging.\n");
 		if (d->game)
 			d->game->save_syncstream(true);
 		break;
 	default:
-		throw DisconnectException(_("Server sent an unknown command (command number %u)"), cmd);
+		throw DisconnectException
+			(_("Server sent an unknown command (command number %u)"), cmd);
 	}
 }
 
