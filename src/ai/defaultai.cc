@@ -684,7 +684,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					if (j->total_count() > 1)
 						prio -= 10 * (j->total_count());
 					else
-						prio += 5;
+						prio *= 3;
 
 					if (prio < 0)
 						continue;
@@ -694,7 +694,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					prio += wares[j->production_hint].preciousness;
 				} else { // "normal" productionsites
 
-					if (j->is_basic && j->total_count())
+					if (j->is_basic && (j->total_count() == 0))
 						prio += 50; // for very important buildings
 
 					// Check if the produced wares are needed
