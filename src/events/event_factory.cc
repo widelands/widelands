@@ -32,7 +32,7 @@
 #include "event_reveal_objective.h"
 #include "event_reveal_scenario.h"
 #include "event_set_timer.h"
-#include "profile.h"
+#include "profile/profile.h"
 
 #include "wexception.h"
 

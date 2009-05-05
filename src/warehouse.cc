@@ -32,7 +32,7 @@
 #include "game.h"
 #include "log.h"
 #include "player.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "requirements.h"
 #include "soldier.h"
 #include "tribe.h"

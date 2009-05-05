@@ -23,7 +23,7 @@
 #include "game.h"
 #include "player.h"
 #include "playercommand.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "wlapplication.h"
 
 struct SinglePlayerGameController : public GameController {

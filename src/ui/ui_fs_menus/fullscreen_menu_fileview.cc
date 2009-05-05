@@ -22,7 +22,7 @@
 #include "constants.h"
 #include "io/filesystem/filesystem.h"
 #include "i18n.h"
-#include "profile.h"
+#include "profile/profile.h"
 
 
 Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(const std::string & filename)

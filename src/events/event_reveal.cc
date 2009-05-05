@@ -21,7 +21,7 @@
 
 #include "wexception.h"
 
-#include "profile.h"
+#include "profile/profile.h"
 
 #define EVENT_VERSION 2
 

@@ -34,7 +34,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "militarysite.h"
 #include "parse_map_object_types.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "soldier.h"
 #include "trainingsite.h"
 #include "warehouse.h"

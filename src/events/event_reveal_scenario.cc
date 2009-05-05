@@ -20,7 +20,7 @@
 #include "event_reveal_scenario.h"
 
 #include "campvis.h"
-#include "profile.h"
+#include "profile/profile.h"
 
 namespace Widelands {
 

@@ -23,7 +23,7 @@
 #include "events/event.h"
 #include "events/event_chain.h"
 #include "map.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "trigger/trigger.h"
 #include "trigger/trigger_conditional.h"
 #include "widelands_fileread.h"

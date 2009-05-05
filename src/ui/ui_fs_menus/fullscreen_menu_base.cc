@@ -22,7 +22,7 @@
 #include "io/filesystem/filesystem.h"
 #include "graphic/graphic.h"
 #include "log.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 

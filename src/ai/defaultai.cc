@@ -36,7 +36,7 @@
 #include "militarysite.h"
 #include "player.h"
 #include "productionsite.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "trainingsite.h"
 #include "tribe.h"
 #include "upcast.h"

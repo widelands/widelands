@@ -23,7 +23,7 @@
 #include "map.h"
 #include "trigger/trigger.h"
 #include "trigger/trigger_factory.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "widelands_fileread.h"
 #include "world.h"
 

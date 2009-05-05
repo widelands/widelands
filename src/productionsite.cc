@@ -31,7 +31,7 @@
 #include "map.h"
 #include "player.h"
 #include "production_program.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "tribe.h"
 #include "upcast.h"
 #include "warelist.h"

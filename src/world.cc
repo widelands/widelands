@@ -26,7 +26,7 @@
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "parse_map_object_types.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"

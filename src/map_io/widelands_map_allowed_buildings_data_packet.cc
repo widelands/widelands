@@ -21,7 +21,7 @@
 
 #include "game.h"
 #include "player.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "tribe.h"
 #include "upcast.h"
 

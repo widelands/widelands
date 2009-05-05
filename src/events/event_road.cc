@@ -22,7 +22,7 @@
 #include "checkstep.h"
 #include "game.h"
 #include "player.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "wexception.h"
 
 #define EVENT_VERSION 1

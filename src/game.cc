@@ -38,7 +38,7 @@
 #include "network/network.h"
 #include "player.h"
 #include "playercommand.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "replay.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"

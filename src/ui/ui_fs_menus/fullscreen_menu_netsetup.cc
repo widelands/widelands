@@ -22,7 +22,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "network/network.h"
-#include "profile.h"
+#include "profile/profile.h"
 
 Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
 :

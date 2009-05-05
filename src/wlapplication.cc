@@ -48,7 +48,7 @@
 #include "map.h"
 #include "network/netclient.h"
 #include "network/nethost.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "replay.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"

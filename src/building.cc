@@ -31,7 +31,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"
 #include "player.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"

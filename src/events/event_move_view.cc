@@ -22,7 +22,7 @@
 #include "interactive_player.h"
 
 #include "game.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "wexception.h"
 
 #define EVENT_VERSION 2

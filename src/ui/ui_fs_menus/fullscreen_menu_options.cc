@@ -26,7 +26,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "languages.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "save_handler.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"

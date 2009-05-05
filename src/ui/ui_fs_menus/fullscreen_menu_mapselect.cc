@@ -25,7 +25,7 @@
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "s2map.h"
 #include "wexception.h"
 #include "map_io/widelands_map_loader.h"

@@ -28,7 +28,7 @@
 #include "i18n.h"
 #include "interactive_gamebase.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "profile.h"
+#include "profile/profile.h"
 
 Interactive_GameBase & Game_Main_Menu_Save_Game::igbase() {
 	return dynamic_cast<Interactive_GameBase &>(*get_parent());

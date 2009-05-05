@@ -25,7 +25,7 @@
 // we also include graphic.h
 #include "graphic/graphic.h"
 #include "map.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
 

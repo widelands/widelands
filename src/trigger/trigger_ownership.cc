@@ -21,7 +21,7 @@
 
 #include "game.h"
 #include "mapregion.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "wexception.h"
 
 #define PACKET_VERSION 3

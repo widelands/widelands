@@ -23,7 +23,7 @@
 #include "game.h"
 #include "map.h"
 #include "player.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "wexception.h"
 
 #define PACKET_VERSION 1

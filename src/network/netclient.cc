@@ -29,7 +29,7 @@
 #include "network_protocol.h"
 #include "network_system.h"
 #include "playercommand.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "warning.h"
 #include "wexception.h"
 #include "wlapplication.h"

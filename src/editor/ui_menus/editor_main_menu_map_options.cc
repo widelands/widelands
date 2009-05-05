@@ -22,7 +22,7 @@
 #include "editorinteractive.h"
 #include "i18n.h"
 #include "map.h"
-#include "profile.h"
+#include "profile/profile.h"
 
 #include "ui_textarea.h"
 #include "ui_multilinetextarea.h"

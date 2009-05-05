@@ -27,7 +27,7 @@
 #include "map.h"
 #include "mapview.h"
 #include "mapviewpixelfunctions.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "songset.h"
 
 #include "log.h"

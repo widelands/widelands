@@ -35,7 +35,7 @@
 #include "helper.h"
 #include "interactive_player.h"
 #include "player.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"

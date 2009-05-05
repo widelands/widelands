@@ -24,7 +24,7 @@
 #include "mapfringeregion.h"
 #include "militarysite.h"
 #include "player.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "soldier.h"
 #include "trainingsite.h"
 #include "tribe.h"

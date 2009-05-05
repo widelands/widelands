@@ -20,7 +20,7 @@
 #include "trigger_time.h"
 
 #include "game.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "wexception.h"
 
 #define TRIGGER_VERSION 2

@@ -21,7 +21,7 @@
 
 #include "bob.h"
 #include "constants.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wexception.h"
 

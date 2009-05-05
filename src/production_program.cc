@@ -25,7 +25,7 @@
 #include "helper.h"
 #include "mapregion.h"
 #include "productionsite.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "soldier.h"
 #include "soldiercontrol.h"
 #include "sound/sound_handler.h"

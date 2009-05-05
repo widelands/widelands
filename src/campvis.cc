@@ -19,7 +19,7 @@
 
 #include "campvis.h"
 #include "io/filesystem/filesystem.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "wexception.h"
 
 #include <sys/stat.h>

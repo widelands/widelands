@@ -36,7 +36,7 @@
 #include "minimap.h"
 #include "graphic/overlay_manager.h"
 #include "player.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "upcast.h"
 #include "wlapplication.h"
 

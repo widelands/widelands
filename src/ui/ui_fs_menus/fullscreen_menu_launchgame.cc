@@ -34,7 +34,7 @@
 #include "map_io/map_loader.h"
 #include "player.h"
 #include "playerdescrgroup.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "warning.h"
 
 Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame

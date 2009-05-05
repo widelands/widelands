@@ -45,7 +45,7 @@
 #include "graphic/overlay_manager.h"
 #include "player.h"
 #include "productionsite.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "soldier.h"
 #include "wui/stock_menu.h"
 #include "tribe.h"

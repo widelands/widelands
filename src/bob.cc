@@ -27,7 +27,7 @@
 #include "mapviewpixelconstants.h"
 #include "path.h"
 #include "player.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "graphic/rendertarget.h"
 #include "tribe.h"
 #include "upcast.h"

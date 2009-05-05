@@ -19,7 +19,7 @@
 
 #include "interactive_gamebase.h"
 
-#include "profile.h"
+#include "profile/profile.h"
 
 #include "game.h"
 Interactive_GameBase::Interactive_GameBase

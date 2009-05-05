@@ -23,7 +23,7 @@
 #include "events/event.h"
 #include "events/event_factory.h"
 #include "map.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "widelands_fileread.h"
 #include "world.h"
 

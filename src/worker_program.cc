@@ -20,7 +20,7 @@
 #include "worker_program.h"
 
 #include "helper.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "findnode.h"
 
 namespace Widelands {

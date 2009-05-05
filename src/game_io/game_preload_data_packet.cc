@@ -22,7 +22,7 @@
 #include "game.h"
 #include "interactive_player.h"
 #include "map.h"
-#include "profile.h"
+#include "profile/profile.h"
 
 namespace Widelands {
 

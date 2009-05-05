@@ -27,7 +27,7 @@
 #include "player.h"
 #include "map.h"
 #include "mapfringeregion.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"

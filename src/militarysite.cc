@@ -24,7 +24,7 @@
 #include "game.h"
 #include "i18n.h"
 #include "player.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "soldier.h"

@@ -22,7 +22,7 @@
 #include "io/fileread.h"
 #include "font_handler.h"
 #include "i18n.h"
-#include "profile.h"
+#include "profile/profile.h"
 
 #define GAMETIPS_DEFAULT_INTERVAL     5
 #define GAMETIPS_DEFAULT_TEXTAREA_W   250

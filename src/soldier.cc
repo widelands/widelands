@@ -30,7 +30,7 @@
 #include "helper.h"
 #include "militarysite.h"
 #include "player.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "graphic/rendertarget.h"
 #include "rgbcolor.h"
 #include "tribe.h"

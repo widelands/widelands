@@ -21,7 +21,7 @@
 
 #include "editor_game_base.h"
 #include "map.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "wexception.h"
 
 #include "log.h"

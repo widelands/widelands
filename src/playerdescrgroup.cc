@@ -23,7 +23,7 @@
 #include "gamesettings.h"
 #include "i18n.h"
 #include "player.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "tribe.h"
 #include "wexception.h"
 

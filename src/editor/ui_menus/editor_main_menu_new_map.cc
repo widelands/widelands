@@ -23,7 +23,7 @@
 #include "i18n.h"
 #include "editorinteractive.h"
 #include "map.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "world.h"
 #include "editor_game_base.h"
 

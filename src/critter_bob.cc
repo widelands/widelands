@@ -23,7 +23,7 @@
 #include "field.h"
 #include "game.h"
 #include "helper.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "wexception.h"
 
 #include <cstdio>

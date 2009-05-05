@@ -21,7 +21,7 @@
 
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "profile.h"
+#include "profile/profile.h"
 
 namespace Widelands {
 

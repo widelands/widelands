@@ -22,7 +22,7 @@
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "wexception.h"
 #include "map_io/widelands_map_loader.h"
 

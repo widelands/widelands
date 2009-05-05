@@ -35,7 +35,7 @@
 #include "map.h"
 #include "graphic/overlay_manager.h"
 #include "player.h"
-#include "profile.h"
+#include "profile/profile.h"
 #include "tribe.h"
 #include "warning.h"
 #include "map_io/widelands_map_loader.h"
