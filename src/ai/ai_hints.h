@@ -38,6 +38,9 @@ struct BuildingHints {
 	const char * get_mines() const throw ()
 	{return mines;}
 
+	bool is_basic()
+	{return basic;}
+
 	bool is_trunkproducer()
 	{return trunkproducer;}
 
@@ -53,6 +56,7 @@ struct BuildingHints {
 private:
 	char  * renews_map_resource;
 	char  * mines;
+	bool    basic;
 	bool    trunkproducer;
 	bool    stoneproducer;
 	bool    needs_water;

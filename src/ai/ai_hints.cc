@@ -28,6 +28,7 @@ BuildingHints::BuildingHints ()
 :
 renews_map_resource(0),
 mines(0),
+basic(false),
 trunkproducer(false),
 stoneproducer(false),
 needs_water(false)
@@ -41,6 +42,8 @@ void BuildingHints::parse (Profile & prof)
 			renews_map_resource = strdup(s);
 		if (char const * const s = hints->get_string("mines"))
 			mines = strdup(s);
+		if (const bool b = hints->get_bool("is_basic"))
+			basic = b;
 		if (const bool b = hints->get_bool("trunkproducer"))
 			trunkproducer = b;
 		if (const bool b = hints->get_bool("stoneproducer"))

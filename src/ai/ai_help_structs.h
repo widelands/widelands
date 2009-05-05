@@ -197,6 +197,8 @@ struct BuildingObserver {
 		MINE
 	}                                 type;
 
+	bool                              is_basic;
+
 	bool                              is_buildable;
 
 	bool                              need_trees;

@@ -210,6 +210,8 @@ void DefaultAI::late_initialization ()
 		bo.cnt_under_construction = 0;
 		bo.production_hint        = -1;
 
+		bo.is_basic               = false;
+
 		bo.is_buildable = bld.buildable() & player->is_building_allowed(i);
 
 		bo.need_trees             = bh->is_trunkproducer();
@@ -240,6 +242,9 @@ void DefaultAI::late_initialization ()
 					bo.mines = world.get_resource(strdup(s));
 				bo.mines_percent = bh->get_mines_percent();
 			}
+
+			if (bh->is_basic())
+				bo.is_basic = true;
 
 			continue;
 		}
@@ -658,7 +663,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					prio += bf->trees_nearby * 5 / 3;
 					prio /= 2 * (1 + bf->tree_consumers_nearby);
 					if (j->total_count() < 2)
-						prio *= 4; // big bonus for the basics
+						prio *= 6; // big bonus for the basics
 					if (j->total_count() == 0)
 						prio *= 2; // even more for the absolute basics
 				} else if (j->need_stones) {
@@ -666,11 +671,13 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					prio += bf->stones_nearby * 5 / 3;
 					prio /= 2 * (1 + bf->stone_consumers_nearby);
 					if (j->total_count() == 0)
-						prio *= 8; // big bonus for the basics
+						prio *= 10; // big bonus for the basics
 				} else if (j->production_hint >= 0) {
 					// production hint (f.e. associate forester with trunks)
 					// add bonus near buildings outputting production_hint ware
 					prio += 2 * bf->producers_nearby[j->production_hint];
+					// Add preciousness - makes the defaultAI build foresters earlier
+					prio += 2 * wares[j->production_hint].preciousness;
 
 					// Do not build too many of these buildings, but still care
 					// to build at least one.
@@ -685,7 +692,11 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// Calculate the need for this building
 					prio += 4 * wares[j->production_hint].consumers;
 					prio += wares[j->production_hint].preciousness;
-				} else {
+				} else { // "normal" productionsites
+
+					if (j->is_basic && j->total_count())
+						prio += 50; // for very important buildings
+
 					// Check if the produced wares are needed
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
 						for (uint32_t m = 0; m < j->outputs.size(); ++m) {
@@ -759,7 +770,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 			// add big penalty if water is needed, but is not near
 			if (j->need_water) {
-				int effect = bf->water_nearby - 12;
+				if (bf->water_nearby < 3)
+					continue;
+				int effect = bf->water_nearby - 8;
 				prio += effect > 0 ? static_cast<int>(sqrt(effect)) : effect;
 				// if same producers are nearby, then give some penalty
 				for (size_t k = 0; k < j->outputs.size(); ++k)
@@ -790,44 +803,64 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		if (!i->is_buildable || i->type != BuildingObserver::MINE)
 			continue;
 
+
+		// Check if the produced wares are needed
+		bool needed = false;
+		container_iterate(std::list<EconomyObserver *>, economies, l) {
+			for (uint32_t m = 0; m < i->outputs.size(); ++m) {
+				Ware_Index wt(static_cast<size_t>(i->outputs[m]));
+				if ((*l.current)->economy.needs_ware(wt)) {
+					needed = true;
+					break;
+				}
+			}
+			if (needed)
+				break;
+		}
+
+		// Only try to build mines that produce needed wares.
+		if (!needed)
+			continue;
+
 		for
 			(std::list<MineableField *>::iterator j = mineable_fields.begin();
 			 j != mineable_fields.end();
 			 ++j)
 		{
+			int32_t prio = 0;
 
-			MineableField * mf = *j;
-			int32_t prio = -1;
-
-			if (mf->coords.field->get_resources() != i->mines)
+			if ((*j)->coords.field->get_resources() != i->mines)
 				continue;
 			else
-				prio += mf->coords.field->get_resources_amount() * 2 / 3;
+				prio += (*j)->coords.field->get_resources_amount() * 3 / 2;
 
-			// Check if current economy can supply enough material for production.
+			// Only build mines on locations where some material can be mined
+			if (prio < 2)
+				continue;
+
+			// Check if current economy can supply enough food for production.
 			for (uint32_t k = 0; k < i->inputs.size(); ++k) {
 				prio += 2 * wares[i->inputs[k]].producers;
-				prio -= 4 * wares[i->inputs[k]].consumers;
+				prio -= 3 * wares[i->inputs[k]].consumers;
 			}
 
-			// Check if the produced wares are needed
-			container_iterate(std::list<EconomyObserver *>, economies, l) {
-				for (uint32_t m = 0; m < i->outputs.size(); ++m) {
-					Ware_Index wt(static_cast<size_t>(i->outputs[m]));
-					if ((*l.current)->economy.needs_ware(wt)) {
-						prio *= 2;
-					}
-				}
+			uint32_t ioprio = 0;
+			for (uint32_t m = 0; m < i->outputs.size(); ++m) {
+				ioprio += wares[i->outputs[m]].preciousness;
 			}
 
-			prio -= 2 * mf->mines_nearby * mf->mines_nearby;
+			// No plus for mines with multiple output
+			ioprio /= i->outputs.size();
+			prio += ioprio;
+
+			prio -= 2 * (*j)->mines_nearby * (*j)->mines_nearby;
 			prio /= 1 + i->cnt_built * 2;
 			prio /= 1 + i->cnt_under_construction * 4;
 
 			if (prio > proposed_priority) {
 				proposed_building = i->id;
 				proposed_priority = prio;
-				proposed_coords = mf->coords;
+				proposed_coords = (*j)->coords;
 				mine = true;
 			}
 		}
@@ -1401,6 +1434,8 @@ int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
 		prio += 2 * wares[bo.inputs[k]].producers;
 		prio -= 4 * wares[bo.inputs[k]].consumers;
 	}
+	if (bo.inputs.size() == 0)
+		++prio;
 
 	int32_t output_prio = 0;
 	for (uint32_t k = 0; k < bo.outputs.size(); ++k) {
@@ -1409,7 +1444,7 @@ int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
 			output_prio += 8 + wo.preciousness; // add a big bonus
 	}
 
-	if (bo.outputs.size() > 0)
+	if (bo.outputs.size() > 1)
 		output_prio = static_cast<int32_t>
 			(ceil(output_prio / sqrt(bo.outputs.size())));
 	prio += output_prio;
