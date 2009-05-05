@@ -11,6 +11,10 @@ spidercloth=1
 [working positions]
 farmer=1
 
+[aihints]
+is_basic=true # farm needs spidercloth to be build and spidercloth needs
+              # corn for production -> farm should be build ASAP!
+
 [programs]
 plant_corn=_Plant corn
 plant=Plant corn (only for compatibility with old savegames (build13))

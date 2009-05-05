@@ -1,5 +1,5 @@
 help=_Stone is one basic build ware type of the Atlanteans.
-preciousness=8
+preciousness=5
 
 [idle]
 pics=idle.png
