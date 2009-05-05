@@ -28,7 +28,6 @@ Computer_Player::Computer_Player
 }
 
 
-#ifdef DEBUG
 struct EmptyAI : Computer_Player {
 	EmptyAI(Widelands::Game & g, const Widelands::Player_Number pid)
 	: Computer_Player(g, pid) {}
@@ -36,7 +35,7 @@ struct EmptyAI : Computer_Player {
 	void think() {}
 
 	struct EmptyAIImpl : Implementation {
-		EmptyAIImpl() {name = "none";}
+		EmptyAIImpl() {name = _("None");}
 		Computer_Player * instantiate
 			(Widelands::Game & g,
 			 const Widelands::Player_Number pid) const
@@ -49,7 +48,6 @@ struct EmptyAI : Computer_Player {
 };
 
 EmptyAI::EmptyAIImpl EmptyAI::implementation;
-#endif
 
 Computer_Player::ImplementationVector const &
 Computer_Player::getImplementations()
@@ -57,10 +55,10 @@ Computer_Player::getImplementations()
 	static std::vector<Computer_Player::Implementation const *> impls;
 
 	if (impls.empty()) {
-		impls.push_back(&DefaultAI::implementation);
-#ifdef DEBUG
+		impls.push_back(&DefaultAI::aggressiveImpl);
+		impls.push_back(&DefaultAI::normalImpl);
+		impls.push_back(&DefaultAI::defensiveImpl);
 		impls.push_back(&EmptyAI::implementation);
-#endif
 	}
 
 	return impls;

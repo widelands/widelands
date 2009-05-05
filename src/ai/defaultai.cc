@@ -51,11 +51,14 @@
 
 using namespace Widelands;
 
-DefaultAI::Implementation DefaultAI::implementation;
+DefaultAI::AggressiveImpl DefaultAI::aggressiveImpl;
+DefaultAI::NormalImpl DefaultAI::normalImpl;
+DefaultAI::DefensiveImpl DefaultAI::defensiveImpl;
 
 /// Constructor of DefaultAI
-DefaultAI::DefaultAI(Game & g, const Player_Number pid) :
+DefaultAI::DefaultAI(Game & g, const Player_Number pid, uint8_t t) :
 Computer_Player(g, pid),
+type(t),
 m_buildable_changed(true),
 m_mineable_changed(true),
 tribe(0),
@@ -146,9 +149,11 @@ void DefaultAI::think ()
 	if (check_militarysites(gametime))
 		return;
 
-	// Finally consider military actions
-	if (next_attack_consideration_due <= gametime)
-		consider_attack(gametime);
+	// Finally consider military actions if defaultAI type is Agressive or
+	// Normal.
+	if (!(type == DEFENSIVE))
+		if (next_attack_consideration_due <= gametime)
+			consider_attack(gametime);
 }
 
 /// called by Widelands game engine when an immovable changed
@@ -1700,6 +1705,8 @@ bool DefaultAI::consider_attack(int32_t gametime) {
 				continue;
 			if (bld->canAttack()) {
 				int32_t ta = player->findAttackSoldiers(bld->base_flag());
+				if (type == NORMAL)
+					ta = ta * 2 / 3;
 				if (ta < 1)
 					continue;
 

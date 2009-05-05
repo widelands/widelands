@@ -22,6 +22,7 @@
 
 #include "ai/ai_help_structs.h"
 #include "computer_player.h"
+#include "i18n.h"
 
 #include <map>
 
@@ -45,7 +46,7 @@ struct Flag;
  * and will try to build up an infrastructure to create that ware.
  *
  * \ToDo Improvements:
- * - Implement different initialization types (Aggressive, Normal, Defensive)
+ * - Improve different initialization types (Aggressive, Normal, Defensive)
  * - Improve update code - currently the whole buildable area owned by defaultAI
  *   is rechecked after construction of a building or a road. Instead it would
  *   be better to write down the changed coordinates and only check those and
@@ -59,22 +60,50 @@ struct Flag;
  *
  */
 struct DefaultAI : Computer_Player {
-	DefaultAI(Widelands::Game &, const Widelands::Player_Number);
+	DefaultAI(Widelands::Game &, const Widelands::Player_Number, uint8_t);
 
 	virtual void think ();
 
 	virtual void receive(Widelands::NoteImmovable const &);
 	virtual void receive(Widelands::NoteField     const &);
 
-	struct Implementation : public Computer_Player::Implementation {
-		Implementation() {name = "default";}
+	enum {
+		AGGRESSIVE = 2,
+		NORMAL     = 1,
+		DEFENSIVE  = 0,
+	};
+
+	/// Implementation for Aggressive
+	struct AggressiveImpl : public Computer_Player::Implementation {
+		AggressiveImpl() {name = _("Aggressive");}
 		Computer_Player * instantiate
 			(Widelands::Game & g, const Widelands::Player_Number p) const
 		{
-			return new DefaultAI(g, p);
+			return new DefaultAI(g, p, AGGRESSIVE);
 		}
 	};
-	static Implementation implementation;
+
+	struct NormalImpl : public Computer_Player::Implementation {
+		NormalImpl() {name = _("Normal");}
+		Computer_Player * instantiate
+			(Widelands::Game & g, const Widelands::Player_Number p) const
+		{
+			return new DefaultAI(g, p, NORMAL);
+		}
+	};
+
+	struct DefensiveImpl : public Computer_Player::Implementation {
+		DefensiveImpl() {name = _("Defensive");}
+		Computer_Player * instantiate
+			(Widelands::Game & g, const Widelands::Player_Number p) const
+		{
+			return new DefaultAI(g, p, DEFENSIVE);
+		}
+	};
+
+	static AggressiveImpl aggressiveImpl;
+	static NormalImpl normalImpl;
+	static DefensiveImpl defensiveImpl;
 
 private:
 	void late_initialization ();
@@ -118,6 +147,8 @@ private:
 
 private:
 	// Variables of default AI
+	uint8_t type;
+
 	bool m_buildable_changed;
 	bool m_mineable_changed;
 
