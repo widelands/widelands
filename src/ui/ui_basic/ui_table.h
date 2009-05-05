@@ -36,7 +36,7 @@ struct Scrollbar;
 template <typename T, typename ID> struct Callback_IDButton;
 
 /**
- * A table with columns and lines. The entriess can be sorted by colums by
+ * A table with columns and lines. The entries can be sorted by columns by
  * clicking on the column header button.
  *
  * Entry can be

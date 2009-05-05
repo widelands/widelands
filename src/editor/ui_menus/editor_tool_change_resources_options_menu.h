@@ -30,33 +30,34 @@ struct Editor_Interactive;
 struct Editor_Increase_Resources_Tool;
 
 struct Editor_Tool_Change_Resources_Options_Menu :
-	public Editor_Tool_Options_Menu {
-		Editor_Tool_Change_Resources_Options_Menu
-			(Editor_Interactive             &,
-			 Editor_Increase_Resources_Tool &,
-			 UI::UniqueWindow::Registry     &);
+	public Editor_Tool_Options_Menu
+{
+	Editor_Tool_Change_Resources_Options_Menu
+		(Editor_Interactive             &,
+		 Editor_Increase_Resources_Tool &,
+		 UI::UniqueWindow::Registry     &);
 
-		private:
-		void selected();
-		enum Button {
-			Change_By_Increase, Change_By_Decrease,
-			Set_To_Increase,    Set_To_Decrease
-		};
-		void clicked_button(Button);
-		void update();
-		UI::Textarea                     m_change_by_label;
-		UI::Callback_IDButton
-			<Editor_Tool_Change_Resources_Options_Menu, Button const>
-			m_change_by_increase, m_change_by_decrease;
-		UI::Textarea                     m_change_by_value;
-		UI::Textarea                     m_set_to_label;
-		UI::Callback_IDButton
-			<Editor_Tool_Change_Resources_Options_Menu, Button const>
-			m_set_to_increase,    m_set_to_decrease;
-		UI::Textarea                     m_set_to_value;
-		UI::Textarea                     m_cur_selection;
-		UI::Radiogroup m_radiogroup;
-		Editor_Increase_Resources_Tool & m_increase_tool;
+private:
+	void selected();
+	enum Button {
+		Change_By_Increase, Change_By_Decrease,
+		Set_To_Increase,    Set_To_Decrease
 	};
+	void clicked_button(Button);
+	void update();
+	UI::Textarea                     m_change_by_label;
+	UI::Callback_IDButton
+		<Editor_Tool_Change_Resources_Options_Menu, Button const>
+		m_change_by_increase, m_change_by_decrease;
+	UI::Textarea                     m_change_by_value;
+	UI::Textarea                     m_set_to_label;
+	UI::Callback_IDButton
+		<Editor_Tool_Change_Resources_Options_Menu, Button const>
+		m_set_to_increase,    m_set_to_decrease;
+	UI::Textarea                     m_set_to_value;
+	UI::Textarea                     m_cur_selection;
+	UI::Radiogroup m_radiogroup;
+	Editor_Increase_Resources_Tool & m_increase_tool;
+};
 
 #endif

@@ -40,7 +40,7 @@ namespace UI {
 #define HZ_B_CORNER_PIXMAP_LEN 20
 
 #define HZ_B_MIDDLE_PIXMAP_LEN \
-	(HZ_B_TOTAL_PIXMAP_LEN - 2 * HZ_B_CORNER_PIXMAP_LEN)
+   (HZ_B_TOTAL_PIXMAP_LEN - 2 * HZ_B_CORNER_PIXMAP_LEN)
 
 /// Width/height the vertical border graphics must have.
 #define VT_B_PIXMAP_THICKNESS 20
@@ -50,7 +50,7 @@ namespace UI {
 #define VT_B_THINGY_PIXMAP_LEN 20
 
 #define VT_B_MIDDLE_PIXMAP_LEN \
-	(VT_B_TOTAL_PIXMAP_LEN - 2 * VT_B_THINGY_PIXMAP_LEN)
+   (VT_B_TOTAL_PIXMAP_LEN - 2 * VT_B_THINGY_PIXMAP_LEN)
 
 
 /**

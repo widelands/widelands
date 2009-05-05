@@ -192,8 +192,7 @@ void Map_Building_Data_Packet::write_priorities
 			else if (Request::WORKER == ware_type)
 				name = tribe.get_worker_descr(ware_index)->name();
 			else
-				throw
-					wexception
+				throw wexception
 						("unrecognized ware type %d while writing priorities",
 						 ware_type);
 
@@ -224,8 +223,7 @@ void Map_Building_Data_Packet::read_priorities
 			else if (Request::WORKER == ware_type)
 				idx = tribe.safe_worker_index(fr.CString());
 			else
-				throw
-					wexception
+				throw wexception
 						("unrecognized ware type %d while reading priorities",
 						 ware_type);
 

@@ -181,12 +181,12 @@ void md5_process_block
 		we store the swapped words in the array CORRECT_WORDS.  */
 
 #define OP(a, b, c, d, s, T)                                                  \
-	do {                                                                       \
-		a += FF (b, c, d) + (*cwp++ = (*words)) + T;                            \
-		++words;                                                                \
-		CYCLIC (a, s);                                                          \
-		a += b;                                                                 \
-	} while (false)                                                            \
+   do {                                                                       \
+      a += FF (b, c, d) + (*cwp++ = (*words)) + T;                            \
+      ++words;                                                                \
+      CYCLIC (a, s);                                                          \
+      a += b;                                                                 \
+   } while (false)                                                            \
 
 		/* It is unfortunate that C does not provide an operator for
 		cyclic rotation.  Hope the C compiler is smart enough.  */
@@ -221,11 +221,11 @@ void md5_process_block
 		argument specifying the function to use.  */
 #undef OP
 #define OP(f, a, b, c, d, k, s, T)                                            \
-	do {                                                                       \
-		a += f (b, c, d) + correct_words[k] + T;                                \
-		CYCLIC (a, s);                                                          \
-		a += b;                                                                 \
-	} while (false)                                                            \
+   do {                                                                       \
+      a += f (b, c, d) + correct_words[k] + T;                                \
+      CYCLIC (a, s);                                                          \
+      a += b;                                                                 \
+   } while (false)                                                            \
 
 		/* Round 2.  */
 		OP (FG, A, B, C, D,  1,  5, 0xf61e2562);

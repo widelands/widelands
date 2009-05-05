@@ -75,8 +75,8 @@ int32_t RealFSImpl::FindFiles
 	 std::string const & pattern,
 	 filenameset_t     * results,
 	 uint32_t)
-#ifdef _WIN32
 {
+#ifdef _WIN32
 	std::string buf;
 	struct _finddata_t c_file;
 	long hFile;
@@ -111,9 +111,7 @@ int32_t RealFSImpl::FindFiles
 	_findclose(hFile);
 
 	return results->size();
-}
 #else
-{
 	std::string buf;
 	glob_t gl;
 	int32_t i, count;
@@ -137,8 +135,8 @@ int32_t RealFSImpl::FindFiles
 	globfree(&gl);
 
 	return count;
-}
 #endif
+}
 
 /**
  * Returns true if the given file exists, and false if it doesn't.

@@ -476,9 +476,9 @@ throw (FileType_error, FileNotFound_error, FileAccessDenied_error)
 }
 
 #ifdef WIN32
-/// hack that is unfortunally needed for windows to check whether
-/// widelands can write in the directory
-bool FileSystem::check_writeable_for_data(char const * path)
+/// hack that is unfortunately needed for windows to check whether Widelands
+/// can write in the directory
+bool FileSystem::check_writeable_for_data(char const * const path)
 {
 	RealFSImpl fs(path);
 	if (fs.IsDirectory(".widelands"))

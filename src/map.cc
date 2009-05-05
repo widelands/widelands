@@ -832,12 +832,8 @@ struct FindBobsCallback {
 
 		for (bob = cur.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
 			if
-				(m_list && std::find
-				 	(m_list->begin(),
-				 	 m_list->end(),
-				 	 bob)
-				 	!=
-				 	m_list->end())
+				(m_list &&
+				 std::find(m_list->begin(), m_list->end(), bob) != m_list->end())
 				continue;
 
 			if (m_functor.accept(bob)) {
@@ -1688,7 +1684,7 @@ Slope is limited to the range [ -SLOPE_COST_STEPS; +oo [
 ===============
 */
 #define CALC_COST_D(slope)                                             \
-	(((slope) + SLOPE_COST_STEPS) * ((slope) + SLOPE_COST_STEPS - 1))
+   (((slope) + SLOPE_COST_STEPS) * ((slope) + SLOPE_COST_STEPS - 1))
 
 static int32_t calc_cost_d(int32_t slope)
 {
@@ -1911,11 +1907,11 @@ public:
 			if
 				(m_data[nsize]->cost() <= m_data[l]->cost() &&
 				 m_data[nsize]->cost() <= m_data[r]->cost())
-				{
-					m_data[fix] = m_data[nsize];
-					m_data[fix]->heap_index = fix;
-					break;
-				}
+			{
+				m_data[fix] = m_data[nsize];
+				m_data[fix]->heap_index = fix;
+				break;
+			}
 			if (m_data[l]->cost() <= m_data[r]->cost()) {
 				m_data[fix] = m_data[l];
 				m_data[fix]->heap_index = fix;

@@ -32,8 +32,8 @@ struct ChatProvider;
  * Provides a panel that contains chat message scrollbar and a chat message
  * entry field.
  */
-struct GameChatPanel : public UI::Panel,
-		public Widelands::NoteReceiver<ChatMessage>
+struct GameChatPanel :
+	public UI::Panel, public Widelands::NoteReceiver<ChatMessage>
 {
 	GameChatPanel
 		(UI::Panel    *,

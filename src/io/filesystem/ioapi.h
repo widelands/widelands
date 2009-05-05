@@ -24,9 +24,9 @@
 
 #ifndef ZCALLBACK
 
-#if (defined(WIN32) || defined (WINDOWS) || \
-	defined (_WINDOWS)) && defined(CALLBACK) && \
-	defined (USEWINDOWS_CALLBACK)
+#if (defined(WIN32) || defined (WINDOWS) ||                                   \
+   defined (_WINDOWS)) && defined(CALLBACK) &&                                \
+   defined (USEWINDOWS_CALLBACK)
 #define ZCALLBACK CALLBACK
 #else
 #define ZCALLBACK
@@ -76,17 +76,17 @@ typedef struct zlib_filefunc_def_s
 void fill_fopen_filefunc OF((zlib_filefunc_def * pzlib_filefunc_def));
 
 #define ZREAD(filefunc, filestream, buf, size) \
-	((*((filefunc).zread_file))((filefunc).opaque, filestream, buf, size))
+   ((*((filefunc).zread_file))((filefunc).opaque, filestream, buf, size))
 #define ZWRITE(filefunc, filestream, buf, size) \
-	((*((filefunc).zwrite_file))((filefunc).opaque, filestream, buf, size))
-#define ZTELL(filefunc, filestream) ((*((filefunc).ztell_file)) \
-		((filefunc).opaque, filestream))
+   ((*((filefunc).zwrite_file))((filefunc).opaque, filestream, buf, size))
+#define ZTELL(filefunc, filestream)                                           \
+   ((*((filefunc).ztell_file)) ((filefunc).opaque, filestream))
 #define ZSEEK(filefunc, filestream, pos, mode) \
-	((*((filefunc).zseek_file))((filefunc).opaque, filestream, pos, mode))
+   ((*((filefunc).zseek_file))((filefunc).opaque, filestream, pos, mode))
 #define ZCLOSE(filefunc, filestream) \
-	((*((filefunc).zclose_file))((filefunc).opaque, filestream))
+   ((*((filefunc).zclose_file))((filefunc).opaque, filestream))
 #define ZERROR(filefunc, filestream) \
-	((*((filefunc).zerror_file))((filefunc).opaque, filestream))
+   ((*((filefunc).zerror_file))((filefunc).opaque, filestream))
 
 
 #ifdef __cplusplus

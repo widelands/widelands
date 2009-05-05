@@ -37,7 +37,7 @@
 using Widelands::Immovable_Descr;
 
 Editor_Tool_Place_Immovable_Options_Menu::
-	Editor_Tool_Place_Immovable_Options_Menu
+Editor_Tool_Place_Immovable_Options_Menu
 		(Editor_Interactive          & parent,
 		 Editor_Place_Immovable_Tool & pit,
 		 UI::UniqueWindow::Registry  & registry)

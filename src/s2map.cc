@@ -269,7 +269,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		Widelands::Y_Coordinate const mapheight = m_map.get_height();
 		assert(mapwidth  == header.w);
 		assert(mapheight == header.h);
-		egbase.allocate_player_maps(); //  initalizes player_fields.vision
+		egbase.allocate_player_maps(); //  initializes player_fields.vision
 
 
 		//  SWD-SECTION 1: Heights
@@ -730,11 +730,12 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				}
 			}
 
-		// WORKAROUND: unfortunately the widelands-engine is not complete
-		// compatible to the one of settlers 2 : space for buildings is
-		// differently defined.  To allow a loading of settlers 2 maps in the
-		// majority of cases, check all startingpositions and try to make it
-		// widelands-compatible, if it's size is too small.
+		//  WORKAROUND:
+		//  Unfortunately the Widelands engine is not completely compatible with
+		//  the Settlers 2; space for buildings is defined differently. To allow
+		//  loading of Settlers 2 maps in the majority of cases, check all
+		//  starting positions and try to make it Widelands compatible, if its
+		//  size is too small.
 		m_map.recalc_whole_map(); //  to initialize buildcaps
 
 		char msg[128];

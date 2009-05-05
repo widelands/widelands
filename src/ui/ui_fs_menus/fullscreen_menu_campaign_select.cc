@@ -37,47 +37,59 @@
  * Loads a list of all visible campaigns
  */
 Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
-Fullscreen_Menu_Base("choosemapmenu.jpg"),
+	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
-m_butw
-	(m_xres / 4),
-m_buth
-	(m_yres * 9 / 200),
-m_fs
-	(fs_small()),
-m_fn
-	(ui_fn()),
+	m_butw
+		(m_xres / 4),
+	m_buth
+		(m_yres * 9 / 200),
+	m_fs
+		(fs_small()),
+	m_fn
+		(ui_fn()),
 
 // Text labels
-title
-	(this, m_xres / 2, m_yres * 9 / 50, _("Select a campaign"), Align_HCenter),
-label_campname   (this, m_xres * 3 / 5,  m_yres * 17 / 50, _("Campaign:")),
-tacampname       (this, m_xres * 61 / 100, m_yres * 3 / 8, ""),
-label_difficulty (this, m_xres * 3 / 5,  m_yres * 17 / 40, _("Difficulty:")),
-tadifficulty     (this, m_xres * 61 / 100, m_yres * 23 / 50, ""),
-label_campdescr  (this, m_xres * 3 / 5,  m_yres * 51 / 100, _("Description:")),
-tacampdescr      (this, m_xres * 61 / 100,
-		m_yres * 11 / 20, m_xres * 9 / 25, m_yres * 7 / 25, ""),
+	title
+		(this,
+		 m_xres / 2, m_yres * 9 / 50,
+		 _("Select a campaign"), Align_HCenter),
+	label_campname
+		(this, m_xres *  3 /   5, m_yres * 17 / 50, _("Campaign:")),
+	tacampname
+		(this, m_xres * 61 / 100, m_yres *  3 /  8, ""),
+	label_difficulty
+		(this, m_xres *  3 /   5, m_yres * 17 / 40, _("Difficulty:")),
+	tadifficulty
+		(this, m_xres * 61 / 100, m_yres * 23 / 50, ""),
+	label_campdescr
+		(this, m_xres *  3 /   5, m_yres * 51 / 100, _("Description:")),
+	tacampdescr
+		(this,
+		 m_xres * 61 / 100, m_yres * 11 / 20, m_xres * 9 / 25, m_yres * 7 / 25,
+		 ""),
 
 // Buttons
-b_ok
-	(this,
-	 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
-	 2,
-	 &Fullscreen_Menu_CampaignSelect::clicked_ok, *this,
-	 _("OK"), std::string(), false, false,
-	 m_fn, m_fs),
-back
-	(this,
-	 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
-	 0,
-	 &Fullscreen_Menu_CampaignSelect::end_modal, *this, 0,
-	 _("Back"), std::string(), true, false,
-	 m_fn, m_fs),
+	b_ok
+		(this,
+		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
+		 2,
+		 &Fullscreen_Menu_CampaignSelect::clicked_ok, *this,
+		 _("OK"), std::string(), false, false,
+		 m_fn, m_fs),
+	back
+		(this,
+		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
+		 0,
+		 &Fullscreen_Menu_CampaignSelect::end_modal, *this, 0,
+		 _("Back"), std::string(), true, false,
+		 m_fn, m_fs),
 
 // Campaign list
-m_list(this, m_xres * 47 / 2500, m_yres * 3417 / 10000, m_xres * 711 / 1250, m_yres * 6083 / 10000)
+	m_list
+		(this,
+		 m_xres *  47 / 2500, m_yres * 3417 / 10000,
+		 m_xres * 711 / 1250, m_yres * 6083 / 10000)
 {
 	title           .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	label_campname  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -87,8 +99,10 @@ m_list(this, m_xres * 47 / 2500, m_yres * 3417 / 10000, m_xres * 711 / 1250, m_y
 	label_campdescr .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	tacampdescr     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_list.set_font(m_fn, m_fs);
-	m_list.selected.set(this, &Fullscreen_Menu_CampaignSelect::campaign_selected);
-	m_list.double_clicked.set(this, &Fullscreen_Menu_CampaignSelect::double_clicked);
+	m_list.selected      .set
+		(this, &Fullscreen_Menu_CampaignSelect::campaign_selected);
+	m_list.double_clicked.set
+		(this, &Fullscreen_Menu_CampaignSelect::double_clicked);
 	fill_list();
 }
 
@@ -129,7 +143,7 @@ static char const * const dif_picture_filenames[] = {
  */
 void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t const i)
 {
-	if (m_list.get_selected()) { //gets false, if the selected entry has no value.
+	if (m_list.get_selected()) { //  false if the selected entry has no value
 		campaign = i;
 
 		// enable OK button
@@ -284,7 +298,10 @@ back
 	 m_fn, m_fs),
 
 // Campaign map list
-m_list(this, m_xres * 47 / 2500, m_yres * 3417 / 10000, m_xres * 711 / 1250, m_yres * 6083 / 10000)
+	m_list
+		(this,
+		 m_xres *  47 / 2500, m_yres * 3417 / 10000,
+		 m_xres * 711 / 1250, m_yres * 6083 / 10000)
 {
 	title         .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	label_mapname .set_font(m_fn, m_fs, UI_FONT_CLR_FG);

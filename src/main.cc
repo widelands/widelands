@@ -62,7 +62,7 @@ int main(int argc, char * argv[])
 			<< "\nCaught exception (of type '" << typeid(e).name()
 			<< "') in outermost handler!\nThe exception said: " << e.what()
 			<< "\n\nThis should not happen. Please file a bug report on version "
-			<< build_id() << "(" << build_type() << ")" << ".\n"
+			<< build_id() << '(' << build_type() << ')' << ".\n"
 			<< "and remember to specify your operating system.\n\n" << flush;
 		delete g_app;
 
@@ -72,7 +72,7 @@ int main(int argc, char * argv[])
 			<< "\nCaught exception (of type '" << typeid(e).name()
 			<< "') in outermost handler!\nThe exception said: " << e.what()
 			<< "\n\nThis should not happen. Please file a bug report on version "
-			<< build_id() << "(" << build_type() << ")" <<".\n"
+			<< build_id() << '(' << build_type() << ')' <<".\n"
 			<< "and remember to specify your operating system.\n\n" << flush;
 		delete g_app;
 

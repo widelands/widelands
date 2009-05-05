@@ -141,7 +141,8 @@ int32_t RenderTarget::get_h() const
  * every pixel as a rectangle. So use it with care
  */
 void RenderTarget::draw_line
-	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, RGBColor color)
+	(int32_t const x1, int32_t const y1, int32_t const x2, int32_t const y2,
+	 RGBColor const color)
 {
 	int32_t dx = x2 - x1;      /* the horizontal distance of the line */
 	int32_t dy = y2 - y1;      /* the vertical distance of the line */
@@ -315,29 +316,29 @@ static inline Sint8 node_brightness
 
 
 #define RENDERMAP_INITIALIZANTONS                                             \
-	viewofs -= m_offset;                                                       \
+   viewofs -= m_offset;                                                       \
                                                                               \
-	Map                   const & map             = egbase.map();              \
-	Widelands::World      const & world           = map.world();               \
-	Overlay_Manager       const & overlay_manager = map.get_overlay_manager(); \
-	uint32_t const                mapwidth        = map.get_width();           \
-	int32_t minfx, minfy;                                                      \
-	int32_t maxfx, maxfy;                                                      \
+   Map                   const & map             = egbase.map();              \
+   Widelands::World      const & world           = map.world();               \
+   Overlay_Manager       const & overlay_manager = map.get_overlay_manager(); \
+   uint32_t const                mapwidth        = map.get_width();           \
+   int32_t minfx, minfy;                                                      \
+   int32_t maxfx, maxfy;                                                      \
                                                                               \
-	/* hack to prevent negative numbers */                                     \
-	minfx = (viewofs.x + (TRIANGLE_WIDTH >> 1)) / TRIANGLE_WIDTH - 1;          \
+   /* hack to prevent negative numbers */                                     \
+   minfx = (viewofs.x + (TRIANGLE_WIDTH >> 1)) / TRIANGLE_WIDTH - 1;          \
                                                                               \
-	minfy = viewofs.y / TRIANGLE_HEIGHT;                                       \
-	maxfx = (viewofs.x + (TRIANGLE_WIDTH >> 1) + m_rect.w) / TRIANGLE_WIDTH;   \
-	maxfy = (viewofs.y + m_rect.h) / TRIANGLE_HEIGHT;                          \
-	maxfx +=  1; /* because of big buildings */                                \
-	maxfy += 10; /* because of heights */                                      \
+   minfy = viewofs.y / TRIANGLE_HEIGHT;                                       \
+   maxfx = (viewofs.x + (TRIANGLE_WIDTH >> 1) + m_rect.w) / TRIANGLE_WIDTH;   \
+   maxfy = (viewofs.y + m_rect.h) / TRIANGLE_HEIGHT;                          \
+   maxfx +=  1; /* because of big buildings */                                \
+   maxfy += 10; /* because of heights */                                      \
                                                                               \
-	int32_t dx              = maxfx - minfx + 1;                               \
-	int32_t dy              = maxfy - minfy + 1;                               \
-	int32_t linear_fy       = minfy;                                           \
-	bool row_is_forward = linear_fy & 1;                                       \
-	int32_t b_posy          = linear_fy * TRIANGLE_HEIGHT - viewofs.y;         \
+   int32_t dx              = maxfx - minfx + 1;                               \
+   int32_t dy              = maxfy - minfy + 1;                               \
+   int32_t linear_fy       = minfy;                                           \
+   bool row_is_forward     = linear_fy & 1;                                   \
+   int32_t b_posy          = linear_fy * TRIANGLE_HEIGHT - viewofs.y;         \
 
 
 /**

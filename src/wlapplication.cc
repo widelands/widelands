@@ -836,21 +836,21 @@ void WLApplication::parse_commandline(const int argc, const char **argv)
 */
 void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 {
-	if (m_commandline.count("help") > 0 || m_commandline.count("version") > 0) {
+	if (m_commandline.count("help") || m_commandline.count("version")) {
 		throw Parameter_error(); //no message on purpose
 	}
 
-	if (m_commandline.count("nosound") > 0) {
+	if (m_commandline.count("nosound")) {
 		g_sound_handler.m_nosound = true;
 		m_commandline.erase("nosound");
 	}
 
-	if (m_commandline.count("nozip") > 0) {
+	if (m_commandline.count("nozip")) {
 		g_options.pull_section("global").create_val("nozip", "true");
 		m_commandline.erase("nozip");
 	}
 
-	if (m_commandline.count("double") > 0) {
+	if (m_commandline.count("double")) {
 #ifdef DEBUG
 #ifndef WIN32
 		init_double_game();
@@ -864,7 +864,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_commandline.erase("double");
 	}
 
-	if (m_commandline.count("editor") > 0) {
+	if (m_commandline.count("editor")) {
 		m_editor_filename = m_commandline["editor"];
 		if (m_editor_filename.size() and *m_editor_filename.rbegin() == '/')
 			m_editor_filename.erase(m_editor_filename.size() - 1);
@@ -872,7 +872,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_commandline.erase("editor");
 	}
 
-	if (m_commandline.count("loadgame") > 0) {
+	if (m_commandline.count("loadgame")) {
 		m_loadgame_filename = m_commandline["loadgame"];
 		if (m_loadgame_filename.empty())
 			throw wexception("empty value of command line parameter --loadgame");
@@ -881,7 +881,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_commandline.erase("loadgame");
 	}
 
-	if (m_commandline.count("scenario") > 0) {
+	if (m_commandline.count("scenario")) {
 		m_scenario_filename = m_commandline["scenario"];
 		if (m_scenario_filename.empty())
 			throw wexception("empty value of command line parameter --scenario");
@@ -892,21 +892,20 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 
 	//Note: it should be possible to record and playback at the same time,
 	//but why would you?
-	if (m_commandline.count("record") > 0) {
+	if (m_commandline.count("record")) {
 		if (m_commandline["record"].empty())
 			throw Parameter_error("ERROR: --record needs a filename!");
 
 		try {
 			journal->start_recording(m_commandline["record"]);
-		}
-		catch (Journalfile_error e) {
+		} catch (Journalfile_error e) {
 			cout << "Journal file error: " << e.what() << endl;
 		}
 
 		m_commandline.erase("record");
 	}
 
-	if (m_commandline.count("playback") > 0) {
+	if (m_commandline.count("playback")) {
 		if (m_commandline["playback"].empty())
 			throw Parameter_error("ERROR: --playback needs a filename!");
 
@@ -948,8 +947,8 @@ void WLApplication::show_usage()
 {
 	i18n::Textdomain textdomain("widelands"); //  uses system standard language
 
-	cout << _("This is Widelands-") << build_id() << "(" << build_type() << ")"
-		<< "\n\n";
+	cout << _("This is Widelands-") << build_id() << '(' << build_type();
+	cout << ")\n\n";
 	cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n\n");
 	cout << _("Options:\n\n");
 	cout
@@ -1376,7 +1375,9 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			++oldplayers;
 		}
 	}
-	virtual void setPlayerState(uint8_t number, PlayerSettings::State state) {
+	virtual void setPlayerState
+		(uint8_t const number, PlayerSettings::State state)
+	{
 		if (number == s.playernum || number >= s.players.size())
 			return;
 
@@ -1391,7 +1392,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 
 		s.players[number].ai = ai;
 	}
-	virtual void nextPlayerState(uint8_t number) {
+	virtual void nextPlayerState(uint8_t const number) {
 		if (number == s.playernum || number >= s.players.size())
 			return;
 
@@ -1413,7 +1414,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].state = PlayerSettings::stateComputer;
 	}
 
-	virtual void setPlayerTribe(uint8_t number, std::string const & tribe) {
+	virtual void setPlayerTribe(uint8_t const number, std::string const & tribe)
+	{
 		if (number >= s.players.size())
 			return;
 
@@ -1448,14 +1450,14 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].name = name;
 	}
 
-	virtual void setPlayer(uint8_t number, PlayerSettings ps) {
+	virtual void setPlayer(uint8_t const number, PlayerSettings const ps) {
 		if (number >= s.players.size())
 			return;
 
 		s.players[number] = ps;
 	}
 
-	virtual void setPlayerNumber(int32_t number) {
+	virtual void setPlayerNumber(int32_t const number) {
 		if (number >= static_cast<int32_t>(s.players.size()))
 			return;
 

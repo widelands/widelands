@@ -461,7 +461,8 @@ void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t pos)
 		if (!settings.multiplayer)
 			throw wexception("Player position = -1 in non multiplayer game");
 		PlayerSettings position = settings.players[pos];
-		if ((pos < m_nr_players) & (position.state == PlayerSettings::stateOpen)) {
+		if ((pos < m_nr_players) & (position.state == PlayerSettings::stateOpen))
+		{
 			m_settings->setPlayerState(pos, PlayerSettings::stateHuman);
 			m_settings->setPlayerNumber(pos);
 			m_settings->setPlayerName(pos, settings.users[settings.usernum].name);
@@ -533,7 +534,8 @@ void Fullscreen_Menu_LaunchGame::enable_all_pdgs()
  * Check to avoid segfaults, if the player changes a map with less player
  * positions while being on a later invalid position.
  */
-void Fullscreen_Menu_LaunchGame::safe_place_for_host(uint8_t newplayernumber)
+void Fullscreen_Menu_LaunchGame::safe_place_for_host
+	(uint8_t const newplayernumber)
 {
 	GameSettings settings = m_settings->settings();
 

@@ -133,7 +133,7 @@ struct InputCallback {
  * \todo What happens if a playback is canceled? Does the game continue or quit?
  * \todo Can recording be canceled?
  * \todo Should we allow to trigger recording ingame, starting with a snapshot
- * savegame? Preferrably, the log would be stored inside the savegame. A new
+ * savegame? Preferably, the log would be stored inside the savegame. A new
  * user interface for starting / stopping playback may bue useful with this.
  * \todo How about a "pause" button during playback to examine the current game
  * state?

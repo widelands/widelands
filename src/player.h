@@ -106,12 +106,13 @@ struct Player :
 			military_influence(0),
 			vision            (0)
 		{
-			//  Must be initialized because the rendering code is accessing it even
-			//  for triangles that the player does not see (it is the darkening
-			//  that actually hides the ground from the player). This is important
-			//  for worlds where the number of terrain types is not maximal (16),
-			//  so that an uninitialized terrain index could cause a not found
-			//  error in Descr_Maintainer<Terrain_Descr>::get(const Terrain_Index).
+			//  Must be initialized because the rendering code is accessing it
+			//  even for triangles that the player does not see (it is the
+			//  darkening that actually hides the ground from the user). This is
+			//  important for worlds where the number of terrain types is not
+			//  maximal (16), so that an uninitialized terrain index could cause a
+			//  not found error in
+			//  Descr_Maintainer<Terrain_Descr>::get(Terrain_Index).
 			terrains.d = terrains.r = 0;
 
 			time_triangle_last_surveyed[0] = Never();
@@ -201,30 +202,27 @@ struct Player :
 		 */
 		Widelands::Field::Resource_Amounts resource_amounts;
 
-		/**
-		 * Whether there is a road between this node and the node to the east,
-		 * as far as this player knows.
-		 * Only valid when this player has seen this node or the node to the east.
-		 */
+		/// Whether there is a road between this node and the node to the
+		/// east, as far as this player knows.
+		/// Only valid when this player has seen this node or the node to the
+		/// east.
 		uint8_t road_e() const throw () {return roads & Road_Mask;}
 
-		/**
-		 * Whether there is a road between this node and the node to the
-		 * southeast, as far as this player knows.
-		 * Only valid when this player has seen this node or the node to the
-		 * southeast.
-		 */
-		uint8_t road_se() const throw ()
-		{return roads >> Road_SouthEast & Road_Mask;}
+		/// Whether there is a road between this node and the node to the
+		/// southeast, as far as this player knows.
+		/// Only valid when this player has seen this node or the node to the
+		/// southeast.
+		uint8_t road_se() const throw () {
+			return roads >> Road_SouthEast & Road_Mask;
+		}
 
-		/**
-		 * Whether there is a road between this node and the node to the
-		 * southwest, as far as this player knows.
-		 * Only valid when this player has seen this node or the node to the
-		 * southwest.
-		 */
-		uint8_t road_sw() const throw ()
-		{return roads >> Road_SouthWest & Road_Mask;}
+		/// Whether there is a road between this node and the node to the
+		/// southwest, as far as this player knows.
+		/// Only valid when this player has seen this node or the node to the
+		/// southwest.
+		uint8_t road_sw() const throw () {
+			return roads >> Road_SouthWest & Road_Mask;
+		}
 
 		/**
 		 * The last time when this player surveyed the respective triangle
@@ -333,7 +331,8 @@ struct Player :
 		Field & field = m_fields[i];
 		assert(1 < field.vision);
 		--field.vision;
-		if (field.vision == 1) field.time_node_last_unseen = gametime;
+		if (field.vision == 1)
+			field.time_node_last_unseen = gametime;
 		assert(1 <= field.vision);
 	}
 
@@ -419,8 +418,8 @@ struct Player :
 	uint32_t msites_defeated    () const {return m_msites_defeated;}
 	uint32_t civil_blds_lost    () const {return m_civil_blds_lost;}
 	uint32_t civil_blds_defeated() const {return m_civil_blds_defeated;}
-	void count_casualty() {++m_casualties;}
-	void count_kill    () {++m_kills;}
+	void count_casualty          () {++m_casualties;}
+	void count_kill              () {++m_kills;}
 	void count_msite_lost        () {++m_msites_lost;}
 	void count_msite_defeated    () {++m_msites_defeated;}
 	void count_civil_bld_lost    () {++m_civil_blds_lost;}
@@ -447,8 +446,8 @@ struct Player :
 	const AreaWatchers & areawatchers() const throw () {return m_areawatchers;}
 
 	// Statistics
-	Building_Stats_vector const &
-		get_building_statistics (Building_Index const i) const
+	Building_Stats_vector const & get_building_statistics
+		(Building_Index const i) const
 	{
 		return m_building_stats[i];
 	}

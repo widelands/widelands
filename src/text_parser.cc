@@ -230,7 +230,7 @@ bool Text_Parser::extract_format_block
 }
 
 void Text_Parser::parse_richtexttext_attributes
-		(std::string format, Richtext_Block *element)
+	(std::string format, Richtext_Block * const element)
 {
 	if (format.empty())
 		return;
@@ -261,7 +261,7 @@ void Text_Parser::parse_richtexttext_attributes
 }
 
 void Text_Parser::parse_text_attributes
-	(std::string format, Text_Block *element)
+	(std::string format, Text_Block * const element)
 {
 	if (format.empty())
 		return;
@@ -282,8 +282,7 @@ void Text_Parser::parse_text_attributes
 			format.erase(0, val_end + 1);
 			if (key == "font-size") {
 				element->set_font_size(atoi(val.c_str()));
-			}
-			else if (key == "font-face")
+			} else if (key == "font-face")
 				element->set_font_face(val + ".ttf");
 			else if (key == "line-spacing")
 				element->set_line_spacing(atoi(val.c_str()));
@@ -298,8 +297,7 @@ void Text_Parser::parse_text_attributes
 				long int const green = strtol(g.c_str(), &ptr, 0);
 				long int const blue  = strtol(b.c_str(), &ptr, 0);
 				element->set_font_color(RGBColor(red, green, blue));
-			}
-			else if (key == "font-weight")
+			} else if (key == "font-weight")
 				element->set_font_weight(val);
 			else if (key == "font-style")
 				element->set_font_style(val);
@@ -309,7 +307,7 @@ void Text_Parser::parse_text_attributes
 	}
 }
 
-Align Text_Parser::set_align(std::string align) {
+Align Text_Parser::set_align(std::string const & align) {
 	return
 		align == "right"  ? Align_Right   :
 		align == "center" ? Align_HCenter :

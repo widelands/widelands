@@ -65,8 +65,6 @@ class ConstructionSite : public Building {
 public:
 	ConstructionSite(const ConstructionSite_Descr & descr);
 
-	virtual int32_t get_building_type() const throw ()
-	{return Building::CONSTRUCTIONSITE;}
 	char const * type_name() const throw () {return "constructionsite";}
 	virtual int32_t get_size() const throw ();
 	virtual uint32_t get_playercaps() const throw ();

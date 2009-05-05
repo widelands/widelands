@@ -31,18 +31,19 @@ struct Editor_Place_Immovable_Tool;
 namespace UI {struct Checkbox;};
 
 struct Editor_Tool_Place_Immovable_Options_Menu :
-	public Editor_Tool_Options_Menu {
-		Editor_Tool_Place_Immovable_Options_Menu
-			(Editor_Interactive          &,
-			 Editor_Place_Immovable_Tool &,
-			 UI::UniqueWindow::Registry  &);
-		virtual ~Editor_Tool_Place_Immovable_Options_Menu();
+	public Editor_Tool_Options_Menu
+{
+	Editor_Tool_Place_Immovable_Options_Menu
+		(Editor_Interactive          &,
+		 Editor_Place_Immovable_Tool &,
+		 UI::UniqueWindow::Registry  &);
+	virtual ~Editor_Tool_Place_Immovable_Options_Menu();
 
-		private:
-		std::vector<UI::Checkbox *> m_checkboxes;
-		UI::Tab_Panel m_tabpanel;
-		Editor_Place_Immovable_Tool & m_pit;
-		void clicked(int32_t, bool);
-	};
+private:
+	std::vector<UI::Checkbox *> m_checkboxes;
+	UI::Tab_Panel m_tabpanel;
+	Editor_Place_Immovable_Tool & m_pit;
+	void clicked(int32_t, bool);
+};
 
 #endif

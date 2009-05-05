@@ -108,13 +108,13 @@ bool Message_Box_Event_Message_Box::handle_mousepress
 		play_click();
 		clicked(0);
 		return true;
-	}
-	return false;
+	} else
+		return false;
 }
 
 
 bool Message_Box_Event_Message_Box::handle_mouserelease
-	(const Uint8, int32_t, int32_t)
+	(Uint8, int32_t, int32_t)
 {
 	return false;
 }
@@ -122,7 +122,7 @@ bool Message_Box_Event_Message_Box::handle_mouserelease
 /**
  * Clicked
  */
-void Message_Box_Event_Message_Box::clicked(int32_t i) {
+void Message_Box_Event_Message_Box::clicked(int32_t const i) {
 	if (i == -1) { // we should end this dialog
 		if (m_is_modal) {
 			end_modal(0);

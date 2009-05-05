@@ -91,7 +91,8 @@ m_label_descr
 	 m_xres * 7 / 10, m_yres * 103 / 200,
 	 _("Descr:"),
 	 Align_Right),
-m_descr (this, m_xres * 71 / 100, m_yres * 13 / 25, m_xres / 4, m_yres * 63 / 200, std::string()),
+m_descr
+	(this, m_xres * 71 / 100, m_yres * 13 / 25, m_xres / 4, m_yres * 63 / 200),
 
 // Buttons
 	m_back
@@ -110,7 +111,10 @@ m_descr (this, m_xres * 71 / 100, m_yres * 13 / 25, m_xres / 4, m_yres * 63 / 20
 		 m_fn, m_fs),
 
 // Map list
-m_list(this, m_xres * 47 / 2500, m_yres * 3417 / 10000, m_xres * 711 / 1250, m_yres * 6083 / 10000),
+	m_list
+		(this,
+		 m_xres *  47 / 2500, m_yres * 3417 / 10000,
+		 m_xres * 711 / 1250, m_yres * 6083 / 10000),
 
 // Runtime variables
 m_curdir("maps"), m_basedir("maps")
@@ -131,7 +135,8 @@ m_curdir("maps"), m_basedir("maps")
 	m_list            .set_font(m_fn, m_fs);
 
 	m_list.selected.set(this, &Fullscreen_Menu_Editor_MapSelect::map_selected);
-	m_list.double_clicked.set(this, &Fullscreen_Menu_Editor_MapSelect::double_clicked);
+	m_list.double_clicked.set
+		(this, &Fullscreen_Menu_Editor_MapSelect::double_clicked);
 
 	fill_list();
 }
@@ -174,7 +179,8 @@ void Fullscreen_Menu_Editor_MapSelect::map_selected(uint32_t)
 	if (!g_fs->IsDirectory(name) || WL_Map_Loader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			Widelands::Map_Loader * const m_ml = map.get_correct_loader(name.c_str());
+			Widelands::Map_Loader * const m_ml =
+				map.get_correct_loader(name.c_str());
 			m_ml->preload_map(true); //  This has worked before, no problem.
 			delete m_ml;
 		}

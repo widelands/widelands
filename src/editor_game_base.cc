@@ -372,11 +372,10 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 			(not
 			 m[i.current->coords].is_interior(imm.owner().get_player_number()))
 			if
-				(std::find
-				 	(burnlist.begin(),
-				 	 burnlist.end(),
-				 	 &imm) == burnlist.end())
-					burnlist.push_back(&imm);
+				(std::find(burnlist.begin(), burnlist.end(), &imm)
+				 ==
+				 burnlist.end())
+				burnlist.push_back(&imm);
 	}
 
 	// Fix all immovables

@@ -1,1 +1,2 @@
-misused_tab.cc:1: indentation is only allowed at line begin
+misused_tab.cc:2: 'HT' in macro definition is not allowed
+misused_tab.cc:3: indentation is only allowed at line begin

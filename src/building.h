@@ -138,19 +138,10 @@ public:
 	};
 
 public:
-	enum Type {
-		PRODUCTIONSITE = 0,
-		CONSTRUCTIONSITE,
-		MILITARYSITE,
-		WAREHOUSE,
-		TRAININGSITE
-	};
-
 	Building(const Building_Descr &);
 	virtual ~Building();
 
 	Tribe_Descr const & tribe() const throw () {return descr().tribe();}
-	virtual int32_t get_building_type() const throw () = 0;
 
 	virtual int32_t  get_type    () const throw ();
 	char const * type_name() const throw () {return "building";}

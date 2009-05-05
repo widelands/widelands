@@ -49,16 +49,8 @@ bool CheckStepRoadAI::allowed
 	uint8_t endcaps = player->get_buildcaps(end);
 
 	// Calculate cost and passability
-	if (!(endcaps & movecaps)) {
+	if (!(endcaps & movecaps))
 		return false;
-		//uint8_t startcaps = player->get_buildcaps(start);
-
-		//if
-		// (!((endcaps & MOVECAPS_WALK)
-		//    &&
-		//    (startcaps & movecaps & MOVECAPS_SWIM)))
-		//return false;
-	}
 
 	// Check for blocking immovables
 	if (BaseImmovable const * const imm = map.get_immovable(end))

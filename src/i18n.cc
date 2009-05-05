@@ -113,7 +113,7 @@ void set_locale(std::string name) {
 	// If this doesn't solve the problem on your linux-distribution, here comes
 	// a quote from
 	// http://www.gnu.org/software/automake/manual/
-	// 	gettext/Locale-Environment-Variables.html
+	//  gettext/Locale-Environment-Variables.html
 	//
 	//   Some systems, unfortunately, set LC_ALL in /etc/profile or in similar
 	//   initialization files. As a user, you therefore have to unset this

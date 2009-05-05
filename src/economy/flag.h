@@ -98,7 +98,7 @@ public:
 			m_roads[3] or m_roads[4] or m_roads[5];
 	}
 	Road * get_road(uint8_t const dir) const {return m_roads[dir - 1];}
-	void attach_road(int32_t dir, Road *road);
+	void attach_road(int32_t dir, Road *);
 	void detach_road(int32_t dir);
 
 	Road * get_road(Flag *);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2004, 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,8 +34,9 @@ namespace Widelands {
 template <typename Area_type = Area<> > struct MapHollowRegion {
 	MapHollowRegion(const Map & map, const HollowArea<Area_type> hollow_area);
 
-	const typename Area_type::Coords_type & location() const throw ()
-	{return m_hollow_area;}
+	typename Area_type::Coords_type const & location() const {
+		return m_hollow_area;
+	}
 
 	/**
 	 * Moves on to the next location, traversing the region by row.

@@ -40,12 +40,13 @@ inline Editor_Interactive & Editor_Event_Menu_Edit_TriggerConditional::eia() {
 
 Editor_Event_Menu_Edit_TriggerConditional::
 Editor_Event_Menu_Edit_TriggerConditional
-	(Editor_Interactive & parent,
-	 TriggerConditional * const cond,
-	 Widelands::EventChain * chain) :
-		UI::Window   (&parent, 0, 0, 465, 340, _("Edit Trigger Conditional")),
-		m_given_cond (cond),
-		m_event_chain(chain)
+	(Editor_Interactive    & parent,
+	 TriggerConditional    * const cond,
+	 Widelands::EventChain * const chain)
+	:
+	UI::Window   (&parent, 0, 0, 465, 340, _("Edit Trigger Conditional")),
+	m_given_cond (cond),
+	m_event_chain(chain)
 {
 	int32_t const offsx    =   5;
 	int32_t const offsy    =  25;

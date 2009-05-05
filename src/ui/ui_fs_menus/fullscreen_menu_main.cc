@@ -101,7 +101,7 @@ exit
 version
 	(this,
 	 m_xres, m_yres,
-	 std::string(_("Version ")) + build_id() + "(" + build_type() + ")", Align_BottomRight),
+	 _("Version ") + build_id() + '(' + build_type() + ')', Align_BottomRight),
 copyright
 	(this,
 	 0, m_yres,

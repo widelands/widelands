@@ -115,8 +115,6 @@ public:
 	void prefill
 		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
 
-	virtual int32_t get_building_type() const throw ()
-	{return Building::TRAININGSITE;}
 	char const * type_name() const throw () {return "trainingsite";}
 	virtual std::string get_statistics_string();
 

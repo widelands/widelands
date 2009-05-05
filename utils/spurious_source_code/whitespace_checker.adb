@@ -33,7 +33,7 @@
 --  for example KDevelop and go to the found errors in the source code with a
 --  keyboard shortcut. Just open the project settings and set the build
 --  command to something like:
---    for i in $(find -name *.cc); do leading_whitespace_checker $i; done
+--    for i in $(find -name *.cc); do whitespace_checker $i; done
 
 with Ada.Characters.Latin_1; use Ada.Characters.Latin_1;
 with Ada.Command_Line;       use Ada.Command_Line;
@@ -142,9 +142,6 @@ procedure Whitespace_Checker is
          Raise_Exception (Giving_Up'Identity, "too many lines");
       end if;
       Current_Line_Number := Current_Line_Number + 1;
---        Put_Line
---          ("DEBUG: moving to line" & Current_Line_Number'Img & " with Previous_Token = " &
---           Previous_Token'Img);
    end Next_Line;
 
    procedure Put_Error
@@ -191,10 +188,15 @@ procedure Whitespace_Checker is
    procedure Read_Macro is begin
       loop
          Next_Character;
-         if Read_Characters (0) = LF then
-            Next_Line;
-            exit when Read_Characters (1) /= '\';
-         end if;
+         case Read_Characters (0) is
+            when LF     =>
+               Next_Line;
+               exit when Read_Characters (1) /= '\';
+            when HT     =>
+               Put_Error ("'HT' in macro definition is not allowed");
+            when others =>
+               null;
+         end case;
       end loop;
    end Read_Macro;
 
@@ -476,15 +478,18 @@ procedure Whitespace_Checker is
                case Read_Characters (1) is
                   when '/' => --  /* comment */
                      Read_Multiline_Comment;
-                  when HT | ' ' | '{' | '(' | '.' | ':' | '>' | '*' | '&' | '!' =>
+                  when
+                    HT | ' ' | '{' | '(' | '.' | ':' | '>' | '*' | '&' | '!' =>
                      null;
-                  when  '+' | '-'                                               =>
+                  when
+                    '+' | '-'                                                =>
                      if Read_Characters (2) /= Read_Characters (1) then
                         Put_Error
                           ('"' & Read_Characters (2) & Read_Characters (1) &
                            "*"" is not allowed");
                      end if;
-                  when 'r'    => --  allow "r*" for "operator*"
+                  when --  allow "r*" for "operator*"
+                    'r'                                                      =>
                      if
                         Read_Characters (2) /= 'o'        or else
                         Read_Characters (3) /= 't'        or else
@@ -500,7 +505,8 @@ procedure Whitespace_Checker is
                      then
                         Put_Error ("""r*"" is not allowed");
                      end if;
-                  when others                                                   =>
+                  when
+                    others                                                   =>
                      Put_Error
                        ('"' & Read_Characters (1) & "*"" is not allowed");
                end case;
@@ -613,10 +619,11 @@ procedure Whitespace_Checker is
                end case;
             when '!'       =>
                case Read_Characters (1) is
-                  when
-                    HT  | ' ' | '(' | '!' => --  allow "(!" for "(!c)" (! used as ¬) and "!!"
+                  when --  allow "(!" for "(!c)" (! used as ¬) and "!!"
+                    HT  | ' ' | '(' | '!' =>
                      null;
-                  when 'r'                => --  allow "r!" for "operator!="
+                  when --  allow "r!" for "operator!="
+                    'r'                   =>
                      if
                         Read_Characters (2) /= 'o'        or else
                         Read_Characters (3) /= 't'        or else
@@ -632,7 +639,8 @@ procedure Whitespace_Checker is
                      then
                         Put_Error ("""r!"" is not allowed");
                      end if;
-                  when others       =>
+                  when
+                    others                =>
                      Put_Error
                        ('"' & Read_Characters (1) & "!"" is not allowed");
                end case;

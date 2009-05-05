@@ -84,9 +84,6 @@ struct ProductionSite_Descr : public Building_Descr {
 	typedef std::map<std::string, ProductionProgram *> Programs;
 	Programs const & programs() const throw () {return m_programs;}
 
-	virtual bool is_only_production_site() const throw () {return true;}
-
-
 private:
 	Ware_Types m_working_positions;
 	Ware_Types m_inputs;
@@ -139,8 +136,6 @@ public:
 	void prefill
 		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
 
-	virtual int32_t get_building_type() const throw ()
-	{return Building::PRODUCTIONSITE;}
 	char const * type_name() const throw () {return "productionsite";}
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);

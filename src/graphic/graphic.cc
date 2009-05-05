@@ -94,9 +94,9 @@ Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen)
 		(sdlsurface->format->BytesPerPixel == 2 ||
 		 sdlsurface->format->BytesPerPixel == 4);
 
-	std::string caption = std::string("Widelands ") + build_id();
-	caption += "(" + build_type() + ")";
-	SDL_WM_SetCaption(caption.c_str(), "Widelands");
+	SDL_WM_SetCaption
+		(("Widelands " + build_id() += '(' + build_type() + ')').c_str(),
+		 "Widelands");
 
 	m_screen.set_sdl_surface(*sdlsurface);
 

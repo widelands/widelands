@@ -54,13 +54,14 @@ UI::UniqueWindow(&parent, &registry, 350, 400, _("Tool Menu"))
 
 	int32_t const num_tools = 6;
 #define ADD_BUTTON(pic, tooltip)                                              \
-	m_radioselect.add_button                                                   \
-		(this,                                                                  \
-		 pos,                                                                   \
-		 g_gr->get_picture                                                      \
-		 	(PicMod_Game, "pics/editor_menu_tool_" pic ".png"),                  \
-		 tooltip);                                                              \
-	pos.x += width + spacing;
+   m_radioselect.add_button                                                   \
+      (this,                                                                  \
+       pos,                                                                   \
+       g_gr->get_picture                                                      \
+          (PicMod_Game, "pics/editor_menu_tool_" pic ".png"),                 \
+       tooltip);                                                              \
+   pos.x += width + spacing;                                                  \
+
 	ADD_BUTTON("change_height",    _("Change height"));
 	ADD_BUTTON("noise_height",     _("Noise height"));
 	ADD_BUTTON("set_terrain",      _("Terrain"));

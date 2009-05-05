@@ -70,7 +70,8 @@ m_title
 	m_title.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_list .set_font(m_fn, m_fs);
 	m_list .selected.set(this, &Fullscreen_Menu_LoadReplay::replay_selected);
-	m_list .double_clicked.set(this, &Fullscreen_Menu_LoadReplay::double_clicked);
+	m_list .double_clicked.set
+		(this, &Fullscreen_Menu_LoadReplay::double_clicked);
 	fill_list();
 }
 
@@ -105,7 +106,11 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 
 	g_fs->FindFiles(REPLAY_DIR, "*" REPLAY_SUFFIX, &files, 1);
 
-	for (filenameset_t::iterator pname = files.begin(); pname != files.end(); ++pname) {
+	for
+		(filenameset_t::iterator pname = files.begin();
+		 pname != files.end();
+		 ++pname)
+	{
 		std::string savename = *pname + WLGF_SUFFIX;
 
 		if (!g_fs->FileExists(savename))

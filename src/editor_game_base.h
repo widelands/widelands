@@ -205,16 +205,16 @@ private:
 };
 
 #define iterate_players_existing(p, nr_players, egbase, player)               \
-	iterate_player_numbers(p, nr_players)                                      \
-		if (Widelands::Player * const player = (egbase).get_player(p))          \
+   iterate_player_numbers(p, nr_players)                                      \
+      if (Widelands::Player * const player = (egbase).get_player(p))          \
 
-#define iterate_players_existing_novar(p, nr_players, egbase)               \
-	iterate_player_numbers(p, nr_players)                                      \
-		if ((egbase).get_player(p))          \
+#define iterate_players_existing_novar(p, nr_players, egbase)                 \
+   iterate_player_numbers(p, nr_players)                                      \
+      if ((egbase).get_player(p))                                             \
 
 #define iterate_players_existing_const(p, nr_players, egbase, player)         \
-	iterate_player_numbers(p, nr_players)                                      \
-		if (Widelands::Player const * const player = (egbase).get_player(p))    \
+   iterate_player_numbers(p, nr_players)                                      \
+      if (Widelands::Player const * const player = (egbase).get_player(p))    \
 
 extern const uint8_t g_playercolors[MAX_PLAYERS][12];
 

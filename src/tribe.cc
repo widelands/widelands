@@ -90,8 +90,8 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_BEGIN("critter bob")
 				m_bobs.add
 					(new Critter_Bob_Descr
-					 	(_name, _descname, path, prof,
-						 global_s,  this, &m_default_encdata));
+					 	(_name, _descname, path, prof, global_s,  this,
+					 	 &m_default_encdata));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("ware")
@@ -103,56 +103,56 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_BEGIN("carrier")
 				m_workers.add
 					(new Carrier::Descr
-					 	(_name, _descname, path, prof, global_s,
-						 *this, &m_default_encdata));
+					 	(_name, _descname, path, prof, global_s, *this,
+					 	 &m_default_encdata));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("soldier")
 				m_workers.add
 					(new Soldier_Descr
-					 	(_name, _descname, path, prof, global_s,
-						 *this, &m_default_encdata));
+					 	(_name, _descname, path, prof, global_s, *this,
+					 	 &m_default_encdata));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("worker")
 				m_workers.add
 					(new Worker_Descr
-					 	(_name, _descname, path, prof, global_s,
-						 *this, &m_default_encdata));
-			PARSE_MAP_OBJECT_TYPES_END
+					 	(_name, _descname, path, prof, global_s, *this,
+					 	 &m_default_encdata));
+			PARSE_MAP_OBJECT_TYPES_END;
 			PARSE_MAP_OBJECT_TYPES_BEGIN("constructionsite")
 				m_buildings.add
 					(new ConstructionSite_Descr
 					 	(_name, _descname, path, prof, global_s, *this,
-						 &m_default_encdata));
+					 	 &m_default_encdata));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("militarysite")
 				m_buildings.add
 					(new MilitarySite_Descr
 					 	(_name, _descname, path, prof, global_s, *this,
-						 &m_default_encdata));
+					 	 &m_default_encdata));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("trainingsite")
 				m_buildings.add
 					(new TrainingSite_Descr
 					 	(_name, _descname, path, prof, global_s, *this,
-						 &m_default_encdata));
+					 	 &m_default_encdata));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
 				m_buildings.add
 					(new Warehouse_Descr
-					 	(_name, _descname, path, prof, global_s,
-						 *this, &m_default_encdata));
+					 	(_name, _descname, path, prof, global_s, *this,
+					 	 &m_default_encdata));
 			PARSE_MAP_OBJECT_TYPES_END;
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("productionsite")
 				m_buildings.add
 					(new ProductionSite_Descr
-					 	(_name, _descname, path, prof, global_s,
-						 *this, &m_default_encdata));
+					 	(_name, _descname, path, prof, global_s, *this,
+					 	 &m_default_encdata));
 			PARSE_MAP_OBJECT_TYPES_END;
 		}
 
@@ -169,11 +169,13 @@ Tribe_Descr::Tribe_Descr
 				m_default_encdata.parse(*defaults_s);
 
 			m_anim_frontier =
-				g_anim.get(path, root_conf.get_safe_section("frontier"),
-						0, &m_default_encdata);
+				g_anim.get
+					(path, root_conf.get_safe_section("frontier"), 0,
+					 &m_default_encdata);
 			m_anim_flag     =
-				g_anim.get(path, root_conf.get_safe_section("flag"),
-						0, &m_default_encdata);
+				g_anim.get
+					(path, root_conf.get_safe_section("flag"), 0,
+					 &m_default_encdata);
 
 			if
 				(Section * const inits_s =

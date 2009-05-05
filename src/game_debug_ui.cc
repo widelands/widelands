@@ -354,10 +354,10 @@ void FieldDebugWindow::think()
 		case 1: {
 			AnimationData const * data = 0;
 			if (player_field.map_object_descr[Widelands::TCoords<>::None])
-				data = g_anim.get_animation
-					(player_field.map_object_descr
-					 	[Widelands::TCoords<>::None]->main_animation());
-
+				data =
+					g_anim.get_animation
+						(player_field.map_object_descr[Widelands::TCoords<>::None]
+						 ->main_animation());
 			snprintf
 				(buffer, sizeof(buffer),
 				 "  last seen at %u:\n"

@@ -122,7 +122,7 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	char buf[200];
 	uint32_t gametime = gpdp.get_gametime();
 #define SPLIT_GAMETIME(unit, factor) \
-	uint32_t const unit = gametime / factor; gametime %= factor;
+   uint32_t const unit = gametime / factor; gametime %= factor;
 	SPLIT_GAMETIME(days, 86400000);
 	SPLIT_GAMETIME(hours, 3600000);
 	SPLIT_GAMETIME(minutes, 60000);

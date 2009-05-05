@@ -45,11 +45,11 @@ extern const Map_Object_Descr g_road_descr;
 
 #define NODE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION     1
 #define NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE \
-	DIRNAME_TEMPLATE "/node_immovable_kinds_%u"
+   DIRNAME_TEMPLATE "/node_immovable_kinds_%u"
 
 #define NODE_IMMOVABLES_CURRENT_PACKET_VERSION          1
 #define NODE_IMMOVABLES_FILENAME_TEMPLATE \
-	DIRNAME_TEMPLATE "/node_immovables_%u"
+   DIRNAME_TEMPLATE "/node_immovables_%u"
 
 #define ROADS_CURRENT_PACKET_VERSION                    1
 #define ROADS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/roads_%u"
@@ -59,11 +59,11 @@ extern const Map_Object_Descr g_road_descr;
 
 #define TRIANGLE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION 1
 #define TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE \
-	DIRNAME_TEMPLATE "/triangle_immovable_kinds_%u"
+   DIRNAME_TEMPLATE "/triangle_immovable_kinds_%u"
 
 #define TRIANGLE_IMMOVABLES_CURRENT_PACKET_VERSION      1
 #define TRIANGLE_IMMOVABLES_FILENAME_TEMPLATE \
-	DIRNAME_TEMPLATE "/triangle_immovables_%u"
+   DIRNAME_TEMPLATE "/triangle_immovables_%u"
 
 #define OWNERS_CURRENT_PACKET_VERSION                   0
 #define OWNERS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/owners_%u"
@@ -124,25 +124,25 @@ inline static const Map_Object_Descr * read_unseen_immovable
 }
 
 #define OPEN_INPUT_FILE(filetype, file, filename, filename_template, version) \
-	char (filename)[FILENAME_SIZE];                                            \
-	snprintf(filename, sizeof(filename), filename_template, plnum, version);   \
-	filetype file;                                                             \
-	try {(file).Open(fs, filename);}                                           \
-	catch (const File_error &) {                                               \
-		throw wexception                                                        \
-			("Map_Players_View_Data_Packet::Read: player %u:Could not open "     \
-			 "\"%s\" for reading. This file should exist when \"%s\" exists",    \
-			 plnum, filename, unseen_times_filename);                            \
-	}                                                                          \
+   char (filename)[FILENAME_SIZE];                                            \
+   snprintf(filename, sizeof(filename), filename_template, plnum, version);   \
+   filetype file;                                                             \
+   try {(file).Open(fs, filename);}                                           \
+   catch (File_error const &) {                                               \
+      throw wexception                                                        \
+         ("Map_Players_View_Data_Packet::Read: player %u:Could not open "     \
+          "\"%s\" for reading. This file should exist when \"%s\" exists",    \
+          plnum, filename, unseen_times_filename);                            \
+   }                                                                          \
 
 #define CHECK_TRAILING_BYTES(file, filename)                                  \
-	if (not (file).EndOfFile())                                                \
-		throw wexception                                                        \
-			("Map_Players_View_Data_Packet::Read: player %u:"                    \
-			 "Found %lu trailing bytes in \"%s\"",                               \
-			 plnum,                                                              \
-			 static_cast<long unsigned int>((file).GetSize() - (file).GetPos()), \
-			 filename);                                                          \
+   if (not (file).EndOfFile())                                                \
+      throw wexception                                                        \
+         ("Map_Players_View_Data_Packet::Read: player %u:"                    \
+          "Found %lu trailing bytes in \"%s\"",                               \
+          plnum,                                                              \
+          static_cast<long unsigned int>((file).GetSize() - (file).GetPos()), \
+          filename);                                                          \
 
 void Map_Players_View_Data_Packet::Read
 	(FileSystem            &       fs,
@@ -670,8 +670,8 @@ inline static void write_unseen_immovable
 }
 
 #define WRITE(file, filename_template, version)                               \
-	snprintf(filename, sizeof(filename), filename_template, plnum, version);   \
-	(file).Write(fs, filename);                                                \
+   snprintf(filename, sizeof(filename), filename_template, plnum, version);   \
+   (file).Write(fs, filename);                                                \
 
 void Map_Players_View_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)

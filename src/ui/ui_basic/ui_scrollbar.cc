@@ -114,12 +114,9 @@ void Scrollbar::set_singlestepsize(uint32_t singlestepsize)
 /**
  * Change the number of steps a pageup/down will scroll.
 */
-void Scrollbar::set_pagesize(int32_t pagesize)
+void Scrollbar::set_pagesize(int32_t const pagesize)
 {
-	if (pagesize < 1)
-		pagesize = 1;
-
-	m_pagesize = pagesize;
+	m_pagesize = pagesize < 1 ? 1 : pagesize;
 }
 
 
@@ -127,7 +124,7 @@ void Scrollbar::set_pagesize(int32_t pagesize)
  * Change the current scrolling position.
  *
  * \param pos the new position, which will be snapped to the range [0,
- *            get_steps()-1]
+ *            get_steps() - 1]
  */
 void Scrollbar::set_scrollpos(int32_t pos)
 {
@@ -135,7 +132,8 @@ void Scrollbar::set_scrollpos(int32_t pos)
 		pos = 0;
 	if (static_cast<uint32_t>(pos) >= m_steps) pos = m_steps - 1;
 
-	if (m_pos == static_cast<uint32_t>(pos)) return;
+	if (m_pos == static_cast<uint32_t>(pos))
+		return;
 
 	m_pos = pos;
 	moved.call(pos);

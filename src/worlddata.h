@@ -23,19 +23,19 @@
 #include <stdint.h>
 
 #ifndef PACK_VERSION
-#define PACK_VERSION(major, minor) \
-	(static_cast<uint16_t>((static_cast<uint8_t>(major)) << 8) | \
-	 ((static_cast<uint8_t>(minor))))
+#define PACK_VERSION(major, minor)                                            \
+   (static_cast<uint16_t>((static_cast<uint8_t>(major)) << 8) |               \
+    ((static_cast<uint8_t>(minor))))
 #endif
 
 #ifndef VERSION_MAJOR
 #define VERSION_MAJOR(vers) \
-	(static_cast<uint16_t>((static_cast<uint16_t>(vers) >> 8) & 0xff))
+   (static_cast<uint16_t>((static_cast<uint16_t>(vers) >> 8) & 0xff))
 #endif
 
 #ifndef VERSION_MINOR
 #define VERSION_MINOR(vers) \
-	(static_cast<uint16_t>((static_cast<uint16_t>(vers)) & 0xff))
+   (static_cast<uint16_t>((static_cast<uint16_t>(vers)) & 0xff))
 #endif
 
 #define WLWF_VERSION PACK_VERSION(1, 0)

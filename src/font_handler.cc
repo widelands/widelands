@@ -482,9 +482,7 @@ void Font_Handler::draw_richtext
 
 					//Word doesn't fit into current line, or a break was
 					//inserted before
-					if
-						(((cur_line_w + rend_word->w)
-						  > text_width_left) || break_before)
+					if (text_width_left < cur_line_w + rend_word->w || break_before)
 					{
 						SDL_Surface * const rend_line =
 							join_sdl_surfaces

@@ -1004,9 +1004,9 @@ inline void move_r(X_Coordinate const mapwidth, FCoords & f, Map_Index & i) {
 
 
 #define iterate_Map_FCoords(map, extent, fc)                                  \
-	Widelands::FCoords fc(map.get_fcoords(Widelands::Coords(0, 0)));           \
-	for (fc.y = 0; fc.y < extent.h; ++fc.y)                                    \
-		for (fc.x = 0; fc.x < extent.w; ++fc.x, ++fc.field)                     \
+   Widelands::FCoords fc(map.get_fcoords(Widelands::Coords(0, 0)));           \
+   for (fc.y = 0; fc.y < extent.h; ++fc.y)                                    \
+      for (fc.x = 0; fc.x < extent.w; ++fc.x, ++fc.field)                     \
 
 
 std::string g_VariableCallback(std::string, void * data);

@@ -37,8 +37,6 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 
 	virtual Building & create_object() const;
 
-	virtual bool is_only_production_site() const throw () {return false;}
-
 	virtual uint32_t get_conquers() const {return m_conquer_radius;}
 	uint32_t get_max_number_of_soldiers () const throw () {
 		return m_num_soldiers;
@@ -74,8 +72,6 @@ public:
 	void prefill
 		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
 
-	virtual int32_t get_building_type() const throw ()
-	{return Building::MILITARYSITE;}
 	char const * type_name() const throw () {return "militarysite";}
 	virtual std::string get_statistics_string();
 

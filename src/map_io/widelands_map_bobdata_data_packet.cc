@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -199,8 +199,8 @@ void Map_Bobdata_Data_Packet::Read
 								else if
 									(not strcmp(taskname, "moveToBattle") ||
 									 not strcmp(taskname, "moveHome"))
-										// Weird hack to support legacy games
-										task = &Worker::taskBuildingwork;
+									//  Weird hack to support legacy games.
+									task = &Worker::taskBuildingwork;
 								else if (*taskname == '\0')
 									continue; // Skip task
 								else

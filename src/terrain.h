@@ -167,7 +167,7 @@ template<typename T> static void render_edge_lists
 						 	[(tx & (TEXTURE_WIDTH - 1)) |
 						 	 ((ty >> 10) & ((TEXTURE_HEIGHT - 1) << 6))]
 						 |
-						 (( b>> 8) & 0xFF00)];
+						 ((b >> 8) & 0xFF00)];
 
 				b += dbdx;
 				++tx;

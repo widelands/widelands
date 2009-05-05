@@ -391,9 +391,7 @@ void DefaultAI::update_all_not_buildable_fields()
 		}
 
 		// check whether building capabilities have improved
-		if
-			((player->get_buildcaps(unusable_fields.front())
-			  & BUILDCAPS_SIZEMASK) != 0)
+		if (player->get_buildcaps(unusable_fields.front()) & BUILDCAPS_SIZEMASK)
 		{
 
 			buildable_fields.push_back
@@ -404,10 +402,7 @@ void DefaultAI::update_all_not_buildable_fields()
 			continue;
 		}
 
-		if
-			((player->get_buildcaps(unusable_fields.front())
-			  & BUILDCAPS_MINE) != 0)
-		{
+		if (player->get_buildcaps(unusable_fields.front()) & BUILDCAPS_MINE) {
 
 			mineable_fields.push_back
 				(new MineableField(unusable_fields.front()));
@@ -583,7 +578,7 @@ void DefaultAI::update_mineable_field (MineableField & field)
  *
  * The need for a productionsite or a mine is calculated by the need for
  * their produced wares. The need for trunkproducers (like lumberjack's huts),
- * stoneproducers (like quarries) and ressource refreshing buildings (like
+ * stoneproducers (like quarries) and resource refreshing buildings (like
  * forester's houses, gamekeeper's huts or fishbreeder houses) are calculated
  * separately as these buildings should have another priority (on one hand they
  * are important for the basic infrastructure, but there is no need for a lot

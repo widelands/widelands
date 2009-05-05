@@ -24,6 +24,7 @@
 #include "transfer.h"
 #include "ware_instance.h"
 
+#include "constructionsite.h"
 #include "game.h"
 #include "player.h"
 #include "productionsite.h"
@@ -32,6 +33,7 @@
 #include "upcast.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
+#include "warehouse.h"
 #include "worker.h"
 
 
@@ -629,26 +631,16 @@ int32_t Request::get_priority (int32_t cost) const
 	int32_t modifier = DEFAULT_PRIORITY;
 
 	if (upcast(Building const, building, &target())) {
-		//log("Tex: %s %i %i\n", building->get_name(),
-		//building->get_building_type(), building->get_type());
-		//assert(building->get_building_type() != Building::WAREHOUSE);
 		if (upcast(ProductionSite const, productionsite, building))
 			if (productionsite->is_stopped())
 				return -1;
 
 		modifier = building->get_priority(get_type(), get_index());
-		switch (building->get_building_type()) {
-			case Building::CONSTRUCTIONSITE:
-				is_construction_site = true;
-				break;
-			case Building::WAREHOUSE:
-				/* warehouses can determine max idle priority*/
-				MAX_IDLE_PRIORITY = modifier;
-				// assert(false);
-				break;
-			default:
-				break;
-		}
+		if      (dynamic_cast<ConstructionSite const *>(building))
+			is_construction_site = true;
+		else if (dynamic_cast<Warehouse        const *>(building))
+			//  warehouses can determine max idle priority
+			MAX_IDLE_PRIORITY = modifier;
 	}
 
 

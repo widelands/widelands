@@ -132,7 +132,8 @@ void Editor_Tool_Place_Bob_Options_Menu::clicked
 		//  disable all checkboxes
 		//  TODO The uint32_t cast is ugly!
 		for
-			(uint32_t i = 0; i < m_checkboxes.size();
+			(uint32_t i = 0;
+			 i < m_checkboxes.size();
 			 ++i, i += i == static_cast<uint32_t>(n))
 			{
 				m_checkboxes[i]->changedtoid.set

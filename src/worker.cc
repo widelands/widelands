@@ -212,8 +212,9 @@ bool Worker::run_breed(Game & game, State & state, Action const & action)
 		(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
 	do {
 		uint8_t fres  = mr.location().field->get_resources();
-		uint32_t amount = mr.location().field->get_starting_res_amount() -
-			mr.location().field->get_resources_amount();
+		uint32_t amount =
+			mr.location().field->get_starting_res_amount() -
+			mr.location().field->get_resources_amount   ();
 
 		// In the future, we might want to support amount = 0 for
 		// fields that can produce an infinite amount of resources.
@@ -511,10 +512,12 @@ bool Worker::run_findspace(Game & game, State & state, Action const & action)
 	functor.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
 	if (action.sparam1.size()) {
 		if (action.iparam4)
-			functor.add(FindNodeResourceBreedable
-					(w->get_resource(action.sparam1.c_str())));
+			functor.add
+				(FindNodeResourceBreedable
+				 	(w->get_resource(action.sparam1.c_str())));
 		else
-			functor.add(FindNodeResource(w->get_resource(action.sparam1.c_str())));
+			functor.add
+				(FindNodeResource(w->get_resource(action.sparam1.c_str())));
 	}
 
 	if (action.iparam3)

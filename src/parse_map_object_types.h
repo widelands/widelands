@@ -18,26 +18,26 @@
  */
 
 #define PARSE_MAP_OBJECT_TYPES_BEGIN(kind)                                    \
-	if (Section * const section = root_conf.get_section(kind " types")) {      \
-		while (Section::Value const * const v = section->get_next_val()) {      \
-			char const * const     _name = v->get_name  ();                      \
-			char const * const _descname = v->get_string();                      \
-			if (names.count(_name))                                              \
-				throw wexception                                                  \
-					("object name \"%s\" is already used", _name);                 \
-			names.insert(_name);                                                 \
-			path += _name;                                                       \
-			path += "/conf";                                                     \
-			try {                                                                \
-				Profile prof(path.c_str(), "global");                             \
-				path.resize(path.size() - strlen("conf"));                        \
-				Section & global_s = prof.get_safe_section("global");             \
+   if (Section * const section = root_conf.get_section(kind " types")) {      \
+      while (Section::Value const * const v = section->get_next_val()) {      \
+         char const * const     _name = v->get_name  ();                      \
+         char const * const _descname = v->get_string();                      \
+         if (names.count(_name))                                              \
+            throw wexception                                                  \
+               ("object name \"%s\" is already used", _name);                 \
+         names.insert(_name);                                                 \
+         path += _name;                                                       \
+         path += "/conf";                                                     \
+         try {                                                                \
+            Profile prof(path.c_str(), "global");                             \
+            path.resize(path.size() - strlen("conf"));                        \
+            Section & global_s = prof.get_safe_section("global");             \
 
 #define PARSE_MAP_OBJECT_TYPES_END                                            \
-				prof.check_used();                                                \
-			} catch (std::exception const & e) {                                 \
-				throw wexception("%s=\"%s\": %s", _name, _descname, e.what());    \
-			}                                                                    \
-			path.resize(base_path_size);                                         \
-		}                                                                       \
-	}
+            prof.check_used();                                                \
+         } catch (std::exception const & e) {                                 \
+            throw wexception("%s=\"%s\": %s", _name, _descname, e.what());    \
+         }                                                                    \
+         path.resize(base_path_size);                                         \
+      }                                                                       \
+   }
