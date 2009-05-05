@@ -11,7 +11,7 @@ blah
     (jdhsf + 
 """
 
-def check_function(lines):
+def check_function(lines,fn):
     errors = []
     for lineno,line in enumerate(lines):
         line = line.strip()
@@ -19,7 +19,7 @@ def check_function(lines):
         opening_parens = line.count('(')
         closing_parens = line.count(')')
         if opening_parens > closing_parens and line[0] != '(':
-            errors.append( (lineno,
+            errors.append( (fn, lineno,
                 "Parenthesis not closed before end of "
                 "line must be at line begin")
             )

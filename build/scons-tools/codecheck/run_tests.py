@@ -16,7 +16,7 @@ class RuleTest(unittest.TestCase):
         self.tv = val
         
     def runTest(self):
-        self.rv = self.c.check_text(self.preprocessor, "test.cc", self.tv)
+        self.rv = self.c.check_text(self.preprocessor, "testdir/test.h", self.tv)
         self._do_test()
 
 class AllowedTest(RuleTest):

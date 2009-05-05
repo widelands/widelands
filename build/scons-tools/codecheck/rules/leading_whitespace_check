@@ -11,20 +11,20 @@ class EvalMatches( object ):
     def __init__(self):
         pass
                     
-    def _handle_closing_curly_brace(self, cor_lineno, cor_indent, lineno, indent, errors):
+    def _handle_closing_curly_brace(self, cor_lineno, cor_indent, lineno, indent, errors, fn):
         if len(cor_indent) != len(indent):
-            errors.append((cor_lineno,"Invalid indent for {} braces"))
-            errors.append((cor_lineno,"Opening brace has an indent of %i" % len(cor_indent)))
-            errors.append((lineno,"Closing brace has an indent of %i" % len(indent)))
+            errors.append((fn,cor_lineno,"Invalid indent for {} braces"))
+            errors.append((fn,cor_lineno,"Opening brace has an indent of %i" % len(cor_indent)))
+            errors.append((fn,lineno,"Closing brace has an indent of %i" % len(indent)))
     
-    def _handle_closing_round_brace(self, cor_lineno, cor_indent, lineno, indent, errors):
+    def _handle_closing_round_brace(self, cor_lineno, cor_indent, lineno, indent, errors, fn):
         if len(indent) <= len(cor_indent) or \
            not indent.startswith(cor_indent):
             errors.append(
-                (lineno,"Closing parenthesis without matching leading alignment")
+                (fn,lineno,"Closing parenthesis without matching leading alignment")
             )
     
-    def __call__(self, lines):
+    def __call__(self, lines, fn):
         data = ''.join(lines)
         indents = self._regexp.findall(data)
 
@@ -101,7 +101,7 @@ class EvalMatches( object ):
                             
                             closing_brace_handlers[opening](
                                 cor_lineno, cor_indent,
-                                lineno, indent, errors
+                                lineno, indent, errors, fn
                             )
                     except IndexError: # Pop from empty list. Unabalenced paren.
                         pass
@@ -110,11 +110,11 @@ class EvalMatches( object ):
             cindent = len(indent)
 
             if len(line) and cindent < len(required_indent) and not brace_diff['('] and not (line[-1] in ';,*/+-&:|'):
-                errors.append( (lineno, "Indentation is too shallow"))
+                errors.append( (fn,lineno, "Indentation is too shallow"))
 
             # Check indent relative to previous line
             if cindent > len(allowed_indent):
-                errors.append( (lineno, "Indentation is too deep (allowed are %i)" % len(allowed_indent) ) )
+                errors.append( (fn,lineno, "Indentation is too deep (allowed are %i)" % len(allowed_indent) ) )
             else:
                 minlen = min(len(allowed_indent),cindent)
                 for current,allowed in zip(indent[:minlen],allowed_indent[:minlen]):
@@ -122,7 +122,7 @@ class EvalMatches( object ):
                         continue
                     if current == "\t" and allowed == " ":
                         continue
-                    errors.append( (lineno, "Indent is invalid. Check for tab/spaces mixup") )
+                    errors.append( (fn,lineno, "Indent is invalid. Check for tab/spaces mixup") )
                     break
             
             # Empty lines are ignored

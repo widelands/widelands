@@ -1,10 +1,10 @@
 #!/usr/bin/python -tt
 
 class EvalMatches( object ):
-    def __call__(self, lines):
+    def __call__(self, lines,fn):
         errors = []
         if lines[-1][-1] != '\n':
-                errors.append( (len(lines), "Missing newline at eof!"))
+                errors.append( (fn, len(lines), "Missing newline at eof!"))
         return errors
 
 

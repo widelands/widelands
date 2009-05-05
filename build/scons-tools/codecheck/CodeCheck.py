@@ -170,7 +170,7 @@ class CheckingRule(object):
         matches = []
         if self._evaluate_matches is not None:
             # Rule has it's own checking function
-            matches = [ (fn,line,msg) for (line,msg) in self._evaluate_matches(lines) ]
+            matches = self._evaluate_matches(lines,fn)
         else:
             # Regular expression rule
             for lidx,line in enumerate(lines):

@@ -28,7 +28,7 @@ regexp = re.compile(r"""(?x)
 )
 
 error_msg="Missing padding for operator. Needs a space before and after."
-def match_function( lines ):
+def match_function( lines, fn ):
     errors = []
     for lineno,line in enumerate(lines):
         line = line.strip()
@@ -38,7 +38,7 @@ def match_function( lines ):
         lineno += 1 
 
         if regexp.search(line):
-            errors.append( (lineno, error_msg) )
+            errors.append( (fn, lineno, error_msg) )
 
     return errors
 
