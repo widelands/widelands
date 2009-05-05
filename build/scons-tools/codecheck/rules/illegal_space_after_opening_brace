@@ -12,7 +12,7 @@ regexp=r"""(?x)
 (?!/\*)  # No comment 
 (.*)
 
-\{\s # Finally, check for the space
+\{[ ] # Finally, check for the space
 
 
 (?!\s*///?) # No comment after space
@@ -44,6 +44,7 @@ allowed = [
     r'{/ /',
     r'{h',
     r'{"h"',
+    "namespace Widelands {\n",
 ]
 
 

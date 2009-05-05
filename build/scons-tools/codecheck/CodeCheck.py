@@ -16,7 +16,7 @@ from time import time
 import os
 import re
 
-class TokenStripper(object):
+class Preprocessor(object):
     """
     This class knows how to remove certain
     strings from given lines
@@ -31,83 +31,107 @@ $)
     _literal_chars = re.compile(r"'[\\]?.'")
 
     def __init__(self):
-        self.reset()
-
-    def reset(self):
-        self._in_comment = False
-        self._in_macro = False
-        self._comm_cache = {}
-        self._str_cache = {}
+        self._plain_cache = {}
+        self._stripped_comments_and_strings = {}
+        self._stripped_all = {}
     
-    def strip_macros(self,given_line):
-        line = given_line
-        if self._in_macro or (len(given_line) and given_line[0] == '#'):
-            self._in_macro = True
-            line = ""
-
-        if len(given_line) and given_line[-1] != '\\':
-            self._in_macro = False
-
-        return line
-
-    def strip_comments(self,given_line):
-        cached_line = self._comm_cache.get(given_line,None)
-        if cached_line:
-            return cached_line
-        line = given_line
-
-        # Multiline comments
-        start_idx = given_line.find('/*')
-        if not self._in_comment:
-            if start_idx != -1:
-                stop_idx = line.find("*/",start_idx+2) 
-                if stop_idx != -1:
-                    line = line[:start_idx] + line[stop_idx+2:]
-                else:
-                    line = line[:start_idx].strip()
-                    self._in_comment = True
-                
-
-        if self._in_comment:
-            stop_idx = line.find('*/')
-            if stop_idx == -1:
-                line = "" 
-            else:
-                line = line[stop_idx+2:].strip()
-                self._in_comment = False
-
-        # Single line comments
-        idx = line.find('//')
-        if idx != -1:
-            line = line[:idx].strip()
-       
-        self._comm_cache[given_line] = line
-
-        return line
+    def _get_plain(self,fn,data):
+        if fn in self._plain_cache:
+            return self._plain_cache[fn]
         
-    def strip_strings(self,line):
-        r"""
-        Strips all cstring literals from line. String contents
-        are replace by spaces. 
-
-        >>> _do_strip_strings(r'"Hallo"')
-        '"     "'
-        >>> _do_strip_strings(r'blah "string with \"escaped\" text" more blah')
-        'blah "                            " more blah'
-        >>> _do_strip_strings(r'blah "string with \\"upsy" \\"upsyagain"\\text" more blah')
-        'blah "              "upsy"   "upsyagain"      " more blah'
+        lines = data.splitlines(True)
+        self._plain_cache[fn] = lines
+        
+        return lines
+    
+    def _get_stripped_comments_and_strings(self,fn,lines):
         """
-        cached_line = self._str_cache.get(line,None)
-        if cached_line:
-            return cached_line
+        Strips all cstring literals from the text. String contents
+        are replace by spaces. 
+        Removes comments from lines. Comments are completely
+        stripped, including // and /**/ symbols
+        """
+        if fn in self._stripped_comments_and_strings:
+            return self._stripped_comments_and_strings[fn]
 
-        # Strings are replaced with blanks 
-        newline = self._literal_chars.sub(lambda k: "'%s'" % ((len(k.group(0))-2)*" "),line)
-        newline = self._literal_strings.sub(lambda k: '"%s"' % ((len(k.group(0))-2)*" "),newline)
-         
-        self._str_cache[line] = newline
+        in_comment = False
+        new_lines = []
+        for line in lines:
+            # Strings are replaced with blanks 
+            line = self._literal_chars.sub(lambda k: "'%s'" % ((len(k.group(0))-2)*" "),line)
+            line = self._literal_strings.sub(lambda k: '"%s"' % ((len(k.group(0))-2)*" "),line)
 
-        return newline
+            # Strip comments and strings
+            # Multiline comments
+            start_idx = line.find('/*')
+            if not in_comment:
+                if start_idx != -1:
+                    stop_idx = line.find("*/",start_idx+2)
+                    if stop_idx != -1:
+                        line = line[:start_idx] + line[stop_idx+2:]
+                    else:
+                        line = line[:start_idx].strip()
+                        in_comment = True
+                    
+            if in_comment:
+                stop_idx = line.find('*/')
+                if stop_idx == -1:
+                    line = "" 
+                else:
+                    line = line[stop_idx+2:].strip()
+                    in_comment = False
+
+            # Single line comments
+            idx = line.find('//')
+            if idx != -1:
+                line = line[:idx].strip()
+           
+            new_lines.append( line )
+
+        self._stripped_comments_and_strings[fn] = new_lines
+        
+        return new_lines
+    
+    def _get_stripped_macros(self,fn,lines):
+        """
+        Remove macros definitions. Also multiline macros. They are replaced with 
+        empty lines
+        """
+        if fn in self._stripped_all:
+            return self._stripped_all[fn]
+       
+        new_lines = []
+        in_macro = False
+        for given_line in lines:
+            line = given_line
+            if in_macro or (len(given_line) and given_line[0] == '#'):
+                in_macro = True
+                line = ""
+
+            if len(given_line) > 1 and given_line[-2] != '\\':
+                in_macro = False
+
+            new_lines.append(line)
+            
+        self._stripped_all[fn] = new_lines
+
+        return new_lines
+
+    
+    def get_preprocessed_data(self,fn, data, strip_strings_and_comments, strip_macros):
+        """
+        Return an array of lines where data has been stripped off
+        """
+        if not strip_macros and not strip_strings_and_comments:
+            return self._get_plain(fn,data)
+        elif not strip_macros and strip_strings_and_comments:
+            return self._get_stripped_comments_and_strings(fn,self._get_plain(fn,data))
+        elif strip_strings_and_comments and strip_macros:
+            return self._get_stripped_macros(fn,self._get_stripped_comments_and_strings(fn,self._get_plain(fn,data)))
+        
+        # Error checking, we should never be here
+        raise RuntimeError, "strip_macros can't be true when strip_strings_and_comments isn't!"
+
 
 class CheckingRule(object):
     """
@@ -115,17 +139,14 @@ class CheckingRule(object):
     """
     def __init__(self, name, vars ):
         self.name = name
-        self._is_multiline = vars.get('is_multiline',False)
-        if self._is_multiline:
-            self._evaluate_matches = vars['evaluate_matches']
-            self._error_msg = None
-            self._strip_comments = False
-            self._strip_strings = False
-        else:
+        self._strip_comments_and_strings = vars.get('strip_comments_and_strings',False)
+        self._strip_macros = vars.get('strip_macros',False)
+        
+        self._evaluate_matches = vars.get('evaluate_matches',None)
+
+        if self._evaluate_matches == None:
             self._regexp = re.compile(vars["regexp"])
             self._error_msg = vars["error_msg"]
-            self._strip_comments = vars.get('strip_comments',True)
-            self._strip_strings = vars.get('strip_strings',True)
        
         def _to_tuple(a):
             if isinstance(a,str):
@@ -137,37 +158,30 @@ class CheckingRule(object):
         self.forbidden  = _to_tuple(vars["forbidden"])
     
     @property
-    def multiline(self):
-        return self._is_multiline
-
-    @property
     def error_msg(self):
         return self._error_msg
 
-    def check_text(self, token_stripper, data):
-        if not self._is_multiline:
-            raise RuntimeError("I am not a Multiline rule. Call check_line!")
+    def check_text(self, preprocessor, fn, data):
+        """
+        Data must be a complete file data as returned by .read()
         
-        token_stripper = TokenStripper()
+        preprocessor - Tool to preprocess the text (strip it from unwanted tokens)
+        fn           - File name of current file to check
+        data         - File contents
+        """
+        lines = preprocessor.get_preprocessed_data(fn,data,self._strip_comments_and_strings, self._strip_macros)
 
-        # Delegate work to Rule
-        matches = self._evaluate_matches(token_stripper, data)
-        
+        matches = []
+        if self._evaluate_matches is not None:
+            # Delegate work to Rule
+            matches = [ (fn,line,msg) for (line,msg) in self._evaluate_matches(lines) ]
+        else:
+            # Single line rules
+            for lidx,line in enumerate(lines):
+                if self._regexp.search(line):
+                    matches.append( (fn,lidx+1,self.error_msg) )
+   
         return matches
-
-    def check_line(self,token_stripper,line):
-        if self._is_multiline:
-            raise RuntimeError("I am a Multiline rule. Call check_text!")
-        
-        if self._strip_comments:
-            line = token_stripper.strip_comments(line)
-        if self._strip_strings:
-            line = token_stripper.strip_strings(line)
-
-        m = self._regexp.search( line )
-        if m:
-            return True
-        return False
 
 ###################
 # Helper function #
@@ -188,19 +202,15 @@ def _parse_rules():
     rule_files = _find_rule_files()
     
     checkers = []
-    mlcheckers = []
 
     for filename in rule_files:
         variables = {}
         execfile(filename,variables)
         
         rule = CheckingRule(os.path.basename(filename), variables)
-        if rule.multiline:
-            mlcheckers.append(rule)
-        else:
-            checkers.append( rule )
+        checkers.append( rule )
     
-    return checkers, mlcheckers
+    return checkers
 
 ansicolor = {
     "default" : '\033[0m',
@@ -229,7 +239,7 @@ ansicolor = {
 }
 
 class CodeChecker(object):
-    _checkers,_mlcheckers = _parse_rules()
+    _checkers = _parse_rules()
     
     def __init__(self, benchmark = False, color = False):
         """
@@ -279,30 +289,19 @@ class CodeChecker(object):
        
         bm = defaultdict(lambda: 0.)
             
-        token_stripper = TokenStripper()
+        preprocessor = Preprocessor()
 
         # Check line by line (currently)
         data = open(fn).read()
-        for lidx,line in enumerate(data.splitlines(False)):
-            for c in self._checkers:
-                if self._benchmark:
-                    start = time()
-                    if c.check_line(token_stripper,line):
-                        errors.append( (fn,lidx+1,c.error_msg) )
-                    bm[c.name] += time()-start
-                else:
-                    if c.check_line(token_stripper,line):
-                        errors.append( (fn,lidx+1,c.error_msg) )
-
-        for c in self._mlcheckers:
+        for c in self._checkers:
             if self._benchmark:
                 start = time()
-                e =  c.check_text( token_stripper, data )
-                errors.extend( [ (fn,lidx,em) for lidx,em in e ] )
+                e =  c.check_text( preprocessor, fn, data )
+                errors.extend( e )
                 bm[c.name] += time()-start
             else:
-                e =  c.check_text( token_stripper, data )
-                errors.extend( [ (fn,lidx,em) for lidx,em in e ] )
+                e =  c.check_text( preprocessor, fn, data )
+                errors.extend( e )
        
         errors.sort(key=lambda a: a[1])
 

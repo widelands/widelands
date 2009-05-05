@@ -28,10 +28,10 @@ regexp = re.compile(r"""(?x)
 )
 
 error_msg="Missing padding for operator. Needs a space before and after."
-def match_function( token_stripper, data ):
+def match_function( lines ):
     errors = []
-    for lineno,line in enumerate(data.splitlines(True)):
-        line = token_stripper.strip_strings(token_stripper.strip_comments(line)).strip()
+    for lineno,line in enumerate(lines):
+        line = line.strip()
         if not len(line) or line[0] == '#':
             continue
         
@@ -42,9 +42,7 @@ def match_function( token_stripper, data ):
 
     return errors
 
-
-    # ([/^%][^\s&*/^%>])  # Check for space after
-is_multiline = True
+strip_comments_and_strings = True
 
 evaluate_matches = match_function
 

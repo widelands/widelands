@@ -24,9 +24,10 @@ class EvalMatches( object ):
                 (lineno,"Closing parenthesis without matching leading alignment")
             )
     
-    def __call__(self, token_stripper, data):
+    def __call__(self, lines):
+        data = ''.join(lines)
         indents = self._regexp.findall(data)
-        
+
         errors = []
         
         curline = 1
@@ -49,7 +50,6 @@ class EvalMatches( object ):
 
         for lineno,(line,indent) in enumerate(indents):
             lineno += 1 
-            line = token_stripper.strip_strings(token_stripper.strip_comments(line))
             if not len(line):
                 indent= ""
             line = line.strip()
@@ -158,8 +158,7 @@ class EvalMatches( object ):
         return errors
 
 
-is_multiline = True
-error_msg = ""
+strip_comments_and_strings = True
 
 evaluate_matches = EvalMatches()
 

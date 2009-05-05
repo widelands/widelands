@@ -5,21 +5,18 @@
 import unittest
 import new
 
-from CodeCheck import CodeChecker, TokenStripper
+from CodeCheck import CodeChecker, Preprocessor
 
 class RuleTest(unittest.TestCase):
     "Base class for RuleTesting"
     def __init__( self, checker, val ):
         unittest.TestCase.__init__(self)
-        self.ts = TokenStripper()
+        self.preprocessor = Preprocessor()
         self.c = checker
         self.tv = val
         
     def runTest(self):
-        if self.c.multiline:
-            self.rv = self.c.check_text(self.ts, self.tv)
-        else:
-            self.rv = self.c.check_line(self.ts, self.tv)
+        self.rv = self.c.check_text(self.preprocessor, "test.cc", self.tv)
         self._do_test()
 
 class AllowedTest(RuleTest):
@@ -28,12 +25,7 @@ class AllowedTest(RuleTest):
     in this test
     """
     def _do_test(self):
-        if self.c.multiline:
-            condition = (len(self.rv)==0)
-        else:
-            condition = (self.rv == False)
-        
-        self.assertTrue( condition,
+        self.assertTrue( len(self.rv)==0,
             "Rule '%s' failed. Example '%s' should be ok, but wasn't" % (self.c.name,self.tv) )
 class ForbiddenTest(RuleTest):
     """
@@ -41,11 +33,7 @@ class ForbiddenTest(RuleTest):
     in the example code.
     """
     def _do_test(self):
-        if self.c.multiline:
-            condition = (len(self.rv)!=0)
-        else:
-            condition = (self.rv == True)
-        self.assertTrue( self.rv,
+        self.assertTrue( len(self.rv)!=0,
             "Rule '%s' failed. Example '%s' should fail, but passed" % (self.c.name,self.tv) )
         
 def _make_tests_from_checker( c ):
@@ -66,13 +54,11 @@ if __name__ == '__main__':
     suite = unittest.TestSuite()
     
     if len(sys.argv) > 1:
-        for checker in (d._checkers + d._mlcheckers):
+        for checker in (d._checkers):
             if checker.name in sys.argv:
                 suite.addTests( _make_tests_from_checker(checker) )
     else:
         for checker in d._checkers:
-            suite.addTests( _make_tests_from_checker(checker) )
-        for checker in d._mlcheckers:
             suite.addTests( _make_tests_from_checker(checker) )
 
     unittest.TextTestRunner(verbosity=1).run(suite)

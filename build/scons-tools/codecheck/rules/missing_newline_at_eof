@@ -1,18 +1,13 @@
 #!/usr/bin/python -tt
 
 class EvalMatches( object ):
-    def __call__(self, token_stripper, data):
+    def __call__(self, lines):
         errors = []
-        curline = 1
-        lines = data.splitlines(True)
         if lines[-1][-1] != '\n':
                 errors.append( (len(lines), "Missing newline at eof!"))
         return errors
 
 
-is_multiline = True
-strip_comments = False
-strip_strings = False
 evaluate_matches = EvalMatches()
 
 allowed = [

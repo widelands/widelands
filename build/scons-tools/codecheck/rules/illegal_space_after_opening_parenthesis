@@ -5,8 +5,10 @@
 This catches an opening parenthesis followed by a space or end of line.
 """
 
-regexp=r"""^([^/]|/[^/])*/?\(( |$|\n)"""
+regexp=r"""\(( |$|\n)"""
 error_msg="No space or newline allowed after opening parenthesis"
+
+strip_comments_and_strings = True
 
 forbidden = [
     '( h',
@@ -28,6 +30,7 @@ allowed = [
     '//(',
     '// (',
     '// (',
+    '/* Convert \n * string blah ( \n */',
 ]
 
 

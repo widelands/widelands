@@ -9,14 +9,13 @@ a;". Characters after // are ignored.
 
 
 regexp=r"""(?x)
-^( 
-    (?!\#)
-    .*      # Otherwise match everything
-)
-\}  [^ ,;})\"\\] # Match the } and finally the illegal characters
+\}[^ ,;})\"\\\n] # Match the } and finally the illegal characters
 """
 
 error_msg = "Illegal character after closing brace"""
+
+strip_macros = True
+strip_comments_and_strings = True
 
 forbidden = [
     r'struct {T x;}a;',
@@ -97,5 +96,7 @@ allowed = [
     r'"\"})" and even "\"})"',
     r'''("illegal state \"%s\" (must be one of {init, running, done)}",''',
     r'''("illegal state \"%s\" (must be one of {init, running, done})",''', # Spot the difference ;)
+    
+    'int* blah() {return "anything";}\n',
 ]
 

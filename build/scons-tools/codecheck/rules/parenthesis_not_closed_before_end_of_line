@@ -11,14 +11,14 @@ blah
     (jdhsf + 
 """
 
-def check_function(token_stripper, data):
+def check_function(lines):
     errors = []
-    for lineno,line in enumerate(data.splitlines()):
-        line = token_stripper.strip_macros(token_stripper.strip_strings(token_stripper.strip_comments(line)).strip())
+    for lineno,line in enumerate(lines):
+        line = line.strip()
         lineno += 1
         opening_parens = line.count('(')
         closing_parens = line.count(')')
-        if opening_parens > closing_parens and line.strip()[0] != '(':
+        if opening_parens > closing_parens and line[0] != '(':
             errors.append( (lineno,
                 "Parenthesis not closed before end of "
                 "line must be at line begin")
@@ -26,9 +26,8 @@ def check_function(token_stripper, data):
 
     return errors
 
-is_multiline = True
-strip_strings = True
-strip_comments = True
+strip_comments_and_strings = True
+strip_macros = True
 
 evaluate_matches = check_function
 

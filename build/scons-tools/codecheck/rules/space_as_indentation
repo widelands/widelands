@@ -1,0 +1,30 @@
+#!/usr/bin/env python -tt
+# encoding: utf-8
+#
+
+"""
+Cry when space appears as first character on a line. Indentation should be done with tabs.
+There is no reason to have spaces as the first line
+
+This is not obligatory for macros, because of the Alignement of the \\ at the end
+"""
+
+error_msg="Use tabs for indentation."
+
+regexp = r"^ +"
+
+strip_comments_and_strings = True
+strip_macros = True
+
+allowed = [
+    "if\n",
+    "\tif(a) {\n",
+    "  // Comment is ok",
+    "/*\n * Multiline comment too */",
+    "#in macros\\\nHi\\\n Hi", # \\\n   it's ok too",
+]
+forbidden = [
+    "   if(a)\n",
+]
+
+

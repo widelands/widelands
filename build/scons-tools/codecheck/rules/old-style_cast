@@ -11,6 +11,8 @@ regexp=r"""^([^/#"']|/([^/"']|"([^"\]|\\"|\\[^"])*"|'(\\[\'nt]|[^\'])')|"([^"]|\
 
 error_msg = "Old C-Style cast. Change to static_cast<Type>(var) or similar!"
 
+strip_comments_and_strings = True
+strip_macros = True
 
 forbidden = [
     '(a)b',
@@ -59,6 +61,7 @@ allowed = [
     '(I const) const;',
     '(I const) const',
     '(I)const',
+	"\t(Widelands::Building_Index::value_t)\n",
 ]
 
 

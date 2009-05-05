@@ -8,7 +8,7 @@ should not catch commas in string constants or character constants.
 """
 
 
-regexp = r"""^([^/#"']|/([^/"']|"([^"]|\\")*"|'(\\[\'nt]|[^\'])')|"([^"\]|\\"|\\[^"])*"|'(\\[\'nt]|[^\'])')*,[^ ]"""
+regexp = r""",[^\s]"""
 error_msg = "A space is mandatory after ','"
 
 
@@ -24,9 +24,12 @@ forbidden = [
     "float YY = ff(_,5,6,7,8,9);",
 ]
 
+strip_comments_and_strings = True
+
 allowed = [
     '''do_something(",", ',')''',
-    ' * We are inside a comment,',
+    '/* We,are inside a comment,*/',
+    '// This is,a comment too',
 
     # Eriks Tests
     ## missing_space_after_comma.cc

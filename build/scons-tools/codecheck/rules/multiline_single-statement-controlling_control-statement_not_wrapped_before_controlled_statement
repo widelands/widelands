@@ -38,7 +38,7 @@ regexp=r"""(?x)
     (^|\t)((do|else)[ ]([^/i]|(i[^f]))|return[ ]+)|(for|if|while)[ ]*\((/[^/*]|[^/])*\)[ ]*
 )
 (/[^/*]|[^/])*
-[^){};\\ ]$"""
+[^){};\\ \n]$"""
 
 error_msg = """Multiline conditional should break after conditional. if (a) blah... -> if (a) \\n blah"""
 
@@ -68,6 +68,7 @@ allowed = [
     'if (c)',
     '	("calculated value for (%i, %i)",',
     '\t\treturn m_nb; ',
+    '\t\treturn m_nb;\n',
 ]
 
 

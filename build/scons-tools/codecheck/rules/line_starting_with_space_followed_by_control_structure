@@ -18,6 +18,9 @@ I disagree with the macros. I do not think they add to the clarity of the code.
 regexp=r"""^	* +(\{|case|else|try|(catch|if|switch|while) *\()"""
 error_msg = "Control structures shouldn't start a line. Move them to the end of the previous line"
 
+strip_comments_and_strings = True
+strip_macros = True
+
 forbidden = [
     '   {',
     '   else',
@@ -33,6 +36,10 @@ allowed = [
     '	if (a)',
     '	switch (a)',
     '	while (a)',
+"""#define iterate_players_existing(p, nr_players, egbase, player)               \\
+   iterate_player_numbers(p, nr_players)                                      \\
+      if (Widelands::Player * const player = (egbase).get_player(p))          \\""",
+
 ]
 
 
