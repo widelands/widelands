@@ -62,15 +62,19 @@ m_ok
 	 m_fn, m_fs),
 
 // Replay list
-m_list(this, m_xres * 47 / 2500, m_yres * 3417 / 10000, m_xres * 711 / 1250, m_yres * 6083 / 10000),
+m_list
+	(this, m_xres * 47 / 2500, m_yres * 3417 / 10000,
+	 m_xres * 711 / 1250, m_yres * 6083 / 10000),
 
 // Text areas
 m_title
 	(this, m_xres / 2, m_yres * 3 / 20, _("Choose saved game!"), Align_HCenter),
-
-m_label_mapname (this, m_xres * 7 / 10,  m_yres * 17 / 50,  _("Map Name:"), Align_Right),
-m_tamapname     (this, m_xres * 71 / 100, m_yres * 17 / 50,  std::string()),
-m_label_gametime(this, m_xres * 7 / 10,  m_yres * 3 / 8, _("Gametime:"), Align_Right),
+m_label_mapname
+	(this, m_xres * 7 / 10,  m_yres * 17 / 50, _("Map Name:"), Align_Right),
+m_tamapname
+	(this, m_xres * 71 / 100, m_yres * 17 / 50, std::string()),
+m_label_gametime
+	(this, m_xres * 7 / 10,  m_yres * 3 / 8, _("Gametime:"), Align_Right),
 m_tagametime    (this, m_xres * 71 / 100, m_yres * 3 / 8, std::string())
 
 {

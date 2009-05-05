@@ -250,7 +250,8 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 
 /**
  * CampaignMapSelect UI
- * Loads a list of all visible maps of selected campaign and let's the user choose one.
+ * Loads a list of all visible maps of selected campaign and let's the user
+ * choose one.
  */
 Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 Fullscreen_Menu_Base("choosemapmenu.jpg"),
@@ -312,7 +313,8 @@ back
 	tamapdescr    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_list.set_font(m_fn, m_fs);
 	m_list.selected.set(this, &Fullscreen_Menu_CampaignMapSelect::map_selected);
-	m_list.double_clicked.set(this, &Fullscreen_Menu_CampaignMapSelect::double_clicked);
+	m_list.double_clicked.set
+		(this, &Fullscreen_Menu_CampaignMapSelect::double_clicked);
 }
 
 
@@ -331,7 +333,8 @@ std::string Fullscreen_Menu_CampaignMapSelect::get_map()
 }
 
 
-//telling this class what campaign we have and since we know what campaign we have, fill it.
+//telling this class what campaign we have and since we know what campaign we
+//have, fill it.
 void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint32_t const i) {
 	campaign = i;
 	fill_list();

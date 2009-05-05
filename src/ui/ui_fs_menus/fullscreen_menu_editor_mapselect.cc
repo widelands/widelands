@@ -241,8 +241,11 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 		const char * const name = pname->c_str();
 		if
 			(strcmp(FileSystem::FS_Filename(name), ".")    and
-			 strcmp(FileSystem::FS_Filename(name), "..")   and // Upsy, appeared again. ignore
-			 strcmp(FileSystem::FS_Filename(name), ".svn") and // HACK: we skip .svn dir (which is in normal checkout present) for esthetic reasons
+			 // Upsy, appeared again. ignore
+			 strcmp(FileSystem::FS_Filename(name), "..")   and
+			 // HACK: we skip .svn dir (which is in normal checkout present) for
+			 // esthetic reasons
+			 strcmp(FileSystem::FS_Filename(name), ".svn") and
 			 g_fs->IsDirectory(name)                       and
 			 not WL_Map_Loader::is_widelands_map(name))
 

@@ -36,7 +36,8 @@
 #include <cstdio>
 
 
-Fullscreen_Menu_Options::Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt)
+Fullscreen_Menu_Options::Fullscreen_Menu_Options
+		(Options_Ctrl::Options_Struct opt)
 :
 Fullscreen_Menu_Base("optionsmenu.jpg"),
 
@@ -207,20 +208,20 @@ os(opt)
 	m_label_language  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_language_list   .set_font(m_fn, m_fs);
 
-	m_label_game_options                .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
-	m_label_single_watchwin             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_single_watchwin                   .set_state(opt.single_watchwin);
-	m_label_auto_roadbuild_mode         .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_auto_roadbuild_mode               .set_state(opt.auto_roadbuild_mode);
-	m_label_show_workarea_preview       .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_show_workarea_preview             .set_state(opt.show_warea);
+	m_label_game_options             .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+	m_label_single_watchwin          .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_single_watchwin                .set_state(opt.single_watchwin);
+	m_label_auto_roadbuild_mode      .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_auto_roadbuild_mode            .set_state(opt.auto_roadbuild_mode);
+	m_label_show_workarea_preview    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_show_workarea_preview          .set_state(opt.show_warea);
 	m_label_snap_windows_only_when_overlapping.set_font
 		(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_snap_windows_only_when_overlapping.set_state
 		(opt.snap_windows_only_when_overlapping);
-	m_label_dock_windows_to_edges       .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_dock_windows_to_edges             .set_state(opt.dock_windows_to_edges);
-	m_label_autosave                    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_dock_windows_to_edges    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_dock_windows_to_edges          .set_state(opt.dock_windows_to_edges);
+	m_label_autosave                 .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
 	SDL_PixelFormat & fmt = *SDL_GetVideoInfo()->vfmt;
@@ -258,7 +259,9 @@ os(opt)
 	bool did_select_a_res = false;
 	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {
 		char buf[32];
-		sprintf(buf, "%ix%i %i bit", m_resolutions[i].xres, m_resolutions[i].yres, m_resolutions[i].depth);
+		sprintf
+			(buf, "%ix%i %i bit", m_resolutions[i].xres,
+			 m_resolutions[i].yres, m_resolutions[i].depth);
 		const bool selected =
 			m_resolutions[i].xres  == opt.xres and
 			m_resolutions[i].yres  == opt.yres and
@@ -384,7 +387,8 @@ m_nozip (this, Point(m_xres * 19 / 200, m_yres * 5833 / 10000)),
 m_label_nozip
 	(this,
 	 m_xres * 1313 / 10000, m_yres * 3 / 5,
-	 _("Do not zip widelands data files (maps, replays and savegames)."), Align_VCenter),
+	 _("Do not zip widelands data files (maps, replays and savegames)."),
+	 Align_VCenter),
 m_label_speed
 	(this,
 	 m_xres * 1313 / 10000, m_yres * 6467 / 10000,
@@ -493,30 +497,50 @@ void Options_Ctrl::handle_menu()
 
 Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 	Options_Struct opt;
-	opt.xres                = m_opt_section.get_int ("xres",                 640);
-	opt.yres                = m_opt_section.get_int ("yres",                 480);
-	opt.depth               = m_opt_section.get_int ("depth",                 16);
-	opt.inputgrab           = m_opt_section.get_bool("inputgrab",          false);
-	opt.fullscreen          = m_opt_section.get_bool("fullscreen",         false);
-	opt.single_watchwin     = m_opt_section.get_bool("single_watchwin",    false);
-	opt.auto_roadbuild_mode = m_opt_section.get_bool("auto_roadbuild_mode", true);
-	opt.show_warea          = m_opt_section.get_bool("workareapreview",    false);
+	opt.xres                = m_opt_section.get_int
+		("xres",                 640);
+	opt.yres                = m_opt_section.get_int
+		("yres",                 480);
+	opt.depth               = m_opt_section.get_int
+		("depth",                 16);
+	opt.inputgrab           = m_opt_section.get_bool
+		("inputgrab",          false);
+	opt.fullscreen          = m_opt_section.get_bool
+		("fullscreen",         false);
+	opt.single_watchwin     = m_opt_section.get_bool
+		("single_watchwin",    false);
+	opt.auto_roadbuild_mode = m_opt_section.get_bool
+		("auto_roadbuild_mode", true);
+	opt.show_warea          = m_opt_section.get_bool
+		("workareapreview",    false);
 	opt.snap_windows_only_when_overlapping
-		= m_opt_section.get_bool("snap_windows_only_when_overlapping",      false);
+		= m_opt_section.get_bool
+			("snap_windows_only_when_overlapping",      false);
 	opt.dock_windows_to_edges
-		= m_opt_section.get_bool("dock_windows_to_edges",                   false);
-	opt.language              =  m_opt_section.get_string("language",         "");
-	opt.music                 = !m_opt_section.get_bool("disable_music",   false);
-	opt.fx                    = !m_opt_section.get_bool("disable_fx",      false);
+		= m_opt_section.get_bool
+			("dock_windows_to_edges",                   false);
+	opt.language              =  m_opt_section.get_string
+		("language",         "");
+	opt.music                 = !m_opt_section.get_bool
+		("disable_music",   false);
+	opt.fx                    = !m_opt_section.get_bool
+		("disable_fx",      false);
 	opt.autosave
-		= m_opt_section.get_int("autosave",        DEFAULT_AUTOSAVE_INTERVAL * 60);
-	opt.maxfps                =  m_opt_section.get_int("maxfps",              25);
+		= m_opt_section.get_int
+			("autosave",        DEFAULT_AUTOSAVE_INTERVAL * 60);
+	opt.maxfps                =  m_opt_section.get_int
+		("maxfps",              25);
 
-	opt.nozip                 =  m_opt_section.get_bool("nozip",           false);
-	opt.ui_font               =  m_opt_section.get_string("ui_font",     "serif");
-	opt.speed_of_new_game     =  m_opt_section.get_int("speed_of_new_game", 1000);
-	opt.border_snap_distance  =  m_opt_section.get_int("border_snap_distance", 0);
-	opt.panel_snap_distance   =  m_opt_section.get_int("panel_snap_distance",  0);
+	opt.nozip                 =  m_opt_section.get_bool
+		("nozip",           false);
+	opt.ui_font               =  m_opt_section.get_string
+		("ui_font",     "serif");
+	opt.speed_of_new_game     =  m_opt_section.get_int
+		("speed_of_new_game", 1000);
+	opt.border_snap_distance  =  m_opt_section.get_int
+		("border_snap_distance", 0);
+	opt.panel_snap_distance   =  m_opt_section.get_int
+		("panel_snap_distance",  0);
 	return opt;
 }
 

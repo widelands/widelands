@@ -86,10 +86,12 @@ public:
 	}
 
 	void disconnect(NoteSender<T> & sender) {
-		typename NoteSender<T>::Links::iterator oit = std::find(sender.m_links.begin(), sender.m_links.end(), this);
+		typename NoteSender<T>::Links::iterator oit = std::find
+			(sender.m_links.begin(), sender.m_links.end(), this);
 		if (oit != sender.m_links.end())
 			sender.m_links.erase(oit);
-		typename Links::iterator it = std::find(m_links.begin(), m_links.end(), &sender);
+		typename Links::iterator it = std::find
+			(m_links.begin(), m_links.end(), &sender);
 		if (it != m_links.end())
 			m_links.erase(it);
 	}
