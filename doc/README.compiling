@@ -64,8 +64,13 @@ build type, execute e.g. "scons build=debug". To see all available types, do
 Several other build targets are available :-) but mostly not documented yet :-(
 
 some available scons flags are:
-build=debug|release
+build=debug|release|profile
 build_id=<IDNAME>
+efence=1
+enable_ggz
+bindir=<BINDIR>
+datadir=<DATADIR>
+localedir=<LOCALEDIR>
 
 make
 ------------------
