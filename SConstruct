@@ -231,7 +231,7 @@ all_code_files.sort()
 Alias('tags', env.ctags(source=all_code_files))
 
 ################################################################ C++ style-check
-if env['build'] == 'debug' or env['build'] == 'profile' and env['Platform'] != 'darwin':
+if (env['build'] == 'debug' or env['build'] == 'profile') and env['PLATFORM'] != 'darwin':
         Alias('old-stylecheck', env.Execute('utils/spurious_source_code/detect'))
 
 # Style Checks
