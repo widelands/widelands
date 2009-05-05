@@ -7,7 +7,16 @@ and when gcc-4.2 is common, -Werror=old-style-cast. It is complex because it
 should allow "operator==(h)" and "operator!=(h)". It should also ignore macros.
 """
 
-regexp=r"""^([^/#"']|/([^/"']|"([^"\]|\\"|\\[^"])*"|'(\\[\'nt]|[^\'])')|"([^"]|\\")*"|'(\\[\'nt]|[^\'])')*(((((((((([_a-zA-Z0-9]o|[^o]|^)p|[^p]|^)e|[^e]|^)r|[^r]|^)a|[^a]|^)t|[^t]|^)o|[^o]|^)r|[^r]|^)[!=]|[^!=]|^)=|[^] "'_a-zA-Z0-9>=]|return|^) *\( *((const|enum|long|(un)?signed|short|struct) +)*([_a-zA-Z][_a-zA-Z0-9]* *::)* *[_a-zA-Z][_a-zA-Z0-9]* *((const)? *\* *)*(const *)?\) *([^].:,;{)=<>|?! */%+\- c]|c([^o]|o([^n]|n([^s]|s([^t]|t[_a-zA-Z0-9])))))"""
+regexp="""(?x)
+(((((((((([_a-zA-Z0-9]o|[^o]|^)p|[^p]|^)e|[^e]|^)r|[^r]|^)a|[^a]|^)t|[^t]|^)o|[^o]|^)r|[^r]|^)[!=]|[^!=]|^)=|[^] "'_a-zA-Z0-9>=]|return|^)
+[ ]*
+\([ ]*((const|enum|long|(un)?signed|short|struct)[ ]+)*
+([_a-zA-Z][_a-zA-Z0-9]*[ ]*::)*[ ]*[_a-zA-Z][_a-zA-Z0-9]*[ ]*
+((const)?[ ]*\*[ ]*)*
+(const *)?
+\)[ ]*
+([^].:,;{)=<>|?! c*/%+\-\n]|c([^o]|o([^n]|n([^s]|s([^t]|t[_a-zA-Z0-9]))))
+)"""
 
 error_msg = "Old C-Style cast. Change to static_cast<Type>(var) or similar!"
 
@@ -28,12 +37,12 @@ forbidden = [
     '(a * * const)b',
     '(a const * * const)b',
     '=(a) b',
-    'goperator!=(b) and',
-    'goperator==(b) or',
-    'operagor!=(b) and',
-    'operagor==(b) or',
-    'perator!=(b) and',
-    'perator==(b) or',
+    'goperator!=(b) d',
+    'goperator==(b) r',
+    'operagor!=(b) d',
+    'operagor==(b) r',
+    'perator!=(b) d',
+    'perator==(b) r',
     'return (PIL*)odr;',
     '(char*)&v',
     '	(enum arb) agr',
@@ -61,7 +70,14 @@ allowed = [
     '(I const) const;',
     '(I const) const',
     '(I)const',
-	"\t(Widelands::Building_Index::value_t)\n",
+    "(dynamic_cast<ConstructionSite const *>(bld) or",
+	"void set_defeating_player(const Player_Number player_number) throw ()",
+	"virtual WaresQueue & waresqueue(Ware_Index) __attribute__ ((noreturn));",
+    "get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));",
+	"if (not er)                          er = &m_table.add(s);",
+	"if (m_linknext) m_linknext->m_linkpprev = &m_linknext;",
+	
+    "\t(Widelands::Building_Index::value_t)\n",
 ]
 
 

@@ -157,10 +157,6 @@ class CheckingRule(object):
         self.allowed = _to_tuple(vars["allowed"])
         self.forbidden  = _to_tuple(vars["forbidden"])
     
-    @property
-    def error_msg(self):
-        return self._error_msg
-
     def check_text(self, preprocessor, fn, data):
         """
         Data must be a complete file data as returned by .read()
@@ -173,13 +169,13 @@ class CheckingRule(object):
 
         matches = []
         if self._evaluate_matches is not None:
-            # Delegate work to Rule
+            # Rule has it's own checking function
             matches = [ (fn,line,msg) for (line,msg) in self._evaluate_matches(lines) ]
         else:
-            # Single line rules
+            # Regular expression rule
             for lidx,line in enumerate(lines):
                 if self._regexp.search(line):
-                    matches.append( (fn,lidx+1,self.error_msg) )
+                    matches.append( (fn,lidx+1,self._error_msg) )
    
         return matches
 
