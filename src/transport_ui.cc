@@ -19,7 +19,7 @@
 
 #include "economy/economy.h"
 #include "graphic/graphic.h"
-#include "interactive_player.h"
+#include "wui/interactive_player.h"
 #include "item_ware_descr.h"
 #include "player.h"
 #include "playercommand.h"

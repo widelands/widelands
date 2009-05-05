@@ -19,7 +19,7 @@
 
 #include "widelands_map_bobdata_data_packet.h"
 
-#include "battle.h"
+#include "logic/battle.h"
 #include "bob.h"
 #include "carrier.h"
 #include "critter_bob.h"

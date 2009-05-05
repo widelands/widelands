@@ -20,8 +20,8 @@
 #include "game_interactive_player_data_packet.h"
 
 #include "game.h"
-#include "interactive_player.h"
-#include "mapview.h"
+#include "wui/interactive_player.h"
+#include "wui/mapview.h"
 #include "graphic/overlay_manager.h"
 #include "player.h"
 #include "tribe.h"

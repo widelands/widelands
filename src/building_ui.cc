@@ -30,7 +30,7 @@ class.
 #include "game_debug_ui.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "interactive_player.h"
+#include "wui/interactive_player.h"
 #include "maphollowregion.h"
 #include "militarysite.h"
 #include "economy/request.h"

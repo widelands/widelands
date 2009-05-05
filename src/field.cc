@@ -19,7 +19,7 @@
 
 #include "field.h"
 
-#include "mapviewpixelfunctions.h"
+#include "wui/mapviewpixelfunctions.h"
 
 namespace Widelands {
 

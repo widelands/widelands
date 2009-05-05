@@ -20,7 +20,7 @@
 #include "game_preload_data_packet.h"
 
 #include "game.h"
-#include "interactive_player.h"
+#include "wui/interactive_player.h"
 #include "map.h"
 #include "profile/profile.h"
 

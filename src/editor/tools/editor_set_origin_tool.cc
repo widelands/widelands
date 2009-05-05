@@ -21,7 +21,7 @@
 
 #include "editorinteractive.h"
 #include "map.h"
-#include "mapviewpixelconstants.h"
+#include "wui/mapviewpixelconstants.h"
 #include "graphic/overlay_manager.h"
 
 int32_t Editor_Set_Origin_Tool::handle_click_impl

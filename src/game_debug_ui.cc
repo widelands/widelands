@@ -24,7 +24,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "instances.h"
-#include "interactive_base.h"
+#include "wui/interactive_base.h"
 #include "map.h"
 
 #include "ui_button.h"

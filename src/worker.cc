@@ -33,7 +33,7 @@
 #include "game.h"
 #include "graphic/graphic.h"
 #include "helper.h"
-#include "interactive_player.h"
+#include "wui/interactive_player.h"
 #include "player.h"
 #include "profile/profile.h"
 #include "soldier.h"

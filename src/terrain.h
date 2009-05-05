@@ -21,7 +21,7 @@
 #define TERRAIN_H
 
 #include "graphic/graphic.h"
-#include "mapviewpixelconstants.h"
+#include "wui/mapviewpixelconstants.h"
 #include "random.h"
 #include "graphic/surface.h"
 

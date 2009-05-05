@@ -27,7 +27,7 @@
 #include "game.h"
 #include "helper.h"
 #include "i18n.h"
-#include "interactive_player.h"
+#include "wui/interactive_player.h"
 #include "map.h"
 #include "player.h"
 #include "production_program.h"

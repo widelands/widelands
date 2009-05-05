@@ -24,6 +24,7 @@ Export('srcenv')
 libs=[]
 libs+=SConscript('graphic/SConscript')
 libs+=SConscript('sound/SConscript')
+libs+=SConscript('logic/SConscript')
 libs+=list(SConscript('io/SConscript'))
 libs+=SConscript('ui/ui_basic/SConscript')
 libs+=SConscript('ui/ui_fs_menus/SConscript')

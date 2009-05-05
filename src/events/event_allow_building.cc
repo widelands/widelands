@@ -20,7 +20,7 @@
 #include "event_allow_building.h"
 
 #include "editor_game_base.h"
-#include "interactive_base.h"
+#include "wui/interactive_base.h"
 #include "game.h"
 #include "i18n.h"
 #include "map.h"

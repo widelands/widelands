@@ -22,7 +22,7 @@
 #include "building.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "interactive_player.h"
+#include "wui/interactive_player.h"
 #include "helper.h"
 #include "player.h"
 #include "productionsite.h"

@@ -21,7 +21,7 @@
 
 #include "computer_player.h"
 #include "game.h"
-#include "interactive_player.h"
+#include "wui/interactive_player.h"
 #include "player.h"
 #include "tribe.h"
 #include "widelands_fileread.h"

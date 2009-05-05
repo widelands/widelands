@@ -24,7 +24,7 @@
 #include "economy/route.h"
 #include "economy/transfer.h"
 #include "game.h"
-#include "mapviewpixelconstants.h"
+#include "wui/mapviewpixelconstants.h"
 #include "path.h"
 #include "player.h"
 #include "profile/profile.h"

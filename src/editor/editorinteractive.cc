@@ -31,7 +31,7 @@
 #include "wui/game_tips.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "interactive_base.h"
+#include "wui/interactive_base.h"
 #include "map.h"
 #include "graphic/overlay_manager.h"
 #include "player.h"

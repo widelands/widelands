@@ -22,7 +22,7 @@
 #include "editor_game_base.h"
 #include "game.h"
 #include "i18n.h"
-#include "interactive_base.h"
+#include "wui/interactive_base.h"
 #include "map.h"
 #include "profile/profile.h"
 #include "wexception.h"

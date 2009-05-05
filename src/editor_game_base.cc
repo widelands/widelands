@@ -20,7 +20,7 @@
 #include "editor_game_base.h"
 
 #include "areawatcher.h"
-#include "battle.h"
+#include "logic/battle.h"
 #include "building.h"
 #include "economy/flag.h"
 #include "findimmovable.h"
@@ -29,7 +29,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "instances.h"
-#include "interactive_base.h"
+#include "wui/interactive_base.h"
 #include "mapregion.h"
 #include "player.h"
 #include "tribe.h"

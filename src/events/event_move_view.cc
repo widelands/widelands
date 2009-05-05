@@ -19,7 +19,7 @@
 
 #include "event_move_view.h"
 
-#include "interactive_player.h"
+#include "wui/interactive_player.h"
 
 #include "game.h"
 #include "profile/profile.h"

@@ -29,7 +29,7 @@
 #include "editor_set_origin_tool.h"
 #include "editor_set_terrain_tool.h"
 #include "editor_set_starting_pos_tool.h"
-#include "interactive_base.h"
+#include "wui/interactive_base.h"
 
 #include "ui_button.h"
 #include "ui_unique_window.h"

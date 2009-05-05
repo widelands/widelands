@@ -20,7 +20,7 @@
 #include "soldier.h"
 
 #include "attackable.h"
-#include "battle.h"
+#include "logic/battle.h"
 #include "checkstep.h"
 #include "economy/flag.h"
 #include "editor_game_base.h"

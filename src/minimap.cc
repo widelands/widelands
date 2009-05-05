@@ -23,9 +23,9 @@
 
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "interactive_player.h"
+#include "wui/interactive_player.h"
 #include "map.h"
-#include "mapviewpixelconstants.h"
+#include "wui/mapviewpixelconstants.h"
 #include "graphic/rendertarget.h"
 
 

@@ -20,7 +20,7 @@
 #include "rendertarget.h"
 
 #include "graphic.h"
-#include "mapviewpixelconstants.h"
+#include "wui/mapviewpixelconstants.h"
 #include "overlay_manager.h"
 #include "surface.h"
 #include "tribe.h"

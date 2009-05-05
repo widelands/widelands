@@ -19,7 +19,7 @@
 
 #include "militarysite.h"
 
-#include "battle.h"
+#include "logic/battle.h"
 #include "editor_game_base.h"
 #include "game.h"
 #include "i18n.h"

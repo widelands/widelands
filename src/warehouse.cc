@@ -22,7 +22,7 @@
 
 #include <algorithm>
 
-#include "battle.h"
+#include "logic/battle.h"
 #include "carrier.h"
 #include "economy/economy.h"
 #include "economy/flag.h"

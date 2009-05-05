@@ -20,7 +20,7 @@
 #include "widelands_map_map_object_saver.h"
 
 #include "areawatcher.h"
-#include "battle.h"
+#include "logic/battle.h"
 #include "bob.h"
 #include "building.h"
 #include "container_iterate.h"

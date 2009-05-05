@@ -21,7 +21,7 @@
 
 #include "constructionsite.h"
 #include "editor_game_base.h"
-#include "interactive_base.h"
+#include "wui/interactive_base.h"
 #include "map.h"
 #include "player.h"
 #include "economy/request.h"

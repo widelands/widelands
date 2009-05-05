@@ -20,7 +20,7 @@
 #include "event_building.h"
 
 #include "game.h"
-#include "interactive_base.h"
+#include "wui/interactive_base.h"
 #include "mapfringeregion.h"
 #include "militarysite.h"
 #include "player.h"

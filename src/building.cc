@@ -26,7 +26,7 @@
 #include "font_handler.h"
 #include "game.h"
 #include "graphic/graphic.h"
-#include "interactive_gamebase.h"
+#include "wui/interactive_gamebase.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"

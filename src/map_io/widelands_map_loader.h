@@ -22,7 +22,7 @@
 
 #include <string>
 #include <cstring>
-#include "map_io/map_loader.h"
+#include "map_loader.h"
 
 struct FileSystem;
 
