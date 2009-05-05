@@ -1,6 +1,6 @@
 help=_The backers of the Empire make really tasty bread.
 default_target_quantity=20
-preciousness=3
+preciousness=4
 
 [idle]
 pics=bread_idle.png
