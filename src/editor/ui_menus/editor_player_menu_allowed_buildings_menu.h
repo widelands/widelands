@@ -22,10 +22,10 @@
 
 #include "widelands.h"
 
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_listselect.h"
-#include "ui/ui_basic/ui_textarea.h"
-#include "ui/ui_basic/ui_unique_window.h"
+#include "ui_basic/button.h"
+#include "ui_basic/listselect.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/unique_window.h"
 
 namespace Widelands {struct Player;};
 

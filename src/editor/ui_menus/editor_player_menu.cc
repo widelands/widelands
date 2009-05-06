@@ -30,9 +30,9 @@
 #include "logic/warehouse.h"
 #include "wexception.h"
 
-#include "ui/ui_basic/ui_editbox.h"
-#include "ui/ui_basic/ui_messagebox.h"
-#include "ui/ui_basic/ui_textarea.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/textarea.h"
 
 
 Editor_Player_Menu::Editor_Player_Menu

@@ -25,7 +25,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 
-#include "ui/ui_basic/ui_button.h"
+#include "ui_basic/button.h"
 
 #include <cstdio>
 

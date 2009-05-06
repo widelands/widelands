@@ -21,7 +21,7 @@
 #define FULLSCREEN_MENU_INTRO_H
 
 #include "fullscreen_menu_base.h"
-#include "ui/ui_basic/ui_textarea.h"
+#include "ui_basic/textarea.h"
 
 /**
  * Fullscreen Menu with Splash Screen (at the moment).

@@ -20,8 +20,8 @@
 #ifndef EDITOR_MAIN_MENU_MAP_OPTIONS_H
 #define EDITOR_MAIN_MENU_MAP_OPTIONS_H
 
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_window.h"
+#include "ui_basic/button.h"
+#include "ui_basic/window.h"
 
 struct Editor_Interactive;
 namespace UI {

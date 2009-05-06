@@ -25,13 +25,13 @@
 #include "trigger/trigger.h"
 #include "trigger/trigger_time.h"
 
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_checkbox.h"
-#include "ui/ui_basic/ui_editbox.h"
-#include "ui/ui_basic/ui_messagebox.h"
-#include "ui/ui_basic/ui_multilineeditbox.h"
-#include "ui/ui_basic/ui_textarea.h"
-#include "ui/ui_basic/ui_unique_window.h"
+#include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/multilineeditbox.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/unique_window.h"
 
 #include <map>
 

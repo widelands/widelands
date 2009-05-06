@@ -26,9 +26,9 @@
 #include "constants.h"
 #include "trigger/trigger_time.h"
 
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_multilinetextarea.h"
-#include "ui/ui_basic/ui_textarea.h"
+#include "ui_basic/button.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textarea.h"
 
 /**
  * The message box itself

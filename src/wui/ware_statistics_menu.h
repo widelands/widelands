@@ -20,7 +20,7 @@
 #ifndef WARE_STATISTICS_MENU_H
 #define WARE_STATISTICS_MENU_H
 
-#include "ui/ui_basic/ui_unique_window.h"
+#include "ui_basic/unique_window.h"
 
 struct Interactive_Player;
 struct WUIPlot_Area;

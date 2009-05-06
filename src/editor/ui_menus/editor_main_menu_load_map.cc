@@ -32,12 +32,12 @@
 #include "world.h"
 #include "map_io/map_loader.h"
 
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_editbox.h"
-#include "ui/ui_basic/ui_listselect.h"
-#include "ui/ui_basic/ui_multilinetextarea.h"
-#include "ui/ui_basic/ui_progresswindow.h"
-#include "ui/ui_basic/ui_textarea.h"
+#include "ui_basic/button.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/listselect.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/progresswindow.h"
+#include "ui_basic/textarea.h"
 
 #include <cstdio>
 

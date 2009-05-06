@@ -20,7 +20,7 @@
 #ifndef TRIGGER_TIME_OPTION_MENU_H
 #define TRIGGER_TIME_OPTION_MENU_H
 
-#include "ui/ui_basic/ui_window.h"
+#include "ui_basic/window.h"
 
 struct Editor_Interactive;
 namespace Widelands {struct Trigger_Time;}

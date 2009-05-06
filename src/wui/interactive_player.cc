@@ -53,8 +53,8 @@
 #include "ware_statistics_menu.h"
 #include "wlapplication.h"
 
-#include "ui/ui_basic/ui_editbox.h"
-#include "ui/ui_basic/ui_unique_window.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/unique_window.h"
 
 
 using Widelands::Building;

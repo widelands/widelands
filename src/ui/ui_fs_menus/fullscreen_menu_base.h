@@ -20,7 +20,7 @@
 #ifndef FULLSCREEN_MENU_BASE_H
 #define FULLSCREEN_MENU_BASE_H
 
-#include "ui/ui_basic/ui_panel.h"
+#include "ui_basic/panel.h"
 #include <string>
 
 /**

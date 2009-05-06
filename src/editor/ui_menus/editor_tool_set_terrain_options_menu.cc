@@ -30,9 +30,9 @@
 #include "world.h"
 #include "worlddata.h"
 
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_panel.h"
-#include "ui/ui_basic/ui_checkbox.h"
+#include "ui_basic/button.h"
+#include "ui_basic/panel.h"
+#include "ui_basic/checkbox.h"
 
 Editor_Tool_Set_Terrain_Tool_Options_Menu::
 Editor_Tool_Set_Terrain_Tool_Options_Menu

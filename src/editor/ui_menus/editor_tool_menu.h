@@ -22,8 +22,8 @@
 
 #include "editor/editorinteractive.h"
 
-#include "ui/ui_basic/ui_radiobutton.h"
-#include "ui/ui_basic/ui_unique_window.h"
+#include "ui_basic/radiobutton.h"
+#include "ui_basic/unique_window.h"
 
 /// The tool selection window/menu.
 struct Editor_Tool_Menu : public UI::UniqueWindow {

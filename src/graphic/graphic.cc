@@ -29,7 +29,7 @@
 #include "wexception.h"
 #include "widelands_fileread.h"
 
-#include "ui/ui_basic/ui_progresswindow.h"
+#include "ui_basic/progresswindow.h"
 
 #include "log.h"
 

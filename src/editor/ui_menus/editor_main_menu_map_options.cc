@@ -24,10 +24,10 @@
 #include "map.h"
 #include "profile/profile.h"
 
-#include "ui/ui_basic/ui_textarea.h"
-#include "ui/ui_basic/ui_multilinetextarea.h"
-#include "ui/ui_basic/ui_multilineeditbox.h"
-#include "ui/ui_basic/ui_editbox.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/multilineeditbox.h"
+#include "ui_basic/editbox.h"
 
 #include <cstdio>
 

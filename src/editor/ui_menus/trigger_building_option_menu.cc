@@ -26,7 +26,7 @@
 #include "player.h"
 #include "tribe.h"
 
-#include "ui/ui_basic/ui_messagebox.h"
+#include "ui_basic/messagebox.h"
 
 #include <cstdio>
 

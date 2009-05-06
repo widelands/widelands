@@ -32,12 +32,12 @@
 #include "map_io/widelands_map_saver.h"
 #include "io/filesystem/zip_filesystem.h"
 
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_editbox.h"
-#include "ui/ui_basic/ui_listselect.h"
-#include "ui/ui_basic/ui_messagebox.h"
-#include "ui/ui_basic/ui_multilinetextarea.h"
-#include "ui/ui_basic/ui_textarea.h"
+#include "ui_basic/button.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/listselect.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textarea.h"
 
 #include "upcast.h"
 

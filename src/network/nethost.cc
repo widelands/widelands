@@ -38,7 +38,7 @@
 #include "wexception.h"
 #include "wlapplication.h"
 
-#include "ui/ui_basic/ui_progresswindow.h"
+#include "ui_basic/progresswindow.h"
 
 
 

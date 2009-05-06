@@ -31,9 +31,9 @@
 #include "warelist.h"
 #include "economy/economy.h"
 
-#include "ui/ui_basic/ui_window.h"
-#include "ui/ui_basic/ui_unique_window.h"
-#include "ui/ui_basic/ui_table.h"
+#include "ui_basic/window.h"
+#include "ui_basic/unique_window.h"
+#include "ui_basic/table.h"
 
 #include "upcast.h"
 

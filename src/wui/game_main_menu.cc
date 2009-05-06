@@ -27,7 +27,7 @@
 #include "stock_menu.h"
 #include "ware_statistics_menu.h"
 
-#include "ui/ui_basic/ui_unique_window.h"
+#include "ui_basic/unique_window.h"
 
 
 GameMainMenu::GameMainMenu

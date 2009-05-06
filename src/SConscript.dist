@@ -8,7 +8,7 @@ distadd(env, 'src/*.cc')
 distadd(env, 'src/*.default')
 
 SConscript('editor/SConscript.dist')
-SConscript('ui/ui_basic/SConscript.dist')
+SConscript('ui_basic/SConscript.dist')
 SConscript('ui/ui_fs_menus/SConscript.dist')
 SConscript('io/SConscript.dist')
 SConscript('sound/SConscript.dist')

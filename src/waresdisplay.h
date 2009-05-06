@@ -22,7 +22,7 @@
 
 #include "warelist.h"
 
-#include "ui/ui_basic/ui_textarea.h"
+#include "ui_basic/textarea.h"
 
 #include <vector>
 

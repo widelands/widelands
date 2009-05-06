@@ -26,14 +26,14 @@
 #include "map.h"
 #include "trigger/trigger_time.h"
 
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_checkbox.h"
-#include "ui/ui_basic/ui_editbox.h"
-#include "ui/ui_basic/ui_listselect.h"
-#include "ui/ui_basic/ui_messagebox.h"
-#include "ui/ui_basic/ui_multilineeditbox.h"
-#include "ui/ui_basic/ui_textarea.h"
-#include "ui/ui_basic/ui_window.h"
+#include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/listselect.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/multilineeditbox.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/window.h"
 
 
 inline Editor_Interactive & Event_Message_Box_Option_Menu::eia() {

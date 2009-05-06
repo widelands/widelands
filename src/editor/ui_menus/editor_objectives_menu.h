@@ -20,8 +20,8 @@
 #ifndef EDITOR_OBJECTIVES_MENU_H
 #define EDITOR_OBJECTIVES_MENU_H
 
-#include "ui/ui_basic/ui_table.h"
-#include "ui/ui_basic/ui_unique_window.h"
+#include "ui_basic/table.h"
+#include "ui_basic/unique_window.h"
 
 struct Editor_Interactive;
 namespace Widelands {struct Objective;};

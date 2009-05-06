@@ -31,8 +31,8 @@
 #include "tools/editor_set_starting_pos_tool.h"
 #include "wui/interactive_base.h"
 
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_unique_window.h"
+#include "ui_basic/button.h"
+#include "ui_basic/unique_window.h"
 
 class Editor;
 class Editor_Tool;

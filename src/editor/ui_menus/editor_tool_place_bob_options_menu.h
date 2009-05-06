@@ -22,7 +22,7 @@
 
 #include "editor_tool_options_menu.h"
 
-#include "ui/ui_basic/ui_tabpanel.h"
+#include "ui_basic/tabpanel.h"
 
 #include <vector>
 

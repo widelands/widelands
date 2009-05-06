@@ -27,10 +27,10 @@
 #include "world.h"
 #include "editor_game_base.h"
 
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_progresswindow.h"
-#include "ui/ui_basic/ui_textarea.h"
-#include "ui/ui_basic/ui_window.h"
+#include "ui_basic/button.h"
+#include "ui_basic/progresswindow.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/window.h"
 
 #include <cstdio>
 #include <cstring>

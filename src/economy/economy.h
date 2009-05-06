@@ -23,7 +23,7 @@
 #include <vector>
 
 #include "supply_list.h"
-#include "ui/ui_basic/ui_unique_window.h"
+#include "ui_basic/unique_window.h"
 #include "warelist.h"
 
 

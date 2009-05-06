@@ -28,10 +28,10 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 
-#include "ui/ui_basic/ui_editbox.h"
-#include "ui/ui_basic/ui_multilinetextarea.h"
-#include "ui/ui_basic/ui_textarea.h"
-#include "ui/ui_basic/ui_unique_window.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/unique_window.h"
 
 /**
  * Setup the replay UI for the given game.

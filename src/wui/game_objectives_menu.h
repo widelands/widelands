@@ -20,9 +20,9 @@
 #ifndef GAME_OBJECTIVE_MENU_H
 #define GAME_OBJECTIVE_MENU_H
 
-#include "ui/ui_basic/ui_listselect.h"
-#include "ui/ui_basic/ui_multilinetextarea.h"
-#include "ui/ui_basic/ui_unique_window.h"
+#include "ui_basic/listselect.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/unique_window.h"
 
 namespace Widelands {
 struct Game;

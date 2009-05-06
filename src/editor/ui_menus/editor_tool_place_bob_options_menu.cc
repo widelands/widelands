@@ -28,11 +28,11 @@
 #include "wlapplication.h"
 #include "world.h"
 
-#include "ui/ui_basic/ui_box.h"
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_checkbox.h"
-#include "ui/ui_basic/ui_tabpanel.h"
-#include "ui/ui_basic/ui_textarea.h"
+#include "ui_basic/box.h"
+#include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
+#include "ui_basic/tabpanel.h"
+#include "ui_basic/textarea.h"
 
 #include "upcast.h"
 

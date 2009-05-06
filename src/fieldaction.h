@@ -20,7 +20,7 @@
 #ifndef FIELDACTION_H
 #define FIELDACTION_H
 
-#include "ui/ui_basic/ui_unique_window.h"
+#include "ui_basic/unique_window.h"
 
 namespace Widelands {
 class Building;

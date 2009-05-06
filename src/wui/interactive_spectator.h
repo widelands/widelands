@@ -20,7 +20,7 @@
 #ifndef INTERACTIVE_SPECTATOR_H
 #define INTERACTIVE_SPECTATOR_H
 
-#include "ui/ui_basic/ui_button.h"
+#include "ui_basic/button.h"
 
 #include "interactive_gamebase.h"
 #include <SDL_keyboard.h>

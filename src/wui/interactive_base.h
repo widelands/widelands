@@ -27,9 +27,9 @@
 #include "mapview.h"
 #include "graphic/overlay_manager.h"
 
-#include "ui/ui_basic/ui_box.h"
-#include "ui/ui_basic/ui_textarea.h"
-#include "ui/ui_basic/ui_unique_window.h"
+#include "ui_basic/box.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/unique_window.h"
 
 #include <SDL_keysym.h>
 

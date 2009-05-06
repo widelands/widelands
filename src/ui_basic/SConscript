@@ -1,0 +1,7 @@
+Import('*')
+
+SRC=simpleglob("*.cc")
+
+lib=srcenv.StaticLibrary(target='uibasic', source=SRC)
+Return('lib')
+

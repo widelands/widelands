@@ -22,7 +22,7 @@
 
 #include "interactive_player.h"
 
-#include "ui/ui_basic/ui_button.h"
+#include "ui_basic/button.h"
 
 // The GameMainMenu is a rather dumb window with lots of buttons
 struct GameMainMenu : public UI::UniqueWindow {

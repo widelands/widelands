@@ -52,8 +52,8 @@
 #include "replay.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
-#include "ui/ui_basic/ui_messagebox.h"
-#include "ui/ui_basic/ui_progresswindow.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/progresswindow.h"
 #include "warning.h"
 #include "wexception.h"
 

@@ -22,10 +22,10 @@
 
 #include "network/network_lan_promotion.h"
 
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_textarea.h"
-#include "ui/ui_basic/ui_editbox.h"
-#include "ui/ui_basic/ui_table.h"
+#include "ui_basic/button.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/table.h"
 
 #include <list>
 #include <string>

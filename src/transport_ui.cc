@@ -25,8 +25,8 @@
 #include "playercommand.h"
 #include "graphic/rendertarget.h"
 #include "tribe.h"
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_unique_window.h"
+#include "ui_basic/button.h"
+#include "ui_basic/unique_window.h"
 
 using Widelands::Economy;
 using Widelands::Game;

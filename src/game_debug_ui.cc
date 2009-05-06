@@ -27,12 +27,12 @@
 #include "wui/interactive_base.h"
 #include "map.h"
 
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_listselect.h"
-#include "ui/ui_basic/ui_multilinetextarea.h"
-#include "ui/ui_basic/ui_panel.h"
-#include "ui/ui_basic/ui_tabpanel.h"
-#include "ui/ui_basic/ui_window.h"
+#include "ui_basic/button.h"
+#include "ui_basic/listselect.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/panel.h"
+#include "ui_basic/tabpanel.h"
+#include "ui_basic/window.h"
 
 #include <cstdio>
 

@@ -25,12 +25,12 @@
 #include "map.h"
 #include "graphic/graphic.h"
 
-#include "ui/ui_basic/ui_messagebox.h"
-#include "ui/ui_basic/ui_window.h"
-#include "ui/ui_basic/ui_textarea.h"
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_checkbox.h"
-#include "ui/ui_basic/ui_editbox.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/window.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
+#include "ui_basic/editbox.h"
 
 #include <cstdio>
 

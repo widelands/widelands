@@ -22,7 +22,7 @@
 
 #include "io/filesystem/filesystem.h"
 
-#include "ui/ui_basic/ui_window.h"
+#include "ui_basic/window.h"
 
 struct Editor_Interactive;
 namespace UI {

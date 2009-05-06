@@ -30,9 +30,9 @@
 #include "wui/mapviewpixelfunctions.h"
 #include "profile/profile.h"
 
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_signal.h"
-#include "ui/ui_basic/ui_window.h"
+#include "ui_basic/button.h"
+#include "ui_basic/signal.h"
+#include "ui_basic/ui_window.h"
 
 #include "upcast.h"
 

@@ -21,7 +21,7 @@
 
 #include "editor/editorinteractive.h"
 #include "i18n.h"
-#include "ui/ui_basic/ui_button.h"
+#include "ui_basic/button.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "editor/tools/editor_set_resources_tool.h"
 #include "map.h"

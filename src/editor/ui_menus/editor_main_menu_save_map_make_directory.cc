@@ -22,10 +22,10 @@
 #include "constants.h"
 #include "i18n.h"
 
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_editbox.h"
-#include "ui/ui_basic/ui_textarea.h"
-#include "ui/ui_basic/ui_window.h"
+#include "ui_basic/button.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/window.h"
 
 Main_Menu_Save_Map_Make_Directory::Main_Menu_Save_Map_Make_Directory
 	(UI::Panel * const parent, char const * dirname)

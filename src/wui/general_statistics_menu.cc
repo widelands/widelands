@@ -30,9 +30,9 @@
 #include "tribe.h"
 #include "warelist.h"
 
-#include "ui/ui_basic/ui_button.h"
-#include "ui/ui_basic/ui_checkbox.h"
-#include "ui/ui_basic/ui_textarea.h"
+#include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
+#include "ui_basic/textarea.h"
 
 using namespace Widelands;
 

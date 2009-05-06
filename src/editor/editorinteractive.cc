@@ -41,8 +41,8 @@
 #include "map_io/widelands_map_loader.h"
 #include "wlapplication.h"
 
-#include "ui/ui_basic/ui_messagebox.h"
-#include "ui/ui_basic/ui_progresswindow.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/progresswindow.h"
 
 #include <SDL_keysym.h>
 

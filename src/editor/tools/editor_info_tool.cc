@@ -24,8 +24,8 @@
 #include "map.h"
 #include "world.h"
 
-#include "ui/ui_basic/ui_multilinetextarea.h"
-#include "ui/ui_basic/ui_window.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/window.h"
 
 #include <cstdio>
 
