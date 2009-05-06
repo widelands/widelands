@@ -1,8 +1,0 @@
-Import('*')
-from Distribute import distadd
-
-distadd(env, 'src/ui/ui_basic/SConscript')
-distadd(env, 'src/ui/ui_basic/SConscript.dist')
-distadd(env, 'src/ui/ui_basic/*.h')
-distadd(env, 'src/ui/ui_basic/*.cc')
-
