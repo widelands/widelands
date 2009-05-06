@@ -28,7 +28,7 @@
 #include "soldier.h"
 #include "trainingsite.h"
 #include "tribe.h"
-#include "warehouse.h"
+#include "logic/warehouse.h"
 #include "wexception.h"
 
 #include "upcast.h"

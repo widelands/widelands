@@ -21,7 +21,7 @@
 
 #include "areawatcher.h"
 #include "logic/battle.h"
-#include "bob.h"
+#include "logic/bob.h"
 #include "building.h"
 #include "container_iterate.h"
 #include "economy/flag.h"

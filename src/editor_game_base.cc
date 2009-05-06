@@ -36,7 +36,7 @@
 #include "ui_progresswindow.h"
 #include "upcast.h"
 #include "wexception.h"
-#include "worker.h"
+#include "logic/worker.h"
 #include "world.h"
 #include "roadtype.h"
 

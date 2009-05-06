@@ -19,7 +19,7 @@
 
 #include "editor_tool_place_bob_options_menu.h"
 
-#include "critter_bob.h"
+#include "logic/critter_bob.h"
 #include "editor_place_bob_tool.h"
 #include "editorinteractive.h"
 #include "graphic/graphic.h"

@@ -20,6 +20,7 @@
 #include "worker_descr.h"
 
 #include "carrier.h"
+
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"

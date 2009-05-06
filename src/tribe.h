@@ -21,12 +21,12 @@
 #define TRIBE_H
 
 #include "graphic/animation.h"
-#include "bob.h"
+#include "logic/bob.h"
 #include "building.h"
 #include "descr_maintainer.h"
 #include "immovable.h"
 #include "item_ware_descr.h"
-#include "worker.h"
+#include "logic/worker.h"
 #include "HTMLReferences.h"
 
 #include "io/filewrite.h"

@@ -35,7 +35,7 @@
 #include "player.h"
 #include "soldier.h"
 #include "tribe.h"
-#include "warehouse.h"
+#include "logic/warehouse.h"
 #include "watchwindow.h"
 
 #include "ui_box.h"

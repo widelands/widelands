@@ -31,7 +31,7 @@
 #include "widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
-#include "worker.h"
+#include "logic/worker.h"
 
 #include <map>
 

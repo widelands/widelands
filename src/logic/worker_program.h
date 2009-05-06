@@ -22,8 +22,9 @@
 
 
 #include "bob.h"
-#include "workarea_info.h"
 #include "worker.h"
+
+#include "workarea_info.h"
 #include "writeHTML.h"
 
 namespace Widelands {

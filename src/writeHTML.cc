@@ -25,7 +25,7 @@
 #include "productionsite.h"
 #include "soldier.h"
 #include "tribe.h"
-#include "worker_program.h"
+#include "logic/worker_program.h"
 #include "world.h"
 
 #include "io/filesystem/disk_filesystem.h"

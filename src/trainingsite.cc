@@ -29,7 +29,7 @@
 #include "economy/request.h"
 #include "soldier.h"
 #include "tribe.h"
-#include "worker.h"
+#include "logic/worker.h"
 
 #include "upcast.h"
 

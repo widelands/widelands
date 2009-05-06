@@ -20,7 +20,7 @@
 #include "world.h"
 
 #include "constants.h"
-#include "critter_bob.h"
+#include "logic/critter_bob.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"

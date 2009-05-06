@@ -20,7 +20,8 @@
 #ifndef DEFAULTAI_H
 #define DEFAULTAI_H
 
-#include "ai/ai_help_structs.h"
+#include "ai_help_structs.h"
+
 #include "computer_player.h"
 #include "i18n.h"
 

@@ -27,7 +27,7 @@
 #include "graphic/overlay_manager.h"
 #include "player.h"
 #include "tribe.h"
-#include "warehouse.h"
+#include "logic/warehouse.h"
 #include "wexception.h"
 
 #include "ui_editbox.h"

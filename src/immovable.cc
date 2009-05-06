@@ -34,7 +34,7 @@
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-#include "worker.h"
+#include "logic/worker.h"
 
 #include "upcast.h"
 

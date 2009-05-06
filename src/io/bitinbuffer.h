@@ -20,7 +20,8 @@
 #ifndef BITINBUFFER_H
 #define BITINBUFFER_H
 
-#include "io/fileread.h"
+#include "fileread.h"
+
 #include "compile_assert.h"
 
 /// Wrapper around FileRead for reading groups of Size bits from a file, where

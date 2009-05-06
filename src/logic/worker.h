@@ -20,7 +20,7 @@
 #ifndef WORKER_H
 #define WORKER_H
 
-#include "idleworkersupply.h"
+#include "economy/idleworkersupply.h"
 #include "worker_descr.h"
 
 namespace Widelands {

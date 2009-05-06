@@ -26,9 +26,6 @@
 #include <cassert>
 
 namespace Widelands {
-
-/// \todo (Antonio Trueba#1#): Get rid of forward declarations
-/// (cleanup of other headers needed)
 struct Map;
 struct Route;
 struct Transfer;

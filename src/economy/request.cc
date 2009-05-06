@@ -33,8 +33,8 @@
 #include "upcast.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "warehouse.h"
-#include "worker.h"
+#include "logic/warehouse.h"
+#include "logic/worker.h"
 
 
 namespace Widelands {

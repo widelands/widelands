@@ -24,7 +24,8 @@
 
 #include <ctime>
 
-#include "ai/ai_hints.h"
+#include "ai_hints.h"
+
 #include "constructionsite.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -40,7 +41,7 @@
 #include "trainingsite.h"
 #include "tribe.h"
 #include "upcast.h"
-#include "warehouse.h"
+#include "logic/warehouse.h"
 #include "world.h"
 
 #include <algorithm>

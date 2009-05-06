@@ -22,7 +22,7 @@
 #include "field.h"
 #include "mapregion.h"
 #include "editorinteractive.h"
-#include "bob.h"
+#include "logic/bob.h"
 
 /**
  * Deletes the bob at the given location

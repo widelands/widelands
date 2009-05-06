@@ -26,7 +26,7 @@
 #include "player.h"
 #include "graphic/rendertarget.h"
 #include "tribe.h"
-#include "worker.h"
+#include "logic/worker.h"
 
 #include <cstdio>
 

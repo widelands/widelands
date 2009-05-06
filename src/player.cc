@@ -36,7 +36,7 @@
 #include "sound/sound_handler.h"
 #include "trainingsite.h"
 #include "tribe.h"
-#include "warehouse.h"
+#include "logic/warehouse.h"
 #include "warning.h"
 #include "wexception.h"
 #include "widelands_fileread.h"

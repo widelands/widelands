@@ -32,7 +32,7 @@
 #include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
-#include "worker.h"
+#include "logic/worker.h"
 
 #include "ui_object.h" //only needed for i18n function _()
 

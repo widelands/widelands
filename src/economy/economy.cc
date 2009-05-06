@@ -30,7 +30,7 @@
 #include "request.h"
 #include "tribe.h"
 #include "upcast.h"
-#include "warehouse.h"
+#include "logic/warehouse.h"
 #include "warehousesupply.h"
 #include "wexception.h"
 

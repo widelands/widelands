@@ -20,10 +20,10 @@
 #include "widelands_map_bobdata_data_packet.h"
 
 #include "logic/battle.h"
-#include "bob.h"
-#include "carrier.h"
-#include "critter_bob.h"
-#include "critter_bob_program.h"
+#include "logic/bob.h"
+#include "logic/carrier.h"
+#include "logic/critter_bob.h"
+#include "logic/critter_bob_program.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
 #include "economy/ware_instance.h"
@@ -39,7 +39,7 @@
 #include "widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
-#include "worker_program.h"
+#include "logic/worker_program.h"
 
 namespace Widelands {
 

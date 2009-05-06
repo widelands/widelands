@@ -21,8 +21,8 @@
 #define WORKER_DESCR_H
 
 #include "bob.h"
-#include "immovable.h"
 
+#include "immovable.h"
 #include "io/filewrite.h"
 
 namespace Widelands {

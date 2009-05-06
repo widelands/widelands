@@ -23,7 +23,7 @@
 #include "economy.h"
 #include "flag.h"
 
-#include "carrier.h"
+#include "logic/carrier.h"
 #include "instances.h"
 #include "upcast.h"
 #include "player.h"

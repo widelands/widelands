@@ -20,9 +20,10 @@
 #include "worker.h"
 
 #include "carrier.h"
+#include "critter_bob.h"
+
 #include "checkstep.h"
 #include "cmd_incorporate.h"
-#include "critter_bob.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"

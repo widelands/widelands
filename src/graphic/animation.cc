@@ -19,7 +19,7 @@
 
 #include "animation.h"
 
-#include "bob.h"
+#include "logic/bob.h"
 #include "constants.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"

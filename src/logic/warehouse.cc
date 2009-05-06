@@ -18,16 +18,18 @@
  */
 
 #include "warehouse.h"
-#include "warehousesupply.h"
 
 #include <algorithm>
 
-#include "logic/battle.h"
+#include "battle.h"
 #include "carrier.h"
+#include "worker.h"
+
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
+#include "economy/warehousesupply.h"
 #include "editor_game_base.h"
 #include "game.h"
 #include "log.h"
@@ -38,7 +40,6 @@
 #include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
-#include "worker.h"
 
 namespace Widelands {
 

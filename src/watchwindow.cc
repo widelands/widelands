@@ -19,7 +19,7 @@
 
 #include "watchwindow.h"
 
-#include "bob.h"
+#include "logic/bob.h"
 #include "game.h"
 #include "graphic/graphic.h"
 #include "i18n.h"

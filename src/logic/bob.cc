@@ -19,8 +19,9 @@
 
 #include "bob.h"
 
-#include "checkstep.h"
 #include "critter_bob.h"
+
+#include "checkstep.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
 #include "game.h"

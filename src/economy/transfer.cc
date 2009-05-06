@@ -28,7 +28,7 @@
 #include "game.h"
 #include "immovable.h"
 #include "request.h"
-#include "worker.h"
+#include "logic/worker.h"
 #include "upcast.h"
 
 namespace Widelands {

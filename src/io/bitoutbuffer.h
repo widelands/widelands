@@ -20,7 +20,8 @@
 #ifndef BITOUTBUFFER_H
 #define BITOUTBUFFER_H
 
-#include "io/filewrite.h"
+#include "filewrite.h"
+
 #include "compile_assert.h"
 
 /// Wrapper around FileWrite for writing bits to a file. Call put to write a

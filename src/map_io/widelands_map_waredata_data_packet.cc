@@ -19,7 +19,7 @@
 
 #include "widelands_map_waredata_data_packet.h"
 
-#include "bob.h"
+#include "logic/bob.h"
 #include "economy/flag.h"
 #include "economy/ware_instance.h"
 #include "editor_game_base.h"
@@ -31,7 +31,7 @@
 #include "widelands_fileread.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
-#include "worker.h"
+#include "logic/worker.h"
 
 namespace Widelands {
 

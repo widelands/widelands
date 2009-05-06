@@ -17,7 +17,7 @@
  *
  */
 
-#include "ai/ai_hints.h"
+#include "ai_hints.h"
 
 #include "profile/profile.h"
 

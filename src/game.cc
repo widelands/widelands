@@ -19,7 +19,7 @@
 
 #include "game.h"
 
-#include "carrier.h"
+#include "logic/carrier.h"
 #include "cmd_check_eventchain.h"
 #include "computer_player.h"
 #include "events/event.h"

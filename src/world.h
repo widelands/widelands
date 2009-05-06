@@ -20,7 +20,7 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-#include "bob.h"
+#include "logic/bob.h"
 #include "descr_maintainer.h"
 #include "immovable.h"
 #include "worlddata.h"

@@ -31,7 +31,7 @@
 #include "sound/sound_handler.h"
 #include "tribe.h"
 #include "upcast.h"
-#include "worker_program.h"
+#include "logic/worker_program.h"
 
 namespace Widelands {
 

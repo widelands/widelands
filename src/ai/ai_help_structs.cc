@@ -17,7 +17,7 @@
  *
  */
 
-#include "ai/ai_help_structs.h"
+#include "ai_help_structs.h"
 #include "player.h"
 #include "upcast.h"
 

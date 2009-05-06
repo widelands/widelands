@@ -36,7 +36,7 @@
 #include "upcast.h"
 #include "warelist.h"
 #include "wexception.h"
-#include "worker.h"
+#include "logic/worker.h"
 #include "world.h"
 
 #include <libintl.h>

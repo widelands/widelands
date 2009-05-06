@@ -37,7 +37,7 @@ class.
 #include "soldier.h"
 #include "trainingsite.h"
 #include "tribe.h"
-#include "warehouse.h"
+#include "logic/warehouse.h"
 #include "waresdisplay.h"
 #include "economy/wares_queue.h"
 

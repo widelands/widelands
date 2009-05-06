@@ -25,11 +25,11 @@
 #include "transfer.h"
 
 #include "game.h"
-#include "warehouse.h"
+#include "logic/warehouse.h"
 #include "request.h"
 #include "wexception.h"
 #include "upcast.h"
-#include "worker.h"
+#include "logic/worker.h"
 
 namespace Widelands {
 

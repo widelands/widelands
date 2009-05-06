@@ -20,7 +20,7 @@
 #include "overlay_manager.h"
 
 #include "field.h"
-#include "graphic/graphic.h"
+#include "graphic.h"
 
 #include <algorithm>
 

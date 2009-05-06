@@ -20,7 +20,7 @@
 #ifndef SOLDIER_H
 #define SOLDIER_H
 
-#include "worker.h"
+#include "logic/worker.h"
 #include "tattribute.h"
 
 struct RGBColor;

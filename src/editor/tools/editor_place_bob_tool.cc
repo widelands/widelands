@@ -22,7 +22,7 @@
 #include "mapregion.h"
 #include "editorinteractive.h"
 #include "editor_game_base.h"
-#include "bob.h"
+#include "logic/bob.h"
 
 using Widelands::Bob;
 

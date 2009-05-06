@@ -35,7 +35,7 @@
 #include "rgbcolor.h"
 #include "tribe.h"
 #include "upcast.h"
-#include "warehouse.h"
+#include "logic/warehouse.h"
 #include "wexception.h"
 
 #include <cstdio>

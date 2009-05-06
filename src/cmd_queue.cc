@@ -28,7 +28,7 @@
 #include "trigger/trigger.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
-#include "worker.h"
+#include "logic/worker.h"
 
 #include "upcast.h"
 

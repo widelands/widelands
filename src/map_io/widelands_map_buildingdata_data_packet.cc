@@ -34,13 +34,13 @@
 #include "trainingsite.h"
 #include "tribe.h"
 #include "upcast.h"
-#include "warehouse.h"
-#include "warehousesupply.h"
+#include "logic/warehouse.h"
+#include "economy/warehousesupply.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
-#include "worker.h"
+#include "logic/worker.h"
 
 #include <map>
 

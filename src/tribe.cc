@@ -19,9 +19,9 @@
 
 #include "tribe.h"
 
-#include "carrier.h"
+#include "logic/carrier.h"
 #include "constructionsite.h"
-#include "critter_bob.h"
+#include "logic/critter_bob.h"
 #include "editor_game_base.h"
 #include "event_allow_building.h"
 #include "event_building.h"
@@ -37,9 +37,9 @@
 #include "profile/profile.h"
 #include "soldier.h"
 #include "trainingsite.h"
-#include "warehouse.h"
+#include "logic/warehouse.h"
 #include "wexception.h"
-#include "worker.h"
+#include "logic/worker.h"
 #include "widelands_fileread.h"
 #include "world.h"
 

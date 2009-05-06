@@ -37,7 +37,7 @@
 #include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
-#include "worker.h"
+#include "logic/worker.h"
 
 #include <cstdio>
 #include <sstream>
