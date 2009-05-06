@@ -4,7 +4,7 @@
 # Project related configuration options
 #---------------------------------------------------------------------------
 PROJECT_NAME           = Widelands
-PROJECT_NUMBER         = build11
+PROJECT_NUMBER         = SVN
 OUTPUT_DIRECTORY       = doc/sourcecode
 CREATE_SUBDIRS         = YES
 OUTPUT_LANGUAGE        = English
@@ -122,7 +122,7 @@ FILE_PATTERNS          = *.c \
 RECURSIVE              = YES
 EXCLUDE                =
 EXCLUDE_SYMLINKS       = NO
-EXCLUDE_PATTERNS       = */.svn/* build fonts campaigns doc locale maps music pics po sound tribes txts worlds .git
+EXCLUDE_PATTERNS       = */.svn/* build fonts campaigns doc locale maps music pics po utils tribes txts worlds .git
 EXAMPLE_PATH           =
 EXAMPLE_PATTERNS       = *
 EXAMPLE_RECURSIVE      = NO
