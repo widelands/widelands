@@ -836,6 +836,13 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		// Check if the produced wares are needed
 		bool needed = false;
 		container_iterate(std::list<EconomyObserver *>, economies, l) {
+			// Don't check if the economy has only one flag.
+			// It is either a constructionsite not yet connected or the
+			// headquarters directly after start - in last case we need
+			// lumberjack huts and quarries, and so there is no need to
+			// check the other productionsites at that state.
+			if ((*l.current)->flags.size() < 2)
+				continue;
 			for (uint32_t m = 0; m < i->outputs.size(); ++m) {
 				Ware_Index wt(static_cast<size_t>(i->outputs[m]));
 				if ((*l.current)->economy.needs_ware(wt)) {
@@ -1010,27 +1017,31 @@ bool DefaultAI::improve_roads (int32_t gametime)
 		roads.pop_front ();
 	}
 
-	if (!economies.empty() & (inhibit_road_building <= gametime)) {
+	if (!economies.empty() && (inhibit_road_building <= gametime)) {
 		EconomyObserver * eco = economies.front();
-		bool finish = false;
+		if (!eco->flags.empty()) {
+			bool finish = false;
 
-		// try to connect to another economy
-		if (economies.size() > 1)
-			finish = connect_flag_to_another_economy(*eco->flags.front());
+			// try to connect to another economy
+			if (economies.size() > 1)
+				finish = connect_flag_to_another_economy(*eco->flags.front());
 
-		if (!finish)
-			finish = improve_transportation_ways(*eco->flags.front());
+			if (!finish)
+				finish = improve_transportation_ways(*eco->flags.front());
 
-		// cycle through flags one at a time
-		eco->flags.push_back(eco->flags.front());
-		eco->flags.pop_front();
+			// cycle through flags one at a time
+			eco->flags.push_back(eco->flags.front());
+			eco->flags.pop_front();
 
-		// and cycle through economies
-		economies.push_back(eco);
-		economies.pop_front();
+			// and cycle through economies
+			economies.push_back(eco);
+			economies.pop_front();
 
-		if (finish)
-			return true;
+			if (finish)
+				return true;
+		} else
+			// If the economy has no flag, the observers need to be updated.
+			return check_economies();
 	}
 
 	return false;
