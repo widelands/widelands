@@ -20,7 +20,7 @@
 #include "event_allow_building_option_menu.h"
 
 #include "editor_game_base.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "events/event_allow_building.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
@@ -28,7 +28,7 @@
 #include "player.h"
 #include "tribe.h"
 
-#include "ui_messagebox.h"
+#include "ui/ui_basic/ui_messagebox.h"
 
 #include <cstdio>
 

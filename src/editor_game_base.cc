@@ -33,7 +33,7 @@
 #include "mapregion.h"
 #include "player.h"
 #include "tribe.h"
-#include "ui_progresswindow.h"
+#include "ui/ui_basic/ui_progresswindow.h"
 #include "upcast.h"
 #include "wexception.h"
 #include "logic/worker.h"

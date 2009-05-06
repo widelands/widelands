@@ -34,7 +34,7 @@
 #include "wexception.h"
 #include "logic/worker.h"
 
-#include "ui_object.h" //only needed for i18n function _()
+#include "ui/ui_basic/ui_object.h" //only needed for i18n function _()
 
 
 #include <cstdio>

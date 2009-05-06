@@ -20,8 +20,8 @@
 #ifndef MINIMAP_H
 #define MINIMAP_H
 
-#include "ui_button.h"
-#include "ui_unique_window.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_unique_window.h"
 
 struct Interactive_Base;
 

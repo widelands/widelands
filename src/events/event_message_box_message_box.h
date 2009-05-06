@@ -20,7 +20,7 @@
 #ifndef EVENT_MESSAGE_BOX_MESSAGE_BOX_H
 #define EVENT_MESSAGE_BOX_MESSAGE_BOX_H
 
-#include "ui_window.h"
+#include "ui/ui_basic/ui_window.h"
 
 #include <vector>
 

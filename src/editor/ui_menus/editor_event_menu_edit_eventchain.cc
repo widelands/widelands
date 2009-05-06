@@ -20,7 +20,7 @@
 #include "editor_event_menu_edit_eventchain.h"
 
 #include "constants.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "editor_event_menu_edit_trigger_conditional.h"
 #include "events/event.h"
 #include "events/event_chain.h"
@@ -29,12 +29,12 @@
 #include "map.h"
 #include "trigger/trigger_conditional.h"
 
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_editbox.h"
-#include "ui_listselect.h"
-#include "ui_textarea.h"
-#include "ui_window.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_checkbox.h"
+#include "ui/ui_basic/ui_editbox.h"
+#include "ui/ui_basic/ui_listselect.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_window.h"
 
 
 inline Editor_Interactive & Editor_Event_Menu_Edit_EventChain::eia() {

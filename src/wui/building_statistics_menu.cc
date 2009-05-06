@@ -30,7 +30,7 @@
 #include "tribe.h"
 #include "plot_area.h"
 
-#include "ui_button.h"
+#include "ui/ui_basic/ui_button.h"
 
 #include "upcast.h"
 

@@ -19,8 +19,8 @@
 
 #include "editor_player_menu.h"
 
-#include "editorinteractive.h"
-#include "editor_set_starting_pos_tool.h"
+#include "editor/editorinteractive.h"
+#include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "map.h"
@@ -30,9 +30,9 @@
 #include "logic/warehouse.h"
 #include "wexception.h"
 
-#include "ui_editbox.h"
-#include "ui_messagebox.h"
-#include "ui_textarea.h"
+#include "ui/ui_basic/ui_editbox.h"
+#include "ui/ui_basic/ui_messagebox.h"
+#include "ui/ui_basic/ui_textarea.h"
 
 
 Editor_Player_Menu::Editor_Player_Menu

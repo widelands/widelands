@@ -22,8 +22,8 @@
 
 #include "chat.h"
 
-#include "ui_editbox.h"
-#include "ui_multilinetextarea.h"
+#include "ui/ui_basic/ui_editbox.h"
+#include "ui/ui_basic/ui_multilinetextarea.h"
 
 
 struct ChatProvider;

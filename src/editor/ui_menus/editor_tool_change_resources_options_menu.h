@@ -22,9 +22,9 @@
 
 #include "editor_tool_options_menu.h"
 
-#include "ui_button.h"
-#include "ui_radiobutton.h"
-#include "ui_textarea.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_radiobutton.h"
+#include "ui/ui_basic/ui_textarea.h"
 
 struct Editor_Interactive;
 struct Editor_Increase_Resources_Tool;

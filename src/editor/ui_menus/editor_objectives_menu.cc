@@ -19,19 +19,19 @@
 
 #include "editor_objectives_menu.h"
 
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "i18n.h"
 #include "map.h"
 #include "trigger/trigger.h"
 #include "trigger/trigger_time.h"
 
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_editbox.h"
-#include "ui_messagebox.h"
-#include "ui_multilineeditbox.h"
-#include "ui_textarea.h"
-#include "ui_unique_window.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_checkbox.h"
+#include "ui/ui_basic/ui_editbox.h"
+#include "ui/ui_basic/ui_messagebox.h"
+#include "ui/ui_basic/ui_multilineeditbox.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_unique_window.h"
 
 #include <map>
 

@@ -19,11 +19,11 @@
 
 #include "editor_tool_change_resources_options_menu.h"
 
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "i18n.h"
-#include "ui_button.h"
-#include "editor_increase_resources_tool.h"
-#include "editor_set_resources_tool.h"
+#include "ui/ui_basic/ui_button.h"
+#include "editor/tools/editor_increase_resources_tool.h"
+#include "editor/tools/editor_set_resources_tool.h"
 #include "map.h"
 #include "widelands.h"
 #include "world.h"

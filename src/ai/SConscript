@@ -6,8 +6,6 @@ srcenv.Append(INDENTLIST=[
 	'ai/defaultai.cc',
 	])
 
-srcenv.Append(CPPPATH=['#/src/ai'])
-
 lib=srcenv.StaticLibrary(target='ai', source=SRC)
 Return('lib')
 

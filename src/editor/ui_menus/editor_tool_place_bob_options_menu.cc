@@ -20,19 +20,19 @@
 #include "editor_tool_place_bob_options_menu.h"
 
 #include "logic/critter_bob.h"
-#include "editor_place_bob_tool.h"
-#include "editorinteractive.h"
+#include "editor/tools/editor_place_bob_tool.h"
+#include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "map.h"
 #include "wlapplication.h"
 #include "world.h"
 
-#include "ui_box.h"
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_tabpanel.h"
-#include "ui_textarea.h"
+#include "ui/ui_basic/ui_box.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_checkbox.h"
+#include "ui/ui_basic/ui_tabpanel.h"
+#include "ui/ui_basic/ui_textarea.h"
 
 #include "upcast.h"
 

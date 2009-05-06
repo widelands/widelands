@@ -2,8 +2,6 @@ Import('*')
 
 SRC=simpleglob("*.cc")
 
-srcenv.Append(CPPPATH=['#/src/ui/ui_basic'])
-
 lib=srcenv.StaticLibrary(target='uibasic', source=SRC)
 Return('lib')
 

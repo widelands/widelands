@@ -24,8 +24,8 @@
 
 #include "plot_area.h"
 
-#include "ui_radiobutton.h"
-#include "ui_unique_window.h"
+#include "ui/ui_basic/ui_radiobutton.h"
+#include "ui/ui_basic/ui_unique_window.h"
 
 struct Interactive_GameBase;
 namespace UI {

@@ -22,13 +22,13 @@
 #include "event_message_box.h"
 #include "game.h"
 #include "graphic/graphic.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "constants.h"
 #include "trigger/trigger_time.h"
 
-#include "ui_button.h"
-#include "ui_multilinetextarea.h"
-#include "ui_textarea.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_multilinetextarea.h"
+#include "ui/ui_basic/ui_textarea.h"
 
 /**
  * The message box itself

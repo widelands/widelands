@@ -26,17 +26,17 @@
 #include "editor_event_menu_edit_trigger_conditional.h"
 #include "editor_event_menu_new_trigger.h"
 #include "editor_event_menu_new_event.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "i18n.h"
 #include "trigger/trigger.h"
 #include "map.h"
 #include "trigger/trigger_factory.h"
 
-#include "ui_button.h"
-#include "ui_listselect.h"
-#include "ui_messagebox.h"
-#include "ui_textarea.h"
-#include "ui_unique_window.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_listselect.h"
+#include "ui/ui_basic/ui_messagebox.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_unique_window.h"
 
 #include <sstream>
 

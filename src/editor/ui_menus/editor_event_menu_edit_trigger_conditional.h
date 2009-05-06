@@ -22,7 +22,7 @@
 
 #include "trigger/trigger_conditional.h"
 
-#include "ui_window.h"
+#include "ui/ui_basic/ui_window.h"
 
 struct Editor_Interactive;
 namespace UI {

@@ -19,9 +19,9 @@
 
 #include "cmd_check_eventchain.h"
 
-#include "event.h"
+#include "events/event.h"
 #include "game.h"
-#include "trigger_conditional.h"
+#include "trigger/trigger_conditional.h"
 
 namespace Widelands {
 

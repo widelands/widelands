@@ -20,7 +20,7 @@
 #ifndef GAME_TIPS_H
 #define GAME_TIPS_H
 
-#include "ui_progresswindow.h"
+#include "ui/ui_basic/ui_progresswindow.h"
 
 #include <string>
 #include <cstring>

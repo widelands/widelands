@@ -22,10 +22,10 @@
 
 #include "fullscreen_menu_base.h"
 
-#include "ui_button.h"
-#include "ui_textarea.h"
-#include "ui_multilinetextarea.h"
-#include "ui_listselect.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_multilinetextarea.h"
+#include "ui/ui_basic/ui_listselect.h"
 
 #include <string>
 

@@ -19,8 +19,6 @@ srcenv.Append(INDENTLIST=[
 	'trigger/trigger_time.h',
 	])
 
-srcenv.Append(CPPPATH=['#/src/trigger'])
-
 lib=srcenv.StaticLibrary(target='trigger', source=SRC)
 Return('lib')
 

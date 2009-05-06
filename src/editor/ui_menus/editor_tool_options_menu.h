@@ -20,9 +20,9 @@
 #ifndef EDITOR_TOOL_OPTIONS_MENU_H
 #define EDITOR_TOOL_OPTIONS_MENU_H
 
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 
-#include "ui_unique_window.h"
+#include "ui/ui_basic/ui_unique_window.h"
 
 struct Editor_Tool_Options_Menu : public UI::UniqueWindow {
 	Editor_Tool_Options_Menu

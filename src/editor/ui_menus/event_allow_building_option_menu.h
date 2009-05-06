@@ -20,11 +20,11 @@
 #ifndef EVENT_ALLOW_BUILDING_OPTION_MENU_H
 #define EVENT_ALLOW_BUILDING_OPTION_MENU_H
 
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_editbox.h"
-#include "ui_window.h"
-#include "ui_textarea.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_checkbox.h"
+#include "ui/ui_basic/ui_editbox.h"
+#include "ui/ui_basic/ui_window.h"
+#include "ui/ui_basic/ui_textarea.h"
 
 #include "widelands.h"
 

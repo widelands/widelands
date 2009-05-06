@@ -23,7 +23,7 @@
 #include "editor_set_height_tool.h"
 #include "map.h"
 #include "field.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 
 /// Decreases the heights by a value. Chages surrounding nodes if necessary.
 int32_t Editor_Decrease_Height_Tool::handle_click_impl

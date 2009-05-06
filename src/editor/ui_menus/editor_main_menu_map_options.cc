@@ -19,15 +19,15 @@
 
 #include "editor_main_menu_map_options.h"
 
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "i18n.h"
 #include "map.h"
 #include "profile/profile.h"
 
-#include "ui_textarea.h"
-#include "ui_multilinetextarea.h"
-#include "ui_multilineeditbox.h"
-#include "ui_editbox.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_multilinetextarea.h"
+#include "ui/ui_basic/ui_multilineeditbox.h"
+#include "ui/ui_basic/ui_editbox.h"
 
 #include <cstdio>
 

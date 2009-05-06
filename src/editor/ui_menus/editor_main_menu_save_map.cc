@@ -20,7 +20,7 @@
 #include "editor_main_menu_save_map.h"
 
 #include "constants.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "editor_main_menu_save_map_make_directory.h"
 #include "io/filesystem/filesystem.h"
 #include "graphic/graphic.h"
@@ -32,12 +32,12 @@
 #include "map_io/widelands_map_saver.h"
 #include "io/filesystem/zip_filesystem.h"
 
-#include "ui_button.h"
-#include "ui_editbox.h"
-#include "ui_listselect.h"
-#include "ui_messagebox.h"
-#include "ui_multilinetextarea.h"
-#include "ui_textarea.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_editbox.h"
+#include "ui/ui_basic/ui_listselect.h"
+#include "ui/ui_basic/ui_messagebox.h"
+#include "ui/ui_basic/ui_multilinetextarea.h"
+#include "ui/ui_basic/ui_textarea.h"
 
 #include "upcast.h"
 

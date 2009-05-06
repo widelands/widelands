@@ -22,8 +22,8 @@
 
 #include "fullscreen_menu_base.h"
 
-#include "ui_button.h"
-#include "ui_textarea.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_textarea.h"
 
 /**
  * This runs the main menu. There, you can select

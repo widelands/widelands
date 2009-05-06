@@ -21,16 +21,16 @@
 
 #include "i18n.h"
 #include "events/event_unhide_area.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "map.h"
 #include "graphic/graphic.h"
 
-#include "ui_messagebox.h"
-#include "ui_window.h"
-#include "ui_textarea.h"
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_editbox.h"
+#include "ui/ui_basic/ui_messagebox.h"
+#include "ui/ui_basic/ui_window.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_checkbox.h"
+#include "ui/ui_basic/ui_editbox.h"
 
 #include <cstdio>
 

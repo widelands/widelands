@@ -41,14 +41,14 @@ class.
 #include "waresdisplay.h"
 #include "economy/wares_queue.h"
 
-#include "ui_box.h"
-#include "ui_button.h"
-#include "ui_listselect.h"
-#include "ui_progressbar.h"
-#include "ui_table.h"
-#include "ui_tabpanel.h"
-#include "ui_textarea.h"
-#include "ui_window.h"
+#include "ui/ui_basic/ui_box.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_listselect.h"
+#include "ui/ui_basic/ui_progressbar.h"
+#include "ui/ui_basic/ui_table.h"
+#include "ui/ui_basic/ui_tabpanel.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_window.h"
 
 #include "upcast.h"
 

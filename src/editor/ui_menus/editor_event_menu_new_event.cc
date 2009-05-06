@@ -20,17 +20,17 @@
 #include "editor_event_menu_new_event.h"
 
 #include "constants.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "events/event.h"
 #include "events/event_factory.h"
 #include "i18n.h"
 #include "map.h"
 
-#include "ui_button.h"
-#include "ui_listselect.h"
-#include "ui_multilinetextarea.h"
-#include "ui_textarea.h"
-#include "ui_window.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_listselect.h"
+#include "ui/ui_basic/ui_multilinetextarea.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_window.h"
 
 using namespace Widelands::Event_Factory;
 

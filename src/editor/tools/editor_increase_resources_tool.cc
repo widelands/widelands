@@ -19,7 +19,7 @@
 
 #include "editor_increase_resources_tool.h"
 
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "field.h"
 #include "graphic/graphic.h"
 #include "map.h"

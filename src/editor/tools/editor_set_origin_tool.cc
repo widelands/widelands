@@ -19,7 +19,7 @@
 
 #include "editor_set_origin_tool.h"
 
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "map.h"
 #include "wui/mapviewpixelconstants.h"
 #include "graphic/overlay_manager.h"

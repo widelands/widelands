@@ -21,7 +21,7 @@
 
 #include "map.h"
 #include "field.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 
 
 /// Increases the heights by a value. Chages surrounding nodes if necessary.

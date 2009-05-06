@@ -21,16 +21,16 @@
 
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "map.h"
 #include "profile/profile.h"
 #include "world.h"
 #include "editor_game_base.h"
 
-#include "ui_button.h"
-#include "ui_progresswindow.h"
-#include "ui_textarea.h"
-#include "ui_window.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_progresswindow.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_window.h"
 
 #include <cstdio>
 #include <cstring>

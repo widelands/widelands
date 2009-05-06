@@ -19,8 +19,8 @@
 
 #include "editor_tool_set_terrain_options_menu.h"
 
-#include "editor_set_terrain_tool.h"
-#include "editorinteractive.h"
+#include "editor/tools/editor_set_terrain_tool.h"
+#include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "map.h"
@@ -30,9 +30,9 @@
 #include "world.h"
 #include "worlddata.h"
 
-#include "ui_button.h"
-#include "ui_panel.h"
-#include "ui_checkbox.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_panel.h"
+#include "ui/ui_basic/ui_checkbox.h"
 
 Editor_Tool_Set_Terrain_Tool_Options_Menu::
 Editor_Tool_Set_Terrain_Tool_Options_Menu

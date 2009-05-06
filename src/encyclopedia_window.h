@@ -24,11 +24,11 @@
 #include "i18n.h"
 #include "wui/interactive_player.h"
 
-#include "ui_listselect.h"
-#include "ui_window.h"
-#include "ui_unique_window.h"
-#include "ui_table.h"
-#include "ui_multilinetextarea.h"
+#include "ui/ui_basic/ui_listselect.h"
+#include "ui/ui_basic/ui_window.h"
+#include "ui/ui_basic/ui_unique_window.h"
+#include "ui/ui_basic/ui_table.h"
+#include "ui/ui_basic/ui_multilinetextarea.h"
 
 namespace Widelands {
 struct Item_Ware_Descr;

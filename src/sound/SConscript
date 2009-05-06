@@ -11,8 +11,6 @@ srcenv.Append(INDENTLIST=[
 	'sound/sound_handler.cc',
 	])
 
-srcenv.Append(CPPPATH=['#/src/sound'])
-
 lib=srcenv.StaticLibrary(target='sound', source=SRC)
 Return('lib')
 

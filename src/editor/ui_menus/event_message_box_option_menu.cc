@@ -21,19 +21,19 @@
 
 #include "events/event_message_box.h"
 #include "i18n.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
 #include "map.h"
 #include "trigger/trigger_time.h"
 
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_editbox.h"
-#include "ui_listselect.h"
-#include "ui_messagebox.h"
-#include "ui_multilineeditbox.h"
-#include "ui_textarea.h"
-#include "ui_window.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_checkbox.h"
+#include "ui/ui_basic/ui_editbox.h"
+#include "ui/ui_basic/ui_listselect.h"
+#include "ui/ui_basic/ui_messagebox.h"
+#include "ui/ui_basic/ui_multilineeditbox.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_window.h"
 
 
 inline Editor_Interactive & Event_Message_Box_Option_Menu::eia() {

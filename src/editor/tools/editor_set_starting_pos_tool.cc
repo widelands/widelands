@@ -20,7 +20,7 @@
 #include "editor_set_starting_pos_tool.h"
 
 #include "building.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "editor_tool.h"
 #include "graphic/graphic.h"
 #include "map.h"

@@ -23,8 +23,8 @@
 #include "debugconsole.h"
 #include "interactive_gamebase.h"
 
-#include "ui_button.h"
-#include "ui_textarea.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_textarea.h"
 
 #include <SDL_keyboard.h>
 

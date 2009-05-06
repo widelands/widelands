@@ -20,7 +20,7 @@
 #include "editor_delete_immovable_tool.h"
 
 #include "field.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "immovable.h"
 #include "mapregion.h"
 

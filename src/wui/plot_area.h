@@ -20,7 +20,7 @@
 #ifndef WUI_PLOT_AREA_H
 #define WUI_PLOT_AREA_H
 
-#include "ui_panel.h"
+#include "ui/ui_basic/ui_panel.h"
 
 #include "rgbcolor.h"
 

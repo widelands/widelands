@@ -19,13 +19,13 @@
 
 #include "editor_tool_change_height_options_menu.h"
 
-#include "editor_increase_height_tool.h"
-#include "editor_set_height_tool.h"
-#include "editorinteractive.h"
+#include "editor/tools/editor_increase_height_tool.h"
+#include "editor/tools/editor_set_height_tool.h"
+#include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 
-#include "ui_button.h"
+#include "ui/ui_basic/ui_button.h"
 
 #include <cstdio>
 

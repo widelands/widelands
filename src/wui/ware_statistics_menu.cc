@@ -29,9 +29,9 @@
 #include "warelist.h"
 #include "plot_area.h"
 
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_textarea.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_checkbox.h"
+#include "ui/ui_basic/ui_textarea.h"
 
 
 #define WARES_DISPLAY_BG "pics/ware_list_bg.png"

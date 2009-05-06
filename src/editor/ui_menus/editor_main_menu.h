@@ -20,8 +20,8 @@
 #ifndef EDITOR_MAIN_MENU_H
 #define EDITOR_MAIN_MENU_H
 
-#include "ui_button.h"
-#include "ui_unique_window.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_unique_window.h"
 
 struct Editor_Interactive;
 

@@ -24,7 +24,7 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "game_debug_ui.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
@@ -38,12 +38,12 @@
 #include "logic/warehouse.h"
 #include "watchwindow.h"
 
-#include "ui_box.h"
-#include "ui_button.h"
-#include "ui_icongrid.h"
-#include "ui_tabpanel.h"
-#include "ui_textarea.h"
-#include "ui_unique_window.h"
+#include "ui/ui_basic/ui_box.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_icongrid.h"
+#include "ui/ui_basic/ui_tabpanel.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_unique_window.h"
 
 #include "upcast.h"
 

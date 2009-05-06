@@ -26,7 +26,7 @@
 #include "events/event_chain.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
-#include "fullscreen_menu_launchgame.h"
+#include "ui/ui_fs_menus/fullscreen_menu_launchgame.h"
 #include "game_io/game_loader.h"
 #include "wui/game_tips.h"
 #include "game_io/game_preload_data_packet.h"
@@ -51,7 +51,7 @@
 
 #include "economy/economy.h"
 
-#include "ui_progresswindow.h"
+#include "ui/ui_basic/ui_progresswindow.h"
 
 #include "log.h"
 

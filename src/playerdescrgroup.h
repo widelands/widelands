@@ -21,7 +21,7 @@
 #define PLAYERDESCRGROUP_H
 
 #include "constants.h"
-#include "ui_panel.h"
+#include "ui/ui_basic/ui_panel.h"
 
 #include <string>
 

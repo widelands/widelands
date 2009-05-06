@@ -23,7 +23,7 @@
 #include "editor_decrease_height_tool.h"
 #include "map.h"
 #include "field.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 
 int32_t Editor_Set_Height_Tool::handle_click_impl
 	(Widelands::Map               &       map,

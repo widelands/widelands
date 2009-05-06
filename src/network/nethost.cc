@@ -22,7 +22,7 @@
 #include "build_info.h"
 #include "chat.h"
 #include "computer_player.h"
-#include "fullscreen_menu_launchgame.h"
+#include "ui/ui_fs_menus/fullscreen_menu_launchgame.h"
 #include "game.h"
 #include "wui/game_tips.h"
 #include "i18n.h"
@@ -38,7 +38,7 @@
 #include "wexception.h"
 #include "wlapplication.h"
 
-#include "ui_progresswindow.h"
+#include "ui/ui_basic/ui_progresswindow.h"
 
 
 

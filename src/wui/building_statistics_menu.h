@@ -20,10 +20,10 @@
 #ifndef BUILDING_STATISTICS_MENU_H
 #define BUILDING_STATISTICS_MENU_H
 
-#include "ui_progressbar.h"
-#include "ui_table.h"
-#include "ui_textarea.h"
-#include "ui_unique_window.h"
+#include "ui/ui_basic/ui_progressbar.h"
+#include "ui/ui_basic/ui_table.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_unique_window.h"
 
 namespace Widelands {struct Building_Descr;};
 struct Interactive_Player;

@@ -22,14 +22,14 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "trigger/trigger_time.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_editbox.h"
-#include "ui_messagebox.h"
-#include "ui_textarea.h"
-#include "ui_window.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_checkbox.h"
+#include "ui/ui_basic/ui_editbox.h"
+#include "ui/ui_basic/ui_messagebox.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_window.h"
 
 
 int32_t Widelands::Trigger_Time::option_menu(Editor_Interactive & eia) {

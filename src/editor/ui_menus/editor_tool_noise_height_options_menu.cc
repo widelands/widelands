@@ -19,10 +19,10 @@
 
 #include "editor_tool_noise_height_options_menu.h"
 
-#include "editorinteractive.h"
-#include "editor_increase_height_tool.h"
-#include "editor_decrease_height_tool.h"
-#include "editor_noise_height_tool.h"
+#include "editor/editorinteractive.h"
+#include "editor/tools/editor_increase_height_tool.h"
+#include "editor/tools/editor_decrease_height_tool.h"
+#include "editor/tools/editor_noise_height_tool.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 

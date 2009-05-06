@@ -18,16 +18,16 @@
  */
 
 #include "editorinteractive.h"
-#include "editor_delete_immovable_tool.h"
-#include "editor_event_menu.h"
-#include "editor_objectives_menu.h"
-#include "editor_variables_menu.h"
-#include "editor_main_menu.h"
-#include "editor_main_menu_load_map.h"
-#include "editor_main_menu_save_map.h"
-#include "editor_player_menu.h"
-#include "editor_tool_menu.h"
-#include "editor_toolsize_menu.h"
+#include "tools/editor_delete_immovable_tool.h"
+#include "ui_menus/editor_event_menu.h"
+#include "ui_menus/editor_objectives_menu.h"
+#include "ui_menus/editor_variables_menu.h"
+#include "ui_menus/editor_main_menu.h"
+#include "ui_menus/editor_main_menu_load_map.h"
+#include "ui_menus/editor_main_menu_save_map.h"
+#include "ui_menus/editor_player_menu.h"
+#include "ui_menus/editor_tool_menu.h"
+#include "ui_menus/editor_toolsize_menu.h"
 #include "wui/game_tips.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
@@ -41,8 +41,8 @@
 #include "map_io/widelands_map_loader.h"
 #include "wlapplication.h"
 
-#include "ui_messagebox.h"
-#include "ui_progresswindow.h"
+#include "ui/ui_basic/ui_messagebox.h"
+#include "ui/ui_basic/ui_progresswindow.h"
 
 #include <SDL_keysym.h>
 

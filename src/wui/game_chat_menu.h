@@ -21,7 +21,7 @@
 #define GAME_CHAT_MENU_H
 
 #include "gamechatpanel.h"
-#include "ui_unique_window.h"
+#include "ui/ui_basic/ui_unique_window.h"
 
 
 /**

@@ -20,7 +20,7 @@
 #ifndef EDITOR_EVENT_MENU_NEW_EVENT_H
 #define EDITOR_EVENT_MENU_NEW_EVENT_H
 
-#include "ui_window.h"
+#include "ui/ui_basic/ui_window.h"
 
 struct Editor_Interactive;
 namespace Widelands {struct Event_Descr;};

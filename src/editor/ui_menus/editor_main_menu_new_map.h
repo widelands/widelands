@@ -20,7 +20,7 @@
 #ifndef EDITOR_MAIN_MENU_NEW_MAP_H
 #define EDITOR_MAIN_MENU_NEW_MAP_H
 
-#include "ui_window.h"
+#include "ui/ui_basic/ui_window.h"
 
 #include <vector>
 

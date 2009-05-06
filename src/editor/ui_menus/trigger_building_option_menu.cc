@@ -20,13 +20,13 @@
 #include "trigger_building_option_menu.h"
 
 #include "i18n.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "map.h"
 #include "graphic/graphic.h"
 #include "player.h"
 #include "tribe.h"
 
-#include "ui_messagebox.h"
+#include "ui/ui_basic/ui_messagebox.h"
 
 #include <cstdio>
 

@@ -25,7 +25,7 @@
 #include "constructionsite.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "event.h"
+#include "events/event.h"
 #include "findimmovable.h"
 #include "game.h"
 #include "i18n.h"

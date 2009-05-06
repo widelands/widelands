@@ -19,18 +19,18 @@
 
 #include "editor_tool_place_immovable_options_menu.h"
 
-#include "editorinteractive.h"
-#include "editor_place_immovable_tool.h"
+#include "editor/editorinteractive.h"
+#include "editor/tools/editor_place_immovable_tool.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "map.h"
 #include "wlapplication.h"
 #include "world.h"
 
-#include "ui_box.h"
-#include "ui_button.h"
-#include "ui_checkbox.h"
-#include "ui_textarea.h"
+#include "ui/ui_basic/ui_box.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_checkbox.h"
+#include "ui/ui_basic/ui_textarea.h"
 
 #include <SDL_keysym.h>
 

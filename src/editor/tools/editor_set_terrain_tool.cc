@@ -20,7 +20,7 @@
 
 #include "editor_set_terrain_tool.h"
 
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "maptriangleregion.h"
 
 using Widelands::TCoords;

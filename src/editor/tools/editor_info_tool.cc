@@ -19,13 +19,13 @@
 
 #include "editor_info_tool.h"
 
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "i18n.h"
 #include "map.h"
 #include "world.h"
 
-#include "ui_multilinetextarea.h"
-#include "ui_window.h"
+#include "ui/ui_basic/ui_multilinetextarea.h"
+#include "ui/ui_basic/ui_window.h"
 
 #include <cstdio>
 

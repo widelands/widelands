@@ -20,7 +20,7 @@
 #include "editor_place_bob_tool.h"
 #include "field.h"
 #include "mapregion.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "editor_game_base.h"
 #include "logic/bob.h"
 

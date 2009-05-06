@@ -2,8 +2,6 @@ Import('*')
 
 SRC=simpleglob("*.cc")
 
-srcenv.Append(CPPPATH=['#/src/ui/ui_fs_menus'])
-
 lib=srcenv.StaticLibrary(target='uifsmenus', source=SRC)
 Return('lib')
 

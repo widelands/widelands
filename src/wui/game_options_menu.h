@@ -22,9 +22,9 @@
 
 #include "interactive_gamebase.h"
 
-#include "ui_button.h"
-#include "ui_textarea.h"
-#include "ui_unique_window.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_unique_window.h"
 
 // The GameOptionsMenu is a rather dumb window with lots of buttons
 struct GameOptionsMenu : public UI::UniqueWindow {

@@ -19,15 +19,15 @@
 
 #include "editor_event_menu_edit_trigger_conditional.h"
 
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "map.h"
-#include "ui_button.h"
-#include "ui_listselect.h"
-#include "ui_messagebox.h"
-#include "ui_textarea.h"
-#include "ui_window.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_listselect.h"
+#include "ui/ui_basic/ui_messagebox.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_window.h"
 #include "trigger/trigger.h"
 #include "trigger/trigger_conditional.h"
 

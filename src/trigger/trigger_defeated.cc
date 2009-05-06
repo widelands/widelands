@@ -19,7 +19,7 @@
 
 #include "trigger_defeated.h"
 
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "game.h"
 #include "map.h"
 #include "player.h"

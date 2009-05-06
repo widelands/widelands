@@ -21,10 +21,10 @@
 
 #include "interactive_gamebase.h"
 
-#include "ui_unique_window.h"
-#include "ui_textarea.h"
-#include "ui_checkbox.h"
-#include "ui_slider.h"
+#include "ui/ui_basic/ui_unique_window.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_checkbox.h"
+#include "ui/ui_basic/ui_slider.h"
 
 /**
  * A window with all sound options.

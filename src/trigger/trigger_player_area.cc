@@ -20,7 +20,7 @@
 #include "trigger_building.h"
 
 #include "building.h"
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 #include "game.h"
 #include "i18n.h"
 #include "map.h"

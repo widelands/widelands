@@ -20,12 +20,12 @@
 #ifndef GAME_MAIN_MENU_SAVE_GAME_H
 #define GAME_MAIN_MENU_SAVE_GAME_H
 
-#include "ui_button.h"
-#include "ui_editbox.h"
-#include "ui_listselect.h"
-#include "ui_messagebox.h"
-#include "ui_textarea.h"
-#include "ui_unique_window.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_editbox.h"
+#include "ui/ui_basic/ui_listselect.h"
+#include "ui/ui_basic/ui_messagebox.h"
+#include "ui/ui_basic/ui_textarea.h"
+#include "ui/ui_basic/ui_unique_window.h"
 
 struct Interactive_GameBase;
 

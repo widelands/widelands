@@ -2,8 +2,6 @@ Import('*')
 
 SRC=simpleglob("*.cc")
 
-srcenv.Append(CPPPATH=['#/src/editor/tools'])
-
 lib=srcenv.StaticLibrary(target='editortools', source=SRC)
 Return('lib')
 

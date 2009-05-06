@@ -20,19 +20,19 @@
 #ifndef EDITORINTERACTIVE_H
 #define EDITORINTERACTIVE_H
 
-#include "editor_increase_height_tool.h"
-#include "editor_increase_resources_tool.h"
-#include "editor_info_tool.h"
-#include "editor_noise_height_tool.h"
-#include "editor_place_immovable_tool.h"
-#include "editor_place_bob_tool.h"
-#include "editor_set_origin_tool.h"
-#include "editor_set_terrain_tool.h"
-#include "editor_set_starting_pos_tool.h"
+#include "tools/editor_increase_height_tool.h"
+#include "tools/editor_increase_resources_tool.h"
+#include "tools/editor_info_tool.h"
+#include "tools/editor_noise_height_tool.h"
+#include "tools/editor_place_immovable_tool.h"
+#include "tools/editor_place_bob_tool.h"
+#include "tools/editor_set_origin_tool.h"
+#include "tools/editor_set_terrain_tool.h"
+#include "tools/editor_set_starting_pos_tool.h"
 #include "wui/interactive_base.h"
 
-#include "ui_button.h"
-#include "ui_unique_window.h"
+#include "ui/ui_basic/ui_button.h"
+#include "ui/ui_basic/ui_unique_window.h"
 
 class Editor;
 class Editor_Tool;
