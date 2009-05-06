@@ -22,13 +22,6 @@ CTAGS:=/usr/bin/ctags
 
 #ADD_CFLAGS:=-DNO_PARACHUTE
 
-# additional build flags. if you're not a developer, you don't want
-# to change this
-#ADD_CFLAGS:= inherit flags from command line!
-
-# additional link flags. if you're not a developer, you don't want
-# to change this
-#ADD_LDFLAGS:=
 
 # Different build-types:
 #  debug      not optimized, debugging symbols
@@ -62,8 +55,6 @@ BUILD:=$(strip $(BUILD))
 ifeq ($(BUILD),release)
 OPTIMIZE:=yes
 # heavy optimization
-#ADD_CFLAGS:=$(ADD_CFLAGS) -fomit-frame-pointer -finline-functions -ffast-math -funroll-loops -funroll-all-loops -fexpensive-optimizations
-# !!!! -fomit-frame-pointer breaks execeptions !!!!
 ADD_CFLAGS:=$(ADD_CFLAGS) -finline-functions -ffast-math -funroll-loops -funroll-all-loops -fexpensive-optimizations
 else
 ifeq ($(BUILD),profile)
@@ -139,7 +130,10 @@ dist:
 
 # WIDELANDS MAIN PROGRAM BUILD RULES
 
-SUBDIRS=../../../src ../../../src/io ../../../src/io/filesystem ../../../src/network ../../../src/economy ../../../src/ai ../../../src/ui/ui_fs_menus ../../../src/ui/ui_basic ../../../src/editor ../../../src/editor/ui_menus ../../../src/editor/tools ../../../src/events ../../../src/sound ../../../src/trigger ../../../src/map_io
+SUBDIRS  = ../../../src ../../../src/io ../../../src/io/filesystem ../../../src/network ../../../src/economy ../../../src/ai ../../../src/ui/ui_fs_menus
+SUBDIRS += ../../../src/ui/ui_basic ../../../src/editor ../../../src/editor/ui_menus ../../../src/editor/tools ../../../src/events ../../../src/sound
+SUBDIRS += ../../../src/trigger ../../../src/map_io ../../../src/wui ../../../src/logic ../../../src/profile ../../../src/graphic ../../../src/game_io
+
 
 CFLAGS += $(patsubst %,-I%,$(SUBDIRS))
 CXXFLAGS += $(patsubst %,-I%,$(SUBDIRS))
