@@ -616,18 +616,33 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 	int32_t expand_factor = 1;
 
-	// check space and set the need for expansion
-	if (spots_avail[BUILDCAPS_BIG] < 2)
-		expand_factor *= 2;
-	if (spots_avail[BUILDCAPS_MEDIUM] + spots_avail[BUILDCAPS_BIG] < 4)
-		expand_factor *= 2;
-	if
-		(spots_avail[BUILDCAPS_SMALL]  +
-		 spots_avail[BUILDCAPS_MEDIUM] +
-		 spots_avail[BUILDCAPS_BIG]
-		 <
-		 8)
-		expand_factor *= 2;
+	if (!(type == DEFENSIVE)) {
+		// check space and set the need for expansion
+		if (spots_avail[BUILDCAPS_BIG] < 2)
+			expand_factor *= 2;
+		if (spots_avail[BUILDCAPS_MEDIUM] + spots_avail[BUILDCAPS_BIG] < 4)
+			expand_factor *= 2;
+		if
+			(spots_avail[BUILDCAPS_SMALL]  +
+			 spots_avail[BUILDCAPS_MEDIUM] +
+			 spots_avail[BUILDCAPS_BIG]
+			 <
+			 8)
+			expand_factor *= 2;
+	} else {
+		// check space and set the need for expansion
+		if (spots_avail[BUILDCAPS_BIG] < 2)
+			expand_factor += 1;
+		if (spots_avail[BUILDCAPS_MEDIUM] + spots_avail[BUILDCAPS_BIG] < 4)
+			expand_factor += 1;
+		if
+			(spots_avail[BUILDCAPS_SMALL]  +
+			 spots_avail[BUILDCAPS_MEDIUM] +
+			 spots_avail[BUILDCAPS_BIG]
+			 <
+			 8)
+			expand_factor *= 2;
+	}
 
 	Building_Index proposed_building;
 	int32_t proposed_priority = 0;
@@ -706,6 +721,13 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// Check if the produced wares are needed
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
 						for (uint32_t m = 0; m < j->outputs.size(); ++m) {
+							// Don't check if the economy has only one flag.
+							// It is either a constructionsite not yet connected or the
+							// headquarters directly after start - in last case we need
+							// lumberjack huts and quarries, and so there is no need to
+							// check the other productionsites at that state.
+							if ((*l.current)->flags.size() < 2)
+								continue;
 							Ware_Index wt(static_cast<size_t>(j->outputs[m]));
 							if ((*l.current)->economy.needs_ware(wt)) {
 								prio += 1 + wares[j->outputs[m]].preciousness;
@@ -787,7 +809,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			}
 
 			// Prefer road side fields
-			prio += bf->preferred ?  1 : 0;
+			if (prio > 0)
+				prio += bf->preferred ?  1 : 0;
 
 			// don't waste good land for small huts
 			prio -= (maxsize - j->desc->get_size()) * 3;
