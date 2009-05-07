@@ -19,7 +19,7 @@
 
 #include "main.h"
 
-#include "../../build_info.h"
+#include "build_info.h"
 #include "i18n.h"
 
 Fullscreen_Menu_Main::Fullscreen_Menu_Main()
