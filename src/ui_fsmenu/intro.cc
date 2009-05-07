@@ -17,7 +17,7 @@
  *
  */
 
-#include "fullscreen_menu_intro.h"
+#include "intro.h"
 
 #include "i18n.h"
 

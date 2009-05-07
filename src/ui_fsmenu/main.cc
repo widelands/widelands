@@ -17,7 +17,7 @@
  *
  */
 
-#include "fullscreen_menu_main.h"
+#include "main.h"
 
 #include "../../build_info.h"
 #include "i18n.h"

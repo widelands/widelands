@@ -31,7 +31,7 @@
 #include <string>
 #include <cstring>
 
-#include "fullscreen_menu_base.h"
+#include "base.h"
 
 class LAN_Open_Game;
 struct LAN_Game_Info;

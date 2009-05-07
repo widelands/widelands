@@ -17,7 +17,7 @@
  *
  */
 
-#include "fullscreen_menu_editor.h"
+#include "editor.h"
 
 #include "constants.h"
 #include "i18n.h"

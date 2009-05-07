@@ -17,7 +17,7 @@
  *
  */
 
-#include "fullscreen_menu_mapselect.h"
+#include "mapselect.h"
 
 
 #include "editor_game_base.h"

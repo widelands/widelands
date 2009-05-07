@@ -17,11 +17,11 @@
  *
  */
 
-#include "fullscreen_menu_launchgame.h"
+#include "launchgame.h"
 
 //#include "editor_game_base.h"
-#include "fullscreen_menu_loadgame.h"
-#include "fullscreen_menu_mapselect.h"
+#include "loadgame.h"
+#include "mapselect.h"
 #include "game.h"
 #include "wui/gamechatpanel.h"
 #include "gamecontroller.h"

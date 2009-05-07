@@ -17,7 +17,7 @@
  *
  */
 
-#include "fullscreen_menu_loadreplay.h"
+#include "loadreplay.h"
 
 #include "game.h"
 #include "game_io/game_loader.h"

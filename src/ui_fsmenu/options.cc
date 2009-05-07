@@ -19,7 +19,7 @@
 
 #define DEFINE_LANGUAGES  // So that the language array gets defined
 
-#include "fullscreen_menu_options.h"
+#include "options.h"
 
 #include "constants.h"
 #include "io/filesystem/layered_filesystem.h"

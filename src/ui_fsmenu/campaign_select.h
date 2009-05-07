@@ -20,7 +20,7 @@
 #ifndef FULLSCREEN_MENU_CAMPAIGN_SELECT_H
 #define FULLSCREEN_MENU_CAMPAIGN_SELECT_H
 
-#include "fullscreen_menu_base.h"
+#include "base.h"
 
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"

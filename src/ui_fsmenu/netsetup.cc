@@ -17,7 +17,7 @@
  *
  */
 
-#include "fullscreen_menu_netsetup.h"
+#include "netsetup.h"
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "i18n.h"

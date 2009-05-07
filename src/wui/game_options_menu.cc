@@ -19,7 +19,7 @@
 
 #include "game_options_menu.h"
 
-#include "ui/ui_fs_menus/fullscreen_menu_fileview.h"
+#include "ui_fsmenu/fileview.h"
 #include "game_options_sound_menu.h"
 #include "game_main_menu_save_game.h"
 #include "graphic/graphic.h"

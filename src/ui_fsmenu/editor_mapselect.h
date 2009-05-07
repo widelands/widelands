@@ -20,7 +20,7 @@
 #ifndef FULLSCREEN_MENU_EDITOR_MAPSELECT_H
 #define FULLSCREEN_MENU_EDITOR_MAPSELECT_H
 
-#include "fullscreen_menu_mapselect.h"
+#include "mapselect.h"
 #include "io/filesystem/filesystem.h"
 
 /**

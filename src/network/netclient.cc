@@ -20,7 +20,7 @@
 #include "netclient.h"
 
 #include "build_info.h"
-#include "ui/ui_fs_menus/fullscreen_menu_launchgame.h"
+#include "ui_fsmenu/launchgame.h"
 #include "game.h"
 #include "wui/game_tips.h"
 #include "i18n.h"

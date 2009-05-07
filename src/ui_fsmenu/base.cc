@@ -17,7 +17,7 @@
  *
  */
 
-#include "fullscreen_menu_base.h"
+#include "base.h"
 
 #include "io/filesystem/filesystem.h"
 #include "graphic/graphic.h"

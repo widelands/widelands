@@ -17,7 +17,7 @@
  *
  */
 
-#include "fullscreen_menu_singleplayer.h"
+#include "singleplayer.h"
 
 #include "constants.h"
 #include "i18n.h"

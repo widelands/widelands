@@ -17,7 +17,7 @@
  *
  */
 
-#include "fullscreen_menu_campaign_select.h"
+#include "campaign_select.h"
 #include "campvis.h"
 #include "constants.h"
 #include "graphic/graphic.h"

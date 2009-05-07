@@ -17,7 +17,7 @@
  *
  */
 
-#include "fullscreen_menu_fileview.h"
+#include "fileview.h"
 
 #include "constants.h"
 #include "io/filesystem/filesystem.h"
