@@ -63,6 +63,7 @@ type(t),
 m_buildable_changed(true),
 m_mineable_changed(true),
 tribe(0),
+next_stats_update_due(30000),
 next_productionsite_check_due(0),
 next_mine_check_due(0),
 next_militarysite_check_due(0),
@@ -127,6 +128,11 @@ void DefaultAI::think ()
 	// empty economy is left.
 	if (check_economies())
 		return;
+
+	// Before thinking about a new construction, update current stats, to have
+	// a better view on current economy.
+	if (next_stats_update_due <= gametime)
+		update_productionsite_stats(gametime);
 
 	// Now try to build something if possible
 	if (next_construction_due <= gametime) {
@@ -215,6 +221,7 @@ void DefaultAI::late_initialization ()
 		bo.cnt_built              = 0;
 		bo.cnt_under_construction = 0;
 		bo.production_hint        = -1;
+		bo.current_stats          = 100;
 
 		bo.is_basic               = false;
 
@@ -584,6 +591,35 @@ void DefaultAI::update_mineable_field (MineableField & field)
 }
 
 
+/// Updates the prodcutionsites statistics needed for construction decision.
+void DefaultAI::update_productionsite_stats(int32_t gametime) {
+	// Updating the stats every 20 seconds should be enough
+	next_stats_update_due = gametime + 20000;
+
+	// Reset statistics for all buildings
+	for (uint32_t i = 0; i < buildings.size(); ++i) {
+		if (buildings[i].cnt_built > 0)
+			buildings[i].current_stats = 0;
+		// If there are no buildings of that type set the current_stats to 100
+		else
+			buildings[i].current_stats = 100;
+	}
+
+	// Check all available productionsites and add there statistics value
+	for (uint32_t i = 0; i < productionsites.size(); ++i) {
+		assert(productionsites.front().bo->cnt_built > 0);
+
+		productionsites.front().bo->current_stats +=
+			productionsites.front().site->get_statistics_percent()
+			/ productionsites.front().bo->cnt_built;
+
+		// Now reorder the buildings
+		productionsites.push_back(productionsites.front());
+		productionsites.pop_front();
+	}
+}
+
+
 /**
  * constructs the most needed building
  *
@@ -662,48 +698,47 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		int32_t const maxsize =
 			player->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK;
 
-		for
-			(std::list<BuildingObserver>::iterator j = buildings.begin();
-			 j != buildings.end();
-			 ++j)
-		{
-			if (!j->is_buildable)
+		// Check all buildable buildings
+		for (uint32_t j = 0; j < buildings.size(); ++j) {
+			BuildingObserver & bo = buildings[j];
+
+			if (!bo.is_buildable)
 				continue;
 
-			if (j->type == BuildingObserver::MINE)
+			if (bo.type == BuildingObserver::MINE)
 				continue;
 
-			if (j->desc->get_size() > maxsize)
+			if (bo.desc->get_size() > maxsize)
 				continue;
 
 			int32_t prio = 0;
 
-			if (j->type == BuildingObserver::PRODUCTIONSITE) {
-				if (j->need_trees) {
+			if (bo.type == BuildingObserver::PRODUCTIONSITE) {
+				if (bo.need_trees) {
 					// Priority of woodcutters depend on the number of near trees
 					prio += bf->trees_nearby * 5 / 3;
 					prio /= 2 * (1 + bf->tree_consumers_nearby);
-					if (j->total_count() < 2)
+					if (bo.total_count() < 2)
 						prio *= 6; // big bonus for the basics
-					if (j->total_count() == 0)
+					if (bo.total_count() == 0)
 						prio *= 2; // even more for the absolute basics
-				} else if (j->need_stones) {
+				} else if (bo.need_stones) {
 					// Priority of quarries depend on the number of near stones
 					prio += bf->stones_nearby * 5 / 3;
 					prio /= 2 * (1 + bf->stone_consumers_nearby);
-					if (j->total_count() == 0)
+					if (bo.total_count() == 0)
 						prio *= 10; // big bonus for the basics
-				} else if (j->production_hint >= 0) {
+				} else if (bo.production_hint >= 0) {
 					// production hint (f.e. associate forester with trunks)
 					// add bonus near buildings outputting production_hint ware
-					prio += 2 * bf->producers_nearby[j->production_hint];
+					prio += 2 * bf->producers_nearby[bo.production_hint];
 					// Add preciousness - makes the defaultAI build foresters earlier
-					prio += 2 * wares[j->production_hint].preciousness;
+					prio += 2 * wares[bo.production_hint].preciousness;
 
 					// Do not build too many of these buildings, but still care
 					// to build at least one.
-					if (j->total_count() > 1)
-						prio -= 10 * (j->total_count());
+					if (bo.total_count() > 1)
+						prio -= 10 * (bo.total_count());
 					else
 						prio *= 3;
 
@@ -711,16 +746,16 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 						continue;
 
 					// Calculate the need for this building
-					prio += 4 * wares[j->production_hint].consumers;
-					prio += wares[j->production_hint].preciousness;
+					prio += 4 * wares[bo.production_hint].consumers;
+					prio += wares[bo.production_hint].preciousness;
 				} else { // "normal" productionsites
 
-					if (j->is_basic && (j->total_count() == 0))
+					if (bo.is_basic && (bo.total_count() == 0))
 						prio += 50; // for very important buildings
 
 					// Check if the produced wares are needed
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
-						for (uint32_t m = 0; m < j->outputs.size(); ++m) {
+						for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
 							// Don't check if the economy has only one flag.
 							// It is either a constructionsite not yet connected or the
 							// headquarters directly after start - in last case we need
@@ -728,10 +763,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 							// check the other productionsites at that state.
 							if ((*l.current)->flags.size() < 2)
 								continue;
-							Ware_Index wt(static_cast<size_t>(j->outputs[m]));
+							Ware_Index wt(static_cast<size_t>(bo.outputs[m]));
 							if ((*l.current)->economy.needs_ware(wt)) {
-								prio += 1 + wares[j->outputs[m]].preciousness;
-								if (j->total_count() == 0)
+								prio += 1 + wares[bo.outputs[m]].preciousness;
+								if (bo.total_count() == 0)
 									prio *= 4; // big bonus, this site might be elemental
 							}
 						}
@@ -739,29 +774,29 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 					// If the produced wares are needed
 					if (prio > 0) {
-						prio = calculate_need_for_ps(*j, prio);
+						prio = calculate_need_for_ps(bo, prio);
 
 						int32_t iosum = 0;
-						for (size_t k = 0; k < j->inputs.size(); ++k)
-							if (bf->producers_nearby[j->inputs[k]] > 0)
+						for (size_t k = 0; k < bo.inputs.size(); ++k)
+							if (bf->producers_nearby[bo.inputs[k]] > 0)
 								++iosum;
-							else if (bf->consumers_nearby[j->inputs[k]] > 0)
+							else if (bf->consumers_nearby[bo.inputs[k]] > 0)
 								--iosum;
 						if (iosum < -2)
 							iosum = -2;
-						for (size_t k = 0; k < j->outputs.size(); ++k)
-							if (bf->consumers_nearby[j->outputs[k]] > 0)
+						for (size_t k = 0; k < bo.outputs.size(); ++k)
+							if (bf->consumers_nearby[bo.outputs[k]] > 0)
 								++iosum;
 						prio += 2 * iosum;
 					}
 
 					// do not construct more than one building,
 					// if supply line is already broken.
-					if (!check_supply(*j) && j->total_count() > 0)
+					if (!check_supply(bo) && bo.total_count() > 0)
 						prio -= 12;
 
 				}
-			} else if (j->type == BuildingObserver::MILITARYSITE) {
+			} else if (bo.type == BuildingObserver::MILITARYSITE) {
 				prio  = bf->unowned_land_nearby - bf->military_influence * 4;
 				prio  = prio > 0 ? prio : 1;
 				prio *= expand_factor;
@@ -771,40 +806,40 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					prio /= 5;
 				}
 
-			} else if (j->type == BuildingObserver::WAREHOUSE) {
+			} else if (bo.type == BuildingObserver::WAREHOUSE) {
 				// Build one warehouse (hq included) for ~every 25 productionsites
 				// and mines. Militarysites are slightly important as well, to
 				// have a bigger chance for a warehouses (containing waiting
 				// soldiers or wares needed for soldier training) near the frontier.
 				prio += productionsites.size() + mines.size();
 				prio += militarysites.size() / 3;
-				prio -= (j->cnt_under_construction + numof_warehouses) * 25;
+				prio -= (bo.cnt_under_construction + numof_warehouses) * 25;
 				prio *= 2;
 
-			} else if (j->type == BuildingObserver::TRAININGSITE) {
+			} else if (bo.type == BuildingObserver::TRAININGSITE) {
 				// Start building trainingsites when there are already more than 50
 				// other buildings. That should be enough for a working economy.
 				// On the other hand only build more trainingssites of the same type
 				// if the economy is really big.
 				prio += productionsites.size() + militarysites.size();
 				prio += mines.size();
-				prio  = prio / (j->total_count() + 1);
-				prio -= (j->total_count() + 1) * 50;
+				prio  = prio / (bo.total_count() + 1);
+				prio -= (bo.total_count() + 1) * 50;
 			}
 
 			// avoid to have too many construction sites
 			prio -=
-				2 * j->cnt_under_construction * (j->cnt_under_construction + 1);
+				2 * bo.cnt_under_construction * (bo.cnt_under_construction + 1);
 
 			// add big penalty if water is needed, but is not near
-			if (j->need_water) {
+			if (bo.need_water) {
 				if (bf->water_nearby < 3)
 					continue;
 				int effect = bf->water_nearby - 8;
 				prio += effect > 0 ? static_cast<int>(sqrt(effect)) : effect;
 				// if same producers are nearby, then give some penalty
-				for (size_t k = 0; k < j->outputs.size(); ++k)
-					if (bf->producers_nearby[j->outputs[k]] > 0)
+				for (size_t k = 0; k < bo.outputs.size(); ++k)
+					if (bf->producers_nearby[bo.outputs[k]] > 0)
 						prio -= 3;
 			}
 
@@ -813,9 +848,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				prio += bf->preferred ?  1 : 0;
 
 			// don't waste good land for small huts
-			prio -= (maxsize - j->desc->get_size()) * 3;
+			prio -= (maxsize - bo.desc->get_size()) * 3;
 			if (prio > proposed_priority) {
-				proposed_building = j->id;
+				proposed_building = bo.id;
 				proposed_priority = prio;
 				proposed_coords   = bf->coords;
 			}
@@ -823,13 +858,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 	}
 
 	// then try all mines
-	for
-		(std::list<BuildingObserver>::iterator i = buildings.begin();
-		 i != buildings.end();
-		 ++i)
-	{
+	for (uint32_t i = 0; i < buildings.size(); ++i) {
+		BuildingObserver & bo = buildings[i];
 
-		if (!i->is_buildable || i->type != BuildingObserver::MINE)
+		if (!bo.is_buildable || bo.type != BuildingObserver::MINE)
 			continue;
 
 
@@ -843,8 +875,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			// check the other productionsites at that state.
 			if ((*l.current)->flags.size() < 2)
 				continue;
-			for (uint32_t m = 0; m < i->outputs.size(); ++m) {
-				Ware_Index wt(static_cast<size_t>(i->outputs[m]));
+			for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
+				Ware_Index wt(static_cast<size_t>(bo.outputs[m]));
 				if ((*l.current)->economy.needs_ware(wt)) {
 					needed = true;
 					break;
@@ -865,7 +897,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		{
 			int32_t prio = 0;
 
-			if ((*j)->coords.field->get_resources() != i->mines)
+			if ((*j)->coords.field->get_resources() != bo.mines)
 				continue;
 			else
 				prio += (*j)->coords.field->get_resources_amount() * 3 / 2;
@@ -875,26 +907,32 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				continue;
 
 			// Check if current economy can supply enough food for production.
-			for (uint32_t k = 0; k < i->inputs.size(); ++k) {
-				prio += 2 * wares[i->inputs[k]].producers;
-				prio -= 3 * wares[i->inputs[k]].consumers;
+			for (uint32_t k = 0; k < bo.inputs.size(); ++k) {
+				prio += 2 * wares[bo.inputs[k]].producers;
+				prio -= 2 * wares[bo.inputs[k]].consumers;
 			}
 
 			uint32_t ioprio = 0;
-			for (uint32_t m = 0; m < i->outputs.size(); ++m) {
-				ioprio += wares[i->outputs[m]].preciousness;
+			for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
+				ioprio += wares[bo.outputs[m]].preciousness;
 			}
 
 			// No plus for mines with multiple output
-			ioprio /= i->outputs.size();
+			ioprio /= bo.outputs.size();
 			prio += ioprio;
 
 			prio -= 2 * (*j)->mines_nearby * (*j)->mines_nearby;
-			prio /= 1 + i->cnt_built * 2;
-			prio /= 1 + i->cnt_under_construction * 4;
+			prio /= 1 + bo.cnt_built * 2;
+			prio /= 1 + bo.cnt_under_construction * 4;
+
+			// multiply with current statistics of all other buildings of this type
+			// to avoid constructing buildings where already some are running on low
+			// resources.
+			prio *= bo.current_stats;
+			prio /= 100;
 
 			if (prio > proposed_priority) {
-				proposed_building = i->id;
+				proposed_building = bo.id;
 				proposed_priority = prio;
 				proposed_coords = (*j)->coords;
 				mine = true;
@@ -1472,7 +1510,7 @@ int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
 	// production.
 	for (uint32_t k = 0; k < bo.inputs.size(); ++k) {
 		prio += 2 * wares[bo.inputs[k]].producers;
-		prio -= 4 * wares[bo.inputs[k]].consumers;
+		prio -= 2 * wares[bo.inputs[k]].consumers;
 	}
 	if (bo.inputs.size() == 0)
 		++prio;
@@ -1488,6 +1526,12 @@ int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
 		output_prio = static_cast<int32_t>
 			(ceil(output_prio / sqrt(bo.outputs.size())));
 	prio += output_prio;
+
+	// multiply with current statistics of all other buildings of this type
+	// to avoid constructing buildings where already some are running on low
+	// resources.
+	prio *= bo.current_stats;
+	prio /= 100;
 
 	return prio;
 }
@@ -1527,14 +1571,11 @@ EconomyObserver * DefaultAI::get_economy_observer (Economy & economy)
 BuildingObserver & DefaultAI::get_building_observer (char const * const name)
 {
 	if (tribe == 0)
-		late_initialization ();
+		late_initialization();
 
-	for
-		(std::list<BuildingObserver>::iterator i = buildings.begin();
-		 i != buildings.end();
-		 ++i)
-		if (!strcmp(i->name, name))
-			return *i;
+	for (uint32_t i = 0; i < buildings.size(); ++i)
+		if (!strcmp(buildings[i].name, name))
+			return buildings[i];
 
 	throw wexception("Help: I do not know what to do with a %s", name);
 }
@@ -1686,7 +1727,7 @@ bool DefaultAI::check_supply(BuildingObserver const &bo)
 {
 	size_t supplied = 0;
 	container_iterate_const(std::vector<int16_t>, bo.inputs, i)
-		container_iterate_const(std::list<BuildingObserver>, buildings, j)
+		container_iterate_const(std::vector<BuildingObserver>, buildings, j)
 			if
 				(j.current->cnt_built &&
 				 std::find

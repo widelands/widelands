@@ -116,6 +116,8 @@ private:
 	void update_buildable_field (BuildableField &);
 	void update_mineable_field (MineableField &);
 
+	void update_productionsite_stats(int32_t);
+
 	bool construct_building (int32_t);
 	bool construct_roads    (int32_t);
 	bool improve_roads      (int32_t);
@@ -156,7 +158,7 @@ private:
 	Widelands::Player               * player;
 	Widelands::Tribe_Descr const    * tribe;
 
-	std::list<BuildingObserver>       buildings;
+	std::vector<BuildingObserver>     buildings;
 	int32_t                           total_constructionsites;
 
 	std::list<Widelands::FCoords>     unusable_fields;
@@ -172,6 +174,7 @@ private:
 	std::vector<WareObserver>         wares;
 
 	int32_t next_road_due;
+	int32_t next_stats_update_due;
 	int32_t next_construction_due;
 	int32_t next_productionsite_check_due;
 	int32_t next_mine_check_due;

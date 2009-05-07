@@ -208,6 +208,8 @@ struct BuildingObserver {
 	int32_t                           mines;
 	uint16_t                          mines_percent;
 
+	uint32_t                          current_stats;
+
 	std::vector<int16_t>              inputs;
 	std::vector<int16_t>              outputs;
 	int16_t                           production_hint;
