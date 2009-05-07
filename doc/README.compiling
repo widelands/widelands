@@ -64,13 +64,18 @@ build type, execute e.g. "scons build=debug". To see all available types, do
 Several other build targets are available :-) but mostly not documented yet :-(
 
 some available scons flags are:
+
 build=debug|release|profile
 build_id=<IDNAME>
-efence=1
-enable_ggz
-bindir=<BINDIR>
-datadir=<DATADIR>
-localedir=<LOCALEDIR>
+efence=1 (default false)
+enable_ggz (default false)
+
+install_prefix=<PREFIX> (default '/usr/local')
+bindir=<BINDIR> (default 'games')
+datadir=<DATADIR> (default ('share/games/widelands')
+localedir=<LOCALEDIR> (default ('share/games/widelands/locale')
+
+stylecheck ('scons stylecheck' will just do the style checking without compiling)
 
 make
 ------------------
