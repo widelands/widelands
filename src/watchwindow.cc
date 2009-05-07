@@ -32,7 +32,7 @@
 
 #include "ui_basic/button.h"
 #include "ui_basic/signal.h"
-#include "ui_basic/ui_window.h"
+#include "ui_basic/window.h"
 
 #include "upcast.h"
 
