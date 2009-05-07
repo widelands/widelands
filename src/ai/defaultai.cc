@@ -1527,11 +1527,13 @@ int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
 			(ceil(output_prio / sqrt(bo.outputs.size())));
 	prio += output_prio;
 
-	// multiply with current statistics of all other buildings of this type
-	// to avoid constructing buildings where already some are running on low
-	// resources.
-	prio *= bo.current_stats;
-	prio /= 100;
+	// If building consumes some wares, multiply with current statistics of all
+	// other buildings of this type to avoid constructing buildings where already
+	// some are running on low resources.
+	if (!bo.inputs.empty()) {
+		prio *= bo.current_stats;
+		prio /= 100;
+	}
 
 	return prio;
 }
