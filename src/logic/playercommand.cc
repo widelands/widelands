@@ -17,14 +17,14 @@
  *
  */
 
-#include "logic/playercommand.h"
+#include "playercommand.h"
 
 #include "economy/economy.h"
 
 #include "log.h"
-#include "logic/game.h"
-#include "logic/instances.h"
-#include "logic/player.h"
+#include "game.h"
+#include "instances.h"
+#include "player.h"
 #include "soldier.h"
 #include "io/streamwrite.h"
 #include "tribe.h"

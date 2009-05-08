@@ -20,8 +20,8 @@
 #ifndef EDITOR_GAME_BASE_H
 #define EDITOR_GAME_BASE_H
 
-#include "logic/bob.h"
-#include "logic/building.h"
+#include "bob.h"
+#include "building.h"
 #include "constants.h"
 #include "map.h"
 #include "notification.h"

@@ -17,27 +17,27 @@
  *
  */
 
-#include "logic/building.h"
+#include "building.h"
 
 #include "constructionsite.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "logic/editor_game_base.h"
+#include "editor_game_base.h"
 #include "font_handler.h"
-#include "logic/game.h"
+#include "game.h"
 #include "graphic/graphic.h"
 #include "wui/interactive_gamebase.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"
-#include "logic/player.h"
+#include "player.h"
 #include "profile/profile.h"
 #include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
-#include "logic/worker.h"
+#include "worker.h"
 
 #include <cstdio>
 #include <sstream>

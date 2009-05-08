@@ -20,7 +20,7 @@
 #ifndef CMD_CHECK_EVENTCHAIN_H
 #define CMD_CHECK_EVENTCHAIN_H
 
-#include "logic/cmd_queue.h"
+#include "cmd_queue.h"
 
 #include "manager.h"
 

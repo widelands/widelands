@@ -17,12 +17,12 @@
  *
  */
 
-#include "logic/path.h"
+#include "path.h"
 
 #include <algorithm>
 
 #include "map.h"
-#include "logic/instances.h"
+#include "instances.h"
 
 namespace Widelands {
 

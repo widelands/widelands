@@ -20,8 +20,8 @@
 #ifndef CMD_INCORPORATE_H
 #define CMD_INCORPORATE_H
 
-#include "logic/cmd_queue.h"
-#include "logic/worker.h"
+#include "cmd_queue.h"
+#include "worker.h"
 
 namespace Widelands {
 

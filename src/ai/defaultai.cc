@@ -925,9 +925,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			prio /= 1 + bo.cnt_built * 2;
 			prio /= 1 + bo.cnt_under_construction * 4;
 
-			// multiply with current statistics of all other buildings of this type
-			// to avoid constructing buildings where already some are running on low
-			// resources.
+			// multiply with current statistics of all other buildings of this
+			// type to avoid constructing buildings where already some are running
+			// on low resources.
 			prio *= bo.current_stats;
 			prio /= 100;
 

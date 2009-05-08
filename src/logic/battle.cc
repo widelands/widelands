@@ -19,8 +19,8 @@
 
 #include "battle.h"
 
-#include "logic/game.h"
-#include "logic/player.h"
+#include "game.h"
+#include "player.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"

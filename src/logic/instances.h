@@ -20,7 +20,7 @@
 #ifndef INSTANCES_H
 #define INSTANCES_H
 
-#include "logic/cmd_queue.h"
+#include "cmd_queue.h"
 
 #include <map>
 #include <string>

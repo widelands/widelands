@@ -17,17 +17,17 @@
  *
  */
 
-#include "logic/player.h"
+#include "player.h"
 
 
 #include "checkstep.h"
-#include "logic/cmd_queue.h"
+#include "cmd_queue.h"
 #include "constructionsite.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "events/event.h"
 #include "findimmovable.h"
-#include "logic/game.h"
+#include "game.h"
 #include "i18n.h"
 #include "log.h"
 #include "militarysite.h"
@@ -36,7 +36,7 @@
 #include "sound/sound_handler.h"
 #include "trainingsite.h"
 #include "tribe.h"
-#include "logic/warehouse.h"
+#include "warehouse.h"
 #include "warning.h"
 #include "wexception.h"
 #include "widelands_fileread.h"

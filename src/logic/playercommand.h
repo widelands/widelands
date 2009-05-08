@@ -20,8 +20,8 @@
 #ifndef PLAYERCOMMAND_H
 #define PLAYERCOMMAND_H
 
-#include "logic/cmd_queue.h"
-#include "logic/path.h"
+#include "cmd_queue.h"
+#include "path.h"
 #include "trainingsite.h"
 
 #include "economy/flag.h"
