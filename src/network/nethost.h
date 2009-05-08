@@ -69,6 +69,7 @@ struct NetHost : public GameController, private SyncCallback {
 		 bool host = false);
 	void setPlayerTribe (uint8_t number, std::string const & tribe);
 	void setPlayerInit  (uint8_t number, uint8_t index);
+	void setPlayerAI    (uint8_t number, std::string const & name);
 	void setPlayerName  (uint8_t number, std::string const & name);
 	void setPlayer      (uint8_t number, PlayerSettings);
 	void setPlayerNumber(int32_t number);

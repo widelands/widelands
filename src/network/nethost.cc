@@ -95,10 +95,28 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			break;
 		case PlayerSettings::stateOpen:
 		case PlayerSettings::stateHuman:
-			newstate = PlayerSettings::stateComputer;
-			break;
 		case PlayerSettings::stateComputer:
-			newstate = PlayerSettings::stateOpen;
+			Computer_Player::ImplementationVector const & impls =
+				Computer_Player::getImplementations();
+			Computer_Player::ImplementationVector::const_iterator it =
+				impls.begin();
+			if (h->settings().players[number].ai.empty()) {
+				setPlayerAI(number, (*it)->name);
+				newstate = PlayerSettings::stateComputer;
+				break;
+			}
+			do {
+				++it;
+				if ((*(it - 1))->name == h->settings().players[number].ai)
+					break;
+			} while (it != impls.end());
+			if (it == impls.end()) {
+				setPlayerAI(number, std::string());
+				newstate = PlayerSettings::stateOpen;
+			} else {
+				setPlayerAI(number, (*it)->name);
+				newstate = PlayerSettings::stateComputer;
+			}
 			break;
 		}
 
@@ -123,8 +141,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setPlayerInit(number, index);
 	}
 
-	virtual void setPlayerAI(uint8_t, std::string const &) {
-		// not implemented
+	virtual void setPlayerAI(uint8_t number, std::string const & name) {
+		h->setPlayerAI(number, name);
 	}
 
 	virtual void setPlayerName(uint8_t const number, std::string const & name) {
@@ -713,6 +731,16 @@ void NetHost::setPlayerInit(uint8_t const number, uint8_t const index)
 			return;
 		}
 	assert(false);
+}
+
+
+void NetHost::setPlayerAI(uint8_t number, std::string const & name)
+{
+	if (number >= d->settings.players.size())
+		return;
+
+	PlayerSettings & player = d->settings.players[number];
+	player.ai = name;
 }
 
 
