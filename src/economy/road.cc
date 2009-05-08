@@ -24,12 +24,12 @@
 #include "flag.h"
 
 #include "logic/carrier.h"
-#include "instances.h"
+#include "logic/instances.h"
 #include "upcast.h"
-#include "player.h"
+#include "logic/player.h"
 #include "request.h"
-#include "editor_game_base.h"
-#include "game.h"
+#include "logic/editor_game_base.h"
+#include "logic/game.h"
 
 #include "tribe.h"
 

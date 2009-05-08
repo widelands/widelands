@@ -22,7 +22,7 @@
 #include "areawatcher.h"
 #include "logic/battle.h"
 #include "logic/bob.h"
-#include "building.h"
+#include "logic/building.h"
 #include "container_iterate.h"
 #include "economy/flag.h"
 #include "economy/road.h"

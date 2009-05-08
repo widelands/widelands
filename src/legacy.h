@@ -20,7 +20,7 @@
 #ifndef LEGACY_H
 #define LEGACY_H
 
-#include "instances.h"
+#include "logic/instances.h"
 
 namespace Widelands {
 

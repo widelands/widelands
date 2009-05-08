@@ -18,7 +18,7 @@
  */
 
 #include "carrier.h"
-#include "game.h"
+#include "logic/game.h"
 #include "wexception.h"
 
 #include "economy/road.h"

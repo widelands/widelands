@@ -21,7 +21,7 @@
 #define S__ROAD_H
 
 #include "immovable.h"
-#include "path.h"
+#include "logic/path.h"
 #include "roadtype.h"
 
 namespace Widelands {

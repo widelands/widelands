@@ -19,7 +19,7 @@
 
 #include "requirements.h"
 
-#include "instances.h"
+#include "logic/instances.h"
 
 #include "container_iterate.h"
 

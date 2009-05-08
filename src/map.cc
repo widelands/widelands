@@ -31,7 +31,7 @@
 #include "mapfringeregion.h"
 #include "graphic/overlay_manager.h"
 #include "pathfield.h"
-#include "player.h"
+#include "logic/player.h"
 #include "s2map.h"
 #include "soldier.h"
 #include "tribe.h"

@@ -19,8 +19,8 @@
 
 #include "areawatcher.h"
 
-#include "game.h"
-#include "player.h"
+#include "logic/game.h"
+#include "logic/player.h"
 
 namespace Widelands {
 

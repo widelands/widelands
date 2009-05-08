@@ -17,21 +17,21 @@
  *
  */
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 
 #include "areawatcher.h"
 #include "logic/battle.h"
-#include "building.h"
+#include "logic/building.h"
 #include "economy/flag.h"
 #include "findimmovable.h"
 #include "font_handler.h"
-#include "game.h"
+#include "logic/game.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "instances.h"
+#include "logic/instances.h"
 #include "wui/interactive_base.h"
 #include "mapregion.h"
-#include "player.h"
+#include "logic/player.h"
 #include "tribe.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"

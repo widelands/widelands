@@ -19,12 +19,12 @@
 
 #include "replay.h"
 
-#include "game.h"
+#include "logic/game.h"
 #include "game_io/game_loader.h"
 #include "gamecontroller.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "md5.h"
-#include "playercommand.h"
+#include "logic/playercommand.h"
 #include "random.h"
 #include "save_handler.h"
 #include "io/streamwrite.h"

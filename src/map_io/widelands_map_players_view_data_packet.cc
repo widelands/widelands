@@ -21,10 +21,10 @@
 
 #include "io/bitinbuffer.h"
 #include "io/bitoutbuffer.h"
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "field.h"
-#include "instances.h" //for g_flag_descr
-#include "player.h"
+#include "logic/instances.h" //for g_flag_descr
+#include "logic/player.h"
 #include "tribe.h"
 #include "widelands_streamread_inlines.h"
 #include "widelands_streamwrite_inlines.h"

@@ -17,20 +17,20 @@
  *
  */
 
-#include "building.h"
+#include "logic/building.h"
 
 #include "constructionsite.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "font_handler.h"
-#include "game.h"
+#include "logic/game.h"
 #include "graphic/graphic.h"
 #include "wui/interactive_gamebase.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"
-#include "player.h"
+#include "logic/player.h"
 #include "profile/profile.h"
 #include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"

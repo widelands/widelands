@@ -19,8 +19,8 @@
 
 #include "event_flag.h"
 
-#include "game.h"
-#include "player.h"
+#include "logic/game.h"
+#include "logic/player.h"
 #include "profile/profile.h"
 #include "wexception.h"
 

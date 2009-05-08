@@ -23,7 +23,7 @@
 #include "editor/editorinteractive.h"
 #include "map.h"
 #include "graphic/graphic.h"
-#include "player.h"
+#include "logic/player.h"
 #include "tribe.h"
 
 #include "ui_basic/messagebox.h"

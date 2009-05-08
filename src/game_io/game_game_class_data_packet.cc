@@ -19,7 +19,7 @@
 
 #include "game_game_class_data_packet.h"
 
-#include "game.h"
+#include "logic/game.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
 

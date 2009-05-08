@@ -19,13 +19,13 @@
 
 #include "event_allow_building_option_menu.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "editor/editorinteractive.h"
 #include "events/event_allow_building.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "map.h"
-#include "player.h"
+#include "logic/player.h"
 #include "tribe.h"
 
 #include "ui_basic/messagebox.h"

@@ -19,7 +19,7 @@
 
 #include "legacy.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "immovable.h"
 
 namespace Widelands {

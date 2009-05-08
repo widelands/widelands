@@ -23,7 +23,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
-#include "player.h"
+#include "logic/player.h"
 
 Stock_Menu::Stock_Menu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)

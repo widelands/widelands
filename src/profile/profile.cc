@@ -23,7 +23,7 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "i18n.h"
-#include "player.h"
+#include "logic/player.h"
 #include "tribe.h"
 #include "wexception.h"
 #include "wlapplication.h"

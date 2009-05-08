@@ -20,10 +20,10 @@
 #include "cmd_call_economy_balance.h"
 
 #include "economy.h"
-#include "game.h"
+#include "logic/game.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "player.h"
+#include "logic/player.h"
 #include "wexception.h"
 
 namespace Widelands {

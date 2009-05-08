@@ -19,7 +19,7 @@
 
 #include "widelands_map_extradata_data_packet.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "io/filewrite.h"
 // Since we are lying about the path of the pictures
 // we also include graphic.h

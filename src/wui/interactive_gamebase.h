@@ -21,7 +21,7 @@
 #define INTERACTIVE_GAMEBASE_H
 
 #include "interactive_base.h"
-#include "game.h"
+#include "logic/game.h"
 #include "graphic/graphic.h"
 
 struct ChatProvider;

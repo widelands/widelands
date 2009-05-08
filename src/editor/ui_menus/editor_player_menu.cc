@@ -25,7 +25,7 @@
 #include "i18n.h"
 #include "map.h"
 #include "graphic/overlay_manager.h"
-#include "player.h"
+#include "logic/player.h"
 #include "tribe.h"
 #include "logic/warehouse.h"
 #include "wexception.h"

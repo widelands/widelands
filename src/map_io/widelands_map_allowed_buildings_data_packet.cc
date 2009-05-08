@@ -19,8 +19,8 @@
 
 #include "widelands_map_allowed_buildings_data_packet.h"
 
-#include "game.h"
-#include "player.h"
+#include "logic/game.h"
+#include "logic/player.h"
 #include "profile/profile.h"
 #include "tribe.h"
 #include "upcast.h"

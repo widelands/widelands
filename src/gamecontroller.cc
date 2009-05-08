@@ -20,9 +20,9 @@
 #include "gamecontroller.h"
 
 #include "computer_player.h"
-#include "game.h"
-#include "player.h"
-#include "playercommand.h"
+#include "logic/game.h"
+#include "logic/player.h"
+#include "logic/playercommand.h"
 #include "profile/profile.h"
 #include "wlapplication.h"
 

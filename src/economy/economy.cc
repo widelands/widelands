@@ -25,8 +25,8 @@
 #include "cmd_call_economy_balance.h"
 #include "router.h"
 
-#include "game.h"
-#include "player.h"
+#include "logic/game.h"
+#include "logic/player.h"
 #include "request.h"
 #include "tribe.h"
 #include "upcast.h"

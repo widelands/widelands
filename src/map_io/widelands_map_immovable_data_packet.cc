@@ -19,7 +19,7 @@
 
 #include "widelands_map_immovable_data_packet.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "immovable.h"
 #include "map.h"
 #include "tribe.h"

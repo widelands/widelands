@@ -22,7 +22,7 @@
 #include "i18n.h"
 #include "map.h"
 #include "tribe.h"
-#include "player.h"
+#include "logic/player.h"
 
 using Widelands::Building_Index;
 

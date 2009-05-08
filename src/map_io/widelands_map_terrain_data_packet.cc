@@ -19,7 +19,7 @@
 
 #include "widelands_map_terrain_data_packet.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "map.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"

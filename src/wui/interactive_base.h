@@ -22,7 +22,7 @@
 
 #include <boost/scoped_ptr.hpp>
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "map.h"
 #include "mapview.h"
 #include "graphic/overlay_manager.h"

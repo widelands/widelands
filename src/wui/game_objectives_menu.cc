@@ -20,7 +20,7 @@
 #include "game_objectives_menu.h"
 
 #include "interactive_player.h"
-#include "player.h"
+#include "logic/player.h"
 #include "trigger/trigger_time.h"
 
 

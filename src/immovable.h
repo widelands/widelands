@@ -21,7 +21,7 @@
 #define IMMOVABLE_H
 
 #include "graphic/animation.h"
-#include "instances.h"
+#include "logic/instances.h"
 #include "widelands_geometry.h"
 
 struct Profile;

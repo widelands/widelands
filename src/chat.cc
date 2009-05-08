@@ -18,7 +18,7 @@
  */
 
 #include "chat.h"
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 
 using namespace Widelands;
 

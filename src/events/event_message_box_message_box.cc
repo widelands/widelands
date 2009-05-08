@@ -20,7 +20,7 @@
 #include "event_message_box_message_box.h"
 
 #include "event_message_box.h"
-#include "game.h"
+#include "logic/game.h"
 #include "graphic/graphic.h"
 #include "editor/editorinteractive.h"
 #include "constants.h"

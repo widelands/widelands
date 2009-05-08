@@ -22,7 +22,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
-#include "player.h"
+#include "logic/player.h"
 #include "graphic/rendertarget.h"
 #include "rgbcolor.h"
 #include "tribe.h"

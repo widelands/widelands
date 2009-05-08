@@ -19,7 +19,7 @@
 
 #include "widelands_map_event_chain_data_packet.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "events/event.h"
 #include "events/event_chain.h"
 #include "map.h"

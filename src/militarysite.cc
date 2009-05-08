@@ -20,10 +20,10 @@
 #include "militarysite.h"
 
 #include "logic/battle.h"
-#include "editor_game_base.h"
-#include "game.h"
+#include "logic/editor_game_base.h"
+#include "logic/game.h"
 #include "i18n.h"
-#include "player.h"
+#include "logic/player.h"
 #include "profile/profile.h"
 #include "economy/flag.h"
 #include "economy/request.h"

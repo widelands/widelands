@@ -20,8 +20,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "cmd_queue.h"
-#include "editor_game_base.h"
+#include "logic/cmd_queue.h"
+#include "logic/editor_game_base.h"
 #include "md5.h"
 #include "random.h"
 #include "save_handler.h"

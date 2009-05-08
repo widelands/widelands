@@ -21,7 +21,7 @@
 
 #include "critter_bob_program.h"
 #include "field.h"
-#include "game.h"
+#include "logic/game.h"
 #include "helper.h"
 #include "profile/profile.h"
 #include "wexception.h"

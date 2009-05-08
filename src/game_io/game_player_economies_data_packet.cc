@@ -21,8 +21,8 @@
 
 #include "economy/economy_data_packet.h"
 #include "economy/flag.h"
-#include "game.h"
-#include "player.h"
+#include "logic/game.h"
+#include "logic/player.h"
 #include "upcast.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"

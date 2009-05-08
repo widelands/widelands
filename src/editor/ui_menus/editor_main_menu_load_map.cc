@@ -19,14 +19,14 @@
 
 #include "editor_main_menu_load_map.h"
 
-#include "building.h"
+#include "logic/building.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "editor/editorinteractive.h"
 #include "map_io/widelands_map_loader.h"
 #include "wexception.h"
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/overlay_manager.h"
 #include "world.h"

@@ -20,7 +20,7 @@
 #ifndef CONSTRUCTIONSITE_H
 #define CONSTRUCTIONSITE_H
 
-#include "building.h"
+#include "logic/building.h"
 
 #include <vector>
 

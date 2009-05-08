@@ -20,9 +20,9 @@
 #include "game_player_info_data_packet.h"
 
 #include "computer_player.h"
-#include "game.h"
+#include "logic/game.h"
 #include "wui/interactive_player.h"
-#include "player.h"
+#include "logic/player.h"
 #include "tribe.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"

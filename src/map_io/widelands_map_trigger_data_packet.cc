@@ -19,7 +19,7 @@
 
 #include "widelands_map_trigger_data_packet.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "map.h"
 #include "trigger/trigger.h"
 #include "trigger/trigger_factory.h"

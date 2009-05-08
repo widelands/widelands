@@ -19,8 +19,8 @@
 
 #include "event_reveal_objective.h"
 
-#include "editor_game_base.h"
-#include "game.h"
+#include "logic/editor_game_base.h"
+#include "logic/game.h"
 #include "i18n.h"
 #include "wui/interactive_base.h"
 #include "map.h"

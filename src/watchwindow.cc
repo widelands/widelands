@@ -20,7 +20,7 @@
 #include "watchwindow.h"
 
 #include "logic/bob.h"
-#include "game.h"
+#include "logic/game.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "wui/interactive_gamebase.h"

@@ -19,9 +19,9 @@
 
 #include "widelands_map_loader.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "map.h"
-#include "player.h"
+#include "logic/player.h"
 #include "tribe.h"
 #include "warning.h"
 #include "widelands_map_allowed_buildings_data_packet.h"

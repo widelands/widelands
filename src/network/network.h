@@ -22,7 +22,7 @@
 
 #include <exception>
 
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 #include "widelands_streamread.h"
 #include "widelands_streamwrite.h"
 

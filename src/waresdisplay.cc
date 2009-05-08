@@ -19,11 +19,11 @@
 
 #include "waresdisplay.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "font_handler.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "player.h"
+#include "logic/player.h"
 #include "graphic/rendertarget.h"
 #include "tribe.h"
 #include "logic/worker.h"

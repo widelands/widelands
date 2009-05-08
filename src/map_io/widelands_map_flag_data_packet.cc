@@ -20,9 +20,9 @@
 #include "widelands_map_flag_data_packet.h"
 
 #include "economy/flag.h"
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "map.h"
-#include "player.h"
+#include "logic/player.h"
 #include "upcast.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"

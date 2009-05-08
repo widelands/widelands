@@ -20,7 +20,7 @@
 #ifndef WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 #define WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 
-#include "instances.h"
+#include "logic/instances.h"
 #include "widelands.h"
 
 #include "upcast.h"

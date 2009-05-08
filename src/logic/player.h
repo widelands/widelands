@@ -21,8 +21,8 @@
 #define PLAYER_H
 
 #include "areawatcher.h"
-#include "building.h"
-#include "editor_game_base.h"
+#include "logic/building.h"
+#include "logic/editor_game_base.h"
 #include "mapregion.h"
 #include "notification.h"
 #include "rgbcolor.h"

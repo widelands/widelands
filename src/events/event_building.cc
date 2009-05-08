@@ -19,11 +19,11 @@
 
 #include "event_building.h"
 
-#include "game.h"
+#include "logic/game.h"
 #include "wui/interactive_base.h"
 #include "mapfringeregion.h"
 #include "militarysite.h"
-#include "player.h"
+#include "logic/player.h"
 #include "profile/profile.h"
 #include "soldier.h"
 #include "trainingsite.h"

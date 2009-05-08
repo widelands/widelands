@@ -25,8 +25,8 @@
 #include "ware_instance.h"
 
 #include "constructionsite.h"
-#include "game.h"
-#include "player.h"
+#include "logic/game.h"
+#include "logic/player.h"
 #include "productionsite.h"
 #include "soldier.h"
 #include "tribe.h"

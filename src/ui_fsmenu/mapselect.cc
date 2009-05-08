@@ -20,7 +20,7 @@
 #include "mapselect.h"
 
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"

@@ -21,7 +21,7 @@
 
 #include "profile/profile.h"
 
-#include "game.h"
+#include "logic/game.h"
 Interactive_GameBase::Interactive_GameBase
 	(Widelands::Game & _game, Section & global_s, bool const chatenabled)
 	:

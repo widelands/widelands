@@ -19,7 +19,7 @@
 
 #include "event_immovable.h"
 
-#include "game.h"
+#include "logic/game.h"
 #include "profile/profile.h"
 #include "wexception.h"
 

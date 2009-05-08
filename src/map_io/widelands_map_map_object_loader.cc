@@ -19,8 +19,8 @@
 
 #include "widelands_map_map_object_loader.h"
 
-#include "editor_game_base.h"
-#include "instances.h"
+#include "logic/editor_game_base.h"
+#include "logic/instances.h"
 #include "wexception.h"
 
 namespace Widelands {

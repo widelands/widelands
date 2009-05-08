@@ -20,7 +20,7 @@
 #include "widelands_map_object_packet.h"
 
 #include "logic/battle.h"
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "immovable.h"
 #include "legacy.h"
 #include "map.h"

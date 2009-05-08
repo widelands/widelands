@@ -19,12 +19,12 @@
 
 #include "queue_cmd_factory.h"
 
-#include "cmd_check_eventchain.h"
+#include "logic/cmd_check_eventchain.h"
 #include "cmd_incorporate.h"
-#include "economy/cmd_call_economy_balance.h"
+#include "logic/economy/cmd_call_economy_balance.h"
 #include "events/event_chain.h"
-#include "instances.h"
-#include "playercommand.h"
+#include "logic/instances.h"
+#include "logic/playercommand.h"
 #include "queue_cmd_ids.h"
 #include "wexception.h"
 

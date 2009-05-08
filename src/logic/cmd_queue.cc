@@ -17,14 +17,14 @@
  *
  */
 
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 
 #include "io/filewrite.h"
-#include "game.h"
-#include "instances.h"
+#include "logic/game.h"
+#include "logic/instances.h"
 #include "machdep.h"
-#include "player.h"
-#include "playercommand.h"
+#include "logic/player.h"
+#include "logic/playercommand.h"
 #include "trigger/trigger.h"
 #include "wexception.h"
 #include "widelands_fileread.h"

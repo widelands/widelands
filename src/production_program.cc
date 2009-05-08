@@ -21,7 +21,7 @@
 
 #include "economy/economy.h"
 #include "economy/wares_queue.h"
-#include "game.h"
+#include "logic/game.h"
 #include "helper.h"
 #include "mapregion.h"
 #include "productionsite.h"

@@ -19,11 +19,11 @@
 
 #include "game_interactive_player_data_packet.h"
 
-#include "game.h"
+#include "logic/game.h"
 #include "wui/interactive_player.h"
 #include "wui/mapview.h"
 #include "graphic/overlay_manager.h"
-#include "player.h"
+#include "logic/player.h"
 #include "tribe.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"

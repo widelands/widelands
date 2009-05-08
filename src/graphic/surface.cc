@@ -19,7 +19,7 @@
 
 #include "surface.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "terrain.h"
 
 #include <cassert>

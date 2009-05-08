@@ -19,8 +19,8 @@
 
 #include "game_cmd_queue_data_packet.h"
 
-#include "cmd_queue.h"
-#include "game.h"
+#include "logic/cmd_queue.h"
+#include "logic/game.h"
 #include "queue_cmd_factory.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"

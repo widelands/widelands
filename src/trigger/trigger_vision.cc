@@ -19,12 +19,12 @@
 
 #include "trigger_vision.h"
 
-#include "building.h"
+#include "logic/building.h"
 #include "editor/editorinteractive.h"
-#include "game.h"
+#include "logic/game.h"
 #include "i18n.h"
 #include "map.h"
-#include "player.h"
+#include "logic/player.h"
 #include "profile/profile.h"
 #include "wexception.h"
 

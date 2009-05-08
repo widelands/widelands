@@ -25,7 +25,7 @@
 #include "map.h"
 #include "mapviewpixelfunctions.h"
 #include "graphic/overlay_manager.h"
-#include "player.h"
+#include "logic/player.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 

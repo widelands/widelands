@@ -23,7 +23,7 @@
 // For Ware Index
 #include "widelands.h"
 // For MO_DESCR
-#include "instances.h"
+#include "logic/instances.h"
 // For Item_Ware_Descr
 #include "item_ware_descr.h"
 

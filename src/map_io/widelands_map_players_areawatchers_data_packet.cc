@@ -19,9 +19,9 @@
 
 #include "widelands_map_players_areawatchers_data_packet.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "map.h"
-#include "player.h"
+#include "logic/player.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"

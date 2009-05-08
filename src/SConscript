@@ -21,23 +21,42 @@ Export('srcenv')
 # themselves: other things might be happening in there that profit from correct
 # ordering (ordering of compilation is always controlled directly by scons
 # itself, though)
+# 
+# libraries is a dictionary passed through all other SConscript, 
+# it is only used to give tests the chance to link against other parts
+# of widelands; many submodules depend on others
+libraries = {}
+Export("libraries")
+
 libs=[]
-libs+=SConscript('graphic/SConscript')
-libs+=SConscript('sound/SConscript')
-libs+=list(SConscript('io/SConscript'))
-libs+=SConscript('ui_basic/SConscript')
-libs+=SConscript('ui_fsmenu/SConscript')
+def add_sconscript( submodule ):
+    global libs
+    lib = SConscript("%s/SConscript" % submodule )
+    libs += lib
+    libraries[submodule] = lib
+
+add_sconscript('graphic')
+add_sconscript('sound')
+filesystem,io=SConscript('io/SConscript')
+libs.extend( (filesystem,io ) )
+libraries["filesystem"] = filesystem
+libraries["io"] = io
+
+add_sconscript('ui_basic')
+add_sconscript('ui_fsmenu')
 libs+=list(SConscript('editor/SConscript'))
-libs+=SConscript('trigger/SConscript')
-libs+=SConscript('events/SConscript')
-libs+=SConscript('network/SConscript')
-libs+=SConscript('ai/SConscript')
-libs+=SConscript('wui/SConscript')
-libs+=SConscript('economy/SConscript')
-libs+=SConscript('logic/SConscript')
-libs+=SConscript('map_io/SConscript')
-libs+=SConscript('game_io/SConscript')
-libs+=SConscript('profile/SConscript')
+# editor is not added to libraries, no tests should depend on it
+
+add_sconscript('trigger')
+add_sconscript('events')
+add_sconscript('network')
+add_sconscript('ai')
+add_sconscript('wui')
+add_sconscript('logic')
+add_sconscript('economy')
+add_sconscript('map_io')
+add_sconscript('game_io')
+add_sconscript('profile')
 libs.reverse()
 
 srcenv.Append(INDENTLIST=[

@@ -20,7 +20,7 @@
 #include "sound_handler.h"
 
 #include "io/fileread.h"
-#include "game.h"
+#include "logic/game.h"
 #include "i18n.h"
 #include "wui/interactive_base.h"
 #include "io/filesystem/layered_filesystem.h"

@@ -19,11 +19,11 @@
 
 #include "widelands_map_immovabledata_data_packet.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "immovable.h"
 #include "immovable_program.h"
 #include "map.h"
-#include "player.h"
+#include "logic/player.h"
 #include "tribe.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"

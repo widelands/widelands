@@ -19,11 +19,11 @@
 // UI classes for real-time game debugging
 
 #include "logic/bob.h"
-#include "building.h"
+#include "logic/building.h"
 #include "field.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "instances.h"
+#include "logic/instances.h"
 #include "wui/interactive_base.h"
 #include "map.h"
 

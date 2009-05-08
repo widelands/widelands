@@ -19,12 +19,12 @@
 
 #include "encyclopedia_window.h"
 
-#include "building.h"
+#include "logic/building.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "wui/interactive_player.h"
 #include "helper.h"
-#include "player.h"
+#include "logic/player.h"
 #include "productionsite.h"
 #include "production_program.h"
 #include "tribe.h"

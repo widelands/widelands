@@ -20,7 +20,7 @@
 #ifndef ITEM_WARE_DESCR_H
 #define ITEM_WARE_DESCR_H
 
-#include "instances.h"
+#include "logic/instances.h"
 #include "writeHTML.h"
 
 #include "io/filewrite.h"

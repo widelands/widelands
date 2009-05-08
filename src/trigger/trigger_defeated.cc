@@ -20,9 +20,9 @@
 #include "trigger_defeated.h"
 
 #include "editor/editorinteractive.h"
-#include "game.h"
+#include "logic/game.h"
 #include "map.h"
-#include "player.h"
+#include "logic/player.h"
 #include "profile/profile.h"
 #include "wexception.h"
 

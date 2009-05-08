@@ -20,10 +20,10 @@
 #include "widelands_map_building_data_packet.h"
 
 #include "constructionsite.h"
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "wui/interactive_base.h"
 #include "map.h"
-#include "player.h"
+#include "logic/player.h"
 #include "economy/request.h"
 #include "tribe.h"
 #include "widelands_fileread.h"

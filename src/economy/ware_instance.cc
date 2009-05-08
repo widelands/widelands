@@ -24,7 +24,7 @@
 #include "flag.h"
 #include "transfer.h"
 
-#include "game.h"
+#include "logic/game.h"
 #include "logic/warehouse.h"
 #include "request.h"
 #include "wexception.h"

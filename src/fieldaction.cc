@@ -20,7 +20,7 @@
 #include "fieldaction.h"
 
 #include "attackable.h"
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -32,7 +32,7 @@
 #include "maphollowregion.h"
 #include "militarysite.h"
 #include "graphic/overlay_manager.h"
-#include "player.h"
+#include "logic/player.h"
 #include "soldier.h"
 #include "tribe.h"
 #include "logic/warehouse.h"

@@ -25,7 +25,7 @@
 #include "map.h"
 #include "profile/profile.h"
 #include "world.h"
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 
 #include "ui_basic/button.h"
 #include "ui_basic/progresswindow.h"

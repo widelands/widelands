@@ -25,7 +25,7 @@
 #include "road.h"
 #include "ware_instance.h"
 
-#include "game.h"
+#include "logic/game.h"
 #include "immovable.h"
 #include "request.h"
 #include "logic/worker.h"

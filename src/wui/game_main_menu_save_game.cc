@@ -21,7 +21,7 @@
 
 #include "io/filesystem/filesystem.h"
 #include "constants.h"
-#include "game.h"
+#include "logic/game.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "game_io/game_saver.h"

@@ -21,7 +21,7 @@
 #define EVENT_ROAD_H
 
 #include "event.h"
-#include "path.h"
+#include "logic/path.h"
 
 struct Event_Road_Option_Menu;
 

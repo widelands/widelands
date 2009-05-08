@@ -20,7 +20,7 @@
 #ifndef ANIMATION_GFX_H
 #define ANIMATION_GFX_H
 
-#include "player.h"
+#include "logic/player.h"
 
 struct Surface;
 

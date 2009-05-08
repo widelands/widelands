@@ -35,7 +35,7 @@
 #include "log.h"
 #include "map.h"
 #include "militarysite.h"
-#include "player.h"
+#include "logic/player.h"
 #include "productionsite.h"
 #include "profile/profile.h"
 #include "trainingsite.h"

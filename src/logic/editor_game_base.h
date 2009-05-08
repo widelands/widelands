@@ -21,7 +21,7 @@
 #define EDITOR_GAME_BASE_H
 
 #include "logic/bob.h"
-#include "building.h"
+#include "logic/building.h"
 #include "constants.h"
 #include "map.h"
 #include "notification.h"

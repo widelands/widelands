@@ -35,7 +35,7 @@
 #include "ui_fsmenu/netsetup.h"
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/singleplayer.h"
-#include "game.h"
+#include "logic/game.h"
 #include "wui/game_tips.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"

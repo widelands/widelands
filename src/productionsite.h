@@ -20,7 +20,7 @@
 #ifndef PRODUCTIONSITE_H
 #define PRODUCTIONSITE_H
 
-#include "building.h"
+#include "logic/building.h"
 #include "production_program.h"
 #include "program_result.h"
 #include "ware_types.h"

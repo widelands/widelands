@@ -22,7 +22,7 @@
 
 #include "widelands_streamwrite.h"
 
-#include "building.h"
+#include "logic/building.h"
 
 namespace Widelands {
 

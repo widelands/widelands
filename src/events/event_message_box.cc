@@ -19,9 +19,9 @@
 
 #include "event_message_box.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "event_message_box_message_box.h"
-#include "game.h"
+#include "logic/game.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "map.h"

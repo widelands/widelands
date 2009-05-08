@@ -17,7 +17,7 @@
  *
  */
 
-#include "cmd_incorporate.h"
+#include "logic/cmd_incorporate.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
 #include "map_io/widelands_map_map_object_loader.h"

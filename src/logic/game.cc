@@ -17,10 +17,10 @@
  *
  */
 
-#include "game.h"
+#include "logic/game.h"
 
 #include "logic/carrier.h"
-#include "cmd_check_eventchain.h"
+#include "logic/cmd_check_eventchain.h"
 #include "computer_player.h"
 #include "events/event.h"
 #include "events/event_chain.h"
@@ -36,8 +36,8 @@
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "network/network.h"
-#include "player.h"
-#include "playercommand.h"
+#include "logic/player.h"
+#include "logic/playercommand.h"
 #include "profile/profile.h"
 #include "replay.h"
 #include "soldier.h"

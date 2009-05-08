@@ -19,7 +19,7 @@
 
 #include "trigger_ownership.h"
 
-#include "game.h"
+#include "logic/game.h"
 #include "mapregion.h"
 #include "profile/profile.h"
 #include "wexception.h"

@@ -21,7 +21,7 @@
 #define TRIGGER_BUILDING_OPTION_MENU_H
 
 #include "player_area.h"
-#include "building.h"
+#include "logic/building.h"
 #include "trigger/trigger_building.h"
 
 #include "ui_basic/button.h"

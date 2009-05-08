@@ -19,12 +19,12 @@
 
 #include "building_statistics_menu.h"
 
-#include "building.h"
+#include "logic/building.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "mapviewpixelconstants.h"
-#include "player.h"
+#include "logic/player.h"
 #include "productionsite.h"
 #include "graphic/rendertarget.h"
 #include "tribe.h"

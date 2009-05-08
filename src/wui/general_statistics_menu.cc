@@ -19,12 +19,12 @@
 
 #include "general_statistics_menu.h"
 
-#include "editor_game_base.h"
-#include "game.h"
+#include "logic/editor_game_base.h"
+#include "logic/game.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "interactive_player.h"
-#include "player.h"
+#include "logic/player.h"
 #include "graphic/rendertarget.h"
 #include "rgbcolor.h"
 #include "tribe.h"

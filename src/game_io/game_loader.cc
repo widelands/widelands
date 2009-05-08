@@ -20,7 +20,7 @@
 #include "game_loader.h"
 
 #include "io/filesystem/layered_filesystem.h"
-#include "game.h"
+#include "logic/game.h"
 #include "game_cmd_queue_data_packet.h"
 #include "game_game_class_data_packet.h"
 #include "game_map_data_packet.h"

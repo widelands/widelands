@@ -17,17 +17,17 @@
  *
  */
 
-#include "player.h"
+#include "logic/player.h"
 
 
 #include "checkstep.h"
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 #include "constructionsite.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "events/event.h"
 #include "findimmovable.h"
-#include "game.h"
+#include "logic/game.h"
 #include "i18n.h"
 #include "log.h"
 #include "militarysite.h"

@@ -17,10 +17,10 @@
  *
  */
 
-#include "cmd_check_eventchain.h"
+#include "logic/cmd_check_eventchain.h"
 
 #include "events/event.h"
-#include "game.h"
+#include "logic/game.h"
 #include "trigger/trigger_conditional.h"
 
 namespace Widelands {

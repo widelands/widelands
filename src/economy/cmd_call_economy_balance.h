@@ -20,9 +20,9 @@
 #ifndef S__CMD_CALL_ECONOMY_BALANCE_H
 #define S__CMD_CALL_ECONOMY_BALANCE_H
 
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 #include "flag.h"
-#include "instances.h"
+#include "logic/instances.h"
 
 namespace Widelands {
 struct Economy;

@@ -20,7 +20,7 @@
 #ifndef COMPUTER_PLAYER_H
 #define COMPUTER_PLAYER_H
 
-#include "game.h"
+#include "logic/game.h"
 #include "notification.h"
 
 /**

@@ -19,13 +19,13 @@
 
 #include "widelands_map_flagdata_data_packet.h"
 
-#include "building.h"
+#include "logic/building.h"
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "map.h"
-#include "player.h"
+#include "logic/player.h"
 #include "upcast.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"

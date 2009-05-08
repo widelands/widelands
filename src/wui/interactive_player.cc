@@ -22,10 +22,10 @@
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
-#include "building.h"
+#include "logic/building.h"
 #include "building_statistics_menu.h"
 #include "chat.h"
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 #include "constructionsite.h"
 #include "debugconsole.h"
 #include "economy/flag.h"
@@ -43,7 +43,7 @@
 #include "i18n.h"
 #include "immovable.h"
 #include "graphic/overlay_manager.h"
-#include "player.h"
+#include "logic/player.h"
 #include "productionsite.h"
 #include "profile/profile.h"
 #include "soldier.h"

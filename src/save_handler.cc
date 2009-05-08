@@ -19,7 +19,7 @@
 
 #include "save_handler.h"
 
-#include "game.h"
+#include "logic/game.h"
 #include "wexception.h"
 #include "wlapplication.h"
 #include "io/filesystem/filesystem.h"

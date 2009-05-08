@@ -20,7 +20,7 @@
 #include "event_chain.h"
 
 #include "event.h"
-#include "game.h"
+#include "logic/game.h"
 #include "map.h"
 #include "trigger/trigger_conditional.h"
 #include "wexception.h"

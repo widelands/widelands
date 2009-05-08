@@ -24,7 +24,7 @@
 #include "map_io/widelands_map_map_object_loader.h"
 
 #include "tribe.h"
-#include "player.h"
+#include "logic/player.h"
 
 
 #define CURRENT_ECONOMY_VERSION 2

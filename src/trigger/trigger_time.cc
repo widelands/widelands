@@ -19,7 +19,7 @@
 
 #include "trigger_time.h"
 
-#include "game.h"
+#include "logic/game.h"
 #include "profile/profile.h"
 #include "wexception.h"
 

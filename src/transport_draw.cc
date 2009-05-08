@@ -20,7 +20,7 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/ware_instance.h"
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "graphic/rendertarget.h"
 
 namespace Widelands {

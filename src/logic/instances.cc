@@ -17,10 +17,10 @@
  *
  */
 
-#include "instances.h"
+#include "logic/instances.h"
 
-#include "cmd_queue.h"
-#include "game.h"
+#include "logic/cmd_queue.h"
+#include "logic/game.h"
 #include "queue_cmd_ids.h"
 #include "wexception.h"
 #include "widelands_fileread.h"

@@ -34,7 +34,7 @@
 #include "wui/interactive_base.h"
 #include "map.h"
 #include "graphic/overlay_manager.h"
-#include "player.h"
+#include "logic/player.h"
 #include "profile/profile.h"
 #include "tribe.h"
 #include "warning.h"

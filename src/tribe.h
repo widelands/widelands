@@ -22,7 +22,7 @@
 
 #include "graphic/animation.h"
 #include "logic/bob.h"
-#include "building.h"
+#include "logic/building.h"
 #include "descr_maintainer.h"
 #include "immovable.h"
 #include "item_ware_descr.h"

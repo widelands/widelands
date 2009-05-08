@@ -21,7 +21,7 @@
 #define WAREHOUSE_H
 
 #include "attackable.h"
-#include "building.h"
+#include "logic/building.h"
 
 struct EncodeData;
 struct Interactive_Player;

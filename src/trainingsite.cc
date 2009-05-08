@@ -19,11 +19,11 @@
 
 #include "trainingsite.h"
 
-#include "editor_game_base.h"
-#include "game.h"
+#include "logic/editor_game_base.h"
+#include "logic/game.h"
 #include "helper.h"
 #include "i18n.h"
-#include "player.h"
+#include "logic/player.h"
 #include "production_program.h"
 #include "profile/profile.h"
 #include "economy/request.h"

@@ -18,7 +18,7 @@
  */
 
 #include "ai_help_structs.h"
-#include "player.h"
+#include "logic/player.h"
 #include "upcast.h"
 
 

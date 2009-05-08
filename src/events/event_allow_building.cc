@@ -19,12 +19,12 @@
 
 #include "event_allow_building.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "wui/interactive_base.h"
-#include "game.h"
+#include "logic/game.h"
 #include "i18n.h"
 #include "map.h"
-#include "player.h"
+#include "logic/player.h"
 #include "profile/profile.h"
 #include "tribe.h"
 #include "wexception.h"

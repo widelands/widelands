@@ -19,7 +19,7 @@
 
 #include "editor_place_immovable_tool.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "editor/editorinteractive.h"
 #include "field.h"
 #include "immovable.h"

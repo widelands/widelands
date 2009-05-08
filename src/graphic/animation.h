@@ -20,7 +20,7 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "instances.h"
+#include "logic/instances.h"
 #include "rgbcolor.h"
 
 #include "point.h"

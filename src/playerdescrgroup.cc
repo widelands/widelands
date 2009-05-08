@@ -22,7 +22,7 @@
 #include "constants.h"
 #include "gamesettings.h"
 #include "i18n.h"
-#include "player.h"
+#include "logic/player.h"
 #include "profile/profile.h"
 #include "tribe.h"
 #include "wexception.h"

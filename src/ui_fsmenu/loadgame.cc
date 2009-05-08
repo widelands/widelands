@@ -19,7 +19,7 @@
 
 #include "loadgame.h"
 
-#include "game.h"
+#include "logic/game.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "graphic/graphic.h"

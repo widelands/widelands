@@ -19,12 +19,12 @@
 
 #include "immovable.h"
 
-#include "editor_game_base.h"
+#include "logic/editor_game_base.h"
 #include "field.h"
-#include "game.h"
+#include "logic/game.h"
 #include "helper.h"
 #include "immovable_program.h"
-#include "player.h"
+#include "logic/player.h"
 #include "map.h"
 #include "mapfringeregion.h"
 #include "profile/profile.h"
