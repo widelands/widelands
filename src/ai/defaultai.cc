@@ -726,8 +726,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// Priority of quarries depend on the number of near stones
 					prio += bf->stones_nearby * 5 / 3;
 					prio /= 2 * (1 + bf->stone_consumers_nearby);
+					if (bo.total_count() < 2)
+						prio *= 6; // big bonus for the basics
 					if (bo.total_count() == 0)
-						prio *= 10; // big bonus for the basics
+						prio *= 2; // even more for the absolute basics
 				} else if (bo.production_hint >= 0) {
 					// production hint (f.e. associate forester with trunks)
 					// add bonus near buildings outputting production_hint ware
