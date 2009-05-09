@@ -146,7 +146,8 @@ void PlayerDescriptionGroup::refresh()
 				if (player.ai.size() == 0)
 					title = _("Computer");
 				else
-					title = _("AI: ") + player.ai;
+					title = _("AI: ");
+					title += _(player.ai);
 			} else
 				title = _("Human");
 			// get translated tribesname
@@ -155,19 +156,25 @@ void PlayerDescriptionGroup::refresh()
 			Section & global = prof.get_safe_section("tribe");
 			d->btnPlayerTribe->set_title(global.get_safe_string("name"));
 			d->btnPlayerType->set_title(title);
-			for
-				(struct {
-				 	std::vector<TribeBasicInfo>::const_iterator       current;
-				 	std::vector<TribeBasicInfo>::const_iterator const end;
-				 } i = {settings.tribes.begin(), settings.tribes.end()};;
-				 ++i.current)
 			{
-				assert(i.current < i.end);
-				if (i.current->name == player.tribe) {
-					d->btnPlayerInit->set_title
-						(i.current->initializations.at(player.initialization_index)
-						 .second);
-					break;
+				i18n::Textdomain td(tribepath); // for translated initialisation
+				for
+					(struct {
+					 	std::vector<TribeBasicInfo>::const_iterator       current;
+					 	std::vector<TribeBasicInfo>::const_iterator const end;
+					 } i = {settings.tribes.begin(), settings.tribes.end()};;
+					 ++i.current)
+				{
+					assert(i.current < i.end);
+					if (i.current->name == player.tribe) {
+						d->btnPlayerInit->set_title
+							(_
+							(i.current->initializations.at(player.initialization_index)
+							 .second
+							)
+							);
+						break;
+					}
 				}
 			}
 			d->plr_name->set_text(player.name);

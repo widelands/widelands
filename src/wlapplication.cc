@@ -1372,6 +1372,13 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			char buf[200];
 			snprintf(buf, sizeof(buf), "%s %u", _("Player"), oldplayers + 1);
 			player.name = buf;
+			// Set default computerplayer ai type
+			if (player.state == PlayerSettings::stateComputer) {
+				Computer_Player::ImplementationVector const & impls =
+					Computer_Player::getImplementations();
+				if (impls.size() > 1)
+					player.ai = impls.at(0)->name;
+			}
 			++oldplayers;
 		}
 	}
