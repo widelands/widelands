@@ -7,7 +7,7 @@ economy=srcenv.StaticLibrary(target='economy', source=SRC)
 ###########################################################################
 #                                  Tests                                  #
 ###########################################################################
-SConscript("test/SConscript", "BUILDDIR testEnv simpleglob economy")
+SConscript("test/SConscript", "tests BUILDDIR testEnv simpleglob economy")
 
 
 Return('economy')

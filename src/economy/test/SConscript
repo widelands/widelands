@@ -1,29 +1,6 @@
 
 Import("*")
 
-tenv = testEnv.Clone()
-
-# tenv.addUnitTest("test_economy", simpleglob("*.cc") + [ '../../../../' + BUILDDIR +'/log.o'])
-sources = simpleglob("*.cc")
-
-libs = [ 
-economy,
-libraries['io'],
-libraries['filesystem'],
-libraries['graphic'],
-# libraries['sound'],
-libraries['ui_basic'],
-# libraries['ui_fsmenu'],
-# libraries['trigger'],
-# libraries['events'],
-# libraries['network'],
-# libraries['ai'],
-libraries['wui'],
-libraries['logic'],
-# libraries['map_io'],
-# libraries['game_io'],
-# libraries['profile'],
-]
-
-tenv.addUnitTest("test_economy", sources + libs)
+sources = Glob("*.cc")
+tests.append( ("test_economy", sources ) )
 
