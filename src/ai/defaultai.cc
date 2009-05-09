@@ -193,7 +193,7 @@ void DefaultAI::late_initialization ()
 	NoteReceiver<NoteField>::connect(*player);
 	tribe = &player->tribe();
 
-	log ("ComputerPlayer(%d): initializing\n", get_player_number());
+	log ("ComputerPlayer(%d): initializing (%u)\n", get_player_number(), type);
 
 	Ware_Index const nr_wares = tribe->get_nrwares();
 	wares.resize(nr_wares.value());

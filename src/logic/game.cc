@@ -207,6 +207,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 			 0,
 			 map().get_scenario_player_tribe(p),
 			 map().get_scenario_player_name (p));
+		get_player(p)->setAI(map().get_scenario_player_ai(p));
 	}
 
 	set_ibase

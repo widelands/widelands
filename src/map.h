@@ -204,8 +204,10 @@ struct Map : public ITransportCostCalculator {
 	//  scenario.
 	const std::string & get_scenario_player_tribe(Player_Number) const;
 	const std::string & get_scenario_player_name (Player_Number) const;
+	const std::string & get_scenario_player_ai   (Player_Number) const;
 	void set_scenario_player_tribe(Player_Number, const std::string &);
 	void set_scenario_player_name (Player_Number, const std::string &);
+	void set_scenario_player_ai   (Player_Number, const std::string &);
 
 	BaseImmovable * get_immovable(Coords) const;
 	uint32_t find_bobs
@@ -378,7 +380,8 @@ private:
 
 	boost::scoped_ptr<PathfieldManager> m_pathfieldmgr;
 	std::vector<std::string> m_scenario_tribes; // only alloced when needed
-	std::vector<std::string>  m_scenario_names;
+	std::vector<std::string> m_scenario_names;
+	std::vector<std::string> m_scenario_ais;
 
 	Manager<Variable>   m_mvm;
 	Manager<Trigger>    m_mtm;

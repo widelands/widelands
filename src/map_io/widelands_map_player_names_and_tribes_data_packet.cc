@@ -69,6 +69,7 @@ void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 				Section & s = prof.get_safe_section(buffer);
 				map->set_scenario_player_name (p, s.get_string("name",  ""));
 				map->set_scenario_player_tribe(p, s.get_string("tribe", ""));
+				map->set_scenario_player_ai   (p, s.get_string("ai",    ""));
 			}
 		} else
 			throw wexception("unknown/unhandled version %i", packet_version);
@@ -98,6 +99,7 @@ throw (_wexception)
 		Section & s = prof.create_section(buffer);
 		s.set_string("name",  map.get_scenario_player_name (p));
 		s.set_string("tribe", map.get_scenario_player_tribe(p));
+		s.set_string("ai",    map.get_scenario_player_ai   (p));
 	}
 
 	prof.write("player_names", false, fs);

@@ -10,11 +10,14 @@ tribe="barbarians"
 [player_2]
 name="Kalitat"
 tribe="barbarians"
+ai="Defensive"
 
 [player_3]
 name="First Brother"
 tribe="barbarians"
+ai="Aggressive"
 
 [player_4]
 name="Second Brother"
 tribe="barbarians"
+ai="Aggressive"

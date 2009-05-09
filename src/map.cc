@@ -329,6 +329,7 @@ void Map::cleanup() {
 
 	m_scenario_tribes.clear();
 	m_scenario_names.clear();
+	m_scenario_ais.clear();
 
 	if (m_overlay_manager)
 		m_overlay_manager->reset();
@@ -597,6 +598,14 @@ const std::string & Map::get_scenario_player_name(const Player_Number p) const
 	return m_scenario_names[p - 1];
 }
 
+const std::string & Map::get_scenario_player_ai(const Player_Number p) const
+{
+	assert(m_scenario_names.size() == get_nrplayers());
+	assert(p);
+	assert(p <= get_nrplayers());
+	return m_scenario_ais[p - 1];
+}
+
 void Map::set_scenario_player_tribe
 	(Player_Number const p, std::string const & tribename)
 {
@@ -613,6 +622,15 @@ void Map::set_scenario_player_name
 	assert(p <= get_nrplayers());
 	m_scenario_names.resize(get_nrplayers());
 	m_scenario_names[p - 1] = playername;
+}
+
+void Map::set_scenario_player_ai
+	(Player_Number const p, std::string const & ainame)
+{
+	assert(p);
+	assert(p <= get_nrplayers());
+	m_scenario_ais.resize(get_nrplayers());
+	m_scenario_ais[p - 1] = ainame;
 }
 
 /*
