@@ -741,6 +741,13 @@ void NetHost::setPlayerAI(uint8_t number, std::string const & name)
 
 	PlayerSettings & player = d->settings.players[number];
 	player.ai = name;
+
+	// Broadcast changes
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_PLAYER);
+	s.Unsigned8(number);
+	writeSettingPlayer(s, number);
+	broadcast(s);
 }
 
 
@@ -847,6 +854,7 @@ void NetHost::writeSettingPlayer(SendPacket & packet, uint8_t const number)
 	packet.String(player.name);
 	packet.String(player.tribe);
 	packet.Unsigned8(player.initialization_index);
+	packet.String(player.ai);
 }
 
 void NetHost::writeSettingAllPlayers(SendPacket & packet)

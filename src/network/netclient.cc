@@ -385,6 +385,7 @@ void NetClient::recvOnePlayer
 	player.name = packet.String();
 	player.tribe = packet.String();
 	player.initialization_index = packet.Unsigned8();
+	player.ai = packet.String();
 
 	if (number == d->playernum)
 		d->localplayername = player.name;
