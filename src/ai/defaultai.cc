@@ -63,7 +63,10 @@ type(t),
 m_buildable_changed(true),
 m_mineable_changed(true),
 tribe(0),
+total_constructionsites(0),
+next_road_due(2000),
 next_stats_update_due(30000),
+next_construction_due(1000),
 next_productionsite_check_due(0),
 next_mine_check_due(0),
 next_militarysite_check_due(0),
@@ -99,9 +102,6 @@ void DefaultAI::think ()
 	// This must be checked every time as changes of bobs in AI area aren't
 	// handled by the AI itself.
 	update_all_not_buildable_fields();
-
-	// wait a moment so that all fields are classified
-	if (next_construction_due == 0) next_construction_due = gametime + 1000;
 
 	// if there are more than one economy try to connect them with a road.
 	if (next_road_due <= gametime) {
@@ -885,8 +885,13 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		if (!bo.is_buildable || bo.type != BuildingObserver::MINE)
 			continue;
 
-		if (onlymissing)
+		// Only have one mine of a type under construction
+		if (!bo.cnt_under_construction > 0)
 			continue;
+
+		if (onlymissing)
+			if (bo.total_count() > 0)
+				continue;
 
 
 		// Check if the produced wares are needed
@@ -924,7 +929,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			if ((*j)->coords.field->get_resources() != bo.mines)
 				continue;
 			else
-				prio += (*j)->coords.field->get_resources_amount() * 3 / 2;
+				prio += (*j)->coords.field->get_resources_amount() * 4 / 3;
 
 			// Only build mines on locations where some material can be mined
 			if (prio < 2)
@@ -947,7 +952,6 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 			prio -= 2 * (*j)->mines_nearby * (*j)->mines_nearby;
 			prio /= 1 + bo.cnt_built * 2;
-			prio /= 1 + bo.cnt_under_construction * 4;
 
 			// multiply with current statistics of all other buildings of this
 			// type to avoid constructing buildings where already some are running
@@ -956,6 +960,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			prio /= 100;
 
 			if (prio > proposed_priority) {
+
 				proposed_building = bo.id;
 				proposed_priority = prio;
 				proposed_coords = (*j)->coords;
@@ -1424,11 +1429,6 @@ bool DefaultAI::check_mines(int32_t gametime)
 		game().send_player_bulldoze (*site.site);
 		return true;
 	}
-
-	// Do not have too many constructionsites
-	uint32_t producers = mines.size() + productionsites.size();
-	if (total_constructionsites >= (5 + (producers / 10)))
-		return false;
 
 	// Check whether building is enhanceable and if wares of the enhanced
 	// buildings are needed. If yes consider an upgrade.
