@@ -600,7 +600,7 @@ const std::string & Map::get_scenario_player_name(const Player_Number p) const
 
 const std::string & Map::get_scenario_player_ai(const Player_Number p) const
 {
-	assert(m_scenario_names.size() == get_nrplayers());
+	assert(m_scenario_ais.size() == get_nrplayers());
 	assert(p);
 	assert(p <= get_nrplayers());
 	return m_scenario_ais[p - 1];
