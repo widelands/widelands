@@ -886,7 +886,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			continue;
 
 		// Only have one mine of a type under construction
-		if (!bo.cnt_under_construction > 0)
+		if (bo.cnt_under_construction > 0)
 			continue;
 
 		if (onlymissing)
