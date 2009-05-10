@@ -60,7 +60,7 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>
 	Editor_Game_Base();
 	virtual ~Editor_Game_Base();
 
-	void set_map(Map *);
+	void set_map(Map *, bool = true);
 	Map & map() const throw () {return *m_map;}
 	Map * get_map() {return m_map;}
 	Map & get_map() const {return *m_map;}

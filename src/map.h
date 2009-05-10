@@ -167,7 +167,7 @@ struct Map : public ITransportCostCalculator {
 
 	void load_graphics();
 	void recalc_whole_map();
-	void recalc_for_field_area(Area<FCoords>);
+	virtual void recalc_for_field_area(Area<FCoords>);
 	void recalc_default_resources();
 
 	void set_nrplayers(Player_Number);
@@ -355,8 +355,10 @@ struct Map : public ITransportCostCalculator {
 	/// Translate the whole map so that the given point becomes the new origin.
 	void set_origin(Coords);
 
-private:
+protected: /// These functions are needed in Testclasses
 	void set_size(uint32_t w, uint32_t h);
+
+private:
 	void load_world();
 	void recalc_border(FCoords);
 

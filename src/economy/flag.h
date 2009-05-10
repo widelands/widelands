@@ -134,6 +134,8 @@ protected:
 	static void flag_job_request_callback
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
+	void set_flag_position(Coords coords);
+
 private:
 	Coords       m_position;
 	uint32_t     m_anim;

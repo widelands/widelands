@@ -20,35 +20,85 @@
 #include <exception>
 #include <boost/test/unit_test.hpp>
 
-class PlayerImmovable {
-};
-
 #include "economy/road.h"
 #include "economy/flag.h"
+#include "logic/instances.h"
+#include "logic/editor_game_base.h"
+#include "logic/player.h"
 
 using namespace Widelands;
 
 /******************/
 /* Helper classes */
 /******************/
+class TestingFlag : public Flag {
+public:
+	TestingFlag(Editor_Game_Base & g, Coords c) :
+		Flag()
+	{
+		set_flag_position(c);
+	}
 
-// class TestingEditorGameBase : public Editor_Game_Base {
-//
-// };
-//
+};
+class TestingMap : public Map {
+public:
+	TestingMap(int w, int h) :
+		Map() {
+			set_size(w, h);
+		}
+
+	virtual void recalc_for_field_area(Area<FCoords>) {}
+
+};
+
 /*************************************************************************/
 /*                                 TESTS                                 */
 /*************************************************************************/
+struct SimpleRoadTestsFixture {
+	SimpleRoadTestsFixture() :
+		path(Coords(5, 5))
+	{
+		map = new TestingMap(32, 32);
+		g.set_map(map, false);
+
+		path.append(*map, Map_Object::WALK_E);
+		path.append(*map, Map_Object::WALK_E);
+
+		start = new TestingFlag(g, Coords(5, 5));
+		end = new TestingFlag(g, Coords(7, 5));
+	}
+	~SimpleRoadTestsFixture() {
+		delete start;
+		delete end;
+		// Map is deleted by Editor_Game_Base
+	}
+
+	TestingMap * map;
+	Editor_Game_Base g;
+	Road r;
+	Path path;
+	TestingFlag * start;
+	TestingFlag * end;
+};
+
 BOOST_AUTO_TEST_SUITE(Road)
 
-BOOST_AUTO_TEST_CASE(instantiate_test) {
-        Widelands::Road r;
-		  Widelands::Flag f1;
-		  Widelands::Flag f2;
+/*
+ * Simple tests
+ */
+BOOST_FIXTURE_TEST_CASE(PassabilitiyTest, SimpleRoadTestsFixture) {
+	BOOST_CHECK_EQUAL(r.get_passable(), true);
+}
+BOOST_FIXTURE_TEST_CASE(CorrectSizeTest, SimpleRoadTestsFixture) {
+	BOOST_CHECK_EQUAL(r.get_size(), static_cast<int32_t>(BaseImmovable::SMALL));
+}
+BOOST_FIXTURE_TEST_CASE(InstantiateEditorGameBase, SimpleRoadTestsFixture) {
+	BOOST_MESSAGE
+		(start->get_position().x << ',' << start->get_position().y <<
+		 "   " << end->get_position().x << ',' << end->get_position().y <<
+		 "   " << path.get_start().x << ',' << path.get_start().y);
 
-        // BOOST_CHECK_EQUAL(r.get_passable(), false);
-
-        // TestingEditorGameBase g;
+         // Widelands::Road::create(g, *start, *end, path);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -93,7 +93,9 @@ Flag::Flag
 	for (uint32_t i = 0; i < 6; ++i) m_roads[i] = 0;
 
 	set_owner(&owning_player);
-	m_position = coords;
+	
+	set_flag_position(m_position);
+
 
 	upcast(Road, road, egbase.map().get_immovable(coords));
 	//  we split a road, or a new, standalone flag is created
@@ -104,6 +106,10 @@ Flag::Flag
 	init(egbase);
 	if (road)
 		road->postsplit(egbase, *this);
+}
+
+void Flag::set_flag_position(Coords coords) {
+	m_position = coords;
 }
 
 int32_t Flag::get_type() const throw ()

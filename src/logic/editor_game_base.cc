@@ -494,13 +494,14 @@ Replaces the current map with the given one. Ownership of the map is transferred
 to the Editor_Game_Base object.
 ===============
 */
-void Editor_Game_Base::set_map(Map * const new_map) {
+void Editor_Game_Base::set_map(Map * const new_map, bool register_callback) {
 	assert(new_map != m_map);
 	delete m_map;
 
 	m_map = new_map;
 
-	g_fh->register_variable_callback(g_VariableCallback, m_map);
+	if (register_callback)
+		g_fh->register_variable_callback(g_VariableCallback, m_map);
 }
 
 
