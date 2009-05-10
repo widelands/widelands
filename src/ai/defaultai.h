@@ -159,7 +159,7 @@ private:
 	Widelands::Tribe_Descr const    * tribe;
 
 	std::vector<BuildingObserver>     buildings;
-	int32_t                           total_constructionsites;
+	uint32_t                          total_constructionsites;
 
 	std::list<Widelands::FCoords>     unusable_fields;
 	std::list<BuildableField *>       buildable_fields;

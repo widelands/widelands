@@ -636,6 +636,12 @@ void DefaultAI::update_productionsite_stats(int32_t gametime) {
  */
 bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 {
+	// Do not have too many constructionsites
+	uint32_t producers = mines.size() + productionsites.size();
+	bool onlymissing = false;
+	if (total_constructionsites >= (5 + (producers / 10)))
+		onlymissing = true;
+
 	//  Just used for easy checking whether a mine or something else was built.
 	bool mine = false;
 
@@ -707,6 +713,16 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 			if (bo.type == BuildingObserver::MINE)
 				continue;
+
+			// If there are already a lot of constructionsites, only missing
+			// productionsites are allowed (perhaps they are needed to finish the
+			// other constructionsites?)
+			if (onlymissing) {
+				if (!(bo.type == BuildingObserver::PRODUCTIONSITE))
+					continue;
+				if (bo.total_count() > 0)
+					continue;
+			}
 
 			if (bo.desc->get_size() > maxsize)
 				continue;
@@ -792,6 +808,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 						prio += 2 * iosum;
 					}
 
+					// prefere building space in the inner land.
+					prio -= bf->unowned_land_nearby / 10;
+
 					// do not construct more than one building,
 					// if supply line is already broken.
 					if (!check_supply(bo) && bo.total_count() > 0)
@@ -864,6 +883,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		BuildingObserver & bo = buildings[i];
 
 		if (!bo.is_buildable || bo.type != BuildingObserver::MINE)
+			continue;
+
+		if (onlymissing)
 			continue;
 
 
@@ -946,7 +968,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		return false;
 
 	// do not have too many construction sites
-	if (proposed_priority < total_constructionsites * total_constructionsites)
+	if (proposed_priority < static_cast<int32_t>(total_constructionsites))
 		return false;
 
 	// send the command to construct a new building
@@ -1303,6 +1325,11 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		return true;
 	}
 
+	// Do not have too many constructionsites
+	uint32_t producers = mines.size() + productionsites.size();
+	if (total_constructionsites >= (5 + (producers / 10)))
+		return false;
+
 	// Check whether building is enhanceable and if wares of the enhanced
 	// buildings are needed. If yes consider an upgrade.
 	std::set<Building_Index> enhancements = site.site->enhancements();
@@ -1397,6 +1424,11 @@ bool DefaultAI::check_mines(int32_t gametime)
 		game().send_player_bulldoze (*site.site);
 		return true;
 	}
+
+	// Do not have too many constructionsites
+	uint32_t producers = mines.size() + productionsites.size();
+	if (total_constructionsites >= (5 + (producers / 10)))
+		return false;
 
 	// Check whether building is enhanceable and if wares of the enhanced
 	// buildings are needed. If yes consider an upgrade.
