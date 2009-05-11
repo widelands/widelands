@@ -184,7 +184,7 @@ m_toggle_minimap
 m_toggle_buildhelp
 	(INIT_BTN("menu_toggle_buildhelp", toggle_buildhelp,       _("Buildhelp"))),
 m_toggle_message_menu
-	(INIT_BTN("message_menu",          toggle_message_menu,	   _("Messages"))),
+	(INIT_BTN("menu_toggle_oldmessage_menu",          toggle_message_menu,	   _("Messages"))),
 #if 0
 m_toggle_resources
 	(INIT_BTN
@@ -323,7 +323,7 @@ void Interactive_Player::toggle_message_menu() {
 	if (m_objectives.window)
 		delete m_message_menu.window;
 	else
-		new GameMessageMenu(*this, m_objectives);
+		new GameMessageMenu(*this, m_message_menu);
 }
 
 void Interactive_Player::toggle_buildhelp() {
