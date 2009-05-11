@@ -39,6 +39,7 @@
 #include "game_objectives_menu.h"
 #include "game_options_menu.h"
 #include "general_statistics_menu.h"
+#include "game_message_menu.h"
 #include "helper.h"
 #include "i18n.h"
 #include "immovable.h"
@@ -182,6 +183,8 @@ m_toggle_minimap
 	(INIT_BTN("menu_toggle_minimap",   toggle_minimap,         _("Minimap"))),
 m_toggle_buildhelp
 	(INIT_BTN("menu_toggle_buildhelp", toggle_buildhelp,       _("Buildhelp"))),
+m_toggle_message_menu
+	(INIT_BTN("message_menu",          toggle_message_menu,	   _("Messages"))),
 #if 0
 m_toggle_resources
 	(INIT_BTN
@@ -200,6 +203,7 @@ m_toggle_help
 	//m_toolbar.add(&m_toggle_resources,       UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_help,            UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_objectives,      UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_message_menu,    UI::Box::AlignLeft);
 
 	set_player_number(plyn);
 	fieldclicked.set(this, &Interactive_Player::node_action);
@@ -315,6 +319,13 @@ void Interactive_Player::toggle_objectives() {
 	else
 		new GameObjectivesMenu(*this, m_objectives);
 }
+void Interactive_Player::toggle_message_menu() {
+	if (m_objectives.window)
+		delete m_message_menu.window;
+	else
+		new GameMessageMenu(*this, m_objectives);
+}
+
 void Interactive_Player::toggle_buildhelp() {
 	egbase().map().overlay_manager().toggle_buildhelp();
 }

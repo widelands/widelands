@@ -61,6 +61,7 @@ struct Interactive_Player :
 	void toggle_buildhelp ();
 	void toggle_resources ();
 	void toggle_help      ();
+	void toggle_message_menu();
 
 	virtual void node_action();
 
@@ -102,7 +103,7 @@ private:
 	UI::Callback_Button<Interactive_Player> m_toggle_buildhelp;
 	//  UI::Callback_Button<Interactive_Player> m_toggle_resources;
 	UI::Callback_Button<Interactive_Player> m_toggle_help;
-
+	UI::Callback_Button<Interactive_Player> m_toggle_message_menu;
 
 	UI::UniqueWindow::Registry m_chat;
 	UI::UniqueWindow::Registry m_options;
@@ -111,6 +112,7 @@ private:
 	UI::UniqueWindow::Registry m_fieldaction;
 	UI::UniqueWindow::Registry m_encyclopedia;
 	UI::UniqueWindow::Registry m_debugconsole;
+	UI::UniqueWindow::Registry m_message_menu;
 };
 
 
