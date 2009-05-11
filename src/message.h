@@ -21,31 +21,33 @@
 #define MESSAGE_H
 
 #include "i18n.h"
+#include "map.h"
 
 #include <cassert>
 #include <string>
 #include <cstring>
 
 namespace Widelands {
+	struct Coords;
 
 	///the Message manager keeps track of messages
 	///based of the objective system
 
-struct Message : public Named, public Referencer<Trigger> {
+struct Message {
 	Message()
 		:
-		m_visname   (name()),
+		m_visname   ("unknown message"),
 		m_descr     (_("no descr")),
 		m_is_visible(true)
 	{}
-	Message(std::string s,Widelands::Coords c):
-		m_visname(name()),
-		m_descr(s),
+	Message(std::string title, Widelands::Coords c,std::string description):
+		m_visname(title),
+		m_descr(description),
+		m_coords(c),
 		m_is_visible(true)
 	{}
-	virtual ~Message() {}
 
-	std::string identifier() const {return "Message: " + name();}
+	std::string identifier() const {return "Message: " + m_visname + "|" + m_descr;}
 
 	const std::string & visname() const throw ()  {return m_visname;}
 	const std::string & descr() const throw ()    {return m_descr;}
