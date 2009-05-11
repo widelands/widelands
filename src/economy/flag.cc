@@ -93,8 +93,8 @@ Flag::Flag
 	for (uint32_t i = 0; i < 6; ++i) m_roads[i] = 0;
 
 	set_owner(&owning_player);
-	
-	set_flag_position(m_position);
+
+	set_flag_position(coords);
 
 
 	upcast(Road, road, egbase.map().get_immovable(coords));
