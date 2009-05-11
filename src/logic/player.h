@@ -28,7 +28,6 @@
 #include "rgbcolor.h"
 
 #include "widelands.h"
-#include "message.h"
 
 namespace Widelands {
 
@@ -83,7 +82,6 @@ struct Player :
 	~Player();
 
 	void allocate_map();
-	std::vector<Widelands::Message>& message_queue() {return m_message_queue;}
 
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
@@ -502,8 +500,6 @@ private:
 	std::vector<uint32_t> m_current_statistics;
 	std::vector< std::vector<uint32_t> > m_ware_productions;
 	BuildingStats m_building_stats;
-
-	std::vector<Widelands::Message> m_message_queue;
 };
 
 };
