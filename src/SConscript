@@ -5,7 +5,7 @@ Import('*')
 #TODO: find a way to remove the .orig files astyle leaves around. Probably in
 #      scons-tools/astyle.py
 
-SRC=simpleglob("*.cc")+["build_info.cc"]
+SRC= list(set(simpleglob("*.cc")) - set(("main.cc","./main.cc"))) +["build_info.cc"]
 
 srcenv=env.Clone()
 
@@ -33,10 +33,6 @@ def add_sconscript( submodule ):
     lib = SConscript("%s/SConscript" % submodule )
     libs += lib
 
-# remaining comprises all remaining source not in 
-# any library
-remaining=srcenv.StaticLibrary(target='remaining', source=SRC)
-
 add_sconscript('graphic')
 add_sconscript('sound')
 filesystem,io=SConscript('io/SConscript')
@@ -51,9 +47,12 @@ add_sconscript('ai')
 add_sconscript('wui')
 add_sconscript('logic')
 add_sconscript('economy')
+add_sconscript('logic')
 add_sconscript('map_io')
 add_sconscript('game_io')
 add_sconscript('profile')
+
+remaining = [srcenv.Object( i.replace(".cc",""),source=i) for i in SRC ]
 
 libs.reverse()
 
@@ -61,7 +60,7 @@ libs.reverse()
 # libraries. It is impossible to get some classes under test
 # in any other way currently
 for name,sources in tests:
-    testEnv.addUnitTest(name, libs + [ remaining ] + sources)
+    testEnv.addUnitTest(name, source = sources + remaining + libs )
 
 srcenv.Append(INDENTLIST=[
 	'helper.h',
@@ -89,7 +88,7 @@ def link_or_copy(target, source, env):
 	else:
 		shutil.copy2(src, dst)
 
-binary=srcenv.Program(target='widelands', source=SRC + libs)
+binary=srcenv.Program(target='widelands', source=["main.cc"] + remaining + libs)
 copybinary=srcenv.Command('#/widelands', binary, Action(link_or_copy))
 
 Return('copybinary')
