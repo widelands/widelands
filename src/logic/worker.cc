@@ -809,11 +809,8 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 		if (rdescr->is_detectable()) {
 			MessageQueue::add
 				(owner(),
-				 Message
-						(rdescr->name(),
-						 position,
-						 _("Resources found.")));
-		}	
+				 Message (rdescr->name(), position, _("Resources found.")));
+		}
 	}
 
 	++state.ivar1;

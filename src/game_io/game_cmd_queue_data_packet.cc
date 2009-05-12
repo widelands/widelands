@@ -121,9 +121,6 @@ throw (_wexception)
 	// Make a copy, so we can pop stuff
 	std::priority_queue<Cmd_Queue::cmditem> p = cmdq.m_cmds;
 
-	assert(p.top().serial == cmdq.m_cmds.top().serial);
-	assert(p.top().cmd    == cmdq.m_cmds.top().cmd);
-
 	while (p.size()) {
 		Cmd_Queue::cmditem const & it = p.top();
 
