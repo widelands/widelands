@@ -35,6 +35,7 @@
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "wui/interactive_player.h"
+#include "message_queue.h"
 #include "player.h"
 #include "profile/profile.h"
 #include "soldier.h"
@@ -802,6 +803,17 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 			 	 rdescr->is_detectable() ?
 			 	 position.field->get_resources_amount() : 0),
 			 &t);
+		/* Geologist also sends a message notifying the player
+		 * TODO: each Geologist should report each resource only once
+		 */
+		if (rdescr->is_detectable()) {
+			MessageQueue::add
+				(owner(),
+				 Message
+						(rdescr->name(),
+						 position,
+						 _("Resources found.")));
+		}	
 	}
 
 	++state.ivar1;
