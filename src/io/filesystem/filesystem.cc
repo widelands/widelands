@@ -96,8 +96,9 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
  */
 std::string FileSystem::fixCrossFile(std::string path) {
 #ifdef WIN32
-	// We simply make it absolut.
-	return FS_CanonicalizeName(path);
+	// We simply keep it as it is and do not care about slashes - they will
+	// be replaced with backslashes in file read actions.
+	return path;
 #else
 	std::string fixedpath(path);
 	std::string temp;
