@@ -1,17 +1,15 @@
-# translation of barbarians.po to
 # Widelands po/sv_SE/tribes/barbarians.po
 # Copyright (C) 2008 Widelands Development Team
-#
 # Daniel Nylander <po@danielnylander.se>, 2005.
-# Erik <esigra@gmail.com>, 2009.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: barbarians\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-03-18 22:53+0000\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
 "PO-Revision-Date: 2009-03-19 00:27+0100\n"
 "Last-Translator: Erik <esigra@gmail.com>\n"
-"Language-Team:  <sv@li.org>\n"
+"Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -443,155 +441,154 @@ msgstr "Vaktpost"
 msgid "Stronghold"
 msgstr "Litet fort"
 
-#: ../../../tribes/barbarians/conf:157
+#: ../../../tribes/barbarians/conf:157 ../../../tribes/barbarians/conf:158
 msgid "Headquarters"
 msgstr "Huvudkvarter"
 
-#: ../../../tribes/barbarians/conf:158
+#: ../../../tribes/barbarians/conf:159
 msgid "Warehouse"
 msgstr "Härbre"
 
-#: ../../../tribes/barbarians/conf:161
+#: ../../../tribes/barbarians/conf:162
 msgid "War Mill"
 msgstr "Vapenindustri"
 
-#: ../../../tribes/barbarians/conf:162
+#: ../../../tribes/barbarians/conf:163
 msgid "Axefactory"
 msgstr "Yxfabrik"
 
-#: ../../../tribes/barbarians/conf:163
+#: ../../../tribes/barbarians/conf:164
 msgid "Bakery"
 msgstr "Bageri"
 
-#: ../../../tribes/barbarians/conf:164
+#: ../../../tribes/barbarians/conf:165
 msgid "Big Inn"
 msgstr "Stort Värdshus"
 
-#: ../../../tribes/barbarians/conf:165
+#: ../../../tribes/barbarians/conf:166
 msgid "Brewery"
 msgstr "Bryggeri"
 
-#: ../../../tribes/barbarians/conf:166
+#: ../../../tribes/barbarians/conf:167
 msgid "Charcoal Burner's House"
 msgstr "Kolarbostad"
 
-#: ../../../tribes/barbarians/conf:167
+#: ../../../tribes/barbarians/conf:168
 msgid "Deeper Coal Mine"
 msgstr "Djupare kolgruva"
 
-#: ../../../tribes/barbarians/conf:168
+#: ../../../tribes/barbarians/conf:169
 msgid "Deep Coal Mine"
 msgstr "Djup kolgruva"
 
-#: ../../../tribes/barbarians/conf:169
+#: ../../../tribes/barbarians/conf:170
 msgid "Coal mine"
 msgstr "Kolgruva"
 
-#: ../../../tribes/barbarians/conf:170
+#: ../../../tribes/barbarians/conf:171
 msgid "Deeper Gold Mine"
 msgstr "Djupare guldgruva"
 
-#: ../../../tribes/barbarians/conf:171
+#: ../../../tribes/barbarians/conf:172
 msgid "Deeper Iron Ore Mine"
 msgstr "Djupare järnmalmsgruva"
 
-#: ../../../tribes/barbarians/conf:172
+#: ../../../tribes/barbarians/conf:173
 msgid "Deep Gold Mine"
 msgstr "Djup guldgruva"
 
-#: ../../../tribes/barbarians/conf:173
+#: ../../../tribes/barbarians/conf:174
 msgid "Deep Iron Ore Mine"
 msgstr "Djup järnmalmsgruva"
 
-#: ../../../tribes/barbarians/conf:174
+#: ../../../tribes/barbarians/conf:175
 msgid "Farm"
 msgstr "Veteodling"
 
-#: ../../../tribes/barbarians/conf:175
+#: ../../../tribes/barbarians/conf:176
 msgid "Fernery"
 msgstr "Ormbunksodling"
 
-#: ../../../tribes/barbarians/conf:176
+#: ../../../tribes/barbarians/conf:177
 msgid "Fisher's Hut"
 msgstr "Fiskarkoja"
 
-#: ../../../tribes/barbarians/conf:177
+#: ../../../tribes/barbarians/conf:178
 msgid "Gamekeeper's Hut"
 msgstr "Viltvårdarkoja"
 
-#: ../../../tribes/barbarians/conf:178
+#: ../../../tribes/barbarians/conf:179
 msgid "Gold Mine"
 msgstr "Guldgruva"
 
-#: ../../../tribes/barbarians/conf:179
+#: ../../../tribes/barbarians/conf:180
 msgid "Granite Mine"
 msgstr "Granitgruva"
 
-#: ../../../tribes/barbarians/conf:180
+#: ../../../tribes/barbarians/conf:181
 msgid "Wood Hardener"
 msgstr "Trähärderi"
 
-#: ../../../tribes/barbarians/conf:181
+#: ../../../tribes/barbarians/conf:182
 msgid "Helmsmithy"
 msgstr "Hjälmsmedja"
 
-#: ../../../tribes/barbarians/conf:182
+#: ../../../tribes/barbarians/conf:183
 msgid "Hunter's Hut"
 msgstr "Jägarkoja"
 
-#: ../../../tribes/barbarians/conf:183
+#: ../../../tribes/barbarians/conf:184
 msgid "Inn"
 msgstr "Värdshus"
 
-#: ../../../tribes/barbarians/conf:184
+#: ../../../tribes/barbarians/conf:185
 msgid "Lime Kiln"
 msgstr "Kalkbränneri"
 
-#: ../../../tribes/barbarians/conf:185
+#: ../../../tribes/barbarians/conf:186
 msgid "Lumberjack's Hut"
 msgstr "Skogshuggarkoja"
 
-#: ../../../tribes/barbarians/conf:186
+#: ../../../tribes/barbarians/conf:187
 msgid "Metalwork Shop"
 msgstr "Verktygssmedja"
 
-#: ../../../tribes/barbarians/conf:187
+#: ../../../tribes/barbarians/conf:188
 msgid "Micro Brewery"
 msgstr "Bryggstuga"
 
-#: ../../../tribes/barbarians/conf:188
+#: ../../../tribes/barbarians/conf:189
 msgid "Iron Ore Mine"
 msgstr "Järnmalmsgruva"
 
-#: ../../../tribes/barbarians/conf:189
+#: ../../../tribes/barbarians/conf:190
 msgid "Quarry"
 msgstr "Stenbrott"
 
-#: ../../../tribes/barbarians/conf:190
+#: ../../../tribes/barbarians/conf:191
 msgid "Ranger's Hut"
 msgstr "Skogvaktarkoja"
 
-#: ../../../tribes/barbarians/conf:191
+#: ../../../tribes/barbarians/conf:192
 msgid "Smelting Works"
 msgstr "Smältverk"
 
-#: ../../../tribes/barbarians/conf:192
+#: ../../../tribes/barbarians/conf:193
 msgid "Tavern"
 msgstr "Gatukök"
 
-#: ../../../tribes/barbarians/conf:193
+#: ../../../tribes/barbarians/conf:194
 msgid "Weaving-Mill"
 msgstr "Väveri"
 
-#: ../../../tribes/barbarians/conf:194
+#: ../../../tribes/barbarians/conf:195
 msgid "Well"
 msgstr "Brunn"
 
-#: ../../../tribes/barbarians/conf:197
+#: ../../../tribes/barbarians/conf:198
 msgid "Headquarters medium"
 msgstr "Huvudkvarter medium"
 
-#: ../../../tribes/barbarians/conf:198
+#: ../../../tribes/barbarians/conf:199
 msgid "Citadel village"
 msgstr "Citadellby"
-

@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 18:49+0100\n"
+"POT-Creation-Date: 2009-05-12 16:36+0200\n"
 "PO-Revision-Date: 2008-03-07 20:42+0100\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -16,93 +16,545 @@ msgstr ""
 "Plural-Forms: nplurals=2 plural=(n!=1)\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../../src/ware_statistics_menu.cc:355 ../../src/game_main_menu.cc:54
-msgid "Ware Statistics"
-msgstr "Termék statisztika"
+#: ../../src/writeHTML.cc:39
+msgid "Requesters"
+msgstr ""
 
-#: ../../src/ware_statistics_menu.cc:427
-#: ../../src/general_statistics_menu.cc:224
-msgid "15 m"
-msgstr "15 perc"
-
-#: ../../src/ware_statistics_menu.cc:436
-#: ../../src/general_statistics_menu.cc:233
-msgid "30 m"
-msgstr "30 perc"
-
-#: ../../src/ware_statistics_menu.cc:445
-#: ../../src/general_statistics_menu.cc:242
-msgid "1 h"
-msgstr "1 óra"
-
-#: ../../src/ware_statistics_menu.cc:454
-#: ../../src/general_statistics_menu.cc:251
-msgid "2 h"
-msgstr "2 óra"
-
-#: ../../src/ware_statistics_menu.cc:465
-#: ../../src/general_statistics_menu.cc:262
-msgid "Help"
-msgstr "Súgó"
-
-#: ../../src/ware_statistics_menu.cc:474
-#: ../../src/general_statistics_menu.cc:271
-msgid "4 h"
-msgstr "4 óra"
-
-#: ../../src/ware_statistics_menu.cc:483
-#: ../../src/general_statistics_menu.cc:279
-msgid "8 h"
-msgstr "8 óra"
-
-#: ../../src/ware_statistics_menu.cc:492
-#: ../../src/general_statistics_menu.cc:288
-msgid "16 h"
-msgstr "16 óra"
-
-#: ../../src/interactive_spectator.cc:44
-#: ../../src/editor/editorinteractive.cc:63
-msgid "Menu"
-msgstr "Menü"
-
-#: ../../src/interactive_spectator.cc:45 ../../src/interactive_player.cc:162
-#: ../../src/editor/editorinteractive.cc:72
-msgid "Minimap"
-msgstr "Térkép"
-
-#: ../../src/interactive_player.cc:154
-msgid "Chat"
-msgstr "Csevegés"
-
-#: ../../src/interactive_player.cc:156 ../../src/game_options_menu.cc:48
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:51
-msgid "Options"
-msgstr "Beállítások"
-
-#: ../../src/interactive_player.cc:158
+#: ../../src/writeHTML.cc:54
 #, fuzzy
-msgid "Statistics"
-msgstr "Termék statisztika"
+msgid "Providers"
+msgstr "Termelés"
 
-#: ../../src/interactive_player.cc:160
-#: ../../src/editor/editorinteractive.cc:87
-msgid "Objectives"
+#: ../../src/writeHTML.cc:69
+msgid "Successors"
+msgstr ""
+
+#: ../../src/writeHTML.cc:84
+msgid "Predecessors"
+msgstr ""
+
+#: ../../src/writeHTML.cc:99
+#, fuzzy
+msgid "Employers"
+msgstr "Játékosok"
+
+#: ../../src/writeHTML.cc:255 ../../src/writeHTML.cc:261
+#, fuzzy
+msgid "Building types"
+msgstr "Épületek"
+
+#: ../../src/writeHTML.cc:266 ../../src/writeHTML.cc:499
+#: ../../src/writeHTML.cc:1265
+#, fuzzy
+msgid "Icon"
+msgstr "Akció"
+
+#: ../../src/writeHTML.cc:268 ../../src/writeHTML.cc:501
+#: ../../src/writeHTML.cc:1267 ../../src/building_ui.cc:1583
+#: ../../src/building_ui.cc:1802 ../../src/wui/building_statistics_menu.cc:111
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:76
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:165
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:164
+msgid "Name"
+msgstr "Név"
+
+#: ../../src/writeHTML.cc:270 ../../src/wui/building_statistics_menu.cc:112
+msgid "Size"
+msgstr "Méret"
+
+#: ../../src/writeHTML.cc:272 ../../src/writeHTML.cc:503
+#, fuzzy
+msgid "Buildable"
+msgstr "Épít"
+
+#: ../../src/writeHTML.cc:274
+#, fuzzy
+msgid "Enhanced"
+msgstr "Továbbfejlesztés: %s"
+
+#: ../../src/writeHTML.cc:277 ../../src/building_ui.cc:617
+msgid "Stop"
+msgstr "Leállít"
+
+#: ../../src/writeHTML.cc:279
+#, fuzzy
+msgid "Conquer<br/>range"
+msgstr "Hódítási terület"
+
+#: ../../src/writeHTML.cc:281 ../../src/writeHTML.cc:505
+#, fuzzy
+msgid "Vision<br/>range"
+msgstr "Építési trigger"
+
+#: ../../src/writeHTML.cc:306 ../../src/writeHTML.cc:362
+#: ../../src/logic/building.cc:508
+#, fuzzy
+msgid "Mine"
+msgstr "bánya"
+
+#: ../../src/writeHTML.cc:310 ../../src/writeHTML.cc:378
+#: ../../src/logic/building.cc:509
+#, fuzzy
+msgid "Small"
+msgstr "kicsi"
+
+#: ../../src/writeHTML.cc:314 ../../src/writeHTML.cc:372
+#: ../../src/logic/building.cc:510
+#, fuzzy
+msgid "Medium"
+msgstr "közepes"
+
+#: ../../src/writeHTML.cc:319 ../../src/writeHTML.cc:367
+#: ../../src/logic/building.cc:510
+#, fuzzy
+msgid "Big"
+msgstr "nagy"
+
+#: ../../src/writeHTML.cc:323 ../../src/writeHTML.cc:326
+#: ../../src/writeHTML.cc:533 ../../src/ui_basic/messagebox.cc:94
+#: ../../src/editor/tools/editor_info_tool.cc:75
+#: ../../src/editor/tools/editor_info_tool.cc:76
+msgid "Yes"
+msgstr "Igen"
+
+#: ../../src/writeHTML.cc:323 ../../src/writeHTML.cc:326
+#: ../../src/writeHTML.cc:533 ../../src/ui_basic/messagebox.cc:101
+#: ../../src/editor/tools/editor_info_tool.cc:75
+#: ../../src/editor/tools/editor_info_tool.cc:76
+msgid "No"
+msgstr "Nem"
+
+#: ../../src/writeHTML.cc:341
+#, fuzzy
+msgid "building_types.xhtml"
+msgstr "Engedélyezett épület típus"
+
+#: ../../src/writeHTML.cc:364
+#, fuzzy
+msgid "Is mine."
+msgstr "bánya"
+
+#: ../../src/writeHTML.cc:369
+#, fuzzy
+msgid "Is big."
+msgstr "nagy"
+
+#: ../../src/writeHTML.cc:374
+#, fuzzy
+msgid "Is medium."
+msgstr "közepes"
+
+#: ../../src/writeHTML.cc:380
+#, fuzzy
+msgid "Is small."
+msgstr "kicsi"
+
+#: ../../src/writeHTML.cc:387
+msgid "Is not buildable."
+msgstr ""
+
+#: ../../src/writeHTML.cc:394
+msgid "Is enhanced."
+msgstr ""
+
+#: ../../src/writeHTML.cc:401
+#, fuzzy, c-format
+msgid "Conquer range is %u."
+msgstr "Hódítási terület"
+
+#: ../../src/writeHTML.cc:409 ../../src/writeHTML.cc:641
+#, fuzzy, c-format
+msgid "Vision range is %u."
+msgstr "Építési trigger"
+
+#: ../../src/writeHTML.cc:417 ../../src/writeHTML.cc:647
+#, fuzzy
+msgid "Build cost"
+msgstr "Út építése"
+
+#: ../../src/writeHTML.cc:427
+msgid "'s constructionsite"
+msgstr ""
+
+#: ../../src/writeHTML.cc:438
+#, fuzzy
+msgid "Enhancements"
+msgstr "Továbbfejlesztés: %s"
+
+#: ../../src/writeHTML.cc:448
+msgid "'s enhancement"
+msgstr ""
+
+#: ../../src/writeHTML.cc:488 ../../src/writeHTML.cc:494
+#, fuzzy
+msgid "Worker types"
+msgstr "Munkások"
+
+#: ../../src/writeHTML.cc:507
+msgid "Minimum<br/>needed<br/>experience"
+msgstr ""
+
+#: ../../src/writeHTML.cc:509
+msgid "Maximum<br/>needed<br/>experience"
+msgstr ""
+
+#: ../../src/writeHTML.cc:511
+msgid "Becomes"
+msgstr ""
+
+#: ../../src/writeHTML.cc:569
+msgid "worker_types.xhtml"
+msgstr ""
+
+#: ../../src/writeHTML.cc:576
+msgid "Combat Properties"
+msgstr ""
+
+#: ../../src/writeHTML.cc:583
+#, c-format
+msgid "Hitpoints is between %u and %u, plus %u for each level above 0 (maximum level is %u)."
+msgstr ""
+
+#: ../../src/writeHTML.cc:593
+#, c-format
+msgid "Attack is between %u and %u, plus %u for each level above 0 (maximum level is %u)."
+msgstr ""
+
+#: ../../src/writeHTML.cc:603
+#, c-format
+msgid "Defense is %u, plus %u for each level above 0 (maximum level is %u)."
+msgstr ""
+
+#: ../../src/writeHTML.cc:613
+#, c-format
+msgid "Evade is %u, plus %u for each level above 0 (maximum level is %u)."
+msgstr ""
+
+#: ../../src/writeHTML.cc:658 ../../src/writeHTML.cc:668
+#, fuzzy
+msgid "'s creation"
+msgstr "Leírás:"
+
+#: ../../src/writeHTML.cc:682
+#, c-format
+msgid "Needs experience from working between %u and %u times to become"
+msgstr ""
+
+#: ../../src/writeHTML.cc:690
+msgid "'s promotion"
+msgstr ""
+
+#: ../../src/writeHTML.cc:700 ../../src/writeHTML.cc:828
+msgid "Programs"
+msgstr ""
+
+#: ../../src/writeHTML.cc:737 ../../src/writeHTML.cc:1144
+#: ../../src/logic/building.cc:503
+#, fuzzy
+msgid "mine"
+msgstr "bánya"
+
+#: ../../src/writeHTML.cc:738
+msgid "breed"
+msgstr ""
+
+#: ../../src/writeHTML.cc:739
+msgid "createitem"
+msgstr ""
+
+#: ../../src/writeHTML.cc:740
+#, fuzzy
+msgid "setdescription"
+msgstr "Leírás:"
+
+#: ../../src/writeHTML.cc:741
+#, fuzzy
+msgid "setbobdescription"
+msgstr "Leírás:"
+
+#: ../../src/writeHTML.cc:742
+msgid "findobject"
+msgstr ""
+
+#: ../../src/writeHTML.cc:743
+msgid "findspace"
+msgstr ""
+
+#: ../../src/writeHTML.cc:744
+msgid "walk"
+msgstr ""
+
+#: ../../src/writeHTML.cc:745
+#, fuzzy
+msgid "animation"
+msgstr "Feltétel"
+
+#: ../../src/writeHTML.cc:746 ../../src/writeHTML.cc:868
+msgid "return"
+msgstr ""
+
+#: ../../src/writeHTML.cc:747
+#, fuzzy
+msgid "object"
 msgstr "Célkitűzések"
 
-#: ../../src/interactive_player.cc:164
-#: ../../src/editor/editorinteractive.cc:75
-msgid "Buildhelp"
-msgstr "Építési segítség"
+#: ../../src/writeHTML.cc:748
+msgid "plant"
+msgstr ""
 
-#: ../../src/interactive_player.cc:170
-msgid "Resource information"
-msgstr "Nyersanyag információ"
+#: ../../src/writeHTML.cc:749
+msgid "create_bob"
+msgstr ""
 
-#: ../../src/interactive_player.cc:173
-msgid "Ware help"
-msgstr "Áru súgó"
+#: ../../src/writeHTML.cc:750
+#, fuzzy
+msgid "removeobject"
+msgstr "Célkitűzések"
 
-#: ../../src/wlapplication.cc:852
+#: ../../src/writeHTML.cc:751
+msgid "geologist"
+msgstr ""
+
+#: ../../src/writeHTML.cc:752
+msgid "geologist_find"
+msgstr ""
+
+#: ../../src/writeHTML.cc:753 ../../src/writeHTML.cc:1219
+msgid "playFX"
+msgstr ""
+
+#: ../../src/writeHTML.cc:754
+msgid "UNKNOWN"
+msgstr ""
+
+#: ../../src/writeHTML.cc:761
+#, fuzzy
+msgid "Production"
+msgstr "Termelékenység"
+
+#: ../../src/writeHTML.cc:765 ../../src/wui/general_statistics_menu.cc:152
+msgid "Workers"
+msgstr "Munkások"
+
+#: ../../src/writeHTML.cc:775
+msgid "'s employee"
+msgstr ""
+
+#: ../../src/writeHTML.cc:785
+#, fuzzy
+msgid "Inputs"
+msgstr "Egér kisajátítás"
+
+#: ../../src/writeHTML.cc:795
+msgid "'s input"
+msgstr ""
+
+#: ../../src/writeHTML.cc:807
+msgid "Output"
+msgstr ""
+
+#: ../../src/writeHTML.cc:817
+msgid "'s output"
+msgstr ""
+
+#: ../../src/writeHTML.cc:864 ../../src/writeHTML.cc:945
+#: ../../src/writeHTML.cc:975 ../../src/writeHTML.cc:1003
+#: ../../src/writeHTML.cc:1023 ../../src/writeHTML.cc:1044
+#: ../../src/writeHTML.cc:1095 ../../src/writeHTML.cc:1140
+#: ../../src/writeHTML.cc:1167 ../../src/writeHTML.cc:1191
+#: ../../src/writeHTML.cc:1215
+msgid "productionsite_program_reference.xhtml"
+msgstr ""
+
+#: ../../src/writeHTML.cc:866
+msgid "Documentation for program command return"
+msgstr ""
+
+#: ../../src/writeHTML.cc:872
+msgid "failed"
+msgstr ""
+
+#: ../../src/writeHTML.cc:873
+msgid "completed"
+msgstr ""
+
+#: ../../src/writeHTML.cc:874
+#, fuzzy
+msgid "skipped"
+msgstr "(megállítva)"
+
+#: ../../src/writeHTML.cc:932
+msgid "workers of this site"
+msgstr ""
+
+#: ../../src/writeHTML.cc:947
+msgid "Documentation for program command call"
+msgstr ""
+
+#: ../../src/writeHTML.cc:949
+#, fuzzy
+msgid "call"
+msgstr "kicsi"
+
+#: ../../src/writeHTML.cc:956
+#, c-format
+msgid "site's program %s"
+msgstr ""
+
+#: ../../src/writeHTML.cc:977
+msgid "Documentation for program command worker"
+msgstr ""
+
+#: ../../src/writeHTML.cc:979
+#, fuzzy
+msgid "worker"
+msgstr "Munkások"
+
+#: ../../src/writeHTML.cc:990
+#, c-format
+msgid "%s's program %s"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1005
+msgid "Documentation for program command sleep"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1007
+msgid "sleep"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1013 ../../src/writeHTML.cc:1033
+#, fuzzy, c-format
+msgid " %u.%03u s"
+msgstr "%ux"
+
+#: ../../src/writeHTML.cc:1025
+msgid "Documentation for program command animate"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1027
+msgid "animate"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1046
+msgid "Documentation for program command consume"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1048
+#, fuzzy
+msgid "consume"
+msgstr "Felhasznált"
+
+#: ../../src/writeHTML.cc:1097
+msgid "Documentation for program command produce"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1099
+msgid "produce"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1142
+msgid "Documentation for program command mine"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1169
+msgid "Documentation for program command check_soldier"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1171
+#, fuzzy
+msgid "check soldier"
+msgstr "%u harcos"
+
+#: ../../src/writeHTML.cc:1177 ../../src/writeHTML.cc:1201
+msgid "hp"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1178 ../../src/writeHTML.cc:1202
+#, fuzzy
+msgid "attack"
+msgstr "Támadás"
+
+#: ../../src/writeHTML.cc:1179 ../../src/writeHTML.cc:1203
+#, fuzzy
+msgid "defense"
+msgstr "Védekezés"
+
+#: ../../src/writeHTML.cc:1180 ../../src/writeHTML.cc:1204
+#, fuzzy
+msgid "evade"
+msgstr "Szint"
+
+#: ../../src/writeHTML.cc:1193
+msgid "Documentation for program command train"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1195
+#, fuzzy
+msgid "train"
+msgstr "Szöveg"
+
+#: ../../src/writeHTML.cc:1217
+msgid "Documentation for program command playFX"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1254 ../../src/writeHTML.cc:1260
+#, fuzzy
+msgid "Ware types"
+msgstr "Termékek"
+
+#: ../../src/writeHTML.cc:1294
+msgid "ware_types.xhtml"
+msgstr ""
+
+#: ../../src/minimap.cc:134 ../../src/ui_fsmenu/netsetup.cc:117
+msgid "Map"
+msgstr "Térkép"
+
+#: ../../src/minimap.cc:143 ../../src/editor/ui_menus/editor_tool_menu.cc:68
+msgid "Terrain"
+msgstr "Terep"
+
+#: ../../src/minimap.cc:150
+msgid "Owner"
+msgstr "Tulajdonos"
+
+#: ../../src/minimap.cc:157
+msgid "Flags"
+msgstr "Zászlók"
+
+#: ../../src/minimap.cc:164
+msgid "Roads"
+msgstr "Utak"
+
+#: ../../src/minimap.cc:171 ../../src/wui/general_statistics_menu.cc:158
+msgid "Buildings"
+msgstr "Épületek"
+
+#: ../../src/constructionsite.cc:188
+#, c-format
+msgid "%u%% built"
+msgstr "%u%% kész"
+
+#: ../../src/militarysite.cc:65 ../../src/logic/warehouse.cc:277
+msgid " conquer"
+msgstr " hódítás"
+
+#: ../../src/militarysite.cc:121
+#, c-format
+msgid "%u soldier"
+msgid_plural "%u soldiers"
+msgstr[0] "%u harcos"
+msgstr[1] "%u harcos"
+
+#: ../../src/militarysite.cc:126
+#, fuzzy, c-format
+msgid "%u(+%u) soldier"
+msgid_plural "%u(+%u) soldiers"
+msgstr[0] "%u harcos"
+msgstr[1] "%u harcos"
+
+#: ../../src/wlapplication.cc:858
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
@@ -112,24 +564,24 @@ msgstr ""
 "Sajnálom, Windows-on nem lehet két pédányos hibakeresést futtatni.\n"
 "\n"
 
-#: ../../src/wlapplication.cc:855
+#: ../../src/wlapplication.cc:861
 msgid "--double is disabled. This is not a debug build!"
 msgstr "--double le van tiltva. Ez nem debug build!"
 
-#: ../../src/wlapplication.cc:945
+#: ../../src/wlapplication.cc:950
 #, fuzzy
 msgid "This is Widelands-"
 msgstr ""
 "Ez egy Widelands-%s\n"
 "\n"
 
-#: ../../src/wlapplication.cc:946
+#: ../../src/wlapplication.cc:952
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr "Használat: widelands <beállítás>=<érték0> ... <beállítás>=<értékN>\n"
 
-#: ../../src/wlapplication.cc:947
+#: ../../src/wlapplication.cc:953
 msgid ""
 "Options:\n"
 "\n"
@@ -137,7 +589,7 @@ msgstr ""
 "Beállítások:\n"
 "\n"
 
-#: ../../src/wlapplication.cc:951
+#: ../../src/wlapplication.cc:957
 #, fuzzy
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
@@ -148,6 +600,9 @@ msgid ""
 "\n"
 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
 "                      of using the SDL\n"
+" --language=[de_DE|sv_SE|...]\n"
+"                      The locale to use.\n"
+"\n"
 msgstr ""
 "--<beállítás-neve>=érték felülbírálja bármelyik beállítást\n"
 "\n"
@@ -156,9 +611,13 @@ msgstr ""
 "\n"
 "--coredump=[yes|no]  Létrehozzon-e a core dump-ot az SDL hazsnálata helyett\n"
 
-#: ../../src/wlapplication.cc:960
+#: ../../src/wlapplication.cc:968
 msgid ""
+"Sound options:\n"
 " --nosound            Starts the game with sound disabled.\n"
+" --disable_fx         Disable sound effects.\n"
+" --disable_music      Disable music.\n"
+"\n"
 " --nozip              Do not save files as binary zip archives.\n"
 "\n"
 " --editor             Directly starts the Widelands editor.\n"
@@ -167,10 +626,45 @@ msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map.\n"
 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
+" --speed_of_new_game  The speed that the new game will run at\n"
+"                      when started, with factor 1000 (0 is pause,\n"
+"                      1000 is normal speed).\n"
+" --auto_roadbuild_mode=[yes|no]\n"
+"                      Whether to enter roadbuilding mode\n"
+"                      automatically after placing a flag that is\n"
+"                      not connected to a road.\n"
+" --write_HTML=[yes|no]\n"
+"                      Write HTML-helpfiles for parsed game data.\n"
+"\n"
+"Graphic options:\n"
+" --fullscreen=[yes|no]\n"
+"                      Whether to use the whole display for the\n"
+"                      game screen.\n"
+" --depth=[16|32]      Color depth in number of bits per pixel.\n"
+" --xres=[...]         Width of the window in pixel.\n"
+" --yres=[...]         Height of the window in pixel.\n"
+"\n"
+"Options for the internal window manager:\n"
+" --border_snap_distance=[0 ...]\n"
+"                      Move a window to the edge of the screen\n"
+"                      when the edge of the window comes within\n"
+"                      this distance from the edge of the screen.\n"
+" --dock_windows_to_edges=[yes|no]\n"
+"                      Eliminate a window's border towards the\n"
+"                      edge of the screen when the edge of the\n"
+"                      window is next to the edge of the screen.\n"
+" --panel_snap_distance=[0 ...]\n"
+"                      Move a window to the edge of the panel when\n"
+"                      the edge of the window comes within this\n"
+"                      distance from the edge of the panel.\n"
+" --snap_windows_only_when_overlapping=[yes|no]\n"
+"                      Only move a window to the edge of a panel\n"
+"                      if the window is overlapping with the\n"
+"                      panel.\n"
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:973
+#: ../../src/wlapplication.cc:1022
 #, fuzzy
 msgid ""
 " --double             Start the game twice (for localhost network\n"
@@ -180,11 +674,11 @@ msgstr ""
 "--double             A játékot kétszer indítja el (hely hálózati teszteléshez)\n"
 "\n"
 
-#: ../../src/wlapplication.cc:977
+#: ../../src/wlapplication.cc:1026
 msgid " --help               Show this help\n"
 msgstr "--help               Megjeleníti ezt a segítséget\n"
 
-#: ../../src/wlapplication.cc:981
+#: ../../src/wlapplication.cc:1030
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        http://www.sourceforge.net/projects/widelands\n"
@@ -198,11 +692,15 @@ msgstr ""
 "Reméljük, hogy tetszett a játék!\n"
 "\n"
 
-#: ../../src/wlapplication.cc:1121
+#: ../../src/wlapplication.cc:1168
+msgid "Warning: "
+msgstr ""
+
+#: ../../src/wlapplication.cc:1172
 msgid "Unexpected error during the game"
 msgstr "Váratlan hiba a játék során"
 
-#: ../../src/wlapplication.cc:1125
+#: ../../src/wlapplication.cc:1176
 msgid ""
 "\n"
 "\n"
@@ -212,7 +710,7 @@ msgstr ""
 "\n"
 "Kérlek jelentsd be ezt a hibát ezzel segítsd a Widelands fejlesztését. A hibával kapcoslatos üzeneteket megtalálod a standard kimeneten (stdout.txt Windowson). Te ezt a verziót használod:"
 
-#: ../../src/wlapplication.cc:1131
+#: ../../src/wlapplication.cc:1182
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
@@ -222,958 +720,708 @@ msgstr ""
 "\n"
 "Widelands megpróbálja lementeni a játékot mikor hiba történik. Gyakran - de nem mindig - be lehet tölteni ezt a mentést és folytatni  játékot.\n"
 
-#: ../../src/wlapplication.cc:1308 ../../src/nethost.cc:699
+#: ../../src/wlapplication.cc:1265
+msgid "The address of the game server is invalid"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1373 ../../src/network/nethost.cc:952
 msgid "Player"
 msgstr "Játékos "
 
-#: ../../src/wlapplication.cc:1383 ../../src/nethost.cc:300
-#: ../../src/netclient.cc:137
+#: ../../src/wlapplication.cc:1517 ../../src/network/netclient.cc:157
+#: ../../src/network/nethost.cc:384
 msgid "Preparing game"
 msgstr "Játék előtötése"
 
-#: ../../src/wlapplication.cc:1516
+#: ../../src/wlapplication.cc:1625
 msgid "End of replay"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1518
+#: ../../src/wlapplication.cc:1627
 msgid "The end of the replay has been reached and the game has been paused. You may unpause the game and continue watching if you want to."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1570 ../../src/game.cc:366 ../../src/game.cc:403
+#: ../../src/wlapplication.cc:1709 ../../src/logic/game.cc:307
+#: ../../src/logic/game.cc:346
 msgid "Loading..."
 msgstr "Betöltés..."
 
-#: ../../src/nethost.cc:231
-#, fuzzy
-msgid "Server has left the game."
-msgstr "%s elhagyta a %s szobát!\n"
-
-#: ../../src/nethost.cc:288
-msgid "The game has started just after you tried to connect."
+#: ../../src/playerdescrgroup.cc:85
+msgid "Initialization"
 msgstr ""
 
-#: ../../src/nethost.cc:336
-msgid "Server has crashed and performed an emergency save."
-msgstr ""
-
-#: ../../src/nethost.cc:464
-msgid "Host has changed to a map that supports fewer players."
-msgstr ""
-
-#: ../../src/nethost.cc:514
-msgid "You were kicked by the host."
-msgstr ""
-
-#: ../../src/nethost.cc:640 ../../src/playerdescrgroup.cc:125
-msgid "Computer"
-msgstr "Számítógép"
-
-#: ../../src/nethost.cc:685
-msgid "There are no open player slots left."
-msgstr ""
-
-#: ../../src/nethost.cc:765
-msgid "Client reports time to host that is running backwards."
-msgstr ""
-
-#: ../../src/nethost.cc:767
-msgid "Client simulates beyond the game time allowed by the host."
-msgstr ""
-
-#: ../../src/nethost.cc:770
-msgid "Client did not submit sync report in time."
-msgstr ""
-
-#: ../../src/nethost.cc:939
-msgid "Client and host have become desynchronized."
-msgstr ""
-
-#: ../../src/nethost.cc:978
-msgid "The game has already started."
-msgstr ""
-
-#: ../../src/nethost.cc:989
-msgid "Connection to client lost."
-msgstr ""
-
-#: ../../src/nethost.cc:1003
-msgid "Client sent malformed commands: "
-msgstr ""
-
-#: ../../src/nethost.cc:1036
-msgid "Game is running already, but client has not connected fully"
-msgstr ""
-
-#: ../../src/nethost.cc:1040
-#, c-format
-msgid "First command sent by client is %u instead of HELLO. Most likely the client is running an incompatible version."
-msgstr ""
-
-#: ../../src/nethost.cc:1045
-msgid "Server uses a different protocol version."
-msgstr ""
-
-#: ../../src/nethost.cc:1070
-msgid "Client sent TIME command even though game is not running."
-msgstr ""
-
-#: ../../src/nethost.cc:1077
-msgid "Client sent PLAYERCOMMAND command even though game is not running."
-msgstr ""
-
-#: ../../src/nethost.cc:1086
-msgid "Client tries to sent a playercommand for a different player."
-msgstr ""
-
-#: ../../src/nethost.cc:1093
-msgid "Client sent unexpected synchronization report."
-msgstr ""
-
-#: ../../src/nethost.cc:1118
-#, c-format
-msgid "Client sent unknown command number %u"
-msgstr ""
-
-#: ../../src/netclient.cc:102
-msgid "Client has left the game."
-msgstr ""
-
-#: ../../src/netclient.cc:165
-msgid "Client crashed and performed an emergency save."
-msgstr ""
-
-#: ../../src/netclient.cc:313
-msgid "Server sent a player update for a player that does not exist."
-msgstr ""
-
-#: ../../src/netclient.cc:383
-#, c-format
-msgid "Expected a HELLO packet from server, but received command number %u. Maybe the server is running a different version of Widelands?"
-msgstr ""
-
-#: ../../src/netclient.cc:389
-msgid "Server uses a different protocol version"
-msgstr ""
-
-#: ../../src/netclient.cc:432
-msgid "Unexpectedly received LAUNCH command from server."
-msgstr ""
-
-#: ../../src/netclient.cc:449
-msgid "Server sent a PLAYERCOMMAND even though no game is running."
-msgstr ""
-
-#: ../../src/netclient.cc:460
-msgid "Server sent a SYNCREQUEST even though no game is running."
-msgstr ""
-
-#: ../../src/netclient.cc:481
-#, c-format
-msgid "Server sent an unknown command (command number %u)"
-msgstr ""
-
-#: ../../src/netclient.cc:510
-msgid "Server sent malformed commands: "
-msgstr ""
-
-#: ../../src/netclient.cc:540
-msgid " An automatic savegame will be created."
-msgstr ""
-
-#: ../../src/watchwindow.cc:108 ../../src/fieldaction.cc:448
-msgid "Watch"
-msgstr "Nézőke"
-
-#: ../../src/watchwindow.cc:122
-msgid "Follow"
-msgstr "Követ"
-
-#: ../../src/watchwindow.cc:129
-msgid "Center mainview on this"
-msgstr "Ugrás erre a helyszínre"
-
-#: ../../src/watchwindow.cc:146
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_fileview.cc:38
-msgid "Close"
-msgstr "Bezár"
-
-#: ../../src/game.cc:245
-msgid "Preloading a map"
-msgstr "Térkép betöltése"
-
-#: ../../src/game.cc:256
-msgid "Loading a world"
-msgstr "Világ létrehozása"
-
-#: ../../src/game.cc:262
-#, c-format
-msgid "Adding player %u"
-msgstr "%u játékos hozzáadása"
-
-#: ../../src/game.cc:271
-msgid "Loading a map"
-msgstr "Egy térkép betöltése"
-
-#: ../../src/game.cc:305 ../../src/game.cc:352 ../../src/game.cc:384
-#, fuzzy
-msgid "Preloading map"
-msgstr "Térkép előtöltése"
-
-#: ../../src/game.cc:319
-msgid "Configuring players"
-msgstr "Játékosok beállítása"
-
-#: ../../src/game.cc:332
-msgid "Loading map"
-msgstr "Térkép betöltése"
-
-#: ../../src/game.cc:458
-msgid "Creating player infrastructure"
-msgstr "Infrastruktúra létrehozása"
-
-#: ../../src/game_objectives_menu.cc:36
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:160
-msgid "Objectives Menu"
-msgstr "Feladatlista menü"
-
-#: ../../src/map.cc:409
-msgid "Player 1"
-msgstr "1. játékos"
-
-#: ../../src/building_statistics_menu.cc:80 ../../src/game_main_menu.cc:61
-msgid "Building Statistics"
-msgstr "Építési statisztika"
-
-#: ../../src/building_statistics_menu.cc:90
-msgid "Total Productivity: "
-msgstr "Teljes termelés: "
-
-#: ../../src/building_statistics_menu.cc:92
-msgid "Owned: "
-msgstr "Számuk: "
-
-#: ../../src/building_statistics_menu.cc:98
-msgid "In Build: "
-msgstr "Építés alatt: "
-
-#: ../../src/building_statistics_menu.cc:104
-msgid "Jump to unproductive: "
-msgstr "Ugrás egy nem működő épülethez: "
-
-#: ../../src/building_statistics_menu.cc:111 ../../src/building_ui.cc:1566
-#: ../../src/building_ui.cc:1951
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:161
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:76
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:164
-msgid "Name"
-msgstr "Név"
-
-#: ../../src/building_statistics_menu.cc:112
-msgid "Size"
-msgstr "Méret"
-
-#: ../../src/building_statistics_menu.cc:113
-msgid "Prod"
-msgstr "Termelés"
-
-#: ../../src/building_statistics_menu.cc:114
-msgid "Owned"
-msgstr "Számuk"
-
-#: ../../src/building_statistics_menu.cc:115
-msgid "Build"
-msgstr "Épít"
-
-#: ../../src/building_statistics_menu.cc:127
-#: ../../src/building_statistics_menu.cc:145
-#: ../../src/building_statistics_menu.cc:163
-#, fuzzy
-msgid "Show previous"
-msgstr "Előző épület"
-
-#: ../../src/building_statistics_menu.cc:136
-#: ../../src/building_statistics_menu.cc:154
-#: ../../src/building_statistics_menu.cc:172
-#, fuzzy
-msgid "Show next"
-msgstr "Következő épület"
-
-#: ../../src/waresdisplay.cc:42 ../../src/stock_menu.cc:32
-#: ../../src/game_main_menu.cc:68
-msgid "Stock"
-msgstr "Raktárak"
-
-#: ../../src/minimap.cc:135
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:69
-msgid "Map"
-msgstr "Térkép"
-
-#: ../../src/minimap.cc:144 ../../src/editor/ui_menus/editor_tool_menu.cc:66
-msgid "Terrain"
-msgstr "Terep"
-
-#: ../../src/minimap.cc:151
-msgid "Owner"
-msgstr "Tulajdonos"
-
-#: ../../src/minimap.cc:158
-msgid "Flags"
-msgstr "Zászlók"
-
-#: ../../src/minimap.cc:165
-msgid "Roads"
-msgstr "Utak"
-
-#: ../../src/minimap.cc:172 ../../src/general_statistics_menu.cc:158
-msgid "Buildings"
-msgstr "Épületek"
-
-#: ../../src/item_ware_descr.cc:40 ../../src/worker_descr.cc:122
-msgid "Doh... someone forgot the help text!"
-msgstr "Hopp... valaki elfelejtette a segítség szövegét megírni!"
-
-#: ../../src/stock_menu.cc:71
-msgid "Show wares"
-msgstr "Termékek megjelenítése"
-
-#: ../../src/stock_menu.cc:76
-msgid "Show workers"
-msgstr "Munkások megjelenítése"
-
-#: ../../src/productionsite.cc:199
-msgid "(not occupied)"
-msgstr "(nincs munkás)"
-
-#: ../../src/productionsite.cc:204
-#, c-format
-msgid "Waiting for %u workers!"
-msgstr "Várakozás %u munkásra!"
-
-#: ../../src/productionsite.cc:212
-msgid "(stopped)"
-msgstr "(megállítva)"
-
-#: ../../src/productionsite.cc:257
-msgid "UP"
-msgstr "FEL"
-
-#: ../../src/productionsite.cc:257
-msgid "DOWN"
-msgstr "LE"
-
-#: ../../src/graphic.cc:663
-#, c-format
-msgid "Loading animations: %d%% complete"
-msgstr "Animációk betöltése: %d%%"
-
-#: ../../src/game_options_sound_menu.cc:27 ../../src/game_options_menu.cc:82
-#, fuzzy
-msgid "Sound Options"
-msgstr "Hang beállítások"
-
-#: ../../src/game_options_sound_menu.cc:32
-msgid "Ingame Music"
-msgstr "Háttérzene"
-
-#: ../../src/game_options_sound_menu.cc:38
-msgid "Sound FX"
-msgstr "Hangok"
-
-#: ../../src/game_options_sound_menu.cc:42
-msgid "Ingame Music Volume"
-msgstr "Háttérzene hangereje"
-
-#: ../../src/game_options_sound_menu.cc:56
-msgid "Sound FX Volume"
-msgstr "Hangok hangereje"
-
-#: ../../src/encyclopedia_window.cc:59
-msgid "Tribe ware encyclopedia"
-msgstr "Népek termék enciklopédiája"
-
-#: ../../src/encyclopedia_window.cc:77
-msgid "Consumed ware type(s)"
-msgstr ""
-
-#: ../../src/encyclopedia_window.cc:78
-msgid "Quantity"
-msgstr ""
-
-#: ../../src/encyclopedia_window.cc:193
-msgid " or "
-msgstr ""
-
-#: ../../src/game_main_menu_save_game.cc:62 ../../src/game_options_menu.cc:91
-msgid "Save Game"
-msgstr "Játék mentése"
-
-#: ../../src/game_main_menu_save_game.cc:66
-msgid "Map Name: "
-msgstr "Térkép neve: "
-
-#: ../../src/game_main_menu_save_game.cc:70
-msgid "Game Time: "
-msgstr "Játékidő: "
-
-#: ../../src/game_main_menu_save_game.cc:78
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:41
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:46
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:70
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:50
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:232
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:66
-#: ../../src/ui/ui_basic/ui_messagebox.cc:85
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:59
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:127
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:118
-msgid "OK"
-msgstr "OK"
-
-#: ../../src/game_main_menu_save_game.cc:86
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:45
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:78
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:68
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:188
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:263
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:93
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:216
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:134
-#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:98
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:127
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:256
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:135
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:191
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:296
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:233
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:174
-msgid "Cancel"
-msgstr "Mégsem"
-
-#: ../../src/game_main_menu_save_game.cc:139
-#, c-format
-msgid "%02ud%02uh%02u'%u\"%03u"
-msgstr ""
-
-#: ../../src/game_main_menu_save_game.cc:200
-msgid ""
-"Game Saving Error!\n"
-"Saved Game-File may be corrupt!\n"
-"\n"
-"Reason given:\n"
-msgstr ""
-"Hiba mentés közben!\n"
-"A lementett játék sérült lehet!\n"
-"\n"
-"A hiba oka:\n"
-
-#: ../../src/game_main_menu_save_game.cc:204
-#: ../../src/game_main_menu_save_game.cc:215
-msgid "Save Game Error!!"
-msgstr "Játék mentési hiba!!"
-
-#: ../../src/game_main_menu_save_game.cc:216
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:356
-msgid "A File with the name "
-msgstr "A fájl "
-
-#: ../../src/game_main_menu_save_game.cc:220
-msgid " already exists. Overwrite?"
-msgstr " néven már létezik, felülírod?"
-
-#: ../../src/militarysite.cc:79 ../../src/warehouse.cc:309
-msgid " conquer"
-msgstr " hódítás"
-
-#: ../../src/militarysite.cc:141
-#, c-format
-msgid "%u soldier"
-msgid_plural "%u soldiers"
-msgstr[0] "%u harcos"
-msgstr[1] "%u harcos"
-
-#: ../../src/militarysite.cc:146
-#, fuzzy, c-format
-msgid "%u(+%u) soldier"
-msgid_plural "%u(+%u) soldiers"
-msgstr[0] "%u harcos"
-msgstr[1] "%u harcos"
-
-#: ../../src/s2map.cc:226
-msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Bluebyte Settlers II térkép, nem tartozik hozzá leírás!"
-
-#: ../../src/playerdescrgroup.cc:117
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:138
+#: ../../src/playerdescrgroup.cc:136 ../../src/ui_fsmenu/netsetup.cc:185
 msgid "Open"
 msgstr "Szabad"
 
-#: ../../src/playerdescrgroup.cc:127
+#: ../../src/playerdescrgroup.cc:147 ../../src/network/nethost.cc:890
+msgid "Computer"
+msgstr "Számítógép"
+
+#: ../../src/playerdescrgroup.cc:149
+#, fuzzy
+msgid "AI: "
+msgstr "Terület: "
+
+#: ../../src/playerdescrgroup.cc:152
 msgid "Human"
 msgstr "Ember"
 
-#: ../../src/trainingsite.cc:208
-msgid "Resting"
+#: ../../src/transport_ui.cc:42
+#, fuzzy
+msgid "Target quantities"
+msgstr "Termék statisztika"
+
+#: ../../src/transport_ui.cc:136
+msgid "Decrease permanent target quantity"
+msgstr ""
+
+#: ../../src/transport_ui.cc:165
+msgid "Increase permanent target quantity"
+msgstr ""
+
+#: ../../src/transport_ui.cc:192
+msgid "Decrease temporary target quantity"
+msgstr ""
+
+#: ../../src/transport_ui.cc:221
+msgid "Increase temporary target quantity"
+msgstr ""
+
+#: ../../src/transport_ui.cc:246
+#, fuzzy
+msgid "Reset"
 msgstr "Pihen"
 
-#: ../../src/trainingsite.cc:210
-msgid "Not Working"
-msgstr "Nem dolgozik"
+#: ../../src/transport_ui.cc:246
+msgid "Reset target quantity to default value"
+msgstr ""
 
-#: ../../src/interactive_base.cc:196
+#: ../../src/s2map.cc:224
+msgid "Bluebyte Settlers II Map. No comment defined!"
+msgstr "Bluebyte Settlers II térkép, nem tartozik hozzá leírás!"
+
+#: ../../src/productionsite.cc:207
+msgid "(not occupied)"
+msgstr "(nincs munkás)"
+
+#: ../../src/productionsite.cc:213
 #, fuzzy, c-format
-msgid "%u.%ux"
-msgstr "%ux"
+msgid "Waiting for one worker!"
+msgid_plural "Waiting for %u workers!"
+msgstr[0] "Várakozás %u munkásra!"
+msgstr[1] "Várakozás %u munkásra!"
 
-#: ../../src/interactive_base.cc:199
-msgid "PAUSE"
-msgstr "SZÜNET"
+#: ../../src/productionsite.cc:223
+msgid "(stopped)"
+msgstr "(megállítva)"
 
-#: ../../src/interactive_base.cc:219
-#, c-format
-msgid "%s (%s)"
-msgstr ""
+#: ../../src/productionsite.cc:305
+msgid "UP"
+msgstr "FEL"
 
-#: ../../src/interactive_base.cc:224
-msgid "NO GAME CONTROLLER"
-msgstr ""
+#: ../../src/productionsite.cc:305
+msgid "DOWN"
+msgstr "LE"
 
-#: ../../src/game_options_menu.cc:58
-msgid "README"
-msgstr "OLVASSEL"
-
-#: ../../src/game_options_menu.cc:66
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:69
-msgid "License"
-msgstr "Licenc"
-
-#: ../../src/game_options_menu.cc:74
-msgid "Authors"
-msgstr "Szerzők"
-
-#: ../../src/game_options_menu.cc:101
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:75
-msgid "Exit Game"
-msgstr "Kilépés"
-
-#: ../../src/editor_game_base.cc:573 ../../src/editor/editorinteractive.cc:134
-msgid "Loading world data"
-msgstr "Világ adatainak betöltése"
-
-#: ../../src/editor_game_base.cc:582
-#, c-format
-msgid "Loading tribe: %s"
-msgstr "%s törzs betöltése"
-
-#: ../../src/general_statistics_menu.cc:52 ../../src/game_main_menu.cc:47
-msgid "General Statistics"
-msgstr "Általános statisztika"
-
-#: ../../src/general_statistics_menu.cc:146
-msgid "Land"
-msgstr "Föld"
-
-#: ../../src/general_statistics_menu.cc:152
-msgid "Workers"
-msgstr "Munkások"
-
-#: ../../src/general_statistics_menu.cc:164
-msgid "Wares"
-msgstr "Termékek"
-
-#: ../../src/general_statistics_menu.cc:170
-msgid "Productivity"
-msgstr "Termelékenység"
-
-#: ../../src/general_statistics_menu.cc:176
-msgid "Casualties"
-msgstr ""
-
-#: ../../src/general_statistics_menu.cc:182
-msgid "Kills"
-msgstr "Megölt"
-
-#: ../../src/general_statistics_menu.cc:188
+#: ../../src/computer_player.cc:38
 #, fuzzy
-msgid "Military buildings lost"
+msgid "None"
+msgstr "Nem"
+
+#: ../../src/encyclopedia_window.cc:61
+msgid "Tribe ware encyclopedia"
+msgstr "Népek termék enciklopédiája"
+
+#: ../../src/encyclopedia_window.cc:79
+msgid "Consumed ware type(s)"
+msgstr ""
+
+#: ../../src/encyclopedia_window.cc:80
+msgid "Quantity"
+msgstr ""
+
+#: ../../src/encyclopedia_window.cc:186
+msgid " or "
+msgstr ""
+
+#: ../../src/watchwindow.cc:94
+msgid "Follow"
+msgstr "Követ"
+
+#: ../../src/watchwindow.cc:156
+msgid "Center mainview on this"
+msgstr "Ugrás erre a helyszínre"
+
+#: ../../src/watchwindow.cc:180 ../../src/ui_fsmenu/fileview.cc:47
+msgid "Close"
+msgstr "Bezár"
+
+#: ../../src/watchwindow.cc:240 ../../src/fieldaction.cc:487
+msgid "Watch"
+msgstr "Nézőke"
+
+#: ../../src/fieldaction.cc:253
+msgid "Build small buildings"
+msgstr "Kis épületek építése"
+
+#: ../../src/fieldaction.cc:254
+msgid "Build medium buildings"
+msgstr "Közepesméretű épületek építése"
+
+#: ../../src/fieldaction.cc:255
+msgid "Build large buildings"
 msgstr "Nagyméretű épületes"
 
-#: ../../src/general_statistics_menu.cc:194
-msgid "Military buildings defeated"
+#: ../../src/fieldaction.cc:289
+msgid "Action"
+msgstr "Akció"
+
+#: ../../src/fieldaction.cc:394
+msgid "Build road"
+msgstr "Út építése"
+
+#: ../../src/fieldaction.cc:406
+msgid "Destroy this flag"
+msgstr "Zászló megsemmisítése"
+
+#: ../../src/fieldaction.cc:413
+msgid "Configure economy"
 msgstr ""
 
-#: ../../src/general_statistics_menu.cc:200
-msgid "Civilian buildings lost"
-msgstr ""
+#: ../../src/fieldaction.cc:418
+msgid "Send geologist to explore site"
+msgstr "Geológus küldése a terület felderítésére"
 
-#: ../../src/general_statistics_menu.cc:206
-msgid "Military"
-msgstr "Katonai"
+#: ../../src/fieldaction.cc:436
+msgid "Put a flag"
+msgstr "Zászló kitűzése"
 
-#: ../../src/game_debug_ui.cc:271
+#: ../../src/fieldaction.cc:443
+msgid "Destroy a road"
+msgstr "Út megsemmisítése"
+
+#: ../../src/fieldaction.cc:460
+msgid "Watch field in a separate window"
+msgstr "Terület figyelése külön ablakban"
+
+#: ../../src/fieldaction.cc:465
+msgid "Toggle building statistics display"
+msgstr "Épület statisztika megjelenítése"
+
+#: ../../src/fieldaction.cc:471
+msgid "Toggle building label display"
+msgstr "Épület nevek megjelenítése"
+
+#: ../../src/fieldaction.cc:478
+msgid "Debug window"
+msgstr "Hibakereső ablak"
+
+#: ../../src/fieldaction.cc:483 ../../src/fieldaction.cc:639
+msgid "Build roads"
+msgstr "Út építése"
+
+#: ../../src/fieldaction.cc:510
+msgid "Send less soldiers"
+msgstr "Kevesebb harcos küldése"
+
+#: ../../src/fieldaction.cc:521
+msgid "Send more soldiers"
+msgstr "Több harcos küldése"
+
+#: ../../src/fieldaction.cc:528
+msgid "Start attack"
+msgstr "Támadás indítása"
+
+#: ../../src/fieldaction.cc:535
+msgid "Attack"
+msgstr "Támadás"
+
+#: ../../src/fieldaction.cc:613
+msgid "Build mines"
+msgstr "Bánya építése"
+
+#: ../../src/fieldaction.cc:631
+msgid "Build flag"
+msgstr "Szászló létrehozása"
+
+#: ../../src/fieldaction.cc:635
+msgid "Cancel road"
+msgstr "Mégsem kell ide út"
+
+#: ../../src/game_debug_ui.cc:268
 msgid "Debug Field"
 msgstr "Hibakereső ablak"
 
-#: ../../src/game_debug_ui.cc:320
+#: ../../src/game_debug_ui.cc:312
 #, c-format
 msgid "%i, %i - height: %u\n"
 msgstr ""
 
-#: ../../src/building_ui.cc:165
+#: ../../src/map.cc:403
+msgid "Player 1"
+msgstr "1. játékos"
+
+#: ../../src/trainingsite.cc:173
+msgid "Resting"
+msgstr "Pihen"
+
+#: ../../src/trainingsite.cc:175
+msgid "Not Working"
+msgstr "Nem dolgozik"
+
+#: ../../src/waresdisplay.cc:42 ../../src/wui/game_main_menu.cc:68
+#: ../../src/wui/stock_menu.cc:31
+msgid "Stock"
+msgstr "Raktárak"
+
+#: ../../src/building_ui.cc:171
 msgid "Destroy building?"
 msgstr "Megsemmisíted az épületet?"
 
-#: ../../src/building_ui.cc:179
+#: ../../src/building_ui.cc:185
 msgid "Do you really want to destroy this "
 msgstr "Tényleg meg akarod semmisíteni ezt a(z)"
 
-#: ../../src/building_ui.cc:181
+#: ../../src/building_ui.cc:187
 msgid "?"
 msgstr "?"
 
-#: ../../src/building_ui.cc:607 ../../src/events/event_message_box.cc:49
+#: ../../src/building_ui.cc:617 ../../src/events/event_message_box.cc:48
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:55
 msgid "Continue"
 msgstr "Folytatás"
 
-#: ../../src/building_ui.cc:607
-msgid "Stop"
-msgstr "Leállít"
-
-#: ../../src/building_ui.cc:630
+#: ../../src/building_ui.cc:632
 #, c-format
 msgid "Enhance to %s"
 msgstr "Továbbfejlesztés: %s"
 
-#: ../../src/building_ui.cc:649
+#: ../../src/building_ui.cc:653
 msgid "Destroy"
 msgstr "Megsemmisít"
 
-#: ../../src/building_ui.cc:660 ../../src/building_ui.cc:767
+#: ../../src/building_ui.cc:664 ../../src/building_ui.cc:769
 msgid "Show workarea"
 msgstr "Munkaterült megjelenítése"
 
-#: ../../src/building_ui.cc:671
+#: ../../src/building_ui.cc:675
 msgid "Debug"
 msgstr "Hibakereső"
 
-#: ../../src/building_ui.cc:794
+#: ../../src/building_ui.cc:796
 msgid "Hide workarea"
 msgstr "Munkaterült elrejtése"
 
-#: ../../src/building_ui.cc:1093
+#: ../../src/building_ui.cc:1089
 msgid "Worker Listing"
 msgstr "Munkáslista"
 
-#: ../../src/building_ui.cc:1113
+#: ../../src/building_ui.cc:1109
 msgid "Type: "
 msgstr "Típus: "
 
-#: ../../src/building_ui.cc:1120
+#: ../../src/building_ui.cc:1116
 msgid "Experience: "
 msgstr "Tapasztalat: "
 
-#: ../../src/building_ui.cc:1127
+#: ../../src/building_ui.cc:1123
 msgid "Trying to become: "
 msgstr "Következő szint: "
 
-#: ../../src/building_ui.cc:1373
+#: ../../src/building_ui.cc:1167
+msgid "(vacant)"
+msgstr ""
+
+#: ../../src/building_ui.cc:1167
+msgid "(coming)"
+msgstr ""
+
+#: ../../src/building_ui.cc:1396
 msgid "Highest priority"
 msgstr "Legmagasabb prioritás"
 
-#: ../../src/building_ui.cc:1382
+#: ../../src/building_ui.cc:1405
 msgid "Normal priority"
 msgstr "Normál prioritás"
 
-#: ../../src/building_ui.cc:1391
+#: ../../src/building_ui.cc:1414
 msgid "Lowest priority"
 msgstr "Legalacsonyabb prioritás"
 
-#: ../../src/building_ui.cc:1425
+#: ../../src/building_ui.cc:1454
 msgid "Show worker listing"
 msgstr "Munkás jegyzék megjelenítése"
 
-#: ../../src/building_ui.cc:1551 ../../src/building_ui.cc:1980
+#: ../../src/building_ui.cc:1568 ../../src/building_ui.cc:1823
 msgid "Capacity"
 msgstr "Kapacitás"
 
-#: ../../src/building_ui.cc:1567 ../../src/building_ui.cc:1952
+#: ../../src/building_ui.cc:1584 ../../src/building_ui.cc:1803
 msgid "HP"
 msgstr "ÉP"
 
-#: ../../src/building_ui.cc:1568 ../../src/building_ui.cc:1953
+#: ../../src/building_ui.cc:1585 ../../src/building_ui.cc:1804
 msgid "AT"
 msgstr "TÁ"
 
-#: ../../src/building_ui.cc:1569 ../../src/building_ui.cc:1954
+#: ../../src/building_ui.cc:1586 ../../src/building_ui.cc:1805
 msgid "DE"
 msgstr "VÉ"
 
-#: ../../src/building_ui.cc:1570 ../../src/building_ui.cc:1955
+#: ../../src/building_ui.cc:1587 ../../src/building_ui.cc:1806
 msgid "EV"
 msgstr ""
 
-#: ../../src/building_ui.cc:1571 ../../src/building_ui.cc:1956
+#: ../../src/building_ui.cc:1588 ../../src/building_ui.cc:1807
 msgid "Level"
 msgstr "Szint"
 
-#: ../../src/building_ui.cc:1673
+#: ../../src/building_ui.cc:1693
 #, fuzzy, c-format
-msgid "Capacity: %2d"
+msgid "Capacity: %2u"
 msgstr "Kapacitás"
 
-#: ../../src/building_ui.cc:1738
-msgid "Training Options"
-msgstr "Képzési beállítások"
-
-#: ../../src/building_ui.cc:1762
-msgid "Training mode : "
-msgstr "Képzési mód : "
-
-#: ../../src/building_ui.cc:1763
-msgid "Balanced"
-msgstr "Kiegyensúlyozott"
-
-#: ../../src/building_ui.cc:1778
-#, fuzzy
-msgid "Hit points"
-msgstr "Életpont"
-
-#: ../../src/building_ui.cc:1780 ../../src/fieldaction.cc:494
-msgid "Attack"
-msgstr "Támadás"
-
-#: ../../src/building_ui.cc:1782
-msgid "Defense"
-msgstr "Védekezés"
-
-#: ../../src/building_ui.cc:1784
-msgid "Evade"
-msgstr ""
-
-#: ../../src/building_ui.cc:1856
-msgid "Make heroes"
-msgstr ""
-
-#: ../../src/building_ui.cc:1858
-msgid "Balanced army"
-msgstr ""
-
-#: ../../src/building_ui.cc:1990
+#: ../../src/building_ui.cc:1833
 msgid "xx"
 msgstr ""
 
-#: ../../src/game_chat_menu.cc:44
-msgid "Chat Menu"
-msgstr "Csevegés menü"
+#: ../../src/ui_basic/messagebox.cc:87
+#: ../../src/wui/game_main_menu_save_game.cc:79
+#: ../../src/ui_fsmenu/editor_mapselect.cc:110
+#: ../../src/ui_fsmenu/mapselect.cc:118 ../../src/ui_fsmenu/loadgame.cc:61
+#: ../../src/ui_fsmenu/loadreplay.cc:57
+#: ../../src/ui_fsmenu/campaign_select.cc:78
+#: ../../src/ui_fsmenu/campaign_select.cc:291
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:61
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:118
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:133
+msgid "OK"
+msgstr "OK"
 
-#: ../../src/game_main_menu.cc:38
-#: ../../src/editor/ui_menus/editor_main_menu.cc:42
-msgid "Main Menu"
-msgstr "Főmenü"
+#: ../../src/ui_basic/progresswindow.cc:42
+msgid "Preparing..."
+msgstr "Felkészülés..."
 
-#: ../../src/constructionsite.cc:216
-#, c-format
-msgid "%u%% built"
-msgstr "%u%% kész"
+#: ../../src/ui_basic/spinbox.cc:122
+#, fuzzy
+msgid "Increase the value"
+msgstr "Érték növelése/csökkentése"
 
-#: ../../src/fieldaction.cc:242
-msgid "Build small buildings"
-msgstr "Kis épületek építése"
+#: ../../src/ui_basic/spinbox.cc:130
+#, fuzzy
+msgid "Decrease the value"
+msgstr "Érték növelése/csökkentése"
 
-#: ../../src/fieldaction.cc:243
-msgid "Build medium buildings"
-msgstr "Közepesméretű épületek építése"
+#: ../../src/ui_basic/spinbox.cc:141
+#, fuzzy
+msgid "Increase the value by 10"
+msgstr "Érték növelése/csökkentése"
 
-#: ../../src/fieldaction.cc:244
-msgid "Build large buildings"
-msgstr "Nagyméretű épületes"
+#: ../../src/ui_basic/spinbox.cc:149
+#, fuzzy
+msgid "Decrease the value by 10"
+msgstr "Érték növelése/csökkentése"
 
-#: ../../src/fieldaction.cc:278
-msgid "Action"
-msgstr "Akció"
-
-#: ../../src/fieldaction.cc:378
-msgid "Build road"
-msgstr "Út építése"
-
-#: ../../src/fieldaction.cc:386
-msgid "Destroy this flag"
-msgstr "Zászló megsemmisítése"
-
-#: ../../src/fieldaction.cc:393
-msgid "Send geologist to explore site"
-msgstr "Geológus küldése a terület felderítésére"
-
-#: ../../src/fieldaction.cc:409
-msgid "Put a flag"
-msgstr "Zászló kitűzése"
-
-#: ../../src/fieldaction.cc:412
-msgid "Destroy a road"
-msgstr "Út megsemmisítése"
-
-#: ../../src/fieldaction.cc:429
-msgid "Watch field in a separate window"
-msgstr "Terület figyelése külön ablakban"
-
-#: ../../src/fieldaction.cc:434
-msgid "Toggle building statistics display"
-msgstr "Épület statisztika megjelenítése"
-
-#: ../../src/fieldaction.cc:436
-msgid "Toggle building label display"
-msgstr "Épület nevek megjelenítése"
-
-#: ../../src/fieldaction.cc:439
-msgid "Debug window"
-msgstr "Hibakereső ablak"
-
-#: ../../src/fieldaction.cc:444 ../../src/fieldaction.cc:596
-msgid "Build roads"
-msgstr "Út építése"
-
-#: ../../src/fieldaction.cc:469
-msgid "Send less soldiers"
-msgstr "Kevesebb harcos küldése"
-
-#: ../../src/fieldaction.cc:480
-msgid "Send more soldiers"
-msgstr "Több harcos küldése"
-
-#: ../../src/fieldaction.cc:487
-msgid "Start attack"
-msgstr "Támadás indítása"
-
-#: ../../src/fieldaction.cc:570
-msgid "Build mines"
-msgstr "Bánya építése"
-
-#: ../../src/fieldaction.cc:588
-msgid "Build flag"
-msgstr "Szászló létrehozása"
-
-#: ../../src/fieldaction.cc:592
-msgid "Cancel road"
-msgstr "Mégsem kell ide út"
-
-#: ../../src/events/event_message_box.cc:42
+#: ../../src/events/event_message_box.cc:41
 msgid "No text defined"
 msgstr "Nincs megadva szöveg"
 
-#: ../../src/events/event_message_box.cc:43
+#: ../../src/events/event_message_box.cc:42
 msgid "Window Title"
 msgstr "Ablak cím"
 
-#: ../../src/events/event_factory.cc:46
+#: ../../src/events/event_factory.cc:48
 msgid "Allow building type"
 msgstr "Engedélyezett épület típus"
 
-#: ../../src/events/event_factory.cc:48
-msgid "Allows (or forbids) the construction of a building type for a player"
+#: ../../src/events/event_factory.cc:50
+msgid "Allows (or forbids) the construction of a building type for a player."
 msgstr ""
 
-#: ../../src/events/event_factory.cc:51
+#: ../../src/events/event_factory.cc:54
 msgid "Create building"
 msgstr "Épület létrehozása"
 
-#: ../../src/events/event_factory.cc:52
+#: ../../src/events/event_factory.cc:55
 msgid "Create a building and optionally place workers in it"
 msgstr ""
 
-#: ../../src/events/event_factory.cc:55
+#: ../../src/events/event_factory.cc:58
 msgid "Conquer area"
 msgstr "Hódítási terület"
 
-#: ../../src/events/event_factory.cc:57
-msgid "Gives ownership of all unowned locations whithin an area to the player"
+#: ../../src/events/event_factory.cc:60
+msgid "Gives ownership of all unowned locations whithin an area to the player."
 msgstr ""
 
-#: ../../src/events/event_factory.cc:61
+#: ../../src/events/event_factory.cc:64
 msgid "Create flag"
 msgstr "Zászló létrehozása"
 
-#: ../../src/events/event_factory.cc:62
-msgid "Create a flag"
+#: ../../src/events/event_factory.cc:65
+#, fuzzy
+msgid "Create a flag."
 msgstr "Egy zászló kitűzése"
 
-#: ../../src/events/event_factory.cc:65
+#: ../../src/events/event_factory.cc:68
 msgid "Create immovable"
 msgstr ""
 
-#: ../../src/events/event_factory.cc:66
-msgid "Create an immovable"
-msgstr ""
-
 #: ../../src/events/event_factory.cc:69
+#, fuzzy
+msgid "Create an immovable."
+msgstr "Egy zászló kitűzése"
+
+#: ../../src/events/event_factory.cc:72
 msgid "Show message box"
 msgstr ""
 
-#: ../../src/events/event_factory.cc:71
-msgid "This Event shows a messagebox. The user can choose to make it modal/non-modal and to add a picture. Events can be assigned to each button to use this as a Choose Dialog for the user"
+#: ../../src/events/event_factory.cc:74
+msgid "Show a message box. It can be modal or and have a picture. An events can be assigned to each button to give the user chose the course of the game."
 msgstr ""
 
-#: ../../src/events/event_factory.cc:76
+#: ../../src/events/event_factory.cc:79
 #, fuzzy
 msgid "Move view"
 msgstr "Mozgó nézet"
 
-#: ../../src/events/event_factory.cc:77
-msgid "This Event centers the Players View on a certain location"
+#: ../../src/events/event_factory.cc:80
+#, fuzzy
+msgid "Center the player's view on a certain location."
 msgstr "Ez az esemény beállítja a játékos nézetét a megadott területre"
 
-#: ../../src/events/event_factory.cc:80
+#: ../../src/events/event_factory.cc:83
 #, fuzzy
 msgid "Reveal campaign"
 msgstr "Hadjárat kiválasztása"
 
-#: ../../src/events/event_factory.cc:81
+#: ../../src/events/event_factory.cc:84
 #, fuzzy
-msgid "Reveal a campaign"
+msgid "Reveal a campaign."
 msgstr "Hadjárat kiválasztása"
 
-#: ../../src/events/event_factory.cc:84
+#: ../../src/events/event_factory.cc:87
 #, fuzzy
 msgid "Reveal objective"
 msgstr "Célkitűzések"
 
-#: ../../src/events/event_factory.cc:85
+#: ../../src/events/event_factory.cc:88
 #, fuzzy
-msgid "Reveal an objective"
+msgid "Reveal an objective."
 msgstr "Célkitűzések"
 
-#: ../../src/events/event_factory.cc:88
+#: ../../src/events/event_factory.cc:91
 #, fuzzy
 msgid "Reveal scenario"
 msgstr "Következő pálya"
 
-#: ../../src/events/event_factory.cc:89
+#: ../../src/events/event_factory.cc:92
 #, fuzzy
-msgid "Reveal a scenario"
+msgid "Reveal a scenario."
 msgstr "Következő pálya"
 
-#: ../../src/events/event_factory.cc:92
+#: ../../src/events/event_factory.cc:95
 msgid "Create road"
 msgstr "Új létrehozása"
 
-#: ../../src/events/event_factory.cc:93
+#: ../../src/events/event_factory.cc:96
 msgid "Create a road and optionally place a carrier on it"
 msgstr "Út létrehozása és ha szükséges munkás elhelyezése rajta"
 
-#: ../../src/events/event_factory.cc:96
-msgid "Set null trigger"
+#: ../../src/events/event_factory.cc:99
+#, fuzzy
+msgid "Set timer"
 msgstr "Null trigger beállítása"
 
-#: ../../src/events/event_factory.cc:97
-msgid "Manually set a Null Trigger to a given value"
+#: ../../src/events/event_factory.cc:100
+msgid "Set a timer to trigger after a certain duration."
 msgstr ""
 
-#: ../../src/events/event_factory.cc:100
+#: ../../src/events/event_factory.cc:103
 msgid "Unhide area"
 msgstr "Terület felfedése"
 
-#: ../../src/events/event_factory.cc:102
+#: ../../src/events/event_factory.cc:105
 msgid "Gives vision for a specified amount of time of all locations whithin an area to the player."
 msgstr ""
+
+#: ../../src/map_io/widelands_map_loader.cc:87
+#, fuzzy
+msgid "Invalid World"
+msgstr "[Hibás adat]"
+
+#: ../../src/map_io/widelands_map_loader.cc:89
+#, c-format
+msgid "The world \"%s\" set by the map, does not exist on your filesystem."
+msgstr ""
+
+#: ../../src/graphic/graphic.cc:651
+#, c-format
+msgid "Loading animations: %d%% complete"
+msgstr "Animációk betöltése: %d%%"
+
+#: ../../src/network/netclient.cc:93
+msgid "Could not establish connection to host"
+msgstr ""
+
+#: ../../src/network/netclient.cc:95
+msgid ""
+"Widelands could not establish a connection to the given address.\n"
+"Either no Widelands server was running at the supposed port or\n"
+"the server shut down as you tried to connect."
+msgstr ""
+
+#: ../../src/network/netclient.cc:116
+msgid "Client has left the game."
+msgstr ""
+
+#: ../../src/network/netclient.cc:192
+msgid "Client crashed and performed an emergency save."
+msgstr ""
+
+#: ../../src/network/netclient.cc:381
+msgid "Server sent a player update for a player that does not exist."
+msgstr ""
+
+#: ../../src/network/netclient.cc:399
+msgid "Server sent an user update for a user that does not exist."
+msgstr ""
+
+#: ../../src/network/netclient.cc:475
+#, c-format
+msgid "Expected a HELLO packet from server, but received command number %u. Maybe the server is running a different version of Widelands?"
+msgstr ""
+
+#: ../../src/network/netclient.cc:482
+msgid "Server uses a different protocol version"
+msgstr ""
+
+#: ../../src/network/netclient.cc:556
+msgid "Unexpectedly received LAUNCH command from server."
+msgstr ""
+
+#: ../../src/network/netclient.cc:576
+msgid "Server sent a PLAYERCOMMAND even though no game is running."
+msgstr ""
+
+#: ../../src/network/netclient.cc:589
+msgid "Server sent a SYNCREQUEST even though no game is running."
+msgstr ""
+
+#: ../../src/network/netclient.cc:614
+#, c-format
+msgid "Server sent an unknown command (command number %u)"
+msgstr ""
+
+#: ../../src/network/netclient.cc:643
+msgid "Server sent malformed commands: "
+msgstr ""
+
+#: ../../src/network/netclient.cc:674
+msgid " An automatic savegame will be created."
+msgstr ""
+
+#: ../../src/network/nethost.cc:296
+#, fuzzy
+msgid "Server has left the game."
+msgstr "%s elhagyta a %s szobát!\n"
+
+#: ../../src/network/nethost.cc:366
+msgid "The game has started just after you tried to connect."
+msgstr ""
+
+#: ../../src/network/nethost.cc:430
+msgid "Server has crashed and performed an emergency save."
+msgstr ""
+
+#: ../../src/network/nethost.cc:643
+#, c-format
+msgid "Host sent player %s to the lobby!"
+msgstr ""
+
+#: ../../src/network/nethost.cc:977
+#, c-format
+msgid "WARNING: %s uses version: %s, while Host uses version: %s"
+msgstr ""
+
+#: ../../src/network/nethost.cc:1013
+#, fuzzy, c-format
+msgid "%s has joined the game"
+msgstr "%s elhagyta a %s szobát!\n"
+
+#: ../../src/network/nethost.cc:1037
+msgid "Client reports time to host that is running backwards."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1040
+msgid "Client simulates beyond the game time allowed by the host."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1044
+msgid "Client did not submit sync report in time."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1220
+msgid "Client and host have become desynchronized."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1262
+#, fuzzy
+msgid "New User"
+msgstr "Új trigger"
+
+#: ../../src/network/nethost.cc:1267
+msgid "The game has already started."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1279
+msgid "Connection to client lost."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1293
+msgid "Client sent malformed commands: "
+msgstr ""
+
+#: ../../src/network/nethost.cc:1326
+msgid "Game is running already, but client has not connected fully"
+msgstr ""
+
+#: ../../src/network/nethost.cc:1330
+#, c-format
+msgid "First command sent by client is %u instead of HELLO. Most likely the client is running an incompatible version."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1336
+msgid "Server uses a different protocol version."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1412
+msgid "Client sent TIME command even though game is not running."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1420
+msgid "Client sent PLAYERCOMMAND command even though game is not running."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1432
+#, c-format
+msgid "Client %i (%i) sent a playercommand (%i) for a different player (%i)."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1441
+msgid "Client sent unexpected synchronization report."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1468
+#, c-format
+msgid "Client sent unknown command number %u"
+msgstr ""
+
+#: ../../src/network/nethost.cc:1509
+#, fuzzy, c-format
+msgid "%s has left the game (%s)"
+msgstr "%s elhagyta a %s szobát!\n"
 
 #: ../../src/trigger/trigger_factory.cc:39
 msgid "Building Trigger"
@@ -1184,21 +1432,20 @@ msgid "Triggers when the player has the specified number of buildings of the spe
 msgstr ""
 
 #: ../../src/trigger/trigger_factory.cc:45
-msgid "Military influence Trigger"
+msgid "Defeated Player Trigger"
 msgstr ""
 
 #: ../../src/trigger/trigger_factory.cc:47
-msgid "Triggers when the player has some (or highest) military influence over the specified number of nodes in the specified area."
+msgid "Triggers when the player was defeated. The trigger is set to true, if the player has 0 workers."
 msgstr ""
 
 #: ../../src/trigger/trigger_factory.cc:51
-msgid "Null Trigger"
-msgstr "Null Trigger"
+msgid "Military influence Trigger"
+msgstr ""
 
 #: ../../src/trigger/trigger_factory.cc:53
-#, fuzzy
-msgid "Never triggers by itself. It is useful to pass it to some event which changes triggers"
-msgstr "Ez a trigger sohasem változtatja meg az állapotát magától. Átadható más eseménynek ami meg tudja változtatni"
+msgid "Triggers when the player has some (or highest) military influence over the specified number of nodes in the specified area."
+msgstr ""
 
 #: ../../src/trigger/trigger_factory.cc:57
 #, fuzzy
@@ -1214,8 +1461,8 @@ msgid "Time Trigger"
 msgstr "Idő trigger"
 
 #: ../../src/trigger/trigger_factory.cc:66
-msgid "This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when the wait time is over for repeating events"
-msgstr "Ez a trigger vár a megadott ideig míg igazzá válik. Be lehet állítani, hogy indítsa újra magát mikor letelik az idő az ismétlődő eseményekhez"
+msgid "Triggers at a certain time. The time can be set to a value in ms. If the trigger has no time is set, a time can be set for it with an event."
+msgstr ""
 
 #: ../../src/trigger/trigger_factory.cc:71
 #, fuzzy
@@ -1226,454 +1473,910 @@ msgstr "Építési trigger"
 msgid "Triggers when the the player sees (or has seen) at least a specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:66
+#: ../../src/wui/game_objectives_menu.cc:36
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:161
+msgid "Objectives Menu"
+msgstr "Feladatlista menü"
+
+#: ../../src/wui/general_statistics_menu.cc:52
+#: ../../src/wui/game_main_menu.cc:47
+msgid "General Statistics"
+msgstr "Általános statisztika"
+
+#: ../../src/wui/general_statistics_menu.cc:146
+msgid "Land"
+msgstr "Föld"
+
+#: ../../src/wui/general_statistics_menu.cc:164
+msgid "Wares"
+msgstr "Termékek"
+
+#: ../../src/wui/general_statistics_menu.cc:170
+msgid "Productivity"
+msgstr "Termelékenység"
+
+#: ../../src/wui/general_statistics_menu.cc:176
+msgid "Casualties"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:182
+msgid "Kills"
+msgstr "Megölt"
+
+#: ../../src/wui/general_statistics_menu.cc:188
+#, fuzzy
+msgid "Military buildings lost"
+msgstr "Nagyméretű épületes"
+
+#: ../../src/wui/general_statistics_menu.cc:194
+msgid "Military buildings defeated"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:200
+msgid "Civilian buildings lost"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:206
+msgid "Military"
+msgstr "Katonai"
+
+#: ../../src/wui/general_statistics_menu.cc:224
+#: ../../src/wui/ware_statistics_menu.cc:427
+msgid "15 m"
+msgstr "15 perc"
+
+#: ../../src/wui/general_statistics_menu.cc:233
+#: ../../src/wui/ware_statistics_menu.cc:436
+msgid "30 m"
+msgstr "30 perc"
+
+#: ../../src/wui/general_statistics_menu.cc:242
+#: ../../src/wui/ware_statistics_menu.cc:445
+msgid "1 h"
+msgstr "1 óra"
+
+#: ../../src/wui/general_statistics_menu.cc:251
+#: ../../src/wui/ware_statistics_menu.cc:454
+msgid "2 h"
+msgstr "2 óra"
+
+#: ../../src/wui/general_statistics_menu.cc:262
+#: ../../src/wui/ware_statistics_menu.cc:465
+msgid "Help"
+msgstr "Súgó"
+
+#: ../../src/wui/general_statistics_menu.cc:271
+#: ../../src/wui/ware_statistics_menu.cc:474
+msgid "4 h"
+msgstr "4 óra"
+
+#: ../../src/wui/general_statistics_menu.cc:279
+#: ../../src/wui/ware_statistics_menu.cc:483
+msgid "8 h"
+msgstr "8 óra"
+
+#: ../../src/wui/general_statistics_menu.cc:288
+#: ../../src/wui/ware_statistics_menu.cc:492
+msgid "16 h"
+msgstr "16 óra"
+
+#: ../../src/wui/interactive_player.cc:177
+#: ../../src/wui/interactive_spectator.cc:51
+msgid "Chat"
+msgstr "Csevegés"
+
+#: ../../src/wui/interactive_player.cc:180
+#: ../../src/wui/interactive_spectator.cc:57
+#: ../../src/wui/game_options_menu.cc:42 ../../src/ui_fsmenu/main.cc:69
+msgid "Options"
+msgstr "Beállítások"
+
+#: ../../src/wui/interactive_player.cc:183
+#: ../../src/wui/interactive_spectator.cc:59
+#, fuzzy
+msgid "Statistics"
+msgstr "Termék statisztika"
+
+#: ../../src/wui/interactive_player.cc:186
+#: ../../src/editor/editorinteractive.cc:88
+msgid "Objectives"
+msgstr "Célkitűzések"
+
+#: ../../src/wui/interactive_player.cc:189
+#: ../../src/wui/interactive_spectator.cc:61
+#: ../../src/editor/editorinteractive.cc:73
+msgid "Minimap"
+msgstr "Térkép"
+
+#: ../../src/wui/interactive_player.cc:192
+#: ../../src/editor/editorinteractive.cc:76
+msgid "Buildhelp"
+msgstr "Építési segítség"
+
+#: ../../src/wui/interactive_player.cc:195
+#, fuzzy
+msgid "Messages"
+msgstr "Üzenet: "
+
+#: ../../src/wui/interactive_player.cc:201
+msgid "Resource information"
+msgstr "Nyersanyag információ"
+
+#: ../../src/wui/interactive_player.cc:205
+msgid "Ware help"
+msgstr "Áru súgó"
+
+#: ../../src/wui/game_main_menu.cc:38
+#: ../../src/editor/ui_menus/editor_main_menu.cc:43
+msgid "Main Menu"
+msgstr "Főmenü"
+
+#: ../../src/wui/game_main_menu.cc:54
+#: ../../src/wui/ware_statistics_menu.cc:355
+msgid "Ware Statistics"
+msgstr "Termék statisztika"
+
+#: ../../src/wui/game_main_menu.cc:61
+#: ../../src/wui/building_statistics_menu.cc:80
+msgid "Building Statistics"
+msgstr "Építési statisztika"
+
+#: ../../src/wui/interactive_base.cc:200
+#, fuzzy, c-format
+msgid "%u.%ux"
+msgstr "%ux"
+
+#: ../../src/wui/interactive_base.cc:203
+msgid "PAUSE"
+msgstr "SZÜNET"
+
+#: ../../src/wui/interactive_base.cc:223
+#, c-format
+msgid "%s (%s)"
+msgstr ""
+
+#: ../../src/wui/interactive_base.cc:228
+msgid "NO GAME CONTROLLER"
+msgstr ""
+
+#: ../../src/wui/stock_menu.cc:70
+msgid "Show wares"
+msgstr "Termékek megjelenítése"
+
+#: ../../src/wui/stock_menu.cc:75
+msgid "Show workers"
+msgstr "Munkások megjelenítése"
+
+#: ../../src/wui/game_chat_menu.cc:44
+msgid "Chat Menu"
+msgstr "Csevegés menü"
+
+#: ../../src/wui/interactive_spectator.cc:53
+#, fuzzy
+msgid "Exit Replay"
+msgstr "Felvétel megtekintése"
+
+#: ../../src/wui/interactive_spectator.cc:55
+#: ../../src/wui/game_main_menu_save_game.cc:63
+#: ../../src/wui/game_options_menu.cc:85
+msgid "Save Game"
+msgstr "Játék mentése"
+
+#: ../../src/wui/game_message_menu.cc:37
+#, fuzzy
+msgid "Message Menu"
+msgstr "Üzenet: "
+
+#: ../../src/wui/game_message_menu.cc:46
+#, fuzzy
+msgid "del"
+msgstr "Törlés"
+
+#: ../../src/wui/game_message_menu.cc:53
+msgid "go to location"
+msgstr ""
+
+#: ../../src/wui/game_options_sound_menu.cc:27
+#: ../../src/wui/game_options_menu.cc:76
+#, fuzzy
+msgid "Sound Options"
+msgstr "Hang beállítások"
+
+#: ../../src/wui/game_options_sound_menu.cc:32
+msgid "Ingame Music"
+msgstr "Háttérzene"
+
+#: ../../src/wui/game_options_sound_menu.cc:38
+msgid "Sound FX"
+msgstr "Hangok"
+
+#: ../../src/wui/game_options_sound_menu.cc:42
+msgid "Ingame Music Volume"
+msgstr "Háttérzene hangereje"
+
+#: ../../src/wui/game_options_sound_menu.cc:56
+msgid "Sound FX Volume"
+msgstr "Hangok hangereje"
+
+#: ../../src/wui/game_main_menu_save_game.cc:67
+msgid "Map Name: "
+msgstr "Térkép neve: "
+
+#: ../../src/wui/game_main_menu_save_game.cc:71
+msgid "Game Time: "
+msgstr "Játékidő: "
+
+#: ../../src/wui/game_main_menu_save_game.cc:87
+#: ../../src/ui_fsmenu/options.cc:69 ../../src/ui_fsmenu/options.cc:343
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:100
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:70
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:127
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:234
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:194
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:176
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:135
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:100
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:263
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:296
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:140
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:190
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:263
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:224
+msgid "Cancel"
+msgstr "Mégsem"
+
+#: ../../src/wui/game_main_menu_save_game.cc:132
+#, c-format
+msgid "%02ud%02uh%02u'%u\"%03u"
+msgstr ""
+
+#: ../../src/wui/game_main_menu_save_game.cc:192
+msgid ""
+"Game Saving Error!\n"
+"Saved Game-File may be corrupt!\n"
+"\n"
+"Reason given:\n"
+msgstr ""
+"Hiba mentés közben!\n"
+"A lementett játék sérült lehet!\n"
+"\n"
+"A hiba oka:\n"
+
+#: ../../src/wui/game_main_menu_save_game.cc:196
+#: ../../src/wui/game_main_menu_save_game.cc:207
+msgid "Save Game Error!!"
+msgstr "Játék mentési hiba!!"
+
+#: ../../src/wui/game_main_menu_save_game.cc:208
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:358
+msgid "A File with the name "
+msgstr "A fájl "
+
+#: ../../src/wui/game_main_menu_save_game.cc:212
+msgid " already exists. Overwrite?"
+msgstr " néven már létezik, felülírod?"
+
+#: ../../src/wui/building_statistics_menu.cc:90
+msgid "Total Productivity: "
+msgstr "Teljes termelés: "
+
+#: ../../src/wui/building_statistics_menu.cc:92
+msgid "Owned: "
+msgstr "Számuk: "
+
+#: ../../src/wui/building_statistics_menu.cc:98
+msgid "In Build: "
+msgstr "Építés alatt: "
+
+#: ../../src/wui/building_statistics_menu.cc:104
+msgid "Jump to unproductive: "
+msgstr "Ugrás egy nem működő épülethez: "
+
+#: ../../src/wui/building_statistics_menu.cc:113
+msgid "Prod"
+msgstr "Termelés"
+
+#: ../../src/wui/building_statistics_menu.cc:114
+msgid "Owned"
+msgstr "Számuk"
+
+#: ../../src/wui/building_statistics_menu.cc:115
+msgid "Build"
+msgstr "Épít"
+
+#: ../../src/wui/building_statistics_menu.cc:128
+#: ../../src/wui/building_statistics_menu.cc:148
+#: ../../src/wui/building_statistics_menu.cc:168
+#, fuzzy
+msgid "Show previous"
+msgstr "Előző épület"
+
+#: ../../src/wui/building_statistics_menu.cc:138
+#: ../../src/wui/building_statistics_menu.cc:158
+#: ../../src/wui/building_statistics_menu.cc:178
+#, fuzzy
+msgid "Show next"
+msgstr "Következő épület"
+
+#: ../../src/wui/game_options_menu.cc:52
+msgid "README"
+msgstr "OLVASSEL"
+
+#: ../../src/wui/game_options_menu.cc:60 ../../src/ui_fsmenu/main.cc:90
+msgid "License"
+msgstr "Licenc"
+
+#: ../../src/wui/game_options_menu.cc:68
+msgid "Authors"
+msgstr "Szerzők"
+
+#: ../../src/wui/game_options_menu.cc:95 ../../src/ui_fsmenu/main.cc:97
+msgid "Exit Game"
+msgstr "Kilépés"
+
+#: ../../src/editor/editorinteractive.cc:64
+msgid "Menu"
+msgstr "Menü"
+
+#: ../../src/editor/editorinteractive.cc:67
 msgid "Tool"
 msgstr "Eszköz"
 
-#: ../../src/editor/editorinteractive.cc:69
+#: ../../src/editor/editorinteractive.cc:70
 msgid "Toolsize"
 msgstr "Eszközméret"
 
-#: ../../src/editor/editorinteractive.cc:78
+#: ../../src/editor/editorinteractive.cc:79
 msgid "Players"
 msgstr "Játékosok"
 
-#: ../../src/editor/editorinteractive.cc:81
+#: ../../src/editor/editorinteractive.cc:82
 msgid "Events"
 msgstr "Események"
 
-#: ../../src/editor/editorinteractive.cc:84
+#: ../../src/editor/editorinteractive.cc:85
 msgid "Variables"
 msgstr "Változók"
 
-#: ../../src/editor/editorinteractive.cc:212
+#: ../../src/editor/editorinteractive.cc:164
+msgid "Unsupported format"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:166
+#, c-format
+msgid "Widelands could not load the file \"%s\". The file format seems to be incompatible."
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:181
+#: ../../src/logic/editor_game_base.cc:566
+msgid "Loading world data"
+msgstr "Világ adatainak betöltése"
+
+#: ../../src/editor/editorinteractive.cc:222
 msgid "Map unsaved"
 msgstr "Térkép nincs mentve"
 
-#: ../../src/editor/editorinteractive.cc:213
+#: ../../src/editor/editorinteractive.cc:223
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr "A térképet nincs elmentve, biztosan ki akarsz lépni?"
 
-#: ../../src/editor/editorinteractive.cc:545
+#: ../../src/editor/editorinteractive.cc:563
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:184
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:182
-#: ../../src/map.h:163
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:179
+#: ../../src/map.h:164
 msgid "No Name"
 msgstr "Névtelen"
 
-#: ../../src/editor/editorinteractive.cc:547
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:140
+#: ../../src/editor/editorinteractive.cc:565
+#: ../../src/ui_fsmenu/netsetup.cc:187
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:185
-#: ../../src/map.h:164
+#: ../../src/map.h:165
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:51
-msgid "Apply"
-msgstr "Alkalmaz"
+#: ../../src/logic/editor_game_base.cc:570
+#, c-format
+msgid "Loading tribe: %s"
+msgstr "%s törzs betöltése"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:58
-msgid "Increase maximum FPS"
+#: ../../src/logic/warehouse.cc:426
+msgid "A new warehouse is created"
 msgstr ""
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:66
-msgid "Decrease maximum FPS"
-msgstr ""
+#: ../../src/logic/building.cc:504
+#: ../../src/editor/tools/editor_info_tool.cc:61
+msgid "small"
+msgstr "kicsi"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:74
-msgid "Increase autosave interval"
-msgstr ""
+#: ../../src/logic/building.cc:505
+#: ../../src/editor/tools/editor_info_tool.cc:62
+msgid "medium"
+msgstr "közepes"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:82
-msgid "Decrease autosave interval"
-msgstr ""
+#: ../../src/logic/building.cc:505
+#: ../../src/editor/tools/editor_info_tool.cc:63
+msgid "big"
+msgstr "nagy"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:90
-msgid "Increase autosave interval at 10"
-msgstr ""
+#: ../../src/logic/game.cc:187
+msgid "Preloading a map"
+msgstr "Térkép betöltése"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:98
-msgid "Decrease autosave interval at 10"
-msgstr ""
+#: ../../src/logic/game.cc:198
+msgid "Loading a world"
+msgstr "Világ létrehozása"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:100
-msgid "General Options"
-msgstr "Beállítások"
+#: ../../src/logic/game.cc:204
+#, c-format
+msgid "Adding player %u"
+msgstr "%u játékos hozzáadása"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:102
-msgid "Fullscreen"
-msgstr "Teljes képernyő"
+#: ../../src/logic/game.cc:217
+msgid "Loading a map"
+msgstr "Egy térkép betöltése"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:104
-msgid "Grab Input"
-msgstr "Egér kisajátítás"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:106
-msgid "Enable Music"
-msgstr "Zene"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:108
-msgid "Enable Sound"
-msgstr "Hang"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:109
+#: ../../src/logic/game.cc:248 ../../src/logic/game.cc:295
+#: ../../src/logic/game.cc:328
 #, fuzzy
-msgid "Maximum FPS:"
-msgstr "Legfeljebb: %u"
+msgid "Preloading map"
+msgstr "Térkép előtöltése"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:112
-msgid "In-game resolution"
-msgstr "Játék felbontása"
+#: ../../src/logic/game.cc:262
+msgid "Configuring players"
+msgstr "Játékosok beállítása"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:113
-msgid "Language"
-msgstr "Nyelv"
+#: ../../src/logic/game.cc:279
+msgid "Loading map"
+msgstr "Térkép betöltése"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:116
-msgid "In-game Options"
-msgstr "Játék beállítások"
+#: ../../src/logic/game.cc:406
+msgid "Creating player infrastructure"
+msgstr "Infrastruktúra létrehozása"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:119
-msgid "Use single Watchwindow Mode"
-msgstr "Egy nézőke ablak"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:122
-msgid "Start roadbuilding after placing flag"
+#: ../../src/logic/player.cc:109
+msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:125
-msgid "Show buildings area preview"
-msgstr "Mutassa az építési terület nézetét"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:128
-msgid "Snap windows only when overlapping"
-msgstr "Az ablakok csak átfedés esetén vonzzák egymást"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:131
-msgid "Dock windows to edges"
-msgstr "Ablakok igazítása a sarkokhoz"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:134
-msgid "Save game automatically every"
+#: ../../src/logic/player.cc:111
+#, c-format
+msgid ""
+"Widelands could not start the game, because player %u has no starting position.\n"
+"You can manually add a starting position with Widelands Editor, to fix this problem."
 msgstr ""
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:138
+#: ../../src/logic/worker.cc:812
 #, fuzzy
-msgid "min."
-msgstr "bánya"
+msgid "Resources found."
+msgstr "Nyersanyag információ"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_options.cc:206
-msgid "System default language"
-msgstr "Rendszer alapértelmezett nyelve"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:37
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:53
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:63
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:51
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:40
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:64
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:54
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:236
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:47
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:60
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:81
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:178
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:117
-msgid "Back"
-msgstr "Vissza"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadreplay.cc:45
-msgid "Choose a replay!"
-msgstr "Válaszd ki a felvételt!"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:28
-msgid "Single Player Menu"
-msgstr "Egyjátékos menü"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:35
-msgid "New Game"
-msgstr "Új játék"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:41
-msgid "Load Game"
-msgstr "Játék betöltése"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_singleplayer.cc:47
-msgid "Campaigns"
-msgstr "Hadjáratok"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:47
-msgid "Select map"
-msgstr "Pálya kiválasztása"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:55
-#, fuzzy
-msgid "Select Savegame"
-msgstr "Játék mentése"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:69
-msgid "Start game"
-msgstr "Játék indítása"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:72
-msgid "Launch Game"
-msgstr "Játék indítása"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:182
-msgid "(no map)"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:201
-msgid "WARNING!!! Host selected file \""
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:203
-msgid "\" for this game, but you don't have it."
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:204
-msgid " Please add it manually."
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:221
-msgid "Original:"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_launchgame.cc:313
-#, fuzzy
-msgid "(Save): "
-msgstr "Térkép mentése"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:30
-msgid "Begin Network Game"
-msgstr "Hálózati játék indítása"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:31
-msgid "List of games in your local network:"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:32
-msgid "Your nickname:"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:33
-msgid "Host to connect:"
-msgstr ""
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:39
-#, fuzzy
-msgid "Join this game"
-msgstr "Csatlakozás egy játékhoz"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:45
-#, fuzzy
-msgid "Host a new game"
-msgstr "Új játék indítása"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:57
-#, fuzzy
-msgid "Load previous host"
-msgstr "Előző épület"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:66
-msgid "nobody"
-msgstr "senki"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:68
-msgid "Host"
-msgstr "Host"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:70
-msgid "State"
-msgstr "Állapot"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_netsetup.cc:139
-msgid "Closed"
-msgstr "Lezárt"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:51
-msgid "Choose saved game!"
-msgstr "Válaszd ki a mentett játékot!"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:54
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:54
-msgid "Map Name:"
-msgstr "Térkép neve:"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_loadgame.cc:56
-msgid "Gametime:"
-msgstr "Játékidő:"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:44
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:221
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:42
+#: ../../src/ui_fsmenu/editor_mapselect.cc:57
+#: ../../src/ui_fsmenu/mapselect.cc:58
+#: ../../src/ui_fsmenu/campaign_select.cc:274
 msgid "Choose your map!"
 msgstr "Válaszd ki a térképet!"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:46
-msgid "Load Map as scenario: "
-msgstr "Térkép betöltése scenarioként"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:47
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:223
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:43
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:56
+#: ../../src/ui_fsmenu/editor_mapselect.cc:62
+#: ../../src/ui_fsmenu/mapselect.cc:68
+#: ../../src/ui_fsmenu/campaign_select.cc:275
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:69
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:65
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:71
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:59
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:107
 #: ../../src/editor/ui_menus/event_move_view_option_menu.cc:57
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:60
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:59
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:71
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:65
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:107
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:69
 msgid "Name:"
 msgstr "Név:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:49
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:225
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:45
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:75
+#: ../../src/ui_fsmenu/editor_mapselect.cc:68
+#: ../../src/ui_fsmenu/mapselect.cc:74
+#: ../../src/ui_fsmenu/campaign_select.cc:277
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:98
 msgid "Author:"
 msgstr "Szerző:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:51
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:47
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:58
+#: ../../src/ui_fsmenu/editor_mapselect.cc:74
+#: ../../src/ui_fsmenu/mapselect.cc:80
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:81
 msgid "Size:"
 msgstr "Méret:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:53
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:49
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:68
+#: ../../src/ui_fsmenu/editor_mapselect.cc:80
+#: ../../src/ui_fsmenu/mapselect.cc:86
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:91
 msgid "World:"
 msgstr "Világ:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:55
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:51
+#: ../../src/ui_fsmenu/editor_mapselect.cc:86
+#: ../../src/ui_fsmenu/mapselect.cc:92
 msgid "Players:"
 msgstr "Játékosok:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:57
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:53
+#: ../../src/ui_fsmenu/editor_mapselect.cc:92
+#: ../../src/ui_fsmenu/mapselect.cc:98
 msgid "Descr:"
 msgstr "Leírás:"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:151
+#: ../../src/ui_fsmenu/editor_mapselect.cc:103
+#: ../../src/ui_fsmenu/mapselect.cc:111 ../../src/ui_fsmenu/singleplayer.cc:73
+#: ../../src/ui_fsmenu/loadgame.cc:54 ../../src/ui_fsmenu/netsetup.cc:83
+#: ../../src/ui_fsmenu/editor.cc:59 ../../src/ui_fsmenu/loadreplay.cc:50
+#: ../../src/ui_fsmenu/launchgame.cc:75
+#: ../../src/ui_fsmenu/campaign_select.cc:85
+#: ../../src/ui_fsmenu/campaign_select.cc:298
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:117
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:84
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:181
+msgid "Back"
+msgstr "Vissza"
+
+#: ../../src/ui_fsmenu/editor_mapselect.cc:230
+#: ../../src/ui_fsmenu/mapselect.cc:264
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:214
+msgid "<parent>"
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapselect.cc:63
+msgid "Load Map as scenario: "
+msgstr "Térkép betöltése scenarioként"
+
+#: ../../src/ui_fsmenu/mapselect.cc:212
 #, fuzzy
 msgid "(directory)"
 msgstr "Könyvtár létrehozása"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_mapselect.cc:203
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor_mapselect.cc:165
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:221
-msgid "<parent>"
+#: ../../src/ui_fsmenu/singleplayer.cc:44
+msgid "Single Player Menu"
+msgstr "Egyjátékos menü"
+
+#: ../../src/ui_fsmenu/singleplayer.cc:52
+msgid "New Game"
+msgstr "Új játék"
+
+#: ../../src/ui_fsmenu/singleplayer.cc:59
+msgid "Campaigns"
+msgstr "Hadjáratok"
+
+#: ../../src/ui_fsmenu/singleplayer.cc:66
+msgid "Load Game"
+msgstr "Játék betöltése"
+
+#: ../../src/ui_fsmenu/loadgame.cc:71
+msgid "Choose saved game!"
+msgstr "Válaszd ki a mentett játékot!"
+
+#: ../../src/ui_fsmenu/loadgame.cc:73
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:72
+msgid "Map Name:"
+msgstr "Térkép neve:"
+
+#: ../../src/ui_fsmenu/loadgame.cc:77
+msgid "Gametime:"
+msgstr "Játékidő:"
+
+#: ../../src/ui_fsmenu/netsetup.cc:49
+msgid "Begin Network Game"
+msgstr "Hálózati játék indítása"
+
+#: ../../src/ui_fsmenu/netsetup.cc:53
+msgid "List of games in your local network:"
 msgstr ""
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:39
-msgid "Select a campaign"
-msgstr "Hadjárat kiválasztása"
+#: ../../src/ui_fsmenu/netsetup.cc:57
+msgid "Your nickname:"
+msgstr ""
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:41
-msgid "Campaign:"
-msgstr "Hadjáratok:"
+#: ../../src/ui_fsmenu/netsetup.cc:61
+msgid "Host to connect:"
+msgstr ""
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:43
-msgid "Difficulty:"
-msgstr "Nehézség:"
+#: ../../src/ui_fsmenu/netsetup.cc:69
+#, fuzzy
+msgid "Join this game"
+msgstr "Csatlakozás egy játékhoz"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:45
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:227
-msgid "Description:"
-msgstr "Leírás:"
+#: ../../src/ui_fsmenu/netsetup.cc:76
+#, fuzzy
+msgid "Host a new game"
+msgstr "Új játék indítása"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:80
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:121
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:123
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:194
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:301
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:302
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:303
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:365
-msgid "[No value found]"
-msgstr "[Érték nincs meg]"
+#: ../../src/ui_fsmenu/netsetup.cc:91
+#, fuzzy
+msgid "Load previous host"
+msgstr "Előző épület"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:81
-msgid "Easy living"
-msgstr "Könnyű élet"
+#: ../../src/ui_fsmenu/netsetup.cc:112
+msgid "nobody"
+msgstr "senki"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:82
-msgid "Be vigilant"
-msgstr "Légy éber"
+#: ../../src/ui_fsmenu/netsetup.cc:116
+msgid "Host"
+msgstr "Host"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:83
-msgid "Hard struggle"
-msgstr "Nehéz küzdelem"
+#: ../../src/ui_fsmenu/netsetup.cc:118
+msgid "State"
+msgstr "Állapot"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:127
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_campaign_select.cc:307
-msgid "[Invalid entry]"
-msgstr "[Hibás adat]"
+#: ../../src/ui_fsmenu/netsetup.cc:186
+msgid "Closed"
+msgstr "Lezárt"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:33
-msgid "Single Player"
-msgstr "Egyjátékos mód"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:39
-msgid "Multi Player"
-msgstr "Hálózati játék"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:45
-msgid "Watch Replay"
-msgstr "Felvétel megtekintése"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:57
-msgid "Editor"
-msgstr "Térképkészítő"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:63
-#: ../../src/editor/ui_menus/editor_main_menu.cc:73
-msgid "View Readme"
-msgstr "Útmutató"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:79
-msgid "Version "
-msgstr "Verzió "
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_main.cc:83
-msgid "(C) 2002-2008 by the Widelands Development Team"
-msgstr "(C) 2002-2008 Widelands Fejlesztőcsapat"
-
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:28
+#: ../../src/ui_fsmenu/editor.cc:37
 #, fuzzy
 msgid "Editor Menu"
 msgstr "Térképkészítő"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:35
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:51
-#: ../../src/editor/ui_menus/editor_main_menu.cc:49
+#: ../../src/ui_fsmenu/editor.cc:45
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:50
+#: ../../src/editor/ui_menus/editor_main_menu.cc:50
 msgid "New Map"
 msgstr "Új térkép"
 
-#: ../../src/ui/ui_fs_menus/fullscreen_menu_editor.cc:41
+#: ../../src/ui_fsmenu/editor.cc:52
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:51
-#: ../../src/editor/ui_menus/editor_main_menu.cc:55
+#: ../../src/editor/ui_menus/editor_main_menu.cc:56
 msgid "Load Map"
 msgstr "Térkép betöltése"
 
-#: ../../src/ui/ui_basic/ui_messagebox.cc:92
-#: ../../src/editor/tools/editor_info_tool.cc:75
-#: ../../src/editor/tools/editor_info_tool.cc:76
-msgid "Yes"
-msgstr "Igen"
+#: ../../src/ui_fsmenu/loadreplay.cc:68
+msgid "Choose a replay!"
+msgstr "Válaszd ki a felvételt!"
 
-#: ../../src/ui/ui_basic/ui_messagebox.cc:99
-#: ../../src/editor/tools/editor_info_tool.cc:75
-#: ../../src/editor/tools/editor_info_tool.cc:76
-msgid "No"
-msgstr "Nem"
+#: ../../src/ui_fsmenu/launchgame.cc:61
+msgid "Select map"
+msgstr "Pálya kiválasztása"
 
-#: ../../src/ui/ui_basic/ui_progresswindow.cc:41
-msgid "Preparing..."
-msgstr "Felkészülés..."
+#: ../../src/ui_fsmenu/launchgame.cc:68
+#, fuzzy
+msgid "Select Savegame"
+msgstr "Játék mentése"
+
+#: ../../src/ui_fsmenu/launchgame.cc:82
+msgid "Start game"
+msgstr "Játék indítása"
+
+#: ../../src/ui_fsmenu/launchgame.cc:89
+msgid "Launch Game"
+msgstr "Játék indítása"
+
+#: ../../src/ui_fsmenu/launchgame.cc:129
+msgid "Switch to position"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launchgame.cc:143
+msgid "Lobby:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launchgame.cc:225
+msgid "File not found"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launchgame.cc:227
+#, c-format
+msgid ""
+"Widelands  tried to start a game with a file that could not be found at given path.\n"
+"The file was: %s\n"
+"If this happens in a network game, the host might have selected a file that you do not have. In that case you should ask the host to send you the file."
+msgstr ""
+
+#: ../../src/ui_fsmenu/launchgame.cc:252
+msgid "(no map)"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launchgame.cc:288
+msgid "WARNING!!! Host selected file \""
+msgstr ""
+
+#: ../../src/ui_fsmenu/launchgame.cc:290
+msgid "\" for this game, but you do not have it."
+msgstr ""
+
+#: ../../src/ui_fsmenu/launchgame.cc:291
+msgid " Please add it manually."
+msgstr ""
+
+#: ../../src/ui_fsmenu/launchgame.cc:308
+msgid "Original:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/launchgame.cc:412
+#, fuzzy
+msgid "(Save): "
+msgstr "Térkép mentése"
+
+#: ../../src/ui_fsmenu/intro.cc:32
+msgid "Press a key or click to continue ..."
+msgstr ""
+
+#: ../../src/ui_fsmenu/campaign_select.cc:56
+msgid "Select a campaign"
+msgstr "Hadjárat kiválasztása"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:58
+msgid "Campaign:"
+msgstr "Hadjáratok:"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:62
+msgid "Difficulty:"
+msgstr "Nehézség:"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:66
+#: ../../src/ui_fsmenu/campaign_select.cc:279
+msgid "Description:"
+msgstr "Leírás:"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:127
+#: ../../src/ui_fsmenu/campaign_select.cc:169
+#: ../../src/ui_fsmenu/campaign_select.cc:171
+#: ../../src/ui_fsmenu/campaign_select.cc:230
+#: ../../src/ui_fsmenu/campaign_select.cc:418
+msgid "[No value found]"
+msgstr "[Érték nincs meg]"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:128
+msgid "Easy living"
+msgstr "Könnyű élet"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:129
+msgid "Be vigilant"
+msgstr "Légy éber"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:130
+msgid "Hard struggle"
+msgstr "Nehéz küzdelem"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:174
+msgid "[Invalid entry]"
+msgstr "[Hibás adat]"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:358
+#, c-format
+msgid "Invalid path to file in cconfig: %s"
+msgstr ""
+
+#: ../../src/ui_fsmenu/main.cc:48
+msgid "Single Player"
+msgstr "Egyjátékos mód"
+
+#: ../../src/ui_fsmenu/main.cc:55
+msgid "Multi Player"
+msgstr "Hálózati játék"
+
+#: ../../src/ui_fsmenu/main.cc:62
+msgid "Watch Replay"
+msgstr "Felvétel megtekintése"
+
+#: ../../src/ui_fsmenu/main.cc:76
+msgid "Editor"
+msgstr "Térképkészítő"
+
+#: ../../src/ui_fsmenu/main.cc:83
+#: ../../src/editor/ui_menus/editor_main_menu.cc:74
+msgid "View Readme"
+msgstr "Útmutató"
+
+#: ../../src/ui_fsmenu/main.cc:104
+msgid "Version "
+msgstr "Verzió "
+
+#: ../../src/ui_fsmenu/main.cc:108
+#, fuzzy
+msgid "by the Widelands Development Team"
+msgstr "(C) 2002-2008 Widelands Fejlesztőcsapat"
+
+#: ../../src/ui_fsmenu/options.cc:62 ../../src/ui_fsmenu/options.cc:372
+#, fuzzy
+msgid "Advanced Options"
+msgstr "Hang beállítások"
+
+#: ../../src/ui_fsmenu/options.cc:76 ../../src/ui_fsmenu/options.cc:350
+msgid "Apply"
+msgstr "Alkalmaz"
+
+#: ../../src/ui_fsmenu/options.cc:87
+#, fuzzy
+msgid "min."
+msgstr "bánya"
+
+#: ../../src/ui_fsmenu/options.cc:93
+msgid "General Options"
+msgstr "Beállítások"
+
+#: ../../src/ui_fsmenu/options.cc:100
+msgid "Fullscreen"
+msgstr "Teljes képernyő"
+
+#: ../../src/ui_fsmenu/options.cc:106
+msgid "Grab Input"
+msgstr "Egér kisajátítás"
+
+#: ../../src/ui_fsmenu/options.cc:112
+msgid "Enable Music"
+msgstr "Zene"
+
+#: ../../src/ui_fsmenu/options.cc:118
+msgid "Enable Sound"
+msgstr "Hang"
+
+#: ../../src/ui_fsmenu/options.cc:123
+#, fuzzy
+msgid "Maximum FPS:"
+msgstr "Legfeljebb: %u"
+
+#: ../../src/ui_fsmenu/options.cc:133
+msgid "In-game resolution"
+msgstr "Játék felbontása"
+
+#: ../../src/ui_fsmenu/options.cc:138
+msgid "Language"
+msgstr "Nyelv"
+
+#: ../../src/ui_fsmenu/options.cc:149
+msgid "In-game Options"
+msgstr "Játék beállítások"
+
+#: ../../src/ui_fsmenu/options.cc:156
+msgid "Use single Watchwindow Mode"
+msgstr "Egy nézőke ablak"
+
+#: ../../src/ui_fsmenu/options.cc:162
+msgid "Start roadbuilding after placing flag"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:168
+msgid "Show buildings area preview"
+msgstr "Mutassa az építési terület nézetét"
+
+#: ../../src/ui_fsmenu/options.cc:175
+msgid "Snap windows only when overlapping"
+msgstr "Az ablakok csak átfedés esetén vonzzák egymást"
+
+#: ../../src/ui_fsmenu/options.cc:181
+msgid "Dock windows to edges"
+msgstr "Ablakok igazítása a sarkokhoz"
+
+#: ../../src/ui_fsmenu/options.cc:186
+msgid "Save game automatically every"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:190
+msgid "Off"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:274
+msgid "System default language"
+msgstr "Rendszer alapértelmezett nyelve"
+
+#: ../../src/ui_fsmenu/options.cc:383
+#, fuzzy
+msgid "Main menu font:"
+msgstr "Főmenü"
+
+#: ../../src/ui_fsmenu/options.cc:390
+msgid "Do not zip widelands data files (maps, replays and savegames)."
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:395
+#, fuzzy
+msgid "Speed of a new game:"
+msgstr "Új játék indítása"
+
+#: ../../src/ui_fsmenu/options.cc:399
+msgid "Distance for windows to snap to other panels:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:403
+msgid "Distance for windows to snap to borders:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:417
+#, fuzzy
+msgid "Pause"
+msgstr "Érték"
+
+#: ../../src/ui_fsmenu/options.cc:427
+msgid "FreeSerif (Default)"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:43
 msgid "Field Information"
@@ -1687,18 +2390,6 @@ msgid ""
 " Height: %u\n"
 " Caps: "
 msgstr ""
-
-#: ../../src/editor/tools/editor_info_tool.cc:61
-msgid "small"
-msgstr "kicsi"
-
-#: ../../src/editor/tools/editor_info_tool.cc:62
-msgid "medium"
-msgstr "közepes"
-
-#: ../../src/editor/tools/editor_info_tool.cc:63
-msgid "big"
-msgstr "nagy"
 
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " flag"
@@ -1798,522 +2489,162 @@ msgstr ""
 "\n"
 " Szerző: "
 
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:47
-msgid "Null Trigger Options"
-msgstr "Null trigger beállításai"
-
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:69
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:179
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:254
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:82
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:207
-#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:87
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:247
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:172
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:128
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:184
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:109
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:289
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:224
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:165
-msgid "Ok"
-msgstr "Ok"
-
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:112
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:528
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:271
-#, c-format
-msgid "There is another trigger registered with the name \"%s\". Choose another name."
-msgstr ""
-
-#: ../../src/editor/ui_menus/trigger_null_option_menu.cc:117
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:225
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:300
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:295
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:195
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:251
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:533
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:276
-msgid "Name in use"
-msgstr "A név már foglalt"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:32
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:141
-msgid "Make Directory"
-msgstr "Könyvtár létrehozása"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
-msgid "Enter Directory Name: "
-msgstr "Új könyvtár neve: "
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:54
-msgid "Event Menu"
-msgstr "Események menü"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:63
-msgid "Event Chains: "
-msgstr "Esemény láncok: "
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:73
-msgid "Registered Events: "
-msgstr "Létrehozott események: "
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:82
-msgid "Registered Triggers"
-msgstr "Létrehozott triggerek: "
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:99
-msgid "New Event Chain"
-msgstr "Új esemény lánc"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:108
-#: ../../src/editor/ui_menus/editor_event_menu.cc:139
-#: ../../src/editor/ui_menus/editor_event_menu.cc:171
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:259
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:185
-msgid "Edit"
-msgstr "Szerkesztés"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:119
-#: ../../src/editor/ui_menus/editor_event_menu.cc:150
-#: ../../src/editor/ui_menus/editor_event_menu.cc:182
-msgid "Del"
-msgstr "Törlés"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:130
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:44
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:96
-msgid "New Event"
-msgstr "Új esemény"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:162
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:44
+#: ../../src/editor/ui_menus/editor_event_menu.cc:162
 msgid "New Trigger"
 msgstr "Új trigger"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:274
-msgid "Can't delete Event. It is in use by "
-msgstr "Nem lehet törölni az eseményt. Használja "
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:284
-#: ../../src/editor/ui_menus/editor_event_menu.cc:326
-#: ../../src/editor/ui_menus/editor_player_menu.cc:244
-#: ../../src/editor/ui_menus/editor_player_menu.cc:276
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:274
-msgid "Error!"
-msgstr "Hiba!"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:316
-msgid "Can't delete Trigger. It is in use by "
-msgstr "Nem törölhető a trigger. Használja "
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:350
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:107
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:235
-#, c-format
-msgid "Unnamed%u"
-msgstr "Névtelen%u"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:357
-msgid "Unnamed"
-msgstr "Névtelen"
-
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:47
-msgid "Move View Event Options"
-msgstr "Nézet mozgása esemény beállításai"
-
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:67
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:72
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:67
-msgid "Current position: "
-msgstr "Aktuális hely: "
-
-#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:220
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:295
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:290
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:190
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:246
-#, c-format
-msgid "There is another event registered with the name \"%s\". Choose another name."
-msgstr "Már létezik egy esemény \"%s\" néven. Válassz egy másik nevet."
-
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:49
-msgid "Unhide Area Event Options"
-msgstr "Terület felfedés esemény beállításai"
-
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:178
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:173
-msgid "Player: "
-msgstr "Játékos: "
-
-#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:198
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:192
-msgid "Area: "
-msgstr "Terület: "
-
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:43
-msgid "Resources Tools Options"
-msgstr "Erőforrás eszközök beállításai"
-
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:47
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:46
-msgid "In-/Decrease Value"
-msgstr "Érték növelése/csökkentése"
-
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:79
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
-msgid "Set Value"
-msgstr "Érték beállítása"
-
-#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:101
-msgid "Current Selection"
-msgstr "Jelenleg kiválasztott"
-
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:55
-msgid "Allowed Buildings"
-msgstr "Engedélyezett épületek"
-
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:60
-msgid "Allowed Buildings:"
-msgstr "Engedélyezett épületek:"
-
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:66
-msgid "Forbidden Buildings:"
-msgstr "Tiltott épületek:"
-
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:84
-msgid "Forbid"
-msgstr "Letilt"
-
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:93
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:145
-msgid "<-"
-msgstr "<-"
-
-#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
-msgid "Allow"
-msgstr "Engedélyez"
-
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:70
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:163
-#, c-format
-msgid "Width: %u"
-msgstr "Szélesség: %u"
-
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:92
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:167
-#, c-format
-msgid "Height: %u"
-msgstr "Magasság: %u"
-
-#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:132
-msgid "Create Map"
-msgstr "Térkép létrehozása"
-
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:54
-#, fuzzy
-msgid "Available Event types: "
-msgstr "Használható események: "
-
-#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:66
-#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:71
-msgid "Description: "
-msgstr "Leírás: "
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:46
-msgid "Edit Trigger Conditional"
-msgstr "Trigger feltétel szerkesztése"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:58
-msgid "Trigger Conditional: "
-msgstr "Trigger feltétel: "
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:76
-msgid "("
-msgstr "("
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:88
-msgid ")"
-msgstr ")"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:100
-msgid "AND"
-msgstr "ÉS"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:112
-msgid "OR"
-msgstr "VAGY"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:124
-msgid "XOR"
-msgstr "XOR"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:136
-msgid "NOT"
-msgstr "NEM"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:146
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:106
-msgid "Insert"
-msgstr "Beillesztés"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:156
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:267
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:196
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:116
-msgid "Delete"
-msgstr "Törlés"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:183
-msgid "Available Triggers: "
-msgstr "Létrehozott triggerek: "
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:281
-msgid "Syntax Error"
-msgstr "Szintaktikai hiba"
-
-#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:283
-msgid "Your conditional contains at least one syntax error. Please correct!\n"
-msgstr "A feltételek legalább egy szintaktikai hibát tartalmaznak. Kérlek javítsd ki!\n"
-
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:42
-#: ../../src/editor/ui_menus/editor_main_menu.cc:67
-msgid "Map Options"
-msgstr "Térkép beállításai"
-
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:63
-msgid "Nr Players:"
-msgstr "Játékosok száma:"
-
-#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:87
-msgid "Nothing defined!"
-msgstr "Nincs meghatározva!"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:57
-#: ../../src/editor/ui_menus/editor_main_menu.cc:61
-msgid "Save Map"
-msgstr "Térkép mentése"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:83
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:69
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:55
-msgid "Name: "
-msgstr "Név: "
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:88
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:76
-msgid "Author: "
-msgstr "Szerző: "
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:93
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:82
-msgid "Size: "
-msgstr "Méret: "
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:98
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:88
-msgid "World: "
-msgstr "Világ: "
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:104
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:95
-msgid "Players: "
-msgstr "Játékosok: "
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:109
-#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:101
-msgid "Descr: "
-msgstr "Leírás: "
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:202
-msgid "unnamed"
-msgstr "névtelen"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:358
-msgid " exists already. Overwrite?"
-msgstr "már létezik. Felülírod?"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:360
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
-msgid "Save Map Error!!"
-msgstr "Térkép mentési hiba!!"
-
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:376
-msgid ""
-"Map Saving Error!\n"
-"Saved Map-File may be corrupt!\n"
-"\n"
-"Reason given:\n"
-msgstr ""
-"Hiba a térkép mentése során!\n"
-"A lementett térkép sérült lehet\n"
-"\n"
-"A hiba oka:\n"
-
-#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:38
-msgid "Toolsize Menu"
-msgstr "Eszközméret"
-
-#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:60
-#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:70
-#, c-format
-msgid "Current Size: %u"
-msgstr "Jelenlegi méret: %u"
-
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
-msgid "Noise Height Options"
-msgstr "Hepehupás terület beállításai"
-
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:130
-#, c-format
-msgid "Minimum: %u"
-msgstr "Legalább: %u"
-
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:132
-#, c-format
-msgid "Maximum: %u"
-msgstr "Legfeljebb: %u"
-
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:137
-#, c-format
-msgid "Set value: %u"
-msgstr "Érték beállítása: %u"
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:55
 #, fuzzy
 msgid "Available Trigger types: "
 msgstr "Létrehozott triggerek: "
 
-#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:41
-msgid "Height Tools Options"
-msgstr "Magasság szerkesztő eszközök beállításai"
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:73
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:73
+msgid "Description: "
+msgstr "Leírás: "
 
-#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:49
-msgid "Conquer Area Event Options"
-msgstr "Hódítási terület esemény beállításai"
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:89
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:109
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:225
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:187
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:167
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:128
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:89
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:254
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:175
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:289
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:181
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:254
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:215
+msgid "Ok"
+msgstr "Ok"
 
-#: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:44
-msgid "Immovable Bobs Menu"
-msgstr "Nem mozgatható tárgyak"
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:147
+msgid "Make Directory"
+msgstr "Könyvtár létrehozása"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:41
-msgid "Player Options"
-msgstr "Játékos beállításai"
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:42
+msgid "Enter Directory Name: "
+msgstr "Új könyvtár neve: "
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:48
-msgid "Add player"
-msgstr "Játékos hozzáadása"
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:67
+msgid "Edit Objective"
+msgstr "Feladat szerkesztése"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:56
-msgid "Remove last player"
-msgstr "Utolsó játékos eltávolítása"
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:84
+msgid "Visible at Begin: "
+msgstr "Látható kezdetben: "
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:68
-msgid "Number of Players"
-msgstr "Játékosok száma: "
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:93
+msgid "Objective text: "
+msgstr "Feladat szövege: "
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:191
-msgid "Player "
-msgstr "Játékos "
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:166
+msgid "Visible"
+msgstr "Látható"
 
-#: ../../src/editor/ui_menus/editor_player_menu.cc:246
-#, fuzzy
-msgid "Can't remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this player and try again."
-msgstr "Nem törölheted ezt a játékost. Valami hivatkozik rá. Távolíts el minden épületet, tárgyat, triggert és eseményt ami ezzel a néppel kapcsolatban áll"
-
-#: ../../src/editor/ui_menus/editor_player_menu.cc:278
-#, fuzzy
-msgid "Can't change player tribe. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this tribe and try again."
-msgstr "Nem változtathatod meg a játékos törzsét. Valami hivatkozik rá. Távolíts el minden épületet, tárgyat, triggert és eseményt ami ezzel a néppel kapcsolatban áll"
-
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:61
-msgid "New Variable"
-msgstr "Új változó"
-
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:69
-msgid "Integer"
-msgstr "Szám"
-
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:75
-msgid "String"
-msgstr "Szöveg"
-
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:155
-msgid "Edit Variable"
-msgstr "Változó szerkesztése"
-
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:164
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:273
-msgid "Value"
-msgstr "Érték"
-
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:214
-#, c-format
-msgid "\"%s\" is not a valid integer!"
-msgstr "\"%s\" nem szám!"
-
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:216
-msgid "Parse error!"
-msgstr "Feldolgozási hiba!"
-
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:245
-msgid "Variables Menu"
-msgstr "Változók menü"
-
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:253
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:176
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:177
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:256
 msgid "New"
 msgstr "Új"
 
-#: ../../src/editor/ui_menus/editor_variables_menu.cc:272
-msgid "Variable"
-msgstr "Változó"
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:186
+#: ../../src/editor/ui_menus/editor_event_menu.cc:108
+#: ../../src/editor/ui_menus/editor_event_menu.cc:139
+#: ../../src/editor/ui_menus/editor_event_menu.cc:171
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:262
+msgid "Edit"
+msgstr "Szerkesztés"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:45
-msgid "Tool Menu"
-msgstr "Eszközök menü"
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:197
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:118
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:270
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:161
+msgid "Delete"
+msgstr "Törlés"
 
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:64
-msgid "Change height"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:65
-#, fuzzy
-msgid "Noise height"
-msgstr "Hepehupás terület beállításai"
-
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:67
-#, fuzzy
-msgid "Immovable"
-msgstr "Nem mozgatható tárgyak"
-
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:68
-msgid "Bob"
-msgstr ""
-
-#: ../../src/editor/ui_menus/editor_tool_menu.cc:69
-msgid "Resource"
-msgstr ""
-
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:45
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:49
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:231
+#: ../../src/editor/ui_menus/editor_event_menu.cc:343
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:110
 #, c-format
-msgid "Player: %u"
-msgstr "Játékos: %u"
+msgid "Unnamed%u"
+msgstr "Névtelen%u"
 
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:55
-#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:68
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:252
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:303
+msgid "Trigger: "
+msgstr "Trigger: "
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:275
+msgid "The objective was deleted, but not its trigger, because it is still referenced by:\n"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:288
+#, fuzzy
+msgid "Note"
+msgstr "Nem"
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:68
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:55
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:84
+msgid "Name: "
+msgstr "Név: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:75
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:90
+msgid "Author: "
+msgstr "Szerző: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:81
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:96
+msgid "Size: "
+msgstr "Méret: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:87
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:102
+msgid "World: "
+msgstr "Világ: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:94
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:109
+msgid "Players: "
+msgstr "Játékosok: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:101
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:115
+msgid "Descr: "
+msgstr "Leírás: "
+
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:48
+msgid "Trigger Option Menu"
+msgstr "Trigger beállítások"
+
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:282
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:538
 #, c-format
-msgid "Building: %s"
-msgstr "Építés: %s"
+msgid "There is another trigger registered with the name \"%s\". Choose another name."
+msgstr ""
 
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:67
-msgid "Allow Building Event Options"
-msgstr "Épület engedélyezés esemény: "
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:287
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:263
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:195
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:302
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:543
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:236
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:309
+msgid "Name in use"
+msgstr "A név már foglalt"
 
-#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:119
-msgid "Allow Building: "
-msgstr "Engedélyezett épület: "
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:43
+msgid "Terrain Select"
+msgstr "Terep választás"
+
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:161
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:215
+msgid "Current:"
+msgstr "Aktuális:"
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:47
 msgid "Message Box Event Options"
@@ -2343,62 +2674,317 @@ msgstr "Ablak cím:"
 msgid "Text:"
 msgstr "Szöveg:"
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:106
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:108
 msgid "Number of Buttons: "
 msgstr "Gombok száma: "
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:132
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:135
 msgid "Button Name: "
 msgstr "Gomb neve: "
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:151
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:154
 msgid "Select Trigger: "
 msgstr "Trigger kiválasztása: "
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:172
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:175
 msgid "Current: "
 msgstr "Aktuális: "
 
-#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:177
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:180
 msgid "No trigger selected!"
 msgstr "Nincs kiválasztva trigger!"
 
-#: ../../src/editor/ui_menus/editor_main_menu.cc:79
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:258
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:190
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:297
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:231
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:304
+#, c-format
+msgid "There is another event registered with the name \"%s\". Choose another name."
+msgstr "Már létezik egy esemény \"%s\" néven. Válassz egy másik nevet."
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:46
+#, fuzzy
+msgid "Set origin"
+msgstr "Szöveg"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:48
+msgid "Set the position that will have the coordinates (0, 0). This will be the top-left corner of a generated minimap."
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:61
+#: ../../src/editor/ui_menus/editor_main_menu.cc:68
+msgid "Map Options"
+msgstr "Térkép beállításai"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:86
+msgid "Nr Players:"
+msgstr "Játékosok száma:"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:110
+msgid "Nothing defined!"
+msgstr "Nincs meghatározva!"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:48
+msgid "Edit Event Chain"
+msgstr "Esemény lánc szerkesztése"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:65
+msgid "Runs multiple times"
+msgstr "Többször is végrehajtható"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:71
+msgid "Events: "
+msgstr "Események: "
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:89
+msgid "Conditional"
+msgstr "Feltétel"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:98
+#: ../../src/editor/ui_menus/editor_event_menu.cc:130
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:44
+msgid "New Event"
+msgstr "Új esemény"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:108
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:150
+msgid "Insert"
+msgstr "Beillesztés"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:130
+msgid "Up"
+msgstr "Fel"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:144
+msgid "Available Events: "
+msgstr "Használható események: "
+
+#: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:46
+msgid "Bobs Menu"
+msgstr "Állatok"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:54
+msgid "Event Menu"
+msgstr "Események menü"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:63
+msgid "Event Chains: "
+msgstr "Esemény láncok: "
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:73
+msgid "Registered Events: "
+msgstr "Létrehozott események: "
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:82
+msgid "Registered Triggers"
+msgstr "Létrehozott triggerek: "
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:99
+msgid "New Event Chain"
+msgstr "Új esemény lánc"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:119
+#: ../../src/editor/ui_menus/editor_event_menu.cc:150
+#: ../../src/editor/ui_menus/editor_event_menu.cc:182
+msgid "Del"
+msgstr "Törlés"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:272
+#, fuzzy
+msgid "Can not delete event. It is in use by "
+msgstr "Nem lehet törölni az eseményt. Használja "
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:279
+#: ../../src/editor/ui_menus/editor_event_menu.cc:319
+#: ../../src/editor/ui_menus/editor_player_menu.cc:244
+#: ../../src/editor/ui_menus/editor_player_menu.cc:276
+msgid "Error!"
+msgstr "Hiba!"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:312
+#, fuzzy
+msgid "Can not delete trigger. It is in use by "
+msgstr "Nem törölhető a trigger. Használja "
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:350
+msgid "Unnamed"
+msgstr "Névtelen"
+
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:45
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:49
+#, c-format
+msgid "Player: %u"
+msgstr "Játékos: %u"
+
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:55
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:68
+#, c-format
+msgid "Building: %s"
+msgstr "Építés: %s"
+
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:67
+msgid "Allow Building Event Options"
+msgstr "Épület engedélyezés esemény: "
+
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:119
+msgid "Allow Building: "
+msgstr "Engedélyezett épület: "
+
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:44
+msgid "Resources Tools Options"
+msgstr "Erőforrás eszközök beállításai"
+
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:48
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:45
+msgid "In-/Decrease Value"
+msgstr "Érték növelése/csökkentése"
+
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:80
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:79
+msgid "Set Value"
+msgstr "Érték beállítása"
+
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:102
+msgid "Current Selection"
+msgstr "Jelenleg kiválasztott"
+
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:69
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:163
+#, c-format
+msgid "Width: %u"
+msgstr "Szélesség: %u"
+
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:91
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:167
+#, c-format
+msgid "Height: %u"
+msgstr "Magasság: %u"
+
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
+msgid "Create Map"
+msgstr "Térkép létrehozása"
+
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:40
+msgid "Height Tools Options"
+msgstr "Magasság szerkesztő eszközök beállításai"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:46
+msgid "Tool Menu"
+msgstr "Eszközök menü"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:66
+msgid "Change height"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:67
+#, fuzzy
+msgid "Noise height"
+msgstr "Hepehupás terület beállításai"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:69
+#, fuzzy
+msgid "Immovable"
+msgstr "Nem mozgatható tárgyak"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:70
+msgid "Bob"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
+msgid "Resource"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:54
+#, fuzzy
+msgid "Available Event types: "
+msgstr "Használható események: "
+
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:49
+msgid "Conquer Area Event Options"
+msgstr "Hódítási terület esemény beállításai"
+
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:71
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:69
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:72
+msgid "Current position: "
+msgstr "Aktuális hely: "
+
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:177
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:178
+msgid "Player: "
+msgstr "Játékos: "
+
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:197
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:198
+msgid "Area: "
+msgstr "Terület: "
+
+#: ../../src/editor/ui_menus/editor_main_menu.cc:62
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:57
+msgid "Save Map"
+msgstr "Térkép mentése"
+
+#: ../../src/editor/ui_menus/editor_main_menu.cc:80
 msgid "Exit Editor"
 msgstr "Vissza a főmenübe"
 
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:43
-msgid "Terrain Select"
-msgstr "Terep választás"
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:64
+msgid "New Variable"
+msgstr "Új változó"
 
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:156
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:208
-msgid "Current:"
-msgstr "Aktuális:"
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:72
+msgid "Integer"
+msgstr "Szám"
 
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:67
-msgid "Edit Objective"
-msgstr "Feladat szerkesztése"
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:78
+msgid "String"
+msgstr "Szöveg"
 
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:84
-msgid "Visible at Begin: "
-msgstr "Látható kezdetben: "
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:158
+msgid "Edit Variable"
+msgstr "Változó szerkesztése"
 
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:93
-msgid "Objective text: "
-msgstr "Feladat szövege: "
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:167
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:276
+msgid "Value"
+msgstr "Érték"
 
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:165
-msgid "Visible"
-msgstr "Látható"
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:217
+#, c-format
+msgid "\"%s\" is not a valid integer!"
+msgstr "\"%s\" nem szám!"
 
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:203
-msgid "Trigger: "
-msgstr "Trigger: "
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:219
+msgid "Parse error!"
+msgstr "Feldolgozási hiba!"
 
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:264
-msgid "Can't delete Objective, because it's trigger is in use by "
-msgstr "Nem törölhető a tárgy, mert egy triggere használja: "
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:248
+msgid "Variables Menu"
+msgstr "Változók menü"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:275
+msgid "Variable"
+msgstr "Változó"
+
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
+msgid "Noise Height Options"
+msgstr "Hepehupás terület beállításai"
+
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:130
+#, c-format
+msgid "Minimum: %u"
+msgstr "Legalább: %u"
+
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:132
+#, c-format
+msgid "Maximum: %u"
+msgstr "Legfeljebb: %u"
+
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:137
+#, c-format
+msgid "Set value: %u"
+msgstr "Érték beállítása: %u"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:58
 #, c-format
@@ -2419,45 +3005,203 @@ msgstr "Kerület: %u"
 msgid "Building Trigger Options"
 msgstr "Építési trigger beállításai"
 
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:48
-msgid "Trigger Option Menu"
-msgstr "Trigger beállítások"
+#: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
+msgid "Immovable Bobs Menu"
+msgstr "Nem mozgatható tárgyak"
 
-#: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:46
-msgid "Bobs Menu"
-msgstr "Állatok"
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:199
+msgid "unnamed"
+msgstr "névtelen"
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:48
-msgid "Edit Event Chain"
-msgstr "Esemény lánc szerkesztése"
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:360
+msgid " exists already. Overwrite?"
+msgstr "már létezik. Felülírod?"
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:65
-msgid "Runs multiple times"
-msgstr "Többször is végrehajtható"
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:362
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:382
+msgid "Save Map Error!!"
+msgstr "Térkép mentési hiba!!"
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:71
-msgid "Events: "
-msgstr "Események: "
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:378
+msgid ""
+"Map Saving Error!\n"
+"Saved Map-File may be corrupt!\n"
+"\n"
+"Reason given:\n"
+msgstr ""
+"Hiba a térkép mentése során!\n"
+"A lementett térkép sérült lehet\n"
+"\n"
+"A hiba oka:\n"
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:87
-msgid "Conditional"
-msgstr "Feltétel"
+#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:39
+msgid "Toolsize Menu"
+msgstr "Eszközméret"
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:128
-msgid "Up"
-msgstr "Fel"
+#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:72
+#, c-format
+msgid "Current Size: %u"
+msgstr "Jelenlegi méret: %u"
 
-#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:142
-msgid "Available Events: "
-msgstr "Használható események: "
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
+msgid "Allowed Buildings"
+msgstr "Engedélyezett épületek"
 
-#: ../../src/objective.h:47
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:61
+msgid "Allowed Buildings:"
+msgstr "Engedélyezett épületek:"
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:67
+msgid "Forbidden Buildings:"
+msgstr "Tiltott épületek:"
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:85
+msgid "Forbid"
+msgstr "Letilt"
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:149
+msgid "<-"
+msgstr "<-"
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:95
+msgid "Allow"
+msgstr "Engedélyez"
+
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:47
+msgid "Move View Event Options"
+msgstr "Nézet mozgása esemény beállításai"
+
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:49
+msgid "Unhide Area Event Options"
+msgstr "Terület felfedés esemény beállításai"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:41
+msgid "Player Options"
+msgstr "Játékos beállításai"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:48
+msgid "Add player"
+msgstr "Játékos hozzáadása"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:56
+msgid "Remove last player"
+msgstr "Utolsó játékos eltávolítása"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:68
+msgid "Number of Players"
+msgstr "Játékosok száma: "
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:191
+msgid "Player "
+msgstr "Játékos "
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:246
+#, fuzzy
+msgid "Can not remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this player and try again."
+msgstr "Nem törölheted ezt a játékost. Valami hivatkozik rá. Távolíts el minden épületet, tárgyat, triggert és eseményt ami ezzel a néppel kapcsolatban áll"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:278
+#, fuzzy
+msgid "Can not change player tribe. It is referenced in some place. Remove all bobs, triggers and events that depend on this tribe and try again."
+msgstr "Nem változtathatod meg a játékos törzsét. Valami hivatkozik rá. Távolíts el minden épületet, tárgyat, triggert és eseményt ami ezzel a néppel kapcsolatban áll"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:47
+msgid "Edit Trigger Conditional"
+msgstr "Trigger feltétel szerkesztése"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:59
+msgid "Trigger Conditional: "
+msgstr "Trigger feltétel: "
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:79
+msgid "("
+msgstr "("
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:91
+msgid ")"
+msgstr ")"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:103
+msgid "AND"
+msgstr "ÉS"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:115
+msgid "OR"
+msgstr "VAGY"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:127
+msgid "XOR"
+msgstr "XOR"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:139
+msgid "NOT"
+msgstr "NEM"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:190
+msgid "Available Triggers: "
+msgstr "Létrehozott triggerek: "
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:283
+msgid "Syntax Error"
+msgstr "Szintaktikai hiba"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:285
+msgid "Your conditional contains at least one syntax error. Please correct!\n"
+msgstr "A feltételek legalább egy szintaktikai hibát tartalmaznak. Kérlek javítsd ki!\n"
+
+#: ../../src/message.h:40 ../../src/objective.h:47
 msgid "no descr"
 msgstr "nincs leírás"
 
-#: ../../src/map.h:165
+#: ../../src/map.h:166
 msgid "no description defined"
 msgstr "nincs leírás"
+
+#: ../../src/ai/defaultai.h:79
+msgid "Aggressive"
+msgstr ""
+
+#: ../../src/ai/defaultai.h:88
+msgid "Normal"
+msgstr ""
+
+#: ../../src/ai/defaultai.h:97
+#, fuzzy
+msgid "Defensive"
+msgstr "Védekezés"
+
+#~ msgid "Doh... someone forgot the help text!"
+#~ msgstr "Hopp... valaki elfelejtette a segítség szövegét megírni!"
+
+#~ msgid "Training Options"
+#~ msgstr "Képzési beállítások"
+
+#~ msgid "Training mode : "
+#~ msgstr "Képzési mód : "
+
+#~ msgid "Balanced"
+#~ msgstr "Kiegyensúlyozott"
+
+#, fuzzy
+#~ msgid "Hit points"
+#~ msgstr "Életpont"
+
+#~ msgid "Null Trigger"
+#~ msgstr "Null Trigger"
+
+#, fuzzy
+#~ msgid "Never triggers by itself. It is useful to pass it to some event which changes triggers"
+#~ msgstr "Ez a trigger sohasem változtatja meg az állapotát magától. Átadható más eseménynek ami meg tudja változtatni"
+
+#~ msgid "This Trigger waits a certain time before it is true. It can be configured to constantly restart itself when the wait time is over for repeating events"
+#~ msgstr "Ez a trigger vár a megadott ideig míg igazzá válik. Be lehet állítani, hogy indítsa újra magát mikor letelik az idő az ismétlődő eseményekhez"
+
+#~ msgid "Null Trigger Options"
+#~ msgstr "Null trigger beállításai"
+
+#~ msgid "Can't delete Objective, because it's trigger is in use by "
+#~ msgstr "Nem törölhető a tárgy, mert egy triggere használja: "
 
 #~ msgid "Server replied illegally to ChatMessage package. Should have sent %i but sent %i. Ignored"
 #~ msgstr "A szerver nem megfelelően válaszolt a ChatMessage csomagra. Ezt kellett volna küldenie: %i, helyette %i üzenet érkezett. Figyelmenkívül hagyva"
@@ -2471,14 +3215,8 @@ msgstr "nincs leírás"
 #~ msgid "The Room %s is currently not logged in or unknown to the server.\n"
 #~ msgstr "A szoba %s nem jelentkezett be vagy nem létezik a szerveren.\n"
 
-#~ msgid "Message: "
-#~ msgstr "Üzenet: "
-
 #~ msgid "Needs Ware"
 #~ msgstr "Szükséges termékek"
-
-#~ msgid "Consumed"
-#~ msgstr "Felhasznált"
 
 #~ msgid "Group"
 #~ msgstr "Csoport"

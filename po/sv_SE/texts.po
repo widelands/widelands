@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3725\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-03-18 22:53+0000\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
 "PO-Revision-Date: 2008-11-18 02:02+0100\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
 "Language-Team: swedish <sv@li.org>\n"
@@ -350,7 +350,7 @@ msgstr "Hövding"
 msgid "Elders"
 msgstr "Överste"
 
-#: ../../txts/developers:19 ../../txts/developers:285
+#: ../../txts/developers:19 ../../txts/developers:290
 msgid "Graphics"
 msgstr "Grafik"
 
@@ -358,15 +358,15 @@ msgstr "Grafik"
 msgid "vacant"
 msgstr "ledig"
 
-#: ../../txts/developers:26 ../../txts/developers:278
+#: ../../txts/developers:26 ../../txts/developers:283
 msgid "Homepage"
 msgstr "Hemsida"
 
-#: ../../txts/developers:33 ../../txts/developers:291
+#: ../../txts/developers:33 ../../txts/developers:296
 msgid "Sound"
 msgstr "Ljud"
 
-#: ../../txts/developers:40 ../../txts/developers:296
+#: ../../txts/developers:40 ../../txts/developers:301
 msgid "Translation"
 msgstr "Översättning"
 
@@ -382,111 +382,111 @@ msgstr "Grafiska designers"
 msgid "Musicians"
 msgstr "Musikskapare"
 
-#: ../../txts/developers:106
+#: ../../txts/developers:108
 msgid "Sound Effects"
 msgstr "Ljudeffekter"
 
-#: ../../txts/developers:113
+#: ../../txts/developers:115
 msgid "Maps and Missions"
 msgstr "Banor och uppdrag"
 
-#: ../../txts/developers:126
+#: ../../txts/developers:128
 msgid "Campaign Story"
 msgstr "Kampanjberättelse"
 
-#: ../../txts/developers:129
+#: ../../txts/developers:131
 msgid "Barbarian"
 msgstr "Barbarer"
 
-#: ../../txts/developers:134
+#: ../../txts/developers:136
 msgid "Empire"
 msgstr "Imperiet"
 
-#: ../../txts/developers:140
+#: ../../txts/developers:142
 msgid "Translators"
 msgstr "Översättare"
 
-#: ../../txts/developers:144
+#: ../../txts/developers:146
 msgid "Czech"
 msgstr "Tjeckiska"
 
-#: ../../txts/developers:150
+#: ../../txts/developers:152
 msgid "Dansk"
 msgstr "Danska"
 
-#: ../../txts/developers:155
+#: ../../txts/developers:157
 msgid "Dutch"
 msgstr "Holländska"
 
-#: ../../txts/developers:161
+#: ../../txts/developers:163
 msgid "Finnish"
 msgstr "Finska"
 
-#: ../../txts/developers:166
+#: ../../txts/developers:169
 msgid "French"
 msgstr "Franska"
 
-#: ../../txts/developers:173
+#: ../../txts/developers:176
 msgid "Galician"
 msgstr "Galliska"
 
-#: ../../txts/developers:178
+#: ../../txts/developers:181
 msgid "German"
 msgstr "Tyska"
 
-#: ../../txts/developers:187
+#: ../../txts/developers:191
 msgid "Hebrew"
 msgstr "Hebreiska"
 
-#: ../../txts/developers:192
+#: ../../txts/developers:196
 msgid "Hungarian"
 msgstr "Ungerska"
 
-#: ../../txts/developers:197
+#: ../../txts/developers:201
 msgid "Polish"
 msgstr "Polska"
 
-#: ../../txts/developers:204
+#: ../../txts/developers:209
 msgid "Russian"
 msgstr "Ryska"
 
-#: ../../txts/developers:209
+#: ../../txts/developers:214
 msgid "Slovak"
 msgstr "Slovakiska"
 
-#: ../../txts/developers:214
+#: ../../txts/developers:219
 msgid "Spanish"
 msgstr "Spanska"
 
-#: ../../txts/developers:219
+#: ../../txts/developers:224
 msgid "Swedish"
 msgstr "Svenska"
 
-#: ../../txts/developers:227
+#: ../../txts/developers:232
 msgid "Packagers"
 msgstr "Paketerare"
 
-#: ../../txts/developers:231
+#: ../../txts/developers:236
 msgid "Linux Distributions"
 msgstr "Linuxdistributioner"
 
-#: ../../txts/developers:242
+#: ../../txts/developers:247
 msgid "Other Unix Distributions"
 msgstr "Övriga Unixdistributioner"
 
-#: ../../txts/developers:251
+#: ../../txts/developers:256
 msgid "Non Unix Distributions"
 msgstr "Icke-UNIX-distributioner"
 
-#: ../../txts/developers:262
+#: ../../txts/developers:267
 msgid "Wiki and Enduser-Documentation"
 msgstr "Wiki och användardokumentation"
 
-#: ../../txts/developers:274
+#: ../../txts/developers:279
 msgid "Former elders"
 msgstr "Före detta åldermän"
 
-#: ../../txts/developers:302
+#: ../../txts/developers:307
 msgid "Other"
 msgstr "Övrigt"
 
@@ -499,7 +499,7 @@ msgid "README for the Editor"
 msgstr "LÄSMIG för redigeraren"
 
 #: ../../txts/editor_readme:10
-msgid "This Editor is intended for players who'd like to design their own maps to use with Widelands.<br>As you can see, this Editor is heavy work in progress and as the Editor becomes better and better this text will also get longer and more complete."
+msgid "This Editor is intended for players who would like to design their own maps to use with Widelands.<br>As you can see, this Editor is heavy work in progress and as the Editor becomes better and better this text will also get longer and more complete."
 msgstr ""
 
 #: ../../txts/editor_readme:12
@@ -571,79 +571,110 @@ msgstr "SHIFT    (Håll inne) Väljer det första alternativa verktyget"
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr "ALT      (Håll inne) Väljer det andra alternativa verktyget"
 
-#: ../../txts/editortips:13
+#: ../../txts/tips/atlanteans.tip:6
+#, fuzzy
+msgid "Always build a forester's and a fish breeder's house, so you will not run out of trunks and food."
+msgstr "Bygg alltid skogvaktarkoja och viltvårdarkoja, så löper du ingen risk för att få slut på träd eller mat."
+
+#: ../../txts/tips/barbarians.tip:2 ../../txts/tips/atlanteans.tip:2
+#: ../../txts/tips/empire.tip:2
+#, fuzzy
+msgid "Some buildings, such as the farm, have a very small working area. If the building is surrounded with trees or roads, production will stop."
+msgstr "Vissa byggnader såsom vinranksgården har en väldigt liten arbetsyta. Om byggnaden är omringad av träd eller vägar så stannar produktionen."
+
+#: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
+#, fuzzy
+msgid "Keep an eye on your fishers. After fish resources are exhausted in their working area, they will stop to fish."
+msgstr "Håll koll på fiskarnas platser; efter att fisken tagit slut så slutar produktionen."
+
+#: ../../txts/tips/barbarians.tip:10
+#, fuzzy
+msgid "Always build a ranger's and a gamekeeper's hut, so you will not run out of trunks and food."
+msgstr "Bygg alltid skogvaktarkoja och viltvårdarkoja, så löper du ingen risk för att få slut på träd eller mat."
+
+#: ../../txts/tips/editor.tip:2
 msgid "You can find general help for the editor as well as a short tutorial in our wiki at www.widelands.org"
 msgstr ""
 
-#: ../../txts/editortips:17
-msgid "You can select multiple nature objects (bobs) if you hold down CTRL during selection. If you than click on the map, one of the selected objects will be randomly placed."
+#: ../../txts/tips/editor.tip:6
+msgid "You can select multiple nature object (bob) types if you hold down CTRL during selection. If you then click on the map, an instance of one of the selected object types will be placed."
 msgstr ""
 
-#: ../../txts/editortips:21
+#: ../../txts/tips/editor.tip:10
 msgid "Like with natural objects (bobs), you can also select multiple animals or groundtextures with CTRL + Mouseclick."
 msgstr ""
 
-#: ../../txts/editortips:25
+#: ../../txts/tips/editor.tip:14
 msgid "Holding down SHIFT switches first alternative tool on. This tool is in most cases the complete difference of the normal tool (for example deletion of an object instead of placing one)."
 msgstr ""
 
-#: ../../txts/editortips:29
+#: ../../txts/tips/editor.tip:18
 msgid "Holding down ALT switches second alternative tool on (if it exists)."
 msgstr ""
 
-#: ../../txts/editortips:33
+#: ../../txts/tips/editor.tip:22
 msgid "The number keys (1 - 0) allow you to directly set the size of the selected area around your mouse."
 msgstr ""
 
-#: ../../txts/editortips:37
+#: ../../txts/tips/editor.tip:26
 msgid "SPACE key behaves like in normal game. It switches buildhelp on or off."
 msgstr ""
 
-#: ../../txts/editortips:41
+#: ../../txts/tips/editor.tip:30
 msgid "The tools for events, triggers, event chains and objectives are still under heavy development. If you've got a question or found a problem, meet us in the editor forums at www.widelands.org"
 msgstr ""
 
-#: ../../txts/editortips:45
+#: ../../txts/tips/editor.tip:34
 msgid "You can find a reference for all triggers and events in our wiki at widelands.org."
 msgstr ""
 
-#: ../../txts/gametips:13
-msgid "Some buildings, such as the vineyard, have a very small working area. If the building is surrounded with trees or roads, production will stop."
-msgstr "Vissa byggnader såsom vinranksgården har en väldigt liten arbetsyta. Om byggnaden är omringad av träd eller vägar så stannar produktionen."
+#: ../../txts/tips/empire.tip:10
+#, fuzzy
+msgid "Always build a forester's house so you will not run out of trunks."
+msgstr "Bygg alltid skogvaktarkoja och viltvårdarkoja, så löper du ingen risk för att få slut på träd eller mat."
 
-#: ../../txts/gametips:17
-msgid "Keep an eye on fisherman's huts; after fish resources are exhausted in the working area, production will stop."
-msgstr "Håll koll på fiskarnas platser; efter att fisken tagit slut så slutar produktionen."
-
-#: ../../txts/gametips:21
+#: ../../txts/tips/general_game.tip:2
 msgid "The building process will only start after a road is built to the construction site."
 msgstr "Byggen kommer bara att påbörjas efter att en väg är ansluten till arbetsplatsen."
 
-#: ../../txts/gametips:25
+#: ../../txts/tips/general_game.tip:6
 msgid "Be sure to send a geologist to survey sites before building a well or a mine."
 msgstr "Skicka alltid en geolog till ny mark innan du bygger brunnar eller gruvor där."
 
-#: ../../txts/gametips:29
-msgid "Your territory can be expanded by building various war buildings - Sentry, Fortress, Barracks, etc."
+#: ../../txts/tips/general_game.tip:10
+#, fuzzy
+msgid "Your territory can be expanded by building various military buildings - Sentry, Fortress, Barracks, etc."
 msgstr "Ditt territorium kan utökas med hjälp av militära byggnader såsom vakt, borg, barrack, etc."
 
-#: ../../txts/gametips:33
+#: ../../txts/tips/general_game.tip:14
 msgid "Miners will only work if supplied with food."
 msgstr "Gruvarbetare behöver mat för att arbeta."
 
-#: ../../txts/gametips:37
+#: ../../txts/tips/general_game.tip:18
 msgid "Split your roads into shorter sections by planting some flags. This will speed up transportation of your wares."
 msgstr "Förkorta sträckorna för dina bärare genom att sätta ut flaggor. Detta leder till mer effektiv transport av varor."
 
-#: ../../txts/gametips:41
-msgid "Always build a forester and a ranger's hut, so you will not run out of trunks and food."
-msgstr "Bygg alltid skogvaktarkoja och viltvårdarkoja, så löper du ingen risk för att få slut på träd eller mat."
-
-#: ../../txts/gametips:45
+#: ../../txts/tips/general_game.tip:22
 #, fuzzy
 msgid "Any further questions? Our FAQs, the wiki and of course our community forums can be found at www.widelands.org."
 msgstr "Har du frågor? Besök www.widelands.org. Där finns våra FAQs, Wiki och ett community forum."
 
-#: ../../txts/gametips:49
+#: ../../txts/tips/general_game.tip:26
 msgid "Use priority buttons in building window to adjust delivery of a specific ware."
+msgstr ""
+
+#: ../../txts/tips/general_game.tip:30
+msgid "Use the 'configure economy' menu to adjust the target quantity of a specific ware."
+msgstr ""
+
+#: ../../txts/tips/multiplayer.tip:2
+msgid "You can use 'Page up' and 'Page down' keys to adjust your wished speed - the real speed is than democratically set."
+msgstr ""
+
+#: ../../txts/tips/multiplayer.tip:6
+msgid "You can use '/me' at the beginning of a chatmessage: '/me is tired' will be printed as '-> Nickname is tired'."
+msgstr ""
+
+#: ../../txts/tips/singleplayer.tip:2
+msgid "Our computer players are too boring? Visit our website at www.widelands.org and meet other players to play online."
 msgstr ""

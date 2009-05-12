@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:45+0000\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
 "PO-Revision-Date: 2008-11-18 11:00+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -32,37 +32,25 @@ msgstr "Císařství - Měsíce ve vyhnanství"
 msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
 msgstr "Před šesti měsíci byl Lucius - mladý generál císařské armády - vyslán se 150 vojáky do lesů na severní hranici, kde končí území císařství a začíná území ovládané barbarskými kmeny. Jeho úkolem bylo bránit hranice císařství. Zpočátku bylo vše klidné, dokonce mluvil s několika barbarskými dětmi a přemýšlel o životě vedle těchto, sice primitivních, ale přesto mírumilovných sousedů. Začal se cítit v bezpečí a jeho armáda polevila v ostražitosti a přestala hlídat potenciálního nepřítele. To se ukázalo jako osudová chyba. Jedné březnové noci stovka barbarů bez varování zaútočila na jeho nepřipravenou armádu a zcela ji rozprášila. Lucius vyvázl pouze s holým životem a s hrstkou věrných vojáků."
 
-#: ../../campaigns/cconfig:50
+#: ../../campaigns/cconfig:51
 msgid "Tutorial1 - Eyes in the Dark"
 msgstr "Trénink 1 - Oči v temnotě"
 
-#: ../../campaigns/cconfig:52
-msgid "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic gameplay and control as well as basic production buildings (wood, stone, etc.) will be introduced."
-msgstr "První mise výukové kampaně barbarů. V této misi se naučíte základní ovládání hry a představíme základní výrobní budovy a suroviny (dřevo, kámen, atd...)."
-
-#: ../../campaigns/cconfig:57
+#: ../../campaigns/cconfig:56
 msgid "Tutorial2 - A Place to call Home"
 msgstr "Trénink 2 - Budování domova"
 
-#: ../../campaigns/cconfig:59
-msgid "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the higher production buildings, including mining and the military expansions will be introduced."
-msgstr "Druhá mise výukové kampaně barbarů. V této misi si představíme pokročilé výrobní budovy včetně těžby surovin a také vojenskou expanzi na další území."
+#: ../../campaigns/cconfig:61
+msgid "Tutorial3 - This land is our land"
+msgstr ""
 
-#: ../../campaigns/cconfig:65
+#: ../../campaigns/cconfig:68
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
 msgstr "Císařství - Trénink 1 - Pobřeží Malac' Mor"
 
-#: ../../campaigns/cconfig:67
-msgid "After losing an important battle against the barbarians, which leads to the forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to start a new life. But his destiny takes his ship into a heavy storm, which nearly desctructs the ship. Only with lot of luck he can save his people and the damaged ship on a unknown desert strand."
-msgstr "Po drtivé porážce utrpěné od barbarů, která vedla ke ztrátě velké části území Císařství, se Lucius rozhodl opustit Fremil a začít nový život. Řízením osudu však jeho loď vplula do děsivé bouře, která loď téměř zničila. Pouze s obrovskou dávkou štěstí se Luciovi a jeho lidem podařilo s poškozenou lodí zakotvit u neznámého pustého pobřeží."
-
-#: ../../campaigns/cconfig:72
+#: ../../campaigns/cconfig:73
 msgid "Empire Tutorial2 - An outpost for exile"
 msgstr "Císařství - Trénink 2 - Základna v exilu"
-
-#: ../../campaigns/cconfig:74
-msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediteran island, looking like paradise."
-msgstr "Loď byla konečně opravena a tak se Lucius a jeho lidé mohli opět vydat na cesty a pokračovat v hledání dobrého místa pro nový začátek. Po několika málo dnech zakotvili u zelených břehů ostrova, který vypadal jako ráj."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -289,6 +277,14 @@ msgstr "Tři válečníci"
 msgid "Mighty mountains divide this land into three fertile valleys. But a path connects the valleys and thus seems a fight inescapable! Hint: Water can be found around the lakes."
 msgstr "Mohutné pohoří rozděluje tuto zemi do tří úrodných nížin. Přesto jsou údolí spojena stezkami a takže boj je nevyhnutelný! Nápověda: Vodu lze najít v okolí jezer."
 
+#: ../../maps/Twinkling Waves.wmf/elemental:9
+msgid "Twinkling Waves"
+msgstr ""
+
+#: ../../maps/Twinkling Waves.wmf/elemental:11
+msgid "Many beautiful, green islands await the ones brave enough to pass the thousand waves, twinkling in the sun."
+msgstr ""
+
 #: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"
 msgstr "Dvě hranice"
@@ -313,3 +309,14 @@ msgstr "Zubří údolí"
 msgid "It seems as if this magical valley was inhabitated by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can you tribe live in peace with your neighbours?"
 msgstr "Toto magické údolí bylo od počátku času obydleno zubry. Když sem tvůj kmen přišel, byli si jisti, že nabízí spoustu místa pro mírumilovný život. Ale může tvůj kmen žít v míru s ostatními sousedy?"
 
+#~ msgid "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic gameplay and control as well as basic production buildings (wood, stone, etc.) will be introduced."
+#~ msgstr "První mise výukové kampaně barbarů. V této misi se naučíte základní ovládání hry a představíme základní výrobní budovy a suroviny (dřevo, kámen, atd...)."
+
+#~ msgid "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the higher production buildings, including mining and the military expansions will be introduced."
+#~ msgstr "Druhá mise výukové kampaně barbarů. V této misi si představíme pokročilé výrobní budovy včetně těžby surovin a také vojenskou expanzi na další území."
+
+#~ msgid "After losing an important battle against the barbarians, which leads to the forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to start a new life. But his destiny takes his ship into a heavy storm, which nearly desctructs the ship. Only with lot of luck he can save his people and the damaged ship on a unknown desert strand."
+#~ msgstr "Po drtivé porážce utrpěné od barbarů, která vedla ke ztrátě velké části území Císařství, se Lucius rozhodl opustit Fremil a začít nový život. Řízením osudu však jeho loď vplula do děsivé bouře, která loď téměř zničila. Pouze s obrovskou dávkou štěstí se Luciovi a jeho lidem podařilo s poškozenou lodí zakotvit u neznámého pustého pobřeží."
+
+#~ msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediteran island, looking like paradise."
+#~ msgstr "Loď byla konečně opravena a tak se Lucius a jeho lidé mohli opět vydat na cesty a pokračovat v hledání dobrého místa pro nový začátek. Po několika málo dnech zakotvili u zelených břehů ostrova, který vypadal jako ráj."

@@ -4,127 +4,15 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:35+0000\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
 "PO-Revision-Date: 2005-12-19 19:15+0200\n"
 "Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: ../../../worlds/desert/bobs/bunny/conf:1
-msgid "Bunny"
-msgstr "ארנב"
-
-#: ../../../worlds/desert/bobs/bush1/conf:1
-#: ../../../worlds/desert/bobs/bush4/conf:1
-#: ../../../worlds/desert/bobs/bush5/conf:1
-msgid "Bush"
-msgstr "שיח"
-
-#: ../../../worlds/desert/bobs/cactus1/conf:1
-#: ../../../worlds/desert/bobs/cactus2/conf:1
-#: ../../../worlds/desert/bobs/cactus3/conf:1
-#: ../../../worlds/desert/bobs/cactus4/conf:1
-msgid "Cactus"
-msgstr "קקטוס"
-
-#: ../../../worlds/desert/bobs/deadtree1/conf:1
-#: ../../../worlds/desert/bobs/deadtree2/conf:1
-#: ../../../worlds/desert/bobs/deadtree3/conf:1
-#: ../../../worlds/desert/bobs/deadtree4/conf:1
-msgid "Dead Tree"
-msgstr "עץ מת"
-
-#: ../../../worlds/desert/bobs/deer/conf:1
-msgid "Deer"
-msgstr "צבי"
-
-#: ../../../worlds/desert/bobs/duck/conf:1
-msgid "Duck"
-msgstr "ברווז"
-
-#: ../../../worlds/desert/bobs/fox/conf:1
-msgid "Fox"
-msgstr "שועל"
-
-#: ../../../worlds/desert/bobs/grass1/conf:1
-#: ../../../worlds/desert/bobs/grass2/conf:1
-#: ../../../worlds/desert/bobs/grass3/conf:1
-msgid "Grass"
-msgstr "דשא"
-
-#: ../../../worlds/desert/bobs/mushroom1/conf:1
-#: ../../../worlds/desert/bobs/mushroom2/conf:1
-msgid "Mushroom"
-msgstr "פטריה"
-
-#: ../../../worlds/desert/bobs/pebble1/conf:1
-#: ../../../worlds/desert/bobs/pebble2/conf:1
-#: ../../../worlds/desert/bobs/pebble3/conf:1
-#: ../../../worlds/desert/bobs/pebble4/conf:1
-#: ../../../worlds/desert/bobs/pebble5/conf:1
-#: ../../../worlds/desert/bobs/pebble6/conf:1
-msgid "Pebble"
-msgstr "אבן קטנה"
-
-#: ../../../worlds/desert/bobs/ruin1/conf:1
-#: ../../../worlds/desert/bobs/ruin2/conf:1
-#: ../../../worlds/desert/bobs/ruin3/conf:1
-#: ../../../worlds/desert/bobs/ruin4/conf:1
-#: ../../../worlds/desert/bobs/ruin5/conf:1
-msgid "ruins"
-msgstr ""
-
-#: ../../../worlds/desert/bobs/sheep/conf:1
-msgid "Sheep"
-msgstr "כבש"
-
-#: ../../../worlds/desert/bobs/skeleton1/conf:1
-#: ../../../worlds/desert/bobs/skeleton2/conf:1
-#: ../../../worlds/desert/bobs/skeleton3/conf:1
-msgid "Skeleton"
-msgstr "שלד"
-
-#: ../../../worlds/desert/bobs/skeleton4/conf:1
-#, fuzzy
-msgid "Shell"
-msgstr "כבש"
-
-#: ../../../worlds/desert/bobs/sstones1/conf:1
-#: ../../../worlds/desert/bobs/sstones2/conf:1
-#: ../../../worlds/desert/bobs/sstones3/conf:1
-#: ../../../worlds/desert/bobs/sstones4/conf:1
-#: ../../../worlds/desert/bobs/sstones5/conf:1
-#: ../../../worlds/desert/bobs/sstones6/conf:1
-#: ../../../worlds/desert/bobs/sstones7/conf:1
-msgid "Standing Stones"
-msgstr "אבנים עומדות"
-
-#: ../../../worlds/desert/bobs/stones1/conf:1
-#: ../../../worlds/desert/bobs/stones2/conf:1
-#: ../../../worlds/desert/bobs/stones3/conf:1
-#: ../../../worlds/desert/bobs/stones4/conf:1
-#: ../../../worlds/desert/bobs/stones5/conf:1
-#: ../../../worlds/desert/bobs/stones6/conf:1
-msgid "Stones"
-msgstr "אבנים"
-
-#: ../../../worlds/desert/bobs/tree1/conf:5
-#: ../../../worlds/desert/bobs/tree2/conf:5
-#: ../../../worlds/desert/bobs/tree3/conf:5
-#: ../../../worlds/desert/bobs/tree4/conf:5
-#: ../../../worlds/desert/bobs/tree5/conf:5
-msgid "Palm"
-msgstr ""
-
-#: ../../../worlds/desert/bobs/tree6/conf:5
-#: ../../../worlds/desert/bobs/tree7/conf:4
-#: ../../../worlds/desert/bobs/tree8/conf:4
-msgid "Tree"
-msgstr "עץ"
 
 #: ../../../worlds/desert/conf:2
 msgid "The Widelands Development Team"
@@ -139,6 +27,157 @@ msgstr "צבי"
 #, fuzzy
 msgid "This is the wide and sandy country of the bedouins"
 msgstr "אלו הארצות היפים ומלאי טוב של הברברים"
+
+#: ../../../worlds/desert/conf:7 ../../../worlds/desert/conf:8
+#: ../../../worlds/desert/conf:9
+msgid "Bush"
+msgstr "שיח"
+
+#: ../../../worlds/desert/conf:10 ../../../worlds/desert/conf:11
+#: ../../../worlds/desert/conf:12 ../../../worlds/desert/conf:13
+msgid "Cactus"
+msgstr "קקטוס"
+
+#: ../../../worlds/desert/conf:14 ../../../worlds/desert/conf:15
+#: ../../../worlds/desert/conf:16 ../../../worlds/desert/conf:17
+msgid "Dead Tree"
+msgstr "עץ מת"
+
+#: ../../../worlds/desert/conf:18 ../../../worlds/desert/conf:19
+#: ../../../worlds/desert/conf:20
+msgid "Grass"
+msgstr "דשא"
+
+#: ../../../worlds/desert/conf:21 ../../../worlds/desert/conf:22
+msgid "Mushroom"
+msgstr "פטריה"
+
+#: ../../../worlds/desert/conf:23 ../../../worlds/desert/conf:24
+#: ../../../worlds/desert/conf:25 ../../../worlds/desert/conf:26
+#: ../../../worlds/desert/conf:27 ../../../worlds/desert/conf:28
+msgid "Pebble"
+msgstr "אבן קטנה"
+
+#: ../../../worlds/desert/conf:29 ../../../worlds/desert/conf:30
+#: ../../../worlds/desert/conf:31 ../../../worlds/desert/conf:32
+#: ../../../worlds/desert/conf:33
+msgid "ruins"
+msgstr ""
+
+#: ../../../worlds/desert/conf:34 ../../../worlds/desert/conf:35
+#: ../../../worlds/desert/conf:36
+msgid "Skeleton"
+msgstr "שלד"
+
+#: ../../../worlds/desert/conf:37
+#, fuzzy
+msgid "Shell"
+msgstr "כבש"
+
+#: ../../../worlds/desert/conf:38 ../../../worlds/desert/conf:39
+#: ../../../worlds/desert/conf:40 ../../../worlds/desert/conf:41
+#: ../../../worlds/desert/conf:42 ../../../worlds/desert/conf:43
+#: ../../../worlds/desert/conf:44
+msgid "Standing Stones"
+msgstr "אבנים עומדות"
+
+#: ../../../worlds/desert/conf:45 ../../../worlds/desert/conf:46
+#: ../../../worlds/desert/conf:47 ../../../worlds/desert/conf:48
+#: ../../../worlds/desert/conf:49 ../../../worlds/desert/conf:50
+msgid "Stones"
+msgstr "אבנים"
+
+#: ../../../worlds/desert/conf:51 ../../../worlds/desert/conf:55
+#: ../../../worlds/desert/conf:59 ../../../worlds/desert/conf:63
+#: ../../../worlds/desert/conf:67
+msgid "Palm"
+msgstr ""
+
+#: ../../../worlds/desert/conf:52 ../../../worlds/desert/conf:56
+#: ../../../worlds/desert/conf:60 ../../../worlds/desert/conf:64
+#: ../../../worlds/desert/conf:68
+msgid "Palm medium"
+msgstr ""
+
+#: ../../../worlds/desert/conf:53 ../../../worlds/desert/conf:57
+#: ../../../worlds/desert/conf:61 ../../../worlds/desert/conf:65
+#: ../../../worlds/desert/conf:69
+msgid "Palm small"
+msgstr ""
+
+#: ../../../worlds/desert/conf:54 ../../../worlds/desert/conf:58
+#: ../../../worlds/desert/conf:62 ../../../worlds/desert/conf:66
+#: ../../../worlds/desert/conf:70
+msgid "Palm tiny"
+msgstr ""
+
+#: ../../../worlds/desert/conf:71
+msgid "Beech"
+msgstr ""
+
+#: ../../../worlds/desert/conf:72
+msgid "Beech medium"
+msgstr ""
+
+#: ../../../worlds/desert/conf:73
+msgid "Beech small"
+msgstr ""
+
+#: ../../../worlds/desert/conf:74
+msgid "Beech tiny"
+msgstr ""
+
+#: ../../../worlds/desert/conf:75
+msgid "Larch"
+msgstr ""
+
+#: ../../../worlds/desert/conf:76
+msgid "Larch medium"
+msgstr ""
+
+#: ../../../worlds/desert/conf:77
+msgid "Larch small"
+msgstr ""
+
+#: ../../../worlds/desert/conf:78
+msgid "Larch tiny"
+msgstr ""
+
+#: ../../../worlds/desert/conf:79
+msgid "Rowan"
+msgstr ""
+
+#: ../../../worlds/desert/conf:80
+msgid "Rowan medium"
+msgstr ""
+
+#: ../../../worlds/desert/conf:81
+msgid "Rowan small"
+msgstr ""
+
+#: ../../../worlds/desert/conf:82
+msgid "Rowan tiny"
+msgstr ""
+
+#: ../../../worlds/desert/conf:85
+msgid "Bunny"
+msgstr "ארנב"
+
+#: ../../../worlds/desert/conf:86
+msgid "Deer"
+msgstr "צבי"
+
+#: ../../../worlds/desert/conf:87
+msgid "Duck"
+msgstr "ברווז"
+
+#: ../../../worlds/desert/conf:88
+msgid "Fox"
+msgstr "שועל"
+
+#: ../../../worlds/desert/conf:89
+msgid "Sheep"
+msgstr "כבש"
 
 #: ../../../worlds/desert/resconf:4
 msgid "Coal"
@@ -163,6 +202,9 @@ msgstr "מים"
 #: ../../../worlds/desert/resconf:41
 msgid "Fish"
 msgstr "דגים"
+
+#~ msgid "Tree"
+#~ msgstr "עץ"
 
 #~ msgid "Reindeer"
 #~ msgstr "צבי גדול"

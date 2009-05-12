@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3807\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-15 12:22+0000\n"
-"PO-Revision-Date: 2009-03-10 12:27+0100\n"
+"POT-Creation-Date: 2009-05-12 14:54+0000\n"
+"PO-Revision-Date: 2009-05-12 16:41+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgstr "Tutorial2 - Ein Ort wie zuhause"
 
 #: ../../campaigns/cconfig:61
 msgid "Tutorial3 - This land is our land"
-msgstr ""
+msgstr "Tutorial3 - Dieses Land ist unser Land"
 
 #: ../../campaigns/cconfig:68
 msgid "Empire Tutorial1 - The strands of Malac' Mor"

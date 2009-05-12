@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3697\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-03-11 20:33+0000\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
 "PO-Revision-Date: 2009-02-16 22:48+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
@@ -438,155 +438,155 @@ msgstr "Wachtpost"
 msgid "Stronghold"
 msgstr "Burcht"
 
-#: ../../../tribes/barbarians/conf:157
+#: ../../../tribes/barbarians/conf:157 ../../../tribes/barbarians/conf:158
 msgid "Headquarters"
 msgstr "Hoofdkwartier"
 
-#: ../../../tribes/barbarians/conf:158
+#: ../../../tribes/barbarians/conf:159
 msgid "Warehouse"
 msgstr "Magazijn"
 
-#: ../../../tribes/barbarians/conf:161
+#: ../../../tribes/barbarians/conf:162
 msgid "War Mill"
 msgstr "Oorlogsfabriek"
 
-#: ../../../tribes/barbarians/conf:162
+#: ../../../tribes/barbarians/conf:163
 msgid "Axefactory"
 msgstr "Bijlenfabriek"
 
-#: ../../../tribes/barbarians/conf:163
+#: ../../../tribes/barbarians/conf:164
 msgid "Bakery"
 msgstr "Bakkerij"
 
-#: ../../../tribes/barbarians/conf:164
+#: ../../../tribes/barbarians/conf:165
 msgid "Big Inn"
 msgstr "Grote herberg"
 
-#: ../../../tribes/barbarians/conf:165
+#: ../../../tribes/barbarians/conf:166
 msgid "Brewery"
 msgstr "Brouwerij"
 
-#: ../../../tribes/barbarians/conf:166
+#: ../../../tribes/barbarians/conf:167
 msgid "Charcoal Burner's House"
 msgstr "Houtskoolbrandershuis"
 
-#: ../../../tribes/barbarians/conf:167
+#: ../../../tribes/barbarians/conf:168
 msgid "Deeper Coal Mine"
 msgstr "Diepere kolenmijn"
 
-#: ../../../tribes/barbarians/conf:168
+#: ../../../tribes/barbarians/conf:169
 msgid "Deep Coal Mine"
 msgstr "Diepe kolenmijn"
 
-#: ../../../tribes/barbarians/conf:169
+#: ../../../tribes/barbarians/conf:170
 msgid "Coal mine"
 msgstr "Kolenmijn"
 
-#: ../../../tribes/barbarians/conf:170
+#: ../../../tribes/barbarians/conf:171
 msgid "Deeper Gold Mine"
 msgstr "Diepere goudmijn"
 
-#: ../../../tribes/barbarians/conf:171
+#: ../../../tribes/barbarians/conf:172
 msgid "Deeper Iron Ore Mine"
 msgstr "Diepere ijzerertsmijn"
 
-#: ../../../tribes/barbarians/conf:172
+#: ../../../tribes/barbarians/conf:173
 msgid "Deep Gold Mine"
 msgstr "Diepe goudmijn"
 
-#: ../../../tribes/barbarians/conf:173
+#: ../../../tribes/barbarians/conf:174
 msgid "Deep Iron Ore Mine"
 msgstr "Diepe ijzerertsmijn"
 
-#: ../../../tribes/barbarians/conf:174
+#: ../../../tribes/barbarians/conf:175
 msgid "Farm"
 msgstr "Boerderij"
 
-#: ../../../tribes/barbarians/conf:175
+#: ../../../tribes/barbarians/conf:176
 msgid "Fernery"
 msgstr "Varenkwekerij"
 
-#: ../../../tribes/barbarians/conf:176
+#: ../../../tribes/barbarians/conf:177
 msgid "Fisher's Hut"
 msgstr "Vissershut"
 
-#: ../../../tribes/barbarians/conf:177
+#: ../../../tribes/barbarians/conf:178
 msgid "Gamekeeper's Hut"
 msgstr "Jachtopzichtershut"
 
-#: ../../../tribes/barbarians/conf:178
+#: ../../../tribes/barbarians/conf:179
 msgid "Gold Mine"
 msgstr "Goudmijn"
 
-#: ../../../tribes/barbarians/conf:179
+#: ../../../tribes/barbarians/conf:180
 msgid "Granite Mine"
 msgstr "Granietmijn"
 
-#: ../../../tribes/barbarians/conf:180
+#: ../../../tribes/barbarians/conf:181
 msgid "Wood Hardener"
 msgstr "Houtverharder"
 
-#: ../../../tribes/barbarians/conf:181
+#: ../../../tribes/barbarians/conf:182
 msgid "Helmsmithy"
 msgstr "Helmsmid"
 
-#: ../../../tribes/barbarians/conf:182
+#: ../../../tribes/barbarians/conf:183
 msgid "Hunter's Hut"
 msgstr "Jagershut"
 
-#: ../../../tribes/barbarians/conf:183
+#: ../../../tribes/barbarians/conf:184
 msgid "Inn"
 msgstr "Herberg"
 
-#: ../../../tribes/barbarians/conf:184
+#: ../../../tribes/barbarians/conf:185
 msgid "Lime Kiln"
 msgstr "Kalkoven"
 
-#: ../../../tribes/barbarians/conf:185
+#: ../../../tribes/barbarians/conf:186
 msgid "Lumberjack's Hut"
 msgstr "Houthakkershut"
 
-#: ../../../tribes/barbarians/conf:186
+#: ../../../tribes/barbarians/conf:187
 msgid "Metalwork Shop"
 msgstr "Metaalbewerkerij"
 
-#: ../../../tribes/barbarians/conf:187
+#: ../../../tribes/barbarians/conf:188
 msgid "Micro Brewery"
 msgstr "Kleine brouwerij"
 
-#: ../../../tribes/barbarians/conf:188
+#: ../../../tribes/barbarians/conf:189
 msgid "Iron Ore Mine"
 msgstr "IJzerertsmijn"
 
-#: ../../../tribes/barbarians/conf:189
+#: ../../../tribes/barbarians/conf:190
 msgid "Quarry"
 msgstr "Steengroeve"
 
-#: ../../../tribes/barbarians/conf:190
+#: ../../../tribes/barbarians/conf:191
 msgid "Ranger's Hut"
 msgstr "Boswachtershut"
 
-#: ../../../tribes/barbarians/conf:191
+#: ../../../tribes/barbarians/conf:192
 msgid "Smelting Works"
 msgstr "Hoogoven"
 
-#: ../../../tribes/barbarians/conf:192
+#: ../../../tribes/barbarians/conf:193
 msgid "Tavern"
 msgstr "Kroeg"
 
-#: ../../../tribes/barbarians/conf:193
+#: ../../../tribes/barbarians/conf:194
 msgid "Weaving-Mill"
 msgstr "Weverij"
 
-#: ../../../tribes/barbarians/conf:194
+#: ../../../tribes/barbarians/conf:195
 msgid "Well"
 msgstr "Put"
 
-#: ../../../tribes/barbarians/conf:197
+#: ../../../tribes/barbarians/conf:198
 msgid "Headquarters medium"
 msgstr "Gemiddeld hoofdkwartier"
 
-#: ../../../tribes/barbarians/conf:198
+#: ../../../tribes/barbarians/conf:199
 msgid "Citadel village"
 msgstr "Citadeldorp"
 

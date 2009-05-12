@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3725\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-03-18 22:53+0000\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
 "PO-Revision-Date: YYYY-MM-DD hh:mm+ZZZZ\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,37 +30,25 @@ msgstr "Imperiet - Månaderna i exil"
 msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
 msgstr ""
 
-#: ../../campaigns/cconfig:50
+#: ../../campaigns/cconfig:51
 msgid "Tutorial1 - Eyes in the Dark"
 msgstr "Lektion1 - Ögon i mörkret"
 
-#: ../../campaigns/cconfig:52
-msgid "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic gameplay and control as well as basic production buildings (wood, stone, etc.) will be introduced."
-msgstr "Första uppdraget i barbarernas lektionskampanj. I denna lektionen introduceras grundläggande spelsätt och kontroll såväl som grundläggande producerande byggnader (trä, sten, etc)."
-
-#: ../../campaigns/cconfig:57
+#: ../../campaigns/cconfig:56
 msgid "Tutorial2 - A Place to call Home"
 msgstr "Lektion2 - En plats att kalla Hemma"
 
-#: ../../campaigns/cconfig:59
-msgid "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the higher production buildings, including mining and the military expansions will be introduced."
-msgstr "Andra uppdraget i barbarernas lektionskampanj."
+#: ../../campaigns/cconfig:61
+msgid "Tutorial3 - This land is our land"
+msgstr ""
 
-#: ../../campaigns/cconfig:65
+#: ../../campaigns/cconfig:68
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
 msgstr "Imperiet Lektion1 - Skeppsbrott på Malac' Mor"
 
-#: ../../campaigns/cconfig:67
-msgid "After losing an important battle against the barbarians, which leads to the forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to start a new life. But his destiny takes his ship into a heavy storm, which nearly desctructs the ship. Only with lot of luck he can save his people and the damaged ship on a unknown desert strand."
-msgstr ""
-
-#: ../../campaigns/cconfig:72
+#: ../../campaigns/cconfig:73
 msgid "Empire Tutorial2 - An outpost for exile"
 msgstr "Imperiet Lektion2 - En utpost för exil"
-
-#: ../../campaigns/cconfig:74
-msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediteran island, looking like paradise."
-msgstr "Till slut blev båten reparerad, Lutius och hans folk begav sig återigen på sitt sökande efter en bra början. Bara några dagar senare går dom iland på en grön, medelhavs ö, liknande ett paradis."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -318,3 +306,12 @@ msgstr ""
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid "It seems as if this magical valley was inhabitated by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can you tribe live in peace with your neighbours?"
 msgstr ""
+
+#~ msgid "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic gameplay and control as well as basic production buildings (wood, stone, etc.) will be introduced."
+#~ msgstr "Första uppdraget i barbarernas lektionskampanj. I denna lektionen introduceras grundläggande spelsätt och kontroll såväl som grundläggande producerande byggnader (trä, sten, etc)."
+
+#~ msgid "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the higher production buildings, including mining and the military expansions will be introduced."
+#~ msgstr "Andra uppdraget i barbarernas lektionskampanj."
+
+#~ msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediteran island, looking like paradise."
+#~ msgstr "Till slut blev båten reparerad, Lutius och hans folk begav sig återigen på sitt sökande efter en bra början. Bara några dagar senare går dom iland på en grön, medelhavs ö, liknande ett paradis."

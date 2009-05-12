@@ -1,26 +1,29 @@
 # Widelands po/pl_PL/campaigns/emp02.wmf.po
 # Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Stanislaw Gackowski <soeb@soeb.eu>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3825\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-16 19:21+0000\n"
-"PO-Revision-Date: 2009-03-18 18:10+0100\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"PO-Revision-Date: 2009-05-10 19:08+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+# Military?
 #: ../../../campaigns/emp02.wmf/elemental:9
+#, fuzzy
 msgid "Empire Tutorial2 - An outpost for exile"
-msgstr ""
+msgstr "Samouczek Imperium 2 - Placówka na wygnaniu"
 
 #: ../../../campaigns/emp02.wmf/elemental:11
-msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediteran island, looking like paradise."
-msgstr ""
+#, fuzzy
+msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediterranean island, looking like paradise."
+msgstr "W końcu łódź była naprawiona, także Lucjusz i jego ludzie znowu wydali się za poszukiwaniem dobrego miejsca dla nowego początku. Tylko pare dni później wylądawali na zielonej, śródziemniej wyspie, wyglądającej jak raj."
 
 #: ../../../campaigns/emp02.wmf/event:109
 #: ../../../campaigns/emp02.wmf/event:136
@@ -34,8 +37,9 @@ msgid "Diary of Lutius"
 msgstr "Dziennik Lucjusza"
 
 #: ../../../campaigns/emp02.wmf/event:111
+#, fuzzy
 msgid " \"Finally! This island appears to be made for us, it is a gift from the Gods to my people and myself.<br> Until now, we have only seen a small part of this island, but this part alone is already bringing sunlight in my mind. I feel as if we have found a priceless treasure, a land like paradise.<br> On this island, we will start our new life. We will build up an outpost for our exile, which perhaps will become a new, beautiful home for every one of us.\" "
-msgstr ""
+msgstr " \"W końcu! Ta wyspa wygląda, jakby była darem Bogów dla moich ludzi i dla mnie.<br> W tej chwili, widzieliśmy tylko mały kawałek tej wyspy, ale sama ta część, rozwesela moją myśl. Mam wrażenie, że znaleźliśmy bezcenny skarb, wyspa jak raj.<br> Na tej wyspie, zaczniemy nowe życie. Zbudujemy placówkę na naszym wygnaniu, która może się stanie nowym, pięknym domem, dla każdego z nas.\""
 
 #: ../../../campaigns/emp02.wmf/event:113
 msgid "A new island"
@@ -47,7 +51,7 @@ msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:139
 msgid "* Build three lumberjack's houses, a forester's house and a sawmill."
-msgstr ""
+msgstr "* Zbuduuj trzy chatki drwala, leśniczówkę i tartak."
 
 #: ../../../campaigns/emp02.wmf/event:141
 msgid "The green forests"
@@ -60,7 +64,7 @@ msgstr ""
 #: ../../../campaigns/emp02.wmf/event:172
 #: ../../../campaigns/emp02.wmf/objective:17
 msgid "* Build a quarry to the south of your headquarters."
-msgstr ""
+msgstr "* Zbuduj kamieniołom na południe od kwatery głównej."
 
 #: ../../../campaigns/emp02.wmf/event:174
 msgid "The rocks"
@@ -68,7 +72,7 @@ msgstr "Skały"
 
 #: ../../../campaigns/emp02.wmf/event:192
 msgid " \"Good news! Today our wood economy was completed. Now we can be sure to have enough wood for our future building projects.\" "
-msgstr ""
+msgstr " \"Dobre wieści! Dzisiaj nasza drzewna gospodarka została dokończona. Teraz jesteśmy pewni, że mamy wystarczająca drzewa na nasze przyszłe budynki.\" "
 
 #: ../../../campaigns/emp02.wmf/event:194
 msgid "Wood for the colony"
@@ -76,7 +80,7 @@ msgstr "Drzewo dla kolonii"
 
 #: ../../../campaigns/emp02.wmf/event:207
 msgid " \"Great, today the building of the quarry was completed. Now we get enough stone to construct larger buildings.\" "
-msgstr ""
+msgstr " \"Świetnie, budowa kamieniołomu była dzisiaj dokończona. Teraz mamy wystarczająca dużo kamienia aby budować większe budynki.\" "
 
 #: ../../../campaigns/emp02.wmf/event:209
 msgid "Stone for the colony"
@@ -93,11 +97,11 @@ msgstr ""
 #: ../../../campaigns/emp02.wmf/event:241
 #: ../../../campaigns/emp02.wmf/objective:25
 msgid "* Build some barracks and sentries around the colony."
-msgstr ""
+msgstr "* Zbuduj baraki i strażnice dookoła kolonii."
 
 #: ../../../campaigns/emp02.wmf/event:243
 msgid "Dangerous shipparts"
-msgstr ""
+msgstr "Niebezpieczne resztki statku"
 
 #: ../../../campaigns/emp02.wmf/event:280
 msgid "Saledus smiles"
@@ -110,15 +114,15 @@ msgstr ""
 #: ../../../campaigns/emp02.wmf/event:283
 #: ../../../campaigns/emp02.wmf/objective:33
 msgid "* Expand to the east, to start mining marble from the mountain."
-msgstr ""
+msgstr "* Rozszerz się na wschód, aby zacząć wykopywać marmur z góry."
 
 #: ../../../campaigns/emp02.wmf/event:285
 msgid "Marble on the mountain"
-msgstr ""
+msgstr "Marmur w górach"
 
 #: ../../../campaigns/emp02.wmf/event:329
 msgid "Saledus is amazed"
-msgstr ""
+msgstr "Saledus jest zdumiony"
 
 #: ../../../campaigns/emp02.wmf/event:331
 msgid " \"By the Gods, this is an unbelievable strike of fortune! There are two more mountains and it seems that one has a large quantity of coal and the other of iron ore. We should immediately start to build iron ore and coal mines (or at least charcoal burners), smelting works, toolsmith's shops, armour and weapon smithies.<br> However: for all these bigger buildings, we need better and more elegant building materials. So, let's build<br> a stonemason, who cuts columns from marble.<br> After all, now we can begin living as we did in Fremil.\"<br><br>-- NEW OBJECTIVE --<br> "
@@ -126,7 +130,7 @@ msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:332
 msgid "* Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner, iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
-msgstr ""
+msgstr "* Zbuduj kamieniarz a potem dokończ górniczą i produkcyjną infrastukturę (kopalnię węgla i/lub piec do węgla drzewnego, kopalnie rudy żelaza,  pracownie rzemieślnik, zbrojmistrza i hutę)."
 
 #: ../../../campaigns/emp02.wmf/event:334
 msgid "Further mountains"
@@ -154,31 +158,31 @@ msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:513
 msgid "* Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier. To watch deep inside the enemy territory, build a tower."
-msgstr ""
+msgstr "* Zbuduj wiekszę wojskowe budynki, takie jak bariera, wieża czy placówka na wschodnim froncie. Żeby zobaczyj dalej do terytorium wroga, zbuduj wieżę."
 
 #: ../../../campaigns/emp02.wmf/event:515
 msgid "The Barbarians"
-msgstr ""
+msgstr "Barbarzyńcy"
 
 #: ../../../campaigns/emp02.wmf/event:554
 msgid " \"That's good. The first large military building is complete and the mining infrastructure is getting better and better. Now we should think of preparing ourselves for battle.\"<br><br>-- NEW OBJECTIVES --<br> "
-msgstr ""
+msgstr " \"To dobrze. Pierwsza wojskowa budowla jest gotowa, a infrastruktura górnictwa z dnia na dzień wygląda lepiej. Mielibyśmy się zacząć przygotowywać na bitwę.\"<br><br>-- NOWE CELE --<br> "
 
 #: ../../../campaigns/emp02.wmf/event:555
 msgid "* As soon as you have enough soldiers, attack and completely destroy the barbarian buildings.<br>"
-msgstr ""
+msgstr "* Kiedy tylko masz wystarczająco dużo żołnierzy, zaatakuj i zniszcz wszystkie budynki barbarzyńców.<br>"
 
 #: ../../../campaigns/emp02.wmf/event:556
 msgid "* Finally, build up a fortress on the peninsula<br> (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
-msgstr ""
+msgstr "* Na koniec zbuduj fortecę na półwyspie<br> (blizko miejsca gdzie kwatera główna barbarzyńców wcześniej stała), aby się upewnić że inne plemiona nie będą tworzyć osady w tym miejscu."
 
 #: ../../../campaigns/emp02.wmf/event:558
 msgid "Command for Attack"
-msgstr ""
+msgstr "Rozkad do ataku"
 
 #: ../../../campaigns/emp02.wmf/event:579
 msgid " \"Today is a proud day. We have fought for our new home and risen victorious.<br> There are still a few barbarians hiding on our island, but I am sure that we will find them soon.<br> Every barbarian who doesn't attack us will be put in a boat with the other peaceful ones, and sent back to their country.\"<br><br>--------------------- VICTORY! ----------------------"
-msgstr ""
+msgstr " \"Dzisiaj jest dumny dzień. Walczyliśmy za nasz nowy dom i wygraliśmy.<br> Cały czas paru barbarzyńców się chowa na naszej wyspie, ale jestem pewien, że w krótce ich znajdziemy.<br> Każdy barbarzyńca, który na nas nie zaatakuje, będzie wysłany na łodzi, razem z innymi pokojowymi, do swojego kraju.\"<br><br>--------------------- ZWYCIĘSTWO! ----------------------"
 
 #: ../../../campaigns/emp02.wmf/event:581
 msgid "Victory"
@@ -190,7 +194,7 @@ msgstr "7 dni pózniej..."
 
 #: ../../../campaigns/emp02.wmf/event:594
 msgid "As time is running by"
-msgstr ""
+msgstr "Kiedy czas leci do przodyu"
 
 #: ../../../campaigns/emp02.wmf/event:598
 msgid "OK"
@@ -210,7 +214,7 @@ msgstr "Amalea się uśmiecha"
 
 #: ../../../campaigns/emp02.wmf/event:622
 msgid " \"Greetings, my friend, I just visited our new tavern<br> 'At the palms'. The beer they serve is really tasty. You really should take a drink there, too.<br> It is good to see that we have now got a warmer and more familiar environment on our island.<br> Thank you, Lutius.\" "
-msgstr ""
+msgstr " \"Witaj mój przyjacielu, właśnie wróciłam z nowej tawerny<br> 'Pod palmami'. Piwo które tam serwuję jest na prawdę świetne. Myślę że też byś się tam miał napić.<br> Dobrze widzieć że teraz mamy cieplejsze i bardziej znane środowisko na naszej wyspie.<br> Dziekuję Lucjusz.\" "
 
 #: ../../../campaigns/emp02.wmf/event:624
 msgid "Our new tavern"
@@ -218,7 +222,7 @@ msgstr "Nasza nowa tawerna"
 
 #: ../../../campaigns/emp02.wmf/objective:7
 msgid "Build up a wood economy"
-msgstr ""
+msgstr "Wytwórz gospodarkę dzrewną"
 
 #: ../../../campaigns/emp02.wmf/objective:9
 msgid "* Build up three lumberjack's houses, a forester's house and a sawmill."
@@ -234,15 +238,15 @@ msgstr "Oboń swoją kolonie"
 
 #: ../../../campaigns/emp02.wmf/objective:31
 msgid "Start mining marble"
-msgstr ""
+msgstr "Zacznij wydobywać marmur"
 
 #: ../../../campaigns/emp02.wmf/objective:39
 msgid "Build a stonemason and mining infrastructure"
-msgstr ""
+msgstr "Zbuduj kamieniarza i górniczą infrastrukturę"
 
 #: ../../../campaigns/emp02.wmf/objective:41
 msgid "* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
-msgstr ""
+msgstr "* Zbuduj pracownię kamieniarza i potem dokończ infrastrukturę górnictwa i produkcji (kopalnia węgla i/lub piec do węgla drzewnego,<br> kopalnie rudy żelaza, pracownię rzemieślnika, snycerza, płatnerz i hutę)."
 
 #: ../../../campaigns/emp02.wmf/objective:47
 msgid "Provide your miners with food"
@@ -254,20 +258,20 @@ msgstr ""
 
 #: ../../../campaigns/emp02.wmf/objective:55
 msgid "Protect your eastern frontier"
-msgstr ""
+msgstr "Ohroń swój wschodni front"
 
 #: ../../../campaigns/emp02.wmf/objective:57
 msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a tower, on the eastern frontier."
-msgstr ""
+msgstr "* Zbuduj większe wojskowe budynki, takie jak placówki i bariery<br> lub wieże, na wschodnim froncie."
 
 #: ../../../campaigns/emp02.wmf/objective:63
 msgid "Destroy the barbarian tribe"
-msgstr ""
+msgstr "Zniscz plemię barbarzyńców"
 
 #: ../../../campaigns/emp02.wmf/objective:65
 msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>"
-msgstr ""
+msgstr "* Kiedy tylko masz wystarczająco dużo żołnierzy, zaatakuj i usuń wszystkie budynki barbarzyńców.<br>"
 
 #: ../../../campaigns/emp02.wmf/objective:66
 msgid "* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
-msgstr ""
+msgstr "* Na koniec zbuduj fortecę na języku wyspy (blizko miejsca gdzie stała kwatera główna barbarzyńców), aby zabronić budowie nowych osad w tym regionie."

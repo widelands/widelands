@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3825\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-16 19:21+0000\n"
-"PO-Revision-Date: 2009-04-02 18:51+0100\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"PO-Revision-Date: 2009-04-18 13:06+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -37,11 +37,11 @@ msgstr "Samouczek 1 - Oczy w mroku"
 
 #: ../../campaigns/cconfig:56
 msgid "Tutorial2 - A Place to call Home"
-msgstr "Samouczek 2 - Miejsce, które nazwać domem"
+msgstr "Samouczek 2 - Miejsce do nazwania domem"
 
 #: ../../campaigns/cconfig:61
 msgid "Tutorial3 - This land is our land"
-msgstr ""
+msgstr "Samouczek 3 - Ta krajina jest naszą krajiną"
 
 #: ../../campaigns/cconfig:68
 msgid "Empire Tutorial1 - The strands of Malac' Mor"

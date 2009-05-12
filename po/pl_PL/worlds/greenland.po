@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3825\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-16 19:21+0000\n"
-"PO-Revision-Date: 2008-10-26 13:01+0100\n"
-"Last-Translator: Jacek Wolszczak <shutdownrunner@o2.pl>\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"PO-Revision-Date: 2009-04-17 19:20+0100\n"
+"Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,7 +43,6 @@ msgid "Dead Tree"
 msgstr "Martwe drzewo"
 
 #: ../../../worlds/greenland/conf:18
-#, fuzzy
 msgid "Fallen Tree"
 msgstr "Martwe drzewo"
 
@@ -82,131 +81,131 @@ msgstr "Kamienie"
 
 #: ../../../worlds/greenland/conf:46
 msgid "Aspen"
-msgstr ""
+msgstr "Topola"
 
 #: ../../../worlds/greenland/conf:47
 msgid "Aspen medium"
-msgstr ""
+msgstr "Średnia topola"
 
 #: ../../../worlds/greenland/conf:48
 msgid "Aspen small"
-msgstr ""
+msgstr "Mała topola"
 
 #: ../../../worlds/greenland/conf:49
 msgid "Aspen tiny"
-msgstr ""
+msgstr "Malutka topola"
 
 #: ../../../worlds/greenland/conf:50
 msgid "Oak"
-msgstr ""
+msgstr "Dąb"
 
 #: ../../../worlds/greenland/conf:51
 msgid "Oak medium"
-msgstr ""
+msgstr "Średni dąb"
 
 #: ../../../worlds/greenland/conf:52
 msgid "Oak small"
-msgstr ""
+msgstr "Mały dąb"
 
 #: ../../../worlds/greenland/conf:53
 msgid "Oak tiny"
-msgstr ""
+msgstr "Malutki dąb"
 
 #: ../../../worlds/greenland/conf:54
 msgid "Spruce"
-msgstr ""
+msgstr "Świerk"
 
 #: ../../../worlds/greenland/conf:55
 msgid "Spruce medium"
-msgstr ""
+msgstr "Średni świerk"
 
 #: ../../../worlds/greenland/conf:56
 msgid "Spruce small"
-msgstr ""
+msgstr "Mały świerk"
 
 #: ../../../worlds/greenland/conf:57
 msgid "Spruce tiny"
-msgstr ""
+msgstr "Malutki świerk"
 
 #: ../../../worlds/greenland/conf:58
 msgid "Alder"
-msgstr ""
+msgstr "Olsza"
 
 #: ../../../worlds/greenland/conf:59
 msgid "Alder medium"
-msgstr ""
+msgstr "Średnia olsza"
 
 #: ../../../worlds/greenland/conf:60
 msgid "Alder small"
-msgstr ""
+msgstr "Mała olsza"
 
 #: ../../../worlds/greenland/conf:61
 msgid "Alder tiny"
-msgstr ""
+msgstr "Malutka olsza"
 
 #: ../../../worlds/greenland/conf:62
 msgid "Birch"
-msgstr ""
+msgstr "Brzoza"
 
 #: ../../../worlds/greenland/conf:63
 msgid "Birch medium"
-msgstr ""
+msgstr "Średnia brzoza"
 
 #: ../../../worlds/greenland/conf:64
 msgid "Birch small"
-msgstr ""
+msgstr "Mała brzoza"
 
 #: ../../../worlds/greenland/conf:65
 msgid "Birch tiny"
-msgstr ""
+msgstr "Malutka brzoza"
 
 #: ../../../worlds/greenland/conf:66
 msgid "Beech"
-msgstr ""
+msgstr "Buk"
 
 #: ../../../worlds/greenland/conf:67
 msgid "Beech medium"
-msgstr ""
+msgstr "Średni buk"
 
 #: ../../../worlds/greenland/conf:68
 msgid "Beech small"
-msgstr ""
+msgstr "Mały buk"
 
 #: ../../../worlds/greenland/conf:69
 msgid "Beech tiny"
-msgstr ""
+msgstr "Malutki buk"
 
 #: ../../../worlds/greenland/conf:70
 msgid "Larch"
-msgstr ""
+msgstr "Modrzew"
 
 #: ../../../worlds/greenland/conf:71
 msgid "Larch medium"
-msgstr ""
+msgstr "Średni modrzew"
 
 #: ../../../worlds/greenland/conf:72
 msgid "Larch small"
-msgstr ""
+msgstr "Mały modrzew"
 
 #: ../../../worlds/greenland/conf:73
 msgid "Larch tiny"
-msgstr ""
+msgstr "Malutki modrzew"
 
 #: ../../../worlds/greenland/conf:74
 msgid "Rowan"
-msgstr ""
+msgstr "Jarząb"
 
 #: ../../../worlds/greenland/conf:75
 msgid "Rowan medium"
-msgstr ""
+msgstr "Średni jarząb"
 
 #: ../../../worlds/greenland/conf:76
 msgid "Rowan small"
-msgstr ""
+msgstr "Mały jarząb"
 
 #: ../../../worlds/greenland/conf:77
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Malutki jarząb"
 
 #: ../../../worlds/greenland/conf:80
 msgid "Badger"

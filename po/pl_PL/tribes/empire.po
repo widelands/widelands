@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3825\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-16 19:21+0000\n"
-"PO-Revision-Date: 2008-10-26 11:21+0100\n"
-"Last-Translator: Jacek Wolszczak <shutdownrunner@o2.pl>\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"PO-Revision-Date: 2009-04-17 18:31+0100\n"
+"Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,89 +29,87 @@ msgstr "Oto cywilizacja rzymskiego Impreium."
 
 #: ../../../tribes/empire/conf:36
 msgid "Ashes"
-msgstr ""
+msgstr "Popiół"
 
 #: ../../../tribes/empire/conf:37
 msgid "Field medium"
-msgstr ""
+msgstr "Średnie pole"
 
 #: ../../../tribes/empire/conf:38
 msgid "Field small"
-msgstr ""
+msgstr "Małe pole"
 
 #: ../../../tribes/empire/conf:39
 msgid "Field tiny"
-msgstr ""
+msgstr "Rosnące pole"
 
 #: ../../../tribes/empire/conf:40
 msgid "Field ripe"
-msgstr ""
+msgstr "Dojrzałe pole"
 
 #: ../../../tribes/empire/conf:41
 msgid "Field harvested"
-msgstr ""
+msgstr "Zebrane pole"
 
 #: ../../../tribes/empire/conf:42
 msgid "Destroyed building"
-msgstr ""
+msgstr "Zniszczony budynek"
 
 #: ../../../tribes/empire/conf:43
 msgid "Resource indicator coal little"
-msgstr ""
+msgstr "Wskaźnik zasobów mało węgla"
 
 #: ../../../tribes/empire/conf:44
 msgid "Resource indicator coal much"
-msgstr ""
+msgstr "Wskaźnik zasobów dużo węgla"
 
 #: ../../../tribes/empire/conf:45
 msgid "Resource indicator gold litte"
-msgstr ""
+msgstr "Wskaźnik zasobów mało złota"
 
 #: ../../../tribes/empire/conf:46
 msgid "Resource indicator gold much"
-msgstr ""
+msgstr "Wskaźnik zasobów dużo złota"
 
 #: ../../../tribes/empire/conf:47
 msgid "Resource indicator granit little"
-msgstr ""
+msgstr "Wskaźnik zasobów mało granitu"
 
 #: ../../../tribes/empire/conf:48
 msgid "Resource indicator granit much"
-msgstr ""
+msgstr "Wskaźnik zasobów dużo granitu"
 
 #: ../../../tribes/empire/conf:49
 msgid "Resource indicator iron little"
-msgstr ""
+msgstr "Wskaźnik zasobów mało żelaza"
 
 #: ../../../tribes/empire/conf:50
 msgid "Resource indicator iron much"
-msgstr ""
+msgstr "Wskaźnik zasobów dużo żelaza"
 
 #: ../../../tribes/empire/conf:51
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "Wskaźnik brak zasobów"
 
 #: ../../../tribes/empire/conf:52
 msgid "Resource indicator water"
-msgstr ""
+msgstr "Wskaźnik zasobów wody"
 
 #: ../../../tribes/empire/conf:53
 msgid "Wine medium"
-msgstr ""
+msgstr "Średnie winorośle"
 
 #: ../../../tribes/empire/conf:54
 msgid "Wine small"
-msgstr ""
+msgstr "Niskie winorośle"
 
 #: ../../../tribes/empire/conf:55
-#, fuzzy
 msgid "Wine tiny"
-msgstr "Winnica"
+msgstr "Wyrastające winorośle"
 
 #: ../../../tribes/empire/conf:56
-#, fuzzy
 msgid "Wine ripe"
-msgstr "Winnica"
+msgstr "Dojrzałe winorośle"
 
 #: ../../../tribes/empire/conf:59
 msgid "Advanced Lance"
@@ -442,9 +440,8 @@ msgid "Headquarters"
 msgstr "Kwatera główna"
 
 #: ../../../tribes/empire/conf:155
-#, fuzzy
 msgid "Headquarters shipwreck"
-msgstr "Kwatera główna"
+msgstr "Kwatera główna z wraku statku"
 
 #: ../../../tribes/empire/conf:156
 msgid "Warehouse"
@@ -547,18 +544,16 @@ msgid "Smelting Works"
 msgstr "Huta"
 
 #: ../../../tribes/empire/conf:183
-#, fuzzy
 msgid "Stonemason's House"
-msgstr "Kamieniarz"
+msgstr "Pracownia kamieniarza"
 
 #: ../../../tribes/empire/conf:184
 msgid "Tavern"
 msgstr "Tawerna"
 
 #: ../../../tribes/empire/conf:185
-#, fuzzy
 msgid "Toolsmithy"
-msgstr "Rzemieślnik"
+msgstr "Pracownia rzemieślnika"
 
 #: ../../../tribes/empire/conf:186
 msgid "Weapon Smithy"
@@ -581,14 +576,12 @@ msgid "Vineyard"
 msgstr "Plantacja winorośli"
 
 #: ../../../tribes/empire/conf:193
-#, fuzzy
 msgid "Headquarters medium"
-msgstr "Kwatera główna"
+msgstr "Wioska z kwaterą główną (średnia)"
 
 #: ../../../tribes/empire/conf:194
-#, fuzzy
 msgid "Castle village"
-msgstr "Zamek"
+msgstr "Wioska z zamekiem (duża)"
 
 #~ msgid "Toolsmith's Shop"
 #~ msgstr "Warsztat"

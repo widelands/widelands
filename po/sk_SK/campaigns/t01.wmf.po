@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:41+0000\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
 "PO-Revision-Date: 2006-03-03 15:10+0100\n"
 "Last-Translator: Ike <ike@zoznam.sk>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -16,212 +16,223 @@ msgstr ""
 "X-Poedit-Language: czech\n"
 "X-Poedit-Country: czech republic\n"
 
-#: ../../../campaigns/t01.wmf/event:10
+#: ../../../campaigns/t01.wmf/elemental:7
+msgid "Tutorial1 - Eyes in the Dark"
+msgstr ""
+
+#: ../../../campaigns/t01.wmf/elemental:9
+msgid "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic gameplay and control as well as basic production buildings (wood, stone, etc.) will be introduced."
+msgstr ""
+
+#: ../../../campaigns/t01.wmf/event:23
 #, fuzzy
 msgid "Thron sighs..."
 msgstr "Hovorí Thorn"
 
-#: ../../../campaigns/t01.wmf/event:12
+#: ../../../campaigns/t01.wmf/event:25
 #, fuzzy
-msgid " \"It's been months and we are still hiding where the forests are old and dark.<br> My warriors hunt at day and lay awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
+msgid " \"It's been months and we are still hiding where the forests are old and dark.<br> My warriors hunt at day and lie awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
 msgstr "Už sú to celé mesiace a stále sa ukrývame v temných a starých lesoch. Moji bojovníci cez deň lovia a v noci nemôžu spať - počúvajú zvuky krutého krvipreliatia, ktoré k nám znie z ďaleka, pomedzi prastaré stromy."
 
-#: ../../../campaigns/t01.wmf/event:14 ../../../campaigns/t01.wmf/event:27
-#: ../../../campaigns/t01.wmf/event:40 ../../../campaigns/t01.wmf/event:53
+#: ../../../campaigns/t01.wmf/event:27 ../../../campaigns/t01.wmf/event:40
+#: ../../../campaigns/t01.wmf/event:53 ../../../campaigns/t01.wmf/event:66
 #, fuzzy
 msgid "The story begins"
 msgstr "Príbeh začína"
 
-#: ../../../campaigns/t01.wmf/event:19 ../../../campaigns/t01.wmf/event:32
-#: ../../../campaigns/t01.wmf/event:45 ../../../campaigns/t01.wmf/event:58
-#: ../../../campaigns/t01.wmf/event:97 ../../../campaigns/t01.wmf/event:113
-#: ../../../campaigns/t01.wmf/event:128 ../../../campaigns/t01.wmf/event:144
-#: ../../../campaigns/t01.wmf/event:159 ../../../campaigns/t01.wmf/event:175
-#: ../../../campaigns/t01.wmf/event:190 ../../../campaigns/t01.wmf/event:220
-#: ../../../campaigns/t01.wmf/event:235 ../../../campaigns/t01.wmf/event:250
-#: ../../../campaigns/t01.wmf/event:265 ../../../campaigns/t01.wmf/event:297
+#: ../../../campaigns/t01.wmf/event:32 ../../../campaigns/t01.wmf/event:45
+#: ../../../campaigns/t01.wmf/event:58 ../../../campaigns/t01.wmf/event:71
+#: ../../../campaigns/t01.wmf/event:110 ../../../campaigns/t01.wmf/event:126
+#: ../../../campaigns/t01.wmf/event:141 ../../../campaigns/t01.wmf/event:157
+#: ../../../campaigns/t01.wmf/event:172 ../../../campaigns/t01.wmf/event:188
+#: ../../../campaigns/t01.wmf/event:203 ../../../campaigns/t01.wmf/event:233
+#: ../../../campaigns/t01.wmf/event:248 ../../../campaigns/t01.wmf/event:263
+#: ../../../campaigns/t01.wmf/event:278 ../../../campaigns/t01.wmf/event:310
 msgid "OK"
 msgstr "OK"
 
-#: ../../../campaigns/t01.wmf/event:25
+#: ../../../campaigns/t01.wmf/event:38
 #, fuzzy
-msgid " \"We can see the raging flames that swallow Al'thunran, miles away, from here.<br> The red lights flash in the darkness and dance to the rhythm of the wardrums that haunt me even in my nightmares.\" "
+msgid " \"We can see the raging flames that swallow Al'thunran from here, miles away.<br> The red lights flash in the darkness and dance to the rhythm of the wardrums that haunt me even in my nightmares.\" "
 msgstr "Míle ďaleko, míle odťialto, stále vidíme besné plamene,  ktoré pohlcujú Al'thunran. Krvavé odrazy blýskajú na nočnom nebi a tancujú v rytme vojny. Ich zvuk ma desí aj v mojich nočných morách."
 
-#: ../../../campaigns/t01.wmf/event:38
+#: ../../../campaigns/t01.wmf/event:51
 #, fuzzy
 msgid " \"My father's bones lay peacefully in the grounds he cleared from the senseless bloodspilling that has once risen among us.<br> Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, not to let greed or despair destroy our bonds as well.\" "
 msgstr "Kosti môjho otca už odpočívajú v pokoji v zemi, ktorú očistil od nezmyselného krviprelievania, ktoré vládlo medzi nami. .<br>Boldreth, môj verný priateľ, mi je oporou a zdrojom pokoja v týchto ťažkých časoch. Povzbudzuje mňa aj mojích bojovníkov, ktorí nemôžu spať, nedovolí, aby lakomosť či zúfalstvo zničilo naše sľuby."
 
-#: ../../../campaigns/t01.wmf/event:51
+#: ../../../campaigns/t01.wmf/event:64
 #, fuzzy
-msgid " \"As father told me, there will be times to fight and times to lay and wait, trying not to sleep or die before the right time comes. And so I do... wait.\" "
+msgid " \"As father told me, there will be times to fight and times to lie and wait, trying not to sleep or die before the right time comes. And so I do... wait.\" "
 msgstr "Otec mi povedal, že prídu časy vojny a časy pokoja a čakania, snahy nezamdlieť a nepadnúť pred tým, ako znova príde tá chvíľa. A tak aj ja... čakám."
 
-#: ../../../campaigns/t01.wmf/event:89
+#: ../../../campaigns/t01.wmf/event:102
 #, fuzzy
 msgid "An old man says..."
 msgstr "Pristúpil k tebe starý muž..."
 
-#: ../../../campaigns/t01.wmf/event:91
-msgid " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my council through these darkened days.\" "
+#: ../../../campaigns/t01.wmf/event:104
+#, fuzzy
+msgid " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my counsel through these darkened days.\" "
 msgstr " \"Buď pozdravený, veliteľ. Som Khantrukh a prežil som už mnoho zím. Dovoľ mi prosím pomôcť ti radou v týchto neľahkých časoch.\" "
 
-#: ../../../campaigns/t01.wmf/event:93
+#: ../../../campaigns/t01.wmf/event:106
 msgid "Somebody comes upon to you"
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:103
+#: ../../../campaigns/t01.wmf/event:116
 msgid "Khantrukh continues..."
 msgstr "Khantrukh pokračuje..."
 
-#: ../../../campaigns/t01.wmf/event:105
+#: ../../../campaigns/t01.wmf/event:118
 #, fuzzy
 msgid " \"None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...<br> We should prepare, in case we have to face the winter in these harsh lands. I believe to the east of our campside are a few places where we could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr " \"Len samotní bohovia vedia, ako dlho tu ešte budeme musieť ostať ukrytí. Tvoji bojovníci snívajú, že budeme pochodovať víťazne späť už o pár dní, ale nemyslím, že k tomu dôjde nejak skoro. A dni sa už krátia a je stále chladnejšie...<br>Pripravme sa pre prípad, že budeme musieť čeliť zime v tejto drsnej krajine. Na východ od tábora je pár miest, kde by sme mohli vybudovať chaty pre drevorúbačov.\"<br><br>-- Nová úloha --<br>- stlač medzerník pre zobrazenie miest k stavaniu. Červené body ukazujú, kde možno vybudovať malú stavbu - ako pre drevorúbačov.<br>- postav chatu pre drevorúbačov na červenom mieste priamo vpravo od základne kliknutím a vybraním chaty pre drevorúbača."
 
-#: ../../../campaigns/t01.wmf/event:106 ../../../campaigns/t01.wmf/objective:7
-msgid "* Press SPACE to see where you can build.<br> The red spots show you, where a small building - like a lumberjack's hut - may be built.<br>"
+#: ../../../campaigns/t01.wmf/event:119 ../../../campaigns/t01.wmf/objective:7
+msgid "* Press SPACE to see where you can build.<br> The red spots show you where a small building - like a lumberjack's hut - may be built.<br>"
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:107
+#: ../../../campaigns/t01.wmf/event:120 ../../../campaigns/t01.wmf/objective:8
 msgid "* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting lumberjack's hut.<br>"
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:109 ../../../campaigns/t01.wmf/event:124
-#: ../../../campaigns/t01.wmf/event:140 ../../../campaigns/t01.wmf/event:155
-#: ../../../campaigns/t01.wmf/event:171 ../../../campaigns/t01.wmf/event:186
+#: ../../../campaigns/t01.wmf/event:122 ../../../campaigns/t01.wmf/event:137
+#: ../../../campaigns/t01.wmf/event:153 ../../../campaigns/t01.wmf/event:168
+#: ../../../campaigns/t01.wmf/event:184 ../../../campaigns/t01.wmf/event:199
 #, fuzzy
 msgid "The advisor"
 msgstr "Radca"
 
-#: ../../../campaigns/t01.wmf/event:119
+#: ../../../campaigns/t01.wmf/event:132
 msgid "The elder remarks..."
 msgstr "Starešina poznamenáva..."
 
-#: ../../../campaigns/t01.wmf/event:121
-msgid " \"Obviously, it would be too draining for our people to walk all the way to the lumberjack's hut through the wilderness. We will have to make a path between our hall and the lumberjack's hut. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
+#: ../../../campaigns/t01.wmf/event:134
+msgid " \"Obviously, it would be too draining for our people to walk all the way to the lumberjack's hut through the wilderness. We will have to make a path between our hall and the lumberjack's hut. It's not a hard guess that the men would appreciate a way as short and even as possible - the wood surely will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:122
-msgid "* Build a road between your headquarters and the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You are expected to connect it to another flag with a road.<br> If you click on a flag little symbols will appear around it to show you in which directions you can build the road.<br> The colour of those symbols indicate how steep the road will be. Green is flat, yellow is steep and red is very steep. The steeper the step is, the harder it will be for your people to walk on it.<br> You can click on any of those symbols to build the first step of the road to it. New symbols will appear to show you where the next step can go, and so on. But you can also click further away to build several steps at once. Click on the flag at the headquarters to finish the road."
+#: ../../../campaigns/t01.wmf/event:135 ../../../campaigns/t01.wmf/objective:9
+msgid "* Build a road between your headquarters and the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You should connect it to another flag with a road.<br> If you click on a flag, little symbols will appear around it to show you in which directions you can build the road.<br> The colour of those symbols indicate how steep the road will be. Green is flat, yellow is steep and red is very steep. The steeper the step is, the harder it will be for your people to walk on it.<br> You can click on any of the symbols to build the first step of the road there. New symbols will appear to show you where the next step can go, and so on. However, you can also click further away to build several steps at once. Click on the flag at the headquarters to finish the road."
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:135
+#: ../../../campaigns/t01.wmf/event:148
 #, fuzzy
 msgid "Khantrukh remembers..."
 msgstr "Hovorí Khantrukh..."
 
-#: ../../../campaigns/t01.wmf/event:137
-msgid " \"There is an old saying:<br> 'A burden divided is easier to endure.'<br> A crossroad on the way between our site and the lumberjack's hut would ease the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
+#: ../../../campaigns/t01.wmf/event:150
+msgid " \"There is an old saying:<br> 'A burden divided is easier to endure.'<br> A crossroads on the way between our site and the lumberjack's hut would ease the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:138
+#: ../../../campaigns/t01.wmf/event:151
+#: ../../../campaigns/t01.wmf/objective:17
 #, fuzzy
-msgid "* Place a flag in the mid of the road.<br> There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
+msgid "* Place a flag in the middle of the road.<br> There is a flag symbol in the mid of the way you just built. You place a flag there by clicking on the symbol and then clicking on the flag button in the consequently appearing menu. This splits the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
 msgstr " \"Poznám príslovie: 'Dvom to ide rýchlejšie.' Krížovatka na ceste medzi nami a drevorúbačom by nosičom uľahčila prácu.\"<br><br>-- Nová úloha --<br>- Uprostred práve postavenej cesty je symbol vlajky. Kliknutím na ňho si otvor menu a vyber symbol vlajky. Na cestu umiestniš vlajku a rozdelíš tak cestu nosenia dreva medzi dvoch nosičov. Keď je prenášané veľké množstvo tovaru medzi dvoma bodmi, pridaním vlajky medzi ne umožníš ich lahší a rýchlejší prenos a zlepšíš  tým infraštruktúru. Umiestni vlajku do stredu cesty."
 
-#: ../../../campaigns/t01.wmf/event:150
+#: ../../../campaigns/t01.wmf/event:163
 msgid "The old man looks to the sky..."
 msgstr "Starý muž sa zahľadí do neba..."
 
-#: ../../../campaigns/t01.wmf/event:152
+#: ../../../campaigns/t01.wmf/event:165
 #, fuzzy
-msgid " \"The northern winds tell us, the coming winter will be a long and cruel one. One lumberjack's hut will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Severné vetry nám hovoria, že zima, čo nás čaká,  bude dlhá a krutá. Jeden drevorúbač nestačí pre celý náš ľud. Dalšie stromy očakávajú naše sekery na juh od novej križovatky - pošleme tam dalších drevorúbačov!\"<br><br>-- Nová úloha --<br>- Postav chatu drevorúbača južne od vlajky, kterú umiestniš na ceste. Následne spoj spomínanú vlajku s novým drevorúbačom. Všimni si, že miesto stavania cesty kúsok po kúsku, môžeš postaviť celú cestu naraz kliknutím na cieľovú vlajku."
-
-#: ../../../campaigns/t01.wmf/event:153
-#, fuzzy
-msgid "* Place a lumberjack's hut directly south of the flag you just placed on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+msgid " \"The northern winds tell us that the coming winter will be a long and cruel one. One lumberjack's hut will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Severné vetry nám hovoria, že zima, čo nás čaká,  bude dlhá a krutá. Jeden drevorúbač nestačí pre celý náš ľud. Dalšie stromy očakávajú naše sekery na juh od novej križovatky - pošleme tam dalších drevorúbačov!\"<br><br>-- Nová úloha --<br>- Postav chatu drevorúbača južne od vlajky, kterú umiestniš na ceste. Následne spoj spomínanú vlajku s novým drevorúbačom. Všimni si, že miesto stavania cesty kúsok po kúsku, môžeš postaviť celú cestu naraz kliknutím na cieľovú vlajku."
 
 #: ../../../campaigns/t01.wmf/event:166
+#: ../../../campaigns/t01.wmf/objective:18
+#, fuzzy
+msgid "* Place a lumberjack's hut directly south of the flag you just placed on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+msgstr " \"Severné vetry nám hovoria, že zima, čo nás čaká,  bude dlhá a krutá. Jeden drevorúbač nestačí pre celý náš ľud. Dalšie stromy očakávajú naše sekery na juh od novej križovatky - pošleme tam dalších drevorúbačov!\"<br><br>-- Nová úloha --<br>- Postav chatu drevorúbača južne od vlajky, kterú umiestniš na ceste. Následne spoj spomínanú vlajku s novým drevorúbačom. Všimni si, že miesto stavania cesty kúsok po kúsku, môžeš postaviť celú cestu naraz kliknutím na cieľovú vlajku."
+
+#: ../../../campaigns/t01.wmf/event:179
 msgid "Khantrukh nods..."
 msgstr "Khantrukh prikyvuje..."
 
-#: ../../../campaigns/t01.wmf/event:168
+#: ../../../campaigns/t01.wmf/event:181
 #, fuzzy
-msgid " \"Of course, if we intended to build a bigger settlement much more lumberjack's huts would be advisable, but this should do for now.<br> But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give back again.<br> So, in order to replace the trees we chop down, we should build a ranger's hut, preferably close to the lumberjack's hut.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgid " \"Of course, if we intended to build a bigger settlement, much more lumberjack's huts would be advisable, but this should do for now.<br> But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give back again.<br> So, in order to replace the trees we chop down, we should build a ranger's hut, preferably close to the lumberjack's hut.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Samozrejme, pokiaľ chceme vybudovať väčšie sídlo, bude lepšie mať ešte omnoho viac drevorúbačov, ale toto by zatiaľ malo stačiť.<br>Ale nikdy nezabudni - tieto lesy sú tvoje dedičstvo, ktoré ti dali tvoji predkovia. Musíš ich vždy rešpektovať a starať sa o ne. Čo si berieme, musíme im tiež vrátiť.<br>Ba, aby sme nahradili stromy, ktoré sme zrúbali, pošleme tam horára, nech sa usadí čo najbližšie pri drevorubačoch.\"<br><br>-- Nová úloha --<br>- Postav chatu horára (vysádzač) na východ od prvého drevorúbača."
 
-#: ../../../campaigns/t01.wmf/event:169
+#: ../../../campaigns/t01.wmf/event:182
 #: ../../../campaigns/t01.wmf/objective:26
 #, fuzzy
 msgid "* Build a ranger's hut to the east of the first lumberjack's hut."
 msgstr "- postav chatu horára (vysádzač) na východ od drevorúbača."
 
-#: ../../../campaigns/t01.wmf/event:181
+#: ../../../campaigns/t01.wmf/event:194
 msgid "The elder speaks..."
 msgstr "Starec prehovoril..."
 
-#: ../../../campaigns/t01.wmf/event:183
+#: ../../../campaigns/t01.wmf/event:196
 #, fuzzy
-msgid " \"I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations.<br> I would advise that we obtain stones for the future - who knows what fortifications we might be forced to build very soon? And - like a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- NEW OBJECTIVE --<br> "
+msgid " \"I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations.<br> I would advise that we obtain stones for the future - who knows what fortifications we might be forced to build very soon. And - like a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Viem veľmi dobre, velitľi, že ani ty, ani tvoji bojovníci, nechcú zostať v týchto zabudnutých končínách dlho. Ale napriek tomu, naša cesta k znovuvybojovaniu našich domovov môže trvať veľmi dlho a bude múdre sa na to pripraviť. Navrhujem pre budúcnosť zhromaždiť kamene - ktovie, aké opevnenie budeme musieť čoskoro postaviť? Ako dar z neba sú tieto skaly hneď vedľa... - \"<br><br>-- Nová úloha --<br>- postav dva kameňolomy juhozápadne od základne."
 
-#: ../../../campaigns/t01.wmf/event:184
+#: ../../../campaigns/t01.wmf/event:197
 #: ../../../campaigns/t01.wmf/objective:34
 #, fuzzy
-msgid "* Build two quarries south-west of your headquarters."
+msgid "* Build two quarries southwest of your headquarters."
 msgstr "- postav dva kameňolomy juhozápadne od základne."
 
-#: ../../../campaigns/t01.wmf/event:211 ../../../campaigns/t01.wmf/event:226
+#: ../../../campaigns/t01.wmf/event:224 ../../../campaigns/t01.wmf/event:239
 msgid "Thron speaks..."
 msgstr "Hovorí Thorn"
 
-#: ../../../campaigns/t01.wmf/event:213
+#: ../../../campaigns/t01.wmf/event:226
 #, fuzzy
-msgid " \"In another sleepless night I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br> They are a constant reminder why we had to hide here... and why we must return in the end!\" "
+msgid " \"In another sleepless night, I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br> They are a constant reminder why we had to hide here... and why we must return in the end!\" "
 msgstr "Ďalšia prebdelá noc. Vyšies som na kopec a hľadel na oblohu na severe. Ohne stále horia, sýtia svoj hlad po dedičštve môjho otca.<br>Sú stálou pripomienkou, prečo sa tu musíme schovávať.<br>Stálou pripomienkou, prečo sa na konci musíme vrátiť."
 
-#: ../../../campaigns/t01.wmf/event:215
+#: ../../../campaigns/t01.wmf/event:228
 #, fuzzy
 msgid "In the night"
 msgstr "V noci..."
 
-#: ../../../campaigns/t01.wmf/event:228
+#: ../../../campaigns/t01.wmf/event:241
 #, fuzzy
-msgid " \"Once again I went up to my father's tomb, in a sacred grove at the feet of the great spire of Kal'mavrath. I just stood there and did not feel neither the hours pass nor the cold rain pouring down from a darkened sky...<br> Somehow it felt like farewell. For the first time I wondered what the future might hold for me...\" "
+msgid " \"Once again, I went up to my father's tomb, in a sacred grove at the foot of the great spire of Kal'mavrath. I just stood there and felt neither the hours pass nor the cold rain pouring down from a darkened sky...<br> Somehow it felt like a farewell. For the first time, I wondered what the future might hold for me...\" "
 msgstr "Znova som zašiel na hrob svojho otca do zasvätenej jaskyne na úpätí večnej hory Kal'mavrath. Len som stál a necítil nič, hodiny okolo mňa ubiehali, studený dážď na mňa padal z temnej oblohy....<br>Cítil som sa akoby som bol ďaleko. Prvýkrát som sa zamyslel nad tým, čo pre mňa budúcnosť pripravuje."
 
-#: ../../../campaigns/t01.wmf/event:230
+#: ../../../campaigns/t01.wmf/event:243
 msgid "At the grave"
 msgstr "Pri hrobe"
 
-#: ../../../campaigns/t01.wmf/event:241
+#: ../../../campaigns/t01.wmf/event:254
 msgid "Thron says thoughtfully..."
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:243
+#: ../../../campaigns/t01.wmf/event:256
 #, fuzzy
-msgid " \"Some time ago, Boldreth came to me. His advise was to move to some place closer home - to strike at the first sign of my brothers forces wavering.<br> But I look over the forests and I still see black smoke rising to the sky and I know - it is too early yet and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed a too rash return would cause both on our and the other side...\" "
+msgid " \"Some time ago, Boldreth came to me. His advice was to move to a place closer to home - to strike at the first sign of my brother's forces wavering.<br> But I look over the forests and I still see black smoke rising to the sky. I know - it is too early yet, and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed that too rash a return would cause both on our and the other side...\" "
 msgstr "Pred časom za mnou prišiel Boldreth. Radil mi presunúť sa niekam bližšie k domovu - aby sme mohli uderiť rýchlo, po prvej známke toho, že sily mojich bratov upadajú.<br>Ale ja som sa pozrel na nebo ponad vrcholky stromov, smerom k domu, a vedel som - nie, ešte je príliš skoro a naše túžby sa ešte nemajú naplniť. Možno má pravdu, ale bojím sa zbytočneho krvipreliatia, ktoré by náš predčasný návrat vyvolal na oboch stranách..."
 
-#: ../../../campaigns/t01.wmf/event:245
+#: ../../../campaigns/t01.wmf/event:258
 #, fuzzy
 msgid "The other day"
 msgstr "Deň potom..."
 
-#: ../../../campaigns/t01.wmf/event:256
+#: ../../../campaigns/t01.wmf/event:269
 #, fuzzy
 msgid "Thron looks furious..."
 msgstr "Starý muž sa zahľadí do neba..."
 
-#: ../../../campaigns/t01.wmf/event:258
+#: ../../../campaigns/t01.wmf/event:271
 #, fuzzy
 msgid " \"Today, my warriors picked up an old man, wandering sick and wounded through the dark forest. We listened in horror when he told us of the atrocities taking place in Al'thunran.<br> I hereby renew my oath - I will stop this madness at any cost!\" "
 msgstr "Dnes moji bojovníci našli starého muža, ako chorý a zranený hľadal cestu lesom. Počuvali sme ho plní zdesenia, jeho rozprávanie o krutostiach, ktoré sa dejú v  Al'thunran<br>Teraz obnovujem svoju prísahu - musím zastaviť toto šialenstvo a to za každú cenu."
 
-#: ../../../campaigns/t01.wmf/event:260
+#: ../../../campaigns/t01.wmf/event:273
 msgid "The oath"
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:291
+#: ../../../campaigns/t01.wmf/event:304
 #, fuzzy
 msgid " \"Very well done, chieftain. We now have all we need to face the winter and may prepare ourselves for the battles ahead.<br><br>--------------------- VICTORY! ----------------------<br><br> You may continue if you wish. Otherwise, move on to the next mission.\" "
 msgstr "Výborne, môj veliteľ. Máme teraz všetko na to, aby sme vydržali zimu a mohli sa pripraviť na boje, ktoré nás očakávajú. .<br><br>Víťazstvo!<br><br> Môžeš pokračovať, pokiaľ chceš. Pokiaľ nie, presuň sa do ďalšej misie."
 
-#: ../../../campaigns/t01.wmf/event:293
+#: ../../../campaigns/t01.wmf/event:306
 msgid "Mission Complete"
 msgstr "Misia splnená."
 
@@ -229,28 +240,9 @@ msgstr "Misia splnená."
 msgid "Build a lumberjack's hut"
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/objective:8
-msgid "* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting Lumberjacks Hut.<br>"
-msgstr ""
-
-#: ../../../campaigns/t01.wmf/objective:9
-#, fuzzy
-msgid "* Build a road between your headquarters and the lumberjack's hut.<br> You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
-msgstr "- stlač medzerník pre zobrazenie miest k stavaniu. Červené body ukazujú, kde možno vybudovať malú stavbu - ako pre drevorúbačov.<br>- postav chatu pre drevorúbačov na červenom mieste priamo vpravo od základne kliknutím a vybraním chaty pre drevorúbača- postav cestu medzi základňou a drevorúbačom kliknutím na vlajku budovy a potom v menu na symbol cesty. Okolo vlajky sa zobrazia symboly, ktoré ukazujú, ako je v tom mieste strmý terén. Čím strmší, tým ťažšie bude pre tvojich ľudí cez neho prejsť. Keď na symbol klikneš, postavíš kúsok cesty a musíš vyberať ďalší smer. Postav cestu medzi vlajkami pred budovami. Skús ju postaviť krátku a rovnú."
-
 #: ../../../campaigns/t01.wmf/objective:15
 msgid "Build another lumberjack's hut"
 msgstr ""
-
-#: ../../../campaigns/t01.wmf/objective:17
-#, fuzzy
-msgid "* Place a flag in the mid of the road.<br> There is a flag symbol in the mid of the way you just built.<br> By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
-msgstr " \"Poznám príslovie: 'Dvom to ide rýchlejšie.' Krížovatka na ceste medzi nami a drevorúbačom by nosičom uľahčila prácu.\"<br><br>-- Nová úloha --<br>- Uprostred práve postavenej cesty je symbol vlajky. Kliknutím na ňho si otvor menu a vyber symbol vlajky. Na cestu umiestniš vlajku a rozdelíš tak cestu nosenia dreva medzi dvoch nosičov. Keď je prenášané veľké množstvo tovaru medzi dvoma bodmi, pridaním vlajky medzi ne umožníš ich lahší a rýchlejší prenos a zlepšíš  tým infraštruktúru. Umiestni vlajku do stredu cesty."
-
-#: ../../../campaigns/t01.wmf/objective:18
-#, fuzzy
-msgid "* Place a lumberjack's hut directly south of the flag you are about to place on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
-msgstr " \"Severné vetry nám hovoria, že zima, čo nás čaká,  bude dlhá a krutá. Jeden drevorúbač nestačí pre celý náš ľud. Dalšie stromy očakávajú naše sekery na juh od novej križovatky - pošleme tam dalších drevorúbačov!\"<br><br>-- Nová úloha --<br>- Postav chatu drevorúbača južne od vlajky, kterú umiestniš na ceste. Následne spoj spomínanú vlajku s novým drevorúbačom. Všimni si, že miesto stavania cesty kúsok po kúsku, môžeš postaviť celú cestu naraz kliknutím na cieľovú vlajku."
 
 #: ../../../campaigns/t01.wmf/objective:24
 msgid "Build a ranger's hut"
@@ -259,6 +251,18 @@ msgstr ""
 #: ../../../campaigns/t01.wmf/objective:32
 msgid "Build two quarries"
 msgstr ""
+
+#, fuzzy
+#~ msgid "* Build a road between your headquarters and the lumberjack's hut.<br> You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
+#~ msgstr "- stlač medzerník pre zobrazenie miest k stavaniu. Červené body ukazujú, kde možno vybudovať malú stavbu - ako pre drevorúbačov.<br>- postav chatu pre drevorúbačov na červenom mieste priamo vpravo od základne kliknutím a vybraním chaty pre drevorúbača- postav cestu medzi základňou a drevorúbačom kliknutím na vlajku budovy a potom v menu na symbol cesty. Okolo vlajky sa zobrazia symboly, ktoré ukazujú, ako je v tom mieste strmý terén. Čím strmší, tým ťažšie bude pre tvojich ľudí cez neho prejsť. Keď na symbol klikneš, postavíš kúsok cesty a musíš vyberať ďalší smer. Postav cestu medzi vlajkami pred budovami. Skús ju postaviť krátku a rovnú."
+
+#, fuzzy
+#~ msgid "* Place a flag in the mid of the road.<br> There is a flag symbol in the mid of the way you just built.<br> By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
+#~ msgstr " \"Poznám príslovie: 'Dvom to ide rýchlejšie.' Krížovatka na ceste medzi nami a drevorúbačom by nosičom uľahčila prácu.\"<br><br>-- Nová úloha --<br>- Uprostred práve postavenej cesty je symbol vlajky. Kliknutím na ňho si otvor menu a vyber symbol vlajky. Na cestu umiestniš vlajku a rozdelíš tak cestu nosenia dreva medzi dvoch nosičov. Keď je prenášané veľké množstvo tovaru medzi dvoma bodmi, pridaním vlajky medzi ne umožníš ich lahší a rýchlejší prenos a zlepšíš  tým infraštruktúru. Umiestni vlajku do stredu cesty."
+
+#, fuzzy
+#~ msgid "* Place a lumberjack's hut directly south of the flag you are about to place on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+#~ msgstr " \"Severné vetry nám hovoria, že zima, čo nás čaká,  bude dlhá a krutá. Jeden drevorúbač nestačí pre celý náš ľud. Dalšie stromy očakávajú naše sekery na juh od novej križovatky - pošleme tam dalších drevorúbačov!\"<br><br>-- Nová úloha --<br>- Postav chatu drevorúbača južne od vlajky, kterú umiestniš na ceste. Následne spoj spomínanú vlajku s novým drevorúbačom. Všimni si, že miesto stavania cesty kúsok po kúsku, môžeš postaviť celú cestu naraz kliknutím na cieľovú vlajku."
 
 #~ msgid " \"Obviously, it would be too draining for our people to walk all the way to the Lumberjack through the wilderness. We will have to make a path between our hall and the Lumberjack. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough.\"<br><br>--NEW OBJECTIVES--<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
 #~ msgstr "Samozrejme by bolo pre naších ľudí priveľmi tažké predierať sa k drevorúbačovi divočinou. Musíme urobiť cestu medzi našou sieňou a drevorúbačom. Nie je ťažké uhádnuť, ako veľmi by naši muži ocenili, keby bola cesta taká krátka a rovná, ako je len možné.\"<br><br>-- Nová úloha --<br>- postav cestu medzi základňou a drevorúbačom kliknutím na vlajku budovy a potom v menu na symbol cesty. Okolo vlajky sa zobrazia symboly, ktoré ukazujú, ako je v tom mieste strmý terén. Čím strmší, tým ťažšie bude pre tvojich ľudí cez neho prejsť. Keď na symbol klikneš, postavíš kúsok cesty a musíš vyberať ďalší smer. Postav cestu medzi vlajkami pred budovami. Skús ju postaviť krátku a rovnú."

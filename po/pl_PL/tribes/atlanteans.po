@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3825\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-16 19:21+0000\n"
-"PO-Revision-Date: 2009-04-03 18:49+0100\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"PO-Revision-Date: 2009-04-21 19:25+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -28,97 +28,91 @@ msgstr "Plemię to znane jest z najstarszych opowieści - synowie i córki Atlan
 
 #: ../../../tribes/atlanteans/conf:36
 msgid "Ashes"
-msgstr ""
+msgstr "Popiół"
 
 #: ../../../tribes/atlanteans/conf:37
-#, fuzzy
 msgid "Blackrootfield"
-msgstr "Czarny korzeń"
+msgstr "Pole korzeni"
 
 #: ../../../tribes/atlanteans/conf:38
-#, fuzzy
 msgid "Blackrootfield harvested"
-msgstr "Farmer czarnych korzeń"
+msgstr "Zerwane korzenie"
 
 #: ../../../tribes/atlanteans/conf:39
-#, fuzzy
 msgid "Blackrootfield medium"
-msgstr "Farmer czarnych korzeń"
+msgstr "Średnie korzenie"
 
 #: ../../../tribes/atlanteans/conf:40
-#, fuzzy
 msgid "Blackrootfield small"
-msgstr "Farma czarnych korzeni"
+msgstr "Małe korzenie"
 
 #: ../../../tribes/atlanteans/conf:41
-#, fuzzy
 msgid "Blackrootfield tiny"
-msgstr "Czarny korzeń"
+msgstr "Małe korzonki"
 
 #: ../../../tribes/atlanteans/conf:42
-#, fuzzy
 msgid "Cornfield"
-msgstr "Mąka kukurydziana"
+msgstr "Pole kukurydzy"
 
 #: ../../../tribes/atlanteans/conf:43
 msgid "Cornfield harvested"
-msgstr ""
+msgstr "Zebrane pole kukurydzy"
 
 #: ../../../tribes/atlanteans/conf:44
 msgid "Cornfield medium"
-msgstr ""
+msgstr "Wysokie pole kukurydzy"
 
 #: ../../../tribes/atlanteans/conf:45
 msgid "Cornfield small"
-msgstr ""
+msgstr "Małe pole kukrudzy"
 
 #: ../../../tribes/atlanteans/conf:46
 msgid "Cornfield tiny"
-msgstr ""
+msgstr "Wyrastające pole kukurydzy"
 
 #: ../../../tribes/atlanteans/conf:47
 msgid "Destroyed building"
-msgstr ""
+msgstr "Zniszczony budynek"
 
 #: ../../../tribes/atlanteans/conf:48
 msgid "Resource indicator coal little"
-msgstr ""
+msgstr "Wskaźnik zasobów mało węgla"
 
 #: ../../../tribes/atlanteans/conf:49
 msgid "Resource indicator coal much"
-msgstr ""
+msgstr "Wskaźnik zasobów dużo węgla"
 
 #: ../../../tribes/atlanteans/conf:50
 msgid "Resource indicator gold litte"
-msgstr ""
+msgstr "Wskaźnik zasobów mało złota"
 
 #: ../../../tribes/atlanteans/conf:51
 msgid "Resource indicator gold much"
-msgstr ""
+msgstr "Wskaźnik zasobów dużo złota"
 
 #: ../../../tribes/atlanteans/conf:52
 msgid "Resource indicator granit little"
-msgstr ""
+msgstr "Wskaźnik zasobów mało granitu"
 
 #: ../../../tribes/atlanteans/conf:53
 msgid "Resource indicator granit much"
-msgstr ""
+msgstr "Wskaźnik zasobów dużo granitu"
 
 #: ../../../tribes/atlanteans/conf:54
 msgid "Resource indicator iron little"
-msgstr ""
+msgstr "Wskaźnik zasobów mało żelaza"
 
 #: ../../../tribes/atlanteans/conf:55
 msgid "Resource indicator iron much"
-msgstr ""
+msgstr "Wskaźnik zasobów dużo żelaza"
 
 #: ../../../tribes/atlanteans/conf:56
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "Wskaźnik brak zasobów"
 
 #: ../../../tribes/atlanteans/conf:57
 msgid "Resource indicator water"
-msgstr ""
+msgstr "Wskaźnik zasobów wody"
 
 #: ../../../tribes/atlanteans/conf:60
 msgid "Advanced Shield"
@@ -129,7 +123,6 @@ msgid "Bakingtray"
 msgstr "Blacha"
 
 #: ../../../tribes/atlanteans/conf:62
-#, fuzzy
 msgid "Blackroot Flour"
 msgstr "Mąka korzenna"
 
@@ -178,12 +171,10 @@ msgid "Fish"
 msgstr "Ryba"
 
 #: ../../../tribes/atlanteans/conf:74
-#, fuzzy
 msgid "Golden Tabard"
-msgstr "Złoty tabard"
+msgstr "Złota kamizelka"
 
 #: ../../../tribes/atlanteans/conf:75
-#, fuzzy
 msgid "Gold Ore"
 msgstr "Ruda złota"
 
@@ -192,7 +183,6 @@ msgid "Gold"
 msgstr "Złoto"
 
 #: ../../../tribes/atlanteans/conf:77
-#, fuzzy
 msgid "Gold Yarn"
 msgstr "Złota przędza"
 
@@ -289,9 +279,8 @@ msgid "Stone"
 msgstr "Kamień"
 
 #: ../../../tribes/atlanteans/conf:101
-#, fuzzy
 msgid "Tabard"
-msgstr "Tabard"
+msgstr "Kamizelka"
 
 #: ../../../tribes/atlanteans/conf:102
 msgid "Trunk"
@@ -446,9 +435,8 @@ msgid "Warehouse"
 msgstr "Magazyn"
 
 #: ../../../tribes/atlanteans/conf:156
-#, fuzzy
 msgid "Armoursmithy"
-msgstr "Płatnerz"
+msgstr "Kuźnia"
 
 #: ../../../tribes/atlanteans/conf:157
 msgid "Bakery"
@@ -459,7 +447,6 @@ msgid "Blackroot Farm"
 msgstr "Farma czarnych korzeni"
 
 #: ../../../tribes/atlanteans/conf:159
-#, fuzzy
 msgid "Charcoal Burner's House"
 msgstr "Smolarnia"
 
@@ -476,17 +463,14 @@ msgid "Farm"
 msgstr "Farma"
 
 #: ../../../tribes/atlanteans/conf:163
-#, fuzzy
 msgid "Fish Breeder's House"
 msgstr "Chata hodowcy ryb"
 
 #: ../../../tribes/atlanteans/conf:164
-#, fuzzy
 msgid "Fisher's House"
 msgstr "Domek rybaka"
 
 #: ../../../tribes/atlanteans/conf:165
-#, fuzzy
 msgid "Forester's House"
 msgstr "Leśniczówka"
 
@@ -499,7 +483,6 @@ msgid "Goldweaver"
 msgstr "Tkacz złota"
 
 #: ../../../tribes/atlanteans/conf:168
-#, fuzzy
 msgid "Hunter's House"
 msgstr "Chata myśliwego"
 
@@ -532,9 +515,8 @@ msgid "Spiderfarm"
 msgstr "Ferma pająków"
 
 #: ../../../tribes/atlanteans/conf:176
-#, fuzzy
 msgid "Toolsmithy"
-msgstr "Rzemieślnik"
+msgstr "Pracownia rzemieślnika"
 
 #: ../../../tribes/atlanteans/conf:177
 msgid "Weapon Smithy"
@@ -549,19 +531,16 @@ msgid "Well"
 msgstr "Studnia"
 
 #: ../../../tribes/atlanteans/conf:180
-#, fuzzy
 msgid "Woodcutter's House"
 msgstr "Chata drwala"
 
 #: ../../../tribes/atlanteans/conf:183
-#, fuzzy
 msgid "Headquarters medium"
-msgstr "Kwatera główna"
+msgstr "Wioska z kwaterą główną (średnia)"
 
 #: ../../../tribes/atlanteans/conf:184
-#, fuzzy
 msgid "Castle village"
-msgstr "Zamek"
+msgstr "Wioska z zamekiem (duża)"
 
 #~ msgid "Toolsmith's Shop"
 #~ msgstr "Warsztat"

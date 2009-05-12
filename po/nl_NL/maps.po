@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3697\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-03-11 20:33+0000\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
 "PO-Revision-Date: 2009-03-11 21:36+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,37 +30,25 @@ msgstr "Keizerrijk - De maanden in ballingschap"
 msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
 msgstr "Zes maanden geleden werd Lutius - een jonge generaal van het Keizerrijk - met 150 soldaten naar de grens in de noordelijke bossen gestuurd, waar Bararenstammen en Keizerrijkland elkaar kruisen. Zijn taak was om het land van het Keizerrijk te verdedigen. Het begon allemaal rustig, hij sprak zelfs met de kinderen van de Barbaren en dacht aan een vreedzaam leven, samen met dit archaïsche volk. Hij voelde zich steeds veiliger en de aandacht van zijn leger voor de potentiële vijand verslapte - En daar ging het mis. Op een nacht in Maart werd zijn onvoorbereide leger aangevallen door 100 mannen van het barbaarse voetleger en werd uiteen gedreven. Met alleen het naakte leven overleefden hij en een handvol soldaten."
 
-#: ../../campaigns/cconfig:50
+#: ../../campaigns/cconfig:51
 msgid "Tutorial1 - Eyes in the Dark"
 msgstr "Oefencampagne 1 - Ogen in de duisternis"
 
-#: ../../campaigns/cconfig:52
-msgid "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic gameplay and control as well as basic production buildings (wood, stone, etc.) will be introduced."
-msgstr "Eerste missie van de Barbaren Oefencampagne. In deze oefencampagne worden de basis van het spel en de besturing en de basisproductiegebouwen (hout, steen, enz.) geïntroduceerd."
-
-#: ../../campaigns/cconfig:57
+#: ../../campaigns/cconfig:56
 msgid "Tutorial2 - A Place to call Home"
 msgstr "Oefencampagne 2 - Een plek om thuis te noemen"
 
-#: ../../campaigns/cconfig:59
-msgid "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the higher production buildings, including mining and the military expansions will be introduced."
-msgstr "Tweede missie van de Barbaren Oefencampagne. In deze campagne worden de hogere productiegebouwen, waaronder mijn en militaire uitbreidingen, geïntroduceerd."
+#: ../../campaigns/cconfig:61
+msgid "Tutorial3 - This land is our land"
+msgstr ""
 
-#: ../../campaigns/cconfig:65
+#: ../../campaigns/cconfig:68
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
 msgstr "Keizerrijk oefencampagne 1 - de stranden van Malac' Mor"
 
-#: ../../campaigns/cconfig:67
-msgid "After losing an important battle against the barbarians, which leads to the forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to start a new life. But his destiny takes his ship into a heavy storm, which nearly desctructs the ship. Only with lot of luck he can save his people and the damaged ship on a unknown desert strand."
-msgstr "Na een belangrijk gevecht met de barbaren verloren te hebben, dat ervoor zorgde dat een groot deel van het territorium van het Keizerrijk opgegeven moest worden, verlaat Lutius Fremil om een nieuw leven te beginnen. Maar zijn reisdoel brengt zijn schip in een zware storm, die bijna zijn schip verwoest. Slechts met veel geluk kan hij zijn mensen redden en het beschadigde schip naar een obekend verlaten strand brengen."
-
-#: ../../campaigns/cconfig:72
+#: ../../campaigns/cconfig:73
 msgid "Empire Tutorial2 - An outpost for exile"
 msgstr "Keizerrijk oefencampagne 2 - Een voorpost in ballingschap"
-
-#: ../../campaigns/cconfig:74
-msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediteran island, looking like paradise."
-msgstr "Eindelijk was het schip gerepareerd, dus gingen Lutius en zijn mensen verder op hun zoektocht naar een geschikte plek voor een nieuw begin. Slechts enkele dagen later landen ze op een groen, mediterraan en paradijselijk eiland."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -318,3 +306,14 @@ msgstr "Wisentenvallei"
 msgid "It seems as if this magical valley was inhabitated by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can you tribe live in peace with your neighbours?"
 msgstr "Het lijkt erop dat deze magische vallei sinds het begin der tijden bewoond werd door wisenten. Toen je stam naar deze plek kwam, was je er zeker van dat het genoeg ruimte bood voor een vreedzaam bestaan. Maar kan je stam in vrede leven met je buren?"
 
+#~ msgid "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic gameplay and control as well as basic production buildings (wood, stone, etc.) will be introduced."
+#~ msgstr "Eerste missie van de Barbaren Oefencampagne. In deze oefencampagne worden de basis van het spel en de besturing en de basisproductiegebouwen (hout, steen, enz.) geïntroduceerd."
+
+#~ msgid "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the higher production buildings, including mining and the military expansions will be introduced."
+#~ msgstr "Tweede missie van de Barbaren Oefencampagne. In deze campagne worden de hogere productiegebouwen, waaronder mijn en militaire uitbreidingen, geïntroduceerd."
+
+#~ msgid "After losing an important battle against the barbarians, which leads to the forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to start a new life. But his destiny takes his ship into a heavy storm, which nearly desctructs the ship. Only with lot of luck he can save his people and the damaged ship on a unknown desert strand."
+#~ msgstr "Na een belangrijk gevecht met de barbaren verloren te hebben, dat ervoor zorgde dat een groot deel van het territorium van het Keizerrijk opgegeven moest worden, verlaat Lutius Fremil om een nieuw leven te beginnen. Maar zijn reisdoel brengt zijn schip in een zware storm, die bijna zijn schip verwoest. Slechts met veel geluk kan hij zijn mensen redden en het beschadigde schip naar een obekend verlaten strand brengen."
+
+#~ msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediteran island, looking like paradise."
+#~ msgstr "Eindelijk was het schip gerepareerd, dus gingen Lutius en zijn mensen verder op hun zoektocht naar een geschikte plek voor een nieuw begin. Slechts enkele dagen later landen ze op een groen, mediterraan en paradijselijk eiland."

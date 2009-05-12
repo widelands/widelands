@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3946\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-29 16:30+0000\n"
+"POT-Creation-Date: 2009-05-12 14:54+0000\n"
 "PO-Revision-Date: 2009-04-29 18:30+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -31,36 +31,23 @@ msgstr "Thron schüttelt den Kopf..."
 msgid " \"The war goes on. More and more of our brothers and sisters flee the brutal war raging in the capital beneath the trees.<br> The stories they tell about the deeds of our kin are sad to hear. I've spent nights lying awake, restless, more tired I ever believed one could be. Yet whenever I close my eyes, I see the fortress my father built consumed by flames. The throne between the trees, the symbol of unity and peace among our kin became the wedge that drives us apart.\" "
 msgstr " \"Der Krieg geht weiter. Mehr und mehr unsrer Brüder und Schwestern fliehen aus unserer einstigen Heimat. Sie finden in unserem Hauptquartier einen Unterschlupf. <br>Die Erzählungen, die sie über die Verbrechen unseres Feindes erzählen, sind schrecklich anzuhören und treiben mich fast in den Wahnsinn. Immer wieder versuche ich, für einen kurzen Moment die Augen zu schließen, um ein wenig Ruhe zu finden. Doch diese ist mir nicht vergönnt. Nach wie vor wird mein Kopf von den schrecklichen Bildern der rot aufschlagenden Feuer heimgesucht. Es sind die Feuer, die das Vermächtnis meines Vaters zerstören, den Frieden verspotten und unser aller Heimat zu einem erbarmungslosen Schlachtfeld werden ließen.\""
 
-#: ../../../campaigns/t02.wmf/event:138
-#: ../../../campaigns/t02.wmf/event:149
+#: ../../../campaigns/t02.wmf/event:138 ../../../campaigns/t02.wmf/event:149
 #: ../../../campaigns/t02.wmf/event:160
 msgid "The story continues"
 msgstr "Die Geschichte geht weiter..."
 
-#: ../../../campaigns/t02.wmf/event:141
-#: ../../../campaigns/t02.wmf/event:152
-#: ../../../campaigns/t02.wmf/event:163
-#: ../../../campaigns/t02.wmf/event:260
-#: ../../../campaigns/t02.wmf/event:272
-#: ../../../campaigns/t02.wmf/event:285
-#: ../../../campaigns/t02.wmf/event:297
-#: ../../../campaigns/t02.wmf/event:309
-#: ../../../campaigns/t02.wmf/event:323
-#: ../../../campaigns/t02.wmf/event:335
-#: ../../../campaigns/t02.wmf/event:348
-#: ../../../campaigns/t02.wmf/event:361
-#: ../../../campaigns/t02.wmf/event:374
-#: ../../../campaigns/t02.wmf/event:386
-#: ../../../campaigns/t02.wmf/event:399
-#: ../../../campaigns/t02.wmf/event:413
-#: ../../../campaigns/t02.wmf/event:426
-#: ../../../campaigns/t02.wmf/event:439
-#: ../../../campaigns/t02.wmf/event:453
-#: ../../../campaigns/t02.wmf/event:466
-#: ../../../campaigns/t02.wmf/event:479
-#: ../../../campaigns/t02.wmf/event:492
-#: ../../../campaigns/t02.wmf/event:513
-#: ../../../campaigns/t02.wmf/event:526
+#: ../../../campaigns/t02.wmf/event:141 ../../../campaigns/t02.wmf/event:152
+#: ../../../campaigns/t02.wmf/event:163 ../../../campaigns/t02.wmf/event:260
+#: ../../../campaigns/t02.wmf/event:272 ../../../campaigns/t02.wmf/event:285
+#: ../../../campaigns/t02.wmf/event:297 ../../../campaigns/t02.wmf/event:309
+#: ../../../campaigns/t02.wmf/event:323 ../../../campaigns/t02.wmf/event:335
+#: ../../../campaigns/t02.wmf/event:348 ../../../campaigns/t02.wmf/event:361
+#: ../../../campaigns/t02.wmf/event:374 ../../../campaigns/t02.wmf/event:386
+#: ../../../campaigns/t02.wmf/event:399 ../../../campaigns/t02.wmf/event:413
+#: ../../../campaigns/t02.wmf/event:426 ../../../campaigns/t02.wmf/event:439
+#: ../../../campaigns/t02.wmf/event:453 ../../../campaigns/t02.wmf/event:466
+#: ../../../campaigns/t02.wmf/event:479 ../../../campaigns/t02.wmf/event:492
+#: ../../../campaigns/t02.wmf/event:513 ../../../campaigns/t02.wmf/event:526
 #: ../../../campaigns/t02.wmf/event:1204
 msgid "OK"
 msgstr "OK"
@@ -81,14 +68,10 @@ msgstr "Boldreth tritt neben dich..."
 msgid " \"So you want to prepare us for a longer stay in these forests, Thron? Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al'thunran. Too long have we waited while our brethren have fought on the battlefield, and our axes and swords have turned rusty over time.\" "
 msgstr " \"Ihr wollt uns für einen längeren Aufenhalt in diesen Wäldern vorbereiten? Ich verstehe Euer Vorgehen nur zu gut und unterstütze diese Idee. Ich wünschte, wir könnten mein Herz mit der glorreichen Befreiung  Al'thunrans befriedigen, doch wir haben einfach zu lange gewartet. Unsere Schwerter und Äxte sind seit der letzten Schlacht stumpf und rostig geworden.\""
 
-#: ../../../campaigns/t02.wmf/event:258
-#: ../../../campaigns/t02.wmf/event:283
-#: ../../../campaigns/t02.wmf/event:321
-#: ../../../campaigns/t02.wmf/event:333
-#: ../../../campaigns/t02.wmf/event:359
-#: ../../../campaigns/t02.wmf/event:384
-#: ../../../campaigns/t02.wmf/event:424
-#: ../../../campaigns/t02.wmf/event:451
+#: ../../../campaigns/t02.wmf/event:258 ../../../campaigns/t02.wmf/event:283
+#: ../../../campaigns/t02.wmf/event:321 ../../../campaigns/t02.wmf/event:333
+#: ../../../campaigns/t02.wmf/event:359 ../../../campaigns/t02.wmf/event:384
+#: ../../../campaigns/t02.wmf/event:424 ../../../campaigns/t02.wmf/event:451
 #: ../../../campaigns/t02.wmf/event:464
 msgid "Your loyal companion"
 msgstr "Dein loyaler Begleiter"
@@ -101,14 +84,10 @@ msgstr "Kantrukh gesellt sich zu euch..."
 msgid " \"I beg your forgiveness, chieftain, but I have a grave concern to discuss with you. The rocks close to our camp are shrinking fast under our workers' tools, and it is a matter of little time only before they are all gone.\" "
 msgstr " \"Ich bitte um Verzeihung, doch wir müssen über eine wichtige Sache sprechen. Die Felsen im Westen unseres Lagers sind mittlerweile, durch die Spitzhacken unserer Arbeiter, beinahe total abgetragen. \""
 
-#: ../../../campaigns/t02.wmf/event:270
-#: ../../../campaigns/t02.wmf/event:295
-#: ../../../campaigns/t02.wmf/event:307
-#: ../../../campaigns/t02.wmf/event:346
-#: ../../../campaigns/t02.wmf/event:372
-#: ../../../campaigns/t02.wmf/event:397
-#: ../../../campaigns/t02.wmf/event:437
-#: ../../../campaigns/t02.wmf/event:477
+#: ../../../campaigns/t02.wmf/event:270 ../../../campaigns/t02.wmf/event:295
+#: ../../../campaigns/t02.wmf/event:307 ../../../campaigns/t02.wmf/event:346
+#: ../../../campaigns/t02.wmf/event:372 ../../../campaigns/t02.wmf/event:397
+#: ../../../campaigns/t02.wmf/event:437 ../../../campaigns/t02.wmf/event:477
 #: ../../../campaigns/t02.wmf/event:490
 msgid "The advisor"
 msgstr "Der Berater"
@@ -121,8 +100,7 @@ msgstr "Boldreth springt auf..."
 msgid " \"While it is certainly no worthy task for a warrior, at least it is something to be done! Thron, what do you say about me taking a few of our most restless warriors and venturing somewhat closer to the great mountain of Kal'mavrath - maybe we will find some more big stones to please the old man?\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Auch wenn dies eigentlich keine Aufgabe für einen Krieger ist, muss dennoch dringend etwas getan werden! Was haltet ihr also davon, wenn ich mit einem kleinen Trupp weiter in Richtung der großen Berge von Kal'mavrath vorstoße? - vielleicht finden wir dort ein paar größere Felsen mit denen wir den alten Mann zufriedenstellen können!\" <br><br>--NEUER Auftrag--<br>"
 
-#: ../../../campaigns/t02.wmf/event:281
-#: ../../../campaigns/t02.wmf/objective:7
+#: ../../../campaigns/t02.wmf/event:281 ../../../campaigns/t02.wmf/objective:7
 msgid "* Build military buildings (like sentries and strongholds) to expand your territory.<br> Get to the rocks northeast from you and build a quarry there."
 msgstr "* Errichte Militärgebäude (z.B. Wachhütten und Festungen) um dein Territorium zu erweitern.<br> Erreiche die Felsen im Nordosten und baue dort einen Steinbruch."
 
@@ -298,8 +276,7 @@ msgstr "Khantrukh scheint erleichtert..."
 msgid " \"Wonderful! Our roofs are not dripping anymore, and we have all the material we need for, well, whichever monumental building we see fit!\" "
 msgstr " \"Wunderbar! Endlich sind unsere Dächer dicht. Und vor allem haben wir nun die Materialien, um so ziemlich jedes größere Gebäude zu errichten.\""
 
-#: ../../../campaigns/t02.wmf/event:506
-#: ../../../campaigns/t02.wmf/event:1197
+#: ../../../campaigns/t02.wmf/event:506 ../../../campaigns/t02.wmf/event:1197
 msgid "Thron speaks..."
 msgstr "Thron spricht..."
 
@@ -381,54 +358,76 @@ msgstr "Baue eine Farnerei"
 
 #~ msgid "* Build a coal mine and an iron ore mine.<br> Place a flag up on the mountain's flank in the east (on mountain terrain, though, not mountain meadow). When you click at the flag, you can send Geologists there. Because the flag is on mountains, the Geologists will search for ores; otherwise, they will search for water. Then build a mine for both kinds of resource he will find, choosing the mine to be built appropriately:<br> Black - coal<br> Red - iron ore<br> Yellow - gold<br> Grey - granite<br> Mines may only be built on mountain terrain. Suitable places for mines are displayed with a hammer and pick symbol."
 #~ msgstr "* Baue eine Kohlenmine und eine Eisenmine. <br> Setze eine Flagge auf die Berge im Osten (auf das Gebirgsgelände, nicht auf eine Gebirgswiese) und sende Geologen dort hin. Baue dann, sobald die Geologen Bodenschätze gefunden haben, ein Bergwerk für den jeweiligen Bodenschatz. Es bedeuten die Farben auf den Schildern, die der Geologe setzt:<br> Schwarz - Kohle<br> Rot - Eisenerz<br> Gelb - Gold<br> Grau - Granit<br><br>Berkwerke können nur auf Gebirgsgelände errichtet werden. Mögliche Bauplätze für ein Bergwerke werden mit einem Spitzhackensymbol markiert."
+
 #~ msgid "* Build military buildings (like sentries and strongholds) to expand your territory. Get to the rocks north-east from you and build a quarry there."
 #~ msgstr "* Errichte Militärgebäude (z.B. Wachhütten und Festungen) um dein Territorium zu erweitern. Erreiche die Felsen im Nordosten und baue dort einen Steinbruch."
+
 #~ msgid "* Build a hunter, a gamekeeper and a tavern.<br> In order to work, your miners need food. A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br> This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow."
 #~ msgstr "* Nun baue eine Jägerhütte, eine Wildhüterhütte und eine Taverne.<br> Um genug Kraft für die schwere Arbeit aufbringen zu können, brauchen Deine Bergarbeiter ein kräftiges Essen, welches vor allem aus Fleisch besteht. Daher brauchst Du einen Jäger der Wild erjagt und einen Wildhüter der dafür sorgt, dass sich das Wild gut vermehren kann. Das Fleisch dieser Tiere muss dann in einer Taverne zu einzelnen Mahlzeiten weiter verarbeitet werden.<br>Und das ist erst der Anfang. Weitere Gebäude sind zwingend notwendig. Aber dazu später mehr."
+
 #~ msgid "* Build a well, a farm and a bakery.<br> Other ways to produce food - different kinds of food though - are fishers and farms. The wheat of the latter has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source."
 #~ msgstr "* Baue einen Brunnen, einen Bauernhof und eine Bäckerei<br>- Fischerei und Landwirtschaft sind zwei weitere Möglichkeiten, um an Nahrung zu kommen. Jedoch muss der Weizen der Bauern noch weiter verarbeitet werden, damit er bekömmlich wird. Dazu benötigt man eine Bäckerei und einen Brunnen, der die Bäckerei mit Wasser versorgt. Baue einen Bauernhof und eine Bäckerei und lass einen Geologen auf freiem Land nach Grundwasser für einen Brunnen suchen. Hat der Geologe Wasser gefunden, so markiert er dies mit einem blauen Schild."
+
 #~ msgid "* Build a smelting works.<br> The iron ore your miners bring up is not usable yet - it has to be melted into iron first."
 #~ msgstr "* Baue einen Hochofen. <br> Die Erze, welche Deine Bergarbeiter aus den Felsen schlagen, können nicht direkt verarbeitet werden. Vorher müssen die Metalle in einem Hochofen verhüttet werden."
+
 #~ msgid "* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require rations instead of snacks. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which strategy you prefer."
 #~ msgstr "* Baue die Kohlemine zu einer tiefen Mine und eine Taverne zu einem Wirtshaus aus.<br> Ein normales Bergwerk kann nur ungefähr ein Drittel aller im Berg liegenden Resourcen abbauen. Dennoch kann man an weitere Rohstoffe kommen, in dem man die Mine zu einer tiefen Mine ausbaut. Um ein Gebäude auszubauen, musst Du es anklicken und dann den entsprechende Knopf im erscheinenden Menü auswählen.<br>Bergarbeiter gewinnen Erfahrung durch erfolgreiche Arbeit. Mit ausreichender Erfahrung werden sie zu einem Bergwerkschef, der notwendig ist, um tiefe Minen zu betreiben. Daher solltest Du nie ein Gebäude ausbauen, bevor Du nicht genug erfahrene Arbeiter hast!<br>Auf der anderen Seite haben die Arbeiter der ausgebauten Gebäude grössere Ansprüche, als die des grundlegenden Gebäudes - zum Beispiel benötigen die Arbeiter von tiefen Minen Rationen anstelle von Snacks. Um Rationen aus Fladenbrot UND einer zweiten Zutat (Fleisch oder Fische) zu produzieren, musst Du Deine Tavern zu einem Wirtshaus ausbauen lassen.  Doch bedenke, dass die Wirtshäuser die Tavernen nicht ersetzen - normale Bergwerke brauchen immernoch Snacks, nicht etwa Rationen.  Natürlich könntest Du gleich alle Bergwerke ausbauen lassen, doch bedenke, dass ausgebaute Bergwerke zwar schneller arbeiten, dafür aber teureres Essen benötigen. Die Entscheidung liegt also bei Dir."
+
 #~ msgid "* Build a wood hardener.<br> Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, for without that you cannot expand."
 #~ msgstr "* Baue einen Holzhärter.<br>- Bessere und größere Gebäude - wie auch alle militärischen Gebäude - benötigen bessere Baumaterialien, denn diese bestehen nicht nur aus Baumstämmen und Felsen, sondern vor allem aus Hartholz, welches von einem Holzhärter produziert werden kann. Da Hartholz unabkömmlich ist ist es wichtig, immer zuerst ein Holzhärter zu bauen, bevor Du Dein letztes Hartholz aufbrauchst. Denn ohne Hartholz kannst Du nur wenige Gebäude bauen und nicht mehr expandieren."
+
 #~ msgid "* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better buildings may require also other improved materials besides blackwood. One of those is grout, which is produced out of raw stone, water and coal by a lime-burner. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking said flag and the Geologist-symbol in the consecutively appearing menu. Coal can be obtained by building a charcoal burner or a coal mine."
 #~ msgstr "* Baue eine Kalkbrennerei, einen Brunnen und eine Köhlerei oder eine Kohlenmine.<br> Baumstämme, Felsen und Hartholz sind nur ein Teil der Materialien, die man für bessere Gebäude braucht. Ein weiteres wichtiges Material ist Mörtel. Mörtel kann in einer Kalkbrennerei aus Felsen und Wasser hergestellt werden. Um  an das dabei benötigte Wasser zu kommen, solltest Du einen Geologen nach Wasser suchen lassen und dann, dort wo er Wasser entdeckt hat, einen Brunnen errichten.  Schicke einen Geologen auf die Suche nach Wasser, in dem Du auf eine Deiner Flaggen klickst, die auf Grasland oder Steppe steht. Wähle anschließend das Geologen-Symbol aus. Kohle erhält man durch eine Köhlerei oder aus einer Kohlemine."
+
 #~ msgid "* Build a fernery.<br> The third material necessary for improved buildings is thatch reed, used to cover roofs. It is being planted by a fernery."
 #~ msgstr "* Baue einen Reet- und Flachshof.<br> Das dritte Material welches für größere und bessere Gebäude gebraucht wird, ist, welche wir vor allem für unsere Dächer verwenden. Reet wird von dem Reet- und Flachshof produziert."
+
 #~ msgid "Expand your territory north-east"
 #~ msgstr "Erweitere dein Territorium in Richtung Nordosten"
+
 #~ msgid "* Build a Fernery.<br> The third material necessary for improved buildings is reed, used to cover roofs. Reed is being planted by a fernery."
 #~ msgstr "* Baue einen Reet- und Flachshof.<br>Weitere Materialien welche für größere und bessere Gebäude gebraucht werden, sind Reet und Flachs, welche wir vor allem für unsere Dächer verwenden. Reet und Flachs werden von dem Reet- und Flachshof produziert."
+
 #~ msgid "* When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granite<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot."
 #~ msgstr "* Wenn du eine Flagge anklickst, kannst du einen Geologen zu ihr schicken. Steht diese Flagge in den Bergen, so sucht der Geologe den Berg nach Bodenschätzen ab;  andernfalls sucht er nach Wasser. <br>Setze eine Flagge auf die Berge im Osten (auf das Gebirgsgelände, nicht auf eine Gebirgswiese) und sende Geologen dort hin. <br>Baue dann, sobald die Geologen Bodenschätze gefunden haben, ein Bergwerk für den jeweiligen Bodenschatz. Es bedeuten die Farben auf den Schildern, die der Geologe setzt:<br> Schwarz - Kohle<br> Rot - Eisenerz<br> Gelb - Gold<br> Grau - Granit<br><br>Berkwerke können nur auf Gebirgsgelände errichtet werden. Mögliche Bauplätze für ein Bergwerke werden mit einem passenden Marker angezeigt."
+
 #~ msgid "* Build a smeltery and a charcoal burner. The iron ore your miners bring up is not usable yet - it has to be melted into iron first. Likewise, the pit coal from your coal mines must be refined into coal."
 #~ msgstr "Baue einen Hochofen und eine Köhlerei. Die Erze, welche Deine Bergarbeiter aus den Felsen schlagen, können nicht direkt verarbeitet werden. Vorher müssen die Metalle in einem Hochofen verhüttet und die Rohkohle in einer Köhlerei verarbeitet werden."
+
 #~ msgid "* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly.<br> To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need rations instead of snacks. You will have to enhance your tavern to an inn in order to produce rations out of pittabread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require snacks instead of rations. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which you prefer."
 #~ msgstr "* Baue die Kohlemine zu einer tiefen Mine und eine Taverne zu einem Wirtshaus aus.<br> Ein normales Bergwerk kann nur ungefähr ein Drittel aller im Berg liegenden Resourcen abbauen. Dennoch kann man an weitere Rohstoffe kommen, in dem man die Mine zu einer tiefen Mine ausbaut. Um ein Gebäude auszubauen, musst Du es anklicken und dann den entsprechende Knopf im erscheinenden Menü auswählen.<br>Bergarbeiter gewinnen Erfahrung durch erfolgreiche Arbeit. Mit ausreichender Erfahrung werden sie zu einem Bergwerkschef, der notwendig ist, um tiefe Minen zu betreiben. Daher solltest Du nie ein Gebäude ausbauen, bevor Du nicht genug erfahrene Arbeiter hast!<br>Auf der anderen Seite haben die Arbeiter der ausgebauten Gebäude grössere Ansprüche, als die des grundlegenden Gebäudes - zum Beispiel benötigen die Arbeiter von tiefen Minen Rationen anstelle von Snacks. Um Rationen aus Fladenbrot UND einer zweiten Zutat (Fleisch oder Fische) zu produzieren, musst Du Deine Tavern zu einem Wirtshaus ausbauen lassen.  Doch bedenke, dass die Wirtshäuser die Tavernen nicht ersetzen - normale Bergwerke brauchen immernoch Snacks, nicht etwa Rationen.  Natürlich könntest Du gleich alle Bergwerke ausbauen lassen, doch bedenke, dass ausgebaute Bergwerke zwar schneller arbeiten, dafür aber teureres Essen benötigen. Die Entscheidung liegt also bei Dir."
+
 #~ msgid "Victory!"
 #~ msgstr "Sieg!"
 
 #, fuzzy
 #~ msgid "* Build a stonegrinder and a well.<br> Better buildings may require also other improved materials besides blackwood. One of those is grindstone, which is produced out of water and raw stone by a stonegrinder. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking implied flag and the Geologist-symbol in the consecutively appearing menu."
 #~ msgstr "--NEUER AUFTRAG--<br>- Baumstämme, Felsen und Hartholz sind nur ein Teil der Materialien, die man für bessere Gebäude braucht. Ein weiteres wichtiges Material ist Mörtel.<br>Mörtel kann in einer Steinschleiferei aus Stein und Wasser hergestellt werden. Um  an das dabei benötigte Wasser zu kommen, solltest Du einen Geologen nach Wasser suchen lassen und dann, dort wo er Wasser entdeckt hat, einen Brunnen errichten. <br>- Schicke einen Geologen auf die Suche nach Wasser, in dem Du auf eine Deiner Flaggen klickst, die auf Grasland oder Steppe steht. Wähle anschließend das Geologen-Symbol aus.<br>- Baue einen Brunnen und eine Steinschleiferei.</p>"
+
 #~ msgid "The Story goes on..."
 #~ msgstr "Die Geschichte geht weiter..."
+
 #~ msgid " \"Just look at that! The great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br>Now that's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!\"<br><br>--NEW OBJECTIVES--<br>- When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granite<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot.</p>"
 #~ msgstr " \"Schau, dort ist der große Berg von Kal'mavrath! Ich frage mich ernsthaft, was die Natur wohl unter seinen majestätischen Felsen versteckt hält! <br>Ich denke dies ist nun wieder einer der wenigen Momente, in denen die alten Männer von nutzen sind! Wir sollten vielleicht einige von denen, die die Sprache der Felsen verstehen, aussenden, damit sie die Berge nach Bodenschätzen absuchen.\"<br><br> -- NEUER AUFTRAG -- <br> - Wenn du eine Flagge anklickst, kannst du einen Geologen zu ihr schicken. Steht diese Flagge in den Bergen, so sucht der Geologe den Berg nach Bodenschätzen ab;  andernfalls sucht er nach Wasser. <br>Setze eine Flagge auf die Berge im Osten (auf das Gebirgsgelände, nicht auf eine Gebirgswiese) und sende Geologen dort hin. <br>Baue dann, sobald die Geologen Bodenschätze gefunden haben, ein Bergwerk für den jeweiligen Bodenschatz. Es bedeuten die Farben auf den Schildern, die der Geologe setzt:<br> Schwarz - Kohle<br> Rot - Eisenerz<br> Gelb - Gold<br> Grau - Granit<br><br>Berkwerke können nur auf Gebirgsgelände errichtet werden. Mögliche Bauplätze für ein Bergwerke werden mit einem passenden Marker angezeigt.</p>"
+
 #~ msgid "--NEW OBJECTIVES--<br>- In order to work, your miners need food. A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br>This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow.<br>Build a hunter, a gamekeeper and a tavern.</p>"
 #~ msgstr "--NEUER AUFTRAG--<br>- Um genug Kraft für die schwere Arbeit aufbringen zu können, brauchen Deine Bergarbeiter ein kräftiges Essen, welches vor allem aus Fleisch besteht. Daher brauchst Du einen Jäger der Wild erjagt und einen Wildhüter der dafür sorgt, dass sich das Wild gut vermehren kann. Das Fleisch dieser Tiere muss dann in einer Taverne zu einzelnen Mahlzeiten weiter verarbeitet werden.<br>Und das ist erst der Anfang. Weitere Gebäude sind zwingend notwendig. Aber dazu später mehr.<br>Nun baue eine Jägerhütte, eine Wildhüterhütte und eine Taverne.</p>"
+
 #~ msgid "--NEW OBJECTIVES--<br>- Other ways to produce food - different kinds of food though - are fishers and farms. The wheat of the latter has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source. Build a well, a farm and a bakery.</p>"
 #~ msgstr "--NEUER AUFTRAG--<br>- Fischerei und Landwirtschaft sind zwei weitere Möglichkeiten, um an Nahrung zu kommen. Jedoch muss der Weizen der Bauern noch weiter verarbeitet werden, damit er bekömmlich wird. Dazu benötigt man eine Bäckerei und einen Brunnen, der die Bäckerei mit Wasser versorgt. Baue einen Bauernhof und eine Bäckerei und lass einen Geologen auf freiem Land nach Grundwasser suchen. Hat der Geologe Wasser gefunden, so markiert er dies mit einem blauen Schild. Nun baue dort auch noch einen Brunnen.</p>"
+
 #~ msgid "--NEW OBJECTIVES--<br>- The ore your miners bring up is not usable yet - it has to be melted into iron first. Build a Smelter. Likewise, the pit coal from your coalmines must be refined into coal - for that, build a charcoal burner.</p>"
 #~ msgstr "--NEUER AUFTRAG--<br>- Die Erze, welche Deine Bergarbeiter aus den Felsen schlagen, können nicht direkt verarbeitet werden. Vorher müssen die Metalle in einem Hochofen verhüttet und die Rohkohle in einer Köhlerei verarbeitet werden.<br>- Baue einen Hochofen und eine Köhlerei.</p>"
+
 #~ msgid "--NEW OBJECTIVES--<br>- A normal mine can only dig up about one third of all ressources lying beneath. Then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, click it and then the appropriate button in the appearing menu.<br>Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need rations instead of snacks. You will have to enhance your tavern to an inn in order to produce rations out of pittabread AND a second kind of food (meat or fish). Note that the existance of inns does not make taverns obsolete - normal mines still require snacks instead of rations. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which you prefer.<br> Enhance the Coal Mine and the Tavern to the better versions of their buildings respectively.</p>"
 #~ msgstr "--NEUER AUFTRAG--<br>- Ein normales Bergwerk kann nur ungefähr ein Drittel aller im Berg liegenden Resourcen abbauen. Dennoch kann man an weitere Rohstoffe kommen, in dem man die Mine zu einer tiefen Mine ausbaut. Um ein Gebäude auszubauen, musst Du es anklicken und dann den entsprechende Knopf im erscheinenden Menü auswählen.<br>Bergarbeiter gewinnen Erfahrung durch erfolgreiche Arbeit. Mit ausreichender Erfahrung werden sie zu einem Bergwerkschef, der notwendig ist, um tiefe Minen zu betreiben. Daher solltest Du nie ein Gebäude ausbauen, bevor Du nicht genug erfahrene Arbeiter hast!<br>Auf der anderen Seite haben die Arbeiter der ausgebauten Gebäude grössere Ansprüche, als die des grundlegenden Gebäudes - zum Beispiel benötigen die Arbeiter von tiefen Minen Rationen anstelle von Snacks. Um Rationen aus Fladenbrot UND einer zweiten Zutat (Fleisch oder Fische) zu produzieren, musst Du Deine Tavern zu einem Wirtshaus ausbauen lassen.  Doch bedenke, dass die Wirtshäuser die Tavernen nicht ersetzen - normale Bergwerke brauchen immernoch Snacks, nicht etwa Rationen.  Natürlich könntest Du gleich alle Bergwerke ausbauen lassen, doch bedenke, dass ausgebaute Bergwerke zwar schneller arbeiten, dafür aber teureres Essen benötigen. Die Entscheidung liegt also bei Dir.<br>- Baue einige Bergwerke und eine Taverne zu verbesserten Gebäuden aus.</p>"
+
 #~ msgid "--NEW OBJECTIVES--<br>- Bigger and better buildings - including all militarian ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a Woodhardener first. Always remember to build a Woodhardener before you run out of blackwood, for without that you cannot expand.<br>Build a Woodhardener.</p>"
 #~ msgstr "--NEUER AUFTRAG--<br>- Bessere und größere Gebäude - wie auch alle militärischen Gebäude - benötigen bessere Baumaterialien, denn diese bestehen nicht nur aus Baumstämmen und Felsen, sondern vor allem aus Hartholz, welches von einem Holzhärter produziert werden kann.<br>Da Hartholz unabkömmlich ist ist es wichtig, immer zuerst ein Holzhärter zu bauen, bevor Du Dein letztes Hartholz aufbrauchst. Denn ohne Hartholz kannst Du nur wenige Gebäude bauen und nicht mehr expandieren.<br>- Baue einen Holzhärter.</p>"
+
 #~ msgid "--NEW OBJECTIVES--<br>- Better buildings may require also other improved materials besides blackwood. One of those is grindstone, which is produced out of water and raw stone by a Stonegrinder. You can obtain water by building a Well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain by clicking said flag and the Geologist-symbol in the consecutively appearing menu.<br>Build a Stonegrinder and a Well.</p>"
 #~ msgstr "--NEUER AUFTRAG--<br>- Baumstämme, Felsen und Hartholz sind nur ein Teil der Materialien, die man für bessere Gebäude braucht. Ein weiteres wichtiges Material ist Mörtel.<br>Mörtel kann in einer Steinschleiferei aus Stein und Wasser hergestellt werden. Um  an das dabei benötigte Wasser zu kommen, solltest Du einen Geologen nach Wasser suchen lassen und dann, dort wo er Wasser entdeckt hat, einen Brunnen errichten. <br>- Schicke einen Geologen auf die Suche nach Wasser, in dem Du auf eine Deiner Flaggen klickst, die auf Grasland oder Steppe steht. Wähle anschließend das Geologen-Symbol aus.<br>- Baue einen Brunnen und eine Steinschleiferei.</p>"
+
 #~ msgid "--NEW OBJECTIVES--<br>- The third material necessary for improved buildings is reed, used to cover roofs. Reed is being planted by a fernery.<br>Build a Fernery.</p>"
 #~ msgstr "--NEUER AUFTRAG--<br>- Das dritte Material was für größere und bessere Gebäude gebraucht wird, ist Schilf, welches wir vor allem für unsere Dächer verwenden. Dachschilf wird in der Farnerei produziert.<br>- Baue eine Farnerei.</p>"
-

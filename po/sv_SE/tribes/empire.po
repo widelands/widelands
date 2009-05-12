@@ -1,17 +1,15 @@
-# translation of empire.po to
 # Widelands po/sv_SE/tribes/empire.po
 # Copyright (C) 2008 Widelands Development Team
-#
 # Daniel Nylander <po@danielnylander.se>, 2005.
-# Erik <esigra@gmail.com>, 2009.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: empire\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-03-18 22:53+0000\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
 "PO-Revision-Date: 2009-03-19 00:31+0100\n"
 "Last-Translator: Erik <esigra@gmail.com>\n"
-"Language-Team:  <sv@li.org>\n"
+"Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -586,4 +584,3 @@ msgstr "Huvudkvarter medium"
 #: ../../../tribes/empire/conf:194
 msgid "Castle village"
 msgstr "Slottsby"
-

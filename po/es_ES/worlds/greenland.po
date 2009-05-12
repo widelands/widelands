@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:33+0000\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
 "PO-Revision-Date: 2007-06-13 20:35+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
@@ -16,142 +16,6 @@ msgstr ""
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: utf-8\n"
-
-#: ../../../worlds/greenland/bobs/badger/conf:1
-msgid "Badger"
-msgstr ""
-
-#: ../../../worlds/greenland/bobs/brownbear/conf:1
-msgid "Brownbear"
-msgstr ""
-
-#: ../../../worlds/greenland/bobs/bunny/conf:1
-msgid "Bunny"
-msgstr "Conejo"
-
-#: ../../../worlds/greenland/bobs/bush1/conf:1
-#: ../../../worlds/greenland/bobs/bush2/conf:1
-#: ../../../worlds/greenland/bobs/bush3/conf:1
-#: ../../../worlds/greenland/bobs/bush4/conf:1
-#: ../../../worlds/greenland/bobs/bush5/conf:1
-msgid "Bush"
-msgstr "Arbusto"
-
-#: ../../../worlds/greenland/bobs/cactus1/conf:1
-#: ../../../worlds/greenland/bobs/cactus2/conf:1
-msgid "Cactus"
-msgstr "Cacto"
-
-#: ../../../worlds/greenland/bobs/chamois/conf:1
-msgid "Chamois"
-msgstr ""
-
-#: ../../../worlds/greenland/bobs/deadtree1/conf:1
-#: ../../../worlds/greenland/bobs/deadtree2/conf:1
-#: ../../../worlds/greenland/bobs/deadtree3/conf:1
-#: ../../../worlds/greenland/bobs/deadtree4/conf:1
-msgid "Dead Tree"
-msgstr "Árbol muerto"
-
-#: ../../../worlds/greenland/bobs/deer/conf:1
-msgid "Deer"
-msgstr "Ciervo"
-
-#: ../../../worlds/greenland/bobs/duck/conf:1
-msgid "Duck"
-msgstr "Pato"
-
-#: ../../../worlds/greenland/bobs/elk/conf:1
-msgid "Elk"
-msgstr ""
-
-#: ../../../worlds/greenland/bobs/fallentree/conf:2
-msgid "Dead tree"
-msgstr "Árbol muerto"
-
-#: ../../../worlds/greenland/bobs/fox/conf:1
-msgid "Fox"
-msgstr "Zorro"
-
-#: ../../../worlds/greenland/bobs/grass1/conf:1
-#: ../../../worlds/greenland/bobs/grass2/conf:1
-#: ../../../worlds/greenland/bobs/grass3/conf:1
-msgid "Grass"
-msgstr "Hierba"
-
-#: ../../../worlds/greenland/bobs/lynx/conf:1
-msgid "Lynx"
-msgstr ""
-
-#: ../../../worlds/greenland/bobs/marten/conf:1
-msgid "Marten"
-msgstr ""
-
-#: ../../../worlds/greenland/bobs/mushroom1/conf:1
-#: ../../../worlds/greenland/bobs/mushroom2/conf:1
-msgid "Mushroom"
-msgstr "Seta"
-
-#: ../../../worlds/greenland/bobs/pebble1/conf:1
-#: ../../../worlds/greenland/bobs/pebble2/conf:1
-#: ../../../worlds/greenland/bobs/pebble3/conf:1
-#: ../../../worlds/greenland/bobs/pebble4/conf:1
-#: ../../../worlds/greenland/bobs/pebble5/conf:1
-#: ../../../worlds/greenland/bobs/pebble6/conf:1
-msgid "Pebble"
-msgstr "Gravilla"
-
-#: ../../../worlds/greenland/bobs/reindeer/conf:1
-msgid "Reindeer"
-msgstr "Reno"
-
-#: ../../../worlds/greenland/bobs/sheep/conf:1
-msgid "Sheep"
-msgstr "Oveja"
-
-#: ../../../worlds/greenland/bobs/skeleton1/conf:1
-#: ../../../worlds/greenland/bobs/skeleton2/conf:1
-#: ../../../worlds/greenland/bobs/skeleton3/conf:1
-msgid "Skeleton"
-msgstr "Esqueleto"
-
-#: ../../../worlds/greenland/bobs/sstones1/conf:1
-#: ../../../worlds/greenland/bobs/sstones2/conf:1
-#: ../../../worlds/greenland/bobs/sstones3/conf:1
-#: ../../../worlds/greenland/bobs/sstones4/conf:1
-#: ../../../worlds/greenland/bobs/sstones5/conf:1
-#: ../../../worlds/greenland/bobs/sstones6/conf:1
-#: ../../../worlds/greenland/bobs/sstones7/conf:1
-msgid "Standing Stones"
-msgstr "Monolito"
-
-#: ../../../worlds/greenland/bobs/stones1/conf:1
-#: ../../../worlds/greenland/bobs/stones2/conf:1
-#: ../../../worlds/greenland/bobs/stones3/conf:1
-#: ../../../worlds/greenland/bobs/stones4/conf:1
-#: ../../../worlds/greenland/bobs/stones5/conf:1
-#: ../../../worlds/greenland/bobs/stones6/conf:1
-msgid "Stones"
-msgstr "Piedras"
-
-#: ../../../worlds/greenland/bobs/tree1/conf:5
-#: ../../../worlds/greenland/bobs/tree2/conf:5
-#: ../../../worlds/greenland/bobs/tree3/conf:5
-#: ../../../worlds/greenland/bobs/tree4/conf:5
-#: ../../../worlds/greenland/bobs/tree5/conf:5
-#: ../../../worlds/greenland/bobs/tree6/conf:5
-#: ../../../worlds/greenland/bobs/tree7/conf:4
-#: ../../../worlds/greenland/bobs/tree8/conf:4
-msgid "Tree"
-msgstr "Árbol"
-
-#: ../../../worlds/greenland/bobs/wisent/conf:1
-msgid "Wisent"
-msgstr ""
-
-#: ../../../worlds/greenland/bobs/wolf/conf:1
-msgid "Wolf"
-msgstr "Zorro"
 
 #: ../../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
@@ -164,6 +28,243 @@ msgstr "Bosque"
 #: ../../../worlds/greenland/conf:4
 msgid "These are the beauty and bountifull countries of the barbarians"
 msgstr "Estas son las hermosas y generosas tierras de los bárbaros"
+
+#: ../../../worlds/greenland/conf:7 ../../../worlds/greenland/conf:8
+#: ../../../worlds/greenland/conf:9 ../../../worlds/greenland/conf:10
+#: ../../../worlds/greenland/conf:11
+msgid "Bush"
+msgstr "Arbusto"
+
+#: ../../../worlds/greenland/conf:12 ../../../worlds/greenland/conf:13
+msgid "Cactus"
+msgstr "Cacto"
+
+#: ../../../worlds/greenland/conf:14 ../../../worlds/greenland/conf:15
+#: ../../../worlds/greenland/conf:16 ../../../worlds/greenland/conf:17
+msgid "Dead Tree"
+msgstr "Árbol muerto"
+
+#: ../../../worlds/greenland/conf:18
+#, fuzzy
+msgid "Fallen Tree"
+msgstr "Árbol muerto"
+
+#: ../../../worlds/greenland/conf:19 ../../../worlds/greenland/conf:20
+#: ../../../worlds/greenland/conf:21
+msgid "Grass"
+msgstr "Hierba"
+
+#: ../../../worlds/greenland/conf:22 ../../../worlds/greenland/conf:23
+msgid "Mushroom"
+msgstr "Seta"
+
+#: ../../../worlds/greenland/conf:24 ../../../worlds/greenland/conf:25
+#: ../../../worlds/greenland/conf:26 ../../../worlds/greenland/conf:27
+#: ../../../worlds/greenland/conf:28 ../../../worlds/greenland/conf:29
+msgid "Pebble"
+msgstr "Gravilla"
+
+#: ../../../worlds/greenland/conf:30 ../../../worlds/greenland/conf:31
+#: ../../../worlds/greenland/conf:32
+msgid "Skeleton"
+msgstr "Esqueleto"
+
+#: ../../../worlds/greenland/conf:33 ../../../worlds/greenland/conf:34
+#: ../../../worlds/greenland/conf:35 ../../../worlds/greenland/conf:36
+#: ../../../worlds/greenland/conf:37 ../../../worlds/greenland/conf:38
+#: ../../../worlds/greenland/conf:39
+msgid "Standing Stones"
+msgstr "Monolito"
+
+#: ../../../worlds/greenland/conf:40 ../../../worlds/greenland/conf:41
+#: ../../../worlds/greenland/conf:42 ../../../worlds/greenland/conf:43
+#: ../../../worlds/greenland/conf:44 ../../../worlds/greenland/conf:45
+msgid "Stones"
+msgstr "Piedras"
+
+#: ../../../worlds/greenland/conf:46
+msgid "Aspen"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:47
+msgid "Aspen medium"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:48
+msgid "Aspen small"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:49
+msgid "Aspen tiny"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:50
+msgid "Oak"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:51
+msgid "Oak medium"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:52
+msgid "Oak small"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:53
+msgid "Oak tiny"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:54
+msgid "Spruce"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:55
+msgid "Spruce medium"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:56
+msgid "Spruce small"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:57
+msgid "Spruce tiny"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:58
+msgid "Alder"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:59
+msgid "Alder medium"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:60
+msgid "Alder small"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:61
+msgid "Alder tiny"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:62
+msgid "Birch"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:63
+msgid "Birch medium"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:64
+msgid "Birch small"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:65
+msgid "Birch tiny"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:66
+msgid "Beech"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:67
+msgid "Beech medium"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:68
+msgid "Beech small"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:69
+msgid "Beech tiny"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:70
+msgid "Larch"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:71
+msgid "Larch medium"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:72
+msgid "Larch small"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:73
+msgid "Larch tiny"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:74
+msgid "Rowan"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:75
+msgid "Rowan medium"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:76
+msgid "Rowan small"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:77
+msgid "Rowan tiny"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:80
+msgid "Badger"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:81
+msgid "Brownbear"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:82
+msgid "Bunny"
+msgstr "Conejo"
+
+#: ../../../worlds/greenland/conf:83
+msgid "Chamois"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:84
+msgid "Deer"
+msgstr "Ciervo"
+
+#: ../../../worlds/greenland/conf:85
+msgid "Duck"
+msgstr "Pato"
+
+#: ../../../worlds/greenland/conf:86
+msgid "Elk"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:87
+msgid "Fox"
+msgstr "Zorro"
+
+#: ../../../worlds/greenland/conf:88
+msgid "Lynx"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:89
+msgid "Marten"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:90
+msgid "Reindeer"
+msgstr "Reno"
+
+#: ../../../worlds/greenland/conf:91
+msgid "Sheep"
+msgstr "Oveja"
+
+#: ../../../worlds/greenland/conf:92
+msgid "Wisent"
+msgstr ""
+
+#: ../../../worlds/greenland/conf:93
+msgid "Wolf"
+msgstr "Zorro"
 
 #: ../../../worlds/greenland/resconf:4
 msgid "Coal"
@@ -188,3 +289,9 @@ msgstr "Agua"
 #: ../../../worlds/greenland/resconf:41
 msgid "Fish"
 msgstr "Pescado"
+
+#~ msgid "Dead tree"
+#~ msgstr "Árbol muerto"
+
+#~ msgid "Tree"
+#~ msgstr "Árbol"

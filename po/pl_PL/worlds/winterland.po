@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3825\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-16 19:21+0000\n"
-"PO-Revision-Date: 2008-10-26 13:03+0100\n"
-"Last-Translator: Jacek Wolszczak <shutdownrunner@o2.pl>\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"PO-Revision-Date: 2009-04-17 19:12+0100\n"
+"Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,132 +81,131 @@ msgstr "Ścieżka"
 
 #: ../../../worlds/winterland/conf:45
 msgid "Aspen"
-msgstr ""
+msgstr "Topola"
 
 #: ../../../worlds/winterland/conf:46
 msgid "Aspen medium"
-msgstr ""
+msgstr "Średnia topola"
 
 #: ../../../worlds/winterland/conf:47
 msgid "Aspen small"
-msgstr ""
+msgstr "Mała topola"
 
 #: ../../../worlds/winterland/conf:48
 msgid "Aspen tiny"
-msgstr ""
+msgstr "Malutka topola"
 
 #: ../../../worlds/winterland/conf:49
 msgid "Oak"
-msgstr ""
+msgstr "Dąb"
 
 #: ../../../worlds/winterland/conf:50
 msgid "Oak medium"
-msgstr ""
+msgstr "Średni dąb"
 
 #: ../../../worlds/winterland/conf:51
 msgid "Oak small"
-msgstr ""
+msgstr "Mały dąb"
 
 #: ../../../worlds/winterland/conf:52
 msgid "Oak tiny"
-msgstr ""
+msgstr "Malutki dąb"
 
 #: ../../../worlds/winterland/conf:53
 msgid "Spruce"
-msgstr ""
+msgstr "Świerk"
 
 #: ../../../worlds/winterland/conf:54
 msgid "Spruce medium"
-msgstr ""
+msgstr "Średni świerk"
 
 #: ../../../worlds/winterland/conf:55
 msgid "Spruce small"
-msgstr ""
+msgstr "Mały świerk"
 
 #: ../../../worlds/winterland/conf:56
 msgid "Spruce tiny"
-msgstr ""
+msgstr "Malutki świerk"
 
 #: ../../../worlds/winterland/conf:57
 msgid "Maple"
-msgstr ""
+msgstr "Klon"
 
 #: ../../../worlds/winterland/conf:58
 msgid "Maple medium"
-msgstr ""
+msgstr "Średni klon"
 
 #: ../../../worlds/winterland/conf:59
 msgid "Maple small"
-msgstr ""
+msgstr "Mały klon"
 
 #: ../../../worlds/winterland/conf:60
 msgid "Maple tiny"
-msgstr ""
+msgstr "Malutki klon"
 
 #: ../../../worlds/winterland/conf:61
 msgid "Birch"
-msgstr ""
+msgstr "Brzoza"
 
 #: ../../../worlds/winterland/conf:62
 msgid "Birch medium"
-msgstr ""
+msgstr "Średnia brzoza"
 
 #: ../../../worlds/winterland/conf:63
 msgid "Birch small"
-msgstr ""
+msgstr "Mała brzoza"
 
 #: ../../../worlds/winterland/conf:64
 msgid "Birch tiny"
-msgstr ""
+msgstr "Malutka brzoza"
 
 #: ../../../worlds/winterland/conf:65
 msgid "Beech"
-msgstr ""
+msgstr "Buk"
 
 #: ../../../worlds/winterland/conf:66
 msgid "Beech medium"
-msgstr ""
+msgstr "Średni buk"
 
 #: ../../../worlds/winterland/conf:67
 msgid "Beech small"
-msgstr ""
+msgstr "Mały buk"
 
 #: ../../../worlds/winterland/conf:68
 msgid "Beech tiny"
-msgstr ""
+msgstr "Malutki buk"
 
 #: ../../../worlds/winterland/conf:69
 msgid "Larch"
-msgstr ""
+msgstr "Modrzew"
 
 #: ../../../worlds/winterland/conf:70
 msgid "Larch medium"
-msgstr ""
+msgstr "Średni modrzew"
 
 #: ../../../worlds/winterland/conf:71
 msgid "Larch small"
-msgstr ""
+msgstr "Mały modrzew"
 
 #: ../../../worlds/winterland/conf:72
 msgid "Larch tiny"
-msgstr ""
+msgstr "Malutki modrzew"
 
 #: ../../../worlds/winterland/conf:73
-#, fuzzy
 msgid "Rowan"
-msgstr "Yeti"
+msgstr "Jarząb"
 
 #: ../../../worlds/winterland/conf:74
 msgid "Rowan medium"
-msgstr ""
+msgstr "Średni jarząb"
 
 #: ../../../worlds/winterland/conf:75
 msgid "Rowan small"
-msgstr ""
+msgstr "Mały jarząb"
 
 #: ../../../worlds/winterland/conf:76
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Malutki jarząb"
 
 #: ../../../worlds/winterland/conf:79
 msgid "Badger"

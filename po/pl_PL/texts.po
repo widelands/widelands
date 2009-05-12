@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3825\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-16 19:21+0000\n"
-"PO-Revision-Date: 2009-04-02 19:00+0100\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"PO-Revision-Date: 2009-05-09 10:25+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -239,7 +239,7 @@ msgstr "F5               Pokazuje całą mapę (Tylko w przypadku wydań \"debug
 #: ../../txts/README:62
 #, fuzzy
 msgid "F6           Shows the debug console (only in debug-builds)"
-msgstr "F5               Pokazuje całą mapę (Tylko w przypadku wydań \"debug\")"
+msgstr "F6           Pokazuj konsole debugującą (tylko w przypadku wydań debug)"
 
 #: ../../txts/README:64
 msgid "F10         Quit the game immediately"
@@ -251,7 +251,7 @@ msgstr "F11             Zapisuje zrzut ekranu"
 
 #: ../../txts/README:69
 msgid "When finishing a road, if Ctrl is down, place flags along the road. Default is to place flags from end to start. If Shift is also down, place flags from start to end instead."
-msgstr ""
+msgstr "Kiedy Ctrl jest wciśnięty podczas dokańczania drogi, flagi będą automatycznie umieszczone. Standardowo, flagi będą umieszczane od końca do początku. Kiedy Shift też jest naciśnięta, flagi będą umieszczone od początku do końca."
 
 #: ../../txts/README:74
 msgid "Online Help"
@@ -349,23 +349,23 @@ msgstr "Wódz"
 msgid "Elders"
 msgstr "Starszyzna"
 
-#: ../../txts/developers:19 ../../txts/developers:289
+#: ../../txts/developers:19 ../../txts/developers:290
 msgid "Graphics"
 msgstr "Grafika"
 
 #: ../../txts/developers:22 ../../txts/developers:29 ../../txts/developers:36
 msgid "vacant"
-msgstr ""
+msgstr "niedostępny"
 
-#: ../../txts/developers:26 ../../txts/developers:282
+#: ../../txts/developers:26 ../../txts/developers:283
 msgid "Homepage"
 msgstr "Strona domowa"
 
-#: ../../txts/developers:33 ../../txts/developers:295
+#: ../../txts/developers:33 ../../txts/developers:296
 msgid "Sound"
 msgstr "Dźwięk"
 
-#: ../../txts/developers:40 ../../txts/developers:300
+#: ../../txts/developers:40 ../../txts/developers:301
 msgid "Translation"
 msgstr "Tłumaczenie"
 
@@ -411,7 +411,7 @@ msgstr "Czeski"
 
 #: ../../txts/developers:152
 msgid "Dansk"
-msgstr ""
+msgstr "Duński"
 
 #: ../../txts/developers:157
 msgid "Dutch"
@@ -433,59 +433,59 @@ msgstr "Galicyjski"
 msgid "German"
 msgstr "Niemiecki"
 
-#: ../../txts/developers:190
+#: ../../txts/developers:191
 msgid "Hebrew"
 msgstr "Hebrajski"
 
-#: ../../txts/developers:195
+#: ../../txts/developers:196
 msgid "Hungarian"
 msgstr "Węgierski"
 
-#: ../../txts/developers:200
+#: ../../txts/developers:201
 msgid "Polish"
 msgstr "Polski"
 
-#: ../../txts/developers:208
+#: ../../txts/developers:209
 msgid "Russian"
 msgstr "Rosyjski"
 
-#: ../../txts/developers:213
+#: ../../txts/developers:214
 msgid "Slovak"
 msgstr "Słowacki"
 
-#: ../../txts/developers:218
+#: ../../txts/developers:219
 msgid "Spanish"
 msgstr "Hiszpański"
 
-#: ../../txts/developers:223
+#: ../../txts/developers:224
 msgid "Swedish"
 msgstr "Szwedzki"
 
-#: ../../txts/developers:231
+#: ../../txts/developers:232
 msgid "Packagers"
 msgstr "Opiekuni pakietów"
 
-#: ../../txts/developers:235
+#: ../../txts/developers:236
 msgid "Linux Distributions"
 msgstr "Dystrubucje linuksowe"
 
-#: ../../txts/developers:246
+#: ../../txts/developers:247
 msgid "Other Unix Distributions"
 msgstr "Inne dystrybucje uniksowe"
 
-#: ../../txts/developers:255
+#: ../../txts/developers:256
 msgid "Non Unix Distributions"
 msgstr "Dystrybucje nieuniksowe"
 
-#: ../../txts/developers:266
+#: ../../txts/developers:267
 msgid "Wiki and Enduser-Documentation"
 msgstr "Wiki i dokumentacja użytkownika"
 
-#: ../../txts/developers:278
+#: ../../txts/developers:279
 msgid "Former elders"
-msgstr ""
+msgstr "Była starszyzna"
 
-#: ../../txts/developers:306
+#: ../../txts/developers:307
 msgid "Other"
 msgstr "Inne"
 
@@ -503,7 +503,6 @@ msgid "This Editor is intended for players who would like to design their own ma
 msgstr "Edytor jest przeznaczony dla graczy, którzy chcą stworzyć własne mapy do gry.<br>Jak widać, Edytor jest we wczesnej fazie rozwoju, wraz ze jego polepszeniem, polepszy się też ta dokumentacja. Planowane jest też wydanie krótkiego samouczka."
 
 #: ../../txts/editor_readme:12
-#, fuzzy
 msgid "Please look into our enduser manuals in our wiki-pages at:"
 msgstr "Proszę spojrzeć do naszych manuali dla użytkowników na naszych wiki-stronach na:"
 
@@ -630,9 +629,8 @@ msgid "You can find a reference for all triggers and events in our wiki at widel
 msgstr ""
 
 #: ../../txts/tips/empire.tip:10
-#, fuzzy
 msgid "Always build a forester's house so you will not run out of trunks."
-msgstr "Zawsze buduj leśniczówkę i opiekuna zwierząt, żeby zapewnić sobie stałe dostawy belek i jedzenia."
+msgstr "Zawsze buduj leśniczówkę, aby belki były zawsze dostępne."
 
 #: ../../txts/tips/general_game.tip:2
 msgid "The building process will only start after a road is built to the construction site."
@@ -643,9 +641,8 @@ msgid "Be sure to send a geologist to survey sites before building a well or a m
 msgstr "Zanim zbudujesz kopalnię czy studnię, wyślij geologa do zbadania terenu."
 
 #: ../../txts/tips/general_game.tip:10
-#, fuzzy
 msgid "Your territory can be expanded by building various military buildings - Sentry, Fortress, Barracks, etc."
-msgstr "Twoje terytorium może być rozszrzone poprzez budoanie róznych budowli - strażnicy, fortecy, koszarów, itp."
+msgstr "Twoje terytorium może być rozszerzone poprzez budowanie róznych budowli - strażnicy, fortecy, koszarów, itp."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will only work if supplied with food."
@@ -669,10 +666,10 @@ msgstr ""
 
 #: ../../txts/tips/multiplayer.tip:2
 msgid "You can use 'Page up' and 'Page down' keys to adjust your wished speed - the real speed is than democratically set."
-msgstr ""
+msgstr "Możesz używać 'Page up' i 'Page down' żeby dostosować prędkość - prawdziwa prędkość będzie potem demokratycznie ustanowiona."
 
 #: ../../txts/tips/multiplayer.tip:6
-msgid "You can use '/me' at the beginning of a chatmessage: '/me is tired' will be printed as '-> Nickname is tired'"
+msgid "You can use '/me' at the beginning of a chatmessage: '/me is tired' will be printed as '-> Nickname is tired'."
 msgstr ""
 
 #: ../../txts/tips/singleplayer.tip:2

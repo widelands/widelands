@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3725\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-03-18 22:53+0000\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
 "PO-Revision-Date: 2008-11-14 21:42+0100\n"
 "Last-Translator: Fredrik Pettersson <luno@iaofredde.net>\n"
 "Language-Team: swedish <sv@li.org>\n"
@@ -15,6 +15,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
 
+#: ../../../campaigns/t01.wmf/elemental:7
+msgid "Tutorial1 - Eyes in the Dark"
+msgstr ""
+
+#: ../../../campaigns/t01.wmf/elemental:9
+msgid "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic gameplay and control as well as basic production buildings (wood, stone, etc.) will be introduced."
+msgstr ""
+
 #: ../../../campaigns/t01.wmf/event:23
 #, fuzzy
 msgid "Thron sighs..."
@@ -22,7 +30,7 @@ msgstr "Thron talar..."
 
 #: ../../../campaigns/t01.wmf/event:25
 #, fuzzy
-msgid " \"It's been months and we are still hiding where the forests are old and dark.<br> My warriors hunt at day and lay awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
+msgid " \"It's been months and we are still hiding where the forests are old and dark.<br> My warriors hunt at day and lie awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
 msgstr "Det har gått flera månader och vi gömmer oss fortfarande i den gamla mörka skogen. Mina krigare jagar på dagen och ligger vakna på natten - och lyssnar på den grymma slakten som ekar bortom den urtida skogen."
 
 #: ../../../campaigns/t01.wmf/event:27 ../../../campaigns/t01.wmf/event:40
@@ -44,7 +52,7 @@ msgstr "Nästa"
 
 #: ../../../campaigns/t01.wmf/event:38
 #, fuzzy
-msgid " \"We can see the raging flames that swallow Al'thunran, miles away, from here.<br> The red lights flash in the darkness and dance to the rhythm of the wardrums that haunt me even in my nightmares.\" "
+msgid " \"We can see the raging flames that swallow Al'thunran from here, miles away.<br> The red lights flash in the darkness and dance to the rhythm of the wardrums that haunt me even in my nightmares.\" "
 msgstr "Vi kan se rasande flammor som äter upp Al'thunran, långt härifrån. Det röda ljuset glimmar i mörkret och dansar till rytmen av krigstrummor som jagar mig i mina mardrömmar."
 
 #: ../../../campaigns/t01.wmf/event:51
@@ -54,7 +62,7 @@ msgstr "Min fars skelett vilar lugnt och stilla i marken som han befriade från 
 
 #: ../../../campaigns/t01.wmf/event:64
 #, fuzzy
-msgid " \"As father told me, there will be times to fight and times to lay and wait, trying not to sleep or die before the right time comes. And so I do... wait.\" "
+msgid " \"As father told me, there will be times to fight and times to lie and wait, trying not to sleep or die before the right time comes. And so I do... wait.\" "
 msgstr "Min far berättade för mig, det kommer tider för krig och tider att sitta och vänta, försök inte att sova eller dö innan tiden är inne. Och det gjorde jag... väntade."
 
 #: ../../../campaigns/t01.wmf/event:102
@@ -63,7 +71,8 @@ msgid "An old man says..."
 msgstr "En gammal man närmar sig..."
 
 #: ../../../campaigns/t01.wmf/event:104
-msgid " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my council through these darkened days.\" "
+#, fuzzy
+msgid " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my counsel through these darkened days.\" "
 msgstr "\"Var hälsad, hövding. Jag är Khantrukh och jag har sett många vintrar flyga förbi. Tillåt mig att hjälpa dig med mina råd i dessa mörka stunder.\""
 
 #: ../../../campaigns/t01.wmf/event:106
@@ -80,10 +89,10 @@ msgid " \"None but the gods know how long we have to remain hidden here. The war
 msgstr " \"Ingen förutom gudarna vet hur länge vi måste hålla oss gömda här. Krigarna hoppas på att vi ska kunna marchera tillbaka vilken dag som hälst nu, men jag tvivlar starkt på att det kommer hända inom en snar framtid. Och dagarna börjar redan bli kallare och mörkare...<br>Vi borde förbereda oss, i fall att vi måste stanna över vintern i detta ogästvänliga landet. Jag tror att det finns lite plats öster om vårt läger där vi kan sätta upp några skogshuggare. \" <br><br>--NYA MÅL--<br>- tryck MELLANSLAG för att se var du kan bygga. De röda prickarna visar var små byggnader - som en skogshuggare - kan byggas.<br>- bygg en skogshuggare vid den närmaste högra röda pricken om ditt huvudkvarter genom att trycka på den och välja skogshuggare."
 
 #: ../../../campaigns/t01.wmf/event:119 ../../../campaigns/t01.wmf/objective:7
-msgid "* Press SPACE to see where you can build.<br> The red spots show you, where a small building - like a lumberjack's hut - may be built.<br>"
+msgid "* Press SPACE to see where you can build.<br> The red spots show you where a small building - like a lumberjack's hut - may be built.<br>"
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:120
+#: ../../../campaigns/t01.wmf/event:120 ../../../campaigns/t01.wmf/objective:8
 msgid "* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting lumberjack's hut.<br>"
 msgstr ""
 
@@ -99,11 +108,11 @@ msgid "The elder remarks..."
 msgstr "Den vise påpekar..."
 
 #: ../../../campaigns/t01.wmf/event:134
-msgid " \"Obviously, it would be too draining for our people to walk all the way to the lumberjack's hut through the wilderness. We will have to make a path between our hall and the lumberjack's hut. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgid " \"Obviously, it would be too draining for our people to walk all the way to the lumberjack's hut through the wilderness. We will have to make a path between our hall and the lumberjack's hut. It's not a hard guess that the men would appreciate a way as short and even as possible - the wood surely will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 
-#: ../../../campaigns/t01.wmf/event:135
-msgid "* Build a road between your headquarters and the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You are expected to connect it to another flag with a road.<br> If you click on a flag little symbols will appear around it to show you in which directions you can build the road.<br> The colour of those symbols indicate how steep the road will be. Green is flat, yellow is steep and red is very steep. The steeper the step is, the harder it will be for your people to walk on it.<br> You can click on any of those symbols to build the first step of the road to it. New symbols will appear to show you where the next step can go, and so on. But you can also click further away to build several steps at once. Click on the flag at the headquarters to finish the road."
+#: ../../../campaigns/t01.wmf/event:135 ../../../campaigns/t01.wmf/objective:9
+msgid "* Build a road between your headquarters and the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You should connect it to another flag with a road.<br> If you click on a flag, little symbols will appear around it to show you in which directions you can build the road.<br> The colour of those symbols indicate how steep the road will be. Green is flat, yellow is steep and red is very steep. The steeper the step is, the harder it will be for your people to walk on it.<br> You can click on any of the symbols to build the first step of the road there. New symbols will appear to show you where the next step can go, and so on. However, you can also click further away to build several steps at once. Click on the flag at the headquarters to finish the road."
 msgstr ""
 
 #: ../../../campaigns/t01.wmf/event:148
@@ -112,12 +121,13 @@ msgid "Khantrukh remembers..."
 msgstr "Khantrukh talar..."
 
 #: ../../../campaigns/t01.wmf/event:150
-msgid " \"There is an old saying:<br> 'A burden divided is easier to endure.'<br> A crossroad on the way between our site and the lumberjack's hut would ease the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgid " \"There is an old saying:<br> 'A burden divided is easier to endure.'<br> A crossroads on the way between our site and the lumberjack's hut would ease the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
 
 #: ../../../campaigns/t01.wmf/event:151
+#: ../../../campaigns/t01.wmf/objective:17
 #, fuzzy
-msgid "* Place a flag in the mid of the road.<br> There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
+msgid "* Place a flag in the middle of the road.<br> There is a flag symbol in the mid of the way you just built. You place a flag there by clicking on the symbol and then clicking on the flag button in the consequently appearing menu. This splits the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
 msgstr " \"Det finns ett gammalt talesätt: 'Delad börda är lättare att bära.' En vägkorsning mellan vårt huvudkvarter och skogshuggaren skulle underlätta arbetet för våra Transportörer.\"<br><br>--NYA MÅL--<BR>Där är en flagg-symbol i mitten på vägen du nyss byggde. Genom att klicka på den och i den rutan som kom fram klickar du på flagg-knappen, så har du placerat en flagga där, och där igenom har du delat upp arbetet med att transportera stockar på två transportörer. När mycket varor transporteras mellan två punkter, så gör flera flaggor mellan dem så att det går fortare att nå fram till deras slutpunkt och där igenom förbättras din infrastruktur. Placera en flagga mitt på vägen."
 
 #: ../../../campaigns/t01.wmf/event:163
@@ -126,12 +136,13 @@ msgstr "Den gamle mannen ser upp i skyn..."
 
 #: ../../../campaigns/t01.wmf/event:165
 #, fuzzy
-msgid " \"The northern winds tell us, the coming winter will be a long and cruel one. One lumberjack's hut will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
+msgid " \"The northern winds tell us that the coming winter will be a long and cruel one. One lumberjack's hut will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Nordanvinden berättar, att den kommande vinter kommer vara lång och elendig. En skogshuggare kommer inte vara tillräckligt för vårt folks behov. Fler träd väntar på oss söder om vår nya korsning - låt oss bygga en andra skogshuggare där!\"<br><br>--NYA MÅL--<br>- Placera en skogshuggare söder om den flaggan som du ska sätta på vägen. Efteråt förbinder du flaggan med den nya skogshuggaren. Notera att, istället för att bygga en väg steg för steg, kan du klicka direkt på destinationen så byggs hela vägen på en gång."
 
 #: ../../../campaigns/t01.wmf/event:166
+#: ../../../campaigns/t01.wmf/objective:18
 #, fuzzy
-msgid "* Place a lumberjack's hut directly south of the flag you just placed on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+msgid "* Place a lumberjack's hut directly south of the flag you just placed on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
 msgstr " \"Nordanvinden berättar, att den kommande vinter kommer vara lång och elendig. En skogshuggare kommer inte vara tillräckligt för vårt folks behov. Fler träd väntar på oss söder om vår nya korsning - låt oss bygga en andra skogshuggare där!\"<br><br>--NYA MÅL--<br>- Placera en skogshuggare söder om den flaggan som du ska sätta på vägen. Efteråt förbinder du flaggan med den nya skogshuggaren. Notera att, istället för att bygga en väg steg för steg, kan du klicka direkt på destinationen så byggs hela vägen på en gång."
 
 #: ../../../campaigns/t01.wmf/event:179
@@ -140,7 +151,7 @@ msgstr "Khantrukh nickar..."
 
 #: ../../../campaigns/t01.wmf/event:181
 #, fuzzy
-msgid " \"Of course, if we intended to build a bigger settlement much more lumberjack's huts would be advisable, but this should do for now.<br> But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give back again.<br> So, in order to replace the trees we chop down, we should build a ranger's hut, preferably close to the lumberjack's hut.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgid " \"Of course, if we intended to build a bigger settlement, much more lumberjack's huts would be advisable, but this should do for now.<br> But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give back again.<br> So, in order to replace the trees we chop down, we should build a ranger's hut, preferably close to the lumberjack's hut.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Självklart, om vi vill bygga ett större rike behöver vi fler skogshuggare, men det borde räcka för tillfället.<br>Men glöm aldrig - skogarna är vårt arv, anförtrodda till oss av våra förfäder. Vi måste alltid respektera och sköta om dem. Det vi tar måste vi ge tillbaka igen.<br>Så, för att ersätta träden vi hugger ner, borde vi bygga en Skogsplanterare, helst nära Skogshuggaren.\"<br><br>-- NYA MÅL--<br>- Bygg en Skogsplanterare öster om den första Skogshuggaren."
 
 #: ../../../campaigns/t01.wmf/event:182
@@ -155,13 +166,13 @@ msgstr "Den vise talar..."
 
 #: ../../../campaigns/t01.wmf/event:196
 #, fuzzy
-msgid " \"I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations.<br> I would advise that we obtain stones for the future - who knows what fortifications we might be forced to build very soon? And - like a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- NEW OBJECTIVE --<br> "
+msgid " \"I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations.<br> I would advise that we obtain stones for the future - who knows what fortifications we might be forced to build very soon. And - like a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Jag är mycket medveten, hövding, att varken du eller dina krigare vill stanna länge i detta övergivna landet. Men ändå, vårt krig för att ta tillbaka vårt hemland kan ta lång tid och det verkar klokt att förbereda sig. Jag skulle råda att vi lagrar sten för framtida bruk - vem vet vilka befästningar vi snart kan bli tvingade att bygga? Och - som en gåva av ödet - där är förträfliga stenblock i närheten...\"<br><br>-- NYTT MÅL--<br> - Bygg två Stenhuggare sydväst om ditt huvudkvarter."
 
 #: ../../../campaigns/t01.wmf/event:197
 #: ../../../campaigns/t01.wmf/objective:34
 #, fuzzy
-msgid "* Build two quarries south-west of your headquarters."
+msgid "* Build two quarries southwest of your headquarters."
 msgstr "- Bygg två Stenhuggare sydväst om ditt Huvudkvarter."
 
 #: ../../../campaigns/t01.wmf/event:224 ../../../campaigns/t01.wmf/event:239
@@ -170,7 +181,7 @@ msgstr "Thron talar..."
 
 #: ../../../campaigns/t01.wmf/event:226
 #, fuzzy
-msgid " \"In another sleepless night I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br> They are a constant reminder why we had to hide here... and why we must return in the end!\" "
+msgid " \"In another sleepless night, I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br> They are a constant reminder why we had to hide here... and why we must return in the end!\" "
 msgstr "Under an annan sömnlös natt gick jag upp på kullen och blickade åt norr. Eldarna brinner fortfarande, stillar sin hunger på min fars arv. <br>De är en konstant påminnelse om varför vi måste gömma oss här. <br>Och en påminnelse om varför vi tillslut måste återvända."
 
 #: ../../../campaigns/t01.wmf/event:228
@@ -180,7 +191,7 @@ msgstr "Under natten..."
 
 #: ../../../campaigns/t01.wmf/event:241
 #, fuzzy
-msgid " \"Once again I went up to my father's tomb, in a sacred grove at the feet of the great spire of Kal'mavrath. I just stood there and did not feel neither the hours pass nor the cold rain pouring down from a darkened sky...<br> Somehow it felt like farewell. For the first time I wondered what the future might hold for me...\" "
+msgid " \"Once again, I went up to my father's tomb, in a sacred grove at the foot of the great spire of Kal'mavrath. I just stood there and felt neither the hours pass nor the cold rain pouring down from a darkened sky...<br> Somehow it felt like a farewell. For the first time, I wondered what the future might hold for me...\" "
 msgstr "Ännu en gång gick jag upp till min fars grav, i en helig lund nedanför Kal'mavraths stora spira. Jag bara stod där utan en tanke på tiden eller regnet som öste ner från den mörknande himmeln... <br>>På något vis kändes det som jag tog farväl. För första gången undrade jag vad framtiden hade för planer för mig..."
 
 #: ../../../campaigns/t01.wmf/event:243
@@ -193,7 +204,7 @@ msgstr "Thron säger tankfullt..."
 
 #: ../../../campaigns/t01.wmf/event:256
 #, fuzzy
-msgid " \"Some time ago, Boldreth came to me. His advise was to move to some place closer home - to strike at the first sign of my brothers forces wavering.<br> But I look over the forests and I still see black smoke rising to the sky and I know - it is too early yet and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed a too rash return would cause both on our and the other side...\" "
+msgid " \"Some time ago, Boldreth came to me. His advice was to move to a place closer to home - to strike at the first sign of my brother's forces wavering.<br> But I look over the forests and I still see black smoke rising to the sky. I know - it is too early yet, and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed that too rash a return would cause both on our and the other side...\" "
 msgstr "För en tid sedan kom Boldreth till mig. Han rådde mig att flytta till ett ställe närmare mitt hem - för att kunna slå till vid första antydan från mina bröders arméer.<br>Men jag tittade över skogen och jag såg fortfarande svart rök som steg mot skyn och jag visste - det är ännu för tidigt och det han hoppas på kommer inte att hända inom en snar framtid. Han kan ha rätt, men jag är rädd för att om vi flyttar tillbaka för tidigt kommer det spillas för mycket blod både på deras sida och våran..."
 
 #: ../../../campaigns/t01.wmf/event:258
@@ -228,28 +239,9 @@ msgstr "Uppdrag Slutfört"
 msgid "Build a lumberjack's hut"
 msgstr "Bygg en skogshuggarkoja"
 
-#: ../../../campaigns/t01.wmf/objective:8
-msgid "* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting Lumberjacks Hut.<br>"
-msgstr ""
-
-#: ../../../campaigns/t01.wmf/objective:9
-#, fuzzy
-msgid "* Build a road between your headquarters and the lumberjack's hut.<br> You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
-msgstr "- tryck MELLANSLAG för att se var du kan bygga. De röda prickarna visar dig var en liten byggnad - som en skogshuggare - kan byggas.<br>- bygg en skogshuggare vid den röda pricken direkt till höger om ditt huvudkvarter genom att klicka på den och välja skogshuggare.<br>- Bygg en väg mellan skogshuggare och ditt huvudkvarter. Du gör det genom att klicka på flaggan framför någon av byggnaderna och sen väg knappen. Runt flaggan borde det dyka upp symboler, som visar hur brant vägen är i den riktningen. Ju brantare väg, desto svårare är det för ditt folk att gå på den. När du klickar på en sådan symbol bygger du en del av vägen och måste sen välja nästa riktning. Bygg en väg mellan flaggorna framför de två byggnaderna. Försök att få den så kort och jämn som möjligt."
-
 #: ../../../campaigns/t01.wmf/objective:15
 msgid "Build another lumberjack's hut"
 msgstr ""
-
-#: ../../../campaigns/t01.wmf/objective:17
-#, fuzzy
-msgid "* Place a flag in the mid of the road.<br> There is a flag symbol in the mid of the way you just built.<br> By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
-msgstr " \"Det finns ett gammalt talesätt: 'Delad börda är lättare att bära.' En vägkorsning mellan vårt huvudkvarter och skogshuggaren skulle underlätta arbetet för våra Transportörer.\"<br><br>--NYA MÅL--<BR>Där är en flagg-symbol i mitten på vägen du nyss byggde. Genom att klicka på den och i den rutan som kom fram klickar du på flagg-knappen, så har du placerat en flagga där, och där igenom har du delat upp arbetet med att transportera stockar på två transportörer. När mycket varor transporteras mellan två punkter, så gör flera flaggor mellan dem så att det går fortare att nå fram till deras slutpunkt och där igenom förbättras din infrastruktur. Placera en flagga mitt på vägen."
-
-#: ../../../campaigns/t01.wmf/objective:18
-#, fuzzy
-msgid "* Place a lumberjack's hut directly south of the flag you are about to place on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
-msgstr " \"Nordanvinden berättar, att den kommande vinter kommer vara lång och elendig. En skogshuggare kommer inte vara tillräckligt för vårt folks behov. Fler träd väntar på oss söder om vår nya korsning - låt oss bygga en andra skogshuggare där!\"<br><br>--NYA MÅL--<br>- Placera en skogshuggare söder om den flaggan som du ska sätta på vägen. Efteråt förbinder du flaggan med den nya skogshuggaren. Notera att, istället för att bygga en väg steg för steg, kan du klicka direkt på destinationen så byggs hela vägen på en gång."
 
 #: ../../../campaigns/t01.wmf/objective:24
 msgid "Build a ranger's hut"
@@ -258,3 +250,15 @@ msgstr "Bygg en skogvaktarkoja"
 #: ../../../campaigns/t01.wmf/objective:32
 msgid "Build two quarries"
 msgstr "Bygg två stenbrott"
+
+#, fuzzy
+#~ msgid "* Build a road between your headquarters and the lumberjack's hut.<br> You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
+#~ msgstr "- tryck MELLANSLAG för att se var du kan bygga. De röda prickarna visar dig var en liten byggnad - som en skogshuggare - kan byggas.<br>- bygg en skogshuggare vid den röda pricken direkt till höger om ditt huvudkvarter genom att klicka på den och välja skogshuggare.<br>- Bygg en väg mellan skogshuggare och ditt huvudkvarter. Du gör det genom att klicka på flaggan framför någon av byggnaderna och sen väg knappen. Runt flaggan borde det dyka upp symboler, som visar hur brant vägen är i den riktningen. Ju brantare väg, desto svårare är det för ditt folk att gå på den. När du klickar på en sådan symbol bygger du en del av vägen och måste sen välja nästa riktning. Bygg en väg mellan flaggorna framför de två byggnaderna. Försök att få den så kort och jämn som möjligt."
+
+#, fuzzy
+#~ msgid "* Place a flag in the mid of the road.<br> There is a flag symbol in the mid of the way you just built.<br> By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
+#~ msgstr " \"Det finns ett gammalt talesätt: 'Delad börda är lättare att bära.' En vägkorsning mellan vårt huvudkvarter och skogshuggaren skulle underlätta arbetet för våra Transportörer.\"<br><br>--NYA MÅL--<BR>Där är en flagg-symbol i mitten på vägen du nyss byggde. Genom att klicka på den och i den rutan som kom fram klickar du på flagg-knappen, så har du placerat en flagga där, och där igenom har du delat upp arbetet med att transportera stockar på två transportörer. När mycket varor transporteras mellan två punkter, så gör flera flaggor mellan dem så att det går fortare att nå fram till deras slutpunkt och där igenom förbättras din infrastruktur. Placera en flagga mitt på vägen."
+
+#, fuzzy
+#~ msgid "* Place a lumberjack's hut directly south of the flag you are about to place on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
+#~ msgstr " \"Nordanvinden berättar, att den kommande vinter kommer vara lång och elendig. En skogshuggare kommer inte vara tillräckligt för vårt folks behov. Fler träd väntar på oss söder om vår nya korsning - låt oss bygga en andra skogshuggare där!\"<br><br>--NYA MÅL--<br>- Placera en skogshuggare söder om den flaggan som du ska sätta på vägen. Efteråt förbinder du flaggan med den nya skogshuggaren. Notera att, istället för att bygga en väg steg för steg, kan du klicka direkt på destinationen så byggs hela vägen på en gång."

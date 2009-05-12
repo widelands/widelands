@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3825\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-04-16 19:21+0000\n"
-"PO-Revision-Date: 2009-04-15 20:22+0100\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"PO-Revision-Date: 2009-04-17 18:37+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgstr "Popiół"
 
 #: ../../../tribes/barbarians/conf:37
 msgid "Destroyed building"
-msgstr "Zniszczny budynek"
+msgstr "Zniszczony budynek"
 
 #: ../../../tribes/barbarians/conf:38
 msgid "Field medium"
@@ -121,7 +121,7 @@ msgstr "Wskaźnik zasobów dużo żelaza"
 
 #: ../../../tribes/barbarians/conf:59
 msgid "Resource indicator no resource"
-msgstr "Wskaźnik zasobów brak"
+msgstr "Wskaźnik brak zasobów"
 
 #: ../../../tribes/barbarians/conf:60
 msgid "Resource indicator water"
@@ -584,14 +584,12 @@ msgid "Well"
 msgstr "Studnia"
 
 #: ../../../tribes/barbarians/conf:198
-#, fuzzy
 msgid "Headquarters medium"
-msgstr "Kwatera główna"
+msgstr "Wioska z kwaterą główną (średnia)"
 
 #: ../../../tribes/barbarians/conf:199
-#, fuzzy
 msgid "Citadel village"
-msgstr "Cytadela"
+msgstr "Wioska z cytadelą (duża)"
 
 #~ msgid "The Axe is the basic weapon and tool for the barbarians. All young soldiers are equipped with this basic weapon, but also the lumberjack is using the same model."
 #~ msgstr "Topór jest podstawową bronią i narzędziem Barbarzyńców. Wszyscy młodzi żołnierze są wyposażeni w tą podstawową broń. Drwal używa dokładnie tego samego modelu."

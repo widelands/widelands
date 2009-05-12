@@ -4,115 +4,15 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn3445\n"
+"Project-Id-Version: Widelands svn4082\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2008-10-26 17:35+0000\n"
+"POT-Creation-Date: 2009-05-12 14:36+0000\n"
 "PO-Revision-Date: 2005-12-19 19:15+0200\n"
 "Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: ../../../worlds/blackland/bobs/bunny/conf:1
-msgid "Bunny"
-msgstr "ארנב"
-
-#: ../../../worlds/blackland/bobs/bush1/conf:1
-#: ../../../worlds/blackland/bobs/bush2/conf:1
-#: ../../../worlds/blackland/bobs/bush3/conf:1
-#: ../../../worlds/blackland/bobs/bush4/conf:1
-#: ../../../worlds/blackland/bobs/bush5/conf:1
-msgid "Bush"
-msgstr "שיח"
-
-#: ../../../worlds/blackland/bobs/cactus1/conf:1
-#: ../../../worlds/blackland/bobs/cactus2/conf:1
-msgid "Cactus"
-msgstr "קקטוס"
-
-#: ../../../worlds/blackland/bobs/deadtree1/conf:1
-#: ../../../worlds/blackland/bobs/deadtree2/conf:1
-#: ../../../worlds/blackland/bobs/deadtree3/conf:1
-#: ../../../worlds/blackland/bobs/deadtree4/conf:1
-msgid "Dead Tree"
-msgstr "עץ מת"
-
-#: ../../../worlds/blackland/bobs/deer/conf:1
-msgid "Deer"
-msgstr "צבי"
-
-#: ../../../worlds/blackland/bobs/duck/conf:1
-msgid "Duck"
-msgstr "ברווז"
-
-#: ../../../worlds/blackland/bobs/fox/conf:1
-msgid "Fox"
-msgstr "שועל"
-
-#: ../../../worlds/blackland/bobs/grass1/conf:1
-#: ../../../worlds/blackland/bobs/grass2/conf:1
-#: ../../../worlds/blackland/bobs/grass3/conf:1
-msgid "Grass"
-msgstr "דשא"
-
-#: ../../../worlds/blackland/bobs/mushroom1/conf:1
-#: ../../../worlds/blackland/bobs/mushroom2/conf:1
-msgid "Mushroom"
-msgstr "פטריה"
-
-#: ../../../worlds/blackland/bobs/pebble1/conf:1
-#: ../../../worlds/blackland/bobs/pebble2/conf:1
-#: ../../../worlds/blackland/bobs/pebble3/conf:1
-#: ../../../worlds/blackland/bobs/pebble4/conf:1
-#: ../../../worlds/blackland/bobs/pebble5/conf:1
-#: ../../../worlds/blackland/bobs/pebble6/conf:1
-msgid "Pebble"
-msgstr "אבן קטנה"
-
-#: ../../../worlds/blackland/bobs/reindeer/conf:1
-msgid "Reindeer"
-msgstr "צבי גדול"
-
-#: ../../../worlds/blackland/bobs/sheep/conf:1
-msgid "Sheep"
-msgstr "כבש"
-
-#: ../../../worlds/blackland/bobs/skeleton1/conf:1
-#: ../../../worlds/blackland/bobs/skeleton2/conf:1
-#: ../../../worlds/blackland/bobs/skeleton3/conf:1
-msgid "Skeleton"
-msgstr "שלד"
-
-#: ../../../worlds/blackland/bobs/sstones1/conf:1
-#: ../../../worlds/blackland/bobs/sstones2/conf:1
-#: ../../../worlds/blackland/bobs/sstones3/conf:1
-#: ../../../worlds/blackland/bobs/sstones4/conf:1
-#: ../../../worlds/blackland/bobs/sstones5/conf:1
-#: ../../../worlds/blackland/bobs/sstones6/conf:1
-#: ../../../worlds/blackland/bobs/sstones7/conf:1
-msgid "Standing Stones"
-msgstr "אבנים עומדות"
-
-#: ../../../worlds/blackland/bobs/stones1/conf:1
-#: ../../../worlds/blackland/bobs/stones2/conf:1
-#: ../../../worlds/blackland/bobs/stones3/conf:1
-#: ../../../worlds/blackland/bobs/stones4/conf:1
-#: ../../../worlds/blackland/bobs/stones5/conf:1
-#: ../../../worlds/blackland/bobs/stones6/conf:1
-msgid "Stones"
-msgstr "אבנים"
-
-#: ../../../worlds/blackland/bobs/tree1/conf:5
-#: ../../../worlds/blackland/bobs/tree2/conf:5
-#: ../../../worlds/blackland/bobs/tree3/conf:5
-#: ../../../worlds/blackland/bobs/tree4/conf:5
-#: ../../../worlds/blackland/bobs/tree5/conf:4
-#: ../../../worlds/blackland/bobs/tree6/conf:4
-#: ../../../worlds/blackland/bobs/tree7/conf:4
-#: ../../../worlds/blackland/bobs/tree8/conf:4
-msgid "Tree"
-msgstr "עץ"
 
 #: ../../../worlds/blackland/conf:2
 msgid "The Widelands Development Team"
@@ -125,6 +25,206 @@ msgstr ""
 #: ../../../worlds/blackland/conf:4
 msgid "These are the grey, horrible and dangerous blacklands"
 msgstr ""
+
+#: ../../../worlds/blackland/conf:7 ../../../worlds/blackland/conf:8
+#: ../../../worlds/blackland/conf:9 ../../../worlds/blackland/conf:10
+#: ../../../worlds/blackland/conf:11
+msgid "Bush"
+msgstr "שיח"
+
+#: ../../../worlds/blackland/conf:12 ../../../worlds/blackland/conf:13
+msgid "Cactus"
+msgstr "קקטוס"
+
+#: ../../../worlds/blackland/conf:14 ../../../worlds/blackland/conf:15
+#: ../../../worlds/blackland/conf:16 ../../../worlds/blackland/conf:17
+msgid "Dead Tree"
+msgstr "עץ מת"
+
+#: ../../../worlds/blackland/conf:18 ../../../worlds/blackland/conf:19
+#: ../../../worlds/blackland/conf:20
+msgid "Grass"
+msgstr "דשא"
+
+#: ../../../worlds/blackland/conf:21 ../../../worlds/blackland/conf:22
+msgid "Mushroom"
+msgstr "פטריה"
+
+#: ../../../worlds/blackland/conf:23 ../../../worlds/blackland/conf:24
+#: ../../../worlds/blackland/conf:25 ../../../worlds/blackland/conf:26
+#: ../../../worlds/blackland/conf:27 ../../../worlds/blackland/conf:28
+msgid "Pebble"
+msgstr "אבן קטנה"
+
+#: ../../../worlds/blackland/conf:29 ../../../worlds/blackland/conf:30
+#: ../../../worlds/blackland/conf:31
+msgid "Skeleton"
+msgstr "שלד"
+
+#: ../../../worlds/blackland/conf:32 ../../../worlds/blackland/conf:33
+#: ../../../worlds/blackland/conf:34 ../../../worlds/blackland/conf:35
+#: ../../../worlds/blackland/conf:36 ../../../worlds/blackland/conf:37
+#: ../../../worlds/blackland/conf:38
+msgid "Standing Stones"
+msgstr "אבנים עומדות"
+
+#: ../../../worlds/blackland/conf:39 ../../../worlds/blackland/conf:40
+#: ../../../worlds/blackland/conf:41 ../../../worlds/blackland/conf:42
+#: ../../../worlds/blackland/conf:43 ../../../worlds/blackland/conf:44
+msgid "Stones"
+msgstr "אבנים"
+
+#: ../../../worlds/blackland/conf:45
+msgid "Aspen"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:46
+msgid "Aspen medium"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:47
+msgid "Aspen small"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:48
+msgid "Aspen tiny"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:49
+msgid "Oak"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:50
+msgid "Oak medium"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:51
+msgid "Oak small"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:52
+msgid "Oak tiny"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:53
+msgid "Spruce"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:54
+msgid "Spruce medium"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:55
+msgid "Spruce small"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:56
+msgid "Spruce tiny"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:57
+msgid "Maple"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:58
+msgid "Maple medium"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:59
+msgid "Maple small"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:60
+msgid "Maple tiny"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:61
+msgid "Birch"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:62
+msgid "Birch medium"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:63
+msgid "Birch small"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:64
+msgid "Birch tiny"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:65
+msgid "Beech"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:66
+msgid "Beech medium"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:67
+msgid "Beech small"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:68
+msgid "Beech tiny"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:69
+msgid "Larch"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:70
+msgid "Larch medium"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:71
+msgid "Larch small"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:72
+msgid "Larch tiny"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:73
+msgid "Rowan"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:74
+msgid "Rowan medium"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:75
+msgid "Rowan small"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:76
+msgid "Rowan tiny"
+msgstr ""
+
+#: ../../../worlds/blackland/conf:79
+msgid "Bunny"
+msgstr "ארנב"
+
+#: ../../../worlds/blackland/conf:80
+msgid "Deer"
+msgstr "צבי"
+
+#: ../../../worlds/blackland/conf:81
+msgid "Duck"
+msgstr "ברווז"
+
+#: ../../../worlds/blackland/conf:82
+msgid "Fox"
+msgstr "שועל"
+
+#: ../../../worlds/blackland/conf:83
+msgid "Reindeer"
+msgstr "צבי גדול"
+
+#: ../../../worlds/blackland/conf:84
+msgid "Sheep"
+msgstr "כבש"
 
 #: ../../../worlds/blackland/resconf:4
 msgid "Coal"
@@ -149,3 +249,6 @@ msgstr "מים"
 #: ../../../worlds/blackland/resconf:41
 msgid "Fish"
 msgstr "דגים"
+
+#~ msgid "Tree"
+#~ msgstr "עץ"
