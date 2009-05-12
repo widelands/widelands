@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,18 +83,6 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 		}
 
 		Widelands::Coords const old_sp = map.get_starting_pos(m_current_player);
-
-		//  If the player is already created in the editor, this means that there
-		//  might be already a hq placed somewhere. This needs to be deleted
-		//  before a starting position change can occur.
-		if
-			(parent.egbase().get_player(m_current_player)
-			 and
-			 old_sp
-			 and
-			 dynamic_cast<const Widelands::Building *>
-			 	(map[old_sp].get_immovable()))
-			return 1;
 
 		char picname[] = "pics/editor_player_00_starting_pos.png";
 		picname[19] += m_current_player / 10;

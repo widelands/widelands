@@ -42,11 +42,11 @@ namespace Widelands {
 struct MessageQueue {
 	void registerButton(UI::Callback_Button<GameMessageMenu>*);
 
-	static std::vector<Message>& get (Player& p)
+	static std::vector<Message> & get (Player & p)
 	{
 		return get(p.get_player_number());
 	}
-	static std::vector<Message>& get (Player_Number player_number)
+	static std::vector<Message> & get (Player_Number const player_number)
 	{
 		static std::vector<std::vector< Message> > myQueue;
 		if (player_number >= myQueue.size())
@@ -56,7 +56,7 @@ struct MessageQueue {
 		return myQueue[player_number];
 	}
 
-	static void add (Player& p, Message m)
+	static void add (Player & p, Message const m)
 	{
 		add(p.get_player_number(), m);
 	}
@@ -64,39 +64,36 @@ struct MessageQueue {
 	{
 		get(player_number).push_back(m);
 		m_readall(player_number) = false;
-		if (m_button(0)){
-			m_button(0)->set_pic(g_gr->get_picture(PicMod_Game,NEW_MESSAGES));
-		}
+		if (m_button(0))
+			m_button(0)->set_pic(g_gr->get_picture(PicMod_Game, NEW_MESSAGES));
 	}
 
-	static void read_all (Player& p)
+	static void read_all (Player & p)
 	{
 		read_all(p.get_player_number());
 	}
 	static void read_all (Player_Number player_number)
 	{
 		m_readall(player_number) = true;
-		if (m_button(0)){
-			m_button(0)->set_pic(g_gr->get_picture(PicMod_Game,NO_NEW_MESSAGES));
-		}
+		if (m_button(0))
+			m_button(0)->set_pic(g_gr->get_picture(PicMod_Game, NO_NEW_MESSAGES));
 	}
 
-	static UI::Callback_Button<Interactive_Player>* m_button(UI::Callback_Button<Interactive_Player>* b)
+	static UI::Callback_Button<Interactive_Player> * m_button
+		(UI::Callback_Button<Interactive_Player> * const b)
 	{
-		static UI::Callback_Button<Interactive_Player>* m_but=0;
-		if (b){
-			m_but=b;
-		}
+		static UI::Callback_Button<Interactive_Player> * m_but = 0;
+		if (b)
+			m_but = b;
 		return m_but;
 	}
 
 private:
 	//use char here instead of bool because bool vectors behave odd
-	static char& m_readall(Player_Number player_number)
+	static char & m_readall(Player_Number const player_number)
 	{
 		static std::vector<char> m_read;
-		if (player_number >= m_read.size())
-		{
+		if (player_number >= m_read.size()) {
 			m_read.resize(player_number + 1);
 		}
 		return m_read[player_number];

@@ -156,7 +156,7 @@ void DefaultAI::think ()
 	if (check_militarysites(gametime))
 		return;
 
-	// Finally consider military actions if defaultAI type is Agressive or
+	//  Finally consider military actions if defaultAI type is Aggressive or
 	// Normal.
 	if (!(type == DEFENSIVE))
 		if (next_attack_consideration_due <= gametime)
@@ -808,7 +808,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 						prio += 2 * iosum;
 					}
 
-					// prefere building space in the inner land.
+					//  Prefer building space in the inner land.
 					prio -= bf->unowned_land_nearby / 10;
 
 					// do not construct more than one building,
@@ -828,10 +828,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				}
 
 			} else if (bo.type == BuildingObserver::WAREHOUSE) {
-				// Build one warehouse (hq included) for ~every 25 productionsites
-				// and mines. Militarysites are slightly important as well, to
-				// have a bigger chance for a warehouses (containing waiting
-				// soldiers or wares needed for soldier training) near the frontier.
+				//  Build one warehouse for ~every 25 productionsites and mines.
+				//  Militarysites are slightly important as well, to have a bigger
+				//  chance for a warehouses (containing waiting soldiers or wares
+				//  needed for soldier training) near the frontier.
 				prio += productionsites.size() + mines.size();
 				prio += militarysites.size() / 3;
 				prio -= (bo.cnt_under_construction + numof_warehouses) * 25;

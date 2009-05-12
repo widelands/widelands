@@ -173,19 +173,26 @@ m_flag_to_connect(Widelands::Coords::Null()),
  tooltip                                                                      \
 
 m_toggle_chat
-	(INIT_BTN("menu_chat",             toggle_chat,         _("Chat"))),
+	(INIT_BTN
+	 	("menu_chat",                  toggle_chat,            _("Chat"))),
 m_toggle_options_menu
-	(INIT_BTN("menu_options_menu",     toggle_options_menu,    _("Options"))),
+	(INIT_BTN
+	 	("menu_options_menu",          toggle_options_menu,    _("Options"))),
 m_toggle_statistics_menu
-	(INIT_BTN("menu_toggle_menu",      toggle_statistics_menu, _("Statistics"))),
+	(INIT_BTN
+	 	("menu_toggle_menu",           toggle_statistics_menu, _("Statistics"))),
 m_toggle_objectives
-	(INIT_BTN("menu_objectives",       toggle_objectives,      _("Objectives"))),
+	(INIT_BTN
+	 	("menu_objectives",            toggle_objectives,      _("Objectives"))),
 m_toggle_minimap
-	(INIT_BTN("menu_toggle_minimap",   toggle_minimap,         _("Minimap"))),
+	(INIT_BTN
+	 	("menu_toggle_minimap",        toggle_minimap,         _("Minimap"))),
 m_toggle_buildhelp
-	(INIT_BTN("menu_toggle_buildhelp", toggle_buildhelp,       _("Buildhelp"))),
+	(INIT_BTN
+	 	("menu_toggle_buildhelp",      toggle_buildhelp,       _("Buildhelp"))),
 m_toggle_message_menu
-	(INIT_BTN("menu_toggle_oldmessage_menu", toggle_message_menu, _("Messages"))),
+	(INIT_BTN
+	 	("menu_toggle_oldmessage_menu", toggle_message_menu,   _("Messages"))),
 #if 0
 m_toggle_resources
 	(INIT_BTN
@@ -194,11 +201,13 @@ m_toggle_resources
 	 	 _("Resource information"))),
 #endif
 m_toggle_help
-	(INIT_BTN("menu_help",             toggle_help,         _("Ware help")))
+	(INIT_BTN
+	 	("menu_help",                  toggle_help,            _("Ware help")))
 {
-	//register with the MessageQueue so the button changes as new messages get added
+	//  Register with the MessageQueue so that the button changes as new
+	//  messages get added.
 	Widelands::MessageQueue::m_button(&m_toggle_message_menu);
-	
+
 	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_options_menu,    UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_statistics_menu, UI::Box::AlignLeft);

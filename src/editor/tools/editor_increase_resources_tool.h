@@ -28,7 +28,8 @@
 struct Editor_Increase_Resources_Tool : public Editor_Tool {
 	Editor_Increase_Resources_Tool
 		(Editor_Decrease_Resources_Tool & the_decrease_tool,
-		 Editor_Set_Resources_Tool      & the_set_to_tool) :
+		 Editor_Set_Resources_Tool      & the_set_to_tool)
+		:
 		Editor_Tool(the_decrease_tool, the_set_to_tool),
 		m_decrease_tool(the_decrease_tool), m_set_tool(the_set_to_tool),
 		m_change_by(1), m_cur_res(0)

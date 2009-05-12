@@ -272,7 +272,8 @@ void Fullscreen_Menu_LaunchGame::refresh()
 		if
 			((player.state == PlayerSettings::stateOpen) |
 			 ((player.state == PlayerSettings::stateComputer) &
-			  !settings.multiplayer) |
+			  !settings.multiplayer)
+			 |
 			 ((settings.playernum == i) & settings.multiplayer))
 			m_pos[i]->set_enabled(true);
 		else

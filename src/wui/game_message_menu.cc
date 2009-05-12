@@ -32,22 +32,25 @@ inline Interactive_Player & GameMessageMenu::iplayer() const {
 
 GameMessageMenu::GameMessageMenu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
-:
-UI::UniqueWindow
-	(&plr, &registry, 340, 5 + 25 + 5 + 110 + 5 + 220 + 5, _("Message Menu")),
-list         (this, 5,   30, get_inner_w() - 10, 110, Align_Left, false),
-messagetext (this, 5, 5 + 25 + 5 + 110 , get_inner_w() - 10, 220, "", Align_Left, 1),
-hide (this,
-	 5, 5,
-	 25, 25,
-	 2,
-	 &GameMessageMenu::clicked_hide, *this, _("del")),
-view (this,
-	 5 + 25 + 5, 5,
-	 25, 25,
-	 2,
-	 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
-	 &GameMessageMenu::clicked_view, *this, _("go to location"))
+	:
+	UI::UniqueWindow
+		(&plr, &registry, 340, 5 + 25 + 5 + 110 + 5 + 220 + 5, _("Message Menu")),
+	list(this, 5,   30, get_inner_w() - 10, 110, Align_Left, false),
+	messagetext
+		(this, 5, 5 + 25 + 5 + 110, get_inner_w() - 10, 220, "", Align_Left, 1),
+	hide
+		(this,
+		 5, 5,
+		 25, 25,
+		 2,
+		 &GameMessageMenu::clicked_hide, *this, _("del")),
+	view
+		(this,
+		 5 + 25 + 5, 5,
+		 25, 25,
+		 2,
+		 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
+		 &GameMessageMenu::clicked_view, *this, _("go to location"))
 {
 	list.selected.set(this, &GameMessageMenu::selected);
 	if (get_usedefaultpos())
@@ -56,7 +59,8 @@ view (this,
 
 
 void GameMessageMenu::think() {
-	std::vector<Widelands::Message> & mmm = Widelands::MessageQueue::get(iplayer().player());
+	std::vector<Widelands::Message> & mmm =
+		Widelands::MessageQueue::get(iplayer().player());
 	int const nr_messages = mmm.size();
 	for (int i = 0; i < nr_messages; ++i) {
 		if (mmm[i].get_is_visible()) {

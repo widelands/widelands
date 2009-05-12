@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,8 +31,7 @@ using namespace Widelands;
 /******************/
 /* Helper classes */
 /******************/
-class TestingFlag : public Flag {
-public:
+struct TestingFlag : public Flag {
 	TestingFlag(Editor_Game_Base & g, Coords c) :
 		Flag()
 	{
@@ -40,12 +39,8 @@ public:
 	}
 
 };
-class TestingMap : public Map {
-public:
-	TestingMap(int w, int h) :
-		Map() {
-			set_size(w, h);
-		}
+struct TestingMap : public Map {
+	TestingMap(int const w, int const h) : Map() {set_size(w, h);}
 
 	virtual void recalc_for_field_area(Area<FCoords>) {}
 
@@ -97,8 +92,6 @@ BOOST_FIXTURE_TEST_CASE(InstantiateEditorGameBase, SimpleRoadTestsFixture) {
 		(start->get_position().x << ',' << start->get_position().y <<
 		 "   " << end->get_position().x << ',' << end->get_position().y <<
 		 "   " << path.get_start().x << ',' << path.get_start().y);
-
-         // Widelands::Road::create(g, *start, *end, path);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

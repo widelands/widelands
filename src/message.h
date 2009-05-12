@@ -40,14 +40,20 @@ struct Message {
 		m_descr     (_("no descr")),
 		m_is_visible(true)
 	{}
-	Message(std::string title, Widelands::Coords c,std::string description):
+	Message
+		(std::string const &       title,
+		 Widelands::Coords   const c,
+		 std::string const &       description)
+		:
 		m_visname(title),
 		m_descr(description),
 		m_coords(c),
 		m_is_visible(true)
 	{}
 
-	std::string identifier() const {return "Message: " + m_visname + "|" + m_descr;}
+	std::string identifier() const {
+		return "Message: " + m_visname + '|' + m_descr;
+	}
 
 	const std::string & visname() const throw ()  {return m_visname;}
 	const std::string & descr() const throw ()    {return m_descr;}
@@ -55,8 +61,8 @@ struct Message {
 	void set_descr  (std::string const & new_descr) {m_descr   = new_descr;}
 	bool get_is_visible()       const throw ()    {return m_is_visible;}
 	void set_is_visible(const bool t) throw ()    {m_is_visible = t;}
-	Widelands::Coords get_coords() const{return m_coords;}
-		
+	Widelands::Coords get_coords() const {return m_coords;}
+
 private:
 	std::string m_visname;
 	std::string m_descr;

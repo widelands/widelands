@@ -272,7 +272,8 @@ bool EditBox::handle_key(bool down, SDL_keysym code)
 			if (is_printable(code)) {
 				if (m->text.size() < m->maxLength) {
 					if (code.unicode < 0x80)         // 1 byte char
-						m->text.insert(m->text.begin() + m->caret++, 1, code.unicode);
+						m->text.insert
+							(m->text.begin() + m->caret++, 1, code.unicode);
 					else if (code.unicode < 0x800) { // 2 byte char
 						m->text.insert
 							(m->text.begin() + m->caret++,

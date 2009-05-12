@@ -1019,7 +1019,8 @@ void Profile::write
 
 	fw.Printf
 		(("# Automatically created by Widelands " + build_id() + '(' +
-		  build_type() + ")" + "\n").c_str());
+		  build_type() + ")\n")
+		 .c_str());
 
 	container_iterate_const(Section_list, m_sections, s) {
 		if (used_only && !s.current->is_used())

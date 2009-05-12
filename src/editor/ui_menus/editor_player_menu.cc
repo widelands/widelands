@@ -296,16 +296,6 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 	if (Widelands::Coords const sp = map.get_starting_pos(n))
 		parent.move_view_to(sp);
 
-	//  If the player is already created in the editor, this means that there
-	//  might be already a hq placed somewhere. This needs to be deleted before
-	//  a starting position change can occur.
-	if (parent.egbase().get_player(n))
-		if (const Widelands::Coords sp = map.get_starting_pos(n))
-			if
-				(dynamic_cast<Widelands::Building const *>
-				 	(map[sp].get_immovable()))
-				return;
-
 	//  select tool set mplayer
 	parent.select_tool(parent.tools.set_starting_pos, Editor_Tool::First);
 	parent.tools.set_starting_pos.set_current_player(n);

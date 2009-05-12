@@ -37,8 +37,7 @@ struct EmptyAI : Computer_Player {
 	struct EmptyAIImpl : Implementation {
 		EmptyAIImpl() {name = _("None");}
 		Computer_Player * instantiate
-			(Widelands::Game & g,
-			 const Widelands::Player_Number pid) const
+			(Widelands::Game & g, Widelands::Player_Number const pid) const
 		{
 			return new EmptyAI(g, pid);
 		}

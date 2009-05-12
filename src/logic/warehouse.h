@@ -62,7 +62,7 @@ struct Warehouse_Descr : public Building_Descr {
 
 private:
 	int32_t m_subtype;
-	int32_t m_conquers; //  HQs conquer
+	int32_t m_conquers;
 };
 
 

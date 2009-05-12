@@ -169,10 +169,9 @@ void PlayerDescriptionGroup::refresh()
 					if (i.current->name == player.tribe) {
 						d->btnPlayerInit->set_title
 							(_
-							(i.current->initializations.at(player.initialization_index)
-							 .second
-							)
-							);
+							 	(i.current->initializations.at
+							 	 	(player.initialization_index)
+							 	 .second));
 						break;
 					}
 				}

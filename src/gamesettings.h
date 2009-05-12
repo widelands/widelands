@@ -108,7 +108,8 @@ struct GameSettingsProvider {
 		(std::string const & mapname,
 		 std::string const & mapfilename,
 		 uint32_t maxplayers,
-		 bool savegame = false) = 0;
+		 bool                savegame = false)
+		= 0;
 	virtual void setPlayerState (uint8_t number, PlayerSettings::State) = 0;
 	virtual void setPlayerAI    (uint8_t number, std::string const &) = 0;
 	virtual void nextPlayerState(uint8_t number) = 0;

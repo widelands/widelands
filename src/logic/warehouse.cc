@@ -437,12 +437,14 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
 
 	//Fill the message queue with a message when a HQ is created
-	//if (warehouse_descr.get_subtype() == Warehouse_Descr::Subtype_HQ){
-		log("Adding message (new HQ)\n");
-		MessageQueue::add(owner(), Message("HQ", Widelands::Coords(get_position()), 
-										   "A new HQ is created with limited resources. Gather more resources and expand your empire"));
-	//}
-
+	log("Adding message (new HQ)\n");
+	MessageQueue::add
+		(owner(),
+		 Message
+		 	("HQ",
+		 	 Widelands::Coords(get_position()),
+		 	 "A new HQ is created with limited resources. Gather more resources "
+		 	 "and expand your empire"));
 }
 
 

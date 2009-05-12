@@ -101,9 +101,9 @@ private:
 	UI::Callback_Button<Interactive_Player> m_toggle_objectives;
 	UI::Callback_Button<Interactive_Player> m_toggle_minimap;
 	UI::Callback_Button<Interactive_Player> m_toggle_buildhelp;
+	UI::Callback_Button<Interactive_Player> m_toggle_message_menu;
 	//  UI::Callback_Button<Interactive_Player> m_toggle_resources;
 	UI::Callback_Button<Interactive_Player> m_toggle_help;
-	UI::Callback_Button<Interactive_Player> m_toggle_message_menu;
 
 	UI::UniqueWindow::Registry m_chat;
 	UI::UniqueWindow::Registry m_options;

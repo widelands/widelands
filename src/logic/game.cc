@@ -404,7 +404,6 @@ bool Game::run
 		Player_Number const nr_players = map().get_nrplayers();
 		if (start_game_type == NewNonScenario) {
 			std::string step_description = _("Creating player infrastructure");
-			// Prepare the players (i.e. place HQs)
 			iterate_players_existing(p, nr_players, *this, plr) {
 				step_description += ".";
 				loader_ui.step(step_description);

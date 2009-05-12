@@ -200,6 +200,7 @@ procedure Whitespace_Checker is
       end loop;
    end Read_Macro;
 
+   Leading_Parentheses_Count        : Natural := 0;
    Previous_Line_Ended_With_Comment : Boolean := False;
 
    --  Reads code after line begin. Returns the depth parentheses increase
@@ -207,10 +208,27 @@ procedure Whitespace_Checker is
    function Read_Code return Integer;
    function Read_Code return Integer is
       Depth_Parentheses_Increase : Integer := 0;
+      Did_Report_CPE             : Boolean := False;
+      procedure Check_Closing_Parenthesis_Condition;
+      pragma Inline (Check_Closing_Parenthesis_Condition);
+      procedure Check_Closing_Parenthesis_Condition is
+      begin
+         if
+           Leading_Parentheses_Count + Depth_Parentheses_Increase < 0 and
+           not Did_Report_CPE
+         then
+            Put_Error
+              ("found '" & Read_Characters (1) &
+               "' but only closing tokens are allowed after closing " &
+               "parenthesis with corresponding opening parenthesis " &
+               "on an earlier line");
+            Did_Report_CPE := True;
+         end if;
+      end Check_Closing_Parenthesis_Condition;
    begin
       Read_Code_Loop : loop
          case Read_Characters (1) is
-            when '(' | '[' =>
+            when '(' | '['             =>
                case Read_Characters (0) is
                   when HT | ' ' | '#' | '?' | '%' | ',' =>
                      Put_Error
@@ -219,7 +237,7 @@ procedure Whitespace_Checker is
                   when others                                 =>
                      null;
                end case;
-            when '}'       =>
+            when '}'                   =>
                case Read_Characters (0)  is
                   when LF | ' ' | ';' | ',' =>
                      null;
@@ -227,7 +245,7 @@ procedure Whitespace_Checker is
                      Put_Error
                        ("""}" & Read_Characters (0) & """ is not allowed");
                end case;
-            when ','       =>
+            when ','                   =>
                case Read_Characters (0) is
                   when LF | ' ' =>
                      null;
@@ -235,7 +253,8 @@ procedure Whitespace_Checker is
                      Put_Error
                        ("""," & Read_Characters (0) & """ is not allowed");
                end case;
-            when '='       =>
+            when '='                   =>
+               Check_Closing_Parenthesis_Condition;
                case Read_Characters (0) is
                   when LF | ' ' | '=' =>
                      null;
@@ -245,13 +264,18 @@ procedure Whitespace_Checker is
                end case;
             when '/'       =>
                case Read_Characters (0) is
-                  when LF  | ' ' | '=' | '*' | '/' | ',' | ';' | ')' | '}' =>
+                  when LF | '*' | '/'                    =>
                      null;
-                  when others                                              =>
+                  when ' ' | '=' | ',' | ';' | ')' | '}' =>
+                     Check_Closing_Parenthesis_Condition;
+                  when others                            =>
+                     Check_Closing_Parenthesis_Condition;
                      Put_Error
                        ("""/" & Read_Characters (0) & """ is not allowed");
                end case;
-            when '-'       =>
+            when '-'                   =>
+               Check_Closing_Parenthesis_Condition;
+
                --  Check that there is padding before '-'.
                case Read_Characters (0) is
                   when '-' | '>' =>
@@ -295,7 +319,9 @@ procedure Whitespace_Checker is
                               Read_Characters (0) & """ is not allowed");
                      end case;
                end case;
-            when '+'       =>
+            when '+'                   =>
+               Check_Closing_Parenthesis_Condition;
+
                --  Check that there is padding before '+', unless it is ++.
                if Read_Characters (0) /= '+' then
                   case Read_Characters (2) is
@@ -338,7 +364,9 @@ procedure Whitespace_Checker is
                            Read_Characters (0) & """ is not allowed");
                   end case;
                end if;
-            when '%' | '^' =>
+            when '%' | '^'             =>
+               Check_Closing_Parenthesis_Condition;
+
                --  Check padding after the operator.
                case Read_Characters (0) is
                   when LF | ' ' | '=' =>
@@ -348,8 +376,10 @@ procedure Whitespace_Checker is
                        ('"' & Read_Characters (1) & Read_Characters (0) &
                         """ is not allowed");
                end case;
-            when others    =>
+            when ';' | ')' | ']' | ' ' =>
                null;
+            when others                =>
+               Check_Closing_Parenthesis_Condition;
          end case;
          case Read_Characters (0) is
             when ' '       =>
@@ -657,6 +687,7 @@ procedure Whitespace_Checker is
 begin
    Open (The_File, In_File, Argument (1));
    while not End_Of_File (The_File) loop
+      Leading_Parentheses_Count   := 0;
       Space_In_Leading_Whitespace := False;
       declare
          Current_Leading_Whitespace_Index : Leading_Whitespace_Index := 0;
@@ -751,7 +782,8 @@ begin
       end;
       while Read_Characters (0) = '(' or Read_Characters (0) = '[' loop
          Leading_Whitespace (Next_Leading_Whitespace_Index) := Space;
-         Next_Leading_Whitespace_Index :=  Next_Leading_Whitespace_Index + 1;
+         Next_Leading_Whitespace_Index := Next_Leading_Whitespace_Index + 1;
+         Leading_Parentheses_Count     := Leading_Parentheses_Count     + 1;
          Next_Character;
       end loop;
       case Read_Characters (0) is

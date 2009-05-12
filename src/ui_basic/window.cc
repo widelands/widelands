@@ -66,8 +66,10 @@ namespace UI {
  * \param title string to display in the window title
  */
 Window::Window
-	(Panel *parent, int32_t x, int32_t y, uint32_t w,
-	 uint32_t h, const char *title) :
+	(Panel * const parent,
+	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
+	 char const * const title)
+	:
 		Panel
 			(parent, x, y, w + VT_B_PIXMAP_THICKNESS * 2,
 			 TP_B_PIXMAP_THICKNESS + h + BT_B_PIXMAP_THICKNESS),
