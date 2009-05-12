@@ -24,6 +24,7 @@
 #include "../router.h"
 #include "../routing_node.h"
 
+#include "../../container_iterate.h"
 
 #include <exception>
 
@@ -66,17 +67,11 @@ private:
 	int32_t _waitcost;
 	Coords _position;
 };
-void TestingRoutingNode::get_neighbours(RoutingNodeNeighbours * n) {
-	for
-		(Neigbours::iterator i = _neighbours.begin();
-		 i != _neighbours.end();
-		 i++)
-	{
+void TestingRoutingNode::get_neighbours(RoutingNodeNeighbours * const n) {
+	container_iterate_const(Neigbours, _neighbours, i)
 		// second parameter is walktime in ms from this flag to the neighbour.
 		// only depends on slope
-		RoutingNodeNeighbour nb(*i, 1000);
-		n->push_back(nb);
-	}
+		n->push_back(RoutingNodeNeighbour(*i.current, 1000));
 }
 bool TestingRoutingNode::all_members_zeroed() {
 	bool integers_zero =
@@ -108,11 +103,10 @@ public:
 
 	int32_t get_length() {return nodes.size();}
 
-	bool has_node(RoutingNode * n) {
-		for (Nodes::iterator i = nodes.begin(); i != nodes.end(); ++i) {
-			if (*i == n)
+	bool has_node(RoutingNode * const n) {
+		container_iterate_const(Nodes, nodes, i)
+			if (*i.current == n)
 				return true;
-		}
 		return false;
 	}
 	bool has_chain(Nodes & n) {
@@ -120,7 +114,7 @@ public:
 
 		Nodes::iterator j = n.begin();
 		Nodes::iterator i = nodes.begin();
-		while (i < nodes.end() && j < n.end()) {
+		while (i != nodes.end() && j != n.end()) {
 			if (!chain_begin_found) {
 				if (*i == *j) {
 					chain_begin_found = true;
@@ -150,9 +144,8 @@ public:
 	}
 
 	void print() {
-		for (Nodes::iterator i = nodes.begin(); i < nodes.end(); ++i) {
-			BOOST_MESSAGE(*i);
-		}
+		container_iterate_const(Nodes, nodes, i)
+			BOOST_MESSAGE(*i.current);
 	}
 private:
 	Nodes nodes;
