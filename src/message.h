@@ -55,7 +55,8 @@ struct Message {
 	void set_descr  (std::string const & new_descr) {m_descr   = new_descr;}
 	bool get_is_visible()       const throw ()    {return m_is_visible;}
 	void set_is_visible(const bool t) throw ()    {m_is_visible = t;}
-
+	Widelands::Coords get_coords() const{return m_coords;}
+		
 private:
 	std::string m_visname;
 	std::string m_descr;
