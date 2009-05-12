@@ -21,7 +21,7 @@ Export('srcenv')
 # themselves: other things might be happening in there that profit from correct
 # ordering (ordering of compilation is always controlled directly by scons
 # itself, though)
-# 
+#
 
 tests = []
 
@@ -45,8 +45,8 @@ add_sconscript('events')
 add_sconscript('network')
 add_sconscript('ai')
 add_sconscript('wui')
-add_sconscript('logic')
 add_sconscript('economy')
+add_sconscript('logic')
 add_sconscript('map_io')
 add_sconscript('game_io')
 add_sconscript('profile')
