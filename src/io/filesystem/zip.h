@@ -161,19 +161,6 @@ extern int32_t ZEXPORT zipOpenNewFileInZip OF
 */
 
 
-extern int32_t ZEXPORT zipOpenNewFileInZip2 OF
-		((zipFile              file,
-		  char         const * filename,
-		  zip_fileinfo const * zipfi,
-		  void         const * extrafield_local,
-		  uInt                 size_extrafield_local,
-		  void         const * extrafield_global,
-		  uInt                 size_extrafield_global,
-		  char         const * comment,
-		  int32_t              method,
-		  int32_t              level,
-		  int32_t              raw));
-
 /*
   Same than zipOpenNewFileInZip, except if raw=1, we write raw file
  */

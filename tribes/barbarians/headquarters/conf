@@ -5,7 +5,6 @@
 # soundfx=../../../sound/spoken/warehouse-bringitin
 size=big
 buildable=no
-subtype=HQ
 conquers=9
 
 [idle]

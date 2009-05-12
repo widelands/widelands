@@ -44,12 +44,6 @@ Warehouse
 class WarehouseSupply;
 
 struct Warehouse_Descr : public Building_Descr {
-	enum {
-		Subtype_Normal,
-		Subtype_HQ,
-		Subtype_Port
-	};
-
 	Warehouse_Descr
 		(char const * name, char const * descname,
 		 std::string const & directory, Profile &, Section & global_s,
@@ -57,11 +51,9 @@ struct Warehouse_Descr : public Building_Descr {
 
 	virtual Building & create_object() const;
 
-	int32_t get_subtype() const {return m_subtype;}
 	virtual uint32_t get_conquers() const {return m_conquers;}
 
 private:
-	int32_t m_subtype;
 	int32_t m_conquers;
 };
 

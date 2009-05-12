@@ -39,15 +39,6 @@ LayeredFileSystem::~LayeredFileSystem()
 	}
 }
 
-///Just a little debugging aid
-void LayeredFileSystem::listSubdirs() const
-{
-	for
-		(std::vector<FileSystem *>::const_iterator i = m_filesystems.begin();
-		 i != m_filesystems.end();
-		 ++i)
-		printf("   %s\n", (*i)->getBasename().c_str());
-}
 
 /**
  * Just assume that at least one of our child FSs is writable

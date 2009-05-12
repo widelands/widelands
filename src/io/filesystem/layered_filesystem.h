@@ -73,7 +73,6 @@ struct LayeredFileSystem : public FileSystem {
 	virtual void Unlink(std::string const & file);
 	virtual void Rename(std::string const &, std::string const &);
 
-	void listSubdirs() const;
 	virtual std::string getBasename() {return std::string();};
 
 private:

@@ -269,28 +269,12 @@ Warehouse_Descr::Warehouse_Descr
 	 Tribe_Descr const & _tribe, EncodeData const * const encdata)
 :
 	Building_Descr(_name, _descname, directory, prof, global_s, _tribe, encdata),
-m_subtype     (Subtype_Normal),
 m_conquers    (0)
 {
-	Section & global = prof.get_safe_section("global");
-	char const * const string = global.get_safe_string("subtype");
-	if (!strcasecmp(string, "HQ")) {
-		m_subtype = Subtype_HQ;
-	} else if (!strcasecmp(string, "port")) {
-		m_subtype = Subtype_Port;
-	} else if (!strcasecmp(string, "none")) {
-		//
-	} else
-		throw wexception
-			("Unsupported warehouse subtype '%s'. Possible values: none, HQ, "
-			 "port",
-			 string);
-
-	if (m_subtype == Subtype_HQ) {
-		m_conquers = global.get_int("conquers");
-		if (0 < m_conquers)
-			m_workarea_info[m_conquers].insert(descname() + _(" conquer"));
-	}
+	if
+		((m_conquers =
+		  	prof.get_safe_section("global").get_positive("conquers", 0)))
+		m_workarea_info[m_conquers].insert(descname() + _(" conquer"));
 }
 
 
@@ -383,11 +367,7 @@ void Warehouse::set_needed(Ware_Index const ware_index, int const value) {
 		m_target_supply[ware_index] = value - m_supply->stock_wares(ware_index);
 }
 
-/*
-===============
-Conquer the land around the HQ on init.
-===============
-*/
+
 void Warehouse::init(Editor_Game_Base & egbase)
 {
 	Building::init(egbase);
@@ -436,15 +416,14 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			 	 Area<FCoords>
 			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
 
-	//Fill the message queue with a message when a HQ is created
-	log("Adding message (new HQ)\n");
+	//  Fill the message queue with a message when a warehouse is created.
+	log("Adding message (new warehouse)\n");
 	MessageQueue::add
 		(owner(),
 		 Message
-		 	("HQ",
+		 	("warehouse",
 		 	 Widelands::Coords(get_position()),
-		 	 "A new HQ is created with limited resources. Gather more resources "
-		 	 "and expand your empire"));
+		 	 _("A new warehouse is created")));
 }
 
 
@@ -453,8 +432,6 @@ void Warehouse::init(Editor_Game_Base & egbase)
 
 /*
 ===============
-Warehouse::cleanup
-
 Destroy the warehouse.
 ===============
 */

@@ -64,58 +64,6 @@ FileSystem::FileSystem()
 #endif
 }
 
-/**
- * Append extension (e.g. ".foo") to the filename if it isn't already there
- * \param filename The filename to possibly be extended
- * \param extension The extension to append, without leading dot (unless you
- * want two consecutive dots)
- */
-std::string FileSystem::AutoExtension
-	(std::string const & filename, std::string const & extension)
-{
-	std::string::size_type const suffix_length = extension.size() + 1;
-	std::string::size_type const startpos = filename.size() - suffix_length;
-
-	if (filename.substr(startpos, suffix_length) != "." + extension)
-		return filename + "." + extension;
-
-	return filename;
-}
-
-
-/**
- * Translate filename so that it is relative to basefile.
- * Basically concatenates the two strings, but removes the filename part
- * of basefile (if any)
- */
-const char *FileSystem::FS_RelativePath
-		(char *buf, const int32_t buflen,
-		 const char *basefile, const char *filename)
-{
-	const char *p;
-	int32_t endbase;
-
-	if (*filename == '/' || *filename == '\\') { // it's an absolute filename
-		snprintf(buf, buflen, "%s", filename);
-		return buf;
-	}
-
-	// find the end of the basefile name
-	endbase = 0;
-	for (p = basefile; *p; ++p)
-		if (*p == '/' || *p == '\\')
-			endbase = p - basefile + 1;
-
-	if (!endbase) { // no path in basefile
-		snprintf(buf, buflen, "%s", filename);
-		return buf;
-	}
-
-	// copy the base path
-	snprintf(buf, buflen, "%s%s", basefile, filename);
-
-	return buf;
-}
 
 /**
  * \param path A file or directory name
@@ -140,17 +88,6 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
 	return true;
 }
 
-/**
- * Prepend FS root and/or working directory (if necessary) to make path
- * absolute.
- * \param path A path that might or might not be absolute
- * \return An absolute path
- */
-std::string FileSystem::AbsolutePath(std::string const & path) const {
-	if (pathIsAbsolute(path))
-		return path;
-	return getWorkingDirectory() + m_filesep + path;
-}
 
 /**
  * Fix a path that might come from another OS.
@@ -192,24 +129,6 @@ std::string FileSystem::getWorkingDirectory() const {
 #endif
 }
 
-/**
- * \return An existing directory where temporary files can be put
- * \todo Is there a temp directory on win32? Where?
- */
-std::string FileSystem::getTempDirectory() {
-	const char *tmpdir;
-
-#ifdef WIN32
-	tmpdir = ".";
-#else
-	tmpdir = "/tmp";
-#endif
-
-	if (!FileExists(tmpdir))
-		throw FileNotFound_error("FileSystem::getTempDirectory", tmpdir);
-
-	return tmpdir;
-}
 
 /// \todo Write homedir detection for non-getenv-systems
 std::string FileSystem::GetHomedir()
