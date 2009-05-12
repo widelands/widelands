@@ -43,6 +43,7 @@
 #include "helper.h"
 #include "i18n.h"
 #include "immovable.h"
+#include "message_queue.h"
 #include "graphic/overlay_manager.h"
 #include "logic/player.h"
 #include "productionsite.h"
@@ -195,6 +196,9 @@ m_toggle_resources
 m_toggle_help
 	(INIT_BTN("menu_help",             toggle_help,         _("Ware help")))
 {
+	//register with the MessageQueue so the button changes as new messages get added
+	Widelands::MessageQueue::m_button(&m_toggle_message_menu);
+	
 	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_options_menu,    UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_statistics_menu, UI::Box::AlignLeft);
@@ -320,9 +324,10 @@ void Interactive_Player::toggle_objectives() {
 		new GameObjectivesMenu(*this, m_objectives);
 }
 void Interactive_Player::toggle_message_menu() {
-	if (m_objectives.window)
+	if (m_message_menu.window)
 		delete m_message_menu.window;
 	else
+		Widelands::MessageQueue::read_all(player());
 		new GameMessageMenu(*this, m_message_menu);
 }
 

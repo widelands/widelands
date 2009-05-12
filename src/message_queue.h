@@ -24,9 +24,13 @@
 #include <string>
 #include <vector>
 
+#include "graphic/graphic.h"
 #include "message.h"
 #include "ui_basic/button.h"
 #include "logic/player.h"
+
+#define NO_NEW_MESSAGES "pics/menu_toggle_oldmessage_menu.png"
+#define NEW_MESSAGES "pics/menu_toggle_newmessage_menu.png"
 
 namespace Widelands {
 	struct Coords;
@@ -60,6 +64,9 @@ struct MessageQueue {
 	{
 		get(player_number).push_back(m);
 		m_readall(player_number) = false;
+		if (m_button(0)){
+			m_button(0)->set_pic(g_gr->get_picture(PicMod_Game,NEW_MESSAGES));
+		}
 	}
 
 	static void read_all (Player& p)
@@ -69,8 +76,19 @@ struct MessageQueue {
 	static void read_all (Player_Number player_number)
 	{
 		m_readall(player_number) = true;
+		if (m_button(0)){
+			m_button(0)->set_pic(g_gr->get_picture(PicMod_Game,NO_NEW_MESSAGES));
+		}
 	}
 
+	static UI::Callback_Button<Interactive_Player>* m_button(UI::Callback_Button<Interactive_Player>* b)
+	{
+		static UI::Callback_Button<Interactive_Player>* m_but=0;
+		if (b){
+			m_but=b;
+		}
+		return m_but;
+	}
 
 private:
 	//use char here instead of bool because bool vectors behave odd
@@ -84,7 +102,8 @@ private:
 		return m_read[player_number];
 	}
 
-	UI::Callback_Button<GameMessageMenu>* m_button;
+
+
 };
 
 };
