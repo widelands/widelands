@@ -37,51 +37,53 @@ namespace Widelands {
 
 struct MessageQueue {
 	void registerButton(UI::Callback_Button<GameMessageMenu>*);
-	
-	static std::vector<Message>& get(Player& p) 
+
+	static std::vector<Message>& get (Player& p)
 	{
 		return get(p.get_player_number());
 	}
-	static std::vector<Message>& get(int i) 
+	static std::vector<Message>& get (Player_Number player_number)
 	{
 		static std::vector<std::vector< Message> > myQueue;
-		if (i >= myQueue.size()){
-			myQueue.resize(i+1);
+		if (player_number >= myQueue.size())
+		{
+			myQueue.resize(player_number + 1);
 		}
-		return myQueue[i];
+		return myQueue[player_number];
 	}
-	
-	static void add(Player& p, Message m)
+
+	static void add (Player& p, Message m)
 	{
-		add(p.get_player_number(),m);
+		add(p.get_player_number(), m);
 	}
-	static void add(int player_number, Message m)
+	static void add (Player_Number player_number, Message m)
 	{
 		get(player_number).push_back(m);
-		m_readall(player_number)=false;
+		m_readall(player_number) = false;
 	}
-	
-	static void read(Player& p)
+
+	static void read_all (Player& p)
 	{
-		read(p.get_player_number());
+		read_all(p.get_player_number());
 	}
-	static void read(int player_number)
+	static void read_all (Player_Number player_number)
 	{
-		m_readall(player_number)=true;
+		m_readall(player_number) = true;
 	}
-		
-	
+
+
 private:
 	//use char here instead of bool because bool vectors behave odd
-	static char& m_readall(int player_number)
+	static char& m_readall(Player_Number player_number)
 	{
 		static std::vector<char> m_read;
-		if (player_number >= m_read.size()){
-			m_read.resize(player_number+1);
+		if (player_number >= m_read.size())
+		{
+			m_read.resize(player_number + 1);
 		}
 		return m_read[player_number];
 	}
-	
+
 	UI::Callback_Button<GameMessageMenu>* m_button;
 };
 
