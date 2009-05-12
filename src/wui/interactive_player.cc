@@ -184,7 +184,7 @@ m_toggle_minimap
 m_toggle_buildhelp
 	(INIT_BTN("menu_toggle_buildhelp", toggle_buildhelp,       _("Buildhelp"))),
 m_toggle_message_menu
-	(INIT_BTN("menu_toggle_oldmessage_menu",          toggle_message_menu,	   _("Messages"))),
+	(INIT_BTN("menu_toggle_oldmessage_menu", toggle_message_menu, _("Messages"))),
 #if 0
 m_toggle_resources
 	(INIT_BTN
