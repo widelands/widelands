@@ -417,7 +417,7 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
 
 	//  Fill the message queue with a message when a warehouse is created.
-	log("Adding message (new warehouse)\n");
+	log("Message: adding (wh) (%s) %i \n",type_name(), owner().get_player_number());
 	MessageQueue::add
 		(owner(),
 		 Message
