@@ -87,6 +87,7 @@ def cli_options():
 	opts.Add('extra_lib_path', '', '')
 	opts.Add('extra_compile_flags', '', '')
 	opts.Add('extra_link_flags', '', '')
+	opts.Add('check','Enable/Disable checks, DO NOT USE', True),
 	opts.AddVariables(
 		BoolVariable('enable_sdl_parachute', 'Enable SDL parachute?', False),
 		BoolVariable('enable_efence', 'Use the efence memory debugger?', False),
