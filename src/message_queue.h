@@ -42,7 +42,7 @@ namespace Widelands {
 struct MessageQueue {
 	void registerButton(UI::Callback_Button<GameMessageMenu>*);
 
-	static std::vector<Message> & get (Player & p)
+	static std::vector<Message> & get (const Player & p)
 	{
 		return get(p.get_player_number());
 	}
@@ -53,22 +53,26 @@ struct MessageQueue {
 		{
 			myQueue.resize(player_number + 1);
 		}
+		//log("messagequeue for player %i at address %i\n",player_number,
+		//&myQueue[player_number]);
 		return myQueue[player_number];
 	}
 
-	static void add (Player & p, Message const m)
+	static void add (const Player & p, Message const m)
 	{
 		add(p.get_player_number(), m);
 	}
 	static void add (Player_Number player_number, Message m)
 	{
+		//log("Adding message for player %i : %s %s\n",player_number,
+		//m.visname().c_str(),m.descr().c_str());
 		get(player_number).push_back(m);
 		m_readall(player_number) = false;
 		if (m_button(0))
 			m_button(0)->set_pic(g_gr->get_picture(PicMod_Game, NEW_MESSAGES));
 	}
 
-	static void read_all (Player & p)
+	static void read_all (const Player & p)
 	{
 		read_all(p.get_player_number());
 	}
