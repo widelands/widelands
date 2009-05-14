@@ -795,6 +795,16 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 		(const Resource_Descr * const rdescr =
 		 map.world().get_resource(position.field->get_resources()))
 	{
+		/* Geologist also sends a message notifying the player
+		 * TODO: each Geologist should report each resource only once
+		 */
+		if (rdescr && rdescr->is_detectable()) {
+			log("Message: resources found %s\n",rdescr->name().c_str());
+			MessageQueue::add
+				(owner(),
+				 Message (rdescr->name(), position, _("Resources found.")));
+		}
+
 		Tribe_Descr const & t = tribe();
 		game.create_immovable
 			(position,
@@ -803,14 +813,6 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 			 	 rdescr->is_detectable() ?
 			 	 position.field->get_resources_amount() : 0),
 			 &t);
-		/* Geologist also sends a message notifying the player
-		 * TODO: each Geologist should report each resource only once
-		 */
-		if (rdescr->is_detectable()) {
-			MessageQueue::add
-				(owner(),
-				 Message (rdescr->name(), position, _("Resources found.")));
-		}
 	}
 
 	++state.ivar1;
