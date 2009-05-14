@@ -232,7 +232,7 @@ all_code_files.sort()
 Alias('tags', env.ctags(source=all_code_files))
 
 ################################################################ C++ style-check
-if (env['build'] == 'debug' or env['build'] == 'profile') and env['PLATFORM'] != 'darwin':
+if (env['build'] == 'debug' or env['build'] == 'profile') and env['PLATFORM'] != 'darwin' and env['check'] == True:
         Alias('old-stylecheck', env.Execute('utils/spurious_source_code/detect'))
 
 # Style Checks
@@ -307,7 +307,8 @@ distcleanactions=[
 	Delete('build/scons-tools/astyle.pyc'),
 	Delete('build/scons-tools/CodeCheck.pyc'),
 	Delete('build/scons-tools/PNGShrink.pyc'),
-#	Delete('build/scons-signatures.dblite')) # This can not work, how to get rid of this file?
+	Delete('build/scons-signatures.dblite'), #have to delete this or problems occur
+	Touch('build/scons-signatures.dblite'), #we need this to make scons exit nicely
 	Delete('utils/scons.py'),
 	Delete('utils/scons-LICENSE'),
 	Delete('utils/scons-README'),

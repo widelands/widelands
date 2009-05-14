@@ -144,8 +144,6 @@ CACHE_DIR="build/stylecheck"
 #    $1
 #      The name of the directory to start the search and check in.
 function detect {
-	if env['check']==False:
-		done
 	for d in $1/*; do
 		[[ -d $d ]] && detect $d
 	done
