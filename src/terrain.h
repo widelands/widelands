@@ -532,7 +532,7 @@ template<typename T> static void render_road_horiz
 	int32_t ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
 	int32_t centery = start.y << 16;
 
-	for (int32_t x = start.x, sx = 0; x < end.x; x++, centery += ydiff, sx ++) {
+	for (int32_t x = start.x, sx = 0; x < end.x; ++x, centery += ydiff, ++sx) {
 		if (x < 0 || x >= dstw)
 			continue;
 
@@ -559,7 +559,7 @@ template<typename T> static void render_road_vert
 	int32_t xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
 	int32_t centerx = start.x << 16;
 
-	for (int32_t y = start.y, sy = 0; y < end.y; y++, centerx += xdiff, sy ++) {
+	for (int32_t y = start.y, sy = 0; y < end.y; ++y, centerx += xdiff, ++sy) {
 		if (y < 0 || y >= dsth)
 			continue;
 
