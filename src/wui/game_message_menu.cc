@@ -50,7 +50,15 @@ GameMessageMenu::GameMessageMenu
 		 25, 25,
 		 2,
 		 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
-		 &GameMessageMenu::clicked_view, *this, _("go to location"))
+		 &GameMessageMenu::clicked_view, *this, _("go to location")),
+	sort
+		(this,
+		 5 + 25 + 5 + 25 + 5,5,
+		 25, 25,
+		 2,
+		 g_gr->get_picture(PicMod_Game, "pics/menu_sort.png"),
+		 &GameMessageMenu::clicked_sort, *this, _("sort messages")),
+	m_direction(1)
 {
 	list.selected.set(this, &GameMessageMenu::selected);
 	if (get_usedefaultpos())
@@ -62,11 +70,17 @@ void GameMessageMenu::think() {
 	std::vector<Widelands::Message> & mmm =
 		Widelands::MessageQueue::get(iplayer().player());
 	int const nr_messages = mmm.size();
+	log (" we have %i messages \n",nr_messages);
 	for (int i = 0; i < nr_messages; ++i) {
 		if (mmm[i].get_is_visible()) {
 			for (uint32_t j = 0;;++j) {
 				if (j == list.size()) {
-					list.add(mmm[i].visname().c_str(), mmm[i]);
+					log ("think: message %s\n",mmm[i].visname().c_str());
+					if (m_direction < 0) {
+						list.add_front(mmm[i].visname().c_str(),mmm[i]);
+					} else {
+						list.add(mmm[i].visname().c_str(), mmm[i]);
+					}
 					break;
 				} else if (&list[j] == &mmm[i]) {
 					break;
@@ -106,4 +120,9 @@ void GameMessageMenu::clicked_view() {
 	if (selection < list.size()) {
 		iplayer().move_view_to(list[selection].get_coords());
 	}
+}
+
+void GameMessageMenu::clicked_sort() {
+	m_direction = -1 * m_direction;
+	list.clear();
 }
