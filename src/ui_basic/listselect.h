@@ -180,7 +180,9 @@ struct Listselect : public BaseListselect {
 		 const bool select_this = false)
 	{
 		m_entry_cache.push_front(value);
-		BaseListselect::add_front(name, m_entry_cache.size() - 1, picid, select_this);
+		BaseListselect::add_front
+			(name, m_entry_cache.size() - 1,
+			 picid, select_this);
 	}
 
 	Entry const & operator[](uint32_t const i) const throw ()

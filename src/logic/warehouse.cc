@@ -361,7 +361,7 @@ int32_t Warehouse::get_priority
 		type == Request::WARE and m_target_supply[ware_index] > 0 ? 500000 : 100;
 }
 
-void Warehouse::set_needed(Ware_Index const ware_index, int const value) {
+void Warehouse::set_needed(Ware_Index const ware_index, uint32_t const value) {
 	//assert (value >= m_supply->stock_wares(ware_index));
 	if (value > m_supply->stock_wares(ware_index))
 		m_target_supply[ware_index] = value - m_supply->stock_wares(ware_index);
@@ -417,7 +417,10 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
 
 	//  Fill the message queue with a message when a warehouse is created.
-	log("Message: adding (wh) (%s) %i \n", type_name(), owner().get_player_number());
+	log
+		("Message: adding (wh) (%s) %i \n",
+		 type_name(),
+		 owner().get_player_number());
 	MessageQueue::add
 		(owner(),
 		 Message

@@ -53,7 +53,7 @@ GameMessageMenu::GameMessageMenu
 		 &GameMessageMenu::clicked_view, *this, _("go to location")),
 	sort
 		(this,
-		 5 + 25 + 5 + 25 + 5,5,
+		 5 + 25 + 5 + 25 + 5, 5,
 		 25, 25,
 		 2,
 		 g_gr->get_picture(PicMod_Game, "pics/menu_sort.png"),
@@ -70,14 +70,14 @@ void GameMessageMenu::think() {
 	std::vector<Widelands::Message> & mmm =
 		Widelands::MessageQueue::get(iplayer().player());
 	int const nr_messages = mmm.size();
-	log (" we have %i messages \n",nr_messages);
+	log (" we have %i messages \n", nr_messages);
 	for (int i = 0; i < nr_messages; ++i) {
 		if (mmm[i].get_is_visible()) {
 			for (uint32_t j = 0;;++j) {
 				if (j == list.size()) {
-					log ("think: message %s\n",mmm[i].visname().c_str());
+					log ("think: message %s\n", mmm[i].visname().c_str());
 					if (m_direction < 0) {
-						list.add_front(mmm[i].visname().c_str(),mmm[i]);
+						list.add_front(mmm[i].visname().c_str(), mmm[i]);
 					} else {
 						list.add(mmm[i].visname().c_str(), mmm[i]);
 					}

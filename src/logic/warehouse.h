@@ -81,7 +81,7 @@ public:
 	virtual void set_economy(Economy *);
 	virtual int32_t get_priority
 		(int32_t type, Ware_Index ware_index, bool adjust = true) const;
-	void set_needed(Ware_Index, int value = 1);
+	void set_needed(Ware_Index, uint32_t value = 1);
 
 	const WareList &get_wares() const;
 	const WareList &get_workers() const;

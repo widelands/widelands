@@ -738,15 +738,10 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		//  size is too small.
 		m_map.recalc_whole_map(); //  to initialize buildcaps
 
-		char msg[128];
 		const Widelands::Player_Number nr_players = m_map.get_nrplayers();
-		snprintf
-			(msg, sizeof(msg),
-			 "Checking starting position for all %u players:\n", nr_players);
-		log(msg);
+		log("Checking starting position for all %u players:\n", nr_players);
 		for (Widelands::Player_Number p = 1; p <= nr_players; ++p) {
-			snprintf(msg, sizeof(msg), "-> Player %u: ", p);
-			log(msg);
+			log("-> Player %u: ", p);
 
 			Widelands::Coords starting_pos = m_map.get_starting_pos(p);
 			if (!starting_pos) {
