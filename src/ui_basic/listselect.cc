@@ -85,7 +85,7 @@ BaseListselect::~BaseListselect()
  * Remove all entries from the listselect
 */
 void BaseListselect::clear() {
-	container_iterate_const(Entry_Record_vector, m_entry_records, i)
+	container_iterate_const(Entry_Record_deque, m_entry_records, i)
 		free(*i.current);
 	m_entry_records.clear();
 
@@ -141,6 +141,48 @@ void BaseListselect::add
 
 	if (sel)
 		select(m_entry_records.size() - 1);
+}
+
+void BaseListselect::add_front
+	(char const * const name,
+	 uint32_t           entry,
+	 int32_t      const picid,
+	 bool         const sel)
+{
+	Entry_Record & er = *static_cast<Entry_Record *>
+		(malloc(sizeof(Entry_Record) + strlen(name)));
+
+	er.m_entry = 0;
+	for (int i = 0; i < m_entry_records.size(); ++i)
+		m_entry_records[i]->m_entry++;
+		
+	er.picid = picid;
+	er.use_clr = false;
+	strcpy(er.name, name);
+
+	uint32_t entry_height = 0;
+	if (picid == -1)
+		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
+	else {
+		uint32_t w, h;
+		g_gr->get_picture_size(picid, w, h);
+		entry_height = (h >= g_fh->get_fontheight(m_fontname, m_fontsize))
+			? h : g_fh->get_fontheight(m_fontname, m_fontsize);
+		if (m_max_pic_width < w)
+			m_max_pic_width = w;
+	}
+
+	if (entry_height > m_lineheight)
+		m_lineheight = entry_height;
+
+	m_entry_records.push_front(&er);
+
+	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
+
+	update(0, 0, get_eff_w(), get_h());
+
+	if (sel)
+		select(0);
 }
 
 /**

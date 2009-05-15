@@ -30,6 +30,7 @@
 #include "compile_assert.h"
 
 #include <limits>
+#include <deque>
 
 namespace UI {
 struct Scrollbar;
@@ -60,6 +61,11 @@ struct BaseListselect : public Panel {
 		(const uint32_t Begin = 0,
 		 uint32_t End = std::numeric_limits<uint32_t>::max());
 	void add
+		(const char * const name,
+		 uint32_t value,
+		 const int32_t picid = -1,
+		 const bool select_this = false);
+	void add_front
 		(const char * const name,
 		 uint32_t value,
 		 const int32_t picid = -1,
@@ -129,12 +135,12 @@ private:
 		int32_t picid;
 		char name[1];
 	};
-	typedef std::vector<Entry_Record *> Entry_Record_vector;
+	typedef std::deque<Entry_Record *> Entry_Record_deque;
 
 	uint32_t m_max_pic_width;
 	uint32_t m_lineheight;
 	Align m_align;
-	Entry_Record_vector m_entry_records;
+	Entry_Record_deque m_entry_records;
 	Scrollbar m_scrollbar;
 	uint32_t m_scrollpos;         //  in pixels
 	uint32_t m_selection;
@@ -167,6 +173,15 @@ struct Listselect : public BaseListselect {
 		m_entry_cache.push_back(value);
 		BaseListselect::add(name, m_entry_cache.size() - 1, picid, select_this);
 	}
+	void add_front
+		(const char * const name,
+		 Entry value,
+		 const int32_t picid = -1,
+		 const bool select_this = false)
+	{
+		m_entry_cache.push_front(value);
+		BaseListselect::add_front(name, m_entry_cache.size() - 1, picid, select_this);
+	}
 
 	Entry const & operator[](uint32_t const i) const throw ()
 	{
@@ -179,7 +194,7 @@ struct Listselect : public BaseListselect {
 	}
 
 private:
-	std::vector<Entry> m_entry_cache;
+	std::deque<Entry> m_entry_cache;
 };
 
 /**
@@ -209,6 +224,14 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 		 const bool select_this = false)
 	{
 		Base::add(name, &value, picid, select_this);
+	}
+	void add_front
+		(const char * const name,
+		 Entry      &       value,
+		 const int32_t picid = -1,
+		 const bool select_this = false)
+	{
+		Base::add_front(name, &value, picid, select_this);
 	}
 
 	Entry & operator[](uint32_t const i) const throw ()
