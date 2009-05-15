@@ -94,10 +94,14 @@ void WLApplication::setup_searchpaths(std::string argv0)
 	try {
 #ifdef __APPLE__
 		// on mac, the default data dir is relative to the current directory
+		log ("Adding directory:Widelands.app/Contents/Resources/\n");
 		g_fs->AddFileSystem
 			(FileSystem::Create("Widelands.app/Contents/Resources/"));
 #else
 		// first, try the data directory used in the last scons invocation
+		log 
+			  ("Adding directory:%s\n",
+		     (std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR).c_str());
 		g_fs->AddFileSystem //  see config.h
 			(FileSystem::Create
 			 	(std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR));
@@ -114,6 +118,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 	try {
 #ifndef WIN32
 		// if that fails, search in FHS standard location (obviously UNIX-only)
+		log ("Adding directory:/usr/share/games/widelands\n");
 		g_fs->AddFileSystem(FileSystem::Create("/usr/share/games/widelands"));
 #else
 		//TODO: is there a "default dir" for this on win32 and mac ?
@@ -129,6 +134,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 
 	try {
 		// absolute fallback directory is the CWD
+		log ("Adding directory:.\n");
 		g_fs->AddFileSystem(FileSystem::Create("."));
 	}
 	catch (FileNotFound_error e) {}
@@ -154,6 +160,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		argv0.erase(slash);
 		if (argv0 != ".") {
 			try {
+				log ("Adding directory: %s\n", argv0.c_str());
 				g_fs->AddFileSystem(FileSystem::Create(argv0));
 #ifdef USE_DATAFILE
 				argv0.append ("/widelands.dat");
@@ -162,7 +169,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			}
 			catch (FileNotFound_error e) {}
 			catch (FileAccessDenied_error e) {
-				log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
+				log ("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 			}
 			catch (FileType_error e) {
 				//TODO: handle me
@@ -177,6 +184,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		RealFSImpl(path).EnsureDirectoryExists(".widelands");
 		path += "/.widelands";
 		try {
+			log ("Adding directory: %s\n", path.c_str());
 			g_fs->AddFileSystem(FileSystem::Create(path.c_str()));
 		} catch (FileNotFound_error     const & e) {
 		} catch (FileAccessDenied_error const & e) {
@@ -849,6 +857,11 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		g_options.pull_section("global").create_val("nozip", "true");
 		m_commandline.erase("nozip");
 	}
+	if (m_commandline.count("datadir")) {
+		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
+		g_fs->AddFileSystem(FileSystem::Create(m_commandline["datadir"]));
+		m_commandline.erase("datadir");
+	}
 
 	if (m_commandline.count("double")) {
 #ifdef DEBUG
@@ -955,6 +968,8 @@ void WLApplication::show_usage()
 		<<
 		_
 			(" --<config-entry-name>=value overwrites any config file setting\n\n"
+			 " --datadir=DIRNAME    Use specified direction for the widelands\n"
+			 "                      data files\n"
 			 " --record=FILENAME    Record all events to the given filename for\n"
 			 "                      later playback\n"
 			 " --playback=FILENAME  Playback given filename (see --record)\n\n"
