@@ -2096,7 +2096,7 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3
 		*(zi->ci.central_header + SIZECENTRALHEADER + size_filename + i) =
 			*((static_cast<const char *>(extrafield_global) + i));
 
-	for (i = 0;i < size_comment; ++i)
+	for (i = 0; i < size_comment; ++i)
 		*
 		(zi->ci.central_header  +
 		 SIZECENTRALHEADER      +
