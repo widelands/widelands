@@ -153,7 +153,7 @@ template<typename T> std::string toString(T const & x) {
 std::vector<std::string> split_string
 	(std::string const &, char const * separators);
 void remove_spaces(std::string &);
-void log(const char *fmt, ...);
+void log(char * const fmt, ...);
 
 bool is_printable(SDL_keysym k);
 
