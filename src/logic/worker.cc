@@ -799,7 +799,7 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 		 * TODO: each Geologist should report each resource only once
 		 */
 		if (rdescr && rdescr->is_detectable()) {
-			log("Message: resources found %s\n",rdescr->name().c_str());
+			log("Message: resources found %s\n", rdescr->name().c_str());
 			MessageQueue::add
 				(owner(),
 				 Message (rdescr->name(), position, _("Resources found.")));
