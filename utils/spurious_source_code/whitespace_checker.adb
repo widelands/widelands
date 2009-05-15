@@ -253,6 +253,14 @@ procedure Whitespace_Checker is
                      Put_Error
                        ("""," & Read_Characters (0) & """ is not allowed");
                end case;
+            when ';'                   =>
+               case Read_Characters (0) is
+                  when LF | ' ' | ';' | ')' | '}' | '&' | '*' =>
+                     null; --  ";&" and ";*" are already reported elsewhere
+                  when others                                 =>
+                     Put_Error
+                       (""";" & Read_Characters (0) & """ is not allowed");
+               end case;
             when '='                   =>
                Check_Closing_Parenthesis_Condition;
                case Read_Characters (0) is
@@ -262,7 +270,7 @@ procedure Whitespace_Checker is
                      Put_Error
                        ("""=" & Read_Characters (0) & """ is not allowed");
                end case;
-            when '/'       =>
+            when '/'                   =>
                case Read_Characters (0) is
                   when LF | '*' | '/'                    =>
                      null;
@@ -376,7 +384,7 @@ procedure Whitespace_Checker is
                        ('"' & Read_Characters (1) & Read_Characters (0) &
                         """ is not allowed");
                end case;
-            when ';' | ')' | ']' | ' ' =>
+            when ')' | ']' | ' '       =>
                null;
             when others                =>
                Check_Closing_Parenthesis_Condition;
