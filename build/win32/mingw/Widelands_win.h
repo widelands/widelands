@@ -33,7 +33,7 @@
 #define FILE_DESCRIPTION	"Widelands - realtime strategy game"
 #define INTERNAL_NAME	"WL"
 #define LEGAL_COPYRIGHT	"GPL v2"
-#define WWW	"http:\/\/xoops.widelands.org"
+#define WWW	"http:\/\/wl.widelands.org"
 #define License	"Gnu GPL v2"
 #define ORIGINAL_FILENAME	"widelands"
 #define PRODUCT_NAME	"Widelands"
