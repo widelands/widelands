@@ -67,7 +67,6 @@ struct BaseListselect : public Panel {
 		 const bool select_this = false);
 	void add_front
 		(const char * const name,
-		 uint32_t value,
 		 const int32_t picid = -1,
 		 const bool select_this = false);
 	void remove(uint32_t);
@@ -181,8 +180,7 @@ struct Listselect : public BaseListselect {
 	{
 		m_entry_cache.push_front(value);
 		BaseListselect::add_front
-			(name, m_entry_cache.size() - 1,
-			 picid, select_this);
+			(name, picid, select_this);
 	}
 
 	Entry const & operator[](uint32_t const i) const throw ()

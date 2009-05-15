@@ -145,7 +145,6 @@ void BaseListselect::add
 
 void BaseListselect::add_front
 	(char const * const name,
-	 uint32_t           entry,
 	 int32_t      const picid,
 	 bool         const sel)
 {
@@ -153,9 +152,9 @@ void BaseListselect::add_front
 		(malloc(sizeof(Entry_Record) + strlen(name)));
 
 	er.m_entry = 0;
-	for (int i = 0; i < m_entry_records.size(); ++i)
+	for (uint32_t																																 i = 0; i < m_entry_records.size(); ++i)
 		m_entry_records[i]->m_entry++;
-		
+
 	er.picid = picid;
 	er.use_clr = false;
 	strcpy(er.name, name);
