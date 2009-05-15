@@ -1253,7 +1253,7 @@ bool DefaultAI::check_economies ()
 	container_iterate(std::list<EconomyObserver *>, economies, i) {
 		// check if any flag has changed its economy
 		std::list<Flag const *> &fl = (*i.current)->flags;
-		for (std::list<Flag const *>::iterator j = fl.begin();j != fl.end();) {
+		for (std::list<Flag const *>::iterator j = fl.begin(); j != fl.end();) {
 			if (&(*i.current)->economy != &(*j)->economy()) {
 				get_economy_observer((*j)->economy())->flags.push_back(*j);
 				j = fl.erase(j);
