@@ -349,11 +349,11 @@ void DirAnimations::parse
 		snprintf(dirpictempl, sizeof(dirpictempl), "%s_??.png", sectnamebase);
 	}
 
-	for (int32_t dir = 1; dir <= 6; ++dir) {
+	for (int32_t dir = 0; dir < 6; ++dir) {
 		static const char *dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
 		char sectname[300];
 
-		snprintf(sectname, sizeof(sectname), sectnamebase, dirstrings[dir - 1]);
+		snprintf(sectname, sizeof(sectname), sectnamebase, dirstrings[dir]);
 
 		std::string const anim_name = sectname;
 
@@ -367,8 +367,8 @@ void DirAnimations::parse
 			s = defaults;
 		}
 
-		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir - 1]);
-		m_animations[dir - 1] = g_anim.get(directory, *s, sectname, encdefaults);
-		b.add_animation(anim_name.c_str(), m_animations[dir - 1]);
+		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir]);
+		m_animations[dir] = g_anim.get(directory, *s, sectname, encdefaults);
+		b.add_animation(anim_name.c_str(), m_animations[dir]);
 	}
 }
