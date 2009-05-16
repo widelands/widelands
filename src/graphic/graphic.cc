@@ -284,8 +284,6 @@ uint32_t Graphic::get_picture(uint8_t const module, char const * const fname) {
 
 		Picture & pic = m_pictures[id];
 
-		pic.module    = 0; // will be filled in by caller
-
 		pic.u.fname   = strdup(fname);
 
 		assert(pic.u.fname); //  FIXME no proper check for NULL return value!
@@ -297,7 +295,7 @@ uint32_t Graphic::get_picture(uint8_t const module, char const * const fname) {
 		m_picturemap[fname] = id;
 	}
 
-	m_pictures[id].module |= module;
+	m_pictures[id].module = module;
 
 	return id;
 }
