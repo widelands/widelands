@@ -567,7 +567,8 @@ void NetHost::setMap
 	d->settings.mapfilename = mapfilename;
 	d->settings.savegame = savegame;
 
-	uint32_t oldplayers = d->settings.players.size();
+	std::vector<PlayerSettings>::size_type oldplayers =
+		d->settings.players.size();
 
 	SendPacket s;
 

@@ -33,7 +33,7 @@ struct Vector {
 
 	void normalize() {
 		const float f = static_cast<float>(sqrt(x * x + y * y + z * z));
-		if (f == 0)
+		if (fabs(f) < 0.00001) // check for ==0
 			return;
 		x /= f;
 		y /= f;

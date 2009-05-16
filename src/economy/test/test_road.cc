@@ -81,7 +81,7 @@ BOOST_AUTO_TEST_SUITE(Road)
 /*
  * Simple tests
  */
-BOOST_FIXTURE_TEST_CASE(PassabilitiyTest, SimpleRoadTestsFixture) {
+BOOST_FIXTURE_TEST_CASE(PassabilityTest, SimpleRoadTestsFixture) {
 	BOOST_CHECK_EQUAL(r.get_passable(), true);
 }
 BOOST_FIXTURE_TEST_CASE(CorrectSizeTest, SimpleRoadTestsFixture) {

@@ -345,7 +345,7 @@ void FieldActionWindow::init()
 	// where the field is, to allow better view
 	const Point mouse = get_mouse_position();
 	if
-		(0 <= mouse.x  and mouse.x < get_w()
+		(0 <= mouse.x and mouse.x < get_w()
 		 and
 		 0 <= mouse.y and mouse.y < get_h())
 	{

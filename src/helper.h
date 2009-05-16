@@ -138,7 +138,7 @@ template<typename T> T stringTo(std::string const & s) {
  *
  * \note In a just world, this would be implemented with gnu::autosprintf. But
  * many distributions don't carry that lib despite the fact that it is part of
- * glibc :-(
+ * glibc.
  *
  * \see http://www.experts-exchange.com/Programming/
  * Programming_Languages/Cplusplus/Q_20670737.html

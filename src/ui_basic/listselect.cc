@@ -152,7 +152,7 @@ void BaseListselect::add_front
 		(malloc(sizeof(Entry_Record) + strlen(name)));
 
 	er.m_entry = 0;
-	for (uint32_t																																 i = 0; i < m_entry_records.size(); ++i)
+	for (uint32_t i = 0; i < m_entry_records.size(); ++i)
 		m_entry_records[i]->m_entry++;
 
 	er.picid = picid;

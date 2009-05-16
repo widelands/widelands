@@ -277,9 +277,8 @@ void Multiline_Editbox::CalcLinePos()
 		if (str[i] == '\n')
 			++lbtb;
 
-	m_textpos = //  Calculate as double, so it comes closer to the true value.
-		(lbtt == 0) & (lbtb == 0) ?
-		0 : (static_cast<double>(m_textheight - get_h())) / (lbtb + lbtt) * lbtt;
+	m_textpos = (lbtt == 0) & (lbtb == 0) ?
+		0 : (m_textheight - get_h()) * lbtt / (lbtb + lbtt);
 }
 
 };

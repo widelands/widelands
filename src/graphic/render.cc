@@ -392,7 +392,7 @@ AnimationGfx::AnimationGfx(AnimationData const * data)
 	//  masks, the extension (4 characters including the dot) and the null
 	//  terminator. Copy the picture name template into the buffer.
 	char filename[256];
-	size_t const picnametempl_size = data->picnametempl.size();
+	std::string::size_type const picnametempl_size = data->picnametempl.size();
 	if (sizeof(filename) < picnametempl_size + 3 + 4 + 1)
 		throw wexception
 			("buffer too small (%lu) for picture name temlplate of size %lu\n",

@@ -188,7 +188,7 @@ void md5_process_block
       a += b;                                                                 \
    } while (false)                                                            \
 
-		/* It is unfortunate that C does not provide an operator for
+	/* It is unfortunate that C does not provide an operator for
 		cyclic rotation.  Hope the C compiler is smart enough.  */
 #define CYCLIC(w, s) (w = (w << s) | (w >> (32 - s)))
 
@@ -227,7 +227,7 @@ void md5_process_block
       a += b;                                                                 \
    } while (false)                                                            \
 
-		/* Round 2.  */
+	/* Round 2.  */
 		OP (FG, A, B, C, D,  1,  5, 0xf61e2562);
 		OP (FG, D, A, B, C,  6,  9, 0xc040b340);
 		OP (FG, C, D, A, B, 11, 14, 0x265e5a51);
