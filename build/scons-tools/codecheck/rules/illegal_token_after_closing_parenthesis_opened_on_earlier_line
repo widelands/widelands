@@ -12,7 +12,7 @@ import re
 class EvalMatches(object):
     _closing_parens = re.compile(r'''(?x)
 (\() | # Either an opening or 
-(\))[ ]*[)}\],;]*[ ]*([^\s;]) # Or a closing with an illegal token
+(\))[ ]*[)}\],;]*[ ]*([^\s(;]) # Or a closing with an illegal token
 '''
 )
     _error_msg = "Found '%s', but only closing tokens are allowed after closing " \
@@ -23,21 +23,22 @@ class EvalMatches(object):
 
         open_parens = 0
         for lineno,line in enumerate(lines):
-            opening_parens = line.count('(')
-            closing_parens = line.count(')')
             
             last_opening_parens = open_parens
             
             # Find all closing parens
+            open_parens_on_line = 0
             for m in self._closing_parens.finditer(line):
                 if m.group(1) == '(':
                     open_parens += 1
+                    open_parens_on_line += 1
                 else:
-                    open_parens -= 1
-                    if open_parens and m.group(3) not in ')}],;':
+                    open_parens -= m.group(0).count(')')
+                    open_parens_on_line -= m.group(0).count(')')
+                    if last_opening_parens and open_parens_on_line < 0 and m.group(3) not in ')}],;':
                         errors.append((fn,lineno+1,self._error_msg % m.group(3)))
 
-            open_parens += last_opening_parens - closing_parens
+            open_parens = last_opening_parens + line.count('(') - line.count(')')
             
         
 
@@ -70,5 +71,18 @@ forbidden = [
 ]
 
 allowed = [
+"""std::set<std::string> const & operator[] (size_t const i) const {
+\t}
+\tstd::set<std::string>       & operator[] (size_t const i)       {
+\t}
+""",
+
+"""(dynamic_cast<Road const *>(pimm) &&
+\t\t\t  fc.field->get_caps() & BUILDCAPS_FLAG));""",
+
+"""snprintf
+\t\t(buffer, sizeof(buffer),
+\t\t _("%u%% built"), (get_built_per64k() * 100) >> 16);""",
+
 ]
 
