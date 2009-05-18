@@ -21,6 +21,7 @@
 #include "editor_main_menu_load_map.h"
 #include "editor_main_menu_map_options.h"
 #include "editor_main_menu_new_map.h"
+#include "editor_main_menu_random_map.h"
 #include "editor_main_menu_save_map.h"
 #include "editor/editorinteractive.h"
 #include "ui_fsmenu/fileview.h"
@@ -48,6 +49,12 @@ Editor_Main_Menu::Editor_Main_Menu
 		 1,
 		 &Editor_Main_Menu::new_map_btn, *this,
 		 _("New Map")),
+	m_button_new_random_map
+		(this,
+		 hmargin, vmargin + 0 * (height + vspacing), width, height,
+		 1,
+		 &Editor_Main_Menu::new_random_map_btn, *this,
+		 _("New Random Map")),
 	m_button_load_map
 		(this,
 		 hmargin, vmargin + 1 * (height + vspacing), width, height,
@@ -91,6 +98,12 @@ void Editor_Main_Menu::new_map_btn() {
 	new Main_Menu_New_Map(&m_parent);
 	die();
 }
+
+void Editor_Main_Menu::new_random_map_btn() {
+	new Main_Menu_New_Random_Map(&m_parent);
+	die();
+}
+
 void Editor_Main_Menu::load_btn() {
 	new Main_Menu_Load_Map(&m_parent);
 	die();

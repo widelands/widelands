@@ -34,6 +34,7 @@ struct Editor_Main_Menu : public UI::UniqueWindow {
 private:
 	Editor_Interactive         & m_parent;
 	UI::Callback_Button<Editor_Main_Menu> m_button_new_map;
+	UI::Callback_Button<Editor_Main_Menu> m_button_new_random_map;
 	UI::Callback_Button<Editor_Main_Menu> m_button_load_map;
 	UI::Callback_Button<Editor_Main_Menu> m_button_save_map;
 	UI::Callback_Button<Editor_Main_Menu> m_button_map_options;
@@ -46,6 +47,7 @@ private:
 	void load_btn       ();
 	void save_btn       ();
 	void new_map_btn    ();
+	void new_random_map_btn    ();
 	void map_options_btn();
 	void readme_btn     ();
 };

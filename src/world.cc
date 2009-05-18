@@ -148,6 +148,227 @@ const std::string & Resource_Descr::get_editor_pic
 }
 
 
+
+/*
+=============================================================================
+
+Map Gen Info
+
+=============================================================================
+*/
+
+int MapGenAreaInfo::split_string
+	(std::vector<std::string> & strs, std::string & str)
+{
+	strs = ::split_string(str, ",");
+	return strs.size();
+}
+
+void MapGenAreaInfo::readTerrains
+	(std::vector<Terrain_Index> &       list,
+	 Section                    &       s,
+	 char const                 * const value_name)
+{
+	std::string str = s.get_string(value_name, "");
+	if (str.empty())
+		throw wexception
+			("terrain info \"%s\" missing in section \"%s\" mapgenconf for world "
+			 "\"%s\"",
+			 value_name, s.get_name(), m_world->get_name());
+	std::vector<std::string> strs;
+
+	split_string(strs, str);
+
+	for (uint32_t ix = 0; ix < strs.size(); ++ix) {
+		Terrain_Index const tix = m_world->index_of_terrain(strs[ix].c_str());
+		if (tix > 128)
+			throw wexception
+				("unknown terrain \"%s\" in section \"%s\" in mapgenconf for "
+				 "world \"%s\"",
+				 value_name, s.get_name(), m_world->get_name());
+		list.push_back(tix);
+	}
+}
+
+
+void MapGenAreaInfo::parseSection
+	(World * const world, Section & s, MapGenAreaType const areaType)
+{
+	m_weight = s.get_positive("weight", 1);
+	m_world = world;
+	switch (areaType) {
+		case atWater:
+			readTerrains(m_Terrains1, s, "ocean_terrains");
+			readTerrains(m_Terrains2, s, "shelf_terrains");
+			readTerrains(m_Terrains3, s, "shallow_terrains");
+			break;
+		case atLand:
+			readTerrains(m_Terrains1, s, "coast_terrains");
+			readTerrains(m_Terrains2, s, "land_terrains");
+			readTerrains(m_Terrains3, s, "upper_terrains");
+			break;
+		case atMountains:
+			readTerrains(m_Terrains1, s, "mountainfoot_terrains");
+			readTerrains(m_Terrains2, s, "mountain_terrains");
+			readTerrains(m_Terrains3, s, "snow_terrains");
+			break;
+		case atWasteland:
+			readTerrains(m_Terrains1, s, "inner_terrains");
+			readTerrains(m_Terrains2, s, "outer_terrains");
+			break;
+	}
+}
+
+size_t MapGenAreaInfo::getNumTerrains(MapGenTerrainType const terrType)
+{
+	switch (terrType) {
+		case ttWaterOcean:        return m_Terrains1.size();
+		case ttWaterShelf:        return m_Terrains2.size();
+		case ttWaterShallow:      return m_Terrains3.size();
+
+		case ttLandCoast:         return m_Terrains1.size();
+		case ttLandLand:          return m_Terrains2.size();
+		case ttLandUpper:         return m_Terrains3.size();
+
+		case ttWastelandInner:    return m_Terrains1.size();
+		case ttWastelandOuter:    return m_Terrains2.size();
+
+		case ttMountainsFoot:     return m_Terrains1.size();
+		case ttMountainsMountain: return m_Terrains2.size();
+		case ttMountainsSnow:     return m_Terrains3.size();
+
+		default:                  return 0;
+	}
+}
+
+Terrain_Index MapGenAreaInfo::getTerrain
+	(MapGenTerrainType const terrType, uint32_t const index)
+{
+	switch (terrType) {
+		case ttWaterOcean:        return m_Terrains1[index];
+		case ttWaterShelf:        return m_Terrains2[index];
+		case ttWaterShallow:      return m_Terrains3[index];
+
+		case ttLandCoast:         return m_Terrains1[index];
+		case ttLandLand:          return m_Terrains2[index];
+		case ttLandUpper:         return m_Terrains3[index];
+
+		case ttWastelandInner:    return m_Terrains1[index];
+		case ttWastelandOuter:    return m_Terrains2[index];
+
+		case ttMountainsFoot:     return m_Terrains1[index];
+		case ttMountainsMountain: return m_Terrains2[index];
+		case ttMountainsSnow:     return m_Terrains3[index];
+
+		default:                  return 0;
+	}
+}
+
+uint32_t MapGenInfo::getSumLandWeight()
+{
+	if (m_land_weight_valid)
+		return m_land_weight;
+
+	uint32_t sum = 0;
+	for (uint32_t ix = 0; ix < getNumAreas(MapGenAreaInfo::atLand); ++ix)
+		sum += getArea(MapGenAreaInfo::atLand, ix).getWeight();
+	m_land_weight = sum;
+	return m_land_weight;
+}
+
+
+size_t MapGenInfo::getNumAreas(MapGenAreaInfo::MapGenAreaType const areaType)
+{
+	switch (areaType) {
+	case MapGenAreaInfo::atWater:     return m_WaterAreas    .size();
+	case MapGenAreaInfo::atLand:      return m_LandAreas     .size();
+	case MapGenAreaInfo::atMountains: return m_MountainAreas .size();
+	case MapGenAreaInfo::atWasteland: return m_WasteLandAreas.size();
+	}
+	throw wexception("invalid MapGenAreaType %u", areaType);
+}
+
+MapGenAreaInfo & MapGenInfo::getArea
+	(MapGenAreaInfo::MapGenAreaType const areaType, uint32_t const index)
+{
+	switch (areaType) {
+	case MapGenAreaInfo::atWater:     return m_WaterAreas    .at(index);
+	case MapGenAreaInfo::atLand:      return m_LandAreas     .at(index);
+	case MapGenAreaInfo::atMountains: return m_MountainAreas .at(index);
+	case MapGenAreaInfo::atWasteland: return m_WasteLandAreas.at(index);
+	}
+	throw wexception("invalid MapGenAreaType %u", areaType);
+}
+
+void MapGenInfo::parseProfile(World * const world, Profile & profile)
+{
+	m_world = world;
+	m_land_weight_valid = false;
+
+	{ //  find out about the general heights
+		Section & s = profile.get_safe_section("heights");
+		m_ocean_height        = s.get_positive("ocean",        10);
+		m_shelf_height        = s.get_positive("shelf",        10);
+		m_shallow_height      = s.get_positive("shallow",      10);
+		m_coast_height        = s.get_positive("coast",        12);
+		m_upperland_height    = s.get_positive("upperland",    16);
+		m_mountainfoot_height = s.get_positive("mountainfoot", 18);
+		m_mountain_height     = s.get_positive("mountain",     20);
+		m_snow_height         = s.get_positive("snow",         33);
+		m_summit_height       = s.get_positive("summit",       40);
+	}
+
+
+	//  read the area names
+	Section & areas_s = profile.get_safe_section("areas");
+	std::string              str;
+	std::vector<std::string> water_strs;
+	std::vector<std::string> land_strs;
+	std::vector<std::string> wasteland_strs;
+	std::vector<std::string> mountain_strs;
+
+	str = areas_s.get_string("water", "water_area");
+	MapGenAreaInfo::split_string(water_strs, str);
+
+	str = areas_s.get_string("land", "land_area");
+	MapGenAreaInfo::split_string(land_strs, str);
+
+	str = areas_s.get_string("wasteland", "wasteland_area");
+	MapGenAreaInfo::split_string(wasteland_strs, str);
+
+	str = areas_s.get_string("mountains", "mountains_area");
+	MapGenAreaInfo::split_string(mountain_strs, str);
+
+	for (uint32_t ix = 0; ix < water_strs.size(); ++ix) {
+		Section & s = profile.get_safe_section(water_strs[ix].c_str());
+		MapGenAreaInfo info;
+		info.parseSection(m_world, s, MapGenAreaInfo::atWater);
+		m_WaterAreas.push_back(info);
+	}
+
+	for (uint32_t ix = 0; ix < land_strs.size(); ++ix) {
+		Section & s = profile.get_safe_section(land_strs[ix].c_str());
+		MapGenAreaInfo info;
+		info.parseSection(m_world, s, MapGenAreaInfo::atLand);
+		m_LandAreas.push_back(info);
+	}
+
+	for (uint32_t ix = 0; ix < wasteland_strs.size(); ++ix) {
+		Section & s = profile.get_safe_section(wasteland_strs[ix].c_str());
+		MapGenAreaInfo info;
+		info.parseSection(m_world, s, MapGenAreaInfo::atWasteland);
+		m_WasteLandAreas.push_back(info);
+	}
+
+	for (uint32_t ix = 0; ix < mountain_strs.size(); ++ix) {
+		Section & s = profile.get_safe_section(mountain_strs[ix].c_str());
+		MapGenAreaInfo info;
+		info.parseSection(m_world, s, MapGenAreaInfo::atMountains);
+		m_MountainAreas.push_back(info);
+	}
+
+}
+
 /*
 =============================================================================
 
@@ -168,6 +389,7 @@ World::World(std::string const & name) : m_basedir("worlds/" + name + '/') {
 			parse_root_conf(name, root_conf);
 			parse_resources();
 			parse_terrains();
+			parse_mapgen();
 			log("Parsing world bobs...\n");
 			parse_bobs(m_basedir, root_conf);
 			root_conf.check_used();
@@ -288,6 +510,152 @@ void World::parse_bobs(std::string & path, Profile & root_conf) {
 	PARSE_MAP_OBJECT_TYPES_END;
 }
 
+void World::parse_mapgen   ()
+{
+	char fname[256];
+
+	snprintf(fname, sizeof(fname), "%s/mapgenconf", m_basedir.c_str());
+
+	try
+	{
+		Profile prof(fname);
+
+		m_mapGenInfo.parseProfile(this, prof);
+
+		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atWater) < 1)
+			throw wexception
+				("World '%s' is missing a water area in %s",
+				 get_name(), fname);
+
+		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atWater) < 1)
+			throw wexception
+				("World '%s' has too many water areas (>3) in %s",
+				 get_name(), fname);
+
+		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atLand) < 1)
+			throw wexception
+				("World '%s' is missing a land area in %s",
+				 get_name(), fname);
+
+		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atLand) > 3)
+			throw wexception
+				("World '%s' has too many land areas (>3) in %s",
+				 get_name(), fname);
+
+		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atWasteland) < 1)
+			throw wexception
+				("World '%s' is missing a wasteland area in %s",
+				 get_name(), fname);
+
+		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atWasteland) > 2)
+			throw wexception
+				("World '%s' has too many wasteland areas (>2) in %s",
+				 get_name(), fname);
+
+		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atMountains) < 1)
+			throw wexception
+				("World '%s' is missing a mountain area in %s",
+				 get_name(), fname);
+
+		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atMountains) < 1)
+			throw wexception
+				("World '%s' has too many mountain areas (>1) in %s",
+				 get_name(), fname);
+
+		if
+			(m_mapGenInfo.getArea(MapGenAreaInfo::atWater, 0).getNumTerrains
+			 	(MapGenAreaInfo::ttWaterOcean) < 1)
+			throw wexception
+				("World '%s' is missing a water/ocean terrain type in %s",
+				 get_name(), fname);
+
+		if
+			(m_mapGenInfo.getArea(MapGenAreaInfo::atWater, 0).getNumTerrains
+			 	(MapGenAreaInfo::ttWaterShelf)
+			 <
+			 1)
+			throw wexception
+				("World '%s' is missing a water/shelf terrain type in %s",
+				 get_name(), fname);
+
+		if
+			(m_mapGenInfo.getArea(MapGenAreaInfo::atWater, 0).getNumTerrains
+			 	(MapGenAreaInfo::ttWaterShallow)
+			 <
+			 1)
+			throw wexception
+				("World '%s' is missing a water/shallow terrain type in %s",
+				 get_name(), fname);
+
+		if
+			(m_mapGenInfo.getArea(MapGenAreaInfo::atLand, 0).getNumTerrains
+			 	(MapGenAreaInfo::ttLandCoast)
+			 <
+			 1)
+			throw wexception
+				("World '%s' is missing a land/coast terrain type in %s",
+				 get_name(), fname);
+
+		if
+			(m_mapGenInfo.getArea(MapGenAreaInfo::atLand, 0).getNumTerrains
+			 	(MapGenAreaInfo::ttLandLand)
+			 <
+			 1)
+			throw wexception
+				("World '%s' is missing a land/land terrain type in %s",
+				 get_name(), fname);
+
+		if
+			(m_mapGenInfo.getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains
+			 	(MapGenAreaInfo::ttMountainsFoot)
+			 <
+			 1)
+			throw wexception
+				("World '%s' is missing a mountain/foot terrain type in %s",
+				 get_name(), fname);
+
+		if
+			(m_mapGenInfo.getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains
+			 	(MapGenAreaInfo::ttMountainsMountain)
+			 <
+			 1)
+			throw wexception
+				("World '%s' is missing a monutain/mountain terrain type in %s",
+				 get_name(), fname);
+
+		if
+			(m_mapGenInfo.getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains
+			 	(MapGenAreaInfo::ttMountainsSnow)
+			 <
+			 1)
+			throw wexception
+				("World '%s' is missing a mountain/snow terrain type in %s",
+				 get_name(), fname);
+
+		if
+			(m_mapGenInfo.getArea(MapGenAreaInfo::atWasteland, 0).getNumTerrains
+			 	(MapGenAreaInfo::ttWastelandInner)
+			 <
+			 1)
+			throw wexception
+				("World '%s' is missing a land/coast terrain type in %s",
+				 get_name(), fname);
+
+		if
+			(m_mapGenInfo.getArea(MapGenAreaInfo::atWasteland, 0).getNumTerrains
+			 	(MapGenAreaInfo::ttWastelandOuter)
+			 <
+			 1)
+			throw wexception
+				("World '%s' is missing a land/land terrain type in %s",
+				 get_name(), fname);
+
+		prof.check_used();
+	} catch (std::exception &e) {
+		throw wexception("%s: %s", fname, e.what());
+	}
+}
+
 /**
  * Check if the world data can actually be read
  */
@@ -328,6 +696,12 @@ int32_t World::safe_resource_index(const char * const resourcename) const {
 			("world %s does not define resource type \"%s\"",
 			 get_name(), resourcename);
 	return result;
+}
+
+
+MapGenInfo & World::getMapGenInfo()
+{
+	return m_mapGenInfo;
 }
 
 

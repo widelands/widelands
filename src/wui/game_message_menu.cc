@@ -69,25 +69,20 @@ GameMessageMenu::GameMessageMenu
 void GameMessageMenu::think() {
 	std::vector<Widelands::Message> & mmm =
 		Widelands::MessageQueue::get(iplayer().player());
-	int const nr_messages = mmm.size();
-	log (" we have %i messages \n", nr_messages);
-	for (int i = 0; i < nr_messages; ++i) {
-		if (mmm[i].get_is_visible()) {
-			for (uint32_t j = 0;;++j) {
+	size_t const nr_messages = mmm.size();
+	log (" we have %u messages \n", nr_messages);
+	for (size_t i = 0; i < nr_messages; ++i)
+		if (mmm[i].get_is_visible())
+			for (uint32_t j = 0;; ++j)
 				if (j == list.size()) {
 					log ("think: message %s\n", mmm[i].visname().c_str());
-					if (m_direction < 0) {
+					if (m_direction < 0)
 						list.add_front(mmm[i].visname().c_str(), mmm[i]);
-					} else {
-						list.add(mmm[i].visname().c_str(), mmm[i]);
-					}
+					else
+						list.add      (mmm[i].visname().c_str(), mmm[i]);
 					break;
-				} else if (&list[j] == &mmm[i]) {
+				} else if (&list[j] == &mmm[i])
 					break;
-				}
-			}
-		}
-	}
 	//list.sort();
 	if (list.size() and not list.has_selection())
 		list.select(0);

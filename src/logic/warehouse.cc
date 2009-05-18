@@ -419,8 +419,7 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	//  Fill the message queue with a message when a warehouse is created.
 	log
 		("Message: adding (wh) (%s) %i \n",
-		 type_name(),
-		 owner().get_player_number());
+		 type_name(), owner().get_player_number());
 	MessageQueue::add
 		(owner(),
 		 Message

@@ -83,8 +83,8 @@ public:
 		(int32_t type, Ware_Index ware_index, bool adjust = true) const;
 	void set_needed(Ware_Index, uint32_t value = 1);
 
-	const WareList &get_wares() const;
-	const WareList &get_workers() const;
+	WareList const & get_wares() const;
+	WareList const & get_workers() const;
 	void insert_wares  (Ware_Index, uint32_t count);
 	void remove_wares  (Ware_Index, uint32_t count);
 	void insert_workers(Ware_Index, uint32_t count);

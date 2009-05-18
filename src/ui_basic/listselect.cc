@@ -110,8 +110,9 @@ void BaseListselect::add
 	 int32_t      const picid,
 	 bool         const sel)
 {
-	Entry_Record & er = *static_cast<Entry_Record *>
-		(malloc(sizeof(Entry_Record) + strlen(name)));
+	Entry_Record & er =
+		*static_cast<Entry_Record *>
+			(malloc(sizeof(Entry_Record) + strlen(name)));
 
 	er.m_entry = entry;
 	er.picid = picid;
@@ -152,8 +153,8 @@ void BaseListselect::add_front
 		(malloc(sizeof(Entry_Record) + strlen(name)));
 
 	er.m_entry = 0;
-	for (uint32_t i = 0; i < m_entry_records.size(); ++i)
-		m_entry_records[i]->m_entry++;
+	container_iterate_const(Entry_Record_deque, m_entry_records, i)
+		++(*i.current)->m_entry;
 
 	er.picid = picid;
 	er.use_clr = false;

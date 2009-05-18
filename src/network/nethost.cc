@@ -574,7 +574,7 @@ void NetHost::setMap
 
 	while (oldplayers > maxplayers) {
 		--oldplayers;
-		for (uint32_t i = 1; i < d->settings.users.size(); ++i) {
+		for (uint32_t i = 1; i < d->settings.users.size(); ++i)
 			if (d->settings.users[i].position == oldplayers) {
 				d->settings.users[i].position = -1;
 
@@ -592,7 +592,6 @@ void NetHost::setMap
 				writeSettingUser(s, i);
 				broadcast(s);
 			}
-		}
 	}
 
 	d->settings.players.resize(maxplayers);

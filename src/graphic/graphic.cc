@@ -410,7 +410,7 @@ uint32_t Graphic::get_resized_picture
 		const double ratio_y = double(h) / orig->get_h();
 
 		//  if proportions are to be kept, recalculate width and height
-		if ((ratio_x - ratio_y) > 0.00001) {// if not equal
+		if ((ratio_x - ratio_y) > 0.00001) { //  if not equal
 			double ratio = 0;
 
 			if (ResizeMode_Clip == mode)

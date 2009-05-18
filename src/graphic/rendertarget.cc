@@ -156,24 +156,32 @@ void RenderTarget::draw_line
 
 	draw_rect(Rect(p, 1, 1), color);
 
-	if (dxabs >= dyabs) for (uint32_t i = 0;i < dxabs; ++i) {
-		//  the line is more horizontal than vertical
-		y += dyabs;
+	if (dxabs >= dyabs)
+		for (uint32_t i = 0; i < dxabs; ++i) {
+			//  the line is more horizontal than vertical
+			y += dyabs;
 
-		if (y >= dxabs) {y -= dxabs; p.y += sdy;}
+			if (y >= dxabs) {
+				y   -= dxabs;
+				p.y += sdy;
+			}
 
-		p.x += sdx;
-		draw_rect(Rect(p, 1, 1), color);
-	}
-	else for (uint32_t i = 0; i < dyabs; ++i) {
-		// the line is more vertical than horizontal
-		x += dxabs;
+			p.x += sdx;
+			draw_rect(Rect(p, 1, 1), color);
+		}
+	else
+		for (uint32_t i = 0; i < dyabs; ++i) {
+			//  the line is more vertical than horizontal
+			x += dxabs;
 
-		if (x >= dyabs) {x -= dyabs; p.x += sdx;}
+			if (x >= dyabs) {
+				x   -= dyabs;
+				p.x += sdx;
+			}
 
-		p.y += sdy;
-		draw_rect(Rect(p, 1, 1), color);
-	}
+			p.y += sdy;
+			draw_rect(Rect(p, 1, 1), color);
+		}
 }
 
 /**

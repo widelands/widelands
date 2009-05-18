@@ -126,6 +126,106 @@ private:
 	explicit Terrain_Descr    (Terrain_Descr const &);
 };
 
+/// Holds world and area specific information for the map generator.
+/// Areas are: Water, Land, Wasteland and Mountains.
+struct MapGenAreaInfo {
+	static int split_string(std::vector<std::string> & strs, std::string & str);
+
+	enum MapGenAreaType {
+		atWater,
+		atLand,
+		atWasteland,
+		atMountains
+	};
+
+	enum MapGenTerrainType {
+		ttWaterOcean,
+		ttWaterShelf,
+		ttWaterShallow,
+
+		ttLandCoast,
+		ttLandLand,
+		ttLandUpper,
+
+		ttWastelandInner,
+		ttWastelandOuter,
+
+		ttMountainsFoot,
+		ttMountainsMountain,
+		ttMountainsSnow
+	};
+
+	void parseSection (World *, Section &, MapGenAreaType areaType);
+	size_t getNumTerrains(MapGenTerrainType);
+	Terrain_Index getTerrain(MapGenTerrainType terrType, uint32_t index);
+	uint32_t getWeight() {return m_weight;}
+
+private:
+
+	void readTerrains
+		(std::vector<Terrain_Index> & list, Section &, char const * value_name);
+
+	std::vector<Terrain_Index> m_Terrains1; //  ocean, coast, inner or foot
+	std::vector<Terrain_Index> m_Terrains2; //  shelf, land, outer or mountain
+	std::vector<Terrain_Index> m_Terrains3; //  shallow, upper, snow
+
+	uint32_t m_weight;
+
+	MapGenAreaType m_areaType;
+
+	World * m_world;
+
+};
+
+/** class MapGenInfo
+  *
+  * This class holds world specific information for the map generator.
+  * This info is usually read from the file "mapgeninfo" of a world.
+  */
+struct MapGenInfo {
+
+	void parseProfile(World * world, Profile & profile);
+
+	size_t getNumAreas(MapGenAreaInfo::MapGenAreaType areaType);
+	MapGenAreaInfo & getArea
+		(MapGenAreaInfo::MapGenAreaType areaType, uint32_t index);
+
+	uint8_t getWaterOceanHeight  () {return m_ocean_height;}
+	uint8_t getWaterShelfHeight  () {return m_shelf_height;}
+	uint8_t getWaterShallowHeight() {return m_shallow_height;}
+	uint8_t getLandCoastHeight   () {return m_coast_height;}
+	uint8_t getLandUpperHeight   () {return m_upperland_height;}
+	uint8_t getMountainFootHeight() {return m_mountainfoot_height;}
+	uint8_t getMountainHeight    () {return m_mountain_height;}
+	uint8_t getSnowHeight        () {return m_snow_height;}
+	uint8_t getSummitHeight      () {return m_summit_height;}
+
+	uint32_t getSumLandWeight();
+
+private:
+
+	World * m_world;
+
+	std::vector<MapGenAreaInfo> m_WaterAreas;
+	std::vector<MapGenAreaInfo> m_LandAreas;
+	std::vector<MapGenAreaInfo> m_WasteLandAreas;
+	std::vector<MapGenAreaInfo> m_MountainAreas;
+
+	uint8_t m_ocean_height;
+	uint8_t m_shelf_height;
+	uint8_t m_shallow_height;
+	uint8_t m_coast_height;
+	uint8_t m_upperland_height;
+	uint8_t m_mountainfoot_height;
+	uint8_t m_snow_height;
+	uint8_t m_mountain_height;
+	uint8_t m_summit_height;
+
+	int32_t  m_land_weight;
+	bool m_land_weight_valid;
+
+};
+
 /** class World
   *
   * This class provides information on a worldtype usable to create a map;
@@ -182,6 +282,8 @@ struct World {
 	int32_t safe_resource_index(const char * const warename) const;
 	std::string const & basedir() const {return m_basedir;}
 
+	MapGenInfo & getMapGenInfo();
+
 private:
 	std::string m_basedir; //  base directory, where the main conf file resides
 	World_Descr_Header                hd;
@@ -191,10 +293,14 @@ private:
 	Descr_Maintainer<Terrain_Descr>   ters;
 	Descr_Maintainer<Resource_Descr>  m_resources;
 
+	//  TODO: Should this be a description-maintainer?
+	MapGenInfo m_mapGenInfo;
+
 	void parse_root_conf(std::string const & name, Profile & root_conf);
 	void parse_resources();
 	void parse_terrains ();
 	void parse_bobs     (std::string & directory, Profile & root_conf);
+	void parse_mapgen   ();
 
 	World & operator= (World const &);
 	explicit World    (World const &);

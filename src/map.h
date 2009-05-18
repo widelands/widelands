@@ -37,6 +37,8 @@
 #include <vector>
 #include <boost/scoped_ptr.hpp>
 
+#include "random.h"
+
 struct Overlay_Manager;
 struct S2_Map_Loader;
 
@@ -114,6 +116,36 @@ struct FindBobEnemySoldier : public FindBob {
 	Player & player;
 };
 
+
+/*
+This helper class repesents the complete map initialization
+info needed by the random map generator
+It can be converted to and from an "Id-String". The Id-String is a
+string-encoded version of the random map info. This Id-String can
+be handelled by the user/player more easily.
+The Id-String also contains some kind of check-sum to prevent ill
+ids to be used.
+*/
+struct UniqueRandomMapInfo {
+	uint32_t mapNumber;
+	uint32_t w;
+	uint32_t h;
+	double   waterRatio;     //  How much of the map is water?
+	double   landRatio;      //  How much of the map is land?
+	double   wastelandRatio; //  How much of the "land" is wasteland?
+	int      numPlayers;     //  number of player to generate
+	bool     islandMode;     //  whether the world will be an island
+
+	//  other stuff
+	static bool setFromIdString
+		(UniqueRandomMapInfo & mapInfo_out, std::string const & mapIdString);
+	static void generateIdString
+		(std::string & mapIdsString_out, UniqueRandomMapInfo const & mapInfo);
+	static int  mapIdCharToNumber(char ch);
+	static char mapIdNumberToChar(int32_t num);
+
+};
+
 /** class Map
  *
  * This really identifies a map like it is in the game
@@ -163,6 +195,13 @@ struct Map : public ITransportCostCalculator {
 		 std::string const & worldname   =   "greenland",
 		 char        const * name        = _("No Name"),
 		 char        const * author      = _("Unknown"),
+		 char        const * description = _("no description defined"));
+
+	void create_random_map
+		(UniqueRandomMapInfo const & mapInfo,
+		 std::string const & worldname   =   "greenland",
+		 char        const * name        = _("No Name"),
+		 char        const * author      = _("Random Map Generator"),
 		 char        const * description = _("no description defined"));
 
 	void load_graphics();
@@ -416,6 +455,15 @@ private:
 
 	Map & operator= (Map const &);
 	explicit Map    (Map const &);
+
+	static uint8_t   make_field_elevation
+		(double ele,
+		 MapGenInfo &,
+		 uint16_t x, uint16_t y,
+		 UniqueRandomMapInfo const &);
+	static uint32_t * generate_random_value_map
+		(uint32_t w, uint32_t h, RNG & rng);
+
 };
 
 /*
