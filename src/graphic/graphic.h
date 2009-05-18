@@ -55,7 +55,9 @@ SDL_Surface * LoadImage(char const * filename);
 */
 
 struct Graphic {
-	Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen);
+	Graphic
+		  (int32_t w, int32_t h, int32_t bpp,
+		   bool fullscreen, bool hw_improvement, bool double_buffer);
 	~Graphic();
 
 	int32_t get_xres();

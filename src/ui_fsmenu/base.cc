@@ -53,7 +53,9 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(const char *bgpic)
 	WLApplication::get()->init_graphics
 		(m_xres, m_yres,
 		 s.get_int("depth", 16),
-		 s.get_bool("fullscreen", false));
+		 s.get_bool("fullscreen", false),
+		 s.get_bool("hw_improvement", false),
+		 s.get_bool("double_buffer",false));
 
 	// Load background graphics
 	char buffer[256];

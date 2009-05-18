@@ -175,7 +175,9 @@ struct WLApplication {
 	void set_mouse_lock(const bool locked) {m_mouse_locked = locked;}
 	//@}
 
-	void init_graphics(int32_t w, int32_t h, int32_t bpp, bool fullscreen);
+	void init_graphics
+		  (int32_t w, int32_t h, int32_t bpp,
+		   bool fullscreen, bool hw_improvement, bool double_buffer);
 
 	void handle_input(const InputCallback *cb);
 
@@ -269,6 +271,8 @@ protected:
 	///If true Widelands is (should be, we never know ;-) running
 	///in a fullscreen window
 	bool   m_gfx_fullscreen;
+	bool   m_gfx_hw_improvement;
+	bool   m_gfx_double_buffer;
 
 private:
 	///Holds this process' one and only instance of WLApplication, if it was

@@ -243,7 +243,9 @@ m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
 m_gfx_w(0), m_gfx_h(0),
-m_gfx_fullscreen       (false)
+m_gfx_fullscreen       (false),
+m_gfx_hw_improvement   (false),
+m_gfx_double_buffer    (false)
 {
 	g_fs = new LayeredFileSystem();
 	g_fh = new Font_Handler();
@@ -635,9 +637,14 @@ void WLApplication::set_input_grab(bool grab)
  * \todo Document parameters
  */
 void WLApplication::init_graphics
-	(int32_t const w, int32_t const h, int32_t const bpp, bool const fullscreen)
+	(int32_t const w, int32_t const h, int32_t const bpp,
+	 bool const fullscreen, bool const hw_improvement, bool const double_buffer)
 {
-	if (w == m_gfx_w && h == m_gfx_h && fullscreen == m_gfx_fullscreen)
+	if
+		  (w == m_gfx_w && h == m_gfx_h &&
+		   fullscreen == m_gfx_fullscreen &&
+		   hw_improvement == m_gfx_hw_improvement &&
+		   double_buffer == m_gfx_double_buffer)
 		return;
 
 	delete g_gr;
@@ -646,10 +653,12 @@ void WLApplication::init_graphics
 	m_gfx_w = w;
 	m_gfx_h = h;
 	m_gfx_fullscreen = fullscreen;
+	m_gfx_hw_improvement = hw_improvement;
+	m_gfx_double_buffer = double_buffer;
 
 	// If we are not to be shut down
 	if (w && h) {
-		g_gr = new Graphic(w, h, bpp, fullscreen);
+		g_gr = new Graphic(w, h, bpp, fullscreen, hw_improvement, double_buffer);
 	}
 }
 
@@ -678,6 +687,8 @@ bool WLApplication::init_settings() {
 	set_mouse_swap(s.get_bool("swapmouse", false));
 
 	m_gfx_fullscreen = s.get_bool("fullscreen", false);
+	m_gfx_hw_improvement = s.get_bool("hw_improvement", false);
+	m_gfx_double_buffer = s.get_bool("double_buffer", false);
 
 	// KLUDGE!
 	// Without this the following config options get dropped by check_used().
@@ -764,7 +775,9 @@ bool WLApplication::init_hardware() {
 	uint32_t xres = s.get_int("xres", XRES);
 	uint32_t yres = s.get_int("yres", YRES);
 
-	init_graphics(xres, yres, s.get_int("depth", 16), m_gfx_fullscreen);
+	init_graphics
+		  (xres, yres, s.get_int("depth", 16),
+		   m_gfx_fullscreen, m_gfx_hw_improvement, m_gfx_double_buffer);
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
@@ -785,7 +798,7 @@ void WLApplication::shutdown_hardware()
 		cout<<"WARNING: Hardware shutting down although graphics system"
 		<<" is still alive!"<<endl;
 	}
-	init_graphics(0, 0, 0, false);
+	init_graphics(0, 0, 0, false, false, false);
 
 	SDL_Quit();
 }

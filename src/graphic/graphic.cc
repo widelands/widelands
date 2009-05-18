@@ -35,6 +35,7 @@
 
 #include <SDL_image.h>
 #include <SDL_rotozoom.h>
+#include <cstring>
 
 Graphic *g_gr;
 
@@ -66,7 +67,7 @@ static uint32_t luminance_table_b[0x100];
 /**
  * Initialize the SDL video mode.
 */
-Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen)
+Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen,bool hw_improvment, bool double_buffer)
 : m_nr_update_rects(0), m_update_fullscreen(false), m_roadtextures(0)
 {
 	for
@@ -82,11 +83,77 @@ Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen)
 	// Set video mode using SDL
 	int32_t flags = SDL_SWSURFACE;
 
-	if (fullscreen)
-		flags |= SDL_FULLSCREEN;
+	if (hw_improvment) {
+		 char videodrv[16];
+		 SDL_VideoDriverName(videodrv,16);
+//		 videodrv = getenv("SDL_VIDEODRIVER");
+		 log("Graphics: Video driver: %s\n",videodrv);
+#ifdef __linux__
+ 		 //std::string videomode = "SDL_VIDEODRIVER=dga\n";
+ 		 //std::string videomode = "SDL_VIDEODRIVER=x11\n";			  
+		 //putenv((char*)videomode.c_str());
+		 //videodrv = getenv("SDL_VIDEODRIVER");
+		 //log("Graphics: Video driver(update): %s\n",videodrv);
+#endif
+
+		 log("Graphics: Trying HW_SURFACE\n");
+		 flags = SDL_HWSURFACE|SDL_HWACCEL ;
+	}
+	if (double_buffer) {
+		 flags |= SDL_DOUBLEBUF;
+		 log("Graphics: Trying DOUBLE BUFFERING\n");
+	}
+	if (fullscreen) {
+		 flags |= SDL_FULLSCREEN;
+		 log("Graphics: Trying FULLSCREEN\n");
+	}
 
 	SDL_Surface * sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
+	 if (0 != (sdlsurface->flags & SDL_HWSURFACE))
+		  log("Graphics: HW SURFACE ENABLED\n");
+	 if (0 != (sdlsurface->flags & SDL_DOUBLEBUF))
+		  log("Graphics: DOUBLE BUFFERING ENABLED\n");
+	 if (0 != (sdlsurface->flags & SDL_SWSURFACE))
+		  log("Graphics: SW SURFACE ENABLED\n");
+	 if (0 != (sdlsurface->flags & SDL_FULLSCREEN))
+		  log("Graphics: FULLSCREEN ENABLED\n");
 
+	 /* Information about the current video settings. */
+	const SDL_VideoInfo* info = NULL;
+
+	info = SDL_GetVideoInfo();
+	 log
+		  ("**** GRAPHICS REPORT****\n \
+		   hw surface possible %d\n \
+		   windows manager available %d\n \
+		   blitz_hw %d\n \
+		   blitz_hw_CC %d\n \
+		   blitz_hw_A %d\n \
+		   blitz_sw %d\n \
+		   blitz_sw_CC %d\n \
+		   blitz_sw_A %d\n \
+		   blitz_fill %d\n \
+		   video_mem %d\n \
+		   vfmt %d\n \
+		   size %d %d\n \
+		   **** END GRAPHICS REPORT ****\n",
+		   info->hw_available,
+		   info->wm_available,
+		   info->blit_hw,
+		   info->blit_hw_CC,
+		   info->blit_sw,
+		   info->blit_sw_CC,
+		   info->blit_sw_A,
+		   info->blit_fill,
+		   info->video_mem,
+		   info->vfmt,
+		   info->current_w,
+		   info->current_h);
+		   
+		   
+	printf("\nhw avail:%d",info->hw_available);
+	log("Graphics: flags: %x\n",sdlsurface->flags);
+		  
 	if (!sdlsurface)
 		throw wexception("could not set video mode: %s", SDL_GetError());
 
