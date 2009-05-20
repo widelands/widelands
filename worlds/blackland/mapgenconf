@@ -8,34 +8,61 @@ coast=12
 upperland=16
 mountainfoot=18
 mountain=20
-snow=33
+snow=35
 summit=40
 
 [areas]
 water=water
-land=land
+land=hardground1,hardground2,ashes
 wasteland=wasteland1,wasteland2
 mountains=mountains
 
-[water]
-ocean_terrains=ashes
-shelf_terrains=ashes
-shallow_terrains=ashes
 
-[land]
+[water]
+ocean_terrains=water
+shelf_terrains=water
+shallow_terrains=water
+
+
+[hardground1]
+weight=2
+
 coast_terrains=strand
-land_terrains=hardground1,hardground2,hardground3,hardground4
-upper_terrains=hardground1,hardground2,hardground3,hardground4
+land_terrains=hardground1,hardground2
+upper_terrains=hardground1,hardground2
+
+
+[hardground2]
+weight=2
+
+coast_terrains=strand
+land_terrains=hardground3,hardground4
+upper_terrains=hardground3,hardground4
+
+
+[ashes]
+weight=1
+
+coast_terrains=ashes2
+land_terrains=ashes
+upper_terrains=ashes
+
 
 [mountains]
-mountainfoot_terrains=hardground1,hardground2,hardground3,hardground4
+mountainfoot_terrains=hardlava
 mountain_terrains=mountain1,mountain2,mountain3,mountain4
-snow_terrains=hardlava
+snow_terrains=lava,lava-stone1,lava-stone2
+
 
 [wasteland1]
-inner_terrains=lava
-outer_terrains=lava
+weight=1
+
+inner_terrains=lava,lava-stone1
+outer_terrains=hardlava,lava-stone2
+
 
 [wasteland2]
-inner_terrains=hardlava
-outer_terrains=hardlava
+weight=2
+
+inner_terrains=hardlava,lava-stone2
+outer_terrains=hardlava,lava-stone2
