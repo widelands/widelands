@@ -1,0 +1,11 @@
+# Manually created by Nasenbaer ;) - no just kiddin' :-P
+
+[global]
+packet_version="1"
+map_w="176"
+map_h="176"
+nr_players="8"
+world="blackland"
+name=_"The ancient sun of fire"
+author="Nasenbaer"
+descr=_"For hundreds of years this island was kept as sanctuary of the Gods. No human ever ventured to set a foot on it. But now, that a tribe was finally barefaced enough to settle on the coast of that island, a lot other followed afterwards."
