@@ -4,7 +4,7 @@ packet_version=1
 [Build Barracks]
 name=_"Build a barracks"
 descr=_""<rt><p>"
-_"* Build a barracks at the red point in the east of the forest."
+_"* Build a barracks at the red point on the east side of the forests, to the right of your headquarters."
 "</p></rt>""
 visible=false
 trigger=Barracks complete
@@ -12,7 +12,7 @@ trigger=Barracks complete
 [Build Lumberjack]
 name=_"Build a lumberjack's house"
 descr=_""<rt><p>"
-_"* Build a lumberjack's house, at the red point at the south of your headquarters."
+_"* Build a lumberjack's house at the red point, south of your headquarters."
 "</p></rt>""
 visible=false
 trigger=Lumberjack complete
@@ -20,7 +20,7 @@ trigger=Lumberjack complete
 [Build Sawmill and Lumberjacks]
 name=_"Build two lumberjack's houses and a sawmill"
 descr=_""<rt><p>"
-_"* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
+_"* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
 "</p></rt>""
 visible=false
 trigger=Sawmill and Lumberjacks complete
@@ -36,7 +36,7 @@ trigger=Forester complete
 [Build Quarry]
 name=_"Build a quarry"
 descr=_""<rt><p>"
-_"* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
+_"* Build a quarry in the south to cut some stones and marble out of the rocks.<br> These might be used for future buildings."
 "</p></rt>""
 visible=false
 trigger=Quarry complete
