@@ -28,7 +28,7 @@
 #include "i18n.h"
 
 //TODO: these should be defined globally for the whole UI
-#define width 120
+#define width 150
 #define height 20
 #define margin 15
 #define hmargin margin
@@ -41,7 +41,7 @@
 Editor_Main_Menu::Editor_Main_Menu
 		(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
 :
-	UI::UniqueWindow(parent, registry, 2 * hmargin + width, 225, _("Main Menu")),
+	UI::UniqueWindow(parent, registry, 2 * hmargin + width, 260, _("Main Menu")),
 	m_parent(*parent),
 	m_button_new_map
 		(this,
@@ -51,37 +51,37 @@ Editor_Main_Menu::Editor_Main_Menu
 		 _("New Map")),
 	m_button_new_random_map
 		(this,
-		 hmargin, vmargin + 0 * (height + vspacing), width, height,
+		 hmargin, vmargin + 1 * (height + vspacing), width, height,
 		 1,
 		 &Editor_Main_Menu::new_random_map_btn, *this,
 		 _("New Random Map")),
 	m_button_load_map
 		(this,
-		 hmargin, vmargin + 1 * (height + vspacing), width, height,
+		 hmargin, vmargin + 2 * (height + vspacing), width, height,
 		 1,
 		 &Editor_Main_Menu::load_btn, *this,
 		 _("Load Map")),
 	m_button_save_map
 		(this,
-		 hmargin, vmargin + 2 * (height + vspacing), width, height,
+		 hmargin, vmargin + 3 * (height + vspacing), width, height,
 		 1,
 		 &Editor_Main_Menu::save_btn, *this,
 		 _("Save Map")),
 	m_button_map_options
 		(this,
-		 hmargin, vmargin + 3 * (height + vspacing), width, height,
+		 hmargin, vmargin + 4 * (height + vspacing), width, height,
 		 1,
 		 &Editor_Main_Menu::map_options_btn, *this,
 		 _("Map Options")),
 	m_button_view_readme
 		(this,
-		 hmargin, vmargin + 4 * (height + vspacing), width, height,
+		 hmargin, vmargin + 5 * (height + vspacing), width, height,
 		 1,
 		 &Editor_Main_Menu::readme_btn, *this,
 		 _("View Readme")),
 	m_button_exit_editor
 		(this,
-		 hmargin, vmargin + 5 * (height + vspacing), width, height,
+		 hmargin, vmargin + 6 * (height + vspacing), width, height,
 		 0,
 		 &Editor_Main_Menu::exit_btn, *this,
 		 _("Exit Editor"))

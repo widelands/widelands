@@ -408,6 +408,7 @@ void Map::create_empty_map
 	Tribe_Descr::get_all_tribenames(tribes);
 	set_scenario_player_tribe(1, tribes[0]);
 	set_scenario_player_name(1, _("Player 1"));
+	set_scenario_player_ai(1, "");
 
 	{
 		Field::Terrains default_terrains;

@@ -157,6 +157,9 @@ void Editor_Player_Menu::update() {
 			map.set_scenario_player_tribe(p, m_tribes[0]);
 		}
 
+		// Set default AI
+		map.set_scenario_player_ai(p, "");
+
 		//  Set Starting pos button.
 		if (!m_plr_set_pos_buts[p - 1]) {
 			m_plr_set_pos_buts[p - 1] =
