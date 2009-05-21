@@ -20,7 +20,7 @@ def generate(env):
 
 def find_astyle(env):
     binary = None
-    if 'PATH' in env:
+    if env['PATH']!= NONE:
         binary=env.WhereIs('astyle', path=env['PATH'])
 	buggy_binary=env.WhereIs('buggy-astyle', path=env['PATH'])
 
