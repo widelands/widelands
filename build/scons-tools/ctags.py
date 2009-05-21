@@ -15,7 +15,7 @@ def generate(env):
 
 def find_ctags(env):
     b = None
-    if 'PATH' in env:
+    if env['PATH']!=None:
         b=env.WhereIs('ctags', path=env['PATH'])
 	if b==None:
 		print 'Searching for ctags:       not found. Tags will not be built'
