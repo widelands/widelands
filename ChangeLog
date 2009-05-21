@@ -1,11 +1,23 @@
 ### Build 14 (until now)
+- Implemented basic "generate random map" feature (svn:r4113)
+- Implemented basic messaging system to inform players of important events.
+  (many different svn rev.)
 - Improved computer player behaviour (many different svn rev.)
+	 * Computer player should now be able to build up a working infrastructure
+	   (including mining, tools and weapons production and soldier training) and
+	   to attack and defeat their enemies.
+	 * Players are now able, to select the type of a computer player. The avail-
+	   able types are: Aggressive, Normal, Defensive and None. First three are
+	   based upon the improved AI and only behave different in case of attacking
+	   strength and expansion, while latter does simply nothing.
+	 * It is now possible to define the computer player type for camapign maps.
 - Throw out the bundled version of scons. Scons is widely available by now and
   the bundled version caused more trouble than it was worth: many incompati-
   bilities, where a distro-supplied version would have worked (svn:r3929)
 - Fix bug #2351257 - wrong game tips are shown. (svn:r3809)
 - Some improvements of tribes economy and soldier balance (svn:r3793, svn:r3796)
-- Added third barbarian campaign (svn:r3790) and improved the already existing ones (svn:r3775, svn:r3788)
+- Added third barbarian campaign (svn:r3790) and improved the already existing
+  ones (svn:r3775, svn:r3788)
 - Added a new trigger for scenario maps: Player defeated (svn:r3789)
 - In the editor save dialog; initialize the name box with the map name and do not react
   (for example by playing a sound) to clicks in the empty area below the last file in the
@@ -35,7 +47,7 @@
   is fortified there. This is achieved by allowing large buildings at a few more places in
   the valleys leading from the starting positions to the center. Also add some wiese1
   (terrain type), which was not used at all on this map before. (svn:r3713)
-- Added a new map "Twinkling Waves". (svn:r3689)
+- Added two new maps "Twinkling Waves" and "The ancient sun of fire". (svn:r3689, svn:r4119)
 - Fix bug that the editor toolsize menu was not updated when the toolsize was changed with
   the keyboard shortcuts. (svn:r3675)
 - Implement feature request #1792180 - Allow user to change starting-position. (svn:r3666,
