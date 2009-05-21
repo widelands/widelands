@@ -31,6 +31,7 @@
 
 #define NO_NEW_MESSAGES "pics/menu_toggle_oldmessage_menu.png"
 #define NEW_MESSAGES "pics/menu_toggle_newmessage_menu.png"
+#define MAX_QUEUE_SIZE 255
 
 namespace Widelands {
 	struct Coords;
@@ -66,7 +67,11 @@ struct MessageQueue {
 	{
 		//log("Adding message for player %i : %s %s\n",player_number,
 		//m.visname().c_str(),m.descr().c_str());
-		get(player_number).push_back(m);
+		std::vector<Message> & myQueue = get(player_number);
+		myQueue.push_back(m);
+		if (myQueue.size() >= MAX_QUEUE_SIZE)
+			myQueue.erase(myQueue.begin());
+
 		m_readall(player_number) = false;
 		if (m_button(0))
 			m_button(0)->set_pic(g_gr->get_picture(PicMod_Game, NEW_MESSAGES));
