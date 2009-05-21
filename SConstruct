@@ -19,6 +19,10 @@ SetOption('max_drift', 1)
 SetOption('implicit_cache', 1)
 Decider('MD5-timestamp')
 
+num_cpu = int(os.environ.get('NUM_CPU', 2))
+SetOption('num_jobs', num_cpu)
+print "running with -j", GetOption('num_jobs')
+
 # write only *one* signature file in a place where we don't care
 SConsignFile('build/scons-signatures')
 
