@@ -21,6 +21,7 @@
 
 #include "build_info.h"
 #include "computer_player.h"
+#include "io/filesystem/disk_filesystem.h"
 #include "editor/editorinteractive.h"
 #include "font_handler.h"
 #include "ui_fsmenu/campaign_select.h"
@@ -193,6 +194,8 @@ void WLApplication::setup_searchpaths(std::string argv0)
 	} else {
 		//TODO: complain
 	}
+	//now make sure we always access the file with the right version first
+	g_fs->PutRightVersionOnTop();
 }
 
 WLApplication * WLApplication::the_singleton = 0;
@@ -251,7 +254,7 @@ m_default_datadirs     (true)
 
 	m_editor_commandline = false;
 	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
-	if (m_default_datadirs){
+	if (m_default_datadirs) {
 		setup_searchpaths(m_commandline["EXENAME"]);
 	}
 	init_settings();
@@ -874,7 +877,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	if (m_commandline.count("datadir")) {
 		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
 		g_fs->AddFileSystem(FileSystem::Create(m_commandline["datadir"]));
-		m_default_datadirs=false;
+		m_default_datadirs = false;
 		m_commandline.erase("datadir");
 	}
 

@@ -803,9 +803,10 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 			std::string sender = "g " + reinterpret_cast<int>(this);
 			MessageQueue::add
 				(owner(),
-				 Message (sender,
-				          game.get_gametime(),
-				          rdescr->name(), position, _("Resources found.")));
+				 Message
+				     (sender,
+				     game.get_gametime(),
+				     rdescr->name(), position, _("Resources found.")));
 		}
 
 		Tribe_Descr const & t = tribe();

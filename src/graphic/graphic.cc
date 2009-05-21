@@ -67,7 +67,9 @@ static uint32_t luminance_table_b[0x100];
 /**
  * Initialize the SDL video mode.
 */
-Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen,bool hw_improvment, bool double_buffer)
+Graphic::Graphic
+	(int32_t w, int32_t h, int32_t bpp,
+	 bool fullscreen, bool hw_improvment, bool double_buffer)
 : m_nr_update_rects(0), m_update_fullscreen(false), m_roadtextures(0)
 {
 	for
@@ -84,16 +86,16 @@ Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen,bool hw_impr
 	int32_t flags = SDL_SWSURFACE;
 
 	if (hw_improvment) {
-		 char videodrv[16];
-		 SDL_VideoDriverName(videodrv,16);
-//		 videodrv = getenv("SDL_VIDEODRIVER");
-		 log("Graphics: Video driver: %s\n",videodrv);
+		char videodrv[16];
+		SDL_VideoDriverName(videodrv, 16);
+		//videodrv = getenv("SDL_VIDEODRIVER");
+		log("Graphics: Video driver: %s\n", videodrv);
 #ifdef __linux__
- 		 //std::string videomode = "SDL_VIDEODRIVER=dga\n";
- 		 //std::string videomode = "SDL_VIDEODRIVER=x11\n";			  
-		 //putenv((char*)videomode.c_str());
-		 //videodrv = getenv("SDL_VIDEODRIVER");
-		 //log("Graphics: Video driver(update): %s\n",videodrv);
+ 		//std::string videomode = "SDL_VIDEODRIVER=dga\n";
+ 		//std::string videomode = "SDL_VIDEODRIVER=x11\n";
+		//putenv((char*)videomode.c_str());
+		//videodrv = getenv("SDL_VIDEODRIVER");
+		//log("Graphics: Video driver(update): %s\n",videodrv);
 #endif
 
 		 log("Graphics: Trying HW_SURFACE\n");
@@ -109,17 +111,17 @@ Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen,bool hw_impr
 	}
 
 	SDL_Surface * sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
-	 if (0 != (sdlsurface->flags & SDL_HWSURFACE))
+	if (0 != (sdlsurface->flags & SDL_HWSURFACE))
 		  log("Graphics: HW SURFACE ENABLED\n");
-	 if (0 != (sdlsurface->flags & SDL_DOUBLEBUF))
+	if (0 != (sdlsurface->flags & SDL_DOUBLEBUF))
 		  log("Graphics: DOUBLE BUFFERING ENABLED\n");
-	 if (0 != (sdlsurface->flags & SDL_SWSURFACE))
+	if (0 != (sdlsurface->flags & SDL_SWSURFACE))
 		  log("Graphics: SW SURFACE ENABLED\n");
-	 if (0 != (sdlsurface->flags & SDL_FULLSCREEN))
+	if (0 != (sdlsurface->flags & SDL_FULLSCREEN))
 		  log("Graphics: FULLSCREEN ENABLED\n");
 
 	 /* Information about the current video settings. */
-	const SDL_VideoInfo* info = NULL;
+	const SDL_VideoInfo * info = NULL;
 
 	info = SDL_GetVideoInfo();
 	 log
@@ -149,11 +151,11 @@ Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen,bool hw_impr
 		   info->vfmt,
 		   info->current_w,
 		   info->current_h);
-		   
-		   
-	printf("\nhw avail:%d",info->hw_available);
-	log("Graphics: flags: %x\n",sdlsurface->flags);
-		  
+
+
+	printf("\nhw avail:%d", info->hw_available);
+	log("Graphics: flags: %x\n", sdlsurface->flags);
+
 	if (!sdlsurface)
 		throw wexception("could not set video mode: %s", SDL_GetError());
 

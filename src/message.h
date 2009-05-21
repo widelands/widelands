@@ -43,7 +43,7 @@ struct Message {
 		m_is_visible(true)
 	{}
 	Message
-		(std::string const&        sender,
+		(std::string const &       sender,
 		 uint32_t                  time,
 		 std::string const &       t,
 		 Widelands::Coords   const c,

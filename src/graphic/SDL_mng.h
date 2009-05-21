@@ -28,22 +28,22 @@ extern "C" {
 
 typedef struct
 {
-    unsigned int Frame_width;
-    unsigned int Frame_height;
-    unsigned int Ticks_per_second;
-    unsigned int Nominal_layer_count;
-    unsigned int Nominal_frame_count;
-    unsigned int Nominal_play_time;
-    unsigned int Simplicity_profile;
+	unsigned int Frame_width;
+	unsigned int Frame_height;
+	unsigned int Ticks_per_second;
+	unsigned int Nominal_layer_count;
+	unsigned int Nominal_frame_count;
+	unsigned int Nominal_play_time;
+	unsigned int Simplicity_profile;
 }
 MHDR_chunk;
 
 /* MNG_Image type */
 typedef struct
 {
-    MHDR_chunk    mhdr;
-    unsigned int  frame_count;
-    SDL_Surface **frame;
+	MHDR_chunk    mhdr;
+	unsigned int  frame_count;
+	SDL_Surface **frame;
 }
 MNG_Image;
 
