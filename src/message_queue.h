@@ -69,8 +69,19 @@ struct MessageQueue {
 		//m.visname().c_str(),m.descr().c_str());
 		std::vector<Message> & myQueue = get(player_number);
 		myQueue.push_back(m);
-		if (myQueue.size() >= MAX_QUEUE_SIZE)
-			myQueue.erase(myQueue.begin());
+		if (myQueue.size() >= MAX_QUEUE_SIZE) {
+			std::vector<Message>::iterator b = myQueue.begin();
+			std::vector<Message>::iterator e = myQueue.end();
+			while (b != e){
+				if (b->get_is_visible())
+					myQueue.erase(b);
+				else
+					++b;
+			}
+			//no empty messages to delete so remove the first one
+			if (myQueue.size() >= MAX_QUEUE_SIZE)
+				myQueue.erase(myQueue.begin());
+		}
 
 		m_readall(player_number) = false;
 		if (m_button(0))
