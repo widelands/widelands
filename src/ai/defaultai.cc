@@ -458,6 +458,7 @@ void DefaultAI::update_buildable_field (BuildableField & field)
 	field.reachable      = false;
 	field.preferred      = false;
 	field.avoid_military = false;
+	field.enemy_nearby   = false;
 
 	field.military_influence     = 0;
 	field.trees_nearby           = 0;
@@ -493,7 +494,10 @@ void DefaultAI::update_buildable_field (BuildableField & field)
 			if
 				(player_immovable->owner().get_player_number()
 				 != get_player_number())
+			{
+				field.enemy_nearby = true;
 				continue;
+			}
 
 		if (upcast(Building const, building, &base_immovable)) {
 
@@ -591,7 +595,7 @@ void DefaultAI::update_mineable_field (MineableField & field)
 }
 
 
-/// Updates the prodcutionsites statistics needed for construction decision.
+/// Updates the productionsites statistics needed for construction decision.
 void DefaultAI::update_productionsite_stats(int32_t gametime) {
 	// Updating the stats every 20 seconds should be enough
 	next_stats_update_due = gametime + 20000;
@@ -639,7 +643,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 	// Do not have too many constructionsites
 	uint32_t producers = mines.size() + productionsites.size();
 	bool onlymissing = false;
-	if (total_constructionsites >= (5 + (producers / 10)))
+	if (total_constructionsites >= (4 + (producers / 10)))
 		onlymissing = true;
 
 	//  Just used for easy checking whether a mine or something else was built.
@@ -664,12 +668,13 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			expand_factor *= 2;
 		if (spots_avail[BUILDCAPS_MEDIUM] + spots_avail[BUILDCAPS_BIG] < 4)
 			expand_factor *= 2;
-		if
-			(spots_avail[BUILDCAPS_SMALL]  +
-			 spots_avail[BUILDCAPS_MEDIUM] +
-			 spots_avail[BUILDCAPS_BIG]
-			 <
-			 8)
+
+		uint32_t spots = spots_avail[BUILDCAPS_SMALL];
+		spots += spots_avail[BUILDCAPS_MEDIUM];
+		spots += spots_avail[BUILDCAPS_BIG];
+		if (spots < 8)
+			expand_factor *= 2;
+		if ((type == AGGRESSIVE) && spots < 16)
 			expand_factor *= 2;
 	} else {
 		// check space and set the need for expansion
@@ -808,8 +813,12 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 						prio += 2 * iosum;
 					}
 
-					//  Prefer building space in the inner land.
-					prio -= bf->unowned_land_nearby / 10;
+					// Prefer building space in the inner land.
+					prio /= (1 + (bf->unowned_land_nearby / 10));
+
+					// And especially spaces near the enemy are unlikely
+					if (bf->enemy_nearby)
+						prio /= 2;
 
 					// do not construct more than one building,
 					// if supply line is already broken.
@@ -823,9 +832,11 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				prio *= expand_factor;
 				prio /= 2;
 
-				if (bf->avoid_military) {
+				if (bf->avoid_military)
 					prio /= 5;
-				}
+
+				if (bf->enemy_nearby)
+					prio *= 2;
 
 			} else if (bo.type == BuildingObserver::WAREHOUSE) {
 				//  Build one warehouse for ~every 25 productionsites and mines.
@@ -1282,7 +1293,7 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 {
 	if ((next_productionsite_check_due > gametime) || productionsites.empty())
 		return false;
-	next_productionsite_check_due = gametime + 2400;
+	next_productionsite_check_due = gametime + 1300;
 
 	// Get link to productionsite that should be checked
 	ProductionSiteObserver & site = productionsites.front();

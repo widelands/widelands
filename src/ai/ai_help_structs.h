@@ -132,6 +132,7 @@ struct BuildableField {
 	bool    reachable;
 	bool    preferred;
 	bool    avoid_military;
+	bool    enemy_nearby;
 
 	uint8_t unowned_land_nearby;
 
