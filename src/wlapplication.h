@@ -274,6 +274,8 @@ protected:
 	bool   m_gfx_hw_improvement;
 	bool   m_gfx_double_buffer;
 
+	//do we want to search the default places for widelands installs
+	bool   m_default_datadirs;
 private:
 	///Holds this process' one and only instance of WLApplication, if it was
 	///created already. NULL otherwise.

@@ -243,15 +243,17 @@ m_should_die           (false),
 m_gfx_w(0), m_gfx_h(0),
 m_gfx_fullscreen       (false),
 m_gfx_hw_improvement   (false),
-m_gfx_double_buffer    (false)
+m_gfx_double_buffer    (false),
+m_default_datadirs     (true)
 {
 	g_fs = new LayeredFileSystem();
 	g_fh = new Font_Handler();
 
 	m_editor_commandline = false;
 	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
-
-	setup_searchpaths(m_commandline["EXENAME"]);
+	if (m_default_datadirs){
+		setup_searchpaths(m_commandline["EXENAME"]);
+	}
 	init_settings();
 	init_hardware();
 
@@ -865,7 +867,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		g_sound_handler.m_nosound = true;
 		m_commandline.erase("nosound");
 	}
-
 	if (m_commandline.count("nozip")) {
 		g_options.pull_section("global").create_val("nozip", "true");
 		m_commandline.erase("nozip");
@@ -873,6 +874,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	if (m_commandline.count("datadir")) {
 		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
 		g_fs->AddFileSystem(FileSystem::Create(m_commandline["datadir"]));
+		m_default_datadirs=false;
 		m_commandline.erase("datadir");
 	}
 
