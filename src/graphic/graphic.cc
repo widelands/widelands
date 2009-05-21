@@ -97,7 +97,7 @@ Graphic::Graphic(int32_t w, int32_t h, int32_t bpp, bool fullscreen,bool hw_impr
 #endif
 
 		 log("Graphics: Trying HW_SURFACE\n");
-		 flags = SDL_HWSURFACE|SDL_HWACCEL ;
+		 flags = SDL_HWSURFACE;//|SDL_HWACCEL|SDL_OPENGL ;
 	}
 	if (double_buffer) {
 		 flags |= SDL_DOUBLEBUF;

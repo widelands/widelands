@@ -800,9 +800,12 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 		 */
 		if (rdescr && rdescr->is_detectable()) {
 			log("Message: resources found %s\n", rdescr->name().c_str());
+			std::string sender = "g " + (int)this;
 			MessageQueue::add
 				(owner(),
-				 Message (rdescr->name(), position, _("Resources found.")));
+				 Message (sender,
+				          game.get_gametime(),
+				          rdescr->name(), position, _("Resources found.")));
 		}
 
 		Tribe_Descr const & t = tribe();

@@ -75,11 +75,11 @@ void GameMessageMenu::think() {
 		if (mmm[i].get_is_visible())
 			for (uint32_t j = 0;; ++j)
 				if (j == list.size()) {
-					log ("think: message %s\n", mmm[i].visname().c_str());
+					log ("think: message %s\n", mmm[i].title().c_str());
 					if (m_direction < 0)
-						list.add_front(mmm[i].visname().c_str(), mmm[i]);
+						list.add_front(mmm[i].title().c_str(), mmm[i]);
 					else
-						list.add      (mmm[i].visname().c_str(), mmm[i]);
+						list.add      (mmm[i].title().c_str(), mmm[i]);
 					break;
 				} else if (&list[j] == &mmm[i])
 					break;

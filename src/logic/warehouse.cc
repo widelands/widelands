@@ -420,10 +420,13 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	log
 		("Message: adding (wh) (%s) %i \n",
 		 type_name(), owner().get_player_number());
+	std::string sender = type_name();
 	MessageQueue::add
 		(owner(),
 		 Message
-		 	("warehouse",
+		 	(sender,
+			  egbase.get_gametime(),
+			  "warehouse",
 		 	 Widelands::Coords(get_position()),
 		 	 _("A new warehouse is created")));
 }

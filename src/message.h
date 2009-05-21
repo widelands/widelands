@@ -36,38 +36,48 @@ namespace Widelands {
 struct Message {
 	Message()
 		:
-		m_visname   ("unknown message"),
+		m_sender    ("unknown sender"),
+		m_time      (0),
+		m_title     ("unknown message"),
 		m_descr     (_("no descr")),
 		m_is_visible(true)
 	{}
 	Message
-		(std::string const &       title,
+		(std::string const&        sender,
+		 uint32_t                  time,
+		 std::string const &       t,
 		 Widelands::Coords   const c,
 		 std::string const &       description)
 		:
-		m_visname(title),
+		m_sender(sender),
+		m_time(time),
+		m_title(t),
 		m_descr(description),
 		m_coords(c),
 		m_is_visible(true)
 	{}
 
 	std::string identifier() const {
-		return "Message: " + m_visname + '|' + m_descr;
+		return "Message: " + m_title + '|' + m_descr;
 	}
 
-	const std::string & visname() const throw ()  {return m_visname;}
+	const std::string & title() const throw ()  {return m_title;}
 	const std::string & descr() const throw ()    {return m_descr;}
-	void set_visname(std::string const & new_name)  {m_visname = new_name;}
+	void set_title(std::string const & new_name)  {m_title = new_name;}
 	void set_descr  (std::string const & new_descr) {m_descr   = new_descr;}
 	bool get_is_visible()       const throw ()    {return m_is_visible;}
 	void set_is_visible(const bool t) throw ()    {m_is_visible = t;}
 	Widelands::Coords get_coords() const {return m_coords;}
 
 private:
-	std::string m_visname;
+	std::string m_sender;
+	uint32_t m_time;
+
+	std::string m_title;
 	std::string m_descr;
 	Widelands::Coords m_coords;
 	bool        m_is_visible;
+
 };
 
 };
