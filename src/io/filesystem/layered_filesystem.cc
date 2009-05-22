@@ -110,7 +110,7 @@ bool LayeredFileSystem::FindMatchingVersionFile(FileSystem * fs) {
 		if (sr->EndOfFile())
 			return false;
 		std::string version = sr->String();
-		version = version.substr(0,build_id().size())
+		version = version.substr(0, build_id().size());
 		if (version.compare(build_id()) == 0) {
 			return true;
 		}
@@ -134,8 +134,10 @@ void LayeredFileSystem::PutRightVersionOnTop() {
 		//check if we matching version file and it's not already on top of
 		//the stack
 		if (FindMatchingVersionFile(*it) && (*it != m_filesystems.back())) {
-			m_filesystems.push_back(*it);
+			FileSystem * fs = * it;
 			m_filesystems.erase(it);
+			m_filesystems.push_back(fs);
+			break;
 		}
 	}
 }

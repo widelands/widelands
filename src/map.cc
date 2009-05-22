@@ -650,13 +650,13 @@ random distribution of all random values in the array is linear.
 The minimum valu will be 0, the maximum value will be MAX_ELEVATION,
 the average will be AVG_ELEVATION.
 
-w,h: are width and height of the two-dimensional array
-     produced. Thus, the array has w*h entries. To access a certain
-     "coordinate" in the array, use array[x+w*y] to retrieve the entry.
+w, h: are width and height of the two-dimensional array
+      produced. Thus, the array has w*h entries. To access a certain
+      "coordinate" in the array, use array[x+w*y] to retrieve the entry.
 
-rng: is the random number generator to be used.
-     This will mostly be the current rng of the random map currently being
-     created.
+rng:  is the random number generator to be used.
+      This will mostly be the current rng of the random map currently being
+      created.
 ===============
 */
 uint32_t * Map::generate_random_value_map
@@ -817,15 +817,15 @@ Figures out terrain info for a field in a random map.
 mapGenInfo:  Map generator information used to translate
              Random values to height information (world-
              specific info)
-x,y:         first coordinate of the current triangle
-x1,y1:       second coordinate of the current triangle
-x2,y2:       third coordinate of the current triangle
+x, y:        first coordinate of the current triangle
+x1, y1:      second coordinate of the current triangle
+x2, y2:      third coordinate of the current triangle
 random2:     Random array for generating different
              terrain types on land
 random3:     Random array for generating different
              terrain types on land
 random4:     Random array for wasteland generation
-h1,h2,h3:    Map height information for the three triangle coords
+h1, h2, h3:  Map height information for the three triangle coords
 mapInfo:     Information about the random map currently
              begin created (map specific info)
 rng:         is the random number generator to be used.
