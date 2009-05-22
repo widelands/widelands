@@ -44,7 +44,6 @@
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 #include "journal.h"
-#include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"
 #include "network/netclient.h"
@@ -644,10 +643,10 @@ void WLApplication::init_graphics
 	 bool const fullscreen, bool const hw_improvement, bool const double_buffer)
 {
 	if
-		  (w == m_gfx_w && h == m_gfx_h &&
-		   fullscreen == m_gfx_fullscreen &&
-		   hw_improvement == m_gfx_hw_improvement &&
-		   double_buffer == m_gfx_double_buffer)
+		(w == m_gfx_w && h == m_gfx_h &&
+		 fullscreen == m_gfx_fullscreen &&
+		 hw_improvement == m_gfx_hw_improvement &&
+		 double_buffer == m_gfx_double_buffer)
 		return;
 
 	delete g_gr;
@@ -779,8 +778,8 @@ bool WLApplication::init_hardware() {
 	uint32_t yres = s.get_int("yres", YRES);
 
 	init_graphics
-		  (xres, yres, s.get_int("depth", 16),
-		   m_gfx_fullscreen, m_gfx_hw_improvement, m_gfx_double_buffer);
+		(xres, yres, s.get_int("depth", 16),
+		 m_gfx_fullscreen, m_gfx_hw_improvement, m_gfx_double_buffer);
 
 	// Start the audio subsystem
 	// must know the locale before calling this!

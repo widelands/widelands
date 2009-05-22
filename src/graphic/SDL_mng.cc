@@ -20,28 +20,25 @@
 */
 
 
+#include "SDL_mng.h"
+
 #include <SDL.h>
 #include <SDL_endian.h>
-#include "SDL_mng.h"
 
 #include <png.h>
 
 /* Chunk structure */
-typedef struct
-{
+struct chunk_t {
 	unsigned int  chunk_ID;
 	unsigned int  chunk_size;
-	char         *chunk_data;
+	char         * chunk_data;
 	unsigned int  chunk_CRC;
-}
-chunk_t;
+};
 
-typedef struct MNG_Frame
-{
-	SDL_Surface      *frame;
-	struct MNG_Frame *next;
-}
-MNG_Frame;
+struct MNG_Frame {
+	SDL_Surface * frame;
+	MNG_Frame   * next;
+};
 
 /* Some select chunk IDs, from libmng.h */
 #define MNG_UINT_MHDR 0x4d484452L
@@ -58,51 +55,51 @@ MNG_Frame;
 #define MNG_UINT_TERM 0x5445524dL
 
 /* Internal MNG functions */
-unsigned char MNG_read_byte     (SDL_RWops *src);
-unsigned int  MNG_read_uint32   (SDL_RWops *src);
-chunk_t       MNG_read_chunk    (SDL_RWops *src);
-MNG_Image    *MNG_iterate_chunks(SDL_RWops *src);
+unsigned char MNG_read_byte     (SDL_RWops * src);
+unsigned int  MNG_read_uint32   (SDL_RWops * src);
+chunk_t       MNG_read_chunk    (SDL_RWops * src);
+MNG_Image    *MNG_iterate_chunks(SDL_RWops * src);
 
 /* Read one MNG frame and return it as an SDL_Surface */
 SDL_Surface * MNG_read_frame(SDL_RWops * src);
 
 /* Return whether or not the file claims to be an MNG */
-int IMG_isMNG(SDL_RWops *src)
+int IMG_isMNG(SDL_RWops * const src)
 {
 	unsigned char buf[8];
 
 	if (SDL_RWread(src, buf, 1, 8) != 8)
 		return 0;
 
-	return(!memcmp(buf, "\212MNG\r\n\032\n", 8));
+	return !memcmp(buf, "\212MNG\r\n\032\n", 8);
 }
 
-MNG_Image *IMG_loadMNG(const char *file)
+MNG_Image * IMG_loadMNG(char * const file)
 {
-	SDL_RWops *src = SDL_RWFromFile(file, "rb");
+	SDL_RWops * const src = SDL_RWFromFile(file, "rb");
 
-	if (src == NULL)
-		return NULL;
+	if (not src)
+		return 0;
 
 	/* See whether or not this data source can handle seeking */
 	if (SDL_RWseek(src, 0, SEEK_CUR) < 0) {
-		SDL_SetError("Can't seek in this data source");
+		SDL_SetError("Can not seek in this data source");
 		SDL_RWclose(src);
-		return NULL;
+		return 0;
 	}
 
 	/* Verify MNG signature */
 	if (!IMG_isMNG(src)) {
 		SDL_SetError("File is not an MNG file");
 		SDL_RWclose(src);
-		return NULL;
+		return 0;
 	}
 
 	return (MNG_iterate_chunks(src));
 }
 
 /* Read a byte from the src stream */
-unsigned char MNG_read_byte(SDL_RWops *src)
+unsigned char MNG_read_byte(SDL_RWops * const src)
 {
 	unsigned char ch;
 
@@ -112,7 +109,7 @@ unsigned char MNG_read_byte(SDL_RWops *src)
 }
 
 /* Read a 4-byte uint32 from the src stream */
-unsigned int MNG_read_uint32(SDL_RWops *src)
+unsigned int MNG_read_uint32(SDL_RWops * const src)
 {
 	unsigned char buffer[4];
 	unsigned int value;
@@ -127,7 +124,7 @@ unsigned int MNG_read_uint32(SDL_RWops *src)
 }
 
 /* Read an MNG chunk */
-chunk_t MNG_read_chunk(SDL_RWops *src)
+chunk_t MNG_read_chunk(SDL_RWops * const src)
 {
 	chunk_t this_chunk;
 	unsigned int i;
@@ -136,7 +133,7 @@ chunk_t MNG_read_chunk(SDL_RWops *src)
 	this_chunk.chunk_ID   = MNG_read_uint32(src);
 
 	this_chunk.chunk_data =
-		(char *)calloc(sizeof(char), this_chunk.chunk_size);
+		static_cast<char *>(calloc(sizeof(char), this_chunk.chunk_size));
 
 	SDL_RWread(src, this_chunk.chunk_data, 1, this_chunk.chunk_size);
 
@@ -146,7 +143,7 @@ chunk_t MNG_read_chunk(SDL_RWops *src)
 }
 
 /* Read MHDR chunk data */
-MHDR_chunk read_MHDR(SDL_RWops *src)
+MHDR_chunk read_MHDR(SDL_RWops * const src)
 {
 	MHDR_chunk mng_header;
 
@@ -165,18 +162,18 @@ MHDR_chunk read_MHDR(SDL_RWops *src)
 }
 
 /* Iterate through the MNG chunks */
-MNG_Image *MNG_iterate_chunks(SDL_RWops *src)
+MNG_Image *MNG_iterate_chunks(SDL_RWops * const src)
 {
 	chunk_t current_chunk;
 
-	unsigned int byte_count  = 0;
-	unsigned int frame_count = 0;
-	unsigned int i;
+	uint32_t byte_count  = 0;
+	uint32_t frame_count = 0;
 
-	MNG_Frame *start_frame   = NULL;
-	MNG_Frame *current_frame = NULL;
+	MNG_Frame * start_frame   = 0;
+	MNG_Frame * current_frame = 0;
 
-	MNG_Image *image = (MNG_Image *)malloc(sizeof(MNG_Image));
+	MNG_Image * const image =
+		static_cast<MNG_Image *>(malloc(sizeof(MNG_Image)));
 
 	do {
 		current_chunk = MNG_read_chunk(src);
@@ -199,33 +196,34 @@ MNG_Image *MNG_iterate_chunks(SDL_RWops *src)
 				SDL_RWseek(src, -byte_count, SEEK_CUR);
 
 				/* We don't know how many frames there will be, really. */
-				if (start_frame == NULL) {
-					current_frame = (MNG_Frame *)malloc(sizeof(MNG_Frame));
+				if (not start_frame) {
+					current_frame =
+						static_cast<MNG_Frame *>(malloc(sizeof(MNG_Frame)));
 					start_frame   = current_frame;
 				} else {
-					current_frame->next = (MNG_Frame *)malloc(sizeof(MNG_Frame));
+					current_frame->next =
+						static_cast<MNG_Frame *>(malloc(sizeof(MNG_Frame)));
 					current_frame = current_frame->next;
 				}
 
 				current_frame->frame = MNG_read_frame(src);
-				frame_count++;
+				++frame_count;
 
 				break;
 
 			default:
 				break;
 		}
-	}
-	while (current_chunk.chunk_ID != MNG_UINT_MEND);
+	} while (current_chunk.chunk_ID != MNG_UINT_MEND);
 
 	/* Now that we're done, move the frames into our image struct */
 	image->frame_count = frame_count;
-	image->frame = (SDL_Surface **)calloc(sizeof(SDL_Surface *), frame_count);
+	image->frame =
+		static_cast<SDL_Surface * *>(calloc(sizeof(SDL_Surface *), frame_count));
 
 	current_frame = start_frame;
 
-	for (i = 0; i < frame_count; i++)
-	{
+	for (uint32_t i = 0; i < frame_count; ++i) {
 		image->frame[i] = current_frame->frame;
 		current_frame   = current_frame->next;
 	}
@@ -235,51 +233,43 @@ MNG_Image *MNG_iterate_chunks(SDL_RWops *src)
 /* png_read_data callback; return <size> bytes from wherever */
 static void png_read_data(png_structp ctx, png_bytep area, png_size_t size)
 {
-	SDL_RWops *src;
-
-	src = (SDL_RWops *)png_get_io_ptr(ctx);
-	SDL_RWread(src, area, size, 1);
+	SDL_RWread(static_cast<SDL_RWops *>(png_get_io_ptr(ctx)), area, size, 1);
 }
 
 /* Read a PNG frame from the MNG file */
-SDL_Surface *MNG_read_frame(SDL_RWops *src)
+SDL_Surface * MNG_read_frame(SDL_RWops * const src)
 {
-	SDL_Surface *volatile surface;
-	png_structp png_ptr;
-	png_infop info_ptr;
 	png_uint_32 width, height;
 	int bit_depth, color_type, interlace_type;
 	Uint32 Rmask;
 	Uint32 Gmask;
 	Uint32 Bmask;
 	Uint32 Amask;
-	SDL_Palette *palette;
-	png_bytep *volatile row_pointers;
-	int row;
+	SDL_Palette * palette;
 	volatile int ckey = -1;
-	png_color_16 *transv;
+	png_color_16 * transv;
 
 	/* Initialize the data we will clean up when we're done */
-	png_ptr = NULL; info_ptr = NULL; row_pointers = NULL; surface = NULL;
+	png_structp png_ptr = 0;
+	png_infop info_ptr = 0;
+	png_bytep * volatile row_pointers = 0;
+	SDL_Surface * volatile surface = 0;
 
 	/* Check to make sure we have something to do */
-	if (! src) {
+	if (! src)
 		goto done;
-	}
 
 	/* Create the PNG loading context structure */
-	png_ptr = png_create_read_struct
-			(PNG_LIBPNG_VER_STRING,
-			NULL, NULL, NULL);
-	if (png_ptr == NULL) {
-		SDL_SetError("Couldn't allocate memory for PNG file");
+	png_ptr = png_create_read_struct (PNG_LIBPNG_VER_STRING, 0, 0, 0);
+	if (not png_ptr) {
+		SDL_SetError("Could not allocate memory for PNG file");
 		goto done;
 	}
 
-	 /* Allocate/initialize the memory for image information.  REQUIRED. */
+	//  Allocate/initialize the memory for image information.  REQUIRED.
 	info_ptr = png_create_info_struct(png_ptr);
-	if (info_ptr == NULL) {
-		SDL_SetError("Couldn't create image information for PNG file");
+	if (not info_ptr) {
+		SDL_SetError("Could not create image information for PNG file");
 		goto done;
 	}
 
@@ -301,8 +291,11 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 	/* Read PNG header info */
 	png_read_info(png_ptr, info_ptr);
 	png_get_IHDR
-		(png_ptr, info_ptr, &width, &height, &bit_depth,
-		&color_type, &interlace_type, NULL, NULL);
+		(png_ptr, info_ptr,
+		 &width, &height,
+		 &bit_depth,
+		 &color_type, &interlace_type,
+		 0, 0);
 
 	/* tell libpng to strip 16 bit/color files down to 8 bits/color */
 	png_set_strip_16(png_ptr);
@@ -321,15 +314,16 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 	   entries exist, use full alpha channel */
 	if (png_get_valid(png_ptr, info_ptr, PNG_INFO_tRNS)) {
 		int num_trans;
-		Uint8 *trans;
+		Uint8 * trans;
 		png_get_tRNS(png_ptr, info_ptr, &trans, &num_trans, &transv);
 		if (color_type == PNG_COLOR_TYPE_PALETTE) {
 			/* Check if all tRNS entries are opaque except one */
-			int i, t = -1;
-			for (i = 0; i < num_trans; i++)
+			uint32_t i = 0;
+			int32_t  t = -1;
+			for (; i < num_trans; ++i)
 				if (trans[i] == 0) {
 					if (t >= 0)
-					break;
+						break;
 					t = i;
 				} else if (trans[i] != 255)
 					break;
@@ -341,7 +335,7 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 				png_set_expand(png_ptr);
 			}
 		} else
-		    ckey = 0; /* actual value will be set later */
+			ckey = 0; //  actual value will be set later
 	}
 
 	if (color_type == PNG_COLOR_TYPE_GRAY_ALPHA)
@@ -350,8 +344,11 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 	png_read_update_info(png_ptr, info_ptr);
 
 	png_get_IHDR
-		(png_ptr, info_ptr, &width, &height, &bit_depth,
-		&color_type, &interlace_type, NULL, NULL);
+		(png_ptr, info_ptr,
+		 &width, &height,
+		 &bit_depth,
+		 &color_type, &interlace_type,
+		 0, 0);
 
 	/* Allocate the SDL surface to hold the image */
 	Rmask = Gmask = Bmask = Amask = 0;
@@ -362,17 +359,20 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 			Bmask = 0x00FF0000;
 			Amask = (info_ptr->channels == 4) ? 0xFF000000 : 0;
 		} else {
-			int s = (info_ptr->channels == 4) ? 0 : 8;
+			int const s = (info_ptr->channels == 4) ? 0 : 8;
 			Rmask = 0xFF000000 >> s;
 			Gmask = 0x00FF0000 >> s;
 			Bmask = 0x0000FF00 >> s;
 			Amask = 0x000000FF >> s;
 		}
 	}
-	surface = SDL_AllocSurface
-		(SDL_SWSURFACE, width, height,
-		bit_depth * info_ptr->channels, Rmask, Gmask, Bmask, Amask);
-	if (surface == NULL) {
+	surface =
+		SDL_AllocSurface
+			(SDL_SWSURFACE,
+			 width, height,
+			 bit_depth * info_ptr->channels,
+			 Rmask, Gmask, Bmask, Amask);
+	if (not surface) {
 		SDL_SetError("Out of memory");
 		goto done;
 	}
@@ -380,26 +380,27 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 	if (ckey != -1) {
 		if (color_type != PNG_COLOR_TYPE_PALETTE)
 			/* FIXME: Should these be truncated or shifted down? */
-			ckey = SDL_MapRGB
-				(surface->format,
-				(Uint8)transv->red,
-				(Uint8)transv->green,
-				(Uint8)transv->blue);
+			ckey =
+				SDL_MapRGB
+					(surface->format,
+					 static_cast<Uint8>(transv->red),
+					 static_cast<Uint8>(transv->green),
+					 static_cast<Uint8>(transv->blue));
 		SDL_SetColorKey(surface, SDL_SRCCOLORKEY, ckey);
 	}
 
 	/* Create the array of pointers to image data */
-	row_pointers = (png_bytep*) malloc(sizeof(png_bytep) * height);
-	if ((row_pointers == NULL)) {
+	row_pointers = static_cast<png_bytep *>(malloc(sizeof(png_bytep) * height));
+	if (not row_pointers) {
 		SDL_SetError("Out of memory");
 		SDL_FreeSurface(surface);
-		surface = NULL;
+		surface = 0;
 		goto done;
 	}
-	for (row = 0; row < (int)height; row++) {
-		row_pointers[row] = (png_bytep)
-				(Uint8 *)surface->pixels + row * surface->pitch;
-	}
+	for (uint32_t row = 0; row < height; ++row)
+		row_pointers[row] =
+			static_cast<png_bytep>(static_cast<Uint8 *>(surface->pixels)) +
+			row * surface->pitch;
 
 	/* Read the entire image in one go */
 	png_read_image(png_ptr, row_pointers);
@@ -408,30 +409,26 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 	png_read_end(png_ptr, info_ptr);
 
 	/* Load the palette, if any */
-	palette = surface->format->palette;
-	if (palette) {
-	    if (color_type == PNG_COLOR_TYPE_GRAY) {
+	if ((palette = surface->format->palette)) {
+		if (color_type == PNG_COLOR_TYPE_GRAY) {
 			palette->ncolors = 256;
-			for (int i = 0; i < 256; i++) {
+			for (uint16_t i = 0; i < 256; ++i) {
 				palette->colors[i].r = i;
 				palette->colors[i].g = i;
 				palette->colors[i].b = i;
 			}
 		} else if (info_ptr->num_palette > 0) {
 			palette->ncolors = info_ptr->num_palette;
-			for (int i=0; i<info_ptr->num_palette; ++i) {
+			for (uint32_t i = 0; i < info_ptr->num_palette; ++i) {
 				palette->colors[i].b = info_ptr->palette[i].blue;
 				palette->colors[i].g = info_ptr->palette[i].green;
 				palette->colors[i].r = info_ptr->palette[i].red;
 			}
-	    }
+		}
 	}
 
 done:    /* Clean up and return */
-	png_destroy_read_struct
-		(&png_ptr, info_ptr ? &info_ptr : (png_infopp)0, (png_infopp)0);
-	if (row_pointers) {
-		free(row_pointers);
-	}
+	png_destroy_read_struct(&png_ptr, info_ptr ? &info_ptr : 0, 0);
+	free(row_pointers);
 	return (surface);
 }

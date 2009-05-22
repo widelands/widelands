@@ -176,8 +176,8 @@ struct WLApplication {
 	//@}
 
 	void init_graphics
-		  (int32_t w, int32_t h, int32_t bpp,
-		   bool fullscreen, bool hw_improvement, bool double_buffer);
+		(int32_t w, int32_t h, int32_t bpp,
+		 bool fullscreen, bool hw_improvement, bool double_buffer);
 
 	void handle_input(const InputCallback *cb);
 

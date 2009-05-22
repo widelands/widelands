@@ -425,8 +425,8 @@ void Warehouse::init(Editor_Game_Base & egbase)
 		(owner(),
 		 Message
 		 	(sender,
-			  egbase.get_gametime(),
-			  "warehouse",
+		 	 egbase.get_gametime(),
+		 	 "warehouse",
 		 	 Widelands::Coords(get_position()),
 		 	 _("A new warehouse is created")));
 }
