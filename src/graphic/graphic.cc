@@ -91,66 +91,66 @@ Graphic::Graphic
 		//videodrv = getenv("SDL_VIDEODRIVER");
 		log("Graphics: Video driver: %s\n", videodrv);
 #ifdef __linux__
- 		//std::string videomode = "SDL_VIDEODRIVER=dga\n";
- 		//std::string videomode = "SDL_VIDEODRIVER=x11\n";
+		//  std::string videomode = "SDL_VIDEODRIVER=dga\n";
+		//  std::string videomode = "SDL_VIDEODRIVER=x11\n";
 		//putenv((char*)videomode.c_str());
 		//videodrv = getenv("SDL_VIDEODRIVER");
 		//log("Graphics: Video driver(update): %s\n",videodrv);
 #endif
 
-		 log("Graphics: Trying HW_SURFACE\n");
-		 flags = SDL_HWSURFACE;//|SDL_HWACCEL|SDL_OPENGL ;
+		log("Graphics: Trying HW_SURFACE\n");
+		flags = SDL_HWSURFACE; //  |SDL_HWACCEL|SDL_OPENGL;
 	}
 	if (double_buffer) {
-		 flags |= SDL_DOUBLEBUF;
-		 log("Graphics: Trying DOUBLE BUFFERING\n");
+		flags |= SDL_DOUBLEBUF;
+		log("Graphics: Trying DOUBLE BUFFERING\n");
 	}
 	if (fullscreen) {
-		 flags |= SDL_FULLSCREEN;
-		 log("Graphics: Trying FULLSCREEN\n");
+		flags |= SDL_FULLSCREEN;
+		log("Graphics: Trying FULLSCREEN\n");
 	}
 
 	SDL_Surface * sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
 	if (0 != (sdlsurface->flags & SDL_HWSURFACE))
-		  log("Graphics: HW SURFACE ENABLED\n");
+		log("Graphics: HW SURFACE ENABLED\n");
 	if (0 != (sdlsurface->flags & SDL_DOUBLEBUF))
-		  log("Graphics: DOUBLE BUFFERING ENABLED\n");
+		log("Graphics: DOUBLE BUFFERING ENABLED\n");
 	if (0 != (sdlsurface->flags & SDL_SWSURFACE))
-		  log("Graphics: SW SURFACE ENABLED\n");
+		log("Graphics: SW SURFACE ENABLED\n");
 	if (0 != (sdlsurface->flags & SDL_FULLSCREEN))
-		  log("Graphics: FULLSCREEN ENABLED\n");
+		log("Graphics: FULLSCREEN ENABLED\n");
 
-	 /* Information about the current video settings. */
-	const SDL_VideoInfo * info = NULL;
+	/* Information about the current video settings. */
+	SDL_VideoInfo const * info = 0;
 
 	info = SDL_GetVideoInfo();
-	 log
-		  ("**** GRAPHICS REPORT****\n \
-		   hw surface possible %d\n \
-		   windows manager available %d\n \
-		   blitz_hw %d\n \
-		   blitz_hw_CC %d\n \
-		   blitz_hw_A %d\n \
-		   blitz_sw %d\n \
-		   blitz_sw_CC %d\n \
-		   blitz_sw_A %d\n \
-		   blitz_fill %d\n \
-		   video_mem %d\n \
-		   vfmt %d\n \
-		   size %d %d\n \
-		   **** END GRAPHICS REPORT ****\n",
-		   info->hw_available,
-		   info->wm_available,
-		   info->blit_hw,
-		   info->blit_hw_CC,
-		   info->blit_sw,
-		   info->blit_sw_CC,
-		   info->blit_sw_A,
-		   info->blit_fill,
-		   info->video_mem,
-		   info->vfmt,
-		   info->current_w,
-		   info->current_h);
+	log
+		("**** GRAPHICS REPORT ****\n"
+		 " hw surface possible %d\n"
+		 " window manager available %d\n"
+		 " blitz_hw %d\n"
+		 " blitz_hw_CC %d\n"
+		 " blitz_hw_A %d\n"
+		 " blitz_sw %d\n"
+		 " blitz_sw_CC %d\n"
+		 " blitz_sw_A %d\n"
+		 " blitz_fill %d\n"
+		 " video_mem %d\n"
+		 " vfmt %p\n"
+		 " size %d %d\n"
+		 "**** END GRAPHICS REPORT ****\n",
+		 info->hw_available,
+		 info->wm_available,
+		 info->blit_hw,
+		 info->blit_hw_CC,
+		 info->blit_hw_A,
+		 info->blit_sw,
+		 info->blit_sw_CC,
+		 info->blit_sw_A,
+		 info->blit_fill,
+		 info->video_mem,
+		 info->vfmt,
+		 info->current_w, info->current_h);
 
 
 	printf("\nhw avail:%d", info->hw_available);
