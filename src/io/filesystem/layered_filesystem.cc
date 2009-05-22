@@ -20,14 +20,13 @@
 #include "layered_filesystem.h"
 #include "io/streamread.h"
 
+#include "build_info.h"
+#include "log.h"
 #include "wexception.h"
 
 #include <cstdio>
 
 LayeredFileSystem *g_fs;
-
-#define CURRENT_VERSION 4100
-#define MINIMAL_VERSION 4100
 
 LayeredFileSystem::LayeredFileSystem() {}
 
@@ -61,6 +60,8 @@ void LayeredFileSystem::AddFileSystem(FileSystem & fs)
 	//the directory
 	if (! FindConflictingVersionFile(&fs)) {
 		m_filesystems.push_back(&fs);
+	} else {
+		log("File system NOT added\n");
 	}
 }
 
@@ -81,13 +82,21 @@ void LayeredFileSystem::RemoveFileSystem(FileSystem & fs)
  * Check if there is a 'version' file with a version lower than minimal version
  * number */
 bool LayeredFileSystem::FindConflictingVersionFile(FileSystem * fs) {
-	if (fs->FileExists("version")) {
-		StreamRead * sr = fs->OpenStreamRead("version");
-		uint16_t version = sr->Unsigned16();
-		if (version != MINIMAL_VERSION) {
+	if (fs->FileExists("VERSION")) {
+		StreamRead * sr = fs->OpenStreamRead("VERSION");
+		if (sr->EndOfFile())
+			return false;
+		std::string version = sr->String();
+		version = version.substr(0, build_id().size());
+		log
+			("Version file found with id \"%s\" (real \"%s\" )\n",
+			 version.c_str(), build_id().c_str());
+		if (version.compare(build_id()) != 0) {
+			log ("not equal strings\n");
 			return true;
 		}
 	}
+	log ("No version file found\n");
 	return false;
 }
 
@@ -96,10 +105,13 @@ bool LayeredFileSystem::FindConflictingVersionFile(FileSystem * fs) {
  * current version */
 
 bool LayeredFileSystem::FindMatchingVersionFile(FileSystem * fs) {
-	if (fs->FileExists("version")) {
-		StreamRead * sr = fs->OpenStreamRead("version");
-		uint16_t version = sr->Unsigned16();
-		if (version == CURRENT_VERSION) {
+	if (fs->FileExists("VERSION")) {
+		StreamRead * sr = fs->OpenStreamRead("VERSION");
+		if (sr->EndOfFile())
+			return false;
+		std::string version = sr->String();
+		version = version.substr(0,build_id().size())
+		if (version.compare(build_id()) == 0) {
 			return true;
 		}
 	}
@@ -114,7 +126,7 @@ bool LayeredFileSystem::FindMatchingVersionFile(FileSystem * fs) {
  */
 
 void LayeredFileSystem::PutRightVersionOnTop() {
-	for 
+	for
 		(std::vector<FileSystem * >::iterator it = m_filesystems.begin();
 		it != m_filesystems.end();
 		++it)

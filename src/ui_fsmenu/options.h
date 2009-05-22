@@ -167,10 +167,10 @@ private:
 	UI::Textarea                m_label_snap_dis_panel, m_label_snap_dis_border;
 
 	UI::Checkbox                m_hw_improvement;
- 	UI::Textarea                m_label_hw_improvement;
+	UI::Textarea                m_label_hw_improvement;
 	UI::Checkbox                m_double_buffer;
 	UI::Textarea                m_label_double_buffer;
-	 
+
 	Options_Ctrl::Options_Struct os;
 };
 

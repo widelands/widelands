@@ -153,6 +153,9 @@ if env.enable_configuration:
 	# Generate config.h - scons itself will decide whether a recompile is needed
 	Command(os.path.join(BUILDDIR, "config.h"), [Value(generate_configh_content(env))], generate_configh_file)
 
+
+
+
 env=conf.Finish()
 
 # We only add this tool now, because it adds an emitter to Object which
@@ -270,6 +273,16 @@ Alias('uninstall', uninstall)
 Alias('uninst', uninstall)
 AlwaysBuild(uninstall)
 
+########################
+#version file
+
+print ("GENERATING VERSION FILE")
+version_file=open("VERSION","w")
+version_file.write(get_build_id(env))
+version_file.write('\n\0')
+version_file.close()
+
+
 ##################################################################### Distribute
 
 distadd(env, 'ChangeLog')
@@ -340,6 +353,7 @@ distcleanactions=[
 	Delete('locale/es_ES'),
 	Delete('locale/fr_FR'),
 	Delete('po/pot'),
+	Delete('VERSION')
 ]
 
 distclean=PhonyTarget("distclean", distcleanactions)
