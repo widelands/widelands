@@ -24,6 +24,8 @@
 #include "log.h"
 #include "wexception.h"
 
+#include "container_iterate.h"
+
 #include <cstdio>
 
 LayeredFileSystem *g_fs;
@@ -127,16 +129,23 @@ bool LayeredFileSystem::FindMatchingVersionFile(FileSystem * fs) {
 
 void LayeredFileSystem::PutRightVersionOnTop() {
 	for
-		(std::vector<FileSystem * >::iterator it = m_filesystems.begin();
-		it != m_filesystems.end();
-		++it)
+		(struct {
+		 	std::vector<FileSystem *>::iterator       current;
+		 	std::vector<FileSystem *>::iterator const end;
+		 } i = {m_filesystems.begin(), m_filesystems.end()};
+		 i.current != i.end;
+		 ++i.current)
 	{
 		//check if we matching version file and it's not already on top of
 		//the stack
-		if (FindMatchingVersionFile(*it) && (*it != m_filesystems.back())) {
-			FileSystem * fs = * it;
-			m_filesystems.erase(it);
-			m_filesystems.push_back(fs);
+		FileSystem * const t = *i.current;
+		if (FindMatchingVersionFile(t)) {
+			std::vector<FileSystem *>::iterator const last = i.end - 1;
+			while (i.current < last) {
+				FileSystem * & target = *i.current;
+				target = *++i.current;
+			}
+			*last = t;
 			break;
 		}
 	}
