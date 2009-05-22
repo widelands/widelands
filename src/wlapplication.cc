@@ -875,6 +875,16 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		g_options.pull_section("global").create_val("nozip", "true");
 		m_commandline.erase("nozip");
 	}
+	if (m_commandline.count("hw_improvements")) {
+		if (m_commandline["hw_improvements"].compare("0") == 0) {
+			g_options.pull_section("global").create_val("hw_improvements", "false");
+		} else if (m_commandline["hw_improvments"].compare("1") == 0) {
+			g_options.pull_section("global").create_val("hw_improvements", "true");
+		} else {
+			log ("Invalid option hw_improvments=[0|1]\n");
+		}
+		m_commandline.erase("hw_improvements");
+	}
 	if (m_commandline.count("datadir")) {
 		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
 		g_fs->AddFileSystem(FileSystem::Create(m_commandline["datadir"]));
