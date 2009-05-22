@@ -75,6 +75,11 @@ struct LayeredFileSystem : public FileSystem {
 
 	virtual std::string getBasename() {return std::string();};
 
+	bool FindConflictingVersionFile(FileSystem * fs);
+	bool FindMatchingVersionFile(FileSystem * fs);
+
+	void PutRightVersionOnTop();
+
 private:
 	typedef std::vector<FileSystem *>::reverse_iterator FileSystem_rit;
 

@@ -18,6 +18,7 @@
  */
 
 #include "layered_filesystem.h"
+#include "io/streamread.h"
 
 #include "wexception.h"
 
@@ -25,6 +26,8 @@
 
 LayeredFileSystem *g_fs;
 
+#define CURRENT_VERSION 4100
+#define MINIMAL_VERSION 4100
 
 LayeredFileSystem::LayeredFileSystem() {}
 
@@ -54,7 +57,11 @@ bool LayeredFileSystem::IsWritable() const {
  */
 void LayeredFileSystem::AddFileSystem(FileSystem & fs)
 {
-	m_filesystems.push_back(&fs);
+	//only add it to the stack if there isn't a conflicting version file in
+	//the directory
+	if (! FindConflictingVersionFile(&fs)) {
+		m_filesystems.push_back(&fs);
+	}
 }
 
 /**
@@ -68,6 +75,57 @@ void LayeredFileSystem::RemoveFileSystem(FileSystem & fs)
 			("LayeredFileSystem::RemoveFileSystem: interspersed add/remove "
 			 "detected!");
 	m_filesystems.pop_back();
+}
+
+/**
+ * Check if there is a 'version' file with a version lower than minimal version
+ * number */
+bool LayeredFileSystem::FindConflictingVersionFile(FileSystem * fs) {
+	if (fs->FileExists("version")) {
+		StreamRead * sr = fs->OpenStreamRead("version");
+		uint16_t version = sr->Unsigned16();
+		if (version != MINIMAL_VERSION) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
+ * Check if there is a  'version' file with a version number equal to our
+ * current version */
+
+bool LayeredFileSystem::FindMatchingVersionFile(FileSystem * fs) {
+	if (fs->FileExists("version")) {
+		StreamRead * sr = fs->OpenStreamRead("version");
+		uint16_t version = sr->Unsigned16();
+		if (version == CURRENT_VERSION) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
+ * PutRightVersionOnTop
+ *
+ * Look through the stack and see if we have a directory with a right version
+ * file. if so always put it on top of the stack
+ */
+
+void LayeredFileSystem::PutRightVersionOnTop() {
+	for 
+		(std::vector<FileSystem * >::iterator it = m_filesystems.begin();
+		it != m_filesystems.end();
+		++it)
+	{
+		//check if we matching version file and it's not already on top of
+		//the stack
+		if (FindMatchingVersionFile(*it) && (*it != m_filesystems.back())) {
+			m_filesystems.push_back(*it);
+			m_filesystems.erase(it);
+		}
+	}
 }
 
 /**
