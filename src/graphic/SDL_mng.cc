@@ -270,7 +270,7 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 	/* Create the PNG loading context structure */
 	png_ptr = png_create_read_struct
 			(PNG_LIBPNG_VER_STRING,
-			NULL,NULL,NULL);
+			NULL, NULL, NULL);
 	if (png_ptr == NULL) {
 		SDL_SetError("Couldn't allocate memory for PNG file");
 		goto done;
@@ -313,7 +313,7 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 	png_set_packing(png_ptr);
 
 	/* scale greyscale values to the range 0..255 */
-	if(color_type == PNG_COLOR_TYPE_GRAY)
+	if (color_type == PNG_COLOR_TYPE_GRAY)
 		png_set_expand(png_ptr);
 
 	/* For images with a single "transparent colour", set colour key;
@@ -327,7 +327,7 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 			/* Check if all tRNS entries are opaque except one */
 			int i, t = -1;
 			for (i = 0; i < num_trans; i++)
-				if(trans[i] == 0) {
+				if (trans[i] == 0) {
 					if (t >= 0)
 					break;
 					t = i;
@@ -336,7 +336,7 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 			if (i == num_trans) {
 				/* exactly one transparent index */
 				ckey = t;
-		    } else {
+			} else {
 				/* more than one transparent index, or translucency */
 				png_set_expand(png_ptr);
 			}
@@ -354,7 +354,7 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 		&color_type, &interlace_type, NULL, NULL);
 
 	/* Allocate the SDL surface to hold the image */
-	Rmask = Gmask = Bmask = Amask = 0 ; 
+	Rmask = Gmask = Bmask = Amask = 0;
 	if (color_type != PNG_COLOR_TYPE_PALETTE) {
 		if (SDL_BYTEORDER == SDL_LIL_ENDIAN) {
 			Rmask = 0x000000FF;
@@ -371,7 +371,7 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 	}
 	surface = SDL_AllocSurface
 		(SDL_SWSURFACE, width, height,
-		bit_depth*info_ptr->channels, Rmask,Gmask,Bmask,Amask);
+		bit_depth * info_ptr->channels, Rmask, Gmask, Bmask, Amask);
 	if (surface == NULL) {
 		SDL_SetError("Out of memory");
 		goto done;
@@ -380,7 +380,8 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 	if (ckey != -1) {
 		if (color_type != PNG_COLOR_TYPE_PALETTE)
 			/* FIXME: Should these be truncated or shifted down? */
-			key = SDL_MapRGB(surface->format,
+			ckey = SDL_MapRGB
+				(surface->format,
 				(Uint8)transv->red,
 				(Uint8)transv->green,
 				(Uint8)transv->blue);
@@ -388,7 +389,7 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 	}
 
 	/* Create the array of pointers to image data */
-	row_pointers = (png_bytep*) malloc(sizeof(png_bytep)*height);
+	row_pointers = (png_bytep*) malloc(sizeof(png_bytep) * height);
 	if ((row_pointers == NULL)) {
 		SDL_SetError("Out of memory");
 		SDL_FreeSurface(surface);
@@ -397,7 +398,7 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 	}
 	for (row = 0; row < (int)height; row++) {
 		row_pointers[row] = (png_bytep)
-				(Uint8 *)surface->pixels + row*surface->pitch;
+				(Uint8 *)surface->pixels + row * surface->pitch;
 	}
 
 	/* Read the entire image in one go */
@@ -416,9 +417,9 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 				palette->colors[i].g = i;
 				palette->colors[i].b = i;
 			}
-	    } else if (info_ptr->num_palette > 0 ) {
-			palette->ncolors = info_ptr->num_palette; 
-			for (int i=0; i<info_ptr->num_palette; ++i ) {
+		} else if (info_ptr->num_palette > 0) {
+			palette->ncolors = info_ptr->num_palette;
+			for (int i=0; i<info_ptr->num_palette; ++i) {
 				palette->colors[i].b = info_ptr->palette[i].blue;
 				palette->colors[i].g = info_ptr->palette[i].green;
 				palette->colors[i].r = info_ptr->palette[i].red;
@@ -426,11 +427,11 @@ SDL_Surface *MNG_read_frame(SDL_RWops *src)
 	    }
 	}
 
-done:	/* Clean up and return */
-	png_destroy_read_struct(&png_ptr, info_ptr ? &info_ptr : (png_infopp)0,
-								(png_infopp)0);
+done:    /* Clean up and return */
+	png_destroy_read_struct
+		(&png_ptr, info_ptr ? &info_ptr : (png_infopp)0, (png_infopp)0);
 	if (row_pointers) {
 		free(row_pointers);
 	}
-	return (surface); 
+	return (surface);
 }
