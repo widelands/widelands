@@ -472,9 +472,13 @@ procedure Whitespace_Checker is
                   when '\'    =>
                      Next_Character;
                      case Read_Characters (0) is
-                        when '0' | ''' | '\' | 'n' | 'r' | 't' | 'v' =>
+                        when
+                          '0' | '1' | '2' | ''' | '\' | 'n' | 'r' | 't' | 'v'
+                          =>
                            null;
-                        when others                                  =>
+                        when
+                          others
+                          =>
                            Put_Error
                              ("illegal escaped character constant: " &
                               Read_Characters (0)'Img);
@@ -499,9 +503,14 @@ procedure Whitespace_Checker is
                      when '\'    =>
                         Next_Character;
                         case Read_Characters (0) is
-                           when '0' | '"' | '\' | 'n' | 'r' | 't' | 'v' =>
+                           when
+                             '0' | '1' | '2' | '"' | '\' | 'n' | 'r' | 't' |
+                             'v'
+                             =>
                               null;
-                           when others                                  =>
+                           when
+                             others
+                             =>
                               Put_Error
                                 ("illegal escaped character in string " &
                                  "constant: " & Read_Characters (0)'Img);
