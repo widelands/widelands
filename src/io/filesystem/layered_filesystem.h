@@ -46,6 +46,8 @@ struct LayeredFileSystem : public FileSystem {
 	virtual ~LayeredFileSystem();
 
 	virtual void    AddFileSystem(FileSystem &);
+	virtual void    SetHomeFileSystem(FileSystem &);
+
 	virtual void RemoveFileSystem(FileSystem &);
 
 	virtual int32_t FindFiles
@@ -84,6 +86,7 @@ private:
 	typedef std::vector<FileSystem *>::reverse_iterator FileSystem_rit;
 
 	std::vector<FileSystem *> m_filesystems;
+	FileSystem * m_home;
 };
 
 /// Access all game data files etc. through this FileSystem

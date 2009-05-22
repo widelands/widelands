@@ -174,7 +174,10 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			}
 		}
 	}
-
+	//now make sure we always access the file with the right version first
+	g_fs->PutRightVersionOnTop();
+}
+void WLApplication::setup_homedir() {
 	std::string path = FileSystem::GetHomedir();
 
 	//If we don't have a home directory don't do anything
@@ -183,7 +186,7 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		path += "/.widelands";
 		try {
 			log ("Adding directory: %s\n", path.c_str());
-			g_fs->AddFileSystem(FileSystem::Create(path.c_str()));
+			g_fs->SetHomeFileSystem(FileSystem::Create(path.c_str()));
 		} catch (FileNotFound_error     const & e) {
 		} catch (FileAccessDenied_error const & e) {
 			log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
@@ -193,8 +196,6 @@ void WLApplication::setup_searchpaths(std::string argv0)
 	} else {
 		//TODO: complain
 	}
-	//now make sure we always access the file with the right version first
-	g_fs->PutRightVersionOnTop();
 }
 
 WLApplication * WLApplication::the_singleton = 0;
@@ -256,6 +257,7 @@ m_default_datadirs     (true)
 	if (m_default_datadirs) {
 		setup_searchpaths(m_commandline["EXENAME"]);
 	}
+	setup_homedir();
 	init_settings();
 	init_hardware();
 

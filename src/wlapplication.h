@@ -231,6 +231,7 @@ protected:
 	void handle_commandline_parameters() throw (Parameter_error);
 
 	void setup_searchpaths(std::string argv0);
+	void setup_homedir();
 
 	/**
 	 * The commandline, conveniently repackaged

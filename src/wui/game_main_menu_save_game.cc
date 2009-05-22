@@ -145,7 +145,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
 	filenameset_t m_gamefiles;
 
 	//  Fill it with all files we find.
-	g_fs->FindFiles(m_curdir, "*", &m_gamefiles, 1);
+	g_fs->FindFiles(m_curdir, "*", &m_gamefiles, 0);
 
 	Widelands::Game_Preload_Data_Packet gpdp;
 
