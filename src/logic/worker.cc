@@ -800,7 +800,7 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 		 */
 		if (rdescr && rdescr->is_detectable()) {
 			log("Message: resources found %s\n", rdescr->name().c_str());
-			std::string sender = "g " + reinterpret_cast<int>(this);
+			std::string sender = "g " + reinterpret_cast<intptr_t>(this);
 			MessageQueue::add
 				(owner(),
 				 Message
