@@ -811,8 +811,11 @@ Start road building.
 */
 void FieldActionWindow::act_buildroad()
 {
-	ibase().start_build_road(m_node, m_plr->get_player_number());
-	okdialog();
+	//if we area already building a road just ignore this
+	if (!ibase().is_building_road()) {
+		ibase().start_build_road(m_node, m_plr->get_player_number());
+		okdialog();
+	}
 }
 
 /*
