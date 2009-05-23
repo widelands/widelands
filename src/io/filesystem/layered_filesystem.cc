@@ -73,6 +73,8 @@ void LayeredFileSystem::SetHomeFileSystem(FileSystem & fs)
 {
 	if (! FindConflictingVersionFile(&fs)) {
 		m_home = &fs;
+	} else {
+		log("File system NOT added\n");
 	}
 }
 
@@ -274,7 +276,7 @@ void LayeredFileSystem::Write
 	(std::string const & fname, void const * const data, int32_t const length)
 {
 	if (m_home and m_home->IsWritable())
-		m_home->Write(fname, data, length);
+		return m_home->Write(fname, data, length);
 
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
@@ -309,7 +311,7 @@ StreamRead  * LayeredFileSystem::OpenStreamRead (const std::string & fname) {
  */
 StreamWrite * LayeredFileSystem::OpenStreamWrite(std::string const & fname) {
 	if (m_home && m_home->IsWritable())
-		m_home->OpenStreamWrite(fname);
+		return m_home->OpenStreamWrite(fname);
 
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
@@ -326,7 +328,7 @@ StreamWrite * LayeredFileSystem::OpenStreamWrite(std::string const & fname) {
  */
 void LayeredFileSystem::MakeDirectory(std::string const & dirname) {
 	if (m_home && m_home->IsWritable())
-		m_home->MakeDirectory(dirname);
+		return m_home->MakeDirectory(dirname);
 
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();

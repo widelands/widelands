@@ -185,7 +185,7 @@ void WLApplication::setup_homedir() {
 		RealFSImpl(path).EnsureDirectoryExists(".widelands");
 		path += "/.widelands";
 		try {
-			log ("Adding directory: %s\n", path.c_str());
+			log ("Set home directory: %s\n", path.c_str());
 			g_fs->SetHomeFileSystem(FileSystem::Create(path.c_str()));
 		} catch (FileNotFound_error     const & e) {
 		} catch (FileAccessDenied_error const & e) {
