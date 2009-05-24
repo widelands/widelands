@@ -69,7 +69,7 @@ static uint32_t luminance_table_b[0x100];
 */
 Graphic::Graphic
 	(int32_t w, int32_t h, int32_t bpp,
-	 bool fullscreen, bool hw_improvment, bool double_buffer)
+	 bool fullscreen, bool hw_improvements, bool double_buffer)
 : m_nr_update_rects(0), m_update_fullscreen(false), m_roadtextures(0)
 {
 	for
@@ -85,7 +85,7 @@ Graphic::Graphic
 	// Set video mode using SDL
 	int32_t flags = SDL_SWSURFACE;
 
-	if (hw_improvment) {
+	if (hw_improvements) {
 		char videodrv[16];
 		SDL_VideoDriverName(videodrv, 16);
 		//videodrv = getenv("SDL_VIDEODRIVER");
@@ -97,7 +97,6 @@ Graphic::Graphic
 		//videodrv = getenv("SDL_VIDEODRIVER");
 		//log("Graphics: Video driver(update): %s\n",videodrv);
 #endif
-
 		log("Graphics: Trying HW_SURFACE\n");
 		flags = SDL_HWSURFACE; //  |SDL_HWACCEL|SDL_OPENGL;
 	}

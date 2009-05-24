@@ -401,8 +401,8 @@ m_label_snap_dis_border
 	(this,
 	 m_xres * 1313 / 10000, m_yres * 37 / 50,
 	 _("Distance for windows to snap to borders:"), Align_VCenter),
-m_hw_improvement (this, Point(m_xres * 19 / 200, m_yres * 7715 / 10000)),
-m_label_hw_improvement
+m_hw_improvements (this, Point(m_xres * 19 / 200, m_yres * 7715 / 10000)),
+m_label_hw_improvements
 	(this,
 	 m_xres * 1313 / 10000, m_yres * 7865 / 10000,
 	 _("Graphics experimental improvements."),
@@ -418,7 +418,7 @@ os(opt)
 	m_title                .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_label_nozip          .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_nozip                .set_state(opt.nozip);
-	m_hw_improvement       .set_state(opt.hw_improvement);
+	m_hw_improvements      .set_state(opt.hw_improvements);
 	m_double_buffer        .set_state(opt.double_buffer);
 	m_label_speed          .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_snap_dis_border.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -475,7 +475,7 @@ os(opt)
 Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 	// Write all remaining data from UI elements
 	os.nozip                = m_nozip.get_state();
-	os.hw_improvement       = m_hw_improvement.get_state();
+	os.hw_improvements      = m_hw_improvements.get_state();
 	os.double_buffer        = m_double_buffer.get_state();
 	os.ui_font              = m_ui_font_list.get_selected();
 	os.speed_of_new_game    = m_sb_speed.getValue() * 1000;
@@ -548,8 +548,8 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 
 	opt.nozip                 =  m_opt_section.get_bool
 		("nozip",           false);
-	opt.hw_improvement        =  m_opt_section.get_bool
-		("hw_improvement",  false);
+	opt.hw_improvements       =  m_opt_section.get_bool
+		("hw_improvements", false);
 	opt.double_buffer         =  m_opt_section.get_bool
 		("double_buffer",   false);
 	opt.ui_font               =  m_opt_section.get_string
@@ -584,7 +584,7 @@ void Options_Ctrl::save_options() {
 	m_opt_section.set_int("maxfps",                 opt.maxfps);
 
 	m_opt_section.set_bool("nozip",                 opt.nozip);
-	m_opt_section.set_bool("hw_improvement",        opt.hw_improvement);
+	m_opt_section.set_bool("hw_improvements",       opt.hw_improvements);
 	m_opt_section.set_bool("double_buffer",         opt.double_buffer);
 	m_opt_section.set_string("ui_font",             opt.ui_font);
 	m_opt_section.set_int("speed_of_new_game",      opt.speed_of_new_game);

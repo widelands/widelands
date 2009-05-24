@@ -92,7 +92,7 @@ m_label_speed                 (this, get_w(), 0, std::string(), Align_TopRight)
 		(get_xres(), get_yres(),
 		 global_s.get_int("depth", 16),
 		 global_s.get_bool("fullscreen", false),
-		 global_s.get_bool("hw_improvement", false),
+		 global_s.get_bool("hw_improvements", false),
 		 global_s.get_bool("double_buffer", false));
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will given

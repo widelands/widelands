@@ -44,7 +44,7 @@ struct Options_Ctrl {
 		int32_t depth;
 		bool inputgrab;
 		bool fullscreen;
-		bool hw_improvement;
+		bool hw_improvements;
 		bool double_buffer;
 		bool single_watchwin;
 		bool auto_roadbuild_mode;
@@ -166,8 +166,8 @@ private:
 
 	UI::Textarea                m_label_snap_dis_panel, m_label_snap_dis_border;
 
-	UI::Checkbox                m_hw_improvement;
-	UI::Textarea                m_label_hw_improvement;
+	UI::Checkbox                m_hw_improvements;
+	UI::Textarea                m_label_hw_improvements;
 	UI::Checkbox                m_double_buffer;
 	UI::Textarea                m_label_double_buffer;
 

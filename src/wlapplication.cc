@@ -245,7 +245,7 @@ m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
 m_gfx_w(0), m_gfx_h(0),
 m_gfx_fullscreen       (false),
-m_gfx_hw_improvement   (false),
+m_gfx_hw_improvements  (false),
 m_gfx_double_buffer    (false),
 m_default_datadirs     (true)
 {
@@ -642,12 +642,12 @@ void WLApplication::set_input_grab(bool grab)
  */
 void WLApplication::init_graphics
 	(int32_t const w, int32_t const h, int32_t const bpp,
-	 bool const fullscreen, bool const hw_improvement, bool const double_buffer)
+	 bool const fullscreen, bool const hw_improvements, bool const double_buffer)
 {
 	if
 		(w == m_gfx_w && h == m_gfx_h &&
 		 fullscreen == m_gfx_fullscreen &&
-		 hw_improvement == m_gfx_hw_improvement &&
+		 hw_improvements == m_gfx_hw_improvements &&
 		 double_buffer == m_gfx_double_buffer)
 		return;
 
@@ -657,12 +657,12 @@ void WLApplication::init_graphics
 	m_gfx_w = w;
 	m_gfx_h = h;
 	m_gfx_fullscreen = fullscreen;
-	m_gfx_hw_improvement = hw_improvement;
+	m_gfx_hw_improvements = hw_improvements;
 	m_gfx_double_buffer = double_buffer;
 
 	// If we are not to be shut down
 	if (w && h) {
-		g_gr = new Graphic(w, h, bpp, fullscreen, hw_improvement, double_buffer);
+		g_gr = new Graphic(w, h, bpp, fullscreen, hw_improvements, double_buffer);
 	}
 }
 
@@ -691,7 +691,7 @@ bool WLApplication::init_settings() {
 	set_mouse_swap(s.get_bool("swapmouse", false));
 
 	m_gfx_fullscreen = s.get_bool("fullscreen", false);
-	m_gfx_hw_improvement = s.get_bool("hw_improvement", false);
+	m_gfx_hw_improvements = s.get_bool("hw_improvements", false);
 	m_gfx_double_buffer = s.get_bool("double_buffer", false);
 
 	// KLUDGE!
@@ -781,7 +781,7 @@ bool WLApplication::init_hardware() {
 
 	init_graphics
 		(xres, yres, s.get_int("depth", 16),
-		 m_gfx_fullscreen, m_gfx_hw_improvement, m_gfx_double_buffer);
+		 m_gfx_fullscreen, m_gfx_hw_improvements, m_gfx_double_buffer);
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
@@ -875,15 +875,25 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		g_options.pull_section("global").create_val("nozip", "true");
 		m_commandline.erase("nozip");
 	}
-	if (m_commandline.count("hw_improvements")) {
-		if (m_commandline["hw_improvements"].compare("0") == 0) {
-			g_options.pull_section("global").create_val("hw_improvements", "false");
-		} else if (m_commandline["hw_improvments"].compare("1") == 0) {
-			g_options.pull_section("global").create_val("hw_improvements", "true");
+	if (m_commandline.count("hw_improvement")) {
+		if (m_commandline["hw_improvement"].compare("0") == 0) {
+			g_options.pull_section("global").create_val("hw_improvement", "false");
+		} else if (m_commandline["hw_improvement"].compare("1") == 0) {
+			g_options.pull_section("global").create_val("hw_improvement", "true");
 		} else {
-			log ("Invalid option hw_improvments=[0|1]\n");
+			log ("Invalid option hw_improvement=[0|1]\n");
 		}
-		m_commandline.erase("hw_improvements");
+		m_commandline.erase("hw_improvement");
+	}
+	if (m_commandline.count("double_buffer")) {
+		if (m_commandline["double_buffer"].compare("0") == 0) {
+			g_options.pull_section("global").create_val("double_buffer", "false");
+		} else if (m_commandline["double_buffer"].compare("1") == 0) {
+			g_options.pull_section("global").create_val("double_buffer", "true");
+		} else {
+			log ("Invalid double_buffer=[0|1]\n");
+		}
+		m_commandline.erase("double_buffer");
 	}
 	if (m_commandline.count("datadir")) {
 		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
@@ -1039,6 +1049,12 @@ void WLApplication::show_usage()
 			 " --depth=[16|32]      Color depth in number of bits per pixel.\n"
 			 " --xres=[...]         Width of the window in pixel.\n"
 			 " --yres=[...]         Height of the window in pixel.\n"
+		     " --hw_improvements=[0|1]\n"
+			 "                      Activate hardware acceleration\n"
+			 "                      *HIGHLY EXPERIMENTAL*\n"
+			 " --double_buffer=[0|1]\n"
+			 "                      Enables double buffering\n"
+			 "                      *HIGHLY EXPERIMENTAL*\n"
 			 "\n"
 			 "Options for the internal window manager:\n"
 			 " --border_snap_distance=[0 ...]\n"
