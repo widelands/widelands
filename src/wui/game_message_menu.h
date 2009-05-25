@@ -41,14 +41,16 @@ private:
 	Interactive_Player & iplayer() const;
 	void                 selected(uint32_t);
 
-	void clicked_hide();
+	void clicked_del_message();
+	void clicked_del_all();
 	void clicked_view();
 	void clicked_sort();
 
 	typedef UI::Listselect<Widelands::Message &> list_type;
 	list_type              list;
 	UI::Multiline_Textarea messagetext;
-	UI::Callback_Button<GameMessageMenu> hide;
+	UI::Callback_Button<GameMessageMenu> del_message;
+	UI::Callback_Button<GameMessageMenu> del_all;
 	UI::Callback_Button<GameMessageMenu> view;
 	UI::Callback_Button<GameMessageMenu> sort;
 	int m_direction;

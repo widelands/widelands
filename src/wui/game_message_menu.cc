@@ -38,22 +38,28 @@ GameMessageMenu::GameMessageMenu
 	list(this, 5,   30, get_inner_w() - 10, 110, Align_Left, false),
 	messagetext
 		(this, 5, 5 + 25 + 5 + 110, get_inner_w() - 10, 220, "", Align_Left, 1),
-	hide
+	del_message
 		(this,
 		 5, 5,
 		 25, 25,
 		 2,
-		 &GameMessageMenu::clicked_hide, *this, _("del")),
-	view
+		 &GameMessageMenu::clicked_del_message, *this, _("del")),
+	del_all
 		(this,
 		 5 + 25 + 5, 5,
+		 25, 25,
+		 2,
+		 &GameMessageMenu::clicked_del_all, *this, _("DELA")),
+	view
+		(this,
+		 5 + 25 + 5 + 25 + 5, 5,
 		 25, 25,
 		 2,
 		 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
 		 &GameMessageMenu::clicked_view, *this, _("go to location")),
 	sort
 		(this,
-		 5 + 25 + 5 + 25 + 5, 5,
+		 5 + 25 + 5 + 25 + 5 + 25 + 5, 5,
 		 25, 25,
 		 2,
 		 g_gr->get_picture(PicMod_Game, "pics/menu_sort.png"),
@@ -97,7 +103,7 @@ void GameMessageMenu::selected(uint32_t const t) {
 		(t == list_type::no_selection_index() ? std::string() : list[t].descr());
 }
 
-void GameMessageMenu::clicked_hide() {
+void GameMessageMenu::clicked_del_message() {
 	size_t selection = list.selection_index();
 	if (selection < list.size()) {
 		list[selection].set_is_visible(false);
@@ -107,6 +113,13 @@ void GameMessageMenu::clicked_hide() {
 			list.select(selection);
 		}
 	}
+}
+
+void GameMessageMenu::clicked_del_all() {
+	for (int i = 0; i < list.size(); ++ i) {
+		list[i].set_is_visible(false);
+	}
+	list.clear();
 }
 
 void GameMessageMenu::clicked_view() {
