@@ -798,7 +798,10 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 		/* Geologist also sends a message notifying the player
 		 * TODO: each Geologist should report each resource only once
 		 */
-		if (rdescr && rdescr->is_detectable()) {
+	  if
+		(rdescr && rdescr->is_detectable() &&
+		(position.field->get_resources_amount() > 0))
+		{
 			log("Message: resources found %s\n", rdescr->name().c_str());
 			std::string sender = "g ";
 			sender += serial();
