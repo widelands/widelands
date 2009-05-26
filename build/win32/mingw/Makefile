@@ -130,8 +130,8 @@ dist:
 
 # WIDELANDS MAIN PROGRAM BUILD RULES
 
-SUBDIRS  = ../../../src ../../../src/io ../../../src/io/filesystem ../../../src/network ../../../src/economy ../../../src/ai ../../../src/ui/ui_fs_menus
-SUBDIRS += ../../../src/ui/ui_basic ../../../src/editor ../../../src/editor/ui_menus ../../../src/editor/tools ../../../src/events ../../../src/sound
+SUBDIRS  = ../../../src ../../../src/io ../../../src/io/filesystem ../../../src/network ../../../src/economy ../../../src/ai ../../../src/ui_fsmenu
+SUBDIRS += ../../../src/ui_basic ../../../src/editor ../../../src/editor/ui_menus ../../../src/editor/tools ../../../src/events ../../../src/sound
 SUBDIRS += ../../../src/trigger ../../../src/map_io ../../../src/wui ../../../src/logic ../../../src/profile ../../../src/graphic ../../../src/game_io
 
 
