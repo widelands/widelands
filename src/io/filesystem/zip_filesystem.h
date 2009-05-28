@@ -61,6 +61,8 @@ struct ZipFilesystem : public FileSystem {
 	virtual void Rename(std::string const &, std::string const &)
 		__attribute__ ((noreturn));
 
+	virtual unsigned long DiskSpace();
+
 public:
 	static FileSystem * CreateFromDirectory(std::string const & directory);
 

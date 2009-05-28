@@ -453,3 +453,8 @@ void ZipFilesystem::m_OpenUnzip() {
 void ZipFilesystem::Rename(std::string const &, std::string const &) {
 	throw wexception("rename inside zip FS is not implemented yet");
 }
+
+unsigned long ZipFilesystem::DiskSpace() {
+  //FIXME;
+  return 0;
+}

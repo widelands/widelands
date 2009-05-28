@@ -22,8 +22,10 @@
 #include "filesystem_exceptions.h"
 #include "wexception.h"
 #include "zip_filesystem.h"
+#include "log.h"
 
 #include <sys/stat.h>
+#include <sys/statvfs.h>
 
 #include <cassert>
 #include <cerrno>
@@ -519,4 +521,17 @@ StreamWrite * RealFSImpl::OpenStreamWrite(std::string const & fname) {
 	const std::string fullname = FS_CanonicalizeName(fname);
 
 	return new RealFSStreamWrite(fullname);
+}
+
+unsigned long RealFSImpl::DiskSpace() {
+	//FIXME: check for disk space in windows does it work the same?
+	log ("Computing disk space in %s\n", m_directory.c_str());
+	struct statvfs svfs;
+	if (statvfs(FS_CanonicalizeName(m_directory).c_str(), &svfs) != -1) {
+		log ("found some space %lu %lu \n", svfs.f_bsize, svfs.f_bavail);
+		return svfs.f_bsize * svfs.f_bavail;
+
+	}
+	//can't check disk space, return 0
+	return 0;
 }

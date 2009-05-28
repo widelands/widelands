@@ -61,6 +61,8 @@ private:
 	void m_unlink_file     (std::string const & file);
 
 	std::string m_directory;
+
+	virtual unsigned long DiskSpace();
 };
 
 #endif

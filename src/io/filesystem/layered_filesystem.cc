@@ -435,3 +435,19 @@ void LayeredFileSystem::Rename
 			return;
 		}
 }
+
+//FIXME: need more control about where we are checking for disk space
+// Currently we return the diskspace in either the home directory
+// or the first directory on the stack we can find
+// this will probally work ok since this is where we will create new files
+unsigned long LayeredFileSystem::DiskSpace() {
+	if (m_home) {
+		return m_home->DiskSpace();
+	}
+	for
+	  (FileSystem_rit it = m_filesystems.rbegin();
+	   it != m_filesystems.rend();
+	     ++it)
+		if (*it)
+		  return (*it)->DiskSpace();
+}

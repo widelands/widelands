@@ -226,20 +226,20 @@ struct Cmd_ReplaySyncWrite : public Command {
  * and the game has changed into running state.
  */
 ReplayWriter::ReplayWriter(Game & game, std::string const & filename)
-	: m_game(game)
+	: m_game(game), m_filename(filename)
 {
 	g_fs->EnsureDirectoryExists(REPLAY_DIR);
 
 	SaveHandler & save_handler = m_game.save_handler();
 
 	std::string error;
-	if (!save_handler.save_game(m_game, filename + WLGF_SUFFIX, &error))
+	if (!save_handler.save_game(m_game, m_filename + WLGF_SUFFIX, &error))
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 
 	log("Reloading the game from replay\n");
 	game.cleanup_for_load(true, true);
 	{
-		Game_Loader gl(filename + WLGF_SUFFIX, game);
+		Game_Loader gl(m_filename + WLGF_SUFFIX, game);
 		gl.load_game();
 	}
 	game.postload();
@@ -296,6 +296,18 @@ void ReplayWriter::SendSync(md5_checksum const & hash)
 	m_cmdlog->Unsigned32(m_game.get_gametime());
 	m_cmdlog->Data(hash.data, sizeof(hash.data));
 	m_cmdlog->Flush();
+}
+
+/**
+ * Check that we have more than X disk space so we are sure
+ * that we don't crash when trying to write our replay
+ */
+#define MINIMUM_DISK_SPACE 100000000u //~100M, don't know why sounds good
+
+bool ReplayWriter::hasDiskSpace() {
+	unsigned long space = g_fs->DiskSpace();
+	log ("Disk space: %lu minimum: %lu \n", space, MINIMUM_DISK_SPACE);
+	return space > MINIMUM_DISK_SPACE;
 }
 
 };

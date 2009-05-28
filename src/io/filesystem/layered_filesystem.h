@@ -82,6 +82,8 @@ struct LayeredFileSystem : public FileSystem {
 
 	void PutRightVersionOnTop();
 
+	virtual unsigned long DiskSpace();
+
 private:
 	typedef std::vector<FileSystem *>::reverse_iterator FileSystem_rit;
 
