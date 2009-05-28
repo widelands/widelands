@@ -25,7 +25,7 @@
 #include "log.h"
 
 #include <sys/stat.h>
-#include <sys/statvfs.h>
+
 
 #include <cassert>
 #include <cerrno>
@@ -35,6 +35,7 @@
 #include <dos.h>
 #else
 #include <glob.h>
+#include <sys/statvfs.h>
 #endif
 
 #include "io/streamread.h"
@@ -524,6 +525,17 @@ StreamWrite * RealFSImpl::OpenStreamWrite(std::string const & fname) {
 }
 
 unsigned long RealFSImpl::DiskSpace() {
+#ifdef WIN32
+	unsigned long numbytes = 0, numfreebytes = 0, freeavailable = 0;
+	if (!GetDiskFreeSpaceEx
+	    (FS_CanonicalizeName(m_directory).c_str(),
+	     &freeavailable,
+	     &numbytes,
+	     &numfreebytes))
+		return freavailable;
+	return 0;
+
+#else
 	//FIXME: check for disk space in windows does it work the same?
 	log ("Computing disk space in %s\n", m_directory.c_str());
 	struct statvfs svfs;
@@ -532,6 +544,7 @@ unsigned long RealFSImpl::DiskSpace() {
 		return svfs.f_bsize * svfs.f_bavail;
 
 	}
+#endif
 	//can't check disk space, return 0
 	return 0;
 }
