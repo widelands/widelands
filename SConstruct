@@ -79,6 +79,8 @@ SConsEnvironment.InstallData = lambda env, dest, files: InstallPerm(env, dest, f
 
 def cli_options():
 	opts=Variables('build/scons-config.py', ARGUMENTS)
+	opts.Add('cc', 'use this compiler as default c compiler', '')
+	opts.Add('cxx', 'use this compiler as default c++ compiler','')
 	opts.Add('build', 'debug / profile / release(default)', 'debug')
 	opts.Add('build_id', 'To get a default value (SVN revision), leave this empty', '') #change this before/after preparing a release
 	opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
@@ -148,6 +150,11 @@ if env.enable_configuration:
 	# Generate build_info.cc - scons itself will decide whether a recompile is needed
 	Command(os.path.join(BUILDDIR, "build_info.cc"), [Value(get_build_id(env)),Value(env['build'])], generate_buildinfo_file)
 
+	if (env['cxx'] != ''):
+		env['CXX'] = env['cxx']
+	if (env['cc'] != ''):
+		env['CC'] = env['cc']
+	print env.Dump();
 	do_configure(conf, env)
 
 	# Generate config.h - scons itself will decide whether a recompile is needed
