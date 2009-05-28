@@ -355,6 +355,14 @@ def do_configure_libraries(conf, env):
 	if not conf.CheckLib(library='SDL_mixer', symbol='Mix_OpenAudio', autoadd=1):
 		print 'Could not find the SDL_mixer library! Is it installed?'
 		env.Exit(1)
+	
+	if not conf.CheckLib(library='GL', symbol='glClear', autoadd=1):
+		print 'Could not find the GL Library! Is it installed?'
+		env.Exit(1)
+
+	if not conf.CheckLib(library='boost_program_options', symbol='', autoadd=1):
+		print 'Could not find the boost::program_options Library! Is it installed?'
+		env.Exit(1)
 
 	if not conf.TryLink(""" #define USE_RWOPS
 			#include <SDL_mixer.h>
@@ -394,7 +402,7 @@ def do_configure_compiler_warnings(conf, env):
 	conf.CheckCompilerFlag('-Wmissing-include-dirs', env)
 	conf.CheckCompilerFlag('-Werror=missing-include-dirs', env)
 	conf.CheckCompilerFlag('-Wmissing-noreturn', env)
-	conf.CheckCompilerFlag('-Werror=missing-noreturn', env)
+	#conf.CheckCompilerFlag('-Werror=missing-noreturn', env)
 	conf.CheckCompilerFlag('-Wcomment', env)
 	conf.CheckCompilerFlag('-Werror=comment', env)
 	conf.CheckCompilerFlag('-Wnormalized=nfc', env)
