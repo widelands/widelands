@@ -213,7 +213,7 @@ Bob & Worker_Descr::create_object() const
  */
 bool Worker_Descr::can_act_as(Ware_Index const index) const {
 	assert(index < tribe().get_nrworkers());
-	if (index == tribe().worker_index(name().c_str()))
+	if (index == worker_index())
 		return true;
 
 	// if requested worker type can be promoted, compare with that type
@@ -223,3 +223,7 @@ bool Worker_Descr::can_act_as(Ware_Index const index) const {
 }
 
 };
+
+Ware_Index Worker_Descr::worker_index() const {
+	return tribe().safe_worker_index(name().c_str());
+}

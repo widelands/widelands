@@ -79,6 +79,7 @@ public:
 	int32_t get_max_exp() const throw () {return m_max_experience;}
 	int32_t get_min_exp() const throw () {return m_min_experience;}
 	Ware_Index becomes() const throw () {return m_becomes;}
+	Ware_Index worker_index() const throw ();
 	bool can_act_as(Ware_Index) const;
 
 	Worker & create
