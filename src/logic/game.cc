@@ -82,6 +82,8 @@ void Game::SyncWrapper::StartDump(std::string const & fname) {
 	m_dump = g_fs->OpenStreamWrite(m_dumpfname);
 }
 
+#define MINIMUM_DISK_SPACE 800000000u
+
 void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 #ifdef SYNC_DEBUG
 	log("[sync:%08u t=%6u]", m_counter, m_game.get_gametime());
@@ -90,8 +92,13 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 	log("\n");
 #endif
 
-	if (m_dump)
+	if (m_dump) {
 		m_dump->Data(data, size);
+		if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
+		  delete m_dump;
+		  m_dump = 0;
+		}
+	}
 
 	m_target.Data(data, size);
 	m_counter += size;
@@ -114,7 +121,8 @@ Game::~Game()
 {
 	assert(this == g_sound_handler.m_the_game);
 	g_sound_handler.m_the_game = 0;
-	delete m_replaywriter;
+	if (m_replaywriter) //arn't guaranteed we are writing a replay
+	  delete m_replaywriter;
 }
 
 
@@ -158,7 +166,11 @@ GameController * Game::gameController()
 
 void Game::set_write_replay(bool const wr)
 {
-	assert(m_state == gs_notrunning);
+	//we want to allow for the posibility to stop writing our replay
+        //this is to ensure we don't crash because of diskspace
+        //still this is only possibe to go from true->false
+	//still probally shouldn't do this with an assert but with better checks
+	assert((m_state == gs_notrunning) || (wr == false));
 
 	m_writereplay = wr;
 }
@@ -610,10 +622,18 @@ void Game::send_player_command (PlayerCommand & pc)
  */
 void Game::enqueue_command (Command * const cmd)
 {
-	if (m_replaywriter)
-		if (upcast(PlayerCommand, plcmd, cmd))
-			m_replaywriter->SendPlayerCommand(plcmd);
-
+	//TODO: we check for diskspace a lot now. rework it so we reduce the performance penalty
+	if (m_writereplay && m_replaywriter) {
+		if (m_replaywriter->hasDiskSpace()) {
+			if (upcast(PlayerCommand, plcmd, cmd)) {
+				m_replaywriter->SendPlayerCommand(plcmd);
+			}
+		} else {
+			m_writereplay = false;
+			delete m_replaywriter;
+			m_replaywriter = 0;
+		}
+	}
 	cmdqueue().enqueue(cmd);
 }
 
