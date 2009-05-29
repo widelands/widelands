@@ -22,7 +22,6 @@
 #include "filesystem_exceptions.h"
 #include "wexception.h"
 #include "zip_filesystem.h"
-#include "log.h"
 
 #include <sys/stat.h>
 
@@ -537,10 +536,8 @@ unsigned long RealFSImpl::DiskSpace() {
 			::convert(freeavailable);
 
 #else
-	log ("Computing disk space in %s\n", m_directory.c_str());
 	struct statvfs svfs;
 	if (statvfs(FS_CanonicalizeName(m_directory).c_str(), &svfs) != -1) {
-		log ("found some space %lu %lu \n", svfs.f_bsize, svfs.f_bavail);
 		return svfs.f_bsize * svfs.f_bavail;
 	}
 #endif
