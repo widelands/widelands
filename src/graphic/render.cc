@@ -61,7 +61,7 @@ m_offsx(other.m_offsx), m_offsy(other.m_offsx), m_w(other.m_w), m_h(other.m_h)
  * Updating the whole Surface
  */
 void Surface::update() {
-	//flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0); 
+	//  flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0);
 	//in case of 2d graphics but also allows for double buffering
 	SDL_Flip(m_surface);
 }

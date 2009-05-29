@@ -1049,7 +1049,7 @@ void WLApplication::show_usage()
 			 " --depth=[16|32]      Color depth in number of bits per pixel.\n"
 			 " --xres=[...]         Width of the window in pixel.\n"
 			 " --yres=[...]         Height of the window in pixel.\n"
-		     " --hw_improvements=[0|1]\n"
+			 " --hw_improvements=[0|1]\n"
 			 "                      Activate hardware acceleration\n"
 			 "                      *HIGHLY EXPERIMENTAL*\n"
 			 " --double_buffer=[0|1]\n"

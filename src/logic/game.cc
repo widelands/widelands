@@ -95,8 +95,8 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 	if (m_dump) {
 		m_dump->Data(data, size);
 		if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
-		  delete m_dump;
-		  m_dump = 0;
+			delete m_dump;
+			m_dump = 0;
 		}
 	}
 
@@ -121,8 +121,7 @@ Game::~Game()
 {
 	assert(this == g_sound_handler.m_the_game);
 	g_sound_handler.m_the_game = 0;
-	if (m_replaywriter) //arn't guaranteed we are writing a replay
-	  delete m_replaywriter;
+	delete m_replaywriter;
 }
 
 
@@ -166,11 +165,11 @@ GameController * Game::gameController()
 
 void Game::set_write_replay(bool const wr)
 {
-	//we want to allow for the posibility to stop writing our replay
-        //this is to ensure we don't crash because of diskspace
-        //still this is only possibe to go from true->false
-	//still probally shouldn't do this with an assert but with better checks
-	assert((m_state == gs_notrunning) || (wr == false));
+	//  we want to allow for the possibility to stop writing our replay
+	//  this is to ensure we do not crash because of diskspace
+	//  still this is only possibe to go from true->false
+	//  still probally should not do this with an assert but with better checks
+	assert(m_state == gs_notrunning || not wr);
 
 	m_writereplay = wr;
 }
@@ -622,7 +621,8 @@ void Game::send_player_command (PlayerCommand & pc)
  */
 void Game::enqueue_command (Command * const cmd)
 {
-	//TODO: we check for diskspace a lot now. rework it so we reduce the performance penalty
+	//  TODO We check for diskspace a lot now. rework it so we reduce the
+	//  TODO performance penalty.
 	if (m_writereplay && m_replaywriter) {
 		if (m_replaywriter->hasDiskSpace()) {
 			if (upcast(PlayerCommand, plcmd, cmd)) {

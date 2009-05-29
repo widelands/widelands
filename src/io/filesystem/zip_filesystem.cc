@@ -455,6 +455,5 @@ void ZipFilesystem::Rename(std::string const &, std::string const &) {
 }
 
 unsigned long ZipFilesystem::DiskSpace() {
-  //FIXME;
-  return 0;
+	return 0; //  FIXME
 }

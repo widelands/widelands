@@ -216,7 +216,7 @@ int32_t LayeredFileSystem::FindFiles
  */
 bool LayeredFileSystem::FileExists(std::string const & path) {
 	if (m_home and m_home->FileExists(path))
-	    return true;
+		return true;
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
 		 it != m_filesystems.rend();
@@ -255,7 +255,7 @@ bool LayeredFileSystem::IsDirectory(std::string const & path) {
  */
 void * LayeredFileSystem::Load(const std::string & fname, size_t & length) {
 	if (m_home && m_home->FileExists(fname))
-	    return m_home->Load(fname, length);
+		return m_home->Load(fname, length);
 
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
@@ -294,7 +294,7 @@ void LayeredFileSystem::Write
  */
 StreamRead  * LayeredFileSystem::OpenStreamRead (const std::string & fname) {
 	if (m_home && m_home->FileExists(fname))
-	    return m_home->OpenStreamRead(fname);
+		return m_home->OpenStreamRead(fname);
 
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
@@ -363,7 +363,7 @@ void LayeredFileSystem::EnsureDirectoryExists(std::string const & dirname) {
 FileSystem & LayeredFileSystem::MakeSubFileSystem(std::string const & dirname)
 {
 	if (m_home and m_home->IsWritable() and m_home->FileExists(dirname))
-	    return m_home->MakeSubFileSystem(dirname);
+		return m_home->MakeSubFileSystem(dirname);
 
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
@@ -445,9 +445,9 @@ unsigned long LayeredFileSystem::DiskSpace() {
 		return m_home->DiskSpace();
 	}
 	for
-	  (FileSystem_rit it = m_filesystems.rbegin();
-	   it != m_filesystems.rend();
-	     ++it)
+		(FileSystem_rit it = m_filesystems.rbegin();
+		 it != m_filesystems.rend();
+		 ++it)
 		if (*it)
-		  return (*it)->DiskSpace();
+			return (*it)->DiskSpace();
 }
