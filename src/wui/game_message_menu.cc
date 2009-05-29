@@ -114,7 +114,7 @@ void GameMessageMenu::clicked_del_message() {
 }
 
 void GameMessageMenu::clicked_del_all() {
-	for (int i = 0; i < list.size(); ++ i) {
+	for (size_t i = 0; i < list.size(); ++ i) {
 		list[i].set_is_visible(false);
 	}
 	list.clear();
