@@ -530,10 +530,10 @@ unsigned long RealFSImpl::DiskSpace() {
 	return
 		GetDiskFreeSpaceEx
 			(FS_CanonicalizeName(m_directory).c_str(),
-			 &freeavailable,
-			 &numbytes,
-			 &numfreebytes)
-		? 0 : freavailable;
+			 (PULARGE_INTEGER)&freeavailable,
+			 (PULARGE_INTEGER)&numbytes,
+			 (PULARGE_INTEGER)&numfreebytes)
+		? 0 : freeavailable;
 
 #else
 	log ("Computing disk space in %s\n", m_directory.c_str());
