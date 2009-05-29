@@ -229,7 +229,7 @@ void LAN_Game_Finder::reset ()
 void LAN_Game_Finder::run ()
 {
 	while (avail()) {
-		LAN_Game_Info info;
+		Net_Game_Info info;
 		sockaddr_in addr;
 
 		if
@@ -245,7 +245,7 @@ void LAN_Game_Finder::run ()
 		if (info.version != LAN_PROMOTION_PROTOCOL_VERSION)
 			continue;
 
-		std::list<LAN_Open_Game *>::iterator i;
+		std::list<Net_Open_Game *>::iterator i;
 		//  if the game already is in the list, update the information
 		for (i = opengames.begin(); i != opengames.end(); ++i) {
 			if ((*i)->address == addr.sin_addr.s_addr) {
@@ -258,7 +258,7 @@ void LAN_Game_Finder::run ()
 
 		//  otherwise just append it to the list
 		if (i == opengames.end()) {
-			opengames.push_back (new LAN_Open_Game);
+			opengames.push_back (new Net_Open_Game);
 
 			opengames.back()->address = addr.sin_addr.s_addr;
 			opengames.back()->port    = htons(WIDELANDS_PORT);
@@ -270,7 +270,7 @@ void LAN_Game_Finder::run ()
 }
 
 void LAN_Game_Finder::set_callback
-	(void (* const cb)(int32_t, LAN_Open_Game const *, void *), void * const ud)
+	(void (* const cb)(int32_t, Net_Open_Game const *, void *), void * const ud)
 {
 	callback = cb;
 	userdata = ud;

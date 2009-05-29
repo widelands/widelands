@@ -33,7 +33,9 @@
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/loadreplay.h"
 #include "ui_fsmenu/main.h"
-#include "ui_fsmenu/netsetup.h"
+#include "ui_fsmenu/multiplayer.h"
+#include "ui_fsmenu/netsetup_ggz.h"
+#include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/singleplayer.h"
 #include "logic/game.h"
@@ -48,6 +50,7 @@
 #include "map.h"
 #include "network/netclient.h"
 #include "network/nethost.h"
+#include "network/network_ggz.h"
 #include "profile/profile.h"
 #include "replay.h"
 #include "sound/sound_handler.h"
@@ -713,6 +716,7 @@ bool WLApplication::init_settings() {
 	s.get_bool("dock_windows_to_edges");
 	s.get_string("nickname");
 	s.get_string("lasthost");
+	s.get_string("servername");
 	s.get_string("realname");
 	s.get_string("ui_font");
 	// KLUDGE!
@@ -1297,42 +1301,122 @@ void WLApplication::mainmenu_multiplayer()
 	WSADATA wsaData;
 	if (WSAStartup(MAKEWORD(1, 1), &wsaData) != 0)
 		throw wexception("initialization of Wsock2-library failed");
-#endif
+#endif // WIN32
+
+	int32_t menu_result = Fullscreen_Menu_NetSetupLAN::JOINGAME; // dummy init;
 	for (;;) { // stay in menu until player clicks "back" button
-		int32_t menu_result;
 		std::string playername;
 		uint32_t addr;
 		uint16_t port;
 		bool host_address;
+
+#if HAVE_GGZ
+		bool ggz = false;
+		NetGGZ::ref().deinitcore(); // cleanup for reconnect to the metaserver
 		{
-			Fullscreen_Menu_NetSetup ns; // reinitalise, else graphics look strange
+			Fullscreen_Menu_MultiPlayer mp;
+			menu_result = mp.run();
+		}
+		switch (menu_result) {
+			case Fullscreen_Menu_MultiPlayer::Back:
+				return;
+			case Fullscreen_Menu_MultiPlayer::Metaserver:
+				ggz = true;
+				break;
+			case Fullscreen_Menu_MultiPlayer::Lan:
+				break;
+			default:
+				assert(false);
+		}
+
+		if (ggz) {
+			// reinitalise in every run, else graphics look strange
+			Fullscreen_Menu_NetSetupGGZ ns;
+			menu_result = ns.run();
+			playername = ns.get_playername();
+
+			switch (menu_result) {
+				case Fullscreen_Menu_NetSetupGGZ::HOSTGAME: {
+					NetHost netgame(playername, true);
+					netgame.run();
+					NetGGZ::ref().deinitcore();
+					break;
+				}
+				case Fullscreen_Menu_NetSetupGGZ::JOINGAME: {
+					uint32_t secs = time(0);
+					while (!NetGGZ::ref().ip()) {
+						NetGGZ::ref().data();
+						if ((time(0) - secs) > 10)
+							throw warning
+								(_("Connection timeouted"),
+								 _
+								 ("Widelands has not been able to get the IP adress "
+								  "of the server in time.\nThere seems to be a "
+								  "network problem, either on your side or on side\n"
+								  "of the server.\n")
+								);
+					}
+
+					IPaddress peer;
+					if (hostent * const he = gethostbyname(NetGGZ::ref().ip())) {
+						peer.host =
+							(reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
+						peer.port = htons(WIDELANDS_PORT);
+					} else
+						throw warning
+							(_("Connection problem"),
+							 _("Widelands has not been able to connect to the host.")
+							);
+					SDLNet_ResolveHost (&peer, NetGGZ::ref().ip(), WIDELANDS_PORT);
+
+					NetClient netgame(&peer, playername, true);
+					netgame.run();
+					NetGGZ::ref().deinitcore();
+					break;
+				}
+				default:
+					goto end;
+			}
+		}
+
+#else
+		// If compiled without ggz support, only lan-netsetup will be visible
+		if (menu_result == Fullscreen_Menu_NetSetupLAN::CANCEL)
+			return;
+#endif // HAVE_GGZ
+
+		else {
+			// reinitalise in every run, else graphics look strange
+			Fullscreen_Menu_NetSetupLAN ns;
 			menu_result = ns.run();
 			playername = ns.get_playername();
 			host_address = ns.get_host_address(addr, port);
-		}
-		switch (menu_result) {
-		case Fullscreen_Menu_NetSetup::HOSTGAME: {
-			NetHost netgame(playername);
-			netgame.run();
-			break;
-		}
-		case Fullscreen_Menu_NetSetup::JOINGAME: {
-			IPaddress peer;
 
-			if (not host_address)
-				throw warning
-					("Invalid Address",
-					 _("The address of the game server is invalid"));
+			switch (menu_result) {
+				case Fullscreen_Menu_NetSetupLAN::HOSTGAME: {
+					NetHost netgame(playername);
+					netgame.run();
+					break;
+				}
+				case Fullscreen_Menu_NetSetupLAN::JOINGAME: {
+					IPaddress peer;
 
-			peer.host = addr;
-			peer.port = port;
+					if (not host_address)
+						throw warning
+							("Invalid Address",
+							 _("The address of the game server is invalid")
+							);
 
-			NetClient netgame(&peer, playername);
-			netgame.run();
-			break;
-		}
-		default:
-			goto end;
+					peer.host = addr;
+					peer.port = port;
+
+					NetClient netgame(&peer, playername);
+					netgame.run();
+					break;
+				}
+				default:
+					goto end;
+			}
 		}
 	}
 end:;

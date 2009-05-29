@@ -31,7 +31,7 @@
 #define LAN_GAME_CLOSED                0
 #define LAN_GAME_OPEN                  1
 
-struct LAN_Game_Info {
+struct Net_Game_Info {
 	char          magic       [6];
 	uint8_t version;
 	uint8_t state;
@@ -41,10 +41,10 @@ struct LAN_Game_Info {
 	char          map        [32];
 };
 
-struct LAN_Open_Game {
+struct Net_Open_Game {
 	in_addr_t     address;
 	in_port_t     port;
-	LAN_Game_Info info;
+	Net_Game_Info info;
 };
 
 struct LAN_Base {
@@ -76,7 +76,7 @@ struct LAN_Game_Promoter : public LAN_Base {
 	void set_map (char const *);
 
 private:
-	LAN_Game_Info gameinfo;
+	Net_Game_Info gameinfo;
 	bool          needupdate;
 };
 
@@ -92,12 +92,12 @@ struct LAN_Game_Finder:LAN_Base {
 	void reset ();
 	void run ();
 
-	void set_callback (void(*)(int32_t, LAN_Open_Game const *, void *), void *);
+	void set_callback (void(*)(int32_t, Net_Open_Game const *, void *), void *);
 
 private:
-	std::list<LAN_Open_Game *> opengames;
+	std::list<Net_Open_Game *> opengames;
 
-	void (*callback) (int32_t, LAN_Open_Game const *, void *);
+	void (*callback) (int32_t, Net_Open_Game const *, void *);
 	void                     * userdata;
 };
 

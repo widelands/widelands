@@ -17,8 +17,12 @@
  *
  */
 
-#ifndef FULLSCREEN_MENU_NETSETUP_H
-#define FULLSCREEN_MENU_NETSETUP_H
+#ifndef FULLSCREEN_MENU_NETSETUP_GGZ_H
+#define FULLSCREEN_MENU_NETSETUP_GGZ_H
+
+#include "network/network_ggz.h"
+
+#if HAVE_GGZ
 
 #include "network/network_lan_promotion.h"
 
@@ -26,34 +30,27 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/table.h"
+#include "wui/gamechatpanel.h"
 
-#include <list>
 #include <string>
 #include <cstring>
+#include <vector>
 
 #include "base.h"
 
-class LAN_Open_Game;
-struct LAN_Game_Info;
+class Net_Open_Game;
+struct Net_Game_info;
 
-struct Fullscreen_Menu_NetSetup : public Fullscreen_Menu_Base {
+struct Fullscreen_Menu_NetSetupGGZ : public Fullscreen_Menu_Base {
 	enum {
 		CANCEL = 0,
 		HOSTGAME,
 		JOINGAME
 	};
 
-	Fullscreen_Menu_NetSetup ();
+	Fullscreen_Menu_NetSetupGGZ ();
 
 	virtual void think();
-
-	/**
-	 * \param[out] addr filled in with the IP address of the chosen server
-	 * \param[out] port filled in with the port of the chosen server
-	 * \return \c true if a valid server has been chosen. If \c false is
-	 * returned, the values of \p addr and \p port are undefined.
-	 */
-	bool get_host_address (uint32_t & addr, uint16_t & port);
 
 	/**
 	 * \return the name chosen by the player
@@ -67,36 +64,32 @@ private:
 	uint32_t                                    m_lisw;
 	uint32_t                                    m_fs;
 	std::string                                 m_fn;
-	UI::Textarea                                title, m_opengames;
-	UI::Textarea                                m_playername, m_hostname;
-	UI::Callback_Button<Fullscreen_Menu_NetSetup>        joingame;
-	UI::Callback_Button<Fullscreen_Menu_NetSetup>        hostgame;
-	//  UI::Callback_IDButton<Fullscreen_Menu_NetSetup, int32_t> playinternet;
-	UI::Callback_IDButton<Fullscreen_Menu_NetSetup, int32_t> back;
-	UI::Callback_Button<Fullscreen_Menu_NetSetup>        loadlasthost;
+	UI::Textarea                                title, m_users, m_opengames;
+	UI::Textarea                                m_playername, m_servername;
+	UI::Callback_Button<Fullscreen_Menu_NetSetupGGZ>            joingame;
+	UI::Callback_Button<Fullscreen_Menu_NetSetupGGZ>            hostgame;
+	UI::Callback_IDButton<Fullscreen_Menu_NetSetupGGZ, int32_t> back;
 	UI::EditBox                                 playername;
-	UI::EditBox                                 hostname;
-	UI::Table<const LAN_Open_Game * const>      opengames;
-	LAN_Game_Finder                             discovery;
+	UI::EditBox                                 servername;
+	UI::Table<const Net_Player    * const>      usersonline;
+	UI::Table<const Net_Open_Game * const>      opengames;
+	GameChatPanel                             * chat;
 
-	void game_selected (uint32_t);
-	void game_doubleclicked (uint32_t);
+	void fillServersList(std::vector<Net_Game_Info>);
+	void fillUserList   (std::vector<Net_Player>);
 
-	static void discovery_callback (int32_t, LAN_Open_Game const *, void *);
+	void connectToMetaserver();
 
-	void game_opened  (LAN_Open_Game const *);
-	void game_closed  (LAN_Open_Game const *);
-	void game_updated (LAN_Open_Game const *);
+	void server_selected (uint32_t);
+	void server_doubleclicked (uint32_t);
 
-	void update_game_info
-		(UI::Table<const LAN_Open_Game * const>::Entry_Record &,
-		 const LAN_Game_Info &);
-
-	void change_hostname();
+	void change_servername();
 	void change_playername();
 	void clicked_joingame();
 	void clicked_hostgame();
 	void clicked_lasthost();
 };
+
+#endif // if HAVE_GGZ
 
 #endif

@@ -84,8 +84,9 @@ struct NetClientImpl {
 	std::vector<ChatMessage> chatmessages;
 };
 
-NetClient::NetClient (IPaddress * const svaddr, std::string const & playername)
-: d(new NetClientImpl)
+NetClient::NetClient
+	(IPaddress * const svaddr, std::string const & playername, bool ggz)
+: d(new NetClientImpl), use_ggz(ggz)
 {
 	d->sock = SDLNet_TCP_Open(svaddr);
 	if (d->sock == 0)
@@ -621,6 +622,11 @@ void NetClient::handle_packet(RecvPacket & packet)
  */
 void NetClient::handle_network ()
 {
+#if HAVE_GGZ
+	// if this is a ggz game, handle the ggz network
+	if (use_ggz)
+		NetGGZ::ref().data();
+#endif
 	try {
 		while (d->sock != 0 && SDLNet_CheckSockets(d->sockset, 0) > 0) {
 			// Perform only one read operation, then process all packets

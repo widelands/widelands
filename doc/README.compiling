@@ -68,7 +68,7 @@ some available scons flags are:
 build=debug|release|profile
 build_id=<IDNAME>
 efence=1 (default false)
-enable_ggz (default false)
+enable_ggz=true (default false)
 
 install_prefix=<PREFIX> (default '/usr/local')
 bindir=<BINDIR> (default 'games')

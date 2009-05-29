@@ -17,14 +17,14 @@
  *
  */
 
-#include "netsetup.h"
+#include "netsetup_lan.h"
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "network/network.h"
 #include "profile/profile.h"
 
-Fullscreen_Menu_NetSetup::Fullscreen_Menu_NetSetup ()
+Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN ()
 :
 Fullscreen_Menu_Base("singleplmenu.jpg"), // change this
 
@@ -65,21 +65,21 @@ joingame
 	(this,
 	 m_xres * 16 / 25, m_yres * 5333 / 10000, m_butw, m_buth,
 	 1,
-	 &Fullscreen_Menu_NetSetup::clicked_joingame, *this,
+	 &Fullscreen_Menu_NetSetupLAN::clicked_joingame, *this,
 	 _("Join this game"), std::string(), true, false,
 	 m_fn, m_fs),
 hostgame
 	(this,
 	 m_xres * 16 / 25, m_yres * 6083 / 10000, m_butw, m_buth,
 	 1,
-	 &Fullscreen_Menu_NetSetup::clicked_hostgame, *this,
+	 &Fullscreen_Menu_NetSetupLAN::clicked_hostgame, *this,
 	 _("Host a new game"), std::string(), true, false,
 	 m_fn, m_fs),
 back
 	(this,
 	 m_xres * 16 / 25, m_yres * 8333 / 10000, m_butw, m_buth,
 	 0,
-	 &Fullscreen_Menu_NetSetup::end_modal, *this, CANCEL,
+	 &Fullscreen_Menu_NetSetupLAN::end_modal, *this, CANCEL,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs),
 loadlasthost
@@ -87,7 +87,7 @@ loadlasthost
 	 m_xres * 171 / 200, m_yres * 19 / 40, m_buth, m_buth,
 	 1,
 	 g_gr->get_picture(PicMod_UI, "pics/menu_load_game.png"),
-	 &Fullscreen_Menu_NetSetup::clicked_lasthost, *this,
+	 &Fullscreen_Menu_NetSetupLAN::clicked_lasthost, *this,
 	 _("Load previous host"), true, false,
 	 m_fn, m_fs),
 
@@ -107,38 +107,40 @@ opengames
 	m_opengames .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_playername.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_hostname  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	hostname    .changed.set(this, &Fullscreen_Menu_NetSetup::change_hostname);
+	hostname    .changed.set
+		(this, &Fullscreen_Menu_NetSetupLAN::change_hostname);
 	hostname    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	playername  .setText  (s.get_string("nickname", (_("nobody"))));
-	playername  .changed.set(this, &Fullscreen_Menu_NetSetup::change_playername);
+	playername  .changed.set
+		(this, &Fullscreen_Menu_NetSetupLAN::change_playername);
 	playername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	opengames   .set_font(m_fn, m_fs);
 	opengames   .add_column(m_lisw * 2 / 5, _("Host"));
 	opengames   .add_column(m_lisw * 2 / 5, _("Map"));
 	opengames   .add_column(m_lisw     / 5, _("State"));
-	opengames   .selected.set (this, &Fullscreen_Menu_NetSetup::game_selected);
+	opengames   .selected.set(this, &Fullscreen_Menu_NetSetupLAN::game_selected);
 	opengames   .double_clicked.set
-		(this, &Fullscreen_Menu_NetSetup::game_doubleclicked);
+		(this, &Fullscreen_Menu_NetSetupLAN::game_doubleclicked);
 	discovery   .set_callback (discovery_callback, this);
 
 	joingame.set_enabled(false);
 }
 
-void Fullscreen_Menu_NetSetup::think ()
+void Fullscreen_Menu_NetSetupLAN::think ()
 {
 	Fullscreen_Menu_Base::think ();
 
 	discovery.run();
 }
 
-bool Fullscreen_Menu_NetSetup::get_host_address
+bool Fullscreen_Menu_NetSetupLAN::get_host_address
 	(uint32_t & addr, uint16_t & port)
 {
 	std::string const & host = hostname.text();
 
 	const uint32_t opengames_size = opengames.size();
 	for (uint32_t i = 0; i < opengames_size; ++i) {
-		const LAN_Open_Game & game = *opengames[i];
+		const Net_Open_Game & game = *opengames[i];
 
 		if (not strcmp(game.info.hostname, host.c_str())) {
 			addr = game.address;
@@ -155,28 +157,28 @@ bool Fullscreen_Menu_NetSetup::get_host_address
 		return false;
 }
 
-std::string const & Fullscreen_Menu_NetSetup::get_playername()
+std::string const & Fullscreen_Menu_NetSetupLAN::get_playername()
 {
 	return playername.text();
 }
 
 
-void Fullscreen_Menu_NetSetup::game_selected (uint32_t) {
+void Fullscreen_Menu_NetSetupLAN::game_selected (uint32_t) {
 	if (opengames.has_selection()) {
-		if (const LAN_Open_Game * const game = opengames.get_selected()) {
+		if (const Net_Open_Game * const game = opengames.get_selected()) {
 			hostname.setText(game->info.hostname);
 			joingame.set_enabled(true);
 		}
 	}
 }
 
-void Fullscreen_Menu_NetSetup::game_doubleclicked (uint32_t) {
+void Fullscreen_Menu_NetSetupLAN::game_doubleclicked (uint32_t) {
 	clicked_joingame();
 }
 
-void Fullscreen_Menu_NetSetup::update_game_info
-	(UI::Table<LAN_Open_Game const * const>::Entry_Record & er,
-	 LAN_Game_Info const & info)
+void Fullscreen_Menu_NetSetupLAN::update_game_info
+	(UI::Table<Net_Open_Game const * const>::Entry_Record & er,
+	 Net_Game_Info const & info)
 {
 	er.set_string (0, info.hostname);
 	er.set_string (1, info.map);
@@ -188,63 +190,63 @@ void Fullscreen_Menu_NetSetup::update_game_info
 	};
 }
 
-void Fullscreen_Menu_NetSetup::game_opened (const LAN_Open_Game * game)
+void Fullscreen_Menu_NetSetupLAN::game_opened (const Net_Open_Game * game)
 {update_game_info(opengames.add(game), game->info);}
 
-void Fullscreen_Menu_NetSetup::game_closed (const LAN_Open_Game *) {}
+void Fullscreen_Menu_NetSetupLAN::game_closed (const Net_Open_Game *) {}
 
-void Fullscreen_Menu_NetSetup::game_updated (const LAN_Open_Game * game)
+void Fullscreen_Menu_NetSetupLAN::game_updated (const Net_Open_Game * game)
 {
 	if
-		(UI::Table<const LAN_Open_Game * const>::Entry_Record * const er =
+		(UI::Table<const Net_Open_Game * const>::Entry_Record * const er =
 		 opengames.find(game))
 		update_game_info(*er, game->info);
 }
 
-void Fullscreen_Menu_NetSetup::discovery_callback
+void Fullscreen_Menu_NetSetupLAN::discovery_callback
 	(int32_t               const type,
-	 LAN_Open_Game const * const game,
+	 Net_Open_Game const * const game,
 	 void                * const userdata)
 {
 	switch (type) {
 	case LAN_Game_Finder::GameOpened:
-		static_cast<Fullscreen_Menu_NetSetup *>(userdata)->game_opened (game);
+		static_cast<Fullscreen_Menu_NetSetupLAN *>(userdata)->game_opened (game);
 		break;
 	case LAN_Game_Finder::GameClosed:
-		static_cast<Fullscreen_Menu_NetSetup *>(userdata)->game_closed (game);
+		static_cast<Fullscreen_Menu_NetSetupLAN *>(userdata)->game_closed (game);
 		break;
 	case LAN_Game_Finder::GameUpdated:
-		static_cast<Fullscreen_Menu_NetSetup *>(userdata)->game_updated(game);
+		static_cast<Fullscreen_Menu_NetSetupLAN *>(userdata)->game_updated(game);
 		break;
 	default:
 		abort ();
 	}
 }
 
-void Fullscreen_Menu_NetSetup::change_hostname()
+void Fullscreen_Menu_NetSetupLAN::change_hostname()
 {
 	// Allow user to enter a hostname manually
 	opengames.select(opengames.no_selection_index());
 	joingame.set_enabled(hostname.text().size());
 }
 
-void Fullscreen_Menu_NetSetup::change_playername()
+void Fullscreen_Menu_NetSetupLAN::change_playername()
 {
 	g_options.pull_section("global").set_string("nickname", playername.text());
 }
 
-void Fullscreen_Menu_NetSetup::clicked_joingame() {
+void Fullscreen_Menu_NetSetupLAN::clicked_joingame() {
 	// Save selected host so users can reload it for reconnection.
 	g_options.pull_section("global").set_string("lasthost", hostname.text());
 
 	end_modal(JOINGAME);
 }
 
-void Fullscreen_Menu_NetSetup::clicked_hostgame() {
+void Fullscreen_Menu_NetSetupLAN::clicked_hostgame() {
 	end_modal(HOSTGAME);
 }
 
-void Fullscreen_Menu_NetSetup::clicked_lasthost() {
+void Fullscreen_Menu_NetSetupLAN::clicked_lasthost() {
 	Section *s = g_options.get_section("global");
 	std::string host = s->get_string("lasthost", "");
 	hostname.setText(host);

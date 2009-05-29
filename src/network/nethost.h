@@ -36,7 +36,7 @@ struct NetHostImpl;
  * launch, as well as dealing with the actual network protocol.
  */
 struct NetHost : public GameController, private SyncCallback {
-	NetHost (std::string const & playername);
+	NetHost (std::string const & playername, bool ggz = false);
 	virtual ~NetHost ();
 
 	void run();
@@ -121,6 +121,7 @@ private:
 	void reaper();
 
 	NetHostImpl * d;
+	bool use_ggz;
 };
 
 

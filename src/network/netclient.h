@@ -40,7 +40,7 @@ struct NetClient :
 	private SyncCallback,
 	public  ChatProvider
 {
-	NetClient (IPaddress *, std::string const & playername);
+	NetClient (IPaddress *, std::string const & playername, bool ggz = false);
 	virtual ~NetClient ();
 
 	void run();
@@ -98,6 +98,7 @@ private:
 		 bool sendreason = true, bool showmsg = true);
 
 	NetClientImpl * d;
+	bool use_ggz;
 };
 
 #endif // NETCLIENT_H

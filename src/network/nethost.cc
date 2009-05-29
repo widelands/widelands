@@ -28,6 +28,7 @@
 #include "i18n.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
+#include "network_ggz.h"
 #include "network_lan_promotion.h"
 #include "network_protocol.h"
 #include "network_system.h"
@@ -256,10 +257,16 @@ struct NetHostImpl {
 	NetHostImpl(NetHost * const h) : chat(h) {}
 };
 
-NetHost::NetHost (std::string const & playername)
-: d(new NetHostImpl(this))
+NetHost::NetHost (std::string const & playername, bool ggz)
+: d(new NetHostImpl(this)), use_ggz(ggz)
 {
 	log("[Host] starting up.\n");
+
+	if (ggz) {
+#if HAVE_GGZ
+		NetGGZ::ref().launch();
+#endif
+	}
 
 	d->localplayername = playername;
 
@@ -1267,6 +1274,12 @@ void NetHost::handle_network ()
 				(d->clients.size() - 1, _("The game has already started."));
 		}
 	}
+
+#if HAVE_GGZ
+	// if this is a ggz game, handle the ggz network
+	if (use_ggz)
+		NetGGZ::ref().data();
+#endif
 
 	// Check if we hear anything from our clients
 	while (SDLNet_CheckSockets(d->sockset, 0) > 0) {
