@@ -82,11 +82,13 @@ void Game::SyncWrapper::StartDump(std::string const & fname) {
 	m_dump = g_fs->OpenStreamWrite(m_dumpfname);
 }
 
-#define MINIMUM_DISK_SPACE 800000000u
+#define MINIMUM_DISK_SPACE 180000000lu
 
 void Game::SyncWrapper::Data(void const * const data, size_t const size) {
+	uint32_t time = m_game.get_gametime();
+	static uint32_t last_check_time = 0;
 #ifdef SYNC_DEBUG
-	log("[sync:%08u t=%6u]", m_counter, m_game.get_gametime());
+	log("[sync:%08u t=%6u]", m_counter, time);
 	for (size_t i = 0; i < size; ++i)
 		log(" %02x", (static_cast<uint8_t const *>(data))[i]);
 	log("\n");
@@ -94,9 +96,12 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 
 	if (m_dump) {
 		m_dump->Data(data, size);
-		if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
-			delete m_dump;
-			m_dump = 0;
+		if ((last_check_time - time) < 1000) {
+			if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
+				delete m_dump;
+				m_dump = 0;
+			}
+			last_check_time = time;
 		}
 	}
 
@@ -621,17 +626,21 @@ void Game::send_player_command (PlayerCommand & pc)
  */
 void Game::enqueue_command (Command * const cmd)
 {
+	uint32_t time = get_gametime();
+	static uint32_t last_check_time = 0;
 	//  TODO We check for diskspace a lot now. rework it so we reduce the
 	//  TODO performance penalty.
 	if (m_writereplay && m_replaywriter) {
-		if (m_replaywriter->hasDiskSpace()) {
-			if (upcast(PlayerCommand, plcmd, cmd)) {
-				m_replaywriter->SendPlayerCommand(plcmd);
+		if (upcast(PlayerCommand, plcmd, cmd)) {
+			m_replaywriter->SendPlayerCommand(plcmd);
+		}
+		if ((time - last_check_time) > 1000) {
+			last_check_time = time;
+			if (!m_replaywriter->hasDiskSpace()) {
+				m_writereplay = false;
+				delete m_replaywriter;
+				m_replaywriter = 0;
 			}
-		} else {
-			m_writereplay = false;
-			delete m_replaywriter;
-			m_replaywriter = 0;
 		}
 	}
 	cmdqueue().enqueue(cmd);

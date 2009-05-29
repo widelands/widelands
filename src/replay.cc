@@ -302,7 +302,7 @@ void ReplayWriter::SendSync(md5_checksum const & hash)
  * Check that we have more than X disk space so we are sure
  * that we don't crash when trying to write our replay
  */
-#define MINIMUM_DISK_SPACE 100000000lu //~100M, don't know why sounds good
+#define MINIMUM_DISK_SPACE 200000000lu //~100M, don't know why sounds good
 
 bool ReplayWriter::hasDiskSpace() {
 	unsigned long space = g_fs->DiskSpace();
