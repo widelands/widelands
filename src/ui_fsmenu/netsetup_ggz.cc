@@ -105,7 +105,10 @@ usersonline
 opengames
 	(this,
 	  m_lisw + m_xres * 1 / 50, m_yres * 2 / 10,
-	  m_lisw, m_yres * 4 / 10)
+	  m_lisw, m_yres * 4 / 10),
+
+// The chat UI
+chat(0)
 {
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername
