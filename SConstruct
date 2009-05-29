@@ -154,7 +154,6 @@ if env.enable_configuration:
 		env['CXX'] = env['cxx']
 	if (env['cc'] != ''):
 		env['CC'] = env['cc']
-	print env.Dump();
 	do_configure(conf, env)
 
 	# Generate config.h - scons itself will decide whether a recompile is needed
