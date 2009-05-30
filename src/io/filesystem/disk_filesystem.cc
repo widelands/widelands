@@ -527,7 +527,7 @@ StreamWrite * RealFSImpl::OpenStreamWrite(std::string const & fname) {
 unsigned long RealFSImpl::DiskSpace() {
 #ifdef WIN32
 	ULARGE_INTEGER numbytes, numfreebytes, freeavailable;
-        if 
+	if
 	  (GetDiskFreeSpaceEx
 			(FS_CanonicalizeName(m_directory).c_str(),
 			 &freeavailable,

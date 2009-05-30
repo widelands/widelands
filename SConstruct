@@ -12,7 +12,7 @@ from Distribute import *
 
 # Sanity checks
 EnsurePythonVersion(2, 3)
-EnsureSConsVersion(1, 0, 0)
+EnsureSConsVersion(1, 0, 1)
 
 # Speedup. If you have problems with inconsistent or wrong builds, look here first
 SetOption('max_drift', 1)
