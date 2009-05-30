@@ -41,7 +41,7 @@ def find_astyle(env):
 			else:
 				binary=buggy_binary
 
-	return binary
+    return binary
 
 def exists(env):
 	if find_astyle(env)==None:

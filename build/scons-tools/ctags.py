@@ -21,7 +21,7 @@ def find_ctags(env):
 		print 'Searching for ctags:       not found. Tags will not be built'
 	else:
 		print 'Searching for ctags:      ', b
-	return b
+    return b
 
 def exists(env):
 	if find_ctags(env)==None:
