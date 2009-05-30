@@ -104,7 +104,7 @@ void set_locale(std::string name) {
 #endif
 
 #ifdef _WIN32
-	putenv((std::string("LANG=") + lang).c_str());
+	putenv(const_cast<char *>((std::string("LANG=") + lang).c_str()));
 #endif
 
 #ifdef linux
