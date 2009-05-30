@@ -113,8 +113,6 @@ void NetGGZ::ggzmod_server(GGZMod *cbmod, GGZModEvent e, const void *cbdata)
 /// checks if new data arrived via network and handles the data
 void NetGGZ::data()
 {
-	datacore();
-
 	if (!used())
 		return;
 
@@ -176,14 +174,12 @@ bool NetGGZ::host()
 
 	if (!used()) return false;
 
-	do
-	{
+	do {
 		ggzmod_dispatch(mod);
 		if (usedcore())
 			datacore();
 		ggzmod_get_player(mod, &spectator, &seat);
-	}
-	while (seat == -1);
+	} while (seat == -1);
 
 	log("GGZ ## host? seat=%i\n", seat);
 	if (!seat) return true;
@@ -444,6 +440,10 @@ void NetGGZ::event_room(uint32_t id, const void *cbdata) {
 	GGZTable *table;
 
 	switch (id) {
+		// \FIXME: if a player is inside a table (launchgame menu / in game) the
+		// server seems to send malformed update data and so lets the clients
+		// freeze. At the moment that's the reason why we do not read updates
+		// while we are inside a table.
 		case GGZ_TABLE_UPDATE:
 		case GGZ_TABLE_LIST:
 			log("GGZCORE/room ## -- table list\n");
@@ -519,7 +519,7 @@ void NetGGZ::event_game(uint32_t id, const void *cbdata) {
 				 // ggzcore_gametype_get_max_players(gametype));
 			for
 				(int32_t i = 1;
-				 i < 8; // ggzcore_gametype_get_max_players(gametype); // FIXME
+				 i < 7; // ggzcore_gametype_get_max_players(gametype); // FIXME
 				 ++i)
 				ggzcore_table_set_seat(table, i, GGZ_SEAT_OPEN, NULL);
 			ggzcore_room_launch_table(room, table);

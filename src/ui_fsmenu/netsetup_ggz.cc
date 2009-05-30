@@ -165,6 +165,7 @@ void Fullscreen_Menu_NetSetupGGZ::think ()
 	}
 
 	// Check ggz ports for new data
+	NetGGZ::ref().datacore();
 	NetGGZ::ref().data();
 
 	if (NetGGZ::ref().updateForUsers())
