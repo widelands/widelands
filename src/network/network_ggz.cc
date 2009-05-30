@@ -33,13 +33,14 @@ static GGZMod *mod = 0;
 static GGZServer *ggzserver = 0;
 
 NetGGZ::NetGGZ()
-: chatprovider()
 {
 	use_ggz = false;
 	m_fd = -1;
 	channelfd = -1;
 	gamefd = -1;
 	server_ip_addr = NULL;
+	userupdate = false;
+	tableupdate = false;
 }
 
 NetGGZ & NetGGZ::ref() {
@@ -267,6 +268,8 @@ void NetGGZ::deinitcore()
 {
 	if (!usedcore())
 		return;
+	formatedGGZChat(_("Dropping connection to the metaserver."), "", true);
+	formatedGGZChat("", "", true);
 	if (ggzcore_server_is_at_table(ggzserver))
 		ggzcore_room_leave_table(room, true);
 	ggzcore_server_logout(ggzserver);
@@ -375,15 +378,15 @@ void NetGGZ::event_server(uint32_t id, const void *cbdata) {
 
 		// now send some text about the room to the chat menu
 		msg = _("Connected to the metaserver of:");
-		chatReceiveMessage(msg, "", true);
-		chatReceiveMessage("", "", true);
+		formatedGGZChat(msg, "", true);
+		formatedGGZChat("", "", true);
 		msg = "                 </p>";
 		msg += "<p font-size=14 font-face=Widelands/Widelands font-weight=bold>";
 		msg += ggzcore_room_get_name(room);
-		chatReceiveMessage(msg, "", true);
+		formatedGGZChat(msg, "", true);
 		msg = ggzcore_room_get_desc(room);
-		chatReceiveMessage(msg, "", true);
-		chatReceiveMessage("", "", true);
+		formatedGGZChat(msg, "", true);
+		formatedGGZChat("", "", true);
 		break;
 	case GGZ_ROOM_LIST:
 		log("GGZCORE ## -- (room list)\n");
@@ -429,8 +432,8 @@ void NetGGZ::event_server(uint32_t id, const void *cbdata) {
 	case GGZ_PROTOCOL_ERROR:
 		msg = static_cast<const char *>(cbdata);
 		log("GGZCORE ## -- error! (%s)\n", msg.c_str());
-		chatReceiveMessage(ERRMSG + msg, "", true);
-		chatReceiveMessage("", "", true);
+		formatedGGZChat(ERRMSG + msg, "", true);
+		formatedGGZChat("", "", true);
 		ggzcore_login = false;
 		break;
 	}
@@ -476,6 +479,7 @@ void NetGGZ::event_room(uint32_t id, const void *cbdata) {
 					continue;
 				tablelist.push_back(info);
 			}
+			tableupdate = true;
 			ggzcore_login = false;
 			ggzcore_ready = true;
 			break;
@@ -485,12 +489,13 @@ void NetGGZ::event_room(uint32_t id, const void *cbdata) {
 		case GGZ_PLAYER_COUNT:
 			log("GGZCORE/room ## -- user list\n");
 			write_userlist();
+			userupdate = true;
 			break;
 		case GGZ_CHAT_EVENT:
 			log("GGZCORE/room ## -- chat message\n");
 			const GGZChatEventData * msg =
 				static_cast<const GGZChatEventData *>(cbdata);
-			chatReceiveMessage(msg->message, msg->sender);
+			formatedGGZChat(msg->message, msg->sender);
 			break;
 	}
 }
@@ -569,13 +574,13 @@ void NetGGZ::event_game(uint32_t id, const void *cbdata) {
 }
 
 /// \returns the tables in the room
-std::vector<Net_Game_Info> NetGGZ::tables()
+std::vector<Net_Game_Info> const & NetGGZ::tables()
 {
 	return tablelist;
 }
 
 /// \returns the players in the room
-std::vector<Net_Player> NetGGZ::users()
+std::vector<Net_Player>   const & NetGGZ::users()
 {
 	return userlist;
 }
@@ -695,20 +700,18 @@ void NetGGZ::request_server_ip()
 }
 
 /// Sends a chat message via ggz room chat
-void NetGGZ::chatSendMessage(std::string const & msg)
+void NetGGZ::send(std::string const & msg)
 {
 	if (!usedcore())
 		return;
-	int16_t sent = ggzcore_room_chat(room, GGZ_CHAT_NORMAL, "Test", msg.c_str());
+	int16_t sent = ggzcore_room_chat(room, GGZ_CHAT_NORMAL, "", msg.c_str());
 	if (sent < 0)
 		log("GGZCORE/room/chat ## error sending message!\n");
-	else
-		log("GGZCORE/room/chat ## message sucessfully sent!\n");
 }
 
 
-/// Send a received or system message to the chat menu
-void NetGGZ::chatReceiveMessage
+/// Send a formated message to the chat menu
+void NetGGZ::formatedGGZChat
 	(std::string const & msg, std::string const & sender, bool system)
 {
 	ChatMessage c;
@@ -724,13 +727,7 @@ void NetGGZ::chatReceiveMessage
 		c.playern = 7;
 	c.msg = msg;
 
-	chatprovider.receive(c);
-}
-
-/// just forwarding to GGZ
-void GGZChatProvider::send(std::string const & msg)
-{
-	NetGGZ::ref().chatSendMessage(msg);
+	receive(c);
 }
 
 #endif

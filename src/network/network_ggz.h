@@ -48,27 +48,13 @@ struct Net_Player {
 	std::string name;
 };
 
-/// The GGZChatProvider
-struct GGZChatProvider : public ChatProvider {
-	GGZChatProvider() {};
-
-	void send(std::string const &);
-
-	std::vector<ChatMessage> const & getMessages() const {
-		return messages;
-	}
-
-	void receive(ChatMessage const & msg) {
-		messages.push_back(msg);
-		ChatProvider::send(msg);
-	}
-
-private:
-	std::vector<ChatMessage> messages;
-};
-
-/// The GGZ implementation
-struct NetGGZ {
+/**
+ * The GGZ implementation
+ *
+ * It is handling all communication between the Widelands client/server and the
+ * metaserver, including metaserver lobbychat.
+ */
+struct NetGGZ : public ChatProvider {
 	static NetGGZ & ref();
 
 	void init();
@@ -79,8 +65,18 @@ struct NetGGZ {
 	void data();
 	const char *ip();
 
-	std::vector<Net_Game_Info> tables();
-	std::vector<Net_Player>    users();
+	bool updateForTables() {
+		bool temp = tableupdate;
+		tableupdate = false;
+		return temp;
+	}
+	bool updateForUsers() {
+		bool temp = userupdate;
+		userupdate = false;
+		return temp;
+	}
+	std::vector<Net_Game_Info> const & tables();
+	std::vector<Net_Player>    const & users();
 
 	void write_userlist();
 
@@ -106,12 +102,19 @@ struct NetGGZ {
 		servername = name;
 	}
 
-	// Communication with chatprovider
-	GGZChatProvider & get_chatprovider() {
-		return chatprovider;
+	// Implementation of ChatProvider
+	void send(std::string const &);
+
+	std::vector<ChatMessage> const & getMessages() const {
+		return messages;
 	}
-	void chatSendMessage(std::string const &);
-	void chatReceiveMessage
+
+	void receive(ChatMessage const & msg) {
+		messages.push_back(msg);
+		ChatProvider::send(msg);
+	}
+
+	void formatedGGZChat
 		(std::string const &, std::string const &, bool system = false);
 
 private:
@@ -139,10 +142,13 @@ private:
 
 	std::string servername;
 
+	bool tableupdate;
+	bool userupdate;
 	std::vector<Net_Game_Info> tablelist;
 	std::vector<Net_Player>    userlist;
 
-	GGZChatProvider chatprovider;
+	// The chat messages
+	std::vector<ChatMessage> messages;
 };
 
 #endif

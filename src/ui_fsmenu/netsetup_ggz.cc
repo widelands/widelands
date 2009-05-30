@@ -30,7 +30,7 @@
 
 Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ ()
 :
-Fullscreen_Menu_Base("singleplmenu.jpg"), // change this
+Fullscreen_Menu_Base("internetmenu.jpg"), // change this
 
 // Values for alignment and size
 m_butx
@@ -41,6 +41,8 @@ m_buth
 	(m_yres * 19 / 400),
 m_lisw
 	(m_xres * 20 / 63),
+m_namechange
+	(0),
 m_fs
 	(fs_small()),
 m_fn
@@ -57,35 +59,35 @@ m_users
 	 _("Users online:"), Align_Left),
 m_opengames
 	(this,
-	 m_lisw + m_xres * 1 / 50, m_yres * 15 / 100,
-	 _("Games promoted on the metaserver:"), Align_Left),
+	 m_lisw + m_xres * 85 / 1000, m_yres * 15 / 100,
+	 _("List of games:"), Align_Left),
 m_playername
 	(this,
 	 m_xres * 17 / 25, m_yres * 15 / 100,
 	 _("Your nickname:"), Align_Left),
 m_servername
 	(this,
-	 m_xres * 17 / 25, m_yres * 175 / 400,
+	 m_xres * 17 / 25, m_yres * 3 / 10,
 	 _("Name of your server:"), Align_Left),
 
 // Buttons
 joingame
 	(this,
-	 m_xres * 17 / 25, m_yres * 268 / 1000, m_butw, m_buth,
+	 m_lisw + m_xres * 85 / 1000, m_yres * 55 / 100, m_lisw * 4 / 5, m_buth,
 	 1,
 	 &Fullscreen_Menu_NetSetupGGZ::clicked_joingame, *this,
 	 _("Join this game"), std::string(), false, false,
 	 m_fn, m_fs),
 hostgame
 	(this,
-	 m_xres * 17 / 25, m_yres * 555 / 1000, m_butw, m_buth,
+	 m_xres * 17 / 25, m_yres * 4 / 10, m_butw, m_buth,
 	 1,
 	 &Fullscreen_Menu_NetSetupGGZ::clicked_hostgame, *this,
-	 _("Host a new game"), std::string(), true, false,
+	 _("Open a new game"), std::string(), true, false,
 	 m_fn, m_fs),
 back
 	(this,
-	 m_xres * 17 / 25, m_yres * 9 / 10, m_butw, m_buth,
+	 m_xres * 17 / 25, m_yres * 55 / 100, m_butw, m_buth,
 	 0,
 	 &Fullscreen_Menu_NetSetupGGZ::end_modal, *this, CANCEL,
 	 _("Back"), std::string(), true, false,
@@ -93,22 +95,26 @@ back
 
 // Edit boxes
 playername
-	(this, m_xres * 17 / 25, m_yres * 2 / 10,  m_butw, m_buth, 2, 0),
+	(this, m_xres * 17 / 25, m_yres * 2 / 10,   m_butw, m_buth, 2, 0),
 servername
-	(this, m_xres * 17 / 25, m_yres * 195 / 400, m_butw, m_buth, 2, 0),
+	(this, m_xres * 17 / 25, m_yres * 35 / 100, m_butw, m_buth, 2, 0),
 
 // List
 usersonline
 	(this,
 	  m_xres * 3 / 50, m_yres * 2 / 10,
-	  m_lisw * 4 / 5, m_yres * 4 / 10),
+	  m_lisw, m_yres * 4 / 10),
 opengames
 	(this,
-	  m_lisw + m_xres * 1 / 50, m_yres * 2 / 10,
-	  m_lisw, m_yres * 4 / 10),
+	  m_lisw + m_xres * 85 / 1000, m_yres * 2 / 10,
+	  m_lisw * 4 / 5, m_yres * 35 / 100),
 
 // The chat UI
-chat(0)
+chat
+	(this,
+	 m_xres * 3 / 50,  m_yres * 5 / 8,
+	 m_xres * 217 / 250, m_yres * 8 / 25,
+	 NetGGZ::ref())
 {
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername
@@ -130,11 +136,9 @@ chat(0)
 
 	// prepare the lists
 	usersonline .set_font(m_fn, m_fs);
-	usersonline .add_column(m_lisw * 2 / 5, _("Name"));
-	usersonline .add_column(m_lisw * 2 / 5, _("Server"));
+	usersonline .add_column(m_lisw / 2, _("Name"));
+	usersonline .add_column(m_lisw / 2, _("Server"));
 	opengames   .set_font(m_fn, m_fs);
-	opengames   .add_column(m_lisw * 4 / 7, _("Server"));
-	opengames   .add_column(m_lisw * 3 / 7, _("State"));
 	opengames   .selected.set
 		(this, &Fullscreen_Menu_NetSetupGGZ::server_selected);
 	opengames   .double_clicked.set
@@ -152,28 +156,22 @@ void Fullscreen_Menu_NetSetupGGZ::think ()
 	Fullscreen_Menu_Base::think ();
 
 	// If we have no connection try to connect
-	if (!NetGGZ::ref().usedcore())
+	if (!NetGGZ::ref().usedcore()) {
+		// Wait two seconds after the user changed the name to avoid reconnecting
+		// after each changed character.
+		if (m_namechange >= time(0) - 1)
+			return;
 		connectToMetaserver();
+	}
 
 	// Check ggz ports for new data
 	NetGGZ::ref().data();
 
-	if (!NetGGZ::ref().users().empty())
+	if (NetGGZ::ref().updateForUsers())
 		fillUserList(NetGGZ::ref().users());
 
-	if (!NetGGZ::ref().tables().empty())
+	if (NetGGZ::ref().updateForTables())
 		fillServersList(NetGGZ::ref().tables());
-
-	// Late initialization
-	if (!chat) {
-		GGZChatProvider & chatprovider = NetGGZ::ref().get_chatprovider();
-		chat =
-			new GameChatPanel
-				(this,
-				 m_xres * 3 / 50, m_yres * 125 / 200,
-				 m_lisw * 9 / 5 + m_xres * 12 / 500, m_yres * 32 / 100,
-				 chatprovider);
-	}
 }
 
 
@@ -190,35 +188,39 @@ void Fullscreen_Menu_NetSetupGGZ::connectToMetaserver()
 
 /// fills the server list
 void Fullscreen_Menu_NetSetupGGZ::fillServersList
-	(std::vector<Net_Game_Info> tables)
+	(std::vector<Net_Game_Info> const & tables)
 {
+	// List and button cleanup
 	opengames.clear();
+	hostgame.set_enabled(true);
+	joingame.set_enabled(false);
 	for (uint32_t i = 0; i < tables.size(); ++i) {
-		Net_Open_Game * newOG;
-		newOG = new Net_Open_Game;
-		newOG->info = Net_Game_Info(tables[i]);
-		UI::Table<Net_Open_Game const * const>::Entry_Record & er =
-			opengames.add(newOG);
-
-		er.set_string (0, newOG->info.hostname);
-
-		switch (newOG->info.state) {
+		Net_Open_Game newOG;
+		newOG.info = Net_Game_Info(tables[i]);
+		uint32_t pic;
+		switch (newOG.info.state) {
 			case LAN_GAME_OPEN:
-				er.set_string(1, _("Open"));
+				pic = g_gr->get_picture(PicMod_Game, "pics/continue.png");
 				break;
 			case LAN_GAME_CLOSED:
-				er.set_string(1, _("Closed"));
+				pic = g_gr->get_picture(PicMod_Game, "pics/stop.png");
 				break;
 			default:
-				er.set_string(1, _("Unknown"));
+				continue;
 		}
+		// If one of the servers has the same name as the local name of the
+		// users server, we disable the 'hostgame' button to avoid having more
+		// than one server with the same name.
+		if (tables[i].hostname == servername.text())
+			hostgame.set_enabled(false);
+		opengames.add(newOG.info.hostname, newOG, pic);
 	}
 }
 
 
 /// fills the user list
 void Fullscreen_Menu_NetSetupGGZ::fillUserList
-	(std::vector<Net_Player> users)
+	(std::vector<Net_Player> const & users)
 {
 	usersonline.clear();
 	for (uint32_t i = 0; i < users.size(); ++i) {
@@ -241,13 +243,8 @@ std::string const & Fullscreen_Menu_NetSetupGGZ::get_playername()
 /// called when an entry of the server list was selected
 void Fullscreen_Menu_NetSetupGGZ::server_selected (uint32_t)
 {
-	if (opengames.has_selection()) {
-		if (const Net_Open_Game * const game = opengames.get_selected()) {
-			servername.setText(game->info.hostname);
-			joingame.set_enabled(true);
-			hostgame.set_enabled(false);
-		}
-	}
+	if (opengames.has_selection())
+		joingame.set_enabled(true);
 }
 
 
@@ -262,9 +259,15 @@ void Fullscreen_Menu_NetSetupGGZ::server_doubleclicked (uint32_t)
 void Fullscreen_Menu_NetSetupGGZ::change_servername()
 {
 	// Allow user to enter a servername manually
-	opengames.select(opengames.no_selection_index());
 	hostgame.set_enabled(true);
-	joingame.set_enabled(false);
+
+	// Check whether a server of that name is already open.
+	// And disable 'hostgame' button if yes.
+	std::vector<Net_Game_Info> const & tables = NetGGZ::ref().tables();
+	for (uint32_t i = 0; i < tables.size(); ++i) {
+		if (tables[i].hostname == servername.text())
+			hostgame.set_enabled(false);
+	}
 }
 
 
@@ -273,15 +276,21 @@ void Fullscreen_Menu_NetSetupGGZ::change_playername()
 {
 	g_options.pull_section("global").set_string("nickname", playername.text());
 	NetGGZ::ref().deinitcore();
-	connectToMetaserver();
+	// instead of directly reconnecting to the server, we wait 2 seconds
+	// to avoid reconnection after each character change.
+	m_namechange = time(0);
 }
 
 
 /// called when the 'join game' button was clicked
 void Fullscreen_Menu_NetSetupGGZ::clicked_joingame()
 {
-	NetGGZ::ref().join(servername.text().c_str());
-	end_modal(JOINGAME);
+	if (opengames.has_selection()) {
+		const Net_Open_Game * game = &opengames.get_selected();
+		NetGGZ::ref().join(game->info.hostname);
+		end_modal(JOINGAME);
+	} else
+		throw wexception("No server selected! That should not happen!");
 }
 
 

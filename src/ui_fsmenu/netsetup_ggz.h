@@ -26,17 +26,17 @@
 
 #include "network/network_lan_promotion.h"
 
+#include "base.h"
 #include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
 #include "ui_basic/editbox.h"
+#include "ui_basic/listselect.h"
 #include "ui_basic/table.h"
+#include "ui_basic/textarea.h"
 #include "wui/gamechatpanel.h"
 
 #include <string>
 #include <cstring>
 #include <vector>
-
-#include "base.h"
 
 class Net_Open_Game;
 struct Net_Game_info;
@@ -62,6 +62,7 @@ private:
 	uint32_t                                    m_butw;
 	uint32_t                                    m_buth;
 	uint32_t                                    m_lisw;
+	int32_t                                     m_namechange;
 	uint32_t                                    m_fs;
 	std::string                                 m_fn;
 	UI::Textarea                                title, m_users, m_opengames;
@@ -71,12 +72,12 @@ private:
 	UI::Callback_IDButton<Fullscreen_Menu_NetSetupGGZ, int32_t> back;
 	UI::EditBox                                 playername;
 	UI::EditBox                                 servername;
-	UI::Table<const Net_Player    * const>      usersonline;
-	UI::Table<const Net_Open_Game * const>      opengames;
-	GameChatPanel                             * chat;
+	UI::Table<const Net_Player * const>         usersonline;
+	UI::Listselect<Net_Open_Game>               opengames;
+	GameChatPanel                               chat;
 
-	void fillServersList(std::vector<Net_Game_Info>);
-	void fillUserList   (std::vector<Net_Player>);
+	void fillServersList(std::vector<Net_Game_Info> const &);
+	void fillUserList   (std::vector<Net_Player> const &);
 
 	void connectToMetaserver();
 
