@@ -1278,8 +1278,7 @@ void NetHost::handle_network ()
 #if HAVE_GGZ
 	// if this is a ggz game, handle the ggz network
 	if (use_ggz)
-		if (!d->game) // can be removed once the ggz problem (>8 players) is fixed
-			NetGGZ::ref().data();
+		NetGGZ::ref().data();
 #endif
 
 	// Check if we hear anything from our clients

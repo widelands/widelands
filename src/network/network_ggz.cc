@@ -32,6 +32,9 @@ static NetGGZ *ggzobj = 0;
 static GGZMod *mod = 0;
 static GGZServer *ggzserver = 0;
 
+
+/// Constructor of NetGGZ.
+/// It is private to avoid the creation of more than one ggz object.
 NetGGZ::NetGGZ()
 {
 	use_ggz = false;
@@ -43,23 +46,32 @@ NetGGZ::NetGGZ()
 	tableupdate = false;
 }
 
+
+/// \returns the _one_ ggzobject. There should be only this one object and it
+/// _must_ be used in all cases.
 NetGGZ & NetGGZ::ref() {
 	if (!ggzobj)
 		ggzobj = new NetGGZ();
 	return *ggzobj;
 }
 
+
+/// sets the locale ggz core to "initialized"
 void NetGGZ::init()
 {
 	use_ggz = true;
 	log(">> GGZ: initialized\n");
 }
 
+
+/// \returns true, if ggz is used
 bool NetGGZ::used()
 {
 	return use_ggz;
 }
 
+
+/// connects to the metaserver
 bool NetGGZ::connect()
 {
 	int32_t ret;
@@ -97,6 +109,8 @@ bool NetGGZ::connect()
 }
 
 
+/// initializes a locale ggzserver object to save the data submitted by the
+/// metaserver
 void NetGGZ::ggzmod_server(GGZMod *cbmod, GGZModEvent e, const void *cbdata)
 {
 	log("GGZ ## ggzmod_server\n");
@@ -110,64 +124,7 @@ void NetGGZ::ggzmod_server(GGZMod *cbmod, GGZModEvent e, const void *cbdata)
 }
 
 
-/// checks if new data arrived via network and handles the data
-void NetGGZ::data()
-{
-	if (!used())
-		return;
-
-	int32_t op;
-	char *ipstring;
-	char *greeter;
-	int32_t greeterversion;
-	char ipaddress[17];
-	int32_t fd = m_fd;
-
-	struct timeval timeout;
-	timeout.tv_sec = 0;
-	timeout.tv_usec = 0;
-	fd_set fdset;
-	FD_ZERO(&fdset);
-	FD_SET(fd, &fdset);
-
-	int32_t ret = select(fd + 1, &fdset, NULL, NULL, &timeout);
-	if (ret <= 0) return;
-	log("GGZ ## select() returns: %i for fd %i\n", ret, fd);
-
-	ret = ggz_read_int(fd, &op);
-	log("GGZ ## received opcode: %i (%i)\n", op, ret);
-	if (ret < 0)
-	{
-		close(fd);
-		ggzmod_disconnect(mod);
-		ggzmod_free(mod);
-		use_ggz = false;
-		return;
-	}
-
-	switch (op) {
-	case op_greeting:
-		ggz_read_string_alloc(fd, &greeter);
-		ggz_read_int(fd, &greeterversion);
-		log("GGZ ## server is: '%s' '%i'\n", greeter, greeterversion);
-		ggz_free(greeter);
-		break;
-	case op_request_ip:
-		log("GGZ ## ip request!\n");
-		snprintf(ipaddress, sizeof(ipaddress), "%i.%i.%i.%i", 255, 255, 255, 255);
-		ggz_write_int(fd, op_reply_ip);
-		ggz_write_string(fd, ipaddress);
-		break;
-	case op_broadcast_ip:
-		ggz_read_string_alloc(fd, &ipstring);
-		log("GGZ ## ip broadcast: '%s'\n", ipstring);
-		server_ip_addr = ggz_strdup(ipstring);
-		ggz_free(ipstring);
-		break;
-	default: log("GGZ ## opcode unknown!\n");
-	}
-}
-
+// not used?
 bool NetGGZ::host()
 {
 	int32_t spectator, seat;
@@ -187,7 +144,7 @@ bool NetGGZ::host()
 }
 
 
-/// returns the ip of the server, if connected
+/// \returns the ip of the server, if connected
 const char *NetGGZ::ip()
 {
 	return server_ip_addr;
@@ -283,6 +240,73 @@ bool NetGGZ::usedcore()
 	return (ggzserver != 0);
 }
 
+
+
+/// checks if the widelands game server module sent new data or whether it
+/// requests any data - this is only useful, when the player is in a table
+void NetGGZ::data()
+{
+	if (!used())
+		return;
+
+	int32_t op;
+	char *ipstring;
+	char *greeter;
+	int32_t greeterversion;
+	char ipaddress[17];
+	int32_t fd = m_fd;
+
+	struct timeval timeout;
+	timeout.tv_sec = 0;
+	timeout.tv_usec = 0;
+	fd_set fdset;
+	FD_ZERO(&fdset);
+	FD_SET(fd, &fdset);
+
+	int32_t ret = select(fd + 1, &fdset, NULL, NULL, &timeout);
+	if (ret <= 0) return;
+	log("GGZ ## select() returns: %i for fd %i\n", ret, fd);
+
+	ret = ggz_read_int(fd, &op);
+	log("GGZ ## received opcode: %i (%i)\n", op, ret);
+	if (ret < 0)
+	{
+		close(fd);
+		ggzmod_disconnect(mod);
+		ggzmod_free(mod);
+		use_ggz = false;
+		return;
+	}
+
+	switch (op) {
+	case op_greeting:
+		ggz_read_string_alloc(fd, &greeter);
+		ggz_read_int(fd, &greeterversion);
+		log("GGZ ## server is: '%s' '%i'\n", greeter, greeterversion);
+		ggz_free(greeter);
+		break;
+	case op_request_ip:
+		log("GGZ ## ip request!\n");
+		snprintf(ipaddress, sizeof(ipaddress), "%i.%i.%i.%i", 255, 255, 255, 255);
+		ggz_write_int(fd, op_reply_ip);
+		ggz_write_string(fd, ipaddress);
+		break;
+	case op_broadcast_ip:
+		ggz_read_string_alloc(fd, &ipstring);
+		log("GGZ ## ip broadcast: '%s'\n", ipstring);
+		server_ip_addr = ggz_strdup(ipstring);
+		ggz_free(ipstring);
+		break;
+	default: log("GGZ ## opcode unknown!\n");
+	}
+}
+
+
+//\FIXME: mallformed updatedata, if the user is in a room and too many seats
+//        are open (~ > 4).
+/// checks for events on server, room and game
+/// if data is pending the ggzcore_*_read_data function will call the fitting
+/// callback function
 void NetGGZ::datacore()
 {
 	GGZGame *game;
@@ -303,6 +327,8 @@ void NetGGZ::datacore()
 }
 
 
+/// callback function for all important server events
+/// calls \ref event_server()
 GGZHookReturn NetGGZ::callback_server
 	(uint32_t id, const void *cbdata, const void *) //void * user)
 {
@@ -313,6 +339,8 @@ GGZHookReturn NetGGZ::callback_server
 }
 
 
+/// callback function for all important room events
+/// calls \ref event_room()
 GGZHookReturn NetGGZ::callback_room
 	(uint32_t id, const void *cbdata, const void *) //void * user)
 {
@@ -323,6 +351,8 @@ GGZHookReturn NetGGZ::callback_room
 }
 
 
+/// callback function for all important game events
+/// calls \ref event_game()
 GGZHookReturn NetGGZ::callback_game
 	(uint32_t id, const void *cbdata, const void *) //void * user)
 {
@@ -333,7 +363,9 @@ GGZHookReturn NetGGZ::callback_game
 }
 
 
-void NetGGZ::event_server(uint32_t id, const void *cbdata) {
+/// handles all important server events
+void NetGGZ::event_server(uint32_t id, const void *cbdata)
+{
 	GGZGameType *type;
 	GGZGame *game;
 	int32_t num, i;
@@ -435,7 +467,10 @@ void NetGGZ::event_server(uint32_t id, const void *cbdata) {
 	}
 }
 
-void NetGGZ::event_room(uint32_t id, const void *cbdata) {
+
+/// handles all important room events
+void NetGGZ::event_room(uint32_t id, const void *cbdata)
+{
 	int32_t i, num;
 	GGZTable *table;
 
@@ -489,14 +524,15 @@ void NetGGZ::event_room(uint32_t id, const void *cbdata) {
 			break;
 		case GGZ_CHAT_EVENT:
 			log("GGZCORE/room ## -- chat message\n");
-			const GGZChatEventData * msg =
-				static_cast<const GGZChatEventData *>(cbdata);
-			formatedGGZChat(msg->message, msg->sender);
+			recievedGGZChat(cbdata);
 			break;
 	}
 }
 
-void NetGGZ::event_game(uint32_t id, const void *cbdata) {
+
+/// handles all important game events
+void NetGGZ::event_game(uint32_t id, const void *cbdata)
+{
 	GGZGame *game;
 	GGZTable *table;
 	GGZGameType *gametype;
@@ -569,6 +605,7 @@ void NetGGZ::event_game(uint32_t id, const void *cbdata) {
 	}
 }
 
+
 /// \returns the tables in the room
 std::vector<Net_Game_Info> const & NetGGZ::tables()
 {
@@ -581,7 +618,10 @@ std::vector<Net_Player>   const & NetGGZ::users()
 	return userlist;
 }
 
-void NetGGZ::write_userlist() {
+
+/// writes the list of online users after an user update arrived
+void NetGGZ::write_userlist()
+{
 	userlist.clear();
 	if (!ggzserver)
 		return;
@@ -611,7 +651,10 @@ void NetGGZ::write_userlist() {
 }
 
 
-void NetGGZ::join(const char *tablename) {
+/// Called by the client, to join an existing table (game) and to add all
+/// hooks to get informed about all important events
+void NetGGZ::join(const char *tablename)
+{
 	GGZGameType *type;
 	GGZGame *game;
 	int32_t i, num;
@@ -664,6 +707,9 @@ void NetGGZ::join(const char *tablename) {
 	request_server_ip();
 }
 
+
+/// Called by the host, to launch a new table (game) and to add all
+/// hooks to get informed about all important events
 void NetGGZ::launch()
 {
 	GGZGame *game;
@@ -689,26 +735,51 @@ void NetGGZ::launch()
 	ggzcore_game_launch(game);
 }
 
+
+/// Sends a request for the ip of the connected game server
 void NetGGZ::request_server_ip()
 {
 	if (used())
 		ggz_write_int(gamefd, op_request_ip);
 }
 
+
 /// Sends a chat message via ggz room chat
 void NetGGZ::send(std::string const & msg)
 {
 	if (!usedcore())
 		return;
-	int16_t sent = ggzcore_room_chat(room, GGZ_CHAT_NORMAL, "", msg.c_str());
+	int16_t sent;
+	if (msg.size() && msg.substr(0, 1) == "@") {
+		// Format a personal message
+		size_t space = msg.find_first_of(" ");
+		if (space >= msg.size() - 1)
+			return;
+		std::string to = msg.substr(1, space - 1);
+		std::string pm = msg.substr(space + 1, msg.size() - space);
+		sent = ggzcore_room_chat(room, GGZ_CHAT_PERSONAL, to.c_str(), pm.c_str());
+		// Add the pm to own message list
+		formatedGGZChat(pm, _("YOU @ ") + to, false, true);
+	} else
+		sent = ggzcore_room_chat(room, GGZ_CHAT_NORMAL, "", msg.c_str());
 	if (sent < 0)
 		log("GGZCORE/room/chat ## error sending message!\n");
 }
 
 
+/// Called when a chatmessage was received.
+void NetGGZ::recievedGGZChat(const void *cbdata)
+{
+	const GGZChatEventData * msg = static_cast<const GGZChatEventData *>(cbdata);
+	bool system = msg->type == GGZ_CHAT_ANNOUNCE;
+	bool pm = msg->type == GGZ_CHAT_PERSONAL;
+	formatedGGZChat(msg->message, msg->sender, system, pm);
+}
+
+
 /// Send a formated message to the chat menu
 void NetGGZ::formatedGGZChat
-	(std::string const & msg, std::string const & sender, bool system)
+	(std::string const & msg, std::string const & sender, bool system, bool pm)
 {
 	ChatMessage c;
 	c.time = WLApplication::get()->get_time();
@@ -719,6 +790,8 @@ void NetGGZ::formatedGGZChat
 	}
 	if (system)
 		c.playern = -1;
+	else if (pm)
+		c.playern = 3;
 	else
 		c.playern = 7;
 	c.msg = msg;

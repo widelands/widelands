@@ -102,20 +102,27 @@ struct NetGGZ : public ChatProvider {
 		servername = name;
 	}
 
-	// Implementation of ChatProvider
+	// ChatProvider: sends a message via GGZnetwork.
 	void send(std::string const &);
 
-	std::vector<ChatMessage> const & getMessages() const {
-		return messages;
-	}
-
+	// ChatProvider: adds the message to the message list and calls parent.
 	void receive(ChatMessage const & msg) {
 		messages.push_back(msg);
 		ChatProvider::send(msg);
 	}
 
+	// ChatProvider: returns the list of chatmessages.
+	std::vector<ChatMessage> const & getMessages() const {
+		return messages;
+	}
+
+	// Called when a message is recieved via GGZnetwork.
+	void recievedGGZChat(const void *cbdata);
+
+	// Adds a GGZchatmessage in selected format to the list of chatmessages.
 	void formatedGGZChat
-		(std::string const &, std::string const &, bool system = false);
+		(std::string const &, std::string const &,
+		 bool system = false, bool pm = false);
 
 private:
 	NetGGZ();

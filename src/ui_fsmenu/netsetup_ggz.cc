@@ -164,9 +164,8 @@ void Fullscreen_Menu_NetSetupGGZ::think ()
 		connectToMetaserver();
 	}
 
-	// Check ggz ports for new data
+	// Check ggz peers for new data
 	NetGGZ::ref().datacore();
-	NetGGZ::ref().data();
 
 	if (NetGGZ::ref().updateForUsers())
 		fillUserList(NetGGZ::ref().users());
