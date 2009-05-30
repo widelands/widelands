@@ -108,11 +108,11 @@ struct Panel : public Object {
 	uint32_t get_bborder() const {return _bborder;}
 
 	uint32_t get_inner_w() const {
-		assert((_lborder + _rborder) < _w);
+		assert((_lborder + _rborder) <= _w);
 		return _w - (_lborder + _rborder);
 	}
 	uint32_t get_inner_h() const {
-		assert((_tborder + _bborder) < _h);
+		assert((_tborder + _bborder) <= _h);
 		return _h - (_tborder + _bborder);
 	}
 
