@@ -50,7 +50,8 @@ SDL_Surface * LoadImage(char const * const filename)
 	FileRead fr;
 	SDL_Surface * surf;
 
-	fr.Open(*g_fs, filename);
+	//fastOpen tries to use mmap
+	fr.fastOpen(*g_fs, filename);
 
 	surf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 
@@ -341,8 +342,8 @@ uint32_t Graphic::get_picture(uint8_t const module, char const * const fname) {
 			log("WARNING: Could not open %s: %s\n", fname, e.what());
 			return 0;
 		}
-
 		// Convert the surface accordingly
+
 		SDL_Surface & use_surface = *SDL_DisplayFormatAlpha(bmp);
 
 		SDL_FreeSurface(bmp);
@@ -596,6 +597,15 @@ uint32_t Graphic::create_surface(int32_t w, int32_t h)
 */
 void Graphic::free_surface(uint32_t const picid) {
 	assert(picid < m_pictures.size());
+	if
+	  (m_pictures[picid].module != PicMod_Font &&
+	    m_pictures[picid].module != PicSurface)
+	{
+	  log
+	    ("Graphic::free_surface ignoring free of %u %u %s\n",
+	     picid, m_pictures[picid].module, m_pictures[picid].u.fname);
+	  return;
+	}
 	assert
 		(m_pictures[picid].module == PicMod_Font
 		 ||

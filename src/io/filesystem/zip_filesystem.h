@@ -43,6 +43,9 @@ struct ZipFilesystem : public FileSystem {
 	virtual bool FileExists (std::string const & path);
 
 	virtual void * Load(std::string const & fname, size_t & length);
+	virtual void * fastLoad
+		(std::string const & fname, size_t & length, bool & fast);
+
 	virtual void Write
 		(std::string const & fname, void const * data, int32_t length);
 	virtual void EnsureDirectoryExists(std::string const & dirname);

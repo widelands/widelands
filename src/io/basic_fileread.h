@@ -22,6 +22,7 @@
 
 #include "io/filesystem/filesystem.h"
 #include "machdep.h"
+#include "sys/mman.h"
 
 #include <cassert>
 #include <limits>
@@ -46,7 +47,7 @@ template<typename Base> struct basic_FileRead : public Base {
 	struct File_Boundary_Exceeded : public Base::_data_error {
 		File_Boundary_Exceeded() : Base::_data_error("end of file") {}
 	};
-	basic_FileRead () : data(0) {}; /// Create the object with nothing to read.
+	basic_FileRead () : data(0), m_fast(0) {}; /// Create the object with nothing to read.
 	~basic_FileRead() {if (data) Close();} /// Close the file if open.
 
 	/// Loads a file into memory. Reserves one additional byte which is zeroed,
@@ -60,6 +61,11 @@ template<typename Base> struct basic_FileRead : public Base {
 		filepos = 0;
 	}
 
+	void fastOpen(FileSystem & fs, const char * const filename) {
+		data = static_cast<char *>(fs.fastLoad(filename, length, m_fast));
+		filepos = 0;
+	}
+
 	/// Works just like Open, but returns false when the load fails.
 	bool TryOpen(FileSystem & fs, const char * const filename) {
 		try {Open(fs, filename);} catch (const std::exception &) {return false;}
@@ -67,7 +73,15 @@ template<typename Base> struct basic_FileRead : public Base {
 	}
 
 	/// Frees allocated memory.
-	void Close() {assert(data); free(data); data = 0;}
+	void Close() {
+		assert(data);
+		if (m_fast) {
+			munmap(data, length);
+		} else {
+			free(data);
+		}
+		data = 0;
+	}
 
 	size_t GetSize() const throw () {return length;}
 	bool EndOfFile() const throw () {return length <= filepos;}
@@ -141,6 +155,7 @@ private:
 	char * data;
 	size_t length;
 	Pos    filepos;
+	bool   m_fast;
 };
 
 #endif

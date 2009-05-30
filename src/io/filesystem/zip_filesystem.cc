@@ -340,6 +340,14 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 	return result;
 }
 
+// don't have a faster way to load zip files yet.
+void* ZipFilesystem::fastLoad
+	(const std::string & fname, size_t & length, bool & fast)
+{
+	fast = false;
+	return Load(fname, length);
+}
+
 /**
  * Write the given block of memory to the repository.
  * Throws an exception if it fails.

@@ -22,9 +22,10 @@
 #include "filesystem_exceptions.h"
 #include "wexception.h"
 #include "zip_filesystem.h"
+#include "log.h"
 
 #include <sys/stat.h>
-
+#include <sys/mman.h>
 
 #include <cassert>
 #include <cerrno>
@@ -36,6 +37,8 @@
 #else
 #include <glob.h>
 #include <sys/statvfs.h>
+#include <sys/types.h>
+#include <fcntl.h>
 #endif
 
 #include "io/streamread.h"
@@ -356,7 +359,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		//printf("     fullname    = %s\n", fullname.c_str());
 		//printf("------------------------------------------\n");
 
-		file = fopen(fullname.c_str(), "rb");
+		file = fopen(fullname.c_str(), "rbm");
 		if (not file)
 			throw File_error("RealFSImpl::Load", fullname.c_str());
 
@@ -377,11 +380,14 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 
 		// allocate a buffer and read the entire file into it
 		data = malloc(size + 1); //  FIXME memory leak!
-		if (size and fread(data, size, 1, file) != 1)
+		int result = fread(data, size, 1, file);
+		if (size and (result != 1)) {
+		  assert(false);
 			throw wexception
 				("RealFSImpl::Load: read failed for %s (%s) with size %lu",
 				 fname.c_str(), fullname.c_str(),
 				 static_cast<long unsigned int>(size));
+		}
 		static_cast<int8_t *>(data)[size] = 0;
 
 		fclose(file);
@@ -399,6 +405,33 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		}
 		throw;
 	}
+}
+
+void * RealFSImpl::fastLoad
+	(const std::string & fname, size_t & length, bool & fast)
+{
+#ifdef WIN32
+	fast = false;
+	return Load(fname, length);
+#else
+	const std::string fullname = FS_CanonicalizeName(fname);
+	int file = 0;
+	void * data = 0;
+
+	file = open(fullname.c_str(), O_RDWR|O_NOATIME);
+	length = lseek(file, 0, SEEK_END);
+	lseek(file, 0, SEEK_SET);
+
+	data = mmap(0, length + 1, PROT_READ|PROT_WRITE, MAP_SHARED, file, 0);
+	fast = true;
+
+	assert(data);
+	assert(data != MAP_FAILED);
+
+	close(file);
+
+	return data;
+#endif
 }
 
 /**

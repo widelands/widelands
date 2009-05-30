@@ -62,6 +62,9 @@ struct FileSystem {
 	virtual bool FileExists (std::string const & path) = 0;
 
 	virtual void * Load(const std::string & fname, size_t & length) = 0;
+	virtual void * fastLoad
+		(const std::string & fname, size_t & length, bool & fast) = 0;
+
 	virtual void Write
 		(std::string const & fname, void const * data, int32_t length)
 		= 0;
