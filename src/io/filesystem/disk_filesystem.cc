@@ -28,6 +28,7 @@
 
 #include <cassert>
 #include <cerrno>
+#include <boost/numeric/conversion/cast.hpp>
 
 #ifdef WIN32
 #include <windows.h>
@@ -525,15 +526,20 @@ StreamWrite * RealFSImpl::OpenStreamWrite(std::string const & fname) {
 
 unsigned long RealFSImpl::DiskSpace() {
 #ifdef WIN32
-	ULARGE_INTEGER numbytes = 0, numfreebytes = 0, freeavailable = 0;
-	return
-		GetDiskFreeSpaceEx
+	ULARGE_INTEGER numbytes, numfreebytes, freeavailable;
+        if 
+	  (GetDiskFreeSpaceEx
 			(FS_CanonicalizeName(m_directory).c_str(),
 			 &freeavailable,
 			 &numbytes,
-			 &numfreebytes)
-		? 0 : boost::numeric_cast<unsigned long, ULARGE_INTEGER>
-			::convert(freeavailable);
+			 &numfreebytes))
+	{
+		//if more than 2G free space report that much
+		if (freeavailable.HighPart)
+			return std::numeric_limits<unsigned long>::max();
+		return freeavailable.LowPart;
+	}
+	return 0;
 
 #else
 	struct statvfs svfs;
