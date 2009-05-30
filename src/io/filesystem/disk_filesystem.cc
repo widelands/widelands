@@ -525,14 +525,14 @@ StreamWrite * RealFSImpl::OpenStreamWrite(std::string const & fname) {
 
 unsigned long RealFSImpl::DiskSpace() {
 #ifdef WIN32
-	PULARGE_INTEGER numbytes = 0, numfreebytes = 0, freeavailable = 0;
+	ULARGE_INTEGER numbytes = 0, numfreebytes = 0, freeavailable = 0;
 	return
 		GetDiskFreeSpaceEx
 			(FS_CanonicalizeName(m_directory).c_str(),
 			 &freeavailable,
 			 &numbytes,
 			 &numfreebytes)
-		? 0 : boost::numeric_cast<unsigned long, PULARGE_INTEGER>
+		? 0 : boost::numeric_cast<unsigned long, ULARGE_INTEGER>
 			::convert(freeavailable);
 
 #else
