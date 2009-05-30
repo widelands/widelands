@@ -3129,8 +3129,8 @@ bool Widelands::UniqueRandomMapInfo::setFromIdString
 		nums[ix] = nums[ix] ^ xorr;
 		xorr -= 7;
 		xorr -= ix;
-		while (xorr < 0)
-			xorr += 32;
+		if (xorr < 0)
+		  xorr &= 0x0000003f;
 	}
 
 	//  check if xxor was right
@@ -3254,8 +3254,8 @@ void Widelands::UniqueRandomMapInfo::generateIdString
 		nums[ix] = nums[ix] ^ xorr;
 		xorr -= 7;
 		xorr -= ix;
-		while (xorr < 0)
-			xorr += 32;
+		if (xorr < 0)
+		  xorr &= 0x0000003f;
 	}
 
 	//  translate it to ASCII
