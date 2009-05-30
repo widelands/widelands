@@ -164,7 +164,8 @@ void Road::_mark_map(Editor_Game_Base & egbase)
 	FCoords curf = map.get_fcoords(m_path.get_start());
 
 	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
-	for (Path::Step_Vector::size_type steps = 0; steps <= nr_steps; ++steps) {
+	for (Path::Step_Vector::size_type steps = 0; steps <  nr_steps + 1; ++steps)
+	{
 		if (steps > 0 && steps < m_path.get_nsteps())
 			set_position(egbase, curf);
 
@@ -198,7 +199,7 @@ void Road::_unmark_map(Editor_Game_Base & egbase) {
 	FCoords curf(m_path.get_start(), &map[m_path.get_start()]);
 
 	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
-	for (Path::Step_Vector::size_type steps = 0; steps <= nr_steps; ++steps) {
+	for (Path::Step_Vector::size_type steps = 0; steps < nr_steps + 1; ++steps) {
 		if (steps > 0 && steps < m_path.get_nsteps())
 			unset_position(egbase, curf);
 

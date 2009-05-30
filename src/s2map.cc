@@ -740,7 +740,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 
 		const Widelands::Player_Number nr_players = m_map.get_nrplayers();
 		log("Checking starting position for all %u players:\n", nr_players);
-		for (Widelands::Player_Number p = 1; p <= nr_players; ++p) {
+		iterate_player_numbers(p, nr_players) {
 			log("-> Player %u: ", p);
 
 			Widelands::Coords starting_pos = m_map.get_starting_pos(p);

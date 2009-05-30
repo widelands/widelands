@@ -163,8 +163,7 @@ void Table<void *>::draw(RenderTarget & dst)
 	//  draw text lines
 	int32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
-	assert(1 + idx * lineheight + m_headerheight > m_scrollpos);
-	uint32_t y = 1 + idx * lineheight - m_scrollpos + m_headerheight;
+	int32_t y = 1 + idx * lineheight - m_scrollpos + m_headerheight;
 
 	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 

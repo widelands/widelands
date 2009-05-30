@@ -1061,7 +1061,7 @@ void Profile::write
 					case '\n':
 						// Convert the newlines to WL format.
 						tempstr += " \"\n";
-						for (uint32_t j = 0; j <= spaces; ++j)
+						for (uint32_t j = 0; j < spaces + 1; ++j)
 							tempstr += ' ';
 						tempstr += " \"";
 						break;

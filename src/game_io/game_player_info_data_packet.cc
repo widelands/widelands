@@ -42,7 +42,7 @@ throw (_wexception)
 		uint16_t const packet_version = fr.Unsigned16();
 		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 			uint32_t const max_players = fr.Unsigned16();
-			for (uint32_t i = 1; i <= max_players; ++i) {
+			for (uint32_t i = 1; i < max_players + 1; ++i) {
 				game.remove_player(i);
 				if (fr.Unsigned8()) {
 					bool    const see_all = fr.Unsigned8();
