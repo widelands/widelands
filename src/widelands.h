@@ -36,7 +36,7 @@ typedef uint16_t Military_Influence;
 typedef uint8_t  Player_Number; /// 5 bits used, so 0 .. 31
 inline Player_Number Neutral() throw () {return 0;}
 #define iterate_player_numbers(p, nr_players) \
-   for (Widelands::Player_Number p = 1; p <= nr_players; ++p)
+   for (Widelands::Player_Number p = 1; p < nr_players + 1; ++p)
 
 typedef uint8_t  Terrain_Index;   /// 4 bits used, so 0 .. 15.
 typedef uint8_t  Resource_Index;  /// 4 bits used, so 0 .. 15.
