@@ -512,7 +512,7 @@ void NetGGZ::event_game(uint32_t id, const void *cbdata) {
 			ggzcore_table_init
 				(table,
 				 gametype,
-				 servername.c_str(), 8);
+				 servername.c_str(), 7);
 				 // FIXME: problem in ggz - for some reasons only 8 seats are
 				 // currently available. I already posted this problem to the
 				 // ggz mailinglist. -- nasenbaer
