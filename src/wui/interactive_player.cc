@@ -114,7 +114,7 @@ void ChatDisplay::draw(RenderTarget & dst)
 		Displayed d = {msgs[idx - 1].toPrintable(), 0};
 
 		g_fh->get_size(UI_FONT_SMALL, d.text, &w, &d.h, get_w());
-		if (d.h + static_cast<int32_t>(totalheight) > get_h())
+		if (d.h + totalheight > get_h())
 			break;
 
 		displaylist.push_back(d);

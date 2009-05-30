@@ -207,8 +207,8 @@ void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
 	if (not m_enabled) return;
 	m_highlighted =
 		pointer >= m_cursor_pos and  pointer <= m_cursor_pos + m_cursor_size
-		and
-		y >= 0 and y < get_h() and x >= 0 and x < get_w();
+		and y >= 0 and static_cast<uint32_t>(y) < get_h()
+		and x >= 0 and static_cast<uint32_t>(x) < get_w();
 
 	if (not m_pressed) return;
 
@@ -355,9 +355,10 @@ bool HorizontalSlider::handle_mousepress
 		cursor_pressed(x);
 		return true;
 	} else if
-		(y >= get_y_gap() - 2 and y <= get_h() - get_y_gap() + 2
-		 and
-		 x >= get_x_gap()     and x <  get_w() - get_x_gap())
+		(y >= get_y_gap() - 2 and
+		 y <= static_cast<int32_t>(get_h()) - get_y_gap() + 2 and
+		 x >= get_x_gap() and
+		 x <  static_cast<int32_t>(get_w()) - get_x_gap())
 	{ //  click on bar
 		bar_pressed(x, get_x_gap());
 		return true;
@@ -428,9 +429,10 @@ bool VerticalSlider::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 		cursor_pressed(y);
 		return true;
 	} else if
-		(y >= get_y_gap()      and  y <= get_h() - get_y_gap()
-		 and
-		 x >= get_x_gap() - 2  and  x <  get_w() - get_x_gap() + 2)
+		(y >= get_y_gap() and
+		 y <= static_cast<int32_t>(get_h()) - get_y_gap() and
+		 x >= get_x_gap() - 2 and
+		 x < static_cast<int32_t>(get_w()) - get_x_gap() + 2)
 	{ //  click on bar
 		bar_pressed(y, get_y_gap());
 		return true;

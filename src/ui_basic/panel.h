@@ -82,8 +82,8 @@ struct Panel : public Object {
 
 	int32_t get_x() const {return _x;}
 	int32_t get_y() const {return _y;}
-	int32_t get_w() const {return _w;}
-	int32_t get_h() const {return _h;}
+	uint32_t get_w() const {return _w;}
+	uint32_t get_h() const {return _h;}
 
 	virtual bool is_snap_target() const {return false;}
 	uint16_t get_border_snap_distance() const {return _border_snap_distance;}
@@ -107,8 +107,14 @@ struct Panel : public Object {
 	uint32_t get_tborder() const {return _tborder;}
 	uint32_t get_bborder() const {return _bborder;}
 
-	int32_t get_inner_w() const {return _w - (_lborder + _rborder);}
-	int32_t get_inner_h() const {return _h - (_tborder + _bborder);}
+	uint32_t get_inner_w() const {
+		assert((_lborder + _rborder) < _w);
+		return _w - (_lborder + _rborder);
+	}
+	uint32_t get_inner_h() const {
+		assert((_tborder + _bborder) < _h);
+		return _h - (_tborder + _bborder);
+	}
 
 	const Panel * get_next_sibling () const {return _next;}
 	Panel       * get_next_sibling ()       {return _next;}

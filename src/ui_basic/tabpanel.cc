@@ -67,8 +67,8 @@ Tab_Panel::Tab_Panel
 */
 void Tab_Panel::resize()
 {
-	int32_t w;
-	int32_t h;
+	uint32_t w;
+	uint32_t h;
 
 	// size of button row
 	w = TP_BUTTON_WIDTH * m_tabs.size();
@@ -154,7 +154,7 @@ void Tab_Panel::activate(uint32_t idx)
 void Tab_Panel::draw(RenderTarget & dst)
 {
 	uint32_t idx;
-	int32_t x;
+	uint32_t x;
 
 	// draw the background
 	compile_assert(2 < TP_BUTTON_WIDTH);

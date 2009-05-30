@@ -17,6 +17,9 @@
  *
  */
 
+#define __STDC_LIMIT_MACROS
+#include <stdint.h>
+
 #include "mapview.h"
 
 #include "graphic/graphic.h"
@@ -53,7 +56,12 @@ void Map_View::warp_mouse_to_node(Widelands::Coords const c) {
 
 	//  If the user has scrolled the field outside the viewable area, he most
 	//  surely doesn't want to jump there.
-	if (p.x < get_w() and p.y < get_h()) {
+	assert(get_w() <= static_cast<uint32_t>(INT32_MAX));
+	assert(get_h() <= static_cast<uint32_t>(INT32_MAX));
+	if
+	  (p.x < static_cast<int32_t>(get_w()) and
+	   p.y < static_cast<int32_t>(get_h()))
+	{
 		if      (p.x <= 0)
 			warp_mouse_to_node(Widelands::Coords(c.x + map.get_width (), c.y));
 		else if (p.y <= 0)

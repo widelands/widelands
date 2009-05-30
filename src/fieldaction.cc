@@ -345,14 +345,16 @@ void FieldActionWindow::init()
 	// where the field is, to allow better view
 	const Point mouse = get_mouse_position();
 	if
-		(0 <= mouse.x and mouse.x < get_w()
+		(0 <= mouse.x and static_cast<uint32_t>(mouse.x) < get_w()
 		 and
-		 0 <= mouse.y and mouse.y < get_h())
+		 0 <= mouse.y and static_cast<uint32_t>(mouse.y) < get_h())
 	{
 		set_pos
 			(Point(get_x(), get_y())
 			 +
-			 Point(0, (mouse.y < get_h() / 2 ? 1 : -1) * get_h()));
+			 Point
+			 (0, (static_cast<uint32_t>(mouse.y) < get_h() / 2 ? 1 : -1)
+			     * get_h()));
 		move_inside_parent();
 	}
 
