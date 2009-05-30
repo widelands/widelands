@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4186\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:54+0000\n"
-"PO-Revision-Date: 2009-05-12 16:41+0100\n"
+"POT-Creation-Date: 2009-05-30 23:37+0000\n"
+"PO-Revision-Date: 2009-05-31 01:36+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -101,11 +101,11 @@ msgid "A Multiplayer-battle-map on a X-Shaped island."
 msgstr "Eine Mehrspielerkarte auf einer X-förmigen Insel"
 
 #: ../../maps/Finlakes.wmf/elemental:9
-msgid "Finish Lakes"
+msgid "Finnish Lakes"
 msgstr "Finnische Seen"
 
 #: ../../maps/Finlakes.wmf/elemental:11
-msgid "These are the beautiful finish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
+msgid "These are the beautiful finnish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
 msgstr "Dies sind die wunderschönen finnischen Lande, die sich vor allem durch Seen, Flüsse, uralte Wälder und Berge auszeichnen. Nun ist es an Dir, Deinen Weg zu finden..."
 
 #: ../../maps/Firegames.wmf/elemental:7
@@ -211,6 +211,14 @@ msgstr "Land der Flüsse"
 #: ../../maps/Riverlands.wmf/elemental:9
 msgid "A mystical land, full of different landscapes, which are all crossed by a handful of big rivers."
 msgstr "Ein mystisches Land, voll von verschiedenen Landschaften, die alle durch eine handvoll großer Flüsse durchflossen werden."
+
+#: ../../maps/Sun of fire.wmf/elemental:9
+msgid "The ancient sun of fire"
+msgstr "Die Sonne des Feuers"
+
+#: ../../maps/Sun of fire.wmf/elemental:11
+msgid "For hundreds of years this island was kept as sanctuary of the Gods. No human ever ventured to set a foot on it. But now, that a tribe was finally barefaced enough to settle on the coast of that island, a lot other followed afterwards."
+msgstr "Seit Hunderten von Jahren wurde diese Insel als Heiligtum der Götter gesehen. Kein Mensch hat je gewagt ein Fuß auf sie zu setzen. Doch als nun ein Stamm so unverschämt genug war, eine Siedlung an seinem Ufer zu errichten, folgten ihnen schnell etliche andere."
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
