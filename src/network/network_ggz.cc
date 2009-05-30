@@ -445,10 +445,6 @@ void NetGGZ::event_room(uint32_t id, const void *cbdata) {
 
 	switch (id) {
 		case GGZ_TABLE_UPDATE:
-			if (!room)
-				room = ggzcore_server_get_cur_room(ggzserver);
-			ggzcore_room_list_tables(room, -1, 0);
-			break;
 		case GGZ_TABLE_LIST:
 			log("GGZCORE/room ## -- table list\n");
 			if (!room)
@@ -516,7 +512,7 @@ void NetGGZ::event_game(uint32_t id, const void *cbdata) {
 			ggzcore_table_init
 				(table,
 				 gametype,
-				 servername.c_str(), 4);
+				 servername.c_str(), 8);
 				 // FIXME: problem in ggz - for some reasons only 8 seats are
 				 // currently available. I already posted this problem to the
 				 // ggz mailinglist. -- nasenbaer
