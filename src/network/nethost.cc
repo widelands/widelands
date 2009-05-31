@@ -177,6 +177,14 @@ struct HostChatProvider : public ChatProvider {
 		c.playern = h->getLocalPlayerposition();
 		c.sender = h->getLocalPlayername();
 		c.msg = msg;
+		if (c.msg.size() && c.msg.substr(0, 1) == "@") {
+			// Personal message
+			size_t space = c.msg.find_first_of(" ");
+			if (space >= c.msg.size() - 1)
+				return;
+			c.recipient = c.msg.substr(1, space - 1);
+			c.msg = c.msg.substr(space + 1, c.msg.size() - space);
+		}
 		h->send(c);
 	}
 
@@ -497,8 +505,10 @@ void NetHost::sendPlayerCommand(Widelands::PlayerCommand & pc)
 
 /**
  * All chat messages go through this function.
- * The message is sent to clients as needed, and it is forwarded
- * to our local \ref ChatProvider.
+ * If it is a normal message it is sent to clients as needed, and it is
+ * forwarded to our local \ref ChatProvider.
+ * If it is a personal message it will only be send to the recipient and to
+ * the sender (to show that the message was actually sent).
  */
 void NetHost::send(ChatMessage msg)
 {
@@ -511,16 +521,91 @@ void NetHost::send(ChatMessage msg)
 		if (msg.msg.substr(i, 1) == "<")
 			msg.msg.replace(i, 1, "{");
 
-	SendPacket s;
-	s.Unsigned8(NETCMD_CHAT);
-	s.Signed16(msg.playern);
-	s.String(msg.sender);
-	s.String(msg.msg);
-	broadcast(s);
+	if (msg.recipient.empty()) {
+		SendPacket s;
+		s.Unsigned8(NETCMD_CHAT);
+		s.Signed16(msg.playern);
+		s.String(msg.sender);
+		s.String(msg.msg);
+		s.Unsigned8(0);
+		broadcast(s);
 
-	d->chat.receive(msg);
+		d->chat.receive(msg);
 
-	log("[Host]: chat: %s\n", msg.toPlainString().c_str());
+		log("[Host]: chat: %s\n", msg.toPlainString().c_str());
+	} else {// Personal messages
+		SendPacket s;
+		s.Unsigned8(NETCMD_CHAT);
+		s.Signed16(msg.playern);
+		s.String(msg.sender);
+		s.String(msg.msg);
+		s.Unsigned8(1);
+		s.String(msg.recipient);
+
+		// Is this pm for the host player?
+		if (d->localplayername == msg.recipient)
+			d->chat.receive(msg);
+		else { //find the recipient
+			uint32_t i = 0;
+			for (; i < d->settings.users.size(); ++i) {
+				UserSettings const & user = d->settings.users[i];
+				if (user.name == msg.recipient)
+					break;
+			}
+			if (i < d->settings.users.size()) {
+				uint32_t j = 0;
+				for (; j < d->clients.size(); ++j)
+					if (d->clients[j].usernum == static_cast<int32_t>(i))
+						break;
+				if (j < d->clients.size())
+					s.send(d->clients[j].sock);
+				else
+					// Better no wexception it would break the whole game
+					log
+						("WARNING: user was found but no client is connected"
+						 " to it!\n");
+
+				log
+					("[Host]: personal chat: from %s to %s\n",
+					 msg.sender.c_str(), msg.recipient.c_str());
+			} else {
+				s.reset();
+				s.Unsigned8(NETCMD_CHAT);
+				s.Signed16(-2); // System message
+				s.String("");
+				std::string fail = "Failed to send message: Recipient \"";
+				fail += msg.recipient + "\" could not be found!";
+				s.String(fail);
+				s.Unsigned8(0);
+			}
+		}
+		//Now find the sender and send either the message or the failure notice
+		if (d->localplayername == msg.sender) // is host the sender?
+			d->chat.receive(msg);
+		else { // host is not the sender -> get sender
+			uint32_t i = 0;
+			for (; i < d->settings.users.size(); ++i) {
+				UserSettings const & user = d->settings.users[i];
+				if (user.name == msg.sender)
+					break;
+			}
+			if (i < d->settings.users.size()) {
+				uint32_t j = 0;
+				for (; j < d->clients.size(); ++j)
+					if (d->clients[j].usernum == static_cast<int32_t>(i))
+						break;
+				if (j < d->clients.size())
+					s.send(d->clients[j].sock);
+				else
+					// Better no wexception it would break the whole game
+					log
+						("WARNING: user was found but no client is connected"
+						 " to it!\n");
+			} else
+				// Better no wexception it would break the whole game
+				log("WARNING: sender could not be found!");
+		}
+	}
 }
 
 void NetHost::sendSystemChat(char const * const fmt, ...)
@@ -1466,6 +1551,14 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		c.playern = d->settings.users[client.usernum].position;
 		c.sender = d->settings.users[client.usernum].name;
 		c.msg = r.String();
+		if (c.msg.size() && c.msg.substr(0, 1) == "@") {
+			// Personal message
+			size_t space = c.msg.find_first_of(" ");
+			if (space >= c.msg.size() - 1)
+				break;
+			c.recipient = c.msg.substr(1, space - 1);
+			c.msg = c.msg.substr(space + 1, c.msg.size() - space);
+		}
 		send(c);
 		break;
 	}

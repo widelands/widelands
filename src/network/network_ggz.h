@@ -122,7 +122,7 @@ struct NetGGZ : public ChatProvider {
 	// Adds a GGZchatmessage in selected format to the list of chatmessages.
 	void formatedGGZChat
 		(std::string const &, std::string const &,
-		 bool system = false, bool pm = false);
+		 bool system = false, std::string recipient = std::string());
 
 private:
 	NetGGZ();
@@ -147,10 +147,11 @@ private:
 	bool ggzcore_ready;
 	GGZRoom *room;
 
+	std::string username;
 	std::string servername;
 
-	bool tableupdate;
 	bool userupdate;
+	bool tableupdate;
 	std::vector<Net_Game_Info> tablelist;
 	std::vector<Net_Player>    userlist;
 

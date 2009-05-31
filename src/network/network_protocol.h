@@ -26,7 +26,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 10,
+	NETWORK_PROTOCOL_VERSION = 11,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -311,6 +311,8 @@ enum {
 	 * \li Signed16: playernumber - only used for colorization of messages.
 	 * \li String: sender (may be empty to indicate system messages)
 	 * \li String: the message
+	 * \li Unsigned8: whether this is a personal message (0 / 1)
+	 * \li String: the recipient (only filled as personal message)
 	 */
 	NETCMD_CHAT = 28,
 

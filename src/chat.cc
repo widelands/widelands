@@ -26,14 +26,31 @@ std::string ChatMessage::toPrintable() const
 {
 	std::string message = "<p font-size=14 font-face=FreeSerif font-color=#";
 	message += color();
-	if ((msg.size() > 3) & (msg.substr(0, 3) == "/me")) {
-		message += " font-style=italic>-> " + (sender.size() ? sender : "***") +
-			msg.substr(3, msg.length() - 1);
-	} else if (sender.size())
-		message += " font-decoration=underline>" + sender +
-			":</p><p font-size=14 font-face=FreeSerif> " + msg;
-	else
-		message += " font-weight=bold>*** " + msg;
+
+	if (!recipient.empty() && !sender.empty()) {
+	// Personal message handling
+		if ((msg.size() > 3) & (msg.substr(0, 3) == "/me")) {
+			message += ">@" + recipient + " >> </p><p font-size=14";
+			message += " font-face=FreeSerif font-color=#" + color();
+			message += " font-style=italic> " + sender;
+			message += msg.substr(3, msg.length() - 3);
+		} else {
+			message += " font-decoration=underline>" + sender + " @ " + recipient;
+			message += ":</p><p font-size=14 font-face=FreeSerif> " + msg;
+		}
+	} else {
+	// Normal messages handling
+		if ((msg.size() > 3) & (msg.substr(0, 3) == "/me")) {
+			message += " font-style=italic>-> " + (sender.size() ? sender : "***");
+			message += msg.substr(3, msg.length() - 3);
+		} else if (sender.size()) {
+			message += " font-decoration=underline>" + sender;
+			message += ":</p><p font-size=14 font-face=FreeSerif> " + msg;
+		} else
+			message += " font-weight=bold>*** " + msg;
+	}
+
+	// return the formated message
 	return message + "<br></p>";
 }
 

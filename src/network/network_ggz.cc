@@ -208,6 +208,8 @@ void NetGGZ::initcore
 	while (ggzcore_login)
 		datacore();
 	log("GGZCORE ## end loop\n");
+
+	username = playername;
 }
 
 
@@ -735,7 +737,7 @@ void NetGGZ::send(std::string const & msg)
 		std::string pm = msg.substr(space + 1, msg.size() - space);
 		sent = ggzcore_room_chat(room, GGZ_CHAT_PERSONAL, to.c_str(), pm.c_str());
 		// Add the pm to own message list
-		formatedGGZChat(pm, _("YOU @ ") + to, false, true);
+		formatedGGZChat(pm, username, false, to);
 	} else
 		sent = ggzcore_room_chat(room, GGZ_CHAT_NORMAL, "", msg.c_str());
 	if (sent < 0)
@@ -748,20 +750,24 @@ void NetGGZ::recievedGGZChat(const void *cbdata)
 {
 	const GGZChatEventData * msg = static_cast<const GGZChatEventData *>(cbdata);
 	bool system = msg->type == GGZ_CHAT_ANNOUNCE;
-	bool pm = msg->type == GGZ_CHAT_PERSONAL;
-	formatedGGZChat(msg->message, msg->sender, system, pm);
+	std::string recipient;
+	if (msg->type == GGZ_CHAT_PERSONAL)
+		recipient = username;
+	formatedGGZChat(msg->message, msg->sender, system, recipient);
 }
 
 
 /// Send a formated message to the chat menu
 void NetGGZ::formatedGGZChat
-	(std::string const & msg, std::string const & sender, bool system, bool pm)
+	(std::string const & msg, std::string const & sender,
+	 bool system, std::string recipient)
 {
 	ChatMessage c;
 	c.time = WLApplication::get()->get_time();
 	c.sender = !system && sender.empty() ? "<unknown>" : sender;
-	c.playern = system ? -1 : pm ? 3 : 7;
+	c.playern = system ? -1 : recipient.size() ? 3 : 7;
 	c.msg = msg;
+	c.recipient = recipient;
 
 	receive(c);
 }

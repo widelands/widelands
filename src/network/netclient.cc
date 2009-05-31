@@ -599,6 +599,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 		c.playern = packet.Signed16();
 		c.sender = packet.String();
 		c.msg = packet.String();
+		if (packet.Unsigned8())
+			c.recipient = packet.String();
 		d->chatmessages.push_back(c);
 		ChatProvider::send(c); // NoteSender<ChatMessage>
 		break;

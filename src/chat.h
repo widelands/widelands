@@ -50,6 +50,17 @@ struct ChatMessage {
 	std::string sender;
 
 	/**
+	 * A string identifying the recipient of the message.
+	 *
+	 * This string should only be filled for personal messages.
+	 *
+	 * \note This is a string instead of an ID because the backlog of
+	 * chat messages might contain chat from a player who has since left
+	 * the game.
+	 */
+	std::string recipient;
+
+	/**
 	 * The actual chat message
 	 */
 	std::string msg;
