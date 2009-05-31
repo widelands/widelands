@@ -418,11 +418,11 @@ void * RealFSImpl::fastLoad
 	int file = 0;
 	void * data = 0;
 
-	file = open(fullname.c_str(), O_RDWR|O_NOATIME);
+	file = open(fullname.c_str(), O_RDONLY|O_NOATIME);
 	length = lseek(file, 0, SEEK_END);
 	lseek(file, 0, SEEK_SET);
 
-	data = mmap(0, length + 1, PROT_READ|PROT_WRITE, MAP_SHARED, file, 0);
+	data = mmap(0, length, PROT_READ, MAP_PRIVATE, file, 0);
 	fast = true;
 
 	assert(data);
