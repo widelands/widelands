@@ -832,11 +832,13 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				prio *= expand_factor;
 				prio /= 2;
 
-				if (bf->avoid_military)
-					prio /= 5;
-
 				if (bf->enemy_nearby)
 					prio *= 2;
+				else
+					prio -= bf->military_influence * 2;
+
+				if (bf->avoid_military)
+					prio /= 5;
 
 			} else if (bo.type == BuildingObserver::WAREHOUSE) {
 				//  Build one warehouse for ~every 25 productionsites and mines.
