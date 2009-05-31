@@ -1376,7 +1376,7 @@ void WLApplication::mainmenu_multiplayer()
 					break;
 				}
 				default:
-					goto end;
+					break;
 			}
 		}
 
@@ -1415,11 +1415,10 @@ void WLApplication::mainmenu_multiplayer()
 					break;
 				}
 				default:
-					goto end;
+					break;
 			}
 		}
 	}
-end:;
 }
 
 void WLApplication::mainmenu_editor()

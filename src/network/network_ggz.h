@@ -28,6 +28,7 @@
 
 #define ERRMSG "</p><p font-size=14 font-color=#ff6633 font-weight=bold>ERROR: "
 
+#include "build_info.h"
 #include "chat.h"
 #include "network_lan_promotion.h"
 
@@ -100,6 +101,7 @@ struct NetGGZ : public ChatProvider {
 		if (name.empty())
 			name = "WL-Default";
 		servername = name;
+		servername += " (" + build_id() + ")";
 	}
 
 	// ChatProvider: sends a message via GGZnetwork.

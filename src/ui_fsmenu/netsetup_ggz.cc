@@ -194,6 +194,8 @@ void Fullscreen_Menu_NetSetupGGZ::fillServersList
 	opengames.clear();
 	hostgame.set_enabled(true);
 	joingame.set_enabled(false);
+	std::string localservername = servername.text();
+	localservername += " (" + build_id() + ")";
 	for (uint32_t i = 0; i < tables.size(); ++i) {
 		Net_Open_Game newOG;
 		newOG.info = Net_Game_Info(tables[i]);
@@ -211,7 +213,7 @@ void Fullscreen_Menu_NetSetupGGZ::fillServersList
 		// If one of the servers has the same name as the local name of the
 		// users server, we disable the 'hostgame' button to avoid having more
 		// than one server with the same name.
-		if (tables[i].hostname == servername.text())
+		if (tables[i].hostname == localservername)
 			hostgame.set_enabled(false);
 		opengames.add(newOG.info.hostname, newOG, pic);
 	}
