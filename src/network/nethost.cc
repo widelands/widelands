@@ -533,7 +533,7 @@ void NetHost::send(ChatMessage msg)
 		d->chat.receive(msg);
 
 		log("[Host]: chat: %s\n", msg.toPlainString().c_str());
-	} else {// Personal messages
+	} else { //  personal messages
 		SendPacket s;
 		s.Unsigned8(NETCMD_CHAT);
 		s.Signed16(msg.playern);
@@ -553,17 +553,22 @@ void NetHost::send(ChatMessage msg)
 					break;
 			}
 			if (i < d->settings.users.size()) {
-				uint32_t j = 0;
-				for (; j < d->clients.size(); ++j)
-					if (d->clients[j].usernum == static_cast<int32_t>(i))
+				for
+					(struct {
+					 	std::vector<Client>::const_iterator       current;
+					 	std::vector<Client>::const_iterator const end;
+					 } j = {d->clients.begin(), d->clients.end()};;
+					 ++j.current)
+					if        (j.current          == j.end) {
+						//  Better no wexception; it would break the whole game.
+						log
+							("WARNING: user was found but no client is connected to "
+							 "it!\n");
 						break;
-				if (j < d->clients.size())
-					s.send(d->clients[j].sock);
-				else
-					// Better no wexception it would break the whole game
-					log
-						("WARNING: user was found but no client is connected"
-						 " to it!\n");
+					} else if (j.current->usernum == static_cast<int32_t>(i)) {
+						s.send(j.current->sock);
+						break;
+					}
 
 				log
 					("[Host]: personal chat: from %s to %s\n",
