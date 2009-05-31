@@ -786,7 +786,8 @@ void Editor_Game_Base::set_road
 		(roadtype == Road_None or roadtype == Road_Normal or
 		 roadtype == Road_Busy or roadtype == Road_Water);
 
-	if (f.field->get_road(direction) == roadtype) return;
+	if (f.field->get_road(direction) == roadtype)
+		return;
 	f.field->set_road(direction, roadtype);
 
 	FCoords neighbour;

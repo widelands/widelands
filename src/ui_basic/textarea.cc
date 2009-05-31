@@ -154,11 +154,14 @@ void Textarea::expand()
 
 	int32_t x = get_x();
 	int32_t y = get_y();
-	int32_t w, h;
+	uint32_t w, h;
 
 	g_fh->get_size
 		(m_fontname,
-		 m_fontsize, m_text.c_str(), &w, &h, m_multiline ? get_w() : -1);
+		 m_fontsize,
+		 m_text.c_str(),
+		 w, h,
+		 m_multiline ? get_w() : -1);
 
 	if (not m_multiline) {
 		if      (m_align & Align_HCenter)

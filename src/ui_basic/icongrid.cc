@@ -188,9 +188,8 @@ void Icon_Grid::draw(RenderTarget & dst)
 	}
 
 	if (highlight) {
-		int32_t w, h;
-		g_fh->get_size
-			(UI_FONT_SMALL,  m_items[m_highlight].descr.c_str(), &w, &h);
+		uint32_t w, h;
+		g_fh->get_size(UI_FONT_SMALL, m_items[m_highlight].descr.c_str(), w, h);
 		if (w > get_inner_w())
 			set_inner_size(w, get_inner_h());
 		g_fh->draw_string
@@ -220,7 +219,8 @@ int32_t Icon_Grid::index_for_point(int32_t x, int32_t y)
 
 	const int32_t index = m_columns * (y / h) + (x / w);
 
-	if (static_cast<size_t>(index) >= m_items.size()) return -1;
+	if (static_cast<size_t>(index) >= m_items.size())
+		return -1;
 
 	return index;
 }
@@ -296,7 +296,8 @@ bool Icon_Grid::handle_mousemove
  * the signal.
 */
 bool Icon_Grid::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
-	if (btn != SDL_BUTTON_LEFT) return false;
+	if (btn != SDL_BUTTON_LEFT)
+		return false;
 
 	const int32_t hl = index_for_point(x, y);
 
@@ -308,7 +309,8 @@ bool Icon_Grid::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	return true;
 }
 bool Icon_Grid::handle_mouserelease(const Uint8 btn, int32_t x, int32_t y) {
-	if (btn != SDL_BUTTON_LEFT) return false;
+	if (btn != SDL_BUTTON_LEFT)
+		return false;
 
 	const int32_t hl = index_for_point(x, y);
 

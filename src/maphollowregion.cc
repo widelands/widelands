@@ -39,7 +39,8 @@ m_left        (hollow_area)
 }
 
 template <> bool MapHollowRegion<Area<> >::advance(const Map & map) throw () {
-	if (m_phase == None) return false;
+	if (m_phase == None)
+		return false;
 	++m_rowpos;
 	if (m_rowpos < m_rowwidth) {
 		map.get_rn(m_hollow_area, &m_hollow_area);

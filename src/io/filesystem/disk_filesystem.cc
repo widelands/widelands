@@ -29,7 +29,6 @@
 
 #include <cassert>
 #include <cerrno>
-#include <boost/numeric/conversion/cast.hpp>
 
 #ifdef WIN32
 #include <windows.h>
@@ -292,9 +291,9 @@ void RealFSImpl::m_unlink_directory(std::string const & file) {
  * if the dir can't be created or if a file with this name exists
  */
 void RealFSImpl::EnsureDirectoryExists(std::string const & dirname) {
-	if (FileExists(dirname)) {
-		if (IsDirectory(dirname)) return; // ok, dir is already there
-	}
+	if (FileExists(dirname))
+		if (IsDirectory(dirname))
+			return; //  ok, dir is already there
 	try {
 		MakeDirectory(dirname);
 	} catch (DirectoryCannotCreate_error const & e) {
@@ -382,7 +381,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		data = malloc(size + 1); //  FIXME memory leak!
 		int result = fread(data, size, 1, file);
 		if (size and (result != 1)) {
-		  assert(false);
+			assert(false);
 			throw wexception
 				("RealFSImpl::Load: read failed for %s (%s) with size %lu",
 				 fname.c_str(), fullname.c_str(),
@@ -559,21 +558,14 @@ StreamWrite * RealFSImpl::OpenStreamWrite(std::string const & fname) {
 
 unsigned long RealFSImpl::DiskSpace() {
 #ifdef WIN32
-	ULARGE_INTEGER numbytes, numfreebytes, freeavailable;
-	if
-	  (GetDiskFreeSpaceEx
-			(FS_CanonicalizeName(m_directory).c_str(),
-			 &freeavailable,
-			 &numbytes,
-			 &numfreebytes))
-	{
+	ULARGE_INTEGER freeavailable;
+	return
+		GetDiskFreeSpaceEx
+			(FS_CanonicalizeName(m_directory).c_str(), &freeavailable, 0, 0)
+		?
 		//if more than 2G free space report that much
-		if (freeavailable.HighPart)
-			return std::numeric_limits<unsigned long>::max();
-		return freeavailable.LowPart;
-	}
-	return 0;
-
+		freeavailable.HighPart ? std::numeric_limits<unsigned long>::max() :
+		freeavailable.LowPart : 0;
 #else
 	struct statvfs svfs;
 	if (statvfs(FS_CanonicalizeName(m_directory).c_str(), &svfs) != -1) {

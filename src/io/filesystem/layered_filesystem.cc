@@ -271,12 +271,12 @@ void * LayeredFileSystem::fastLoad
 	(const std::string & fname, size_t & length, bool & fast)
 {
 	if (m_home && m_home->FileExists(fname))
-		return m_home->fastLoad(fname, length,fast);
+		return m_home->fastLoad(fname, length, fast);
 
 	for
 		(FileSystem_rit it = m_filesystems.rbegin();
-		it != m_filesystems.rend();
-		++it)
+		 it != m_filesystems.rend();
+		 ++it)
 		if ((*it)->FileExists(fname))
 			return (*it)->fastLoad(fname, length, fast);
 

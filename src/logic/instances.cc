@@ -194,7 +194,8 @@ void Object_Manager::remove(Map_Object *obj)
 
 Map_Object * Object_Ptr::get(Editor_Game_Base const & egbase)
 {
-	if (!m_serial) return 0;
+	if (!m_serial)
+		return 0;
 	Map_Object * const obj = egbase.objects().get_object(m_serial);
 	if (!obj)
 		m_serial = 0;

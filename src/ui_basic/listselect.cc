@@ -17,9 +17,6 @@
  *
  */
 
-#define __STDC_LIMIT_MACROS
-#include <stdint.h>
-
 #include "listselect.h"
 
 #include "constants.h"
@@ -347,7 +344,10 @@ void BaseListselect::draw(RenderTarget & dst)
 	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < m_entry_records.size()) {
-		assert(get_h() < INT32_MAX);
+		assert
+			(get_h()
+			 <
+			 static_cast<uint32_t>(std::numeric_limits<int32_t>::max()));
 		if (y >= static_cast<int32_t>(get_h()))
 			return;
 

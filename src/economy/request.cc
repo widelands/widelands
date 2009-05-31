@@ -64,7 +64,7 @@ Request::Request
 	m_required_interval(0),
 	m_last_request_time(m_required_time)
 {
-	assert((m_type == WARE) or (m_type == WORKER));
+	assert(m_type == WARE or m_type == WORKER);
 	if (w == WARE   and _target.owner().tribe().get_nrwares  () <= index)
 		throw wexception
 			("creating ware request with index %u, but tribe has only %u "

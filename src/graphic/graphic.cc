@@ -598,13 +598,13 @@ uint32_t Graphic::create_surface(int32_t w, int32_t h)
 void Graphic::free_surface(uint32_t const picid) {
 	assert(picid < m_pictures.size());
 	if
-	  (m_pictures[picid].module != PicMod_Font &&
-	    m_pictures[picid].module != PicSurface)
+		(m_pictures[picid].module != PicMod_Font &&
+		 m_pictures[picid].module != PicSurface)
 	{
-	  log
-	    ("Graphic::free_surface ignoring free of %u %u %s\n",
-	     picid, m_pictures[picid].module, m_pictures[picid].u.fname);
-	  return;
+		log
+			("Graphic::free_surface ignoring free of %u %u %s\n",
+			 picid, m_pictures[picid].module, m_pictures[picid].u.fname);
+		return;
 	}
 	assert
 		(m_pictures[picid].module == PicMod_Font

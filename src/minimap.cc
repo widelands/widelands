@@ -85,7 +85,8 @@ Left-press: warp the view point to the new position
 ===============
 */
 bool MiniMap::View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
-	if (btn != SDL_BUTTON_LEFT) return false;
+	if (btn != SDL_BUTTON_LEFT)
+		return false;
 
 	//  calculates the coordinates corresponding to the mouse position
 	Widelands::Coords c

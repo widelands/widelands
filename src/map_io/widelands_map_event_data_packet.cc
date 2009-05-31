@@ -39,7 +39,8 @@ void Map_Event_Data_Packet::Read
 	 Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-	if (skip) return;
+	if (skip)
+		return;
 
 	//  skip, if no events saved
 	FileRead fr;

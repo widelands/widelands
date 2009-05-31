@@ -353,8 +353,10 @@ void FieldActionWindow::init()
 			(Point(get_x(), get_y())
 			 +
 			 Point
-			 (0, (static_cast<uint32_t>(mouse.y) < get_h() / 2 ? 1 : -1)
-			     * get_h()));
+			 	(0,
+			 	 (static_cast<uint32_t>(mouse.y) < get_h() / 2 ? 1 : -1)
+			 	 *
+			 	 get_h()));
 		move_inside_parent();
 	}
 

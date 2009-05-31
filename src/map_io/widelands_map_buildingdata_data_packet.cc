@@ -64,7 +64,8 @@ void Map_Buildingdata_Data_Packet::Read
 	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-	if (skip) return;
+	if (skip)
+		return;
 
 	FileRead fr;
 	try {fr.Open(fs, "binary/building_data");} catch (...) {return;}

@@ -148,8 +148,8 @@ Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y)
 
 	// Out of panel
 	if
-	  (x < 0 || x >= static_cast<int32_t>(get_w()) ||
-	   y < 0 || y >= static_cast<int32_t>(get_h()))
+		(x < 0 || x >= static_cast<int32_t>(get_w()) ||
+		 y < 0 || y >= static_cast<int32_t>(get_h()))
 		return None;
 
 	// Normalize coordinates

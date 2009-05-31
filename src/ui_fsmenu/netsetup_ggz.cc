@@ -95,19 +95,19 @@ back
 
 // Edit boxes
 playername
-	(this, m_xres * 17 / 25, m_yres * 2 / 10,   m_butw, m_buth, 2, 0),
+	(this, m_xres * 17 / 25, m_yres     /  5, m_butw, m_buth, 2, 0),
 servername
-	(this, m_xres * 17 / 25, m_yres * 35 / 100, m_butw, m_buth, 2, 0),
+	(this, m_xres * 17 / 25, m_yres * 7 / 20, m_butw, m_buth, 2, 0),
 
 // List
 usersonline
 	(this,
-	  m_xres * 3 / 50, m_yres * 2 / 10,
-	  m_lisw, m_yres * 4 / 10),
+	 m_xres * 3 / 50, m_yres     / 5,
+	 m_lisw,          m_yres * 2 / 5),
 opengames
 	(this,
-	  m_lisw + m_xres * 85 / 1000, m_yres * 2 / 10,
-	  m_lisw * 4 / 5, m_yres * 35 / 100),
+	 m_lisw + m_xres * 17 / 200, m_yres     /  5,
+	 m_lisw * 4 / 5,             m_yres * 7 / 20),
 
 // The chat UI
 chat

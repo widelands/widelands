@@ -53,7 +53,8 @@ throw (_wexception)
 void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 	(FileSystem & fs, Map * const map, bool const skip)
 {
-	if (skip) return;
+	if (skip)
+		return;
 
 	Profile prof;
 	prof.read("player_names", 0, fs);

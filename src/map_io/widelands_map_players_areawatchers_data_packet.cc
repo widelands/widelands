@@ -42,7 +42,8 @@ void Map_Players_AreaWatchers_Data_Packet::Read
 	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-	if (skip) return;
+	if (skip)
+		return;
 
 	Map const & map = egbase.map();
 	Extent const extent = map.extent();

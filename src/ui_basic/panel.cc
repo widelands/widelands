@@ -942,13 +942,10 @@ void Panel::set_tooltip(const char * const text) {
  */
 void Panel::draw_tooltip(RenderTarget & dst, Panel & lowest)
 {
-	int32_t tip_width, tip_height;
-	g_fh->get_size
-		(UI_FONT_TOOLTIP, lowest.tooltip(), &tip_width, &tip_height, 0);
+	uint32_t tip_width, tip_height;
+	g_fh->get_size(UI_FONT_TOOLTIP, lowest.tooltip(), tip_width, tip_height, 0);
 	tip_width += 4;
 	tip_height += 4;
-	assert(0 <= tip_width);
-	assert(0 <= tip_height);
 	const WLApplication & wlapplication = *WLApplication::get();
 	Rect r
 		(wlapplication.get_mouse_position() + Point(2, 32),

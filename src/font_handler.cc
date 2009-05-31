@@ -830,10 +830,8 @@ std::string Font_Handler::word_wrap_text
 					if (calc_linewidth(font, tmp_str) > max_width) {
 						wrapped_text += cur_line + '\n';
 						cur_line = "";
-					}
-					else {
+					} else
 						cur_line += cur_word[i];
-					}
 				}
 			}
 			else {
@@ -884,15 +882,16 @@ std::string Font_Handler::remove_first_space(const std::string &text) {
 void Font_Handler::get_size
 	(std::string const & fontname, int32_t const fontsize,
 	 std::string text,
-	 int32_t * const w, int32_t * const h, int32_t const wrap)
+	 uint32_t & w, uint32_t & h,
+	 uint32_t const wrap)
 {
 	TTF_Font & font = *m_font_loader->get_font(fontname, fontsize);
 
-	if (wrap > 0)
+	if (wrap < std::numeric_limits<uint32_t>::max())
 		text = word_wrap_text(font, text, wrap);
 
-	*w = 0;
-	*h = 0;
+	w = 0;
+	h = 0;
 	const std::vector<std::string> lines(split_string(text, "\n"));
 	container_iterate_const(std::vector<std::string>, lines, i) {
 		std::string const line(i.current->empty() ? " " : *i.current);
@@ -900,9 +899,9 @@ void Font_Handler::get_size
 		int32_t line_w, line_h;
 		TTF_SizeUTF8(&font, line.c_str(), &line_w, &line_h);
 
-		if (*w < line_w)
-			*w = line_w;
-		*h += line_h;
+		if (w < line_w)
+			w = line_w;
+		h += line_h;
 	}
 }
 

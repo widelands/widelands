@@ -118,12 +118,12 @@ std::string FileSystem::fixCrossFile(std::string path) {
 std::string FileSystem::getWorkingDirectory() const {
 #ifndef WIN32
 	char cwd[PATH_MAX + 1];
-	char * result = getcwd(cwd, PATH_MAX);
+	char * const result = getcwd(cwd, PATH_MAX);
 	if (! result)
-	  throw File_error
-	    ("FileSystem::getWorkingDirectory()",
-	     "widelands",
-	     "can't run getcwd");
+		throw File_error
+			("FileSystem::getWorkingDirectory()",
+			 "widelands",
+			 "ca not run getcwd");
 
 	return std::string(cwd);
 #else

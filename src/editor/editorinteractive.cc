@@ -222,7 +222,8 @@ void Editor_Interactive::exit() {
 			 _("Map unsaved"),
 			 _("The Map is unsaved, do you really want to quit?"),
 			 UI::MessageBox::YESNO);
-		if (mmb.run() == 0) return;
+		if (mmb.run() == 0)
+			return;
 	}
 	end_modal(0);
 }

@@ -287,7 +287,8 @@ void Overlay_Manager::remove_road_overlay(Job_Id const jobid) {
  * Load all the needed graphics
  */
 void Overlay_Manager::load_graphics() {
-	if (m_are_graphics_loaded) return;
+	if (m_are_graphics_loaded)
+		return;
 
 	Overlay_Info * buildhelp_info = m_buildhelp_infos;
 	static const char * filenames[] = {

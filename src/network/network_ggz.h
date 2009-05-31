@@ -116,8 +116,8 @@ struct NetGGZ : public ChatProvider {
 		return messages;
 	}
 
-	// Called when a message is recieved via GGZnetwork.
-	void recievedGGZChat(const void *cbdata);
+	/// Called when a message is received via GGZnetwork.
+	void recievedGGZChat(void const * cbdata);
 
 	// Adds a GGZchatmessage in selected format to the list of chatmessages.
 	void formatedGGZChat

@@ -58,7 +58,8 @@ struct Panel : public Object {
 
 	Panel
 		(Panel * const nparent,
-		 const int32_t nx, const int32_t ny, const uint32_t nw, const uint32_t nh,
+		 int32_t  const nx, int32_t  const ny,
+		 uint32_t const nw, uint32_t const nh,
 		 const std::string & tooltip_text = std::string());
 	virtual ~Panel();
 
@@ -108,11 +109,11 @@ struct Panel : public Object {
 	uint32_t get_bborder() const {return _bborder;}
 
 	uint32_t get_inner_w() const {
-		assert((_lborder + _rborder) <= _w);
+		assert(_lborder + _rborder <= _w);
 		return _w - (_lborder + _rborder);
 	}
 	uint32_t get_inner_h() const {
-		assert((_tborder + _bborder) <= _h);
+		assert(_tborder + _bborder <= _h);
 		return _h - (_tborder + _bborder);
 	}
 

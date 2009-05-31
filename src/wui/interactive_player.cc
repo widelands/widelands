@@ -86,7 +86,7 @@ void ChatDisplay::setChatProvider(ChatProvider & chat)
 
 struct Displayed {
 	std::string text;
-	int32_t h;
+	uint32_t    h;
 };
 
 void ChatDisplay::draw(RenderTarget & dst)
@@ -109,11 +109,11 @@ void ChatDisplay::draw(RenderTarget & dst)
 	uint32_t idx = msgs.size();
 
 	while (idx && now - msgs[idx - 1].time <= CHAT_DISPLAY_TIME) {
-		int32_t w;
+		uint32_t w;
 
 		Displayed d = {msgs[idx - 1].toPrintable(), 0};
 
-		g_fh->get_size(UI_FONT_SMALL, d.text, &w, &d.h, get_w());
+		g_fh->get_size(UI_FONT_SMALL, d.text, w, d.h, get_w());
 		if (d.h + totalheight > get_h())
 			break;
 

@@ -1350,11 +1350,11 @@ void WLApplication::mainmenu_multiplayer()
 							throw warning
 								(_("Connection timeouted"),
 								 _
-								 ("Widelands has not been able to get the IP adress "
-								  "of the server in time.\nThere seems to be a "
-								  "network problem, either on your side or on side\n"
-								  "of the server.\n")
-								);
+								 	("Widelands has not been able to get the IP "
+								 	 "address of the server in time.\n"
+								 	 "There seems to be a network problem, either on "
+								 	 "your side or on side\n"
+								 	 "of the server.\n"));
 					}
 
 					IPaddress peer;
@@ -1365,8 +1365,9 @@ void WLApplication::mainmenu_multiplayer()
 					} else
 						throw warning
 							(_("Connection problem"),
-							 _("Widelands has not been able to connect to the host.")
-							);
+							 _
+							 	("Widelands has not been able to connect to the "
+							 	 "host."));
 					SDLNet_ResolveHost (&peer, NetGGZ::ref().ip(), WIDELANDS_PORT);
 
 					NetClient netgame(&peer, playername, true);
@@ -1404,8 +1405,7 @@ void WLApplication::mainmenu_multiplayer()
 					if (not host_address)
 						throw warning
 							("Invalid Address",
-							 _("The address of the game server is invalid")
-							);
+							 _("The address of the game server is invalid"));
 
 					peer.host = addr;
 					peer.port = port;

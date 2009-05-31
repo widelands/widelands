@@ -341,7 +341,7 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 }
 
 // don't have a faster way to load zip files yet.
-void* ZipFilesystem::fastLoad
+void * ZipFilesystem::fastLoad
 	(const std::string & fname, size_t & length, bool & fast)
 {
 	fast = false;

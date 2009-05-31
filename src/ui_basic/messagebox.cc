@@ -57,14 +57,14 @@ MessageBox::MessageBox
 		parent->get_inner_h() : g_gr->get_yres();
 	const int32_t maxwidth = outerwidth - 80;
 	const int32_t maxheight = outerheight - 60;
-	int32_t width, height;
+	uint32_t width, height;
 	std::string font = d->textarea->get_font_name();
 	int32_t fontsize = d->textarea->get_font_size();
 
-	g_fh->get_size(font, fontsize, text, &width, &height, maxwidth);
+	g_fh->get_size(font, fontsize, text, width, height, maxwidth);
 	// stupid heuristic to avoid excessively long lines
-	if (height < 2 * fontsize)
-		g_fh->get_size(font, fontsize, text, &width, &height, maxwidth / 2);
+	if (height < 2U * fontsize)
+		g_fh->get_size(font, fontsize, text, width, height, maxwidth / 2);
 
 	width += 10 + 2 * d->textarea->scrollbar_w();
 	if (width < 100)

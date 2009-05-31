@@ -98,7 +98,8 @@ void Editor_Player_Menu::think() {
  * Update all
 */
 void Editor_Player_Menu::update() {
-	if (is_minimal()) return;
+	if (is_minimal())
+		return;
 
 	Widelands::Map & map =
 		dynamic_cast<const Editor_Interactive &>(*get_parent()).egbase().map();

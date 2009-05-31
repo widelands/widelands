@@ -178,7 +178,8 @@ void Slider::handle_mousein(bool inside) {
  * Update pressed status.
  */
 bool Slider::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
-	if (btn != SDL_BUTTON_LEFT) return false;
+	if (btn != SDL_BUTTON_LEFT)
+		return false;
 	if (m_pressed) {
 		grab_mouse(false);
 		m_pressed = false;
@@ -204,13 +205,15 @@ bool Slider::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
  * \param y The y position of the mouse pointer.
  */
 void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
-	if (not m_enabled) return;
+	if (not m_enabled)
+		return;
 	m_highlighted =
 		pointer >= m_cursor_pos and  pointer <= m_cursor_pos + m_cursor_size
 		and y >= 0 and static_cast<uint32_t>(y) < get_h()
 		and x >= 0 and static_cast<uint32_t>(x) < get_w();
 
-	if (not m_pressed) return;
+	if (not m_pressed)
+		return;
 
 	m_cursor_pos = pointer - m_relative_move;
 	if (m_cursor_pos < 0) m_cursor_pos = 0;
@@ -242,7 +245,8 @@ void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
  * \param pointer The relative position of the mouse pointer.
  */
 void Slider::cursor_pressed(int32_t pointer) {
-	if (not m_enabled) return;
+	if (not m_enabled)
+		return;
 
 	grab_mouse(true);
 	m_pressed = true;
@@ -262,7 +266,8 @@ void Slider::cursor_pressed(int32_t pointer) {
  * \param ofs The cursor offset.
  */
 void Slider::bar_pressed(int32_t pointer, int32_t ofs) {
-	if (not m_enabled) return;
+	if (not m_enabled)
+		return;
 
 	grab_mouse(true);
 	m_pressed = true;
@@ -347,7 +352,8 @@ bool HorizontalSlider::handle_mousemove
 bool HorizontalSlider::handle_mousepress
 		(const Uint8 btn, int32_t x, int32_t y)
 {
-	if (btn != SDL_BUTTON_LEFT) return false;
+	if (btn != SDL_BUTTON_LEFT)
+		return false;
 
 
 	if (x >= m_cursor_pos and x <= m_cursor_pos + m_cursor_size) {
@@ -422,7 +428,8 @@ bool VerticalSlider::handle_mousemove
  * \param y The Y position of mouse pointer.
  */
 bool VerticalSlider::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
-	if (btn != SDL_BUTTON_LEFT) return false;
+	if (btn != SDL_BUTTON_LEFT)
+		return false;
 
 	if (y >= m_cursor_pos and y <= m_cursor_pos + m_cursor_size) {
 		//  click on cursor

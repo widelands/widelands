@@ -360,7 +360,8 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 		s += _(" exists already. Overwrite?");
 		UI::MessageBox mbox
 			(m_parent, _("Save Map Error!!"), s, UI::MessageBox::YESNO);
-		if (not mbox.run()) return false;
+		if (not mbox.run())
+			return false;
 
 		g_fs->Unlink(complete_filename);
 	}

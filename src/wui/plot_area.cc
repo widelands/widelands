@@ -134,8 +134,8 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 			(buffer, sizeof(buffer),
 			 "%u", max_x[m_time] / how_many_ticks[m_time] * i);
 
-		int32_t w, h;
-		g_fh->get_size(UI_FONT_SMALL, buffer, &w, &h, 0);
+		uint32_t w, h;
+		g_fh->get_size(UI_FONT_SMALL, buffer, w, h, 0);
 		g_fh->draw_string
 			(dst,
 			 UI_FONT_SMALL,
@@ -198,8 +198,8 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 
 	//  print the maximal value
 	sprintf(buffer, "%i", max);
-	int32_t w, h;
-	g_fh->get_size(UI_FONT_SMALL, buffer, &w, &h, 0);
+	uint32_t w, h;
+	g_fh->get_size(UI_FONT_SMALL, buffer, w, h, 0);
 	g_fh->draw_string
 		(dst,
 		 UI_FONT_SMALL,

@@ -2800,22 +2800,28 @@ bool Map::can_reach_by_water(const Coords field) const
 	FCoords neighb;
 
 	get_tln(fc, &neighb);
-	if (fc.field->get_caps() & MOVECAPS_SWIM) return true;
+	if (fc.field->get_caps() & MOVECAPS_SWIM)
+		return true;
 
 	get_trn(fc, &neighb);
-	if (fc.field->get_caps() & MOVECAPS_SWIM) return true;
+	if (fc.field->get_caps() & MOVECAPS_SWIM)
+		return true;
 
 	get_rn(fc, &neighb);
-	if (fc.field->get_caps() & MOVECAPS_SWIM) return true;
+	if (fc.field->get_caps() & MOVECAPS_SWIM)
+		return true;
 
 	get_brn(fc, &neighb);
-	if (fc.field->get_caps() & MOVECAPS_SWIM) return true;
+	if (fc.field->get_caps() & MOVECAPS_SWIM)
+		return true;
 
 	get_bln(fc, &neighb);
-	if (fc.field->get_caps() & MOVECAPS_SWIM) return true;
+	if (fc.field->get_caps() & MOVECAPS_SWIM)
+		return true;
 
 	get_ln(fc, &neighb);
-	if (fc.field->get_caps() & MOVECAPS_SWIM) return true;
+	if (fc.field->get_caps() & MOVECAPS_SWIM)
+		return true;
 
 	return false;
 }
@@ -3130,7 +3136,7 @@ bool Widelands::UniqueRandomMapInfo::setFromIdString
 		xorr -= 7;
 		xorr -= ix;
 		if (xorr < 0)
-		  xorr &= 0x0000003f;
+			xorr &= 0x0000003f;
 	}
 
 	//  check if xxor was right
@@ -3255,7 +3261,7 @@ void Widelands::UniqueRandomMapInfo::generateIdString
 		xorr -= 7;
 		xorr -= ix;
 		if (xorr < 0)
-		  xorr &= 0x0000003f;
+			xorr &= 0x0000003f;
 	}
 
 	//  translate it to ASCII

@@ -37,7 +37,8 @@ void Map_Owned_Fields_Data_Packet::Read
 	 Map_Map_Object_Loader * const)
 	throw (_wexception)
 {
-	if (skip) return;
+	if (skip)
+		return;
 	FileRead fr;
 	try {fr.Open(fs, "binary/owned_fields");} catch (...) {return;}
 	try {

@@ -49,7 +49,8 @@ void Map_Building_Data_Packet::Read
 	 Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-	if (skip) return;
+	if (skip)
+		return;
 	FileRead fr;
 	try {fr.Open(fs, "binary/building");} catch (...) {return;}
 	Interactive_Base & ibase = *egbase.get_ibase();

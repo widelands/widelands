@@ -90,7 +90,8 @@ struct Font_Handler {
 	void get_size
 		(std::string const & fontname, int32_t size,
 		 std::string text,
-		 int32_t *w, int32_t *h, int32_t wrap = -1);
+		 uint32_t & w, uint32_t & h,
+		 uint32_t wrap = std::numeric_limits<uint32_t>::max());
 	int32_t calc_linewidth(TTF_Font &, const std::string & text);
 	uint32_t get_fontheight(std::string const & name, int32_t size);
 	std::string remove_first_space(const std::string &text);

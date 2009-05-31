@@ -35,7 +35,8 @@ int32_t Editor_Place_Immovable_Tool::handle_click_impl
 	 Editor_Interactive           &       parent)
 {
 	const int32_t radius = parent.get_sel_radius();
-	if (not get_nr_enabled()) return radius;
+	if (not get_nr_enabled())
+		return radius;
 	Widelands::Editor_Game_Base & egbase = parent.egbase();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,

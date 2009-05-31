@@ -43,14 +43,16 @@ template <typename T> struct Descr_Maintainer {
 	int32_t get_index(std::string const & name) const throw (Nonexistent)
 	{
 		for (typename T::Index i = 0; i < nitems; ++i)
-			if (name == items[i]->name()) return i;
+			if (name == items[i]->name())
+				return i;
 		return -1;
 	}
 
 	int32_t get_index(const char * const name) const throw (Nonexistent)
 	{
 		for (typename T::Index i = 0; i < nitems; ++i)
-			if (name == items[i]->name()) return i;
+			if (name == items[i]->name())
+				return i;
 		return -1;
 	}
 

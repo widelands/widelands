@@ -151,7 +151,8 @@ void Map_Players_View_Data_Packet::Read
 	 Map_Map_Object_Loader * const)
 	throw (_wexception)
 {
-	if (skip) return;
+	if (skip)
+		return;
 
 	Map const & map = egbase.map();
 	const X_Coordinate mapwidth  = map.get_width ();
