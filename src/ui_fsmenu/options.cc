@@ -423,6 +423,8 @@ os(opt)
 	m_label_speed          .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_snap_dis_border.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_snap_dis_panel .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_hw_improvements.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_double_buffer  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_sb_speed             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_sb_dis_border        .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_sb_dis_panel         .set_font(m_fn, m_fs, UI_FONT_CLR_FG);

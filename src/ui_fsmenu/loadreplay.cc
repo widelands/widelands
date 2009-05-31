@@ -35,7 +35,7 @@ Fullscreen_Menu_Base("choosemapmenu.jpg"),
 m_butw
 	(m_xres / 4),
 m_buth
-	(m_yres * 9 / 299),
+	(m_yres * 19 / 400),
 m_fs
 	(fs_small()),
 m_fn
