@@ -358,7 +358,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		//printf("     fullname    = %s\n", fullname.c_str());
 		//printf("------------------------------------------\n");
 
-		file = fopen(fullname.c_str(), "rbm");
+		file = fopen(fullname.c_str(), "rb");
 		if (not file)
 			throw File_error("RealFSImpl::Load", fullname.c_str());
 
