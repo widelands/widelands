@@ -7,6 +7,8 @@ import SCons
 from SCons.Script.SConscript import SConsEnvironment
 
 from ColorizeGcc import overwrite_spawn_function
+from distcc import setup_distcc
+from ccache import setup_ccache
 from scons_configure import *
 from Distribute import *
 
@@ -18,10 +20,6 @@ EnsureSConsVersion(1, 0, 1)
 SetOption('max_drift', 1)
 SetOption('implicit_cache', 1)
 Decider('MD5-timestamp')
-
-num_cpu = int(os.environ.get('NUM_CPU', 2))
-SetOption('num_jobs', num_cpu)
-print "running with -j", GetOption('num_jobs')
 
 # write only *one* signature file in a place where we don't care
 SConsignFile('build/scons-signatures')
@@ -95,6 +93,9 @@ def cli_options():
 	opts.Add('extra_link_flags', '', '')
 	opts.Add('check','Enable/Disable checks, DO NOT USE', True),
 	opts.AddVariables(
+		BoolVariable('distcc', 'use distcc to compile widelands on many computers', False),
+		BoolVariable('ccache', 'use ccache to speedup compiling widelands', False),
+
 		BoolVariable('enable_sdl_parachute', 'Enable SDL parachute?', False),
 		BoolVariable('enable_efence', 'Use the efence memory debugger?', False),
 		BoolVariable('enable_ggz', 'Use the GGZ Gamingzone?', False),
@@ -152,8 +153,23 @@ if env.enable_configuration:
 
 	if (env['cxx'] != ''):
 		env['CXX'] = env['cxx']
+		print "Using compiler cxx=" + env['cxx']
 	if (env['cc'] != ''):
 		env['CC'] = env['cc']
+		print "Using compiler cc=" + env['cc']
+	num_cpu = 0
+	if (env['distcc'] == True):
+		setup_distcc(env)
+		num_cpu = int(os.environ.get('NUM_CPU', 8))
+	else:
+		num_cpu = int(os.environ.get('NUM_CPU', 2))
+	if (env['ccache'] == True):
+			setup_ccache(env)
+	
+	SetOption('num_jobs', num_cpu)
+	print "running with -j", GetOption('num_jobs')
+	print env.Dump()
+
 	do_configure(conf, env)
 
 	# Generate config.h - scons itself will decide whether a recompile is needed
@@ -328,6 +344,8 @@ distcleanactions=[
 	Delete('build/scons-tools/Distribute.pyc'),
 	Delete('build/scons-tools/ctags.pyc'),
 	Delete('build/scons-tools/astyle.pyc'),
+	Delete('build/scons-tools/distcc.pyc'),
+	Delete('build/scons-tools/ccache.pyc'),
 	Delete('build/scons-tools/CodeCheck.pyc'),
 	Delete('build/scons-tools/PNGShrink.pyc'),
 	Delete('build/scons-signatures.dblite'), #have to delete this or problems occur
