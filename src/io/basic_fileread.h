@@ -22,7 +22,10 @@
 
 #include "io/filesystem/filesystem.h"
 #include "machdep.h"
+#ifdef WIN32
+#else
 #include "sys/mman.h"
+#endif
 
 #include <cassert>
 #include <limits>

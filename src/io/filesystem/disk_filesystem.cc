@@ -25,7 +25,6 @@
 #include "log.h"
 
 #include <sys/stat.h>
-#include <sys/mman.h>
 
 #include <cassert>
 #include <cerrno>
@@ -34,6 +33,7 @@
 #include <windows.h>
 #include <dos.h>
 #else
+#include <sys/mman.h>
 #include <glob.h>
 #include <sys/statvfs.h>
 #include <sys/types.h>
