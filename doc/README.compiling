@@ -65,6 +65,12 @@ Several other build targets are available :-) but mostly not documented yet :-(
 
 some available scons flags are:
 
+cc=<COMPILER>
+cxx=<COMPILER>
+
+ccache=True/False
+distcc=True/False
+
 build=debug|release|profile
 build_id=<IDNAME>
 efence=1 (default false)
