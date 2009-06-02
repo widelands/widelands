@@ -205,8 +205,9 @@ m_toggle_help
 	 	("menu_help",                  toggle_help,            _("Ware help")))
 {
 	//  Register with the MessageQueue so that the button changes as new
-	//  messages get added.
+	//  messages get added. also set for which player the button should flip
 	Widelands::MessageQueue::m_button(&m_toggle_message_menu);
+	Widelands::MessageQueue::set_player_number(plyn);
 
 	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_options_menu,    UI::Box::AlignLeft);

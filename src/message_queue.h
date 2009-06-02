@@ -84,8 +84,9 @@ struct MessageQueue {
 		}
 
 		m_readall(player_number) = false;
-		if (m_button(0))
-			m_button(0)->set_pic(g_gr->get_picture(PicMod_Game, NEW_MESSAGES));
+		if (player_number == m_player_number(0))
+			if (m_button(0))
+				m_button(0)->set_pic(g_gr->get_picture(PicMod_Game, NEW_MESSAGES));
 	}
 
 	static void read_all (const Player & p)
@@ -95,7 +96,7 @@ struct MessageQueue {
 	static void read_all (Player_Number player_number)
 	{
 		m_readall(player_number) = true;
-		if (m_button(0))
+		if (player_number == m_player_number(0) and m_button(0))
 			m_button(0)->set_pic(g_gr->get_picture(PicMod_Game, NO_NEW_MESSAGES));
 	}
 
@@ -106,6 +107,10 @@ struct MessageQueue {
 		if (b)
 			m_but = b;
 		return m_but;
+	}
+
+	static void set_player_number(const Player_Number & player_number) {
+		m_player_number(player_number);
 	}
 
 private:
@@ -119,6 +124,12 @@ private:
 		return m_read[player_number];
 	}
 
+	static Player_Number & m_player_number(Player_Number const & player_number) {
+		static Player_Number plrnum = 0;
+		if (player_number != 0)
+			plrnum = player_number;
+		return plrnum;
+	}
 
 
 };
