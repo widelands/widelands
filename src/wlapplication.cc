@@ -240,6 +240,7 @@ WLApplication * WLApplication::get(int const argc, char const * * argv) {
  */
 WLApplication::WLApplication(const int argc, const char **argv):
 m_commandline          (std::map<std::string, std::string>()),
+m_game_type            (NONE),
 journal                (0),
 m_mouse_swapped        (false),
 m_mouse_position       (0, 0),
@@ -297,21 +298,21 @@ WLApplication::~WLApplication()
  */
 void WLApplication::run()
 {
-	if (m_editor_commandline) {
+	if (m_game_type == EDITOR) {
 		g_sound_handler.start_music("ingame");
-		Editor_Interactive::run_editor(m_editor_filename);
-	} else if (m_loadgame_filename.size()) {
+		Editor_Interactive::run_editor(m_filename);
+	} else if (m_game_type == LOADGAME) {
 		Widelands::Game game;
 		try {
-			game.run_load_game(m_loadgame_filename.c_str());
+			game.run_load_game(m_filename.c_str());
 		} catch (...) {
 			emergency_save(game);
 			throw;
 		}
-	} else if (m_scenario_filename.size()) {
+	} else if (m_game_type == SCENARIO) {
 		Widelands::Game game;
 		try {
-			game.run_splayer_scenario_direct(m_scenario_filename.c_str());
+			game.run_splayer_scenario_direct(m_filename.c_str());
 		} catch (...) {
 			emergency_save(game);
 			throw;
@@ -921,28 +922,31 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	}
 
 	if (m_commandline.count("editor")) {
-		m_editor_filename = m_commandline["editor"];
-		if (m_editor_filename.size() and *m_editor_filename.rbegin() == '/')
-			m_editor_filename.erase(m_editor_filename.size() - 1);
+		m_filename = m_commandline["editor"];
+		if (m_filename.size() and *m_filename.rbegin() == '/')
+			m_filename.erase(m_filename.size() - 1);
 		m_editor_commandline = true;
+		m_game_type = EDITOR;
 		m_commandline.erase("editor");
 	}
 
 	if (m_commandline.count("loadgame")) {
-		m_loadgame_filename = m_commandline["loadgame"];
-		if (m_loadgame_filename.empty())
+		m_filename = m_commandline["loadgame"];
+		if (m_filename.empty())
 			throw wexception("empty value of command line parameter --loadgame");
-		if (*m_loadgame_filename.rbegin() == '/')
-			m_loadgame_filename.erase(m_loadgame_filename.size() - 1);
+		if (*m_filename.rbegin() == '/')
+			m_filename.erase(m_filename.size() - 1);
+		m_game_type = LOADGAME;
 		m_commandline.erase("loadgame");
 	}
 
 	if (m_commandline.count("scenario")) {
-		m_scenario_filename = m_commandline["scenario"];
-		if (m_scenario_filename.empty())
+		m_filename = m_commandline["scenario"];
+		if (m_filename.empty())
 			throw wexception("empty value of command line parameter --scenario");
-		if (*m_scenario_filename.rbegin() == '/')
-			m_scenario_filename.erase(m_scenario_filename.size() - 1);
+		if (*m_filename.rbegin() == '/')
+			m_filename.erase(m_filename.size() - 1);
+		m_game_type = SCENARIO;
 		m_commandline.erase("scenario");
 	}
 
@@ -1438,7 +1442,7 @@ void WLApplication::mainmenu_editor()
 
 		switch (code) {
 			case Fullscreen_Menu_Editor::New_Map:
-				Editor_Interactive::run_editor(m_editor_filename);
+				Editor_Interactive::run_editor(m_filename);
 				done = true;
 				break;
 			case Fullscreen_Menu_Editor::Load_Map:

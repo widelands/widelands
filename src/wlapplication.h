@@ -150,6 +150,8 @@ struct WLApplication {
 	static WLApplication * get(int const argc = 0, char const * * argv = 0);
 	~WLApplication();
 
+	enum GameType {NONE, EDITOR, SCENARIO, LOADGAME, NETWORK};
+
 	void run();
 
 	/// \warning true if an external entity wants us to quit
@@ -241,8 +243,8 @@ protected:
 	std::map<std::string, std::string> m_commandline;
 
 	bool m_editor_commandline; // Enable the User to start the Editor directly.
-	std::string m_loadgame_filename, m_scenario_filename, m_editor_filename;
-
+	std::string m_filename;
+	GameType m_game_type;
 	///the event recorder object
 	Journal *journal;
 
