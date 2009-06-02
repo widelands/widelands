@@ -168,7 +168,6 @@ if env.enable_configuration:
 	
 	SetOption('num_jobs', num_cpu)
 	print "running with -j", GetOption('num_jobs')
-	print env.Dump()
 
 	do_configure(conf, env)
 
