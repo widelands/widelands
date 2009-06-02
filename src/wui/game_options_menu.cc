@@ -95,8 +95,9 @@ exit_game
 	 _("Exit Game"))
 {
 	set_inner_size
-		(hmargin() + std::max(get_inner_w(), readme.get_w()) + hmargin(),
-		 get_inner_h());
+	  (hmargin() + hmargin() +
+	   std::max(static_cast<int32_t>(get_inner_w()), readme.get_w()),
+	   get_inner_h());
 	if (get_usedefaultpos())
 		center_to_parent();
 }

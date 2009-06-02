@@ -899,7 +899,7 @@ void Font_Handler::get_size
 		int32_t line_w, line_h;
 		TTF_SizeUTF8(&font, line.c_str(), &line_w, &line_h);
 
-		if (w < line_w)
+		if (static_cast<int32_t>(w) < line_w)
 			w = line_w;
 		h += line_h;
 	}

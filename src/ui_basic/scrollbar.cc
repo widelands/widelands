@@ -332,7 +332,7 @@ void Scrollbar::draw(RenderTarget & dst)
 
 	if (m_horizontal)
 	{
-		if ((2 * Size + knobsize) > get_w()) {
+		if ((2 * Size + knobsize) > static_cast<uint32_t>(get_w())) {
 			// Our owner obviously allocated too little space - draw something
 			// stupid
 			draw_button(dst, Minus, Rect(Point(0, 0), get_w(), get_h()));
@@ -349,7 +349,9 @@ void Scrollbar::draw(RenderTarget & dst)
 			(dst,
 			 MinusPage,
 			 Rect(Point(Size, 0), knobpos - Size - knobsize / 2, get_h()));
-		assert((knobpos + knobsize / 2 + Size) <= get_w());
+		assert
+		  ((knobpos + knobsize / 2 + Size) <=
+		   static_cast<uint32_t>(get_w()));
 		draw_area
 			(dst,
 			 PlusPage,
@@ -359,7 +361,7 @@ void Scrollbar::draw(RenderTarget & dst)
 	}
 	else
 	{
-		if ((2 * Size + knobsize) > get_h()) {
+		if ((2 * Size + knobsize) > static_cast<uint32_t>(get_h())) {
 			// Our owner obviously allocated too little space - draw something
 			// stupid
 			draw_button(dst, Minus, Rect(Point(0, 0), get_w(), get_h()));
@@ -376,7 +378,9 @@ void Scrollbar::draw(RenderTarget & dst)
 			(dst,
 			 MinusPage,
 			 Rect(Point(0, Size), get_w(), knobpos - Size - knobsize / 2));
-		assert(knobpos + knobsize / 2 + Size <= get_h());
+		assert
+			(knobpos + knobsize / 2 + Size <=
+			 static_cast<uint32_t>(get_h()));
 		draw_area
 			(dst,
 			 PlusPage,

@@ -56,6 +56,7 @@ MessageBox::MessageBox
 	const int32_t outerheight = parent ?
 		parent->get_inner_h() : g_gr->get_yres();
 	const int32_t maxwidth = outerwidth - 80;
+	assert(outerheight >= 60);
 	const int32_t maxheight = outerheight - 60;
 	uint32_t width, height;
 	std::string font = d->textarea->get_font_name();
@@ -70,7 +71,7 @@ MessageBox::MessageBox
 	if (width < 100)
 		width = 100;
 	height += 50;
-	if (height > maxheight)
+	if (height > static_cast<uint32_t>(maxheight))
 		height = maxheight;
 
 	set_inner_size(width, height);

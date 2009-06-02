@@ -83,8 +83,9 @@ struct Panel : public Object {
 
 	int32_t get_x() const {return _x;}
 	int32_t get_y() const {return _y;}
-	uint32_t get_w() const {return _w;}
-	uint32_t get_h() const {return _h;}
+	//int unstead of uint because of overflow situations
+	int32_t get_w() const {return _w;}
+	int32_t get_h() const {return _h;}
 
 	virtual bool is_snap_target() const {return false;}
 	uint16_t get_border_snap_distance() const {return _border_snap_distance;}

@@ -260,7 +260,7 @@ void Multiline_Editbox::set_text(char const * const str)
  */
 void Multiline_Editbox::CalcLinePos()
 {
-	if (m_textheight < get_h()) {
+	if (m_textheight < static_cast<uint32_t>(get_h())) {
 		m_textpos = 0;
 		return;
 	}

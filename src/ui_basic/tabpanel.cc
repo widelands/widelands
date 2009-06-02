@@ -78,7 +78,7 @@ void Tab_Panel::resize()
 	if (m_active < m_tabs.size()) {
 		Panel * const panel = m_tabs[m_active].panel;
 
-		if (panel->get_w() > w)
+		if (static_cast<uint32_t>(panel->get_w()) > w)
 			w = panel->get_w();
 		h += panel->get_h();
 	}
@@ -224,7 +224,7 @@ void Tab_Panel::draw(RenderTarget & dst)
 	}
 
 	// draw the remaining separator
-	assert(x <= get_w());
+	assert(x <= static_cast<uint32_t>(get_w()));
 	dst.brighten_rect
 		(Rect(Point(x, TP_BUTTON_HEIGHT - 2), get_w() - x, 2),
 		 2 * BUTTON_EDGE_BRIGHT_FACTOR);

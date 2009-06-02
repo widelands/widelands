@@ -209,8 +209,7 @@ void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
 		return;
 	m_highlighted =
 		pointer >= m_cursor_pos and  pointer <= m_cursor_pos + m_cursor_size
-		and y >= 0 and static_cast<uint32_t>(y) < get_h()
-		and x >= 0 and static_cast<uint32_t>(x) < get_w();
+		and y >= 0 and y < get_h() and x >= 0 and x < get_w();
 
 	if (not m_pressed)
 		return;

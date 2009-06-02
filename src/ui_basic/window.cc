@@ -131,14 +131,25 @@ void Window::move_inside_parent() {
 			px = 0;
 			if (parent->get_dock_windows_to_edges() and not _docked_left)
 				dock_left();
-		} else if (px + get_w() > parent->get_inner_w()) {
-			px = parent->get_inner_w() - get_w();
+		} else if
+			(px + static_cast<uint32_t>(get_w()) >=
+			 parent->get_inner_w())
+		{
+			assert
+				(parent->get_inner_w() >
+				 static_cast<uint32_t>(get_w()));
+			px = parent->get_inner_w() -
+				static_cast<uint32_t>(get_w());
 			if (parent->get_dock_windows_to_edges() and not _docked_right)
 				dock_right();
 		}
 		if (py < 0) py = 0;
-		else if (py + get_h() > parent->get_inner_h()) {
-			py = parent->get_inner_h() - get_h();
+		else if
+			(py + static_cast<uint32_t>(get_h()) >
+			 parent->get_inner_h())
+		{
+		  assert(parent->get_inner_h() >= static_cast<uint32_t>(get_h()));
+			py = parent->get_inner_h() - static_cast<uint32_t>(get_h());
 			if
 				(not _is_minimal
 				 and
