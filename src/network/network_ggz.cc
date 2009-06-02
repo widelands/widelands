@@ -595,7 +595,10 @@ tablelist.clear();
 			 sizeof(info.hostname));
 		GGZTableState const state = ggzcore_table_get_state(table);
 		if (state == GGZ_TABLE_WAITING) {
-			info.state = LAN_GAME_OPEN;
+			if (ggzcore_table_get_seat_count(table, GGZ_SEAT_OPEN) > 1)
+				info.state = LAN_GAME_OPEN;
+			else
+				info.state = LAN_GAME_CLOSED;
 		}
 		else if (state == GGZ_TABLE_PLAYING)
 			info.state = LAN_GAME_CLOSED;

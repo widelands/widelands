@@ -261,8 +261,13 @@ std::string const & Fullscreen_Menu_NetSetupGGZ::get_playername()
 /// called when an entry of the server list was selected
 void Fullscreen_Menu_NetSetupGGZ::server_selected (uint32_t)
 {
-	if (opengames.has_selection())
-		joingame.set_enabled(true);
+	if (opengames.has_selection()) {
+		const Net_Open_Game * game = &opengames.get_selected();
+		if (game->info.state == LAN_GAME_OPEN)
+			joingame.set_enabled(true);
+		else
+			joingame.set_enabled(false);
+	}
 }
 
 
