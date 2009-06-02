@@ -79,8 +79,6 @@ struct NetGGZ : public ChatProvider {
 	std::vector<Net_Game_Info> const & tables();
 	std::vector<Net_Player>    const & users();
 
-	void write_userlist();
-
 	enum Protocol
 	{
 		op_greeting = 1,
@@ -89,7 +87,7 @@ struct NetGGZ : public ChatProvider {
 		op_broadcast_ip = 4
 	};
 
-	void initcore(const char * metaserver, const char * playername);
+	bool initcore(const char * metaserver, const char * playername);
 	void deinitcore();
 	bool usedcore();
 	void datacore();
@@ -97,6 +95,11 @@ struct NetGGZ : public ChatProvider {
 	void request_server_ip();
 	void join(const char *tablename);
 
+	// functions for local server setup
+	uint32_t max_players();
+	void set_local_maxplayers(uint32_t mp) {
+		tableseats = mp;
+	}
 	void set_local_servername(std::string name) {
 		if (name.empty())
 			name = "WL-Default";
@@ -139,6 +142,9 @@ private:
 	void event_room(uint32_t id, const void *cbdata);
 	void event_game(uint32_t id, const void *cbdata);
 
+	void write_tablelist();
+	void write_userlist();
+
 	bool use_ggz;
 	int32_t m_fd;
 	int32_t channelfd;
@@ -151,6 +157,7 @@ private:
 
 	std::string username;
 	std::string servername;
+	uint32_t tableseats;
 
 	bool userupdate;
 	bool tableupdate;

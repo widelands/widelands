@@ -40,6 +40,7 @@ struct SpinBox : public Panel {
 		 Align align = Align_Center);
 
 	void setValue(int32_t);
+	void setInterval(int32_t min, int32_t max);
 	void setUnit(std::string);
 	int32_t getValue();
 	std::string getUnit();

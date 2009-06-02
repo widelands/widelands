@@ -1341,6 +1341,8 @@ void WLApplication::mainmenu_multiplayer()
 
 			switch (menu_result) {
 				case Fullscreen_Menu_NetSetupGGZ::HOSTGAME: {
+					uint32_t mp = static_cast<uint32_t>(ns.get_maxplayers());
+					NetGGZ::ref().set_local_maxplayers(mp);
 					NetHost netgame(playername, true);
 					netgame.run();
 					NetGGZ::ref().deinitcore();

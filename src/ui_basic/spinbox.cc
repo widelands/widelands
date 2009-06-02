@@ -212,6 +212,22 @@ void SpinBox::setValue(int32_t value)
 	update();
 }
 
+
+/**
+ * sets the interval the value may lay in and fixes the value, if outside.
+ */
+void SpinBox::setInterval(int32_t min, int32_t max)
+{
+	sbi->max = max;
+	sbi->min = min;
+	if (sbi->value > max)
+		sbi->value = max;
+	else if (sbi->value < min)
+		sbi->value = min;
+	update();
+}
+
+
 /**
  * manually sets the used unit to a given string
  */

@@ -41,6 +41,7 @@ NetGGZ::NetGGZ() :
 	channelfd     (-1),
 	gamefd        (-1),
 	server_ip_addr(0),
+	tableseats    (1),
 	userupdate    (false),
 	tableupdate   (false)
 {}
@@ -147,13 +148,13 @@ char const * NetGGZ::ip()
 
 
 /// initializes the local ggz core
-void NetGGZ::initcore
+bool NetGGZ::initcore
 	(char const * const metaserver, char const * const playername)
 {
 	GGZOptions opt;
 
 	if (usedcore())
-		return;
+		return false;
 
 	log("GGZCORE ## initialization\n");
 	ggzcore_login = true;
@@ -210,6 +211,7 @@ void NetGGZ::initcore
 	log("GGZCORE ## end loop\n");
 
 	username = playername;
+	return usedcore();
 }
 
 
@@ -479,29 +481,7 @@ void NetGGZ::event_room(uint32_t const id, void const * const cbdata)
 			deinitcore();
 			throw wexception("room was not found!");
 		}
-		tablelist.clear();
-		int32_t const num = ggzcore_room_get_num_tables(room);
-		for (int32_t i = 0; i < num; ++i) {
-			Net_Game_Info info;
-			GGZTable * const table = ggzcore_room_get_nth_table(room, i);
-			if (!table) {
-				deinitcore();
-				throw wexception("table can not be found!");
-			}
-			strncpy
-				(info.hostname,
-				 ggzcore_table_get_desc(table),
-				 sizeof(info.hostname));
-			GGZTableState const state = ggzcore_table_get_state(table);
-			if (state == GGZ_TABLE_WAITING)
-				info.state = LAN_GAME_OPEN;
-			else if (state == GGZ_TABLE_PLAYING)
-				info.state = LAN_GAME_CLOSED;
-			else
-				continue;
-			tablelist.push_back(info);
-		}
-		tableupdate   = true;
+		write_tablelist();
 		ggzcore_login = false;
 		ggzcore_ready = true;
 		break;
@@ -512,7 +492,6 @@ void NetGGZ::event_room(uint32_t const id, void const * const cbdata)
 	case GGZ_PLAYER_COUNT:
 		log("GGZCORE/room ## -- user list\n");
 		write_userlist();
-		userupdate = true;
 		break;
 	case GGZ_CHAT_EVENT:
 		log("GGZCORE/room ## -- chat message\n");
@@ -533,18 +512,8 @@ void NetGGZ::event_game(uint32_t const id, void const * const cbdata)
 		if (tableid == -1) {
 			GGZTable    * const table    = ggzcore_table_new        ();
 			GGZGameType * const gametype = ggzcore_room_get_gametype(room);
-			ggzcore_table_init
-				(table,
-				 gametype,
-				 servername.c_str(), 7);
-			//  FIXME problem in ggz - for some reasons only 8 seats are currently
-			//  FIXME available. I already posted this problem to the ggz
-			//  FIXME mailinglist. -- nasenbaer
-			//  ggzcore_gametype_get_max_players(gametype));
-			for
-				(int32_t i = 1;
-				 i < 7; // ggzcore_gametype_get_max_players(gametype); // FIXME
-				 ++i)
+			ggzcore_table_init(table, gametype, servername.c_str(), tableseats);
+			for (uint32_t i = 1; i < tableseats; ++i)
 				ggzcore_table_set_seat(table, i, GGZ_SEAT_OPEN, 0);
 			ggzcore_room_launch_table(room, table);
 			ggzcore_table_free(table);
@@ -608,6 +577,36 @@ std::vector<Net_Player>   const & NetGGZ::users()
 }
 
 
+/// writes the list of tables after an table update arrived
+void NetGGZ::write_tablelist()
+{
+tablelist.clear();
+	int32_t const num = ggzcore_room_get_num_tables(room);
+	for (int32_t i = 0; i < num; ++i) {
+		Net_Game_Info info;
+		GGZTable * const table = ggzcore_room_get_nth_table(room, i);
+		if (!table) {
+			deinitcore();
+			throw wexception("table can not be found!");
+		}
+		strncpy
+			(info.hostname,
+			 ggzcore_table_get_desc(table),
+			 sizeof(info.hostname));
+		GGZTableState const state = ggzcore_table_get_state(table);
+		if (state == GGZ_TABLE_WAITING) {
+			info.state = LAN_GAME_OPEN;
+		}
+		else if (state == GGZ_TABLE_PLAYING)
+			info.state = LAN_GAME_CLOSED;
+		else
+			continue;
+		tablelist.push_back(info);
+	}
+	tableupdate   = true;
+}
+
+
 /// writes the list of online users after an user update arrived
 void NetGGZ::write_userlist()
 {
@@ -632,6 +631,7 @@ void NetGGZ::write_userlist()
 		user.table = tab ? ggzcore_table_get_desc(tab) : "--";
 		userlist.push_back(user);
 	}
+	userupdate = true;
 }
 
 
@@ -711,6 +711,22 @@ void NetGGZ::launch()
 	ggzcore_game_add_event_hook(game, GGZ_GAME_PLAYING, &NetGGZ::callback_game);
 
 	ggzcore_game_launch(game);
+}
+
+
+/// \returns the maximum number of seats in a widelands table (game)
+uint32_t NetGGZ::max_players()
+{
+	if (!ggzserver)
+		return 1;
+	if (!room)
+		return 1;
+	GGZGameType * const gametype = ggzcore_room_get_gametype(room);
+	//  FIXME problem in ggz - for some reasons only 8 seats are currently
+	//  FIXME available. I already posted this problem to the ggz
+	//  FIXME mailinglist. -- nasenbaer
+	//return gametype ? ggzcore_gametype_get_max_players(gametype) : 1;
+	return gametype ? 7 : 1;
 }
 
 

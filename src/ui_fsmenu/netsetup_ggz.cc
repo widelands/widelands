@@ -67,8 +67,19 @@ m_playername
 	 _("Your nickname:"), Align_Left),
 m_servername
 	(this,
-	 m_xres * 17 / 25, m_yres * 3 / 10,
+	 m_xres * 17 / 25, m_yres * 28 / 100,
 	 _("Name of your server:"), Align_Left),
+m_maxplayers
+	(this,
+	 m_xres * 17 / 25, m_yres * 38 / 100,
+	 _("Maximum of players:"), Align_Left),
+
+
+// Spinboxes
+maxplayers
+	(this,
+	 m_xres * 17 / 25, m_yres * 42 / 100, m_butw, m_buth * 7 / 10,
+	 1, 1, 1), // start/min./max. value dummy inits
 
 // Buttons
 joingame
@@ -80,7 +91,7 @@ joingame
 	 m_fn, m_fs),
 hostgame
 	(this,
-	 m_xres * 17 / 25, m_yres * 4 / 10, m_butw, m_buth,
+	 m_xres * 17 / 25, m_yres * 46 / 100, m_butw, m_buth,
 	 1,
 	 &Fullscreen_Menu_NetSetupGGZ::clicked_hostgame, *this,
 	 _("Open a new game"), std::string(), true, false,
@@ -97,7 +108,7 @@ back
 playername
 	(this, m_xres * 17 / 25, m_yres     /  5, m_butw, m_buth, 2, 0),
 servername
-	(this, m_xres * 17 / 25, m_yres * 7 / 20, m_butw, m_buth, 2, 0),
+	(this, m_xres * 17 / 25, m_yres * 33 / 100, m_butw, m_buth, 2, 0),
 
 // List
 usersonline
@@ -124,6 +135,8 @@ chat
 	m_users     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_playername.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_servername.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_maxplayers.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	maxplayers  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	std::string server = s.get_string("servername", "");
 	servername  .setText (server);
 	servername  .changed.set
@@ -182,7 +195,10 @@ void Fullscreen_Menu_NetSetupGGZ::connectToMetaserver()
 	const char *metaserver;
 	metaserver = s.get_string("metaserver", WL_METASERVER);
 
-	NetGGZ::ref().initcore(metaserver, playername.text().c_str());
+	if (NetGGZ::ref().initcore(metaserver, playername.text().c_str())) {
+		// Update of server spinbox
+		maxplayers.setInterval(1, NetGGZ::ref().max_players());
+	}
 }
 
 

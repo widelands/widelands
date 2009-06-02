@@ -30,6 +30,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
+#include "ui_basic/spinbox.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "wui/gamechatpanel.h"
@@ -52,10 +53,13 @@ struct Fullscreen_Menu_NetSetupGGZ : public Fullscreen_Menu_Base {
 
 	virtual void think();
 
-	/**
-	 * \return the name chosen by the player
-	 */
+	/// \returns the name chosen by the player
 	std::string const & get_playername();
+
+	/// \returns the maximum number of players that may connect
+	int32_t get_maxplayers() {
+		return maxplayers.getValue();
+	}
 
 private:
 	uint32_t                                    m_butx;
@@ -67,6 +71,8 @@ private:
 	std::string                                 m_fn;
 	UI::Textarea                                title, m_users, m_opengames;
 	UI::Textarea                                m_playername, m_servername;
+	UI::Textarea                                m_maxplayers;
+	UI::SpinBox                                 maxplayers;
 	UI::Callback_Button<Fullscreen_Menu_NetSetupGGZ>            joingame;
 	UI::Callback_Button<Fullscreen_Menu_NetSetupGGZ>            hostgame;
 	UI::Callback_IDButton<Fullscreen_Menu_NetSetupGGZ, int32_t> back;
