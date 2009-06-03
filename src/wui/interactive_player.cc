@@ -336,9 +336,10 @@ void Interactive_Player::toggle_objectives() {
 void Interactive_Player::toggle_message_menu() {
 	if (m_message_menu.window)
 		delete m_message_menu.window;
-	else
+	else {
 		Widelands::MessageQueue::read_all(player());
 		new GameMessageMenu(*this, m_message_menu);
+	}
 }
 
 void Interactive_Player::toggle_buildhelp() {
