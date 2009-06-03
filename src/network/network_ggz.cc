@@ -685,8 +685,6 @@ void NetGGZ::join(char const * const tablename)
 	ggzcore_game_add_event_hook(game, GGZ_GAME_PLAYING, &NetGGZ::callback_game);
 
 	ggzcore_game_launch(game);
-
-	request_server_ip();
 }
 
 
@@ -733,11 +731,25 @@ uint32_t NetGGZ::max_players()
 }
 
 
-/// Sends a request for the ip of the connected game server
-void NetGGZ::request_server_ip()
+/// Tells the metaserver that the game started
+void NetGGZ::send_game_playing()
 {
-	if (used())
-		ggz_write_int(gamefd, op_request_ip);
+	if (used()) {
+		if (ggz_write_int(m_fd, op_state_playing) < 0)
+			log("ERROR: Game state could not be send!\n");
+	} else
+		log("ERROR: GGZ not used!\n");
+}
+
+
+/// Tells the metaserver that the game is done
+void NetGGZ::send_game_done()
+{
+	if (used()) {
+		if (ggz_write_int(m_fd, op_state_done) < 0)
+			log("ERROR: Game state could not be send!\n");
+	} else
+		log("ERROR: GGZ not used!\n");
 }
 
 

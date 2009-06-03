@@ -375,6 +375,12 @@ void NetHost::run()
 			return;
 	}
 
+#if HAVE_GGZ
+	// if this is a ggz game, tell the metaserver that the game started
+	if (use_ggz)
+		NetGGZ::ref().send_game_playing();
+#endif
+
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		if (d->clients[i].playernum == -2)
 			disconnectClient
@@ -434,6 +440,11 @@ void NetHost::run()
 			(loaderUI,
 			 d->settings.savegame ?
 			 Widelands::Game::Loaded : Widelands::Game::NewNonScenario);
+#if HAVE_GGZ
+		// if this is a ggz game, tell the metaserver that the game is done.
+		if (use_ggz)
+			NetGGZ::ref().send_game_done();
+#endif
 		clearComputerPlayers();
 	} catch (...) {
 		WLApplication::emergency_save(game);

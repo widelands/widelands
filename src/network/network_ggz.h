@@ -82,9 +82,11 @@ struct NetGGZ : public ChatProvider {
 	enum Protocol
 	{
 		op_greeting = 1,
-		op_request_ip = 2,
-		op_reply_ip = 3,
-		op_broadcast_ip = 4
+		op_request_ip = 2, // request the IP of the host
+		op_reply_ip = 3, // tell the server, that following package is our IP
+		op_broadcast_ip = 4,
+		op_state_playing = 5, // tell the server that the game was stated
+		op_state_done = 6 // tell the server that the gam ended
 	};
 
 	bool initcore(const char * metaserver, const char * playername);
@@ -92,7 +94,8 @@ struct NetGGZ : public ChatProvider {
 	bool usedcore();
 	void datacore();
 	void launch  ();
-	void request_server_ip();
+	void send_game_playing();
+	void send_game_done();
 	void join(const char *tablename);
 
 	// functions for local server setup
