@@ -1,0 +1,13 @@
+THIS IS NOT PART OF THE MAIN WIDELANDS BINARY AND SHOULD NOT BE LINKED TO IT
+
+This directory contains the widelands game_server module for ggzd needed to run
+widelands on a ggzd server. It is normally maintained in the official ggzd
+distribution (in ggzd/game_servers/widelands) so changes in it's code should be
+committed to their svn repository as well.
+
+If you want to use this version (properly more up to date than the one in ggzd)
+of the game_server module on your own server, download the newest ggzd from
+www.ggzgamingzone.org, replace the files in ggzd/game_servers/widelands, compile
+and run the server.
+You can than run widelands with --metaserver=YOURSERVERADRESS to connect to your
+own server.
