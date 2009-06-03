@@ -55,8 +55,9 @@ MessageBox::MessageBox
 		parent->get_inner_w() : g_gr->get_xres();
 	const int32_t outerheight = parent ?
 		parent->get_inner_h() : g_gr->get_yres();
-	const int32_t maxwidth = outerwidth - 80;
+	assert(outerwidth >= 80);
 	assert(outerheight >= 60);
+	const int32_t maxwidth = outerwidth - 80;
 	const int32_t maxheight = outerheight - 60;
 	uint32_t width, height;
 	std::string font = d->textarea->get_font_name();
