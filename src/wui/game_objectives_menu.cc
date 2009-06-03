@@ -22,6 +22,14 @@
 #include "interactive_player.h"
 #include "logic/player.h"
 #include "trigger/trigger_time.h"
+#include "wlapplication.h"
+
+using namespace Widelands;
+
+#define BUTTON_HEIGHT 20
+#define BUTTON_WIDTH 100
+#define OBJECTIVE_LIST 120
+#define FULL_OBJECTIVE_TEXT 240
 
 
 inline Interactive_Player & GameObjectivesMenu::iplayer() const {
@@ -33,9 +41,28 @@ GameObjectivesMenu::GameObjectivesMenu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 :
 UI::UniqueWindow
-	(&plr, &registry, 340, 5 + 120 + 5 + 240 + 5, _("Objectives Menu")),
-list         (this, 5,   5, get_inner_w() - 10, 120, Align_Left, false),
-objectivetext(this, 5, 130, get_inner_w() - 10, 240, "", Align_Left, 1)
+	(&plr, &registry,
+	 340, 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5 + BUTTON_HEIGHT + 5,
+	 _("Objectives Menu")),
+list         (this, 5,   5, get_inner_w() - 10, OBJECTIVE_LIST, Align_Left, false),
+objectivetext(this, 5, 130, get_inner_w() - 10, FULL_OBJECTIVE_TEXT, "", Align_Left, 1),
+
+m_claim_victory
+	(this,
+	 25,
+	 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5,
+	 BUTTON_WIDTH, BUTTON_HEIGHT,
+	 4, &GameObjectivesMenu::claim_victory, *this,
+	 _("Claim Victory"), std::string(), false),
+
+m_restart_mission
+	(this,
+	 25 + BUTTON_WIDTH + 25,
+	 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5,
+	 BUTTON_WIDTH, BUTTON_HEIGHT,
+	 4, &GameObjectivesMenu::restart_mission, *this,
+	 _("Restart Mission")),
+m_player(plr)
 {
 	list.selected.set(this, &GameObjectivesMenu::selected);
 	if (get_usedefaultpos())
@@ -44,6 +71,8 @@ objectivetext(this, 5, 130, get_inner_w() - 10, 240, "", Align_Left, 1)
 
 
 void GameObjectivesMenu::think() {
+	victorious(iplayer().get_playertype() == VICTORIOUS);
+
 	//  Adjust the list according to the game state.
 	Manager<Widelands::Objective> & mom = iplayer().game().map().mom();
 	Manager<Widelands::Objective>::Index const nr_objectives = mom.size();
@@ -77,4 +106,18 @@ void GameObjectivesMenu::think() {
 void GameObjectivesMenu::selected(uint32_t const t) {
 	objectivetext.set_text
 		(t == list_type::no_selection_index() ? std::string() : list[t].descr());
+}
+
+/*
+ *  Claim Victory & exit this game
+ */
+void GameObjectivesMenu::claim_victory() {
+	m_player.end_modal(0);
+}
+
+/*
+ * Restart this campaign
+ */
+void GameObjectivesMenu::restart_mission() {
+	m_player.end_modal(0);
 }

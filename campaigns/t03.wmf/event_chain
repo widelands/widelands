@@ -375,5 +375,6 @@ event="Show ruin"
 event="Goto ruin"
 event="Story Msg 7"
 event="Reveal Empiretut"
+event=Victory
 current_event="0"
 state="init"

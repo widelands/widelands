@@ -32,6 +32,7 @@
 #include "event_reveal_objective.h"
 #include "event_reveal_scenario.h"
 #include "event_set_timer.h"
+#include "event_victory.h"
 #include "profile/profile.h"
 
 #include "wexception.h"
@@ -105,6 +106,10 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 			("Gives vision for a specified amount of time of all locations "
 			 "whithin an area to the player.")
 	},
+	{
+	  "victory",                 _("victory"),
+	  _("Allows a player to claim victory of this campain")
+	}
 };
 
 
@@ -132,6 +137,7 @@ Event & create
 	case 10: return *new Event_Road            (name, state);
 	case 11: return *new Event_Set_Timer       (name, state);
 	case 12: return *new Event_Unhide_Area     (name, state);
+	case 13: return *new Event_Victory         (name, state);
 	default:
 		assert(false);
 	}
@@ -169,6 +175,7 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	case 10: return *new Event_Road            (s, egbase);
 	case 11: return *new Event_Set_Timer       (s, egbase);
 	case 12: return *new Event_Unhide_Area     (s, egbase);
+	case 13: return *new Event_Victory         (s, egbase);
 	default:
 		assert(false);
 	}

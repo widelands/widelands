@@ -39,6 +39,8 @@ private:
 	Widget_Cache          m_cache_mode;
 };
 
+enum PlayerType {NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED};
+
 struct Interactive_GameBase : public Interactive_Base {
 	struct Game_Main_Menu_Windows {
 		UI::UniqueWindow::Registry loadgame;
@@ -56,7 +58,8 @@ struct Interactive_GameBase : public Interactive_Base {
 	};
 
 	Interactive_GameBase
-		(Widelands::Game &, Section & global_s, bool chatenabled = false);
+	  (Widelands::Game &, Section & global_s,
+		PlayerType pt = NONE, bool chatenabled = false);
 	Widelands::Game * get_game() const;
 	Widelands::Game &     game() const;
 
@@ -75,6 +78,8 @@ struct Interactive_GameBase : public Interactive_Base {
 	}
 
 	virtual void node_action() = 0;
+	const PlayerType & get_playertype()const {return m_playertype;}
+	void set_playertype(const PlayerType & pt) {m_playertype = pt;}
 
 protected:
 	Game_Main_Menu_Windows m_mainm_windows;
@@ -84,6 +89,8 @@ protected:
 	std::string              m_building_statistics_format;
 	std::string              m_building_window_title_format;
 	bool                     m_chatenabled;
+
+	PlayerType m_playertype;
 };
 
 #endif

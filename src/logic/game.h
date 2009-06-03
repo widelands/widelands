@@ -225,6 +225,7 @@ private:
 
 	uint32_t m_last_stats_update;
 	General_Stats_vector m_general_stats;
+
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

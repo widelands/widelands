@@ -249,13 +249,14 @@ event=Reveal Objective 7 - Attack
 current_event=0
 state=init
 
-[Victory]
+[Victory1]
 repeating=false
 conditional_element_00=trigger
 conditional_element_00_data=Victory
 event=Diary page 10
 event=7 days later
 event=Diary page 11
+event=Victory
 current_event=0
 state=init
 

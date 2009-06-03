@@ -23,6 +23,8 @@
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/unique_window.h"
+#include "ui_basic/button.h"
+#include "wui/interactive_player.h"
 
 namespace Widelands {
 struct Game;
@@ -42,6 +44,22 @@ private:
 	typedef UI::Listselect<Widelands::Objective &> list_type;
 	list_type              list;
 	UI::Multiline_Textarea objectivetext;
+	UI::Callback_Button<GameObjectivesMenu> m_claim_victory, m_restart_mission;
+public:
+	bool victorious(bool v = false) {
+		static bool m_victory = v;
+		if (v) {
+			m_victory = v;
+		}
+		m_claim_victory.set_enabled(m_victory);
+		return m_victory;
+	}
+private:
+	void claim_victory();
+	void restart_mission();
+
+	Interactive_Player & m_player;
+
 };
 
 #endif

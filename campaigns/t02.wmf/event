@@ -1202,3 +1202,8 @@ window_title=_A friendly village joined us!
 posx=0
 is_modal=true
 button_00=_OK
+
+[Victory]
+type=victory
+version=1
+advance=true

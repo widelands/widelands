@@ -23,7 +23,8 @@
 
 #include "logic/game.h"
 Interactive_GameBase::Interactive_GameBase
-	(Widelands::Game & _game, Section & global_s, bool const chatenabled)
+	(Widelands::Game & _game, Section & global_s,
+	 PlayerType pt, bool const chatenabled)
 	:
 	Interactive_Base(_game, global_s),
 	m_building_census_format
@@ -32,7 +33,8 @@ Interactive_GameBase::Interactive_GameBase
 		(global_s.get_string("building_statistics_format",   "%t")),
 	m_building_window_title_format
 		(global_s.get_string("building_window_title_format", "%A")),
-	m_chatenabled(chatenabled)
+	m_chatenabled(chatenabled),
+	m_playertype(pt)
 {}
 
 /// \return a pointer to the running \ref Game instance.

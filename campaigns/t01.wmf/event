@@ -313,3 +313,8 @@ button_00=_ OK
 type=reveal_scenario
 version=2
 entry=barbariantut01
+
+[Victory1]
+type=victory
+version=1
+advance=true

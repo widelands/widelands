@@ -39,7 +39,7 @@
 Interactive_Spectator::Interactive_Spectator
 	(Widelands::Game & _game, Section & global_s, bool const multiplayer)
 	:
-	Interactive_GameBase(_game, global_s, multiplayer),
+	Interactive_GameBase(_game, global_s, OBSERVER, multiplayer),
 
 #define INIT_BTN(picture, callback, tooltip)                                  \
  TOOLBAR_BUTTON_COMMON_PARAMETERS,                                            \
