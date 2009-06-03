@@ -50,7 +50,7 @@ int main(int argc, char** argv)
 					<< "Published under GNU GPL v.2 conditions " << std::endl << std::endl
 					<< "Options: " << std::endl
 					<< "[-h | --help]    This help screen" << std::endl
-					<< "[-v | --version] Version information" << std::endl
+					<< "[-v | --version] Version information" << std::endl;
 				exit(EXIT_SUCCESS);
 			case 'v':
 				std::cout << "GGZ Widelands Server version " WIDELANDS_SERVER_VERSION << std::endl;
