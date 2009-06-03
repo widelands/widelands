@@ -722,7 +722,7 @@ uint32_t NetGGZ::max_players()
 {
 	if (!ggzserver)
 		return 1;
-	if (!room)
+	if (!ggzcore_server_is_in_room(ggzserver))
 		return 1;
 	GGZGameType * const gametype = ggzcore_room_get_gametype(room);
 	//  FIXME problem in ggz - for some reasons only 8 seats are currently

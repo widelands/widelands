@@ -97,9 +97,11 @@ struct NetGGZ : public ChatProvider {
 
 	// functions for local server setup
 	uint32_t max_players();
+	/// sets the maximum number of players that may be in the game
 	void set_local_maxplayers(uint32_t mp) {
 		tableseats = mp;
 	}
+	/// sets the servername shown in the games list
 	void set_local_servername(std::string name) {
 		if (name.empty())
 			name = "WL-Default";
