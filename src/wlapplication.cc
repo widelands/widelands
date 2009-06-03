@@ -772,10 +772,58 @@ bool WLApplication::init_hardware() {
 	setenv("SDL_VIDEO_ALLOW_SCREENSAVER", "1", 0);
 	#endif
 
-	if (SDL_Init(sdl_flags) == -1) {
-		//TODO: that's not handled yet!
-		throw wexception("Failed to initialize SDL: %s", SDL_GetError());
+	//try all available video drivers till we find one that matches
+	std::vector<std::string> videomode;
+	int result = -1;
+
+	//add default video mode
+#ifdef linux
+	videomode.push_back("x11");
+#elif WIN32
+	videomode.push_back("windib");
+#elif __APPLE__
+	videomode.push_back("Quartz");
+#endif
+
+	//add experimental video modes
+	if (m_gfx_hw_improvements) {
+#ifdef linux
+		videomode.push_back("svga");
+		videomode.push_back("fbcon");
+		videomode.push_back("directfb");
+		videomode.push_back("dga");
+#elif WIN32
+		videomode.push_back("directx");
+#endif
 	}
+
+	//if a video mode is given on the command line, add that one first
+	const char * videodrv;
+	videodrv = getenv("SDL_VIDEODRIVER");
+	if (videodrv) {
+		log("Also adding video driver %s\n", videodrv);
+		videomode.push_back(videodrv);
+	}
+
+	char videodrvused[26];
+	strcpy(videodrvused, "SDL_VIDEODRIVER=\0");
+	std::cout << videodrvused << "&" << std::endl;
+	for (int i = videomode.size() - 1; result == -1 && i >= 0; --i) {
+	  strcpy(videodrvused + 16, videomode[i].c_str());
+	  videodrvused[16 + videomode[i].size()] = '\0';
+		putenv(videodrvused);
+		//SDL_VideoDriverName(videodrvused, 16);
+		videodrv = getenv("SDL_VIDEODRIVER");
+		log
+			("Graphics: Trying Video driver: %i %s %s\n",
+			 i, videomode[i].c_str(), videodrvused);
+	  result = SDL_Init(sdl_flags);
+	}
+
+	if (result == -1)
+		throw wexception
+			("Failed to initialize SDL, no valid video driver: %s",
+			 SDL_GetError());
 
 	SDL_ShowCursor(SDL_DISABLE);
 	SDL_EnableUNICODE(1); //needed by helper.h:is_printable()
@@ -1749,7 +1797,6 @@ bool WLApplication::campaign_game()
 	}
 	return false;
 }
-
 
 struct ReplayGameController : public GameController {
 	ReplayGameController(Widelands::Game & game, std::string const & filename) :

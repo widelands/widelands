@@ -87,21 +87,10 @@ Graphic::Graphic
 	int32_t flags = SDL_SWSURFACE;
 
 	if (hw_improvements) {
-		char videodrv[16];
-		SDL_VideoDriverName(videodrv, 16);
-		//videodrv = getenv("SDL_VIDEODRIVER");
-		log("Graphics: Video driver: %s\n", videodrv);
-#ifdef __linux__
-		//  std::string videomode = "SDL_VIDEODRIVER=dga\n";
-		//  std::string videomode = "SDL_VIDEODRIVER=x11\n";
-		//putenv((char*)videomode.c_str());
-		//videodrv = getenv("SDL_VIDEODRIVER");
-		//log("Graphics: Video driver(update): %s\n",videodrv);
-#endif
 		log("Graphics: Trying HW_SURFACE\n");
 		flags = SDL_HWSURFACE; //  |SDL_HWACCEL|SDL_OPENGL;
 	}
-	if (double_buffer) {
+	if (hw_improvements && double_buffer) {
 		flags |= SDL_DOUBLEBUF;
 		log("Graphics: Trying DOUBLE BUFFERING\n");
 	}
@@ -110,7 +99,13 @@ Graphic::Graphic
 		log("Graphics: Trying FULLSCREEN\n");
 	}
 
-	SDL_Surface * sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
+	SDL_Surface * sdlsurface = 0;
+
+	sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
+
+	if (!sdlsurface)
+		throw wexception("could not set video mode: %s", SDL_GetError());
+
 	if (0 != (sdlsurface->flags & SDL_HWSURFACE))
 		log("Graphics: HW SURFACE ENABLED\n");
 	if (0 != (sdlsurface->flags & SDL_DOUBLEBUF))
@@ -124,8 +119,11 @@ Graphic::Graphic
 	SDL_VideoInfo const * info = 0;
 
 	info = SDL_GetVideoInfo();
+	char videodrvused[16];
+	SDL_VideoDriverName(videodrvused, 16);
 	log
 		("**** GRAPHICS REPORT ****\n"
+		 " VIDEO DRIVER %s\n"
 		 " hw surface possible %d\n"
 		 " window manager available %d\n"
 		 " blitz_hw %d\n"
@@ -139,6 +137,7 @@ Graphic::Graphic
 		 " vfmt %p\n"
 		 " size %d %d\n"
 		 "**** END GRAPHICS REPORT ****\n",
+		 videodrvused,
 		 info->hw_available,
 		 info->wm_available,
 		 info->blit_hw,
@@ -155,9 +154,6 @@ Graphic::Graphic
 
 	printf("\nhw avail:%d", info->hw_available);
 	log("Graphics: flags: %x\n", sdlsurface->flags);
-
-	if (!sdlsurface)
-		throw wexception("could not set video mode: %s", SDL_GetError());
 
 	assert
 		(sdlsurface->format->BytesPerPixel == 2 ||
