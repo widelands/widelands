@@ -4,6 +4,12 @@
 # Do not change this file, instead create a new Makefile.local
 # and overwrite the variables listed here
 
+# Use the GGZ Gamingzone? Enable for releases.
+ifndef USE_GGZ
+USE_GGZ:=NO
+endif
+
+
 #doxygen
 DOXYGEN=/usr/bin/doxygen
 
@@ -47,6 +53,12 @@ icon.o: Widelands_win.rc
 ####################################################################
 #  NO USER CHANGES BELOW THIS POINT                                #
 ####################################################################
+
+ifeq ($(USE_GGZ),YES)
+ADD_CFLAGS:= $(ADD_CFLAGS) -DUSE_GGZ
+ADD_LDFLAGS:=-lggzmod -lggzcore -lggz -lexpat
+endif
+
 
 ##############################################################################
 # Flags configuration

@@ -13,3 +13,6 @@ BUILD=release
 
 #### Version #### // Needed for 'make dist'
 Version="Build13"
+
+#### GGZ usage? NO/YES ####
+USE_GGZ=YES

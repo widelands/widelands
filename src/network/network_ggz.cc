@@ -198,9 +198,12 @@ bool NetGGZ::initcore
 		(ggzserver, GGZ_CHANNEL_CONNECTED, &NetGGZ::callback_server);
 	ggzcore_server_add_event_hook
 		(ggzserver, GGZ_CHANNEL_READY, &NetGGZ::callback_server);
-
+#if GGZCORE_VERSION_MINOR == 0
 	ggzcore_server_set_hostinfo(ggzserver, metaserver, WL_METASERVER_PORT, 0);
-
+#else
+	ggzcore_server_set_hostinfo
+		(ggzserver, metaserver, WL_METASERVER_PORT, GGZ_CONNECTION_CLEAR);
+#endif
 	ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, playername, 0, 0);
 
 	ggzcore_server_connect(ggzserver);
@@ -376,7 +379,11 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 	case GGZ_LOGGED_IN:
 		log("GGZCORE ## -- logged in\n");
 		ggzcore_server_list_gametypes(ggzserver, 0);
+#if GGZCORE_VERSION_MINOR == 0
 		ggzcore_server_list_rooms(ggzserver, -1, 1);
+#else
+		ggzcore_server_list_rooms(ggzserver, 1);
+#endif
 		break;
 	case GGZ_ENTERED:
 		log("GGZCORE ## -- entered\n");
@@ -394,7 +401,11 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 		ggzcore_room_add_event_hook(room, GGZ_CHAT_EVENT, &NetGGZ::callback_room);
 
 		// Request list of tables and players
+#if GGZCORE_VERSION_MINOR == 0
 		ggzcore_room_list_tables(room, -1, 0);
+#else
+		ggzcore_room_list_tables(room);
+#endif
 		ggzcore_room_list_players(room);
 
 		// now send some text about the room to the chat menu
