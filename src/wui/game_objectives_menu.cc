@@ -44,9 +44,19 @@ UI::UniqueWindow
 	(&plr, &registry,
 	 340, 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5 + BUTTON_HEIGHT + 5,
 	 _("Objectives Menu")),
-list         (this, 5,   5, get_inner_w() - 10, OBJECTIVE_LIST, Align_Left, false),
-objectivetext(this, 5, 130, get_inner_w() - 10, FULL_OBJECTIVE_TEXT, "", Align_Left, 1),
-
+list
+	(this, 
+	 5, 5,
+	 get_inner_w() - 10, OBJECTIVE_LIST,
+	 Align_Left,
+	 false),
+objectivetext
+	(this,
+	 5, 130,
+	 get_inner_w() - 10, FULL_OBJECTIVE_TEXT,
+	 "",
+	 Align_Left,
+	 1),
 m_claim_victory
 	(this,
 	 25,
@@ -54,7 +64,6 @@ m_claim_victory
 	 BUTTON_WIDTH, BUTTON_HEIGHT,
 	 4, &GameObjectivesMenu::claim_victory, *this,
 	 _("Claim Victory"), std::string(), false),
-
 m_restart_mission
 	(this,
 	 25 + BUTTON_WIDTH + 25,
