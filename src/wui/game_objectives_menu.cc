@@ -45,7 +45,7 @@ UI::UniqueWindow
 	 340, 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5 + BUTTON_HEIGHT + 5,
 	 _("Objectives Menu")),
 list
-	(this, 
+	(this,
 	 5, 5,
 	 get_inner_w() - 10, OBJECTIVE_LIST,
 	 Align_Left,
