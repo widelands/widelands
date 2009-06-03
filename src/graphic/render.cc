@@ -397,7 +397,7 @@ AnimationGfx::AnimationGfx(AnimationData const * data)
 	std::string::size_type const picnametempl_size = data->picnametempl.size();
 	if (sizeof(filename) < picnametempl_size + 3 + 4 + 1)
 		throw wexception
-			("buffer too small (%lu) for picture name temlplate of size %lu\n",
+			("buffer too small (%u) for picture name temlplate of size %u\n",
 			 sizeof(filename), picnametempl_size);
 	strcpy(filename, data->picnametempl.c_str());
 
