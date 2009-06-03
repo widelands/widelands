@@ -71,7 +71,8 @@ static uint32_t luminance_table_b[0x100];
 Graphic::Graphic
 	(int32_t w, int32_t h, int32_t bpp,
 	 bool fullscreen, bool hw_improvements, bool double_buffer)
-: m_nr_update_rects(0), m_update_fullscreen(false), m_roadtextures(0)
+	: m_rendertarget(0), m_nr_update_rects(0), m_update_fullscreen(false),
+	  m_roadtextures(0)
 {
 	for
 		(uint32_t i = 0, r = 0, g = 0, b = 0;
@@ -165,6 +166,12 @@ Graphic::Graphic
 
 	m_screen.set_sdl_surface(*sdlsurface);
 
+	if (m_rendertarget) {
+	  //FIXME do we not need to clean up the old render target?
+	  delete m_rendertarget;
+	  m_rendertarget = 0;
+	}
+	assert(m_rendertarget == 0);
 	m_rendertarget = new RenderTarget(&m_screen);
 }
 
@@ -175,7 +182,9 @@ Graphic::~Graphic()
 {
 	flush(PicMod_UI | PicMod_Menu | PicMod_Game);
 	delete m_roadtextures;
-	delete m_rendertarget;
+	if (m_rendertarget) {
+	  delete m_rendertarget;
+	}
 
 	std::vector<Picture>::size_type const pictures_size = m_pictures.size();
 	for (std::vector<Picture>::size_type i = 0; i < pictures_size; ++i)
@@ -184,7 +193,7 @@ Graphic::~Graphic()
 				("WARNING: picture %zu with module = 0x%x has not been freed "
 				 "(u.{fname,rendertarget} = %p). Some code may try to free it "
 				 "later, which would cause undefined behaviour!!!\n",
-				 i, m_pictures[i].module, m_pictures[i].u.fname);
+				 i, m_pictures[i].module, m_pictures[i].fname);
 }
 
 /**
@@ -283,14 +292,15 @@ void Graphic::flush(uint8_t const module) {
 	container_iterate(std::vector<Picture>, m_pictures, i) {
 		if        (!  i.current->module)             {
 			assert(0 == i.current->surface);
-			assert(0 == i.current->u.fname);
+			assert(0 == i.current->fname);
+			assert(0 == i.current->rendertarget);
 		} else if (! (i.current->module &= ~module)) {
 			//  Unmasked the modules that should be flushed.
 			// Once the picture is no longer in any mods, free it.
 			delete i.current->surface; i.current->surface = 0;
-			if (i.current->u.fname) {
-				m_picturemap.erase(i.current->u.fname);
-				free(i.current->u.fname); i.current->u.fname = 0;
+			if (i.current->fname) {
+				m_picturemap.erase(i.current->fname);
+				free(i.current->fname); i.current->fname = 0;
 			}
 		}
 	}
@@ -349,9 +359,10 @@ uint32_t Graphic::get_picture(uint8_t const module, char const * const fname) {
 
 		Picture & pic = m_pictures[id];
 
-		pic.u.fname   = strdup(fname);
+		assert(pic.fname == 0);
+		pic.fname   = strdup(fname);
 
-		assert(pic.u.fname); //  FIXME no proper check for NULL return value!
+		assert(pic.fname); //  FIXME no proper check for NULL return value!
 
 		pic.surface   = new Surface();
 
@@ -374,10 +385,11 @@ uint32_t Graphic::get_picture
 	pic.surface   = &surf;
 
 	if (fname) {
-		pic.u.fname = strdup(fname);
+	  assert(pic.fname == 0);
+		pic.fname = strdup(fname);
 		m_picturemap[fname] = id;
 	} else
-		pic.u.fname =  0;
+		pic.fname =  0;
 
 	return id;
 }
@@ -582,7 +594,8 @@ uint32_t Graphic::create_surface(int32_t w, int32_t h)
 	pic.module    = PicSurface; // mark as surface
 	pic.surface   = new Surface();
 	pic.surface->set_sdl_surface(surf);
-	pic.u.rendertarget = new RenderTarget(pic.surface);
+	assert(pic.rendertarget == 0);
+	pic.rendertarget = new RenderTarget(pic.surface);
 
 	return id;
 }
@@ -599,7 +612,7 @@ void Graphic::free_surface(uint32_t const picid) {
 	{
 		log
 			("Graphic::free_surface ignoring free of %u %u %s\n",
-			 picid, m_pictures[picid].module, m_pictures[picid].u.fname);
+			 picid, m_pictures[picid].module, m_pictures[picid].fname);
 		return;
 	}
 	assert
@@ -609,10 +622,18 @@ void Graphic::free_surface(uint32_t const picid) {
 
 	Picture & pic = m_pictures[picid];
 
-	delete pic.u.rendertarget;
-	pic.u.rendertarget = 0;
-	delete pic.surface;
-	pic.surface = 0;
+	if (pic.rendertarget) {
+	  delete pic.rendertarget;
+	  pic.rendertarget = 0;
+	}
+	if (pic.fname) {
+	  delete pic.fname;
+	  pic.fname = 0;
+	}
+	if (pic.surface) {
+	  delete pic.surface;
+	  pic.surface = 0;
+	}
 	pic.module = 0;
 }
 
@@ -663,7 +684,7 @@ RenderTarget * Graphic::get_surface_renderer(uint32_t const pic) {
 	assert(pic < m_pictures.size());
 	//  assert(m_pictures[pic].module == 0xff); fails showing terrains in editor
 
-	RenderTarget & rt = *m_pictures[pic].u.rendertarget;
+	RenderTarget & rt = *m_pictures[pic].rendertarget;
 
 	rt.reset();
 
