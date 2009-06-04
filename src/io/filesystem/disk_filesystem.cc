@@ -422,6 +422,12 @@ void * RealFSImpl::fastLoad
 	lseek(file, 0, SEEK_SET);
 
 	data = mmap(0, length, PROT_READ, MAP_PRIVATE, file, 0);
+
+	//if mmap doesn't work for some strange reason try the old way
+	if (data == MAP_FAILED) {
+		return Load(fname, length);
+	}
+
 	fast = true;
 
 	assert(data);
