@@ -1,15 +1,16 @@
 # Widelands po/fi_FI/campaigns/t02.wmf.po
 # Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007.
+# Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:36+0000\n"
-"PO-Revision-Date: 2007-03-24 05:59+0200\n"
-"Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
-"Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"POT-Creation-Date: 2009-06-04 12:52+0000\n"
+"PO-Revision-Date: 2009-06-03 01:47+0300\n"
+"Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
+"Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,11 +20,11 @@ msgstr ""
 
 #: ../../../campaigns/t02.wmf/elemental:7
 msgid "Tutorial2 - A Place to call Home"
-msgstr ""
+msgstr "Opastus 2 - Paikka, jota kutsua kodiksi"
 
 #: ../../../campaigns/t02.wmf/elemental:9
 msgid "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the higher production buildings, including mining and the military expansions will be introduced."
-msgstr ""
+msgstr "Barbaarien opastuskampanjan toinen komennus. Tällä opastuskomennuksella esitellään lisää tuotantorakennuksia, kaivokset ja armeijan vaikutusvalta-alueen laajentaminen."
 
 #: ../../../campaigns/t02.wmf/event:134
 #, fuzzy
@@ -32,7 +33,7 @@ msgstr "Thron puhuu..."
 
 #: ../../../campaigns/t02.wmf/event:136
 msgid " \"The war goes on. More and more of our brothers and sisters flee the brutal war raging in the capital beneath the trees.<br> The stories they tell about the deeds of our kin are sad to hear. I've spent nights lying awake, restless, more tired I ever believed one could be. Yet whenever I close my eyes, I see the fortress my father built consumed by flames. The throne between the trees, the symbol of unity and peace among our kin became the wedge that drives us apart.\" "
-msgstr ""
+msgstr "\"Sota jatkuu. Yhä useampia veljiämme ja sisariamme pakenee veristä sotaa, joka raivoaa pääkaupungissa puiden alla.<br> Heidän kertomuksensa verisukulaistemme teoista ovat surullista kuultavaa. Olen viettänyt öitä valveilla, levottomana, väsyneempänä kuin koskaan uskoin kenenkään voivan olla. Silti aina kun suljen silmäni, näen isäni rakentaman linnoituksen liekkien nielemänä. Puiden keskellä kohoavasta valtaistuimesta, väkemme välisen yhtenäisyyden ja rauhan symbolista, tuli kiila joka ajaa meitä erillemme.\""
 
 #: ../../../campaigns/t02.wmf/event:138 ../../../campaigns/t02.wmf/event:149
 #: ../../../campaigns/t02.wmf/event:160
@@ -58,7 +59,7 @@ msgstr ""
 
 #: ../../../campaigns/t02.wmf/event:147
 msgid " \"Today my hunters brought men, women and little children who had hidden out in the forests, trying to escape the war, hate and revenge that rage among the tribes fighting each other like in old times, when we were no more but the wild beasts driven and controlled by instincts. None of my brothers will ever gain and hold control over the wooden throne, none of the tribes will be strong enough to subdue the other. There will be no end to this slaughtering, unless... is this it? As father told me?<br> Rise against whoever threatens our very existence, may it even be one of your blood or mind?\" "
-msgstr ""
+msgstr "\"Tänään metsästäjäni toivat mukanaan miehiä, naisia ja pieniä lapsia, jotka olivat piilotelleet metsässä, yrittäen paeta sodalta, vihalta ja kostolta, jotka raivoavat heimojen välillä. Heimot taistelevat toisiaan vastaan kuin vanhoina aikoina, jolloin emme olleet parempia kuin villipedot, joita vaistot ajoivat ja hallitsivat. Yksikään veljistäni ei koskaan saa ja pidä valtaansa puista valtaistuinta, yksikään heimoista ei ole riittävän vahva voittamaan toista. Tälle verilöylylle ei ole loppua, ellei... onko tämä se, mistä isäni minulle puhui?<br> Nouse vastaan ketä tahansa, joka uhkaa olemassaoloamme, vaikka se olisi joku omaa vertasi tai samanmielinen?\""
 
 #: ../../../campaigns/t02.wmf/event:158
 msgid " \"Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches, and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long - but I never thought my brothers would engage in this senseless battle for so long either.<br> Perhaps it's time to make ourselves feel a little more at ease here. Perhaps it's time to give those who still live and think united a new home, replacing what is now lost to us? Until we can return to the place we once called our home...\" "

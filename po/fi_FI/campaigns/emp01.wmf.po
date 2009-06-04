@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"POT-Creation-Date: 2009-06-04 12:52+0000\n"
 "PO-Revision-Date: 2007-03-24 05:54+0200\n"
 "Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
 "Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
@@ -63,6 +63,7 @@ msgid " \"Sire, I fear we are not safe in this foreign land. Who knows what terr
 msgstr ""
 
 #: ../../../campaigns/emp01.wmf/event:136
+#: ../../../campaigns/emp01.wmf/objective:7
 #, fuzzy
 msgid "* Build a barracks at the red point on the east side of the forests, to the right of your headquarters."
 msgstr "Rakenna parakki punaiseen kohtaan itäänpäin metsästä"
@@ -105,6 +106,7 @@ msgid " \"Hey Lutius, I just met Saledus outside.<br> He told me about the barra
 msgstr ""
 
 #: ../../../campaigns/emp01.wmf/event:175
+#: ../../../campaigns/emp01.wmf/objective:15
 #, fuzzy
 msgid "* Build a lumberjack's house at the red point, south of your headquarters."
 msgstr "Rakenna parakki punaiseen kohtaan itäänpäin metsästä"
@@ -125,6 +127,7 @@ msgid " \"Hey Lutius, I got the message that our first lumberjack started his wo
 msgstr ""
 
 #: ../../../campaigns/emp01.wmf/event:195
+#: ../../../campaigns/emp01.wmf/objective:23
 #, fuzzy
 msgid "* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
 msgstr "Rakenna parakki punaiseen kohtaan itäänpäin metsästä"
@@ -152,6 +155,7 @@ msgid " \"Hey, my good old friend. I just thought about the rocks standing on th
 msgstr ""
 
 #: ../../../campaigns/emp01.wmf/event:250
+#: ../../../campaigns/emp01.wmf/objective:39
 msgid "* Build a quarry in the south to cut some stones and marble out of the rocks.<br> These might be used for future buildings."
 msgstr ""
 
@@ -197,26 +201,12 @@ msgstr ""
 msgid "Build a barracks"
 msgstr ""
 
-#: ../../../campaigns/emp01.wmf/objective:7
-#, fuzzy
-msgid "* Build a barracks at the red point in the east of the forest."
-msgstr "Rakenna parakki punaiseen kohtaan itäänpäin metsästä"
-
 #: ../../../campaigns/emp01.wmf/objective:13
 msgid "Build a lumberjack's house"
 msgstr ""
 
-#: ../../../campaigns/emp01.wmf/objective:15
-#, fuzzy
-msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
-msgstr "Rakenna parakki punaiseen kohtaan itäänpäin metsästä"
-
 #: ../../../campaigns/emp01.wmf/objective:21
 msgid "Build two lumberjack's houses and a sawmill"
-msgstr ""
-
-#: ../../../campaigns/emp01.wmf/objective:23
-msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
 msgstr ""
 
 #: ../../../campaigns/emp01.wmf/objective:29
@@ -227,9 +217,13 @@ msgstr ""
 msgid "Build a quarry"
 msgstr ""
 
-#: ../../../campaigns/emp01.wmf/objective:39
-msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
-msgstr ""
+#, fuzzy
+#~ msgid "* Build a barracks at the red point in the east of the forest."
+#~ msgstr "Rakenna parakki punaiseen kohtaan itäänpäin metsästä"
+
+#, fuzzy
+#~ msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
+#~ msgstr "Rakenna parakki punaiseen kohtaan itäänpäin metsästä"
 
 #~ msgid "First mission of the Empire campaign"
 #~ msgstr "Ensimmäinen tehtävä imperiumikampanjasta"

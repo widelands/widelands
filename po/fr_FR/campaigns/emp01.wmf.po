@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"POT-Creation-Date: 2009-06-04 13:01+0000\n"
 "PO-Revision-Date: 2008-08-18 23:07+0100\n"
 "Last-Translator: Jean-Pierre Gemble <jpgemble@voila.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,6 +63,7 @@ msgid " \"Sire, I fear we are not safe in this foreign land. Who knows what terr
 msgstr " \"Sire, je crains que nous ne soyons pas en sécurité dans ce pays étranger. Qui sait quelles épouvantables créatures vivent au-delà de cette forêt, dans ce grand désert ? Qu'arriverait-il si ces créatures s'introduisent dans les bois et attendent le moment opportun pour nous attaquer ?<br> Bien, peut-être que ma crainte est erronée, mais il faut surveiller la forêt, nous pourrons alors être sûrs de voir tout ennemi potentiel avant qu'il ne puisse nous voir.<br> Nous devrions vraiment construire une caserne dans la partie est de la forêt. L'un d'entre nous surveillera les ténèbres et nous protégera des attaques de ces créatures.\"<br><br>-- NOUVEL OBJECTIF --<br>"
 
 #: ../../../campaigns/emp01.wmf/event:136
+#: ../../../campaigns/emp01.wmf/objective:7
 msgid "* Build a barracks at the red point on the east side of the forests, to the right of your headquarters."
 msgstr "* Construisez une caserne sur le point rouge à la lisière est de la forêt, à la droite de votre quartier général."
 
@@ -105,6 +106,7 @@ msgid " \"Hey Lutius, I just met Saledus outside.<br> He told me about the barra
 msgstr " \"Hé Lutius, je viens juste de rencontrer Saledus dehors.<br> Il m'a parlé de la caserne. Hé bien, je ne suis pas de celles qui pensent que nous avons besoin de plus de casernes, mais d'un autre côté nous pourrions nous concentrer sur d'autres choses maintenant.<br> Il est évident que nous avons besoin de bois pour réparer notre bateau. Je suis donc allé me promener dans la forêt hier et j'ai trouvé un bel endroit pour une maison de bûcheron au sud de notre quartier général.<br><br>-- NOUVEL OBJECTIF --<br>"
 
 #: ../../../campaigns/emp01.wmf/event:175
+#: ../../../campaigns/emp01.wmf/objective:15
 #, fuzzy
 msgid "* Build a lumberjack's house at the red point, south of your headquarters."
 msgstr "* Construisez une maison de bûcheron sur le point rouge, au sud de votre quartier général"
@@ -125,6 +127,7 @@ msgid " \"Hey Lutius, I got the message that our first lumberjack started his wo
 msgstr " \"Hé Lutius, j'ai eu l'information que notre premier bûcheron a commencé le travail aujourd'hui. Peut-être serait-il judicieux d'attendre qu'il ait déboisé suffisamment pour construire deux maisons de bûcheron supplémentaires, pour améliorer le rendement.<br>Mais malheureusement ces troncs d'arbre sont inutiles pour réparer notre bateau ; nous avons besoin de planches, comme en nécessite tout bateau et aussi tout grand bâtiment.  Nous devons donc construire une scierie, dès que nous aurons assez de place pour cela.\"<br><br>-- NOUVEL OBJECTIF --<br>"
 
 #: ../../../campaigns/emp01.wmf/event:195
+#: ../../../campaigns/emp01.wmf/objective:23
 #, fuzzy
 msgid "* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
 msgstr "* Construisez deux maisons de bûcheron plus loin et une scierie dès qu'il y a assez d'espace."
@@ -153,6 +156,7 @@ msgid " \"Hey, my good old friend. I just thought about the rocks standing on th
 msgstr " \"Hé mon vieil ami, je viens juste de penser aux rochers de la rive sud de cette île. Peut-être pourrions nous en extraire quelques pierres utiles et du beau marbre.<br> La réparation de notre navire prendra de toute façon quelques semaines, et les ressources que nous récoltons maintenant pourrait être la base de grands et solides bâtiments dans un autre pays.\"<br><br>-- NOUVEL OBJECTIF --<br>"
 
 #: ../../../campaigns/emp01.wmf/event:250
+#: ../../../campaigns/emp01.wmf/objective:39
 msgid "* Build a quarry in the south to cut some stones and marble out of the rocks.<br> These might be used for future buildings."
 msgstr "* Construisez une carrière au sud pour extraire des pierres et du marbre des rochers.<br> Ceci pourra servir pour nos futures constructions."
 
@@ -197,25 +201,13 @@ msgstr "Péninsule sécurisée"
 msgid "Build a barracks"
 msgstr "Construisez une caserne"
 
-#: ../../../campaigns/emp01.wmf/objective:7
-msgid "* Build a barracks at the red point in the east of the forest."
-msgstr "* Construisez une caserne sur le point rouge à l'est de la forêt."
-
 #: ../../../campaigns/emp01.wmf/objective:13
 msgid "Build a lumberjack's house"
 msgstr "Construisez une maison de bûcheron"
 
-#: ../../../campaigns/emp01.wmf/objective:15
-msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
-msgstr "* Construisez une maison de bûcheron, sur le point rouge au sud de votre quartier général."
-
 #: ../../../campaigns/emp01.wmf/objective:21
 msgid "Build two lumberjack's houses and a sawmill"
 msgstr "Construisez deux maisons de bûcheron et une scierie"
-
-#: ../../../campaigns/emp01.wmf/objective:23
-msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
-msgstr "* Construisez deux maisons de bûcheron plus loin et une scierie dès qu'il y a assez d'espace."
 
 #: ../../../campaigns/emp01.wmf/objective:29
 msgid "Build a forester's house"
@@ -225,9 +217,17 @@ msgstr "Construisez une maison de sylviculteur"
 msgid "Build a quarry"
 msgstr "Construisez une carrière"
 
-#: ../../../campaigns/emp01.wmf/objective:39
-msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
-msgstr "* Construisez une carrière au sud pour extraire des pierres et du marbre des rochers. Ceci pourra servir pour nos futures constructions."
+#~ msgid "* Build a barracks at the red point in the east of the forest."
+#~ msgstr "* Construisez une caserne sur le point rouge à l'est de la forêt."
+
+#~ msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
+#~ msgstr "* Construisez une maison de bûcheron, sur le point rouge au sud de votre quartier général."
+
+#~ msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
+#~ msgstr "* Construisez deux maisons de bûcheron plus loin et une scierie dès qu'il y a assez d'espace."
+
+#~ msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
+#~ msgstr "* Construisez une carrière au sud pour extraire des pierres et du marbre des rochers. Ceci pourra servir pour nos futures constructions."
 
 #~ msgid "First mission of the Empire campaign"
 #~ msgstr "Première mission de la campagne de l'Empire"

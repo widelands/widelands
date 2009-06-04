@@ -1,13 +1,14 @@
 # Widelands po/fi_FI/tribes/barbarians.po
 # Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007.
+# Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:36+0000\n"
-"PO-Revision-Date: 2009-04-08 19:08+0300\n"
+"POT-Creation-Date: 2009-06-04 12:52+0000\n"
+"PO-Revision-Date: 2009-04-11 20:12+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -509,7 +510,7 @@ msgstr "Syvä rautakaivos"
 
 #: ../../../tribes/barbarians/conf:175
 msgid "Farm"
-msgstr "Viljelmä"
+msgstr "Maatila"
 
 #: ../../../tribes/barbarians/conf:176
 msgid "Fernery"

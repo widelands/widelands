@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"POT-Creation-Date: 2009-06-04 13:01+0000\n"
 "PO-Revision-Date: 2008-11-01 01:05+0100\n"
 "Last-Translator: Jean-Pierre Gemble <jpgemble@voila.fr>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
@@ -99,11 +99,13 @@ msgid "A Multiplayer-battle-map on a X-Shaped island."
 msgstr "Une carte de bataille multijoueur sur une île en forme de X."
 
 #: ../../maps/Finlakes.wmf/elemental:9
-msgid "Finish Lakes"
+#, fuzzy
+msgid "Finnish Lakes"
 msgstr "Lacs de la fin"
 
 #: ../../maps/Finlakes.wmf/elemental:11
-msgid "These are the beautiful finish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
+#, fuzzy
+msgid "These are the beautiful finnish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
 msgstr "Voici les magnifiques terres de la fin, composées de lacs, de rivières, de forêts ancestrales et de montagnes. C'est à vous de trouver un chemin à travers ces terres."
 
 #: ../../maps/Firegames.wmf/elemental:7
@@ -209,6 +211,14 @@ msgstr "Les pays des rivières"
 #: ../../maps/Riverlands.wmf/elemental:9
 msgid "A mystical land, full of different landscapes, which are all crossed by a handful of big rivers."
 msgstr "Une contrée mystique, pleine de paysages variés, qui sont tous traversés par une poignée de larges rivières."
+
+#: ../../maps/Sun of fire.wmf/elemental:9
+msgid "The ancient sun of fire"
+msgstr ""
+
+#: ../../maps/Sun of fire.wmf/elemental:11
+msgid "For hundreds of years this island was kept as sanctuary of the Gods. No human ever ventured to set a foot on it. But now, that a tribe was finally barefaced enough to settle on the coast of that island, a lot other followed afterwards."
+msgstr ""
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"

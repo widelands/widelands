@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"POT-Creation-Date: 2009-06-04 13:01+0000\n"
 "PO-Revision-Date: 2007-04-21 10:06+0100\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Galician/Spain <widelands-public@lists.sourceforge.net>\n"
@@ -67,6 +67,7 @@ msgid " \"Sire, I fear we are not safe in this foreign land. Who knows what terr
 msgstr "Señor, temo que non esteamos salvos nesta terra estraña.<br>¿Quen sabe que crueles criaturas han habitar trala fraga, no deserto?<br>¿E que ha pasar se estas criaturas reptan ata a maleza e agardan o momento de atacar?<br><br>Ben, pode que o meu medo non teña fundamentos, pero non ha facer mal vixiar nas fragas, asi habemos estar certos de ver calquer inimigo potencial antes que el poida vernos.<br>Debemos construir un cuartel ó leste, na fraga. Entón un de nos ha vixiar na escuridade e manteranos salvos frente ó ataque desas criaturas.<br><br>- Construe un cuartel no marcador vermello ó leste da fraga."
 
 #: ../../../campaigns/emp01.wmf/event:136
+#: ../../../campaigns/emp01.wmf/objective:7
 #, fuzzy
 msgid "* Build a barracks at the red point on the east side of the forests, to the right of your headquarters."
 msgstr "Construe unha cabana de leñador, no marcador vermello ó sur do teu cuartel xeral."
@@ -111,6 +112,7 @@ msgid " \"Hey Lutius, I just met Saledus outside.<br> He told me about the barra
 msgstr "Oe, Lutius, conincidín con Saledus fora. Contoume o da construción do cuartel. Ben, non son unha desas mozas que cren que precisemos máis cuarteles, pero por outra banda, debemos pensar noutras cousas agora.<br>Está moi claro que precisamos madeira pra repará-lo noso barco, de modo que explorei a fraga onte, e atopei un bo lugar para un leñador ó sur do cuartel xeral.<br><br>- Construe unha cabana de leñador, no marcador vermello ó sur do teu cuartel xeral."
 
 #: ../../../campaigns/emp01.wmf/event:175
+#: ../../../campaigns/emp01.wmf/objective:15
 #, fuzzy
 msgid "* Build a lumberjack's house at the red point, south of your headquarters."
 msgstr "Construe unha cabana de leñador, no marcador vermello ó sur do teu cuartel xeral."
@@ -132,6 +134,7 @@ msgid " \"Hey Lutius, I got the message that our first lumberjack started his wo
 msgstr "Oe, Lutius, recibín a mensaxe que o noso primeiro leñador comezou a traballar hoxe. Seica é unha boa idea agardar a que limpe espazo abondo pra construir duas cabanas de leñador mais, e recoller troncos mais lixeiros.<br>Desafortunadamente, os troncos non serven pra repará-lo barco - precisamos madeira tratada, coma calquera nave e gran edificio - de modo que debemos construir un serradoiro, tan cedo coma haxa espazo abondo para el.<br><br>- Construe dous cabanas de leñador máis e un serradoiro tan cedo haxa espazo para eles."
 
 #: ../../../campaigns/emp01.wmf/event:195
+#: ../../../campaigns/emp01.wmf/objective:23
 #, fuzzy
 msgid "* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
 msgstr "Construe dous cabanas de leñador máis e un serradoiro tan cedo haxa espazo para eles."
@@ -162,6 +165,7 @@ msgid " \"Hey, my good old friend. I just thought about the rocks standing on th
 msgstr "Meu vello amigo, estiven matinando nas rochas, en pe na beira sur da illa. Seica podamos picar algo de útil pedra e fermoso mármore.<br>A reparación da nosa nave inda ha tardar algunhas semanas, e os recursos que acumulemos agora poden sé-la base de grandes e poderosos edificios noutra terra.<br><br>- Construe unha canteira ó sur, para obter algo de pedra e mármore a partir das rochas. Han ser útiles para construcións futuras."
 
 #: ../../../campaigns/emp01.wmf/event:250
+#: ../../../campaigns/emp01.wmf/objective:39
 #, fuzzy
 msgid "* Build a quarry in the south to cut some stones and marble out of the rocks.<br> These might be used for future buildings."
 msgstr "Construe unha canteira ó sur, para obter algo de pedra e mármore a partir das rochas. Han ser útiles para construcións futuras."
@@ -210,28 +214,13 @@ msgstr ""
 msgid "Build a barracks"
 msgstr ""
 
-#: ../../../campaigns/emp01.wmf/objective:7
-#, fuzzy
-msgid "* Build a barracks at the red point in the east of the forest."
-msgstr "Construe un cuartel no marcador vermello ó leste da fraga."
-
 #: ../../../campaigns/emp01.wmf/objective:13
 msgid "Build a lumberjack's house"
 msgstr ""
 
-#: ../../../campaigns/emp01.wmf/objective:15
-#, fuzzy
-msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
-msgstr "Construe unha cabana de leñador, no marcador vermello ó sur do teu cuartel xeral."
-
 #: ../../../campaigns/emp01.wmf/objective:21
 msgid "Build two lumberjack's houses and a sawmill"
 msgstr ""
-
-#: ../../../campaigns/emp01.wmf/objective:23
-#, fuzzy
-msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
-msgstr "Construe dous cabanas de leñador máis e un serradoiro tan cedo haxa espazo para eles."
 
 #: ../../../campaigns/emp01.wmf/objective:29
 msgid "Build a forester's house"
@@ -241,10 +230,21 @@ msgstr ""
 msgid "Build a quarry"
 msgstr ""
 
-#: ../../../campaigns/emp01.wmf/objective:39
 #, fuzzy
-msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
-msgstr "Construe unha canteira ó sur, para obter algo de pedra e mármore a partir das rochas. Han ser útiles para construcións futuras."
+#~ msgid "* Build a barracks at the red point in the east of the forest."
+#~ msgstr "Construe un cuartel no marcador vermello ó leste da fraga."
+
+#, fuzzy
+#~ msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
+#~ msgstr "Construe unha cabana de leñador, no marcador vermello ó sur do teu cuartel xeral."
+
+#, fuzzy
+#~ msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
+#~ msgstr "Construe dous cabanas de leñador máis e un serradoiro tan cedo haxa espazo para eles."
+
+#, fuzzy
+#~ msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
+#~ msgstr "Construe unha canteira ó sur, para obter algo de pedra e mármore a partir das rochas. Han ser útiles para construcións futuras."
 
 #~ msgid "First mission of the Empire campaign"
 #~ msgstr "Primeira misión da campaña do Imperio"

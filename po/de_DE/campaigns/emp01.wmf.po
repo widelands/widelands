@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:54+0000\n"
+"POT-Creation-Date: 2009-06-04 13:01+0000\n"
 "PO-Revision-Date: 2009-04-08 08:54+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -63,6 +63,7 @@ msgid " \"Sire, I fear we are not safe in this foreign land. Who knows what terr
 msgstr "\"Herr, ich befürchte, dass wir hier in diesem fremden Land nicht sicher sein können.<br>Wer weiß schon, was für schreckliche Kreaturen in dieser Wüste und hinter ihr wohnen? Und vor allem: Was ist, wenn diese Kreaturen es bis in diesen Wald schaffen und dann aus dem Hinterhalt über unsere Leute herfallen?<br>Es mag sein, dass meine Angst übertrieben ist. Doch es scheint mir nur logisch und vorsichtig, wenn wir im Osten des Waldes eine kleine Baracke aufbauen, von der aus jemand in der Wüste nach potentiellen Gefahren Ausschau halten kann.<br><br>-- NEUER AUFTRAG --<br>"
 
 #: ../../../campaigns/emp01.wmf/event:136
+#: ../../../campaigns/emp01.wmf/objective:7
 msgid "* Build a barracks at the red point on the east side of the forests, to the right of your headquarters."
 msgstr "* Baue eine Baracke an dem rot markierten Punkt östlich des Waldes, rechts neben deinem Hauptquartier."
 
@@ -103,6 +104,7 @@ msgid " \"Hey Lutius, I just met Saledus outside.<br> He told me about the barra
 msgstr "\"Hallo, Lutius, ich habe gerade Saledus draußen getroffen. Er hat mir davon erzählt, dass die Baracke nun fertig ist und wir uns endlich etwas sicherer fühlen können. Na ja... Ich bin sicherlich nicht eine der Frauen, die sich viele Baracken wünscht. Doch nun da diese eine fertig gestellt ist, können wir uns um etwas anderes kümmern:<br>Gestern bin ich durch den Wald gelaufen und habe mich dabei etwas umgeschaut. Dabei habe ich im Süden unseres Hauptquartiers eine schöne Stelle gefunden, wo wir eine Holzfällerhütte aufbauen könnten. Und du weisst ja selbst genau so gut wie ich, dass wir Holz brauchen, um unser Schiff zu reparieren.\"<br><br>-- NEUER AUFTRAG --<br>"
 
 #: ../../../campaigns/emp01.wmf/event:175
+#: ../../../campaigns/emp01.wmf/objective:15
 msgid "* Build a lumberjack's house at the red point, south of your headquarters."
 msgstr "* Baue ein Holzfällerhaus am rot markierten Punkt, südllich deines Hauptquartiers"
 
@@ -121,6 +123,7 @@ msgid " \"Hey Lutius, I got the message that our first lumberjack started his wo
 msgstr "\"Hallo, Lutius! Ich bekam gerade die Nachricht, dass unser erster Holzfäller heute seine Arbeit aufgenommen hat. Vielleicht wäre es eine gute Idee, den Holzeinschlag etwas zu beschleunigen, indem wir zwei weitere Holzfäller einsetzen, sobald genug Platz vorhanden ist. Und was noch viel wichtiger ist: Wir brauchen ein Sägewerk. Denn mit den Stämmen alleine ist es schwer, ein Schiff zu reparieren.<br><br>-- NEUER AUFTRAG --<br>"
 
 #: ../../../campaigns/emp01.wmf/event:195
+#: ../../../campaigns/emp01.wmf/objective:23
 msgid "* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
 msgstr "* Baue zwei weitere Holzfällerhäuser und ein Sägewerk sobald genug Platz vorhanden ist."
 
@@ -146,6 +149,7 @@ msgid " \"Hey, my good old friend. I just thought about the rocks standing on th
 msgstr "\"Hallo, mein alter Freund! Ich habe mir gerade ein paar Gedanken über die Felsen am Südstrand gemacht. Vielleicht könnten wir ein paar gute Steine und schöne Marmorblöcke aus den Felsen schlagen.<br>Die Schiffsreparatur wird noch einige Zeit dauern und die Baumaterialien, die wir jetzt zusätzlich abbauen könnten, wären die Grundlage für die mächtigen Gebäude unserer zukünftigen Siedlung.<br><br>-- NEUER AUFTRAG --<br>"
 
 #: ../../../campaigns/emp01.wmf/event:250
+#: ../../../campaigns/emp01.wmf/objective:39
 msgid "* Build a quarry in the south to cut some stones and marble out of the rocks.<br> These might be used for future buildings."
 msgstr "* Baue einen Steinbruch im Süden um Steine und ab und an auch Marmor aus den Felsen zu schlagen.<br>Diese brauchen wir für größere Gebäude."
 
@@ -189,25 +193,13 @@ msgstr "Sichere Insel"
 msgid "Build a barracks"
 msgstr "Baue eine Baracke"
 
-#: ../../../campaigns/emp01.wmf/objective:7
-msgid "* Build a barracks at the red point in the east of the forest."
-msgstr "* Baue eine Baracke auf dem rot markierten Punkt östlich des Waldes."
-
 #: ../../../campaigns/emp01.wmf/objective:13
 msgid "Build a lumberjack's house"
 msgstr "Baue ein Holzfällerhaus"
 
-#: ../../../campaigns/emp01.wmf/objective:15
-msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
-msgstr "* Baue ein Holzfällerhaus"
-
 #: ../../../campaigns/emp01.wmf/objective:21
 msgid "Build two lumberjack's houses and a sawmill"
 msgstr "Baue zwei Holzfällerhäuser und ein Sägewerk"
-
-#: ../../../campaigns/emp01.wmf/objective:23
-msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
-msgstr "* Baue zwei weitere Holzfällerhäuser und ein Sägewerk sobald genug Platz vorhanden ist."
 
 #: ../../../campaigns/emp01.wmf/objective:29
 msgid "Build a forester's house"
@@ -217,9 +209,17 @@ msgstr "Baue ein Forsthaus"
 msgid "Build a quarry"
 msgstr "Baue einen Steinbruch"
 
-#: ../../../campaigns/emp01.wmf/objective:39
-msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
-msgstr "* Baue einen Steinbruch im Süden um Steine und ab und an Marmor aus den Felsen zu schlagen. Diese brauchen wir für größere Gebäude."
+#~ msgid "* Build a barracks at the red point in the east of the forest."
+#~ msgstr "* Baue eine Baracke auf dem rot markierten Punkt östlich des Waldes."
+
+#~ msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
+#~ msgstr "* Baue ein Holzfällerhaus"
+
+#~ msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
+#~ msgstr "* Baue zwei weitere Holzfällerhäuser und ein Sägewerk sobald genug Platz vorhanden ist."
+
+#~ msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
+#~ msgstr "* Baue einen Steinbruch im Süden um Steine und ab und an Marmor aus den Felsen zu schlagen. Diese brauchen wir für größere Gebäude."
 
 #~ msgid "First mission of the Empire campaign"
 #~ msgstr "Erste Mission der imperialen Kampagne"

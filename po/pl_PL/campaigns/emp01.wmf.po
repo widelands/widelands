@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"POT-Creation-Date: 2009-06-04 13:01+0000\n"
 "PO-Revision-Date: 2009-04-21 19:43+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Polish <LL@li.org>\n"
@@ -61,6 +61,7 @@ msgid " \"Sire, I fear we are not safe in this foreign land. Who knows what terr
 msgstr " \"Panie, obawiam się, że nie jesteśmy bezpieczni na tej obcej ziemi.Któż wie co za okrutne stwory mieszkają na wielkiej pustyni za lasem? A co jeśli wejdą do lasu i zaatakują nas przy pierwszej okazji?<br>Być może mój strach jest nieuzasadniony, lecz rozsądnie byłoby postawić straż w lesie, aby wypatrzyć wroga zanim on zrobi to pierwszy.<br> Naprawdę powinniśmy zbudować koszary we wschodniej części lasu. Wówczas jeden z nas będzie czuwał w ciemności i ostrzeże przed podstępnym atakiem tych stworów.<br><br>-- NOWE ZADANIE -- <br> "
 
 #: ../../../campaigns/emp01.wmf/event:136
+#: ../../../campaigns/emp01.wmf/objective:7
 msgid "* Build a barracks at the red point on the east side of the forests, to the right of your headquarters."
 msgstr "* Zbuduj koszary w miejscu oznaczonym na czerwono, we wschodniej części lasu na prawo od kwatery głównej."
 
@@ -101,6 +102,7 @@ msgid " \"Hey Lutius, I just met Saledus outside.<br> He told me about the barra
 msgstr " \"Witaj Lucjuszu, na zewnątrz spotkałam Saledusa. <br> Powiedział mi o koszrach. No cóż... nie jestem jedną z tych dziewczyn, których uważają, że potrzeba nam więcej koszarów. Wydaje mi się, że powinniśmy się skoncentrować na innych sprawach.<br> Bez wątpienia do naprawy statku potrzebujemy drewna. Wczoraj w trakcie spaceru po lesie na południe od naszej kwatery głównej odkryłam wspaniałe miejsce na chatę drwala.\"<br><br>-- NOWE ZADANIE --<br>."
 
 #: ../../../campaigns/emp01.wmf/event:175
+#: ../../../campaigns/emp01.wmf/objective:15
 msgid "* Build a lumberjack's house at the red point, south of your headquarters."
 msgstr "* Zbuduj chatę drwala na południe od kwatery głównej, w miejscu oznaczonym na czerwono"
 
@@ -119,6 +121,7 @@ msgid " \"Hey Lutius, I got the message that our first lumberjack started his wo
 msgstr " \"Witaj Lucjuszu! Otrzymałam wiadomość, że pierwszy drwal zaczął dziś pracować. Być może dobrze byłoby poczekać aż oczyści kawałek lasu i dobudować jeszcze dwie chaty drwala, żeby zwiększyć produkcję belek.<br> Niestety same belki nie przydadzą się do naprawy naszego statku. Do tego, oraz budowy większych budynków potrzebujemy drewna. Jak tylko zwolni się miejsce w lesie, musimy wybudować tartak.\"<br><br>-- NOWE ZADANIE --<br> "
 
 #: ../../../campaigns/emp01.wmf/event:195
+#: ../../../campaigns/emp01.wmf/objective:23
 msgid "* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
 msgstr "* Zbuduj jeszcze dwie chaty drwala oraz tartak, gdy tylko zwolni się dla nich miejsce."
 
@@ -144,6 +147,7 @@ msgid " \"Hey, my good old friend. I just thought about the rocks standing on th
 msgstr " \"Witaj stary druhu. Właśnie myślałem o skałach na plaży w południowej części wyspy. Być może udałoby się wyciąć z nich kilka użytecznych kamieni oraz piękny marmur.<br> Naprawa statku i tak potrwa jeszcze kilka tygodni, a surowce, które teraz zgromadzimy, mogą posłużyć nam do budowy dużych i solidnych budowli w innym miejscu.\"<br><br>-- NOWE ZADANIE --<br> "
 
 #: ../../../campaigns/emp01.wmf/event:250
+#: ../../../campaigns/emp01.wmf/objective:39
 msgid "* Build a quarry in the south to cut some stones and marble out of the rocks.<br> These might be used for future buildings."
 msgstr "* Zbuduj kamieniołom na południu i wytnij ze skał trochę kamienia i marmuru.<br> W przyszłości będzie ich można użyć do budowy."
 
@@ -187,25 +191,13 @@ msgstr "Bezpieczny półwysep"
 msgid "Build a barracks"
 msgstr "Zbuduj koszary"
 
-#: ../../../campaigns/emp01.wmf/objective:7
-msgid "* Build a barracks at the red point in the east of the forest."
-msgstr "* Zbuduj koszary we wschodzniej części lasu oznaczonej na czerwono."
-
 #: ../../../campaigns/emp01.wmf/objective:13
 msgid "Build a lumberjack's house"
 msgstr "Zbuduj chatę drwala"
 
-#: ../../../campaigns/emp01.wmf/objective:15
-msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
-msgstr "* Zbuduj chatę drwala na południe od kwatery, w miejscu oznaczonym na czerwono."
-
 #: ../../../campaigns/emp01.wmf/objective:21
 msgid "Build two lumberjack's houses and a sawmill"
 msgstr "Zbuduj dwie chaty drwali i tartak"
-
-#: ../../../campaigns/emp01.wmf/objective:23
-msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
-msgstr "* Zbuduj jeszcze dwie chaty drwala oraz tartak, gdy tylko zwolni się dla nich miejsce."
 
 #: ../../../campaigns/emp01.wmf/objective:29
 msgid "Build a forester's house"
@@ -215,9 +207,17 @@ msgstr "Zbuduj leśniczówkę"
 msgid "Build a quarry"
 msgstr "Zbuduj kamieniołom"
 
-#: ../../../campaigns/emp01.wmf/objective:39
-msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
-msgstr "* Zbuduj kamieniołom na południu i wytnij ze skał trochę kamienia i marmuru.<br> W przyszłości będzie ich można użyć do budowy."
+#~ msgid "* Build a barracks at the red point in the east of the forest."
+#~ msgstr "* Zbuduj koszary we wschodzniej części lasu oznaczonej na czerwono."
+
+#~ msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
+#~ msgstr "* Zbuduj chatę drwala na południe od kwatery, w miejscu oznaczonym na czerwono."
+
+#~ msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
+#~ msgstr "* Zbuduj jeszcze dwie chaty drwala oraz tartak, gdy tylko zwolni się dla nich miejsce."
+
+#~ msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
+#~ msgstr "* Zbuduj kamieniołom na południu i wytnij ze skał trochę kamienia i marmuru.<br> W przyszłości będzie ich można użyć do budowy."
 
 #~ msgid "First mission of the Empire campaign"
 #~ msgstr "Pierwsza misja kampanii Imperium"

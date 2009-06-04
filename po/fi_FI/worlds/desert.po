@@ -1,15 +1,16 @@
 # Widelands po/fi_FI/worlds/desert.po
 # Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007.
+# Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:36+0000\n"
-"PO-Revision-Date: 2007-03-24 05:51+0200\n"
-"Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
-"Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"POT-Creation-Date: 2009-06-04 12:52+0000\n"
+"PO-Revision-Date: 2009-04-13 21:29+0300\n"
+"Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
+"Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,12 +28,12 @@ msgstr "Aavikko"
 
 #: ../../../worlds/desert/conf:4
 msgid "This is the wide and sandy country of the bedouins"
-msgstr ""
+msgstr "Tämä on beduiinien asuttama laaja ja hiekkainen maa"
 
 #: ../../../worlds/desert/conf:7 ../../../worlds/desert/conf:8
 #: ../../../worlds/desert/conf:9
 msgid "Bush"
-msgstr "Puska"
+msgstr "Pensas"
 
 #: ../../../worlds/desert/conf:10 ../../../worlds/desert/conf:11
 #: ../../../worlds/desert/conf:12 ../../../worlds/desert/conf:13
@@ -79,7 +80,7 @@ msgstr "Kuori"
 #: ../../../worlds/desert/conf:42 ../../../worlds/desert/conf:43
 #: ../../../worlds/desert/conf:44
 msgid "Standing Stones"
-msgstr ""
+msgstr "Seisovia kiviä"
 
 #: ../../../worlds/desert/conf:45 ../../../worlds/desert/conf:46
 #: ../../../worlds/desert/conf:47 ../../../worlds/desert/conf:48
@@ -97,68 +98,67 @@ msgstr "Palmu"
 #: ../../../worlds/desert/conf:60 ../../../worlds/desert/conf:64
 #: ../../../worlds/desert/conf:68
 msgid "Palm medium"
-msgstr ""
+msgstr "Palmu keskikokoinen"
 
 #: ../../../worlds/desert/conf:53 ../../../worlds/desert/conf:57
 #: ../../../worlds/desert/conf:61 ../../../worlds/desert/conf:65
 #: ../../../worlds/desert/conf:69
 msgid "Palm small"
-msgstr ""
+msgstr "Palmu pieni"
 
 #: ../../../worlds/desert/conf:54 ../../../worlds/desert/conf:58
 #: ../../../worlds/desert/conf:62 ../../../worlds/desert/conf:66
 #: ../../../worlds/desert/conf:70
-#, fuzzy
 msgid "Palm tiny"
-msgstr "Palmu"
+msgstr "Palmu hyvin pieni"
 
 #: ../../../worlds/desert/conf:71
 msgid "Beech"
-msgstr ""
+msgstr "Pyökki"
 
 #: ../../../worlds/desert/conf:72
 msgid "Beech medium"
-msgstr ""
+msgstr "Pyökki keskikokoinen"
 
 #: ../../../worlds/desert/conf:73
 msgid "Beech small"
-msgstr ""
+msgstr "Pyökki pieni"
 
 #: ../../../worlds/desert/conf:74
 msgid "Beech tiny"
-msgstr ""
+msgstr "Pyökki hyvin pieni"
 
 #: ../../../worlds/desert/conf:75
 msgid "Larch"
-msgstr ""
+msgstr "Lehtikuusi"
 
 #: ../../../worlds/desert/conf:76
 msgid "Larch medium"
-msgstr ""
+msgstr "Lehtikuusi kesikokoinen"
 
 #: ../../../worlds/desert/conf:77
 msgid "Larch small"
-msgstr ""
+msgstr "Lehtikuusi pieni"
 
 #: ../../../worlds/desert/conf:78
 msgid "Larch tiny"
-msgstr ""
+msgstr "Lehtikuusi hyvin pieni"
 
 #: ../../../worlds/desert/conf:79
 msgid "Rowan"
-msgstr ""
+msgstr "Pihlaja"
 
 #: ../../../worlds/desert/conf:80
 msgid "Rowan medium"
-msgstr ""
+msgstr "Pihlaja keskikokoinen"
 
 #: ../../../worlds/desert/conf:81
 msgid "Rowan small"
-msgstr ""
+msgstr "Pihlaja pieni"
 
 #: ../../../worlds/desert/conf:82
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Pihlaja hyvin pieni"
 
 #: ../../../worlds/desert/conf:85
 msgid "Bunny"
@@ -203,15 +203,3 @@ msgstr "Vesi"
 #: ../../../worlds/desert/resconf:41
 msgid "Fish"
 msgstr "Kala"
-
-#~ msgid "Tree"
-#~ msgstr "Puu"
-
-#~ msgid "Desert Fox"
-#~ msgstr "Aavikkokettu"
-
-#~ msgid "Reindeer"
-#~ msgstr "Poro"
-
-#~ msgid "Greenland"
-#~ msgstr "Ruohikko"

@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"POT-Creation-Date: 2009-06-04 13:01+0000\n"
 "PO-Revision-Date: 2008-08-11 21:25+0100\n"
 "Last-Translator: Pietertje <pienter.ouwerkerk@xs4all.nl>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -67,6 +67,7 @@ msgid " \"Sire, I fear we are not safe in this foreign land. Who knows what terr
 msgstr "\"Sire, ik vrees dat wij niet veilig zijn in dit uitheemse land. Wie weet wat voor wrede schepsels er leven achter dit bos, in die machtige woestijn? En wat als die schepselen het bos betreden en de tijd afwachten om ons aan te vallen?<br> Misschien is mijn vrees ongegrond, maar het kan nooit verkeerd zijn om te waken in het bos - opdat we er zeker van kunnen zijn dat we elke potentiële vijand zien voordat ze ons kunnen zien.<br>We zouden echt een barak moeten bouwen in het oostelijke deel van het bos. Dan zou iemand van ons de wacht kunnen houden in het donker en ons kunnen beschermen tegen deze schepsels.\"<br><br>-- NIEUW DOEL -- <br>"
 
 #: ../../../campaigns/emp01.wmf/event:136
+#: ../../../campaigns/emp01.wmf/objective:7
 msgid "* Build a barracks at the red point on the east side of the forests, to the right of your headquarters."
 msgstr "* Bouw een barak op het rode punt aan de oostkant van het bos, rechts van je hoofdkwartier."
 
@@ -109,6 +110,7 @@ msgid " \"Hey Lutius, I just met Saledus outside.<br> He told me about the barra
 msgstr "\"Hé Lutius, ik kwam net Saledus buiten tegen.<br> Hij vertelde me over de bouw van de barak. Tja, ik ben niet een van die meisjes die denken dat we meer barakken nodig hebben, maar aan de andere kant zouden we ons nu kunnen concentreren op ander dingen.<br>Het is overduidelijk dat we meer hout nodig hebben om ons schip te repareren. Daarom liep ik gisteren door het bos en vond een mooie plek voor een houthakker ten zuiden van ons hoofdkwartier.\"<br><br>-- NIEUW DOEL --"
 
 #: ../../../campaigns/emp01.wmf/event:175
+#: ../../../campaigns/emp01.wmf/objective:15
 #, fuzzy
 msgid "* Build a lumberjack's house at the red point, south of your headquarters."
 msgstr "* Bouw een houthakkershut op het rode punt ten zuiden van je hoofdkwartier"
@@ -129,6 +131,7 @@ msgid " \"Hey Lutius, I got the message that our first lumberjack started his wo
 msgstr "\"Hé Lutius, ik kreeg het bericht dat onze eerste houthakker vandaag is begonnen met zijn werk. Misschien zou het een goed idee zijn om te wachten tot hij genoeg ruimte heeft vrijgemaakt om nog twee houthakkershutten te bouwen, zodat we sneller stammen verzamelen.<br> Maar helaas zijn de stammen niet te gebruiken om ons schip te repareren - we hebben bewerkt hout nodig, zoals elk schip en alle grotere gebouwen. Dus we moeten een houtzagerij bouwen zodra we er genoeg ruimte voor hebben.<br><br>-- NIEUW DOEL --<br>"
 
 #: ../../../campaigns/emp01.wmf/event:195
+#: ../../../campaigns/emp01.wmf/objective:23
 #, fuzzy
 msgid "* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
 msgstr "* Bouw nog twee houthakkershutten en een houtzagerij zodra er voldoende ruimte voor is."
@@ -157,6 +160,7 @@ msgid " \"Hey, my good old friend. I just thought about the rocks standing on th
 msgstr "\"Hé goede oude vriend, ik dacht net aan de rotsen die gelegen zijn op het zuidelijke strand van dit land. Misschien kunnen we er bruikbare stenen en prachtig marmer uithakken.<br> Het repareren van ons schip duurt toch nog een paar weken en de grondstoffen die we nu verzamelen zouden de basis kunnen vormen van grote en sterke gebouwen in een ander land.\"<br><br>-- NIEUW DOEL --"
 
 #: ../../../campaigns/emp01.wmf/event:250
+#: ../../../campaigns/emp01.wmf/objective:39
 msgid "* Build a quarry in the south to cut some stones and marble out of the rocks.<br> These might be used for future buildings."
 msgstr "* Bouw een steengroeve in het zuiden om steen en marmer uit de rotsen te houwen.<br> Dit zou nuttig kunnen zijn voor latere gebouwen."
 
@@ -201,25 +205,13 @@ msgstr "Veilig schiereiland"
 msgid "Build a barracks"
 msgstr "Bouw een barak"
 
-#: ../../../campaigns/emp01.wmf/objective:7
-msgid "* Build a barracks at the red point in the east of the forest."
-msgstr "* Bouw een barak op het rode punt in het oosten van het bos."
-
 #: ../../../campaigns/emp01.wmf/objective:13
 msgid "Build a lumberjack's house"
 msgstr "Bouw een houthakkershut"
 
-#: ../../../campaigns/emp01.wmf/objective:15
-msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
-msgstr "* Bouw een houthakkershut op het rode punt ten zuiden van je hoofdkwartier."
-
 #: ../../../campaigns/emp01.wmf/objective:21
 msgid "Build two lumberjack's houses and a sawmill"
 msgstr "Bouw twee houthakkershutten en een houtzagerij"
-
-#: ../../../campaigns/emp01.wmf/objective:23
-msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
-msgstr "* Bouw nog twee houthakkershutten en een houtzagerij zodra er voldoende ruimte voor is."
 
 #: ../../../campaigns/emp01.wmf/objective:29
 msgid "Build a forester's house"
@@ -229,9 +221,17 @@ msgstr "Bouw een boswachtershuis"
 msgid "Build a quarry"
 msgstr "Bouw een steengroeve"
 
-#: ../../../campaigns/emp01.wmf/objective:39
-msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
-msgstr "* Bouw een steengroeve in het zuiden om steen en marmer uit de rots te houwen. Dit zou nuttig kunnen zijn voor latere gebouwen."
+#~ msgid "* Build a barracks at the red point in the east of the forest."
+#~ msgstr "* Bouw een barak op het rode punt in het oosten van het bos."
+
+#~ msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
+#~ msgstr "* Bouw een houthakkershut op het rode punt ten zuiden van je hoofdkwartier."
+
+#~ msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
+#~ msgstr "* Bouw nog twee houthakkershutten en een houtzagerij zodra er voldoende ruimte voor is."
+
+#~ msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
+#~ msgstr "* Bouw een steengroeve in het zuiden om steen en marmer uit de rots te houwen. Dit zou nuttig kunnen zijn voor latere gebouwen."
 
 #~ msgid "First mission of the Empire campaign"
 #~ msgstr "Eerste missie van de Keizerrijk-campagne"

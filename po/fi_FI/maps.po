@@ -1,15 +1,16 @@
 # Widelands po/fi_FI/maps.po
 # Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
+# Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:36+0000\n"
-"PO-Revision-Date: 2007-03-24 05:59+0200\n"
-"Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
-"Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"POT-Creation-Date: 2009-06-04 12:52+0000\n"
+"PO-Revision-Date: 2009-04-13 21:38+0300\n"
+"Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
+"Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,27 +20,29 @@ msgstr ""
 
 #: ../../campaigns/cconfig:24
 msgid "(Tutorial) Barbarians - The second Empire"
-msgstr ""
+msgstr "(Opastus) Barbaarit - Toinen valtakunta"
 
+# TODO: Though his glorious reign - though? re-established order. Too long sentences. redrew? Really reunite brothers?
 #: ../../campaigns/cconfig:27
 msgid "When Chat’Karuth died, he was an old man, father to three strong and ambitious sons and warlord to an army that could match any enemy willing to rise against the ancient forests. Though his glorious reign, Chat’Karuth left his eldest son Thron in the due to succeed him as the tribes warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father told him, Thron left the capital of Al’thunran, the home of the throne among the trees and redrew his forces to the high hills where he buried the corpse of his father and swore to the gods and his spirit, that he’d return to re-established order. While his brothers raged in blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
-msgstr ""
+msgstr "Kun Chat'Karuth kuoli, hän oli vanha mies, kolmen vahvan ja kunnianhimoisen pojan isä sekä sotaherra, jonka armeija päihitti minkä tahansa vihollisen, joka oli valmis nousemaan ikivanhoja metsiä vastaan. Loistokkaana hallintokautenaan Chat'Karuth määräsi vanhimman poikansa, Thronin, perimään heimojen sotaherran manttelinsa. Tämä päätös jätti kaksi muuta veljeä tyytymättömiksi, minkä vanha sotaherra tiesi. Isänsä kehotuksesta Thron jätti Al'thunranin pääkaupungin, puiden keskellä kohoavan valtaistuimen kodin, ja johti joukkonsa korkeille kukkuloille. Tänne hän hautasi isänsä ja vannoi jumalille ja tämän hengelle palaavansa palauttamaan järjestyksen. Sillä välin kun Thronin veljet raivosivat käyden sokeaa sotaa, taistellen vastaan niitä vähiä joukkoja jotka Thron oli jättänyt turvaamaan Al'thunranin rajoja. Nuori sotaherra pyrkii uudelleenyhdistämään kunnianhimoiset veljensä ja pakottamaan heimot marssimaan jälleen kerran yhteisen lipun alla."
 
 #: ../../campaigns/cconfig:30
 msgid "Empire - The months of exile"
-msgstr ""
+msgstr "Keisarikunta - Maanpaon kuukaudet"
 
+# TODO: month->s
 #: ../../campaigns/cconfig:33
 msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
 msgstr ""
 
 #: ../../campaigns/cconfig:51
 msgid "Tutorial1 - Eyes in the Dark"
-msgstr ""
+msgstr "Opastus 1 - Silmät pimeydessä"
 
 #: ../../campaigns/cconfig:56
 msgid "Tutorial2 - A Place to call Home"
-msgstr ""
+msgstr "Opastus 2 - Paikka, jota kutsua kodiksi"
 
 #: ../../campaigns/cconfig:61
 msgid "Tutorial3 - This land is our land"
@@ -47,11 +50,11 @@ msgstr ""
 
 #: ../../campaigns/cconfig:68
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr ""
+msgstr "Keisarikunta, opastus 1 - Malac' Morin rannat"
 
 #: ../../campaigns/cconfig:73
 msgid "Empire Tutorial2 - An outpost for exile"
-msgstr ""
+msgstr "Keisarikunta, opastus 2 - Rajalinnoitus maanpaolle"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -63,7 +66,7 @@ msgstr ""
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
-msgstr ""
+msgstr "Komeettasaari"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid "A few miles in front of Gerion Coast lies a small unnamed island. Until now, you have not seen any reason, to ship there, but yesterday a big fireball came from the sky and touched down in it's middle. Is this a sign of the Gods? You believe it is and you hope, that your tribe will find the treasure of this island, before other tribes will follow."
@@ -71,7 +74,7 @@ msgstr ""
 
 #: ../../maps/Crater.wmf/elemental:9
 msgid "Crater"
-msgstr ""
+msgstr "Kraateri"
 
 #: ../../maps/Crater.wmf/elemental:11
 msgid "Long after a meteor crashed into a couple of mountains life blossoms in the crater. Two tribes are now fighting about the rich resources."
@@ -102,11 +105,11 @@ msgid "A Multiplayer-battle-map on a X-Shaped island."
 msgstr ""
 
 #: ../../maps/Finlakes.wmf/elemental:9
-msgid "Finish Lakes"
+msgid "Finnish Lakes"
 msgstr ""
 
 #: ../../maps/Finlakes.wmf/elemental:11
-msgid "These are the beautiful finish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
+msgid "These are the beautiful finnish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
 msgstr ""
 
 #: ../../maps/Firegames.wmf/elemental:7
@@ -211,6 +214,14 @@ msgstr ""
 
 #: ../../maps/Riverlands.wmf/elemental:9
 msgid "A mystical land, full of different landscapes, which are all crossed by a handful of big rivers."
+msgstr ""
+
+#: ../../maps/Sun of fire.wmf/elemental:9
+msgid "The ancient sun of fire"
+msgstr ""
+
+#: ../../maps/Sun of fire.wmf/elemental:11
+msgid "For hundreds of years this island was kept as sanctuary of the Gods. No human ever ventured to set a foot on it. But now, that a tribe was finally barefaced enough to settle on the coast of that island, a lot other followed afterwards."
 msgstr ""
 
 #: ../../maps/Swamp Island.wmf/elemental:9

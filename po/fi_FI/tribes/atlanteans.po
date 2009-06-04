@@ -1,13 +1,13 @@
 # Widelands po/fi_FI/tribes/atlanteans.po
 # Copyright (C) 2005-2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:36+0000\n"
-"PO-Revision-Date: 2009-04-08 19:33+0300\n"
+"POT-Creation-Date: 2009-06-04 12:52+0000\n"
+"PO-Revision-Date: 2009-04-11 22:07+0300\n"
 "Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -418,7 +418,7 @@ msgstr "Vartiotupa"
 
 #: ../../../tribes/atlanteans/conf:147
 msgid "High Tower"
-msgstr "Korkea torni"
+msgstr "Suurtorni"
 
 #: ../../../tribes/atlanteans/conf:148
 msgid "Small Tower"

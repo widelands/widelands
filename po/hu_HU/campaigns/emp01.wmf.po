@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"POT-Creation-Date: 2009-06-04 13:01+0000\n"
 "PO-Revision-Date: 2008-03-07 20:21+0100\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -69,6 +69,7 @@ msgid " \"Sire, I fear we are not safe in this foreign land. Who knows what terr
 msgstr "Uram, félek nem vagyunk biztonságban ezen az idegen vidéken. <br>Ki tudja milyen kegyetlen élőlények élnek a fák között ebben a hatalmas sivatagban? <br>Mi van ha ezek a lények csak arra várnak az erdőben, hogy lecsaphassanak ránk? <br><br>Nos, talán a félelmem alaptalan, de nem árthat ha szétnézünk az erdőben, hogy biztosan észrevegyünk minden ellenséget mielőtt ők vesznek minket észre. <br>Építenünk kell egy laktanyát az erdő keleti részén, így egyikünk szemmel tarthatja az erdőt és megóvhat minket ezektől a lényektől. <br><br>-építs egy laktanyát a piros pöttyön az erdő keleti részén jobbra a főhadiszállástól."
 
 #: ../../../campaigns/emp01.wmf/event:136
+#: ../../../campaigns/emp01.wmf/objective:7
 msgid "* Build a barracks at the red point on the east side of the forests, to the right of your headquarters."
 msgstr ""
 
@@ -112,6 +113,7 @@ msgid " \"Hey Lutius, I just met Saledus outside.<br> He told me about the barra
 msgstr "Lutius, nemrég találkoztam Saledus-al kint. Beszélt nekem a laktanya építéséről. Nos nem vagyok az a fajta nő aki úgy gondolja, hogy sok harcosra van szükségünk, azonban most más dolgokra kellene koncentrálnunk. <br>Fára van szükségünk, hogy helyrehozzunk a hajót. Tegnap sétáltam az erdőben és találtam egy nagyszerű helyet egy fatelephez délre a főhadiszállástól. <br><br>- építs egy favágókunyhót az egyik piros pöttyön délre a főhadiszállásodtól"
 
 #: ../../../campaigns/emp01.wmf/event:175
+#: ../../../campaigns/emp01.wmf/objective:15
 msgid "* Build a lumberjack's house at the red point, south of your headquarters."
 msgstr ""
 
@@ -132,6 +134,7 @@ msgid " \"Hey Lutius, I got the message that our first lumberjack started his wo
 msgstr "Lutius, megkaptam az üzenetet, hogy az első fatelep ma munkához látott. Jó ötlet lenne várni míg elég helyet tisztít meg, hogy építsünk még kettőt, ezzel gyorsabban gyűjtsük még több rönköt. <br>De sajnos a rönkök használhatatlanok a hajó megjavításához. A hajóhoz és nagyobb épületekhez is csiszolt fára van szükségünk, ezért építenünk kell egy fűrészmalmot amint lesz elég hely. <br><br>- Építs még két favágókunyhót és egy fűrészmalmot amit lesz elég hely nekik."
 
 #: ../../../campaigns/emp01.wmf/event:195
+#: ../../../campaigns/emp01.wmf/objective:23
 msgid "* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
 msgstr ""
 
@@ -160,6 +163,7 @@ msgid " \"Hey, my good old friend. I just thought about the rocks standing on th
 msgstr "Hé régi barátom, épp a kövekre gondoltam amik délre állnak ezen a földön. Talán ki tudunk bányászni ott egy kevés követ és gyönyörű márványt. <br>A hajó megjavítása egyébkéntis eltart egy pár hétig a készletek amiket itt össze tudunk gyűjteni hasznosak lehetnek más földeken a hatalmas építményekhez. <br><br>-Építs egy kőfejtőt, hogy követ és márványt tudj bányászni ezekből a sziklákból. Később hasznosak lehetnek az épületekhez."
 
 #: ../../../campaigns/emp01.wmf/event:250
+#: ../../../campaigns/emp01.wmf/objective:39
 msgid "* Build a quarry in the south to cut some stones and marble out of the rocks.<br> These might be used for future buildings."
 msgstr ""
 
@@ -208,24 +212,12 @@ msgstr "Biztonságos félsziget"
 msgid "Build a barracks"
 msgstr ""
 
-#: ../../../campaigns/emp01.wmf/objective:7
-msgid "* Build a barracks at the red point in the east of the forest."
-msgstr ""
-
 #: ../../../campaigns/emp01.wmf/objective:13
 msgid "Build a lumberjack's house"
 msgstr ""
 
-#: ../../../campaigns/emp01.wmf/objective:15
-msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
-msgstr ""
-
 #: ../../../campaigns/emp01.wmf/objective:21
 msgid "Build two lumberjack's houses and a sawmill"
-msgstr ""
-
-#: ../../../campaigns/emp01.wmf/objective:23
-msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
 msgstr ""
 
 #: ../../../campaigns/emp01.wmf/objective:29
@@ -234,10 +226,6 @@ msgstr ""
 
 #: ../../../campaigns/emp01.wmf/objective:37
 msgid "Build a quarry"
-msgstr ""
-
-#: ../../../campaigns/emp01.wmf/objective:39
-msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
 msgstr ""
 
 #~ msgid "First mission of the Empire campaign"

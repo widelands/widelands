@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"POT-Creation-Date: 2009-06-04 13:01+0000\n"
 "PO-Revision-Date: 2007-03-14 01:24+0500\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -101,11 +101,13 @@ msgid "A Multiplayer-battle-map on a X-Shaped island."
 msgstr ""
 
 #: ../../maps/Finlakes.wmf/elemental:9
-msgid "Finish Lakes"
+#, fuzzy
+msgid "Finnish Lakes"
 msgstr "Финские озера"
 
 #: ../../maps/Finlakes.wmf/elemental:11
-msgid "These are the beautiful finish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
+#, fuzzy
+msgid "These are the beautiful finnish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
 msgstr "Это прекрасные финские земли, полные озёр, рек, древних лесов и гор. Твоя задача найти путь через эти земли."
 
 #: ../../maps/Firegames.wmf/elemental:7
@@ -211,6 +213,14 @@ msgstr "Речная страна"
 
 #: ../../maps/Riverlands.wmf/elemental:9
 msgid "A mystical land, full of different landscapes, which are all crossed by a handful of big rivers."
+msgstr ""
+
+#: ../../maps/Sun of fire.wmf/elemental:9
+msgid "The ancient sun of fire"
+msgstr ""
+
+#: ../../maps/Sun of fire.wmf/elemental:11
+msgid "For hundreds of years this island was kept as sanctuary of the Gods. No human ever ventured to set a foot on it. But now, that a tribe was finally barefaced enough to settle on the coast of that island, a lot other followed afterwards."
 msgstr ""
 
 #: ../../maps/Swamp Island.wmf/elemental:9

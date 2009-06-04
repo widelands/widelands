@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"POT-Creation-Date: 2009-06-04 13:01+0000\n"
 "PO-Revision-Date: 2007-03-14 01:49+0500\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -67,6 +67,7 @@ msgid " \"Sire, I fear we are not safe in this foreign land. Who knows what terr
 msgstr "Сэр, боюсь, что в этих незнакомых землях мы не в безопасности.<br>Кто знает, какие бестии живут за этим лесом в бескрайней пустыне?<br>И что если эти создания затаились среди деревьев и ждут момента чтобы напасть?<br><br>Что ж, возможно мои опасения напрасны, но оставить наблюдателя в лесу просто необходимо, чтобы мы смогли увидеть любых врагов до того, как они увидят нас.<br>Нам необходимо построить барак на восточной стороне леса. Затем один из нас будет наблюдать и предупредит о возможных атаках этих существ.<br><br> - постройте барак у красной точки на восточном краю леса рядом с вашим штабом."
 
 #: ../../../campaigns/emp01.wmf/event:136
+#: ../../../campaigns/emp01.wmf/objective:7
 #, fuzzy
 msgid "* Build a barracks at the red point on the east side of the forests, to the right of your headquarters."
 msgstr "Постройте хижину дровосека у красной точки на юге от вашего штаба."
@@ -111,6 +112,7 @@ msgid " \"Hey Lutius, I just met Saledus outside.<br> He told me about the barra
 msgstr "Эй, Лютиус, Я только что встретила снаружи Саледуса. Он рассказал мне о создании барака. Я не из девиц считающих, что нам нужно больше бараков, а наоборот, мы должны теперь сосредоточиться на другом.<br>Абсолютно ясно, что нам необходимо дерево, чтобы отремонтировать наш корабль. Так вот, я вчера гуляла по лесу и нашла прекрасное место для хижины дровосека к югу от штаба.<br><br>- постройте хижину дровосека у красной точки, к югу от вашего штаба."
 
 #: ../../../campaigns/emp01.wmf/event:175
+#: ../../../campaigns/emp01.wmf/objective:15
 #, fuzzy
 msgid "* Build a lumberjack's house at the red point, south of your headquarters."
 msgstr "Постройте хижину дровосека у красной точки на юге от вашего штаба."
@@ -132,6 +134,7 @@ msgid " \"Hey Lutius, I got the message that our first lumberjack started his wo
 msgstr "Эй, Лютиус, я получила сообщение, что наш первый дровосек начал сегодня работу. Возможно хорошей идеей будет подождать, пока он не расчистит место для строительства ещё двух хижин дровосека, чтобы мы быстрее получали брёвна.<br>Но к сожалению, для ремонта корабля брёвна бесполезны - нам необходимо обработанное дерево, как того требуют все корабли и большие строения - поэтому необходимо построить лесопилку, как только будет для неё место.<br><br>- Постройте ещё две хижины дровосека и лесопилку как только для неё найдется место."
 
 #: ../../../campaigns/emp01.wmf/event:195
+#: ../../../campaigns/emp01.wmf/objective:23
 #, fuzzy
 msgid "* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
 msgstr "Постройте две дополнительных хижины дровосека и лесопилку как только для неё найдется место."
@@ -162,6 +165,7 @@ msgid " \"Hey, my good old friend. I just thought about the rocks standing on th
 msgstr "Эй, мой хороший старый друг, я тут подумал о скалах, расположенных у южного побережья острова. Возможно мы сможем выпилить несколько пригодных каменных и мраморных блоков.<br>В любом случае ремонт нашего корабля займет несколько недель и ресурсы, которые мы соберем сейчас могут послужить основой больших строений в другом краю.<br><br>- Постройте каменоломню на юге, чтобы вырезать из скал несколько каменных и мраморных блоков. Они могут использоваться для будущих строений."
 
 #: ../../../campaigns/emp01.wmf/event:250
+#: ../../../campaigns/emp01.wmf/objective:39
 #, fuzzy
 msgid "* Build a quarry in the south to cut some stones and marble out of the rocks.<br> These might be used for future buildings."
 msgstr "Постройте на юге каменоломню, для получения нескольких камней и мрамора из скал. Они могут использоваться для будущих строений."
@@ -210,28 +214,13 @@ msgstr ""
 msgid "Build a barracks"
 msgstr ""
 
-#: ../../../campaigns/emp01.wmf/objective:7
-#, fuzzy
-msgid "* Build a barracks at the red point in the east of the forest."
-msgstr "Постройте барак у красной точки на востоке леса."
-
 #: ../../../campaigns/emp01.wmf/objective:13
 msgid "Build a lumberjack's house"
 msgstr ""
 
-#: ../../../campaigns/emp01.wmf/objective:15
-#, fuzzy
-msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
-msgstr "Постройте хижину дровосека у красной точки на юге от вашего штаба."
-
 #: ../../../campaigns/emp01.wmf/objective:21
 msgid "Build two lumberjack's houses and a sawmill"
 msgstr ""
-
-#: ../../../campaigns/emp01.wmf/objective:23
-#, fuzzy
-msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
-msgstr "Постройте две дополнительных хижины дровосека и лесопилку как только для неё найдется место."
 
 #: ../../../campaigns/emp01.wmf/objective:29
 msgid "Build a forester's house"
@@ -241,10 +230,21 @@ msgstr ""
 msgid "Build a quarry"
 msgstr ""
 
-#: ../../../campaigns/emp01.wmf/objective:39
 #, fuzzy
-msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
-msgstr "Постройте на юге каменоломню, для получения нескольких камней и мрамора из скал. Они могут использоваться для будущих строений."
+#~ msgid "* Build a barracks at the red point in the east of the forest."
+#~ msgstr "Постройте барак у красной точки на востоке леса."
+
+#, fuzzy
+#~ msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
+#~ msgstr "Постройте хижину дровосека у красной точки на юге от вашего штаба."
+
+#, fuzzy
+#~ msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
+#~ msgstr "Постройте две дополнительных хижины дровосека и лесопилку как только для неё найдется место."
+
+#, fuzzy
+#~ msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
+#~ msgstr "Постройте на юге каменоломню, для получения нескольких камней и мрамора из скал. Они могут использоваться для будущих строений."
 
 #~ msgid "First mission of the Empire campaign"
 #~ msgstr "Первая миссия Имперской компании "

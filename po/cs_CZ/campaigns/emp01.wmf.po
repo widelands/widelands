@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4082\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-05-12 14:36+0000\n"
+"POT-Creation-Date: 2009-06-04 13:00+0000\n"
 "PO-Revision-Date: 2008-11-18 21:36+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -68,6 +68,7 @@ msgid " \"Sire, I fear we are not safe in this foreign land. Who knows what terr
 msgstr " \"Pane, obávám se, že v těchto cizích zemích nejsme bezpečni. Kdoví, co za divoké stvoření žijí v lesích téhle pustiny. A co když tato stvoření se už plíží stíny k nám a čekají na chvíli, kdy na nás zaútočí?<br> Budiž, možná jsou mé obavy plané, ale co tím ztratíme, když budeme v lesích držet hlídky, abychom si byli jistí, že uvidíme blížícího se nepřítele dříve, než na nás zaútočí?<br> Bude jen rozumné, abychom postavili kasárna ve východní části lesa. Odtud bude někdo sledovat pustinu a včas nás varovat před útoky bestií, které se v ní ukrávají.\"<br><br>-- Nový úkol --<br> "
 
 #: ../../../campaigns/emp01.wmf/event:136
+#: ../../../campaigns/emp01.wmf/objective:7
 msgid "* Build a barracks at the red point on the east side of the forests, to the right of your headquarters."
 msgstr "* Postav kasárna na červeném bodu ve východní části lesa, napravo od základny."
 
@@ -110,6 +111,7 @@ msgid " \"Hey Lutius, I just met Saledus outside.<br> He told me about the barra
 msgstr " \"Ahoj Lucie. Teď jsem se venku potkala se Saledem.<br> Pověděl mi o stavbě kasáren. Víš, nejsem z těch holek, co si myslí, že potřebujeme další kasárna. Na druhou stranu bychom se mohli soustředit i na jiné věci.<br> Bez debaty potřebujeme dřevo, abychom mohli opravit naši loď. Včera jsem prošla les a našla pěkné místo pro chatu dřevorubce, na jih od základny.\"<br><br>-- Nový úkol --<br> "
 
 #: ../../../campaigns/emp01.wmf/event:175
+#: ../../../campaigns/emp01.wmf/objective:15
 #, fuzzy
 msgid "* Build a lumberjack's house at the red point, south of your headquarters."
 msgstr "* Postav chatu dřevorubce na červeném bodu na jih od své základny."
@@ -130,6 +132,7 @@ msgid " \"Hey Lutius, I got the message that our first lumberjack started his wo
 msgstr "\"Ahoj Lucie. Dostala jsem zprávu, že první dřevorubec dnes začal svou práci. Asi bude dobré chvíli počkat, až udělá v lese trochu místa, abychom mohli postavit další chaty pro dřevorubce. Tak asi dvě. Budeme pak moci těžit dřevo rychleji.<br> Bohužel, takhle je dřevo na opravy k ničemu, musíme ho nařezat na desky, jaké se používají na stavbu lodí i větších budov. No, musíme postavit i pilu, hned jak na ni bude dost místa.\"<br><br>-- Nový úkol --<br> "
 
 #: ../../../campaigns/emp01.wmf/event:195
+#: ../../../campaigns/emp01.wmf/objective:23
 #, fuzzy
 msgid "* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
 msgstr "* Postav další dvě chaty dřevorubce a pilu hned jak pro ně bude místo."
@@ -158,6 +161,7 @@ msgid " \"Hey, my good old friend. I just thought about the rocks standing on th
 msgstr " \"Vítej příteli, rád tě vidím. Zrovna jsem myslel na skály, co jsou na jižním konci této země. Co myslíš, možná bychom v nich mohli najít vhodné kameny a snad dokonce i kousek mramoru na nějakou stavbu?<br>Vypadá to, že oprava lodi se určitě na pár týdnů protáhne a s tím, co teď máme, bychom mohli dát dohromady materiál na stavbu pevných a velkých budov v nové zemi.\"<br><br>-- Nový úkol --<br> "
 
 #: ../../../campaigns/emp01.wmf/event:250
+#: ../../../campaigns/emp01.wmf/objective:39
 msgid "* Build a quarry in the south to cut some stones and marble out of the rocks.<br> These might be used for future buildings."
 msgstr "* Otevři na jihu lom pro těžbu kamení a mramoru ve skalách. Později budou užitečné při stavbě budov."
 
@@ -202,25 +206,13 @@ msgstr "Bezpečný poloostrov"
 msgid "Build a barracks"
 msgstr "Postav kasárna"
 
-#: ../../../campaigns/emp01.wmf/objective:7
-msgid "* Build a barracks at the red point in the east of the forest."
-msgstr "* Postav kasárna na červeném bodu na východ od lesa."
-
 #: ../../../campaigns/emp01.wmf/objective:13
 msgid "Build a lumberjack's house"
 msgstr "Postav chatu dřevorubce"
 
-#: ../../../campaigns/emp01.wmf/objective:15
-msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
-msgstr "* Postav chatu dřevorubce na červeném bodu na jih od své základny."
-
 #: ../../../campaigns/emp01.wmf/objective:21
 msgid "Build two lumberjack's houses and a sawmill"
 msgstr "Postav dvě chaty pro dřevorubce a pilu"
-
-#: ../../../campaigns/emp01.wmf/objective:23
-msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
-msgstr "* Postav další dvě chaty dřevorubce a pilu hned jak pro ně bude místo."
 
 #: ../../../campaigns/emp01.wmf/objective:29
 msgid "Build a forester's house"
@@ -230,9 +222,17 @@ msgstr "Postav dům lesníka"
 msgid "Build a quarry"
 msgstr "Postav lom"
 
-#: ../../../campaigns/emp01.wmf/objective:39
-msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
-msgstr "* Otevři na jihu lom pro těžbu kamení a mramoru ve skalách. Později budou užitečné při stavbě budov."
+#~ msgid "* Build a barracks at the red point in the east of the forest."
+#~ msgstr "* Postav kasárna na červeném bodu na východ od lesa."
+
+#~ msgid "* Build a lumberjack's house, at the red point at the south of your headquarters."
+#~ msgstr "* Postav chatu dřevorubce na červeném bodu na jih od své základny."
+
+#~ msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
+#~ msgstr "* Postav další dvě chaty dřevorubce a pilu hned jak pro ně bude místo."
+
+#~ msgid "* Build a quarry in the south to cut some stones and marble out of the rocks. These might be used for future buildings."
+#~ msgstr "* Otevři na jihu lom pro těžbu kamení a mramoru ve skalách. Později budou užitečné při stavbě budov."
 
 #~ msgid "First mission of the Empire campaign"
 #~ msgstr "První mise císařské kampaně"
