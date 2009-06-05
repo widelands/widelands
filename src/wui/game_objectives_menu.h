@@ -24,7 +24,8 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/unique_window.h"
 #include "ui_basic/button.h"
-#include "wui/interactive_player.h"
+
+#include "interactive_player.h"
 
 namespace Widelands {
 struct Game;
