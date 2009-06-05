@@ -230,6 +230,7 @@ struct ProductionSiteObserver {
 struct MilitarySiteObserver {
 	Widelands::MilitarySite * site;
 	BuildingObserver * bo;
+	uint8_t checks;
 };
 
 struct WareObserver {

@@ -113,7 +113,7 @@ private:
 	void update_all_mineable_fields      (int32_t);
 	void update_all_not_buildable_fields ();
 
-	void update_buildable_field (BuildableField &);
+	void update_buildable_field(BuildableField &, uint16_t = 7, bool = false);
 	void update_mineable_field (MineableField &);
 
 	void update_productionsite_stats(int32_t);

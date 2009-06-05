@@ -437,117 +437,157 @@ void DefaultAI::update_all_not_buildable_fields()
 
 
 /// Updates one buildable field
-void DefaultAI::update_buildable_field (BuildableField & field)
+void DefaultAI::update_buildable_field
+	(BuildableField & field, uint16_t range, bool military)
 {
 	// look if there is any unowned land nearby
 	FindNodeUnowned find_unowned(get_player_number());
 	Map & map = game().map();
 
 	field.unowned_land_nearby =
-		map.find_fields(Area<FCoords>(field.coords, 7), 0, find_unowned);
+		map.find_fields(Area<FCoords>(field.coords, range), 0, find_unowned);
 
 	// collect information about resources in the area
 	std::vector<ImmovableFound> immovables;
 
-	int32_t const tree_attr  = Map_Object_Descr::get_attribute_id("tree");
-	int32_t const stone_attr = Map_Object_Descr::get_attribute_id("stone");
+	// Search in a radius of range
+	map.find_immovables (Area<FCoords>(field.coords, range), &immovables);
 
-	// Search in a radius of 7
-	map.find_immovables (Area<FCoords>(field.coords, 7), &immovables);
+	// Is this a general update or just for military consideration
+	// (second is used in check_militarysites)
+	if (!military) {
+		int32_t const tree_attr  = Map_Object_Descr::get_attribute_id("tree");
+		int32_t const stone_attr = Map_Object_Descr::get_attribute_id("stone");
 
-	field.reachable      = false;
-	field.preferred      = false;
-	field.avoid_military = false;
-	field.enemy_nearby   = false;
+		field.reachable      = false;
+		field.preferred      = false;
+		field.avoid_military = false;
+		field.enemy_nearby   = false;
 
-	field.military_influence     = 0;
-	field.trees_nearby           = 0;
-	field.stones_nearby          = 0;
-	field.tree_consumers_nearby  = 0;
-	field.stone_consumers_nearby = 0;
-	field.producers_nearby.clear();
-	field.producers_nearby.resize(wares.size());
-	field.consumers_nearby.clear();
-	field.consumers_nearby.resize(wares.size());
-	std::vector<Coords> water_list;
-	FindNodeWater find_water;
-	map.find_fields(Area<FCoords>(field.coords, 4), &water_list, find_water);
-	field.water_nearby = water_list.size();
+		field.military_influence     = 0;
+		field.trees_nearby           = 0;
+		field.stones_nearby          = 0;
+		field.tree_consumers_nearby  = 0;
+		field.stone_consumers_nearby = 0;
+		field.producers_nearby.clear();
+		field.producers_nearby.resize(wares.size());
+		field.consumers_nearby.clear();
+		field.consumers_nearby.resize(wares.size());
+		std::vector<Coords> water_list;
+		FindNodeWater find_water;
+		map.find_fields(Area<FCoords>(field.coords, 4), &water_list, find_water);
+		field.water_nearby = water_list.size();
 
-	FCoords fse;
-	map.get_neighbour (field.coords, Map_Object::WALK_SE, &fse);
+		FCoords fse;
+		map.get_neighbour (field.coords, Map_Object::WALK_SE, &fse);
 
-	if (BaseImmovable const * const imm = fse.field->get_immovable())
-		if
-			(dynamic_cast<Flag const *>(imm)
-			 or
-			 (dynamic_cast<Road const *>(imm)
-			  &&
-			  fse.field->get_caps() & BUILDCAPS_FLAG))
-		field.preferred = true;
-
-	for (uint32_t i = 0; i < immovables.size(); ++i) {
-		const BaseImmovable & base_immovable = *immovables[i].object;
-		if (dynamic_cast<const Flag *>(&base_immovable))
-			field.reachable = true;
-		if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
+		if (BaseImmovable const * const imm = fse.field->get_immovable())
 			if
-				(player_immovable->owner().get_player_number()
-				 != get_player_number())
-			{
-				field.enemy_nearby = true;
-				continue;
-			}
+				(dynamic_cast<Flag const *>(imm)
+				 or
+				 (dynamic_cast<Road const *>(imm)
+				  &&
+				  fse.field->get_caps() & BUILDCAPS_FLAG))
+			field.preferred = true;
 
-		if (upcast(Building const, building, &base_immovable)) {
+		for (uint32_t i = 0; i < immovables.size(); ++i) {
+			const BaseImmovable & base_immovable = *immovables[i].object;
+			if (dynamic_cast<const Flag *>(&base_immovable))
+				field.reachable = true;
+			if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
+				if
+					(player_immovable->owner().get_player_number()
+					 != get_player_number())
+				{
+					field.enemy_nearby = true;
+					continue;
+				}
 
-			if (upcast(ConstructionSite const, constructionsite, building)) {
-				const Building_Descr & target_descr = constructionsite->building();
+			if (upcast(Building const, building, &base_immovable)) {
 
-				if (upcast(MilitarySite_Descr const, target_ms_d, &target_descr)) {
+				if (upcast(ConstructionSite const, constructionsite, building)) {
+					const Building_Descr & target_descr =
+						constructionsite->building();
+
+					if (upcast(MilitarySite_Descr const, target_ms_d, &target_descr))
+					{
+						const int32_t v =
+							target_ms_d->get_conquers()
+							-
+							map.calc_distance(field.coords, immovables[i].coords);
+
+						if (0 < v) {
+							field.military_influence += v * (v + 2) * 6;
+							field.avoid_military = true;
+						}
+					}
+
+					if (dynamic_cast<ProductionSite_Descr const *>(&target_descr))
+						consider_productionsite_influence
+							(field,
+							 immovables[i].coords,
+							 get_building_observer(constructionsite->name().c_str()));
+				}
+
+				if (upcast(MilitarySite const, militarysite, building)) {
 					const int32_t v =
-						target_ms_d->get_conquers()
+						militarysite->get_conquers()
 						-
 						map.calc_distance(field.coords, immovables[i].coords);
 
-					if (0 < v) {
-						field.military_influence += v * (v + 2) * 6;
-						field.avoid_military = true;
-					}
+					if (v > 0)
+						field.military_influence +=
+							v * v * militarysite->soldierCapacity();
 				}
 
-				if (dynamic_cast<ProductionSite_Descr const *>(&target_descr))
+				if (dynamic_cast<const ProductionSite *>(building))
 					consider_productionsite_influence
 						(field,
 						 immovables[i].coords,
-						 get_building_observer(constructionsite->name().c_str()));
+						 get_building_observer(building->name().c_str()));
+
+				continue;
 			}
 
-			if (upcast(MilitarySite const, militarysite, building)) {
-				const int32_t v =
-					militarysite->get_conquers()
-					-
-					map.calc_distance(field.coords, immovables[i].coords);
+			if (immovables[i].object->has_attribute(tree_attr))
+				++field.trees_nearby;
 
-				if (v > 0)
-					field.military_influence +=
-						v * v * militarysite->soldierCapacity();
-			}
-
-			if (dynamic_cast<const ProductionSite *>(building))
-				consider_productionsite_influence
-					(field,
-					 immovables[i].coords,
-					 get_building_observer(building->name().c_str()));
-
-			continue;
+			if (immovables[i].object->has_attribute(stone_attr))
+				++field.stones_nearby;
 		}
+	} else { // the small update just for military consideration
+		for (uint32_t i = 0; i < immovables.size(); ++i) {
+			const BaseImmovable & base_immovable = *immovables[i].object;
+			if (upcast(Building const, building, &base_immovable)) {
+				if (upcast(ConstructionSite const, constructionsite, building)) {
+					const Building_Descr & target_descr =
+						constructionsite->building();
 
-		if (immovables[i].object->has_attribute(tree_attr))
-			++field.trees_nearby;
+					if (upcast(MilitarySite_Descr const, target_ms_d, &target_descr))
+					{
+						const int32_t v =
+							target_ms_d->get_conquers()
+							-
+							map.calc_distance(field.coords, immovables[i].coords);
 
-		if (immovables[i].object->has_attribute(stone_attr))
-			++field.stones_nearby;
+						if (0 < v) {
+							field.military_influence += v * (v + 2) * 6;
+							field.avoid_military = true;
+						}
+					}
+				}
+				if (upcast(MilitarySite const, militarysite, building)) {
+					const int32_t v =
+						militarysite->get_conquers()
+						-
+						map.calc_distance(field.coords, immovables[i].coords);
+
+					if (v > 0)
+						field.military_influence +=
+							v * v * militarysite->soldierCapacity();
+				}
+			}
+		}
 	}
 }
 
@@ -827,6 +867,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 				}
 			} else if (bo.type == BuildingObserver::MILITARYSITE) {
+				if (!bf->unowned_land_nearby)
+					continue;
 				prio  = bf->unowned_land_nearby - bf->military_influence * 4;
 				prio  = prio > 0 ? prio : 1;
 				prio *= expand_factor;
@@ -1323,7 +1365,10 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		 0)
 	{
 		if (site.site->get_statistics_percent() == 0) {
-			game().send_player_bulldoze (*site.site);
+			// destruct the building and it's flag (via flag destruction)
+			// the destruction of the flag avoids that defaultAI will have too many
+			// unused roads - if needed the road will be rebuild directly.
+			game().send_player_bulldoze(site.site->base_flag());
 			return true;
 		}
 	}
@@ -1339,7 +1384,10 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		 ==
 		 0)
 	{
-		game().send_player_bulldoze (*site.site);
+		// destruct the building and it's flag (via flag destruction)
+		// the destruction of the flag avoids that defaultAI will have too many
+		// unused roads - if needed the road will be rebuild directly.
+		game().send_player_bulldoze(site.site->base_flag());
 		return true;
 	}
 
@@ -1439,7 +1487,10 @@ bool DefaultAI::check_mines(int32_t gametime)
 	// Check if mine ran out of resources
 	uint8_t current = field->get_resources_amount();
 	if (current < 1) {
-		game().send_player_bulldoze (*site.site);
+		// destruct the building and it's flag (via flag destruction)
+		// the destruction of the flag avoids that defaultAI will have too many
+		// unused roads - if needed the road will be rebuild directly.
+		game().send_player_bulldoze(site.site->base_flag());
 		return true;
 	}
 
@@ -1518,11 +1569,74 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
 
 	if (map.find_fields(Area<FCoords>(f, vision), 0, find_unowned) == 0) {
 		// If no enemy in sight - decrease the number of stationed soldiers
-		// as long as it is > 1
+		// as long as it is > 1 - BUT take care that there is a warehouse in the
+		// same economy where the thrown out soldiers can go to.
 		if (ms->economy().get_nr_warehouses() > 0) {
 			uint32_t j = ms->soldierCapacity();
 			if (j > 1)
 				game().send_player_change_soldier_capacity(*ms, -1);
+
+			// if the building is in inner land and other militarysites still
+			// hold the miliary influence of the field, consider to destruct the
+			// building to free some building space.
+			else {
+				// treat this field like a buildable and write military info to it.
+				BuildableField bf(f);
+				update_buildable_field(bf, vision, true);
+
+				// watch out if there is any unowned land in vision range. If there
+				// is none, there must be another building nearer to the frontier.
+				if (bf.unowned_land_nearby == 0) {
+					// bigger buildings are only checked after all smaller
+					// ones are at least one time checked.
+					if (militarysites.front().checks == 0) {
+						// If the military influence of other near buildings is higher
+						// than the own doubled max SoldierCapacity destruct the
+						// building and it's flag (via flag destruction)
+						// the destruction of the flag avoids that defaultAI will have
+						// too many unused roads - if needed the road will be rebuild
+						// directly.
+						if ((ms->maxSoldierCapacity() * 2) < bf.military_influence)
+							game().send_player_bulldoze(ms->base_flag());
+						// Else consider enhancing the building (if possible)
+						else {
+							// Do not have too many constructionsites
+							uint32_t producers = mines.size() + productionsites.size();
+							if (total_constructionsites >= (5 + (producers / 10)))
+								goto reorder;
+							std::set<Building_Index> enhancements = ms->enhancements();
+							int32_t maxprio = 10000; // surely never reached
+							Building_Index enbld;
+							container_iterate_const
+								(std::set<Building_Index>, enhancements, x)
+							{
+								// Only enhance building to allowed (scenario mode)
+								if (player->is_building_allowed((*x.current))) {
+									const Building_Descr & bld =
+										*tribe->get_building_descr((*x.current));
+									BuildingObserver & en_bo =
+										get_building_observer(bld.name().c_str());
+
+									// Don't enhance this building, if there is
+									// already one of same type under construction
+									if (en_bo.cnt_under_construction > 0)
+										continue;
+									if (en_bo.cnt_built < maxprio) {
+										maxprio = en_bo.cnt_built;
+										enbld = (*x.current);
+									}
+								}
+							}
+							// Enhance if enhanced building is useful
+							if (maxprio < 10000) {
+								game().send_player_enhance_building(*ms, enbld);
+								changed = true;
+							}
+						}
+					} else
+						--militarysites.front().checks;
+				}
+			}
 		}
 	} else {
 		// If an enemy is in sight and the number of stationed soldier is not
@@ -1533,6 +1647,7 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
 			game().send_player_change_soldier_capacity(*ms, j - k);
 		changed = true;
 	}
+	reorder:;
 	militarysites.push_back(militarysites.front());
 	militarysites.pop_front();
 	next_militarysite_check_due = gametime + 1000;
@@ -1697,6 +1812,7 @@ void DefaultAI::gain_building (Building & b)
 			militarysites.push_back (MilitarySiteObserver());
 			militarysites.back().site = &dynamic_cast<MilitarySite &>(b);
 			militarysites.back().bo = &bo;
+			militarysites.back().checks = bo.desc->get_size();
 		} else if (bo.type == BuildingObserver::WAREHOUSE)
 			++numof_warehouses;
 	}
