@@ -36,6 +36,7 @@
 #include "ui_basic/table.h"
 
 #include "upcast.h"
+#include "type_check.h"
 
 #include <algorithm>
 #include <set>
@@ -189,9 +190,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					//  Make sure to detect if someone changes the type so that it
 					//  needs more than 3 decimal digits to represent.
 					compile_assert
-						(std::numeric_limits<typeof(j.current->second)>::max()
-						 <=
-						 999);
+						(only1byte<sizeof(j.current->second)>::result);
 					char amount_string[4]; //  Space for 3 digits + terminator.
 					sprintf(amount_string, "%u", j.current->second);
 
