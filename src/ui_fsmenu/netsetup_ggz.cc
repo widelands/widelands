@@ -79,7 +79,7 @@ m_maxplayers
 maxplayers
 	(this,
 	 m_xres * 17 / 25, m_yres * 42 / 100, m_butw, m_buth * 7 / 10,
-	 1, 1, 1), // start/min./max. value dummy inits
+	 4, 1, 7), // start/min./max. value dummy inits
 
 // Buttons
 joingame

@@ -225,6 +225,8 @@ void NetGGZ::deinitcore()
 		return;
 	formatedGGZChat(_("Dropping connection to the metaserver."), "", true);
 	formatedGGZChat("", "", true);
+	tablelist.clear();
+	userlist.clear();
 	if (ggzcore_server_is_at_table(ggzserver))
 		ggzcore_room_leave_table(room, true);
 	ggzcore_server_logout(ggzserver);
@@ -233,6 +235,8 @@ void NetGGZ::deinitcore()
 	ggzserver = 0;
 	ggzcore_destroy();
 	ggzcore_ready = false;
+	free(ggzobj);
+	ggzobj = 0;
 }
 
 
@@ -524,7 +528,7 @@ void NetGGZ::event_game(uint32_t const id, void const * const cbdata)
 			GGZTable    * const table    = ggzcore_table_new        ();
 			GGZGameType * const gametype = ggzcore_room_get_gametype(room);
 			ggzcore_table_init(table, gametype, servername.c_str(), tableseats);
-			for (uint32_t i = 1; i < tableseats; ++i)
+			for (uint32_t i = 0; i < tableseats; ++i)
 				ggzcore_table_set_seat(table, i, GGZ_SEAT_OPEN, 0);
 			ggzcore_room_launch_table(room, table);
 			ggzcore_table_free(table);
@@ -606,7 +610,12 @@ tablelist.clear();
 			 sizeof(info.hostname));
 		GGZTableState const state = ggzcore_table_get_state(table);
 		if (state == GGZ_TABLE_WAITING) {
-			if (ggzcore_table_get_seat_count(table, GGZ_SEAT_OPEN) > 0)
+			// To avoid freezes for users with build14 when trying to connect to
+			// a table with seats > 7 - could surely happen once the seats problem
+			// is fixed.
+			if (ggzcore_table_get_num_seats(table) > 7)
+				info.state = LAN_GAME_CLOSED;
+			else if (ggzcore_table_get_seat_count(table, GGZ_SEAT_OPEN) > 0)
 				info.state = LAN_GAME_OPEN;
 			else
 				info.state = LAN_GAME_CLOSED;
