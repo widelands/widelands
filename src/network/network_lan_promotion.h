@@ -37,7 +37,7 @@ struct Net_Game_Info {
 	uint8_t state;
 
 	char          gameversion[32];
-	char          hostname   [32];
+	char          hostname   [128];
 	char          map        [32];
 };
 
