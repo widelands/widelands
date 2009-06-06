@@ -79,8 +79,8 @@ public:
 	void unlock();
 
 	/// For the slowest: Indirect pixel access
-	uint32_t get_pixel(uint32_t x, uint32_t y);
-	void set_pixel(uint32_t x, uint32_t y, Uint32 clr);
+	uint32_t get_pixel(uint32_t x, uint32_t y) __attribute__ ((hot));
+	void set_pixel(uint32_t x, uint32_t y, Uint32 clr) __attribute__ ((hot));
 
 	void clear();
 	void draw_rect(Rect, RGBColor);
