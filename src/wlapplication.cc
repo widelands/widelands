@@ -71,6 +71,7 @@
 #include <cerrno>
 #include <cstring>
 #include <iostream>
+#include <fstream>
 #include <stdexcept>
 #include <string>
 
@@ -84,7 +85,8 @@ volatile int32_t WLApplication::may_run = 0;
 #endif
 
 //Always specifying namespaces is good, but let's not go too far ;-)
-using std::cout;
+//using std::cout;
+std::ostream & wout = std::cout;
 using std::endl;
 
 /**
@@ -807,7 +809,7 @@ bool WLApplication::init_hardware() {
 
 	char videodrvused[26];
 	strcpy(videodrvused, "SDL_VIDEODRIVER=\0");
-	std::cout << videodrvused << "&" << std::endl;
+	wout << videodrvused << "&" << std::endl;
 	for (int i = videomode.size() - 1; result == -1 && i >= 0; --i) {
 	  strcpy(videodrvused + 16, videomode[i].c_str());
 	  videodrvused[16 + videomode[i].size()] = '\0';
@@ -852,7 +854,7 @@ void WLApplication::shutdown_hardware()
 	SDL_QuitSubSystem(SDL_INIT_AUDIO);
 
 	if (g_gr)
-		cout
+		wout
 			<<
 			"WARNING: Hardware shutting down although graphics system is still "
 			"alive!"
@@ -919,7 +921,20 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	if (m_commandline.count("help") || m_commandline.count("version")) {
 		throw Parameter_error(); //no message on purpose
 	}
-
+	if (m_commandline.count("logfile")) {
+		m_logfile = m_commandline["logfile"];
+		std::cerr << "Redirecting log target to: " <<  m_logfile << std::endl;
+		if (m_logfile.size() != 0) {
+			//FIXME (very small) memory leak of 1 ofstream;
+			//swaw the buffers (internally) of the file and wout
+			std::ofstream * widelands_out = new std::ofstream(m_logfile.c_str());
+			std::streambuf * logbuf = widelands_out->rdbuf();
+			wout.rdbuf(logbuf);
+		} else {
+			//wout = std::cout;
+		}
+		m_commandline.erase("logfile");
+	}
 	if (m_commandline.count("nosound")) {
 		g_sound_handler.m_nosound = true;
 		m_commandline.erase("nosound");
@@ -960,10 +975,10 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 #ifndef WIN32
 		init_double_game();
 #else
-		cout << _("\nSorry, no double-instance debugging on WIN32.\n\n");
+		wout << _("\nSorry, no double-instance debugging on WIN32.\n\n");
 #endif
 #else
-		cout << _("--double is disabled. This is not a debug build!") << endl;
+		wout << _("--double is disabled. This is not a debug build!") << endl;
 #endif
 
 		m_commandline.erase("double");
@@ -1007,7 +1022,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		try {
 			journal->start_recording(m_commandline["record"]);
 		} catch (Journalfile_error e) {
-			cout << "Journal file error: " << e.what() << endl;
+			wout << "Journal file error: " << e.what() << endl;
 		}
 
 		m_commandline.erase("record");
@@ -1021,7 +1036,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 			journal->start_playback(m_commandline["playback"]);
 		}
 		catch (Journalfile_error e) {
-			cout << "Journal file error: " << e.what() << endl;
+			wout << "Journal file error: " << e.what() << endl;
 		}
 
 		m_commandline.erase("playback");
@@ -1055,14 +1070,16 @@ void WLApplication::show_usage()
 {
 	i18n::Textdomain textdomain("widelands"); //  uses system standard language
 
-	cout << _("This is Widelands-") << build_id() << '(' << build_type();
-	cout << ")\n\n";
-	cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n\n");
-	cout << _("Options:\n\n");
-	cout
+	wout << _("This is Widelands-") << build_id() << '(' << build_type();
+	wout << ")\n\n";
+	wout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n\n");
+	wout << _("Options:\n\n");
+	wout
 		<<
 		_
 			(" --<config-entry-name>=value overwrites any config file setting\n\n"
+			 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
+			 "                      terminal output\n"
 			 " --datadir=DIRNAME    Use specified direction for the widelands\n"
 			 "                      data files\n"
 			 " --record=FILENAME    Record all events to the given filename for\n"
@@ -1132,15 +1149,15 @@ void WLApplication::show_usage()
 			 "\n");
 #ifdef DEBUG
 #ifndef WIN32
-	cout
+	wout
 		<<
 		_
 			(" --double             Start the game twice (for localhost network\n"
 			 "                      testing)\n\n");
 #endif
 #endif
-	cout << _(" --help               Show this help\n") << endl;
-	cout
+	wout << _(" --help               Show this help\n") << endl;
+	wout
 		<<
 		_
 			("Bug reports? Suggestions? Check out the project website:\n"

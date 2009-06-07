@@ -23,6 +23,8 @@
 #include <cstdio>
 #include <iostream>
 
+extern std::ostream & wout;
+
 void log(const char * const fmt, ...) {
 	char buffer[2048];
 	va_list va;
@@ -33,6 +35,6 @@ void log(const char * const fmt, ...) {
 
 	//TODO: use iostreams instead of vprintf because other parts of
 	//      Widelands use iostreams
-	std::cout << buffer;
-	std::cout.flush();
+	wout << buffer;
+	wout.flush();
 }

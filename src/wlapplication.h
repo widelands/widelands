@@ -244,6 +244,10 @@ protected:
 
 	bool m_editor_commandline; // Enable the User to start the Editor directly.
 	std::string m_filename;
+
+	//Log all output to this file if set, otherwise use cout
+	std::string m_logfile;
+
 	GameType m_game_type;
 	///the event recorder object
 	Journal *journal;
