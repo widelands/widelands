@@ -555,7 +555,7 @@ Cmd_SetWarePriority::Cmd_SetWarePriority
 
 void Cmd_SetWarePriority::execute(Game & game)
 {
-	upcast(ProductionSite, psite, game.objects().get_object(m_serial));
+	upcast(Building, psite, game.objects().get_object(m_serial));
 
 	if (!psite)
 		return;

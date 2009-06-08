@@ -421,6 +421,46 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
 		dst.blit(point, m_pic_background);
 }
 
+/*
+=====
+
+class Priority_Button
+
+=====
+*/
+
+struct PriorityButtonInfo {
+	UI::Button * button;
+	int32_t picture_enabled;
+	int32_t picture_disabled;
+
+	PriorityButtonInfo() {}
+
+	PriorityButtonInfo
+		(UI::Button * const btn,
+		 int32_t const pic_enabled, int32_t const pic_disabled)
+		:
+		button(btn), picture_enabled(pic_enabled), picture_disabled(pic_disabled)
+	{}
+};
+
+struct PriorityButtonHelper : std::map<int32_t, PriorityButtonInfo> {
+	PriorityButtonHelper
+		(Widelands::Game     & g,
+		 Building            * ps,
+		 int32_t               ware_type,
+		 Widelands::Ware_Index ware_index);
+
+	void button_clicked (int32_t priority);
+	void update_buttons ();
+
+private:
+	Widelands::Game     & m_game;
+	Building            * m_building;
+	int32_t               m_ware_type;
+	Widelands::Ware_Index m_ware_index;
+};
+
 
 /*
 ==============================================================================
@@ -464,6 +504,18 @@ protected:
 	void act_drop_soldier(uint32_t);
 	void act_change_soldier_capacity(int32_t);
 
+	void create_ware_queue_panel
+		(UI::Box *, Building *, Widelands::WaresQueue *);
+
+	Interactive_Player * m_parent;
+	std::list<PriorityButtonHelper> m_priority_helpers;
+	UI::Callback_IDButton<PriorityButtonHelper, int32_t> *
+	create_priority_button
+		(UI::Box *, PriorityButtonHelper &,
+		 int32_t priority, int32_t x, int32_t y, int32_t w, int32_t h,
+		 const char * picture1, const char * picture2,
+		 const std::string & tooltip);
+
 private:
 	UI::Window *                * m_registry;
 	Interactive_Player          * m_player;
@@ -498,6 +550,8 @@ Building_Window::Building_Window
 		 building->info_string(parent->building_window_title_format()).c_str()),
 m_workarea_job_id(Overlay_Manager::Job_Id::Null())
 {
+	m_parent = parent;
+
 	m_registry = registry;
 	delete *m_registry;
 	*m_registry = this;
@@ -797,6 +851,25 @@ void Building_Window::toggle_workarea() {
 	}
 }
 
+struct ProductionSite_Window : public Building_Window {
+	ProductionSite_Window
+		(Interactive_Player * parent, ProductionSite *, UI::Window * * registry);
+
+	ProductionSite * get_productionsite() {
+		return dynamic_cast<ProductionSite *>(get_building());
+	}
+
+	virtual void think();
+
+private:
+	UI::Window * * m_reg;
+public:
+	void list_worker_clicked();
+protected:
+	UI::Box * create_production_box(UI::Panel * ptr, ProductionSite * ps);
+};
+
+
 
 /*
 ==============================================================================
@@ -820,6 +893,7 @@ struct ConstructionSite_Window : public Building_Window {
 
 private:
 	UI::Progress_Bar * m_progress;
+
 };
 
 
@@ -851,15 +925,9 @@ ConstructionSite_Window::ConstructionSite_Window
 	box.add_space(8);
 
 	// Add the wares queue
-	for (uint32_t i = 0; i < cs->get_nrwaresqueues(); ++i)
-		box.add
-			(new WaresQueueDisplay
-			 	(&box,
-			 	 0, 0,
-			 	 get_w(),
-			 	 cs->get_waresqueue(i),
-			 	 parent->get_game()),
-			 UI::Box::AlignLeft);
+	for (uint32_t i = 0; i < cs->get_nrwaresqueues(); ++i) {
+		Building_Window::create_ware_queue_panel(&box, cs, cs->get_waresqueue(i));
+	}
 
 	box.add_space(8);
 
@@ -881,6 +949,9 @@ Make sure the window is redrawn when necessary.
 void ConstructionSite_Window::think()
 {
 	Building_Window::think();
+
+	container_iterate(std::list<PriorityButtonHelper>, m_priority_helpers, i)
+		i.current->update_buttons();
 
 	m_progress->set_state
 		(dynamic_cast<ConstructionSite &>(*get_building()).get_built_per64k());
@@ -941,8 +1012,6 @@ Warehouse_Window::Warehouse_Window
 	 UI::Window *       * const registry)
 	: Building_Window(parent, wh, registry)
 {
-	m_parent = parent;
-
 	// Add wares display
 	m_waresdisplay = new WaresDisplay(this, 0, 0, parent->player().tribe());
 	m_waresdisplay->add_warelist
@@ -1213,89 +1282,26 @@ void ProductionSite_Window_ListWorkerWindow::update()
 	}
 }
 
-struct PriorityButtonInfo {
-	UI::Button * button;
-	int32_t picture_enabled;
-	int32_t picture_disabled;
-
-	PriorityButtonInfo() {}
-
-	PriorityButtonInfo
-		(UI::Button * const btn,
-		 int32_t const pic_enabled, int32_t const pic_disabled)
-		:
-		button(btn), picture_enabled(pic_enabled), picture_disabled(pic_disabled)
-	{}
-};
-
-struct PriorityButtonHelper : std::map<int32_t, PriorityButtonInfo> {
-	PriorityButtonHelper
-		(Widelands::Game     & g,
-		 ProductionSite      * ps,
-		 int32_t               ware_type,
-		 Widelands::Ware_Index ware_index);
-
-	void button_clicked (int32_t priority);
-	void update_buttons ();
-
-private:
-	Widelands::Game & m_game;
-	ProductionSite * m_ps;
-	int32_t m_ware_type;
-	Widelands::Ware_Index m_ware_index;
-};
-
-struct ProductionSite_Window : public Building_Window {
-	ProductionSite_Window
-		(Interactive_Player * parent, ProductionSite *, UI::Window * * registry);
-
-	ProductionSite * get_productionsite() {
-		return dynamic_cast<ProductionSite *>(get_building());
-	}
-
-	virtual void think();
-
-private:
-	Interactive_Player * m_parent;
-	UI::Window * * m_reg;
-	std::list<PriorityButtonHelper> m_priority_helpers;
-public:
-	void list_worker_clicked();
-protected:
-	UI::Box * create_production_box(UI::Panel * ptr, ProductionSite * ps);
-
-	void create_ware_queue_panel
-		(UI::Box *, ProductionSite *, Widelands::WaresQueue *);
-
-	UI::Callback_IDButton<PriorityButtonHelper, int32_t> *
-	create_priority_button
-		(UI::Box *, PriorityButtonHelper &,
-		 int32_t priority, int32_t x, int32_t y, int32_t w, int32_t h,
-		 const char * picture1, const char * picture2,
-		 const std::string & tooltip);
-};
-
-
 PriorityButtonHelper::PriorityButtonHelper
 	(Widelands::Game     &       g,
-	 ProductionSite      *       ps,
+	 Building            *       building,
 	 int32_t               const ware_type,
 	 Widelands::Ware_Index const ware_index)
 :
 m_game(g),
-m_ps        (ps),
+m_building  (building),
 m_ware_type (ware_type),
 m_ware_index(ware_index)
 {}
 
 void PriorityButtonHelper::button_clicked (int32_t const priority) {
 	m_game.send_player_set_ware_priority
-		(*m_ps, m_ware_type, m_ware_index, priority);
+		(*m_building, m_ware_type, m_ware_index, priority);
 }
 
 void PriorityButtonHelper::update_buttons () {
 	int32_t const priority =
-		m_ps->get_priority(m_ware_type, m_ware_index, false);
+		m_building->get_priority(m_ware_type, m_ware_index, false);
 
 	for (iterator it = begin(); it != end(); ++it) {
 		bool const enable = it->first != priority;
@@ -1318,7 +1324,6 @@ ProductionSite_Window::ProductionSite_Window
 	 UI::Window *       * const registry)
 	: Building_Window(parent, ps, registry)
 {
-	m_parent = parent;
 	m_reg = registry;
 
 	UI::Box * prod_box = 0;
@@ -1333,7 +1338,7 @@ ProductionSite_Window::ProductionSite_Window
 }
 
 UI::Callback_IDButton<PriorityButtonHelper, int32_t> *
-ProductionSite_Window::create_priority_button
+Building_Window::create_priority_button
 	(UI::Box * box, PriorityButtonHelper & helper,
 	 int32_t priority, int32_t x, int32_t, int32_t w, int32_t h,
 	 char const * picture1, char const * picture2,
@@ -1359,9 +1364,9 @@ ProductionSite_Window::create_priority_button
 	return button;
 }
 
-void ProductionSite_Window::create_ware_queue_panel
+void Building_Window::create_ware_queue_panel
 	(UI::Box               * const box,
-	 ProductionSite        * const ps,
+	 Building              * const ps,
 	 Widelands::WaresQueue * const wq)
 {
 	const int32_t priority_buttons_width = WaresQueueDisplay::Height / 3;
@@ -1435,7 +1440,7 @@ UI::Box * ProductionSite_Window::create_production_box
 	// Add the wares queue
 	std::vector<Widelands::WaresQueue *> const & warequeues = ps->warequeues();
 	for (uint32_t i = 0; i < warequeues.size(); ++i) {
-		create_ware_queue_panel (box, ps, warequeues[i]);
+		Building_Window::create_ware_queue_panel (box, ps, warequeues[i]);
 	}
 
 	box->add_space(8);
@@ -1770,7 +1775,6 @@ TrainingSite_Window::TrainingSite_Window
 	 UI::Window *       * const registry)
 	: ProductionSite_Window(parent, ms, registry)
 {
-	m_parent = parent;
 	m_reg = registry;
 	m_ms_location = ms->get_position ();
 
