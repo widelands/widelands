@@ -45,7 +45,6 @@
 //Holds information for a view
 struct WatchWindowView {
 	Point view_point;
-	Interactive_Player *parent;
 	Widelands::Object_Ptr tracking; //  if non-null, we're tracking a Bob
 };
 

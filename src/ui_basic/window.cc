@@ -143,12 +143,13 @@ void Window::move_inside_parent() {
 			if (parent->get_dock_windows_to_edges() and not _docked_right)
 				dock_right();
 		}
-		if (py < 0) py = 0;
+		if (py < 0)
+			py = 0;
 		else if
 			(py + static_cast<uint32_t>(get_h()) >
 			 parent->get_inner_h())
 		{
-		  assert(parent->get_inner_h() >= static_cast<uint32_t>(get_h()));
+			assert(parent->get_inner_h() >= static_cast<uint32_t>(get_h()));
 			py = parent->get_inner_h() - static_cast<uint32_t>(get_h());
 			if
 				(not _is_minimal
@@ -156,9 +157,12 @@ void Window::move_inside_parent() {
 				 parent->get_dock_windows_to_edges() and not _docked_bottom)
 				dock_bottom();
 		}
-		if      (_docked_left)   px = 0;
-		else if (_docked_right)  px = parent->get_inner_w() - get_w();
-		if      (_docked_bottom) py = parent->get_inner_h() - get_h();
+		if      (_docked_left)
+			px = 0;
+		else if (_docked_right)
+			px = parent->get_inner_w() - get_w();
+		if      (_docked_bottom)
+			py = parent->get_inner_h() - get_h();
 		set_pos(Point(px, py));
 	}
 }

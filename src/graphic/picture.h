@@ -33,17 +33,17 @@ enum {
 };
 
 struct Picture {
-Picture() : module(0), surface(0), fname(0), rendertarget(0) {}
+	Picture() : module(0), surface(0), fname(0), rendertarget(0) {}
 	/// 0 if unused, PicSurface for surfaces, PicMod_* bitmask for pictures
 	uint8_t   module;
 	Surface * surface;
 
 	//WTF ?!?! A union between char* (to be used as filename) and class* ?!?
 	//Why ?!?! #fweber
-	//union {
+	//  union {
 		char         * fname; //  module & (PicMod_UI|PicMod_Menu|PicMod_Game)
 		RenderTarget * rendertarget; //  module & (PicMod_Font | PicSurface)
-  //} u;
+	//  } u;
 };
 
 #endif

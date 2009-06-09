@@ -29,11 +29,11 @@ namespace Widelands {
 
 
 void Game_Game_Class_Data_Packet::Read
-	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const)
+	(FileSystem & fs, Game & game, Map_Map_Object_Loader *)
 throw (_wexception)
 {
-	FileRead fr;
 	try {
+		FileRead fr;
 		fr.Open(fs, "binary/game_class");
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version <= CURRENT_PACKET_VERSION) {

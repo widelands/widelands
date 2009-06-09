@@ -127,7 +127,6 @@ unsigned int MNG_read_uint32(SDL_RWops * const src)
 chunk_t MNG_read_chunk(SDL_RWops * const src)
 {
 	chunk_t this_chunk;
-	unsigned int i;
 
 	this_chunk.chunk_size = MNG_read_uint32(src);
 	this_chunk.chunk_ID   = MNG_read_uint32(src);

@@ -50,7 +50,6 @@ class Surface;
 */
 struct RenderTarget {
 	RenderTarget(Surface *);
-	void get_window(Rect *, Point * ofs) const;
 	void set_window(Rect const & rc, Point const & ofs);
 	bool enter_window(Rect const & rc, Rect * previous, Point * prevofs);
 

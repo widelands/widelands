@@ -293,7 +293,6 @@ struct Map : public ITransportCostCalculator {
 	void get_coords(Field & f, Coords & c) const;
 
 	uint32_t calc_distance(Coords, Coords) const;
-	int32_t is_neighbour(Coords, Coords) const;
 
 	int32_t calc_cost_estimate(Coords, Coords) const;
 	int32_t calc_cost_lowerbound(Coords, Coords) const;

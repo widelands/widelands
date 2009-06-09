@@ -55,16 +55,14 @@ void Songset::add_song(std::string const & filename) {
  */
 Mix_Music * Songset::get_song()
 {
-	int32_t songnumber;
 	std::string filename;
 
 	if (g_sound_handler.get_disable_music() || m_songs.empty())
 		return 0;
 
-	if (g_sound_handler.m_random_order) {
-		songnumber = g_sound_handler.m_rng.rand() % m_songs.size();
-		filename = m_songs.at(songnumber);
-	} else {
+	if (g_sound_handler.m_random_order)
+		filename = m_songs.at(g_sound_handler.m_rng.rand() % m_songs.size());
+	else {
 		if (m_current_song == m_songs.end())
 			m_current_song = m_songs.begin();
 

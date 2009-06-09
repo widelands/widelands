@@ -33,8 +33,8 @@ void Game_Preload_Data_Packet::Read
 	(FileSystem & fs, Game &, Map_Map_Object_Loader * const)
 throw (_wexception)
 {
-	Profile prof;
 	try {
+		Profile prof;
 		prof.read("preload", 0, fs);
 		Section & s = prof.get_safe_section("global");
 		int32_t const packet_version = s.get_int("packet_version");

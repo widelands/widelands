@@ -153,15 +153,11 @@ Scrollbar::Area Scrollbar::get_area_for_point(int32_t x, int32_t y)
 		return None;
 
 	// Normalize coordinates
-	if (m_horizontal)
-	{
+	if (m_horizontal) {
 		std::swap(x, y);
 		extent = get_w();
-	}
-	else
-	{
+	} else
 		extent = get_h();
-	}
 
 	// Determine the area
 	int32_t knob = get_knob_pos();
@@ -201,12 +197,7 @@ uint32_t Scrollbar::get_knob_pos() {
 void Scrollbar::set_knob_pos(int32_t pos)
 {
 	uint32_t knobsize = get_knob_size();
-	int32_t extent;
-
-	if (m_horizontal)
-		extent = get_w();
-	else
-		extent = get_h();
+	int32_t extent = m_horizontal ? get_w() : get_h();
 
 	extent -= 2 * Size + knobsize;
 	pos -= Size + knobsize / 2;
@@ -280,8 +271,7 @@ void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
 	// Draw border
 	RGBColor black(0, 0, 0);
 
-	if (area != m_pressed)
-	{
+	if (area != m_pressed) {
 		// top edge
 		dst.brighten_rect(Rect(r, r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		// left edge
@@ -293,9 +283,7 @@ void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
 		// right edge
 		dst.fill_rect(Rect(r + Point(r.w - 2, 2), 1, r.h - 2), black);
 		dst.fill_rect(Rect(r + Point(r.w - 1, 1), 1, r.h - 1), black);
-	}
-	else
-	{
+	} else {
 		// bottom edge
 		dst.brighten_rect
 			(Rect(r + Point(0, r.h - 2), r.w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
@@ -315,7 +303,8 @@ void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
 void Scrollbar::draw_area(RenderTarget & dst, const Area area, const Rect r) {
 	dst.tile(r, m_pic_background, Point(get_x(), get_y()) + r);
 
-	if (area == m_pressed) dst.brighten_rect(r, BUTTON_EDGE_BRIGHT_FACTOR);
+	if (area == m_pressed)
+		dst.brighten_rect(r, BUTTON_EDGE_BRIGHT_FACTOR);
 }
 
 
@@ -330,8 +319,7 @@ void Scrollbar::draw(RenderTarget & dst)
 	if (m_steps == 1 && !m_force_draw)
 		return; // don't draw a not doing scrollbar
 
-	if (m_horizontal)
-	{
+	if (m_horizontal) {
 		if ((2 * Size + knobsize) > static_cast<uint32_t>(get_w())) {
 			// Our owner obviously allocated too little space - draw something
 			// stupid
@@ -349,18 +337,14 @@ void Scrollbar::draw(RenderTarget & dst)
 			(dst,
 			 MinusPage,
 			 Rect(Point(Size, 0), knobpos - Size - knobsize / 2, get_h()));
-		assert
-		  ((knobpos + knobsize / 2 + Size) <=
-		   static_cast<uint32_t>(get_w()));
+		assert(knobpos + knobsize / 2 + Size <= static_cast<uint32_t>(get_w()));
 		draw_area
 			(dst,
 			 PlusPage,
 			 Rect
 			 	(Point(knobpos + knobsize / 2, 0),
 			 	 get_w() - knobpos - knobsize / 2 - Size, get_h()));
-	}
-	else
-	{
+	} else {
 		if ((2 * Size + knobsize) > static_cast<uint32_t>(get_h())) {
 			// Our owner obviously allocated too little space - draw something
 			// stupid
@@ -452,7 +436,10 @@ bool Scrollbar::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 
 	switch (btn) {
 	case SDL_BUTTON_LEFT:
-		if (m_pressed != None) {grab_mouse(false); m_pressed = None;}
+		if (m_pressed != None) {
+			grab_mouse(false);
+			m_pressed = None;
+		}
 		result = true;
 		break;
 
@@ -474,14 +461,10 @@ bool Scrollbar::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
  * Move the knob while pressed.
 */
 bool Scrollbar::handle_mousemove
-		(const Uint8, int32_t mx, int32_t my, int32_t, int32_t)
+	(Uint8, int32_t const mx, int32_t const my, int32_t, int32_t)
 {
 	if (m_pressed == Knob)
-	{
-		int32_t pos = m_horizontal ? mx : my;
-
-		set_knob_pos(pos - m_knob_grabdelta);
-	}
+		set_knob_pos((m_horizontal ? mx : my) - m_knob_grabdelta);
 	return true;
 }
 };

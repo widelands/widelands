@@ -33,17 +33,16 @@ namespace Widelands {
 
 
 void Game_Player_Economies_Data_Packet::Read
-	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const)
+	(FileSystem & fs, Game & game, Map_Map_Object_Loader *)
 throw (_wexception)
 {
-	FileRead fr;
-
-	Map   const &       map        = game.map();
-	Map_Index     const max_index  = map.max_index();
-	Extent        const extent     = map.extent();
-	Player_Number const nr_players = map.get_nrplayers();
-
 	try {
+		Map   const &       map        = game.map();
+		Map_Index     const max_index  = map.max_index();
+		Extent        const extent     = map.extent();
+		Player_Number const nr_players = map.get_nrplayers();
+
+		FileRead fr;
 		fr.Open(fs, "binary/player_economies");
 		uint16_t const packet_version = fr.Unsigned16();
 		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {

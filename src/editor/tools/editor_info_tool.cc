@@ -52,7 +52,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 
 	snprintf
 		(buf1, sizeof(buf1),
-		 _("1) Node infos\n Coordinates: (%i, %i)\n Height: %u\n Caps: "),
+		 _("1) Node info\n Coordinates: (%i, %i)\n Height: %u\n Caps: "),
 		 center.node.x, center.node.y, f.get_height());
 	buf += buf1;
 	{

@@ -869,13 +869,4 @@ uint32_t Request::find_transfer(Transfer & t)
 	return it - m_transfers.begin();
 }
 
-
-std::string Request::describe() const
-{
-	if (get_type() == WARE)
-		return m_economy->owner().tribe().get_ware_descr(get_index())->name();
-	else
-		return m_economy->owner().tribe().get_worker_descr(get_index())->name();
-}
-
 }

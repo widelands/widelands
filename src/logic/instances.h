@@ -212,15 +212,6 @@ public:
 	 */
 	virtual int32_t get_tattribute(uint32_t attr) const;
 
-	/**
-	 * \return \c true if this object has at least one \ref tAttribute
-	 * that is unique to this object and not part of the object description.
-	 * This is used to decide whether a \ref Worker needs to be preserved
-	 * even while incorporated into a \ref Warehouse.
-	 * The default behaviour returns \c false.
-	 */
-	virtual bool have_tattributes() const;
-
 	void remove(Editor_Game_Base &);
 	virtual void destroy(Editor_Game_Base &);
 

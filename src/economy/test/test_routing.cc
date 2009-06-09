@@ -142,11 +142,6 @@ public:
 
 		return false;
 	}
-
-	void print() {
-		container_iterate_const(Nodes, nodes, i)
-			BOOST_MESSAGE(*i.current);
-	}
 private:
 	Nodes nodes;
 };

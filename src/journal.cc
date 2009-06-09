@@ -396,19 +396,18 @@ void Journal::record_event(SDL_Event *e)
  */
 bool Journal::read_event(SDL_Event *e)
 {
-	uint8_t recordtype, eventtype;
-	bool haveevent = false;
-
 	if (!m_playback)
 		return false;
 
 	try {
-		read(recordtype);
+		bool haveevent = false;
 
+		uint8_t recordtype;
+		read(recordtype);
 		switch (recordtype) {
 		case RFC_EVENT:
+			uint8_t eventtype;
 			read(eventtype);
-
 			switch (eventtype) {
 			case RFC_KEYDOWN:
 				e->type = SDL_KEYDOWN;
@@ -462,8 +461,7 @@ bool Journal::read_event(SDL_Event *e)
 		}
 
 		return haveevent;
-	}
-	catch (std::ifstream::failure f) {
+	} catch (std::ifstream::failure f) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Failed to read from journal file. Playback deactivated.\n");

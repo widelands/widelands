@@ -2181,67 +2181,6 @@ uint32_t Map::calc_distance(const Coords a, const Coords b) const
 	return dist;
 }
 
-/*
-===============
-Map::is_neighbour
-
-Find out if the two given fields are neighbours.
-If they aren't, the function returns 0. If they are the same, return -1.
-Otherwise, it returns the direction from start to end
-===============
-*/
-int32_t Map::is_neighbour(const Coords start, const Coords end) const
-{
-	int32_t dx, dy;
-
-	dy = end.y - start.y;
-	dx = end.x - start.x;
-	if (dx > static_cast<int32_t>(m_width >> 1))
-		dx -= m_width;
-	else if (dx < -static_cast<int32_t>(m_width >> 1))
-		dx += m_width;
-
-	// end and start are on the same row
-	if (!dy) {
-		switch (dx) {
-		case -1: return Map_Object::WALK_W;
-		case  0: return -1;
-		case  1: return Map_Object::WALK_E;
-		default:
-			return 0;
-		}
-	}
-
-	if (dy > static_cast<int32_t>(m_height >> 1))
-		dy -= m_height;
-	else if (dy < -static_cast<int32_t>(m_height >> 1))
-		dy += m_height;
-
-	// end is one row below start
-	if (dy == 1) {
-		if (start.y & 1) --dx;
-		switch (dx) {
-		case -1: return Map_Object::WALK_SW;
-		case  0: return Map_Object::WALK_SE;
-		default:
-			return 0;
-		}
-	}
-
-	// end is one row above start
-	if (dy == -1) {
-		if (start.y & 1) --dx;
-		switch (dx) {
-		case -1: return Map_Object::WALK_NW;
-		case  0: return Map_Object::WALK_NE;
-		default:
-			return 0;
-		}
-	}
-
-	return 0;
-}
-
 
 #define BASE_COST_PER_FIELD 1800
 #define SLOPE_COST_DIVISOR  50

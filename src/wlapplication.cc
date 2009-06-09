@@ -811,15 +811,15 @@ bool WLApplication::init_hardware() {
 	strcpy(videodrvused, "SDL_VIDEODRIVER=\0");
 	wout << videodrvused << "&" << std::endl;
 	for (int i = videomode.size() - 1; result == -1 && i >= 0; --i) {
-	  strcpy(videodrvused + 16, videomode[i].c_str());
-	  videodrvused[16 + videomode[i].size()] = '\0';
+		strcpy(videodrvused + 16, videomode[i].c_str());
+		videodrvused[16 + videomode[i].size()] = '\0';
 		putenv(videodrvused);
 		//SDL_VideoDriverName(videodrvused, 16);
 		videodrv = getenv("SDL_VIDEODRIVER");
 		log
 			("Graphics: Trying Video driver: %i %s %s\n",
 			 i, videomode[i].c_str(), videodrvused);
-	  result = SDL_Init(sdl_flags);
+		result = SDL_Init(sdl_flags);
 	}
 
 	if (result == -1)
@@ -1326,32 +1326,31 @@ void WLApplication::mainmenu()
  */
 void WLApplication::mainmenu_singleplayer()
 {
+	//  This is the code returned by UI::Panel::run() when the panel is dying.
+	//  Make sure that the program exits when the window manager says so.
+	compile_assert(Fullscreen_Menu_SinglePlayer::Back == UI::Panel::dying_code);
 
-	for (bool done = false; not done;) {
+	for (;;) {
 		int32_t code;
 		{
 			Fullscreen_Menu_SinglePlayer single_player_menu;
 			code = single_player_menu.run();
 		}
-
-		//  This is the code returned by UI::Panel::run() when the panel is dying.
-		//  Make sure that the program exits when the window manager says so.
-		assert(Fullscreen_Menu_SinglePlayer::Back == UI::Panel::dying_code);
-
-		if (code == Fullscreen_Menu_SinglePlayer::Back) break;
-
 		switch (code) {
+		case Fullscreen_Menu_SinglePlayer::Back:
+			return;
 		case Fullscreen_Menu_SinglePlayer::New_Game:
-			done = new_game();
+			if (new_game())
+				return;
 			break;
-		case Fullscreen_Menu_SinglePlayer::Load_Game: {
-			done = load_game();
+		case Fullscreen_Menu_SinglePlayer::Load_Game:
+			if (load_game())
+				return;
 			break;
-		}
-		case Fullscreen_Menu_SinglePlayer::Campaign: {
-			done = campaign_game();
+		case Fullscreen_Menu_SinglePlayer::Campaign:
+			if (campaign_game())
+				return;
 			break;
-		}
 		default:
 			assert(false);
 		}
@@ -1375,9 +1374,6 @@ void WLApplication::mainmenu_multiplayer()
 	int32_t menu_result = Fullscreen_Menu_NetSetupLAN::JOINGAME; // dummy init;
 	for (;;) { // stay in menu until player clicks "back" button
 		std::string playername;
-		uint32_t addr;
-		uint16_t port;
-		bool host_address;
 
 #if HAVE_GGZ
 		bool ggz = false;
@@ -1414,10 +1410,10 @@ void WLApplication::mainmenu_multiplayer()
 					break;
 				}
 				case Fullscreen_Menu_NetSetupGGZ::JOINGAME: {
-					uint32_t secs = time(0);
+					uint32_t const secs = time(0);
 					while (!NetGGZ::ref().ip()) {
 						NetGGZ::ref().data();
-						if ((time(0) - secs) > 10)
+						if (10 < time(0) - secs)
 							throw warning
 								(_("Connection timeouted"),
 								 _
@@ -1462,7 +1458,9 @@ void WLApplication::mainmenu_multiplayer()
 			Fullscreen_Menu_NetSetupLAN ns;
 			menu_result = ns.run();
 			playername = ns.get_playername();
-			host_address = ns.get_host_address(addr, port);
+			uint32_t addr;
+			uint16_t port;
+			bool const host_address = ns.get_host_address(addr, port);
 
 			switch (menu_result) {
 				case Fullscreen_Menu_NetSetupLAN::HOSTGAME: {
@@ -1494,43 +1492,36 @@ void WLApplication::mainmenu_multiplayer()
 
 void WLApplication::mainmenu_editor()
 {
-	for (bool done = false; not done;) {
+	//  This is the code returned by UI::Panel::run() when the panel is dying.
+	//  Make sure that the program exits when the window manager says so.
+	compile_assert(Fullscreen_Menu_Editor::Back == UI::Panel::dying_code);
+
+	for (;;) {
 		int32_t code;
 		{
 			Fullscreen_Menu_Editor editor_menu;
 			code = editor_menu.run();
 		}
-
-		//  This is the code returned by UI::Panel::run() when the panel is dying.
-		//  Make sure that the program exits when the window manager says so.
-		assert(Fullscreen_Menu_Editor::Back == UI::Panel::dying_code);
-
-		if (code == Fullscreen_Menu_Editor::Back) break;
-
 		switch (code) {
-			case Fullscreen_Menu_Editor::New_Map:
-				Editor_Interactive::run_editor(m_filename);
-				done = true;
-				break;
-			case Fullscreen_Menu_Editor::Load_Map:
-				{
-					std::string filename;
-					{
-						Fullscreen_Menu_Editor_MapSelect emsm;
-						int retval = emsm.run();
-						if (retval <= 0)
-							break;
+		case Fullscreen_Menu_Editor::Back:
+			return;
+		case Fullscreen_Menu_Editor::New_Map:
+			Editor_Interactive::run_editor(m_filename);
+			return;
+		case Fullscreen_Menu_Editor::Load_Map: {
+			std::string filename;
+			{
+				Fullscreen_Menu_Editor_MapSelect emsm;
+				if (emsm.run() <= 0)
+					break;
 
-						filename = emsm.get_map();
-					}
-					Editor_Interactive::run_editor(filename.c_str());
-				}
-				done = true;
-				break;
-
-			default:
-				assert(false);
-
+				filename = emsm.get_map();
+			}
+			Editor_Interactive::run_editor(filename.c_str());
+			return;
+		}
+		default:
+			assert(false);
 		}
 	}
 }

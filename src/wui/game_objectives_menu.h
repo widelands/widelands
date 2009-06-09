@@ -47,11 +47,10 @@ private:
 	UI::Multiline_Textarea objectivetext;
 	UI::Callback_Button<GameObjectivesMenu> m_claim_victory, m_restart_mission;
 public:
-	bool victorious(bool v = false) {
+	bool victorious(bool const v = false) {
 		static bool m_victory = v;
-		if (v) {
+		if (v)
 			m_victory = v;
-		}
 		m_claim_victory.set_enabled(m_victory);
 		return m_victory;
 	}

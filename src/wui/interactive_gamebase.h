@@ -58,8 +58,10 @@ struct Interactive_GameBase : public Interactive_Base {
 	};
 
 	Interactive_GameBase
-	  (Widelands::Game &, Section & global_s,
-		PlayerType pt = NONE, bool chatenabled = false);
+		(Widelands::Game &,
+		 Section         & global_s,
+		 PlayerType        pt          = NONE,
+		 bool              chatenabled = false);
 	Widelands::Game * get_game() const;
 	Widelands::Game &     game() const;
 

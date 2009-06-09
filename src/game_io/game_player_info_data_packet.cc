@@ -33,11 +33,11 @@ namespace Widelands {
 
 
 void Game_Player_Info_Data_Packet::Read
-	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const)
+	(FileSystem & fs, Game & game, Map_Map_Object_Loader *)
 throw (_wexception)
 {
-	FileRead fr;
 	try {
+		FileRead fr;
 		fr.Open(fs, "binary/player_info");
 		uint16_t const packet_version = fr.Unsigned16();
 		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {

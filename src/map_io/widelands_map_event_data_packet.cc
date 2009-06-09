@@ -43,13 +43,12 @@ throw (_wexception)
 		return;
 
 	//  skip, if no events saved
-	FileRead fr;
-	try {fr.Open(fs, "event");} catch (...) {return;}
-
-	Profile prof;
-	prof.read("event", 0, fs);
+	try {FileRead fr; fr.Open(fs, "event");} catch (...) {return;}
 
 	try {
+		Profile prof;
+		prof.read("event", 0, fs);
+
 		uint32_t const packet_version =
 			prof.get_safe_section("global").get_safe_positive("packet_version");
 		if (packet_version <= CURRENT_PACKET_VERSION) {

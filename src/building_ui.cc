@@ -885,15 +885,10 @@ struct ConstructionSite_Window : public Building_Window {
 		 Widelands::ConstructionSite *,
 		 UI::Window *                * registry);
 
-	ConstructionSite * get_constructionsize() {
-		return dynamic_cast<ConstructionSite *>(get_building());
-	}
-
 	virtual void think();
 
 private:
 	UI::Progress_Bar * m_progress;
-
 };
 
 

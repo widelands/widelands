@@ -41,9 +41,7 @@ LayeredFileSystem::~LayeredFileSystem()
 		delete m_filesystems.back();
 		m_filesystems.pop_back();
 	}
-	if (m_home) {
-		delete m_home;
-	}
+	delete m_home;
 }
 
 

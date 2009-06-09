@@ -378,13 +378,6 @@ int32_t Map_Object::get_tattribute(uint32_t) const
 	return -1;
 }
 
-/**
- * Default implementation
- */
-bool Map_Object::have_tattributes() const
-{
-	return false;
-}
 
 /**
  * Queue a CMD_ACT tdelta milliseconds from now, using the given data.

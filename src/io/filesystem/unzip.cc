@@ -1724,7 +1724,6 @@ extern zipFile ZEXPORT zipOpen2
 	 zlib_filefunc_def * pzlib_filefunc_def)
 {
 	zip_internal ziinit;
-	zip_internal * zi;
 	int32_t err = ZIP_OK;
 
 
@@ -1756,7 +1755,8 @@ extern zipFile ZEXPORT zipOpen2
 	init_linkedlist(&(ziinit.central_dir));
 
 
-	zi = static_cast<zip_internal *>(malloc(sizeof(zip_internal)));
+	zip_internal * const zi =
+		static_cast<zip_internal *>(malloc(sizeof(zip_internal)));
 	if (not zi) {
 		ZCLOSE(ziinit.z_filefunc, ziinit.filestream);
 		return 0;

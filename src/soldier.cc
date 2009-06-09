@@ -294,12 +294,8 @@ uint32_t Soldier::get_level(tAttribute const at) const {
 	throw wexception ("Soldier::get_level attribute not identified.");
 }
 
-bool Soldier::have_tattributes() const
-{
-	return true;
-}
 
-int32_t Soldier::get_tattribute(uint32_t attr) const
+int32_t Soldier::get_tattribute(uint32_t const attr) const
 {
 	switch (attr) {
 	case atrHP: return m_hp_level;

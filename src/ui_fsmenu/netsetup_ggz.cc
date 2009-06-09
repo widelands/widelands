@@ -309,8 +309,7 @@ void Fullscreen_Menu_NetSetupGGZ::change_playername()
 void Fullscreen_Menu_NetSetupGGZ::clicked_joingame()
 {
 	if (opengames.has_selection()) {
-		const Net_Open_Game * game = &opengames.get_selected();
-		NetGGZ::ref().join(game->info.hostname);
+		NetGGZ::ref().join(opengames.get_selected().info.hostname);
 		end_modal(JOINGAME);
 	} else
 		throw wexception("No server selected! That should not happen!");

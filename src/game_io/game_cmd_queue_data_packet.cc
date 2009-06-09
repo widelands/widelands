@@ -36,8 +36,8 @@ void Game_Cmd_Queue_Data_Packet::Read
 	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const ol)
 throw (_wexception)
 {
-	FileRead fr;
 	try {
+		FileRead fr;
 		fr.Open(fs, "binary/cmd_queue");
 		uint16_t const packet_version = fr.Unsigned16();
 		if (1 <= packet_version) {

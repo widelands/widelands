@@ -449,11 +449,11 @@ void Main_Menu_New_Random_Map::id_edit_box_changed()
 
 void Main_Menu_New_Random_Map::nr_edit_box_changed()
 {
-	unsigned int number;
-	std::string text = m_nrEditbox->text();
-	std::stringstream sstrm(text);
 
 	try {
+		std::string const text = m_nrEditbox->text();
+		std::stringstream sstrm(text);
+		unsigned int number;
 		sstrm >> number;
 
 		if (!sstrm.fail()) {

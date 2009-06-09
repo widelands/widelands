@@ -50,15 +50,6 @@ RenderTarget::RenderTarget(Surface * const bmp)
 
 
 /**
- * Retrieve the current window setting.
- */
-void RenderTarget::get_window(Rect * const rc, Point * const ofs) const
-{
-	*rc = m_rect;
-	*ofs = m_offset;
-}
-
-/**
  * Sets an arbitrary drawing window.
  */
 void RenderTarget::set_window(Rect const & rc, Point const & ofs)

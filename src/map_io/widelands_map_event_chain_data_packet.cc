@@ -54,8 +54,8 @@ throw (_wexception)
 	Manager<EventChain> & mcm = map.mcm();
 	Manager<Event>      & mem = map.mem();
 	Manager<Trigger>    & mtm = map.mtm();
-	Profile prof;
 	try {
+		Profile prof;
 		prof.read("event_chain", 0, fs);
 		uint32_t const packet_version =
 			prof.get_safe_section("global").get_safe_positive("packet_version");

@@ -69,10 +69,16 @@ static uint32_t luminance_table_b[0x100];
  * Initialize the SDL video mode.
 */
 Graphic::Graphic
-	(int32_t w, int32_t h, int32_t bpp,
-	 bool fullscreen, bool hw_improvements, bool double_buffer)
-	: m_rendertarget(0), m_nr_update_rects(0), m_update_fullscreen(false),
-	  m_roadtextures(0)
+	(int32_t const w, int32_t const h,
+	 int32_t const bpp,
+	 bool    const fullscreen,
+	 bool    const hw_improvements,
+	 bool    const double_buffer)
+	:
+	m_rendertarget     (0),
+	m_nr_update_rects  (0),
+	m_update_fullscreen(false),
+	m_roadtextures     (0)
 {
 	for
 		(uint32_t i = 0, r = 0, g = 0, b = 0;
@@ -161,17 +167,13 @@ Graphic::Graphic
 		 sdlsurface->format->BytesPerPixel == 4);
 
 	SDL_WM_SetCaption
-		(("Widelands " + build_id() += '(' + build_type() + ')').c_str(),
+		(("Widelands " + build_id() + '(' + build_type() + ')').c_str(),
 		 "Widelands");
 
 	m_screen.set_sdl_surface(*sdlsurface);
 
-	if (m_rendertarget) {
-	  //FIXME do we not need to clean up the old render target?
-	  delete m_rendertarget;
-	  m_rendertarget = 0;
-	}
-	assert(m_rendertarget == 0);
+	//  FIXME do we not need to clean up the old render target?
+	delete m_rendertarget;
 	m_rendertarget = new RenderTarget(&m_screen);
 }
 
@@ -182,9 +184,7 @@ Graphic::~Graphic()
 {
 	flush(PicMod_UI | PicMod_Menu | PicMod_Game);
 	delete m_roadtextures;
-	if (m_rendertarget) {
-	  delete m_rendertarget;
-	}
+	delete m_rendertarget;
 
 	std::vector<Picture>::size_type const pictures_size = m_pictures.size();
 	for (std::vector<Picture>::size_type i = 0; i < pictures_size; ++i)
@@ -385,7 +385,7 @@ uint32_t Graphic::get_picture
 	pic.surface   = &surf;
 
 	if (fname) {
-	  assert(pic.fname == 0);
+		assert(pic.fname == 0);
 		pic.fname = strdup(fname);
 		m_picturemap[fname] = id;
 	} else
@@ -622,26 +622,19 @@ void Graphic::free_surface(uint32_t const picid) {
 
 	Picture & pic = m_pictures[picid];
 
-	if (pic.rendertarget) {
-	  delete pic.rendertarget;
-	  pic.rendertarget = 0;
-	}
-	if (pic.fname) {
-	  delete pic.fname;
-	  pic.fname = 0;
-	}
-	if (pic.surface) {
-	  delete pic.surface;
-	  pic.surface = 0;
-	}
+	delete pic.rendertarget;
+	pic.rendertarget = 0;
+	delete pic.fname;
+	pic.fname = 0;
+	delete pic.surface;
+	pic.surface = 0;
 	pic.module = 0;
 }
 
 
 uint32_t Graphic::create_grayed_out_pic(uint32_t const picid) {
 	if (picid) {
-		Surface & s =
-			*new Surface(*get_picture_surface(picid));
+		Surface & s = *new Surface(*get_picture_surface(picid));
 		SDL_PixelFormat const & format = s.format();
 		uint32_t const w = s.get_w(), h = s.get_h();
 		for (uint32_t y = 0; y < h; ++y)

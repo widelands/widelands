@@ -134,7 +134,7 @@ void Button::set_title(std::string const & title) {
  * Enable/Disable the button (disabled buttons can't be clicked).
  * Buttons are enabled by default
 */
-void Button::set_enabled(bool on)
+void Button::set_enabled(bool const on)
 {
 	// disabled buttons should look different...
 	if (on)

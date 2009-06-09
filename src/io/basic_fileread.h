@@ -80,7 +80,7 @@ template<typename Base> struct basic_FileRead : public Base {
 		assert(data);
 		if (m_fast) {
 #ifdef WIN32
-		  assert(false);
+			assert(false);
 #else
 			munmap(data, length);
 #endif

@@ -96,7 +96,7 @@ struct NetGGZ : public ChatProvider {
 	void launch  ();
 	void send_game_playing();
 	void send_game_done();
-	void join(const char *tablename);
+	void join(char const * tablename);
 
 	// functions for local server setup
 	uint32_t max_players();
@@ -105,11 +105,11 @@ struct NetGGZ : public ChatProvider {
 		tableseats = mp;
 	}
 	/// sets the servername shown in the games list
-	void set_local_servername(std::string name) {
-		if (name.empty())
-			name = "WL-Default";
-		servername = name;
-		servername += " (" + build_id() + ")";
+	void set_local_servername(std::string const & name) {
+		servername  = name.empty() ? "WL-Default" : name;
+		servername += " (";
+		servername += build_id();
+		servername += ')';
 	}
 
 	// ChatProvider: sends a message via GGZnetwork.
@@ -136,16 +136,16 @@ struct NetGGZ : public ChatProvider {
 
 private:
 	NetGGZ();
-	static void ggzmod_server(GGZMod *cbmod, GGZModEvent e, const void *cbdata);
+	static void ggzmod_server(GGZMod *, GGZModEvent, void const * cbdata);
 	static GGZHookReturn
-		callback_server(uint32_t id, const void *cbdata, const void *user);
+		callback_server(uint32_t id, void const * cbdata, void const * user);
 	static GGZHookReturn
-		callback_room(uint32_t id, const void *cbdata, const void *user);
+		callback_room(uint32_t id, void const * cbdata, void const * user);
 	static GGZHookReturn
-		callback_game(uint32_t id, const void *cbdata, const void *user);
-	void event_server(uint32_t id, const void *cbdata);
-	void event_room(uint32_t id, const void *cbdata);
-	void event_game(uint32_t id, const void *cbdata);
+		callback_game(uint32_t id, void const * cbdata, void const * user);
+	void event_server(uint32_t id, void const * cbdata);
+	void event_room(uint32_t id, void const * cbdata);
+	void event_game(uint32_t id, void const * cbdata);
 
 	void write_tablelist();
 	void write_userlist();

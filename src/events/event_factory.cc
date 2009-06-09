@@ -107,8 +107,8 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 			 "whithin an area to the player.")
 	},
 	{
-	  "victory",                 _("victory"),
-	  _("Allows a player to claim victory of this campain")
+		"victory",                _("victory"),
+		_("Allows a player to claim victory of this campain")
 	}
 };
 
