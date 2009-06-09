@@ -1754,7 +1754,6 @@ private:
 	void add_tab(char const * picname, UI::Panel * panel);
 
 	Widelands::Coords      m_ms_location;
-	Interactive_Player   * m_parent;
 	UI::Window         * * m_reg;
 	UI::Table<Soldier &> * m_table;
 	UI::Textarea         * m_capacity;
