@@ -280,6 +280,12 @@ def do_configure_basic_compiling(conf, env):
 	if not conf.CheckCompilerAttribute('format(printf, 2, 3)', env):
 		print "Your compiler does not support __attribute__((format(printf, 2, 3))) which is necessary for Widelands. Please get a decent compiler."
 		env.Exit(1)
+	if not conf.CheckCompilerAttribute('hot', env):
+		print "Your compiler does not support __attribute__((hot)) which is necessary for Widelands. Please get a decent compiler."
+		env.Exit(1)
+	if not conf.CheckCompilerAttribute('pure', env):
+		print "Your compiler does not support __attribute__((noinline)) which is necessary for Widelands. Please get a decent compiler."
+		env.Exit(1)
 
 def do_configure_locale(conf, env):
 	setlocalefound=0
