@@ -43,7 +43,8 @@ NetGGZ::NetGGZ() :
 	server_ip_addr(0),
 	tableseats    (1),
 	userupdate    (false),
-	tableupdate   (false)
+	tableupdate   (false),
+	motd          ()
 {}
 
 
@@ -163,6 +164,16 @@ bool NetGGZ::initcore
 	opt.flags = static_cast<GGZOptionFlags>(GGZ_OPT_EMBEDDED);
 	ggzcore_init(opt);
 
+	// Register callback functions for server events.
+	//
+	// Not yet handled server events:
+	// * GGZ_SERVER_PLAYERS_CHANGED (instead only room players are handled)
+	// * GGZ_LOGOUT                 (useful for us?)
+	// * GGZ_SERVER_ROOMS_CHANGED   (should not happen on our own server. There
+	//                               should only be the widelands room.)
+	// * GGZ_STATE_CHANGE           (a.t.m. we explicitely check the state if we
+	//                               need it, but perhaps it could be a good idea
+	//                               to generally monitor it for debug reasons.)
 	ggzserver = ggzcore_server_new();
 	ggzcore_server_add_event_hook
 		(ggzserver, GGZ_CONNECTED, &NetGGZ::callback_server);
@@ -183,6 +194,8 @@ bool NetGGZ::initcore
 		(ggzserver, GGZ_ENTER_FAIL, &NetGGZ::callback_server);
 	ggzcore_server_add_event_hook
 		(ggzserver, GGZ_CHANNEL_FAIL, &NetGGZ::callback_server);
+	ggzcore_server_add_event_hook
+		(ggzserver, GGZ_CHAT_FAIL, &NetGGZ::callback_server);
 
 	ggzcore_server_add_event_hook
 		(ggzserver, GGZ_ROOM_LIST, &NetGGZ::callback_server);
@@ -198,6 +211,9 @@ bool NetGGZ::initcore
 		(ggzserver, GGZ_CHANNEL_CONNECTED, &NetGGZ::callback_server);
 	ggzcore_server_add_event_hook
 		(ggzserver, GGZ_CHANNEL_READY, &NetGGZ::callback_server);
+
+	ggzcore_server_add_event_hook
+		(ggzserver, GGZ_MOTD_LOADED, &NetGGZ::callback_server);
 #if GGZCORE_VERSION_MINOR == 0
 	ggzcore_server_set_hostinfo(ggzserver, metaserver, WL_METASERVER_PORT, 0);
 #else
@@ -235,8 +251,6 @@ void NetGGZ::deinitcore()
 	ggzserver = 0;
 	ggzcore_destroy();
 	ggzcore_ready = false;
-	free(ggzobj);
-	ggzobj = 0;
 }
 
 
@@ -424,6 +438,11 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 		}
 		formatedGGZChat(ggzcore_room_get_desc(room), "", true);
 		formatedGGZChat("", "", true);
+		if (motd.size()) {
+			formatedGGZChat(_("Server MOTD:"), "", true);
+			formatedGGZChat(motd, "", true);
+			formatedGGZChat("", "", true);
+		}
 		break;
 	case GGZ_ROOM_LIST: {
 		log("GGZCORE ## -- (room list)\n");
@@ -459,21 +478,55 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 		channelfd = -1;
 		init();
 		break;
-	case GGZ_CONNECT_FAIL:
-	case GGZ_NEGOTIATE_FAIL:
+	case GGZ_CHAT_FAIL:
+		{
+			GGZErrorEventData const * ce =
+				static_cast<GGZErrorEventData const *>(cbdata);
+			log("GGZCORE ## -- chat error! (%s)\n", ce->message);
+			std::string formated = ERRMSG;
+			formated += ce->message;
+			formatedGGZChat(formated, "", true);
+			formatedGGZChat("", "", true);
+		}
+		break;
 	case GGZ_LOGIN_FAIL:
 	case GGZ_ENTER_FAIL:
-	case GGZ_CHANNEL_FAIL:
-	case GGZ_NET_ERROR:
+#if GGZCORE_VERSION_MINOR > 0
 	case GGZ_PROTOCOL_ERROR:
-		log("GGZCORE ## -- error! (%s)\n", static_cast<char const *>(cbdata));
+#endif
 		{
-			std::string msg = ERRMSG;
-			msg += static_cast<char const *>(cbdata);
-			formatedGGZChat(msg, "", true);
+			GGZErrorEventData const * eed =
+				static_cast<GGZErrorEventData const *>(cbdata);
+			log("GGZCORE ## -- error! (%s)\n", eed->message);
+			std::string formated = ERRMSG;
+			formated += eed->message;
+			formatedGGZChat(formated, "", true);
+			formatedGGZChat("", "", true);
+			ggzcore_login = false;
 		}
-		formatedGGZChat("", "", true);
-		ggzcore_login = false;
+		break;
+#if GGZCORE_VERSION_MINOR == 0
+	case GGZ_PROTOCOL_ERROR:
+#endif
+	case GGZ_CHANNEL_FAIL:
+	case GGZ_NEGOTIATE_FAIL:
+	case GGZ_CONNECT_FAIL:
+	case GGZ_NET_ERROR:
+		{
+			char const * msg =  static_cast<char const *>(cbdata);
+			log("GGZCORE ## -- error! (%s)\n", msg);
+			std::string formated = ERRMSG;
+			formated += msg;
+			formatedGGZChat(formated, "", true);
+			formatedGGZChat("", "", true);
+			ggzcore_login = false;
+		}
+		break;
+	case GGZ_MOTD_LOADED:
+		{
+			log("GGZCORE ## -- motd loaded!\n");
+			motd = static_cast<GGZMotdEventData const * >(cbdata)->motd;
+		}
 		break;
 	}
 }

@@ -168,6 +168,7 @@ private:
 	bool tableupdate;
 	std::vector<Net_Game_Info> tablelist;
 	std::vector<Net_Player>    userlist;
+	std::string motd;
 
 	// The chat messages
 	std::vector<ChatMessage> messages;
