@@ -61,7 +61,8 @@ struct Request : public Trackable {
 
 	enum Type {
 		WARE    = 0,
-		WORKER  = 1
+		WORKER  = 1,
+		INVALID = 2
 	};
 
 	Request(PlayerImmovable & target, Ware_Index, callback_t, Type);
