@@ -23,7 +23,7 @@
 #ifdef USE_GGZ
 #define HAVE_GGZ 1
 
-#define WL_METASERVER "janus.animux.de" // temp. testserver sponsored by janus
+#define WL_METASERVER "widelands.org"
 #define WL_METASERVER_PORT 5688
 
 #define ERRMSG "</p><p font-size=14 font-color=#ff6633 font-weight=bold>ERROR: "

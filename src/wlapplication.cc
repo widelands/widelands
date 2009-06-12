@@ -1423,9 +1423,16 @@ void WLApplication::mainmenu_multiplayer()
 								 	 "your side or on side\n"
 								 	 "of the server.\n"));
 					}
+					std::string ip = NetGGZ::ref().ip();
+
+					// FIXME : Simple hack - we cut the IPv6 tag at the beginning
+					if (INET6_ADDRSTRLEN) {
+						ip = ip.substr(7, ip.size() - 7);
+						log("GGZClient ## cutted IPv6 adress: %s\n", ip.c_str());
+					}
 
 					IPaddress peer;
-					if (hostent * const he = gethostbyname(NetGGZ::ref().ip())) {
+					if (hostent * const he = gethostbyname(ip.c_str())) {
 						peer.host =
 							(reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
 						peer.port = htons(WIDELANDS_PORT);
@@ -1435,7 +1442,7 @@ void WLApplication::mainmenu_multiplayer()
 							 _
 							 	("Widelands has not been able to connect to the "
 							 	 "host."));
-					SDLNet_ResolveHost (&peer, NetGGZ::ref().ip(), WIDELANDS_PORT);
+					SDLNet_ResolveHost (&peer, ip.c_str(), WIDELANDS_PORT);
 
 					NetClient netgame(&peer, playername, true);
 					netgame.run();
