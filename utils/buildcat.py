@@ -63,9 +63,9 @@ ITERATIVEPOTS = [ ("campaigns/%s", "campaigns/",
 											["../../../campaigns/%s/e*",
 											"../../../campaigns/%s/objective"] ),
 				  ("tribes/%s", "tribes/", ["../../../tribes/%s/conf",
-											 "../../../tribes/%s/*/*/conf"] ),
+											 "../../../tribes/%s/*/conf"] ),
 				  ("worlds/%s", "worlds/", ["../../../worlds/%s/*conf",
-											 "../../../worlds/%s/*/*/conf"] )
+											 "../../../worlds/%s/*/conf"] )
 				]
 
 
