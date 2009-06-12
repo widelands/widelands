@@ -84,6 +84,10 @@ volatile int32_t WLApplication::may_run = 0;
 #endif
 #endif
 
+#ifndef INET6_ADDRSTRLEN // at least on mingw
+#define INET6_ADDRSTRLEN 46 // from packet-ipv6.h
+#endif
+
 //Always specifying namespaces is good, but let's not go too far ;-)
 //using std::cout;
 std::ostream & wout = std::cout;
