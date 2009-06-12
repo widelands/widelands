@@ -41,6 +41,7 @@ NetGGZ::NetGGZ() :
 	channelfd     (-1),
 	gamefd        (-1),
 	server_ip_addr(0),
+	relogin       (false),
 	tableseats    (1),
 	userupdate    (false),
 	tableupdate   (false),
@@ -239,8 +240,9 @@ void NetGGZ::deinitcore()
 {
 	if (!usedcore())
 		return;
-	formatedGGZChat(_("Dropping connection to the metaserver."), "", true);
-	formatedGGZChat("", "", true);
+	formatedGGZChat(_("Closed the connection to the metaserver."), "", true);
+	formatedGGZChat("*** *** ***", "", true);
+	relogin = true;
 	tablelist.clear();
 	userlist.clear();
 	if (ggzcore_server_is_at_table(ggzserver))
@@ -445,21 +447,26 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 		ggzcore_room_list_players(room);
 
 		// now send some text about the room to the chat menu
-		formatedGGZChat(_("Connected to the metaserver of:"), "", true);
-		formatedGGZChat("", "", true);
-		{
-			std::string msg =
-			"                 </p>"
-			"<p font-size=14 font-face=Widelands/Widelands font-weight=bold>";
-			msg += ggzcore_room_get_name(room);
-			formatedGGZChat(msg, "", true);
-		}
-		formatedGGZChat(ggzcore_room_get_desc(room), "", true);
-		formatedGGZChat("", "", true);
-		if (motd.size()) {
-			formatedGGZChat(_("Server MOTD:"), "", true);
-			formatedGGZChat(motd, "", true);
-			formatedGGZChat("", "", true);
+		if (!relogin) {
+			formatedGGZChat(_("Connected to the metaserver of:"), "", true);
+			{
+				std::string msg =
+				"              </p>"
+				"<p font-size=18 font-face=Widelands/Widelands font-weight=bold>";
+				msg += ggzcore_room_get_name(room);
+				formatedGGZChat(msg, "", true);
+			}
+			formatedGGZChat(ggzcore_room_get_desc(room), "", true);
+			if (motd.motd.size()) {
+				formatedGGZChat("*** *** ***", "", true);
+				formatedGGZChat(_("Server MOTD:"), "", true);
+				for (uint32_t i = 0; i < motd.motd.size(); ++i)
+					formatedGGZChat(motd.formationstr + motd.motd[i], "", true);
+				formatedGGZChat("*** *** ***", "", true);
+			}
+		} else {
+			formatedGGZChat(_("Reconnected to the metaserver."), "", true);
+			formatedGGZChat("*** *** ***", "", true);
 		}
 		break;
 	case GGZ_ROOM_LIST: {
@@ -504,7 +511,7 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 			std::string formated = ERRMSG;
 			formated += ce->message;
 			formatedGGZChat(formated, "", true);
-			formatedGGZChat("", "", true);
+			formatedGGZChat("*** *** ***", "", true);
 		}
 		break;
 	case GGZ_LOGIN_FAIL:
@@ -519,7 +526,7 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 			std::string formated = ERRMSG;
 			formated += eed->message;
 			formatedGGZChat(formated, "", true);
-			formatedGGZChat("", "", true);
+			formatedGGZChat("*** *** ***", "", true);
 			ggzcore_login = false;
 		}
 		break;
@@ -536,14 +543,14 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 			std::string formated = ERRMSG;
 			formated += msg;
 			formatedGGZChat(formated, "", true);
-			formatedGGZChat("", "", true);
+			formatedGGZChat("*** *** ***", "", true);
 			ggzcore_login = false;
 		}
 		break;
 	case GGZ_MOTD_LOADED:
 		{
 			log("GGZCORE ## -- motd loaded!\n");
-			motd = static_cast<GGZMotdEventData const * >(cbdata)->motd;
+			motd = MOTD(static_cast<GGZMotdEventData const * >(cbdata)->motd);
 		}
 		break;
 	}

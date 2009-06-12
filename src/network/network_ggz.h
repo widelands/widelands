@@ -49,6 +49,37 @@ struct Net_Player {
 	std::string name;
 };
 
+/// A MOTD struct for easier output to the chat panel
+struct MOTD {
+	std::string formationstr;
+	std::vector<std::string> motd;
+
+	MOTD() {}
+	MOTD(std::string msg) {
+		// if msg is empty -> return
+		if (msg.size() < 1)
+			return;
+
+		// first char is always \n - so we remove it
+		msg = msg.substr(1, msg.size() - 1);
+		size_t j = msg.find_first_of("\n");
+
+		// split the message parts to have good looking texts
+		for (int32_t i = 0; msg.size(); ++i) {
+			if (j == std::string::npos) {
+				motd.push_back(msg);
+				break;
+			}
+			if (i == 0 && msg.substr(0, 1) == "<")
+				formationstr = msg.substr(0, j);
+			else
+				motd.push_back(msg.substr(0, j));
+			msg = msg.substr(j + 1, msg.size() - j);
+			j = msg.find_first_of("\n");
+		}
+	}
+};
+
 /**
  * The GGZ implementation
  *
@@ -158,6 +189,7 @@ private:
 	char *server_ip_addr;
 	bool ggzcore_login;
 	bool ggzcore_ready;
+	bool relogin;
 	GGZRoom *room;
 
 	std::string username;
@@ -168,7 +200,7 @@ private:
 	bool tableupdate;
 	std::vector<Net_Game_Info> tablelist;
 	std::vector<Net_Player>    userlist;
-	std::string motd;
+	MOTD motd;
 
 	// The chat messages
 	std::vector<ChatMessage> messages;
