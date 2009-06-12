@@ -122,10 +122,6 @@ def parse_cli(env, buildtargets):
 	if env['enable_efence']=='1':
 		env.efence=1
 
-	if env['enable_ggz']:
-		env.Append(CCFLAGS='-DUSE_GGZ')
-		env.Append(LIBS=['ggzmod', 'ggzcore', 'ggz'])
-
 	return BUILDDIR
 
 ################################################################################
@@ -369,6 +365,17 @@ def do_configure_libraries(conf, env):
 	if not conf.CheckLib(library='boost_program_options', symbol='', autoadd=1):
 		print 'Could not find the boost::program_options Library! Is it installed?'
 		env.Exit(1)
+
+	if env['enable_ggz']:
+		if not (conf.CheckLib(library='libggzcore', symbol='ggz_conf_parse', autoadd=1) 
+			and conf.CheckLib(library='libggz', symbol='ggz_read_line', autoadd=1)
+			and conf.CheckLib(library='libggzmod', symbol='', autoadd=1)):
+			print 'Could not find libggz or ggz-client-libs! Are they BOTH installed?'
+			env.Exit(1)
+		else:
+			env.Append(CCFLAGS='-DUSE_GGZ')
+			#env.Append(LIBS=['ggzmod', 'ggzcore', 'ggz'])
+
 
 	if not conf.TryLink(""" #define USE_RWOPS
 			#include <SDL_mixer.h>
