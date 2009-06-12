@@ -6,7 +6,7 @@ packet_version=1
 [Build Woodeconomy]
 name=_"Build up a wood economy"
 descr=_""<rt><p>"
-_"* Build up three lumberjack's houses, a forester's house and a sawmill."
+_"* Build three lumberjack's houses, a forester's house and a sawmill."
 "</p></rt>""
 visible=false
 trigger=Woodeconomy complete
@@ -38,7 +38,7 @@ trigger=Marblemine complete
 [Build Mining infrastructure]
 name=_"Build a stonemason and mining infrastructure"
 descr=_""<rt><p>"
-_"* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
+_"* Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner, iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 "</p></rt>""
 visible=false
 trigger=Mining infrastructure complete
@@ -46,7 +46,7 @@ trigger=Mining infrastructure complete
 [Build Food infrastructure]
 name=_"Provide your miners with food"
 descr=_""<rt><p>"
-_"* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food like fish, meat or bread. To provide these foodstuff you would have to build a fisher's house, a farm, a mill and a bakery. Maybe you will also need a hunter's house, a piggery, a vineyard and some wells. It's up to you, what you want to build.<br> But remember - Coal and Iron Ore Mines need beer, Marble and Gold Mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
+_"* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food - like fish, meat or bread.<br> To provide these foodstuffs, you would have to build a fisher's house, a farm, a mill and a bakery.<br> Maybe you will also need a hunter's house,<br> a piggery, a vineyard and some wells.<br> It's up to you what you want to build.<br> But remember - coal and iron ore mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
 "</p></rt>""
 visible=false
 trigger=Food infrastructure complete
@@ -54,7 +54,7 @@ trigger=Food infrastructure complete
 [Build bigger military buildings]
 name=_"Protect your eastern frontier"
 descr=_""<rt><p>"
-_"* Build up bigger military buildings, like an outpost, a barrier or<br> a tower, on the eastern frontier."
+_"* Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier. To watch deep inside the enemy territory, build a tower."
 "</p></rt>""
 visible=false
 trigger=Bigger military building complete
@@ -62,8 +62,8 @@ trigger=Bigger military building complete
 [Remove the barbarians]
 name=_"Destroy the barbarian tribe"
 descr=_""<rt><p>"
-_"* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>"
-_"* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
+_"* As soon as you have enough soldiers, attack and completely destroy the barbarian buildings.<br>"
+_"* Finally, build up a fortress on the peninsula<br> (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 "</p></rt>""
 visible=false
 trigger=Victory

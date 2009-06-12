@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4208\n"
+"Project-Id-Version: Widelands svn4240\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-04 13:01+0000\n"
+"POT-Creation-Date: 2009-06-12 14:42+0000\n"
 "PO-Revision-Date: 2009-05-12 16:41+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -49,6 +49,7 @@ msgid " \"As Saledus and I walked through these wonderful forests in the north, 
 msgstr "\"Als Saledus und ich in den dichten, grünen Wäldern im Norden unseres Hauptquartiers spazieren gingen, fühlten wir, dass unsere Zukunft gerade begonnen hat. Diese Insel ist so friedlich, angenehm und wunderschön, dass ich hier am liebsten bis zu meinem Lebensende bleiben möchte.<br>Doch bis dahin werden hoffentlich noch etliche Jahre vergehen. Und für den Moment sollten wir uns auf das Jetzt konzentrieren und eine paar Holzfällerhütten sowie ein Sägewerk errichten, um gutes Baumaterial herzustellen.<br>Gleichzeitig sollten wir aber nicht vergessen, die Schönheit und Stärke dieser Natur zu bewahren. Diese Wälder sollen für immer bestehen und auch noch den Kindern unserer Kinder den nötigen Schatten spenden - ein Forsthaus wird dies gewährleisten.\"<br><br>-- NEUER AUFTRAG --<br>"
 
 #: ../../../campaigns/emp02.wmf/event:139
+#: ../../../campaigns/emp02.wmf/objective:9
 msgid "* Build three lumberjack's houses, a forester's house and a sawmill."
 msgstr "* Baue drei Holzfäller, ein Forsthaus und ein Sägewerk."
 
@@ -128,6 +129,7 @@ msgid " \"By the Gods, this is an unbelievable strike of fortune! There are two 
 msgstr "\"Bei den Göttern, das ist großartig, das ist ein unglaubliches Geschenk! Dort sind zwei weitere Berge und es scheint beinahe so, als ob einer eine größere Menge Steinkohle verbirgt und der andere einige Eisenadern hat. Nun können wir wirklich ein Leben wie in Fremil führen. Wir sollten sofort anfangen, Minen, eine Köhlerei, einen Hochofen, Schmieden und eine Werkzeugschmiede zu bauen. Allerdings brauchen wir für diese größeren Gebäude bessere und schönere Baumaterialien. Lass uns einen Steinmetz beauftragen, der uns ein paar wunderschöne Säulen aus Marmor schlägt.<br><br>"
 
 #: ../../../campaigns/emp02.wmf/event:332
+#: ../../../campaigns/emp02.wmf/objective:41
 msgid "* Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner, iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 msgstr "* Baue eine komplette Bergbau- und Produktionsinfrastruktur auf: Eisenmine, Köhlerei oder Kohlenmine, Hochofen, Werkzeugschmiede, Waffen- und Rüstungsschmied, zusätzlich einen Steinmetz."
 
@@ -144,6 +146,7 @@ msgid " \"Hi Lutius, I hope you forgive my criticism, but it seems to me as if y
 msgstr "\"Hallo, Lutius,<br>ich hoffe, du vergibst mir meine Kritik, aber ich befürchte, dass du etwas vergessen hast. Es ist schön und natürlich eine gute Idee, Minen aufzubauen, die uns ein luxuriöseres Leben ermöglichen werden. Doch die Leute, die in den Minen arbeiten, sind unglücklich mit der derzeitigen Versorgung. Sie müssen hart arbeiten und haben kaum Zeit ihr eigenes Essen zuzubereiten.<br>Sollten wir ihnen nicht etwas aushelfen? <br>Lutius, lass uns eine Taverne errichten, die ein paar leckere Snacks und Rationen für unsere Bergarbeiter herstellt, sowie eine Brauerei und eine Winzerei, die Bier und Wein für unsere Bergarbeiter herstellen.<br>Natürlich werden wir mehr Rohstoffe für das ganze Essen brauchen. Ich schlage daher vor, einen Fischer, einen Bauernhof, eine Mühle und einen Bäcker zu errichten. Ein Jäger, eine Schweinefarm, ein Winzer und ein Brunnen wären wohl auch von Nöten.<br>Versteh mich bitte nicht falsch, aber die Bergarbeiter brauchen nun einmal etwas Ordentliches zu essen und zu trinken, um genügend Kraft für ihre harte Arbeit zu haben."
 
 #: ../../../campaigns/emp02.wmf/event:414
+#: ../../../campaigns/emp02.wmf/objective:49
 msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food - like fish, meat or bread.<br> To provide these foodstuffs, you would have to build a fisher's house, a farm, a mill and a bakery.<br> Maybe you will also need a hunter's house,<br> a piggery, a vineyard and some wells.<br> It's up to you what you want to build.<br> But remember - coal and iron ore mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
 msgstr "* Um unsere Bergarbeiter mit Nahrung zu versorgen, sollten wir eine Taverne errichten. Damit sie nicht verdursten, solltest du auch eine Brauerei und eine Kellerei errichten.<br> Natürlich brauchen wir mehr Rohstoffe um die Nahrungsmittel zu produzieren, wie Fisch, Fleisch und Brot. Deshalb solltest du Fischerhütten, Bauernhof, Windmühle und Bäckerei bauen.<br>Vielleicht wirst du auch ein Jägerhaus, Schweinezucht, Winzerei und einige Brunnen brauchen.<br>Es ist dir überlassen, was du bauen willst.<br>Beachte aber: Kohlen- und Eisenminen brauchen Bier, Marmor- und Goldminen brauchen Wein, und alle Minen brauchen Mahlzeiten, die aus Brot und Fisch oder Fleisch hergestellt werden."
 
@@ -156,6 +159,7 @@ msgid " \"By the Gods! This is absolutely terrible. It seems as if we stand clos
 msgstr "\"Bei den Göttern!<br>Das ist ein Schock. Es scheint beinahe so, als ob wir vor einer Prüfung stehen und Saledus mit seinen Befürchtungen bezüglich der Schiffsteile Recht hatte.<br> Heute, als ich zu den östlichen Stränden ging, war ich wie vom Blitz getroffen. Dort war einer dieser verhassten, bösen barbarischen Stämme, mit denen wir zuvor schon mehr als genug Ärger hatten.<br>Zuerst war ich etwas naiv und hoffte, dass sie friedlich wären, doch kaum hatten sie mich entdeckt, griffen sie mich mit ihren Wurfspeeren an. Den Göttern sei Dank, dass ich mich verstecken und schließlich in unsere Kolonie zurückschleichen konnte.<br>Wie auch immer, wir MÜSSEN so schnell wie möglich größere militärische Gebäude errichten.<br><br>-- NEUER AUFTRAG --<br>"
 
 #: ../../../campaigns/emp02.wmf/event:513
+#: ../../../campaigns/emp02.wmf/objective:57
 msgid "* Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier. To watch deep inside the enemy territory, build a tower."
 msgstr "* Baue einen Verteidigungswall aus größeren militärischen Gebäude, wie Außenposten, Barrieren oder Türme, an der östlichen Grenze. Um weiter in das gegnerische Gebiet sehen zu können baue einen Wachturm."
 
@@ -168,10 +172,12 @@ msgid " \"That's good. The first large military building is complete and the min
 msgstr "\"Das ist gut. Das erste große militärische Gebäude ist fertig und unsere Bergbau-Infrastruktur wird besser und besser. Nun können wir uns auf den Angriff vorbereiten.\"<br><br>-- NEUER AUFTRAG --<br>"
 
 #: ../../../campaigns/emp02.wmf/event:555
+#: ../../../campaigns/emp02.wmf/objective:65
 msgid "* As soon as you have enough soldiers, attack and completely destroy the barbarian buildings.<br>"
 msgstr "* Sobald du genug Soldaten hast, greife die Barbaren an und zerstöre alle ihre Gebäude.<br>"
 
 #: ../../../campaigns/emp02.wmf/event:556
+#: ../../../campaigns/emp02.wmf/objective:66
 msgid "* Finally, build up a fortress on the peninsula<br> (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 msgstr "* Wenn du das erreicht hast, errichte eine Festung auf der Inselzunge (nahe der Stelle, wo die Barbaren ihr Hauptquartier hatten), um neue Besiedlungsversuche von anderen Stämmen zu verhindern."
 
@@ -223,10 +229,6 @@ msgstr "Unsere neue Taverne"
 msgid "Build up a wood economy"
 msgstr "Baue eine Holzproduktionskette"
 
-#: ../../../campaigns/emp02.wmf/objective:9
-msgid "* Build up three lumberjack's houses, a forester's house and a sawmill."
-msgstr "* Baue drei Holzfäller, ein Forsthaus und ein Sägewerk."
-
 #: ../../../campaigns/emp02.wmf/objective:15
 msgid "Build a quarry"
 msgstr "Baue einen Steinbruch"
@@ -243,37 +245,35 @@ msgstr "Beginne damit Marmor abzubauen"
 msgid "Build a stonemason and mining infrastructure"
 msgstr "Baue einen Steinmetz und Minen"
 
-#: ../../../campaigns/emp02.wmf/objective:41
-msgid "* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
-msgstr "* Baue eine komplette Bergbau- und Produktionsinfrastruktur auf: Eisenmine, Hochofen, Kohlenmine oder eine Köhlerei, Werkzeugschmiede, Waffen- und Rüstungsschmied, zusätzlich einen Steinmetz."
-
 #: ../../../campaigns/emp02.wmf/objective:47
 msgid "Provide your miners with food"
 msgstr "Versorge deine Bergarbeiter mit Nahrung"
-
-#: ../../../campaigns/emp02.wmf/objective:49
-msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food like fish, meat or bread. To provide these foodstuff you would have to build a fisher's house, a farm, a mill and a bakery. Maybe you will also need a hunter's house, a piggery, a vineyard and some wells. It's up to you, what you want to build.<br> But remember - Coal and Iron Ore Mines need beer, Marble and Gold Mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
-msgstr "* Um unsere Bergarbeiter mit Nahrung zu versorgen, sollten wir eine Taverne errichten. Damit sie nicht verdursten, solltest du auch eine Brauerei und eine Kellerei errichten.<br> Natürlich brauchen wir mehr Rohstoffe um die Nahrungsmittel zu produzieren, wie Fisch, Fleisch und Brot. Deshalb solltest du Fischerhütten, Bauernhof, Windmühle und Bäckerei bauen. Vielleicht wirst du auch ein Jägerhaus, Schweinezucht, Winzerei und einige Brunnen brauchen. Es ist dir überlassen, was du bauen willst.<br>Beachte aber: Kohlen- und Eisenminen brauchen Bier, Marmor- und Goldminen brauchen Wein, und alle Minen brauchen Mahlzeiten, die aus Brot und Fisch oder Fleisch hergestellt werden."
 
 #: ../../../campaigns/emp02.wmf/objective:55
 msgid "Protect your eastern frontier"
 msgstr "Beschütze deine östliche Grenze"
 
-#: ../../../campaigns/emp02.wmf/objective:57
-msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a tower, on the eastern frontier."
-msgstr "* Baue einen Verteidigungswall aus größeren militärischen Gebäude, wie Außenposten, Barrieren oder Türme an der östlichen Grenze."
-
 #: ../../../campaigns/emp02.wmf/objective:63
 msgid "Destroy the barbarian tribe"
 msgstr "Besiege den Barbarenstamm"
 
-#: ../../../campaigns/emp02.wmf/objective:65
-msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>"
-msgstr "* Sobald du genug Soldaten hast, greife die Barbaren an und zerstöre alle ihre Gebäude.<br>"
+#~ msgid "* Build up three lumberjack's houses, a forester's house and a sawmill."
+#~ msgstr "* Baue drei Holzfäller, ein Forsthaus und ein Sägewerk."
 
-#: ../../../campaigns/emp02.wmf/objective:66
-msgid "* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
-msgstr "* Wenn du das erreicht hast, errichte eine Festung auf der Inselzunge (nahe der Stelle, wo die Barbaren ihr Hauptquartier hatten), um neue Besiedlungsversuche von anderen Stämmen zu verhindern."
+#~ msgid "* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
+#~ msgstr "* Baue eine komplette Bergbau- und Produktionsinfrastruktur auf: Eisenmine, Hochofen, Kohlenmine oder eine Köhlerei, Werkzeugschmiede, Waffen- und Rüstungsschmied, zusätzlich einen Steinmetz."
+
+#~ msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food like fish, meat or bread. To provide these foodstuff you would have to build a fisher's house, a farm, a mill and a bakery. Maybe you will also need a hunter's house, a piggery, a vineyard and some wells. It's up to you, what you want to build.<br> But remember - Coal and Iron Ore Mines need beer, Marble and Gold Mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
+#~ msgstr "* Um unsere Bergarbeiter mit Nahrung zu versorgen, sollten wir eine Taverne errichten. Damit sie nicht verdursten, solltest du auch eine Brauerei und eine Kellerei errichten.<br> Natürlich brauchen wir mehr Rohstoffe um die Nahrungsmittel zu produzieren, wie Fisch, Fleisch und Brot. Deshalb solltest du Fischerhütten, Bauernhof, Windmühle und Bäckerei bauen. Vielleicht wirst du auch ein Jägerhaus, Schweinezucht, Winzerei und einige Brunnen brauchen. Es ist dir überlassen, was du bauen willst.<br>Beachte aber: Kohlen- und Eisenminen brauchen Bier, Marmor- und Goldminen brauchen Wein, und alle Minen brauchen Mahlzeiten, die aus Brot und Fisch oder Fleisch hergestellt werden."
+
+#~ msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a tower, on the eastern frontier."
+#~ msgstr "* Baue einen Verteidigungswall aus größeren militärischen Gebäude, wie Außenposten, Barrieren oder Türme an der östlichen Grenze."
+
+#~ msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>"
+#~ msgstr "* Sobald du genug Soldaten hast, greife die Barbaren an und zerstöre alle ihre Gebäude.<br>"
+
+#~ msgid "* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
+#~ msgstr "* Wenn du das erreicht hast, errichte eine Festung auf der Inselzunge (nahe der Stelle, wo die Barbaren ihr Hauptquartier hatten), um neue Besiedlungsversuche von anderen Stämmen zu verhindern."
 
 #~ msgid "Second mission of the Empire campaign"
 #~ msgstr "Zweite Mission der imperialen Kampagne"
