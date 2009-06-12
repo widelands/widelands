@@ -404,12 +404,30 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 #endif
 		break;
 	case GGZ_ENTERED:
-		log("GGZCORE ## -- entered\n");
-		// Add hooks for all interesting data for the room
+		log("GGZCORE ## -- entered room\n");
+
+		// Register callback functions for room events.
+		//
+		// Not yet handled server events:
+		// * GGZ_PLAYER_LAG   (useful for us?)
+		// * GGZ_PLAYER_STATS (should be handled once Widelands knows winner,
+		//                     loser and point handling)
+		// * GGZ_PLAYER_PERMS (useful as soon as login features and admin features
+		//                     are implemented)
 		room = ggzcore_server_get_cur_room(ggzserver);
 		ggzcore_room_add_event_hook(room, GGZ_TABLE_LIST, &NetGGZ::callback_room);
 		ggzcore_room_add_event_hook
 			(room, GGZ_TABLE_UPDATE, &NetGGZ::callback_room);
+		ggzcore_room_add_event_hook
+			(room, GGZ_TABLE_LAUNCHED, &NetGGZ::callback_room);
+				ggzcore_room_add_event_hook
+			(room, GGZ_TABLE_LAUNCH_FAIL, &NetGGZ::callback_room);
+		ggzcore_room_add_event_hook
+			(room, GGZ_TABLE_JOINED, &NetGGZ::callback_room);
+			ggzcore_room_add_event_hook
+			(room, GGZ_TABLE_JOIN_FAIL, &NetGGZ::callback_room);
+			ggzcore_room_add_event_hook
+			(room, GGZ_TABLE_LEFT, &NetGGZ::callback_room);
 		ggzcore_room_add_event_hook
 			(room, GGZ_PLAYER_LIST, &NetGGZ::callback_room);
 		ggzcore_room_add_event_hook
@@ -541,7 +559,7 @@ void NetGGZ::event_room(uint32_t const id, void const * const cbdata)
 		//  FIXME clients freeze. At the moment that is the reason why we do not
 		//  FIXME read updates while we are inside a table.
 	case GGZ_TABLE_UPDATE:
-	case GGZ_TABLE_LIST: {
+	case GGZ_TABLE_LIST:
 		log("GGZCORE/room ## -- table list\n");
 		if (!room)
 			room = ggzcore_server_get_cur_room(ggzserver);
@@ -553,11 +571,35 @@ void NetGGZ::event_room(uint32_t const id, void const * const cbdata)
 		ggzcore_login = false;
 		ggzcore_ready = true;
 		break;
-	}
-	case GGZ_ROOM_ENTER:
-	case GGZ_ROOM_LEAVE:
+	case GGZ_TABLE_LAUNCHED:
+		log("GGZCORE/room ## -- table launched\n");
+		// nothing to be done here - just for debugging
+		// cbdata is NULL
+		break;
+	case GGZ_TABLE_LAUNCH_FAIL:
+		// nothing useful done yet - just debug output
+		{
+			GGZErrorEventData const * eed =
+				static_cast<GGZErrorEventData const *>(cbdata);
+			log("GGZCORE/room ## -- table launch failed! (%s)\n", eed->message);
+		}
+		break;
+	case GGZ_TABLE_JOINED:
+		log("GGZCORE/room ## -- table joined\n");
+		// nothing to be done here - just for debugging
+		// cbdata is the table index (int*) of the table we joined
+		break;
+	case GGZ_TABLE_JOIN_FAIL:
+		// nothing useful done yet - just debug output
+		{
+			char const * msg =  static_cast<char const *>(cbdata);
+			log("GGZCORE ## -- error! (%s)\n", msg);
+		}
+		break;
+	case GGZ_ROOM_ENTER: // cbdate is a GGZRoomChangeEventData*
+	case GGZ_ROOM_LEAVE: // cbdate is a GGZRoomChangeEventData*
 	case GGZ_PLAYER_LIST:
-	case GGZ_PLAYER_COUNT:
+	case GGZ_PLAYER_COUNT: // cbdata is the GGZRoom* where players were counted
 		log("GGZCORE/room ## -- user list\n");
 		write_userlist();
 		break;
