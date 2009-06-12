@@ -17,6 +17,8 @@
  *
  */
 
+#pragma GCC diagnostic ignored "-Wold-style-cast"
+
 #include "widelands_geometry.h"
 
 #include "../iroute.h"
