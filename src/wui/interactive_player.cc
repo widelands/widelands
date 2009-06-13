@@ -64,7 +64,7 @@ using Widelands::Map;
 using boost::format;
 
 
-#define CHAT_DISPLAY_TIME 5000 // Show chat messages as overlay for 5 seconds
+#define CHAT_DISPLAY_TIME 5 // Show chat messages as overlay for 5 seconds
 
 ChatDisplay::ChatDisplay
 	(UI::Panel * const parent,
@@ -101,7 +101,7 @@ void ChatDisplay::draw(RenderTarget & dst)
 			g_fh->delete_widget_cache(m_cache_id[i]);
 	m_cache_id.resize(0);
 
-	int32_t now = WLApplication::get()->get_time();
+	int32_t now = time(0);
 
 	std::vector<ChatMessage> const & msgs = m_chat->getMessages();
 	std::vector<Displayed> displaylist;
