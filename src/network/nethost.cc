@@ -173,7 +173,7 @@ struct HostChatProvider : public ChatProvider {
 
 	void send(std::string const & msg) {
 		ChatMessage c;
-		c.time = WLApplication::get()->get_time();
+		c.time = time(0);
 		c.playern = h->getLocalPlayerposition();
 		c.sender = h->getLocalPlayername();
 		c.msg = msg;
@@ -634,7 +634,7 @@ void NetHost::sendSystemChat(char const * const fmt, ...)
 	va_end(va);
 
 	ChatMessage c;
-	c.time = WLApplication::get()->get_time();
+	c.time = time(0);
 	c.msg = buffer;
 	c.playern = -2; // == System message
 	// c.sender remains empty to indicate a system message
@@ -1563,7 +1563,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	case NETCMD_CHAT: {
 		ChatMessage c;
-		c.time = WLApplication::get()->get_time();
+		c.time = time(0);
 		c.playern = d->settings.users[client.usernum].position;
 		c.sender = d->settings.users[client.usernum].name;
 		c.msg = r.String();

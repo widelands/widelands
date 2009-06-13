@@ -31,7 +31,7 @@ struct ChatMessage {
 	/**
 	 * The (real-)time at which the message was received.
 	 */
-	int32_t time;
+	time_t time;
 
 	/**
 	 * The playercolor (just used to colorize the senders name).

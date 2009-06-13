@@ -89,7 +89,7 @@ struct Console : public ChatProvider, public Handler {
 	{
 		ChatMessage cm;
 
-		cm.time = WLApplication::get()->get_time();
+		cm.time = time(0);
 		cm.msg = msg;
 		messages.push_back(cm);
 

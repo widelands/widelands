@@ -595,7 +595,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 	case NETCMD_CHAT: {
 		ChatMessage c;
-		c.time = WLApplication::get()->get_time();
+		c.time = time(0);
 		c.playern = packet.Signed16();
 		c.sender = packet.String();
 		c.msg = packet.String();

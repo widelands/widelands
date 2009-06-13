@@ -24,7 +24,15 @@ using namespace Widelands;
 
 std::string ChatMessage::toPrintable() const
 {
-	std::string message = "<p font-size=14 font-face=FreeSerif font-color=#";
+	std::string message = "<p font-color=#33ff33 font-size=9>";
+
+	// time calculation
+	char ts[13];
+	tm * t = localtime(&time);
+	strftime(ts, sizeof(ts), "[%H:%M] </p>", t);
+	message += ts;
+
+	message += "<p font-size=14 font-face=FreeSerif font-color=#";
 	message += color();
 
 	if (!recipient.empty() && !sender.empty()) {

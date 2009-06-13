@@ -223,6 +223,12 @@ bool NetGGZ::initcore
 #endif
 	ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, playername, 0, 0);
 
+	// Following are for registering a new account and for logging in an already
+	// registered account:
+	//ggzcore_server_set_logininfo
+		//(ggzserver, GGZ_LOGIN_NEW, playername, passwd, email");
+	//ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN, playername, passwd, 0);
+
 	ggzcore_server_connect(ggzserver);
 
 	log("GGZCORE ## start loop\n");
@@ -934,7 +940,7 @@ void NetGGZ::formatedGGZChat
 	 bool system, std::string recipient)
 {
 	ChatMessage c;
-	c.time = WLApplication::get()->get_time();
+	c.time = time(0);
 	c.sender = !system && sender.empty() ? "<unknown>" : sender;
 	c.playern = system ? -1 : recipient.size() ? 3 : 7;
 	c.msg = msg;
