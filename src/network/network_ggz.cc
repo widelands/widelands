@@ -603,8 +603,26 @@ void NetGGZ::event_room(uint32_t const id, void const * const cbdata)
 			log("GGZCORE ## -- error! (%s)\n", msg);
 		}
 		break;
-	case GGZ_ROOM_ENTER: // cbdate is a GGZRoomChangeEventData*
-	case GGZ_ROOM_LEAVE: // cbdate is a GGZRoomChangeEventData*
+	case GGZ_ROOM_ENTER:
+		{
+			log("GGZCORE/room ## -- user joined\n");
+			std::string msg =
+				static_cast<const GGZRoomChangeEventData * >(cbdata)->player_name;
+			msg += _(" joined the metaserver.");
+			formatedGGZChat(msg, "", true);
+		}
+		write_userlist();
+		break;
+	case GGZ_ROOM_LEAVE:
+		{
+			log("GGZCORE/room ## -- user left\n");
+			std::string msg =
+				static_cast<const GGZRoomChangeEventData * >(cbdata)->player_name;
+			msg += _(" left the metaserver.");
+			formatedGGZChat(msg, "", true);
+		}
+		write_userlist();
+		break;
 	case GGZ_PLAYER_LIST:
 	case GGZ_PLAYER_COUNT: // cbdata is the GGZRoom* where players were counted
 		log("GGZCORE/room ## -- user list\n");
