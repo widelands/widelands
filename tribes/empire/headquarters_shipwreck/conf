@@ -5,4 +5,6 @@ conquers=9
 
 [idle]
 # sfx=0 ../../../sound/spoken/warehouse-bringitin
-hotspot=95 110
+pics=wreck_??.png
+hotspot=81 38
+playercolor=true
