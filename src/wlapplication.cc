@@ -84,13 +84,6 @@ volatile int32_t WLApplication::may_run = 0;
 #endif
 #endif
 
-#ifndef INET6_ADDRSTRLEN // at least on mingw
-#define INET6_ADDRSTRLEN 46 // from packet-ipv6.h
-#endif
-#ifndef INET_ADDRSTRLEN // at least on mingw
-#define INET_ADDRSTRLEN 16
-#endif
-
 
 //Always specifying namespaces is good, but let's not go too far ;-)
 //using std::cout;
@@ -1433,8 +1426,8 @@ void WLApplication::mainmenu_multiplayer()
 					}
 					std::string ip = NetGGZ::ref().ip();
 
-					// FIXME : Simple hack - we cut the IPv6 tag at the beginning
-					if (ip.size() > INET_ADDRSTRLEN && ip.size() <= INET6_ADDRSTRLEN)
+					// Handle "IPv4 compatible" IPv6 adresses returned by ggzd
+					if (ip.size() > 7 && ip.substr(0, 7) == "::ffff:")
 					{
 						ip = ip.substr(7, ip.size() - 7);
 						log("GGZClient ## cutted IPv6 adress: %s\n", ip.c_str());
