@@ -117,7 +117,8 @@ struct NetGGZ : public ChatProvider {
 		op_reply_ip = 3, // tell the server, that following package is our IP
 		op_broadcast_ip = 4,
 		op_state_playing = 5, // tell the server that the game was stated
-		op_state_done = 6 // tell the server that the gam ended
+		op_state_done = 6, // tell the server that the game ended
+		op_unreachable = 99 // the metaserver says we are unreachable
 	};
 
 	bool initcore(const char * metaserver, const char * playername);

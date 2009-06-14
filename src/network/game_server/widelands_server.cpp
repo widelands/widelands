@@ -65,9 +65,10 @@ void WidelandsServer::joinEvent(Client *client)
 	ggz_write_string(channel, "widelands server");
 	ggz_write_int(channel, WIDELANDS_PROTOCOL);
 
-	if(client->number == 0)
+	if(client->number == 0) {
 		ggz_write_int(channel, op_request_ip);
-	else
+		changeState(GGZGameServer::playing);
+	} else
 	{
 		ggz_write_int(channel, op_broadcast_ip);
 		ggz_write_string(channel, m_ip);
@@ -127,23 +128,36 @@ void WidelandsServer::dataEvent(Client *client)
 			ret = getpeername(channel, addr, &addrsize);
 
 			// FIXME: IPv4 compatibility?
-			if(addr->sa_family == AF_INET6)
-			{
+			if(addr->sa_family == AF_INET6) {
 				ip = (char*)ggz_malloc(INET6_ADDRSTRLEN);
 				inet_ntop(AF_INET6, (void*)&(((struct sockaddr_in6*)addr)->sin6_addr),
 					ip, INET6_ADDRSTRLEN);
-			}
-			else if(addr->sa_family == AF_INET)
-			{
+			} else if(addr->sa_family == AF_INET) {
 				ip = (char*)ggz_malloc(INET_ADDRSTRLEN);
 				inet_ntop(AF_INET, (void*)&(((struct sockaddr_in*)addr)->sin_addr),
 					ip, INET_ADDRSTRLEN);
+			} else {
+				ip = NULL;
+				std::cout << "GAME: unreachable -> done!" << std::endl;
+				ggz_write_int(channel, op_unreachable);
+				changeState(GGZGameServer::done);
+				break;
 			}
-			else ip = NULL;
 
 			std::cout << "broadcast IP: " << ip << std::endl;
 			m_ip = ggz_strdup(ip);
 			ggz_free(ip);
+			{ // test for connectablity
+				addrinfo *ai = 0;
+				if (getaddrinfo(m_ip, "7396", 0, &ai) != 0) {
+					std::cout << "GAME: unreachable -> done!" << std::endl;
+					ggz_write_int(channel, op_unreachable);
+					changeState(GGZGameServer::done);
+					break;
+				}
+			}
+			std::cout << "GAME: reachable -> waiting!" << std::endl;
+			changeState(GGZGameServer::waiting);
 			break;
 		case op_state_playing:
 			std::cout << "GAME: playing!" << std::endl;
@@ -177,4 +191,3 @@ void WidelandsServer::game_stop()
 void WidelandsServer::game_end()
 {
 }
-

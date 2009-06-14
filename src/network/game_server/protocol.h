@@ -28,7 +28,8 @@ enum NetworkOpcodes
 	op_reply_ip = 3,
 	op_broadcast_ip = 4,
 	op_state_playing = 5,
-	op_state_done = 6
+	op_state_done = 6,
+	op_unreachable = 99
 };
 
 #endif
