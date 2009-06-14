@@ -55,6 +55,10 @@ Request::Request
 	:
 	m_type             (w),
 	m_target           (_target),
+	m_target_building  (dynamic_cast<Building *>(&_target)),
+	m_target_productionsite  (dynamic_cast<ProductionSite *>(&_target)),
+	m_target_warehouse (dynamic_cast<Warehouse *>(&_target)),
+	m_target_constructionsite (dynamic_cast<ConstructionSite *>(&_target)),
 	m_economy          (_target.get_economy()),
 	m_index            (index),
 	m_idle             (false),
@@ -630,15 +634,15 @@ int32_t Request::get_priority (int32_t cost) const
 	bool is_construction_site = false;
 	int32_t modifier = DEFAULT_PRIORITY;
 
-	if (upcast(Building const, building, &target())) {
-		if (upcast(ProductionSite const, productionsite, building))
-			if (productionsite->is_stopped())
-				return -1;
+	if (m_target_building) {
+		const Building *building = m_target_building;
+		if (m_target_productionsite && m_target_productionsite->is_stopped())
+			return -1;
 
 		modifier = building->get_priority(get_type(), get_index());
-		if      (dynamic_cast<ConstructionSite const *>(building))
+		if      (m_target_constructionsite)
 			is_construction_site = true;
-		else if (dynamic_cast<Warehouse        const *>(building))
+		else if (m_target_warehouse)
 			//  warehouses can determine max idle priority
 			MAX_IDLE_PRIORITY = modifier;
 	}

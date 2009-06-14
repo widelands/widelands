@@ -40,6 +40,10 @@ struct Requirements;
 struct Supply;
 struct Transfer;
 class Worker;
+struct Building;
+struct ProductionSite;
+struct Warehouse;
+struct ConstructionSite;
 
 /**
  * A Request is issued whenever some object (road or building) needs a ware.
@@ -114,7 +118,16 @@ private:
 	typedef std::vector<Transfer *> TransferList;
 
 	Type              m_type;
+
 	PlayerImmovable & m_target;            //  who requested it?
+	//  Copies of m_target of various pointer types, to avoid expensive
+	//  dynamic casting at runtime. Variables with an incompatible type
+	//  are filled with nulls.
+	Building        * m_target_building;
+	ProductionSite  * m_target_productionsite;
+	Warehouse       * m_target_warehouse;
+	ConstructionSite * m_target_constructionsite;
+
 	Economy         * m_economy;
 	Ware_Index        m_index;             //  the index of the ware descr
 	bool              m_idle;
