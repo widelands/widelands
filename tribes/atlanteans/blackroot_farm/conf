@@ -12,8 +12,8 @@ blackroot_farmer=1
 [programs]
 plant_blackroot=_Plant blackroot
 plant=Plant blackroot (only for compatibility with old savegames (build13))
-harvest_blackroot=_Harvest backroot
-harvest=Harvest backroot (only for compatibility with old savegames (build13))
+harvest_blackroot=_Harvest blackroot
+harvest=Harvest blackroot (only for compatibility with old savegames (build13))
 work=_Work
 
 [plant_blackroot]
