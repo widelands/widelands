@@ -287,7 +287,9 @@ instadd(env, 'widelands', filetype='binary')
 install=env.Install('installtarget', 'COPYING') # the second argument is a (neccessary) dummy
 Alias('install', install)
 AlwaysBuild(install)
-env.AddPreAction(install, Action(buildlocale))
+Depends(install, buildlocale)
+#env.AddPreAction(install, Action(buildlocale))
+
 
 uninstall=env.Uninstall('uninstalltarget', 'COPYING') # the second argument is a (neccessary) dummy
 Alias('uninstall', uninstall)
