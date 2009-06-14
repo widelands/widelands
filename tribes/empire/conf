@@ -50,10 +50,10 @@ resi_iron1=_Resource indicator iron little
 resi_iron2=_Resource indicator iron much
 resi_none=_Resource indicator no resource
 resi_water1=_Resource indicator water
-wine0=_Wine medium
-wine0s=_Wine small
-wine0t=_Wine tiny
-wine1=_Wine ripe
+wine0=_Vine medium
+wine0s=_Vine small
+wine0t=_Vine tiny
+wine1=_Vine ripe
 
 [ware types]
 advanced_lance=_Advanced Lance

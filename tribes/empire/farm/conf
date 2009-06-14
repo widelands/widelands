@@ -12,10 +12,10 @@ marblecolumn=2
 farmer=1
 
 [programs]
-plant_weath=_Plant weath
-plant=Plant weath (only for compatibility with old savegames (build13))
-harvest_weath=_Harvest weath
-harvest=Harvest weath (only for compatibility with old savegames (build13))
+plant_wheat=_Plant wheat
+plant=Plant wheat (only for compatibility with old savegames (build13))
+harvest_wheat=_Harvest wheat
+harvest=Harvest wheat (only for compatibility with old savegames (build13))
 work=_Work
 
 [plant_wheat]

@@ -1,4 +1,4 @@
-help=_Grows wine.
+help=_Grows vine.
 program=plantvine
 program=harvestvine
 
@@ -17,10 +17,10 @@ basket=1
 6=return
 
 [harvestvine]
-0=findobject attrib:grown_wine radius:1
+0=findobject attrib:grown_vine radius:1
 1=walk object
 2=animation idle 10000
-3=object harvestwine
+3=object harvestvine
 4=animation idle 2000
 5=createitem grape
 6=return

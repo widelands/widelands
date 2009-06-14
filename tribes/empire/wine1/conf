@@ -1,13 +1,13 @@
 size=medium
-attrib=grown_wine
+attrib=grown_vine
 program=program
-program=harvestwine
+program=harvestvine
 
 [program]
 animate=idle 500000
 remove=
 
-[harvestwine]
+[harvestvine]
 remove=
 
 [idle]

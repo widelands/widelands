@@ -13,8 +13,8 @@ vinefarmer=1
 [programs]
 plant_vine=_Plant vine
 plantvine=Plant vine (only for compatibility with old savegames (build13))
-harvest_vine=_Harvest wine
-harvestvine=Harvest wine (only for compatibility with old savegames (build13))
+harvest_vine=_Harvest vine
+harvestvine=Harvest vine (only for compatibility with old savegames (build13))
 work=_Work
 
 [plant_vine]
