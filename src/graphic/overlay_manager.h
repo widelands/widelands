@@ -22,6 +22,7 @@
 
 #include "field.h"
 #include "widelands_geometry.h"
+#include "graphic.h"
 
 #include <map>
 #include <set>
@@ -70,7 +71,7 @@ struct Overlay_Manager {
 		uint32_t id;
 	};
 	struct Overlay_Info {
-		uint32_t picid;
+		PictureID picid;
 		Point hotspot;
 	};
 
@@ -115,13 +116,14 @@ struct Overlay_Manager {
 	 */
 	void register_overlay
 		(Widelands::TCoords<>,
-		 int32_t picid,
+		 PictureID picid,
 		 int32_t level,
 		 Point   hotspot = Point::invalid(),
 		 Job_Id          = Job_Id::Null());
 
 	//  if picid == -1 remove all overlays
-	void remove_overlay(Widelands::TCoords<>, int32_t picid = -1);
+	void remove_overlay
+		(Widelands::TCoords<>, PictureID picid = g_gr->get_no_picture());
 
 	void remove_overlay(Job_Id);
 
@@ -152,17 +154,17 @@ struct Overlay_Manager {
 private:
 	struct Registered_Overlays {
 		Registered_Overlays
-			(const Job_Id Jobid,
-			 const int32_t Picid,
-			 const Point  Hotspot,
-			 const int32_t Level)
+			(const Job_Id    Jobid,
+			 const PictureID Picid,
+			 const Point     Hotspot,
+			 const int32_t   Level)
 			:
 			picid(Picid),
 			hotspot(Hotspot),
 			level(Level)
 		{jobids.insert(Jobid);}
 		std::set<Job_Id> jobids;
-		int32_t picid;
+		PictureID picid;
 		Point            hotspot;
 		int32_t level;
 	};

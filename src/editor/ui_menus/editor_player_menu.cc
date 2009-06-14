@@ -42,16 +42,16 @@ UI::UniqueWindow(&parent, registry, 340, 400, _("Player Options")),
 m_add_player
 	(this,
 	 5, 5, 20, 20,
-	 1,
-	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 	 &Editor_Player_Menu::clicked_add_player, *this,
 	 _("Add player"),
 	 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
 m_remove_last_player
 	(this,
 	 get_inner_w() - 5 - 20, 5, 20, 20,
-	 1,
-	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 	 &Editor_Player_Menu::clicked_remove_last_player, *this,
 	 _("Remove last player"),
 	 1 < parent.egbase().map().get_nrplayers())
@@ -132,7 +132,9 @@ void Editor_Player_Menu::update() {
 		int32_t posx = spacing;
 		if (!m_plr_names[p - 1]) {
 			m_plr_names[p - 1] =
-				new UI::EditBox(this, posx, posy, 140, size, 0, p - 1);
+				new UI::EditBox
+					(this, posx, posy, 140, size,
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"), p - 1);
 			m_plr_names[p - 1]->changedid.set
 				(this, &Editor_Player_Menu::name_changed);
 			posx += 140 + spacing;
@@ -145,7 +147,7 @@ void Editor_Player_Menu::update() {
 				<Editor_Player_Menu, Widelands::Player_Number const>
 					(this,
 					 posx, posy, 140, size,
-					 0,
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 					 &Editor_Player_Menu::player_tribe_clicked, *this, p - 1,
 					 std::string());
 			posx += 140 + spacing;
@@ -168,8 +170,8 @@ void Editor_Player_Menu::update() {
 				<Editor_Player_Menu, Widelands::Player_Number const>
 					(this,
 					 posx, posy, size, size,
-					 0,
-					 0, //  set below
+					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+					 g_gr->get_no_picture(), //  set below
 					 &Editor_Player_Menu::set_starting_pos_clicked, *this, p,
 					 std::string());
 			posx += size + spacing;

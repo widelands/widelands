@@ -73,14 +73,14 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 	b_ok
 		(this,
 		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
-		 2,
+		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 &Fullscreen_Menu_CampaignSelect::clicked_ok, *this,
 		 _("OK"), std::string(), false, false,
 		 m_fn, m_fs),
 	back
 		(this,
 		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_CampaignSelect::end_modal, *this, 0,
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
@@ -286,14 +286,14 @@ tamapdescr
 b_ok
 	(this,
 	 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
-	 2,
+	 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 	 &Fullscreen_Menu_CampaignMapSelect::clicked_ok, *this,
 	 _("OK"), std::string(), false, false,
 	 m_fn, m_fs),
 back
 	(this,
 	 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
-	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 	 &Fullscreen_Menu_CampaignMapSelect::end_modal, *this, 0,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs),

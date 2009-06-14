@@ -84,21 +84,21 @@ private:
 
 private:
 	bool m_horizontal;
-	bool     m_force_draw; // draw this scrollbar, even if it can't do anything
+	bool      m_force_draw; // draw this scrollbar, even if it can't do anything
 
-	uint32_t m_pos;            ///< from 0 to m_range - 1
-	uint32_t m_singlestepsize;
-	uint32_t m_pagesize;
-	uint32_t m_steps;
+	uint32_t  m_pos;            ///< from 0 to m_range - 1
+	uint32_t  m_singlestepsize;
+	uint32_t  m_pagesize;
+	uint32_t  m_steps;
 
 	Area m_pressed; ///< area that the user clicked on (None if mouse is up)
-	int32_t  m_time_nextact;
-	int32_t  m_knob_grabdelta; ///< only while m_pressed == Knob
+	int32_t   m_time_nextact;
+	int32_t   m_knob_grabdelta; ///< only while m_pressed == Knob
 
-	uint32_t m_pic_minus;      ///< left/up
-	uint32_t m_pic_plus;       ///< right/down
-	uint32_t m_pic_background;
-	uint32_t m_pic_buttons;
+	PictureID m_pic_minus;      ///< left/up
+	PictureID m_pic_plus;       ///< right/down
+	PictureID m_pic_background;
+	PictureID m_pic_buttons;
 };
 };
 

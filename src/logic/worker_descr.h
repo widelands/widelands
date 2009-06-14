@@ -21,6 +21,7 @@
 #define WORKER_DESCR_H
 
 #include "bob.h"
+#include "graphic/picture.h"
 
 #include "immovable.h"
 #include "io/filewrite.h"
@@ -66,7 +67,7 @@ public:
 	const Tribe_Descr & tribe() const throw () {return *m_owner_tribe;}
 	std::string helptext() const {return m_helptext;}
 
-	uint32_t icon() const throw () {return m_icon;}
+	PictureID icon() const throw () {return m_icon;}
 	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
 	const DirAnimations & get_right_walk_anims(const bool carries_ware)
 		const throw ()
@@ -98,7 +99,7 @@ protected:
 
 	std::string   m_helptext;       ///< Short (tooltip-like) help text
 	std::string const m_icon_fname; ///< Filename of worker's icon
-	uint32_t          m_icon;       ///< Pointer to icon into picture stack
+	PictureID         m_icon;       ///< Pointer to icon into picture stack
 	DirAnimations m_walk_anims;
 	DirAnimations m_walkload_anims;
 	Buildcost     m_buildcost;

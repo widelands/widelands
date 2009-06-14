@@ -35,7 +35,7 @@ struct Button : public Panel {
 	Button /// for textual buttons
 		(Panel * const parent,
 		 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-		 uint32_t const background_pictute_id,
+		 PictureID const background_pictute_id,
 		 std::string const & title_text,
 		 std::string const & tooltip_text = std::string(),
 		 bool const _enabled = true,
@@ -45,8 +45,8 @@ struct Button : public Panel {
 	Button /// for pictorial buttons
 		(Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const uint32_t background_pictute_id,
-		 const uint32_t foreground_picture_id,
+		 const PictureID background_pictute_id,
+		 const PictureID foreground_picture_id,
 		 std::string const & tooltip_text = std::string(),
 		 bool const _enabled = true,
 		 bool const flat     = false,
@@ -54,7 +54,7 @@ struct Button : public Panel {
 		 const uint32_t      fontsize = UI_FONT_SIZE_SMALL);
 	~Button();
 
-	void set_pic(uint32_t picid);
+	void set_pic(PictureID picid);
 	void set_title(const std::string &);
 	const std::string & get_title() const throw () {return m_title;}
 	bool enabled() const {return m_enabled;}
@@ -88,9 +88,9 @@ private:
 
 	std::string m_title;          //  title string used when _mypic == 0
 
-	uint32_t        m_pic_background; //  background texture (picture ID)
-	uint32_t        m_pic_custom;     //  custom icon on the button
-	uint32_t        m_pic_custom_disabled;
+	PictureID       m_pic_background; //  background texture (picture ID)
+	PictureID       m_pic_custom;     //  custom icon on the button
+	PictureID       m_pic_custom_disabled;
 	std::string     m_fontname;
 	uint32_t        m_fontsize;
 
@@ -106,7 +106,7 @@ template <typename T> struct Callback_Button : public Button {
 	Callback_Button /// for textual buttons
 		(Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const uint32_t background_pictute_id,
+		 const PictureID background_pictute_id,
 		 void (T::*callback_function)(),
 		 T & callback_argument_this,
 		 const std::string & title_text,
@@ -131,8 +131,8 @@ template <typename T> struct Callback_Button : public Button {
 	Callback_Button /// for pictorial buttons
 		(Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const uint32_t background_pictute_id,
-		 const uint32_t foreground_picture_id,
+		 const PictureID background_pictute_id,
+		 const PictureID foreground_picture_id,
 		 void (T::*callback_function)(),
 		 T & callback_argument_this,
 		 std::string const & tooltip_text = std::string(),
@@ -173,7 +173,7 @@ template <typename T, typename ID> struct Callback_IDButton : public Button {
 	Callback_IDButton /// for textual buttons
 		(Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const uint32_t background_pictute_id,
+		 const PictureID background_pictute_id,
 		 void (T::*callback_function)(ID),
 		 T & callback_argument_this,
 		 const ID callback_argument_id,
@@ -200,8 +200,8 @@ template <typename T, typename ID> struct Callback_IDButton : public Button {
 	Callback_IDButton /// for pictorial buttons
 		(Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const uint32_t background_pictute_id,
-		 const uint32_t foreground_picture_id,
+		 const PictureID background_pictute_id,
+		 const PictureID foreground_picture_id,
 		 void (T::*callback_function)(ID),
 		 T & callback_argument_this,
 		 const ID callback_argument_id,

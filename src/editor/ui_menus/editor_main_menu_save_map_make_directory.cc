@@ -44,7 +44,8 @@ UI::Window(parent, 0, 0, 230, 120, _("Make Directory"))
 
 	m_edit =
 		new UI::EditBox
-			(this, spacing, posy, get_inner_w() - 2 * spacing, 20, 1, 0);
+			(this, spacing, posy, get_inner_w() - 2 * spacing, 20,
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0);
 	m_edit->setText(dirname);
 	m_dirname = dirname;
 	m_edit->changed.set(this, &Main_Menu_Save_Map_Make_Directory::edit_changed);
@@ -56,7 +57,7 @@ UI::Window(parent, 0, 0, 230, 120, _("Make Directory"))
 		UI::Callback_IDButton<Main_Menu_Save_Map_Make_Directory, int32_t>
 		(this,
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Main_Menu_Save_Map_Make_Directory::end_modal, *this, 1,
 		 _("OK"),
 		 std::string(),
@@ -65,7 +66,7 @@ UI::Window(parent, 0, 0, 230, 120, _("Make Directory"))
 	new UI::Callback_IDButton<Main_Menu_Save_Map_Make_Directory, int32_t>
 		(this,
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Main_Menu_Save_Map_Make_Directory::end_modal, *this, 0,
 		 _("Cancel"));
 

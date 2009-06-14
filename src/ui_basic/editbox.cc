@@ -22,6 +22,7 @@
 #include "mouse_constants.h"
 
 #include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
 #include "helper.h"
 
 #include <limits>
@@ -31,7 +32,7 @@ namespace UI {
 
 struct EditBoxImpl {
 	/// Background tile style.
-	uint32_t background;
+	PictureID background;
 
 	/// ID. Only used for the id-flavoured signals.
 	int32_t id;
@@ -52,7 +53,7 @@ struct EditBoxImpl {
 EditBox::EditBox
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 const uint32_t background,
+	 const PictureID & background,
 	 const int32_t id,
 	 Align _align)
 	:
@@ -65,8 +66,7 @@ EditBox::EditBox
 	set_think(false);
 
 	char buf[256];
-	snprintf(buf, sizeof(buf), "pics/but%u.png", background);
-	m->background = g_gr->get_picture(PicMod_UI,  buf);
+	m->background = background;
 
 	m->id = id;
 	m->align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);

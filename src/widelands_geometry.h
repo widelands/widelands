@@ -20,6 +20,7 @@
 #ifndef WIDELANDS_GEOMETRY_H
 #define WIDELANDS_GEOMETRY_H
 
+#include "graphic/picture.h"
 #include "compile_assert.h"
 
 #include <cmath>

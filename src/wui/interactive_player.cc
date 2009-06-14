@@ -75,7 +75,7 @@ ChatDisplay::~ChatDisplay()
 {
 	// Finally delete all left message pictures
 	for (uint32_t i = 0; i < m_cache_id.size(); ++i)
-		if (m_cache_id[i])
+		if (m_cache_id[i] != g_gr->get_no_picture())
 			g_fh->delete_widget_cache(m_cache_id[i]);
 }
 
@@ -97,7 +97,7 @@ void ChatDisplay::draw(RenderTarget & dst)
 	// delete pictures of all old messages that we won't use again
 	// this is important to save space
 	for (uint32_t i = 0; i < m_cache_id.size(); ++i)
-		if (m_cache_id[i])
+		if (m_cache_id[i] != g_gr->get_no_picture())
 			g_fh->delete_widget_cache(m_cache_id[i]);
 	m_cache_id.resize(0);
 
@@ -124,7 +124,7 @@ void ChatDisplay::draw(RenderTarget & dst)
 	uint32_t y = 0;
 
 	container_iterate_const(std::vector<Displayed>, displaylist, i) {
-		uint32_t picid;
+		PictureID picid;
 		g_fh->draw_richtext
 			(dst,
 			 RGBColor(55, 55, 55),

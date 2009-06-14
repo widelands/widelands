@@ -79,7 +79,7 @@ throw (_wexception)
 					std::string picname = FileSystem::FS_Filename(pname->c_str());
 					picname = "map:" + picname;
 
-					uint32_t const data =
+					PictureID const data =
 						g_gr->get_picture(PicMod_Game, picsurf, picname.c_str());
 
 					//  OK, the pic is now known to the game. But when the game is

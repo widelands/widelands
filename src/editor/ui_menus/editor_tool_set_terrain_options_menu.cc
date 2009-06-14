@@ -62,17 +62,17 @@ m_tool(tool)
 
 	m_checkboxes.resize(nr_terrains);
 
-	const uint32_t green =
+	const PictureID green =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_green.png");
-	const uint32_t water =
+	const PictureID water =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_water.png");
-	const uint32_t mountain =
+	const PictureID mountain =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_mountain.png");
-	const uint32_t dead =
+	const PictureID dead =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_dead.png");
-	const uint32_t unpassable =
+	const PictureID unpassable =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_unpassable.png");
-	const uint32_t dry =
+	const PictureID dry =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_dry.png");
 	uint32_t small_picw, small_pich;
 	g_gr->get_picture_size(dry, small_picw, small_pich);
@@ -97,7 +97,7 @@ m_tool(tool)
 				(g_gr->get_picture
 				 	(PicMod_Game, g_gr->get_maptexture_picture(i + 1)),
 				 picw, pich);
-			uint32_t surface = g_gr->create_surface(picw, pich);
+			PictureID surface = g_gr->create_surface(picw, pich);
 
 			//  get the rendertarget for this
 			RenderTarget & target = *g_gr->get_surface_renderer(surface);
@@ -173,7 +173,7 @@ m_tool(tool)
 Editor_Tool_Set_Terrain_Tool_Options_Menu::
 	~Editor_Tool_Set_Terrain_Tool_Options_Menu()
 {
-	container_iterate_const(std::vector<uint32_t>, m_surfaces, i)
+	container_iterate_const(std::vector<PictureID>, m_surfaces, i)
 		g_gr->free_surface(*i.current);
 }
 

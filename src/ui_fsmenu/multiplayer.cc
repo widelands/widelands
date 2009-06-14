@@ -49,21 +49,21 @@ title
 metaserver
 	(this,
 	 m_butx, m_yres * 6 / 25, m_butw, m_buth,
-	 1,
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 	 &Fullscreen_Menu_MultiPlayer::end_modal, *this, Metaserver,
 	 _("Internet game"), std::string(), true, false,
 	 m_fn, m_fs),
 lan
 	(this,
 	 m_butx, m_yres * 61 / 200, m_butw, m_buth,
-	 1,
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 	 &Fullscreen_Menu_MultiPlayer::end_modal, *this, Lan,
 	 _("LAN / Direct IP"), std::string(), true, false,
 	 m_fn, m_fs),
 back
 	(this,
 	 m_butx, m_yres * 3 / 4, m_butw, m_buth,
-	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 	 &Fullscreen_Menu_MultiPlayer::end_modal, *this, Back,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs)

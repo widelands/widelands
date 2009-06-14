@@ -22,10 +22,13 @@
 
 #include "animation_gfx.h"
 #include "picture.h"
+#include "rect.h"
+#include "surface.h"
 
 #include <png.h>
 
 #include <vector>
+#include <boost/shared_ptr.hpp>
 
 /**
  * Names of road terrains
@@ -38,6 +41,8 @@
 struct RenderTarget;
 class Surface;
 struct Graphic;
+struct Road_Textures;
+struct Texture;
 
 ///\todo Get rid of this global function
 SDL_Surface * LoadImage(char const * filename);
@@ -60,8 +65,8 @@ struct Graphic {
 		 bool fullscreen, bool hw_improvements, bool double_buffer);
 	~Graphic();
 
-	int32_t get_xres();
-	int32_t get_yres();
+	int32_t get_xres() const;
+	int32_t get_yres() const;
 	RenderTarget * get_render_target();
 	void toggle_fullscreen();
 	void update_fullscreen();
@@ -71,16 +76,25 @@ struct Graphic {
 	bool need_update();
 	void refresh(bool force = true);
 
-	void flush(uint8_t module);
-	uint32_t get_picture(uint8_t module, char const * fname);
-	void get_picture_size(const uint32_t pic, uint32_t & w, uint32_t & h);
-	uint32_t get_picture(uint32_t module, Surface &, const char * name = 0);
-	Surface * get_picture_surface(uint32_t id);
-	void save_png(uint32_t, StreamWrite *);
-	uint32_t create_surface(int32_t w, int32_t h);
-	void free_surface(uint32_t pic);
-	uint32_t create_grayed_out_pic(uint32_t picid);
-	RenderTarget * get_surface_renderer(uint32_t pic);
+	void flush(PicMod module);
+  PictureID & get_picture(PicMod module, const std::string & fname);
+	//__attribute__ ((pure));
+	PictureID get_picture
+		(PicMod module, Surface &, const std::string & name = "");
+	//__attribute__ ((pure));
+	PictureID & get_no_picture() const;
+
+	Surface * get_picture_surface(const PictureID & id);
+	const Surface * get_picture_surface(const PictureID & id) const;
+
+	void get_picture_size
+		(const PictureID & pic, uint32_t & w, uint32_t & h) const;
+
+	void save_png(const PictureID &, StreamWrite *);
+	PictureID create_surface(int32_t w, int32_t h);
+	void free_surface(const PictureID & pic);
+	PictureID create_grayed_out_pic(const PictureID & picid);
+	RenderTarget * get_surface_renderer(const PictureID & pic);
 
 	enum  ResizeMode {
 		// do not worry about proportions, just sketch to requested size
@@ -93,8 +107,9 @@ struct Graphic {
 		ResizeMode_Average,
 	};
 
-	uint32_t get_resized_picture(uint32_t, uint32_t w, uint32_t h, ResizeMode);
-	SDL_Surface * resize(uint32_t index, uint32_t w, uint32_t h);
+	PictureID get_resized_picture
+		(PictureID, uint32_t w, uint32_t h, ResizeMode);
+	SDL_Surface * resize(const PictureID index, uint32_t w, uint32_t h);
 
 	uint32_t get_maptexture(char const & fnametempl, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
@@ -123,19 +138,16 @@ protected:
 		 png_size_t length);
 	static void m_png_flush_function (png_structp png_ptr);
 
-	std::vector<Picture>::size_type find_free_picture();
-
-	typedef std::map<std::string, std::vector<Picture>::size_type> picmap_t;
-
 	Surface m_screen;
 	RenderTarget * m_rendertarget;
 	SDL_Rect m_update_rects[MAX_RECTS];
 	int32_t m_nr_update_rects;
 	bool m_update_fullscreen;
 
-	std::vector<Picture> m_pictures;
 	/// hash of filename/picture ID pairs
-	picmap_t m_picturemap;
+	std::vector
+		<std::map<std::string, boost::shared_ptr<Picture> > > m_picturemap;
+	typedef std::map<std::string, boost::shared_ptr<Picture> >::iterator pmit;
 
 	Road_Textures * m_roadtextures;
 	std::vector<Texture *> m_maptextures;

@@ -45,8 +45,8 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu
 :
 Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Bobs Menu")),
 
-m_tabpanel              (this, 0, 0, 1),
-m_pit                   (pit)
+m_tabpanel          (this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+m_pit               (pit)
 {
 	int32_t const space  =  5;
 	Widelands::World const & world = parent.egbase().map().world();
@@ -71,7 +71,7 @@ m_pit                   (pit)
 		if (h > height) height = h;
 	}
 
-	const uint32_t tab_icon =
+	const PictureID tab_icon =
 		g_gr->get_picture(PicMod_Game, "pics/list_first_entry.png");
 	Point pos;
 	uint32_t cur_x = bobs_in_row;

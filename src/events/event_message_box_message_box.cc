@@ -74,7 +74,7 @@ m_game    (game)
 		new UI::Callback_IDButton<Message_Box_Event_Message_Box, int32_t>
 			(this,
 			 posx, posy, but_width, 20,
-			 0,
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 			 &Message_Box_Event_Message_Box::clicked, *this, i,
 			 event->get_button_name(i));
 		posx += but_width;

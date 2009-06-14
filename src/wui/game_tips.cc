@@ -21,6 +21,7 @@
 
 #include "io/fileread.h"
 #include "font_handler.h"
+#include "graphic/rendertarget.h"
 #include "i18n.h"
 #include "profile/profile.h"
 
@@ -204,9 +205,9 @@ void GameTips::show_tip(int32_t index) {
 	Rect text_area;
 
 	// try to load a background
-	const uint32_t pic_background =
+	const PictureID pic_background =
 		g_gr->get_picture(PicMod_Menu, m_background_picture.c_str());
-	if (pic_background > 0) {
+	if (pic_background != g_gr->get_no_picture()) {
 		uint32_t w = 0;
 		uint32_t h = 0;
 		g_gr->get_picture_size(pic_background, w, h);

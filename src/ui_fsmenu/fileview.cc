@@ -42,7 +42,7 @@ textview
 close_button
 	(this,
 	 m_xres * 3 / 8, m_yres * 9 / 10, m_xres / 4, m_yres * 9 / 200,
-	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 	 &Fullscreen_Menu_TextView::end_modal, *this, 0,
 	 _("Close"), std::string(), true, false,
 	 ui_fn(), fs_small())

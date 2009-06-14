@@ -35,8 +35,8 @@ struct ChatDisplay : public UI::Panel {
 
 private:
 	ChatProvider * m_chat;
-	std::vector<uint32_t> m_cache_id;
-	Widget_Cache          m_cache_mode;
+	std::vector<PictureID> m_cache_id;
+	Widget_Cache           m_cache_mode;
 };
 
 enum PlayerType {NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED};

@@ -1416,7 +1416,7 @@ void WLApplication::mainmenu_multiplayer()
 						NetGGZ::ref().data();
 						if (10 < time(0) - secs)
 							throw warning
-								(_("Connection timeouted"),
+								(_("Connection timeouted"), "%s",
 								 _
 								 	("Widelands has not been able to get the IP "
 								 	 "address of the server in time.\n"
@@ -1440,7 +1440,7 @@ void WLApplication::mainmenu_multiplayer()
 						peer.port = htons(WIDELANDS_PORT);
 					} else
 						throw warning
-							(_("Connection problem"),
+							(_("Connection problem"), "%s",
 							 _
 							 	("Widelands has not been able to connect to the "
 							 	 "host."));
@@ -1482,7 +1482,7 @@ void WLApplication::mainmenu_multiplayer()
 
 					if (not host_address)
 						throw warning
-							("Invalid Address",
+							("Invalid Address", "%s",
 							 _("The address of the game server is invalid"));
 
 					peer.host = addr;

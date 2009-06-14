@@ -24,6 +24,7 @@
 #include "writeHTML.h"
 
 #include "io/filewrite.h"
+#include "graphic/picture.h"
 
 #include <stdint.h>
 #include <cstring>
@@ -64,7 +65,7 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	virtual ~Item_Ware_Descr() {};
 
 	/// \return index to ware's icon inside picture stack
-	uint32_t icon() const throw () {return m_icon;}
+	PictureID icon() const throw () {return m_icon;}
 
 	/// \return ware's localized descriptive text
 	std::string const & helptext() const throw () {return m_helptext;}
@@ -99,7 +100,7 @@ private:
 	std::string m_helptext;   ///< Long descriptive text
 	uint32_t    m_default_target_quantity;
 	std::string m_icon_fname; ///< Filename of ware's main picture
-	uint32_t    m_icon;       ///< Index of ware's picture in picture stack
+	PictureID    m_icon;       ///< Index of ware's picture in picture stack
 	uint8_t     m_preciousness;
 };
 

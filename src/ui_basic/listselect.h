@@ -63,11 +63,11 @@ struct BaseListselect : public Panel {
 	void add
 		(const char * const name,
 		 uint32_t value,
-		 const int32_t picid = -1,
+		 const PictureID picid = g_gr->get_no_picture(),
 		 const bool select_this = false);
 	void add_front
 		(const char * const name,
-		 const int32_t picid = -1,
+		 const PictureID picid = g_gr->get_no_picture(),
 		 const bool select_this = false);
 	void remove(uint32_t);
 	void remove(const char * name);
@@ -131,8 +131,8 @@ private:
 		uint32_t m_entry;
 		bool use_clr;
 		RGBColor clr;
-		int32_t picid;
-		char name[1];
+		PictureID picid;
+	   std::string name;
 	};
 	typedef std::deque<Entry_Record *> Entry_Record_deque;
 
@@ -146,7 +146,7 @@ private:
 	int32_t m_last_click_time;
 	uint32_t m_last_selection;  // for double clicks
 	bool m_show_check; //  show a green arrow left of selected element
-	int32_t m_check_picid;
+	PictureID m_check_picid;
 
 	std::string m_fontname;
 	uint32_t    m_fontsize;
@@ -166,7 +166,7 @@ struct Listselect : public BaseListselect {
 	void add
 		(const char * const name,
 		 Entry value,
-		 const int32_t picid = -1,
+		 const PictureID picid = g_gr->get_no_picture(),
 		 const bool select_this = false)
 	{
 		m_entry_cache.push_back(value);
@@ -175,7 +175,7 @@ struct Listselect : public BaseListselect {
 	void add_front
 		(const char * const name,
 		 Entry value,
-		 const int32_t picid = -1,
+		 const PictureID picid = g_gr->get_no_picture(),
 		 const bool select_this = false)
 	{
 		m_entry_cache.push_front(value);
@@ -220,7 +220,7 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 	void add
 		(const char * const name,
 		 Entry      &       value,
-		 const int32_t picid = -1,
+		 const PictureID picid = g_gr->get_no_picture(),
 		 const bool select_this = false)
 	{
 		Base::add(name, &value, picid, select_this);
@@ -228,7 +228,7 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 	void add_front
 		(const char * const name,
 		 Entry      &       value,
-		 const int32_t picid = -1,
+		 const PictureID picid = g_gr->get_no_picture(),
 		 const bool select_this = false)
 	{
 		Base::add_front(name, &value, picid, select_this);

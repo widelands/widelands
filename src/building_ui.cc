@@ -29,6 +29,7 @@ class.
 #include "constructionsite.h"
 #include "game_debug_ui.h"
 #include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
 #include "i18n.h"
 #include "wui/interactive_player.h"
 #include "maphollowregion.h"
@@ -190,14 +191,14 @@ BulldozeConfirm::BulldozeConfirm
 	new UI::Callback_Button<BulldozeConfirm>
 		(this,
 		 6, 80, 80, 34,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, pic_ok),
 		 &BulldozeConfirm::bulldoze, *this);
 
 	(new UI::Callback_Button<BulldozeConfirm>
 	 	(this,
 	 	 114, 80, 80, 34,
-	 	 4,
+	 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 	 g_gr->get_picture(PicMod_Game, pic_cancel),
 	 	 &BulldozeConfirm::die, *this))
 		->center_mouse();
@@ -314,8 +315,8 @@ private:
 private:
 	Widelands::WaresQueue * m_queue;
 	uint32_t         m_max_width;
-	uint32_t         m_icon;            //< Index to ware's picture
-	uint32_t         m_pic_background;
+	PictureID        m_icon;            //< Index to ware's picture
+	PictureID        m_pic_background;
 
 	uint32_t         m_cache_size;
 	uint32_t         m_cache_filled;
@@ -431,14 +432,14 @@ class Priority_Button
 
 struct PriorityButtonInfo {
 	UI::Button * button;
-	int32_t picture_enabled;
-	int32_t picture_disabled;
+	PictureID picture_enabled;
+	PictureID picture_disabled;
 
 	PriorityButtonInfo() {}
 
 	PriorityButtonInfo
 		(UI::Button * const btn,
-		 int32_t const pic_enabled, int32_t const pic_disabled)
+		 PictureID const pic_enabled, PictureID const pic_disabled)
 		:
 		button(btn), picture_enabled(pic_enabled), picture_disabled(pic_disabled)
 	{}
@@ -528,7 +529,7 @@ private:
 	uint32_t m_capscache;
 
 	Overlay_Manager::Job_Id m_workarea_job_id;
-	uint32_t workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
+	PictureID workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
 };
 
 
@@ -663,7 +664,7 @@ void Building_Window::setup_capsbuttons()
 			new UI::Callback_Button<Building_Window>
 				(m_capsbuttons,
 				 x, 0, 34, 34,
-				 4,
+				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 				 g_gr->get_picture
 				 	(PicMod_Game,
 				 	 (is_stopped ? "pics/continue.png" : "pics/stop.png")),
@@ -688,7 +689,7 @@ void Building_Window::setup_capsbuttons()
 					<Building_Window, Widelands::Building_Index>
 					(m_capsbuttons,
 					 x, 0, 34, 34,
-					 4,
+					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 					 building.get_buildicon(),
 					 &Building_Window::act_enhance, *this,
 					 *i.current, //  button id = building id
@@ -701,7 +702,7 @@ void Building_Window::setup_capsbuttons()
 		new UI::Callback_Button<Building_Window>
 			(m_capsbuttons,
 			 x, 0, 34, 34,
-			 4,
+			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_Game, pic_bulldoze),
 			 &Building_Window::act_bulldoze, *this,
 			 _("Destroy"));
@@ -712,7 +713,7 @@ void Building_Window::setup_capsbuttons()
 		m_toggle_workarea = new UI::Callback_Button<Building_Window>
 			(m_capsbuttons,
 			 x, 0, 34, 34,
-			 4,
+			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_Game,  "pics/workarea3cumulative.png"),
 			 &Building_Window::toggle_workarea, *this,
 			 _("Show workarea"));
@@ -723,7 +724,7 @@ void Building_Window::setup_capsbuttons()
 		new UI::Callback_Button<Building_Window>
 			(m_capsbuttons,
 			 x, 0, 34, 34,
-			 4,
+			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 g_gr->get_picture(PicMod_Game,  pic_debug),
 			 &Building_Window::act_debug, *this,
 			 _("Debug"));
@@ -1026,7 +1027,7 @@ Warehouse_Window::Warehouse_Window
 	new UI::Callback_Button<Warehouse_Window>
 		(this,
 		 posx, posy, button_w, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
 		 &Warehouse_Window::clicked_help, *this);
 
@@ -1035,7 +1036,7 @@ Warehouse_Window::Warehouse_Window
 	new UI::Callback_Button<Warehouse_Window>
 		(this,
 		 posx, posy, button_w * 2 + spacing, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/warehousewindow_switchpage.png"),
 		 &Warehouse_Window::clicked_switchpage, *this);
 
@@ -1044,7 +1045,7 @@ Warehouse_Window::Warehouse_Window
 	new UI::Callback_Button<Warehouse_Window>
 		(this,
 		 posx, posy, button_w, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
 		 &Warehouse_Window::clicked_goto, *this);
 
@@ -1339,11 +1340,11 @@ Building_Window::create_priority_button
 	 char const * picture1, char const * picture2,
 	 std::string const & button_tooltip)
 {
-	int32_t const pic_enabled  =
+	PictureID const pic_enabled  =
 		g_gr->get_resized_picture
 			(g_gr->get_picture(PicMod_Game,  picture1),
 			 w, h, Graphic::ResizeMode_Clip);
-	int32_t const pic_disabled =
+	PictureID const pic_disabled =
 		g_gr->get_resized_picture
 			(g_gr->get_picture(PicMod_Game,  picture2),
 			 w, h, Graphic::ResizeMode_Clip);
@@ -1351,7 +1352,7 @@ Building_Window::create_priority_button
 		new UI::Callback_IDButton<PriorityButtonHelper, int32_t>
 			(box,
 			 x, 0, w, h,
-			 4,
+			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 			 pic_enabled,
 			 &PriorityButtonHelper::button_clicked, helper, priority,
 			 button_tooltip, true, true);
@@ -1448,7 +1449,7 @@ UI::Box * ProductionSite_Window::create_production_box
 		(new UI::Callback_Button<ProductionSite_Window>
 		 	(box,
 		 	 0, 0, 32, 32,
-		 	 4,
+			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 	 g_gr->get_picture(PicMod_Game,  pic_list_worker),
 		 	 &ProductionSite_Window::list_worker_clicked, *this,
 		 	 _("Show worker listing")),
@@ -1560,7 +1561,7 @@ m_table        (&m_vbox, 0, 0, 360, 200),
 m_drop_button
 	(&m_vbox,
 	 0, 0, 360, 32,
-	 4,
+	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, pic_drop_soldier),
 	 &MilitarySite_Window::drop_button_clicked, *this),
 m_bottom_box   (&m_vbox, 0, 0, UI::Box::Horizontal),
@@ -1569,13 +1570,13 @@ m_capacity     (&m_bottom_box, 0, 0, _("Capacity"), Align_Right),
 m_capacity_down
 	(&m_bottom_box,
 	 0, 0, 24, 24,
-	 4,
+	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, pic_down_train),
 	 &MilitarySite_Window::soldier_capacity_down, *this),
 m_capacity_up
 	(&m_bottom_box,
 	 0, 0, 24, 24,
-	 4,
+	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 g_gr->get_picture(PicMod_Game, pic_up_train),
 	 &MilitarySite_Window::soldier_capacity_up,   *this)
 {
@@ -1772,7 +1773,8 @@ TrainingSite_Window::TrainingSite_Window
 	m_reg = registry;
 	m_ms_location = ms->get_position ();
 
-	m_tabpanel = new UI::Tab_Panel(this, 0, 0, 1);
+	m_tabpanel = new UI::Tab_Panel
+		(this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
 	m_tabpanel->set_snapparent(true);
 
 	// Training Box (wares and buttons related to them)
@@ -1810,7 +1812,7 @@ UI::Box * TrainingSite_Window::create_military_box (UI::Panel * const panel)
 		(new UI::Callback_Button<TrainingSite_Window>
 		 	(sold_box,
 		 	 0, 0, 360, 32,
-		 	 4,
+			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 	 g_gr->get_picture(PicMod_Game, pic_drop_soldier),
 		 	 &TrainingSite_Window::drop_button_clicked, *this),
 		 Align_Left);
@@ -1823,7 +1825,7 @@ UI::Box * TrainingSite_Window::create_military_box (UI::Panel * const panel)
 		(new UI::Callback_Button<TrainingSite_Window>
 		 	(box,
 		 	 70, 4, 24, 24,
-		 	 4,
+		 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 	 g_gr->get_picture(PicMod_Game, pic_down_train),
 		 	 &TrainingSite_Window::soldier_capacity_down, *this),
 		 Align_Top);
@@ -1835,7 +1837,7 @@ UI::Box * TrainingSite_Window::create_military_box (UI::Panel * const panel)
 		(new UI::Callback_Button<TrainingSite_Window>
 		 	(box,
 		 	 118, 4, 24, 24,
-		 	 4,
+		 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 	 g_gr->get_picture(PicMod_Game, pic_up_train),
 		 	 &TrainingSite_Window::soldier_capacity_up, *this),
 		 Align_Top);

@@ -78,7 +78,7 @@ public:
 	uint32_t get_animation(char const * const str) const {
 		return descr().get_animation(str);
 	}
-	uint32_t icon() const throw () {return descr().icon();}
+	PictureID icon() const throw () {return descr().icon();}
 	Ware_Index becomes() const throw () {return descr().becomes();}
 	Ware_Index worker_index() const throw () {return descr().worker_index();}
 	const Tribe_Descr * get_tribe() const throw () {return descr().get_tribe();}

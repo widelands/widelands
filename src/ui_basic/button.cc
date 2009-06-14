@@ -31,7 +31,7 @@ namespace UI {
 Button::Button //  for textual buttons
 	(Panel * const parent,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-	 uint32_t background_picture_id,
+	 PictureID background_picture_id,
 	 std::string const & title_text,
 	 std::string const & tooltip_text,
 	 bool const _enabled, bool const flat,
@@ -46,28 +46,22 @@ Button::Button //  for textual buttons
 	m_flat          (flat),
 	m_title         (title_text),
 	m_pic_background(background_picture_id),
-	m_pic_custom    (0),
-	m_pic_custom_disabled(0),
+	m_pic_custom    (g_gr->get_no_picture()),
+	m_pic_custom_disabled(g_gr->get_no_picture()),
 	m_fontname      (fontname),
 	m_fontsize      (fontsize),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
 {
 	set_think(false);
-
-	if (4 < background_picture_id)
-		background_picture_id = 0;
-	char background_pic_filename[] = "pics/but0.png";
-	background_pic_filename[8] += background_picture_id;
-	m_pic_background = g_gr->get_picture(PicMod_UI, background_pic_filename);
 }
 
 
 Button::Button //  for pictorial buttons
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 uint32_t background_picture_id,
-	 const uint32_t foreground_picture_id,
+	 PictureID background_picture_id,
+	 const PictureID foreground_picture_id,
 	 const std::string & tooltip_text,
 	 bool const _enabled, bool const flat,
 	 const std::string & fontname,
@@ -79,6 +73,7 @@ Button::Button //  for pictorial buttons
 	m_enabled       (_enabled),
 	m_repeating     (false),
 	m_flat          (flat),
+	m_pic_background(background_picture_id),
 	m_pic_custom    (foreground_picture_id),
 	m_pic_custom_disabled(g_gr->create_grayed_out_pic(foreground_picture_id)),
 	m_fontname      (fontname),
@@ -87,17 +82,11 @@ Button::Button //  for pictorial buttons
 	m_draw_caret    (false)
 {
 	set_think(false);
-
-	if (4 < background_picture_id)
-		background_picture_id = 0;
-	char background_pic_filename[] = "pics/but0.png";
-	background_pic_filename[8] += background_picture_id;
-	m_pic_background = g_gr->get_picture(PicMod_UI, background_pic_filename);
 }
 
 
 Button::~Button() {
-	if (m_pic_custom_disabled)
+	if (m_pic_custom_disabled != g_gr->get_no_picture())
 		g_gr->free_surface(m_pic_custom_disabled);
 }
 
@@ -105,12 +94,12 @@ Button::~Button() {
 /**
  * Sets a new picture for the Button.
 */
-void Button::set_pic(uint32_t picid)
+void Button::set_pic(PictureID picid)
 {
 	m_title.clear();
 
 	m_pic_custom = picid;
-	if (m_pic_custom_disabled)
+	if (m_pic_custom_disabled != g_gr->get_no_picture())
 		g_gr->free_surface(m_pic_custom_disabled);
 	m_pic_custom_disabled = g_gr->create_grayed_out_pic(picid);
 
@@ -122,7 +111,7 @@ void Button::set_pic(uint32_t picid)
  * Set a text title for the Button
 */
 void Button::set_title(std::string const & title) {
-	m_pic_custom = 0;
+	m_pic_custom = g_gr->get_no_picture();
 	m_title      = title;
 
 
@@ -168,7 +157,8 @@ void Button::draw(RenderTarget & dst)
 		dst.brighten_rect
 			(Rect(Point(0, 0), get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
 
-	if (m_pic_custom) { //  if we got a picture, draw it centered
+	//  if we got a picture, draw it centered
+	if (m_pic_custom != g_gr->get_no_picture()) {
 		uint32_t cpw, cph;
 		g_gr->get_picture_size(m_pic_custom, cpw, cph);
 

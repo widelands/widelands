@@ -20,6 +20,7 @@
 #include "progresswindow.h"
 
 #include "font_handler.h"
+#include "graphic/rendertarget.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 
@@ -57,20 +58,20 @@ void ProgressWindow::draw_background
 
 	// Load background graphics
 	Rect wnd_rect(Point(0, 0), xres, yres);
-	const uint32_t pic_tile =
+	const PictureID pic_tile =
 		g_gr->get_picture(PicMod_Menu, "pics/progress.png");
-	if (pic_tile > 0) {
+	if (pic_tile != g_gr->get_no_picture()) {
 		rt.tile(wnd_rect, pic_tile, Point(0, 0));
 		g_gr->update_fullscreen();
 	}
 
-	uint32_t const background_original =
+	PictureID const background_original =
 		g_gr->get_picture(PicMod_Menu, m_background.c_str());
-	uint32_t const background_resized  =
+	PictureID const background_resized  =
 		g_gr->get_resized_picture //  FIXME memory leak!!!
 			(background_original, xres, yres, Graphic::ResizeMode_Loose);
 
-	if (background_resized > 0) {
+	if (background_resized != g_gr->get_no_picture()) {
 		uint32_t w = 0;
 		uint32_t h = 0;
 		g_gr->get_picture_size(background_resized, w, h);

@@ -69,7 +69,7 @@ private:
 	private:
 		Interactive_Base & m_ibase;
 		int32_t                m_viewx, m_viewy;
-		uint32_t               m_pic_map_spot;
+		PictureID              m_pic_map_spot;
 	public:
 		int8_t * m_flags;
 	};

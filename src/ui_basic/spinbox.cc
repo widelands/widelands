@@ -48,7 +48,7 @@ struct SpinBoxImpl {
 	std::string unit;
 
 	/// Background tile style of buttons.
-	uint32_t background;
+	PictureID background;
 
 	/// Alignment of the text. Vertical alignment is always centered.
 	Align align;
@@ -80,7 +80,7 @@ SpinBox::SpinBox
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 int32_t startval, int32_t minval, int32_t maxval, std::string unit,
-	 const uint32_t background, bool big,
+	 const PictureID background, bool big,
 	 Align alignm)
 	:
 	Panel(parent, x, y, w, h),

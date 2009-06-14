@@ -32,7 +32,7 @@ Item_Ware_Descr::Item_Ware_Descr
 	Map_Object_Descr(_name, _descname),
 	m_helptext      (global_s.get_string("help", "")),
 	m_icon_fname(directory + "/menu.png"),
-	m_icon(0)
+	m_icon(g_gr->get_picture(PicMod_UI, "pics/but0.png"))
 {
 	m_default_target_quantity =
 		global_s.get_positive
@@ -49,7 +49,7 @@ Item_Ware_Descr::Item_Ware_Descr
  */
 void Item_Ware_Descr::load_graphics()
 {
-	m_icon = g_gr->get_picture(PicMod_Game, m_icon_fname.c_str());
+	m_icon = g_gr->get_picture(PicMod_Game, m_icon_fname);
 }
 
 }

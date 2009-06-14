@@ -54,7 +54,7 @@ Icon_Grid::Icon_Grid
  * Returns the index of the newly added icon.
 */
 int32_t Icon_Grid::add
-	(uint32_t const picid, void * const data, std::string const & descr)
+	(PictureID const picid, void * const data, std::string const & descr)
 {
 	Item it;
 
@@ -151,7 +151,7 @@ void Icon_Grid::draw(RenderTarget & dst)
 	uint32_t x = 0, y = 0;
 
 	for (uint32_t idx = 0; idx < m_items.size(); ++idx) {
-		const uint32_t picid = m_items[idx].picid;
+		const PictureID picid = m_items[idx].picid;
 		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
 

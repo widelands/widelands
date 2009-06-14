@@ -34,7 +34,7 @@
 #include <libintl.h>
 
 #include <cstdio>
-
+#include <iostream>
 
 Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		(Options_Ctrl::Options_Struct opt)
@@ -57,21 +57,21 @@ m_fn
 m_advanced_options
 	(this,
 	 m_xres * 9 / 80, m_yres * 19 / 20, m_butw, m_buth,
-	 2,
+	 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 	 &Fullscreen_Menu_Options::advanced_options, *this,
 	 _("Advanced Options"), std::string(), true, false,
 	 m_fn, m_fs),
 m_cancel
 	(this,
 	 m_xres * 51 / 80, m_yres * 19 / 20, m_butw, m_buth,
-	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 	 &Fullscreen_Menu_Options::end_modal, *this, om_cancel,
 	 _("Cancel"), std::string(), true, false,
 	 m_fn, m_fs),
 m_apply
 	(this,
 	 m_xres * 3 / 8, m_yres * 19 / 20, m_butw, m_buth,
-	 2,
+	 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 	 &Fullscreen_Menu_Options::end_modal, *this, om_ok,
 	 _("Apply"), std::string(), true, false,
 	 m_fn, m_fs),
@@ -80,11 +80,13 @@ m_apply
 m_sb_maxfps
 	(this,
 	 m_xres / 2, m_yres * 3833 / 10000, m_xres / 5, m_vbutw,
-	 opt.maxfps, 0, 100, "", 1),
+	 opt.maxfps, 0, 100, "",
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 m_sb_autosave
 	(this,
 	 m_xres * 6767 / 10000, m_yres * 8167 / 10000, m_xres / 4, m_vbutw,
-	 opt.autosave / 60, 0, 100, _("min."), 1, true),
+	 opt.autosave / 60, 0, 100, _("min."),
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png"), true),
 
 // Title
 m_title
@@ -267,7 +269,7 @@ os(opt)
 			m_resolutions[i].yres  == opt.yres and
 			m_resolutions[i].depth == opt.depth;
 		did_select_a_res |= selected;
-		m_reslist.add(buf, 0, -1, selected);
+		m_reslist.add(buf, 0, g_gr->get_no_picture(), selected);
 	}
 	if (not did_select_a_res) m_reslist.select(m_reslist.size() - 1);
 
@@ -276,7 +278,7 @@ os(opt)
 		m_language_list.add
 			(available_languages[i].name.c_str(),
 			 available_languages[i].abbrev,
-			 -1, //  FIXME this should be a flag
+			 g_gr->get_no_picture(),
 			 available_languages[i].abbrev == opt.language);
 }
 
@@ -338,14 +340,14 @@ m_fn
 m_cancel
 	(this,
 	 m_xres * 41 / 80, m_yres * 19 / 20, m_butw, m_buth,
-	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 	 &Fullscreen_Menu_Advanced_Options::end_modal, *this, om_cancel,
 	 _("Cancel"), std::string(), true, false,
 	 m_fn, m_fs),
 m_apply
 	(this,
 	 m_xres / 4,   m_yres * 19 / 20, m_butw, m_buth,
-	 2,
+	 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 	 &Fullscreen_Menu_Advanced_Options::end_modal, *this, om_ok,
 	 _("Apply"), std::string(), true, false,
 	 m_fn, m_fs),
@@ -354,15 +356,18 @@ m_apply
 m_sb_speed
 	(this,
 	 m_xres * 18 / 25, m_yres * 63 / 100, m_xres / 4, m_vbutw,
-	 opt.speed_of_new_game / 1000, 0, 100, "x", 1),
+	 opt.speed_of_new_game / 1000, 0, 100, "x",
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 m_sb_dis_panel
 	(this,
 	 m_xres * 18 / 25, m_yres * 6768 / 10000, m_xres / 4, m_vbutw,
-	 opt.border_snap_distance, 0, 100, "px.", 1),
+	 opt.border_snap_distance, 0, 100, "px.",
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 m_sb_dis_border
 	(this,
 	 m_xres * 18 / 25, m_yres * 7235 / 10000, m_xres / 4, m_vbutw,
-	 opt.panel_snap_distance, 0, 100, "px.", 1),
+	 opt.panel_snap_distance, 0, 100, "px.",
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 
 
 // Title
@@ -439,13 +444,16 @@ os(opt)
 		bool did_select_a_font = false;
 		bool cmpbool = !strcmp("serif", opt.ui_font.c_str());
 		did_select_a_font = cmpbool;
-		m_ui_font_list.add(_("FreeSerif (Default)"), "serif", -1, cmpbool);
+		m_ui_font_list.add
+			(_("FreeSerif (Default)"), "serif", g_gr->get_no_picture(), cmpbool);
 		cmpbool = !strcmp("sans", opt.ui_font.c_str());
 		did_select_a_font |= cmpbool;
-		m_ui_font_list.add("FreeSans", "sans", -1, cmpbool);
+		m_ui_font_list.add
+			("FreeSans", "sans", g_gr->get_no_picture(), cmpbool);
 		cmpbool = !strcmp(UI_FONT_NAME_WIDELANDS, opt.ui_font.c_str());
 		did_select_a_font |= cmpbool;
-		m_ui_font_list.add("Widelands", UI_FONT_NAME_WIDELANDS, -1, cmpbool);
+		m_ui_font_list.add
+			("Widelands", UI_FONT_NAME_WIDELANDS, g_gr->get_no_picture(), cmpbool);
 
 		// Fill with all left *.ttf files we find in fonts
 		filenameset_t files;
@@ -466,7 +474,8 @@ os(opt)
 				continue;
 			cmpbool = !strcmp(name, opt.ui_font.c_str());
 			did_select_a_font |= cmpbool;
-			m_ui_font_list.add(name, name, -1, cmpbool);
+			m_ui_font_list.add
+				(name, name, g_gr->get_no_picture(), cmpbool);
 		}
 
 		if (!did_select_a_font)

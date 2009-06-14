@@ -219,7 +219,7 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_15_MINS,
 		 _("15 m"));
 
@@ -228,7 +228,7 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_30_MINS,
 		 _("30 m"));
 
@@ -237,7 +237,7 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_ONE_HOUR,
 		 _("1 h"));
 
@@ -246,7 +246,7 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_TWO_HOURS,
 		 _("2 h"));
 
@@ -256,7 +256,7 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 	new UI::Callback_Button<General_Statistics_Menu>
 		(this,
 		 pos.x, pos.y, 32, 32,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
 		 &General_Statistics_Menu::clicked_help, *this,
 		 _("Help"));
@@ -266,7 +266,7 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_FOUR_HOURS,
 		 _("4 h"));
 	pos.x += button_size + spacing;
@@ -274,7 +274,7 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_EIGHT_HOURS,
 		 _("8 h"));
 
@@ -283,7 +283,7 @@ m_plot          (this, 5, 5, 430, PLOT_HEIGHT)
 	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &WUIPlot_Area::set_time, m_plot, WUIPlot_Area::TIME_16_HOURS,
 		 _("16 h"));
 

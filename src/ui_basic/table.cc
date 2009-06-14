@@ -86,7 +86,7 @@ void Table<void *>::add_column
 				new Callback_IDButton<Table, Columns::size_type>
 					(this,
 					 complete_width, 0, width, m_headerheight,
-					 3,
+					 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
 					 &Table::header_button_clicked, *this, m_columns.size(),
 					 title, "", true, false, m_fontname, m_fontsize)
 				:
@@ -187,10 +187,10 @@ void Table<void *>::draw(RenderTarget & dst)
 			uint32_t const curw      = m_columns[i].width;
 			Align    const alignment = m_columns[i].alignment;
 
-			int32_t             const entry_picture = er.get_picture(i);
+			PictureID           const entry_picture = er.get_picture(i);
 			std::string const &       entry_string  = er.get_string (i);
 			uint32_t w = 0, h = g_fh->get_fontheight(m_fontname, m_fontsize);
-			if (entry_picture != -1)
+			if (entry_picture != g_gr->get_no_picture())
 				g_gr->get_picture_size(entry_picture, w, h);
 			Point point =
 				Point(curx, y)
@@ -204,7 +204,7 @@ void Table<void *>::draw(RenderTarget & dst)
 					  static_cast<int32_t>(h))
 					 /
 					 2);
-			if (entry_picture != -1)
+			if (entry_picture != g_gr->get_no_picture())
 				dst.blit(point, entry_picture);
 			else
 				g_fh->draw_string
@@ -370,7 +370,7 @@ Table<void *>::Entry_Record::Entry_Record(void * const e)
 {}
 
 void Table<void *>::Entry_Record::set_picture
-	(uint32_t const column, uint32_t const picid, std::string const & str)
+	(uint32_t const column, PictureID const picid, std::string const & str)
 {
 	assert(column < m_data.size());
 
@@ -382,10 +382,10 @@ void Table<void *>::Entry_Record::set_string
 {
 	assert(column < m_data.size());
 
-	m_data[column].d_picture = -1;
+	m_data[column].d_picture = g_gr->get_no_picture();
 	m_data[column].d_string = str;
 }
-int32_t Table<void *>::Entry_Record::get_picture
+PictureID Table<void *>::Entry_Record::get_picture
 	(uint32_t const column) const
 {
 	assert(column < m_data.size());

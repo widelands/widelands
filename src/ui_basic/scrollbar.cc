@@ -250,18 +250,18 @@ void Scrollbar::action(Area const area)
 
 
 void Scrollbar::draw_button(RenderTarget & dst, const Area area, const Rect r) {
-	uint32_t pic;
+	PictureID pic;
 
 	dst.tile(r, m_pic_buttons, Point(get_x(), get_y()));
 
 	// Draw the picture
-	pic = 0;
+	pic = g_gr->get_no_picture();
 	if (area == Minus)
 		pic = m_pic_minus;
 	else if (area == Plus)
 		pic = m_pic_plus;
 
-	if (pic) {
+	if (pic != g_gr->get_no_picture()) {
 		uint32_t cpw, cph;
 		g_gr->get_picture_size(pic, cpw, cph);
 

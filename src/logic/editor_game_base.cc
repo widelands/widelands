@@ -754,8 +754,9 @@ void Editor_Game_Base::cleanup_for_load
 	// TODO: check this when another world is needed
 	if (flush_animations)
 		g_anim.flush();
-	if (flush_graphics)
-		g_gr->flush(0);
+	if (flush_graphics) {
+		//g_gr->flush(0); FIXME, what do we need to flush here?
+	}
 
 	const Player * const * const players_end = m_players + MAX_PLAYERS;
 	for (Player * * p = m_players; p < players_end; ++p) {

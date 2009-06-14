@@ -148,7 +148,7 @@ struct MapObjectDebugWindow : public UI::Window {
 private:
 	bool                  m_log_general_info;
 	Widelands::Object_Ptr m_object;
-	uint32_t            m_serial;
+	uint32_t              m_serial;
 	UI::Tab_Panel         m_tabs;
 };
 
@@ -167,7 +167,8 @@ MapObjectDebugWindow::MapObjectDebugWindow
 	UI::Window        (&parent, 0, 0, 100, 100, ""),
 	m_log_general_info(true),
 	m_object          (&obj),
-	m_tabs            (this, 0, 0, 1)
+	m_tabs
+		(this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"))
 {
 	char buffer[128];
 
@@ -275,7 +276,7 @@ m_ui_field(this, 0, 0, 200, 280, ""),
 m_ui_immovable
 	(this,
 	 0, 280, 200, 24,
-	 0,
+	 g_gr->get_no_picture(),
 	 &FieldDebugWindow::open_immovable, *this,
 	 ""),
 

@@ -64,28 +64,28 @@ m_hostname
 joingame
 	(this,
 	 m_xres * 16 / 25, m_yres * 5333 / 10000, m_butw, m_buth,
-	 1,
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 	 &Fullscreen_Menu_NetSetupLAN::clicked_joingame, *this,
 	 _("Join this game"), std::string(), true, false,
 	 m_fn, m_fs),
 hostgame
 	(this,
 	 m_xres * 16 / 25, m_yres * 6083 / 10000, m_butw, m_buth,
-	 1,
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 	 &Fullscreen_Menu_NetSetupLAN::clicked_hostgame, *this,
 	 _("Host a new game"), std::string(), true, false,
 	 m_fn, m_fs),
 back
 	(this,
 	 m_xres * 16 / 25, m_yres * 8333 / 10000, m_butw, m_buth,
-	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 	 &Fullscreen_Menu_NetSetupLAN::end_modal, *this, CANCEL,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs),
 loadlasthost
 	(this,
 	 m_xres * 171 / 200, m_yres * 19 / 40, m_buth, m_buth,
-	 1,
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 	 g_gr->get_picture(PicMod_UI, "pics/menu_load_game.png"),
 	 &Fullscreen_Menu_NetSetupLAN::clicked_lasthost, *this,
 	 _("Load previous host"), true, false,
@@ -93,9 +93,11 @@ loadlasthost
 
 // Edit boxes
 playername
-	(this, m_xres * 16 / 25, m_yres * 3333 / 10000, m_butw,       m_buth, 2, 0),
+	(this, m_xres * 16 / 25, m_yres * 3333 / 10000, m_butw,       m_buth,
+	 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
 hostname
-	(this, m_xres * 16 / 25, m_yres * 19 / 40,  m_xres * 17 / 80, m_buth, 2, 0),
+	(this, m_xres * 16 / 25, m_yres * 19 / 40,  m_xres * 17 / 80, m_buth,
+	 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
 
 // List
 opengames

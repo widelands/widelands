@@ -43,7 +43,7 @@ Editor_Tool_Place_Immovable_Options_Menu
 		 UI::UniqueWindow::Registry  & registry)
 :
 Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Immovable Bobs Menu")),
-m_tabpanel(this, 0, 0, 1),
+m_tabpanel(this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 m_pit     (pit)
 {
 	int32_t const space  =  5;
@@ -69,7 +69,7 @@ m_pit     (pit)
 
 	//box->set_inner_size((immovables_in_row)*(width+1+space)+xstart,
 	//                     (immovables_in_row)*(height+1+space)+ystart+yend);
-	const uint32_t tab_icon =
+	const PictureID tab_icon =
 		g_gr->get_picture(PicMod_Game, "pics/list_first_entry.png");
 
 	Point pos;

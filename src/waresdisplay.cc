@@ -164,7 +164,7 @@ void WaresDisplay::draw_ware
 	 bool                  const is_worker)
 {
 	//  draw a background
-	const uint32_t picid =
+	const PictureID picid =
 		g_gr->get_picture(PicMod_Game, "pics/ware_list_bg.png");
 	uint32_t w, h;
 	g_gr->get_picture_size(picid, w, h);

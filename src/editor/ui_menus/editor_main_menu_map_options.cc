@@ -42,7 +42,7 @@ Enable_Set_Origin_Tool_Button(Main_Menu_Map_Options & parent)
 	UI::Button
 		(&parent,
 		 5, parent.get_inner_h() - 25, parent.get_inner_w() - 10, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 _("Set origin"),
 		 _
 		 	("Set the position that will have the coordinates (0, 0). This will "
@@ -75,7 +75,7 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 			(this,
 			 posx + ta->get_w() + spacing, posy,
 			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
-			 1, 0);
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0);
 	m_name->changedid.set(this, &Main_Menu_Map_Options::changed);
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("Size:"));
@@ -100,7 +100,8 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 		new UI::EditBox
 			(this,
 			 posx + ta->get_w() + spacing, posy,
-			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20, 1, 1);
+			 get_inner_w() - (posx + ta->get_w() + spacing) - spacing, 20,
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 1);
 	m_author->changedid.set(this, &Main_Menu_Map_Options::changed);
 	posy += height + spacing;
 	m_descr = new UI::Multiline_Editbox

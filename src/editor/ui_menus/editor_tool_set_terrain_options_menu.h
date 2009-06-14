@@ -40,7 +40,7 @@ struct Editor_Tool_Set_Terrain_Tool_Options_Menu :
 	virtual ~Editor_Tool_Set_Terrain_Tool_Options_Menu();
 
 private:
-	std::vector<uint32_t>       m_surfaces;
+	std::vector<PictureID>       m_surfaces;
 	UI::Textarea                m_cur_selection;
 	Editor_Set_Terrain_Tool   & m_tool;
 	void selected(int32_t, bool);

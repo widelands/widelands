@@ -68,7 +68,8 @@ m_trigger (trigger)
 
 	new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
 	m_name = new UI::EditBox
-		(this, spacing + 50, posy, get_inner_w() - 50 - 2 * spacing, 20, 0, 0);
+		(this, spacing + 50, posy, get_inner_w() - 50 - 2 * spacing, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"), 0);
 	m_name->setText(trigger.name());
 
 	posy += 20 + spacing;
@@ -78,7 +79,7 @@ m_trigger (trigger)
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy, width, height,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Time_Option_Menu::clicked, *this, 2);
 
@@ -89,7 +90,7 @@ m_trigger (trigger)
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy + 40, width, height,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, *this, 3);
 
@@ -100,7 +101,7 @@ m_trigger (trigger)
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy, width, height,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Time_Option_Menu::clicked, *this, 4);
 
@@ -111,7 +112,7 @@ m_trigger (trigger)
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy + 40, width, height,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, *this, 5);
 
@@ -126,7 +127,7 @@ m_trigger (trigger)
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy, width, height,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Time_Option_Menu::clicked, *this, 6);
 
@@ -137,7 +138,7 @@ m_trigger (trigger)
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy + 40, width, height,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, *this, 7);
 
@@ -148,7 +149,7 @@ m_trigger (trigger)
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy, width, height,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Time_Option_Menu::clicked, *this, 8);
 
@@ -159,7 +160,7 @@ m_trigger (trigger)
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy + 40, width, height,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, *this, 9);
 
@@ -173,7 +174,7 @@ m_trigger (trigger)
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy, width, height,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Time_Option_Menu::clicked, *this, 10);
 
@@ -184,7 +185,7 @@ m_trigger (trigger)
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy + 40, width, height,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, *this, 11);
 
@@ -194,7 +195,7 @@ m_trigger (trigger)
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy, width, height,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Trigger_Time_Option_Menu::clicked, *this, 12);
 
@@ -205,7 +206,7 @@ m_trigger (trigger)
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy + 40, width, height,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, *this, 13);
 
@@ -220,7 +221,7 @@ m_trigger (trigger)
 	new UI::Callback_Button<Trigger_Time_Option_Menu>
 		(this,
 		 posx, posy, 60, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Trigger_Time_Option_Menu::clicked_ok, *this,
 		 _("Ok"));
 
@@ -229,7 +230,7 @@ m_trigger (trigger)
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
 		 posx, posy, 60, 20,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Trigger_Time_Option_Menu::end_modal, *this, 0,
 		 _("Cancel"));
 

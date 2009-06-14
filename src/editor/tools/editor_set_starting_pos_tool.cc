@@ -68,7 +68,7 @@ Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool()
 int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 	(Widelands::Map               &       map,
 	 Widelands::Node_and_Triangle<> const center,
-	 Editor_Interactive           &       parent)
+	 Editor_Interactive           &)
 {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
@@ -88,7 +88,7 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 		char picname[] = "pics/editor_player_00_starting_pos.png";
 		picname[19] += m_current_player / 10;
 		picname[20] += m_current_player % 10;
-		const uint32_t picid = g_gr->get_picture(PicMod_Game,  picname);
+		const PictureID picid = g_gr->get_picture(PicMod_Game,  picname);
 		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
 

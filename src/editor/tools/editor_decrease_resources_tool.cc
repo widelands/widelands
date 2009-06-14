@@ -57,7 +57,7 @@ int32_t Editor_Decrease_Resources_Tool::handle_click_impl
 			 and
 			 Editor_Change_Resource_Tool_Callback(mr.location(), &map, m_cur_res))
 		{
-			int32_t picid;
+			PictureID picid;
 			//  Ok, we're doing something. First remove the current overlays.
 			std::string str =
 				map.world().get_resource(res)->get_editor_pic

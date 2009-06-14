@@ -24,6 +24,8 @@
 #include "object.h"
 
 #include "point.h"
+#include "graphic/picture.h"
+#include "graphic/graphic.h"
 
 #include <SDL_keyboard.h>
 
@@ -216,7 +218,7 @@ private:
 	Panel *_focus; // keyboard focus
 
 	uint32_t _flags;
-	uint32_t _cache;
+	PictureID _cache;
 	bool _needdraw;
 
 	int32_t _x, _y;
@@ -247,7 +249,7 @@ private:
 	static Panel *_modal;
 	static Panel *_g_mousegrab;
 	static Panel *_g_mousein;
-	static uint32_t s_default_cursor;
+	static PictureID s_default_cursor;
 };
 
 inline void Panel::set_snap_windows_only_when_overlapping(const bool on) {

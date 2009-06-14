@@ -84,21 +84,21 @@ MessageBox::MessageBox
 		new Callback_Button<MessageBox>
 			(this,
 			 (get_inner_w() - 60) / 2, get_inner_h() - 30, 60, 20,
-			 0,
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 			 &MessageBox::pressedOk, *this,
 			 _("OK"));
 	} else if (type == YESNO) {
 		new Callback_Button<MessageBox>
 			(this,
 			 (get_inner_w() / 2 - 60) / 2, get_inner_h() - 30, 60, 20,
-			 0,
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 			 &MessageBox::pressedYes, *this,
 			 _("Yes"));
 		new Callback_Button<MessageBox>
 			(this,
 			 (get_inner_w() / 2 - 60) / 2 + get_inner_w() / 2, get_inner_h() - 30,
 			 60, 20,
-			 1,
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 			 &MessageBox::pressedNo, *this,
 			 _("No"));
 	}

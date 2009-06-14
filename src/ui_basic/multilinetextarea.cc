@@ -37,7 +37,7 @@ Multiline_Textarea::Multiline_Textarea
 	m_text      (text),
 	m_scrollbar (this, get_w() - scrollbar_w(), 0, scrollbar_w(), h, false),
 	m_scrollmode(ScrollNormal),
-	m_cache_id  (0),
+	m_cache_id  (g_gr->get_no_picture()),
 	m_cache_mode(Widget_Cache_New),
 	m_textheight(0),
 	m_textpos   (0)
@@ -64,7 +64,7 @@ Multiline_Textarea::Multiline_Textarea
  * Free allocated resources
 */
 Multiline_Textarea::~Multiline_Textarea() {
-	if (m_cache_id)
+	if (m_cache_id != g_gr->get_no_picture())
 		g_fh->delete_widget_cache(m_cache_id);
 }
 
@@ -156,7 +156,7 @@ void Multiline_Textarea::draw_scrollbar() {
 				setbottom = true;
 
 		uint32_t m_width = 0;
-		if (m_cache_id)
+		if (m_cache_id != g_gr->get_no_picture())
 			g_fh->get_size_from_cache(m_cache_id, m_width, m_textheight);
 
 		if (setbottom || m_textpos > m_textheight - get_h())

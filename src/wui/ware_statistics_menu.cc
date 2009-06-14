@@ -299,13 +299,13 @@ static const RGBColor colors[] = {
  * of the graph and it needs a picture
  */
 struct WSM_Checkbox : public UI::Checkbox {
-	WSM_Checkbox(UI::Panel *, Point, int32_t id, uint32_t picid, RGBColor);
+	WSM_Checkbox(UI::Panel *, Point, int32_t id, PictureID picid, RGBColor);
 
 	virtual void draw(RenderTarget &);
 
 private:
-	int32_t  m_pic;
-	RGBColor m_color;
+	PictureID  m_pic;
+	RGBColor   m_color;
 };
 
 
@@ -313,7 +313,7 @@ WSM_Checkbox::WSM_Checkbox
 	(UI::Panel * const parent,
 	 Point       const p,
 	 int32_t     const id,
-	 uint32_t    const picid,
+	 PictureID   const picid,
 	 RGBColor    const color)
 :
 UI::Checkbox(parent, p, g_gr->get_picture(PicMod_Game,  WARES_DISPLAY_BG)),
@@ -422,7 +422,7 @@ m_parent(&parent)
 	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &WUIPlot_Area::set_time, *m_plot, WUIPlot_Area::TIME_15_MINS,
 		 _("15 m"));
 
@@ -431,7 +431,7 @@ m_parent(&parent)
 	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &WUIPlot_Area::set_time, *m_plot, WUIPlot_Area::TIME_30_MINS,
 		 _("30 m"));
 
@@ -440,7 +440,7 @@ m_parent(&parent)
 	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &WUIPlot_Area::set_time, *m_plot, WUIPlot_Area::TIME_ONE_HOUR,
 		 _("1 h"));
 
@@ -449,7 +449,7 @@ m_parent(&parent)
 	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &WUIPlot_Area::set_time, *m_plot, WUIPlot_Area::TIME_TWO_HOURS,
 		 _("2 h"));
 
@@ -459,7 +459,7 @@ m_parent(&parent)
 	new UI::Callback_Button<Ware_Statistics_Menu>
 		(this,
 		 pos.x, pos.y, 32, 32,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/menu_help.png"),
 		 &Ware_Statistics_Menu::clicked_help, *this,
 		 _("Help"));
@@ -469,7 +469,7 @@ m_parent(&parent)
 	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &WUIPlot_Area::set_time, *m_plot, WUIPlot_Area::TIME_FOUR_HOURS,
 		 _("4 h"));
 
@@ -478,7 +478,7 @@ m_parent(&parent)
 	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &WUIPlot_Area::set_time, *m_plot, WUIPlot_Area::TIME_EIGHT_HOURS,
 		 _("8 h"));
 
@@ -487,7 +487,7 @@ m_parent(&parent)
 	new UI::Callback_IDButton<WUIPlot_Area, WUIPlot_Area::TIME>
 		(this,
 		 pos.x, pos.y, button_size, 25,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &WUIPlot_Area::set_time, *m_plot, WUIPlot_Area::TIME_16_HOURS,
 		 _("16 h"));
 

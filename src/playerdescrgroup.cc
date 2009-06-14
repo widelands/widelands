@@ -64,7 +64,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerType = new UI::Callback_Button<PlayerDescriptionGroup>
 		(this,
 		 w * 29 / 125, 0, w * 19 / 100, h,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &PlayerDescriptionGroup::toggle_playertype, *this,
 		 std::string(), std::string(),
 		 true, false,
@@ -72,7 +72,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerTribe = new UI::Callback_Button<PlayerDescriptionGroup>
 		(this,
 		 w * 43 / 100, 0, w * 6 / 25, h,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &PlayerDescriptionGroup::toggle_playertribe, *this,
 		 std::string(), std::string(),
 		 true, false,
@@ -80,7 +80,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerInit = new UI::Callback_Button<PlayerDescriptionGroup>
 		(this,
 		 w * 27 / 40, 0, w * 8 / 25, h,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &PlayerDescriptionGroup::toggle_playerinit, *this,
 		 std::string(), _("Initialization"),
 		 true, false,

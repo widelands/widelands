@@ -378,10 +378,10 @@ void Soldier::draw
 			 color);
 
 		//  Draw information fields about levels. First, gather information.
-		const uint32_t hppic = get_hp_level_pic();
-		const uint32_t attackpic = get_attack_level_pic();
-		const uint32_t defensepic = get_defense_level_pic();
-		const uint32_t evadepic = get_evade_level_pic();
+		const PictureID hppic = get_hp_level_pic();
+		const PictureID attackpic = get_attack_level_pic();
+		const PictureID defensepic = get_defense_level_pic();
+		const PictureID evadepic = get_evade_level_pic();
 		uint32_t hpw, hph, atw, ath, dew, deh, evw, evh;
 		g_gr->get_picture_size(hppic,      hpw, hph);
 		g_gr->get_picture_size(attackpic,  atw, ath);

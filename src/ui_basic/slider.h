@@ -40,7 +40,7 @@ protected:
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 int32_t min_value, int32_t max_value, int32_t value,
-		 uint32_t background_picture_id,
+		 PictureID background_picture_id,
 		 const std::string & tooltip_text,
 		 uint32_t cursor_size,
 		 bool enabled,
@@ -86,7 +86,7 @@ private:
 	bool m_pressed;           //  the cursor is pressed
 	bool m_enabled;           //  enabled widget
 
-	uint32_t m_pic_background;    //  background texture (picture ID)
+	PictureID m_pic_background;    //  background texture (picture ID)
 
 	int32_t m_x_gap;              //  draw positions
 	int32_t m_y_gap;
@@ -106,7 +106,7 @@ struct HorizontalSlider : public Slider {
 		(Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const int32_t min_value, const int32_t max_value, const int32_t value,
-		 const uint32_t background_picture_id,
+		 const PictureID background_picture_id,
 		 const std::string & tooltip_text = std::string(),
 		 const uint32_t cursor_size = 20,
 		 const bool enabled = true)
@@ -140,7 +140,7 @@ struct VerticalSlider : public Slider {
 		(Panel * const parent,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 		 const int32_t min_value, const int32_t max_value, const int32_t value,
-		 const uint32_t background_picture_id,
+		 const PictureID background_picture_id,
 		 const uint32_t cursor_size = 20,
 		 const std::string & tooltip_text = std::string(),
 		 const bool enabled = true)

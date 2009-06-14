@@ -56,7 +56,7 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl
 		if (Editor_Change_Resource_Tool_Callback(mr.location(), &map, m_cur_res))
 		{
 			//  Ok, we're doing something. First remove the current overlays.
-			int32_t picid =
+			PictureID picid =
 				g_gr->get_picture
 					(PicMod_Menu,
 					 world.get_resource(res)->get_editor_pic

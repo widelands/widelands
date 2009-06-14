@@ -74,7 +74,7 @@ m_te      (te)
 	Objective & obj = UI::Table<Objective &>::get(te);
 
 	new UI::Textarea(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft);
-	m_name = new UI::EditBox(this, 120, 5, 120, 20, 0, 0);
+	m_name = new UI::EditBox(this, 120, 5, 120, 20);
 	m_name->setText(obj.name());
 	pos.y += 20 + spacing;
 
@@ -104,7 +104,7 @@ m_te      (te)
 	new UI::Callback_Button<Edit_Objective_Window>
 		(this,
 		 pos.x, pos.y, 80, 20,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Edit_Objective_Window::clicked_ok, *this,
 		 _("Ok"));
 
@@ -112,7 +112,7 @@ m_te      (te)
 	new UI::Callback_IDButton<Edit_Objective_Window, int32_t>
 		(this,
 		 pos.x, pos.y, 80, 20,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Edit_Objective_Window::end_modal, *this, 0,
 		 _("Back"));
 
@@ -172,7 +172,7 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 	new UI::Callback_Button<Editor_Objectives_Menu>
 		(this,
 		 spacing, get_inner_h() - 30, 60, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Objectives_Menu::clicked_new, *this,
 		 _("New"));
 
@@ -181,7 +181,7 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 	m_edit_button = new UI::Callback_Button<Editor_Objectives_Menu>
 		(this,
 		 posx, get_inner_h() - 30, 60, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Objectives_Menu::clicked_edit, *this,
 		 _("Edit"),
 		 std::string(),
@@ -192,7 +192,7 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 	m_delete_button = new UI::Callback_Button<Editor_Objectives_Menu>
 		(this,
 		 posx, get_inner_h() - 30, 60, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Objectives_Menu::clicked_del, *this,
 		 _("Delete"),
 		 std::string(),

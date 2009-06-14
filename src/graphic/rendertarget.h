@@ -24,8 +24,16 @@
 #include "rgbcolor.h"
 
 #include "widelands.h"
-
 #include <vector>
+#include "picture.h"
+//#include <boost/shared_ptr.hpp>
+//#include <boost/ptr_container/ptr_map.hpp>
+
+//#ifndef PICTURE_ID
+//#define PICTURE_ID
+//struct Picture;
+//typedef boost::shared_ptr<Picture> PictureID;
+//#endif
 
 namespace Widelands {
 struct Editor_Game_Base;
@@ -67,9 +75,9 @@ struct RenderTarget {
 	void brighten_rect(Rect, int32_t factor);
 	void clear();
 
-	void blit(Point dst, uint32_t picture);
-	void blitrect(Point dst, uint32_t picture, Rect src);
-	void tile(Rect, uint32_t picture, Point ofs);
+	void blit(Point dst, PictureID picture);
+	void blitrect(Point dst, PictureID picture, Rect src);
+	void tile(Rect, PictureID picture, Point ofs);
 
 	/**
 	 * Renders the map from a player's point of view into the current drawing

@@ -38,26 +38,14 @@ namespace UI {
 Tab_Panel::Tab_Panel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y,
-	 uint32_t const background)
+	 PictureID const background)
 	:
-	Panel       (parent, x, y, 0, 0),
-	m_active    (0),
-	m_snapparent(false),
-	m_highlight (-1)
-{
-	switch (background) {
-	default:
-	case 0:
-		m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but0.png"); break;
-	case 1:
-		m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but1.png"); break;
-	case 2:
-		m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but2.png"); break;
-	case 3:
-		m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but3.png"); break;
-	}
-
-}
+	Panel            (parent, x, y, 0, 0),
+	m_active         (0),
+	m_snapparent     (false),
+	m_highlight      (-1),
+	m_pic_background (background)
+{}
 
 
 /**
@@ -108,7 +96,7 @@ void Tab_Panel::set_snapparent(bool snapparent)
  * Add a new tab
 */
 uint32_t Tab_Panel::add
-	(uint32_t            const picid,
+	(PictureID           const picid,
 	 Panel             * const panel,
 	 std::string const &       tooltip_text)
 {

@@ -86,7 +86,7 @@ private:
 
 protected:
 	Align        m_align;
-	uint32_t     m_cache_id; ///picid of the whole textarea surface
+	PictureID    m_cache_id; ///picid of the whole textarea surface
 
 	///set to Widget_Cache_Update if the whole textarea has to be rebuild
 	Widget_Cache m_cache_mode;

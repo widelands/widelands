@@ -22,6 +22,7 @@
 
 #include "point.h"
 #include "rgbcolor.h"
+#include "graphic/picture.h"
 
 #include <SDL_ttf.h>
 
@@ -84,7 +85,7 @@ struct Font_Handler {
 		 Align               align           = Align_CenterLeft,
 		 int32_t             wrap            = -1,
 		 Widget_Cache        widget_cache    = Widget_Cache_None,
-		 uint32_t          * widget_cache_id = 0,
+		 PictureID         * widget_cache_id = 0,
 		 int32_t             caret           = -1,
 		 bool                transparent     = true);
 	void get_size
@@ -108,7 +109,7 @@ struct Font_Handler {
 	// from the graphics code before the graphics are flushed,
 	// to make sure that everything is forgotten
 	void flush_cache();
-	void delete_widget_cache(uint32_t widget_cache_id);
+	void delete_widget_cache(PictureID widget_cache_id);
 	void draw_richtext
 		(RenderTarget &,
 		 const RGBColor bg,
@@ -116,10 +117,10 @@ struct Font_Handler {
 		 std::string text,
 		 int32_t wrap,
 		 Widget_Cache widget_cache = Widget_Cache_None,
-		 uint32_t * const widget_cache_id = 0,
+		 PictureID * const widget_cache_id = 0,
 		 bool transparent = true);
 	void get_size_from_cache
-		(const uint32_t widget_cache_id,
+		(const PictureID widget_cache_id,
 		 uint32_t & w,
 		 uint32_t & h);
 
@@ -132,7 +133,7 @@ struct Font_Handler {
 
 private:
 	struct _Cache_Infos {
-		uint32_t surface_id;
+		PictureID picture_id;
 		std::string str;
 		const TTF_Font * f;
 		RGBColor fg;
@@ -160,12 +161,12 @@ private:
 	void                  * m_cbdata;
 
 private:
-	uint32_t create_text_surface
+	PictureID create_text_surface
 		(TTF_Font &,
 		 const RGBColor fg, const RGBColor bg,
 		 const std::string & text, const Align, const int32_t wrap,
 		 const int32_t caret = -1, bool transparent = true);
-	uint32_t convert_sdl_surface
+	PictureID convert_sdl_surface
 		(SDL_Surface &, const RGBColor bg, bool transparent = false);
 	SDL_Surface * draw_string_sdl_surface
 		(const std::string & fontname, const int32_t fontsize,

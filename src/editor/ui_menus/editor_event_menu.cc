@@ -94,7 +94,8 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 
 	new UI::Callback_Button<Editor_Event_Menu>
 		(this,
-		 posx, posy, 90, 20, 4,
+		 posx, posy, 90, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &Editor_Event_Menu::clicked_new_eventchain, *this,
 		 _("New Event Chain"));
 
@@ -103,7 +104,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 	m_btn_edit_eventchain = new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 50, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu::clicked_edit_eventchain, *this,
 		 _("Edit"),
 		 std::string(),
@@ -114,7 +115,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 	m_btn_del_eventchain = new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 50, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu::clicked_del_eventchain, *this,
 		 _("Del"),
 		 std::string(),
@@ -125,7 +126,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 	new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 90, 20,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &Editor_Event_Menu::clicked_new_event, *this,
 		 _("New Event"));
 
@@ -134,7 +135,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 	m_btn_edit_event = new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 50, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu::clicked_edit_event, *this,
 		 _("Edit"),
 		 std::string(),
@@ -145,7 +146,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 	m_btn_del_event = new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 50, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu::clicked_del_event, *this,
 		 _("Del"),
 		 std::string(),
@@ -157,7 +158,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 	new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 90, 20,
-		 4,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &Editor_Event_Menu::clicked_new_trigger, *this,
 		 _("New Trigger"));
 
@@ -166,7 +167,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 	m_btn_edit_trigger = new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 50, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu::clicked_edit_trigger, *this,
 		 _("Edit"),
 		 std::string(),
@@ -177,7 +178,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 	m_btn_del_trigger = new UI::Callback_Button<Editor_Event_Menu>
 		(this,
 		 posx, posy, 50, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu::clicked_del_trigger, *this,
 		 _("Del"),
 		 std::string(),
@@ -347,7 +348,7 @@ void Editor_Event_Menu::clicked_new_eventchain() {
 
 		evch.set_name(buffer);
 		map.mcm().register_new(evch);
-		m_eventchain_list->add(_("Unnamed"), &evch, -1, true);
+		m_eventchain_list->add(_("Unnamed"), &evch, g_gr->get_no_picture(), true);
 		m_eventchain_list->sort();
 		clicked_edit_eventchain();
 	} else

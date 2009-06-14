@@ -50,8 +50,8 @@ protected:
 	uint32_t m_xres;
 	uint32_t m_yres;
 private:
-	uint32_t m_pic_background;
-	uint32_t m_res_background;
+	PictureID m_pic_background;
+	PictureID m_res_background;
 };
 
 

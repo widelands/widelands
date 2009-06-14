@@ -61,7 +61,7 @@ struct Icon_Grid : public Panel {
 	uint32_t get_orientation() const {return m_flags & Grid_Orientation_Mask;}
 
 	int32_t add
-		(uint32_t            picid,
+		(PictureID           picid,
 		 void              * data,
 		 std::string const & descr = std::string());
 	void * get_data(int32_t idx);
@@ -86,7 +86,7 @@ protected:
 
 private:
 	struct Item {
-		uint32_t        picid;
+		PictureID   picid;
 		void      * data;
 		std::string descr;
 	};

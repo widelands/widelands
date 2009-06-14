@@ -234,7 +234,7 @@ private:
 	bool m_fastclick; // if true, put the mouse over first button in first tab
 	uint32_t m_best_tab;
 	Overlay_Manager::Job_Id m_workarea_preview_job_id;
-	uint32_t workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
+	PictureID workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
 
 	/// Variables to use with attack dialog.
 	UI::Textarea * m_text_attackers;
@@ -291,7 +291,7 @@ FieldActionWindow::FieldActionWindow
 	m_map(&ib->egbase().map()),
 	m_overlay_manager(*m_map->get_overlay_manager()),
 	m_node(ib->get_sel_pos().node, &(*m_map)[ib->get_sel_pos().node]),
-	m_tabpanel(this, 0, 0, 1),
+	m_tabpanel(this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 	m_fastclick(true),
 	m_best_tab(0),
 	m_workarea_preview_job_id(Overlay_Manager::Job_Id::Null()),
@@ -675,7 +675,7 @@ void FieldActionWindow::add_button
 		*new UI::Callback_Button<FieldActionWindow>
 			(box,
 			 0, 0, 34, 34,
-			 2,
+			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 			 g_gr->get_picture(PicMod_Game, picname),
 			 fn, *this, tooltip_text);
 	button.set_repeating(repeating);

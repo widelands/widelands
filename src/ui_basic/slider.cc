@@ -47,22 +47,23 @@ Slider::Slider
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const int32_t min_value, const int32_t max_value, const int32_t value,
-	 const uint32_t background_picture_id,
+	 const PictureID background_picture_id,
 	 const std::string & tooltip_text,
 	 const uint32_t cursor_size,
 	 const bool enabled,
 	 const int32_t x_gap, const int32_t y_gap, const int32_t bar_size)
 	:
-	Panel         (parent, x, y, w, h, tooltip_text),
-	m_min_value   (min_value),
-	m_max_value   (max_value),
-	m_value       (value),
-	m_highlighted (false),
-	m_pressed     (false),
-	m_enabled     (enabled),
-	m_x_gap       (x_gap),
-	m_y_gap       (y_gap),
-	m_bar_size    (bar_size),
+	Panel            (parent, x, y, w, h, tooltip_text),
+	m_min_value      (min_value),
+	m_max_value      (max_value),
+	m_value          (value),
+	m_highlighted    (false),
+	m_pressed        (false),
+	m_enabled        (enabled),
+	m_pic_background (background_picture_id),
+	m_x_gap          (x_gap),
+	m_y_gap          (y_gap),
+	m_bar_size       (bar_size),
 	m_cursor_pos
 		(m_value <= m_min_value ? 0              :
 		 m_value >= m_max_value ? get_bar_size() :
@@ -72,20 +73,6 @@ Slider::Slider
 	//  cursor initial position
 
 	set_think(false);
-
-	switch (background_picture_id) {
-	default:
-	case 0:
-		m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but0.png"); break;
-	case 1:
-		m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but1.png"); break;
-	case 2:
-		m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but2.png"); break;
-	case 3:
-		m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but3.png"); break;
-	case 4:
-		m_pic_background = g_gr->get_picture(PicMod_UI, "pics/but4.png"); break;
-	}
 }
 
 

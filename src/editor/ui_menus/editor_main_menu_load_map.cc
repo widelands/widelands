@@ -113,7 +113,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
 	m_ok_btn = new UI::Callback_Button<Main_Menu_Load_Map>
 		(this,
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Main_Menu_Load_Map::clicked_ok, *this,
 		 _("OK"),
 		 std::string(),
@@ -122,7 +122,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
 	new UI::Callback_Button<Main_Menu_Load_Map>
 		(this,
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Main_Menu_Load_Map::die, *this,
 		 _("Cancel"));
 

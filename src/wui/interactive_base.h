@@ -125,7 +125,7 @@ private:
 			 		 Widelands::TCoords<>
 			 		 	(Widelands::Coords(0, 0), Widelands::TCoords<>::D)),
 			 const uint32_t Radius                   = 0,
-			 const int32_t Pic                       = 0,
+			 const PictureID Pic                     = g_gr->get_no_picture(),
 			 const Overlay_Manager::Job_Id Jobid = Overlay_Manager::Job_Id::Null())
 			:
 			freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius),
@@ -135,7 +135,7 @@ private:
 		bool              triangles; //  otherwise nodes
 		Widelands::Node_and_Triangle<>     pos;
 		uint32_t              radius;
-		int32_t               pic;
+		PictureID             pic;
 		Overlay_Manager::Job_Id jobid;
 	} m_sel;
 
@@ -174,6 +174,7 @@ private:
 	UI::Textarea m_label_speed;
 };
 
-#define TOOLBAR_BUTTON_COMMON_PARAMETERS &m_toolbar, 0, 0, 34U, 34U, 2U
+#define PIC2 g_gr->get_picture(PicMod_UI, "pics/but2.png")
+#define TOOLBAR_BUTTON_COMMON_PARAMETERS &m_toolbar, 0, 0, 34U, 34U, PIC2
 
 #endif

@@ -17,6 +17,8 @@
  *
  */
 
+#include <iostream>
+
 #include "listselect.h"
 
 #include "constants.h"
@@ -107,22 +109,19 @@ void BaseListselect::clear() {
 void BaseListselect::add
 	(char const * const name,
 	 uint32_t           entry,
-	 int32_t      const picid,
+	 PictureID    const picid,
 	 bool         const sel)
 {
-	Entry_Record & er =
-		*static_cast<Entry_Record *>
-			(malloc(sizeof(Entry_Record) + strlen(name)));
+	Entry_Record * er = new Entry_Record();
 
-	er.m_entry = entry;
-	er.picid = picid;
-	er.use_clr = false;
-	strcpy(er.name, name);
-
+	er->m_entry = entry;
+	er->picid = picid;
+	er->use_clr = false;
+	er->name = std::string(name);
 	uint32_t entry_height = 0;
-	if (picid == -1)
+	if (picid == g_gr->get_no_picture()) {
 		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
-	else {
+	} else {
 		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
 		entry_height = (h >= g_fh->get_fontheight(m_fontname, m_fontsize))
@@ -134,7 +133,7 @@ void BaseListselect::add
 	if (entry_height > m_lineheight)
 		m_lineheight = entry_height;
 
-	m_entry_records.push_back(&er);
+	m_entry_records.push_back(er);
 
 	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
 
@@ -146,7 +145,7 @@ void BaseListselect::add
 
 void BaseListselect::add_front
 	(char const * const name,
-	 int32_t      const picid,
+	 PictureID    const picid,
 	 bool         const sel)
 {
 	Entry_Record & er = *static_cast<Entry_Record *>
@@ -158,10 +157,11 @@ void BaseListselect::add_front
 
 	er.picid = picid;
 	er.use_clr = false;
-	strcpy(er.name, name);
+	//strcpy(er.name, name);
+	er.name = std::string(name);
 
 	uint32_t entry_height = 0;
-	if (picid == -1)
+	if (picid == g_gr->get_no_picture())
 		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
 	else {
 		uint32_t w, h;
@@ -218,7 +218,7 @@ void BaseListselect::sort(const uint32_t Begin, uint32_t End)
 		for (uint32_t j = i + 1; j < End; ++j) {
 			Entry_Record * const eri = m_entry_records[i];
 			Entry_Record * const erj = m_entry_records[j];
-			if (strcmp(eri->name, erj->name) > 0)  {
+			if (strcmp(eri->name.c_str(), erj->name.c_str()) > 0) {
 				if      (m_selection == i) m_selection = j;
 				else if (m_selection == j) m_selection = i;
 				m_entry_records[i] = erj;
@@ -273,7 +273,7 @@ void BaseListselect::select(const uint32_t i)
 
 	if (m_show_check) {
 		if (m_selection != no_selection_index())
-			m_entry_records[m_selection]->picid = -1;
+			m_entry_records[m_selection]->picid = g_gr->get_no_picture();
 		m_entry_records[i]->picid = m_check_picid;
 	}
 	m_selection = i;
@@ -347,7 +347,7 @@ void BaseListselect::draw(RenderTarget & dst)
 		assert
 			(get_h()
 			 <
-			 static_cast<uint32_t>(std::numeric_limits<int32_t>::max()));
+			 static_cast<int32_t>(std::numeric_limits<int32_t>::max()));
 		if (y >= static_cast<int32_t>(get_h()))
 			return;
 
@@ -386,7 +386,7 @@ void BaseListselect::draw(RenderTarget & dst)
 			 -1);
 
 		// Now draw pictures
-		if (er.picid != -1) {
+		if (er.picid != g_gr->get_no_picture()) {
 			uint32_t w, h;
 			g_gr->get_picture_size(er.picid, w, h);
 			dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.picid);
@@ -450,7 +450,7 @@ void BaseListselect::remove(const uint32_t i)
 {
 	assert(i < m_entry_records.size());
 
-	free(m_entry_records[i]);
+	delete (m_entry_records[i]);
 	m_entry_records.erase(m_entry_records.begin() + i);
 	if (m_selection == i)
 		selected.call(m_selection = no_selection_index());
@@ -466,7 +466,7 @@ void BaseListselect::remove(const uint32_t i)
 void BaseListselect::remove(const char * const str)
 {
 	for (uint32_t i = 0; i < m_entry_records.size(); ++i) {
-		if (!strcmp(m_entry_records[i]->name, str)) {
+		if (!strcmp(m_entry_records[i]->name.c_str(), str)) {
 			remove(i);
 			return;
 		}

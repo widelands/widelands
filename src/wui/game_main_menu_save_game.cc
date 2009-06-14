@@ -62,7 +62,9 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 UI::UniqueWindow
 	(&parent, &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
 m_ls     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT),
-m_editbox(this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT, 1, 0),
+m_editbox
+	(this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT,
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 m_name_label
 	(this, DESCRIPTION_X,  5, 0, 20, _("Map Name: "),  Align_CenterLeft),
 m_name
@@ -74,7 +76,7 @@ m_gametime
 m_button_ok
 	(this,
 	 DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	 4,
+	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 &Game_Main_Menu_Save_Game::clicked_ok, *this,
 	 _("OK"),
 	 std::string(),
@@ -82,7 +84,7 @@ m_button_ok
 m_button_cancel
 	(this,
 	 DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	 4,
+	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 	 &Game_Main_Menu_Save_Game::die, *this,
 	 _("Cancel")),
 m_curdir(SaveHandler::get_base_dir())

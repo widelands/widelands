@@ -17,33 +17,56 @@
  *
  */
 
+#define BOOST_SP_DISABLE_THREADS
+#include <boost/shared_ptr.hpp>
+#include <stdint.h>
+
+#ifndef PICTURE_ID
+#define PICTURE_ID
+struct Picture;
+typedef boost::shared_ptr<Picture> PictureID;
+#endif
+
 #ifndef PICTURE_H
 #define PICTURE_H
 
-#include "rendertarget.h"
-#include "surface.h"
+/***
+ * Picture/PictureID
+ *
+ * PictureID is a reference to a picture
+ * picmod is used to specify which buffer picture is loaded in.
+ * warning: a picture can be loaded multiple times in multiple buffers
+ * when buffer is flushed pictures will hang around till the last reference
+ * is gone too
+ ***/
+
+
+struct RenderTarget;
+struct Surface;
 
 /// picture module flags
-enum {
-	PicMod_UI   = 0x01,
-	PicMod_Menu = 0x02,
-	PicMod_Game = 0x04,
-	PicMod_Font = 0x40,
-	PicSurface  = 0x80
+enum PicMod {
+	INVALID     = 0,
+	PicMod_UI   = 1,
+	PicMod_Menu = 2,
+	PicMod_Game = 3,
+	PicMod_Font = 4,
+	PicSurface  = 5,
+	MaxModule   = 6 //MaxModule ALWAYS has to be the 'size' of picmod
 };
 
 struct Picture {
-	Picture() : module(0), surface(0), fname(0), rendertarget(0) {}
-	/// 0 if unused, PicSurface for surfaces, PicMod_* bitmask for pictures
-	uint8_t   module;
+	Picture() : module(INVALID), surface(0), fname(0), rendertarget(0) {}
+	~Picture();
+	//void operator delete(void * p);
+
+	//PicMod lists which 'buffer' to load the images in.
+	// INVALID if unused, MaxModule not a legal module
+	PicMod    module;
 	Surface * surface;
 
-	//WTF ?!?! A union between char* (to be used as filename) and class* ?!?
-	//Why ?!?! #fweber
-	//  union {
-		char         * fname; //  module & (PicMod_UI|PicMod_Menu|PicMod_Game)
-		RenderTarget * rendertarget; //  module & (PicMod_Font | PicSurface)
-	//  } u;
+	char         * fname; //  module & (PicMod_UI|PicMod_Menu|PicMod_Game)
+	RenderTarget * rendertarget; //  module & (PicMod_Font | PicSurface)
 };
 
 #endif

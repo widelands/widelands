@@ -131,7 +131,8 @@ private:
 		struct Decrease_Permanent : public UI::Button {
 			Decrease_Permanent(Ware_Type_Box & parent) :
 				UI::Button
-					(&parent, 190, 0, 24, 24, 0,
+					(&parent, 190, 0, 24, 24,
+					 g_gr->get_no_picture(),
 					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 					 _("Decrease permanent target quantity"),
 					 true)
@@ -160,7 +161,8 @@ private:
 		struct Increase_Permanent : public UI::Button {
 			Increase_Permanent(Ware_Type_Box & parent) :
 				UI::Button
-					(&parent, 214, 0, 24, 24, 0,
+					(&parent, 214, 0, 24, 24,
+					 g_gr->get_no_picture(),
 					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 					 _("Increase permanent target quantity"))
 			{
@@ -187,7 +189,8 @@ private:
 		struct Decrease_Temporary : public UI::Button {
 			Decrease_Temporary(Ware_Type_Box & parent) :
 				UI::Button
-					(&parent, 280, 0, 24, 24, 0,
+					(&parent, 280, 0, 24, 24,
+					 g_gr->get_no_picture(),
 					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 					 _("Decrease temporary target quantity"))
 			{
@@ -216,7 +219,8 @@ private:
 		struct Increase_Temporary : public UI::Button {
 			Increase_Temporary(Ware_Type_Box & parent) :
 				UI::Button
-					(&parent, 304, 0, 24, 24, 0,
+					(&parent, 304, 0, 24, 24,
+					 g_gr->get_no_picture(),
 					 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 					 _("Increase temporary target quantity"))
 			{
@@ -242,7 +246,7 @@ private:
 		struct Reset : UI::Button {
 			Reset(Ware_Type_Box & parent) :
 				UI::Button
-					(&parent, 330, 0, 90, 24, 0,
+					(&parent, 330, 0, 90, 24, g_gr->get_no_picture(),
 					 _("Reset"), _("Reset target quantity to default value"))
 			{}
 			virtual void clicked() const {

@@ -67,19 +67,19 @@ m_variable(0),
 button_integer
 	(this,
 	 5, 5, 60, 20,
-	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 	 &New_Variable_Window::clicked_new, *this, Integer_Type,
 	 _("Integer")),
 button_string
 	(this,
 	 70, 5, 60, 20,
-	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 	 &New_Variable_Window::clicked_new, *this, String_Type,
 	 _("String")),
 button_back
 	(this,
 	 (get_inner_w() - 80) / 2, 30, 80, 20,
-	 1,
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 	 &New_Variable_Window::end_modal, *this, 0,
 	 _("Back"))
 {center_to_parent();}
@@ -162,21 +162,23 @@ m_te(te),
 
 //  what type
 m_label_name(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft),
-m_name(this, 120, 5, 120, 20, 0, 0),
-
+m_name
+	(this, 120, 5, 120, 20,
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0),
 m_label_value(this, 5, 30, 120, 20, _("Value"), Align_CenterLeft),
-m_value(this, 120, 35, 120, 20, 0, 0),
-
+m_value
+	(this, 120, 35, 120, 20,
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0),
 m_ok
 	(this,
 	 get_inner_w() / 2 - 80 - spacing, 60, 80, 20,
-	 1,
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 	 &Edit_Variable_Window::clicked_ok, *this,
 	 _("Ok")),
 m_back
 	(this,
 	 get_inner_w() / 2 + spacing, 60, 80, 20,
-	 1,
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 	 &Edit_Variable_Window::end_modal, *this, 0,
 	 _("Back"))
 {
@@ -251,13 +253,13 @@ m_table(this, 5, 5, get_inner_w() - 2 * spacing, get_inner_h() - 40),
 m_button_new
 	(this,
 	 get_inner_w() / 2 - 180 - spacing, get_inner_h() - 30, 120, 20,
-	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 	 &Editor_Variables_Menu::clicked_new, *this,
 	 _("New")),
 m_button_edit
 	(this,
 	 get_inner_w() / 2 - 60, get_inner_h() - 30, 120, 20,
-	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 	 &Editor_Variables_Menu::clicked_edit, *this,
 	 _("Edit"),
 	 std::string(),
@@ -265,7 +267,7 @@ m_button_edit
 m_button_del
 	(this,
 	 get_inner_w() / 2 + 60 + spacing, get_inner_h() - 30, 120, 20,
-	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 	 &Editor_Variables_Menu::clicked_del, *this,
 	 _("Delete"),
 	 std::string(),

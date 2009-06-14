@@ -31,13 +31,13 @@ namespace UI {
 Statebox::Statebox
 	(Panel             * const parent,
 	 Point               const p,
-	 uint32_t            const picid,
+	 PictureID           const picid,
 	 std::string const &       tooltip_text)
 	:
 	Panel  (parent, p.x, p.y, STATEBOX_WIDTH, STATEBOX_HEIGHT, tooltip_text),
 	m_flags(Is_Enabled)
 {
-	if (picid) {
+	if (picid != g_gr->get_no_picture()) {
 		uint32_t w, h;
 		g_gr->get_picture_size(picid, w, h);
 		set_size(w, h);

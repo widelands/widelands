@@ -26,6 +26,7 @@
 #include "font_handler.h"
 #include "i18n.h"
 #include "rendertarget.h"
+#include "texture.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
 
@@ -36,6 +37,7 @@
 #include <SDL_image.h>
 #include <SDL_rotozoom.h>
 #include <cstring>
+#include <iostream>
 
 Graphic *g_gr;
 
@@ -80,6 +82,8 @@ Graphic::Graphic
 	m_update_fullscreen(false),
 	m_roadtextures     (0)
 {
+	m_picturemap.resize(MaxModule);
+
 	for
 		(uint32_t i = 0, r = 0, g = 0, b = 0;
 		 i < 0x100;
@@ -182,24 +186,17 @@ Graphic::Graphic
 */
 Graphic::~Graphic()
 {
-	flush(PicMod_UI | PicMod_Menu | PicMod_Game);
-	delete m_roadtextures;
-	delete m_rendertarget;
+	for (size_t i = 1; i < m_picturemap.size(); ++i)
+		flush(static_cast<PicMod>(i));
 
-	std::vector<Picture>::size_type const pictures_size = m_pictures.size();
-	for (std::vector<Picture>::size_type i = 0; i < pictures_size; ++i)
-		if (m_pictures[i].module)
-			log
-				("WARNING: picture %zu with module = 0x%x has not been freed "
-				 "(u.{fname,rendertarget} = %p). Some code may try to free it "
-				 "later, which would cause undefined behaviour!!!\n",
-				 i, m_pictures[i].module, m_pictures[i].fname);
+	delete m_rendertarget;
+	delete m_roadtextures;
 }
 
 /**
  * Return the screen x resolution
 */
-int32_t Graphic::get_xres()
+int32_t Graphic::get_xres() const
 {
 	return m_screen.get_w();
 }
@@ -207,7 +204,7 @@ int32_t Graphic::get_xres()
 /**
  * Return the screen x resolution
 */
-int32_t Graphic::get_yres()
+int32_t Graphic::get_yres() const
 {
 	return m_screen.get_h();
 }
@@ -285,27 +282,16 @@ void Graphic::refresh(bool force)
  * Remove all resources (currently pictures) from the given modules.
  * \note flush(0) does nothing
 */
-void Graphic::flush(uint8_t const module) {
-	assert(not (module & ~(PicMod_UI | PicMod_Menu | PicMod_Game)));
+void Graphic::flush(PicMod const module) {
 	// Flush pictures
 
-	container_iterate(std::vector<Picture>, m_pictures, i) {
-		if        (!  i.current->module)             {
-			assert(0 == i.current->surface);
-			assert(0 == i.current->fname);
-			assert(0 == i.current->rendertarget);
-		} else if (! (i.current->module &= ~module)) {
-			//  Unmasked the modules that should be flushed.
-			// Once the picture is no longer in any mods, free it.
-			delete i.current->surface; i.current->surface = 0;
-			if (i.current->fname) {
-				m_picturemap.erase(i.current->fname);
-				free(i.current->fname); i.current->fname = 0;
-			}
+	//pmit b, e = m_picturemap.end();
+	for (size_t i = 0; i < m_picturemap.size(); ++i) {
+		if (static_cast<PicMod>(i) == module) {
+			m_picturemap[i].clear();
 		}
 	}
 
-	// Flush game items
 	if (!module || module & PicMod_Game) {
 		container_iterate_const(std::vector<Texture *>, m_maptextures, i)
 			delete *i.current;
@@ -330,23 +316,21 @@ void Graphic::flush(uint8_t const module) {
  *
  * \return 0 (a null-picture) if the picture cannot be loaded.
 */
-uint32_t Graphic::get_picture(uint8_t const module, char const * const fname) {
-	std::vector<Picture>::size_type id;
-
+PictureID & Graphic::get_picture(PicMod const module, const std::string & fname)
+{
 	//  Check if the picture is already loaded.
-	const picmap_t::const_iterator it = m_picturemap.find(fname);
+	pmit it = m_picturemap[module].find(fname);
 
-	if (it != m_picturemap.end())
-		id = it->second;
-	else {
+	if (it != m_picturemap[module].end()) {
+	} else {
 		SDL_Surface * bmp;
 
 		try {
-			bmp = LoadImage(fname);
+			bmp = LoadImage(fname.c_str());
 			//log("Graphic::get_picture(): loading picture '%s'\n", fname);
 		} catch (std::exception const & e) {
-			log("WARNING: Could not open %s: %s\n", fname, e.what());
-			return 0;
+			log("WARNING: Could not open %s: %s\n", fname.c_str(), e.what());
+			return get_no_picture();
 		}
 		// Convert the surface accordingly
 
@@ -355,43 +339,50 @@ uint32_t Graphic::get_picture(uint8_t const module, char const * const fname) {
 		SDL_FreeSurface(bmp);
 
 		// Fill in a free slot in the pictures array
-		id = find_free_picture();
+		Picture & pic = * new Picture();
+		m_picturemap[module].insert(std::make_pair(fname, &pic));
 
-		Picture & pic = m_pictures[id];
 
 		assert(pic.fname == 0);
-		pic.fname   = strdup(fname);
+		pic.fname   = strdup(fname.c_str());
 
-		assert(pic.fname); //  FIXME no proper check for NULL return value!
+		//  FIXME no proper check for NULL return value!
+		assert(pic.fname != 0);
 
 		pic.surface   = new Surface();
 
 		pic.surface->set_sdl_surface(use_surface);
-
-		m_picturemap[fname] = id;
+		it = m_picturemap[module].find(fname);
 	}
 
-	m_pictures[id].module = module;
+	it->second->module = module;
 
-	return id;
+	return it->second;
 }
 
-uint32_t Graphic::get_picture
-	(uint32_t const module, Surface & surf, char const * const fname)
+PictureID Graphic::get_picture
+(PicMod const module, Surface & surf, const std::string & fname)
 {
-	const std::vector<Picture>::size_type id = find_free_picture();
-	Picture & pic = m_pictures[id];
+	Picture & pic = * new Picture();
+	PictureID id = PictureID(&pic);
+	m_picturemap[module].insert(std::make_pair(fname, id));
+
 	pic.module    = module;
 	pic.surface   = &surf;
 
-	if (fname) {
+	if (fname.size() != 0) {
 		assert(pic.fname == 0);
-		pic.fname = strdup(fname);
-		m_picturemap[fname] = id;
+		pic.fname = strdup(fname.c_str());
 	} else
-		pic.fname =  0;
+		pic.fname = 0;
 
+	//return m_picturemap.find(fname);
 	return id;
+}
+
+PictureID & Graphic::get_no_picture() const {
+	static PictureID invalid = PictureID(new Picture());
+	return invalid;
 }
 
 /**
@@ -399,18 +390,18 @@ uint32_t Graphic::get_picture
  *
  * Might return same id if dimensions are the same
  */
-uint32_t Graphic::get_resized_picture
-	(uint32_t const index,
+PictureID Graphic::get_resized_picture
+	(PictureID index,
 	 uint32_t const w, uint32_t const h,
 	 ResizeMode const mode)
 {
-	if (index >= m_pictures.size() or !m_pictures[index].module)
-		throw wexception
-			("get_resized_picture(%i): picture does not exist", index);
+	//if (index >= m_pictures.size() or !m_pictures[index].module)
+	//throw wexception
+	//("get_resized_picture(%i): picture does not exist", index);
 
-	Surface * const orig = m_pictures[index].surface;
+	Surface * const orig = index->surface;
 	if (orig->get_w() == w and orig->get_h() == h)
-		return index;
+	  return index;
 
 	uint32_t width = w;
 	uint32_t height = h;
@@ -435,10 +426,10 @@ uint32_t Graphic::get_resized_picture
 		}
 	}
 
-	const uint32_t pic = g_gr->create_surface(w, h);
+	PictureID pic = g_gr->create_surface(w, h);
 
 	if (mode == ResizeMode_Loose || (width == w && height == h))
-		m_pictures[pic].surface->set_sdl_surface(*resize(index, w, h));
+		pic->surface->set_sdl_surface(*resize(index, w, h));
 	else {
 
 		Surface src;
@@ -454,7 +445,7 @@ uint32_t Graphic::get_resized_picture
 
 		g_gr->get_surface_renderer(pic)->blitrect //  Get the rendertarget
 			(Point((w - srcrc.w) / 2, (h - srcrc.h) / 2),
-			 get_picture(m_pictures[index].module, src), srcrc);
+			 get_picture(index->module, src), srcrc);
 	}
 
 	return pic;
@@ -469,7 +460,7 @@ uint32_t Graphic::get_resized_picture
  * \return resized version of picture
  */
 SDL_Surface * Graphic::resize
-	(uint32_t const index, uint32_t const w, uint32_t const h)
+	(const PictureID index, uint32_t const w, uint32_t const h)
 {
 	Surface & orig = *g_gr->get_picture_surface(index);
 
@@ -485,19 +476,20 @@ SDL_Surface * Graphic::resize
  * Stores the picture size in pw and ph.
  * Throws an exception if the picture doesn't exist.
 */
-void Graphic::get_picture_size(const uint32_t pic, uint32_t & w, uint32_t & h)
+void Graphic::get_picture_size
+	(const PictureID & pic, uint32_t & w, uint32_t & h) const
 {
-	if (pic >= m_pictures.size() || !m_pictures[pic].module)
-		throw wexception("get_picture_size(%i): picture does not exist", pic);
+  //if (pic >= m_pictures.size() || !m_pictures[pic].module)
+  //throw wexception("get_picture_size(%i): picture does not exist", pic);
 
-	Surface & bmp = *m_pictures[pic].surface;
+	Surface & bmp = *pic->surface;
 
 	w = bmp.get_w();
 
 	h = bmp.get_h();
 }
 
-void Graphic::save_png(uint32_t pic_index, StreamWrite * const sw)
+void Graphic::save_png(const PictureID & pic_index, StreamWrite * const sw)
 {
 	Surface & surf = *get_picture_surface(pic_index);
 
@@ -579,7 +571,7 @@ void Graphic::save_png(uint32_t pic_index, StreamWrite * const sw)
  * A RenderTarget for the surface can be obtained using get_surface_renderer().
  * \note Surfaces do not belong to a module and must be freed explicitly.
 */
-uint32_t Graphic::create_surface(int32_t w, int32_t h)
+PictureID Graphic::create_surface(int32_t w, int32_t h)
 {
 	const SDL_PixelFormat & format = m_screen.format();
 	SDL_Surface & surf =
@@ -589,8 +581,10 @@ uint32_t Graphic::create_surface(int32_t w, int32_t h)
 			 format.BitsPerPixel,
 			 format.Rmask, format.Gmask, format.Bmask, format.Amask);
 
-	const std::vector<Picture>::size_type id = find_free_picture();
-	Picture & pic = m_pictures[id];
+	Picture & pic = *new Picture();
+	PictureID id = PictureID(&pic);
+	m_picturemap[PicSurface].insert(std::make_pair("", id));
+
 	pic.module    = PicSurface; // mark as surface
 	pic.surface   = new Surface();
 	pic.surface->set_sdl_surface(surf);
@@ -604,36 +598,45 @@ uint32_t Graphic::create_surface(int32_t w, int32_t h)
  * Free the given surface.
  * Unlike normal pictures, surfaces are not freed by flush().
 */
-void Graphic::free_surface(uint32_t const picid) {
-	assert(picid < m_pictures.size());
+void Graphic::free_surface(const PictureID & picid) {
+	//assert(picid < m_pictures.size());
 	if
-		(m_pictures[picid].module != PicMod_Font &&
-		 m_pictures[picid].module != PicSurface)
+		(picid->module != PicMod_Font &&
+		 picid->module != PicSurface)
 	{
 		log
-			("Graphic::free_surface ignoring free of %u %u %s\n",
-			 picid, m_pictures[picid].module, m_pictures[picid].fname);
+			("Graphic::free_surface ignoring free of %u %s\n",
+			 picid->module, picid->fname);
 		return;
 	}
 	assert
-		(m_pictures[picid].module == PicMod_Font
+		(picid->module == PicMod_Font
 		 ||
-		 m_pictures[picid].module == PicSurface);
+		 picid->module == PicSurface);
 
-	Picture & pic = m_pictures[picid];
 
-	delete pic.rendertarget;
-	pic.rendertarget = 0;
-	delete pic.fname;
-	pic.fname = 0;
-	delete pic.surface;
-	pic.surface = 0;
-	pic.module = 0;
+	//Picture & pic = m_pictures[picid];
+
+	//delete picid->rendertarget;
+	//pic.rendertarget = 0;
+	//delete picid->fname;
+	//pic.fname = 0;
+	//delete pic->surface;
+	//pic.surface = 0;
+	//pic.module = 0;
+	pmit b, e = m_picturemap[picid->module].end();
+	for (b = m_picturemap[picid->module].begin(); b != e; ++b) {
+		if (b->second == picid)
+			break;
+	}
+	if (b != e) {
+		m_picturemap[picid->module].erase(b);
+	}
 }
 
 
-uint32_t Graphic::create_grayed_out_pic(uint32_t const picid) {
-	if (picid) {
+PictureID Graphic::create_grayed_out_pic(const PictureID & picid) {
+	if (picid == get_no_picture()) {
 		Surface & s = *new Surface(*get_picture_surface(picid));
 		SDL_PixelFormat const & format = s.format();
 		uint32_t const w = s.get_w(), h = s.get_h();
@@ -666,18 +669,18 @@ uint32_t Graphic::create_grayed_out_pic(uint32_t const picid) {
 			}
 		return get_picture(PicSurface, s);
 	} else
-		return 0;
+		return get_no_picture();
 }
 
 
 /**
  * Returns the RenderTarget for the given surface
 */
-RenderTarget * Graphic::get_surface_renderer(uint32_t const pic) {
-	assert(pic < m_pictures.size());
+RenderTarget * Graphic::get_surface_renderer(const PictureID & pic) {
+	//assert(pic < m_pictures.size());
 	//  assert(m_pictures[pic].module == 0xff); fails showing terrains in editor
 
-	RenderTarget & rt = *m_pictures[pic].rendertarget;
+	RenderTarget & rt = *pic->rendertarget;
 
 	rt.reset();
 
@@ -818,34 +821,37 @@ void Graphic::m_png_flush_function
 
 /**
  * Find a free picture slot and return it.
-*/
-std::vector<Picture>::size_type Graphic::find_free_picture()
+ * FIXME: remove this function
+ */
+/*
+PictureID Graphic::find_free_picture()
 {
-	const std::vector<Picture>::size_type pictures_size = m_pictures.size();
-	std::vector<Picture>::size_type id = 1;
+	const PictureID pictures_size = m_pictures.end();
+	PictureID id = m_pictures.begin();
 
-	for (; id < pictures_size; ++id)
-		if (m_pictures[id].module == 0)
+	for (; id != pictures_size; ++id)
+		if (id->module == 0)
 			return id;
 
-	m_pictures.resize(id + 1);
+	m_pictures.resize(m_picture);
 
 	return id;
 }
-
+*/
 /**
  * Returns the bitmap that belongs to the given picture ID.
  * May return 0 if the given picture does not exist.
 */
-Surface * Graphic::get_picture_surface(uint32_t const id)
+Surface * Graphic::get_picture_surface(const PictureID & id)
 {
-	if (id >= m_pictures.size())
-		return 0;
+	//assert(id != get_no_picture());
 
-	if (!m_pictures[id].module)
-		return 0;
+	return id->surface;
+}
 
-	return m_pictures[id].surface;
+const Surface * Graphic::get_picture_surface(const PictureID & id) const
+{
+	return id->surface;
 }
 
 /**

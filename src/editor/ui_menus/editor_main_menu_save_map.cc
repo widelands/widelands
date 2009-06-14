@@ -75,7 +75,8 @@ m_parent  (parent) //  FIXME redundant (base has parent pointer)
 			(this,
 			 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
 			 get_inner_w() / 2 - spacing, 20,
-			 1, 0);
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+			 0);
 	m_editbox->setText(parent->egbase().map().get_name());
 	m_editbox->changed.set(this, &Main_Menu_Save_Map::edit_box_changed);
 
@@ -128,21 +129,21 @@ m_parent  (parent) //  FIXME redundant (base has parent pointer)
 	m_ok_btn = new UI::Callback_Button<Main_Menu_Save_Map>
 		(this,
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Main_Menu_Save_Map::clicked_ok, *this,
 		 _("OK"));
 
 	new UI::Callback_Button<Main_Menu_Save_Map>
 		(this,
 		 get_inner_w() / 2 + spacing, posy, 80, 20,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Main_Menu_Save_Map::die, *this,
 		 _("Cancel"));
 
 	new UI::Callback_Button<Main_Menu_Save_Map>
 		(this,
 		 spacing, posy, 120, 20,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Main_Menu_Save_Map::clicked_make_directory, *this,
 		 _("Make Directory"));
 

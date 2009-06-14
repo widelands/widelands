@@ -90,25 +90,26 @@ void Font_Handler::draw_string
 	 Align               const align,
 	 int32_t             const wrap,
 	 Widget_Cache        const widget_cache,
-	 uint32_t          * const widget_cache_id,
+	 PictureID         * const widget_cache_id,
 	 int32_t             const caret,
 	 bool                const transparent)
 {
 	TTF_Font & font = *m_font_loader->get_font(fontname, fontsize);
 	//Width and height of text, needed for alignment
 	uint32_t w, h;
-	uint32_t picid;
+	PictureID picid;
 	//Fontrender takes care of caching
 	if (widget_cache == Widget_Cache_None) {
 		// look if text is cached
-		_Cache_Infos  ci = {0, text, &font, fg, bg, caret, 0, 0};
+		_Cache_Infos  ci =
+			{g_gr->get_no_picture(), text, &font, fg, bg, caret, 0, 0};
 
 		std::list<_Cache_Infos>::iterator i =
 			find(m_cache.begin(), m_cache.end(), ci);
 
 		if (i != m_cache.end())  {
 			// Ok, it is cached, blit it and done
-			picid = i->surface_id;
+			picid = i->picture_id;
 			w = i->w;
 			h = i->h;
 			if (i != m_cache.begin()) {
@@ -118,20 +119,20 @@ void Font_Handler::draw_string
 		}
 		else {
 			//not cached, create a new surface
-			ci.surface_id =
+			ci.picture_id =
 				create_text_surface
 				(font, fg, bg, text, align, wrap, caret, transparent);
 			// Now cache it
-			g_gr->get_picture_size(ci.surface_id, ci.w, ci.h);
+			g_gr->get_picture_size(ci.picture_id, ci.w, ci.h);
 			ci.f = &font;
 			m_cache.push_front (ci);
 
 			while (m_cache.size() > CACHE_ARRAY_SIZE) {
-				g_gr->free_surface(m_cache.back().surface_id);
+				g_gr->free_surface(m_cache.back().picture_id);
 				m_cache.pop_back();
 			}
 			//Set for alignment and blitting
-			picid = ci.surface_id;
+			picid = ci.picture_id;
 			w = ci.w;
 			h = ci.h;
 		}
@@ -158,7 +159,7 @@ void Font_Handler::draw_string
 /*
 * Creates a Widelands surface of the given text, checks if multiline or not
 */
-uint32_t Font_Handler::create_text_surface
+PictureID Font_Handler::create_text_surface
 	(TTF_Font & f, RGBColor const fg, RGBColor const bg,
 	 std::string const & text, Align const align, int32_t const wrap,
 	 int32_t const caret, bool const transparent)
@@ -353,10 +354,10 @@ void Font_Handler::draw_richtext
 	 std::string          text,
 	 int32_t              wrap,
 	 Widget_Cache         widget_cache,
-	 uint32_t     * const widget_cache_id,
+	 PictureID    * const widget_cache_id,
 	 bool           const transparent)
 {
-	uint32_t picid;
+	PictureID picid;
 	if (widget_cache == Widget_Cache_Use) {
 		//g_gr->get_picture_size(*widget_cache_id, &w, &h);
 		picid = *widget_cache_id;
@@ -651,7 +652,7 @@ SDL_Surface * Font_Handler::render_space
 
 //gets size of picid
 void Font_Handler::get_size_from_cache
-	(uint32_t const widget_cache_id, uint32_t & w, uint32_t & h)
+	(PictureID const widget_cache_id, uint32_t & w, uint32_t & h)
 {
 	g_gr->get_picture_size(widget_cache_id, w, h);
 }
@@ -726,7 +727,7 @@ SDL_Surface * Font_Handler::join_sdl_surfaces
  *
  * If transparent is true, background is transparent
  */
-uint32_t Font_Handler::convert_sdl_surface
+PictureID Font_Handler::convert_sdl_surface
 	(SDL_Surface & surface, RGBColor const bg, bool const transparent)
 {
 	Surface & surf = *new Surface();
@@ -738,7 +739,7 @@ uint32_t Font_Handler::convert_sdl_surface
 
 	surf.set_sdl_surface(surface);
 
-	uint32_t picid = g_gr->get_picture(PicMod_Font, surf);
+	PictureID picid = g_gr->get_picture(PicMod_Font, surf);
 	return picid;
 }
 
@@ -770,12 +771,12 @@ void Font_Handler::do_align
  */
 void Font_Handler::flush_cache() {
 	while (!m_cache.empty()) {
-		g_gr->free_surface (m_cache.front().surface_id);
+		g_gr->free_surface (m_cache.front().picture_id);
 		m_cache.pop_front();
 	}
 }
 //Deletes widget controlled surface
-void Font_Handler::delete_widget_cache(uint32_t const widget_cache_id) {
+void Font_Handler::delete_widget_cache(PictureID const widget_cache_id) {
 	g_gr->free_surface(widget_cache_id);
 }
 

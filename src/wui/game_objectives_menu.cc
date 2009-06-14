@@ -62,14 +62,16 @@ m_claim_victory
 	 25,
 	 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5,
 	 BUTTON_WIDTH, BUTTON_HEIGHT,
-	 4, &GameObjectivesMenu::claim_victory, *this,
+	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+	 &GameObjectivesMenu::claim_victory, *this,
 	 _("Claim Victory"), std::string(), false),
 m_restart_mission
 	(this,
 	 25 + BUTTON_WIDTH + 25,
 	 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5,
 	 BUTTON_WIDTH, BUTTON_HEIGHT,
-	 4, &GameObjectivesMenu::restart_mission, *this,
+	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+	 &GameObjectivesMenu::restart_mission, *this,
 	 _("Restart Mission")),
 m_player(plr)
 {

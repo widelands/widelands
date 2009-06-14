@@ -88,7 +88,7 @@ private:
 			UI::Button
 				(&parent,
 				 0, h - 34, 34, 34,
-				 20,
+				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 				 g_gr->get_picture(PicMod_UI, "pics/menu_watch_follow.png"),
 				 _("Follow"))
 		{}
@@ -150,7 +150,7 @@ private:
 			UI::Button
 				(&parent,
 				 34, h - 34, 34, 34,
-				 21,
+				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 				 g_gr->get_picture(PicMod_UI, "pics/menu_goto.png"),
 				 _("Center mainview on this"))
 		{}
@@ -174,7 +174,7 @@ private:
 			UI::Button
 				(&parent,
 				 w - 34, h - 34, 34, 34,
-				 22,
+				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 				 g_gr->get_picture(PicMod_UI, "pics/menu_abort.png"),
 				 _("Close"),
 				 visible)
@@ -203,7 +203,7 @@ private:
 		View_Button(WatchWindow & parent, uint8_t const index) :
 			UI::Button
 				(&parent,
-				 74 + (17 * index), 200 - 34, 17, 34, 0,
+				 74 + (17 * index), 200 - 34, 17, 34, g_gr->get_no_picture(),
 				 "-", std::string(),
 				 false),
 			m_index   (index)

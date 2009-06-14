@@ -1596,8 +1596,11 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
 						// the destruction of the flag avoids that defaultAI will have
 						// too many unused roads - if needed the road will be rebuild
 						// directly.
-						if ((ms->maxSoldierCapacity() * 2) < bf.military_influence)
+						if
+						  (static_cast<int32_t>((ms->maxSoldierCapacity() * 2))
+							< bf.military_influence)
 							game().send_player_bulldoze(ms->base_flag());
+
 						// Else consider enhancing the building (if possible)
 						else {
 							// Do not have too many constructionsites

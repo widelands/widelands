@@ -62,7 +62,7 @@ m_player_area(event.m_player_area)
 		new UI::EditBox
 			(this,
 			 spacing + 60, posy, get_inner_w() - 2 * spacing - 60, 20,
-			 0, 0);
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"));
 	m_name->setText(event.name());
 	posy += 20 + spacing;
 
@@ -76,43 +76,43 @@ m_player_area(event.m_player_area)
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 20, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 3);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 20, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 4);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 40, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 5);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 40, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 6);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 60, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 7);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 60, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 8);
 
 	new UI::Textarea
@@ -128,43 +128,43 @@ m_player_area(event.m_player_area)
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 9);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 10);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 20, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 11);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 20, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 12);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 40, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 13);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 40, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 14);
 
 	new UI::Textarea(this, spacing, posy + 20, 20, 20, "Y: ", Align_CenterLeft);
@@ -182,15 +182,15 @@ m_player_area(event.m_player_area)
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 90, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 15);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 110, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 16);
 
 	posy += 20 + spacing;
@@ -200,43 +200,43 @@ m_player_area(event.m_player_area)
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 70, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 17);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 70, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 18);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 90, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 19);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 90, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 20);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 110, posy, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 21);
 
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 spacing + 110, posy + 40, 20, 20,
-		 0,
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked, *this, 22);
 
 	m_area_ta = new UI::Textarea
@@ -249,7 +249,7 @@ m_player_area(event.m_player_area)
 	new UI::Callback_Button<Event_Unhide_Area_Option_Menu>
 		(this,
 		 posx, posy, 60, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Event_Unhide_Area_Option_Menu::clicked_ok, *this,
 		 _("Ok"));
 
@@ -258,7 +258,7 @@ m_player_area(event.m_player_area)
 	new UI::Callback_IDButton<Event_Unhide_Area_Option_Menu, int32_t>
 		(this,
 		 posx, posy, 60, 20,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Event_Unhide_Area_Option_Menu::end_modal, *this, 0,
 		 _("Cancel"));
 

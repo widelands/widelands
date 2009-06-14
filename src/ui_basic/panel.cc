@@ -32,7 +32,7 @@ namespace UI {
 Panel *Panel::_modal = 0;
 Panel *Panel::_g_mousegrab = 0;
 Panel *Panel::_g_mousein = 0;
-uint32_t Panel::s_default_cursor = 0;
+PictureID Panel::s_default_cursor = g_gr->get_no_picture();
 
 
 /**
@@ -44,7 +44,8 @@ Panel::Panel
 	 const std::string & tooltip_text)
 	:
 	_parent(nparent), _fchild(0), _lchild(0), _mousein(0), _focus(0),
-	_flags(pf_handle_mouse|pf_think|pf_visible), _cache(0), _needdraw(false),
+	_flags(pf_handle_mouse|pf_think|pf_visible),
+	_cache(g_gr->get_no_picture()), _needdraw(false),
 	_x(nx), _y(ny), _w(nw), _h(nh),
 	_lborder(0), _rborder(0), _tborder(0), _bborder(0),
 	_border_snap_distance(0), _panel_snap_distance(0),
@@ -71,7 +72,7 @@ Panel::~Panel()
 {
 	update(0, 0, get_w(), get_h());
 
-	if (_cache)
+	if (_cache != g_gr->get_no_picture())
 		g_gr->free_surface(_cache);
 
 	// Release pointers to this object
@@ -244,7 +245,7 @@ void Panel::set_size(const uint32_t nw, const uint32_t nh)
 	if (nw > upw) upw = nw;
 	if (nh > uph) uph = nh;
 
-	if (_cache) {
+	if (_cache != g_gr->get_no_picture()) {
 		g_gr->free_surface(_cache);
 		_cache = g_gr->create_surface(_w, _h);
 	}
@@ -674,7 +675,7 @@ void Panel::do_draw(RenderTarget & dst)
 	if (!is_visible())
 		return;
 
-	if (!_cache)
+	if (_cache == g_gr->get_no_picture())
 	{
 		Rect outerrc;
 		Point outerofs;

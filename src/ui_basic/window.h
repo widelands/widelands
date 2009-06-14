@@ -95,11 +95,11 @@ private:
 
 	std::string m_title;
 
-	uint32_t m_pic_lborder;
-	uint32_t m_pic_rborder;
-	uint32_t m_pic_top;
-	uint32_t m_pic_bottom;
-	uint32_t m_pic_background;
+	PictureID m_pic_lborder;
+	PictureID m_pic_rborder;
+	PictureID m_pic_top;
+	PictureID m_pic_bottom;
+	PictureID m_pic_background;
 };
 };
 

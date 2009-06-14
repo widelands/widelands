@@ -27,7 +27,7 @@ struct Radiobutton : public Statebox {
 	friend class Radiogroup;
 
 	Radiobutton
-		(Panel * parent, Point, uint32_t picid, Radiogroup &, int32_t id);
+		(Panel * parent, Point, PictureID picid, Radiogroup &, int32_t id);
 	~Radiobutton();
 
 private:
@@ -44,7 +44,7 @@ private:
 Radiobutton::Radiobutton
 	(Panel      * const parent,
 	 Point        const p,
-	 uint32_t     const picid,
+	 PictureID    const picid,
 	 Radiogroup &       group,
 	 int32_t      const id)
 	:
@@ -111,7 +111,7 @@ Radiogroup::~Radiogroup() {while (m_buttons) delete m_buttons;}
 int32_t Radiogroup::add_button
 	(Panel      * const parent,
 	 Point        const p,
-	 uint32_t     const picid,
+	 PictureID    const picid,
 	 char const * const tooltip)
 {
 	++m_highestid;

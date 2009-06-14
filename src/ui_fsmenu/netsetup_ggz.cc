@@ -85,30 +85,32 @@ maxplayers
 joingame
 	(this,
 	 m_lisw + m_xres * 85 / 1000, m_yres * 55 / 100, m_lisw * 4 / 5, m_buth,
-	 1,
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 	 &Fullscreen_Menu_NetSetupGGZ::clicked_joingame, *this,
 	 _("Join this game"), std::string(), false, false,
 	 m_fn, m_fs),
 hostgame
 	(this,
 	 m_xres * 17 / 25, m_yres * 46 / 100, m_butw, m_buth,
-	 1,
+	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 	 &Fullscreen_Menu_NetSetupGGZ::clicked_hostgame, *this,
 	 _("Open a new game"), std::string(), true, false,
 	 m_fn, m_fs),
 back
 	(this,
 	 m_xres * 17 / 25, m_yres * 55 / 100, m_butw, m_buth,
-	 0,
+	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 	 &Fullscreen_Menu_NetSetupGGZ::end_modal, *this, CANCEL,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs),
 
 // Edit boxes
 playername
-	(this, m_xres * 17 / 25, m_yres     /  5, m_butw, m_buth, 2, 0),
+	(this, m_xres * 17 / 25, m_yres     /  5, m_butw, m_buth,
+	 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
 servername
-	(this, m_xres * 17 / 25, m_yres * 33 / 100, m_butw, m_buth, 2, 0),
+	(this, m_xres * 17 / 25, m_yres * 33 / 100, m_butw, m_buth,
+	 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
 
 // List
 usersonline
@@ -215,13 +217,13 @@ void Fullscreen_Menu_NetSetupGGZ::fillServersList
 	for (uint32_t i = 0; i < tables.size(); ++i) {
 		Net_Open_Game newOG;
 		newOG.info = Net_Game_Info(tables[i]);
-		uint32_t pic;
+		PictureID pic;
 		switch (newOG.info.state) {
 			case LAN_GAME_OPEN:
-				pic = g_gr->get_picture(PicMod_Game, "pics/continue.png");
+				pic = g_gr->get_picture(PicMod_UI, "pics/continue.png");
 				break;
 			case LAN_GAME_CLOSED:
-				pic = g_gr->get_picture(PicMod_Game, "pics/stop.png");
+				pic = g_gr->get_picture(PicMod_UI, "pics/stop.png");
 				break;
 			default:
 				continue;

@@ -73,7 +73,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
 		 *this, Widelands::TriggerConditional_Factory::LPAREN,
 		 _("("));
@@ -85,7 +85,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
 		 *this, Widelands::TriggerConditional_Factory::RPAREN,
 		 _(")"));
@@ -97,7 +97,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
 		 *this, Widelands::TriggerConditional_Factory::AND,
 		 _("AND"));
@@ -109,7 +109,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
 		 *this, Widelands::TriggerConditional_Factory::OR,
 		 _("OR"));
@@ -121,7 +121,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
 		 *this, Widelands::TriggerConditional_Factory::XOR,
 		 _("XOR"));
@@ -133,7 +133,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 		Widelands::TriggerConditional_Factory::TokenNames>
 		(this,
 		 posx, posy, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_operator,
 		 *this, Widelands::TriggerConditional_Factory::NOT,
 		 _("NOT"));
@@ -144,7 +144,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 		UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
 		 posx, posy, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_ins_trigger, *this,
 		 _("<-"),
 		 _("Insert"),
@@ -156,7 +156,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 		UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
 		 posx, posy, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_del_trigger, *this,
 		 _("Delete"),
 		 std::string(),
@@ -168,7 +168,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 		UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
 		 posx + 5, posy, 24, 24,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_move_up, *this,
 		 std::string(),
@@ -178,7 +178,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 		UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
 		 posx + 51, posy, 24, 24,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_move_down, *this,
 		 std::string(),
@@ -210,7 +210,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 	new UI::Callback_Button<Editor_Event_Menu_Edit_TriggerConditional>
 		(this,
 		 posx, posy, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu_Edit_TriggerConditional::clicked_ok, *this,
 		 _("Ok"));
 
@@ -219,7 +219,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 	new UI::Callback_IDButton<Editor_Event_Menu_Edit_TriggerConditional, int32_t>
 		(this,
 		 posx, posy, 80, 20,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Editor_Event_Menu_Edit_TriggerConditional::end_modal, *this, 0,
 		 _("Cancel"));
 
@@ -236,7 +236,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 				 :
 				 Widelands::TriggerConditional_Factory::operators[t.token],
 				 t,
-				 -1,
+				 g_gr->get_no_picture(),
 				 true);
 		}
 	}
@@ -298,7 +298,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_operator
 	m_construction->add
 		(Widelands::TriggerConditional_Factory::operators[i],
 		 *new Widelands::TriggerConditional_Factory::Token(i),
-		 -1,
+		 g_gr->get_no_picture(),
 		 true);
 }
 
@@ -309,7 +309,7 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ins_trigger() {
 		(trigger.name().c_str(),
 		 *new Widelands::TriggerConditional_Factory::Token
 		 	(Widelands::TriggerConditional_Factory::TRIGGER, &trigger),
-		 -1,
+		 g_gr->get_no_picture(),
 		 true);
 }
 

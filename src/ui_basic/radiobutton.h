@@ -20,6 +20,7 @@
 #ifndef UI_RADIOBUTTON_H
 #define UI_RADIOBUTTON_H
 
+#include "graphic/picture.h"
 #include "point.h"
 #include "m_signal.h"
 
@@ -46,7 +47,7 @@ struct Radiogroup {
 	Signal clicked; //  clicked without things changed
 
 	int32_t add_button
-		(Panel * parent, Point, uint32_t picid, char const * tooltip = 0);
+		(Panel * parent, Point, PictureID picid, char const * tooltip = 0);
 
 	int32_t get_state() const throw () {return m_state;}
 	void set_state(int32_t state);

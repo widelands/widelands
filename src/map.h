@@ -433,7 +433,7 @@ private:
 		enum Type {
 			PIC,
 		};
-		uint32_t    data;
+		PictureID   data;
 		std::string filename;
 		Type        type;
 	};

@@ -55,7 +55,8 @@ m_event_chain(chain)
 	new UI::Textarea(this, pos.x, pos.y, 60, 20, _("Name: "), Align_CenterLeft);
 	m_name =
 		new UI::EditBox
-			(this, pos.x + 60, pos.y, get_inner_w() - 2 * spacing - 60, 20, 0, 0);
+			(this, pos.x + 60, pos.y, get_inner_w() - 2 * spacing - 60, 20,
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"), 0);
 	m_name->setText(m_event_chain.name());
 	pos.y += 20 + spacing;
 
@@ -83,7 +84,7 @@ m_event_chain(chain)
 	new UI::Callback_Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
 		 pos.x, pos.y, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional,
 		 *this,
 		 _("Conditional"));
@@ -93,7 +94,7 @@ m_event_chain(chain)
 	new UI::Callback_Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
 		 pos.x, pos.y, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu_Edit_EventChain::clicked_new_event, *this,
 		 _("New Event"));
 
@@ -102,7 +103,7 @@ m_event_chain(chain)
 	m_insert_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
 		 pos.x, pos.y, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu_Edit_EventChain::clicked_ins_event, *this,
 		 "<-",
 		 _("Insert"),
@@ -113,7 +114,7 @@ m_event_chain(chain)
 	m_delete_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
 		 pos.x, pos.y, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu_Edit_EventChain::clicked_del_event, *this,
 		 _("Delete"),
 		 std::string(),
@@ -124,7 +125,7 @@ m_event_chain(chain)
 	m_mvup_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
 		 pos.x + 5, pos.y, 24, 24,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Editor_Event_Menu_Edit_EventChain::clicked_move_up, *this,
 		 _("Up"),
@@ -133,7 +134,7 @@ m_event_chain(chain)
 	m_mvdown_btn = new UI::Callback_Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
 		 pos.x + 51, pos.y, 24, 24,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Editor_Event_Menu_Edit_EventChain::clicked_move_down, *this,
 		 std::string(),
@@ -162,7 +163,7 @@ m_event_chain(chain)
 	new UI::Callback_Button<Editor_Event_Menu_Edit_EventChain>
 		(this,
 		 pos.x, pos.y, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu_Edit_EventChain::clicked_ok, *this,
 		 _("Ok"));
 
@@ -171,7 +172,7 @@ m_event_chain(chain)
 	new UI::Callback_IDButton<Editor_Event_Menu_Edit_EventChain, int32_t>
 		(this,
 		 pos.x, pos.y, 80, 20,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Editor_Event_Menu_Edit_EventChain::end_modal, *this, 0,
 		 _("Cancel"));
 
@@ -241,7 +242,7 @@ void Editor_Event_Menu_Edit_EventChain::clicked_edit_trigger_contitional() {
 
 void Editor_Event_Menu_Edit_EventChain::clicked_ins_event() {
 	Widelands::Event & event = m_available_events->get_selected();
-	m_events->add(event.name().c_str(), event, -1, true);
+	m_events->add(event.name().c_str(), event, g_gr->get_no_picture(), true);
 }
 
 

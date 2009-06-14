@@ -122,9 +122,9 @@ template <> struct Table<void *> : public Panel {
 
 		void set_picture
 			(uint32_t column,
-			 uint32_t picid, std::string const & = std::string());
+			 PictureID picid, std::string const & = std::string());
 		void set_string(uint32_t column, const std::string &);
-		int32_t get_picture(uint32_t column) const;
+		PictureID get_picture(uint32_t column) const;
 		const std::string & get_string(uint32_t column) const;
 		void * entry() const throw () {return m_entry;}
 		void set_color(const  RGBColor c) {
@@ -141,7 +141,7 @@ template <> struct Table<void *> : public Panel {
 		bool     use_clr;
 		RGBColor clr;
 		struct _data {
-			int32_t     d_picture;
+			PictureID   d_picture;
 			std::string d_string;
 		};
 		std::vector<_data> m_data;

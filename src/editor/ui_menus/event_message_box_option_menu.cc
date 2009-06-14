@@ -67,7 +67,7 @@ m_event   (event)
 		new UI::EditBox
 			(this,
 			 spacing + 60, pos.y, get_inner_w() / 2 - 60 - 2 * spacing, 20,
-			 0, 0);
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"), 0);
 	m_name->setText(event.name());
 	pos.y += 20 + spacing;
 
@@ -87,7 +87,8 @@ m_event   (event)
 	pos.x += 100;
 	m_window_title =
 		new UI::EditBox
-			(this, pos.x, pos.y, get_inner_w() - 100 - 2 * spacing, 20, 0, 2);
+			(this, pos.x, pos.y, get_inner_w() - 100 - 2 * spacing, 20,
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"), 2);
 	m_window_title->setText(m_event.get_window_title());
 
 	pos.x  =      spacing;
@@ -111,7 +112,7 @@ m_event   (event)
 	new UI::Callback_Button<Event_Message_Box_Option_Menu>
 		(this,
 		 pos.x, pos.y, 20, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Event_Message_Box_Option_Menu::clicked_number_of_buttons_decrease,
 		 *this);
@@ -124,7 +125,7 @@ m_event   (event)
 	new UI::Callback_Button<Event_Message_Box_Option_Menu>
 		(this,
 		 pos.x, pos.y, 20, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Message_Box_Option_Menu::clicked_number_of_buttons_increase,
 		 *this);
@@ -134,7 +135,9 @@ m_event   (event)
 	new UI::Textarea
 		(this, pos.x, pos.y, 100, 20, _("Button Name: "), Align_CenterLeft);
 	pos.x += 110;
-	m_button_name = new UI::EditBox(this, pos.x, pos.y, 100, 20, 0, 3);
+	m_button_name = new UI::EditBox
+		(this, pos.x, pos.y, 100, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"), 3);
 	m_button_name->changedid.set
 		(this, &Event_Message_Box_Option_Menu::edit_box_edited);
 
@@ -157,7 +160,7 @@ m_event   (event)
 	new UI::Callback_Button<Event_Message_Box_Option_Menu>
 		(this,
 		 pos.x, pos.y, 20, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Event_Message_Box_Option_Menu::clicked_trigger_sel_decrease, *this);
 
@@ -165,7 +168,7 @@ m_event   (event)
 	new UI::Callback_Button<Event_Message_Box_Option_Menu>
 		(this,
 		 pos.x, pos.y, 20, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
 		 &Event_Message_Box_Option_Menu::clicked_trigger_sel_increase, *this);
 
@@ -182,14 +185,15 @@ m_event   (event)
 	pos = Point(get_inner_w() / 2 - 60 - spacing, get_inner_h() - 30);
 	new UI::Callback_Button<Event_Message_Box_Option_Menu>
 		(this,
-		 pos.x, pos.y, 60, 20, 0,
+		 pos.x, pos.y, 60, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Event_Message_Box_Option_Menu::clicked_ok, *this,
 		 _("Ok"));
 	pos.x = get_inner_w() / 2 + spacing;
 	new UI::Callback_IDButton<Event_Message_Box_Option_Menu, int32_t>
 		(this,
 		 pos.x, pos.y, 60, 20,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Event_Message_Box_Option_Menu::end_modal, *this, 0,
 		 _("Cancel"));
 

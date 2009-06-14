@@ -84,7 +84,7 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 	m_ok_button = new UI::Callback_Button<Editor_Event_Menu_New_Trigger>
 		(this,
 		 posx, posy, 80, 20,
-		 0,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Editor_Event_Menu_New_Trigger::clicked_ok, *this,
 		 _("Ok"),
 		 std::string(),
@@ -95,7 +95,7 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 	new UI::Callback_IDButton<Editor_Event_Menu_New_Trigger, int32_t>
 		(this,
 		 posx, posy, 80, 20,
-		 1,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Editor_Event_Menu_New_Trigger::end_modal, *this, 0,
 		 _("Cancel"));
 

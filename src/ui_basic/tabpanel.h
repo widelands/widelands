@@ -35,7 +35,7 @@ namespace UI {
  * The Panels you add() to the Tab_Panel must be children of the Tab_Panel.
 */
 struct Tab_Panel : public Panel {
-	Tab_Panel(Panel * parent, int32_t x, int32_t y, uint32_t background);
+	Tab_Panel(Panel * parent, int32_t x, int32_t y, PictureID background);
 
 	void resize();
 
@@ -43,7 +43,7 @@ struct Tab_Panel : public Panel {
 	bool get_snapparent() const {return m_snapparent;}
 
 	uint32_t add
-		(uint32_t            picid,
+		(PictureID           picid,
 		 Panel             * panel,
 		 std::string const & tooltip = std::string());
 
@@ -60,18 +60,18 @@ private:
 	void handle_mousein(bool inside);
 
 	struct Tab {
-		uint32_t        picid;
+		PictureID   picid;
 		std::string tooltip;
 		Panel     * panel;
 	};
 
 	std::vector<Tab> m_tabs;
-	uint32_t             m_active;         ///< index of the currently active tab
+	uint32_t         m_active;         ///< index of the currently active tab
 	bool             m_snapparent; ///< if true, resize parent to fit this panel
 
-	int32_t              m_highlight;      ///< index of the highlighted button
+	int32_t          m_highlight;      ///< index of the highlighted button
 
-	uint32_t             m_pic_background; ///< picture used to draw background
+	PictureID        m_pic_background; ///< picture used to draw background
 };
 };
 

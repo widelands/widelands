@@ -209,14 +209,14 @@ void RenderTarget::clear()
 /**
  * Blits a blitsource into this bitmap
  */
-void RenderTarget::blit(const Point dst, const uint32_t picture)
+void RenderTarget::blit(const Point dst, const PictureID picture)
 {
 	if (Surface * const src = g_gr->get_picture_surface(picture))
 		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()));
 }
 
 void RenderTarget::blitrect
-	(Point const dst, uint32_t const picture, Rect const srcrc)
+	(Point const dst, PictureID const picture, Rect const srcrc)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
@@ -231,12 +231,12 @@ void RenderTarget::blitrect
  * The pixel from ofs inside picture is placed at the top-left corner of
  * the filled rectangle.
  */
-void RenderTarget::tile(Rect r, uint32_t const picture, Point ofs)
+void RenderTarget::tile(Rect r, PictureID const picture, Point ofs)
 {
 	Surface * const src = g_gr->get_picture_surface(picture);
 
 	if (!src) {
-		log("RenderTarget::tile: bad picture %u\n", picture);
+		log("RenderTarget::tile: bad picture\n");
 		return;
 	}
 

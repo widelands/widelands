@@ -28,6 +28,7 @@
 #include "ware_types.h"
 #include "widelands.h"
 
+#include "graphic/picture.h"
 #include "io/filewrite.h"
 
 #include <string>
@@ -67,7 +68,7 @@ struct Building_Descr : public Map_Object_Descr {
 	bool get_enhanced_building() const {return m_enhanced_building;}
 	typedef std::map<Ware_Index, uint8_t> Buildcost;
 	Buildcost const & buildcost() const throw () {return m_buildcost;}
-	uint32_t get_buildicon() const {return m_buildicon;}
+	PictureID get_buildicon() const {return m_buildicon;}
 	int32_t get_size() const throw () {return m_size;}
 	bool get_ismine() const {return m_mine;}
 	virtual uint32_t get_ui_anim() const throw () {return get_animation("idle");}
@@ -111,7 +112,7 @@ private:
 	const Tribe_Descr & m_tribe;
 	bool         m_buildable;       // the player can build this himself
 	Buildcost    m_buildcost;
-	uint32_t     m_buildicon;       // if buildable: picture in the build dialog
+	PictureID    m_buildicon;       // if buildable: picture in the build dialog
 	std::string  m_buildicon_fname; // filename for this icon
 	int32_t      m_size;            // size of the building
 	bool         m_mine;
