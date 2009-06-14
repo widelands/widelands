@@ -11,13 +11,13 @@ raw_stone=3
 farmer=1
 
 [programs]
-plant_weath=_Plant weath
-plant=Plant weath (only for compatibility with old savegames (build13))
-harvest_weath=_Harvest weath
-harvest=Harvest weath (only for compatibility with old savegames (build13))
+plant_wheat=_Plant wheat
+plant=Plant wheat (only for compatibility with old savegames (build13))
+harvest_wheat=_Harvest wheat
+harvest=Harvest wheat (only for compatibility with old savegames (build13))
 work=_Work
 
-[plant_weath]
+[plant_wheat]
 sleep=20000
 worker=plant
 
@@ -25,7 +25,7 @@ worker=plant
 sleep=20000
 worker=plant
 
-[harvest_weath]
+[harvest_wheat]
 sleep=5000
 worker=harvest
 
@@ -34,8 +34,8 @@ sleep=5000
 worker=harvest
 
 [work]
-call=plant_weath
-call=harvest_weath
+call=plant_wheat
+call=harvest_wheat
 playFX=../../../sound/farm/farm_animal 192
 return=skipped
 
