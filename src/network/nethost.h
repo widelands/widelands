@@ -39,7 +39,7 @@ struct NetHost : public GameController, private SyncCallback {
 	NetHost (std::string const & playername, bool ggz = false);
 	virtual ~NetHost ();
 
-	void run();
+	void run(bool autostart = false);
 	std::string const & getLocalPlayername() const;
 	int16_t getLocalPlayerposition();
 
@@ -73,6 +73,8 @@ struct NetHost : public GameController, private SyncCallback {
 	void setPlayerName  (uint8_t number, std::string const & name);
 	void setPlayer      (uint8_t number, PlayerSettings);
 	void setPlayerNumber(int32_t number);
+	void setPlayerReady (uint8_t number, PlayerSettings::ReadyState readystate);
+	bool getPlayerReady(uint8_t number);
 
 	// just visible stuff for the select mapmenu
 	void setMultiplayerGameSettings();

@@ -48,6 +48,7 @@
 #include "journal.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"
+#include "map_io/map_loader.h"
 #include "network/netclient.h"
 #include "network/nethost.h"
 #include "network/network_ggz.h"
@@ -320,6 +321,51 @@ void WLApplication::run()
 			emergency_save(game);
 			throw;
 		}
+#if HAVE_GGZ
+	} else if (m_game_type == GGZ) {
+		Widelands::Game game;
+		try {
+		  //Fullscreen_Menu_NetSetupGGZ ns;
+
+		  //setup some detalis about a dedicated server
+		  std::string playername = "dedicated";
+		  uint32_t mp = static_cast<uint32_t>(10);
+
+		  NetHost netgame(playername, true);
+
+		  NetGGZ::ref().set_local_maxplayers(mp);
+
+		  //Load te requested map
+		  GameSettings const & settings = netgame.settings();
+		  Widelands::Map map;
+		  i18n::Textdomain td("maps");
+		  map.set_filename(m_filename.c_str());
+		  Widelands::Map_Loader * const ml = map.get_correct_loader(m_filename.c_str());
+		  ml->preload_map(true);
+
+		  //fill in the mapdata structure
+		  MapData mapdata;
+		  mapdata.filename = m_filename;
+		  mapdata.name = map.get_name();
+		  mapdata.author = map.get_author();
+		  mapdata.description = map.get_description();
+		  mapdata.world = map.get_world_name();
+		  mapdata.nrplayers = map.get_nrplayers();
+		  mapdata.width = map.get_width();
+		  mapdata.height = map.get_height();
+
+		  //set the map
+		  netgame.setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
+
+		  //run the network game, autostart when everyone is ready
+		  netgame.run(true);
+
+		  NetGGZ::ref().deinitcore();
+		} catch (...) {
+			emergency_save(game);
+			throw;
+		}
+#endif
 	} else {
 
 		g_sound_handler.start_music("intro");
@@ -1013,7 +1059,17 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_game_type = SCENARIO;
 		m_commandline.erase("scenario");
 	}
-
+#if HAVE_GGZ
+	if (m_commandline.count("dedicated")) {
+		m_filename = m_commandline["dedicated"];
+		if (m_filename.empty())
+			throw wexception("empty value of commandline parameter --dedicated");
+		if (*m_filename.rbegin() == '/')
+			m_filename.erase(m_filename.size() - 1);
+		m_game_type = GGZ;
+		m_commandline.erase("dedicated");
+	}
+#endif
 	//Note: it should be possible to record and playback at the same time,
 	//but why would you?
 	if (m_commandline.count("record")) {
@@ -1596,6 +1652,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			++oldplayers;
 		}
 	}
+
 	virtual void setPlayerState
 		(uint8_t const number, PlayerSettings::State state)
 	{
@@ -1607,6 +1664,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 
 		s.players[number].state = state;
 	}
+
 	virtual void setPlayerAI(uint8_t const number, std::string const & ai) {
 		if (number >= s.players.size())
 			return;
@@ -1683,6 +1741,17 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			return;
 
 		s.playernum = number;
+	}
+
+	virtual void setPlayerReady
+		(uint8_t const, PlayerSettings::ReadyState const)
+	{
+		//ignore, a single player is always ready to start the game if he wants to
+	}
+
+	virtual bool getPlayerReady(uint8_t) {
+		//a single player is always ready
+		return true;
 	}
 
 private:

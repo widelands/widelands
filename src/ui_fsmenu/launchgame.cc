@@ -38,7 +38,8 @@
 #include "warning.h"
 
 Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
-	(GameSettingsProvider * const settings, GameController * const ctrl)
+	(GameSettingsProvider * const settings, GameController * const ctrl,
+	 bool autolaunch)
 :
 Fullscreen_Menu_Base("launchgamemenu.jpg"),
 
@@ -108,7 +109,8 @@ m_settings     (settings),
 m_ctrl         (ctrl),
 m_chat         (0),
 m_is_scenario  (false),
-m_is_savegame  (false)
+m_is_savegame  (false),
+m_autolaunch   (autolaunch)
 {
 
 	m_title  .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
@@ -254,7 +256,12 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	m_filename = settings.mapfilename;
 	m_nr_players = settings.players.size();
 
-	m_ok.set_enabled(m_settings->canLaunch());
+	bool launch = m_settings->canLaunch();
+	m_ok.set_enabled(launch);
+	//check if we want to autolaunch
+	if (m_autolaunch && launch)
+	  start_clicked();
+
 	m_select_map.set_visible(m_settings->canChangeMap());
 	m_select_map.set_enabled(m_settings->canChangeMap());
 	m_select_save.set_visible

@@ -72,14 +72,17 @@ struct NetClient :
 		 std::string const & mapfilename,
 		 uint32_t maxplayers,
 		 bool savegame = false);
-	virtual void setPlayerState (uint8_t number, PlayerSettings::State state);
-	virtual void setPlayerAI    (uint8_t number, std::string const & ai);
-	virtual void nextPlayerState(uint8_t number);
-	virtual void setPlayerTribe (uint8_t number, std::string const & tribe);
-	virtual void setPlayerInit  (uint8_t number, uint8_t index);
-	virtual void setPlayerName  (uint8_t number, std::string const & name);
-	virtual void setPlayer      (uint8_t number, PlayerSettings ps);
-	virtual void setPlayerNumber(int32_t number);
+	virtual void setPlayerState   (uint8_t number, PlayerSettings::State state);
+	virtual void setPlayerAI      (uint8_t number, std::string const & ai);
+	virtual void nextPlayerState  (uint8_t number);
+	virtual void setPlayerTribe   (uint8_t number, std::string const & tribe);
+	virtual void setPlayerInit    (uint8_t number, uint8_t index);
+	virtual void setPlayerName    (uint8_t number, std::string const & name);
+	virtual void setPlayer        (uint8_t number, PlayerSettings ps);
+	virtual void setPlayerNumber  (int32_t number);
+	virtual void setPlayerReady
+	  (uint8_t number, PlayerSettings::ReadyState readystate);
+	virtual bool getPlayerReady(uint8_t number);
 
 	// ChatProvider interface
 	void send(std::string const & msg);

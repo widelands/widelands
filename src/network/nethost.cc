@@ -158,6 +158,22 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setPlayer(number, ps);
 	}
 
+	virtual void setPlayerReady
+		(uint8_t const number, PlayerSettings::ReadyState const readystate)
+	{
+		if (number >= h->settings().players.size())
+			return;
+
+		if (number == settings().playernum)
+		  h->setPlayerReady(number, readystate);
+	}
+
+	virtual bool getPlayerReady(uint8_t const number) {
+		if (number >= h->settings().players.size())
+			return false;
+		return h->getPlayerReady(number);
+	}
+
 	virtual void setPlayerNumber(int32_t const number) {
 		if (number >= static_cast<int32_t>(h->settings().players.size()))
 			return;
@@ -363,11 +379,11 @@ void NetHost::initComputerPlayers()
 	}
 }
 
-void NetHost::run()
+void NetHost::run(bool autorun)
 {
 	HostGameSettingsProvider hp(this);
 	{
-		Fullscreen_Menu_LaunchGame lgm(&hp, this);
+		Fullscreen_Menu_LaunchGame lgm(&hp, this, autorun);
 		lgm.setChatProvider(d->chat);
 		const int32_t code = lgm.run();
 
@@ -662,7 +678,16 @@ GameSettings const & NetHost::settings()
 
 bool NetHost::canLaunch()
 {
-	return d->settings.mapname.size() != 0 && d->settings.players.size() >= 1;
+	if (d->settings.mapname.size() == 0)
+		return false;
+	if (d->settings.players.size() < 1)
+		return false;
+	for (size_t i = 0; i < d->settings.players.size(); ++i) {
+		if (!getPlayerReady(i)) {
+			return false;
+		}
+	}
+	return true;
 }
 
 void NetHost::setMap
@@ -912,6 +937,31 @@ void NetHost::setPlayerNumber(int32_t const number)
 	broadcast(s);
 }
 
+void NetHost::setPlayerReady
+	(uint8_t const number, PlayerSettings::ReadyState const readystate)
+{
+	if (number >= d->settings.players.size())
+	  return;
+	d->settings.players[number].readystate = readystate;
+
+	//breadcast changes
+	SendPacket s;
+	s.Unsigned8(NETCMD_SETTING_CHANGEREADY);
+	s.Unsigned8(number);
+	writeSettingPlayer(s, number);
+	broadcast(s);
+	return;
+}
+
+bool NetHost::getPlayerReady(uint8_t const number)
+{
+	return
+		d->settings.players[number].state == PlayerSettings::stateClosed ||
+		d->settings.players[number].state == PlayerSettings::stateComputer ||
+		(d->settings.players[number].state == PlayerSettings::stateHuman &&
+			d->settings.players[number].readystate);
+}
+
 void NetHost::setMultiplayerGameSettings()
 {
 	d->settings.scenario = false;
@@ -963,6 +1013,7 @@ void NetHost::writeSettingPlayer(SendPacket & packet, uint8_t const number)
 	packet.String(player.tribe);
 	packet.Unsigned8(player.initialization_index);
 	packet.String(player.ai);
+	packet.Unsigned8(static_cast<uint8_t>(player.readystate));
 }
 
 void NetHost::writeSettingAllPlayers(SendPacket & packet)
@@ -1467,6 +1518,14 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		if (!d->game) {
 			std::string tribe = r.String();
 			setPlayerTribe(client.playernum, tribe);
+		}
+		break;
+
+	case NETCMD_SETTING_CHANGEREADY:
+		if (!d->game) {
+			PlayerSettings::ReadyState ready =
+				static_cast<PlayerSettings::ReadyState>(r.Unsigned8());
+			setPlayerReady(client.playernum, ready);
 		}
 		break;
 

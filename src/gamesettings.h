@@ -33,11 +33,18 @@ struct PlayerSettings {
 		stateClosed
 	};
 
+	enum ReadyState {
+		stateReady,
+		stateNotReady
+	};
+
 	State state;
 	uint8_t     initialization_index;
 	std::string name;
 	std::string tribe;
 	std::string ai; /**< Preferred AI provider for this player */
+
+	ReadyState readystate;
 };
 
 struct UserSettings {
@@ -110,14 +117,18 @@ struct GameSettingsProvider {
 		 uint32_t maxplayers,
 		 bool                savegame = false)
 		= 0;
-	virtual void setPlayerState (uint8_t number, PlayerSettings::State) = 0;
-	virtual void setPlayerAI    (uint8_t number, std::string const &) = 0;
-	virtual void nextPlayerState(uint8_t number) = 0;
-	virtual void setPlayerTribe (uint8_t number, std::string const &) = 0;
-	virtual void setPlayerInit  (uint8_t number, uint8_t index) = 0;
-	virtual void setPlayerName  (uint8_t number, std::string const &) = 0;
-	virtual void setPlayer      (uint8_t number, PlayerSettings) = 0;
-	virtual void setPlayerNumber(int32_t number) = 0;
+	virtual void setPlayerState   (uint8_t number, PlayerSettings::State) = 0;
+	virtual void setPlayerAI      (uint8_t number, std::string const &) = 0;
+	virtual void nextPlayerState  (uint8_t number) = 0;
+	virtual void setPlayerTribe   (uint8_t number, std::string const &) = 0;
+	virtual void setPlayerInit    (uint8_t number, uint8_t index) = 0;
+	virtual void setPlayerName    (uint8_t number, std::string const &) = 0;
+	virtual void setPlayer        (uint8_t number, PlayerSettings) = 0;
+	virtual void setPlayerNumber  (int32_t number) = 0;
+	virtual void setPlayerReady
+		(uint8_t number, PlayerSettings::ReadyState readystate) = 0;
+	virtual bool getPlayerReady(uint8_t number) = 0;
+
 	const std::string getPlayersTribe() {
 		if (settings().playernum < 0)
 			return std::string();

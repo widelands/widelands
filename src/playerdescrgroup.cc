@@ -41,6 +41,7 @@ struct PlayerDescriptionGroupImpl {
 	UI::Callback_Button<PlayerDescriptionGroup> * btnPlayerType;
 	UI::Callback_Button<PlayerDescriptionGroup> * btnPlayerTribe;
 	UI::Callback_Button<PlayerDescriptionGroup> * btnPlayerInit;
+	UI::Checkbox     * btnReadyPlayer;
 };
 
 PlayerDescriptionGroup::PlayerDescriptionGroup
@@ -71,7 +72,7 @@ d(new PlayerDescriptionGroupImpl)
 		 fname, fsize);
 	d->btnPlayerTribe = new UI::Callback_Button<PlayerDescriptionGroup>
 		(this,
-		 w * 43 / 100, 0, w * 6 / 25, h,
+		 w * 43 / 100, 0, w * 5 / 25, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &PlayerDescriptionGroup::toggle_playertribe, *this,
 		 std::string(), std::string(),
@@ -79,12 +80,15 @@ d(new PlayerDescriptionGroupImpl)
 		 fname, fsize);
 	d->btnPlayerInit = new UI::Callback_Button<PlayerDescriptionGroup>
 		(this,
-		 w * 27 / 40, 0, w * 8 / 25, h,
+		 w * 26 / 40, 0, w * 8 / 25, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &PlayerDescriptionGroup::toggle_playerinit, *this,
 		 std::string(), _("Initialization"),
 		 true, false,
 		 fname, fsize);
+	d->btnReadyPlayer = new UI::Checkbox(this, Point(w * 120 / 125, 0));
+	d->btnReadyPlayer->changedto.set
+		(this, &PlayerDescriptionGroup::ready_player);
 
 	refresh();
 }
@@ -127,6 +131,7 @@ void PlayerDescriptionGroup::refresh()
 		d->btnPlayerInit->set_visible(false);
 		d->btnPlayerInit->set_enabled(false);
 		d->plr_name->set_text(std::string());
+		d->btnReadyPlayer->set_visible(false);
 	} else {
 		d->btnEnablePlayer->set_state(true);
 		d->btnPlayerType->set_visible(true);
@@ -139,17 +144,22 @@ void PlayerDescriptionGroup::refresh()
 			d->btnPlayerTribe->set_enabled(false);
 			d->btnPlayerInit ->set_enabled(false);
 			d->plr_name->set_text(std::string());
+			d->btnReadyPlayer->set_visible(false);
 		} else {
 			std::string title;
 
 			if (player.state == PlayerSettings::stateComputer) {
 				if (player.ai.size() == 0)
 					title = _("Computer");
-				else
+				else {
 					title = _("AI: ");
 					title += _(player.ai);
-			} else
+				}
+				d->btnReadyPlayer->set_visible(false);
+			} else { // PlayerSettings::stateHuman
 				title = _("Human");
+				d->btnReadyPlayer->set_visible(true);
+			}
 			// get translated tribesname
 			std::string tribepath("tribes/" + player.tribe);
 			Profile prof((tribepath + "/conf").c_str(), 0, tribepath.c_str());
@@ -242,6 +252,23 @@ void PlayerDescriptionGroup::enable_player(bool on)
 	} else {
 		if (settings.players[d->plnum].state != PlayerSettings::stateClosed)
 			d->settings->setPlayerState(d->plnum, PlayerSettings::stateClosed);
+	}
+}
+
+/**
+ * The checkbox to indicate a player is ready to start
+ */
+void PlayerDescriptionGroup::ready_player(bool on)
+{
+	GameSettings const & settings = d->settings->settings();
+
+	if (d->plnum >= settings.players.size())
+	  return;
+
+	if (on) {
+		d->settings->setPlayerReady(d->plnum, PlayerSettings::stateReady);
+	} else {
+		d->settings->setPlayerReady(d->plnum, PlayerSettings::stateNotReady);
 	}
 }
 

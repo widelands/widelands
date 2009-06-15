@@ -26,7 +26,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 11,
+	NETWORK_PROTOCOL_VERSION = 12,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -286,6 +286,13 @@ enum {
 	 * \li Signed32: new playernumber
 	 */
 	NETCMD_SET_PLAYERNUMBER = 19,
+
+	/**
+	 * During game setup, this send by the client to a host signals1
+	 * the player is ready (or not). Playload is
+	 * \li Unsigned8: new state
+	 */
+	NETCMD_SETTING_CHANGEREADY = 30,
 
 	/**
 	 * Sent by the client to reply to a \ref NETCMD_SYNCREQUEST command,

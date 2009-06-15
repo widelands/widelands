@@ -54,7 +54,8 @@ struct PlayerDescriptionGroup;
  *    4  - multi player scenario savegame <- not yet implemented
  */
 struct Fullscreen_Menu_LaunchGame : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LaunchGame(GameSettingsProvider *, GameController * = 0);
+	Fullscreen_Menu_LaunchGame
+		(GameSettingsProvider *, GameController * = 0, bool autolaunch = false);
 
 	void setChatProvider(ChatProvider &);
 
@@ -97,6 +98,7 @@ private:
 	int8_t                    m_nr_players;
 	bool                      m_is_scenario;
 	bool                      m_is_savegame;
+	bool                      m_autolaunch;
 };
 
 

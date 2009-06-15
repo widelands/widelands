@@ -150,7 +150,7 @@ struct WLApplication {
 	static WLApplication * get(int const argc = 0, char const * * argv = 0);
 	~WLApplication();
 
-	enum GameType {NONE, EDITOR, SCENARIO, LOADGAME, NETWORK};
+	enum GameType {NONE, EDITOR, SCENARIO, LOADGAME, NETWORK, GGZ};
 
 	void run();
 
