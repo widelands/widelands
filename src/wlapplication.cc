@@ -325,42 +325,43 @@ void WLApplication::run()
 	} else if (m_game_type == GGZ) {
 		Widelands::Game game;
 		try {
-		  //Fullscreen_Menu_NetSetupGGZ ns;
+			//Fullscreen_Menu_NetSetupGGZ ns;
 
-		  //setup some detalis about a dedicated server
-		  std::string playername = "dedicated";
-		  uint32_t mp = static_cast<uint32_t>(10);
+			//setup some detalis about a dedicated server
+			std::string playername = "dedicated";
+			uint32_t mp = static_cast<uint32_t>(10);
 
-		  NetHost netgame(playername, true);
+			NetHost netgame(playername, true);
 
-		  NetGGZ::ref().set_local_maxplayers(mp);
+			NetGGZ::ref().set_local_maxplayers(mp);
 
-		  //Load te requested map
-		  GameSettings const & settings = netgame.settings();
-		  Widelands::Map map;
-		  i18n::Textdomain td("maps");
-		  map.set_filename(m_filename.c_str());
-		  Widelands::Map_Loader * const ml = map.get_correct_loader(m_filename.c_str());
-		  ml->preload_map(true);
+			//Load te requested map
+			GameSettings const & settings = netgame.settings();
+			Widelands::Map map;
+			i18n::Textdomain td("maps");
+			map.set_filename(m_filename.c_str());
+			Widelands::Map_Loader * const ml = map.get_correct_loader
+				(m_filename.c_str());
+			ml->preload_map(true);
 
-		  //fill in the mapdata structure
-		  MapData mapdata;
-		  mapdata.filename = m_filename;
-		  mapdata.name = map.get_name();
-		  mapdata.author = map.get_author();
-		  mapdata.description = map.get_description();
-		  mapdata.world = map.get_world_name();
-		  mapdata.nrplayers = map.get_nrplayers();
-		  mapdata.width = map.get_width();
-		  mapdata.height = map.get_height();
+			//fill in the mapdata structure
+			MapData mapdata;
+			mapdata.filename = m_filename;
+			mapdata.name = map.get_name();
+			mapdata.author = map.get_author();
+			mapdata.description = map.get_description();
+			mapdata.world = map.get_world_name();
+			mapdata.nrplayers = map.get_nrplayers();
+			mapdata.width = map.get_width();
+			mapdata.height = map.get_height();
 
-		  //set the map
-		  netgame.setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
+			//set the map
+			netgame.setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
 
-		  //run the network game, autostart when everyone is ready
-		  netgame.run(true);
+			//run the network game, autostart when everyone is ready
+			netgame.run(true);
 
-		  NetGGZ::ref().deinitcore();
+			NetGGZ::ref().deinitcore();
 		} catch (...) {
 			emergency_save(game);
 			throw;
