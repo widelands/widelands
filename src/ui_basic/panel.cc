@@ -966,6 +966,7 @@ void Panel::draw_tooltip(RenderTarget & dst, Panel & lowest)
 		 lowest.tooltip(),
 		 Align_Left, -1,
 		 Widget_Cache_None,
-		 0, -1, false);
+		 g_gr->get_no_picture(),
+		 -1, false);
 }
 };

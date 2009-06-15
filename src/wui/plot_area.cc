@@ -144,7 +144,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 			 	(static_cast<int32_t>(posx - w / 2),
 			 	 get_inner_h() - space_at_bottom + 4),
 			 buffer, Align_CenterLeft, -1,
-			 Widget_Cache_None, 0, -1, false);
+			 Widget_Cache_None, g_gr->get_no_picture(), -1, false);
 		posx -= sub;
 	}
 
@@ -206,7 +206,7 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 		 RGBColor(120, 255, 0), RGBColor(255, 255, 255),
 		 Point(get_inner_w() - space_at_right - w - 2, spacing),
 		 buffer, Align_CenterLeft, -1,
-		 Widget_Cache_None, 0, -1, false);
+		 Widget_Cache_None, g_gr->get_no_picture(), -1, false);
 
 	//  plot the pixels
 	sub =

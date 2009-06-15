@@ -358,7 +358,7 @@ void EditBox::draw(RenderTarget & dst)
 		 align(),
 		 -1,
 		 Widget_Cache_None,
-		 0,
+		 g_gr->get_no_picture(),
 		 has_focus() ? static_cast<int32_t>(m->caret) : -1);
 }
 

@@ -180,7 +180,7 @@ void Button::draw(RenderTarget & dst)
 			 Align_Center,
 			 -1,
 			 Widget_Cache_None,
-			 0,
+			 g_gr->get_no_picture(),
 			 (m_draw_caret ?
 			  m_title.length() : std::numeric_limits<uint32_t>::max()));
 	}

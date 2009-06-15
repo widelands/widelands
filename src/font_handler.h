@@ -22,6 +22,7 @@
 
 #include "point.h"
 #include "rgbcolor.h"
+#include "graphic/graphic.h"
 #include "graphic/picture.h"
 
 #include <SDL_ttf.h>
@@ -85,7 +86,7 @@ struct Font_Handler {
 		 Align               align           = Align_CenterLeft,
 		 int32_t             wrap            = -1,
 		 Widget_Cache        widget_cache    = Widget_Cache_None,
-		 PictureID         * widget_cache_id = 0,
+		 PictureID         & widget_cache_id = g_gr->get_no_picture(),
 		 int32_t             caret           = -1,
 		 bool                transparent     = true);
 	void get_size
@@ -117,7 +118,7 @@ struct Font_Handler {
 		 std::string text,
 		 int32_t wrap,
 		 Widget_Cache widget_cache = Widget_Cache_None,
-		 PictureID * const widget_cache_id = 0,
+		 PictureID & widget_cache_id = g_gr->get_no_picture(),
 		 bool transparent = true);
 	void get_size_from_cache
 		(const PictureID widget_cache_id,

@@ -231,7 +231,7 @@ void Multiline_Editbox::draw(RenderTarget & dst)
 			 m_align,
 			 get_eff_w(),
 			 m_cache_mode,
-			 &m_cache_id,
+			 m_cache_id,
 			 //  explicit cast is necessary to avoid a compiler warning
 			 (has_focus() ? static_cast<int32_t>(m_cur_pos) : -1));
 		draw_scrollbar();

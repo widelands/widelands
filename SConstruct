@@ -288,7 +288,7 @@ install=env.Install('installtarget', 'COPYING') # the second argument is a (necc
 Alias('install', install)
 AlwaysBuild(install)
 Depends(install, buildlocale)
-#env.AddPreAction(install, Action(buildlocale))
+#env.AddPreAction(install, Action("scons buildlocale"))
 
 
 uninstall=env.Uninstall('uninstalltarget', 'COPYING') # the second argument is a (neccessary) dummy

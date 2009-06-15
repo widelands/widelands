@@ -90,7 +90,7 @@ void Font_Handler::draw_string
 	 Align               const align,
 	 int32_t             const wrap,
 	 Widget_Cache        const widget_cache,
-	 PictureID         * const widget_cache_id,
+	 PictureID         &       widget_cache_id,
 	 int32_t             const caret,
 	 bool                const transparent)
 {
@@ -123,6 +123,7 @@ void Font_Handler::draw_string
 				create_text_surface
 				(font, fg, bg, text, align, wrap, caret, transparent);
 			// Now cache it
+			assert(ci.picture_id->surface);
 			g_gr->get_picture_size(ci.picture_id, ci.w, ci.h);
 			ci.f = &font;
 			m_cache.push_front (ci);
@@ -139,18 +140,18 @@ void Font_Handler::draw_string
 	}
 	//Widget gave us an explicit picid
 	else if (widget_cache == Widget_Cache_Use) {
-		g_gr->get_picture_size(*widget_cache_id, w, h);
-		picid = *widget_cache_id;
+		g_gr->get_picture_size(widget_cache_id, w, h);
+		picid = widget_cache_id;
 	}
 	//We need to (re)create the picid for the widget
 	else {
 		if (widget_cache == Widget_Cache_Update)
-			g_gr->free_surface(*widget_cache_id);
-		*widget_cache_id =
+			g_gr->free_surface(widget_cache_id);
+		widget_cache_id =
 			create_text_surface
 				(font, fg, bg, text, align, wrap, caret, transparent);
-		g_gr->get_picture_size(*widget_cache_id, w, h);
-		picid = *widget_cache_id;
+		g_gr->get_picture_size(widget_cache_id, w, h);
+		picid = widget_cache_id;
 	}
 	do_align(align, dstpoint.x, dstpoint.y, w, h);
 	dst.blit(dstpoint, picid);
@@ -354,17 +355,17 @@ void Font_Handler::draw_richtext
 	 std::string          text,
 	 int32_t              wrap,
 	 Widget_Cache         widget_cache,
-	 PictureID    * const widget_cache_id,
+	 PictureID    &       widget_cache_id,
 	 bool           const transparent)
 {
 	PictureID picid;
 	if (widget_cache == Widget_Cache_Use) {
 		//g_gr->get_picture_size(*widget_cache_id, &w, &h);
-		picid = *widget_cache_id;
+		picid = widget_cache_id;
 	}
 	else {
 		if (widget_cache == Widget_Cache_Update) {
-			g_gr->free_surface(*widget_cache_id);
+			g_gr->free_surface(widget_cache_id);
 		}
 		std::vector<Richtext_Block> blocks;
 		Text_Parser p;
@@ -627,7 +628,7 @@ void Font_Handler::draw_richtext
 		picid = convert_sdl_surface
 			(*join_sdl_surfaces(wrap, global_h, rend_blocks, bg),
 			 bg, transparent);
-		*widget_cache_id = picid;
+		widget_cache_id = picid;
 	}
 	dst.blit(dstpoint, picid);
 }

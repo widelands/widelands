@@ -340,7 +340,8 @@ PictureID & Graphic::get_picture(PicMod const module, const std::string & fname)
 
 		// Fill in a free slot in the pictures array
 		Picture & pic = * new Picture();
-		m_picturemap[module].insert(std::make_pair(fname, &pic));
+		PictureID id = PictureID(&pic);
+		m_picturemap[module].insert(std::make_pair(fname, id));
 
 
 		assert(pic.fname == 0);
@@ -482,6 +483,7 @@ void Graphic::get_picture_size
   //if (pic >= m_pictures.size() || !m_pictures[pic].module)
   //throw wexception("get_picture_size(%i): picture does not exist", pic);
 
+	assert (pic->surface);
 	Surface & bmp = *pic->surface;
 
 	w = bmp.get_w();
@@ -614,7 +616,18 @@ void Graphic::free_surface(const PictureID & picid) {
 		 ||
 		 picid->module == PicSurface);
 
-
+	if (picid->surface) {
+	  delete picid->surface;
+	  picid->surface = 0;
+	}
+	if (picid->rendertarget) {
+	  delete picid->rendertarget;
+	  picid->rendertarget = 0;
+	}
+	if (picid->fname) {
+	  delete picid->fname;
+	  picid->fname = 0;
+	}
 	//Picture & pic = m_pictures[picid];
 
 	//delete picid->rendertarget;
