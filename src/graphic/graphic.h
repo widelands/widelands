@@ -77,7 +77,7 @@ struct Graphic {
 	void refresh(bool force = true);
 
 	void flush(PicMod module);
-  PictureID & get_picture(PicMod module, const std::string & fname);
+	PictureID & get_picture(PicMod module, const std::string & fname);
 	//__attribute__ ((pure));
 	PictureID get_picture
 		(PicMod module, Surface &, const std::string & name = "");
