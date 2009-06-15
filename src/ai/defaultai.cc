@@ -1001,6 +1001,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				ioprio += wares[bo.outputs[m]].preciousness;
 			}
 
+			// tribes that have enhanceable mines should build more mines
+			prio *= 100 / bo.mines_percent;
+
 			// No plus for mines with multiple output
 			ioprio /= bo.outputs.size();
 			prio += ioprio;
@@ -1597,7 +1600,7 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
 						// too many unused roads - if needed the road will be rebuild
 						// directly.
 						if
-						  (static_cast<int32_t>((ms->maxSoldierCapacity() * 2))
+						  (static_cast<int32_t>((ms->maxSoldierCapacity() * 4))
 							< bf.military_influence)
 							game().send_player_bulldoze(ms->base_flag());
 
