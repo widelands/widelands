@@ -993,7 +993,6 @@ private:
 
 private:
 	WaresDisplay       * m_waresdisplay;
-	Interactive_Player * m_parent;
 	int32_t              m_curpage;
 };
 
