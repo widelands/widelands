@@ -255,6 +255,7 @@ m_gfx_w(0), m_gfx_h(0),
 m_gfx_fullscreen       (false),
 m_gfx_hw_improvements  (false),
 m_gfx_double_buffer    (false),
+m_gfx_opengl           (false),
 m_default_datadirs     (true)
 {
 	g_fs = new LayeredFileSystem();
@@ -696,13 +697,15 @@ void WLApplication::set_input_grab(bool grab)
  */
 void WLApplication::init_graphics
 	(int32_t const w, int32_t const h, int32_t const bpp,
-	 bool const fullscreen, bool const hw_improvements, bool const double_buffer)
+	 bool const fullscreen, bool const hw_improvements,
+	 bool const double_buffer, bool const opengl)
 {
 	if
 		(w == m_gfx_w && h == m_gfx_h &&
 		 fullscreen == m_gfx_fullscreen &&
 		 hw_improvements == m_gfx_hw_improvements &&
-		 double_buffer == m_gfx_double_buffer)
+		 double_buffer == m_gfx_double_buffer &&
+		 opengl == m_gfx_opengl)
 		return;
 
 	delete g_gr;
@@ -713,10 +716,12 @@ void WLApplication::init_graphics
 	m_gfx_fullscreen = fullscreen;
 	m_gfx_hw_improvements = hw_improvements;
 	m_gfx_double_buffer = double_buffer;
+	m_gfx_opengl = opengl;
 
 	// If we are not to be shut down
 	if (w && h) {
-		g_gr = new Graphic(w, h, bpp, fullscreen, hw_improvements, double_buffer);
+		g_gr = new Graphic
+			(w, h, bpp, fullscreen, hw_improvements, double_buffer, opengl);
 	}
 }
 
@@ -747,6 +752,7 @@ bool WLApplication::init_settings() {
 	m_gfx_fullscreen = s.get_bool("fullscreen", false);
 	m_gfx_hw_improvements = s.get_bool("hw_improvements", false);
 	m_gfx_double_buffer = s.get_bool("double_buffer", false);
+	m_gfx_opengl = s.get_bool("opengl", false);
 
 	// KLUDGE!
 	// Without this the following config options get dropped by check_used().
@@ -884,7 +890,8 @@ bool WLApplication::init_hardware() {
 
 	init_graphics
 		(xres, yres, s.get_int("depth", 16),
-		 m_gfx_fullscreen, m_gfx_hw_improvements, m_gfx_double_buffer);
+		 m_gfx_fullscreen, m_gfx_hw_improvements,
+		 m_gfx_double_buffer, m_gfx_opengl);
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
@@ -907,7 +914,7 @@ void WLApplication::shutdown_hardware()
 			"WARNING: Hardware shutting down although graphics system is still "
 			"alive!"
 			<< endl;
-	init_graphics(0, 0, 0, false, false, false);
+	init_graphics(0, 0, 0, false, false, false, false);
 
 	SDL_Quit();
 }
@@ -1010,6 +1017,16 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 			log ("Invalid double_buffer=[0|1]\n");
 		}
 		m_commandline.erase("double_buffer");
+	}
+	if (m_commandline.count("opengl")) {
+		if (m_commandline["opengl"].compare("0") == 0) {
+			g_options.pull_section("global").create_val("opengl", "false");
+		} else if (m_commandline["opengl"].compare("1") == 0) {
+			g_options.pull_section("global").create_val("opengl", "true");
+		} else {
+			log ("Invalid option opengl=[0|1]\n");
+		}
+		m_commandline.erase("opengl");
 	}
 	if (m_commandline.count("datadir")) {
 		log ("Adding directory: %s\n", m_commandline["datadir"].c_str());
@@ -1163,6 +1180,9 @@ void WLApplication::show_usage()
 			 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 			 "                      map.\n"
 			 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
+#if HAVE_GGZ
+			 " --dedicated=FILENAME Starts ggz host with FILENAME as map\n"
+#endif
 			 " --speed_of_new_game  The speed that the new game will run at\n"
 			 "                      when started, with factor 1000 (0 is pause,\n"
 			 "                      1000 is normal speed).\n"
@@ -1186,6 +1206,9 @@ void WLApplication::show_usage()
 			 " --double_buffer=[0|1]\n"
 			 "                      Enables double buffering\n"
 			 "                      *HIGHLY EXPERIMENTAL*\n"
+			 " --opengl=[0|1]\n"
+			 "                      Enables opengl rendering\n"
+			 "                      *DANGEROUS AND BROKEN, DON'T USE*\n"
 			 "\n"
 			 "Options for the internal window manager:\n"
 			 " --border_snap_distance=[0 ...]\n"

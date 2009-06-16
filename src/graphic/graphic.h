@@ -26,6 +26,7 @@
 #include "surface.h"
 
 #include <png.h>
+#include <SDL_opengl.h>
 
 #include <vector>
 #include <boost/shared_ptr.hpp>
@@ -62,7 +63,7 @@ SDL_Surface * LoadImage(char const * filename);
 struct Graphic {
 	Graphic
 		(int32_t w, int32_t h, int32_t bpp,
-		 bool fullscreen, bool hw_improvements, bool double_buffer);
+		 bool fullscreen, bool hw_improvements, bool double_buffer, bool opengl);
 	~Graphic();
 
 	int32_t get_xres() const;
@@ -155,6 +156,7 @@ protected:
 };
 
 extern Graphic * g_gr;
+extern bool g_opengl;
 
 #endif
 

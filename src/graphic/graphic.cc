@@ -36,10 +36,12 @@
 
 #include <SDL_image.h>
 #include <SDL_rotozoom.h>
+#include <SDL_opengl.h>
 #include <cstring>
 #include <iostream>
 
 Graphic *g_gr;
+bool g_opengl;
 
 /**
  * Helper function wraps around SDL_image. Returns the given image file as a
@@ -75,7 +77,8 @@ Graphic::Graphic
 	 int32_t const bpp,
 	 bool    const fullscreen,
 	 bool    const hw_improvements,
-	 bool    const double_buffer)
+	 bool    const double_buffer,
+	 bool    const opengl)
 	:
 	m_rendertarget     (0),
 	m_nr_update_rects  (0),
@@ -101,6 +104,11 @@ Graphic::Graphic
 		log("Graphics: Trying HW_SURFACE\n");
 		flags = SDL_HWSURFACE; //  |SDL_HWACCEL|SDL_OPENGL;
 	}
+	if (hw_improvements && opengl) {
+		log("Graphics: Trying opengl\n");
+		flags = SDL_HWACCEL|SDL_OPENGL;//SDL_OPENGLBLIT;
+		g_opengl = true;
+	}
 	if (hw_improvements && double_buffer) {
 		flags |= SDL_DOUBLEBUF;
 		log("Graphics: Trying DOUBLE BUFFERING\n");
@@ -125,6 +133,8 @@ Graphic::Graphic
 		log("Graphics: SW SURFACE ENABLED\n");
 	if (0 != (sdlsurface->flags & SDL_FULLSCREEN))
 		log("Graphics: FULLSCREEN ENABLED\n");
+	if (0 != (sdlsurface->flags & SDL_OPENGL))
+	  log ("Graphics: OPENGL ENABLED\n");
 
 	/* Information about the current video settings. */
 	SDL_VideoInfo const * info = 0;
@@ -173,6 +183,25 @@ Graphic::Graphic
 	SDL_WM_SetCaption
 		(("Widelands " + build_id() + '(' + build_type() + ')').c_str(),
 		 "Widelands");
+
+	if (g_opengl) {
+	  glMatrixMode(GL_PROJECTION);
+	  glPushMatrix();
+	  glLoadIdentity();
+	  glOrtho(0, w, 0, h, -1, 1);
+
+	  glMatrixMode(GL_MODELVIEW);
+	  glPushMatrix();
+	  glLoadIdentity();
+
+	  glDisable(GL_DEPTH_TEST);
+	  // glViewport(0, 0, w, h);
+	  //gluOrtho2D(0, w, h, 0);
+	  //glEnable(GL_TEXTURE_2D);
+	  //glEnable(GL_BLEND);
+	  //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	}
 
 	m_screen.set_sdl_surface(*sdlsurface);
 

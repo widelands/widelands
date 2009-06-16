@@ -137,6 +137,7 @@ protected:
 	Rect m_rect;
 	///Drawing offset
 	Point m_offset;
+
 };
 
 #endif

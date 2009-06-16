@@ -179,7 +179,7 @@ struct WLApplication {
 
 	void init_graphics
 		(int32_t w, int32_t h, int32_t bpp,
-		 bool fullscreen, bool hw_improvements, bool double_buffer);
+		 bool fullscreen, bool hw_improvements, bool double_buffer, bool opengl);
 
 	void handle_input(const InputCallback *cb);
 
@@ -280,6 +280,7 @@ protected:
 	bool   m_gfx_fullscreen;
 	bool   m_gfx_hw_improvements;
 	bool   m_gfx_double_buffer;
+	bool   m_gfx_opengl;
 
 	//do we want to search the default places for widelands installs
 	bool   m_default_datadirs;

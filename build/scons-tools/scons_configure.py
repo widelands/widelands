@@ -361,6 +361,10 @@ def do_configure_libraries(conf, env):
 	if not conf.CheckLib(library='GL', symbol='glClear', autoadd=1):
 		print 'Could not find the GL Library! Is it installed?'
 		env.Exit(1)
+		
+	if not conf.CheckLib(library='GLU', symbol='gluOrtho2D', autoadd=1):
+		print 'Could not find the GLU Library! Is it installed?'
+		env.Exit(1)
 
 	if not conf.CheckLib(library='boost_program_options', symbol='', autoadd=1):
 		print 'Could not find the boost::program_options Library! Is it installed?'

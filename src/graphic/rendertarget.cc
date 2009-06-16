@@ -135,6 +135,19 @@ void RenderTarget::draw_line
 	(int32_t const x1, int32_t const y1, int32_t const x2, int32_t const y2,
 	 RGBColor const color)
 {
+	//use opengl drawing if available
+	if (g_opengl) {
+		glBegin(GL_LINES);
+		glColor3f
+			((color.r() / 256.0f),
+			 (color.g() / 256.0f),
+			 (color.b() / 256.0f));
+		glVertex2f(x1, y1);
+		glVertex2f(x2, y2);
+		glEnd();
+		return;
+	}
+
 	int32_t dx = x2 - x1;      /* the horizontal distance of the line */
 	int32_t dy = y2 - y1;      /* the vertical distance of the line */
 	const uint32_t dxabs = abs(dx);

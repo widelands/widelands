@@ -55,7 +55,8 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(const char *bgpic)
 		 s.get_int("depth", 16),
 		 s.get_bool("fullscreen", false),
 		 s.get_bool("hw_improvements", false),
-		 s.get_bool("double_buffer", false));
+		 s.get_bool("double_buffer", false),
+		 s.get_bool("opengl", false));
 
 	// Load background graphics
 	char buffer[256];
