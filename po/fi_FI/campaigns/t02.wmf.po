@@ -1,5 +1,5 @@
 # Widelands po/fi_FI/campaigns/t02.wmf.po
-# Copyright (C) 2008 Widelands Development Team
+# Copyright (C) 2005-2009 Widelands Development Team
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007.
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009.
 #
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2009-06-04 12:52+0000\n"
-"PO-Revision-Date: 2009-06-03 01:47+0300\n"
+"PO-Revision-Date: 2009-06-16 01:03+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -27,9 +27,8 @@ msgid "Second Mission of the Barbarian Tutorial Campaign. In this tutorial the h
 msgstr "Barbaarien opastuskampanjan toinen komennus. Tällä opastuskomennuksella esitellään lisää tuotantorakennuksia, kaivokset ja armeijan vaikutusvalta-alueen laajentaminen."
 
 #: ../../../campaigns/t02.wmf/event:134
-#, fuzzy
 msgid "Thron shakes his head..."
-msgstr "Thron puhuu..."
+msgstr "Thron pudistaa päätään..."
 
 #: ../../../campaigns/t02.wmf/event:136
 msgid " \"The war goes on. More and more of our brothers and sisters flee the brutal war raging in the capital beneath the trees.<br> The stories they tell about the deeds of our kin are sad to hear. I've spent nights lying awake, restless, more tired I ever believed one could be. Yet whenever I close my eyes, I see the fortress my father built consumed by flames. The throne between the trees, the symbol of unity and peace among our kin became the wedge that drives us apart.\" "
@@ -37,9 +36,8 @@ msgstr "\"Sota jatkuu. Yhä useampia veljiämme ja sisariamme pakenee veristä s
 
 #: ../../../campaigns/t02.wmf/event:138 ../../../campaigns/t02.wmf/event:149
 #: ../../../campaigns/t02.wmf/event:160
-#, fuzzy
 msgid "The story continues"
-msgstr "Tarina jatkuu..."
+msgstr "Tarina jatkuu"
 
 #: ../../../campaigns/t02.wmf/event:141 ../../../campaigns/t02.wmf/event:152
 #: ../../../campaigns/t02.wmf/event:163 ../../../campaigns/t02.wmf/event:260
@@ -55,23 +53,23 @@ msgstr "Tarina jatkuu..."
 #: ../../../campaigns/t02.wmf/event:513 ../../../campaigns/t02.wmf/event:526
 #: ../../../campaigns/t02.wmf/event:1204
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../../../campaigns/t02.wmf/event:147
 msgid " \"Today my hunters brought men, women and little children who had hidden out in the forests, trying to escape the war, hate and revenge that rage among the tribes fighting each other like in old times, when we were no more but the wild beasts driven and controlled by instincts. None of my brothers will ever gain and hold control over the wooden throne, none of the tribes will be strong enough to subdue the other. There will be no end to this slaughtering, unless... is this it? As father told me?<br> Rise against whoever threatens our very existence, may it even be one of your blood or mind?\" "
-msgstr "\"Tänään metsästäjäni toivat mukanaan miehiä, naisia ja pieniä lapsia, jotka olivat piilotelleet metsässä, yrittäen paeta sodalta, vihalta ja kostolta, jotka raivoavat heimojen välillä. Heimot taistelevat toisiaan vastaan kuin vanhoina aikoina, jolloin emme olleet parempia kuin villipedot, joita vaistot ajoivat ja hallitsivat. Yksikään veljistäni ei koskaan saa ja pidä valtaansa puista valtaistuinta, yksikään heimoista ei ole riittävän vahva voittamaan toista. Tälle verilöylylle ei ole loppua, ellei... onko tämä se, mistä isäni minulle puhui?<br> Nouse vastaan ketä tahansa, joka uhkaa olemassaoloamme, vaikka se olisi joku omaa vertasi tai samanmielinen?\""
+msgstr "\"Tänään metsästäjäni toivat mukanaan miehiä, naisia ja pieniä lapsia, jotka olivat piilotelleet metsässä, yrittäen paeta sodalta, vihalta ja kostolta, jotka raivoavat heimojen välillä. Heimot taistelevat toisiaan vastaan kuin vanhoina aikoina, jolloin emme olleet parempia kuin villipedot, joita vaistot ajoivat ja hallitsivat. Yksikään veljistäni ei koskaan saa pidettyä vallassaan puista valtaistuinta, yksikään heimoista ei ole riittävän vahva voittamaan toista. Tälle verilöylylle ei ole loppua, ellei... onko tämä se, mistä isäni minulle puhui?<br> Nouse vastaan ketä tahansa, joka uhkaa olemassaoloamme, vaikka se olisi joku omaa vertasi tai samanmielinen?\""
 
 #: ../../../campaigns/t02.wmf/event:158
 msgid " \"Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches, and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long - but I never thought my brothers would engage in this senseless battle for so long either.<br> Perhaps it's time to make ourselves feel a little more at ease here. Perhaps it's time to give those who still live and think united a new home, replacing what is now lost to us? Until we can return to the place we once called our home...\" "
-msgstr ""
+msgstr "\"Boldreth näyttää yhä levottomammalta päivien kuluessa. Joukkojemme taisteluhenki murenee vähä vähältä kylmän kauden lähestyessä; asummehan yhä vaivaisissa majoissa ja tilapäisrakennelmissa. En uskonut meidän viipyvän täällä erämaassa näin kauan - mutta enhän myöskään uskonut veljieni ryhtyvän tähän järjettömään taistoon tai jatkavan sitä näin pitkään.<br> Ehkä olisi aika tehdä oloamme hieman kotoisammaksi. Ehkä on aika antaa yhä kanssamme eläville ja uskoville uusi koti korvaamaan sitä, minkä olemme menettäneet? Ainakin siihen asti, kunnes voimme palata paikkaan, jota kutsuimme kodiksemme...\""
 
 #: ../../../campaigns/t02.wmf/event:254
 msgid "Brave Boldreth steps aside you..."
-msgstr ""
+msgstr "Urhea Boldreth astuu vierellesi..."
 
 #: ../../../campaigns/t02.wmf/event:256
 msgid " \"So you want to prepare us for a longer stay in these forests, Thron? Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al'thunran. Too long have we waited while our brethren have fought on the battlefield, and our axes and swords have turned rusty over time.\" "
-msgstr ""
+msgstr "\"Haluat siis valmistaa meitä pidempään viipymiseen näissä metsissä, Thron? No, näen kuinka ajatuksessa on viisautta, mutta sydämeni halajaa yhä loisteliasta Al'thunraniin paluuta. Olemme odottaneet liian kauan sillä välin kun veljemme ovat taistelleet sotatantereella - kirveemme ja miekkamme ovat ajan ruostuttamat.\""
 
 #: ../../../campaigns/t02.wmf/event:258 ../../../campaigns/t02.wmf/event:283
 #: ../../../campaigns/t02.wmf/event:321 ../../../campaigns/t02.wmf/event:333
@@ -79,210 +77,210 @@ msgstr ""
 #: ../../../campaigns/t02.wmf/event:424 ../../../campaigns/t02.wmf/event:451
 #: ../../../campaigns/t02.wmf/event:464
 msgid "Your loyal companion"
-msgstr ""
+msgstr "Uskollinen kumppanisi"
 
 #: ../../../campaigns/t02.wmf/event:266
 msgid "Khantrukh joins the both of you..."
-msgstr ""
+msgstr "Khantrukh liittyy seuraanne..."
 
 #: ../../../campaigns/t02.wmf/event:268
 msgid " \"I beg your forgiveness, chieftain, but I have a grave concern to discuss with you. The rocks close to our camp are shrinking fast under our workers' tools, and it is a matter of little time only before they are all gone.\" "
-msgstr ""
+msgstr "\"Pyydän anteeksi, päällikköni, mutta minun on puhuttava kanssasi vakavasta ongelmasta. Kivet leirimme lähistöllä pienenevät nopeasti työläistemme hakkujen kuluttamina, ja ei kestä kauaakaan ennen kuin ne ovat loppuneet.\""
 
 #: ../../../campaigns/t02.wmf/event:270 ../../../campaigns/t02.wmf/event:295
 #: ../../../campaigns/t02.wmf/event:307 ../../../campaigns/t02.wmf/event:346
 #: ../../../campaigns/t02.wmf/event:372 ../../../campaigns/t02.wmf/event:397
 #: ../../../campaigns/t02.wmf/event:437 ../../../campaigns/t02.wmf/event:477
 #: ../../../campaigns/t02.wmf/event:490
-#, fuzzy
 msgid "The advisor"
-msgstr "Neuvoja"
+msgstr "Neuvonantaja"
 
 #: ../../../campaigns/t02.wmf/event:278
 msgid "Boldreth jumps up..."
-msgstr ""
+msgstr "Boldreth astuu lähemmäs..."
 
 #: ../../../campaigns/t02.wmf/event:280
 msgid " \"While it is certainly no worthy task for a warrior, at least it is something to be done! Thron, what do you say about me taking a few of our most restless warriors and venturing somewhat closer to the great mountain of Kal'mavrath - maybe we will find some more big stones to please the old man?\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr "\"Vaikkei tehtävä soturin kunnialle sovikaan, ainakin tässä olisi jotakin tekemistä! Thron, mitä jos lähtisin muutaman levottomimman soturimme kanssa tutkimaan aluetta lähempänä Kal'mavrathin vuorta - ehkäpä löydämme sieltä lisää suuria kiviä vanhuksen iloksi?\"<br><br>-- UUSI TAVOITE --<br>"
 
 #: ../../../campaigns/t02.wmf/event:281 ../../../campaigns/t02.wmf/objective:7
 msgid "* Build military buildings (like sentries and strongholds) to expand your territory.<br> Get to the rocks northeast from you and build a quarry there."
-msgstr ""
+msgstr "* Rakenna sotilasrakennuksia, kuten vartiopaikkoja ja linnakkeita, laajentaaksesi valtakuntaasi.<br> Valtaa aluetta koilliseen kivikkoon asti, ja rakenna sinne kivilouhos."
 
 #: ../../../campaigns/t02.wmf/event:291
 msgid "Khantrukh grumbles..."
-msgstr ""
+msgstr "Khantrukh jupisee itsekseen..."
 
 #: ../../../campaigns/t02.wmf/event:293
 msgid " \"Old man? Disrespectful youth!\" "
-msgstr ""
+msgstr "\"Vai että 'vanhus'? Julkea nulikka!\" "
 
 #: ../../../campaigns/t02.wmf/event:303
 msgid "Khantrukh nods satisfied..."
-msgstr ""
+msgstr "Khantrukh nyökkää tyytyväisenä..."
 
 #: ../../../campaigns/t02.wmf/event:305
 msgid " \"At last! These rocks should last for a while.\" "
-msgstr ""
+msgstr "\"Vihdoinkin! Näiden kivien pitäisi riittää tarpeisiimme joksikin aikaa.\""
 
 #: ../../../campaigns/t02.wmf/event:316
 msgid "Boldreth exclaims..."
-msgstr ""
+msgstr "Boldreth huudahtaa..."
 
 #: ../../../campaigns/t02.wmf/event:318
 msgid " \"Just look at that! The great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br> Now that's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr "\"Katsohan vain! Suuri Kal'mavrathin vuori! Mietinpä, mitä aarteita luonto on voinut kätkeä sen mahtavien kupeiden alle!<br> Tässä onkin vanhimmillemme mahdollisuus olla vaihteeksi hyödyksi! Lähettäkäämme kivien kieltä ymmärtäviä miehiä selvittämään vuoren salaisuudet!\"<br><br>-- UUSI TAVOITE --<br>"
 
 #: ../../../campaigns/t02.wmf/event:319
 #: ../../../campaigns/t02.wmf/objective:15
 msgid "* Build a coal mine and an iron ore mine.<br> Place a flag up on the mountain's flank to the east (on mountain terrain though, not mountain meadow). When you click at implied flag you can send Geologists there. Because the flag is on mountains, the Geologists will search for ores; otherwise, they will search for water. Then build a mine for both kinds of resource he will find, choosing the mine to be built appropriately:<br> Black - coal<br> Red - iron ore<br> Yellow - gold<br> Grey - granite<br> Mines may only be built on mountain terrain. Suitable places for mines are displayed as hammer and pick."
-msgstr ""
+msgstr "* Rakenna hiilikaivos ja rautakaivos.<br> Aseta lippu vuoren rinteelle idässä (kalliolle, ei vihertävälle vuoriniitylle). Kun napsautat tätä lippua, voit lähettää sen luo geologeja. Koska lippu on vuoren rinteellä, geologisi etsivät malmeja ja hiiltä; muuten he etsisivät vettä. Rakenna tämän jälkeen kaivos kullekin resurssityypille, jota he löytävät; valitse kaivoksen tyyppi geologin jättämän merkin mukaan:<br> Musta - hiili<br> Punainen - rautamalmi<br> Keltainen - kulta<br> Harmaa - graniitti.<br> Kaivoksia voi rakentaa vain vuoristoon. Rakentamiseen sopivat paikat näkyvät ristikkäisenä vasarana ja hakkuna rakennusavussa."
 
 #: ../../../campaigns/t02.wmf/event:329
 msgid "Boldreth laughs..."
-msgstr ""
+msgstr "Boldreth nauraa..."
 
 #: ../../../campaigns/t02.wmf/event:331
 msgid " \"By Chat'Karuth's beard, this is awesome! Just imagine what we can use this coal and iron ore for!<br> It might even be enough to...\" "
-msgstr ""
+msgstr "\"Kautta Chat'Karuthin parran, tämä on mainiota! Kuvittele, mihin kaikkeen voimmekaan käyttää tätä hiiltä ja rautamalmia!<br> Se saattaisi jopa riittää a-...\""
 
 #: ../../../campaigns/t02.wmf/event:342
 msgid "Khantrukh interrupts..."
-msgstr ""
+msgstr "Khantrukh keskeyttää..."
 
 #: ../../../campaigns/t02.wmf/event:344
 msgid " \"While this is true, we should consider it later, for now other obstacles are at hand. The miners will definately demand greater rations for working high up on the mountain in this bitter cold, and providing these supplies may not be easy.\" "
-msgstr ""
+msgstr "\"Vaikka tämä onkin totta, meidän tulisi jättää sen miettiminen myöhemmälle - juuri nyt meillä on muita ongelmia ratkottavana. Kaivostyöläiset tarvitsevat tavallista tuhdimpia ruoka-annoksia työskennellessään vuorella näin purevan kylmässä säässä. Näiden ruoka-annosten valmistaminen ei käy käden käänteessä.\""
 
 #: ../../../campaigns/t02.wmf/event:354
 msgid "Boldreth nods..."
-msgstr ""
+msgstr "Boldreth nyökkää..."
 
 #: ../../../campaigns/t02.wmf/event:356
 msgid " \"I have to hand it to you: you are right here, old man.<br> There seem to be quite many animals in the forests here - we might just hunt down more of them. And, of course, the people would cheer to a new tavern - hey, we might call it 'Thron's Pride' or so if you want!\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr "\"Täytyy myöntää, vanhus, osuit naulan kantaan.<br> Metsissä näkyy olevan melkoisesti eläimiä - voisimmekin metsästää niitä aiempaa aktiivisemmin. Toki väkeämme ilahduttaisi myös uusi krouvi - hei, voisimme kutsua sitä vaikka 'Thronin ylpeydeksi' jos haluat!\"<br><br>-- UUSI TAVOITE --<br>"
 
 #: ../../../campaigns/t02.wmf/event:357
 #: ../../../campaigns/t02.wmf/objective:23
 msgid "* Build a hunter, a gamekeeper and a tavern.<br> In order to work, your miners need food.<br> A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br> This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow."
-msgstr ""
+msgstr "* Rakenna metsästäjän maja, riistanvartijan maja ja krouvi.<br> Kaivostyöläisesi tarvitsevat ruokaa työskennelläkseen.<br> Metsästäjä voi metsästää lähistön eläimiä, kun taas riistanvartija varmistaa, etteivät ne kuole sukupuuttoon. Liha jatkojalostetaan krouvissa aterioiksi kaivostyöläisiäsi varten.<br> Tämä on vasta ensimmäinen esimerkki tuotteesta, jota on jalostettava toisessa rakennuksessa ennen kuin sitä voidaan käyttää - muita seuraa myöhemmin."
 
 #: ../../../campaigns/t02.wmf/event:367
 msgid "The elder jumps into the air..."
-msgstr ""
+msgstr "Kylänvanhin touhottaa väliin..."
 
 #: ../../../campaigns/t02.wmf/event:369
 msgid " \"Wisdom commands to seek variety.<br> North of the great mountain is a large plain - why don't we use the space Mother Nature gave us and build a farm? I sure would enjoy a freshly baken pitta bread for a change...\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr "\"Vanha viisaus käskee ylläpitämään myös vaihtelua.<br> Suuren vuoren pohjoispuolella on suuri tasanko - miksemme käyttäisi luontoäidin meille lahjoittamaa aluetta hyväksi? Rakentakaamme maatila - minä ainakaan en panisi pahitteeksi tuoretta pitaleipää pitkästä aikaa...\"<br><br>-- UUSI TAVOITE --<br>"
 
 #: ../../../campaigns/t02.wmf/event:370
 #: ../../../campaigns/t02.wmf/objective:31
 msgid "* Build a well, a farm and a bakery.<br> Other ways to produce food - different kinds of food - are fishers and hunters. The wheat of the farms has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source."
-msgstr ""
+msgstr "* Rakenna kaivo, maatila ja leipomo.<br> Muita tapoja erilaisten ruokatarpeiden valmistamiseen tuovat kalastajat ja metsästäjät. Maatiloilta saatava vehnä on käsiteltävä veden kanssa leipomossa ennen kuin sitä voi syödä. Saat vettä rakentamalla kaivon paikkaan, josta geologisi ovat löytäneet pohjavettä."
 
 #: ../../../campaigns/t02.wmf/event:380
 msgid "Boldreth cheers up..."
-msgstr ""
+msgstr "Boldreth piristyy..."
 
 #: ../../../campaigns/t02.wmf/event:382
 msgid " \"Our hunters are out in the forests, Thron.<br> I promise you, before the sun sets today you will have a magnificient meal fit for the chieftain of all clans!\" "
-msgstr ""
+msgstr "\"Metsästäjämme ovat metsällä, Thron.<br> Vannon, että ennen auringonlaskua meillä on edessämme mahtava ateria, joka kelpaisi kaikkien klaanien päälliköllekin!\""
 
 #: ../../../campaigns/t02.wmf/event:393
 msgid "Khantrukh gazes over the plains..."
-msgstr ""
+msgstr "Khantrukh katsoo tasangoille..."
 
 #: ../../../campaigns/t02.wmf/event:395
 msgid " \"Isn't it lovely, the view of golden fields, growing peacefully, dancing to the wind? And I believe the baker is just on his way here, with his most delicious bread reserved for our chieftain alone!\" "
-msgstr ""
+msgstr "\"Eikö olekin kaunis näky - kultaiset pellot, kasvamassa kaikessa rauhassa, tähkäpäät tuulessa tanssien? Ja luulenpa leipurin olevan matkalla tänne mukanaan ensimmäinen ja herkullisin leipänsä, joka on varattu yksin päälliköllemme!\""
 
+# TODO: recognizes what?
 #: ../../../campaigns/t02.wmf/event:406
-#, fuzzy
 msgid "Thron recognizes..."
-msgstr "Thron puhuu..."
+msgstr "Thron myöntää..."
 
 #: ../../../campaigns/t02.wmf/event:408
 msgid " \"A tavern opened for our people yesterday. While I am hardly in the mood for celebration, I noticed how much this tiny bit of home meant to my people. Their songs filled the air until the deep night, and they were in higher spirit still the day after.<br> Maybe we actually are slowly creating a place here which we can... call home.\" "
-msgstr ""
+msgstr "\"Krouvi avasi ovensa asukkaillemme eilen. Vaikka en olekaan järin juhlatuulella, huomasin kuinka paljon tämä pieni palanen kotia merkitsi väelleni. Heidän laulunsa täyttivät ilman myöhään yöhön asti, ja he olivat yleensäkin paremmalla tuulella seuraavana päivänä.<br> Ehkäpä olemme pikku hiljaa rakentamassa tänne paikkaa, jota... kutsua kodiksi.\""
 
 #: ../../../campaigns/t02.wmf/event:410
-#, fuzzy
 msgid "A beautiful morning"
-msgstr "Kaunis aamu..."
+msgstr "Kaunis aamu"
 
 #: ../../../campaigns/t02.wmf/event:419
 msgid "Boldreth remarks..."
-msgstr ""
+msgstr "Boldreth tokaisee..."
 
 #: ../../../campaigns/t02.wmf/event:421
 msgid " \"So now that we have both the mines and the food to sustain them, we should bring what our brave miners gain for us into a more useful state. The iron ore has to be melted into iron so that it is ready to be forged into whatever we want. And we need the coal to keep the smelter's ovens burning.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr "\"Nyt kun meillä on sekä kaivoksia että ruokaa niiden ylläpitoon, on aika saattaa kaivostyöläistemme työn hedelmät käyttökelpoisempaan muotoon. Rautamalmi pitää sulattaa raudaksi, jotta se voidaan takoa haluamaamme muotoon. Tarvitsemme myös hiiltä pitääksemme sulattajan uunit kuumina.\"<br><br>-- UUSI TAVOITE --<br>"
 
 #: ../../../campaigns/t02.wmf/event:422
 #: ../../../campaigns/t02.wmf/objective:39
 msgid "* Build a smelting works. The iron ore your miners bring up is not usable yet - it has to be melted into iron first."
-msgstr ""
+msgstr "* Rakenna sulattamo. Kaivostyöläistesi louhima rautamalmi ei ole vielä käyttökelpoista - se pitää ensin sulattaa raudaksi."
 
 #: ../../../campaigns/t02.wmf/event:432
 msgid "Khantrukh speaks..."
-msgstr ""
+msgstr "Khantrukh puhuu..."
 
+# TODO: by the day
 #: ../../../campaigns/t02.wmf/event:434
 msgid " \"Our miners are digging up less and less by day! We have to go deeper, closer to the mountain's core, if we want more of its treasures!<br> Of course, it is dark and cold in such depths and only few venture voluntarily into these places. We should reward this bravery with greater rations for them.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr "\"Kaivostyöläisemme kantavat ulos joka päivä vähemmän! Meidän on kaivettava syvemmälle, lähemmäs vuoren sydäntä, jos mielimme saada suuremman osuuden sen aarteista!<br> Tietenkin sellaisissa syvyyksissä on kylmää ja pimeää, eivätkä monet etsiydy tällaisiin paikkoihin vapaaehtoisesti. Meidän tulee palkita tällainen rohkeus tuhdimmilla ruoka-annoksilla.\"<br><br>-- UUSI TAVOITE --<br>"
 
 #: ../../../campaigns/t02.wmf/event:435
 #: ../../../campaigns/t02.wmf/objective:47
 msgid "* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath it; then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate the enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish). Note that the existence of inns does not make taverns obsolete - normal mines still require rations instead of snacks. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which strategy you prefer."
-msgstr ""
+msgstr "* Päivitä hiilikaivos ja krouvi astetta astetta paremmiksi versioikseen.<br> Tavallinen kaivos yltää vain noin kolmannekseen allaan olevista resursseista; tämän jälkeen se on päivitettävä syväksi kaivokseksi, jotta se jatkaisi toimintaansa. Kun haluat parannella jotakin rakennusta, valitse se ja paina avautuvasta ikkunasta päivitysnappia.<br> Työläiset saavat kokemusta onnistuneesta työstä. Kun kokemusta on riittävästi, jotkin työläiset muuttuvat erikoistuneemmiksi työläisiksi, joita tarvitaan parannellun rakennuksen hyödyntämiseen. Älä paranna rakennusta ennen kuin sinulla on sen tarvitsemat erikoistuneet työläiset! Tällaisilla rakennuksilla on usein myös suuremmat vaatimukset kuin rakennuksen perustyypillä - esimerkiksi syvät kaivokset vaativat välipaloja tavallisten ruoka-annosten sijaan. Sinun on parannettava krouvista majatalo, jotta voit tuottaa välipaloja pitaleivistä JA toisesta ruokatyypistä - lihasta tai kalasta. Huomaa myös, että majatalojen olemassaolo ei tee krouveista tarpeettomia - tavalliset kaivokset tarvitsevat yhä ruoka-annoksia, eivätkä käytä välipaloja. Voit toki parantaa kaikki kaivokset yhtä aikaa syviksi - suuremmat kaivokset tekevät työtä nopeammin, kun taas pienemmät kaivokset pärjäävät halvemmalla ruualla. On sinun valintasi, kumpaa strategiaa seuraat."
 
 #: ../../../campaigns/t02.wmf/event:446
 msgid "Boldreth seems concerned..."
-msgstr ""
+msgstr "Boldreth näyttää huolestuneelta..."
 
 #: ../../../campaigns/t02.wmf/event:448
 msgid " \"As I just discovered, we are running short on blackwood! We cannot put our warriors into some crumbling huts, and even less so in times as dangerous as ours!<br> We need a wood hardener, and we need one now!\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr "\"Kuten juuri huomasin, mustapuuvarantomme ovat loppumassa! Emme voi laittaa sotureitamme tuulenpuuskastakin hajoaviin mökkeihin, vielä vähemmän näin vaarallisina aikoina!<br> Tarvitsemme puunkovettajan, ja tarvitsemme sellaisen nyt!\"<br><br>-- UUSI TAVOITE --<br>"
 
 #: ../../../campaigns/t02.wmf/event:449
 #: ../../../campaigns/t02.wmf/objective:55
 msgid "* Build a wood hardener.<br> Bigger and better buildings - including all military ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, as without it you cannot expand."
-msgstr ""
+msgstr "* Rakenna puunkovettaja.<br> Suuremmat ja paremmat rakennukset - kuten kaikki sotilasrakennukset - tarvitsevat parempia rakennusmateriaaleja. Niitä ei voi rakentaa perustukeista, vaan puu on ensin jalostettava mustapuuksi puunkovettamossa. Muista aina rakentaa puunkovettaja ennen kuin mustapuuvarantosi pääsevät loppumaan, sillä et voi laajentaa valtakuntaasi ilman sitä."
 
 #: ../../../campaigns/t02.wmf/event:459
 msgid "Boldreth smiles..."
-msgstr ""
+msgstr "Boldreth hymyilee..."
 
 #: ../../../campaigns/t02.wmf/event:461
 msgid " \"Well, old friend, this should ensure that our fortifications do not break down with our foes' first battle cry! Now we can expand safely!<br> Still, it would not hurt to assemble some grout for our further campaign; thus we could, in times of need, build a fortress as the world has not seen before!\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr "\"Vanha toverini, tämän pitäisi varmistaa että rintamalinjamme eivät murru vihollistemme ensimmäisen sotahuudon edessä! Nyt voimme laajentua turvallisesti!<br> Tosin ei olisi pahitteeksi koota myös jonkin verran laastia myöhempää kampanjaamme varten; voisimme silloin tarvittaessa rakentaa linnoituksen, jota tämän auringon alla ei ole ennen nähty!\"<br><br>-- UUSI TAVOITE --<br>"
 
 #: ../../../campaigns/t02.wmf/event:462
 #: ../../../campaigns/t02.wmf/objective:63
 msgid "* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better buildings may require also other improved materials besides blackwood. One of those is grout, which is produced out of raw stone, water and coal by a lime-burner. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain, by clicking on the implied flag and the Geologist-symbol in the consequently appearing menu. Coal can be obtained by building a charcoal burner or a coal mine."
-msgstr ""
+msgstr "* Rakenna kalkinpolttouuni, kaivo ja hiilenpolttajan talo tai hiilikaivos.<br> Paremmat rakennukset voivat vaatia myös muita jalostettuja materiaaleja mustapuun lisäksi. Yksi näistä on barbaarien erityislaasti, jota tuotetaan raakakivestä, vedestä ja hiilestä kalkinpolttouunissa. Saat vettä rakentamalla kaivon pohjavesipaikan päälle. Geologisi etsivät hyviä kaivonpaikkoja kun lähetät heidät minkä tahansa sellaisen lipun luo, joka ei ole vuorenrinteellä. Napsauta tällaista lippua ja valitse goelogin symboli avautuvasta valikosta. Hiiltä taas saadaan joko hiilenpolttajalta tai hiilikaivoksesta."
 
 #: ../../../campaigns/t02.wmf/event:472
 msgid "Khantrukh steps in..."
-msgstr ""
+msgstr "Khantrukh astuu esiin..."
 
 #: ../../../campaigns/t02.wmf/event:474
 msgid " \"Chieftain, this is a disgrace! It is well that we can produce grout for mighty fortifications and great buildings now - only this does not prevent our roofs from becoming leaky! Maybe the young ones like spending their nights in the rain, but I just can't find any sleep with these raindrops dripping on my face!<br> Now this is a problem we should do something about!\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr "\"Päällikköni, tämä on häpeällistä! Onhan se hyvä että voimme rakentaa laastistamme mahtavia muureja - sillä välin kun kattomme vuotavat niiden takana! Ehkäpä nuoret urhot viettävät mieluusti yönsä sateessa, mutta minä en ainakaan saa unenpäästä kiinni vesipisaroiden tippuessa otsalleni!<br> Tälle ongelmalle meidän pitäisi tehdä jotakin!<br>-- UUSI TAVOITE --<br>"
 
 #: ../../../campaigns/t02.wmf/event:475
 #: ../../../campaigns/t02.wmf/objective:71
 msgid "* Build a fernery.<br> The third material necessary for improved buildings is thatch reed, used to cover roofs. Thatch reed is planted by a fernery, around the building."
-msgstr ""
+msgstr "* Rakenna kaislaviljelmä.<br> Kolmas materiaali, jota tarvitaan parempien rakennusten rakentamiseen, on kattojen peittämiseen käytetty kaislanolki. Kaislaa kasvatetaan kaislaviljelmillä, kasvattamorakennuksen ympärillä."
 
+# TODO: relieved
 #: ../../../campaigns/t02.wmf/event:486
 msgid "Khantrukh seems reliefed..."
-msgstr ""
+msgstr "Khantrukh näyttää helpottuneelta..."
 
 #: ../../../campaigns/t02.wmf/event:488
 msgid " \"Wonderful! Our roofs are not dripping anymore, and we have all the material we need for, well, whichever monumental building we see fit!\" "
-msgstr ""
+msgstr "\"Erinomaista! Kattomme eivät enää vuoda, ja meillä on kaikki tarvittavat materiaalit mihin tahansa valtavankin rakennuksen tarpeisiin!\""
 
 #: ../../../campaigns/t02.wmf/event:506 ../../../campaigns/t02.wmf/event:1197
 msgid "Thron speaks..."
@@ -290,33 +288,33 @@ msgstr "Thron puhuu..."
 
 #: ../../../campaigns/t02.wmf/event:508
 msgid " \"One night, when the moon shone brightly, I climbed to the peak of Kal'mavrath.<br> When I gazed at the horizon, I still saw crimson lights flicker in the distance. It is incredible how much passion my brethren fight this war with. I fear the moment I see Al'thunran again - will there be anything but ashes and wasted ruins left of our once beautiful capital when we get there?\" "
-msgstr ""
+msgstr "\"Eräänä yönä, kuun paistaessa kirkkaasti, kiipesin Kal'mavarathin huipulle.<br> Kun katsoin horisonttiin, näin yhä punaisten valojen tanssivan kaukaisuudessa. On uskomatonta, miten intohimoisesti sukulaiseni käyvät tätä sotaa. Pelkään jo sitä aikaa, kun näemme Al'thunranin jälleen - lieneekö siellä muuta kuin tuhkaa ja savuavia raunioita jäljellä paikasta, jossa kaunis pääkaupunkimme kerran kukoisti?\""
 
+# TODO: don't think this works in English
 #: ../../../campaigns/t02.wmf/event:510
-#, fuzzy
 msgid "One fullmoon night"
-msgstr "Eräänä kuutamoisena yönä..."
+msgstr "Eräänä täydenkuun yönä..."
 
 #: ../../../campaigns/t02.wmf/event:519
 msgid "Thron looks worried..."
-msgstr ""
+msgstr "Thron näyttää huolestuneelta..."
 
+# TODO: </p> without <p>
 #: ../../../campaigns/t02.wmf/event:521
 msgid " \"The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore - it must not be far anymore.<br> I prayed it might get warmer again, as I prayed the war would finally come to an end.<br> So far, it seems that neither prayer was fulfilled.\"</p>"
-msgstr ""
+msgstr "\"Talvi on saapunut. Monet meistä kärsivät kylmyydestä, mutta meidän on selvittävä. Paluumme päivä ei voi enää olla kaukana - se ei saa enää olla kovin kaukana.<br> Olen rukoillut, että sää lämpenisi jälleen, samoin kuin olen rukoillut että sota loppuisi vihdoinkin.<br> Tähän mennessä kumpikaan rukous ei näy täyttyneen.\"</p>"
 
 #: ../../../campaigns/t02.wmf/event:523
 msgid "Another cold day"
-msgstr ""
+msgstr "Toinen kuulas päivä"
 
 #: ../../../campaigns/t02.wmf/event:587
 msgid " \"The other day Boldreth asked me to accompany him to the new inn. It would cheer me up, he said.<br> When I looked around, I saw faithful faces, trusting that I could guide them through these dark days. Yet before I could speak any words of gratitude or encouragement, one of my warriors ran into the inn. He had been far out in the forest for the past days and I could see how weary he was.<br> The news he brought changed everything...\"<br><br>--------------------- VICTORY! ----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
-msgstr ""
+msgstr "\"Eilen Boldreth pyysi minua mukaansa uuteen majataloon. Se kuulemma piristäisi minua.<br> Kun katsoin ympärilleni, näin uskollisia ja luottavaisia kasvoja; he uskovat vakaasti, että kykenen johtamaan heimomme tämän synkän ajan läpi. Ennen kuin ehdin lausua kiitoksen ja kannustuksen sanoja, yksi sotureistani juoksi majataloon. Mies oli ollut syvällä metsässä viime päivien ajan, ja väsymys paistoi selvästi hänen lasvoiltaan.<br> Hänen kertomansa uutiset muuttivat kaiken...\"<br><br>--------------------- VOITTO! ----------------------<br><br>Olet selviytynyt läpi tämän komennuksen. Voit halutessasi jatkaa pelaamista, tai voit siirtyä seuraavaan komennukseen."
 
 #: ../../../campaigns/t02.wmf/event:589
-#, fuzzy
 msgid "Mission Complete"
-msgstr "Tehtävä suoritettu!"
+msgstr "Tehtävä suoritettu"
 
 #: ../../../campaigns/t02.wmf/event:592
 msgid "Continue"
@@ -324,50 +322,45 @@ msgstr "Jatka"
 
 #: ../../../campaigns/t02.wmf/event:1199
 msgid " \"We have found a village with friendly and productive people, impressed by our wealth, technology and strength.<br> They have decided to join us!\" "
-msgstr ""
+msgstr "\"Olemme löytäneet kylän, jossa asuu ystävällistä ja tuotteliasta väkeä. Rikkautemme, tietämyksemme ja voimamme on vakuuttanut heidät liittymään joukkoomme.<br> Joukkomme on kasvanut!\""
 
 #: ../../../campaigns/t02.wmf/event:1201
 msgid "A friendly village joined us!"
-msgstr ""
+msgstr "Ystävällismielinen kylä liittyi joukkoomme!"
 
 #: ../../../campaigns/t02.wmf/objective:5
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "Laajennu koilliseen ja rakenna kivilouhos"
 
+# TODO: 'a'
 #: ../../../campaigns/t02.wmf/objective:13
 msgid "Start building mines on a mountain"
-msgstr ""
+msgstr "Ala rakentaa kaivoksia vuoren rinteille"
 
 #: ../../../campaigns/t02.wmf/objective:21
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Toimita kaivostyöläisillesi ruokaa"
 
 #: ../../../campaigns/t02.wmf/objective:29
 msgid "Bake bread"
-msgstr ""
+msgstr "Leivo leipää"
 
 #: ../../../campaigns/t02.wmf/objective:37
 msgid "Refine your mined resources"
-msgstr ""
+msgstr "Jalosta kaivostesi tuotteita"
 
 #: ../../../campaigns/t02.wmf/objective:45
 msgid "Enhance Buildings"
-msgstr ""
+msgstr "Paranna rakennuksiasi"
 
 #: ../../../campaigns/t02.wmf/objective:53
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Rakenna puunkovettaja"
 
 #: ../../../campaigns/t02.wmf/objective:61
 msgid "Build a lime kiln and coal economy"
-msgstr ""
+msgstr "Rakenna kalkinpolttouuni ja hiilitalous"
 
 #: ../../../campaigns/t02.wmf/objective:69
 msgid "Build a fernery"
-msgstr ""
-
-#~ msgid "The Story goes on..."
-#~ msgstr "Tarina kulkee eteenpäin..."
-
-#~ msgid "Victory!"
-#~ msgstr "Voitto!"
+msgstr "Rakenna saniaisenkasvattamo"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2009-06-04 12:52+0000\n"
-"PO-Revision-Date: 2009-04-13 21:29+0300\n"
+"PO-Revision-Date: 2009-06-05 22:35+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -80,7 +80,7 @@ msgstr "Kuori"
 #: ../../../worlds/desert/conf:42 ../../../worlds/desert/conf:43
 #: ../../../worlds/desert/conf:44
 msgid "Standing Stones"
-msgstr "Seisovia kiviä"
+msgstr "Pystykiviä"
 
 #: ../../../worlds/desert/conf:45 ../../../worlds/desert/conf:46
 #: ../../../worlds/desert/conf:47 ../../../worlds/desert/conf:48

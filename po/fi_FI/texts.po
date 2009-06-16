@@ -1,15 +1,15 @@
 # Widelands po/fi_FI/texts.po
 # Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-#
+# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
+# Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2009-06-04 12:52+0000\n"
-"PO-Revision-Date: 2007-03-24 06:31+0200\n"
-"Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
-"Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"PO-Revision-Date: 2009-06-14 14:11+0300\n"
+"Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
+"Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,11 +23,11 @@ msgstr "Lisenssi"
 
 #: ../../txts/COPYING:3
 msgid "GNU general public licence"
-msgstr ""
+msgstr "GNU General Public License (GPL)"
 
 #: ../../txts/COPYING:6
 msgid "Version 2, June 1991<br></p></rt>"
-msgstr "Versio 2, kesäkuu 1991<br></p></rt>"
+msgstr "Versio 2, kesäkuuta 1991 (epäviralliset käännökset muille kielille ks. http://www.gnu.org/licenses/translations.html)<br></p></rt>"
 
 #: ../../txts/COPYING:8
 msgid "Copyright (C) 1989, 1991 Free Software Foundation, Inc.<br>59 Temple Place, Suite 330, Boston, MA  02111-1307  USA<br>Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.<br>"
@@ -115,7 +115,7 @@ msgstr ""
 
 #: ../../txts/COPYING:70
 msgid "No warranty"
-msgstr "Ei takuuta"
+msgstr ""
 
 #: ../../txts/COPYING:74
 msgid "11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM AS IS WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION."
@@ -163,7 +163,7 @@ msgstr ""
 
 #: ../../txts/README:1
 msgid "README"
-msgstr "LUEMINUT"
+msgstr "Ohje"
 
 #: ../../txts/README:5
 msgid "an open source strategy game"
@@ -175,15 +175,15 @@ msgstr "Esittely"
 
 #: ../../txts/README:13
 msgid "Widelands is a strategy game aiming for gameplay similar to Settlers II by BlueByte.<br>In this game, you start out on a small piece of land with nothing more than a few of useful resources. Using those, you can build yourself an empire with many thousands of inhabitants. On your way towards this goal, you will have to build up an economic infrastructure, explore the lands around you and face enemies who are trying to rule the world just like you do."
-msgstr ""
+msgstr "Widelands on strategiapeli, joka rakentuu Bluebyten Settlers II:n pelityypille.<br>Pelaajana sinulla on alkuun vallassasi vain pieni maapläntti, jolla on kourallinen käyttökelpoisia resursseja. Niitä käyttäen voit rakentaa valtakunnan, jossa on tuhansia asukkaita. Tavoitteeseen päästäksesi sinun on rakennettava perusteet sisäiselle taloudelle, kartoittaa ympäröivät maat ja kohdata vihollisia, jotka tavoittelevat sinun tapaasi maailman hallintaa."
 
 #: ../../txts/README:16
 msgid "Check out the Widelands project homepage:"
-msgstr "Tarkista Widelands-projektin kotisivut:"
+msgstr "Widelands-projektin kotisivut:"
 
 #: ../../txts/README:22
 msgid "Widelands is licensed under the GNU General Public License (GPL). For more information, see the file 'COPYING' or select the License button from the main menu."
-msgstr ""
+msgstr "Widelands on lisensoitu GNU General Public Licensen (GPL) alla. Saat englanninkielistä lisätietoa tiedostosta 'COPYING', tai napsauttamalla Lisenssi-nappia päävalikosta. GNU-projekti linkittää lisenssin epävirallisiin käännöksiin osoitteessa http://www.gnu.org/licenses/translations.html."
 
 #: ../../txts/README:27
 msgid "Status"
@@ -191,33 +191,33 @@ msgstr "Tila"
 
 #: ../../txts/README:31
 msgid "Widelands is now on the step of being playable, but to become more playable volunteers are needed. Your contributions (yes, I'm talking to you) are required, especially in the area of graphics, to make Widelands a better game."
-msgstr ""
+msgstr "Widelands on nyt pelattavuuden kynnyksellä, mutta tarvitsee vapaaehtoisia kehittyäkseen. Sinun (kyllä, juuri sinun) apuasi tarvitaan Widelandsin parantamiseksi; erityisesti grafiikat kaipaavat kehittämistä."
 
 #: ../../txts/README:36
 msgid "Keyboard shortcuts (in-game)"
-msgstr "Näppäimistöoikotiet (pelissä)"
+msgstr "Näppäimistöoikotiet (pelin aikana)"
 
 #: ../../txts/README:40
-#, fuzzy
 msgid "SPACE       Toggle build-help"
-msgstr "SPACE       Rakennusapu päälle/pois"
+msgstr "SPACE      Näytä/piilota rakennusapumerkit"
 
 #: ../../txts/README:42
 msgid "M               Toggle minimap"
-msgstr "M               Minikartta päälle/pois"
+msgstr "M               Näytä/piilota minikartta"
 
+# TODO: msgid is gibberish
 #: ../../txts/README:44
 msgid "C               Toggle census"
-msgstr ""
+msgstr "C               Näytä/piilota rakennuksen lisätiedot (muokattavissa)"
 
+# TODO: msgid is gibberish
 #: ../../txts/README:46
 msgid "S               Toggle statistics"
-msgstr "S               Statistiikat päälle/pois"
+msgstr "S               Näytä/piilota rakennusten nimet (muokattavissa)"
 
 #: ../../txts/README:48
-#, fuzzy
 msgid "O               Toggle objectives display"
-msgstr "S               Statistiikat päälle/pois"
+msgstr "O               Näytä/piilota tavoitteet"
 
 #: ../../txts/README:50
 msgid "F               Toggle Fullscreen"
@@ -225,115 +225,117 @@ msgstr "F               Kokoruudun tila päälle/pois"
 
 #: ../../txts/README:52
 msgid "Home        Center main mapview on starting location"
-msgstr ""
+msgstr "Home       Keskitä päänäkymä aloituspisteeseen"
 
 #: ../../txts/README:55
 msgid "PAGEUP         Increase gamespeed"
-msgstr "PAGEUP         Lisää pelinopeutta"
+msgstr "PageUp         Lisää pelinopeutta"
 
 #: ../../txts/README:57
 msgid "PAGEDOWN    Decrease gamespeed"
-msgstr "PAGEDOWN    Vähennä pelinopeutta"
+msgstr "PageDown    Vähennä pelinopeutta"
 
 #: ../../txts/README:60
 msgid "F5           Reveals the entire map (only in debug-builds)"
-msgstr ""
+msgstr "F5          Paljasta koko kartta (vain debug-versioissa)"
 
 #: ../../txts/README:62
 msgid "F6           Shows the debug console (only in debug-builds)"
-msgstr ""
+msgstr "F6          Näytä debug-konsoli (vain debug-versioissa)"
 
 #: ../../txts/README:64
 msgid "F10         Quit the game immediately"
-msgstr "F10         Poistu pelistä välittömästi"
+msgstr "F10        Poistu pelistä välittömästi"
 
 #: ../../txts/README:66
 msgid "F11         Take a screenshot"
-msgstr "F11         Ota ruudunkaappaus"
+msgstr "F11        Ota ruudunkaappaus"
 
 #: ../../txts/README:69
 msgid "When finishing a road, if Ctrl is down, place flags along the road. Default is to place flags from end to start. If Shift is also down, place flags from start to end instead."
-msgstr ""
+msgstr "Kun valmistat tietä, paina Ctrl-näppäin pohjaan kun valitset tien loppupään: tällöin tien varrelle asetetaan lippuja automaattisesti. Oletuksena liput asetetaan tien alusta loppuun. Jos lisäksi vaihtonäppäin (Shift) on pohjassa, asettelujärjestys on käänteinen, lopusta alkuun."
 
 #: ../../txts/README:74
 msgid "Online Help"
-msgstr "Online-apu"
+msgstr "Verkko-ohje"
 
 #: ../../txts/README:78
 msgid "If you need documentation or help for Widelands or the Widelands Editor, be sure to visit our homepage. You can find an up to date online help at:"
-msgstr ""
+msgstr "Jos tarvitset dokumentaatiota tai ohjeita koskien Widelandsia tai Widelands-karttamuokkainta, vieraile toki kotisivullamme. Voit löytää ajantasaiset verkko-ohjeet osoitteesta"
 
 #: ../../txts/README:86
 msgid "Reporting Bugs"
-msgstr "Bugien raportointi"
+msgstr "Vikaraportit"
 
+# TODO: all url-endians should use %s to place the url; missing period in at least this message (in the middle)
 #: ../../txts/README:90
 msgid "If you want to report bugs, please send your report to the mailing list, <widelands-public@list.sourceforge.net><br>To subscribe, visit the following page:"
-msgstr ""
+msgstr "Jos haluat tehdä raportin viasta, lähetä raportti postituslistallemme, <widelands-public@list.sourceforge.net>.<br>Voit liittyä listalle osoitteessa"
 
 #: ../../txts/README:95
 msgid "Please provide enough background information. Tell us:"
-msgstr ""
+msgstr "Toivomme sinun littävän raporttiin riittävät taustatiedot virheen paikantamiseksi. Kerro meille:"
 
 #: ../../txts/README:98
 msgid "- what version of Widelands did you use (i.e. the build number, or whether it's<br>a custom compile from SVN)"
-msgstr ""
+msgstr "- mitä Widelands-versiota käytit (so. build-numero tai käännös SVN:stä),"
 
 #: ../../txts/README:100
 msgid "- how to reproduce the bug"
-msgstr "- Kuinka ongelma voidaan toistaa"
+msgstr "- kuinka ongelma voidaan toistaa, ja"
 
 #: ../../txts/README:102
 msgid "- which map you were playing"
-msgstr "- Mitä karttaa pelasit"
+msgstr "- mitä karttaa pelasit. Lisäksi"
 
 #: ../../txts/README:104
 msgid "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-game. For more explanation, see the section on Replays below."
-msgstr ""
+msgstr "- lähetä meille (zip-, hzip- tai bzip2-) pakattu pelin toistotiedosto, mikäli virhe tapahtui pelin aikana. Pelien toisto -luku alla selittää tämän tarkemmin.  Viimeiseksi,"
 
 #: ../../txts/README:106
 msgid "- send us a compressed (zip, gzip, bzip2) session record if possible, unless the<br>bug is trivial to reproduce. In fact, it may be a good idea to always record<br>your sessions in case a bug surfaces. For more explanation, see below."
-msgstr ""
+msgstr "- mikäli mahdollista, lähetä meille (zip-, bzip- tai bzip2-) pakattu sessiotallenne. Tämä ei ole tarpeen mikäli virheen toisto on yksinkertaista. Voit myös asettaa sessiosi tallentumaan automaattisesti aina siltä varalta että jokin virhe ilmaantuu. Sessiotallenteen luonti -osio alla antaa lisätietoa aiheesta."
 
+# TODO: if we can't start the paragraph, including the end tag is really an unnecessary error source
 #: ../../txts/README:111
 msgid "Replays</p>"
-msgstr ""
+msgstr "Pelien toisto</p>"
 
 #: ../../txts/README:114
 msgid "Widelands records every game you play in two files. One of these files has a .wrpl.wgf extension and contains an initial savegame. The other file has just a .wrpl extension and contains all commands that were issued by all players, such as building a road or attacking an enemy. The rest of the filenames will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands tallettaa kaikki pelaamasi pelit kahteen tiedostoon. Automaattisen alkutallennuksen tiedoston pääte on .wrpl.wgf. Pelin toistotiedoston pääte on pelkkä .wrpl, ja se sisältää kaikkien pelaajien syöttämät kaikki komennot, kuten rakennusten rakentamisen tai vihollisen kimppuun hyökkäämisen. Tiedostonimien alkuosat asetetaan sen mukaan, mihin aikaan aloitit pelin."
 
 #: ../../txts/README:116
 msgid "Using the Watch Replay option in the main menu, a previously played game will be precisely reconstructed for you to watch. Note, however, that even small changes in the game data files or the Widelands executable can cause a replay to become incompatible and to 'go out of sync'. This is similar to how network games will suffer from desynchronization problems if one of the players has a different version of the game."
-msgstr ""
+msgstr "Voit käyttää päävalikon \"Katso pelin toisto\" -nappia näyttääksesi aiemmin pelatun pelin tarkalleen sellaisena kuin se pelattiin. Huomaa kuitenkin, että pienetkin muutokset pelin datatiedostoissa tai itse ohjelmatiedostoissa voi tehdä pelin toistosta epäyhteensopivan, kun se ei enää ole 'synkronoitu' itse pelin kanssa. Tämä ilmiö on samankaltainen kuin epäsynkronisuusongelmat, jotka aiheutuvat siitä kun verkkopelaajat käyttävät keskenään erilaisia versioita pelistä."
 
 #: ../../txts/README:118
 msgid "Replays are a very useful tool to find bugs in the game logic code, so we ask you to attach replay files to all bug reports that you submit. The replay files are saved in the ~/.widelands/replays directory in your home on Linux and in the replays subdirectory of your Widelands installation on Windows."
-msgstr ""
+msgstr "Pelien toisto on erittäin hyödyllinen työkalu virheiden paikantamiseen pelilogiikan toteutuksessa, joten toivomme sinun liittävän pelin toistotiedostot kaikkiin lähettämiiso vikaraportteihin. Toistotiedostot tallennetaan Linuxissa kotihakemistosi alle hakemistoon ~/.widelands/replays, Windowsissa taas Widelands-asennushakemistosi alle replays-alihakemistoon."
 
 #: ../../txts/README:122
 msgid "Creating a Session Record</p>"
-msgstr ""
+msgstr "Sessiotallenteen luonti</p>"
 
 #: ../../txts/README:125
 msgid "Widelands can record all your keypresses and mouse movements to a file. It can then replay an entire session from starting the game to exiting it. This is really helpful for debugging problems."
-msgstr ""
+msgstr "Widelands voi tallettaa kaikki näppäinkomentosi ja hiiren liikkeet tiedostoon. Tällöin se voi toistaa kokonaisen session pelin käynnistämisestä sen loppuun asti. Tämä on suureksi avuksi ongelmien syitä metsästettäessä."
 
 #: ../../txts/README:128
 msgid "To create a session record, start the game with the --record parameter. On Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
-msgstr ""
+msgstr "Voit luoda sessiotallenteen käynnistämällä pelin komentoriviparametrillä --record. Linuxissa käynnistäisit pelin siis näin: ./widelands --record=tallenne.rec "
 
 #: ../../txts/README:131
 msgid "On Windows, create a shortcut to the file widelands.exe (right-click on widelands.exe and choose Create Shortcut). Then edit the shortcut (right-click on the newly created shortcut and choose Properties). The Target field should read something like c:\\games\\widelands\\widelands.exe. Change this to c:\\games\\widelands\\widelands.exe --record=filename.rec."
-msgstr ""
+msgstr "Windowsissa vastaava onnistuu luomalla pikakuvake tiedostoon widelands.exe (napsauta oikealla napilla Widelands.exe-tiedostoa, ja valitse Luo pikakuvake). Muokkaa sitten pikakuvaketta (napsauta sitä hiiren oikealla napilla ja valitse Ominaisuudet). Kohde-kentässä pitäisi lukea jotain sellaista kuin C:\\Ohjelmatiedostot\\widelands\\widelands.exe. Lisää parametri sen loppuun näin: C:\\Ohjelmatiedostot\\widelands\\widelands.exe --record=tallenne.rec."
 
 #: ../../txts/README:134
 msgid "A binary file called filename.rec will be created. To play it back, perform the same steps as outlined above, but replace --record with --playback."
-msgstr ""
+msgstr "Sessio tallentuu tällöin binääritiedostoon nimeltä tallenne.rec. Toistaaksesi session toista edellä kuvatut askeleet, mutta korvaa --record parametrillä --playback. "
 
 #: ../../txts/README:137
 msgid "Note that while recorded files are platform independent, they generally won't work across different versions of Widelands, because the user interface and the order in which low-level functions can be called may change between versions. Session records are not intended to serve as demo files; they are mostly a debugging tool which helps us to track down bugs."
-msgstr ""
+msgstr "Huomaa myös että vaikka tallenteet ovat järjestelmäriippumattomia, ne useimmiten eivät toimi Widelandsin version vaihtuessa, koska käyttöliittymä ja matalan tason toimintojen kutsumajärjestys saattaa muuttua versioiden välillä. Sessiotallenteita ei siten kannata käyttää esimerkiksi demotiedostoina, vaan ne ovat lähinnä vianmetsästystyökalu."
 
 #: ../../txts/developers:1
 msgid "Development"
@@ -341,175 +343,175 @@ msgstr "Kehitys"
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
-msgstr ""
+msgstr "Widelands-kehittäjät"
 
 #: ../../txts/developers:9
 msgid "Chieftain"
-msgstr ""
+msgstr "Päällikkö"
 
 #: ../../txts/developers:15
 msgid "Elders"
-msgstr ""
+msgstr "Vanhimmat"
 
 #: ../../txts/developers:19 ../../txts/developers:291
 msgid "Graphics"
-msgstr ""
+msgstr "Grafiikka"
 
 #: ../../txts/developers:22 ../../txts/developers:29 ../../txts/developers:36
 msgid "vacant"
-msgstr ""
+msgstr "(täyttämättä)"
 
 #: ../../txts/developers:26 ../../txts/developers:284
 msgid "Homepage"
-msgstr ""
+msgstr "Kotisivu"
 
 #: ../../txts/developers:33 ../../txts/developers:297
 msgid "Sound"
-msgstr ""
+msgstr "Ääni"
 
 #: ../../txts/developers:40 ../../txts/developers:302
 msgid "Translation"
-msgstr ""
+msgstr "Käännökset"
 
 #: ../../txts/developers:48
 msgid "Coders"
-msgstr ""
+msgstr "Ohjelmoijat"
 
 #: ../../txts/developers:74
 msgid "Graphicians"
-msgstr ""
+msgstr "Graafikot"
 
 #: ../../txts/developers:98
 msgid "Musicians"
-msgstr ""
+msgstr "Muusikot"
 
 #: ../../txts/developers:109
 msgid "Sound Effects"
-msgstr ""
+msgstr "Äänitehosteet"
 
 #: ../../txts/developers:116
 msgid "Maps and Missions"
-msgstr ""
+msgstr "Kartat ja missiot"
 
 #: ../../txts/developers:129
 msgid "Campaign Story"
-msgstr ""
+msgstr "Kampanjatarina"
 
 #: ../../txts/developers:132
 msgid "Barbarian"
-msgstr ""
+msgstr "Barbaarit"
 
 #: ../../txts/developers:137
 msgid "Empire"
-msgstr ""
+msgstr "Keisarikunta"
 
 #: ../../txts/developers:143
 msgid "Translators"
-msgstr ""
+msgstr "Kääntäjät"
 
 #: ../../txts/developers:147
 msgid "Czech"
-msgstr ""
+msgstr "Tsekki"
 
 #: ../../txts/developers:153
 msgid "Dansk"
-msgstr ""
+msgstr "Tanska"
 
 #: ../../txts/developers:158
 msgid "Dutch"
-msgstr ""
+msgstr "Hollanti"
 
 #: ../../txts/developers:164
 msgid "Finnish"
-msgstr ""
+msgstr "Suomi"
 
 #: ../../txts/developers:170
 msgid "French"
-msgstr ""
+msgstr "Ranska"
 
 #: ../../txts/developers:177
 msgid "Galician"
-msgstr ""
+msgstr "Galego"
 
 #: ../../txts/developers:182
 msgid "German"
-msgstr ""
+msgstr "Saksa"
 
 #: ../../txts/developers:192
 msgid "Hebrew"
-msgstr ""
+msgstr "Heprea"
 
 #: ../../txts/developers:197
 msgid "Hungarian"
-msgstr ""
+msgstr "Unkari"
 
 #: ../../txts/developers:202
 msgid "Polish"
-msgstr ""
+msgstr "Puola"
 
 #: ../../txts/developers:210
 msgid "Russian"
-msgstr ""
+msgstr "Venäjä"
 
 #: ../../txts/developers:215
 msgid "Slovak"
-msgstr ""
+msgstr "Slovakki"
 
 #: ../../txts/developers:220
 msgid "Spanish"
-msgstr ""
+msgstr "Espanja"
 
 #: ../../txts/developers:225
 msgid "Swedish"
-msgstr ""
+msgstr "Ruotsi"
 
 #: ../../txts/developers:233
 msgid "Packagers"
-msgstr ""
+msgstr "Paketoijat"
 
 #: ../../txts/developers:237
 msgid "Linux Distributions"
-msgstr ""
+msgstr "Linux-jakelut"
 
 #: ../../txts/developers:248
 msgid "Other Unix Distributions"
-msgstr ""
+msgstr "Muut Unix-jakelut"
 
 #: ../../txts/developers:257
 msgid "Non Unix Distributions"
-msgstr ""
+msgstr "Muut kuin Unix-jakelut"
 
 #: ../../txts/developers:268
 msgid "Wiki and Enduser-Documentation"
-msgstr ""
+msgstr "Wiki ja loppukäyttäjien dokumentaatio"
 
 #: ../../txts/developers:280
 msgid "Former elders"
-msgstr ""
+msgstr "Entiset vanhimmat"
 
 #: ../../txts/developers:308
 msgid "Other"
-msgstr ""
+msgstr "Muut"
 
 #: ../../txts/editor_readme:1
 msgid "README for the Widelands Editor"
-msgstr "LUEMINUT Widelandsin muokkaimelle"
+msgstr "Ohje Widelandsin karttamuokkaimelle"
 
 #: ../../txts/editor_readme:4
 msgid "README for the Editor"
-msgstr "LUEMINUT karttamuokkaimelle"
+msgstr "Ohje karttamuokkaimelle"
 
 #: ../../txts/editor_readme:10
 msgid "This Editor is intended for players who would like to design their own maps to use with Widelands.<br>As you can see, this Editor is heavy work in progress and as the Editor becomes better and better this text will also get longer and more complete."
-msgstr ""
+msgstr "Tämä muokkain on tarkoitettu käyttäjille, jotka haluavat suunnitella omia karttojaan Widelandsissa käytettäväksi.<br>Kuten näkyy, muokkain on vielä varsin keskeneräinen, ja sen kehittyessä tämäkin teksti pidentyy ja täydellistyy."
 
 #: ../../txts/editor_readme:12
 msgid "Please look into our enduser manuals in our wiki-pages at:"
-msgstr ""
+msgstr "Katso myös loppukäyttäjien ohjekirjoja wikisivuillamme osoitteessa "
 
 #: ../../txts/editor_readme:14
 msgid "Those pages might be more complete and up to date than this file. And there you further can find a short tutorial about building a map."
-msgstr ""
+msgstr "Sivuston ohjeet voivat hyvinkin olla täydellisempiä ja päiväntasaisempia kuin tämä tiedosto, ja sieltä löydät mm. lyhyen opastuksen kartan rakentamiseen."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
@@ -517,158 +519,162 @@ msgstr "Näppäimistöoikotiet"
 
 #: ../../txts/editor_readme:21
 msgid "SPACE    Toggles build help"
-msgstr "SPACE    Rakennusapu päälle/pois"
+msgstr "SPACE    Näytä/piilota rakennusapuri"
 
 #: ../../txts/editor_readme:23
 msgid "C        Toggles census on/off"
-msgstr ""
+msgstr "C        Näytä/piilota rakennusten nimet (muokattavissa)"
 
 #: ../../txts/editor_readme:25
 msgid "E        Toggles event menu"
-msgstr ""
+msgstr "E        Näytä/piilota tapahtumavalikko"
 
 #: ../../txts/editor_readme:27
-#, fuzzy
 msgid "F        Toggles fullscreen"
-msgstr "F        Koko ruudun tila päälle/pois"
+msgstr "F        Koko ruudun tila käyttöön/pois"
 
 #: ../../txts/editor_readme:29
 msgid "H        Toggles main menu"
-msgstr "H        Päävalikko"
+msgstr "H        Näytä/piilota päävalikko"
 
 #: ../../txts/editor_readme:31
 msgid "M        Toggles minimap"
-msgstr "M        Minikartta"
+msgstr "M        Näytä/piilota minikartta"
 
 #: ../../txts/editor_readme:33
 msgid "P        Toggles player menu"
-msgstr "P        Pelaajavalikko"
+msgstr "P        Näytä/piilota pelaajavalikko"
 
 #: ../../txts/editor_readme:35
 msgid "T        Toggles tools menu"
-msgstr ""
+msgstr "T        Näytä/piilota työkaluvalikko"
 
 #: ../../txts/editor_readme:37
 msgid "I        Activates information tool"
-msgstr ""
+msgstr "I        Aktivoi infotyökalu"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
-msgstr "CTRL+L   Lataa kartta"
+msgstr "Ctrl+L   Lataa kartta"
 
 #: ../../txts/editor_readme:41
 msgid "CTRL+S   Save Map"
-msgstr "CTRL+S   Tallenna kartta"
+msgstr "Ctrl+S   Tallenna kartta"
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
-msgstr ""
+msgstr "1-0      Muuta työkalun kokoa"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
-msgstr ""
+msgstr "Vaihto   (Pohjassa) Valitse 1. vaihtoehtoinen työkalu alaspainettuna"
 
 #: ../../txts/editor_readme:47
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
-msgstr ""
+msgstr "Alt      (Pohjassa) Valitse 2. vaihtoehtoinen työkalu alaspainettuna"
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid "Always build a forester's and a fish breeder's house, so you will not run out of trunks and food."
-msgstr ""
+msgstr "Rakenna aina metsänvartijan talo ja kalankasvattajan talo, jotteivät puu- ja ruokavarantosi pääse loppumaan."
 
 #: ../../txts/tips/barbarians.tip:2 ../../txts/tips/atlanteans.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid "Some buildings, such as the farm, have a very small working area. If the building is surrounded with trees or roads, production will stop."
-msgstr ""
+msgstr "Jotkin rakennukset, kuten maatila, toimivat hyvin pienellä alueella. Jos rakennus on puiden tai teiden ympäröimä, sen tuotanto lakkaa."
 
 #: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid "Keep an eye on your fishers. After fish resources are exhausted in their working area, they will stop to fish."
-msgstr ""
+msgstr "Pidä kalastajiasi silmällä. Kun kala loppuu niiden toiminta-alueelta, he lakkaavat kalastamasta."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid "Always build a ranger's and a gamekeeper's hut, so you will not run out of trunks and food."
-msgstr ""
+msgstr "Rakenna aina metsänvartijan ja riistanvartijan majat, jotta puu- ja ruokavarantosi eivät pääse loppumaan."
 
 #: ../../txts/tips/editor.tip:2
 msgid "You can find general help for the editor as well as a short tutorial in our wiki at www.widelands.org"
-msgstr ""
+msgstr "Voit löytää yleisiä ohjeita muokkaimen käytöstä ja lyhyen opastuksen kartanluontiin wikistä osoitteessa www.widelands.org"
 
 #: ../../txts/tips/editor.tip:6
 msgid "You can select multiple nature object (bob) types if you hold down CTRL during selection. If you then click on the map, an instance of one of the selected object types will be placed."
-msgstr ""
+msgstr "Voit valita useita objektityyppejä (\"bobeja\") jos painat pohjaan Ctrl-näppäimen valitessasi niitä. Jos sen jälkeen napsautat karttaa, yksi objekti jotakin valittua tyyppiä asetetaan osoittamaasi kohtaan."
 
 #: ../../txts/tips/editor.tip:10
 msgid "Like with natural objects (bobs), you can also select multiple animals or groundtextures with CTRL + Mouseclick."
-msgstr ""
+msgstr "Voit liikkumattomien objektien tapaan valita myös useita vaihtoehtoisia liikkuvia objekteja (eläimiä) tai maastotyyppejä eli tekstuureja Ctrl-napsautuksella."
 
+# TODO: Complete opposite, not difference.
 #: ../../txts/tips/editor.tip:14
 msgid "Holding down SHIFT switches first alternative tool on. This tool is in most cases the complete difference of the normal tool (for example deletion of an object instead of placing one)."
-msgstr ""
+msgstr "Vaihtonäppäimen pohjaanpainaminen ottaa käyttöön ensimmäisen vaihtoehtoisen työkalun. Tämä työkalu on useimmissa tapauksissa perustyökalun täysi vastakohta - esimerkiksi sijoitustyökalun vastakohtana on poistotyökalu."
 
 #: ../../txts/tips/editor.tip:18
 msgid "Holding down ALT switches second alternative tool on (if it exists)."
-msgstr ""
+msgstr "Alt-näppäimen pohjaanpainaminen vaihtaa käyttöön toisen vaihtoehtoisen työkalun, mikäli sellainen on saatavilla."
 
 #: ../../txts/tips/editor.tip:22
 msgid "The number keys (1 - 0) allow you to directly set the size of the selected area around your mouse."
-msgstr ""
+msgstr "Numeronäppäimet (1-0) asettavat suoraan hiiren osoittimen ympärillä olevan valittavan alueen koon."
 
 #: ../../txts/tips/editor.tip:26
 msgid "SPACE key behaves like in normal game. It switches buildhelp on or off."
-msgstr ""
+msgstr "Välilyönti toimii kuten pelissäkin, näyttäen tai piilottaen rakennusapusymbolit."
 
 #: ../../txts/tips/editor.tip:30
 msgid "The tools for events, triggers, event chains and objectives are still under heavy development. If you've got a question or found a problem, meet us in the editor forums at www.widelands.org"
-msgstr ""
+msgstr "Tapahtumien, liipaisinten ja tapahtumaketjujen sekä tavoitteiden hallintatyökalut ovat vielä varsin keskeneräisiä. Jos sinulla on kysymyksiä tai törmäät ongelmiin, kutsumme sinut keskustelufoorumeillemme osoitteessa www.widelands.or"
 
+# TODO: widelands.org urls inconsistent across the documentation (www., without, wl).
 #: ../../txts/tips/editor.tip:34
 msgid "You can find a reference for all triggers and events in our wiki at widelands.org."
-msgstr ""
+msgstr "Kaikille liipaisimille ja tapahtumille on selite wikissämme, osoitteesas widelands.org."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester's house so you will not run out of trunks."
-msgstr ""
+msgstr "Rakenna aina metsänvartijan talo, jotta puuvarantosi eivät kulu loppuun."
 
 #: ../../txts/tips/general_game.tip:2
 msgid "The building process will only start after a road is built to the construction site."
-msgstr ""
+msgstr "Rakentaminen alkaa varsinaisesti vasta kun rakennuspaikka on yhdistetty tieverkostoon."
 
 #: ../../txts/tips/general_game.tip:6
 msgid "Be sure to send a geologist to survey sites before building a well or a mine."
-msgstr ""
+msgstr "Muista lähettää geologi tutkimaan alue ennen kuin rakennat kaivon tai kaivoksen."
 
+# TODO: split between tribes to minimize confusion, no?
 #: ../../txts/tips/general_game.tip:10
 msgid "Your territory can be expanded by building various military buildings - Sentry, Fortress, Barracks, etc."
-msgstr ""
+msgstr "Voit laajentaa valtakuntaasi rakentamalla erilaisia sotilasrakennuksia - vartiopaikkoja, linnakkeita, parakkeja jne."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will only work if supplied with food."
-msgstr ""
+msgstr "Kaivostyöläiset tekevät töitä vain, kun saavat ruokaa."
 
 #: ../../txts/tips/general_game.tip:18
 msgid "Split your roads into shorter sections by planting some flags. This will speed up transportation of your wares."
-msgstr ""
+msgstr "Jaa tiesi lyhyempiin pätkiin asettamalla niille lippuja. Tämä nopeuttaa tavaroiden kuljetusta."
 
 #: ../../txts/tips/general_game.tip:22
 msgid "Any further questions? Our FAQs, the wiki and of course our community forums can be found at www.widelands.org."
-msgstr ""
+msgstr "Onko sinulla mielessä kysymyksiä? Usein kysytyt kysymykset, wiki ja tietenkin käyttäjäyhteisömme keskustelufoorumit odottavat sinua osoitteessa www.widelands.org."
 
 #: ../../txts/tips/general_game.tip:26
 msgid "Use priority buttons in building window to adjust delivery of a specific ware."
-msgstr ""
+msgstr "Käytä priorisointinappeja rakennusikkunoissa hienosäätääksesi tiettyjen tuotteiden jakelua."
 
+# TODO: the menu is opened at an unobvious place, note here how
 #: ../../txts/tips/general_game.tip:30
 msgid "Use the 'configure economy' menu to adjust the target quantity of a specific ware."
-msgstr ""
+msgstr "Käytä 'Muuta talouden asetuksia' -valikkoa (napsauta lippua löytääksesi sen) asettaaksesi tietyn tuotteen tuotannolle tavoitemäärät."
 
 #: ../../txts/tips/multiplayer.tip:2
 msgid "You can use 'Page up' and 'Page down' keys to adjust your wished speed - the real speed is than democratically set."
-msgstr ""
+msgstr "Voit käyttää PageUp- ja PageDown-näppäimiä säätääksesi toivomustasi pelin nopeudesta - varsinainen pelinnopeus asetetaan tämän perusteella demokraattisen äänestyksen perusteella."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid "You can use '/me' at the beginning of a chatmessage: '/me is tired' will be printed as '-> Nickname is tired'."
-msgstr ""
+msgstr "Voit käyttää /me-komentoa keskusteluviestien alussa; esim. '/me on väsynyt.' tulostuu muotoon '-> Käyttäjänimi on väsynyt.'"
 
+# TODO: Grammar on first sentence.
 #: ../../txts/tips/singleplayer.tip:2
 msgid "Our computer players are too boring? Visit our website at www.widelands.org and meet other players to play online."
-msgstr ""
+msgstr "Ovatko tietokonevastustajamme liian tylsiä? Käy verkkosivuillamme osoitteessa www.widelands.org (tai irkissä freenode-verkon kanavalla #widelands) ja tapaa muita pelaajia pelataksesi verkossa!"

@@ -2,14 +2,13 @@
 # Copyright (C) 2008 Widelands Development Team
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007.
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009.
-
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2009-06-04 12:52+0000\n"
-"PO-Revision-Date: 2009-04-11 20:16+0300\n"
+"PO-Revision-Date: 2009-06-15 12:06+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -245,7 +244,7 @@ msgstr "Levyhaarniska"
 
 #: ../../../tribes/empire/conf:90
 msgid "Ration"
-msgstr "Annos"
+msgstr "Ruoka-annos"
 
 #: ../../../tribes/empire/conf:91
 msgid "Saw"
@@ -277,7 +276,7 @@ msgstr "Vettä"
 
 #: ../../../tribes/empire/conf:98
 msgid "Wheat"
-msgstr "Viljaa"
+msgstr "Vehnä"
 
 #: ../../../tribes/empire/conf:99
 msgid "Wine"
@@ -313,7 +312,7 @@ msgstr "Leipomo"
 
 #: ../../../tribes/empire/conf:113
 msgid "Brewer"
-msgstr "Panimo"
+msgstr "Oluenpanija"
 
 #: ../../../tribes/empire/conf:114
 msgid "Builder"

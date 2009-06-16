@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2009-06-04 14:52+0200\n"
-"PO-Revision-Date: 2009-06-03 00:47+0300\n"
+"PO-Revision-Date: 2009-06-14 18:33+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -404,7 +404,7 @@ msgstr "sleep (nuku)"
 #: ../../src/writeHTML.cc:1013 ../../src/writeHTML.cc:1033
 #, c-format
 msgid " %u.%03u s"
-msgstr "%u %03u s"
+msgstr "%u,%03u s"
 
 #: ../../src/writeHTML.cc:1025
 msgid "Documentation for program command animate"
@@ -472,7 +472,7 @@ msgstr "Ohjeistus ohjelmakomennolle 'playFX'"
 
 #: ../../src/writeHTML.cc:1254 ../../src/writeHTML.cc:1260
 msgid "Ware types"
-msgstr "Tavaratyypit"
+msgstr "Tuotetyypit"
 
 # TODO: Needs translator comment in code
 #: ../../src/writeHTML.cc:1294
@@ -581,7 +581,7 @@ msgstr ""
 " --datadir=HAKEMISTO  Käytä annettua hakemistopolkua Widelandsin \n"
 "                      datatiedostoille\n"
 " --record=TIEDOSTO    Talleta kaikki tapahtumat annettuun tiedostoon\n"
-"                      myöhempää uudelleensoittoa varten\n"
+"                      myöhempää toistoa varten\n"
 " --playback=TIEDOSTO  Soita annettu tiedosto (ks. --record)\n"
 "\n"
 " --coredump=[yes|no]  Luo muistitallenteen muistialueen ylityksen jälkeen,\n"
@@ -792,11 +792,11 @@ msgstr "Valmistelen peliä"
 
 #: ../../src/wlapplication.cc:1774
 msgid "End of replay"
-msgstr "Uudelleenpeluun loppu"
+msgstr "Toiston loppu"
 
 #: ../../src/wlapplication.cc:1776
 msgid "The end of the replay has been reached and the game has been paused. You may unpause the game and continue watching if you want to."
-msgstr "Uudelleenpeluu on loppunut ja peli on keskeytetty. Voit jatkaa peliä ja tarkkailua halutessasi."
+msgstr "Pelin toisto on loppunut ja peli on keskeytetty. Voit jatkaa peliä ja tarkkailua halutessasi."
 
 #: ../../src/wlapplication.cc:1858 ../../src/logic/game.cc:323
 #: ../../src/logic/game.cc:362
@@ -894,9 +894,8 @@ msgstr "Kulutetut tuotetyypit"
 
 #: ../../src/encyclopedia_window.cc:80
 msgid "Quantity"
-msgstr "Vaadittu määrä"
+msgstr "Määrä"
 
-# Ei näin, paitsi jos pakko
 #: ../../src/encyclopedia_window.cc:186
 msgid " or "
 msgstr " tai "
@@ -1862,7 +1861,7 @@ msgstr "Näytä seuraava"
 
 #: ../../src/wui/game_options_menu.cc:52
 msgid "README"
-msgstr "Lue minut"
+msgstr "Ohje"
 
 #: ../../src/wui/game_options_menu.cc:60 ../../src/ui_fsmenu/main.cc:90
 msgid "License"
@@ -2106,9 +2105,8 @@ msgid "Name of your server:"
 msgstr "Palvelimen nimi:"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:75
-#, fuzzy
 msgid "Maximum of players:"
-msgstr "Pelaajien määrä"
+msgstr "Pelaajien maksimimäärä:"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:90
 #: ../../src/ui_fsmenu/netsetup_lan.cc:69
@@ -2345,7 +2343,7 @@ msgstr "Epäkelpo polku tiedostoon cconfigissa: %s"
 
 #: ../../src/ui_fsmenu/main.cc:48
 msgid "Single Player"
-msgstr "Yksinpeli"
+msgstr "Yksinpeli ja kampanjat"
 
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "Multi Player"
@@ -2362,7 +2360,7 @@ msgstr "Muokkain"
 #: ../../src/ui_fsmenu/main.cc:83
 #: ../../src/editor/ui_menus/editor_main_menu.cc:81
 msgid "View Readme"
-msgstr "Lueminut-ohje"
+msgstr "Lue käyttöohje"
 
 # Todo: ei näin
 #: ../../src/ui_fsmenu/main.cc:104
@@ -2375,7 +2373,7 @@ msgstr "Widelands-kehittäjätiimi"
 
 #: ../../src/ui_fsmenu/options.cc:62 ../../src/ui_fsmenu/options.cc:372
 msgid "Advanced Options"
-msgstr "Laajat asetukset"
+msgstr "Tarkemmat asetukset"
 
 #: ../../src/ui_fsmenu/options.cc:76 ../../src/ui_fsmenu/options.cc:350
 msgid "Apply"
@@ -2395,7 +2393,7 @@ msgstr "Koko ruutu"
 
 #: ../../src/ui_fsmenu/options.cc:106
 msgid "Grab Input"
-msgstr "Nappaa syöte"
+msgstr "Kaappaa syöte"
 
 #: ../../src/ui_fsmenu/options.cc:112
 msgid "Enable Music"
@@ -2403,11 +2401,12 @@ msgstr "Soita taustamusiikkia"
 
 #: ../../src/ui_fsmenu/options.cc:118
 msgid "Enable Sound"
-msgstr "Soita äånitehosteet"
+msgstr "Soita äänitehosteet"
 
+# Really "Korkein näytön päivitysnopeus (FPS):", but no space.
 #: ../../src/ui_fsmenu/options.cc:123
 msgid "Maximum FPS:"
-msgstr "Korkein näytön päivitysnopeus (FPS):"
+msgstr "FPS-yläraja:"
 
 #: ../../src/ui_fsmenu/options.cc:133
 msgid "In-game resolution"
@@ -2459,7 +2458,7 @@ msgstr "Päävalikon kirjasin:"
 
 #: ../../src/ui_fsmenu/options.cc:390
 msgid "Do not zip widelands data files (maps, replays and savegames)."
-msgstr "Älä paketoi Widelands-datatiedostoja (karttoja, uudelleenpeluita ja tallenuksia)."
+msgstr "Älä paketoi Widelands-datatiedostoja (karttoja, pelin toistoja ja tallenuksia)."
 
 #: ../../src/ui_fsmenu/options.cc:395
 msgid "Speed of a new game:"
@@ -2476,11 +2475,11 @@ msgstr "Etäisyys, jolla ikkunat kiinnittyvät ruudun laitoihin:"
 
 #: ../../src/ui_fsmenu/options.cc:408
 msgid "Graphics experimental improvements."
-msgstr "Grafiikan kokeellisia parannuksia."
+msgstr "Käytä grafiikan kokeellisia parannuksia."
 
 #: ../../src/ui_fsmenu/options.cc:414
 msgid "Graphics double buffering."
-msgstr "Grafiikan kaksoispuskurointi."
+msgstr "Käytä grafiikan kaksoispuskurointia."
 
 #: ../../src/ui_fsmenu/options.cc:432
 msgid "Pause"

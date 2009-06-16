@@ -1,39 +1,38 @@
-# Widelands po/fi_FI/worlds/winterland.po
-# Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-#
+# Widelands po/fi_FI/worlds/greenland.po
+# Copyright (C) 2009 Widelands Development Team
+# Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
+# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2005?
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-04 12:52+0000\n"
-"PO-Revision-Date: 2007-03-24 05:47+0200\n"
-"Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
-"Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"POT-Creation-Date: 2009-05-09 09:25+0000\n"
+"PO-Revision-Date: 2009-06-05 22:44+0300\n"
+"Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
+"Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Finnish\n"
-"X-Poedit-Country: FINLAND\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../../../worlds/winterland/conf:2
 msgid "The Widelands Development Team"
-msgstr "Widelands-kehittäjätiimi"
+msgstr "Widelands-kehittäjät"
 
 #: ../../../worlds/winterland/conf:3
 msgid "Winterland"
-msgstr "Talvimaa"
+msgstr "Ikitalven maat"
 
 #: ../../../worlds/winterland/conf:4
-msgid "These are the white, wide and frosty winterlands, in which the Northmen dwell."
-msgstr ""
+msgid ""
+"These are the white, wide and frosty winterlands, in which the Northmen "
+"dwell."
+msgstr "Nämä ovat valkeat, laajat ja jäätyneet ikitalven maat, joissa Pohjoisen väki asuu."
 
 #: ../../../worlds/winterland/conf:7 ../../../worlds/winterland/conf:8
 #: ../../../worlds/winterland/conf:9 ../../../worlds/winterland/conf:10
 #: ../../../worlds/winterland/conf:11
 msgid "Bush"
-msgstr "Puska"
+msgstr "Pensas"
 
 #: ../../../worlds/winterland/conf:12 ../../../worlds/winterland/conf:13
 #: ../../../worlds/winterland/conf:14 ../../../worlds/winterland/conf:15
@@ -53,7 +52,7 @@ msgstr "Sieni"
 #: ../../../worlds/winterland/conf:23 ../../../worlds/winterland/conf:24
 #: ../../../worlds/winterland/conf:25 ../../../worlds/winterland/conf:26
 msgid "Pebble"
-msgstr "Sora"
+msgstr "Kivi"
 
 #: ../../../worlds/winterland/conf:27 ../../../worlds/winterland/conf:28
 #: ../../../worlds/winterland/conf:29
@@ -62,14 +61,14 @@ msgstr "Luuranko"
 
 #: ../../../worlds/winterland/conf:30
 msgid "Snowman"
-msgstr ""
+msgstr "Lumiukko"
 
 #: ../../../worlds/winterland/conf:31 ../../../worlds/winterland/conf:32
 #: ../../../worlds/winterland/conf:33 ../../../worlds/winterland/conf:34
 #: ../../../worlds/winterland/conf:35 ../../../worlds/winterland/conf:36
 #: ../../../worlds/winterland/conf:37
 msgid "Standing Stones"
-msgstr ""
+msgstr "Pystykiviä"
 
 #: ../../../worlds/winterland/conf:38 ../../../worlds/winterland/conf:39
 #: ../../../worlds/winterland/conf:40 ../../../worlds/winterland/conf:41
@@ -77,142 +76,145 @@ msgstr ""
 msgid "Stones"
 msgstr "Kiviä"
 
+# TODO: Should have a comment: pawprints or a path
 #: ../../../worlds/winterland/conf:44
 msgid "Track"
-msgstr ""
+msgstr "Jälki"
 
 #: ../../../worlds/winterland/conf:45
 msgid "Aspen"
-msgstr ""
+msgstr "Haapa"
 
 #: ../../../worlds/winterland/conf:46
 msgid "Aspen medium"
-msgstr ""
+msgstr "Haapa keskikokoinen"
 
 #: ../../../worlds/winterland/conf:47
 msgid "Aspen small"
-msgstr ""
+msgstr "Haapa pieni"
 
 #: ../../../worlds/winterland/conf:48
 msgid "Aspen tiny"
-msgstr ""
+msgstr "Haapa hyvin pieni"
 
+# TODO: for heaven's sake, one "?tree_and_size:%s %s" and a single translation of sizes and species!
 #: ../../../worlds/winterland/conf:49
 msgid "Oak"
-msgstr ""
+msgstr "Tammi"
 
 #: ../../../worlds/winterland/conf:50
 msgid "Oak medium"
-msgstr ""
+msgstr "Tammi keskikokoinen"
 
 #: ../../../worlds/winterland/conf:51
 msgid "Oak small"
-msgstr ""
+msgstr "Tammi pieni"
 
 #: ../../../worlds/winterland/conf:52
 msgid "Oak tiny"
-msgstr ""
+msgstr "Tammi hyvin pieni"
 
 #: ../../../worlds/winterland/conf:53
 msgid "Spruce"
-msgstr ""
+msgstr "Kuusi"
 
 #: ../../../worlds/winterland/conf:54
 msgid "Spruce medium"
-msgstr ""
+msgstr "Kuusi keskikokoinen"
 
 #: ../../../worlds/winterland/conf:55
 msgid "Spruce small"
-msgstr ""
+msgstr "Kuusi pieni"
 
 #: ../../../worlds/winterland/conf:56
 msgid "Spruce tiny"
-msgstr ""
+msgstr "Kuusi hyvin pieni"
 
 #: ../../../worlds/winterland/conf:57
 msgid "Maple"
-msgstr ""
+msgstr "Vaahtera"
 
 #: ../../../worlds/winterland/conf:58
 msgid "Maple medium"
-msgstr ""
+msgstr "Vaahtera keskikokoinen"
 
 #: ../../../worlds/winterland/conf:59
 msgid "Maple small"
-msgstr ""
+msgstr "Vaahtera pieni"
 
 #: ../../../worlds/winterland/conf:60
 msgid "Maple tiny"
-msgstr ""
+msgstr "Vaahtera hyvin pieni"
 
 #: ../../../worlds/winterland/conf:61
 msgid "Birch"
-msgstr ""
+msgstr "Koivu"
 
 #: ../../../worlds/winterland/conf:62
 msgid "Birch medium"
-msgstr ""
+msgstr "Koivu keskikokoinen"
 
 #: ../../../worlds/winterland/conf:63
 msgid "Birch small"
-msgstr ""
+msgstr "Koivu pieni"
 
 #: ../../../worlds/winterland/conf:64
 msgid "Birch tiny"
-msgstr ""
+msgstr "Koivu hyvin pieni"
 
 #: ../../../worlds/winterland/conf:65
 msgid "Beech"
-msgstr ""
+msgstr "Pyökki"
 
 #: ../../../worlds/winterland/conf:66
 msgid "Beech medium"
-msgstr ""
+msgstr "Pyökki keskikokoinen"
 
 #: ../../../worlds/winterland/conf:67
 msgid "Beech small"
-msgstr ""
+msgstr "Pyökki pieni"
 
 #: ../../../worlds/winterland/conf:68
 msgid "Beech tiny"
-msgstr ""
+msgstr "Pyökki hyvin pieni"
 
 #: ../../../worlds/winterland/conf:69
 msgid "Larch"
-msgstr ""
+msgstr "Lehtikuusi"
 
 #: ../../../worlds/winterland/conf:70
 msgid "Larch medium"
-msgstr ""
+msgstr "Lehtikuusi keskikokoinen"
 
 #: ../../../worlds/winterland/conf:71
 msgid "Larch small"
-msgstr ""
+msgstr "Lehtikuusi pieni"
 
 #: ../../../worlds/winterland/conf:72
 msgid "Larch tiny"
-msgstr ""
+msgstr "Lehtikuusi hyvin pieni"
 
 #: ../../../worlds/winterland/conf:73
 msgid "Rowan"
-msgstr ""
+msgstr "Pihlaja"
 
 #: ../../../worlds/winterland/conf:74
 msgid "Rowan medium"
-msgstr ""
+msgstr "Pihlaja keskikokoinen"
 
 #: ../../../worlds/winterland/conf:75
 msgid "Rowan small"
-msgstr ""
+msgstr "Pihlaja pieni"
 
 #: ../../../worlds/winterland/conf:76
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Pihlaja hyvin pieni"
 
 #: ../../../worlds/winterland/conf:79
 msgid "Badger"
-msgstr ""
+msgstr "Mäyrä"
 
+# TODO: Bunny is a dialect word, cf. doggy; use rabbit or hare or cony/coney.
 #: ../../../worlds/winterland/conf:80
 msgid "Bunny"
 msgstr "Jänis"
@@ -225,9 +227,10 @@ msgstr "Peura"
 msgid "Duck"
 msgstr "Ankka"
 
+# Occasionally also hirvi (moose).
 #: ../../../worlds/winterland/conf:83
 msgid "Elk"
-msgstr ""
+msgstr "Vapiti"
 
 #: ../../../worlds/winterland/conf:84
 msgid "Fox"
@@ -235,11 +238,11 @@ msgstr "Kettu"
 
 #: ../../../worlds/winterland/conf:85
 msgid "Lynx"
-msgstr ""
+msgstr "Ilves"
 
 #: ../../../worlds/winterland/conf:86
 msgid "Marten"
-msgstr ""
+msgstr "Näätä"
 
 #: ../../../worlds/winterland/conf:87
 msgid "Reindeer"
@@ -251,11 +254,11 @@ msgstr "Lammas"
 
 #: ../../../worlds/winterland/conf:89
 msgid "Wisent"
-msgstr ""
+msgstr "Visentti"
 
 #: ../../../worlds/winterland/conf:90
 msgid "Wolf"
-msgstr ""
+msgstr "Susi"
 
 #: ../../../worlds/winterland/resconf:4
 msgid "Coal"
@@ -280,6 +283,3 @@ msgstr "Vesi"
 #: ../../../worlds/winterland/resconf:41
 msgid "Fish"
 msgstr "Kala"
-
-#~ msgid "Tree"
-#~ msgstr "Puu"

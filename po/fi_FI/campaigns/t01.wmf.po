@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2009-06-04 12:52+0000\n"
-"PO-Revision-Date: 2009-04-13 21:54+0300\n"
+"PO-Revision-Date: 2009-06-13 22:20+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -99,7 +99,7 @@ msgstr "Neuvonantaja"
 
 #: ../../../campaigns/t01.wmf/event:132
 msgid "The elder remarks..."
-msgstr "Vanhus puhuu..."
+msgstr "Kylänvanhin puhuu..."
 
 #: ../../../campaigns/t01.wmf/event:134
 msgid " \"Obviously, it would be too draining for our people to walk all the way to the lumberjack's hut through the wilderness. We will have to make a path between our hall and the lumberjack's hut. It's not a hard guess that the men would appreciate a way as short and even as possible - the wood surely will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
@@ -150,7 +150,7 @@ msgstr "* Rakenna metsänvartijan maja ensimmäisen puunhakkaajan majasi itäpuo
 
 #: ../../../campaigns/t01.wmf/event:194
 msgid "The elder speaks..."
-msgstr "Vanhus puhuu..."
+msgstr "Kylänvanhin puhuu..."
 
 #: ../../../campaigns/t01.wmf/event:196
 msgid " \"I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations.<br> I would advise that we obtain stones for the future - who knows what fortifications we might be forced to build very soon. And - like a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- NEW OBJECTIVE --<br> "

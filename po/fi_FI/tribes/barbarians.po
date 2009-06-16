@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2009-06-04 12:52+0000\n"
-"PO-Revision-Date: 2009-04-11 20:12+0300\n"
+"PO-Revision-Date: 2009-06-15 20:33+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -76,19 +76,19 @@ msgstr "Pellava kypsä"
 
 #: ../../../tribes/barbarians/conf:47
 msgid "Reed medium"
-msgstr "Heinänkorsi keskikokoinen"
+msgstr "Kaisla keskikokoinen"
 
 #: ../../../tribes/barbarians/conf:48
 msgid "Reed small"
-msgstr "Heinänkorsi pieni"
+msgstr "Kaisla pieni"
 
 #: ../../../tribes/barbarians/conf:49
 msgid "Reed tiny"
-msgstr "Heinänkorsi hyvin pieni"
+msgstr "Kaisla hyvin pieni"
 
 #: ../../../tribes/barbarians/conf:50
 msgid "Reed ripe"
-msgstr "Heinänkorsi kypsä"
+msgstr "Kaisla kypsä"
 
 #: ../../../tribes/barbarians/conf:51
 msgid "Resource indicator coal little"
@@ -279,7 +279,7 @@ msgstr "Vahva olut"
 
 #: ../../../tribes/barbarians/conf:101
 msgid "Thatch Reed"
-msgstr "Olki"
+msgstr "Kaislanolki"
 
 #: ../../../tribes/barbarians/conf:102
 msgid "Trunk"
@@ -300,7 +300,7 @@ msgstr "Vesi"
 
 #: ../../../tribes/barbarians/conf:106
 msgid "Wheat"
-msgstr "Vilja"
+msgstr "Vehnä"
 
 #: ../../../tribes/barbarians/conf:109
 msgid "Carrier"
@@ -352,7 +352,7 @@ msgstr "Viljelijä"
 
 #: ../../../tribes/barbarians/conf:125
 msgid "Ferner"
-msgstr "Saniaisenkasvattaja"
+msgstr "Kaislankasvattaja"
 
 #: ../../../tribes/barbarians/conf:126
 msgid "Fisher"
@@ -514,7 +514,7 @@ msgstr "Maatila"
 
 #: ../../../tribes/barbarians/conf:176
 msgid "Fernery"
-msgstr "Saniaistalo"
+msgstr "Kaislaviljelmä"
 
 #: ../../../tribes/barbarians/conf:177
 msgid "Fisher's Hut"
@@ -599,15 +599,3 @@ msgstr "Keskikokoinen päämaja"
 #: ../../../tribes/barbarians/conf:199
 msgid "Citadel village"
 msgstr "Kastellikylä"
-
-#~ msgid "A real meal which satisfies all miners needs"
-#~ msgstr "Kunnon ateria, joka tyydyttää kaivostyöläisten näläntunteet"
-
-#~ msgid "Forester"
-#~ msgstr "Puunistuttaja"
-
-#~ msgid "Coalearth"
-#~ msgstr "Kivihiili"
-
-#~ msgid "Presser"
-#~ msgstr "Painaja"

@@ -1,39 +1,36 @@
-# Widelands po/fi_FI/worlds/blackland.po
-# Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-#
+# Widelands po/fi_FI/worlds/greenland.po
+# Copyright (C) 2009 Widelands Development Team
+# Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2005
+# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2005?
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-04 12:52+0000\n"
-"PO-Revision-Date: 2007-03-24 05:47+0200\n"
-"Last-Translator: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
-"Language-Team: Pekka Järvinen <pekka.jarvinen@gmail.com>\n"
+"POT-Creation-Date: 2009-05-09 09:25+0000\n"
+"PO-Revision-Date: 2009-06-05 22:41+0300\n"
+"Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
+"Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Finnish\n"
-"X-Poedit-Country: FINLAND\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../../../worlds/blackland/conf:2
 msgid "The Widelands Development Team"
-msgstr "Widelands-kehittäjätiimi"
+msgstr "Widelands-kehittäjät"
 
 #: ../../../worlds/blackland/conf:3
 msgid "Blackland"
-msgstr ""
+msgstr "Mustat maat"
 
 #: ../../../worlds/blackland/conf:4
 msgid "These are the grey, horrible and dangerous blacklands"
-msgstr ""
+msgstr "Nämä ovat harmaat, kauheat ja vaaralliset Mustat maat"
 
 #: ../../../worlds/blackland/conf:7 ../../../worlds/blackland/conf:8
 #: ../../../worlds/blackland/conf:9 ../../../worlds/blackland/conf:10
 #: ../../../worlds/blackland/conf:11
 msgid "Bush"
-msgstr "Puska"
+msgstr "Pensas"
 
 #: ../../../worlds/blackland/conf:12 ../../../worlds/blackland/conf:13
 msgid "Cactus"
@@ -57,7 +54,7 @@ msgstr "Sieni"
 #: ../../../worlds/blackland/conf:25 ../../../worlds/blackland/conf:26
 #: ../../../worlds/blackland/conf:27 ../../../worlds/blackland/conf:28
 msgid "Pebble"
-msgstr "Sora"
+msgstr "Kivi"
 
 #: ../../../worlds/blackland/conf:29 ../../../worlds/blackland/conf:30
 #: ../../../worlds/blackland/conf:31
@@ -69,7 +66,7 @@ msgstr "Luuranko"
 #: ../../../worlds/blackland/conf:36 ../../../worlds/blackland/conf:37
 #: ../../../worlds/blackland/conf:38
 msgid "Standing Stones"
-msgstr ""
+msgstr "Pystykiviä"
 
 #: ../../../worlds/blackland/conf:39 ../../../worlds/blackland/conf:40
 #: ../../../worlds/blackland/conf:41 ../../../worlds/blackland/conf:42
@@ -79,132 +76,134 @@ msgstr "Kiviä"
 
 #: ../../../worlds/blackland/conf:45
 msgid "Aspen"
-msgstr ""
+msgstr "Haapa"
 
 #: ../../../worlds/blackland/conf:46
 msgid "Aspen medium"
-msgstr ""
+msgstr "Haapa keskikokoinen"
 
 #: ../../../worlds/blackland/conf:47
 msgid "Aspen small"
-msgstr ""
+msgstr "Haapa pieni"
 
 #: ../../../worlds/blackland/conf:48
 msgid "Aspen tiny"
-msgstr ""
+msgstr "Haapa hyvin pieni"
 
+# TODO: for heaven's sake, one "?tree_and_size:%s %s" and a single translation of sizes and species!
 #: ../../../worlds/blackland/conf:49
 msgid "Oak"
-msgstr ""
+msgstr "Tammi"
 
 #: ../../../worlds/blackland/conf:50
 msgid "Oak medium"
-msgstr ""
+msgstr "Tammi keskikokoinen"
 
 #: ../../../worlds/blackland/conf:51
 msgid "Oak small"
-msgstr ""
+msgstr "Tammi pieni"
 
 #: ../../../worlds/blackland/conf:52
 msgid "Oak tiny"
-msgstr ""
+msgstr "Tammi hyvin pieni"
 
 #: ../../../worlds/blackland/conf:53
 msgid "Spruce"
-msgstr ""
+msgstr "Kuusi"
 
 #: ../../../worlds/blackland/conf:54
 msgid "Spruce medium"
-msgstr ""
+msgstr "Kuusi keskikokoinen"
 
 #: ../../../worlds/blackland/conf:55
 msgid "Spruce small"
-msgstr ""
+msgstr "Kuusi pieni"
 
 #: ../../../worlds/blackland/conf:56
 msgid "Spruce tiny"
-msgstr ""
+msgstr "Kuusi hyvin pieni"
 
 #: ../../../worlds/blackland/conf:57
 msgid "Maple"
-msgstr ""
+msgstr "Vaahtera"
 
 #: ../../../worlds/blackland/conf:58
 msgid "Maple medium"
-msgstr ""
+msgstr "Vaahtera keskikokoinen"
 
 #: ../../../worlds/blackland/conf:59
 msgid "Maple small"
-msgstr ""
+msgstr "Vaahtera pieni"
 
 #: ../../../worlds/blackland/conf:60
 msgid "Maple tiny"
-msgstr ""
+msgstr "Vaahtera hyvin pieni"
 
 #: ../../../worlds/blackland/conf:61
 msgid "Birch"
-msgstr ""
+msgstr "Koivu"
 
 #: ../../../worlds/blackland/conf:62
 msgid "Birch medium"
-msgstr ""
+msgstr "Koivu keskikokoinen"
 
 #: ../../../worlds/blackland/conf:63
 msgid "Birch small"
-msgstr ""
+msgstr "Koivu pieni"
 
 #: ../../../worlds/blackland/conf:64
 msgid "Birch tiny"
-msgstr ""
+msgstr "Koivu hyvin pieni"
 
 #: ../../../worlds/blackland/conf:65
 msgid "Beech"
-msgstr ""
+msgstr "Pyökki"
 
 #: ../../../worlds/blackland/conf:66
 msgid "Beech medium"
-msgstr ""
+msgstr "Pyökki keskikokoinen"
 
 #: ../../../worlds/blackland/conf:67
 msgid "Beech small"
-msgstr ""
+msgstr "Pyökki pieni"
 
 #: ../../../worlds/blackland/conf:68
 msgid "Beech tiny"
-msgstr ""
+msgstr "Pyökki hyvin pieni"
 
 #: ../../../worlds/blackland/conf:69
 msgid "Larch"
-msgstr ""
+msgstr "Lehtikuusi"
 
 #: ../../../worlds/blackland/conf:70
 msgid "Larch medium"
-msgstr ""
+msgstr "Lehtikuusi keskikokoinen"
 
 #: ../../../worlds/blackland/conf:71
 msgid "Larch small"
-msgstr ""
+msgstr "Lehtikuusi pieni"
 
 #: ../../../worlds/blackland/conf:72
 msgid "Larch tiny"
-msgstr ""
+msgstr "Lehtikuusi hyvin pieni"
 
 #: ../../../worlds/blackland/conf:73
 msgid "Rowan"
-msgstr ""
+msgstr "Pihlaja"
 
 #: ../../../worlds/blackland/conf:74
 msgid "Rowan medium"
-msgstr ""
+msgstr "Pihlaja keskikokoinen"
 
 #: ../../../worlds/blackland/conf:75
 msgid "Rowan small"
-msgstr ""
+msgstr "Pihlaja pieni"
 
 #: ../../../worlds/blackland/conf:76
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Pihlaja hyvin pieni"
 
+# TODO: Bunny is a dialect word, cf. doggy; use rabbit or hare or cony/coney.
 #: ../../../worlds/blackland/conf:79
 msgid "Bunny"
 msgstr "Jänis"
@@ -252,6 +251,3 @@ msgstr "Vesi"
 #: ../../../worlds/blackland/resconf:41
 msgid "Fish"
 msgstr "Kala"
-
-#~ msgid "Tree"
-#~ msgstr "Puu"
