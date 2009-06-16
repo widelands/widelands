@@ -82,7 +82,7 @@ void Game::SyncWrapper::StartDump(std::string const & fname) {
 	m_dump = g_fs->OpenStreamWrite(m_dumpfname);
 }
 
-#define MINIMUM_DISK_SPACE 180000000lu
+#define MINIMUM_DISK_SPACE 250000000lu
 
 void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 	uint32_t time = m_game.get_gametime();
@@ -96,7 +96,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 
 	if (m_dump) {
 		m_dump->Data(data, size);
-		if ((last_check_time - time) < 1000) {
+		if ((time - last_check_time) > 2000) {
 			if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
 				delete m_dump;
 				m_dump = 0;
@@ -634,7 +634,7 @@ void Game::enqueue_command (Command * const cmd)
 		if (upcast(PlayerCommand, plcmd, cmd)) {
 			m_replaywriter->SendPlayerCommand(plcmd);
 		}
-		if ((time - last_check_time) > 1000) {
+		if ((time - last_check_time) > 2000) {
 			last_check_time = time;
 			if (!m_replaywriter->hasDiskSpace()) {
 				m_writereplay = false;
