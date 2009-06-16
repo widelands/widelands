@@ -370,7 +370,7 @@ Load the animation
 ===============
 */
 static const uint32_t nextensions = 4;
-static const char extensions[nextensions][5] = {".bmp", ".png", ".gif", ".jpg"};
+static const char extensions[nextensions][5] = {".png", ".jpg", ".bmp", ".gif"};
 AnimationGfx::AnimationGfx(AnimationData const * data)
 : m_hotspot(data->hotspot)
 {
