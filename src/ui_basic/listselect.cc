@@ -88,7 +88,7 @@ BaseListselect::~BaseListselect()
 */
 void BaseListselect::clear() {
 	container_iterate_const(Entry_Record_deque, m_entry_records, i)
-		free(*i.current);
+		delete(*i.current);
 	m_entry_records.clear();
 
 	m_scrollbar.set_steps(1);
@@ -148,17 +148,16 @@ void BaseListselect::add_front
 	 PictureID    const picid,
 	 bool         const sel)
 {
-	Entry_Record & er = *static_cast<Entry_Record *>
-		(malloc(sizeof(Entry_Record) + strlen(name)));
+	Entry_Record * er = new Entry_Record();
 
-	er.m_entry = 0;
+	er->m_entry = 0;
 	container_iterate_const(Entry_Record_deque, m_entry_records, i)
 		++(*i.current)->m_entry;
 
-	er.picid = picid;
-	er.use_clr = false;
+	er->picid = picid;
+	er->use_clr = false;
 	//strcpy(er.name, name);
-	er.name = std::string(name);
+	er->name = std::string(name);
 
 	uint32_t entry_height = 0;
 	if (picid == g_gr->get_no_picture())
@@ -175,7 +174,7 @@ void BaseListselect::add_front
 	if (entry_height > m_lineheight)
 		m_lineheight = entry_height;
 
-	m_entry_records.push_front(&er);
+	m_entry_records.push_front(er);
 
 	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
 
