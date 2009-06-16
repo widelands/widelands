@@ -177,9 +177,16 @@ struct WLApplication {
 	void set_mouse_lock(const bool locked) {m_mouse_locked = locked;}
 	//@}
 
+#if HAS_OPENGL
 	void init_graphics
 		(int32_t w, int32_t h, int32_t bpp,
 		 bool fullscreen, bool hw_improvements, bool double_buffer, bool opengl);
+#else
+	void init_graphics
+		(int32_t w, int32_t h, int32_t bpp,
+		 bool fullscreen, bool hw_improvements, bool double_buffer);
+
+#endif
 
 	void handle_input(const InputCallback *cb);
 
@@ -280,7 +287,9 @@ protected:
 	bool   m_gfx_fullscreen;
 	bool   m_gfx_hw_improvements;
 	bool   m_gfx_double_buffer;
+#if HAS_OPENGL
 	bool   m_gfx_opengl;
+#endif
 
 	//do we want to search the default places for widelands installs
 	bool   m_default_datadirs;

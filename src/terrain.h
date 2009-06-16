@@ -214,6 +214,7 @@ template<typename T> static void render_triangle
 	if (p1.y == p2.y && p2.y == p3.y)
 		return; // degenerate triangle
 
+#if HAS_OPENGL
 	if (g_opengl) {
 		glBegin(GL_TRIANGLES);
 		glTexCoord2i(p1.tx, p1.ty);
@@ -225,6 +226,7 @@ template<typename T> static void render_triangle
 		glEnd();
 		return;
 	}
+#endif
 
 	// Clip the triangle
 	Polygon polygon;

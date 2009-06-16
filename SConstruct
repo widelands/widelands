@@ -99,6 +99,7 @@ def cli_options():
 		BoolVariable('enable_sdl_parachute', 'Enable SDL parachute?', False),
 		BoolVariable('enable_efence', 'Use the efence memory debugger?', False),
 		BoolVariable('enable_ggz', 'Use the GGZ Gamingzone?', False),
+		BoolVariable('enable_opengl', 'use opengl for graphics', False),
 		BoolVariable('prefer_localdata', 'Useful for developers. Use data and locales from ./ at runtime', True),
 		BoolVariable('pretty_compile_output', 'Suppress link and compile commands, only print a very short info text and occurring errors and warnings.', True),
 		BoolVariable('colored_compile_output', 'Show style warnings and (gcc) compile warnings in color. Disabled if output is not a tty', True),

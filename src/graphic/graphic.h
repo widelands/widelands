@@ -29,7 +29,11 @@
 #include <SDL_opengl.h>
 
 #include <vector>
+
+#ifdef USE_OPENGL
+#define HAS_OPENGL 1
 #include <boost/shared_ptr.hpp>
+#endif
 
 /**
  * Names of road terrains
@@ -61,9 +65,16 @@ SDL_Surface * LoadImage(char const * filename);
 */
 
 struct Graphic {
+#if HAS_OPENGL
 	Graphic
 		(int32_t w, int32_t h, int32_t bpp,
 		 bool fullscreen, bool hw_improvements, bool double_buffer, bool opengl);
+#else
+	Graphic
+		(int32_t w, int32_t h, int32_t bpp,
+		 bool fullscreen, bool hw_improvements, bool double_buffer);
+#endif
+
 	~Graphic();
 
 	int32_t get_xres() const;
@@ -156,7 +167,9 @@ protected:
 };
 
 extern Graphic * g_gr;
+#if HAS_OPENGL
 extern bool g_opengl;
+#endif
 
 #endif
 

@@ -93,8 +93,11 @@ m_label_speed                 (this, get_w(), 0, std::string(), Align_TopRight)
 		 global_s.get_int("depth", 16),
 		 global_s.get_bool("fullscreen", false),
 		 global_s.get_bool("hw_improvements", false),
-		 global_s.get_bool("double_buffer", false),
-		 global_s.get_bool("opengl", false));
+		 global_s.get_bool("double_buffer", false)
+#if HAS_OPENGL
+, global_s.get_bool("opengl", false)
+#endif
+);
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will given
 	//  funny results.

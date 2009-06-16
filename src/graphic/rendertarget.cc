@@ -135,6 +135,7 @@ void RenderTarget::draw_line
 	(int32_t const x1, int32_t const y1, int32_t const x2, int32_t const y2,
 	 RGBColor const color)
 {
+#if HAS_OPENGL
 	//use opengl drawing if available
 	if (g_opengl) {
 		glBegin(GL_LINES);
@@ -147,6 +148,7 @@ void RenderTarget::draw_line
 		glEnd();
 		return;
 	}
+#endif
 
 	int32_t dx = x2 - x1;      /* the horizontal distance of the line */
 	int32_t dy = y2 - y1;      /* the vertical distance of the line */

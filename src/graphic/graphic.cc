@@ -36,12 +36,16 @@
 
 #include <SDL_image.h>
 #include <SDL_rotozoom.h>
+#if HAS_OPENGL
 #include <SDL_opengl.h>
+#endif
 #include <cstring>
 #include <iostream>
 
 Graphic *g_gr;
+#if HAS_OPENGL
 bool g_opengl;
+#endif
 
 /**
  * Helper function wraps around SDL_image. Returns the given image file as a
@@ -72,6 +76,7 @@ static uint32_t luminance_table_b[0x100];
 /**
  * Initialize the SDL video mode.
 */
+#if HAS_OPENGL
 Graphic::Graphic
 	(int32_t const w, int32_t const h,
 	 int32_t const bpp,
@@ -79,6 +84,14 @@ Graphic::Graphic
 	 bool    const hw_improvements,
 	 bool    const double_buffer,
 	 bool    const opengl)
+#else
+Graphic::Graphic
+	(int32_t const w, int32_t const h,
+	 int32_t const bpp,
+	 bool    const fullscreen,
+	 bool    const hw_improvements,
+	 bool    const double_buffer)
+#endif
 	:
 	m_rendertarget     (0),
 	m_nr_update_rects  (0),
@@ -104,11 +117,13 @@ Graphic::Graphic
 		log("Graphics: Trying HW_SURFACE\n");
 		flags = SDL_HWSURFACE; //  |SDL_HWACCEL|SDL_OPENGL;
 	}
+#if HAS_OPENGL
 	if (hw_improvements && opengl) {
 		log("Graphics: Trying opengl\n");
 		flags = SDL_HWACCEL|SDL_OPENGL;//SDL_OPENGLBLIT;
 		g_opengl = true;
 	}
+#endif
 	if (hw_improvements && double_buffer) {
 		flags |= SDL_DOUBLEBUF;
 		log("Graphics: Trying DOUBLE BUFFERING\n");
@@ -133,8 +148,10 @@ Graphic::Graphic
 		log("Graphics: SW SURFACE ENABLED\n");
 	if (0 != (sdlsurface->flags & SDL_FULLSCREEN))
 		log("Graphics: FULLSCREEN ENABLED\n");
+#if HAS_OPENGL
 	if (0 != (sdlsurface->flags & SDL_OPENGL))
 	  log ("Graphics: OPENGL ENABLED\n");
+#endif
 
 	/* Information about the current video settings. */
 	SDL_VideoInfo const * info = 0;
@@ -184,6 +201,7 @@ Graphic::Graphic
 		(("Widelands " + build_id() + '(' + build_type() + ')').c_str(),
 		 "Widelands");
 
+#if HAS_OPENGL
 	if (g_opengl) {
 	  glMatrixMode(GL_PROJECTION);
 	  glPushMatrix();
@@ -202,6 +220,7 @@ Graphic::Graphic
 	  //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	}
+#endif
 
 	m_screen.set_sdl_surface(*sdlsurface);
 
