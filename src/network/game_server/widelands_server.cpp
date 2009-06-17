@@ -126,14 +126,16 @@ void WidelandsServer::dataEvent(Client * const client)
 			ip = static_cast<char *>(ggz_malloc(INET6_ADDRSTRLEN));
 			inet_ntop
 				(AF_INET6,
-				 static_cast<void *>(&((struct sockaddr_in6*)addr)->sin6_addr)),
+				 static_cast<void *>
+				 	(&(static_cast<struct sockaddr_in6 *>(addr))->sin6_addr),
 				 ip,
 				 INET6_ADDRSTRLEN);
 		} else if(addr->sa_family == AF_INET) {
 			ip = static_cast<char *>(ggz_malloc(INET_ADDRSTRLEN));
 			inet_ntop
 				(AF_INET,
-				 static_cast<void *>(&((struct sockaddr_in*)addr)->sin_addr),
+				 static_cast<void *>
+				 	(&(static_cast<struct sockaddr_in *>(addr))->sin_addr),
 				 ip,
 				 INET_ADDRSTRLEN);
 		} else {
