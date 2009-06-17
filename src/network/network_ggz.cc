@@ -81,7 +81,20 @@ bool NetGGZ::connect()
 
 	log("GGZ ## connect\n");
 	mod = ggzmod_new(GGZMOD_GAME);
+
+	// Set handler for ggzmod events:
 	ggzmod_set_handler(mod, GGZMOD_EVENT_SERVER, &NetGGZ::ggzmod_server);
+	ggzmod_set_handler(mod, GGZMOD_EVENT_ERROR, &NetGGZ::ggzmod_server);
+	// not handled / not used events of the GGZMOD Server:
+	// * GGZMOD_EVENT_STATE
+	// * GGZMOD_EVENT_PLAYER
+	// * GGZMOD_EVENT_SEAT
+	// * GGZMOD_EVENT_SPECTATOR_SEAT
+	// * GGZMOD_EVENT_CHAT
+	// * GGZMOD_EVENT_STATS
+	// * GGZMOD_EVENT_INFO
+	// * GGZMOD_EVENT_RANKINGS
+
 	if (ggzmod_connect(mod)) {
 		log("GGZ ## connection failed\n");
 		return false;
@@ -107,8 +120,7 @@ bool NetGGZ::connect()
 }
 
 
-/// initializes a locale ggzserver object to save the data submitted by the
-/// metaserver
+/// handles the events of the ggzmod server
 void NetGGZ::ggzmod_server
 	(GGZMod * const cbmod, GGZModEvent const e, void const * const cbdata)
 {
@@ -118,7 +130,11 @@ void NetGGZ::ggzmod_server
 		ggzobj->m_fd = fd;
 		log("GGZ ## got fd: %i\n", fd);
 		ggzmod_set_state(cbmod, GGZMOD_STATE_PLAYING);
-	}
+	} else if (e == GGZMOD_EVENT_ERROR) {
+		const char * msg = static_cast<const char * >(cbdata);
+		log("GGZ ## ERROR: %s\n", msg);
+	} else
+		log("GGZ ## HANDLE ERROR: %i\n", e);
 }
 
 
