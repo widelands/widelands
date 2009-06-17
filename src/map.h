@@ -101,11 +101,11 @@ struct FindBobAlwaysTrue : public FindBob {
 	virtual ~FindBobAlwaysTrue() {}  // make gcc shut up
 };
 struct FindBobAttribute : public FindBob {
-	FindBobAttribute(uint32_t attrib) : m_attrib(attrib) {}
+	FindBobAttribute(uint32_t const attrib) : m_attrib(attrib) {}
 
 	virtual bool accept(Bob *) const;
 
-	int32_t m_attrib;
+	uint32_t m_attrib;
 	virtual ~FindBobAttribute() {}  // make gcc shut up
 };
 struct FindBobEnemySoldier : public FindBob {
