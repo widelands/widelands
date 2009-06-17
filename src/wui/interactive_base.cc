@@ -95,11 +95,11 @@ m_label_speed                 (this, get_w(), 0, std::string(), Align_TopRight)
 		 global_s.get_bool("hw_improvements", false),
 		 global_s.get_bool("double_buffer", false)
 #if HAS_OPENGL
-, global_s.get_bool("opengl", false)
+		 /**/, global_s.get_bool("opengl", false)
 #endif
-);
+		 /**/);
 
-	//  Having this in the initializer list (before Sys_InitGraphics) will given
+	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
 	m_sel.pic = g_gr->get_picture(PicMod_Game, "pics/fsel.png");
 

@@ -263,7 +263,7 @@ void PlayerDescriptionGroup::ready_player(bool on)
 	GameSettings const & settings = d->settings->settings();
 
 	if (d->plnum >= settings.players.size())
-	  return;
+		return;
 
 	if (on) {
 		d->settings->setPlayerReady(d->plnum, PlayerSettings::stateReady);

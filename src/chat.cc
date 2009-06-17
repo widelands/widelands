@@ -28,8 +28,7 @@ std::string ChatMessage::toPrintable() const
 
 	// time calculation
 	char ts[13];
-	tm * t = localtime(&time);
-	strftime(ts, sizeof(ts), "[%H:%M] </p>", t);
+	strftime(ts, sizeof(ts), "[%H:%M] </p>", localtime(&time));
 	message += ts;
 
 	message += "<p font-size=14 font-face=FreeSerif font-color=#";

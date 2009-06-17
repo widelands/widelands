@@ -1600,8 +1600,9 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
 						// too many unused roads - if needed the road will be rebuild
 						// directly.
 						if
-						  (static_cast<int32_t>((ms->maxSoldierCapacity() * 4))
-							< bf.military_influence)
+							(static_cast<int32_t>(ms->maxSoldierCapacity() * 4)
+							 <
+							 bf.military_influence)
 							game().send_player_bulldoze(ms->base_flag());
 
 						// Else consider enhancing the building (if possible)

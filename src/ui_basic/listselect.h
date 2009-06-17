@@ -132,7 +132,7 @@ private:
 		bool use_clr;
 		RGBColor clr;
 		PictureID picid;
-	   std::string name;
+		std::string name;
 	};
 	typedef std::deque<Entry_Record *> Entry_Record_deque;
 

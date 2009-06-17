@@ -65,7 +65,7 @@ void Surface::update() {
 	//in case of 2d graphics but also allows for double buffering
 #if HAS_OPENGL
 	if (g_opengl) {
-	  //SDL_GL_SwapBuffers();
+		//  SDL_GL_SwapBuffers();
 	} else
 #endif
 		SDL_Flip(m_surface);
@@ -190,8 +190,8 @@ void Surface::brighten_rect(const Rect rc, const int32_t factor) {
 
 #if HAS_OPENGL
 	if (g_opengl) {
-	  //FIXME do something here
-	  return;
+		//  FIXME do something here
+		return;
 	}
 #endif
 
@@ -235,7 +235,7 @@ Blit this given source bitmap to this bitmap.
 */
 void Surface::blit(Point const dst, Surface * const src, Rect const srcrc)
 {
-  //Fixme: draw using opengl
+	//  FIXME draw using opengl
 
 	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
 	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
@@ -420,10 +420,10 @@ AnimationGfx::AnimationGfx
 Load the animation
 ===============
 */
-static const uint32_t nextensions = 4;
-static const char extensions[nextensions][5] = {".png", ".jpg", ".bmp", ".gif"};
-AnimationGfx::AnimationGfx(AnimationData const * data)
-: m_hotspot(data->hotspot)
+static const uint32_t nextensions = 2;
+static const char extensions[nextensions][5] = {".png", ".jpg"};
+AnimationGfx::AnimationGfx(AnimationData const * const data) :
+	m_hotspot(data->hotspot)
 {
 	m_encodedata.hasplrclrs = data->encdata.hasplrclrs;
 	m_encodedata.plrclr[0]  = data->encdata.plrclr[0];

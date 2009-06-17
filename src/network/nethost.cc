@@ -165,7 +165,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			return;
 
 		if (number == settings().playernum)
-		  h->setPlayerReady(number, readystate);
+			h->setPlayerReady(number, readystate);
 	}
 
 	virtual bool getPlayerReady(uint8_t const number) {
@@ -941,7 +941,7 @@ void NetHost::setPlayerReady
 	(uint8_t const number, PlayerSettings::ReadyState const readystate)
 {
 	if (number >= d->settings.players.size())
-	  return;
+		return;
 	d->settings.players[number].readystate = readystate;
 
 	//breadcast changes
@@ -959,7 +959,7 @@ bool NetHost::getPlayerReady(uint8_t const number)
 		d->settings.players[number].state == PlayerSettings::stateClosed ||
 		d->settings.players[number].state == PlayerSettings::stateComputer ||
 		(d->settings.players[number].state == PlayerSettings::stateHuman &&
-			d->settings.players[number].readystate);
+		 d->settings.players[number].readystate);
 }
 
 void NetHost::setMultiplayerGameSettings()

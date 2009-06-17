@@ -65,7 +65,6 @@ EditBox::EditBox
 {
 	set_think(false);
 
-	char buf[256];
 	m->background = background;
 
 	m->id = id;

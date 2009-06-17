@@ -159,7 +159,8 @@ protected:
 	/// hash of filename/picture ID pairs
 	std::vector
 		<std::map<std::string, boost::shared_ptr<Picture> > > m_picturemap;
-	typedef std::map<std::string, boost::shared_ptr<Picture> >::iterator pmit;
+	typedef std::map<std::string, boost::shared_ptr<Picture> > Picturemap;
+	typedef Picturemap::iterator pmit;
 
 	Road_Textures * m_roadtextures;
 	std::vector<Texture *> m_maptextures;

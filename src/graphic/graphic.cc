@@ -120,7 +120,7 @@ Graphic::Graphic
 #if HAS_OPENGL
 	if (hw_improvements && opengl) {
 		log("Graphics: Trying opengl\n");
-		flags = SDL_HWACCEL|SDL_OPENGL;//SDL_OPENGLBLIT;
+		flags = SDL_HWACCEL|SDL_OPENGL; //  SDL_OPENGLBLIT;
 		g_opengl = true;
 	}
 #endif
@@ -150,7 +150,7 @@ Graphic::Graphic
 		log("Graphics: FULLSCREEN ENABLED\n");
 #if HAS_OPENGL
 	if (0 != (sdlsurface->flags & SDL_OPENGL))
-	  log ("Graphics: OPENGL ENABLED\n");
+		log ("Graphics: OPENGL ENABLED\n");
 #endif
 
 	/* Information about the current video settings. */
@@ -203,21 +203,21 @@ Graphic::Graphic
 
 #if HAS_OPENGL
 	if (g_opengl) {
-	  glMatrixMode(GL_PROJECTION);
-	  glPushMatrix();
-	  glLoadIdentity();
-	  glOrtho(0, w, 0, h, -1, 1);
+		glMatrixMode(GL_PROJECTION);
+		glPushMatrix();
+		glLoadIdentity();
+		glOrtho(0, w, 0, h, -1, 1);
 
-	  glMatrixMode(GL_MODELVIEW);
-	  glPushMatrix();
-	  glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glLoadIdentity();
 
-	  glDisable(GL_DEPTH_TEST);
-	  // glViewport(0, 0, w, h);
-	  //gluOrtho2D(0, w, h, 0);
-	  //glEnable(GL_TEXTURE_2D);
-	  //glEnable(GL_BLEND);
-	  //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glDisable(GL_DEPTH_TEST);
+		//  glViewport(0, 0, w, h);
+		//  gluOrtho2D(0, w, h, 0);
+		//  glEnable(GL_TEXTURE_2D);
+		//  glEnable(GL_BLEND);
+		//  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	}
 #endif
@@ -410,7 +410,7 @@ PictureID & Graphic::get_picture(PicMod const module, const std::string & fname)
 }
 
 PictureID Graphic::get_picture
-(PicMod const module, Surface & surf, const std::string & fname)
+	(PicMod const module, Surface & surf, std::string const & fname)
 {
 	Picture & pic = * new Picture();
 	PictureID id = PictureID(&pic);
@@ -450,7 +450,7 @@ PictureID Graphic::get_resized_picture
 
 	Surface * const orig = index->surface;
 	if (orig->get_w() == w and orig->get_h() == h)
-	  return index;
+		return index;
 
 	uint32_t width = w;
 	uint32_t height = h;
@@ -528,9 +528,6 @@ SDL_Surface * Graphic::resize
 void Graphic::get_picture_size
 	(const PictureID & pic, uint32_t & w, uint32_t & h) const
 {
-  //if (pic >= m_pictures.size() || !m_pictures[pic].module)
-  //throw wexception("get_picture_size(%i): picture does not exist", pic);
-
 	assert (pic->surface);
 	Surface & bmp = *pic->surface;
 
@@ -665,16 +662,16 @@ void Graphic::free_surface(const PictureID & picid) {
 		 picid->module == PicSurface);
 
 	if (picid->surface) {
-	  delete picid->surface;
-	  picid->surface = 0;
+		delete picid->surface;
+		picid->surface = 0;
 	}
 	if (picid->rendertarget) {
-	  delete picid->rendertarget;
-	  picid->rendertarget = 0;
+		delete picid->rendertarget;
+		picid->rendertarget = 0;
 	}
 	if (picid->fname) {
-	  delete picid->fname;
-	  picid->fname = 0;
+		delete picid->fname;
+		picid->fname = 0;
 	}
 	//Picture & pic = m_pictures[picid];
 
@@ -685,14 +682,20 @@ void Graphic::free_surface(const PictureID & picid) {
 	//delete pic->surface;
 	//pic.surface = 0;
 	//pic.module = 0;
-	pmit b, e = m_picturemap[picid->module].end();
-	for (b = m_picturemap[picid->module].begin(); b != e; ++b) {
-		if (b->second == picid)
+	for
+		(struct {
+		 	Picturemap::      iterator       current;
+		 	Picturemap::const_iterator const end;
+		 } it = {
+		 	m_picturemap[picid->module].begin(),
+		 	m_picturemap[picid->module].end  ()
+		 };
+		 it.current != it.end;
+		 ++it.current)
+		if (it.current->second == picid) {
+			m_picturemap[picid->module].erase(it.current);
 			break;
-	}
-	if (b != e) {
-		m_picturemap[picid->module].erase(b);
-	}
+		}
 }
 
 

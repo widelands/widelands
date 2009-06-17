@@ -717,7 +717,7 @@ void WLApplication::init_graphics
 #if HAS_OPENGL
 		 && opengl == m_gfx_opengl
 #endif
-)
+		 /**/)
 		return;
 
 	delete g_gr;
@@ -1243,7 +1243,7 @@ void WLApplication::show_usage()
 #if HAS_OPENGL
 			 " --opengl=[0|1]\n"
 			 "                      Enables opengl rendering\n"
-			 "                      *DANGEROUS AND BROKEN, DON'T USE*\n"
+			 "                      *DANGEROUS AND BROKEN, DO NOT USE*\n"
 #endif
 			 "\n"
 			 "Options for the internal window manager:\n"
@@ -1542,11 +1542,10 @@ void WLApplication::mainmenu_multiplayer()
 					}
 					std::string ip = NetGGZ::ref().ip();
 
-					// Handle "IPv4 compatible" IPv6 adresses returned by ggzd
-					if (ip.size() > 7 && ip.substr(0, 7) == "::ffff:")
-					{
+					//  Handle "IPv4 compatible" IPv6 addresses returned by ggzd.
+					if (ip.size() > 7 && ip.substr(0, 7) == "::ffff:") {
 						ip = ip.substr(7, ip.size() - 7);
-						log("GGZClient ## cutted IPv6 adress: %s\n", ip.c_str());
+						log("GGZClient ## cut IPv6 address: %s\n", ip.c_str());
 					}
 
 					IPaddress peer;

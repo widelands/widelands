@@ -260,7 +260,7 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	m_ok.set_enabled(launch);
 	//check if we want to autolaunch
 	if (m_autolaunch && launch)
-	  start_clicked();
+		start_clicked();
 
 	m_select_map.set_visible(m_settings->canChangeMap());
 	m_select_map.set_enabled(m_settings->canChangeMap());

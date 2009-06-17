@@ -287,7 +287,7 @@ m_currentworld(0)
 	m_goButton = new UI::Callback_Button<Main_Menu_New_Random_Map>
 		(this,
 		 posx, posy, width, height,
-		 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Main_Menu_New_Random_Map::clicked_create_map, *this,
 		 _("Generate Map"));
 	posy += height + spacing;

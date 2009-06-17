@@ -17,14 +17,14 @@
  *
  */
 
-#include <iostream>
-
 #include "listselect.h"
 
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
+
+#include <iostream>
 
 namespace UI {
 /**
@@ -88,7 +88,7 @@ BaseListselect::~BaseListselect()
 */
 void BaseListselect::clear() {
 	container_iterate_const(Entry_Record_deque, m_entry_records, i)
-		delete(*i.current);
+		delete *i.current;
 	m_entry_records.clear();
 
 	m_scrollbar.set_steps(1);

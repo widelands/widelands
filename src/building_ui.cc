@@ -1448,7 +1448,7 @@ UI::Box * ProductionSite_Window::create_production_box
 		(new UI::Callback_Button<ProductionSite_Window>
 		 	(box,
 		 	 0, 0, 32, 32,
-			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 	 g_gr->get_picture(PicMod_Game,  pic_list_worker),
 		 	 &ProductionSite_Window::list_worker_clicked, *this,
 		 	 _("Show worker listing")),
@@ -1811,7 +1811,7 @@ UI::Box * TrainingSite_Window::create_military_box (UI::Panel * const panel)
 		(new UI::Callback_Button<TrainingSite_Window>
 		 	(sold_box,
 		 	 0, 0, 360, 32,
-			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 	 g_gr->get_picture(PicMod_Game, pic_drop_soldier),
 		 	 &TrainingSite_Window::drop_button_clicked, *this),
 		 Align_Left);
