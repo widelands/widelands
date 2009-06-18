@@ -873,14 +873,16 @@ void ProductionProgram::ActReturn::writeHTML
 		 m_result == Completed ? _("completed") :
 		 _("skipped"));
 	if (m_conditions.size()) {
-		char const * op;
+		std::string op;
+		fw.Text(" <span class=\"keyword\">");
 		if (m_is_when) {
-			op = "<span class=\"keyword\">and</span> ";
-			fw.Text(" <span class=\"keyword\">when</span> ");
+			op = _("and");
+			fw.Text(_("when"));
 		} else {
-			op = "<span class=\"keyword\">or</span> ";
-			fw.Text(" <span class=\"keyword\">unless</span> ");
+			op = _("or");
+			fw.Text(_("unless"));
 		}
+		fw.Text("</span> ");
 		for
 			(struct {
 			 	Conditions::const_iterator       current;
@@ -890,7 +892,9 @@ void ProductionProgram::ActReturn::writeHTML
 			(*i.current)->writeHTML(fw, site);
 			if (++i.current == i.end)
 				break;
+			fw.Text("<span class=\"keyword\">");
 			fw.Text(op);
+			fw.Text("</span> ");
 		}
 	}
 }
@@ -910,10 +914,11 @@ void ProductionProgram::ActReturn::Economy_Needs::writeHTML
 	Item_Ware_Descr const & ware = *site.tribe().get_ware_descr(ware_type);
 	std::string const & ware_name     = ware.    name();
 	std::string const & ware_descname = ware.descname();
-	fw.Text
-		("<span class=\"keyword\">economy</span> "
-		 "<span class=\"keyword\">needs</span> "
-		 "<a href=\"../");
+	fw.Text("<span class=\"keyword\">");
+	fw.Text(_("economy"));
+	fw.Text("</span> <span class=\"keyword\">");
+	fw.Text(_("needs"));
+	fw.Text("</span> <a href=\"../");
 	fw.Text(ware_name);
 	fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
 	fw.Text(ware_descname);
@@ -980,7 +985,7 @@ void ProductionProgram::ActWorker::writeHTML
 	fw.Text("</a> <a href=\"../");
 	Worker_Descr const & worker_descr =
 		*site.tribe().get_worker_descr(site.working_positions().at(0).first);
-	fw.Text(worker_descr.descname());
+	fw.Text(worker_descr.name());
 	fw.Text("/index_" + i18n::get_locale() + ".xhtml#program_");
 	fw.Text(m_program);
 	fw.Text("\" title=\"");
