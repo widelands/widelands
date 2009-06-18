@@ -935,10 +935,13 @@ void ProductionProgram::ActReturn::Workers_Need_Experience::writeHTML
 {
 	fw.Text("<a href=\"#workers\" title=\"");
 	fw.Text(_("workers of this site"));
-	fw.Text
-		("\"><span class=\"keyword\">workers</span></a> "
-		 "<span class=\"keyword\">need</span> "
-		 "<span class=\"keyword\">experience</span>");
+	fw.Text("\"><span class=\"keyword\">");
+	fw.Text(_("workers"));
+	fw.Text(_("</span></a> <span class=\"keyword\">"));
+	fw.Text(_("need"));
+	fw.Text("</span> <span class=\"keyword\">");
+	fw.Text(_("experience"));
+	fw.Text("</span>");
 }
 
 
