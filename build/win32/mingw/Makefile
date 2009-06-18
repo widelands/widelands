@@ -9,6 +9,11 @@ ifndef USE_GGZ
 USE_GGZ:=NO
 endif
 
+# Use of OpenGL?
+ifndef OPENGL
+OPENGL:=NO
+endif
+
 
 #doxygen
 DOXYGEN=/usr/bin/doxygen
@@ -59,6 +64,9 @@ ADD_CFLAGS:= $(ADD_CFLAGS) -DUSE_GGZ
 ADD_LDFLAGS:=-lggzmod -lggzcore -lggz -lexpat
 endif
 
+ifeq ($(OPENGL),YES)
+ADD_CFLAGS:= $(ADD_CFLAGS) -DHAS_OPENGL
+endif
 
 ##############################################################################
 # Flags configuration

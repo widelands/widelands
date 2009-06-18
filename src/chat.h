@@ -21,6 +21,9 @@
 #define CHAT_H
 
 #include <string>
+#ifdef WIN32
+#include <time.h>
+#endif
 
 #include "notification.h"
 
