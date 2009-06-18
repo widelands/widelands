@@ -80,13 +80,13 @@ d(new PlayerDescriptionGroupImpl)
 		 fname, fsize);
 	d->btnPlayerInit = new UI::Callback_Button<PlayerDescriptionGroup>
 		(this,
-		 w * 26 / 40, 0, w * 8 / 25, h,
+		 w * 64 / 100, 0, w * 3 / 10, h,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &PlayerDescriptionGroup::toggle_playerinit, *this,
 		 std::string(), _("Initialization"),
 		 true, false,
 		 fname, fsize);
-	d->btnReadyPlayer = new UI::Checkbox(this, Point(w * 120 / 125, 0));
+	d->btnReadyPlayer = new UI::Checkbox(this, Point(w * 945 / 1000, 0));
 	d->btnReadyPlayer->changedto.set
 		(this, &PlayerDescriptionGroup::ready_player);
 
@@ -158,7 +158,10 @@ void PlayerDescriptionGroup::refresh()
 				d->btnReadyPlayer->set_visible(false);
 			} else { // PlayerSettings::stateHuman
 				title = _("Human");
-				d->btnReadyPlayer->set_visible(true);
+				if (settings.multiplayer)
+					d->btnReadyPlayer->set_visible(true);
+				else
+					d->btnReadyPlayer->set_visible(false);
 			}
 			// get translated tribesname
 			std::string tribepath("tribes/" + player.tribe);
