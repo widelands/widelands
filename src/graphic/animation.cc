@@ -319,7 +319,7 @@ void DirAnimations::parse
 {
 	char dirpictempl[256];
 	char sectnamebase[256];
-	char *repl;
+	char * repl;
 
 	if (strchr(sectnametempl, '%'))
 		throw wexception("sectnametempl %s contains %%", sectnametempl);
@@ -350,7 +350,8 @@ void DirAnimations::parse
 	}
 
 	for (int32_t dir = 0; dir < 6; ++dir) {
-		static const char *dirstrings[6] = {"ne", "e", "se", "sw", "w", "nw"};
+		static char const * const dirstrings[6] =
+			{"ne", "e", "se", "sw", "w", "nw"};
 		char sectname[300];
 
 		snprintf(sectname, sizeof(sectname), sectnamebase, dirstrings[dir]);

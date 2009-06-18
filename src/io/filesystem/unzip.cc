@@ -338,7 +338,6 @@ extern unzFile ZEXPORT unzOpen2
 	(char const * path, zlib_filefunc_def * const pzlib_filefunc_def)
 {
 	unz_s us;
-	unz_s *s;
 	uLong central_pos, uL;
 
 	//  number of the current dist, used for spaning ZIP, unsupported, always 0
@@ -458,7 +457,7 @@ extern unzFile ZEXPORT unzOpen2
 	us.encrypted               = 0;
 
 
-	s = static_cast<unz_s *>(malloc(sizeof(unz_s)));
+	unz_s * const s = static_cast<unz_s *>(malloc(sizeof(unz_s)));
 	*s = us;
 	unzGoToFirstFile(static_cast<unzFile>(s));
 	return static_cast<unzFile>(s);
@@ -1203,12 +1202,12 @@ extern int32_t ZEXPORT unzReadCurrentFile
 			iRead += uDoCopy;
 		} else {
 			uLong uTotalOutBefore, uTotalOutAfter;
-			const Bytef *bufBefore;
 			uLong uOutThis;
 			int32_t flush = Z_SYNC_FLUSH;
 
 			uTotalOutBefore = pfile_in_zip_read_info->stream.total_out;
-			bufBefore = pfile_in_zip_read_info->stream.next_out;
+			Bytef const * const bufBefore =
+				pfile_in_zip_read_info->stream.next_out;
 
 			err = inflate(&pfile_in_zip_read_info->stream, flush);
 

@@ -249,11 +249,11 @@ void Fullscreen_Menu_NetSetupLAN::clicked_hostgame() {
 }
 
 void Fullscreen_Menu_NetSetupLAN::clicked_lasthost() {
-	Section *s = g_options.get_section("global");
-	std::string host = s->get_string("lasthost", "");
+	Section & s = g_options.get_safe_section("global");
+	std::string const host = s.get_string("lasthost", "");
 	hostname.setText(host);
-	if (host != "")
-		joingame.set_enabled(hostname.text().size());
+	if (host.size())
+		joingame.set_enabled(true);
 	opengames.select(opengames.no_selection_index());
 }
 

@@ -46,7 +46,7 @@ class WidelandsServer : public GGZGameServer
 		void game_stop();
 		void game_end();
 
-		char *m_ip;
+		char * m_ip;
 };
 
 #endif

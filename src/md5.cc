@@ -148,9 +148,9 @@ void md5_process_block
 	(void const * const buffer, uint32_t const len, md5_ctx * const ctx)
 {
 	uint32_t correct_words[16];
-	uint32_t const * words = static_cast<const uint32_t *>(buffer);
-	uint32_t nwords = len / sizeof (uint32_t);
-	const uint32_t *endp = words + nwords;
+	uint32_t const *       words  = static_cast<uint32_t const *>(buffer);
+	uint32_t         const nwords = len / sizeof (uint32_t);
+	uint32_t const * const endp   = words + nwords;
 	uint32_t A = ctx->A;
 	uint32_t B = ctx->B;
 	uint32_t C = ctx->C;
@@ -165,13 +165,12 @@ void md5_process_block
 
 	/* Process all bytes in the buffer with 64 bytes in each round of
 		the loop.  */
-	while (words < endp)
-	{
-		uint32_t *cwp = correct_words;
-		uint32_t A_save = A;
-		uint32_t B_save = B;
-		uint32_t C_save = C;
-		uint32_t D_save = D;
+	while (words < endp) {
+		uint32_t * cwp = correct_words;
+		uint32_t const A_save = A;
+		uint32_t const B_save = B;
+		uint32_t const C_save = C;
+		uint32_t const D_save = D;
 
 		/* First round: using the given function, the context and a constant
 		the next context is computed.  Because the algorithms processing

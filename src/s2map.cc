@@ -240,11 +240,11 @@ void S2_Map_Loader::load_s2mf_header()
  */
 void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 {
-	uint8_t * section = 0;
-	uint8_t *bobs = 0;
-	uint8_t *buildings = 0;
+	uint8_t * section   = 0;
+	uint8_t * bobs      = 0;
+	uint8_t * buildings = 0;
 
-	uint8_t *pc;
+	uint8_t * pc;
 
 	try {
 		FileRead fr;
@@ -295,20 +295,20 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		pc = section;
 		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
 			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
-				char c = *pc;
+				uint8_t c = *pc;
 				c &= 0x1f;
-				switch (static_cast<int32_t>(c)) {
-				case 0x00: c = 0; break;
-				case 0x01: c = 1; break;
-				case 0x02: c = 2; break;
-				case 0x03: c = 3; break;
-				case 0x04: c = 4; break;
-				case 0x05: c = 5; break;
+				switch (c) {
+				case 0x00: c =  0; break;
+				case 0x01: c =  1; break;
+				case 0x02: c =  2; break;
+				case 0x03: c =  3; break;
+				case 0x04: c =  4; break;
+				case 0x05: c =  5; break;
 
-				case 0x08: c = 6; break;
-				case 0x09: c = 7; break;
-				case 0x0a: c = 8; break;
-				case 0x0b: c = 9; break;
+				case 0x08: c =  6; break;
+				case 0x09: c =  7; break;
+				case 0x0a: c =  8; break;
+				case 0x0b: c =  9; break;
 				case 0x0c: c = 10; break;
 				case 0x0d: c = 11; break;
 				case 0x0e: c = 12; break;
@@ -317,8 +317,8 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				case 0x10: c = 14; break;
 				case 0x12: c = 15; break;
 
-				case 0x07: c = 4; break; // Unknown texture
-				case 0x13: c = 4; break; // unknown texture!
+				case 0x07: c =  4; break; //  unknown texture
+				case 0x13: c =  4; break; //  unknown texture
 				default:
 					c = 7;
 					cerr
@@ -340,9 +340,9 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		pc = section;
 		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
 			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
-				char c = *pc;
+				uint8_t c = *pc;
 				c &= 0x1f;
-				switch (static_cast<int32_t>(c)) {
+				switch (c) {
 				case 0x00: c =  0; break;
 				case 0x01: c =  1; break;
 				case 0x02: c =  2; break;
@@ -437,7 +437,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y) {
 			uint32_t i = y * mapwidth;
 			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
-				const char *bobname = 0;
+				char const * bobname = 0;
 
 				switch (section[i]) {
 				case 0: break;
@@ -534,7 +534,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		int32_t amount = 0;
 		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
 			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc) {
-				char c = *pc;
+				uint8_t c = *pc;
 
 				switch (c & 0xF8) {
 				case 0x40: res = "coal";   amount = c & 7; break;

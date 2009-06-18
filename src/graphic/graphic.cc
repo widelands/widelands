@@ -272,8 +272,7 @@ RenderTarget * Graphic::get_render_target()
 */
 void Graphic::toggle_fullscreen()
 {
-	SDL_Surface *surface = m_screen.get_sdl_surface();
-	SDL_WM_ToggleFullScreen(surface);
+	SDL_WM_ToggleFullScreen(m_screen.get_sdl_surface());
 }
 
 /**

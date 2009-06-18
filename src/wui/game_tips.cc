@@ -71,16 +71,15 @@ void GameTips::load_style(std::string name)
 	try {
 		Profile prof(filename.c_str());
 		if (Section * const s = prof.get_section("global")) {
-			const char *text = s->get_string("background");
-			if (text)
+			if (char const * const text = s->get_string("background"))
 				m_background_picture = text;
-			m_width = s->get_int("width", GAMETIPS_DEFAULT_TEXTAREA_W);
-			m_height = s->get_int("height", GAMETIPS_DEFAULT_TEXTAREA_H);
-			m_pading_l = s->get_int("padding-left", GAMETIPS_DEFAULT_PADDING);
-			m_pading_r = s->get_int("padding-right", GAMETIPS_DEFAULT_PADDING);
-			m_pading_t = s->get_int("padding-top", GAMETIPS_DEFAULT_PADDING);
-			m_pading_b = s->get_int("padding-bottom", GAMETIPS_DEFAULT_PADDING);
-			m_font_size = s->get_int("text-size", UI_FONT_SIZE_SMALL);
+			m_width     = s->get_int("width",        GAMETIPS_DEFAULT_TEXTAREA_W);
+			m_height    = s->get_int("height",       GAMETIPS_DEFAULT_TEXTAREA_H);
+			m_pading_l  = s->get_int("padding-left",   GAMETIPS_DEFAULT_PADDING);
+			m_pading_r  = s->get_int("padding-right",  GAMETIPS_DEFAULT_PADDING);
+			m_pading_t  = s->get_int("padding-top",    GAMETIPS_DEFAULT_PADDING);
+			m_pading_b  = s->get_int("padding-bottom", GAMETIPS_DEFAULT_PADDING);
+			m_font_size = s->get_int("text-size",      UI_FONT_SIZE_SMALL);
 			m_bgcolor =
 				color_from_hex
 					(s->get_string("background-color"), GAMETIPS_TEXTAREA_COLOR_BG);

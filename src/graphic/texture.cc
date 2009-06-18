@@ -48,11 +48,10 @@ is_32bit   (format.BytesPerPixel == 4)
 
 	for (;;) {
 		int32_t nr = m_nrframes;
-		char *p;
 
 		// create the file name by reverse-scanning for '?' and replacing
 		snprintf(fname, sizeof(fname), "%s", &fnametmpl);
-		p = fname + strlen(fname);
+		char * p = fname + strlen(fname);
 		while (p > fname) {
 			if (*--p != '?')
 				continue;

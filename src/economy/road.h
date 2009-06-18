@@ -102,7 +102,7 @@ private:
 
 private:
 	int32_t    m_type;       ///< use Field::Road_XXX
-	Flag      *m_flags  [2]; ///< start and end flag
+	Flag     * m_flags  [2]; ///< start and end flag
 	int32_t    m_flagidx[2]; ///< index of this road in the flag's road array
 
 	/// cost for walking this road (0 = from start to end, 1 = from end to start)

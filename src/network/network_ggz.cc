@@ -295,8 +295,8 @@ void NetGGZ::data()
 		return;
 
 	int32_t op;
-	char *ipstring;
-	char *greeter;
+	char * ipstring;
+	char * greeter;
 	int32_t greeterversion;
 	char ipaddress[17];
 	int32_t fd = m_fd;

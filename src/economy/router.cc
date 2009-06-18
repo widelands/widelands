@@ -239,7 +239,7 @@ bool Router::find_route
 
 	// Add the starting node into the open list
 	RoutingNodeQueue Open;
-	RoutingNode *current;
+	RoutingNode * current;
 
 	start.mpf_cycle    = mpf_cycle;
 	start.mpf_backlink = 0;

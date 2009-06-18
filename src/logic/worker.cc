@@ -908,7 +908,7 @@ void Worker::set_location(PlayerImmovable *location)
 	m_location = location;
 
 	if (location) {
-		Economy *eco = location->get_economy();
+		Economy * const eco = location->get_economy();
 
 		if (!m_economy)
 			set_economy(eco);
@@ -2046,7 +2046,7 @@ void Worker::fugitive_update(Game & game, State & state)
 	}
 
 	Map & map = game.map();
-	PlayerImmovable *location = get_location(game);
+	PlayerImmovable const * location = get_location(game);
 
 	if (location && &location->owner() == &owner()) {
 		molog("[fugitive]: we are on location\n");

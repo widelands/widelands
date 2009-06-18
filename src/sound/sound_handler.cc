@@ -478,9 +478,7 @@ void Sound_Handler::start_music
 			("Sound_Handler: songset \"%s\" does not exist!\n",
 			 songset_name.c_str());
 	else {
-		Mix_Music *m = m_songs[songset_name]->get_song();
-
-		if (m) {
+		if (Mix_Music * const m = m_songs[songset_name]->get_song()) {
 			Mix_FadeInMusic(m, 1, fadein_ms);
 			m_current_songset = songset_name;
 		} else

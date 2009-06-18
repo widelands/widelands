@@ -194,8 +194,7 @@ void Fullscreen_Menu_NetSetupGGZ::think ()
 void Fullscreen_Menu_NetSetupGGZ::connectToMetaserver()
 {
 	Section & s = g_options.pull_section("global");
-	const char *metaserver;
-	metaserver = s.get_string("metaserver", WL_METASERVER);
+	char const * const metaserver = s.get_string("metaserver", WL_METASERVER);
 
 	if (NetGGZ::ref().initcore(metaserver, playername.text().c_str())) {
 		// Update of server spinbox

@@ -38,7 +38,7 @@ namespace UI {
  */
 class Signal : public Object {
 	typedef void (Object::*fnT)();
-	Object *_obj;
+	Object * _obj;
 	fnT _fn;
 public:
 	Signal() {_obj = 0; _fn = 0;}
@@ -58,7 +58,7 @@ public:
 template<class T1>
 class Signal1 : public Object {
 	typedef void (Object::*fnT)(T1);
-	Object *_obj;
+	Object * _obj;
 	fnT _fn;
 public:
 	Signal1() {_obj = 0; _fn = 0;}
@@ -79,7 +79,7 @@ public:
 template<class T1, class T2>
 class Signal2 : public Object {
 	typedef void (Object::*fnT)(T1, T2);
-	Object *_obj;
+	Object * _obj;
 	fnT _fn;
 public:
 	Signal2() {_obj = 0; _fn = 0;}

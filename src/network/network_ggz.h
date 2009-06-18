@@ -95,7 +95,7 @@ struct NetGGZ : public ChatProvider {
 	bool used();
 	bool host();
 	void data();
-	const char *ip();
+	char const * ip();
 
 	bool updateForTables() {
 		bool temp = tableupdate;
@@ -187,11 +187,11 @@ private:
 	int32_t channelfd;
 	int32_t gamefd;
 	int32_t tableid;
-	char *server_ip_addr;
+	char    * server_ip_addr;
 	bool ggzcore_login;
 	bool ggzcore_ready;
 	bool relogin;
-	GGZRoom *room;
+	GGZRoom * room;
 
 	std::string username;
 	std::string servername;

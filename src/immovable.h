@@ -196,7 +196,7 @@ struct PlayerImmovable : public BaseImmovable {
 	PlayerImmovable(const Map_Object_Descr &);
 	virtual ~PlayerImmovable();
 
-	Player *get_owner() const {return m_owner;}
+	Player * get_owner() const {return m_owner;}
 	Player & owner() const {return *m_owner;}
 	Economy * get_economy() const throw () {return m_economy;}
 	Economy & economy() const throw () {return *m_economy;}

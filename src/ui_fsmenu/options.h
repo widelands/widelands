@@ -72,7 +72,7 @@ struct Options_Ctrl {
 	void save_options();
 private:
 	Section & m_opt_section;
-	Fullscreen_Menu_Options *m_opt_dialog;
+	Fullscreen_Menu_Options * m_opt_dialog;
 };
 
 /**

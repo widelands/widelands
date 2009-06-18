@@ -101,15 +101,15 @@ void Section::Value::mark_used()
 
 int32_t Section::Value::get_int() const
 {
-	char *endp;
-	int32_t i;
-
-	i = strtol(m_value, &endp, 0);
-
+	char * endp;
+	long int const i = strtol(m_value, &endp, 0);
 	if (*endp)
 		throw wexception("%s: '%s' is not an integer", get_name(), m_value);
+	int32_t const result = i;
+	if (i != result)
+		throw wexception("%s: '%s' is out of range",   get_name(), m_value);
 
-	return i;
+	return result;
 }
 
 
@@ -323,7 +323,7 @@ Section::Value & Section::create_val_duplicate
  */
 int32_t Section::get_safe_int(const char *name)
 {
-	Value *v = get_val(name);
+	Value * const v = get_val(name);
 	if (!v)
 		throw wexception("[%s]: missing integer key '%s'", get_name(), name);
 	return v->get_int();
@@ -357,7 +357,7 @@ uint32_t Section::get_safe_positive(char const * const name)
  */
 bool Section::get_safe_bool(const char *name)
 {
-	Value *v = get_val(name);
+	Value * const v = get_val(name);
 	if (!v)
 		throw wexception("[%s]: missing boolean key '%s'", get_name(), name);
 	return v->get_bool();
@@ -370,7 +370,7 @@ bool Section::get_safe_bool(const char *name)
  */
 const char *Section::get_safe_string(const char *name)
 {
-	Value *v = get_val(name);
+	Value * const v = get_val(name);
 	if (!v)
 		throw wexception("[%s]: missing key '%s'", get_name(), name);
 	return v->get_string();
@@ -473,7 +473,7 @@ Widelands::Building_Descr const & Section::get_safe_Building_Type
  */
 int32_t Section::get_int(const char *name, int32_t def)
 {
-	Value *v = get_val(name);
+	Value * const v = get_val(name);
 	if (!v)
 		return def;
 
@@ -528,7 +528,7 @@ uint32_t Section::get_positive(char const * const name, uint32_t const def)
  */
 bool Section::get_bool(const char *name, bool def)
 {
-	Value *v = get_val(name);
+	Value * const v = get_val(name);
 	if (!v)
 		return def;
 
@@ -596,7 +596,7 @@ Widelands::Player_Number Section::get_Player_Number
  */
 const char *Section::get_next_bool(const char *name, bool *value)
 {
-	Value *v = get_next_val(name);
+	Value * const v = get_next_val(name);
 	if (!v)
 		return 0;
 
@@ -842,33 +842,26 @@ inline char *skipwhite(char *p)
 	return p;
 }
 
-inline void rtrim(char *str)
+inline void rtrim(char * const str)
 {
-	char *p;
-	for (p = strchr(str, 0); p > str; --p) {
-		if (!isspace(p[-1]))
+	for (char * p = strchr(str, '\0'); str < p; --p)
+		if (!isspace(p[-1])) {
+			*p = 0;
 			break;
-	}
-	*p = 0;
+		}
 }
 
-inline void killcomments(char *p)
+inline void killcomments(char * p)
 {
 	while (*p) {
-		if (p[0] == '#' || (p[0] == '/' && p[1] == '/')) {
-			p[0] = 0;
+		if (p[0] == '#') {
+			p[0] = '\0';
 			break;
 		}
 		++p;
 	}
 }
 
-inline char * setEndAt(char * const str, char const c)
-{
-	if (char * const s = strchr(str, c))
-		*s = '\0';
-	return str;
-}
 
 /**
  * Parses an ini-style file into sections and key values. If a section or
@@ -886,8 +879,8 @@ void Profile::read
 		FileRead fr;
 		fr.Open(fs, filename);
 
-		char *p = 0;
-		Section *s = 0;
+		char    * p = 0;
+		Section * s = 0;
 
 		bool reading_multiline = 0;
 		std::string data;
@@ -900,12 +893,12 @@ void Profile::read
 				p = line;
 
 			p = skipwhite(p);
-			if (!p[0] || p[0] == '#' || (p[0] == '/' && p[1] == '/'))
+			if (!p[0] || p[0] == '#')
 				continue;
 
 			if (p[0] == '[') {
 				++p;
-				setEndAt(p, ']');
+				*strchrnul(p, ']') = '\0';
 				s = &create_section_duplicate(p);
 			} else {
 				char * tail = 0;
@@ -1018,9 +1011,8 @@ void Profile::write
 	FileWrite fw;
 
 	fw.Printf
-		(("# Automatically created by Widelands " + build_id() + '(' +
-		  build_type() + ")\n")
-		 .c_str());
+		("# Automatically created by Widelands %s (%s)\n",
+		 build_id().c_str(), build_type().c_str());
 
 	container_iterate_const(Section_list, m_sections, s) {
 		if (used_only && !s.current->is_used())

@@ -395,9 +395,10 @@ struct ComplexRouterFixture {
 	  * Convenience function
 	  */
 	TestingRoutingNode * new_node_w_neighbour
-		(TestingRoutingNode * d,
-		 Coords pos = Coords(0, 0),
-		 int32_t roadcost = 1, int32_t waitcost = 0)
+		(TestingRoutingNode * const d,
+		 Coords               const pos      = Coords(0, 0),
+		 int32_t                             = 1,
+		 int32_t              const waitcost = 0)
 	{
 		TestingRoutingNode * dnew = new TestingRoutingNode
 			(waitcost, pos);
@@ -461,8 +462,8 @@ struct ComplexRouterFixture {
 	 *
 	 * \return The last node in the chain
 	 */
-	TestingRoutingNode *add_chain
-		(int n, TestingRoutingNode * start, Nodes * chain)
+	TestingRoutingNode * add_chain
+		(int const n, TestingRoutingNode * const start, Nodes * const chain)
 	{
 		TestingRoutingNode * last = start;
 		chain->push_back(start);
@@ -552,7 +553,7 @@ struct DistanceRoutingFixture : public ComplexRouterFixture {
 
 	TestingRoutingNode * start;
 	TestingRoutingNode * end;
-	TestingRoutingNode *d1, *d2, *d3, *d4, *d5;
+	TestingRoutingNode * d1, * d2, * d3, * d4, * d5;
 };
 BOOST_FIXTURE_TEST_CASE(priced_routing, DistanceRoutingFixture) {
 	Nodes chain;

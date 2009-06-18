@@ -59,9 +59,10 @@ int main(int argc, char** argv)
 
 	srand(time(NULL));
 
-	WidelandsServer *wls = new WidelandsServer();
-	wls->connect(false);
-	delete wls;
+	{
+		WidelandsServer wls;
+		wls.connect(false);
+	}
 
 	return 0;
 }

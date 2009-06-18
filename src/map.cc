@@ -1375,17 +1375,17 @@ void Map::find_reachable
 
 		// Get neighbours
 		for (Direction dir = 1; dir <= 6; ++dir) {
-			Pathfield *neighbpf;
 			FCoords neighb;
 
 			get_neighbour(cur, dir, &neighb);
-			neighbpf = &pathfields->fields[neighb.field - m_fields];
 
-			// Have we already visited this field?
-			if (neighbpf->cycle == pathfields->cycle)
-				continue;
+			{ //  Have we already visited this node?
+				Pathfield & neighbpf = pathfields->fields[neighb.field - m_fields];
+				if (neighbpf.cycle == pathfields->cycle)
+					continue;
+			}
 
-			// Is the field still within the radius?
+			//  Is the node still within the radius?
 			if (calc_distance(area, neighb) > area.radius)
 				continue;
 
@@ -1435,9 +1435,11 @@ struct FindBobsCallback {
 		: m_list(list), m_functor(functor), m_found(0) {}
 
 	void operator()(const Map &, const FCoords cur) {
-		Bob *bob;
-
-		for (bob = cur.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
+		for
+			(Bob * bob = cur.field->get_first_bob();
+			 bob;
+			 bob = bob->get_next_bob())
+		{
 			if
 				(m_list &&
 				 std::find(m_list->begin(), m_list->end(), bob) != m_list->end())
@@ -1966,15 +1968,13 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 	//     - walkable
 	//     - have no water triangles next to them
 	//     - are not blocked by "robust" Map_Objects
-	BaseImmovable *immovable = get_immovable(f);
-
-	if
-		(not (caps & MOVECAPS_WALK)
-		 or
-		 cnt_water
-		 or
-		 (immovable and immovable->get_size() >= BaseImmovable::SMALL))
+	if (not (caps & MOVECAPS_WALK))
 		goto end;
+	if (cnt_water)
+		goto end;
+	if (BaseImmovable const * const immovable = get_immovable(f))
+		if (immovable->get_size() >= BaseImmovable::SMALL)
+			goto end;
 
 	// 3) We can only build something if there is a flag on the
 	// bottom-right neighbour (or if we could build a flag on the
@@ -2402,10 +2402,7 @@ Map_Loader * Map::get_correct_loader(char const * const filename) {
 /**
  * Provides the flexible priority queue to maintain the open list.
  */
-class StarQueue {
-	std::vector<Pathfield *> m_data;
-
-public:
+struct StarQueue {
 	void flush() {m_data.clear();}
 
 	// Return the best node and readjust the tree
@@ -2420,8 +2417,7 @@ public:
 	//       put slot[_size] in its place and stop
 	//     if only the left child is there
 	//       arrange left child and slot[_size] correctly and stop
-	Pathfield * pop()
-	{
+	Pathfield * pop() {
 		if (m_data.empty())
 			return 0;
 
@@ -2482,23 +2478,22 @@ public:
 	//  1. Put the new node in the last slot
 	//  2. If parent slot is worse than self, exchange places and recurse
 	// Note that I rearranged this a bit so swap isn't necessary
-	void push(Pathfield *t)
-	{
+	void push(Pathfield & t) {
 		uint32_t slot = m_data.size();
 		m_data.push_back(static_cast<Pathfield *>(0));
 
 		while (slot > 0) {
 			uint32_t parent = (slot - 1) / 2;
 
-			if (m_data[parent]->cost() < t->cost())
+			if (m_data[parent]->cost() < t.cost())
 				break;
 
 			m_data[slot] = m_data[parent];
 			m_data[slot]->heap_index = slot;
 			slot = parent;
 		}
-		m_data[slot] = t;
-		t->heap_index = slot;
+		m_data[slot] = &t;
+		t.heap_index = slot;
 
 		debug(0, "push");
 	}
@@ -2506,31 +2501,29 @@ public:
 	// Rearrange the tree after a node has become better, i.e. move the
 	// node up
 	// Pushing algorithm is basically the same as in push()
-	void boost(Pathfield *t)
-	{
-		uint32_t slot = t->heap_index;
+	void boost(Pathfield & t) {
+		uint32_t slot = t.heap_index;
 
-		assert(m_data[slot] == t);
+		assert(m_data[slot] == &t);
 
 		while (slot > 0) {
 			uint32_t parent = (slot - 1) / 2;
 
-			if (m_data[parent]->cost() <= t->cost())
+			if (m_data[parent]->cost() <= t.cost())
 				break;
 
 			m_data[slot] = m_data[parent];
 			m_data[slot]->heap_index = slot;
 			slot = parent;
 		}
-		m_data[slot] = t;
-		t->heap_index = slot;
+		m_data[slot] = &t;
+		t.heap_index = slot;
 
 		debug(0, "boost");
 	}
 
 	// Recursively check integrity
-	void debug(uint32_t node, const char *str)
-	{
+	void debug(uint32_t const node, char const * const str) {
 		uint32_t l = node * 2 + 1;
 		uint32_t r = node * 2 + 2;
 		if (m_data[node]->heap_index != static_cast<int32_t>(node)) {
@@ -2553,6 +2546,8 @@ public:
 		}
 	}
 
+private:
+	std::vector<Pathfield *> m_data;
 };
 
 
@@ -2622,18 +2617,15 @@ int32_t Map::findpath
 	// Actual pathfinding
 	boost::shared_ptr<Pathfields> pathfields = m_pathfieldmgr->allocate();
 	StarQueue Open;
-	Pathfield *curpf;
-
-	curpf = &pathfields->fields[start.field - m_fields];
-	curpf->cycle = pathfields->cycle;
-	curpf->real_cost = 0;
+	Pathfield * curpf = &pathfields->fields[start.field - m_fields];
+	curpf->cycle      = pathfields->cycle;
+	curpf->real_cost  = 0;
 	curpf->estim_cost = calc_cost_lowerbound(start, end);
-	curpf->backlink = Map_Object::IDLE;
+	curpf->backlink   = Map_Object::IDLE;
 
-	Open.push(curpf);
+	Open.push(*curpf);
 
-	while ((curpf = Open.pop()))
-	{
+	while ((curpf = Open.pop())) {
 		cur.field = m_fields + (curpf - pathfields->fields.get());
 		get_coords(*cur.field, cur);
 
@@ -2651,21 +2643,18 @@ int32_t Map::findpath
 			Map_Object::WALK_NW, Map_Object::WALK_W, Map_Object::WALK_SW,
 			Map_Object::WALK_SE, Map_Object::WALK_E, Map_Object::WALK_NE
 		};
-		const int8_t *direction;
-
-		direction = (cur.x + cur.y) & 1 ? order1 : order2;
+		int8_t const * direction = (cur.x + cur.y) & 1 ? order1 : order2;
 
 		// Check all the 6 neighbours
 		for (uint32_t i = 6; i; i--, direction++) {
-			Pathfield *neighbpf;
 			FCoords neighb;
 			int32_t cost;
 
 			get_neighbour(cur, *direction, &neighb);
-			neighbpf = &pathfields->fields[neighb.field - m_fields];
+			Pathfield & neighbpf = pathfields->fields[neighb.field - m_fields];
 
 			// Is the field Closed already?
-			if (neighbpf->cycle == pathfields->cycle && neighbpf->heap_index < 0)
+			if (neighbpf.cycle == pathfields->cycle && neighbpf.heap_index < 0)
 				continue;
 
 			// Check passability
@@ -2684,22 +2673,22 @@ int32_t Map::findpath
 				continue;
 
 			// Calculate cost
-			const int32_t stepcost = (flags & fpBidiCost) ?
-				calc_bidi_cost(cur, *direction) : calc_cost(cur, *direction);
+			cost =
+				curpf->real_cost +
+				(flags & fpBidiCost ?
+				 calc_bidi_cost(cur, *direction) : calc_cost(cur, *direction));
 
-			cost = curpf->real_cost + stepcost;
-
-			if (neighbpf->cycle != pathfields->cycle) {
+			if (neighbpf.cycle != pathfields->cycle) {
 				// add to open list
-				neighbpf->cycle = pathfields->cycle;
-				neighbpf->real_cost = cost;
-				neighbpf->estim_cost = calc_cost_lowerbound(neighb, end);
-				neighbpf->backlink = *direction;
+				neighbpf.cycle      = pathfields->cycle;
+				neighbpf.real_cost  = cost;
+				neighbpf.estim_cost = calc_cost_lowerbound(neighb, end);
+				neighbpf.backlink   = *direction;
 				Open.push(neighbpf);
-			} else if (neighbpf->cost() > cost + neighbpf->estim_cost) {
+			} else if (neighbpf.cost() > cost + neighbpf.estim_cost) {
 				// found a better path to a field that's already Open
-				neighbpf->real_cost = cost;
-				neighbpf->backlink = *direction;
+				neighbpf.real_cost = cost;
+				neighbpf.backlink = *direction;
 				Open.boost(neighbpf);
 			}
 		}
@@ -2949,12 +2938,12 @@ Bob search functors
 
 ==============================================================================
 */
-bool FindBobAttribute::accept(Bob *bob) const
+bool FindBobAttribute::accept(Bob * const bob) const
 {
 	return bob->has_attribute(m_attrib);
 }
 
-bool FindBobEnemySoldier::accept(Bob *imm) const
+bool FindBobEnemySoldier::accept(Bob * const imm) const
 {
 	if (upcast(Soldier, soldier, imm))
 		if (soldier->isOnBattlefield() && &soldier->owner() != &player)

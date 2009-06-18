@@ -86,7 +86,7 @@ d(new PlayerDescriptionGroupImpl)
 		 std::string(), _("Initialization"),
 		 true, false,
 		 fname, fsize);
-	d->btnReadyPlayer = new UI::Checkbox(this, Point(w * 945 / 1000, 0));
+	d->btnReadyPlayer = new UI::Checkbox(this, Point(w * 189 / 200, 0));
 	d->btnReadyPlayer->changedto.set
 		(this, &PlayerDescriptionGroup::ready_player);
 

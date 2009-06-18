@@ -64,7 +64,7 @@ protected:
 	uint32_t      mpf_cycle;
 	int32_t       mpf_heapindex;
 	int32_t       mpf_realcost; ///< real cost of getting to this flag
-	RoutingNode  *mpf_backlink; ///< flag where we came from
+	RoutingNode * mpf_backlink; ///< flag where we came from
 	int32_t       mpf_estimate; ///< estimate of cost to destination
 
 public:

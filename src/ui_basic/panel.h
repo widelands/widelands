@@ -211,11 +211,11 @@ private:
 		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool do_key(bool down, SDL_keysym code);
 
-	Panel *_parent;
-	Panel *_next, *_prev;
-	Panel *_fchild, *_lchild; // first, last child
-	Panel *_mousein; // child panel the mouse is in
-	Panel *_focus; // keyboard focus
+	Panel * _parent;
+	Panel * _next, * _prev;
+	Panel * _fchild, * _lchild; //  first, last child
+	Panel * _mousein; //  child panel that the mouse is in
+	Panel * _focus; //  keyboard focus
 
 	uint32_t _flags;
 	PictureID _cache;
@@ -239,16 +239,16 @@ public:
 
 
 private:
-	static Panel *ui_trackmouse(int32_t *x, int32_t *y);
+	static Panel * ui_trackmouse(int32_t & x, int32_t & y);
 	static void ui_mousepress  (const Uint8 button, int32_t x, int32_t y);
 	static void ui_mouserelease(const Uint8 button, int32_t x, int32_t y);
 	static void ui_mousemove
 		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	static void ui_key(bool down, SDL_keysym code);
 
-	static Panel *_modal;
-	static Panel *_g_mousegrab;
-	static Panel *_g_mousein;
+	static Panel * _modal;
+	static Panel * _g_mousegrab;
+	static Panel * _g_mousein;
 	static PictureID s_default_cursor;
 };
 

@@ -45,7 +45,7 @@ struct Songset {
 	~Songset();
 
 	void add_song(std::string const & filename);
-	Mix_Music *get_song();
+	Mix_Music * get_song();
 	bool empty() {return m_songs.empty();}
 
 protected:
@@ -58,7 +58,7 @@ protected:
 	std::vector < std::string >::iterator m_current_song;
 
 	/// The current song
-	Mix_Music *m_m;
+	Mix_Music * m_m;
 
 	/** File reader object to fetch songs from disk when they start playing.
 	 * Do not create this for each load, it's a major hassle to code.
@@ -72,7 +72,7 @@ protected:
 	 * \sa m_fr
 	 * \sa get_song()
 	 */
-	SDL_RWops *m_rwops;
+	SDL_RWops * m_rwops;
 };
 
 #endif

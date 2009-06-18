@@ -257,7 +257,7 @@ protected:
 
 	GameType m_game_type;
 	///the event recorder object
-	Journal *journal;
+	Journal * journal;
 
 	///True if left and right mouse button should be swapped
 	bool  m_mouse_swapped;
@@ -297,7 +297,7 @@ private:
 	///Holds this process' one and only instance of WLApplication, if it was
 	///created already. NULL otherwise.
 	///\note This is private on purpose. Read the class documentation.
-	static WLApplication *the_singleton;
+	static WLApplication * the_singleton;
 };
 
 #endif

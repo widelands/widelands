@@ -142,7 +142,7 @@ Flag & Flag::base_flag()
 */
 void Flag::set_economy(Economy *e)
 {
-	Economy *old = get_economy();
+	Economy * const old = get_economy();
 
 	if (old == e)
 		return;
@@ -224,7 +224,7 @@ void Flag::detach_road(int32_t const dir)
 void Flag::get_neighbours(RoutingNodeNeighbours *neighbours)
 {
 	for (int8_t i = 0; i < 6; ++i) {
-		Road *road = m_roads[i];
+		Road * const road = m_roads[i];
 		if (!road)
 			continue;
 
@@ -254,7 +254,7 @@ void Flag::get_neighbours(RoutingNodeNeighbours *neighbours)
 Road *Flag::get_road(Flag *flag)
 {
 	for (int8_t i = 0; i < 6; ++i) {
-		Road *road = m_roads[i];
+		Road * const road = m_roads[i];
 		if (!road)
 			continue;
 

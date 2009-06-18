@@ -86,8 +86,8 @@ template<typename T> static void render_edge_lists
 	if (-y >= height)
 		return; // completely above screen
 
-	uint8_t *texpixels;
-	T *texcolormap;
+	uint8_t * texpixels;
+	T * texcolormap;
 
 	texpixels = tex.get_curpixels();
 	texcolormap = static_cast<T *>(tex.get_colormap());
@@ -355,8 +355,8 @@ template<typename T> static void dither_edge_horiz
 	 Vertex const & start, Vertex const & end,
 	 Texture const & ttex, Texture const & btex)
 {
-	uint8_t *tpixels, *bpixels;
-	T *tcolormap, *bcolormap;
+	uint8_t * tpixels, * bpixels;
+	T * tcolormap, * bcolormap;
 
 	tpixels = ttex.get_curpixels();
 	tcolormap = static_cast<T *>(ttex.get_colormap());

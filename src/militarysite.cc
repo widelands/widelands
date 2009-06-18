@@ -312,11 +312,11 @@ void MilitarySite::act(Game & game, uint32_t const data)
 		std::vector<Soldier *> soldiers = presentSoldiers();
 
 		for (uint32_t i = 0; i < soldiers.size(); ++i) {
-			Soldier *s = soldiers[i];
+			Soldier & s = *soldiers[i];
 
 			// The healing algorithm is totally arbitrary
-			if (s->get_current_hitpoints() < s->get_max_hitpoints()) {
-				s->heal(total_heal);
+			if (s.get_current_hitpoints() < s.get_max_hitpoints()) {
+				s.heal(total_heal);
 				total_heal -= total_heal / 3;
 			}
 		}

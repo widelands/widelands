@@ -48,7 +48,7 @@ struct FXset {
 	~FXset();
 
 	void add_fx(Mix_Chunk * fx, Uint8 prio = PRIO_MEDIUM);
-	Mix_Chunk *get_fx();
+	Mix_Chunk * get_fx();
 	bool empty() {return m_fxs.empty();}
 
 protected:

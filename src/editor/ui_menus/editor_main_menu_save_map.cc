@@ -302,7 +302,7 @@ void Main_Menu_Save_Map::fill_list() {
 		 pname != mapfiles_end;
 		 ++pname)
 	{
-		const char *name = pname->c_str();
+		char const * const name = pname->c_str();
 
 		// we do not list S2 files since we only write wlmf
 		if (upcast(Widelands::WL_Map_Loader, ml, map.get_correct_loader(name))) {

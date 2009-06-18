@@ -71,7 +71,7 @@ struct Section {
 
 		Value & operator= (Value const &);
 
-		const char *get_name() const {return m_name;}
+		char const * get_name() const {return m_name;}
 
 		bool is_used() const;
 		void mark_used();
@@ -100,11 +100,11 @@ struct Section {
 	/// Does not mark the value as used.
 	bool has_val(char const * name) const;
 
-	Value *get_val(const char *name);
-	Value *get_next_val(char const * name = 0);
+	Value * get_val     (char const * name);
+	Value * get_next_val(char const * name = 0);
 	uint32_t get_num_values() const {return m_values.size();}
 
-	const char *get_name() const;
+	char const * get_name() const;
 
 	bool is_used() const;
 	void mark_used();
@@ -162,7 +162,7 @@ struct Section {
 		(char const * name,
 		 Widelands::Editor_Game_Base &, Widelands::Player_Number);
 
-	const char *get_next_bool(const char *name, bool *value);
+	char const * get_next_bool(char const * name, bool * value);
 
 	void set_int
 		(char const *       name, int32_t                   value);
@@ -253,9 +253,9 @@ struct Profile {
 		 bool used_only = true,
 		 FileSystem & = *g_fs);
 
-	Section *get_section(const char *name);
-	Section & get_safe_section(char const *);
-	Section & pull_section(char const * name);
+	Section * get_section     (char const * name);
+	Section & get_safe_section(char const * name);
+	Section & pull_section    (char const * name);
 	Section * get_next_section(char const * name = 0);
 
 	/// If a section with the given name already exists, return a reference to

@@ -538,9 +538,9 @@ Supply * Economy::_find_best_supply
 	assert(req.is_open());
 
 	Route buf_route0, buf_route1;
-	Supply *best_supply = 0;
-	Route *best_route = 0;
-	int32_t best_cost = -1;
+	Supply * best_supply = 0;
+	Route  * best_route  = 0;
+	int32_t  best_cost   = -1;
 	Flag & target_flag = req.target_flag();
 
 	for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i) {

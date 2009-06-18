@@ -544,7 +544,7 @@ void Font_Handler::draw_richtext
 							line_breaks.erase(line_breaks.begin());
 						}
 						while (line_breaks.size()) {
-							SDL_Surface *space = render_space(*text_it, bg);
+							SDL_Surface * const space = render_space(*text_it, bg);
 							rend_lines.push_back(space);
 							block_h += space->h;
 							line_breaks.erase(line_breaks.begin());

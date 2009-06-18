@@ -43,7 +43,7 @@ typedef struct
 {
 	MHDR_chunk    mhdr;
 	unsigned int  frame_count;
-	SDL_Surface **frame;
+	SDL_Surface * * frame;
 }
 MNG_Image;
 

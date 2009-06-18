@@ -121,14 +121,14 @@ void Panel::free_children() {while (_fchild) delete _fchild;}
 int32_t Panel::run()
 {
 	WLApplication * const app = WLApplication::get();
-	Panel *prevmodal = _modal;
+	Panel * const prevmodal = _modal;
 	_modal = this;
 	_g_mousegrab = 0; // good ol' paranoia
 	app->set_mouse_lock(false); // more paranoia :-)
 
-	Panel *forefather = this;
-	while (forefather->_parent)
-		forefather = forefather->_parent;
+	Panel * forefather = this;
+	while (Panel * const p = forefather->_parent)
+		forefather = p;
 
 	s_default_cursor = g_gr->get_picture(PicMod_UI,  "pics/cursor.png");
 
@@ -648,9 +648,9 @@ void Panel::play_click()
  */
 void Panel::check_child_death()
 {
-	Panel *next = _fchild;
+	Panel * next = _fchild;
 	while (next) {
-		Panel *p = next;
+		Panel * p = next;
 		next = p->_next;
 
 		if (p->_flags & pf_die)
@@ -846,27 +846,27 @@ bool Panel::get_key_state(const SDLKey key) const
  *
  * \return The panel which receives the mouse event
  */
-Panel *Panel::ui_trackmouse(int32_t * const x, int32_t * const y)
+Panel *Panel::ui_trackmouse(int32_t & x, int32_t & y)
 {
-	Panel *mousein;
-	Panel *rcv = 0;
+	Panel * mousein;
+	Panel * rcv = 0;
 
 	if (_g_mousegrab)
 		mousein = rcv = _g_mousegrab;
 	else
 		mousein = _modal;
 
-	*x -= mousein->_x;
-	*y -= mousein->_y;
+	x -= mousein->_x;
+	y -= mousein->_y;
 	for (Panel *p = mousein->_parent; p; p = p->_parent) {
-		*x -= p->_lborder + p->_x;
-		*y -= p->_tborder + p->_y;
+		x -= p->_lborder + p->_x;
+		y -= p->_tborder + p->_y;
 	}
 
 	if
-		(*x >= 0 and *x < static_cast<int32_t>(mousein->_w)
+		(0 <= x and x < static_cast<int32_t>(mousein->_w)
 		 and
-		 *y >= 0 and *y < static_cast<int32_t>(mousein->_h))
+		 0 <= y and y < static_cast<int32_t>(mousein->_h))
 		rcv = mousein;
 	else
 		mousein = 0;
@@ -887,11 +887,11 @@ Panel *Panel::ui_trackmouse(int32_t * const x, int32_t * const y)
  * panel.
 */
 void Panel::ui_mousepress(const Uint8 button, int32_t x, int32_t y) {
-	if (Panel * const p = ui_trackmouse(&x, &y))
+	if (Panel * const p = ui_trackmouse(x, y))
 		p->do_mousepress(button, x, y);
 }
 void Panel::ui_mouserelease(const Uint8 button, int32_t x, int32_t y) {
-	if (Panel * const p = ui_trackmouse(&x, &y))
+	if (Panel * const p = ui_trackmouse(x, y))
 		p->do_mouserelease(button, x, y);
 }
 
@@ -906,14 +906,14 @@ void Panel::ui_mousemove
 	if (!xdiff && !ydiff)
 		return;
 
-	Panel *p;
+	Panel * p;
 	uint32_t w, h;
 	g_gr->get_picture_size(s_default_cursor, w, h);
 
 	g_gr->update_rectangle(x - xdiff, y - ydiff, w, h);
 	g_gr->update_rectangle(x, y, w, h);
 
-	p = ui_trackmouse(&x, &y);
+	p = ui_trackmouse(x, y);
 	if (!p)
 		return;
 
