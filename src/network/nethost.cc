@@ -944,9 +944,9 @@ void NetHost::setPlayerReady
 		return;
 	d->settings.players[number].readystate = readystate;
 
-	//breadcast changes
+	// broadcast changes
 	SendPacket s;
-	s.Unsigned8(NETCMD_SETTING_CHANGEREADY);
+	s.Unsigned8(NETCMD_SETTING_PLAYER);
 	s.Unsigned8(number);
 	writeSettingPlayer(s, number);
 	broadcast(s);

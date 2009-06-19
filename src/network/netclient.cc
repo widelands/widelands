@@ -358,7 +358,9 @@ bool NetClient::getPlayerReady(uint8_t number) {
 
 void NetClient::setPlayerNumber(int32_t number)
 {
-	if (number != d->playernum)
+	// If the playernumber we want to switch to is our own, there is no need
+	// for sending a request to the host.
+	if (number == d->playernum)
 		return;
 
 	// Send request
