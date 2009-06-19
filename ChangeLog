@@ -1,5 +1,16 @@
 ### Build 14 (until now)
-- Implemented basic "generate random map" feature (svn:r4113)
+- Many graphic system updates including experimental hardware improvements
+  (many different svn rev.)
+- Implemented very basic "dedicated" server (many different svn rev.)
+- Improved chat system:
+	 * Added personal messages (use "@username message") (svn:r4186)
+	 * Added a time string in front of each message (svn:r4253)
+- Implemented metaserver lobby for internet game (many different svn rev.)
+- Implemented check of free diskspace to avoid segfaults (different svn rev.)
+- Added new ware icons. (svn:r4152, svn:r4250)
+- Implemented versioning system to avoid that Widelands loads data of old Widelands
+  versions. (svn:r4133)
+- Implemented basic "generate random map" feature. (svn:r4113)
 - Implemented basic messaging system to inform players of important events.
   (many different svn rev.)
 - Improved computer player behaviour (many different svn rev.)

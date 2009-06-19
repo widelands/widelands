@@ -26,6 +26,12 @@ for Widelands makes direct use of them:
 Make sure you have them all. If you encounter library versions that do not work,
 please tell us.
 
+Optional you will need the following libraries for Widelands' metaserver usage:
+   - ggz-base-libs >= 0.99.5
+or
+   - ggz-client-libs == 0.14.1
+   - libggz == 0.14.1
+
 For compiling, you will also need
    - Python >= 2.3
    - scons >= 1.0.0 (optional but recommended, see below)
@@ -74,7 +80,7 @@ distcc=True/False
 build=debug|release|profile
 build_id=<IDNAME>
 efence=1 (default false)
-enable_ggz=true (default false)
+enable_ggz=false (default true)
 
 install_prefix=<PREFIX> (default '/usr/local')
 bindir=<BINDIR> (default 'games')

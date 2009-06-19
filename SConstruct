@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import os, sys, string
 sys.path.append("build/scons-tools")
@@ -98,7 +99,7 @@ def cli_options():
 
 		BoolVariable('enable_sdl_parachute', 'Enable SDL parachute?', False),
 		BoolVariable('enable_efence', 'Use the efence memory debugger?', False),
-		BoolVariable('enable_ggz', 'Use the GGZ Gamingzone?', False),
+		BoolVariable('enable_ggz', 'Use the GGZ Gamingzone?', True),
 		BoolVariable('enable_opengl', 'use opengl for graphics', False),
 		BoolVariable('prefer_localdata', 'Useful for developers. Use data and locales from ./ at runtime', True),
 		BoolVariable('pretty_compile_output', 'Suppress link and compile commands, only print a very short info text and occurring errors and warnings.', True),
@@ -166,7 +167,7 @@ if env.enable_configuration:
 		num_cpu = int(os.environ.get('NUM_CPU', 2))
 	if (env['ccache'] == True):
 			setup_ccache(env)
-	
+
 	SetOption('num_jobs', num_cpu)
 	print "running with -j", GetOption('num_jobs')
 
