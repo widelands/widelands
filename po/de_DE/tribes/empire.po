@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4240\n"
+"Project-Id-Version: Widelands svn4288\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-12 14:42+0000\n"
+"POT-Creation-Date: 2009-06-19 13:25+0000\n"
 "PO-Revision-Date: 2009-03-16 12:52+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -16,6 +16,103 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Generator: KBabel 1.11.4\n"
+
+#: ../../../tribes/empire/advanced_lance/conf:1
+msgid "This is an advanced lance, with steel top."
+msgstr "Diese verbesserte Lanze besitzt eine Stahlspitze."
+
+#: ../../../tribes/empire/armour/conf:1
+msgid "Basic armour for Empire soldiers."
+msgstr "Die Grundausrüstung für Soldaten des Imperiums"
+
+#: ../../../tribes/empire/armoursmithy/conf:23
+msgid "Produce helm"
+msgstr ""
+
+#: ../../../tribes/empire/armoursmithy/conf:24
+msgid "Produce armour"
+msgstr ""
+
+#: ../../../tribes/empire/armoursmithy/conf:25
+msgid "Produce chain armour"
+msgstr ""
+
+#: ../../../tribes/empire/armoursmithy/conf:26
+#, fuzzy
+msgid "Produce plate armour"
+msgstr "Plattenharnisch"
+
+#: ../../../tribes/empire/axe/conf:1
+msgid "The axe is the tool for the lumberjack. It is produced by the toolsmith."
+msgstr "Die Axt ist das Werkzeug des Holzfällers. Sie wird vom Werkzeugmacher gefertigt."
+
+#: ../../../tribes/empire/bakingtray/conf:1
+msgid "The peel is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
+msgstr "Der Brotschieber ist das Werkzeug des Bäckers. Es wird vom Werkzeugmacher gefertigt."
+
+#: ../../../tribes/empire/basket/conf:1
+msgid "This basket is needed by the winegrower, for harvesting the grapes. It is produced by the toolsmith."
+msgstr "Körbe werden von Winzern benötigt, um die Traubenernte einzubringen. Sie werden vom Werkzeugmacher hergestellt"
+
+#: ../../../tribes/empire/beer/conf:1
+msgid "Young soldiers and miners need some encouragement. This drink makes a man fearless and strong."
+msgstr "Junge Soldaten und Bergarbeiter brauchen ein wenig Ansporn. Dieses gute Bier macht sie stark und furchtlos."
+
+#: ../../../tribes/empire/bread/conf:1
+msgid "The backers of the Empire make really tasty bread."
+msgstr "Die imperialen Bäcker backen wirklich leckeres Brot."
+
+#: ../../../tribes/empire/brewer/conf:1
+msgid "Produces beer or wine."
+msgstr ""
+
+#: ../../../tribes/empire/builder/conf:1
+msgid "Works at construction sites to create a new building."
+msgstr ""
+
+#: ../../../tribes/empire/burner/conf:1
+msgid "Burns coal."
+msgstr ""
+
+#: ../../../tribes/empire/carrier/conf:1
+msgid "Carries items along your roads."
+msgstr ""
+
+#: ../../../tribes/empire/chain_armour/conf:1
+msgid "This is a medium armour for Empire soldiers."
+msgstr "Dies ist die mittlere Rüstung für einen imperialen Soldaten."
+
+#: ../../../tribes/empire/cloth/conf:1
+msgid "Cloth is needed for Empire ships and few bigger buildings. It is produced out of wool."
+msgstr "Stoff wird für Schiffe und einige größere Gebäude benötigt. Er wird aus Wolle hergestellt."
+
+#: ../../../tribes/empire/coal/conf:1
+msgid "The fires of the Empire are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
+msgstr "Die Feuer des Imperiums werden meist mit Holz geschürt, falls das allerdings nicht heiß genug sein sollte, wird gerne Kohle benutzt."
+
+#: ../../../tribes/empire/colosseum/conf:27
+#: ../../../tribes/empire/trainingscamp/conf:38
+#: ../../../tribes/empire/arena/conf:13
+msgid "Sleep"
+msgstr ""
+
+#: ../../../tribes/empire/colosseum/conf:28
+#: ../../../tribes/empire/arena/conf:14
+msgid "Upgrade soldier evade 0"
+msgstr ""
+
+#: ../../../tribes/empire/colosseum/conf:29
+#: ../../../tribes/empire/arena/conf:15
+msgid "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/colosseum/conf:30
+msgid "Upgrade soldier evade 1"
+msgstr ""
+
+#: ../../../tribes/empire/colosseum/conf:31
+msgid "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
+msgstr ""
 
 #: ../../../tribes/empire/conf:18
 msgid "The Widelands Development Team"
@@ -98,19 +195,23 @@ msgid "Resource indicator water"
 msgstr "Ressourcen Anzeige für Wasser"
 
 #: ../../../tribes/empire/conf:53
-msgid "Wine medium"
+#, fuzzy
+msgid "Vine medium"
 msgstr "ausgewachsene Weinrebe"
 
 #: ../../../tribes/empire/conf:54
-msgid "Wine small"
+#, fuzzy
+msgid "Vine small"
 msgstr "junge Weinrebe"
 
 #: ../../../tribes/empire/conf:55
-msgid "Wine tiny"
+#, fuzzy
+msgid "Vine tiny"
 msgstr "frisch gesäte Weinrebe"
 
 #: ../../../tribes/empire/conf:56
-msgid "Wine ripe"
+#, fuzzy
+msgid "Vine ripe"
 msgstr "reife Weinrebe"
 
 #: ../../../tribes/empire/conf:59
@@ -586,143 +687,420 @@ msgstr "norm. Hauptquartier"
 msgid "Castle village"
 msgstr "Burg Dorf"
 
-#~ msgid "This is an advanced lance, with steel top."
-#~ msgstr "Diese verbesserte Lanze besitzt eine Stahlspitze."
+#: ../../../tribes/empire/farm/conf:15
+msgid "Plant wheat"
+msgstr ""
 
-#~ msgid "Basic armour for Empire soldiers."
-#~ msgstr "Die Grundausrüstung für Soldaten des Imperiums"
+#: ../../../tribes/empire/farm/conf:17
+msgid "Harvest wheat"
+msgstr ""
 
-#~ msgid "The axe is the tool for the lumberjack. It is produced by the toolsmith."
-#~ msgstr "Die Axt ist das Werkzeug des Holzfällers. Sie wird vom Werkzeugmacher gefertigt."
+#: ../../../tribes/empire/farmer/conf:2
+msgid "Plants fields."
+msgstr ""
 
-#~ msgid "The peel is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
-#~ msgstr "Der Brotschieber ist das Werkzeug des Bäckers. Es wird vom Werkzeugmacher gefertigt."
+#: ../../../tribes/empire/fire_tongs/conf:1
+msgid "The fire tongs are the tool of the smelter, working in the smelting works. They are produced by the toolsmith."
+msgstr "Die Feuerzange ist das Werkzeug des Hüttenarbeiters. Sie wird vom Werkzeugmacher hergestellt."
 
-#~ msgid "This basket is needed by the winegrower, for harvesting the grapes. It is produced by the toolsmith."
-#~ msgstr "Körbe werden von Winzern benötigt, um die Traubenernte einzubringen. Sie werden vom Werkzeugmacher hergestellt"
+#: ../../../tribes/empire/fish/conf:1
+msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
+msgstr "Neben Brot und Fleisch wird im Imperium auch gerne Fisch verspeist."
 
-#~ msgid "Young soldiers and miners need some encouragement. This drink makes a man fearless and strong."
-#~ msgstr "Junge Soldaten und Bergarbeiter brauchen ein wenig Ansporn. Dieses gute Bier macht sie stark und furchtlos."
+#: ../../../tribes/empire/fisher/conf:1
+msgid "Gets fish out of the sea."
+msgstr ""
 
-#~ msgid "The backers of the Empire make really tasty bread."
-#~ msgstr "Die imperialen Bäcker backen wirklich leckeres Brot."
+#: ../../../tribes/empire/fishing_rod/conf:1
+msgid "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
+msgstr "Angeln werden vom Fischer benutzt, um Fische zu fangen. Sie werden vom Werkzeugmacher hergestellt."
 
-#~ msgid "This is a medium armour for Empire soldiers."
-#~ msgstr "Dies ist die mittlere Rüstung für einen imperialen Soldaten."
+#: ../../../tribes/empire/flour/conf:1
+msgid "Flour is produced out of wheat and is needed for the tasty Empire bread."
+msgstr "Mehl wird aus Weizen hergestellt und wird für das leckere Imperiums-Brot benötigt."
 
-#~ msgid "Cloth is needed for Empire ships and few bigger buildings. It is produced out of wool."
-#~ msgstr "Stoff wird für Schiffe und einige größere Gebäude benötigt. Er wird aus Wolle hergestellt."
+#: ../../../tribes/empire/forester/conf:1
+msgid "Plants trees."
+msgstr ""
 
-#~ msgid "The fires of the Empire are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
-#~ msgstr "Die Feuer des Imperiums werden meist mit Holz geschürt, falls das allerdings nicht heiß genug sein sollte, wird gerne Kohle benutzt."
+#: ../../../tribes/empire/geologist/conf:1
+msgid "Discovers resources for mining."
+msgstr ""
 
-#~ msgid "The fire tongs are the tool of the smelter, working in the smelting works. They are produced by the toolsmith."
-#~ msgstr "Die Feuerzange ist das Werkzeug des Hüttenarbeiters. Sie wird vom Werkzeugmacher hergestellt."
+#: ../../../tribes/empire/gold/conf:1
+msgid "Gold is the most valuable of all metals; only very important things are garnished with it."
+msgstr "Gold ist das wertvollste Metal des Imperiums. Es wird nur für besonders wichtige Sachen verwendet."
 
-#~ msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
-#~ msgstr "Neben Brot und Fleisch wird im Imperium auch gerne Fisch verspeist."
+#: ../../../tribes/empire/goldstone/conf:1
+msgid "This is the yellow goldstone."
+msgstr "Dies ist gelb schimmerndes Golderz."
 
-#~ msgid "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
-#~ msgstr "Angeln werden vom Fischer benutzt, um Fische zu fangen. Sie werden vom Werkzeugmacher hergestellt."
+#: ../../../tribes/empire/grape/conf:1
+msgid "These grapes are the basic for tasty wine."
+msgstr "Diese Weintrauben sind der Rohstoff für einen hervorragenden Wein."
 
-#~ msgid "Flour is produced out of wheat and is needed for the tasty Empire bread."
-#~ msgstr "Mehl wird aus Weizen hergestellt und wird für das leckere Imperiums-Brot benötigt."
+#: ../../../tribes/empire/hammer/conf:1
+msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the armour- and weaponsmith. Make sure you always got some in reserve! It is produced by the toolsmith."
+msgstr "Der Hammer ist das wichtigste Werkzeug. Er wird vom Geologen, vom Bauarbeiter, vom Werkzeugmacher und von den Schmieden benötigt, daher solltest du immer ein paar auf Lager haben. Hergestellt wird er vom Werkzeugmacher"
 
-#~ msgid "Gold is the most valuable of all metals; only very important things are garnished with it."
-#~ msgstr "Gold ist das wertvollste Metal des Imperiums. Es wird nur für besonders wichtige Sachen verwendet."
+#: ../../../tribes/empire/heavy_lance/conf:1
+msgid "This is a good warrior lance, with a steel-top and a little blade."
+msgstr "Dies ist die Lanze eines guten Kriegers. Sie besitzt eine Stahlspitze mit einer zusätzlichen schmalen Schneide."
 
-#~ msgid "This is the yellow goldstone."
-#~ msgstr "Dies ist gelb schimmerndes Golderz."
+#: ../../../tribes/empire/helm/conf:1
+msgid "Basic defence of a warrior"
+msgstr "Die Grundausrüstung eines Soldaten."
 
-#~ msgid "These grapes are the basic for tasty wine."
-#~ msgstr "Diese Weintrauben sind der Rohstoff für einen hervorragenden Wein."
+#: ../../../tribes/empire/hunter/conf:1
+msgid "The Hunter brings good meat to the colonists."
+msgstr ""
 
-#~ msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the armour- and weaponsmith. Make sure you always got some in reserve! It is produced by the toolsmith."
-#~ msgstr "Der Hammer ist das wichtigste Werkzeug. Er wird vom Geologen, vom Bauarbeiter, vom Werkzeugmacher und von den Schmieden benötigt, daher solltest du immer ein paar auf Lager haben. Hergestellt wird er vom Werkzeugmacher"
+#: ../../../tribes/empire/hunters_house/conf:12
+#: ../../../tribes/empire/stonemasons_house/conf:18
+#: ../../../tribes/empire/smelting_works/conf:21
+#: ../../../tribes/empire/burners_house/conf:16
+#: ../../../tribes/empire/winery/conf:17 ../../../tribes/empire/farm/conf:19
+#: ../../../tribes/empire/sawmill/conf:17
+#: ../../../tribes/empire/bakery/conf:17
+#: ../../../tribes/empire/deep_goldmine/conf:22
+#: ../../../tribes/empire/armoursmithy/conf:27
+#: ../../../tribes/empire/deep_oremine/conf:22
+#: ../../../tribes/empire/quarry/conf:20
+#: ../../../tribes/empire/toolsmithy/conf:42
+#: ../../../tribes/empire/marblemine/conf:24
+#: ../../../tribes/empire/weaving-mill/conf:16
+#: ../../../tribes/empire/coalmine/conf:21
+#: ../../../tribes/empire/deep_coalmine/conf:22
+#: ../../../tribes/empire/inn/conf:20
+#: ../../../tribes/empire/lumberjacks_house/conf:15
+#: ../../../tribes/empire/piggery/conf:18 ../../../tribes/empire/well/conf:13
+#: ../../../tribes/empire/vineyard/conf:18
+#: ../../../tribes/empire/deep_marblemine/conf:23
+#: ../../../tribes/empire/mill/conf:17 ../../../tribes/empire/brewery/conf:17
+#: ../../../tribes/empire/foresters_house/conf:15
+#: ../../../tribes/empire/sheepfarm/conf:18
+#: ../../../tribes/empire/weaponsmithy/conf:31
+#: ../../../tribes/empire/oremine/conf:21
+#: ../../../tribes/empire/goldmine/conf:21
+#: ../../../tribes/empire/fishers_house/conf:16
+#: ../../../tribes/empire/tavern/conf:19
+msgid "Work"
+msgstr ""
 
-#~ msgid "This is a good warrior lance, with a steel-top and a little blade."
-#~ msgstr "Dies ist die Lanze eines guten Kriegers. Sie besitzt eine Stahlspitze mit einer zusätzlichen schmalen Schneide."
+#: ../../../tribes/empire/hunting_spear/conf:1
+msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters."
+msgstr "Dieser Speer ist leicht genug, um geworfen zu werden, und doch schwer genug, um ein Tier sofort zu töten. Er wird nur von Jägern benutzt."
 
-#~ msgid "Basic defence of a warrior"
-#~ msgstr "Die Grundausrüstung eines Soldaten."
+#: ../../../tribes/empire/innkeeper/conf:1
+msgid "Produces food for miners."
+msgstr ""
 
-#~ msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters."
-#~ msgstr "Dieser Speer ist leicht genug, um geworfen zu werden, und doch schwer genug, um ein Tier sofort zu töten. Er wird nur von Jägern benutzt."
+#: ../../../tribes/empire/iron/conf:1
+msgid "Weapons and tools are made of iron."
+msgstr "Waffen und Werkzeuge werden aus Eisen gefertigt."
 
-#~ msgid "Weapons and tools are made of iron."
-#~ msgstr "Waffen und Werkzeuge werden aus Eisen gefertigt."
+#: ../../../tribes/empire/ironore/conf:1
+msgid "This is the red iron ore."
+msgstr "Dies ist rotes Eisenerz."
 
-#~ msgid "This is the red iron ore."
-#~ msgstr "Dies ist rotes Eisenerz."
+#: ../../../tribes/empire/kitchen_tools/conf:1
+msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
+msgstr "Wie sollten unsere Köche Mahlzeiten oder Rationen herstellen, wenn sie keine Küchengeräte hätten?"
 
-#~ msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
-#~ msgstr "Wie sollten unsere Köche Mahlzeiten oder Rationen herstellen, wenn sie keine Küchengeräte hätten?"
+#: ../../../tribes/empire/lance/conf:1
+msgid "This wooden lance has an iron spike."
+msgstr "Diese hölzerne Lanze besitzt eine eiserne Spitze."
 
-#~ msgid "This wooden lance has an iron spike."
-#~ msgstr "Diese hölzerne Lanze besitzt eine eiserne Spitze."
+#: ../../../tribes/empire/lumberjack/conf:1
+msgid "Fells trees."
+msgstr ""
 
-#~ msgid "Marble is the beautiful stone, which is cutted out of the mountains and which is used for beautiful buildings and columns."
-#~ msgstr "Marmor ist der wunderschöne, helle Stein, der aus den Bergen geschlagen wird, um majestätische Gebäude und Säulen zu bauen."
+#: ../../../tribes/empire/marble/conf:1
+msgid "Marble is the beautiful stone, which is cutted out of the mountains and which is used for beautiful buildings and columns."
+msgstr "Marmor ist der wunderschöne, helle Stein, der aus den Bergen geschlagen wird, um majestätische Gebäude und Säulen zu bauen."
 
-#~ msgid "Marble columns present the high culture of the Empire, so they are needed for nearly every bigger building."
-#~ msgstr "Marmorsäulen präsentieren die hoch entwickelte Kultur des Imperiums und werden daher in vielen großen Gebäuden verwendet."
+#: ../../../tribes/empire/marblecolumn/conf:1
+msgid "Marble columns present the high culture of the Empire, so they are needed for nearly every bigger building."
+msgstr "Marmorsäulen präsentieren die hoch entwickelte Kultur des Imperiums und werden daher in vielen großen Gebäuden verwendet."
 
-#~ msgid "A real meal which satisfies all miners needs."
-#~ msgstr "Eine richtige Mahlzeit, die einen jeden Bergarbeiter glücklich macht."
+#: ../../../tribes/empire/master-miner/conf:1
+#: ../../../tribes/empire/miner/conf:1
+msgid "Works deep in the mines to produce coal, iron or gold."
+msgstr ""
 
-#~ msgid "Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong."
-#~ msgstr "Fleisch ist voller Energie, daher wird es in Gaststätten und Tavernen verwendet, um ein kräftiges Mahl für Bergarbeiter und Soldaten zuzubereiten."
+#: ../../../tribes/empire/meal/conf:1
+msgid "A real meal which satisfies all miners needs."
+msgstr "Eine richtige Mahlzeit, die einen jeden Bergarbeiter glücklich macht."
 
-#~ msgid "This pick is used by the stonemasons and the miners. It is produced by the toolsmith."
-#~ msgstr "Die Spitzhacke wird vom Steinmetz und vom Bergarbeiter benutzt. Sie wird vom Werkzeugmacher hergestellt."
+#: ../../../tribes/empire/meat/conf:1
+msgid "Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong."
+msgstr "Fleisch ist voller Energie, daher wird es in Gaststätten und Tavernen verwendet, um ein kräftiges Mahl für Bergarbeiter und Soldaten zuzubereiten."
 
-#~ msgid "The strongest armour existing for the Empire soldiers."
-#~ msgstr "Der stärkste Harnisch, den es im Imperium gibt."
+#: ../../../tribes/empire/pick/conf:1
+msgid "This pick is used by the stonemasons and the miners. It is produced by the toolsmith."
+msgstr "Die Spitzhacke wird vom Steinmetz und vom Bergarbeiter benutzt. Sie wird vom Werkzeugmacher hergestellt."
 
-#~ msgid "A small bite to keep miners strong and working."
-#~ msgstr "Eine kleiner Happen, um die Bergarbeiter für die schwere Arbeit zu stärken."
+#: ../../../tribes/empire/pig-breeder/conf:1
+msgid "Breeds pigs."
+msgstr ""
 
-#~ msgid "This saw is needed by the sawyer to create all the useful tools. It is produced by the toolsmith."
-#~ msgstr "Diese Säge wird vom Säger benötigt, um all die wichtigen Werkzeuge herzustellen."
+#: ../../../tribes/empire/plate_armour/conf:1
+msgid "The strongest armour existing for the Empire soldiers."
+msgstr "Der stärkste Harnisch, den es im Imperium gibt."
 
-#~ msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-#~ msgstr "Die Sense ist das Werkzeug des Bauern. Sie wird vom Werkzeugmacher gefertigt."
+#: ../../../tribes/empire/quarry/conf:16
+#: ../../../tribes/empire/marblemine/conf:23
+#, fuzzy
+msgid "Mine stone"
+msgstr "frisch gesäte Weinrebe"
 
-#~ msgid "The shovel is needed for proper handling of plants. Therefore the forester uses it. It is produced by the toolsmith."
-#~ msgstr "Die Schaufel wird für den Umgang mit Pflanzen benötigt, daher wird sie vom Förster benutzt. Sie wird vom Werkzeugmacher hergestellt."
+#: ../../../tribes/empire/quarry/conf:17
+msgid "Mine stone (only for compatibility with old savegames (build13))"
+msgstr ""
 
-#~ msgid "Stones and wood are the basic build material of the Empire."
-#~ msgstr "Steine und Holz sind die Grundbaustoffe des Imperiums."
+#: ../../../tribes/empire/quarry/conf:18
+#: ../../../tribes/empire/marblemine/conf:22
+#, fuzzy
+msgid "Mine marble"
+msgstr "Marmor"
 
-#~ msgid "Trunks are one important build material of the Empire."
-#~ msgstr "Stämme sind ein wichtiger Baustoff des Imperiums."
+#: ../../../tribes/empire/quarry/conf:19
+msgid "Mine marble (only for compatibility with old savegames (build13))"
+msgstr ""
 
-#~ msgid "This is the best and sharpest weapon, the Empire weaponsmith creates for their warriors."
-#~ msgstr "Dies ist die beste und schärfste Waffe, die die imperialen Schmiede für ihre Krieger produzieren können."
+#: ../../../tribes/empire/ration/conf:1
+msgid "A small bite to keep miners strong and working."
+msgstr "Eine kleiner Happen, um die Bergarbeiter für die schwere Arbeit zu stärken."
 
-#~ msgid "Water is the most essential essence for life! This water is used in many places, be it to make bread or beer."
-#~ msgstr "Wasser ist die Basis des Lebens. Dieses Wasser wird für viele Sachen benutzt, sei es für Brot oder für Bier."
+#: ../../../tribes/empire/saw/conf:1
+msgid "This saw is needed by the sawyer to create all the useful tools. It is produced by the toolsmith."
+msgstr "Diese Säge wird vom Säger benötigt, um all die wichtigen Werkzeuge herzustellen."
 
-#~ msgid "Wheat is essential for surviving. Delicious bread and ales can be made of this wheat."
-#~ msgstr "Weizen ist überlebenswichtig. Gutes Brot und starke Biere können aus diesem Weizen hergestellt werden."
+#: ../../../tribes/empire/scythe/conf:1
+msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
+msgstr "Die Sense ist das Werkzeug des Bauern. Sie wird vom Werkzeugmacher gefertigt."
 
-#~ msgid "This wine gives enough power, to mine marble or gold. And furthermore, our soldiers like it, too."
-#~ msgstr "Dieser Wein gibt genug Kraft, um Marmor oder Gold abzubauen, und sogar die Soldaten mögen den Wein äußerst gerne."
+#: ../../../tribes/empire/shepherd/conf:1
+msgid "Keeping sheeps."
+msgstr ""
 
-#~ msgid "This is a wooden lance, which is the basic of the Empires military system."
-#~ msgstr "Dies ist eine hölzerne Lanze, die Standardwaffe des imperialen Militärs."
+#: ../../../tribes/empire/shovel/conf:1
+msgid "The shovel is needed for proper handling of plants. Therefore the forester uses it. It is produced by the toolsmith."
+msgstr "Die Schaufel wird für den Umgang mit Pflanzen benötigt, daher wird sie vom Förster benutzt. Sie wird vom Werkzeugmacher hergestellt."
 
-#~ msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
-#~ msgstr "Wolle ist das Haar von Schaffen. Imperiale Webereien benutzen sie, um Stoffe zu erstellen."
+#: ../../../tribes/empire/smelter/conf:1
+#, fuzzy
+msgid "Smelts iron."
+msgstr "Hüttenarbeiter"
+
+#: ../../../tribes/empire/smelting_works/conf:19
+#, fuzzy
+msgid "Smelt iron"
+msgstr "Hüttenarbeiter"
+
+#: ../../../tribes/empire/smelting_works/conf:20
+msgid "Smelt gold"
+msgstr ""
+
+#: ../../../tribes/empire/soldier/conf:1
+msgid "Defend and Conquer!"
+msgstr ""
+
+#: ../../../tribes/empire/stonemason/conf:1
+msgid "Cuts raw pieces of granit and marble out of laying stones."
+msgstr ""
+
+#: ../../../tribes/empire/toolsmithy/conf:30
+#, fuzzy
+msgid "Produce bakingtray"
+msgstr "Backholz"
+
+#: ../../../tribes/empire/toolsmithy/conf:31
+msgid "Produce fire tongs"
+msgstr ""
+
+#: ../../../tribes/empire/toolsmithy/conf:32
+#, fuzzy
+msgid "Produce fishing rod"
+msgstr "Angel"
+
+#: ../../../tribes/empire/toolsmithy/conf:33
+msgid "Produce hammer"
+msgstr ""
+
+#: ../../../tribes/empire/toolsmithy/conf:34
+#, fuzzy
+msgid "Produce kitchen tools"
+msgstr "Küchengerät"
+
+#: ../../../tribes/empire/toolsmithy/conf:35
+msgid "Produce pick"
+msgstr ""
+
+#: ../../../tribes/empire/toolsmithy/conf:36
+msgid "Produce scythe"
+msgstr ""
+
+#: ../../../tribes/empire/toolsmithy/conf:37
+msgid "Produce shovel"
+msgstr ""
+
+#: ../../../tribes/empire/toolsmithy/conf:38
+#, fuzzy
+msgid "Produce hunting spear"
+msgstr "Jagdspeer"
+
+#: ../../../tribes/empire/toolsmithy/conf:39
+msgid "Produce basket"
+msgstr ""
+
+#: ../../../tribes/empire/toolsmithy/conf:40
+msgid "Produce saw"
+msgstr ""
+
+#: ../../../tribes/empire/toolsmithy/conf:41
+msgid "Produce axe"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:39
+msgid "Upgrade soldier attack 0"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:40
+msgid "Upgrade soldier attack 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:41
+msgid "Upgrade soldier attack 1"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:42
+msgid "Upgrade soldier attack 1 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:43
+msgid "Upgrade soldier attack 2"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:44
+msgid "Upgrade soldier attack 2 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:45
+msgid "Upgrade soldier attack 3"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:46
+msgid "Upgrade soldier attack 3 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:47
+msgid "Upgrade soldier hitpoints 0"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:48
+msgid "Upgrade soldier hitpoints 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:49
+msgid "Upgrade soldier hitpoints 1"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:50
+msgid "Upgrade soldier hitpoints 1 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:51
+msgid "Upgrade soldier hitpoints 2"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:52
+msgid "Upgrade soldier hitpoints 2 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:53
+msgid "Upgrade soldier hitpoints 3"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:54
+msgid "Upgrade soldier hitpoints 3 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trunk/conf:1
+msgid "Trunks are one important build material of the Empire."
+msgstr "Stämme sind ein wichtiger Baustoff des Imperiums."
+
+# XXX ??
+#: ../../../tribes/empire/vinefarmer/conf:1
+#, fuzzy
+msgid "Grows vine."
+msgstr "Goldmine"
+
+#: ../../../tribes/empire/vineyard/conf:14
+msgid "Plant vine"
+msgstr ""
+
+#: ../../../tribes/empire/vineyard/conf:16
+#, fuzzy
+msgid "Harvest vine"
+msgstr "Marmormine"
+
+#: ../../../tribes/empire/war_lance/conf:1
+msgid "This is the best and sharpest weapon, the Empire weaponsmith creates for their warriors."
+msgstr "Dies ist die beste und schärfste Waffe, die die imperialen Schmiede für ihre Krieger produzieren können."
+
+#: ../../../tribes/empire/water/conf:1
+msgid "Water is the most essential essence for life! This water is used in many places, be it to make bread or beer."
+msgstr "Wasser ist die Basis des Lebens. Dieses Wasser wird für viele Sachen benutzt, sei es für Brot oder für Bier."
+
+#: ../../../tribes/empire/weaponsmithy/conf:26
+msgid "Produce wood lance"
+msgstr ""
+
+#: ../../../tribes/empire/weaponsmithy/conf:27
+#, fuzzy
+msgid "Produce lance"
+msgstr "Holzlanze"
+
+#: ../../../tribes/empire/weaponsmithy/conf:28
+#, fuzzy
+msgid "Produce advanced lance"
+msgstr "Verbesserte Lanze"
+
+#: ../../../tribes/empire/weaponsmithy/conf:29
+#, fuzzy
+msgid "Produce heavy lance"
+msgstr "Schwere Lanze"
+
+#: ../../../tribes/empire/weaver/conf:1
+msgid "Produces cloth for ships and soldiers."
+msgstr ""
+
+#: ../../../tribes/empire/wheat/conf:1
+msgid "Wheat is essential for surviving. Delicious bread and ales can be made of this wheat."
+msgstr "Weizen ist überlebenswichtig. Gutes Brot und starke Biere können aus diesem Weizen hergestellt werden."
+
+#: ../../../tribes/empire/wine/conf:1
+msgid "This wine gives enough power, to mine marble or gold. And furthermore, our soldiers like it, too."
+msgstr "Dieser Wein gibt genug Kraft, um Marmor oder Gold abzubauen, und sogar die Soldaten mögen den Wein äußerst gerne."
+
+#: ../../../tribes/empire/wood/conf:1 ../../../tribes/empire/stone/conf:1
+msgid "Stones and wood are the basic build material of the Empire."
+msgstr "Steine und Holz sind die Grundbaustoffe des Imperiums."
+
+#: ../../../tribes/empire/wood_lance/conf:1
+msgid "This is a wooden lance, which is the basic of the Empires military system."
+msgstr "Dies ist eine hölzerne Lanze, die Standardwaffe des imperialen Militärs."
+
+#: ../../../tribes/empire/wool/conf:1
+msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
+msgstr "Wolle ist das Haar von Schaffen. Imperiale Webereien benutzen sie, um Stoffe zu erstellen."
 
 #~ msgid "Toolsmith's Shop"
 #~ msgstr "Werkzeugschmiede"
 
 #~ msgid "Vintagery"
 #~ msgstr "Winzerei"
-
-#~ msgid "Bakingtray"
-#~ msgstr "Backholz"
 
 #~ msgid "Herdsman"
 #~ msgstr "Schäfer"

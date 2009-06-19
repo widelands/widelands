@@ -26,6 +26,7 @@
 #include "logic/game.h"
 #include "wui/game_tips.h"
 #include "i18n.h"
+#include "wui/interactive_dedicated_server.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 #include "network_ggz.h"
@@ -424,14 +425,17 @@ void NetHost::run(bool autorun)
 		d->game = &game;
 		game.set_game_controller(this);
 		Interactive_GameBase * igb;
-		if (pn > 0)
+		if (pn > 0)       // "normal" player
 			igb =
 				new Interactive_Player
 					(game, g_options.pull_section("global"), pn, false, true);
-		else
+		else if (!autorun) // spectator
 			igb =
 				new Interactive_Spectator
 					(*d->game, g_options.pull_section("global"), true);
+		else              // dedicated server
+			igb =
+				new Interactive_DServer(*d->game, g_options.pull_section("global"));
 		igb->set_chat_provider(d->chat);
 		game.set_ibase(igb);
 		if (!d->settings.savegame) //  new game
