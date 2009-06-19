@@ -412,9 +412,7 @@ void Map_Object::set_logsink(LogSink * const sink)
 	m_logsink = sink;
 }
 
-/**
- * General infos, nothing todo for a no object
- */
+
 void Map_Object::log_general_info(Editor_Game_Base const &) {}
 
 /**

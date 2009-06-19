@@ -100,12 +100,11 @@ ConstructionSite::get_size
 Override: construction size is always the same size as the building
 ===============
 */
-int32_t ConstructionSite::get_size() const throw ()
-{return m_building->get_size();}
+int32_t ConstructionSite::get_size() const throw () {
+	return m_building->get_size();
+}
 
-/*
- * Write infos over this constructionsite
- */
+
 void ConstructionSite::log_general_info(Editor_Game_Base const & egbase) {
 	Building::log_general_info(egbase);
 

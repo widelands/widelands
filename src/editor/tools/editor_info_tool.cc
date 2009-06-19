@@ -30,9 +30,7 @@
 #include <cstdio>
 
 
-/**
- * Show a simple info dialog with infos about this field
-*/
+/// Show a window with information about the pointed at node and triangle.
 int32_t Editor_Info_Tool::handle_click_impl
 	(Widelands::Map               &       map,
 	 Widelands::Node_and_Triangle<> const center,

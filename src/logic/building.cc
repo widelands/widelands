@@ -823,9 +823,7 @@ void Building::set_priority
 	}
 }
 
-/**
- * Log basic infos
- */
+
 void Building::log_general_info(Editor_Game_Base const & egbase) {
 	PlayerImmovable::log_general_info(egbase);
 

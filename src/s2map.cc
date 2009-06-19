@@ -49,14 +49,9 @@ S2_Map_Loader::S2_Map_Loader(const char * filename, Widelands::Map & M)
 }
 
 
-/**
- * load the header
- *
- * preloads the map. The map will then return valid
- * infos when get_width() or get_nrplayers(),
- * get_author() and so on are called
- */
-int32_t S2_Map_Loader::preload_map(bool scenario) {
+/// Load the header. The map will then return valid information when
+/// get_width(), get_nrplayers(), get_author() and so on are called.
+int32_t S2_Map_Loader::preload_map(bool const scenario) {
 	assert(get_state() != STATE_LOADED);
 
 	m_map.cleanup();
