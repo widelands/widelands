@@ -73,7 +73,7 @@ struct NetHost : public GameController, private SyncCallback {
 	void setPlayerName  (uint8_t number, std::string const & name);
 	void setPlayer      (uint8_t number, PlayerSettings);
 	void setPlayerNumber(int32_t number);
-	void setPlayerReady (uint8_t number, PlayerSettings::ReadyState readystate);
+	void setPlayerReady (uint8_t number, bool ready);
 	bool getPlayerReady(uint8_t number);
 
 	// just visible stuff for the select mapmenu

@@ -337,13 +337,13 @@ void NetClient::setPlayer(uint8_t, PlayerSettings)
 }
 
 void NetClient::setPlayerReady
-	(uint8_t number, PlayerSettings::ReadyState readystate)
+	(uint8_t number, bool ready)
 {
 	//only if we have a valid player number set readyness
 	if (number == d->playernum) {
 		SendPacket s;
 		s.Unsigned8(NETCMD_SETTING_CHANGEREADY);
-		s.Unsigned8(readystate);
+		s.Unsigned8(static_cast<uint8_t>(ready));
 		s.send(d->sock);
 	}
 }
@@ -353,7 +353,7 @@ bool NetClient::getPlayerReady(uint8_t number) {
 		d->settings.players[number].state == PlayerSettings::stateClosed ||
 		d->settings.players[number].state == PlayerSettings::stateComputer ||
 		(d->settings.players[number].state == PlayerSettings::stateHuman &&
-		 d->settings.players[number].readystate);
+		 d->settings.players[number].ready);
 }
 
 void NetClient::setPlayerNumber(int32_t number)
@@ -409,8 +409,7 @@ void NetClient::recvOnePlayer
 	player.tribe = packet.String();
 	player.initialization_index = packet.Unsigned8();
 	player.ai = packet.String();
-	player.readystate = static_cast<PlayerSettings::ReadyState>
-		(packet.Unsigned8());
+	player.ready = static_cast<bool>(packet.Unsigned8());
 
 	if (number == d->playernum)
 		d->localplayername = player.name;

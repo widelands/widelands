@@ -87,7 +87,7 @@ d(new PlayerDescriptionGroupImpl)
 		 true, false,
 		 fname, fsize);
 	d->btnReadyPlayer = new UI::Checkbox(this, Point(w * 189 / 200, 0));
-	d->btnReadyPlayer->changedto.set
+	d->btnReadyPlayer->clickedto.set
 		(this, &PlayerDescriptionGroup::ready_player);
 
 	refresh();
@@ -124,12 +124,12 @@ void PlayerDescriptionGroup::refresh()
 
 	if (player.state == PlayerSettings::stateClosed) {
 		d->btnEnablePlayer->set_state(false);
-		d->btnPlayerType->set_visible(false);
-		d->btnPlayerType->set_enabled(false);
+		d->btnPlayerType ->set_visible(false);
+		d->btnPlayerType ->set_enabled(false);
 		d->btnPlayerTribe->set_visible(false);
 		d->btnPlayerTribe->set_enabled(false);
-		d->btnPlayerInit->set_visible(false);
-		d->btnPlayerInit->set_enabled(false);
+		d->btnPlayerInit ->set_visible(false);
+		d->btnPlayerInit ->set_enabled(false);
 		d->plr_name->set_text(std::string());
 		d->btnReadyPlayer->set_visible(false);
 	} else {
@@ -138,7 +138,7 @@ void PlayerDescriptionGroup::refresh()
 		d->btnPlayerType->set_enabled(stateaccess);
 
 		if (player.state == PlayerSettings::stateOpen) {
-			d->btnPlayerType->set_title(_("Open"));
+			d->btnPlayerType ->set_title(_("Open"));
 			d->btnPlayerTribe->set_visible(false);
 			d->btnPlayerInit ->set_visible(false);
 			d->btnPlayerTribe->set_enabled(false);
@@ -158,9 +158,11 @@ void PlayerDescriptionGroup::refresh()
 				d->btnReadyPlayer->set_visible(false);
 			} else { // PlayerSettings::stateHuman
 				title = _("Human");
-				if (settings.multiplayer)
+				if (settings.multiplayer) {
 					d->btnReadyPlayer->set_visible(true);
-				else
+					d->btnReadyPlayer->set_enabled(tribeaccess);
+					d->btnReadyPlayer->set_state(player.ready);
+				} else
 					d->btnReadyPlayer->set_visible(false);
 			}
 			// get translated tribesname
@@ -259,20 +261,16 @@ void PlayerDescriptionGroup::enable_player(bool on)
 }
 
 /**
- * The checkbox to indicate a player is ready to start
+ * The checkbox to indicate whether player is ready to start
  */
-void PlayerDescriptionGroup::ready_player(bool on)
+void PlayerDescriptionGroup::ready_player(bool ready)
 {
 	GameSettings const & settings = d->settings->settings();
 
 	if (d->plnum >= settings.players.size())
 		return;
 
-	if (on) {
-		d->settings->setPlayerReady(d->plnum, PlayerSettings::stateReady);
-	} else {
-		d->settings->setPlayerReady(d->plnum, PlayerSettings::stateNotReady);
-	}
+	d->settings->setPlayerReady(d->plnum, ready);
 }
 
 

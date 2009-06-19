@@ -49,8 +49,8 @@ struct PlayerDescriptionGroup : public UI::Panel {
 	void show_tribe_button(bool show   = true);
 
 private:
-	void enable_player(bool on);
-	void ready_player(bool on);
+	void enable_player(bool);
+	void ready_player(bool);
 	void toggle_playertype();
 	void toggle_playertribe();
 	void toggle_playerinit();

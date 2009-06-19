@@ -1806,9 +1806,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.playernum = number;
 	}
 
-	virtual void setPlayerReady
-		(uint8_t const, PlayerSettings::ReadyState const)
-	{
+	virtual void setPlayerReady(uint8_t const, bool const) {
 		//ignore, a single player is always ready to start the game if he wants to
 	}
 

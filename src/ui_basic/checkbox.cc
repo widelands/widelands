@@ -163,6 +163,7 @@ bool Statebox::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
  */
 void Checkbox::clicked()
 {
+	clickedto.call(!get_state());
 	set_state(!get_state());
 	play_click();
 }

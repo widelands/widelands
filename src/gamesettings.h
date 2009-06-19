@@ -33,18 +33,13 @@ struct PlayerSettings {
 		stateClosed
 	};
 
-	enum ReadyState {
-		stateReady,
-		stateNotReady
-	};
-
 	State state;
 	uint8_t     initialization_index;
 	std::string name;
 	std::string tribe;
 	std::string ai; /**< Preferred AI provider for this player */
 
-	ReadyState readystate;
+	bool ready;
 };
 
 struct UserSettings {
@@ -125,9 +120,8 @@ struct GameSettingsProvider {
 	virtual void setPlayerName    (uint8_t number, std::string const &) = 0;
 	virtual void setPlayer        (uint8_t number, PlayerSettings) = 0;
 	virtual void setPlayerNumber  (int32_t number) = 0;
-	virtual void setPlayerReady
-		(uint8_t number, PlayerSettings::ReadyState readystate) = 0;
-	virtual bool getPlayerReady(uint8_t number) = 0;
+	virtual void setPlayerReady   (uint8_t number, bool ready) = 0;
+	virtual bool getPlayerReady   (uint8_t number) = 0;
 
 	const std::string getPlayersTribe() {
 		if (settings().playernum < 0)

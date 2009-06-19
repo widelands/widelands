@@ -160,13 +160,13 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	}
 
 	virtual void setPlayerReady
-		(uint8_t const number, PlayerSettings::ReadyState const readystate)
+		(uint8_t const number, bool const ready)
 	{
 		if (number >= h->settings().players.size())
 			return;
 
 		if (number == settings().playernum)
-			h->setPlayerReady(number, readystate);
+			h->setPlayerReady(number, ready);
 	}
 
 	virtual bool getPlayerReady(uint8_t const number) {
@@ -438,9 +438,9 @@ void NetHost::run(bool autorun)
 				new Interactive_DServer(*d->game, g_options.pull_section("global"));
 		igb->set_chat_provider(d->chat);
 		game.set_ibase(igb);
-		if (!d->settings.savegame) //  new game
+		if (!d->settings.savegame) // new game
 			game.init_newgame(loaderUI, d->settings);
-		else // savegame
+		else                      // savegame
 			game.init_savegame(loaderUI, d->settings);
 		d->pseudo_networktime = game.get_gametime();
 		d->time.reset(d->pseudo_networktime);
@@ -942,11 +942,11 @@ void NetHost::setPlayerNumber(int32_t const number)
 }
 
 void NetHost::setPlayerReady
-	(uint8_t const number, PlayerSettings::ReadyState const readystate)
+	(uint8_t const number, bool const ready)
 {
 	if (number >= d->settings.players.size())
 		return;
-	d->settings.players[number].readystate = readystate;
+	d->settings.players[number].ready = ready;
 
 	// broadcast changes
 	SendPacket s;
@@ -963,7 +963,7 @@ bool NetHost::getPlayerReady(uint8_t const number)
 		d->settings.players[number].state == PlayerSettings::stateClosed ||
 		d->settings.players[number].state == PlayerSettings::stateComputer ||
 		(d->settings.players[number].state == PlayerSettings::stateHuman &&
-		 d->settings.players[number].readystate);
+		 d->settings.players[number].ready);
 }
 
 void NetHost::setMultiplayerGameSettings()
@@ -1017,7 +1017,7 @@ void NetHost::writeSettingPlayer(SendPacket & packet, uint8_t const number)
 	packet.String(player.tribe);
 	packet.Unsigned8(player.initialization_index);
 	packet.String(player.ai);
-	packet.Unsigned8(static_cast<uint8_t>(player.readystate));
+	packet.Unsigned8(static_cast<uint8_t>(player.ready));
 }
 
 void NetHost::writeSettingAllPlayers(SendPacket & packet)
@@ -1527,9 +1527,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	case NETCMD_SETTING_CHANGEREADY:
 		if (!d->game) {
-			PlayerSettings::ReadyState ready =
-				static_cast<PlayerSettings::ReadyState>(r.Unsigned8());
-			setPlayerReady(client.playernum, ready);
+			setPlayerReady(client.playernum, static_cast<bool>(r.Unsigned8()));
 		}
 		break;
 

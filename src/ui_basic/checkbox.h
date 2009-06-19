@@ -43,6 +43,7 @@ struct Statebox : public Panel {
 
 	Signal changed;
 	Signal1<bool> changedto;
+	Signal1<bool> clickedto; // same as changedto but only called when clicked
 	Signal2<int32_t, bool> changedtoid;
 
 	void set_enabled(bool enabled);
