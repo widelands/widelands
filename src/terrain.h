@@ -191,7 +191,7 @@ template<typename T> static void render_edge_lists
 	}
 }
 
-struct Polygon {
+struct WLPolygon {
 	Point p[3];
 	uint8_t nrpoints;
 };
@@ -229,7 +229,7 @@ template<typename T> static void render_triangle
 #endif
 
 	// Clip the triangle
-	Polygon polygon;
+	WLPolygon polygon;
 
 	polygon.p[0] = p1;
 	polygon.p[1] = p2;
