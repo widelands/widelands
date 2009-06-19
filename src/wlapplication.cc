@@ -328,18 +328,22 @@ void WLApplication::run()
 	} else if (m_game_type == GGZ) {
 		Widelands::Game game;
 		try {
-			//Fullscreen_Menu_NetSetupGGZ ns;
 
-			//setup some detalis about a dedicated server
-			std::string playername = "dedicated";
-			uint32_t mp = static_cast<uint32_t>(10);
+			//setup some ggz details about a dedicated server
+			Section & s = g_options.pull_section("global");
+			char const * const meta = s.get_string("metaserver", WL_METASERVER);
+			char const * const name = s.get_string("nickname", "dedicated");
+			char const * const server = s.get_string("servername", name);
+			if (!NetGGZ::ref().initcore(meta, name)) {
+				log(_("ERROR: Could not connect to metaserver (reason above)!\n"));
+				return;
+			}
+			NetGGZ::ref().set_local_servername(server);
+			NetGGZ::ref().set_local_maxplayers(7); // > 7 == freeze -> ggz bug
 
-			NetHost netgame(playername, true);
+			NetHost netgame(name, true);
 
-			NetGGZ::ref().set_local_maxplayers(mp);
-
-			//Load te requested map
-			GameSettings const & settings = netgame.settings();
+			//Load the requested map
 			Widelands::Map map;
 			i18n::Textdomain td("maps");
 			map.set_filename(m_filename.c_str());
@@ -361,7 +365,7 @@ void WLApplication::run()
 			//set the map
 			netgame.setMap(mapdata.name, mapdata.filename, mapdata.nrplayers);
 
-			//run the network game, autostart when everyone is ready
+			//run the network game (autostarts when everyone is ready)
 			netgame.run(true);
 
 			NetGGZ::ref().deinitcore();

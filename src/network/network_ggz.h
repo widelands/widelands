@@ -190,6 +190,7 @@ private:
 	char    * server_ip_addr;
 	bool ggzcore_login;
 	bool ggzcore_ready;
+	bool logged_in;
 	bool relogin;
 	GGZRoom * room;
 

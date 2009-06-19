@@ -41,6 +41,7 @@ NetGGZ::NetGGZ() :
 	channelfd     (-1),
 	gamefd        (-1),
 	server_ip_addr(0),
+	logged_in     (false),
 	relogin       (false),
 	tableseats    (1),
 	userupdate    (false),
@@ -254,7 +255,7 @@ bool NetGGZ::initcore
 	log("GGZCORE ## end loop\n");
 
 	username = playername;
-	return usedcore();
+	return logged_in;
 }
 
 
@@ -273,6 +274,7 @@ void NetGGZ::deinitcore()
 	ggzcore_server_logout(ggzserver);
 	ggzcore_server_disconnect(ggzserver);
 	ggzcore_server_free(ggzserver);
+	logged_in = false;
 	ggzserver = 0;
 	ggzcore_destroy();
 	ggzcore_ready = false;
@@ -421,6 +423,7 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 		break;
 	case GGZ_LOGGED_IN:
 		log("GGZCORE ## -- logged in\n");
+		logged_in = true;
 		ggzcore_server_list_gametypes(ggzserver, 0);
 #if GGZCORE_VERSION_MINOR == 0
 		ggzcore_server_list_rooms(ggzserver, -1, 1);
