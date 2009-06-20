@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os, sys
 import string
 
@@ -361,18 +362,18 @@ def do_configure_libraries(conf, env):
 		if not conf.CheckLib(library='GL', symbol='glClear', autoadd=1):
 			print 'Could not find the GL Library! Is it installed?'
 			env.Exit(1)
-		
+
        		if not conf.CheckLib(library='GLU', symbol='gluOrtho2D', autoadd=1):
 			print 'Could not find the GLU Library! Is it installed?'
 			env.Exit(1)
 		env.Append(CCFLAGS='-DUSE_OPENGL')
 
-	if not conf.CheckLib(library='boost_program_options', symbol='', autoadd=1):
+	if not conf.CheckLib(library='boost_program_options', symbol='', autoadd=1) and not conf.CheckLib(library='boost_program_options-mt', symbol='', autoadd=1):
 		print 'Could not find the boost::program_options Library! Is it installed?'
 		env.Exit(1)
 
 	if env['enable_ggz']:
-		if not (conf.CheckLib(library='libggzcore', symbol='ggz_conf_parse', autoadd=1) 
+		if not (conf.CheckLib(library='libggzcore', symbol='ggz_conf_parse', autoadd=1)
 			and conf.CheckLib(library='libggz', symbol='ggz_read_line', autoadd=1)
 			and conf.CheckLib(library='libggzmod', symbol='', autoadd=1)):
 			print 'Could not find libggz or ggz-client-libs! Are they BOTH installed?'
