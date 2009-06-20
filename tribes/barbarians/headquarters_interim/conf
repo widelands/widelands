@@ -7,4 +7,5 @@ conquers=9
 
 [idle]
 pics=hq_i_??.png
-hotspot=44 70
+hotspot=70 110
+playercolor=true
