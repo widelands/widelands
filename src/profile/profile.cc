@@ -863,14 +863,6 @@ inline void killcomments(char * p)
 }
 
 
-inline char * setEndAt(char * const str, char const c)
-{
-	if (char * const s = strchr(str, c))
-		*s = '\0';
-	return str;
-}
-
-
 /**
  * Parses an ini-style file into sections and key values. If a section or
  * key name occurs multiple times, an additional entry is created.
@@ -906,7 +898,10 @@ void Profile::read
 
 			if (p[0] == '[') {
 				++p;
-				setEndAt(p, ']');
+				if (char * const closing = strchr(p, ']'))
+					*closing = '\0';
+				else
+					throw wexception("missing ']' after \"%s\"", p);
 				s = &create_section_duplicate(p);
 			} else {
 				char * tail = 0;
