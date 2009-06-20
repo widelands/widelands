@@ -226,7 +226,7 @@ void Fullscreen_Menu_LaunchGame::start_clicked()
 		throw warning
 			(_("File not found"),
 			 _
-			 	("Widelands  tried to start a game with a file that could not be "
+			 	("Widelands tried to start a game with a file that could not be "
 			 	 "found at given path.\n"
 			 	 "The file was: %s\n"
 			 	 "If this happens in a network game, the host might have selected "
