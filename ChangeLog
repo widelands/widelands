@@ -1,4 +1,5 @@
-### Build 14 (until now)
+### Build 14
+- Added and improved some buildings and workers animations (different svn rev.)
 - Many graphic system updates including experimental hardware improvements
   (many different svn rev.)
 - Implemented very basic "dedicated" server (many different svn rev.)
