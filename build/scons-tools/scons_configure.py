@@ -73,8 +73,12 @@ def parse_cli(env, buildtargets):
 	env.Append(PATH=[])
 
 	#TODO: should be detected automagically
-	if env['PLATFORM']!='win32':
-	        env.Append(PATH=['/usr/bin', '/usr/local/bin'])
+	env.Append(PATH=['/usr/bin', '/usr/local/bin'])
+
+	if env['PLATFORM']=='win32':
+	        env.Append(PATH='/mingw/bin')
+	        env.Append(CPPPATH=['/mingw/include', '/mingw/include/SDL'])
+	        env.Append(LIBPATH='/mingw/lib')
 
 	#TODO: should be detected automagically
 	if env['PLATFORM']=='darwin':
@@ -373,7 +377,7 @@ def do_configure_libraries(conf, env):
 		env.Exit(1)
 
 	if env['enable_ggz']:
-		if not (conf.CheckLib(library='libggzcore', symbol='ggz_conf_parse', autoadd=1)
+		if not (conf.CheckLib(library='libggzcore', symbol='ggzcore_conf_read_int', autoadd=1)
 			and conf.CheckLib(library='libggz', symbol='ggz_read_line', autoadd=1)
 			and conf.CheckLib(library='libggzmod', symbol='', autoadd=1)):
 			print 'Could not find libggz or ggz-client-libs! Are they BOTH installed?'
@@ -383,7 +387,7 @@ def do_configure_libraries(conf, env):
 			#env.Append(LIBS=['ggzmod', 'ggzcore', 'ggz'])
 
 
-	if not conf.TryLink(""" #define USE_RWOPS
+	if (not env['PLATFORM'] == 'win32') and not conf.TryLink(""" #define USE_RWOPS
 			#include <SDL_mixer.h>
 			int main(){
 				Mix_LoadMUS_RW("foo.ogg");
