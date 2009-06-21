@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4208\n"
+"Project-Id-Version: Widelands svn4303\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-04 13:00+0000\n"
-"PO-Revision-Date: 2006-06-27 13:49+0100\n"
-"Last-Translator: Prometheus <mmatej@yahoo.com>\n"
+"POT-Creation-Date: 2009-06-21 12:56+0000\n"
+"PO-Revision-Date: 2009-06-20 21:40+0100\n"
+"Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -78,131 +78,131 @@ msgstr "Kameny"
 
 #: ../../../worlds/blackland/conf:45
 msgid "Aspen"
-msgstr ""
+msgstr "Osika"
 
 #: ../../../worlds/blackland/conf:46
 msgid "Aspen medium"
-msgstr ""
+msgstr "Střední osika"
 
 #: ../../../worlds/blackland/conf:47
 msgid "Aspen small"
-msgstr ""
+msgstr "Malá osika"
 
 #: ../../../worlds/blackland/conf:48
 msgid "Aspen tiny"
-msgstr ""
+msgstr "Maličká osika"
 
 #: ../../../worlds/blackland/conf:49
 msgid "Oak"
-msgstr ""
+msgstr "Dub"
 
 #: ../../../worlds/blackland/conf:50
 msgid "Oak medium"
-msgstr ""
+msgstr "Střední dub"
 
 #: ../../../worlds/blackland/conf:51
 msgid "Oak small"
-msgstr ""
+msgstr "Malý dub"
 
 #: ../../../worlds/blackland/conf:52
 msgid "Oak tiny"
-msgstr ""
+msgstr "Maličký dub"
 
 #: ../../../worlds/blackland/conf:53
 msgid "Spruce"
-msgstr ""
+msgstr "Smrk"
 
 #: ../../../worlds/blackland/conf:54
 msgid "Spruce medium"
-msgstr ""
+msgstr "Střední smrk"
 
 #: ../../../worlds/blackland/conf:55
 msgid "Spruce small"
-msgstr ""
+msgstr "Malý smrk"
 
 #: ../../../worlds/blackland/conf:56
 msgid "Spruce tiny"
-msgstr ""
+msgstr "Maličký smrk"
 
 #: ../../../worlds/blackland/conf:57
 msgid "Maple"
-msgstr ""
+msgstr "Javor"
 
 #: ../../../worlds/blackland/conf:58
 msgid "Maple medium"
-msgstr ""
+msgstr "Střední javor"
 
 #: ../../../worlds/blackland/conf:59
 msgid "Maple small"
-msgstr ""
+msgstr "Malý javor"
 
 #: ../../../worlds/blackland/conf:60
 msgid "Maple tiny"
-msgstr ""
+msgstr "Maličký javor"
 
 #: ../../../worlds/blackland/conf:61
 msgid "Birch"
-msgstr ""
+msgstr "Bříza"
 
 #: ../../../worlds/blackland/conf:62
 msgid "Birch medium"
-msgstr ""
+msgstr "Střední bříza"
 
 #: ../../../worlds/blackland/conf:63
 msgid "Birch small"
-msgstr ""
+msgstr "Malá bříza"
 
 #: ../../../worlds/blackland/conf:64
 msgid "Birch tiny"
-msgstr ""
+msgstr "Maličká bříza"
 
 #: ../../../worlds/blackland/conf:65
 msgid "Beech"
-msgstr ""
+msgstr "Buk"
 
 #: ../../../worlds/blackland/conf:66
 msgid "Beech medium"
-msgstr ""
+msgstr "Střední buk"
 
 #: ../../../worlds/blackland/conf:67
 msgid "Beech small"
-msgstr ""
+msgstr "Malý buk"
 
 #: ../../../worlds/blackland/conf:68
 msgid "Beech tiny"
-msgstr ""
+msgstr "Maličký buk"
 
 #: ../../../worlds/blackland/conf:69
 msgid "Larch"
-msgstr ""
+msgstr "Modřín"
 
 #: ../../../worlds/blackland/conf:70
 msgid "Larch medium"
-msgstr ""
+msgstr "Střední modřín"
 
 #: ../../../worlds/blackland/conf:71
 msgid "Larch small"
-msgstr ""
+msgstr "Malý modřín"
 
 #: ../../../worlds/blackland/conf:72
 msgid "Larch tiny"
-msgstr ""
+msgstr "Maličký modřín"
 
 #: ../../../worlds/blackland/conf:73
 msgid "Rowan"
-msgstr ""
+msgstr "Jeřáb"
 
 #: ../../../worlds/blackland/conf:74
 msgid "Rowan medium"
-msgstr ""
+msgstr "Střední jeřáb"
 
 #: ../../../worlds/blackland/conf:75
 msgid "Rowan small"
-msgstr ""
+msgstr "Malý jeřáb"
 
 #: ../../../worlds/blackland/conf:76
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Maličký jeřáb"
 
 #: ../../../worlds/blackland/conf:79
 msgid "Bunny"

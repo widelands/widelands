@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4208\n"
+"Project-Id-Version: Widelands svn4303\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-04 13:00+0000\n"
-"PO-Revision-Date: 2008-11-18 11:00+0100\n"
+"POT-Creation-Date: 2009-06-21 12:56+0000\n"
+"PO-Revision-Date: 2009-06-20 21:39+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgstr "Trénink 2 - Budování domova"
 
 #: ../../campaigns/cconfig:61
 msgid "Tutorial3 - This land is our land"
-msgstr ""
+msgstr "Trénink 3 - Tato země je naše"
 
 #: ../../campaigns/cconfig:68
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
@@ -102,12 +102,10 @@ msgid "A Multiplayer-battle-map on a X-Shaped island."
 msgstr "Multiplayerová bitevní mapa na ostrově ve tvaru X."
 
 #: ../../maps/Finlakes.wmf/elemental:9
-#, fuzzy
 msgid "Finnish Lakes"
 msgstr "Finská jezera"
 
 #: ../../maps/Finlakes.wmf/elemental:11
-#, fuzzy
 msgid "These are the beautiful finnish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
 msgstr "Tohle je krajina Finských jezer, plná jezerních ploch, řek, pravěkých hvozdů a hor. Je jen na tobě, jak si jimi najdeš cestu."
 
@@ -217,11 +215,11 @@ msgstr "Mystická země plná různorodých krajin, které jsou všechny protká
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The ancient sun of fire"
-msgstr ""
+msgstr "Pradávné ohnivé slunce"
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid "For hundreds of years this island was kept as sanctuary of the Gods. No human ever ventured to set a foot on it. But now, that a tribe was finally barefaced enough to settle on the coast of that island, a lot other followed afterwards."
-msgstr ""
+msgstr "Po stovky let byl tento ostrov svatyní samotných Bohů. Žádný člověk na něj nikdy nevstoupil. Až nyní vzrostla nestydatost jednoho kmene natolik, že se usadili přímo na pobřeží tohoto ostrova. A spousta dalších je následovala."
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
@@ -289,11 +287,11 @@ msgstr "Mohutné pohoří rozděluje tuto zemi do tří úrodných nížin. Pře
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
-msgstr ""
+msgstr "Třpytivé vlny"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid "Many beautiful, green islands await the ones brave enough to pass the thousand waves, twinkling in the sun."
-msgstr ""
+msgstr "Mnoho nádherných zelených ostrovů očekává hrdiny, kteří odvážně proplují tisícem vln třpytících se v záři slunce."
 
 #: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"

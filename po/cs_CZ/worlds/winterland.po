@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4208\n"
+"Project-Id-Version: Widelands svn4303\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-04 13:00+0000\n"
-"PO-Revision-Date: 2008-11-09 00:24+0100\n"
+"POT-Creation-Date: 2009-06-21 12:56+0000\n"
+"PO-Revision-Date: 2009-06-20 21:40+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -82,132 +82,131 @@ msgstr "Stopy"
 
 #: ../../../worlds/winterland/conf:45
 msgid "Aspen"
-msgstr ""
+msgstr "Osika"
 
 #: ../../../worlds/winterland/conf:46
 msgid "Aspen medium"
-msgstr ""
+msgstr "Střední osika"
 
 #: ../../../worlds/winterland/conf:47
 msgid "Aspen small"
-msgstr ""
+msgstr "Malá osika"
 
 #: ../../../worlds/winterland/conf:48
 msgid "Aspen tiny"
-msgstr ""
+msgstr "Maličká osika"
 
 #: ../../../worlds/winterland/conf:49
 msgid "Oak"
-msgstr ""
+msgstr "Dub"
 
 #: ../../../worlds/winterland/conf:50
 msgid "Oak medium"
-msgstr ""
+msgstr "Střední dub"
 
 #: ../../../worlds/winterland/conf:51
 msgid "Oak small"
-msgstr ""
+msgstr "Malý dub"
 
 #: ../../../worlds/winterland/conf:52
 msgid "Oak tiny"
-msgstr ""
+msgstr "Maličký dub"
 
 #: ../../../worlds/winterland/conf:53
 msgid "Spruce"
-msgstr ""
+msgstr "Smrk"
 
 #: ../../../worlds/winterland/conf:54
 msgid "Spruce medium"
-msgstr ""
+msgstr "Střední smrk"
 
 #: ../../../worlds/winterland/conf:55
 msgid "Spruce small"
-msgstr ""
+msgstr "Malý smrk"
 
 #: ../../../worlds/winterland/conf:56
 msgid "Spruce tiny"
-msgstr ""
+msgstr "Maličký smrk"
 
 #: ../../../worlds/winterland/conf:57
 msgid "Maple"
-msgstr ""
+msgstr "Javor"
 
 #: ../../../worlds/winterland/conf:58
 msgid "Maple medium"
-msgstr ""
+msgstr "Střední javor"
 
 #: ../../../worlds/winterland/conf:59
 msgid "Maple small"
-msgstr ""
+msgstr "Malý javor"
 
 #: ../../../worlds/winterland/conf:60
 msgid "Maple tiny"
-msgstr ""
+msgstr "Maličký javor"
 
 #: ../../../worlds/winterland/conf:61
 msgid "Birch"
-msgstr ""
+msgstr "Bříza"
 
 #: ../../../worlds/winterland/conf:62
 msgid "Birch medium"
-msgstr ""
+msgstr "Střední bříza"
 
 #: ../../../worlds/winterland/conf:63
 msgid "Birch small"
-msgstr ""
+msgstr "Malá bříza"
 
 #: ../../../worlds/winterland/conf:64
 msgid "Birch tiny"
-msgstr ""
+msgstr "Maličká bříza"
 
 #: ../../../worlds/winterland/conf:65
 msgid "Beech"
-msgstr ""
+msgstr "Buk"
 
 #: ../../../worlds/winterland/conf:66
 msgid "Beech medium"
-msgstr ""
+msgstr "Střední buk"
 
 #: ../../../worlds/winterland/conf:67
 msgid "Beech small"
-msgstr ""
+msgstr "Malý buk"
 
 #: ../../../worlds/winterland/conf:68
 msgid "Beech tiny"
-msgstr ""
+msgstr "Maličký buk"
 
 #: ../../../worlds/winterland/conf:69
 msgid "Larch"
-msgstr ""
+msgstr "Modřín"
 
 #: ../../../worlds/winterland/conf:70
 msgid "Larch medium"
-msgstr ""
+msgstr "Střední modřín"
 
 #: ../../../worlds/winterland/conf:71
 msgid "Larch small"
-msgstr ""
+msgstr "Malý modřín"
 
 #: ../../../worlds/winterland/conf:72
 msgid "Larch tiny"
-msgstr ""
+msgstr "Maličký modřín"
 
 #: ../../../worlds/winterland/conf:73
-#, fuzzy
 msgid "Rowan"
-msgstr "Sněhulák"
+msgstr "Jeřáb"
 
 #: ../../../worlds/winterland/conf:74
 msgid "Rowan medium"
-msgstr ""
+msgstr "Střední jeřáb"
 
 #: ../../../worlds/winterland/conf:75
 msgid "Rowan small"
-msgstr ""
+msgstr "Malý jeřáb"
 
 #: ../../../worlds/winterland/conf:76
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Maličký jeřáb"
 
 #: ../../../worlds/winterland/conf:79
 msgid "Badger"

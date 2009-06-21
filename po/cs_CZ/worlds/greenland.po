@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4208\n"
+"Project-Id-Version: Widelands svn4303\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-04 13:00+0000\n"
-"PO-Revision-Date: 2008-11-09 00:23+0100\n"
+"POT-Creation-Date: 2009-06-21 12:56+0000\n"
+"PO-Revision-Date: 2009-06-20 21:40+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -45,9 +45,8 @@ msgid "Dead Tree"
 msgstr "Uschlý strom"
 
 #: ../../../worlds/greenland/conf:18
-#, fuzzy
 msgid "Fallen Tree"
-msgstr "Uschlý strom"
+msgstr "Spadlý strom"
 
 #: ../../../worlds/greenland/conf:19 ../../../worlds/greenland/conf:20
 #: ../../../worlds/greenland/conf:21
@@ -84,131 +83,131 @@ msgstr "Kameny"
 
 #: ../../../worlds/greenland/conf:46
 msgid "Aspen"
-msgstr ""
+msgstr "Osika"
 
 #: ../../../worlds/greenland/conf:47
 msgid "Aspen medium"
-msgstr ""
+msgstr "Střední osika"
 
 #: ../../../worlds/greenland/conf:48
 msgid "Aspen small"
-msgstr ""
+msgstr "Malá osika"
 
 #: ../../../worlds/greenland/conf:49
 msgid "Aspen tiny"
-msgstr ""
+msgstr "Maličká osika"
 
 #: ../../../worlds/greenland/conf:50
 msgid "Oak"
-msgstr ""
+msgstr "Dub"
 
 #: ../../../worlds/greenland/conf:51
 msgid "Oak medium"
-msgstr ""
+msgstr "Střední dub"
 
 #: ../../../worlds/greenland/conf:52
 msgid "Oak small"
-msgstr ""
+msgstr "Malý dub"
 
 #: ../../../worlds/greenland/conf:53
 msgid "Oak tiny"
-msgstr ""
+msgstr "Maličký dub"
 
 #: ../../../worlds/greenland/conf:54
 msgid "Spruce"
-msgstr ""
+msgstr "Smrk"
 
 #: ../../../worlds/greenland/conf:55
 msgid "Spruce medium"
-msgstr ""
+msgstr "Střední smrk"
 
 #: ../../../worlds/greenland/conf:56
 msgid "Spruce small"
-msgstr ""
+msgstr "Malý smrk"
 
 #: ../../../worlds/greenland/conf:57
 msgid "Spruce tiny"
-msgstr ""
+msgstr "Maličký smrk"
 
 #: ../../../worlds/greenland/conf:58
 msgid "Alder"
-msgstr ""
+msgstr "Olše"
 
 #: ../../../worlds/greenland/conf:59
 msgid "Alder medium"
-msgstr ""
+msgstr "Střední olše"
 
 #: ../../../worlds/greenland/conf:60
 msgid "Alder small"
-msgstr ""
+msgstr "Malá olše"
 
 #: ../../../worlds/greenland/conf:61
 msgid "Alder tiny"
-msgstr ""
+msgstr "Maličká olše"
 
 #: ../../../worlds/greenland/conf:62
 msgid "Birch"
-msgstr ""
+msgstr "Bříza"
 
 #: ../../../worlds/greenland/conf:63
 msgid "Birch medium"
-msgstr ""
+msgstr "Střední bříza"
 
 #: ../../../worlds/greenland/conf:64
 msgid "Birch small"
-msgstr ""
+msgstr "Malá bříza"
 
 #: ../../../worlds/greenland/conf:65
 msgid "Birch tiny"
-msgstr ""
+msgstr "Maličká bříza"
 
 #: ../../../worlds/greenland/conf:66
 msgid "Beech"
-msgstr ""
+msgstr "Buk"
 
 #: ../../../worlds/greenland/conf:67
 msgid "Beech medium"
-msgstr ""
+msgstr "Střední buk"
 
 #: ../../../worlds/greenland/conf:68
 msgid "Beech small"
-msgstr ""
+msgstr "Malý buk"
 
 #: ../../../worlds/greenland/conf:69
 msgid "Beech tiny"
-msgstr ""
+msgstr "Maličký buk"
 
 #: ../../../worlds/greenland/conf:70
 msgid "Larch"
-msgstr ""
+msgstr "Modřín"
 
 #: ../../../worlds/greenland/conf:71
 msgid "Larch medium"
-msgstr ""
+msgstr "Střední modřín"
 
 #: ../../../worlds/greenland/conf:72
 msgid "Larch small"
-msgstr ""
+msgstr "Malý modřín"
 
 #: ../../../worlds/greenland/conf:73
 msgid "Larch tiny"
-msgstr ""
+msgstr "Maličký modřín"
 
 #: ../../../worlds/greenland/conf:74
 msgid "Rowan"
-msgstr ""
+msgstr "Jeřáb"
 
 #: ../../../worlds/greenland/conf:75
 msgid "Rowan medium"
-msgstr ""
+msgstr "Střední jeřáb"
 
 #: ../../../worlds/greenland/conf:76
 msgid "Rowan small"
-msgstr ""
+msgstr "Malý jeřáb"
 
 #: ../../../worlds/greenland/conf:77
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Maličký jeřáb"
 
 #: ../../../worlds/greenland/conf:80
 msgid "Badger"
