@@ -232,10 +232,10 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	std::string fixedpath(path);
 	std::string temp;
 	uint32_t path_size = path.size();
-	for (uint32_t i = 0; i < path_size; ++i) {
-		temp = fixedpath.at(i);
+	for (uint32_t j = 0; j < path_size; ++j) {
+		temp = fixedpath.at(j);
 		if (temp == "/")
-			fixedpath.replace(i, 1, "\\");
+			fixedpath.replace(j, 1, "\\");
 	}
 
 	bool absolute = pathIsAbsolute(fixedpath);
