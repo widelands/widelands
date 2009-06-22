@@ -33,6 +33,8 @@ def add_sconscript( submodule ):
     lib = SConscript("%s/SConscript" % submodule )
     libs += lib
 
+# Currently wui is doublelinked on linux we will else get undefined references
+# however there should be a better solution!?!
 add_sconscript('graphic')
 add_sconscript('sound')
 filesystem,io=SConscript('io/SConscript')
@@ -56,7 +58,7 @@ remaining = [srcenv.Object( i.replace(".cc",""),source=i) for i in SRC ]
 
 libs.reverse()
 
-# Currently all tests are linked agains all widelands
+# Currently all tests are linked against all widelands
 # libraries. It is impossible to get some classes under test
 # in any other way currently
 for name,sources in tests:

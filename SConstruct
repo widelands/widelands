@@ -114,7 +114,7 @@ def cli_options():
 
 opts=cli_options()
 
-env=Environment(options=opts)
+env=Environment(ENV=os.environ, options=opts)
 
 BUILDDIR=parse_cli(env, BUILD_TARGETS) # must parse CLI before anything else, PATH might get changed
 
@@ -123,6 +123,8 @@ env.Tool("PNGShrink", toolpath=['build/scons-tools'])
 env.Tool("astyle", toolpath=['build/scons-tools'])
 env.Tool("Distribute", toolpath=['build/scons-tools'])
 env.Help(opts.GenerateHelpText(env))
+if sys.platform == 'win32':
+	Tool('mingw')(env)
 
 opts.Save('build/scons-config.py',env)
 

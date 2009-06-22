@@ -2,6 +2,8 @@
 import os, sys
 import string
 
+from subprocess import Popen, PIPE
+
 from detect_revision import *
 
 ################################################################################
@@ -145,12 +147,20 @@ def CheckPKGConfig(context, version):
 
 def CheckSDLConfig(context, env):
 	context.Message( 'Checking for sdl-config... ' )
-	for p in env['PATH']:
-		ret = context.TryAction(os.path.join(p, env['sdlconfig'])+' --version')[0]
-		if ret==1:
-			env['sdlconfig']=os.path.join(p, env['sdlconfig'])
-			context.Result( ret )
-			break
+	if env['PLATFORM'] == 'win32':
+		for p in env['PATH']:
+			ret = context.TryAction('sh.exe '+os.path.join(p, env['sdlconfig'])+' --version')[0]
+			if ret==1:
+				env['sdlconfig']='sh.exe '+os.path.join(p, env['sdlconfig'])
+				context.Result( ret )
+				break
+	else:
+		for p in env['PATH']:
+			ret = context.TryAction(os.path.join(p, env['sdlconfig'])+' --version')[0]
+			if ret==1:
+				env['sdlconfig']=os.path.join(p, env['sdlconfig'])
+				context.Result( ret )
+				break
 	return ret
 
 def CheckParaguiConfig(context, env):
