@@ -217,11 +217,11 @@ void Editor_Interactive::think()
 
 void Editor_Interactive::exit() {
 	if (m_need_save) {
-		UI::MessageBox mmb
+		UI::WLMessageBox mmb
 			(this,
 			 _("Map unsaved"),
 			 _("The Map is unsaved, do you really want to quit?"),
-			 UI::MessageBox::YESNO);
+			 UI::WLMessageBox::YESNO);
 		if (mmb.run() == 0)
 			return;
 	}

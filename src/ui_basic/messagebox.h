@@ -19,7 +19,6 @@
 
 #ifndef UI_MESSAGEBOX_H
 #define UI_MESSAGEBOX_H
-#undef MessageBox //Don't ask, this is just because of Windows ;-)
 
 #include <boost/scoped_ptr.hpp>
 
@@ -29,14 +28,14 @@
 
 namespace UI {
 
-struct MessageBoxImpl;
+struct WLMessageBoxImpl;
 
 /**
  * Shows a standard messagebox. The message box can be used either as a modal
  * or as a non-modal dialog box.
  *
  * Using it as a modal dialog box is very straightforward:
- *     MessageBox mb(parent, "Caption", "Text", OK);
+ *     WLMessageBox mb(parent, "Caption", "Text", OK);
  *     int32_t code = mb.run();
  * The return code is 1 if the "Yes" button has been pressed in a \ref YESNO
  * dialog box. Otherwise, it is 0 (or negative, if the modal messagebox has
@@ -46,18 +45,21 @@ struct MessageBoxImpl;
  * to add this dialog box as a child to the current fullscreen panel, and
  * connect the signals \ref yes and \ref no or \ref ok, depending on the
  * messagebox type, to a function that deletes the message box.
+ * \note this function is named "WLMessageBox" instead of simply "MessageBox"
+ *       because else linking on Windows (even with #undef MessageBox) will
+ *       not work.
 */
-struct MessageBox : public Window {
+struct WLMessageBox : public Window {
 	enum MB_Type {
 		OK,
 		YESNO
 	};
-	MessageBox
+	WLMessageBox
 		(Panel * parent,
 		 const std::string & caption,
 		 const std::string & text,
 		 MB_Type);
-	~MessageBox();
+	~WLMessageBox();
 
 	Signal ok;
 	Signal yes;
@@ -74,7 +76,7 @@ protected:
 	virtual void pressedNo();
 
 private:
-	boost::scoped_ptr<MessageBoxImpl> d;
+	boost::scoped_ptr<WLMessageBoxImpl> d;
 };
 
 }

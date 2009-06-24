@@ -30,20 +30,20 @@
 namespace UI {
 
 
-struct MessageBoxImpl {
+struct WLMessageBoxImpl {
 	Multiline_Textarea * textarea;
-	MessageBox::MB_Type type;
+	WLMessageBox::MB_Type type;
 };
 
 
-MessageBox::MessageBox
+WLMessageBox::WLMessageBox
 	(Panel * const parent,
 	 const std::string & caption,
 	 const std::string & text,
 	 const MB_Type type)
 	:
 	Window(parent, 0, 0, 20, 20, caption.c_str()),
-	d(new MessageBoxImpl)
+	d(new WLMessageBoxImpl)
 {
 	d->type = type;
 	d->textarea = new Multiline_Textarea
@@ -81,35 +81,35 @@ MessageBox::MessageBox
 	d->textarea->set_size(width - 10, height - 50);
 
 	if (type == OK) {
-		new Callback_Button<MessageBox>
+		new Callback_Button<WLMessageBox>
 			(this,
 			 (get_inner_w() - 60) / 2, get_inner_h() - 30, 60, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-			 &MessageBox::pressedOk, *this,
+			 &WLMessageBox::pressedOk, *this,
 			 _("OK"));
 	} else if (type == YESNO) {
-		new Callback_Button<MessageBox>
+		new Callback_Button<WLMessageBox>
 			(this,
 			 (get_inner_w() / 2 - 60) / 2, get_inner_h() - 30, 60, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-			 &MessageBox::pressedYes, *this,
+			 &WLMessageBox::pressedYes, *this,
 			 _("Yes"));
-		new Callback_Button<MessageBox>
+		new Callback_Button<WLMessageBox>
 			(this,
 			 (get_inner_w() / 2 - 60) / 2 + get_inner_w() / 2, get_inner_h() - 30,
 			 60, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-			 &MessageBox::pressedNo, *this,
+			 &WLMessageBox::pressedNo, *this,
 			 _("No"));
 	}
 }
 
-MessageBox::~MessageBox()
+WLMessageBox::~WLMessageBox()
 {
 }
 
 
-void MessageBox::set_align(Align align)
+void WLMessageBox::set_align(Align align)
 {
 	d->textarea->set_align(align);
 }
@@ -121,7 +121,7 @@ void MessageBox::set_align(Align align)
  * Clicking the right mouse button inside the window acts like pressing
  * Ok or No, depending on the message box type.
  */
-bool MessageBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
+bool WLMessageBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
@@ -133,26 +133,26 @@ bool MessageBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 	return true;
 }
 
-bool MessageBox::handle_mouserelease(const Uint8, int32_t, int32_t)
+bool WLMessageBox::handle_mouserelease(const Uint8, int32_t, int32_t)
 {
 	return true;
 }
 
-void MessageBox::pressedOk()
+void WLMessageBox::pressedOk()
 {
 	ok.call();
 	if (is_modal())
 		end_modal(0);
 }
 
-void MessageBox::pressedYes()
+void WLMessageBox::pressedYes()
 {
 	yes.call();
 	if (is_modal())
 		end_modal(1);
 }
 
-void MessageBox::pressedNo()
+void WLMessageBox::pressedNo()
 {
 	no.call();
 	if (is_modal())

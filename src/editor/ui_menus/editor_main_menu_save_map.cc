@@ -359,8 +359,8 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 		std::string s = _("A File with the name ");
 		s += FileSystem::FS_Filename(filename.c_str());
 		s += _(" exists already. Overwrite?");
-		UI::MessageBox mbox
-			(m_parent, _("Save Map Error!!"), s, UI::MessageBox::YESNO);
+		UI::WLMessageBox mbox
+			(m_parent, _("Save Map Error!!"), s, UI::WLMessageBox::YESNO);
 		if (not mbox.run())
 			return false;
 
@@ -380,8 +380,8 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 			("Map Saving Error!\nSaved Map-File may be corrupt!\n\nReason "
 			 "given:\n");
 		s += e.what();
-		UI::MessageBox  mbox
-			(m_parent, _("Save Map Error!!"), s, UI::MessageBox::OK);
+		UI::WLMessageBox  mbox
+			(m_parent, _("Save Map Error!!"), s, UI::WLMessageBox::OK);
 		mbox.run();
 	}
 	delete &fs;

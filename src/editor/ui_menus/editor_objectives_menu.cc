@@ -285,7 +285,7 @@ void Editor_Objectives_Menu::clicked_del() {
 				break;
 			str += '\n';
 		}
-		UI::MessageBox mmb(m_parent, _("Note"), str.c_str(), UI::MessageBox::OK);
+		UI::WLMessageBox mmb(m_parent, _("Note"), str.c_str(), UI::WLMessageBox::OK);
 		mmb.run();
 	} else
 		map.mtm().remove(*trigger);

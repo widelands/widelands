@@ -278,13 +278,13 @@ void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
 		m_given_cond = &cond;
 		end_modal(1);
 	} catch (Widelands::TriggerConditional_Factory::SyntaxError) {
-		UI::MessageBox mb
+		UI::WLMessageBox mb
 			(&eia(),
 			 _("Syntax Error"),
 			 _
 			 	("Your conditional contains at least one syntax error. Please "
 			 	 "correct!\n"),
-			 UI::MessageBox::OK);
+			 UI::WLMessageBox::OK);
 		mb.run();
 		return;
 	}

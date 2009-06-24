@@ -276,8 +276,8 @@ void Editor_Event_Menu::clicked_del_event() {
 		container_iterate_const
 			(Widelands::Event::Referencers, event_referencers, i)
 			s << i.current->first->identifier() << '\n';
-		UI::MessageBox mmb
-			(&eia(), _("Error!"), s.str(), UI::MessageBox::OK);
+		UI::WLMessageBox mmb
+			(&eia(), _("Error!"), s.str(), UI::WLMessageBox::OK);
 		mmb.run();
 		return;
 	}
@@ -316,8 +316,8 @@ void Editor_Event_Menu::clicked_del_trigger() {
 		container_iterate_const
 			(Widelands::Trigger::Referencers, trigger_referencers, i)
 			s << i.current->first->identifier() << '\n';
-		UI::MessageBox messagebox
-			(&eia(), _("Error!"), s.str(), UI::MessageBox::OK);
+		UI::WLMessageBox messagebox
+			(&eia(), _("Error!"), s.str(), UI::WLMessageBox::OK);
 		messagebox.run();
 	}
 }

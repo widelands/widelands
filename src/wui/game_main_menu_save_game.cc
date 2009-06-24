@@ -194,17 +194,17 @@ static void dosave
 			("Game Saving Error!\nSaved Game-File may be corrupt!\n\n"
 			 "Reason given:\n");
 		s += error;
-		UI::MessageBox mbox
-			(&igbase, _("Save Game Error!!"), s, UI::MessageBox::OK);
+		UI::WLMessageBox mbox
+			(&igbase, _("Save Game Error!!"), s, UI::WLMessageBox::OK);
 		mbox.run();
 	}
 }
 
-struct SaveWarnMessageBox : public UI::MessageBox {
+struct SaveWarnMessageBox : public UI::WLMessageBox {
 	SaveWarnMessageBox
 		(Game_Main_Menu_Save_Game & parent, std::string const & filename)
 		:
-		UI::MessageBox
+		UI::WLMessageBox
 			(&parent,
 			 _("Save Game Error!!"),
 			 std::string(_("A File with the name "))

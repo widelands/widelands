@@ -231,10 +231,10 @@ void Event_Move_View_Option_Menu::clicked_ok() {
 					 	("There is another event registered with the name \"%s\". "
 					 	 "Choose another name."),
 					 name.c_str());
-				UI::MessageBox mb
+				UI::WLMessageBox mb
 					(get_parent(),
 					 _("Name in use"), buffer,
-					 UI::MessageBox::OK);
+					 UI::WLMessageBox::OK);
 				mb.run();
 				return;
 			}

@@ -704,11 +704,11 @@ void NetClient::disconnect
 		if (trysave)
 			msg += _(" An automatic savegame will be created.");
 
-		UI::MessageBox mmb
+		UI::WLMessageBox mmb
 			(d->modal,
 			 "Disconnected from Host",
 			 msg,
-			 UI::MessageBox::OK);
+			 UI::WLMessageBox::OK);
 		mmb.run();
 	}
 

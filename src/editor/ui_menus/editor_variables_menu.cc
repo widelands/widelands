@@ -217,8 +217,8 @@ void Edit_Variable_Window::clicked_ok() {
 			snprintf
 				(buffer, sizeof(buffer),
 				 _("\"%s\" is not a valid integer!"), m_value.text().c_str());
-			UI::MessageBox mb
-				(&m_parent, _("Parse error!"), buffer, UI::MessageBox::OK);
+			UI::WLMessageBox mb
+				(&m_parent, _("Parse error!"), buffer, UI::WLMessageBox::OK);
 			mb.run();
 			return;
 		}

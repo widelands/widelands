@@ -245,14 +245,14 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 		else
 			update();
 	} else {
-		UI::MessageBox mmb
+		UI::WLMessageBox mmb
 			(&parent,
 			 _("Error!"),
 			 _
 			 	("Can not remove player. It is referenced in some place. Remove "
 			 	 "all buildings, bobs, triggers and events that depend on this "
 			 	 "player and try again."),
-			 UI::MessageBox::OK);
+			 UI::WLMessageBox::OK);
 		mmb.run();
 	}
 }
@@ -277,14 +277,14 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 		parent.egbase().map().set_scenario_player_tribe(n + 1, t);
 		parent.set_need_save(true);
 	} else {
-		UI::MessageBox mmb
+		UI::WLMessageBox mmb
 			(&parent,
 			 _("Error!"),
 			 _
 			 	("Can not change player tribe. It is referenced in some place. "
 			 	 "Remove all bobs, triggers and events that depend on this tribe "
 			 	 "and try again."),
-			 UI::MessageBox::OK);
+			 UI::WLMessageBox::OK);
 		mmb.run();
 	}
 	update();

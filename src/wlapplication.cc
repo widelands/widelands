@@ -1373,11 +1373,11 @@ void WLApplication::mainmenu()
 		if (message.size()) {
 			log("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
 
-			UI::MessageBox mmb
+			UI::WLMessageBox mmb
 				(&mm,
 				 messagetitle,
 				 message,
-				 UI::MessageBox::OK);
+				 UI::WLMessageBox::OK);
 			mmb.set_align(Align_Left);
 			mmb.run();
 
@@ -1963,14 +1963,14 @@ struct ReplayGameController : public GameController {
 		Cmd_ReplayEnd (int32_t const _duetime) : Widelands::Command(_duetime) {}
 		virtual void execute (Widelands::Game & game) {
 			game.gameController()->setDesiredSpeed(0);
-			UI::MessageBox mmb
+			UI::WLMessageBox mmb
 				(game.get_ibase(),
 				 _("End of replay"),
 				 _
 				 	("The end of the replay has been reached and the game has "
 				 	 "been paused. You may unpause the game and continue watching "
 				 	 "if you want to."),
-				 UI::MessageBox::OK);
+				 UI::WLMessageBox::OK);
 			mmb.run();
 		}
 		virtual uint8_t id() const {return QUEUE_CMD_REPLAYEND;}
