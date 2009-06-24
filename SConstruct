@@ -114,7 +114,7 @@ def cli_options():
 
 opts=cli_options()
 
-env=Environment(ENV=os.environ, options=opts)
+env=Environment(options=opts)
 
 BUILDDIR=parse_cli(env, BUILD_TARGETS) # must parse CLI before anything else, PATH might get changed
 
@@ -265,7 +265,7 @@ Alias('tags', env.ctags(source=all_code_files))
 
 ################################################################ C++ style-check
 if (env['build'] == 'debug' or env['build'] == 'profile') and env['PLATFORM'] != 'darwin' and env['check'] == True:
-        Alias('old-stylecheck', env.Execute('utils/spurious_source_code/detect'))
+        Alias('old-stylecheck', env.Execute('sh utils/spurious_source_code/detect'))
 
 # Style Checks
 PhonyTarget('stylecheck',
@@ -324,7 +324,7 @@ AlwaysBuild(dist)
 
 ###################################################################### longlines
 
-longlines=PhonyTarget("longlines", 'utils/count-longlines.py')
+longlines=PhonyTarget("longlines", 'python utils/count-longlines.py')
 
 ###################################################################### precommit
 
