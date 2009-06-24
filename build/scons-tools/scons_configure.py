@@ -2,8 +2,6 @@
 import os, sys
 import string
 
-from subprocess import Popen, PIPE
-
 from detect_revision import *
 
 ################################################################################
@@ -78,9 +76,11 @@ def parse_cli(env, buildtargets):
 	env.Append(PATH=['/usr/bin', '/usr/local/bin'])
 
 	if env['PLATFORM']=='win32':
+	        env.Append(ENV=os.environ)
 	        env.Append(PATH='/mingw/bin')
 	        env.Append(CPPPATH=['/mingw/include', '/mingw/include/SDL'])
 	        env.Append(LIBPATH='/mingw/lib')
+	        env.Append(LINKFLAGS=['-lintl', '-lwsock32'])
 
 	#TODO: should be detected automagically
 	if env['PLATFORM']=='darwin':
