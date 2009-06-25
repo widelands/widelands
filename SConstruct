@@ -254,7 +254,7 @@ if env['build']=='release':
 	Default(buildlocale)
 
 # Also build tests by default
-if env['build'] == 'debug' or env['build'] == 'profile' and not env['PLATFORM'] == 'win32': # FIXME: on win32 economytest is linked to SDL libs which breaks linking
+if (env['build'] == 'debug' or env['build'] == 'profile') and not env['PLATFORM'] == 'win32': # FIXME: on win32 economytest is linked to SDL libs which breaks linking
     Default("test")
 
 ########################################################################### tags

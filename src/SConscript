@@ -94,6 +94,9 @@ def link_or_copy(target, source, env):
 		shutil.copy2(src, dst)
 
 binary=srcenv.Program(target='widelands', source=["main.cc"] + remaining + libs)
-copybinary=srcenv.Command('#/widelands', binary, Action(link_or_copy))
+if env['PLATFORM'] == 'win32':
+	copybinary=srcenv.Command('#/Widelands.exe', binary, Action(link_or_copy))
+else:
+	copybinary=srcenv.Command('#/widelands', binary, Action(link_or_copy))
 
 Return('copybinary')
