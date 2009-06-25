@@ -209,31 +209,29 @@ m_toggle_help
 	Widelands::MessageQueue::m_button(&m_toggle_message_menu);
 	Widelands::MessageQueue::set_player_number(plyn);
 
-	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
+	// TODO : instead of making unneeded buttons invisible after generation,
+	// they should not at all be generated. -> implement more dynamic toolbar UI
 	m_toolbar.add(&m_toggle_options_menu,    UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_statistics_menu, UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
-	//m_toolbar.add(&m_toggle_resources,       UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_help,            UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_objectives,      UI::Box::AlignLeft);
-	m_toolbar.add(&m_toggle_message_menu,    UI::Box::AlignLeft);
-
-	set_player_number(plyn);
-	fieldclicked.set(this, &Interactive_Player::node_action);
-
-
-	// TODO : instead of making unneeded buttons invisible after generation,
-	// they should not at all be generated. -> implement more dynamic toolbar UI
 	if (multiplayer) {
+		m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 		m_chatDisplay =
 			new ChatDisplay(this, 10, 25, get_w() - 10, get_h() - 25);
 		m_toggle_chat.set_visible(false);
 		m_toggle_chat.set_enabled(false);
 	} else
 		m_toggle_chat.set_visible(false);
+	m_toolbar.add(&m_toggle_help,            UI::Box::AlignLeft);
 	if (not scenario)
 		m_toggle_objectives.set_visible(false);
+	else
+		m_toolbar.add(&m_toggle_objectives,      UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_message_menu,    UI::Box::AlignLeft);
+
+	set_player_number(plyn);
+	fieldclicked.set(this, &Interactive_Player::node_action);
 
 	m_toolbar.resize();
 	adjust_toolbar_position();
