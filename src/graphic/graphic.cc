@@ -699,7 +699,7 @@ void Graphic::free_surface(const PictureID & picid) {
 
 
 PictureID Graphic::create_grayed_out_pic(const PictureID & picid) {
-	if (picid == get_no_picture()) {
+	if (picid != get_no_picture()) {
 		Surface & s = *new Surface(*get_picture_surface(picid));
 		SDL_PixelFormat const & format = s.format();
 		uint32_t const w = s.get_w(), h = s.get_h();
