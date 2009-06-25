@@ -286,6 +286,7 @@ if ('shrink' in BUILD_TARGETS):
 instadd(env, 'ChangeLog', 'doc')
 instadd(env, 'COPYING', 'doc')
 instadd(env, 'CREDITS', 'doc')
+instadd(env, 'VERSION', '.')
 instadd(env, 'widelands', filetype='binary')
 
 install=env.Install('installtarget', 'COPYING') # the second argument is a (neccessary) dummy
