@@ -89,6 +89,7 @@ struct Graphic {
 	void refresh(bool force = true);
 
 	void flush(PicMod module);
+	void flush_animations();
 	PictureID & get_picture(PicMod module, const std::string & fname)
 	__attribute__ ((pure));
 	PictureID get_picture

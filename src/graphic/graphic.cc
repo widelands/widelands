@@ -327,7 +327,7 @@ void Graphic::refresh(bool force)
 
 /**
  * Remove all resources (currently pictures) from the given modules.
- * \note flush(0) does nothing
+ * \note flush(0) does nothing <- obviously wrong it deletes a lot!
 */
 void Graphic::flush(PicMod const module) {
 	// Flush pictures
@@ -355,6 +355,15 @@ void Graphic::flush(PicMod const module) {
 	if (not module or module & PicMod_UI) // Flush the cached Fontdatas
 		g_fh->flush_cache();
 }
+
+
+/// flushes the animations in m_animations
+void Graphic::flush_animations() {
+	container_iterate_const(std::vector<AnimationGfx *>, m_animations, i)
+		delete *i.current;
+	m_animations.clear();
+}
+
 
 /**
  * Retrieves the picture ID of the picture with the given filename.

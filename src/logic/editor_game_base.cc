@@ -751,11 +751,10 @@ void Editor_Game_Base::cleanup_for_load
 
 	//  We do not flush the animations in the editor since all tribes are loaded
 	//  and animations can not change a lot, or?
-	// TODO: check this when another world is needed
 	if (flush_animations)
 		g_anim.flush();
 	if (flush_graphics) {
-		//g_gr->flush(0); FIXME, what do we need to flush here?
+		g_gr->flush_animations(); // flush all world animations
 	}
 
 	const Player * const * const players_end = m_players + MAX_PLAYERS;
