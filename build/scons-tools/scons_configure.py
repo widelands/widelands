@@ -80,7 +80,7 @@ def parse_cli(env, buildtargets):
 	        env.Append(PATH='/mingw/bin')
 	        env.Append(CPPPATH=['/mingw/include', '/mingw/include/SDL'])
 	        env.Append(LIBPATH='/mingw/lib')
-	        env.Append(LINKFLAGS=['-lintl', '-lwsock32'])
+	        env.Append(LIBS=['intl', 'wsock32'])
 
 	#TODO: should be detected automagically
 	if env['PLATFORM']=='darwin':

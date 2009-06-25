@@ -5,7 +5,10 @@ Import('*')
 #TODO: find a way to remove the .orig files astyle leaves around. Probably in
 #      scons-tools/astyle.py
 
-SRC= list(set(simpleglob("*.cc")) - set(("main.cc","./main.cc"))) +["build_info.cc"]
+if env['PLATFORM'] == 'win32':
+	SRC= list(set(simpleglob("*.cc")) - set(("main.cc",".\\main.cc"))) +["build_info.cc"]
+else:
+	SRC= list(set(simpleglob("*.cc")) - set(("main.cc","./main.cc"))) +["build_info.cc"]
 
 srcenv=env.Clone()
 
