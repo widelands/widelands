@@ -71,8 +71,7 @@ struct MessageQueue {
 		myQueue.push_back(m);
 		if (myQueue.size() >= MAX_QUEUE_SIZE) {
 			std::vector<Message>::iterator b = myQueue.begin();
-			std::vector<Message>::iterator e = myQueue.end();
-			while (b != e) {
+			while (b != myQueue.end()) {
 				if (b->get_is_visible())
 					myQueue.erase(b);
 				else
