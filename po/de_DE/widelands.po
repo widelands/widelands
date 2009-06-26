@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4288\n"
+"Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-19 15:25+0200\n"
+"POT-Creation-Date: 2009-06-26 19:07+0200\n"
 "PO-Revision-Date: 2009-06-19 15:17+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -835,20 +835,20 @@ msgstr "Die Adresse the Spiele Servers ist inkorrekt"
 msgid "Player"
 msgstr "Spieler"
 
-#: ../../src/wlapplication.cc:1863 ../../src/network/netclient.cc:158
+#: ../../src/wlapplication.cc:1861 ../../src/network/netclient.cc:158
 #: ../../src/network/nethost.cc:422
 msgid "Preparing game"
 msgstr "Bereite Spiel vor"
 
-#: ../../src/wlapplication.cc:1970
+#: ../../src/wlapplication.cc:1968
 msgid "End of replay"
 msgstr "Ende der Spielaufzeichnung"
 
-#: ../../src/wlapplication.cc:1972
+#: ../../src/wlapplication.cc:1970
 msgid "The end of the replay has been reached and the game has been paused. You may unpause the game and continue watching if you want to."
 msgstr "Das Ende der Spielaufzeichnung wurde erreicht und das Spiel wurde auf Pause gesetzt. Wenn du möchtest, kannst du die Wiedergabe fortsetzen und weitergucken."
 
-#: ../../src/wlapplication.cc:2054 ../../src/logic/game.cc:323
+#: ../../src/wlapplication.cc:2052 ../../src/logic/game.cc:323
 #: ../../src/logic/game.cc:362
 msgid "Loading..."
 msgstr "Laden..."
@@ -1351,7 +1351,7 @@ msgstr "Unzulässige Welt"
 msgid "The world \"%s\" set by the map, does not exist on your filesystem."
 msgstr "Die Welt \"%s\" die von der Karte vorgegeben wird, exisitiert nicht auf deinem Dateisystem."
 
-#: ../../src/graphic/graphic.cc:803
+#: ../../src/graphic/graphic.cc:812
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr "Lade Animationen: %d%% fertig"
@@ -1382,41 +1382,41 @@ msgstr "Der Client ist abgestürzt und hat eine Notfallspeicherung durchgeführt
 msgid "Server sent a player update for a player that does not exist."
 msgstr "Der Server hat ein Spieler-Update für einen nicht existenten Spieler gesendet."
 
-#: ../../src/network/netclient.cc:424
+#: ../../src/network/netclient.cc:423
 msgid "Server sent an user update for a user that does not exist."
 msgstr "Der Server hat ein Benutzerupdate für einen nicht existenten Benutzer gesendet."
 
-#: ../../src/network/netclient.cc:500
+#: ../../src/network/netclient.cc:499
 #, c-format
 msgid "Expected a HELLO packet from server, but received command number %u. Maybe the server is running a different version of Widelands?"
 msgstr "Habe ein HELLO Paket vom Server erwartet, aber die Anweisung Nummer %u erhalten. Vielleicht verwendet der Server eine andere Widelands-Version?"
 
-#: ../../src/network/netclient.cc:507
+#: ../../src/network/netclient.cc:506
 msgid "Server uses a different protocol version"
 msgstr "Der Server benutzt eine andere Protokollversion"
 
-#: ../../src/network/netclient.cc:581
+#: ../../src/network/netclient.cc:580
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr "Ich habe unerwartet ein LAUNCH Befehl vom Server erhalten."
 
-#: ../../src/network/netclient.cc:601
+#: ../../src/network/netclient.cc:600
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
 msgstr "Der Server hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/network/netclient.cc:614
+#: ../../src/network/netclient.cc:613
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr "Der Server hat ein SYNCREQUEST gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/network/netclient.cc:641
+#: ../../src/network/netclient.cc:640
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
 msgstr "Der Server eine unbekannte Anweisungen (Anweisung Nummer: %u) gesendet"
 
-#: ../../src/network/netclient.cc:675
+#: ../../src/network/netclient.cc:674
 msgid "Server sent malformed commands: "
 msgstr "Der Server hat unverständliche Anweisungen gesendet:"
 
-#: ../../src/network/netclient.cc:706
+#: ../../src/network/netclient.cc:705
 msgid " An automatic savegame will be created."
 msgstr " Eine automatische Spielsicherung wird durchgeführt."
 
@@ -1436,11 +1436,19 @@ msgstr "Server MOTD:"
 msgid "Reconnected to the metaserver."
 msgstr "Metaserververbindung wieder hergestellt."
 
-#: ../../src/network/network_ggz.cc:627
+#: ../../src/network/network_ggz.cc:491
+msgid "NOTE: The internet gaming implementation is in very early state."
+msgstr ""
+
+#: ../../src/network/network_ggz.cc:493
+msgid "Please take a look at the notes at:"
+msgstr ""
+
+#: ../../src/network/network_ggz.cc:632
 msgid " joined the metaserver."
 msgstr "hat den Metaserver betreten."
 
-#: ../../src/network/network_ggz.cc:636
+#: ../../src/network/network_ggz.cc:641
 msgid " left the metaserver."
 msgstr "hat den Metaserver verlassen."
 
@@ -1516,29 +1524,29 @@ msgstr "Der Erste vom Clienten gesendete Befehl ist %u stattdessen hätte HELLO 
 msgid "Server uses a different protocol version."
 msgstr "Der Server verwendet eine andere Protokollversion"
 
-#: ../../src/network/nethost.cc:1589
+#: ../../src/network/nethost.cc:1587
 msgid "Client sent TIME command even though game is not running."
 msgstr "Der Client hat einen TIME Befehl gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/network/nethost.cc:1597
+#: ../../src/network/nethost.cc:1595
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr "Der Client hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/network/nethost.cc:1609
+#: ../../src/network/nethost.cc:1607
 #, c-format
 msgid "Client %i (%i) sent a playercommand (%i) for a different player (%i)."
 msgstr "Der Client %i (%i) versucht einen Spielerbefehl (%i)  für einen anderen Spieler (%i) zu senden."
 
-#: ../../src/network/nethost.cc:1618
+#: ../../src/network/nethost.cc:1616
 msgid "Client sent unexpected synchronization report."
 msgstr "Der Client hat einen unerwarteten Synchronisationsreport geschickt."
 
-#: ../../src/network/nethost.cc:1653
+#: ../../src/network/nethost.cc:1651
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "Der Client hat einen unbekannten Befehl Nummer %u gesendet."
 
-#: ../../src/network/nethost.cc:1694
+#: ../../src/network/nethost.cc:1692
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr "%s hat das Spiel verlassen (%s)."
@@ -1598,36 +1606,17 @@ msgid "Chat"
 msgstr "Chat"
 
 #: ../../src/wui/interactive_dedicated_server.cc:53
-#: ../../src/wui/interactive_spectator.cc:53
-msgid "Exit Replay"
-msgstr "Aufnahme beenden"
-
-#: ../../src/wui/interactive_dedicated_server.cc:55
-#: ../../src/wui/interactive_spectator.cc:55
-#: ../../src/wui/game_main_menu_save_game.cc:63
-#: ../../src/wui/game_options_menu.cc:85
-msgid "Save Game"
-msgstr "Spiel speichern"
-
-#: ../../src/wui/interactive_dedicated_server.cc:57
 #: ../../src/wui/interactive_player.cc:180
 #: ../../src/wui/interactive_spectator.cc:57
 #: ../../src/wui/game_options_menu.cc:42 ../../src/ui_fsmenu/main.cc:69
 msgid "Options"
 msgstr "Optionen"
 
-#: ../../src/wui/interactive_dedicated_server.cc:59
+#: ../../src/wui/interactive_dedicated_server.cc:55
 #: ../../src/wui/interactive_player.cc:183
 #: ../../src/wui/interactive_spectator.cc:59
 msgid "Statistics"
 msgstr "Statistik"
-
-#: ../../src/wui/interactive_dedicated_server.cc:61
-#: ../../src/wui/interactive_player.cc:189
-#: ../../src/wui/interactive_spectator.cc:61
-#: ../../src/editor/editorinteractive.cc:73
-msgid "Minimap"
-msgstr "Minikarte"
 
 #: ../../src/wui/game_objectives_menu.cc:46
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:161
@@ -1728,6 +1717,12 @@ msgstr "16 Std"
 msgid "Objectives"
 msgstr "Aufgaben"
 
+#: ../../src/wui/interactive_player.cc:189
+#: ../../src/wui/interactive_spectator.cc:61
+#: ../../src/editor/editorinteractive.cc:73
+msgid "Minimap"
+msgstr "Minikarte"
+
 #: ../../src/wui/interactive_player.cc:192
 #: ../../src/editor/editorinteractive.cc:76
 msgid "Buildhelp"
@@ -1789,6 +1784,16 @@ msgstr "Zeige Arbeiter"
 #: ../../src/wui/game_chat_menu.cc:44
 msgid "Chat Menu"
 msgstr "Chat-Menü"
+
+#: ../../src/wui/interactive_spectator.cc:53
+msgid "Exit Replay"
+msgstr "Aufnahme beenden"
+
+#: ../../src/wui/interactive_spectator.cc:55
+#: ../../src/wui/game_main_menu_save_game.cc:63
+#: ../../src/wui/game_options_menu.cc:85
+msgid "Save Game"
+msgstr "Spiel speichern"
 
 #: ../../src/wui/game_message_menu.cc:37
 msgid "Message Menu"
@@ -2280,9 +2285,9 @@ msgid "File not found"
 msgstr "Datei nicht gefunden"
 
 #: ../../src/ui_fsmenu/launchgame.cc:229
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Widelands  tried to start a game with a file that could not be found at given path.\n"
+"Widelands tried to start a game with a file that could not be found at given path.\n"
 "The file was: %s\n"
 "If this happens in a network game, the host might have selected a file that you do not have. In that case you should ask the host to send you the file."
 msgstr ""
@@ -2833,7 +2838,7 @@ msgid "Unnamed%u"
 msgstr "Namenlos%u"
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:252
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:303
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:304
 msgid "Trigger: "
 msgstr "Auslöser: "
 
@@ -2841,7 +2846,7 @@ msgstr "Auslöser: "
 msgid "The objective was deleted, but not its trigger, because it is still referenced by:\n"
 msgstr "Die Aufgabe wurde gelöscht, sein Auslöser wurde allerdings beibehalten, weil er immer noch verwendet wird von:\n"
 
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:288
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:289
 msgid "Note"
 msgstr "Notiz"
 

@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4303\n"
+"Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-21 14:56+0200\n"
+"POT-Creation-Date: 2009-06-26 19:07+0200\n"
 "PO-Revision-Date: 2009-06-20 21:40+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -1353,7 +1353,7 @@ msgstr "Chybný svět"
 msgid "The world \"%s\" set by the map, does not exist on your filesystem."
 msgstr "V souborovém systému neexistuje svět \"%s\" nastavený mapou."
 
-#: ../../src/graphic/graphic.cc:803
+#: ../../src/graphic/graphic.cc:812
 #, c-format
 msgid "Loading animations: %d%% complete"
 msgstr "Nahrávání animací: %d%% dokončeno"
@@ -1438,11 +1438,19 @@ msgstr "Server MOTD:"
 msgid "Reconnected to the metaserver."
 msgstr "Znovu připojit k metaserveru."
 
-#: ../../src/network/network_ggz.cc:627
+#: ../../src/network/network_ggz.cc:491
+msgid "NOTE: The internet gaming implementation is in very early state."
+msgstr ""
+
+#: ../../src/network/network_ggz.cc:493
+msgid "Please take a look at the notes at:"
+msgstr ""
+
+#: ../../src/network/network_ggz.cc:632
 msgid " joined the metaserver."
 msgstr " se připojil k metaserveru."
 
-#: ../../src/network/network_ggz.cc:636
+#: ../../src/network/network_ggz.cc:641
 msgid " left the metaserver."
 msgstr " opustil metaserver."
 
@@ -2832,7 +2840,7 @@ msgid "Unnamed%u"
 msgstr "Nepojmenovaný %u"
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:252
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:303
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:304
 msgid "Trigger: "
 msgstr "Spoušť: "
 
@@ -2840,7 +2848,7 @@ msgstr "Spoušť: "
 msgid "The objective was deleted, but not its trigger, because it is still referenced by:\n"
 msgstr "Byl smazán úkol, ale ne jeho spoušť, protože na ni stále existují odkazy z:\n"
 
-#: ../../src/editor/ui_menus/editor_objectives_menu.cc:288
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:289
 msgid "Note"
 msgstr "Poznámka"
 

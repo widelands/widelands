@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4208\n"
+"Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-04 13:01+0000\n"
+"POT-Creation-Date: 2009-06-26 17:07+0000\n"
 "PO-Revision-Date: 2008-11-03 14:16+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -48,6 +48,7 @@ msgid " \"As Saledus and I walked through these wonderful forests in the north, 
 msgstr "\"Toen Saledus en ik door deze prachtige bossen in het noorden liepen, hadden we het gevoel dat onze nieuwe toekomst net was begonnen. Dit land is zo vredig, rijk en mooi, dat ik hier tot het eind mijner dagen zou kunnen blijven.<br> Mogen er nog jaren jaren verstrijken tot die laatste dag! We moeten ons voorlopig richten op het heden en enkele houthakkershutten en een houtzagerij bouwen om basisbouwmaterialen te produceren.<br> Maar we mogen niet vergeten deze natuurlijke rijkdom te bewaken. Deze bossen moeten eeuwig mee, dus we moeten ook een boswachtershuis bouwen.\"<br><br>-- NIEUWE DOELEN --"
 
 #: ../../../campaigns/emp02.wmf/event:139
+#: ../../../campaigns/emp02.wmf/objective:9
 msgid "* Build three lumberjack's houses, a forester's house and a sawmill."
 msgstr "* Bouw drie houthakkershutten, een boswachtershuis en een houtzagerij."
 
@@ -131,6 +132,7 @@ msgid " \"By the Gods, this is an unbelievable strike of fortune! There are two 
 msgstr "\"Bij de Goden, wat een ongelooflijk geschenk. Er zijn nog twee bergen en het lijkt erop dat de één een grote voorraad steenkool en de ander een voorraad ijzererts bevat. We zouden direct moeten beginnen met het bouwen van ijzer- en kolenmijnen (of op zijn minst houtskoolbranders), hoogovens en werktuig-, harnassen- en wapensmeden. <br>Voor deze grotere gebouwen hebben we echter sterkere en sierlijkere bouwmaterialen nodig. Dus laten we een steenhouwer bouwen die voor ons zuilen uit marmer houwt. Nu kunnen we tenslotte beginnen te leven zoals in Fremil.\"<br><br>-- NIEUW DOEL --<br>"
 
 #: ../../../campaigns/emp02.wmf/event:332
+#: ../../../campaigns/emp02.wmf/objective:41
 msgid "* Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner, iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 msgstr "* Bouw een steenhouwer en daarna een complete mijn- en productieinfrastructuir (koolmijn en/of houtskoolbrander, ijzermijn, werktuigsmid, wapensmid, harnassensmid, en een hoogoven)."
 
@@ -147,6 +149,7 @@ msgid " \"Hi Lutius, I hope you forgive my criticism, but it seems to me as if y
 msgstr "\"Hoi Lutius,<br>Ik hoop dat je me mijn kritiek kunt vergeven, maar het lijkt erop dat je iets vergeet. Het is prettig, en uiteraard een goed idee, om mijnen te bouwen die ons een luxer bestaan zullen schenken, maar de mijnwerkers zijn ontevreden met de huidige situatie. Ze moeten hard werken en hebben geen tijd om zelf voor eten te zorgen.<br> Wat vind je ervan om ze te helpen?<br> I kan je niet zeggen wat we precies nodig hebben... maar hier zijn mijn aanbevelingen:\"<br><br>-- NIEUW DOEL --<br>"
 
 #: ../../../campaigns/emp02.wmf/event:414
+#: ../../../campaigns/emp02.wmf/objective:49
 #, fuzzy
 msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food - like fish, meat or bread.<br> To provide these foodstuffs, you would have to build a fisher's house, a farm, a mill and a bakery.<br> Maybe you will also need a hunter's house,<br> a piggery, a vineyard and some wells.<br> It's up to you what you want to build.<br> But remember - coal and iron ore mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
 msgstr "* Om voedzaam eten voor onze mijnwerkers te maken, zouden we een kroeg kunnen bouwen. Om ze van goede en voedzame drank te voorzien zouden we een brouwerij en een wijnmakerij kunnen bouwen.<br> Uiteraard betekent dit dat we meer bronnen nodig hebben voor het bereiden van voedsel als vis, brood en vlees.<br> Om in deze materialen te voorzien moet je een vissershut, een boerderij, een molen en een bakkerij bouwen.<br> Misschien heb je ook een jagerhuis, een varkensfokkerij, een wijngaarde en enkele putten nodig.<br> De keus is aan jou wat je wilt bouwen<br> Maar onthoud - kool- en ijzerertsmijnen hebben bier nodig, marmer- en goudmijnen wijn en alle mijnen hebben minstens porties nodig, die worden gemaakt uit brood OF vlees OF vis."
@@ -161,6 +164,7 @@ msgid " \"By the Gods! This is absolutely terrible. It seems as if we stand clos
 msgstr "\"Bij de Goden!<br>Dit is absoluut verschrikkelijk. Het lijkt erop dat we voor een beproeving staan - en het lijkt erop dat Saledus gelijk had met zijn zorgen over het scheepswrak dat hij vond.<br> Toen ik vandaag langs de oostelijke stranden liep, kreeg ik een schok. Er was één van die gehate, kwaadaardige barbarenstammen waarmee we vroeger zo veel problemen hebben gehad.<br> Ik was in het begin een beetje naief en hoopte dat ze vreedzaam waren, maar zodra één van hen mij zag stormden ze mijn kant op en begonnen me aan te vallen met hun werpsperen. Goden zij dank dat ik kon vluchten en mezelf kon verstoppen onder de mantel van de duisternis.<br>In ieder geval, we moeten zo snel mogelijk grotere militaire gebouwen bouwen.\"<br><br>-- NIEUW DOEL --<br>"
 
 #: ../../../campaigns/emp02.wmf/event:513
+#: ../../../campaigns/emp02.wmf/objective:57
 #, fuzzy
 msgid "* Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier. To watch deep inside the enemy territory, build a tower."
 msgstr "* Bouw sterke militaire gebouwen, zoals een buitenpost, een barrière of een toren, aan de oostelijke grens. Om diep in het vijandig gebied te kijken, bouw een toren"
@@ -174,11 +178,13 @@ msgid " \"That's good. The first large military building is complete and the min
 msgstr "\"Dat is mooi. Het eerste grote militaire gebouw is af en de mijneninfrastructuur wordt beter en beter. Nu moeten ons richten op het voorbereiden op de strijd.\"<br><br>-- NIEUWE DOELEN --<br>"
 
 #: ../../../campaigns/emp02.wmf/event:555
+#: ../../../campaigns/emp02.wmf/objective:65
 #, fuzzy
 msgid "* As soon as you have enough soldiers, attack and completely destroy the barbarian buildings.<br>"
 msgstr "* Zodra je voldoende soldaten hebt, val de barbarengebouwen aan en sloop ze volledig.<br>"
 
 #: ../../../campaigns/emp02.wmf/event:556
+#: ../../../campaigns/emp02.wmf/objective:66
 msgid "* Finally, build up a fortress on the peninsula<br> (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 msgstr "* Bouw tenslotten een fort op het schiereiland<br> (vlakbij waar het hoofdkwartier van de barbaren stond) om nieuwe vestigingen van andere stammen in die regio te voorkomen."
 
@@ -233,10 +239,6 @@ msgstr "Onze nieuwe kroeg"
 msgid "Build up a wood economy"
 msgstr "Bouw een houteconomie"
 
-#: ../../../campaigns/emp02.wmf/objective:9
-msgid "* Build up three lumberjack's houses, a forester's house and a sawmill."
-msgstr "* Bouw drie houthakkershutten, een boswachtershuis en een houtzagerij."
-
 #: ../../../campaigns/emp02.wmf/objective:15
 msgid "Build a quarry"
 msgstr "Bouw een steengroeve"
@@ -253,37 +255,35 @@ msgstr "Start het mijnen van marmer"
 msgid "Build a stonemason and mining infrastructure"
 msgstr "Bouw een steenhouwer en mijninfrastructuur"
 
-#: ../../../campaigns/emp02.wmf/objective:41
-msgid "* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
-msgstr "* Bouw een steenhouwer en dan een complete mijn- en productieinfrastructuir (koolmijn en/of houtskoolbrander, ijzermijn, werktuigsmid, wapensmid, harnassensmid, en hoogoven)."
-
 #: ../../../campaigns/emp02.wmf/objective:47
 msgid "Provide your miners with food"
 msgstr "Voorzie je mijnwerkers van voedsel"
-
-#: ../../../campaigns/emp02.wmf/objective:49
-msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food like fish, meat or bread. To provide these foodstuff you would have to build a fisher's house, a farm, a mill and a bakery. Maybe you will also need a hunter's house, a piggery, a vineyard and some wells. It's up to you, what you want to build.<br> But remember - Coal and Iron Ore Mines need beer, Marble and Gold Mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
-msgstr "* Om voedzaam eten voor onze mijnwerkers te maken, zouden we een kroeg kunnen bouwen. Om ze van goede en voedzame drank te voorzien zouden we een brouwerij en een wijnmakerij kunnen bouwen.<br> Uiteraard betekent dit dat we meer bronnen nodig hebben voor het bereiden van voedsel als vis, brood en vlees.<br> Om in deze materialen te voorzien moet je een vissershut, een boerderij, een molen en een bakkerij bouwen. Misschien heb je ook een jagerhuis, een varkensfokkerij, een wijngaarde en enkele putten nodig.<br> De keus is aan jou wat je wilt bouwen<br> Maar onthoud - kool- en ijzerertsmijnen hebben bier nodig, marmer- en goudmijnen wijn en alle mijnen hebben minstens porties nodig, die worden gemaakt uit brood OF vlees OF vis."
 
 #: ../../../campaigns/emp02.wmf/objective:55
 msgid "Protect your eastern frontier"
 msgstr "Bescherm je oostgrens"
 
-#: ../../../campaigns/emp02.wmf/objective:57
-msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a tower, on the eastern frontier."
-msgstr "* Bouw grotere militaire gebouwen, zoals een buitenpost, een barrière of een toren, aan de oostelijke grens."
-
 #: ../../../campaigns/emp02.wmf/objective:63
 msgid "Destroy the barbarian tribe"
 msgstr "Vernietig de barbarenstam"
 
-#: ../../../campaigns/emp02.wmf/objective:65
-msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>"
-msgstr "* Zodra je voldoende soldaten hebt, val de barbarengebouwen aan en sloop ze volledig.<br>"
+#~ msgid "* Build up three lumberjack's houses, a forester's house and a sawmill."
+#~ msgstr "* Bouw drie houthakkershutten, een boswachtershuis en een houtzagerij."
 
-#: ../../../campaigns/emp02.wmf/objective:66
-msgid "* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
-msgstr "* Bouw tenslotte een ford op de landtong (vlakbij waar het barbarenhoofdkwartier stond) om nieuwe vestigingen van andere stammen in die regop te voorkomen."
+#~ msgid "* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
+#~ msgstr "* Bouw een steenhouwer en dan een complete mijn- en productieinfrastructuir (koolmijn en/of houtskoolbrander, ijzermijn, werktuigsmid, wapensmid, harnassensmid, en hoogoven)."
+
+#~ msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food like fish, meat or bread. To provide these foodstuff you would have to build a fisher's house, a farm, a mill and a bakery. Maybe you will also need a hunter's house, a piggery, a vineyard and some wells. It's up to you, what you want to build.<br> But remember - Coal and Iron Ore Mines need beer, Marble and Gold Mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
+#~ msgstr "* Om voedzaam eten voor onze mijnwerkers te maken, zouden we een kroeg kunnen bouwen. Om ze van goede en voedzame drank te voorzien zouden we een brouwerij en een wijnmakerij kunnen bouwen.<br> Uiteraard betekent dit dat we meer bronnen nodig hebben voor het bereiden van voedsel als vis, brood en vlees.<br> Om in deze materialen te voorzien moet je een vissershut, een boerderij, een molen en een bakkerij bouwen. Misschien heb je ook een jagerhuis, een varkensfokkerij, een wijngaarde en enkele putten nodig.<br> De keus is aan jou wat je wilt bouwen<br> Maar onthoud - kool- en ijzerertsmijnen hebben bier nodig, marmer- en goudmijnen wijn en alle mijnen hebben minstens porties nodig, die worden gemaakt uit brood OF vlees OF vis."
+
+#~ msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a tower, on the eastern frontier."
+#~ msgstr "* Bouw grotere militaire gebouwen, zoals een buitenpost, een barrière of een toren, aan de oostelijke grens."
+
+#~ msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>"
+#~ msgstr "* Zodra je voldoende soldaten hebt, val de barbarengebouwen aan en sloop ze volledig.<br>"
+
+#~ msgid "* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
+#~ msgstr "* Bouw tenslotte een ford op de landtong (vlakbij waar het barbarenhoofdkwartier stond) om nieuwe vestigingen van andere stammen in die regop te voorkomen."
 
 #~ msgid "Second mission of the Empire campaign"
 #~ msgstr "Tweede missie van de Keizerrijk campagne"

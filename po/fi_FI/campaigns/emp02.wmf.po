@@ -1,13 +1,12 @@
 # Widelands po/fi_FI/campaigns/emp02.wmf.po
 # Copyright (C) 2008 Widelands Development Team
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007.
-# Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4208\n"
+"Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-04 12:52+0000\n"
+"POT-Creation-Date: 2009-06-26 17:07+0000\n"
 "PO-Revision-Date: 2009-06-15 12:04+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
@@ -50,6 +49,7 @@ msgid " \"As Saledus and I walked through these wonderful forests in the north, 
 msgstr "\"Kulkiessamme näissä ihmeellisissä pohjoisen metsissä Saledus ja minä tunsimme, että tulevaisuutemme on vasta alkanut. Tämä maa on niin rauhallista, hyvää ja kaunista, että voisin asua täällä päivieni loppuun.<br> Olkoon siihen tosin vielä monta vuotta! Juuri nyt meidän on keskityttävä nykyhetkeen, ja rakennettava muutama puunhakkaajan mökki ja saha rakennusmateriaalin keräämiseksi.<br> Meidän ei myöskään tule haaskata tätä luonnon aarreaittaa. Näiden metsien pitää kestää ikuisesti, joten meidän tulisi rakentaa myös puunistuttajan mökki.\"<br><br>-- UUSI TAVOITE --<br>"
 
 #: ../../../campaigns/emp02.wmf/event:139
+#: ../../../campaigns/emp02.wmf/objective:9
 msgid "* Build three lumberjack's houses, a forester's house and a sawmill."
 msgstr "* Rakenna kolme puunhakkaajan mökkiä, puunistuttajan mökki ja saha."
 
@@ -130,6 +130,7 @@ msgstr "\"Kautta jumalten, tämä on aivan uskomaton onnenpotku! Vuoria on kaksi
 
 # TODO: Repetition cf. later
 #: ../../../campaigns/emp02.wmf/event:332
+#: ../../../campaigns/emp02.wmf/objective:41
 msgid "* Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner, iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 msgstr "* Rakenna kivenhakkaajan mökki, ja täydellinen kaivos- ja tuotantotalous: hiilikaivos ja/tai hiilenpolttamo, rautakaivos, työkaluseppä, asepaja, haarniskaseppä ja sulattamo."
 
@@ -146,6 +147,7 @@ msgid " \"Hi Lutius, I hope you forgive my criticism, but it seems to me as if y
 msgstr "\"Hei, Lutius. Annathan anteeksi kärkevyyteni, mutta minusta tuntuu siltä että unohdat jotakin tärkeää.<br> On toki mukavaa ja hyvä idea rakennella kaivoksia, jotka mahdollistavat erinäisiä elämän mukavuuksia, mutta kaivostyöläiset nurisevat työoloistaan. Heidän täytyy raataa selkä vääränä , eivätkä he ehdi kokkaamaan.<br> Mitä sanot, eiköhän auteta heitä?<br> En voi sanoa, mitä tässä tarkalleen ottaen tarvitaan, mutta tällaisia suosituksia minulla on:\"<br><br>-- UUSI TAVOITE --<br>"
 
 #: ../../../campaigns/emp02.wmf/event:414
+#: ../../../campaigns/emp02.wmf/objective:49
 msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food - like fish, meat or bread.<br> To provide these foodstuffs, you would have to build a fisher's house, a farm, a mill and a bakery.<br> Maybe you will also need a hunter's house,<br> a piggery, a vineyard and some wells.<br> It's up to you what you want to build.<br> But remember - coal and iron ore mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
 msgstr "* Kaivostyöläisten kunnollista ruokkimista varten voisi rakentaa krouvin. Panimosta ja viinikellarista taas saisi palan painikkeeksi hyvää ja vahvistavaa juomaa.<br> Tietysti tarvitsemme myös lisätarpeita ruuan valmistamiseksi - kuten kalaa, lihaa tai leipää.<br> Näitä varten tarvitaan kalastajan mökki, maatila, mylly ja leipomo.<br> Kenties haluat rakentaa myös metsästäjän mökin, sikalan, viinitarhan ja pari kaivoa.<br> On oma asiasi, mitä haluat rakentaa, mutta paina tämä mieleesi: hiili- ja rautakaivokset tarvitsevat olutta, marmori- ja kultakaivokset viiniä, sekä kaikki kaivokset tarvitsevat ainakin perusruoka-annoksia, jotka tehdään leivästä TAI lihasta TAI kalasta."
 
@@ -158,6 +160,7 @@ msgid " \"By the Gods! This is absolutely terrible. It seems as if we stand clos
 msgstr "\"Kautta jumalten! Tämä on aivan kauheaa. Näyttää siltä, että suurin koettelemus lähestyy - ja mitä ilmeisimmin Saledus oli oikeassa hermoillessaan löytämistään haaksirikkoutuneen laivan jäänteistä.<br> Tänään, kävellessäni itäisillä rannoilla, törmäsin järkyttävään näkyyn: yksi noista inhottavista, kirotuista barbaariheimoista, joista on ollut loputtomiin harmia aiemmin, asuu saarella!<br> Olin yhä ensi alkuun naiivi ja toivoin heidän olevan rauhanomaisia, mutta heti kun he näkivät minut, he ryntäsivät minua kohti ja alkoivat paiskoa heittokeihäitään suuntaani. Oli jumalten varjelusta, että onnistuin pakenemaan ja piiloutumaan, ennen kuin palasin omieni luo pimeyden turvin.<br>  Joka tapauksessa seuraava askel on selvä. Meidän on rakennettava kestävämpiä sotilasrakennuksia niin nopeasti kuin suinkin voimme.\"<br><br>-- UUSI TAVOITE --<br>"
 
 #: ../../../campaigns/emp02.wmf/event:513
+#: ../../../campaigns/emp02.wmf/objective:57
 msgid "* Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier. To watch deep inside the enemy territory, build a tower."
 msgstr "* Rakenna itärajallesi kestävämpiä sotilasrakennuksia, kuten etuvartioasema rajalinnake tai torni. Rakenna torneja nähdäksesi syvälle vihollisen alueelle."
 
@@ -171,11 +174,13 @@ msgstr "\"Hyvä, ensimmäinen suuri sotilasrakennus on valmis ja kaivosinfrastru
 
 # TODO: repetition cf. later
 #: ../../../campaigns/emp02.wmf/event:555
+#: ../../../campaigns/emp02.wmf/objective:65
 msgid "* As soon as you have enough soldiers, attack and completely destroy the barbarian buildings.<br>"
 msgstr "* Heti kun sinulla on riittävästi sotilaita, hyökkää ja tuhoa joka ikinen barbaarien rakennus.<br>"
 
 # TODO: repetition cf. later
 #: ../../../campaigns/emp02.wmf/event:556
+#: ../../../campaigns/emp02.wmf/objective:66
 msgid "* Finally, build up a fortress on the peninsula<br> (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 msgstr "* Viimeiseksi: rakenna linnoitus niemen kärkeen lähelle barbaarien päämajan paikkaa, jotteivät muut heimot yrittäisi asettua asumaan alueelle."
 
@@ -228,10 +233,6 @@ msgstr "Uusi krouvimme"
 msgid "Build up a wood economy"
 msgstr "Rakenna puutalous"
 
-#: ../../../campaigns/emp02.wmf/objective:9
-msgid "* Build up three lumberjack's houses, a forester's house and a sawmill."
-msgstr "* Rakenna kolme puunhakkaajan mökkiä, puunistuttajan mökki ja saha."
-
 #: ../../../campaigns/emp02.wmf/objective:15
 msgid "Build a quarry"
 msgstr "Rakenna kivilouhos"
@@ -248,36 +249,34 @@ msgstr "Ala louhia marmoria"
 msgid "Build a stonemason and mining infrastructure"
 msgstr "Rakenna kievenhakkaaja ja kaivostalous"
 
-# TODO: Strangely placed <br>
-#: ../../../campaigns/emp02.wmf/objective:41
-msgid "* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
-msgstr "* Rakenna kivenhakkaajan mökki, ja täydellinen kaivos- ja tuotantotalous: hiilikaivos ja/tai hiilenpolttamo,<br> rautakaivos, työkaluseppä, asepaja, haarniskaseppä ja sulattamo."
-
 #: ../../../campaigns/emp02.wmf/objective:47
 msgid "Provide your miners with food"
 msgstr "Tuota ruokaa kaivostyöläisillesi"
-
-#: ../../../campaigns/emp02.wmf/objective:49
-msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food like fish, meat or bread. To provide these foodstuff you would have to build a fisher's house, a farm, a mill and a bakery. Maybe you will also need a hunter's house, a piggery, a vineyard and some wells. It's up to you, what you want to build.<br> But remember - Coal and Iron Ore Mines need beer, Marble and Gold Mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
-msgstr "* Kaivostyöläisten kunnollista ruokkimista varten voisi rakentaa krouvin. Panimosta ja viinikellarista taas saisi palan painikkeeksi hyvää ja vahvistavaa juomaa.<br> Tietysti tarvitsemme myös lisätarpeita ruuan valmistamiseksi - kuten kalaa, lihaa tai leipää.<br> Näitä varten tarvitaan kalastajan mökki, maatila, mylly ja leipomo.<br> Kenties haluat rakentaa myös metsästäjän mökin, sikalan, viinitarhan ja pari kaivoa.<br> On oma asiasi, mitä haluat rakentaa, mutta paina tämä mieleesi: hiili- ja rautakaivokset tarvitsevat olutta, marmori- ja kultakaivokset viiniä, sekä kaikki kaivokset tarvitsevat ainakin perusruoka-annoksia, jotka tehdään leivästä TAI lihasta TAI kalasta.<"
 
 #: ../../../campaigns/emp02.wmf/objective:55
 msgid "Protect your eastern frontier"
 msgstr "Suojele itärajaasi"
 
-# TODO: Strangely placed <br>
-#: ../../../campaigns/emp02.wmf/objective:57
-msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a tower, on the eastern frontier."
-msgstr "* Rakenna itärajallesi kestävämpiä sotilasrakennuksia, kuten etuvartioasema, rajalinnake tai torni."
-
 #: ../../../campaigns/emp02.wmf/objective:63
 msgid "Destroy the barbarian tribe"
 msgstr "Tuhoa barbaariheimo"
 
-#: ../../../campaigns/emp02.wmf/objective:65
-msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>"
-msgstr "* Heti kun sinulla on riittävästi sotilaita, hyökkää ja tuhoa joka ikinen barbaarien rakennus.<br>"
+#~ msgid "* Build up three lumberjack's houses, a forester's house and a sawmill."
+#~ msgstr "* Rakenna kolme puunhakkaajan mökkiä, puunistuttajan mökki ja saha."
 
-#: ../../../campaigns/emp02.wmf/objective:66
-msgid "* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
-msgstr "* Viimeiseksi: rakenna linnoitus niemen kärkeen lähelle barbaarien päämajan paikkaa, jotteivät muut heimot yrittäisi asettua asumaan alueelle."
+# TODO: Strangely placed <br>
+#~ msgid "* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
+#~ msgstr "* Rakenna kivenhakkaajan mökki, ja täydellinen kaivos- ja tuotantotalous: hiilikaivos ja/tai hiilenpolttamo,<br> rautakaivos, työkaluseppä, asepaja, haarniskaseppä ja sulattamo."
+
+#~ msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food like fish, meat or bread. To provide these foodstuff you would have to build a fisher's house, a farm, a mill and a bakery. Maybe you will also need a hunter's house, a piggery, a vineyard and some wells. It's up to you, what you want to build.<br> But remember - Coal and Iron Ore Mines need beer, Marble and Gold Mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
+#~ msgstr "* Kaivostyöläisten kunnollista ruokkimista varten voisi rakentaa krouvin. Panimosta ja viinikellarista taas saisi palan painikkeeksi hyvää ja vahvistavaa juomaa.<br> Tietysti tarvitsemme myös lisätarpeita ruuan valmistamiseksi - kuten kalaa, lihaa tai leipää.<br> Näitä varten tarvitaan kalastajan mökki, maatila, mylly ja leipomo.<br> Kenties haluat rakentaa myös metsästäjän mökin, sikalan, viinitarhan ja pari kaivoa.<br> On oma asiasi, mitä haluat rakentaa, mutta paina tämä mieleesi: hiili- ja rautakaivokset tarvitsevat olutta, marmori- ja kultakaivokset viiniä, sekä kaikki kaivokset tarvitsevat ainakin perusruoka-annoksia, jotka tehdään leivästä TAI lihasta TAI kalasta.<"
+
+# TODO: Strangely placed <br>
+#~ msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a tower, on the eastern frontier."
+#~ msgstr "* Rakenna itärajallesi kestävämpiä sotilasrakennuksia, kuten etuvartioasema, rajalinnake tai torni."
+
+#~ msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>"
+#~ msgstr "* Heti kun sinulla on riittävästi sotilaita, hyökkää ja tuhoa joka ikinen barbaarien rakennus.<br>"
+
+#~ msgid "* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
+#~ msgstr "* Viimeiseksi: rakenna linnoitus niemen kärkeen lähelle barbaarien päämajan paikkaa, jotteivät muut heimot yrittäisi asettua asumaan alueelle."

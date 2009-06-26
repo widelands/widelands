@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4208\n"
+"Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-04 13:00+0000\n"
+"POT-Creation-Date: 2009-06-26 17:07+0000\n"
 "PO-Revision-Date: YYYY-MM-DD hh:mm+ZZZZ\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -46,6 +46,7 @@ msgid " \"As Saledus and I walked through these wonderful forests in the north, 
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:139
+#: ../../../campaigns/emp02.wmf/objective:9
 msgid "* Build three lumberjack's houses, a forester's house and a sawmill."
 msgstr ""
 
@@ -125,6 +126,7 @@ msgid " \"By the Gods, this is an unbelievable strike of fortune! There are two 
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:332
+#: ../../../campaigns/emp02.wmf/objective:41
 msgid "* Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner, iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 msgstr ""
 
@@ -141,6 +143,7 @@ msgid " \"Hi Lutius, I hope you forgive my criticism, but it seems to me as if y
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:414
+#: ../../../campaigns/emp02.wmf/objective:49
 msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food - like fish, meat or bread.<br> To provide these foodstuffs, you would have to build a fisher's house, a farm, a mill and a bakery.<br> Maybe you will also need a hunter's house,<br> a piggery, a vineyard and some wells.<br> It's up to you what you want to build.<br> But remember - coal and iron ore mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
 msgstr ""
 
@@ -153,6 +156,7 @@ msgid " \"By the Gods! This is absolutely terrible. It seems as if we stand clos
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:513
+#: ../../../campaigns/emp02.wmf/objective:57
 msgid "* Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier. To watch deep inside the enemy territory, build a tower."
 msgstr ""
 
@@ -165,10 +169,12 @@ msgid " \"That's good. The first large military building is complete and the min
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:555
+#: ../../../campaigns/emp02.wmf/objective:65
 msgid "* As soon as you have enough soldiers, attack and completely destroy the barbarian buildings.<br>"
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:556
+#: ../../../campaigns/emp02.wmf/objective:66
 msgid "* Finally, build up a fortress on the peninsula<br> (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 msgstr ""
 
@@ -220,10 +226,6 @@ msgstr ""
 msgid "Build up a wood economy"
 msgstr ""
 
-#: ../../../campaigns/emp02.wmf/objective:9
-msgid "* Build up three lumberjack's houses, a forester's house and a sawmill."
-msgstr ""
-
 #: ../../../campaigns/emp02.wmf/objective:15
 msgid "Build a quarry"
 msgstr ""
@@ -240,34 +242,14 @@ msgstr ""
 msgid "Build a stonemason and mining infrastructure"
 msgstr ""
 
-#: ../../../campaigns/emp02.wmf/objective:41
-msgid "* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
-msgstr ""
-
 #: ../../../campaigns/emp02.wmf/objective:47
 msgid "Provide your miners with food"
-msgstr ""
-
-#: ../../../campaigns/emp02.wmf/objective:49
-msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food like fish, meat or bread. To provide these foodstuff you would have to build a fisher's house, a farm, a mill and a bakery. Maybe you will also need a hunter's house, a piggery, a vineyard and some wells. It's up to you, what you want to build.<br> But remember - Coal and Iron Ore Mines need beer, Marble and Gold Mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/objective:55
 msgid "Protect your eastern frontier"
 msgstr ""
 
-#: ../../../campaigns/emp02.wmf/objective:57
-msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a tower, on the eastern frontier."
-msgstr ""
-
 #: ../../../campaigns/emp02.wmf/objective:63
 msgid "Destroy the barbarian tribe"
-msgstr ""
-
-#: ../../../campaigns/emp02.wmf/objective:65
-msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>"
-msgstr ""
-
-#: ../../../campaigns/emp02.wmf/objective:66
-msgid "* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 msgstr ""

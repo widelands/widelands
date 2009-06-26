@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4208\n"
+"Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-04 13:01+0000\n"
+"POT-Creation-Date: 2009-06-26 17:07+0000\n"
 "PO-Revision-Date: 2007-08-30 08:52+0200\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -54,6 +54,7 @@ msgid " \"As Saledus and I walked through these wonderful forests in the north, 
 msgstr "Ahogy Salendus és én sétáltunk északra e csodálatos erdőben, úgy éreztük az új életünk elkezdődött. Ez a föld olyan békés, barátságos és gyönyörű, életem végéig itt tudnék élni.<br>De addig a napig, még remélhetőleg sok év van hátra. Most a jelennel kell foglalkoznunk és építenünk kell néhány fatelepet és egy malmot, hogy megfelelő építőanyagot termeljünk.<br>Azonban meg kell óvnunk ezt a csodálatos paradicsomot. Meg kell őriznünk ezeket az erdőket, ezért építenünk kellene egy erdészkunyhót is.<br><br>"
 
 #: ../../../campaigns/emp02.wmf/event:139
+#: ../../../campaigns/emp02.wmf/objective:9
 #, fuzzy
 msgid "* Build three lumberjack's houses, a forester's house and a sawmill."
 msgstr "* Építs három favágókunyhót, egy erdészkunyhót és egy malmot."
@@ -143,6 +144,7 @@ msgid " \"By the Gods, this is an unbelievable strike of fortune! There are two 
 msgstr "Az Istenek újabb nagyszerű és hihetetlen ajándéka: van még két másik hegy is, és úgy tűnik sok szenet és vasércet rejtenek. Mostmár úgy élhetünk mint Fremil-ben. El kell kezdenünk bányákat, faszénégetőket, vasolvasztót, szerszámkészítő és fegyverkovács-műhelyet építeni. Azonban ezekhez a nagyobb épületekhez jobb építőanyag szükséges. Építsünk egy kőfaragó műhelyt, ami felvágja a márványt a megfelelő méretre."
 
 #: ../../../campaigns/emp02.wmf/event:332
+#: ../../../campaigns/emp02.wmf/objective:41
 #, fuzzy
 msgid "* Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner, iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 msgstr "* Építs fel egy teljes bányászati és termelő infrastruktúrát (szénbánya, kőbánya, szerszámkovács-, fegyverkovács-, páncélkovács-műhelyt, vasolvasztót, és faszéngyártót) és egy kőfaragóműhelyt."
@@ -161,6 +163,7 @@ msgid " \"Hi Lutius, I hope you forgive my criticism, but it seems to me as if y
 msgstr "Szia Lutius,<br> Remélem megbocsájtod a kritikámat, de úgy tűnik, hogy elfelejtettél valamit. Szép és jó ötlet bányákat építeni, ami majd luxus életet biztosít nekünk, de a bányában dolgozó emberek nem boldogok, keményen dolgoznak és nincs idejük elkészíteni a saját ennivalójukat.<br> Mit gondolsz nem kellene segítenünk nekik? Építsünk egy kocsmát, ami élelmet készít a bányászainknak, de szükségünk van egy sörfőzdére és szőlőskertre is ami  megfelelő italt biztosítja.<br> Természetesen ez azt jelenti, hogy több erőforrásra és élelemre van szükségünk. Azt javaslom, hogy építsünk halászkunyhót, farmot, malmot és péket. Vadászkunyhó, disznóól és egy kút is hasznos lehet.<br> Nem érts félre, de a bányászoknak jó étel is ital kell, hogy elég erejük legyen a kemény munkához."
 
 #: ../../../campaigns/emp02.wmf/event:414
+#: ../../../campaigns/emp02.wmf/objective:49
 msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food - like fish, meat or bread.<br> To provide these foodstuffs, you would have to build a fisher's house, a farm, a mill and a bakery.<br> Maybe you will also need a hunter's house,<br> a piggery, a vineyard and some wells.<br> It's up to you what you want to build.<br> But remember - coal and iron ore mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
 msgstr ""
 
@@ -174,6 +177,7 @@ msgid " \"By the Gods! This is absolutely terrible. It seems as if we stand clos
 msgstr "Az Istenekre!<br> Ez szörnyű. Úgy tűnik, hogy közel vagyunk egy törzshöz, Saledusnak igaza volt a hajóroncsot illetőleg.<br> Ma elsétáltam a keleti partokhoz és hirtelen megfagyott az ereimben a vér. Megláttam azt az ördögi barbár törzset amivel oly sok problémánk volt korábban.<br> Először kicsit naiv voltam és azt hittem, hogy békések, de amint megláttak szaladni kezdtek felém és megtámadtak a dárdáikkal. Csak az Isteneknek köszönhetem, hogy megmenekültem és vissza tudtam jönni a kolóniához.<br> Amilyen hamar csak lehet építenünk KELL nagyobb katonai épületeket."
 
 #: ../../../campaigns/emp02.wmf/event:513
+#: ../../../campaigns/emp02.wmf/objective:57
 #, fuzzy
 msgid "* Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier. To watch deep inside the enemy territory, build a tower."
 msgstr "* Építs nagyobb katonai épületeket, megfelelő lesz előőrsnek egy erődítmény vagy egy torony a keleti határon."
@@ -187,10 +191,12 @@ msgid " \"That's good. The first large military building is complete and the min
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:555
+#: ../../../campaigns/emp02.wmf/objective:65
 msgid "* As soon as you have enough soldiers, attack and completely destroy the barbarian buildings.<br>"
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:556
+#: ../../../campaigns/emp02.wmf/objective:66
 #, fuzzy
 msgid "* Finally, build up a fortress on the peninsula<br> (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 msgstr "* Amint elég katonánk lesz távolítsd el a barbár épületeket végleg.<br> * Végül építs egy várat a barbár főhadiszállás helyén, hogy megelőzd más barbár népek betelepülését arra a területre."
@@ -246,11 +252,6 @@ msgstr ""
 msgid "Build up a wood economy"
 msgstr ""
 
-#: ../../../campaigns/emp02.wmf/objective:9
-#, fuzzy
-msgid "* Build up three lumberjack's houses, a forester's house and a sawmill."
-msgstr "* Építs három favágókunyhót, egy erdészkunyhót és egy malmot."
-
 #: ../../../campaigns/emp02.wmf/objective:15
 msgid "Build a quarry"
 msgstr ""
@@ -268,40 +269,33 @@ msgstr ""
 msgid "Build a stonemason and mining infrastructure"
 msgstr ""
 
-#: ../../../campaigns/emp02.wmf/objective:41
-#, fuzzy
-msgid "* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
-msgstr "* Építs fel egy teljes bányászati és termelő infrastruktúrát (szénbánya, kőbánya, szerszámkovács-, fegyverkovács-, páncélkovács-műhelyt, vasolvasztót, és faszéngyártót) és egy kőfaragóműhelyt."
-
 #: ../../../campaigns/emp02.wmf/objective:47
 msgid "Provide your miners with food"
-msgstr ""
-
-#: ../../../campaigns/emp02.wmf/objective:49
-msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food like fish, meat or bread. To provide these foodstuff you would have to build a fisher's house, a farm, a mill and a bakery. Maybe you will also need a hunter's house, a piggery, a vineyard and some wells. It's up to you, what you want to build.<br> But remember - Coal and Iron Ore Mines need beer, Marble and Gold Mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/objective:55
 msgid "Protect your eastern frontier"
 msgstr ""
 
-#: ../../../campaigns/emp02.wmf/objective:57
-#, fuzzy
-msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a tower, on the eastern frontier."
-msgstr "* Építs nagyobb katonai épületeket, megfelelő lesz előőrsnek egy erődítmény vagy egy torony a keleti határon."
-
 #: ../../../campaigns/emp02.wmf/objective:63
 msgid "Destroy the barbarian tribe"
 msgstr ""
 
-#: ../../../campaigns/emp02.wmf/objective:65
-msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>"
-msgstr ""
-
-#: ../../../campaigns/emp02.wmf/objective:66
 #, fuzzy
-msgid "* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
-msgstr "* Amint elég katonánk lesz távolítsd el a barbár épületeket végleg.<br> * Végül építs egy várat a barbár főhadiszállás helyén, hogy megelőzd más barbár népek betelepülését arra a területre."
+#~ msgid "* Build up three lumberjack's houses, a forester's house and a sawmill."
+#~ msgstr "* Építs három favágókunyhót, egy erdészkunyhót és egy malmot."
+
+#, fuzzy
+#~ msgid "* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
+#~ msgstr "* Építs fel egy teljes bányászati és termelő infrastruktúrát (szénbánya, kőbánya, szerszámkovács-, fegyverkovács-, páncélkovács-műhelyt, vasolvasztót, és faszéngyártót) és egy kőfaragóműhelyt."
+
+#, fuzzy
+#~ msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a tower, on the eastern frontier."
+#~ msgstr "* Építs nagyobb katonai épületeket, megfelelő lesz előőrsnek egy erődítmény vagy egy torony a keleti határon."
+
+#, fuzzy
+#~ msgid "* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
+#~ msgstr "* Amint elég katonánk lesz távolítsd el a barbár épületeket végleg.<br> * Végül építs egy várat a barbár főhadiszállás helyén, hogy megelőzd más barbár népek betelepülését arra a területre."
 
 #~ msgid "Second mission of the Empire campaign"
 #~ msgstr "A Birodalom hadjárat második küldetése"

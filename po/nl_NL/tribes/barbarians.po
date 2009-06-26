@@ -4,15 +4,105 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4208\n"
+"Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-04 13:01+0000\n"
+"POT-Creation-Date: 2009-06-26 17:07+0000\n"
 "PO-Revision-Date: 2009-02-16 22:48+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tribes/barbarians/axe/conf:1
+msgid "The Axe is the basic weapon and tool for the barbarians. All young soldiers are equipped with this basic weapon, but also the lumberjack is using the same model."
+msgstr "De bijl is het standaardwapen en -gereedschap voor de barbaren. Alle jonge soldaten worden met dit wapen uitgerust, maar ook de houthakker gebruikt dit model."
+
+#: ../../../tribes/barbarians/axefactory/conf:26
+#: ../../../tribes/barbarians/warmill/conf:30
+#: ../../../tribes/barbarians/metalworks/conf:30
+#, fuzzy
+msgid "Produce axe"
+msgstr "Brede bijl"
+
+#: ../../../tribes/barbarians/axefactory/conf:27
+#: ../../../tribes/barbarians/warmill/conf:31
+msgid "Produce sharpaxe"
+msgstr ""
+
+#: ../../../tribes/barbarians/axefactory/conf:28
+#: ../../../tribes/barbarians/warmill/conf:32
+msgid "Produce broadaxe"
+msgstr ""
+
+#: ../../../tribes/barbarians/bakingtray/conf:1
+msgid "The peel is the tool of the baker, each baker needs its own. It is produced in the metal works like all tools."
+msgstr "De schieter is het gereedschap van de bakker. Elke bakker moet er zelf één hebben. Hij wordt als alle gereedschap in de metaalbewerkerij gemaakt. "
+
+#: ../../../tribes/barbarians/battlearena/conf:26
+msgid "Upgrade soldier evade 0"
+msgstr ""
+
+#: ../../../tribes/barbarians/battlearena/conf:27
+msgid "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/barbarians/battlearena/conf:28
+msgid "Upgrade soldier evade 1"
+msgstr ""
+
+#: ../../../tribes/barbarians/battlearena/conf:29
+msgid "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/barbarians/battleaxe/conf:1
+msgid "This is the second most dangerous weapon, the barbarians are able to produce. Only trained warriors are able to yield such a weapon. It is produce in the axe factory."
+msgstr "Dit is het één na meest gevaarlijke wapen dat de barbaren kunnen maken. Alleen getrainde strijders kunnen zo'n wapen gebruiken. Hij wordt gemaakt in de bijlenfabriek."
+
+#: ../../../tribes/barbarians/beer/conf:1
+msgid "Young warriors need some encouragement. This drink makes a man fearless and strong."
+msgstr "Jonge strijders hebben enige aanmoediging nodig. Deze drank maakt een man onbevreesd en sterk."
+
+#: ../../../tribes/barbarians/big_inn/conf:26
+msgid "Produce meal"
+msgstr ""
+
+#: ../../../tribes/barbarians/blackwood/conf:1
+msgid "Fire-hardened wood, hard as iron and can not burn, used for military buildings."
+msgstr "Met vuur versterkt hout, hard als staal en onbrandbaar, gebruikt voor militaire gebouwen."
+
+#: ../../../tribes/barbarians/brewer/conf:1
+#: ../../../tribes/barbarians/master-brewer/conf:1
+msgid "Produces the finest ales to keep warriors strong and happy in training."
+msgstr ""
+
+#: ../../../tribes/barbarians/broadaxe/conf:1
+msgid "Warriors with a fundamental fighting knowledge gain a broad axe. It is produced in the axe factory."
+msgstr "Strijders met een fundamentele kennis over de krijgskunst krijgen een brede bijl. Deze wordt gemaakt in de bijlenfabriek."
+
+#: ../../../tribes/barbarians/bronzeaxe/conf:1
+msgid "The bronze axe is considered a hard to handle weapon: it makes a lot of damage, but it's durability is not the best. Only skilled warriors can use this. Produced in the axe factory."
+msgstr "De bronzen bijl wordt beschouwd als een moeilijk te hanteren wapen: het brengt veel schade toe, maar zijn duurzaamheid is niet zo best. Alleen ervaren strijders kunnen hem gebruiken. Gemaakt in de bijlenfabriek."
+
+#: ../../../tribes/barbarians/builder/conf:1
+msgid "Works at construction sites to create a new building."
+msgstr ""
+
+#: ../../../tribes/barbarians/burner/conf:1
+msgid "Burns coal."
+msgstr ""
+
+#: ../../../tribes/barbarians/carrier/conf:1
+msgid "Carries items along your roads."
+msgstr ""
+
+#: ../../../tribes/barbarians/cloth/conf:1
+msgid "Cloth is needed for barbarian ships. It is produced out of flax."
+msgstr "Doek is nodig voor barbarenschepen. Gemaakt uit vlas."
+
+#: ../../../tribes/barbarians/coal/conf:1
+msgid "The fires of the barbarians are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
+msgstr "De vuren van de barbaren worden doorgaans gevoerd met hout, maar soms brandt hout niet heet genoeg. Dan wordt steenkool gebruikt."
 
 #: ../../../tribes/barbarians/conf:18
 msgid "The Widelands Development Team"
@@ -590,134 +680,416 @@ msgstr "Gemiddeld hoofdkwartier"
 msgid "Citadel village"
 msgstr "Citadeldorp"
 
-#~ msgid "The Axe is the basic weapon and tool for the barbarians. All young soldiers are equipped with this basic weapon, but also the lumberjack is using the same model."
-#~ msgstr "De bijl is het standaardwapen en -gereedschap voor de barbaren. Alle jonge soldaten worden met dit wapen uitgerust, maar ook de houthakker gebruikt dit model."
+#: ../../../tribes/barbarians/farm/conf:14
+msgid "Plant wheat"
+msgstr ""
 
-#~ msgid "The peel is the tool of the baker, each baker needs its own. It is produced in the metal works like all tools."
-#~ msgstr "De schieter is het gereedschap van de bakker. Elke bakker moet er zelf één hebben. Hij wordt als alle gereedschap in de metaalbewerkerij gemaakt. "
+#: ../../../tribes/barbarians/farm/conf:16
+msgid "Harvest wheat"
+msgstr ""
 
-#~ msgid "This is the second most dangerous weapon, the barbarians are able to produce. Only trained warriors are able to yield such a weapon. It is produce in the axe factory."
-#~ msgstr "Dit is het één na meest gevaarlijke wapen dat de barbaren kunnen maken. Alleen getrainde strijders kunnen zo'n wapen gebruiken. Hij wordt gemaakt in de bijlenfabriek."
+#: ../../../tribes/barbarians/farmer/conf:2
+msgid "Plants fields."
+msgstr ""
 
-#~ msgid "Young warriors need some encouragement. This drink makes a man fearless and strong."
-#~ msgstr "Jonge strijders hebben enige aanmoediging nodig. Deze drank maakt een man onbevreesd en sterk."
+#: ../../../tribes/barbarians/ferner/conf:1
+msgid "Grows flax and thatch reed."
+msgstr ""
 
-#~ msgid "Fire-hardened wood, hard as iron and can not burn, used for military buildings."
-#~ msgstr "Met vuur versterkt hout, hard als staal en onbrandbaar, gebruikt voor militaire gebouwen."
+#: ../../../tribes/barbarians/fernery/conf:13
+msgid "Plant flax"
+msgstr ""
 
-#~ msgid "Warriors with a fundamental fighting knowledge gain a broad axe. It is produced in the axe factory."
-#~ msgstr "Strijders met een fundamentele kennis over de krijgskunst krijgen een brede bijl. Deze wordt gemaakt in de bijlenfabriek."
+#: ../../../tribes/barbarians/fernery/conf:15
+msgid "Plant reed"
+msgstr ""
 
-#~ msgid "The bronze axe is considered a hard to handle weapon: it makes a lot of damage, but it's durability is not the best. Only skilled warriors can use this. Produced in the axe factory."
-#~ msgstr "De bronzen bijl wordt beschouwd als een moeilijk te hanteren wapen: het brengt veel schade toe, maar zijn duurzaamheid is niet zo best. Alleen ervaren strijders kunnen hem gebruiken. Gemaakt in de bijlenfabriek."
+#: ../../../tribes/barbarians/fernery/conf:17
+msgid "Harvest flax"
+msgstr ""
 
-#~ msgid "Cloth is needed for barbarian ships. It is produced out of flax."
-#~ msgstr "Doek is nodig voor barbarenschepen. Gemaakt uit vlas."
+#: ../../../tribes/barbarians/fernery/conf:19
+msgid "Harvest reed"
+msgstr ""
 
-#~ msgid "The fires of the barbarians are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
-#~ msgstr "De vuren van de barbaren worden doorgaans gevoerd met hout, maar soms brandt hout niet heet genoeg. Dan wordt steenkool gebruikt."
+#: ../../../tribes/barbarians/fire_tongs/conf:1
+msgid "The fire tongs are the tool of the smelter, working in the smelting works. Produced in the metal works."
+msgstr "De brandtang is het gereedschap van de smelter in de hoogoven. Gemaakt in de metaalbewerkerij."
 
-#~ msgid "The fire tongs are the tool of the smelter, working in the smelting works. Produced in the metal works."
-#~ msgstr "De brandtang is het gereedschap van de smelter in de hoogoven. Gemaakt in de metaalbewerkerij."
+#: ../../../tribes/barbarians/fish/conf:1
+msgid "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
+msgstr "Naast pitabrood en vlees, is vis ook een bron van voedsel voor de barbaren."
 
-#~ msgid "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
-#~ msgstr "Naast pitabrood en vlees, is vis ook een bron van voedsel voor de barbaren."
+#: ../../../tribes/barbarians/fisher/conf:1
+msgid "Gets fish out of the sea."
+msgstr ""
 
-#~ msgid "Fishing rods are needed by barbarian fishers, to catch fish."
-#~ msgstr "Vishengels zijn nodig voor vissers om vis te vangen."
+#: ../../../tribes/barbarians/fishing_rod/conf:1
+msgid "Fishing rods are needed by barbarian fishers, to catch fish."
+msgstr "Vishengels zijn nodig voor vissers om vis te vangen."
 
-#~ msgid "Flax is a beautiful flower, which are used to make cloth."
-#~ msgstr "Vlas is een prachtige bloem, die wordt gebruikt om doek te maken."
+#: ../../../tribes/barbarians/flax/conf:1
+msgid "Flax is a beautiful flower, which are used to make cloth."
+msgstr "Vlas is een prachtige bloem, die wordt gebruikt om doek te maken."
 
-#~ msgid "Gold is the most valuable of all metals; only very important things are garnished with it."
-#~ msgstr "Goud is het meest waardevolle metaal; alleen heel belangrijke zaken worden ermee opgeluisterd."
+#: ../../../tribes/barbarians/gamekeeper/conf:1
+msgid "The Gamekeeper makes sure that the natural population of animals never drops too low."
+msgstr ""
 
-#~ msgid "This is the yellow goldstone."
-#~ msgstr "Dit is de gele goudsteen"
+#: ../../../tribes/barbarians/geologist/conf:1
+msgid "Discovers resources for mining."
+msgstr ""
 
-#~ msgid "Raw stone can be enhanced to grout which delivers solid, non burning build material."
-#~ msgstr "Ruwe steen kan worden bewerkt tot specie dat voorziet in een stevig, niet brandbaar bouwmateriaal."
+#: ../../../tribes/barbarians/gold/conf:1
+msgid "Gold is the most valuable of all metals; only very important things are garnished with it."
+msgstr "Goud is het meest waardevolle metaal; alleen heel belangrijke zaken worden ermee opgeluisterd."
 
-#~ msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the blacksmiths and the helmsmiths. Make sure you always got some in reserve! Build at the metal works."
-#~ msgstr "De hamer is essentieel gereedschap. Hij wordt gebruikt door de geoloog, de arbeider, de smid en de helmsmid. Zorg dat je er altijd op voorraad hebt! Gemaakt in de metaalbewerkerij."
+#: ../../../tribes/barbarians/goldstone/conf:1
+msgid "This is the yellow goldstone."
+msgstr "Dit is de gele goudsteen"
 
-#~ msgid "Basic defence of a warrior"
-#~ msgstr "Standaardverdeding voor een strijder"
+#: ../../../tribes/barbarians/grout/conf:1
+msgid "Raw stone can be enhanced to grout which delivers solid, non burning build material."
+msgstr "Ruwe steen kan worden bewerkt tot specie dat voorziet in een stevig, niet brandbaar bouwmateriaal."
 
-#~ msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters. Produced in the metal works."
-#~ msgstr "Deze speer is licht genoeg om te werpen, maar zwaar genoeg om elk dier in één klap te doden. Wordt alleen gebruikt door de jagers. Gemaakt in de metaalbewerkerij."
+#: ../../../tribes/barbarians/hammer/conf:1
+msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the blacksmiths and the helmsmiths. Make sure you always got some in reserve! Build at the metal works."
+msgstr "De hamer is essentieel gereedschap. Hij wordt gebruikt door de geoloog, de arbeider, de smid en de helmsmid. Zorg dat je er altijd op voorraad hebt! Gemaakt in de metaalbewerkerij."
 
-#~ msgid "Weapons and tools are made of iron."
-#~ msgstr "Wapens en gereedschap worden gemaakt van ijzer."
+#: ../../../tribes/barbarians/helm/conf:1
+#, fuzzy
+msgid "Basic defence of a warrior."
+msgstr "Standaardverdeding voor een strijder"
 
-#~ msgid "This is the red iron ore."
-#~ msgstr "Dit is rode ijzererts."
+#: ../../../tribes/barbarians/helmsmithy/conf:22
+msgid "Produce helm"
+msgstr ""
 
-#~ msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
-#~ msgstr "Hoe kun je een maaltijd, hapje of portie bereiden zonder keukengerei?"
+#: ../../../tribes/barbarians/helmsmithy/conf:23
+msgid "Produce mask"
+msgstr ""
 
-#~ msgid "An enhanced version of the helmet."
-#~ msgstr "Een verbeterde versie van de helm."
+#: ../../../tribes/barbarians/helmsmithy/conf:24
+msgid "Produce warhelmet"
+msgstr ""
 
-#~ msgid "A real meal which satisfies all miners needs"
-#~ msgstr "Een echte maaltijd die de behoefte van elke mijnwerker vervult."
+#: ../../../tribes/barbarians/hunter/conf:1
+msgid "The Hunter brings good meat to the colonists."
+msgstr ""
 
-#~ msgid "Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong."
-#~ msgstr "Vlees bevat veel energie. Het wordt gebruikt in de herbergen en kroegen om lunch voor de mijnwerkers te maken en in trainingskampen om strijders sterk te houden."
+#: ../../../tribes/barbarians/hunting_spear/conf:1
+msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters. Produced in the metal works."
+msgstr "Deze speer is licht genoeg om te werpen, maar zwaar genoeg om elk dier in één klap te doden. Wordt alleen gebruikt door de jagers. Gemaakt in de metaalbewerkerij."
 
-#~ msgid "This pick is used by the stonemasons and the miners. It is produced in the metal works."
-#~ msgstr "Deze punthouweel wordt gebruikt door de steenhouwers en de mijnwerkers. Gemaakt in de metaalbewerkerij."
+#: ../../../tribes/barbarians/inn/conf:23
+#: ../../../tribes/barbarians/big_inn/conf:24
+#: ../../../tribes/barbarians/tavern/conf:20
+msgid "Produce ration"
+msgstr ""
 
-#~ msgid "The barbarian backers are best in making this flat and tasty pitta bread."
-#~ msgstr "De bakkers van de barbaren blinken uit in het maken van dit platte en smaakvolle pitabrood."
+#: ../../../tribes/barbarians/inn/conf:24
+#: ../../../tribes/barbarians/big_inn/conf:25
+msgid "Produce snack"
+msgstr ""
 
-#~ msgid "A small bite to keep miners strong and working."
-#~ msgstr "Een kleine snack om mijnwerkers sterk en in gang te houden."
+#: ../../../tribes/barbarians/innkeeper/conf:1
+msgid "Produces food for miners."
+msgstr ""
 
-#~ msgid "Raw Stones are the secondary build material of the barbarians."
-#~ msgstr "Ruwe steen is het tweede bouwmateriaal van de barbaren."
+#: ../../../tribes/barbarians/iron/conf:1
+msgid "Weapons and tools are made of iron."
+msgstr "Wapens en gereedschap worden gemaakt van ijzer."
 
-#~ msgid "The scythe is the tool of the farmers. It is produced in the metal works."
-#~ msgstr "De zeis is het gereedschap van de boeren. Gemaakt in de metaalbewerkerij."
+#: ../../../tribes/barbarians/ironore/conf:1
+msgid "This is the red iron ore."
+msgstr "Dit is rode ijzererts."
 
-#~ msgid "Real warriors consider the sharp axe the first real weapon, after being able to handle an ordinary axe, this weapon is tackled. It is heavier and sharper than the ordinary axe. Build in the axe factory."
-#~ msgstr "Echte strijders beschouwen de scherpe bijl als het eerste echte wapen. Nadat ze met een gewone bijl om kunnen gaan, gaan ze met deze aan de slag. Deze is zwaarder en scherper dan de gewone bijl. Gebouwd in de bijlenfabriek."
+#: ../../../tribes/barbarians/kitchen_tools/conf:1
+msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
+msgstr "Hoe kun je een maaltijd, hapje of portie bereiden zonder keukengerei?"
 
-#~ msgid "The shovel is needed for proper handling of plants. Therefore the ferner and the ranger use it. Build at the metal works."
-#~ msgstr "De schop is nodig voor het goed omgaan met planten. Daarom gebruiker de varenkweker en de boswachter hem. Gemaakt in de metaalbewerker."
+#: ../../../tribes/barbarians/lime-burner/conf:1
+msgid "Burns lime in the lime kilm."
+msgstr ""
 
-#~ msgid "A bit bigger, for the advanced miners. They will need a big morsel."
-#~ msgstr "Iets groter, omdat betere mijnwerkers meer voedsel nodig hebben."
+#: ../../../tribes/barbarians/lumberjack/conf:1
+msgid "Fells trees."
+msgstr ""
 
-#~ msgid "Only this beer is acceptable for the old warriors. Some say, the whole power of the barbarians is in this ale."
-#~ msgstr "De oude strijders accepteren alleen dit bier. Er wordt wel gezegd dat alle macht van de barbaren in deze eel verborgen zit."
+#: ../../../tribes/barbarians/mask/conf:1
+msgid "An enhanced version of the helmet."
+msgstr "Een verbeterde versie van de helm."
 
-#~ msgid "Thatch reed is used to make the roofs of buildings waterproof."
-#~ msgstr "Dakstro wordt gebruikt om daken waterdicht te maken."
+#: ../../../tribes/barbarians/master-miner/conf:1
+#: ../../../tribes/barbarians/chief-miner/conf:1
+#: ../../../tribes/barbarians/miner/conf:1
+msgid "Works deep in the mines to produce coal, iron or gold."
+msgstr ""
 
-#~ msgid "Trunks are the primary build material of the barbarians."
-#~ msgstr "Boomstammen zijn het basisbouwmateriaal van de barbaren."
+#: ../../../tribes/barbarians/meal/conf:1
+#, fuzzy
+msgid "A real meal which satisfies all miners needs."
+msgstr "Een echte maaltijd die de behoefte van elke mijnwerker vervult."
 
-#~ msgid "An enhanced mask for barbarian warriors."
-#~ msgstr "Een verbeterd masker voor barbarenstrijders."
+#: ../../../tribes/barbarians/meat/conf:1
+msgid "Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong."
+msgstr "Vlees bevat veel energie. Het wordt gebruikt in de herbergen en kroegen om lunch voor de mijnwerkers te maken en in trainingskampen om strijders sterk te houden."
 
-#~ msgid "The warriors axe is the most dangerous of all weapons. Only a few warriors ever were able to handle those huge and powerful axes. Build at the axe factory."
-#~ msgstr "De oorlogsbijl is het gevaarlijkste wapen van allemaal. Slecht enkele strijders zijn ooit in staat geweest om met deze grote en machtige bijlen om te gaan. Gebouwd in de bijlenfabriek."
+#: ../../../tribes/barbarians/metalworks/conf:31
+#, fuzzy
+msgid "Produce bakingtray"
+msgstr "Baklade"
 
-#~ msgid "Water is the most essential essence for life! This water is used in many places, be it to make bread or beer or to produce grout."
-#~ msgstr "Water is de meest essentiële stof voor het leven! Dit water wordt voor van alles gebruikt, zoals om brood of bier te maken of specie te maken."
+#: ../../../tribes/barbarians/metalworks/conf:32
+msgid "Produce fire tongs"
+msgstr ""
 
-#~ msgid "Wheat is essential for surviving. Delicious pitta bread and strong ales can be made of this wheat."
-#~ msgstr "Tarwe is essentieel voor overleven, goed brood en lekkere bieren kunnen met deze tarwe gemaakt worden."
+#: ../../../tribes/barbarians/metalworks/conf:33
+#, fuzzy
+msgid "Produce fishing rod"
+msgstr "Vishengel"
+
+#: ../../../tribes/barbarians/metalworks/conf:34
+msgid "Produce hammer"
+msgstr ""
+
+#: ../../../tribes/barbarians/metalworks/conf:35
+#, fuzzy
+msgid "Produce kitchen tools"
+msgstr "Keukengerei"
+
+#: ../../../tribes/barbarians/metalworks/conf:36
+msgid "Produce pick"
+msgstr ""
+
+#: ../../../tribes/barbarians/metalworks/conf:37
+msgid "Produce scythe"
+msgstr ""
+
+#: ../../../tribes/barbarians/metalworks/conf:38
+msgid "Produce shovel"
+msgstr ""
+
+#: ../../../tribes/barbarians/metalworks/conf:39
+#, fuzzy
+msgid "Produce hunting spear"
+msgstr "Jagersspeer"
+
+#: ../../../tribes/barbarians/pick/conf:1
+msgid "This pick is used by the stonemasons and the miners. It is produced in the metal works."
+msgstr "Deze punthouweel wordt gebruikt door de steenhouwers en de mijnwerkers. Gemaakt in de metaalbewerkerij."
+
+#: ../../../tribes/barbarians/pittabread/conf:1
+#, fuzzy
+msgid "The barbarian bakers are best in making this flat and tasty pitta bread."
+msgstr "De bakkers van de barbaren blinken uit in het maken van dit platte en smaakvolle pitabrood."
+
+#: ../../../tribes/barbarians/ranger/conf:1
+msgid "Plants trees."
+msgstr ""
+
+#: ../../../tribes/barbarians/ration/conf:1
+msgid "A small bite to keep miners strong and working."
+msgstr "Een kleine snack om mijnwerkers sterk en in gang te houden."
+
+#: ../../../tribes/barbarians/raw_stone/conf:1
+msgid "Raw Stones are the secondary build material of the barbarians."
+msgstr "Ruwe steen is het tweede bouwmateriaal van de barbaren."
+
+#: ../../../tribes/barbarians/scythe/conf:1
+msgid "The scythe is the tool of the farmers. It is produced in the metal works."
+msgstr "De zeis is het gereedschap van de boeren. Gemaakt in de metaalbewerkerij."
+
+#: ../../../tribes/barbarians/sharpaxe/conf:1
+msgid "Real warriors consider the sharp axe the first real weapon, after being able to handle an ordinary axe, this weapon is tackled. It is heavier and sharper than the ordinary axe. Build in the axe factory."
+msgstr "Echte strijders beschouwen de scherpe bijl als het eerste echte wapen. Nadat ze met een gewone bijl om kunnen gaan, gaan ze met deze aan de slag. Deze is zwaarder en scherper dan de gewone bijl. Gebouwd in de bijlenfabriek."
+
+#: ../../../tribes/barbarians/shovel/conf:1
+msgid "The shovel is needed for proper handling of plants. Therefore the ferner and the ranger use it. Build at the metal works."
+msgstr "De schop is nodig voor het goed omgaan met planten. Daarom gebruiker de varenkweker en de boswachter hem. Gemaakt in de metaalbewerker."
+
+#: ../../../tribes/barbarians/smelter/conf:1
+#, fuzzy
+msgid "Smelts iron."
+msgstr "Smelter"
+
+#: ../../../tribes/barbarians/smelting_works/conf:21
+#, fuzzy
+msgid "Smelt iron"
+msgstr "Smelter"
+
+#: ../../../tribes/barbarians/smelting_works/conf:22
+#, fuzzy
+msgid "Smelt gold"
+msgstr "Burcht"
+
+#: ../../../tribes/barbarians/smelting_works/conf:23
+#: ../../../tribes/barbarians/lime_kiln/conf:18
+#: ../../../tribes/barbarians/burners_house/conf:16
+#: ../../../tribes/barbarians/granitemine/conf:18
+#: ../../../tribes/barbarians/farm/conf:18
+#: ../../../tribes/barbarians/hardener/conf:15
+#: ../../../tribes/barbarians/bakery/conf:18
+#: ../../../tribes/barbarians/deep_goldmine/conf:23
+#: ../../../tribes/barbarians/gamekeepers_hut/conf:14
+#: ../../../tribes/barbarians/helmsmithy/conf:25
+#: ../../../tribes/barbarians/deep_oremine/conf:23
+#: ../../../tribes/barbarians/quarry/conf:14
+#: ../../../tribes/barbarians/fishers_hut/conf:14
+#: ../../../tribes/barbarians/deeper_goldmine/conf:22
+#: ../../../tribes/barbarians/micro-brewery/conf:19
+#: ../../../tribes/barbarians/axefactory/conf:29
+#: ../../../tribes/barbarians/weaving-mill/conf:16
+#: ../../../tribes/barbarians/coalmine/conf:20
+#: ../../../tribes/barbarians/deeper_coalmine/conf:22
+#: ../../../tribes/barbarians/deep_coalmine/conf:23
+#: ../../../tribes/barbarians/fernery/conf:21
+#: ../../../tribes/barbarians/lumberjacks_hut/conf:14
+#: ../../../tribes/barbarians/inn/conf:25
+#: ../../../tribes/barbarians/well/conf:11
+#: ../../../tribes/barbarians/warmill/conf:36
+#: ../../../tribes/barbarians/deeper_oremine/conf:22
+#: ../../../tribes/barbarians/brewery/conf:20
+#: ../../../tribes/barbarians/rangers_hut/conf:13
+#: ../../../tribes/barbarians/hunters_hut/conf:12
+#: ../../../tribes/barbarians/oremine/conf:20
+#: ../../../tribes/barbarians/metalworks/conf:40
+#: ../../../tribes/barbarians/big_inn/conf:27
+#: ../../../tribes/barbarians/goldmine/conf:20
+#: ../../../tribes/barbarians/tavern/conf:21
+msgid "Work"
+msgstr ""
+
+#: ../../../tribes/barbarians/snack/conf:1
+msgid "A bit bigger, for the advanced miners. They will need a big morsel."
+msgstr "Iets groter, omdat betere mijnwerkers meer voedsel nodig hebben."
+
+#: ../../../tribes/barbarians/soldier/conf:1
+msgid "Defend and Conquer!"
+msgstr ""
+
+#: ../../../tribes/barbarians/stonemason/conf:2
+msgid "Cuts raw pieces of granit out of laying stones."
+msgstr ""
+
+#: ../../../tribes/barbarians/strongbeer/conf:1
+msgid "Only this beer is acceptable for the old warriors. Some say, the whole power of the barbarians is in this ale."
+msgstr "De oude strijders accepteren alleen dit bier. Er wordt wel gezegd dat alle macht van de barbaren in deze eel verborgen zit."
+
+#: ../../../tribes/barbarians/thatchreed/conf:1
+msgid "Thatch reed is used to make the roofs of buildings waterproof."
+msgstr "Dakstro wordt gebruikt om daken waterdicht te maken."
+
+#: ../../../tribes/barbarians/trainingscamp/conf:36
+#: ../../../tribes/barbarians/battlearena/conf:25
+msgid "Sleep"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:37
+msgid "Upgrade soldier attack 0"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:38
+msgid "Upgrade soldier attack 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:39
+msgid "Upgrade soldier attack 1"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:40
+msgid "Upgrade soldier attack 1 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:41
+msgid "Upgrade soldier attack 2"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:42
+msgid "Upgrade soldier attack 2 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:43
+msgid "Upgrade soldier attack 3"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:44
+msgid "Upgrade soldier attack 3 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:45
+msgid "Upgrade soldier attack 4"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:46
+msgid "Upgrade soldier attack 4 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:47
+msgid "Upgrade soldier hitpoints 0"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:48
+msgid "Upgrade soldier hitpoints 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:49
+msgid "Upgrade soldier hitpoints 1"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:50
+msgid "Upgrade soldier hitpoints 1 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:51
+msgid "Upgrade soldier hitpoints 2"
+msgstr ""
+
+#: ../../../tribes/barbarians/trainingscamp/conf:52
+msgid "Upgrade soldier hitpoints 2 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/barbarians/trunk/conf:1
+msgid "Trunks are the primary build material of the barbarians."
+msgstr "Boomstammen zijn het basisbouwmateriaal van de barbaren."
+
+#: ../../../tribes/barbarians/warhelmet/conf:1
+msgid "An enhanced mask for barbarian warriors."
+msgstr "Een verbeterd masker voor barbarenstrijders."
+
+#: ../../../tribes/barbarians/warmill/conf:33
+msgid "Produce bronzeaxe"
+msgstr ""
+
+#: ../../../tribes/barbarians/warmill/conf:34
+msgid "Produce battleaxe"
+msgstr ""
+
+#: ../../../tribes/barbarians/warmill/conf:35
+msgid "Produce warriorsaxe"
+msgstr ""
+
+#: ../../../tribes/barbarians/warriorsaxe/conf:1
+msgid "The warriors axe is the most dangerous of all weapons. Only a few warriors ever were able to handle those huge and powerful axes. Build at the axe factory."
+msgstr "De oorlogsbijl is het gevaarlijkste wapen van allemaal. Slecht enkele strijders zijn ooit in staat geweest om met deze grote en machtige bijlen om te gaan. Gebouwd in de bijlenfabriek."
+
+#: ../../../tribes/barbarians/water/conf:1
+msgid "Water is the most essential essence for life! This water is used in many places, be it to make bread or beer or to produce grout."
+msgstr "Water is de meest essentiële stof voor het leven! Dit water wordt voor van alles gebruikt, zoals om brood of bier te maken of specie te maken."
+
+#: ../../../tribes/barbarians/weaver/conf:1
+msgid "Produces cloth for ships and soldiers."
+msgstr ""
+
+#: ../../../tribes/barbarians/wheat/conf:1
+msgid "Wheat is essential for surviving. Delicious pitta bread and strong ales can be made of this wheat."
+msgstr "Tarwe is essentieel voor overleven, goed brood en lekkere bieren kunnen met deze tarwe gemaakt worden."
 
 #~ msgid "Forester"
 #~ msgstr "Boswachter"
 
 #~ msgid "Stonegrinder"
 #~ msgstr "Steenmaler"
-
-#~ msgid "Bakingtray"
-#~ msgstr "Baklade"
 
 #~ msgid "Grindstone"
 #~ msgstr "Gemalen steen"

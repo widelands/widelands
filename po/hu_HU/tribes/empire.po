@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4208\n"
+"Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-04 13:01+0000\n"
+"POT-Creation-Date: 2009-06-26 17:07+0000\n"
 "PO-Revision-Date: 2007-09-01 12:04+0200\n"
 "Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -14,6 +14,107 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
+
+#: ../../../tribes/empire/advanced_lance/conf:1
+msgid "This is an advanced lance, with steel top."
+msgstr "Ez egy fejlett acélhegyű lándzsa."
+
+#: ../../../tribes/empire/armour/conf:1
+msgid "Basic armour for Empire soldiers."
+msgstr "Alap vért"
+
+#: ../../../tribes/empire/armoursmithy/conf:23
+msgid "Produce helm"
+msgstr ""
+
+#: ../../../tribes/empire/armoursmithy/conf:24
+msgid "Produce armour"
+msgstr ""
+
+#: ../../../tribes/empire/armoursmithy/conf:25
+msgid "Produce chain armour"
+msgstr ""
+
+#: ../../../tribes/empire/armoursmithy/conf:26
+#, fuzzy
+msgid "Produce plate armour"
+msgstr "Lemezpáncél"
+
+#: ../../../tribes/empire/axe/conf:1
+#, fuzzy
+msgid "The axe is the tool for the lumberjack. It is produced by the toolsmith."
+msgstr "A fejsze a favágók szerszáma. A szerszámkészítő készíti el."
+
+#: ../../../tribes/empire/bakingtray/conf:1
+#, fuzzy
+msgid "The peel is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
+msgstr "Minden péknek szüksége van egy saját kenyérsütőlapátra, ezt a szerszámkovács készíti."
+
+#: ../../../tribes/empire/basket/conf:1
+#, fuzzy
+msgid "This basket is needed by the winegrower, for harvesting the grapes. It is produced by the toolsmith."
+msgstr "A bortermelőnek szüksége van erre a kosárra, hogy összegyűjtse a szőlőt. A többi szerszámhoz hasonlóan ezt is a szerszámkovács készíti el."
+
+#: ../../../tribes/empire/beer/conf:1
+msgid "Young soldiers and miners need some encouragement. This drink makes a man fearless and strong."
+msgstr "A fiatal katonáknak és bányászoknak szüksége van egy kis bátorításra. Ez az ital bátorrá és erőssé teszi az embereket."
+
+#: ../../../tribes/empire/bread/conf:1
+msgid "The backers of the Empire make really tasty bread."
+msgstr "A birodalmi pékek nagyos ízletes kenyeret készítenek."
+
+#: ../../../tribes/empire/brewer/conf:1
+msgid "Produces beer or wine."
+msgstr ""
+
+#: ../../../tribes/empire/builder/conf:1
+msgid "Works at construction sites to create a new building."
+msgstr ""
+
+#: ../../../tribes/empire/burner/conf:1
+msgid "Burns coal."
+msgstr ""
+
+#: ../../../tribes/empire/carrier/conf:1
+msgid "Carries items along your roads."
+msgstr ""
+
+#: ../../../tribes/empire/chain_armour/conf:1
+#, fuzzy
+msgid "This is a medium armour for Empire soldiers."
+msgstr "Ez egy közepes erősségű vért a birodalom katonáinak."
+
+#: ../../../tribes/empire/cloth/conf:1
+msgid "Cloth is needed for Empire ships and few bigger buildings. It is produced out of wool."
+msgstr "A szövet szükséges a birodalom hajónak és néhány nagyon épülethez is kell. Gyapjúból készül."
+
+#: ../../../tribes/empire/coal/conf:1
+msgid "The fires of the Empire are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
+msgstr "A birodalom tüzeit általában fával táplálják. Ez néha nem ad elég hőt, ekkor használják a szenet."
+
+#: ../../../tribes/empire/colosseum/conf:27
+#: ../../../tribes/empire/trainingscamp/conf:38
+#: ../../../tribes/empire/arena/conf:13
+msgid "Sleep"
+msgstr ""
+
+#: ../../../tribes/empire/colosseum/conf:28
+#: ../../../tribes/empire/arena/conf:14
+msgid "Upgrade soldier evade 0"
+msgstr ""
+
+#: ../../../tribes/empire/colosseum/conf:29
+#: ../../../tribes/empire/arena/conf:15
+msgid "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/colosseum/conf:30
+msgid "Upgrade soldier evade 1"
+msgstr ""
+
+#: ../../../tribes/empire/colosseum/conf:31
+msgid "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
+msgstr ""
 
 #: ../../../tribes/empire/conf:18
 msgid "The Widelands Development Team"
@@ -97,21 +198,22 @@ msgid "Resource indicator water"
 msgstr ""
 
 #: ../../../tribes/empire/conf:53
-msgid "Wine medium"
-msgstr ""
+#, fuzzy
+msgid "Vine medium"
+msgstr "Szőlőtermelő"
 
 #: ../../../tribes/empire/conf:54
-msgid "Wine small"
+msgid "Vine small"
 msgstr ""
 
 #: ../../../tribes/empire/conf:55
 #, fuzzy
-msgid "Wine tiny"
+msgid "Vine tiny"
 msgstr "Bor"
 
 #: ../../../tribes/empire/conf:56
 #, fuzzy
-msgid "Wine ripe"
+msgid "Vine ripe"
 msgstr "Bor"
 
 #: ../../../tribes/empire/conf:59
@@ -606,168 +708,440 @@ msgstr "Főhadiszállás"
 msgid "Castle village"
 msgstr "Kastély"
 
-#~ msgid "This is an advanced lance, with steel top."
-#~ msgstr "Ez egy fejlett acélhegyű lándzsa."
+#: ../../../tribes/empire/farm/conf:15
+msgid "Plant wheat"
+msgstr ""
 
-#~ msgid "Basic armour for Empire soldiers."
-#~ msgstr "Alap vért"
+#: ../../../tribes/empire/farm/conf:17
+msgid "Harvest wheat"
+msgstr ""
 
+#: ../../../tribes/empire/farmer/conf:2
+msgid "Plants fields."
+msgstr ""
+
+#: ../../../tribes/empire/fire_tongs/conf:1
 #, fuzzy
-#~ msgid "The axe is the tool for the lumberjack. It is produced by the toolsmith."
-#~ msgstr "A fejsze a favágók szerszáma. A szerszámkészítő készíti el."
+msgid "The fire tongs are the tool of the smelter, working in the smelting works. They are produced by the toolsmith."
+msgstr "A fogó a vasolvasztó mester eszköze. A többi szerszámhoz hasonlóan ezt is a szerszámkovács készíti."
 
+#: ../../../tribes/empire/fish/conf:1
 #, fuzzy
-#~ msgid "The peel is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
-#~ msgstr "Minden péknek szüksége van egy saját kenyérsütőlapátra, ezt a szerszámkovács készíti."
+msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
+msgstr "Hasonlóan a kenyérhez és a húshoz a hal is fontos éleleme a Birodalom népének."
 
+#: ../../../tribes/empire/fisher/conf:1
+msgid "Gets fish out of the sea."
+msgstr ""
+
+#: ../../../tribes/empire/fishing_rod/conf:1
 #, fuzzy
-#~ msgid "This basket is needed by the winegrower, for harvesting the grapes. It is produced by the toolsmith."
-#~ msgstr "A bortermelőnek szüksége van erre a kosárra, hogy összegyűjtse a szőlőt. A többi szerszámhoz hasonlóan ezt is a szerszámkovács készíti el."
+msgid "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
+msgstr "A halásznak szüksége van horgászbotra, hogy halat tudjon fogni. A szerszámkészítő műhelyében készül."
 
-#~ msgid "Young soldiers and miners need some encouragement. This drink makes a man fearless and strong."
-#~ msgstr "A fiatal katonáknak és bányászoknak szüksége van egy kis bátorításra. Ez az ital bátorrá és erőssé teszi az embereket."
+#: ../../../tribes/empire/flour/conf:1
+msgid "Flour is produced out of wheat and is needed for the tasty Empire bread."
+msgstr "A liszt búzából készül, és szükséges az ízletes birodalmi kenyérhez."
 
-#~ msgid "The backers of the Empire make really tasty bread."
-#~ msgstr "A birodalmi pékek nagyos ízletes kenyeret készítenek."
+#: ../../../tribes/empire/forester/conf:1
+msgid "Plants trees."
+msgstr ""
 
+#: ../../../tribes/empire/geologist/conf:1
+msgid "Discovers resources for mining."
+msgstr ""
+
+#: ../../../tribes/empire/gold/conf:1
+msgid "Gold is the most valuable of all metals; only very important things are garnished with it."
+msgstr "Az arany a legértékesebb fém, csak a nagyon fontos dolgokat díszítik vele."
+
+#: ../../../tribes/empire/goldstone/conf:1
+msgid "This is the yellow goldstone."
+msgstr "Ez a sárga aranyérc."
+
+#: ../../../tribes/empire/grape/conf:1
 #, fuzzy
-#~ msgid "This is a medium armour for Empire soldiers."
-#~ msgstr "Ez egy közepes erősségű vért a birodalom katonáinak."
+msgid "These grapes are the basic for tasty wine."
+msgstr "Ebből készül a kiváló minőségű bor."
 
-#~ msgid "Cloth is needed for Empire ships and few bigger buildings. It is produced out of wool."
-#~ msgstr "A szövet szükséges a birodalom hajónak és néhány nagyon épülethez is kell. Gyapjúból készül."
-
-#~ msgid "The fires of the Empire are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
-#~ msgstr "A birodalom tüzeit általában fával táplálják. Ez néha nem ad elég hőt, ekkor használják a szenet."
-
+#: ../../../tribes/empire/hammer/conf:1
 #, fuzzy
-#~ msgid "The fire tongs are the tool of the smelter, working in the smelting works. They are produced by the toolsmith."
-#~ msgstr "A fogó a vasolvasztó mester eszköze. A többi szerszámhoz hasonlóan ezt is a szerszámkovács készíti."
+msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the armour- and weaponsmith. Make sure you always got some in reserve! It is produced by the toolsmith."
+msgstr "A kalapács nagyon fontos eszköz. A geológusok, munkások és a szerszámkovács is használja. Figyelj oda, hogy mindig legyen belőle pár tartalékban. A szerszámkovács műhelyében készül."
 
+#: ../../../tribes/empire/heavy_lance/conf:1
+msgid "This is a good warrior lance, with a steel-top and a little blade."
+msgstr "Ez egy jó harci lándzsa acél heggyel és egy kis pengével."
+
+#: ../../../tribes/empire/helm/conf:1
+msgid "Basic defence of a warrior"
+msgstr "A harcosok alap védelme."
+
+#: ../../../tribes/empire/hunter/conf:1
+msgid "The Hunter brings good meat to the colonists."
+msgstr ""
+
+#: ../../../tribes/empire/hunters_house/conf:12
+#: ../../../tribes/empire/stonemasons_house/conf:18
+#: ../../../tribes/empire/smelting_works/conf:21
+#: ../../../tribes/empire/burners_house/conf:16
+#: ../../../tribes/empire/winery/conf:17 ../../../tribes/empire/farm/conf:19
+#: ../../../tribes/empire/sawmill/conf:17
+#: ../../../tribes/empire/bakery/conf:17
+#: ../../../tribes/empire/deep_goldmine/conf:22
+#: ../../../tribes/empire/armoursmithy/conf:27
+#: ../../../tribes/empire/deep_oremine/conf:22
+#: ../../../tribes/empire/quarry/conf:20
+#: ../../../tribes/empire/toolsmithy/conf:42
+#: ../../../tribes/empire/marblemine/conf:24
+#: ../../../tribes/empire/weaving-mill/conf:16
+#: ../../../tribes/empire/coalmine/conf:21
+#: ../../../tribes/empire/deep_coalmine/conf:22
+#: ../../../tribes/empire/inn/conf:20
+#: ../../../tribes/empire/lumberjacks_house/conf:15
+#: ../../../tribes/empire/piggery/conf:18 ../../../tribes/empire/well/conf:13
+#: ../../../tribes/empire/vineyard/conf:18
+#: ../../../tribes/empire/deep_marblemine/conf:23
+#: ../../../tribes/empire/mill/conf:17 ../../../tribes/empire/brewery/conf:17
+#: ../../../tribes/empire/foresters_house/conf:15
+#: ../../../tribes/empire/sheepfarm/conf:18
+#: ../../../tribes/empire/weaponsmithy/conf:31
+#: ../../../tribes/empire/oremine/conf:21
+#: ../../../tribes/empire/goldmine/conf:21
+#: ../../../tribes/empire/fishers_house/conf:16
+#: ../../../tribes/empire/tavern/conf:19
+msgid "Work"
+msgstr ""
+
+#: ../../../tribes/empire/hunting_spear/conf:1
+msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters."
+msgstr "Ez a lándzsa elég könnyű, hogy eldobják, de elég nehéz, hogy el lehessen vele ejteni egy állatot. Csak a vadászok használják."
+
+#: ../../../tribes/empire/innkeeper/conf:1
+msgid "Produces food for miners."
+msgstr ""
+
+#: ../../../tribes/empire/iron/conf:1
 #, fuzzy
-#~ msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
-#~ msgstr "Hasonlóan a kenyérhez és a húshoz a hal is fontos éleleme a Birodalom népének."
+msgid "Weapons and tools are made of iron."
+msgstr "A fegyverek és a szerszámok legfontosabb alapanyaga."
 
+#: ../../../tribes/empire/ironore/conf:1
 #, fuzzy
-#~ msgid "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
-#~ msgstr "A halásznak szüksége van horgászbotra, hogy halat tudjon fogni. A szerszámkészítő műhelyében készül."
+msgid "This is the red iron ore."
+msgstr "Ez a vörös vasérc."
 
-#~ msgid "Flour is produced out of wheat and is needed for the tasty Empire bread."
-#~ msgstr "A liszt búzából készül, és szükséges az ízletes birodalmi kenyérhez."
-
-#~ msgid "Gold is the most valuable of all metals; only very important things are garnished with it."
-#~ msgstr "Az arany a legértékesebb fém, csak a nagyon fontos dolgokat díszítik vele."
-
-#~ msgid "This is the yellow goldstone."
-#~ msgstr "Ez a sárga aranyérc."
-
+#: ../../../tribes/empire/kitchen_tools/conf:1
 #, fuzzy
-#~ msgid "These grapes are the basic for tasty wine."
-#~ msgstr "Ebből készül a kiváló minőségű bor."
+msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
+msgstr "Hogyan készítesz ételt, ha nincsenek konyha eszközeid?"
 
+#: ../../../tribes/empire/lance/conf:1
+msgid "This wooden lance has an iron spike."
+msgstr "Ennek a fából készült lándzsának acél hegye van."
+
+#: ../../../tribes/empire/lumberjack/conf:1
+msgid "Fells trees."
+msgstr ""
+
+#: ../../../tribes/empire/marble/conf:1
+msgid "Marble is the beautiful stone, which is cutted out of the mountains and which is used for beautiful buildings and columns."
+msgstr "A márvány nagyon szép kő, amit a hegyekben bányásznak. Gyönyörű épületekhez és oszlopok készítésére használják."
+
+#: ../../../tribes/empire/marblecolumn/conf:1
 #, fuzzy
-#~ msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the armour- and weaponsmith. Make sure you always got some in reserve! It is produced by the toolsmith."
-#~ msgstr "A kalapács nagyon fontos eszköz. A geológusok, munkások és a szerszámkovács is használja. Figyelj oda, hogy mindig legyen belőle pár tartalékban. A szerszámkovács műhelyében készül."
+msgid "Marble columns present the high culture of the Empire, so they are needed for nearly every bigger building."
+msgstr "A márványoszlop mutatja a birodalom magas kultúráját, ezért szükség van rá majdnem minden nagy épületnél."
 
-#~ msgid "This is a good warrior lance, with a steel-top and a little blade."
-#~ msgstr "Ez egy jó harci lándzsa acél heggyel és egy kis pengével."
+#: ../../../tribes/empire/master-miner/conf:1
+#: ../../../tribes/empire/miner/conf:1
+msgid "Works deep in the mines to produce coal, iron or gold."
+msgstr ""
 
-#~ msgid "Basic defence of a warrior"
-#~ msgstr "A harcosok alap védelme."
+#: ../../../tribes/empire/meal/conf:1
+msgid "A real meal which satisfies all miners needs."
+msgstr "Egy ebéd ami kielégíti minden bányász igényeit."
 
-#~ msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters."
-#~ msgstr "Ez a lándzsa elég könnyű, hogy eldobják, de elég nehéz, hogy el lehessen vele ejteni egy állatot. Csak a vadászok használják."
-
+#: ../../../tribes/empire/meat/conf:1
 #, fuzzy
-#~ msgid "Weapons and tools are made of iron."
-#~ msgstr "A fegyverek és a szerszámok legfontosabb alapanyaga."
+msgid "Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong."
+msgstr "A húsban sok energia van. A vendéglőkben és kocsmákban használják, hogy laktató élelmet készítsenek a bányászoknak és a katonáknak."
 
+#: ../../../tribes/empire/pick/conf:1
 #, fuzzy
-#~ msgid "This is the red iron ore."
-#~ msgstr "Ez a vörös vasérc."
+msgid "This pick is used by the stonemasons and the miners. It is produced by the toolsmith."
+msgstr "Csákányt a kőfaragók és a bányászok használják. A szerszámkovács műhelyében készül."
 
+#: ../../../tribes/empire/pig-breeder/conf:1
+msgid "Breeds pigs."
+msgstr ""
+
+#: ../../../tribes/empire/plate_armour/conf:1
 #, fuzzy
-#~ msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
-#~ msgstr "Hogyan készítesz ételt, ha nincsenek konyha eszközeid?"
+msgid "The strongest armour existing for the Empire soldiers."
+msgstr "A birodalom katonáinak legerősebb létező vértezete."
 
-#~ msgid "This wooden lance has an iron spike."
-#~ msgstr "Ennek a fából készült lándzsának acél hegye van."
-
-#~ msgid "Marble is the beautiful stone, which is cutted out of the mountains and which is used for beautiful buildings and columns."
-#~ msgstr "A márvány nagyon szép kő, amit a hegyekben bányásznak. Gyönyörű épületekhez és oszlopok készítésére használják."
-
+#: ../../../tribes/empire/quarry/conf:16
+#: ../../../tribes/empire/marblemine/conf:23
 #, fuzzy
-#~ msgid "Marble columns present the high culture of the Empire, so they are needed for nearly every bigger building."
-#~ msgstr "A márványoszlop mutatja a birodalom magas kultúráját, ezért szükség van rá majdnem minden nagy épületnél."
+msgid "Mine stone"
+msgstr "Bor"
 
-#~ msgid "A real meal which satisfies all miners needs."
-#~ msgstr "Egy ebéd ami kielégíti minden bányász igényeit."
+#: ../../../tribes/empire/quarry/conf:17
+msgid "Mine stone (only for compatibility with old savegames (build13))"
+msgstr ""
 
+#: ../../../tribes/empire/quarry/conf:18
+#: ../../../tribes/empire/marblemine/conf:22
 #, fuzzy
-#~ msgid "Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong."
-#~ msgstr "A húsban sok energia van. A vendéglőkben és kocsmákban használják, hogy laktató élelmet készítsenek a bányászoknak és a katonáknak."
+msgid "Mine marble"
+msgstr "Márvány"
 
+#: ../../../tribes/empire/quarry/conf:19
+msgid "Mine marble (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/ration/conf:1
+msgid "A small bite to keep miners strong and working."
+msgstr "Ez a kis falat kenyér segít a bányászoknak a munkában."
+
+#: ../../../tribes/empire/saw/conf:1
 #, fuzzy
-#~ msgid "This pick is used by the stonemasons and the miners. It is produced by the toolsmith."
-#~ msgstr "Csákányt a kőfaragók és a bányászok használják. A szerszámkovács műhelyében készül."
+msgid "This saw is needed by the sawyer to create all the useful tools. It is produced by the toolsmith."
+msgstr "A szerszámkészítőnek szüksége van a fűrészre, hogy el tudja készíteni azt a sok hasznos szerszámot, köztük a fűrészt is."
 
+#: ../../../tribes/empire/scythe/conf:1
 #, fuzzy
-#~ msgid "The strongest armour existing for the Empire soldiers."
-#~ msgstr "A birodalom katonáinak legerősebb létező vértezete."
+msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
+msgstr "A kasza a farmerek legfontosabb eszköze. A szerszámkészítő műhelyében készül."
 
-#~ msgid "A small bite to keep miners strong and working."
-#~ msgstr "Ez a kis falat kenyér segít a bányászoknak a munkában."
+#: ../../../tribes/empire/shepherd/conf:1
+msgid "Keeping sheeps."
+msgstr ""
 
+#: ../../../tribes/empire/shovel/conf:1
 #, fuzzy
-#~ msgid "This saw is needed by the sawyer to create all the useful tools. It is produced by the toolsmith."
-#~ msgstr "A szerszámkészítőnek szüksége van a fűrészre, hogy el tudja készíteni azt a sok hasznos szerszámot, köztük a fűrészt is."
+msgid "The shovel is needed for proper handling of plants. Therefore the forester uses it. It is produced by the toolsmith."
+msgstr "A lapát fontos a növények ültetéséhez, ezért minden erdésznek szüksége van egyre. A szerszámkovács műhelyében készül."
 
+#: ../../../tribes/empire/smelter/conf:1
 #, fuzzy
-#~ msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-#~ msgstr "A kasza a farmerek legfontosabb eszköze. A szerszámkészítő műhelyében készül."
+msgid "Smelts iron."
+msgstr "Olvasztómester"
 
+#: ../../../tribes/empire/smelting_works/conf:19
 #, fuzzy
-#~ msgid "The shovel is needed for proper handling of plants. Therefore the forester uses it. It is produced by the toolsmith."
-#~ msgstr "A lapát fontos a növények ültetéséhez, ezért minden erdésznek szüksége van egyre. A szerszámkovács műhelyében készül."
+msgid "Smelt iron"
+msgstr "Olvasztómester"
 
+#: ../../../tribes/empire/smelting_works/conf:20
+msgid "Smelt gold"
+msgstr ""
+
+#: ../../../tribes/empire/soldier/conf:1
+msgid "Defend and Conquer!"
+msgstr ""
+
+#: ../../../tribes/empire/stonemason/conf:1
+msgid "Cuts raw pieces of granit and marble out of laying stones."
+msgstr ""
+
+#: ../../../tribes/empire/toolsmithy/conf:30
 #, fuzzy
-#~ msgid "Stones and wood are the basic build material of the Empire."
-#~ msgstr "A kő és a fa a birodalom alapvető építőanyaga."
+msgid "Produce bakingtray"
+msgstr "Kenyérsütőlapát"
 
+#: ../../../tribes/empire/toolsmithy/conf:31
+msgid "Produce fire tongs"
+msgstr ""
+
+#: ../../../tribes/empire/toolsmithy/conf:32
 #, fuzzy
-#~ msgid "Trunks are one important build material of the Empire."
-#~ msgstr "A farönk a birodalom fontos építőanyaga."
+msgid "Produce fishing rod"
+msgstr "Horgászbot"
 
+#: ../../../tribes/empire/toolsmithy/conf:33
+msgid "Produce hammer"
+msgstr ""
+
+#: ../../../tribes/empire/toolsmithy/conf:34
 #, fuzzy
-#~ msgid "This is the best and sharpest weapon, the Empire weaponsmith creates for their warriors."
-#~ msgstr "Ez a legjobb és legélesebb fegyver, amit a római fegyverkovács készíteni tud."
+msgid "Produce kitchen tools"
+msgstr "Konyha eszközök"
 
-#~ msgid "Water is the most essential essence for life! This water is used in many places, be it to make bread or beer."
-#~ msgstr "A víz alapvető fontosságú az élethez. Nagyon sok helyen használják, a kenyér és a sör elkészítéséhez is szükséges."
+#: ../../../tribes/empire/toolsmithy/conf:35
+msgid "Produce pick"
+msgstr ""
 
+#: ../../../tribes/empire/toolsmithy/conf:36
+msgid "Produce scythe"
+msgstr ""
+
+#: ../../../tribes/empire/toolsmithy/conf:37
+msgid "Produce shovel"
+msgstr ""
+
+#: ../../../tribes/empire/toolsmithy/conf:38
 #, fuzzy
-#~ msgid "Wheat is essential for surviving. Delicious bread and ales can be made of this wheat."
-#~ msgstr "A búza létfontosságú, ebből készül a kiváló kenyér és a jó erős sör is."
+msgid "Produce hunting spear"
+msgstr "Vadász lándzsa"
 
-#~ msgid "This wine gives enough power, to mine marble or gold. And furthermore, our soldiers like it, too."
-#~ msgstr "A bor elég erőt ad, hogy márványt és aranyat bányásszanak, és a katonák is kedvelik."
+#: ../../../tribes/empire/toolsmithy/conf:39
+msgid "Produce basket"
+msgstr ""
 
+#: ../../../tribes/empire/toolsmithy/conf:40
+msgid "Produce saw"
+msgstr ""
+
+#: ../../../tribes/empire/toolsmithy/conf:41
+msgid "Produce axe"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:39
+msgid "Upgrade soldier attack 0"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:40
+msgid "Upgrade soldier attack 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:41
+msgid "Upgrade soldier attack 1"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:42
+msgid "Upgrade soldier attack 1 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:43
+msgid "Upgrade soldier attack 2"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:44
+msgid "Upgrade soldier attack 2 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:45
+msgid "Upgrade soldier attack 3"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:46
+msgid "Upgrade soldier attack 3 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:47
+msgid "Upgrade soldier hitpoints 0"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:48
+msgid "Upgrade soldier hitpoints 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:49
+msgid "Upgrade soldier hitpoints 1"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:50
+msgid "Upgrade soldier hitpoints 1 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:51
+msgid "Upgrade soldier hitpoints 2"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:52
+msgid "Upgrade soldier hitpoints 2 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:53
+msgid "Upgrade soldier hitpoints 3"
+msgstr ""
+
+#: ../../../tribes/empire/trainingscamp/conf:54
+msgid "Upgrade soldier hitpoints 3 (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../../tribes/empire/trunk/conf:1
 #, fuzzy
-#~ msgid "This is a wooden lance, which is the basic of the Empires military system."
-#~ msgstr "Ez egy fa lándzsa, a római katonai rendszer alapja."
+msgid "Trunks are one important build material of the Empire."
+msgstr "A farönk a birodalom fontos építőanyaga."
 
+#: ../../../tribes/empire/vinefarmer/conf:1
 #, fuzzy
-#~ msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
-#~ msgstr "Gyapjú a birka szőre. A birodalmi szövöde szövetkészítéshez használja."
+msgid "Grows vine."
+msgstr "Aranybánya"
+
+#: ../../../tribes/empire/vineyard/conf:14
+msgid "Plant vine"
+msgstr ""
+
+#: ../../../tribes/empire/vineyard/conf:16
+#, fuzzy
+msgid "Harvest vine"
+msgstr "Márvány bánya"
+
+#: ../../../tribes/empire/war_lance/conf:1
+#, fuzzy
+msgid "This is the best and sharpest weapon, the Empire weaponsmith creates for their warriors."
+msgstr "Ez a legjobb és legélesebb fegyver, amit a római fegyverkovács készíteni tud."
+
+#: ../../../tribes/empire/water/conf:1
+msgid "Water is the most essential essence for life! This water is used in many places, be it to make bread or beer."
+msgstr "A víz alapvető fontosságú az élethez. Nagyon sok helyen használják, a kenyér és a sör elkészítéséhez is szükséges."
+
+#: ../../../tribes/empire/weaponsmithy/conf:26
+msgid "Produce wood lance"
+msgstr ""
+
+#: ../../../tribes/empire/weaponsmithy/conf:27
+#, fuzzy
+msgid "Produce lance"
+msgstr "Falándzsa"
+
+#: ../../../tribes/empire/weaponsmithy/conf:28
+#, fuzzy
+msgid "Produce advanced lance"
+msgstr "Továbbfejlesztett lándzsa"
+
+#: ../../../tribes/empire/weaponsmithy/conf:29
+#, fuzzy
+msgid "Produce heavy lance"
+msgstr "Nehéz lándzsa"
+
+#: ../../../tribes/empire/weaver/conf:1
+msgid "Produces cloth for ships and soldiers."
+msgstr ""
+
+#: ../../../tribes/empire/wheat/conf:1
+#, fuzzy
+msgid "Wheat is essential for surviving. Delicious bread and ales can be made of this wheat."
+msgstr "A búza létfontosságú, ebből készül a kiváló kenyér és a jó erős sör is."
+
+#: ../../../tribes/empire/wine/conf:1
+msgid "This wine gives enough power, to mine marble or gold. And furthermore, our soldiers like it, too."
+msgstr "A bor elég erőt ad, hogy márványt és aranyat bányásszanak, és a katonák is kedvelik."
+
+#: ../../../tribes/empire/wood/conf:1 ../../../tribes/empire/stone/conf:1
+#, fuzzy
+msgid "Stones and wood are the basic build material of the Empire."
+msgstr "A kő és a fa a birodalom alapvető építőanyaga."
+
+#: ../../../tribes/empire/wood_lance/conf:1
+#, fuzzy
+msgid "This is a wooden lance, which is the basic of the Empires military system."
+msgstr "Ez egy fa lándzsa, a római katonai rendszer alapja."
+
+#: ../../../tribes/empire/wool/conf:1
+#, fuzzy
+msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
+msgstr "Gyapjú a birka szőre. A birodalmi szövöde szövetkészítéshez használja."
 
 #~ msgid "Carpenter's workshop"
 #~ msgstr "Szerszámkészítő műhely"
 
 #~ msgid "Vintagery"
 #~ msgstr "Borház"
-
-#~ msgid "Bakingtray"
-#~ msgstr "Kenyérsütőlapát"
 
 #~ msgid "Coalearth"
 #~ msgstr "Nyers szén"

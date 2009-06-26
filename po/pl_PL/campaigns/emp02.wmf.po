@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4208\n"
+"Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-04 13:01+0000\n"
+"POT-Creation-Date: 2009-06-26 17:07+0000\n"
 "PO-Revision-Date: 2009-05-10 19:08+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -50,6 +50,7 @@ msgid " \"As Saledus and I walked through these wonderful forests in the north, 
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:139
+#: ../../../campaigns/emp02.wmf/objective:9
 msgid "* Build three lumberjack's houses, a forester's house and a sawmill."
 msgstr "* Zbuduuj trzy chatki drwala, leśniczówkę i tartak."
 
@@ -129,6 +130,7 @@ msgid " \"By the Gods, this is an unbelievable strike of fortune! There are two 
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:332
+#: ../../../campaigns/emp02.wmf/objective:41
 msgid "* Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner, iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 msgstr "* Zbuduj kamieniarz a potem dokończ górniczą i produkcyjną infrastukturę (kopalnię węgla i/lub piec do węgla drzewnego, kopalnie rudy żelaza,  pracownie rzemieślnik, zbrojmistrza i hutę)."
 
@@ -145,6 +147,7 @@ msgid " \"Hi Lutius, I hope you forgive my criticism, but it seems to me as if y
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:414
+#: ../../../campaigns/emp02.wmf/objective:49
 msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food - like fish, meat or bread.<br> To provide these foodstuffs, you would have to build a fisher's house, a farm, a mill and a bakery.<br> Maybe you will also need a hunter's house,<br> a piggery, a vineyard and some wells.<br> It's up to you what you want to build.<br> But remember - coal and iron ore mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
 msgstr ""
 
@@ -157,6 +160,7 @@ msgid " \"By the Gods! This is absolutely terrible. It seems as if we stand clos
 msgstr ""
 
 #: ../../../campaigns/emp02.wmf/event:513
+#: ../../../campaigns/emp02.wmf/objective:57
 msgid "* Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier. To watch deep inside the enemy territory, build a tower."
 msgstr "* Zbuduj wiekszę wojskowe budynki, takie jak bariera, wieża czy placówka na wschodnim froncie. Żeby zobaczyj dalej do terytorium wroga, zbuduj wieżę."
 
@@ -169,10 +173,12 @@ msgid " \"That's good. The first large military building is complete and the min
 msgstr " \"To dobrze. Pierwsza wojskowa budowla jest gotowa, a infrastruktura górnictwa z dnia na dzień wygląda lepiej. Mielibyśmy się zacząć przygotowywać na bitwę.\"<br><br>-- NOWE CELE --<br> "
 
 #: ../../../campaigns/emp02.wmf/event:555
+#: ../../../campaigns/emp02.wmf/objective:65
 msgid "* As soon as you have enough soldiers, attack and completely destroy the barbarian buildings.<br>"
 msgstr "* Kiedy tylko masz wystarczająco dużo żołnierzy, zaatakuj i zniszcz wszystkie budynki barbarzyńców.<br>"
 
 #: ../../../campaigns/emp02.wmf/event:556
+#: ../../../campaigns/emp02.wmf/objective:66
 msgid "* Finally, build up a fortress on the peninsula<br> (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 msgstr "* Na koniec zbuduj fortecę na półwyspie<br> (blizko miejsca gdzie kwatera główna barbarzyńców wcześniej stała), aby się upewnić że inne plemiona nie będą tworzyć osady w tym miejscu."
 
@@ -224,10 +230,6 @@ msgstr "Nasza nowa tawerna"
 msgid "Build up a wood economy"
 msgstr "Wytwórz gospodarkę dzrewną"
 
-#: ../../../campaigns/emp02.wmf/objective:9
-msgid "* Build up three lumberjack's houses, a forester's house and a sawmill."
-msgstr "* Zbuduj trzy chaty drwali, leśniczówke i tartak."
-
 #: ../../../campaigns/emp02.wmf/objective:15
 msgid "Build a quarry"
 msgstr "Zbuduj kamieniołom"
@@ -244,34 +246,29 @@ msgstr "Zacznij wydobywać marmur"
 msgid "Build a stonemason and mining infrastructure"
 msgstr "Zbuduj kamieniarza i górniczą infrastrukturę"
 
-#: ../../../campaigns/emp02.wmf/objective:41
-msgid "* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
-msgstr "* Zbuduj pracownię kamieniarza i potem dokończ infrastrukturę górnictwa i produkcji (kopalnia węgla i/lub piec do węgla drzewnego,<br> kopalnie rudy żelaza, pracownię rzemieślnika, snycerza, płatnerz i hutę)."
-
 #: ../../../campaigns/emp02.wmf/objective:47
 msgid "Provide your miners with food"
 msgstr "Zapewnij swojim górnikom jedzenie"
-
-#: ../../../campaigns/emp02.wmf/objective:49
-msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food like fish, meat or bread. To provide these foodstuff you would have to build a fisher's house, a farm, a mill and a bakery. Maybe you will also need a hunter's house, a piggery, a vineyard and some wells. It's up to you, what you want to build.<br> But remember - Coal and Iron Ore Mines need beer, Marble and Gold Mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
-msgstr ""
 
 #: ../../../campaigns/emp02.wmf/objective:55
 msgid "Protect your eastern frontier"
 msgstr "Ohroń swój wschodni front"
 
-#: ../../../campaigns/emp02.wmf/objective:57
-msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a tower, on the eastern frontier."
-msgstr "* Zbuduj większe wojskowe budynki, takie jak placówki i bariery<br> lub wieże, na wschodnim froncie."
-
 #: ../../../campaigns/emp02.wmf/objective:63
 msgid "Destroy the barbarian tribe"
 msgstr "Zniscz plemię barbarzyńców"
 
-#: ../../../campaigns/emp02.wmf/objective:65
-msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>"
-msgstr "* Kiedy tylko masz wystarczająco dużo żołnierzy, zaatakuj i usuń wszystkie budynki barbarzyńców.<br>"
+#~ msgid "* Build up three lumberjack's houses, a forester's house and a sawmill."
+#~ msgstr "* Zbuduj trzy chaty drwali, leśniczówke i tartak."
 
-#: ../../../campaigns/emp02.wmf/objective:66
-msgid "* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
-msgstr "* Na koniec zbuduj fortecę na języku wyspy (blizko miejsca gdzie stała kwatera główna barbarzyńców), aby zabronić budowie nowych osad w tym regionie."
+#~ msgid "* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
+#~ msgstr "* Zbuduj pracownię kamieniarza i potem dokończ infrastrukturę górnictwa i produkcji (kopalnia węgla i/lub piec do węgla drzewnego,<br> kopalnie rudy żelaza, pracownię rzemieślnika, snycerza, płatnerz i hutę)."
+
+#~ msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a tower, on the eastern frontier."
+#~ msgstr "* Zbuduj większe wojskowe budynki, takie jak placówki i bariery<br> lub wieże, na wschodnim froncie."
+
+#~ msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>"
+#~ msgstr "* Kiedy tylko masz wystarczająco dużo żołnierzy, zaatakuj i usuń wszystkie budynki barbarzyńców.<br>"
+
+#~ msgid "* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
+#~ msgstr "* Na koniec zbuduj fortecę na języku wyspy (blizko miejsca gdzie stała kwatera główna barbarzyńców), aby zabronić budowie nowych osad w tym regionie."

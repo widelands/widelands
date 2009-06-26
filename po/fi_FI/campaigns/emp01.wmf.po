@@ -1,13 +1,12 @@
 # Widelands po/fi_FI/campaigns/emp01.wmf.po
 # Copyright (C) 2008 Widelands Development Team
-# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
-# Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4208\n"
+"Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-04 12:52+0000\n"
+"POT-Creation-Date: 2009-06-26 17:07+0000\n"
 "PO-Revision-Date: 2009-06-15 00:11+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <widelands-public@lists.sourcefore.net>\n"
