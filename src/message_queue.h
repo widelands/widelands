@@ -73,7 +73,7 @@ struct MessageQueue {
 			std::vector<Message>::iterator b = myQueue.begin();
 			while (b != myQueue.end()) {
 				if (b->get_is_visible())
-					myQueue.erase(b);
+					b = myQueue.erase(b);
 				else
 					++b;
 			}
