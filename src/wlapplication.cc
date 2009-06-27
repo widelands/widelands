@@ -1488,7 +1488,7 @@ void WLApplication::mainmenu_multiplayer()
 	//  The Winsock2 library needs to get called through WSAStartup, to initiate
 	//  the use of the Winsock DLL by Widelands.
 	WSADATA wsaData;
-	if (WSAStartup(MAKEWORD(1, 1), &wsaData) != 0)
+	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
 		throw wexception("initialization of Wsock2-library failed");
 #endif // WIN32
 
