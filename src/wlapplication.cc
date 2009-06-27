@@ -1577,8 +1577,13 @@ void WLApplication::mainmenu_multiplayer()
 
 #else
 		// If compiled without ggz support, only lan-netsetup will be visible
-		if (menu_result == Fullscreen_Menu_NetSetupLAN::CANCEL)
+		if (menu_result == Fullscreen_Menu_NetSetupLAN::CANCEL) {
+#ifdef WIN32
+			// Clean up winsock2 data
+			WSACleanup();
+#endif
 			return;
+		}
 #endif // HAVE_GGZ
 
 		else {
@@ -1616,6 +1621,10 @@ void WLApplication::mainmenu_multiplayer()
 			}
 		}
 	}
+#ifdef WIN32
+	// Clean up winsock2 data
+	WSACleanup();
+#endif
 }
 
 void WLApplication::mainmenu_editor()
