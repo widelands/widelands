@@ -1,251 +1,252 @@
 # Widelands po/da_DK/worlds/blackland.po
-# Copyright (C) 2005-2007 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Copyright (C) 2009 Widelands Development Team
+# Joe Hansen <joedalton2@yahoo.dk>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4323\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: YYYY-MM-DD hh:mm+ZZZZ\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2009-06-27 15:55+0000\n"
+"PO-Revision-Date: 2009-06-26 13:00+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../../../worlds/blackland/conf:2
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "Widelands' udviklingshold"
 
 #: ../../../worlds/blackland/conf:3
 msgid "Blackland"
-msgstr ""
+msgstr "Sortlandet"
 
 #: ../../../worlds/blackland/conf:4
 msgid "These are the grey, horrible and dangerous blacklands"
-msgstr ""
+msgstr "Dette er det grå, frygtelige og farlige Sortland"
 
+# Bush -> krat, buskads, busk, kratskov.
 #: ../../../worlds/blackland/conf:7 ../../../worlds/blackland/conf:8
 #: ../../../worlds/blackland/conf:9 ../../../worlds/blackland/conf:10
 #: ../../../worlds/blackland/conf:11
 msgid "Bush"
-msgstr ""
+msgstr "Krat"
 
 #: ../../../worlds/blackland/conf:12 ../../../worlds/blackland/conf:13
 msgid "Cactus"
-msgstr ""
+msgstr "Kaktus"
 
 #: ../../../worlds/blackland/conf:14 ../../../worlds/blackland/conf:15
 #: ../../../worlds/blackland/conf:16 ../../../worlds/blackland/conf:17
 msgid "Dead Tree"
-msgstr ""
+msgstr "Dødt træ"
 
 #: ../../../worlds/blackland/conf:18 ../../../worlds/blackland/conf:19
 #: ../../../worlds/blackland/conf:20
 msgid "Grass"
-msgstr ""
+msgstr "Græs"
 
 #: ../../../worlds/blackland/conf:21 ../../../worlds/blackland/conf:22
 msgid "Mushroom"
-msgstr ""
+msgstr "Champignon"
 
 #: ../../../worlds/blackland/conf:23 ../../../worlds/blackland/conf:24
 #: ../../../worlds/blackland/conf:25 ../../../worlds/blackland/conf:26
 #: ../../../worlds/blackland/conf:27 ../../../worlds/blackland/conf:28
 msgid "Pebble"
-msgstr ""
+msgstr "Grus"
 
 #: ../../../worlds/blackland/conf:29 ../../../worlds/blackland/conf:30
 #: ../../../worlds/blackland/conf:31
 msgid "Skeleton"
-msgstr ""
+msgstr "Skelet"
 
 #: ../../../worlds/blackland/conf:32 ../../../worlds/blackland/conf:33
 #: ../../../worlds/blackland/conf:34 ../../../worlds/blackland/conf:35
 #: ../../../worlds/blackland/conf:36 ../../../worlds/blackland/conf:37
 #: ../../../worlds/blackland/conf:38
 msgid "Standing Stones"
-msgstr ""
+msgstr "Stensætning"
 
 #: ../../../worlds/blackland/conf:39 ../../../worlds/blackland/conf:40
 #: ../../../worlds/blackland/conf:41 ../../../worlds/blackland/conf:42
 #: ../../../worlds/blackland/conf:43 ../../../worlds/blackland/conf:44
 msgid "Stones"
-msgstr ""
+msgstr "Sten"
 
 #: ../../../worlds/blackland/conf:45
 msgid "Aspen"
-msgstr ""
+msgstr "Asp"
 
 #: ../../../worlds/blackland/conf:46
 msgid "Aspen medium"
-msgstr ""
+msgstr "Mellemstor asp"
 
 #: ../../../worlds/blackland/conf:47
 msgid "Aspen small"
-msgstr ""
+msgstr "Lille asp"
 
 #: ../../../worlds/blackland/conf:48
 msgid "Aspen tiny"
-msgstr ""
+msgstr "Meget lille asp"
 
 #: ../../../worlds/blackland/conf:49
 msgid "Oak"
-msgstr ""
+msgstr "Egetræ"
 
 #: ../../../worlds/blackland/conf:50
 msgid "Oak medium"
-msgstr ""
+msgstr "Mellemstort egetræ"
 
 #: ../../../worlds/blackland/conf:51
 msgid "Oak small"
-msgstr ""
+msgstr "Lille egetræ"
 
 #: ../../../worlds/blackland/conf:52
 msgid "Oak tiny"
-msgstr ""
+msgstr "Meget lille egetræ"
 
 #: ../../../worlds/blackland/conf:53
 msgid "Spruce"
-msgstr ""
+msgstr "Gran"
 
 #: ../../../worlds/blackland/conf:54
 msgid "Spruce medium"
-msgstr ""
+msgstr "Mellemstor gran"
 
 #: ../../../worlds/blackland/conf:55
 msgid "Spruce small"
-msgstr ""
+msgstr "Lille gran"
 
 #: ../../../worlds/blackland/conf:56
 msgid "Spruce tiny"
-msgstr ""
+msgstr "Meget lille gran"
 
 #: ../../../worlds/blackland/conf:57
 msgid "Maple"
-msgstr ""
+msgstr "Ahorn"
 
 #: ../../../worlds/blackland/conf:58
 msgid "Maple medium"
-msgstr ""
+msgstr "Mellemstor ahorn"
 
 #: ../../../worlds/blackland/conf:59
 msgid "Maple small"
-msgstr ""
+msgstr "Lille ahorn"
 
 #: ../../../worlds/blackland/conf:60
 msgid "Maple tiny"
-msgstr ""
+msgstr "Meget lille ahorn"
 
 #: ../../../worlds/blackland/conf:61
 msgid "Birch"
-msgstr ""
+msgstr "Birk"
 
 #: ../../../worlds/blackland/conf:62
 msgid "Birch medium"
-msgstr ""
+msgstr "Mellemstor birk"
 
 #: ../../../worlds/blackland/conf:63
 msgid "Birch small"
-msgstr ""
+msgstr "Lille birk"
 
 #: ../../../worlds/blackland/conf:64
 msgid "Birch tiny"
-msgstr ""
+msgstr "Meget lille birk"
 
 #: ../../../worlds/blackland/conf:65
 msgid "Beech"
-msgstr ""
+msgstr "Bøg"
 
 #: ../../../worlds/blackland/conf:66
 msgid "Beech medium"
-msgstr ""
+msgstr "Mellemstor bøg"
 
 #: ../../../worlds/blackland/conf:67
 msgid "Beech small"
-msgstr ""
+msgstr "Lille bøg"
 
 #: ../../../worlds/blackland/conf:68
 msgid "Beech tiny"
-msgstr ""
+msgstr "Meget lille bøg"
 
 #: ../../../worlds/blackland/conf:69
 msgid "Larch"
-msgstr ""
+msgstr "Lærk"
 
 #: ../../../worlds/blackland/conf:70
 msgid "Larch medium"
-msgstr ""
+msgstr "Mellemstor lærk"
 
 #: ../../../worlds/blackland/conf:71
 msgid "Larch small"
-msgstr ""
+msgstr "Lille lærk"
 
 #: ../../../worlds/blackland/conf:72
 msgid "Larch tiny"
-msgstr ""
+msgstr "Meget lille lærk"
 
 #: ../../../worlds/blackland/conf:73
 msgid "Rowan"
-msgstr ""
+msgstr "Røn"
 
 #: ../../../worlds/blackland/conf:74
 msgid "Rowan medium"
-msgstr ""
+msgstr "Mellemstor røn"
 
 #: ../../../worlds/blackland/conf:75
 msgid "Rowan small"
-msgstr ""
+msgstr "Lille røn"
 
 #: ../../../worlds/blackland/conf:76
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Meget lille røn"
 
 #: ../../../worlds/blackland/conf:79
 msgid "Bunny"
-msgstr ""
+msgstr "Kanin"
 
 #: ../../../worlds/blackland/conf:80
 msgid "Deer"
-msgstr ""
+msgstr "Hjort"
 
 #: ../../../worlds/blackland/conf:81
 msgid "Duck"
-msgstr ""
+msgstr "And"
 
 #: ../../../worlds/blackland/conf:82
 msgid "Fox"
-msgstr ""
+msgstr "Ræv"
 
 #: ../../../worlds/blackland/conf:83
 msgid "Reindeer"
-msgstr ""
+msgstr "Rensdyr"
 
 #: ../../../worlds/blackland/conf:84
 msgid "Sheep"
-msgstr ""
+msgstr "Får"
 
 #: ../../../worlds/blackland/resconf:4
 msgid "Coal"
-msgstr ""
+msgstr "Kul"
 
 #: ../../../worlds/blackland/resconf:12
 msgid "Gold"
-msgstr ""
+msgstr "Guld"
 
 #: ../../../worlds/blackland/resconf:20
 msgid "Iron"
-msgstr ""
+msgstr "Jern"
 
 #: ../../../worlds/blackland/resconf:28
 msgid "Granit"
-msgstr ""
+msgstr "Granit"
 
 #: ../../../worlds/blackland/resconf:36
 msgid "Water"
-msgstr ""
+msgstr "Vand"
 
 #: ../../../worlds/blackland/resconf:41
 msgid "Fish"
-msgstr ""
+msgstr "Fisk"

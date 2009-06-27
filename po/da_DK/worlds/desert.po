@@ -1,201 +1,202 @@
 # Widelands po/da_DK/worlds/desert.po
-# Copyright (C) 2005-2007 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Copyright (C) 2009 Widelands Development Team
+# Joe Hansen <joedalton2@yahoo.dk>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4323\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: YYYY-MM-DD hh:mm+ZZZZ\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2009-06-27 15:55+0000\n"
+"PO-Revision-Date: 2009-06-26 13:00+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../../../worlds/desert/conf:2
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "Widelands' udviklingshold"
 
 #: ../../../worlds/desert/conf:3
 msgid "Desert"
-msgstr ""
+msgstr "Ørken"
 
 #: ../../../worlds/desert/conf:4
 msgid "This is the wide and sandy country of the bedouins"
-msgstr ""
+msgstr "Dette er det store og sandfyldte beduinland"
 
+# Bush -> krat, buskads, busk, kratskov.
 #: ../../../worlds/desert/conf:7 ../../../worlds/desert/conf:8
 #: ../../../worlds/desert/conf:9
 msgid "Bush"
-msgstr ""
+msgstr "Krat"
 
 #: ../../../worlds/desert/conf:10 ../../../worlds/desert/conf:11
 #: ../../../worlds/desert/conf:12 ../../../worlds/desert/conf:13
 msgid "Cactus"
-msgstr ""
+msgstr "Kaktus"
 
 #: ../../../worlds/desert/conf:14 ../../../worlds/desert/conf:15
 #: ../../../worlds/desert/conf:16 ../../../worlds/desert/conf:17
 msgid "Dead Tree"
-msgstr ""
+msgstr "Dødt træ"
 
 #: ../../../worlds/desert/conf:18 ../../../worlds/desert/conf:19
 #: ../../../worlds/desert/conf:20
 msgid "Grass"
-msgstr ""
+msgstr "Græs"
 
 #: ../../../worlds/desert/conf:21 ../../../worlds/desert/conf:22
 msgid "Mushroom"
-msgstr ""
+msgstr "Champignon"
 
 #: ../../../worlds/desert/conf:23 ../../../worlds/desert/conf:24
 #: ../../../worlds/desert/conf:25 ../../../worlds/desert/conf:26
 #: ../../../worlds/desert/conf:27 ../../../worlds/desert/conf:28
 msgid "Pebble"
-msgstr ""
+msgstr "Grus"
 
 #: ../../../worlds/desert/conf:29 ../../../worlds/desert/conf:30
 #: ../../../worlds/desert/conf:31 ../../../worlds/desert/conf:32
 #: ../../../worlds/desert/conf:33
 msgid "ruins"
-msgstr ""
+msgstr "ruiner"
 
 #: ../../../worlds/desert/conf:34 ../../../worlds/desert/conf:35
 #: ../../../worlds/desert/conf:36
 msgid "Skeleton"
-msgstr ""
+msgstr "Skelet"
 
 #: ../../../worlds/desert/conf:37
 msgid "Shell"
-msgstr ""
+msgstr "Skal"
 
 #: ../../../worlds/desert/conf:38 ../../../worlds/desert/conf:39
 #: ../../../worlds/desert/conf:40 ../../../worlds/desert/conf:41
 #: ../../../worlds/desert/conf:42 ../../../worlds/desert/conf:43
 #: ../../../worlds/desert/conf:44
 msgid "Standing Stones"
-msgstr ""
+msgstr "Stensætning"
 
 #: ../../../worlds/desert/conf:45 ../../../worlds/desert/conf:46
 #: ../../../worlds/desert/conf:47 ../../../worlds/desert/conf:48
 #: ../../../worlds/desert/conf:49 ../../../worlds/desert/conf:50
 msgid "Stones"
-msgstr ""
+msgstr "Sten"
 
 #: ../../../worlds/desert/conf:51 ../../../worlds/desert/conf:55
 #: ../../../worlds/desert/conf:59 ../../../worlds/desert/conf:63
 #: ../../../worlds/desert/conf:67
 msgid "Palm"
-msgstr ""
+msgstr "Palme"
 
 #: ../../../worlds/desert/conf:52 ../../../worlds/desert/conf:56
 #: ../../../worlds/desert/conf:60 ../../../worlds/desert/conf:64
 #: ../../../worlds/desert/conf:68
 msgid "Palm medium"
-msgstr ""
+msgstr "Mellemstor palme"
 
 #: ../../../worlds/desert/conf:53 ../../../worlds/desert/conf:57
 #: ../../../worlds/desert/conf:61 ../../../worlds/desert/conf:65
 #: ../../../worlds/desert/conf:69
 msgid "Palm small"
-msgstr ""
+msgstr "Lille palme"
 
 #: ../../../worlds/desert/conf:54 ../../../worlds/desert/conf:58
 #: ../../../worlds/desert/conf:62 ../../../worlds/desert/conf:66
 #: ../../../worlds/desert/conf:70
 msgid "Palm tiny"
-msgstr ""
+msgstr "Meget lille palme"
 
 #: ../../../worlds/desert/conf:71
 msgid "Beech"
-msgstr ""
+msgstr "Bøg"
 
 #: ../../../worlds/desert/conf:72
 msgid "Beech medium"
-msgstr ""
+msgstr "Mellemstor bøg"
 
 #: ../../../worlds/desert/conf:73
 msgid "Beech small"
-msgstr ""
+msgstr "Lille bøg"
 
 #: ../../../worlds/desert/conf:74
 msgid "Beech tiny"
-msgstr ""
+msgstr "Meget lille bøg"
 
 #: ../../../worlds/desert/conf:75
 msgid "Larch"
-msgstr ""
+msgstr "Lærk"
 
 #: ../../../worlds/desert/conf:76
 msgid "Larch medium"
-msgstr ""
+msgstr "Mellemstor lærk"
 
 #: ../../../worlds/desert/conf:77
 msgid "Larch small"
-msgstr ""
+msgstr "Lille lærk"
 
 #: ../../../worlds/desert/conf:78
 msgid "Larch tiny"
-msgstr ""
+msgstr "Meget lille lærk"
 
 #: ../../../worlds/desert/conf:79
 msgid "Rowan"
-msgstr ""
+msgstr "Røn"
 
 #: ../../../worlds/desert/conf:80
 msgid "Rowan medium"
-msgstr ""
+msgstr "Mellemstor røn"
 
 #: ../../../worlds/desert/conf:81
 msgid "Rowan small"
-msgstr ""
+msgstr "Lille røn"
 
 #: ../../../worlds/desert/conf:82
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Meget lille røn"
 
 #: ../../../worlds/desert/conf:85
 msgid "Bunny"
-msgstr ""
+msgstr "Kanin"
 
 #: ../../../worlds/desert/conf:86
 msgid "Deer"
-msgstr ""
+msgstr "Hjort"
 
 #: ../../../worlds/desert/conf:87
 msgid "Duck"
-msgstr ""
+msgstr "And"
 
 #: ../../../worlds/desert/conf:88
 msgid "Fox"
-msgstr ""
+msgstr "Ræv"
 
 #: ../../../worlds/desert/conf:89
 msgid "Sheep"
-msgstr ""
+msgstr "Får"
 
 #: ../../../worlds/desert/resconf:4
 msgid "Coal"
-msgstr ""
+msgstr "Kul"
 
 #: ../../../worlds/desert/resconf:12
 msgid "Gold"
-msgstr ""
+msgstr "Guld"
 
 #: ../../../worlds/desert/resconf:20
 msgid "Iron"
-msgstr ""
+msgstr "Jern"
 
 #: ../../../worlds/desert/resconf:28
 msgid "Granit"
-msgstr ""
+msgstr "Granit"
 
 #: ../../../worlds/desert/resconf:36
 msgid "Water"
-msgstr ""
+msgstr "Vand"
 
 #: ../../../worlds/desert/resconf:41
 msgid "Fish"
-msgstr ""
+msgstr "Fisk"
