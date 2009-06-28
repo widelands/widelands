@@ -97,7 +97,7 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		_("Create a road and optionally place a carrier on it")
 	},
 	{
-		"set_timer",        _("Set timer"),
+		"set_timer",              _("Set timer"),
 		_("Set a timer to trigger after a certain duration.")
 	},
 	{
@@ -108,7 +108,7 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 	},
 	{
 		"victory",                _("victory"),
-		_("Allows a player to claim victory of this campain")
+		_("Allows a player to claim victory of this campaign.")
 	}
 };
 
