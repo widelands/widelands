@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4323\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 19:07+0200\n"
-"PO-Revision-Date: 2009-06-19 15:17+0100\n"
-"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
+"POT-Creation-Date: 2009-06-28 17:56+0200\n"
+"PO-Revision-Date: 2009-06-27 13:29+0100\n"
+"Last-Translator: Tino Miegel <tino@geofs.de>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1438,11 +1438,11 @@ msgstr "Metaserververbindung wieder hergestellt."
 
 #: ../../src/network/network_ggz.cc:491
 msgid "NOTE: The internet gaming implementation is in very early state."
-msgstr ""
+msgstr "HINWEIS: Die Implementierung der Internetspielfunktion ist in einem frühen Stadium."
 
 #: ../../src/network/network_ggz.cc:493
 msgid "Please take a look at the notes at:"
-msgstr ""
+msgstr "Bitte beachte die Hinweise bei:"
 
 #: ../../src/network/network_ggz.cc:632
 msgid " joined the metaserver."
@@ -2285,7 +2285,7 @@ msgid "File not found"
 msgstr "Datei nicht gefunden"
 
 #: ../../src/ui_fsmenu/launchgame.cc:229
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at given path.\n"
 "The file was: %s\n"

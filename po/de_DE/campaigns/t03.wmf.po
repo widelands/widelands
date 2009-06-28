@@ -1,14 +1,14 @@
 # Widelands po/de_DE/campaigns/t03.wmf.po
 # Copyright (C) 2005-2009 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4323\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-04-27 18:07+0100\n"
-"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
+"POT-Creation-Date: 2009-06-28 15:56+0000\n"
+"PO-Revision-Date: 2009-06-27 13:54+0100\n"
+"Last-Translator: Tino Miegel <tino@geofs.de>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +40,7 @@ msgstr "Boldreth spricht:"
 
 #: ../../../campaigns/t03.wmf/event:333
 msgid " \"This morning I found Thron trouble-minded. He returned from his patrol late last night and sat back against a tree watching over the encampment. The number of quarrels and disputes keeps growing and the winter has us firmly under control. We should put food in our storage to survive the long, cold winter!\" "
-msgstr "\"Diesen morgen fand ich Thron aufgewühlt. Spät in der letzte Nacht erreichte er uns von seiner Patroullie und lehnte sich gegen einen Baum der über das Lager wacht. Die Zahl an auseinandersetzungen und Streitereien wächst stätig und der Winter hat uns fest in der Hand. Wir sollten Nahrung in unserem Lager lagern um den langen, kalten WInter zu überstehen!\""
+msgstr "\"Diesen morgen fand ich Thron aufgewühlt. Spät in der letzte Nacht erreichte er uns von seiner Patrouille und lehnte sich gegen einen Baum der über das Lager wacht. Die Zahl an auseinandersetzungen und Streitereien wächst stätig und der Winter hat uns fest in der Hand. Wir sollten Nahrung in unserem Lager lagern um den langen, kalten Winter zu überstehen!\""
 
 #: ../../../campaigns/t03.wmf/event:335
 msgid "Winter ahead"
@@ -71,7 +71,7 @@ msgstr "Der Berater"
 
 #: ../../../campaigns/t03.wmf/event:418
 msgid " \"Khantrukh just informed me, that our basic food economy was built up successfully. Finally none of us has to fear starvation anymore."
-msgstr ""
+msgstr "\"Khantrukh hat mir gerade gesagt, das die grundlegende Nahrungsversorgung gesichert ist. Endlich müssen wir nicht mehr fürchten zu verhungern.\""
 
 #: ../../../campaigns/t03.wmf/event:420
 msgid "Food economy completed"
@@ -79,11 +79,11 @@ msgstr "Nahrungsmittelwirtschaft vollendet"
 
 #: ../../../campaigns/t03.wmf/event:457
 msgid " \"Thron told me that he discovered tracks in the snow to the northeast of our settlement. He instructed us to build a Donjon, to have a further visual range on the area around our hall to protect our people from sudden attacks.\" "
-msgstr ""
+msgstr "\"Thron hat Spuren im Nordosten unseres Siedlungsgebietes entdeckt. Er möchte, dass wir einen Wachturm bauen um eine bessere Übersicht zu haben und um unsere Leute vor plötzlichen Angriffen zu schützen.\""
 
 #: ../../../campaigns/t03.wmf/event:461
 msgid "* Build a donjon at the northeast of your territory."
-msgstr ""
+msgstr "* Baue einen Wachturm im Nordosten deines Territoriums."
 
 #: ../../../campaigns/t03.wmf/event:463
 msgid "Tracks"
@@ -91,7 +91,7 @@ msgstr "Wege"
 
 #: ../../../campaigns/t03.wmf/event:492
 msgid " \"The first fortification Thron ordered has just been completed. At the moment he seeks to bring trust and belief to those who live inside the walls of our new habitat, that we named 'Ondun', which means 'those who wait' in the old tongue. But Thron is not yet satisfied - and I fully understand his fears: The forests are deep and the fronier to Al’thunran is near. I am sure that there are thousand bigger dangers out there than the unknown tracks.<br>To overlook more of the area around our hall we should explore further and set up more guards and scouts to observe the frontier and keep an eye on the raging wars on our doorsteps. THAN we will be prepared once trouble seeks to capture our woods.\" "
-msgstr ""
+msgstr "\"Die erste von Thron verlangte Befestigung ist fertiggestellt. Im Moment versucht er das Vertrauen der Leute zu erlangen, die innerhalb der neuen Siedlung leben, die wir 'Ondun' genannt haben, was 'die die warten' in der alten Sprache bedeutet. Aber Thron ist noch nicht zufrieden - und ich verstehe seine Ängste: Die Wälder sind tief und die Grenze zu Al'thunran ist nahe. Ich bin mir sicher, dass dort draussen noch etliche tausendmal größere Gefahren drohen, als die entdeckten Spuren.<br> Um mehr Gebiet um unsere Haupthaus überwachen zu können, sollten wir die Umgebung weiter erforschen und Wachen an den Grenzen aufstellen, um ein Auge auf das Kriegsgeschehen halten zu können. DANN werden wir vorbereitet sein, wenn jemand auf Ärger aus ist.\""
 
 #: ../../../campaigns/t03.wmf/event:496
 #: ../../../campaigns/t03.wmf/objective:23
@@ -104,7 +104,7 @@ msgstr "Weitere Erforschungen"
 
 #: ../../../campaigns/t03.wmf/event:564
 msgid " \"I just talked to the leader of our patrol. He told me, that they found some mountains to the north east and the east of our territory. With a bit of luck this opens us a new chance for rearming our men, because as far as I remember, most of the mountains west to Al'thunran hold coal and some metal ores.\" "
-msgstr ""
+msgstr "\"Ich habe gerade mit dem Führer der Patrouille gesprochen. Sie haben einige Berge im Nordosten und Osten entdeckt. Mit ein wenig Glück ermöglicht uns das, unsere Männer weiter zu bewaffnen. Soweit ich mich erinnere, findet man in den Bergen westlich von Al'thunran oft Kohle und Metallerze.\""
 
 #: ../../../campaigns/t03.wmf/event:568
 #: ../../../campaigns/t03.wmf/objective:31
@@ -117,7 +117,7 @@ msgstr "Gebirge gefunden"
 
 #: ../../../campaigns/t03.wmf/event:634
 msgid " \"I just got informed, that our mining economy started it's work. These news brought a smile on my face - even if the hardest part is still waiting to be done, now our smiths will give their best to further ease our lives.\" "
-msgstr ""
+msgstr "\"Ich habe soeben erfahren, dass unsere Montanwirtschaft anläuft. Diese Nachricht hat mich lächeln lassen - obwohl uns der härteste Teil noch bevorsteht, werden unsere Schmiede nun alles geben, uns das Leben zu erleichtern.\""
 
 #: ../../../campaigns/t03.wmf/event:636
 msgid "Mining economy completed"
@@ -125,7 +125,7 @@ msgstr "Minenwirtschaft vollendet"
 
 #: ../../../campaigns/t03.wmf/event:653
 msgid " \"Boldreth and I just explored the area around the three mountains. One major strategic problem of that area seems to be, that there are two bigger passages - one north and one south to the middle mountain. Those passages are quite hard to control and so it seems to me, like we have only one chance to secure the mountains from enemy hands: We must build a fortress to the east of the mountains!\" "
-msgstr ""
+msgstr "\"Boldreth und ich haben die Gegend bei den drei Bergen erforscht. Ein großes strategisches Problem sind die beiden Täler - eines nördlich und einer südlich des mittleren Berges. Diese Täler sind nur schwer zu kontrollieren, meiner Meinung nach haben wir nur eine Möglichkeit uns zu schützen: Wir müssen östlich der Berge eine Festung bauen!\""
 
 #: ../../../campaigns/t03.wmf/event:657
 #: ../../../campaigns/t03.wmf/objective:39
@@ -138,7 +138,7 @@ msgstr "Festung benötigt"
 
 #: ../../../campaigns/t03.wmf/event:681
 msgid " \"Finally!<br>The fortress was just completed, so the entrance to our settlement should be save for now. For the future we might think on building some more fortifications like barriers and donjons at the passages, but for now we can take a deep breath.\" "
-msgstr ""
+msgstr "\"Endlich!<br>Die Festung ist fertiggestellt, so das der Eingang zu unserem Siedlungsgebiet geschützt ist. Für die Zukunft können wir noch einige Befestigungen wie Barrieren und Wachtürmer planen, aber jetzt können wir erst einmal tief Luft holen.\""
 
 #: ../../../campaigns/t03.wmf/event:683
 msgid "Fortress completed"
@@ -146,11 +146,11 @@ msgstr "Festung vollendet"
 
 #: ../../../campaigns/t03.wmf/event:694
 msgid " \"Our mining economy seems to work fine, that is already good news! Anyway there are still a lot of men and women waiting in our hall to get a task, so they can help our soldiers to prepare for the future fights."
-msgstr ""
+msgstr "\"Unsere Minen laufen gut, das sind großartige Neuigkeiten! Doch immer noch warten viele Frauen und Männer auf eine Aufgabe, mit der sie unsere Soldaten für zukünftige Konflikte unterstützen können.\""
 
 #: ../../../campaigns/t03.wmf/event:696
 msgid "Our geologists found a lot more deposits of iron ore, coal and even gold. We should enhance our current mines as soon as our miners are more experienced. We should build up some more mines, a bigger food infrastructure to always supply our men with sufficient food and a further processing economy. But that's still not everything - most of our soldiers are quite young and neither have a good weapon nor are they well trained. We should build up trainingssites to prepare them for their future tasks.\" "
-msgstr ""
+msgstr "Unsere Geologen haben viele weitere Vorkommen von Eisenerz, Kohle und sogar Golderz gefunden. Wir sollten unsere Minen aufwerten sobald unsere Bergleute erfahrener sind. Ausserdem sollten wir einige Minen mehr bauen und eine grössere Infrastruktur für Nahrungsversorgung um sie entsprechend zu versorgen. Und das ist nicht alles - die meisten unserer Soldaten sind eher jung und unerfahren und haben keine guten Waffen. Wir sollten ein Trainingslager errichten um sie auf zukünftige Konflikte vorzubereiten.\""
 
 #: ../../../campaigns/t03.wmf/event:698
 msgid "-- NEW OBJECTIVES --"
@@ -199,7 +199,7 @@ msgstr "Boldreth schüttelt sein Kopf."
 
 #: ../../../campaigns/t03.wmf/event:864
 msgid " \"Thron seeks to believe that Kalitat is tired of fighting and will be willing to join us, once we march to re-establish law and order in Al’thunran. But I don’t think so. Kalitat is son to one of the mightiest generals of our forces and his family never quite liked the thought to bow before the banner of Chat’Karuth. Why should he march with his son to reclaim his heritage and the throne?\" "
-msgstr ""
+msgstr "\"Thron glaubt, dass Kalitat des Kämpfens müde ist und sich uns anschließen wird, sobald wir nach Al'thunran marschieren um Recht und Ordnung wiederherzustellen. Aber ich glaube das eher nicht. Kalitat ist der Sohn eines der mächtigsten Generäle und seine Familie wird sich niemals dem Banner von Chat'Karuth beugen. Warum sollten wir mit seinem Sohn marschieren und seinen Thronsitz zurückerobern?\""
 
 #: ../../../campaigns/t03.wmf/event:866
 msgid "Doubts"
@@ -207,7 +207,7 @@ msgstr "Zweifel"
 
 #: ../../../campaigns/t03.wmf/event:877
 msgid " \"However, Thron is not willing to listen to my doubts. He seeks to expand our fortifications to the borders of Kalitat’s territory and reunite with his forces. I have to keep an eye on everything that happens here.\" "
-msgstr ""
+msgstr "\"Wie auch immer, Thron ist nicht bereit auf meine Zweifel zu hören. Er möchte unsere Befestigungen in Richtung der Grenze zu Kalitats Territorium ausdehnen und sich mit ihm verbünden. Ich muss wohl ein Auge auf alles was hier geschieht haben...\""
 
 #: ../../../campaigns/t03.wmf/event:879 ../../../campaigns/t03.wmf/event:913
 msgid "The story continues"
@@ -219,11 +219,11 @@ msgstr "Thron spricht im Vertrauen."
 
 #: ../../../campaigns/t03.wmf/event:898
 msgid " \"The frontier line of my forces has expanded to the edge of the forests. We have a long and cold winter and so many miles behind us. The fortification that we erected around Ondun will guarantee us fast supply of man and goods and once Al’thunran is in my hands, the two cities will be linked by a good and defendable infrastructure. Still I hope I will not walk alone on this mission, I hope Kailitat son of Kun will follow my call.\" "
-msgstr ""
+msgstr "\"Die Frontlinie meiner Truppen hat sich bis zur Waldgrenze ausgedehnt. Wir haben einen langen und kalten Winter und viele Meilen hinter uns. Die Befestigung die wir um Ondun errichtet haben wird uns mit Männern und Nahrung versorgen, und sobald wir Al'thunran erobert haben, werden beide Städte durch eine gut zu verteidigende Infrastruktur verbunden sein. Ich hoffe immer noch dass ich diese Aufgabe nicht alleine erledigen muss und Kalitat, Sohn des Kun, sich mir anschließen wird.\""
 
 #: ../../../campaigns/t03.wmf/event:911
 msgid " \"I have sent men to meet Kalitat in this fortress. He has barricaded the former main entrance to the capital and is trying to set up a siege ring around Al’thunran. He will not let anyone enter or leave the city while the ring is intact. Until now, he has not answered any of my messages. But the time I wait won't be lost. I will further upgrade my soldiers and prepare for battle.\" "
-msgstr ""
+msgstr "\"Ich habe Männer geschickt, um Kalitat in seiner Festung aufzusuchen. Er hat den Hauptzugang zur Hauptstadt verbarrikadiert und versucht einen Belagerungsgürtel um Al'thunran aufzubauen. Er lässt niemanden in die Stadt hinein oder hinaus. Bis jetzt hat er auf keiner meiner Nachrichten geantwortet. Aber die Zeit wird nicht vergeudet sein, ich werde auch weiterhin meine Soldaten trainieren und uns auf den Kampf vorbereiten.\""
 
 #: ../../../campaigns/t03.wmf/event:924
 msgid "Boldreth shouts out!"
