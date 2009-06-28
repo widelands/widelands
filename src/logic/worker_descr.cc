@@ -43,6 +43,8 @@ Worker_Descr::Worker_Descr
 	m_helptext(global_s.get_string("help", "")),
 	m_icon_fname(directory + "/menu.png"),
 	m_icon(g_gr->get_no_picture()),
+	m_max_experience(-1),
+	m_min_experience(-1),
 	m_becomes (Ware_Index::Null())
 {
 	add_attribute(Map_Object::WORKER);
@@ -92,7 +94,6 @@ Worker_Descr::Worker_Descr
 	if (char const * const becomes_name = global_s.get_string("becomes")) {
 		m_becomes = tribe().safe_worker_index(becomes_name);
 		std::string const exp = global_s.get_string("experience", "");
-		m_min_experience = m_max_experience = -1;
 		if (exp.size()) {
 			std::vector<std::string> list(split_string(exp, "-"));
 			if (list.size() != 2)
