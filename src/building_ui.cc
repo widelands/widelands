@@ -1230,8 +1230,10 @@ void ProductionSite_Window_ListWorkerWindow::fill_list() {
 				(m_ps->working_positions()[i].worker_request->is_open() ?
 				 _("(vacant)") : _("(coming)"),
 				 0);
-	if (m_ls->size() > m_last_select) m_ls->select(m_last_select);
-	else if (m_ls->size()) m_ls->select(m_ls->size() - 1);
+	if      (m_ls->size() > m_last_select)
+		m_ls->select(m_last_select);
+	else if (m_ls->size())
+		m_ls->select(m_ls->size() - 1);
 
 	update();
 }
@@ -1252,6 +1254,8 @@ void ProductionSite_Window_ListWorkerWindow::update()
 			 and
 			 worker.get_needed_experience () != -1)
 		{
+			assert(worker.becomes());
+
 			// Fill upgrade status
 			char buffer[7];
 			snprintf
@@ -1896,7 +1900,7 @@ void TrainingSite_Window::update() {
 	for (uint32_t i = 0; i < soldiers.size(); ++i) {
 		Soldier & s = *soldiers[i];
 		UI::Table<Soldier &>::Entry_Record * er = m_table->find(s);
-		if (not er)                           er = &m_table->add(s);
+		if (not er)                          er = &m_table->add(s);
 		uint32_t const  hl = s.get_hp_level         ();
 		uint32_t const mhl = s.get_max_hp_level     ();
 		uint32_t const  al = s.get_attack_level     ();
