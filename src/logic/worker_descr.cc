@@ -89,30 +89,32 @@ Worker_Descr::Worker_Descr
 		g_sound_handler.load_fx(directory, v->get_string());
 
 	// Read the becomes and experience
-	if (char const * const becomes_name = global_s.get_string("becomes"))
+	if (char const * const becomes_name = global_s.get_string("becomes")) {
 		m_becomes = tribe().safe_worker_index(becomes_name);
-	std::string const exp = global_s.get_string("experience", "");
-	m_min_experience = m_max_experience = -1;
-	if (exp.size()) {
-		std::vector<std::string> list(split_string(exp, "-"));
-		if (list.size() != 2)
-			throw wexception
-				("Parse error in experience string: \"%s\" (must be \"min-max\")",
-				 exp.c_str());
-		remove_spaces(list[0]);
-		remove_spaces(list[1]);
+		std::string const exp = global_s.get_string("experience", "");
+		m_min_experience = m_max_experience = -1;
+		if (exp.size()) {
+			std::vector<std::string> list(split_string(exp, "-"));
+			if (list.size() != 2)
+				throw wexception
+					("Parse error in experience string: \"%s\" (must be "
+					 "\"min-max\")",
+					 exp.c_str());
+			remove_spaces(list[0]);
+			remove_spaces(list[1]);
 
-		char * endp;
-		m_min_experience = strtol(list[0].c_str(), &endp, 0);
-		if (*endp)
-			throw wexception
-				("Parse error in experience string: %s is a bad value",
-				 list[0].c_str());
-		m_max_experience = strtol(list[1].c_str(), &endp, 0);
-		if (*endp)
-			throw wexception
-				("Parse error in experience string: %s is a bad value",
-				 list[1].c_str());
+			char * endp;
+			m_min_experience = strtol(list[0].c_str(), &endp, 0);
+			if (*endp)
+				throw wexception
+					("Parse error in experience string: %s is a bad value",
+					 list[0].c_str());
+			m_max_experience = strtol(list[1].c_str(), &endp, 0);
+			if (*endp)
+				throw wexception
+					("Parse error in experience string: %s is a bad value",
+					 list[1].c_str());
+		}
 	}
 
 	// Read programs
