@@ -533,10 +533,14 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			productionsite.m_program_timer = fr.Unsigned8();
 			productionsite.m_program_time = fr.Signed32();
 
-			uint16_t const nr_queues = fr.Unsigned16();
-			if (nr_queues != productionsite.m_input_queues.size())
-				throw wexception("wrong number of input queues");
-			for (uint16_t i = 0; i < productionsite.m_input_queues.size(); ++i)
+			uint16_t nr_queues = fr.Unsigned16();
+			// perhaps the building had more input queues in earlier versions
+			for (; nr_queues > productionsite.m_input_queues.size(); --nr_queues)
+				productionsite.m_input_queues[0]->Read(fr, egbase, ol);
+			// do not use productionsite.m_input_queues.size() as maximum, perhaps
+			// the older version had less inputs - that way we leave the new ones
+			// empty
+			for (uint16_t i = 0; i < nr_queues; ++i)
 				productionsite.m_input_queues[i]->Read(fr, egbase, ol);
 
 			uint16_t const stats_size = fr.Unsigned16();
