@@ -1,5 +1,7 @@
+# Automatically created by Widelands svn4331 (debug)
+
 [global]
-packet_version=2
-player_1=108 4
-player_2=32 236
-player_3=70 149
+packet_version="2"
+player_1="108 4"
+player_2="32 236"
+player_3="70 149"
