@@ -229,26 +229,34 @@ void Editor_Interactive::exit() {
 }
 
 void Editor_Interactive::toggle_mainmenu() {
-	if (m_mainmenu.window) delete m_mainmenu.window;
-	else new Editor_Main_Menu(this, &m_mainmenu);
+	if (m_mainmenu.window)
+		delete m_mainmenu.window;
+	else
+		new Editor_Main_Menu(this, &m_mainmenu);
 }
 
 
 void Editor_Interactive::toggle_objectivesmenu() {
-	if (m_objectivesmenu.window) delete m_objectivesmenu.window;
-	else new Editor_Objectives_Menu(this, &m_objectivesmenu);
+	if (m_objectivesmenu.window)
+		delete m_objectivesmenu.window;
+	else
+		new Editor_Objectives_Menu(this, &m_objectivesmenu);
 }
 
 
 void Editor_Interactive::toggle_variablesmenu() {
-	if (m_variablesmenu.window) delete m_variablesmenu.window;
-	else new Editor_Variables_Menu(*this, &m_variablesmenu);
+	if (m_variablesmenu.window)
+		delete m_variablesmenu.window;
+	else
+		new Editor_Variables_Menu(*this, &m_variablesmenu);
 }
 
 
 void Editor_Interactive::toggle_eventmenu() {
-	if (m_eventmenu.window) delete m_eventmenu.window;
-	else new Editor_Event_Menu(*this, &m_eventmenu);
+	if (m_eventmenu.window)
+		delete m_eventmenu.window;
+	else
+		new Editor_Event_Menu(*this, &m_eventmenu);
 }
 
 void Editor_Interactive::map_clicked() {
@@ -280,13 +288,16 @@ void Editor_Interactive::toggle_buildhelp()
 
 
 void Editor_Interactive::tool_menu_btn() {
-	if (m_toolmenu.window) delete m_toolmenu.window;
-	else new Editor_Tool_Menu(*this, m_toolmenu);
+	if (m_toolmenu.window)
+		delete m_toolmenu.window;
+	else
+		new Editor_Tool_Menu(*this, m_toolmenu);
 }
 
 
 void Editor_Interactive::toggle_playermenu() {
-	if (m_playermenu.window) delete m_playermenu.window;
+	if (m_playermenu.window)
+		delete m_playermenu.window;
 	else {
 		select_tool(tools.set_starting_pos, Editor_Tool::First);
 		new Editor_Player_Menu(*this, &m_playermenu);
@@ -296,8 +307,10 @@ void Editor_Interactive::toggle_playermenu() {
 
 
 void Editor_Interactive::toolsize_menu_btn() {
-	if (m_toolsizemenu.window) delete m_toolsizemenu.window;
-	else new Editor_Toolsize_Menu(this, &m_toolsizemenu);
+	if (m_toolsizemenu.window)
+		delete m_toolsizemenu.window;
+	else
+		new Editor_Toolsize_Menu(this, &m_toolsizemenu);
 }
 
 
@@ -510,13 +523,19 @@ void Editor_Interactive::unreference_player_tribe
 	std::vector<Player_References>::iterator it = references.begin();
 	std::vector<Player_References>::const_iterator references_end =
 		references.end();
-	if (player > 0) {
+	if (player)
 		for (; it < references_end; ++it)
-			if (it->player == player and it->object == data) break;
-		references.erase(it);
-	} else //  Player is invalid. Remove all references from this object.
-		for (; it < references_end; ++it)
-			if (it->object == data) {references.erase(it); --it, --references_end;}
+			if (it->player == player and it->object == data) {
+				references.erase(it);
+				break;
+			}
+	else //  Player is invalid. Remove all references from this object.
+		while (it < references_end)
+			if (it->object == data) {
+				it = references.erase(it);
+				references_end = references.end();
+			} else
+				++it;
 }
 
 bool Editor_Interactive::is_player_tribe_referenced(int32_t player) {
