@@ -275,7 +275,12 @@ void Fullscreen_Menu_NetSetupGGZ::server_selected (uint32_t)
 /// called when an entry of the server list was doubleclicked
 void Fullscreen_Menu_NetSetupGGZ::server_doubleclicked (uint32_t)
 {
-	clicked_joingame();
+	// if the game is open try to connect it, if not do nothing.
+	if (opengames.has_selection()) {
+		const Net_Open_Game * game = &opengames.get_selected();
+		if (game->info.state == LAN_GAME_OPEN)
+			clicked_joingame();
+	}
 }
 
 
