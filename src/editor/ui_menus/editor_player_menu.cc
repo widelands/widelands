@@ -215,7 +215,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 	Widelands::Player_Number const old_nr_players = map.get_nrplayers();
 	Widelands::Player_Number const nr_players     = old_nr_players - 1;
 	assert(1 <= nr_players);
-	if (not parent.is_player_tribe_referenced(nr_players)) {
+	if (not parent.is_player_tribe_referenced(old_nr_players)) {
 		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
 			char picsname[] = "pics/editor_player_00_starting_pos.png";
@@ -227,8 +227,8 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 		std::string const & name  = map.get_scenario_player_name (nr_players);
 		std::string const & tribe = map.get_scenario_player_tribe(nr_players);
 		map.set_nrplayers(nr_players);
-		map.set_scenario_player_name(nr_players, name);
-		map.set_scenario_player_tribe(nr_players, tribe);
+		map.set_scenario_player_name(nr_players, name);   //  ???
+		map.set_scenario_player_tribe(nr_players, tribe); //  ???
 		parent.set_need_save(true);
 		m_add_player        .set_enabled(true);
 		m_remove_last_player.set_enabled(1 < nr_players);
