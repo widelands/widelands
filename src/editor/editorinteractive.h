@@ -108,7 +108,7 @@ public:
 	//  reference functions
 	void   reference_player_tribe(Widelands::Player_Number, void const *);
 	void unreference_player_tribe(Widelands::Player_Number, void const *);
-	bool is_player_tribe_referenced(int32_t);
+	bool is_player_tribe_referenced(Widelands::Player_Number);
 	void set_need_save(bool const t) {m_need_save = t;}
 
 	/// Must be called when the world is changed. Takes care of closing the tool

@@ -523,13 +523,13 @@ void Editor_Interactive::unreference_player_tribe
 	std::vector<Player_References>::iterator it = references.begin();
 	std::vector<Player_References>::const_iterator references_end =
 		references.end();
-	if (player)
+	if (player) {
 		for (; it < references_end; ++it)
 			if (it->player == player and it->object == data) {
 				references.erase(it);
 				break;
 			}
-	else //  Player is invalid. Remove all references from this object.
+	} else //  Player is invalid. Remove all references from this object.
 		while (it < references_end)
 			if (it->object == data) {
 				it = references.erase(it);
@@ -538,7 +538,9 @@ void Editor_Interactive::unreference_player_tribe
 				++it;
 }
 
-bool Editor_Interactive::is_player_tribe_referenced(int32_t player) {
+bool Editor_Interactive::is_player_tribe_referenced
+	(Widelands::Player_Number const  player)
+{
 	assert(0 < player);
 	assert    (player <= egbase().map().get_nrplayers());
 
