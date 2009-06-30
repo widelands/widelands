@@ -108,58 +108,60 @@ void WidelandsServer::dataEvent(Client * const client)
 	ggz_read_int(channel, &opcode);
 	switch (opcode) {
 	case op_reply_ip:
-		char * ip;
+		{
+			char * ip;
 
-		//  Do not use IP provided by client. Instead, determine peer IP address.
-		ggz_read_string_alloc(channel, &ip);
-		std::cout << "IP: " << ip << std::endl;
-		//  m_ip = ggz_strdup(ip);
-		ggz_free(ip);
+			//  Do not use IP provided by client. Instead, determine peer IP address.
+			ggz_read_string_alloc(channel, &ip);
+			std::cout << "IP: " << ip << std::endl;
+			//  m_ip = ggz_strdup(ip);
+			ggz_free(ip);
 
-		socklen_t addrsize = 256;
-		struct sockaddr * const addr =
-			static_cast<struct sockaddr *>(malloc(addrsize));
-		int const ret = getpeername(channel, addr, &addrsize);
+			socklen_t addrsize = 256;
+			struct sockaddr * const addr =
+				static_cast<struct sockaddr *>(malloc(addrsize));
+			int const ret = getpeername(channel, addr, &addrsize);
 
-		//  FIXME: IPv4 compatibility?
-		if (addr->sa_family == AF_INET6) {
-			ip = static_cast<char *>(ggz_malloc(INET6_ADDRSTRLEN));
-			inet_ntop
-				(AF_INET6,
-				 static_cast<void *>
-				 	(&(static_cast<struct sockaddr_in6 *>(addr))->sin6_addr),
-				 ip,
-				 INET6_ADDRSTRLEN);
-		} else if(addr->sa_family == AF_INET) {
-			ip = static_cast<char *>(ggz_malloc(INET_ADDRSTRLEN));
-			inet_ntop
-				(AF_INET,
-				 static_cast<void *>
-				 	(&(static_cast<struct sockaddr_in *>(addr))->sin_addr),
-				 ip,
-				 INET_ADDRSTRLEN);
-		} else {
-			ip = NULL;
-			std::cout << "GAME: unreachable -> done!" << std::endl;
-			ggz_write_int(channel, op_unreachable);
-			changeState(GGZGameServer::done);
-			break;
-		}
-
-		std::cout << "broadcast IP: " << ip << std::endl;
-		m_ip = ggz_strdup(ip);
-		ggz_free(ip);
-		{ //  test for connectablity
-			addrinfo * ai = 0;
-			if (getaddrinfo(m_ip, "7396", 0, &ai)) {
+			//  FIXME: IPv4 compatibility?
+			if (addr->sa_family == AF_INET6) {
+				ip = static_cast<char *>(ggz_malloc(INET6_ADDRSTRLEN));
+				inet_ntop
+					(AF_INET6,
+					 static_cast<void *>
+					 	(&(reinterpret_cast<struct sockaddr_in6 *>(addr))->sin6_addr),
+					 ip,
+					 INET6_ADDRSTRLEN);
+			} else if(addr->sa_family == AF_INET) {
+				ip = static_cast<char *>(ggz_malloc(INET_ADDRSTRLEN));
+				inet_ntop
+					(AF_INET,
+					 static_cast<void *>
+					 	(&(reinterpret_cast<struct sockaddr_in *>(addr))->sin_addr),
+					 ip,
+					 INET_ADDRSTRLEN);
+			} else {
+				ip = NULL;
 				std::cout << "GAME: unreachable -> done!" << std::endl;
 				ggz_write_int(channel, op_unreachable);
 				changeState(GGZGameServer::done);
 				break;
 			}
+
+			std::cout << "broadcast IP: " << ip << std::endl;
+			m_ip = ggz_strdup(ip);
+			ggz_free(ip);
+			{ //  test for connectablity
+				addrinfo * ai = 0;
+				if (getaddrinfo(m_ip, "7396", 0, &ai)) {
+					std::cout << "GAME: unreachable -> done!" << std::endl;
+					ggz_write_int(channel, op_unreachable);
+					changeState(GGZGameServer::done);
+					break;
+				}
+			}
+			std::cout << "GAME: reachable -> waiting!" << std::endl;
+			changeState(GGZGameServer::waiting);
 		}
-		std::cout << "GAME: reachable -> waiting!" << std::endl;
-		changeState(GGZGameServer::waiting);
 		break;
 	case op_state_playing:
 		std::cout << "GAME: playing!" << std::endl;

@@ -735,7 +735,7 @@ std::vector<Net_Player>   const & NetGGZ::users()
 /// writes the list of tables after an table update arrived
 void NetGGZ::write_tablelist()
 {
-tablelist.clear();
+	tablelist.clear();
 	int32_t const num = ggzcore_room_get_num_tables(room);
 	for (int32_t i = 0; i < num; ++i) {
 		Net_Game_Info info;
