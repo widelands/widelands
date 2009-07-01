@@ -143,6 +143,7 @@ int32_t Int_Player_overlay_callback_function
 	(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t)
 {
 	assert(data);
+	assert(static_cast<Interactive_Player const *>(data)->get_player());
 	return
 		static_cast<const Interactive_Player *>(data)->get_player()->
 		get_buildcaps(c);

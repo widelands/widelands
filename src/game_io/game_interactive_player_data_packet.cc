@@ -44,6 +44,9 @@ throw (_wexception)
 		if (packet_version == CURRENT_PACKET_VERSION || packet_version == 1) {
 			Player_Number const player_number =
 				fr.Player_Number8(game.map().get_nrplayers());
+			if (not game.get_player(player_number))
+				throw wexception
+					("player %u does not exist in the game", player_number);
 			int32_t       const x             = fr.Unsigned16();
 			int32_t       const y             = fr.Unsigned16();
 			uint32_t      const display_flags = fr.Unsigned32();
