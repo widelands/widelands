@@ -175,7 +175,7 @@ void Map_Building_Data_Packet::write_priorities
 	building.collect_priorities(type_to_priorities);
 	for (it = type_to_priorities.begin(); it != type_to_priorities.end(); ++it)
 	{
-		if (it->second.size() == 0)
+		if (it->second.empty())
 			continue;
 
 		// write ware type and priority count

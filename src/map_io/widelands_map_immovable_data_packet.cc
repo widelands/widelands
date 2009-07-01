@@ -33,14 +33,6 @@
 
 namespace Widelands {
 
-/* VERSION 1: initial release
-     - registering through Map_Object_Loader/Saver
-     - handling for tribe immovables (ignored on skip)
-*/
-
-#define CURRENT_PACKET_VERSION 1
-
-
 void Map_Immovable_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
@@ -59,10 +51,9 @@ throw (_wexception)
 
 	try {
 		const uint16_t packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (1 == packet_version) {
 			for (;;) {
 				Serial const serial = fr.Unsigned32();
-				//  FIXME Just test EndOfFile instead in the next packet version.
 				if (serial == 0xffffffff) {
 					if (not fr.EndOfFile())
 						throw wexception
