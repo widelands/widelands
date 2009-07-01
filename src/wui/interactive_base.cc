@@ -120,7 +120,8 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 
 	// Remove old sel pointer
-	if (m_sel.jobid) overlay_manager.remove_overlay(m_sel.jobid);
+	if (m_sel.jobid)
+		overlay_manager.remove_overlay(m_sel.jobid);
 	const Overlay_Manager::Job_Id jobid =
 		m_sel.jobid = overlay_manager.get_a_job_id();
 
@@ -343,9 +344,11 @@ void Interactive_Base::mainview_move(int32_t x, int32_t y)
 		const int32_t maxy = MapviewPixelFunctions::get_map_end_screen_y(map);
 
 		x += get_w() >> 1;
-		if (x >= maxx) x -= maxx;
+		if (x >= maxx)
+			x -= maxx;
 		y += get_h() >> 1;
-		if (y >= maxy) y -= maxy;
+		if (y >= maxy)
+			y -= maxy;
 
 
 		m->mm->set_view_pos(x, y);
@@ -366,8 +369,10 @@ void Interactive_Base::minimap_warp(int32_t x, int32_t y)
 	x -= get_w() >> 1;
 	y -= get_h() >> 1;
 	const Map & map = egbase().map();
-	if (x < 0) x += map.get_width () * TRIANGLE_WIDTH;
-	if (y < 0) y += map.get_height() * TRIANGLE_HEIGHT;
+	if (x < 0)
+		x += map.get_width () * TRIANGLE_WIDTH;
+	if (y < 0)
+		y += map.get_height() * TRIANGLE_HEIGHT;
 	set_viewpoint(Point(x, y));
 }
 
@@ -795,7 +800,8 @@ void Interactive_Base::roadb_remove_overlay()
 
 	//  preview of the road
 	Overlay_Manager & overlay_manager = egbase().map().overlay_manager();
-	if (m_jobid) overlay_manager.remove_road_overlay(m_jobid);
+	if (m_jobid)
+		overlay_manager.remove_road_overlay(m_jobid);
 	m_jobid = Overlay_Manager::Job_Id::Null();
 
 	// build hints

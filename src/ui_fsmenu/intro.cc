@@ -35,16 +35,21 @@ m_message
 	m_message.set_font(ui_fn(), fs_small() * 6 / 5, RGBColor(192, 192, 128));
 }
 
-bool Fullscreen_Menu_Intro::handle_mousepress(const Uint8, int32_t, int32_t) {
+bool Fullscreen_Menu_Intro::handle_mousepress  (Uint8, int32_t, int32_t)
+{
 	end_modal(0);
 
 	return true;
 }
-bool Fullscreen_Menu_Intro::handle_mouserelease(const Uint8, int32_t, int32_t)
-{return true;}
+bool Fullscreen_Menu_Intro::handle_mouserelease(Uint8, int32_t, int32_t)
+{
+	return true;
+}
 
-bool Fullscreen_Menu_Intro::handle_key(bool down, SDL_keysym code) {
-	if (down and code.sym == SDLK_ESCAPE) end_modal(0);
+bool Fullscreen_Menu_Intro::handle_key(bool const down, SDL_keysym const code)
+{
+	if (down and code.sym == SDLK_ESCAPE)
+		end_modal(0);
 
 	return true;
 }

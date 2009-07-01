@@ -84,7 +84,8 @@ template <typename Base> struct basic_FileWrite : public Base {
 		if (i + size > filelength) {
 			if (i + size > maxsize) {
 				maxsize += 4096;
-				if (i + size > maxsize) maxsize = i + size;
+				if (maxsize < i + size)
+					maxsize = i + size;
 				data = static_cast<char *>(realloc(data, maxsize));
 			}
 			filelength = i + size;

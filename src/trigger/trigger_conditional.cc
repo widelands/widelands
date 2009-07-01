@@ -55,7 +55,8 @@ TriggerConditional & TriggerConditional_Factory::create_from_infix
 					log("Missmatched parenthesis!\n");
 					throw SyntaxError();
 				}
-				if (tempstack.back().token == LPAREN) break;
+				if (tempstack.back().token == LPAREN)
+					break;
 				postfix.push_back(tempstack.back());
 				tempstack.pop_back();
 			}

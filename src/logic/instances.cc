@@ -427,7 +427,8 @@ void Map_Object::molog(char const * fmt, ...) const
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-	if (m_logsink) m_logsink->log(buffer);
+	if (m_logsink)
+		m_logsink->log(buffer);
 
 	log("MO(%u): %s", m_serial, buffer);
 }

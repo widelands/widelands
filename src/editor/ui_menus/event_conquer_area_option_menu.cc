@@ -364,12 +364,14 @@ void Event_Conquer_Area_Option_Menu::update() {
 	if (extent.h <= static_cast<uint16_t>(m_player_area.y))
 		m_player_area.y = extent.h - 1;
 
-	if (m_player_area.player_number < 1) m_player_area.player_number = 1;
+	if (m_player_area.player_number < 1)
+		m_player_area.player_number = 1;
 	Widelands::Player_Number const nr_players = map.get_nrplayers();
 	if (nr_players < m_player_area.player_number)
 		m_player_area.player_number = nr_players;
 
-	if (m_player_area.radius < 1) m_player_area.radius = 1;
+	if (m_player_area.radius < 1)
+		m_player_area.radius = 1;
 
 	char buf[6];
 	snprintf(buf, sizeof(buf), "%i", m_player_area.x);

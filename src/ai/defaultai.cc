@@ -1246,7 +1246,8 @@ bool DefaultAI::improve_transportation_ways (const Flag & flag)
 		for (uint8_t i = 1; i <= 6; ++i) {
 		Road * const road = nf.flag->get_road(i);
 
-		if (!road) continue;
+		if (!road)
+			continue;
 
 		Flag * endflag = &road->get_flag(Road::FlagStart);
 		if (endflag == nf.flag)

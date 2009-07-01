@@ -116,8 +116,10 @@ void GameOptionsMenu::clicked_authors() {
 }
 
 void GameOptionsMenu::clicked_sound() {
-	if (m_windows.sound_options.window) delete m_windows.sound_options.window;
-	else new GameOptionsSoundMenu(m_gb, m_windows.sound_options);
+	if (m_windows.sound_options.window)
+		delete m_windows.sound_options.window;
+	else
+		new GameOptionsSoundMenu(m_gb, m_windows.sound_options);
 }
 
 void GameOptionsMenu::clicked_save_game() {

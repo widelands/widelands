@@ -189,7 +189,8 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 				for (uint32_t i = 0; i < dataset.size(); ++i) {
 					add += dataset[i];
 					if (0 == ((i + 1) % how_many)) {
-						if (add > max) max = add;
+						if (max < add)
+							max = add;
 						add = 0;
 					}
 				}

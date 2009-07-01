@@ -160,7 +160,8 @@ int32_t Panel::run()
 		};
 
 		app->handle_input(&icb);
-		if (app->should_die()) end_modal(dying_code);
+		if (app->should_die())
+			end_modal(dying_code);
 
 		do_think();
 
@@ -237,13 +238,10 @@ void Panel::end() {}
  */
 void Panel::set_size(const uint32_t nw, const uint32_t nh)
 {
-	uint32_t upw = _w;
-	uint32_t uph = _h;
+	uint32_t const upw = std::min(nw, _w);
+	uint32_t const uph = std::min(nh, _h);
 	_w = nw;
 	_h = nh;
-
-	if (nw > upw) upw = nw;
-	if (nh > uph) uph = nh;
 
 	if (_cache != g_gr->get_no_picture()) {
 		g_gr->free_surface(_cache);
@@ -471,8 +469,10 @@ Point Panel::get_mouse_position() const throw () {
 void Panel::set_mouse_pos(const Point p) {
 	const Point relative_p =
 		p + Point(get_x() + get_lborder(), get_y() + get_tborder());
-	if (_parent) _parent     ->set_mouse_pos(relative_p);
-	else WLApplication::get()->warp_mouse(relative_p);
+	if (_parent)
+		_parent             ->set_mouse_pos(relative_p);
+	else
+		WLApplication::get()->warp_mouse   (relative_p);
 }
 
 
@@ -576,7 +576,8 @@ void Panel::grab_mouse(bool const grab)
 void Panel::set_can_focus(bool const yes)
 {
 
-	if (yes) _flags |= pf_can_focus;
+	if (yes)
+		_flags |= pf_can_focus;
 	else {
 		_flags &= ~pf_can_focus;
 
@@ -777,7 +778,8 @@ void Panel::do_mousein(bool const inside)
 bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 	x -= _lborder;
 	y -= _tborder;
-	if (_flags & pf_top_on_click) move_to_top();
+	if (_flags & pf_top_on_click)
+		move_to_top();
 	if (_g_mousegrab != this)
 		for
 			(Panel * child = _fchild;
@@ -953,8 +955,10 @@ void Panel::draw_tooltip(RenderTarget & dst, Panel & lowest)
 		 tip_width, tip_height);
 	const Point tooltip_bottom_left = r.bottom_left();
 	const Point screen_bottom_left(g_gr->get_xres(), g_gr->get_yres());
-	if (screen_bottom_left.x < tooltip_bottom_left.x) r.x -=  4 + r.w;
-	if (screen_bottom_left.y < tooltip_bottom_left.y) r.y -= 35 + r.h;
+	if (screen_bottom_left.x < tooltip_bottom_left.x)
+		r.x -=  4 + r.w;
+	if (screen_bottom_left.y < tooltip_bottom_left.y)
+		r.y -= 35 + r.h;
 
 	dst.fill_rect(r, RGBColor(230, 200, 50));
 	dst.draw_rect(r, RGBColor(0, 0, 0));

@@ -87,7 +87,8 @@ UI::UniqueWindow(&parent, &registry, 350, 400, _("Tool Menu"))
 	m_radioselect.changed.set(this, &Editor_Tool_Menu::changed_to);
 	m_radioselect.clicked.set(this, &Editor_Tool_Menu::changed_to);
 
-	if (get_usedefaultpos()) center_to_parent();
+	if (get_usedefaultpos())
+		center_to_parent();
 }
 
 /**

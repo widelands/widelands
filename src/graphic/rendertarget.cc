@@ -260,11 +260,13 @@ void RenderTarget::tile(Rect r, PictureID const picture, Point ofs)
 		// Make sure the offset is within bounds
 		ofs.x = ofs.x % src->get_w();
 
-		if (ofs.x < 0) ofs.x += src->get_w();
+		if (ofs.x < 0)
+			ofs.x += src->get_w();
 
 		ofs.y = ofs.y % src->get_h();
 
-		if (ofs.y < 0) ofs.y += src->get_h();
+		if (ofs.y < 0)
+			ofs.y += src->get_h();
 
 		// Blit the picture into the rectangle
 		uint32_t ty = 0;
@@ -277,13 +279,15 @@ void RenderTarget::tile(Rect r, PictureID const picture, Point ofs)
 			srcrc.y = ofs.y;
 			srcrc.h = src->get_h() - ofs.y;
 
-			if (ty + srcrc.h > r.h) srcrc.h = r.h - ty;
+			if (ty + srcrc.h > r.h)
+				srcrc.h = r.h - ty;
 
 			while (tx < r.w) {
 				srcrc.x = tofsx;
 				srcrc.w = src->get_w() - tofsx;
 
-				if (tx + srcrc.w > r.w) srcrc.w = r.w - tx;
+				if (tx + srcrc.w > r.w)
+					srcrc.w = r.w - tx;
 
 				m_surface->blit(r + Point(tx, ty), src, srcrc);
 
@@ -566,7 +570,8 @@ void RenderTarget::rendermap
 					if (f_is_border) {
 						const Player & owner = egbase.player(f_owner_number);
 						const uint32_t anim = owner.tribe().get_frontier_anim();
-						if (1 < f_vision) drawanim(f_pos, anim, 0, &owner);
+						if (1 < f_vision)
+							drawanim(f_pos, anim, 0, &owner);
 						if
 							((f_vision | r_vision)
 							 and

@@ -291,7 +291,8 @@ void Editor_Game_Base::do_conquer_area
 				 or
 				 player(owner).military_influence(index) < new_influence_modified)
 			{
-				if (owner) receive(NoteField(mr.location(), LOSE));
+				if (owner)
+					receive(NoteField(mr.location(), LOSE));
 				mr.location().field->set_owned_by(player_area.player_number);
 				inform_players_about_ownership(index, player_area.player_number);
 				receive (NoteField(mr.location(), GAIN));
@@ -471,7 +472,8 @@ void Editor_Game_Base::inform_players_about_ownership
 	for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
 		if (Player * const p = m_players[plnum]) {
 			Player::Field & player_field = p->m_fields[i];
-			if (1 < player_field.vision) player_field.owner = new_owner;
+			if (1 < player_field.vision)
+				player_field.owner = new_owner;
 		}
 }
 void Editor_Game_Base::inform_players_about_immovable
@@ -507,7 +509,8 @@ void Editor_Game_Base::set_map(Map * const new_map, bool register_callback) {
 
 void Editor_Game_Base::allocate_player_maps() {
 	for (Player_Number i = 0; i < MAX_PLAYERS; ++i)
-		if (m_players[i]) m_players[i]->allocate_map();
+		if (m_players[i])
+			m_players[i]->allocate_map();
 }
 
 
@@ -763,7 +766,8 @@ void Editor_Game_Base::cleanup_for_load
 		*p = 0;
 	}
 
-	if (m_map) m_map->cleanup();
+	if (m_map)
+		m_map->cleanup();
 }
 
 

@@ -59,24 +59,21 @@ struct MessageQueue {
 		return myQueue[player_number];
 	}
 
-	static void add (const Player & p, Message const m)
-	{
+	static void add (Player const & p, Message const m) {
 		add(p.get_player_number(), m);
 	}
-	static void add (Player_Number player_number, Message m)
-	{
+	static void add (Player_Number const player_number, Message const m) {
 		//log("Adding message for player %i : %s %s\n",player_number,
 		//m.visname().c_str(),m.descr().c_str());
 		std::vector<Message> & myQueue = get(player_number);
 		myQueue.push_back(m);
 		if (myQueue.size() >= MAX_QUEUE_SIZE) {
 			std::vector<Message>::iterator b = myQueue.begin();
-			while (b != myQueue.end()) {
+			while (b != myQueue.end())
 				if (b->get_is_visible())
 					b = myQueue.erase(b);
 				else
 					++b;
-			}
 			//no empty messages to delete so remove the first one
 			if (myQueue.size() >= MAX_QUEUE_SIZE)
 				myQueue.erase(myQueue.begin());

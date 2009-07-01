@@ -203,11 +203,13 @@ public:
 		}
 	};
 	Entry_Record & get_selected_record() const {
-		if (m_selection == no_selection_index()) throw No_Selection();
+		if (m_selection == no_selection_index())
+			throw No_Selection();
 		return *m_entry_records[m_selection];
 	}
 	void remove_selected() throw (No_Selection) {
-		if (m_selection == no_selection_index()) throw No_Selection();
+		if (m_selection == no_selection_index())
+			throw No_Selection();
 		remove(m_selection);
 	}
 	void * get_selected() const

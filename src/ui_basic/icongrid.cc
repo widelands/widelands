@@ -281,9 +281,11 @@ bool Icon_Grid::handle_mousemove
 
 	if (hl != m_highlight) {
 		update_for_index(m_highlight);
-		if (m_highlight != -1) mouseout.call(m_highlight);
+		if (m_highlight != -1)
+			mouseout.call(m_highlight);
 		update_for_index(hl);
-		if (hl != -1) mousein.call(hl);
+		if (hl          != -1)
+			mousein .call(hl);
 
 		m_highlight = hl;
 	}

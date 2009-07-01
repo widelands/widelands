@@ -140,7 +140,8 @@ FieldCaps Player::get_buildcaps(const FCoords fc) const {
 	uint8_t buildcaps = fc.field->get_caps();
 	const uint8_t player_number = m_plnum;
 
-	if (not fc.field->is_interior(player_number)) buildcaps = 0;
+	if (not fc.field->is_interior(player_number))
+		buildcaps = 0;
 
 	// Check if a building's flag can't be build due to ownership
 	else if (buildcaps & BUILDCAPS_BUILDINGMASK) {
@@ -672,7 +673,8 @@ throw ()
 			const Map_Object_Descr * map_object_descr;
 			if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
-				if (map_object_descr == &g_road_descr) map_object_descr = 0;
+				if (map_object_descr == &g_road_descr)
+					map_object_descr = 0;
 				else if (upcast(Building const, building, base_immovable))
 					if (building->get_position() != f)
 						//  TODO This is not the buildidng's main position so we can
@@ -731,9 +733,11 @@ throw ()
 	assert(m_fields <= &field);
 	assert            (&field < m_fields + map.max_index());
 	Vision fvision = field.vision;
-	if (fvision == 0) fvision = 1;
+	if (fvision == 0)
+		fvision = 1;
 	if (fvision == 1) {
-		if (not lasting) field.time_node_last_unseen = gametime;
+		if (not lasting)
+			field.time_node_last_unseen = gametime;
 		discover_node(map, first_map_field, f, field);
 	}
 	fvision += lasting;

@@ -510,12 +510,14 @@ bool Window::handle_mousemove
 				new_top = max_y_minus_h;
 			}
 
-			if (nearest_snap_distance_x == bsnap) nearest_snap_distance_x = psnap;
+			if (nearest_snap_distance_x == bsnap)
+				nearest_snap_distance_x = psnap;
 			else {
 				assert(nearest_snap_distance_x < bsnap);
 				nearest_snap_distance_x = std::min(nearest_snap_distance_x, psnap);
 			}
-			if (nearest_snap_distance_y == bsnap) nearest_snap_distance_y = psnap;
+			if (nearest_snap_distance_y == bsnap)
+				nearest_snap_distance_y = psnap;
 			else {
 				assert(nearest_snap_distance_y < bsnap);
 				nearest_snap_distance_y = std::min(nearest_snap_distance_y, psnap);
@@ -579,8 +581,10 @@ bool Window::handle_mousemove
 
 			if (parent->get_dock_windows_to_edges()) {
 				if (new_left == 0) {
-					if (not _docked_left) dock_left();
-				} else if (_docked_left) undock_left();
+					if (not _docked_left)
+						dock_left();
+				} else if (_docked_left)
+					undock_left();
 				if (new_left == max_x_minus_w) {
 					if (not _docked_right) {
 						dock_right();

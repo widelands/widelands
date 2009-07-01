@@ -273,15 +273,18 @@ inline Direction StreamRead::Direction8_allow_null() {
 
 inline Map_Index StreamRead::Map_Index32(Map_Index const max) {
 	uint32_t const i = Unsigned32();
-	if (max <= i) throw exceeded_max_index(max, i);
+	if (max <= i)
+		throw exceeded_max_index(max, i);
 	return i;
 }
 
 inline Coords StreamRead::Coords32(const Extent extent) {
 	uint16_t const x = Unsigned16();
 	uint16_t const y = Unsigned16();
-	if (extent.w <= x) throw exceeded_width (extent.w, x);
-	if (extent.h <= y) throw exceeded_height(extent.h, y);
+	if (extent.w <= x)
+		throw exceeded_width (extent.w, x);
+	if (extent.h <= y)
+		throw exceeded_height(extent.h, y);
 	return Coords(x, y);
 }
 
@@ -290,8 +293,10 @@ inline Coords StreamRead::Coords32_allow_null(const Extent extent) {
 	uint16_t const y = Unsigned16();
 	const Coords result(x, y);
 	if (result) {
-		if (extent.w <= x) throw exceeded_width (extent.w, x);
-		if (extent.h <= y) throw exceeded_height(extent.h, y);
+		if (extent.w <= x)
+			throw exceeded_width (extent.w, x);
+		if (extent.h <= y)
+			throw exceeded_height(extent.h, y);
 	}
 	return result;
 }

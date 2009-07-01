@@ -33,7 +33,8 @@ Songset::~Songset()
 {
 	m_songs.clear();
 
-	if (m_m) Mix_FreeMusic(m_m);
+	if (m_m)
+		Mix_FreeMusic(m_m);
 }
 
 /** Append a song to the end of the songset

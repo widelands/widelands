@@ -1510,7 +1510,9 @@ local int32_t ziplocal_putValue
 		x >>= 8;
 	}
 	// data overflow - hack for ZIP64 (X Roche)
-	if (x != 0) for (n = 0; n < nbByte; ++n) buf[n] = 0xff;
+	if (x != 0)
+		for (n = 0; n < nbByte; ++n)
+			buf[n] = 0xff;
 
 	return
 		ZWRITE(*pzlib_filefunc_def, filestream, buf, nbByte)

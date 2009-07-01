@@ -151,7 +151,8 @@ Point Section::Value::get_Point() const
 	char * endp = m_value;
 	long int const x = strtol(endp, &endp, 0);
 	long int const y = strtol(endp, &endp, 0);
-	if (*endp) throw wexception("%s: '%s' is not a Point", get_name(), m_value);
+	if (*endp)
+		throw wexception("%s: '%s' is not a Point", get_name(), m_value);
 
 	return Point(x, y);
 }

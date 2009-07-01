@@ -85,8 +85,10 @@ m_game    (game)
 
 	center_to_parent();
 
-	if (gposx != -1) set_pos(Point(gposy, get_y()));
-	if (gposy != -1) set_pos(Point(get_x(), gposy));
+	if (gposx != -1)
+		set_pos(Point(gposy, get_y()));
+	if (gposy != -1)
+		set_pos(Point(get_x(), gposy));
 }
 
 

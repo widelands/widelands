@@ -198,18 +198,19 @@ void Surface::brighten_rect(const Rect rc, const int32_t factor) {
 	const Point bl = rc.bottom_left();
 	lock();
 	for (int32_t y = rc.y; y < bl.y; ++y) for (int32_t x = rc.x; x < bl.x; ++x) {
+		uint32_t const clr = get_pixel(x, y);
 		uint8_t gr, gg, gb;
-		int16_t r, g, b;
-		uint32_t clr = get_pixel(x, y);
 		SDL_GetRGB(clr, m_surface->format, &gr, &gg, &gb);
-		r = gr + factor;
-		g = gg + factor;
-		b = gb + factor;
-		if (b & 0xFF00) b = (~b) >> 24;
-		if (g & 0xFF00) g = (~g) >> 24;
-		if (r & 0xFF00) r = (~r) >> 24;
-		clr = SDL_MapRGB(m_surface->format, r, g, b);
-		set_pixel(x, y, clr);
+		int16_t r = gr + factor;
+		int16_t g = gg + factor;
+		int16_t b = gb + factor;
+		if (b & 0xFF00)
+			b = ~b >> 24;
+		if (g & 0xFF00)
+			g = ~g >> 24;
+		if (r & 0xFF00)
+			r = ~r >> 24;
+		set_pixel(x, y, SDL_MapRGB(m_surface->format, r, g, b));
 	}
 	unlock();
 }

@@ -44,7 +44,8 @@ int32_t Editor_Tool_Set_Starting_Pos_Callback
 			if (Widelands::Coords const sp = map.get_starting_pos(p))
 				if (map.calc_distance(sp, c) < MIN_PLACE_AROUND_PLAYERS)
 					return 0;
-		if (last == nr_players) break;
+		if (last == nr_players)
+			break;
 		last = nr_players;
 	}
 

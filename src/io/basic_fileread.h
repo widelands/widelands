@@ -97,7 +97,8 @@ template<typename Base> struct basic_FileRead : public Base {
 	/// \throws File_Boundary_Exceeded if the pointer is out of bound.
 	void SetFilePos(Pos const pos) {
 		assert(data);
-		if (pos >= length) throw File_Boundary_Exceeded();
+		if (pos >= length)
+			throw File_Boundary_Exceeded();
 		filepos = pos;
 	}
 
@@ -121,7 +122,8 @@ template<typename Base> struct basic_FileRead : public Base {
 			i = filepos;
 			filepos += bytes;
 		}
-		if (i + bytes > length) throw File_Boundary_Exceeded();
+		if (length < i + bytes)
+			throw File_Boundary_Exceeded();
 		return data + i;
 	}
 
@@ -129,12 +131,15 @@ template<typename Base> struct basic_FileRead : public Base {
 		assert(data);
 
 		Pos i = pos.isNull() ? filepos : pos;
-		if (i >= length) throw File_Boundary_Exceeded();
+		if (i >= length)
+			throw File_Boundary_Exceeded();
 		char * const result = data + i;
 		for (char * p = result; *p; ++p, ++i) {}
 		++i; //  beyond the null
-		if (i > length) throw File_Boundary_Exceeded();
-		if (pos.isNull()) filepos = i;
+		if (i > length)
+			throw File_Boundary_Exceeded();
+		if (pos.isNull())
+			filepos = i;
 		return result;
 	}
 	char const * CString() {return CString(Pos::Null());}

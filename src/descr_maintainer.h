@@ -68,7 +68,8 @@ private:
 	void reserve(const typename T::Index n) {
 		T * * const new_items =
 			static_cast<T * *>(realloc(items, sizeof(T *) * n));
-		if (not new_items) throw std::bad_alloc();
+		if (not new_items)
+			throw std::bad_alloc();
 		items = new_items;
 		capacity = n;
 	}

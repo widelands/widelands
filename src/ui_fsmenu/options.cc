@@ -271,7 +271,8 @@ os(opt)
 		did_select_a_res |= selected;
 		m_reslist.add(buf, 0, g_gr->get_no_picture(), selected);
 	}
-	if (not did_select_a_res) m_reslist.select(m_reslist.size() - 1);
+	if (not did_select_a_res)
+		m_reslist.select(m_reslist.size() - 1);
 
 	available_languages[0].name = _("System default language");
 	for (uint32_t i = 0; i < NR_LANGUAGES; ++i)

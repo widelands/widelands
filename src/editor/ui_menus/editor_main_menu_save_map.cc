@@ -316,7 +316,8 @@ void Main_Menu_Save_Map::fill_list() {
 			delete ml;
 		}
 	}
-	if (m_ls->size()) m_ls->select(0);
+	if (m_ls->size())
+		m_ls->select(0);
 }
 
 /*

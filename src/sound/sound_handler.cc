@@ -402,7 +402,8 @@ void Sound_Handler::play_fx
 	//  retrieve the fx and play it if it's valid
 	if (Mix_Chunk * const m = m_fxs[fx_name]->get_fx()) {
 		const int32_t chan = Mix_PlayChannel(-1, m, 0);
-		if (chan == -1) log("Sound_Handler: Mix_PlayChannel failed\n");
+		if (chan == -1)
+			log("Sound_Handler: Mix_PlayChannel failed\n");
 		else {
 			Mix_SetPanning(chan, 254 - stereo_pos, stereo_pos);
 			Mix_Volume(chan, get_fx_volume());

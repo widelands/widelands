@@ -44,8 +44,10 @@ struct MultiSelect {
 		if (m_enabled[n] == t)
 			return;
 		m_enabled[n] = t;
-		if (t) ++m_nr_enabled;
-		else   --m_nr_enabled;
+		if (t)
+			++m_nr_enabled;
+		else
+			--m_nr_enabled;
 		assert(0 <= m_nr_enabled);
 	}
 	bool is_enabled(int32_t n) const {

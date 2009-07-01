@@ -67,7 +67,8 @@ m_fontsize(UI_FONT_SIZE_SMALL)
 		uint32_t pic_h;
 		m_check_picid = g_gr->get_picture(PicMod_Game,  "pics/list_selected.png");
 		g_gr->get_picture_size(m_check_picid, m_max_pic_width, pic_h);
-		if (pic_h > m_lineheight) m_lineheight = pic_h;
+		if (pic_h > m_lineheight)
+			m_lineheight = pic_h;
 	}
 	else
 		m_max_pic_width = 0;
@@ -212,14 +213,17 @@ void BaseListselect::switch_entries(const uint32_t m, const uint32_t n)
  */
 void BaseListselect::sort(const uint32_t Begin, uint32_t End)
 {
-	if (End > size()) End = size();
+	if (End > size())
+		End = size();
 	for (uint32_t i = Begin; i < End; ++i)
 		for (uint32_t j = i + 1; j < End; ++j) {
 			Entry_Record * const eri = m_entry_records[i];
 			Entry_Record * const erj = m_entry_records[j];
 			if (strcmp(eri->name.c_str(), erj->name.c_str()) > 0) {
-				if      (m_selection == i) m_selection = j;
-				else if (m_selection == j) m_selection = i;
+				if      (m_selection == i)
+					m_selection = j;
+				else if (m_selection == j)
+					m_selection = i;
 				m_entry_records[i] = erj;
 				m_entry_records[j] = eri;
 			}

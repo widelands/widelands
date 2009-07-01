@@ -959,7 +959,8 @@ void Bob::set_position(Editor_Game_Base & egbase, Coords const coords)
 
 	m_linknext = m_position.field->bobs;
 	m_linkpprev = &m_position.field->bobs;
-	if (m_linknext) m_linknext->m_linkpprev = &m_linknext;
+	if (m_linknext)
+		m_linknext->m_linkpprev = &m_linknext;
 	*m_linkpprev = this;
 
 	if (m_owner != 0) {

@@ -46,8 +46,10 @@ struct Event_Set_Timer : public Event, public Referencer<Trigger> {
 
 	void set_trigger(Trigger_Time * const new_trigger) {
 		if (new_trigger != m_trigger) {
-			if   (m_trigger) Referencer<Trigger>::unreference  (*m_trigger);
-			if (new_trigger) Referencer<Trigger>::  reference(*new_trigger);
+			if   (m_trigger)
+				Referencer<Trigger>::unreference  (*m_trigger);
+			if (new_trigger)
+				Referencer<Trigger>::  reference(*new_trigger);
 			m_trigger = new_trigger;
 		}
 	}

@@ -103,7 +103,8 @@ ingame_sound_volume
 		 + vbigspacing() + 3 * vspacing() + 2 * slideh()
 		 + ingame_music_volume_label.get_h() + ingame_music_volume_label.get_h());
 
-	if (get_usedefaultpos()) center_to_parent();
+	if (get_usedefaultpos())
+		center_to_parent();
 }
 
 /**

@@ -22,6 +22,7 @@
 #include "logic/bob.h"
 #include "economy/flag.h"
 #include "economy/ware_instance.h"
+#include "legacy.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "map.h"
@@ -35,7 +36,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 
 void Map_Waredata_Data_Packet::Read
@@ -53,10 +54,9 @@ throw (_wexception)
 
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (1 == packet_version) {
 			for (;;) {
 				Serial const serial = fr.Unsigned32();
-				//  FIXME Just test EndOfFile instead in the next packet version.
 				if (serial == 0xffffffff) {
 					if (not fr.EndOfFile())
 						throw wexception
@@ -66,15 +66,8 @@ throw (_wexception)
 				try {
 					WareInstance & ware = ol->get<WareInstance>(serial);
 					ware.m_economy = 0;
-					uint32_t const location_serial = fr.Unsigned32();
-
-					//  FIXME This code is broken. We can not assume that ware index
-					//  FIXME is the same as when the game was saved.
-					uint32_t const ware_index_from_file = fr.Unsigned32();
-					ware.m_descr_index =
-						Ware_Index
-							(static_cast<Ware_Index::value_t>(ware_index_from_file));
-
+					uint32_t     const location_serial = fr.Unsigned32();
+					uint32_t     const index           = fr.Unsigned32();
 					try {
 						Map_Object & location = ol->get<Map_Object>(location_serial);
 
@@ -86,56 +79,112 @@ throw (_wexception)
 							{
 								//  We didn't know what kind of ware we were till now,
 								//  so no economy might have a clue of us.
-
-								//  FIXME This code is broken. We can not assume that
-								//  FIXME ware index is the same as when the game was
-								//  FIXME saved.
 								Tribe_Descr const & tribe =
 									player_immovable->owner().tribe();
-								if
-									(tribe.get_nrwares().value()
-									 <=
-									 static_cast<int32_t>(ware_index_from_file))
-									throw wexception
-										("ware index out of range: %u",
-										 ware_index_from_file);
 								ware.m_descr =
-									tribe.get_ware_descr(ware.descr_index());
+									tribe.get_ware_descr
+										(ware.m_descr_index =
+										 	Legacy::ware_index
+										 		(tribe,
+										 		 player_immovable->descr().descname(),
+										 		 "has",
+										 		 index));
 
 								ware.set_economy(player_immovable->get_economy());
 							} else
 								throw wexception
 									("is PlayerImmovable but not Building or Flag");
 						} else if (upcast(Worker, worker, &location)) {
-
-							//  FIXME This code is broken. We can not assume that ware
-							//  FIXME index ware index is the same as when the game
-							//  FIXME was saved.
 							Tribe_Descr const & tribe = *worker->get_tribe();
-							if
-								(tribe.get_nrwares().value()
-								 <=
-								 static_cast<int32_t>(ware_index_from_file))
-								throw wexception
-									("ware index out of range: %u",
-									 ware_index_from_file);
-							ware.m_descr = tribe.get_ware_descr(ware.descr_index());
+							ware.m_descr =
+								tribe.get_ware_descr
+									(ware.m_descr_index =
+									 	Legacy::ware_index
+									 		(tribe,
+									 		 worker->descr().descname(),
+									 		 "has",
+									 		 index));
 
 							//  The worker sets our economy.
 						} else
 							throw wexception("is not PlayerImmovable or Worker");
 						//  Do not touch supply or transfer.
 
-						if (uint32_t const nextstep_serial = fr.Unsigned32()) {
+						if (uint32_t const nextstep_serial = fr.Unsigned32())
 							try {
 								ware.m_transfer_nextstep =
-									&ol->get<Map_Object>(nextstep_serial);
+									&ol->get<PlayerImmovable>(nextstep_serial);
 							} catch (_wexception const & e) {
 								throw wexception
 									("nextstep %u: %s", nextstep_serial, e.what());
 							}
+						else
+							ware.m_transfer_nextstep =
+								static_cast<PlayerImmovable *>(0);
+
+						//  Do some kind of init.
+						if (upcast(Game, game, &egbase))
+							ware.set_location(*game, &location);
+					} catch (_wexception const & e) {
+						throw wexception
+							("location %u: %s", location_serial, e.what());
+					}
+					ol->mark_object_as_loaded(&ware);
+				} catch (_wexception const & e) {
+					throw wexception("item %u: %s", serial, e.what());
+				}
+			}
+		} else if
+			(2 <= packet_version and packet_version <= CURRENT_PACKET_VERSION)
+		{
+			for (; not fr.EndOfFile();) {
+				Serial const serial = fr.Unsigned32();
+				try {
+					WareInstance & ware = ol->get<WareInstance>(serial);
+					ware.m_economy = 0;
+					uint32_t     const location_serial = fr.Unsigned32();
+					char const * const type_name       = fr.CString   ();
+					try {
+						Map_Object & location = ol->get<Map_Object>(location_serial);
+
+						if (upcast(PlayerImmovable, player_immovable, &location)) {
+							if
+								(dynamic_cast<Building const *>(player_immovable)
+								 or
+								 dynamic_cast<Flag     const *>(player_immovable))
+							{
+								Tribe_Descr const & tribe =
+									player_immovable->owner().tribe();
+								ware.m_descr =
+									tribe.get_ware_descr
+										(ware.m_descr_index =
+										 	tribe.safe_ware_index(type_name));
+								ware.set_economy(player_immovable->get_economy());
+							} else
+								throw wexception
+									("is PlayerImmovable but not Building or Flag");
+						} else if (upcast(Worker, worker, &location)) {
+							Tribe_Descr const & tribe = *worker->get_tribe();
+							ware.m_descr =
+								tribe.get_ware_descr
+									(ware.m_descr_index =
+									 	tribe.safe_ware_index(type_name));
+							//  The worker sets our economy.
 						} else
-							ware.m_transfer_nextstep = static_cast<Map_Object *>(0);
+							throw wexception("is not PlayerImmovable or Worker");
+						//  Do not touch supply or transfer.
+
+						if (uint32_t const nextstep_serial = fr.Unsigned32())
+							try {
+								ware.m_transfer_nextstep =
+									&ol->get<PlayerImmovable>(nextstep_serial);
+							} catch (_wexception const & e) {
+								throw wexception
+									("nextstep %u: %s", nextstep_serial, e.what());
+							}
+						else
+							ware.m_transfer_nextstep =
+								static_cast<PlayerImmovable *>(0);
 
 						//  Do some kind of init.
 						if (upcast(Game, game, &egbase))
@@ -191,7 +240,6 @@ throw (_wexception)
 					write_ware(fw, egbase, os, *ware);
 				}
 	}
-	fw.Unsigned32(0xffffffff); // End of wares
 
 	fw.Write(fs, "binary/ware_data");
 }
@@ -213,11 +261,7 @@ void Map_Waredata_Data_Packet::write_ware
 	} else
 		fw.Unsigned32(0);
 
-	// Economy is set by set_location()
-
-	//  FIXME We can not assume that ware index is the same when the game is
-	//  FIXME loaded again. This must be changed to write the name instead.
-	fw.Signed32(ware.descr_index().value());
+	fw.CString(ware.descr().name());
 
 	if (Map_Object const * const obj = ware.m_transfer_nextstep.get(egbase)) {
 		assert(os->is_object_known(*obj));

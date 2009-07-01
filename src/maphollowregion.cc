@@ -53,7 +53,8 @@ template <> bool MapHollowRegion<Area<> >::advance(const Map & map) throw () {
 		}
 	} else {
 		++m_row;
-		if (m_phase == Top and m_row == m_delta_radius) m_phase = Upper;
+		if (m_phase == Top and m_row == m_delta_radius)
+			m_phase = Upper;
 
 		// If we completed the widest, center line, switch into lower mode
 		// There are m_radius+1 lines in the upper "half", because the upper

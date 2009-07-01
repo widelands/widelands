@@ -77,7 +77,9 @@ private:
 	};
 	uint8_t m_flags;
 	void set_flags(uint8_t const flags, bool const enable) throw () {
-		m_flags &= ~flags; if (enable) m_flags |= flags;
+		m_flags &= ~flags;
+		if (enable)
+			m_flags |= flags;
 	}
 	PictureID    m_pic_graphics;
 };

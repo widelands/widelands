@@ -263,5 +263,6 @@ void Main_Menu_Load_Map::fill_list() {
 		}
 	}
 
-	if (m_ls->size()) m_ls->select(0);
+	if (m_ls->size())
+		m_ls->select(0);
 }

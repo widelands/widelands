@@ -274,14 +274,19 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		 ++pname)
 	{
 		char const * const name = pname->c_str();
-		if (!strcmp(FileSystem::FS_Filename(name), ".")) continue;
+		if (!strcmp(FileSystem::FS_Filename(name), "."))
+			continue;
 		// Upsy, appeared again. ignore
-		if (!strcmp(FileSystem::FS_Filename(name), "..")) continue;
+		if (!strcmp(FileSystem::FS_Filename(name), ".."))
+			continue;
 		// HACK: we skip .svn dir (which is in normal checkout present) for
 		// esthetic reasons
-		if (!strcmp(FileSystem::FS_Filename(name), ".svn")) continue;
-		if (!g_fs->IsDirectory(name)) continue;
-		if (WL_Map_Loader::is_widelands_map(name)) continue;
+		if (!strcmp(FileSystem::FS_Filename(name), ".svn"))
+			continue;
+		if (!g_fs->IsDirectory(name))
+			continue;
+		if (WL_Map_Loader::is_widelands_map(name))
+			continue;
 
 		MapData dir;
 		dir.filename = name;

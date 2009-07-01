@@ -367,7 +367,7 @@ bool Trigger_Building_Option_Menu::
 	return false;
 }
 bool Trigger_Building_Option_Menu::
-	handle_mouserelease(const Uint8, int32_t, int32_t)
+	handle_mouserelease(Uint8, int32_t, int32_t)
 {
 	return false;
 }

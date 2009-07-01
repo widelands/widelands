@@ -309,32 +309,41 @@ void Main_Menu_New_Random_Map::button_clicked(int32_t n) {
 	case 2: ++m_h; break;
 	case 3: --m_h; break;
 	case 4:
-		if (m_waterval < 60) m_waterval += 5;
-		if (m_landval + m_waterval > 100) m_landval -= 5;
+		if (m_waterval < 60)
+			m_waterval += 5;
+		if (m_landval + m_waterval > 100)
+			m_landval -= 5;
 		break;
 	case 5:
-		if (m_waterval > 0) m_waterval -= 5;
+		if (m_waterval > 0)
+			m_waterval -= 5;
 		break;
 	case 6:
-		if (m_landval < 100) m_landval += 5;
-		if (m_waterval + m_landval > 100) m_waterval -= 5;
+		if (m_landval < 100)
+			m_landval += 5;
+		if (m_waterval + m_landval > 100)
+			m_waterval -= 5;
 		break;
 	case 7:
-		if (m_landval > 0) m_landval -= 5;
+		if (m_landval > 0)
+			m_landval -= 5;
 		break;
 	case 8:
 		++ m_currentworld;
-		if (m_currentworld == m_worlds.size()) m_currentworld = 0;
+		if (m_currentworld == m_worlds.size())
+			m_currentworld = 0;
 		m_world->set_title
 			(Widelands::World::World(m_worlds[m_currentworld].c_str()).get_name());
 		break;
 	case 9:
 		break;
 	case 10:
-		if (m_wastelandval < 70) m_wastelandval += 10;
+		if (m_wastelandval < 70)
+			m_wastelandval += 10;
 		break;
 	case 11:
-		if (m_wastelandval > 0) m_wastelandval -= 10;
+		if (m_wastelandval > 0)
+			m_wastelandval -= 10;
 		break;
 	}
 

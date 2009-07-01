@@ -54,7 +54,8 @@ struct Map_Object_Descr {
 	struct Animation_Nonexistent {};
 	uint32_t get_animation(char const * const anim) const {
 		std::map<std::string, uint32_t>::const_iterator it = m_anims.find(anim);
-		if (it == m_anims.end()) throw Animation_Nonexistent();
+		if (it == m_anims.end())
+			throw Animation_Nonexistent();
 		return it->second;
 	}
 

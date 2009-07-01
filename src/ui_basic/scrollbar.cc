@@ -82,7 +82,8 @@ void Scrollbar::set_steps(int32_t steps)
 	if (steps < 1)
 		steps = 1;
 
-	if (m_pos >= static_cast<uint32_t>(steps)) set_scrollpos(steps - 1);
+	if (m_pos >= static_cast<uint32_t>(steps))
+		set_scrollpos(steps - 1);
 
 	m_steps = steps;
 
@@ -130,7 +131,8 @@ void Scrollbar::set_scrollpos(int32_t pos)
 {
 	if (pos < 0)
 		pos = 0;
-	if (static_cast<uint32_t>(pos) >= m_steps) pos = m_steps - 1;
+	if (static_cast<uint32_t>(pos) >= m_steps)
+		pos = m_steps - 1;
 
 	if (m_pos == static_cast<uint32_t>(pos))
 		return;

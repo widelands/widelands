@@ -174,7 +174,8 @@ button_bldns
 	set_inner_size
 		(m_view.get_w(), m_view.get_h() + number_of_button_rows() * but_h());
 
-	if (get_usedefaultpos()) center_to_parent();
+	if (get_usedefaultpos())
+		center_to_parent();
 }
 
 

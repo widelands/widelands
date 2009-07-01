@@ -46,8 +46,10 @@ void Field::set_brightness
 	if (b > 0)
 		b *= 1.5;
 
-	if (b < -128) b = -128;
-	else if (b > 127) b = 127;
+	if      (b < -128)
+		b = -128;
+	else if (b >  127)
+		b =  127;
 	brightness = static_cast<int8_t>(b); //FIXME: ARGH !!
 }
 

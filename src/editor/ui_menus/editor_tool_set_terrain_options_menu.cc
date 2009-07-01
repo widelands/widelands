@@ -83,7 +83,8 @@ m_tool(tool)
 		for (Widelands::Terrain_Index i  = 0; i < nr_terrains; ++i) {
 
 			const uint8_t ter_is = world.get_ter(i).get_is();
-			if (ter_is != check[checkfor]) continue;
+			if (ter_is != check[checkfor])
+				continue;
 
 			if (cur_x == terrains_in_row) {
 				cur_x = 0;

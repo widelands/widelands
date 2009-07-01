@@ -45,7 +45,8 @@ S2_Map_Loader::S2_Map_Loader(const char * filename, Widelands::Map & M)
 : Widelands::Map_Loader(filename, M)
 {
 	strncpy(m_filename, filename, sizeof(m_filename));
-	if (m_filename[sizeof(m_filename) - 1]) throw;
+	if (m_filename[sizeof(m_filename) - 1])
+		throw;
 }
 
 

@@ -67,8 +67,10 @@ m_pit               (pit)
 			(g_gr->get_picture
 			 	(PicMod_Game, world.get_bob_descr(j)->get_picture()),
 			 w, h);
-		if (w > width)  width  = w;
-		if (h > height) height = h;
+		if (w > width)
+			width  = w;
+		if (h > height)
+			height = h;
 	}
 
 	const PictureID tab_icon =

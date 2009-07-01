@@ -154,7 +154,8 @@ void Slider::set_enabled(const bool enabled) {
  * Change the cursor style.
  */
 void Slider::handle_mousein(bool inside) {
-	if (not inside) m_highlighted = false;
+	if (not inside)
+		m_highlighted = false;
 	update(0, 0, get_w(), get_h());
 }
 
@@ -202,8 +203,10 @@ void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
 		return;
 
 	m_cursor_pos = pointer - m_relative_move;
-	if (m_cursor_pos < 0) m_cursor_pos = 0;
-	if (m_cursor_pos > get_bar_size()) m_cursor_pos = get_bar_size();
+	if (m_cursor_pos < 0)
+		m_cursor_pos = 0;
+	if (m_cursor_pos > get_bar_size())
+		m_cursor_pos = get_bar_size();
 
 	//  absolute value
 	int32_t new_value =
@@ -215,8 +218,10 @@ void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
 
 	//  relative value in bounds
 	new_value += m_min_value;
-	if (new_value < m_min_value) new_value = m_min_value;
-	if (new_value > m_max_value) new_value = m_max_value;
+	if (new_value < m_min_value)
+		new_value = m_min_value;
+	if (new_value > m_max_value)
+		new_value = m_max_value;
 
 	//  updating
 	if (new_value != m_value) {m_value = new_value; send_value_changed();}
@@ -269,8 +274,10 @@ void Slider::bar_pressed(int32_t pointer, int32_t ofs) {
 			 	 get_bar_size()));
 
 	//  relative value in bounds
-	if (m_value < m_min_value) m_value = m_min_value;
-	if (m_value > m_max_value) m_value = m_max_value;
+	if (m_value < m_min_value)
+		m_value = m_min_value;
+	if (m_value > m_max_value)
+		m_value = m_max_value;
 
 	play_click();
 	send_value_changed();

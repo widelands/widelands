@@ -88,11 +88,13 @@ uint32_t MapviewPixelFunctions::calc_pix_distance
 	uint32_t dx = abs(a.x - b.x), dy = abs(a.y - b.y);
 	{
 		const uint32_t map_end_screen_x = get_map_end_screen_x(map);
-		if (dx > map_end_screen_x / 2) dx = -(dx - map_end_screen_x);
+		if (dx > map_end_screen_x / 2)
+			dx = -(dx - map_end_screen_x);
 	}
 	{
 		const uint32_t map_end_screen_y = get_map_end_screen_y(map);
-		if (dy > map_end_screen_y / 2) dy = -(dy - map_end_screen_y);
+		if (dy > map_end_screen_y / 2)
+			dy = -(dy - map_end_screen_y);
 	}
 	return dx + dy;
 }
@@ -114,7 +116,8 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 	assert(row_number < mapheight);
 	const uint32_t left_col = col_number / 2;
 	uint16_t right_col = (col_number + 1) / 2;
-	if (right_col == mapwidth) right_col = 0;
+	if (right_col == mapwidth)
+		right_col = 0;
 	bool slash = (col_number + row_number) & 1;
 
 	//  Find out which two nodes the mouse is between in the y-dimension, taking
@@ -135,7 +138,8 @@ Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
 	for (;;) {
 		screen_y_base += TRIANGLE_HEIGHT;
 		next_row_number = row_number + 1;
-		if (next_row_number == mapheight) next_row_number = 0;
+		if (next_row_number == mapheight)
+			next_row_number = 0;
 		upper_screen_dy = lower_screen_dy;
 		lower_screen_dy =
 			screen_y_base

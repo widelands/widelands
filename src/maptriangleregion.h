@@ -78,7 +78,8 @@ template <> struct MapTriangleRegion<FCoords> {
 
 	bool advance(const Map & map) throw () {
 		if (--m_remaining_in_row) {
-			if (m_area.t == TCoords<FCoords>::D) m_area.t = TCoords<FCoords>::R;
+			if (m_area.t == TCoords<FCoords>::D)
+				m_area.t = TCoords<FCoords>::R;
 			else {
 				m_area.t = TCoords<FCoords>::D;
 				map.get_rn(m_area, &m_area);

@@ -203,13 +203,15 @@ void WareInstance::set_economy(Economy * const e)
 	if (m_descr_index == Ware_Index::Null() or m_economy == e)
 		return;
 
-	if (m_economy) m_economy->remove_wares(m_descr_index, 1);
+	if (m_economy)
+		m_economy->remove_wares(m_descr_index, 1);
 
 	m_economy = e;
 	if (m_supply)
 		m_supply->set_economy(e);
 
-	if (m_economy) m_economy->add_wares(m_descr_index, 1);
+	if (m_economy)
+		m_economy->add_wares(m_descr_index, 1);
 }
 
 /**

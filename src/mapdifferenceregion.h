@@ -73,8 +73,7 @@ template <typename Area_type = Area<> > struct MapDifferenceRegion {
 		m_direction = direction;
 	}
 
-	const typename Area_type::Coords_type & location() const throw ()
-	{return m_area;}
+	typename Area_type::Coords_type & location() const {return m_area;}
 
 	/**
 	 * Moves on to the next location. The return value indicates whether the new

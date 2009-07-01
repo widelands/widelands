@@ -184,8 +184,10 @@ struct Panel : public Object {
 	bool get_think() const {return (_flags & pf_think) ? true : false;}
 
 	void set_top_on_click(bool on) {
-		if (on) _flags |= pf_top_on_click;
-		else _flags &= ~pf_top_on_click;
+		if (on)
+			_flags |= pf_top_on_click;
+		else
+			_flags &= ~pf_top_on_click;
 	}
 	bool get_top_on_click()
 		const {return (_flags & pf_top_on_click) ? true : false;}
@@ -254,11 +256,13 @@ private:
 
 inline void Panel::set_snap_windows_only_when_overlapping(const bool on) {
 	_flags &= ~pf_snap_windows_only_when_overlapping;
-	if (on) _flags |= pf_snap_windows_only_when_overlapping;
+	if (on)
+		_flags |= pf_snap_windows_only_when_overlapping;
 }
 inline void Panel::set_dock_windows_to_edges(const bool on) {
 	_flags &= ~pf_dock_windows_to_edges;
-	if (on) _flags |= pf_dock_windows_to_edges;
+	if (on)
+		_flags |= pf_dock_windows_to_edges;
 }
 };
 

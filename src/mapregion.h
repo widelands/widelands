@@ -53,7 +53,8 @@ template <typename Area_type = Area<> > struct MapRegion {
 	 * the iteration is done.
 	 */
 	bool advance(const Map & map) throw () {
-		if (--m_remaining_in_row) map.get_rn(m_area, &m_area);
+		if (--m_remaining_in_row)
+			map.get_rn(m_area, &m_area);
 		else if (m_area.radius < --m_remaining_rows) {
 			map.get_bln(m_left, &m_area); m_left = m_area;
 			m_remaining_in_row = ++m_rowwidth;

@@ -248,9 +248,12 @@ void Map_Players_View_Data_Packet::Read
 
 					{ //  edges
 						uint8_t mask = 0;
-						if (f_vision | bl_vision) mask  = Road_Mask << Road_SouthWest;
-						if (f_vision | br_vision) mask |= Road_Mask << Road_SouthEast;
-						if (f_vision |  r_vision) mask |= Road_Mask << Road_East;
+						if (f_vision | bl_vision)
+							mask  = Road_Mask << Road_SouthWest;
+						if (f_vision | br_vision)
+							mask |= Road_Mask << Road_SouthEast;
+						if (f_vision |  r_vision)
+							mask |= Road_Mask << Road_East;
 						f_player_field.roads = f.field->get_roads() & mask;
 					}
 
@@ -452,7 +455,8 @@ void Map_Players_View_Data_Packet::Read
 						 f.field->get_immovable())
 					{
 						map_object_descr = &base_immovable->descr();
-						if (map_object_descr == &g_road_descr) map_object_descr = 0;
+						if (map_object_descr == &g_road_descr)
+							map_object_descr = 0;
 						else if (upcast(Building const, building, base_immovable))
 							if (building->get_position() != f)
 								//  TODO This is not the buildidng's main position so
@@ -512,7 +516,8 @@ void Map_Players_View_Data_Packet::Read
 
 				{ //  edges
 					uint8_t mask = 0;
-					if (f_seen | bl_seen) mask  = Road_Mask << Road_SouthWest;
+					if (f_seen | bl_seen)
+						mask  = Road_Mask << Road_SouthWest;
 					else if (f_everseen | bl_everseen)
 						//  The player has seen the SouthWest edge but does not see
 						//  it now. Load his information about this edge from file.
@@ -524,7 +529,8 @@ void Map_Players_View_Data_Packet::Read
 								 "reading Road_SouthWest",
 								 plnum, roads_filename, f.x, f.y);
 						}
-					if (f_seen | br_seen) mask |= Road_Mask << Road_SouthEast;
+					if (f_seen | br_seen)
+						mask |= Road_Mask << Road_SouthEast;
 					else if (f_everseen | br_everseen)
 						//  The player has seen the SouthEast edge but does not see
 						//  it now. Load his information about this edge from file.
@@ -536,7 +542,8 @@ void Map_Players_View_Data_Packet::Read
 								 "reading Road_SouthEast",
 								 plnum, roads_filename, f.x, f.y);
 						}
-					if (f_seen |  r_seen) mask |= Road_Mask << Road_East;
+					if (f_seen |  r_seen)
+						mask |= Road_Mask << Road_East;
 					else if (f_everseen |  r_everseen)
 						//  The player has seen the      East edge but does not see
 						//  it now. Load his information about this edge from file.

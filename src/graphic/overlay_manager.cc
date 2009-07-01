@@ -55,7 +55,8 @@ uint8_t Overlay_Manager::get_overlays
 	{
 		overlays[num_ret].picid = it->second.picid;
 		overlays[num_ret].hotspot = it->second.hotspot;
-		if (++num_ret == MAX_OVERLAYS_PER_NODE) goto end;
+		if (++num_ret == MAX_OVERLAYS_PER_NODE)
+			goto end;
 		++it;
 	}
 	if (m_showbuildhelp) {
@@ -63,13 +64,15 @@ uint8_t Overlay_Manager::get_overlays
 			c.field->get_buildhelp_overlay_index();
 		if (buildhelp_overlay_index < Widelands::Field::Buildhelp_None) {
 			overlays[num_ret] = m_buildhelp_infos[buildhelp_overlay_index];
-			if (++num_ret == MAX_OVERLAYS_PER_NODE) goto end;
+			if (++num_ret == MAX_OVERLAYS_PER_NODE)
+				goto end;
 		}
 	}
 	while (it != overlay_map.end() and it->first == c) {
 		overlays[num_ret].picid = it->second.picid;
 		overlays[num_ret].hotspot = it->second.hotspot;
-		if (++num_ret == MAX_OVERLAYS_PER_NODE) goto end;
+		if (++num_ret == MAX_OVERLAYS_PER_NODE)
+			goto end;
 		++it;
 	}
 end:
@@ -193,7 +196,8 @@ void Overlay_Manager::register_overlay
 	do {
 		jt = it;
 		++jt;
-		if (jt == overlay_map.end()) break;
+		if (jt == overlay_map.end())
+			break;
 		if (jt->first == it->first) {
 			// There are several overlays registered for this location.
 			if (jt->second.level < it->second.level) {
@@ -264,7 +268,8 @@ void Overlay_Manager::register_road_overlay
  */
 void Overlay_Manager::remove_road_overlay(const Widelands::Coords c) {
 	const Registered_Road_Overlays_Map::iterator it = m_road_overlays.find(c);
-	if (it != m_road_overlays.end()) m_road_overlays.erase(it);
+	if (it != m_road_overlays.end())
+		m_road_overlays.erase(it);
 }
 
 /*
@@ -274,10 +279,11 @@ void Overlay_Manager::remove_road_overlay(Job_Id const jobid) {
 	Registered_Road_Overlays_Map::iterator it = m_road_overlays.begin();
 	const Registered_Road_Overlays_Map::const_iterator end =
 		m_road_overlays.end();
-	while (it != end) {
-		if (it->second.jobid == jobid) m_road_overlays.erase(it++); //  Necessary!
-		else ++it;
-	}
+	while (it != end)
+		if (it->second.jobid == jobid)
+			m_road_overlays.erase(it++); //  Necessary!
+		else
+			++it;
 }
 
 /*
@@ -312,7 +318,8 @@ void Overlay_Manager::load_graphics() {
 		buildhelp_info + Widelands::Field::Buildhelp_None;
 	for (;;) { // The other buildhelp overlays.
 		++buildhelp_info, ++filename;
-		if (buildhelp_info == buildhelp_infos_end) break;
+		if (buildhelp_info == buildhelp_infos_end)
+			break;
 		buildhelp_info->picid = g_gr->get_picture(PicMod_Game, *filename);
 		uint32_t hotspot_x, hotspot_y;
 		g_gr->get_picture_size(buildhelp_info->picid, hotspot_x, hotspot_y);

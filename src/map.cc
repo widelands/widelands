@@ -1080,12 +1080,11 @@ void Map::create_random_map
 				uint32_t lower_x       = x - x_dec;
 				uint32_t lower_right_x = x - x_dec + 1;
 
-				if (lower_x > mapInfo.w) lower_x += mapInfo.w;
-
-				if (right_x >= mapInfo.w)             right_x -= mapInfo.w;
-				if (lower_x >= mapInfo.w)             lower_x -= mapInfo.w;
+				if       (lower_x >  mapInfo.w)       lower_x += mapInfo.w;
+				if       (right_x >= mapInfo.w)       right_x -= mapInfo.w;
+				if       (lower_x >= mapInfo.w)       lower_x -= mapInfo.w;
 				if (lower_right_x >= mapInfo.w) lower_right_x -= mapInfo.w;
-				if (lower_y >= mapInfo.h)             lower_y -= mapInfo.h;
+				if       (lower_y >= mapInfo.h)       lower_y -= mapInfo.h;
 
 				//  get the heights of my neighbour nodes and of my current node
 
@@ -2089,11 +2088,14 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 				do {
 					uint16_t const slope =
 						abs(mr.location().field->get_height() - f_height);
-					if (slope >= 4) goto end;
-					if (slope >= 3) building = BUILDCAPS_SMALL;
+					if (slope >= 4)
+						goto end;
+					if (slope >= 3)
+						building = BUILDCAPS_SMALL;
 				} while (mr.advance(*this));
 			}
-			if (abs(br.field->get_height() - f_height) >= 2) goto end;
+			if (abs(br.field->get_height() - f_height) >= 2)
+				goto end;
 
 			//  8) Reduce building size based on height diff. of second order
 			//    neighbours  If height difference between this field and second
@@ -2903,7 +2905,8 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t & area)
 	}
 
 	for (uint8_t i = 0; i < 6; ++i)
-		if (check[i]) check_neighbour_heights(n[i], area);
+		if (check[i])
+			check_neighbour_heights(n[i], area);
 }
 
 
@@ -2922,9 +2925,9 @@ Military_Influence Map::calc_influence
 			 	(std::min(abs(a.y - area.y), abs(a.y - area.y + h)),
 			 	 abs(a.y - area.y - h)));
 
-	if (influence > area.radius) influence = 0;
-	else if (influence == 0) influence = MAX_RADIUS;
-	else influence = MAX_RADIUS - influence;
+	influence =
+		influence > area.radius ? 0 :
+		influence == 0          ? MAX_RADIUS :  MAX_RADIUS - influence;
 	influence *= influence;
 
 	return influence;
@@ -2973,24 +2976,24 @@ Return value: The resulting number (0-31) or -1 if the character
 
 int  Widelands::UniqueRandomMapInfo::mapIdCharToNumber(char ch)
 {
-	if ((ch >= 'A') && (ch < 'O'))
-	{
+	if (ch >= 'A' && ch < 'O') {
 		char res = ch - 'A';
-		if (ch > 'I') res --;
-		if (ch > 'O') res --;
+		if (ch > 'I')
+			--res;
+		if (ch > 'O')
+			--res;
 		return res;
 	}
-	else if ((ch >= 'a') && (ch <= 'z'))
-	{
+	else if (ch >= 'a' && ch <= 'z') {
 		char res = ch - 'a';
-		if (ch > 'i') res --;
-		if (ch > 'o') res --;
+		if (ch > 'i')
+			--res;
+		if (ch > 'o')
+			--res;
 		return res;
 	}
-	else if ((ch >= '2') && (ch <= '9'))
-	{
+	else if (ch >= '2' && ch <= '9')
 		return 24 + ch - '2';
-	}
 	return -1;
 }
 

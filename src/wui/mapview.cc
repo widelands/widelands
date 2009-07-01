@@ -169,14 +169,14 @@ Scroll the view according to mouse movement.
 bool Map_View::handle_mousemove
 	(Uint8 const state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff)
 {
-	if (m_dragging)
-	{
+	if (m_dragging) {
 		if (state & SDL_BUTTON(SDL_BUTTON_RIGHT))
 			set_rel_viewpoint(Point(xdiff, ydiff));
 		else stop_dragging();
 	}
 
-	if (not intbase().get_sel_freeze()) track_sel(Point(x, y));
+	if (not intbase().get_sel_freeze())
+		track_sel(Point(x, y));
 
 	g_gr->update_fullscreen();
 	return true;

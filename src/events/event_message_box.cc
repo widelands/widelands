@@ -75,8 +75,10 @@ void Event_Message_Box::set_button_trigger
 	assert(button_number < get_nr_buttons());
 	Trigger * const old_trigger = m_buttons[button_number].trigger;
 	if (new_trigger != old_trigger) {
-		if (old_trigger) Referencer<Trigger>::unreference(*old_trigger);
-		if (new_trigger) Referencer<Trigger>::  reference(*new_trigger);
+		if (old_trigger)
+			Referencer<Trigger>::unreference(*old_trigger);
+		if (new_trigger)
+			Referencer<Trigger>::  reference(*new_trigger);
 		m_buttons[button_number].trigger = new_trigger;
 	}
 }

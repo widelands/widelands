@@ -255,7 +255,8 @@ bool Tab_Panel::handle_mousemove
 			const char * t = 0;
 			if (hl >= 0) {
 				const std::string & str = m_tabs[hl].tooltip;
-				if (str.size()) t = str.c_str();
+				if (str.size())
+					t = str.c_str();
 			}
 			set_tooltip(t);
 		}

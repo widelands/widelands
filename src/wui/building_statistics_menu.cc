@@ -247,14 +247,16 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
 		int32_t const curindex = m_last_building_index;
 		while
 			(validate_pointer(&(--m_last_building_index), vec.size()) != curindex)
-			if (vec[m_last_building_index].is_constructionsite) break;
+			if (vec[m_last_building_index].is_constructionsite)
+				break;
 		break;
 	}
 	case Next_Construction: {
 		int32_t const curindex = m_last_building_index;
 		while
 			(validate_pointer(&(++m_last_building_index), vec.size()) != curindex)
-			if (vec[m_last_building_index].is_constructionsite) break;
+			if (vec[m_last_building_index].is_constructionsite)
+				break;
 		break;
 	}
 	case Prev_Unproductive: {
@@ -372,7 +374,8 @@ void Building_Statistics_Menu::update() {
 		uint32_t total_prod = 0;
 		upcast(Widelands::ProductionSite_Descr const, productionsite, &building);
 		for (uint32_t l = 0; l < vec.size(); ++l) {
-			if (vec[l].is_constructionsite) ++nr_build;
+			if (vec[l].is_constructionsite)
+				++nr_build;
 			else {
 				++nr_owned;
 				if (productionsite)

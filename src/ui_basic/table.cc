@@ -243,7 +243,8 @@ bool Table<void *>::handle_mousepress(const Uint8 btn, int32_t, int32_t y) {
 		m_last_click_time = time;
 
 		y = (y + m_scrollpos - m_headerheight) / get_lineheight();
-		if (static_cast<size_t>(y) < m_entry_records.size()) select(y);
+		if (static_cast<size_t>(y) < m_entry_records.size())
+			select(y);
 
 		if //  check if doubleclicked
 			(time - real_last_click_time < DOUBLE_CLICK_INTERVAL
@@ -320,7 +321,8 @@ void Table<void *>::remove(const uint32_t i) {
 	const Entry_Record_vector::iterator it = m_entry_records.begin() + i;
 	delete *it;
 	m_entry_records.erase(it);
-	if (m_selection == i) m_selection = no_selection_index();
+	if (m_selection == i)
+		m_selection = no_selection_index();
 }
 
 /**
@@ -333,7 +335,8 @@ void Table<void *>::remove(const uint32_t i) {
 void Table<void *>::sort(const uint32_t Begin, uint32_t End) {
 	assert(m_columns.at(m_sort_column).btn);
 	assert(m_sort_column < m_columns.size());
-	if (End > size()) End = size();
+	if (End > size())
+		End = size();
 	if (get_sort_descending())
 		for (uint32_t i = Begin; i != End; ++i)
 			for (uint32_t j = i; j != End; ++j) {
@@ -342,8 +345,10 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End) {
 				if
 					(eri->get_string(m_sort_column) > erj->get_string(m_sort_column))
 				{
-					if      (m_selection == i) m_selection = j;
-					else if (m_selection == j) m_selection = i;
+					if      (m_selection == i)
+						m_selection = j;
+					else if (m_selection == j)
+						m_selection = i;
 					m_entry_records[i] = erj;
 					m_entry_records[j] = eri;
 				}
@@ -356,8 +361,10 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End) {
 				if
 					(eri->get_string(m_sort_column) < erj->get_string(m_sort_column))
 				{
-					if      (m_selection == i) m_selection = j;
-					else if (m_selection == j) m_selection = i;
+					if      (m_selection == i)
+						m_selection = j;
+					else if (m_selection == j)
+						m_selection = i;
 					m_entry_records[i] = erj;
 					m_entry_records[j] = eri;
 				}

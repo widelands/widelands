@@ -563,7 +563,8 @@ void WLApplication::handle_input(const InputCallback *cb)
 					for (uint32_t nr = 0; nr < 10000; ++nr) {
 						char buffer[256];
 						snprintf(buffer, sizeof(buffer), "shot%04u.bmp", nr); // FIXME
-						if (g_fs->FileExists(buffer)) continue;
+						if (g_fs->FileExists(buffer))
+							continue;
 						g_gr->screenshot(*buffer);
 						break;
 					}

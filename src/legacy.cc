@@ -21,10 +21,324 @@
 
 #include "logic/editor_game_base.h"
 #include "immovable.h"
+#include "tribe.h"
 
 namespace Widelands {
 
 namespace Legacy {
+
+//  These tables are needed for compatibility with requests written in version
+//  <= 3.
+static char const * const barbarian_ware_types[] = {
+	"axe",
+	"bakingtray",
+	"battleaxe",
+	"beer",
+	"blackwood",
+	"broadaxe",
+	"bronzeaxe",
+	"cloth",
+	"coal",
+	"fire_tongs",
+	"fish",
+	"fishing_rod",
+	"flax",
+	"gold",
+	"goldstone",
+	"grout",
+	"hammer",
+	"helm",
+	"hunting_spear",
+	"iron",
+	"ironore",
+	"kitchen_tools",
+	"mask",
+	"meal",
+	"meat",
+	"pick",
+	"pittabread",
+	"ration",
+	"raw_stone",
+	"scythe",
+	"sharpaxe",
+	"shovel",
+	"snack",
+	"strongbeer",
+	"thatchreed",
+	"trunk",
+	"warhelmet",
+	"warriorsaxe",
+	"water",
+	"wheat"
+};
+static char const * const barbarian_worker_types[] = {
+	"baker",
+	"blacksmith",
+	"brewer",
+	"builder",
+	"burner",
+	"carrier",
+	"chief-miner",
+	"farmer",
+	"ferner",
+	"fisher",
+	"gamekeeper",
+	"geologist",
+	"helmsmith",
+	"hunter",
+	"innkeeper",
+	"lime-burner",
+	"lumberjack",
+	"master-blacksmith",
+	"master-brewer",
+	"master-miner",
+	"miner",
+	"ranger",
+	"smelter",
+	"soldier",
+	"stonemason",
+	"trainer",
+	"weaver"
+};
+static char const * const empire_ware_types[] = {
+	"advanced_lance",
+	"armour",
+	"axe",
+	"bakingtray",
+	"basket",
+	"beer",
+	"bread",
+	"chain_armour",
+	"cloth",
+	"coal",
+	"fire_tongs",
+	"fish",
+	"fishing_rod",
+	"flour",
+	"gold",
+	"goldstone",
+	"grape",
+	"hammer",
+	"heavy_lance",
+	"helm",
+	"hunting_spear",
+	"iron",
+	"ironore",
+	"kitchen_tools",
+	"lance",
+	"marble",
+	"marblecolumn",
+	"meal",
+	"meat",
+	"pick",
+	"plate_armour",
+	"ration",
+	"saw",
+	"scythe",
+	"shovel",
+	"stone",
+	"trunk",
+	"war_lance",
+	"water",
+	"wheat",
+	"wine",
+	"wood",
+	"wood_lance",
+	"wool",
+};
+static char const * const empire_worker_types[] = {
+	"armoursmith",
+	"baker",
+	"brewer",
+	"builder",
+	"burner",
+	"carrier",
+	"farmer",
+	"fisher",
+	"forester",
+	"geologist",
+	"hunter",
+	"innkeeper",
+	"lumberjack",
+	"master-miner",
+	"miller",
+	"miner",
+	"pig-breeder",
+	"shepherd",
+	"smelter",
+	"soldier",
+	"stonemason",
+	"toolsmith",
+	"trainer",
+	"weaponsmith",
+	"weaver",
+	"vinefarmer"
+};
+static char const * const atlantean_ware_types[] = {
+	"advanced_shield",
+	"bakingtray",
+	"blackroot",
+	"blackrootflour",
+	"bread",
+	"bucket",
+	"coal",
+	"corn",
+	"cornflour",
+	"diamond",
+	"double_trident",
+	"fire_tongs",
+	"fish",
+	"fishing_net",
+	"gold",
+	"golden_tabard",
+	"goldore",
+	"goldyarn",
+	"hammer",
+	"heavy_double_trident",
+	"hook_pole",
+	"hunting_bow",
+	"iron",
+	"ironore",
+	"light_trident",
+	"long_trident",
+	"meat",
+	"milking_tongs",
+	"pick",
+	"planks",
+	"quartz",
+	"saw",
+	"scythe",
+	"shovel",
+	"smoked_fish",
+	"smoked_meat",
+	"spidercloth",
+	"spideryarn",
+	"steel_shield",
+	"steel_trident",
+	"stone",
+	"tabard",
+	"trunk",
+	"water"
+};
+static char const * const atlantean_worker_types[] = {
+	"armoursmith",
+	"baker",
+	"blackroot_farmer",
+	"builder",
+	"burner",
+	"carrier",
+	"farmer",
+	"fish_breeder",
+	"fisher",
+	"forester",
+	"geologist",
+	"hunter",
+	"miller",
+	"miner",
+	"sawyer",
+	"smelter",
+	"smoker",
+	"soldier",
+	"spiderbreeder",
+	"stonecutter",
+	"toolsmith",
+	"trainer",
+	"weaponsmith",
+	"weaver",
+	"woodcutter"
+};
+
+Ware_Index ware_index
+	(Tribe_Descr const &       tribe,
+	 std::string const &       name,
+	 char        const * const relation,
+	 uint32_t            const legacy_index)
+{
+	char const * type_name;
+	if        (tribe.name() == "barbarians") {
+		if
+			(sizeof (barbarian_ware_types) / sizeof (*barbarian_ware_types)
+			 <=
+			 legacy_index)
+			throw wexception
+				("could not interpret legacy barbarian ware index %u",
+				 legacy_index);
+		type_name = barbarian_ware_types[legacy_index];
+	} else if (tribe.name() == "empire")     {
+		if
+			(sizeof (empire_ware_types) / sizeof (*empire_ware_types)
+			 <=
+			 legacy_index)
+			throw wexception
+				("could not interpret legacy empire ware index %u",
+				 legacy_index);
+		type_name = empire_ware_types[legacy_index];
+	} else if (tribe.name() == "atlanteans") {
+		if
+			(sizeof (atlantean_ware_types) / sizeof (*atlantean_ware_types)
+			 <=
+			 legacy_index)
+			throw wexception
+				("could not interpret legacy atlantean ware index %u",
+				 legacy_index);
+		type_name = atlantean_ware_types[legacy_index];
+	} else
+		throw wexception
+			("no backwards compatibility support for tribe %s",
+			 tribe.name().c_str());
+	log
+		("WARNING: Interpreting a legacy ware index: A %s %s %s a ware of type "
+		 "%u. This is interpreted as %s.\n",
+		 tribe.name().c_str(), name.c_str(), relation, legacy_index, type_name);
+	return tribe.safe_ware_index(type_name);
+}
+
+
+Ware_Index worker_index
+	(Tribe_Descr const &       tribe,
+	 std::string const &       name,
+	 char        const * const relation,
+	 uint32_t            const legacy_index)
+{
+	char const * type_name;
+	if        (tribe.name() == "barbarians") {
+		if
+			(sizeof (barbarian_worker_types) / sizeof (*barbarian_worker_types)
+			 <=
+			 legacy_index)
+			throw wexception
+				("could not interpret legacy barbarian worker index %u",
+				 legacy_index);
+		type_name = barbarian_worker_types[legacy_index];
+	} else if (tribe.name() == "empire")     {
+		if
+			(sizeof (empire_worker_types) / sizeof (*empire_worker_types)
+			 <=
+			 legacy_index)
+			throw wexception
+				("could not interpret legacy empire worker index %u",
+				 legacy_index);
+		type_name = empire_worker_types[legacy_index];
+	} else if (tribe.name() == "atlanteans") {
+		if
+			(sizeof (atlantean_worker_types) / sizeof (*atlantean_worker_types)
+			 <=
+			 legacy_index)
+			throw wexception
+				("could not interpret legacy atlantean worker index %u",
+				 legacy_index);
+		type_name = atlantean_worker_types[legacy_index];
+	} else
+		throw wexception
+			("no backwards compatibility support for tribe %s",
+			 tribe.name().c_str());
+	log
+		("WARNING: Interpreting a legacy worker index: A %s %s %s a worker of "
+		 "type %u. This is interpreted as %s.\n",
+		 tribe.name().c_str(), name.c_str(), relation, legacy_index, type_name);
+	return tribe.safe_worker_index(type_name);
+}
+
 
 Map_Object_Descr g_FakeAttackController_Descr
 	("attack_controller", "Attack controller");
@@ -50,7 +364,7 @@ struct FakeAttackController : public BaseImmovable {
 				fr.Unsigned32();
 				fr.Unsigned8();
 
-				uint32_t numBs = fr.Unsigned32();
+				uint32_t const numBs = fr.Unsigned32();
 
 				for (uint32_t j = 0; j < numBs; ++j) {
 					fr.Unsigned32();

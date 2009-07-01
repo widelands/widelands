@@ -488,8 +488,11 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 			formatedGGZChat("*** *** ***", "", true);
 		}
 		formatedGGZChat
-			(_("NOTE: The internet gaming implementation is in very early state."),
-			   "", true);
+			(_
+			 	("NOTE: The internet gaming implementation is in very early "
+			 	 "state."),
+			 "",
+			 true);
 		formatedGGZChat(_("Please take a look at the notes at:"), "", true);
 		formatedGGZChat("http://wl.widelands.org/wiki/InternetGaming", "", true);
 		break;

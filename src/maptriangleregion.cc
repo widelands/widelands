@@ -80,7 +80,8 @@ template <> bool MapTriangleRegion<>::advance(const Map & map) throw () {
 	--m_remaining_in_row;
 	switch (m_phase) {
 	case Top:
-		if (m_remaining_in_row) map.get_rn(m_location, &m_location);
+		if (m_remaining_in_row)
+			map.get_rn(m_location, &m_location);
 		else if (m_remaining_rows_in_upper_phase) {
 			m_phase = Upper;
 			m_remaining_in_row = m_row_length;
@@ -90,8 +91,10 @@ template <> bool MapTriangleRegion<>::advance(const Map & map) throw () {
 		break;
 	case Upper:
 		if (m_remaining_in_row) {
-			if (m_location.t == TCoords<>::D) m_location.t = TCoords<>::R;
-			else m_location = TCoords<>(map.r_n(m_location), TCoords<>::D);
+			if (m_location.t == TCoords<>::D)
+				m_location.t = TCoords<>::R;
+			else
+				m_location = TCoords<>(map.r_n(m_location), TCoords<>::D);
 		} else {
 			if (--m_remaining_rows_in_upper_phase) {
 				m_row_length += 2;
@@ -113,8 +116,10 @@ template <> bool MapTriangleRegion<>::advance(const Map & map) throw () {
 		break;
 	case Lower:
 		if (m_remaining_in_row) {
-			if (m_location.t == TCoords<>::D) m_location.t = TCoords<>::R;
-			else m_location = TCoords<>(map.r_n(m_location), TCoords<>::D);
+			if (m_location.t == TCoords<>::D)
+				m_location.t = TCoords<>::R;
+			else
+				m_location = TCoords<>(map.r_n(m_location), TCoords<>::D);
 		} else {
 			if (--m_remaining_rows_in_lower_phase) {
 				assert(m_row_length >= 2);
@@ -130,7 +135,8 @@ template <> bool MapTriangleRegion<>::advance(const Map & map) throw () {
 		}
 		break;
 	case Bottom:
-		if (m_remaining_in_row) map.get_rn(m_location, &m_location);
+		if (m_remaining_in_row)
+			map.get_rn(m_location, &m_location);
 		break;
 	default:
 		assert(false);
@@ -201,7 +207,8 @@ bool MapTriangleRegion<TCoords<FCoords> >::advance(const Map & map) throw ()
 	--m_remaining_in_row;
 	switch (m_phase) {
 	case Top:
-		if (m_remaining_in_row) map.get_rn(m_location, &m_location);
+		if (m_remaining_in_row)
+			map.get_rn(m_location, &m_location);
 		else if (m_remaining_rows_in_upper_phase) {
 			m_phase = Upper;
 			m_remaining_in_row = m_row_length;
@@ -258,7 +265,8 @@ bool MapTriangleRegion<TCoords<FCoords> >::advance(const Map & map) throw ()
 		}
 		break;
 	case Bottom:
-		if (m_remaining_in_row) map.get_rn(m_location, &m_location);
+		if (m_remaining_in_row)
+			map.get_rn(m_location, &m_location);
 		break;
 	default:
 		assert(false);
