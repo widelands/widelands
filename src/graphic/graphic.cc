@@ -69,9 +69,9 @@ SDL_Surface * LoadImage(char const * const filename)
 	return surf;
 }
 
-static uint32_t luminance_table_r[0x100];
-static uint32_t luminance_table_g[0x100];
-static uint32_t luminance_table_b[0x100];
+uint32_t luminance_table_r[0x100];
+uint32_t luminance_table_g[0x100];
+uint32_t luminance_table_b[0x100];
 
 /**
  * Initialize the SDL video mode.

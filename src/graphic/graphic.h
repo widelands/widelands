@@ -52,6 +52,10 @@ struct Texture;
 ///\todo Get rid of this global function
 SDL_Surface * LoadImage(char const * filename);
 
+extern uint32_t luminance_table_r[0x100];
+extern uint32_t luminance_table_g[0x100];
+extern uint32_t luminance_table_b[0x100];
+
 /**
  * A renderer to get pixels to a 16bit framebuffer.
  *

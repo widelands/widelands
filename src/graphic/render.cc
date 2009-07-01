@@ -714,13 +714,12 @@ void AnimationGfx::encode(uint8_t plr, RGBColor const * plrclrs)
 					(uint32_t const influence =
 					 	static_cast<uint32_t>(mask.r) * mask.a)
 				{
-					//  FIXME This intensity calculation may not be correct. It
-					//  FIXME counts all 3 base colors equally. They should usually
-					//  FIXME be weighted in a certain way. See for example the
-					//  FIXME luminance calculation in
-					//  FIXME Graphic::create_grayed_out_pic.
-					uint32_t intensity =
-						static_cast<uint32_t>(source.r + source.g + source.b) / 3;
+					uint32_t const intensity =
+						(luminance_table_r[source.r] +
+						 luminance_table_g[source.g] +
+						 luminance_table_b[source.b] +
+						 8388608U) //  compensate for truncation:  .5 * 2^24
+						>> 24;
 					RGBAColor plrclr;
 
 					plrclr.r = (plrclrs[3].r() * intensity) >> 8;
