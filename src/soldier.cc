@@ -771,19 +771,27 @@ void Soldier::battle_update(Game & game, State &)
 				Coords dest = opponent.get_position();
 				if (upcast(Building, building, map[dest].get_immovable()))
 					dest = building->base_flag().get_position();
-				start_task_movepath
-					(game,
-					 dest,
-					 0,
-					 descr().get_right_walk_anims(does_carry_ware()),
-					 false, (dist + 3) / 4);
-				molog
-					("player %u's soldier started task_movepath\n",
-					 owner().get_player_number());
-				molog
-					("player %u's soldier started task_movepath\n",
-					 owner().get_player_number());
-				return;
+				if
+					(start_task_movepath
+					 	(game,
+					 	 dest,
+					 	 0,
+					 	 descr().get_right_walk_anims(does_carry_ware()),
+					 	 false, (dist + 3) / 4))
+				{
+					molog
+						("player %u's soldier started task_movepath\n",
+						 owner().get_player_number());
+					molog
+						("player %u's soldier started task_movepath\n",
+						 owner().get_player_number());
+					return;
+				} else
+					throw wexception
+						("soldier %u could not move from (%u, %u) to (%u, %u)",
+						 serial(),
+						 get_position().x, get_position().y,
+						 dest.x, dest.y);
 			}
 		}
 	}
