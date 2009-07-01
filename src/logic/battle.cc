@@ -180,7 +180,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	if ((m_readyflags | thisflag) != 3) {                         //  codepath a
 		//  My opponent is not ready to defend. Idle until he wakes me up.
 		assert(m_readyflags == 0 or m_readyflags == thisflag);
-		m_readyflags |= thisflag; //  FIXME simplify to a plain assignment
+		m_readyflags = thisflag;
 		assert(m_readyflags == thisflag);
 		return
 			soldier.start_task_idle
@@ -192,7 +192,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 		assert
 			((m_readyflags == 1 and thisflag == 2) or
 			 (m_readyflags == 2 and thisflag == 1));
-		m_readyflags |= thisflag; //  FIXME simplify to a plain assignment (3)
+		m_readyflags = 3;
 		assert(m_readyflags == 3);
 		calculateTurn(game);
 		opponent(soldier)->send_signal(game, "wakeup");
