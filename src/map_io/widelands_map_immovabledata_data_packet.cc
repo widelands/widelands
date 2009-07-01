@@ -36,9 +36,6 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
-
-
 void Map_Immovabledata_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &,
@@ -59,10 +56,9 @@ throw (_wexception)
 
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (1 == packet_version) {
 			for (;;) {
 				Serial const serial = fr.Unsigned32();
-				//  FIXME Just test EndOfFile instead in the next packet version.
 				if (serial == 0xffffffff) {
 					if (not fr.EndOfFile())
 						throw wexception

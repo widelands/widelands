@@ -148,13 +148,6 @@ int32_t Int_Player_overlay_callback_function
 }
 
 
-/*
-===============
-Interactive_Player::Interactive_Player
-
-Initialize
-===============
-*/
 Interactive_Player::Interactive_Player
 	(Widelands::Game        &       _game,
 	 Section                &       global_s,
