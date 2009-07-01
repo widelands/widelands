@@ -263,14 +263,21 @@ struct Bob : public Map_Object {
 	void send_signal(Game &, char const *);
 	void start_task_idle(Game &, uint32_t anim, int32_t timeout);
 
+	/// This can fail (and return false). Therefore the caller must check the
+	/// result and find something else for the bob to do. Otherwise there will
+	/// be a "failed to act" error.
 	bool start_task_movepath
 		(Game                &,
 		 const Coords          dest,
 		 const int32_t         persist,
 		 const DirAnimations &,
 		 const bool            forceonlast = false,
-		 const int32_t         only_step = -1);
+		 const int32_t         only_step = -1)
+		__attribute__((warn_unused_result));
 
+	/// This can fail (and return false). Therefore the caller must check the
+	/// result and find something else for the bob to do. Otherwise there will
+	/// be a "failed to act" error.
 	void start_task_movepath
 		(Game                &,
 		 const Path          &,
@@ -284,7 +291,8 @@ struct Bob : public Map_Object {
 		 const int32_t         index,
 		 const DirAnimations &,
 		 const bool            forceonlast = false,
-		 const int32_t         only_step = -1);
+		 const int32_t         only_step = -1)
+		__attribute__((warn_unused_result));
 
 	void start_task_move(Game & game, int32_t dir, DirAnimations const *, bool);
 
