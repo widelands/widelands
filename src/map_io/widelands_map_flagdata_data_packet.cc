@@ -235,8 +235,12 @@ void Map_Flagdata_Data_Packet::Write
 				fw.Unsigned8(flag->m_items[i].pending);
 				assert(os->is_object_known(*flag->m_items[i].item));
 				fw.Unsigned32(os->get_object_file_index(*flag->m_items[i].item));
+				assert
+					(not flag->m_items[i].nextstep or
+					 dynamic_cast<PlayerImmovable const *>
+					 	(flag->m_items[i].nextstep));
 				fw.Unsigned32
-					(os->is_object_known      (*flag->m_items[i].nextstep) ?
+					(flag->m_items[i].nextstep ?
 					 os->get_object_file_index(*flag->m_items[i].nextstep) : 0);
 			}
 
