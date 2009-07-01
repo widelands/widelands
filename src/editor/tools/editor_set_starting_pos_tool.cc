@@ -33,8 +33,9 @@ static int32_t m_current_player;
  * static callback function for overlay calculation
  */
 int32_t Editor_Tool_Set_Starting_Pos_Callback
-	(Widelands::TCoords<Widelands::FCoords> const c, void * data, int32_t)
+	(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t)
 {
+	assert(data);
 	Widelands::Map const & map = *static_cast<Widelands::Map const *>(data);
 
 	// Area around already placed players

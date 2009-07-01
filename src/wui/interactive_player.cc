@@ -140,8 +140,9 @@ void ChatDisplay::draw(RenderTarget & dst)
 
 // This function is the callback for recalculation of field overlays
 int32_t Int_Player_overlay_callback_function
-	(Widelands::TCoords<Widelands::FCoords> const c, void * data, int32_t)
+	(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t)
 {
+	assert(data);
 	return
 		static_cast<const Interactive_Player *>(data)->get_player()->
 		get_buildcaps(c);

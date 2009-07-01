@@ -30,8 +30,11 @@
 using Widelands::TCoords;
 
 int32_t Editor_Change_Resource_Tool_Callback
-	(TCoords<Widelands::FCoords> const c, void * data, int32_t curres)
+	(TCoords<Widelands::FCoords> const c,
+	 void                      * const data,
+	 int32_t                     const curres)
 {
+	assert(data);
 	Widelands::Map   & map   = *static_cast<Widelands::Map *>(data);
 	Widelands::World & world = map.world();
 	Widelands::FCoords f(c, &map[c]);
