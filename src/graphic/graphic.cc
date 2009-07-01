@@ -891,25 +891,7 @@ void Graphic::m_png_flush_function
 	static_cast<StreamWrite *>(png_get_io_ptr(png_ptr))->Flush();
 }
 
-/**
- * Find a free picture slot and return it.
- * FIXME: remove this function
- */
-/*
-PictureID Graphic::find_free_picture()
-{
-	const PictureID pictures_size = m_pictures.end();
-	PictureID id = m_pictures.begin();
 
-	for (; id != pictures_size; ++id)
-		if (id->module == 0)
-			return id;
-
-	m_pictures.resize(m_picture);
-
-	return id;
-}
-*/
 /**
  * Returns the bitmap that belongs to the given picture ID.
  * May return 0 if the given picture does not exist.
