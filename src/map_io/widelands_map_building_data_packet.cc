@@ -153,16 +153,7 @@ throw (_wexception)
 	// DONE
 }
 
-/*
- * Priorities are writen in format:
- 0    - ware type (8 bits), for example Request:WARE
- 2    - count of priorities for this type (8 bits)
-   fish  - ware name (32 bits) //  FIXME ???
-   4     - priority assigned to a ware (32 bits)
-   water - ware name (32 bits) //  FIXME ???
-   1     - ware priority(32 bits)
- 0xff - end of ware types
- */
+
 void Map_Building_Data_Packet::write_priorities
 	(Building const & building, FileWrite & fw)
 {
