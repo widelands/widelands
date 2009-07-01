@@ -356,9 +356,8 @@ void Soldier::draw
 		// Draw the actual bar
 		assert(m_hp_max);
 		const float fraction = static_cast<float>(m_hp_current) / m_hp_max;
-		//FIXME:
-		//Draw bar in playercolor, should be removed when soldier is
-		//correctly painted
+		//  FIXME Draw bar in playercolor, should be removed when soldier is
+		//  FIXME correctly painted.
 		RGBColor color
 			(owner().get_playercolor()->r(),
 			 owner().get_playercolor()->g(),
