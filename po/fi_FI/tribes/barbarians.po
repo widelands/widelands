@@ -1,13 +1,14 @@
 # Widelands po/fi_FI/tribes/barbarians.po
 # Copyright (C) 2008 Widelands Development Team
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007.
+# Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-06-15 20:33+0300\n"
+"POT-Creation-Date: 2009-07-01 00:17+0000\n"
+"PO-Revision-Date: 2009-07-01 03:21+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -19,93 +20,100 @@ msgstr ""
 
 #: ../../../tribes/barbarians/axe/conf:1
 msgid "The Axe is the basic weapon and tool for the barbarians. All young soldiers are equipped with this basic weapon, but also the lumberjack is using the same model."
-msgstr ""
-
-#: ../../../tribes/barbarians/axefactory/conf:26
-#: ../../../tribes/barbarians/warmill/conf:30
-#: ../../../tribes/barbarians/metalworks/conf:30
-#, fuzzy
-msgid "Produce axe"
-msgstr "Leveä kirves"
-
-#: ../../../tribes/barbarians/axefactory/conf:27
-#: ../../../tribes/barbarians/warmill/conf:31
-msgid "Produce sharpaxe"
-msgstr ""
-
-#: ../../../tribes/barbarians/axefactory/conf:28
-#: ../../../tribes/barbarians/warmill/conf:32
-msgid "Produce broadaxe"
-msgstr ""
+msgstr "Kirves on barbaarien perusase. Kaikki nuoret soturit aseistetaan kirvein, mutta sitä käyttää myös puunhakkaaja."
 
 #: ../../../tribes/barbarians/bakingtray/conf:1
 msgid "The peel is the tool of the baker, each baker needs its own. It is produced in the metal works like all tools."
-msgstr ""
+msgstr "Leipälapio on leipurin työkalu, ja jokainen leipuri tarvitsee omansa. Se valmistetaan muiden työkalujen tapaan metallipajalla."
+
+#: ../../../tribes/barbarians/battlearena/conf:25
+#: ../../../tribes/barbarians/trainingscamp/conf:36
+msgid "Sleep"
+msgstr "Lepää"
 
 #: ../../../tribes/barbarians/battlearena/conf:26
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Paranna sotilaan välttökykyä (0)"
 
 #: ../../../tribes/barbarians/battlearena/conf:27
 msgid "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan välttökykyä (0) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/barbarians/battlearena/conf:28
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Paranna sotilaan välttökykyä (1)"
 
 #: ../../../tribes/barbarians/battlearena/conf:29
 msgid "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan välttökykyä (1) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
+# TODO: produced, drop first comma, wield.
 #: ../../../tribes/barbarians/battleaxe/conf:1
 msgid "This is the second most dangerous weapon, the barbarians are able to produce. Only trained warriors are able to yield such a weapon. It is produce in the axe factory."
-msgstr ""
+msgstr "Tämä on toiseksi vaarallisin ase, joka barbaareilla on käytössä. Vain koulutetut soturit saavat kantaa sitä. Kirves valmistetaan sotamyllyssä."
 
 #: ../../../tribes/barbarians/beer/conf:1
 msgid "Young warriors need some encouragement. This drink makes a man fearless and strong."
-msgstr ""
+msgstr "Nuoret soturit tarvitsevat rohkaisua. Tämä olut tekee heistä pelottomia ja vahvoja."
+
+#: ../../../tribes/barbarians/big_inn/conf:24
+#: ../../../tribes/barbarians/inn/conf:23
+#: ../../../tribes/barbarians/tavern/conf:20
+msgid "Produce ration"
+msgstr "Valmista ruoka-annos"
+
+#: ../../../tribes/barbarians/big_inn/conf:25
+#: ../../../tribes/barbarians/inn/conf:24
+msgid "Produce snack"
+msgstr "Valmista välipala"
 
 #: ../../../tribes/barbarians/big_inn/conf:26
 msgid "Produce meal"
-msgstr ""
+msgstr "Valmista ateria"
 
 #: ../../../tribes/barbarians/blackwood/conf:1
 msgid "Fire-hardened wood, hard as iron and can not burn, used for military buildings."
-msgstr ""
+msgstr "Tulessa kovetettu puu ei pala ja on raudanlujaa. Sitä käytetäänkin sotilasrakennuksissa."
 
 #: ../../../tribes/barbarians/brewer/conf:1
 #: ../../../tribes/barbarians/master-brewer/conf:1
 msgid "Produces the finest ales to keep warriors strong and happy in training."
-msgstr ""
+msgstr "Panee parhaimpia oluita, jotka pitävät soturit vahvoina ja tyytyväisinä harjoitellessaan."
 
 #: ../../../tribes/barbarians/broadaxe/conf:1
 msgid "Warriors with a fundamental fighting knowledge gain a broad axe. It is produced in the axe factory."
-msgstr ""
+msgstr "Sotureilla, joilla on perustiedot taistelemisesta, saavat aseekseen leveän kirveen. Se valmistetaan kirvestehtaassa."
 
+# TODO: axe production info is outdated for all warmill axes
 #: ../../../tribes/barbarians/bronzeaxe/conf:1
 msgid "The bronze axe is considered a hard to handle weapon: it makes a lot of damage, but it's durability is not the best. Only skilled warriors can use this. Produced in the axe factory."
-msgstr ""
+msgstr "Pronssikirvestä pidetään vaikeana aseena käsitellä: se kylvää tuhoa tehokkaasti, muttei ole kestävimpiä aseita. Vain taitavat soturit voivat käyttää sitä."
 
 #: ../../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "Työskentelee rakennustyömailla rakentaen uusia rakennuksia."
 
 #: ../../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
-msgstr ""
+msgstr "Polttaa hiiliä."
 
 #: ../../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Kantaa tavaroita teilläsi (ja joskus tiellesi)."
+
+#: ../../../tribes/barbarians/chief-miner/conf:1
+#: ../../../tribes/barbarians/miner/conf:1
+#: ../../../tribes/barbarians/master-miner/conf:1
+msgid "Works deep in the mines to produce coal, iron or gold."
+msgstr "Työskentelee syvällä kaivoksissa louhien hiiltä, rautaa tai kultaa."
 
 #: ../../../tribes/barbarians/cloth/conf:1
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
-msgstr ""
+msgstr "Kangasta tarvitaan barbaarien aluksia varten. Sitä valmistetaan pellavasta."
 
 #: ../../../tribes/barbarians/coal/conf:1
 msgid "The fires of the barbarians are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
-msgstr ""
+msgstr "Barbaarien tulissa palaa yleensä puuta, mutta joskus puun liekki ei ole riittävän kuuma. Tällöin käytetään hiiltä."
 
 #: ../../../tribes/barbarians/conf:18
 msgid "The Widelands Development Team"
@@ -188,7 +196,7 @@ msgid "Resource indicator coal much"
 msgstr "Resurssimerkki hiili paljon"
 
 #: ../../../tribes/barbarians/conf:53
-msgid "Resource indicator gold litte"
+msgid "Resource indicator gold little"
 msgstr "Resurssimerkki kulta vähän"
 
 #: ../../../tribes/barbarians/conf:54
@@ -267,7 +275,7 @@ msgstr "Hiili"
 
 #: ../../../tribes/barbarians/conf:76
 msgid "Fire Tongs"
-msgstr "Tongit"
+msgstr "Pihdit"
 
 #: ../../../tribes/barbarians/conf:77
 msgid "Fish"
@@ -571,11 +579,11 @@ msgstr "Hiilenpolttajan talo"
 
 #: ../../../tribes/barbarians/conf:168
 msgid "Deeper Coal Mine"
-msgstr "Keskisyvä hiilikaivos"
+msgstr "Syvä hiilikaivos"
 
 #: ../../../tribes/barbarians/conf:169
 msgid "Deep Coal Mine"
-msgstr "Syvä hiilikaivos"
+msgstr "Keskisyvä hiilikaivos"
 
 #: ../../../tribes/barbarians/conf:170
 msgid "Coal mine"
@@ -583,19 +591,19 @@ msgstr "Hiilikaivos"
 
 #: ../../../tribes/barbarians/conf:171
 msgid "Deeper Gold Mine"
-msgstr "Keskisyvä kultakaivos"
+msgstr "Syvä kultakaivos"
 
 #: ../../../tribes/barbarians/conf:172
 msgid "Deeper Iron Ore Mine"
-msgstr "Keskisyvä rautakaivos"
+msgstr "Syvä rautakaivos"
 
 #: ../../../tribes/barbarians/conf:173
 msgid "Deep Gold Mine"
-msgstr "Syvä kultakaivos"
+msgstr "Keskisyvä kultakaivos"
 
 #: ../../../tribes/barbarians/conf:174
 msgid "Deep Iron Ore Mine"
-msgstr "Syvä rautakaivos"
+msgstr "Keskisyvä rautakaivos"
 
 #: ../../../tribes/barbarians/conf:175
 msgid "Farm"
@@ -689,403 +697,396 @@ msgstr "Keskikokoinen päämaja"
 msgid "Citadel village"
 msgstr "Kastellikylä"
 
+#: ../../../tribes/barbarians/deeper_goldmine/conf:22
+#: ../../../tribes/barbarians/fishers_hut/conf:14
+#: ../../../tribes/barbarians/goldmine/conf:20
+#: ../../../tribes/barbarians/well/conf:11
+#: ../../../tribes/barbarians/big_inn/conf:27
+#: ../../../tribes/barbarians/rangers_hut/conf:13
+#: ../../../tribes/barbarians/deep_goldmine/conf:23
+#: ../../../tribes/barbarians/deeper_oremine/conf:22
+#: ../../../tribes/barbarians/helmsmithy/conf:25
+#: ../../../tribes/barbarians/burners_house/conf:16
+#: ../../../tribes/barbarians/inn/conf:25
+#: ../../../tribes/barbarians/hardener/conf:15
+#: ../../../tribes/barbarians/deep_oremine/conf:23
+#: ../../../tribes/barbarians/tavern/conf:21
+#: ../../../tribes/barbarians/fernery/conf:21
+#: ../../../tribes/barbarians/brewery/conf:20
+#: ../../../tribes/barbarians/farm/conf:18
+#: ../../../tribes/barbarians/granitemine/conf:18
+#: ../../../tribes/barbarians/warmill/conf:36
+#: ../../../tribes/barbarians/smelting_works/conf:23
+#: ../../../tribes/barbarians/gamekeepers_hut/conf:14
+#: ../../../tribes/barbarians/hunters_hut/conf:12
+#: ../../../tribes/barbarians/deeper_coalmine/conf:22
+#: ../../../tribes/barbarians/coalmine/conf:20
+#: ../../../tribes/barbarians/metalworks/conf:40
+#: ../../../tribes/barbarians/weaving-mill/conf:16
+#: ../../../tribes/barbarians/deep_coalmine/conf:23
+#: ../../../tribes/barbarians/oremine/conf:20
+#: ../../../tribes/barbarians/lime_kiln/conf:18
+#: ../../../tribes/barbarians/axefactory/conf:29
+#: ../../../tribes/barbarians/bakery/conf:18
+#: ../../../tribes/barbarians/lumberjacks_hut/conf:14
+#: ../../../tribes/barbarians/quarry/conf:14
+#: ../../../tribes/barbarians/micro-brewery/conf:19
+msgid "Work"
+msgstr "Työskentele (pääohjelna)"
+
 #: ../../../tribes/barbarians/farm/conf:14
 msgid "Plant wheat"
-msgstr ""
+msgstr "Istuta vehnää"
 
 #: ../../../tribes/barbarians/farm/conf:16
 msgid "Harvest wheat"
-msgstr ""
+msgstr "Korjaa vehnää"
 
 #: ../../../tribes/barbarians/farmer/conf:2
 msgid "Plants fields."
-msgstr ""
+msgstr "Istuttaa peltoja."
 
 #: ../../../tribes/barbarians/ferner/conf:1
 msgid "Grows flax and thatch reed."
-msgstr ""
+msgstr "Kasvattaa pellavaa ja kaislaa olkia varten."
 
 #: ../../../tribes/barbarians/fernery/conf:13
 msgid "Plant flax"
-msgstr ""
+msgstr "Istuta pellavaa"
 
 #: ../../../tribes/barbarians/fernery/conf:15
 msgid "Plant reed"
-msgstr ""
+msgstr "Istuta kaislaa"
 
 #: ../../../tribes/barbarians/fernery/conf:17
 msgid "Harvest flax"
-msgstr ""
+msgstr "Korjaa pellavaa"
 
 #: ../../../tribes/barbarians/fernery/conf:19
 msgid "Harvest reed"
-msgstr ""
+msgstr "Korjaa kaislaa"
 
 #: ../../../tribes/barbarians/fire_tongs/conf:1
 msgid "The fire tongs are the tool of the smelter, working in the smelting works. Produced in the metal works."
-msgstr ""
+msgstr "Sulattaja käyttää tultakestäviä pihtejä sulattamossa työskennellessään. Ne valmistetaan metallipajalla."
 
 #: ../../../tribes/barbarians/fish/conf:1
 msgid "Besides pitta bread and meat, fish is also a foodstuff for the barbarians."
-msgstr ""
+msgstr "Kala on barbaarien ruokaa lihan ja pitaleivän ohella."
 
 #: ../../../tribes/barbarians/fisher/conf:1
 msgid "Gets fish out of the sea."
-msgstr ""
+msgstr "Kiskoo kalaa vedestä."
 
 #: ../../../tribes/barbarians/fishing_rod/conf:1
 msgid "Fishing rods are needed by barbarian fishers, to catch fish."
-msgstr ""
+msgstr "Barbaarikalastajat käyttävät onkia kalojen narraamiseen."
 
 #: ../../../tribes/barbarians/flax/conf:1
 msgid "Flax is a beautiful flower, which are used to make cloth."
-msgstr ""
+msgstr "Pellava on kaunis kukka, jota käytetään kankaan valmistamiseen."
 
 #: ../../../tribes/barbarians/gamekeeper/conf:1
 msgid "The Gamekeeper makes sure that the natural population of animals never drops too low."
-msgstr ""
+msgstr "Riistanvartija varmistaa, etteivät riistaeläinten kannat pienene liikaa."
 
 #: ../../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Paikantaa hyviä kaivosten ja kaivojen paikkoja."
 
 #: ../../../tribes/barbarians/gold/conf:1
 msgid "Gold is the most valuable of all metals; only very important things are garnished with it."
-msgstr ""
+msgstr "Kulta on arvokkain kaikista metalleista, ja vain tärkeät esineet koristellaan sillä."
 
 #: ../../../tribes/barbarians/goldstone/conf:1
 msgid "This is the yellow goldstone."
-msgstr ""
+msgstr "Tämä on kellertävää kultakiveä."
 
 #: ../../../tribes/barbarians/grout/conf:1
 msgid "Raw stone can be enhanced to grout which delivers solid, non burning build material."
-msgstr ""
+msgstr "Raakakivestä voidaan jalostaa barbaarien puuromaista laastia, joka on kovaa ja tulenkestävää."
 
+# TODO: worker???
 #: ../../../tribes/barbarians/hammer/conf:1
 msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the blacksmiths and the helmsmiths. Make sure you always got some in reserve! Build at the metal works."
-msgstr ""
+msgstr "Vasara on keskeinen työkalu. Sitä tarvitsevat geologit, rakentajat ja seppä. Varmista, että sinulla on aina pari vasaraa varalla! Vasarat valmistetaan metallipajalla."
 
+# TODO: defense
 #: ../../../tribes/barbarians/helm/conf:1
 msgid "Basic defence of a warrior."
-msgstr ""
+msgstr "Soturin perussuoja."
 
 #: ../../../tribes/barbarians/helmsmithy/conf:22
 msgid "Produce helm"
-msgstr ""
+msgstr "Valmista kypärä"
 
 #: ../../../tribes/barbarians/helmsmithy/conf:23
 msgid "Produce mask"
-msgstr ""
+msgstr "Valmista naamio"
 
 #: ../../../tribes/barbarians/helmsmithy/conf:24
 msgid "Produce warhelmet"
-msgstr ""
+msgstr "Valmista sotakypärä"
 
 #: ../../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr ""
+msgstr "Metsästäjä tuo hyvää lihaa väellesi."
 
 #: ../../../tribes/barbarians/hunting_spear/conf:1
 msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters. Produced in the metal works."
-msgstr ""
-
-#: ../../../tribes/barbarians/inn/conf:23
-#: ../../../tribes/barbarians/big_inn/conf:24
-#: ../../../tribes/barbarians/tavern/conf:20
-msgid "Produce ration"
-msgstr ""
-
-#: ../../../tribes/barbarians/inn/conf:24
-#: ../../../tribes/barbarians/big_inn/conf:25
-msgid "Produce snack"
-msgstr ""
+msgstr "Tämä keihäs on riittävän kevyt heitettäväksi, mutta riittävän raskas tappamaan minkä tahansa eläimen yhdellä iskulla. Vain metsästäjät käyttävät sitä. Seipäät valmistetaan metallipajalla."
 
 #: ../../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Valmistaa ruokaa kaivostyöläisille."
 
 #: ../../../tribes/barbarians/iron/conf:1
 msgid "Weapons and tools are made of iron."
-msgstr ""
+msgstr "Aseet ja työkalut valmistetaan raudasta."
 
 #: ../../../tribes/barbarians/ironore/conf:1
 msgid "This is the red iron ore."
-msgstr ""
+msgstr "Tämä on punaista rautamalmia."
 
 #: ../../../tribes/barbarians/kitchen_tools/conf:1
 msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
-msgstr ""
+msgstr "Mitenkäs sitä majatalonpitäjä loihtisi erilaisia ruoka-annoksia, jos ei olisi keittiövälineitä?"
 
 #: ../../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kilm."
-msgstr ""
+msgstr "Polttaa kalkkia laastiin sekoitettavaksi kalkinpolttouunissa."
 
 #: ../../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
-msgstr ""
+msgstr "Kaataa puita."
 
 #: ../../../tribes/barbarians/mask/conf:1
 msgid "An enhanced version of the helmet."
-msgstr ""
-
-#: ../../../tribes/barbarians/master-miner/conf:1
-#: ../../../tribes/barbarians/chief-miner/conf:1
-#: ../../../tribes/barbarians/miner/conf:1
-msgid "Works deep in the mines to produce coal, iron or gold."
-msgstr ""
+msgstr "Paranneltu versio kypärästä."
 
 #: ../../../tribes/barbarians/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
-msgstr ""
+msgstr "Kunnon ateria, joka täyttää nälkäisimmänkin kaivostyöläisen vatsan."
 
 #: ../../../tribes/barbarians/meat/conf:1
 msgid "Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong."
-msgstr ""
+msgstr "Lihassa on paljon energiaa. Sitä käytetään majataloissa ja krouveissa osana kaivostyöläisten lounaita, ja koulutettavien sotureiden vahvistamiseen."
 
 #: ../../../tribes/barbarians/metalworks/conf:31
 msgid "Produce bakingtray"
-msgstr ""
+msgstr "Valmista leipälapio"
 
 #: ../../../tribes/barbarians/metalworks/conf:32
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "Valmista pihdit"
 
 #: ../../../tribes/barbarians/metalworks/conf:33
-#, fuzzy
 msgid "Produce fishing rod"
-msgstr "Onki"
+msgstr "Valmista onki"
 
 #: ../../../tribes/barbarians/metalworks/conf:34
 msgid "Produce hammer"
-msgstr ""
+msgstr "Valmista vasara"
 
 #: ../../../tribes/barbarians/metalworks/conf:35
-#, fuzzy
 msgid "Produce kitchen tools"
-msgstr "Keittiövälineet"
+msgstr "Valmista keittiövälineet"
 
 #: ../../../tribes/barbarians/metalworks/conf:36
 msgid "Produce pick"
-msgstr ""
+msgstr "Valmista hakku"
 
 #: ../../../tribes/barbarians/metalworks/conf:37
 msgid "Produce scythe"
-msgstr ""
+msgstr "Valmista viikate"
 
 #: ../../../tribes/barbarians/metalworks/conf:38
 msgid "Produce shovel"
-msgstr ""
+msgstr "Valmista lapio"
 
 #: ../../../tribes/barbarians/metalworks/conf:39
-#, fuzzy
 msgid "Produce hunting spear"
-msgstr "Metsästyskeihäs"
+msgstr "Valmista metsästyskeihäs"
 
 #: ../../../tribes/barbarians/pick/conf:1
 msgid "This pick is used by the stonemasons and the miners. It is produced in the metal works."
-msgstr ""
+msgstr "Hakkua käyttävät kivenhakkaajat ja kaivostyöläiset. Se valmistetaan metallipajalla."
 
 #: ../../../tribes/barbarians/pittabread/conf:1
 msgid "The barbarian bakers are best in making this flat and tasty pitta bread."
-msgstr ""
+msgstr "Barbaarileipurit leipovat parhaimmat litteät ja maistuvat pitaleivät."
 
 #: ../../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
-msgstr ""
+msgstr "Istuttaa puita."
 
 #: ../../../tribes/barbarians/ration/conf:1
 msgid "A small bite to keep miners strong and working."
-msgstr ""
+msgstr "Pieni perusannos, joka pitää kaivostyöläiset hakun varressa kiinni."
 
+# TODO: building
 #: ../../../tribes/barbarians/raw_stone/conf:1
 msgid "Raw Stones are the secondary build material of the barbarians."
-msgstr ""
+msgstr "Raakakivi on hieman tukkeja kestävämpi rakentamisen raaka-aine barbaareille."
 
 #: ../../../tribes/barbarians/scythe/conf:1
 msgid "The scythe is the tool of the farmers. It is produced in the metal works."
-msgstr ""
+msgstr "Viikate on viljelijän työkalu. Se valmistetaan metallipajalla."
 
 #: ../../../tribes/barbarians/sharpaxe/conf:1
 msgid "Real warriors consider the sharp axe the first real weapon, after being able to handle an ordinary axe, this weapon is tackled. It is heavier and sharper than the ordinary axe. Build in the axe factory."
-msgstr ""
+msgstr "Kunnon soturit pitävät terävää kirvestä ensimmäisenä oikeana aseena. Se otetaan käyttöön, kun tavallinen kirves pysyy jo hyvin käsissä, ja on peruskirvestä terävämpi ja painavampi. Terävät kirveet valmistetaan kirvestehtaalla."
 
 #: ../../../tribes/barbarians/shovel/conf:1
 msgid "The shovel is needed for proper handling of plants. Therefore the ferner and the ranger use it. Build at the metal works."
-msgstr ""
+msgstr "Lapiota tarvitaan kasvien kasvatuksessa, ja sitä käyttävätkin kaislankasvattaja ja metsänvartija. Lapiot valmistetaan metallipajalla."
 
 #: ../../../tribes/barbarians/smelter/conf:1
-#, fuzzy
 msgid "Smelts iron."
-msgstr "Sulattaja"
+msgstr "Sulattaa rautaa."
 
 #: ../../../tribes/barbarians/smelting_works/conf:21
-#, fuzzy
 msgid "Smelt iron"
-msgstr "Sulattaja"
+msgstr "Sulata rautaa"
 
 #: ../../../tribes/barbarians/smelting_works/conf:22
-#, fuzzy
 msgid "Smelt gold"
-msgstr "Linnake"
-
-#: ../../../tribes/barbarians/smelting_works/conf:23
-#: ../../../tribes/barbarians/lime_kiln/conf:18
-#: ../../../tribes/barbarians/burners_house/conf:16
-#: ../../../tribes/barbarians/granitemine/conf:18
-#: ../../../tribes/barbarians/farm/conf:18
-#: ../../../tribes/barbarians/hardener/conf:15
-#: ../../../tribes/barbarians/bakery/conf:18
-#: ../../../tribes/barbarians/deep_goldmine/conf:23
-#: ../../../tribes/barbarians/gamekeepers_hut/conf:14
-#: ../../../tribes/barbarians/helmsmithy/conf:25
-#: ../../../tribes/barbarians/deep_oremine/conf:23
-#: ../../../tribes/barbarians/quarry/conf:14
-#: ../../../tribes/barbarians/fishers_hut/conf:14
-#: ../../../tribes/barbarians/deeper_goldmine/conf:22
-#: ../../../tribes/barbarians/micro-brewery/conf:19
-#: ../../../tribes/barbarians/axefactory/conf:29
-#: ../../../tribes/barbarians/weaving-mill/conf:16
-#: ../../../tribes/barbarians/coalmine/conf:20
-#: ../../../tribes/barbarians/deeper_coalmine/conf:22
-#: ../../../tribes/barbarians/deep_coalmine/conf:23
-#: ../../../tribes/barbarians/fernery/conf:21
-#: ../../../tribes/barbarians/lumberjacks_hut/conf:14
-#: ../../../tribes/barbarians/inn/conf:25
-#: ../../../tribes/barbarians/well/conf:11
-#: ../../../tribes/barbarians/warmill/conf:36
-#: ../../../tribes/barbarians/deeper_oremine/conf:22
-#: ../../../tribes/barbarians/brewery/conf:20
-#: ../../../tribes/barbarians/rangers_hut/conf:13
-#: ../../../tribes/barbarians/hunters_hut/conf:12
-#: ../../../tribes/barbarians/oremine/conf:20
-#: ../../../tribes/barbarians/metalworks/conf:40
-#: ../../../tribes/barbarians/big_inn/conf:27
-#: ../../../tribes/barbarians/goldmine/conf:20
-#: ../../../tribes/barbarians/tavern/conf:21
-msgid "Work"
-msgstr ""
+msgstr "Sulata kultaa"
 
 #: ../../../tribes/barbarians/snack/conf:1
 msgid "A bit bigger, for the advanced miners. They will need a big morsel."
-msgstr ""
+msgstr "Välipala on hieman peruskokoista ruoka-annosta suurempi ravinnonlähde keskisyvien kaivosten työläisille, jotka tarvitsevat enemmän murua rinnan alle."
 
 #: ../../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Puolusta ja valloita!"
 
+# TODO: laying - standing? boulders?
 #: ../../../tribes/barbarians/stonemason/conf:2
 msgid "Cuts raw pieces of granit out of laying stones."
-msgstr ""
+msgstr "Leikkaa raakagraniitin paloja irtolohkareista."
 
 #: ../../../tribes/barbarians/strongbeer/conf:1
 msgid "Only this beer is acceptable for the old warriors. Some say, the whole power of the barbarians is in this ale."
-msgstr ""
+msgstr "Vain vahva olut kelpaa vanhoille sotureille. Tarina kertoo, että koko barbaariheimon voima piilee tässä oluessa."
 
 #: ../../../tribes/barbarians/thatchreed/conf:1
 msgid "Thatch reed is used to make the roofs of buildings waterproof."
-msgstr ""
-
-#: ../../../tribes/barbarians/trainingscamp/conf:36
-#: ../../../tribes/barbarians/battlearena/conf:25
-msgid "Sleep"
-msgstr ""
+msgstr "Kaislanolkea käytetään rakennusten kattojen tilkitsemiseen vettäpitäviksi."
 
 #: ../../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (0)"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:38
 msgid "Upgrade soldier attack 0 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (0) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:39
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (1)"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:40
 msgid "Upgrade soldier attack 1 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (1) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:41
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (2)"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:42
 msgid "Upgrade soldier attack 2 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (2) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:43
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (3)"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:44
 msgid "Upgrade soldier attack 3 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (3) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:45
 msgid "Upgrade soldier attack 4"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (4)"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:46
 msgid "Upgrade soldier attack 4 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (4) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))<"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Paranna sotilaan voimapisteitä (0)"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:48
 msgid "Upgrade soldier hitpoints 0 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan voimapisteitä (0) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
-msgstr ""
+msgstr "Paranna sotilaan voimapisteitä (1)"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:50
 msgid "Upgrade soldier hitpoints 1 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan voimapisteitä (1) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
-msgstr ""
+msgstr "Paranna sotilaan voimapisteitä (2)"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:52
 msgid "Upgrade soldier hitpoints 2 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan voimapisteitä (2) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/barbarians/trunk/conf:1
 msgid "Trunks are the primary build material of the barbarians."
-msgstr ""
+msgstr "Tukit ovat barbaarien pääasiallisesti käyttämä rakennusmateriaali."
 
 #: ../../../tribes/barbarians/warhelmet/conf:1
 msgid "An enhanced mask for barbarian warriors."
-msgstr ""
+msgstr "Kehittyneempi naamio barbaarisotureille."
+
+#: ../../../tribes/barbarians/warmill/conf:30
+#: ../../../tribes/barbarians/metalworks/conf:30
+#: ../../../tribes/barbarians/axefactory/conf:26
+msgid "Produce axe"
+msgstr "Valmista kirves"
+
+#: ../../../tribes/barbarians/warmill/conf:31
+#: ../../../tribes/barbarians/axefactory/conf:27
+msgid "Produce sharpaxe"
+msgstr "Valmista terävä kirves"
+
+#: ../../../tribes/barbarians/warmill/conf:32
+#: ../../../tribes/barbarians/axefactory/conf:28
+msgid "Produce broadaxe"
+msgstr "Valmista leveä kirves"
 
 #: ../../../tribes/barbarians/warmill/conf:33
 msgid "Produce bronzeaxe"
-msgstr ""
+msgstr "Valmista pronssikirves"
 
 #: ../../../tribes/barbarians/warmill/conf:34
 msgid "Produce battleaxe"
-msgstr ""
+msgstr "Valmista taistelukirves"
 
+# TODO: see ware name
 #: ../../../tribes/barbarians/warmill/conf:35
 msgid "Produce warriorsaxe"
-msgstr ""
+msgstr "Valmista soturin kirves"
 
 #: ../../../tribes/barbarians/warriorsaxe/conf:1
 msgid "The warriors axe is the most dangerous of all weapons. Only a few warriors ever were able to handle those huge and powerful axes. Build at the axe factory."
-msgstr ""
+msgstr "Soturin kirves on aseista vaarallisin. Vain kourallinen sotureita on koskaan pystynyt käsittelemään näitä valtavia ja tehokkaita kirveitä."
 
 #: ../../../tribes/barbarians/water/conf:1
 msgid "Water is the most essential essence for life! This water is used in many places, be it to make bread or beer or to produce grout."
-msgstr ""
+msgstr "Vesi on elämän eliksiiriä! Vettä käytetään moneen, muun muassa leivän leipomiseen, oluen panemiseen ja laastin sekoittamiseen."
 
 #: ../../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr ""
+msgstr "Kutoo kangasta aluksia ja sotilaita varten."
 
 #: ../../../tribes/barbarians/wheat/conf:1
 msgid "Wheat is essential for surviving. Delicious pitta bread and strong ales can be made of this wheat."
-msgstr ""
+msgstr "Vehnä on elintärkeää; siitä valmistetaan herkullista pitaleipää sekä vahvoja oluita."

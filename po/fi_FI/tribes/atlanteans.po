@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-04-11 22:07+0300\n"
+"POT-Creation-Date: 2009-07-01 00:17+0000\n"
+"PO-Revision-Date: 2009-07-01 03:22+0300\n"
 "Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -16,71 +16,69 @@ msgstr ""
 
 #: ../../../tribes/atlanteans/advanced_shield/conf:1
 msgid "These shields are used by the best soldiers of the Atlanteans."
-msgstr ""
+msgstr "Näitä kilpiä käyttävät atlantislaisten parhaat sotilaat."
 
 #: ../../../tribes/atlanteans/armoursmithy/conf:20
-#, fuzzy
 msgid "Produce steel shield"
-msgstr "Teräskilpi"
+msgstr "Valmista teräskilpi"
 
 #: ../../../tribes/atlanteans/armoursmithy/conf:21
 msgid "Produce steel shield (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Valmista teräskilpi (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/atlanteans/armoursmithy/conf:22
-#, fuzzy
 msgid "Produce advanced shield"
-msgstr "Suurkilpi"
+msgstr "Valmista suurkilpi"
 
 #: ../../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce advanced shield (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Valmista suurkilpi (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/atlanteans/bakingtray/conf:1
 msgid "The bakingtray is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
-msgstr ""
+msgstr "Leipälapio on leipurin työkalu, ja jokainen leipuri tarvitsee omansa. Työkaluseppä valmistaa leipälapiot."
 
 #: ../../../tribes/atlanteans/blackroot/conf:1
 msgid "Blackroots are a special kind of roots. The Atlanteans like their strong taste and use its flour for making bread."
-msgstr ""
+msgstr "Mustajuuret ovat erityisiä syötäviä juuria. Atlantislaiset ovat mieltyneet niiden makuun, ja käyttävät niistä jauhettuja jauhoja leivän leipomiseen."
 
 #: ../../../tribes/atlanteans/blackroot_farm/conf:13
-#, fuzzy
 msgid "Plant blackroot"
-msgstr "Mustajuuri"
+msgstr "Istuta mustajuuri"
 
 #: ../../../tribes/atlanteans/blackroot_farm/conf:15
-#, fuzzy
 msgid "Harvest blackroot"
-msgstr "Mustajuuri"
+msgstr "Korjaa mustajuuri"
 
 #: ../../../tribes/atlanteans/blackrootflour/conf:1
 msgid "Blackroot Flour is produced out of blackroots and is one of three parts of the atlantian bread."
-msgstr ""
+msgstr "Mustajuurijauho jauhetaan mustajuurista, ja se on yksi kolmesta atlantislaisen leivän ainesosasta."
 
+# TODO: a miner's
 #: ../../../tribes/atlanteans/bread/conf:1
 msgid "This tasty bread is made out of corn- and blackrootflour and is one part of miners meal."
-msgstr ""
+msgstr "Tämä maukas leipä tehdään maissi- ja mustajuurijauhoista, ja se on yksi osa kaivostyöläisen ateriaa."
 
 #: ../../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
-msgstr ""
+msgstr "Kalankasvattaja käyttää suuria ämpäreitä työssään. Työkaluseppä valmistaa ne."
 
 #: ../../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "Työskentelee rakennustyömailla rakentaen uusia rakennuksia."
 
 #: ../../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
-msgstr ""
+msgstr "Polttaa hiiliä."
 
 #: ../../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Kantaa tavaroita teilläsi."
 
+# TODO: " - "
 #: ../../../tribes/atlanteans/coal/conf:1
 msgid "To make the fine atlantian steel a hot fire is needed. But a fire of wood isn't hot enough -this coal brings the needed heat."
-msgstr ""
+msgstr "Hienon atlantislaisen teräksen valmistamiseen tarvitaan kuuma ahjo. Pelkkä raakapuulla lietsottu tuli ei ole riittävän kuuma, vaan tarvitaan hiiltä."
 
 #: ../../../tribes/atlanteans/conf:18
 msgid "The Widelands Development Team"
@@ -151,7 +149,7 @@ msgid "Resource indicator coal much"
 msgstr "Resurssimerkki hiili paljon"
 
 #: ../../../tribes/atlanteans/conf:50
-msgid "Resource indicator gold litte"
+msgid "Resource indicator gold little"
 msgstr "Resurssimerkki kulta vähän"
 
 #: ../../../tribes/atlanteans/conf:51
@@ -614,447 +612,430 @@ msgstr "Linnakylä"
 
 #: ../../../tribes/atlanteans/corn/conf:1
 msgid "This corn is the base of the fine cornflour, that every atlantian baker needs for a good bread."
-msgstr ""
+msgstr "Maissi on hienon maissijauhon perusta; sitä puolestaan tarvitsee jokainen atlantislainen leipuri hyvän leivän leipomiseen."
 
 #: ../../../tribes/atlanteans/cornflour/conf:1
 msgid "Cornflour is produced out of corn and is one of three parts of the atlantian bread."
-msgstr ""
+msgstr "Maissijauho valmistetaan maissista, ja se on yksi kolmesta atlantislaisen leivän ainesosasta."
 
 #: ../../../tribes/atlanteans/crystalmine/conf:23
 msgid "Mine stone"
-msgstr ""
+msgstr "Louhi kiveä"
 
 #: ../../../tribes/atlanteans/crystalmine/conf:24
-#, fuzzy
 msgid "Mine quartz"
-msgstr "Kaivosmies"
+msgstr "Louhi kvartsia"
 
 #: ../../../tribes/atlanteans/crystalmine/conf:25
-#, fuzzy
 msgid "Mine diamond"
-msgstr "Timantti"
+msgstr "Louhi timanttia"
 
 #: ../../../tribes/atlanteans/diamond/conf:1
 msgid "This wonderful diamonds are used for some exclusive buildings and tools."
-msgstr ""
+msgstr "Näitä loisteliaita timantteja käytetään joissakin erityislaatuisissa rakennuksissa ja työkaluissa."
 
 #: ../../../tribes/atlanteans/double_trident/conf:1
 msgid "Already one of the best tridents of the Atlanteans. Only used by very good fighters."
-msgstr ""
+msgstr "Tämä on jo yksi parhaista atlantislaisista atraimista. Sitä käyttävät vain erittäin taitavat taistelijat."
 
 #: ../../../tribes/atlanteans/dungeon/conf:32
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (0)"
 
 #: ../../../tribes/atlanteans/dungeon/conf:33
 msgid "Upgrade soldier attack 0 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (0) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/atlanteans/dungeon/conf:34
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (1)"
 
 #: ../../../tribes/atlanteans/dungeon/conf:35
 msgid "Upgrade soldier attack 1 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (1) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/atlanteans/dungeon/conf:36
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (2)"
 
 #: ../../../tribes/atlanteans/dungeon/conf:37
 msgid "Upgrade soldier attack 2 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (2) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/atlanteans/dungeon/conf:38
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (3)"
 
 #: ../../../tribes/atlanteans/dungeon/conf:39
 msgid "Upgrade soldier attack 3 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan hyökkäystä (3) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/atlanteans/farm/conf:19
 msgid "Plant corn"
-msgstr ""
+msgstr "Istuta maissia"
 
 #: ../../../tribes/atlanteans/farm/conf:21
 msgid "Harvest corn"
-msgstr ""
+msgstr "Korjaa maissia"
 
 #: ../../../tribes/atlanteans/farmer/conf:2
 msgid "Plants fields."
-msgstr ""
+msgstr "Istuttaa peltoja."
 
 #: ../../../tribes/atlanteans/fire_tongs/conf:1
 msgid "The fire tongs are the tools of the smelter, working in the smelting works. They are produced by the toolsmith."
-msgstr ""
+msgstr "Sulattaja käyttää pihtejä työskennellessään sulattamolla. Työkaluseppä valmistaa pihdit."
 
 #: ../../../tribes/atlanteans/fish/conf:1
 msgid "Fish is one of the biggest food-resources of the Atlanteans."
-msgstr ""
+msgstr "Kala on yksi keskeisimmistä atlantislaisten ruokaresursseista."
 
 #: ../../../tribes/atlanteans/fish_breeder/conf:1
-#, fuzzy
 msgid "Breeds fish."
-msgstr "Savukala"
+msgstr "Kasvattaa kaloja."
 
 #: ../../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
-msgstr ""
+msgstr "Kalastaja pyydystää herkullista kalaa."
 
 #: ../../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
-msgstr ""
+msgstr "Kalaverkon valmistaa työkaluseppä ja kalastaja käyttää sitä."
 
 #: ../../../tribes/atlanteans/forester/conf:1
 msgid "Plants trees."
-msgstr ""
+msgstr "Istuttaa puita."
+
+#: ../../../tribes/atlanteans/foresters_house/conf:15
+#: ../../../tribes/atlanteans/ironmine/conf:21
+#: ../../../tribes/atlanteans/hunters_house/conf:12
+#: ../../../tribes/atlanteans/goldmine/conf:21
+#: ../../../tribes/atlanteans/well/conf:13
+#: ../../../tribes/atlanteans/fishers_house/conf:15
+#: ../../../tribes/atlanteans/fish_breeders_house/conf:16
+#: ../../../tribes/atlanteans/burners_house/conf:16
+#: ../../../tribes/atlanteans/spiderfarm/conf:17
+#: ../../../tribes/atlanteans/mill/conf:20
+#: ../../../tribes/atlanteans/armoursmithy/conf:24
+#: ../../../tribes/atlanteans/farm/conf:23
+#: ../../../tribes/atlanteans/weaponsmithy/conf:32
+#: ../../../tribes/atlanteans/smokery/conf:22
+#: ../../../tribes/atlanteans/smelting_works/conf:22
+#: ../../../tribes/atlanteans/woodcutters_house/conf:15
+#: ../../../tribes/atlanteans/blackroot_farm/conf:17
+#: ../../../tribes/atlanteans/coalmine/conf:21
+#: ../../../tribes/atlanteans/weaving-mill/conf:22
+#: ../../../tribes/atlanteans/toolsmithy/conf:42
+#: ../../../tribes/atlanteans/crystalmine/conf:26
+#: ../../../tribes/atlanteans/bakery/conf:18
+#: ../../../tribes/atlanteans/quarry/conf:15
+#: ../../../tribes/atlanteans/goldweaver/conf:16
+#: ../../../tribes/atlanteans/sawmill/conf:16
+msgid "Work"
+msgstr "Työskentele (pääohjelma)"
 
 #: ../../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Paikantaa hyviä kaivosten ja kaivojen paikkoja."
 
 #: ../../../tribes/atlanteans/gold/conf:1
-msgid "Gold is one of the most valuable materials only important things are garnished with it."
-msgstr ""
+msgid "Gold is one of the most valuable materials. Only important things are garnished with it."
+msgstr "Kulta on yksi arvokkaimmista materiaaleista, ja vain tärkeät esineet koristellaan sillä."
 
 #: ../../../tribes/atlanteans/golden_tabard/conf:1
 msgid "A special tabard for atlantian soldiers."
-msgstr ""
+msgstr "Erikoisasetakki atlantislaisille sotilaille."
 
 #: ../../../tribes/atlanteans/goldore/conf:1
 msgid "This is the yellow gold ore."
-msgstr ""
+msgstr "Tämä on kellertävää kultamalmia."
 
 #: ../../../tribes/atlanteans/goldyarn/conf:1
 msgid "This yarn, made of gold, is used for weaving exclusive cloth."
-msgstr ""
+msgstr "Tätä kullasta tehtyä lankaa käytetään erikoiskankaiden kudonnassa."
 
 #: ../../../tribes/atlanteans/hammer/conf:1
 msgid "The hammer is an essential tool. It is needed by the geologist, the builder and all smiths. Make sure you always got some in reserve! It is produced by the toolsmith."
-msgstr ""
+msgstr "Vasara on keskeinen työkalu. Sitä tarvitsevat geologit, rakentajat ja kaikki sepät. Varmista, että sinulla on aina pari vasaraa varalla! Työkaluseppä valmistaa vasarat."
 
 #: ../../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid "This is the most dangerous weapon of the atlantian military. Only the best of the best soldiers may use it."
-msgstr ""
+msgstr "Tämä on arlantislaisten armeijan vaarallisin ase. Vain parhaista sotureista parhaat voivat käyttää sitä."
 
 #: ../../../tribes/atlanteans/hook_pole/conf:1
 msgid "This hook pole is used by the smoker to hang up all the meat and fish to the top of the smoke-house. It is created by the toolsmith."
-msgstr ""
+msgstr "Savustaja käyttää savustusvarrasta lihan ja kalan ripustamiseen savustustalon katonrajaan. Työkaluseppä valmistaa vartaat."
 
 #: ../../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
-msgstr ""
-
-#: ../../../tribes/atlanteans/hunters_house/conf:12
-#: ../../../tribes/atlanteans/smelting_works/conf:22
-#: ../../../tribes/atlanteans/woodcutters_house/conf:15
-#: ../../../tribes/atlanteans/burners_house/conf:16
-#: ../../../tribes/atlanteans/farm/conf:23
-#: ../../../tribes/atlanteans/sawmill/conf:16
-#: ../../../tribes/atlanteans/crystalmine/conf:26
-#: ../../../tribes/atlanteans/bakery/conf:18
-#: ../../../tribes/atlanteans/goldweaver/conf:16
-#: ../../../tribes/atlanteans/smokery/conf:22
-#: ../../../tribes/atlanteans/armoursmithy/conf:24
-#: ../../../tribes/atlanteans/quarry/conf:15
-#: ../../../tribes/atlanteans/toolsmithy/conf:42
-#: ../../../tribes/atlanteans/fish_breeders_house/conf:16
-#: ../../../tribes/atlanteans/ironmine/conf:21
-#: ../../../tribes/atlanteans/weaving-mill/conf:22
-#: ../../../tribes/atlanteans/spiderfarm/conf:17
-#: ../../../tribes/atlanteans/coalmine/conf:21
-#: ../../../tribes/atlanteans/blackroot_farm/conf:17
-#: ../../../tribes/atlanteans/well/conf:13
-#: ../../../tribes/atlanteans/mill/conf:20
-#: ../../../tribes/atlanteans/foresters_house/conf:15
-#: ../../../tribes/atlanteans/weaponsmithy/conf:32
-#: ../../../tribes/atlanteans/goldmine/conf:21
-#: ../../../tribes/atlanteans/fishers_house/conf:15
-msgid "Work"
-msgstr ""
+msgstr "Metsästäjä tuo atlantislaisille tuoretta, raakaa lihaa."
 
 #: ../../../tribes/atlanteans/hunting_bow/conf:1
 msgid "This bow is used by the atlantian hunter."
-msgstr ""
+msgstr "Atlantislaiset metsästäjät käyttävät jousta."
 
+# TODO: tools
 #: ../../../tribes/atlanteans/iron/conf:1
 msgid "Weapons and Tools are made of iron."
-msgstr ""
+msgstr "Aseet ja työkalut valmistetaan raudasta."
 
 #: ../../../tribes/atlanteans/ironore/conf:1
 msgid "This is red iron ore."
-msgstr ""
+msgstr "Tämä on punaista rautamalmia."
 
 #: ../../../tribes/atlanteans/labyrinth/conf:36
 #: ../../../tribes/atlanteans/dungeon/conf:31
 msgid "Sleep"
-msgstr ""
+msgstr "Lepää"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:37
 msgid "Upgrade soldier defense 0"
-msgstr ""
+msgstr "Paranna sotilaan puolustusta (0)"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:38
 msgid "Upgrade soldier defense 0 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan puolustusta (0) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:39
 msgid "Upgrade soldier defense 1"
-msgstr ""
+msgstr "Paranna sotilaan puolustusta (1)"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:40
 msgid "Upgrade soldier defense 1 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan puolustusta (1) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:41
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Paranna sotilaan voimapisteitä (0)"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:42
 msgid "Upgrade soldier hitpoints 0 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan voimapisteitä (0) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:43
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Paranna sotilaan välttökykyä (0)"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:44
 msgid "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan välttökykyä (0) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:45
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Paranna sotilaan välttökykyä (1)"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Paranna sotilaan välttökykyä (1) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/atlanteans/light_trident/conf:1
 msgid "This is the basic weapon for atlantian soldiers."
-msgstr ""
+msgstr "Tämä on atlantislaisten sotilaiden perusase."
 
 #: ../../../tribes/atlanteans/long_trident/conf:1
 msgid "This is an advanced trident for more experienced soldiers."
-msgstr ""
+msgstr "Tämä on perusversiota kehittyneempi atrain kokeneemmille sotilaille."
 
 #: ../../../tribes/atlanteans/meat/conf:1
 msgid "Meat is one food-resource of the Atlanteans."
-msgstr ""
+msgstr "Liha on yksi atlantislaisten ruokatarvike."
 
 #: ../../../tribes/atlanteans/milking_tongs/conf:1
 msgid "Milking tongs are used by the spider breeder, to milk the spiders. They are produced by the toolsmith."
-msgstr ""
+msgstr "Hämähäkinkasvattaja käyttää lypsypihtejä seitin lypsämiseksi hämähäkeistä. Työkaluseppä valmistaa pihdit."
 
 #: ../../../tribes/atlanteans/mill/conf:18
-#, fuzzy
 msgid "Produce cornflour"
-msgstr "Maissijauho"
+msgstr "Valmista maissijauhoa"
 
 #: ../../../tribes/atlanteans/mill/conf:19
-#, fuzzy
 msgid "Produce blackrootflour"
-msgstr "Mustajuurijauho"
+msgstr "Valmista mustajuurijauhoa"
 
 #: ../../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."
-msgstr ""
+msgstr "Työskentelee syvällä kaivoksissa louhien hiiltä, rautaa tai kultaa."
 
 #: ../../../tribes/atlanteans/pick/conf:1
 msgid "Picks are used by stonecutters and miners. It is produced by the toolsmith."
-msgstr ""
+msgstr "Hakkuja käyttävät kivenhakkaajat ja kaivostyöläiset. Työkaluseppä valmistaa hakut."
 
 #: ../../../tribes/atlanteans/planks/conf:1
 msgid "Planks are an important build material of the Atlanteans."
-msgstr ""
+msgstr "Sahatavara on tärkeä rakennusmateriaali atlantislaisille."
 
 #: ../../../tribes/atlanteans/quartz/conf:1
 msgid "These transparent quartz' are used for some exclusive buildings and tools."
-msgstr ""
+msgstr "Näitä läpinäkyviä kvartsikiviä käytetään joidenkin erikoisten rakennusten ja työkalujen valmistuksessa."
 
+# TODO: toolsmith is a smith, so he needs both a saw and a hammer, eh? (see hammer desc)
 #: ../../../tribes/atlanteans/saw/conf:1
 msgid "Saws are needed by the sawyer, the woodcutter and the toolsmith. It is produced by the toolsmith."
-msgstr ""
+msgstr "Sahoja tarvitsevat sahaajien lisäksi puunhakkaajat ja työkalusepät. Työkaluseppä valmistaa sahat."
 
 #: ../../../tribes/atlanteans/scythe/conf:1
 msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr ""
+msgstr "Viikate on maanviljelijän työkalu. Työkaluseppä valmistaa viikatteet."
 
 #: ../../../tribes/atlanteans/shovel/conf:1
 msgid "Shovels are needed for proper handling of plants. Therefore the forester and the blackroot farmer are using it. It is produced by the toolsmith."
-msgstr ""
+msgstr "Lapioita tarvitaan kasvien käsittelyyn, joten niitä käyttävät puunistuttaja ja mustajuuren viljelijä. Työkaluseppä valmistaa lapiot."
 
 #: ../../../tribes/atlanteans/smelter/conf:1
-#, fuzzy
 msgid "Smelts iron."
-msgstr "Sulattaja"
+msgstr "Sulattaa rautaa."
 
 #: ../../../tribes/atlanteans/smelting_works/conf:20
-#, fuzzy
 msgid "Smelt iron"
-msgstr "Sulattaja"
+msgstr "Sulata rautaa"
 
 #: ../../../tribes/atlanteans/smelting_works/conf:21
 msgid "Smelt gold"
-msgstr ""
+msgstr "Sulata kultaa"
 
+# TODO: as, edible; ditto for s. meat
 #: ../../../tribes/atlanteans/smoked_fish/conf:1
 msgid "This is smoked fish - As no Atlantid likes raw fish, smoking is the most common way to make it eatable."
-msgstr ""
+msgstr "Tämä on savustettua kalaa - koska atlantislaiset eivät pidä raa'asta kalasta, savustus on yleisin tapa tehdä siitä syömäkelpoista."
 
 #: ../../../tribes/atlanteans/smoked_meat/conf:1
 msgid "This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is a common way to make it eatable."
-msgstr ""
+msgstr "Tämä on savustettua lihaa - koska atlantislaiset eivät pidä raa'asta lihasta, savustus on yleisin tapa tehdä siitä syömäkelpoista."
 
 #: ../../../tribes/atlanteans/smokery/conf:20
-#, fuzzy
 msgid "Smoke meat"
-msgstr "Savuliha"
+msgstr "Savusta lihaa"
 
 #: ../../../tribes/atlanteans/smokery/conf:21
-#, fuzzy
 msgid "Smoke fish"
-msgstr "Savukala"
+msgstr "Savusta kalaa"
 
 #: ../../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Puolusta ja valloita!"
 
 #: ../../../tribes/atlanteans/spidercloth/conf:1
 msgid "Cloth made out of spideryarn."
-msgstr ""
+msgstr "Seittilangasta kudottua kangasta."
 
 #: ../../../tribes/atlanteans/spideryarn/conf:1
 msgid "This yarn is produced by spiders, which are bred on spiderfarms."
-msgstr ""
+msgstr "Tämä lanka punotaan hämähäkkitarhoissa kasvatettujen hämähäkkien seitistä."
 
 #: ../../../tribes/atlanteans/steel_shield/conf:1
 msgid "This steel shield is used by experienced soldiers."
-msgstr ""
+msgstr "Kokeneet sotilaat käyttävät näitä teräksisiä kilpiä."
 
 #: ../../../tribes/atlanteans/steel_trident/conf:1
 msgid "This is the medium trident - used by advanced soldiers."
-msgstr ""
+msgstr "Tämä on keskikokoinen atrain, jota käyttävät kouliintuneet sotilaat."
 
 #: ../../../tribes/atlanteans/stone/conf:1
 msgid "Stone is one basic build ware type of the Atlanteans."
-msgstr ""
+msgstr "Kivi on rakentamisen perusraaka-aine atlantislaisille."
 
+# TODO: laying - standing? boulders?
 #: ../../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granit out of laying stones."
-msgstr ""
+msgstr "Leikkaa raakagraniitin paloja irtolohkareista."
 
+# TODO: inconsistent capital-As for Atlanteans in several places.
 #: ../../../tribes/atlanteans/tabard/conf:1
 msgid "All atlantean soldiers have to wear the sign of their country on their chests."
-msgstr ""
+msgstr "Kaikki atlantislaiset sotilaat kantavat maansa tunnusta rinnallaan."
 
-# Ei näin: kuvake vs. teksti
 #: ../../../tribes/atlanteans/toolsmithy/conf:30
-#, fuzzy
 msgid "Produce bakingtray"
-msgstr "Leipälapio"
+msgstr "Valmista leipälapio"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:31
 msgid "Produce bucket"
-msgstr ""
+msgstr "Valmista ämpäri"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:32
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "Valmista pihdit"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:33
-#, fuzzy
 msgid "Produce fishing net"
-msgstr "Kalaverkko"
+msgstr "Valmista kalaverkko"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:34
 msgid "Produce hammer"
-msgstr ""
+msgstr "Valmista vasara"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:35
-#, fuzzy
 msgid "Produce hook pole"
-msgstr "Savustusvarras"
+msgstr "Valmista savustusvarras"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:36
 msgid "Produce bow"
-msgstr ""
+msgstr "Valmista jousi"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:37
-#, fuzzy
 msgid "Produce milking tongs"
-msgstr "Lypsypihdit"
+msgstr "Valmista lypsypihdit"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce pick"
-msgstr ""
+msgstr "Valmista hakku"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce saw"
-msgstr ""
+msgstr "Valmista saha"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:40
 msgid "Produce scythe"
-msgstr ""
+msgstr "Valmista viikate"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:41
 msgid "Produce shovel"
-msgstr ""
+msgstr "Valmista lapio"
 
 #: ../../../tribes/atlanteans/trunk/conf:1
 msgid "Trunks are the base for planks, which are used in nearly every building of the Atlanteans."
-msgstr ""
+msgstr "Puunrungot ovat raaka-aine sahatavaralle, jota käytetään lähes kaikissa atlantislaisissa rakennuksissa."
 
 #: ../../../tribes/atlanteans/water/conf:1
 msgid "Water is the most essential essence for life! This water is used in many places, for example to make bread."
-msgstr ""
+msgstr "Vesi on elämän eliksiiriä! Vettä käytetään moneen, muun muassa leivän leipomiseen."
 
 #: ../../../tribes/atlanteans/weaponsmithy/conf:27
-#, fuzzy
 msgid "Produce light trident"
-msgstr "Kevyt atrain"
+msgstr "Valmista kevyt atrain"
 
 #: ../../../tribes/atlanteans/weaponsmithy/conf:28
-#, fuzzy
 msgid "Produce long trident"
-msgstr "Pitkä atrain"
+msgstr "Valmista pitkä atrain"
 
 #: ../../../tribes/atlanteans/weaponsmithy/conf:29
-#, fuzzy
 msgid "Produce steel trident"
-msgstr "Teräsatrain"
+msgstr "Valmista teräsatrain"
 
 #: ../../../tribes/atlanteans/weaponsmithy/conf:30
-#, fuzzy
 msgid "Produce double trident"
-msgstr "Kaksipäinen atrain"
+msgstr "Valmista kaksipäinen atrain"
 
 #: ../../../tribes/atlanteans/weaponsmithy/conf:31
-#, fuzzy
 msgid "Produce heavy double trident"
-msgstr "Raskas kaksipäinen atrain"
+msgstr "Valmista raskas kaksipäinen atrain"
 
 #: ../../../tribes/atlanteans/weaver/conf:1
 msgid "Produces cloth for buildings, ships and soldiers."
-msgstr ""
+msgstr "Kutoo kangasta rakennuksia, aluksia ja sotilaita varten."
 
 #: ../../../tribes/atlanteans/weaving-mill/conf:19
-#, fuzzy
 msgid "Produce spidercloth"
-msgstr "Hämähäkinsilkki"
+msgstr "Valmista hämähäkinsilkkiä"
 
 #: ../../../tribes/atlanteans/weaving-mill/conf:20
-#, fuzzy
 msgid "Produce tabard"
-msgstr "Kultainen asetakki"
+msgstr "Valmista asetakki"
 
 #: ../../../tribes/atlanteans/weaving-mill/conf:21
-#, fuzzy
 msgid "Produce golden tabard"
-msgstr "Kultainen asetakki"
+msgstr "Valmista kultainen asetakki"
 
 #: ../../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
-msgstr ""
+msgstr "Kaataa puita."

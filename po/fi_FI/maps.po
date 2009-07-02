@@ -1,13 +1,14 @@
 # Widelands po/fi_FI/maps.po
 # Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
+# Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-06-14 13:48+0300\n"
+"POT-Creation-Date: 2009-07-01 00:17+0000\n"
+"PO-Revision-Date: 2009-06-20 20:28+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +34,7 @@ msgstr "Keisarikunta - Maanpaon kuukaudet"
 # TODO: month->s... and total spellcheck. Cryptic!
 #: ../../campaigns/cconfig:33
 msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
-msgstr "Kuusi viikkoa sitten Lutius - nuori keisarikunnan kenraali - lähetettiin 150 sotilaan kanssa eturintamalle, pohjoisiin metsiin, joissa barbaariheimojen maat ja keisarikunnan alue risteävät. Hänen tehtävänään oli puolustaa keisarikunnan rajapyykkiä. Ensi alkuun kaikki oli tyyntä - hän jopa puhui barbaarilasten kanssa ja kuvitteli rauhaisaa yhteiseloa näiden alkukantaisten asukkien kanssa. Hän alkoi tuntea olonsa turvallisemmaksi, ja armeija ei kiinnittänyt enää juuri huomiota mahdolliseen viholliseensa. Tämä oli virhe - erään iltamarssin aikana, Lutiuksen valmistautumaton armeija joutui sadan barbaarijalkamiehen hyökkäyksen kohteeksi, ja joutui pakenemaan joka ilmansuuntaan. Vain kourallinen sotilaita selviytyi."
+msgstr "Kuusi viikkoa sitten Lutius - nuori keisarikunnan kenraali - lähetettiin 150 sotilaan kanssa eturintamalle, pohjoisiin metsiin, joissa barbaariheimojen maat ja keisarikunnan alue risteävät. Hänen tehtävänään oli puolustaa keisarikunnan rajapyykkiä. Ensi alkuun kaikki oli tyyntä - hän jopa puhui barbaarilasten kanssa ja kuvitteli rauhaisaa yhteiseloa näiden alkukantaisten asukkien kanssa. Hän alkoi tuntea olonsa turvallisemmaksi, ja armeija ei kiinnittänyt enää juuri huomiota mahdolliseen viholliseensa. Tämä oli virhe - erään iltamarssin aikana Lutiuksen valmistautumaton armeija joutui sadan barbaarijalkamiehen hyökkäyksen kohteeksi, ja pakeni joka ilmansuuntaan. Vain kourallinen sotilaita selviytyi."
 
 #: ../../campaigns/cconfig:51
 msgid "Tutorial1 - Eyes in the Dark"
