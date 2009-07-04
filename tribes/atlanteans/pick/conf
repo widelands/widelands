@@ -1,5 +1,5 @@
 help=_Picks are used by stonecutters and miners. They are produced by the toolsmith.
-default_target_quantity=2
+default_target_quantity=3
 preciousness=1
 
 [idle]
