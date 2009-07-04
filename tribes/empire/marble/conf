@@ -1,5 +1,4 @@
 help=_Marble is the beautiful stone, which is cutted out of the mountains and which is used for beautiful buildings and columns.
-default_target_quantity=10
 preciousness=3
 
 [idle]

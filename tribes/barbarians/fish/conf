@@ -1,6 +1,5 @@
 help=_Besides pitta bread and meat, fish is also a foodstuff for the barbarians.
 preciousness=3
-default_target_quantity=15
 
 [idle]
 pics=idle.png
