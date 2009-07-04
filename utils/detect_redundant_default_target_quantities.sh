@@ -6,8 +6,8 @@
 
 for tribe in barbarians empire atlanteans; do
 	echo -n $tribe:
-	for ware_type in $(grep "default_target_quantity=" tribes/atlanteans/*/conf|sed "s@tribes/.*/\(.*\)/conf:.*@\1@"); do
-		if [[ -z $(egrep "economy needs $ware_type" tribes/atlanteans/*/conf) ]]; then
+	for ware_type in $(grep "default_target_quantity=" tribes/$tribe/*/conf|sed "s@tribes/.*/\(.*\)/conf:.*@\1@"); do
+		if [[ -z $(egrep "economy needs $ware_type" tribes/$tribe/*/conf) ]]; then
 			echo -n " $ware_type"
 		fi
 	done
