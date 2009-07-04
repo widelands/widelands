@@ -639,14 +639,15 @@ void RenderTarget::rendermap
 							(const Map_Object_Descr * const map_object_descr =
 							 f_player_field.map_object_descr[TCoords<>::None])
 						{
+							Player const * const owner =
+								egbase.get_player(f_owner_number);
 							if
 								(const uint32_t picid =
-								 map_object_descr->main_animation())
-									drawanim(f_pos, picid, 0);
+								 	map_object_descr->main_animation())
+									drawanim(f_pos, picid, 0, owner);
 							else if (map_object_descr == &Widelands::g_flag_descr) {
-								const Player & owner = egbase.player(f_owner_number);
 								drawanim
-									(f_pos, owner.tribe().get_flag_anim(), 0, &owner);
+									(f_pos, owner->tribe().get_flag_anim(), 0, owner);
 							}
 						}
 				}
