@@ -317,7 +317,7 @@ Player::build
 Place a construction site, checking that it's legal to do so.
 ===============
 */
-void Player::build(Coords c, Building_Index idx)
+void Player::build(Coords c, Building_Index const idx)
 {
 	int32_t buildcaps;
 

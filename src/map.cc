@@ -1779,7 +1779,7 @@ into two passes. You should always perform both passes. See the comment
 above recalc_brightness.
 ===============
 */
-void Map::recalc_fieldcaps_pass1(FCoords f)
+void Map::recalc_fieldcaps_pass1(FCoords const f)
 {
 	uint8_t caps = CAPS_NONE;
 
@@ -1891,7 +1891,7 @@ on this Field.
 Important: flag buildability has already been checked in the first pass.
 ===============
 */
-void Map::recalc_fieldcaps_pass2(FCoords f)
+void Map::recalc_fieldcaps_pass2(FCoords const f)
 {
 	// 1) Collect neighbour information
 	//
@@ -2018,11 +2018,15 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 				 &objectlist,
 				 FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
 			for (uint32_t i = 0; i < objectlist.size(); ++i) {
-				BaseImmovable * obj = objectlist[i].object;
-				Coords objpos = objectlist[i].coords;
-				int32_t dist = calc_distance(f, objpos);
+				BaseImmovable const & obj = *objectlist[i].object;
+				Coords const objpos = objectlist[i].coords;
+				int32_t const dist = calc_distance(f, objpos);
+				bool main_location = true; //  large buildings occupy 3 extra nodes
+				if (upcast(Building const, building_immovable, &obj))
+					if (building_immovable->get_position() != objpos)
+						main_location = false;
 
-				switch (obj->get_size()) {
+				switch (main_location ? obj.get_size() : BaseImmovable::SMALL) {
 				case BaseImmovable::SMALL:
 					if (dist == 1) {
 						if (building > BUILDCAPS_MEDIUM) {
@@ -2032,16 +2036,16 @@ void Map::recalc_fieldcaps_pass2(FCoords f)
 							if
 								((objpos != br and objpos != r and objpos != bl)
 								 or
-								 (not dynamic_cast<Flag const *>(obj)
+								 (not dynamic_cast<Flag const *>(&obj)
 								  &&
-								  not dynamic_cast<Road const *>(obj)))
+								  not dynamic_cast<Road const *>(&obj)))
 								building = BUILDCAPS_MEDIUM;
 						}
 					}
 					break;
 
 				case BaseImmovable::MEDIUM:
-					if (dynamic_cast<Building const *>(obj)) {
+					if (dynamic_cast<Building const *>(&obj)) {
 						if (building > BUILDCAPS_MEDIUM)
 							building = BUILDCAPS_MEDIUM;
 					} else {

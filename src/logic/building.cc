@@ -809,7 +809,7 @@ void Building::collect_priorities
 /**
 * Set base priority for this building (applies for all wares)
  */
-void Building::set_priority(int32_t new_priority) {
+void Building::set_priority(int32_t const new_priority) {
 	m_priority = new_priority;
 }
 
