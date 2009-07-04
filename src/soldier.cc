@@ -786,12 +786,22 @@ void Soldier::battle_update(Game & game, State &)
 						("player %u's soldier started task_movepath\n",
 						 owner().get_player_number());
 					return;
-				} else
+				} else {
+					BaseImmovable const * const immovable_position =
+						get_position().field->get_immovable();
+					BaseImmovable const * const immovable_dest     =
+						map[dest]            .get_immovable();
 					throw wexception
-						("soldier %u could not move from (%u, %u) to (%u, %u)",
+						("soldier %u could not move from (%u, %u) (%s) to (%u, %u) "
+						 "(%s)",
 						 serial(),
 						 get_position().x, get_position().y,
-						 dest.x, dest.y);
+						 immovable_position ? immovable_position->name().c_str() :
+						 "no immovable",
+						 dest.x, dest.y,
+						 immovable_dest     ? immovable_dest    ->name().c_str() :
+						 "no immovable");
+				}
 			}
 		}
 	}
