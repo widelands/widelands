@@ -1,5 +1,4 @@
 help=_This is the red iron ore.
-default_target_quantity=25
 preciousness=4
 
 [idle]

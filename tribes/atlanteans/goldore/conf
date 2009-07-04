@@ -1,6 +1,5 @@
 help=_This is the yellow gold ore.
 preciousness=2
-default_target_quantity=15
 
 [idle]
 pics=idle.png

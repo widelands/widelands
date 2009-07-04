@@ -1,5 +1,4 @@
 help=_These grapes are the basic for tasty wine.
-default_target_quantity=10
 preciousness=2
 
 [idle]

@@ -1,3 +1,5 @@
+#include "gamecontroller.h"
+
 /*
  * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
@@ -1515,6 +1517,7 @@ void Worker::return_update(Game & game, State & state)
 		 	 descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[return]: Failed to return\n");
+		game.gameController()->setDesiredSpeed(0);
 		return set_location(0);
 	}
 }

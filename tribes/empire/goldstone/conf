@@ -1,5 +1,4 @@
 help=_This is the yellow goldstone.
-default_target_quantity=15
 preciousness=2
 
 [idle]

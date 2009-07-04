@@ -1,6 +1,5 @@
 help=_Fish is one of the biggest food-resources of the Atlanteans.
 preciousness=4
-default_target_quantity=30
 
 [idle]
 pics=idle.png

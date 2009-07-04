@@ -76,7 +76,7 @@ SinglePlayerGameController::~SinglePlayerGameController()
 
 void SinglePlayerGameController::think()
 {
-	int32_t curtime = WLApplication::get()->get_time();
+	int32_t const curtime = WLApplication::get()->get_time();
 	int32_t frametime = curtime - m_lastframe;
 	m_lastframe = curtime;
 
