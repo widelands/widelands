@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
+"POT-Creation-Date: 2009-07-07 19:16+0000\n"
 "PO-Revision-Date: 2007-09-03 15:03+0200\n"
 "Last-Translator: Erik Soe Sorensen <eriksoe@daimi.au.dk>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
@@ -355,144 +355,144 @@ msgstr "Høvding"
 msgid "Elders"
 msgstr "Ældsteråd"
 
-#: ../../txts/developers:19 ../../txts/developers:291
+#: ../../txts/developers:19 ../../txts/developers:288
 msgid "Graphics"
 msgstr "Grafik"
 
-#: ../../txts/developers:22 ../../txts/developers:29 ../../txts/developers:36
-msgid "vacant"
-msgstr "ledig"
-
-#: ../../txts/developers:26 ../../txts/developers:284
+#: ../../txts/developers:24 ../../txts/developers:281
 msgid "Homepage"
 msgstr "Hjemmeside"
 
-#: ../../txts/developers:33 ../../txts/developers:297
+#: ../../txts/developers:27
+msgid "vacant"
+msgstr "ledig"
+
+#: ../../txts/developers:31 ../../txts/developers:294
 msgid "Sound"
 msgstr "Lyd"
 
-#: ../../txts/developers:40 ../../txts/developers:302
+#: ../../txts/developers:36 ../../txts/developers:299
 msgid "Translation"
 msgstr "Oversættelse"
 
-#: ../../txts/developers:48
+#: ../../txts/developers:44
 msgid "Coders"
 msgstr "Programmører"
 
-#: ../../txts/developers:74
+#: ../../txts/developers:70
 msgid "Graphicians"
 msgstr "Grafikere"
 
-#: ../../txts/developers:98
+#: ../../txts/developers:94
 msgid "Musicians"
 msgstr "Musikere"
 
-#: ../../txts/developers:109
+#: ../../txts/developers:105
 msgid "Sound Effects"
 msgstr "Lydeffekter"
 
-#: ../../txts/developers:116
+#: ../../txts/developers:112
 msgid "Maps and Missions"
 msgstr "Kort og Missioner"
 
-#: ../../txts/developers:129
+#: ../../txts/developers:125
 #, fuzzy
 msgid "Campaign Story"
 msgstr "Barbarernes Felttogs Historie"
 
-#: ../../txts/developers:132
+#: ../../txts/developers:128
 msgid "Barbarian"
 msgstr ""
 
-#: ../../txts/developers:137
+#: ../../txts/developers:133
 msgid "Empire"
 msgstr ""
 
-#: ../../txts/developers:143
+#: ../../txts/developers:139
 msgid "Translators"
 msgstr "Oversættere"
 
-#: ../../txts/developers:147
+#: ../../txts/developers:143
 msgid "Czech"
 msgstr "Tjekkisk"
 
-#: ../../txts/developers:153
+#: ../../txts/developers:149
 msgid "Dansk"
 msgstr ""
 
-#: ../../txts/developers:158
+#: ../../txts/developers:155
 msgid "Dutch"
 msgstr "Hollandsk"
 
-#: ../../txts/developers:164
+#: ../../txts/developers:161
 msgid "Finnish"
 msgstr "Finsk"
 
-#: ../../txts/developers:170
+#: ../../txts/developers:167
 msgid "French"
 msgstr "Fransk"
 
-#: ../../txts/developers:177
+#: ../../txts/developers:174
 msgid "Galician"
 msgstr "Gælisk"
 
-#: ../../txts/developers:182
+#: ../../txts/developers:179
 msgid "German"
 msgstr "Tysk"
 
-#: ../../txts/developers:192
+#: ../../txts/developers:189
 msgid "Hebrew"
 msgstr "Hebræisk"
 
-#: ../../txts/developers:197
+#: ../../txts/developers:194
 msgid "Hungarian"
 msgstr "Ungarsk"
 
-#: ../../txts/developers:202
+#: ../../txts/developers:199
 msgid "Polish"
 msgstr "Polsk"
 
-#: ../../txts/developers:210
+#: ../../txts/developers:207
 msgid "Russian"
 msgstr "Russisk"
 
-#: ../../txts/developers:215
+#: ../../txts/developers:212
 msgid "Slovak"
 msgstr "Slovakisk"
 
-#: ../../txts/developers:220
+#: ../../txts/developers:217
 msgid "Spanish"
 msgstr "Spansk"
 
-#: ../../txts/developers:225
+#: ../../txts/developers:222
 msgid "Swedish"
 msgstr "Svensk"
 
-#: ../../txts/developers:233
+#: ../../txts/developers:230
 msgid "Packagers"
 msgstr "Pakkere"
 
-#: ../../txts/developers:237
+#: ../../txts/developers:234
 msgid "Linux Distributions"
 msgstr ""
 
-#: ../../txts/developers:248
+#: ../../txts/developers:245
 msgid "Other Unix Distributions"
 msgstr ""
 
-#: ../../txts/developers:257
+#: ../../txts/developers:254
 msgid "Non Unix Distributions"
 msgstr ""
 
-#: ../../txts/developers:268
+#: ../../txts/developers:265
 msgid "Wiki and Enduser-Documentation"
 msgstr ""
 
-#: ../../txts/developers:280
+#: ../../txts/developers:277
 msgid "Former elders"
 msgstr ""
 
-#: ../../txts/developers:308
+#: ../../txts/developers:305
 msgid "Other"
 msgstr ""
 

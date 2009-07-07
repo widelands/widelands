@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 19:07+0200\n"
+"POT-Creation-Date: 2009-07-07 21:16+0200\n"
 "PO-Revision-Date: 2007-08-10 23:57+0200\n"
 "Last-Translator: Erik Soe Sorensen <eriksoe@daimi.au.dk>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
@@ -49,8 +49,8 @@ msgid "Icon"
 msgstr "Handling"
 
 #: ../../src/writeHTML.cc:268 ../../src/writeHTML.cc:501
-#: ../../src/writeHTML.cc:1275 ../../src/building_ui.cc:1583
-#: ../../src/building_ui.cc:1801 ../../src/wui/building_statistics_menu.cc:111
+#: ../../src/writeHTML.cc:1275 ../../src/building_ui.cc:1537
+#: ../../src/building_ui.cc:1724 ../../src/wui/building_statistics_menu.cc:111
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:154
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:76
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:165
@@ -72,7 +72,7 @@ msgstr "Bygget"
 msgid "Enhanced"
 msgstr "Opgradér til %s"
 
-#: ../../src/writeHTML.cc:277 ../../src/building_ui.cc:672
+#: ../../src/writeHTML.cc:277 ../../src/building_ui.cc:648
 msgid "Stop"
 msgstr "Stop"
 
@@ -594,36 +594,36 @@ msgstr[1] ""
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1081
+#: ../../src/wlapplication.cc:1082
 msgid ""
 "\n"
 "Sorry, no double-instance debugging on WIN32.\n"
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1084
+#: ../../src/wlapplication.cc:1085
 msgid "--double is disabled. This is not a debug build!"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1186
+#: ../../src/wlapplication.cc:1187
 #, fuzzy
 msgid "This is Widelands-"
 msgstr "Dette er Widelands-%s"
 
-#: ../../src/wlapplication.cc:1188
+#: ../../src/wlapplication.cc:1189
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1189
+#: ../../src/wlapplication.cc:1190
 #, fuzzy
 msgid ""
 "Options:\n"
 "\n"
 msgstr "Indstillinger:"
 
-#: ../../src/wlapplication.cc:1193
+#: ../../src/wlapplication.cc:1194
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -642,7 +642,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1208
+#: ../../src/wlapplication.cc:1209
 msgid ""
 "Sound options:\n"
 " --nosound            Starts the game with sound disabled.\n"
@@ -705,18 +705,18 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1276
+#: ../../src/wlapplication.cc:1277
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)\n"
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1280
+#: ../../src/wlapplication.cc:1281
 msgid " --help               Show this help\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1284
+#: ../../src/wlapplication.cc:1285
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        http://www.sourceforge.net/projects/widelands\n"
@@ -725,71 +725,71 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1422
+#: ../../src/wlapplication.cc:1423
 #, fuzzy
 msgid "Warning: "
 msgstr "Venter"
 
-#: ../../src/wlapplication.cc:1426
+#: ../../src/wlapplication.cc:1427
 msgid "Unexpected error during the game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1430
+#: ../../src/wlapplication.cc:1431
 msgid ""
 "\n"
 "\n"
 "Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build "
 msgstr ""
 
-#: ../../src/wlapplication.cc:1436
+#: ../../src/wlapplication.cc:1437
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often - though not always - possible to load it and continue playing.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1539
+#: ../../src/wlapplication.cc:1540
 msgid "Connection timeouted"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1541
+#: ../../src/wlapplication.cc:1542
 msgid ""
 "Widelands has not been able to get the IP address of the server in time.\n"
 "There seems to be a network problem, either on your side or on side\n"
 "of the server.\n"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1562
+#: ../../src/wlapplication.cc:1563
 msgid "Connection problem"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1564
+#: ../../src/wlapplication.cc:1565
 msgid "Widelands has not been able to connect to the host."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1605
+#: ../../src/wlapplication.cc:1611
 msgid "The address of the game server is invalid"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1706 ../../src/network/nethost.cc:1115
+#: ../../src/wlapplication.cc:1716 ../../src/network/nethost.cc:1115
 msgid "Player"
 msgstr "Spiller"
 
-#: ../../src/wlapplication.cc:1861 ../../src/network/netclient.cc:158
+#: ../../src/wlapplication.cc:1871 ../../src/network/netclient.cc:158
 #: ../../src/network/nethost.cc:422
 #, fuzzy
 msgid "Preparing game"
 msgstr "Forbereder..."
 
-#: ../../src/wlapplication.cc:1968
+#: ../../src/wlapplication.cc:1978
 msgid "End of replay"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1970
+#: ../../src/wlapplication.cc:1980
 msgid "The end of the replay has been reached and the game has been paused. You may unpause the game and continue watching if you want to."
 msgstr ""
 
-#: ../../src/wlapplication.cc:2052 ../../src/logic/game.cc:323
+#: ../../src/wlapplication.cc:2062 ../../src/logic/game.cc:323
 #: ../../src/logic/game.cc:362
 msgid "Loading..."
 msgstr "Indlæser..."
@@ -844,7 +844,7 @@ msgstr "Hviler"
 msgid "Reset target quantity to default value"
 msgstr ""
 
-#: ../../src/s2map.cc:219
+#: ../../src/s2map.cc:220
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr ""
 
@@ -1022,114 +1022,114 @@ msgstr "Arbejder ikke"
 msgid "Stock"
 msgstr "Lager"
 
-#: ../../src/building_ui.cc:172
+#: ../../src/building_ui.cc:170
 msgid "Destroy building?"
 msgstr "Nedriv bygning?"
 
-#: ../../src/building_ui.cc:186
+#: ../../src/building_ui.cc:184
 msgid "Do you really want to destroy this "
 msgstr "Er du sikker på, at du vil nedrive denne "
 
-#: ../../src/building_ui.cc:188
+#: ../../src/building_ui.cc:186
 msgid "?"
 msgstr "?"
 
-#: ../../src/building_ui.cc:672 ../../src/events/event_message_box.cc:48
+#: ../../src/building_ui.cc:648 ../../src/events/event_message_box.cc:48
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:55
 msgid "Continue"
 msgstr "Fortsæt"
 
-#: ../../src/building_ui.cc:687
+#: ../../src/building_ui.cc:664
 #, c-format
 msgid "Enhance to %s"
 msgstr "Opgradér til %s"
 
-#: ../../src/building_ui.cc:708
+#: ../../src/building_ui.cc:685
 msgid "Destroy"
 msgstr "Nedriv"
 
-#: ../../src/building_ui.cc:719 ../../src/building_ui.cc:824
+#: ../../src/building_ui.cc:696 ../../src/building_ui.cc:798
 msgid "Show workarea"
 msgstr "Vis arbejdsområde"
 
-#: ../../src/building_ui.cc:730
+#: ../../src/building_ui.cc:707
 msgid "Debug"
 msgstr "Debug"
 
-#: ../../src/building_ui.cc:851
+#: ../../src/building_ui.cc:825
 msgid "Hide workarea"
 msgstr "Skjul arbejdsområde"
 
-#: ../../src/building_ui.cc:1153
+#: ../../src/building_ui.cc:1129
 msgid "Worker Listing"
 msgstr "Liste over arbejdere"
 
-#: ../../src/building_ui.cc:1173
+#: ../../src/building_ui.cc:1148
 msgid "Type: "
 msgstr "Type: "
 
-#: ../../src/building_ui.cc:1180
+#: ../../src/building_ui.cc:1155
 msgid "Experience: "
 msgstr "Erfaring: "
 
-#: ../../src/building_ui.cc:1187
+#: ../../src/building_ui.cc:1162
 msgid "Trying to become: "
 msgstr "Under uddannelse til: "
 
-#: ../../src/building_ui.cc:1231
+#: ../../src/building_ui.cc:1206
 msgid "(vacant)"
 msgstr ""
 
-#: ../../src/building_ui.cc:1231
+#: ../../src/building_ui.cc:1206
 msgid "(coming)"
 msgstr ""
 
-#: ../../src/building_ui.cc:1396
+#: ../../src/building_ui.cc:1367
 msgid "Highest priority"
 msgstr "Højeste prioritet"
 
-#: ../../src/building_ui.cc:1405
+#: ../../src/building_ui.cc:1376
 msgid "Normal priority"
 msgstr "Normal prioritet"
 
-#: ../../src/building_ui.cc:1414
+#: ../../src/building_ui.cc:1385
 msgid "Lowest priority"
 msgstr "Laveste prioritet"
 
-#: ../../src/building_ui.cc:1454
+#: ../../src/building_ui.cc:1423
 msgid "Show worker listing"
 msgstr "Vis liste over arbejdere"
 
-#: ../../src/building_ui.cc:1568 ../../src/building_ui.cc:1822
+#: ../../src/building_ui.cc:1522 ../../src/building_ui.cc:1760
 msgid "Capacity"
 msgstr "Kapacitet"
 
-#: ../../src/building_ui.cc:1584 ../../src/building_ui.cc:1802
+#: ../../src/building_ui.cc:1538 ../../src/building_ui.cc:1725
 msgid "HP"
 msgstr ""
 
-#: ../../src/building_ui.cc:1585 ../../src/building_ui.cc:1803
+#: ../../src/building_ui.cc:1539 ../../src/building_ui.cc:1726
 msgid "AT"
 msgstr ""
 
-#: ../../src/building_ui.cc:1586 ../../src/building_ui.cc:1804
+#: ../../src/building_ui.cc:1540 ../../src/building_ui.cc:1727
 msgid "DE"
 msgstr ""
 
-#: ../../src/building_ui.cc:1587 ../../src/building_ui.cc:1805
+#: ../../src/building_ui.cc:1541 ../../src/building_ui.cc:1728
 msgid "EV"
 msgstr ""
 
-#: ../../src/building_ui.cc:1588 ../../src/building_ui.cc:1806
+#: ../../src/building_ui.cc:1542 ../../src/building_ui.cc:1729
 msgid "Level"
 msgstr "Niveau"
 
-#: ../../src/building_ui.cc:1693
+#: ../../src/building_ui.cc:1640
 #, fuzzy, c-format
 msgid "Capacity: %2u"
 msgstr "Kapacitet"
 
-#: ../../src/building_ui.cc:1832
+#: ../../src/building_ui.cc:1786
 msgid "xx"
 msgstr ""
 
@@ -1302,7 +1302,7 @@ msgid "victory"
 msgstr "Opret bibliotek"
 
 #: ../../src/events/event_factory.cc:111
-msgid "Allows a player to claim victory of this campain"
+msgid "Allows a player to claim victory of this campaign."
 msgstr ""
 
 #: ../../src/map_io/widelands_map_loader.cc:87
@@ -1396,20 +1396,20 @@ msgstr ""
 msgid "Reconnected to the metaserver."
 msgstr ""
 
-#: ../../src/network/network_ggz.cc:491
+#: ../../src/network/network_ggz.cc:492
 msgid "NOTE: The internet gaming implementation is in very early state."
 msgstr ""
 
-#: ../../src/network/network_ggz.cc:493
+#: ../../src/network/network_ggz.cc:496
 msgid "Please take a look at the notes at:"
 msgstr ""
 
-#: ../../src/network/network_ggz.cc:632
+#: ../../src/network/network_ggz.cc:635
 #, fuzzy
 msgid " joined the metaserver."
 msgstr "Deltag i et netværksspil"
 
-#: ../../src/network/network_ggz.cc:641
+#: ../../src/network/network_ggz.cc:644
 msgid " left the metaserver."
 msgstr ""
 
@@ -1562,20 +1562,20 @@ msgid "Triggers when the the player sees (or has seen) at least a specified numb
 msgstr ""
 
 #: ../../src/wui/interactive_dedicated_server.cc:51
-#: ../../src/wui/interactive_player.cc:177
+#: ../../src/wui/interactive_player.cc:172
 #: ../../src/wui/interactive_spectator.cc:51
 msgid "Chat"
 msgstr "Chat"
 
 #: ../../src/wui/interactive_dedicated_server.cc:53
-#: ../../src/wui/interactive_player.cc:180
+#: ../../src/wui/interactive_player.cc:175
 #: ../../src/wui/interactive_spectator.cc:57
 #: ../../src/wui/game_options_menu.cc:42 ../../src/ui_fsmenu/main.cc:69
 msgid "Options"
 msgstr "Indstillinger"
 
 #: ../../src/wui/interactive_dedicated_server.cc:55
-#: ../../src/wui/interactive_player.cc:183
+#: ../../src/wui/interactive_player.cc:178
 #: ../../src/wui/interactive_spectator.cc:59
 #, fuzzy
 msgid "Statistics"
@@ -1676,33 +1676,33 @@ msgstr "8 h"
 msgid "16 h"
 msgstr "16 h"
 
-#: ../../src/wui/interactive_player.cc:186
+#: ../../src/wui/interactive_player.cc:181
 #: ../../src/editor/editorinteractive.cc:88
 msgid "Objectives"
 msgstr "Mål"
 
-#: ../../src/wui/interactive_player.cc:189
+#: ../../src/wui/interactive_player.cc:184
 #: ../../src/wui/interactive_spectator.cc:61
 #: ../../src/editor/editorinteractive.cc:73
 msgid "Minimap"
 msgstr "Minikort"
 
-#: ../../src/wui/interactive_player.cc:192
+#: ../../src/wui/interactive_player.cc:187
 #: ../../src/editor/editorinteractive.cc:76
 msgid "Buildhelp"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:195
+#: ../../src/wui/interactive_player.cc:190
 #, fuzzy
 msgid "Messages"
 msgstr "Besked: "
 
-#: ../../src/wui/interactive_player.cc:201
+#: ../../src/wui/interactive_player.cc:196
 #, fuzzy
 msgid "Resource information"
 msgstr "Feltinformation"
 
-#: ../../src/wui/interactive_player.cc:205
+#: ../../src/wui/interactive_player.cc:200
 msgid "Ware help"
 msgstr ""
 
@@ -1721,21 +1721,21 @@ msgstr ""
 msgid "Building Statistics"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:207
+#: ../../src/wui/interactive_base.cc:208
 #, c-format
 msgid "%u.%ux"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:210
+#: ../../src/wui/interactive_base.cc:211
 msgid "PAUSE"
 msgstr "PAUSE"
 
-#: ../../src/wui/interactive_base.cc:230
+#: ../../src/wui/interactive_base.cc:231
 #, c-format
 msgid "%s (%s)"
 msgstr ""
 
-#: ../../src/wui/interactive_base.cc:235
+#: ../../src/wui/interactive_base.cc:236
 msgid "NO GAME CONTROLLER"
 msgstr ""
 
@@ -1817,7 +1817,7 @@ msgid "Game Time: "
 msgstr "Spiltid:"
 
 #: ../../src/wui/game_main_menu_save_game.cc:89
-#: ../../src/ui_fsmenu/options.cc:69 ../../src/ui_fsmenu/options.cc:345
+#: ../../src/ui_fsmenu/options.cc:69 ../../src/ui_fsmenu/options.cc:346
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:100
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:71
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:127
@@ -1854,7 +1854,7 @@ msgid "Save Game Error!!"
 msgstr "Fejl i det gemte spil!!"
 
 #: ../../src/wui/game_main_menu_save_game.cc:210
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:359
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:360
 msgid "A File with the name "
 msgstr "En fil med navnet "
 
@@ -1954,7 +1954,7 @@ msgid "Widelands could not load the file \"%s\". The file format seems to be inc
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:181
-#: ../../src/logic/editor_game_base.cc:566
+#: ../../src/logic/editor_game_base.cc:569
 msgid "Loading world data"
 msgstr "Indlæser verdensdata"
 
@@ -1966,23 +1966,23 @@ msgstr "Kort ikke gemt"
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr "Dette kort er ikke gemt. Afslut alligevel?"
 
-#: ../../src/editor/editorinteractive.cc:564
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:403
+#: ../../src/editor/editorinteractive.cc:585
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:412
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:184
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:180
 #: ../../src/map.h:196 ../../src/map.h:203
 msgid "No Name"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:566
+#: ../../src/editor/editorinteractive.cc:587
 #: ../../src/ui_fsmenu/netsetup_lan.cc:191
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:404
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:413
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:185
 #: ../../src/map.h:197
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:570
+#: ../../src/logic/editor_game_base.cc:573
 #, c-format
 msgid "Loading tribe: %s"
 msgstr "Indlæser stamme: %s"
@@ -2053,7 +2053,7 @@ msgid ""
 "You can manually add a starting position with Widelands Editor, to fix this problem."
 msgstr ""
 
-#: ../../src/logic/worker.cc:814
+#: ../../src/logic/worker.cc:816
 #, fuzzy
 msgid "Resources found."
 msgstr "Feltinformation"
@@ -2429,12 +2429,12 @@ msgstr "Version"
 msgid "by the Widelands Development Team"
 msgstr "(C) 2002-2008 Widelands-udviklingsholdet"
 
-#: ../../src/ui_fsmenu/options.cc:62 ../../src/ui_fsmenu/options.cc:377
+#: ../../src/ui_fsmenu/options.cc:62 ../../src/ui_fsmenu/options.cc:378
 #, fuzzy
 msgid "Advanced Options"
 msgstr "Indstillinger"
 
-#: ../../src/ui_fsmenu/options.cc:76 ../../src/ui_fsmenu/options.cc:352
+#: ../../src/ui_fsmenu/options.cc:76 ../../src/ui_fsmenu/options.cc:353
 msgid "Apply"
 msgstr "Anvend"
 
@@ -2508,45 +2508,45 @@ msgstr ""
 msgid "Off"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:276
+#: ../../src/ui_fsmenu/options.cc:277
 msgid "System default language"
 msgstr "Systemets standard-sprog"
 
-#: ../../src/ui_fsmenu/options.cc:388
+#: ../../src/ui_fsmenu/options.cc:389
 #, fuzzy
 msgid "Main menu font:"
 msgstr "Hovedmenu"
 
-#: ../../src/ui_fsmenu/options.cc:395
+#: ../../src/ui_fsmenu/options.cc:396
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:400
+#: ../../src/ui_fsmenu/options.cc:401
 #, fuzzy
 msgid "Speed of a new game:"
 msgstr "Vær vært for netværksspil"
 
-#: ../../src/ui_fsmenu/options.cc:404
+#: ../../src/ui_fsmenu/options.cc:405
 msgid "Distance for windows to snap to other panels:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:408
+#: ../../src/ui_fsmenu/options.cc:409
 msgid "Distance for windows to snap to borders:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:413
+#: ../../src/ui_fsmenu/options.cc:414
 msgid "Graphics experimental improvements."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:419
+#: ../../src/ui_fsmenu/options.cc:420
 msgid "Graphics double buffering."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:437
+#: ../../src/ui_fsmenu/options.cc:438
 msgid "Pause"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:448
+#: ../../src/ui_fsmenu/options.cc:449
 msgid "FreeSerif (Default)"
 msgstr ""
 
@@ -2689,7 +2689,7 @@ msgid "Random Number:"
 msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:118
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:348
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:357
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:69
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:163
 #, fuzzy, c-format
@@ -2697,7 +2697,7 @@ msgid "Width: %u"
 msgstr "Bredde"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:128
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:352
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:361
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:91
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:167
 #, fuzzy, c-format
@@ -2738,22 +2738,22 @@ msgstr "Kortnavn:"
 msgid "Generate Map"
 msgstr "Opret Kort"
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:356
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:365
 #, c-format
 msgid "Water: %i %%"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:359
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:368
 #, c-format
 msgid "Land: %i %%"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:362
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:371
 #, c-format
 msgid "Wasteland: %i %%"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:365
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:374
 #, c-format
 msgid "Mountains: %i %%"
 msgstr ""
@@ -2879,8 +2879,8 @@ msgstr ""
 msgid "Terrain Select"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:161
-#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:215
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:162
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:216
 msgid "Current:"
 msgstr ""
 
@@ -3235,16 +3235,16 @@ msgstr ""
 msgid "unnamed"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:361
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:362
 msgid " exists already. Overwrite?"
 msgstr " eksisterer allerede. Overskriv?"
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:363
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:384
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:364
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:385
 msgid "Save Map Error!!"
 msgstr ""
 
-#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:380
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:381
 msgid ""
 "Map Saving Error!\n"
 "Saved Map-File may be corrupt!\n"
