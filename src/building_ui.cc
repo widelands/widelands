@@ -489,7 +489,7 @@ protected:
 	void act_change_soldier_capacity(int32_t);
 
 	void create_ware_queue_panel
-		(UI::Box *, Building *, Widelands::WaresQueue *);
+		(UI::Box *, Building &, Widelands::WaresQueue *);
 
 	std::list<PriorityButtonHelper> m_priority_helpers;
 	UI::Callback_IDButton<PriorityButtonHelper, int32_t> *
@@ -841,7 +841,10 @@ private:
 public:
 	void list_worker_clicked();
 protected:
-	UI::Box * create_production_box(UI::Panel * ptr, ProductionSite * ps);
+	struct Production_Box : public UI::Box {
+		Production_Box
+			(UI::Panel & parent, ProductionSite_Window &, ProductionSite &);
+	};
 };
 
 
@@ -895,9 +898,9 @@ ConstructionSite_Window::ConstructionSite_Window
 	box.add_space(8);
 
 	// Add the wares queue
-	for (uint32_t i = 0; i < cs->get_nrwaresqueues(); ++i) {
-		Building_Window::create_ware_queue_panel(&box, cs, cs->get_waresqueue(i));
-	}
+	for (uint32_t i = 0; i < cs->get_nrwaresqueues(); ++i)
+		Building_Window::create_ware_queue_panel
+			(&box, *cs, cs->get_waresqueue(i));
 
 	box.add_space(8);
 
@@ -1300,7 +1303,7 @@ ProductionSite_Window::ProductionSite_Window
 		(not dynamic_cast<TrainingSite const *>(ps) and
 		 not dynamic_cast<MilitarySite const *>(ps))
 	{
-		prod_box = create_production_box (this, ps);
+		prod_box = new Production_Box (*this, *this, *ps);
 		fit_inner(*prod_box);
 		move_inside_parent();
 	}
@@ -1335,7 +1338,7 @@ Building_Window::create_priority_button
 
 void Building_Window::create_ware_queue_panel
 	(UI::Box               * const box,
-	 Building              * const ps,
+	 Building              &       ps,
 	 Widelands::WaresQueue * const wq)
 {
 	const int32_t priority_buttons_width = WaresQueueDisplay::Height / 3;
@@ -1348,7 +1351,7 @@ void Building_Window::create_ware_queue_panel
 	if (wq->get_ware()) {
 		m_priority_helpers.push_back
 			(PriorityButtonHelper
-			 	(iaplayer().game(), ps, Widelands::Request::WARE, wq->get_ware()));
+			 	(iaplayer().game(), &ps, Widelands::Request::WARE, wq->get_ware()));
 
 		PriorityButtonHelper & helper = m_priority_helpers.back();
 
@@ -1389,40 +1392,36 @@ void Building_Window::create_ware_queue_panel
 	box->add(hbox, UI::Box::AlignLeft);
 }
 
-UI::Box * ProductionSite_Window::create_production_box
-	(UI::Panel * const parent, ProductionSite * const ps)
+ProductionSite_Window::Production_Box::Production_Box
+	(UI::Panel & parent, ProductionSite_Window & window, ProductionSite & ps)
+	:
+	UI::Box
+		(&parent,
+		 0, 0,
+		 UI::Box::Vertical,
+		 g_gr->get_xres() - 80, g_gr->get_yres() - 80)
 {
-	UI::Box * const box =
-		new UI::Box
-			(parent,
-			 0, 0,
-			 UI::Box::Vertical,
-			 g_gr->get_xres() - 80,
-			 g_gr->get_yres() - 80);
 
 	// Add the wares queue
-	std::vector<Widelands::WaresQueue *> const & warequeues = ps->warequeues();
-	for (uint32_t i = 0; i < warequeues.size(); ++i) {
-		Building_Window::create_ware_queue_panel (box, ps, warequeues[i]);
-	}
+	std::vector<Widelands::WaresQueue *> const & warequeues = ps.warequeues();
+	for (uint32_t i = 0; i < warequeues.size(); ++i)
+		window.create_ware_queue_panel(this, ps, warequeues[i]);
 
-	box->add_space(8);
+	add_space(8);
 
 	// Add caps buttons
-	box->add(create_capsbuttons(box), UI::Box::AlignLeft);
+	add(window.create_capsbuttons(this), UI::Box::AlignLeft);
 
 	// Add list worker button
-	box->add
+	add
 		(new UI::Callback_Button<ProductionSite_Window>
-		 	(box,
+		 	(this,
 		 	 0, 0, 32, 32,
 		 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 	 g_gr->get_picture(PicMod_Game,  pic_list_worker),
-		 	 &ProductionSite_Window::list_worker_clicked, *this,
+		 	 &ProductionSite_Window::list_worker_clicked, window,
 		 	 _("Show worker listing")),
 		 UI::Box::AlignLeft);
-
-	return box;
 }
 
 
@@ -1678,30 +1677,141 @@ TrainingSite UI IMPLEMENTATION
 
 struct TrainingSite_Window : public ProductionSite_Window {
 	TrainingSite_Window
-		(Interactive_Player * parent,
-		 TrainingSite       *,
-		 UI::Window *       * registry);
+		(Interactive_Player & parent, TrainingSite &, UI::Window * & registry);
 
-	TrainingSite * get_trainingsite() {
-		return dynamic_cast<TrainingSite *>(get_building());
+	TrainingSite & trainingsite() {
+		return dynamic_cast<TrainingSite &>(*get_building());
 	}
 
 	virtual void think();
-	void drop_button_clicked ();
-	void soldier_capacity_up () {act_change_soldier_capacity (1);}
-	void soldier_capacity_down() {act_change_soldier_capacity(-1);}
-	UI::Box * create_military_box (UI::Panel *);
+
 private:
 	void update();
 
-	void add_tab(char const * picname, UI::Panel * panel);
-
 	Widelands::Coords      m_ms_location;
 	UI::Window         * * m_reg;
-	UI::Table<Soldier &> * m_table;
-	UI::Textarea         * m_capacity;
 
-	UI::Tab_Panel        * m_tabpanel;
+	struct Tab_Panel : public UI::Tab_Panel {
+		Tab_Panel(TrainingSite_Window & parent, TrainingSite & ts) :
+			UI::Tab_Panel
+				(&parent, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+			m_prod_box(*this, parent, ts),
+			m_sold_box(*this)
+		{
+			set_snapparent(true);
+			m_prod_box.resize();
+			add(g_gr->get_picture(PicMod_Game, pic_tab_training), &m_prod_box);
+			add(g_gr->get_picture(PicMod_Game, pic_tab_military), &m_sold_box);
+			resize();
+		}
+
+		Production_Box         m_prod_box;
+
+		struct Sold_Box : public UI::Box {
+			Sold_Box(Tab_Panel & parent) :
+				UI::Box(&parent, 0,  0, UI::Box::Vertical),
+				m_table                (*this),
+				m_drop_selected_soldier(*this),
+				m_capacity_box         (*this)
+			{
+				resize();
+			}
+
+			struct Table : public UI::Table<Soldier &> {
+				Table(UI::Box & parent) :
+					UI::Table<Soldier &>(&parent, 0,  0, 360, 200)
+				{
+					add_column(100, _("Name"));
+					add_column (40, _("HP"));
+					add_column (40, _("AT"));
+					add_column (40, _("DE"));
+					add_column (40, _("EV"));
+					add_column(100, _("Level")); //  enough space for scrollbar
+					parent.add (this, Align_Left);
+				}
+			}                      m_table;
+
+			struct Drop_Selected_Soldier : public UI::Button {
+				Drop_Selected_Soldier(UI::Box & sold_box) :
+					UI::Button
+						(&sold_box,
+						 0, 0, 360, 32,
+						 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+						 g_gr->get_picture(PicMod_Game, pic_drop_soldier))
+				{
+					sold_box.add(this, Align_Left);
+				}
+				void clicked() const;
+			} m_drop_selected_soldier;
+
+			struct Capacity_Box : public UI::Box {
+				Capacity_Box(Sold_Box & parent) :
+					UI::Box               (&parent, 0,  0, UI::Box::Horizontal),
+					m_capacity_label      (*this),
+					m_capacity_decrement  (*this),
+					m_capacity_value_label(*this),
+					m_capacity_increment  (*this)
+				{
+					parent.add(this, Align_Left);
+				}
+
+				struct Capacity_Label : public UI::Textarea {
+					Capacity_Label(Capacity_Box & parent) :
+						UI::Textarea(&parent, 0, 11, _("Capacity"), Align_Left)
+					{
+						parent.add(this, Align_Left);
+					}
+				} m_capacity_label;
+
+				struct Capacity_Decrement : public UI::Button {
+					Capacity_Decrement(UI::Box & parent) :
+						UI::Button
+							(&parent,
+							 70, 4, 24, 24,
+							 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+							 g_gr->get_picture(PicMod_Game, pic_down_train))
+					{
+						set_repeating(true);
+						parent.add(this, Align_Top);
+					}
+					void clicked() const {
+						dynamic_cast<TrainingSite_Window &>
+							(*get_parent()->get_parent()->get_parent()->get_parent())
+							.act_change_soldier_capacity(-1);
+					}
+				} m_capacity_decrement;
+
+				struct Capacity_Value_Label : public UI::Textarea {
+					Capacity_Value_Label(Capacity_Box & parent) :
+						UI::Textarea(&parent, 0, 11, _("xx"), Align_Center)
+					{
+						parent.add(this, Align_Top);
+					}
+				} m_capacity_value_label;
+
+				struct Capacity_Increment : public UI::Button {
+					Capacity_Increment(UI::Box & parent) :
+						UI::Button
+							(&parent,
+							 118, 4, 24, 24,
+							 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+							 g_gr->get_picture(PicMod_Game, pic_up_train))
+					{
+						set_repeating(true);
+						parent.add(this, Align_Top);
+					}
+					void clicked() const {
+						dynamic_cast<TrainingSite_Window &>
+							(*get_parent()->get_parent()->get_parent()->get_parent())
+							.act_change_soldier_capacity(1);
+					}
+				} m_capacity_increment;
+
+			}  m_capacity_box;
+
+		} m_sold_box;
+
+	} m_tabpanel;
 };
 
 
@@ -1711,95 +1821,13 @@ Create the window and its panels, add it to the registry.
 ===============
 */
 TrainingSite_Window::TrainingSite_Window
-	(Interactive_Player * const parent,
-	 TrainingSite       * const ms,
-	 UI::Window *       * const registry)
-	: ProductionSite_Window(parent, ms, registry)
+	(Interactive_Player & parent, TrainingSite & ts, UI::Window * & registry)
+	:
+	ProductionSite_Window  (&parent, &ts, &registry),
+	m_ms_location          (ts.get_position()),
+	m_tabpanel             (*this, ts)
 {
-	m_reg = registry;
-	m_ms_location = ms->get_position ();
-
-	m_tabpanel = new UI::Tab_Panel
-		(this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
-	m_tabpanel->set_snapparent(true);
-
-	// Training Box (wares and buttons related to them)
-	UI::Box * prod_box = create_production_box (m_tabpanel, ms);
-	prod_box->resize();
-	add_tab(pic_tab_training, prod_box);
-
-	// Military Box (Soldiers and buttons related to them)
-	// Training Box (wares and buttons related to them)
-	UI::Box * train_box = create_military_box (m_tabpanel);
-	train_box->resize();
-	add_tab(pic_tab_military, train_box);
-
-	m_tabpanel->resize();
-	fit_inner (*m_tabpanel);
-}
-
-
-UI::Box * TrainingSite_Window::create_military_box (UI::Panel * const panel)
-{
-	UI::Box * sold_box = new UI::Box (panel, 0, 0, UI::Box::Vertical);
-
-	//  soldiers view
-	m_table = new UI::Table<Soldier &>(sold_box, 0, 0, 360, 200);
-	m_table->add_column(100, _("Name"));
-	m_table->add_column (40, _("HP"));
-	m_table->add_column (40, _("AT"));
-	m_table->add_column (40, _("DE"));
-	m_table->add_column (40, _("EV"));
-	m_table->add_column(100, _("Level")); // enough space for scrollbar
-	sold_box->add (m_table, Align_Left);
-
-	//  add drop soldier button
-	sold_box->add
-		(new UI::Callback_Button<TrainingSite_Window>
-		 	(sold_box,
-		 	 0, 0, 360, 32,
-		 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 	 g_gr->get_picture(PicMod_Game, pic_drop_soldier),
-		 	 &TrainingSite_Window::drop_button_clicked, *this),
-		 Align_Left);
-
-	//  add TrainingSite options and capacity buttons
-	UI::Box * box = new UI::Box (sold_box, 0, 0, UI::Box::Horizontal);
-	box->add
-		(new UI::Textarea (box, 0, 11, _("Capacity"), Align_Left), Align_Left);
-	box->add
-		(new UI::Callback_Button<TrainingSite_Window>
-		 	(box,
-		 	 70, 4, 24, 24,
-		 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 	 g_gr->get_picture(PicMod_Game, pic_down_train),
-		 	 &TrainingSite_Window::soldier_capacity_down, *this),
-		 Align_Top);
-
-	m_capacity = new UI::Textarea (box, 0, 11, _("xx"), Align_Center);
-	box->add (m_capacity, Align_Top);
-
-	box->add
-		(new UI::Callback_Button<TrainingSite_Window>
-		 	(box,
-		 	 118, 4, 24, 24,
-		 	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 	 g_gr->get_picture(PicMod_Game, pic_up_train),
-		 	 &TrainingSite_Window::soldier_capacity_up, *this),
-		 Align_Top);
-	sold_box->add (box, Align_Left);
-
-	return sold_box;
-}
-
-/*
-===============
-Convenience function: Adds a new tab to the main tab panel
-===============
-*/
-void TrainingSite_Window::add_tab(char const * picname, UI::Panel * panel)
-{
-	m_tabpanel->add(g_gr->get_picture(PicMod_Game,   picname), panel);
+	fit_inner (m_tabpanel);
 }
 
 
@@ -1833,15 +1861,17 @@ FIXME What if a soldier have been removed and another added? This needs review.
 =============
 */
 void TrainingSite_Window::update() {
-	std::vector<Soldier *> soldiers = get_trainingsite()->presentSoldiers();
+	std::vector<Soldier *> soldiers = trainingsite().presentSoldiers();
 
-	if (soldiers.size() != m_table->size())
-		m_table->clear();
+	if (soldiers.size() != m_tabpanel.m_sold_box.m_table.size())
+		m_tabpanel.m_sold_box.m_table.clear();
 
 	for (uint32_t i = 0; i < soldiers.size(); ++i) {
 		Soldier & s = *soldiers[i];
-		UI::Table<Soldier &>::Entry_Record * er = m_table->find(s);
-		if (not er)                          er = &m_table->add(s);
+		UI::Table<Soldier &>::Entry_Record * er =
+			m_tabpanel.m_sold_box.m_table.find(s);
+		if (not er)
+			er = &m_tabpanel.m_sold_box.m_table.add(s);
 		uint32_t const  hl = s.get_hp_level         ();
 		uint32_t const mhl = s.get_max_hp_level     ();
 		uint32_t const  al = s.get_attack_level     ();
@@ -1863,14 +1893,23 @@ void TrainingSite_Window::update() {
 		sprintf(buffer, "%2u / %u", hl + al + dl + el, mhl + mal + mdl + mel);
 		er->set_string(5, buffer);
 	}
-	m_table->sort();
+	m_tabpanel.m_sold_box.m_table.sort();
 
+	TrainingSite const & ts =
+		dynamic_cast<TrainingSite const &>(*get_building());
+	uint32_t const capacity     = ts.   soldierCapacity();
 	char buffer[sizeof("4294967295")];
-	sprintf
-		(buffer,
-		 "%2u",
-		 dynamic_cast<const TrainingSite &>(*get_building()).soldierCapacity());
-	m_capacity->set_text (buffer);
+	sprintf (buffer, "%2u", ts.soldierCapacity());
+	m_tabpanel.m_sold_box.m_capacity_box.m_capacity_value_label.set_text
+		(buffer);
+	uint32_t const capacity_min = ts.minSoldierCapacity();
+	m_tabpanel.m_sold_box.m_drop_selected_soldier.set_enabled
+		(m_tabpanel.m_sold_box.m_table.has_selection() and
+		 capacity_min < m_tabpanel.m_sold_box.m_table.size());
+	m_tabpanel.m_sold_box.m_capacity_box.m_capacity_decrement.set_enabled
+		(capacity_min < capacity);
+	m_tabpanel.m_sold_box.m_capacity_box.m_capacity_increment.set_enabled
+		(capacity < ts.maxSoldierCapacity());
 }
 
 
@@ -1880,11 +1919,13 @@ Handle the click at drop soldier. Enqueue a command at command queue to
 get out selected soldier from this training site.
 =============
 */
-void TrainingSite_Window::drop_button_clicked()
+void TrainingSite_Window::Tab_Panel::Sold_Box::Drop_Selected_Soldier::clicked()
+	const
 {
-	assert(*m_reg == this);
-	if (m_table->selection_index() != m_table->no_selection_index())
-		act_drop_soldier(m_table->get_selected().serial());
+	Sold_Box & sold_box = dynamic_cast<Sold_Box &>(*get_parent());
+	if (sold_box.m_table.selection_index() != Table::no_selection_index())
+		dynamic_cast<TrainingSite_Window &>(*sold_box.get_parent()->get_parent())
+			.act_drop_soldier(sold_box.m_table.get_selected().serial());
 }
 
 /*
@@ -1895,5 +1936,5 @@ Create the training site information window.
 void TrainingSite::create_options_window
 	(Interactive_Player & plr, UI::Window * & registry)
 {
-	new TrainingSite_Window(&plr, this, &registry);
+	new TrainingSite_Window(plr, *this, registry);
 }
