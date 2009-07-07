@@ -640,7 +640,7 @@ void RenderTarget::rendermap
 							 f_player_field.map_object_descr[TCoords<>::None])
 						{
 							Player const * const owner =
-								egbase.get_player(f_owner_number);
+								f_owner_number ? egbase.get_player(f_owner_number) : 0;
 							if
 								(const uint32_t picid =
 								 	map_object_descr->main_animation())
