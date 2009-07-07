@@ -480,9 +480,16 @@ void Interactive_Player::cmdSwitchPlayer(std::vector<std::string> const & args)
 		 	(format("Switching from #%1% to #%2%.")
 		 	 % static_cast<int>(m_player_number) % n));
 	m_player_number = n;
+	Map              &       map             = egbase().map();
+	Overlay_Manager  &       overlay_manager = map.overlay_manager();
+	Widelands::Extent  const extent          = map.extent         ();
+	for (Widelands::Y_Coordinate y = 0; y < extent.h; ++y)
+		for (Widelands::X_Coordinate x = 0; x < extent.w; ++x)
+			overlay_manager.recalc_field_overlays
+				(map.get_fcoords(Widelands::Coords(x, y)));
 	if
 		(UI::UniqueWindow * const building_statistics_window =
-		 m_mainm_windows.building_stats.window)
+		 	m_mainm_windows.building_stats.window)
 		dynamic_cast<Building_Statistics_Menu &>(*building_statistics_window)
 			.update();
 }

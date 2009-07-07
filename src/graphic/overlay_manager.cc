@@ -130,7 +130,7 @@ void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
 	Widelands::FieldCaps const caps =
 		m_callback ?
 		static_cast<Widelands::FieldCaps>
-		(m_callback(fc, m_callback_data, m_callback_data_i))
+			(m_callback(fc, m_callback_data, m_callback_data_i))
 		:
 		fc.field->get_caps();
 
