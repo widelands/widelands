@@ -594,9 +594,13 @@ Draw a picture of the building in the background.
 */
 void Building_Window::draw(RenderTarget & dst)
 {
-	uint32_t anim = get_building()->get_ui_anim();
+	Building const & building = *get_building();
 
-	dst.drawanim(Point(get_inner_w() / 2, get_inner_h() / 2), anim, 0, 0);
+	dst.drawanim
+		(Point(get_inner_w() / 2, get_inner_h() / 2),
+		 building.get_ui_anim(),
+		 0,
+		 &get_building()->owner());
 
 	// Draw all the panels etc. above the background
 	UI::Window::draw(dst);
