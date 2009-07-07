@@ -358,7 +358,8 @@ int32_t Warehouse::get_priority
 	(int32_t const type, Ware_Index const ware_index, bool) const
 {
 	return
-		type == Request::WARE and m_target_supply[ware_index] > 0 ? 500000 : 100;
+		type == Request::WARE and m_target_supply[ware_index] > 0 ?
+		(m_target_supply[ware_index] + 1) * 100 : 100;
 }
 
 void Warehouse::set_needed(Ware_Index const ware_index, uint32_t const value) {
