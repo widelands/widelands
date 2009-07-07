@@ -469,7 +469,7 @@ void Interactive_Player::cmdSwitchPlayer(std::vector<std::string> const & args)
 		return;
 	}
 
-	int n = atoi(args[1].c_str());
+	int const n = atoi(args[1].c_str());
 	if (n < 1 || n > MAX_PLAYERS || !game().get_player(n)) {
 		DebugConsole::write(str(format("Player #%1% does not exist.") % n));
 		return;
@@ -480,4 +480,9 @@ void Interactive_Player::cmdSwitchPlayer(std::vector<std::string> const & args)
 		 	(format("Switching from #%1% to #%2%.")
 		 	 % static_cast<int>(m_player_number) % n));
 	m_player_number = n;
+	if
+		(UI::UniqueWindow * const building_statistics_window =
+		 m_mainm_windows.building_stats.window)
+		dynamic_cast<Building_Statistics_Menu &>(*building_statistics_window)
+			.update();
 }

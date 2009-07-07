@@ -38,6 +38,7 @@ struct Building_Statistics_Menu : public UI::UniqueWindow {
 
 	void think();
 	void draw(RenderTarget &);
+	void update();
 
 private:
 	Interactive_Player & iplayer() const;
@@ -64,7 +65,6 @@ private:
 	void clicked_help();
 	void clicked_jump(Jump_Targets);
 	void table_changed(uint32_t);
-	void update();
 	int32_t validate_pointer(int32_t *, int32_t);
 };
 

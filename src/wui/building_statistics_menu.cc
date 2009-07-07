@@ -58,7 +58,7 @@
 
 #define LOW_PROD 25
 
-#define UPDATE_TIME 1000  // 1 second, real time
+#define UPDATE_TIME 1000  //  1 second, gametime
 
 
 inline Interactive_Player & Building_Statistics_Menu::iplayer() const {
@@ -226,7 +226,7 @@ int32_t Building_Statistics_Menu::validate_pointer
 }
 
 
-void Building_Statistics_Menu::clicked_jump(Jump_Targets id) {
+void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 	assert(m_table.has_selection());
 	const std::vector<Widelands::Player::Building_Stats> & vec =
 		iplayer().get_player()->get_building_statistics
@@ -336,7 +336,8 @@ void Building_Statistics_Menu::update() {
 	m_in_build.set_text("");
 	m_progbar .set_state(0);
 
-	Widelands::Tribe_Descr const & tribe = iplayer().player().tribe();
+	Widelands::Player      const & player = iplayer().player();
+	Widelands::Tribe_Descr const & tribe  = player.tribe();
 	Widelands::Map         const & map   = iplayer().game().map();
 	Widelands::Building_Index      const nr_buildings = tribe.get_nrbuildings();
 	for
@@ -349,7 +350,7 @@ void Building_Statistics_Menu::update() {
 			continue;
 
 		std::vector<Widelands::Player::Building_Stats> const & vec =
-			iplayer().get_player()->get_building_statistics(i);
+			player.get_building_statistics(i);
 
 		//  walk all entries, add new ones if needed
 		UI::Table<const intptr_t>::Entry_Record * te = 0;
