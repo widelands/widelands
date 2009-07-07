@@ -26,8 +26,10 @@
 #include "logic/editor_game_base.h"
 #include "findimmovable.h"
 #include "logic/game.h"
+#include "gamecontroller.h"
 #include "graphic/graphic.h"
 #include "helper.h"
+#include "message_queue.h"
 #include "militarysite.h"
 #include "logic/player.h"
 #include "profile/profile.h"
@@ -791,16 +793,46 @@ void Soldier::battle_update(Game & game, State &)
 						get_position().field->get_immovable();
 					BaseImmovable const * const immovable_dest     =
 						map[dest]            .get_immovable();
-					throw wexception
-						("soldier %u could not move from (%u, %u) (%s) to (%u, %u) "
-						 "(%s)",
-						 serial(),
+					char buffer[2048];
+					snprintf
+						(buffer, sizeof(buffer),
+						 _
+						 	("The game engine has encountered a logic error. The %s "
+						 	 "#%u of player %u could could not find a way from "
+						 	 "(%i, %i) (with %s immovable) to the opponent (%s #%u "
+						 	 "of player %u) at (%i, %i) (with %s immovable). The %s "
+						 	 "will now desert (but will not be executed). Strange "
+						 	 "things may happen. No solution for this problem has "
+						 	 "been implemented yet. (bug #1951113) (The game has "
+						 	 "been paused.)"),
+						 descname().c_str(), serial(), owner().get_player_number(),
 						 get_position().x, get_position().y,
-						 immovable_position ? immovable_position->name().c_str() :
-						 "no immovable",
+						 immovable_position ?
+						 immovable_position->descr().descname().c_str() : _("no"),
+						 opponent.descname().c_str(), opponent.serial(),
+						 opponent.owner().get_player_number(),
 						 dest.x, dest.y,
-						 immovable_dest     ? immovable_dest    ->name().c_str() :
-						 "no immovable");
+						 immovable_dest ?
+						 immovable_dest->descr().descname().c_str() : _("no"),
+						 descname().c_str());
+					MessageQueue::add
+						(owner(),
+						 Message
+						 	(_("Game engine"),
+						 	 game.get_gametime(),
+						 	 _("Logic error"),
+						 	 Widelands::Coords(get_position()),
+						 	 buffer));
+					MessageQueue::add
+						(opponent.owner(),
+						 Message
+						 	(_("Game engine"),
+						 	 game.get_gametime(),
+						 	 _("Logic error"),
+						 	 Widelands::Coords(get_position()),
+						 	 buffer));
+					game.gameController()->setDesiredSpeed(0);
+					return pop_task(game);
 				}
 			}
 		}
