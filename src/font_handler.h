@@ -100,12 +100,12 @@ struct Font_Handler {
 	std::string word_wrap_text
 		(TTF_Font &,
 		 const std::string & unwrapped_text,
-		 const int32_t max_width);
+		 int32_t max_width);
 	std::string word_wrap_text
-		(const std::string & font, const int32_t size,
-		 const std::string & unwrapped_text, const int32_t max_width);
+		(std::string const & font, int32_t size,
+		 std::string const & unwrapped_text, int32_t max_width);
 	void do_align
-		(Align align, int32_t & dstx, int32_t & dsty, int32_t w, int32_t h);
+		(Align, int32_t & dstx, int32_t & dsty, int32_t w, int32_t h);
 	// This deletes all cached pictures, it is called
 	// from the graphics code before the graphics are flushed,
 	// to make sure that everything is forgotten
@@ -113,7 +113,7 @@ struct Font_Handler {
 	void delete_widget_cache(PictureID widget_cache_id);
 	void draw_richtext
 		(RenderTarget &,
-		 const RGBColor bg,
+		 RGBColor bg,
 		 Point dstpoint,
 		 std::string text,
 		 int32_t wrap,
@@ -121,9 +121,7 @@ struct Font_Handler {
 		 PictureID & widget_cache_id = g_gr->get_no_picture(),
 		 bool transparent = true);
 	void get_size_from_cache
-		(const PictureID widget_cache_id,
-		 uint32_t & w,
-		 uint32_t & h);
+		(PictureID widget_cache_id, uint32_t & w, uint32_t & h);
 
 	/// Register a callback which is used whenever the
 	/// tag<variable name="kljdf"> appears
@@ -164,40 +162,40 @@ private:
 private:
 	PictureID create_text_surface
 		(TTF_Font &,
-		 const RGBColor fg, const RGBColor bg,
-		 const std::string & text, const Align, const int32_t wrap,
-		 const int32_t caret = -1, bool transparent = true);
+		 RGBColor fg, RGBColor bg,
+		 std::string const & text, Align, int32_t wrap,
+		 int32_t caret = -1, bool transparent = true);
 	PictureID convert_sdl_surface
 		(SDL_Surface &, const RGBColor bg, bool transparent = false);
 	SDL_Surface * draw_string_sdl_surface
-		(const std::string & fontname, const int32_t fontsize,
-		 const RGBColor fg, const RGBColor bg,
+		(std::string const & fontname, int32_t fontsize,
+		 RGBColor fg, RGBColor bg,
 		 const std::string & text,
-		 const Align align, const int32_t wrap,
-		 const int32_t style = TTF_STYLE_NORMAL,
-		 const int32_t line_spacing = 0);
+		 Align, int32_t wrap,
+		 int32_t style = TTF_STYLE_NORMAL,
+		 int32_t line_spacing = 0);
 	SDL_Surface * create_sdl_text_surface
-		(TTF_Font &, const RGBColor fg, const RGBColor bg,
+		(TTF_Font &, RGBColor fg, RGBColor bg,
 		 const std::string & text,
-		 const Align align, const int32_t wrap, const int32_t line_spacing = 0);
+		 Align, int32_t wrap, int32_t line_spacing = 0);
 	SDL_Surface * create_static_long_text_surface
-		(TTF_Font &, const RGBColor fg, const RGBColor bg,
+		(TTF_Font &, RGBColor fg, RGBColor bg,
 		 std::string text,
-		 const Align align, const int32_t wrap, const int32_t line_spacing = 0,
-		 const int32_t caret = -1);
+		 Align, int32_t wrap, int32_t line_spacing = 0,
+		 int32_t caret = -1);
 	SDL_Surface * create_single_line_text_surface
-		(TTF_Font &, const RGBColor fg, const RGBColor bg,
+		(TTF_Font &, RGBColor fg, RGBColor bg,
 		 std::string text,
-		 const Align align, const int32_t caret = -1);
+		 Align, int32_t caret = -1);
 	SDL_Surface * create_empty_sdl_surface(uint32_t w, uint32_t h);
 	SDL_Surface * join_sdl_surfaces
-		(const uint32_t w, const uint32_t h,
+		(uint32_t w, uint32_t h,
 		 const std::vector<SDL_Surface *> & surfaces,
-		 const RGBColor bg,
-		 const Align align        = Align_Left,
-		 const int32_t spacing        = 0,
-		 const bool vertical      = false,
-		 const bool keep_surfaces = false);
+		 RGBColor bg,
+		 Align align        = Align_Left,
+		 int32_t spacing        = 0,
+		 bool vertical      = false,
+		 bool keep_surfaces = false);
 	SDL_Surface * load_image(std::string file);
 	SDL_Surface * render_space
 		(Text_Block &, RGBColor bg, int32_t style = TTF_STYLE_NORMAL);
