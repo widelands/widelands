@@ -70,7 +70,7 @@ public:
 	virtual uint32_t get_playercaps() const throw ();
 	virtual uint32_t get_ui_anim() const;
 	virtual std::string get_statistics_string();
-	uint32_t get_built_per64k();
+	uint32_t get_built_per64k() const;
 
 	virtual WaresQueue & waresqueue(Ware_Index);
 

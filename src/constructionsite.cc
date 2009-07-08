@@ -195,7 +195,7 @@ Return the completion "percentage", where 2^16 = completely built,
 0 = nothing built.
 ===============
 */
-uint32_t ConstructionSite::get_built_per64k()
+uint32_t ConstructionSite::get_built_per64k() const
 {
 	const uint32_t time = owner().egbase().get_gametime();
 	uint32_t thisstep = 0;
