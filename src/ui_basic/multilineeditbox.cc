@@ -23,6 +23,7 @@
 #include "constants.h"
 #include "font_handler.h"
 #include "graphic/rendertarget.h"
+#include "helper.h"
 #include "wlapplication.h"
 
 #include <SDL_keysym.h>
@@ -52,23 +53,24 @@ Multiline_Editbox::Multiline_Editbox
  * A key event must be handled
 */
 bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
-	char c = code.unicode & 0xff80 ? '\0' : code.unicode;
-
 	m_needs_update = true;
 
 	if (down) {
 		std::string txt =
 			g_fh->word_wrap_text(m_fontname, m_fontsize, get_text(), get_eff_w());
 		switch (code.sym) {
-		case SDLK_BACKSPACE:
-			if (txt.size() and m_cur_pos)
-				--m_cur_pos;
-			else
-				break;
-			//  fallthrough
 
 		case SDLK_DELETE:
-			if (txt.size() and m_cur_pos < txt.size()) {
+			if (m_cur_pos < txt.size()) {
+				while ((txt[++m_cur_pos] & 0xc0) == 0x80) {};
+				// fallthrough - handle it like backspace
+			} else
+				break;
+
+		case SDLK_BACKSPACE:
+			if (txt.size() and m_cur_pos) {
+				while ((txt[--m_cur_pos] & 0xc0) == 0x80)
+					txt.erase(txt.begin() + m_cur_pos);
 				txt.erase(txt.begin() + m_cur_pos);
 				set_text(txt.c_str());
 			}
@@ -76,7 +78,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 
 		case SDLK_LEFT:
 			if (0 < m_cur_pos) {
-				--m_cur_pos;
+				while ((txt[--m_cur_pos] & 0xc0) == 0x80) {};
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 					for (uint32_t new_cur_pos = m_cur_pos;; m_cur_pos = new_cur_pos)
 						if (0 == new_cur_pos or isspace(txt[--new_cur_pos]))
@@ -86,7 +88,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 
 		case SDLK_RIGHT:
 			if (m_cur_pos < txt.size()) {
-				++m_cur_pos;
+				while ((txt[++m_cur_pos] & 0xc0) == 0x80) {};
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 					for (uint32_t new_cur_pos = m_cur_pos;; ++new_cur_pos)
 						if
@@ -125,6 +127,9 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 					>
 					end_of_next_line ? end_of_next_line :
 					begin_of_next_line + m_cur_pos - begin_of_line;
+				// Care about unicode letters
+				while ((txt[m_cur_pos] & 0xc0) == 0x80)
+					++m_cur_pos;
 			}
 			break;
 
@@ -152,6 +157,9 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 					>
 					end_of_last_line ? end_of_last_line :
 					begin_of_lastline + (m_cur_pos - begin_of_line);
+				// Care about unicode letters
+				while ((txt[m_cur_pos] & 0xc0) == 0x80)
+					++m_cur_pos;
 			}
 			break;
 
@@ -177,12 +185,33 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 			break;
 
 		case SDLK_RETURN:
-			c = '\n';
-			// fallthrough
+			if (txt.size() < m_maxchars) {
+				txt.insert(txt.begin() + m_cur_pos++, 1, '\n');
+				set_text(txt.c_str());
+			}
+			break;
 		default:
-			if (c and txt.size() < m_maxchars) {
-				txt.insert(m_cur_pos, 1, c);
-				++m_cur_pos;
+			if (is_printable(code) and txt.size() < m_maxchars) {
+				if (code.unicode < 0x80)         // 1 byte char
+					txt.insert(txt.begin() + m_cur_pos++, 1, code.unicode);
+				else if (code.unicode < 0x800) { // 2 byte char
+					txt.insert
+						(txt.begin() + m_cur_pos++,
+						 (((code.unicode & 0x7c0) >> 6) | 0xc0));
+					txt.insert
+						(txt.begin() + m_cur_pos++,
+						 ((code.unicode & 0x3f) | 0x80));
+				} else {                         // 3 byte char
+					txt.insert
+						(txt.begin() + m_cur_pos++,
+						 (((code.unicode & 0xf000) >> 12) | 0xe0));
+					txt.insert
+						(txt.begin() + m_cur_pos++,
+						 (((code.unicode & 0xfc0) >> 6) | 0x80));
+					txt.insert
+						(txt.begin() + m_cur_pos++,
+						 ((code.unicode & 0x3f) | 0x80));
+				}
 			}
 			set_text(txt.c_str());
 			break;
