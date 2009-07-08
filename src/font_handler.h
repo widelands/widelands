@@ -180,7 +180,7 @@ private:
 		 Align, int32_t wrap, int32_t line_spacing = 0, int32_t caret = -1);
 	SDL_Surface * create_static_long_text_surface
 		(TTF_Font &, RGBColor fg, RGBColor bg,
-		 std::string text,
+		 std::string const & text,
 		 Align, int32_t wrap, int32_t line_spacing = 0,
 		 int32_t caret = -1);
 	SDL_Surface * create_single_line_text_surface

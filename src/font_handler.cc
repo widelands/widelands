@@ -216,7 +216,7 @@ SDL_Surface * Font_Handler::create_single_line_text_surface
 SDL_Surface * Font_Handler::create_static_long_text_surface
 	(TTF_Font & font,
 	 RGBColor const fg, RGBColor const bg,
-	 std::string       text,
+	 std::string const & text,
 	 Align       const align,
 	 int32_t     const wrap,
 	 int32_t     const line_spacing,
@@ -225,7 +225,7 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 	assert(wrap > 0);
 	assert(text.size() > 0);
 
-	int32_t global_surface_width  = wrap > 0 ? wrap : 0;
+	int32_t global_surface_width  = wrap;
 	int32_t global_surface_height = 0;
 	std::vector<SDL_Surface *> m_rendered_lines;
 
@@ -235,8 +235,8 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 	uint32_t cur_text_pos = 0;
 	uint32_t i = 0;
 
-	text = word_wrap_text(font, text, wrap);
-	const std::vector<std::string> lines(split_string(text, "\n"));
+	std::vector<std::string> const lines
+		(split_string(word_wrap_text(font, text, wrap), "\n"));
 	container_iterate_const(std::vector<std::string>, lines, j) {
 		std::string const line(j.current->empty() ? " " : *j.current);
 
@@ -245,22 +245,23 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 			(SDL_Surface * const surface =
 			 	TTF_RenderUTF8_Shaded(&font, line.c_str(), sdl_fg, sdl_bg))
 		{
-		uint32_t const new_text_pos = cur_text_pos + line.size();
-		if (caret != -1) {
-			if (new_text_pos >= caret - i) {
-				int32_t const caret_line_pos = caret - cur_text_pos - i;
-				std::string const text_caret_pos = line.substr(0, caret_line_pos);
-				render_caret(font, *surface, text_caret_pos);
-				caret = -1;
-			} else
-				cur_text_pos = new_text_pos;
-			++i;
-		}
+			if (caret != -1) {
+				uint32_t const new_text_pos = cur_text_pos + line.size();
+				if (new_text_pos >= caret - i) {
+					int32_t const caret_line_pos = caret - cur_text_pos - i;
+					std::string const text_caret_pos =
+						line.substr(0, caret_line_pos);
+					render_caret(font, *surface, text_caret_pos);
+					caret = -1;
+				} else
+					cur_text_pos = new_text_pos;
+				++i;
+			}
 
-		m_rendered_lines.push_back(surface);
-		global_surface_height += surface->h + line_spacing;
-		if (global_surface_width < surface->w)
-			global_surface_width = surface->w;
+			m_rendered_lines.push_back(surface);
+			global_surface_height += surface->h + line_spacing;
+			if (global_surface_width < surface->w)
+				global_surface_width = surface->w;
 		} else {
 			log
 				("Font_Handler::create_static_long_text_surface, an error : %s\n",
@@ -681,8 +682,9 @@ SDL_Surface * Font_Handler::join_sdl_surfaces
 	 bool                               const vertical,
 	 bool                               const keep_surfaces)
 {
-	SDL_Surface * global_surface = create_empty_sdl_surface
-		(h ? w : 0, w ? h + spacing * surfaces.size() : 0);
+	SDL_Surface * const global_surface =
+		create_empty_sdl_surface
+			(h ? w : 0, w ? h + spacing * surfaces.size() : 0);
 	assert(global_surface);
 
 	SDL_FillRect
