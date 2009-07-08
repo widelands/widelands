@@ -254,15 +254,27 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 	uint32_t cur_text_pos = 0;
 	uint32_t i = 0;
 
-	std::vector<std::string> const lines
-		(split_string(word_wrap_text(font, text, wrap - 2 * LINE_MARGIN), "\n"));
-	container_iterate_const(std::vector<std::string>, lines, j) {
-		std::string const line(j.current->empty() ? " " : *j.current);
+	std::string const lines =
+		word_wrap_text(font, text, wrap - 2 * LINE_MARGIN);
+	for
+		(struct {std::string::size_type pos; bool done;} j = {0, false};
+		 not j.done;)
+	{
+		std::string::size_type line_end = lines.find_first_of('\n', j.pos);
+		if (line_end == std::string::npos) {
+			line_end = lines.size();
+			j.done = true;
+		}
+		std::string::size_type line_size = line_end - j.pos;
+		std::string line = lines.substr(j.pos, line_size);
 
 		// render this block in a SDL Surface
 		if
 			(SDL_Surface * const text_surface =
-			 	TTF_RenderUTF8_Shaded(&font, line.c_str(), sdl_fg, sdl_bg))
+			 	TTF_RenderUTF8_Shaded
+			 		(&font,
+			 		 line.empty() ? " " : line.c_str(),
+			 		 sdl_fg, sdl_bg))
 		{
 			//  Draw this into a slightly larger surface so that the caret is
 			//  visible even when it is before the first or after the last
@@ -283,12 +295,11 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 			SDL_BlitSurface(text_surface, 0, surface, &r);
 			SDL_FreeSurface(text_surface);
 			if (caret != -1) {
-				uint32_t const new_text_pos = cur_text_pos + line.size();
+				uint32_t const new_text_pos = cur_text_pos + line_size;
 				if (new_text_pos >= caret - i) {
 					int32_t const caret_line_pos = caret - cur_text_pos - i;
-					std::string const text_caret_pos =
-						line.substr(0, caret_line_pos);
-					render_caret(font, *surface, text_caret_pos);
+					line.resize(caret_line_pos);
+					render_caret(font, *surface, line);
 					caret = -1;
 				} else
 					cur_text_pos = new_text_pos;
@@ -305,7 +316,7 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 				 TTF_GetError());
 			log("Text was: %s\n", text.c_str());
 		}
-
+		j.pos = line_end + 1;
 	}
 
 	// blit all this together in one Surface
@@ -841,20 +852,16 @@ std::string Font_Handler::word_wrap_text
 			cur_word =
 				unwrapped_text.substr(word_start_pos, c + 1 - word_start_pos);
 			word_start_pos = c + 1;
-		}
-		else if (unwrapped_text[c] == '\n') {
+		} else if (unwrapped_text[c] == '\n') {
 			cur_word =
 				unwrapped_text.substr(word_start_pos, c + 1 - word_start_pos);
 			word_start_pos = c + 1;
 			forced_line_break = true;
-		}
-		else if (unwrapped_text[c] == ' ') {
+		} else if (unwrapped_text[c] == ' ') {
 			cur_word = unwrapped_text.substr(word_start_pos, c - word_start_pos);
 			word_start_pos = c;
-		}
-		else {
+		} else
 			continue;
-		}
 
 		// Test if the line should be wrapped or not
 		std::string tmp_str = cur_line + cur_word;
