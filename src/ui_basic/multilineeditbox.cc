@@ -51,7 +51,7 @@ Multiline_Editbox::Multiline_Editbox
 /**
  * A key event must be handled
 */
-bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
+bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 	char c = code.unicode & 0xff80 ? '\0' : code.unicode;
 
 	m_needs_update = true;
@@ -101,7 +101,7 @@ bool Multiline_Editbox::handle_key(bool down, SDL_keysym code) {
 			break;
 
 		case SDLK_DOWN:
-			if (m_cur_pos < txt.size() - 1) {
+			if (m_cur_pos < txt.size()) {
 				uint32_t begin_of_line = m_cur_pos;
 				if (txt[begin_of_line] == '\n')
 					--begin_of_line;
