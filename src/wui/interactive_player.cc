@@ -358,10 +358,8 @@ void Interactive_Player::node_action()
 	{
 		// Special case for buildings
 		if (upcast(Building, building, map.get_immovable(get_sel_pos().node)))
-			if (building->owner().get_player_number() == get_player_number()) {
-				building->show_options(this);
-				return;
-			}
+			if (&building->owner() == &player() or player().see_all())
+				return building->show_options(this);
 
 		// everything else can bring up the temporary dialog
 		show_field_action(this, get_player(), &m_fieldaction);
@@ -380,7 +378,7 @@ void Interactive_Player::node_action()
  * \li Return: write chat message
  * \li F5: reveal map (in debug builds)
 */
-bool Interactive_Player::handle_key(bool down, SDL_keysym code)
+bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 {
 	if (down)
 		switch (code.sym) {

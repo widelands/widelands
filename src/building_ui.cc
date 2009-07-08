@@ -138,9 +138,13 @@ class BulldozeConfirm
  */
 struct BulldozeConfirm : public UI::Window {
 	BulldozeConfirm
-		(Interactive_Base           * parent,
+		(Interactive_Player         * parent,
 		 Building                   * building,
 		 Widelands::PlayerImmovable * todestroy = 0);
+
+	Interactive_Player & iaplayer() const {
+		return dynamic_cast<Interactive_Player &>(*get_parent());
+	}
 
 	virtual void think();
 
@@ -163,7 +167,7 @@ confirm building destruction when the building's base flag is removed.
 ===============
 */
 BulldozeConfirm::BulldozeConfirm
-	(Interactive_Base           * parent,
+	(Interactive_Player         * parent,
 	 Building                   * building,
 	 Widelands::PlayerImmovable * todestroy)
 	:
@@ -173,7 +177,6 @@ BulldozeConfirm::BulldozeConfirm
 
 	center_to_parent();
 
-	m_iabase = parent;
 	m_building = building;
 
 	if (!todestroy)
@@ -210,13 +213,14 @@ Make sure the building still exists and can in fact be bulldozed.
 */
 void BulldozeConfirm::think()
 {
-	Widelands::Editor_Game_Base const & egbase = m_iabase->egbase();
+	Widelands::Editor_Game_Base const & egbase = iaplayer().egbase();
 	upcast(Building,        building,  m_building .get(egbase));
 	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(egbase));
 
 	if
 		(!todestroy ||
 		 !building  ||
+		 &iaplayer().player() != &building->owner() or
 		 !(building->get_playercaps() & (1 << Building::PCap_Bulldoze)))
 		die();
 }
@@ -229,23 +233,24 @@ Issue the CMD_BULLDOZE command for this building.
 */
 void BulldozeConfirm::bulldoze()
 {
-	Widelands::Editor_Game_Base & egbase = m_iabase->egbase();
+	Widelands::Editor_Game_Base & egbase = iaplayer().egbase();
 	upcast(Building,        building,  m_building .get(egbase));
 	upcast(Widelands::PlayerImmovable, todestroy, m_todestroy.get(egbase));
 
 	if
 		(todestroy &&
 		 building &&
+		 &iaplayer().player() == &building->owner() and
 		 building->get_playercaps() & (1 << Building::PCap_Bulldoze))
 	{
 		if (upcast(Widelands::Game, game, &egbase)) {
 			game->send_player_bulldoze
 				(*todestroy,
 				 get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
-			m_iabase->need_complete_redraw();
+			iaplayer().need_complete_redraw();
 		} else { //  Editor
 			todestroy->owner().bulldoze(*todestroy);
-			m_iabase->need_complete_redraw();
+			iaplayer().need_complete_redraw();
 		}
 	}
 
@@ -262,7 +267,7 @@ dialog.
 ===============
 */
 void show_bulldoze_confirm
-	(Interactive_Base           &       player,
+	(Interactive_Player         &       player,
 	 Building                   &       building,
 	 Widelands::PlayerImmovable * const todestroy)
 {
@@ -433,7 +438,7 @@ struct PriorityButtonHelper : std::map<int32_t, PriorityButtonInfo> {
 		 Widelands::Ware_Index ware_index);
 
 	void button_clicked (int32_t priority);
-	void update_buttons ();
+	void update_buttons (bool allow_changes);
 
 private:
 	Widelands::Game     & m_game;
@@ -466,7 +471,7 @@ struct Building_Window : public UI::Window {
 
 	virtual ~Building_Window();
 
-	Building * get_building() {return m_building;}
+	Building & building() {return *m_building;}
 
 	Interactive_Player & iaplayer() const {
 		return dynamic_cast<Interactive_Player &>(*get_parent());
@@ -508,6 +513,7 @@ private:
 
 	//  capabilities that were last used in setting up the caps panel
 	uint32_t m_capscache;
+	Widelands::Player_Number m_capscache_player_number;
 
 	Overlay_Manager::Job_Id m_workarea_job_id;
 	PictureID workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
@@ -523,20 +529,19 @@ Create the window, add it to the registry.
 */
 Building_Window::Building_Window
 	(Interactive_Player * const parent,
-	 Building           * const building,
+	 Building           * const b,
 	 UI::Window *       * const registry)
 	:
 	UI::Window
 		(parent,
 		 0, 0, Width, 0,
-		 building->info_string(parent->building_window_title_format()).c_str()),
+		 b->info_string(parent->building_window_title_format()).c_str()),
+	m_building       (b),
 m_workarea_job_id(Overlay_Manager::Job_Id::Null())
 {
 	m_registry = registry;
 	delete *m_registry;
 	*m_registry = this;
-
-	m_building = building;
 
 	m_capsbuttons = 0;
 	m_capscache = 0;
@@ -570,13 +575,11 @@ Draw a picture of the building in the background.
 */
 void Building_Window::draw(RenderTarget & dst)
 {
-	Building const & building = *get_building();
-
 	dst.drawanim
 		(Point(get_inner_w() / 2, get_inner_h() / 2),
-		 building.get_ui_anim(),
+		 building().get_ui_anim(),
 		 0,
-		 &get_building()->owner());
+		 &building().owner());
 
 	// Draw all the panels etc. above the background
 	UI::Window::draw(dst);
@@ -590,10 +593,14 @@ Check the capabilities and setup the capsbutton panel in case they've changed.
 */
 void Building_Window::think()
 {
-	if (m_capsbuttons) {
-		if (get_building()->get_playercaps() != m_capscache)
-			setup_capsbuttons();
-	}
+	Widelands::Player const & player = iaplayer().player();
+	if (not player.see_all() and &player != &building().owner())
+		die();
+	if
+		(m_capscache_player_number != player.get_player_number()
+		 or
+		 building().get_playercaps() != m_capscache)
+		setup_capsbuttons();
 
 	UI::Window::think();
 }
@@ -601,8 +608,6 @@ void Building_Window::think()
 
 /*
 ===============
-Building_Window::create_capsbuttons
-
 Create the capsbuttons panel with the given parent window, set it up and return
 it.
 ===============
@@ -625,15 +630,19 @@ Clear the capsbuttons panel and re-setup.
 */
 void Building_Window::setup_capsbuttons()
 {
-	int32_t x;
-
 	assert(m_capsbuttons);
 
 	m_capsbuttons->free_children();
-	m_capscache = get_building()->get_playercaps();
+	Widelands::Player const & player = iaplayer().player();
+	m_capscache = building().get_playercaps();
+	m_capscache_player_number = player.get_player_number();
 
-	x = 0;
+	int32_t x = 0;
 
+	bool const see_all       = player.see_all();
+	bool const allow_changes = &player == &building().owner();
+
+	if (allow_changes) {
 	if (upcast(ProductionSite const, productionsite, m_building))
 		if (not dynamic_cast<MilitarySite const *>(productionsite)) {
 			bool const is_stopped = productionsite->is_stopped();
@@ -652,22 +661,21 @@ void Building_Window::setup_capsbuttons()
 	if (m_capscache & 1 << Building::PCap_Enhancable) {
 		std::set<Building_Index> const & enhancements =
 			m_building->enhancements();
-		Widelands::Player      const & player = iaplayer().player();
 		Widelands::Tribe_Descr const & tribe  = player.tribe();
 		container_iterate_const(std::set<Building_Index>, enhancements, i)
 			if (player.is_building_allowed(*i.current)) {
-				Widelands::Building_Descr const & building =
+				Widelands::Building_Descr const & building_descr =
 					*tribe.get_building_descr(*i.current);
 				char buffer[128];
 				snprintf
 					(buffer, sizeof(buffer),
-					 _("Enhance to %s"), building.descname().c_str());
+					 _("Enhance to %s"), building_descr.descname().c_str());
 				new UI::Callback_IDButton
 					<Building_Window, Widelands::Building_Index>
 					(m_capsbuttons,
 					 x, 0, 34, 34,
 					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-					 building.get_buildicon(),
+					 building_descr.get_buildicon(),
 					 &Building_Window::act_enhance, *this,
 					 *i.current, //  button id = building id
 					 buffer);
@@ -685,7 +693,9 @@ void Building_Window::setup_capsbuttons()
 			 _("Destroy"));
 		x += 34;
 	}
+	}
 
+	if (allow_changes or see_all) {
 	if (m_building->descr().m_workarea_info.size()) {
 		m_toggle_workarea = new UI::Callback_Button<Building_Window>
 			(m_capsbuttons,
@@ -706,6 +716,7 @@ void Building_Window::setup_capsbuttons()
 			 &Building_Window::act_debug, *this,
 			 _("Debug"));
 		x += 34;
+	}
 	}
 
 	if (x == 0) {
@@ -830,8 +841,8 @@ struct ProductionSite_Window : public Building_Window {
 	ProductionSite_Window
 		(Interactive_Player * parent, ProductionSite *, UI::Window * * registry);
 
-	ProductionSite * get_productionsite() {
-		return dynamic_cast<ProductionSite *>(get_building());
+	ProductionSite & productionsite() {
+		return dynamic_cast<ProductionSite &>(building());
 	}
 
 	virtual void think();
@@ -921,18 +932,17 @@ void ConstructionSite_Window::think()
 {
 	Building_Window::think();
 
+	ConstructionSite const & cs = dynamic_cast<ConstructionSite &>(building());
+	bool const allow_changes = &iaplayer().player() == &cs.owner();
 	container_iterate(std::list<PriorityButtonHelper>, m_priority_helpers, i)
-		i.current->update_buttons();
+		i.current->update_buttons(allow_changes);
 
-	m_progress->set_state
-		(dynamic_cast<ConstructionSite &>(*get_building()).get_built_per64k());
+	m_progress->set_state(cs.get_built_per64k());
 }
 
 
 /*
 ===============
-ConstructionSite::create_options_window
-
 Create the status window describing the construction site.
 ===============
 */
@@ -955,8 +965,8 @@ struct Warehouse_Window : public Building_Window {
 	Warehouse_Window
 		(Interactive_Player * parent, Warehouse *, UI::Window * * registry);
 
-	Warehouse * get_warehouse() {
-		return dynamic_cast<Warehouse *>(get_building());
+	Warehouse & warehouse() {
+		return dynamic_cast<Warehouse &>(building());
 	}
 
 	virtual void think();
@@ -984,8 +994,7 @@ Warehouse_Window::Warehouse_Window
 {
 	// Add wares display
 	m_waresdisplay = new WaresDisplay(this, 0, 0, parent->player().tribe());
-	m_waresdisplay->add_warelist
-		(&get_warehouse()->get_wares(), WaresDisplay::WARE);
+	m_waresdisplay->add_warelist(&warehouse().get_wares(), WaresDisplay::WARE);
 
 	set_inner_size(m_waresdisplay->get_w(), 0);
 
@@ -1045,7 +1054,7 @@ void Warehouse_Window::clicked_help() {}
 
 
 void Warehouse_Window::clicked_goto() {
-	iaplayer().move_view_to(get_warehouse()->get_position());
+	iaplayer().move_view_to(warehouse().get_position());
 }
 
 
@@ -1058,14 +1067,14 @@ void Warehouse_Window::clicked_switchpage() {
 		//  Showing wares, should show workers.
 		m_waresdisplay->remove_all_warelists();
 		m_waresdisplay->add_warelist
-			(&get_warehouse()->get_workers(), WaresDisplay::WORKER);
+			(&warehouse().get_workers(), WaresDisplay::WORKER);
 		m_curpage = 1;
 	} else if (m_curpage == 1) {
 		//  Showing workers, should show soldiers
 		//  TODO currently switches back to wares
 		m_waresdisplay->remove_all_warelists();
 		m_waresdisplay->add_warelist
-			(&get_warehouse()->get_wares(), WaresDisplay::WARE);
+			(&warehouse().get_wares(), WaresDisplay::WARE);
 		m_curpage = 0;
 	}
 }
@@ -1273,13 +1282,13 @@ void PriorityButtonHelper::button_clicked (int32_t const priority) {
 		(*m_building, m_ware_type, m_ware_index, priority);
 }
 
-void PriorityButtonHelper::update_buttons () {
+void PriorityButtonHelper::update_buttons (bool const allow_changes) {
 	int32_t const priority =
 		m_building->get_priority(m_ware_type, m_ware_index, false);
 
 	for (iterator it = begin(); it != end(); ++it) {
 		bool const enable = it->first != priority;
-		it->second.button->set_enabled(enable);
+		it->second.button->set_enabled(allow_changes and enable);
 		it->second.button->set_pic
 			(enable ? it->second.picture_enabled : it->second.picture_disabled);
 	}
@@ -1338,7 +1347,7 @@ Building_Window::create_priority_button
 
 void Building_Window::create_ware_queue_panel
 	(UI::Box               * const box,
-	 Building              &       ps,
+	 Building              &       b,
 	 Widelands::WaresQueue * const wq)
 {
 	const int32_t priority_buttons_width = WaresQueueDisplay::Height / 3;
@@ -1351,7 +1360,7 @@ void Building_Window::create_ware_queue_panel
 	if (wq->get_ware()) {
 		m_priority_helpers.push_back
 			(PriorityButtonHelper
-			 	(iaplayer().game(), &ps, Widelands::Request::WARE, wq->get_ware()));
+			 	(iaplayer().game(), &b, Widelands::Request::WARE, wq->get_ware()));
 
 		PriorityButtonHelper & helper = m_priority_helpers.back();
 
@@ -1386,7 +1395,7 @@ void Building_Window::create_ware_queue_panel
 			 UI::Box::AlignTop);
 
 		hbox->add(vbox, UI::Box::AlignCenter);
-		helper.update_buttons();
+		helper.update_buttons(&iaplayer().player() == &b.owner());
 	}
 
 	box->add(hbox, UI::Box::AlignLeft);
@@ -1433,7 +1442,7 @@ void ProductionSite_Window::list_worker_clicked() {
 
 	*m_reg =
 		new ProductionSite_Window_ListWorkerWindow
-			(&iaplayer(), get_productionsite());
+			(&iaplayer(), &productionsite());
 	die();
 }
 
@@ -1446,8 +1455,9 @@ void ProductionSite_Window::think()
 {
 	Building_Window::think();
 
+	bool const allow_changes = &iaplayer().player() == &building().owner();
 	container_iterate(std::list<PriorityButtonHelper>, m_priority_helpers, i)
-		i.current->update_buttons();
+		i.current->update_buttons(allow_changes);
 }
 
 
@@ -1477,8 +1487,8 @@ struct MilitarySite_Window : public Building_Window {
 		 MilitarySite       &,
 		 UI::Window *       & registry);
 
-	MilitarySite * get_militarysite() {
-		return dynamic_cast<MilitarySite *>(get_building());
+	MilitarySite & militarysite() {
+		return dynamic_cast<MilitarySite &>(building());
 	}
 
 	virtual void think();
@@ -1602,15 +1612,18 @@ Update the listselect, maybe there are new soldiers
 =============
 */
 void MilitarySite_Window::update() {
-	std::vector<Soldier *> soldiers = get_militarysite()->presentSoldiers();
+	MilitarySite const & ms = militarysite();
+	std::vector<Soldier *> soldiers = ms.presentSoldiers();
 
 	if (soldiers.size() < m_table.size())
 		m_table.clear();
 
 	for (uint32_t i = 0; i < soldiers.size(); ++i) {
 		Soldier & s = *soldiers[i];
-		UI::Table<Soldier &>::Entry_Record * er = m_table.find(s);
-		if (not er)                          er = &m_table.add(s);
+		UI::Table<Soldier &>::Entry_Record * er =
+			m_table.find(s);
+		if (not er)
+			er = &m_table.add(s);
 		uint32_t const  hl = s.get_hp_level         ();
 		uint32_t const mhl = s.get_max_hp_level     ();
 		uint32_t const  al = s.get_attack_level     ();
@@ -1634,16 +1647,19 @@ void MilitarySite_Window::update() {
 	}
 	m_table.sort();
 
-	MilitarySite const & ms = dynamic_cast<MilitarySite &>(*get_building());
 	uint32_t const capacity     = ms.   soldierCapacity();
 	char buffer[200];
 	snprintf(buffer, sizeof(buffer), _("Capacity: %2u"), capacity);
 	m_capacity.set_text (buffer);
 	uint32_t const capacity_min = ms.minSoldierCapacity();
+	bool const allow_changes = &iaplayer().player() == &ms.owner();
 	m_drop_button.set_enabled
-		(m_table.has_selection() and capacity_min < m_table.size());
-	m_capacity_down.set_enabled(capacity_min < capacity);
-	m_capacity_up  .set_enabled(capacity < ms.maxSoldierCapacity());
+		(allow_changes and
+		 m_table.has_selection() and capacity_min < m_table.size());
+	m_capacity_down.set_enabled
+		(allow_changes and capacity_min < capacity);
+	m_capacity_up  .set_enabled
+		(allow_changes and                capacity < ms.maxSoldierCapacity());
 }
 
 void MilitarySite_Window::drop_button_clicked()
@@ -1655,8 +1671,6 @@ void MilitarySite_Window::drop_button_clicked()
 
 /*
 ===============
-MilitarySite::create_options_window
-
 Create the production site information window.
 ===============
 */
@@ -1680,7 +1694,7 @@ struct TrainingSite_Window : public ProductionSite_Window {
 		(Interactive_Player & parent, TrainingSite &, UI::Window * & registry);
 
 	TrainingSite & trainingsite() {
-		return dynamic_cast<TrainingSite &>(*get_building());
+		return dynamic_cast<TrainingSite &>(building());
 	}
 
 	virtual void think();
@@ -1895,21 +1909,22 @@ void TrainingSite_Window::update() {
 	}
 	m_tabpanel.m_sold_box.m_table.sort();
 
-	TrainingSite const & ts =
-		dynamic_cast<TrainingSite const &>(*get_building());
+	TrainingSite const & ts = trainingsite();
 	uint32_t const capacity     = ts.   soldierCapacity();
 	char buffer[sizeof("4294967295")];
 	sprintf (buffer, "%2u", ts.soldierCapacity());
 	m_tabpanel.m_sold_box.m_capacity_box.m_capacity_value_label.set_text
 		(buffer);
 	uint32_t const capacity_min = ts.minSoldierCapacity();
+	bool const allow_changes = &iaplayer().player() == &ts.owner();
 	m_tabpanel.m_sold_box.m_drop_selected_soldier.set_enabled
-		(m_tabpanel.m_sold_box.m_table.has_selection() and
+		(allow_changes and
+		 m_tabpanel.m_sold_box.m_table.has_selection() and
 		 capacity_min < m_tabpanel.m_sold_box.m_table.size());
 	m_tabpanel.m_sold_box.m_capacity_box.m_capacity_decrement.set_enabled
-		(capacity_min < capacity);
+		(allow_changes and capacity_min < capacity);
 	m_tabpanel.m_sold_box.m_capacity_box.m_capacity_increment.set_enabled
-		(capacity < ts.maxSoldierCapacity());
+		(allow_changes and                capacity < ts.maxSoldierCapacity());
 }
 
 

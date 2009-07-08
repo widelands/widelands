@@ -546,7 +546,7 @@ FieldActionWindow::add_buttons_build
 Add buttons for house building.
 ===============
 */
-void FieldActionWindow::add_buttons_build(int32_t buildcaps)
+void FieldActionWindow::add_buttons_build(int32_t const buildcaps)
 {
 	BuildGrid * bbg_house[3] = {0, 0, 0};
 	BuildGrid * bbg_mine = 0;
@@ -619,8 +619,6 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 
 /*
 ===============
-FieldActionWindow::add_buttons_road
-
 Buttons used during road building: Set flag here and Abort
 ===============
 */
@@ -645,8 +643,6 @@ void FieldActionWindow::add_buttons_road(bool const flag)
 
 /*
 ===============
-FieldActionWindow::add_tab
-
 Convenience function: Adds a new tab to the main tab panel
 ===============
 */
@@ -659,11 +655,6 @@ uint32_t FieldActionWindow::add_tab
 }
 
 
-/*
-===============
-FieldActionWindow::add_button
-===============
-*/
 void FieldActionWindow::add_button
 	(UI::Box           * const box,
 	 char        const * const picname,
@@ -685,8 +676,6 @@ void FieldActionWindow::add_button
 
 /*
 ===============
-FieldActionWindow::okdialog
-
 Call this from the button handlers.
 It resets the mouse to its original position and closes the window
 ===============
@@ -699,8 +688,6 @@ void FieldActionWindow::okdialog()
 
 /*
 ===============
-FieldActionWindow::act_watch()
-
 Open a watch window for the given field and delete self.
 ===============
 */
@@ -715,9 +702,6 @@ void FieldActionWindow::act_watch()
 
 /*
 ===============
-FieldActionWindow::act_show_census
-FieldActionWindow::act_show_statistics
-
 Toggle display of census and statistics for buildings, respectively.
 ===============
 */
@@ -740,8 +724,6 @@ void FieldActionWindow::act_show_statistics()
 
 /*
 ===============
-FieldActionWindow::act_debug
-
 Show a debug widow for this field.
 ===============
 */
@@ -753,8 +735,6 @@ void FieldActionWindow::act_debug()
 
 /*
 ===============
-FieldActionWindow::act_buildflag
-
 Build a flag at this field
 ===============
 */
@@ -782,8 +762,6 @@ void FieldActionWindow::act_configure_economy()
 
 /*
 ===============
-FieldActionWindow::act_ripflag
-
 Remove the flag at this field
 ===============
 */
@@ -794,7 +772,8 @@ void FieldActionWindow::act_ripflag()
 	if (upcast(Widelands::Flag, flag, m_node.field->get_immovable())) {
 		if (Building * const building = flag->get_building()) {
 			if (building->get_playercaps() & (1 << Building::PCap_Bulldoze))
-				show_bulldoze_confirm(ibase(), *building, flag);
+				show_bulldoze_confirm
+					(dynamic_cast<Interactive_Player &>(ibase()), *building, flag);
 		} else {
 			if (upcast(Game, game, &egbase))
 				game->send_player_bulldoze
