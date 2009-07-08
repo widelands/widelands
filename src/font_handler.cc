@@ -36,6 +36,8 @@
 #include <algorithm>
 #include <iostream>
 
+#define LINE_MARGIN 1
+
 /**
  * Plain Constructor
  */
@@ -189,9 +191,26 @@ SDL_Surface * Font_Handler::create_single_line_text_surface
 		text = " ";
 
 	if
-		(SDL_Surface * const surface =
+		(SDL_Surface * const text_surface =
 		 	TTF_RenderUTF8_Shaded(&font, text.c_str(), sdl_fg, sdl_bg))
 	{
+		//  Draw this into a slightly larger surface so that the caret is visible
+		//  even when it is before the first or after the last character.
+		SDL_Surface * const surface =
+			SDL_CreateRGBSurface
+				(SDL_SWSURFACE,
+				 text_surface->w + 2 * LINE_MARGIN,
+				 text_surface->h,
+				 16,
+				 text_surface->format->Rmask,
+				 text_surface->format->Gmask,
+				 text_surface->format->Bmask,
+				 text_surface->format->Amask);
+		SDL_FillRect
+			(surface, 0, SDL_MapRGB(surface->format, bg.r(), bg.g(), bg.b()));
+		SDL_Rect r; r.x = LINE_MARGIN, r.y = 0;
+		SDL_BlitSurface(text_surface, 0, surface, &r);
+		SDL_FreeSurface(text_surface);
 		if (caret != -1) {
 			std::string const text_caret_pos = text.substr(0, caret);
 			render_caret(font, *surface, text_caret_pos);
@@ -222,7 +241,7 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 	 int32_t     const line_spacing,
 	 int32_t           caret)
 {
-	assert(wrap > 0);
+	assert(2 * LINE_MARGIN < wrap);
 	assert(text.size() > 0);
 
 	int32_t global_surface_width  = wrap;
@@ -236,15 +255,33 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 	uint32_t i = 0;
 
 	std::vector<std::string> const lines
-		(split_string(word_wrap_text(font, text, wrap), "\n"));
+		(split_string(word_wrap_text(font, text, wrap - 2 * LINE_MARGIN), "\n"));
 	container_iterate_const(std::vector<std::string>, lines, j) {
 		std::string const line(j.current->empty() ? " " : *j.current);
 
 		// render this block in a SDL Surface
 		if
-			(SDL_Surface * const surface =
+			(SDL_Surface * const text_surface =
 			 	TTF_RenderUTF8_Shaded(&font, line.c_str(), sdl_fg, sdl_bg))
 		{
+			//  Draw this into a slightly larger surface so that the caret is
+			//  visible even when it is before the first or after the last
+			//  character.
+			SDL_Surface * const surface =
+				SDL_CreateRGBSurface
+					(SDL_SWSURFACE,
+					 text_surface->w + 2 * LINE_MARGIN,
+					 text_surface->h,
+					 16,
+					 text_surface->format->Rmask,
+					 text_surface->format->Gmask,
+					 text_surface->format->Bmask,
+					 text_surface->format->Amask);
+			SDL_FillRect
+				(surface, 0, SDL_MapRGB(surface->format, bg.r(), bg.g(), bg.b()));
+			SDL_Rect r; r.x = LINE_MARGIN, r.y = 0;
+			SDL_BlitSurface(text_surface, 0, surface, &r);
+			SDL_FreeSurface(text_surface);
 			if (caret != -1) {
 				uint32_t const new_text_pos = cur_text_pos + line.size();
 				if (new_text_pos >= caret - i) {
@@ -287,6 +324,7 @@ void Font_Handler::render_caret
 	int32_t caret_x, caret_y;
 
 	TTF_SizeUTF8(&font, text_caret_pos.c_str(), &caret_x, &caret_y);
+	caret_x += LINE_MARGIN;
 
 	Surface * const caret_surf =
 		g_gr->get_picture_surface
