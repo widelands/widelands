@@ -122,6 +122,7 @@ void GameMessageMenu::clicked_del_all() {
 		list[i].set_is_visible(false);
 	}
 	list.clear();
+	messagetext.set_text(std::string());
 }
 
 void GameMessageMenu::clicked_view() {
