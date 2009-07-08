@@ -23,7 +23,6 @@
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "editor_game_base.h"
-#include "font_handler.h"
 #include "game.h"
 #include "graphic/graphic.h"
 #include "wui/interactive_gamebase.h"

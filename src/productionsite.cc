@@ -27,7 +27,6 @@
 #include "logic/game.h"
 #include "helper.h"
 #include "i18n.h"
-#include "wui/interactive_player.h"
 #include "map.h"
 #include "logic/player.h"
 #include "production_program.h"
