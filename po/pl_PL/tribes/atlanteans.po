@@ -4,60 +4,54 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4395\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-04-21 19:25+0100\n"
+"POT-Creation-Date: 2009-07-08 20:24+0000\n"
+"PO-Revision-Date: 2009-06-29 14:00+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3 plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 #: ../../../tribes/atlanteans/advanced_shield/conf:1
-#, fuzzy
 msgid "These shields are used by the best soldiers of the Atlanteans."
 msgstr "Tylko najlepsi atlanccy żołnierze noszą tarcze."
 
 #: ../../../tribes/atlanteans/armoursmithy/conf:20
-#, fuzzy
 msgid "Produce steel shield"
-msgstr "Stalowa tarcza"
+msgstr "Produce steel shield (Produkuj stalową tarczę)"
 
 #: ../../../tribes/atlanteans/armoursmithy/conf:21
 msgid "Produce steel shield (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Produce steel shield (only for compatibility with old savegames (build13))<br/>Produkuj stalową tarczę (tylko dla utrzymania kompatybliności z starymi zapisami (build13))"
 
 #: ../../../tribes/atlanteans/armoursmithy/conf:22
-#, fuzzy
 msgid "Produce advanced shield"
-msgstr "Zaawansowana tarcza"
+msgstr "Produce advanced shield (Produkuj zaawansowaną tarczę)"
 
 #: ../../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce advanced shield (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Produce advanced shield (only for compatibility with old savegames (build13))<br/>Produkuj zaawansowaną tarczę (tylko dla utrzymania kompatybliności z starymi zapisami (build13))"
 
 #: ../../../tribes/atlanteans/bakingtray/conf:1
 msgid "The bakingtray is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
 msgstr "Blacha to narzędziem piekarza. Produkuje ją rzemieślnik."
 
 #: ../../../tribes/atlanteans/blackroot/conf:1
-#, fuzzy
 msgid "Blackroots are a special kind of roots. The Atlanteans like their strong taste and use its flour for making bread."
 msgstr "Czarne korzenie to specjalna odmiana korzenia używana przez Atlantów do produkcji mąki na chleb. Cenione są przede wszystkim za swój intensywny smak."
 
 #: ../../../tribes/atlanteans/blackroot_farm/conf:13
-#, fuzzy
 msgid "Plant blackroot"
-msgstr "Czarny korzeń"
+msgstr "Plant blackroot (Sadź korzenie)"
 
 #: ../../../tribes/atlanteans/blackroot_farm/conf:15
-#, fuzzy
 msgid "Harvest blackroot"
-msgstr "Czarny korzeń"
+msgstr "Harvest blackroot (Zbieraj korzenie)"
 
 #: ../../../tribes/atlanteans/blackrootflour/conf:1
-#, fuzzy
 msgid "Blackroot Flour is produced out of blackroots and is one of three parts of the atlantian bread."
 msgstr "Mąka korzenna produkowana jest z czarnych korzeni i jest jednym z trzech składników do produkcji chleba."
 
@@ -71,15 +65,15 @@ msgstr "Duże wiadra dla hodowców ryb  Wytwarza je rzemieślnik."
 
 #: ../../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "Pracuje na placu budowy i buduje nowe budynki."
 
 #: ../../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
-msgstr ""
+msgstr "Wypala węgiel."
 
 #: ../../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Nosi przedmioty po twoich drogach."
 
 #: ../../../tribes/atlanteans/coal/conf:1
 msgid "To make the fine atlantian steel a hot fire is needed. But a fire of wood isn't hot enough -this coal brings the needed heat."
@@ -154,7 +148,7 @@ msgid "Resource indicator coal much"
 msgstr "Wskaźnik zasobów dużo węgla"
 
 #: ../../../tribes/atlanteans/conf:50
-msgid "Resource indicator gold litte"
+msgid "Resource indicator gold little"
 msgstr "Wskaźnik zasobów mało złota"
 
 #: ../../../tribes/atlanteans/conf:51
@@ -614,7 +608,6 @@ msgid "Castle village"
 msgstr "Wioska z zamekiem (duża)"
 
 #: ../../../tribes/atlanteans/corn/conf:1
-#, fuzzy
 msgid "This corn is the base of the fine cornflour, that every atlantian baker needs for a good bread."
 msgstr "Kukurydza służy do produkcji mąki kukurydzanej, bez której nie powstanie wyśmienity chleb."
 
@@ -624,86 +617,79 @@ msgstr "Mąka kukurydziana wytwarzana jest z kukurydzy i stanowi jeden z trzech 
 
 #: ../../../tribes/atlanteans/crystalmine/conf:23
 msgid "Mine stone"
-msgstr ""
+msgstr "Mine stone (Kop kamień)"
 
 #: ../../../tribes/atlanteans/crystalmine/conf:24
-#, fuzzy
 msgid "Mine quartz"
-msgstr "Górnik"
+msgstr "Mine quartz (Kop kwarc)"
 
 #: ../../../tribes/atlanteans/crystalmine/conf:25
-#, fuzzy
 msgid "Mine diamond"
-msgstr "Diament"
+msgstr "Mine diamond (Kop diament)"
 
 #: ../../../tribes/atlanteans/diamond/conf:1
 msgid "This wonderful diamonds are used for some exclusive buildings and tools."
 msgstr "Wspaniałe diamenty używane są do budowy wyjątkowy budynków i narzędzi."
 
 #: ../../../tribes/atlanteans/double_trident/conf:1
-#, fuzzy
 msgid "Already one of the best tridents of the Atlanteans. Only used by very good fighters."
 msgstr "Jeden z najlepszych atlanckich trójzębów. Używany wyłącznie przez wyśmienitych wojowników."
 
 #: ../../../tribes/atlanteans/dungeon/conf:32
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Ulepsz atak 0 żołnierza (Ulepsz atak 0 żołnierza)"
 
 #: ../../../tribes/atlanteans/dungeon/conf:33
 msgid "Upgrade soldier attack 0 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Upgrade soldier attack 0 (only for compatibility with old savegames (build13))<br/>(Ulepsz atak 0 żołnierza (tylko dla utrzymania kompatybliności ze starymi zapisami (build13)))"
 
 #: ../../../tribes/atlanteans/dungeon/conf:34
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Ulepsz atak 1 żołnierza (Ulepsz atak 1 żołnierza)"
 
 #: ../../../tribes/atlanteans/dungeon/conf:35
 msgid "Upgrade soldier attack 1 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Upgrade soldier attack 1 (only for compatibility with old savegames (build13))<br/>(Ulepsz atak 1 żołnierza (tylko dla utrzymania kompatybliności ze starymi zapisami (build13)))"
 
 #: ../../../tribes/atlanteans/dungeon/conf:36
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Ulepsz atak 2 żołnierza (Ulepsz atak 2 żołnierza)"
 
 #: ../../../tribes/atlanteans/dungeon/conf:37
 msgid "Upgrade soldier attack 2 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Upgrade soldier attack 2 (only for compatibility with old savegames (build13))<br/>(Ulepsz atak 2 żołnierza (tylko dla utrzymania kompatybliności ze starymi zapisami (build13)))"
 
 #: ../../../tribes/atlanteans/dungeon/conf:38
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Ulepsz atak 3 żołnierza (Ulepsz atak 3 żołnierza)"
 
 #: ../../../tribes/atlanteans/dungeon/conf:39
 msgid "Upgrade soldier attack 3 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Upgrade soldier attack 3 (only for compatibility with old savegames (build13))<br/>(Ulepsz atak 3 żołnierza (tylko dla utrzymania kompatybliności ze starymi zapisami (build13)))"
 
 #: ../../../tribes/atlanteans/farm/conf:19
-#, fuzzy
 msgid "Plant corn"
-msgstr "Sadzi drzewa."
+msgstr "Plant corn (Siej kukurydzę)"
 
 #: ../../../tribes/atlanteans/farm/conf:21
 msgid "Harvest corn"
-msgstr ""
+msgstr "Harvest corn (Zbieraj kukurydzę)"
 
 #: ../../../tribes/atlanteans/farmer/conf:2
-#, fuzzy
 msgid "Plants fields."
-msgstr "Sadzi drzewa."
+msgstr "Sieje na polach."
 
 #: ../../../tribes/atlanteans/fire_tongs/conf:1
 msgid "The fire tongs are the tools of the smelter, working in the smelting works. They are produced by the toolsmith."
 msgstr "Szczypce są używane przez hutnika. Produkowane są przez rzemieślnika."
 
 #: ../../../tribes/atlanteans/fish/conf:1
-#, fuzzy
 msgid "Fish is one of the biggest food-resources of the Atlanteans."
-msgstr "Ryby to jedno z podstawowych źródeł pożywienia Atlantów."
+msgstr "Ryby to jedno z podstawowych źródeł pożywienia atlantów."
 
 #: ../../../tribes/atlanteans/fish_breeder/conf:1
-#, fuzzy
 msgid "Breeds fish."
-msgstr "Hoduje ryby"
+msgstr "Hoduje ryby."
 
 #: ../../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
@@ -719,10 +705,10 @@ msgstr "Sadzi drzewa."
 
 #: ../../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Odkrywa zasoby do wykopania."
 
 #: ../../../tribes/atlanteans/gold/conf:1
-msgid "Gold is one of the most valuable materials only important things are garnished with it."
+msgid "Gold is one of the most valuable materials. Only important things are garnished with it."
 msgstr "Złoto to najcenniejszy kruszec. Tylko najważniejsze przedmioty są nim dekorowane."
 
 #: ../../../tribes/atlanteans/golden_tabard/conf:1
@@ -730,7 +716,6 @@ msgid "A special tabard for atlantian soldiers."
 msgstr "Specjalny tabard dla atlanckich żołnierzy."
 
 #: ../../../tribes/atlanteans/goldore/conf:1
-#, fuzzy
 msgid "This is the yellow gold ore."
 msgstr "To żółta skała złotonośna."
 
@@ -752,7 +737,7 @@ msgstr "Haki służą wędzarzom do wieszania mięsa i ryb w wędzarni. Produkuj
 
 #: ../../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
-msgstr ""
+msgstr "Myśliwy przynosi mięso dla atlantów."
 
 #: ../../../tribes/atlanteans/hunters_house/conf:12
 #: ../../../tribes/atlanteans/smelting_works/conf:22
@@ -780,7 +765,7 @@ msgstr ""
 #: ../../../tribes/atlanteans/goldmine/conf:21
 #: ../../../tribes/atlanteans/fishers_house/conf:15
 msgid "Work"
-msgstr ""
+msgstr "Work (Pracuj)"
 
 #: ../../../tribes/atlanteans/hunting_bow/conf:1
 msgid "This bow is used by the atlantian hunter."
@@ -791,57 +776,55 @@ msgid "Weapons and Tools are made of iron."
 msgstr "Broń i narzędzia produkowane są z żelaza."
 
 #: ../../../tribes/atlanteans/ironore/conf:1
-#, fuzzy
 msgid "This is red iron ore."
 msgstr "To jest czerwona ruda żelaza."
 
 #: ../../../tribes/atlanteans/labyrinth/conf:36
 #: ../../../tribes/atlanteans/dungeon/conf:31
 msgid "Sleep"
-msgstr ""
+msgstr "Sleep (Śpij)"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:37
 msgid "Upgrade soldier defense 0"
-msgstr ""
+msgstr "Upgrade soldier defense 0 (Ulepsz obronę 0 żołnierza)"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:38
 msgid "Upgrade soldier defense 0 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Upgrade soldier defense 0 (only for compatibility with old savegames (build13))<br/>Ulepsz obronę 0 żołnierza (tylko dla utrzymania kompatybliności z starymi zapisami (build13))"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:39
 msgid "Upgrade soldier defense 1"
-msgstr ""
+msgstr "Upgrade soldier defense 1 (Ulepsz obronę 1 żołnierza)"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:40
 msgid "Upgrade soldier defense 1 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Upgrade soldier defense 1 (only for compatibility with old savegames (build13))<br/>Ulepsz obronę 1 żołnierza (tylko dla utrzymania kompatybliności z starymi zapisami (build13))"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:41
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Upgrade soldier hitpoints 0 (Ulepsz punkty życia 0 żołnierza)"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:42
 msgid "Upgrade soldier hitpoints 0 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Upgrade soldier hitpoints 0 (only for compatibility with old savegames (build13))<br/>(Ulepsz punkty życia 0 żołnierza (tylko dla utrzymania kompatybliności z starymi zapisami (build13)))"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:43
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Upgrade soldier evade 0 (Ulepsz wymijanie 0 żołnierza)"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:44
 msgid "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))<br/>(Ulepsz wymijanie 0 żołnierza (tylko dla utrzymania kompatybliności z starymi zapisami (build13)))"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:45
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Upgrade soldier evade 1 (Ulepsz wymijanie 1 żołnierza)"
 
 #: ../../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
-msgstr ""
+msgstr "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))<br/>(Ulepsz wymijanie 1 żołnierza (tylko dla utrzymania kompatybliności z starymi zapisami (build13)))"
 
 #: ../../../tribes/atlanteans/light_trident/conf:1
-#, fuzzy
 msgid "This is the basic weapon for atlantian soldiers."
 msgstr "Podstawowa broń atlanckich żołnierzy."
 
@@ -850,7 +833,6 @@ msgid "This is an advanced trident for more experienced soldiers."
 msgstr "Zaawansowany trójząb dla bardziej doświadczonych żołnierzy."
 
 #: ../../../tribes/atlanteans/meat/conf:1
-#, fuzzy
 msgid "Meat is one food-resource of the Atlanteans."
 msgstr "Atlanci lubią zajadać się mięsem."
 
@@ -859,25 +841,23 @@ msgid "Milking tongs are used by the spider breeder, to milk the spiders. They a
 msgstr "Szczypce używane przez hodowców pająków do ich dojenia. Produkowane przez rzemieślnika."
 
 #: ../../../tribes/atlanteans/mill/conf:18
-#, fuzzy
 msgid "Produce cornflour"
-msgstr "Mąka kukurydziana"
+msgstr "Produce cornflour (Produkuj mąkę kukurydzianą)"
 
 #: ../../../tribes/atlanteans/mill/conf:19
-#, fuzzy
 msgid "Produce blackrootflour"
-msgstr "Mąka korzenna"
+msgstr "Produce blackrootflour (Produkuj mąkę korzenną)"
 
 #: ../../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."
-msgstr ""
+msgstr "Pracuje głęboko w kopalniach aby wykopywać węgiel, żelazo i złoto."
 
 #: ../../../tribes/atlanteans/pick/conf:1
-msgid "Picks are used by stonecutters and miners. It is produced by the toolsmith."
+#, fuzzy
+msgid "Picks are used by stonecutters and miners. They are produced by the toolsmith."
 msgstr "Kilof używany jest przez kamieniarzy i przez górników. Produkowany w warsztacie."
 
 #: ../../../tribes/atlanteans/planks/conf:1
-#, fuzzy
 msgid "Planks are an important build material of the Atlanteans."
 msgstr "Deski są dla Atlantów ważnym budulcem."
 
@@ -894,22 +874,21 @@ msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
 msgstr "Kosa jest narzędziem farmerów. Produkowana jest w warsztacie."
 
 #: ../../../tribes/atlanteans/shovel/conf:1
-msgid "Shovels are needed for proper handling of plants. Therefore the forester and the blackroot farmer are using it. It is produced by the toolsmith."
+#, fuzzy
+msgid "Shovels are needed for proper handling of plants. Therefore the forester and the blackroot farmer are using them. They are produced by the toolsmith."
 msgstr "Łopaty potrzebne są do właściwego zajmowania się roślinami, a przydają się leśniczemu i farmerowi.czarnych korzeni. Wytwarza je rzemieślnik."
 
 #: ../../../tribes/atlanteans/smelter/conf:1
-#, fuzzy
 msgid "Smelts iron."
-msgstr "Hutnik"
+msgstr "Wytapia żelazo."
 
 #: ../../../tribes/atlanteans/smelting_works/conf:20
-#, fuzzy
 msgid "Smelt iron"
-msgstr "Hutnik"
+msgstr "Smelt iron (Wytapiaj żelazo)"
 
 #: ../../../tribes/atlanteans/smelting_works/conf:21
 msgid "Smelt gold"
-msgstr ""
+msgstr "Smelt gold (Wytapiaj złoto)"
 
 #: ../../../tribes/atlanteans/smoked_fish/conf:1
 msgid "This is smoked fish - As no Atlantid likes raw fish, smoking is the most common way to make it eatable."
@@ -920,30 +899,26 @@ msgid "This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat
 msgstr "Ponieważ Atlanci nie jedzą surowego, najczęściej serwują je uwędzone."
 
 #: ../../../tribes/atlanteans/smokery/conf:20
-#, fuzzy
 msgid "Smoke meat"
-msgstr "Wędzone mięso"
+msgstr "Smoke meat (Wędź mięso)"
 
 #: ../../../tribes/atlanteans/smokery/conf:21
-#, fuzzy
 msgid "Smoke fish"
-msgstr "Wędzona ryba"
+msgstr "Smoke fish (Wędź rybę)"
 
 #: ../../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Broń i zwyciężaj!"
 
 #: ../../../tribes/atlanteans/spidercloth/conf:1
 msgid "Cloth made out of spideryarn."
 msgstr "Tkanina wytwarzana z pajęczej przędzy."
 
 #: ../../../tribes/atlanteans/spideryarn/conf:1
-#, fuzzy
 msgid "This yarn is produced by spiders, which are bred on spiderfarms."
 msgstr "Przędza produkowana przez pająki hodowane na farmach."
 
 #: ../../../tribes/atlanteans/steel_shield/conf:1
-#, fuzzy
 msgid "This steel shield is used by experienced soldiers."
 msgstr "Doświadczeni żołnierze noszą stalowe tarcze."
 
@@ -952,7 +927,6 @@ msgid "This is the medium trident - used by advanced soldiers."
 msgstr "Średni trój ząb używany jest przez doświadczonych żołnierzy."
 
 #: ../../../tribes/atlanteans/stone/conf:1
-#, fuzzy
 msgid "Stone is one basic build ware type of the Atlanteans."
 msgstr "Kamienie to jeden z podstawowych budulców używanych przez Atlantów."
 
@@ -961,64 +935,58 @@ msgid "Cuts raw pieces of granit out of laying stones."
 msgstr "Wycina granit ze skał."
 
 #: ../../../tribes/atlanteans/tabard/conf:1
-#, fuzzy
 msgid "All atlantean soldiers have to wear the sign of their country on their chests."
 msgstr "Każdy Atlanta nosi godło państwa na swej piersi."
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:30
-#, fuzzy
 msgid "Produce bakingtray"
-msgstr "Blacha"
+msgstr "Produce bakingtray (Produkuj blachę)"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:31
 msgid "Produce bucket"
-msgstr ""
+msgstr "Produce bucket (Produkuj wiadro)"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:32
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "Produce fire tongs (Produkuj szczypce)"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:33
-#, fuzzy
 msgid "Produce fishing net"
-msgstr "Sieć rybacka"
+msgstr "Produce fishing net (Produkuj sieć rybacką)"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:34
 msgid "Produce hammer"
-msgstr ""
+msgstr "Produce hammer (Produkuj młotek)"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:35
-#, fuzzy
 msgid "Produce hook pole"
-msgstr "Hak"
+msgstr "Produce hook pole (Produkuj hak)"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:36
 msgid "Produce bow"
-msgstr ""
+msgstr "Produce bow (Produkuj łuk)"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:37
-#, fuzzy
 msgid "Produce milking tongs"
-msgstr "Szczypce do dojenia"
+msgstr "Produce milking tongs (Produkuj szczypce do dojenia)"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce pick"
-msgstr ""
+msgstr "Produce pick (Produkuj kilof)"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce saw"
-msgstr ""
+msgstr "Produce saw (Produkuj piłę)"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:40
 msgid "Produce scythe"
-msgstr ""
+msgstr "Produce scythe (Produkuj kosę)"
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:41
 msgid "Produce shovel"
-msgstr ""
+msgstr "Produce shovel (Produkuj łopatę)"
 
 #: ../../../tribes/atlanteans/trunk/conf:1
-#, fuzzy
 msgid "Trunks are the base for planks, which are used in nearly every building of the Atlanteans."
 msgstr "Deski produkowane z belek są używane do budowy praktycznie wszystkich atlanckich budynków."
 
@@ -1027,53 +995,60 @@ msgid "Water is the most essential essence for life! This water is used in many 
 msgstr "Woda to esencja życia! Jest używana do wielu rzeczy np. do pieczenia chleba."
 
 #: ../../../tribes/atlanteans/weaponsmithy/conf:27
-#, fuzzy
 msgid "Produce light trident"
-msgstr "Lekki trójząb"
+msgstr "Produce light trident (Produkuj lekki trójząb)"
 
 #: ../../../tribes/atlanteans/weaponsmithy/conf:28
-#, fuzzy
 msgid "Produce long trident"
-msgstr "Długi trójząb"
+msgstr "Produce long trident (Produkuj długi trójząb)"
 
 #: ../../../tribes/atlanteans/weaponsmithy/conf:29
-#, fuzzy
 msgid "Produce steel trident"
-msgstr "Stalowy trójząb"
+msgstr "Produce steel trident (Produkuj stalowy trójząb)"
 
 #: ../../../tribes/atlanteans/weaponsmithy/conf:30
-#, fuzzy
 msgid "Produce double trident"
-msgstr "Podwójny trójząb"
+msgstr "Produce double trident (Produkuj podwójny trójząb)"
 
 #: ../../../tribes/atlanteans/weaponsmithy/conf:31
-#, fuzzy
 msgid "Produce heavy double trident"
-msgstr "Ciężki podwójny trójząb"
+msgstr "Produce heavy double trident (Produkuj ciężki podwójny trójząb)"
 
 #: ../../../tribes/atlanteans/weaver/conf:1
-#, fuzzy
 msgid "Produces cloth for buildings, ships and soldiers."
-msgstr "Wytwarza tkaninę do budowy statków oraz wyposażenia dla żołnierzy."
+msgstr "Wytwarza tkaninę do budowy statków, budynków oraz wyposażenia dla żołnierzy."
 
 #: ../../../tribes/atlanteans/weaving-mill/conf:19
-#, fuzzy
 msgid "Produce spidercloth"
-msgstr "Pajęcza tkanina"
+msgstr "Produce spidercloth (Produkuj pajęczą tkaninę)"
 
 #: ../../../tribes/atlanteans/weaving-mill/conf:20
-#, fuzzy
 msgid "Produce tabard"
-msgstr "Złota kamizelka"
+msgstr "Produce tabard (Produkuj kamizelkę)"
 
 #: ../../../tribes/atlanteans/weaving-mill/conf:21
-#, fuzzy
 msgid "Produce golden tabard"
-msgstr "Złota kamizelka"
+msgstr "Produce golden tabard (Produkuj złotą kamizelkę)"
 
 #: ../../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
 msgstr "Ścina drzewa."
+
+#, fuzzy
+#~ msgid "harvest"
+#~ msgstr "Harvest corn (Zbieraj kukurydzę)"
+
+#, fuzzy
+#~ msgid "breed"
+#~ msgstr "Chleb"
+
+#, fuzzy
+#~ msgid "fish"
+#~ msgstr "Ryba"
+
+#, fuzzy
+#~ msgid "hunt"
+#~ msgstr "Myśliwy"
 
 #~ msgid "Toolsmith's Shop"
 #~ msgstr "Warsztat"

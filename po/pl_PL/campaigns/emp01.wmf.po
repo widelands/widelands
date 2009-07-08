@@ -1,15 +1,15 @@
 # Widelands po/pl_PL/campaigns/emp01.wmf.po
 # Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Jacek Wolszczak <shutdownrunner@o2.pl>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4395\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-04-21 19:43+0100\n"
+"POT-Creation-Date: 2009-07-08 20:24+0000\n"
+"PO-Revision-Date: 2009-06-12 15:48+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
-"Language-Team: Polish <LL@li.org>\n"
+"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,7 +30,7 @@ msgstr "Dziennik Lucjusza"
 
 #: ../../../campaigns/emp01.wmf/event:63
 msgid " \"What has become of our Empire? I really ask this question - why did my king forbid me from fighting against that monsterous barbarian tribe, who first acted as a peaceful friend and then attacked my army in the darkest night?<br> With an army of 150 men, I was assigned to patrol on our northern frontier, which lies near the Galdin Mountains in a great, beautiful and ancient forest. Soon, we met a barbarian tribe, which at first was friendly. A few of my men even traded with them and their kids came to us, to admire our clean and tidy uniforms and weapons.<br> But in our fifth night in that region, they attacked us with no reason. I lost dozens of good men, and found myself imprisoned and brought to their chieftain. He spat at me, mocked me and told me to leave this land forever. He did not want new land and did not want our land, but he told me that THIS forest was their land - and would stay theirs until the ghosts take the last man of his folk!<br> Three weeks later, I came back to Fremil to speak with our king. He was furious at the Barbarians, yet disallowed an attack of these tribes. He believed that our army was too weak to survive in a war against the barbarians.<br> Still, I saw no way that I could erase my shame - without fighting against the Barbarians. So I left Fremil by boat to find myself a new world, and a new life, somewhere in the south. Now I am sailing on the perl-gulf with my family, some of my friends and a few of my best warriors.\" "
-msgstr " \"Cóż stało się z naszym Imperium? Ciągle zadaję sobie pytanie, dlaczego mój krój nie pozwala mi walczyć z tym potwornym plemieniem barbarzyńców, którzy najpierw byli przyjaźnie nastawieni, lecz potem zaatakowali mą armię pod osłoną nocy.<br>Otrzymałem zadanie patrolowania północnej granicy w pobliżu gór Galdin w pięknym pradawnym lesie z oddziałem 150 ludzi. Szybko natknęliśmy się na plemię barbarzyńców, które z początku było przyjaźnie nastawione. Kilku z moich ludzi nawet z nimi handlowało, a ich dzieci przychodziły, by podziwiać nasz kunsztowny rynsztunek.<br> Lecz podczas piątej nocy naszego pobytu w tym rejonie zaatakowali nas bez powodu. Straciłem wielu ludzi, a sam zostałem uwięziony, by w końcu trafić przed oblicze wodza. Splunął mi w twarz, drwił i kazał na zawsze opuścić tę krainę. Powiedział mi, że TEN las należy do nich i pozostanie tak dopóki duchy nie przyjdą po duszę ostatniego przedstawiciela jego ludu! Nie pragnął w ogóle innych ziemi.<br>Trzy tygodnie później powróciłem do Fremil, by porozmawiać z królem. Był wściekły na Barbarzyńców, ale nie pozwolił ich zaatakować. Jego zdaniem nasza armia nie byłaby w stanie wygrać wojny z dzikimi ludźmi..<br>Nie widziałem sposobu,  by zmazać mą hańbę, dlatego też opuściłem Fremil i wyruszyłem na południe łodzią, by szukać dla siebie nowego życia, nowego świata. I tak pływam teraz po Perłowej Zatoce wraz z rodziną, grupą przyjaciół i garstką moich najlepszych wojowników.\" "
+msgstr " \"Cóż stało się z naszym Imperium? Ciągle zadaję sobie pytanie, dlaczego mój krój nie pozwala mi walczyć z tym potwornym plemieniem barbarzyńców, którzy najpierw byli przyjaźnie nastawieni, lecz potem zaatakowali mą armię pod osłoną nocy.<br>Otrzymałem zadanie patrolowania północnej granicy w pobliżu gór Galdin w pięknym pradawnym lesie z oddziałem 150 ludzi. Szybko natknęliśmy się na plemię barbarzyńców, które z początku było przyjaźnie nastawione. Kilku z moich ludzi nawet z nimi handlowało, a ich dzieci przychodziły, by podziwiać nasz kunsztowny rynsztunek.<br> Lecz podczas piątej nocy naszego pobytu w tym rejonie zaatakowali nas bez powodu. Straciłem wielu ludzi, a sam zostałem uwięziony, by w końcu trafić przed oblicze wodza. Splunął mi w twarz, drwił i kazał na zawsze opuścić tę krainę. Powiedział mi, że TEN las należy do nich i pozostanie tak dopóki duchy nie przyjdą po duszę ostatniego przedstawiciela jego ludu! Nie pragnął w ogóle innych ziemi.<br>Trzy tygodnie później powróciłem do Fremil, by porozmawiać z królem. Był wściekły na Barbarzyńców, ale nie pozwolił ich zaatakować. Jego zdaniem nasza armia nie byłaby w stanie wygrać wojny z dzikimi ludźmi...<br>Nie widziałem sposobu,  by zmazać mą hańbę, dlatego też opuściłem Fremil i wyruszyłem na południe łodzią, by szukać dla siebie nowego życia, nowego świata. I tak pływam teraz po Perłowej Zatoce wraz z rodziną, grupą przyjaciół i garstką moich najlepszych wojowników.\" "
 
 #: ../../../campaigns/emp01.wmf/event:65
 msgid "A dark night"
@@ -38,7 +38,7 @@ msgstr "Ciemna noc"
 
 #: ../../../campaigns/emp01.wmf/event:78
 msgid " \"It seems as if sailing on the perl-gulf was one of our biggest mistakes. Nature was against us and drove us into a dark, wild storm. I really don't know how many hours have passed since the waves rose higher than our boat, but still it would be suicide to go outside.<br> Our ship is badly damaged and is taking in more and more water. We can thank the Gods if we survive this black night with our lives.\" "
-msgstr " \"Żeglowanie po Perłowej Zatoce okazało się naszą największą pomyłką. Los nam nie sprzyja i pchnął nas w uścisk potężnego sztormu. Nie wiem, ile godzin minęło od czasu gdy fale przewyższyły rozmiarem naszą łódź, ale nadal wyjście na zewnątrz jest samobójstwem. <br> Nasz statek został poważnie uszkodzony i nabiera coraz więcej wody. Tylko bogowie mogą sprawić, że wyjdziemy z tego cali.\" "
+msgstr " \"Żeglowanie po Perłowej Zatoce okazało się naszą największą pomyłką. Los nam nie sprzyja i pchnął nas w uścisk potężnego sztormu. Nie wiem, ile godzin minęło od czasu gdy fale przewyższyły rozmiarem naszą łódź, ale nadal wyjście na zewnątrz jest samobójstwem.<br> Nasz statek został poważnie uszkodzony i nabiera coraz więcej wody. Tylko bogowie mogą sprawić, że wyjdziemy z tego cali.\" "
 
 #: ../../../campaigns/emp01.wmf/event:80
 msgid "The rough sea"
@@ -46,7 +46,7 @@ msgstr "Niespokojne morze"
 
 #: ../../../campaigns/emp01.wmf/event:93
 msgid " \"Finally, the Gods were with us!<br> We landed on an unknown coast and found peaceful rest under the palm trees growing at the strand. But that is about as good as it gets. The truth is:<br> when I woke up this morning, I saw nothing more than sand around us.<br> It really seems as if we landed under the only palm trees existing in this far-away sandy desert. I fear we won't find the help we need to get our ship repaired in good time.\" "
-msgstr " \"Nareszcie bogowie nam sprzyjali. <br> Wylądowaliśmy na nieznanym wybrzeżu i odzyskaliśmy spokojny sen pod palmami rosnącymi na plaży. Jednak to wszystko.<br>Prawda jest taka, że gdy obudziłem się rano, nie zobaczyłem wokół nas nic poza piaskiem.<br> Wydaje się, że naprawdę wylądowaliśmy pod jedynymi palmami rosnącymi na tej odległej piaszczystej pustyni. Obawiam się, że nie znajdziemy pomocy, by na czas naprawić statek.\" "
+msgstr " \"Nareszcie bogowie nam sprzyjali!<br> Wylądowaliśmy na nieznanym wybrzeżu i odzyskaliśmy spokojny sen pod palmami rosnącymi na plaży. Jednak to wszystko.<br>Prawda jest taka, że gdy obudziłem się rano, nie zobaczyłem wokół nas nic poza piaskiem.<br> Wydaje się, że naprawdę wylądowaliśmy pod jedynymi palmami rosnącymi na tej odległej piaszczystej pustyni. Obawiam się, że nie znajdziemy pomocy, by na czas naprawić statek.\" "
 
 #: ../../../campaigns/emp01.wmf/event:95
 msgid "Survivor"
@@ -58,7 +58,7 @@ msgstr "Saledus rozgląda się nerwowo..."
 
 #: ../../../campaigns/emp01.wmf/event:135
 msgid " \"Sire, I fear we are not safe in this foreign land. Who knows what terrible creatures live beyond this forest, in that mighty desert? What if these creatures enter the woods and await the time to attack us?<br> Well, perhaps my fear is misguided, but it can't be wrong to keep watch in the forests - so that we can be sure to see any potential enemies before they can see us.<br> We really should build a barracks in the eastern portion of the forest. Than one of us will keep watch in the darkness and keep us safe from these creatures.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Panie, obawiam się, że nie jesteśmy bezpieczni na tej obcej ziemi.Któż wie co za okrutne stwory mieszkają na wielkiej pustyni za lasem? A co jeśli wejdą do lasu i zaatakują nas przy pierwszej okazji?<br>Być może mój strach jest nieuzasadniony, lecz rozsądnie byłoby postawić straż w lesie, aby wypatrzyć wroga zanim on zrobi to pierwszy.<br> Naprawdę powinniśmy zbudować koszary we wschodniej części lasu. Wówczas jeden z nas będzie czuwał w ciemności i ostrzeże przed podstępnym atakiem tych stworów.<br><br>-- NOWE ZADANIE -- <br> "
+msgstr " \"Panie, obawiam się, że nie jesteśmy bezpieczni na tej obcej ziemi. Któż wie co za okrutne stwory mieszkają na wielkiej pustyni za lasem? A co jeśli wejdą do lasu i zaatakują nas przy pierwszej okazji?<br> Być może mój strach jest nieuzasadniony, lecz rozsądnie byłoby postawić straż w lesie, aby wypatrzyć wroga zanim on zrobi to pierwszy.<br> Naprawdę powinniśmy zbudować koszary we wschodniej części lasu. Wówczas jeden z nas będzie czuwał w ciemności i ostrzeże przed podstępnym atakiem tych stworów.<br><br>-- NOWE CELE -- <br> "
 
 #: ../../../campaigns/emp01.wmf/event:136
 #: ../../../campaigns/emp01.wmf/objective:7
@@ -99,7 +99,7 @@ msgstr "Amalea uśmiecha się..."
 
 #: ../../../campaigns/emp01.wmf/event:174
 msgid " \"Hey Lutius, I just met Saledus outside.<br> He told me about the barracks. Well, I am not one of those girls who think we need more barracks - instead, we might concentrate on other things now.<br> It is absolutely clear that we need wood to repair our ship. So, I walked through the forest yesterday and found a nice place for a lumberjack's house, south of our headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Witaj Lucjuszu, na zewnątrz spotkałam Saledusa. <br> Powiedział mi o koszrach. No cóż... nie jestem jedną z tych dziewczyn, których uważają, że potrzeba nam więcej koszarów. Wydaje mi się, że powinniśmy się skoncentrować na innych sprawach.<br> Bez wątpienia do naprawy statku potrzebujemy drewna. Wczoraj w trakcie spaceru po lesie na południe od naszej kwatery głównej odkryłam wspaniałe miejsce na chatę drwala.\"<br><br>-- NOWE ZADANIE --<br>."
+msgstr " \"Witaj Lucjuszu, na zewnątrz spotkałam Saledusa. <br> Powiedział mi o koszarach. No cóż... nie jestem jedną z tych dziewczyn, których uważają, że potrzeba nam ich więcej. Wydaje mi się, że powinniśmy się skoncentrować na innych sprawach.<br> Bez wątpienia do naprawy statku potrzebujemy drewna. Wczoraj w trakcie spaceru po lesie na południe od naszej kwatery głównej odkryłam wspaniałe miejsce na chatę drwala.\"<br><br>-- NOWE CELE --<br>."
 
 #: ../../../campaigns/emp01.wmf/event:175
 #: ../../../campaigns/emp01.wmf/objective:15
@@ -118,7 +118,7 @@ msgstr "Sugiestia Amalei..."
 
 #: ../../../campaigns/emp01.wmf/event:194
 msgid " \"Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjack's houses, so that we can faster harvest the trunks.<br> But unfortunately the trunks are useless for repairing our ship - we need refined wood, like every ship and every bigger building needs, too. So we should build up a sawmill - as soon as we have enough space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Witaj Lucjuszu! Otrzymałam wiadomość, że pierwszy drwal zaczął dziś pracować. Być może dobrze byłoby poczekać aż oczyści kawałek lasu i dobudować jeszcze dwie chaty drwala, żeby zwiększyć produkcję belek.<br> Niestety same belki nie przydadzą się do naprawy naszego statku. Do tego, oraz budowy większych budynków potrzebujemy drewna. Jak tylko zwolni się miejsce w lesie, musimy wybudować tartak.\"<br><br>-- NOWE ZADANIE --<br> "
+msgstr " \"Witaj Lucjuszu! Otrzymałam wiadomość, że pierwszy drwal zaczął dziś pracować. Być może dobrze byłoby poczekać aż oczyści kawałek lasu i dobudować jeszcze dwie chaty drwala, żeby zwiększyć produkcję belek.<br> Niestety same belki nie przydadzą się do naprawy naszego statku. Do tego, oraz budowy większych budynków potrzebujemy drewna. Jak tylko zwolni się miejsce w lesie, musimy wybudować tartak.\"<br><br>-- NOWE CELE --<br> "
 
 #: ../../../campaigns/emp01.wmf/event:195
 #: ../../../campaigns/emp01.wmf/objective:23
@@ -131,7 +131,7 @@ msgstr "Wchodzi Amalea..."
 
 #: ../../../campaigns/emp01.wmf/event:219
 msgid " \"Hi Lutius, I've got two important things to talk about... First the good news:<br> I saw that the construction of the sawmill is complete, so we can begin to refine the trunks the lumberjacks are harvesting to wood.<br> But that's just about the only positive thing I know to talk about. The bad news is that our lumberjacks harvest at an unbelievable speed. There are almost no trees left on this island.<br> Lutius, these trees provide shelter from the sandstorms from the desert, shade on the hot days and they are the home of so many gentle animals. We shouldn't leave this island a complete desert.<br> Lutius, I beg you: find someone who takes care about planting new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Witaj Lucjuszu! Mam dwie istotne sprawy do omówienia - złą i dobrą wiadomość... Najpierw dobra wiadomość:<br>Zakończono budowę tartaku, a zatem możemy już przerabiać belki na drewno.<br> Niestety nie mam więcej dobrych wiadomości. Zła jest taka, że nasi drwale ścinają drzewa w takim tempie, że już wkrótce zabraknie ich na wyspie.<br> Lucjuszu, te drzewa chronią nas przed burzami piaskowymi z pustyni, zapewniają cień w upalne dni oraz dają schronienie tak wielu zwierzętom. Nie możemy dopuścić, by wyspę w całości pokryła pustynia.<br>Błagam cię, Lucjuszu! Znajdź kogoś, kto zajmie się sadzeniem nowych drzew.\"<br><br>-- NOWE ZADANIE --<br>. "
+msgstr " \"Witaj Lucjuszu! Mam dwie istotne sprawy do omówienia - złą i dobrą wiadomość... Najpierw dobra wiadomość:<br>Zakończono budowę tartaku, a zatem możemy już przerabiać belki na drewno.<br> Niestety nie mam więcej dobrych wiadomości. Zła jest taka, że nasi drwale ścinają drzewa w takim tempie, że już wkrótce zabraknie ich na wyspie.<br> Lucjuszu, te drzewa chronią nas przed burzami piaskowymi z pustyni, zapewniają cień w upalne dni oraz dają schronienie tak wielu zwierzętom. Nie możemy dopuścić, by wyspę w całości pokryła pustynia.<br>Błagam cię, Lucjuszu! Znajdź kogoś, kto zajmie się sadzeniem nowych drzew.\"<br><br>-- NOWE CELE --<br>. "
 
 #: ../../../campaigns/emp01.wmf/event:220
 #: ../../../campaigns/emp01.wmf/objective:31
@@ -144,7 +144,7 @@ msgstr "Saledus zauważa..."
 
 #: ../../../campaigns/emp01.wmf/event:249
 msgid " \"Hey, my good old friend. I just thought about the rocks standing on the south strand of this land. Perhaps we could cut out some useful hard stones and beautiful marble.<br> The repair of our ship will take a few weeks, anyway, and the resources we harvest now might be the base of strong and big buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Witaj stary druhu. Właśnie myślałem o skałach na plaży w południowej części wyspy. Być może udałoby się wyciąć z nich kilka użytecznych kamieni oraz piękny marmur.<br> Naprawa statku i tak potrwa jeszcze kilka tygodni, a surowce, które teraz zgromadzimy, mogą posłużyć nam do budowy dużych i solidnych budowli w innym miejscu.\"<br><br>-- NOWE ZADANIE --<br> "
+msgstr " \"Witaj stary druhu. Właśnie myślałem o skałach na plaży w południowej części wyspy. Być może udałoby się wyciąć z nich kilka użytecznych kamieni oraz piękny marmur.<br> Naprawa statku i tak potrwa jeszcze kilka tygodni, a surowce, które teraz zgromadzimy, mogą posłużyć nam do budowy dużych i solidnych budowli w innym miejscu.\"<br><br>-- NOWE CELE --<br> "
 
 #: ../../../campaigns/emp01.wmf/event:250
 #: ../../../campaigns/emp01.wmf/objective:39
@@ -153,7 +153,7 @@ msgstr "* Zbuduj kamieniołom na południu i wytnij ze skał trochę kamienia i 
 
 #: ../../../campaigns/emp01.wmf/event:252
 msgid "Thinking about the future"
-msgstr "Myślenie o przyszłości"
+msgstr "Myśląc o przyszłości"
 
 #: ../../../campaigns/emp01.wmf/event:272
 msgid "Saledus looks promising..."
@@ -206,6 +206,10 @@ msgstr "Zbuduj leśniczówkę"
 #: ../../../campaigns/emp01.wmf/objective:37
 msgid "Build a quarry"
 msgstr "Zbuduj kamieniołom"
+
+#, fuzzy
+#~ msgid "* Build a barracks at the red point on the east side of the forests, to the right of your headquarters"
+#~ msgstr "* Zbuduj koszary w miejscu oznaczonym na czerwono, we wschodniej części lasu na prawo od kwatery głównej."
 
 #~ msgid "* Build a barracks at the red point in the east of the forest."
 #~ msgstr "* Zbuduj koszary we wschodzniej części lasu oznaczonej na czerwono."
