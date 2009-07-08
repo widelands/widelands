@@ -31,43 +31,17 @@
 namespace Widelands {
 
 const Critter_BobProgram::ParseMap Critter_BobProgram::s_parsemap[] = {
-#if 0
-	{"mine",              &Critter_BobProgram::parse_mine},
-	{"breed",             &Critter_BobProgram::parse_breed},
-	{"createitem",        &Critter_BobProgram::parse_createitem},
-	{"setdescription",    &Critter_BobProgram::parse_setdescription},
-	{"setbobdescription", &Critter_BobProgram::parse_setbobdescription},
-	{"findobject",        &Critter_BobProgram::parse_findobject},
-	{"findspace",         &Critter_BobProgram::parse_findspace},
-	{"walk",              &Critter_BobProgram::parse_walk},
-	{"animation",         &Critter_BobProgram::parse_animation},
-	{"return",            &Critter_BobProgram::parse_return},
-	{"object",            &Critter_BobProgram::parse_object},
-	{"plant",             &Critter_BobProgram::parse_plant},
-	{"create_bob",        &Critter_BobProgram::parse_create_bob},
-	{"removeobject",      &Critter_BobProgram::parse_removeobject},
-	{"geologist",         &Critter_BobProgram::parse_geologist},
-	{"geologist-find",    &Critter_BobProgram::parse_geologist_find},
-#endif
 	{"remove",            &Critter_BobProgram::parse_remove},
 	{0,                   0}
 };
 
 
-/*
-===============
-Critter_BobProgram::parse
-
-Parse a program
-===============
-*/
-void Critter_BobProgram::parse(Parser * parser, char const * const name)
+void Critter_BobProgram::parse(Parser * const parser, char const * const name)
 {
 	Section & program_s = parser->prof->get_safe_section(name);
 
 	for (uint32_t idx = 0;; ++idx) {
-		try
-		{
+		try {
 			char buffer[32];
 
 			snprintf(buffer, sizeof(buffer), "%i", idx);
@@ -257,13 +231,6 @@ Bob::Task Critter_Bob::taskProgram = {
 };
 
 
-/*
-===============
-Critter_Bob::start_task_program
-
-Start the given program.
-===============
-*/
 void Critter_Bob::start_task_program
 	(Game & game, std::string const & programname)
 {
@@ -274,11 +241,6 @@ void Critter_Bob::start_task_program
 }
 
 
-/*
-===============
-Critter_Bob::program_update
-===============
-*/
 void Critter_Bob::program_update(Game & game, State & state)
 {
 	if (get_signal().size()) {
