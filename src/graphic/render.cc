@@ -93,8 +93,6 @@ void Surface::force_disable_alpha() {
 
 /*
 ===============
-Surface::draw_rect
-
 Draws the outline of a rectangle
 ===============
 */
@@ -139,8 +137,6 @@ void Surface::draw_rect(const Rect rc, const RGBColor clr) {
 
 /*
 ===============
-Surface::fill_rect
-
 Draws a filled rectangle
 ===============
 */
@@ -176,8 +172,6 @@ void Surface::fill_rect(const Rect rc, const RGBColor clr) {
 
 /*
 ===============
-Surface::brighten_rect
-
 Change the brightness of the given rectangle
 This function is slow as hell.
 ===============
@@ -218,8 +212,6 @@ void Surface::brighten_rect(const Rect rc, const int32_t factor) {
 
 /*
 ===============
-Surface::clear
-
 Clear the entire bitmap to black
 ===============
 */
@@ -229,8 +221,6 @@ void Surface::clear() {
 
 /*
 ===============
-Surface::blit
-
 Blit this given source bitmap to this bitmap.
 ===============
 */
@@ -681,12 +671,10 @@ AnimationGfx::~AnimationGfx()
 
 /*
 ===============
-AnimationGfx::encode
-
 Encodes the given surface into a frame
 ===============
 */
-void AnimationGfx::encode(uint8_t plr, RGBColor const * plrclrs)
+void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 {
 	assert(m_plrframes[0].size() == m_pcmasks.size());
 	std::vector<Surface *> & frames = m_plrframes[plr];

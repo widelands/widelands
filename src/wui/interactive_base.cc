@@ -242,8 +242,6 @@ void Interactive_Base::update_speedlabel()
 
 /*
 ===============
-Interactive_Base::think
-
 Called once per frame by the UI code
 ===============
 */
@@ -290,8 +288,6 @@ void Interactive_Base::think()
 
 /*
 ===============
-Interactive_Base::draw_overlay
-
 Draw debug overlay when appropriate.
 ===============
 */
@@ -358,8 +354,6 @@ void Interactive_Base::mainview_move(int32_t x, int32_t y)
 
 /*
 ===============
-Interactive_Base::minimap_warp
-
 Called whenever the player clicks on a location on the minimap.
 Warps the main mapview position to the clicked location.
 ===============
@@ -379,8 +373,6 @@ void Interactive_Base::minimap_warp(int32_t x, int32_t y)
 
 /*
 ===============
-Interactive_Base::move_view_to
-
 Move the mainview to the given position (in node coordinates)
 ===============
 */
@@ -400,8 +392,6 @@ void Interactive_Base::move_view_to(const Coords c)
 
 /*
 ===============
-Interactive_Base::move_view_to_point
-
 Center the mainview on the given position (in pixels)
 ===============
 */
@@ -449,8 +439,6 @@ void Interactive_Base::hide_minimap()
 
 /*
 ===============
-Interactive_Base::get_display_flags
-
 Return display flags (dfXXX) that modify the view of the map.
 ===============
 */
@@ -462,8 +450,6 @@ uint32_t Interactive_Base::get_display_flags() const
 
 /*
 ===============
-Interactive_Base::set_display_flags
-
 Change the display flags that modify the view of the map.
 ===============
 */
@@ -477,18 +463,15 @@ void Interactive_Base::set_display_flags(uint32_t flags)
 
 /*
 ===============
-Interactive_Base::get_display_flag
-Interactive_Base::set_display_flag
-
 Get and set one individual flag of the display flags.
 ===============
 */
-bool Interactive_Base::get_display_flag(uint32_t flag)
+bool Interactive_Base::get_display_flag(uint32_t const flag)
 {
 	return m_display_flags & flag;
 }
 
-void Interactive_Base::set_display_flag(uint32_t flag, bool on)
+void Interactive_Base::set_display_flag(uint32_t const flag, bool const on)
 {
 	m_display_flags &= ~flag;
 
@@ -500,8 +483,6 @@ void Interactive_Base::set_display_flag(uint32_t flag, bool on)
 
 /*
 ===============
-Interactive_Base::start_build_road
-
 Begin building a road
 ===============
 */
@@ -529,8 +510,6 @@ void Interactive_Base::start_build_road
 
 /*
 ===============
-Interactive_Base::abort_build_road
-
 Stop building the road
 ===============
 */
@@ -550,8 +529,6 @@ void Interactive_Base::abort_build_road()
 
 /*
 ===============
-Interactive_Base::finish_build_road
-
 Finally build the road
 ===============
 */
@@ -604,8 +581,6 @@ void Interactive_Base::finish_build_road()
 
 /*
 ===============
-Interactive_Base::append_build_road
-
 If field is on the path, remove tail of path.
 Otherwise append if possible or return false.
 ===============
@@ -787,8 +762,6 @@ void Interactive_Base::roadb_add_overlay()
 
 /*
 ===============
-Interactive_Base::roadb_remove_overlay
-
 Remove road building data from road overlay
 ===============
 */
