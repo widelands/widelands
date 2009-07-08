@@ -149,8 +149,9 @@ public:
 
 	void switch_program(Game & game, std::string const & programname);
 
-	const Tribe_Descr * get_owner_tribe() const throw ()
-	{return descr().get_owner_tribe();}
+	Tribe_Descr const * get_owner_tribe() const {
+		return descr().get_owner_tribe();
+	}
 
 protected:
 	Coords                   m_position;

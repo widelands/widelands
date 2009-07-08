@@ -32,13 +32,13 @@ struct Editor_Decrease_Resources_Tool : public Editor_Tool {
 
 	int32_t handle_click_impl
 		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
-	const char * get_sel_impl() const throw ()
-	{return "pics/fsel_editor_decrease_resources.png";}
+	char const * get_sel_impl() const {
+		return "pics/fsel_editor_decrease_resources.png";
+	}
 
 	int32_t get_change_by() const throw () {return m_change_by;}
 	void set_change_by(const int32_t n) throw () {m_change_by = n;}
-	Widelands::Resource_Index get_cur_res() const throw ()
-	{return m_cur_res;}
+	Widelands::Resource_Index get_cur_res() const {return m_cur_res;}
 	void set_cur_res(Widelands::Resource_Index const res) throw () {
 		m_cur_res = res;
 	}

@@ -57,16 +57,9 @@ char const * falseWords[FALSE_WORDS] =
 
 Profile g_options(Profile::err_log);
 
-/*
-==============================================================================
-
-Section::Value
-
-==============================================================================
-*/
-
 Section::Value::Value(const char * const nname, const char * const nval) :
-m_used(false), m_name(strdup(nname)), m_value(strdup(nval)) {}
+	m_used(false), m_name(strdup(nname)), m_value(strdup(nval))
+{}
 
 Section::Value::Value(const Section::Value &o) :
 m_used(o.m_used), m_name(strdup(o.m_name)), m_value(strdup(o.m_value)) {}
@@ -199,11 +192,13 @@ Section::Section(Profile * const prof, const char * const name) :
 m_profile(prof), m_used(false), m_section_name(strdup(name)) {}
 
 Section::Section(const Section & o) :
-m_profile     (o.m_profile),
-m_used        (o.m_used),
-m_section_name(strdup(o.m_section_name)),
-m_values      (o.m_values)
-{assert(this != &o);}
+	m_profile     (o.m_profile),
+	m_used        (o.m_used),
+	m_section_name(strdup(o.m_section_name)),
+	m_values      (o.m_values)
+{
+	assert(this != &o);
+}
 
 Section::~Section() {free(m_section_name);}
 
@@ -559,7 +554,10 @@ const char *Section::get_string(const char *name, const char *def)
 }
 
 Point Section::get_Point(const char * const name, const Point def)
-{const Value * const v = get_val(name); return v ? v->get_Point() : def;}
+{
+	Value const * const v = get_val(name);
+	return v ? v->get_Point() : def;
+}
 
 
 Widelands::Coords Section::get_Coords

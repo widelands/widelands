@@ -87,8 +87,9 @@ struct Graphic {
 	void toggle_fullscreen();
 	void update_fullscreen();
 	void update_rectangle(int32_t x, int32_t y, int32_t w, int32_t h);
-	void update_rectangle(const Rect & rect)
-	{update_rectangle (rect.x, rect.y, rect.w, rect.h);}
+	void update_rectangle(Rect const & rect) {
+		update_rectangle (rect.x, rect.y, rect.w, rect.h);
+	}
 	bool need_update();
 	void refresh(bool force = true);
 

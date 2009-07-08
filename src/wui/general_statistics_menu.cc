@@ -39,13 +39,6 @@ using namespace Widelands;
 #define PLOT_HEIGHT 130
 #define NR_DIFFERENT_DATASETS 11
 
-/*
-===============
-General_Statistics_Menu::General_Statistics_Menu
-
-Create all the buttons etc...
-===============
-*/
 General_Statistics_Menu::General_Statistics_Menu
 	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
 :

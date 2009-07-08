@@ -197,10 +197,18 @@ m_event_chain(chain)
  */
 bool Editor_Event_Menu_Edit_EventChain::handle_mousepress
 	(Uint8 const btn, int32_t, int32_t)
-{if (btn & SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
+{
+	if (btn & SDL_BUTTON_RIGHT) {
+		end_modal(0);
+		return true;
+	}
+	return false;
+}
 bool Editor_Event_Menu_Edit_EventChain::handle_mouserelease
 	(Uint8,           int32_t, int32_t)
-{return false;}
+{
+	return false;
+}
 
 
 /**
@@ -209,7 +217,10 @@ bool Editor_Event_Menu_Edit_EventChain::handle_mouserelease
  * Maybe we have to simulate a click
  */
 void Editor_Event_Menu_Edit_EventChain::think()
-{if (m_edit_trigcond) clicked_edit_trigger_contitional();}
+{
+	if (m_edit_trigcond)
+		clicked_edit_trigger_contitional();
+}
 
 void Editor_Event_Menu_Edit_EventChain::clicked_ok() {
 	m_event_chain.set_name(m_name->text());
@@ -285,7 +296,11 @@ void Editor_Event_Menu_Edit_EventChain::cs_selected(uint32_t) {
  * Listbox got double clicked
  */
 void Editor_Event_Menu_Edit_EventChain::tl_double_clicked(uint32_t)
-{clicked_ins_event();}
+{
+	clicked_ins_event();
+}
 
 void Editor_Event_Menu_Edit_EventChain::cs_double_clicked(uint32_t)
-{clicked_del_event();}
+{
+	clicked_del_event();
+}

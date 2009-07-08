@@ -83,11 +83,6 @@ class MilitarySite
 =============================
 */
 
-/**
-===============
-MilitarySite::MilitarySite
-===============
-*/
 MilitarySite::MilitarySite(const MilitarySite_Descr & ms_descr) :
 ProductionSite(ms_descr),
 m_soldier_request(0),
@@ -187,8 +182,6 @@ void MilitarySite::init(Editor_Game_Base & egbase)
 
 /**
 ===============
-MilitarySite::set_economy
-
 Change the economy for the wares queues.
 Note that the workers are dealt with in the PlayerImmovable code.
 ===============
@@ -293,8 +286,6 @@ void MilitarySite::update_soldier_request()
 
 /*
 ===============
-MilitarySite::act
-
 Advance the program state if applicable.
 ===============
 */

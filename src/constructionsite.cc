@@ -44,11 +44,6 @@ namespace Widelands {
 #define CONSTRUCTIONSITE_STEP_TIME 30000
 
 
-/*
-===============
-ConstructionSite_Descr::ConstructionSite_Descr
-===============
-*/
 ConstructionSite_Descr::ConstructionSite_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
@@ -73,13 +68,6 @@ IMPLEMENTATION
 */
 
 
-/*
-===============
-ConstructionSite::ConstructionSite
-
-Initialize with default values
-===============
-*/
 ConstructionSite::ConstructionSite(const ConstructionSite_Descr & cs_descr) :
 Building         (cs_descr),
 m_building       (0),
@@ -95,8 +83,6 @@ m_work_steps     (0)
 
 /*
 ===============
-ConstructionSite::get_size
-
 Override: construction size is always the same size as the building
 ===============
 */
@@ -145,8 +131,6 @@ void ConstructionSite::log_general_info(Editor_Game_Base const & egbase) {
 
 /*
 ===============
-ConstructionSite::get_playercaps
-
 Override: Even though construction sites cannot be built themselves, you can
 bulldoze them.
 ===============
@@ -162,20 +146,18 @@ uint32_t ConstructionSite::get_playercaps() const throw () {
 
 /*
 ===============
-ConstructionSite::get_ui_anim
-
 Return the animation for the building that is in construction, as this
 should be more useful to the player.
 ===============
 */
 uint32_t ConstructionSite::get_ui_anim() const
-{return building().get_animation("idle");}
+{
+	return building().get_animation("idle");
+}
 
 
 /*
 ===============
-ConstructionSite::get_statistics_string
-
 Print completion percentage.
 ===============
 */
@@ -256,8 +238,6 @@ void ConstructionSite::set_previous_building
 
 /*
 ===============
-ConstructionSite::set_economy
-
 Change the economy for the wares queues.
 Note that the workers are dealt with in the PlayerImmovable code.
 ===============
@@ -316,8 +296,6 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 
 /*
 ===============
-ConstructionSite::cleanup
-
 Release worker and material (if any is left).
 If construction was finished successfully, place the building at our position.
 ===============
@@ -350,8 +328,6 @@ void ConstructionSite::cleanup(Editor_Game_Base & egbase)
 
 /*
 ===============
-ConstructionSite::burn_on_destroy
-
 Construction sites only burn if some of the work has been completed.
 ===============
 */
@@ -366,8 +342,6 @@ bool ConstructionSite::burn_on_destroy()
 
 /*
 ===============
-ConstructionSite::request_builder
-
 Issue a request for the builder.
 ===============
 */
@@ -410,8 +384,6 @@ void ConstructionSite::request_builder_callback
 
 /*
 ===============
-ConstructionSite::fetch_from_flag
-
 Remember the item on the flag. The worker will be sent from get_building_work().
 ===============
 */
@@ -514,8 +486,6 @@ void ConstructionSite::wares_queue_callback
 
 /*
 ===============
-ConstructionSite::draw
-
 Draw the construction site.
 ===============
 */

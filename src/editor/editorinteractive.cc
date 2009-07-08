@@ -190,7 +190,9 @@ void Editor_Interactive::load(std::string const & filename) {
 
 /// Called just before the editor starts, after postload, init and gfxload.
 void Editor_Interactive::start()
-{egbase().map().overlay_manager().show_buildhelp(true);}
+{
+	egbase().map().overlay_manager().show_buildhelp(true);
+}
 
 
 /**
@@ -284,7 +286,9 @@ void Editor_Interactive::set_sel_pos(Widelands::Node_and_Triangle<> const sel)
 
 
 void Editor_Interactive::toggle_buildhelp()
-{egbase().map().overlay_manager().toggle_buildhelp();}
+{
+	egbase().map().overlay_manager().toggle_buildhelp();
+}
 
 
 void Editor_Interactive::tool_menu_btn() {

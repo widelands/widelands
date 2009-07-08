@@ -45,13 +45,7 @@
 #include <cstring>
 #include <string>
 
-/*
-===============
-Main_Menu_Save_Map::Main_Menu_Save_Map
 
-Create all the buttons etc...
-===============
-*/
 Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive *parent)
 :
 UI::Window(parent, 0, 0, 500, 330, _("Save Map")),

@@ -59,12 +59,11 @@ private:
 			((get_inner_w() * 1.45 - (nr_buttons + 3) * hspacing()) / nr_buttons);
 	}
 
-	/**
-	 * Returns the x coordinate of the (left edge of) button number nr in a row
-	 * with nr_buttons buttons.
-	 */
-	uint32_t posx(const uint32_t nr, const uint32_t nr_buttons) const
-	{return hmargin() + nr * (buttonw(nr_buttons) + hspacing());}
+	/// Returns the x coordinate of the (left edge of) button number nr in a row
+	/// with nr_buttons buttons.
+	uint32_t posx(uint32_t const nr, uint32_t const nr_buttons) const {
+		return hmargin() + nr * (buttonw(nr_buttons) + hspacing());
+	}
 
 	void clicked_readme   ();
 	void clicked_license  ();

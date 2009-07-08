@@ -36,8 +36,9 @@ struct MiniMap : public UI::UniqueWindow {
 
 	UI::Signal2<int32_t, int32_t> warpview;
 
-	void set_view_pos(const int32_t x, const int32_t y) throw ()
-	{m_view.set_view_pos(x, y);}
+	void set_view_pos(int32_t const x, int32_t const y) {
+		m_view.set_view_pos(x, y);
+	}
 
 	enum Layers {Terrn = 1, Owner = 2, Flags = 4, Roads = 8, Bldns = 16};
 
@@ -74,10 +75,10 @@ private:
 		int8_t * m_flags;
 	};
 
-	uint32_t number_of_buttons_per_row() const throw ();
-	uint32_t number_of_button_rows    () const throw ();
-	uint32_t but_w                    () const throw ();
-	uint32_t but_h                    () const throw ();
+	uint32_t number_of_buttons_per_row() const;
+	uint32_t number_of_button_rows    () const;
+	uint32_t but_w                    () const;
+	uint32_t but_h                    () const;
 
 	View     m_view;
 	UI::Callback_IDButton<MiniMap, Layers> button_terrn;

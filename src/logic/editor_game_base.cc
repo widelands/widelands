@@ -186,8 +186,6 @@ void Editor_Game_Base::unconquer_area
 
 /*
 ===============
-Editor_Game_Base::conquer_area
-
 This conquers a given area because of a new (military) building
 that is set there.
 ===============
@@ -351,8 +349,6 @@ void Editor_Game_Base::do_conquer_area
 
 /*
 ===============
-Editor_Game_Base::cleanup_playerimmovables_area
-
 Make sure that buildings cannot exist outside their owner's territory.
 ===============
 */
@@ -407,8 +403,6 @@ void Editor_Game_Base::remove_player(const Player_Number plnum) {
 
 /*
 ===============
-Editor_Game_Base::add_player
-
 Create the player structure for the given plnum.
 Note that AI player structures and the Interactive_Player are created when
 the game starts. Similar for remote players.
@@ -490,8 +484,6 @@ void Editor_Game_Base::inform_players_about_immovable
 
 /*
 ===============
-Editor_Game_Base::set_map
-
 Replaces the current map with the given one. Ownership of the map is transferred
 to the Editor_Game_Base object.
 ===============
@@ -516,8 +508,6 @@ void Editor_Game_Base::allocate_player_maps() {
 
 /*
 ===============
-Editor_Game_Base::postload
-
 Load and prepare detailled game data.
 This happens once just after the host has started the game and before the
 graphics are loaded.
@@ -556,8 +546,6 @@ void Editor_Game_Base::postload()
 
 /*
 ===============
-Editor_Game_Base::load_graphics
-
 Load all graphics.
 This function needs to be called once at startup when the graphics system
 is ready.
@@ -581,8 +569,6 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui) {
 
 /*
 ===============
-Editor_Game_Base::warp_building
-
 Instantly create a building at the given x/y location. There is no build time.
 
 owner is the player number of the building's owner.
@@ -731,8 +717,6 @@ void * Editor_Game_Base::get_trackpointer(uint32_t const serial)
 
 /*
 ===============
-Editor_Game_Base::remove_trackpointer
-
 Remove the registered track pointer. Subsequent calls to get_trackpointer()
 using this serial number will return 0.
 ===============

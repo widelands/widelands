@@ -79,13 +79,6 @@ private:
 };
 
 
-/*
-===============
-BuildGrid::BuildGrid
-
-Initialize the grid
-===============
-*/
 BuildGrid::BuildGrid
 	(UI::Panel                    * parent,
 	 Widelands::Tribe_Descr const & tribe,
@@ -104,8 +97,6 @@ BuildGrid::BuildGrid
 
 /*
 ===============
-BuildGrid::add
-
 Add a new building to the list of buildable buildings
 ===============
 */
@@ -276,8 +267,6 @@ static char const * const pic_attack         = "pics/menu_attack.png";
 
 /*
 ===============
-FieldActionWindow::FieldActionWindow
-
 Initialize a field action window, creating the appropriate buttons.
 ===============
 */
@@ -329,8 +318,6 @@ void FieldActionWindow::think() {
 
 /*
 ===============
-FieldActionWindow::init
-
 Initialize after buttons have been registered.
 This mainly deals with mouse placement
 ===============
@@ -368,8 +355,6 @@ void FieldActionWindow::init()
 
 /*
 ===============
-FieldActionWindow::add_buttons_auto
-
 Add the buttons you normally get when clicking on a field.
 ===============
 */
@@ -541,8 +526,6 @@ void FieldActionWindow::add_buttons_attack ()
 
 /*
 ===============
-FieldActionWindow::add_buttons_build
-
 Add buttons for house building.
 ===============
 */
@@ -816,8 +799,6 @@ void FieldActionWindow::act_abort_buildroad()
 
 /*
 ===============
-FieldActionWindow::act_removeroad
-
 Remove the road at the given field
 ===============
 */
@@ -915,8 +896,6 @@ void FieldActionWindow::building_icon_mouse_in
 
 /*
 ===============
-FieldActionWindow::act_geologist
-
 Call a geologist on this flag.
 ===============
 */

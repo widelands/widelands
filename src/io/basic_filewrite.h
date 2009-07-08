@@ -59,8 +59,9 @@ template <typename Base> struct basic_FileWrite : public Base {
 	/// Write the file out to disk. If successful, this clears the buffers.
 	/// Otherwise, an exception is thrown but the buffer remains intact (don't
 	/// worry, it will be cleared by the destructor).
-	void Write(FileSystem & fs, const char * const filename)
-	{fs.Write(filename, data, filelength); Clear();}
+	void Write(FileSystem & fs, char const * const filename) {
+		fs.Write(filename, data, filelength); Clear();
+	}
 
 	/// Get the position that will be written to in the next write operation that
 	/// does not specify a position.
@@ -93,8 +94,9 @@ template <typename Base> struct basic_FileWrite : public Base {
 		memcpy(data + i, src, size);
 	}
 
-	void Data(void const * const src, size_t const size)
-	{Data(src, size, Pos::Null());}
+	void Data(void const * const src, size_t const size) {
+		Data(src, size, Pos::Null());
+	}
 
 private:
 	char * data;

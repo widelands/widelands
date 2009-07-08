@@ -241,8 +241,6 @@ m_toggle_help
 
 /*
 ===============
-Interactive_Player::start
-
 Called just before the game starts, after postload, init and gfxload
 ===============
 */

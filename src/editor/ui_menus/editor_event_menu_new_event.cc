@@ -113,10 +113,18 @@ Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event
  */
 bool Editor_Event_Menu_New_Event::handle_mousepress
 	(Uint8 const btn, int32_t, int32_t)
-{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
+{
+	if (btn == SDL_BUTTON_RIGHT) {
+		end_modal(0);
+		return true;
+	}
+	return false;
+}
 bool Editor_Event_Menu_New_Event::handle_mouserelease
 	(Uint8,           int32_t, int32_t)
-{return false;}
+{
+	return false;
+}
 
 /**
  * A button has been clicked

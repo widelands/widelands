@@ -47,11 +47,6 @@ namespace Widelands {
 
 extern Map_Object_Descr g_road_descr;
 
-//
-//
-// class Player
-//
-//
 Player::Player
 	(Editor_Game_Base  & the_egbase,
 	 Player_Number         const plnum,
@@ -130,8 +125,6 @@ void Player::allocate_map()
 
 /*
 ===============
-Player::get_buildcaps
-
 Return filtered buildcaps that take the player's territory into account.
 ===============
 */
@@ -168,8 +161,6 @@ FieldCaps Player::get_buildcaps(const FCoords fc) const {
 
 /*
 ===============
-Player::build_flag
-
 Build a flag, checking that it's legal to do so.
 ===============
 */
@@ -204,8 +195,6 @@ Flag & Player::force_flag(FCoords const c) {
 
 /*
 ===============
-Player::build_road
-
 Build a road along the given path.
 Perform sanity checks (ownership, flags).
 
@@ -312,8 +301,6 @@ void Player::force_building
 
 /*
 ===============
-Player::build
-
 Place a construction site, checking that it's legal to do so.
 ===============
 */
@@ -350,8 +337,6 @@ void Player::build(Coords c, Building_Index const idx)
 
 /*
 ===============
-Player::bulldoze
-
 Bulldoze the given road, flag or building.
 ===============
 */

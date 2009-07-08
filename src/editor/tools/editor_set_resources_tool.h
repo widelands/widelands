@@ -31,8 +31,9 @@ struct Editor_Set_Resources_Tool : public Editor_Tool {
 
 	int32_t handle_click_impl
 		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
-	const char * get_sel_impl() const throw ()
-	{return "pics/fsel_editor_set_resources.png";}
+	char const * get_sel_impl() const {
+		return "pics/fsel_editor_set_resources.png";
+	}
 
 	uint8_t get_set_to() const throw () {return m_set_to;}
 	void set_set_to(uint8_t const n) throw () {m_set_to = n;}

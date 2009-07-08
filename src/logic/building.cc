@@ -47,13 +47,6 @@ namespace Widelands {
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
 
-/*
-===============
-Building_Descr::Building_Descr
-
-Initialize with sane defaults
-===============
-*/
 Building_Descr::Building_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
@@ -240,8 +233,6 @@ uint32_t Building_Descr::vision_range() const throw ()
 
 /*
 ===============
-Building_Descr::load_graphics
-
 Called whenever building graphics need to be loaded.
 ===============
 */
@@ -316,8 +307,6 @@ Flag & Building::base_flag()
 
 /*
 ===============
-Building::get_playercaps
-
 Return a bitfield of commands the owning player can issue for this building.
 The bits are (1 << PCap_XXX).
 By default, all buildable buildings can be bulldozed.
@@ -336,13 +325,6 @@ uint32_t Building::get_playercaps() const throw () {
 std::string const & Building::name() const throw () {return descr().name();}
 
 
-/*
-===============
-Building::start_animation
-
-Start the given animation
-===============
-*/
 void Building::start_animation(Editor_Game_Base & egbase, uint32_t const anim)
 {
 	m_anim = anim;
@@ -351,8 +333,6 @@ void Building::start_animation(Editor_Game_Base & egbase, uint32_t const anim)
 
 /*
 ===============
-Building::init
-
 Common building initialization code. You must call this from
 derived class' init.
 ===============
@@ -396,13 +376,7 @@ void Building::init(Editor_Game_Base & egbase)
 	m_leave_time = egbase.get_gametime();
 }
 
-/*
-===============
-Building::cleanup
 
-Cleanup the building
-===============
-*/
 void Building::cleanup(Editor_Game_Base & egbase)
 {
 	if (m_defeating_player) {
@@ -456,8 +430,6 @@ bool Building::burn_on_destroy()
 
 /*
 ===============
-Building::destroy
-
 Remove the building from the world now, and create a fire in its place if
 applicable.
 ===============
@@ -640,8 +612,6 @@ void Building::leave_skip(Game &, Worker & w)
 
 /*
 ===============
-Building::act
-
 Advance the leave queue.
 ===============
 */
@@ -701,8 +671,6 @@ bool Building::fetch_from_flag(Game &)
 
 /*
 ===============
-Building::draw
-
 Draw the building.
 ===============
 */
@@ -726,8 +694,6 @@ void Building::draw
 
 /*
 ===============
-Building::draw_help
-
 Draw overlay help strings when enabled.
 ===============
 */

@@ -55,13 +55,6 @@ private:
 };
 
 
-/*
-===============
-MapObjectDebugPanel::MapObjectDebugPanel
-
-Initialize logging.
-===============
-*/
 MapObjectDebugPanel::MapObjectDebugPanel
 	(UI::Panel                   & parent,
 	 Widelands::Editor_Game_Base const & egbase,
@@ -77,11 +70,6 @@ m_log    (this, 0, 0, 280, 150, "")
 }
 
 
-/*
-===============
-Unregister logger.
-===============
-*/
 MapObjectDebugPanel::~MapObjectDebugPanel()
 {
 	if (Widelands::Map_Object * const obj = m_object.get(m_egbase))
@@ -92,8 +80,6 @@ MapObjectDebugPanel::~MapObjectDebugPanel()
 
 /*
 ===============
-MapObjectDebugPanel::log
-
 Append the string to the log textarea.
 ===============
 */
@@ -153,14 +139,6 @@ private:
 };
 
 
-
-/*
-===============
-MapObjectDebugWindow::MapObjectDebugWindow
-
-Create the window
-===============
-*/
 MapObjectDebugWindow::MapObjectDebugWindow
 	(Interactive_Base & parent, Widelands::Map_Object & obj)
 	:
@@ -188,8 +166,6 @@ MapObjectDebugWindow::MapObjectDebugWindow
 
 /*
 ===============
-MapObjectDebugWindow::think
-
 Remove self when the object disappears.
 ===============
 */
@@ -256,13 +232,6 @@ private:
 };
 
 
-/*
-===============
-FieldDebugWindow::FieldDebugWindow
-
-Initialize the field debug window.
-===============
-*/
 FieldDebugWindow::FieldDebugWindow
 	(Interactive_Base & parent, Widelands::Coords const coords)
 :
@@ -409,8 +378,6 @@ void FieldDebugWindow::think()
 
 /*
 ===============
-FieldDebugWindow::open_immovable
-
 Open the debug window for the immovable on our position.
 ===============
 */
@@ -423,8 +390,6 @@ void FieldDebugWindow::open_immovable()
 
 /*
 ===============
-FieldDebugWindow::open_bob
-
 Open the bob debug window for the bob of the given index in the list
 ===============
 */

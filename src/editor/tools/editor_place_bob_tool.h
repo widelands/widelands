@@ -31,8 +31,7 @@ struct Editor_Place_Bob_Tool : public Editor_Tool, public MultiSelect {
 
 	int32_t handle_click_impl
 		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
-	const char * get_sel_impl() const throw ()
-	{return "pics/fsel_editor_place_bob.png";}
+	char const * get_sel_impl() const {return "pics/fsel_editor_place_bob.png";}
 };
 
 #endif

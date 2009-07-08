@@ -41,10 +41,12 @@ struct Point {
 		return not (*this == other);
 	}
 
-	Point   operator+  (Point const other) const
-		{return Point(x + other.x, y + other.y);}
-	Point   operator-  (Point const other) const
-		{return Point(x - other.x, y - other.y);}
+	Point   operator+  (Point const other) const {
+		return Point(x + other.x, y + other.y);
+	}
+	Point   operator-  (Point const other) const {
+		return Point(x - other.x, y - other.y);
+	}
 	Point & operator+= (Point const other) {
 		x += other.x;
 		y += other.y;

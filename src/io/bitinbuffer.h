@@ -32,8 +32,9 @@
 template<uint8_t const Size> struct BitInBuffer {
 	compile_assert(Size == 1 or Size == 2 or Size == 4);
 	BitInBuffer() : mask(0x00) {}
-	void Open(FileSystem & fs, const char * const filename)
-	{fr.Open(fs, filename);}
+	void Open(FileSystem & fs, char const * const filename) {
+		fr.Open(fs, filename);
+	}
 	size_t GetSize() const throw () {return fr.GetSize  ();}
 	bool EndOfFile() const throw () {return fr.EndOfFile();}
 	size_t GetPos () const throw () {return fr.GetPos   ();}

@@ -61,7 +61,9 @@ void Map_Elemental_Data_Packet::Read
 	 bool,
 	 Map_Map_Object_Loader * const)
 throw (_wexception)
-{Pre_Read(fs, &egbase.map());}
+{
+	Pre_Read(fs, &egbase.map());
+}
 
 
 void Map_Elemental_Data_Packet::Write

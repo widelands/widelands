@@ -129,9 +129,17 @@ m_te      (te)
  * We are not draggable.
  */
 bool Edit_Objective_Window::handle_mousepress(const Uint8 btn, int32_t, int32_t)
-{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
+{
+	if (btn == SDL_BUTTON_RIGHT) {
+		end_modal(0);
+		return true;
+	}
+	return false;
+}
 bool Edit_Objective_Window::handle_mouserelease(const Uint8, int32_t, int32_t)
-{return false;}
+{
+	return false;
+}
 
 /**
  * A button has been clicked

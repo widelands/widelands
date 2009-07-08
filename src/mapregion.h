@@ -41,17 +41,14 @@ template <typename Area_type = Area<> > struct MapRegion {
 		m_left = m_area;
 	}
 
-	const typename Area_type::Coords_type & location() const throw ()
-	{return m_area;}
+	typename Area_type::Coords_type const & location() const {return m_area;}
 
-	/**
-	 * Moves on to the next location. The return value indicates whether the new
-	 * location has not yet been reached during this iteration. Note that when
-	 * the area is so large that it overlaps itself because of wrapping, the same
-	 * location may be reached several times during an iteration, while advance
-	 * keeps returning true. When finally advance returns false, it means that
-	 * the iteration is done.
-	 */
+	/// Moves on to the next location. The return value indicates whether the
+	/// new location has not yet been reached during this iteration. Note that
+	/// when the area is so large that it overlaps itself because of wrapping,
+	/// the same location may be reached several times during an iteration,
+	/// while advance keeps returning true. When finally advance returns false,
+	/// it means that the iteration is done.
 	bool advance(const Map & map) throw () {
 		if (--m_remaining_in_row)
 			map.get_rn(m_area, &m_area);
@@ -65,8 +62,7 @@ template <typename Area_type = Area<> > struct MapRegion {
 		return true;
 	}
 
-	typename Area_type::Radius_type radius() const throw ()
-	{return m_area.radius;}
+	typename Area_type::Radius_type radius() const {return m_area.radius;}
 private:
 	Area_type                       m_area;
 	typename Area_type::Coords_type m_left;

@@ -41,7 +41,6 @@ struct Main_Menu_New_Random_Map : public UI::Window {
 	Main_Menu_New_Random_Map(Editor_Interactive *);
 
 private:
-	Editor_Interactive * m_parent;
 	UI::Textarea * m_width, * m_height;
 	UI::Textarea * m_land, * m_water, * m_mountains, * m_wasteland;
 	UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t> * m_world;

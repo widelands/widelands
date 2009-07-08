@@ -91,16 +91,20 @@ struct Panel : public Object {
 
 	virtual bool is_snap_target() const {return false;}
 	uint16_t get_border_snap_distance() const {return _border_snap_distance;}
-	void set_border_snap_distance(const uint8_t value)
-		{_border_snap_distance = value;}
+	void set_border_snap_distance(uint8_t const value) {
+		_border_snap_distance = value;
+	}
 	uint8_t get_panel_snap_distance () const {return _panel_snap_distance;}
-	void set_panel_snap_distance(const uint8_t value)
-		{_panel_snap_distance = value;}
-	bool get_snap_windows_only_when_overlapping() const
-		{return _flags & pf_snap_windows_only_when_overlapping;}
+	void set_panel_snap_distance(uint8_t const value) {
+		_panel_snap_distance = value;
+	}
+	bool get_snap_windows_only_when_overlapping() const {
+		return _flags & pf_snap_windows_only_when_overlapping;
+	}
 	void set_snap_windows_only_when_overlapping(const bool on = true);
-	bool get_dock_windows_to_edges() const
-		{return _flags & pf_dock_windows_to_edges;}
+	bool get_dock_windows_to_edges() const {
+		return _flags & pf_dock_windows_to_edges;
+	}
 	void set_dock_windows_to_edges(const bool on = true);
 	void set_inner_size(uint32_t nw, uint32_t nh);
 	void fit_inner(Panel & inner);
@@ -170,27 +174,27 @@ struct Panel : public Object {
 	bool get_key_state(SDLKey) const;
 
 	void set_handle_mouse(bool yes);
-	bool get_handle_mouse() const
-		{return (_flags & pf_handle_mouse) ? true : false;}
+	bool get_handle_mouse() const {return _flags & pf_handle_mouse;}
 	void grab_mouse(bool grab);
 
 	void set_can_focus(bool yes);
-	bool get_can_focus() const {return (_flags & pf_can_focus) ? true : false;}
-	bool has_focus() const
-		{assert(get_can_focus()); return (_parent->_focus == this);}
+	bool get_can_focus() const {return _flags & pf_can_focus;}
+	bool has_focus() const {
+		assert(get_can_focus());
+		return (_parent->_focus == this);
+	}
 	void focus();
 
 	void set_think(bool yes);
-	bool get_think() const {return (_flags & pf_think) ? true : false;}
+	bool get_think() const {return _flags & pf_think;}
 
-	void set_top_on_click(bool on) {
+	void set_top_on_click(bool const on) {
 		if (on)
 			_flags |= pf_top_on_click;
 		else
 			_flags &= ~pf_top_on_click;
 	}
-	bool get_top_on_click()
-		const {return (_flags & pf_top_on_click) ? true : false;}
+	bool get_top_on_click() const {return _flags & pf_top_on_click;}
 
 protected:
 	void die();

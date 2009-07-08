@@ -255,10 +255,18 @@ Editor_Event_Menu_Edit_TriggerConditional
  */
 bool Editor_Event_Menu_Edit_TriggerConditional::handle_mousepress
 	(Uint8 const btn, int32_t, int32_t)
-{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
+{
+	if (btn == SDL_BUTTON_RIGHT) {
+		end_modal(0);
+		return true;
+	}
+	return false;
+}
 bool Editor_Event_Menu_Edit_TriggerConditional::handle_mouserelease
 	(Uint8,           int32_t, int32_t)
-{return false;}
+{
+	return false;
+}
 
 
 void Editor_Event_Menu_Edit_TriggerConditional::clicked_ok() {
@@ -353,6 +361,10 @@ void Editor_Event_Menu_Edit_TriggerConditional::cs_selected(uint32_t const i) {
  * Listbox got double clicked
  */
 void Editor_Event_Menu_Edit_TriggerConditional::tl_double_clicked(uint32_t)
-{clicked_ins_trigger();}
+{
+	clicked_ins_trigger();
+}
 void Editor_Event_Menu_Edit_TriggerConditional::cs_double_clicked(uint32_t)
-{clicked_del_trigger();}
+{
+	clicked_del_trigger();
+}

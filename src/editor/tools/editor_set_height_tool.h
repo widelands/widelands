@@ -32,14 +32,16 @@ struct Editor_Set_Height_Tool : public Editor_Tool {
 
 	int32_t handle_click_impl
 		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
-	const char * get_sel_impl() const throw ()
-	{return "pics/fsel_editor_set_height.png";}
+	char const * get_sel_impl() const {
+		return "pics/fsel_editor_set_height.png";
+	}
 
 	interval<Widelands::Field::Height> get_interval() const throw () {
 		return m_interval;
 	}
-	void set_interval(const interval<Widelands::Field::Height> i) throw ()
-	{m_interval = i;}
+	void set_interval(interval<Widelands::Field::Height> const i) {
+		m_interval = i;
+	}
 
 private:
 	interval<Widelands::Field::Height> m_interval;

@@ -30,7 +30,7 @@ struct Editor_Set_Origin_Tool : public Editor_Tool {
 
 	int32_t handle_click_impl
 		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
-	char const * get_sel_impl() const throw () {return "pics/fsel.png";}
+	char const * get_sel_impl() const {return "pics/fsel.png";}
 };
 
 #endif

@@ -69,9 +69,9 @@ public:
 
 	PictureID icon() const throw () {return m_icon;}
 	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
-	const DirAnimations & get_right_walk_anims(const bool carries_ware)
-		const throw ()
-	{return carries_ware ? m_walkload_anims : m_walk_anims;}
+	DirAnimations const & get_right_walk_anims(bool const carries_ware) const {
+		return carries_ware ? m_walkload_anims : m_walk_anims;
+	}
 	WorkerProgram const * get_program(std::string const &) const;
 
 	virtual Worker_Type get_worker_type() const {return NORMAL;}

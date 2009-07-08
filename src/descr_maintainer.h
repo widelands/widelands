@@ -31,8 +31,9 @@ template <typename T> struct Descr_Maintainer {
 	Descr_Maintainer() : capacity(0), nitems(0), items(0) {}
 	~Descr_Maintainer();
 
-	static typename T::Index invalid_index()
-	{return std::numeric_limits<typename T::Index>::max();}
+	static typename T::Index invalid_index() {
+		return std::numeric_limits<typename T::Index>::max();
+	}
 
 	T * exists(char const * name);
 	int32_t add(T *);

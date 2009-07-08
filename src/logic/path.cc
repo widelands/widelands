@@ -26,23 +26,14 @@
 
 namespace Widelands {
 
-/*
-===============
-Path::Path
-
-Initialize a Path from a CoordPath
-===============
-*/
-Path::Path(CoordPath & o) :
-m_start(o.get_start()),
-m_end  (o.get_end()),
-m_path (o.steps())
-{std::reverse(m_path.begin(), m_path.end());} //  Path stores in reversed order!
+Path::Path(CoordPath & o)
+	: m_start(o.get_start()), m_end(o.get_end()), m_path(o.steps())
+{
+	std::reverse(m_path.begin(), m_path.end()); //  path stored in reverse order
+}
 
 /*
 ===============
-Path::reverse
-
 Change the path so that it goes in the opposite direction
 ===============
 */
@@ -57,8 +48,6 @@ void Path::reverse()
 
 /*
 ===============
-Path::append
-
 Add the given step at the end of the path.
 ===============
 */
@@ -70,8 +59,6 @@ void Path::append(const Map & map, const Direction dir) {
 
 /*
 ===============
-CoordPath::CoordPath
-
 Initialize from a path, calculating the coordinates as needed
 ===============
 */
@@ -108,8 +95,6 @@ int32_t CoordPath::get_index(Coords const c) const
 
 /*
 ===============
-CoordPath::reverse
-
 Reverse the direction of the path.
 ===============
 */
@@ -125,8 +110,6 @@ void CoordPath::reverse()
 
 /*
 ===============
-CoordPath::truncate
-
 Truncate the path after the given number of steps
 ===============
 */
@@ -139,8 +122,6 @@ void CoordPath::truncate(const std::vector<char>::size_type after) {
 
 /*
 ===============
-CoordPath::starttrim
-
 Opposite of truncate: remove the first n steps of the path.
 ===============
 */
@@ -153,8 +134,6 @@ void CoordPath::starttrim(const std::vector<char>::size_type before) {
 
 /*
 ===============
-CoordPath::append
-
 Append the given path. Automatically created the necessary coordinates.
 ===============
 */
@@ -175,8 +154,6 @@ void CoordPath::append(const Map & map, const Path & tail) {
 
 /*
 ===============
-CoordPath::append
-
 Append the given path.
 ===============
 */

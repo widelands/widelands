@@ -155,7 +155,9 @@ bool Statebox::handle_mousepress(const Uint8 btn, int32_t, int32_t) {
 		return false;
 }
 bool Statebox::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
-{return btn == SDL_BUTTON_LEFT;}
+{
+	return btn == SDL_BUTTON_LEFT;
+}
 
 
 /**

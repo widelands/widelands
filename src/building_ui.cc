@@ -101,8 +101,6 @@ Building UI IMPLEMENTATION
 
 /*
 ===============
-Building::show_options
-
 Create the building's options window if necessary.
 ===============
 */
@@ -116,8 +114,6 @@ void Building::show_options(Interactive_Player * const plr)
 
 /*
 ===============
-Building::hide_options
-
 Force the destruction of the options window.
 ===============
 */
@@ -520,13 +516,6 @@ private:
 };
 
 
-/*
-===============
-Building_Window::Building_Window
-
-Create the window, add it to the registry.
-===============
-*/
 Building_Window::Building_Window
 	(Interactive_Player * const parent,
 	 Building           * const b,
@@ -729,8 +718,6 @@ void Building_Window::setup_capsbuttons()
 
 /*
 ===============
-Building_Window::act_bulldoze
-
 Callback for bulldozing request
 ===============
 */
@@ -881,13 +868,6 @@ private:
 };
 
 
-/*
-===============
-ConstructionSite_Window::ConstructionSite_Window
-
-Create the window and its panels
-===============
-*/
 ConstructionSite_Window::ConstructionSite_Window
 	(Interactive_Player          * const parent,
 	 Widelands::ConstructionSite * const cs,
@@ -1129,9 +1109,7 @@ private:
 	UI::Textarea * m_type, * m_experience, * m_becomes;
 };
 
-/*
- * Constructor
- */
+
 ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow
 	(Interactive_Player * const parent, ProductionSite * const ps)
 	:

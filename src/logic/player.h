@@ -360,11 +360,13 @@ struct Player :
 		m_view_changed = true;
 	}
 
-	Military_Influence military_influence(Map_Index const i) const throw ()
-	{return m_fields[i].military_influence;}
+	Military_Influence military_influence(Map_Index const i) const {
+		return m_fields[i].military_influence;
+	}
 
-	Military_Influence & military_influence(Map_Index const i) throw ()
-	{return m_fields[i].military_influence;}
+	Military_Influence & military_influence(Map_Index const i) {
+		return m_fields[i].military_influence;
+	}
 
 	// Allowed buildings
 	bool is_building_allowed(Building_Index const i) const throw () {

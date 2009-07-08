@@ -32,67 +32,67 @@ GameOptionsMenu::GameOptionsMenu
 	 UI::UniqueWindow::Registry                   & registry,
 	 Interactive_GameBase::Game_Main_Menu_Windows & windows)
 :
-UI::UniqueWindow
-	(&gb, &registry,
-	 102,
-	 vmargin()
-	 + 4 * (20 + vspacing()) + 2 * vgap() +
-	 35 + vspacing() + 35 +
-	 vmargin(),
-	 _("Options")),
-m_gb(gb),
-m_windows(windows),
-readme
-	(this,
-	 posx(0, 1),
-	 vmargin() + 0 * (20 + vspacing()) + 0 * vgap(),
-	 buttonw(1), 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 &GameOptionsMenu::clicked_readme, *this,
-	 _("README")),
-license
-	(this,
-	 posx(0, 1),
-	 vmargin() + 1 * (20 + vspacing()) + 0 * vgap(),
-	 buttonw(1), 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 &GameOptionsMenu::clicked_license, *this,
-	 _("License")),
-authors
-	(this,
-	 posx(0, 1),
-	 vmargin() + 2 * (20 + vspacing()) + 0 * vgap(),
-	 buttonw(1), 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 &GameOptionsMenu::clicked_authors, *this,
-	 _("Authors")),
-sound
-	(this,
-	 posx(0, 1),
-	 vmargin() + 3 * (20 + vspacing()) + 1 * vgap(),
-	 buttonw(1), 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 &GameOptionsMenu::clicked_sound, *this,
-	 _("Sound Options")),
-save_game
-	(this,
-	 posx(0, 1),
-	 vmargin() + 4 * (20 + vspacing()) + 2 * vgap(),
-	 buttonw(1), 35,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, "pics/menu_save_game.png"),
-	 &GameOptionsMenu::clicked_save_game, *this,
-	 _("Save Game")),
-exit_game
-	(this,
-	 posx(0, 1),
-	 vmargin() + 4 * (20 + vspacing()) + 2 * vgap() +
-	 35 + vspacing(),
-	 buttonw(1), 35,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.png"),
-	 &GameOptionsMenu::clicked_exit_game, *this,
-	 _("Exit Game"))
+	UI::UniqueWindow
+		(&gb, &registry,
+		 102,
+		 vmargin()
+		 + 4 * (20 + vspacing()) + 2 * vgap() +
+		 35 + vspacing() + 35 +
+		 vmargin(),
+		 _("Options")),
+	m_gb(gb),
+	m_windows(windows),
+	readme
+		(this,
+		 posx(0, 1),
+		 vmargin() + 0 * (20 + vspacing()) + 0 * vgap(),
+		 buttonw(1), 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 &GameOptionsMenu::clicked_readme, *this,
+		 _("README")),
+	license
+		(this,
+		 posx(0, 1),
+		 vmargin() + 1 * (20 + vspacing()) + 0 * vgap(),
+		 buttonw(1), 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 &GameOptionsMenu::clicked_license, *this,
+		 _("License")),
+	authors
+		(this,
+		 posx(0, 1),
+		 vmargin() + 2 * (20 + vspacing()) + 0 * vgap(),
+		 buttonw(1), 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 &GameOptionsMenu::clicked_authors, *this,
+		 _("Authors")),
+	sound
+		(this,
+		 posx(0, 1),
+		 vmargin() + 3 * (20 + vspacing()) + 1 * vgap(),
+		 buttonw(1), 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 &GameOptionsMenu::clicked_sound, *this,
+		 _("Sound Options")),
+	save_game
+		(this,
+		 posx(0, 1),
+		 vmargin() + 4 * (20 + vspacing()) + 2 * vgap(),
+		 buttonw(1), 35,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 g_gr->get_picture(PicMod_Game, "pics/menu_save_game.png"),
+		 &GameOptionsMenu::clicked_save_game, *this,
+		 _("Save Game")),
+	exit_game
+		(this,
+		 posx(0, 1),
+		 vmargin() + 4 * (20 + vspacing()) + 2 * vgap() +
+		 35 + vspacing(),
+		 buttonw(1), 35,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 g_gr->get_picture(PicMod_Game, "pics/menu_exit_game.png"),
+		 &GameOptionsMenu::clicked_exit_game, *this,
+		 _("Exit Game"))
 {
 	set_inner_size
 		(hmargin() + hmargin() +

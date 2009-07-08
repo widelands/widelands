@@ -24,10 +24,13 @@ Editor_Tool_Options_Menu::Editor_Tool_Options_Menu
 	 UI::UniqueWindow::Registry &       registry,
 	 uint32_t const width, uint32_t const height,
 	 char                 const * const title)
-:
-UI::UniqueWindow(&parent, &registry, width, height, title),
-m_current_pointer(parent.tools.current_pointer)
-{if (get_usedefaultpos()) move_to_mouse();}
+	:
+	UI::UniqueWindow(&parent, &registry, width, height, title),
+	m_current_pointer(parent.tools.current_pointer)
+{
+	if (get_usedefaultpos())
+		move_to_mouse();
+}
 
 
 void Editor_Tool_Options_Menu::select_correct_tool() {

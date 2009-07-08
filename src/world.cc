@@ -43,8 +43,6 @@ namespace Widelands {
 
 /*
 ==============
-Resource_Descr::parse
-
 Parse a resource description section.
 ==============
 */
@@ -825,8 +823,6 @@ Terrain_Descr::~Terrain_Descr()
 
 /*
 ===============
-Terrain_Descr::load_graphics
-
 Trigger load of the actual animation frames.
 ===============
 */

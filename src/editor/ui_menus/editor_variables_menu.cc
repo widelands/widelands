@@ -61,28 +61,30 @@ private:
 };
 
 New_Variable_Window::New_Variable_Window(Editor_Interactive & parent) :
-UI::Window(&parent, 0, 0, 135, 55, _("New Variable")),
-m_parent(parent),
-m_variable(0),
-button_integer
-	(this,
-	 5, 5, 60, 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 &New_Variable_Window::clicked_new, *this, Integer_Type,
-	 _("Integer")),
-button_string
-	(this,
-	 70, 5, 60, 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 &New_Variable_Window::clicked_new, *this, String_Type,
-	 _("String")),
-button_back
-	(this,
-	 (get_inner_w() - 80) / 2, 30, 80, 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 &New_Variable_Window::end_modal, *this, 0,
-	 _("Back"))
-{center_to_parent();}
+	UI::Window(&parent, 0, 0, 135, 55, _("New Variable")),
+	m_parent(parent),
+	m_variable(0),
+	button_integer
+		(this,
+		 5, 5, 60, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 &New_Variable_Window::clicked_new, *this, Integer_Type,
+		 _("Integer")),
+	button_string
+		(this,
+		 70, 5, 60, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 &New_Variable_Window::clicked_new, *this, String_Type,
+		 _("String")),
+	button_back
+		(this,
+		 (get_inner_w() - 80) / 2, 30, 80, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &New_Variable_Window::end_modal, *this, 0,
+		 _("Back"))
+{
+	center_to_parent();
+}
 
 /**
  * Handle mouseclick
@@ -93,9 +95,17 @@ button_back
  * We are not draggable.
  */
 bool New_Variable_Window::handle_mousepress(const Uint8 btn, int32_t, int32_t)
-{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
+{
+	if (btn == SDL_BUTTON_RIGHT) {
+		end_modal(0);
+		return true;
+	}
+	return false;
+}
 bool New_Variable_Window::handle_mouserelease(const Uint8, int32_t, int32_t)
-{return false;}
+{
+	return false;
+}
 
 /**
  * A button has been clicked
@@ -196,9 +206,17 @@ m_back
  * We are not draggable.
  */
 bool Edit_Variable_Window::handle_mousepress(const Uint8 btn, int32_t, int32_t)
-{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
+{
+	if (btn == SDL_BUTTON_RIGHT) {
+		end_modal(0);
+		return true;
+	}
+	return false;
+}
 bool Edit_Variable_Window::handle_mouserelease(const Uint8, int32_t, int32_t)
-{return false;}
+{
+	return false;
+}
 
 /**
  * A button has been clicked

@@ -63,8 +63,9 @@ struct Coords {
 	 * For use with standard containers.
 	 */
 	struct ordering_functor {
-		bool operator()(const Coords a, const Coords b) const throw ()
-		{return a.all < b.all;}
+		bool operator()(Coords const a, Coords const b) const {
+			return a.all < b.all;
+		}
 	};
 
 	void reorigin(Coords new_origin, Extent const extent) {

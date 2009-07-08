@@ -87,8 +87,7 @@ template <typename Area_type = Area<> > struct MapDifferenceRegion {
 
 	void move_to_other_side(const Map & map) throw ();
 
-	typename Area_type::Radius_type radius() const throw ()
-	{return m_area.radius;}
+	typename Area_type::Radius_type radius() const {return m_area.radius;}
 private:
 	Area_type                       m_area;
 	typename Area_type::Radius_type m_remaining_in_edge;

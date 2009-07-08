@@ -24,17 +24,20 @@
 
 struct RGBColor : protected SDL_Color {
 	RGBColor() {}
-	RGBColor(const Uint8 R, const Uint8 G, const Uint8 B) throw ()
-	{SDL_Color::r = R, SDL_Color::g = G, SDL_Color::b = B;}
+	RGBColor(Uint8 const R, Uint8 const G, Uint8 const B) {
+		SDL_Color::r = R, SDL_Color::g = G, SDL_Color::b = B;
+	}
 
 	Uint8 r() const throw () {return SDL_Color::r;}
 	Uint8 g() const throw () {return SDL_Color::g;}
 	Uint8 b() const throw () {return SDL_Color::b;}
 
-	Uint32 map(const SDL_PixelFormat & fmt) const throw ()
-	{return SDL_MapRGB(&const_cast<SDL_PixelFormat &>(fmt), r(), g(), b());}
-	void set(SDL_PixelFormat * const fmt, Uint32 clr) throw ()
-	{SDL_GetRGB(clr, fmt, &(SDL_Color::r), &(SDL_Color::g), &(SDL_Color::b));}
+	Uint32 map(SDL_PixelFormat const & fmt) const {
+		return SDL_MapRGB(&const_cast<SDL_PixelFormat &>(fmt), r(), g(), b());
+	}
+	void set(SDL_PixelFormat * const fmt, Uint32 const clr) {
+		SDL_GetRGB(clr, fmt, &(SDL_Color::r), &(SDL_Color::g), &(SDL_Color::b));
+	}
 
 	bool operator== (RGBColor const & other) const throw () {
 		return r() == other.r() and g() == other.g() and b() == other.b();

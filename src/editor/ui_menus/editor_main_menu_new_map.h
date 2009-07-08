@@ -39,7 +39,6 @@ struct Main_Menu_New_Map : public UI::Window {
 	Main_Menu_New_Map(Editor_Interactive *);
 
 private:
-	Editor_Interactive * m_parent;
 	UI::Textarea * m_width, * m_height;
 	UI::Callback_IDButton<Main_Menu_New_Map, int32_t> * m_world;
 	int32_t m_w, m_h;

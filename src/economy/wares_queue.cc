@@ -198,7 +198,9 @@ void WaresQueue::set_filled(const uint32_t filled) throw () {
  * This interval is merely a hint for the Supply/Request balancing code.
 */
 void WaresQueue::set_consume_interval(const uint32_t time) throw ()
-{m_consume_interval = time;}
+{
+	m_consume_interval = time;
+}
 
 /**
  * Read and write

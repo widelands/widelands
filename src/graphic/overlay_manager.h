@@ -58,8 +58,10 @@ typedef int32_t (*Overlay_Callback_Function)
 	(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
 struct Overlay_Manager {
 	struct Job_Id { //  Boxing
-		static Job_Id Null() throw () //  Constant value for no job.
-		{Job_Id result; result.id = 0; return result;}
+
+		/// Constant value for no job.
+		static Job_Id Null() {Job_Id result; result.id = 0; return result;}
+
 		operator bool() const throw () {return id;}
 		bool operator<(const Job_Id other) const throw () {return id < other.id;}
 	private:
@@ -162,7 +164,9 @@ private:
 			picid(Picid),
 			hotspot(Hotspot),
 			level(Level)
-		{jobids.insert(Jobid);}
+		{
+			jobids.insert(Jobid);
+		}
 		std::set<Job_Id> jobids;
 		PictureID picid;
 		Point            hotspot;

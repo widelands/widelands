@@ -223,13 +223,6 @@ private:
 
 static WatchWindow * g_watch_window = 0;
 
-/*
-===============
-WatchWindow::WatchWindow
-
-Initialize a watch window.
-===============
-*/
 WatchWindow::WatchWindow
 	(Interactive_GameBase &       parent,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
@@ -366,8 +359,6 @@ void WatchWindow::think()
 
 /*
 ===============
-WatchWindow::stop_tracking_by_drag
-
 When the user drags the mapview, we stop tracking.
 ===============
 */

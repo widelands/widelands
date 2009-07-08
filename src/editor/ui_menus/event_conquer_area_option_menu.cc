@@ -277,10 +277,18 @@ m_player_area(event.m_player_area)
  */
 bool Event_Conquer_Area_Option_Menu::handle_mousepress
 	(Uint8 const btn, int32_t, int32_t)
-{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
+{
+	if (btn == SDL_BUTTON_RIGHT) {
+		end_modal(0);
+		return true;
+	}
+	return false;
+}
 bool Event_Conquer_Area_Option_Menu::handle_mouserelease
 	(Uint8,           int32_t, int32_t)
-{return false;}
+{
+	return false;
+}
 
 
 void Event_Conquer_Area_Option_Menu::clicked_ok() {

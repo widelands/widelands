@@ -41,7 +41,9 @@ m_tribe (tribe),
 m_curware
 	(this, 0, get_inner_h() - 25, get_inner_w(), 20, _("Stock"), Align_Center)
 
-{set_size(Width, 100);}
+{
+	set_size(Width, 100);
+}
 
 
 WaresDisplay::~WaresDisplay()
@@ -79,8 +81,6 @@ bool WaresDisplay::handle_mousemove
 
 /*
 ===============
-WaresDisplay::set_wares
-
 add a ware list to be displayed in this WaresDisplay
 ===============
 */
@@ -110,13 +110,7 @@ void WaresDisplay::remove_all_warelists() {
 	m_warelists.clear();
 }
 
-/*
-===============
-WaresDisplay::draw
 
-Draw the wares.
-===============
-*/
 void WaresDisplay::draw(RenderTarget & dst)
 {
 	Point p(2, 2);

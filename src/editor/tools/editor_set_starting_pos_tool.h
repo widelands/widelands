@@ -37,7 +37,7 @@ struct Editor_Set_Starting_Pos_Tool : public Editor_Tool {
 
 	int32_t handle_click_impl
 		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
-	const char * get_sel_impl() const throw () {return m_current_sel_pic;}
+	char const * get_sel_impl() const {return m_current_sel_pic;}
 
 	Widelands::Player_Number get_current_player() const throw ();
 	void set_current_player(int32_t);

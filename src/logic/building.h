@@ -213,8 +213,9 @@ public:
 	virtual void switch_train_mode () {};
 
 	///  Stores the Player_Number of the player who has defeated this building.
-	void set_defeating_player(const Player_Number player_number) throw ()
-	{m_defeating_player = player_number;}
+	void set_defeating_player(Player_Number const player_number) {
+		m_defeating_player = player_number;
+	}
 
 	void    add_worker(Worker &);
 	void remove_worker(Worker &);

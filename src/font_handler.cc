@@ -39,13 +39,11 @@
 /**
  * Plain Constructor
  */
-Font_Handler::Font_Handler() {
+Font_Handler::Font_Handler() : m_varcallback(0), m_cbdata(0) {
 	if (TTF_Init() == -1)
 		throw wexception
 			("True Type library did not initialize: %s\n", TTF_GetError());
 	m_font_loader = new Font_Loader();
-	m_varcallback = 0;
-	m_cbdata = 0;
 }
 
 
@@ -121,7 +119,7 @@ void Font_Handler::draw_string
 			//not cached, create a new surface
 			ci.picture_id =
 				create_text_surface
-				(font, fg, bg, text, align, wrap, caret, transparent);
+					(font, fg, bg, text, align, wrap, caret, transparent);
 			// Now cache it
 			assert(ci.picture_id->surface);
 			g_gr->get_picture_size(ci.picture_id, ci.w, ci.h);

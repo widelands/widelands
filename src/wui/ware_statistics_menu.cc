@@ -342,13 +342,7 @@ void WSM_Checkbox::draw(RenderTarget & dst) {
 		 m_pic);
 }
 
-/*
-===============
-Ware_Statistics_Menu::Ware_Statistics_Menu
 
-Create all the buttons etc...
-===============
-*/
 Ware_Statistics_Menu::Ware_Statistics_Menu
 	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
 :

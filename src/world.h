@@ -103,9 +103,7 @@ struct Terrain_Descr {
 				return true;
 		return false;
 	}
-	int8_t get_default_resources() const
-		throw ()
-	{return m_default_resources;}
+	int8_t get_default_resources() const {return m_default_resources;}
 	int32_t get_default_resources_amount() const throw () {
 		return m_default_amount;
 	}
@@ -250,15 +248,20 @@ struct World {
 	const char * get_author() const throw () {return hd.author;}
 	const char * get_descr () const throw () {return hd.descr;}
 
-	Terrain_Descr ::Index index_of_terrain   (const char * const name) const
-	{return ters       .get_index(name);}
-	Terrain_Descr & terrain_descr    (const Terrain_Descr  ::Index i) const
-		throw ()
-	{return *ters.get(i);}
-	const Terrain_Descr & get_ter(Terrain_Index const i) const
-	{assert(i < ters.get_nitems()); return *ters.get(i);}
-	const Terrain_Descr * get_ter(const char * const name) const
-	{const int32_t i = ters.get_index(name); return i != -1 ? ters.get(i) : 0;}
+	Terrain_Index index_of_terrain(char const * const name) const {
+		return ters.get_index(name);
+	}
+	Terrain_Descr & terrain_descr(Terrain_Index const i) const {
+		return *ters.get(i);
+	}
+	Terrain_Descr const & get_ter(Terrain_Index const i) const {
+		assert(i < ters.get_nitems());
+		return *ters.get(i);
+	}
+	Terrain_Descr const * get_ter(char const * const name) const {
+		int32_t const i = ters.get_index(name);
+		return i != -1 ? ters.get(i) : 0;
+	}
 	int32_t get_nr_terrains() const {return ters.get_nitems();}
 	int32_t get_bob(char const * const l) const {return bobs.get_index(l);}
 	Bob::Descr * get_bob_descr(uint16_t const index) const {
@@ -276,8 +279,10 @@ struct World {
 	int32_t get_resource(const char * const name) const {
 		return m_resources.get_index(name);
 	}
-	Resource_Descr * get_resource(const Resource_Index res) const throw ()
-		{assert(res < m_resources.get_nitems()); return m_resources.get(res);}
+	Resource_Descr * get_resource(Resource_Index const res) const throw () {
+		assert(res < m_resources.get_nitems());
+		return m_resources.get(res);
+	}
 	int32_t get_nr_resources() const {return m_resources.get_nitems();}
 	int32_t safe_resource_index(const char * const warename) const;
 	std::string const & basedir() const {return m_basedir;}

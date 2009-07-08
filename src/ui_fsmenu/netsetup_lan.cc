@@ -193,7 +193,9 @@ void Fullscreen_Menu_NetSetupLAN::update_game_info
 }
 
 void Fullscreen_Menu_NetSetupLAN::game_opened (const Net_Open_Game * game)
-{update_game_info(opengames.add(game), game->info);}
+{
+	update_game_info(opengames.add(game), game->info);
+}
 
 void Fullscreen_Menu_NetSetupLAN::game_closed (const Net_Open_Game *) {}
 

@@ -163,12 +163,15 @@ public:
 		 Align                     = Align_Left);
 
 	void clear();
-	void set_sort_column(const uint32_t col) throw ()
-	{assert(col < m_columns.size()); m_sort_column = col;}
+	void set_sort_column(uint32_t const col) {
+		assert(col < m_columns.size());
+		m_sort_column = col;
+	}
 	uint32_t get_sort_colum() const throw () {return m_sort_column;}
 	bool  get_sort_descending() const throw () {return m_sort_descending;}
-	void set_sort_descending(const bool descending) throw ()
-	{m_sort_descending = descending;}
+	void set_sort_descending(bool const descending) {
+		m_sort_descending = descending;
+	}
 	void set_font(std::string const & fontname, int32_t fontsize) {
 		m_fontname = fontname;
 		m_fontsize = fontsize;
@@ -183,17 +186,22 @@ public:
 	Entry_Record & add(void * entry = 0, bool select = false);
 
 	uint32_t size() const throw () {return m_entry_records.size();}
-	void * operator[](const uint32_t i) const throw ()
-	{assert(i < m_entry_records.size()); return m_entry_records[i]->entry();}
-	static uint32_t no_selection_index() throw ()
-	{return std::numeric_limits<uint32_t>::max();}
-	bool has_selection() const throw ()
-	{return m_selection != no_selection_index();}
+	void * operator[](uint32_t const i) const {
+		assert(i < m_entry_records.size());
+		return m_entry_records[i]->entry();
+	}
+	static uint32_t no_selection_index() {
+		return std::numeric_limits<uint32_t>::max();
+	}
+	bool has_selection() const {
+		return m_selection != no_selection_index();
+	}
 	uint32_t selection_index() const throw () {return m_selection;}
-	Entry_Record & get_record(const uint32_t n) const throw ()
-	{assert(n < m_entry_records.size()); return *m_entry_records[n];}
-	static void * get(const Entry_Record & er) throw ()
-	{return er.entry();}
+	Entry_Record & get_record(uint32_t const n) const {
+		assert(n < m_entry_records.size());
+		return *m_entry_records[n];
+	}
+	static void * get(Entry_Record const & er) {return er.entry();}
 	Entry_Record * find(const void * entry) const throw ();
 
 	void select(uint32_t);
@@ -212,8 +220,7 @@ public:
 			throw No_Selection();
 		remove(m_selection);
 	}
-	void * get_selected() const
-	{return get_selected_record().entry();};
+	void * get_selected() const {return get_selected_record().entry();};
 
 	uint32_t get_lineheight() const throw () {return m_lineheight + 2;}
 	uint32_t get_eff_w     () const throw () {return get_w();}
@@ -271,8 +278,9 @@ template <typename Entry>
 		return Base::add(const_cast<Entry *>(entry), select_this);
 	}
 
-	const Entry * operator[](const uint32_t i) const throw ()
-	{return static_cast<const Entry *>(Base::operator[](i));}
+	Entry const * operator[](uint32_t const i) const throw () {
+		return static_cast<Entry const *>(Base::operator[](i));
+	}
 
 	static Entry const * get(const Entry_Record & er) {
 		return static_cast<Entry const *>(er.entry());
@@ -297,8 +305,9 @@ template <typename Entry> struct Table<Entry * const> : public Table<void *> {
 		return Base::add(entry, select_this);
 	}
 
-	Entry * operator[](const uint32_t i) const throw ()
-	{return static_cast<Entry *>(Base::operator[](i));}
+	Entry * operator[](uint32_t const i) const {
+		return static_cast<Entry *>(Base::operator[](i));
+	}
 
 	static Entry * get(Entry_Record const & er) {
 		return static_cast<Entry *>(er.entry());
@@ -322,17 +331,21 @@ template <typename Entry> struct Table<const Entry &> : public Table<void *> {
 		return Base::add(&const_cast<Entry &>(entry), select_this);
 	}
 
-	const Entry & operator[](const uint32_t i) const throw ()
-	{return *static_cast<const Entry *>(Base::operator[](i));}
+	Entry const & operator[](uint32_t const i) const {
+		return *static_cast<Entry const *>(Base::operator[](i));
+	}
 
-	static const Entry & get(const Entry_Record & er)
-	{return *static_cast<const Entry *>(er.entry());}
+	static Entry const & get(Entry_Record const & er) {
+		return *static_cast<Entry const *>(er.entry());
+	}
 
-	Entry_Record * find(const Entry & entry) const throw ()
-	{return Base::find(&entry);}
+	Entry_Record * find(Entry const & entry) const {
+		return Base::find(&entry);
+	}
 
-	const Entry & get_selected() const
-	{return *static_cast<const Entry *>(Base::get_selected());}
+	Entry const & get_selected() const {
+		return *static_cast<Entry const *>(Base::get_selected());
+	}
 };
 
 template <typename Entry> struct Table<Entry &> : public Table<void *> {
@@ -348,17 +361,19 @@ template <typename Entry> struct Table<Entry &> : public Table<void *> {
 		return Base::add(&entry, select_this);
 	}
 
-	Entry & operator[](const uint32_t i) const throw ()
-	{return *static_cast<Entry *>(Base::operator[](i));}
+	Entry & operator[](uint32_t const i) const {
+		return *static_cast<Entry *>(Base::operator[](i));
+	}
 
-	static Entry & get(const Entry_Record & er)
-	{return *static_cast<Entry *>(er.entry());}
+	static Entry & get(Entry_Record const & er) {
+		return *static_cast<Entry *>(er.entry());
+	}
 
-	Entry_Record * find(Entry & entry) const throw ()
-	{return Base::find(&entry);}
+	Entry_Record * find(Entry & entry) const {return Base::find(&entry);}
 
-	Entry & get_selected() const
-	{return *static_cast<Entry *>(Base::get_selected());}
+	Entry & get_selected() const {
+		return *static_cast<Entry *>(Base::get_selected());
+	}
 };
 
 compile_assert(sizeof(void *) == sizeof(intptr_t));
@@ -375,16 +390,20 @@ template <> struct Table<intptr_t> : public Table<void *> {
 		return Base::add(reinterpret_cast<void *>(entry), select_this);
 	}
 
-	intptr_t operator[](const uint32_t i) const throw ()
-	{return reinterpret_cast<intptr_t>(Base::operator[](i));}
-	static intptr_t get(const Entry_Record & er)
-	{return reinterpret_cast<intptr_t>(er.entry());}
+	intptr_t operator[](uint32_t const i) const throw () {
+		return reinterpret_cast<intptr_t>(Base::operator[](i));
+	}
+	static intptr_t get(Entry_Record const & er) {
+		return reinterpret_cast<intptr_t>(er.entry());
+	}
 
-	Entry_Record * find(const intptr_t entry) const throw ()
-	{return Base::find(reinterpret_cast<const void *>(entry));}
+	Entry_Record * find(intptr_t const entry) const {
+		return Base::find(reinterpret_cast<void const *>(entry));
+	}
 
-	intptr_t get_selected() const
-	{return reinterpret_cast<intptr_t>(Base::get_selected());}
+	intptr_t get_selected() const {
+		return reinterpret_cast<intptr_t>(Base::get_selected());
+	}
 };
 template <> struct Table<const intptr_t> : public Table<intptr_t> {
 	typedef Table<intptr_t> Base;

@@ -79,10 +79,18 @@ UI::Window(parent, 0, 0, 230, 120, _("Make Directory"))
  */
 bool Main_Menu_Save_Map_Make_Directory::handle_mousepress
 	(Uint8 const btn, int32_t, int32_t)
-{if (btn == SDL_BUTTON_RIGHT) {end_modal(0); return true;} return false;}
+{
+	if (btn == SDL_BUTTON_RIGHT) {
+		end_modal(0);
+		return true;
+	}
+	return false;
+}
 bool Main_Menu_Save_Map_Make_Directory::handle_mouserelease
 	(Uint8,           int32_t, int32_t)
-{return false;}
+{
+	return false;
+}
 
 /**
  * Editbox changed

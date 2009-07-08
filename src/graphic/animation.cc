@@ -32,8 +32,6 @@
 
 /*
 ===============
-EncodeData::clear
-
 Reset the EncodeData to defaults (no special colors)
 ===============
 */
@@ -45,8 +43,6 @@ void EncodeData::clear()
 
 /*
 ===============
-EncodeData::parse
-
 Parse color codes from section, the following keys are currently known:
 
 clrkey_[r, g, b]     color key
@@ -76,8 +72,6 @@ void EncodeData::parse(Section & s)
 
 /*
 ===============
-EncodeData::add
-
 Add another encode data. Already existing color codes are overwritten
 ===============
 */
@@ -102,8 +96,6 @@ AnimationManager g_anim;
 
 /*
 ===============
-AnimationManager::flush
-
 Remove all animations
 ===============
 */
@@ -215,8 +207,6 @@ uint32_t AnimationManager::get
 
 /*
 ===============
-AnimationManager::get
-
 Return the number of animations.
 ===============
 */
@@ -228,8 +218,6 @@ uint32_t AnimationManager::get_nranimations() const
 
 /*
 ===============
-AnimationManager::get_animation
-
 Return AnimationData for this animation.
 Returns 0 if the animation doesn't exist.
 ===============
@@ -298,8 +286,6 @@ DirAnimations::DirAnimations
 
 /*
 ===============
-DirAnimations::parse
-
 Parse an animation from the given directory and config.
 sectnametempl is of the form "foowalk_??", where ?? will be replaced with
 nw, ne, e, se, sw and w to get the section names for the animations.

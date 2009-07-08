@@ -67,6 +67,8 @@ back
 	 &Fullscreen_Menu_MultiPlayer::end_modal, *this, Back,
 	 _("Back"), std::string(), true, false,
 	 m_fn, m_fs)
-{title.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);}
+{
+	title.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+}
 
 #endif // if HAVE_GGZ

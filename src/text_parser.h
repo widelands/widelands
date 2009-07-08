@@ -46,8 +46,9 @@ struct Text_Block {
 	}
 	const std::string & get_font_style() const throw () {return m_font_style;}
 
-	void set_font_decoration(const std::string & font_decoration) throw ()
-	{m_font_decoration = font_decoration;}
+	void set_font_decoration(std::string const & font_decoration) {
+		m_font_decoration = font_decoration;
+	}
 	std::string const & get_font_decoration() const {return m_font_decoration;}
 
 	void set_font_face(std::string const & font_face) {m_font_face = font_face;}
@@ -63,10 +64,14 @@ struct Text_Block {
 
 	void set_line_breaks
 		(const std::vector<std::vector<std::string>::size_type> & line_breaks)
-	{m_line_breaks = line_breaks;};
+	{
+		m_line_breaks = line_breaks;
+	}
 	const std::vector<std::vector<std::string>::size_type> & get_line_breaks
 		() const throw ()
-	{return m_line_breaks;}
+	{
+		return m_line_breaks;
+	}
 private:
 	int32_t                                          m_font_size;
 	RGBColor                                         m_font_color;
@@ -83,23 +88,23 @@ struct Richtext_Block {
 	Richtext_Block();
 	Richtext_Block(const Richtext_Block & src);
 
-	void set_images(const std::vector<std::string> & images) throw ()
-	{m_images = images;}
-	const std::vector<std::string> & get_images() const throw ()
-	{return m_images;}
+	void set_images(std::vector<std::string> const & images) {
+		m_images = images;
+	}
+	std::vector<std::string> const & get_images() const {return m_images;}
 
-	void set_image_align(const Align image_align) throw ()
-	{m_image_align = image_align;}
+	void set_image_align(Align const image_align) {m_image_align = image_align;}
 	Align get_image_align() const throw () {return m_image_align;}
 
-	void set_text_align(const Align text_align) throw ()
-	{m_text_align = text_align;}
+	void set_text_align(Align const text_align) {m_text_align = text_align;}
 	Align get_text_align() const throw () {return m_text_align;}
 
-	void set_text_blocks(const std::vector<Text_Block> & text_blocks) throw ()
-	{m_text_blocks = text_blocks;}
-	const std::vector<Text_Block> & get_text_blocks() const throw ()
-	{return m_text_blocks;}
+	void set_text_blocks(std::vector<Text_Block> const & text_blocks) {
+		m_text_blocks = text_blocks;
+	}
+	std::vector<Text_Block> const & get_text_blocks() const {
+		return m_text_blocks;
+	}
 private:
 	std::vector<std::string> m_images;
 	std::vector<Text_Block>  m_text_blocks;

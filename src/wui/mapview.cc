@@ -66,8 +66,6 @@ void Map_View::warp_mouse_to_node(Widelands::Coords const c) {
 
 /*
 ===============
-Map_View::draw
-
 This is the guts!! this function draws the whole
 map the user can see. we spend a lot of time
 in this function
@@ -156,13 +154,15 @@ bool Map_View::handle_mousepress
 	return true;
 }
 bool Map_View::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
-{if (btn == SDL_BUTTON_RIGHT and m_dragging) stop_dragging(); return true;}
+{
+	if (btn == SDL_BUTTON_RIGHT and m_dragging)
+		stop_dragging();
+	return true;
+}
 
 
 /*
 ===============
-Map_View::handle_mousemove
-
 Scroll the view according to mouse movement.
 ===============
 */

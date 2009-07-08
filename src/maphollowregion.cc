@@ -64,15 +64,15 @@ template <> bool MapHollowRegion<Area<> >::advance(const Map & map) throw () {
 			m_phase = Lower;
 		}
 
-		if (m_phase & (Top|Upper))
-		{map.get_bln(m_left, &m_hollow_area); ++m_rowwidth;}
-		else {
+		if (m_phase & (Top|Upper)) {
+			map.get_bln(m_left, &m_hollow_area);
+			++m_rowwidth;
+		} else {
 
 			if (m_row > m_hollow_area.radius) {
 				m_phase = None;
 				return true; // early out
-			}
-			else if (m_phase == Lower and m_row > m_hollow_area.hole_radius)
+			} else if (m_phase == Lower and m_row > m_hollow_area.hole_radius)
 				m_phase = Bottom;
 
 			map.get_brn(m_left, &m_hollow_area);

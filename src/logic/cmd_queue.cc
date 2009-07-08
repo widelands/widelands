@@ -58,8 +58,6 @@ void Cmd_Queue::flush() {
 
 /*
 ===============
-Cmd_Queue::queue
-
 Insert a new command into the queue; it will be executed at the given time
 ===============
 */

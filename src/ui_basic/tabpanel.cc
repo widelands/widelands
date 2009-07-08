@@ -295,6 +295,8 @@ bool Tab_Panel::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 
 	return false;
 }
-bool Tab_Panel::handle_mouserelease(const Uint8, int32_t, int32_t)
-{return false;}
+bool Tab_Panel::handle_mouserelease(Uint8, int32_t, int32_t)
+{
+	return false;
+}
 };

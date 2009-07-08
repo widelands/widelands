@@ -78,8 +78,9 @@ inline float SwapFloat(const float x)
 	return s;
 }
 
-inline uint8_t Deref8(const void * const ptr)
-{return *reinterpret_cast<const uint8_t *>(ptr);}
+inline uint8_t Deref8(void const * const ptr) {
+	return *reinterpret_cast<uint8_t const *>(ptr);
+}
 
 inline uint16_t Deref16(const void * const ptr) {
 	uint16_t r;

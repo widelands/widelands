@@ -482,8 +482,9 @@ inline Map_Index Map::get_index(Coords const c, X_Coordinate const width) {
 }
 
 inline Field & Map::operator[](Map_Index const i) const {return m_fields[i];}
-inline Field & Map::operator[](const Coords c) const
-{return operator[](get_index(c, m_width));}
+inline Field & Map::operator[](Coords const c) const {
+	return operator[](get_index(c, m_width));
+}
 
 inline FCoords Map::get_fcoords(const Coords c) const
 {

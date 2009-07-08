@@ -28,8 +28,9 @@ struct Editor_Delete_Immovable_Tool : public Editor_Tool {
 
 	int32_t handle_click_impl
 		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
-	const char * get_sel_impl() const throw ()
-	{return "pics/fsel_editor_delete.png";}
+	char const * get_sel_impl() const {
+		return "pics/fsel_editor_delete.png";
+	}
 };
 
 #endif

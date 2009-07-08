@@ -396,8 +396,14 @@ void Editor_Event_Menu::eventchain_list_selected(uint32_t) {
  * Listbox was double clicked
  */
 void Editor_Event_Menu::trigger_double_clicked(uint32_t)
-	{clicked_edit_trigger();}
+{
+	clicked_edit_trigger();
+}
 void Editor_Event_Menu::event_double_clicked(uint32_t)
-	{clicked_edit_event  ();}
+{
+	clicked_edit_event  ();
+}
 void Editor_Event_Menu::eventchain_double_clicked(uint32_t)
-	{clicked_edit_eventchain();}
+{
+	clicked_edit_eventchain();
+}

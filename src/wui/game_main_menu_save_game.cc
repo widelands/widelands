@@ -34,13 +34,7 @@ Interactive_GameBase & Game_Main_Menu_Save_Game::igbase() {
 	return dynamic_cast<Interactive_GameBase &>(*get_parent());
 }
 
-/*
-===============
-Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 
-Create all the buttons etc...
-===============
-*/
 Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
 :
@@ -59,35 +53,35 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 #define DESCRIPTION_WIDTH              (WINDOW_WIDTH - DESCRIPTION_X - VMARGIN)
 #define CANCEL_Y                      (WINDOW_HEIGHT - BUTTON_HEIGHT - VMARGIN)
 #define OK_Y                              (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
-UI::UniqueWindow
-	(&parent, &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
-m_ls     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT),
-m_editbox
-	(this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
-m_name_label
-	(this, DESCRIPTION_X,  5, 0, 20, _("Map Name: "),  Align_CenterLeft),
-m_name
-	(this, DESCRIPTION_X, 20, 0, 20, " ",              Align_CenterLeft),
-m_gametime_label
-	(this, DESCRIPTION_X, 45, 0, 20, _("Game Time: "), Align_CenterLeft),
-m_gametime
-	(this, DESCRIPTION_X, 60, 0, 20, " ",              Align_CenterLeft),
-m_button_ok
-	(this,
-	 DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 &Game_Main_Menu_Save_Game::clicked_ok, *this,
-	 _("OK"),
-	 std::string(),
-	 false),
-m_button_cancel
-	(this,
-	 DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 &Game_Main_Menu_Save_Game::die, *this,
-	 _("Cancel")),
-m_curdir(SaveHandler::get_base_dir())
+	UI::UniqueWindow
+		(&parent, &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
+	m_ls     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT),
+	m_editbox
+		(this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+	m_name_label
+		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name: "),  Align_CenterLeft),
+	m_name
+		(this, DESCRIPTION_X, 20, 0, 20, " ",              Align_CenterLeft),
+	m_gametime_label
+		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time: "), Align_CenterLeft),
+	m_gametime
+		(this, DESCRIPTION_X, 60, 0, 20, " ",              Align_CenterLeft),
+	m_button_ok
+		(this,
+		 DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 &Game_Main_Menu_Save_Game::clicked_ok, *this,
+		 _("OK"),
+		 std::string(),
+		 false),
+	m_button_cancel
+		(this,
+		 DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 &Game_Main_Menu_Save_Game::die, *this,
+		 _("Cancel")),
+	m_curdir(SaveHandler::get_base_dir())
 {
 	m_ls.selected.set(this, &Game_Main_Menu_Save_Game::selected);
 	m_ls.double_clicked.set(this, &Game_Main_Menu_Save_Game::double_clicked);

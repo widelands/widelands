@@ -43,8 +43,7 @@ template <typename Area_type = Area<> > struct MapFringeRegion {
 	}
 
 
-	const typename Area_type::Coords_type & location() const throw ()
-	{return m_area;}
+	typename Area_type::Coords_type const & location() const {return m_area;}
 
 	/**
 	 * Moves on to the next location. The return value indicates whether the new
@@ -71,8 +70,7 @@ template <typename Area_type = Area<> > struct MapFringeRegion {
 		m_phase = 6;
 	}
 
-	typename Area_type::Radius_type radius() const throw ()
-	{return m_area.radius;}
+	typename Area_type::Radius_type radius() const {return m_area.radius;}
 private:
 	Area_type                       m_area;
 	typename Area_type::Radius_type m_remaining_in_phase;

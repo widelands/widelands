@@ -53,9 +53,6 @@ using namespace std;
 
 namespace Widelands {
 
-//
-// Tribe_Descr class
-//
 Tribe_Descr::Tribe_Descr
 	(std::string const & tribename, Editor_Game_Base & egbase)
 	: m_name(tribename), m_world(egbase.map().world())
@@ -264,8 +261,6 @@ Tribe_Descr::Tribe_Descr
 
 /*
 ===============
-Tribe_Descr::postload
-
 Load all logic data
 ===============
 */
@@ -275,8 +270,6 @@ void Tribe_Descr::postload(Editor_Game_Base &) {
 
 /*
 ===============
-Tribe_Descr::load_graphics
-
 Load tribe graphics
 ===============
 */
@@ -385,8 +378,6 @@ void Tribe_Descr::get_all_tribe_infos(std::vector<TribeBasicInfo> & tribes) {
 
 /*
 ==============
-Resource_Descr::get_indicator
-
 Find the best matching indicator for the given amount.
 ==============
 */

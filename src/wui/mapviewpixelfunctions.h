@@ -87,10 +87,14 @@ void get_save_pix
 
 inline uint32_t MapviewPixelFunctions::get_map_end_screen_x
 	(Widelands::Map const & map)
-{return map.get_width() * TRIANGLE_WIDTH;}
+{
+	return map.get_width() * TRIANGLE_WIDTH;
+}
 inline uint32_t MapviewPixelFunctions::get_map_end_screen_y
 	(Widelands::Map const & map)
-{return map.get_height() * TRIANGLE_HEIGHT;}
+{
+	return map.get_height() * TRIANGLE_HEIGHT;
+}
 
 /*
 ===============
@@ -113,11 +117,12 @@ inline void MapviewPixelFunctions::get_pix
 	py -= fc.field->get_height() * HEIGHT_FACTOR;
 }
 
-inline
-void MapviewPixelFunctions::get_pix
+inline void MapviewPixelFunctions::get_pix
 	(Widelands::Map const & map, const Widelands::Coords c,
 	 int32_t & px, int32_t & py)
-{get_pix(map.get_fcoords(c), px, py);}
+{
+	get_pix(map.get_fcoords(c), px, py);
+}
 
 // fx and fy might be out of range, must be normalized for the field
 // theres no need for such a function for FCoords, since x, y out of range

@@ -60,13 +60,7 @@ void MiniMap::View::set_view_pos(const int32_t x, const int32_t y)
 	update(0, 0, get_w(), get_h());
 }
 
-/*
-===============
-MiniMapView::draw
 
-Redraw the view of the map
-===============
-*/
 void MiniMap::View::draw(RenderTarget & dst)
 {
 	dst.renderminimap
@@ -79,8 +73,6 @@ void MiniMap::View::draw(RenderTarget & dst)
 
 /*
 ===============
-MiniMapView::handle_mouseclick
-
 Left-press: warp the view point to the new position
 ===============
 */
@@ -100,8 +92,9 @@ bool MiniMap::View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 
 	return true;
 }
-bool MiniMap::View::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
-{return btn == SDL_BUTTON_LEFT;}
+bool MiniMap::View::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
+	return btn == SDL_BUTTON_LEFT;
+}
 
 
 /*
@@ -114,8 +107,6 @@ MiniMap
 
 /*
 ===============
-MiniMap::MiniMap
-
 Initialize the minimap window. Dimensions will be set automatically
 according to the map size.
 A registry pointer is set to track the MiniMap object (only show one
@@ -125,11 +116,12 @@ reg, the registry pointer will be set by constructor and cleared by
 destructor
 ===============
 */
-inline uint32_t MiniMap::number_of_buttons_per_row() const throw () {return 3;}
-inline uint32_t MiniMap::number_of_button_rows    () const throw () {return 2;}
-inline uint32_t MiniMap::but_w() const throw ()
-{return m_view.get_w() / number_of_buttons_per_row();}
-inline uint32_t MiniMap::but_h() const throw () {return 20;}
+inline uint32_t MiniMap::number_of_buttons_per_row() const {return 3;}
+inline uint32_t MiniMap::number_of_button_rows    () const {return 2;}
+inline uint32_t MiniMap::but_w                    () const {
+	return m_view.get_w() / number_of_buttons_per_row();
+}
+inline uint32_t MiniMap::but_h                    () const {return 20;}
 MiniMap::MiniMap(Interactive_Base & ibase, Registry * const registry)
 :
 	UI::UniqueWindow(&ibase, registry, 0, 0, _("Map")),

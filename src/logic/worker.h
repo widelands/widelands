@@ -70,8 +70,9 @@ public:
 	Worker(const Worker_Descr &);
 	virtual ~Worker();
 
-	virtual Worker_Descr::Worker_Type get_worker_type() const throw ()
-	{return descr().get_worker_type();}
+	virtual Worker_Descr::Worker_Type get_worker_type() const {
+		return descr().get_worker_type();
+	}
 	char const * type_name() const throw () {return "worker";}
 	virtual Bob::Type get_bob_type() const throw () {return Bob::WORKER;}
 

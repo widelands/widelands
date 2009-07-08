@@ -41,17 +41,14 @@
 
 using Widelands::NUMBER_OF_MAP_DIMENSIONS;
 
-/**
- * Create all the buttons etc...
-*/
-Main_Menu_New_Random_Map::Main_Menu_New_Random_Map(Editor_Interactive *parent)
-:
-UI::Window
-	(parent,
-	 (parent->get_w() - 220) / 2, (parent->get_h() - 250) / 2, 220, 250,
-	 _("New Random Map")),
-m_parent(parent), //  FIXME redundant (base stores parent pointer)
-m_currentworld(0)
+Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
+	(Editor_Interactive * const parent)
+	:
+	UI::Window
+		(parent,
+		 (parent->get_w() - 220) / 2, (parent->get_h() - 250) / 2, 220, 250,
+		 _("New Random Map")),
+	m_currentworld(0)
 {
 	char buffer[250];
 	int32_t const offsx   =  5;
@@ -379,7 +376,9 @@ void Main_Menu_New_Random_Map::button_clicked(int32_t n) {
 }
 
 void Main_Menu_New_Random_Map::clicked_create_map() {
-	Widelands::Editor_Game_Base & egbase = m_parent->egbase();
+	Editor_Interactive & eia =
+		dynamic_cast<Editor_Interactive &>(*get_parent());
+	Widelands::Editor_Game_Base & egbase = eia.egbase();
 	Widelands::Map              & map    = egbase.map();
 	UI::ProgressWindow loader;
 
@@ -387,7 +386,7 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 	egbase.cleanup_for_load(true, false);
 
 	if (strcmp(map.get_world_name(), m_worlds[m_currentworld].c_str()))
-		m_parent->change_world();
+		eia.change_world();
 
 	Widelands::UniqueRandomMapInfo mapInfo;
 	mapInfo.w = Widelands::MAP_DIMENSIONS[m_w];
@@ -418,8 +417,8 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 
 	map.recalc_whole_map();
 
-	m_parent->set_need_save(true);
-	m_parent->need_complete_redraw();
+	eia.set_need_save(true);
+	eia.need_complete_redraw();
 
 	die();
 }

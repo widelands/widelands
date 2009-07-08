@@ -178,7 +178,9 @@ public:
 	void set_terrain
 		(const TCoords<FCoords>::TriangleIndex t, Terrain_Index const i)
 		throw ()
-	{(t == TCoords<FCoords>::D ? terrains.d : terrains.r) = i;}
+	{
+		(t == TCoords<FCoords>::D ? terrains.d : terrains.r) = i;
+	}
 	void set_terrain_d(Terrain_Index const i) throw () {terrains.d = i;}
 	void set_terrain_r(Terrain_Index const i) throw () {terrains.r = i;}
 
@@ -205,8 +207,7 @@ public:
 			((owner_info_and_selections & Player_Number_Bitmask) <= MAX_PLAYERS);
 		return owner_info_and_selections & Player_Number_Bitmask;
 	}
-	bool is_border() const throw ()
-	{return owner_info_and_selections & Border_Bitmask;}
+	bool is_border() const {return owner_info_and_selections & Border_Bitmask;}
 
 	///
 	/// Returns true when the node is owned by player_number and is not a border
@@ -227,8 +228,9 @@ public:
 	}
 
 	uint8_t get_buildhelp_overlay_index() const {return buildhelp_overlay_index;}
-	void set_buildhelp_overlay_index(const Buildhelp_Index i)
-	{buildhelp_overlay_index = i;}
+	void set_buildhelp_overlay_index(Buildhelp_Index const i) {
+		buildhelp_overlay_index = i;
+	}
 
 	int32_t get_roads() const {return roads;}
 	int32_t get_road(int32_t dir) const {return (roads >> dir) & Road_Mask;}

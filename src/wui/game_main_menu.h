@@ -48,26 +48,26 @@ private:
 	uint32_t vmargin() const {return 2 * vspacing();}
 
 	/** Returns the width of a button in a row with nr_buttons buttons. */
-	uint32_t buttonw(const uint32_t nr_buttons) const
-	{return (get_inner_w() - (nr_buttons + 3) * hspacing()) / nr_buttons;}
+	uint32_t buttonw(uint32_t const nr_buttons) const {
+		return (get_inner_w() - (nr_buttons + 3) * hspacing()) / nr_buttons;
+	}
 
 	/** Returns the height of buttons in a window with nr_rows rows. */
-	uint32_t buttonh(const uint32_t nr_rows) const
-	{return (get_inner_h() - (nr_rows    + 3) * vspacing()) / nr_rows;}
+	uint32_t buttonh(uint32_t const nr_rows) const {
+		return (get_inner_h() - (nr_rows    + 3) * vspacing()) / nr_rows;
+	}
 
-	/**
-	 * Returns the x coordinate of the (left edge of) button number nr in a row
-	 * with nr_buttons buttons.
-	 */
-	uint32_t posx(const uint32_t nr, const uint32_t nr_buttons) const
-	{return hmargin() + nr * (buttonw(nr_buttons) + hspacing());}
+	/// Returns the x coordinate of the (left edge of) button number nr in a row
+	/// with nr_buttons buttons.
+	uint32_t posx(uint32_t const nr, uint32_t const nr_buttons) const {
+		return hmargin() + nr * (buttonw(nr_buttons) + hspacing());
+	}
 
-	/**
-	 * Returns the y coordinate of the (top edge of) a button in row number nr
-	 * in a dialog with nr_rows rows.
-	 */
-	uint32_t posy(const uint32_t nr, const uint32_t nr_rows) const
-	{return vmargin() + nr * (buttonh(nr_rows) + vspacing());}
+	/// Returns the y coordinate of the (top edge of) a button in row number nr
+	/// in a dialog with nr_rows rows.
+	uint32_t posy(uint32_t const nr, uint32_t const nr_rows) const {
+		return vmargin() + nr * (buttonh(nr_rows) + vspacing());
+	}
 
 	void clicked_general_stats ();
 	void clicked_ware_stats    ();

@@ -368,7 +368,9 @@ void Sound_Handler::play_fx
 	(std::string const &       fx_name,
 	 Widelands::Coords   const map_position,
 	 uint8_t             const priority)
-{play_fx(fx_name, stereo_position(map_position), priority);}
+{
+	play_fx(fx_name, stereo_position(map_position), priority);
+}
 
 /** \overload
  * \param fx_name  The identifying name of the sound effect, see \ref load_fx .

@@ -29,13 +29,6 @@ GameChatMenu IMPLEMENTATION
 ==============================================================================
 */
 
-/*
-===============
-GameChatMenu::GameChatMenu
-
-Create all the buttons etc...
-===============
-*/
 GameChatMenu::GameChatMenu
 	(UI::Panel                  * parent,
 	 UI::UniqueWindow::Registry & registry,

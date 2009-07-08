@@ -58,15 +58,18 @@ using namespace Widelands;
 EncyclopediaWindow::EncyclopediaWindow
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 :
-UI::UniqueWindow
-	(&plr, &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Tribe ware encyclopedia")),
-interactivePlayer(plr),
-wares            (this, 5, 5, WINDOW_WIDTH - 10, WINDOW_HEIGHT - 250),
-prodSites        (this, 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH / 3 - 5, 140),
-condTable
-	(this,
-	 WINDOW_WIDTH / 3, WINDOW_HEIGHT - 150, WARE_GROUPS_TABLE_WIDTH, 140),
-descrTxt         (this, 5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, "")
+	UI::UniqueWindow
+		(&plr,
+		 &registry,
+		 WINDOW_WIDTH, WINDOW_HEIGHT,
+		 _("Tribe ware encyclopedia")),
+	interactivePlayer(plr),
+	wares            (this, 5, 5, WINDOW_WIDTH - 10, WINDOW_HEIGHT - 250),
+	prodSites        (this, 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH / 3 - 5, 140),
+	condTable
+		(this,
+		 WINDOW_WIDTH / 3, WINDOW_HEIGHT - 150, WARE_GROUPS_TABLE_WIDTH, 140),
+	descrTxt         (this, 5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, "")
 {
 	wares.selected.set(this, &EncyclopediaWindow::wareSelected);
 

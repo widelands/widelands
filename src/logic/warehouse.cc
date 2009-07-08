@@ -123,8 +123,6 @@ void WarehouseSupply::set_economy(Economy * const e)
 
 /*
 ===============
-WarehouseSupply::add_wares
-
 Add wares and update the economy.
 ===============
 */
@@ -140,8 +138,6 @@ void WarehouseSupply::add_wares     (Ware_Index const id, uint32_t const count)
 
 /*
 ===============
-WarehouseSupply::remove_wares
-
 Remove wares and update the economy.
 ===============
 */
@@ -156,8 +152,6 @@ void WarehouseSupply::remove_wares  (Ware_Index const id, uint32_t const count)
 
 /*
 ===============
-WarehouseSupply::add_workers
-
 Add workers and update the economy.
 
 ===============
@@ -174,8 +168,6 @@ void WarehouseSupply::add_workers   (Ware_Index const id, uint32_t const count)
 
 /*
 ===============
-WarehouseSupply::remove_workers
-
 Remove workers and update the economy.
 
 Comments see add_workers
@@ -192,8 +184,6 @@ void WarehouseSupply::remove_workers(Ware_Index const id, uint32_t const count)
 
 /*
 ===============
-WarehouseSupply::get_position
-
 Return the position of the Supply, i.e. the owning Warehouse.
 ===============
 */
@@ -202,8 +192,6 @@ PlayerImmovable * WarehouseSupply::get_position(Game &) {return m_warehouse;}
 
 /*
 ===============
-WarehouseSupply::is_active
-
 Warehouse supplies are never active.
 ===============
 */
@@ -258,11 +246,6 @@ Warehouse building
 ==============================================================================
 */
 
-/*
-===============
-Initialize with sane defaults
-===============
-*/
 Warehouse_Descr::Warehouse_Descr
 	(char const * const _name, char const * const _descname,
 	 std::string const & directory, Profile & prof, Section & global_s,
@@ -286,13 +269,6 @@ IMPLEMENTATION
 ==============================
 */
 
-/*
-===============
-Warehouse::Warehouse
-
-Initialize a warehouse (zero contents, etc...)
-===============
-*/
 Warehouse::Warehouse(const Warehouse_Descr & warehouse_descr) :
 Building            (warehouse_descr),
 m_supply            (new WarehouseSupply(this)),
@@ -351,7 +327,6 @@ void Warehouse::postfill
 
 
 /*
-Warehouse::get_priority
 warehouses determine how badly they want a certain ware
 */
 int32_t Warehouse::get_priority
@@ -560,21 +535,12 @@ void Warehouse::set_economy(Economy * const e)
 }
 
 
-/*
-===============
-Warehouse::get_wares
-===============
-*/
 WareList const & Warehouse::get_wares() const
 {
 	return m_supply->get_wares();
 }
 
-/*
-===============
-Warehouse::get_workers
-===============
-*/
+
 WareList const & Warehouse::get_workers() const
 {
 	return m_supply->get_workers();
@@ -584,8 +550,6 @@ WareList const & Warehouse::get_workers() const
 
 /*
 ===============
-Warehouse::create_wares
-
 Magically create wares in this warehouse. Updates the economy accordingly.
 ===============
 */
@@ -602,8 +566,6 @@ void Warehouse::insert_wares(Ware_Index const id, uint32_t const count)
 
 /*
 ===============
-Warehouse::destroy_wares
-
 Magically destroy wares.
 ===============
 */
@@ -617,8 +579,6 @@ void Warehouse::remove_wares(Ware_Index const id, uint32_t const count)
 
 /*
 ===============
-Warehouse::create_workers
-
 Magically create workers in this warehouse. Updates the economy accordingly.
 ===============
 */
@@ -632,8 +592,6 @@ void Warehouse::insert_workers(Ware_Index const id, uint32_t const count)
 
 /*
 ===============
-Warehouse::destroy_workers
-
 Magically destroy workers.
 ===============
 */
@@ -647,8 +605,6 @@ void Warehouse::remove_workers(Ware_Index const id, uint32_t const count)
 
 /*
 ===============
-Warehouse::fetch_from_flag
-
 Launch a carrier to fetch an item from our flag.
 ===============
 */
@@ -853,8 +809,6 @@ void Warehouse::do_launch_item(Game & game, WareInstance & item)
 
 /*
 ===============
-Warehouse::incorporate_item
-
 Swallow the item, adding it to out inventory.
 ===============
 */

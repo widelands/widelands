@@ -25,27 +25,25 @@
 #include "profile/profile.h"
 
 
-Fullscreen_Menu_TextView::Fullscreen_Menu_TextView(const std::string & filename)
-:
-Fullscreen_Menu_Base("fileviewmenu.jpg"),
+Fullscreen_Menu_TextView::Fullscreen_Menu_TextView
+	(std::string const & filename)
+	:
+	Fullscreen_Menu_Base("fileviewmenu.jpg"),
 
-// Title
-title (this, m_xres * 3 / 50, m_yres / 10, std::string(), Align_Left),
+	title (this, m_xres * 3 / 50, m_yres / 10, std::string(), Align_Left),
 
-// Multi lined text label
-textview
-	(this,
-	 m_xres *   3 /   80, m_yres * 283 / 1000,
-	 m_xres * 919 / 1000, m_yres *  11 /   20),
+	textview
+		(this,
+		 m_xres *   3 /   80, m_yres * 283 / 1000,
+		 m_xres * 919 / 1000, m_yres *  11 /   20),
 
-// Button
-close_button
-	(this,
-	 m_xres * 3 / 8, m_yres * 9 / 10, m_xres / 4, m_yres * 9 / 200,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 &Fullscreen_Menu_TextView::end_modal, *this, 0,
-	 _("Close"), std::string(), true, false,
-	 ui_fn(), fs_small())
+	close_button
+		(this,
+		 m_xres * 3 / 8, m_yres * 9 / 10, m_xres / 4, m_yres * 9 / 200,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 &Fullscreen_Menu_TextView::end_modal, *this, 0,
+		 _("Close"), std::string(), true, false,
+		 ui_fn(), fs_small())
 {
 	Profile prof(filename.c_str(), "global", "texts"); //  section-less file
 	Section & section = prof.get_safe_section("global");
@@ -61,7 +59,9 @@ close_button
 }
 
 void Fullscreen_Menu_TextView::set_text(const std::string & text)
-{textview.set_text(text);}
+{
+	textview.set_text(text);
+}
 
 Fullscreen_Menu_FileView::Fullscreen_Menu_FileView(const std::string & filename)
 : Fullscreen_Menu_TextView(filename)

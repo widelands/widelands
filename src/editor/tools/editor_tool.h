@@ -58,7 +58,7 @@ struct Editor_Tool {
 	virtual int32_t handle_click_impl
 		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &)
 		= 0;
-	virtual const char * get_sel_impl() const throw () = 0;
+	virtual const char * get_sel_impl() const = 0;
 	virtual bool operates_on_triangles() const {return false;};
 
 protected:

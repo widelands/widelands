@@ -210,7 +210,9 @@ bool Multiline_Editbox::handle_mousepress
 	return Multiline_Textarea::handle_mousepress(btn, x, y);
 }
 bool Multiline_Editbox::handle_mouserelease(const Uint8, int32_t, int32_t)
-{return false;}
+{
+	return false;
+}
 
 /**
  * Redraw the Editbox

@@ -81,8 +81,6 @@ void Stock_Menu::clicked_switch_page() {
 
 /*
 ===============
-Stock_Menu::think
-
 Push the current wares status to the WaresDisplay.
 ===============
 */

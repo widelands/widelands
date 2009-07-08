@@ -203,8 +203,9 @@ public:
 	 *
 	 * \return whether this object has the given attribute
 	 */
-	bool has_attribute(const uint32_t attr) const throw ()
-	{return descr().has_attribute(attr);}
+	bool has_attribute(uint32_t const attr) const {
+		return descr().has_attribute(attr);
+	}
 
 	/**
 	 * \return the value of the given \ref tAttribute. -1 if this object
