@@ -17,7 +17,7 @@ scythe=1
 6=return
 
 [harvest]
-0=findobject attrib:barbarian_field radius:2
+0=findobject attrib:wheat radius:2
 1=walk object
 2=playFX ../../../sound/farm/scythe 220
 3=animation idle 10000
