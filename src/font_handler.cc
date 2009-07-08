@@ -119,7 +119,7 @@ void Font_Handler::draw_string
 			//not cached, create a new surface
 			ci.picture_id =
 				create_text_surface
-					(font, fg, bg, text, align, wrap, caret, transparent);
+					(font, fg, bg, text, align, wrap, 0, caret, transparent);
 			// Now cache it
 			assert(ci.picture_id->surface);
 			g_gr->get_picture_size(ci.picture_id, ci.w, ci.h);
@@ -147,7 +147,7 @@ void Font_Handler::draw_string
 			g_gr->free_surface(widget_cache_id);
 		widget_cache_id =
 			create_text_surface
-				(font, fg, bg, text, align, wrap, caret, transparent);
+				(font, fg, bg, text, align, wrap, 0, caret, transparent);
 		g_gr->get_picture_size(widget_cache_id, w, h);
 		picid = widget_cache_id;
 	}
@@ -159,18 +159,15 @@ void Font_Handler::draw_string
 * Creates a Widelands surface of the given text, checks if multiline or not
 */
 PictureID Font_Handler::create_text_surface
-	(TTF_Font & f, RGBColor const fg, RGBColor const bg,
+	(TTF_Font & font, RGBColor const fg, RGBColor const bg,
 	 std::string const & text, Align const align, int32_t const wrap,
+	 int32_t             const line_spacing,
 	 int32_t const caret, bool const transparent)
 {
 	return
 		convert_sdl_surface
-			(*
-			 (wrap > 0 ?
-			  create_static_long_text_surface
-			  	(f, fg, bg, text, align, wrap, 0, caret)
-			  :
-			  create_single_line_text_surface(f, fg, bg, text, align, caret)),
+			(*create_sdl_text_surface
+			 	(font, fg, bg, text, align, wrap, line_spacing, caret),
 			 bg, transparent);
 }
 
@@ -213,7 +210,7 @@ SDL_Surface * Font_Handler::create_single_line_text_surface
  * This function renders a longer (multiline) text passage, which should
  * not change. If it changes, this function is highly unperformant.
  *
- * This function also completely ignores vertical aligement.
+ * This function also completely ignores vertical alignment.
  * Horizontal alignment is now recognized correctly
  */
 SDL_Surface * Font_Handler::create_static_long_text_surface
@@ -248,17 +245,15 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 			(SDL_Surface * const surface =
 			 	TTF_RenderUTF8_Shaded(&font, line.c_str(), sdl_fg, sdl_bg))
 		{
-		uint32_t new_text_pos = cur_text_pos + line.size();
+		uint32_t const new_text_pos = cur_text_pos + line.size();
 		if (caret != -1) {
 			if (new_text_pos >= caret - i) {
-				int32_t caret_line_pos = caret - cur_text_pos - i;
+				int32_t const caret_line_pos = caret - cur_text_pos - i;
 				std::string const text_caret_pos = line.substr(0, caret_line_pos);
 				render_caret(font, *surface, text_caret_pos);
 				caret = -1;
-			}
-			else {
+			} else
 				cur_text_pos = new_text_pos;
-			}
 			++i;
 		}
 
@@ -330,14 +325,17 @@ SDL_Surface * Font_Handler::draw_string_sdl_surface
 SDL_Surface * Font_Handler::create_sdl_text_surface
 	(TTF_Font & font, RGBColor const fg, RGBColor const bg,
 	 std::string const & text,
-	 Align const align, int32_t const wrap, int32_t const line_spacing)
+	 Align               const align,
+	 int32_t             const wrap,
+	 int32_t             const line_spacing,
+	 int32_t             const caret)
 {
 	return
-		(wrap > 0  ?
-		 create_static_long_text_surface
-		 	(font, fg, bg, text, align, wrap, line_spacing)
-		 :
-		 create_single_line_text_surface(font, fg, bg, text, align));
+		wrap > 0  ?
+		create_static_long_text_surface
+			(font, fg, bg, text, align, wrap, line_spacing, caret)
+		:
+		create_single_line_text_surface(font, fg, bg, text, align, caret);
 }
 
 /*
@@ -432,8 +430,8 @@ void Font_Handler::draw_richtext
 				0;
 
 			//Width that's left for text in this richtext block
-			int32_t h_space = 3;
-			int32_t text_width_left = (wrap - img_surf_w) - h_space;
+			int32_t const h_space         = 3;
+			int32_t const text_width_left = (wrap - img_surf_w) - h_space;
 
 			//Iterate over text blocks of current richtext block
 			for
@@ -463,7 +461,7 @@ void Font_Handler::draw_richtext
 					if (text_it->get_font_decoration() == "underline")
 						font_style |= TTF_STYLE_UNDERLINE;
 
-					SDL_Surface * rend_word =
+					SDL_Surface * const rend_word =
 						draw_string_sdl_surface
 							(text_it->get_font_face (),
 							 text_it->get_font_size (),

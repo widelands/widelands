@@ -163,7 +163,7 @@ private:
 	PictureID create_text_surface
 		(TTF_Font &,
 		 RGBColor fg, RGBColor bg,
-		 std::string const & text, Align, int32_t wrap,
+		 std::string const & text, Align, int32_t wrap, int32_t line_spacing,
 		 int32_t caret = -1, bool transparent = true);
 	PictureID convert_sdl_surface
 		(SDL_Surface &, const RGBColor bg, bool transparent = false);
@@ -177,7 +177,7 @@ private:
 	SDL_Surface * create_sdl_text_surface
 		(TTF_Font &, RGBColor fg, RGBColor bg,
 		 const std::string & text,
-		 Align, int32_t wrap, int32_t line_spacing = 0);
+		 Align, int32_t wrap, int32_t line_spacing = 0, int32_t caret = -1);
 	SDL_Surface * create_static_long_text_surface
 		(TTF_Font &, RGBColor fg, RGBColor bg,
 		 std::string text,
