@@ -32,26 +32,19 @@ struct BuildingHints {
 
 	void parse (Profile &);
 
-	const char * get_renews_map_resource() const throw ()
-	{return renews_map_resource;}
+	char const * get_renews_map_resource() const {return renews_map_resource;}
 
-	const char * get_mines() const throw ()
-	{return mines;}
+	char const * get_mines              () const {return mines;}
 
-	bool is_basic()
-	{return basic;}
+	bool         is_basic               () const {return basic;}
 
-	bool is_trunkproducer()
-	{return trunkproducer;}
+	bool         is_trunkproducer       () const {return trunkproducer;}
 
-	bool is_stoneproducer()
-	{return stoneproducer;}
+	bool         is_stoneproducer       () const {return stoneproducer;}
 
-	bool get_needs_water()
-	{return needs_water;}
+	bool         get_needs_water        () const {return needs_water;}
 
-	uint8_t get_mines_percent()
-	{return mines_percent;}
+	uint8_t      get_mines_percent      () const {return mines_percent;}
 
 private:
 	char  * renews_map_resource;
