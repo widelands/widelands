@@ -77,13 +77,6 @@ Map IMPLEMENTATION
  * This really identifies a map like it is in the game
  */
 
-/*
-===============
-Map::Map
-
-Inits a clean, empty map
-===============
-*/
 Map::Map() :
 m_nrplayers      (0),
 m_width          (0),
@@ -122,8 +115,6 @@ void Map::recalc_border(const FCoords fc) {
 
 /*
 ===============
-Map::recalc_for_field_area
-
 Call this function whenever the field at fx/fy has changed in one of the ways:
  - height has changed
  - robust Map_Object has been added or removed
@@ -317,8 +308,6 @@ void Map::recalc_default_resources() {
 
 /*
 ===============
-Map::cleanup
-
 remove your world, remove your data
 go back to your initial state
 ===============
@@ -633,8 +622,6 @@ uint8_t Map::make_field_elevation
 
 /*
 ===============
-Map::generate_random_value_map
-
 Generate a "continuous" array of "reasonable" random values.
 The array generated is in fact organized in a two-dimensional
 way. "Reasonable" means that the values are not purely random.
@@ -810,8 +797,6 @@ uint32_t * Map::generate_random_value_map
 
 /*
 ===============
-Map::figure_out_terrain
-
 Figures out terrain info for a field in a random map.
 
 mapGenInfo:  Map generator information used to translate
@@ -1223,8 +1208,6 @@ void Map::set_scenario_player_ai
 
 /*
 ===============
-Map::set_nrplayers
-
 Change the number of players the map supports.
 Could happen multiple times in the map editor.
 ===============
@@ -1247,8 +1230,6 @@ void Map::set_nrplayers(Player_Number const nrplayers) {
 
 /*
 ===============
-Map::set_starting_pos
-
 Set the starting coordinates of a player
 ===============
 */
@@ -1260,37 +1241,28 @@ void Map::set_starting_pos(Player_Number const plnum, Coords const c)
 	m_starting_pos[plnum - 1] = c;
 }
 
-/*
-===============
-Map::set_author
-Map::set_name
-Map::set_description
-Map::set_world_name
 
-Set informational strings
-===============
-*/
-void Map::set_filename(const char *string)
+void Map::set_filename(char const * const string)
 {
 	snprintf(m_filename, sizeof(m_filename), "%s", string);
 }
 
-void Map::set_author(const char *string)
+void Map::set_author(char const * const string)
 {
 	snprintf(m_author, sizeof(m_author), "%s", string);
 }
 
-void Map::set_name(const char *string)
+void Map::set_name(char const * const string)
 {
 	snprintf(m_name, sizeof(m_name), "%s", string);
 }
 
-void Map::set_description(const char *string)
+void Map::set_description(char const * const string)
 {
 	snprintf(m_description, sizeof(m_description), "%s", string);
 }
 
-void Map::set_world_name(const char *string)
+void Map::set_world_name(char const * const string)
 {
 	snprintf(m_worldname, sizeof(m_worldname), "%s", string);
 }
@@ -1305,8 +1277,6 @@ void Map::set_background(char const * const string)
 
 /*
 ===============
-Map::load_world
-
 load the corresponding world. This should only happen
 once during initial load.
 ===============
@@ -1319,8 +1289,6 @@ void Map::load_world()
 
 /*
 ===============
-Map::load_graphics
-
 Load data for the graphics subsystem.
 ===============
 */
@@ -1332,13 +1300,13 @@ void Map::load_graphics()
 
 /*
 ===============
-Map::get_immovable
-
 Returns the immovable at the given coordinate
 ===============
 */
 BaseImmovable * Map::get_immovable(const Coords coord) const
-{return operator[](coord).get_immovable();}
+{
+	return operator[](coord).get_immovable();
+}
 
 
 /*
@@ -1408,8 +1376,6 @@ void Map::find_reachable
 
 /*
 ===============
-Map::find_radius
-
 Call the functor for every field within the given radius.
 
 Functor is of the form: functor(Map &, FCoords)
@@ -1461,8 +1427,6 @@ struct FindBobsCallback {
 
 /*
 ===============
-Map::find_bobs
-
 Find Bobs in the given area. Only finds objects for which
 functor.accept() returns true (the default functor always returns true)
 If list is non-zero, pointers to the relevant objects will be stored in
@@ -1486,8 +1450,6 @@ uint32_t Map::find_bobs
 
 /*
 ===============
-Map::find_reachable_bobs
-
 Find Bobs that are reachable by moving within the given radius (also see
 find_reachable()).
 Only finds objects for which functor.accept() returns true (the default functor
@@ -1550,8 +1512,6 @@ struct FindImmovablesCallback {
 
 /*
 ===============
-Map::find_immovables
-
 Find all immovables in the given area for which functor returns true
 (the default functor always returns true).
 Returns true if an immovable has been found.
@@ -1573,8 +1533,6 @@ uint32_t Map::find_immovables
 
 /*
 ===============
-Map::find_reachable_immovables
-
 Find all immovables reachable by moving in the given radius (see
 find_reachable()).
 Return immovables for which functor returns true (the default functor
@@ -1727,8 +1685,6 @@ dependencies.
 
 /*
 ===============
-Map::recalc_brightness
-
 Fetch the slopes to neighbours and call the actual logic in Field
 ===============
 */
@@ -1767,8 +1723,6 @@ void Map::recalc_brightness(FCoords const f) {
 
 /*
 ===============
-Map::recalc_fieldcaps_pass1
-
 Recalculate the fieldcaps for the given field.
  - Check terrain types for passability and flag buildability
 
@@ -1883,8 +1837,6 @@ end:
 
 /*
 ===============
-Map::recalc_fieldcaps_pass2
-
 Second pass of fieldcaps. Determine which kind of building (if any) can be built
 on this Field.
 
@@ -2108,8 +2060,10 @@ void Map::recalc_fieldcaps_pass2(FCoords const f)
 			//    if one of the second order neighbours is swimmable.
 			{
 				MapFringeRegion<Area<FCoords> > mr(*this, Area<FCoords>(f, 2));
-				do if (abs(mr.location().field->get_height() - f_height) >= 3)
-				{building = BUILDCAPS_SMALL; break;} while (mr.advance(*this));
+				do if (abs(mr.location().field->get_height() - f_height) >= 3) {
+					building = BUILDCAPS_SMALL;
+					break;
+				} while (mr.advance(*this));
 			}
 
 			caps |= building;
@@ -2194,8 +2148,6 @@ uint32_t Map::calc_distance(const Coords a, const Coords b) const
 
 /*
 ===============
-Map::calc_cost_estimate
-
 Calculates the cost estimate between the two points.
 This function is used mainly for the path-finding estimate.
 ===============
@@ -2217,8 +2169,6 @@ int32_t Map::calc_cost_lowerbound(const Coords a, const Coords b) const
 
 /*
 ===============
-Map::calc_cost
-
 Calculate the hard cost of walking the given slope (positive means up,
 negative means down).
 The cost is in milliseconds it takes to walk.
@@ -2259,8 +2209,6 @@ int32_t Map::calc_cost(int32_t const slope) const
 
 /*
 ===============
-Map::calc_cost
-
 Return the time it takes to walk the given step from coords in the given
 direction, in milliseconds.
 ===============
@@ -2284,8 +2232,6 @@ int32_t Map::calc_cost(const Coords coords, const int32_t dir) const
 
 /*
 ===============
-Map::calc_bidi_cost
-
 Calculate the average cost of walking the given step in both directions.
 ===============
 */
@@ -2308,8 +2254,6 @@ int32_t Map::calc_bidi_cost(const Coords coords, const int32_t dir) const
 
 /*
 ===============
-Map::calc_cost
-
 Calculate the cost of walking the given path.
 If either of the forward or backward pointers is set, it will be filled in
 with the cost of walking in said direction.
@@ -2337,13 +2281,7 @@ void Map::calc_cost
 	}
 }
 
-/*
-===============
-Map::get_neighbour
-
-Get a field's neighbour by direction
-===============
-*/
+/// Get a node's neighbour by direction.
 void Map::get_neighbour
 	(Coords const f, Direction const dir, Coords * const o) const
 {
@@ -2965,8 +2903,6 @@ bool FindBobEnemySoldier::accept(Bob * const imm) const
 
 /*
 ===============
-UniqueRandomMapInfo::mapIdNumberToChar
-
 Converts a character out of a mapId-String into an integer value.
 Valid characters are 'a'-'z' (or 'A'-'Z') and '2'-'9'. 'i' and 'o'
 (or 'I' and 'O') are not valid.
@@ -3003,8 +2939,6 @@ int  Widelands::UniqueRandomMapInfo::mapIdCharToNumber(char ch)
 
 /*
 ===============
-UniqueRandomMapInfo::mapIdNumberToChar
-
 Converts an integer number (0-31) to a characted usable in
 a map id string.
 
@@ -3029,8 +2963,6 @@ char Widelands::UniqueRandomMapInfo::mapIdNumberToChar(int32_t const num)
 
 /*
 ===============
-UniqueRandomMapInfo::setFromIdString
-
 Fills a UniqueRandomMapInfo structure from a given Map-id-string.
 
 mapIdString:  Map-Id-String
@@ -3117,8 +3049,6 @@ bool Widelands::UniqueRandomMapInfo::setFromIdString
 
 /*
 ===============
-UniqueRandomMapInfo::generateIdString
-
 Generates an ID-String for map generation.
 The ID-String is an encoded version of the
 information in a UniqueMapInfo structure.
