@@ -632,80 +632,80 @@ void Building_Window::setup_capsbuttons()
 	bool const allow_changes = &player == &building().owner();
 
 	if (allow_changes) {
-	if (upcast(ProductionSite const, productionsite, m_building))
-		if (not dynamic_cast<MilitarySite const *>(productionsite)) {
-			bool const is_stopped = productionsite->is_stopped();
+		if (upcast(ProductionSite const, productionsite, m_building))
+			if (not dynamic_cast<MilitarySite const *>(productionsite)) {
+				bool const is_stopped = productionsite->is_stopped();
+				new UI::Callback_Button<Building_Window>
+					(m_capsbuttons,
+					 x, 0, 34, 34,
+					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+					 g_gr->get_picture
+					 	(PicMod_Game,
+					 	 (is_stopped ? "pics/continue.png" : "pics/stop.png")),
+					 &Building_Window::act_start_stop, *this,
+					 is_stopped ? _("Continue") : _("Stop"));
+				x += 34;
+			}
+
+		if (m_capscache & 1 << Building::PCap_Enhancable) {
+			std::set<Building_Index> const & enhancements =
+				m_building->enhancements();
+			Widelands::Tribe_Descr const & tribe  = player.tribe();
+			container_iterate_const(std::set<Building_Index>, enhancements, i)
+				if (player.is_building_allowed(*i.current)) {
+					Widelands::Building_Descr const & building_descr =
+						*tribe.get_building_descr(*i.current);
+					char buffer[128];
+					snprintf
+						(buffer, sizeof(buffer),
+						 _("Enhance to %s"), building_descr.descname().c_str());
+					new UI::Callback_IDButton
+						<Building_Window, Widelands::Building_Index>
+						(m_capsbuttons,
+						 x, 0, 34, 34,
+						 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+						 building_descr.get_buildicon(),
+						 &Building_Window::act_enhance, *this,
+						 *i.current, //  button id = building id
+						 buffer);
+					x += 34;
+				}
+		}
+
+		if (m_capscache & (1 << Building::PCap_Bulldoze)) {
 			new UI::Callback_Button<Building_Window>
 				(m_capsbuttons,
 				 x, 0, 34, 34,
 				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-				 g_gr->get_picture
-				 	(PicMod_Game,
-				 	 (is_stopped ? "pics/continue.png" : "pics/stop.png")),
-				 &Building_Window::act_start_stop, *this,
-				 is_stopped ? _("Continue") : _("Stop"));
+				 g_gr->get_picture(PicMod_Game, pic_bulldoze),
+				 &Building_Window::act_bulldoze, *this,
+				 _("Destroy"));
 			x += 34;
 		}
-
-	if (m_capscache & 1 << Building::PCap_Enhancable) {
-		std::set<Building_Index> const & enhancements =
-			m_building->enhancements();
-		Widelands::Tribe_Descr const & tribe  = player.tribe();
-		container_iterate_const(std::set<Building_Index>, enhancements, i)
-			if (player.is_building_allowed(*i.current)) {
-				Widelands::Building_Descr const & building_descr =
-					*tribe.get_building_descr(*i.current);
-				char buffer[128];
-				snprintf
-					(buffer, sizeof(buffer),
-					 _("Enhance to %s"), building_descr.descname().c_str());
-				new UI::Callback_IDButton
-					<Building_Window, Widelands::Building_Index>
-					(m_capsbuttons,
-					 x, 0, 34, 34,
-					 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-					 building_descr.get_buildicon(),
-					 &Building_Window::act_enhance, *this,
-					 *i.current, //  button id = building id
-					 buffer);
-				x += 34;
-			}
-	}
-
-	if (m_capscache & (1 << Building::PCap_Bulldoze)) {
-		new UI::Callback_Button<Building_Window>
-			(m_capsbuttons,
-			 x, 0, 34, 34,
-			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-			 g_gr->get_picture(PicMod_Game, pic_bulldoze),
-			 &Building_Window::act_bulldoze, *this,
-			 _("Destroy"));
-		x += 34;
-	}
 	}
 
 	if (allow_changes or see_all) {
-	if (m_building->descr().m_workarea_info.size()) {
-		m_toggle_workarea = new UI::Callback_Button<Building_Window>
-			(m_capsbuttons,
-			 x, 0, 34, 34,
-			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-			 g_gr->get_picture(PicMod_Game,  "pics/workarea3cumulative.png"),
-			 &Building_Window::toggle_workarea, *this,
-			 _("Show workarea"));
-		x += 34;
-	}
+		if (m_building->descr().m_workarea_info.size()) {
+			m_toggle_workarea = new UI::Callback_Button<Building_Window>
+				(m_capsbuttons,
+				 x, 0, 34, 34,
+				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+				 g_gr->get_picture(PicMod_Game,  "pics/workarea3cumulative.png"),
+				 &Building_Window::toggle_workarea, *this,
+				 _("Show workarea"));
+			x += 34;
+		}
 
-	if (iaplayer().get_display_flag(Interactive_Base::dfDebug)) {
-		new UI::Callback_Button<Building_Window>
-			(m_capsbuttons,
-			 x, 0, 34, 34,
-			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-			 g_gr->get_picture(PicMod_Game,  pic_debug),
-			 &Building_Window::act_debug, *this,
-			 _("Debug"));
-		x += 34;
-	}
+		if (iaplayer().get_display_flag(Interactive_Base::dfDebug)) {
+			new UI::Callback_Button<Building_Window>
+				(m_capsbuttons,
+				 x, 0, 34, 34,
+				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+				 g_gr->get_picture(PicMod_Game,  pic_debug),
+				 &Building_Window::act_debug, *this,
+				 _("Debug"));
+			x += 34;
+		}
 	}
 
 	if (x == 0) {
