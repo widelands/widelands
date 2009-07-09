@@ -307,6 +307,8 @@ void WLApplication::run()
 	if (m_game_type == EDITOR) {
 		g_sound_handler.start_music("ingame");
 		Editor_Interactive::run_editor(m_filename);
+	} else if (m_game_type == REPLAY)   {
+		replay();
 	} else if (m_game_type == LOADGAME) {
 		Widelands::Game game;
 		try {
@@ -2048,14 +2050,12 @@ private:
  */
 void WLApplication::replay()
 {
-	std::string fname;
-
-	{
+	if (m_filename.empty()) {
 		Fullscreen_Menu_LoadReplay rm;
 		if (rm.run() <= 0)
 			return;
 
-		fname = rm.filename();
+		m_filename = rm.filename();
 	}
 
 	Widelands::Game game;
@@ -2070,7 +2070,7 @@ void WLApplication::replay()
 		game.set_ibase
 			(new Interactive_Spectator(game, g_options.pull_section("global")));
 		game.set_write_replay(false);
-		ReplayGameController rgc(game, fname);
+		ReplayGameController rgc(game, m_filename);
 
 		game.run(loaderUI, Widelands::Game::Loaded);
 	} catch (...) {
