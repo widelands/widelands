@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-07-01 00:17+0000\n"
-"PO-Revision-Date: 2009-07-01 03:22+0300\n"
-"Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
+"POT-Creation-Date: 2009-07-09 16:24+0000\n"
+"PO-Revision-Date: 2009-07-09 19:27+0300\n"
+"Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -857,7 +857,7 @@ msgid "Works deep in the mines to produce coal, iron or gold."
 msgstr "Työskentelee syvällä kaivoksissa louhien hiiltä, rautaa tai kultaa."
 
 #: ../../../tribes/atlanteans/pick/conf:1
-msgid "Picks are used by stonecutters and miners. It is produced by the toolsmith."
+msgid "Picks are used by stonecutters and miners. They are produced by the toolsmith."
 msgstr "Hakkuja käyttävät kivenhakkaajat ja kaivostyöläiset. Työkaluseppä valmistaa hakut."
 
 #: ../../../tribes/atlanteans/planks/conf:1
@@ -878,7 +878,7 @@ msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
 msgstr "Viikate on maanviljelijän työkalu. Työkaluseppä valmistaa viikatteet."
 
 #: ../../../tribes/atlanteans/shovel/conf:1
-msgid "Shovels are needed for proper handling of plants. Therefore the forester and the blackroot farmer are using it. It is produced by the toolsmith."
+msgid "Shovels are needed for proper handling of plants. Therefore the forester and the blackroot farmer are using them. They are produced by the toolsmith."
 msgstr "Lapioita tarvitaan kasvien käsittelyyn, joten niitä käyttävät puunistuttaja ja mustajuuren viljelijä. Työkaluseppä valmistaa lapiot."
 
 #: ../../../tribes/atlanteans/smelter/conf:1
