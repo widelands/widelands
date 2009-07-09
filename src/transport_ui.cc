@@ -19,7 +19,7 @@
 
 #include "economy/economy.h"
 #include "graphic/graphic.h"
-#include "wui/interactive_player.h"
+#include "wui/interactive_gamebase.h"
 #include "item_ware_descr.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
@@ -34,8 +34,7 @@ using Widelands::Item_Ware_Descr;
 using Widelands::Ware_Index;
 
 struct Economy_Options_Window : public UI::UniqueWindow {
-	Economy_Options_Window(Interactive_Player & parent, Economy & _economy)
-
+	Economy_Options_Window(Interactive_GameBase & parent, Economy & _economy)
 		:
 		UI::UniqueWindow
 			(&parent, &_economy.m_optionswindow_registry, 0, 0,
@@ -45,7 +44,7 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 			 g_gr->get_xres() - 80, g_gr->get_yres() - 80),
 		m_economy (_economy)
 	{
-		Widelands::Tribe_Descr const & tribe = parent.player().tribe();
+		Widelands::Tribe_Descr const & tribe = _economy.owner().tribe();
 		Ware_Index const nr_wares = tribe.get_nrwares();
 		for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
 			Item_Ware_Descr const & descr = *tribe.get_ware_descr(i);
@@ -57,6 +56,12 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 	}
 
 	virtual void think() {
+		Interactive_GameBase const & igbase =
+			dynamic_cast<Interactive_GameBase &>(*get_parent());
+		Widelands::Player_Number const owner = economy().owner().player_number();
+		if (not igbase.can_see(owner))
+			die();
+		bool const can_act = igbase.can_act(owner);
 		for
 			(Ware_Type_Box * b =
 			 	dynamic_cast<Ware_Type_Box *>(m_box.get_first_child());
@@ -65,9 +70,11 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 		{
 			Ware_Index const i = b->ware_type;
 			Economy::Target_Quantity const & tq = economy().target_quantity(i);
-			b->decrease_permanent.set_enabled(1 < tq.permanent);
-			b->decrease_temporary.set_enabled(1 < tq.temporary);
-			b->reset             .set_enabled(tq.last_modified);
+			b->decrease_permanent.set_enabled(can_act and 1 < tq.permanent);
+			b->increase_permanent.set_enabled(can_act);
+			b->decrease_temporary.set_enabled(can_act and 1 < tq.temporary);
+			b->increase_temporary.set_enabled(can_act);
+			b->reset             .set_enabled(can_act and tq.last_modified);
 		}
 	}
 
@@ -151,7 +158,7 @@ private:
 					Game & game = dynamic_cast<Game &>(player.egbase());
 					game.send_player_command
 						(*new Widelands::Cmd_SetTargetQuantity
-						 	(game.get_gametime(), player.get_player_number(),
+						 	(game.get_gametime(), player.player_number(),
 						 	 player.get_economy_number(&e), ware_type,
 						 	 tq.permanent - 1, tq.temporary));
 				}
@@ -180,7 +187,7 @@ private:
 				Game & game = dynamic_cast<Game &>(player.egbase());
 				game.send_player_command
 					(*new Widelands::Cmd_SetTargetQuantity
-					 	(game.get_gametime(), player.get_player_number(),
+					 	(game.get_gametime(), player.player_number(),
 					 	 player.get_economy_number(&e), ware_type,
 					 	 new_permanent, std::max(new_permanent, tq.temporary)));
 			}
@@ -209,7 +216,7 @@ private:
 					Game   & game   = dynamic_cast<Game &>(player.egbase());
 					game.send_player_command
 						(*new Widelands::Cmd_SetTargetQuantity
-						 	(game.get_gametime(), player.get_player_number(),
+						 	(game.get_gametime(), player.player_number(),
 						 	 player.get_economy_number(&e), ware_type,
 						 	 std::min(tq.permanent, new_temporary), new_temporary));
 				}
@@ -237,7 +244,7 @@ private:
 				Game & game = dynamic_cast<Game &>(player.egbase());
 				game.send_player_command
 					(*new Widelands::Cmd_SetTargetQuantity
-					 	(game.get_gametime(), player.get_player_number(),
+					 	(game.get_gametime(), player.player_number(),
 					 	 player.get_economy_number(&e), ware_type,
 					 	 tq.permanent, tq.temporary + 1));
 			}
@@ -257,7 +264,7 @@ private:
 				Game & game = dynamic_cast<Game &>(player.egbase());
 				game.send_player_command
 					(*new Widelands::Cmd_ResetTargetQuantity
-					 	(game.get_gametime(), player.get_player_number(),
+					 	(game.get_gametime(), player.player_number(),
 					 	 player.get_economy_number(&e), parent.ware_type));
 			}
 		} reset;
@@ -282,6 +289,6 @@ void Economy::show_options_window() {
 		m_optionswindow_registry.window->move_to_top();
 	else
 		new Economy_Options_Window
-			(dynamic_cast<Interactive_Player &>(*owner().egbase().get_ibase()),
+			(dynamic_cast<Interactive_GameBase &>(*owner().egbase().get_ibase()),
 			 *this);
 }

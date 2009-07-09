@@ -167,7 +167,7 @@ void Editor_Game_Base::unconquer_area
 	//  Here must be a building.
 	assert
 		(dynamic_cast<const Building &>(*map().get_immovable(player_area))
-		 .owner().get_player_number()
+		 .owner().player_number()
 		 ==
 		 player_area.player_number);
 
@@ -367,7 +367,7 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 			dynamic_cast<PlayerImmovable &>(*i.current->object);
 		if
 			(not
-			 m[i.current->coords].is_interior(imm.owner().get_player_number()))
+			 m[i.current->coords].is_interior(imm.owner().player_number()))
 			if
 				(std::find(burnlist.begin(), burnlist.end(), &imm)
 				 ==

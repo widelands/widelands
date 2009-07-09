@@ -205,7 +205,7 @@ void MilitarySite::cleanup(Editor_Game_Base & egbase)
 	if (m_didconquer)
 		egbase.unconquer_area
 			(Player_Area<Area<FCoords> >
-			 	(owner().get_player_number(),
+			 	(owner().player_number(),
 			 	 Area<FCoords>
 			 	 	(egbase.map().get_fcoords(get_position()), get_conquers())),
 			 m_defeating_player);
@@ -449,7 +449,7 @@ void MilitarySite::conquer_area(Game & game) {
 	assert(not m_didconquer);
 	game.conquer_area
 		(Player_Area<Area<FCoords> >
-		 	(owner().get_player_number(),
+		 	(owner().player_number(),
 		 	 Area<FCoords>
 		 	 	(game.map().get_fcoords(get_position()), get_conquers())));
 	m_didconquer = true;
@@ -531,7 +531,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		return true;
 	} else {
 		//TODO: Conquer building
-		set_defeating_player(enemy.owner().get_player_number());
+		set_defeating_player(enemy.owner().player_number());
 		schedule_destroy(game);
 		return false;
 	}

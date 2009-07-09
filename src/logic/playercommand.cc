@@ -559,7 +559,7 @@ void Cmd_SetWarePriority::execute(Game & game)
 
 	if (!psite)
 		return;
-	if (psite->owner().get_player_number() != sender())
+	if (psite->owner().player_number() != sender())
 		return;
 
 	psite->set_priority(m_type, m_index, m_priority);
@@ -1018,7 +1018,7 @@ void Cmd_EnemyFlagAction::execute (Game & game)
 
 	log
 		("player(%u)    imm->owner (%d) number = %u\n",
-		 player.get_player_number(), imm.owner().get_player_number(), number);
+		 player.player_number(), imm.owner().player_number(), number);
 
 	if (upcast(Flag, flag, &imm)) {
 		if (Building const * const building = flag->get_building())

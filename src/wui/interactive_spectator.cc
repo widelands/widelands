@@ -20,6 +20,7 @@
 #include "interactive_spectator.h"
 
 #include "chat.h"
+#include "fieldaction.h"
 #include "game_chat_menu.h"
 #include "game_main_menu_save_game.h"
 #include "game_options_menu.h"
@@ -32,6 +33,8 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
+
+#include "upcast.h"
 
 /**
  * Setup the replay UI for the given game.
@@ -170,11 +173,34 @@ void Interactive_Spectator::toggle_statistics() {
 }
 
 
+bool Interactive_Spectator::can_see(Widelands::Player_Number) const
+{
+	return true;
+}
+bool Interactive_Spectator::can_act(Widelands::Player_Number) const
+{
+	return false;
+}
+Widelands::Player_Number Interactive_Spectator::player_number() const
+{
+	return 0;
+}
+
+
 /**
- * Observer has clicked on the given field; bring up the context menu.
- * \todo Implement
+ * Observer has clicked on the given node; bring up the context menu.
  */
-void Interactive_Spectator::node_action() {}
+void Interactive_Spectator::node_action() {
+	if //  special case for buildings
+		(upcast
+		 	(Widelands::Building,
+		 	 building,
+		 	 egbase().map().get_immovable(get_sel_pos().node)))
+		return building->show_options(this);
+
+	//  everything else can bring up the temporary dialog
+	show_field_action(this, 0, &m_fieldaction);
+}
 
 
 /**

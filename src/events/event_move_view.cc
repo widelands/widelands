@@ -78,7 +78,7 @@ Event::State Event_Move_View::run(Game & game) {
 	assert(m_location);
 
 	Interactive_Player & ipl = *game.get_ipl();
-	if (ipl.get_player_number() == m_player)
+	if (ipl.player_number() == m_player)
 		ipl.move_view_to(m_location);
 
 	return m_state = DONE;

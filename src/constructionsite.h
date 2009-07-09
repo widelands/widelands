@@ -95,7 +95,7 @@ public:
 
 protected:
 	virtual void create_options_window
-		(Interactive_Player &, UI::Window * & registry);
+		(Interactive_GameBase &, UI::Window * & registry);
 
 	void request_builder(Game &);
 	static void request_builder_callback

@@ -1210,8 +1210,7 @@ void RenderTarget::drawanim
 	uint32_t const framenumber = (time / data.frametime) % gfx.nr_frames();
 
 	Surface * const frame =
-		gfx.get_frame
-			(framenumber, player ? player->get_player_number() : 0, player);
+		gfx.get_frame(framenumber, player ? player->player_number() : 0, player);
 
 	dst -= gfx.get_hotspot();
 
@@ -1245,7 +1244,7 @@ void RenderTarget::drawanimrect
 	// Get the frame and its data
 	Surface * const frame = g_gr->get_animation(animation)->get_frame
 			((time / data->frametime) % g_gr->nr_frames(animation),
-			 player ? player->get_player_number() : 0,
+			 player ? player->player_number() : 0,
 			 player);
 
 	dst -= g_gr->get_animation(animation)->get_hotspot();

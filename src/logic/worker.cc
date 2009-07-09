@@ -866,7 +866,7 @@ void Worker::log_general_info(Editor_Game_Base const & egbase)
 
 	if (upcast(PlayerImmovable, loc, m_location.get(egbase))) {
 		molog("* Owner: (%p)\n", &loc->owner());
-		molog("** Owner (plrnr): %i\n", loc->owner().get_player_number());
+		molog("** Owner (plrnr): %i\n", loc->owner().player_number());
 		molog("* Economy: %p\n", loc->get_economy());
 	}
 
@@ -1537,7 +1537,7 @@ void Worker::return_update(Game & game, State & state)
 			 	 "object, such as a farm field, is placed on the map while the "
 			 	 "worker is out working. (bug #1796611) (The game has been "
 			 	 "paused.)"),
-			 descname().c_str(), serial(), owner().get_player_number(),
+			 descname().c_str(), serial(), owner().player_number(),
 			 does_carry_ware() ?
 			 get_carried_item(game)->descr().descname().c_str() : _("nothing"),
 			 get_position().x, get_position().y,

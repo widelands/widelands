@@ -94,7 +94,7 @@ throw (_wexception)
 	Interactive_Player * const plr = game.get_ipl();
 
 	// Player number
-	fw.Unsigned8(plr ? plr->get_player_number() : 1);
+	fw.Unsigned8(plr ? plr->player_number() : 1);
 
 	// Map Position
 	if (plr) {

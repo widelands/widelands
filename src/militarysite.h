@@ -118,7 +118,7 @@ protected:
 	void conquer_area(Game &);
 
 	virtual void create_options_window
-		(Interactive_Player &, UI::Window * & registry);
+		(Interactive_GameBase &, UI::Window * & registry);
 
 private:
 	bool isPresent(Soldier &) const;

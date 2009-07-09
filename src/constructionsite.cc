@@ -121,7 +121,7 @@ void ConstructionSite::log_general_info(Editor_Game_Base const & egbase) {
 			 static_cast<long unsigned int>(m_wares.size()));
 		molog
 			("* Owner: %i (player nr)\n",
-			 m_wares[i]->owner().get_player_number());
+			 m_wares[i]->owner().player_number());
 		molog("* Ware: %u (index)\n", m_wares[i]->get_ware().value());
 		molog("* Size: %i\n", m_wares[i]->get_size());
 		molog("* Filled: %i\n", m_wares[i]->get_filled());

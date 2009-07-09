@@ -113,7 +113,7 @@ protected:
 
 	/// Create the warehouse information window.
 	virtual void create_options_window
-		(Interactive_Player &, UI::Window * & registry);
+		(Interactive_GameBase &, UI::Window * & registry);
 
 private:
 	static void idle_request_cb

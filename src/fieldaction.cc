@@ -310,8 +310,8 @@ FieldActionWindow::~FieldActionWindow()
 
 void FieldActionWindow::think() {
 	if
-		(m_plr->vision(m_node.field - &ibase().egbase().map()[0]) <= 1 and
-		 not m_plr->see_all())
+		(m_plr and m_plr->vision(m_node.field - &ibase().egbase().map()[0]) <= 1
+		 and not m_plr->see_all())
 		die();
 }
 
@@ -366,7 +366,10 @@ void FieldActionWindow::add_buttons_auto()
 	watchbox = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 	// Add road-building actions
-	if (m_node.field->get_owned_by() == m_plr->get_player_number()) {
+	Interactive_GameBase const & igbase =
+		dynamic_cast<Interactive_GameBase const &>(ibase());
+	Widelands::Player_Number const owner = m_node.field->get_owned_by();
+	if (igbase.can_see(owner)) {
 
 		Widelands::BaseImmovable * const imm = m_map->get_immovable(m_node);
 
@@ -375,23 +378,26 @@ void FieldActionWindow::add_buttons_auto()
 
 		if (upcast(Widelands::Flag, flag, imm)) {
 			// Add flag actions
-			add_button
-				(buildbox,
-				 pic_buildroad,
-				 &FieldActionWindow::act_buildroad,
-				 _("Build road"));
-
-			Building * const building = flag->get_building();
-
-			if
-				(!building
-				 ||
-				 building->get_playercaps() & (1 << Building::PCap_Bulldoze))
+			bool const can_act = igbase.can_act(owner);
+			if (can_act) {
 				add_button
 					(buildbox,
-					 pic_ripflag,
-					 &FieldActionWindow::act_ripflag,
-					 _("Destroy this flag"));
+					 pic_buildroad,
+					 &FieldActionWindow::act_buildroad,
+					 _("Build road"));
+
+				Building * const building = flag->get_building();
+
+				if
+					(!building
+					 ||
+					 building->get_playercaps() & (1 << Building::PCap_Bulldoze))
+					add_button
+						(buildbox,
+						 pic_ripflag,
+						 &FieldActionWindow::act_ripflag,
+						 _("Destroy this flag"));
+			}
 
 			if (dynamic_cast<Game const *>(&ibase().egbase())) {
 				add_button
@@ -399,14 +405,15 @@ void FieldActionWindow::add_buttons_auto()
 					 "pics/genstats_nrwares.png",
 					 &FieldActionWindow::act_configure_economy,
 					 _("Configure economy"));
-				add_button
-					(buildbox,
-					 pic_geologist,
-					 &FieldActionWindow::act_geologist,
-					 _("Send geologist to explore site"));
+				if (can_act)
+					add_button
+						(buildbox,
+						 pic_geologist,
+						 &FieldActionWindow::act_geologist,
+						 _("Send geologist to explore site"));
 			}
 		} else {
-			int32_t const buildcaps = m_plr->get_buildcaps(m_node);
+			int32_t const buildcaps = m_plr ? m_plr->get_buildcaps(m_node) : 0;
 
 			// Add house building
 			if
@@ -431,7 +438,8 @@ void FieldActionWindow::add_buttons_auto()
 					 _("Destroy a road"));
 		}
 	} else if
-		(1
+		(m_plr and
+		 1
 		 <
 		 m_plr->vision
 		 	(Widelands::Map::get_index
@@ -480,7 +488,7 @@ void FieldActionWindow::add_buttons_attack ()
 	UI::Box * attackbox = 0;
 
 	// Add attack button
-	if (m_node.field->get_owned_by() != m_plr->get_player_number()) {
+	if (m_plr and m_plr->player_number() != m_node.field->get_owned_by()) {
 
 		// The box with attack buttons
 		attackbox = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
@@ -531,6 +539,8 @@ Add buttons for house building.
 */
 void FieldActionWindow::add_buttons_build(int32_t const buildcaps)
 {
+	if (not m_plr)
+		return;
 	BuildGrid * bbg_house[3] = {0, 0, 0};
 	BuildGrid * bbg_mine = 0;
 
@@ -723,11 +733,8 @@ Build a flag at this field
 */
 void FieldActionWindow::act_buildflag()
 {
-	// Game: send command
-	if (upcast(Game, game, &ibase().egbase()))
-		game->send_player_build_flag(m_plr->get_player_number(), m_node);
-	// Editor: Just plain build this flag
-	else m_plr->build_flag(m_node);
+	dynamic_cast<Game &>(ibase().egbase()).send_player_build_flag
+		(m_plr->player_number(), m_node);
 	if (ibase().is_building_road())
 		ibase().finish_build_road();
 	else
@@ -778,7 +785,7 @@ void FieldActionWindow::act_buildroad()
 {
 	//if we area already building a road just ignore this
 	if (!ibase().is_building_road()) {
-		ibase().start_build_road(m_node, m_plr->get_player_number());
+		ibase().start_build_road(m_node, m_plr->player_number());
 		okdialog();
 	}
 }
@@ -826,11 +833,11 @@ void FieldActionWindow::act_build(Widelands::Building_Index::value_t const idx)
 {
 	Widelands::Game & game = dynamic_cast<Game &>(ibase().egbase());
 	game.send_player_build
-		(dynamic_cast<Interactive_Player &>(ibase()).get_player_number(),
+		(dynamic_cast<Interactive_Player &>(ibase()).player_number(),
 		 m_node,
 		 Widelands::Building_Index(idx));
 	ibase().reference_player_tribe
-		(m_plr->get_player_number(), &m_plr->tribe());
+		(m_plr->player_number(), &m_plr->tribe());
 	dynamic_cast<Interactive_Player &>(ibase()).set_flag_to_connect
 		(game.map().br_n(m_node));
 	okdialog();
@@ -922,8 +929,7 @@ void FieldActionWindow::act_attack ()
 		if (m_attackers > 0)
 			game.send_player_enemyflagaction
 				(building->base_flag(),
-				 dynamic_cast<Interactive_Player const &>(ibase())
-				 .get_player_number(),
+				 dynamic_cast<Interactive_Player const &>(ibase()).player_number(),
 				 m_attackers); //  number of soldiers
 
 	okdialog();
@@ -1016,7 +1022,7 @@ void show_field_action
 			if (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) {
 				if (upcast(Game, game, &ibase->egbase()))
 					game->send_player_build_flag
-						(player->get_player_number(), target);
+						(player->player_number(), target);
 				finish = true;
 			}
 		if (finish)

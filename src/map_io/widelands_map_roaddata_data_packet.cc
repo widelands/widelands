@@ -179,7 +179,7 @@ throw (_wexception)
 
 				//  First, write PlayerImmovable Stuff
 				//  Theres only the owner
-				fw.Unsigned8(r->owner().get_player_number());
+				fw.Unsigned8(r->owner().player_number());
 
 				fw.Unsigned32(r->m_type);
 

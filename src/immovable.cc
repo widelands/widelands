@@ -1039,7 +1039,7 @@ void PlayerImmovable::log_general_info(Editor_Game_Base const & egbase)
 
 	molog("this: %p\n", this);
 	molog("m_owner: %p\n", m_owner);
-	molog("* player nr: %i\n", m_owner->get_player_number());
+	molog("* player nr: %i\n", m_owner->player_number());
 	molog("m_economy: %p\n", m_economy);
 }
 

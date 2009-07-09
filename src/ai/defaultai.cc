@@ -188,12 +188,12 @@ void DefaultAI::receive(NoteField const & note)
  */
 void DefaultAI::late_initialization ()
 {
-	player = game().get_player(get_player_number());
+	player = game().get_player(player_number());
 	NoteReceiver<NoteImmovable>::connect(*player);
 	NoteReceiver<NoteField>::connect(*player);
 	tribe = &player->tribe();
 
-	log ("ComputerPlayer(%d): initializing (%u)\n", get_player_number(), type);
+	log ("ComputerPlayer(%d): initializing (%u)\n", player_number(), type);
 
 	Ware_Index const nr_wares = tribe->get_nrwares();
 	wares.resize(nr_wares.value());
@@ -297,13 +297,13 @@ void DefaultAI::late_initialization ()
 		for (X_Coordinate x = 0; x < map.get_width(); ++x) {
 			FCoords f = map.get_fcoords(Coords(x, y));
 
-			if (f.field->get_owned_by() != get_player_number())
+			if (f.field->get_owned_by() != player_number())
 				continue;
 
 			unusable_fields.push_back (f);
 
 			if (upcast(PlayerImmovable, imm, f.field->get_immovable()))
-				// Guard by a set - immovables might be on several fields at once
+				//  Guard by a set - immovables might be on several nodes at once.
 				if (&imm->owner() == player and not found_immovables.count(imm)) {
 					found_immovables.insert(imm);
 					gain_immovable(*imm);
@@ -329,7 +329,7 @@ void DefaultAI::update_all_buildable_fields(const int32_t gametime)
 		BuildableField * bf = buildable_fields.front();
 
 		//  check whether we lost ownership of the node
-		if (bf->coords.field->get_owned_by() != get_player_number()) {
+		if (bf->coords.field->get_owned_by() != player_number()) {
 			buildable_fields.pop_front();
 			continue;
 		}
@@ -367,7 +367,7 @@ void DefaultAI::update_all_mineable_fields(const int32_t gametime)
 		MineableField * mf = mineable_fields.front();
 
 		//  check whether we lost ownership of the node
-		if (mf->coords.field->get_owned_by() != get_player_number()) {
+		if (mf->coords.field->get_owned_by() != player_number()) {
 			mineable_fields.pop_front();
 			continue;
 		}
@@ -396,7 +396,7 @@ void DefaultAI::update_all_mineable_fields(const int32_t gametime)
  */
 void DefaultAI::update_all_not_buildable_fields()
 {
-	int32_t pn = get_player_number();
+	int32_t const pn = player_number();
 	uint32_t maxchecks = unusable_fields.size();
 	if (maxchecks > 50)
 		maxchecks = 50;
@@ -441,7 +441,7 @@ void DefaultAI::update_buildable_field
 	(BuildableField & field, uint16_t range, bool military)
 {
 	// look if there is any unowned land nearby
-	FindNodeUnowned find_unowned(get_player_number());
+	FindNodeUnowned find_unowned(player_number());
 	Map & map = game().map();
 
 	field.unowned_land_nearby =
@@ -495,10 +495,7 @@ void DefaultAI::update_buildable_field
 			if (dynamic_cast<const Flag *>(&base_immovable))
 				field.reachable = true;
 			if (upcast(PlayerImmovable const, player_immovable, &base_immovable))
-				if
-					(player_immovable->owner().get_player_number()
-					 != get_player_number())
-				{
+				if (player_immovable->owner().player_number() != player_number()) {
 					field.enemy_nearby = true;
 					continue;
 				}
@@ -1036,7 +1033,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 	// send the command to construct a new building
 	game().send_player_build
-		(get_player_number(), proposed_coords, proposed_building);
+		(player_number(), proposed_coords, proposed_building);
 
 	// set the type of update that is needed
 	if (mine)
@@ -1122,14 +1119,14 @@ bool DefaultAI::improve_roads (int32_t gametime)
 				{
 					const Coords c = cp.get_coords()[i];
 					if (map[c].get_caps() & BUILDCAPS_FLAG) {
-						game().send_player_build_flag (get_player_number(), c);
+						game().send_player_build_flag (player_number(), c);
 						return true;
 					}
 				}
 				{
 					const Coords c = cp.get_coords()[j];
 					if (map[c].get_caps() & BUILDCAPS_FLAG) {
-						game().send_player_build_flag (get_player_number(), c);
+						game().send_player_build_flag (player_number(), c);
 						return true;
 					}
 				}
@@ -1207,7 +1204,7 @@ bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
 
 	// if we join a road and there is no flag yet, build one
 	if (dynamic_cast<const Road *> (map[closest].get_immovable()))
-		game().send_player_build_flag (get_player_number(), closest);
+		game().send_player_build_flag (player_number(), closest);
 
 	// and finally build the road
 	Path & path = *new Path();
@@ -1217,7 +1214,7 @@ bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
 		return false;
 	}
 
-	game().send_player_build_road (get_player_number(), path);
+	game().send_player_build_road (player_number(), path);
 	return true;
 }
 
@@ -1282,7 +1279,7 @@ bool DefaultAI::improve_transportation_ways (const Flag & flag)
 				 and
 				 static_cast<int32_t>(2 * path.get_nsteps() + 2) < nf.cost)
 			{
-				game().send_player_build_road (get_player_number(), path);
+				game().send_player_build_road (player_number(), path);
 				return true;
 			}
 
@@ -1563,9 +1560,9 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
 	// Check next militarysite
 	bool changed = false;
 	Map & map = game().map();
-	uint16_t pn = get_player_number();
+	uint16_t const pn = player_number();
 	MilitarySite * ms = militarysites.front().site;
-	uint32_t vision = ms->vision_range();
+	uint32_t const vision = ms->vision_range();
 	FCoords f = map.get_fcoords(ms->get_position());
 
 	// look if there is any enemy land nearby
@@ -1931,11 +1928,11 @@ bool DefaultAI::consider_attack(int32_t gametime) {
 		return false;
 
 	Map & map = game().map();
-	uint16_t pn = get_player_number();
+	uint16_t const pn = player_number();
 
 	// Check next militarysite
 	MilitarySite * ms = militarysites.front().site;
-	uint32_t vision = ms->vision_range();
+	uint32_t const vision = ms->vision_range();
 	FCoords f = map.get_fcoords(ms->get_position());
 
 	Building * target = ms; // dummy initialisation to silence the compiler
@@ -1950,7 +1947,7 @@ bool DefaultAI::consider_attack(int32_t gametime) {
 
 	for (uint32_t j = 0; j < immovables.size(); ++j) {
 		if (upcast(MilitarySite, bld, immovables[j].object)) {
-			if (bld->owner().get_player_number() == pn)
+			if (bld->owner().player_number() == pn)
 				continue;
 			if (bld->canAttack()) {
 				int32_t ta = player->findAttackSoldiers(bld->base_flag());
@@ -1967,7 +1964,7 @@ bool DefaultAI::consider_attack(int32_t gametime) {
 				}
 			}
 		} else if (upcast(Warehouse, wh, immovables[j].object)) {
-			if (wh->owner().get_player_number() == pn)
+			if (wh->owner().player_number() == pn)
 				continue;
 			if (wh->canAttack()) {
 				int32_t ta = player->findAttackSoldiers(wh->base_flag());

@@ -41,7 +41,7 @@ struct Computer_Player :
 	virtual void receive(Widelands::NoteField     const &) {}
 
 	Widelands::Game & game() const throw () {return m_game;}
-	Widelands::Player_Number get_player_number() {return player_number;}
+	Widelands::Player_Number player_number() {return m_player_number;}
 
 	/**
 	 * Interface to a concrete implementation, used to instantiate AIs.
@@ -70,7 +70,7 @@ struct Computer_Player :
 
 private:
 	Widelands::Game & m_game;
-	Widelands::Player_Number const player_number;
+	Widelands::Player_Number const m_player_number;
 };
 
 #endif

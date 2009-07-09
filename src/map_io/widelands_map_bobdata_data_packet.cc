@@ -518,7 +518,7 @@ throw (_wexception)
 				fw.Unsigned32(reg);
 				//  BOB STUFF
 
-				fw.Unsigned8(bob.m_owner ? bob.m_owner->get_player_number() : 0);
+				fw.Unsigned8(bob.m_owner ? bob.m_owner->player_number() : 0);
 
 				fw.Coords32(bob.m_position);
 				//  FIELD can't be saved

@@ -133,7 +133,7 @@ throw (_wexception)
 			assert(!os->is_object_known(*building));
 
 			fw.Unsigned8(1);
-			fw.Unsigned8(building->owner().get_player_number());
+			fw.Unsigned8(building->owner().player_number());
 			fw.Unsigned32(os->register_object(*building));
 
 			upcast(ConstructionSite const, constructionsite, building);

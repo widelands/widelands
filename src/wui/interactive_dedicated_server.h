@@ -45,6 +45,12 @@ private:
 	void toggle_chat();
 	void toggle_options_menu();
 	void toggle_statistics();
+	virtual bool can_see(Widelands::Player_Number) const
+		__attribute__ ((noreturn));
+	virtual bool can_act(Widelands::Player_Number) const
+		__attribute__ ((noreturn));
+	virtual Widelands::Player_Number player_number() const
+		__attribute__ ((noreturn));
 	virtual void node_action();
 
 private:

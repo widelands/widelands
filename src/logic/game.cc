@@ -430,7 +430,7 @@ bool Game::run
 
 		if (get_ipl())
 			get_ipl()->move_view_to
-				(map().get_starting_pos(get_ipl()->get_player_number()));
+				(map().get_starting_pos(get_ipl()->player_number()));
 
 		// Prepare the map, set default textures
 		map().recalc_default_resources();
@@ -651,7 +651,7 @@ void Game::send_player_bulldoze (PlayerImmovable & pi, bool const recurse)
 {
 	send_player_command
 		(*new Cmd_Bulldoze
-		 	(get_gametime(), pi.owner().get_player_number(), pi, recurse));
+		 	(get_gametime(), pi.owner().player_number(), pi, recurse));
 }
 
 void Game::send_player_build
@@ -675,14 +675,14 @@ void Game::send_player_flagaction (Flag & flag)
 {
 	send_player_command
 		(*new Cmd_FlagAction
-		 	(get_gametime(), flag.owner().get_player_number(), flag));
+		 	(get_gametime(), flag.owner().player_number(), flag));
 }
 
 void Game::send_player_start_stop_building (Building & building)
 {
 	send_player_command
 		(*new Cmd_StartStopBuilding
-		 	(get_gametime(), building.owner().get_player_number(), building));
+		 	(get_gametime(), building.owner().player_number(), building));
 }
 
 void Game::send_player_enhance_building
@@ -692,7 +692,7 @@ void Game::send_player_enhance_building
 
 	send_player_command
 		(*new Cmd_EnhanceBuilding
-		 	(get_gametime(), building.owner().get_player_number(), building, id));
+		 	(get_gametime(), building.owner().player_number(), building, id));
 }
 
 void Game::send_player_set_ware_priority
@@ -704,7 +704,7 @@ void Game::send_player_set_ware_priority
 	send_player_command
 		(*new Cmd_SetWarePriority
 		 	(get_gametime(),
-		 	 imm.owner().get_player_number(),
+		 	 imm.owner().player_number(),
 		 	 imm,
 		 	 type,
 		 	 index,
@@ -716,7 +716,7 @@ void Game::send_player_change_training_options
 {
 	send_player_command
 		(*new Cmd_ChangeTrainingOptions
-		 	(get_gametime(), ts.owner().get_player_number(), ts, atr, val));
+		 	(get_gametime(), ts.owner().player_number(), ts, atr, val));
 }
 
 void Game::send_player_drop_soldier (Building & b, int32_t const ser)
@@ -724,7 +724,7 @@ void Game::send_player_drop_soldier (Building & b, int32_t const ser)
 	assert(ser != -1);
 	send_player_command
 		(*new Cmd_DropSoldier
-		 	(get_gametime(), b.owner().get_player_number(), b, ser));
+		 	(get_gametime(), b.owner().player_number(), b, ser));
 }
 
 void Game::send_player_change_soldier_capacity
@@ -732,7 +732,7 @@ void Game::send_player_change_soldier_capacity
 {
 	send_player_command
 		(*new Cmd_ChangeSoldierCapacity
-		 	(get_gametime(), b.owner().get_player_number(), b, val));
+		 	(get_gametime(), b.owner().player_number(), b, val));
 }
 
 /////////////////////// TESTING STUFF
@@ -797,8 +797,7 @@ void Game::sample_statistics()
 			// Get the immovable
 		if (upcast(Building, building, fc.field->get_immovable()))
 			if (building->get_position() == fc) { // only count main location
-				uint8_t const player_index =
-					building->owner().get_player_number() - 1;
+				uint8_t const player_index = building->owner().player_number() - 1;
 				++nr_buildings[player_index];
 
 				//  If it is a productionsite, add its productivity.
@@ -812,7 +811,7 @@ void Game::sample_statistics()
 			// Now, walk the bobs
 		for (Bob const * b = fc.field->get_first_bob(); b; b = b->get_next_bob())
 			if (upcast(Soldier const, s, b))
-				miltary_strength[s->owner().get_player_number() - 1] +=
+				miltary_strength[s->owner().player_number() - 1] +=
 					s->get_level(atrTotal) + 1; //  So that level 0 also counts.
 	}
 

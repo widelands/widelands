@@ -79,6 +79,10 @@ struct Interactive_GameBase : public Interactive_Base {
 		return m_building_window_title_format;
 	}
 
+	virtual bool can_see(Widelands::Player_Number) const = 0;
+	virtual bool can_act(Widelands::Player_Number) const = 0;
+	virtual Widelands::Player_Number player_number() const = 0;
+
 	virtual void node_action() = 0;
 	const PlayerType & get_playertype()const {return m_playertype;}
 	void set_playertype(const PlayerType & pt) {m_playertype = pt;}
@@ -93,6 +97,7 @@ protected:
 	bool                     m_chatenabled;
 
 	PlayerType m_playertype;
+	UI::UniqueWindow::Registry m_fieldaction;
 };
 
 #endif

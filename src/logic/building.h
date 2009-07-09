@@ -38,7 +38,7 @@
 namespace UI {struct Window;};
 struct BuildingHints;
 struct EncodeData;
-struct Interactive_Player;
+struct Interactive_GameBase;
 struct Profile;
 
 namespace Widelands {
@@ -179,7 +179,7 @@ public:
 	virtual bool burn_on_destroy();
 	virtual void destroy(Editor_Game_Base &);
 
-	void show_options(Interactive_Player *);
+	void show_options(Interactive_GameBase *);
 	void hide_options();
 
 	virtual bool fetch_from_flag(Game &);
@@ -231,7 +231,7 @@ protected:
 	void draw_help(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
 
 	virtual void create_options_window
-		(Interactive_Player &, UI::Window * & registry)
+		(Interactive_GameBase &, UI::Window * & registry)
 		= 0;
 
 	UI::Window * m_optionswindow;

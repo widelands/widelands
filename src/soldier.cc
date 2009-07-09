@@ -725,7 +725,7 @@ void Soldier::battle_update(Game & game, State &)
 	std::string signal = get_signal();
 	molog
 		("[battle] update for player %u's soldier: signal = \"%s\"\n",
-		 owner().get_player_number(), signal.c_str());
+		 owner().player_number(), signal.c_str());
 
 	if (signal.size()) {
 		if (signal == "blocked") {
@@ -783,10 +783,10 @@ void Soldier::battle_update(Game & game, State &)
 				{
 					molog
 						("player %u's soldier started task_movepath\n",
-						 owner().get_player_number());
+						 owner().player_number());
 					molog
 						("player %u's soldier started task_movepath\n",
-						 owner().get_player_number());
+						 owner().player_number());
 					return;
 				} else {
 					BaseImmovable const * const immovable_position =
@@ -805,12 +805,12 @@ void Soldier::battle_update(Game & game, State &)
 						 	 "things may happen. No solution for this problem has "
 						 	 "been implemented yet. (bug #1951113) (The game has "
 						 	 "been paused.)"),
-						 descname().c_str(), serial(), owner().get_player_number(),
+						 descname().c_str(), serial(), owner().player_number(),
 						 get_position().x, get_position().y,
 						 immovable_position ?
 						 immovable_position->descr().descname().c_str() : _("no"),
 						 opponent.descname().c_str(), opponent.serial(),
-						 opponent.owner().get_player_number(),
+						 opponent.owner().player_number(),
 						 dest.x, dest.y,
 						 immovable_dest ?
 						 immovable_dest->descr().descname().c_str() : _("no"),
@@ -922,7 +922,7 @@ void Soldier::sendSpaceSignals(Game & game)
 			if (soldier != this)
 				soldier->send_signal(game, "wakeup");
 
-	if (get_position().field->get_owned_by() != owner().get_player_number()) {
+	if (get_position().field->get_owned_by() != owner().player_number()) {
 		std::vector<BaseImmovable *> attackables;
 		game.map().find_reachable_immovables_unique
 			(Area<FCoords>(get_position(), MaxProtectionRadius),

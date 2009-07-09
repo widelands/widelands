@@ -45,7 +45,7 @@ struct MessageQueue {
 
 	static std::vector<Message> & get (const Player & p)
 	{
-		return get(p.get_player_number());
+		return get(p.player_number());
 	}
 	static std::vector<Message> & get (Player_Number const player_number)
 	{
@@ -60,7 +60,7 @@ struct MessageQueue {
 	}
 
 	static void add (Player const & p, Message const m) {
-		add(p.get_player_number(), m);
+		add(p.player_number(), m);
 	}
 	static void add (Player_Number const player_number, Message const m) {
 		//log("Adding message for player %i : %s %s\n",player_number,
@@ -87,9 +87,9 @@ struct MessageQueue {
 
 	static void read_all (const Player & p)
 	{
-		read_all(p.get_player_number());
+		read_all(p.player_number());
 	}
-	static void read_all (Player_Number player_number)
+	static void read_all (Player_Number const player_number)
 	{
 		m_readall(player_number) = true;
 		if (player_number == m_player_number(0) and m_button(0))

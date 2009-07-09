@@ -95,7 +95,7 @@ void Player::create_default_infrastructure() {
 		Game & game = dynamic_cast<Game &>(egbase());
 		container_iterate_const(std::vector<Event *>, initialization.events, i) {
 			Event & event = **i.current;
-			event.set_player(get_player_number());
+			event.set_player(player_number());
 			event.set_position(starting_pos);
 			event.run(game);
 		}
@@ -131,27 +131,26 @@ Return filtered buildcaps that take the player's territory into account.
 FieldCaps Player::get_buildcaps(const FCoords fc) const {
 	const Map & map = egbase().map();
 	uint8_t buildcaps = fc.field->get_caps();
-	const uint8_t player_number = m_plnum;
 
-	if (not fc.field->is_interior(player_number))
+	if (not fc.field->is_interior(m_plnum))
 		buildcaps = 0;
 
 	// Check if a building's flag can't be build due to ownership
 	else if (buildcaps & BUILDCAPS_BUILDINGMASK) {
 		FCoords flagcoords;
 		map.get_brn(fc, &flagcoords);
-		if (not flagcoords.field->is_interior(player_number))
+		if (not flagcoords.field->is_interior(m_plnum))
 			buildcaps &= ~BUILDCAPS_BUILDINGMASK;
 
 		//  Prevent big buildings that would swell over borders.
 		if
 			((buildcaps & BUILDCAPS_BIG) == BUILDCAPS_BIG
 			 and
-			 (not map.tr_n(fc).field->is_interior(player_number)
+			 (not map.tr_n(fc).field->is_interior(m_plnum)
 			  or
-			  not map.tl_n(fc).field->is_interior(player_number)
+			  not map.tl_n(fc).field->is_interior(m_plnum)
 			  or
-			  not map. l_n(fc).field->is_interior(player_number)))
+			  not map. l_n(fc).field->is_interior(m_plnum)))
 			buildcaps &= ~BUILDCAPS_SMALL;
 	}
 
@@ -189,7 +188,7 @@ Flag & Player::force_flag(FCoords const c) {
 
 	//  Make sure that the player owns the area around.
 	egbase().conquer_area_no_building
-		(Player_Area<Area<FCoords> >(get_player_number(), Area<FCoords>(c, 1)));
+		(Player_Area<Area<FCoords> >(player_number(), Area<FCoords>(c, 1)));
 	return *new Flag(egbase(), *this, c);
 }
 
@@ -217,19 +216,19 @@ void Player::build_road(const Path & path) {
 					if (imm->get_size() >= BaseImmovable::SMALL) {
 						log
 							("%i: building road, immovable in the way, type=%d\n",
-							 get_player_number(), imm->get_type());
+							 player_number(), imm->get_type());
 						return;
 					}
 				if (!(get_buildcaps(fc) & MOVECAPS_WALK)) {
-					log("%i: building road, unwalkable\n", get_player_number());
+					log("%i: building road, unwalkable\n", player_number());
 					return;
 				}
 			}
 			Road::create(egbase(), *start, *end, path);
 		} else
-			log("%i: building road, missed end flag\n", get_player_number());
+			log("%i: building road, missed end flag\n", player_number());
 	} else
-		log("%i: building road, missed start flag\n", get_player_number());
+		log("%i: building road, missed start flag\n", player_number());
 }
 
 
@@ -246,8 +245,7 @@ void Player::force_road(Path const & path, bool const create_carrier) {
 
 		//  Make sure that the player owns the area around.
 		egbase().conquer_area_no_building
-			(Player_Area<Area<FCoords> >
-			 	(get_player_number(), Area<FCoords>(c, 1)));
+			(Player_Area<Area<FCoords> >(player_number(), Area<FCoords>(c, 1)));
 
 		if (BaseImmovable * const immovable = c.field->get_immovable()) {
 			assert(immovable != &start);
@@ -287,7 +285,7 @@ void Player::force_building
 			//  Make sure that the player owns the area around.
 			egbase().conquer_area_no_building
 				(Player_Area<Area<FCoords> >
-				 	(get_player_number(), Area<FCoords>(c[i], 1)));
+				 	(player_number(), Area<FCoords>(c[i], 1)));
 
 			if (BaseImmovable * const immovable = c[i].field->get_immovable())
 				immovable->remove(egbase());
@@ -611,10 +609,10 @@ uint32_t Player::findAttackSoldiers
 void Player::enemyflagaction
 	(Flag & flag, Player_Number const attacker, uint32_t const count)
 {
-	if      (attacker != get_player_number())
+	if      (attacker != player_number())
 		log
 			("Player (%d) is not the sender of an attack (%d)\n",
-			 attacker, get_player_number());
+			 attacker, player_number());
 	else if (count == 0)
 		log("enemyflagaction: count is 0\n");
 	else if (&flag.owner() != this)
@@ -857,7 +855,7 @@ void Player::ReadStatistics(FileRead & fr, uint32_t const version)
 				throw wexception
 					("statistics for player %u (%s) has %u ware types (should be "
 					 "%u)",
-					 get_player_number(), tribe().name().c_str(),
+					 player_number(), tribe().name().c_str(),
 					 nr_wares, tribe().get_nrwares().value());
 
 			assert(m_ware_productions.size() == nr_wares);

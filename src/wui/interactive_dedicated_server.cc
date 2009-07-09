@@ -107,6 +107,19 @@ void Interactive_DServer::toggle_statistics() {
 }
 
 
+bool Interactive_DServer::can_see(Widelands::Player_Number) const
+{
+	throw;
+}
+bool Interactive_DServer::can_act(Widelands::Player_Number) const
+{
+	throw;
+}
+Widelands::Player_Number Interactive_DServer::player_number() const
+{
+	throw;
+}
+
 /// just for compatibility
 void Interactive_DServer::node_action() {}
 

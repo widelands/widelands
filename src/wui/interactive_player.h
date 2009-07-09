@@ -63,11 +63,14 @@ struct Interactive_Player :
 	void toggle_help      ();
 	void toggle_message_menu();
 
+	virtual bool can_see(Widelands::Player_Number) const;
+	virtual bool can_act(Widelands::Player_Number) const;
+	virtual Widelands::Player_Number player_number() const;
+
 	virtual void node_action();
 
 	bool handle_key(bool down, SDL_keysym);
 
-	Widelands::Player_Number get_player_number() const {return m_player_number;}
 	Widelands::Player & player() const throw () {
 		return game().player(m_player_number);
 	}
@@ -109,7 +112,6 @@ private:
 	UI::UniqueWindow::Registry m_options;
 	UI::UniqueWindow::Registry m_statisticsmenu;
 	UI::UniqueWindow::Registry m_objectives;
-	UI::UniqueWindow::Registry m_fieldaction;
 	UI::UniqueWindow::Registry m_encyclopedia;
 	UI::UniqueWindow::Registry m_debugconsole;
 	UI::UniqueWindow::Registry m_message_menu;

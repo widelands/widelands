@@ -388,14 +388,14 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	if (uint32_t const conquer_radius = get_conquers())
 		egbase.conquer_area
 			(Player_Area<Area<FCoords> >
-			 	(owner().get_player_number(),
+			 	(owner().player_number(),
 			 	 Area<FCoords>
 			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
 
 	//  Fill the message queue with a message when a warehouse is created.
 	log
 		("Message: adding (wh) (%s) %i \n",
-		 type_name(), owner().get_player_number());
+		 type_name(), owner().player_number());
 	std::string sender = type_name();
 	MessageQueue::add
 		(owner(),
@@ -440,7 +440,7 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 	if (const uint32_t conquer_radius = get_conquers())
 		egbase.unconquer_area
 			(Player_Area<Area<FCoords> >
-			 	(owner().get_player_number(),
+			 	(owner().player_number(),
 			 	 Area<FCoords>(map.get_fcoords(get_position()), conquer_radius)),
 			 m_defeating_player);
 
@@ -949,7 +949,7 @@ bool Warehouse::attack(Soldier & enemy)
 		return true;
 	}
 
-	set_defeating_player(enemy.owner().get_player_number());
+	set_defeating_player(enemy.owner().player_number());
 	schedule_destroy(game);
 	return false;
 }

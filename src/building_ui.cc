@@ -104,7 +104,7 @@ Building UI IMPLEMENTATION
 Create the building's options window if necessary.
 ===============
 */
-void Building::show_options(Interactive_Player * const plr)
+void Building::show_options(Interactive_GameBase * const plr)
 {
 	if (m_optionswindow)
 		m_optionswindow->move_to_top();
@@ -134,7 +134,7 @@ class BulldozeConfirm
  */
 struct BulldozeConfirm : public UI::Window {
 	BulldozeConfirm
-		(Interactive_Player         * parent,
+		(Interactive_Player         & parent,
 		 Building                   * building,
 		 Widelands::PlayerImmovable * todestroy = 0);
 
@@ -163,11 +163,11 @@ confirm building destruction when the building's base flag is removed.
 ===============
 */
 BulldozeConfirm::BulldozeConfirm
-	(Interactive_Player         * parent,
+	(Interactive_Player         & parent,
 	 Building                   * building,
 	 Widelands::PlayerImmovable * todestroy)
 	:
-	UI::Window(parent, 0, 0, 200, 120, _("Destroy building?"))
+	UI::Window(&parent, 0, 0, 200, 120, _("Destroy building?"))
 {
 	std::string text;
 
@@ -267,7 +267,7 @@ void show_bulldoze_confirm
 	 Building                   &       building,
 	 Widelands::PlayerImmovable * const todestroy)
 {
-	new BulldozeConfirm(&player, &building, todestroy);
+	new BulldozeConfirm(player, &building, todestroy);
 }
 
 
@@ -463,14 +463,14 @@ struct Building_Window : public UI::Window {
 	};
 
 	Building_Window
-		(Interactive_Player * parent, Building *, UI::Window * * registry);
+		(Interactive_GameBase * parent, Building *, UI::Window * * registry);
 
 	virtual ~Building_Window();
 
 	Building & building() {return *m_building;}
 
-	Interactive_Player & iaplayer() const {
-		return dynamic_cast<Interactive_Player &>(*get_parent());
+	Interactive_GameBase & igbase() const {
+		return dynamic_cast<Interactive_GameBase &>(*get_parent());
 	}
 
 	virtual void draw(RenderTarget &);
@@ -517,7 +517,7 @@ private:
 
 
 Building_Window::Building_Window
-	(Interactive_Player * const parent,
+	(Interactive_GameBase * const parent,
 	 Building           * const b,
 	 UI::Window *       * const registry)
 	:
@@ -551,7 +551,7 @@ m_workarea_job_id(Overlay_Manager::Job_Id::Null())
 Building_Window::~Building_Window()
 {
 	if (m_workarea_job_id)
-		static_cast<Interactive_Player *>(get_parent())
+		static_cast<Interactive_GameBase *>(get_parent())
 		->egbase().map().overlay_manager().remove_overlay(m_workarea_job_id);
 	*m_registry = 0;
 }
@@ -582,11 +582,10 @@ Check the capabilities and setup the capsbutton panel in case they've changed.
 */
 void Building_Window::think()
 {
-	Widelands::Player const & player = iaplayer().player();
-	if (not player.see_all() and &player != &building().owner())
+	if (not igbase().can_see(building().owner().player_number()))
 		die();
 	if
-		(m_capscache_player_number != player.get_player_number()
+		(m_capscache_player_number != igbase().player_number()
 		 or
 		 building().get_playercaps() != m_capscache)
 		setup_capsbuttons();
@@ -622,16 +621,17 @@ void Building_Window::setup_capsbuttons()
 	assert(m_capsbuttons);
 
 	m_capsbuttons->free_children();
-	Widelands::Player const & player = iaplayer().player();
 	m_capscache = building().get_playercaps();
-	m_capscache_player_number = player.get_player_number();
+	m_capscache_player_number = igbase().player_number();
 
 	int32_t x = 0;
 
-	bool const see_all       = player.see_all();
-	bool const allow_changes = &player == &building().owner();
+	Widelands::Player const & owner = building().owner();
+	Widelands::Player_Number const owner_number = owner.player_number();
+	bool const can_see = igbase().can_see(owner_number);
+	bool const can_act = igbase().can_act(owner_number);
 
-	if (allow_changes) {
+	if (can_act) {
 		if (upcast(ProductionSite const, productionsite, m_building))
 			if (not dynamic_cast<MilitarySite const *>(productionsite)) {
 				bool const is_stopped = productionsite->is_stopped();
@@ -650,9 +650,9 @@ void Building_Window::setup_capsbuttons()
 		if (m_capscache & 1 << Building::PCap_Enhancable) {
 			std::set<Building_Index> const & enhancements =
 				m_building->enhancements();
-			Widelands::Tribe_Descr const & tribe  = player.tribe();
+			Widelands::Tribe_Descr const & tribe  = owner.tribe();
 			container_iterate_const(std::set<Building_Index>, enhancements, i)
-				if (player.is_building_allowed(*i.current)) {
+				if (owner.is_building_allowed(*i.current)) {
 					Widelands::Building_Descr const & building_descr =
 						*tribe.get_building_descr(*i.current);
 					char buffer[128];
@@ -684,7 +684,7 @@ void Building_Window::setup_capsbuttons()
 		}
 	}
 
-	if (allow_changes or see_all) {
+	if (can_see) {
 		if (m_building->descr().m_workarea_info.size()) {
 			m_toggle_workarea = new UI::Callback_Button<Building_Window>
 				(m_capsbuttons,
@@ -696,7 +696,7 @@ void Building_Window::setup_capsbuttons()
 			x += 34;
 		}
 
-		if (iaplayer().get_display_flag(Interactive_Base::dfDebug)) {
+		if (igbase().get_display_flag(Interactive_Base::dfDebug)) {
 			new UI::Callback_Button<Building_Window>
 				(m_capsbuttons,
 				 x, 0, 34, 34,
@@ -723,12 +723,13 @@ Callback for bulldozing request
 */
 void Building_Window::act_bulldoze()
 {
-	new BulldozeConfirm(&iaplayer(), m_building);
+	new BulldozeConfirm
+		(dynamic_cast<Interactive_Player &>(igbase()), m_building);
 }
 
 void Building_Window::act_start_stop() {
 	if (dynamic_cast<ProductionSite const *>(m_building))
-		iaplayer().game().send_player_start_stop_building (*m_building);
+		igbase().game().send_player_start_stop_building (*m_building);
 
 	die();
 }
@@ -744,7 +745,7 @@ void Building_Window::act_enhance(Widelands::Building_Index const id)
 		(m_building
 		 &&
 		 m_building->get_playercaps() & (1 << Building::PCap_Enhancable))
-		iaplayer().game().send_player_enhance_building (*m_building, id);
+		igbase().game().send_player_enhance_building (*m_building, id);
 
 	die();
 }
@@ -756,7 +757,7 @@ Callback for bulldozing request
 */
 void Building_Window::act_drop_soldier(uint32_t serial) {
 	if (m_building && (serial > 0))
-		iaplayer().game().send_player_drop_soldier (*m_building, serial);
+		igbase().game().send_player_drop_soldier (*m_building, serial);
 }
 
 /*
@@ -768,7 +769,7 @@ TODO: Check that building is a military or a training site.
 void Building_Window::act_change_soldier_capacity(int32_t const value)
 {
 	if (m_building)
-		iaplayer().game().send_player_change_soldier_capacity
+		igbase().game().send_player_change_soldier_capacity
 			(*m_building, value);
 
 }
@@ -781,14 +782,14 @@ Callback for debug window
 void Building_Window::act_debug()
 {
 	show_field_debug
-		(iaplayer(),
-		 iaplayer().game().map().get_fcoords(m_building->get_position()));
+		(igbase(),
+		 igbase().game().map().get_fcoords(m_building->get_position()));
 }
 
 
 void Building_Window::toggle_workarea() {
 	Widelands::Map & map =
-		static_cast<Interactive_Player *>(get_parent())->egbase().map();
+		static_cast<Interactive_GameBase *>(get_parent())->egbase().map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	if (m_workarea_job_id) {
 		overlay_manager.remove_overlay(m_workarea_job_id);
@@ -826,7 +827,9 @@ void Building_Window::toggle_workarea() {
 
 struct ProductionSite_Window : public Building_Window {
 	ProductionSite_Window
-		(Interactive_Player * parent, ProductionSite *, UI::Window * * registry);
+		(Interactive_GameBase * parent,
+		 ProductionSite       *,
+		 UI::Window *         * registry);
 
 	ProductionSite & productionsite() {
 		return dynamic_cast<ProductionSite &>(building());
@@ -857,7 +860,7 @@ ConstructionSite UI IMPLEMENTATION
 
 struct ConstructionSite_Window : public Building_Window {
 	ConstructionSite_Window
-		(Interactive_Player          * parent,
+		(Interactive_GameBase          * parent,
 		 Widelands::ConstructionSite *,
 		 UI::Window *                * registry);
 
@@ -869,7 +872,7 @@ private:
 
 
 ConstructionSite_Window::ConstructionSite_Window
-	(Interactive_Player          * const parent,
+	(Interactive_GameBase          * const parent,
 	 Widelands::ConstructionSite * const cs,
 	 UI::Window *                * const registry)
 	: Building_Window(parent, cs, registry)
@@ -913,9 +916,9 @@ void ConstructionSite_Window::think()
 	Building_Window::think();
 
 	ConstructionSite const & cs = dynamic_cast<ConstructionSite &>(building());
-	bool const allow_changes = &iaplayer().player() == &cs.owner();
+	bool const can_act = igbase().can_act(cs.owner().player_number());
 	container_iterate(std::list<PriorityButtonHelper>, m_priority_helpers, i)
-		i.current->update_buttons(allow_changes);
+		i.current->update_buttons(can_act);
 
 	m_progress->set_state(cs.get_built_per64k());
 }
@@ -927,7 +930,7 @@ Create the status window describing the construction site.
 ===============
 */
 void ConstructionSite::create_options_window
-	(Interactive_Player & plr, UI::Window * & registry)
+	(Interactive_GameBase & plr, UI::Window * & registry)
 {
 	new ConstructionSite_Window(&plr, this, &registry);
 }
@@ -943,7 +946,7 @@ Warehouse UI IMPLEMENTATION
 
 struct Warehouse_Window : public Building_Window {
 	Warehouse_Window
-		(Interactive_Player * parent, Warehouse *, UI::Window * * registry);
+		(Interactive_GameBase * parent, Warehouse *, UI::Window * * registry);
 
 	Warehouse & warehouse() {
 		return dynamic_cast<Warehouse &>(building());
@@ -967,13 +970,13 @@ Open the window, create the window buttons and add to the registry.
 ===============
 */
 Warehouse_Window::Warehouse_Window
-	(Interactive_Player * const parent,
+	(Interactive_GameBase * const parent,
 	 Warehouse          * const wh,
 	 UI::Window *       * const registry)
 	: Building_Window(parent, wh, registry)
 {
 	// Add wares display
-	m_waresdisplay = new WaresDisplay(this, 0, 0, parent->player().tribe());
+	m_waresdisplay = new WaresDisplay(this, 0, 0, wh->owner().tribe());
 	m_waresdisplay->add_warelist(&warehouse().get_wares(), WaresDisplay::WARE);
 
 	set_inner_size(m_waresdisplay->get_w(), 0);
@@ -1034,7 +1037,7 @@ void Warehouse_Window::clicked_help() {}
 
 
 void Warehouse_Window::clicked_goto() {
-	iaplayer().move_view_to(warehouse().get_position());
+	igbase().move_view_to(warehouse().get_position());
 }
 
 
@@ -1072,7 +1075,7 @@ Create the warehouse information window
 ===============
 */
 void Warehouse::create_options_window
-	(Interactive_Player & plr, UI::Window * & registry)
+	(Interactive_GameBase & plr, UI::Window * & registry)
 {
 	new Warehouse_Window(&plr, this, &registry);
 }
@@ -1091,10 +1094,10 @@ ProductionSite UI IMPLEMENTATION
  */
 struct ProductionSite_Window_ListWorkerWindow : public UI::Window {
 	ProductionSite_Window_ListWorkerWindow
-		(Interactive_Player *, ProductionSite *);
+		(Interactive_GameBase *, ProductionSite *);
 
-	Interactive_Player & iaplayer() const {
-		return dynamic_cast<Interactive_Player &>(*get_parent());
+	Interactive_GameBase & iaplayer() const {
+		return dynamic_cast<Interactive_GameBase &>(*get_parent());
 	}
 
 	virtual void think();
@@ -1111,7 +1114,7 @@ private:
 
 
 ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow
-	(Interactive_Player * const parent, ProductionSite * const ps)
+	(Interactive_GameBase * const parent, ProductionSite * const ps)
 	:
 	UI::Window(parent, 0, 0, 320, 125, _("Worker Listing"))
 {
@@ -1278,7 +1281,7 @@ Create the window and its panels, add it to the registry.
 ===============
 */
 ProductionSite_Window::ProductionSite_Window
-	(Interactive_Player * const parent,
+	(Interactive_GameBase * const parent,
 	 ProductionSite     * const ps,
 	 UI::Window *       * const registry)
 	: Building_Window(parent, ps, registry)
@@ -1338,7 +1341,7 @@ void Building_Window::create_ware_queue_panel
 	if (wq->get_ware()) {
 		m_priority_helpers.push_back
 			(PriorityButtonHelper
-			 	(iaplayer().game(), &b, Widelands::Request::WARE, wq->get_ware()));
+			 	(igbase().game(), &b, Widelands::Request::WARE, wq->get_ware()));
 
 		PriorityButtonHelper & helper = m_priority_helpers.back();
 
@@ -1373,7 +1376,7 @@ void Building_Window::create_ware_queue_panel
 			 UI::Box::AlignTop);
 
 		hbox->add(vbox, UI::Box::AlignCenter);
-		helper.update_buttons(&iaplayer().player() == &b.owner());
+		helper.update_buttons(igbase().can_act(b.owner().player_number()));
 	}
 
 	box->add(hbox, UI::Box::AlignLeft);
@@ -1419,8 +1422,7 @@ void ProductionSite_Window::list_worker_clicked() {
 	assert(*m_reg == this);
 
 	*m_reg =
-		new ProductionSite_Window_ListWorkerWindow
-			(&iaplayer(), &productionsite());
+		new ProductionSite_Window_ListWorkerWindow(&igbase(), &productionsite());
 	die();
 }
 
@@ -1433,9 +1435,9 @@ void ProductionSite_Window::think()
 {
 	Building_Window::think();
 
-	bool const allow_changes = &iaplayer().player() == &building().owner();
+	bool const can_act = igbase().can_act(building().owner().player_number());
 	container_iterate(std::list<PriorityButtonHelper>, m_priority_helpers, i)
-		i.current->update_buttons(allow_changes);
+		i.current->update_buttons(can_act);
 }
 
 
@@ -1445,7 +1447,7 @@ Create the production site information window.
 ===============
 */
 void ProductionSite::create_options_window
-	(Interactive_Player & plr, UI::Window * & registry)
+	(Interactive_GameBase & plr, UI::Window * & registry)
 {
 	new ProductionSite_Window(&plr, this, &registry);
 }
@@ -1461,7 +1463,7 @@ MilitarySite UI IMPLEMENTATION
 
 struct MilitarySite_Window : public Building_Window {
 	MilitarySite_Window
-		(Interactive_Player & parent,
+		(Interactive_GameBase & parent,
 		 MilitarySite       &,
 		 UI::Window *       & registry);
 
@@ -1490,7 +1492,7 @@ private:
 
 
 MilitarySite_Window::MilitarySite_Window
-	(Interactive_Player & parent,
+	(Interactive_GameBase & parent,
 	 MilitarySite       & ms,
 	 UI::Window *       & registry)
 	:
@@ -1571,7 +1573,7 @@ void MilitarySite_Window::think()
 	Building_Window::think();
 
 	Widelands::BaseImmovable const * const base_immovable =
-		iaplayer().egbase().map()[m_ms_location].get_immovable();
+		igbase().egbase().map()[m_ms_location].get_immovable();
 	if
 		(not dynamic_cast<const Building *>(base_immovable)
 		 or
@@ -1630,14 +1632,13 @@ void MilitarySite_Window::update() {
 	snprintf(buffer, sizeof(buffer), _("Capacity: %2u"), capacity);
 	m_capacity.set_text (buffer);
 	uint32_t const capacity_min = ms.minSoldierCapacity();
-	bool const allow_changes = &iaplayer().player() == &ms.owner();
+	bool const can_act = igbase().can_act(ms.owner().player_number());
 	m_drop_button.set_enabled
-		(allow_changes and
-		 m_table.has_selection() and capacity_min < m_table.size());
+		(can_act and m_table.has_selection() and capacity_min < m_table.size());
 	m_capacity_down.set_enabled
-		(allow_changes and capacity_min < capacity);
+		(can_act and capacity_min < capacity);
 	m_capacity_up  .set_enabled
-		(allow_changes and                capacity < ms.maxSoldierCapacity());
+		(can_act and                capacity < ms.maxSoldierCapacity());
 }
 
 void MilitarySite_Window::drop_button_clicked()
@@ -1653,7 +1654,7 @@ Create the production site information window.
 ===============
 */
 void MilitarySite::create_options_window
-	(Interactive_Player & plr, UI::Window * & registry)
+	(Interactive_GameBase & plr, UI::Window * & registry)
 {
 	new MilitarySite_Window(plr, *this, registry);
 }
@@ -1669,7 +1670,7 @@ TrainingSite UI IMPLEMENTATION
 
 struct TrainingSite_Window : public ProductionSite_Window {
 	TrainingSite_Window
-		(Interactive_Player & parent, TrainingSite &, UI::Window * & registry);
+		(Interactive_GameBase & parent, TrainingSite &, UI::Window * & registry);
 
 	TrainingSite & trainingsite() {
 		return dynamic_cast<TrainingSite &>(building());
@@ -1813,7 +1814,7 @@ Create the window and its panels, add it to the registry.
 ===============
 */
 TrainingSite_Window::TrainingSite_Window
-	(Interactive_Player & parent, TrainingSite & ts, UI::Window * & registry)
+	(Interactive_GameBase & parent, TrainingSite & ts, UI::Window * & registry)
 	:
 	ProductionSite_Window  (&parent, &ts, &registry),
 	m_ms_location          (ts.get_position()),
@@ -1833,7 +1834,7 @@ void TrainingSite_Window::think()
 	ProductionSite_Window::think();
 
 	Widelands::BaseImmovable const * const base_immovable =
-		iaplayer().egbase().map()[m_ms_location].get_immovable();
+		igbase().egbase().map()[m_ms_location].get_immovable();
 	if
 		(not dynamic_cast<const Building *>(base_immovable)
 		 or
@@ -1894,15 +1895,14 @@ void TrainingSite_Window::update() {
 	m_tabpanel.m_sold_box.m_capacity_box.m_capacity_value_label.set_text
 		(buffer);
 	uint32_t const capacity_min = ts.minSoldierCapacity();
-	bool const allow_changes = &iaplayer().player() == &ts.owner();
+	bool const can_act = igbase().can_act(ts.owner().player_number());
 	m_tabpanel.m_sold_box.m_drop_selected_soldier.set_enabled
-		(allow_changes and
-		 m_tabpanel.m_sold_box.m_table.has_selection() and
+		(can_act and m_tabpanel.m_sold_box.m_table.has_selection() and
 		 capacity_min < m_tabpanel.m_sold_box.m_table.size());
 	m_tabpanel.m_sold_box.m_capacity_box.m_capacity_decrement.set_enabled
-		(allow_changes and capacity_min < capacity);
+		(can_act and capacity_min < capacity);
 	m_tabpanel.m_sold_box.m_capacity_box.m_capacity_increment.set_enabled
-		(allow_changes and                capacity < ts.maxSoldierCapacity());
+		(can_act and                capacity < ts.maxSoldierCapacity());
 }
 
 
@@ -1927,7 +1927,7 @@ Create the training site information window.
 ===============
 */
 void TrainingSite::create_options_window
-	(Interactive_Player & plr, UI::Window * & registry)
+	(Interactive_GameBase & plr, UI::Window * & registry)
 {
 	new TrainingSite_Window(plr, *this, registry);
 }

@@ -50,6 +50,9 @@ private:
 	void toggle_statistics();
 	void exit_btn();
 	void save_btn();
+	virtual bool can_see(Widelands::Player_Number) const;
+	virtual bool can_act(Widelands::Player_Number) const;
+	virtual Widelands::Player_Number player_number() const;
 	virtual void node_action();
 
 private:

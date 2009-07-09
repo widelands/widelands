@@ -346,6 +346,20 @@ void Interactive_Player::toggle_help        () {
 }
 
 
+bool Interactive_Player::can_see(Widelands::Player_Number const p) const
+{
+	return p == player_number() or player().see_all();
+}
+bool Interactive_Player::can_act(Widelands::Player_Number const p) const
+{
+	return p == player_number();
+}
+Widelands::Player_Number Interactive_Player::player_number() const
+{
+	return m_player_number;
+}
+
+
 /// Player has clicked on the given node; bring up the context menu.
 void Interactive_Player::node_action()
 {
@@ -356,7 +370,7 @@ void Interactive_Player::node_action()
 	{
 		// Special case for buildings
 		if (upcast(Building, building, map.get_immovable(get_sel_pos().node)))
-			if (&building->owner() == &player() or player().see_all())
+			if (can_see(building->owner().player_number()))
 				return building->show_options(this);
 
 		// everything else can bring up the temporary dialog

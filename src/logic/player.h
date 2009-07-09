@@ -85,7 +85,7 @@ struct Player :
 
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
-	Player_Number get_player_number() const throw () {return m_plnum;}
+	Player_Number     player_number() const throw () {return m_plnum;}
 	RGBColor const * get_playercolor() const {return m_playercolor;}
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 
@@ -428,7 +428,7 @@ struct Player :
 	void count_civil_bld_defeated() {++m_civil_blds_defeated;}
 
 	AreaWatcher & add_areawatcher(const Player_Area<> player_area) {
-		assert(player_area.player_number == get_player_number());
+		assert(player_area.player_number == player_number());
 		see_area
 			(Area<FCoords>
 			 	(egbase().map().get_fcoords(player_area), player_area.radius));

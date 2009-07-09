@@ -497,11 +497,9 @@ void Interactive_Base::start_build_road
 
 	//  If we are a game, we obviously build for the Interactive Player.
 	assert
-		(not dynamic_cast<const Game *>(&m_egbase)
-		 or
-		 player ==
-		 static_cast<const Interactive_Player *>(this)->
-		 get_player_number());
+		(player
+		 ==
+		 static_cast<Interactive_Player const &>(*this).player_number());
 
 	roadb_add_overlay();
 	need_complete_redraw();
