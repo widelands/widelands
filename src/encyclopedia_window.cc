@@ -136,7 +136,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	Tribe_Descr const & tribe = interactivePlayer.get_player()->tribe();
 
 	ProductionSite_Descr::Programs const & programs =
-		static_cast<const ProductionSite_Descr &>
+		dynamic_cast<ProductionSite_Descr const &>
 			(*tribe.get_building_descr(prodSites.get_selected()))
 		.programs();
 

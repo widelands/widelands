@@ -1598,13 +1598,13 @@ void Worker::program_update(Game & game, State & state)
 	}
 
 	for (;;) {
-		WorkerProgram const * program =
-			static_cast<WorkerProgram const *>(state.program);
+		WorkerProgram const & program =
+			dynamic_cast<WorkerProgram const &>(*state.program);
 
-		if (static_cast<uint32_t>(state.ivar1) >= program->get_size())
+		if (static_cast<uint32_t>(state.ivar1) >= program.get_size())
 			return pop_task(game);
 
-		Action const & action = *program->get_action(state.ivar1);
+		Action const & action = *program.get_action(state.ivar1);
 
 		if ((this->*(action.function))(game, state, action))
 			return;

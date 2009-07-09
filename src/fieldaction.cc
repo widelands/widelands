@@ -686,9 +686,7 @@ Open a watch window for the given field and delete self.
 */
 void FieldActionWindow::act_watch()
 {
-	dynamic_cast<Game const &>(ibase().egbase());
-
-	show_watch_window(static_cast<Interactive_Player &>(ibase()), m_node);
+	show_watch_window(dynamic_cast<Interactive_GameBase &>(ibase()), m_node);
 	okdialog();
 }
 

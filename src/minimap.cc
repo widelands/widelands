@@ -86,8 +86,7 @@ bool MiniMap::View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 
 	m_ibase.egbase().map().normalize_coords(c);
 
-	assert(dynamic_cast<const MiniMap *>(get_parent()));
-	static_cast<const MiniMap *>(get_parent())->warpview.call
+	dynamic_cast<MiniMap &>(*get_parent()).warpview.call
 		(c.x * TRIANGLE_WIDTH, c.y * TRIANGLE_HEIGHT);
 
 	return true;

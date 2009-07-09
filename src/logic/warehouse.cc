@@ -316,7 +316,7 @@ void Warehouse::postfill
 			Soldier_Strength const ss = i.current->first;
 			for (uint32_t j = i.current->second; j; --j) {
 				Soldier & soldier =
-					static_cast<Soldier &>
+					dynamic_cast<Soldier &>
 						(soldier_descr.create(game, owner(), this, get_position()));
 				soldier.set_level(ss.hp, ss.attack, ss.defense, ss.evade);
 				incorporate_worker(game, soldier);

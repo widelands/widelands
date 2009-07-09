@@ -499,7 +499,7 @@ void Interactive_Base::start_build_road
 	assert
 		(player
 		 ==
-		 static_cast<Interactive_Player const &>(*this).player_number());
+		 dynamic_cast<Interactive_Player const &>(*this).player_number());
 
 	roadb_add_overlay();
 	need_complete_redraw();
