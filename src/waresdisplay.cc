@@ -85,14 +85,14 @@ add a ware list to be displayed in this WaresDisplay
 ===============
 */
 void WaresDisplay::add_warelist
-	(Widelands::WareList const * const wares, wdType const type)
+	(Widelands::WareList const & wares, wdType const type)
 {
 	//  If you register something twice, it is counted twice. Not my problem.
-	m_warelists.push_back(wares);
+	m_warelists.push_back(&wares);
 
 	int32_t rows, height;
 
-	rows = (wares->get_nrwareids().value() + WaresPerRow - 1) / WaresPerRow;
+	rows = (wares.get_nrwareids().value() + WaresPerRow - 1) / WaresPerRow;
 	height = rows * (WARE_MENU_PIC_HEIGHT + 8 + 3) + 1;
 
 	set_size(get_inner_w(), height + 30);

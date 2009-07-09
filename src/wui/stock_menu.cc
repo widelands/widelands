@@ -103,7 +103,7 @@ void Stock_Menu::fill_waredisplay_with_wares() {
 	const uint32_t nrecos = player.get_nr_economies();
 	for (uint32_t i = 0; i < nrecos; ++i)
 		waresdisplay.add_warelist
-			(&player.get_economy_by_number(i)->get_wares(), WaresDisplay::WARE);
+			(player.get_economy_by_number(i)->get_wares(), WaresDisplay::WARE);
 }
 
 /*
@@ -115,6 +115,6 @@ void Stock_Menu::fill_waredisplay_with_workers() {
 	const uint32_t nrecos = player.get_nr_economies();
 	for (uint32_t i = 0; i < nrecos; ++i)
 		waresdisplay.add_warelist
-			(&player.get_economy_by_number(i)->get_workers(),
+			(player.get_economy_by_number(i)->get_workers(),
 			 WaresDisplay::WORKER);
 }

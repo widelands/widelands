@@ -371,7 +371,7 @@ void Interactive_Player::node_action()
 		// Special case for buildings
 		if (upcast(Building, building, map.get_immovable(get_sel_pos().node)))
 			if (can_see(building->owner().player_number()))
-				return building->show_options(this);
+				return building->show_options(*this);
 
 		// everything else can bring up the temporary dialog
 		show_field_action(this, get_player(), &m_fieldaction);

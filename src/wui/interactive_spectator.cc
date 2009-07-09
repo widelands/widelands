@@ -196,7 +196,7 @@ void Interactive_Spectator::node_action() {
 		 	(Widelands::Building,
 		 	 building,
 		 	 egbase().map().get_immovable(get_sel_pos().node)))
-		return building->show_options(this);
+		return building->show_options(*this);
 
 	//  everything else can bring up the temporary dialog
 	show_field_action(this, 0, &m_fieldaction);

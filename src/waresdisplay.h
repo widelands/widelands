@@ -59,7 +59,7 @@ public:
 	bool handle_mousemove
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 
-	void add_warelist(Widelands::WareList const *, wdType);
+	void add_warelist(Widelands::WareList const &, wdType);
 	void remove_all_warelists();
 
 protected:

@@ -179,7 +179,7 @@ public:
 	virtual bool burn_on_destroy();
 	virtual void destroy(Editor_Game_Base &);
 
-	void show_options(Interactive_GameBase *);
+	void show_options(Interactive_GameBase &);
 	void hide_options();
 
 	virtual bool fetch_from_flag(Game &);
