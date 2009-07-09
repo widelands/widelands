@@ -22,7 +22,6 @@
 #include "interactive_player.h"
 #include "logic/player.h"
 #include "trigger/trigger_time.h"
-#include "wlapplication.h"
 
 using namespace Widelands;
 

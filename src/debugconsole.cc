@@ -24,7 +24,6 @@
 
 #include "chat.h"
 #include "log.h"
-#include "wlapplication.h"
 
 namespace DebugConsole {
 

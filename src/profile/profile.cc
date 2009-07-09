@@ -26,7 +26,6 @@
 #include "logic/player.h"
 #include "tribe.h"
 #include "wexception.h"
-#include "wlapplication.h"
 
 #include "log.h"
 

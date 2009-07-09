@@ -53,7 +53,6 @@
 #include "tribe.h"
 #include "upcast.h"
 #include "ware_statistics_menu.h"
-#include "wlapplication.h"
 
 #include "ui_basic/editbox.h"
 #include "ui_basic/unique_window.h"
