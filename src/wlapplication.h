@@ -150,7 +150,7 @@ struct WLApplication {
 	static WLApplication * get(int const argc = 0, char const * * argv = 0);
 	~WLApplication();
 
-	enum GameType {NONE, EDITOR, SCENARIO, LOADGAME, NETWORK, GGZ};
+	enum GameType {NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK, GGZ};
 
 	void run();
 
@@ -249,7 +249,6 @@ protected:
 	 */
 	std::map<std::string, std::string> m_commandline;
 
-	bool m_editor_commandline; // Enable the User to start the Editor directly.
 	std::string m_filename;
 
 	//Log all output to this file if set, otherwise use cout

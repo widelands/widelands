@@ -263,7 +263,6 @@ m_default_datadirs     (true)
 	g_fs = new LayeredFileSystem();
 	g_fh = new Font_Handler();
 
-	m_editor_commandline = false;
 	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
 	if (m_default_datadirs) {
 		setup_searchpaths(m_commandline["EXENAME"]);
@@ -1092,9 +1091,16 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_filename = m_commandline["editor"];
 		if (m_filename.size() and *m_filename.rbegin() == '/')
 			m_filename.erase(m_filename.size() - 1);
-		m_editor_commandline = true;
 		m_game_type = EDITOR;
 		m_commandline.erase("editor");
+	}
+
+	if (m_commandline.count("replay")) {
+		m_filename = m_commandline["replay"];
+		if (m_filename.size() and *m_filename.rbegin() == '/')
+			m_filename.erase(m_filename.size() - 1);
+		m_game_type = REPLAY;
+		m_commandline.erase("replay");
 	}
 
 	if (m_commandline.count("loadgame")) {
