@@ -1098,6 +1098,8 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	}
 
 	if (m_commandline.count("replay")) {
+		if (m_game_type != NONE)
+			throw wexception("replay can not be combined with other actions");
 		m_filename = m_commandline["replay"];
 		if (m_filename.size() and *m_filename.rbegin() == '/')
 			m_filename.erase(m_filename.size() - 1);
@@ -1106,6 +1108,8 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	}
 
 	if (m_commandline.count("loadgame")) {
+		if (m_game_type != NONE)
+			throw wexception("loadgame can not be combined with other actions");
 		m_filename = m_commandline["loadgame"];
 		if (m_filename.empty())
 			throw wexception("empty value of command line parameter --loadgame");
@@ -1116,6 +1120,8 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	}
 
 	if (m_commandline.count("scenario")) {
+		if (m_game_type != NONE)
+			throw wexception("scenario can not be combined with other actions");
 		m_filename = m_commandline["scenario"];
 		if (m_filename.empty())
 			throw wexception("empty value of command line parameter --scenario");
@@ -1126,6 +1132,8 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	}
 #if HAVE_GGZ
 	if (m_commandline.count("dedicated")) {
+		if (m_game_type != NONE)
+			throw wexception("dedicated can not be combined with other actions");
 		m_filename = m_commandline["dedicated"];
 		if (m_filename.empty())
 			throw wexception("empty value of commandline parameter --dedicated");
