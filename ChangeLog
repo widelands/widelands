@@ -1,4 +1,46 @@
 ### Build 14
+- Exit with an error when incompatible command line parameters are given,
+  instead of ignoring it. (svn:r4406)
+- Allow starting a replay from the command line by giving the --replay=FILENAME
+  parameter. If just --replay is given, the program goes directly to the replay
+  file selection menu. (svn:r4405)
+- Fix display of multiline editoboxes when the text has more than one
+  consecutive linebreak. (svn:r4395)
+- Fix navigation in multiline editboxes. When the last line was empty and the
+  text cursor was at the end of the line above, it was not possible to move the
+  cursor to the last line with the down arrow key. (svn:r4394)
+- Fix bug that the text cursor was not visible when at the beginning of a line
+  (in a single- or multiline editbox). (svn:r4393).
+- Give spectators (see-only) access to the building and economy configuration
+  windows. Same for players with see-all right (debug builds). (svn:r4380,
+  svn:r4399)
+- When a soldier can not move to its opponent during an attack, do not give up
+  and quit the program. Instead, let the soldier desert without punishment.
+  Notify the 2 involved players by adding a message to their message queues and
+  pausing the game. Also pause and give a message when a worker can not return
+  home to his building and therefore becomes a fugitive. (svn:r4378)
+- Fix bug that the traingingsite window soldier buttons (drop selected soldier,
+  decrease soldier capacity and increase capacity) were not properly disabled
+  and that the latter 2 were not repeating. (svn:r4373)
+- Fix bug that the building window background graphic was not drawn with
+  correct playercolour. (svn:r4369)
+- Fix bug that buildings that were behind fog were not drawn with correct
+  playercolour. (svn:r4367)
+- Fix bug in buildcaps calculation. Sometimes it was possible to build a large
+  building at location A and then build a large building at location B. But if
+  a large building was built at location B first, it was no longer possible to
+  build a large building at location A. (svn:r4366)
+- Fix bug that the content of the interactive player data packet in a savegame
+  was used without being checked properly, which could lead to a segmentation
+  fault. (svn:r4353)
+- Fix bug in the editor that it was possible to remove a player even though
+  it was referenced by someting (such as an event or trigger). (svn:r4339)
+- Fix bug that for a worker type, an experience value was read and used even
+  though the worker type could not become some other worker type. (svn:r4328)
+- Make the config file format somewhat stricter. Do not allow // comments and
+  require a section header to be closed with a ']'. (svn:r4285, svn:r4298)
+- No longer look for bmp an gif images when searching for animation frames.
+  This should make animation loading a little faster. (svn:r4278)
 - Added and improved some buildings and workers animations (different svn rev.)
 - Many graphic system updates including experimental hardware improvements
   (many different svn rev.)
@@ -55,17 +97,22 @@
 - Added a lobby to multiplayer launchgame menu. Now players aren't automatically assigned
   to a position. Players staying in lobby are getting in game spectators.(svn:r3702,
   svn:r3703, svn:r3707, svn:r3709, svn:r3710)
-- Improved the map Plateau so that the players can reach the center even if another player
-  is fortified there. This is achieved by allowing large buildings at a few more places in
-  the valleys leading from the starting positions to the center. Also add some wiese1
-  (terrain type), which was not used at all on this map before. (svn:r3713)
+- Fix the map Dry Riverbed so that the mountain pass is passable in both
+  directions. (svn:r4335)
+- Improved the map Plateau so that the players can reach the center even if
+  another player is fortified there. This is achieved by allowing large
+  buildings at a few more places in the valleys leading from the starting
+  positions to the center. Also add some wiese1 (terrain type), which was not
+  used at all on this map before. Make some small adjustments to the node
+  heights in the small valley just east of player 1's starting position, so
+  that the valley becomes more useful. (svn:r3713, svn:r4361, svn:r4362)
 - Added two new maps "Twinkling Waves" and "The ancient sun of fire". (svn:r3689, svn:r4119)
 - Fix bug that the editor toolsize menu was not updated when the toolsize was changed with
   the keyboard shortcuts. (svn:r3675)
 - Implement feature request #1792180 - Allow user to change starting-position. (svn:r3666,
   svn:r3667, svn:r3668)
 - Editboxes now support UTF8 (unicode) characters, so the players can use their locale
-  language in game. (svn:r3662)
+  language in game. (svn:r3662, svn:r4398)
 - Improve the output of _widelands --help_. (svn:r3660)
 - Add a new terrain type, corresponding to Greenland's bergwiese, to Desert. (svn:r3659)
 - Workers that search for an object now prefer one of the nearest. Therefore they spend
@@ -110,9 +157,10 @@
 - For the statistics string of a trainingsite (shown in the mapview near the trainingsite
   when S has been pressed), replace strings like "upgrade_evade_0" (untranslated) with
   strings like "Upgrade evade 0" (translated). (svn:r3595)
-- Fix bug that requests saved internal index numbers instead of ware/worker type names.
-  The internal index numbers may not be the same when the game is loaded again, while type
-  names should be the same. (svn:r3593)
+- Fix bugs that ware/worker types were identified by their temporary index
+  value instead of their permanent name in some places in savegames. The
+  temporary index values may not be the same when the game is loaded again,
+  while type names should be the same. (svn:r3593, svn:r4343)
 - Implement automatic recursive road removal. When a player holds down Ctrl when ordering
   (or confirming, if applicable) the removal of flag or road, do a recursive removal. If a
   road removal command is given with the recursive option, all roads between the start and
@@ -155,7 +203,8 @@
   he has completed the construction. Instead he leaves directly. (svn:r3590)
 - Added new portrait pictures for the campaign maps (svn:r3581, svn:r3632)
 - Allow multiple AI implementations (svn:r3574)
-- Implement a debug console and add a "switchplayer" command (svn:r3573)
+- Implement a debug console and add a "switchplayer" command (svn:r3573,
+  svn:r4370, svn:r4371)
 - Fix bug that the back buttons in the campaign selection UI had the wrong background.
   (svn:r3619)
 - Improvements of full screen menu UI (svn:r3579, svn:r3581)
