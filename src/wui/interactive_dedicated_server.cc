@@ -35,6 +35,8 @@
 
 /**
  * Setup the dedictated server UI for the given game.
+ * TODO  In fact the server windows should only show the chat and save and exit
+ * TODO  buttons. -> As less UI as possible.
  */
 Interactive_DServer::Interactive_DServer
 	(Widelands::Game & _game, Section & global_s)
