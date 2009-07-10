@@ -197,15 +197,13 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 	}
 
 	//  print the maximal value
-	sprintf(buffer, "%i", max);
-	uint32_t w, h;
-	g_fh->get_size(UI_FONT_SMALL, buffer, w, h, 0);
+	sprintf(buffer, "%u", max);
 	g_fh->draw_string
 		(dst,
 		 UI_FONT_SMALL,
 		 RGBColor(120, 255, 0), RGBColor(255, 255, 255),
-		 Point(get_inner_w() - space_at_right - w - 2, spacing),
-		 buffer, Align_CenterLeft, -1,
+		 Point(get_inner_w() - space_at_right - 2, spacing),
+		 buffer, Align_CenterRight, -1,
 		 Widget_Cache_None, g_gr->get_no_picture(), -1, false);
 
 	//  plot the pixels

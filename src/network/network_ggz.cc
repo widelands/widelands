@@ -354,10 +354,10 @@ void NetGGZ::data()
 		throw warning
 			(_("Connection problem"), "%s",
 			 _
-				("Your Server was not reachable from the internet.\n"
-				 "Please try to solve the problem - Reading the notes\n"
-				 "at http://wl.widelands.org/wiki/InternetGaming can\n"
-				 "be advantageous."));
+			 	("Your Server was not reachable from the internet.\n"
+			 	 "Please try to solve the problem - Reading the notes\n"
+			 	 "at http://wl.widelands.org/wiki/InternetGaming can\n"
+			 	 "be advantageous."));
 	default: log("GGZ ## opcode unknown!\n");
 	}
 }
