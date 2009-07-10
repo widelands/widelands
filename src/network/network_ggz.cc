@@ -23,6 +23,7 @@
 
 #include "log.h"
 #include "i18n.h"
+#include "warning.h"
 #include "wexception.h"
 #include "wlapplication.h"
 
@@ -348,6 +349,15 @@ void NetGGZ::data()
 		server_ip_addr = ggz_strdup(ipstring);
 		ggz_free(ipstring);
 		break;
+	case op_unreachable:
+		deinitcore();
+		throw warning
+			(_("Connection problem"), "%s",
+			 _
+				("Your Server was not reachable from the internet.\n"
+				 "Please try to solve the problem - Reading the notes\n"
+				 "at http://wl.widelands.org/wiki/InternetGaming can\n"
+				 "be advantageous."));
 	default: log("GGZ ## opcode unknown!\n");
 	}
 }
