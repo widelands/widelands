@@ -922,7 +922,8 @@ void Soldier::sendSpaceSignals(Game & game)
 			if (soldier != this)
 				soldier->send_signal(game, "wakeup");
 
-	if (get_position().field->get_owned_by() != owner().player_number()) {
+	Player_Number const land_owner = get_position().field->get_owned_by();
+	if (land_owner != owner().player_number()) {
 		std::vector<BaseImmovable *> attackables;
 		game.map().find_reachable_immovables_unique
 			(Area<FCoords>(get_position(), MaxProtectionRadius),
@@ -933,8 +934,9 @@ void Soldier::sendSpaceSignals(Game & game)
 		container_iterate_const(std::vector<BaseImmovable *>, attackables, i)
 			if
 				(dynamic_cast<PlayerImmovable const &>(**i.current).get_owner()
-				 !=
-				 get_owner())
+				 ->player_number()
+				 ==
+				 land_owner)
 				dynamic_cast<Attackable &>(**i.current).aggressor(*this);
 	}
 }

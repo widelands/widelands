@@ -127,7 +127,7 @@ void Interactive_DServer::node_action() {}
 
 
 /// Global in-game keypresses:
-bool Interactive_DServer::handle_key(bool down, SDL_keysym code)
+bool Interactive_DServer::handle_key(bool const down, SDL_keysym const code)
 {
 	if (down)
 		switch (code.sym) {
