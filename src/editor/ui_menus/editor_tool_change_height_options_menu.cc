@@ -35,70 +35,75 @@ Editor_Tool_Change_Height_Options_Menu::Editor_Tool_Change_Height_Options_Menu
 	(Editor_Interactive          & parent,
 	 Editor_Increase_Height_Tool & increase_tool,
 	 UI::UniqueWindow::Registry  & registry)
-:
-Editor_Tool_Options_Menu
-	(parent, registry, 135, 135, _("Height Tools Options")),
-m_increase_tool(increase_tool),
-m_change_by_label
-	(this,
-	 hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), height,
-	 _("In-/Decrease Value"), Align_BottomCenter),
-m_change_by_increase
-	(this,
-	 hmargin(),
-	 m_change_by_label.get_y() + m_change_by_label.get_h() + spacing(),
-	 width, height,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-	 &Editor_Tool_Change_Height_Options_Menu::clicked_change_by_increment, *this,
-	 std::string(),
-	 increase_tool.get_change_by() < MAX_FIELD_HEIGHT_DIFF),
-m_change_by_decrease
-	(this,
-	 get_inner_w() - hmargin() - width, m_change_by_increase.get_y(),
-	 width, height,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-	 &Editor_Tool_Change_Height_Options_Menu::clicked_change_by_decrement, *this,
-	 std::string(),
-	 1 < increase_tool.get_change_by()),
-m_change_by_value
-	(this,
-	 m_change_by_increase.get_x() + m_change_by_increase.get_w() + hspacing(),
-	 m_change_by_increase.get_y(),
-	 m_change_by_decrease.get_x() - hspacing()
-	 -
-	 (m_change_by_increase.get_x() + m_change_by_increase.get_w() + hspacing()),
-	 height,
-	 Align_BottomCenter),
-m_set_to_label
-	(this,
-	 vmargin(),
-	 m_change_by_increase.get_y() + m_change_by_increase.get_h() + vspacing(),
-	 get_inner_w() - 2 * hmargin(), height,
-	 _("Set Value"), Align_BottomCenter),
-m_set_to_increase
-	(this,
-	 hmargin(), m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
-	 width, height,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-	 &Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment, *this,
-	 std::string(),
-	 increase_tool.set_tool().get_interval().min < MAX_FIELD_HEIGHT),
-m_set_to_decrease
-	(this,
-	 m_change_by_decrease.get_x(), m_set_to_increase.get_y(), width, height,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-	 &Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement, *this,
-	 std::string(),
-	 0 < increase_tool.set_tool().get_interval().min),
-m_set_to_value
-	(this,
-	 m_change_by_value.get_x(), m_set_to_increase.get_y(),
-	 m_change_by_value.get_w(), height,
-	 Align_BottomCenter)
+	:
+	Editor_Tool_Options_Menu
+		(parent, registry, 135, 135, _("Height Tools Options")),
+	m_increase_tool(increase_tool),
+	m_change_by_label
+		(this,
+		 hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), height,
+		 _("In-/Decrease Value"), UI::Align_BottomCenter),
+	m_change_by_increase
+		(this,
+		 hmargin(),
+		 m_change_by_label.get_y() + m_change_by_label.get_h() + spacing(),
+		 width, height,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+		 &Editor_Tool_Change_Height_Options_Menu::clicked_change_by_increment,
+		 *this,
+		 std::string(),
+		 increase_tool.get_change_by() < MAX_FIELD_HEIGHT_DIFF),
+	m_change_by_decrease
+		(this,
+		 get_inner_w() - hmargin() - width, m_change_by_increase.get_y(),
+		 width, height,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+		 &Editor_Tool_Change_Height_Options_Menu::clicked_change_by_decrement,
+		 *this,
+		 std::string(),
+		 1 < increase_tool.get_change_by()),
+	m_change_by_value
+		(this,
+		 m_change_by_increase.get_x() + m_change_by_increase.get_w() +
+		 hspacing(),
+		 m_change_by_increase.get_y(),
+		 m_change_by_decrease.get_x() - hspacing()
+		 -
+		 (m_change_by_increase.get_x() + m_change_by_increase.get_w() +
+		  hspacing()),
+		 height,
+		 UI::Align_BottomCenter),
+	m_set_to_label
+		(this,
+		 vmargin(),
+		 m_change_by_increase.get_y() + m_change_by_increase.get_h() +
+		 vspacing(),
+		 get_inner_w() - 2 * hmargin(), height,
+		 _("Set Value"), UI::Align_BottomCenter),
+	m_set_to_increase
+		(this,
+		 hmargin(), m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
+		 width, height,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+		 &Editor_Tool_Change_Height_Options_Menu::clicked_setto_increment, *this,
+		 std::string(),
+		 increase_tool.set_tool().get_interval().min < MAX_FIELD_HEIGHT),
+	m_set_to_decrease
+		(this,
+		 m_change_by_decrease.get_x(), m_set_to_increase.get_y(), width, height,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+		 &Editor_Tool_Change_Height_Options_Menu::clicked_setto_decrement, *this,
+		 std::string(),
+		 0 < increase_tool.set_tool().get_interval().min),
+	m_set_to_value
+		(this,
+		 m_change_by_value.get_x(), m_set_to_increase.get_y(),
+		 m_change_by_value.get_w(), height,
+		 UI::Align_BottomCenter)
 {
 	m_change_by_increase.set_repeating(true);
 	m_change_by_decrease.set_repeating(true);

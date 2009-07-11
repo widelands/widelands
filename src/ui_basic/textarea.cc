@@ -19,7 +19,7 @@
 
 #include "textarea.h"
 
-#include "graphic/graphic.h"
+#include "font_handler.h"
 
 namespace UI {
 
@@ -103,7 +103,7 @@ void Textarea::set_align(const Align align) {
 void Textarea::draw(RenderTarget & dst)
 {
 	if (m_text.length())
-		g_fh->draw_string
+		UI::g_fh->draw_string
 			(dst,
 			 m_fontname, m_fontsize, m_fcolor, UI_FONT_CLR_BG,
 			 Point
@@ -113,7 +113,7 @@ void Textarea::draw(RenderTarget & dst)
 			 	 get_h() / 2 : m_align & Align_Bottom ? get_h() : 0),
 			 m_text,
 			 m_align,
-			 m_multiline ? get_w() : -1);
+			 m_multiline ? get_w() : std::numeric_limits<uint32_t>::max());
 }
 
 
@@ -156,7 +156,7 @@ void Textarea::expand()
 	int32_t y = get_y();
 	uint32_t w, h;
 
-	g_fh->get_size
+	UI::g_fh->get_size
 		(m_fontname,
 		 m_fontsize,
 		 m_text,

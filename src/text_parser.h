@@ -20,7 +20,13 @@
 #ifndef TEXT_PARSER_H
 #define TEXT_PARSER_H
 
-#include "font_handler.h"
+#include "ui_basic/align.h"
+#include "rgbcolor.h"
+#include "ui_basic/variable_callback.h"
+
+#include <vector>
+
+namespace UI {
 
 inline bool is_richtext(std::string const & text) {
 	return text.substr(0, 3) == "<rt";
@@ -137,5 +143,6 @@ private:
 	void split_words(std::string in, std::vector<std::string> * plist);
 };
 
+}
 
 #endif

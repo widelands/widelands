@@ -21,11 +21,10 @@
 #ifndef UI_LISTSELECT_H
 #define UI_LISTSELECT_H
 
+#include "align.h"
 #include "panel.h"
 #include "scrollbar.h"
 #include "m_signal.h"
-
-#include "font_handler.h"
 
 #include "compile_assert.h"
 
@@ -81,8 +80,7 @@ struct BaseListselect : public Panel {
 		m_fontsize = fontsize;
 	}
 
-	uint32_t size() const throw ()
-	{
+	uint32_t size() const {
 		return m_entry_records.size();
 	}
 

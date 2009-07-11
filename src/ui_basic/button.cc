@@ -22,7 +22,6 @@
 #include "mouse_constants.h"
 
 #include "font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 
@@ -169,8 +168,8 @@ void Button::draw(RenderTarget & dst)
 			 	((get_w() - static_cast<int32_t>(cpw)) >> 1,
 			 	 (get_h() - static_cast<int32_t>(cph)) >> 1),
 			 m_enabled ? m_pic_custom : m_pic_custom_disabled);
-	} else if (m_title.length()) { //  otherwise draw title string centered
-		g_fh->draw_string
+	} else if (m_title.length()) //  otherwise draw title string centered
+		UI::g_fh->draw_string
 			(dst,
 			 m_fontname,
 			 m_fontsize,
@@ -178,12 +177,11 @@ void Button::draw(RenderTarget & dst)
 			 Point(get_w() >> 1, get_h() >> 1),
 			 m_title,
 			 Align_Center,
-			 -1,
+			 std::numeric_limits<uint32_t>::max(),
 			 Widget_Cache_None,
 			 g_gr->get_no_picture(),
-			 (m_draw_caret ?
-			  m_title.length() : std::numeric_limits<uint32_t>::max()));
-	}
+			 m_draw_caret ? m_title.length() :
+			 std::numeric_limits<uint32_t>::max());
 
 	//  draw border
 	//  a pressed but not highlighted button occurs when the user has pressed

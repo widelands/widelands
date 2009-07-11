@@ -26,52 +26,47 @@ Fullscreen_Menu_SinglePlayer::Fullscreen_Menu_SinglePlayer() :
 Fullscreen_Menu_Base("singleplmenu.jpg"),
 
 // Values for alignment and size
-m_butw
-	(m_xres * 7 / 20),
-m_buth
-	(m_yres * 19 / 400),
-m_butx
-	((m_xres - m_butw) / 2),
-m_fs
-	(fs_small()),
-m_fn
-	(ui_fn()),
+	m_butw (m_xres * 7 / 20),
+	m_buth (m_yres * 19 / 400),
+	m_butx ((m_xres - m_butw) / 2),
+	m_fs   (fs_small()),
+	m_fn   (ui_fn()),
 
 // Title
-title
-	(this,
-	 m_xres / 2, m_yres * 3 / 40,
-	 _("Single Player Menu"), Align_HCenter),
+	title
+		(this,
+		 m_xres / 2, m_yres * 3 / 40,
+		 _("Single Player Menu"), UI::Align_HCenter),
 
 // Buttons
-new_game
-	(this,
-	 m_butx, m_yres * 6 / 25, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 &Fullscreen_Menu_SinglePlayer::end_modal, *this, New_Game,
-	 _("New Game"), std::string(), true, false,
-	 m_fn, m_fs),
-campaign
-	(this,
-	 m_butx, m_yres * 61 / 200, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 &Fullscreen_Menu_SinglePlayer::end_modal, *this, Campaign,
-	 _("Campaigns"), std::string(), true, false,
-	 m_fn, m_fs),
-load_game
-	(this,
-	 m_butx, m_yres * 87 / 200, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 &Fullscreen_Menu_SinglePlayer::end_modal, *this, Load_Game,
-	 _("Load Game"), std::string(), true, false,
-	 m_fn, m_fs),
-back
-	(this,
-	 m_butx, m_yres * 3 / 4, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 &Fullscreen_Menu_SinglePlayer::end_modal, *this, Back,
-	 _("Back"), std::string(), true, false,
-	 m_fn, m_fs)
+	new_game
+		(this,
+		 m_butx, m_yres * 6 / 25, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &Fullscreen_Menu_SinglePlayer::end_modal, *this, New_Game,
+		 _("New Game"), std::string(), true, false,
+		 m_fn, m_fs),
+	campaign
+		(this,
+		 m_butx, m_yres * 61 / 200, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &Fullscreen_Menu_SinglePlayer::end_modal, *this, Campaign,
+		 _("Campaigns"), std::string(), true, false,
+		 m_fn, m_fs),
+	load_game
+		(this,
+		 m_butx, m_yres * 87 / 200, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &Fullscreen_Menu_SinglePlayer::end_modal, *this, Load_Game,
+		 _("Load Game"), std::string(), true, false,
+		 m_fn, m_fs),
+	back
+		(this,
+		 m_butx, m_yres * 3 / 4, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 &Fullscreen_Menu_SinglePlayer::end_modal, *this, Back,
+		 _("Back"), std::string(), true, false,
+		 m_fn, m_fs)
 {
 	title.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 }

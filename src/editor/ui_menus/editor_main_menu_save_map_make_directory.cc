@@ -38,8 +38,7 @@ UI::Window(parent, 0, 0, 230, 120, _("Make Directory"))
 	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
 
-	new UI::Textarea
-		(this, spacing, posy, _("Enter Directory Name: "), Align_Left);
+	new UI::Textarea(this, spacing, posy, _("Enter Directory Name: "));
 	posy += 20 + spacing;
 
 	m_edit =

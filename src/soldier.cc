@@ -34,7 +34,6 @@
 #include "logic/player.h"
 #include "profile/profile.h"
 #include "graphic/rendertarget.h"
-#include "rgbcolor.h"
 #include "tribe.h"
 #include "upcast.h"
 #include "logic/warehouse.h"

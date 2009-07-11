@@ -22,91 +22,86 @@
 #include "build_info.h"
 #include "i18n.h"
 
-Fullscreen_Menu_Main::Fullscreen_Menu_Main()
-:
-Fullscreen_Menu_Base("mainmenu.jpg"),
+Fullscreen_Menu_Main::Fullscreen_Menu_Main() :
+	Fullscreen_Menu_Base("mainmenu.jpg"),
 
 // Values for alignment and size
-m_butx
-	(m_xres * 13 / 40),
-m_butw
-	(m_xres * 7 / 20),
-m_buth
-	(m_yres * 19 / 400),
-m_fs
-	(fs_small()),
-m_fn
-	(ui_fn()),
-wlcr(WLCR),
+	m_butx (m_xres * 13 / 40),
+	m_butw (m_xres * 7 / 20),
+	m_buth (m_yres * 19 / 400),
+	m_fs   (fs_small()),
+	m_fn   (ui_fn()),
+	wlcr   (WLCR),
 
 // Buttons
-singleplayer
-	(this,
-	 m_butx, m_yres * 6 / 25, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-	 &Fullscreen_Menu_Main::end_modal, *this, mm_singleplayer,
-	 _("Single Player"), std::string(), true, false,
-	 m_fn, m_fs),
-multiplayer
-	(this,
-	 m_butx, m_yres * 61 / 200, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-	 &Fullscreen_Menu_Main::end_modal, *this, mm_multiplayer,
-	 _("Multi Player"), std::string(), true, false,
-	 m_fn, m_fs),
-replay
-	(this,
-	 m_butx, m_yres * 37 / 100, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-	 &Fullscreen_Menu_Main::end_modal, *this, mm_replay,
-	 _("Watch Replay"), std::string(), true, false,
-	 m_fn, m_fs),
-options
-	(this,
-	 m_butx, m_yres * 87 / 200, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-	 &Fullscreen_Menu_Main::end_modal, *this, mm_options,
-	 _("Options"), std::string(), true, false,
-	 m_fn, m_fs),
-editor
-	(this,
-	 m_butx, m_yres / 2, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-	 &Fullscreen_Menu_Main::end_modal, *this, mm_editor,
-	 _("Editor"), std::string(), true, false,
-	 m_fn, m_fs),
-readme
-	(this,
-	 m_butx, m_yres * 113 / 200, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-	 &Fullscreen_Menu_Main::end_modal, *this, mm_readme,
-	 _("View Readme"), std::string(), true, false,
-	 m_fn, m_fs),
-license
-	(this,
-	 m_butx, m_yres * 63 / 100, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-	 &Fullscreen_Menu_Main::end_modal, *this, mm_license,
-	 _("License"), std::string(), true, false,
-	 m_fn, m_fs),
-exit
-	(this,
-	 m_butx, m_yres * 3 / 4, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
-	 &Fullscreen_Menu_Main::end_modal, *this, mm_exit,
-	 _("Exit Game"), std::string(), true, false,
-	 m_fn, m_fs),
+	singleplayer
+		(this,
+		 m_butx, m_yres * 6 / 25, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 &Fullscreen_Menu_Main::end_modal, *this, mm_singleplayer,
+		 _("Single Player"), std::string(), true, false,
+		 m_fn, m_fs),
+	multiplayer
+		(this,
+		 m_butx, m_yres * 61 / 200, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 &Fullscreen_Menu_Main::end_modal, *this, mm_multiplayer,
+		 _("Multi Player"), std::string(), true, false,
+		 m_fn, m_fs),
+	replay
+		(this,
+		 m_butx, m_yres * 37 / 100, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 &Fullscreen_Menu_Main::end_modal, *this, mm_replay,
+		 _("Watch Replay"), std::string(), true, false,
+		 m_fn, m_fs),
+	options
+		(this,
+		 m_butx, m_yres * 87 / 200, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 &Fullscreen_Menu_Main::end_modal, *this, mm_options,
+		 _("Options"), std::string(), true, false,
+		 m_fn, m_fs),
+	editor
+		(this,
+		 m_butx, m_yres / 2, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 &Fullscreen_Menu_Main::end_modal, *this, mm_editor,
+		 _("Editor"), std::string(), true, false,
+		 m_fn, m_fs),
+	readme
+		(this,
+		 m_butx, m_yres * 113 / 200, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 &Fullscreen_Menu_Main::end_modal, *this, mm_readme,
+		 _("View Readme"), std::string(), true, false,
+		 m_fn, m_fs),
+	license
+		(this,
+		 m_butx, m_yres * 63 / 100, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 &Fullscreen_Menu_Main::end_modal, *this, mm_license,
+		 _("License"), std::string(), true, false,
+		 m_fn, m_fs),
+	exit
+		(this,
+		 m_butx, m_yres * 3 / 4, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 &Fullscreen_Menu_Main::end_modal, *this, mm_exit,
+		 _("Exit Game"), std::string(), true, false,
+		 m_fn, m_fs),
 
 // Textlabels
-version
-	(this,
-	 m_xres, m_yres,
-	 _("Version ") + build_id() + '(' + build_type() + ')', Align_BottomRight),
-copyright
-	(this,
-	 0, m_yres,
-	 (wlcr + _("by the Widelands Development Team")).c_str(),
-	 Align_BottomLeft)
+	version
+		(this,
+		 m_xres, m_yres,
+		 _("Version ") + build_id() + '(' + build_type() + ')',
+		 UI::Align_BottomRight),
+	copyright
+		(this,
+		 0, m_yres,
+		 (wlcr + _("by the Widelands Development Team")).c_str(),
+		 UI::Align_BottomLeft)
 {
 	version.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	copyright.set_font(m_fn, m_fs, UI_FONT_CLR_FG);

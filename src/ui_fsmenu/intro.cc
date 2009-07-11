@@ -29,8 +29,7 @@ Fullscreen_Menu_Intro::Fullscreen_Menu_Intro()
 m_message
 	(this,
 	 gr_x() / 2, gr_y() * 19 / 20,
-	 _("Press ESC or click to continue ..."),
-	 Align_HCenter)
+	 _("Press ESC or click to continue ..."), UI::Align_HCenter)
 {
 	m_message.set_font(ui_fn(), fs_small() * 6 / 5, RGBColor(192, 192, 128));
 }

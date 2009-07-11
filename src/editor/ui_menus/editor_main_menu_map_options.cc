@@ -68,8 +68,7 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 	int32_t const height  = 20;
 	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
-	UI::Textarea * ta =
-		new UI::Textarea(this, posx, posy - 2, _("Map Name:"), Align_Left);
+	UI::Textarea * ta = new UI::Textarea(this, posx, posy - 2, _("Map Name:"));
 	m_name =
 		new UI::EditBox
 			(this,
@@ -81,21 +80,18 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 	ta = new UI::Textarea(this, posx, posy - 2, _("Size:"));
 	m_size =
 		new UI::Textarea
-			(this, posx + ta->get_w() + spacing, posy - 2, "512x512", Align_Left);
+			(this, posx + ta->get_w() + spacing, posy - 2, "512x512");
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("Nr Players:"));
 	m_nrplayers =
-		new UI::Textarea
-			(this, posx + ta->get_w() + spacing, posy - 2, "1", Align_Left);
+		new UI::Textarea(this, posx + ta->get_w() + spacing, posy - 2, "1");
 	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("World:"));
 	m_world =
 		new UI::Textarea
-			(this,
-			 posx + ta->get_w() + spacing, posy - 2,
-			 "\"Greenland\"", Align_Left);
+			(this, posx + ta->get_w() + spacing, posy - 2, "\"Greenland\"");
 	posy += height + spacing;
-	ta = new UI::Textarea(this, posx, posy - 2, _("Author:"), Align_Left);
+	ta = new UI::Textarea(this, posx, posy - 2, _("Author:"));
 	m_author =
 		new UI::EditBox
 			(this,
@@ -104,11 +100,12 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 1);
 	m_author->changedid.set(this, &Main_Menu_Map_Options::changed);
 	posy += height + spacing;
-	m_descr = new UI::Multiline_Editbox
-		(this,
-		 posx, posy,
-		 get_inner_w() - spacing - posx, get_inner_h() - 25 - spacing - posy,
-		 _("Nothing defined!"));
+	m_descr =
+		new UI::Multiline_Editbox
+			(this,
+			 posx, posy,
+			 get_inner_w() - spacing - posx, get_inner_h() - 25 - spacing - posy,
+			 _("Nothing defined!"));
 	m_descr->changed.set(this, &Main_Menu_Map_Options::editbox_changed);
 	update();
 }

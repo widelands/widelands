@@ -23,18 +23,16 @@
 #include "i18n.h"
 
 Fullscreen_Menu_Editor::Fullscreen_Menu_Editor() :
-Fullscreen_Menu_Base("singleplmenu.jpg"),
+	Fullscreen_Menu_Base("singleplmenu.jpg"),
 
 // Values for alignment and size
-m_butw
-	(m_xres * 7 / 20),
-m_buth
-	(m_yres * 19 / 400),
-m_butx
-	((m_xres - m_butw) / 2),
+	m_butw (m_xres * 7 / 20),
+	m_buth (m_yres * 19 / 400),
+	m_butx ((m_xres - m_butw) / 2),
 
 // Title
-title(this, m_xres / 2, m_yres * 3 / 40, _("Editor Menu"), Align_HCenter),
+	title
+		(this, m_xres / 2, m_yres * 3 / 40, _("Editor Menu"), UI::Align_HCenter),
 
 // Buttons
 	new_map

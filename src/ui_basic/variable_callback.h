@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,36 +17,15 @@
  *
  */
 
-#ifndef FONT_LOADER_H
-#define FONT_LOADER_H
+#ifndef VARIABLE_CALLBACK_H
+#define VARIABLE_CALLBACK_H
 
-#include "io/fileread.h"
-#include "rgbcolor.h"
-
-#include <SDL_ttf.h>
-
-#include <map>
 #include <string>
-#include <cstring>
-#include <vector>
 
 namespace UI {
 
-/*
- * Font
- *
- * this represents a loaded font used by the FontHandler
- */
-struct Font_Loader {
-	Font_Loader() {};
-	~Font_Loader();
-	TTF_Font * open_font(const std::string & name, int32_t size);
-	TTF_Font * get_font (std::string const & name, int32_t size);
-	void clear_fonts();
-private:
-	std::map<std::string, TTF_Font *> m_font_table;
-	std::vector<FileRead *> m_freads;
-};
+/// \todo Document what this is used for.
+typedef std::string (*Varibale_Callback)(std::string, void * data);
 
 }
 

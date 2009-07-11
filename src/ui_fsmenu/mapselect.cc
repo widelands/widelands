@@ -36,97 +36,90 @@
 
 using Widelands::WL_Map_Loader;
 
-
-Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect()
-:
-Fullscreen_Menu_Base("choosemapmenu.jpg"),
+Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect() :
+	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
-m_butw
-	(m_xres / 4),
-m_buth
-	(m_yres * 9 / 200),
-m_fs
-	(fs_small()),
-m_fn
-	(ui_fn()),
+	m_butw (m_xres / 4),
+	m_buth (m_yres * 9 / 200),
+	m_fs   (fs_small()),
+	m_fn   (ui_fn()),
 
 // Text labels
-m_title
-	(this,
-	 m_xres / 2, m_yres * 9 / 50,
-	 _("Choose your map!"),
-	 Align_HCenter),
-m_label_load_map_as_scenario
-	(this,
-	 m_xres * 23 / 25, m_yres * 11 / 40,
-	 _("Load Map as scenario: "),
-	 Align_Right),
-m_label_name
-	(this,
-	 m_xres * 7 / 10, m_yres * 17 / 50,
-	 _("Name:"),
-	 Align_Right),
-m_name (this, m_xres * 71 / 100, m_yres * 17 / 50, std::string()),
-m_label_author
-	(this,
-	 m_xres * 7 / 10, m_yres * 3 / 8,
-	 _("Author:"),
-	 Align_Right),
-m_author (this, m_xres * 71 / 100, m_yres * 3 / 8, std::string()),
-m_label_size
-	(this,
-	 m_xres * 7 / 10, m_yres * 41 / 100,
-	 _("Size:"),
-	 Align_Right),
-m_size (this, m_xres * 71 / 100, m_yres * 41 / 100, std::string()),
-m_label_world
-	(this,
-	 m_xres * 7 / 10, m_yres * 89 / 200,
-	 _("World:"),
-	 Align_Right),
-m_world (this, m_xres * 71 / 100, m_yres * 89 / 200, std::string()),
-m_label_nr_players
-	(this,
-	 m_xres * 7 / 10, m_yres * 12 / 25,
-	 _("Players:"),
-	 Align_Right),
-m_nr_players (this, m_xres * 71 / 100, m_yres * 12 / 25, std::string()),
-m_label_descr
-	(this,
-	 m_xres * 7 / 10, m_yres * 103 / 200,
-	 _("Descr:"),
-	 Align_Right),
-m_descr
-	(this,
-	 m_xres * 71 / 100, m_yres * 13 / 25, m_xres / 4, m_yres * 63 / 200,
-	 std::string()),
+	m_title
+		(this,
+		 m_xres / 2, m_yres * 9 / 50,
+		 _("Choose your map!"),
+		 UI::Align_HCenter),
+	m_label_load_map_as_scenario
+		(this,
+		 m_xres * 23 / 25, m_yres * 11 / 40,
+		 _("Load Map as scenario: "),
+		 UI::Align_Right),
+	m_label_name
+		(this,
+		 m_xres * 7 / 10, m_yres * 17 / 50,
+		 _("Name:"),
+		 UI::Align_Right),
+	m_name (this, m_xres * 71 / 100, m_yres * 17 / 50),
+	m_label_author
+		(this,
+		 m_xres * 7 / 10, m_yres * 3 / 8,
+		 _("Author:"),
+		 UI::Align_Right),
+	m_author (this, m_xres * 71 / 100, m_yres * 3 / 8),
+	m_label_size
+		(this,
+		 m_xres * 7 / 10, m_yres * 41 / 100,
+		 _("Size:"),
+		 UI::Align_Right),
+	m_size (this, m_xres * 71 / 100, m_yres * 41 / 100),
+	m_label_world
+		(this,
+		 m_xres * 7 / 10, m_yres * 89 / 200,
+		 _("World:"),
+		 UI::Align_Right),
+	m_world (this, m_xres * 71 / 100, m_yres * 89 / 200),
+	m_label_nr_players
+		(this,
+		 m_xres * 7 / 10, m_yres * 12 / 25,
+		 _("Players:"),
+		 UI::Align_Right),
+	m_nr_players (this, m_xres * 71 / 100, m_yres * 12 / 25),
+	m_label_descr
+		(this,
+		 m_xres * 7 / 10, m_yres * 103 / 200,
+		 _("Descr:"),
+		 UI::Align_Right),
+	m_descr
+		(this,
+		 m_xres * 71 / 100, m_yres * 13 / 25, m_xres / 4, m_yres * 63 / 200),
 
 // Buttons
-m_back
-	(this,
-	 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 &Fullscreen_Menu_MapSelect::end_modal, *this, 0,
-	 _("Back"), std::string(), true, false,
-	 m_fn, m_fs),
-m_ok
-	(this,
-	 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-	 &Fullscreen_Menu_MapSelect::ok, *this,
-	 _("OK"), std::string(), false, false,
-	 m_fn, m_fs),
+	m_back
+		(this,
+		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 &Fullscreen_Menu_MapSelect::end_modal, *this, 0,
+		 _("Back"), std::string(), true, false,
+		 m_fn, m_fs),
+	m_ok
+		(this,
+		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 &Fullscreen_Menu_MapSelect::ok, *this,
+		 _("OK"), std::string(), false, false,
+		 m_fn, m_fs),
 
 // Checkbox
-m_load_map_as_scenario (this, Point (m_xres * 187 / 200, m_yres * 7 / 25)),
+	m_load_map_as_scenario (this, Point (m_xres * 187 / 200, m_yres * 7 / 25)),
 
 // Map list
-m_list
-	(this,
-	 m_xres *  47 / 2500, m_yres * 3417 / 10000,
-	 m_xres * 711 / 1250, m_yres * 6083 / 10000),
-m_curdir("maps"), m_basedir("maps")
+	m_list
+		(this,
+		 m_xres *  47 / 2500, m_yres * 3417 / 10000,
+		 m_xres * 711 / 1250, m_yres * 6083 / 10000),
+	m_curdir("maps"), m_basedir("maps")
 {
 	m_title.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_label_load_map_as_scenario.set_font(m_fn, m_fs, UI_FONT_CLR_FG);

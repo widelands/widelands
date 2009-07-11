@@ -20,6 +20,7 @@
 #include "slider.h"
 
 #include "mouse_constants.h"
+#include "graphic/rendertarget.h"
 
 namespace UI {
 

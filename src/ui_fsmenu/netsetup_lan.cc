@@ -24,84 +24,78 @@
 #include "network/network.h"
 #include "profile/profile.h"
 
-Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN ()
-:
-Fullscreen_Menu_Base("singleplmenu.jpg"), // change this
+Fullscreen_Menu_NetSetupLAN::Fullscreen_Menu_NetSetupLAN () :
+	Fullscreen_Menu_Base("singleplmenu.jpg"), //  FIXME change this
 
 // Values for alignment and size
-m_butx
-	(m_xres * 13 / 40),
-m_butw
-	(m_xres / 4),
-m_buth
-	(m_yres * 19 / 400),
-m_lisw
-	(m_xres * 9 / 16),
-m_fs
-	(fs_small()),
-m_fn
-	(ui_fn()),
+	m_butx (m_xres * 13 / 40),
+	m_butw (m_xres / 4),
+	m_buth (m_yres * 19 / 400),
+	m_lisw (m_xres * 9 / 16),
+	m_fs   (fs_small()),
+	m_fn   (ui_fn()),
 
 // Text labels
-title
-	(this,
-	 m_xres / 2, m_yres / 10,
-	 _("Begin Network Game"), Align_HCenter),
-m_opengames
-	(this,
-	 m_xres * 3 / 50, m_yres * 27 / 100,
-	 _("List of games in your local network:"), Align_Left),
-m_playername
-	(this,
-	 m_xres * 16 / 25, m_yres * 27 / 100,
-	 _("Your nickname:"), Align_Left),
-m_hostname
-	(this,
-	 m_xres * 16 / 25, m_yres * 17 / 40,
-	 _("Host to connect:"), Align_Left),
+	title
+		(this,
+		 m_xres / 2, m_yres / 10,
+		 _("Begin Network Game"), UI::Align_HCenter),
+	m_opengames
+		(this,
+		 m_xres * 3 / 50, m_yres * 27 / 100,
+		 _("List of games in your local network:")),
+	m_playername
+		(this,
+		 m_xres * 16 / 25, m_yres * 27 / 100,
+		 _("Your nickname:")),
+	m_hostname
+		(this,
+		 m_xres * 16 / 25, m_yres * 17 / 40,
+		 _("Host to connect:")),
 
 // Buttons
-joingame
-	(this,
-	 m_xres * 16 / 25, m_yres * 5333 / 10000, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 &Fullscreen_Menu_NetSetupLAN::clicked_joingame, *this,
-	 _("Join this game"), std::string(), true, false,
-	 m_fn, m_fs),
-hostgame
-	(this,
-	 m_xres * 16 / 25, m_yres * 6083 / 10000, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 &Fullscreen_Menu_NetSetupLAN::clicked_hostgame, *this,
-	 _("Host a new game"), std::string(), true, false,
-	 m_fn, m_fs),
-back
-	(this,
-	 m_xres * 16 / 25, m_yres * 8333 / 10000, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 &Fullscreen_Menu_NetSetupLAN::end_modal, *this, CANCEL,
-	 _("Back"), std::string(), true, false,
-	 m_fn, m_fs),
-loadlasthost
-	(this,
-	 m_xres * 171 / 200, m_yres * 19 / 40, m_buth, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 g_gr->get_picture(PicMod_UI, "pics/menu_load_game.png"),
-	 &Fullscreen_Menu_NetSetupLAN::clicked_lasthost, *this,
-	 _("Load previous host"), true, false,
-	 m_fn, m_fs),
+	joingame
+		(this,
+		 m_xres * 16 / 25, m_yres * 5333 / 10000, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &Fullscreen_Menu_NetSetupLAN::clicked_joingame, *this,
+		 _("Join this game"), std::string(), true, false,
+		 m_fn, m_fs),
+	hostgame
+		(this,
+		 m_xres * 16 / 25, m_yres * 6083 / 10000, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &Fullscreen_Menu_NetSetupLAN::clicked_hostgame, *this,
+		 _("Host a new game"), std::string(), true, false,
+		 m_fn, m_fs),
+	back
+		(this,
+		 m_xres * 16 / 25, m_yres * 8333 / 10000, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 &Fullscreen_Menu_NetSetupLAN::end_modal, *this, CANCEL,
+		 _("Back"), std::string(), true, false,
+		 m_fn, m_fs),
+	loadlasthost
+		(this,
+		 m_xres * 171 / 200, m_yres * 19 / 40, m_buth, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/menu_load_game.png"),
+		 &Fullscreen_Menu_NetSetupLAN::clicked_lasthost, *this,
+		 _("Load previous host"), true, false,
+		 m_fn, m_fs),
 
 // Edit boxes
-playername
-	(this, m_xres * 16 / 25, m_yres * 3333 / 10000, m_butw,       m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
-hostname
-	(this, m_xres * 16 / 25, m_yres * 19 / 40,  m_xres * 17 / 80, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
+	playername
+		(this, m_xres * 16 / 25, m_yres * 3333 / 10000, m_butw,       m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
+	hostname
+		(this, m_xres * 16 / 25, m_yres * 19 / 40,  m_xres * 17 / 80, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
 
 // List
-opengames
-	(this, m_xres * 3 / 50, m_yres * 3333 / 10000, m_lisw, m_yres * 5433 / 10000)
+	opengames
+		(this,
+		 m_xres * 3 / 50, m_yres * 3333 / 10000, m_lisw, m_yres * 5433 / 10000)
 {
 	Section & s = g_options.pull_section("global"); //  for playername
 

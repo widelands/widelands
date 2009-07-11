@@ -28,10 +28,12 @@
 #include <string>
 #include <cstring>
 
-Richtext_Block::Richtext_Block() {
-	m_image_align = Align_Left;
-	m_text_align = Align_Left;
-}
+namespace UI {
+
+Richtext_Block::Richtext_Block() :
+	m_image_align(Align_Left),
+	m_text_align (Align_Left)
+{}
 
 Richtext_Block::Richtext_Block(const Richtext_Block &src) {
 	m_images.clear();
@@ -74,7 +76,7 @@ Text_Block::Text_Block(const Text_Block &src) {
 void Text_Parser::parse
 	(std::string                 & text,
 	 std::vector<Richtext_Block> & blocks,
-	 Varibale_Callback vcb, void * const vcdata)
+	 Varibale_Callback const vcb, void * const vcdata)
 {
 	bool more_richtext_blocks = true;
 	//First while loop parses all richtext blocks (images)
@@ -105,8 +107,9 @@ void Text_Parser::parse
 			std::vector<std::string> words;
 			std::vector<std::vector<std::string>::size_type> line_breaks;
 
-			more_text_blocks = parse_textblock
-				(unparsed_text, block_format, words, line_breaks, vcb, vcdata);
+			more_text_blocks =
+				parse_textblock
+					(unparsed_text, block_format, words, line_breaks, vcb, vcdata);
 			parse_text_attributes(block_format, &new_block);
 
 			new_block.set_words(words);
@@ -312,4 +315,6 @@ Align Text_Parser::set_align(std::string const & align) {
 		align == "right"  ? Align_Right   :
 		align == "center" ? Align_HCenter :
 		Align_Left;
+}
+
 }

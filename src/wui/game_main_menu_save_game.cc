@@ -60,13 +60,13 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		(this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 	m_name_label
-		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name: "),  Align_CenterLeft),
+		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name: "),  UI::Align_CenterLeft),
 	m_name
-		(this, DESCRIPTION_X, 20, 0, 20, " ",              Align_CenterLeft),
+		(this, DESCRIPTION_X, 20, 0, 20, " ",              UI::Align_CenterLeft),
 	m_gametime_label
-		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time: "), Align_CenterLeft),
+		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time: "), UI::Align_CenterLeft),
 	m_gametime
-		(this, DESCRIPTION_X, 60, 0, 20, " ",              Align_CenterLeft),
+		(this, DESCRIPTION_X, 60, 0, 20, " ",              UI::Align_CenterLeft),
 	m_button_ok
 		(this,
 		 DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,

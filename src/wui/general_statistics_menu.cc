@@ -26,7 +26,6 @@
 #include "interactive_player.h"
 #include "logic/player.h"
 #include "graphic/rendertarget.h"
-#include "rgbcolor.h"
 #include "tribe.h"
 #include "warelist.h"
 

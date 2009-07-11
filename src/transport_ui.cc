@@ -18,7 +18,7 @@
  */
 
 #include "economy/economy.h"
-#include "graphic/graphic.h"
+#include "font_handler.h"
 #include "wui/interactive_gamebase.h"
 #include "item_ware_descr.h"
 #include "logic/player.h"
@@ -99,32 +99,28 @@ private:
 
 		virtual void draw(RenderTarget & dst) {
 			dst.blit(Point(0, 0), descr.icon());
-			g_fh->draw_string
+			UI::g_fh->draw_string
 				(dst,
 				 UI_FONT_NAME, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG, UI_FONT_CLR_BG,
 				 Point(26, 12),
-				 descr.descname(),
-				 Align_CenterLeft,
-				 -1);
+				 descr.descname());
 			Economy::Target_Quantity const & tq =
 				economy().target_quantity(ware_type);
 			char buffer[32];
 			sprintf(buffer, "%u", tq.permanent);
-			g_fh->draw_string
+			UI::g_fh->draw_string
 				(dst,
 				 UI_FONT_NAME, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG, UI_FONT_CLR_BG,
 				 Point(188, 12),
 				 buffer,
-				 Align_CenterRight,
-				 -1);
+				 UI::Align_CenterRight);
 			sprintf(buffer, "%u", tq.temporary);
-			g_fh->draw_string
+			UI::g_fh->draw_string
 				(dst,
 				 UI_FONT_NAME, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG, UI_FONT_CLR_BG,
 				 Point(278, 12),
 				 buffer,
-				 Align_CenterRight,
-				 -1);
+				 UI::Align_CenterRight);
 			UI::Panel::draw(dst);
 		}
 

@@ -62,7 +62,8 @@ m_event   (event)
 	m_buttons[3].trigger = -1;
 
 
-	new UI::Textarea(this, pos.x, pos.y, 50, 20, _("Name:"), Align_CenterLeft);
+	new UI::Textarea
+		(this, pos.x, pos.y, 50, 20, _("Name:"), UI::Align_CenterLeft);
 	m_name =
 		new UI::EditBox
 			(this,
@@ -74,7 +75,7 @@ m_event   (event)
 	new UI::Textarea
 		(this,
 		 get_inner_w() / 2 + spacing, pos.y, 150, 20,
-		 _("Is Modal: "), Align_CenterLeft);
+		 _("Is Modal: "), UI::Align_CenterLeft);
 	pos.x = get_inner_w() - STATEBOX_WIDTH - spacing;
 	m_is_modal = new UI::Checkbox(this, pos);
 	m_is_modal->set_state(m_event.get_is_modal());
@@ -83,7 +84,7 @@ m_event   (event)
 	pos.y += 20 + spacing;
 
 	new UI::Textarea
-		(this, pos.x, pos.y, 50, 20, _("Window Title:"), Align_CenterLeft);
+		(this, pos.x, pos.y, 50, 20, _("Window Title:"), UI::Align_CenterLeft);
 	pos.x += 100;
 	m_window_title =
 		new UI::EditBox
@@ -93,7 +94,8 @@ m_event   (event)
 
 	pos.x  =      spacing;
 	pos.y += 20 + spacing;
-	new UI::Textarea(this, pos.x, pos.y, 50, 20, _("Text:"), Align_CenterLeft);
+	new UI::Textarea
+		(this, pos.x, pos.y, 50, 20, _("Text:"), UI::Align_CenterLeft);
 	pos.y += 20 + spacing;
 	m_text =
 		new UI::Multiline_Editbox
@@ -106,7 +108,7 @@ m_event   (event)
 	new UI::Textarea
 		(this,
 		 pos.x, pos.y, 130, 20,
-		 _("Number of Buttons: "), Align_CenterLeft);
+		 _("Number of Buttons: "), UI::Align_CenterLeft);
 
 	pos.x += 140;
 	new UI::Callback_Button<Event_Message_Box_Option_Menu>
@@ -119,7 +121,9 @@ m_event   (event)
 
 	m_nr_buttons_ta =
 		new UI::Textarea
-			(this, spacing + 160 + spacing, pos.y, 15, 20, "1", Align_CenterLeft);
+			(this,
+			 spacing + 160 + spacing, pos.y, 15, 20,
+			 "1", UI::Align_CenterLeft);
 
 	pos.x += 30 + spacing;
 	new UI::Callback_Button<Event_Message_Box_Option_Menu>
@@ -133,7 +137,7 @@ m_event   (event)
 	pos.x  =      spacing;
 	pos.y += 20 + spacing;
 	new UI::Textarea
-		(this, pos.x, pos.y, 100, 20, _("Button Name: "), Align_CenterLeft);
+		(this, pos.x, pos.y, 100, 20, _("Button Name: "), UI::Align_CenterLeft);
 	pos.x += 110;
 	m_button_name = new UI::EditBox
 		(this, pos.x, pos.y, 100, 20,
@@ -145,16 +149,16 @@ m_event   (event)
 	pos.x = get_inner_w() / 2 + spacing;
 	m_buttons_ls =
 		new UI::Listselect<void *>
-		(this,
-		 pos.x, pos.y, get_inner_w() / 2 - 2 * spacing, 80,
-		 Align_Left);
+			(this, pos.x, pos.y, get_inner_w() / 2 - 2 * spacing, 80);
 	m_buttons_ls->selected.set
 		(this, &Event_Message_Box_Option_Menu::ls_selected);
 
 	pos.x  =      spacing;
 	pos.y += 20 + spacing;
 	new UI::Textarea
-		(this, pos.x, pos.y, 100, 20, _("Select Trigger: "), Align_CenterLeft);
+		(this,
+		 pos.x, pos.y, 100, 20,
+		 _("Select Trigger: "), UI::Align_CenterLeft);
 
 	pos.x += 110;
 	new UI::Callback_Button<Event_Message_Box_Option_Menu>
@@ -175,12 +179,12 @@ m_event   (event)
 	pos.x  =      spacing;
 	pos.y += 20 + spacing;
 	new UI::Textarea
-		(this, pos.x, pos.y, 100, 20, _("Current: "), Align_CenterLeft);
+		(this, pos.x, pos.y, 100, 20, _("Current: "), UI::Align_CenterLeft);
 	m_current_trigger_ta =
 		new UI::Textarea
 			(this,
 			 pos.x + 15, pos.y + 15 + spacing, get_inner_w() / 2, 20,
-			 _("No trigger selected!"), Align_CenterLeft);
+			 _("No trigger selected!"), UI::Align_CenterLeft);
 
 	pos = Point(get_inner_w() / 2 - 60 - spacing, get_inner_h() - 30);
 	new UI::Callback_Button<Event_Message_Box_Option_Menu>

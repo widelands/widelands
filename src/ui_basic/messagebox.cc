@@ -24,7 +24,7 @@
 #include "window.h"
 #include "multilinetextarea.h"
 #include "button.h"
-#include "graphic/graphic.h"
+#include "font_handler.h"
 #include "wlapplication.h"
 
 namespace UI {
@@ -63,10 +63,10 @@ WLMessageBox::WLMessageBox
 	std::string font = d->textarea->get_font_name();
 	int32_t fontsize = d->textarea->get_font_size();
 
-	g_fh->get_size(font, fontsize, text, width, height, maxwidth);
+	UI::g_fh->get_size(font, fontsize, text, width, height, maxwidth);
 	// stupid heuristic to avoid excessively long lines
 	if (height < 2U * fontsize)
-		g_fh->get_size(font, fontsize, text, width, height, maxwidth / 2);
+		UI::g_fh->get_size(font, fontsize, text, width, height, maxwidth / 2);
 
 	width += 10 + 2 * d->textarea->scrollbar_w();
 	if (width < 100)

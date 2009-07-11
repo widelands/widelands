@@ -21,9 +21,7 @@
 
 #include "io/fileread.h"
 #include "font_handler.h"
-#include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "rgbcolor.h"
 #include "wexception.h"
 
 #include <SDL_ttf.h>
@@ -31,6 +29,8 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+
+namespace UI {
 
 Font_Handler * g_fh = 0; // the font handler
 
@@ -115,4 +115,6 @@ void Font_Loader::clear_fonts() {
 
 Font_Loader::~Font_Loader() {
 	clear_fonts();
+}
+
 }

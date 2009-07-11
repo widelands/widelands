@@ -56,6 +56,8 @@ class.
 #include <SDL_types.h>
 #include <sys/types.h>
 
+#include <list>
+
 using Widelands::Building;
 using Widelands::Building_Index;
 using Widelands::ConstructionSite;
@@ -153,7 +155,7 @@ private:
 				 0, 0, 200, 74,
 				 _("Do you really want to destroy this ") + building.descname() +
 				 _("?"),
-				 Align_Center,
+				 UI::Align_Center,
 				 true)
 		{}
 	} m_message;
@@ -1089,7 +1091,22 @@ ProductionSite UI IMPLEMENTATION
  */
 struct ProductionSite_Window_ListWorkerWindow : public UI::Window {
 	ProductionSite_Window_ListWorkerWindow
-		(Interactive_GameBase &, ProductionSite &);
+		(Interactive_GameBase & parent, ProductionSite & ps)
+		:
+		UI::Window              (&parent, 0, 0, 340, 100, _("Worker Listing")),
+		m_ps_location           (ps.get_position()),
+		m_ps                    (ps),
+		m_list                  (*this),
+		m_type_label            (*this),
+		m_type_value_label      (*this),
+		m_experience_label      (*this),
+		m_experience_value_label(*this),
+		m_becomes_label         (*this),
+		m_becomes_value_label   (*this)
+	{
+		center_to_parent();
+		move_to_top();
+	}
 
 	Interactive_GameBase & iaplayer() const {
 		return dynamic_cast<Interactive_GameBase &>(*get_parent());
@@ -1103,56 +1120,59 @@ private:
 
 	Widelands::Coords                     m_ps_location;
 	ProductionSite                      & m_ps;
-	UI::Listselect<Widelands::Worker const *> * m_ls;
-	UI::Textarea * m_type, * m_experience, * m_becomes;
+	struct List : public UI::Listselect<Widelands::Worker const *> {
+		List                  (ProductionSite_Window_ListWorkerWindow & parent) :
+			UI::Listselect<Widelands::Worker const *> (&parent, 5, 5, 155, 90)
+		{}
+	} m_list;
+
+	struct Type_Label             : public UI::Textarea {
+		Type_Label            (ProductionSite_Window_ListWorkerWindow & parent) :
+			UI::Textarea
+				(&parent, 165, 5, 150, 20, _("Type: "), UI::Align_CenterLeft)
+		{}
+	} m_type_label;
+
+	struct Type_Value_Label       : public UI::Textarea {
+		Type_Value_Label      (ProductionSite_Window_ListWorkerWindow & parent) :
+			UI::Textarea
+				(&parent, 245, 5, 200, 20, "---", UI::Align_CenterLeft)
+		{}
+	} m_type_value_label;
+
+	struct Experience_Label       : public UI::Textarea {
+		Experience_Label      (ProductionSite_Window_ListWorkerWindow & parent) :
+			UI::Textarea
+				(&parent,
+				 165, 30, 150, 20,
+				 _("Experience: "), UI::Align_CenterLeft)
+		{}
+	} m_experience_label;
+
+	struct Experience_Value_Label : public UI::Textarea {
+		Experience_Value_Label(ProductionSite_Window_ListWorkerWindow & parent) :
+			UI::Textarea
+				(&parent,
+				 245, 30, 200, 20, "---", UI::Align_CenterLeft)
+		{}
+	} m_experience_value_label;
+
+	struct Becomes_Label          : public UI::Textarea {
+		Becomes_Label         (ProductionSite_Window_ListWorkerWindow & parent) :
+			UI::Textarea
+				(&parent,
+				 165, 55, 70, 20,
+				 _("Trying to become: "), UI::Align_CenterLeft)
+		{}
+	} m_becomes_label;
+
+	struct Becomes_Value_Label    : public UI::Textarea {
+		Becomes_Value_Label   (ProductionSite_Window_ListWorkerWindow & parent) :
+			UI::Textarea
+				(&parent, 180, 70, 200, 20, "---", UI::Align_CenterLeft)
+		{}
+	} m_becomes_value_label;
 };
-
-
-ProductionSite_Window_ListWorkerWindow::ProductionSite_Window_ListWorkerWindow
-	(Interactive_GameBase & parent, ProductionSite & ps)
-	:
-	UI::Window(&parent, 0, 0, 320, 125, _("Worker Listing")),
-	m_ps_location(ps.get_position()),
-	m_ps(ps)
-{
-
-	int32_t const spacing = 5;
-	int32_t       offsx   = spacing;
-	int32_t       offsy   = 30;
-	int32_t       posx    = offsx;
-	int32_t       posy    = offsy;
-
-	// listselect
-	m_ls =
-		new UI::Listselect<Widelands::Worker const *>
-		(this,
-		 posx, posy,
-		 get_inner_w() / 2 - spacing, get_inner_h() - spacing - offsy);
-
-	posx = get_inner_w() / 2 + spacing;
-	new UI::Textarea(this, posx, posy, 150, 20, _("Type: "), Align_CenterLeft);
-	m_type =
-		new UI::Textarea(this, posx + 80, posy, 200, 20, "---", Align_CenterLeft);
-	posy += 20 + spacing;
-
-	//  experience
-	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Experience: "), Align_CenterLeft);
-	m_experience =
-		new UI::Textarea(this, posx + 80, posy, 200, 20, "---", Align_CenterLeft);
-	posy += 20 + spacing;
-
-	// is working to become
-	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Trying to become: "), Align_CenterLeft);
-	posy += 20;
-	m_becomes =
-		new UI::Textarea(this, posx + 25, posy, 200, 20, "---", Align_CenterLeft);
-	posy += 20 + spacing;
-
-	center_to_parent();
-	move_to_top();
-}
 
 
 void ProductionSite_Window_ListWorkerWindow::think() {
@@ -1176,24 +1196,24 @@ void ProductionSite_Window_ListWorkerWindow::think() {
  * fill list()
  */
 void ProductionSite_Window_ListWorkerWindow::fill_list() {
-	const uint32_t m_last_select = m_ls->selection_index();
-	m_ls->clear();
+	uint32_t const m_last_select = m_list.selection_index();
+	m_list.clear();
 
 	uint32_t const nr_working_positions = m_ps.descr().nr_working_positions();
 	for (uint32_t i = 0; i < nr_working_positions; ++i)
 		if
 			(Widelands::Worker const * const worker =
 			 	m_ps.working_positions()[i].worker)
-			m_ls->add(worker->descname().c_str(), worker, worker->icon());
+			m_list.add(worker->descname().c_str(), worker, worker->icon());
 		else
-			m_ls->add
+			m_list.add
 				(m_ps.working_positions()[i].worker_request->is_open() ?
 				 _("(vacant)") : _("(coming)"),
 				 0);
-	if      (m_ls->size() > m_last_select)
-		m_ls->select(m_last_select);
-	else if (m_ls->size())
-		m_ls->select(m_ls->size() - 1);
+	if      (m_last_select < m_list.size())
+		m_list.select(m_last_select);
+	else if (m_list.size())
+		m_list.select(m_list.size() - 1);
 
 	update();
 }
@@ -1203,11 +1223,11 @@ void ProductionSite_Window_ListWorkerWindow::fill_list() {
  */
 void ProductionSite_Window_ListWorkerWindow::update()
 {
-	if (m_ls->has_selection() and m_ls->get_selected()) {
-		Widelands::Worker      const & worker = *m_ls->get_selected();
+	if (m_list.has_selection() and m_list.get_selected()) {
+		Widelands::Worker      const & worker = *m_list.get_selected();
 		Widelands::Tribe_Descr const & tribe  = worker.tribe();
 
-		m_type->set_text(worker.descname());
+		m_type_value_label.set_text(worker.descname());
 
 		if
 			(worker.get_current_experience() != -1
@@ -1222,22 +1242,22 @@ void ProductionSite_Window_ListWorkerWindow::update()
 				(buffer, sizeof(buffer),
 				 "%i/%i",
 				 worker.get_current_experience(), worker.get_needed_experience());
-			m_experience->set_text(buffer);
+			m_experience_value_label.set_text(buffer);
 
 			// Get the descriptive name of the ongoing upgrade
-			m_becomes->set_text
+			m_becomes_value_label.set_text
 				(tribe.get_worker_descr(worker.becomes())->descname());
 
 		} else {
 			// Worker is not upgradeable
-			m_experience->set_text("---");
-			m_becomes->set_text("---");
+			m_experience_value_label.set_text("---");
+			m_becomes_value_label   .set_text("---");
 		}
 	} else {
-		m_type      ->set_text("---");
-		m_becomes   ->set_text("---");
-		m_experience->set_text("---");
-		m_becomes   ->set_text("---");
+		m_type_value_label      .set_text("---");
+		m_becomes_value_label   .set_text("---");
+		m_experience_value_label.set_text("---");
+		m_becomes_value_label   .set_text("---");
 	}
 }
 
@@ -1488,31 +1508,31 @@ MilitarySite_Window::MilitarySite_Window
 	 MilitarySite       & ms,
 	 UI::Window *       & registry)
 	:
-Building_Window(parent, ms, registry),
-m_ms_location  (ms.get_position()),
-m_vbox         (this, 5, 5, UI::Box::Vertical),
-m_table        (&m_vbox, 0, 0, 360, 200),
-m_drop_button
-	(&m_vbox,
-	 0, 0, 360, 32,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, pic_drop_soldier),
-	 &MilitarySite_Window::drop_button_clicked, *this),
-m_bottom_box   (&m_vbox, 0, 0, UI::Box::Horizontal),
-m_capsbuttons  (&m_bottom_box, 0, 34, 34 * 7, 34),
-m_capacity     (&m_bottom_box, 0, 0, _("Capacity"), Align_Right),
-m_capacity_down
-	(&m_bottom_box,
-	 0, 0, 24, 24,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, pic_down_train),
-	 &MilitarySite_Window::soldier_capacity_down, *this),
-m_capacity_up
-	(&m_bottom_box,
-	 0, 0, 24, 24,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, pic_up_train),
-	 &MilitarySite_Window::soldier_capacity_up,   *this)
+	Building_Window(parent, ms, registry),
+	m_ms_location  (ms.get_position()),
+	m_vbox         (this, 5, 5, UI::Box::Vertical),
+	m_table        (&m_vbox, 0, 0, 360, 200),
+	m_drop_button
+		(&m_vbox,
+		 0, 0, 360, 32,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 g_gr->get_picture(PicMod_Game, pic_drop_soldier),
+		 &MilitarySite_Window::drop_button_clicked, *this),
+	m_bottom_box   (&m_vbox, 0, 0, UI::Box::Horizontal),
+	m_capsbuttons  (&m_bottom_box, 0, 34, 34 * 7, 34),
+	m_capacity     (&m_bottom_box, 0, 0, _("Capacity"), UI::Align_Right),
+	m_capacity_down
+		(&m_bottom_box,
+		 0, 0, 24, 24,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 g_gr->get_picture(PicMod_Game, pic_down_train),
+		 &MilitarySite_Window::soldier_capacity_down, *this),
+	m_capacity_up
+		(&m_bottom_box,
+		 0, 0, 24, 24,
+		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 g_gr->get_picture(PicMod_Game, pic_up_train),
+		 &MilitarySite_Window::soldier_capacity_up,   *this)
 {
 	//  soldiers view
 	m_table.add_column(100, _("Name"));
@@ -1709,7 +1729,7 @@ private:
 					add_column (40, _("DE"));
 					add_column (40, _("EV"));
 					add_column(100, _("Level")); //  enough space for scrollbar
-					parent.add (this, Align_Left);
+					parent.add (this, UI::Align_Left);
 				}
 			}                      m_table;
 
@@ -1721,7 +1741,7 @@ private:
 						 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 						 g_gr->get_picture(PicMod_Game, pic_drop_soldier))
 				{
-					sold_box.add(this, Align_Left);
+					sold_box.add(this, UI::Align_Left);
 				}
 				void clicked() const;
 			} m_drop_selected_soldier;
@@ -1734,14 +1754,14 @@ private:
 					m_capacity_value_label(*this),
 					m_capacity_increment  (*this)
 				{
-					parent.add(this, Align_Left);
+					parent.add(this, UI::Align_Left);
 				}
 
 				struct Capacity_Label : public UI::Textarea {
 					Capacity_Label(Capacity_Box & parent) :
-						UI::Textarea(&parent, 0, 11, _("Capacity"), Align_Left)
+						UI::Textarea(&parent, 0, 11, _("Capacity"), UI::Align_Left)
 					{
-						parent.add(this, Align_Left);
+						parent.add(this, UI::Align_Left);
 					}
 				} m_capacity_label;
 
@@ -1754,7 +1774,7 @@ private:
 							 g_gr->get_picture(PicMod_Game, pic_down_train))
 					{
 						set_repeating(true);
-						parent.add(this, Align_Top);
+						parent.add(this, UI::Align_Top);
 					}
 					void clicked() const {
 						dynamic_cast<TrainingSite_Window &>
@@ -1765,9 +1785,9 @@ private:
 
 				struct Capacity_Value_Label : public UI::Textarea {
 					Capacity_Value_Label(Capacity_Box & parent) :
-						UI::Textarea(&parent, 0, 11, _("xx"), Align_Center)
+						UI::Textarea(&parent, 0, 11, _("xx"), UI::Align_Center)
 					{
-						parent.add(this, Align_Top);
+						parent.add(this, UI::Align_Top);
 					}
 				} m_capacity_value_label;
 
@@ -1780,7 +1800,7 @@ private:
 							 g_gr->get_picture(PicMod_Game, pic_up_train))
 					{
 						set_repeating(true);
-						parent.add(this, Align_Top);
+						parent.add(this, UI::Align_Top);
 					}
 					void clicked() const {
 						dynamic_cast<TrainingSite_Window &>

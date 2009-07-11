@@ -51,8 +51,7 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 	int32_t       posy    = offsy;
 
 	//  trigger List
-	new UI::Textarea
-		(this, spacing, offsy, _("Available Trigger types: "), Align_Left);
+	new UI::Textarea(this, spacing, offsy, _("Available Trigger types: "));
 	m_trigger_type_list =
 		new UI::BaseListselect
 			(this,
@@ -68,27 +67,25 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 
 	//  descr List
 	new UI::Textarea
-		(this,
-		 get_inner_w() / 2 + spacing, offsy,
-		 _("Description: "), Align_Left);
+		(this, get_inner_w() / 2 + spacing, offsy, _("Description: "));
 	m_description =
 		new UI::Multiline_Textarea
 			(this,
 			 get_inner_w() / 2 + spacing, offsy + 20,
-			 get_inner_w() / 2 - 2 * spacing, get_inner_h() - offsy - 55,
-			 "", Align_Left);
+			 get_inner_w() / 2 - 2 * spacing, get_inner_h() - offsy - 55);
 
 	posy = get_inner_h() - 30;
 	posx = get_inner_w() / 2 - 80 - spacing;
 
-	m_ok_button = new UI::Callback_Button<Editor_Event_Menu_New_Trigger>
-		(this,
-		 posx, posy, 80, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Editor_Event_Menu_New_Trigger::clicked_ok, *this,
-		 _("Ok"),
-		 std::string(),
-		 false);
+	m_ok_button =
+		new UI::Callback_Button<Editor_Event_Menu_New_Trigger>
+			(this,
+			 posx, posy, 80, 20,
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 &Editor_Event_Menu_New_Trigger::clicked_ok, *this,
+			 _("Ok"),
+			 std::string(),
+			 false);
 
 	posx = get_inner_w() / 2 + spacing;
 

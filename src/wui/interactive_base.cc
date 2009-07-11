@@ -27,7 +27,6 @@
 #include "font_handler.h"
 #include "logic/game.h"
 #include "gamecontroller.h"
-#include "graphic/graphic.h"
 #include "immovable.h"
 #include "interactive_player.h"
 #include "maptriangleregion.h"
@@ -61,22 +60,23 @@ Interactive_Base::Interactive_Base
 	:
 	Map_View(0, 0, 0, get_xres(), get_yres(), *this),
 	m_show_workarea_preview(global_s.get_bool("workareapreview", false)),
-m(new InteractiveBaseInternals),
-m_egbase                      (the_egbase),
+	m(new InteractiveBaseInternals),
+	m_egbase                      (the_egbase),
 #ifdef DEBUG //  not in releases
-m_display_flags               (dfDebug),
+	m_display_flags               (dfDebug),
 #else
-m_display_flags               (0),
+	m_display_flags               (0),
 #endif
-m_lastframe                   (WLApplication::get()->get_time()),
-m_frametime                   (0),
-m_avg_usframetime             (0),
-m_jobid                       (Overlay_Manager::Job_Id::Null()),
-m_road_buildhelp_overlay_jobid(Overlay_Manager::Job_Id::Null()),
-m_buildroad                   (false),
-m_road_build_player           (0),
-m_toolbar                     (this, 0, 0, UI::Box::Horizontal),
-m_label_speed                 (this, get_w(), 0, std::string(), Align_TopRight)
+	m_lastframe                   (WLApplication::get()->get_time()),
+	m_frametime                   (0),
+	m_avg_usframetime             (0),
+	m_jobid                       (Overlay_Manager::Job_Id::Null()),
+	m_road_buildhelp_overlay_jobid(Overlay_Manager::Job_Id::Null()),
+	m_buildroad                   (false),
+	m_road_build_player           (0),
+	m_toolbar                     (this, 0, 0, UI::Box::Horizontal),
+	m_label_speed
+		(this, get_w(), 0, std::string(), UI::Align_TopRight)
 {
 	warpview.set(this, &Interactive_Player::mainview_move);
 
@@ -301,8 +301,8 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
 		char buf[100];
 
 		snprintf(buf, sizeof(buf), "%3i %3i", m_sel.pos.node.x, m_sel.pos.node.y);
-		g_fh->draw_string
-			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(5, 5), buf, Align_Left);
+		UI::g_fh->draw_string
+			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(5, 5), buf, UI::Align_Left);
 		assert(m_sel.pos.triangle.t < 2);
 		const char * const triangle_string[] = {"down", "right"};
 		snprintf
@@ -310,8 +310,11 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
 			 "%3i %3i %s",
 			 m_sel.pos.triangle.x, m_sel.pos.triangle.y,
 			 triangle_string[m_sel.pos.triangle.t]);
-		g_fh->draw_string
-			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(5, 25), buf, Align_Left);
+		UI::g_fh->draw_string
+			(dst,
+			 UI_FONT_BIG, UI_FONT_BIG_CLR,
+			 Point(5, 25),
+			 buf, UI::Align_Left);
 	}
 
 	if (get_display_flag(dfDebug)) {
@@ -321,8 +324,11 @@ void Interactive_Base::draw_overlay(RenderTarget & dst) {
 			(buffer, sizeof(buffer),
 			 "%5.1f fps (avg: %5.1f fps)",
 			 1000.0 / m_frametime, 1000.0 / (m_avg_usframetime / 1000));
-		g_fh->draw_string
-			(dst, UI_FONT_BIG, UI_FONT_BIG_CLR, Point(85, 5), buffer, Align_Left);
+		UI::g_fh->draw_string
+			(dst,
+			 UI_FONT_BIG, UI_FONT_BIG_CLR,
+			 Point(85, 5),
+			 buffer, UI::Align_Left);
 	}
 }
 

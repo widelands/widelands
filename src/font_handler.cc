@@ -23,7 +23,6 @@
 
 #include "io/filesystem/filesystem.h"
 #include "font_loader.h"
-#include "graphic/graphic.h"
 #include "helper.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
@@ -35,6 +34,8 @@
 
 #include <algorithm>
 #include <iostream>
+
+namespace UI {
 
 #define LINE_MARGIN 1
 
@@ -88,10 +89,10 @@ void Font_Handler::draw_string
 	 Point                     dstpoint,
 	 std::string const &       text,
 	 Align               const align,
-	 int32_t             const wrap,
+	 uint32_t            const wrap,
 	 Widget_Cache        const widget_cache,
 	 PictureID         &       widget_cache_id,
-	 int32_t             const caret,
+	 uint32_t            const caret,
 	 bool                const transparent)
 {
 	TTF_Font & font = *m_font_loader->get_font(fontname, fontsize);
@@ -162,14 +163,16 @@ void Font_Handler::draw_string
 */
 PictureID Font_Handler::create_text_surface
 	(TTF_Font & font, RGBColor const fg, RGBColor const bg,
-	 std::string const & text, Align const align, int32_t const wrap,
-	 int32_t             const line_spacing,
-	 int32_t const caret, bool const transparent)
+	 std::string const & text, Align const align,
+	 uint32_t            const wrap,
+	 uint32_t            const linespacing,
+	 uint32_t            const caret,
+	 bool                const transparent)
 {
 	return
 		convert_sdl_surface
 			(*create_sdl_text_surface
-			 	(font, fg, bg, text, align, wrap, line_spacing, caret),
+			 	(font, fg, bg, text, align, wrap, linespacing, caret),
 			 bg, transparent);
 }
 
@@ -181,7 +184,7 @@ SDL_Surface * Font_Handler::create_single_line_text_surface
 	 RGBColor const fg, RGBColor const bg,
 	 std::string       text,
 	 Align,
-	 int32_t     const caret)
+	 uint32_t    const caret)
 {
 	// render this block in a SDL Surface
 	SDL_Color sdl_fg = {fg.r(), fg.g(), fg.b(), 0};
@@ -211,7 +214,7 @@ SDL_Surface * Font_Handler::create_single_line_text_surface
 		SDL_Rect r; r.x = LINE_MARGIN, r.y = 0;
 		SDL_BlitSurface(text_surface, 0, surface, &r);
 		SDL_FreeSurface(text_surface);
-		if (caret != -1) {
+		if (caret != std::numeric_limits<uint32_t>::max()) {
 			std::string const text_caret_pos = text.substr(0, caret);
 			render_caret(font, *surface, text_caret_pos);
 		}
@@ -237,15 +240,16 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 	 RGBColor const fg, RGBColor const bg,
 	 std::string const & text,
 	 Align       const align,
-	 int32_t     const wrap,
-	 int32_t     const line_spacing,
-	 int32_t           caret)
+	 uint32_t            const wrap,
+	 uint32_t            const linespacing,
+	 uint32_t                  caret)
 {
+	assert(wrap != std::numeric_limits<uint32_t>::max());
 	assert(2 * LINE_MARGIN < wrap);
 	assert(text.size() > 0);
 
-	int32_t global_surface_width  = wrap;
-	int32_t global_surface_height = 0;
+	uint32_t global_surface_width  = wrap;
+	uint32_t global_surface_height = 0;
 	std::vector<SDL_Surface *> m_rendered_lines;
 
 	SDL_Color sdl_fg = {fg.r(), fg.g(), fg.b(), 0};
@@ -256,13 +260,14 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 
 	std::string const lines =
 		word_wrap_text(font, text, wrap - 2 * LINE_MARGIN);
+	std::string::size_type const lines_size = lines.size();
 	for
 		(struct {std::string::size_type pos; bool done;} j = {0, false};
 		 not j.done;)
 	{
 		std::string::size_type line_end = lines.find_first_of('\n', j.pos);
 		if (line_end == std::string::npos) {
-			line_end = lines.size();
+			line_end = lines_size;
 			j.done = true;
 		}
 		std::string::size_type line_size = line_end - j.pos;
@@ -294,20 +299,20 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 			SDL_Rect r; r.x = LINE_MARGIN, r.y = 0;
 			SDL_BlitSurface(text_surface, 0, surface, &r);
 			SDL_FreeSurface(text_surface);
-			if (caret != -1) {
+			if (caret != std::numeric_limits<uint32_t>::max()) {
 				uint32_t const new_text_pos = cur_text_pos + line_size;
 				if (new_text_pos >= caret - i) {
 					int32_t const caret_line_pos = caret - cur_text_pos - i;
 					line.resize(caret_line_pos);
 					render_caret(font, *surface, line);
-					caret = -1;
+					caret = std::numeric_limits<uint32_t>::max();
 				} else
 					cur_text_pos = new_text_pos;
 				++i;
 			}
 
 			m_rendered_lines.push_back(surface);
-			global_surface_height += surface->h + line_spacing;
+			global_surface_height += surface->h + linespacing;
 			if (global_surface_width < surface->w)
 				global_surface_width = surface->w;
 		} else {
@@ -322,8 +327,8 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 	// blit all this together in one Surface
 	return
 		join_sdl_surfaces
-		(global_surface_width, global_surface_height,
-		 m_rendered_lines, bg, align, line_spacing);
+			(global_surface_width, global_surface_height,
+			 m_rendered_lines, bg, align, linespacing);
 
 }
 
@@ -359,14 +364,14 @@ SDL_Surface * Font_Handler::draw_string_sdl_surface
 	 RGBColor const fg, RGBColor const bg,
 	 std::string const &       text,
 	 Align               const align,
-	 int32_t             const wrap,
+	 uint32_t            const wrap,
 	 int32_t             const style,
-	 int32_t             const line_spacing)
+	 uint32_t            const linespacing)
 {
 	TTF_Font & font = *m_font_loader->get_font(fontname, fontsize);
 	TTF_SetFontStyle(&font, style);
 	return
-		create_sdl_text_surface(font, fg, bg, text, align, wrap, line_spacing);
+		create_sdl_text_surface(font, fg, bg, text, align, wrap, linespacing);
 }
 
 /*
@@ -376,14 +381,14 @@ SDL_Surface * Font_Handler::create_sdl_text_surface
 	(TTF_Font & font, RGBColor const fg, RGBColor const bg,
 	 std::string const & text,
 	 Align               const align,
-	 int32_t             const wrap,
-	 int32_t             const line_spacing,
-	 int32_t             const caret)
+	 uint32_t            const wrap,
+	 uint32_t            const linespacing,
+	 uint32_t            const caret)
 {
 	return
-		wrap > 0  ?
+		wrap != std::numeric_limits<uint32_t>::max()  ?
 		create_static_long_text_surface
-			(font, fg, bg, text, align, wrap, line_spacing, caret)
+			(font, fg, bg, text, align, wrap, linespacing, caret)
 		:
 		create_single_line_text_surface(font, fg, bg, text, align, caret);
 }
@@ -405,10 +410,8 @@ void Font_Handler::draw_richtext
 	 bool           const transparent)
 {
 	PictureID picid;
-	if (widget_cache == Widget_Cache_Use) {
-		//g_gr->get_picture_size(*widget_cache_id, &w, &h);
+	if (widget_cache == Widget_Cache_Use)
 		picid = widget_cache_id;
-	}
 	else {
 		if (widget_cache == Widget_Cache_Update) {
 			g_gr->free_surface(widget_cache_id);
@@ -519,7 +522,7 @@ void Font_Handler::draw_richtext
 							 bg,
 							 str_word,
 							 Align_Left,
-							 -1,
+							 std::numeric_limits<uint32_t>::max(),
 							 font_style,
 							 text_it->get_line_spacing());
 
@@ -691,7 +694,7 @@ SDL_Surface * Font_Handler::render_space
 			 bg,
 			 " ",
 			 Align_Left,
-			 -1,
+			 std::numeric_limits<uint32_t>::max(),
 			 style,
 			 block.get_line_spacing());
 	return rend_space;
@@ -705,11 +708,13 @@ void Font_Handler::get_size_from_cache
 }
 
 //creates an empty sdl surface of given size
-SDL_Surface * Font_Handler::create_empty_sdl_surface(uint32_t w, uint32_t h) {
+SDL_Surface * Font_Handler::create_empty_sdl_surface
+	(uint32_t const w, uint32_t const h)
+{
 	SDL_Surface * const mask_surf =
 		draw_string_sdl_surface
 			("FreeSans.ttf", 10, RGBColor(0, 0, 0), RGBColor(0, 0, 0),
-			 " ", Align_Left, -1);
+			 " ", Align_Left);
 	SDL_Surface * const surface =
 		SDL_CreateRGBSurface
 			(SDL_SWSURFACE, w, h, 16,
@@ -798,7 +803,7 @@ void Font_Handler::do_align
 	 int32_t const w, int32_t const h)
 {
 	//Vertical Align
-	if (align & (Align_VCenter|Align_Bottom)) {
+	if (align & (Align_VCenter | Align_Bottom)) {
 		if (align & Align_VCenter)
 			dsty -= (h + 1) / 2; //  +1 for slight bias to top
 		else
@@ -937,17 +942,29 @@ void Font_Handler::get_size
 
 	w = 0;
 	h = 0;
-	const std::vector<std::string> lines(split_string(text, "\n"));
-	container_iterate_const(std::vector<std::string>, lines, i) {
-		std::string const line(i.current->empty() ? " " : *i.current);
+	std::string::size_type const text_size = text.size();
+	for
+		(struct {std::string::size_type pos; bool done;} j = {0, false};
+		 not j.done;)
+	{
+		std::string::size_type line_end = text.find_first_of('\n', j.pos);
+		if (line_end == std::string::npos) {
+			line_end = text_size;
+			j.done = true;
+		}
+		std::string::size_type line_size = line_end - j.pos;
+		std::string line = text.substr(j.pos, line_size);
 
 		int32_t line_w, line_h;
-		TTF_SizeUTF8(&font, line.c_str(), &line_w, &line_h);
+		TTF_SizeUTF8(&font, line.empty() ? " " : line.c_str(), &line_w, &line_h);
 
 		if (static_cast<int32_t>(w) < line_w)
 			w = line_w;
 		h += line_h;
+
+		j.pos = line_end + 1;
 	}
+	w += 2 * LINE_MARGIN;
 }
 
 //calcultes linewidth of a given text
@@ -971,4 +988,6 @@ void Font_Handler::register_variable_callback
 void Font_Handler::unregister_variable_callback() {
 	m_varcallback = 0;
 	m_cbdata = 0;
+}
+
 }

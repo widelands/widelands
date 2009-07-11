@@ -23,8 +23,8 @@
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "editor_game_base.h"
+#include "font_handler.h"
 #include "game.h"
-#include "graphic/graphic.h"
 #include "wui/interactive_gamebase.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -706,27 +706,25 @@ void Building::draw_help
 		dynamic_cast<Interactive_GameBase const &>(*game.get_ibase());
 	uint32_t const dpyflags = igbase.get_display_flags();
 
-	if (dpyflags & Interactive_Base::dfShowCensus)
-	{
+	if (dpyflags & Interactive_Base::dfShowCensus) {
 		//  TODO make more here
-		g_fh->draw_string
+		UI::g_fh->draw_string
 			(dst,
 			 UI_FONT_SMALL,
 			 UI_FONT_SMALL_CLR,
 			 pos - Point(0, 45),
 			 info_string(igbase.building_census_format()),
-			 Align_Center);
+			 UI::Align_Center);
 	}
 
-	if (dpyflags & Interactive_Base::dfShowStatistics)
-	{
-		g_fh->draw_string
+	if (dpyflags & Interactive_Base::dfShowStatistics) {
+		UI::g_fh->draw_string
 			(dst,
 			 UI_FONT_SMALL,
 			 UI_FONT_SMALL_CLR,
 			 pos - Point(0, 35),
 			 info_string(igbase.building_statistics_format()),
-			 Align_Center);
+			 UI::Align_Center);
 	}
 }
 

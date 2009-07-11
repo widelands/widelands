@@ -147,7 +147,7 @@ void ProgressWindow::step(const std::string & description) {
 		draw_background(rt, xres, yres);
 
 	rt.fill_rect(m_label_rectangle, PROGRESS_FONT_COLOR_BG);
-	g_fh->draw_string
+	UI::g_fh->draw_string
 		(rt, UI_FONT_SMALL, PROGRESS_FONT_COLOR,
 		 m_label_center, description, Align_Center);
 	g_gr->update_rectangle(m_label_rectangle);

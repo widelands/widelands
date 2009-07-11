@@ -20,7 +20,7 @@
 #include "listselect.h"
 
 #include "constants.h"
-#include "graphic/graphic.h"
+#include "font_handler.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 
@@ -41,17 +41,17 @@ BaseListselect::BaseListselect
 	(Panel * const parent,
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 	 Align const align, bool const show_check)
-:
-Panel(parent, x, y, w, h),
-m_lineheight(g_fh->get_fontheight(UI_FONT_SMALL)),
-m_scrollbar      (this, get_w() - 24, 0, 24, h, false),
-m_scrollpos     (0),
-m_selection     (no_selection_index()),
-m_last_click_time(-10000),
-m_last_selection(no_selection_index()),
-m_show_check(show_check),
-m_fontname(UI_FONT_NAME),
-m_fontsize(UI_FONT_SIZE_SMALL)
+	:
+	Panel(parent, x, y, w, h),
+	m_lineheight(g_fh->get_fontheight(UI_FONT_SMALL)),
+	m_scrollbar      (this, get_w() - 24, 0, 24, h, false),
+	m_scrollpos     (0),
+	m_selection     (no_selection_index()),
+	m_last_click_time(-10000),
+	m_last_selection(no_selection_index()),
+	m_show_check(show_check),
+	m_fontname(UI_FONT_NAME),
+	m_fontsize(UI_FONT_SIZE_SMALL)
 {
 	set_think(false);
 
@@ -374,7 +374,7 @@ void BaseListselect::draw(RenderTarget & dst)
 		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
 
 		// Horizontal center the string
-		g_fh->draw_string
+		UI::g_fh->draw_string
 			(dst,
 			 m_fontname, m_fontsize,
 			 col,
@@ -385,8 +385,8 @@ void BaseListselect::draw(RenderTarget & dst)
 			 	 (get_lineheight() - g_fh->get_fontheight(m_fontname, m_fontsize))
 			 	 /
 			 	 2),
-			 er.name, m_align,
-			 -1);
+			 er.name,
+			 m_align);
 
 		// Now draw pictures
 		if (er.picid != g_gr->get_no_picture()) {

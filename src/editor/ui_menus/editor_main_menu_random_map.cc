@@ -64,7 +64,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	// ---------- Random map number edit ----------
 
-	new UI::Textarea(this, posx, posy, _("Random Number:"), Align_Left);
+	new UI::Textarea(this, posx, posy, _("Random Number:"));
 	posy += height + spacing;
 
 	m_nrEditbox =
@@ -114,7 +114,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	snprintf
 		(buffer, sizeof(buffer), _("Width: %u"), Widelands::MAP_DIMENSIONS[m_w]);
 	m_width =
-		new UI::Textarea(this, posx + spacing + 20, posy, buffer, Align_Left);
+		new UI::Textarea(this, posx + spacing + 20, posy, buffer);
 
 	posy += 20 + spacing + spacing;
 
@@ -123,8 +123,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	snprintf
 		(buffer, sizeof(buffer),
 		 _("Height: %u"), Widelands::MAP_DIMENSIONS[m_h]);
-	m_height =
-		new UI::Textarea(this, posx + spacing + 20, posy, buffer, Align_Left);
+	m_height = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
 		(this,
@@ -159,10 +158,8 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
 		 &Main_Menu_New_Random_Map::button_clicked, *this, 5);
 
-	snprintf
-		(buffer, sizeof(buffer), _("Water: %u %%"), m_waterval);
-	m_water =
-		new UI::Textarea(this, posx + spacing + 20, posy, buffer, Align_Left);
+	snprintf(buffer, sizeof(buffer), _("Water: %u %%"), m_waterval);
+	m_water = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
 
 	posy += 20 + spacing + spacing;
 
@@ -186,8 +183,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	snprintf
 		(buffer, sizeof(buffer), _("Land: %u %%"), m_landval);
-	m_land =
-		new UI::Textarea(this, posx + spacing + 20, posy, buffer, Align_Left);
+	m_land = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
 
 	posy += 20 + spacing + spacing;
 
@@ -211,8 +207,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	snprintf
 		(buffer, sizeof(buffer), _("Wasteland: %u %%"), m_wastelandval);
-	m_wasteland =
-		new UI::Textarea(this, posx + spacing + 20, posy, buffer, Align_Left);
+	m_wasteland = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
 
 	posy += 20 + spacing + spacing;
 
@@ -223,8 +218,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	snprintf
 		(buffer, sizeof(buffer), _("Mountains: %u %%"),
 		 100 - m_waterval - m_landval);
-	m_mountains =
-		new UI::Textarea(this, posx + spacing + 20, posy, buffer, Align_Left);
+	m_mountains = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
 
 	posy += 20 + spacing + spacing;
 
@@ -239,8 +233,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	m_island_mode->changed.set
 		(this, & Main_Menu_New_Random_Map::nr_edit_box_changed);
 
-	new UI::Textarea
-		(this, posx + spacing + 20, posy, _("Island mode:"), Align_Left);
+	new UI::Textarea(this, posx + spacing + 20, posy, _("Island mode:"));
 	posy += height + spacing;
 
 
@@ -264,8 +257,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	// ---------- Map ID String edit ----------
 
-	new UI::Textarea
-		(this, posx + spacing + 20, posy, _("Map ID:"), Align_Left);
+	new UI::Textarea(this, posx + spacing + 20, posy, _("Map ID:"));
 	posy += height + spacing;
 
 	m_idEditbox =

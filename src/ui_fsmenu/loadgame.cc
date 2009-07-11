@@ -28,55 +28,54 @@
 
 #include <cstdio>
 
-
 Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Widelands::Game & g) :
-Fullscreen_Menu_Base("choosemapmenu.jpg"),
+	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
-m_butw
-	(m_xres / 4),
-m_buth
-	(m_yres * 9 / 200),
-m_fs
-	(fs_small()),
-m_fn
-	(ui_fn()),
+	m_butw (m_xres / 4),
+	m_buth (m_yres * 9 / 200),
+	m_fs   (fs_small()),
+	m_fn   (ui_fn()),
 
 // "Data holder" for the savegame information
-m_game(g),
+	m_game(g),
 
 // Buttons
-m_back
-	(this,
-	 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 &Fullscreen_Menu_LoadGame::end_modal, *this, 0,
-	 _("Back"), std::string(), true, false,
-	 m_fn, m_fs),
-m_ok
-	(this,
-	 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-	 &Fullscreen_Menu_LoadGame::clicked_ok, *this,
-	 _("OK"), std::string(), false, false,
-	 m_fn, m_fs),
+	m_back
+		(this,
+		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 &Fullscreen_Menu_LoadGame::end_modal, *this, 0,
+		 _("Back"), std::string(), true, false,
+		 m_fn, m_fs),
+	m_ok
+		(this,
+		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 &Fullscreen_Menu_LoadGame::clicked_ok, *this,
+		 _("OK"), std::string(), false, false,
+		 m_fn, m_fs),
 
 // Replay list
-m_list
-	(this, m_xres * 47 / 2500, m_yres * 3417 / 10000,
-	 m_xres * 711 / 1250, m_yres * 6083 / 10000),
+	m_list
+		(this, m_xres * 47 / 2500, m_yres * 3417 / 10000,
+		 m_xres * 711 / 1250, m_yres * 6083 / 10000),
 
 // Text areas
-m_title
-	(this, m_xres / 2, m_yres * 3 / 20, _("Choose saved game!"), Align_HCenter),
-m_label_mapname
-	(this, m_xres * 7 / 10,  m_yres * 17 / 50, _("Map Name:"), Align_Right),
-m_tamapname
-	(this, m_xres * 71 / 100, m_yres * 17 / 50, std::string()),
-m_label_gametime
-	(this, m_xres * 7 / 10,  m_yres * 3 / 8, _("Gametime:"), Align_Right),
-m_tagametime    (this, m_xres * 71 / 100, m_yres * 3 / 8, std::string())
-
+	m_title
+		(this,
+		 m_xres / 2, m_yres * 3 / 20,
+		 _("Choose saved game!"), UI::Align_HCenter),
+	m_label_mapname
+		(this,
+		 m_xres * 7 / 10,  m_yres * 17 / 50,
+		 _("Map Name:"), UI::Align_Right),
+	m_tamapname(this, m_xres * 71 / 100, m_yres * 17 / 50),
+	m_label_gametime
+		(this,
+		 m_xres * 7 / 10,  m_yres * 3 / 8,
+		 _("Gametime:"), UI::Align_Right),
+	m_tagametime(this, m_xres * 71 / 100, m_yres * 3 / 8)
 {
 	m_title         .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_label_mapname .set_font(m_fn, m_fs, UI_FONT_CLR_FG);

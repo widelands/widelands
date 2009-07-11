@@ -353,7 +353,7 @@ void Graphic::flush(PicMod const module) {
 	}
 
 	if (not module or module & PicMod_UI) // Flush the cached Fontdatas
-		g_fh->flush_cache();
+		UI::g_fh->flush_cache();
 }
 
 

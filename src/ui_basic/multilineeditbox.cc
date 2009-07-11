@@ -57,7 +57,8 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 
 	if (down) {
 		std::string txt =
-			g_fh->word_wrap_text(m_fontname, m_fontsize, get_text(), get_eff_w());
+			UI::g_fh->word_wrap_text
+				(m_fontname, m_fontsize, get_text(), get_eff_w());
 		switch (code.sym) {
 
 		case SDLK_DELETE:
@@ -251,7 +252,7 @@ void Multiline_Editbox::draw(RenderTarget & dst)
 	//  make the whole area a bit darker
 	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 	if (get_text().size()) {
-		g_fh->draw_string
+		UI::g_fh->draw_string
 			(dst,
 			 m_fontname,
 			 m_fontsize,
@@ -264,11 +265,12 @@ void Multiline_Editbox::draw(RenderTarget & dst)
 			 m_cache_mode,
 			 m_cache_id,
 			 //  explicit cast is necessary to avoid a compiler warning
-			 (has_focus() ? static_cast<int32_t>(m_cur_pos) : -1));
+			 has_focus() ? static_cast<int32_t>(m_cur_pos) :
+			 std::numeric_limits<uint32_t>::max());
 		draw_scrollbar();
 
 		uint32_t w; // just to run g_fh->get_size_from_cache
-		g_fh->get_size_from_cache(m_cache_id, w, m_textheight);
+		UI::g_fh->get_size_from_cache(m_cache_id, w, m_textheight);
 
 		m_cache_mode = Widget_Cache_Use;
 	}

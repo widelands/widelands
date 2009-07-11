@@ -21,10 +21,6 @@
 
 #include "panel.h"
 #include "m_signal.h"
-#include "graphic/rendertarget.h"
-#include "graphic/graphic.h"
-
-#include "rgbcolor.h"
 
 namespace UI {
 

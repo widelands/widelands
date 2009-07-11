@@ -54,7 +54,8 @@ m_location(event.location())
 	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
 
-	new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
+	new UI::Textarea
+		(this, spacing, posy, 50, 20, _("Name:"), UI::Align_CenterLeft);
 	m_name =
 		new UI::EditBox
 			(this,
@@ -66,7 +67,7 @@ m_location(event.location())
 	new UI::Textarea
 		(this,
 		 spacing, posy, get_inner_w(), 15,
-		 _("Current position: "), Align_CenterLeft);
+		 _("Current position: "), UI::Align_CenterLeft);
 	posy += 20 + spacing;
 	//  X
 
@@ -113,10 +114,10 @@ m_location(event.location())
 		 &Event_Move_View_Option_Menu::clicked, *this, 8);
 
 	new UI::Textarea
-		(this, spacing + 20, posy + 20, 20, 20, "X: ", Align_CenterLeft);
+		(this, spacing + 20, posy + 20, 20, 20, "X: ", UI::Align_CenterLeft);
 	m_x_ta =
 		new UI::Textarea
-			(this, spacing + 40, posy + 20, 20, 20, "X: ", Align_CenterLeft);
+			(this, spacing + 40, posy + 20, 20, 20, "X: ", UI::Align_CenterLeft);
 
 	//  Y
 	int32_t const oldspacing = spacing;
@@ -165,10 +166,10 @@ m_location(event.location())
 		 &Event_Move_View_Option_Menu::clicked, *this, 14);
 
 	new UI::Textarea
-		(this, spacing,      posy + 20, 20, 20, "Y: ", Align_CenterLeft);
+		(this, spacing,      posy + 20, 20, 20, "Y: ", UI::Align_CenterLeft);
 	m_y_ta =
 		new UI::Textarea
-			(this, spacing + 20, posy + 20, 20, 20, "Y: ", Align_CenterLeft);
+			(this, spacing + 20, posy + 20, 20, 20, "Y: ", UI::Align_CenterLeft);
 	spacing = oldspacing;
 
 	posx = get_inner_w() / 2 - 60 - spacing;

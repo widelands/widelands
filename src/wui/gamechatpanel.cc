@@ -25,18 +25,18 @@
  */
 GameChatPanel::GameChatPanel
 	(UI::Panel * parent,
-	 int32_t x, int32_t y, uint32_t w, uint32_t h,
+	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 	 ChatProvider & chat)
-:
-UI::Panel(parent, x, y, w, h),
-m_chat(chat),
-chatbox(this, 0, 0, w, h - 25, "", Align_Left, 1),
-editbox(this, 0, h - 20, w,  20)
+	:
+	UI::Panel(parent, x, y, w, h),
+	m_chat   (chat),
+	chatbox  (this, 0, 0, w, h - 25, "", UI::Align_Left, 1),
+	editbox  (this, 0, h - 20, w,  20)
 {
 	chatbox.set_scrollmode(UI::Multiline_Textarea::ScrollLog);
 	editbox.ok.set(this, &GameChatPanel::keyEnter);
 	editbox.cancel.set(this, &GameChatPanel::keyEscape);
-	editbox.setAlign(Align_Left);
+	editbox.setAlign(UI::Align_Left);
 
 	connect(m_chat);
 	recalculate();

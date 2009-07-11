@@ -48,14 +48,14 @@ GameObjectivesMenu::GameObjectivesMenu
 		(this,
 		 5, 5,
 		 get_inner_w() - 10, OBJECTIVE_LIST,
-		 Align_Left,
+		 UI::Align_Left,
 		 false),
 	objectivetext
 		(this,
 		 5, 130,
 		 get_inner_w() - 10, FULL_OBJECTIVE_TEXT,
 		 "",
-		 Align_Left,
+		 UI::Align_Left,
 		 1),
 	m_claim_victory
 		(this,

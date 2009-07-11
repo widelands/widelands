@@ -20,10 +20,10 @@
 #ifndef UI_MULTILINE_TEXTAREA_H
 #define UI_MULTILINE_TEXTAREA_H
 
+#include "align.h"
 #include "panel.h"
 #include "scrollbar.h"
-
-#include "font_handler.h"
+#include "widget_cache.h"
 
 namespace UI {
 struct Scrollbar;

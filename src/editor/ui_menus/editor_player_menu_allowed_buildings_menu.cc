@@ -58,13 +58,13 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 	m_allowed_label
 		(this,
 		 hmargin, vmargin, list_width, label_height,
-		 _("Allowed Buildings:"), Align_CenterLeft),
+		 _("Allowed Buildings:"), UI::Align_CenterLeft),
 	m_forbidden_label
 		(this,
 		 hmargin + list_width + hspacing + middle_button_width + hspacing,
 		 m_allowed_label.get_y(),
 		 list_width, label_height,
-		 _("Forbidden Buildings:"), Align_CenterLeft),
+		 _("Forbidden Buildings:"), UI::Align_CenterLeft),
 	m_allowed
 		(this,
 		 m_allowed_label.get_x(),

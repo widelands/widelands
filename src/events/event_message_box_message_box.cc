@@ -56,8 +56,7 @@ m_game    (game)
 			(this,
 			 posx, posy,
 			 get_inner_w() - posx -     spacing,
-			 get_inner_h() - posy - 2 * spacing - 50,
-			 "", Align_Left);
+			 get_inner_h() - posy - 2 * spacing - 50);
 
 	if (m_text)
 		m_text->set_text(event->get_text());

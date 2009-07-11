@@ -19,9 +19,8 @@
 
 #include "multilinetextarea.h"
 
-#include "font_handler.h"
 #include "constants.h"
-#include "graphic/graphic.h"
+#include "font_handler.h"
 #include "text_parser.h"
 
 namespace UI {
@@ -65,7 +64,7 @@ Multiline_Textarea::Multiline_Textarea
 */
 Multiline_Textarea::~Multiline_Textarea() {
 	if (m_cache_id != g_gr->get_no_picture())
-		g_fh->delete_widget_cache(m_cache_id);
+		UI::g_fh->delete_widget_cache(m_cache_id);
 }
 
 
@@ -124,7 +123,7 @@ void Multiline_Textarea::draw(RenderTarget & dst)
 	if (m_text.length()) {
 		//  Let the font handler worry about all the complicated stuff..
 		if (is_richtext(m_text))
-			g_fh->draw_richtext
+			UI::g_fh->draw_richtext
 				(dst,
 				 RGBColor(107, 87, 55),
 				 Point(get_halign(), 0 - m_textpos),
@@ -132,7 +131,7 @@ void Multiline_Textarea::draw(RenderTarget & dst)
 				 get_eff_w(),
 				 m_cache_mode, m_cache_id);
 		else
-			g_fh->draw_string
+			UI::g_fh->draw_string
 				(dst,
 				 m_fontname,
 				 m_fontsize,
@@ -157,7 +156,7 @@ void Multiline_Textarea::draw_scrollbar() {
 
 		uint32_t m_width = 0;
 		if (m_cache_id != g_gr->get_no_picture())
-			g_fh->get_size_from_cache(m_cache_id, m_width, m_textheight);
+			UI::g_fh->get_size_from_cache(m_cache_id, m_width, m_textheight);
 
 		if (setbottom || m_textpos > m_textheight - get_h())
 			m_textpos = m_textheight - get_h();

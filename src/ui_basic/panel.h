@@ -237,7 +237,7 @@ private:
 
 	char * _tooltip;
 
-	void draw_tooltip(RenderTarget &, Panel & lowest);
+	static void draw_tooltip(RenderTarget &, char const * const text);
 
 public:
 	void set_tooltip(const char * const);

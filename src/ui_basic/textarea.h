@@ -20,8 +20,8 @@
 #ifndef UI_TEXTAREA_H
 #define UI_TEXTAREA_H
 
+#include "align.h"
 #include "constants.h"
-#include "font_handler.h"
 #include "panel.h"
 
 namespace UI {
@@ -40,7 +40,7 @@ struct Textarea : public Panel {
 	Textarea
 		(Panel * parent,
 		 int32_t x, int32_t y,
-		 const std::string & text,
+		 std::string const & text = std::string(),
 		 Align align = Align_Left, bool multiline = false);
 
 	Textarea

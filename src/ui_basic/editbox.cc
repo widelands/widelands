@@ -21,7 +21,7 @@
 
 #include "mouse_constants.h"
 
-#include "graphic/graphic.h"
+#include "font_handler.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
 
@@ -349,16 +349,17 @@ void EditBox::draw(RenderTarget & dst)
 		break;
 	}
 
-	g_fh->draw_string
+	UI::g_fh->draw_string
 		(dst,
 		 m_fontname, m_fontsize, m_fontcolor, UI_FONT_CLR_BG,
 		 pos,
 		 m->text,
 		 align(),
-		 -1,
+		 std::numeric_limits<uint32_t>::max(),
 		 Widget_Cache_None,
 		 g_gr->get_no_picture(),
-		 has_focus() ? static_cast<int32_t>(m->caret) : -1);
+		 has_focus() ? static_cast<int32_t>(m->caret) :
+		 std::numeric_limits<uint32_t>::max());
 }
 
 

@@ -52,7 +52,8 @@ m_event_chain(chain)
 	int32_t const ls_width = 200;
 	Point         pos        (5, 25);
 
-	new UI::Textarea(this, pos.x, pos.y, 60, 20, _("Name: "), Align_CenterLeft);
+	new UI::Textarea
+		(this, pos.x, pos.y, 60, 20, _("Name: "), UI::Align_CenterLeft);
 	m_name =
 		new UI::EditBox
 			(this, pos.x + 60, pos.y, get_inner_w() - 2 * spacing - 60, 20,
@@ -63,13 +64,13 @@ m_event_chain(chain)
 	new UI::Textarea
 		(this,
 		 pos.x + STATEBOX_WIDTH + spacing, pos.y, 120, STATEBOX_HEIGHT,
-		 _("Runs multiple times"), Align_CenterLeft);
+		 _("Runs multiple times"), UI::Align_CenterLeft);
 	m_morethanonce = new UI::Checkbox(this, pos);
 	m_morethanonce->set_state(m_event_chain.get_repeating());
 	pos.y += STATEBOX_HEIGHT + spacing;
 	int32_t const lsoffsy = pos.y;
 
-	new UI::Textarea(this, pos.x, lsoffsy, _("Events: "), Align_Left);
+	new UI::Textarea(this, pos.x, lsoffsy, _("Events: "), UI::Align_Left);
 	m_events =
 		new UI::Listselect<Widelands::Event &>
 			(this, spacing, lsoffsy + 20, ls_width, get_inner_h() - lsoffsy - 55);
@@ -141,8 +142,7 @@ m_event_chain(chain)
 		 false);
 
 	pos += Point(80 + spacing, 24 + spacing + spacing);
-	new UI::Textarea
-		(this, pos.x, lsoffsy, _("Available Events: "), Align_Left);
+	new UI::Textarea(this, pos.x, lsoffsy, _("Available Events: "));
 	m_available_events =
 		new UI::Listselect<Widelands::Event &>
 			(this, pos.x, lsoffsy + 20, ls_width, get_inner_h() - lsoffsy - 55);

@@ -33,7 +33,6 @@ Rendering functions of the 16-bit software renderer.
 #include "map.h"
 #include "minimap.h"
 #include "logic/player.h"
-#include "rgbcolor.h"
 #include "upcast.h"
 #include "wexception.h"
 #include "world.h"

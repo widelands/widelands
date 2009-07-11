@@ -21,7 +21,6 @@
 
 #include "logic/editor_game_base.h"
 #include "font_handler.h"
-#include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/player.h"
 #include "graphic/rendertarget.h"
@@ -34,12 +33,14 @@ WaresDisplay::WaresDisplay
 	(UI::Panel * const parent,
 	 int32_t const x, int32_t const y,
 	 Widelands::Tribe_Descr const & tribe)
-:
-UI::Panel(parent, x, y, Width, 0),
-m_tribe (tribe),
+	:
+	UI::Panel(parent, x, y, Width, 0),
+	m_tribe (tribe),
 
-m_curware
-	(this, 0, get_inner_h() - 25, get_inner_w(), 20, _("Stock"), Align_Center)
+	m_curware
+		(this,
+		 0, get_inner_h() - 25, get_inner_w(), 20,
+		 _("Stock"), UI::Align_Center)
 
 {
 	set_size(Width, 100);
@@ -180,11 +181,11 @@ void WaresDisplay::draw_ware
 	char buffer[32];
 	snprintf(buffer, sizeof(buffer), "%i", stock);
 
-	g_fh->draw_string
+	UI::g_fh->draw_string
 		(dst,
 		 UI_FONT_ULTRASMALL,
 		 UI_FONT_SMALL_CLR,
 		 p + Point(WARE_MENU_PIC_WIDTH, WARE_MENU_PIC_HEIGHT - 4),
 		 buffer,
-		 Align_Right);
+		 UI::Align_Right);
 }

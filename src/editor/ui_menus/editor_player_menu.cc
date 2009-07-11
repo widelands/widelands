@@ -64,12 +64,11 @@ m_remove_last_player
 
 	set_inner_size(375, 135);
 
-	UI::Textarea * ta =
-		new UI::Textarea(this, 0, 0, _("Number of Players"), Align_Left);
+	UI::Textarea * ta = new UI::Textarea(this, 0, 0, _("Number of Players"));
 	ta->set_pos(Point((get_inner_w() - ta->get_w()) / 2, posy + 5));
 	posy += spacing + width;
 
-	m_nr_of_players_ta = new UI::Textarea(this, 0, 0, "5", Align_Left);
+	m_nr_of_players_ta = new UI::Textarea(this, 0, 0, "5");
 	m_nr_of_players_ta->set_pos
 		(Point((get_inner_w() - m_nr_of_players_ta->get_w()) / 2, posy + 5));
 	posy += width + spacing + spacing;

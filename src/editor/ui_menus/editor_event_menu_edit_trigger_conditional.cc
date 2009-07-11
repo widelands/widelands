@@ -56,7 +56,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 	int32_t const ls_width = 180;
 
 	//  trigger List
-	new UI::Textarea(this, posx, offsy, _("Trigger Conditional: "), Align_Left);
+	new UI::Textarea(this, posx, offsy, _("Trigger Conditional: "));
 	m_construction =
 		new UI::Listselect<Widelands::TriggerConditional_Factory::Token &>
 			(this, spacing, offsy + 20, ls_width, get_inner_h() - offsy - 55);
@@ -187,7 +187,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 	posy += 24 + spacing + spacing;
 
 	posx += 80 + spacing;
-	new UI::Textarea(this, posx, offsy, _("Available Triggers: "), Align_Left);
+	new UI::Textarea(this, posx, offsy, _("Available Triggers: "));
 	m_trigger_list =
 		new UI::Listselect<Widelands::Trigger &>
 		(this,

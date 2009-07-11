@@ -101,7 +101,7 @@ m_pit               (pit)
 		cb.set_state(m_pit.is_enabled(i));
 		cb.changedtoid.set(this, &Editor_Tool_Place_Bob_Options_Menu::clicked);
 		m_checkboxes.push_back(&cb);
-		box->add(&cb, Align_Left);
+		box->add(&cb, UI::Align_Left);
 		box->add_space(space);
 		pos.x += width + 1 + space;
 		++cur_x;

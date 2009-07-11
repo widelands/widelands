@@ -65,47 +65,51 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive *parent)
 
 	posx = get_inner_w() / 2 + spacing;
 	posy += 20;
-	new UI::Textarea(this, posx, posy, 150, 20, _("Name: "), Align_CenterLeft);
+	new UI::Textarea
+		(this, posx, posy, 150, 20, _("Name: "), UI::Align_CenterLeft);
 	m_name =
 		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
+			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Author: "), Align_CenterLeft);
+		(this, posx, posy, 150, 20, _("Author: "), UI::Align_CenterLeft);
 	m_author =
 		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
-	posy += 20 + spacing;
-
-	new UI::Textarea(this, posx, posy, 70, 20, _("Size: "), Align_CenterLeft);
-	m_size =
-		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
-	posy += 20 + spacing;
-
-	new UI::Textarea(this, posx, posy, 70, 20, _("World: "), Align_CenterLeft);
-	m_world =
-		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
+			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Players: "), Align_CenterLeft);
+		(this, posx, posy, 70, 20, _("Size: "), UI::Align_CenterLeft);
+	m_size =
+		new UI::Textarea
+			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
+	posy += 20 + spacing;
+
+	new UI::Textarea
+		(this, posx, posy, 70, 20, _("World: "), UI::Align_CenterLeft);
+	m_world =
+		new UI::Textarea
+			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
+	posy += 20 + spacing;
+
+	new UI::Textarea
+		(this, posx, posy, 70, 20, _("Players: "), UI::Align_CenterLeft);
 	m_nrplayers =
 		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", Align_CenterLeft);
+			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 
-	new UI::Textarea(this, posx, posy, 70, 20, _("Descr: "), Align_CenterLeft);
+	new UI::Textarea
+		(this, posx, posy, 70, 20, _("Descr: "), UI::Align_CenterLeft);
 	m_descr =
 		new UI::Multiline_Textarea
 			(this,
 			 posx + 70, posy,
 			 get_inner_w() - posx - spacing - 70,
 			 get_inner_h() - posy - spacing - 40,
-			 "---", Align_CenterLeft);
+			 "---", UI::Align_CenterLeft);
 
 	posx = 5;
 	posy = get_inner_h() - 30;

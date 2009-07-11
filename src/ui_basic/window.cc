@@ -20,7 +20,6 @@
 #include "window.h"
 
 #include "font_handler.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
 
@@ -230,7 +229,7 @@ void Window::draw_border(RenderTarget & dst)
 
 	// draw the title if we have one
 	if (m_title.length())
-		g_fh->draw_string
+		UI::g_fh->draw_string
 			(dst,
 			 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
 			 Point(get_lborder() + get_inner_w() / 2, TP_B_PIXMAP_THICKNESS / 2),

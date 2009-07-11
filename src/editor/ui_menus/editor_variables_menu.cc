@@ -161,36 +161,37 @@ private:
 };
 
 #define spacing 5
-
 Edit_Variable_Window::Edit_Variable_Window
 	(Editor_Interactive & parent, UI::Table<Variable &>::Entry_Record & te)
-:
-UI::Window(&parent, 0, 0, 250, 85, _("Edit Variable")),
+	:
+	UI::Window(&parent, 0, 0, 250, 85, _("Edit Variable")),
 
-m_parent(parent),
-m_te(te),
+	m_parent(parent),
+	m_te(te),
 
 //  what type
-m_label_name(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft),
-m_name
-	(this, 120, 5, 120, 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0),
-m_label_value(this, 5, 30, 120, 20, _("Value"), Align_CenterLeft),
-m_value
-	(this, 120, 35, 120, 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0),
-m_ok
-	(this,
-	 get_inner_w() / 2 - 80 - spacing, 60, 80, 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 &Edit_Variable_Window::clicked_ok, *this,
-	 _("Ok")),
-m_back
-	(this,
-	 get_inner_w() / 2 + spacing, 60, 80, 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 &Edit_Variable_Window::end_modal, *this, 0,
-	 _("Back"))
+	m_label_name(this, 5, 5, 120, 20, _("Name"), UI::Align_CenterLeft),
+	m_name
+		(this,
+		 120, 5, 120, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0),
+	m_label_value(this, 5, 30, 120, 20, _("Value"), UI::Align_CenterLeft),
+	m_value
+		(this,
+		 120, 35, 120, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"), 0),
+	m_ok
+		(this,
+		 get_inner_w() / 2 - 80 - spacing, 60, 80, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &Edit_Variable_Window::clicked_ok, *this,
+		 _("Ok")),
+	m_back
+		(this,
+		 get_inner_w() / 2 + spacing, 60, 80, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &Edit_Variable_Window::end_modal, *this, 0,
+		 _("Back"))
 {
 	m_name .setText(m_te.get_string(1));
 	m_value.setText(m_te.get_string(2));

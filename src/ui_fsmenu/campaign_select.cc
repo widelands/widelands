@@ -40,20 +40,16 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
-	m_butw
-		(m_xres / 4),
-	m_buth
-		(m_yres * 9 / 200),
-	m_fs
-		(fs_small()),
-	m_fn
-		(ui_fn()),
+	m_butw (m_xres / 4),
+	m_buth (m_yres * 9 / 200),
+	m_fs   (fs_small()),
+	m_fn   (ui_fn()),
 
 // Text labels
 	title
 		(this,
 		 m_xres / 2, m_yres * 9 / 50,
-		 _("Select a campaign"), Align_HCenter),
+		 _("Select a campaign"), UI::Align_HCenter),
 	label_campname
 		(this, m_xres *  3 /   5, m_yres * 17 / 50, _("Campaign:")),
 	tacampname
@@ -254,49 +250,45 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
  * choose one.
  */
 Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
-Fullscreen_Menu_Base("choosemapmenu.jpg"),
+	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
-m_xres
-	(gr_x()),
-m_yres
-	(gr_y()),
-m_butw
-	(m_xres / 4),
-m_buth
-	(m_yres * 9 / 200),
-m_fs
-	(fs_small()),
-m_fn
-	(ui_fn()),
+	m_xres (gr_x()),
+	m_yres (gr_y()),
+	m_butw (m_xres / 4),
+	m_buth (m_yres * 9 / 200),
+	m_fs   (fs_small()),
+	m_fn   (ui_fn()),
 
 // Text labels
-title(this, m_xres / 2, m_yres * 9 / 50, _("Choose your map!"), Align_HCenter),
-label_mapname   (this, m_xres * 3 / 5,  m_yres * 17 / 50, _("Name:")),
-tamapname       (this, m_xres * 61 / 100, m_yres * 3 / 8, ""),
-label_author    (this, m_xres * 3 / 5,  m_yres * 17 / 40, _("Author:")),
-taauthor        (this, m_xres * 61 / 100, m_yres * 23 / 50, ""),
-label_mapdescr  (this, m_xres * 3 / 5,  m_yres * 51 / 100, _("Description:")),
-tamapdescr
-	(this,
-	 m_xres * 61 / 100, m_yres * 11 / 20, m_xres * 9 / 25, m_yres * 7 / 25,
-	 ""),
+	title
+		(this,
+		 m_xres / 2, m_yres * 9 / 50, _("Choose your map!"),
+		 UI::Align_HCenter),
+	label_mapname (this, m_xres * 3 / 5,  m_yres * 17 / 50, _("Name:")),
+	tamapname     (this, m_xres * 61 / 100, m_yres * 3 / 8, ""),
+	label_author  (this, m_xres * 3 / 5,  m_yres * 17 / 40, _("Author:")),
+	taauthor      (this, m_xres * 61 / 100, m_yres * 23 / 50, ""),
+	label_mapdescr(this, m_xres * 3 / 5,  m_yres * 51 / 100, _("Description:")),
+	tamapdescr
+		(this,
+		 m_xres * 61 / 100, m_yres * 11 / 20, m_xres * 9 / 25, m_yres * 7 / 25),
 
 // Buttons
-b_ok
-	(this,
-	 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-	 &Fullscreen_Menu_CampaignMapSelect::clicked_ok, *this,
-	 _("OK"), std::string(), false, false,
-	 m_fn, m_fs),
-back
-	(this,
-	 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 &Fullscreen_Menu_CampaignMapSelect::end_modal, *this, 0,
-	 _("Back"), std::string(), true, false,
-	 m_fn, m_fs),
+	b_ok
+		(this,
+		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 &Fullscreen_Menu_CampaignMapSelect::clicked_ok, *this,
+		 _("OK"), std::string(), false, false,
+		 m_fn, m_fs),
+	back
+		(this,
+		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 &Fullscreen_Menu_CampaignMapSelect::end_modal, *this, 0,
+		 _("Back"), std::string(), true, false,
+		 m_fn, m_fs),
 
 // Campaign map list
 	m_list

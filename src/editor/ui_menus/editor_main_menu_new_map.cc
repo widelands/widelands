@@ -63,8 +63,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
 	}
 	snprintf
 		(buffer, sizeof(buffer), _("Width: %u"), Widelands::MAP_DIMENSIONS[m_w]);
-	m_width =
-		new UI::Textarea(this, posx + spacing + 20, posy, buffer, Align_Left);
+	m_width = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
 
 	new UI::Callback_IDButton<Main_Menu_New_Map, int32_t>
 		(this,
@@ -85,8 +84,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
 	snprintf
 		(buffer, sizeof(buffer),
 		 _("Height: %u"), Widelands::MAP_DIMENSIONS[m_h]);
-	m_height =
-		new UI::Textarea(this, posx + spacing + 20, posy, buffer, Align_Left);
+	m_height = new UI::Textarea(this, posx + spacing + 20, posy, buffer);
 
 	new UI::Callback_IDButton<Main_Menu_New_Map, int32_t>
 		(this,

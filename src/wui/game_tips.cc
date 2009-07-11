@@ -240,10 +240,10 @@ void GameTips::show_tip(int32_t index) {
 	text_area.h -= m_pading_t + m_pading_b;
 	Point center(text_area.x + text_area.w / 2, text_area.y + text_area.h / 2);
 
-	g_fh->draw_string
+	UI::g_fh->draw_string
 		(rt, UI_FONT_NAME, m_font_size,
 		 m_color, m_bgcolor, //RGBColor(107, 87, 55),
 		 center, m_tips[index].text,
-		 Align_Center, text_area.w);
+		 UI::Align_Center, text_area.w);
 	g_gr->update_rectangle(tips_area);
 }

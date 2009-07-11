@@ -29,7 +29,11 @@ namespace Widelands {
 struct Editor_Game_Base;
 struct Field;
 struct Player;
-};
+}
+
+namespace UI {
+struct Font_Handler;
+}
 
 struct Vertex;
 
@@ -42,7 +46,7 @@ struct Vertex;
 */
 class Surface {
 	friend class AnimationGfx;
-	friend class Font_Handler; // Needs m_surface for SDL_Blitting
+	friend struct UI::Font_Handler; //  needs m_surface for SDL_Blitting
 
 	SDL_Surface * m_surface;
 	int32_t m_offsx;

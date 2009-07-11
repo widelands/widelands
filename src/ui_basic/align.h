@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,35 +17,34 @@
  *
  */
 
-#ifndef FONT_LOADER_H
-#define FONT_LOADER_H
-
-#include "io/fileread.h"
-#include "rgbcolor.h"
-
-#include <SDL_ttf.h>
-
-#include <map>
-#include <string>
-#include <cstring>
-#include <vector>
+#ifndef ALIGN_H
+#define ALIGN_H
 
 namespace UI {
 
-/*
- * Font
- *
- * this represents a loaded font used by the FontHandler
- */
-struct Font_Loader {
-	Font_Loader() {};
-	~Font_Loader();
-	TTF_Font * open_font(const std::string & name, int32_t size);
-	TTF_Font * get_font (std::string const & name, int32_t size);
-	void clear_fonts();
-private:
-	std::map<std::string, TTF_Font *> m_font_table;
-	std::vector<FileRead *> m_freads;
+enum Align {
+	Align_Left         =  0,
+	Align_HCenter      =  1,
+	Align_Right        =  2,
+	Align_Horizontal   =  3,
+
+	Align_Top          =  0,
+	Align_VCenter      =  4,
+	Align_Bottom       =  8,
+	Align_Vertical     = 12,
+
+	Align_TopLeft      =  0,
+	Align_CenterLeft   = Align_VCenter,
+	Align_BottomLeft   = Align_Bottom,
+
+	Align_TopCenter    = Align_HCenter,
+	Align_Center       = Align_HCenter|Align_VCenter,
+	Align_BottomCenter = Align_HCenter|Align_Bottom,
+
+	Align_TopRight     = Align_Right,
+	Align_CenterRight  = Align_Right|Align_VCenter,
+
+	Align_BottomRight  = Align_Right|Align_Bottom,
 };
 
 }

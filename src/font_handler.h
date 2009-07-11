@@ -20,59 +20,30 @@
 #ifndef FONT_HANDLER_H
 #define FONT_HANDLER_H
 
+#include "ui_basic/align.h"
 #include "point.h"
 #include "rgbcolor.h"
 #include "graphic/graphic.h"
 #include "graphic/picture.h"
+#include "ui_basic/variable_callback.h"
+#include "ui_basic/widget_cache.h"
 
 #include <SDL_ttf.h>
 
 #include <list>
-#include <string>
 #include <cstring>
 #include <vector>
 
-struct Font_Loader;
 struct RenderTarget;
+
+namespace UI {
 struct Text_Block;
-
-enum Align {
-	Align_Left         =  0,
-	Align_HCenter      =  1,
-	Align_Right        =  2,
-	Align_Horizontal   =  3,
-
-	Align_Top          =  0,
-	Align_VCenter      =  4,
-	Align_Bottom       =  8,
-	Align_Vertical     = 12,
-
-	Align_TopLeft      =  0,
-	Align_CenterLeft   = Align_VCenter,
-	Align_BottomLeft   = Align_Bottom,
-
-	Align_TopCenter    = Align_HCenter,
-	Align_Center       = Align_HCenter|Align_VCenter,
-	Align_BottomCenter = Align_HCenter|Align_Bottom,
-
-	Align_TopRight     = Align_Right,
-	Align_CenterRight  = Align_Right|Align_VCenter,
-
-	Align_BottomRight  = Align_Right|Align_Bottom,
-};
-
-enum Widget_Cache {
-	Widget_Cache_None   = 0,
-	Widget_Cache_Use    = 1,
-	Widget_Cache_New    = 2,
-	Widget_Cache_Update = 3
-};
+struct Font_Loader;
 
 /** class Font_Handler
  *
  * This class generates font Pictures out of strings and returns them
  */
-typedef std::string (*Varibale_Callback)(std::string, void * data);
 struct Font_Handler {
 	Font_Handler();
 	~Font_Handler();
@@ -84,10 +55,10 @@ struct Font_Handler {
 		 Point               dstpoint,
 		 const std::string & text,
 		 Align               align           = Align_CenterLeft,
-		 int32_t             wrap            = -1,
+		 uint32_t            wrap         = std::numeric_limits<uint32_t>::max(),
 		 Widget_Cache        widget_cache    = Widget_Cache_None,
 		 PictureID         & widget_cache_id = g_gr->get_no_picture(),
-		 int32_t             caret           = -1,
+		 uint32_t            caret        = std::numeric_limits<uint32_t>::max(),
 		 bool                transparent     = true);
 	void get_size
 		(std::string const & fontname, int32_t size,
@@ -163,30 +134,40 @@ private:
 	PictureID create_text_surface
 		(TTF_Font &,
 		 RGBColor fg, RGBColor bg,
-		 std::string const & text, Align, int32_t wrap, int32_t line_spacing,
-		 int32_t caret = -1, bool transparent = true);
+		 std::string const & text,
+		 Align,
+		 uint32_t            wrap         = std::numeric_limits<uint32_t>::max(),
+		 uint32_t            line_spacing = 0,
+		 uint32_t            caret        = std::numeric_limits<uint32_t>::max(),
+		 bool transparent = true);
 	PictureID convert_sdl_surface
 		(SDL_Surface &, const RGBColor bg, bool transparent = false);
 	SDL_Surface * draw_string_sdl_surface
 		(std::string const & fontname, int32_t fontsize,
 		 RGBColor fg, RGBColor bg,
 		 const std::string & text,
-		 Align, int32_t wrap,
+		 Align,
+		 uint32_t            wrap        = std::numeric_limits<uint32_t>::max(),
 		 int32_t style = TTF_STYLE_NORMAL,
-		 int32_t line_spacing = 0);
+		 uint32_t            linespacing = 0);
 	SDL_Surface * create_sdl_text_surface
 		(TTF_Font &, RGBColor fg, RGBColor bg,
-		 const std::string & text,
-		 Align, int32_t wrap, int32_t line_spacing = 0, int32_t caret = -1);
+		 std::string const & text,
+		 Align,
+		 uint32_t            wrap        = std::numeric_limits<uint32_t>::max(),
+		 uint32_t            linespacing = 0,
+		 uint32_t            caret       = std::numeric_limits<uint32_t>::max());
 	SDL_Surface * create_static_long_text_surface
 		(TTF_Font &, RGBColor fg, RGBColor bg,
 		 std::string const & text,
-		 Align, int32_t wrap, int32_t line_spacing = 0,
-		 int32_t caret = -1);
+		 Align,
+		 uint32_t            wrap        = std::numeric_limits<uint32_t>::max(),
+		 uint32_t            linespacing = 0,
+		 uint32_t            caret       = std::numeric_limits<uint32_t>::max());
 	SDL_Surface * create_single_line_text_surface
 		(TTF_Font &, RGBColor fg, RGBColor bg,
-		 std::string text,
-		 Align, int32_t caret = -1);
+		 std::string text, Align,
+		 uint32_t caret = std::numeric_limits<uint32_t>::max());
 	SDL_Surface * create_empty_sdl_surface(uint32_t w, uint32_t h);
 	SDL_Surface * join_sdl_surfaces
 		(uint32_t w, uint32_t h,
@@ -206,5 +187,7 @@ private:
 };
 
 extern Font_Handler * g_fh; // the default font
+
+}
 
 #endif

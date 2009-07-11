@@ -507,7 +507,7 @@ void FieldActionWindow::add_buttons_attack ()
 					 true);
 
 				m_text_attackers =
-					new UI::Textarea(attackbox, 90, 0, "000/000", Align_Center);
+					new UI::Textarea(attackbox, 90, 0, "000/000", UI::Align_Center);
 				attackbox->add(m_text_attackers, UI::Box::AlignTop);
 
 				add_button

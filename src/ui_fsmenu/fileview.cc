@@ -30,7 +30,7 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView
 	:
 	Fullscreen_Menu_Base("fileviewmenu.jpg"),
 
-	title (this, m_xres * 3 / 50, m_yres / 10, std::string(), Align_Left),
+	title (this, m_xres * 3 / 50, m_yres / 10),
 
 	textview
 		(this,

@@ -19,7 +19,7 @@
 
 #include "table.h"
 
-#include "graphic/graphic.h"
+#include "font_handler.h"
 #include "graphic/rendertarget.h"
 #include "button.h"
 #include "mouse_constants.h"
@@ -207,14 +207,13 @@ void Table<void *>::draw(RenderTarget & dst)
 			if (entry_picture != g_gr->get_no_picture())
 				dst.blit(point, entry_picture);
 			else
-				g_fh->draw_string
+				UI::g_fh->draw_string
 					(dst,
 					 m_fontname, m_fontsize,
 					 col,
 					 RGBColor(107, 87, 55),
 					 point,
-					 entry_string, alignment,
-					 -1);
+					 entry_string, alignment);
 
 			curx += curw;
 		}

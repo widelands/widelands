@@ -21,10 +21,9 @@
 #ifndef UI_TABLE_H
 #define UI_TABLE_H
 
+#include "align.h"
 #include "panel.h"
 #include "m_signal.h"
-
-#include "font_handler.h"
 
 #include "compile_assert.h"
 

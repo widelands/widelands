@@ -20,7 +20,7 @@
 #ifndef UI_EDITBOX_H
 #define UI_EDITBOX_H
 
-#include "font_handler.h"
+#include "align.h"
 #include "button.h"
 
 #include <boost/scoped_ptr.hpp>

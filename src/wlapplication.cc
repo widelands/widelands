@@ -41,7 +41,6 @@
 #include "logic/game.h"
 #include "wui/game_tips.h"
 #include "gamesettings.h"
-#include "graphic/graphic.h"
 #include "i18n.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -261,7 +260,7 @@ m_gfx_opengl           (false),
 m_default_datadirs     (true)
 {
 	g_fs = new LayeredFileSystem();
-	g_fh = new Font_Handler();
+	UI::g_fh = new UI::Font_Handler();
 
 	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
 	if (m_default_datadirs) {
@@ -286,9 +285,9 @@ WLApplication::~WLApplication()
 	shutdown_hardware();
 	shutdown_settings();
 
-	assert(g_fh);
-	delete g_fh;
-	g_fh = 0;
+	assert(UI::g_fh);
+	delete UI::g_fh;
+	UI::g_fh = 0;
 
 	assert(g_fs);
 	delete g_fs;
@@ -1395,7 +1394,7 @@ void WLApplication::mainmenu()
 				 messagetitle,
 				 message,
 				 UI::WLMessageBox::OK);
-			mmb.set_align(Align_Left);
+			mmb.set_align(UI::Align_Left);
 			mmb.run();
 
 			message.clear();

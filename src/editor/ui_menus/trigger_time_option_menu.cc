@@ -66,7 +66,8 @@ m_trigger (trigger)
 	m_values[4] = time        /   10; //  seconds
 	m_values[5] = time        %   10;
 
-	new UI::Textarea(this, spacing, posy, 50, 20, _("Name:"), Align_CenterLeft);
+	new UI::Textarea
+		(this, spacing, posy, 50, 20, _("Name:"), UI::Align_CenterLeft);
 	m_name = new UI::EditBox
 		(this, spacing + 50, posy, get_inner_w() - 50 - 2 * spacing, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"), 0);
@@ -85,7 +86,7 @@ m_trigger (trigger)
 
 	m_textareas[0] =
 		new UI::Textarea
-			(this, posx, posy + 20, width, height, "9", Align_Center);
+			(this, posx, posy + 20, width, height, "9", UI::Align_Center);
 
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -107,7 +108,7 @@ m_trigger (trigger)
 
 	m_textareas[1] =
 		new UI::Textarea
-			(this, posx, posy + 20, width, height, "9", Align_Center);
+			(this, posx, posy + 20, width, height, "9", UI::Align_Center);
 
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -118,8 +119,7 @@ m_trigger (trigger)
 
 	posx += width + spacing;
 
-	UI::Textarea * tt =
-		new UI::Textarea(this, posx, posy + 23, ":", Align_Left);
+	UI::Textarea * tt = new UI::Textarea(this, posx, posy + 23, ":");
 	posx += spacing + tt->get_w();
 
 	//  minutes, first cipher
@@ -133,7 +133,7 @@ m_trigger (trigger)
 
 	m_textareas[2] =
 		new UI::Textarea
-			(this, posx, posy + 20, width, height, "9", Align_Center);
+			(this, posx, posy + 20, width, height, "9", UI::Align_Center);
 
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -155,7 +155,7 @@ m_trigger (trigger)
 
 	m_textareas[3] =
 		new UI::Textarea
-			(this, posx, posy + 20, width, height, "9", Align_Center);
+			(this, posx, posy + 20, width, height, "9", UI::Align_Center);
 
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -166,7 +166,7 @@ m_trigger (trigger)
 
 	posx += width + spacing;
 
-	tt = new UI::Textarea(this, posx, posy + 23, ":", Align_Left);
+	tt = new UI::Textarea(this, posx, posy + 23, ":");
 
 	posx += spacing + tt->get_w();
 	// seconds, first cipher
@@ -180,7 +180,7 @@ m_trigger (trigger)
 
 	m_textareas[4] =
 		new UI::Textarea
-			(this, posx, posy + 20, width, height, "9", Align_Center);
+			(this, posx, posy + 20, width, height, "9", UI::Align_Center);
 
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
@@ -201,7 +201,7 @@ m_trigger (trigger)
 
 	m_textareas[5] =
 		new UI::Textarea
-			(this, posx, posy + 20, width, height, "9", Align_Center);
+			(this, posx, posy + 20, width, height, "9", UI::Align_Center);
 
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,

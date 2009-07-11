@@ -21,7 +21,6 @@
 
 #include "constants.h"
 #include "font_handler.h"
-#include "graphic/graphic.h"
 #include "profile/profile.h"
 #include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
@@ -175,8 +174,8 @@ int32_t Panel::run()
 			if (Panel * lowest = _mousein) {
 				while (Panel * const mousein = lowest->_mousein)
 					lowest = mousein;
-				if (lowest->tooltip())
-					draw_tooltip(rt, *lowest);
+				if (char const * const text = lowest->tooltip())
+					draw_tooltip(rt, text);
 			}
 
 			g_gr->refresh();
@@ -945,10 +944,10 @@ void Panel::set_tooltip(const char * const text) {
 /**
  * Draw the tooltip.
  */
-void Panel::draw_tooltip(RenderTarget & dst, Panel & lowest)
+void Panel::draw_tooltip(RenderTarget & dst, char const * const text)
 {
 	uint32_t tip_width, tip_height;
-	g_fh->get_size(UI_FONT_TOOLTIP, lowest.tooltip(), tip_width, tip_height, 0);
+	UI::g_fh->get_size(UI_FONT_TOOLTIP, text, tip_width, tip_height);
 	tip_width += 4;
 	tip_height += 4;
 	const WLApplication & wlapplication = *WLApplication::get();
@@ -964,15 +963,18 @@ void Panel::draw_tooltip(RenderTarget & dst, Panel & lowest)
 
 	dst.fill_rect(r, RGBColor(230, 200, 50));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
-	g_fh->draw_string
+	UI::g_fh->draw_string
 		(dst,
 		 UI_FONT_TOOLTIP,
 		 UI_FONT_TOOLTIP_CLR,
 		 r + Point(2, 2),
-		 lowest.tooltip(),
-		 Align_Left, -1,
+		 text,
+		 Align_Left,
+		 std::numeric_limits<uint32_t>::max(),
 		 Widget_Cache_None,
 		 g_gr->get_no_picture(),
-		 -1, false);
+		 std::numeric_limits<uint32_t>::max(),
+		 false);
 }
-};
+
+}

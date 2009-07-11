@@ -23,6 +23,7 @@
 #include "interactive_base.h"
 #include "logic/game.h"
 #include "graphic/graphic.h"
+#include "ui_basic/widget_cache.h"
 
 struct ChatProvider;
 
@@ -36,7 +37,7 @@ struct ChatDisplay : public UI::Panel {
 private:
 	ChatProvider * m_chat;
 	std::vector<PictureID> m_cache_id;
-	Widget_Cache           m_cache_mode;
+	UI::Widget_Cache       m_cache_mode;
 };
 
 enum PlayerType {NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED};

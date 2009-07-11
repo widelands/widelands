@@ -23,7 +23,6 @@
 #include "font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "rgbcolor.h"
 
 #include "ui_basic/panel.h"
 
@@ -133,15 +132,20 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 			(buffer, sizeof(buffer),
 			 "%u", max_x[m_time] / how_many_ticks[m_time] * i);
 
-		g_fh->draw_string
+		UI::g_fh->draw_string
 			(dst,
 			 UI_FONT_SMALL,
 			 RGBColor(255, 0, 0), RGBColor(255, 255, 255),
 			 Point
 			 	(static_cast<int32_t>(posx),
 			 	 get_inner_h() - space_at_bottom + 4),
-			 buffer, Align_Center, -1,
-			 Widget_Cache_None, g_gr->get_no_picture(), -1, false);
+			 buffer,
+			 UI::Align_Center,
+			 std::numeric_limits<uint32_t>::max(),
+			 UI::Widget_Cache_None,
+			 g_gr->get_no_picture(),
+			 std::numeric_limits<uint32_t>::max(),
+			 false);
 		posx -= sub;
 	}
 
@@ -196,13 +200,18 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 
 	//  print the maximal value
 	sprintf(buffer, "%u", max);
-	g_fh->draw_string
+	UI::g_fh->draw_string
 		(dst,
 		 UI_FONT_SMALL,
 		 RGBColor(120, 255, 0), RGBColor(255, 255, 255),
 		 Point(get_inner_w() - space_at_right - 2, spacing),
-		 buffer, Align_CenterRight, -1,
-		 Widget_Cache_None, g_gr->get_no_picture(), -1, false);
+		 buffer,
+		 UI::Align_CenterRight,
+		 std::numeric_limits<uint32_t>::max(),
+		 UI::Widget_Cache_None,
+		 g_gr->get_no_picture(),
+		 std::numeric_limits<uint32_t>::max(),
+		 false);
 
 	//  plot the pixels
 	sub =

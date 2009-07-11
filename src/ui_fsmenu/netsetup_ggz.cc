@@ -28,106 +28,97 @@
 #include "network/network_ggz.h"
 #include "profile/profile.h"
 
-Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ ()
-:
-Fullscreen_Menu_Base("internetmenu.jpg"), // change this
+Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ () :
+	Fullscreen_Menu_Base("internetmenu.jpg"), //  FIXME change this
 
 // Values for alignment and size
-m_butx
-	(m_xres * 13 / 40),
-m_butw
-	(m_xres / 4),
-m_buth
-	(m_yres * 19 / 400),
-m_lisw
-	(m_xres * 20 / 63),
-m_namechange
-	(0),
-m_fs
-	(fs_small()),
-m_fn
-	(ui_fn()),
+	m_butx (m_xres * 13 / 40),
+	m_butw (m_xres / 4),
+	m_buth (m_yres * 19 / 400),
+	m_lisw (m_xres * 20 / 63),
+	m_namechange(0),
+	m_fs   (fs_small()),
+	m_fn   (ui_fn()),
 
 // Text labels
-title
-	(this,
-	 m_xres / 2, m_yres / 20,
-	 _("Metaserver Lobby"), Align_HCenter),
-m_users
-	(this,
-	 m_xres * 3 / 50, m_yres * 15 / 100,
-	 _("Users online:"), Align_Left),
-m_opengames
-	(this,
-	 m_lisw + m_xres * 85 / 1000, m_yres * 15 / 100,
-	 _("List of games:"), Align_Left),
-m_playername
-	(this,
-	 m_xres * 17 / 25, m_yres * 15 / 100,
-	 _("Your nickname:"), Align_Left),
-m_servername
-	(this,
-	 m_xres * 17 / 25, m_yres * 28 / 100,
-	 _("Name of your server:"), Align_Left),
-m_maxplayers
-	(this,
-	 m_xres * 17 / 25, m_yres * 38 / 100,
-	 _("Maximum of players:"), Align_Left),
-
+	title
+		(this,
+		 m_xres / 2, m_yres / 20,
+		 _("Metaserver Lobby"), UI::Align_HCenter),
+	m_users
+		(this,
+		 m_xres * 3 / 50, m_yres * 15 / 100,
+		 _("Users online:")),
+	m_opengames
+		(this,
+		 m_lisw + m_xres * 85 / 1000, m_yres * 15 / 100,
+		 _("List of games:")),
+	m_playername
+		(this,
+		 m_xres * 17 / 25, m_yres * 15 / 100,
+		 _("Your nickname:")),
+	m_servername
+		(this,
+		 m_xres * 17 / 25, m_yres * 28 / 100,
+		 _("Name of your server:")),
+	m_maxplayers
+		(this,
+		 m_xres * 17 / 25, m_yres * 38 / 100,
+		 _("Maximum of players:")),
 
 // Spinboxes
-maxplayers
-	(this,
-	 m_xres * 17 / 25, m_yres * 42 / 100, m_butw, m_buth * 7 / 10,
-	 4, 1, 7), // start/min./max. value dummy inits
+	maxplayers
+		(this,
+		 m_xres * 17 / 25, m_yres * 42 / 100, m_butw, m_buth * 7 / 10,
+		 4, 1, 7), //  start/min./max. value dummy initializations
 
 // Buttons
-joingame
-	(this,
-	 m_lisw + m_xres * 85 / 1000, m_yres * 55 / 100, m_lisw * 4 / 5, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 &Fullscreen_Menu_NetSetupGGZ::clicked_joingame, *this,
-	 _("Join this game"), std::string(), false, false,
-	 m_fn, m_fs),
-hostgame
-	(this,
-	 m_xres * 17 / 25, m_yres * 46 / 100, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 &Fullscreen_Menu_NetSetupGGZ::clicked_hostgame, *this,
-	 _("Open a new game"), std::string(), true, false,
-	 m_fn, m_fs),
-back
-	(this,
-	 m_xres * 17 / 25, m_yres * 55 / 100, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 &Fullscreen_Menu_NetSetupGGZ::end_modal, *this, CANCEL,
-	 _("Back"), std::string(), true, false,
-	 m_fn, m_fs),
+	joingame
+		(this,
+		 m_lisw + m_xres * 85 / 1000, m_yres * 55 / 100, m_lisw * 4 / 5, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &Fullscreen_Menu_NetSetupGGZ::clicked_joingame, *this,
+		 _("Join this game"), std::string(), false, false,
+		 m_fn, m_fs),
+	hostgame
+		(this,
+		 m_xres * 17 / 25, m_yres * 46 / 100, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &Fullscreen_Menu_NetSetupGGZ::clicked_hostgame, *this,
+		 _("Open a new game"), std::string(), true, false,
+		 m_fn, m_fs),
+	back
+		(this,
+		 m_xres * 17 / 25, m_yres * 55 / 100, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 &Fullscreen_Menu_NetSetupGGZ::end_modal, *this, CANCEL,
+		 _("Back"), std::string(), true, false,
+		 m_fn, m_fs),
 
 // Edit boxes
-playername
-	(this, m_xres * 17 / 25, m_yres     /  5, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
-servername
-	(this, m_xres * 17 / 25, m_yres * 33 / 100, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
+	playername
+		(this, m_xres * 17 / 25, m_yres     /  5, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
+	servername
+		(this, m_xres * 17 / 25, m_yres * 33 / 100, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
 
 // List
-usersonline
-	(this,
-	 m_xres * 3 / 50, m_yres     / 5,
-	 m_lisw,          m_yres * 2 / 5),
-opengames
-	(this,
-	 m_lisw + m_xres * 17 / 200, m_yres     /  5,
-	 m_lisw * 4 / 5,             m_yres * 7 / 20),
+	usersonline
+		(this,
+		 m_xres * 3 / 50, m_yres     / 5,
+		 m_lisw,          m_yres * 2 / 5),
+	opengames
+		(this,
+		 m_lisw + m_xres * 17 / 200, m_yres     /  5,
+		 m_lisw * 4 / 5,             m_yres * 7 / 20),
 
 // The chat UI
-chat
-	(this,
-	 m_xres * 3 / 50,  m_yres * 5 / 8,
-	 m_xres * 217 / 250, m_yres * 8 / 25,
-	 NetGGZ::ref())
+	chat
+		(this,
+		 m_xres * 3 / 50,  m_yres * 5 / 8,
+		 m_xres * 217 / 250, m_yres * 8 / 25,
+		 NetGGZ::ref())
 {
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername

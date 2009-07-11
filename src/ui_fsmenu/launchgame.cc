@@ -40,77 +40,68 @@
 Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	(GameSettingsProvider * const settings, GameController * const ctrl,
 	 bool autolaunch)
-:
-Fullscreen_Menu_Base("launchgamemenu.jpg"),
+	:
+	Fullscreen_Menu_Base("launchgamemenu.jpg"),
 
 // Values for alignment and size
-m_butw
-	(m_xres / 4),
-m_buth
-	(m_yres * 9 / 200),
-m_fs
-	(fs_small()),
-m_fn
-	(ui_fn()),
+	m_butw (m_xres / 4),
+	m_buth (m_yres * 9 / 200),
+	m_fs   (fs_small()),
+	m_fn   (ui_fn()),
 
 // Buttons
-m_select_map
-	(this,
-	 m_xres * 7 / 10, m_yres * 7 / 20, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 &Fullscreen_Menu_LaunchGame::select_map, *this,
-	 _("Select map"), std::string(), false, false,
-	 m_fn, m_fs),
-m_select_save
-	(this,
-	 m_xres * 7 / 10, m_yres * 4 / 10, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 &Fullscreen_Menu_LaunchGame::select_savegame, *this,
-	 _("Select Savegame"), std::string(), false, false,
-	 m_fn, m_fs),
-m_back
-	(this,
-	 m_xres * 7 / 10, m_yres * 9 / 20, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 &Fullscreen_Menu_LaunchGame::back_clicked, *this,
-	 _("Back"), std::string(), true, false,
-	 m_fn, m_fs),
-m_ok
-	(this,
-	 m_xres * 7 / 10, m_yres * 1 / 2, m_butw, m_buth,
-	 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-	 &Fullscreen_Menu_LaunchGame::start_clicked, *this,
-	 _("Start game"), std::string(), false, false,
-	 m_fn, m_fs),
+	m_select_map
+		(this,
+		 m_xres * 7 / 10, m_yres * 7 / 20, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &Fullscreen_Menu_LaunchGame::select_map, *this,
+		 _("Select map"), std::string(), false, false,
+		 m_fn, m_fs),
+	m_select_save
+		(this,
+		 m_xres * 7 / 10, m_yres * 4 / 10, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &Fullscreen_Menu_LaunchGame::select_savegame, *this,
+		 _("Select Savegame"), std::string(), false, false,
+		 m_fn, m_fs),
+	m_back
+		(this,
+		 m_xres * 7 / 10, m_yres * 9 / 20, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 &Fullscreen_Menu_LaunchGame::back_clicked, *this,
+		 _("Back"), std::string(), true, false,
+		 m_fn, m_fs),
+	m_ok
+		(this,
+		 m_xres * 7 / 10, m_yres * 1 / 2, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 &Fullscreen_Menu_LaunchGame::start_clicked, *this,
+		 _("Start game"), std::string(), false, false,
+		 m_fn, m_fs),
 
 // Text labels
-m_title
-	(this,
-	 m_xres / 2, m_yres / 10,
-	 _("Launch Game"),
-	 Align_HCenter),
-m_mapname
-	(this,
-	 m_xres * 7 / 10 + m_butw / 2, m_yres * 3 / 10,
-	 std::string(),
-	 Align_HCenter),
-m_lobby
-	(this,
-	 m_xres * 7 / 10, m_yres * 11 / 20,
-	 std::string(),
-	 Align_Left),
-m_notes
-	(this,
-	 m_xres * 2 / 25, m_yres * 9 / 50, m_xres * 21 / 25, m_yres / 10,
-	 std::string()),
+	m_title
+		(this,
+		 m_xres / 2, m_yres / 10,
+		 _("Launch Game"), UI::Align_HCenter),
+	m_mapname
+		(this,
+		 m_xres * 7 / 10 + m_butw / 2, m_yres * 3 / 10,
+		 std::string(), UI::Align_HCenter),
+	m_lobby
+		(this,
+		 m_xres * 7 / 10, m_yres * 11 / 20),
+	m_notes
+		(this,
+		 m_xres * 2 / 25, m_yres * 9 / 50, m_xres * 21 / 25, m_yres / 10),
 
 // Variables and objects used in the menu
-m_settings     (settings),
-m_ctrl         (ctrl),
-m_chat         (0),
-m_is_scenario  (false),
-m_is_savegame  (false),
-m_autolaunch   (autolaunch)
+	m_settings     (settings),
+	m_ctrl         (ctrl),
+	m_chat         (0),
+	m_is_scenario  (false),
+	m_is_savegame  (false),
+	m_autolaunch   (autolaunch)
 {
 
 	m_title  .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);

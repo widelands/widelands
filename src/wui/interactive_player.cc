@@ -75,7 +75,7 @@ ChatDisplay::~ChatDisplay()
 	// Finally delete all left message pictures
 	for (uint32_t i = 0; i < m_cache_id.size(); ++i)
 		if (m_cache_id[i] != g_gr->get_no_picture())
-			g_fh->delete_widget_cache(m_cache_id[i]);
+			UI::g_fh->delete_widget_cache(m_cache_id[i]);
 }
 
 void ChatDisplay::setChatProvider(ChatProvider & chat)
@@ -97,7 +97,7 @@ void ChatDisplay::draw(RenderTarget & dst)
 	// this is important to save space
 	for (uint32_t i = 0; i < m_cache_id.size(); ++i)
 		if (m_cache_id[i] != g_gr->get_no_picture())
-			g_fh->delete_widget_cache(m_cache_id[i]);
+			UI::g_fh->delete_widget_cache(m_cache_id[i]);
 	m_cache_id.resize(0);
 
 	int32_t now = time(0);
@@ -112,7 +112,7 @@ void ChatDisplay::draw(RenderTarget & dst)
 
 		Displayed d = {msgs[idx - 1].toPrintable(), 0};
 
-		g_fh->get_size(UI_FONT_SMALL, d.text, w, d.h, get_w());
+		UI::g_fh->get_size(UI_FONT_SMALL, d.text, w, d.h, get_w());
 		if (d.h + totalheight > static_cast<uint32_t>(get_h()))
 			break;
 
@@ -124,7 +124,7 @@ void ChatDisplay::draw(RenderTarget & dst)
 
 	container_iterate_const(std::vector<Displayed>, displaylist, i) {
 		PictureID picid;
-		g_fh->draw_richtext
+		UI::g_fh->draw_richtext
 			(dst,
 			 RGBColor(55, 55, 55),
 			 Point(0, get_inner_h() -55 -y),

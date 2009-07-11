@@ -60,7 +60,7 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 	int32_t       posy     = offsy;
 	int32_t const ls_width = 200;
 
-	new UI::Textarea(this, posx, offsy, _("Event Chains: "), Align_Left);
+	new UI::Textarea(this, posx, offsy, _("Event Chains: "));
 	m_eventchain_list =
 		new UI::Listselect<Widelands::EventChain *>
 		(this, spacing, offsy + 20, ls_width, get_inner_h() - offsy - 55);
@@ -70,16 +70,16 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 		(this, &Editor_Event_Menu::eventchain_double_clicked);
 	posx += ls_width + spacing;
 
-	new UI::Textarea(this, posx, offsy, _("Registered Events: "), Align_Left);
+	new UI::Textarea(this, posx, offsy, _("Registered Events: "));
 	m_event_list =
 		new UI::Listselect<Widelands::Event *>
-		(this, posx, offsy + 20, ls_width, get_inner_h() - offsy - 55);
+			(this, posx, offsy + 20, ls_width, get_inner_h() - offsy - 55);
 	m_event_list->selected.set(this, &Editor_Event_Menu::event_list_selected);
 	m_event_list->double_clicked.set
 		(this, &Editor_Event_Menu::event_double_clicked);
 	posx += ls_width + spacing;
 
-	new UI::Textarea(this, posx, offsy, _("Registered Triggers"), Align_Left);
+	new UI::Textarea(this, posx, offsy, _("Registered Triggers"));
 	m_trigger_list =
 		new UI::Listselect<Widelands::Trigger *>
 		(this, posx, offsy + 20, ls_width, get_inner_h() - offsy - 55);

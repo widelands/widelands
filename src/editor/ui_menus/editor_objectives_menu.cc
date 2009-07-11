@@ -73,7 +73,7 @@ m_te      (te)
 
 	Objective & obj = UI::Table<Objective &>::get(te);
 
-	new UI::Textarea(this, 5, 5, 120, 20, _("Name"), Align_CenterLeft);
+	new UI::Textarea(this, 5, 5, 120, 20, _("Name"), UI::Align_CenterLeft);
 	m_name = new UI::EditBox(this, 120, 5, 120, 20);
 	m_name->setText(obj.name());
 	pos.y += 20 + spacing;
@@ -81,7 +81,7 @@ m_te      (te)
 	new UI::Textarea
 		(this,
 		 5, pos.y, 120, STATEBOX_HEIGHT,
-		 _("Visible at Begin: "), Align_CenterLeft);
+		 _("Visible at Begin: "), UI::Align_CenterLeft);
 	m_visibleAtBegin = new UI::Checkbox(this, pos);
 	m_visibleAtBegin->set_state(obj.get_is_visible());
 	pos.x  = 5;
@@ -90,14 +90,15 @@ m_te      (te)
 	new UI::Textarea
 		(this,
 		 pos.x, pos.y, 120, STATEBOX_HEIGHT,
-		 _("Objective text: "), Align_CenterLeft);
+		 _("Objective text: "), UI::Align_CenterLeft);
 	pos.y += 20 + spacing;
 
 	int32_t const editbox_height = 140;
-	m_descr = new UI::Multiline_Editbox
-		(this,
-		 pos.x, pos.y, get_inner_w() - 2 * spacing, editbox_height,
-		 obj.descr().c_str());
+	m_descr =
+		new UI::Multiline_Editbox
+			(this,
+			 pos.x, pos.y, get_inner_w() - 2 * spacing, editbox_height,
+			 obj.descr().c_str());
 	pos.x  = get_inner_w() / 2 - 80 - spacing;
 	pos.y += editbox_height + spacing + spacing;
 
@@ -212,7 +213,7 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 		new UI::Textarea
 			(this,
 			 posx, get_inner_h() - 20, 0, 0,
-			 std::string(), Align_CenterLeft);
+			 std::string(), UI::Align_CenterLeft);
 
 	Manager<Objective> & mom = m_parent->egbase().map().mom();
 	Manager<Objective>::Index const nr_objectives = mom.size();

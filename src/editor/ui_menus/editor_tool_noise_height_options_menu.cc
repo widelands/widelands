@@ -36,87 +36,89 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 	(Editor_Interactive         & parent,
 	 Editor_Noise_Height_Tool   & noise_tool,
 	 UI::UniqueWindow::Registry & registry)
-:
-Editor_Tool_Options_Menu
-	(parent, registry, 200, 115, _("Noise Height Options")),
-m_noise_tool(noise_tool),
-m_lower_label
-	(this,
-	 hmargin(),
-	 vmargin(), (get_inner_w() - 2 * hmargin() - spacing()) / 2, height,
-	 Align_BottomCenter),
-m_upper_label
-	(this,
-	 m_lower_label.get_x() + m_lower_label.get_w() + spacing(),
-	 m_lower_label.get_y(),
-	 m_lower_label.get_w(), height,
-	 Align_BottomCenter),
-m_lower_increase
-	(this,
-	 hmargin() + (get_inner_w() - 2 * hmargin() - hspacing() - 4 * width) / 4,
-	 m_lower_label.get_y() + m_lower_label.get_h() + vspacing(),
-	 width, height,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase, *this,
-	 std::string(),
-	 noise_tool.get_interval().min < MAX_FIELD_HEIGHT),
-m_lower_decrease
-	(this,
-	 m_lower_increase.get_x() + m_lower_increase.get_w(),
-	 m_lower_increase.get_y(),
-	 width, height,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease, *this,
-	 std::string(),
-	 0 < noise_tool.get_interval().min),
-m_upper_increase
-	(this,
-	 m_lower_decrease.get_x() + width
-	 +
-	 (get_inner_w() - 2 * hmargin() - hspacing() - 4 * width) / 2 + hspacing(),
-	 m_lower_decrease.get_y(),
-	 width, height,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_upper_increase, *this,
-	 std::string(),
-	 noise_tool.get_interval().max < MAX_FIELD_HEIGHT),
-m_upper_decrease
-	(this,
-	 m_upper_increase.get_x() + m_upper_increase.get_w(),
-	 m_upper_increase.get_y(),
-	 width, height,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease, *this,
-	 std::string(),
-	 0 < noise_tool.get_interval().max),
-m_set_label
-	(this,
-	 hspacing(),
-	 m_upper_decrease.get_y() + m_upper_decrease.get_h() + vspacing(),
-	 get_inner_w() - 2 * hspacing(), height,
-	 Align_BottomCenter),
-m_setto_increase
-	(this,
-	 get_inner_w() / 2 - width,
-	 m_set_label.get_y() + m_set_label.get_h() + vspacing(),
-	 width, height,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_setto_increase, *this,
-	 std::string(),
-	 noise_tool.set_tool().get_interval().max < MAX_FIELD_HEIGHT),
-m_setto_decrease
-	(this,
-	 get_inner_w() / 2, m_setto_increase.get_y(), width, height,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
-	 &Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease, *this,
-	 std::string(),
-	 0 < noise_tool.set_tool().get_interval().min)
+	:
+	Editor_Tool_Options_Menu
+		(parent, registry, 200, 115, _("Noise Height Options")),
+	m_noise_tool(noise_tool),
+	m_lower_label
+		(this,
+		 hmargin(),
+		 vmargin(), (get_inner_w() - 2 * hmargin() - spacing()) / 2, height,
+		 UI::Align_BottomCenter),
+	m_upper_label
+		(this,
+		 m_lower_label.get_x() + m_lower_label.get_w() + spacing(),
+		 m_lower_label.get_y(),
+		 m_lower_label.get_w(), height,
+		 UI::Align_BottomCenter),
+	m_lower_increase
+		(this,
+		 hmargin() +
+		 (get_inner_w() - 2 * hmargin() - hspacing() - 4 * width) / 4,
+		 m_lower_label.get_y() + m_lower_label.get_h() + vspacing(),
+		 width, height,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+		 &Editor_Tool_Noise_Height_Options_Menu::clicked_lower_increase, *this,
+		 std::string(),
+		 noise_tool.get_interval().min < MAX_FIELD_HEIGHT),
+	m_lower_decrease
+		(this,
+		 m_lower_increase.get_x() + m_lower_increase.get_w(),
+		 m_lower_increase.get_y(),
+		 width, height,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+		 &Editor_Tool_Noise_Height_Options_Menu::clicked_lower_decrease, *this,
+		 std::string(),
+		 0 < noise_tool.get_interval().min),
+	m_upper_increase
+		(this,
+		 m_lower_decrease.get_x() + width
+		 +
+		 (get_inner_w() - 2 * hmargin() - hspacing() - 4 * width) / 2 +
+		 hspacing(),
+		 m_lower_decrease.get_y(),
+		 width, height,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+		 &Editor_Tool_Noise_Height_Options_Menu::clicked_upper_increase, *this,
+		 std::string(),
+		 noise_tool.get_interval().max < MAX_FIELD_HEIGHT),
+	m_upper_decrease
+		(this,
+		 m_upper_increase.get_x() + m_upper_increase.get_w(),
+		 m_upper_increase.get_y(),
+		 width, height,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 &Editor_Tool_Noise_Height_Options_Menu::clicked_upper_decrease, *this,
+		 std::string(),
+		 0 < noise_tool.get_interval().max),
+	m_set_label
+		(this,
+		 hspacing(),
+		 m_upper_decrease.get_y() + m_upper_decrease.get_h() + vspacing(),
+		 get_inner_w() - 2 * hspacing(), height,
+		 UI::Align_BottomCenter),
+	m_setto_increase
+		(this,
+		 get_inner_w() / 2 - width,
+		 m_set_label.get_y() + m_set_label.get_h() + vspacing(),
+		 width, height,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 &Editor_Tool_Noise_Height_Options_Menu::clicked_setto_increase, *this,
+		 std::string(),
+		 noise_tool.set_tool().get_interval().max < MAX_FIELD_HEIGHT),
+	m_setto_decrease
+		(this,
+		 get_inner_w() / 2, m_setto_increase.get_y(), width, height,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 &Editor_Tool_Noise_Height_Options_Menu::clicked_setto_decrease, *this,
+		 std::string(),
+		 0 < noise_tool.set_tool().get_interval().min)
 {
 	update();
 }

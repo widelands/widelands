@@ -26,7 +26,6 @@
 #include "findimmovable.h"
 #include "font_handler.h"
 #include "game.h"
-#include "graphic/graphic.h"
 #include "i18n.h"
 #include "instances.h"
 #include "wui/interactive_base.h"
@@ -495,7 +494,7 @@ void Editor_Game_Base::set_map(Map * const new_map, bool register_callback) {
 	m_map = new_map;
 
 	if (register_callback)
-		g_fh->register_variable_callback(g_VariableCallback, m_map);
+		UI::g_fh->register_variable_callback(g_VariableCallback, m_map);
 }
 
 
