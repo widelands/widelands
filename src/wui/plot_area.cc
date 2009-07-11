@@ -133,16 +133,14 @@ void WUIPlot_Area::draw(RenderTarget & dst) {
 			(buffer, sizeof(buffer),
 			 "%u", max_x[m_time] / how_many_ticks[m_time] * i);
 
-		uint32_t w, h;
-		g_fh->get_size(UI_FONT_SMALL, buffer, w, h, 0);
 		g_fh->draw_string
 			(dst,
 			 UI_FONT_SMALL,
 			 RGBColor(255, 0, 0), RGBColor(255, 255, 255),
 			 Point
-			 	(static_cast<int32_t>(posx - w / 2),
+			 	(static_cast<int32_t>(posx),
 			 	 get_inner_h() - space_at_bottom + 4),
-			 buffer, Align_CenterLeft, -1,
+			 buffer, Align_Center, -1,
 			 Widget_Cache_None, g_gr->get_no_picture(), -1, false);
 		posx -= sub;
 	}
