@@ -21,9 +21,10 @@
 
 #include <cstdarg>
 
-/**
- * split a string by whitespace
- */
+/// Split a string by separators.
+/// \note This ignores empty elements, so do not use this for example to split
+/// a string with newline characters into lines, because it would ignore empty
+/// lines.
 std::vector<std::string> split_string
 	(std::string const & s, char const * const separators)
 {
