@@ -243,7 +243,7 @@ void GameTips::show_tip(int32_t index) {
 	g_fh->draw_string
 		(rt, UI_FONT_NAME, m_font_size,
 		 m_color, m_bgcolor, //RGBColor(107, 87, 55),
-		 center, m_tips[index].text.c_str(),
+		 center, m_tips[index].text,
 		 Align_Center, text_area.w);
 	g_gr->update_rectangle(tips_area);
 }

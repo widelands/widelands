@@ -103,7 +103,7 @@ private:
 				(dst,
 				 UI_FONT_NAME, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG, UI_FONT_CLR_BG,
 				 Point(26, 12),
-				 descr.descname().c_str(),
+				 descr.descname(),
 				 Align_CenterLeft,
 				 -1);
 			Economy::Target_Quantity const & tq =

@@ -138,7 +138,7 @@ void Multiline_Textarea::draw(RenderTarget & dst)
 				 m_fontsize,
 				 m_fcolor, RGBColor(107, 87, 55),
 				 Point(get_halign(), 0 - m_textpos),
-				 m_text.c_str(),
+				 m_text,
 				 m_align,
 				 get_eff_w(),
 				 m_cache_mode, m_cache_id);

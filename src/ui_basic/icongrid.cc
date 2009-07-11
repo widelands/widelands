@@ -196,7 +196,7 @@ void Icon_Grid::draw(RenderTarget & dst)
 			(dst,
 			 UI_FONT_SMALL, UI_FONT_SMALL_CLR,
 			 Point(1, get_h() - m_font_height + 10),
-			 m_items[m_highlight].descr.c_str());
+			 m_items[m_highlight].descr);
 	}
 }
 

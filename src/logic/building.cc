@@ -714,7 +714,7 @@ void Building::draw_help
 			 UI_FONT_SMALL,
 			 UI_FONT_SMALL_CLR,
 			 pos - Point(0, 45),
-			 info_string(igbase.building_census_format()).c_str(),
+			 info_string(igbase.building_census_format()),
 			 Align_Center);
 	}
 
@@ -725,7 +725,7 @@ void Building::draw_help
 			 UI_FONT_SMALL,
 			 UI_FONT_SMALL_CLR,
 			 pos - Point(0, 35),
-			 info_string(igbase.building_statistics_format()).c_str(),
+			 info_string(igbase.building_statistics_format()),
 			 Align_Center);
 	}
 }

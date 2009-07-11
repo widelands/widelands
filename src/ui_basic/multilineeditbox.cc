@@ -258,7 +258,7 @@ void Multiline_Editbox::draw(RenderTarget & dst)
 			 m_fcolor,
 			 RGBColor(107, 87, 55),
 			 Point(get_halign(), 0 - m_textpos),
-			 get_text().c_str(),
+			 get_text(),
 			 m_align,
 			 get_eff_w(),
 			 m_cache_mode,

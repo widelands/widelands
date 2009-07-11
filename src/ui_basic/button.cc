@@ -176,7 +176,7 @@ void Button::draw(RenderTarget & dst)
 			 m_fontsize,
 			 m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED, UI_FONT_CLR_BG,
 			 Point(get_w() >> 1, get_h() >> 1),
-			 m_title.c_str(),
+			 m_title,
 			 Align_Center,
 			 -1,
 			 Widget_Cache_None,

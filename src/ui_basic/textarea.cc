@@ -111,7 +111,7 @@ void Textarea::draw(RenderTarget & dst)
 			 	 get_w() / 2 : m_align & Align_Right  ? get_w() : 0,
 			 	 m_align & Align_VCenter ?
 			 	 get_h() / 2 : m_align & Align_Bottom ? get_h() : 0),
-			 m_text.c_str(),
+			 m_text,
 			 m_align,
 			 m_multiline ? get_w() : -1);
 }
