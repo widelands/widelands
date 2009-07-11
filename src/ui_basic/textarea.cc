@@ -159,7 +159,7 @@ void Textarea::expand()
 	g_fh->get_size
 		(m_fontname,
 		 m_fontsize,
-		 m_text.c_str(),
+		 m_text,
 		 w, h,
 		 m_multiline ? get_w() : -1);
 

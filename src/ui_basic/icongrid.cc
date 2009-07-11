@@ -189,7 +189,7 @@ void Icon_Grid::draw(RenderTarget & dst)
 
 	if (highlight) {
 		uint32_t w, h;
-		g_fh->get_size(UI_FONT_SMALL, m_items[m_highlight].descr.c_str(), w, h);
+		g_fh->get_size(UI_FONT_SMALL, m_items[m_highlight].descr, w, h);
 		if (w > get_inner_w())
 			set_inner_size(w, get_inner_h());
 		g_fh->draw_string
