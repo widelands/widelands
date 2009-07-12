@@ -20,14 +20,11 @@
 #ifndef RENDERTARGET_H
 #define RENDERTARGET_H
 
+#include "picture.h"
 #include "rect.h"
 #include "rgbcolor.h"
 
-#include "widelands.h"
 #include <vector>
-#include "picture.h"
-//#include <boost/shared_ptr.hpp>
-//#include <boost/ptr_container/ptr_map.hpp>
 
 //#ifndef PICTURE_ID
 //#define PICTURE_ID

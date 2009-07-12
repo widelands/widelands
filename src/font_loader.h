@@ -21,7 +21,6 @@
 #define FONT_LOADER_H
 
 #include "io/fileread.h"
-#include "rgbcolor.h"
 
 #include <SDL_ttf.h>
 

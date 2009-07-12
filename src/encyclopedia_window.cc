@@ -55,15 +55,19 @@
 
 using namespace Widelands;
 
+inline Interactive_Player & EncyclopediaWindow::iaplayer() const {
+	return dynamic_cast<Interactive_Player &>(*get_parent());
+}
+
+
 EncyclopediaWindow::EncyclopediaWindow
-	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
+	(Interactive_Player & parent, UI::UniqueWindow::Registry & registry)
 :
 	UI::UniqueWindow
-		(&plr,
+		(&parent,
 		 &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT,
 		 _("Tribe ware encyclopedia")),
-	interactivePlayer(plr),
 	wares            (this, 5, 5, WINDOW_WIDTH - 10, WINDOW_HEIGHT - 250),
 	prodSites        (this, 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH / 3 - 5, 140),
 	condTable
@@ -91,7 +95,7 @@ EncyclopediaWindow::EncyclopediaWindow
 
 
 void EncyclopediaWindow::fillWares() {
-	Tribe_Descr const & tribe = interactivePlayer.get_player()->tribe();
+	Tribe_Descr const & tribe = iaplayer().player().tribe();
 	Ware_Index const nr_wares = tribe.get_nrwares();
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
 		Item_Ware_Descr const & ware = *tribe.get_ware_descr(i);
@@ -100,7 +104,7 @@ void EncyclopediaWindow::fillWares() {
 }
 
 void EncyclopediaWindow::wareSelected(uint32_t) {
-	Tribe_Descr const & tribe = interactivePlayer.get_player()->tribe();
+	Tribe_Descr const & tribe = iaplayer().player().tribe();
 	selectedWare = tribe.get_ware_descr(wares.get_selected());
 
 	descrTxt.set_text(selectedWare->helptext());
@@ -133,7 +137,7 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	assert(prodSites.has_selection());
 	condTable.clear();
-	Tribe_Descr const & tribe = interactivePlayer.get_player()->tribe();
+	Tribe_Descr const & tribe = iaplayer().player().tribe();
 
 	ProductionSite_Descr::Programs const & programs =
 		dynamic_cast<ProductionSite_Descr const &>

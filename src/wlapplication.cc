@@ -33,6 +33,7 @@
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/loadreplay.h"
 #include "ui_fsmenu/main.h"
+#include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/multiplayer.h"
 #include "ui_fsmenu/netsetup_ggz.h"
 #include "ui_fsmenu/netsetup_lan.h"

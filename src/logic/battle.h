@@ -19,11 +19,10 @@
 #ifndef BATTLE_H
 #define BATTLE_H
 
-
-#include "immovable.h"
-#include "soldier.h"
+#include "instances.h"
 
 namespace Widelands {
+struct Soldier;
 
 /**
  * Manages the battle between two opposing soldiers.

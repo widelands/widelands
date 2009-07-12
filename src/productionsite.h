@@ -24,7 +24,6 @@
 #include "production_program.h"
 #include "program_result.h"
 #include "ware_types.h"
-#include "wexception.h"
 
 #include <map>
 #include <set>

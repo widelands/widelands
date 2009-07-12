@@ -22,7 +22,6 @@
 
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "wui/interactive_player.h"
 
 #include "ui_basic/listselect.h"
 #include "ui_basic/window.h"
@@ -35,10 +34,12 @@ struct Item_Ware_Descr;
 struct Tribe_Descr;
 };
 
+struct Interactive_Player;
+
 struct EncyclopediaWindow : public UI::UniqueWindow {
 	EncyclopediaWindow(Interactive_Player &, UI::UniqueWindow::Registry &);
 private:
-	Interactive_Player               & interactivePlayer;
+	Interactive_Player & iaplayer() const;
 	UI::Listselect<Widelands::Ware_Index> wares;
 	UI::Listselect<Widelands::Building_Index> prodSites;
 	UI::Table     <intptr_t> condTable;

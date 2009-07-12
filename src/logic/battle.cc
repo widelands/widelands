@@ -21,6 +21,7 @@
 
 #include "game.h"
 #include "player.h"
+#include "soldier.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"

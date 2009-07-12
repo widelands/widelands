@@ -20,6 +20,8 @@
 #ifndef TRIBEBASICINFO_H
 #define TRIBEBASICINFO_H
 
+#include <vector>
+
 /// Basic information about the tribe that is determined only from the conf
 /// file and needed before the actual game.
 struct TribeBasicInfo {

@@ -20,7 +20,7 @@
 #ifndef GAMESETTINGS_H
 #define GAMESETTINGS_H
 
-#include "tribe.h"
+#include "TribeBasicInfo.h"
 
 #include <string>
 #include <vector>
