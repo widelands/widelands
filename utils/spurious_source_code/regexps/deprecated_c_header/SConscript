@@ -1,0 +1,8 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/deprecated_c_header/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/deprecated_c_header/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/deprecated_c_header/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/deprecated_c_header/regexps')
+

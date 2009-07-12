@@ -1,0 +1,10 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/using_macro_TRUE_FALSE/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/using_macro_TRUE_FALSE/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/using_macro_TRUE_FALSE/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/using_macro_TRUE_FALSE/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/using_macro_TRUE_FALSE/redundant_with_krazy2')
+distadd(env, 'utils/spurious_source_code/regexps/using_macro_TRUE_FALSE/regexps')
+

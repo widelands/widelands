@@ -1,0 +1,9 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/old-style_cast/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/old-style_cast/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/old-style_cast/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/old-style_cast/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/old-style_cast/regexps')
+

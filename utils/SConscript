@@ -2,11 +2,12 @@ Import('env')
 from Distribute import *
 
 distadd(env, 'utils/SConscript')
-distadd(env, 'utils/buildcat.py')
-distadd(env, 'utils/buildlocale.py')
-distadd(env, 'utils/confgettext.py')
-distadd(env, 'utils/count-longlines.py')
-distadd(env, 'utils/detect_misused_tabs.sh')
-distadd(env, 'utils/replace.py')
-distadd(env, 'utils/tiki2widelands.py')
+distadd(env, 'utils/create_cppcheck_report')
+distadd(env, 'utils/*.py')
+distadd(env, 'utils/*.sh')
+distadd(env, 'utils/')
+
+Export('env')
+SConscript('spurious_source_code/SConscript')
+SConscript('syncstream/SConscript')
 

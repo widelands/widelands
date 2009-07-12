@@ -1,0 +1,9 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/const_qualifier_for_parameter_passed_by_value/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/const_qualifier_for_parameter_passed_by_value/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/const_qualifier_for_parameter_passed_by_value/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/const_qualifier_for_parameter_passed_by_value/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/const_qualifier_for_parameter_passed_by_value/regexps')
+

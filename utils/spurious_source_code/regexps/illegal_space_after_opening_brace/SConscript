@@ -1,0 +1,9 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/illegal_space_after_opening_brace/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/illegal_space_after_opening_brace/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/illegal_space_after_opening_brace/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/illegal_space_after_opening_brace/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/illegal_space_after_opening_brace/regexps')
+

@@ -1,0 +1,10 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/illegal_space_before/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/illegal_space_before/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/illegal_space_before/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/illegal_space_before/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/illegal_space_before/redundant_with_whitespace_checker')
+distadd(env, 'utils/spurious_source_code/regexps/illegal_space_before/regexps')
+

@@ -6,3 +6,5 @@ distadd(env, 'src/network/SConscript.dist')
 distadd(env, 'src/network/*.h')
 distadd(env, 'src/network/*.cc')
 
+SConscript('game_server/SConscript.dist')
+

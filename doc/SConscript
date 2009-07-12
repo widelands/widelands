@@ -1,9 +1,13 @@
 Import('*')
 from Distribute import distadd
 
-#instadd(env, 'doc/filename', 'doc')
-
 distadd(env, 'doc/Doxyfile')
 distadd(env, 'doc/README.compiling')
 distadd(env, 'doc/README.development')
 distadd(env, 'doc/SConscript')
+distadd(env, 'doc/productionsite_program_reference.xhtml')
+distadd(env, 'doc/sorttable.js')
+
+Export('env')
+SConscript('geometry/SConscript')
+

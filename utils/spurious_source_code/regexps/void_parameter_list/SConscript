@@ -1,0 +1,9 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/void_parameter_list/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/void_parameter_list/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/void_parameter_list/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/void_parameter_list/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/void_parameter_list/regexps')
+

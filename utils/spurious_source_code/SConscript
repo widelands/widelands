@@ -1,0 +1,12 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/Makefile')
+distadd(env, 'utils/spurious_source_code/SConscript')
+distadd(env, 'utils/spurious_source_code/detect')
+distadd(env, 'utils/spurious_source_code/whitespace_checker.adb')
+
+Export('env')
+SConscript('regexps/SConscript')
+SConscript('whitespace_checker.test/SConscript')
+

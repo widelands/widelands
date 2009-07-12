@@ -1,0 +1,9 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/function_returning_constant_value/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/function_returning_constant_value/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/function_returning_constant_value/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/function_returning_constant_value/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/function_returning_constant_value/regexps')
+

@@ -1,0 +1,10 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_comma/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_comma/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_comma/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_comma/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_comma/redundant_with_whitespace_checker')
+distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_comma/regexps')
+

@@ -1,0 +1,9 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/testing_not_size/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/testing_not_size/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/testing_not_size/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/testing_not_size/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/testing_not_size/regexps')
+

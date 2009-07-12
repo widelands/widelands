@@ -1,0 +1,6 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/syncstream/SConscript')
+distadd(env, 'utils/syncstream/*.sh')
+

@@ -1,0 +1,9 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/const_without_effect_in_cast/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/const_without_effect_in_cast/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/const_without_effect_in_cast/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/const_without_effect_in_cast/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/const_without_effect_in_cast/regexps')
+

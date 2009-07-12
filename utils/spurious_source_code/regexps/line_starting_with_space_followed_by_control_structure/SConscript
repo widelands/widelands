@@ -1,0 +1,9 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/line_starting_with_space_followed_by_control_structure/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/line_starting_with_space_followed_by_control_structure/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/line_starting_with_space_followed_by_control_structure/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/line_starting_with_space_followed_by_control_structure/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/line_starting_with_space_followed_by_control_structure/regexps')
+

@@ -1,0 +1,16 @@
+Import('*')
+from Distribute import distadd
+
+distadd(env, 'doc/geometry/Makefile')
+distadd(env, 'doc/geometry/SConscript')
+distadd(env, 'doc/geometry/*.gnuplot')
+distadd(env, 'doc/geometry/grid-with-vertical-lines.png')
+distadd(env, 'doc/geometry/height-affecting-y-coordinate.png')
+distadd(env, 'doc/geometry/index.xhtml')
+distadd(env, 'doc/geometry/map.png')
+distadd(env, 'doc/geometry/point-in-one-of-4-triangles.png')
+distadd(env, 'doc/geometry/triangleregion-d.png')
+distadd(env, 'doc/geometry/triangleregion-r.png')
+distadd(env, 'doc/geometry/vertex-edges.png')
+distadd(env, 'doc/geometry/vertex-triangles.png')
+

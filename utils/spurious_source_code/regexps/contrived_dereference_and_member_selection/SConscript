@@ -1,0 +1,9 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/contrived_dereference_and_member_selection/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/contrived_dereference_and_member_selection/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/contrived_dereference_and_member_selection/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/contrived_dereference_and_member_selection/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/contrived_dereference_and_member_selection/regexps')
+
