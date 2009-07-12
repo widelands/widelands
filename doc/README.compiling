@@ -48,6 +48,9 @@ If you are a developer, you might (optionally!) make use of the following softwa
      Used to make PNG images more compact. You most certainly don't need this;
      compactification is a once-a-year, one-person-only job. If you don't know
      already that you will be doing it, forget about it.
+   - Krazy
+     A sourcecode checker from the KDE project, subversion repository available at
+     svn://anonsvn.kde.org/home/kde/trunk/quality/krazy2
 
 
 
