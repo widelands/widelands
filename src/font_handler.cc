@@ -971,7 +971,7 @@ void Font_Handler::get_size
 int32_t Font_Handler::calc_linewidth(TTF_Font & font, std::string const & text)
 {
 	int32_t w, h;
-	TTF_SizeText(&font, text.c_str(), &w, &h);
+	TTF_SizeUTF8(&font, text.c_str(), &w, &h);
 	return w;
 }
 
