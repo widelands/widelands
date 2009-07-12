@@ -454,7 +454,7 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 		//                       features are implemented)
 		room = ggzcore_server_get_cur_room(ggzserver);
 #define ADD_EVENT_HOOK(event) \
-   ggzcore_room_add_event_hook(room, event, NetGGZ::callback_room);
+		ggzcore_room_add_event_hook(room, event, NetGGZ::callback_room);
 		ADD_EVENT_HOOK(GGZ_TABLE_LIST);
 		ADD_EVENT_HOOK(GGZ_TABLE_UPDATE);
 		ADD_EVENT_HOOK(GGZ_TABLE_LAUNCHED);
