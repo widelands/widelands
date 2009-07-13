@@ -226,6 +226,10 @@ void NetClient::think()
 void NetClient::sendPlayerCommand(Widelands::PlayerCommand & pc)
 {
 	assert(d->game);
+	if (pc.sender() != d->playernum + 1) { // TODO check for kooperative players
+		delete &pc;
+		return;
+	}
 
 	log("[Client]: send playercommand at time %i\n", d->game->get_gametime());
 
