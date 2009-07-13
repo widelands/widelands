@@ -85,6 +85,7 @@ private:
 	UI::Callback_IDButton<Fullscreen_Menu_LaunchGame, uint8_t> *
 		m_pos[MAX_PLAYERS];
 	UI::Textarea              m_title, m_mapname, m_lobby;
+	UI::Textarea              m_name, m_type, m_tribe, m_init, m_ready;
 	UI::Multiline_Textarea    m_notes;
 	UI::Listselect<int32_t> * m_lobby_list;
 	GameSettingsProvider    * m_settings;

@@ -91,6 +91,25 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	m_lobby
 		(this,
 		 m_xres * 7 / 10, m_yres * 11 / 20),
+	m_name
+		(this,
+		 m_xres * 1 / 25, m_yres * 53 / 200,
+		 _("Player's name"), UI::Align_Left),
+	m_type
+		(this,
+		 m_xres * 19 / 100, m_yres * 53 / 200,
+		 _("Player's type"), UI::Align_Left),
+	m_tribe
+		(this,
+		 m_xres * 8 / 25, m_yres * 53 / 200,
+		 _("Player's tribe"), UI::Align_Left),
+	m_init
+		(this,
+		 m_xres * 9 / 20, m_yres * 53 / 200,
+		 _("Start type"), UI::Align_Left),
+	m_ready
+		(this,
+		 m_xres * 16 / 25, m_yres * 53 / 200),
 	m_notes
 		(this,
 		 m_xres * 2 / 25, m_yres * 9 / 50, m_xres * 21 / 25, m_yres / 10),
@@ -106,6 +125,10 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 
 	m_title  .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_mapname.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_name   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
+	m_type   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
+	m_tribe  .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
+	m_init   .set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
 	m_notes  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	uint32_t y = m_yres / 4;
@@ -135,6 +158,8 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 		m_lobby_list->set_font(m_fn, m_fs);
 		m_lobby.set_text(_("Lobby:"));
 		m_lobby.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+		m_ready.set_text(_("Ready"));
+		m_ready.set_font(m_fn, m_fs * 4 / 5, UI_FONT_CLR_FG);
 	}
 }
 
