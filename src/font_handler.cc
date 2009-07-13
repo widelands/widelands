@@ -258,8 +258,7 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 	uint32_t cur_text_pos = 0;
 	uint32_t i = 0;
 
-	std::string const lines =
-		word_wrap_text(font, text, wrap - 2 * LINE_MARGIN);
+	std::string const lines = word_wrap_text(font, text, wrap);
 	std::string::size_type const lines_size = lines.size();
 	for
 		(struct {std::string::size_type pos; bool done;} j = {0, false};
@@ -840,8 +839,10 @@ void Font_Handler::delete_widget_cache(PictureID const widget_cache_id) {
 std::string Font_Handler::word_wrap_text
 	(TTF_Font          &       font,
 	 std::string const &       unwrapped_text,
-	 int32_t             const max_width)
+	 int32_t                   max_width)
 {
+	assert(2 * LINE_MARGIN < max_width);
+	max_width -= 2 * LINE_MARGIN;
 	//std::cerr << "Wrapping word " << unwrapped_text << "\n";
 
 	std::string wrapped_text; // the final result
