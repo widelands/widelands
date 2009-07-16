@@ -35,9 +35,12 @@ GameMessageMenu::GameMessageMenu
 	:
 	UI::UniqueWindow
 		(&plr, &registry, 340, 5 + 25 + 5 + 110 + 5 + 220 + 5, _("Message Menu")),
-	list(this, 5,   30, get_inner_w() - 10, 110, Align_Left, false),
+	list(this, 5,   30, get_inner_w() - 10, 110, UI::Align_Left, false),
 	messagetext
-		(this, 5, 5 + 25 + 5 + 110, get_inner_w() - 10, 220, "", Align_Left, 1),
+		(this,
+		 5, 5 + 25 + 5 + 110,
+		 get_inner_w() - 10, 220,
+		 "", UI::Align_Left, 1),
 	del_message
 		(this,
 		 5, 5,
@@ -116,7 +119,7 @@ void GameMessageMenu::clicked_del_message() {
 		} else {
 			messagetext.set_text(std::string());
 		}
-	} 
+	}
 }
 
 void GameMessageMenu::clicked_del_all() {
