@@ -24,7 +24,7 @@
 
 Picture::~Picture() {
 	delete surface;
-	delete fname;
+	free(fname);
 	delete rendertarget;
 }
 
