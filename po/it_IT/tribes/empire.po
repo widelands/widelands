@@ -1,0 +1,659 @@
+# Widelands po/it_IT/tribes/empire.po
+# Copyright (C) 2005-2009 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svn4230\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2009-06-07 09:58+0000\n"
+"PO-Revision-Date: 2009-07-01 18:23+0100\n"
+"Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
+"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../../tribes/empire/conf:18
+#, fuzzy
+msgid "The Widelands Development Team"
+msgstr "Imposta l'etichetta della squadra"
+
+#: ../../../tribes/empire/conf:19
+#, fuzzy
+msgid "Empire"
+msgstr "Impero - I mesi dell'esilio"
+
+#: ../../../tribes/empire/conf:20
+msgid "This is the culture of the roman Empire."
+msgstr ""
+
+#: ../../../tribes/empire/conf:36
+msgid "Ashes"
+msgstr ""
+
+#: ../../../tribes/empire/conf:37
+#, fuzzy
+msgid "Field medium"
+msgstr "Testo medio"
+
+#: ../../../tribes/empire/conf:38
+#, fuzzy
+msgid "Field small"
+msgstr "Icone _piccole"
+
+#: ../../../tribes/empire/conf:39
+#, fuzzy
+msgid "Field tiny"
+msgstr "Testo minuscolo"
+
+#: ../../../tribes/empire/conf:40
+#, fuzzy
+msgid "Field ripe"
+msgstr "Tipo Campo"
+
+#: ../../../tribes/empire/conf:41
+#, fuzzy
+msgid "Field harvested"
+msgstr "Tipo Campo"
+
+#: ../../../tribes/empire/conf:42
+#, fuzzy
+msgid "Destroyed building"
+msgstr "Obiettivo Distrutto"
+
+#: ../../../tribes/empire/conf:43
+msgid "Resource indicator coal little"
+msgstr ""
+
+#: ../../../tribes/empire/conf:44
+msgid "Resource indicator coal much"
+msgstr ""
+
+#: ../../../tribes/empire/conf:45
+msgid "Resource indicator gold litte"
+msgstr ""
+
+#: ../../../tribes/empire/conf:46
+msgid "Resource indicator gold much"
+msgstr ""
+
+#: ../../../tribes/empire/conf:47
+msgid "Resource indicator granit little"
+msgstr ""
+
+#: ../../../tribes/empire/conf:48
+msgid "Resource indicator granit much"
+msgstr ""
+
+#: ../../../tribes/empire/conf:49
+msgid "Resource indicator iron little"
+msgstr ""
+
+#: ../../../tribes/empire/conf:50
+msgid "Resource indicator iron much"
+msgstr ""
+
+#: ../../../tribes/empire/conf:51
+#, fuzzy
+msgid "Resource indicator no resource"
+msgstr "«Lord» – Oh, no!"
+
+#: ../../../tribes/empire/conf:52
+#, fuzzy
+msgid "Resource indicator water"
+msgstr "Disabilita indicatore email"
+
+#: ../../../tribes/empire/conf:53
+#, fuzzy
+msgid "Wine medium"
+msgstr "Testo medio"
+
+#: ../../../tribes/empire/conf:54
+#, fuzzy
+msgid "Wine small"
+msgstr "Icone _piccole"
+
+#: ../../../tribes/empire/conf:55
+#, fuzzy
+msgid "Wine tiny"
+msgstr "Testo minuscolo"
+
+#: ../../../tribes/empire/conf:56
+msgid "Wine ripe"
+msgstr ""
+
+#: ../../../tribes/empire/conf:59
+#, fuzzy
+msgid "Advanced Lance"
+msgstr "Avanzate"
+
+#: ../../../tribes/empire/conf:60
+#, fuzzy
+msgid "Armour"
+msgstr "Armatura Cinetica"
+
+#: ../../../tribes/empire/conf:61
+#, fuzzy
+msgid "Axe"
+msgstr "ascia"
+
+#: ../../../tribes/empire/conf:62
+msgid "Peel"
+msgstr ""
+
+#: ../../../tribes/empire/conf:63
+msgid "Basket"
+msgstr ""
+
+#: ../../../tribes/empire/conf:64
+msgid "Beer"
+msgstr ""
+
+#: ../../../tribes/empire/conf:65
+msgid "Bread"
+msgstr ""
+
+#: ../../../tribes/empire/conf:66
+#, fuzzy
+msgid "Chain-Armour"
+msgstr "Armatura Cinetica"
+
+#: ../../../tribes/empire/conf:67
+#, fuzzy
+msgid "Cloth"
+msgstr "Stoffa"
+
+#: ../../../tribes/empire/conf:68
+msgid "Coal"
+msgstr ""
+
+#: ../../../tribes/empire/conf:69
+#, fuzzy
+msgid "Fire Tongs"
+msgstr "Ahh! Fuoco!"
+
+#: ../../../tribes/empire/conf:70
+#, fuzzy
+msgid "Fish"
+msgstr "Piovra gigante"
+
+#: ../../../tribes/empire/conf:71
+#, fuzzy
+msgid "Fishing Rod"
+msgstr "Bacchetta della Giustizia"
+
+#: ../../../tribes/empire/conf:72
+msgid "Flour"
+msgstr ""
+
+#: ../../../tribes/empire/conf:73
+#, fuzzy
+msgid "Gold"
+msgstr "Oro"
+
+#: ../../../tribes/empire/conf:74
+msgid "Goldstone"
+msgstr ""
+
+#: ../../../tribes/empire/conf:75
+msgid "Grape"
+msgstr ""
+
+#: ../../../tribes/empire/conf:76
+#, fuzzy
+msgid "Hammer"
+msgstr "martello"
+
+#: ../../../tribes/empire/conf:77
+#, fuzzy
+msgid "Heavy Lance"
+msgstr "Fanteria pesante"
+
+#: ../../../tribes/empire/conf:78
+msgid "Helmet"
+msgstr ""
+
+#: ../../../tribes/empire/conf:79
+#, fuzzy
+msgid "Hunting Spear"
+msgstr "Orco a caccia"
+
+#: ../../../tribes/empire/conf:80
+#, fuzzy
+msgid "Iron"
+msgstr "Maglio di ferro"
+
+#: ../../../tribes/empire/conf:81
+#, fuzzy
+msgid "Iron Ore"
+msgstr "Maglio di ferro"
+
+#: ../../../tribes/empire/conf:82
+#, fuzzy
+msgid "Kitchen Tools"
+msgstr "Strumenti Booleane"
+
+#: ../../../tribes/empire/conf:83
+#, fuzzy
+msgid "Lance"
+msgstr "lancia"
+
+#: ../../../tribes/empire/conf:84
+#, fuzzy
+msgid "Marble Column"
+msgstr "Ordinamento colonne"
+
+#: ../../../tribes/empire/conf:85
+#, fuzzy
+msgid "Marble"
+msgstr "Marmo"
+
+#: ../../../tribes/empire/conf:86
+msgid "Meal"
+msgstr ""
+
+#: ../../../tribes/empire/conf:87
+#, fuzzy
+msgid "Meat"
+msgstr "Carne fresca!"
+
+#: ../../../tribes/empire/conf:88
+#, fuzzy
+msgid "Pick"
+msgstr "piccone"
+
+#: ../../../tribes/empire/conf:89
+#, fuzzy
+msgid "Plate-Armour"
+msgstr "Armatura Cinetica"
+
+#: ../../../tribes/empire/conf:90
+msgid "Ration"
+msgstr ""
+
+#: ../../../tribes/empire/conf:91
+msgid "Saw"
+msgstr ""
+
+#: ../../../tribes/empire/conf:92
+#, fuzzy
+msgid "Scythe"
+msgstr "falce"
+
+#: ../../../tribes/empire/conf:93
+msgid "Shovel"
+msgstr ""
+
+#: ../../../tribes/empire/conf:94
+#, fuzzy
+msgid "Stones"
+msgstr "pietrifica"
+
+#: ../../../tribes/empire/conf:95
+msgid "Trunk"
+msgstr ""
+
+#: ../../../tribes/empire/conf:96
+#, fuzzy
+msgid "War-Lance"
+msgstr "Nebbia di guerra"
+
+#: ../../../tribes/empire/conf:97
+#, fuzzy
+msgid "Water"
+msgstr "acqua"
+
+#: ../../../tribes/empire/conf:98
+msgid "Wheat"
+msgstr ""
+
+#: ../../../tribes/empire/conf:99
+msgid "Wine"
+msgstr ""
+
+#: ../../../tribes/empire/conf:100
+#, fuzzy
+msgid "Wood"
+msgstr "Legno"
+
+#: ../../../tribes/empire/conf:101
+#, fuzzy
+msgid "Wood Lance"
+msgstr "Bosco Fogliafulgida"
+
+#: ../../../tribes/empire/conf:102
+msgid "Wool"
+msgstr ""
+
+#: ../../../tribes/empire/conf:105
+msgid "Carrier"
+msgstr ""
+
+#: ../../../tribes/empire/conf:108
+#, fuzzy
+msgid "Soldier"
+msgstr "Soldato"
+
+#: ../../../tribes/empire/conf:111
+msgid "Armoursmith"
+msgstr ""
+
+#: ../../../tribes/empire/conf:112
+#, fuzzy
+msgid "Baker"
+msgstr "Isola Baker"
+
+#: ../../../tribes/empire/conf:113
+msgid "Brewer"
+msgstr ""
+
+#: ../../../tribes/empire/conf:114
+#, fuzzy
+msgid "Builder"
+msgstr "Creazione di classi"
+
+#: ../../../tribes/empire/conf:115
+#, fuzzy
+msgid "Burner"
+msgstr "Drago inceneritore"
+
+#: ../../../tribes/empire/conf:116
+#, fuzzy
+msgid "Farmer"
+msgstr "Povero contadino"
+
+#: ../../../tribes/empire/conf:117
+msgid "Fisher"
+msgstr ""
+
+#: ../../../tribes/empire/conf:118
+msgid "Forester"
+msgstr ""
+
+#: ../../../tribes/empire/conf:119
+msgid "Geologist"
+msgstr ""
+
+#: ../../../tribes/empire/conf:120
+#, fuzzy
+msgid "Hunter"
+msgstr "Cacciatore nereide"
+
+#: ../../../tribes/empire/conf:121
+msgid "Innkeeper"
+msgstr ""
+
+#: ../../../tribes/empire/conf:122
+msgid "Lumberjack"
+msgstr ""
+
+#: ../../../tribes/empire/conf:123
+#, fuzzy
+msgid "Master Miner"
+msgstr "Nano minatore"
+
+#: ../../../tribes/empire/conf:124
+msgid "Miller"
+msgstr ""
+
+#: ../../../tribes/empire/conf:125
+#, fuzzy
+msgid "Miner"
+msgstr "Nano minatore"
+
+#: ../../../tribes/empire/conf:126
+msgid "Pig Breeder"
+msgstr ""
+
+#: ../../../tribes/empire/conf:127
+msgid "Shepherd"
+msgstr ""
+
+#: ../../../tribes/empire/conf:128
+msgid "Smelter"
+msgstr ""
+
+#: ../../../tribes/empire/conf:129
+msgid "Stonemason"
+msgstr ""
+
+#: ../../../tribes/empire/conf:130
+msgid "Toolsmith"
+msgstr ""
+
+#: ../../../tribes/empire/conf:131
+#, fuzzy
+msgid "Trainer"
+msgstr "Capo allenatore"
+
+#: ../../../tribes/empire/conf:132
+msgid "Weaponsmith"
+msgstr ""
+
+#: ../../../tribes/empire/conf:133
+msgid "Weaver"
+msgstr ""
+
+#: ../../../tribes/empire/conf:134
+#, fuzzy
+msgid "Vine Farmer"
+msgstr "Povero contadino"
+
+#: ../../../tribes/empire/conf:137
+#, fuzzy
+msgid "Construction Site"
+msgstr "Sito SAM"
+
+#: ../../../tribes/empire/conf:140
+msgid "Colosseum"
+msgstr ""
+
+#: ../../../tribes/empire/conf:141
+msgid "Arena"
+msgstr ""
+
+#: ../../../tribes/empire/conf:142
+msgid "Trainingscamp"
+msgstr ""
+
+#: ../../../tribes/empire/conf:145
+msgid "Sentry"
+msgstr ""
+
+#: ../../../tribes/empire/conf:146
+msgid "Barracks"
+msgstr ""
+
+#: ../../../tribes/empire/conf:147
+msgid "Barrier"
+msgstr ""
+
+#: ../../../tribes/empire/conf:148
+#, fuzzy
+msgid "Castle"
+msgstr "Castello"
+
+#: ../../../tribes/empire/conf:149
+#, fuzzy
+msgid "Fortress"
+msgstr "Fortezza con Cannone"
+
+#: ../../../tribes/empire/conf:150
+#, fuzzy
+msgid "Outpost"
+msgstr "L'avamposto"
+
+#: ../../../tribes/empire/conf:151
+#, fuzzy
+msgid "Tower"
+msgstr "Tower Hamlets"
+
+#: ../../../tribes/empire/conf:154
+msgid "Headquarters"
+msgstr ""
+
+#: ../../../tribes/empire/conf:155
+msgid "Headquarters shipwreck"
+msgstr ""
+
+#: ../../../tribes/empire/conf:156
+#, fuzzy
+msgid "Warehouse"
+msgstr "Magazzino"
+
+#: ../../../tribes/empire/conf:159
+#, fuzzy
+msgid "Armour Smithy"
+msgstr "Armatura Cinetica"
+
+#: ../../../tribes/empire/conf:160
+msgid "Bakery"
+msgstr ""
+
+#: ../../../tribes/empire/conf:161
+msgid "Brewery"
+msgstr ""
+
+#: ../../../tribes/empire/conf:162
+#, fuzzy
+msgid "Charcoal Burner"
+msgstr "Drago inceneritore"
+
+#: ../../../tribes/empire/conf:163
+#, fuzzy
+msgid "Deep Coal Mine"
+msgstr "Negli abissi del tempio"
+
+#: ../../../tribes/empire/conf:164
+#, fuzzy
+msgid "Coal Mine"
+msgstr "L'onore è mio, signore."
+
+#: ../../../tribes/empire/conf:165
+#, fuzzy
+msgid "Deep Gold Mine"
+msgstr "Così avete l'oro?"
+
+#: ../../../tribes/empire/conf:166
+#, fuzzy
+msgid "Deep Marble Mine"
+msgstr "Usa marmo ammorbidito"
+
+#: ../../../tribes/empire/conf:167
+msgid "Deep Iron Ore Mine"
+msgstr ""
+
+#: ../../../tribes/empire/conf:168
+msgid "Farm"
+msgstr ""
+
+#: ../../../tribes/empire/conf:169
+#, fuzzy
+msgid "Fisher's House"
+msgstr "Vedo una casa in lontananza!"
+
+#: ../../../tribes/empire/conf:170
+#, fuzzy
+msgid "Forester's House"
+msgstr "Vedo una casa in lontananza!"
+
+#: ../../../tribes/empire/conf:171
+#, fuzzy
+msgid "Gold Mine"
+msgstr "Franco-Oro"
+
+#: ../../../tribes/empire/conf:172
+#, fuzzy
+msgid "Hunter's House"
+msgstr "Cacciatore nereide"
+
+#: ../../../tribes/empire/conf:173
+msgid "Inn"
+msgstr ""
+
+#: ../../../tribes/empire/conf:174
+#, fuzzy
+msgid "Lumberjack's House"
+msgstr "Vedo una casa in lontananza!"
+
+#: ../../../tribes/empire/conf:175
+#, fuzzy
+msgid "Marble Mine"
+msgstr "Usa marmo ammorbidito"
+
+#: ../../../tribes/empire/conf:176
+msgid "Mill"
+msgstr ""
+
+#: ../../../tribes/empire/conf:177
+#, fuzzy
+msgid "Iron Ore Mine"
+msgstr "L'onore è mio, signore."
+
+#: ../../../tribes/empire/conf:178
+msgid "Piggery"
+msgstr ""
+
+#: ../../../tribes/empire/conf:179
+msgid "Quarry"
+msgstr ""
+
+#: ../../../tribes/empire/conf:180
+msgid "Sawmill"
+msgstr ""
+
+#: ../../../tribes/empire/conf:181
+msgid "Sheepfarm"
+msgstr ""
+
+#: ../../../tribes/empire/conf:182
+#, fuzzy
+msgid "Smelting Works"
+msgstr "Funziona anche il tasto Enter"
+
+#: ../../../tribes/empire/conf:183
+#, fuzzy
+msgid "Stonemason's House"
+msgstr "Vedo una casa in lontananza!"
+
+#: ../../../tribes/empire/conf:184
+msgid "Tavern"
+msgstr ""
+
+#: ../../../tribes/empire/conf:185
+msgid "Toolsmithy"
+msgstr ""
+
+#: ../../../tribes/empire/conf:186
+#, fuzzy
+msgid "Weapon Smithy"
+msgstr "Scegli l'arma:"
+
+#: ../../../tribes/empire/conf:187
+msgid "Weaving Mill"
+msgstr ""
+
+#: ../../../tribes/empire/conf:188
+#, fuzzy
+msgid "Well"
+msgstr "Be'..."
+
+#: ../../../tribes/empire/conf:189
+msgid "Winery"
+msgstr ""
+
+#: ../../../tribes/empire/conf:190
+msgid "Vineyard"
+msgstr ""
+
+#: ../../../tribes/empire/conf:193
+#, fuzzy
+msgid "Headquarters medium"
+msgstr "Testo medio"
+
+#: ../../../tribes/empire/conf:194
+#, fuzzy
+msgid "Castle village"
+msgstr "Oro del villaggio"
+

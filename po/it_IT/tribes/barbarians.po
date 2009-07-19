@@ -1,0 +1,678 @@
+# Widelands po/it_IT/tribes/barbarians.po
+# Copyright (C) 2005-2009 Widelands Development Team
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svn4230\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2009-06-07 09:58+0000\n"
+"PO-Revision-Date: 2009-07-01 18:23+0100\n"
+"Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
+"Language-Team: Gabriel Rota <gabriel.rota@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../../../tribes/barbarians/conf:18
+#, fuzzy
+msgid "The Widelands Development Team"
+msgstr "Gruppo di Sviluppo di Widelands"
+
+#: ../../../tribes/barbarians/conf:19
+msgid "Barbarians"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:20
+msgid "The mighty tribes of the east-lands!"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:36
+msgid "Ashes"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:37
+#, fuzzy
+msgid "Destroyed building"
+msgstr "Consenti Edificio: "
+
+#: ../../../tribes/barbarians/conf:38
+#, fuzzy
+msgid "Field medium"
+msgstr "Testo medio"
+
+#: ../../../tribes/barbarians/conf:39
+#, fuzzy
+msgid "Field small"
+msgstr "Icone _piccole"
+
+#: ../../../tribes/barbarians/conf:40
+#, fuzzy
+msgid "Field tiny"
+msgstr "Testo minuscolo"
+
+#: ../../../tribes/barbarians/conf:41
+#, fuzzy
+msgid "Field ripe"
+msgstr "Tipo Campo"
+
+#: ../../../tribes/barbarians/conf:42
+#, fuzzy
+msgid "Field harvested"
+msgstr "Tipo Campo"
+
+#: ../../../tribes/barbarians/conf:43
+#, fuzzy
+msgid "Flax medium"
+msgstr "Testo medio"
+
+#: ../../../tribes/barbarians/conf:44
+#, fuzzy
+msgid "Flax small"
+msgstr "Icone _piccole"
+
+#: ../../../tribes/barbarians/conf:45
+#, fuzzy
+msgid "Flax tiny"
+msgstr "Testo minuscolo"
+
+#: ../../../tribes/barbarians/conf:46
+msgid "Flax ripe"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:47
+#, fuzzy
+msgid "Reed medium"
+msgstr "Testo medio"
+
+#: ../../../tribes/barbarians/conf:48
+#, fuzzy
+msgid "Reed small"
+msgstr "Icone _piccole"
+
+#: ../../../tribes/barbarians/conf:49
+#, fuzzy
+msgid "Reed tiny"
+msgstr "Testo minuscolo"
+
+#: ../../../tribes/barbarians/conf:50
+msgid "Reed ripe"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:51
+msgid "Resource indicator coal little"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:52
+msgid "Resource indicator coal much"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:53
+msgid "Resource indicator gold litte"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:54
+msgid "Resource indicator gold much"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:55
+msgid "Resource indicator granit little"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:56
+msgid "Resource indicator granit much"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:57
+msgid "Resource indicator iron little"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:58
+msgid "Resource indicator iron much"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:59
+#, fuzzy
+msgid "Resource indicator no resource"
+msgstr "«Lord» – Oh, no!"
+
+#: ../../../tribes/barbarians/conf:60
+#, fuzzy
+msgid "Resource indicator water"
+msgstr "Disabilita indicatore email"
+
+#: ../../../tribes/barbarians/conf:63
+#, fuzzy
+msgid "Deer"
+msgstr "Cervo"
+
+#: ../../../tribes/barbarians/conf:64
+msgid "Wildboar"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:67
+#, fuzzy
+msgid "Axe"
+msgstr "ascia"
+
+#: ../../../tribes/barbarians/conf:68
+msgid "Peel"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:69
+#, fuzzy
+msgid "Battle Axe"
+msgstr "ascia da battaglia"
+
+#: ../../../tribes/barbarians/conf:70
+msgid "Beer"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:71
+msgid "Blackwood"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:72
+#, fuzzy
+msgid "Broad Axe"
+msgstr "ascia da battaglia"
+
+#: ../../../tribes/barbarians/conf:73
+#, fuzzy
+msgid "Bronze Axe"
+msgstr "ascia da battaglia"
+
+#: ../../../tribes/barbarians/conf:74
+#, fuzzy
+msgid "Cloth"
+msgstr "Stoffa"
+
+#: ../../../tribes/barbarians/conf:75
+#, fuzzy
+msgid "Coal"
+msgstr "Carbone"
+
+#: ../../../tribes/barbarians/conf:76
+#, fuzzy
+msgid "Fire Tongs"
+msgstr "Ahh! Fuoco!"
+
+#: ../../../tribes/barbarians/conf:77
+#, fuzzy
+msgid "Fish"
+msgstr "Piovra gigante"
+
+#: ../../../tribes/barbarians/conf:78
+#, fuzzy
+msgid "Fishing Rod"
+msgstr "Bacchetta della Giustizia"
+
+#: ../../../tribes/barbarians/conf:79
+msgid "Flax"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:80
+#, fuzzy
+msgid "Gold"
+msgstr "Oro"
+
+#: ../../../tribes/barbarians/conf:81
+msgid "Goldstone"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:82
+msgid "Grout"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:83
+#, fuzzy
+msgid "Hammer"
+msgstr "martello"
+
+#: ../../../tribes/barbarians/conf:84
+msgid "Helmet"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:85
+#, fuzzy
+msgid "Hunting Spear"
+msgstr "Orco a caccia"
+
+#: ../../../tribes/barbarians/conf:86
+#, fuzzy
+msgid "Iron"
+msgstr "Maglio di ferro"
+
+#: ../../../tribes/barbarians/conf:87
+#, fuzzy
+msgid "Iron Ore"
+msgstr "Maglio di ferro"
+
+#: ../../../tribes/barbarians/conf:88
+#, fuzzy
+msgid "Kitchen Tools"
+msgstr "Strumenti Booleane"
+
+#: ../../../tribes/barbarians/conf:89
+#, fuzzy
+msgid "Mask"
+msgstr "Maschera"
+
+#: ../../../tribes/barbarians/conf:90
+msgid "Meal"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:91
+#, fuzzy
+msgid "Meat"
+msgstr "Carne fresca!"
+
+#: ../../../tribes/barbarians/conf:92
+#, fuzzy
+msgid "Pick"
+msgstr "piccone"
+
+#: ../../../tribes/barbarians/conf:93
+msgid "Pitta Bread"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:94
+msgid "Ration"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:95
+#, fuzzy
+msgid "Raw Stone"
+msgstr "pietrifica"
+
+#: ../../../tribes/barbarians/conf:96
+#, fuzzy
+msgid "Scythe"
+msgstr "falce"
+
+#: ../../../tribes/barbarians/conf:97
+#, fuzzy
+msgid "Sharp Axe"
+msgstr "ascia da battaglia"
+
+#: ../../../tribes/barbarians/conf:98
+msgid "Shovel"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:99
+msgid "Snack"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:100
+#, fuzzy
+msgid "Strong Beer"
+msgstr "forte"
+
+#: ../../../tribes/barbarians/conf:101
+msgid "Thatch Reed"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:102
+msgid "Trunk"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:103
+#, fuzzy
+msgid "War Helmet"
+msgstr "Nebbia di guerra"
+
+#: ../../../tribes/barbarians/conf:104
+#, fuzzy
+msgid "Warriors Axe"
+msgstr "ascia da battaglia"
+
+#: ../../../tribes/barbarians/conf:105
+#, fuzzy
+msgid "Water"
+msgstr "acqua"
+
+#: ../../../tribes/barbarians/conf:106
+msgid "Wheat"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:109
+msgid "Carrier"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:112
+#, fuzzy
+msgid "Soldier"
+msgstr "Soldato"
+
+#: ../../../tribes/barbarians/conf:115
+#, fuzzy
+msgid "Baker"
+msgstr "Isola Baker"
+
+#: ../../../tribes/barbarians/conf:116
+#, fuzzy
+msgid "Master Blacksmith"
+msgstr "Proteggere il padrone"
+
+#: ../../../tribes/barbarians/conf:117
+msgid "Blacksmith"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:118
+#, fuzzy
+msgid "Master Brewer"
+msgstr "Proteggere il padrone"
+
+#: ../../../tribes/barbarians/conf:119
+msgid "Brewer"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:120
+#, fuzzy
+msgid "Builder"
+msgstr "Creazione di classi"
+
+#: ../../../tribes/barbarians/conf:121
+#, fuzzy
+msgid "Burner"
+msgstr "Drago inceneritore"
+
+#: ../../../tribes/barbarians/conf:122
+#, fuzzy
+msgid "Master Miner"
+msgstr "Nano minatore"
+
+#: ../../../tribes/barbarians/conf:123
+#, fuzzy
+msgid "Chief Miner"
+msgstr "Nano minatore"
+
+#: ../../../tribes/barbarians/conf:124
+#, fuzzy
+msgid "Farmer"
+msgstr "Povero contadino"
+
+#: ../../../tribes/barbarians/conf:125
+msgid "Ferner"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:126
+msgid "Fisher"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:127
+msgid "Gamekeeper"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:128
+msgid "Geologist"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:129
+msgid "Helmsmith"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:130
+#, fuzzy
+msgid "Hunter"
+msgstr "Cacciatore nereide"
+
+#: ../../../tribes/barbarians/conf:131
+msgid "Innkeeper"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:132
+#, fuzzy
+msgid "Lime-Burner"
+msgstr "Drago inceneritore"
+
+#: ../../../tribes/barbarians/conf:133
+#, fuzzy
+msgid "Lumberjack"
+msgstr "Costruisci una falegnameria"
+
+#: ../../../tribes/barbarians/conf:134
+#, fuzzy
+msgid "Miner"
+msgstr "Nano minatore"
+
+#: ../../../tribes/barbarians/conf:135
+#, fuzzy
+msgid "Ranger"
+msgstr "Ranger"
+
+#: ../../../tribes/barbarians/conf:136
+msgid "Smelter"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:137
+msgid "Stonemason"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:138
+#, fuzzy
+msgid "Trainer"
+msgstr "Capo allenatore"
+
+#: ../../../tribes/barbarians/conf:139
+msgid "Weaver"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:142
+#, fuzzy
+msgid "Construction Site"
+msgstr "Sito SAM"
+
+#: ../../../tribes/barbarians/conf:145
+#, fuzzy
+msgid "Battle Arena"
+msgstr "ascia da battaglia"
+
+#: ../../../tribes/barbarians/conf:146
+msgid "Trainingscamp"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:149
+msgid "Barrier"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:150
+msgid "Citadel"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:151
+msgid "Donjon"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:152
+#, fuzzy
+msgid "Fortress"
+msgstr "Fortezza con Cannone"
+
+#: ../../../tribes/barbarians/conf:153
+msgid "Sentry"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:154
+#, fuzzy
+msgid "Stronghold"
+msgstr "Distruggi la roccaforte di Halstead"
+
+#: ../../../tribes/barbarians/conf:157
+#: ../../../tribes/barbarians/conf:158
+msgid "Headquarters"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:159
+#, fuzzy
+msgid "Warehouse"
+msgstr "Magazzino"
+
+#: ../../../tribes/barbarians/conf:162
+#, fuzzy
+msgid "War Mill"
+msgstr "Nebbia di guerra"
+
+#: ../../../tribes/barbarians/conf:163
+msgid "Axefactory"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:164
+msgid "Bakery"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:165
+#, fuzzy
+msgid "Big Inn"
+msgstr "Big-endian"
+
+#: ../../../tribes/barbarians/conf:166
+msgid "Brewery"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:167
+#, fuzzy
+msgid "Charcoal Burner's House"
+msgstr "Vedo una casa in lontananza!"
+
+#: ../../../tribes/barbarians/conf:168
+#, fuzzy
+msgid "Deeper Coal Mine"
+msgstr "L'onore è mio, signore."
+
+#: ../../../tribes/barbarians/conf:169
+#, fuzzy
+msgid "Deep Coal Mine"
+msgstr "Negli abissi del tempio"
+
+#: ../../../tribes/barbarians/conf:170
+#, fuzzy
+msgid "Coal mine"
+msgstr "L'onore è mio, signore."
+
+#: ../../../tribes/barbarians/conf:171
+#, fuzzy
+msgid "Deeper Gold Mine"
+msgstr "Così avete l'oro?"
+
+#: ../../../tribes/barbarians/conf:172
+msgid "Deeper Iron Ore Mine"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:173
+#, fuzzy
+msgid "Deep Gold Mine"
+msgstr "Così avete l'oro?"
+
+#: ../../../tribes/barbarians/conf:174
+msgid "Deep Iron Ore Mine"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:175
+msgid "Farm"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:176
+msgid "Fernery"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:177
+msgid "Fisher's Hut"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:178
+msgid "Gamekeeper's Hut"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:179
+#, fuzzy
+msgid "Gold Mine"
+msgstr "Franco-Oro"
+
+#: ../../../tribes/barbarians/conf:180
+#, fuzzy
+msgid "Granite Mine"
+msgstr "L'onore è mio, signore."
+
+#: ../../../tribes/barbarians/conf:181
+#, fuzzy
+msgid "Wood Hardener"
+msgstr "Bosco Fogliafulgida"
+
+#: ../../../tribes/barbarians/conf:182
+msgid "Helmsmithy"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:183
+#, fuzzy
+msgid "Hunter's Hut"
+msgstr "Cacciatore nereide"
+
+#: ../../../tribes/barbarians/conf:184
+msgid "Inn"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:185
+msgid "Lime Kiln"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:186
+#, fuzzy
+msgid "Lumberjack's Hut"
+msgstr "Costruisci una falegnameria"
+
+#: ../../../tribes/barbarians/conf:187
+#, fuzzy
+msgid "Metalwork Shop"
+msgstr "Negozio online di Blender"
+
+#: ../../../tribes/barbarians/conf:188
+msgid "Micro Brewery"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:189
+#, fuzzy
+msgid "Iron Ore Mine"
+msgstr "L'onore è mio, signore."
+
+#: ../../../tribes/barbarians/conf:190
+#, fuzzy
+msgid "Quarry"
+msgstr "Costruisci una cava"
+
+#: ../../../tribes/barbarians/conf:191
+#, fuzzy
+msgid "Ranger's Hut"
+msgstr "Elfo ranger"
+
+#: ../../../tribes/barbarians/conf:192
+#, fuzzy
+msgid "Smelting Works"
+msgstr "Funziona anche il tasto Enter"
+
+#: ../../../tribes/barbarians/conf:193
+msgid "Tavern"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:194
+msgid "Weaving-Mill"
+msgstr ""
+
+#: ../../../tribes/barbarians/conf:195
+#, fuzzy
+msgid "Well"
+msgstr "Be'..."
+
+#: ../../../tribes/barbarians/conf:198
+#, fuzzy
+msgid "Headquarters medium"
+msgstr "Testo medio"
+
+#: ../../../tribes/barbarians/conf:199
+#, fuzzy
+msgid "Citadel village"
+msgstr "Oro del villaggio"
+

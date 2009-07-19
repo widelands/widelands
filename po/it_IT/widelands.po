@@ -1,0 +1,3513 @@
+# Widelands po/it_IT/widelands.po
+# Copyright (C) 2009 Widelands Development Team
+# FIRST AUTHOR <gabriel.rota@gmail.com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Widelands svn4230\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2009-06-07 11:58+0200\n"
+"PO-Revision-Date: 2009-07-01 18:24+0100\n"
+"Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
+"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../src/writeHTML.cc:39
+msgid "Requesters"
+msgstr "Richiedenti"
+
+#: ../../src/writeHTML.cc:54
+msgid "Providers"
+msgstr "Fornitori"
+
+#: ../../src/writeHTML.cc:69
+msgid "Successors"
+msgstr "Successori"
+
+#: ../../src/writeHTML.cc:84
+msgid "Predecessors"
+msgstr "Predecessori"
+
+#: ../../src/writeHTML.cc:99
+msgid "Employers"
+msgstr "Datori di lavoro"
+
+#: ../../src/writeHTML.cc:255
+#: ../../src/writeHTML.cc:261
+msgid "Building types"
+msgstr "Tipi di Costruzioni"
+
+#: ../../src/writeHTML.cc:266
+#: ../../src/writeHTML.cc:499
+#: ../../src/writeHTML.cc:1265
+msgid "Icon"
+msgstr "icona"
+
+#: ../../src/writeHTML.cc:268
+#: ../../src/writeHTML.cc:501
+#: ../../src/writeHTML.cc:1267
+#: ../../src/building_ui.cc:1583
+#: ../../src/building_ui.cc:1802
+#: ../../src/wui/building_statistics_menu.cc:111
+#: ../../src/ui_fsmenu/netsetup_ggz.cc:152
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:76
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:165
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:164
+msgid "Name"
+msgstr "Nome"
+
+#: ../../src/writeHTML.cc:270
+#: ../../src/wui/building_statistics_menu.cc:112
+msgid "Size"
+msgstr "Dimensione"
+
+#: ../../src/writeHTML.cc:272
+#: ../../src/writeHTML.cc:503
+msgid "Buildable"
+msgstr "Edificabile"
+
+#: ../../src/writeHTML.cc:274
+msgid "Enhanced"
+msgstr "Rafforzata"
+
+#: ../../src/writeHTML.cc:277
+#: ../../src/building_ui.cc:617
+msgid "Stop"
+msgstr "Stop"
+
+#: ../../src/writeHTML.cc:279
+msgid "Conquer<br/>range"
+msgstr ""
+
+#: ../../src/writeHTML.cc:281
+#: ../../src/writeHTML.cc:505
+msgid "Vision<br/>range"
+msgstr ""
+
+#: ../../src/writeHTML.cc:306
+#: ../../src/writeHTML.cc:362
+#: ../../src/logic/building.cc:508
+msgid "Mine"
+msgstr "Miniera"
+
+#: ../../src/writeHTML.cc:310
+#: ../../src/writeHTML.cc:378
+#: ../../src/logic/building.cc:509
+msgid "Small"
+msgstr "Piccolo"
+
+#: ../../src/writeHTML.cc:314
+#: ../../src/writeHTML.cc:372
+#: ../../src/logic/building.cc:510
+msgid "Medium"
+msgstr "Medio"
+
+#: ../../src/writeHTML.cc:319
+#: ../../src/writeHTML.cc:367
+#: ../../src/logic/building.cc:510
+msgid "Big"
+msgstr "Grande"
+
+#: ../../src/writeHTML.cc:323
+#: ../../src/writeHTML.cc:326
+#: ../../src/writeHTML.cc:533
+#: ../../src/ui_basic/messagebox.cc:96
+#: ../../src/editor/tools/editor_info_tool.cc:75
+#: ../../src/editor/tools/editor_info_tool.cc:76
+msgid "Yes"
+msgstr "Sì"
+
+#: ../../src/writeHTML.cc:323
+#: ../../src/writeHTML.cc:326
+#: ../../src/writeHTML.cc:533
+#: ../../src/ui_basic/messagebox.cc:103
+#: ../../src/editor/tools/editor_info_tool.cc:75
+#: ../../src/editor/tools/editor_info_tool.cc:76
+msgid "No"
+msgstr "No"
+
+#: ../../src/writeHTML.cc:341
+msgid "building_types.xhtml"
+msgstr "building_types.xhtml"
+
+#: ../../src/writeHTML.cc:364
+msgid "Is mine."
+msgstr "È mio."
+
+#: ../../src/writeHTML.cc:369
+msgid "Is big."
+msgstr "È grande."
+
+#: ../../src/writeHTML.cc:374
+msgid "Is medium."
+msgstr "È medio."
+
+#: ../../src/writeHTML.cc:380
+msgid "Is small."
+msgstr "È piccolo."
+
+#: ../../src/writeHTML.cc:387
+msgid "Is not buildable."
+msgstr "Non è edificabile."
+
+#: ../../src/writeHTML.cc:394
+msgid "Is enhanced."
+msgstr "E' rafforzata."
+
+#: ../../src/writeHTML.cc:401
+#, fuzzy, c-format
+msgid "Conquer range is %u."
+msgstr "La directory %s è deviata"
+
+#: ../../src/writeHTML.cc:409
+#: ../../src/writeHTML.cc:641
+#, fuzzy, c-format
+msgid "Vision range is %u."
+msgstr "La directory %s è deviata"
+
+#: ../../src/writeHTML.cc:417
+#: ../../src/writeHTML.cc:647
+msgid "Build cost"
+msgstr "Costro della costruzione"
+
+#: ../../src/writeHTML.cc:427
+msgid "'s constructionsite"
+msgstr ""
+
+#: ../../src/writeHTML.cc:438
+msgid "Enhancements"
+msgstr "Miglioramenti"
+
+#: ../../src/writeHTML.cc:448
+msgid "'s enhancement"
+msgstr ""
+
+#: ../../src/writeHTML.cc:488
+#: ../../src/writeHTML.cc:494
+msgid "Worker types"
+msgstr "Tipi di operaio"
+
+#: ../../src/writeHTML.cc:507
+msgid "Minimum<br/>needed<br/>experience"
+msgstr ""
+
+#: ../../src/writeHTML.cc:509
+msgid "Maximum<br/>needed<br/>experience"
+msgstr ""
+
+#: ../../src/writeHTML.cc:511
+msgid "Becomes"
+msgstr "Diventa"
+
+#: ../../src/writeHTML.cc:569
+msgid "worker_types.xhtml"
+msgstr "worker_types.xhtml"
+
+#: ../../src/writeHTML.cc:576
+msgid "Combat Properties"
+msgstr "Proprietà di Combattimento"
+
+#: ../../src/writeHTML.cc:583
+#, c-format
+msgid "Hitpoints is between %u and %u, plus %u for each level above 0 (maximum level is %u)."
+msgstr ""
+
+#: ../../src/writeHTML.cc:593
+#, c-format
+msgid "Attack is between %u and %u, plus %u for each level above 0 (maximum level is %u)."
+msgstr ""
+
+#: ../../src/writeHTML.cc:603
+#, c-format
+msgid "Defense is %u, plus %u for each level above 0 (maximum level is %u)."
+msgstr ""
+
+#: ../../src/writeHTML.cc:613
+#, c-format
+msgid "Evade is %u, plus %u for each level above 0 (maximum level is %u)."
+msgstr ""
+
+#: ../../src/writeHTML.cc:658
+#: ../../src/writeHTML.cc:668
+#, fuzzy
+msgid "'s creation"
+msgstr "Creazione DVI:"
+
+#: ../../src/writeHTML.cc:682
+#, c-format
+msgid "Needs experience from working between %u and %u times to become"
+msgstr ""
+
+#: ../../src/writeHTML.cc:690
+msgid "'s promotion"
+msgstr ""
+
+#: ../../src/writeHTML.cc:700
+#: ../../src/writeHTML.cc:828
+msgid "Programs"
+msgstr "Programmi"
+
+#: ../../src/writeHTML.cc:737
+#: ../../src/writeHTML.cc:1144
+#: ../../src/logic/building.cc:503
+msgid "mine"
+msgstr "miniera"
+
+#: ../../src/writeHTML.cc:738
+msgid "breed"
+msgstr "razza"
+
+#: ../../src/writeHTML.cc:739
+msgid "createitem"
+msgstr "creaelemento"
+
+#: ../../src/writeHTML.cc:740
+msgid "setdescription"
+msgstr ""
+
+#: ../../src/writeHTML.cc:741
+msgid "setbobdescription"
+msgstr ""
+
+#: ../../src/writeHTML.cc:742
+msgid "findobject"
+msgstr "trovaoggetto"
+
+#: ../../src/writeHTML.cc:743
+msgid "findspace"
+msgstr ""
+
+#: ../../src/writeHTML.cc:744
+msgid "walk"
+msgstr "camminare"
+
+#: ../../src/writeHTML.cc:745
+msgid "animation"
+msgstr "animazione"
+
+#: ../../src/writeHTML.cc:746
+#: ../../src/writeHTML.cc:868
+msgid "return"
+msgstr "ritorno"
+
+#: ../../src/writeHTML.cc:747
+msgid "object"
+msgstr "oggetto"
+
+#: ../../src/writeHTML.cc:748
+msgid "plant"
+msgstr ""
+
+#: ../../src/writeHTML.cc:749
+msgid "create_bob"
+msgstr ""
+
+#: ../../src/writeHTML.cc:750
+msgid "removeobject"
+msgstr ""
+
+#: ../../src/writeHTML.cc:751
+msgid "geologist"
+msgstr ""
+
+#: ../../src/writeHTML.cc:752
+msgid "geologist_find"
+msgstr ""
+
+#: ../../src/writeHTML.cc:753
+#: ../../src/writeHTML.cc:1219
+msgid "playFX"
+msgstr ""
+
+#: ../../src/writeHTML.cc:754
+msgid "UNKNOWN"
+msgstr "SCONOSCIUTO"
+
+#: ../../src/writeHTML.cc:761
+msgid "Production"
+msgstr "Produzione"
+
+#: ../../src/writeHTML.cc:765
+#: ../../src/wui/general_statistics_menu.cc:152
+msgid "Workers"
+msgstr ""
+
+#: ../../src/writeHTML.cc:775
+msgid "'s employee"
+msgstr ""
+
+#: ../../src/writeHTML.cc:785
+msgid "Inputs"
+msgstr "Ingressi"
+
+#: ../../src/writeHTML.cc:795
+#, fuzzy
+msgid "'s input"
+msgstr "Input"
+
+#: ../../src/writeHTML.cc:807
+#, fuzzy
+msgid "Output"
+msgstr "Uscita"
+
+#: ../../src/writeHTML.cc:817
+#, fuzzy
+msgid "'s output"
+msgstr "Uscita"
+
+#: ../../src/writeHTML.cc:864
+#: ../../src/writeHTML.cc:945
+#: ../../src/writeHTML.cc:975
+#: ../../src/writeHTML.cc:1003
+#: ../../src/writeHTML.cc:1023
+#: ../../src/writeHTML.cc:1044
+#: ../../src/writeHTML.cc:1095
+#: ../../src/writeHTML.cc:1140
+#: ../../src/writeHTML.cc:1167
+#: ../../src/writeHTML.cc:1191
+#: ../../src/writeHTML.cc:1215
+msgid "productionsite_program_reference.xhtml"
+msgstr ""
+
+#: ../../src/writeHTML.cc:866
+msgid "Documentation for program command return"
+msgstr ""
+
+#: ../../src/writeHTML.cc:872
+#, fuzzy
+msgid "failed"
+msgstr " fallita."
+
+#: ../../src/writeHTML.cc:873
+#, fuzzy
+msgid "completed"
+msgstr "Completati"
+
+#: ../../src/writeHTML.cc:874
+msgid "skipped"
+msgstr ""
+
+#: ../../src/writeHTML.cc:932
+#, fuzzy
+msgid "workers of this site"
+msgstr "Web&site...\tCtrl-I"
+
+#: ../../src/writeHTML.cc:947
+msgid "Documentation for program command call"
+msgstr ""
+
+#: ../../src/writeHTML.cc:949
+#, fuzzy
+msgid "call"
+msgstr "Tipo di chiamata sconosciuta (\"%s\")\n"
+
+#: ../../src/writeHTML.cc:956
+#, fuzzy, c-format
+msgid "site's program %s"
+msgstr "Scegliere un programma"
+
+#: ../../src/writeHTML.cc:977
+msgid "Documentation for program command worker"
+msgstr ""
+
+#: ../../src/writeHTML.cc:979
+msgid "worker"
+msgstr ""
+
+#: ../../src/writeHTML.cc:990
+#, fuzzy, c-format
+msgid "%s's program %s"
+msgstr "Programma"
+
+#: ../../src/writeHTML.cc:1005
+msgid "Documentation for program command sleep"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1007
+msgid "sleep"
+msgstr "sonno"
+
+#: ../../src/writeHTML.cc:1013
+#: ../../src/writeHTML.cc:1033
+#, c-format
+msgid " %u.%03u s"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1025
+msgid "Documentation for program command animate"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1027
+#, fuzzy
+msgid "animate"
+msgstr "Anima diramazione"
+
+#: ../../src/writeHTML.cc:1046
+msgid "Documentation for program command consume"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1048
+msgid "consume"
+msgstr "consumare"
+
+#: ../../src/writeHTML.cc:1097
+msgid "Documentation for program command produce"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1099
+#, fuzzy
+msgid "produce"
+msgstr "Costoso da produrre"
+
+#: ../../src/writeHTML.cc:1142
+msgid "Documentation for program command mine"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1169
+msgid "Documentation for program command check_soldier"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1171
+#, fuzzy
+msgid "check soldier"
+msgstr "Soldato umano"
+
+#: ../../src/writeHTML.cc:1177
+#: ../../src/writeHTML.cc:1201
+#, fuzzy
+msgid "hp"
+msgstr "PF"
+
+#: ../../src/writeHTML.cc:1178
+#: ../../src/writeHTML.cc:1202
+#, fuzzy
+msgid "attack"
+msgstr "All'attacco!"
+
+#: ../../src/writeHTML.cc:1179
+#: ../../src/writeHTML.cc:1203
+#, fuzzy
+msgid "defense"
+msgstr "Difesa"
+
+#: ../../src/writeHTML.cc:1180
+#: ../../src/writeHTML.cc:1204
+msgid "evade"
+msgstr "eludere"
+
+#: ../../src/writeHTML.cc:1193
+msgid "Documentation for program command train"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1195
+msgid "train"
+msgstr "treno"
+
+#: ../../src/writeHTML.cc:1217
+msgid "Documentation for program command playFX"
+msgstr ""
+
+#: ../../src/writeHTML.cc:1254
+#: ../../src/writeHTML.cc:1260
+#, fuzzy
+msgid "Ware types"
+msgstr "Stesso Tipo "
+
+#: ../../src/writeHTML.cc:1294
+#, fuzzy
+msgid "ware_types.xhtml"
+msgstr "tutti i tipi di deviazione"
+
+#: ../../src/minimap.cc:135
+#: ../../src/ui_fsmenu/netsetup_lan.cc:119
+#, fuzzy
+msgid "Map"
+msgstr "Mappa"
+
+#: ../../src/minimap.cc:144
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:68
+#, fuzzy
+msgid "Terrain"
+msgstr "Terreno"
+
+#: ../../src/minimap.cc:151
+#, fuzzy
+msgid "Owner"
+msgstr "Proprietario"
+
+#: ../../src/minimap.cc:158
+#, fuzzy
+msgid "Flags"
+msgstr "flag di %s impostati come"
+
+#: ../../src/minimap.cc:165
+#, fuzzy
+msgid "Roads"
+msgstr "Strade tra castelli"
+
+#: ../../src/minimap.cc:172
+#: ../../src/wui/general_statistics_menu.cc:158
+msgid "Buildings"
+msgstr "Costruzioni"
+
+#: ../../src/game_debug_ui.cc:268
+#, fuzzy
+msgid "Debug Field"
+msgstr "Tipo Campo"
+
+#: ../../src/game_debug_ui.cc:312
+#, fuzzy, c-format
+msgid "%i, %i - height: %u\n"
+msgstr "Altezza:"
+
+#: ../../src/productionsite.cc:207
+#, fuzzy
+msgid "(not occupied)"
+msgstr "(non trovato)"
+
+#: ../../src/productionsite.cc:213
+#, c-format
+msgid "Waiting for one worker!"
+msgid_plural "Waiting for %u workers!"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../src/productionsite.cc:223
+#, fuzzy
+msgid "(stopped)"
+msgstr "Fermo"
+
+#: ../../src/productionsite.cc:305
+#, fuzzy
+msgid "UP"
+msgstr "su"
+
+#: ../../src/productionsite.cc:305
+#, fuzzy
+msgid "DOWN"
+msgstr "giù"
+
+#: ../../src/encyclopedia_window.cc:62
+#, fuzzy
+msgid "Tribe ware encyclopedia"
+msgstr "Questa tribù è sotto controllo."
+
+#: ../../src/encyclopedia_window.cc:80
+#, fuzzy
+msgid "Consumed ware type(s)"
+msgstr "Tipo costruttore GTK+"
+
+#: ../../src/encyclopedia_window.cc:81
+msgid "Quantity"
+msgstr "Quantità"
+
+#: ../../src/encyclopedia_window.cc:187
+#, fuzzy
+msgid " or "
+msgstr " oppure"
+
+#: ../../src/computer_player.cc:38
+#, fuzzy
+msgid "None"
+msgstr "Nessuno"
+
+#: ../../src/trainingsite.cc:173
+msgid "Resting"
+msgstr ""
+
+#: ../../src/trainingsite.cc:175
+#, fuzzy
+msgid "Not Working"
+msgstr "Server attivi: %i"
+
+#: ../../src/waresdisplay.cc:42
+#: ../../src/wui/stock_menu.cc:31
+#: ../../src/wui/game_main_menu.cc:68
+msgid "Stock"
+msgstr "Magazzino"
+
+#: ../../src/s2map.cc:224
+msgid "Bluebyte Settlers II Map. No comment defined!"
+msgstr ""
+
+#: ../../src/wlapplication.cc:963
+msgid ""
+"\n"
+"Sorry, no double-instance debugging on WIN32.\n"
+"\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:966
+msgid "--double is disabled. This is not a debug build!"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1058
+#, fuzzy
+msgid "This is Widelands-"
+msgstr "Geany %s."
+
+#: ../../src/wlapplication.cc:1060
+msgid ""
+"Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
+"\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1061
+msgid ""
+"Options:\n"
+"\n"
+msgstr ""
+"Opzioni:\n"
+"\n"
+
+#: ../../src/wlapplication.cc:1065
+msgid ""
+" --<config-entry-name>=value overwrites any config file setting\n"
+"\n"
+" --datadir=DIRNAME    Use specified direction for the widelands\n"
+"                      data files\n"
+" --record=FILENAME    Record all events to the given filename for\n"
+"                      later playback\n"
+" --playback=FILENAME  Playback given filename (see --record)\n"
+"\n"
+" --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
+"                      of using the SDL\n"
+" --language=[de_DE|sv_SE|...]\n"
+"                      The locale to use.\n"
+"\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1078
+msgid ""
+"Sound options:\n"
+" --nosound            Starts the game with sound disabled.\n"
+" --disable_fx         Disable sound effects.\n"
+" --disable_music      Disable music.\n"
+"\n"
+" --nozip              Do not save files as binary zip archives.\n"
+"\n"
+" --editor             Directly starts the Widelands editor.\n"
+"                      You can add a =FILENAME to directly load\n"
+"                      the map FILENAME in editor.\n"
+" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
+"                      map.\n"
+" --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
+" --speed_of_new_game  The speed that the new game will run at\n"
+"                      when started, with factor 1000 (0 is pause,\n"
+"                      1000 is normal speed).\n"
+" --auto_roadbuild_mode=[yes|no]\n"
+"                      Whether to enter roadbuilding mode\n"
+"                      automatically after placing a flag that is\n"
+"                      not connected to a road.\n"
+" --write_HTML=[yes|no]\n"
+"                      Write HTML-helpfiles for parsed game data.\n"
+"\n"
+"Graphic options:\n"
+" --fullscreen=[yes|no]\n"
+"                      Whether to use the whole display for the\n"
+"                      game screen.\n"
+" --depth=[16|32]      Color depth in number of bits per pixel.\n"
+" --xres=[...]         Width of the window in pixel.\n"
+" --yres=[...]         Height of the window in pixel.\n"
+" --hw_improvements=[0|1]\n"
+"                      Activate hardware acceleration\n"
+"                      *HIGHLY EXPERIMENTAL*\n"
+" --double_buffer=[0|1]\n"
+"                      Enables double buffering\n"
+"                      *HIGHLY EXPERIMENTAL*\n"
+"\n"
+"Options for the internal window manager:\n"
+" --border_snap_distance=[0 ...]\n"
+"                      Move a window to the edge of the screen\n"
+"                      when the edge of the window comes within\n"
+"                      this distance from the edge of the screen.\n"
+" --dock_windows_to_edges=[yes|no]\n"
+"                      Eliminate a window's border towards the\n"
+"                      edge of the screen when the edge of the\n"
+"                      window is next to the edge of the screen.\n"
+" --panel_snap_distance=[0 ...]\n"
+"                      Move a window to the edge of the panel when\n"
+"                      the edge of the window comes within this\n"
+"                      distance from the edge of the panel.\n"
+" --snap_windows_only_when_overlapping=[yes|no]\n"
+"                      Only move a window to the edge of a panel\n"
+"                      if the window is overlapping with the\n"
+"                      panel.\n"
+"\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1138
+msgid ""
+" --double             Start the game twice (for localhost network\n"
+"                      testing)\n"
+"\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1142
+#, fuzzy
+msgid " --help               Show this help\n"
+msgstr "Mostra questo suggerimento."
+
+#: ../../src/wlapplication.cc:1146
+msgid ""
+"Bug reports? Suggestions? Check out the project website:\n"
+"        http://www.sourceforge.net/projects/widelands\n"
+"\n"
+"Hope you enjoy this game!\n"
+"\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1284
+#, fuzzy
+msgid "Warning: "
+msgstr "Warning: "
+
+#: ../../src/wlapplication.cc:1288
+#, fuzzy
+msgid "Unexpected error during the game"
+msgstr "Errore mentre si gioca la partita: "
+
+#: ../../src/wlapplication.cc:1292
+msgid ""
+"\n"
+"\n"
+"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build "
+msgstr ""
+
+#: ../../src/wlapplication.cc:1298
+msgid ""
+". Please add this information to your report.\n"
+"\n"
+"Widelands attempts to create a savegame when errors occur during the game. It is often - though not always - possible to load it and continue playing.\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1405
+#, fuzzy
+msgid "Connection timeouted"
+msgstr "Errore di connessione"
+
+#: ../../src/wlapplication.cc:1407
+msgid ""
+"Widelands has not been able to get the IP address of the server in time.\n"
+"There seems to be a network problem, either on your side or on side\n"
+"of the server.\n"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1421
+#, fuzzy
+msgid "Connection problem"
+msgstr "Problema nell'unlink di %s"
+
+#: ../../src/wlapplication.cc:1423
+msgid "Widelands has not been able to connect to the host."
+msgstr ""
+
+#: ../../src/wlapplication.cc:1462
+msgid "The address of the game server is invalid"
+msgstr ""
+
+#: ../../src/wlapplication.cc:1570
+#: ../../src/network/nethost.cc:1060
+msgid "Player"
+msgstr "Giocatore"
+
+#: ../../src/wlapplication.cc:1714
+#: ../../src/network/netclient.cc:158
+#: ../../src/network/nethost.cc:405
+#, fuzzy
+msgid "Preparing game"
+msgstr "Crea partita"
+
+#: ../../src/wlapplication.cc:1821
+msgid "End of replay"
+msgstr "Fine del replay"
+
+#: ../../src/wlapplication.cc:1823
+msgid "The end of the replay has been reached and the game has been paused. You may unpause the game and continue watching if you want to."
+msgstr ""
+
+#: ../../src/wlapplication.cc:1905
+#: ../../src/logic/game.cc:323
+#: ../../src/logic/game.cc:362
+msgid "Loading..."
+msgstr "Sto caricando..."
+
+#: ../../src/watchwindow.cc:94
+msgid "Follow"
+msgstr "Seguire"
+
+#: ../../src/watchwindow.cc:156
+#, fuzzy
+msgid "Center mainview on this"
+msgstr "Centra fotogramma corrente"
+
+#: ../../src/watchwindow.cc:180
+#: ../../src/ui_fsmenu/fileview.cc:47
+msgid "Close"
+msgstr "Chiudi"
+
+#: ../../src/watchwindow.cc:240
+#: ../../src/fieldaction.cc:490
+#, fuzzy
+msgid "Watch"
+msgstr "Sera"
+
+#: ../../src/building_ui.cc:171
+msgid "Destroy building?"
+msgstr "Distruggi la costruzione?"
+
+#: ../../src/building_ui.cc:185
+#, fuzzy
+msgid "Do you really want to destroy this "
+msgstr "Vuoi davvero cancellare questa partita?"
+
+#: ../../src/building_ui.cc:187
+#, fuzzy
+msgid "?"
+msgstr "?"
+
+#: ../../src/building_ui.cc:617
+#: ../../src/events/event_message_box.cc:48
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:55
+msgid "Continue"
+msgstr "Continua"
+
+#: ../../src/building_ui.cc:632
+#, fuzzy, c-format
+msgid "Enhance to %s"
+msgstr "Modificato '%s' in %s"
+
+#: ../../src/building_ui.cc:653
+msgid "Destroy"
+msgstr "Distruggi"
+
+#: ../../src/building_ui.cc:664
+#: ../../src/building_ui.cc:769
+msgid "Show workarea"
+msgstr "Visualizza area di lavoro"
+
+#: ../../src/building_ui.cc:675
+#, fuzzy
+msgid "Debug"
+msgstr "Correzione"
+
+#: ../../src/building_ui.cc:796
+#, fuzzy
+msgid "Hide workarea"
+msgstr "Eventi area di lavoro"
+
+#: ../../src/building_ui.cc:1089
+#, fuzzy
+msgid "Worker Listing"
+msgstr "&Listato in linea"
+
+#: ../../src/building_ui.cc:1109
+#, fuzzy
+msgid "Type: "
+msgstr "<b>Tipo:</b>"
+
+#: ../../src/building_ui.cc:1116
+#, fuzzy
+msgid "Experience: "
+msgstr "Modificatore dell'esperienza"
+
+#: ../../src/building_ui.cc:1123
+#, fuzzy
+msgid "Trying to become: "
+msgstr "provando a svuotare %s"
+
+#: ../../src/building_ui.cc:1167
+#, fuzzy
+msgid "(vacant)"
+msgstr "(Casella disponibile)"
+
+#: ../../src/building_ui.cc:1167
+msgid "(coming)"
+msgstr ""
+
+#: ../../src/building_ui.cc:1396
+msgid "Highest priority"
+msgstr "Priorità Alta"
+
+#: ../../src/building_ui.cc:1405
+msgid "Normal priority"
+msgstr "Priorità normale"
+
+#: ../../src/building_ui.cc:1414
+msgid "Lowest priority"
+msgstr "Priorità bassa"
+
+#: ../../src/building_ui.cc:1454
+#, fuzzy
+msgid "Show worker listing"
+msgstr "Lettura della lista dei file in corso"
+
+#: ../../src/building_ui.cc:1568
+#: ../../src/building_ui.cc:1823
+msgid "Capacity"
+msgstr ""
+
+#: ../../src/building_ui.cc:1584
+#: ../../src/building_ui.cc:1803
+msgid "HP"
+msgstr ""
+
+#: ../../src/building_ui.cc:1585
+#: ../../src/building_ui.cc:1804
+msgid "AT"
+msgstr ""
+
+#: ../../src/building_ui.cc:1586
+#: ../../src/building_ui.cc:1805
+#, fuzzy
+msgid "DE"
+msgstr "De..."
+
+#: ../../src/building_ui.cc:1587
+#: ../../src/building_ui.cc:1806
+msgid "EV"
+msgstr ""
+
+#: ../../src/building_ui.cc:1588
+#: ../../src/building_ui.cc:1807
+msgid "Level"
+msgstr "Livello"
+
+#: ../../src/building_ui.cc:1693
+#, c-format
+msgid "Capacity: %2u"
+msgstr ""
+
+#: ../../src/building_ui.cc:1833
+msgid "xx"
+msgstr ""
+
+#: ../../src/fieldaction.cc:253
+#, fuzzy
+msgid "Build small buildings"
+msgstr "Immagine troppo piccola"
+
+#: ../../src/fieldaction.cc:254
+#, fuzzy
+msgid "Build medium buildings"
+msgstr "Punti corazza: medi"
+
+#: ../../src/fieldaction.cc:255
+#, fuzzy
+msgid "Build large buildings"
+msgstr "Testo molto Grande"
+
+#: ../../src/fieldaction.cc:289
+#, fuzzy
+msgid "Action"
+msgstr "Azione"
+
+#: ../../src/fieldaction.cc:397
+#, fuzzy
+msgid "Build road"
+msgstr "Velocità sulla Strada"
+
+#: ../../src/fieldaction.cc:409
+#, fuzzy
+msgid "Destroy this flag"
+msgstr "Caricato %d flag bitmap."
+
+#: ../../src/fieldaction.cc:416
+#, fuzzy
+msgid "Configure economy"
+msgstr "Configura codec"
+
+#: ../../src/fieldaction.cc:421
+msgid "Send geologist to explore site"
+msgstr "Invia geologo ad esplorare il sito"
+
+#: ../../src/fieldaction.cc:439
+#, fuzzy
+msgid "Put a flag"
+msgstr "Bandiera nera"
+
+#: ../../src/fieldaction.cc:446
+#, fuzzy
+msgid "Destroy a road"
+msgstr "Velocità sulla Strada"
+
+#: ../../src/fieldaction.cc:463
+msgid "Watch field in a separate window"
+msgstr "Visualizza il campo in una finestra separata"
+
+#: ../../src/fieldaction.cc:468
+msgid "Toggle building statistics display"
+msgstr "Visualizza/Nascondi "
+
+#: ../../src/fieldaction.cc:474
+msgid "Toggle building label display"
+msgstr ""
+
+#: ../../src/fieldaction.cc:481
+#, fuzzy
+msgid "Debug window"
+msgstr "Chiudi finestra"
+
+#: ../../src/fieldaction.cc:486
+#: ../../src/fieldaction.cc:642
+#, fuzzy
+msgid "Build roads"
+msgstr "Opzioni per la generazione"
+
+#: ../../src/fieldaction.cc:513
+#, fuzzy
+msgid "Send less soldiers"
+msgstr "Invia un messaggio privato"
+
+#: ../../src/fieldaction.cc:524
+#, fuzzy
+msgid "Send more soldiers"
+msgstr "Sii più aggressivo"
+
+#: ../../src/fieldaction.cc:531
+#, fuzzy
+msgid "Start attack"
+msgstr "Attacca il nemico"
+
+#: ../../src/fieldaction.cc:538
+msgid "Attack"
+msgstr "Attacca"
+
+#: ../../src/fieldaction.cc:616
+#, fuzzy
+msgid "Build mines"
+msgstr "La liberazione delle Miniere"
+
+#: ../../src/fieldaction.cc:634
+#, fuzzy
+msgid "Build flag"
+msgstr "Bandiera nera"
+
+#: ../../src/fieldaction.cc:638
+#, fuzzy
+msgid "Cancel road"
+msgstr "Velocità sulla Strada"
+
+#: ../../src/transport_ui.cc:42
+#, fuzzy
+msgid "Target quantities"
+msgstr "Oggetto Target"
+
+#: ../../src/transport_ui.cc:136
+msgid "Decrease permanent target quantity"
+msgstr ""
+
+#: ../../src/transport_ui.cc:165
+msgid "Increase permanent target quantity"
+msgstr ""
+
+#: ../../src/transport_ui.cc:192
+msgid "Decrease temporary target quantity"
+msgstr ""
+
+#: ../../src/transport_ui.cc:221
+msgid "Increase temporary target quantity"
+msgstr ""
+
+#: ../../src/transport_ui.cc:246
+msgid "Reset"
+msgstr "Reimposta"
+
+#: ../../src/transport_ui.cc:246
+msgid "Reset target quantity to default value"
+msgstr ""
+
+#: ../../src/playerdescrgroup.cc:85
+#, fuzzy
+msgid "Initialization"
+msgstr "Inizializzazione codificatore fallita"
+
+#: ../../src/playerdescrgroup.cc:136
+#: ../../src/ui_fsmenu/netsetup_lan.cc:187
+msgid "Open"
+msgstr "Apri"
+
+#: ../../src/playerdescrgroup.cc:147
+#: ../../src/network/nethost.cc:998
+msgid "Computer"
+msgstr "Computer"
+
+#: ../../src/playerdescrgroup.cc:149
+msgid "AI: "
+msgstr "AI: "
+
+#: ../../src/playerdescrgroup.cc:152
+msgid "Human"
+msgstr "Umano"
+
+#: ../../src/map.cc:410
+msgid "Player 1"
+msgstr "Giocatore 1"
+
+#: ../../src/militarysite.cc:65
+#: ../../src/logic/warehouse.cc:277
+msgid " conquer"
+msgstr ""
+
+#: ../../src/militarysite.cc:121
+#, c-format
+msgid "%u soldier"
+msgid_plural "%u soldiers"
+msgstr[0] "%u soldato"
+msgstr[1] "%u soldati"
+
+#: ../../src/militarysite.cc:126
+#, c-format
+msgid "%u(+%u) soldier"
+msgid_plural "%u(+%u) soldiers"
+msgstr[0] "%u(+%u) soldato"
+msgstr[1] "%u(+%u) soldati"
+
+#: ../../src/constructionsite.cc:188
+#, fuzzy, c-format
+msgid "%u%% built"
+msgstr " - Costruito %s"
+
+#: ../../src/editor/editorinteractive.cc:64
+msgid "Menu"
+msgstr "Menù"
+
+#: ../../src/editor/editorinteractive.cc:67
+msgid "Tool"
+msgstr "Strumento"
+
+#: ../../src/editor/editorinteractive.cc:70
+msgid "Toolsize"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:73
+#: ../../src/wui/interactive_spectator.cc:61
+#: ../../src/wui/interactive_player.cc:189
+msgid "Minimap"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:76
+#: ../../src/wui/interactive_player.cc:192
+msgid "Buildhelp"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:79
+msgid "Players"
+msgstr "Giocatori"
+
+#: ../../src/editor/editorinteractive.cc:82
+msgid "Events"
+msgstr "Eventi"
+
+#: ../../src/editor/editorinteractive.cc:85
+#, fuzzy
+msgid "Variables"
+msgstr "Variabili"
+
+#: ../../src/editor/editorinteractive.cc:88
+#: ../../src/wui/interactive_player.cc:186
+#, fuzzy
+msgid "Objectives"
+msgstr "Obiettivi dello scenario"
+
+#: ../../src/editor/editorinteractive.cc:164
+#, fuzzy
+msgid "Unsupported format"
+msgstr "Formato audio non supportato"
+
+#: ../../src/editor/editorinteractive.cc:166
+#, c-format
+msgid "Widelands could not load the file \"%s\". The file format seems to be incompatible."
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:181
+#: ../../src/logic/editor_game_base.cc:566
+#, fuzzy
+msgid "Loading world data"
+msgstr "Caricamento file di dati"
+
+#: ../../src/editor/editorinteractive.cc:222
+#, fuzzy
+msgid "Map unsaved"
+msgstr "Modifiche non salvate"
+
+#: ../../src/editor/editorinteractive.cc:223
+msgid "The Map is unsaved, do you really want to quit?"
+msgstr ""
+
+#: ../../src/editor/editorinteractive.cc:564
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:403
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:184
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:179
+#: ../../src/map.h:196
+#: ../../src/map.h:203
+msgid "No Name"
+msgstr "Senza Nome"
+
+#: ../../src/editor/editorinteractive.cc:566
+#: ../../src/ui_fsmenu/netsetup_lan.cc:189
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:404
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:185
+#: ../../src/map.h:197
+#, fuzzy
+msgid "Unknown"
+msgstr "sconosciuto"
+
+#: ../../src/wui/general_statistics_menu.cc:52
+#: ../../src/wui/game_main_menu.cc:47
+#, fuzzy
+msgid "General Statistics"
+msgstr "Invia le statistiche"
+
+#: ../../src/wui/general_statistics_menu.cc:146
+#, fuzzy
+msgid "Land"
+msgstr "Land"
+
+#: ../../src/wui/general_statistics_menu.cc:164
+msgid "Wares"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:170
+msgid "Productivity"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:176
+msgid "Casualties"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:182
+#, fuzzy
+msgid "Kills"
+msgstr "Uccisioni"
+
+#: ../../src/wui/general_statistics_menu.cc:188
+#, fuzzy
+msgid "Military buildings lost"
+msgstr "Persa connessione a %s (%s:%i)"
+
+#: ../../src/wui/general_statistics_menu.cc:194
+#, fuzzy
+msgid "Military buildings defeated"
+msgstr "Membro del clan sconfitto"
+
+#: ../../src/wui/general_statistics_menu.cc:200
+#, fuzzy
+msgid "Civilian buildings lost"
+msgstr "Persa connessione a %s (%s:%i)"
+
+#: ../../src/wui/general_statistics_menu.cc:206
+msgid "Military"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:224
+#: ../../src/wui/ware_statistics_menu.cc:427
+#, fuzzy
+msgid "15 m"
+msgstr "Schermo 15"
+
+#: ../../src/wui/general_statistics_menu.cc:233
+#: ../../src/wui/ware_statistics_menu.cc:436
+#, fuzzy
+msgid "30 m"
+msgstr "NTSC - 30 FPS"
+
+#: ../../src/wui/general_statistics_menu.cc:242
+#: ../../src/wui/ware_statistics_menu.cc:445
+msgid "1 h"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:251
+#: ../../src/wui/ware_statistics_menu.cc:454
+msgid "2 h"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:262
+#: ../../src/wui/ware_statistics_menu.cc:465
+#, fuzzy
+msgid "Help"
+msgstr "Aiuto"
+
+#: ../../src/wui/general_statistics_menu.cc:271
+#: ../../src/wui/ware_statistics_menu.cc:474
+msgid "4 h"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:279
+#: ../../src/wui/ware_statistics_menu.cc:483
+msgid "8 h"
+msgstr ""
+
+#: ../../src/wui/general_statistics_menu.cc:288
+#: ../../src/wui/ware_statistics_menu.cc:492
+#, fuzzy
+msgid "16 h"
+msgstr "16:9"
+
+#: ../../src/wui/stock_menu.cc:70
+#, fuzzy
+msgid "Show wares"
+msgstr "Mostra la griglia"
+
+#: ../../src/wui/stock_menu.cc:75
+#, fuzzy
+msgid "Show workers"
+msgstr "Mostra la griglia"
+
+#: ../../src/wui/interactive_spectator.cc:51
+#: ../../src/wui/interactive_player.cc:177
+msgid "Chat"
+msgstr "Chat"
+
+#: ../../src/wui/interactive_spectator.cc:53
+msgid "Exit Replay"
+msgstr "Esci dal Replay"
+
+#: ../../src/wui/interactive_spectator.cc:55
+#: ../../src/wui/game_main_menu_save_game.cc:63
+#: ../../src/wui/game_options_menu.cc:85
+msgid "Save Game"
+msgstr "Salva la Partita"
+
+#: ../../src/wui/interactive_spectator.cc:57
+#: ../../src/wui/interactive_player.cc:180
+#: ../../src/wui/game_options_menu.cc:42
+#: ../../src/ui_fsmenu/main.cc:69
+msgid "Options"
+msgstr "Opzioni"
+
+#: ../../src/wui/interactive_spectator.cc:59
+#: ../../src/wui/interactive_player.cc:183
+msgid "Statistics"
+msgstr "Statistiche"
+
+#: ../../src/wui/interactive_player.cc:195
+msgid "Messages"
+msgstr "Messaggi"
+
+#: ../../src/wui/interactive_player.cc:201
+msgid "Resource information"
+msgstr "Informazioni sulle Risorse"
+
+#: ../../src/wui/interactive_player.cc:205
+#, fuzzy
+msgid "Ware help"
+msgstr "Aiuta Wesnoth"
+
+#: ../../src/wui/game_main_menu_save_game.cc:67
+#, fuzzy
+msgid "Map Name: "
+msgstr "Cambio nome"
+
+#: ../../src/wui/game_main_menu_save_game.cc:71
+#, fuzzy
+msgid "Game Time: "
+msgstr "Tempo di Gioco Totale - %s"
+
+#: ../../src/wui/game_main_menu_save_game.cc:79
+#: ../../src/ui_basic/messagebox.cc:89
+#: ../../src/ui_fsmenu/loadgame.cc:61
+#: ../../src/ui_fsmenu/campaign_select.cc:78
+#: ../../src/ui_fsmenu/campaign_select.cc:291
+#: ../../src/ui_fsmenu/loadreplay.cc:57
+#: ../../src/ui_fsmenu/editor_mapselect.cc:110
+#: ../../src/ui_fsmenu/mapselect.cc:118
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:118
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:61
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:133
+msgid "OK"
+msgstr "OK"
+
+#: ../../src/wui/game_main_menu_save_game.cc:87
+#: ../../src/ui_fsmenu/options.cc:69
+#: ../../src/ui_fsmenu/options.cc:343
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:100
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:194
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:263
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:224
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:234
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:190
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:263
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:127
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:296
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:135
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:70
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:100
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:176
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:140
+msgid "Cancel"
+msgstr "Annulla"
+
+#: ../../src/wui/game_main_menu_save_game.cc:132
+#, fuzzy, c-format
+msgid "%02ud%02uh%02u'%u\"%03u"
+msgstr "%02uG %02uore %02umin %02usec"
+
+#: ../../src/wui/game_main_menu_save_game.cc:192
+msgid ""
+"Game Saving Error!\n"
+"Saved Game-File may be corrupt!\n"
+"\n"
+"Reason given:\n"
+msgstr ""
+
+#: ../../src/wui/game_main_menu_save_game.cc:196
+#: ../../src/wui/game_main_menu_save_game.cc:207
+#, fuzzy
+msgid "Save Game Error!!"
+msgstr "Errore mentre si gioca la partita: "
+
+#: ../../src/wui/game_main_menu_save_game.cc:208
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:358
+#, fuzzy
+msgid "A File with the name "
+msgstr "Un file con lo stesso nome esiste già"
+
+#: ../../src/wui/game_main_menu_save_game.cc:212
+#, fuzzy
+msgid " already exists. Overwrite?"
+msgstr "Il file \"%s\" esiste già!"
+
+#: ../../src/wui/game_message_menu.cc:37
+#, fuzzy
+msgid "Message Menu"
+msgstr "Converti menu"
+
+#: ../../src/wui/game_message_menu.cc:48
+#, fuzzy
+msgid "delete selected message"
+msgstr "Elimina l'elemento selezionato"
+
+#: ../../src/wui/game_message_menu.cc:56
+#, fuzzy
+msgid "delete all messages"
+msgstr "Filtra tutti i messaggi"
+
+#: ../../src/wui/game_message_menu.cc:63
+#, fuzzy
+msgid "go to location"
+msgstr "Vai alla riga"
+
+#: ../../src/wui/game_message_menu.cc:70
+#, fuzzy
+msgid "sort messages"
+msgstr "Pulisci i messaggi"
+
+#: ../../src/wui/game_options_menu.cc:52
+#, fuzzy
+msgid "README"
+msgstr "Leggimi / FAQ..."
+
+#: ../../src/wui/game_options_menu.cc:60
+#: ../../src/ui_fsmenu/main.cc:90
+msgid "License"
+msgstr "Licenza"
+
+#: ../../src/wui/game_options_menu.cc:68
+#, fuzzy
+msgid "Authors"
+msgstr "Autori"
+
+#: ../../src/wui/game_options_menu.cc:76
+#: ../../src/wui/game_options_sound_menu.cc:27
+msgid "Sound Options"
+msgstr "Opzioni Effetti Sonori"
+
+#: ../../src/wui/game_options_menu.cc:95
+#: ../../src/ui_fsmenu/main.cc:97
+msgid "Exit Game"
+msgstr "Esci dal Gioco"
+
+#: ../../src/wui/game_chat_menu.cc:44
+#, fuzzy
+msgid "Chat Menu"
+msgstr "Converti menu"
+
+#: ../../src/wui/game_main_menu.cc:38
+#: ../../src/editor/ui_menus/editor_main_menu.cc:44
+msgid "Main Menu"
+msgstr "Menu Principale"
+
+#: ../../src/wui/game_main_menu.cc:54
+#: ../../src/wui/ware_statistics_menu.cc:355
+#, fuzzy
+msgid "Ware Statistics"
+msgstr "Invia le statistiche"
+
+#: ../../src/wui/game_main_menu.cc:61
+#: ../../src/wui/building_statistics_menu.cc:80
+#, fuzzy
+msgid "Building Statistics"
+msgstr "Invia le statistiche"
+
+#: ../../src/wui/game_options_sound_menu.cc:32
+#, fuzzy
+msgid "Ingame Music"
+msgstr "Volume della musica:"
+
+#: ../../src/wui/game_options_sound_menu.cc:38
+msgid "Sound FX"
+msgstr "Effetti Sonori"
+
+#: ../../src/wui/game_options_sound_menu.cc:42
+#, fuzzy
+msgid "Ingame Music Volume"
+msgstr "Cambia il volume della musica"
+
+#: ../../src/wui/game_options_sound_menu.cc:56
+msgid "Sound FX Volume"
+msgstr "Volume Effetti Sonori"
+
+#: ../../src/wui/interactive_base.cc:203
+#, c-format
+msgid "%u.%ux"
+msgstr ""
+
+#: ../../src/wui/interactive_base.cc:206
+msgid "PAUSE"
+msgstr "Pausa"
+
+#: ../../src/wui/interactive_base.cc:226
+#, c-format
+msgid "%s (%s)"
+msgstr ""
+
+#: ../../src/wui/interactive_base.cc:231
+#, fuzzy
+msgid "NO GAME CONTROLLER"
+msgstr "Non è un gioco, Konrad!"
+
+#: ../../src/wui/building_statistics_menu.cc:90
+#, fuzzy
+msgid "Total Productivity: "
+msgstr "Totale dipendenze: "
+
+#: ../../src/wui/building_statistics_menu.cc:92
+#, fuzzy
+msgid "Owned: "
+msgstr "Villaggio proprio"
+
+#: ../../src/wui/building_statistics_menu.cc:98
+#, fuzzy
+msgid "In Build: "
+msgstr "Opzioni per la generazione"
+
+#: ../../src/wui/building_statistics_menu.cc:104
+#, fuzzy
+msgid "Jump to unproductive: "
+msgstr "Vai alla Linea "
+
+#: ../../src/wui/building_statistics_menu.cc:113
+#, fuzzy
+msgid "Prod"
+msgstr "prod"
+
+#: ../../src/wui/building_statistics_menu.cc:114
+#, fuzzy
+msgid "Owned"
+msgstr "Villaggio proprio"
+
+#: ../../src/wui/building_statistics_menu.cc:115
+#, fuzzy
+msgid "Build"
+msgstr "Genera"
+
+#: ../../src/wui/building_statistics_menu.cc:128
+#: ../../src/wui/building_statistics_menu.cc:148
+#: ../../src/wui/building_statistics_menu.cc:168
+#, fuzzy
+msgid "Show previous"
+msgstr "Unità precedente"
+
+#: ../../src/wui/building_statistics_menu.cc:138
+#: ../../src/wui/building_statistics_menu.cc:158
+#: ../../src/wui/building_statistics_menu.cc:178
+#, fuzzy
+msgid "Show next"
+msgstr "Mostra il prossimo suggerimento del giorno"
+
+#: ../../src/wui/game_objectives_menu.cc:46
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:161
+#, fuzzy
+msgid "Objectives Menu"
+msgstr "Converti menu"
+
+#: ../../src/wui/game_objectives_menu.cc:66
+#, fuzzy
+msgid "Claim Victory"
+msgstr "Una vittoria veloce"
+
+#: ../../src/wui/game_objectives_menu.cc:73
+#, fuzzy
+msgid "Restart Mission"
+msgstr "Missione? Quale missione?"
+
+#: ../../src/logic/warehouse.cc:431
+#, fuzzy
+msgid "A new warehouse is created"
+msgstr "Nuova traccia audio creata"
+
+#: ../../src/logic/game.cc:203
+#, fuzzy
+msgid "Preloading a map"
+msgstr "Chiudi mappa"
+
+#: ../../src/logic/game.cc:214
+#, fuzzy
+msgid "Loading a world"
+msgstr "Sfoglia Mondo"
+
+#: ../../src/logic/game.cc:220
+#, fuzzy, c-format
+msgid "Adding player %u"
+msgstr "Nessuno"
+
+#: ../../src/logic/game.cc:233
+#, fuzzy
+msgid "Loading a map"
+msgstr "Errore di caricamento della mappa"
+
+#: ../../src/logic/game.cc:264
+#: ../../src/logic/game.cc:311
+#: ../../src/logic/game.cc:344
+#, fuzzy
+msgid "Preloading map"
+msgstr "Chiudi mappa"
+
+#: ../../src/logic/game.cc:278
+#, fuzzy
+msgid "Configuring players"
+msgstr "Qualsiasi numero di giocatori"
+
+#: ../../src/logic/game.cc:295
+#, fuzzy
+msgid "Loading map"
+msgstr "Errore di caricamento della mappa"
+
+#: ../../src/logic/game.cc:422
+#, fuzzy
+msgid "Creating player infrastructure"
+msgstr "Giocatore locale anonimo"
+
+#: ../../src/logic/editor_game_base.cc:570
+#, fuzzy, c-format
+msgid "Loading tribe: %s"
+msgstr "Caricamento livello"
+
+#: ../../src/logic/building.cc:504
+#: ../../src/editor/tools/editor_info_tool.cc:61
+msgid "small"
+msgstr "piccolo"
+
+#: ../../src/logic/building.cc:505
+#: ../../src/editor/tools/editor_info_tool.cc:62
+msgid "medium"
+msgstr "medio"
+
+#: ../../src/logic/building.cc:505
+#: ../../src/editor/tools/editor_info_tool.cc:63
+msgid "big"
+msgstr "grande"
+
+#: ../../src/logic/worker.cc:813
+#, fuzzy
+msgid "Resources found."
+msgstr "(non trovato)"
+
+#: ../../src/logic/player.cc:109
+#, fuzzy
+msgid "Missing starting position"
+msgstr "Posizione iniziale per l'asse X"
+
+#: ../../src/logic/player.cc:111
+#, c-format
+msgid ""
+"Widelands could not start the game, because player %u has no starting position.\n"
+"You can manually add a starting position with Widelands Editor, to fix this problem."
+msgstr ""
+
+#: ../../src/events/event_factory.cc:49
+#, fuzzy
+msgid "Allow building type"
+msgstr "Tipo costruttore GTK+"
+
+#: ../../src/events/event_factory.cc:51
+msgid "Allows (or forbids) the construction of a building type for a player."
+msgstr ""
+
+#: ../../src/events/event_factory.cc:55
+#, fuzzy
+msgid "Create building"
+msgstr "Costruzione fallita"
+
+#: ../../src/events/event_factory.cc:56
+msgid "Create a building and optionally place workers in it"
+msgstr ""
+
+#: ../../src/events/event_factory.cc:59
+#, fuzzy
+msgid "Conquer area"
+msgstr "Area Faccia"
+
+#: ../../src/events/event_factory.cc:61
+msgid "Gives ownership of all unowned locations whithin an area to the player."
+msgstr ""
+
+#: ../../src/events/event_factory.cc:65
+#, fuzzy
+msgid "Create flag"
+msgstr "Bandiera nera"
+
+#: ../../src/events/event_factory.cc:66
+#, fuzzy
+msgid "Create a flag."
+msgstr "Bandiera nera"
+
+#: ../../src/events/event_factory.cc:69
+#, fuzzy
+msgid "Create immovable"
+msgstr "Crea partita"
+
+#: ../../src/events/event_factory.cc:70
+#, fuzzy
+msgid "Create an immovable."
+msgstr "Crea partita"
+
+#: ../../src/events/event_factory.cc:73
+#, fuzzy
+msgid "Show message box"
+msgstr "Mostra _finestra messaggi"
+
+#: ../../src/events/event_factory.cc:75
+msgid "Show a message box. It can be modal or and have a picture. An events can be assigned to each button to give the user chose the course of the game."
+msgstr ""
+
+#: ../../src/events/event_factory.cc:80
+#, fuzzy
+msgid "Move view"
+msgstr "Mostra elenco"
+
+#: ../../src/events/event_factory.cc:81
+msgid "Center the player's view on a certain location."
+msgstr ""
+
+#: ../../src/events/event_factory.cc:84
+#, fuzzy
+msgid "Reveal campaign"
+msgstr "Progetto delle campagne"
+
+#: ../../src/events/event_factory.cc:85
+#, fuzzy
+msgid "Reveal a campaign."
+msgstr "Progetto delle campagne"
+
+#: ../../src/events/event_factory.cc:88
+#, fuzzy
+msgid "Reveal objective"
+msgstr "Imposta obiettivo..."
+
+#: ../../src/events/event_factory.cc:89
+#, fuzzy
+msgid "Reveal an objective."
+msgstr "Imposta obiettivo..."
+
+#: ../../src/events/event_factory.cc:92
+#, fuzzy
+msgid "Reveal scenario"
+msgstr "Obiettivi dello scenario"
+
+#: ../../src/events/event_factory.cc:93
+#, fuzzy
+msgid "Reveal a scenario."
+msgstr "Obiettivi dello scenario"
+
+#: ../../src/events/event_factory.cc:96
+#, fuzzy
+msgid "Create road"
+msgstr "Velocità sulla Strada"
+
+#: ../../src/events/event_factory.cc:97
+msgid "Create a road and optionally place a carrier on it"
+msgstr ""
+
+#: ../../src/events/event_factory.cc:100
+#, fuzzy
+msgid "Set timer"
+msgstr "10 Impulsi"
+
+#: ../../src/events/event_factory.cc:101
+msgid "Set a timer to trigger after a certain duration."
+msgstr ""
+
+#: ../../src/events/event_factory.cc:104
+#, fuzzy
+msgid "Unhide area"
+msgstr "Area Faccia"
+
+#: ../../src/events/event_factory.cc:106
+msgid "Gives vision for a specified amount of time of all locations whithin an area to the player."
+msgstr ""
+
+#: ../../src/events/event_factory.cc:110
+#, fuzzy
+msgid "victory"
+msgstr "Vittoria"
+
+#: ../../src/events/event_factory.cc:111
+msgid "Allows a player to claim victory of this campain"
+msgstr ""
+
+#: ../../src/events/event_message_box.cc:41
+#, fuzzy
+msgid "No text defined"
+msgstr "Non è stata definita nessuna griglia."
+
+#: ../../src/events/event_message_box.cc:42
+#, fuzzy
+msgid "Window Title"
+msgstr "Titolo finestra"
+
+#: ../../src/ui_basic/spinbox.cc:122
+#, fuzzy
+msgid "Increase the value"
+msgstr "Mappa Valori"
+
+#: ../../src/ui_basic/spinbox.cc:130
+#, fuzzy
+msgid "Decrease the value"
+msgstr "Mappa Valori"
+
+#: ../../src/ui_basic/spinbox.cc:141
+#, fuzzy
+msgid "Increase the value by 10"
+msgstr "Aumenta il rientro di uno spazio"
+
+#: ../../src/ui_basic/spinbox.cc:149
+#, fuzzy
+msgid "Decrease the value by 10"
+msgstr "Diminuisce il rientro di uno spazio"
+
+#: ../../src/ui_basic/progresswindow.cc:42
+#, fuzzy
+msgid "Preparing..."
+msgstr "Preparazione di %s in corso"
+
+#: ../../src/map_io/widelands_map_loader.cc:87
+#, fuzzy
+msgid "Invalid World"
+msgstr "Sfoglia Mondo"
+
+#: ../../src/map_io/widelands_map_loader.cc:89
+#, c-format
+msgid "The world \"%s\" set by the map, does not exist on your filesystem."
+msgstr ""
+
+#: ../../src/network/netclient.cc:94
+#, fuzzy
+msgid "Could not establish connection to host"
+msgstr "Impossibile connettersi a %s:%s (%s), tempo limite di connessione esaurito"
+
+#: ../../src/network/netclient.cc:96
+msgid ""
+"Widelands could not establish a connection to the given address.\n"
+"Either no Widelands server was running at the supposed port or\n"
+"the server shut down as you tried to connect."
+msgstr ""
+
+#: ../../src/network/netclient.cc:117
+#, fuzzy
+msgid "Client has left the game."
+msgstr "L'host ha abbandonato la partita!"
+
+#: ../../src/network/netclient.cc:193
+msgid "Client crashed and performed an emergency save."
+msgstr ""
+
+#: ../../src/network/netclient.cc:382
+msgid "Server sent a player update for a player that does not exist."
+msgstr ""
+
+#: ../../src/network/netclient.cc:400
+msgid "Server sent an user update for a user that does not exist."
+msgstr ""
+
+#: ../../src/network/netclient.cc:476
+#, c-format
+msgid "Expected a HELLO packet from server, but received command number %u. Maybe the server is running a different version of Widelands?"
+msgstr ""
+
+#: ../../src/network/netclient.cc:483
+msgid "Server uses a different protocol version"
+msgstr ""
+
+#: ../../src/network/netclient.cc:557
+msgid "Unexpectedly received LAUNCH command from server."
+msgstr ""
+
+#: ../../src/network/netclient.cc:577
+msgid "Server sent a PLAYERCOMMAND even though no game is running."
+msgstr ""
+
+#: ../../src/network/netclient.cc:590
+msgid "Server sent a SYNCREQUEST even though no game is running."
+msgstr ""
+
+#: ../../src/network/netclient.cc:617
+#, c-format
+msgid "Server sent an unknown command (command number %u)"
+msgstr ""
+
+#: ../../src/network/netclient.cc:651
+#, fuzzy
+msgid "Server sent malformed commands: "
+msgstr "Il server HTTP ha inviato un header di risposta non valido"
+
+#: ../../src/network/netclient.cc:682
+#, fuzzy
+msgid " An automatic savegame will be created."
+msgstr "Impossibile creare la cartella di configurazione (%s)."
+
+#: ../../src/network/nethost.cc:311
+#, fuzzy
+msgid "Server has left the game."
+msgstr "L'host ha abbandonato la partita!"
+
+#: ../../src/network/nethost.cc:387
+msgid "The game has started just after you tried to connect."
+msgstr ""
+
+#: ../../src/network/nethost.cc:456
+msgid "Server has crashed and performed an emergency save."
+msgstr ""
+
+#: ../../src/network/nethost.cc:751
+#, c-format
+msgid "Host sent player %s to the lobby!"
+msgstr ""
+
+#: ../../src/network/nethost.cc:1085
+#, c-format
+msgid "WARNING: %s uses version: %s, while Host uses version: %s"
+msgstr ""
+
+#: ../../src/network/nethost.cc:1121
+#, fuzzy, c-format
+msgid "%s has joined the game"
+msgstr "%s ha abbandonato la partita"
+
+#: ../../src/network/nethost.cc:1145
+msgid "Client reports time to host that is running backwards."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1148
+msgid "Client simulates beyond the game time allowed by the host."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1152
+msgid "Client did not submit sync report in time."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1328
+msgid "Client and host have become desynchronized."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1370
+#, fuzzy
+msgid "New User"
+msgstr "Comando-utente#2"
+
+#: ../../src/network/nethost.cc:1375
+#, fuzzy
+msgid "The game has already started."
+msgstr "Il filesystem ha già un journal.\n"
+
+#: ../../src/network/nethost.cc:1393
+#, fuzzy
+msgid "Connection to client lost."
+msgstr "*** Impossibile connettersi al client / Connessione persa ***"
+
+#: ../../src/network/nethost.cc:1407
+msgid "Client sent malformed commands: "
+msgstr ""
+
+#: ../../src/network/nethost.cc:1440
+msgid "Game is running already, but client has not connected fully"
+msgstr ""
+
+#: ../../src/network/nethost.cc:1444
+#, c-format
+msgid "First command sent by client is %u instead of HELLO. Most likely the client is running an incompatible version."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1450
+msgid "Server uses a different protocol version."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1526
+msgid "Client sent TIME command even though game is not running."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1534
+msgid "Client sent PLAYERCOMMAND command even though game is not running."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1546
+#, c-format
+msgid "Client %i (%i) sent a playercommand (%i) for a different player (%i)."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1555
+msgid "Client sent unexpected synchronization report."
+msgstr ""
+
+#: ../../src/network/nethost.cc:1590
+#, c-format
+msgid "Client sent unknown command number %u"
+msgstr ""
+
+#: ../../src/network/nethost.cc:1631
+#, fuzzy, c-format
+msgid "%s has left the game (%s)"
+msgstr "%s ha abbandonato la partita"
+
+#: ../../src/network/network_ggz.cc:226
+#, fuzzy
+msgid "Dropping connection to the metaserver."
+msgstr "Impossibile iniziare la connessione a %s:%s (%s)."
+
+#: ../../src/network/network_ggz.cc:416
+#, fuzzy
+msgid "Connected to the metaserver of:"
+msgstr " è connesso a "
+
+#: ../../src/graphic/graphic.cc:744
+#, fuzzy, c-format
+msgid "Loading animations: %d%% complete"
+msgstr "Ultima fonte completa vista"
+
+#: ../../src/trigger/trigger_factory.cc:39
+#, fuzzy
+msgid "Building Trigger"
+msgstr "Intensit Innesco"
+
+#: ../../src/trigger/trigger_factory.cc:41
+msgid "Triggers when the player has the specified number of buildings of the specified type in the specified area."
+msgstr ""
+
+#: ../../src/trigger/trigger_factory.cc:45
+#, fuzzy
+msgid "Defeated Player Trigger"
+msgstr "Giocatore locale anonimo"
+
+#: ../../src/trigger/trigger_factory.cc:47
+msgid "Triggers when the player was defeated. The trigger is set to true, if the player has 0 workers."
+msgstr ""
+
+#: ../../src/trigger/trigger_factory.cc:51
+#, fuzzy
+msgid "Military influence Trigger"
+msgstr "Inserisci Chiave influenza"
+
+#: ../../src/trigger/trigger_factory.cc:53
+msgid "Triggers when the player has some (or highest) military influence over the specified number of nodes in the specified area."
+msgstr ""
+
+#: ../../src/trigger/trigger_factory.cc:57
+#, fuzzy
+msgid "Ownership Trigger"
+msgstr "Intensit Innesco"
+
+#: ../../src/trigger/trigger_factory.cc:59
+msgid "Triggers when the the player owns at least the specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
+msgstr ""
+
+#: ../../src/trigger/trigger_factory.cc:64
+#, fuzzy
+msgid "Time Trigger"
+msgstr "Intensit Innesco"
+
+#: ../../src/trigger/trigger_factory.cc:66
+msgid "Triggers at a certain time. The time can be set to a value in ms. If the trigger has no time is set, a time can be set for it with an event."
+msgstr ""
+
+#: ../../src/trigger/trigger_factory.cc:71
+#, fuzzy
+msgid "Vision Trigger"
+msgstr "Intensit Innesco"
+
+#: ../../src/trigger/trigger_factory.cc:73
+msgid "Triggers when the the player sees (or has seen) at least a specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
+msgstr ""
+
+#: ../../src/ui_fsmenu/multiplayer.cc:46
+#, fuzzy
+msgid "Choose game type"
+msgstr "Sel. tipo di campo"
+
+#: ../../src/ui_fsmenu/multiplayer.cc:54
+#, fuzzy
+msgid "Internet game"
+msgstr "Crea partita"
+
+#: ../../src/ui_fsmenu/multiplayer.cc:61
+#, fuzzy
+msgid "LAN / Direct IP"
+msgstr "Modalità diretta fotogrammi-B "
+
+#: ../../src/ui_fsmenu/multiplayer.cc:68
+#: ../../src/ui_fsmenu/netsetup_lan.cc:83
+#: ../../src/ui_fsmenu/singleplayer.cc:73
+#: ../../src/ui_fsmenu/editor.cc:59
+#: ../../src/ui_fsmenu/loadgame.cc:54
+#: ../../src/ui_fsmenu/campaign_select.cc:85
+#: ../../src/ui_fsmenu/campaign_select.cc:298
+#: ../../src/ui_fsmenu/loadreplay.cc:50
+#: ../../src/ui_fsmenu/launchgame.cc:75
+#: ../../src/ui_fsmenu/editor_mapselect.cc:103
+#: ../../src/ui_fsmenu/mapselect.cc:111
+#: ../../src/ui_fsmenu/netsetup_ggz.cc:104
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:117
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:84
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:181
+msgid "Back"
+msgstr "Indietro"
+
+#: ../../src/ui_fsmenu/netsetup_lan.cc:49
+#, fuzzy
+msgid "Begin Network Game"
+msgstr "Ospita partita in rete"
+
+#: ../../src/ui_fsmenu/netsetup_lan.cc:53
+msgid "List of games in your local network:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/netsetup_lan.cc:57
+#: ../../src/ui_fsmenu/netsetup_ggz.cc:67
+#, fuzzy
+msgid "Your nickname:"
+msgstr "Nickname: %s ID: %u"
+
+#: ../../src/ui_fsmenu/netsetup_lan.cc:61
+#, fuzzy
+msgid "Host to connect:"
+msgstr "Impossibile connettersi all'host remoto."
+
+#: ../../src/ui_fsmenu/netsetup_lan.cc:69
+#: ../../src/ui_fsmenu/netsetup_ggz.cc:90
+#, fuzzy
+msgid "Join this game"
+msgstr "Chiude questo gioco"
+
+#: ../../src/ui_fsmenu/netsetup_lan.cc:76
+msgid "Host a new game"
+msgstr "Ospita un nuovo gioco"
+
+#: ../../src/ui_fsmenu/netsetup_lan.cc:91
+#, fuzzy
+msgid "Load previous host"
+msgstr "Non apre i file di sessioni precedenti"
+
+#: ../../src/ui_fsmenu/netsetup_lan.cc:113
+#: ../../src/ui_fsmenu/netsetup_ggz.cc:145
+msgid "nobody"
+msgstr ""
+
+#: ../../src/ui_fsmenu/netsetup_lan.cc:118
+msgid "Host"
+msgstr "Ospite"
+
+#: ../../src/ui_fsmenu/netsetup_lan.cc:120
+msgid "State"
+msgstr "Stato"
+
+#: ../../src/ui_fsmenu/netsetup_lan.cc:188
+msgid "Closed"
+msgstr "Chiuso"
+
+#: ../../src/ui_fsmenu/singleplayer.cc:44
+msgid "Single Player Menu"
+msgstr "Menu Giocatore Singolo"
+
+#: ../../src/ui_fsmenu/singleplayer.cc:52
+msgid "New Game"
+msgstr "Avvia nuovo gioco"
+
+#: ../../src/ui_fsmenu/singleplayer.cc:59
+msgid "Campaigns"
+msgstr "Campagne"
+
+#: ../../src/ui_fsmenu/singleplayer.cc:66
+msgid "Load Game"
+msgstr "Carica una partita"
+
+#: ../../src/ui_fsmenu/editor.cc:37
+msgid "Editor Menu"
+msgstr "Converti menu"
+
+#: ../../src/ui_fsmenu/editor.cc:45
+#: ../../src/editor/ui_menus/editor_main_menu.cc:51
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:50
+msgid "New Map"
+msgstr "Nuova mappa"
+
+#: ../../src/ui_fsmenu/editor.cc:52
+#: ../../src/editor/ui_menus/editor_main_menu.cc:63
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:51
+msgid "Load Map"
+msgstr "Carica mappa"
+
+#: ../../src/ui_fsmenu/main.cc:48
+msgid "Single Player"
+msgstr "Giocatore Singolo"
+
+#: ../../src/ui_fsmenu/main.cc:55
+msgid "Multi Player"
+msgstr "Multigiocatore"
+
+#: ../../src/ui_fsmenu/main.cc:62
+msgid "Watch Replay"
+msgstr "Guarda i Replay"
+
+#: ../../src/ui_fsmenu/main.cc:76
+#, fuzzy
+msgid "Editor"
+msgstr "Editor"
+
+#: ../../src/ui_fsmenu/main.cc:83
+#: ../../src/editor/ui_menus/editor_main_menu.cc:81
+msgid "View Readme"
+msgstr "Leggimi"
+
+#: ../../src/ui_fsmenu/main.cc:104
+msgid "Version "
+msgstr "Versione"
+
+#: ../../src/ui_fsmenu/main.cc:108
+msgid "by the Widelands Development Team"
+msgstr ""
+
+#: ../../src/ui_fsmenu/loadgame.cc:71
+msgid "Choose saved game!"
+msgstr "Scegli una partita salvata!"
+
+#: ../../src/ui_fsmenu/loadgame.cc:73
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:72
+msgid "Map Name:"
+msgstr "Nome Mappa:"
+
+#: ../../src/ui_fsmenu/loadgame.cc:77
+msgid "Gametime:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/intro.cc:32
+msgid "Press a key or click to continue ..."
+msgstr "Premi un tasto del mouse per continuare ..."
+
+#: ../../src/ui_fsmenu/campaign_select.cc:56
+msgid "Select a campaign"
+msgstr "Seleziona una campagna"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:58
+msgid "Campaign:"
+msgstr "Campagna:"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:62
+msgid "Difficulty:"
+msgstr "Difficoltà:"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:66
+#: ../../src/ui_fsmenu/campaign_select.cc:279
+msgid "Description:"
+msgstr "Descrizione:"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:127
+#: ../../src/ui_fsmenu/campaign_select.cc:169
+#: ../../src/ui_fsmenu/campaign_select.cc:171
+#: ../../src/ui_fsmenu/campaign_select.cc:230
+#: ../../src/ui_fsmenu/campaign_select.cc:418
+#, fuzzy
+msgid "[No value found]"
+msgstr "Nessuna corrispondenza trovata."
+
+#: ../../src/ui_fsmenu/campaign_select.cc:128
+#, fuzzy
+msgid "Easy living"
+msgstr "Prendendo le cose con calma!"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:129
+#, fuzzy
+msgid "Be vigilant"
+msgstr "sdovrebbe essere"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:130
+#, fuzzy
+msgid "Hard struggle"
+msgstr "Una lotta sotterranea"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:174
+#, fuzzy
+msgid "[Invalid entry]"
+msgstr "info entry non valida"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:274
+#: ../../src/ui_fsmenu/editor_mapselect.cc:57
+#: ../../src/ui_fsmenu/mapselect.cc:58
+msgid "Choose your map!"
+msgstr "Scegli la mappa!"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:275
+#: ../../src/ui_fsmenu/editor_mapselect.cc:62
+#: ../../src/ui_fsmenu/mapselect.cc:68
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:65
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:59
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:69
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:57
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:60
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:107
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:71
+msgid "Name:"
+msgstr "Nome:"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:277
+#: ../../src/ui_fsmenu/editor_mapselect.cc:68
+#: ../../src/ui_fsmenu/mapselect.cc:74
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:98
+msgid "Author:"
+msgstr "Autore:"
+
+#: ../../src/ui_fsmenu/campaign_select.cc:358
+#, fuzzy, c-format
+msgid "Invalid path to file in cconfig: %s"
+msgstr "Impossibile trovare il file di immagine nella cartella immagini: \"%s\" nicht finden"
+
+#: ../../src/ui_fsmenu/options.cc:62
+#: ../../src/ui_fsmenu/options.cc:372
+msgid "Advanced Options"
+msgstr "Opzioni Avanzate"
+
+#: ../../src/ui_fsmenu/options.cc:76
+#: ../../src/ui_fsmenu/options.cc:350
+msgid "Apply"
+msgstr "Applica"
+
+#: ../../src/ui_fsmenu/options.cc:87
+msgid "min."
+msgstr "min."
+
+#: ../../src/ui_fsmenu/options.cc:93
+msgid "General Options"
+msgstr "Opzioni Generali"
+
+#: ../../src/ui_fsmenu/options.cc:100
+msgid "Fullscreen"
+msgstr "Schermo intero"
+
+#: ../../src/ui_fsmenu/options.cc:106
+#, fuzzy
+msgid "Grab Input"
+msgstr "Mix ingresso"
+
+#: ../../src/ui_fsmenu/options.cc:112
+msgid "Enable Music"
+msgstr "Abilita Musica"
+
+#: ../../src/ui_fsmenu/options.cc:118
+msgid "Enable Sound"
+msgstr "Abilita Suoni"
+
+#: ../../src/ui_fsmenu/options.cc:123
+msgid "Maximum FPS:"
+msgstr "FPS Massimi:"
+
+#: ../../src/ui_fsmenu/options.cc:133
+msgid "In-game resolution"
+msgstr "Risoluzione durante il gioco"
+
+#: ../../src/ui_fsmenu/options.cc:138
+msgid "Language"
+msgstr "Lingua"
+
+#: ../../src/ui_fsmenu/options.cc:149
+msgid "In-game Options"
+msgstr "Opzioni durante il gioco"
+
+#: ../../src/ui_fsmenu/options.cc:156
+#, fuzzy
+msgid "Use single Watchwindow Mode"
+msgstr "La modalità di paranoia da usare"
+
+#: ../../src/ui_fsmenu/options.cc:162
+msgid "Start roadbuilding after placing flag"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:168
+msgid "Show buildings area preview"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:175
+msgid "Snap windows only when overlapping"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:181
+#, fuzzy
+msgid "Dock windows to edges"
+msgstr "Sel. livello di suddivisioni da mostrare"
+
+#: ../../src/ui_fsmenu/options.cc:186
+msgid "Save game automatically every"
+msgstr "Salvataggio automatico del gioco ogni"
+
+#: ../../src/ui_fsmenu/options.cc:190
+msgid "Off"
+msgstr "Spento"
+
+#: ../../src/ui_fsmenu/options.cc:274
+msgid "System default language"
+msgstr "Lingua di sistema"
+
+#: ../../src/ui_fsmenu/options.cc:383
+#, fuzzy
+msgid "Main menu font:"
+msgstr "Esci al Menu Principale"
+
+#: ../../src/ui_fsmenu/options.cc:390
+msgid "Do not zip widelands data files (maps, replays and savegames)."
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:395
+msgid "Speed of a new game:"
+msgstr "Velocita del nuovo gioco:"
+
+#: ../../src/ui_fsmenu/options.cc:399
+msgid "Distance for windows to snap to other panels:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:403
+msgid "Distance for windows to snap to borders:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/options.cc:408
+#, fuzzy
+msgid "Graphics experimental improvements."
+msgstr "Inverti i grafici del tempo"
+
+#: ../../src/ui_fsmenu/options.cc:414
+msgid "Graphics double buffering."
+msgstr "Grafica con doppio buffering."
+
+#: ../../src/ui_fsmenu/options.cc:432
+msgid "Pause"
+msgstr "Pausa"
+
+#: ../../src/ui_fsmenu/options.cc:442
+#, fuzzy
+msgid "FreeSerif (Default)"
+msgstr "256 - default"
+
+#: ../../src/ui_fsmenu/loadreplay.cc:68
+#, fuzzy
+msgid "Choose a replay!"
+msgstr "Salva replay"
+
+#: ../../src/ui_fsmenu/launchgame.cc:61
+msgid "Select map"
+msgstr "Seleziona mappa"
+
+#: ../../src/ui_fsmenu/launchgame.cc:68
+msgid "Select Savegame"
+msgstr "Seleziona Gioco Salvato"
+
+#: ../../src/ui_fsmenu/launchgame.cc:82
+msgid "Start game"
+msgstr "Avvia gioco"
+
+#: ../../src/ui_fsmenu/launchgame.cc:89
+msgid "Launch Game"
+msgstr "Lancia Gioco"
+
+#: ../../src/ui_fsmenu/launchgame.cc:129
+#, fuzzy
+msgid "Switch to position"
+msgstr "Passa al compilatore"
+
+#: ../../src/ui_fsmenu/launchgame.cc:143
+#, fuzzy
+msgid "Lobby:"
+msgstr "Lobby"
+
+#: ../../src/ui_fsmenu/launchgame.cc:225
+msgid "File not found"
+msgstr "File non trovato"
+
+#: ../../src/ui_fsmenu/launchgame.cc:227
+#, c-format
+msgid ""
+"Widelands  tried to start a game with a file that could not be found at given path.\n"
+"The file was: %s\n"
+"If this happens in a network game, the host might have selected a file that you do not have. In that case you should ask the host to send you the file."
+msgstr ""
+
+#: ../../src/ui_fsmenu/launchgame.cc:252
+#, fuzzy
+msgid "(no map)"
+msgstr "Chiudi mappa"
+
+#: ../../src/ui_fsmenu/launchgame.cc:288
+#, fuzzy
+msgid "WARNING!!! Host selected file \""
+msgstr "Il file sel. non  un filmato"
+
+#: ../../src/ui_fsmenu/launchgame.cc:290
+msgid "\" for this game, but you do not have it."
+msgstr ""
+
+#: ../../src/ui_fsmenu/launchgame.cc:291
+#, fuzzy
+msgid " Please add it manually."
+msgstr "Aggiungi un server manualmente: Nome"
+
+#: ../../src/ui_fsmenu/launchgame.cc:308
+#, fuzzy
+msgid "Original:"
+msgstr "Originale"
+
+#: ../../src/ui_fsmenu/launchgame.cc:412
+msgid "(Save): "
+msgstr "(Salva): "
+
+#: ../../src/ui_fsmenu/editor_mapselect.cc:74
+#: ../../src/ui_fsmenu/mapselect.cc:80
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:81
+msgid "Size:"
+msgstr "Dimensione:"
+
+#: ../../src/ui_fsmenu/editor_mapselect.cc:80
+#: ../../src/ui_fsmenu/mapselect.cc:86
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:91
+msgid "World:"
+msgstr "Mondo:"
+
+#: ../../src/ui_fsmenu/editor_mapselect.cc:86
+#: ../../src/ui_fsmenu/mapselect.cc:92
+msgid "Players:"
+msgstr "Giocatori:"
+
+#: ../../src/ui_fsmenu/editor_mapselect.cc:92
+#: ../../src/ui_fsmenu/mapselect.cc:98
+msgid "Descr:"
+msgstr ""
+
+#: ../../src/ui_fsmenu/editor_mapselect.cc:230
+#: ../../src/ui_fsmenu/mapselect.cc:264
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:214
+#, fuzzy
+msgid "<parent>"
+msgstr "Genitore"
+
+#: ../../src/ui_fsmenu/mapselect.cc:63
+msgid "Load Map as scenario: "
+msgstr ""
+
+#: ../../src/ui_fsmenu/mapselect.cc:212
+#, fuzzy
+msgid "(directory)"
+msgstr "_Cartella:"
+
+#: ../../src/ui_fsmenu/netsetup_ggz.cc:55
+#, fuzzy
+msgid "Metaserver Lobby"
+msgstr "Game Lobby"
+
+#: ../../src/ui_fsmenu/netsetup_ggz.cc:59
+msgid "Users online:"
+msgstr "Utenti in linea:"
+
+#: ../../src/ui_fsmenu/netsetup_ggz.cc:63
+msgid "List of games:"
+msgstr "Lista delle partite:"
+
+#: ../../src/ui_fsmenu/netsetup_ggz.cc:71
+#, fuzzy
+msgid "Name of your server:"
+msgstr "Aggiungi un server manualmente: Nome"
+
+#: ../../src/ui_fsmenu/netsetup_ggz.cc:75
+msgid "Maximum of players:"
+msgstr "Numero massimo di giocatori:"
+
+#: ../../src/ui_fsmenu/netsetup_ggz.cc:97
+msgid "Open a new game"
+msgstr "Avvia nuovo gioco"
+
+#: ../../src/ui_fsmenu/netsetup_ggz.cc:153
+msgid "Server"
+msgstr "Server"
+
+#: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
+#, fuzzy
+msgid "Immovable Bobs Menu"
+msgstr "Menu Taglia/Passante"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:46
+msgid "Set origin"
+msgstr "Imposta Origine"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:48
+msgid "Set the position that will have the coordinates (0, 0). This will be the top-left corner of a generated minimap."
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:61
+#: ../../src/editor/ui_menus/editor_main_menu.cc:75
+msgid "Map Options"
+msgstr "Opzioni Mappa"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:86
+msgid "Nr Players:"
+msgstr "N. Giocatori:"
+
+#: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:110
+msgid "Nothing defined!"
+msgstr "Nulla di definito!"
+
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:43
+msgid "Terrain Select"
+msgstr "Terreno Selezionato"
+
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:161
+#: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:215
+msgid "Current:"
+msgstr "Corrente:"
+
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:44
+#, fuzzy
+msgid "Resources Tools Options"
+msgstr "Opzioni avanzate"
+
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:48
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:45
+#, fuzzy
+msgid "In-/Decrease Value"
+msgstr "Valore cache in microsecondi"
+
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:80
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:79
+#, fuzzy
+msgid "Set Value"
+msgstr "Imposta un valore delle preferenze."
+
+#: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:102
+#, fuzzy
+msgid "Current Selection"
+msgstr "Strumento Selezione"
+
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:44
+#: ../../src/editor/ui_menus/editor_event_menu.cc:130
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:98
+msgid "New Event"
+msgstr "Nuovo Evento"
+
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:54
+msgid "Available Event types: "
+msgstr "Tipi di Eventi Disponibili: "
+
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:73
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:73
+msgid "Description: "
+msgstr "Descrizione: "
+
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:89
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:187
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:254
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:215
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:109
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:225
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:181
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:254
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:175
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:289
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:128
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:89
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:167
+msgid "Ok"
+msgstr "Ok"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:47
+msgid "Message Box Event Options"
+msgstr ""
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:56
+msgid "Button 1"
+msgstr "Bottone 1"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:57
+msgid "Button 2"
+msgstr "Bottone 2"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:58
+msgid "Button 3"
+msgstr "Bottone 3"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:77
+msgid "Is Modal: "
+msgstr "E' Modale: "
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:86
+msgid "Window Title:"
+msgstr "Titolo Finestra:"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:95
+msgid "Text:"
+msgstr "Testo:"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:108
+msgid "Number of Buttons: "
+msgstr "Numero di Bottoni: "
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:135
+msgid "Button Name: "
+msgstr "Nome Pulsante: "
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:154
+msgid "Select Trigger: "
+msgstr "Seleziona Innesco: "
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:175
+msgid "Current: "
+msgstr "Corrente: "
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:180
+msgid "No trigger selected!"
+msgstr "Nessun innesco selezionato!"
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:258
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:297
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:231
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:304
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:190
+#, c-format
+msgid "There is another event registered with the name \"%s\". Choose another name."
+msgstr ""
+
+#: ../../src/editor/ui_menus/event_message_box_option_menu.cc:263
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:302
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:287
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:236
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:309
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:543
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:195
+msgid "Name in use"
+msgstr "Nome in uso"
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
+msgid "Allowed Buildings"
+msgstr "Costruzioni Permesse"
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:61
+msgid "Allowed Buildings:"
+msgstr "Costruzione Permessa:"
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:67
+msgid "Forbidden Buildings:"
+msgstr "Costruzione Proibita:"
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:85
+msgid "Forbid"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:149
+msgid "<-"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:95
+msgid "Allow"
+msgstr "Consenti"
+
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:49
+msgid "Conquer Area Event Options"
+msgstr ""
+
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:71
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:69
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:72
+msgid "Current position: "
+msgstr "Posizione corrente: "
+
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:177
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:178
+msgid "Player: "
+msgstr "Giocatore: "
+
+#: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:197
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:198
+msgid "Area: "
+msgstr "Area: "
+
+#: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:46
+#, fuzzy
+msgid "Bobs Menu"
+msgstr "Converti menu"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:47
+#, fuzzy
+msgid "Edit Trigger Conditional"
+msgstr "Scala Ipo modifica"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:59
+msgid "Trigger Conditional: "
+msgstr "Innesco Condizionale: "
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:79
+msgid "("
+msgstr "("
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:91
+msgid ")"
+msgstr ")"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:103
+msgid "AND"
+msgstr "e"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:115
+msgid "OR"
+msgstr "O"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:127
+msgid "XOR"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:139
+msgid "NOT"
+msgstr "NON"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:150
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:108
+msgid "Insert"
+msgstr "Inserisci"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:161
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:197
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:270
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:118
+msgid "Delete"
+msgstr "Elimina"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:190
+#, fuzzy
+msgid "Available Triggers: "
+msgstr "Nessuno Disponibile"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:283
+#, fuzzy
+msgid "Syntax Error"
+msgstr "Errore di sintassi!"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:285
+msgid "Your conditional contains at least one syntax error. Please correct!\n"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:67
+#, fuzzy
+msgid "Edit Objective"
+msgstr "Imposta obiettivo..."
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:84
+#, fuzzy
+msgid "Visible at Begin: "
+msgstr "Uniforma i campioni"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:93
+#, fuzzy
+msgid "Objective text: "
+msgstr "Solo _testo"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:166
+msgid "Visible"
+msgstr "Visibile"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:177
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:256
+msgid "New"
+msgstr "Nuovo"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:186
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:262
+#: ../../src/editor/ui_menus/editor_event_menu.cc:108
+#: ../../src/editor/ui_menus/editor_event_menu.cc:139
+#: ../../src/editor/ui_menus/editor_event_menu.cc:171
+msgid "Edit"
+msgstr "Modifica"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:231
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:110
+#: ../../src/editor/ui_menus/editor_event_menu.cc:343
+#, c-format
+msgid "Unnamed%u"
+msgstr "Senza nome%u"
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:252
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:303
+msgid "Trigger: "
+msgstr "Innesco: "
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:275
+msgid "The objective was deleted, but not its trigger, because it is still referenced by:\n"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_objectives_menu.cc:288
+msgid "Note"
+msgstr "Nota"
+
+#: ../../src/editor/ui_menus/editor_main_menu.cc:57
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:52
+msgid "New Random Map"
+msgstr "Nuova Mappa Casuale"
+
+#: ../../src/editor/ui_menus/editor_main_menu.cc:69
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:57
+msgid "Save Map"
+msgstr "Salva Mappa"
+
+#: ../../src/editor/ui_menus/editor_main_menu.cc:87
+msgid "Exit Editor"
+msgstr "Esci dall'Editor"
+
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:48
+#, fuzzy
+msgid "Trigger Option Menu"
+msgstr "Menu Taglia/Passante"
+
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:282
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:538
+#, c-format
+msgid "There is another trigger registered with the name \"%s\". Choose another name."
+msgstr ""
+
+#: ../../src/editor/ui_menus/event_move_view_option_menu.cc:47
+msgid "Move View Event Options"
+msgstr ""
+
+#: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:49
+msgid "Unhide Area Event Options"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:41
+msgid "Player Options"
+msgstr "Opzioni del Giocatore"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:48
+#, fuzzy
+msgid "Add player"
+msgstr "Nessuno"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:56
+msgid "Remove last player"
+msgstr "Rimuovi l'ultimo giocatore"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:68
+msgid "Number of Players"
+msgstr "Numero di Giocatori"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:195
+msgid "Player "
+msgstr "Giocatore "
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:248
+#: ../../src/editor/ui_menus/editor_player_menu.cc:280
+#: ../../src/editor/ui_menus/editor_event_menu.cc:279
+#: ../../src/editor/ui_menus/editor_event_menu.cc:319
+msgid "Error!"
+msgstr "Errore!"
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:250
+msgid "Can not remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this player and try again."
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_player_menu.cc:282
+msgid "Can not change player tribe. It is referenced in some place. Remove all bobs, triggers and events that depend on this tribe and try again."
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:64
+msgid "New Variable"
+msgstr "Nuova Variabile"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:72
+msgid "Integer"
+msgstr "Intero"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:78
+msgid "String"
+msgstr "Stringa"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:158
+msgid "Edit Variable"
+msgstr "Modifica Variabile"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:167
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:276
+msgid "Value"
+msgstr "Valore"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:217
+#, fuzzy, c-format
+msgid "\"%s\" is not a valid integer!"
+msgstr "Il file \"%s\" non è %s valido."
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:219
+#, fuzzy
+msgid "Parse error!"
+msgstr "errori analizzando il template: %s"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:248
+msgid "Variables Menu"
+msgstr "Menu Variabili"
+
+#: ../../src/editor/ui_menus/editor_variables_menu.cc:275
+msgid "Variable"
+msgstr "Variabile"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:54
+msgid "Event Menu"
+msgstr "Menu Eventi"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:63
+msgid "Event Chains: "
+msgstr "Catene di Eventi:"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:73
+msgid "Registered Events: "
+msgstr "Eventi Registrati: "
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:82
+msgid "Registered Triggers"
+msgstr "Innesco Registrato"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:99
+msgid "New Event Chain"
+msgstr "Nuova Catena di Eventi"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:119
+#: ../../src/editor/ui_menus/editor_event_menu.cc:150
+#: ../../src/editor/ui_menus/editor_event_menu.cc:182
+msgid "Del"
+msgstr "Cancella"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:162
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:44
+msgid "New Trigger"
+msgstr "Nuovo Innesco"
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:272
+msgid "Can not delete event. It is in use by "
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:312
+msgid "Can not delete trigger. It is in use by "
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_event_menu.cc:350
+msgid "Unnamed"
+msgstr "Senza nome"
+
+#: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:40
+#, fuzzy
+msgid "Height Tools Options"
+msgstr "Opzioni avanzate"
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:68
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:55
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:84
+msgid "Name: "
+msgstr "Nome: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:75
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:90
+msgid "Author: "
+msgstr "Autore: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:81
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:96
+msgid "Size: "
+msgstr "Dimensione: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:87
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:102
+msgid "World: "
+msgstr "Mondo: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:94
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:109
+msgid "Players: "
+msgstr "Giocatori: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:101
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:115
+msgid "Descr: "
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:70
+msgid "Random Number:"
+msgstr "Numero Casuale:"
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:118
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:348
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:69
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:163
+#, c-format
+msgid "Width: %u"
+msgstr "Larghezza: %u"
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:128
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:352
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:91
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:167
+#, c-format
+msgid "Height: %u"
+msgstr "Altezza: %u"
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:166
+#, c-format
+msgid "Water: %u %%"
+msgstr "acqua: %u %%"
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:191
+#, c-format
+msgid "Land: %u %%"
+msgstr "Terra: %u %%"
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:216
+#, c-format
+msgid "Wasteland: %u %%"
+msgstr "Terre desolate: %u %%"
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:227
+#, c-format
+msgid "Mountains: %u %%"
+msgstr "Montagne: %u %%"
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
+msgid "Island mode:"
+msgstr "modalità Isola:"
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:271
+msgid "Map ID:"
+msgstr "ID Mappa:"
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:292
+msgid "Generate Map"
+msgstr "Genera Mappa"
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:356
+#, c-format
+msgid "Water: %i %%"
+msgstr "Acqua: %i %%"
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:359
+#, c-format
+msgid "Land: %i %%"
+msgstr "Terra: %i %%"
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:362
+#, c-format
+msgid "Wasteland: %i %%"
+msgstr "Terre desolate: %i %%"
+
+#: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:365
+#, c-format
+msgid "Mountains: %i %%"
+msgstr "Montagne: %i %%"
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:49
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:45
+#, c-format
+msgid "Player: %u"
+msgstr "Giocatore: %u"
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:58
+#, c-format
+msgid "How many: %u"
+msgstr "Quanti: %u"
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:68
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:55
+#, c-format
+msgid "Building: %s"
+msgstr "Costruire: %s"
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:78
+#, c-format
+msgid "(X, Y): (%i, %i)"
+msgstr ""
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:87
+#, c-format
+msgid "Radius: %u"
+msgstr "Raggio: %u"
+
+#: ../../src/editor/ui_menus/trigger_building_option_menu.cc:99
+msgid "Building Trigger Options"
+msgstr "Opzioni di Innesco Costruzioni"
+
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:67
+msgid "Allow Building Event Options"
+msgstr ""
+
+#: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:119
+msgid "Allow Building: "
+msgstr "Consenti Edificio: "
+
+#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:39
+#, fuzzy
+msgid "Toolsize Menu"
+msgstr "Converti menu"
+
+#: ../../src/editor/ui_menus/editor_toolsize_menu.cc:72
+#, c-format
+msgid "Current Size: %u"
+msgstr "Dimensione Corrente: %u"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:147
+msgid "Make Directory"
+msgstr "Crea Cartella"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:42
+msgid "Enter Directory Name: "
+msgstr "Inserisci il nome della directory: "
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:46
+msgid "Tool Menu"
+msgstr "Menu Strumenti"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:66
+msgid "Change height"
+msgstr "Cambia altezza:"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:67
+msgid "Noise height"
+msgstr "Noiosamente alte:"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:69
+msgid "Immovable"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:70
+#, fuzzy
+msgid "Bob"
+msgstr "Bob"
+
+#: ../../src/editor/ui_menus/editor_tool_menu.cc:71
+msgid "Resource"
+msgstr "Risorse"
+
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:55
+msgid "Available Trigger types: "
+msgstr "tipi di Inesco Disponibili: "
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:48
+msgid "Edit Event Chain"
+msgstr "Modifica Catena di Eventi"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:65
+msgid "Runs multiple times"
+msgstr "Lancia più di una volta"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:71
+msgid "Events: "
+msgstr "Eventi: "
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:89
+msgid "Conditional"
+msgstr ""
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:130
+msgid "Up"
+msgstr "Su"
+
+#: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:144
+msgid "Available Events: "
+msgstr "Eventi Disponibili: "
+
+#: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:131
+msgid "Create Map"
+msgstr "Crea mappa"
+
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
+msgid "Noise Height Options"
+msgstr "Opzioni Noiosamente Avanzate"
+
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:130
+#, c-format
+msgid "Minimum: %u"
+msgstr "Minimo: %u"
+
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:132
+#, c-format
+msgid "Maximum: %u"
+msgstr "Massimo: %u"
+
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:137
+#, c-format
+msgid "Set value: %u"
+msgstr "Impostare il valore: %u"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:199
+msgid "unnamed"
+msgstr "senza nome"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:360
+msgid " exists already. Overwrite?"
+msgstr " esiste già. Sovrascrivo?"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:362
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:383
+msgid "Save Map Error!!"
+msgstr "Errore Salvando la Mappa!!"
+
+#: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:379
+msgid ""
+"Map Saving Error!\n"
+"Saved Map-File may be corrupt!\n"
+"\n"
+"Reason given:\n"
+msgstr ""
+
+#: ../../src/editor/tools/editor_info_tool.cc:43
+msgid "Field Information"
+msgstr "Informazioni sul Campo"
+
+#: ../../src/editor/tools/editor_info_tool.cc:55
+#, c-format
+msgid ""
+"1) Node infos\n"
+" Coordinates: (%i, %i)\n"
+" Height: %u\n"
+" Caps: "
+msgstr ""
+
+#: ../../src/editor/tools/editor_info_tool.cc:65
+msgid " flag"
+msgstr "bandiera"
+
+#: ../../src/editor/tools/editor_info_tool.cc:66
+msgid " mine"
+msgstr ""
+
+#: ../../src/editor/tools/editor_info_tool.cc:67
+msgid " port"
+msgstr "porto"
+
+#: ../../src/editor/tools/editor_info_tool.cc:68
+msgid " walk"
+msgstr "camminare"
+
+#: ../../src/editor/tools/editor_info_tool.cc:69
+msgid " swim"
+msgstr ""
+
+#: ../../src/editor/tools/editor_info_tool.cc:73
+#, c-format
+msgid ""
+"\n"
+" Owned by %i\n"
+" Has base immovable: %s\n"
+" Has bobs: %s\n"
+msgstr ""
+
+#: ../../src/editor/tools/editor_info_tool.cc:79
+msgid ""
+"2) Terrain Info\n"
+" Name: "
+msgstr ""
+"2) Informazioni sul Terreno\n"
+" Nome: "
+
+#: ../../src/editor/tools/editor_info_tool.cc:87
+#, c-format
+msgid ""
+"\n"
+" Texture Number: %i\n"
+msgstr ""
+"\n"
+" Numero di Texture: %i\n"
+
+#: ../../src/editor/tools/editor_info_tool.cc:91
+msgid ""
+"4) Map Info\n"
+" Name: "
+msgstr ""
+"4) Info sulla Mappa\n"
+" Nome: "
+
+#: ../../src/editor/tools/editor_info_tool.cc:95
+#, c-format
+msgid ""
+"\n"
+" Size: %ix%i\n"
+" Author: "
+msgstr ""
+"\n"
+" Dimensione: %ix%i\n"
+" Autore: "
+
+#: ../../src/editor/tools/editor_info_tool.cc:98
+#: ../../src/editor/tools/editor_info_tool.cc:109
+msgid ""
+"\n"
+" Descr: "
+msgstr ""
+
+#: ../../src/editor/tools/editor_info_tool.cc:102
+#, c-format
+msgid ""
+"\n"
+" Number of Players: %i\n"
+msgstr ""
+"\n"
+" Numero di Giocatori: %i\n"
+
+#: ../../src/editor/tools/editor_info_tool.cc:105
+msgid ""
+"5) World Info\n"
+" Name: "
+msgstr ""
+"5) Info sul Mondo\n"
+" Nome: "
+
+#: ../../src/editor/tools/editor_info_tool.cc:107
+msgid ""
+"\n"
+" Author: "
+msgstr ""
+"\n"
+" Autore: "
+
+#: ../../src/objective.h:47
+#: ../../src/message.h:42
+msgid "no descr"
+msgstr ""
+
+#: ../../src/map.h:198
+#: ../../src/map.h:205
+msgid "no description defined"
+msgstr "Descrizione non definita"
+
+#: ../../src/map.h:204
+msgid "Random Map Generator"
+msgstr "Genera Mappa Casuale"
+
+#: ../../src/ai/defaultai.h:79
+msgid "Aggressive"
+msgstr "Aggressivo"
+
+#: ../../src/ai/defaultai.h:88
+msgid "Normal"
+msgstr "Normale"
+
+#: ../../src/ai/defaultai.h:97
+msgid "Defensive"
+msgstr "Difensivo"
+
