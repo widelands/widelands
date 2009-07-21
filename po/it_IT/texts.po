@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4230\n"
+"Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-07 09:58+0000\n"
+"POT-Creation-Date: 2009-07-21 18:08+0000\n"
 "PO-Revision-Date: 2009-07-01 18:23+0100\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: Gabriel Rota <gabriel.rota@gmail.com>\n"
@@ -169,8 +169,7 @@ msgstr "Leggimi"
 msgid "an open source strategy game"
 msgstr "Un gioco di strategia open source"
 
-#: ../../txts/README:9
-#: ../../txts/editor_readme:7
+#: ../../txts/README:9 ../../txts/editor_readme:7
 msgid "Introduction"
 msgstr "Introduzione"
 
@@ -350,149 +349,143 @@ msgstr "Capo tribu"
 msgid "Elders"
 msgstr "Anziani"
 
-#: ../../txts/developers:19
-#: ../../txts/developers:291
+#: ../../txts/developers:19 ../../txts/developers:288
 msgid "Graphics"
 msgstr "Grafica"
 
-#: ../../txts/developers:22
-#: ../../txts/developers:29
-#: ../../txts/developers:36
-msgid "vacant"
-msgstr "vacante"
-
-#: ../../txts/developers:26
-#: ../../txts/developers:284
+#: ../../txts/developers:24 ../../txts/developers:281
 msgid "Homepage"
 msgstr "Pagina iniziale"
 
-#: ../../txts/developers:33
-#: ../../txts/developers:297
+#: ../../txts/developers:27
+msgid "vacant"
+msgstr "vacante"
+
+#: ../../txts/developers:31 ../../txts/developers:294
 msgid "Sound"
 msgstr "Suono"
 
-#: ../../txts/developers:40
-#: ../../txts/developers:302
+#: ../../txts/developers:36 ../../txts/developers:299
 msgid "Translation"
 msgstr "Traduzione"
 
-#: ../../txts/developers:48
+#: ../../txts/developers:44
 msgid "Coders"
 msgstr "Programmatori"
 
-#: ../../txts/developers:74
+#: ../../txts/developers:70
 msgid "Graphicians"
 msgstr "Grafici"
 
-#: ../../txts/developers:98
+#: ../../txts/developers:94
 msgid "Musicians"
 msgstr "Musicisti"
 
-#: ../../txts/developers:109
+#: ../../txts/developers:105
 msgid "Sound Effects"
 msgstr "Effetti sonori"
 
-#: ../../txts/developers:116
+#: ../../txts/developers:112
 msgid "Maps and Missions"
 msgstr "Mappe e Missioni"
 
-#: ../../txts/developers:129
+#: ../../txts/developers:125
 msgid "Campaign Story"
 msgstr "Storia della Campagna"
 
-#: ../../txts/developers:132
+#: ../../txts/developers:128
 msgid "Barbarian"
 msgstr "Barbaro"
 
-#: ../../txts/developers:137
+#: ../../txts/developers:133
 msgid "Empire"
 msgstr "Impero"
 
-#: ../../txts/developers:143
+#: ../../txts/developers:139
 msgid "Translators"
 msgstr "Traduttori"
 
-#: ../../txts/developers:147
+#: ../../txts/developers:143
 msgid "Czech"
 msgstr "Ceco"
 
-#: ../../txts/developers:153
+#: ../../txts/developers:149
 msgid "Dansk"
 msgstr ""
 
-#: ../../txts/developers:158
+#: ../../txts/developers:155
 msgid "Dutch"
 msgstr "Olandese"
 
-#: ../../txts/developers:164
+#: ../../txts/developers:161
 msgid "Finnish"
 msgstr "Finlandese"
 
-#: ../../txts/developers:170
+#: ../../txts/developers:167
 msgid "French"
 msgstr "Francese"
 
-#: ../../txts/developers:177
+#: ../../txts/developers:174
 msgid "Galician"
 msgstr "Galiziano"
 
-#: ../../txts/developers:182
+#: ../../txts/developers:179
 msgid "German"
 msgstr "Tedesco"
 
-#: ../../txts/developers:192
+#: ../../txts/developers:189
 msgid "Hebrew"
 msgstr "Ebraico"
 
-#: ../../txts/developers:197
+#: ../../txts/developers:194
 msgid "Hungarian"
 msgstr "Ungherese"
 
-#: ../../txts/developers:202
+#: ../../txts/developers:199
 msgid "Polish"
 msgstr "Polacco"
 
-#: ../../txts/developers:210
+#: ../../txts/developers:207
 msgid "Russian"
 msgstr "Russo"
 
-#: ../../txts/developers:215
+#: ../../txts/developers:212
 msgid "Slovak"
 msgstr "Slovacco"
 
-#: ../../txts/developers:220
+#: ../../txts/developers:217
 msgid "Spanish"
 msgstr "Spagnolo"
 
-#: ../../txts/developers:225
+#: ../../txts/developers:222
 msgid "Swedish"
 msgstr "Svedese"
 
-#: ../../txts/developers:233
+#: ../../txts/developers:230
 msgid "Packagers"
 msgstr "Pacchettizzatori"
 
-#: ../../txts/developers:237
+#: ../../txts/developers:234
 msgid "Linux Distributions"
 msgstr "Distribuzioni Linux"
 
-#: ../../txts/developers:248
+#: ../../txts/developers:245
 msgid "Other Unix Distributions"
 msgstr "Altre Distribuzioni Unix"
 
-#: ../../txts/developers:257
+#: ../../txts/developers:254
 msgid "Non Unix Distributions"
 msgstr "Distribuzioni Non Unix"
 
-#: ../../txts/developers:268
+#: ../../txts/developers:265
 msgid "Wiki and Enduser-Documentation"
 msgstr "Wiki e Documentazione per l'utente finale"
 
-#: ../../txts/developers:280
+#: ../../txts/developers:277
 msgid "Former elders"
 msgstr "Ex anziani"
 
-#: ../../txts/developers:308
+#: ../../txts/developers:305
 msgid "Other"
 msgstr "Altro"
 
@@ -576,18 +569,16 @@ msgstr ""
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr ""
 
-#: ../../txts/tips/atlanteans.tip:2
-#: ../../txts/tips/barbarians.tip:2
-#: ../../txts/tips/empire.tip:2
-msgid "Some buildings, such as the farm, have a very small working area. If the building is surrounded with trees or roads, production will stop."
-msgstr ""
-
 #: ../../txts/tips/atlanteans.tip:6
 msgid "Always build a forester's and a fish breeder's house, so you will not run out of trunks and food."
 msgstr ""
 
-#: ../../txts/tips/barbarians.tip:6
-#: ../../txts/tips/empire.tip:6
+#: ../../txts/tips/barbarians.tip:2 ../../txts/tips/atlanteans.tip:2
+#: ../../txts/tips/empire.tip:2
+msgid "Some buildings, such as the farm, have a very small working area. If the building is surrounded with trees or roads, production will stop."
+msgstr ""
+
+#: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
 msgid "Keep an eye on your fishers. After fish resources are exhausted in their working area, they will stop to fish."
 msgstr ""
 
@@ -678,4 +669,3 @@ msgstr ""
 #: ../../txts/tips/singleplayer.tip:2
 msgid "Our computer players are too boring? Visit our website at www.widelands.org and meet other players to play online."
 msgstr ""
-

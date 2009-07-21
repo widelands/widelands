@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4230\n"
+"Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-07 09:58+0000\n"
+"POT-Creation-Date: 2009-07-21 18:08+0000\n"
 "PO-Revision-Date: 2009-07-01 18:23+0100\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -28,59 +28,46 @@ msgstr "Deserto"
 msgid "This is the wide and sandy country of the bedouins"
 msgstr ""
 
-#: ../../../worlds/desert/conf:7
-#: ../../../worlds/desert/conf:8
+#: ../../../worlds/desert/conf:7 ../../../worlds/desert/conf:8
 #: ../../../worlds/desert/conf:9
 msgid "Bush"
 msgstr ""
 
-#: ../../../worlds/desert/conf:10
-#: ../../../worlds/desert/conf:11
-#: ../../../worlds/desert/conf:12
-#: ../../../worlds/desert/conf:13
+#: ../../../worlds/desert/conf:10 ../../../worlds/desert/conf:11
+#: ../../../worlds/desert/conf:12 ../../../worlds/desert/conf:13
 msgid "Cactus"
 msgstr ""
 
-#: ../../../worlds/desert/conf:14
-#: ../../../worlds/desert/conf:15
-#: ../../../worlds/desert/conf:16
-#: ../../../worlds/desert/conf:17
+#: ../../../worlds/desert/conf:14 ../../../worlds/desert/conf:15
+#: ../../../worlds/desert/conf:16 ../../../worlds/desert/conf:17
 #, fuzzy
 msgid "Dead Tree"
 msgstr "Grande albero"
 
-#: ../../../worlds/desert/conf:18
-#: ../../../worlds/desert/conf:19
+#: ../../../worlds/desert/conf:18 ../../../worlds/desert/conf:19
 #: ../../../worlds/desert/conf:20
 msgid "Grass"
 msgstr ""
 
-#: ../../../worlds/desert/conf:21
-#: ../../../worlds/desert/conf:22
+#: ../../../worlds/desert/conf:21 ../../../worlds/desert/conf:22
 #, fuzzy
 msgid "Mushroom"
 msgstr "Campo di funghi"
 
-#: ../../../worlds/desert/conf:23
-#: ../../../worlds/desert/conf:24
-#: ../../../worlds/desert/conf:25
-#: ../../../worlds/desert/conf:26
-#: ../../../worlds/desert/conf:27
-#: ../../../worlds/desert/conf:28
+#: ../../../worlds/desert/conf:23 ../../../worlds/desert/conf:24
+#: ../../../worlds/desert/conf:25 ../../../worlds/desert/conf:26
+#: ../../../worlds/desert/conf:27 ../../../worlds/desert/conf:28
 msgid "Pebble"
 msgstr ""
 
-#: ../../../worlds/desert/conf:29
-#: ../../../worlds/desert/conf:30
-#: ../../../worlds/desert/conf:31
-#: ../../../worlds/desert/conf:32
+#: ../../../worlds/desert/conf:29 ../../../worlds/desert/conf:30
+#: ../../../worlds/desert/conf:31 ../../../worlds/desert/conf:32
 #: ../../../worlds/desert/conf:33
 #, fuzzy
 msgid "ruins"
 msgstr "2p - Le rovine di Sulla"
 
-#: ../../../worlds/desert/conf:34
-#: ../../../worlds/desert/conf:35
+#: ../../../worlds/desert/conf:34 ../../../worlds/desert/conf:35
 #: ../../../worlds/desert/conf:36
 #, fuzzy
 msgid "Skeleton"
@@ -91,57 +78,43 @@ msgstr "Scheletro"
 msgid "Shell"
 msgstr "Shell"
 
-#: ../../../worlds/desert/conf:38
-#: ../../../worlds/desert/conf:39
-#: ../../../worlds/desert/conf:40
-#: ../../../worlds/desert/conf:41
-#: ../../../worlds/desert/conf:42
-#: ../../../worlds/desert/conf:43
+#: ../../../worlds/desert/conf:38 ../../../worlds/desert/conf:39
+#: ../../../worlds/desert/conf:40 ../../../worlds/desert/conf:41
+#: ../../../worlds/desert/conf:42 ../../../worlds/desert/conf:43
 #: ../../../worlds/desert/conf:44
 #, fuzzy
 msgid "Standing Stones"
 msgstr "Animazione delle unità ferme"
 
-#: ../../../worlds/desert/conf:45
-#: ../../../worlds/desert/conf:46
-#: ../../../worlds/desert/conf:47
-#: ../../../worlds/desert/conf:48
-#: ../../../worlds/desert/conf:49
-#: ../../../worlds/desert/conf:50
+#: ../../../worlds/desert/conf:45 ../../../worlds/desert/conf:46
+#: ../../../worlds/desert/conf:47 ../../../worlds/desert/conf:48
+#: ../../../worlds/desert/conf:49 ../../../worlds/desert/conf:50
 #, fuzzy
 msgid "Stones"
 msgstr "pietrifica"
 
-#: ../../../worlds/desert/conf:51
-#: ../../../worlds/desert/conf:55
-#: ../../../worlds/desert/conf:59
-#: ../../../worlds/desert/conf:63
+#: ../../../worlds/desert/conf:51 ../../../worlds/desert/conf:55
+#: ../../../worlds/desert/conf:59 ../../../worlds/desert/conf:63
 #: ../../../worlds/desert/conf:67
 msgid "Palm"
 msgstr ""
 
-#: ../../../worlds/desert/conf:52
-#: ../../../worlds/desert/conf:56
-#: ../../../worlds/desert/conf:60
-#: ../../../worlds/desert/conf:64
+#: ../../../worlds/desert/conf:52 ../../../worlds/desert/conf:56
+#: ../../../worlds/desert/conf:60 ../../../worlds/desert/conf:64
 #: ../../../worlds/desert/conf:68
 #, fuzzy
 msgid "Palm medium"
 msgstr "Testo medio"
 
-#: ../../../worlds/desert/conf:53
-#: ../../../worlds/desert/conf:57
-#: ../../../worlds/desert/conf:61
-#: ../../../worlds/desert/conf:65
+#: ../../../worlds/desert/conf:53 ../../../worlds/desert/conf:57
+#: ../../../worlds/desert/conf:61 ../../../worlds/desert/conf:65
 #: ../../../worlds/desert/conf:69
 #, fuzzy
 msgid "Palm small"
 msgstr "Icone _piccole"
 
-#: ../../../worlds/desert/conf:54
-#: ../../../worlds/desert/conf:58
-#: ../../../worlds/desert/conf:62
-#: ../../../worlds/desert/conf:66
+#: ../../../worlds/desert/conf:54 ../../../worlds/desert/conf:58
+#: ../../../worlds/desert/conf:62 ../../../worlds/desert/conf:66
 #: ../../../worlds/desert/conf:70
 #, fuzzy
 msgid "Palm tiny"
@@ -251,4 +224,3 @@ msgstr "acqua"
 #, fuzzy
 msgid "Fish"
 msgstr "Piovra gigante"
-

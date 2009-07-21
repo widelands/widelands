@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4230\n"
+"Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-07 09:58+0000\n"
+"POT-Creation-Date: 2009-07-21 18:08+0000\n"
 "PO-Revision-Date: 2009-07-01 18:23+0100\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -28,23 +28,18 @@ msgstr "Groenlandia"
 msgid "These are the beauty and bountifull countries of the barbarians"
 msgstr ""
 
-#: ../../../worlds/greenland/conf:7
-#: ../../../worlds/greenland/conf:8
-#: ../../../worlds/greenland/conf:9
-#: ../../../worlds/greenland/conf:10
+#: ../../../worlds/greenland/conf:7 ../../../worlds/greenland/conf:8
+#: ../../../worlds/greenland/conf:9 ../../../worlds/greenland/conf:10
 #: ../../../worlds/greenland/conf:11
 msgid "Bush"
 msgstr ""
 
-#: ../../../worlds/greenland/conf:12
-#: ../../../worlds/greenland/conf:13
+#: ../../../worlds/greenland/conf:12 ../../../worlds/greenland/conf:13
 msgid "Cactus"
 msgstr ""
 
-#: ../../../worlds/greenland/conf:14
-#: ../../../worlds/greenland/conf:15
-#: ../../../worlds/greenland/conf:16
-#: ../../../worlds/greenland/conf:17
+#: ../../../worlds/greenland/conf:14 ../../../worlds/greenland/conf:15
+#: ../../../worlds/greenland/conf:16 ../../../worlds/greenland/conf:17
 #, fuzzy
 msgid "Dead Tree"
 msgstr "Grande albero"
@@ -54,51 +49,39 @@ msgstr "Grande albero"
 msgid "Fallen Tree"
 msgstr "Grande albero"
 
-#: ../../../worlds/greenland/conf:19
-#: ../../../worlds/greenland/conf:20
+#: ../../../worlds/greenland/conf:19 ../../../worlds/greenland/conf:20
 #: ../../../worlds/greenland/conf:21
 msgid "Grass"
 msgstr ""
 
-#: ../../../worlds/greenland/conf:22
-#: ../../../worlds/greenland/conf:23
+#: ../../../worlds/greenland/conf:22 ../../../worlds/greenland/conf:23
 #, fuzzy
 msgid "Mushroom"
 msgstr "Campo di funghi"
 
-#: ../../../worlds/greenland/conf:24
-#: ../../../worlds/greenland/conf:25
-#: ../../../worlds/greenland/conf:26
-#: ../../../worlds/greenland/conf:27
-#: ../../../worlds/greenland/conf:28
-#: ../../../worlds/greenland/conf:29
+#: ../../../worlds/greenland/conf:24 ../../../worlds/greenland/conf:25
+#: ../../../worlds/greenland/conf:26 ../../../worlds/greenland/conf:27
+#: ../../../worlds/greenland/conf:28 ../../../worlds/greenland/conf:29
 msgid "Pebble"
 msgstr ""
 
-#: ../../../worlds/greenland/conf:30
-#: ../../../worlds/greenland/conf:31
+#: ../../../worlds/greenland/conf:30 ../../../worlds/greenland/conf:31
 #: ../../../worlds/greenland/conf:32
 #, fuzzy
 msgid "Skeleton"
 msgstr "Scheletro"
 
-#: ../../../worlds/greenland/conf:33
-#: ../../../worlds/greenland/conf:34
-#: ../../../worlds/greenland/conf:35
-#: ../../../worlds/greenland/conf:36
-#: ../../../worlds/greenland/conf:37
-#: ../../../worlds/greenland/conf:38
+#: ../../../worlds/greenland/conf:33 ../../../worlds/greenland/conf:34
+#: ../../../worlds/greenland/conf:35 ../../../worlds/greenland/conf:36
+#: ../../../worlds/greenland/conf:37 ../../../worlds/greenland/conf:38
 #: ../../../worlds/greenland/conf:39
 #, fuzzy
 msgid "Standing Stones"
 msgstr "Animazione delle unità ferme"
 
-#: ../../../worlds/greenland/conf:40
-#: ../../../worlds/greenland/conf:41
-#: ../../../worlds/greenland/conf:42
-#: ../../../worlds/greenland/conf:43
-#: ../../../worlds/greenland/conf:44
-#: ../../../worlds/greenland/conf:45
+#: ../../../worlds/greenland/conf:40 ../../../worlds/greenland/conf:41
+#: ../../../worlds/greenland/conf:42 ../../../worlds/greenland/conf:43
+#: ../../../worlds/greenland/conf:44 ../../../worlds/greenland/conf:45
 #, fuzzy
 msgid "Stones"
 msgstr "pietrifica"
@@ -340,4 +323,3 @@ msgstr "acqua"
 #, fuzzy
 msgid "Fish"
 msgstr "Piovra gigante"
-

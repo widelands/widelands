@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4230\n"
+"Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-07 09:58+0000\n"
+"POT-Creation-Date: 2009-07-21 18:08+0000\n"
 "PO-Revision-Date: 2009-07-01 18:23+0100\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: Gabriel Rota <gabriel.rota@gmail.com>\n"
@@ -316,4 +316,3 @@ msgstr "Valle Wisent"
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid "It seems as if this magical valley was inhabitated by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can you tribe live in peace with your neighbours?"
 msgstr "Sembra come se questa magica valle fosse abitata da saggi fino dall'inizio dei giorni. Quando la vostra tribù è venuta in questo luogo, eravate sicuri che vi offrisse spazio sufficiente per una vita tranquilla. Ma possono più tribù vivere vicine in pace?"
-

@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4230\n"
+"Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-07 09:58+0000\n"
+"POT-Creation-Date: 2009-07-21 18:08+0000\n"
 "PO-Revision-Date: 2009-07-01 18:23+0100\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: Gabriel Rota <gabriel.rota@gmail.com>\n"
@@ -57,18 +57,14 @@ msgstr ""
 msgid " \"Boldreth is right! We don't have enough food to survive a long, cold winter. We should start to build a well, a fisher's and a hunter's hut. And if we find enough space, we should as well build up a farm and a bakery! One of our farmers seems to be very clever he already got some crops to grow in this cold soil.\" "
 msgstr ""
 
-#: ../../../campaigns/t03.wmf/event:350
-#: ../../../campaigns/t03.wmf/event:459
-#: ../../../campaigns/t03.wmf/event:494
-#: ../../../campaigns/t03.wmf/event:566
-#: ../../../campaigns/t03.wmf/event:655
-#: ../../../campaigns/t03.wmf/event:928
+#: ../../../campaigns/t03.wmf/event:350 ../../../campaigns/t03.wmf/event:459
+#: ../../../campaigns/t03.wmf/event:494 ../../../campaigns/t03.wmf/event:566
+#: ../../../campaigns/t03.wmf/event:655 ../../../campaigns/t03.wmf/event:928
 #: ../../../campaigns/t03.wmf/event:1002
 msgid "-- NEW OBJECTIVE --"
 msgstr "-- NUOVO OBBIETTIVO --"
 
-#: ../../../campaigns/t03.wmf/event:352
-#: ../../../campaigns/t03.wmf/objective:7
+#: ../../../campaigns/t03.wmf/event:352 ../../../campaigns/t03.wmf/objective:7
 msgid "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a farm and a bakery, to provide your people with food."
 msgstr ""
 
@@ -187,8 +183,7 @@ msgstr ""
 msgid "Enhanced economy and training"
 msgstr ""
 
-#: ../../../campaigns/t03.wmf/event:847
-#: ../../../campaigns/t03.wmf/event:1039
+#: ../../../campaigns/t03.wmf/event:847 ../../../campaigns/t03.wmf/event:1039
 msgid "Thron looks worried."
 msgstr "Thron con sguardo preoccupato..."
 
@@ -196,8 +191,7 @@ msgstr "Thron con sguardo preoccupato..."
 msgid " \"The news that a patrol brought is not good to hear. Our spies tell us, that the wartribes still rage in battle but some of the elder soldiers and tribe leaders seem to grow tired of this senseless war. Kalitat, son of Kun is the first warleader to leave Al’thunran, thus leaving his side weak and vulnerable. As my scouts report, he has set foot on the lower grounds around the capitol, securing the outer fortification rings.\" "
 msgstr ""
 
-#: ../../../campaigns/t03.wmf/event:851
-#: ../../../campaigns/t03.wmf/event:900
+#: ../../../campaigns/t03.wmf/event:851 ../../../campaigns/t03.wmf/event:900
 #: ../../../campaigns/t03.wmf/event:1047
 msgid "Another cold day"
 msgstr "Un altro freddo giorno"
@@ -218,8 +212,7 @@ msgstr ""
 msgid " \"However, Thron is not willing to listen to my doubts. He seeks to expand our fortifications to the borders of Kalitat’s territory and reunite with his forces. I have to keep an eye on everything that happens here.\" "
 msgstr ""
 
-#: ../../../campaigns/t03.wmf/event:879
-#: ../../../campaigns/t03.wmf/event:913
+#: ../../../campaigns/t03.wmf/event:879 ../../../campaigns/t03.wmf/event:913
 msgid "The story continues"
 msgstr "La storia continua"
 
@@ -349,4 +342,3 @@ msgstr "Distruggi l'esercito di Kalitaths"
 #: ../../../campaigns/t03.wmf/objective:91
 msgid "Military assault on Al’thunran"
 msgstr ""
-

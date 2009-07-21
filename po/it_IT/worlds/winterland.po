@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4230\n"
+"Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-07 09:58+0000\n"
+"POT-Creation-Date: 2009-07-21 18:08+0000\n"
 "PO-Revision-Date: 2009-07-01 18:23+0100\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -27,45 +27,35 @@ msgstr ""
 msgid "These are the white, wide and frosty winterlands, in which the Northmen dwell."
 msgstr ""
 
-#: ../../../worlds/winterland/conf:7
-#: ../../../worlds/winterland/conf:8
-#: ../../../worlds/winterland/conf:9
-#: ../../../worlds/winterland/conf:10
+#: ../../../worlds/winterland/conf:7 ../../../worlds/winterland/conf:8
+#: ../../../worlds/winterland/conf:9 ../../../worlds/winterland/conf:10
 #: ../../../worlds/winterland/conf:11
 msgid "Bush"
 msgstr ""
 
-#: ../../../worlds/winterland/conf:12
-#: ../../../worlds/winterland/conf:13
-#: ../../../worlds/winterland/conf:14
-#: ../../../worlds/winterland/conf:15
+#: ../../../worlds/winterland/conf:12 ../../../worlds/winterland/conf:13
+#: ../../../worlds/winterland/conf:14 ../../../worlds/winterland/conf:15
 #, fuzzy
 msgid "Dead Tree"
 msgstr "Grande albero"
 
-#: ../../../worlds/winterland/conf:16
-#: ../../../worlds/winterland/conf:17
+#: ../../../worlds/winterland/conf:16 ../../../worlds/winterland/conf:17
 #: ../../../worlds/winterland/conf:18
 msgid "Grass"
 msgstr ""
 
-#: ../../../worlds/winterland/conf:19
-#: ../../../worlds/winterland/conf:20
+#: ../../../worlds/winterland/conf:19 ../../../worlds/winterland/conf:20
 #, fuzzy
 msgid "Mushroom"
 msgstr "Campo di funghi"
 
-#: ../../../worlds/winterland/conf:21
-#: ../../../worlds/winterland/conf:22
-#: ../../../worlds/winterland/conf:23
-#: ../../../worlds/winterland/conf:24
-#: ../../../worlds/winterland/conf:25
-#: ../../../worlds/winterland/conf:26
+#: ../../../worlds/winterland/conf:21 ../../../worlds/winterland/conf:22
+#: ../../../worlds/winterland/conf:23 ../../../worlds/winterland/conf:24
+#: ../../../worlds/winterland/conf:25 ../../../worlds/winterland/conf:26
 msgid "Pebble"
 msgstr ""
 
-#: ../../../worlds/winterland/conf:27
-#: ../../../worlds/winterland/conf:28
+#: ../../../worlds/winterland/conf:27 ../../../worlds/winterland/conf:28
 #: ../../../worlds/winterland/conf:29
 #, fuzzy
 msgid "Skeleton"
@@ -75,23 +65,17 @@ msgstr "Scheletro"
 msgid "Snowman"
 msgstr ""
 
-#: ../../../worlds/winterland/conf:31
-#: ../../../worlds/winterland/conf:32
-#: ../../../worlds/winterland/conf:33
-#: ../../../worlds/winterland/conf:34
-#: ../../../worlds/winterland/conf:35
-#: ../../../worlds/winterland/conf:36
+#: ../../../worlds/winterland/conf:31 ../../../worlds/winterland/conf:32
+#: ../../../worlds/winterland/conf:33 ../../../worlds/winterland/conf:34
+#: ../../../worlds/winterland/conf:35 ../../../worlds/winterland/conf:36
 #: ../../../worlds/winterland/conf:37
 #, fuzzy
 msgid "Standing Stones"
 msgstr "Animazione delle unità ferme"
 
-#: ../../../worlds/winterland/conf:38
-#: ../../../worlds/winterland/conf:39
-#: ../../../worlds/winterland/conf:40
-#: ../../../worlds/winterland/conf:41
-#: ../../../worlds/winterland/conf:42
-#: ../../../worlds/winterland/conf:43
+#: ../../../worlds/winterland/conf:38 ../../../worlds/winterland/conf:39
+#: ../../../worlds/winterland/conf:40 ../../../worlds/winterland/conf:41
+#: ../../../worlds/winterland/conf:42 ../../../worlds/winterland/conf:43
 #, fuzzy
 msgid "Stones"
 msgstr "pietrifica"
@@ -331,4 +315,3 @@ msgstr "acqua"
 #, fuzzy
 msgid "Fish"
 msgstr "Piovra gigante"
-

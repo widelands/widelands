@@ -1,4 +1,5 @@
 ### Build 14
+- Added Italian translation (svn:r4435, svn:r4436)
 - Exit with an error when incompatible command line parameters are given,
   instead of ignoring it. (svn:r4406)
 - Allow starting a replay from the command line by giving the --replay=FILENAME

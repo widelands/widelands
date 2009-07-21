@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4230\n"
+"Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-07 09:58+0000\n"
+"POT-Creation-Date: 2009-07-21 18:08+0000\n"
 "PO-Revision-Date: 2009-07-01 18:23+0100\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -27,72 +27,55 @@ msgstr "Terre nere"
 msgid "These are the grey, horrible and dangerous blacklands"
 msgstr "Queste sono le grigie, orribili e pericolose terre nere"
 
-#: ../../../worlds/blackland/conf:7
-#: ../../../worlds/blackland/conf:8
-#: ../../../worlds/blackland/conf:9
-#: ../../../worlds/blackland/conf:10
+#: ../../../worlds/blackland/conf:7 ../../../worlds/blackland/conf:8
+#: ../../../worlds/blackland/conf:9 ../../../worlds/blackland/conf:10
 #: ../../../worlds/blackland/conf:11
 msgid "Bush"
 msgstr "cespuglio"
 
-#: ../../../worlds/blackland/conf:12
-#: ../../../worlds/blackland/conf:13
+#: ../../../worlds/blackland/conf:12 ../../../worlds/blackland/conf:13
 msgid "Cactus"
 msgstr "Cactus"
 
-#: ../../../worlds/blackland/conf:14
-#: ../../../worlds/blackland/conf:15
-#: ../../../worlds/blackland/conf:16
-#: ../../../worlds/blackland/conf:17
+#: ../../../worlds/blackland/conf:14 ../../../worlds/blackland/conf:15
+#: ../../../worlds/blackland/conf:16 ../../../worlds/blackland/conf:17
 #, fuzzy
 msgid "Dead Tree"
 msgstr "Grande albero"
 
-#: ../../../worlds/blackland/conf:18
-#: ../../../worlds/blackland/conf:19
+#: ../../../worlds/blackland/conf:18 ../../../worlds/blackland/conf:19
 #: ../../../worlds/blackland/conf:20
 msgid "Grass"
 msgstr "Erba"
 
-#: ../../../worlds/blackland/conf:21
-#: ../../../worlds/blackland/conf:22
+#: ../../../worlds/blackland/conf:21 ../../../worlds/blackland/conf:22
 #, fuzzy
 msgid "Mushroom"
 msgstr "Campo di funghi"
 
-#: ../../../worlds/blackland/conf:23
-#: ../../../worlds/blackland/conf:24
-#: ../../../worlds/blackland/conf:25
-#: ../../../worlds/blackland/conf:26
-#: ../../../worlds/blackland/conf:27
-#: ../../../worlds/blackland/conf:28
+#: ../../../worlds/blackland/conf:23 ../../../worlds/blackland/conf:24
+#: ../../../worlds/blackland/conf:25 ../../../worlds/blackland/conf:26
+#: ../../../worlds/blackland/conf:27 ../../../worlds/blackland/conf:28
 msgid "Pebble"
 msgstr "Ciottolo"
 
-#: ../../../worlds/blackland/conf:29
-#: ../../../worlds/blackland/conf:30
+#: ../../../worlds/blackland/conf:29 ../../../worlds/blackland/conf:30
 #: ../../../worlds/blackland/conf:31
 #, fuzzy
 msgid "Skeleton"
 msgstr "Scheletro"
 
-#: ../../../worlds/blackland/conf:32
-#: ../../../worlds/blackland/conf:33
-#: ../../../worlds/blackland/conf:34
-#: ../../../worlds/blackland/conf:35
-#: ../../../worlds/blackland/conf:36
-#: ../../../worlds/blackland/conf:37
+#: ../../../worlds/blackland/conf:32 ../../../worlds/blackland/conf:33
+#: ../../../worlds/blackland/conf:34 ../../../worlds/blackland/conf:35
+#: ../../../worlds/blackland/conf:36 ../../../worlds/blackland/conf:37
 #: ../../../worlds/blackland/conf:38
 #, fuzzy
 msgid "Standing Stones"
 msgstr "Animazione delle unità ferme"
 
-#: ../../../worlds/blackland/conf:39
-#: ../../../worlds/blackland/conf:40
-#: ../../../worlds/blackland/conf:41
-#: ../../../worlds/blackland/conf:42
-#: ../../../worlds/blackland/conf:43
-#: ../../../worlds/blackland/conf:44
+#: ../../../worlds/blackland/conf:39 ../../../worlds/blackland/conf:40
+#: ../../../worlds/blackland/conf:41 ../../../worlds/blackland/conf:42
+#: ../../../worlds/blackland/conf:43 ../../../worlds/blackland/conf:44
 msgid "Stones"
 msgstr "Pietre"
 
@@ -284,4 +267,3 @@ msgstr "acqua"
 #: ../../../worlds/blackland/resconf:41
 msgid "Fish"
 msgstr "Pesce"
-
