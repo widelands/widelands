@@ -2083,8 +2083,10 @@ void WLApplication::replay()
 		game.run(loaderUI, Widelands::Game::Loaded);
 	} catch (...) {
 		emergency_save(game);
+		m_filename.clear();
 		throw;
 	}
+	m_filename.clear();
 }
 
 
