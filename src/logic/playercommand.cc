@@ -171,7 +171,6 @@ void Cmd_Bulldoze::Write
 	PlayerCommand::Write(fw, egbase, mos);
 	// Now serial
 	Map_Object const & obj = *egbase.objects().get_object(serial);
-	assert(mos.is_object_known(obj));
 	fw.Unsigned32(mos.get_object_file_index(obj));
 	fw.Unsigned8(recurse);
 }
@@ -418,7 +417,6 @@ void Cmd_FlagAction::Write
 
 	// Now serial
 	Map_Object const & obj = *egbase.objects().get_object(serial);
-	assert(mos.is_object_known(obj));
 	fw.Unsigned32(mos.get_object_file_index(obj));
 }
 
@@ -472,7 +470,6 @@ void Cmd_StartStopBuilding::Write
 
 	// Now serial
 	Map_Object const & obj = *egbase.objects().get_object(serial);
-	assert(mos.is_object_known(obj));
 	fw.Unsigned32(mos.get_object_file_index(obj));
 }
 
@@ -532,7 +529,6 @@ void Cmd_EnhanceBuilding::Write
 
 	// Now serial
 	Map_Object const & obj = *egbase.objects().get_object(serial);
-	assert(mos.is_object_known(obj));
 	fw.Unsigned32(mos.get_object_file_index(obj));
 
 	// Now id
@@ -851,7 +847,6 @@ void Cmd_ChangeTrainingOptions::Write
 
 	// Now serial
 	Map_Object const & obj = *egbase.objects().get_object(serial);
-	assert(mos.is_object_known(obj));
 	fw.Unsigned32(mos.get_object_file_index(obj));
 
 	fw.Unsigned16(attribute);
@@ -990,7 +985,6 @@ void Cmd_ChangeSoldierCapacity::Write
 
 	// Now serial
 	Map_Object const & obj = *egbase.objects().get_object(serial);
-	assert(mos.is_object_known(obj));
 	fw.Unsigned32(mos.get_object_file_index(obj));
 
 	// Now capacity
@@ -1081,7 +1075,6 @@ void Cmd_EnemyFlagAction::Write
 
 	// Now serial
 	Map_Object const & obj = *egbase.objects().get_object(serial);
-	assert(mos.is_object_known(obj));
 	fw.Unsigned32(mos.get_object_file_index(obj));
 
 	// Now param
