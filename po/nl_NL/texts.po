@@ -4,17 +4,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4437\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-02-16 22:52+0100\n"
-"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
-"Language-Team: Dutch <programming@ertai.nl>\n"
+"POT-Creation-Date: 2009-07-24 09:16+0000\n"
+"PO-Revision-Date: 2009-07-23 23:23+0200\n"
+"Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
+"Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: Netherlands\n"
+"X-Generator: Lokalize 0.2\n"
 
 #: ../../txts/COPYING:1
 msgid "License"
@@ -348,143 +349,147 @@ msgstr "Leider"
 msgid "Elders"
 msgstr "Ouderlingen"
 
-#: ../../txts/developers:19 ../../txts/developers:291
+#: ../../txts/developers:19 ../../txts/developers:293
 msgid "Graphics"
 msgstr "Afbeeldingen"
 
-#: ../../txts/developers:22 ../../txts/developers:29 ../../txts/developers:36
-msgid "vacant"
-msgstr "vacant"
-
-#: ../../txts/developers:26 ../../txts/developers:284
+#: ../../txts/developers:24 ../../txts/developers:286
 msgid "Homepage"
 msgstr "Homepage"
 
-#: ../../txts/developers:33 ../../txts/developers:297
+#: ../../txts/developers:27
+msgid "vacant"
+msgstr "vacant"
+
+#: ../../txts/developers:31 ../../txts/developers:299
 msgid "Sound"
 msgstr "Geluid"
 
-#: ../../txts/developers:40 ../../txts/developers:302
+#: ../../txts/developers:36 ../../txts/developers:304
 msgid "Translation"
 msgstr "Vertaling"
 
-#: ../../txts/developers:48
+#: ../../txts/developers:44
 msgid "Coders"
 msgstr "Programmeurs"
 
-#: ../../txts/developers:74
+#: ../../txts/developers:70
 msgid "Graphicians"
 msgstr "Grafici"
 
-#: ../../txts/developers:98
+#: ../../txts/developers:94
 msgid "Musicians"
 msgstr "Musici"
 
-#: ../../txts/developers:109
+#: ../../txts/developers:105
 msgid "Sound Effects"
 msgstr "Geluidseffecten"
 
-#: ../../txts/developers:116
+#: ../../txts/developers:112
 msgid "Maps and Missions"
 msgstr "Kaarten en missies"
 
-#: ../../txts/developers:129
+#: ../../txts/developers:125
 msgid "Campaign Story"
 msgstr "Campagneverhaal"
 
-#: ../../txts/developers:132
+#: ../../txts/developers:128
 msgid "Barbarian"
 msgstr "Barbaren"
 
-#: ../../txts/developers:137
+#: ../../txts/developers:133
 msgid "Empire"
 msgstr "Keizerrijk"
 
-#: ../../txts/developers:143
+#: ../../txts/developers:139
 msgid "Translators"
 msgstr "Vertalers"
 
-#: ../../txts/developers:147
+#: ../../txts/developers:143
 msgid "Czech"
 msgstr "Tsjechisch"
 
-#: ../../txts/developers:153
+#: ../../txts/developers:149
 msgid "Dansk"
 msgstr "Deens"
 
-#: ../../txts/developers:158
+#: ../../txts/developers:155
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: ../../txts/developers:164
+#: ../../txts/developers:161
 msgid "Finnish"
 msgstr "Fins"
 
-#: ../../txts/developers:170
+#: ../../txts/developers:167
 msgid "French"
 msgstr "Frans"
 
-#: ../../txts/developers:177
+#: ../../txts/developers:174
 msgid "Galician"
 msgstr "Galicisch"
 
-#: ../../txts/developers:182
+#: ../../txts/developers:179
 msgid "German"
 msgstr "Duits"
 
-#: ../../txts/developers:192
+#: ../../txts/developers:189
 msgid "Hebrew"
 msgstr "Hebreeuws"
 
-#: ../../txts/developers:197
+#: ../../txts/developers:194
 msgid "Hungarian"
 msgstr "Hongaars"
 
-#: ../../txts/developers:202
+#: ../../txts/developers:199
+msgid "Italian"
+msgstr "Italiaans"
+
+#: ../../txts/developers:204
 msgid "Polish"
 msgstr "Pools"
 
-#: ../../txts/developers:210
+#: ../../txts/developers:212
 msgid "Russian"
 msgstr "Russisch"
 
-#: ../../txts/developers:215
+#: ../../txts/developers:217
 msgid "Slovak"
 msgstr "Slowaaks"
 
-#: ../../txts/developers:220
+#: ../../txts/developers:222
 msgid "Spanish"
 msgstr "Spaans"
 
-#: ../../txts/developers:225
+#: ../../txts/developers:227
 msgid "Swedish"
 msgstr "Zweeds"
 
-#: ../../txts/developers:233
+#: ../../txts/developers:235
 msgid "Packagers"
 msgstr "Pakketmakers"
 
-#: ../../txts/developers:237
+#: ../../txts/developers:239
 msgid "Linux Distributions"
 msgstr "Linux Distributies"
 
-#: ../../txts/developers:248
+#: ../../txts/developers:250
 msgid "Other Unix Distributions"
 msgstr "Andere Unix Distributies"
 
-#: ../../txts/developers:257
+#: ../../txts/developers:259
 msgid "Non Unix Distributions"
 msgstr "Niet-Unix Distributies"
 
-#: ../../txts/developers:268
+#: ../../txts/developers:270
 msgid "Wiki and Enduser-Documentation"
 msgstr "Wiki en Eindgebruikersdocumentatie"
 
-#: ../../txts/developers:280
+#: ../../txts/developers:282
 msgid "Former elders"
 msgstr "Voormalige ouderlingen"
 
-#: ../../txts/developers:308
+#: ../../txts/developers:310
 msgid "Other"
 msgstr "Overige"
 
@@ -497,7 +502,6 @@ msgid "README for the Editor"
 msgstr "LEESMIJ voor de Editor"
 
 #: ../../txts/editor_readme:10
-#, fuzzy
 msgid "This Editor is intended for players who would like to design their own maps to use with Widelands.<br>As you can see, this Editor is heavy work in progress and as the Editor becomes better and better this text will also get longer and more complete."
 msgstr "Deze Editor is bedoeld voor spelers die graag hun eigen kaarten zouden ontwerpen om te gebruiken in Widelands.<br>Zoals je kunt zien, is deze editor nog een stevig werk in uitvoering en als de Editor beter en beter wordt, zal deze tekst ook langer en completer worden."
 

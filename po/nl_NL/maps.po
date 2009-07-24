@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4437\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-03-11 21:36+0100\n"
+"POT-Creation-Date: 2009-07-24 09:16+0000\n"
+"PO-Revision-Date: 2009-05-24 16:52+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -40,7 +40,7 @@ msgstr "Oefencampagne 2 - Een plek om thuis te noemen"
 
 #: ../../campaigns/cconfig:61
 msgid "Tutorial3 - This land is our land"
-msgstr ""
+msgstr "Oefencampagne 3 - Dit land is ons land"
 
 #: ../../campaigns/cconfig:68
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
@@ -99,12 +99,10 @@ msgid "A Multiplayer-battle-map on a X-Shaped island."
 msgstr "Een strijdkaart voor meer spelers op een kruisvormig eiland."
 
 #: ../../maps/Finlakes.wmf/elemental:9
-#, fuzzy
 msgid "Finnish Lakes"
 msgstr "Finse meren"
 
 #: ../../maps/Finlakes.wmf/elemental:11
-#, fuzzy
 msgid "These are the beautiful finnish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
 msgstr "Dit is het mooie finse landschap, bestaande uit meren, rivieren, oerbossen en bergen. Het is aan jou, je hier een weg door te banen."
 
@@ -214,11 +212,11 @@ msgstr "Een mystiek land met een grote verscheidenheid aan landschappen dat door
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The ancient sun of fire"
-msgstr ""
+msgstr "De oude vuurzon"
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid "For hundreds of years this island was kept as sanctuary of the Gods. No human ever ventured to set a foot on it. But now, that a tribe was finally barefaced enough to settle on the coast of that island, a lot other followed afterwards."
-msgstr ""
+msgstr "Honderden jaren werd dit eiland gebruikt als schuilplaats voor de Goden. Geen mensen waagde het ooit hier een voet aan de grond te zetten. Maar nu was er eindelijk een stam dapper genoeg om zich op de kust van dit eiland te vestigen, een hoop andere volgden."
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"

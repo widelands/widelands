@@ -4,23 +4,24 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4437\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-02-16 22:51+0100\n"
-"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
-"Language-Team: Dutch <programming@ertai.nl>\n"
+"POT-Creation-Date: 2009-07-24 09:16+0000\n"
+"PO-Revision-Date: 2009-07-23 23:22+0200\n"
+"Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
+"Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.2\n"
 
 #: ../../../tribes/empire/advanced_lance/conf:1
 msgid "This is an advanced lance, with steel top."
-msgstr "Dit is een verbeterde lans, met stalen punt."
+msgstr ""
 
 #: ../../../tribes/empire/armour/conf:1
 msgid "Basic armour for Empire soldiers."
-msgstr "Standaardharnas voor de soldaten van het keizerrijk."
+msgstr ""
 
 #: ../../../tribes/empire/armoursmithy/conf:23
 msgid "Produce helm"
@@ -41,23 +42,23 @@ msgstr "Pantser"
 
 #: ../../../tribes/empire/axe/conf:1
 msgid "The axe is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr "De bijl is het gereedschap van de houthakker. Het wordt gemaakt door de werktuigsmid."
+msgstr ""
 
 #: ../../../tribes/empire/bakingtray/conf:1
 msgid "The peel is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
-msgstr "De schieter is het gereedschap van de bakker, elke bakker moet er zelf één hebben. Deze wordt gemaakt door de werktuigsmid."
+msgstr ""
 
 #: ../../../tribes/empire/basket/conf:1
 msgid "This basket is needed by the winegrower, for harvesting the grapes. It is produced by the toolsmith."
-msgstr "Deze mand wordt gebruikt door de wijnteler om wijndruiven te plukken. Deze wordt gemaakt door de werktuigsmid."
+msgstr ""
 
 #: ../../../tribes/empire/beer/conf:1
 msgid "Young soldiers and miners need some encouragement. This drink makes a man fearless and strong."
-msgstr "Jonge soldaten en mijnwerkers hebben enige aanmoediging nodig. Deze drank maakt een man onbevreesd en sterk."
+msgstr ""
 
 #: ../../../tribes/empire/bread/conf:1
 msgid "The backers of the Empire make really tasty bread."
-msgstr "De bakkers van het Keizerrijk bakken zeer lekker brood."
+msgstr ""
 
 #: ../../../tribes/empire/brewer/conf:1
 msgid "Produces beer or wine."
@@ -77,15 +78,15 @@ msgstr ""
 
 #: ../../../tribes/empire/chain_armour/conf:1
 msgid "This is a medium armour for Empire soldiers."
-msgstr "Dit is een gemiddeld harnas voor soldaten van het Keizerrijk."
+msgstr ""
 
 #: ../../../tribes/empire/cloth/conf:1
 msgid "Cloth is needed for Empire ships and few bigger buildings. It is produced out of wool."
-msgstr "Doek wordt gebruikt voor schepen en enkele grotere gebouwen. Het wordt gemaakt uit wol."
+msgstr ""
 
 #: ../../../tribes/empire/coal/conf:1
 msgid "The fires of the Empire are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
-msgstr "De vuren van het Keizerrijk worden normaal gevoed met hout, maar soms brandt hout gewoon niet heet genoeg. Dan wordt steenkool gebruikt."
+msgstr ""
 
 #: ../../../tribes/empire/colosseum/conf:27
 #: ../../../tribes/empire/trainingscamp/conf:38
@@ -160,7 +161,7 @@ msgid "Resource indicator coal much"
 msgstr "Bronindicator veel kool"
 
 #: ../../../tribes/empire/conf:45
-msgid "Resource indicator gold litte"
+msgid "Resource indicator gold little"
 msgstr "Bronindicator weinig goud"
 
 #: ../../../tribes/empire/conf:46
@@ -192,24 +193,20 @@ msgid "Resource indicator water"
 msgstr "Bronindicator water"
 
 #: ../../../tribes/empire/conf:53
-#, fuzzy
 msgid "Vine medium"
-msgstr "Groeiende wijn"
+msgstr "Groeiende wijnrank"
 
 #: ../../../tribes/empire/conf:54
-#, fuzzy
 msgid "Vine small"
-msgstr "Jonge wijn"
+msgstr "Jonge wijnrank"
 
 #: ../../../tribes/empire/conf:55
-#, fuzzy
 msgid "Vine tiny"
-msgstr "Kleine wijn"
+msgstr "Kleine wijnrank"
 
 #: ../../../tribes/empire/conf:56
-#, fuzzy
 msgid "Vine ripe"
-msgstr "Rijpe wijn"
+msgstr "Rijpe wijnrank"
 
 #: ../../../tribes/empire/conf:59
 msgid "Advanced Lance"
@@ -697,11 +694,11 @@ msgstr ""
 
 #: ../../../tribes/empire/fire_tongs/conf:1
 msgid "The fire tongs are the tool of the smelter, working in the smelting works. They are produced by the toolsmith."
-msgstr "De brandtang is het gereedschap van de smelter in de hoogovens. Het wordt gemaakt door de werktuigsmid."
+msgstr ""
 
 #: ../../../tribes/empire/fish/conf:1
 msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
-msgstr "Naast brood en vlees, is vis ook een bron van voedsel voor het Keizerrijk"
+msgstr ""
 
 #: ../../../tribes/empire/fisher/conf:1
 msgid "Gets fish out of the sea."
@@ -709,11 +706,11 @@ msgstr ""
 
 #: ../../../tribes/empire/fishing_rod/conf:1
 msgid "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
-msgstr "Vishengels worden gebruikt door vissers om vis te vangen. Gemaakt door de werktuigsmid."
+msgstr ""
 
 #: ../../../tribes/empire/flour/conf:1
 msgid "Flour is produced out of wheat and is needed for the tasty Empire bread."
-msgstr "Bloem wordt gemaakt uit tarwe en is nodig voor het lekkere brood van het Keizerrijk."
+msgstr ""
 
 #: ../../../tribes/empire/forester/conf:1
 msgid "Plants trees."
@@ -725,27 +722,27 @@ msgstr ""
 
 #: ../../../tribes/empire/gold/conf:1
 msgid "Gold is the most valuable of all metals; only very important things are garnished with it."
-msgstr "Goud is het meest waardevolle metaal; alleen heel belangrijke zaken worden ermee opgeluisterd."
+msgstr ""
 
 #: ../../../tribes/empire/goldstone/conf:1
 msgid "This is the yellow goldstone."
-msgstr "Dit is de gele goudsteen"
+msgstr ""
 
 #: ../../../tribes/empire/grape/conf:1
 msgid "These grapes are the basic for tasty wine."
-msgstr "Deze druiven zijn de basis voor heerlijke wine."
+msgstr ""
 
 #: ../../../tribes/empire/hammer/conf:1
 msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the armour- and weaponsmith. Make sure you always got some in reserve! It is produced by the toolsmith."
-msgstr "De hamer is essentieel gereedschap. Hij wordt gebruikt door de geoloog, de arbeider en alle smeden. Zorg dat je er altijd een paar op voorraad hebt! Deze wordt gemaakt door de werktuigsmid."
+msgstr ""
 
 #: ../../../tribes/empire/heavy_lance/conf:1
 msgid "This is a good warrior lance, with a steel-top and a little blade."
-msgstr "Dit is een goede lans voor een strijder, met een stalen punt en een klein blad."
+msgstr ""
 
 #: ../../../tribes/empire/helm/conf:1
 msgid "Basic defence of a warrior"
-msgstr "Standaardverdeding voor een strijder"
+msgstr ""
 
 #: ../../../tribes/empire/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -785,7 +782,7 @@ msgstr ""
 
 #: ../../../tribes/empire/hunting_spear/conf:1
 msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters."
-msgstr "Deze speer is licht genoeg om te worden geworpen, maar zwaar genoeg om elk dier in één klap te doden. Wordt alleen gebruikt door jagers."
+msgstr ""
 
 #: ../../../tribes/empire/innkeeper/conf:1
 msgid "Produces food for miners."
@@ -793,19 +790,20 @@ msgstr ""
 
 #: ../../../tribes/empire/iron/conf:1
 msgid "Weapons and tools are made of iron."
-msgstr "Wapens en gereedschap worden gemaakt van ijzer."
+msgstr ""
 
 #: ../../../tribes/empire/ironore/conf:1
+#, fuzzy
 msgid "This is the red iron ore."
-msgstr "Dit is rode ijzererts."
+msgstr "Dit is de cultuur van het Romeinse rijk"
 
 #: ../../../tribes/empire/kitchen_tools/conf:1
 msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
-msgstr "Hoe kun je een maaltijd, hapje of portie bereiden zonder keukengerei?"
+msgstr ""
 
 #: ../../../tribes/empire/lance/conf:1
 msgid "This wooden lance has an iron spike."
-msgstr "Deze houten lans heeft een ijzeren piek."
+msgstr ""
 
 #: ../../../tribes/empire/lumberjack/conf:1
 msgid "Fells trees."
@@ -813,11 +811,11 @@ msgstr ""
 
 #: ../../../tribes/empire/marble/conf:1
 msgid "Marble is the beautiful stone, which is cutted out of the mountains and which is used for beautiful buildings and columns."
-msgstr "Marmer is mooi gesteente dat wordt gehouwen uit de bergen en wordt gebruikt voor prachtige gebouwen en voor zuilen."
+msgstr ""
 
 #: ../../../tribes/empire/marblecolumn/conf:1
 msgid "Marble columns present the high culture of the Empire, so they are needed for nearly every bigger building."
-msgstr "Marmerzuilen tonen de hoogstaande cultuur van het Keizerrijk, dus worden ze gebruikt voor bijna elk groot gebouw."
+msgstr ""
 
 #: ../../../tribes/empire/master-miner/conf:1
 #: ../../../tribes/empire/miner/conf:1
@@ -826,15 +824,15 @@ msgstr ""
 
 #: ../../../tribes/empire/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
-msgstr "Een echte maaltijd die voorziet in de behoeftes van alle mijnwerkers."
+msgstr ""
 
 #: ../../../tribes/empire/meat/conf:1
 msgid "Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong."
-msgstr "Vlees bevat veel energie. Het wordt gebruikt in de herbergen en kroegen om lunch voor de mijnwerkers te maken en in trainingskamen om strijders sterk te houden."
+msgstr ""
 
 #: ../../../tribes/empire/pick/conf:1
 msgid "This pick is used by the stonemasons and the miners. It is produced by the toolsmith."
-msgstr "Deze punthouweel wordt gebruikt door de steenhouwer en de mijnwerkers en wordt gemaakt door de werktuigsmid."
+msgstr ""
 
 #: ../../../tribes/empire/pig-breeder/conf:1
 msgid "Breeds pigs."
@@ -842,13 +840,13 @@ msgstr ""
 
 #: ../../../tribes/empire/plate_armour/conf:1
 msgid "The strongest armour existing for the Empire soldiers."
-msgstr "Het sterkste bekende harnas voor Keizerrijksoldaten."
+msgstr ""
 
 #: ../../../tribes/empire/quarry/conf:16
 #: ../../../tribes/empire/marblemine/conf:23
 #, fuzzy
 msgid "Mine stone"
-msgstr "Kleine wijn"
+msgstr "Kleine wijnrank"
 
 #: ../../../tribes/empire/quarry/conf:17
 msgid "Mine stone (only for compatibility with old savegames (build13))"
@@ -866,15 +864,15 @@ msgstr ""
 
 #: ../../../tribes/empire/ration/conf:1
 msgid "A small bite to keep miners strong and working."
-msgstr "Een kleine snack om mijnwerkers sterk en in gang te houden."
+msgstr ""
 
 #: ../../../tribes/empire/saw/conf:1
 msgid "This saw is needed by the sawyer to create all the useful tools. It is produced by the toolsmith."
-msgstr "Deze zaag wordt gebruikt door de timmerman om alle handige gereedschappen te maken. Hij wordt door de werktuigsmid gemaakt."
+msgstr ""
 
 #: ../../../tribes/empire/scythe/conf:1
 msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr "De zeis is het gereedschap van de boeren en wordt gemaakt door de werktuigsmid."
+msgstr ""
 
 #: ../../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheeps."
@@ -882,7 +880,7 @@ msgstr ""
 
 #: ../../../tribes/empire/shovel/conf:1
 msgid "The shovel is needed for proper handling of plants. Therefore the forester uses it. It is produced by the toolsmith."
-msgstr "De schop is nodig om goed met planten om te kunnen gaan. Daarom gebruikt de boswachter hem. Wordt gemaakt door de werktuigsmid."
+msgstr ""
 
 #: ../../../tribes/empire/smelter/conf:1
 #, fuzzy
@@ -907,9 +905,8 @@ msgid "Cuts raw pieces of granit and marble out of laying stones."
 msgstr ""
 
 #: ../../../tribes/empire/toolsmithy/conf:30
-#, fuzzy
 msgid "Produce bakingtray"
-msgstr "Baklade"
+msgstr ""
 
 #: ../../../tribes/empire/toolsmithy/conf:31
 msgid "Produce fire tongs"
@@ -1024,7 +1021,7 @@ msgstr ""
 
 #: ../../../tribes/empire/trunk/conf:1
 msgid "Trunks are one important build material of the Empire."
-msgstr "Boomstammen zijn een belangrijk bouwmateriaal voor het Keizerrijk"
+msgstr ""
 
 #: ../../../tribes/empire/vinefarmer/conf:1
 #, fuzzy
@@ -1042,11 +1039,11 @@ msgstr "Marmermijn"
 
 #: ../../../tribes/empire/war_lance/conf:1
 msgid "This is the best and sharpest weapon, the Empire weaponsmith creates for their warriors."
-msgstr "Dit is het beste en scherpste wapen dat de wapensmid van het Keizerrijk maakt voor de krijgers."
+msgstr ""
 
 #: ../../../tribes/empire/water/conf:1
 msgid "Water is the most essential essence for life! This water is used in many places, be it to make bread or beer."
-msgstr "Water is de meest essentiële stof voor het leven! Dit water wordt voor van alles gebruikt, zoals om brood of bier te maken."
+msgstr ""
 
 #: ../../../tribes/empire/weaponsmithy/conf:26
 msgid "Produce wood lance"
@@ -1073,38 +1070,20 @@ msgstr ""
 
 #: ../../../tribes/empire/wheat/conf:1
 msgid "Wheat is essential for surviving. Delicious bread and ales can be made of this wheat."
-msgstr "Tarwe is essentieel voor overleving, goed brood en lekkere bieren kunnen met deze tarwe gemaakt worden."
+msgstr ""
 
 #: ../../../tribes/empire/wine/conf:1
 msgid "This wine gives enough power, to mine marble or gold. And furthermore, our soldiers like it, too."
-msgstr "Deze wijn geeft genoeg kracht om naar marmer en goud te graven. Daarnaast vinden onze soldaten hem ook lekker."
+msgstr ""
 
 #: ../../../tribes/empire/wood/conf:1 ../../../tribes/empire/stone/conf:1
 msgid "Stones and wood are the basic build material of the Empire."
-msgstr "Stenen en hout zijn de basisbouwmaterialen van het Keizerrijk."
+msgstr ""
 
 #: ../../../tribes/empire/wood_lance/conf:1
 msgid "This is a wooden lance, which is the basic of the Empires military system."
-msgstr "Dit is de houten lans die aan de basis staat van het militaire stelsel van het Keizerrijk."
+msgstr ""
 
 #: ../../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
-msgstr "Wol is het haar van schapen. Weverijen van het Keizerrijk maken er doek van."
-
-#~ msgid "Toolsmith's Shop"
-#~ msgstr "Werktuigsmederij"
-
-#~ msgid "Vintagery"
-#~ msgstr "Wijnmakerij"
-
-#~ msgid "Herdsman"
-#~ msgstr "Herder"
-
-#~ msgid "Coalearth"
-#~ msgstr "Koolaarde"
-
-#~ msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
-#~ msgstr "Deze aarde wordt diep in kolenmijnen gevonden. Het moet bewerkt worden om echte steenkool te krijgen."
-
-#~ msgid "Carpenter"
-#~ msgstr "Timmerman"
+msgstr ""

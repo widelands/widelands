@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4437\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2008-11-03 14:16+0100\n"
-"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
+"POT-Creation-Date: 2009-07-24 09:16+0000\n"
+"PO-Revision-Date: 2009-05-14 20:51+0100\n"
+"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,7 @@ msgstr "Keizerrijk leerschool 2 - Een voorpost in ballingschap"
 
 #: ../../../campaigns/emp02.wmf/elemental:11
 msgid "Finally the ship was repaired, so Lutius and his people again went on the quest to find a good place for a new beginning. Only few days later they land on a green, mediterranean island, looking like paradise."
-msgstr ""
+msgstr "Eindelijk was het schip gerepareerd, dus gingen Lutius en zijn mensen verder op hun zoektocht naar een geschikte plek om opnieuw te beginnen. Slechts enkele dagen later landen ze op een groen, mediterraan en paradijselijk eiland."
 
 #: ../../../campaigns/emp02.wmf/event:109
 #: ../../../campaigns/emp02.wmf/event:136
@@ -34,16 +34,14 @@ msgid "Diary of Lutius"
 msgstr "Dagboek van Lutius"
 
 #: ../../../campaigns/emp02.wmf/event:111
-#, fuzzy
 msgid " \"Finally! This island appears to be made for us, it is a gift from the Gods to my people and myself.<br> Until now, we have only seen a small part of this island, but this part alone is already bringing sunlight in my mind. I feel as if we have found a priceless treasure, a land like paradise.<br> On this island, we will start our new life. We will build up an outpost for our exile, which perhaps will become a new, beautiful home for every one of us.\" "
-msgstr "\"Eindelijk! Dit eiland lijkt wel voor ons gemaakt. Het is een geschenk van de goden aan mijn volk en mijzelf.<br> We hebben tot nu slechts een klein deel van dit eiland gezien, maar dit deel zendt al zonnestralen in mijn ziel. Het voelt alsof we een onbetaalbare schat hebben gevonden, een klein paradijs.<br> Op dit eiland zullen we ons nieuwe leven beginnen. We zullen een thuishaven in ballingschap bouwen, die wellicht ooit een nieuw en mooi thuis zal bieden aan eenieder van ons.\""
+msgstr "\"Eindelijk! Dit eiland lijkt wel voor ons gemaakt. Het is een geschenk van de Goden aan mijn volk en mijzelf.<br> We hebben tot nu slechts een klein deel van dit eiland gezien, maar dit deel zendt al zonnestralen in mijn ziel. Het voelt alsof we een onbetaalbare schat hebben gevonden, een klein paradijs.<br> Op dit eiland zullen we ons nieuwe leven beginnen. We zullen een thuishaven in ballingschap bouwen, die wellicht ooit een nieuw en mooi thuis zal bieden aan eenieder van ons.\""
 
 #: ../../../campaigns/emp02.wmf/event:113
 msgid "A new island"
 msgstr "Een nieuw eiland"
 
 #: ../../../campaigns/emp02.wmf/event:138
-#, fuzzy
 msgid " \"As Saledus and I walked through these wonderful forests in the north, we felt that our future had just begun. This land is so peaceful, good and beautiful, I could stay here until the end of my life.<br> But until that day, may many years pass! For now, we must concentrate on the present, and build a few lumberjack's houses and a sawmill to produce some basic building materials.<br> But we shouldn't forget to preserve this natural bounty. These forests should last forever, so we really should build a forester's house too.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr "\"Toen Saledus en ik door deze prachtige bossen in het noorden liepen, hadden we het gevoel dat onze nieuwe toekomst net was begonnen. Dit land is zo vredig, rijk en mooi, dat ik hier tot het eind mijner dagen zou kunnen blijven.<br> Mogen er nog jaren jaren verstrijken tot die laatste dag! We moeten ons voorlopig richten op het heden en enkele houthakkershutten en een houtzagerij bouwen om basisbouwmaterialen te produceren.<br> Maar we mogen niet vergeten deze natuurlijke rijkdom te bewaken. Deze bossen moeten eeuwig mee, dus we moeten ook een boswachtershuis bouwen.\"<br><br>-- NIEUWE DOELEN --"
 
@@ -57,7 +55,6 @@ msgid "The green forests"
 msgstr "De groene bossen"
 
 #: ../../../campaigns/emp02.wmf/event:171
-#, fuzzy
 msgid " \"Later, I walked down to the rocks in the south and looked for a place where we can build a quarry to get some hard stone for our larger buildings.<br> Again, I felt like I'm in paradise when I noticed that some marble-like stones were among the rocks. It seems that we will soon be able to build strong, luxurious buildings, like those we were accustomed to in Fremil.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr "\"Later liep ik naar de rotsen in het zuiden en zocht een plek om een steengroeve te kunnen bouwen om harde steen te kunnen verzamelen voor onze grotere gebouwen.<br> Ik voelde me weer in het paradijs toen ik zag dat er enkele marmerachtige stenen in de rotsen zaten. Het lijkt erop dat we spoedig in staat zullen zijn om grote luxe gebouwen te kunnen bouwen, zoals die waar we in Fremil aan gewend waren.\"<br><br>-- NIEUW DOEL --<br>"
 
@@ -91,9 +88,8 @@ msgid "Saledus looks unhappy"
 msgstr "Saledus kijkt niet blij"
 
 #: ../../../campaigns/emp02.wmf/event:240
-#, fuzzy
 msgid " \"Greetings Lutius, I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern strands I found the remains of another ship. I don't know whether these parts are all that is left of that ship. Inn any case: these parts do not seem to be old.<br> Perhaps the people aboard that ship were caught in the same storm which brought us to Malac' Mor - and were brought to this island.<br> I beg you to be cautious and to build some barracks or sentries around our colony.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr "\"Gegroet Lutius,<br>Ik wil geen paniek veroorzaken, maar ik heb iets gezien dat als een steen op mijn maag ligt en angstschokken door mijn hart stuurt. Toen ik vandaag naar de zuidelijke stranden van dit eiland liep, vond ik de resten van een ander schip. Ik weet niet of dit alles is dat over is van dat schip, maar in ieder geval: Deze resten leken niet oud.<br> Misschien zijn de mensen van dat schip in dezelfde storm terecht gekomen die ons naar Malac' Mor bracht - en zijn ze ook op dit eiland gestrand.<br> Toch verzoek ik je om op je hoede te zijn en enkele barakken en wachtposten rond onze kolonie te bouwen.\"<br><br>-- NIEUW DOEL--<br>"
+msgstr "\"Gegroet Lutius, Ik wil geen paniek veroorzaken, maar ik heb iets gezien dat als een steen op mijn maag ligt en angstschokken door mijn hart stuurt. Toen ik vandaag naar de zuidelijke stranden van dit eiland liep, vond ik de resten van een ander schip. Ik weet niet of dit alles is dat over is van dat schip, maar in ieder geval: Deze resten leken niet oud.<br> Misschien zijn de mensen van dat schip in dezelfde storm terecht gekomen die ons naar Malac' Mor bracht - en zijn ze ook op dit eiland gestrand.<br> Toch verzoek ik je om op je hoede te zijn en enkele barakken en wachtposten rond onze kolonie te bouwen.\"<br><br>-- NIEUW DOEL--<br>"
 
 #: ../../../campaigns/emp02.wmf/event:241
 #: ../../../campaigns/emp02.wmf/objective:25
@@ -109,9 +105,8 @@ msgid "Saledus smiles"
 msgstr "Saledus glimlacht"
 
 #: ../../../campaigns/emp02.wmf/event:282
-#, fuzzy
 msgid " \"Lutius, I've got good news for you:<br> As I walked to the east, I found a larger mountain.<br> I am not absolutely sure - a geologist should check if I am right - but I believe we could mine marble from some places on the mountain.<br> It would be a good source to bolster our supply of quality marble, beyond the meagre quantities available from the quarry. Perhaps you were right when you said that this island is like paradise.<br> Let us expand to that mountain and start mining marble.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr "\"Lutius, ik heb goed nieuws voor je:<br> Toen ik naar het oosten liep, vond ik een grotere berg.<br> Ik weet het niet helemaal zeker, een geoloog moet maar kijken of ik gelijk heb, maar ik denk dat we marmer kunnen uitgraven op enkele plaatsen in de berg.<br> Het zou een goede bron zijn om onze voorraad goede marmer aan te vullen, meer dan die kleine hoeveelheden beschikbaar van de steengroeve. Je had misschien wel gelijk toen je zei dat dit eiland een paradijs is.<br>Laten we uitbreiden naar die berg en naar marmer beginnen te graven.\"<br><br>-- NIEUW DOEL --<br>"
+msgstr "\"Lutius, ik heb goed nieuws voor je:<br> Toen ik naar het oosten liep, vond ik een grotere berg.<br> Ik weet het niet helemaal zeker, een geoloog moet maar kijken of ik gelijk heb, maar ik denk dat we marmer kunnen uitgraven op enkele plaatsen in de berg.<br> Het zou een goede bron zijn om onze voorraad kwaliteitsmarmer aan te vullen, meer dan die kleine hoeveelheden beschikbaar van de steengroeve. Je had misschien wel gelijk toen je zei dat dit eiland een paradijs is.<br> Laten we uitbreiden naar die berg en naar marmer beginnen te graven.\"<br><br>-- NIEUW DOEL --<br>"
 
 #: ../../../campaigns/emp02.wmf/event:283
 #: ../../../campaigns/emp02.wmf/objective:33
@@ -127,9 +122,8 @@ msgid "Saledus is amazed"
 msgstr "Saledus is verbaasd"
 
 #: ../../../campaigns/emp02.wmf/event:331
-#, fuzzy
 msgid " \"By the Gods, this is an unbelievable strike of fortune! There are two more mountains and it seems that one has a large quantity of coal and the other of iron ore. We should immediately start to build iron ore and coal mines (or at least charcoal burners), smelting works, toolsmith's shops, armour and weapon smithies.<br> However: for all these bigger buildings, we need better and more elegant building materials. So, let's build<br> a stonemason, who cuts columns from marble.<br> After all, now we can begin living as we did in Fremil.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr "\"Bij de Goden, wat een ongelooflijk geschenk. Er zijn nog twee bergen en het lijkt erop dat de één een grote voorraad steenkool en de ander een voorraad ijzererts bevat. We zouden direct moeten beginnen met het bouwen van ijzer- en kolenmijnen (of op zijn minst houtskoolbranders), hoogovens en werktuig-, harnassen- en wapensmeden. <br>Voor deze grotere gebouwen hebben we echter sterkere en sierlijkere bouwmaterialen nodig. Dus laten we een steenhouwer bouwen die voor ons zuilen uit marmer houwt. Nu kunnen we tenslotte beginnen te leven zoals in Fremil.\"<br><br>-- NIEUW DOEL --<br>"
+msgstr "\"Bij de Goden, wat een ongelooflijk geschenk! Er zijn nog twee bergen en het lijkt erop dat de één een grote voorraad steenkool en de ander een voorraad ijzererts bevat. We zouden direct moeten beginnen met het bouwen van ijzer- en kolenmijnen (of op zijn minst houtskoolbranders), hoogovens en werktuig-, harnassen- en wapensmederijen.<br> Voor deze grotere gebouwen hebben we echter sterkere en sierlijkere bouwmaterialen nodig. Dus laten we een steenhouwer bouwen die voor ons zuilen uit marmer houwt. Nu kunnen we tenslotte beginnen te leven zoals in Fremil.\"<br><br>-- NIEUW DOEL --<br>"
 
 #: ../../../campaigns/emp02.wmf/event:332
 #: ../../../campaigns/emp02.wmf/objective:41
@@ -150,24 +144,21 @@ msgstr "\"Hoi Lutius,<br>Ik hoop dat je me mijn kritiek kunt vergeven, maar het 
 
 #: ../../../campaigns/emp02.wmf/event:414
 #: ../../../campaigns/emp02.wmf/objective:49
-#, fuzzy
 msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food - like fish, meat or bread.<br> To provide these foodstuffs, you would have to build a fisher's house, a farm, a mill and a bakery.<br> Maybe you will also need a hunter's house,<br> a piggery, a vineyard and some wells.<br> It's up to you what you want to build.<br> But remember - coal and iron ore mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
-msgstr "* Om voedzaam eten voor onze mijnwerkers te maken, zouden we een kroeg kunnen bouwen. Om ze van goede en voedzame drank te voorzien zouden we een brouwerij en een wijnmakerij kunnen bouwen.<br> Uiteraard betekent dit dat we meer bronnen nodig hebben voor het bereiden van voedsel als vis, brood en vlees.<br> Om in deze materialen te voorzien moet je een vissershut, een boerderij, een molen en een bakkerij bouwen.<br> Misschien heb je ook een jagerhuis, een varkensfokkerij, een wijngaarde en enkele putten nodig.<br> De keus is aan jou wat je wilt bouwen<br> Maar onthoud - kool- en ijzerertsmijnen hebben bier nodig, marmer- en goudmijnen wijn en alle mijnen hebben minstens porties nodig, die worden gemaakt uit brood OF vlees OF vis."
+msgstr "* Om voedzaam eten voor onze mijnwerkers te maken, zouden we een kroeg kunnen bouwen. Om ze van goede en voedzame drank te voorzien zouden we een brouwerij en een wijnmakerij kunnen bouwen.<br> Uiteraard betekent dit dat we meer bronnen nodig hebben voor het bereiden van voedsel als vis, vlees of brood.<br> Om in deze materialen te voorzien moet je een vissershuis, een boerderij, een molen en een bakkerij bouwen.<br> Misschien heb je ook een jagerhuis, een varkensfokkerij, een wijngaarde en enkele putten nodig.<br> De keus is aan jou wat je wilt bouwen<br> Maar onthoud - kool- en ijzerertsmijnen hebben bier nodig, marmer- en goudmijnen wijn en alle mijnen hebben minstens porties nodig, die worden gemaakt uit brood OF vlees OF vis."
 
 #: ../../../campaigns/emp02.wmf/event:416
 msgid "Food for the miners"
 msgstr "Voedsel voor de mijnwerkers"
 
 #: ../../../campaigns/emp02.wmf/event:512
-#, fuzzy
 msgid " \"By the Gods! This is absolutely terrible. It seems as if we stand close to a test - and it seems as if Saledus was right with his fear concerning the shipwreck he found.<br> Today, as I walked down to the eastern strands,<br> I got a shock. I caught sight of one of those hated, evil, barbarian tribes with whom we have had so many problems before.<br> At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me they charged towards me and started attacking me with their throwing-spears. Thanks be to the Gods that<br> I was able to flee and hide myself, before retreating back to our colony under cover of darkness.<br> Anyway, we must build up stronger military buildings as soon as possible.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr "\"Bij de Goden!<br>Dit is absoluut verschrikkelijk. Het lijkt erop dat we voor een beproeving staan - en het lijkt erop dat Saledus gelijk had met zijn zorgen over het scheepswrak dat hij vond.<br> Toen ik vandaag langs de oostelijke stranden liep, kreeg ik een schok. Er was één van die gehate, kwaadaardige barbarenstammen waarmee we vroeger zo veel problemen hebben gehad.<br> Ik was in het begin een beetje naief en hoopte dat ze vreedzaam waren, maar zodra één van hen mij zag stormden ze mijn kant op en begonnen me aan te vallen met hun werpsperen. Goden zij dank dat ik kon vluchten en mezelf kon verstoppen onder de mantel van de duisternis.<br>In ieder geval, we moeten zo snel mogelijk grotere militaire gebouwen bouwen.\"<br><br>-- NIEUW DOEL --<br>"
+msgstr "\"Bij de Goden! Dit is absoluut verschrikkelijk. Het lijkt erop dat we voor een beproeving staan - en het lijkt erop dat Saledus gelijk had met zijn zorgen over het scheepswrak dat hij vond.<br> Toen ik vandaag langs de oostelijke stranden liep, kreeg ik een schok. Er was één van die gehate, kwaadaardige barbarenstammen waarmee we vroeger zo veel problemen hebben gehad.<br> Ik was in het begin een beetje naief en hoopte dat ze vreedzaam waren, maar zodra één van hen mij zag stormden ze mijn kant op en begonnen me aan te vallen met hun werpsperen. Goden zij dank dat ik kon vluchten en mezelf kon verstoppen onder de mantel van de duisternis.<br>In ieder geval, we moeten zo snel mogelijk grotere militaire gebouwen bouwen.\"<br><br>-- NIEUW DOEL --<br>"
 
 #: ../../../campaigns/emp02.wmf/event:513
 #: ../../../campaigns/emp02.wmf/objective:57
-#, fuzzy
 msgid "* Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier. To watch deep inside the enemy territory, build a tower."
-msgstr "* Bouw sterke militaire gebouwen, zoals een buitenpost, een barrière of een toren, aan de oostelijke grens. Om diep in het vijandig gebied te kijken, bouw een toren"
+msgstr "* Bouw sterke militaire gebouwen, zoals een buitenpost, een barrière of een toren, aan de oostelijke grens. Om diep in het vijandig gebied te kijken, bouw een toren."
 
 #: ../../../campaigns/emp02.wmf/event:515
 msgid "The Barbarians"
@@ -179,7 +170,6 @@ msgstr "\"Dat is mooi. Het eerste grote militaire gebouw is af en de mijneninfra
 
 #: ../../../campaigns/emp02.wmf/event:555
 #: ../../../campaigns/emp02.wmf/objective:65
-#, fuzzy
 msgid "* As soon as you have enough soldiers, attack and completely destroy the barbarian buildings.<br>"
 msgstr "* Zodra je voldoende soldaten hebt, val de barbarengebouwen aan en sloop ze volledig.<br>"
 
@@ -193,9 +183,8 @@ msgid "Command for Attack"
 msgstr "Bevel tot Aanval"
 
 #: ../../../campaigns/emp02.wmf/event:579
-#, fuzzy
 msgid " \"Today is a proud day. We have fought for our new home and risen victorious.<br> There are still a few barbarians hiding on our island, but I am sure that we will find them soon.<br> Every barbarian who doesn't attack us will be put in a boat with the other peaceful ones, and sent back to their country.\"<br><br>--------------------- VICTORY! ----------------------"
-msgstr "\"Vandaag is een dag om trots op te zijn. We vochten voor ons nieuwe thuis en kraaiden victorie.<br> Er verbergen zich nog enkele barbaren op ons eiland, maar ik weet zeker dat we die snel zullen vinden. Elke barbaar die ons niet aanvalt, zal op een boot gezet worden met de andere vreedzamen en zal worden teruggestuurd naar hun land.\"<br><br>----------------------OVERWINNING!-----------------------"
+msgstr "\"Vandaag is een dag om trots op te zijn. We vochten voor ons nieuwe thuis en kraaiden victorie.<br> Er verbergen zich nog enkele barbaren op ons eiland, maar ik weet zeker dat we die snel zullen vinden.<br> Elke barbaar die ons niet aanvalt, zal op een boot gezet worden met de andere vreedzamen en zal worden teruggestuurd naar hun land.\"<br><br>----------------------OVERWINNING!-----------------------"
 
 #: ../../../campaigns/emp02.wmf/event:581
 msgid "Victory"
@@ -214,7 +203,6 @@ msgid "OK"
 msgstr "OK"
 
 #: ../../../campaigns/emp02.wmf/event:606
-#, fuzzy
 msgid " \"Today a pigeon landed on our island.<br> It brought a message which fills me with dark thoughts and brings back my fears.<br> The message was addressed to me, begging me to come back to Fremil.<br> It says that the Empire is at war with the Barbarians. They were attacked from the north by the tribe I was forbidden to attack.<br> For me, it is clear what I must do...<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.\" "
 msgstr "\"Vandaag landde een duif op ons eiland.<br> Hij bracht een bericht dat me met zwarte gedachten vervult en mijn angst doet herleven.<br> Het bericht was aan mij gericht en verzocht me om terug te komen naar Fremil.<br> Het zei dat het keizerrijk in oorlog is met de Barbaren. Ze werden aangevallen uit het noorden, door de stam die ik niet aan mocht vallen.<br>Het is mij duidelijk wat me te doen staat...<br><br> Je hebt deze missie voltooid. Je mag verder spelen als je dat wilt, ga anders verder met de volgende missie.\""
 
@@ -227,9 +215,8 @@ msgid "Amalea smiles"
 msgstr "Amalea glimlacht"
 
 #: ../../../campaigns/emp02.wmf/event:622
-#, fuzzy
 msgid " \"Greetings, my friend, I just visited our new tavern<br> 'At the palms'. The beer they serve is really tasty. You really should take a drink there, too.<br> It is good to see that we have now got a warmer and more familiar environment on our island.<br> Thank you, Lutius.\" "
-msgstr "\"Gegroet mijn vriend, ik ben net op bezoek geweest in onze nieuwe kroeg<br> 'Onder de palmen'. Het bier dat ze schenken is erg smaakvol. Je zou daar ook eens iets moeten gaan drinken.<br> Goed om te zien dat we een warmere en herkenbaardere omgeving op ons eiland krijgen.<br> Dank Lutius.\""
+msgstr "\"Gegroet mijn vriend, ik ben net op bezoek geweest in onze nieuwe kroeg<br> 'Onder de palmen'. Het bier dat ze schenken is erg smaakvol. Je zou daar ook eens iets moeten gaan drinken.<br> Goed om te zien dat we een warmere en herkenbaardere omgeving op ons eiland krijgen.<br> Dank je, Lutius.\""
 
 #: ../../../campaigns/emp02.wmf/event:624
 msgid "Our new tavern"

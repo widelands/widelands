@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4437\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: YYYY-MM-DD hh:mm+ZZZZ\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2009-07-24 09:16+0000\n"
+"PO-Revision-Date: 2009-04-27 22:49+0100\n"
+"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,326 +16,326 @@ msgstr ""
 
 #: ../../../campaigns/t03.wmf/elemental:7
 msgid "Tutorial3 - This land is our land"
-msgstr ""
+msgstr "Oefencampagne 3 - Dit land is ons land"
 
 #: ../../../campaigns/t03.wmf/elemental:9
 msgid "Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the handling of military and training site buildings and will finally introduce fighting."
-msgstr ""
+msgstr "Derde missie van de Barbaren oefencampagne. Deze oefenmissie legt het omgaan met militaire en oefengebouwen uit en zal eindelijk vechten introduceren."
 
 #: ../../../campaigns/t03.wmf/event:316
 msgid "Thron looks worried..."
-msgstr ""
+msgstr "Thron kijkt bezorgd..."
 
 #: ../../../campaigns/t03.wmf/event:318
 msgid " \"The last days we came closer to our capital. Many people have already joined us on our march and set their hopes on me. However, I fear that we are not strong enough to take up the battle with my brothers.<br>For now we rest at the borders of the old forest and prepare for the coming days.\" "
-msgstr ""
+msgstr "\"De laatste dagen kwamen we dichter bij onze hoofdstad. Veel mensen hebben zich al bij onze mars aangesloten en hun hoop op mij gericht. Ik vrees echter dat we niet sterk genoeg zijn om de strijd met mijn broers aan te gaan.<br>Voorlopig rusten we aan de grenzen van het oude woud en bereiden ons voor op de dagen die komen.\""
 
 #: ../../../campaigns/t03.wmf/event:320
 msgid "Close to home"
-msgstr ""
+msgstr "Dicht bij huis"
 
 #: ../../../campaigns/t03.wmf/event:331
 msgid "Boldreth speaks:"
-msgstr ""
+msgstr "Boldreth spreekt:"
 
 #: ../../../campaigns/t03.wmf/event:333
 msgid " \"This morning I found Thron trouble-minded. He returned from his patrol late last night and sat back against a tree watching over the encampment. The number of quarrels and disputes keeps growing and the winter has us firmly under control. We should put food in our storage to survive the long, cold winter!\" "
-msgstr ""
+msgstr "\"Deze morgen zag ik Thron in zorgen. Hij keerde gisterenavond laat terug van zijn patrouille en zat tegen een boom te kijken over het kamp. Het aantal ruzies en discussies blijft groeien en de winter heeft ons stevig in zijn greep. We zouden voedsel op moeten slaan om de lange, koude winter te overleven!\""
 
 #: ../../../campaigns/t03.wmf/event:335
 msgid "Winter ahead"
-msgstr ""
+msgstr "Winter nadert"
 
 #: ../../../campaigns/t03.wmf/event:346
 msgid "Khantrukh nods"
-msgstr ""
+msgstr "Khantrukh knikt"
 
 #: ../../../campaigns/t03.wmf/event:348
 msgid " \"Boldreth is right! We don't have enough food to survive a long, cold winter. We should start to build a well, a fisher's and a hunter's hut. And if we find enough space, we should as well build up a farm and a bakery! One of our farmers seems to be very clever he already got some crops to grow in this cold soil.\" "
-msgstr ""
+msgstr "\"Boldreth heeft gelijk! We hebben niet genoeg voedsel om een lange, koude winter te overleven. We zouden een put en een vissers- en jagershut moeten bouwen. En als we genoeg ruimte hebben, zouden we ook een boerderij en een bakkerij moeten bouwen! Eén van onze boeren schijnt erg slim te zijn: Hij heeft al oogsten binnen kunnen halen op deze koude bodem.\""
 
 #: ../../../campaigns/t03.wmf/event:350 ../../../campaigns/t03.wmf/event:459
 #: ../../../campaigns/t03.wmf/event:494 ../../../campaigns/t03.wmf/event:566
 #: ../../../campaigns/t03.wmf/event:655 ../../../campaigns/t03.wmf/event:928
 #: ../../../campaigns/t03.wmf/event:1002
 msgid "-- NEW OBJECTIVE --"
-msgstr ""
+msgstr "-- NIEUW DOEL --"
 
 #: ../../../campaigns/t03.wmf/event:352 ../../../campaigns/t03.wmf/objective:7
 msgid "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a farm and a bakery, to provide your people with food."
-msgstr ""
+msgstr "* Bouw een basisvoedseleconomie op - een vissershut, een jagershut, een put, een boerderij en een bakkerij - om je mensen van voedsel te voorzien."
 
 #: ../../../campaigns/t03.wmf/event:354
 msgid "The advisor"
-msgstr ""
+msgstr "De adviseur"
 
 #: ../../../campaigns/t03.wmf/event:418
 msgid " \"Khantrukh just informed me, that our basic food economy was built up successfully. Finally none of us has to fear starvation anymore."
-msgstr ""
+msgstr "\"Khantruk heeft me net geïnformeerd dat onze voedseleconomie succesvol is opgebouwd. Eindelijk hoeft niemand meer de hongerdood te vrezen."
 
 #: ../../../campaigns/t03.wmf/event:420
 msgid "Food economy completed"
-msgstr ""
+msgstr "Voedseleconomie voltooid"
 
 #: ../../../campaigns/t03.wmf/event:457
 msgid " \"Thron told me that he discovered tracks in the snow to the northeast of our settlement. He instructed us to build a Donjon, to have a further visual range on the area around our hall to protect our people from sudden attacks.\" "
-msgstr ""
+msgstr "\"Thron vertelde me dat hij sporen heeft ontdekt in de sneeuw ten noordoosten van onze nederzetting. Hij raadde ons aan een verdedigingstoren te bouwen om meer zicht te hebben op de directe omgeving om onze mensen te verdedigen tegen plotselinge aanvallen.\""
 
 #: ../../../campaigns/t03.wmf/event:461
 msgid "* Build a donjon at the northeast of your territory."
-msgstr ""
+msgstr "* Bouw een verdedigingstoren ten oosten van de bergen."
 
 #: ../../../campaigns/t03.wmf/event:463
 msgid "Tracks"
-msgstr ""
+msgstr "Sporen"
 
 #: ../../../campaigns/t03.wmf/event:492
 msgid " \"The first fortification Thron ordered has just been completed. At the moment he seeks to bring trust and belief to those who live inside the walls of our new habitat, that we named 'Ondun', which means 'those who wait' in the old tongue. But Thron is not yet satisfied - and I fully understand his fears: The forests are deep and the fronier to Al’thunran is near. I am sure that there are thousand bigger dangers out there than the unknown tracks.<br>To overlook more of the area around our hall we should explore further and set up more guards and scouts to observe the frontier and keep an eye on the raging wars on our doorsteps. THAN we will be prepared once trouble seeks to capture our woods.\" "
-msgstr ""
+msgstr "\"De eerste versterking die Thron heeft bevolen, is net voltooid. Op dit moment probeert hij geloof en vertrouwen te geven aan degenen die leven binnen de muren van onze nieuwe woonomgeving, die we 'Ondun' hebben genoemd. Dit betekent 'wachtenden' in de oude taal. Maar Thron is nog niet tevreden - en ik begrijp zijn angst helemaal: De bossen zijn diep en de grens met Al'thunran is dichtbij. Ik weet zeker dat er duizend gevaren meer zijn dan de onbekende sporen.<br>Om meer van de omgeving rond ons dorpshuis te zien, moeten we verder onderzoeken en meer wachters en verkenners inzetten om de grens en de woedende strijd voor onze deur in het oog te houden. Alleen DAN zullen we voorbereid zijn zodra problemen zich in onze willen vestigen.\""
 
 #: ../../../campaigns/t03.wmf/event:496
 #: ../../../campaigns/t03.wmf/objective:23
 msgid "* Build more military buildings to explore the area around the headquarters and to ensure the safety of your people."
-msgstr ""
+msgstr "* Bouw meer militaire gebouwen om het gebied rond je hoofdkwartier te verkennen en de veiligheid van je mensen te garanderen."
 
 #: ../../../campaigns/t03.wmf/event:498
 msgid "Further explorations"
-msgstr ""
+msgstr "Verdere verkenningen"
 
 #: ../../../campaigns/t03.wmf/event:564
 msgid " \"I just talked to the leader of our patrol. He told me, that they found some mountains to the north east and the east of our territory. With a bit of luck this opens us a new chance for rearming our men, because as far as I remember, most of the mountains west to Al'thunran hold coal and some metal ores.\" "
-msgstr ""
+msgstr "\"Ik sprak net met de leider van onze patrouille. Hij vertelde me dat ze enkele bergen hebben gevonden ten oosten en noordoosten van ons gebied. Met een beetje geluk, is dit een nieuwe kans om onze mannen van nieuwe wapens te voorzien. Want als ik met goed herinner, zitten in de meeste bergen ten westen van Al'thunran kolen en enkele metalen.\""
 
 #: ../../../campaigns/t03.wmf/event:568
 #: ../../../campaigns/t03.wmf/objective:31
 msgid "* Expand your territory to the mountains, send geologists to search for ore and coal and build a mining economy with mines, taverns, smelting works and metalworks."
-msgstr ""
+msgstr "* Breid je territorium uit tot de bergen, zend geologen om naar erts en kool te zoeken en bouw een mijneconomie met mijnen, kroegen, hoogovens en metaalberwerkerijen."
 
 #: ../../../campaigns/t03.wmf/event:570
 msgid "Mountains found"
-msgstr ""
+msgstr "Bergen gevonden"
 
 #: ../../../campaigns/t03.wmf/event:634
 msgid " \"I just got informed, that our mining economy started it's work. These news brought a smile on my face - even if the hardest part is still waiting to be done, now our smiths will give their best to further ease our lives.\" "
-msgstr ""
+msgstr "\"Ik ontving net het bericht dat onze mijneconomie in gang is gezet. Dit nieuws toverde een glimlach op mijn gezicht - zelfs als het moeilijkste nog moet komen, kunnen onze smeden zich nu volledig inzetten om ons leven nog makkelijker te maken.\""
 
 #: ../../../campaigns/t03.wmf/event:636
 msgid "Mining economy completed"
-msgstr ""
+msgstr "Mijneconomie opgebouwd"
 
 #: ../../../campaigns/t03.wmf/event:653
 msgid " \"Boldreth and I just explored the area around the three mountains. One major strategic problem of that area seems to be, that there are two bigger passages - one north and one south to the middle mountain. Those passages are quite hard to control and so it seems to me, like we have only one chance to secure the mountains from enemy hands: We must build a fortress to the east of the mountains!\" "
-msgstr ""
+msgstr "\"Boldreth en ik hebben net de regio om de drie bergen verkend. Een groot strategisch probleem van deze regio lijkt te zijn dat er twee ruime doorgangen zijn - ten noorden en zuiden van de middelste berg. Deze doorgangen zijn moeilijk te controleren en volgens mij is er maar één kans om de bergen uit vijandelijke handen te houden: we moeten een vesting ten oosten van de bergen bouwen!\""
 
 #: ../../../campaigns/t03.wmf/event:657
 #: ../../../campaigns/t03.wmf/objective:39
 msgid "* Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "* Bouw een vesting ten oosten van de bergen."
 
 #: ../../../campaigns/t03.wmf/event:659
 msgid "Fortress needed"
-msgstr ""
+msgstr "Vesting nodig"
 
 #: ../../../campaigns/t03.wmf/event:681
 msgid " \"Finally!<br>The fortress was just completed, so the entrance to our settlement should be save for now. For the future we might think on building some more fortifications like barriers and donjons at the passages, but for now we can take a deep breath.\" "
-msgstr ""
+msgstr "\"Eindelijk!<br>De vesting is net voltooid, dus zou de toegang naar onze vestiging voorlopig veilig moeten zijn. Voor de toekomst zouden we kunnen denken aan het bouwen van nog enkele versterkingen, zoals barrières en verdedingstorens, bij de doorgangen, maar we kunnen voorlopig even rustig ademhalen.\""
 
 #: ../../../campaigns/t03.wmf/event:683
 msgid "Fortress completed"
-msgstr ""
+msgstr "Vesting voltooid"
 
 #: ../../../campaigns/t03.wmf/event:694
 msgid " \"Our mining economy seems to work fine, that is already good news! Anyway there are still a lot of men and women waiting in our hall to get a task, so they can help our soldiers to prepare for the future fights."
-msgstr ""
+msgstr "\"Onze mijneconomie lijkt goed te werken. Dat is alvast goed nieuws! In elk geval zijn er nog veel mannen en vrouwen in ons dorpshuis die nog geen taak hebben, dus kunnen zij nu onze soldaten helpen zicht voor te bereiden op toekomstige gevechten."
 
 #: ../../../campaigns/t03.wmf/event:696
 msgid "Our geologists found a lot more deposits of iron ore, coal and even gold. We should enhance our current mines as soon as our miners are more experienced. We should build up some more mines, a bigger food infrastructure to always supply our men with sufficient food and a further processing economy. But that's still not everything - most of our soldiers are quite young and neither have a good weapon nor are they well trained. We should build up trainingssites to prepare them for their future tasks.\" "
-msgstr ""
+msgstr "Onze geologen hebben nog meer voorraden ijzererts, kool en zelfs goud gevonden. We zouden onze mijnen moeten verbeteren zodra onze mijnwerkers meer ervaring hebben. We zouden nog enkele mijnen moeten bouwen en een grotere voedeselinfrastructuur om onze mensen altijd te voorzien van voldoende voedsel en een beter werkende economie. Maar dat is nog niet alles - de meeste van onze soldaten zijn behoorlijk jong en geen enkele heeft een goed wapen of is goed geoefend. We zouden oefenlocaties moeten bouwen om ze voor te bereiden op hun toekomstige taken.\""
 
 #: ../../../campaigns/t03.wmf/event:698
 msgid "-- NEW OBJECTIVES --"
-msgstr ""
+msgstr "-- NIEUWE DOELEN --"
 
 #: ../../../campaigns/t03.wmf/event:700
 #: ../../../campaigns/t03.wmf/objective:47
 msgid "* Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "* Bouw een magazijn ten westen van de bergen."
 
 #: ../../../campaigns/t03.wmf/event:702
 #: ../../../campaigns/t03.wmf/objective:57
 msgid "* Build a battle arena and a trainings camp to the west of the mountains."
-msgstr ""
+msgstr "* Bouw een gevechtsarena en een trainingskamp ten westen van de bergen."
 
 #: ../../../campaigns/t03.wmf/event:704
 #: ../../../campaigns/t03.wmf/objective:67
 msgid "* As soon as the blacksmith reaches his next level (master blacksmith) enhance your metalworks to an axefactory or even a war mill and build up another metalworks to ensure the production of tools."
-msgstr ""
+msgstr "* Verbeter je metaalbewerkerij naar een bijlenfabriek of zelfs een oorlogsfabriek zodra je smid het volgende niveau (meestersmid) bereikt en bouw een nieuwe metaalbewerkerij om je te verzekeren van de productie van gereedschap."
 
 #: ../../../campaigns/t03.wmf/event:706
 #: ../../../campaigns/t03.wmf/objective:75
 msgid "* Build a helmsmithy to the west of the mountains to provide your soldiers with better armor."
-msgstr ""
+msgstr "* Bouw een helmsmederij ten westen van de bergen om je soldaten van een beter pantser te voorzien."
 
 #: ../../../campaigns/t03.wmf/event:708
 msgid "Enhanced economy and training"
-msgstr ""
+msgstr "Verbeterde economie en training"
 
 #: ../../../campaigns/t03.wmf/event:847 ../../../campaigns/t03.wmf/event:1039
 msgid "Thron looks worried."
-msgstr ""
+msgstr "Thron kijkt bezorgd."
 
 #: ../../../campaigns/t03.wmf/event:849
 msgid " \"The news that a patrol brought is not good to hear. Our spies tell us, that the wartribes still rage in battle but some of the elder soldiers and tribe leaders seem to grow tired of this senseless war. Kalitat, son of Kun is the first warleader to leave Al’thunran, thus leaving his side weak and vulnerable. As my scouts report, he has set foot on the lower grounds around the capitol, securing the outer fortification rings.\" "
-msgstr ""
+msgstr "\"Het nieuws van een patrouille is niet prettig om te horen. Onze spionnen vertellen ons dat de oorlogsstammen nog steeds in strijd verwikkeld zijn, maar sommige van de oudere soldaten en stamleiders lijken deze zinloze oorlog moe te worden. Kalitat, zoon van Kun, is de eerste oorlogsleider die Al'thunran verlaten heeft, deze zijde zwak en kwetsbaar achterlatend. Zoals mijn scouts melden, heeft hij zich gevestigd op de lagere gronden om de hoofdstad, om de buitenste ringen van versterking te zekeren.\""
 
 #: ../../../campaigns/t03.wmf/event:851 ../../../campaigns/t03.wmf/event:900
 #: ../../../campaigns/t03.wmf/event:1047
 msgid "Another cold day"
-msgstr ""
+msgstr "Alweer een koude dag"
 
 #: ../../../campaigns/t03.wmf/event:862
 msgid "Boldreth shakes his head."
-msgstr ""
+msgstr "Boldreth schudt zijn hoofd."
 
 #: ../../../campaigns/t03.wmf/event:864
 msgid " \"Thron seeks to believe that Kalitat is tired of fighting and will be willing to join us, once we march to re-establish law and order in Al’thunran. But I don’t think so. Kalitat is son to one of the mightiest generals of our forces and his family never quite liked the thought to bow before the banner of Chat’Karuth. Why should he march with his son to reclaim his heritage and the throne?\" "
-msgstr ""
+msgstr "\"Thron neigt te geloven dat Kalitat het vechten moe is en zich bij ons aan zou willen sluiten, zodra we op pad gaan om recht en orde te herstellen in Al'thunran. Maar ik geloof het niet. Kalitat is de zoon van één van de machtigste generaals in onze legers en zijn familie heeft zich nooit echt neer kunnen leggen bij de gedachte om te buigen voor de vlag van Chat'Karuth. Waarom zouden we op pad gaan met zijn zoon om zijn nalatenschap en de troon te herstellen?\""
 
 #: ../../../campaigns/t03.wmf/event:866
 msgid "Doubts"
-msgstr ""
+msgstr "Twijfels"
 
 #: ../../../campaigns/t03.wmf/event:877
 msgid " \"However, Thron is not willing to listen to my doubts. He seeks to expand our fortifications to the borders of Kalitat’s territory and reunite with his forces. I have to keep an eye on everything that happens here.\" "
-msgstr ""
+msgstr "\"Thron wil echter niet luisteren naar mijn twijfels. Hij wil onze versterkingen uitbreiden naar de grenzen van Kalitat's territorium en zich verenigen met mijn troepen. Ik moet alles dat hier gebeurt in het oog houden.\""
 
 #: ../../../campaigns/t03.wmf/event:879 ../../../campaigns/t03.wmf/event:913
 msgid "The story continues"
-msgstr ""
+msgstr "Het verhaal gaat verder"
 
 #: ../../../campaigns/t03.wmf/event:896
 msgid "Thron speaks confidently."
-msgstr ""
+msgstr "Thron spreekt vol vertrouwen."
 
 #: ../../../campaigns/t03.wmf/event:898
 msgid " \"The frontier line of my forces has expanded to the edge of the forests. We have a long and cold winter and so many miles behind us. The fortification that we erected around Ondun will guarantee us fast supply of man and goods and once Al’thunran is in my hands, the two cities will be linked by a good and defendable infrastructure. Still I hope I will not walk alone on this mission, I hope Kailitat son of Kun will follow my call.\" "
-msgstr ""
+msgstr "\"De frontlijn van mijn troepen heeft uitgebreid tot de rand van de wouden. We hebben een lange en koude winter en vele mijlen achter ans. De versterking die we hebben opgericht rond Ondun verzekert ons van voldoende manschappen en goederen en zodra ik Al'thunran in handen heb, zullen de twee steden verbonden worden door een goede en verdedigbare infrastructuur. Toch hoop ik nog dat wij niet op onszelf staan in deze missie; ik hoop dat Kalitat, zoon van Kun, mijn oproep beantwoord.\""
 
 #: ../../../campaigns/t03.wmf/event:911
 msgid " \"I have sent men to meet Kalitat in this fortress. He has barricaded the former main entrance to the capital and is trying to set up a siege ring around Al’thunran. He will not let anyone enter or leave the city while the ring is intact. Until now, he has not answered any of my messages. But the time I wait won't be lost. I will further upgrade my soldiers and prepare for battle.\" "
-msgstr ""
+msgstr "\"Ik heb mannen gestuurd om Kalitat in zijn vesting te ontmoeten. Hij heeft de oude hoofdingang naar de hoofdstad gebarricadeerd en probeert een belegeringsring om Al'thunran op te richten. Hij laat niemand de stad in of uit zolang de ring intact is. Hij heeft tot nu toe op geen enkele van mijn boodschappen gereageerd. Maar de wachttijd zal geen verloren tijd zijn. Ik zal mijn soldaten verder opwaarderen en voorbereiden op de strijd.\""
 
 #: ../../../campaigns/t03.wmf/event:924
 msgid "Boldreth shouts out!"
-msgstr ""
+msgstr "Boldreth schreeuwt uit!"
 
 #: ../../../campaigns/t03.wmf/event:926
 msgid " \"This BASTARD! Only one man of our frontier patrol came back alive. He carried a message of Kalitath telling us that he will punish every move of our troops with their own blood! We cannot accept this behaviour. From now on there is war between Kalitath and us!\" "
-msgstr ""
+msgstr "\"Die SCHOFT! Slecht één man van onze grenspatrouille is levend teruggekeerd. He bracht een bericht van Kalitat, dat ons vertelde dat hij elke beweging van onze troepen met hun bloed zal straffen. Wij acceptern dit gedrag niet. Vanaf nu is het oorlog tussen Kalitat en ons!\""
 
 #: ../../../campaigns/t03.wmf/event:930
 #: ../../../campaigns/t03.wmf/objective:83
 msgid "* Destroy Kalitaths army and expand your territory to the east."
-msgstr ""
+msgstr "* Vernietig Kalitat's leger en breid je territorium uit naar het oosten."
 
 #: ../../../campaigns/t03.wmf/event:932
 #: ../../../campaigns/t03.wmf/objective:85
 msgid "-> To attack an enemy you must click on the door of an advarse military building. A menu will pop up allowing you to select the number of soldiers that should attack. When you are ready with setting the number, click on the cross ('start attack')"
-msgstr ""
+msgstr "-> Om een vijand aan te vallen, moet je op de deur van een vijandig gebouw klikken. Een menu zal opkomen, dat je in staat stelt het aantal soldaten te kiezen dat aan moet vallen. Als je het aantal gekozen hebt, klik dan op het kruis ('start aanval')."
 
 #: ../../../campaigns/t03.wmf/event:934
 msgid "Your loyal companion"
-msgstr ""
+msgstr "Je trouwe metgezel"
 
 #: ../../../campaigns/t03.wmf/event:986
 msgid "Thron speaks:"
-msgstr ""
+msgstr "Thron spreekt:"
 
 #: ../../../campaigns/t03.wmf/event:988
 msgid " \"The traitor has left his armies dying where they lay as he saw that he would not keep my forces back. Kalitat disappeared in the mess of the war, but I don’t care now. Shall he flee and be forgotten for all times as a tribeleader that would not bow before the wooden throne, that is mine to take now. Even more his flight brought us a big benefit: All year Kalitath was to busy fighting so that he did not even care to store enough food for all his men. Now that he fled the hunger brought some of his younger followers to desert. This group helds a strong fortification on the main ring. But there is more news: My scouts reported, that the two raging tribes of my brothers are in chaos and have barely noticed the new danger that is about to strike them. However they would not care if they noticed I guess, blinded by rage and hate, there is no sense left in them at all I believe.\" "
-msgstr ""
+msgstr "\"De verrader heeft zijn legers voor dood achtergelaten waar ze lagen toen hij zag dat hij mijn troepen niet kon weerstaan. Kalitat verdween in het strijdgewoel, maar dat maakt me nu niet uit. Zal hij vluchten en voor altijd vergeten worden als een stamleider die niet wilde buigen voor de houten troon, die ik nu in kan nemen. Zijn vlucht bracht ons zelfs een groot voordeel: Het hele jaar was Kalitat zo druk bezig met zijn strijd, dat hij er zelfs niet voor zorgde om voldoende voedsel op te slaan voor al zijn manschappen. Nu hij gevlucht is, heeft de honger enkele van zijn jongere volgelingen laten deserteren. Deze groep zat in een versterking in de hoofdring. Maar er is meer nieuws: Mijn verkenners berichtten dat de twee strijdende stammen van mijn broers in chaos leven en nauwelijks iets gemerkt hebben van het nieuwe gevaar dat zich op hun gaat storten. Het zou ze ook niets uitmaken als ze het zagen, denk ik, verblind door haat en woede, zijn ze volgens mij helemaal niet meer voor rede vatbaar.\""
 
 #: ../../../campaigns/t03.wmf/event:990
 msgid "Renegade fortification"
-msgstr ""
+msgstr "Overgelopen versterking"
 
 #: ../../../campaigns/t03.wmf/event:1000
 msgid " \"So be it, the generals are out to set up my troops and Boldreth himself will lead the first strike. I will ride by his side, to free Al’thunran of this war and bring peace back in our capital. When the young sun rises above the trees tomorrow morning, I will order the assault. By dusk, I will celebrate my victory in the wooden halls of the warlord and sacrifice a newborn lamb in the honour of my father whose eyes lie upon me today.<br>So be it!\" "
-msgstr ""
+msgstr "\"Komt wat komt, de generaals zijn bezig mijn troepen op te stellen en Boldreth zelf zal de eerste aanval leiden. Ik zal aan zijn zijde rijden om Al'thunran ban deze oorlog te bevrijden en de vrede terug te brengen naar onze hoofdstad. Als de jonge zon morgen boven deze bomen op zal komen, zal ik het bevel tot aanval geven. Bij zonsondergang, zal ik mijn overwinning vieren in de houten zal van de krijgsheren en een pasgeboren lam offeren voor de eer van mijn vader wiens ogen vandaag op mij rusten.<br>Komt wat komt!\""
 
 #: ../../../campaigns/t03.wmf/event:1004
 #: ../../../campaigns/t03.wmf/objective:93
 msgid "* Destroy all enforcements of Thron’s two brothers to liberate the throne-circle."
-msgstr ""
+msgstr "* Vernietig alle versterkingen van Thron's twee broers om de trooncirkel te bevrijden."
 
 #: ../../../campaigns/t03.wmf/event:1006
 msgid "Military assault"
-msgstr ""
+msgstr "Militaire aanval"
 
 #: ../../../campaigns/t03.wmf/event:1041
 msgid " \"My brothers and their soldiers are dead and left fire and destruction behind. In none of all the ruins I found any man or woman of the normal folk and so I just may hope that they fled from this cruel battleground and started a better life somewhere else. Nothing is left from that beauty I remember, only ruins remain from the old capital. I am sorrowful but also relieved. I never hoped to ever see Al'thunrans old beauty again - some month ago I even wondered whether I will ever be able to set my feet near to Al'thunran again. Now the old town is back in my hands and I will not hesitate to rebuild it with all forces my people have. I can't wait to see it again in it's old beauty.\" "
-msgstr ""
+msgstr "\"Mijn broers en hun soldaten zijn dood en lieten vuur en vernietiging achter. In geen van de ruïnes vond ik een man of vrouw van de normale mensen en dus hoop ik maar dat zij dit wrede slagveld ontvlucht zijn en elders een beter leven zijn begonnen. Er is niets over van de pracht die ik mij herinner, er zijn slecht ruïnes over van de oude hoofdstad. Ik ben bezorgd maar ook opgetogen. Ik durfde niet te hopen Al'Thunran's oude schoonheid weer te zien - enkele maanden geleden vroeg ik mij zelfs af of ik ooit weer in de buurt van Al'thunran zou staan. Nu is de oude stad weer terug in mijn handen en zal ik niet aarzelen om ze opnieuw op te bouwen met alle krachten die mijn mensen hebben. Ik kan niet wachten om de oude schoonheid weer te zien.\""
 
 #: ../../../campaigns/t03.wmf/event:1043
 msgid "--------------------- VICTORY! ----------------------"
-msgstr ""
+msgstr "---------------- OVERWINNING! -------------------"
 
 #: ../../../campaigns/t03.wmf/event:1045
 msgid "You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
-msgstr ""
+msgstr "Je hebt deze missie voltooid. Je mag verder spelen als je dat wilt, ga anders verder met de volgende missie."
 
 #: ../../../campaigns/t03.wmf/objective:5
 msgid "Build up a small food economy"
-msgstr ""
+msgstr "Bouw een kleine voedseleconomie op"
 
 #: ../../../campaigns/t03.wmf/objective:13
 msgid "Build a donjon"
-msgstr ""
+msgstr "Bouw een verdedigingstoren"
 
 #: ../../../campaigns/t03.wmf/objective:15
 msgid "* Build a donjon at the northeast of your territory to get a farther visual range and to protect your people from sudden attacks of enemies."
-msgstr ""
+msgstr "* Bouw een verdedigingstoren in het noordoosten van je territorium om je zicht te vergroten en om je mensen te beschermen tegen onverwachte aanvallen van vijanden."
 
 #: ../../../campaigns/t03.wmf/objective:21
 msgid "Explore further"
-msgstr ""
+msgstr "Verken verder"
 
 #: ../../../campaigns/t03.wmf/objective:29
 msgid "Build mines"
-msgstr ""
+msgstr "Bouw mijnen"
 
 #: ../../../campaigns/t03.wmf/objective:37
 msgid "Build a fortress"
-msgstr ""
+msgstr "Bouw een fort"
 
 #: ../../../campaigns/t03.wmf/objective:45
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Bouw een magazijn"
 
 #: ../../../campaigns/t03.wmf/objective:49
 msgid "-> Warehouses are similiar to your headquarters, with the only difference that it is not defended by soldiers. It is often wise to build a warehouse when your territory is growing and the paths to your headquarters get longer and longer."
-msgstr ""
+msgstr "-> Magazijnen zijn te vergelijken met je hoofdkwartier, alleen worden ze niet verdedigd door soldaten. Het is vaak verstandig om een magazijn te bouwen als je territorium groeit en de weg naar je hoofdkwartier langer en langer wordt."
 
 #: ../../../campaigns/t03.wmf/objective:55
 msgid "Build trainingssites"
-msgstr ""
+msgstr "Bouw oefenlocaties"
 
 #: ../../../campaigns/t03.wmf/objective:59
 msgid "-> Trainingssites like a training camp or a battle arena are used for training soldiers in their different attributes. Those attributes are important in fights and the better a soldier is, the higher is the chance to win a fight.<br>Attributes are: health points, attack, defense and evade."
-msgstr ""
+msgstr "-> Oefenlocaties, zoals een trainingskamp of strijdarena worden gebruikt om soldaten te trainen in hun verschillende attributen. Deze attributen zijn belangrijk in gevechten en hoe beter een soldaat is, des te beter hoger is kans om een gevecht te winnen.<br>Attributen zijn: gezondheidspunten, aanval, verdediging en ontwijken."
 
 #: ../../../campaigns/t03.wmf/objective:65
 msgid "Build weapon productions"
-msgstr ""
+msgstr "Bouw wapenproducenten"
 
 #: ../../../campaigns/t03.wmf/objective:73
 msgid "Build a helmsmithy"
-msgstr ""
+msgstr "Bouw een helmsmederij"
 
 #: ../../../campaigns/t03.wmf/objective:81
 msgid "Destroy Kalitaths army"
-msgstr ""
+msgstr "Vernietig Kalitat's leger"
 
 #: ../../../campaigns/t03.wmf/objective:91
 msgid "Military assault on Al’thunran"
-msgstr ""
+msgstr "Militaire aanval op Al'thunran"

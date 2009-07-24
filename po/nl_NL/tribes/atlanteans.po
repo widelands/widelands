@@ -4,15 +4,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4437\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-02-16 22:50+0100\n"
-"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
-"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2009-07-24 09:16+0000\n"
+"PO-Revision-Date: 2009-07-23 23:22+0200\n"
+"Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
+"Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.2\n"
 
 #: ../../../tribes/atlanteans/advanced_shield/conf:1
 #, fuzzy
@@ -153,7 +154,7 @@ msgid "Resource indicator coal much"
 msgstr "Bronindicator veel kool"
 
 #: ../../../tribes/atlanteans/conf:50
-msgid "Resource indicator gold litte"
+msgid "Resource indicator gold little"
 msgstr "Bronindicator weinig goud"
 
 #: ../../../tribes/atlanteans/conf:51
@@ -721,7 +722,8 @@ msgid "Discovers resources for mining."
 msgstr ""
 
 #: ../../../tribes/atlanteans/gold/conf:1
-msgid "Gold is one of the most valuable materials only important things are garnished with it."
+#, fuzzy
+msgid "Gold is one of the most valuable materials. Only important things are garnished with it."
 msgstr "Goud is één van de meest waardevolle materialen. Enkel belangrijke zaken worden hiermee versierd."
 
 #: ../../../tribes/atlanteans/golden_tabard/conf:1
@@ -870,7 +872,8 @@ msgid "Works deep in the mines to produce coal, iron or gold."
 msgstr ""
 
 #: ../../../tribes/atlanteans/pick/conf:1
-msgid "Picks are used by stonecutters and miners. It is produced by the toolsmith."
+#, fuzzy
+msgid "Picks are used by stonecutters and miners. They are produced by the toolsmith."
 msgstr "Punthouwelen worden gebruikt door steenhouwers en mijnwerkers. Ze worden gemaakt door de werktuigsmid."
 
 #: ../../../tribes/atlanteans/planks/conf:1
@@ -891,7 +894,8 @@ msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
 msgstr "De zeis is het gereedschap van de boeren. Het wordt gemaakt door de werktuigsmid."
 
 #: ../../../tribes/atlanteans/shovel/conf:1
-msgid "Shovels are needed for proper handling of plants. Therefore the forester and the blackroot farmer are using it. It is produced by the toolsmith."
+#, fuzzy
+msgid "Shovels are needed for proper handling of plants. Therefore the forester and the blackroot farmer are using them. They are produced by the toolsmith."
 msgstr "Schoppen zijn nodig om goed met planten om te gaan. Daarom maken de boswachter en de ereprijskweker er gebruik van. Ze worden gemaakt door de werktuigsmid."
 
 #: ../../../tribes/atlanteans/smelter/conf:1
