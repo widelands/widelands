@@ -1,5 +1,14 @@
 ### Build 14
+- Fix invalid memory access bug (causisng random behaviour) when a section file
+  inside a zip-archive was missing a newline at the end. (svn:r4443)
+- Fix bug that trigger building could count large buildings sevaral times
+  because they occupy several nodes on the map. (svn:r4441)
 - Added Italian translation (svn:r4435, svn:r4436)
+- Fix drawing of text with non-latin1 characters. (svn:r4421)
+- When a soldier steps outside his territory during attack, he searches for
+  militarysites with defenders. Previously he chose them from any other player.
+  Now only choose defenders from the player whose territory the soldier steps
+  on. (svn:r4410)
 - Exit with an error when incompatible command line parameters are given,
   instead of ignoring it. (svn:r4406)
 - Allow starting a replay from the command line by giving the --replay=FILENAME
