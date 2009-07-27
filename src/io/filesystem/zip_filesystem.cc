@@ -317,6 +317,7 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 		if (len == 0)
 			break;
 		if (len < 0) {
+			unzCloseCurrentFile(m_unzipfile);
 			char buf[200];
 			snprintf(buf, sizeof(buf), "read error %i", len);
 			throw ZipOperation_error
@@ -330,13 +331,14 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 	}
 	unzCloseCurrentFile(m_unzipfile);
 
-	void * const result = malloc(totallen);
+	void * const result = malloc(totallen + 1);
 	if (not result)
 		throw std::bad_alloc();
 	unzOpenCurrentFile(m_unzipfile);
 	unzReadCurrentFile(m_unzipfile, result, totallen);
 	unzCloseCurrentFile(m_unzipfile);
 
+	static_cast<uint8_t *>(result)[totallen] = 0;
 	length = totallen;
 
 	return result;
