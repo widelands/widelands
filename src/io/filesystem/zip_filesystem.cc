@@ -331,6 +331,8 @@ void * ZipFilesystem::Load(const std::string & fname, size_t & length) {
 	unzCloseCurrentFile(m_unzipfile);
 
 	void * const result = malloc(totallen);
+	if (not result)
+		throw std::bad_alloc();
 	unzOpenCurrentFile(m_unzipfile);
 	unzReadCurrentFile(m_unzipfile, result, totallen);
 	unzCloseCurrentFile(m_unzipfile);
