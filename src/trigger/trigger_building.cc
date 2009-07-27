@@ -78,7 +78,9 @@ void Trigger_Building::check_set_conditions(Game const & game) {
 	do if
 		(upcast(Building const, building, mr.location().field->get_immovable()))
 		if
-			(building->owner().player_number() == m_player_area.player_number
+			(building->get_position() == mr.location()
+			 and
+			 building->owner().player_number() == m_player_area.player_number
 			 and
 			 &building->descr() == m_building_type)
 			if (m_count <= ++count)
