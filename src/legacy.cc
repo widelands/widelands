@@ -353,8 +353,8 @@ struct FakeAttackController : public BaseImmovable {
 	{}
 
 	struct Loader : public BaseImmovable::Loader {
-		virtual void load(FileRead & fr) {
-			BaseImmovable::Loader::load(fr);
+		virtual void load(FileRead & fr, uint8_t const version) {
+			BaseImmovable::Loader::load(fr, version);
 
 			try {
 				fr.Unsigned32();
@@ -405,7 +405,7 @@ Map_Object::Loader * loadAttackController
 			throw wexception("unknown/unhandled version %u", version);
 
 		loader->init(egbase, mol, new FakeAttackController);
-		loader->load(fr);
+		loader->load(fr, version);
 	} catch (std::exception const & e) {
 		throw wexception("Loading legacy AttackController: %s", e.what());
 	}
@@ -426,8 +426,8 @@ struct FakeBattle : public BaseImmovable {
 	{}
 
 	struct Loader : public BaseImmovable::Loader {
-		virtual void load(FileRead & fr) {
-			BaseImmovable::Loader::load(fr);
+		virtual void load(FileRead & fr, uint8_t const version) {
+			BaseImmovable::Loader::load(fr, version);
 
 			fr.Unsigned32();
 			fr.Unsigned32();
@@ -448,11 +448,11 @@ Map_Object::Loader * loadBattle
 	try {
 		// Header has been peeled away by caller
 		uint8_t const version = fr.Unsigned8();
-		if (version != 1)
+		if (1 == version) {
+			loader->init(egbase, mol, new FakeBattle);
+			loader->load(fr, version);
+		} else
 			throw wexception("unknown/unhandled version %u", version);
-
-		loader->init(egbase, mol, new FakeBattle);
-		loader->load(fr);
 	} catch (const std::exception & e) {
 		throw wexception("Loading legacy Battle: %s", e.what());
 	}

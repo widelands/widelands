@@ -88,7 +88,7 @@ private:
 	// Load/save support
 protected:
 	struct Loader : public Map_Object::Loader {
-		virtual void load(FileRead &);
+		virtual void load(FileRead &, uint8_t version);
 		virtual void load_pointers();
 
 		Serial m_first;

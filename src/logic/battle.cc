@@ -244,9 +244,9 @@ Load/Save support
 
 #define BATTLE_SAVEGAME_VERSION 1
 
-void Battle::Loader::load(FileRead & fr)
+void Battle::Loader::load(FileRead & fr, uint8_t const version)
 {
-	Map_Object::Loader::load(fr);
+	Map_Object::Loader::load(fr, version);
 
 	Battle & battle = get<Battle>();
 
@@ -307,11 +307,11 @@ Map_Object::Loader * Battle::load
 		// Header has been peeled away by caller
 
 		uint8_t const version = fr.Unsigned8();
-		if (version != BATTLE_SAVEGAME_VERSION)
+		if (version == BATTLE_SAVEGAME_VERSION) {
+			loader->init(egbase, mol, new Battle);
+			loader->load(fr, version);
+		} else
 			throw wexception("unknown/unhandled version %u", version);
-
-		loader->init(egbase, mol, new Battle);
-		loader->load(fr);
 	} catch (const std::exception & e) {
 		throw wexception("Loading Battle: %s", e.what());
 	}

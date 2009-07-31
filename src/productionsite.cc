@@ -124,7 +124,10 @@ ProductionSite_Descr::ProductionSite_Descr
 		(Section * const programs_s =
 		 	prof.get_section("programs"))
 	while (Section::Value const * const v = programs_s->get_next_val()) {
-		std::string const program_name = v->get_name();
+		std::string program_name = v->get_name();
+		std::transform
+			(program_name.begin(), program_name.end(), program_name.begin(),
+			 tolower);
 		try {
 			if (m_programs.count(program_name))
 				throw wexception("this program has already been declared");

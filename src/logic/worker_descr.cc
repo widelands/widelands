@@ -120,7 +120,10 @@ Worker_Descr::Worker_Descr
 
 	// Read programs
 	while (Section::Value const * const v = global_s.get_next_val("program")) {
-		std::string const program_name = v->get_string();
+		std::string program_name = v->get_string();
+		std::transform
+			(program_name.begin(), program_name.end(), program_name.begin(),
+			 tolower);
 		WorkerProgram * program = 0;
 
 		try {

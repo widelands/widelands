@@ -138,7 +138,10 @@ Critter_Bob_Descr::Critter_Bob_Descr
 		 encdata);
 
 	while (Section::Value const * const v = global_s.get_next_val("program")) {
-		std::string const program_name = v->get_string();
+		std::string program_name = v->get_string();
+		std::transform
+			(program_name.begin(), program_name.end(), program_name.begin(),
+			 tolower);
 		Critter_BobProgram * prog = 0;
 		try {
 			if (m_programs.count(program_name))

@@ -283,7 +283,7 @@ public:
 		template<typename T> T & get() {return dynamic_cast<T &>(*m_object);}
 
 	protected:
-		virtual void load(FileRead &);
+		virtual void load(FileRead &, uint8_t version);
 
 	public:
 		virtual void load_pointers();

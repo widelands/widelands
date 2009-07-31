@@ -196,7 +196,10 @@ Immovable_Descr::Immovable_Descr
 
 	//  parse the programs
 	while (Section::Value const * const v = global_s.get_next_val("program")) {
-		std::string const program_name = v->get_string();
+		std::string program_name = v->get_string();
+		std::transform
+			(program_name.begin(), program_name.end(), program_name.begin(),
+			 tolower);
 		ImmovableProgram * program = 0;
 		try {
 			if (m_programs.count(program_name))
@@ -459,11 +462,11 @@ Load/save support
 ==============================
 */
 
-#define IMMOVABLE_SAVEGAME_VERSION 1
+#define IMMOVABLE_SAVEGAME_VERSION 2
 
-void Immovable::Loader::load(FileRead & fr)
+void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 {
-	BaseImmovable::Loader::load(fr);
+	BaseImmovable::Loader::load(fr, version);
 
 	Immovable & imm = dynamic_cast<Immovable &>(*get_object());
 
@@ -483,9 +486,20 @@ void Immovable::Loader::load(FileRead & fr)
 	}
 	imm.m_animstart = fr.Signed32();
 
-	//  program
-	imm.m_program =
-		imm.descr().get_program(fr.Unsigned8() ? fr.CString() : "program");
+	{ //  program
+		std::string program_name;
+		if (1 == version) {
+			program_name = fr.Unsigned8() ? fr.CString() : "program";
+			std::transform
+				(program_name.begin(), program_name.end(), program_name.begin(),
+				 tolower);
+		} else {
+			program_name = fr.CString();
+			if (program_name.empty())
+				program_name = "program";
+		}
+		imm.m_program = imm.descr().get_program(program_name);
+	}
 	imm.m_program_ptr = fr.Unsigned32();
 
 	if (!imm.m_program) {
@@ -550,12 +564,7 @@ void Immovable::save
 	fw.Signed32(m_animstart);
 
 	// Program Stuff
-	if (m_program) {
-		fw.Unsigned8(1);
-		fw.String(m_program->name());
-	} else {
-		fw.Unsigned8(0);
-	}
+	fw.String(m_program ? m_program->name() : "");
 
 	fw.Unsigned32(m_program_ptr);
 	fw.Signed32(m_program_step);
@@ -570,39 +579,39 @@ Map_Object::Loader * Immovable::load
 		// The header has been peeled away by the caller
 
 		uint8_t const version = fr.Unsigned8();
-		if (version != IMMOVABLE_SAVEGAME_VERSION)
-			throw wexception("unknown/unhandled version %u", version);
+		if (1 <= version and version <= IMMOVABLE_SAVEGAME_VERSION) {
 
-		const char * const owner = fr.CString ();
-		const char * const name  = fr.CString ();
-		Immovable * imm = 0;
+			char const * const owner = fr.CString ();
+			char const * const name  = fr.CString ();
+			Immovable * imm = 0;
 
-		if (strcmp(owner, "world")) {
-			// It is a tribe immovable
-			egbase.manually_load_tribe(owner);
+			if (strcmp(owner, "world")) { //  It is a tribe immovable.
+				egbase.manually_load_tribe(owner);
 
-			if (Tribe_Descr const * const tribe = egbase.get_tribe(owner)) {
-				const int32_t idx = tribe->get_immovable_index(name);
-				if (idx != -1)
-					imm = new Immovable(*tribe->get_immovable_descr(idx));
-				else
+				if (Tribe_Descr const * const tribe = egbase.get_tribe(owner)) {
+					int32_t const idx = tribe->get_immovable_index(name);
+					if (idx != -1)
+						imm = new Immovable(*tribe->get_immovable_descr(idx));
+					else
+						throw wexception
+							("tribe %s does not define immovable type \"%s\"",
+							 owner, name);
+				} else
+					throw wexception("Unknown tribe %s!", owner);
+			} else { //  world immovable
+				World const & world = egbase.map().world();
+				int32_t const idx = world.get_immovable_index(name);
+				if (idx == -1)
 					throw wexception
-						("Unknown tribe-immovable %s in map, asked for tribe: %s!",
-						 name, owner);
-			} else
-				throw wexception("Unknown tribe %s!", owner);
-		} else {
-			// World immovable
-			World const & world = egbase.map().world();
-			int32_t const idx = world.get_immovable_index(name);
-			if (idx == -1)
-				throw wexception("Unknown world immovable %s in map!", name);
+						("world does not define immovable type \"%s\"", name);
 
-			imm = new Immovable(*world.get_immovable_descr(idx));
-		}
+				imm = new Immovable(*world.get_immovable_descr(idx));
+			}
 
-		loader->init(egbase, mol, imm);
-		loader->load(fr);
+			loader->init(egbase, mol, imm);
+			loader->load(fr, version);
+		} else
+			throw wexception("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("Loading Immovable: %s", e.what());
 	}
