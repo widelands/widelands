@@ -83,9 +83,13 @@ throw (_wexception)
 					imm.m_animstart = fr.Signed32();
 
 					//  program
-					if (fr.Unsigned8())
-						imm.m_program = descr.get_program(fr.CString());
-					else
+					if (fr.Unsigned8()) {
+						std::string progname = fr.CString();
+						std::transform
+							(progname.begin(), progname.end(), progname.begin(),
+							 tolower);
+						imm.m_program = descr.get_program(progname);
+					} else
 						imm.m_program = 0;
 					imm.m_program_ptr = fr.Unsigned32();
 					if (!imm.m_program)

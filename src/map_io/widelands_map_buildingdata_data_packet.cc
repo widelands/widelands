@@ -85,9 +85,22 @@ throw (_wexception)
 				try {
 					Building & building = ol->get<Building>(serial);
 
-					building.m_anim =
-						fr.Unsigned8() ?
-						building.descr().get_animation(fr.CString()) : 0;
+					if (fr.Unsigned8()) {
+						char const * const animation_name = fr.CString();
+						try {
+							building.m_anim =
+								building.descr().get_animation(animation_name);
+						} catch (Map_Object_Descr::Animation_Nonexistent const &) {
+							log
+								("WARNING: %s %s does not have animation \"%s\"; "
+								 "using animation \"idle\" instead\n",
+								 building.descr().tribe().name().c_str(),
+								 building.descname().c_str(),
+								 animation_name);
+							building.m_anim = building.descr().get_animation("idle");
+						}
+					} else
+						building.m_anim = 0;
 					building.m_animstart = fr.Unsigned32();
 
 					{
@@ -524,8 +537,12 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			uint16_t const nr_progs = fr.Unsigned16();
 			productionsite.m_stack.resize(nr_progs);
 			for (uint16_t i = 0; i < nr_progs; ++i) {
+				std::string program_name = fr.CString();
+				std::transform
+					(program_name.begin(), program_name.end(), program_name.begin(),
+					 tolower);
 				productionsite.m_stack[i].program =
-					productionsite.descr().get_program(fr.CString());
+					productionsite.descr().get_program(program_name);
 				productionsite.m_stack[i].ip    = fr.  Signed32();
 				productionsite.m_stack[i].phase = fr.  Signed32();
 				productionsite.m_stack[i].flags = fr.Unsigned32();

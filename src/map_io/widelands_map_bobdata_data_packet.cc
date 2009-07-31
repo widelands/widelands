@@ -300,7 +300,10 @@ void Map_Bobdata_Data_Packet::Read
 							}
 
 							if (fr.Unsigned8()) {
-								char const * const progname = fr.CString();
+								std::string progname = fr.CString();
+								std::transform
+									(progname.begin(), progname.end(), progname.begin(),
+									 tolower);
 								if      (upcast(Worker      const, wor, &bob))
 									state.program = wor->descr().get_program(progname);
 								else if (upcast(Critter_Bob const, cri, &bob))
