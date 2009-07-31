@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2009-06-26 19:07+0200\n"
-"PO-Revision-Date: 2007-07-28 20:22+0100\n"
+"PO-Revision-Date: 2009-07-31 15:57+0200\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Galician/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -128,9 +128,8 @@ msgid "No"
 msgstr "Non"
 
 #: ../../src/writeHTML.cc:341
-#, fuzzy
 msgid "building_types.xhtml"
-msgstr "Permitir construción: "
+msgstr "building_types_gl_ES.xhtml"
 
 #: ../../src/writeHTML.cc:364
 #, fuzzy
@@ -207,7 +206,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:569
 msgid "worker_types.xhtml"
-msgstr ""
+msgstr "worker_types_gl_ES.xhtml"
 
 #: ../../src/writeHTML.cc:576
 msgid "Combat Properties"
@@ -555,7 +554,7 @@ msgstr "Mercaderías"
 
 #: ../../src/writeHTML.cc:1302
 msgid "ware_types.xhtml"
-msgstr ""
+msgstr "ware_types_gl_ES.xhtml"
 
 #: ../../src/minimap.cc:135 ../../src/ui_fsmenu/netsetup_lan.cc:121
 msgid "Map"

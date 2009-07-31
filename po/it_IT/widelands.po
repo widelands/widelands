@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2009-07-21 20:08+0200\n"
-"PO-Revision-Date: 2009-07-01 18:24+0100\n"
+"PO-Revision-Date: 2009-07-31 15:51+0200\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -113,7 +113,7 @@ msgstr "No"
 
 #: ../../src/writeHTML.cc:341
 msgid "building_types.xhtml"
-msgstr "building_types.xhtml"
+msgstr "building_types_it_IT.xhtml"
 
 #: ../../src/writeHTML.cc:364
 msgid "Is mine."
@@ -183,7 +183,7 @@ msgstr "Diventa"
 
 #: ../../src/writeHTML.cc:569
 msgid "worker_types.xhtml"
-msgstr "worker_types.xhtml"
+msgstr "worker_types_it_IT.xhtml"
 
 #: ../../src/writeHTML.cc:576
 msgid "Combat Properties"
@@ -525,9 +525,8 @@ msgid "Ware types"
 msgstr "Stesso Tipo "
 
 #: ../../src/writeHTML.cc:1302
-#, fuzzy
 msgid "ware_types.xhtml"
-msgstr "tutti i tipi di deviazione"
+msgstr "ware_types_it_IT.xhtml"
 
 #: ../../src/minimap.cc:126 ../../src/ui_fsmenu/netsetup_lan.cc:115
 #, fuzzy

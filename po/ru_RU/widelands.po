@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2009-06-26 19:07+0200\n"
-"PO-Revision-Date: 2007-03-17 02:12+0500\n"
+"PO-Revision-Date: 2009-07-31 15:49+0200\n"
 "Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -130,9 +130,8 @@ msgid "No"
 msgstr ""
 
 #: ../../src/writeHTML.cc:341
-#, fuzzy
 msgid "building_types.xhtml"
-msgstr "Разрешить строение: "
+msgstr "building_types_ru_RU.xhtml"
 
 #: ../../src/writeHTML.cc:364
 #, fuzzy
@@ -209,7 +208,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:569
 msgid "worker_types.xhtml"
-msgstr ""
+msgstr "worker_types_ru_RU.xhtml"
 
 #: ../../src/writeHTML.cc:576
 msgid "Combat Properties"
@@ -557,7 +556,7 @@ msgstr "Товары"
 
 #: ../../src/writeHTML.cc:1302
 msgid "ware_types.xhtml"
-msgstr ""
+msgstr "ware_types_ru_RU.xhtml"
 
 #: ../../src/minimap.cc:135 ../../src/ui_fsmenu/netsetup_lan.cc:121
 msgid "Map"

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2009-06-26 19:07+0200\n"
-"PO-Revision-Date: 2009-06-20 21:40+0100\n"
+"PO-Revision-Date: 2009-07-31 15:47+0200\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -116,7 +116,7 @@ msgstr "Ne"
 
 #: ../../src/writeHTML.cc:341
 msgid "building_types.xhtml"
-msgstr "building_types.xhtml"
+msgstr "building_types_cs_CZ.xhtml"
 
 #: ../../src/writeHTML.cc:364
 msgid "Is mine."
@@ -186,7 +186,7 @@ msgstr "Stane se"
 
 #: ../../src/writeHTML.cc:569
 msgid "worker_types.xhtml"
-msgstr "worker_types.xhtml"
+msgstr "worker_types_cs_CZ.xhtml"
 
 #: ../../src/writeHTML.cc:576
 msgid "Combat Properties"
@@ -508,7 +508,7 @@ msgstr "Typy zboží"
 
 #: ../../src/writeHTML.cc:1302
 msgid "ware_types.xhtml"
-msgstr "ware_types.xhtml"
+msgstr "ware_types_cs_CZ.xhtml"
 
 #: ../../src/minimap.cc:135 ../../src/ui_fsmenu/netsetup_lan.cc:121
 msgid "Map"

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2009-06-26 19:07+0200\n"
-"PO-Revision-Date: 2005-12-20 17:10+0100\n"
+"PO-Revision-Date: 2009-07-31 15:53+0200\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -113,7 +113,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:341
 msgid "building_types.xhtml"
-msgstr ""
+msgstr "building_types_he_HE.xhtml"
 
 #: ../../src/writeHTML.cc:364
 msgid "Is mine."
@@ -183,7 +183,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:569
 msgid "worker_types.xhtml"
-msgstr ""
+msgstr "worker_types_he_HE.xhtml"
 
 #: ../../src/writeHTML.cc:576
 msgid "Combat Properties"
@@ -505,7 +505,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1302
 msgid "ware_types.xhtml"
-msgstr ""
+msgstr "ware_types_he_HE.xhtml"
 
 #: ../../src/minimap.cc:135 ../../src/ui_fsmenu/netsetup_lan.cc:121
 msgid "Map"

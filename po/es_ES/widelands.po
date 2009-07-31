@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2009-06-26 19:07+0200\n"
-"PO-Revision-Date: 2007-07-28 20:22+0100\n"
+"PO-Revision-Date: 2009-07-31 15:40+0200\n"
 "Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -41,9 +41,8 @@ msgid "Employers"
 msgstr "Jugadores"
 
 #: ../../src/writeHTML.cc:255 ../../src/writeHTML.cc:261
-#, fuzzy
 msgid "Building types"
-msgstr "Construcciones"
+msgstr "Tipos de Construcciones"
 
 #: ../../src/writeHTML.cc:266 ../../src/writeHTML.cc:499
 #: ../../src/writeHTML.cc:1273
@@ -128,9 +127,8 @@ msgid "No"
 msgstr "No"
 
 #: ../../src/writeHTML.cc:341
-#, fuzzy
 msgid "building_types.xhtml"
-msgstr "Habilitar construcción: "
+msgstr "tipos_de_construcciones.xhtml"
 
 #: ../../src/writeHTML.cc:364
 #, fuzzy
@@ -189,9 +187,8 @@ msgid "'s enhancement"
 msgstr ""
 
 #: ../../src/writeHTML.cc:488 ../../src/writeHTML.cc:494
-#, fuzzy
 msgid "Worker types"
-msgstr "Trabajadores"
+msgstr "Tipos de Trabajadores"
 
 #: ../../src/writeHTML.cc:507
 msgid "Minimum<br/>needed<br/>experience"
@@ -207,7 +204,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:569
 msgid "worker_types.xhtml"
-msgstr ""
+msgstr "tipos_de_trabajadores.xhtml"
 
 #: ../../src/writeHTML.cc:576
 msgid "Combat Properties"
@@ -549,13 +546,12 @@ msgid "Documentation for program command playFX"
 msgstr ""
 
 #: ../../src/writeHTML.cc:1262 ../../src/writeHTML.cc:1268
-#, fuzzy
 msgid "Ware types"
-msgstr "Mercancías"
+msgstr "Tipos de Mercancías"
 
 #: ../../src/writeHTML.cc:1302
 msgid "ware_types.xhtml"
-msgstr ""
+msgstr "tipos_de_mercancías.xhtml"
 
 #: ../../src/minimap.cc:135 ../../src/ui_fsmenu/netsetup_lan.cc:121
 msgid "Map"
