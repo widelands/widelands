@@ -6,7 +6,7 @@ echo "<html xmlns=\"http://www.w3.org/1999/xhtml\">"                            
 echo "<head><title>cppcheck error report for Widelands C++ source code</title></head>"                                   >> $FILE
 echo "<body>"                                                                                                            >> $FILE
 echo "<div>"                                                                                                             >> $FILE
-cppcheck --all --quiet --style src 2>&1 | sed "s@^\[\(.*\):\([[:digit:]]\+\)\]: \(.*\)\$@<a href=\"http://widelands.svn.sourceforge.net/viewvc/widelands/trunk/\1\?view=markup#l_\2\">\1:\2</a>: \3<br/>@" >> $FILE
+cppcheck --all --quiet --style --unused-functions src 2>&1 | sed "s@^\[\(.*\):\([[:digit:]]\+\)\]: \(.*\)\$@<a href=\"http://widelands.svn.sourceforge.net/viewvc/widelands/trunk/\1\?view=markup#l_\2\">\1:\2</a>: \3<br/>@" >> $FILE
 echo "</div>"                                                                                                            >> $FILE
 echo "</body>"                                                                                                           >> $FILE
 echo "</html>"                                                                                                           >> $FILE
