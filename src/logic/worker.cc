@@ -449,12 +449,12 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 /**
  * findspace key:value key:value ...
  *
- * Find a field based on a number of predicates.
- * The field can later be used in other commands, e.g. walk.
+ * Find a node based on a number of predicates.
+ * The node can later be used in other commands, e.g. walk.
  *
  * Predicates:
  * radius:\<dist\>
- * Search for fields within the given radius around the worker.
+ * Search for nodes within the given radius around the worker.
  *
  * size:[any|build|small|medium|big|mine|port]
  * Search for fields with the given amount of space.
@@ -464,9 +464,26 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
  * therelike (non detectable Resources and default resources)
  *
  * space
- * Find only fields that are walkable such that all neighbours
+ * Find only nodes that are walkable such that all neighbours
  * are also walkable (an exception is made if one of the neighbouring
  * fields is owned by this worker's location).
+ * FIXME This is an embarrasingly ugly hack to make bug #1796611 happen less
+ * FIXME often. But it gives no passability guarantee (that workers will not
+ * FIXME get locked in). For example one farmer may call findspace and then,
+ * FIXME before he plants anything, another farmer may call findspace, which
+ * FIXME may find a space without considering that the first farmer will plant
+ * FIXME something. Together they can cause a passability problem. This code
+ * FIXME will also allow blocking the shoreline if it is next to the worker's
+ * FIXME location. Also, the gap of 2 nodes between 2 farms will be blocked,
+ * FIXME because both are next to their farm. The only real solution that I can
+ * FIXME think of for this kind of bugs is to only allow unpassable objects to
+ * FIXME be placed on a node if ALL neighbouring nodes are passable. This must
+ * FIXME of course be checked at the moment when the object is placed and not,
+ * FIXME as in this case, only before a worker starts walking there to place an
+ * FIXME object. But that would make it very difficult to find space for things
+ * FIXME like farm fileds. So our only option seems to be to keep all farm
+ * FIXME fields, trees, stones and such on triangles and keep the nodes
+ * FIXME passable. See code structure issue #1096824.
  *
  * iparam1 = radius
  * iparam2 = FindNodeSize::sizeXXX

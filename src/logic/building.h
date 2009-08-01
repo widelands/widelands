@@ -71,7 +71,7 @@ struct Building_Descr : public Map_Object_Descr {
 	PictureID get_buildicon() const {return m_buildicon;}
 	int32_t get_size() const throw () {return m_size;}
 	bool get_ismine() const {return m_mine;}
-	virtual uint32_t get_ui_anim() const throw () {return get_animation("idle");}
+	virtual uint32_t get_ui_anim() const {return get_animation("idle");}
 
 	typedef std::set<Building_Index> Enhancements;
 	Enhancements const & enhancements() const throw () {return m_enhancements;}
