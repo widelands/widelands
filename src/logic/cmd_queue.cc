@@ -102,6 +102,11 @@ int32_t Cmd_Queue::run_queue(int32_t const interval, int32_t & game_time_var) {
 
 		m_cmds.pop();
 
+		if (c.duetime() < game_time_var)
+			throw wexception
+				("command (%u) has duetime %i but game time has already advanced "
+				 "to %i",
+				 c.id(), c.duetime(), game_time_var);
 		assert(game_time_var <= c.duetime());
 		game_time_var = c.duetime();
 
