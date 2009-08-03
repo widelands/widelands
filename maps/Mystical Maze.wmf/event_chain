@@ -1,0 +1,18 @@
+# This file holds all event_chains.
+# each event chain has it's own section [NAME], has at least one conditional
+# element (when should the event chain be started? - if triggerA AND ...) and
+# at least one event that will be started once the conditional elements get true.
+
+[global]
+packet_version="3"
+
+# Following is the event chain that starts the three events declared inside the
+# "events" file once the trigger "Begin" gets true (actually directly after
+# start, as it is a time trigger set to 0
+[Begin]
+repeating="false"
+conditional_element_00="trigger"
+conditional_element_00_data="Begin"
+event="Start Message"
+current_event="0"
+state="init"
