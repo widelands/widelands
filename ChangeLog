@@ -56,57 +56,63 @@
   (many different svn rev.)
 - Implemented very basic "dedicated" server (many different svn rev.)
 - Improved chat system:
-	 * Added personal messages (use "@username message") (svn:r4186)
-	 * Added a time string in front of each message (svn:r4253)
+    * Added personal messages (use "@username message") (svn:r4186)
+    * Added a time string in front of each message (svn:r4253)
 - Implemented metaserver lobby for internet game (many different svn rev.)
 - Implemented check of free diskspace to avoid segfaults (different svn rev.)
 - Added new ware icons. (svn:r4152, svn:r4250)
-- Implemented versioning system to avoid that Widelands loads data of old Widelands
-  versions. (svn:r4133)
+- Implemented versioning system to avoid that Widelands loads data of old
+  Widelands versions. (svn:r4133)
 - Implemented basic "generate random map" feature. (svn:r4113)
 - Implemented basic messaging system to inform players of important events.
   (many different svn rev.)
 - Improved computer player behaviour (many different svn rev.)
-	 * Computer player should now be able to build up a working infrastructure
-	   (including mining, tools and weapons production and soldier training) and
-	   to attack and defeat their enemies.
-	 * Players are now able, to select the type of a computer player. The avail-
-	   able types are: Aggressive, Normal, Defensive and None. First three are
-	   based upon the improved AI and only behave different in case of attacking
-	   strength and expansion, while latter does simply nothing.
-	 * It is now possible to define the computer player type for camapign maps.
+    * Computer player should now be able to build up a working infrastructure
+      (including mining, tools and weapons production and soldier training) and
+      to attack and defeat their enemies.
+    * Users are now able, to select the type of a computer player. The
+      available types are: Aggressive, Normal, Defensive and None. First three
+      are based upon the improved AI and only behave different in case of
+      attacking strength and expansion, while latter does simply nothing.
+    * It is now possible to define the computer player type for camapign maps.
 - Throw out the bundled version of scons. Scons is widely available by now and
-  the bundled version caused more trouble than it was worth: many incompati-
-  bilities, where a distro-supplied version would have worked (svn:r3929)
+  the bundled version caused more trouble than it was worth: many
+  incompatibilities, where a distribution-supplied version would have worked
+  (svn:r3929)
 - Fix bug #2351257 - wrong game tips are shown. (svn:r3808)
-- Some improvements of tribes economy and soldier balance (svn:r3793, svn:r3796)
+- Some improvements of tribes economy and soldier balance (svn:r3793,
+  svn:r3796)
 - Added third barbarian campaign (svn:r3790) and improved the already existing
   ones (svn:r3775, svn:r3788)
 - Added a new trigger for scenario maps: Player defeated (svn:r3789)
-- In the editor save dialog; initialize the name box with the map name and do not react
-  (for example by playing a sound) to clicks in the empty area below the last file in the
-  listbox (affects all listboxes in the UI). (svn:r3783)
-- Fix bug in build13 that the editor save dialog would use the name of the list item from
-  the second last (instead of the last) click. (svn:r3781)
-- Added an editor tool to set a new origin in the map. This will make it possible to get
-  an island properly centered, instead of divided in 4 corners when a minimap is generated
-  with an external tool, such as the one used in the
-  [map download section](http://wl.widelands.org/maps/). The button that enables the tool
-  is in the map options dialog. (svn:r3778)
-- Allow longer text for a world's name and author (to avoid having it cut off like "The
-  Widelands Development Tea"). (svn:r3777)
+- In the editor save dialog; initialize the name box with the map name and do
+  not react (for example by playing a sound) to clicks in the empty area below
+  the last file in the listbox (affects all listboxes in the UI). (svn:r3783)
+- Fix bug in build13 that the editor save dialog would use the name of the list
+  item from the second last (instead of the last) click. (svn:r3781)
+- Added an editor tool to set a new origin in the map. This will make it
+  possible to get an island properly centered, instead of divided in 4 corners
+  when a minimap is generated with an external tool, such as the one used in
+  the [map download section](http://wl.widelands.org/maps/). The button that
+  enables the tool is in the map options dialog. (svn:r3778)
+- Allow longer text for a world's name and author (to avoid having it cut off
+  like "The Widelands Development Tea"). (svn:r3777)
 - Do not crash when writing an empty file. (svn:r3773)
 - Added two new in game and one new menu song. (svn:r3758, svn:r3800)
 - Make more configuration options configurable in the options menu. (svn:r2753)
-- Fix bugs in the S2 map loader. Trying to load an invalid file could cause failed
-  assertions in debug builds and probably other bugs in release builds. (svn:r3750)
-- Added new loading screens for winterland and for barbarian campaigns. (svn:r3748, svn:3797)
-- Allow configuring which information about a building is shown in the mapview's building
-  census and statistics displays and the building window title. (svn:r3741)
+- Fix bugs in the S2 map loader. Trying to load an invalid file could cause
+  failed assertions in debug builds and probably other bugs in release builds.
+  (svn:r3750)
+- Added new loading screens for winterland and for barbarian campaigns.
+  (svn:r3748, svn:r3797)
+- Allow configuring which information about a building is shown in the
+  mapview's building census and statistics displays and the building window
+  title. (svn:r3741)
 - Added colorized chatmessages. (svn:r3725)
-- Added a lobby to multiplayer launchgame menu. Now players aren't automatically assigned
-  to a position. Players staying in lobby are getting in game spectators.(svn:r3702,
-  svn:r3703, svn:r3707, svn:r3709, svn:r3710)
+- Added a lobby to the multiplayer launchgame menu. Now users are not
+  automatically assigned to players. Users staying in the lobby when the game
+  begins will become spectators. (svn:r3702, svn:r3703, svn:r3707, svn:r3709,
+  svn:r3710)
 - Fix the map Dry Riverbed so that the mountain pass is passable in both
   directions. (svn:r4335)
 - Improved the map Plateau so that the players can reach the center even if
@@ -116,306 +122,346 @@
   used at all on this map before. Make some small adjustments to the node
   heights in the small valley just east of player 1's starting position, so
   that the valley becomes more useful. (svn:r3713, svn:r4361, svn:r4362)
-- Added two new maps "Twinkling Waves" and "The ancient sun of fire". (svn:r3689, svn:r4119)
-- Fix bug that the editor toolsize menu was not updated when the toolsize was changed with
-  the keyboard shortcuts. (svn:r3675)
-- Implement feature request #1792180 - Allow user to change starting-position. (svn:r3666,
-  svn:r3667, svn:r3668)
-- Editboxes now support UTF8 (unicode) characters, so the players can use their locale
-  language in game. (svn:r3662, svn:r4398)
+- Added two new maps "Twinkling Waves" and "The ancient sun of fire".
+  (svn:r3689, svn:r4119)
+- Fix bug that the editor toolsize menu was not updated when the toolsize was
+  changed with the keyboard shortcuts. (svn:r3675)
+- Implement feature request #1792180 - Allow user to change starting-position.
+  (svn:r3666, svn:r3667, svn:r3668)
+- Editboxes now support UTF8 (unicode) characters, so the players can use their
+  locale language in game. (svn:r3662, svn:r4398)
 - Improve the output of _widelands --help_. (svn:r3660)
-- Add a new terrain type, corresponding to Greenland's bergwiese, to Desert. (svn:r3659)
-- Workers that search for an object now prefer one of the nearest. Therefore they spend
-  less time walking and more time harvesting. (svn:r3658)
-- Fix bug that in the military-/trainingsite windows, the name (untranslated) of the
-  soldier type was shown instead of the descname (translated). (svn:r3645)
-- Fix bug that in the trainingsite window, the ware priority buttons were not updated.
-  (svn:r3642)
-- Fix bug that in the trainingsite window, the column _total level_ was not sorted
-  correctly for 2-digit values (10 was sorted between 1 and 2).  (svn:r3641)
-- Fix bug that when the user typed in the editor's map description input fields, the world
-  was reparsed on every keystroke, which caused a delay. (svn:r3640)
-- Fix bug that when the loading of a tribe failed, the error message was insufficient.
-  (svn:r3639)
-- Fix bug related to land ownership and military influence when a soldier arrived to a
-  trainingsite. (svn:r3701)
-- Fix bug related to land ownership and military influence when an event_building was
-  executed. (svn:r3636, svn:r3637)
-- Fix bug that when a \_pc-file was missing for an animation frame, the program did not
-  make it clear that it was the \_pc-file that was missing (the user was lead to think
-  that it was the main file of the animation frame). (svn:r3623)
-- Fix bugs in the maps _Mystical Maze_ and _Three Warriors_: update tribe name to
-  _atlanteans_. (svn:r3609, svn:r3612)
-- Change the Atlantean Weaponsmithy's program Produce Light Trident to consume iron (in
-  addition to planks). This makes it necessary to mine iron ore to produce soldiers, which
-  makes it more difficult to win against the other tribes (who also require iron for
-  making soldiers) (svn:r3718)
-- Fix bug in build13 that the Atlantean Labyrinth's program Upgrade Evade 1 could consume
-  bread and then fail. (svn:r3714)
-- Add demand check to _Cloth_ production in _Empire_ _Weaving Mill_. (svn:r3604)
+- Add a new terrain type, corresponding to Greenland's bergwiese, to Desert.
+  (svn:r3659)
+- Workers that search for an object now prefer one of the nearest. Therefore
+  they spend less time walking and more time harvesting. (svn:r3658)
+- Fix bug that in the military-/trainingsite windows, the name (untranslated)
+  of the soldier type was shown instead of the descname (translated).
+  (svn:r3645)
+- Fix bug that in the trainingsite window, the ware priority buttons were not
+  updated. (svn:r3642)
+- Fix bug that in the trainingsite window, the column _total level_ was not
+  sorted correctly for 2-digit values (10 was sorted between 1 and 2).
+  (svn:r3641)
+- Fix bug that when the user typed in the editor's map description input
+  fields, the world was reparsed on every keystroke, which caused a delay.
+  (svn:r3640)
+- Fix bug that when the loading of a tribe failed, the error message was
+  insufficient. (svn:r3639)
+- Fix bug related to land ownership and military influence when a soldier
+  arrived to a trainingsite. (svn:r3701)
+- Fix bug related to land ownership and military influence when an
+  event_building was executed. (svn:r3636, svn:r3637)
+- Fix bug that when a \_pc-file was missing for an animation frame, the program
+  did not make it clear that it was the \_pc-file that was missing (the user
+  was lead to think that it was the main file of the animation frame).
+  (svn:r3623)
+- Fix bugs in the maps _Mystical Maze_ and _Three Warriors_: update tribe name
+  to _atlanteans_. (svn:r3609, svn:r3612)
+- Change the Atlantean Weaponsmithy's program Produce Light Trident to consume
+  iron (in addition to planks). This makes it necessary to mine iron ore to
+  produce soldiers, which makes it more difficult to win against the other
+  tribes (who also require iron for making soldiers) (svn:r3718)
+- Fix bug in build13 that the Atlantean Labyrinth's program Upgrade Evade 1
+  could consume bread and then fail. (svn:r3714)
+- Add demand check to _Cloth_ production in _Empire_ _Weaving Mill_.
+  (svn:r3604)
 - Add a program that produces an axe to the Barbarian Metalworks. (svn:r3717)
-- Simplify the stoppability rules of building types. Only productionsites are stoppable. A
-  productionsite type is a stoppable if and only if it is not a militarysite type. Get rid
-  of the config option to make a building type stoppable (many building types had
-  "stopable=yes" in their conf-file). Also get rid of the config options to set custom
-  stop/continue icons for each building type (this was not used in any of the building
-  types that are included in the Widelands releases). It is no longer possible to stop a
-  constructionsite so that the finished building will be set to stopped. (svn:r3723)
-- Get rid of event numbers in event chains. This removes the maximum limit of 99 events in
-  an !EventChain. It also makes diffs much smaller when an event is inserted, because now
-  the following events do not need to be renumbered. (svn:r3600)
-- For the statistics string of a trainingsite (shown in the mapview near the trainingsite
-  when S has been pressed), replace strings like "upgrade_evade_0" (untranslated) with
-  strings like "Upgrade evade 0" (translated). (svn:r3595)
+- Simplify the stoppability rules of building types. Only productionsites are
+  stoppable. A productionsite type is a stoppable if and only if it is not a
+  militarysite type. Get rid of the config option to make a building type
+  stoppable (many building types had "stopable=yes" in their conf-file). Also
+  get rid of the config options to set custom stop/continue icons for each
+  building type (this was not used in any of the building types that are
+  included in the Widelands releases). It is no longer possible to stop a
+  constructionsite so that the finished building will be set to stopped.
+  (svn:r3723)
+- Get rid of event numbers in event chains. This removes the maximum limit of
+  99 events in an !EventChain. It also makes diffs much smaller when an event
+  is inserted, because now the following events do not need to be renumbered.
+  (svn:r3600)
+- For the statistics string of a trainingsite (shown in the mapview near the
+  trainingsite when S has been pressed), replace strings like "upgrade_evade_0"
+  (untranslated) with strings like "Upgrade evade 0" (translated). (svn:r3595)
 - Fix bugs that ware/worker types were identified by their temporary index
   value instead of their permanent name in some places in savegames. The
   temporary index values may not be the same when the game is loaded again,
   while type names should be the same. (svn:r3593, svn:r4343)
-- Implement automatic recursive road removal. When a player holds down Ctrl when ordering
-  (or confirming, if applicable) the removal of flag or road, do a recursive removal. If a
-  road removal command is given with the recursive option, all roads between the start and
-  end flags are removed. Then those flags that become dead ends are removed recursively. A
-  flag is a dead end if it does not have a building and roads to at most 1 other flag.
-  (svn:r3591)
+- Implement automatic recursive road removal. When a player holds down Ctrl
+  when ordering (or confirming, if applicable) the removal of flag or road, do
+  a recursive removal. If a road removal command is given with the recursive
+  option, all roads between the start and end flags are removed. Then those
+  flags that become dead ends are removed recursively. A flag is a dead end if
+  it does not have a building and roads to at most 1 other flag. (svn:r3591)
 - Make immovable animation times random. (svn:r3635)
-- Implement natural reproduction for trees. Instead of just growing up and then idling
-  forever, they seed new trees and eventually die. Dead trees disappear after a while.
-  Different tree species have different advantages on different terrain types (only for
-  Greenland). This makes it possible for several tree species to survive by occupying
-  different niches. Increase the working radius of woodcutters/lumberjacks from 8 to 10.
-  This makes it easier to cover large areas with a few of them. This is now recommended to
-  keep an area clear of trees. (svn:r3591, svn:r3610)
-- Forbid immovable programs to have transform commands that replace an immovable with one
-  of the same type. (svn:r3647)
+- Implement natural reproduction for trees. Instead of just growing up and then
+  idling forever, they seed new trees and eventually die. Dead trees disappear
+  after a while. Different tree species have different advantages on different
+  terrain types. This makes it possible for several tree species to survive by
+  occupying different niches. Increase the working radius of
+  woodcutters/lumberjacks from 8 to 10. This makes it easier to cover large
+  areas with a few of them. This is now recommended to keep an area clear of
+  trees. (svn:r3591, svn:r3610, svn:r3735, svn:r3786, svn:r3828)
+- Forbid immovable programs to have transform commands that replace an
+  immovable with one of the same type. (svn:r3647)
 - Get rid of line numbers in immovable programs. (svn:r3591)
-- In the worker list window of productionsites; if a worker is missing, show "(vacant)" if
-  the request for it is open and "(coming)" if the request is in transfer. (svn:r3591)
-- Create a few different player initializations and allow choosing one for each player
-  when the game is configured. The default initialization is a headquarters with the usual
-  set of wares/workers/soldiers, so the default behaviour is unchanged. There is another
-  player initialization called castle_village that creates a castle (or citadell,
-  depending on tribe) and a village around it with a warehouse loaded with some
-  wares/workers/soldiers and some basic production and training buildings. (svn:r3629)
-- Do not automatically create a headquarters for each player in scenarios. This must now
-  be done explicitly with events. Change the existing scenarios accordingly (and use new
-  headquarter graphics in some of them). (svn:r3591, svn:r3617, svn:r3737)
-- Implemented logic for finding a suitable location for a building that will be created
-  with an event. (svn:r3629)
-- When a warehouse is created through an event, allow configuring exactly how many of each
-  type of ware, worker and soldier that should be created with the warehouse. (svn:r3591)
-- When a productionsite is created through an event, allow configuring exactly which of
-  the wares and workers that should be created with the productionsite. (svn:r3591,
-  svn:r3630)
-- When a military-/trainingsite is created through an event, allow configuring exactly how
-  many soldiers at each combination of strength levels  that should be created with the
-  site. (svn:r3628, svn:r3629)
-- The builder does no longer enter the building and see the surroundings for a moment when
-  he has completed the construction. Instead he leaves directly. (svn:r3590)
+- In the worker list window of productionsites; if a worker is missing, show
+  "(vacant)" if the request for it is open and "(coming)" if the request is in
+  transfer. (svn:r3591)
+- Create a few different player initializations and allow choosing one for each
+  player when the game is configured. The default initialization is a
+  headquarters with the usual set of wares/workers/soldiers, so the default
+  behaviour is unchanged. There is another player initialization called
+  castle_village that creates a castle (or citadell, depending on tribe) and a
+  village around it with a warehouse loaded with some wares/workers/soldiers
+  and some basic production and training buildings. (svn:r3629)
+- Do not automatically create a headquarters for each player in scenarios. This
+  must now be done explicitly with events. Change the existing scenarios
+  accordingly (and use new headquarter graphics in some of them). (svn:r3591,
+  svn:r3617, svn:r3737, svn:r4249, svn:r4299)
+- Implemented logic for finding a suitable location for a building that will be
+  created with an event. (svn:r3629)
+- When a warehouse is created through an event, allow configuring exactly how
+  many of each type of ware, worker and soldier that should be created with the
+  warehouse. (svn:r3591)
+- When a productionsite is created through an event, allow configuring exactly
+  which of the wares and workers that should be created with the
+  productionsite. (svn:r3591, svn:r3630)
+- When a military-/trainingsite is created through an event, allow configuring
+  exactly how many soldiers at each combination of strength levels that should
+  be created with the site. (svn:r3628, svn:r3629)
+- The builder does no longer enter the building and see the surroundings for a
+  moment when he has completed the construction. Instead he leaves directly.
+  (svn:r3590)
 - Added new portrait pictures for the campaign maps (svn:r3581, svn:r3632)
 - Allow multiple AI implementations (svn:r3574)
 - Implement a debug console and add a "switchplayer" command (svn:r3573,
   svn:r4370, svn:r4371)
-- Fix bug that the back buttons in the campaign selection UI had the wrong background.
-  (svn:r3619)
+- Fix bug that the back buttons in the campaign selection UI had the wrong
+  background. (svn:r3619)
 - Improvements of full screen menu UI (svn:r3579, svn:r3581)
-	* Make fullscreen menus dynamic resizable. Now the menus use the same resolution as the
-	  whole game. Still the resolution must be saved in the config, so it's not yet possible
-	  to resize via mouse.
-	* Clean up menu design, make some menus more straight and intuitive and follow the same
-	  alignment in similar menus.
-	* Add note to intro screen, so players aren't confused anymore, whether widelands is still
-	  loading.
-	* Introduce config option and commandline argument "ui_font". This option allows the user,
-	  to use a different font in the fullscreen menus, which can be quite important if the
-	  resolution is very low and the serif font is nearly unreadable. Besides a path to a TTF
-	  file relative to <widelands-data>/fonts/ the values "sans" and "serif" are accepted. If
-	  an invalid argument was given Widelands falls back to UI_FONT_NAME.
+   * Make fullscreen menus dynamic resizable. Now the menus use the same
+     resolution as the whole game. Still the resolution must be saved in the
+     config, so it is not yet possible to resize via mouse.
+   * Clean up menu design, make some menus more straight and intuitive and
+     follow the same alignment in similar menus.
+   * Add note to intro screen, so players are not confused anymore, whether
+     Widelands is still loading.
+   * Introduce config option and commandline parameter "ui_font". This option
+     allows the user, to use a different font in the fullscreen menus, which
+     can be quite important if the resolution is very low and the serif font is
+     nearly unreadable. Besides a path to a TTF file relative to
+     <widelands-data>/fonts/ the values "sans" and "serif" are accepted. If an
+     invalid parameter was given Widelands falls back to UI_FONT_NAME.
 - Made the minimap remember its display options during the session (svn:r3572)
 - Implemented generation of browsable HTML from game data. (svn:r3548)
-- Made it possible to define a default target quantity for a ware type and set target
-  quantities in the game. (svn:r3543)
-- Made Ctrl+S bring up the save game dialog in both gameplay and replay. Added save button
-  in replay watcher. (svn:r3542)
+- Made it possible to define a default target quantity for a ware type and set
+  target quantities in the game. (svn:r3543)
+- Made Ctrl+S bring up the save game dialog in both gameplay and replay. Added
+  save button in replay watcher. (svn:r3542)
 - Fixed Trigger_Time (and replaced Trigger_Null with it). (svn:r3541)
 
 ### Build 13
-- Count casualties/kills, military/civilian buildings lost/defeated and present them in
-  the general statistics menu (except for civilian buildings defeated, which is omitted
-  from the user interface) (svn:r3395, svn:r3407).
+- Count casualties/kills, military/civilian buildings lost/defeated and present
+  them in the general statistics menu (except for civilian buildings defeated,
+  which is omitted from the user interface) (svn:r3395, svn:r3407).
 - Improved map options menu (svn:r3328).
-- Improved progresswindow use and added new loading screens (svn:r3249, svn:r3253,
-  svn:r3275, svn:r3315, svn:r3316).
+- Improved progresswindow use and added new loading screens (svn:r3249,
+  svn:r3253, svn:r3275, svn:r3315, svn:r3316).
 - Added menu for editor to the mainmenu (svn:r3248).
 - Improved save game dialog (svn:r3185, svn:r3189).
-- Improved mapselect and launchgame menu (svn:r3243, svn:r3246, svn:r3247, svn:r3283,
-  svn:r3290).
+- Improved mapselect and launchgame menu (svn:r3243, svn:r3246, svn:r3247,
+  svn:r3283, svn:r3290).
 - Improved ingame UI (svn:r3224).
 - Implemented "/me" command for multiplayer chat (svn:r3223).
-- Improved multiplayermenu (svn:r3218, svn:r3260, svn:r3261, svn:r3288, svn:r3289).
-- Improved optionsmenu and added possibility to set autosave interval (svn:r3215).
-- Implemented option for maximum FPS to reduce CPU-usage (svn:r3210, svn:r3213, svn:r3214,
-  svn:r3215, svn:r3220).
+- Improved multiplayermenu (svn:r3218, svn:r3260, svn:r3261, svn:r3288,
+  svn:r3289).
+- Improved optionsmenu and added possibility to set autosave interval
+  (svn:r3215).
+- Implemented option for maximum FPS to reduce CPU-usage (svn:r3210, svn:r3213,
+  svn:r3214, svn:r3215, svn:r3220).
 - Improved editor new map dialog (svn:r3172, svn:r3331).
-- Make automatic roadbuilding mode after creation of non-connected flag optional
-  (svn:r3177).
+- Make automatic roadbuilding mode after creation of non-connected flag
+  optional (svn:r3177).
 - Improved production program handling (svn:r3373, svn:r3384):
-	* Eliminate the need for line numbers in the programs.
-	* Fix bug that the consume command required that all wares in a consume-group must be of
-	  the same type. For example the command "2=consume smoked_fish,smoked_meat 2" required 2
-	  smoked_fish or 2 smoked_meat. Now it will also work if there is only one of each.
-	* Change the syntax of a consume-group to ware1[,ware2[,...]][:quantitiy] (for example
-	  "smoked_fish,smoked_meat:2").
-	* Extend the consume command to take any number of consume-groups (for example
-	  "smoked_fish,smoked_meat:2 bread:2"). This means that unless all consume-groups can be
-	  satisfied, nothing is consumed when the command fails. This will fix many bugs in the
-	  game data where programs had for example "2=consume smoked_fish,smoked_meat 2" and
-	  "3=consume bread 2". If there was not 2 bread, it would consume 2 smoked_fish or 2
-	  smoked_meat and then fail.
-	* Get rid of the command check. It was only a work-around for the previously deficient
-	  command consume (and some programs forgot to use it).
-	* Implement the new command return. It can return from a program. There are 3 different
-	  return values; Failed, Completed and Skipped. Only programs returning Failed and
-	  Completed will affect statistics. A program that reaches the end will be considered to
-	  have implicitly returned Completed. The return command can optionally take a condition.
-	  Currently only two conditions are supported; economy needs ware_type and  workers
-	  need experience. The former will allow a program to have a command "return=skipped
-	  unless economy needs marblecolumn". It will prevent Game Over as a result of a
-	  production deadlock on marble when a user forgets to turn off a stonemason for a while.
-	  This fixes the huge problem with production deadlocks that hit every new player in their
-	  first games and every experienced player once in a while. The condition makes a query to
-	  the economy, which now simply checks if there are no warehouse supplies that supply the
-	  ware type. This can of course be made much smarter later. The latter is used in the
-	  barbarian micro-brewery to let it practice making beer until the brewer has become a
-	  master_brewer even if the economy does not need any beer.
-	* Extend the produce command to take any number of ware types with quantities.
-	* Fix the call command to validate that the called program exists. This requires changing
-	  declaration order in some data files (for example if "work" calls "seed", "program=seed"
-	  must come before "program=work" in the "global" section of the productionsite
-	  definition. (However the definition order of the programs does not matter.) This fixes
-	  the bug that a call command may fail at run-time because the called program does not
-	  exists.
-	* Extend the call command with an optional error handling specification
-	  (call=<program_name> [on failure {ignore|repeat|fail}]). It will make it possible to
-	  ignore a failure of a called program and continue the calling program, or repeat the
-	  failed program until it succeeds.
-	* Extend the sleep and animate commands. If no duration is given as the last parameter,
-	  the return value from a previous action is used for duration. This makes it possible to
-	  for example let the mining command calculate how long the following sleep/animation
-	  should last, depending on ore concentration and mining depth.
-	* Get rid of the set command and the associated catch and nostats flags.
-	* Fix the mine command to parse and validate its parameters at parse-time instead of at
-	  run-time. This fixes the bug that the game engine could fail with the message "Should
-	  mine resource <resource_type>, which doesn't exist in world. Tribe is not compatible
-	  with world!!" at run-time the first time a mining command is executed.
-	* Fix most other commands that had insufficient validation or did parsing at run-time (for
-	  example the consume command reparsed its wares at each execution).
-	* Optimize the parsing by eliminating needless string copying.
-- Rename the building property "enhance_to" to "enhancement" and validate that the given
-  building type exists (svn:r3373).
-- Improved editor handling of bobs and animals, so they can not be placed on invalid
-  locations (svn:r3319, svn:r3321).
-- Implemented loading of savegames in multi player (svn:r3266, svn:r3270, svn:r3271)
+   * Eliminate the need for line numbers in the programs.
+   * Fix bug that the consume command required that all wares in a
+     consume-group must be of the same type. For example the command "2=consume
+     smoked_fish,smoked_meat 2" required 2 smoked_fish or 2 smoked_meat. Now it
+     will also work if there is only one of each.
+   * Change the syntax of a consume-group to ware1[,ware2[,...]][:quantitiy]
+     (for example "smoked_fish,smoked_meat:2").
+   * Extend the consume command to take any number of consume-groups (for
+     example smoked_fish,smoked_meat:2 bread:2"). This means that unless all
+     consume-groups can be satisfied, nothing is consumed when the command
+     fails. This will fix many bugs in the game data where programs had for
+     example "2=consume smoked_fish,smoked_meat 2" and "3=consume bread 2". If
+     there was not 2 bread, it would consume 2 smoked_fish or 2 smoked_meat and
+     then fail.
+   * Get rid of the command check. It was only a work-around for the previously
+     deficient command consume (and some programs forgot to use it).
+   * Implement the new command return. It can return from a program. There are
+     3 different return values; Failed, Completed and Skipped. Only programs
+     returning Failed and Completed will affect statistics. A program that
+     reaches the end will be considered to have implicitly returned Completed.
+     The return command can optionally take a condition. Currently only two
+     conditions are supported; "economy needs ware_type" and "workers need
+     experience". The former will allow a program to have a command
+     "return=skipped unless economy needs marblecolumn". It will prevent Game
+     Over as a result of a production deadlock on marble when a user forgets to
+     turn off a stonemason for a while. This fixes the huge problem with
+     production deadlocks that hit every new player in their first games and
+     every experienced player once in a while. The condition makes a query to
+     the economy, which now simply checks if there is no warehouse supplies the
+     ware type. This can of course be made much smarter later. The latter is
+     used in the barbarian micro-brewery to let it practice making beer until
+     the brewer has become a master_brewer even if the economy does not need
+     any beer.
+   * Extend the produce command to take any number of ware types with
+     quantities.
+   * Fix the call command to validate that the called program exists. This
+     requires changing declaration order in some data files (for example if
+     "work" calls "seed", "program=seed" must come before "program=work" in the
+     "global" section of the productionsite definition. (However the definition
+     order of the programs does not matter.) This fixes the bug that a call
+     command may fail at run-time because the called program does not exist.
+   * Extend the call command with an optional error handling specification
+     (call=<program_name> [on failure {ignore|repeat|fail}]). It will make it
+     possible to ignore a failure of a called program and continue the calling
+     program, or repeat the failed program until it succeeds.
+   * Extend the sleep and animate commands. If no duration is given as the last
+     parameter, the return value from a previous action is used for duration.
+     This makes it possible to for example let the mining command calculate how
+     long the following sleep/animation should last, depending on ore
+     concentration and mining depth.
+   * Get rid of the set command and the associated catch and nostats flags.
+   * Fix the mine command to parse and validate its parameters at parse-time
+     instead of at run-time. This fixes the bug that the game engine could fail
+     with the message "Should mine resource <resource_type>, which does not
+     exist in world. Tribe is not compatible with world!!" at run-time the
+     first time a mining command is executed.
+   * Fix most other commands that had insufficient validation or did parsing at
+     run-time (for example the consume command reparsed its wares at each
+     execution).
+   * Optimize the parsing by eliminating needless string copying.
+- Rename the building property "enhance_to" to "enhancement" and validate that
+  the given building type exists (svn:r3373).
+- Improved editor handling of bobs and animals, so they can not be placed on
+  invalid locations (svn:r3319, svn:r3321).
+- Implemented loading of savegames in multi player (svn:r3266, svn:r3270,
+  svn:r3271)
 - Only allow attacking seen buildings (svn:r3173).
 - Improved computer player behaviour (svn:r3209).
-- Update and cleanup of tribes economies (svn:r3202, svn:r3203, svn:r3204, svn:r3205,
-  svn:r3206, svn:r3207, svn:r3211, svn:r3237, svn:r3239, svn:r3241, svn:r3257, svn:r3258,
-  svn:r3269, svn:r3272, svn:r3294, svn:r3307).
-- Introduced automatic update of Campaign-list via campaign-menu (svn:r3197, svn:r3198).
+- Update and cleanup of tribes economies (svn:r3202, svn:r3203, svn:r3204,
+  svn:r3205, svn:r3206, svn:r3207, svn:r3211, svn:r3237, svn:r3239, svn:r3241,
+  svn:r3257, svn:r3258, svn:r3269, svn:r3272, svn:r3294, svn:r3307).
+- Introduced automatic update of Campaign-list via campaign-menu (svn:r3197,
+  svn:r3198).
 - Added a new in game song
 - Added global objects usable in every world (svn:r3308, svn:r3310, svn:r3311).
 - Added 12 new maps (9 from map contest) (svn:r3226, svn:r3298, svn:r3305).
-- Added atlantean building graphics (svn:r3278, svn:r3295, svn:r3300, svn:r3309, + a lot
-  more).
-- Added a lot of new sounds and integrated them in the game (svn:r3231, svn:r3232,
-  svn:r3415, svn:r3419, svn:r3439).
+- Added atlantean building graphics (svn:r3278, svn:r3295, svn:r3300,
+  svn:r3309, and many more).
+- Added a lot of new sounds and integrated them in the game (svn:r3231,
+  svn:r3232, svn:r3415, svn:r3419, svn:r3439).
 - Rework of campaign missions (svn:r3228, svn:r3233, svn:r3236, svn:r3242).
-- Fix bugs in parsing of building types's buildcosts and inputs. Check that the ware types
-  exist and are not duplicated and that the quantities are within range (svn:r3373).
-- Fix bug in parsing of productionsite types' outputs. Check that the ware types exist and
-  are not duplicated (svn:r3373).
-- Fix bugs in parsing of productionsite types', critter_bob types' and worker types'
-  programs. If a program was declared twice, it was parsed twice and the memory used to
-  store the first instance was leaked (svn:r3373).
-- Fixed bugs with drop-soldier commands: If such a command was given and then the game was
-  saved before the command was executed (because the game was paused), the command was
-  saved incorrectly (svn:r3451, svn:r3456). And even if the savegame would have had such a
-  command correctly saved, the loading code would not have recognized it (svn:r3456).
-- Removed the trainingsite options window. The "Make heros" button was suspected of being
-  able to cause desync in network games (svn:r3452).
-- Fixed bugs that attack, change-soldier-capacity and set-ware-priority commands were not
-  recognized when encountered in savegames (svn:r3454, svn:r3456, svn:r3455).
-- Fixed bug that set-ware-priority commands were saved as enhance-building commands
-  (svn:r3455).
-- Change game rule: Forbid upgrading any building to any type of building. Only allow
-  upgrading to one of the defined enhancements. This is the behaviour that was intended
-  and that the user interface obeys. Now also the game logic enforces it. This prevents
-  users from circumventing the user interface and do arbitrary building upgrades, which
-  other players may consider cheating in a network game (svn:r3457).
-- Fix program crash (or worse) when a worker type was declared to have an ingredient that
-  had not been defined (svn:r3459).
-- Forbid declaring that a building can be enhanced to its own type or the special type
-  constructionsite (svn:r3460, svn:r3461).
-- Do not let the constructionsite crash the game if a building type did not define a build
-  animation. Use the idle animation instead (svn:r3462).
-- Do not crash because of division by 0 when building a building without buildcost
-  (svn:r3462).
-- When building a building without buildcost, complete it immediately instead of never
-  (svn:r3462).
-- Check for mine and size mismatch when parsing building enhancement definitions. This
-  prevents crashes at run-time (svn:r3463).
-- Fixed bug #1792379 - little trees set with editor don't grow (svn:r3317).
+- Fix bugs in parsing of building types's buildcosts and inputs. Check that the
+  ware types exist and are not duplicated and that the quantities are within
+  range (svn:r3373).
+- Fix bug in parsing of productionsite types' outputs. Check that the ware
+  types exist and are not duplicated (svn:r3373).
+- Fix bugs in parsing of productionsite types', critter_bob types' and worker
+  types' programs. If a program was declared twice, it was parsed twice and the
+  memory used to store the first instance was leaked (svn:r3373).
+- Fixed bugs with drop-soldier commands: If such a command was given and then
+  the game was saved before the command was executed (because the game was
+  paused), the command was saved incorrectly (svn:r3451, svn:r3456). And even
+  if the savegame would have had such a command correctly saved, the loading
+  code would not have recognized it (svn:r3456).
+- Removed the trainingsite options window. The "Make heros" button was
+  suspected of being able to cause desync in network games (svn:r3452).
+- Fixed bugs that attack, change-soldier-capacity and set-ware-priority
+  commands were not recognized when encountered in savegames (svn:r3454,
+  svn:r3456, svn:r3455).
+- Fixed bug that set-ware-priority commands were saved as enhance-building
+  commands (svn:r3455).
+- Change game rule: Forbid upgrading any building to any type of building. Only
+  allow upgrading to one of the defined enhancements. This is the behaviour
+  that was intended and that the user interface obeys. Now also the game logic
+  enforces it. This prevents users from circumventing the user interface and do
+  arbitrary building upgrades, which other players may consider cheating in a
+  network game (svn:r3457).
+- Fix program crash (or worse) when a worker type was declared to have an
+  ingredient that had not been defined (svn:r3459).
+- Forbid declaring that a building can be enhanced to its own type or the
+  special type constructionsite (svn:r3460, svn:r3461).
+- Do not let the constructionsite crash the game if a building type did not
+  define a build animation. Use the idle animation instead (svn:r3462).
+- Do not crash because of division by 0 when building a building without
+  buildcost (svn:r3462).
+- When building a building without buildcost, complete it immediately instead
+  of never (svn:r3462).
+- Check for mine and size mismatch when parsing building enhancement
+  definitions. This prevents crashes at run-time (svn:r3463).
+- Fixed bug #1792379 - little trees set with editor do not grow (svn:r3317).
 - Fixed bug #1913902 - collosseum now trains evade 0 and 1 (svn:r3303).
-- Fixed bug that upgraded worker were used in buildings instead of training new simple
-  ones (svn:r3304).
-- Fixed crossplatform network bug (win32 path on unix) (svn:r3293, svn:r3427, svn:r3429).
-- Fixed disk_filesystem handling on win32(svn:r3284, svn:r3285, svn:r3286, svn:r3287,
-  svn:r3291).
-- Fixed strange, unwanted behaviour of multilined editboxes (svn:r3281, svn:r3282).
-- Fixed loading of settlers 2 maps in widelands (svn:r3234, svn:r3235, svn:r3238,
-  svn:r3250).
+- Fixed bug that upgraded worker were used in buildings instead of training new
+  simple ones (svn:r3304).
+- Fixed crossplatform network bug (win32 path on unix) (svn:r3293, svn:r3427,
+  svn:r3429).
+- Fixed disk_filesystem handling on win32(svn:r3284, svn:r3285, svn:r3286,
+  svn:r3287, svn:r3291).
+- Fixed strange, unwanted behaviour of multilined editboxes (svn:r3281,
+  svn:r3282).
+- Fixed loading of settlers 2 maps in widelands (svn:r3234, svn:r3235,
+  svn:r3238, svn:r3250).
 - Fixed bug that caused segmentation fault when executing./widelands
   --editor=nonexistent_file (svn:r3335).
 - Fixed bug that caused segmentation fault when executing./widelands
   --scenario=nonexistent_file (svn:r3336).
 - Fixed bug that caused invalid use of uninitialized memory when an animation
-  configuration defined playercolor=true but a mask file was missing (svn:r3347).
-- Fixed bug #1968196 - Scenario-maps aren't loaded as one (svn:r3227).
-- Fixed bug #1900477 - Objectives description are not translated and objective names are
-  not included in PO templates (svn:r3225, svn:r3229).
+  configuration defined playercolor=true but a mask file was missing
+  (svn:r3347).
+- Fixed bug #1968196 - Scenario-maps are not loaded as one (svn:r3227).
+- Fixed bug #1900477 - Objectives description are not translated and objective
+  names are not included in PO templates (svn:r3225, svn:r3229).
 - Fixed hotspots of animals (svn:r3170).
 - Fixed editor height tool dialogs (svn:r3171).
-- Fixed language-settings-menu for Linux - now Widelands sets system-language-variable
-  correctly (svn:r3193, svn:r3252, svn:r3262).
-- Fixed bug that prevented releasing the last soldier from a trainingsite (svn:r3179).
-- Fixed memory access errors in the game logic, causing segmentation fault or any kind of
-  strange undefined behaviour (svn:r3184,
-  [3365](http://widelands.svn.sourceforge.net/viewvc/widelands?view=rev&revision=3365)).
-- Fixed bug that the game would abort if an attacking soldier could not find a path to the
-  target (svn:r3382).
+- Fixed language-settings-menu for Linux - now Widelands sets
+  system-language-variable correctly (svn:r3193, svn:r3252, svn:r3262).
+- Fixed bug that prevented releasing the last soldier from a trainingsite
+  (svn:r3179).
+- Fixed memory access errors in the game logic, causing segmentation fault or
+  any kind of strange undefined behaviour (svn:r3184, svn:r3365).
+- Fixed bug that the game would abort if an attacking soldier could not find a
+  path to the target (svn:r3382).
 - Fixed memory access error in save game dialog (svn:r3185).
-- Fixed many memory access errors when trying to read missing sections in configuration
-  files (svn:r3195).
-- Fixed bug that the computer player did not check if a planned large building would be
-  completely inside his borders (svn:r3191).
-- Fixed bugs that the empire wine bush and barbarian flax and reed lived forever, blocking
-  the map (svn:r3190, svn:r3527).
+- Fixed many memory access errors when trying to read missing sections in
+  configuration files (svn:r3195).
+- Fixed bug that the computer player did not check if a planned large building
+  would be completely inside his borders (svn:r3191).
+- Fixed bugs that the empire wine bush and barbarian flax and reed lived
+  forever, blocking the map (svn:r3190, svn:r3527).
 - Fixed bug that it was possible to cheat when destroying an enhanceable
   building by first ordering and upgrade and then immediately ordering the
   destruction of the enhancement-constructionsite. This avoided the burning
   phase, which made the space available immediately. (svn:r3513)
-- Fixed bug that replay was stopped before all commands had been executed. (svn:r3539)
+- Fixed bug that replay was stopped before all commands had been executed.
+  (svn:r3539)
 
 
 ### Build 12
 - New feature: Additional scenario event types and trigger types.
-- New feature: Flags are automatically placed when holding down Ctrl while building a road.
-- New feature: Load maps directly into the editor from the command line (widelands --editor=<filename>).
+- New feature: Flags are automatically placed when holding down Ctrl while
+  building a road.
+- New feature: Load maps directly into the editor from the command line
+  (widelands --editor=<filename>).
 - New feature: Navigation in edit boxes.
 - New feature: Multiplayer games.
 - New and greatly improved animations for a number of workers.
 - New animals and new animations for existing animals.
 - New singleplayer/multiplayer map.
-- New tribe 'Atlantids'.
+- New tribe Atlantids.
 - Improved the usability of scrollbars, listselects and tables.
 - Improvements of Campaign UI (show only revealed campaigns/scenarios).
 - Improvements of all single-/multiplayer maps (rebalancing resources).
@@ -426,17 +472,20 @@
 - Improved the handling of player colours.
 - Improved recovery from bugs during gameplay.
 - Improved the battle system.
-- Fixed bugs: Several invalid memory accesses, which may have caused random bugs, such as
-  [#1508297 (Needed images sometimes not saved with
+- Fixed bugs: Several invalid memory accesses, which may have caused random
+  bugs, such as [#1508297 (Needed images sometimes not saved with
   game)](http://sourceforge.net/tracker/index.php?func=detail&aid=1508297&group_id=40163&atid=427221).
-- Fixed bug: Workers that become fugitives have a higher chance of finding back to a
-  warehouse. A flag connected to a warehouse must be close to the worker.
-- Fixed bug that the objectives menu was not updated when objectives were fulfilled during
-  the game.
-- Fixed bug that workers would enter a building before arriving at it (entering it when passing the flag in front of the building). This caused the worker to start seeing from the building too early.
+- Fixed bug: Workers that become fugitives have a higher chance of finding back
+  to a warehouse. A flag connected to a warehouse must be close to the worker.
+- Fixed bug that the objectives menu was not updated when objectives were
+  fulfilled during the game.
+- Fixed bug that workers would enter a building before arriving at it (entering
+  it when passing the flag in front of the building). This caused the worker to
+  start seeing from the building too early.
 - Fixed network support for direct IP and LAN games.
 - Fixed many gamelogic bugs.
-- Removed support for GGZ. Please use the forums and IRC channel to meet for multiplayer games.
+- Removed support for GGZ. Please use the forums and IRC channel to meet for
+  multiplayer games.
 - Many other bugfixes, optimizations and cleanups.
 
 ### Build 11
@@ -454,12 +503,13 @@
 - Improvements of Multiplayercode.
 - Improvements of Campaign UI
 - Improvement of "growing tree patch" (seperation of different steps)
-- Improvement of single-line-edit-box handling (buttons aren't locked anymore)
+- Improvement of single-line-edit-box handling (buttons are not locked anymore)
 - Improvement of Ware-image visualisation program.
 - Added 2 new multiplayer maps
 - Fix of bug 1633431 (Attacking headquarters crashes game.)
-- Fix of bug 1451851 (Upgrade building while delievering to/from cause crash/hang)
-- Fix of bug 1690070 (ware: can't move from building A to B)
+- Fix of bug 1451851 (Upgrade building while delievering to/from cause
+  crash/hang)
+- Fix of bug 1690070 (ware: can not move from building A to B)
 - Many other bugfixes
 
 
@@ -473,8 +523,8 @@
 - Addition of two new Empire-campaign-maps
 - Addition of three new ingame music-tracks
 - A lot of localization-bugs were fixed and new strings for translation were added.
-- Widelands now supports 14 languages (cz_CZ, de_DE, en_EN, es_ES, fi_FI, fr_FR, gl_ES,
-  he_HE, hu_HU, nl_NL, pl_PL, ru_RU, sk_SK, sv_SE)
+- Widelands now supports 14 languages (cz_CZ, de_DE, en_EN, es_ES, fi_FI,
+  fr_FR, gl_ES, he_HE, hu_HU, nl_NL, pl_PL, ru_RU, sk_SK, sv_SE)
 - New feature: Mouse-over-hover-help
 - New feature: Tribe ware encyclopedia
 - Mousewheel support integrated (textarea)
@@ -492,12 +542,13 @@
 ### Build 9half
 - Updated Campaign Missions
 - Added proper localization support (language selectable in options menu)
-- Font renderer now renders multiple newlines correctly and in richtext
-  accepts <br> as newline
+- Font renderer now renders multiple newlines correctly and in richtext accepts
+  <br> as newline
 - added localization patch by Josef + beginning of localization
 - f now triggers fullscreen ingame
 - added new maps from winterwind
-- implemented new trigger system. This invalidates every scenario, campaign and map.
+- implemented new trigger system. This invalidates every scenario, campaign and
+  map.
 - save now changes into zip files, added option nozip for debugging reasons
 - save changed to save into directory
 - added trigger conditionals
@@ -525,7 +576,8 @@
 - fixed "Worker Type 11 not found" bug
 - new Tree Graphics from Wolfgang Weidner
 - Added patch from Florian Falkner
-   * new Option Dialog UIListselect can have now a selection-indicator !WatchWindow
+   * new Option Dialog UIListselect can have now a selection-indicator
+     !WatchWindow
    * functionality is user selectable
 - Windows can be minimized (middle mouse or Ctrl+left mouse)
 - fixed crash when using 32-bit fullscreen mode under win32
@@ -561,7 +613,7 @@
 - graphics reworked
 - added functionality for the first few buildings
 - reworked transport code
-- added multiselect option for editors 'set texture'  tool
+- added multiselect option for editor's set texture tool
 
 
 ### Build 5
@@ -593,7 +645,7 @@
 - options handling redesigned
 - introduced System
 - added keyboard input
-- build symbols react to objects now (can't build next to stones etc...)
+- build symbols react to objects now (can not build next to stones etc...)
 - only use 8 different types of trees (like Settlers 2)
 - unique windows now remember their position
 - improved fieldaction mouse placement for fast click-through
