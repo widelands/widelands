@@ -79,7 +79,7 @@ Note: If the execution reaches the end of the program. the return value is impli
   failure_handling_method:
      Specifies how to handle a failure of the called program.
      * If failure_handling_method is Fail, the command fails (with the
-       same effect as executing <b>return=failed</b>).
+       same effect as executing <b>return</b>=<b>failed</b>).
      * If failure_handling_method is <b>repeat</b>, the command is repeated.
      * If failure_handling_method is <b>ignore</b>, the failure is ignored
        (the program is continued).
@@ -133,15 +133,16 @@ Starts the specified animation for the productionsite. Blocks the execution of t
 For each group, the number of wares specified in count is consumed. The consumed wares may be of any type in the group.
 </p>
 <p>
-If there are not enough wares in the input storages, the command fails (with the same effect as executing <b>return&lt;b&gt;=&lt;b&gt;failed</b>). Then no wares will be consumed.
+If there are not enough wares in the input storages, the command fails (with the same effect as executing <b>return</b>=<b>failed</b>). Then no wares will be consumed.
 </p>
 <p>
-Selecting which ware types to consume for a group so that the whole command succeeds is a constraint satisfaction problem. The implementation does not implement an exhaustive search for a solution to it. It is just a greedy algorithm which gives up instead of backtracking. Therefore The command may fail even if there is a solution.</p>
+Selecting which ware types to consume for a group so that the whole command succeeds is a constraint satisfaction problem. The implementation does not implement an exhaustive search for a solution to it. It is just a greedy algorithm which gives up instead of backtracking. Therefore the command may fail even if there is a solution.
+</p>
 <p>
-However it may be possible to help the algorithm by ordering the groups carefully. Suppose that the input storage has the wares a:1, b:1 and a consume command has the parameters <i>a</i><b>,</b><i>b</i><b>:</b>1 <i>a</i><b>:</b>1". The algorithm tries to
-consume its input wares in order. First it consumes wares of type a. It starts with the first group and consumes 1 (the group becomes satisfied). Then it proceeds with the second group, but there are no <i>a'</i>s left to consume. Since there is no other ware type that can satisfy the group, the command will fail. If the groups are reordered so that the parameters become <i>a</i><b>:</b>1 <i>a</i><b>,</b><i>b</i><b>:</b>1", it will work. When the algorithm consumes wares of type a, it will consume 1 for the first group. When it proceeds with the second group, it will not have any <i>a'</i>s left. Then it will go on and
-consume wares of type <i>b</i>. it will consume 1 for the second group (which becomes satisfied) and the command succeeds.
-</p><p><b>Note:</b> It is not possible to reorder ware types within a group. <i>a</i><b>,</b><i>b</i>" is equivalent to <i>b<b>,</b>a</i> because in the internal representation the ware types of a group are sorted.
+However it may be possible to help the algorithm by ordering the groups carefully. Suppose that the input storage has the wares <i>a</i>:1, <i>b</i>:1 and a consume command has the parameters <i>a</i><b>,</b><i>b</i><b>:</b>1 <i>a</i><b>:</b>1. The algorithm tries to consume its input wares in order. It starts with the first group and consumes 1 ware of type <i>a</i> (the group becomes satisfied). Then it proceeds with the second group, but there are no wares of type <i>a</i> left to consume. Since there is no other ware type that can satisfy the group, the command will fail. If the groups are reordered so that the parameters become <i>a</i><b>:</b>1 <i>a</i><b>,</b><i>b</i><b>:</b>1, it will work. The algorithm will consume 1 ware of type <i>a</i> for the first group. When it proceeds with the second group, it will not have any wares of type <i>a</i> left. Then it will go on and consume 1 ware of type <i>b</i> for the second group (which becomes satisfied) and the command succeeds.
+</p>
+<p>
+<b>Note:</b> It is not possible to reorder ware types within a group. <i>a</i><b>,</b><i>b</i>" is equivalent to <i>b<b>,</b>a</i> because in the internal representation the ware types of a group are sorted.
 </p>
 <h3 id="produce">produce</h3>
 <p>Produces wares.</p>
@@ -161,7 +162,7 @@ For each group, the number of wares specified in count is produced. The produced
 <p>Takes resources from the ground. This command type is subject to change.</p>
 <h3 id="check_soldier">check_soldier</h3>
 <p>
-Returns failure unless there are a specified amout of soldiers with specified level of specified properties.  This command type is subject to change.
+Returns failure unless there are a specified amout of soldiers with specified level of specified properties. This command type is subject to change.
 </p>
 <h3 id="train">train</h3>
 <p>
