@@ -229,4 +229,15 @@ void Editor_Tool_Change_Resources_Options_Menu::update() {
 	m_cur_selection.set_pos
 		(Point
 		 	((get_inner_w() - m_cur_selection.get_w()) / 2, get_inner_h() - 20));
+
+	{
+		int32_t const change_by = m_increase_tool.get_change_by();
+		m_change_by_decrease.set_enabled(1 < change_by);
+		m_change_by_increase.set_enabled    (change_by < 63);
+	}
+	{
+		int32_t const set_to   = m_increase_tool.set_tool().get_set_to();
+		m_set_to_decrease   .set_enabled(0 < set_to);
+		m_set_to_increase   .set_enabled    (set_to    < 63);
+	}
 }
