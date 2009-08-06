@@ -120,6 +120,12 @@ Editor_Tool_Noise_Height_Options_Menu::Editor_Tool_Noise_Height_Options_Menu
 		 std::string(),
 		 0 < noise_tool.set_tool().get_interval().min)
 {
+	m_lower_increase.set_repeating(true);
+	m_lower_decrease.set_repeating(true);
+	m_upper_increase.set_repeating(true);
+	m_upper_decrease.set_repeating(true);
+	m_setto_increase.set_repeating(true);
+	m_setto_decrease.set_repeating(true);
 	update();
 }
 
