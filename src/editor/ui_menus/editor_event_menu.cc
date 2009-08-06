@@ -50,17 +50,18 @@ inline Editor_Interactive & Editor_Event_Menu::eia() {
 
 Editor_Event_Menu::Editor_Event_Menu
 	(Editor_Interactive & parent, UI::UniqueWindow::Registry * registry)
-:
-UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
+	:
+	UI::UniqueWindow(&parent, registry, 590, 380, _("Event Menu"))
 {
 	int32_t const offsx    =   5;
-	int32_t const offsy    =  25;
+	int32_t const offsy    =   5;
 	int32_t const spacing  =   5;
 	int32_t       posx     = offsx;
 	int32_t       posy     = offsy;
-	int32_t const ls_width = 200;
+	int32_t const ls_width = 190;
 
-	new UI::Textarea(this, posx, offsy, _("Event Chains: "));
+	new UI::Textarea
+		(this, posx + ls_width / 2, offsy, _("Event Chains: "), UI::Align_HCenter); //  FIXME change to "Event Chains" when no message freeze
 	m_eventchain_list =
 		new UI::Listselect<Widelands::EventChain *>
 		(this, spacing, offsy + 20, ls_width, get_inner_h() - offsy - 55);
@@ -70,7 +71,8 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 		(this, &Editor_Event_Menu::eventchain_double_clicked);
 	posx += ls_width + spacing;
 
-	new UI::Textarea(this, posx, offsy, _("Registered Events: "));
+	new UI::Textarea
+		(this, posx + ls_width / 2, offsy, _("Registered Events: "), UI::Align_HCenter); //  FIXME change to "Events" when no message freeze
 	m_event_list =
 		new UI::Listselect<Widelands::Event *>
 			(this, posx, offsy + 20, ls_width, get_inner_h() - offsy - 55);
@@ -79,7 +81,8 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 		(this, &Editor_Event_Menu::event_double_clicked);
 	posx += ls_width + spacing;
 
-	new UI::Textarea(this, posx, offsy, _("Registered Triggers"));
+	new UI::Textarea
+		(this, posx + ls_width / 2, offsy, _("Registered Triggers"), UI::Align_HCenter); //  FIXME change to "Triggers" when no message freeze
 	m_trigger_list =
 		new UI::Listselect<Widelands::Trigger *>
 		(this, posx, offsy + 20, ls_width, get_inner_h() - offsy - 55);
@@ -94,95 +97,101 @@ UI::UniqueWindow(&parent, registry, 620, 400, _("Event Menu"))
 
 	new UI::Callback_Button<Editor_Event_Menu>
 		(this,
-		 posx, posy, 90, 20,
+		 posx, posy, 60, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &Editor_Event_Menu::clicked_new_eventchain, *this,
-		 _("New Event Chain"));
+		 _("New"));
 
-	posx += 90 + spacing;
+	posx += 60 + spacing;
 
-	m_btn_edit_eventchain = new UI::Callback_Button<Editor_Event_Menu>
-		(this,
-		 posx, posy, 50, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Editor_Event_Menu::clicked_edit_eventchain, *this,
-		 _("Edit"),
-		 std::string(),
-		 false);
+	m_btn_edit_eventchain =
+		new UI::Callback_Button<Editor_Event_Menu>
+			(this,
+			 posx, posy, 60, 20,
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 &Editor_Event_Menu::clicked_edit_eventchain, *this,
+			 _("Edit"),
+			 std::string(),
+			 false);
 
-	posx += 50 + spacing;
+	posx += 60 + spacing;
 
-	m_btn_del_eventchain = new UI::Callback_Button<Editor_Event_Menu>
-		(this,
-		 posx, posy, 50, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Editor_Event_Menu::clicked_del_eventchain, *this,
-		 _("Del"),
-		 std::string(),
-		 false);
+	m_btn_del_eventchain =
+		new UI::Callback_Button<Editor_Event_Menu>
+			(this,
+			 posx, posy, 60, 20,
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 &Editor_Event_Menu::clicked_del_eventchain, *this,
+			 _("Delete"),
+			 std::string(),
+			 false);
 
 	posx = spacing + ls_width + spacing;
 
 	new UI::Callback_Button<Editor_Event_Menu>
 		(this,
-		 posx, posy, 90, 20,
+		 posx, posy, 60, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &Editor_Event_Menu::clicked_new_event, *this,
-		 _("New Event"));
+		 _("New"));
 
-	posx += 90 + spacing;
+	posx += 60 + spacing;
 
-	m_btn_edit_event = new UI::Callback_Button<Editor_Event_Menu>
-		(this,
-		 posx, posy, 50, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Editor_Event_Menu::clicked_edit_event, *this,
-		 _("Edit"),
-		 std::string(),
-		 false);
+	m_btn_edit_event =
+		new UI::Callback_Button<Editor_Event_Menu>
+			(this,
+			 posx, posy, 60, 20,
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 &Editor_Event_Menu::clicked_edit_event, *this,
+			 _("Edit"),
+			 std::string(),
+			 false);
 
-	posx += 50 + spacing;
+	posx += 60 + spacing;
 
-	m_btn_del_event = new UI::Callback_Button<Editor_Event_Menu>
-		(this,
-		 posx, posy, 50, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Editor_Event_Menu::clicked_del_event, *this,
-		 _("Del"),
-		 std::string(),
-		 false);
+	m_btn_del_event =
+		new UI::Callback_Button<Editor_Event_Menu>
+			(this,
+			 posx, posy, 60, 20,
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 &Editor_Event_Menu::clicked_del_event, *this,
+			 _("Delete"),
+			 std::string(),
+			 false);
 
 
 	posx = 3 * spacing + 2 * ls_width;
 
 	new UI::Callback_Button<Editor_Event_Menu>
 		(this,
-		 posx, posy, 90, 20,
+		 posx, posy, 60, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &Editor_Event_Menu::clicked_new_trigger, *this,
-		 _("New Trigger"));
+		 _("New"));
 
-	posx += 90 + spacing;
+	posx += 60 + spacing;
 
-	m_btn_edit_trigger = new UI::Callback_Button<Editor_Event_Menu>
-		(this,
-		 posx, posy, 50, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Editor_Event_Menu::clicked_edit_trigger, *this,
-		 _("Edit"),
-		 std::string(),
-		 false);
+	m_btn_edit_trigger =
+		new UI::Callback_Button<Editor_Event_Menu>
+			(this,
+			 posx, posy, 60, 20,
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 &Editor_Event_Menu::clicked_edit_trigger, *this,
+			 _("Edit"),
+			 std::string(),
+			 false);
 
-	posx += 50 + spacing;
+	posx += 60 + spacing;
 
-	m_btn_del_trigger = new UI::Callback_Button<Editor_Event_Menu>
-		(this,
-		 posx, posy, 50, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 &Editor_Event_Menu::clicked_del_trigger, *this,
-		 _("Del"),
-		 std::string(),
-		 false);
+	m_btn_del_trigger =
+		new UI::Callback_Button<Editor_Event_Menu>
+			(this,
+			 posx, posy, 60, 20,
+			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 &Editor_Event_Menu::clicked_del_trigger, *this,
+			 _("Delete"),
+			 std::string(),
+			 false);
 
 	// Put in the default position, if necessary
 	if (get_usedefaultpos())
