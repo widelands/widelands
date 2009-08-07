@@ -1,4 +1,7 @@
 ### Build 14
+- Fix bug that a corrupt savegame could cause gametime to go backwards (a
+  GameLogicCommand could have a duetime in the past without being detected as
+  corrupt during load). (svn:r4460)
 - Fix invalid memory access bug (causisng random behaviour) when a section file
   inside a zip-archive was missing a newline at the end. (svn:r4443)
 - Fix bug that trigger building could count large buildings sevaral times
@@ -29,6 +32,10 @@
   Notify the 2 involved players by adding a message to their message queues and
   pausing the game. Also pause and give a message when a worker can not return
   home to his building and therefore becomes a fugitive. (svn:r4378)
+- Fix bug that the in-/decrease buttons in the editor's noise height options
+  menu were not repeating. (svn:r4459)
+- Fix bug that the buttons in the editor's change resources options menu were
+  not properly disabled. (svn:r4458)
 - Fix bug that the traingingsite window soldier buttons (drop selected soldier,
   decrease soldier capacity and increase capacity) were not properly disabled
   and that the latter 2 were not repeating. (svn:r4373)
