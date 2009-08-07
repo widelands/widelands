@@ -102,11 +102,6 @@ int32_t Cmd_Queue::run_queue(int32_t const interval, int32_t & game_time_var) {
 
 		m_cmds.pop();
 
-		if (c.duetime() < game_time_var)
-			throw wexception
-				("command (%u) has duetime %i but game time has already advanced "
-				 "to %i",
-				 c.id(), c.duetime(), game_time_var);
 		assert(game_time_var <= c.duetime());
 		game_time_var = c.duetime();
 
@@ -141,12 +136,19 @@ Command::~Command () {}
  * \note This function must be called by deriving objects that override it.
  */
 void GameLogicCommand::Write
-	(FileWrite & fw, Editor_Game_Base &, Map_Map_Object_Saver &)
+	(FileWrite & fw,
+#ifndef NDEBUG
+	 Editor_Game_Base & egbase,
+#else
+	 Editor_Game_Base &,
+#endif
+	 Map_Map_Object_Saver &)
 {
 	// First version
 	fw.Unsigned16(BASE_CMD_VERSION);
 
 	// Write duetime
+	assert(egbase.get_gametime() <= duetime());
 	fw.Unsigned32(duetime());
 }
 
@@ -156,13 +158,17 @@ void GameLogicCommand::Write
  * \note This function must be called by deriving objects that override it.
  */
 void GameLogicCommand::Read
-	(FileRead & fr, Editor_Game_Base &, Map_Map_Object_Loader &)
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader &)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == BASE_CMD_VERSION)
+		if (packet_version == BASE_CMD_VERSION) {
 			set_duetime(fr.Unsigned32());
-		else
+			int32_t const gametime = egbase.get_gametime();
+			if (duetime() < gametime)
+				throw wexception
+					("duetime (%i) < gametime (%i)", duetime(), gametime);
+		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
 	} catch (_wexception const & e) {
 		throw wexception("game logic: %s", e.what());
