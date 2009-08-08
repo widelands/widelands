@@ -1090,10 +1090,11 @@ void Worker::create_needed_experience(Game & game)
 		return;
 	}
 
+	assert(descr().get_min_exp() <= descr().get_max_exp());
 	m_needed_exp =
 		descr().get_min_exp()
 		+
-		game.logic_rand() % (descr().get_max_exp() - descr().get_min_exp());
+		game.logic_rand() % (1 + descr().get_max_exp() - descr().get_min_exp());
 	m_current_exp = 0;
 }
 
@@ -2277,7 +2278,8 @@ void Worker::geologist_update(Game & game, State & state)
 			// depending on position of center
 			bool is_target_mountain;
 			uint32_t n = list.size();
-			uint32_t i = game.logic_rand() % list.size();
+			assert(n);
+			uint32_t i = game.logic_rand() % n;
 			do {
 				target =
 					map.get_fcoords(list[game.logic_rand() % list.size()]);
