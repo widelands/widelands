@@ -115,6 +115,10 @@ Worker_Descr::Worker_Descr
 				throw wexception
 					("Parse error in experience string: %s is a bad value",
 					 list[1].c_str());
+			if (m_max_experience < m_min_experience)
+				throw wexception
+					("Parse error in experience string: %u < %u",
+					 m_max_experience, m_min_experience);
 		}
 	}
 
