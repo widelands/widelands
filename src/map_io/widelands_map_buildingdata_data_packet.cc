@@ -685,6 +685,23 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 		} else
 			throw wexception
 				("unknown/unhandled version %u", trainingsite_packet_version);
+		if        (trainingsite.m_capacity < trainingsite.minSoldierCapacity()) {
+			log
+				("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
+				 "set to %u but it must be at least %u. Changing to that value.\n",
+				 trainingsite.serial(), trainingsite.owner().player_number(),
+				 trainingsite.get_position().x, trainingsite.get_position().y,
+				 trainingsite.m_capacity, trainingsite.minSoldierCapacity());
+			trainingsite.m_capacity = trainingsite.minSoldierCapacity();
+		} else if (trainingsite.maxSoldierCapacity() < trainingsite.m_capacity) {
+			log
+				("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
+				 "set to %u but it can be at most %u. Changing to that value.\n",
+				 trainingsite.serial(), trainingsite.owner().player_number(),
+				 trainingsite.get_position().x, trainingsite.get_position().y,
+				 trainingsite.m_capacity, trainingsite.maxSoldierCapacity());
+			trainingsite.m_capacity = trainingsite.maxSoldierCapacity();
+		}
 	} catch (_wexception const & e) {
 		throw wexception("trainingsite: %s", e.what());
 	}
