@@ -214,11 +214,16 @@ void Soldier::init(Editor_Game_Base & egbase)
 	m_max_attack    = descr().get_max_attack();
 	m_defense       = descr().get_defense   ();
 	m_evade         = descr().get_evade     ();
-	if (upcast(Game, game, &egbase)) {
+	{
 		const uint32_t min_hp = descr().get_min_hp();
 		assert(min_hp);
 		assert(min_hp <= descr().get_max_hp());
-		m_hp_max = min_hp + game->logic_rand() % (descr().get_max_hp() - min_hp);
+		m_hp_max =
+			min_hp
+			+
+			dynamic_cast<Game &>(egbase).logic_rand()
+			%
+			(descr().get_max_hp() - (min_hp - 1));
 	}
 	m_hp_current    = m_hp_max;
 
