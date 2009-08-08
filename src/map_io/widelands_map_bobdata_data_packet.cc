@@ -397,10 +397,14 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						}
 						if (soldier->m_hp_max < min_hp)
 							throw wexception
-								("m_hp_max = %u but must be at least %u",
+								("hp_max = %u but must be at least %u",
 								 soldier->m_hp_max, min_hp);
 						soldier->m_min_attack    = fr.Unsigned32();
 						soldier->m_max_attack    = fr.Unsigned32();
+						if (soldier->m_max_attack < soldier->m_min_attack)
+							throw wexception
+								("max_attack = %u but must be at least %u",
+								 soldier->m_max_attack, soldier->m_min_attack);
 						soldier->m_defense       = fr.Unsigned32();
 						soldier->m_evade         = fr.Unsigned32();
 						soldier->m_hp_level      = fr.Unsigned32();
