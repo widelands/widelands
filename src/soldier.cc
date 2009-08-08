@@ -98,6 +98,10 @@ Soldier_Descr::Soldier_Descr
 			throw wexception
 				("Parse error in attack string: %s is a bad value",
 				 list[1].c_str());
+		if (m_max_attack < m_min_attack)
+			throw wexception
+				("Parse error in attack string: \"%s\" < \"%s\"",
+				 list[1].c_str(), list[0].c_str());
 	}
 
 	// Parse defend
