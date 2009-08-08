@@ -224,11 +224,12 @@ void Battle::calculateTurn(Game & game)
 
 	uint32_t const hit = game.logic_rand() % 100;
 	if (hit > defender->get_evade()) {
+		assert(attacker->get_min_attack() <= attacker->get_max_attack());
 		uint32_t const attack =
 			attacker->get_min_attack() +
 			(game.logic_rand()
 			 %
-			 (attacker->get_max_attack() - attacker->get_min_attack() - 1));
+			 (1 + attacker->get_max_attack() - attacker->get_min_attack()));
 		defender->damage(attack - (attack * defender->get_defense()) / 100);
 	}
 }
