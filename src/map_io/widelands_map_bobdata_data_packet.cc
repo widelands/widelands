@@ -132,6 +132,7 @@ void Map_Bobdata_Data_Packet::Read
 					}
 					bob.m_walkstart = fr.Signed32();
 					bob.m_walkend   = fr.Signed32();
+					//  if (bob.m_walkend < bob.m_walkstart) ...
 
 					uint16_t const old_stacksize = bob.m_stack.size();
 					uint16_t const new_stacksize = fr.Unsigned16();

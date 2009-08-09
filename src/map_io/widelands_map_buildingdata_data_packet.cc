@@ -413,6 +413,33 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			}
 		} else
 			throw wexception("unknown/unhandled version %u", packet_version);
+
+		//  If the site's capacity is outside the allowed range (can happen if
+		//  the site's type's definition has changed), set the variable to the
+		//  nearest valid value.
+		//
+		//  This does not drop excessive soldiers, since they are not loaded into
+		//  the site yet. To do that we would have to do this change by adding a
+		//  Cmd_ChangeSoldierCapacity to the beginning of the game's command
+		//  queue. But that would not work because the command queue is not read
+		//  yet and will be cleared before it is read.
+		if        (militarysite.m_capacity < militarysite.minSoldierCapacity()) {
+			log
+				("WARNING: militarysite %u of player %u at (%i, %i) has capacity "
+				 "set to %u but it must be at least %u. Changing to that value.\n",
+				 militarysite.serial(), militarysite.owner().player_number(),
+				 militarysite.get_position().x, militarysite.get_position().y,
+				 militarysite.m_capacity, militarysite.minSoldierCapacity());
+			militarysite.m_capacity = militarysite.minSoldierCapacity();
+		} else if (militarysite.maxSoldierCapacity() < militarysite.m_capacity) {
+			log
+				("WARNING: militarysite %u of player %u at (%i, %i) has capacity "
+				 "set to %u but it can be at most %u. Changing to that value.\n",
+				 militarysite.serial(), militarysite.owner().player_number(),
+				 militarysite.get_position().x, militarysite.get_position().y,
+				 militarysite.m_capacity, militarysite.maxSoldierCapacity());
+			militarysite.m_capacity = militarysite.maxSoldierCapacity();
+		}
 	} catch (_wexception const & e) {
 		throw wexception("militarysite: %s", e.what());
 	}
@@ -685,6 +712,16 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 		} else
 			throw wexception
 				("unknown/unhandled version %u", trainingsite_packet_version);
+
+		//  If the site's capacity is outside the allowed range (can happen if
+		//  the site's type's definition has changed), set the variable to the
+		//  nearest valid value.
+		//
+		//  This does not drop excessive soldiers, since they are not loaded into
+		//  the site yet. To do that we would have to do this change by adding a
+		//  Cmd_ChangeSoldierCapacity to the beginning of the game's command
+		//  queue. But that would not work because the command queue is not read
+		//  yet and will be cleared before it is read.
 		if        (trainingsite.m_capacity < trainingsite.minSoldierCapacity()) {
 			log
 				("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
