@@ -68,9 +68,13 @@ void Cmd_Call_Economy_Balance::Read
 			if (Player * const player = egbase.get_player(player_number)) {
 				if (not fr.Unsigned8())
 					throw wexception("0 is not allowed here");
-				Economy * const economy =
-					player->get_economy_by_number(fr.Unsigned16());
-				m_flag = &economy->get_arbitrary_flag();
+				uint16_t const economy_number = fr.Unsigned16();
+				if (economy_number < player->get_nr_economies())
+					m_flag =
+						&player->get_economy_by_number(economy_number)
+						->get_arbitrary_flag();
+				else
+					throw wexception("invalid economy number %u", economy_number);
 			} else
 				throw wexception("invalid player number %u", player_number);
 			if (packet_version >= 2)
