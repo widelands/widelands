@@ -384,9 +384,10 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						 <=
 						 SOLDIER_WORKER_BOB_PACKET_VERSION)
 					{
-						uint32_t const min_hp = soldier->descr().get_min_hp();
+						Soldier_Descr const & descr = soldier->descr();
+
+						uint32_t min_hp = descr.get_min_hp();
 						assert(min_hp);
-						uint32_t const max_hp = soldier->descr().get_max_hp();
 						{
 							//  Soldiers created by old versions of Widelands have
 							//  wrong values for m_hp_max and m_hp_current; they were
@@ -406,47 +407,183 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 							throw wexception
 								("hp_max (%u) < hp_current (%u)",
 								 soldier->m_hp_max, soldier->m_hp_current);
-						if (soldier->m_hp_max < min_hp) {
-							//  The soldier's type's definition may have changed, so
-							//  that max_hp must be larger. Adjust it and scale up the
-							//  current amount of hitpoints proportionally.
-							uint32_t const new_hp_current =
-								soldier->m_hp_current * min_hp / soldier->m_hp_max;
-							log
-								("WARNING: hp_max = %u but must be at least %u, "
-								 "changing the value and increasing current hp from "
-								 "%u to %u\n",
-								 soldier->m_hp_max, min_hp,
-								 soldier->m_hp_current, new_hp_current);
-							soldier->m_hp_current = new_hp_current;
-							soldier->m_hp_max = min_hp;
-						} else if (max_hp < soldier->m_hp_max) {
-							//  The soldier's type's definition may have changed, so
-							//  that max_hp must be smaller. Adjust it and scale down
-							//  the current amount of hitpoints proportionally.
-							uint32_t const new_hp_current =
-								soldier->m_hp_current * max_hp / soldier->m_hp_max;
-							log
-								("WARNING: hp_max = %u but can be at most %u, "
-								 "changing the value and decreasing current hp from "
-								 "%u to %u\n",
-								 soldier->m_hp_max, max_hp,
-								 soldier->m_hp_current, new_hp_current);
-							soldier->m_hp_current = new_hp_current;
-							soldier->m_hp_max = max_hp;
-						}
+
 						soldier->m_min_attack    = fr.Unsigned32();
 						soldier->m_max_attack    = fr.Unsigned32();
 						if (soldier->m_max_attack < soldier->m_min_attack)
 							throw wexception
 								("max_attack = %u but must be at least %u",
 								 soldier->m_max_attack, soldier->m_min_attack);
+
 						soldier->m_defense       = fr.Unsigned32();
+
 						soldier->m_evade         = fr.Unsigned32();
-						soldier->m_hp_level      = fr.Unsigned32();
-						soldier->m_attack_level  = fr.Unsigned32();
-						soldier->m_defense_level = fr.Unsigned32();
-						soldier->m_evade_level   = fr.Unsigned32();
+
+#define READLEVEL(variable, pn, maxfunction)                                  \
+   soldier->variable = fr.Unsigned32();                                       \
+   {                                                                          \
+      uint32_t const max = descr.maxfunction();                               \
+      if (max < soldier->variable) {                                          \
+         log                                                                  \
+            ("WARNING: %s %s (%u) of player %u has "                          \
+             pn                                                               \
+             "_level = %u but it can be at most %u, decreasing it to that "   \
+             "value\n",                                                       \
+             descr.tribe().name().c_str(), descr.descname().c_str(),          \
+             soldier->serial(), soldier->owner().player_number(),             \
+             soldier->variable, max);                                         \
+         soldier->variable = max;                                             \
+       }                                                                      \
+   }                                                                          \
+
+						READLEVEL(m_hp_level,      "hp",      get_max_hp_level);
+						READLEVEL(m_attack_level,  "attack",  get_max_attack_level);
+						READLEVEL(m_defense_level, "defense", get_max_defense_level);
+						READLEVEL(m_evade_level,   "evade",   get_max_evade_level);
+
+						{ //  validate hp values
+							uint32_t const level_increase =
+								descr.get_hp_incr_per_level() * soldier->m_hp_level;
+							min_hp += level_increase;
+							uint32_t const max = descr.get_max_hp() + level_increase;
+							if (soldier->m_hp_max < min_hp) {
+								//  The soldier's type's definition may have changed,
+								//  so that max_hp must be larger. Adjust it and scale
+								//  up the current amount of hitpoints proportionally.
+								uint32_t const new_current =
+									soldier->m_hp_current * min_hp / soldier->m_hp_max;
+								log
+									("WARNING: %s %s (%u) of player %u has hp_max = %u "
+									 "but it must be at least %u (= %u + %u * %u), "
+									 "changing it to that value and increasing current "
+									 "hp from %u to %u\n",
+									 descr.tribe().name().c_str(),
+									 descr.descname().c_str(), soldier->serial(),
+									 soldier->owner().player_number(),
+									 soldier->m_hp_max, min_hp,
+									 descr.get_min_hp(),
+									 descr.get_hp_incr_per_level(), soldier->m_hp_level,
+									 soldier->m_hp_current, new_current);
+								soldier->m_hp_current = new_current;
+								soldier->m_hp_max = min_hp;
+							} else if (max < soldier->m_hp_max) {
+								//  The soldier's type's definition may have changed,
+								//  so that max_hp must be smaller. Adjust it and scale
+								//  down the current amount of hitpoints
+								//  proportionally. Round to the soldier's favour and
+								//  make sure that the scaling does not kill the
+								//  soldier.
+								uint32_t const new_current =
+									1
+									+
+									(soldier->m_hp_current * max - 1)
+									/
+									soldier->m_hp_max;
+								assert(new_current);
+								assert(new_current <= soldier->m_hp_max);
+								log
+									("WARNING: %s %s (%u) of player %u has hp_max = %u "
+									 "but it can be at most %u (= %u + %u * %u), "
+									 "changing it to that value and decreasing current "
+									 "hp from %u to %u\n",
+									 descr.tribe().name().c_str(),
+									 descr.descname().c_str(), soldier->serial(),
+									 soldier->owner().player_number(),
+									 soldier->m_hp_max, max,
+									 descr.get_max_hp(),
+									 descr.get_hp_incr_per_level(), soldier->m_hp_level,
+									 soldier->m_hp_current, new_current);
+								soldier->m_hp_current = new_current;
+								soldier->m_hp_max = max;
+							}
+						}
+
+						{ //  validate attack values
+							uint32_t const level_increase =
+								descr.get_attack_incr_per_level()
+								*
+								soldier->m_attack_level;
+							{
+								uint32_t const min =
+									descr.get_min_attack() + level_increase;
+								if (soldier->m_min_attack < min) {
+									log
+										("WARNING: %s %s (%u) of player %u has "
+										 "min_attack = %u but it must be at least %u (= "
+										 "%u + %u * %u), changing it to that value\n",
+										 descr.tribe().name().c_str(),
+										 descr.descname().c_str(), soldier->serial(),
+										 soldier->owner().player_number(),
+										 soldier->m_min_attack, min,
+										 descr.get_min_attack(),
+										 descr.get_attack_incr_per_level(),
+										 soldier->m_attack_level);
+									soldier->m_min_attack = min;
+									if (soldier->m_max_attack < min) {
+										log
+											(" (and changing max_attack from %u to the "
+											 "same value)",
+											 soldier->m_max_attack);
+										soldier->m_max_attack = min;
+									}
+									log("\n");
+								}
+							}
+							{
+								uint32_t const max =
+									descr.get_max_attack() + level_increase;
+								if (max < soldier->m_max_attack) {
+									log
+										("WARNING: %s %s (%u) of player %u has "
+										 "max_attack = %u but it can be at most %u (= "
+										 "%u + %u * %u), changing it to that value",
+										 descr.tribe().name().c_str(),
+										 descr.descname().c_str(), soldier->serial(),
+										 soldier->owner().player_number(),
+										 soldier->m_max_attack, max,
+										 descr.get_max_attack(),
+										 descr.get_attack_incr_per_level(),
+										 soldier->m_attack_level);
+									soldier->m_max_attack = max;
+									if (max < soldier->m_min_attack) {
+										log
+											(" (and changing min_attack from %u to the "
+											 "same value)",
+											 soldier->m_min_attack);
+										soldier->m_min_attack = max;
+									}
+									log("\n");
+								}
+							}
+							assert(soldier->m_min_attack <= soldier->m_max_attack);
+						}
+
+#define VALIDATE_VALUE(pn, valuefunct, incrfunct, level_variable, variable)   \
+   {                                                                          \
+      uint32_t const value =                                                  \
+         descr.valuefunct() + descr.incrfunct() * soldier->level_variable;    \
+      if (value != soldier->variable) {                                       \
+         log                                                                  \
+            ("WARNING: %s %s (%u) of player %u has "                          \
+             pn                                                               \
+             " = %u but it must be %u (= %u + %u * %u), changing it to that " \
+             "value\n",                                                       \
+             descr.tribe().name().c_str(), descr.descname().c_str(),          \
+             soldier->serial(), soldier->owner().player_number(),             \
+             soldier->variable, value,                                        \
+             descr.valuefunct(), descr.incrfunct(), soldier->level_variable); \
+         soldier->variable = value;                                           \
+      }                                                                       \
+   }                                                                          \
+
+						VALIDATE_VALUE
+							("defense", get_defense, get_defense_incr_per_level,
+							 m_defense_level, m_defense);
+
+						VALIDATE_VALUE
+							("evade",   get_evade,   get_evade_incr_per_level,
+							 m_evade_level,   m_evade);
+
 						if (soldier_worker_bob_packet_version <= 3) {
 							fr.Unsigned8 (); // old soldier->m_marked
 							oldsoldier_fix = true;
