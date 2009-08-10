@@ -399,10 +399,21 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 							soldier->m_hp_max =
 								broken_hp_compensation + fr.Unsigned32();
 						}
-						if (soldier->m_hp_max < min_hp)
-							throw wexception
-								("hp_max = %u but must be at least %u",
-								 soldier->m_hp_max, min_hp);
+						if (soldier->m_hp_max < min_hp) {
+							//  The soldier's type's definition may have changed, so
+							//  that max_hp must be larger. Adjust it and scale up the
+							//  current amount of hitpoints proportionally.
+							uint32_t const new_hp_current =
+								soldier->m_hp_current * min_hp / soldier->m_hp_max;
+							log
+								("WARNING: hp_max = %u but must be at least %u, "
+								 "changing the value and increasing current hp from "
+								 "%u to %u\n",
+								 soldier->m_hp_max, min_hp,
+								 soldier->m_hp_current, new_hp_current);
+							soldier->m_hp_current = new_hp_current;
+							soldier->m_hp_max = min_hp;
+						}
 						soldier->m_min_attack    = fr.Unsigned32();
 						soldier->m_max_attack    = fr.Unsigned32();
 						if (soldier->m_max_attack < soldier->m_min_attack)
