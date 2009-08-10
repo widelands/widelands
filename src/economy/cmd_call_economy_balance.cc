@@ -66,9 +66,10 @@ void Cmd_Call_Economy_Balance::Read
 			GameLogicCommand::Read(fr, egbase, mol);
 			uint8_t const player_number = fr.Unsigned8();
 			if (Player * const player = egbase.get_player(player_number)) {
+				if (not fr.Unsigned8())
+					throw wexception("0 is not allowed here");
 				Economy * const economy =
-					fr.Unsigned8 () ?
-					player->get_economy_by_number(fr.Unsigned16()) : 0;
+					player->get_economy_by_number(fr.Unsigned16());
 				m_flag = &economy->get_arbitrary_flag();
 			} else
 				throw wexception("invalid player number %u", player_number);
