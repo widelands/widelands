@@ -64,11 +64,14 @@ void Cmd_Call_Economy_Balance::Read
 			m_timerid = fr.Unsigned32();
 		} else if (packet_version == 1 || packet_version == 2) {
 			GameLogicCommand::Read(fr, egbase, mol);
-			Player * const player = egbase.get_player(fr.Unsigned8());
-			Economy * const economy =
-				fr.Unsigned8 () ?
-				player->get_economy_by_number(fr.Unsigned16()) : 0;
-			m_flag = &economy->get_arbitrary_flag();
+			uint8_t const player_number = fr.Unsigned8();
+			if (Player * const player = egbase.get_player(player_number)) {
+				Economy * const economy =
+					fr.Unsigned8 () ?
+					player->get_economy_by_number(fr.Unsigned16()) : 0;
+				m_flag = &economy->get_arbitrary_flag();
+			} else
+				throw wexception("invalid player number %u", player_number);
 			if (packet_version >= 2)
 				m_timerid = fr.Unsigned32();
 			else
