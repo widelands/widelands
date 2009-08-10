@@ -386,6 +386,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 					{
 						uint32_t const min_hp = soldier->descr().get_min_hp();
 						assert(min_hp);
+						uint32_t const max_hp = soldier->descr().get_max_hp();
 						{
 							//  Soldiers created by old versions of Widelands have
 							//  wrong values for m_hp_max and m_hp_current; they were
@@ -413,6 +414,20 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 								 soldier->m_hp_current, new_hp_current);
 							soldier->m_hp_current = new_hp_current;
 							soldier->m_hp_max = min_hp;
+						} else if (max_hp < soldier->m_hp_max) {
+							//  The soldier's type's definition may have changed, so
+							//  that max_hp must be smaller. Adjust it and scale down
+							//  the current amount of hitpoints proportionally.
+							uint32_t const new_hp_current =
+								soldier->m_hp_current * max_hp / soldier->m_hp_max;
+							log
+								("WARNING: hp_max = %u but can be at most %u, "
+								 "changing the value and decreasing current hp from "
+								 "%u to %u\n",
+								 soldier->m_hp_max, max_hp,
+								 soldier->m_hp_current, new_hp_current);
+							soldier->m_hp_current = new_hp_current;
+							soldier->m_hp_max = max_hp;
 						}
 						soldier->m_min_attack    = fr.Unsigned32();
 						soldier->m_max_attack    = fr.Unsigned32();
