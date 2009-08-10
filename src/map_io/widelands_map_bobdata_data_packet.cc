@@ -400,6 +400,8 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 							soldier->m_hp_max =
 								broken_hp_compensation + fr.Unsigned32();
 						}
+						if (not soldier->m_hp_current)
+							throw wexception("no hitpoints (should be dead)");
 						if (soldier->m_hp_max < soldier->m_hp_current)
 							throw wexception
 								("hp_max (%u) < hp_current (%u)",
