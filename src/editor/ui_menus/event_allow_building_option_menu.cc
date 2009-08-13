@@ -64,7 +64,7 @@ inline static void update_label_building
 Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu
 	(Editor_Interactive & parent, Widelands::Event_Allow_Building & event)
 	:
-	UI::Window(&parent, 0, 0, 200, 280, _("Allow Building Event Options")),
+	UI::Window(&parent, 0, 0, 320, 280, _("Allow Building Event Options")),
 	m_event   (event),
 	m_player  (m_event.m_player),
 	m_building(m_event.m_building),
@@ -118,15 +118,15 @@ Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu
 	m_label_allow
 		(this,
 		 spacing,
-		 m_increment_building.get_y() + m_increment_building.get_h() + spacing,
+		 m_label_building.get_y() + m_label_building.get_h() + spacing,
 		 get_inner_w() - 3 * spacing - 20, 20,
 		 _("Allow Building: "), UI::Align_CenterLeft),
 	m_allow(this, Point(get_inner_w() - spacing - 20, m_label_allow.get_y())),
 	m_button_ok
 		(this,
-		 (get_inner_w() >> 1) - 60 - spacing,
+		 (get_inner_w() >> 1) - 80 - spacing,
 		 m_label_allow.get_y() + m_label_allow.get_h() + spacing,
-		 3 * button_width, button_height,
+		 4 * button_width, button_height,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Event_Allow_Building_Option_Menu::clicked_ok, *this,
 		 _("Ok")),
@@ -134,7 +134,7 @@ Event_Allow_Building_Option_Menu::Event_Allow_Building_Option_Menu
 		(this,
 		 m_button_ok.get_x() + m_button_ok.get_w() + spacing,
 		 m_button_ok.get_y(),
-		 3 * button_width, button_height,
+		 4 * button_width, button_height,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Event_Allow_Building_Option_Menu::end_modal, *this, 0,
 		 _("Cancel"))
