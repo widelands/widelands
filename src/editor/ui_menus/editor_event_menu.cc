@@ -254,6 +254,10 @@ void Editor_Event_Menu::update() {
 		m_btn_del_event ->set_enabled(false);
 		m_btn_edit_event->set_enabled(false);
 	}
+	if (not m_eventchain_list->has_selection()) {
+		m_btn_del_eventchain ->set_enabled(false);
+		m_btn_edit_eventchain->set_enabled(false);
+	}
 }
 
 
