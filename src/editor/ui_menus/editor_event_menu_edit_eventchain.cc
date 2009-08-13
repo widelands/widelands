@@ -50,7 +50,7 @@ m_event_chain(chain)
 {
 	int32_t const spacing  =   5;
 	int32_t const ls_width = 200;
-	Point         pos        (5, 25);
+	Point         pos        (5, 5);
 
 	new UI::Textarea
 		(this, pos.x, pos.y, 60, 20, _("Name: "), UI::Align_CenterLeft);

@@ -49,7 +49,7 @@ Editor_Event_Menu_Edit_TriggerConditional
 	m_event_chain(chain)
 {
 	int32_t const offsx    =   5;
-	int32_t const offsy    =  25;
+	int32_t const offsy    =   5;
 	int32_t const spacing  =   5;
 	int32_t       posx     = offsx;
 	int32_t       posy     = offsy;

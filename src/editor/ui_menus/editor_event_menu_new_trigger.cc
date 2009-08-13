@@ -45,7 +45,7 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 {
 
 	int32_t const offsx   =  5;
-	int32_t const offsy   = 25;
+	int32_t const offsy   =  5;
 	int32_t const spacing =  5;
 	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;

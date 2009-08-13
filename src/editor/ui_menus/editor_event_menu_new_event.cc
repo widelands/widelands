@@ -44,7 +44,7 @@ Editor_Event_Menu_New_Event::Editor_Event_Menu_New_Event
 : UI::Window(&parent, 0, 0, 400, 240, _("New Event"))
 {
 	int32_t const offsx   =  5;
-	int32_t const offsy   = 25;
+	int32_t const offsy   =  5;
 	int32_t const spacing =  5;
 	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
