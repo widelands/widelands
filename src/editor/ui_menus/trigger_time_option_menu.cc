@@ -45,11 +45,11 @@ inline Editor_Interactive & Trigger_Time_Option_Menu::eia() {
 Trigger_Time_Option_Menu::Trigger_Time_Option_Menu
 	(Editor_Interactive & parent, Widelands::Trigger_Time & trigger)
 :
-UI::Window(&parent, 0, 0, 164, 180, _("Trigger Option Menu")),
+UI::Window(&parent, 0, 0, 200, 125, _("Trigger Option Menu")),
 m_trigger (trigger)
 {
-	int32_t const offsx   =  5;
-	int32_t const offsy   = 25;
+	int32_t const offsx   = 20;
+	int32_t const offsy   =  5;
 	int32_t const spacing =  5;
 	int32_t const width   = 20;
 	int32_t const height  = 20;
@@ -216,11 +216,11 @@ m_trigger (trigger)
 
 	posy += 2 * spacing;
 
-	posx = get_inner_w() / 2 - 60 - spacing;
+	posx = get_inner_w() / 2 - 80 - spacing;
 
 	new UI::Callback_Button<Trigger_Time_Option_Menu>
 		(this,
-		 posx, posy, 60, 20,
+		 posx, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Trigger_Time_Option_Menu::clicked_ok, *this,
 		 _("Ok"));
@@ -229,7 +229,7 @@ m_trigger (trigger)
 
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
 		(this,
-		 posx, posy, 60, 20,
+		 posx, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Trigger_Time_Option_Menu::end_modal, *this, 0,
 		 _("Cancel"));

@@ -114,10 +114,10 @@ m_location(event.location())
 		 &Event_Move_View_Option_Menu::clicked, *this, 8);
 
 	new UI::Textarea
-		(this, spacing + 20, posy + 20, 20, 20, "X: ", UI::Align_CenterLeft);
+		(this, spacing + 30, posy + 20, 20, 20, "X: ", UI::Align_CenterLeft);
 	m_x_ta =
 		new UI::Textarea
-			(this, spacing + 40, posy + 20, 20, 20, "X: ", UI::Align_CenterLeft);
+			(this, spacing + 50, posy + 20, 20, 20, "X: ", UI::Align_CenterLeft);
 
 	//  Y
 	int32_t const oldspacing = spacing;

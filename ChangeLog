@@ -1,4 +1,7 @@
 ### Build 14
+- Some "plastic surgeries" on editor menus.
+- Fix bug #2834137 "buttons in editor event menu are wrongly enabled (crashes)"
+  (svn:r4480)
 - Fix bug that a corrupt savegame could cause gametime to go backwards (a
   GameLogicCommand could have a duetime in the past without being detected as
   corrupt during load). (svn:r4460)
