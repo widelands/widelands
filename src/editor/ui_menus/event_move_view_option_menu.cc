@@ -44,12 +44,12 @@ inline Editor_Interactive & Event_Move_View_Option_Menu::eia() {
 Event_Move_View_Option_Menu::Event_Move_View_Option_Menu
 	(Editor_Interactive & parent, Widelands::Event_Move_View & event)
 :
-UI::Window(&parent, 0, 0, 180, 200, _("Move View Event Options")),
+UI::Window(&parent, 0, 0, 200, 200, _("Move View Event Options")),
 m_event   (event),
 m_location(event.location())
 {
 	int32_t const offsx   =  5;
-	int32_t const offsy   = 25;
+	int32_t const offsy   =  5;
 	int32_t       spacing =  5;
 	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
@@ -73,42 +73,42 @@ m_location(event.location())
 
 	new UI::Callback_IDButton<Event_Move_View_Option_Menu, int32_t>
 		(this,
-		 spacing + 20, posy, 20, 20,
+		 spacing + 30, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Event_Move_View_Option_Menu::clicked, *this, 3);
 
 	new UI::Callback_IDButton<Event_Move_View_Option_Menu, int32_t>
 		(this,
-		 spacing + 20, posy + 40, 20, 20,
+		 spacing + 30, posy + 40, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Event_Move_View_Option_Menu::clicked, *this, 4);
 
 	new UI::Callback_IDButton<Event_Move_View_Option_Menu, int32_t>
 		(this,
-		 spacing + 40, posy, 20, 20,
+		 spacing + 50, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Event_Move_View_Option_Menu::clicked, *this, 5);
 
 	new UI::Callback_IDButton<Event_Move_View_Option_Menu, int32_t>
 		(this,
-		 spacing + 40, posy + 40, 20, 20,
+		 spacing + 50, posy + 40, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Event_Move_View_Option_Menu::clicked, *this, 6);
 
 	new UI::Callback_IDButton<Event_Move_View_Option_Menu, int32_t>
 		(this,
-		 spacing + 60, posy, 20, 20,
+		 spacing + 70, posy, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Event_Move_View_Option_Menu::clicked, *this, 7);
 
 	new UI::Callback_IDButton<Event_Move_View_Option_Menu, int32_t>
 		(this,
-		 spacing + 60, posy + 40, 20, 20,
+		 spacing + 70, posy + 40, 20, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Event_Move_View_Option_Menu::clicked, *this, 8);
@@ -172,11 +172,11 @@ m_location(event.location())
 			(this, spacing + 20, posy + 20, 20, 20, "Y: ", UI::Align_CenterLeft);
 	spacing = oldspacing;
 
-	posx = get_inner_w() / 2 - 60 - spacing;
+	posx = get_inner_w() / 2 - 80 - spacing;
 	posy = get_inner_h()     - 20 - spacing;
 	new UI::Callback_Button<Event_Move_View_Option_Menu>
 		(this,
-		 posx, posy, 60, 20,
+		 posx, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Event_Move_View_Option_Menu::clicked_ok, *this,
 		 _("Ok"));
@@ -185,7 +185,7 @@ m_location(event.location())
 
 	new UI::Callback_IDButton<Event_Move_View_Option_Menu, int32_t>
 		(this,
-		 posx, posy, 60, 20,
+		 posx, posy, 80, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Event_Move_View_Option_Menu::end_modal, *this, 0,
 		 _("Cancel"));

@@ -51,7 +51,7 @@ m_event(event),
 m_player_area(event.m_player_area)
 {
 	int32_t const offsx   =  5;
-	int32_t const offsy   = 25;
+	int32_t const offsy   =  5;
 	int32_t       spacing =  5;
 	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
