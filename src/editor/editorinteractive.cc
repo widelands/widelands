@@ -599,9 +599,12 @@ void Editor_Interactive::run_editor(std::string const & filename)
 		{ //  Load all tribes into memory
 			std::vector<std::string> tribenames;
 			Widelands::Tribe_Descr::get_all_tribenames(tribenames);
-			container_iterate_const(std::vector<std::string>, tribenames, i)
+			container_iterate_const(std::vector<std::string>, tribenames, i) {
+				loader_ui.stepf(_("Loading tribe: %s"), i.current->c_str());
 				editor.manually_load_tribe(*i.current);
+			}
 		}
+		loader_ui.step(std::string());
 
 		eia.select_tool(eia.tools.increase_height, Editor_Tool::First);
 		editor.postload();
