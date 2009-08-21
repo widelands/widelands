@@ -29,7 +29,6 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
-#include "ui_basic/window.h"
 
 
 int32_t Widelands::Trigger_Time::option_menu(Editor_Interactive & eia) {
@@ -44,9 +43,9 @@ inline Editor_Interactive & Trigger_Time_Option_Menu::eia() {
 
 Trigger_Time_Option_Menu::Trigger_Time_Option_Menu
 	(Editor_Interactive & parent, Widelands::Trigger_Time & trigger)
-:
-UI::Window(&parent, 0, 0, 200, 125, _("Trigger Option Menu")),
-m_trigger (trigger)
+	:
+	UI::Window(&parent, 0, 0, 200, 150, _("Trigger Option Menu")),
+	m_trigger (trigger)
 {
 	int32_t const offsx   = 20;
 	int32_t const offsy   =  5;
@@ -56,16 +55,6 @@ m_trigger (trigger)
 	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
 
-	Widelands::Time time = trigger.time();
-	m_values[0] = time / 3600 /   10; //  hours
-	m_values[1] = time / 3600 %   10;
-	time       -= time / 3600 * 3600;
-	m_values[2] = time /   60 /   10; //  minutes
-	m_values[3] = time /   60 %   10;
-	time       -= time /   60 *   60;
-	m_values[4] = time        /   10; //  seconds
-	m_values[5] = time        %   10;
-
 	new UI::Textarea
 		(this, spacing, posy, 50, 20, _("Name:"), UI::Align_CenterLeft);
 	m_name = new UI::EditBox
@@ -74,6 +63,36 @@ m_trigger (trigger)
 	m_name->setText(trigger.name());
 
 	posy += 20 + spacing;
+
+	m_absolute_time =
+		new UI::Checkbox
+			(this, Point(spacing, posy),
+			 g_gr->get_no_picture(),
+			 _
+			 	("Trigger at an absolute time from the beginning of the game "
+			 	 "(otherwise, only trigger if activated by an event set timer)."));
+	m_absolute_time->clickedto.set
+		(this, &Trigger_Time_Option_Menu::absolute_time_clickedto);
+	new UI::Textarea(this, 30, posy, _("Trigger at absolute time"));
+
+	posy += 25;
+
+	Widelands::Time time = trigger.time();
+	if (time == Widelands::Never()) {
+		time = 0;
+		m_absolute_time->set_state(false);
+	} else
+		m_absolute_time->set_state(true);
+	m_values[0] = time / 3600 /   10; //  hours
+	m_values[1] = time / 3600 %   10;
+	time       -= time / 3600 * 3600;
+	assert(0 <= time);
+	m_values[2] = time /   60 /   10; //  minutes
+	m_values[3] = time /   60 %   10;
+	time       -= time /   60 *   60;
+	assert(0 <= time);
+	m_values[4] = time        /   10; //  seconds
+	m_values[5] = time        %   10;
 
 	//  hours, first cipher
 
@@ -117,10 +136,11 @@ m_trigger (trigger)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, *this, 5);
 
-	posx += width + spacing;
-
-	UI::Textarea * tt = new UI::Textarea(this, posx, posy + 23, ":");
-	posx += spacing + tt->get_w();
+	posx += width + spacing + spacing;
+	posx +=
+		(new UI::Textarea
+		 	(this, posx, posy + 20, 0, height, ":", UI::Align_Center))
+		->get_w();
 
 	//  minutes, first cipher
 
@@ -164,11 +184,11 @@ m_trigger (trigger)
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Trigger_Time_Option_Menu::clicked, *this, 9);
 
-	posx += width + spacing;
-
-	tt = new UI::Textarea(this, posx, posy + 23, ":");
-
-	posx += spacing + tt->get_w();
+	posx += width + spacing + spacing;
+	posx +=
+		(new UI::Textarea
+		 	(this, posx, posy + 20, 0, height, ":", UI::Align_Center))
+		->get_w();
 	// seconds, first cipher
 
 	new UI::Callback_IDButton<Trigger_Time_Option_Menu, int32_t>
@@ -239,6 +259,14 @@ m_trigger (trigger)
 }
 
 
+void Trigger_Time_Option_Menu::absolute_time_clickedto(bool const on)
+{
+	if (not on)
+		for (uint8_t i = 6; i;)
+			m_values[--i] = 0;
+	update();
+}
+
 /**
  * Handle mousepress/-release
  *
@@ -247,8 +275,8 @@ m_trigger (trigger)
  * we simulate a cancel click
  * We are not draggable.
  */
-bool Trigger_Time_Option_Menu::
-	handle_mousepress(const Uint8 btn, int32_t, int32_t)
+bool Trigger_Time_Option_Menu::handle_mousepress
+	(Uint8 const btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_RIGHT) {
 		end_modal(0);
@@ -256,8 +284,7 @@ bool Trigger_Time_Option_Menu::
 	}
 	return false;
 }
-bool Trigger_Time_Option_Menu::
-	handle_mouserelease(const Uint8, int32_t, int32_t)
+bool Trigger_Time_Option_Menu::handle_mouserelease(Uint8, int32_t, int32_t)
 {
 	return false;
 }
@@ -265,11 +292,14 @@ bool Trigger_Time_Option_Menu::
 
 void Trigger_Time_Option_Menu::clicked_ok() {
 	m_trigger.set_time
-		((m_values[0] * 10 + m_values[1]) * 3600
+		(m_absolute_time->get_state() ?
+		 (m_values[0] * 10 + m_values[1]) * 3600
 		 +
 		 (m_values[2] * 10 + m_values[3]) * 60
 		 +
-		 (m_values[4] * 10 + m_values[5]));
+		 (m_values[4] * 10 + m_values[5])
+		 :
+		 Widelands::Never());
 	std::string const & name = m_name->text();
 	if (name.size()) {
 		if
@@ -298,21 +328,18 @@ void Trigger_Time_Option_Menu::clicked_ok() {
 
 void Trigger_Time_Option_Menu::clicked(int32_t const i) {
 	int32_t id = (i - 2) / 2;
+	assert(0 <= m_values[id]);
+	assert     (m_values[id] <= 9);
 	m_values[id] = i % 2 ?  m_values[id] - 1 :  m_values[id] + 1;
 	if (m_values[id] < 0)
 		m_values[id] = 0;
-	if
-		(!m_values[0] &&
-		 !m_values[1] &&
-		 !m_values[2] &&
-		 !m_values[3] &&
-		 !m_values[4] &&
-		 !m_values[5])
-		m_values[5]  = 1;
 	if (m_values[id] > 9)
 		m_values[id] = 9;
 	if ((id == 2 || id == 4) && m_values[id] >= 6)
 		m_values[id] = 5;
+	assert(0 <= m_values[id]);
+	assert     (m_values[id] <= 9);
+	m_absolute_time->set_state(true);
 	update();
 }
 
@@ -322,6 +349,8 @@ void Trigger_Time_Option_Menu::clicked(int32_t const i) {
 void Trigger_Time_Option_Menu::update() {
 	for (size_t i = 0; i < 6; ++i) {
 		char str[2];
+		assert(0 <= m_values[i]);
+		assert     (m_values[i] <= 9);
 		str[0] = '0' + m_values[i];
 		str[1] = '\0';
 		m_textareas[i]->set_text(str);

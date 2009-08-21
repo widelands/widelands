@@ -26,8 +26,9 @@ struct Editor_Interactive;
 namespace Widelands {struct Trigger_Time;}
 namespace UI {
 template <typename T> struct Callback_Button;
-struct Textarea;
+struct Checkbox;
 struct EditBox;
+struct Textarea;
 };
 
 /**
@@ -44,10 +45,12 @@ private:
 	Editor_Interactive & eia();
 	void clicked_ok();
 	void clicked(int32_t);
+	void absolute_time_clickedto(bool);
 	void update();
 
 	Widelands::Trigger_Time & m_trigger;
 	UI::EditBox             * m_name;
+	UI::Checkbox            * m_absolute_time;
 	UI::Textarea            * m_textareas[6];
 	int32_t                   m_values[6];
 };
