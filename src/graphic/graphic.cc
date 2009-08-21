@@ -821,7 +821,7 @@ void Graphic::load_animations(UI::ProgressWindow & loader_ui) {
 		++id;
 		m_animations.push_back(new AnimationGfx(g_anim.get_animation(id)));
 	}
-	loader_ui.stepf(std::string(), 100);
+	loader_ui.step(std::string());
 }
 
 /**
