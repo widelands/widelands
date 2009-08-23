@@ -117,7 +117,7 @@ The icon with the given index has been clicked. Figure out which building it
 belongs to and trigger signal buildclicked.
 ===============
 */
-void BuildGrid::clickslot(int32_t idx)
+void BuildGrid::clickslot(int32_t const idx)
 {
 	buildclicked.call
 		(static_cast<int32_t>(reinterpret_cast<intptr_t>(get_data(idx))));
@@ -423,7 +423,7 @@ void FieldActionWindow::add_buttons_auto()
 				add_buttons_build(buildcaps);
 
 			// Add build actions
-			if (buildcaps & Widelands::BUILDCAPS_FLAG)
+			if ((m_fastclick = buildcaps & Widelands::BUILDCAPS_FLAG))
 				add_button
 					(buildbox,
 					 pic_buildflag,
