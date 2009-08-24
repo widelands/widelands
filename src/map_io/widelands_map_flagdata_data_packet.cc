@@ -37,7 +37,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 void Map_Flagdata_Data_Packet::Read
 	(FileSystem            &       fs,
@@ -54,12 +54,13 @@ throw (_wexception)
 
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 			Extent const extent = egbase.map().extent();
 			for (;;) {
+				if (2 <= packet_version and fr.EndOfFile())
+					break;
 				Serial const serial = fr.Unsigned32();
-				//  FIXME Just test EndOfFile instead in the next packet version.
-				if (serial == 0xffffffff) {
+				if (packet_version < 2 and serial == 0xffffffff) {
 					if (not fr.EndOfFile())
 						throw wexception
 							("expected end of file after serial 0xffffffff");
@@ -284,8 +285,6 @@ void Map_Flagdata_Data_Packet::Write
 			os->mark_object_as_saved(*flag);
 
 		}
-
-	fw.Unsigned32(0xffffffff); // End of flags
 
 	fw.Write(fs, "binary/flag_data");
 }

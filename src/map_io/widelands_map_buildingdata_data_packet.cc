@@ -47,7 +47,7 @@
 namespace Widelands {
 
 // Versions
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 
 // Subversions
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 1
@@ -72,11 +72,12 @@ throw (_wexception)
 
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 			for (;;) {
+				if (2 <= packet_version and fr.EndOfFile())
+					break;
 				Serial const serial = fr.Unsigned32();
-				//  FIXME Just test EndOfFile instead in the next packet version.
-				if (serial == 0xffffffff) {
+				if (packet_version < 2 and serial == 0xffffffff) {
 					if (not fr.EndOfFile())
 						throw wexception
 							("expected end of file after serial 0xffffffff");
@@ -453,7 +454,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_PACKET_VERSION) {
+		if (packet_version == CURRENT_PRODUCTIONSITE_PACKET_VERSION) {
 			//  FIXME The reason for this code is probably that the constructor of
 			//  FIXME ProductionSite requests workers. That makes sense when a
 			//  FIXME ProductionSite is created in the game, but definitely not
@@ -821,9 +822,6 @@ throw (_wexception)
 
 			os->mark_object_as_saved(*building);
 		}
-
-	//  FIXME Remove this in the next packet version. End of file is enough.
-	fw.Unsigned32(0xffffffff);
 
 	fw.Write(fs, "binary/building_data");
 }
