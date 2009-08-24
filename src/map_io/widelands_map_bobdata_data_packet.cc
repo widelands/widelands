@@ -43,7 +43,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
+#define CURRENT_PACKET_VERSION 3
 
 // Bob subtype versions
 #define CRITTER_BOB_PACKET_VERSION 1
@@ -69,14 +69,15 @@ void Map_Bobdata_Data_Packet::Read
 
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_PACKET_VERSION || packet_version == 1) {
+		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
 			Map   const &       map        = egbase.map();
 			Extent        const extent     = map.extent();
 			Player_Number const nr_players = map.get_nrplayers();
 			for (;;) {
+				if (3 <= packet_version and fr.EndOfFile())
+					break;
 				Serial const serial = fr.Unsigned32();
-				//  FIXME Just test EndOfFile instead in the next packet version.
-				if (serial == 0xffffffff) {
+				if (packet_version < 3 and serial == 0xffffffff) {
 					if (not fr.EndOfFile())
 						throw wexception
 							("expected end of file after serial 0xffffffff");
@@ -113,13 +114,18 @@ void Map_Bobdata_Data_Packet::Read
 
 					bob.m_actid = fr.Unsigned32();
 
-					bob.m_anim =
-						fr.Unsigned8() ? bob_descr.get_animation(fr.CString()) : 0;
+					if (packet_version < 3) {
+						bob.m_anim =
+							fr.Unsigned8() ? bob_descr.get_animation(fr.CString()) :
+							0;
+					} else {
+						char const * const anim_name = fr.CString();
+						bob.m_anim =
+							*anim_name ? bob_descr.get_animation(anim_name) : 0;
+					}
 					bob.m_animstart = fr.Signed32();
 
-					{
-						//  FIXME Use StreamRead::Direction8 in the next packet
-						//  FIXME version.
+					if (packet_version < 3) {
 						Map_Object::WalkingDir const walking_dir =
 							static_cast<Map_Object::WalkingDir>(fr.Signed32());
 						if (6 < walking_dir)
@@ -129,7 +135,18 @@ void Map_Bobdata_Data_Packet::Read
 								 "(southwest), 5 (west), 6 (northwest)}",
 								 walking_dir);
 						bob.m_walking = walking_dir;
-					}
+					} else
+						try {
+							bob.m_walking =
+								static_cast<Map_Object::WalkingDir>
+									(fr.Direction8_allow_null());
+						} catch (StreamRead::direction_invalid const & e) {
+							throw wexception
+								("walking dir is %u but must be one of {0 (idle), 1 "
+								 "(northeast), 2 (east), 3 (southeast), 4 "
+								 "(southwest), 5 (west), 6 (northwest)}",
+								 e.direction);
+						}
 					bob.m_walkstart = fr.Signed32();
 					bob.m_walkend   = fr.Signed32();
 					if (bob.m_walkend < bob.m_walkstart)
@@ -208,7 +225,7 @@ void Map_Bobdata_Data_Packet::Read
 								else if (*taskname == '\0')
 									continue; // Skip task
 								else
-									throw wexception("unknown task %s", taskname);
+									throw wexception("unknown task \"%s\"", taskname);
 
 								state.task = task;
 							}
@@ -233,8 +250,15 @@ void Map_Bobdata_Data_Packet::Read
 							} else
 								state.objvar1 = 0;
 							state.svar1 = fr.CString();
-							state.coords.x = fr.Signed32(); //\todo fix format to use
-							state.coords.y = fr.Signed32(); //\todo FileRead::Coords32
+							if (packet_version < 3) {
+								int32_t const x = fr.Signed32();
+								int32_t const y = fr.Signed32();
+								state.coords = Coords(x, y);
+								if (state.coords and (extent.w <= x or extent.h <= y))
+									throw wexception
+										("invalid coordinates (%i, %i)", x, y);
+							} else
+								state.coords = fr.Coords32_allow_null(extent);
 
 							if (fr.Unsigned8()) {
 								const uint32_t ans[6] = {
@@ -713,20 +737,12 @@ throw (_wexception)
 				// integrity checks
 
 				// Animation
-				// \todo Just write the string without the 1 first:
-				// \todo fw.CString(bob->m_anim ?
-				//    bob->descr().get_animation_name(bob->m_anim).c_str() : "");
-				// \todo When reading, the empty string should mean no animation.
-				if (bob.m_anim) {
-					fw.Unsigned8(1);
-					fw.CString(descr.get_animation_name(bob.m_anim).c_str());
-				} else
-					fw.Unsigned8(0);
+				fw.CString
+					(bob.m_anim ?
+					 bob.descr().get_animation_name(bob.m_anim).c_str() : "");
 				fw.Signed32(bob.m_animstart);
 
-				// FIXME Direction should only be 8 bits and of course not signed
-				// FIXME in the next packet version.
-				fw.Signed32(bob.m_walking);
+				fw.Direction8_allow_null(bob.m_walking);
 
 				fw.Signed32(bob.m_walkstart);
 
@@ -752,8 +768,7 @@ throw (_wexception)
 
 					fw.CString(s.svar1.c_str());
 
-					fw.Signed32(s.coords.x); //  FIXME fix format to use
-					fw.Signed32(s.coords.y); //  FIXME FileWrite::Coords32
+					fw.Coords32(s.coords);
 
 					if (DirAnimations const * const diranims = s.diranims) {
 						fw.Unsigned8(1);
@@ -821,9 +836,6 @@ throw (_wexception)
 
 		}
 	}
-
-	//  FIXME Remove this in the next packet version. End of file is enough.
-	fw.Unsigned32(0xffffffff);
 
 	fw.Write(fs, "binary/bob_data");
 }

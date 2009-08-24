@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,8 +45,8 @@ struct StreamRead : public ::StreamRead {
 			()
 			:
 			_data_error
-			("direction is 0 but must be one of {1 (northeast), 2 (east), 3 "
-			 "(southeast), 4 (southwest), 5 (west), 6 (northwest)}")
+				("direction is 0 but must be one of {1 (northeast), 2 (east), 3 "
+				 "(southeast), 4 (southwest), 5 (west), 6 (northwest)}")
 		{}
 	};
 	struct direction_invalid : public _data_error {

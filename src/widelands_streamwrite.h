@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,7 +38,8 @@ struct Tribe_Descr;
 /// ::StreamWrite can be used as a Widelands::StreamWrite to read
 /// Widelands-specific types.
 struct StreamWrite : public ::StreamWrite {
-
+	void Direction8           (Direction);
+	void Direction8_allow_null(Direction);
 	void Map_Index32(Map_Index const i) {Unsigned32(i);}
 	void Coords32      (Coords);
 	void Area48        (Area<Coords, uint16_t>);
@@ -48,6 +49,17 @@ struct StreamWrite : public ::StreamWrite {
 	void Immovable_Type(Immovable_Descr const &);
 	void Building_Type (Building_Descr  const &);
 };
+
+inline void StreamWrite::Direction8           (Direction const d) {
+	assert(0 < d);
+	assert    (d <= 6);
+	Data(&d, 1);
+}
+
+inline void StreamWrite::Direction8_allow_null(Direction const d) {
+	assert    (d <= 6);
+	Data(&d, 1);
+}
 
 inline void StreamWrite::Coords32(const Coords c) {
 	assert(static_cast<uint16_t>(c.x) < 0x8000 or c.x == -1);
