@@ -1,7 +1,70 @@
 ### Build 14
+- Fix usability problem that accidentally double-clicking on a road could
+  remove it. (Previously, when clicking on a node that had a road, but a flag
+  could not be placed there, the mouse cursor would be placed over the button
+  to remove the road, in the dialog that was opened. Now place the mouse cursor
+  over the tab icon instead in that case.) (svn:r4490)
+- When entering automatic roadbuilding mode after creation of a non-connected
+  flag, move the mouse cursor to the flag, to offer optimal conditions to
+  either start building a road, in any direction from that flag, or directly
+  click on the flag to stop building the road. (svn:r4489)
+- Give more progress information during editor startup by showing a message for
+  each tribe that is being loaded. (svn:r4488)
+- When a progress indicator has been shown during animation loading, remove the
+  message "Loading animations: 99%", so that the user is not mislead to believe
+  that animation loading is still going on, when in fact something else is
+  taking time. (svn:r4486)
 - Some "plastic surgeries" on editor menus.
-- Fix bug #2834137 "buttons in editor event menu are wrongly enabled (crashes)"
-  (svn:r4480)
+  (svn:r4481, svn:r4482, svn:r4483, svn:r4484, svn:r4485)
+- Fix bug that in the editor's event menu, the buttons to change and delete an
+  event chain where enabled even when no event chain was selected in the list.
+  This caused a crash when any of the 2 buttons was clicked. (svn:r4480)
+- Make sure that every soldier battle property that is loaded from a savegame
+  and is not compatible with the soldier's type's definition is adjusted to the
+  nearest valid value. This makes changes to a soldier type's battle properties
+  affect preexisting savegames when they are loaded with the changed game data.
+  (svn:r4479)
+- Fix bug that a soldier without hitpoints could be loaded from a savegame.
+  (svn:r4478)
+- Fix memory access error caused by a value read from a savegame being used as
+  an array index without being checked. (svn:r4477)
+- Fix null pointer dereference that could be caused by an invalid savegame.
+  (svn:r4475)
+- Fix bug that if a savegame contained a soldier with
+  max hitpoints < current hitpoints, it was not detected as an error.
+  (svn:r4474)
+- Fix bug that when loading (from a savegame) a bob (such as a worker or wild
+  animal) that was walking along an edge between 2 neighbouring nodes, it was
+  not checked that the start time was before the end time. (Both times are
+  stored in savegames.) (svn:r4470)
+- Fix bug that when a military-/trainingsite was loaded from a savegame, it was
+  not checked whether the configured capacity was within the range of allowed
+  values, as defined in the site's type. Do not reject the savegame if the
+  value is outside the range, since the definition may have changed and the
+  user wants to load the game anyway. Just warn and adjust the variable to the
+  nearest valid value. (svn:r4468, svn:r4469)
+- Fix bug that the parsing of a worker type would allow
+  max_experience < min_experience. (svn:r4467)
+- Fix wrong calculation of the amount of experience that a worker needs to
+  change its type. The value is chosen randomly in an interval, from
+  min_experience to max_experience, specified in the soldier's type's
+  definition. But the calculation had an off-by-one error that caused the value
+  to never become max_experience, and worse, crash with a division by 0 when
+  min_experience = max_experience. (svn:r4466)
+- Fix bug that the game loading code would accept a soldier with
+  max_attack < min_attack. (svn:r4465)
+- Fix bug that the parsing of a soldier type would allow
+  max_attack < min_attack. (svn:r4464)
+- Fix wrong calculation of a soldier's attack value during battle. The value is
+  chosen randomly in an interval, from min_attack to max_attack. But the
+  calculation had an off-by-two error that caused the value to never become
+  max_attack or max_attack - 1, and worse, crash with a division by 0 when
+  min_attack + 1 = max_attack. (svn:r4463)
+- Fix wrong calculation of a soldier's maximum hitpoints during its creation.
+  The value is chosen randomly in an interval, from min_hp to max_hp, specified
+  in the soldier's type's definition. But the calculation had an off-by-one
+  error that caused the value to never become max_hp, and worse, crash with a
+  division by 0 when min_hp = max_hp. (svn:r4462)
 - Fix bug that a corrupt savegame could cause gametime to go backwards (a
   GameLogicCommand could have a duetime in the past without being detected as
   corrupt during load). (svn:r4460)
@@ -70,7 +133,7 @@
     * Added a time string in front of each message (svn:r4253)
 - Implemented metaserver lobby for internet game (many different svn rev.)
 - Implemented check of free diskspace to avoid segfaults (different svn rev.)
-- Added new ware icons. (svn:r4152, svn:r4250)
+- Added new ware icons. (svn:r4152, svn:r4250, svn:r4471)
 - Implemented versioning system to avoid that Widelands loads data of old
   Widelands versions. (svn:r4133)
 - Implemented basic "generate random map" feature. (svn:r4113)
@@ -269,7 +332,8 @@
   target quantities in the game. (svn:r3543)
 - Made Ctrl+S bring up the save game dialog in both gameplay and replay. Added
   save button in replay watcher. (svn:r3542)
-- Fixed Trigger_Time (and replaced Trigger_Null with it). (svn:r3541)
+- Fixed Trigger_Time (and replaced Trigger_Null with it). Introduced
+  Event_Set_Timer. (svn:r3541, svn:r4485)
 
 ### Build 13
 - Count casualties/kills, military/civilian buildings lost/defeated and present
