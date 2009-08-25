@@ -735,6 +735,7 @@ void ProductionProgram::ActMine::execute
 			return ps.program_end(game, Failed);
 
 		//  second pass through nodes
+		assert(totalchance);
 		pick = game.logic_rand() % totalchance;
 
 		{
