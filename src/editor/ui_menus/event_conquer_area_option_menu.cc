@@ -45,10 +45,10 @@ Editor_Interactive & Event_Conquer_Area_Option_Menu::eia() {
 
 Event_Conquer_Area_Option_Menu::Event_Conquer_Area_Option_Menu
 	(Editor_Interactive & parent, Widelands::Event_Conquer_Area & event)
-:
-UI::Window(&parent, 0, 0, 180, 280, _("Conquer Area Event Options")),
-m_event(event),
-m_player_area(event.m_player_area)
+	:
+	UI::Window(&parent, 0, 0, 180, 280, _("Conquer Area Event Options")),
+	m_event(event),
+	m_player_area(event.m_player_area)
 {
 	int32_t const offsx   =  5;
 	int32_t const offsy   =  5;
