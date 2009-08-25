@@ -1574,7 +1574,7 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
 		// as long as it is > 1 - BUT take care that there is a warehouse in the
 		// same economy where the thrown out soldiers can go to.
 		if (ms->economy().get_nr_warehouses() > 0) {
-			uint32_t j = ms->soldierCapacity();
+			uint32_t const j = ms->soldierCapacity();
 			if (j > 1)
 				game().send_player_change_soldier_capacity(*ms, -1);
 
@@ -1647,8 +1647,8 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
 	} else {
 		// If an enemy is in sight and the number of stationed soldier is not
 		// at maximum - set it to maximum.
-		uint32_t j = ms->maxSoldierCapacity();
-		uint32_t k = ms->soldierCapacity();
+		uint32_t const j = ms->maxSoldierCapacity();
+		uint32_t const k = ms->soldierCapacity();
 		if (j > k)
 			game().send_player_change_soldier_capacity(*ms, j - k);
 		changed = true;
