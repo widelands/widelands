@@ -433,8 +433,8 @@ void MilitarySite::dropSoldier(Soldier & soldier)
 		molog("MilitarySite::dropSoldier(%u): not present\n", soldier.serial());
 		return;
 	}
-	if (presentSoldiers().size() <= 1) {
-		molog("cannot drop last soldier\n");
+	if (presentSoldiers().size() <= minSoldierCapacity()) {
+		molog("cannot drop last soldier(s)\n");
 		return;
 	}
 
