@@ -249,6 +249,7 @@ bool Worker::run_breed(Game & game, State & state, Action const & action)
 	}
 
 	// Second pass through fields
+	assert(totalchance);
 	pick = game.logic_rand() % totalchance;
 
 	do {
@@ -299,6 +300,7 @@ bool Worker::run_breed(Game & game, State & state, Action const & action)
 bool Worker::run_setdescription
 	(Game & game, State & state, Action const & action)
 {
+	assert(action.sparamv.size());
 	uint32_t const idx = game.logic_rand() % action.sparamv.size();
 
 	std::vector<std::string> const list(split_string(action.sparamv[idx], ":"));
@@ -544,8 +546,7 @@ bool Worker::run_findspace(Game & game, State & state, Action const & action)
 	if (action.iparam3)
 		functor.add(FindNodeSpace(get_location(game)));
 
-	if (!map.find_reachable_fields(area, &list, cstep, functor))
-	{
+	if (!map.find_reachable_fields(area, &list, cstep, functor)) {
 		molog("  no space found\n");
 		send_signal(game, "fail");
 		pop_task(game);

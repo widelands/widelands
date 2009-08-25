@@ -834,6 +834,8 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 			static_cast<float>(game.get_gametime() - m_walkstart)
 			/
 			(m_walkend - m_walkstart);
+		assert(m_walkstart <= game.get_gametime());
+		assert(m_walkstart < m_walkend);
 
 		if (f < 0)
 			f = 0;
@@ -904,6 +906,7 @@ int32_t Bob::start_walk
 
 	// Move is go
 	int32_t const tdelta = map.calc_cost(m_position, dir);
+	assert(tdelta);
 
 	m_walking = dir;
 	m_walkstart = game.get_gametime();
