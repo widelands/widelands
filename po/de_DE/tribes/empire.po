@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4374\n"
+"Project-Id-Version: Widelands svn4498\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-07-07 19:22+0000\n"
+"POT-Creation-Date: 2009-09-03 12:40+0000\n"
 "PO-Revision-Date: 2009-07-07 21:22+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -762,7 +762,7 @@ msgstr "Der Jäger bringt gutes Fleisch zu den Siedlern."
 #: ../../../tribes/empire/deep_oremine/conf:22
 #: ../../../tribes/empire/quarry/conf:20
 #: ../../../tribes/empire/toolsmithy/conf:42
-#: ../../../tribes/empire/marblemine/conf:24
+#: ../../../tribes/empire/marblemine/conf:26
 #: ../../../tribes/empire/weaving-mill/conf:16
 #: ../../../tribes/empire/coalmine/conf:21
 #: ../../../tribes/empire/deep_coalmine/conf:22
@@ -844,11 +844,12 @@ msgid "The strongest armour existing for the Empire soldiers."
 msgstr "Der stärkste Harnisch, den es im Imperium gibt."
 
 #: ../../../tribes/empire/quarry/conf:16
-#: ../../../tribes/empire/marblemine/conf:23
+#: ../../../tribes/empire/marblemine/conf:24
 msgid "Mine stone"
 msgstr "Mint Steine"
 
 #: ../../../tribes/empire/quarry/conf:17
+#: ../../../tribes/empire/marblemine/conf:25
 msgid "Mine stone (only for compatibility with old savegames (build13))"
 msgstr "Mint Stein (nur für Abwärtskompatiblität mit Speicherständen von build13)."
 
@@ -858,6 +859,7 @@ msgid "Mine marble"
 msgstr "Mint Marmor"
 
 #: ../../../tribes/empire/quarry/conf:19
+#: ../../../tribes/empire/marblemine/conf:23
 msgid "Mine marble (only for compatibility with old savegames (build13))"
 msgstr "Mint Marmor (nur für Abwärtskompatiblität mit Speicherständen von build13)."
 

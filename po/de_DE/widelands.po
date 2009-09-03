@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4429\n"
+"Project-Id-Version: Widelands svn4498\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-07-13 16:48+0200\n"
-"PO-Revision-Date: 2009-07-13 16:47+0100\n"
+"POT-Creation-Date: 2009-09-03 14:40+0200\n"
+"PO-Revision-Date: 2009-09-03 14:39+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -905,26 +905,26 @@ msgstr "Setze Zielwert auf Standard zurück"
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte-Siedler-II-Karte. Kein Kommentar definiert!"
 
-#: ../../src/productionsite.cc:206
+#: ../../src/productionsite.cc:209
 msgid "(not occupied)"
 msgstr "(nicht besetzt)"
 
-#: ../../src/productionsite.cc:212
+#: ../../src/productionsite.cc:215
 #, c-format
 msgid "Waiting for one worker!"
 msgid_plural "Waiting for %u workers!"
 msgstr[0] "Warte auf einen Arbeiter!"
 msgstr[1] "Warte auf %u Arbeiter!"
 
-#: ../../src/productionsite.cc:222
+#: ../../src/productionsite.cc:225
 msgid "(stopped)"
 msgstr "(gestoppt)"
 
-#: ../../src/productionsite.cc:304
+#: ../../src/productionsite.cc:307
 msgid "UP"
 msgstr "+"
 
-#: ../../src/productionsite.cc:304
+#: ../../src/productionsite.cc:307
 msgid "DOWN"
 msgstr "-"
 
@@ -948,23 +948,23 @@ msgstr "Anzahl"
 msgid " or "
 msgstr " oder"
 
-#: ../../src/soldier.cc:799
+#: ../../src/soldier.cc:808
 #, c-format
 msgid "The game engine has encountered a logic error. The %s #%u of player %u could could not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will not be executed). Strange things may happen. No solution for this problem has been implemented yet. (bug #1951113) (The game has been paused.)"
 msgstr "Der Spieltreiber hat einen Logikfehler entdeckt. Der/die/das %s #%u vom Spieler %u konnte keinen Weg von (%i, %i) (mit einem %s Objekt) zum Gegnerischen Objekt bei (%s #%u von Spieler %u) bei (%i, %i) (mit einem %s Objekt) finden. Der %s wird nun desertieren (aber wird dafür nicht umgebracht). Seltsame Sachen können passieren. Bisher wurde keine Möglichkeit eingebaut um den Fehler (#1951113) zu beheben. (Das Spiel wurde pausiert.)"
 
-#: ../../src/soldier.cc:810 ../../src/soldier.cc:815
-#: ../../src/logic/worker.cc:1544
+#: ../../src/soldier.cc:819 ../../src/soldier.cc:824
+#: ../../src/logic/worker.cc:1563
 msgid "no"
 msgstr "nein"
 
-#: ../../src/soldier.cc:820 ../../src/soldier.cc:828
-#: ../../src/logic/worker.cc:1554
+#: ../../src/soldier.cc:829 ../../src/soldier.cc:837
+#: ../../src/logic/worker.cc:1573
 msgid "Game engine"
 msgstr "Spieltreiber"
 
-#: ../../src/soldier.cc:822 ../../src/soldier.cc:830
-#: ../../src/logic/worker.cc:1556
+#: ../../src/soldier.cc:831 ../../src/soldier.cc:839
+#: ../../src/logic/worker.cc:1575
 msgid "Logic error"
 msgstr "Logikfehler"
 
@@ -1100,7 +1100,7 @@ msgstr "Lager"
 
 #: ../../src/building_ui.cc:156
 msgid "Do you really want to destroy this "
-msgstr "Gebäude "
+msgstr "Möchtest du wirklich das Gebäude "
 
 #: ../../src/building_ui.cc:157
 msgid "?"
@@ -1478,11 +1478,11 @@ msgstr "Bitte beachte die Hinweise bei:"
 
 #: ../../src/network/network_ggz.cc:645
 msgid " joined the metaserver."
-msgstr "hat den Metaserver betreten."
+msgstr " hat den Metaserver betreten."
 
 #: ../../src/network/network_ggz.cc:654
 msgid " left the metaserver."
-msgstr "hat den Metaserver verlassen."
+msgstr " hat den Metaserver verlassen."
 
 #: ../../src/network/nethost.cc:328
 msgid "Server has left the game."
@@ -1831,19 +1831,19 @@ msgstr "Spiel speichern"
 msgid "Message Menu"
 msgstr "Nachrichten Menü"
 
-#: ../../src/wui/game_message_menu.cc:48
+#: ../../src/wui/game_message_menu.cc:51
 msgid "delete selected message"
 msgstr "Lösche ausgewählte Nachricht"
 
-#: ../../src/wui/game_message_menu.cc:56
+#: ../../src/wui/game_message_menu.cc:59
 msgid "delete all messages"
 msgstr "lösche alle Nachrichten"
 
-#: ../../src/wui/game_message_menu.cc:63
+#: ../../src/wui/game_message_menu.cc:66
 msgid "go to location"
 msgstr "gehe zum Ort des Ereignisses"
 
-#: ../../src/wui/game_message_menu.cc:70
+#: ../../src/wui/game_message_menu.cc:73
 msgid "sort messages"
 msgstr "sortiere die Nachrichten"
 
@@ -1881,7 +1881,7 @@ msgstr "Spielzeit:"
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:97
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:131
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:235
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:255
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:202
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:177
 #: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:140
@@ -2044,6 +2044,7 @@ msgstr "Kein Name"
 msgid "Unknown"
 msgstr "Unbekannt"
 
+#: ../../src/editor/editorinteractive.cc:603
 #: ../../src/logic/editor_game_base.cc:560
 #, c-format
 msgid "Loading tribe: %s"
@@ -2115,16 +2116,16 @@ msgstr ""
 " Widelands konnte das Spiel nicht starten, das Spieler %u keinen Startpunkt besitzt.\n"
 "Du kannst manuell mit dem Widelands Editor einen Startpunkt setzen, um das Problem zu lösen."
 
-#: ../../src/logic/worker.cc:815
+#: ../../src/logic/worker.cc:833
 msgid "Resources found."
 msgstr "Rohstoffe gefunden."
 
-#: ../../src/logic/worker.cc:1525
+#: ../../src/logic/worker.cc:1544
 #, c-format
 msgid "The game engine has encountered a logic error. The %s #%u of player %u (carrying %s) could not find a way home from (%i, %i) (with %s immovable) to the base flag at (%i, %i) of its %s at (%i, %i). The %s will be made homeless and probably die, unless some object is removed very soon and the %s finds a way to a flag connected to a warehouse. The %s will immediately request a new worker. Unfortunately this may happen repeatedly and drain the supply of workers (tools). No solution for this problem has been implemented yet. It would be safest to destroy the %s and not rebuild it at that location, nor any other building that sends out a worker on the map. This problem usually occurs near unpassable terrain, such as water, when an object, such as a farm field, is placed on the map while the worker is out working. (bug #1796611) (The game has been paused.)"
 msgstr "Der Spieltreiber hat einen Logikfehler entdeckt. Der/die/das %s #%u vom Spieler %u (trägt %s) konnte keinen Weg von (%i, %i) (mit einem %s Objekt) zur Flagge bei (%i, %i) seines %s bei (%i, %i) finden. Dem %s wird nun sein Haus aberkannt. Er wird wahrscheinlich sterben - nur die Entfernung eines bestimmten Objekts könnte den %s eventuell retten, sodass er einen Weg zu einem Warenhaus finden kann. Sein Haus (%s) wird jetzt sofort einen neuen Arbeiter anfordern. Leider kann das aber auch dazu führen das noch mehr Arbeiter verloren gehen und somit Werkzeuge verschwendet werden. Bisher wurde keine Möglichkeit eingebaut um den Fehler (#1796611)  zu beheben. Es wird das sicherste sein das Gebäude (%s) abzureißen und es dort nicht wieder aufzubauen. Es wöre auch nicht ratsam ein anderes Gebäude dorthinzustellen dessen Arbeiter das Haus häufiger verlassen. Diese Problem geschieht am häufigsten in der Nähe von unbegehbarem Land wie z.B. Wasser -> Ein Objekt wird erstellt (z.B. ein Feld) und versperrt den einzigen Weg den der andere Arbeiter zurück zu seinem Haus nehmen könnte. (Das Spiel wurde pausiert.)"
 
-#: ../../src/logic/worker.cc:1542
+#: ../../src/logic/worker.cc:1561
 msgid "nothing"
 msgstr "nichts"
 
@@ -2137,7 +2138,7 @@ msgstr "Wähle deine Karte!"
 #: ../../src/ui_fsmenu/editor_mapselect.cc:55
 #: ../../src/ui_fsmenu/mapselect.cc:62
 #: ../../src/ui_fsmenu/campaign_select.cc:268
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:70
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:59
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:66
 #: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:72
 #: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:60
@@ -2739,7 +2740,6 @@ msgstr ""
 " Autor: "
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:44
-#: ../../src/editor/ui_menus/editor_event_menu.cc:163
 msgid "New Trigger"
 msgstr "Auslöser neu"
 
@@ -2754,7 +2754,7 @@ msgstr "Beschreibung: "
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:86
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:110
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:226
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:246
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:195
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:168
 #: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:132
@@ -2871,27 +2871,33 @@ msgid "Visible"
 msgstr "Sichtbar"
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:186
+#: ../../src/editor/ui_menus/editor_event_menu.cc:103
+#: ../../src/editor/ui_menus/editor_event_menu.cc:136
+#: ../../src/editor/ui_menus/editor_event_menu.cc:170
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:277
 msgid "New"
 msgstr "Neu"
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:195
-#: ../../src/editor/ui_menus/editor_event_menu.cc:109
-#: ../../src/editor/ui_menus/editor_event_menu.cc:140
-#: ../../src/editor/ui_menus/editor_event_menu.cc:172
+#: ../../src/editor/ui_menus/editor_event_menu.cc:113
+#: ../../src/editor/ui_menus/editor_event_menu.cc:146
+#: ../../src/editor/ui_menus/editor_event_menu.cc:180
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:283
 msgid "Edit"
 msgstr "Ändern"
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:206
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:120
+#: ../../src/editor/ui_menus/editor_event_menu.cc:125
+#: ../../src/editor/ui_menus/editor_event_menu.cc:158
+#: ../../src/editor/ui_menus/editor_event_menu.cc:192
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:291
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:161
 msgid "Delete"
 msgstr "Löschen"
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:240
-#: ../../src/editor/ui_menus/editor_event_menu.cc:344
+#: ../../src/editor/ui_menus/editor_event_menu.cc:357
 #: ../../src/editor/ui_menus/editor_variables_menu.cc:120
 #, c-format
 msgid "Unnamed%u"
@@ -2941,17 +2947,25 @@ msgstr "Spieler: "
 msgid "Descr: "
 msgstr "Beschr: "
 
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:48
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:47
 msgid "Trigger Option Menu"
 msgstr "Auslöseroptionenmenü"
 
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:283
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:72
+msgid "Trigger at an absolute time from the beginning of the game (otherwise, only trigger if activated by an event set timer)."
+msgstr "Verwendet die absolute Zeit die seit dem Spielbeginn vergangen ist (ansonsten wird die Zeit verwendet die von einem \"Setze Zeit\" Ereignis gesetzt wird)."
+
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:76
+msgid "Trigger at absolute time"
+msgstr "Mit absoluter Zeit rechnen"
+
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:313
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:555
 #, c-format
 msgid "There is another trigger registered with the name \"%s\". Choose another name."
 msgstr "Es gibt einen anderen registrierten Auslöser mit dem Namen \"%s\". Wähle einen anderen Namen."
 
-#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:288
+#: ../../src/editor/ui_menus/trigger_time_option_menu.cc:318
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:271
 #: ../../src/editor/ui_menus/event_allow_building_option_menu.cc:208
 #: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:310
@@ -3065,7 +3079,6 @@ msgid "Conditional"
 msgstr "Bedingung"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:100
-#: ../../src/editor/ui_menus/editor_event_menu.cc:131
 #: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:44
 msgid "New Event"
 msgstr "Ereignis neu"
@@ -3091,44 +3104,34 @@ msgstr "Bewegte Natur"
 msgid "Event Menu"
 msgstr "Ereignisse"
 
-#: ../../src/editor/ui_menus/editor_event_menu.cc:63
+#: ../../src/editor/ui_menus/editor_event_menu.cc:64
 msgid "Event Chains: "
 msgstr "Ereignisketten:"
 
-#: ../../src/editor/ui_menus/editor_event_menu.cc:73
+#: ../../src/editor/ui_menus/editor_event_menu.cc:75
 msgid "Registered Events: "
 msgstr "Erstellte Ereignisse:"
 
-#: ../../src/editor/ui_menus/editor_event_menu.cc:82
+#: ../../src/editor/ui_menus/editor_event_menu.cc:85
 msgid "Registered Triggers"
 msgstr "Erstellte Auslöser:"
 
-#: ../../src/editor/ui_menus/editor_event_menu.cc:100
-msgid "New Event Chain"
-msgstr "Neue Kette"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:120
-#: ../../src/editor/ui_menus/editor_event_menu.cc:151
-#: ../../src/editor/ui_menus/editor_event_menu.cc:183
-msgid "Del"
-msgstr "Entf"
-
-#: ../../src/editor/ui_menus/editor_event_menu.cc:273
+#: ../../src/editor/ui_menus/editor_event_menu.cc:286
 msgid "Can not delete event. It is in use by "
 msgstr "Kann das Ereignis nicht löschen. Es wird genutzt von"
 
-#: ../../src/editor/ui_menus/editor_event_menu.cc:280
-#: ../../src/editor/ui_menus/editor_event_menu.cc:320
+#: ../../src/editor/ui_menus/editor_event_menu.cc:293
+#: ../../src/editor/ui_menus/editor_event_menu.cc:333
 #: ../../src/editor/ui_menus/editor_player_menu.cc:249
 #: ../../src/editor/ui_menus/editor_player_menu.cc:281
 msgid "Error!"
 msgstr "Fehler!"
 
-#: ../../src/editor/ui_menus/editor_event_menu.cc:313
+#: ../../src/editor/ui_menus/editor_event_menu.cc:326
 msgid "Can not delete trigger. It is in use by "
 msgstr "Kann den Auslöser nicht löschen. Er wird genutzt von"
 
-#: ../../src/editor/ui_menus/editor_event_menu.cc:351
+#: ../../src/editor/ui_menus/editor_event_menu.cc:364
 msgid "Unnamed"
 msgstr "Namenlos"
 
@@ -3277,17 +3280,17 @@ msgstr "Variable"
 msgid "Noise Height Options"
 msgstr "Optionen: Zufallshöhewerkzeug"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:132
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:138
 #, c-format
 msgid "Minimum: %u"
 msgstr "Minimum: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:134
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:140
 #, c-format
 msgid "Maximum: %u"
 msgstr "Maximum: %u"
 
-#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:139
+#: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:145
 #, c-format
 msgid "Set value: %u"
 msgstr "Wert setzen: %u"
@@ -3477,6 +3480,12 @@ msgstr "Normal"
 #: ../../src/ai/defaultai.h:97
 msgid "Defensive"
 msgstr "Defensiv"
+
+#~ msgid "New Event Chain"
+#~ msgstr "Neue Kette"
+
+#~ msgid "Del"
+#~ msgstr "Entf"
 
 #~ msgid "YOU @ "
 #~ msgstr "DU @ "

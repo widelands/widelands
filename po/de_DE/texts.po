@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4374\n"
+"Project-Id-Version: Widelands svn4498\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-07-07 19:22+0000\n"
-"PO-Revision-Date: 2009-05-01 19:57+0100\n"
+"POT-Creation-Date: 2009-09-03 12:40+0000\n"
+"PO-Revision-Date: 2009-09-03 14:40+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -349,11 +349,11 @@ msgstr "Häuptling"
 msgid "Elders"
 msgstr "Ältesten"
 
-#: ../../txts/developers:19 ../../txts/developers:288
+#: ../../txts/developers:19 ../../txts/developers:293
 msgid "Graphics"
 msgstr "Grafik"
 
-#: ../../txts/developers:24 ../../txts/developers:281
+#: ../../txts/developers:24 ../../txts/developers:286
 msgid "Homepage"
 msgstr "Homepage"
 
@@ -361,11 +361,11 @@ msgstr "Homepage"
 msgid "vacant"
 msgstr "unbesetzt"
 
-#: ../../txts/developers:31 ../../txts/developers:294
+#: ../../txts/developers:31 ../../txts/developers:299
 msgid "Sound"
 msgstr "Geräusche"
 
-#: ../../txts/developers:36 ../../txts/developers:299
+#: ../../txts/developers:36 ../../txts/developers:304
 msgid "Translation"
 msgstr "Übersetzer"
 
@@ -442,50 +442,54 @@ msgid "Hungarian"
 msgstr "Ungarisch"
 
 #: ../../txts/developers:199
+msgid "Italian"
+msgstr "Italienisch"
+
+#: ../../txts/developers:204
 msgid "Polish"
 msgstr "Polnisch"
 
-#: ../../txts/developers:207
+#: ../../txts/developers:212
 msgid "Russian"
 msgstr "Russisch"
 
-#: ../../txts/developers:212
+#: ../../txts/developers:217
 msgid "Slovak"
 msgstr "Slovakisch"
 
-#: ../../txts/developers:217
+#: ../../txts/developers:222
 msgid "Spanish"
 msgstr "Spanisch"
 
-#: ../../txts/developers:222
+#: ../../txts/developers:227
 msgid "Swedish"
 msgstr "Schwedisch"
 
-#: ../../txts/developers:230
+#: ../../txts/developers:235
 msgid "Packagers"
 msgstr "Packer"
 
-#: ../../txts/developers:234
+#: ../../txts/developers:239
 msgid "Linux Distributions"
 msgstr "Linux Distributionen"
 
-#: ../../txts/developers:245
+#: ../../txts/developers:250
 msgid "Other Unix Distributions"
 msgstr "Andere Unix Distributionen"
 
-#: ../../txts/developers:254
+#: ../../txts/developers:259
 msgid "Non Unix Distributions"
 msgstr "Nicht Unix Distributionen"
 
-#: ../../txts/developers:265
+#: ../../txts/developers:270
 msgid "Wiki and Enduser-Documentation"
 msgstr "Wiki und Endbenutzer-Dokumentation"
 
-#: ../../txts/developers:277
+#: ../../txts/developers:282
 msgid "Former elders"
 msgstr "Ehemalige Ältesten"
 
-#: ../../txts/developers:305
+#: ../../txts/developers:310
 msgid "Other"
 msgstr "Andere"
 
