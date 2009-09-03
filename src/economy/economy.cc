@@ -725,7 +725,7 @@ void Economy::_create_requested_workers(Game & game)
 				int32_t num_wares = 0;
 				Worker_Descr * const w_desc = tribe.get_worker_descr(index);
 
-				// Ignore it if is a worker that cann't be buildable
+				// Ignore the request if it is for a worker that can not be build
 				if (!w_desc->buildable())
 					continue;
 
@@ -735,14 +735,12 @@ void Economy::_create_requested_workers(Game & game)
 				// If there aren't enough supplies...
 				if (num_wares == 0) {
 					bool created_worker = false;
-					uint32_t n_wh = 0;
-					while (n_wh < get_nr_warehouses()) {
+					for (uint32_t n_wh = 0; n_wh < get_nr_warehouses(); ++n_wh) {
 						if (m_warehouses[n_wh]->can_create_worker(game, index)) {
 							m_warehouses[n_wh]->create_worker(game, index);
 							created_worker = true;
-							//break;
+							break;
 						} // if (m_warehouses[n_wh]
-						++n_wh;
 					} // while (n_wh < get_nr_warehouses())
 					if (! created_worker) { //  fix to nearest warehouse
 						Warehouse & nearest = *m_warehouses[0];
