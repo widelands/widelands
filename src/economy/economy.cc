@@ -742,8 +742,28 @@ void Economy::_create_requested_workers(Game & game)
 							break;
 						} // if (m_warehouses[n_wh]
 					} // while (n_wh < get_nr_warehouses())
-					if (! created_worker) { //  fix to nearest warehouse
-						Warehouse & nearest = *m_warehouses[0];
+					if (! created_worker) {
+						uint32_t nth_wh = 0;
+						if (get_nr_warehouses() > 1) {
+							// Find nearest warehouse!
+							// NOTE  Just a dummy implementation to ensure that each
+							// NOTE  call of this function sets an request for the same
+							// NOTE  warehouse - should of coures be improved further.
+							Coords tac = req.target_flag().get_position();
+							Coords whc = m_warehouses[0]->base_flag().get_position();
+							int32_t current = (tac.x - whc.x) * (tac.y - whc.y);
+							current = current < 1 ? (- current) : current;
+							for (uint32_t i = 0; i < get_nr_warehouses(); ++i) {
+								whc = m_warehouses[i]->base_flag().get_position();
+								int32_t cost = (tac.x - whc.x) * (tac.y - whc.y);
+								cost = cost < 0 ? (- cost) : cost;
+								if (current > cost) {
+									current = cost;
+									nth_wh = i;
+								}
+							}
+						}
+						Warehouse & nearest = *m_warehouses[nth_wh];
 						Worker_Descr::Buildcost const & cost = w_desc->buildcost();
 						container_iterate_const(Worker_Descr::Buildcost, cost, bc_it)
 							if
