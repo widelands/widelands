@@ -939,6 +939,8 @@ void NetHost::setPlayerNumber(int32_t const number)
 	s.Unsigned32(0);
 	writeSettingUser(s, 0);
 	broadcast(s);
+
+	setPlayerReady(number, false);
 }
 
 void NetHost::setPlayerReady
@@ -1545,6 +1547,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 				if (position.state == PlayerSettings::stateOpen) {
 					setPlayerState(pos, PlayerSettings::stateHuman);
 					setPlayerName(pos, d->settings.users[client.usernum].name);
+					setPlayerReady(pos, false);
 					log("[Host] client %i switched to position %i.\n", i, pos);
 				}
 			} else {
@@ -1558,6 +1561,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 					const PlayerSettings oldOnPos = position;
 					setPlayer(pos, player);
 					setPlayer(client.playernum, oldOnPos);
+					setPlayerReady(pos, false);
 					log("[Host] client %i switched to position %i.\n", i, pos);
 				} else
 					break;

@@ -74,7 +74,7 @@ struct NetHost : public GameController, private SyncCallback {
 	void setPlayer      (uint8_t number, PlayerSettings);
 	void setPlayerNumber(int32_t number);
 	void setPlayerReady (uint8_t number, bool ready);
-	bool getPlayerReady(uint8_t number);
+	bool getPlayerReady (uint8_t number);
 
 	// just visible stuff for the select mapmenu
 	void setMultiplayerGameSettings();

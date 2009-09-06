@@ -483,7 +483,7 @@ void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t pos)
 	// to the position. This is only possible in multiplayer games.
 	if (settings.playernum == -1) {
 		if (!settings.multiplayer)
-			throw wexception("Player position = -1 in non multiplayer game");
+			throw wexception("Player position = -1 in none multiplayer game");
 		PlayerSettings position = settings.players[pos];
 		if ((pos < m_nr_players) & (position.state == PlayerSettings::stateOpen))
 		{
