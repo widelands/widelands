@@ -1,3 +1,4 @@
+#include "backtrace.h"
 /*
  * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
@@ -250,10 +251,8 @@ void RenderTarget::tile(Rect r, PictureID const picture, Point ofs)
 {
 	Surface * const src = g_gr->get_picture_surface(picture);
 
-	if (!src) {
-		log("RenderTarget::tile: bad picture\n");
+	if (!src)
 		return;
-	}
 
 	if (clip(r)) {
 
