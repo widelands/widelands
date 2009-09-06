@@ -1,4 +1,7 @@
 ### Build 14
+- Fix bug that when a ware was waiting at a flag, and the next flag or building
+  that the ware was waiting to be taken to was removed, anyting could happen
+  (because of a dangling pointer). (svn:r4508)
 - Fix usability problem that accidentally double-clicking on a road could
   remove it. (Previously, when clicking on a node that had a road, but a flag
   could not be placed there, the mouse cursor would be placed over the button
