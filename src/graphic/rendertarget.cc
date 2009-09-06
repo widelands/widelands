@@ -1,4 +1,3 @@
-#include "backtrace.h"
 /*
  * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *

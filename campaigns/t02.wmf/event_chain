@@ -229,7 +229,6 @@ conditional_element_04=trigger
 conditional_element_04_data=Enhance Buildings
 event=Mission Complete
 event=Reveal next scenario
-event=Victory
 current_event=0
 state=init
 

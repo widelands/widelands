@@ -77,7 +77,6 @@ conditional_element_04=trigger
 conditional_element_04_data=Built Ranger
 event=Mission Complete
 event=Reveal Barbariantut01
-event=Victory1
 current_event=0
 state=init
 

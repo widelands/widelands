@@ -1055,8 +1055,3 @@ button_00="OK"
 type=reveal_campaign
 version=2
 entry=campsect1
-
-[Victory]
-type=victory
-version=1
-advance=true

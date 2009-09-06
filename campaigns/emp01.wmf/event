@@ -312,8 +312,3 @@ _" "You have made this peninsula a very secure place. It is time to move on!" "
 window_title=_Safe Peninsula
 is_modal=true
 button_00=_OK
-
-[Victory1]
-type=victory
-version=1
-advance=true

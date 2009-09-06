@@ -99,7 +99,6 @@ conditional_element_00=trigger
 conditional_element_00_data=End Trigger
 event=Diary page 4
 event=Reveal Empiretut02
-event=Victory1
 current_event=0
 state=init
 

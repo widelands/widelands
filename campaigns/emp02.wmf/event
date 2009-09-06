@@ -626,8 +626,3 @@ is_modal=true
 width=450
 height=350
 button_00=OK
-
-[Victory]
-type=victory
-version=1
-advance=true
