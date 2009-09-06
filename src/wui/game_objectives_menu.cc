@@ -57,7 +57,7 @@ GameObjectivesMenu::GameObjectivesMenu
 		 "",
 		 UI::Align_Left,
 		 1),
-	m_claim_victory
+/*m_claim_victory
 		(this,
 		 25,
 		 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5,
@@ -72,7 +72,7 @@ GameObjectivesMenu::GameObjectivesMenu
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &GameObjectivesMenu::restart_mission, *this,
-		 _("Restart Mission")),
+		 _("Restart Mission")),*/
 	m_player(plr)
 {
 	list.selected.set(this, &GameObjectivesMenu::selected);
@@ -119,15 +119,17 @@ void GameObjectivesMenu::selected(uint32_t const t) {
 		(t == list_type::no_selection_index() ? std::string() : list[t].descr());
 }
 
-/*
- *  Claim Victory & exit this game
+/**
+ * TODO Claim Victory & exit this game
+ * once this is implemented uncomment the button
  */
 void GameObjectivesMenu::claim_victory() {
 	m_player.end_modal(0);
 }
 
-/*
- * Restart this campaign
+/**
+ * TODO Restart this campaign
+ * once this is implemented uncomment the button
  */
 void GameObjectivesMenu::restart_mission() {
 	m_player.end_modal(0);
