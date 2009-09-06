@@ -62,9 +62,9 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 		g_fs->Rename(complete_filename, backup_filename);
 	}
 
-	static std::string * error;
-	if (!save_game(game, complete_filename, error)) {
-		log("Autosave: ERROR! - %s\n", error->c_str());
+	static std::string error;
+	if (!save_game(game, complete_filename, &error)) {
+		log("Autosave: ERROR! - %s\n", error.c_str());
 
 		// if backup file was created, move it back
 		if (backup_filename.length() > 0) {
@@ -73,8 +73,8 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 			}
 			g_fs->Rename(backup_filename, complete_filename);
 		}
-		// Wait 2 seconds until next save try
-		m_lastSaveTime = m_lastSaveTime + 2000;
+		// Wait 30 seconds until next save try
+		m_lastSaveTime = m_lastSaveTime + 30000;
 		return;
 	} else {
 		// if backup file was created, time to remove it
