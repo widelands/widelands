@@ -74,6 +74,9 @@ Flag::~Flag()
 	for (int32_t i = 0; i < 6; ++i)
 		if (m_roads[i])
 			log("Flag: ouch! road left\n");
+	log
+		("destroying flag (%u) (%u, %u) object at address %p\n",
+		 serial(), get_position().x, get_position().y, this);
 }
 
 /**

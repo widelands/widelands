@@ -240,6 +240,16 @@ void Map_Flagdata_Data_Packet::Write
 					(not flag->m_items[i].nextstep or
 					 dynamic_cast<PlayerImmovable const *>
 					 	(flag->m_items[i].nextstep));
+				if
+					(PlayerImmovable const * const nextstep =
+					 	flag->m_items[i].nextstep)
+					log
+						("Saving nextstep %p of item #%u (%s) at flag %u at "
+						 "(%i, %i).\n",
+						 flag->m_items[i].nextstep, i,
+						 flag->m_items[i].item->descr().name().c_str(),
+						 flag->serial(),
+						 flag->get_position().x, flag->get_position().y);
 				fw.Unsigned32
 					(flag->m_items[i].nextstep ?
 					 os->get_object_file_index(*flag->m_items[i].nextstep) : 0);
