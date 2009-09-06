@@ -56,6 +56,12 @@ Map_Map_Object_Saver::get_object_record(Map_Object const & obj)
 		return it->second;
 
 	MapObjectRec rec;
+#ifndef NDEBUG
+	rec.description  = obj.type_name();
+	rec.description += " (";
+	rec.description += obj.serial();
+	rec.description += ')';
+#endif
 	rec.fileserial = ++m_lastserial;
 	rec.registered = false;
 	rec.saved = false;
@@ -126,15 +132,18 @@ void Map_Map_Object_Saver::mark_object_as_saved(Map_Object const & obj) {
 	rec.saved = true;
 }
 
+#ifndef NDEBUG
 /*
  * Return the number of unsaved objects
  */
-uint32_t Map_Map_Object_Saver::get_nr_unsaved_objects() const throw () {
-	uint32_t result = 0;
-	container_iterate_const(Map_Object_Map, m_objects, i)
-		if (!i.current->second.saved)
-			++result;
-	return result;
+void Map_Map_Object_Saver::detect_unsaved_objects() const {
+	container_iterate_const(Map_Object_Map, m_objects, i) {
+		if (!i.current->second.saved) {
+			throw wexception
+				("%s has not been saved", i.current->second.description.c_str());
+		}
+	}
 }
+#endif
 
 };

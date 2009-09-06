@@ -236,23 +236,12 @@ void Map_Flagdata_Data_Packet::Write
 				fw.Unsigned8(flag->m_items[i].pending);
 				assert(os->is_object_known(*flag->m_items[i].item));
 				fw.Unsigned32(os->get_object_file_index(*flag->m_items[i].item));
-				assert
-					(not flag->m_items[i].nextstep or
-					 dynamic_cast<PlayerImmovable const *>
-					 	(flag->m_items[i].nextstep));
 				if
 					(PlayerImmovable const * const nextstep =
-					 	flag->m_items[i].nextstep)
-					log
-						("Saving nextstep %p of item #%u (%s) at flag %u at "
-						 "(%i, %i).\n",
-						 flag->m_items[i].nextstep, i,
-						 flag->m_items[i].item->descr().name().c_str(),
-						 flag->serial(),
-						 flag->get_position().x, flag->get_position().y);
-				fw.Unsigned32
-					(flag->m_items[i].nextstep ?
-					 os->get_object_file_index(*flag->m_items[i].nextstep) : 0);
+					 	flag->m_items[i].nextstep.get(egbase))
+					fw.Unsigned32(os->get_object_file_index(*nextstep));
+				else
+					fw.Unsigned32(0);
 			}
 
 			if (Flag const * const always_call_for = flag->m_always_call_for_flag)

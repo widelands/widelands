@@ -24,6 +24,10 @@
 
 #include <map>
 
+#ifndef NDEBUG
+#include <string>
+#endif
+
 namespace Widelands {
 
 class Map_Object;
@@ -44,7 +48,9 @@ struct Map_Map_Object_Saver {
 	void mark_object_as_saved(Map_Object const &);
 
 	// Information functions
-	uint32_t get_nr_unsaved_objects() const throw ();
+#ifndef NDEBUG
+	void     detect_unsaved_objects() const;
+#endif
 	uint32_t get_nr_roads          () const throw () {return m_nr_roads;}
 	uint32_t get_nr_flags          () const throw () {return m_nr_flags;}
 	uint32_t get_nr_buildings      () const throw () {return m_nr_buildings;}
@@ -57,6 +63,9 @@ struct Map_Map_Object_Saver {
 
 private:
 	struct MapObjectRec {
+#ifndef NDEBUG
+		std::string description;
+#endif
 		uint32_t fileserial;
 		bool registered;
 		bool saved;

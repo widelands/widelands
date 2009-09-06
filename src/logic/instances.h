@@ -389,6 +389,9 @@ struct Object_Ptr {
 	bool operator== (Object_Ptr const other) const throw () {
 		return m_serial == other.m_serial;
 	}
+	bool operator!= (Object_Ptr const other) const throw () {
+		return m_serial != other.m_serial;
+	}
 
 	uint32_t serial() const {return m_serial;}
 
@@ -422,6 +425,7 @@ struct OPtr {
 
 	bool operator<  (OPtr<T> const & other) const {return m <  other.m;}
 	bool operator== (OPtr<T> const & other) const {return m == other.m;}
+	bool operator!= (OPtr<T> const & other) const {return m != other.m;}
 
 	Serial serial() const {return m.serial();}
 

@@ -60,7 +60,7 @@ class Flag : public PlayerImmovable, public RoutingNode {
 	struct PendingItem {
 		WareInstance    * item;     ///< the item itself
 		bool              pending;  ///< if the item is pending
-		PlayerImmovable * nextstep; ///< next step that this item is sent to
+		OPtr<PlayerImmovable> nextstep; ///< next step that this item is sent to
 	};
 
 	struct FlagJob {

@@ -74,9 +74,6 @@ Flag::~Flag()
 	for (int32_t i = 0; i < 6; ++i)
 		if (m_roads[i])
 			log("Flag: ouch! road left\n");
-	log
-		("destroying flag (%u) (%u, %u) object at address %p\n",
-		 serial(), get_position().x, get_position().y, this);
 }
 
 /**
@@ -341,9 +338,7 @@ void Flag::add_item(Game & game, WareInstance & item)
  * for a  building destination.
 */
 bool Flag::has_pending_item(Game &, Flag & dest) {
-	int32_t i;
-
-	for (i = 0; i < m_item_filled; ++i) {
+	for (int32_t i = 0; i < m_item_filled; ++i) {
 		if (!m_items[i].pending)
 			continue;
 
@@ -362,9 +357,7 @@ bool Flag::has_pending_item(Game &, Flag & dest) {
  * \return true if an item is actually waiting for the carrier.
 */
 bool Flag::ack_pending_item(Game &, Flag & destflag) {
-	int32_t i;
-
-	for (i = 0; i < m_item_filled; ++i) {
+	for (int32_t i = 0; i < m_item_filled; ++i) {
 		if (!m_items[i].pending)
 			continue;
 

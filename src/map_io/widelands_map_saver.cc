@@ -230,11 +230,9 @@ void Map_Saver::save() throw (_wexception) {
 	{Map_Objective_Data_Packet               p; p.Write(m_fs, m_egbase, m_mos);}
 	log("done!\n ");
 
-	if (m_mos->get_nr_unsaved_objects())
-		throw wexception
-			("There are %i unsaved objects. This is a bug, please consider "
-			 "committing!",
-			 m_mos->get_nr_unsaved_objects());
+#ifndef NDEBUG
+	m_mos->detect_unsaved_objects();
+#endif
 }
 
 };
