@@ -33,7 +33,8 @@ struct Trigger_Ownership : public Trigger_Player_Area {
 	friend struct ::Trigger_Ownership_Option_Menu;
 	Trigger_Ownership(char const * Name, bool set);
 
-	int32_t option_menu(Editor_Interactive &);
+	bool has_option_menu() const {return false;}
+	int32_t option_menu(Editor_Interactive &) __attribute__  ((noreturn));
 
 	void check_set_conditions(Game const &);
 

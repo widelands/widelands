@@ -21,6 +21,4 @@
 
 using Widelands::Trigger_Ownership;
 
-int32_t Trigger_Ownership::option_menu(Editor_Interactive &) {
-	return 0;
-}
+int32_t Trigger_Ownership::option_menu(Editor_Interactive &) {throw;}

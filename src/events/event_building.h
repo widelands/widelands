@@ -50,7 +50,8 @@ struct Event_Building : Event {
 		 Tribe_Descr const * = 0, Building_Index = Building_Index::Null());
 	~Event_Building();
 
-	int32_t option_menu(Editor_Interactive &);
+	bool has_option_menu() const {return false;}
+	int32_t option_menu(Editor_Interactive &) __attribute__ ((noreturn));
 
 	void set_player(Player_Number);
 	void set_position(Coords);

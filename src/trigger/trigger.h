@@ -46,6 +46,7 @@ struct Trigger : public Named, public Referenced<Trigger> {
 
 	virtual void reorigin(Coords, Extent) {} /// Translate stored coordinates;
 
+	virtual bool has_option_menu() const {return true;}
 	virtual int32_t option_menu(Editor_Interactive &) = 0;
 
 	virtual void Read (Section &, Editor_Game_Base       &)       = 0;

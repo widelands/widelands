@@ -25,15 +25,13 @@
 #include <string>
 #include <cstring>
 
-struct Trigger_Military_Influence_Option_Menu;
-
 namespace Widelands {
 
 struct Trigger_Military_Influence : public Trigger_Player_Area {
-	friend struct ::Trigger_Military_Influence_Option_Menu;
 	Trigger_Military_Influence(char const * Name, bool set);
 
-	int32_t option_menu(Editor_Interactive &);
+	bool has_option_menu() const {return false;}
+	int32_t option_menu(Editor_Interactive &) __attribute__ ((noreturn));
 
 	void check_set_conditions(Game const &);
 

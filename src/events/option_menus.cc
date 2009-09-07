@@ -46,34 +46,34 @@ int32_t Event_Allow_Building            ::option_menu(Editor_Interactive & eia)
 {Event_Allow_Building_Option_Menu               m(eia, *this); return m.run();}
 
 int32_t Event_Building                  ::option_menu(Editor_Interactive &)
-{return 0;}
+{throw;}
 
 int32_t Event_Conquer_Area              ::option_menu(Editor_Interactive & eia)
 {Event_Conquer_Area_Option_Menu                 m(eia, *this); return m.run();}
 
 int32_t Event_Flag                      ::option_menu(Editor_Interactive &)
-{return 0;}
+{throw;}
 
 int32_t Event_Immovable                 ::option_menu(Editor_Interactive &)
-{return 0;}
+{throw;}
 
 int32_t Event_Message_Box               ::option_menu(Editor_Interactive & eia)
 {Event_Message_Box_Option_Menu                  m(eia, *this); return m.run();}
 
 int32_t Event_Reveal_Campaign           ::option_menu(Editor_Interactive &)
-{return 0;}
+{throw;}
 
 int32_t Event_Reveal_Objective          ::option_menu(Editor_Interactive &)
-{return 0;}
+{throw;}
 
 int32_t Event_Reveal_Scenario           ::option_menu(Editor_Interactive &)
-{return 0;}
+{throw;}
 
 int32_t Event_Road                      ::option_menu(Editor_Interactive &)
-{return 0;}
+{throw;}
 
 int32_t Event_Set_Timer                 ::option_menu(Editor_Interactive &)
-{return 0;}
+{throw;}
 
 int32_t Event_Move_View                 ::option_menu(Editor_Interactive & eia)
 {Event_Move_View_Option_Menu                    m(eia, *this); return m.run();}

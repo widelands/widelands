@@ -394,11 +394,13 @@ void Editor_Event_Menu::clicked_edit_eventchain() {
  */
 void Editor_Event_Menu::trigger_list_selected(uint32_t) {
 	m_btn_del_trigger ->set_enabled(true);
-	m_btn_edit_trigger->set_enabled(true);
+	m_btn_edit_trigger->set_enabled
+		(m_trigger_list->get_selected()->has_option_menu());
 }
 void Editor_Event_Menu::event_list_selected(uint32_t) {
 	m_btn_del_event ->set_enabled(true);
-	m_btn_edit_event->set_enabled(true);
+	m_btn_edit_event  ->set_enabled
+		(m_event_list  ->get_selected()->has_option_menu());
 }
 void Editor_Event_Menu::eventchain_list_selected(uint32_t) {
 	m_btn_del_eventchain ->set_enabled(true);
@@ -410,11 +412,13 @@ void Editor_Event_Menu::eventchain_list_selected(uint32_t) {
  */
 void Editor_Event_Menu::trigger_double_clicked(uint32_t)
 {
-	clicked_edit_trigger();
+	if (m_trigger_list->get_selected()->has_option_menu())
+		clicked_edit_trigger();
 }
 void Editor_Event_Menu::event_double_clicked(uint32_t)
 {
-	clicked_edit_event  ();
+	if (m_event_list  ->get_selected()->has_option_menu())
+		clicked_edit_event  ();
 }
 void Editor_Event_Menu::eventchain_double_clicked(uint32_t)
 {

@@ -21,6 +21,4 @@
 
 using Widelands::Trigger_Vision;
 
-int32_t Trigger_Vision::option_menu(Editor_Interactive &) {
-	return 0;
-}
+int32_t Trigger_Vision::option_menu(Editor_Interactive &) {throw;}

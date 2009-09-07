@@ -36,24 +36,28 @@ namespace Trigger_Factory {
 ///\todo This data belongs into the triggers themselves
 Type_Descr TRIGGER_TYPE_DESCRIPTIONS[] = {
 	{
+		true,
 		"building",           _("Building Trigger"),
 		_
 			("Triggers when the player has the specified number of buildings of "
 			 "the specified type in the specified area.")
 	},
 	{
+		false,
 		"defeated",           _("Defeated Player Trigger"),
 		_
 			("Triggers when the player was defeated. The trigger is set to true, "
 			 "if the player has 0 workers.")
 	},
 	{
+		false,
 		"military_influence", _("Military influence Trigger"),
 		_
 			("Triggers when the player has some (or highest) military influence "
 			 "over the specified number of nodes in the specified area.")
 	},
 	{
+		false,
 		"ownership",          _("Ownership Trigger"),
 		_
 			("Triggers when the the player owns at least the specified number of "
@@ -61,6 +65,7 @@ Type_Descr TRIGGER_TYPE_DESCRIPTIONS[] = {
 			 "it becomes unset when this no longer holds.")
 	},
 	{
+		true,
 		"time",               _("Time Trigger"),
 		_
 			("Triggers at a certain time. The time can be set to a value in ms. "
@@ -68,6 +73,7 @@ Type_Descr TRIGGER_TYPE_DESCRIPTIONS[] = {
 			 "an event.")
 	},
 	{
+		false,
 		"vision",             _("Vision Trigger"),
 		_
 			("Triggers when the the player sees (or has seen) at least a "

@@ -140,12 +140,27 @@ void Editor_Event_Menu_New_Trigger::clicked_ok() {
  * The listbox got selected
  */
 void Editor_Event_Menu_New_Trigger::selected(uint32_t) {
-	m_description->set_text
-		(_(type_descr(m_trigger_type_list->get_selected()).helptext));
-	m_ok_button->set_enabled(true);
+	Type_Descr const & descr = type_descr(m_trigger_type_list->get_selected());
+	m_description->set_font
+		(UI_FONT_SMALL,
+		 descr.has_options_window ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED);
+	{
+		std::string helptext = _(descr.helptext);
+		if (not descr.has_options_window)
+			helptext +=
+				_
+					(" NOTE: There is no options window for this trigger type yet. "
+					 "It has to be created manually by editing the text files in "
+					 "the map.");
+		m_description->set_text(helptext);
+	}
+	m_ok_button->set_enabled(descr.has_options_window);
 }
 
 /**
  * Listbox got double clicked
  */
-void Editor_Event_Menu_New_Trigger::double_clicked(uint32_t) {clicked_ok();}
+void Editor_Event_Menu_New_Trigger::double_clicked(uint32_t) {
+	if (type_descr(m_trigger_type_list->get_selected()).has_options_window)
+		clicked_ok();
+}

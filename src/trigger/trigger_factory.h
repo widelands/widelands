@@ -51,6 +51,7 @@ Trigger & create
 	(char const * type_name, char const * name = "", bool set = false);
 
 struct Type_Descr {
+	bool         const has_options_window;
 	char const * const id;       /// The identifier that is written to files.
 	std::string  const name;     /// Descriptive name for the user (localized).
 	std::string  const helptext; /// Help text for the user (localized).

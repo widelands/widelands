@@ -45,30 +45,36 @@ namespace Event_Factory {
 ///\todo This information belongs into the event classes
 Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 	{
+		true,
 		"allow_building",         _("Allow building type"),
 		_
 			("Allows (or forbids) the construction of a building type for a "
 			 "player.")
 	},
 	{
+		false,
 		"building",               _("Create building"),
 		_("Create a building and optionally place workers in it")
 	},
 	{
+		true,
 		"conquer_area",           _("Conquer area"),
 		_
 			("Gives ownership of all unowned locations whithin an area to the "
 			 "player.")
 	},
 	{
+		false,
 		"flag",                   _("Create flag"),
 		_("Create a flag.")
 	},
 	{
+		false,
 		"immovable",              _("Create immovable"),
 		_("Create an immovable.")
 	},
 	{
+		true,
 		"message_box",            _("Show message box"),
 		_
 			("Show a message box. It can be modal or and have a picture. An "
@@ -76,30 +82,37 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 			 "course of the game.")
 	},
 	{
+		true,
 		"move_view",              _("Move view"),
 		_("Center the player's view on a certain location.")
 	},
 	{
+		false,
 		"reveal_campaign",        _("Reveal campaign"),
 		_("Reveal a campaign.")
 	},
 	{
+		false,
 		"reveal_objective",       _("Reveal objective"),
 		_("Reveal an objective.")
 	},
 	{
+		false,
 		"reveal_scenario",        _("Reveal scenario"),
 		_("Reveal a scenario.")
 	},
 	{
+		false,
 		"road",                   _("Create road"),
 		_("Create a road and optionally place a carrier on it")
 	},
 	{
+		false,
 		"set_timer",              _("Set timer"),
 		_("Set a timer to trigger after a certain duration.")
 	},
 	{
+		true,
 		"unhide_area",            _("Unhide area"),
 		_
 			("Gives vision for a specified amount of time of all locations "

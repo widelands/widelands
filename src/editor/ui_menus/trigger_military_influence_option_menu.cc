@@ -21,6 +21,4 @@
 
 using Widelands::Trigger_Military_Influence;
 
-int32_t Trigger_Military_Influence::option_menu(Editor_Interactive &) {
-	return 0;
-}
+int32_t Trigger_Military_Influence::option_menu(Editor_Interactive &) {throw;}

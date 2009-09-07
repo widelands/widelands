@@ -34,7 +34,10 @@ namespace Widelands {
 struct Trigger_Defeated : public Trigger {
 	Trigger_Defeated(char const *, bool);
 
-	int32_t option_menu(Editor_Interactive &) {return 0;};
+	bool has_option_menu() const {return false;}
+	int32_t option_menu(Editor_Interactive &) __attribute__ ((noreturn)) {
+		throw;
+	}
 
 	void check_set_conditions(Game const &);
 

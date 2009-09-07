@@ -38,7 +38,8 @@ struct Event_Set_Timer : public Event, public Referencer<Trigger> {
 
 	std::string identifier() const {return "Event (set timer): " + name();}
 
-	int32_t option_menu(Editor_Interactive &);
+	bool has_option_menu() const {return false;}
+	int32_t option_menu(Editor_Interactive &) __attribute__ ((noreturn));
 
 	State run(Game &);
 

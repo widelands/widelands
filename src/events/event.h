@@ -57,6 +57,7 @@ struct Event : public Named, public Referenced<Event> {
 
 	virtual void reorigin(Coords, Extent) {} /// Translate stored coordinates;
 
+	virtual bool has_option_menu() const {return true;}
 	virtual int32_t option_menu(Editor_Interactive &) = 0;
 
 	virtual void Write(Section &, Editor_Game_Base &) const = 0;
