@@ -38,6 +38,9 @@
 #include <sys/statvfs.h>
 #include <sys/types.h>
 #include <fcntl.h>
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE // for O_NOATIME
+#endif
 #endif
 
 #include "io/streamread.h"

@@ -23,7 +23,7 @@
 #include "widelands_geometry.h"
 
 #include "ui_basic/panel.h"
-#include "ui_basic/signal.h"
+#include "ui_basic/m_signal.h"
 
 struct Interactive_Base;
 
