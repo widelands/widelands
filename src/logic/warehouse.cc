@@ -573,7 +573,7 @@ void Warehouse::remove_wares(Ware_Index const id, uint32_t const count)
 {
 	assert(get_economy());
 	if (m_target_supply[id] > 0)
-		m_target_supply[id] += 1;
+		m_target_supply[id] += count;
 	m_supply->remove_wares(id, count);
 }
 
