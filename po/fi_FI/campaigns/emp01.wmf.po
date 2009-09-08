@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-06-15 00:11+0300\n"
+"POT-Creation-Date: 2009-07-21 11:08+0000\n"
+"PO-Revision-Date: 2009-07-21 14:20+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <widelands-public@lists.sourcefore.net>\n"
 "MIME-Version: 1.0\n"
@@ -25,52 +25,118 @@ msgstr "Keisarikunta, opastus 1 - Malac' Morin rannat"
 msgid "After losing an important battle against the barbarians, which leads to the forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to start a new life. But his destiny takes his ship into a heavy storm, which nearly desctructs the ship. Only with lot of luck he can save his people and the damaged ship on a unknown desert strand."
 msgstr "Lutius lähtee Fremilistä aloittaakseen uuden elämän. Hän on juuri hävinnyt tärkeän taistelun barbaareja vastaan, mikä on johtanut huomattaviin Keisarikunnan alueiden menetyksiin. Kohtalo kuitenkin ajaa Lutiuksen aluksen rajuun myrskyyn, joka lähestulkoon tuhoaa laivan. Vain huomattavan onnenkantamoisen turvin hän onnistuu pelastautumaan väkensä ja vaurioituneen laivan kanssa tuntemattomalle aavikkorannalle. "
 
-#: ../../../campaigns/emp01.wmf/event:61 ../../../campaigns/emp01.wmf/event:76
-#: ../../../campaigns/emp01.wmf/event:91
-msgid "Diary of Lutius"
-msgstr "Lutiuksen päiväkirja"
-
 #: ../../../campaigns/emp01.wmf/event:63
 msgid " \"What has become of our Empire? I really ask this question - why did my king forbid me from fighting against that monsterous barbarian tribe, who first acted as a peaceful friend and then attacked my army in the darkest night?<br> With an army of 150 men, I was assigned to patrol on our northern frontier, which lies near the Galdin Mountains in a great, beautiful and ancient forest. Soon, we met a barbarian tribe, which at first was friendly. A few of my men even traded with them and their kids came to us, to admire our clean and tidy uniforms and weapons.<br> But in our fifth night in that region, they attacked us with no reason. I lost dozens of good men, and found myself imprisoned and brought to their chieftain. He spat at me, mocked me and told me to leave this land forever. He did not want new land and did not want our land, but he told me that THIS forest was their land - and would stay theirs until the ghosts take the last man of his folk!<br> Three weeks later, I came back to Fremil to speak with our king. He was furious at the Barbarians, yet disallowed an attack of these tribes. He believed that our army was too weak to survive in a war against the barbarians.<br> Still, I saw no way that I could erase my shame - without fighting against the Barbarians. So I left Fremil by boat to find myself a new world, and a new life, somewhere in the south. Now I am sailing on the perl-gulf with my family, some of my friends and a few of my best warriors.\" "
 msgstr "\"Mitä onkaan käynyt Keisarikunnalle? Kysyn tämän kysymyksen tosissani - miksi kuninkaani kielsi minua taistelemasta tuota hirviömäistä barbaariheimoa vastaan? He tekeytyivät ensin ystävällisiksi, sitten hyökkäsivät armeijani kimppuun yön pimeydessä.<br> Minut ja 150 hengen armeijani oli määrätty partioimaan pohjoisella rajavyöhykkeellä, joka koostuu kauniista ja ikivanhoista metsästä lähellä Galdin-vuoria. Pian kohtasimme barbaariheimon, joka ensi alkuun vaikutti ystävälliseltä. Muutamat miehistäni kävivät kauppaa heidän kanssaan, ja heidän lapsensa tulivat luoksemme ihailemaan siistejä ja puhtaita asepukujamme ja aseitamme.<br> Mutta viidentenä yönämme tällä alueella he hyökkäsivät kimppuumme ilman syytä. Menetin liudan hyviä miehiä ja jouduin itse vangiksi. He veivät minut päällikkönsä luokse - hän sylki päälleni, pilkkasi minua ja käski meidän jättää nämä maat ikuisesti taaksemme. Hän ei ollut kiinnostunut uusista maista eikä halunnut meidän maitamme, vaan kertoi minulle että TÄMÄ metsä oli heidän maataan ja että se pysyisi heillä kunnes aaveet veisivät viimeisenkin hänen väestään!<br> Kolme viikkoa myöhemmin palasin Fremiliin puhuakseni kuninkaalleni. Hän oli raivoissaan barbaarien teosta, mutta kielsi yhä meitä hyökkäämästä heimojen kimppuun. Hän uskoi armeijamme olevan liian heikon selvitäksemme sodasta barbaareja vastaan.<br> En vieläkään nähnyt keinoa pyyhkiä pois häpeääni taistelematta barbaareja vastaan. Siksi lähdin Fremilistä laivalla löytääkseni itselleni uuden maailman ja uuden elämän jossakin etelässä. Nyt purjehdin helmilahdella mukanani perheeni, joitakin ystäviäni ja muutama parhaista sotilaistani.\""
-
-#: ../../../campaigns/emp01.wmf/event:65
-msgid "A dark night"
-msgstr "Pimeä yö"
 
 #: ../../../campaigns/emp01.wmf/event:78
 msgid " \"It seems as if sailing on the perl-gulf was one of our biggest mistakes. Nature was against us and drove us into a dark, wild storm. I really don't know how many hours have passed since the waves rose higher than our boat, but still it would be suicide to go outside.<br> Our ship is badly damaged and is taking in more and more water. We can thank the Gods if we survive this black night with our lives.\" "
 msgstr "\"Näyttää siltä, että helmilahteen purjehtiminen oli yksi suurimmista virheistämme. Luonto oli meitä vastaan ja ajoi meidät pimeään, villiin myrskyyn. En todellakaan tiedä, montako tuntia sitten aallot alkoivat nousta korkeammalle kuin laivamme kansi - olisi itsemurha nousta kannelle,<br> Laivamme on pahoin vaurioitunut ja vettä virtaa sisään koko ajan enemmän. Voimme kiittää jumalia, jos selviämme tästä mustasta yöstä hengissä.\""
 
-#: ../../../campaigns/emp01.wmf/event:80
-msgid "The rough sea"
-msgstr "Myrskyinen meri"
-
 #: ../../../campaigns/emp01.wmf/event:93
 msgid " \"Finally, the Gods were with us!<br> We landed on an unknown coast and found peaceful rest under the palm trees growing at the strand. But that is about as good as it gets. The truth is:<br> when I woke up this morning, I saw nothing more than sand around us.<br> It really seems as if we landed under the only palm trees existing in this far-away sandy desert. I fear we won't find the help we need to get our ship repaired in good time.\" "
 msgstr "\"Vihdoinkin jumalat ovat puolellamme!<br> Rantauduimme tuntemattomalle rannikolle ja löysimme rauhaisan levähdyspaikan rannalla kasvavien palmujen alla. Mutta muuta hyvää tässä rannassa ei olekaan.<br>Kun heräsin tänä aamuna, en nähnyt muuta kuin hiekkaa ympärillämme.<br> Näyttää tosiaan siltä, että rantauduimme tämän kaukaisen hiekka-aavikon ainoiden palmujen alle. Pelkään pahoin, ettemme löydä apua laivamme pikaiseen korjaamiseen.\""
 
+#: ../../../campaigns/emp01.wmf/event:160
+msgid " \"Sire, I saw that the construction of the barracks was complete, so I assigned one of my best soldiers to it to keep watch on the desert.<br> This is a good step forward. Now we can feel a bit safer and can look forward to repair our ship.\" "
+msgstr "\"Herrani, näin parakin valmistuneen, joten lähetin yhden parhaista sotilaistani pitämään silmällä aavikkoa.<br> Tämä on aimo askel eteenpäin. Nyt voimme tuntea olomme hiukan turvallisemmaksi ja keskittyä laivamme korjaamiseen.\""
+
+#: ../../../campaigns/emp01.wmf/event:174
+msgid " \"Hey Lutius, I just met Saledus outside.<br> He told me about the barracks. Well, I am not one of those girls who think we need more barracks - instead, we might concentrate on other things now.<br> It is absolutely clear that we need wood to repair our ship. So, I walked through the forest yesterday and found a nice place for a lumberjack's house, south of our headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr "\"Hei, Lutius, törmäsin juuri Saledukseen ulkosalla.<br> Hän kertoi minulle parakista. No, en ole sellainen likka joka uskoo meidän tarvitsevan lisää parakkeja, vaan minusta voisimme keskittyä nyt muihin asioihin.<br> Otsallakin näkee, että tarvitsemme puuta laivamme korjaamiseksi. Kävelinkin eilen metsässä ja löysin parahultaisen paikan puunhakkaajan mökille päämajamme eteläpuolelta.\"<br><br>-- UUSI TAVOITE --<br>"
+
+#: ../../../campaigns/emp01.wmf/event:175
+#: ../../../campaigns/emp01.wmf/objective:15
+msgid "* Build a lumberjack's house at the red point, south of your headquarters."
+msgstr "* Rakenna puunhakkaajan mökki rakennusavussa näkyvän punaisen talon kohdalle päämajasi eteläpuolella."
+
+#: ../../../campaigns/emp01.wmf/event:194
+msgid " \"Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjack's houses, so that we can faster harvest the trunks.<br> But unfortunately the trunks are useless for repairing our ship - we need refined wood, like every ship and every bigger building needs, too. So we should build up a sawmill - as soon as we have enough space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr "\"Hei Lutius, sain juuri viestin, jossa kerrotaan ensimmäisen puunhakkaajamme aloittaneen hommansa  Lienee hyvä odottaa, kunnes hän saa raivattua riittävästi tilaa kahden muunkin puunhakkaajan talon rakentamiseen, jolloin saamme tukkeja kasaan nopeammin.<br> Harmi vain, että tukit eivät sellaisenaan käy laivamme korjaamiseen - tarvitsemme jalostettua puuta, kuten kaikki muutkin suuremmat rakennusprojektit. Toisin sanoen meidän pitää rakentaa saha - heti kun sellaiselle on tilaa.\"<br><br>-- UUSI TAVOITE --<br>"
+
+#: ../../../campaigns/emp01.wmf/event:195
+#: ../../../campaigns/emp01.wmf/objective:23
+msgid "* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
+msgstr "* Rakenna kaksi puunhakkaajan mökkiä lisää ja saha, sitä mukaa kun niille on riittävästi tilaa."
+
+#: ../../../campaigns/emp01.wmf/event:219
+msgid " \"Hi Lutius, I've got two important things to talk about... First the good news:<br> I saw that the construction of the sawmill is complete, so we can begin to refine the trunks the lumberjacks are harvesting to wood.<br> But that's just about the only positive thing I know to talk about. The bad news is that our lumberjacks harvest at an unbelievable speed. There are almost no trees left on this island.<br> Lutius, these trees provide shelter from the sandstorms from the desert, shade on the hot days and they are the home of so many gentle animals. We shouldn't leave this island a complete desert.<br> Lutius, I beg you: find someone who takes care about planting new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr "\"Terve, Lutius, minulla onkin kaksin verroin tärkeää puhuttavaa... Ensin hyvät uutiset:<br> Näin juuri, että saha on valmistunut, joten saamme puunhakkaajien tuottamat tukit jalostettua lautatavaraksi.<br> Mutta siihen hyvät uutiset loppuvatkin. Sitten huonot uutiset: puunhakkaajat panevat metsää sileäksi käsittämätöntä vauhtia. Saarella ei kohta ole enää lainkaan puuta jäljellä.<br> Lutius, nämä puut suojaavat aavikon hiekkamyrskyiltä, suovat varjoa kuumina päivinä ja antavat kodin jos jonkinlaisille leppoisille elukoille. Meidän ei pidä jättää tätä saarta täysin kaljuksi.<br> Lutius kiltti, pistä joku istuttamaan uusia puita!\"<br><br>-- UUSI TAVOITE --<br>"
+
+#: ../../../campaigns/emp01.wmf/event:249
+msgid " \"Hey, my good old friend. I just thought about the rocks standing on the south strand of this land. Perhaps we could cut out some useful hard stones and beautiful marble.<br> The repair of our ship will take a few weeks, anyway, and the resources we harvest now might be the base of strong and big buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr "\"Hei, vanha ystäväni. Tulin juuri pohtineeksi tämän maan etelärannalla seisovia kiviä. Ehkä voisimme hakata irti joitakin hyödyllisiä kovia kiviä ja kaunista marmoria.<br> Laivan korjaamiseen menee pari viikkoa joka tapauksessa, ja mukaan ottamamme rakennusmateriaalit voivat toimia perustana kestäville ja mahtaville rakennuksille toisaalla.\"<br><br>-- UUSI TAVOITE --<br>"
+
+# TODO: misplaced quote
+#: ../../../campaigns/emp01.wmf/event:292
+msgid " \"Today I got the message that our ship is completely repaired. At the moment my people are loading everything onto our newly repaired ship, hoping it will serve us better than last time.<br> Tonight will be our last night on this island. Tomorrow morning we will leave, searching for a new place for our exile.<br> I still wonder if we will ever see Fremil again.<br><br>--------------------- VICTORY! ----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.\" "
+msgstr "\"Tänään sain kuulla, että laivamme korjaukset ovat valmiit. Kirjoittaessani tätä väkeni lastaavat tavaroitamme entistä ehompaan alukseemme, joka toivottavasti palvelee meitä viime kertaa paremmin.<br> Tänä iltana vietämme viimeistä iltaamme tällä saarella. Huomenaamulla nostamme purjeet ja lähdemme etsimään uutta kohdetta maanpaollemme.<br> Mietin yhä, näemmekö Fremiliä enää koskaan.\"<br><br>>--------------------- VOITTO! ----------------------<br><br> Olet selviytynyt tästä komennuksesta. Voit halutessasi jatkaa pelaamista, tai siirtyä seuraavaan komennukseen."
+
+#: ../../../campaigns/emp01.wmf/event~:61
+#: ../../../campaigns/emp01.wmf/event~:76
+#: ../../../campaigns/emp01.wmf/event~:91
+#: ../../../campaigns/emp01.wmf/event:61 ../../../campaigns/emp01.wmf/event:76
+#: ../../../campaigns/emp01.wmf/event:91
+msgid "Diary of Lutius"
+msgstr "Lutiuksen päiväkirja"
+
+#: ../../../campaigns/emp01.wmf/event~:63
+msgid " \"What has become of our Empire? I really ask this question - why did my king forbid me from fighting against that monsterous barbarian tribe, who first acted as a peaceful friend and then attacked my army in the darkest night.<br> I was assigned to patrol on our northern frontier, which lies near the Galdin Mountains in a great, beautiful and ancient forest, with an army of 150 men. Soon we met a barbarian tribe, which at first was friendly. A few of my men even traded with them and their kids came to us, to admire our clean and tidy uniforms and weapons.<br> But in our fifth night in that region, they attacked us without a reason. I lost dozens of good men, was imprisoned and brought to their chieftain. He spit at me, mocked me and told me to leave this land forever. He doesn't wanted new land and doesn't wanted our land, but he told me that THIS forest was their land and would stay theirs until the ghosts take the last man of his folk!<br> Three weeks later I came back to Fremil to speak with our king. He was furious at the Barbarians, but disallowed an attack of these tribes anyway. He believed, that our army was too weak to resist in a war against the barbarians.<br> I saw no way that I could erase my guilt - without fighting against the Barbarians. So I left Fremil by boat to find a new world and a new life for me somewhere in the south. Now I am sailing on the perl-gulf with my family, some of my friends and a few of my best warriors.\" "
+msgstr "\"Mitä onkaan käynyt Keisarikunnalle? Kysyn tämän kysymyksen tosissani - miksi kuninkaani kielsi minua taistelemasta tuota hirviömäistä barbaariheimoa vastaan? He tekeytyivät ensin ystävällisiksi, sitten hyökkäsivät armeijani kimppuun yön pimeydessä.<br> Minut ja 150 hengen armeijani oli määrätty partioimaan pohjoisella rajavyöhykkeellä, joka koostuu kauniista ja ikivanhoista metsästä lähellä Galdin-vuoria. Pian kohtasimme barbaariheimon, joka ensi alkuun vaikutti ystävälliseltä. Muutamat miehistäni kävivät kauppaa heidän kanssaan, ja heidän lapsensa tulivat luoksemme ihailemaan siistejä ja puhtaita asepukujamme ja aseitamme.<br> Mutta viidentenä yönämme tällä alueella he hyökkäsivät kimppuumme ilman syytä. Menetin liudan hyviä miehiä ja jouduin itse vangiksi. He veivät minut päällikkönsä luokse - hän sylki päälleni, pilkkasi minua ja käski meidän jättää nämä maat ikuisesti taaksemme. Hän ei ollut kiinnostunut uusista maista eikä halunnut meidän maitamme, vaan kertoi minulle että TÄMÄ metsä oli heidän maataan ja että se pysyisi heillä kunnes aaveet veisivät viimeisenkin hänen väestään!<br> Kolme viikkoa myöhemmin palasin Fremiliin puhuakseni kuninkaalleni. Hän oli raivoissaan barbaarien teosta, mutta kielsi yhä meitä hyökkäämästä heimojen kimppuun. Hän uskoi armeijamme olevan liian heikon selvitäksemme sodasta barbaareja vastaan.<br> En vieläkään nähnyt keinoa pyyhkiä pois häpeääni taistelematta barbaareja vastaan. Siksi lähdin Fremilistä laivalla löytääkseni itselleni uuden maailman ja uuden elämän jossakin etelässä. Nyt purjehdin helmilahdella mukanani perheeni, joitakin ystäviäni ja muutama parhaista sotilaistani.\""
+
+#: ../../../campaigns/emp01.wmf/event~:65
+#: ../../../campaigns/emp01.wmf/event:65
+msgid "A dark night"
+msgstr "Pimeä yö"
+
+#: ../../../campaigns/emp01.wmf/event~:78
+msgid " \"It seems as if sailing on the perl-gulf was one of our biggest mistakes. Nature was against us and drove us in a dark, wild storm. I really don't know how many hours have passed since the waves rose higher than our boat, but still it would be suicide to go outside.<br> Our ship is badly damaged and is taking on more and more water. We can thank the Gods if we survive this black night with just our lives.\" "
+msgstr "\"Näyttää siltä, että helmilahteen purjehtiminen oli yksi suurimmista virheistämme. Luonto oli meitä vastaan ja ajoi meidät pimeään, villiin myrskyyn. En todellakaan tiedä, montako tuntia sitten aallot alkoivat nousta korkeammalle kuin laivamme laidat - olisi itsemurha nousta kannelle,<br> Laivamme on pahoin vaurioitunut ja vettä virtaa sisään koko ajan enemmän. Voimme kiittää jumalia, jos selviämme tästä mustasta yöstä hengissä.\""
+
+#: ../../../campaigns/emp01.wmf/event~:80
+#: ../../../campaigns/emp01.wmf/event:80
+msgid "The rough sea"
+msgstr "Myrskyinen meri"
+
+#: ../../../campaigns/emp01.wmf/event~:93
+msgid " \"Finally the Gods were with us.<br> We landed on an unknown coast and found peaceful rest under the palms growing at the strand. But that is about as good as it gets. The truth is:<br> when I woke up this morning I saw nothing more than sand around us.<br> It really seems as if we landed under the only palms existing in this far sandy desert. I fear we won't find the help we need to get our ship repaired in good time.\" "
+msgstr "\"Vihdoinkin jumalat ovat puolellamme!<br> Rantauduimme tuntemattomalle rannikolle ja löysimme rauhaisan levähdyspaikan rannalla kasvavien palmujen alla. Mutta muuta hyvää tässä rannassa ei olekaan.<br>Kun heräsin tänä aamuna, en nähnyt muuta kuin hiekkaa ympärillämme.<br> Näyttää tosiaan siltä, että rantauduimme tämän kaukaisen hiekka-aavikon ainoiden palmujen alle. Pelkään pahoin, ettemme löydä apua laivamme pikaiseen korjaamiseen.\""
+
+#: ../../../campaigns/emp01.wmf/event~:95
 #: ../../../campaigns/emp01.wmf/event:95
 msgid "Survivor"
 msgstr "Selviytyjä"
 
+#: ../../../campaigns/emp01.wmf/event~:133
 #: ../../../campaigns/emp01.wmf/event:133
 msgid "Saledus looks around nervously..."
 msgstr "Saledus vilkuilee ympärilleen hermostuneesti..."
 
+#: ../../../campaigns/emp01.wmf/event~:135
 #: ../../../campaigns/emp01.wmf/event:135
 msgid " \"Sire, I fear we are not safe in this foreign land. Who knows what terrible creatures live beyond this forest, in that mighty desert? What if these creatures enter the woods and await the time to attack us?<br> Well, perhaps my fear is misguided, but it can't be wrong to keep watch in the forests - so that we can be sure to see any potential enemies before they can see us.<br> We really should build a barracks in the eastern portion of the forest. Than one of us will keep watch in the darkness and keep us safe from these creatures.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr "\"Herrani, pelkään pahoin ettemme ole yksin tällä vieraalla maalla. Kuka tietää, minkälaisia hirviömäisiä otuksia elää laajoilla aavikoilla tämän metsän ulkopuolella? Entä jos nämä pedot piiloutuvat metsään, odottamaan sopivaa hetkeä hyökätä kimppuumme?<br> No, ehkä pelkoni ovat aiheettomia. mutten näe mitään haittaakaan metsien silmällä pitämisestä - voimmehan ainakin olla varmoja siitä, että näemme mahdolliset viholliset ennen kuin ne näkevät meidät.<br> Meidän pitäisi rakentaa parakki metsän itäosaan. Silloin yksi meistä vahtii pimeässä ja pitää meidät turvassa näiltä otuksilta.\"<br><br>-- UUSI TAVOITE --<br>"
 
+#: ../../../campaigns/emp01.wmf/event~:136
 #: ../../../campaigns/emp01.wmf/event:136
 #: ../../../campaigns/emp01.wmf/objective:7
 msgid "* Build a barracks at the red point on the east side of the forests, to the right of your headquarters."
 msgstr "* Rakenna parakki rakennusavussa näkyvän punaisen talon kohdalle, metsän itäpuolelle ja oikealle päämajastasi."
 
+#: ../../../campaigns/emp01.wmf/event~:138
 #: ../../../campaigns/emp01.wmf/event:138
 msgid "A foreboding"
 msgstr "Ennakkoaavistus"
 
+#: ../../../campaigns/emp01.wmf/event~:142
+#: ../../../campaigns/emp01.wmf/event~:166
+#: ../../../campaigns/emp01.wmf/event~:181
+#: ../../../campaigns/emp01.wmf/event~:201
+#: ../../../campaigns/emp01.wmf/event~:226
+#: ../../../campaigns/emp01.wmf/event~:256
+#: ../../../campaigns/emp01.wmf/event~:280
+#: ../../../campaigns/emp01.wmf/event~:292
+#: ../../../campaigns/emp01.wmf/event~:309
 #: ../../../campaigns/emp01.wmf/event:142
 #: ../../../campaigns/emp01.wmf/event:166
 #: ../../../campaigns/emp01.wmf/event:181
@@ -83,110 +149,127 @@ msgstr "Ennakkoaavistus"
 msgid "OK"
 msgstr "OK"
 
+#: ../../../campaigns/emp01.wmf/event~:158
 #: ../../../campaigns/emp01.wmf/event:158
 msgid "Saledus speaks with a sigh of relief..."
 msgstr "Saledus huokaisee helpotuksesta..."
 
-#: ../../../campaigns/emp01.wmf/event:160
-msgid " \"Sire, I saw that the construction of the barracks was complete, so I assigned one of my best soldiers to it to keep watch on the desert.<br> This is a good step forward. Now we can feel a bit safer and can look forward to repair our ship.\" "
+#: ../../../campaigns/emp01.wmf/event~:160
+msgid " \"Sire, I saw that the construction of the barracks was complete, so I assigned one of my best soldiers to it to keep watch on the desert.<br> This is a good step forward. Now we can feel a bit safer and can look ahead to repair our ship.\" "
 msgstr "\"Herrani, näin parakin valmistuneen, joten lähetin yhden parhaista sotilaistani pitämään silmällä aavikkoa.<br> Tämä on aimo askel eteenpäin. Nyt voimme tuntea olomme hiukan turvallisemmaksi ja keskittyä laivamme korjaamiseen.\""
 
+#: ../../../campaigns/emp01.wmf/event~:162
 #: ../../../campaigns/emp01.wmf/event:162
 msgid "Safe for now"
 msgstr "Hetkellisesti turvassa"
 
+#: ../../../campaigns/emp01.wmf/event~:172
 #: ../../../campaigns/emp01.wmf/event:172
 msgid "Amalea smiles..."
 msgstr "Amalea hymyilee.."
 
-#: ../../../campaigns/emp01.wmf/event:174
-msgid " \"Hey Lutius, I just met Saledus outside.<br> He told me about the barracks. Well, I am not one of those girls who think we need more barracks - instead, we might concentrate on other things now.<br> It is absolutely clear that we need wood to repair our ship. So, I walked through the forest yesterday and found a nice place for a lumberjack's house, south of our headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
+#: ../../../campaigns/emp01.wmf/event~:174
+msgid " \"Hey Lutius, I just met Saledus outside.<br> He told me about the barracks. Well, I am not one of those girls who think we need more barracks, but on the other hand we might concentrate on other things, now.<br> It is absolutely clear that we need wood to repair our ship. So I walked through the forest yesterday and found a nice place for a lumberjack's house, south of our headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr "\"Hei, Lutius, törmäsin juuri Saledukseen ulkosalla.<br> Hän kertoi minulle parakista. No, en ole sellainen likka joka uskoo meidän tarvitsevan lisää parakkeja, vaan minusta voisimme keskittyä nyt muihin asioihin.<br> Otsallakin näkee, että tarvitsemme puuta laivamme korjaamiseksi. Kävelinkin eilen metsässä ja löysin parahultaisen paikan puunhakkaajan mökille päämajamme eteläpuolelta.\"<br><br>-- UUSI TAVOITE --<br>"
 
-#: ../../../campaigns/emp01.wmf/event:175
-#: ../../../campaigns/emp01.wmf/objective:15
-msgid "* Build a lumberjack's house at the red point, south of your headquarters."
+#: ../../../campaigns/emp01.wmf/event~:175
+msgid "* Build a lumberjack's house at the red point, south of your headquarters"
 msgstr "* Rakenna puunhakkaajan mökki rakennusavussa näkyvän punaisen talon kohdalle päämajasi eteläpuolella."
 
+#: ../../../campaigns/emp01.wmf/event~:177
+#: ../../../campaigns/emp01.wmf/event~:197
+#: ../../../campaigns/emp01.wmf/event~:222
 #: ../../../campaigns/emp01.wmf/event:177
 #: ../../../campaigns/emp01.wmf/event:197
 #: ../../../campaigns/emp01.wmf/event:222
 msgid "Young Amalea"
 msgstr "Nuori Amalea"
 
+#: ../../../campaigns/emp01.wmf/event~:192
 #: ../../../campaigns/emp01.wmf/event:192
 msgid "Amalea recommends..."
 msgstr "Amalea suosittelee..."
 
-#: ../../../campaigns/emp01.wmf/event:194
-msgid " \"Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjack's houses, so that we can faster harvest the trunks.<br> But unfortunately the trunks are useless for repairing our ship - we need refined wood, like every ship and every bigger building needs, too. So we should build up a sawmill - as soon as we have enough space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
+#: ../../../campaigns/emp01.wmf/event~:194
+msgid " \"Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjack's houses, so that we can faster harvest the trunks.<br> But unfortunately the trunks are useless for repairing our ship - we need refined wood, like every ship and every bigger building needs, too. So we should build up a sawmill - as soon as we have got enough space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr "\"Hei Lutius, sain juuri viestin, jossa kerrotaan ensimmäisen puunhakkaajamme aloittaneen hommansa  Lienee hyvä odottaa, kunnes hän saa raivattua riittävästi tilaa kahden muunkin puunhakkaajan talon rakentamiseen, jolloin saamme tukkeja kasaan nopeammin.<br> Harmi vain, että tukit eivät sellaisenaan käy laivamme korjaamiseen - tarvitsemme jalostettua puuta, kuten kaikki muutkin suuremmat rakennusprojektit. Toisin sanoen meidän pitää rakentaa saha - heti kun sellaiselle on tilaa.\"<br><br>-- UUSI TAVOITE --<br>"
 
-#: ../../../campaigns/emp01.wmf/event:195
-#: ../../../campaigns/emp01.wmf/objective:23
-msgid "* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
+#: ../../../campaigns/emp01.wmf/event~:195
+msgid "* Build two further lumberjack's houses and a sawmill as soon as there is enough space for them."
 msgstr "* Rakenna kaksi puunhakkaajan mökkiä lisää ja saha, sitä mukaa kun niille on riittävästi tilaa."
 
+#: ../../../campaigns/emp01.wmf/event~:217
 #: ../../../campaigns/emp01.wmf/event:217
 msgid "Amalea comes in..."
 msgstr "Amalea tulee sisään..."
 
-#: ../../../campaigns/emp01.wmf/event:219
-msgid " \"Hi Lutius, I've got two important things to talk about... First the good news:<br> I saw that the construction of the sawmill is complete, so we can begin to refine the trunks the lumberjacks are harvesting to wood.<br> But that's just about the only positive thing I know to talk about. The bad news is that our lumberjacks harvest at an unbelievable speed. There are almost no trees left on this island.<br> Lutius, these trees provide shelter from the sandstorms from the desert, shade on the hot days and they are the home of so many gentle animals. We shouldn't leave this island a complete desert.<br> Lutius, I beg you: find someone who takes care about planting new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
+#: ../../../campaigns/emp01.wmf/event~:219
+msgid " \"Hi Lutius, I've got two important things to talk about... First the good news:<br> I saw that the construction of the sawmill is complete, so we can begin to refine the trunks the lumberjacks are harvesting, to wood.<br> But that's just the only positive thing I know to talk about. The bad news is that our lumberjacks harvest at an unbelievable speed. There are almost no trees left on this island.<br> Lutius, these trees provide shelter from the sandstorms from the desert, shade for the hot days and they are the home of so many gentle animals. We shouldn't leave this island as complete desert.<br> Lutius, I beg you: find someone who takes care about planting new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr "\"Terve, Lutius, minulla onkin kaksin verroin tärkeää puhuttavaa... Ensin hyvät uutiset:<br> Näin juuri, että saha on valmistunut, joten saamme puunhakkaajien tuottamat tukit jalostettua lautatavaraksi.<br> Mutta siihen hyvät uutiset loppuvatkin. Sitten huonot uutiset: puunhakkaajat panevat metsää sileäksi käsittämätöntä vauhtia. Saarella ei kohta ole enää lainkaan puuta jäljellä.<br> Lutius, nämä puut suojaavat aavikon hiekkamyrskyiltä, suovat varjoa kuumina päivinä ja antavat kodin jos jonkinlaisille leppoisille elukoille. Meidän ei pidä jättää tätä saarta täysin kaljuksi.<br> Lutius kiltti, pistä joku istuttamaan uusia puita!\"<br><br>-- UUSI TAVOITE --<br>"
 
+#: ../../../campaigns/emp01.wmf/event~:220
 #: ../../../campaigns/emp01.wmf/event:220
 #: ../../../campaigns/emp01.wmf/objective:31
 msgid "* Build a forester's house to preserve the wood resources of this island."
 msgstr "* Rakenna puunistuttajan mökki ylläpitääksesi saaren puuvarantoja."
 
+#: ../../../campaigns/emp01.wmf/event~:247
 #: ../../../campaigns/emp01.wmf/event:247
 msgid "Saledus notes..."
 msgstr "Saledus huomioi..."
 
-#: ../../../campaigns/emp01.wmf/event:249
-msgid " \"Hey, my good old friend. I just thought about the rocks standing on the south strand of this land. Perhaps we could cut out some useful hard stones and beautiful marble.<br> The repair of our ship will take a few weeks, anyway, and the resources we harvest now might be the base of strong and big buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
+#: ../../../campaigns/emp01.wmf/event~:249
+msgid " \"Hey my good old friend, I just thought about the rocks, standing on the south strand of this land. Perhaps we could cut out some useful hard stones and beautiful marble.<br> The repair of our ship will take a few weeks, anyway, and the resources we harvest now might be the base of strong and big buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr "\"Hei, vanha ystäväni. Tulin juuri pohtineeksi tämän maan etelärannalla seisovia kiviä. Ehkä voisimme hakata irti joitakin hyödyllisiä kovia kiviä ja kaunista marmoria.<br> Laivan korjaamiseen menee pari viikkoa joka tapauksessa, ja mukaan ottamamme rakennusmateriaalit voivat toimia perustana kestäville ja mahtaville rakennuksille toisaalla.\"<br><br>-- UUSI TAVOITE --<br>"
 
+#: ../../../campaigns/emp01.wmf/event~:250
 #: ../../../campaigns/emp01.wmf/event:250
 #: ../../../campaigns/emp01.wmf/objective:39
 msgid "* Build a quarry in the south to cut some stones and marble out of the rocks.<br> These might be used for future buildings."
 msgstr "* Rakenna kivilouhos etelään hakataksesi kiveä ja marmoria lohkareista.<br> Niitä voidaan käyttää myöhempiin rakennuksiin."
 
+#: ../../../campaigns/emp01.wmf/event~:252
 #: ../../../campaigns/emp01.wmf/event:252
 msgid "Thinking about the future"
 msgstr "Tulevaisuutta ajatellessa"
 
 # TODO: I know Romans are men's men but this still might not be intended to sound like that.
+#: ../../../campaigns/emp01.wmf/event~:272
 #: ../../../campaigns/emp01.wmf/event:272
 msgid "Saledus looks promising..."
 msgstr "Saledus hymyilee.."
 
+#: ../../../campaigns/emp01.wmf/event~:274
 #: ../../../campaigns/emp01.wmf/event:274
 msgid " \"Hey Lutius, today we got a lot closer to our first castle. The quarry to the south began its work today and will soon provide us with stones and beautiful marble.<br> Now we truly can look forward to settling down on another island.\" "
 msgstr "\"Hei, Lutius, tänään olemme askeleen lähempänä ensimmäisen linnamme rakentamista. Työt eteläisellä kivilouhoksella alkoivat tänään, ja pian meillä on kiveä ja komeaa marmoria niin paljon kuin laivaan uskaltaa lastata.<br> Nyt voimme tosiaan uskoa asettuvamme taloksi jollekin sopivalle saarelle.\""
 
+#: ../../../campaigns/emp01.wmf/event~:276
 #: ../../../campaigns/emp01.wmf/event:276
 msgid "A step forward"
 msgstr "Askel eteenpäin"
 
 # TODO: misplaced quote
-#: ../../../campaigns/emp01.wmf/event:292
-msgid " \"Today I got the message that our ship is completely repaired. At the moment my people are loading everything onto our newly repaired ship, hoping it will serve us better than last time.<br> Tonight will be our last night on this island. Tomorrow morning we will leave, searching for a new place for our exile.<br> I still wonder if we will ever see Fremil again.<br><br>--------------------- VICTORY! ----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.\" "
+#: ../../../campaigns/emp01.wmf/event~:287
+msgid " \"Today I got the message that our ship is completely repaired. At the moment my people loading everything onto our newly repaired ship, hoping it will serve us better than last time.<br> Tonight will be our last night on this island. Tomorrow morning we will leave, searching for a new place for our exile.<br> I still wonder if we will ever see Fremil again.<br><br>--------------------- VICTORY! ----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.\" "
 msgstr "\"Tänään sain kuulla, että laivamme korjaukset ovat valmiit. Kirjoittaessani tätä väkeni lastaavat tavaroitamme entistä ehompaan alukseemme, joka toivottavasti palvelee meitä viime kertaa paremmin.<br> Tänä iltana vietämme viimeistä iltaamme tällä saarella. Huomenaamulla nostamme purjeet ja lähdemme etsimään uutta kohdetta maanpaollemme.<br> Mietin yhä, näemmekö Fremiliä enää koskaan.\"<br><br>>--------------------- VOITTO! ----------------------<br><br> Olet selviytynyt tästä komennuksesta. Voit halutessasi jatkaa pelaamista, tai siirtyä seuraavaan komennukseen."
 
+#: ../../../campaigns/emp01.wmf/event~:289
 #: ../../../campaigns/emp01.wmf/event:294
 msgid "Mission Complete"
 msgstr "Tehtävä suoritettu"
 
+#: ../../../campaigns/emp01.wmf/event~:303
 #: ../../../campaigns/emp01.wmf/event:308
 msgid "Saledus speaks:"
 msgstr "Saledus puhuu:"
 
+#: ../../../campaigns/emp01.wmf/event~:305
 #: ../../../campaigns/emp01.wmf/event:310
 msgid " \"You have made this peninsula a very secure place. It is time to move on!\" "
 msgstr "\"Olet tehnyt tästä niemimaasta hyvin turvallisen paikan. On aika jatkaa matkaa!\""
 
+#: ../../../campaigns/emp01.wmf/event~:307
 #: ../../../campaigns/emp01.wmf/event:312
 msgid "Safe Peninsula"
 msgstr "Niemimaa turvattu"

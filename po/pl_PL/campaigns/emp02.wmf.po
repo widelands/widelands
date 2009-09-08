@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4395\n"
+"Project-Id-Version: Widelands svn4498\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-07-08 20:24+0000\n"
-"PO-Revision-Date: 2009-06-27 18:36+0100\n"
+"POT-Creation-Date: 2009-08-28 14:17+0000\n"
+"PO-Revision-Date: 2009-09-08 14:15+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -43,9 +43,8 @@ msgid "A new island"
 msgstr "Nowa wyspa"
 
 #: ../../../campaigns/emp02.wmf/event:138
-#, fuzzy
 msgid " \"As Saledus and I walked through these wonderful forests in the north, we felt that our future had just begun. This land is so peaceful, good and beautiful, I could stay here until the end of my life.<br> But until that day, may many years pass! For now, we must concentrate on the present, and build a few lumberjack's houses and a sawmill to produce some basic building materials.<br> But we shouldn't forget to preserve this natural bounty. These forests should last forever, so we really should build a forester's house too.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Jak się przechadzaliśmi z Saledusem przez te piękne lasy na północy, poczuliśmy, że nasza przyszłość własnie zaczeęła. This land is so peaceful, good and beautiful, I could stay here until the end of my life.<br> But until that day, may many years pass! For now, we must concentrate on the present, and build a few lumberjack's houses and a sawmill to produce some basic building materials.<br> But we shouldn't forget to preserve this natural bounty. These forests should last forever, so we really should build a forester's house too.\"<br><br>-- NOWE CELE --<br> "
+msgstr " \"Jak się przechadzaliśmi z Saledusem przez te piękne lasy na północy, poczuliśmy, że nasza przyszłość własnie zaczeęła. Ten ląd jest tak spokojny, piękny i dobry, mógł bym tutaj spędzić resztę mojego życia.<br> Ale niech do tego dnia, minie wiela lat! Teraz, musimy się koncentrować na teraźniejszości, i zbudować parę chat drwala i tartak aby zacząć produkować jakieś podstawowe materiały.<br> Ale nie mieli byśmy zapominać o zachowaniu tego naturalnego skarbu. Te lasy miały by zostać na wieczność, także mielibyśmy też zbudować leśniczówkę.\"<br><br>-- NOWE CELE --<br> "
 
 #: ../../../campaigns/emp02.wmf/event:139
 #: ../../../campaigns/emp02.wmf/objective:9
@@ -90,8 +89,9 @@ msgid "Saledus looks unhappy"
 msgstr "Saledus nie wygląda szcześliwie"
 
 #: ../../../campaigns/emp02.wmf/event:240
+#, fuzzy
 msgid " \"Greetings Lutius, I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern strands I found the remains of another ship. I don't know whether these parts are all that is left of that ship. Inn any case: these parts do not seem to be old.<br> Perhaps the people aboard that ship were caught in the same storm which brought us to Malac' Mor - and were brought to this island.<br> I beg you to be cautious and to build some barracks or sentries around our colony.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr " \"Witaj Lucjuszu, nie chcę rozpoczynać paniki, ale znalazłem coś, Greetings Lutius, I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern strands I found the remains of another ship. I don't know whether these parts are all that is left of that ship. Inn any case: these parts do not seem to be old.<br> Perhaps the people aboard that ship were caught in the same storm which brought us to Malac' Mor - and were brought to this island.<br> I beg you to be cautious and to build some barracks or sentries around our colony.\"<br><br>-- NEW OBJECTIVE --<br> "
 
 #: ../../../campaigns/emp02.wmf/event:241
 #: ../../../campaigns/emp02.wmf/objective:25
@@ -108,7 +108,7 @@ msgstr "Saledus się uśmiecha"
 
 #: ../../../campaigns/emp02.wmf/event:282
 msgid " \"Lutius, I've got good news for you:<br> As I walked to the east, I found a larger mountain.<br> I am not absolutely sure - a geologist should check if I am right - but I believe we could mine marble from some places on the mountain.<br> It would be a good source to bolster our supply of quality marble, beyond the meagre quantities available from the quarry. Perhaps you were right when you said that this island is like paradise.<br> Let us expand to that mountain and start mining marble.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr " \"Lucjuszu, mam dla Ciebie dobre wieści:<br> Kiedy poszedłem na wschód, znalazłem większą górę.<br> Nie jestem pewien - geolog by miał sprawdzić czy mam rację - ale mam wrażenie że mogli byśmy wykopać marmur w niektórych miejscach na górze.<br> Było by to dobre źródło aby wzomcnić nasze zapasy jakościowego marmuru, ponad te marne ilości dostępne z kamieniołomów. Może miałeś rację, kiedy powiedziałeś, że ta wyspa jest jak raj.<br> Pozwól nam rozszerzyć nasze terytoria i zacząć wykopywać marmur.\"<br><br>-- NOWE CELE --<br> "
 
 #: ../../../campaigns/emp02.wmf/event:283
 #: ../../../campaigns/emp02.wmf/objective:33
@@ -218,7 +218,7 @@ msgstr "Amalea się uśmiecha"
 
 #: ../../../campaigns/emp02.wmf/event:622
 msgid " \"Greetings, my friend, I just visited our new tavern<br> 'At the palms'. The beer they serve is really tasty. You really should take a drink there, too.<br> It is good to see that we have now got a warmer and more familiar environment on our island.<br> Thank you, Lutius.\" "
-msgstr " \"Witaj mój przyjacielu, właśnie wróciłam z nowej tawerny<br> 'Pod palmami'. Piwo które tam serwuję jest na prawdę świetne. Myślę że też byś się tam miał napić.<br> Dobrze widzieć że teraz mamy cieplejsze i bardziej znane środowisko na naszej wyspie.<br> Dziekuję Lucjusz.\" "
+msgstr " \"Witaj mój przyjacielu, właśnie wróciłam z nowej tawerny<br> 'Pod palmami'. Piwo które tam serwuję jest na prawdę świetne. Myślę że też byś się tam miał napić.<br> Dobrze widzieć że teraz mamy cieplejsze i bardziej znane środowisko na naszej wyspie.<br> Dziekuję Lucjuszu.\" "
 
 #: ../../../campaigns/emp02.wmf/event:624
 msgid "Our new tavern"
@@ -258,15 +258,12 @@ msgstr "Zniscz plemię barbarzyńców"
 
 #~ msgid "* Build up three lumberjack's houses, a forester's house and a sawmill."
 #~ msgstr "* Zbuduj trzy chaty drwali, leśniczówke i tartak."
-
 #~ msgid "* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 #~ msgstr "* Zbuduj pracownię kamieniarza i potem dokończ infrastrukturę górnictwa i produkcji (kopalnia węgla i/lub piec do węgla drzewnego,<br> kopalnie rudy żelaza, pracownię rzemieślnika, snycerza, płatnerz i hutę)."
-
 #~ msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a tower, on the eastern frontier."
 #~ msgstr "* Zbuduj większe wojskowe budynki, takie jak placówki i bariery<br> lub wieże, na wschodnim froncie."
-
 #~ msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>"
 #~ msgstr "* Kiedy tylko masz wystarczająco dużo żołnierzy, zaatakuj i usuń wszystkie budynki barbarzyńców.<br>"
-
 #~ msgid "* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 #~ msgstr "* Na koniec zbuduj fortecę na języku wyspy (blizko miejsca gdzie stała kwatera główna barbarzyńców), aby zabronić budowie nowych osad w tym regionie."
+

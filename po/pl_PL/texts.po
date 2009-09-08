@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4395\n"
+"Project-Id-Version: Widelands svn4498\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-07-08 20:24+0000\n"
-"PO-Revision-Date: 2009-06-12 18:18+0100\n"
+"POT-Creation-Date: 2009-08-28 14:17+0000\n"
+"PO-Revision-Date: 2009-08-15 10:45+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -347,11 +347,11 @@ msgstr "Wódz"
 msgid "Elders"
 msgstr "Starszyzna"
 
-#: ../../txts/developers:19 ../../txts/developers:288
+#: ../../txts/developers:19 ../../txts/developers:293
 msgid "Graphics"
 msgstr "Grafika"
 
-#: ../../txts/developers:24 ../../txts/developers:281
+#: ../../txts/developers:24 ../../txts/developers:286
 msgid "Homepage"
 msgstr "Strona domowa"
 
@@ -359,11 +359,11 @@ msgstr "Strona domowa"
 msgid "vacant"
 msgstr "niedostępny"
 
-#: ../../txts/developers:31 ../../txts/developers:294
+#: ../../txts/developers:31 ../../txts/developers:299
 msgid "Sound"
 msgstr "Dźwięk"
 
-#: ../../txts/developers:36 ../../txts/developers:299
+#: ../../txts/developers:36 ../../txts/developers:304
 msgid "Translation"
 msgstr "Tłumaczenie"
 
@@ -440,50 +440,54 @@ msgid "Hungarian"
 msgstr "Węgierski"
 
 #: ../../txts/developers:199
+msgid "Italian"
+msgstr "Włoski"
+
+#: ../../txts/developers:204
 msgid "Polish"
 msgstr "Polski"
 
-#: ../../txts/developers:207
+#: ../../txts/developers:212
 msgid "Russian"
 msgstr "Rosyjski"
 
-#: ../../txts/developers:212
+#: ../../txts/developers:217
 msgid "Slovak"
 msgstr "Słowacki"
 
-#: ../../txts/developers:217
+#: ../../txts/developers:222
 msgid "Spanish"
 msgstr "Hiszpański"
 
-#: ../../txts/developers:222
+#: ../../txts/developers:227
 msgid "Swedish"
 msgstr "Szwedzki"
 
-#: ../../txts/developers:230
+#: ../../txts/developers:235
 msgid "Packagers"
 msgstr "Opiekuni pakietów"
 
-#: ../../txts/developers:234
+#: ../../txts/developers:239
 msgid "Linux Distributions"
 msgstr "Dystrubucje linuksowe"
 
-#: ../../txts/developers:245
+#: ../../txts/developers:250
 msgid "Other Unix Distributions"
 msgstr "Inne dystrybucje uniksowe"
 
-#: ../../txts/developers:254
+#: ../../txts/developers:259
 msgid "Non Unix Distributions"
 msgstr "Dystrybucje nieuniksowe"
 
-#: ../../txts/developers:265
+#: ../../txts/developers:270
 msgid "Wiki and Enduser-Documentation"
 msgstr "Wiki i dokumentacja użytkownika"
 
-#: ../../txts/developers:277
+#: ../../txts/developers:282
 msgid "Former elders"
 msgstr "Była starszyzna"
 
-#: ../../txts/developers:305
+#: ../../txts/developers:310
 msgid "Other"
 msgstr "Inne"
 
@@ -571,15 +575,6 @@ msgstr "ALT      (przytrzymany) wybiera drugie alternatywne narzędzie dopóki j
 msgid "Always build a forester's and a fish breeder's house, so you will not run out of trunks and food."
 msgstr "Zawsze buduj leśniczówkę i hodowcę ryb, żeby zapewnić sobie stałe dostawy belek i jedzenia."
 
-#: ../../txts/tips/barbarians.tip:2 ../../txts/tips/atlanteans.tip:2
-#: ../../txts/tips/empire.tip:2
-msgid "Some buildings, such as the farm, have a very small working area. If the building is surrounded with trees or roads, production will stop."
-msgstr "Niektóre budynki, jak na przykład farma, mają bardzo maly okręg pracy. Jeśli budynek jest otoczony drzewami albo drogami, produkacje się zatrzyma."
-
-#: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
-msgid "Keep an eye on your fishers. After fish resources are exhausted in their working area, they will stop to fish."
-msgstr "Uważaj na chatki rybaków. Po wykończeniu zasobów ryb w okręgu miejsca pracy, produkcja będzie zatrzymana."
-
 #: ../../txts/tips/barbarians.tip:10
 msgid "Always build a ranger's and a gamekeeper's hut, so you will not run out of trunks and food."
 msgstr "Zawsze buduj leśniczówkę i opiekuna zwierząt, żeby zapewnić sobie stałe dostawy belek i jedzenia."
@@ -619,6 +614,15 @@ msgstr "Narzędzia dla zdarzeń, wyzwalaczy, ciągów zdarzeń i celów są cał
 #: ../../txts/tips/editor.tip:34
 msgid "You can find a reference for all triggers and events in our wiki at widelands.org."
 msgstr "Możesz znaleźć informacje dla wszystkich wyzwalaczy i zdarzeń w naszej wiki na widelands.org (po angielsku)."
+
+#: ../../txts/tips/empire.tip:2 ../../txts/tips/atlanteans.tip:2
+#: ../../txts/tips/barbarians.tip:2
+msgid "Some buildings, such as the farm, have a very small working area. If the building is surrounded with trees or roads, production will stop."
+msgstr "Niektóre budynki, jak na przykład farma, mają bardzo maly okręg pracy. Jeśli budynek jest otoczony drzewami albo drogami, produkacje się zatrzyma."
+
+#: ../../txts/tips/empire.tip:6 ../../txts/tips/barbarians.tip:6
+msgid "Keep an eye on your fishers. After fish resources are exhausted in their working area, they will stop to fish."
+msgstr "Uważaj na chatki rybaków. Po wykończeniu zasobów ryb w okręgu miejsca pracy, produkcja będzie zatrzymana."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester's house so you will not run out of trunks."

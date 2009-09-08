@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-07-01 00:17+0000\n"
-"PO-Revision-Date: 2009-07-01 03:20+0300\n"
+"POT-Creation-Date: 2009-07-21 11:08+0000\n"
+"PO-Revision-Date: 2009-07-21 19:48+0300\n"
 "Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -22,22 +22,6 @@ msgstr ""
 #: ../../../tribes/empire/advanced_lance/conf:1
 msgid "This is an advanced lance, with steel top."
 msgstr "Tämän keihään kärki on terästä ja on siksi puista kestävämpi."
-
-#: ../../../tribes/empire/arena/conf:13
-#: ../../../tribes/empire/trainingscamp/conf:38
-#: ../../../tribes/empire/colosseum/conf:27
-msgid "Sleep"
-msgstr "Lepää"
-
-#: ../../../tribes/empire/arena/conf:14
-#: ../../../tribes/empire/colosseum/conf:28
-msgid "Upgrade soldier evade 0"
-msgstr "Paranna sotilaan välttökykyä (0)"
-
-#: ../../../tribes/empire/arena/conf:15
-#: ../../../tribes/empire/colosseum/conf:29
-msgid "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
-msgstr "Paranna sotilaan välttökykyä (0) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/empire/armour/conf:1
 msgid "Basic armour for Empire soldiers."
@@ -106,6 +90,16 @@ msgstr "Kangasta tarvitaan Keisarikunnan aluksille ja suurempia rakennuksia vart
 #: ../../../tribes/empire/coal/conf:1
 msgid "The fires of the Empire are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
 msgstr "Keisarikunnassa tulia ruokitaan yleensä puulla, mutta joskus tällainen liekki ei ole riittävän kuuma. Tällöin käytetään hiiltä."
+
+#: ../../../tribes/empire/colosseum/conf:28
+#: ../../../tribes/empire/arena/conf:14
+msgid "Upgrade soldier evade 0"
+msgstr "Paranna sotilaan välttökykyä (0)"
+
+#: ../../../tribes/empire/colosseum/conf:29
+#: ../../../tribes/empire/arena/conf:15
+msgid "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+msgstr "Paranna sotilaan välttökykyä (0) (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta (build13))"
 
 #: ../../../tribes/empire/colosseum/conf:30
 msgid "Upgrade soldier evade 1"
@@ -256,7 +250,7 @@ msgstr "Hiili"
 
 #: ../../../tribes/empire/conf:69
 msgid "Fire Tongs"
-msgstr "Tongit"
+msgstr "Pihdit"
 
 #: ../../../tribes/empire/conf:70
 msgid "Fish"
@@ -725,37 +719,6 @@ msgstr "Vehnästä jauhettua jauhoa käytetään Keisarikunnan maukkaan leivän 
 msgid "Plants trees."
 msgstr "Istuttaa puita."
 
-#: ../../../tribes/empire/foresters_house/conf:15
-#: ../../../tribes/empire/hunters_house/conf:12
-#: ../../../tribes/empire/goldmine/conf:21 ../../../tribes/empire/well/conf:13
-#: ../../../tribes/empire/deep_goldmine/conf:22
-#: ../../../tribes/empire/fishers_house/conf:16
-#: ../../../tribes/empire/piggery/conf:18
-#: ../../../tribes/empire/deep_marblemine/conf:23
-#: ../../../tribes/empire/winery/conf:17
-#: ../../../tribes/empire/burners_house/conf:16
-#: ../../../tribes/empire/inn/conf:20
-#: ../../../tribes/empire/deep_oremine/conf:22
-#: ../../../tribes/empire/mill/conf:17 ../../../tribes/empire/tavern/conf:19
-#: ../../../tribes/empire/armoursmithy/conf:27
-#: ../../../tribes/empire/sheepfarm/conf:18
-#: ../../../tribes/empire/brewery/conf:17 ../../../tribes/empire/farm/conf:19
-#: ../../../tribes/empire/vineyard/conf:18
-#: ../../../tribes/empire/weaponsmithy/conf:31
-#: ../../../tribes/empire/smelting_works/conf:21
-#: ../../../tribes/empire/coalmine/conf:21
-#: ../../../tribes/empire/weaving-mill/conf:16
-#: ../../../tribes/empire/toolsmithy/conf:42
-#: ../../../tribes/empire/deep_coalmine/conf:22
-#: ../../../tribes/empire/oremine/conf:21
-#: ../../../tribes/empire/lumberjacks_house/conf:15
-#: ../../../tribes/empire/marblemine/conf:24
-#: ../../../tribes/empire/stonemasons_house/conf:18
-#: ../../../tribes/empire/bakery/conf:17 ../../../tribes/empire/quarry/conf:20
-#: ../../../tribes/empire/sawmill/conf:17
-msgid "Work"
-msgstr "Työskentele (pääohjelma)"
-
 #: ../../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
 msgstr "Paikantaa hyviä kaivosten ja kaivojen paikkoja."
@@ -967,6 +930,12 @@ msgstr "Valmista saha"
 msgid "Produce axe"
 msgstr "Valmista kirves"
 
+#: ../../../tribes/empire/trainingscamp/conf:38
+#: ../../../tribes/empire/colosseum/conf:27
+#: ../../../tribes/empire/arena/conf:13
+msgid "Sleep"
+msgstr "Lepää"
+
 #: ../../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
 msgstr "Paranna sotilaan hyökkäystä (0)"
@@ -1046,6 +1015,39 @@ msgstr "Istuta viiniköynnös"
 #: ../../../tribes/empire/vineyard/conf:16
 msgid "Harvest vine"
 msgstr "Korjaa viinirypäleitä"
+
+#: ../../../tribes/empire/vineyard/conf:18
+#: ../../../tribes/empire/armoursmithy/conf:27
+#: ../../../tribes/empire/marblemine/conf:24
+#: ../../../tribes/empire/bakery/conf:17
+#: ../../../tribes/empire/hunters_house/conf:12
+#: ../../../tribes/empire/oremine/conf:21
+#: ../../../tribes/empire/piggery/conf:18
+#: ../../../tribes/empire/lumberjacks_house/conf:15
+#: ../../../tribes/empire/inn/conf:20
+#: ../../../tribes/empire/stonemasons_house/conf:18
+#: ../../../tribes/empire/toolsmithy/conf:42
+#: ../../../tribes/empire/sawmill/conf:17
+#: ../../../tribes/empire/tavern/conf:19
+#: ../../../tribes/empire/fishers_house/conf:16
+#: ../../../tribes/empire/farm/conf:19 ../../../tribes/empire/quarry/conf:20
+#: ../../../tribes/empire/deep_marblemine/conf:23
+#: ../../../tribes/empire/burners_house/conf:16
+#: ../../../tribes/empire/weaving-mill/conf:16
+#: ../../../tribes/empire/goldmine/conf:21
+#: ../../../tribes/empire/sheepfarm/conf:18
+#: ../../../tribes/empire/mill/conf:17
+#: ../../../tribes/empire/foresters_house/conf:15
+#: ../../../tribes/empire/deep_oremine/conf:22
+#: ../../../tribes/empire/smelting_works/conf:21
+#: ../../../tribes/empire/deep_coalmine/conf:22
+#: ../../../tribes/empire/weaponsmithy/conf:31
+#: ../../../tribes/empire/winery/conf:17
+#: ../../../tribes/empire/deep_goldmine/conf:22
+#: ../../../tribes/empire/well/conf:13 ../../../tribes/empire/brewery/conf:17
+#: ../../../tribes/empire/coalmine/conf:21
+msgid "Work"
+msgstr "Työskentele (pääohjelma)"
 
 # TODO: no ,
 #: ../../../tribes/empire/war_lance/conf:1

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4395\n"
+"Project-Id-Version: Widelands svn4498\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-07-08 20:24+0000\n"
-"PO-Revision-Date: 2009-06-29 14:04+0100\n"
+"POT-Creation-Date: 2009-08-28 14:17+0000\n"
+"PO-Revision-Date: 2009-09-03 14:16+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr "(Samouczek) Barbarzyńcy - Drugie Imperium"
 
 #: ../../campaigns/cconfig:27
 msgid "When Chat’Karuth died, he was an old man, father to three strong and ambitious sons and warlord to an army that could match any enemy willing to rise against the ancient forests. Though his glorious reign, Chat’Karuth left his eldest son Thron in the due to succeed him as the tribes warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father told him, Thron left the capital of Al’thunran, the home of the throne among the trees and redrew his forces to the high hills where he buried the corpse of his father and swore to the gods and his spirit, that he’d return to re-established order. While his brothers raged in blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
-msgstr ""
+msgstr "Kiedy Chat'Karuth umarł, był starym człowiekiem, ojcem trzech dorosłych i ambitnych synów i dygnitarzem do armii która mogła by pokonać jakiego kolwiek worga chcącego zniszczyć te stare lasy. I przez jego chwalebne panowanie, Chat'Karuth pozostawił swojego najstarszego syna, Trona, aby był ponim dygnitarzem plemion - decysja, które zdenerwowałe jego obu braci. Stary władca to wiedział. Jak jego ojciec mu powiedział, Tron opuścił Al'thunran, dom trone między drzewami i przesunął swoje siły do wysokich gór, gdzie pogrzbił swojego ojca i przysięgał bogom i jego duchu, że powróci, aby przywrócić porządek. Kiedy jego bracia szaleli w ślepej wojnie przciwko Tronowi i jego siłam, które pozostawił aby zabezpieczyły granice Al'thunran, młody pan probuje zjednoczyć swojich ambitnych braci i zmusić plemiona to pomaszerowania jeszcze raz pod jednym sztandarem."
 
 #: ../../campaigns/cconfig:30
 msgid "Empire - The months of exile"
@@ -176,9 +176,8 @@ msgid "Last Bastion"
 msgstr "Ostatni bastion"
 
 #: ../../maps/Last Bastion.wmf/elemental:11
-#, fuzzy
 msgid "Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter Sun heated up the Earth and melted glaciers and people plunged into the deep. But now - high in the majestic mountains, on the last scrap of land - two surviving tribes are sheltering. Even though the Gods showed mercy and the climate thus turned cooler again the water is still rising and rising. Onto the last secure place - the highest mountain range where the amount of gold and the space to live merely suffice for one tribe - only two opposite paths lead. But remember, be careful... this last living space is also a hard and small place to live. Don't forget to take care about your timber supplies, you'll need them."
-msgstr "Kapryśni Bogowie nie odpowiedzieli na nasze modlitwy.Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter Sun heated up the Earth and melted glaciers and people plunged into the deep. But now - high in the majestic mountains, on the last scrap of land - two surviving tribes are sheltering. Even though the Gods showed mercy and the climate thus turned cooler again the water is still rising and rising. Onto the last secure place - the highest mountain range where the amount of gold and the space to live merely suffice for one tribe - only two opposite paths lead. But remember, be careful... this last living space is also a hard and small place to live. Don't forget to take care about your timber supplies, you'll need them."
+msgstr "Kapryśni Bogowie nie odpowiedzieli na nasze modlitwy. Zamiast tego tysiące razy gorętsze niż zwykle słońcę roztopiło lodowce i ludzkość była zatopiona w głębiach. Ale teraz - wysoko w majestatycznych górach, na ostatnim skrawku lądu, dwa przetrwawające plemiona się ukrywają. I gdyż bogowie pokazali litość i klimat znów się ochłodził, woda cały czas rośnie i rośnie. Na ostatnim bezpiecznym miejscu - szczycie góry z wystarczającą ilością miejsca i złota dla przeżycia jednego plemiona. Tylko dwie przeciwległe ścieżki tam prowadzą. Ale pamiętaj - bądź ostrożny... to ostatnie miejsce jest też małe i w trudnych warunkach. Nie zapomnij postarać się o swoje zasoby drewna, będziesz je potrzebował."
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
@@ -234,7 +233,7 @@ msgstr "Daleka północ"
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid "Some say that impenetrable lands to the far north scared away even the most courageous settlers and the bravest of the brave warriors. Big and old forests, full of big and predatory game, cut across by wetlands and hills were shrouded in mystery. The ones who had managed to come back mentioned tremendous buildings, decorated with carvings and gold from majestic mountain ranges somewhere amongst the wilderness. Dozens of years after only some crumbly ruins remain of these good old times, covered with moss and trees. Their shapes give only an idea about the craftsmanship of ancient constructors. Nobody knows why they (have) disappeared. Nobody knows why. People say that now nothing is blocking the road to wealth. But many will die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
-msgstr ""
+msgstr "Niektórzy mówią, że nieprzeniknione krajiny północy wystraszyły nawet najbardziej śmiałych osadników i najodważnieszych z odważnych wojowników. Wielkie i stare lasy, pełne dużych i drapieżnych zwięrząt, przecinają się przez mokre ziemie i góry, pokryte całunem tajemnic. Ci, którym się udało wrócić, mówili o wielkich budynkach, dekorowanych w rzeźby i złoto z przpiękny pasm górskich, głęboko w dziczy. Setki lat później pozostały tylko ruiny jako wspomnienie starych dobrych czasów, przykryte mchem i drzewami. Ich kształty mało co mówią o rzemieśle starożytnych konstruktorów. Nikt nie wie dlaczego znikneli. Nie nie wie czemu. Ludzie mówią, że nic nie blokuje drogi do ich bogactwa. Ale wiele zginie rozerwanych przez wilki, pochłonionych przez bagna... otoczonych przez nieprzyjazne plemiona."
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
@@ -315,3 +314,4 @@ msgstr "Dolina żubrów"
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid "It seems as if this magical valley was inhabitated by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can you tribe live in peace with your neighbours?"
 msgstr "Wygląda na to, że tę magiczną doliną od niepamiętnych czasów zamieszkują żubry. Gdy twoje plemię przybyło do tego miejsca, byłeś pewien, że oferuje wystarczająco dużo miejsca na spokojne życie. Lecz czy twoje może żyć w zgodzie z sąsiadami?"
+
