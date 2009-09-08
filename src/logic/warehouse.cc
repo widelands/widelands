@@ -201,10 +201,17 @@ bool WarehouseSupply::is_active() const throw () {return false;}
 uint32_t WarehouseSupply::nr_supplies
 	(Game const & game, Request const & req) const
 {
-	return
-		req.get_type() == Request::WARE ? m_wares.stock(req.get_index()) :
-		m_warehouse->count_workers
+	if (req.get_type() == Request::WORKER)
+		return
+			m_warehouse->count_workers
 			(game, req.get_index(), req.get_requirements());
+
+	// calculate how many wares can be send out - it might that be we need them
+	// ourselves. E.g. for hiring new soldiers.
+	int32_t x = m_wares.stock(req.get_index())
+		- (m_warehouse->get_priority(Request::WARE, req.get_index()) / 100)
+		+ (req.get_priority(0) / 100);
+	return (x > 0) ? x : 0;
 }
 
 

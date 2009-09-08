@@ -313,7 +313,8 @@ int32_t Request::get_priority (int32_t cost) const
 			is_construction_site = true;
 		else if (m_target_warehouse)
 			//  warehouses can determine max idle priority
-			MAX_IDLE_PRIORITY = modifier;
+			//MAX_IDLE_PRIORITY = modifier;
+			return modifier;
 	}
 
 
