@@ -211,7 +211,7 @@ uint32_t WarehouseSupply::nr_supplies
 	int32_t  x = m_wares.stock(req.get_index());
 	if (x == 0)
 		return 0;
-	x += (m_warehouse->get_priority(Request::WARE, req.get_index()) / 100)
+	x -= (m_warehouse->get_priority(Request::WARE, req.get_index()) / 100)
 		- (req.get_priority(0) / 100);
 	return (x > 0) ? x : 0;
 }
