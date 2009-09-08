@@ -1,4 +1,5 @@
 size=small
+output=meat
 
 [buildcost]
 trunk=1
