@@ -211,8 +211,13 @@ uint32_t WarehouseSupply::nr_supplies
 	int32_t  x = m_wares.stock(req.get_index());
 	if (x == 0)
 		return 0;
-	x -= (m_warehouse->get_priority(Request::WARE, req.get_index()) / 100)
-		- (req.get_priority(0) / 100);
+	// only mark an item of that type as available, if the priority of the
+	// request + number of that wares in warehouse is > priority of request
+	// of *this* warehouse + 1 (+1 is important, as else the ware would directly
+	// be taken back to the warehouse as the request of the warehouse would be
+	// highered and would have the same value as the original request)
+	x += (req.get_priority(0) / 100)
+		- (m_warehouse->get_priority(Request::WARE, req.get_index()) / 100) - 1;
 	return (x > 0) ? x : 0;
 }
 
