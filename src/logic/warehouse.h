@@ -129,7 +129,7 @@ private:
 	int32_t                 m_next_military_act; // time of next military action
 
 	/// how many do we want to store in this building
-	std::vector<size_t> m_target_supply;
+	std::vector<size_t> m_target_supply; // absolute value
 };
 
 };

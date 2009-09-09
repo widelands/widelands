@@ -208,16 +208,17 @@ uint32_t WarehouseSupply::nr_supplies
 
 	// calculate how many wares can be send out - it might that be we need them
 	// ourselves. E.g. for hiring new soldiers.
-	int32_t  x = m_wares.stock(req.get_index());
-	if (x == 0)
-		return 0;
+	int32_t x = m_wares.stock(req.get_index());
 	// only mark an item of that type as available, if the priority of the
 	// request + number of that wares in warehouse is > priority of request
 	// of *this* warehouse + 1 (+1 is important, as else the ware would directly
 	// be taken back to the warehouse as the request of the warehouse would be
 	// highered and would have the same value as the original request)
-	x += (req.get_priority(0) / 100)
+	int32_t y = x + (req.get_priority(0) / 100)
 		- (m_warehouse->get_priority(Request::WARE, req.get_index()) / 100) - 1;
+	// But the number should never be higher than the number of wares available
+	if (y > x)
+		return x;
 	return (x > 0) ? x : 0;
 }
 
@@ -346,15 +347,23 @@ warehouses determine how badly they want a certain ware
 int32_t Warehouse::get_priority
 	(int32_t const type, Ware_Index const ware_index, bool) const
 {
-	return
-		type == Request::WARE and m_target_supply[ware_index] > 0 ?
-		(m_target_supply[ware_index] + 1) * 100 : 100;
+	//  NOTE  100 is idle priority, so the priority should be > 100 if the
+	//  NOTE  warehouse really wants to have this ware.
+
+	// return 100, if type is a ware, or the warehouse has no request itself
+	if ((type == Request::WORKER) || (m_target_supply[ware_index] == 0))
+		return 100;
+	int32_t x =
+		((m_target_supply[ware_index] + 2
+		- m_supply->get_wares().stock(ware_index))
+		* 100);
+	// return 100 if all requests are fullfilled, else 100 * number of requested
+	return (x > 100) ? x : 100;
 }
 
-void Warehouse::set_needed(Ware_Index const ware_index, uint32_t const value) {
-	//assert (value >= m_supply->stock_wares(ware_index));
-	if (value > m_supply->stock_wares(ware_index))
-		m_target_supply[ware_index] = value - m_supply->stock_wares(ware_index);
+void Warehouse::set_needed(Ware_Index const ware_index, uint32_t const value)
+{
+	m_target_supply[ware_index] = value;
 }
 
 
@@ -570,10 +579,6 @@ Magically create wares in this warehouse. Updates the economy accordingly.
 void Warehouse::insert_wares(Ware_Index const id, uint32_t const count)
 {
 	assert(get_economy());
-	if (m_target_supply[id] > count)
-		m_target_supply[id] -= count;
-	else
-		m_target_supply[id] = 0;
 	m_supply->add_wares(id, count);
 }
 
@@ -586,8 +591,6 @@ Magically destroy wares.
 void Warehouse::remove_wares(Ware_Index const id, uint32_t const count)
 {
 	assert(get_economy());
-	if (m_target_supply[id] > 0)
-		m_target_supply[id] += count;
 	m_supply->remove_wares(id, count);
 }
 
