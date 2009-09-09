@@ -1,4 +1,12 @@
 ### Build 14
+- Fix bug that the Atlantean and Empire Hunter's Houses were not shown as meat
+  producers in the ware encyclopedia. (svn:r4521)
+- Fix bug that in the new event/trigger dialogs, the Ok button was enabled even
+  when an event/trigger type was selected, for which no options window is
+  implemented. Nothing happened when the button was pressed. Now the button is
+  disabled and a note is shown, explaining that an event/trigger of this type
+  must be created by editing the text files (with a regular text editor instead
+  of the Widelands editor). (svn:r4512)
 - Fix bug that when a ware was waiting at a flag, and the next flag or building
   that the ware was waiting to be taken to was removed, anyting could happen
   (because of a dangling pointer). (svn:r4508)
@@ -14,9 +22,9 @@
 - Give more progress information during editor startup by showing a message for
   each tribe that is being loaded. (svn:r4488)
 - When a progress indicator has been shown during animation loading, remove the
-  message "Loading animations: 99%", so that the user is not mislead to believe
-  that animation loading is still going on, when in fact something else is
-  taking time. (svn:r4486)
+  message "Loading animations: 99%" afterwards, so that the user is not mislead
+  to believe that animation loading is still going on, when in fact something
+  else is taking time. (svn:r4486)
 - Some "plastic surgeries" on editor menus.
   (svn:r4481, svn:r4482, svn:r4483, svn:r4484, svn:r4485)
 - Fix bug that in the editor's event menu, the buttons to change and delete an
