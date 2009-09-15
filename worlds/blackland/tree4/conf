@@ -10,7 +10,7 @@ size=small
 attrib=tree
 program=program
 program=fall
-picture=idle_0.png
+picture=tree4_00.png
 
 [terrain affinity]
 strand=       16
@@ -27,7 +27,7 @@ mountain3=     7
 mountain4=     7
 
 [idle]
-pics=idle_?.png
+pics=tree4_??.png
 sfx=0 ../../../sound/animals/bird4
 fps=10
 hotspot=24 60

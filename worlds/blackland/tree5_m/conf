@@ -1,6 +1,6 @@
 size=small
 program=program
-picture=s3tree5_00.png
+picture=tree5_m_00.png
 
 [terrain affinity]
 strand=       32
@@ -25,6 +25,6 @@ remove=10
 transform=tree5
 
 [medium]
-pics=s3tree5_??.png
+pics=tree5_m_??.png
 fps=8
 hotspot=18 48

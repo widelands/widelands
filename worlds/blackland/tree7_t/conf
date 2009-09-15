@@ -1,5 +1,5 @@
 program=program
-picture=s1tree7_00.png
+picture=tree7_t_00.png
 
 [terrain affinity]
 strand=        2
@@ -21,6 +21,6 @@ remove=44
 transform=tree7_s
 
 [tiny]
-pics=s1tree7_??.png
+pics=tree7_t_??.png
 fps=8
 hotspot=5 12

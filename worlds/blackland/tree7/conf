@@ -10,7 +10,7 @@ size=small
 attrib=tree
 program=program
 program=fall
-picture=idle_0.png
+picture=tree7_00.png
 
 [terrain affinity]
 strand=        2
@@ -27,7 +27,7 @@ mountain3=     2
 mountain4=     2
 
 [idle]
-pics=idle_?.png
+pics=tree7_??.png
 hotspot=24 60
 
 [program]
