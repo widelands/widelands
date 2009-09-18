@@ -1,12 +1,13 @@
 # Widelands po/pl_PL/texts.po
 # Copyright (C) 2008 Widelands Development Team
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006.
+# Stanislaw Gackowski <soeb@soeb.eu>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4498\n"
+"Project-Id-Version: Widelands svn4529\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-08-28 14:17+0000\n"
+"POT-Creation-Date: 2009-09-18 16:56+0000\n"
 "PO-Revision-Date: 2009-08-15 10:45+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -615,8 +616,8 @@ msgstr "Narzędzia dla zdarzeń, wyzwalaczy, ciągów zdarzeń i celów są cał
 msgid "You can find a reference for all triggers and events in our wiki at widelands.org."
 msgstr "Możesz znaleźć informacje dla wszystkich wyzwalaczy i zdarzeń w naszej wiki na widelands.org (po angielsku)."
 
-#: ../../txts/tips/empire.tip:2 ../../txts/tips/atlanteans.tip:2
-#: ../../txts/tips/barbarians.tip:2
+#: ../../txts/tips/empire.tip:2 ../../txts/tips/barbarians.tip:2
+#: ../../txts/tips/atlanteans.tip:2
 msgid "Some buildings, such as the farm, have a very small working area. If the building is surrounded with trees or roads, production will stop."
 msgstr "Niektóre budynki, jak na przykład farma, mają bardzo maly okręg pracy. Jeśli budynek jest otoczony drzewami albo drogami, produkacje się zatrzyma."
 

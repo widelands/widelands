@@ -1,13 +1,14 @@
 # Widelands po/pl_PL/tribes/empire.po
 # Copyright (C) 2008 Widelands Development Team
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008.
+# Stanislaw Gackowski <soeb@soeb.eu>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4498\n"
+"Project-Id-Version: Widelands svn4529\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-08-28 14:17+0000\n"
-"PO-Revision-Date: 2009-06-29 14:00+0100\n"
+"POT-Creation-Date: 2009-09-18 16:56+0000\n"
+"PO-Revision-Date: 2009-09-17 19:18+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -18,16 +19,6 @@ msgstr ""
 #: ../../../tribes/empire/advanced_lance/conf:1
 msgid "This is an advanced lance, with steel top."
 msgstr "To jest dłuższa lanca ze stalowym grotem."
-
-#: ../../../tribes/empire/arena/conf:14
-#: ../../../tribes/empire/colosseum/conf:28
-msgid "Upgrade soldier evade 0"
-msgstr "Upgrade soldier evade 0 (Ulepsz wymijanie 0 żołnierza)"
-
-#: ../../../tribes/empire/arena/conf:15
-#: ../../../tribes/empire/colosseum/conf:29
-msgid "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
-msgstr "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))<br/>(Ulepsz wymijanie 0 żołnierza (tylko dla utrzymania kompatybliności z starymi zapisami (build13)))"
 
 #: ../../../tribes/empire/armour/conf:1
 msgid "Basic armour for Empire soldiers."
@@ -96,6 +87,16 @@ msgstr "Tkanina potrzebna jest do budowy imperialnych statków oraz większych b
 #: ../../../tribes/empire/coal/conf:1
 msgid "The fires of the Empire are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
 msgstr "Mieszkańcy Imperium zazwyczaj spalają drewno, ale tam gdzie potrzebna jest naprawdę wysoka temperatura używają węgla."
+
+#: ../../../tribes/empire/colosseum/conf:28
+#: ../../../tribes/empire/arena/conf:14
+msgid "Upgrade soldier evade 0"
+msgstr "Upgrade soldier evade 0 (Ulepsz wymijanie 0 żołnierza)"
+
+#: ../../../tribes/empire/colosseum/conf:29
+#: ../../../tribes/empire/arena/conf:15
+msgid "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+msgstr "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))<br/>(Ulepsz wymijanie 0 żołnierza (tylko dla utrzymania kompatybliności z starymi zapisami (build13)))"
 
 #: ../../../tribes/empire/colosseum/conf:30
 msgid "Upgrade soldier evade 1"
@@ -385,6 +386,7 @@ msgstr "Tragarz"
 msgid "Soldier"
 msgstr "Żołnierz"
 
+# non-existent, should be armourer/armorer!
 #: ../../../tribes/empire/conf:111
 msgid "Armoursmith"
 msgstr "Płatnerz"
@@ -539,7 +541,7 @@ msgstr "Magazyn"
 
 #: ../../../tribes/empire/conf:159
 msgid "Armour Smithy"
-msgstr "Płatnerz"
+msgstr "Pracownia płatnerza"
 
 #: ../../../tribes/empire/conf:160
 msgid "Bakery"
@@ -647,7 +649,7 @@ msgstr "Pracownia rzemieślnika"
 
 #: ../../../tribes/empire/conf:186
 msgid "Weapon Smithy"
-msgstr "Zbrojmistrz"
+msgstr "Pracownia zbrojmistrza"
 
 #: ../../../tribes/empire/conf:187
 msgid "Weaving Mill"
@@ -810,6 +812,38 @@ msgstr "Mięso zawiera dużo energii. Używane w karczmach i tawernach do przygo
 msgid "Works deep in the mines to produce coal, iron or gold."
 msgstr "Pracuje głęboko w kopalniach aby wykopywać węgiel, żelazo i złoto."
 
+#: ../../../tribes/empire/oremine/conf:21
+#: ../../../tribes/empire/armoursmithy/conf:27
+#: ../../../tribes/empire/sheepfarm/conf:18
+#: ../../../tribes/empire/mill/conf:17 ../../../tribes/empire/vineyard/conf:18
+#: ../../../tribes/empire/smelting_works/conf:21
+#: ../../../tribes/empire/fishers_house/conf:16
+#: ../../../tribes/empire/weaving-mill/conf:16
+#: ../../../tribes/empire/coalmine/conf:21
+#: ../../../tribes/empire/burners_house/conf:16
+#: ../../../tribes/empire/brewery/conf:17 ../../../tribes/empire/farm/conf:19
+#: ../../../tribes/empire/winery/conf:17
+#: ../../../tribes/empire/marblemine/conf:26
+#: ../../../tribes/empire/deep_marblemine/conf:23
+#: ../../../tribes/empire/foresters_house/conf:15
+#: ../../../tribes/empire/deep_oremine/conf:22
+#: ../../../tribes/empire/piggery/conf:18
+#: ../../../tribes/empire/weaponsmithy/conf:31
+#: ../../../tribes/empire/quarry/conf:20
+#: ../../../tribes/empire/toolsmithy/conf:42
+#: ../../../tribes/empire/deep_goldmine/conf:22
+#: ../../../tribes/empire/well/conf:13
+#: ../../../tribes/empire/stonemasons_house/conf:18
+#: ../../../tribes/empire/hunters_house/conf:13
+#: ../../../tribes/empire/inn/conf:20 ../../../tribes/empire/goldmine/conf:21
+#: ../../../tribes/empire/tavern/conf:19
+#: ../../../tribes/empire/lumberjacks_house/conf:15
+#: ../../../tribes/empire/sawmill/conf:17
+#: ../../../tribes/empire/deep_coalmine/conf:22
+#: ../../../tribes/empire/bakery/conf:17
+msgid "Work"
+msgstr "Work (Pracuj)"
+
 #: ../../../tribes/empire/pick/conf:1
 msgid "This pick is used by the stonemasons and the miners. It is produced by the toolsmith."
 msgstr "Kilof używany jest przez kamieniarzy i przez górników. Produkowany przez rzemieślnika."
@@ -857,10 +891,6 @@ msgstr "Smelt gold (Wytapiaj złoto)"
 #: ../../../tribes/empire/soldier/conf:1
 msgid "Defend and Conquer!"
 msgstr "Broń i zwyciężaj!"
-
-#: ../../../tribes/empire/stone/conf:1 ../../../tribes/empire/wood/conf:1
-msgid "Stones and wood are the basic build material of the Empire."
-msgstr "Kamienie i drewno to podstawowy budulec używany w Imperium."
 
 #: ../../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granit and marble out of laying stones."
@@ -915,8 +945,8 @@ msgid "Produce axe"
 msgstr "Produce axe (Produkuj topór)"
 
 #: ../../../tribes/empire/trainingscamp/conf:38
-#: ../../../tribes/empire/arena/conf:13
 #: ../../../tribes/empire/colosseum/conf:27
+#: ../../../tribes/empire/arena/conf:13
 msgid "Sleep"
 msgstr "Sleep (Śpij)"
 
@@ -1024,39 +1054,6 @@ msgstr "Produce advanced lance (Produkuj długą lancę)"
 msgid "Produce heavy lance"
 msgstr "Produce heavy lance (Produkuj ciężką lancę)"
 
-#: ../../../tribes/empire/weaponsmithy/conf:31
-#: ../../../tribes/empire/sheepfarm/conf:18
-#: ../../../tribes/empire/coalmine/conf:21 ../../../tribes/empire/farm/conf:19
-#: ../../../tribes/empire/toolsmithy/conf:42
-#: ../../../tribes/empire/well/conf:13
-#: ../../../tribes/empire/burners_house/conf:16
-#: ../../../tribes/empire/armoursmithy/conf:27
-#: ../../../tribes/empire/mill/conf:17
-#: ../../../tribes/empire/deep_coalmine/conf:22
-#: ../../../tribes/empire/oremine/conf:21
-#: ../../../tribes/empire/deep_oremine/conf:22
-#: ../../../tribes/empire/winery/conf:17
-#: ../../../tribes/empire/stonemasons_house/conf:18
-#: ../../../tribes/empire/foresters_house/conf:15
-#: ../../../tribes/empire/inn/conf:20 ../../../tribes/empire/bakery/conf:17
-#: ../../../tribes/empire/deep_goldmine/conf:22
-#: ../../../tribes/empire/marblemine/conf:26
-#: ../../../tribes/empire/piggery/conf:18
-#: ../../../tribes/empire/vineyard/conf:18
-#: ../../../tribes/empire/fishers_house/conf:16
-#: ../../../tribes/empire/smelting_works/conf:21
-#: ../../../tribes/empire/sawmill/conf:17
-#: ../../../tribes/empire/tavern/conf:19
-#: ../../../tribes/empire/goldmine/conf:21
-#: ../../../tribes/empire/quarry/conf:20
-#: ../../../tribes/empire/lumberjacks_house/conf:15
-#: ../../../tribes/empire/hunters_house/conf:12
-#: ../../../tribes/empire/deep_marblemine/conf:23
-#: ../../../tribes/empire/brewery/conf:17
-#: ../../../tribes/empire/weaving-mill/conf:16
-msgid "Work"
-msgstr "Work (Pracuj)"
-
 #: ../../../tribes/empire/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
 msgstr "Produkuje tkaninę dla łodzi i żołnierzy."
@@ -1068,6 +1065,10 @@ msgstr "Pszenica jest niezbędna do przeżycia. Można z niej zrobić mocny alko
 #: ../../../tribes/empire/wine/conf:1
 msgid "This wine gives enough power, to mine marble or gold. And furthermore, our soldiers like it, too."
 msgstr "Wino daje dość siły aby wydobywać marmur lub złoto. Ponadto nasi żołnierze też je lubią."
+
+#: ../../../tribes/empire/wood/conf:1 ../../../tribes/empire/stone/conf:1
+msgid "Stones and wood are the basic build material of the Empire."
+msgstr "Kamienie i drewno to podstawowy budulec używany w Imperium."
 
 #: ../../../tribes/empire/wood_lance/conf:1
 msgid "This is a wooden lance, which is the basic of the Empires military system."

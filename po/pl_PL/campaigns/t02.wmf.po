@@ -1,12 +1,13 @@
 # Widelands po/pl_PL/campaigns/t02.wmf.po
 # Copyright (C) 2008 Widelands Development Team
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006.
+# Stanislaw Gackowski <soeb@soeb.eu>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4498\n"
+"Project-Id-Version: Widelands svn4529\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-08-28 14:17+0000\n"
+"POT-Creation-Date: 2009-09-18 16:56+0000\n"
 "PO-Revision-Date: 2009-08-28 16:57+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -31,36 +32,23 @@ msgstr "Tron wstrząsa głową..."
 msgid " \"The war goes on. More and more of our brothers and sisters flee the brutal war raging in the capital beneath the trees.<br> The stories they tell about the deeds of our kin are sad to hear. I've spent nights lying awake, restless, more tired I ever believed one could be. Yet whenever I close my eyes, I see the fortress my father built consumed by flames. The throne between the trees, the symbol of unity and peace among our kin became the wedge that drives us apart.\" "
 msgstr " \"Wojna trwa dalej. Coraz więcej naszych sióstr i braci ucieka przed walką trwającą w stolicy pod drzewami.<br> To co opowiadają o czynach naszych bliskich jest tak bardzo smutne... Spędziłem noce leżąc obudzony i bez odpoczynku, bardziej zmęczony niż kiedykolwiek myślałem że można być. Zawsze kiedy zamykam oczy widze las, zasadzony przez mojego ojca, stojący w płomieniach. Tron stojący pomiędzy drzewami, symbol zjednoczenia i pokoju w naszym rodzie, stał się klinem który nas rozdzielił.\" "
 
-#: ../../../campaigns/t02.wmf/event:138
-#: ../../../campaigns/t02.wmf/event:149
+#: ../../../campaigns/t02.wmf/event:138 ../../../campaigns/t02.wmf/event:149
 #: ../../../campaigns/t02.wmf/event:160
 msgid "The story continues"
 msgstr "Opowieść ciągnie dalej"
 
-#: ../../../campaigns/t02.wmf/event:141
-#: ../../../campaigns/t02.wmf/event:152
-#: ../../../campaigns/t02.wmf/event:163
-#: ../../../campaigns/t02.wmf/event:260
-#: ../../../campaigns/t02.wmf/event:272
-#: ../../../campaigns/t02.wmf/event:285
-#: ../../../campaigns/t02.wmf/event:297
-#: ../../../campaigns/t02.wmf/event:309
-#: ../../../campaigns/t02.wmf/event:323
-#: ../../../campaigns/t02.wmf/event:335
-#: ../../../campaigns/t02.wmf/event:348
-#: ../../../campaigns/t02.wmf/event:361
-#: ../../../campaigns/t02.wmf/event:374
-#: ../../../campaigns/t02.wmf/event:386
-#: ../../../campaigns/t02.wmf/event:399
-#: ../../../campaigns/t02.wmf/event:413
-#: ../../../campaigns/t02.wmf/event:426
-#: ../../../campaigns/t02.wmf/event:439
-#: ../../../campaigns/t02.wmf/event:453
-#: ../../../campaigns/t02.wmf/event:466
-#: ../../../campaigns/t02.wmf/event:479
-#: ../../../campaigns/t02.wmf/event:492
-#: ../../../campaigns/t02.wmf/event:513
-#: ../../../campaigns/t02.wmf/event:526
+#: ../../../campaigns/t02.wmf/event:141 ../../../campaigns/t02.wmf/event:152
+#: ../../../campaigns/t02.wmf/event:163 ../../../campaigns/t02.wmf/event:260
+#: ../../../campaigns/t02.wmf/event:272 ../../../campaigns/t02.wmf/event:285
+#: ../../../campaigns/t02.wmf/event:297 ../../../campaigns/t02.wmf/event:309
+#: ../../../campaigns/t02.wmf/event:323 ../../../campaigns/t02.wmf/event:335
+#: ../../../campaigns/t02.wmf/event:348 ../../../campaigns/t02.wmf/event:361
+#: ../../../campaigns/t02.wmf/event:374 ../../../campaigns/t02.wmf/event:386
+#: ../../../campaigns/t02.wmf/event:399 ../../../campaigns/t02.wmf/event:413
+#: ../../../campaigns/t02.wmf/event:426 ../../../campaigns/t02.wmf/event:439
+#: ../../../campaigns/t02.wmf/event:453 ../../../campaigns/t02.wmf/event:466
+#: ../../../campaigns/t02.wmf/event:479 ../../../campaigns/t02.wmf/event:492
+#: ../../../campaigns/t02.wmf/event:513 ../../../campaigns/t02.wmf/event:526
 #: ../../../campaigns/t02.wmf/event:1204
 msgid "OK"
 msgstr "OK"
@@ -81,14 +69,10 @@ msgstr "Dzielny Boldreth kroczy koło Ciebie..."
 msgid " \"So you want to prepare us for a longer stay in these forests, Thron? Well, I see the wisdom in doing so, yet my heart is yearning for a glorious return to Al'thunran. Too long have we waited while our brethren have fought on the battlefield, and our axes and swords have turned rusty over time.\" "
 msgstr " \"Czyli zamierzasz przygotować nas do dłuższego pobytu w lesie, wodzu? Widzę w tym mądrość, ale moje serce żąda triumfalnego powrotu do Al'thunran. Zbyt długo czekaliśmy - kiedy nasi bracia walczyli na polu bitwy, nasze topory i miecze pokryły się rdzą...\""
 
-#: ../../../campaigns/t02.wmf/event:258
-#: ../../../campaigns/t02.wmf/event:283
-#: ../../../campaigns/t02.wmf/event:321
-#: ../../../campaigns/t02.wmf/event:333
-#: ../../../campaigns/t02.wmf/event:359
-#: ../../../campaigns/t02.wmf/event:384
-#: ../../../campaigns/t02.wmf/event:424
-#: ../../../campaigns/t02.wmf/event:451
+#: ../../../campaigns/t02.wmf/event:258 ../../../campaigns/t02.wmf/event:283
+#: ../../../campaigns/t02.wmf/event:321 ../../../campaigns/t02.wmf/event:333
+#: ../../../campaigns/t02.wmf/event:359 ../../../campaigns/t02.wmf/event:384
+#: ../../../campaigns/t02.wmf/event:424 ../../../campaigns/t02.wmf/event:451
 #: ../../../campaigns/t02.wmf/event:464
 msgid "Your loyal companion"
 msgstr "Twój wierny towarzysz"
@@ -101,14 +85,10 @@ msgstr "Khantrukh dołącza do was..."
 msgid " \"I beg your forgiveness, chieftain, but I have a grave concern to discuss with you. The rocks close to our camp are shrinking fast under our workers' tools, and it is a matter of little time only before they are all gone.\" "
 msgstr " \"Przepraszam wodzu, ale mam ważny powód aby z Tobą porozmawiać. Skały niedaleko naszego obozu znikają bardzo szybko pod narzędziami naszych kamieniarzy i to kwestia dni kiedy znikną zupełnie.\""
 
-#: ../../../campaigns/t02.wmf/event:270
-#: ../../../campaigns/t02.wmf/event:295
-#: ../../../campaigns/t02.wmf/event:307
-#: ../../../campaigns/t02.wmf/event:346
-#: ../../../campaigns/t02.wmf/event:372
-#: ../../../campaigns/t02.wmf/event:397
-#: ../../../campaigns/t02.wmf/event:437
-#: ../../../campaigns/t02.wmf/event:477
+#: ../../../campaigns/t02.wmf/event:270 ../../../campaigns/t02.wmf/event:295
+#: ../../../campaigns/t02.wmf/event:307 ../../../campaigns/t02.wmf/event:346
+#: ../../../campaigns/t02.wmf/event:372 ../../../campaigns/t02.wmf/event:397
+#: ../../../campaigns/t02.wmf/event:437 ../../../campaigns/t02.wmf/event:477
 #: ../../../campaigns/t02.wmf/event:490
 msgid "The advisor"
 msgstr "Doradca "
@@ -121,8 +101,7 @@ msgstr "Boldreth podskakuje..."
 msgid " \"While it is certainly no worthy task for a warrior, at least it is something to be done! Thron, what do you say about me taking a few of our most restless warriors and venturing somewhat closer to the great mountain of Kal'mavrath - maybe we will find some more big stones to please the old man?\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Może nie jest to zadanie warte wojownika, ale zawsze coś do roboty! Wodzu, co powiesz na to, abym zabrał paru wypoczętych wojowników i wybrał się bliżej do wielkiej góry Kal'mavrath - może znajdziemy jakieś skały aby zadowolić staruszka?\" <br><br>--NOWE CELE--<br>"
 
-#: ../../../campaigns/t02.wmf/event:281
-#: ../../../campaigns/t02.wmf/objective:7
+#: ../../../campaigns/t02.wmf/event:281 ../../../campaigns/t02.wmf/objective:7
 msgid "* Build military buildings (like sentries and strongholds) to expand your territory.<br> Get to the rocks northeast from you and build a quarry there."
 msgstr "* Zbuduj budynki militarne (takie jak strażnice i twierdze) aby powiększyć swoje terytorium.<br> Dotrzyj do skał na północnym zachodzie i zbuduj tam kamieniołom."
 
@@ -298,8 +277,7 @@ msgstr "Khantrukh odetchnął z ulgą..."
 msgid " \"Wonderful! Our roofs are not dripping anymore, and we have all the material we need for, well, whichever monumental building we see fit!\" "
 msgstr " \"Wspaniale! Nasze dachy już nie przeciekają, a my mamy wszystkie potrzebne materiały na, hmm... jaką kolwiek monumentalną budowlę którą będziemy chcieli!\" "
 
-#: ../../../campaigns/t02.wmf/event:506
-#: ../../../campaigns/t02.wmf/event:1197
+#: ../../../campaigns/t02.wmf/event:506 ../../../campaigns/t02.wmf/event:1197
 msgid "Thron speaks..."
 msgstr "Tron mówi..."
 
@@ -379,6 +357,9 @@ msgstr "Zbuduj piec do fugi i gospodarkę węglaną"
 msgid "Build a fernery"
 msgstr "Zbuduj paprociarnię"
 
+#~ msgid "* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath it; then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate the enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish). Note that the existence of inns does not make taverns obsolete - normal mines still require rations instead of snacks. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which strategy you prefer."
+#~ msgstr "* Rozbuduj kopalnię wegla i tawernę do ich ulepszonych wersji.<br> Normalna kopalnia może wykopać tylko jedną trzecią zasobów leżących pod nią; potem musi być rozszerzona do głębokiej kopalnie, aby utrzymać ją działającą. Aby rozbudować budynek, wybierz to, i naciśnij odpowiedni przycisk w nowo pojawionym menu.<br> Pracownicy mogą zdobyć doświadczenie poprzez udaną pracę. Z wystarczającym doświadczeniem, stają sie bardziej zaawansowani w swojej pracy i są potrzebni w bardziej zaawanowanych budynkach. Nie rozbudowuj budynek, dokąd nie masz wystarczająca zaawansowanych pracowników! Rozbudowane budynki zwykle wymagają więcej niż ich podstawowe wersje - na przykład, głębokie kopalnie potrzebują przekąski zamiast racji. Będziesz musiał/a rozbudować tawernę do karczmy, abyś był/a wstanie produkować przekąski z chleba pita I(!) drugiego typu jedzenia (mięso lub ryby). Zauważ, że istnienie karczm nie powoduje że tawerny są nie potrzebne - normalne kopalnie cały czas potrzebują racje, a nie przekąski. Oczywiście możesz rozbudować wszystkie kopalnie do głębszych od razu - wielkie kopalnie pracują trochę szybciej, mniejsze kopalnie potrzebują tańsze jedznie. Pozostaje na tobie, jaką strategię wybierzesz."
+
 #, fuzzy
 #~ msgid "Khantrukh seems relieved..."
 #~ msgstr "Khantrukh odetchnął z ulgą..."
@@ -386,8 +367,6 @@ msgstr "Zbuduj paprociarnię"
 #, fuzzy
 #~ msgid " \"The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore - it must not be far anymore.<br> I prayed it might get warmer again, as I prayed the war would finally come to an end.<br> So far, it seems that neither prayer was fulfilled.\" "
 #~ msgstr "\"Zima nadchodzi. Wielu z nas cierpi z zimna, które musimy znosić. Dzień kiedy możemy powrócić nie może być niedaleko - on musi nadejść wkrótce.<br> Znowu się modliłem aby się ociepliło, tak jak wcześniej się modliłem aby ta wojna w końcu skończyła.<br> Cały czas wygląda, że żadna z tych modlitw się nie spełniła...\"</p>"
-#~ msgid "* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath it; then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate the enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish). Note that the existence of inns does not make taverns obsolete - normal mines still require rations instead of snacks. You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which strategy you prefer."
-#~ msgstr "* Rozbuduj kopalnię wegla i tawernę do ich ulepszonych wersji.<br> Normalna kopalnia może wykopać tylko jedną trzecią zasobów leżących pod nią; potem musi być rozszerzona do głębokiej kopalnie, aby utrzymać ją działającą. Aby rozbudować budynek, wybierz to, i naciśnij odpowiedni przycisk w nowo pojawionym menu.<br> Pracownicy mogą zdobyć doświadczenie poprzez udaną pracę. Z wystarczającym doświadczeniem, stają sie bardziej zaawansowani w swojej pracy i są potrzebni w bardziej zaawanowanych budynkach. Nie rozbudowuj budynek, dokąd nie masz wystarczająca zaawansowanych pracowników! Rozbudowane budynki zwykle wymagają więcej niż ich podstawowe wersje - na przykład, głębokie kopalnie potrzebują przekąski zamiast racji. Będziesz musiał/a rozbudować tawernę do karczmy, abyś był/a wstanie produkować przekąski z chleba pita I(!) drugiego typu jedzenia (mięso lub ryby). Zauważ, że istnienie karczm nie powoduje że tawerny są nie potrzebne - normalne kopalnie cały czas potrzebują racje, a nie przekąski. Oczywiście możesz rozbudować wszystkie kopalnie do głębszych od razu - wielkie kopalnie pracują trochę szybciej, mniejsze kopalnie potrzebują tańsze jedznie. Pozostaje na tobie, jaką strategię wybierzesz."
 
 #, fuzzy
 #~ msgid "* Build a coal mine and an iron ore mine.<br> Place a flag up on the mountain's flank in the east (on mountain terrain, though, not mountain meadow). When you click at the flag, you can send Geologists there. Because the flag is on mountains, the Geologists will search for ores; otherwise, they will search for water. Then build a mine for both kinds of resource he will find, choosing the mine to be built appropriately:<br> Black - coal<br> Red - iron ore<br> Yellow - gold<br> Grey - granite<br> Mines may only be built on mountain terrain. Suitable places for mines are displayed with a hammer and pick symbol."
@@ -420,12 +399,13 @@ msgstr "Zbuduj paprociarnię"
 #, fuzzy
 #~ msgid " \"I have to give it to you, you are right here, old man.<br> There seem to be quite many animals in the forests here - we might just hunt down more of them. And, of course, the people would cheer to a new tavern - hey, we might call it 'Thron's Pride' or so if you want!\"<br><br>-- NEW OBJECTIVE --<br> "
 #~ msgstr " \"Tutaj muszę przyznać ci rację, starcze.<br>Wygląda na to że w lesie jest całkiem sporo zwierząt- może powinniśmy po prostu zapolować na większą liczbę. I oczywiście ludzie będą się cieszyć z nowej Tawerny. Hej! Może powinniśmy ją nazwać Dumą Tronu lub podobnie jeśli sobie życzysz!\"<br><br>"
+
 #~ msgid "The Story goes on..."
 #~ msgstr "Opowieść biegnie dalej..."
 
 #, fuzzy
 #~ msgid " \"Just look at that! The great mountain of Kal'mavrath! I wonder what treasures nature might have hidden beneath its majestic flanks!<br>Now that's a chance for the elderly to become useful once in a while! Let us send out some of those who understand the stone's tongue to unravel the mountain's secrets!\"<br><br>--NEW OBJECTIVES--<br>- When you click at a flag you can send Geologists to said flag. If that flag is in mountains, the Geologists will search the mountain for ores; otherwise, they will search it for water. Place a flag up on the mountains flank to the east (on mountain terrain though, not mountain meadow) and send a Gelogist there. Build then a mine for both kinds of ore he will find, choosing the mine to be built appropriately:<br>Black - coal<br>Red - iron ore<br>Yellow - gold<br>Grey - granite<br>Mines may only be built on mountain terrain. Suitable places for mines are displayed with a light grey dot.</p>"
 #~ msgstr " \"Tylko spójrz! Wielka góra Kal'mavrath! Zastanawiam się jakie skarby natury kryją się pośród majestatycznych grani!<br>Nadszedł czas aby starszyzna na coś się przydała. Pozwól mi posłać kogoś z tych, którzy rozumią język skał aby odkryć sekrety góry!\"<br><br>--NOWE CELE--<br>- Kiedy klikniesz na flagę, możesz posłać tam geologa. Jeżeli flaga znajduje się w górach, będzieszukał rud, w przeciwnym wypadku będzie szukał wody. Postaw flagę na wschodniej grani góry (oczywiście na skalistym terenie, nie na łące) i wyślij tam Geologa. Wybuduj odpowiednią kopalnie dla wszystkich rodzajów rud jakie tam znajdzie:<br>Czarny - węgiel<br>Czerwony - ruda żelaza<br>Żółty - złoto<br>Szary - granit<br>Kopalnie mogą być budowanie tylko na skalistym terenie. Odpowiednie miejsca są oznaczone jasnoszarą kropką.</p>"
+
 #~ msgid "Victory!"
 #~ msgstr "Zwycięstwo!"
-

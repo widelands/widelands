@@ -1,12 +1,13 @@
 # Widelands po/pl_PL/maps.po
 # Copyright (C) 2008 Widelands Development Team
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008.
+# Stanislaw Gackowski <soeb@soeb.eu>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4498\n"
+"Project-Id-Version: Widelands svn4529\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-08-28 14:17+0000\n"
+"POT-Creation-Date: 2009-09-18 16:56+0000\n"
 "PO-Revision-Date: 2009-09-03 14:16+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -314,4 +315,3 @@ msgstr "Dolina żubrów"
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid "It seems as if this magical valley was inhabitated by wisents since the beginning of days. When your tribe came to this place, you were sure that it offers enough space for a peaceful life. But can you tribe live in peace with your neighbours?"
 msgstr "Wygląda na to, że tę magiczną doliną od niepamiętnych czasów zamieszkują żubry. Gdy twoje plemię przybyło do tego miejsca, byłeś pewien, że oferuje wystarczająco dużo miejsca na spokojne życie. Lecz czy twoje może żyć w zgodzie z sąsiadami?"
-

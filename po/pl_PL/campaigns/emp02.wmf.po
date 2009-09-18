@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4498\n"
+"Project-Id-Version: Widelands svn4529\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-08-28 14:17+0000\n"
-"PO-Revision-Date: 2009-09-08 14:15+0100\n"
+"POT-Creation-Date: 2009-09-18 16:56+0000\n"
+"PO-Revision-Date: 2009-09-18 15:27+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -88,10 +88,10 @@ msgstr "Kamień dla kolonii"
 msgid "Saledus looks unhappy"
 msgstr "Saledus nie wygląda szcześliwie"
 
+# what inn?
 #: ../../../campaigns/emp02.wmf/event:240
-#, fuzzy
 msgid " \"Greetings Lutius, I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern strands I found the remains of another ship. I don't know whether these parts are all that is left of that ship. Inn any case: these parts do not seem to be old.<br> Perhaps the people aboard that ship were caught in the same storm which brought us to Malac' Mor - and were brought to this island.<br> I beg you to be cautious and to build some barracks or sentries around our colony.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Witaj Lucjuszu, nie chcę rozpoczynać paniki, ale znalazłem coś, Greetings Lutius, I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern strands I found the remains of another ship. I don't know whether these parts are all that is left of that ship. Inn any case: these parts do not seem to be old.<br> Perhaps the people aboard that ship were caught in the same storm which brought us to Malac' Mor - and were brought to this island.<br> I beg you to be cautious and to build some barracks or sentries around our colony.\"<br><br>-- NEW OBJECTIVE --<br> "
+msgstr " \"Witaj Lucjuszu, nie chcę rozpoczynać paniki, ale znalazłem coś, co mi nie daje spokoju a wręcz sieje panikę w moim sercu. Kiedy przeszedłem się na południowy brzeg, zauważyłem resztki innej łodzi. Nie wiem czy jest to wszystko co z niej zostało. W każdym razie: te szcątki nie wyglądają na stare.<br> Może ludzie na tej łodzi trafili na ten sam sztorm co przyniósł na do Malac' Mor, i znaleźli się tutaj.<br> Proszę Cię, bądź ostrożny i zbuduj jakieś koszary i strażnic do okoła naszej koloni.\"<br><br>-- NOWE CELE --<br> "
 
 #: ../../../campaigns/emp02.wmf/event:241
 #: ../../../campaigns/emp02.wmf/objective:25
@@ -125,7 +125,7 @@ msgstr "Saledus jest zdumiony"
 
 #: ../../../campaigns/emp02.wmf/event:331
 msgid " \"By the Gods, this is an unbelievable strike of fortune! There are two more mountains and it seems that one has a large quantity of coal and the other of iron ore. We should immediately start to build iron ore and coal mines (or at least charcoal burners), smelting works, toolsmith's shops, armour and weapon smithies.<br> However: for all these bigger buildings, we need better and more elegant building materials. So, let's build<br> a stonemason, who cuts columns from marble.<br> After all, now we can begin living as we did in Fremil.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr " \"Na bogów, to jest niewiarygodne sczęście! Dalej leżą dwie góry, i wygląda na to, że jedna ma duże ilości węgla a druga, żelaza! Mielybyśmy zacząć budować kopalnie węgla (albo przynajmniej piec do węgla drzewnego) i rudy żelaza, hutę i pracownie rzemieślnika, zbrojmistrza i płatnerza.<br> Ale, dla wszystkich tych budynków potrzebujemy lepsze i ładniejsze materiały budowlane. Także musimy zbudować<br> pracownię kamieniarza, aby wycinał kolumny z marmuru.<br> W końcu, przecierz możemy zacząć żyć tak jak wcześniej, w Fremil.\"<br><br>-- NOWE CELE --<br> "
 
 #: ../../../campaigns/emp02.wmf/event:332
 #: ../../../campaigns/emp02.wmf/objective:41
@@ -144,10 +144,12 @@ msgstr "Amalea wchodzi..."
 msgid " \"Hi Lutius, I hope you forgive my criticism, but it seems to me as if you forgot something.<br> It's nice, and of course a good idea, to build up mines, which will give us a more comfortable life,<br> but the people working in the mines are unhappy with the current situation. They have to do hard work and have no time for making their own food.<br> What do you think about helping them out?<br> I can't tell you what exactly we need... but here are my recommendations:\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Lucjuszu, prosze odpuść mi moją krytykę, ale wygladą na to że o czymś zapomniałeś.<br> Wybudowanie kopalni jest świetnym pomysłem, który zrobi nasze życia bardziej wygodne,<br> ale ludzie pracujący w kopalniach nie są zbyt szczęśliwi z aktualnej sytuacji. Muszą ciężko pracować i nie mają czasu na robienie sobie jedzenia.<br> Co myślisz o tym, żeby im pomóc?<br> Nie jestem pewna co dokładnie potrzebujemy... tutaj są moje pomysły:\"<br><br>-- NOWE CELE --<br> "
 
+# Foodstuffs?!
+# rewording (EITHER bread, meat or fish instead of OR and OR...)
 #: ../../../campaigns/emp02.wmf/event:414
 #: ../../../campaigns/emp02.wmf/objective:49
 msgid "* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.<br> Of course this means we will need more resources for preparing this food - like fish, meat or bread.<br> To provide these foodstuffs, you would have to build a fisher's house, a farm, a mill and a bakery.<br> Maybe you will also need a hunter's house,<br> a piggery, a vineyard and some wells.<br> It's up to you what you want to build.<br> But remember - coal and iron ore mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish."
-msgstr ""
+msgstr "* Aby wyprodukawać wytrzymujące jedzienie dla naszych górników, musimy zbudować tawernę. Aby zapewnić ich z dobrymi i silnymi napojami, mielibyśmy zbudować browar i winnicę.<br> Oczywiście to oznacza, że potrzebujemy więcej zasobów do przygotowywania jedzenia - takich jak ryba, mięso lub chleb.<br> Aby je zapewnić, musisz zbudować chatkę rybaka, farmę, młyn i piekarnię.<br> Możesz też potrzebować chatę myśliwego,<br> chlew, plantację winorośli i studnie.<br> Zależy na Tobie co zbudujesz.<br> Ale pamiętaj - kopalnie węgla i żelaza potrzebują piwo i kopalnie marmuru i złota wino, i wszystkie minimalnie racje, które są produkowane z chleba LUB mięsa LUB ryby."
 
 #: ../../../campaigns/emp02.wmf/event:416
 msgid "Food for the miners"
@@ -155,7 +157,7 @@ msgstr "Jedzenie dla górników"
 
 #: ../../../campaigns/emp02.wmf/event:512
 msgid " \"By the Gods! This is absolutely terrible. It seems as if we stand close to a test - and it seems as if Saledus was right with his fear concerning the shipwreck he found.<br> Today, as I walked down to the eastern strands,<br> I got a shock. I caught sight of one of those hated, evil, barbarian tribes with whom we have had so many problems before.<br> At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me they charged towards me and started attacking me with their throwing-spears. Thanks be to the Gods that<br> I was able to flee and hide myself, before retreating back to our colony under cover of darkness.<br> Anyway, we must build up stronger military buildings as soon as possible.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr " \"Na bogów! To jest okropne. Wygląda na to, że zbliżamy się do próby - i też na to, że Saledus miał rację kiedy się obwaiał o resztki łodzi którą znalazł.<br> Dziś, kiedy poszedłem na wschodni brzeg, byłem<br> zszokowany tym co zobaczyłem. Był to jeden z tych znienawidzonych, złych barbarzyńskich plemion, z którymi mieliśmy tyle problemów.<br> Na początku byłem na tyle naiwny i wierzyłem, że są pokojowo nastawieni, ale kiedy zobaczyłem jednego z nich biegnącego w mym kierunku i probójącego mnie zaatakować z ich osczepu, widziałem że nie są.<br> Dzięki bogom, że byłem w stanie uciec i ukryć się przed powrotem do naszej koloni w ciemnościach.<br> Teraz musimy wybudować lepszą obronę, i lepiej zacznijmy szybko.\"<br><br>-- NOWE CELE --<br> "
 
 #: ../../../campaigns/emp02.wmf/event:513
 #: ../../../campaigns/emp02.wmf/objective:57
@@ -258,12 +260,15 @@ msgstr "Zniscz plemię barbarzyńców"
 
 #~ msgid "* Build up three lumberjack's houses, a forester's house and a sawmill."
 #~ msgstr "* Zbuduj trzy chaty drwali, leśniczówke i tartak."
+
 #~ msgid "* Build up a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner,<br> iron ore mine, toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 #~ msgstr "* Zbuduj pracownię kamieniarza i potem dokończ infrastrukturę górnictwa i produkcji (kopalnia węgla i/lub piec do węgla drzewnego,<br> kopalnie rudy żelaza, pracownię rzemieślnika, snycerza, płatnerz i hutę)."
+
 #~ msgid "* Build up bigger military buildings, like an outpost, a barrier or<br> a tower, on the eastern frontier."
 #~ msgstr "* Zbuduj większe wojskowe budynki, takie jak placówki i bariery<br> lub wieże, na wschodnim froncie."
+
 #~ msgid "* As soon as you have enough soldiers, attack and completely remove the barbarian buildings.<br>"
 #~ msgstr "* Kiedy tylko masz wystarczająco dużo żołnierzy, zaatakuj i usuń wszystkie budynki barbarzyńców.<br>"
+
 #~ msgid "* Finally build up a fortress on the island-tongue (near where the barbarian headquarters stood before), to avoid new settlements of other tribes in that region."
 #~ msgstr "* Na koniec zbuduj fortecę na języku wyspy (blizko miejsca gdzie stała kwatera główna barbarzyńców), aby zabronić budowie nowych osad w tym regionie."
-
