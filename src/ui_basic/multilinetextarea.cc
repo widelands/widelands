@@ -154,9 +154,10 @@ void Multiline_Textarea::draw_scrollbar() {
 			if (m_scrollbar.get_scrollpos() >= m_scrollbar.get_steps() - 1)
 				setbottom = true;
 
-		uint32_t m_width = 0;
-		if (m_cache_id != g_gr->get_no_picture())
-			UI::g_fh->get_size_from_cache(m_cache_id, m_width, m_textheight);
+		if (m_cache_id != g_gr->get_no_picture()) {
+			uint32_t width;
+			UI::g_fh->get_size_from_cache(m_cache_id, width, m_textheight);
+		}
 
 		if (setbottom || m_textpos > m_textheight - get_h())
 			m_textpos = m_textheight - get_h();
