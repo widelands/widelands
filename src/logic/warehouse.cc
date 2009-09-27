@@ -204,17 +204,18 @@ uint32_t WarehouseSupply::nr_supplies
 	if (req.get_type() == Request::WORKER)
 		return
 			m_warehouse->count_workers
-			(game, req.get_index(), req.get_requirements());
+				(game, req.get_index(), req.get_requirements());
 
-	// calculate how many wares can be send out - it might that be we need them
+	//  Calculate how many wares can be sent out - it might be that we need them
 	// ourselves. E.g. for hiring new soldiers.
-	int32_t x = m_wares.stock(req.get_index());
+	int32_t const x = m_wares.stock(req.get_index());
 	// only mark an item of that type as available, if the priority of the
 	// request + number of that wares in warehouse is > priority of request
 	// of *this* warehouse + 1 (+1 is important, as else the ware would directly
 	// be taken back to the warehouse as the request of the warehouse would be
 	// highered and would have the same value as the original request)
-	int32_t y = x + (req.get_priority(0) / 100)
+	int32_t const y =
+		x + (req.get_priority(0) / 100)
 		- (m_warehouse->get_priority(Request::WARE, req.get_index()) / 100) - 1;
 	// But the number should never be higher than the number of wares available
 	if (y > x)
@@ -355,9 +356,9 @@ int32_t Warehouse::get_priority
 		return 100;
 	int32_t x =
 		((m_target_supply[ware_index] + 2
-		- m_supply->get_wares().stock(ware_index))
-		* 100);
-	// return 100 if all requests are fullfilled, else 100 * number of requested
+		  - m_supply->get_wares().stock(ware_index))
+		 * 100);
+	//  return 100 if all requests are fulfilled, else 100 * number of requested
 	return (x > 100) ? x : 100;
 }
 
