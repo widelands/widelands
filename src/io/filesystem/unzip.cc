@@ -1878,6 +1878,7 @@ extern zipFile ZEXPORT zipOpen2
 
 		if (err != ZIP_OK) {
 			ZCLOSE(ziinit.z_filefunc, ziinit.filestream);
+			free(zi);
 			return 0;
 		}
 
