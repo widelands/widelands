@@ -469,16 +469,21 @@ def do_configure_compiler_features(conf, env):
 	conf.CheckCompilerFlag('-fbounds-check', env)
 	conf.CheckCompilerFlag('-pipe', env)
 
-	if env.optimize:
-		# !!!! -fomit-frame-pointer breaks exceptions !!!!
-		conf.CheckCompilerFlag('-fexpensive-optimizations', env)
-		conf.CheckCompilerFlag('-finline-functions', env)
-		conf.CheckCompilerFlag('-ffast-math', env)
-		conf.CheckCompilerFlag('-funroll-loops', env)
-		conf.CheckCompilerFlag('-O3', env)
+	import platform
+	if (platform.architecture()[0] == '64bit'):
+		# Some stuff for 64bit architectures:
+		conf.CheckCompilerFlag('-m64', env)
 	else:
-		conf.CheckCompilerFlag('-O0', env)
-		conf.CheckCompilerFlag('-funit-at-a-time', env)
+		if env.optimize: # no optimization on 64bit atm - leads to segfaults
+			 # !!!! -fomit-frame-pointer breaks exceptions !!!!
+			 conf.CheckCompilerFlag('-fexpensive-optimizations', env)
+			 conf.CheckCompilerFlag('-finline-functions', env)
+			 conf.CheckCompilerFlag('-ffast-math', env)
+			 conf.CheckCompilerFlag('-funroll-loops', env)
+			 conf.CheckCompilerFlag('-O3', env)
+		else:
+			 conf.CheckCompilerFlag('-O0', env)
+			 conf.CheckCompilerFlag('-funit-at-a-time', env)
 
 	if env.profile:
 		conf.CheckCompilerFlag('-pg', env)
