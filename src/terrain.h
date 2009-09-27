@@ -266,9 +266,9 @@ template<typename T> static void render_triangle
 	// Build left edges
 	int32_t boty = topy;
 	LeftEdge leftedges[3];
-	uint8_t nrleftedges = 0;
 
 	{
+		uint8_t nrleftedges = 0;
 		uint8_t start = top;
 		uint8_t end = (top + 1) % polygon.nrpoints;
 		do {
@@ -307,9 +307,9 @@ template<typename T> static void render_triangle
 
 	// Build right edges
 	RightEdge rightedges[3];
-	uint8_t nrrightedges = 0;
 
 	{
+		uint8_t nrrightedges = 0;
 		uint8_t start = top;
 		uint8_t end = (polygon.nrpoints + top - 1) % polygon.nrpoints;
 		do {
