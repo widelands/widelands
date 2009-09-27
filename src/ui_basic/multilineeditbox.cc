@@ -59,18 +59,19 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 		std::string txt =
 			UI::g_fh->word_wrap_text
 				(m_fontname, m_fontsize, get_text(), get_eff_w());
+		assert(m_cur_pos <= txt.size());
 		switch (code.sym) {
 
 		case SDLK_DELETE:
 			if (m_cur_pos < txt.size()) {
-				while ((txt[++m_cur_pos] & 0xc0) == 0x80) {};
+				while ((txt.at(++m_cur_pos) & 0xc0) == 0x80) {};
 				// fallthrough - handle it like backspace
 			} else
 				break;
 
 		case SDLK_BACKSPACE:
 			if (txt.size() and m_cur_pos) {
-				while ((txt[--m_cur_pos] & 0xc0) == 0x80)
+				while ((txt.at(--m_cur_pos) & 0xc0) == 0x80)
 					txt.erase(txt.begin() + m_cur_pos);
 				txt.erase(txt.begin() + m_cur_pos);
 				set_text(txt.c_str());
@@ -79,23 +80,23 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 
 		case SDLK_LEFT:
 			if (0 < m_cur_pos) {
-				while ((txt[--m_cur_pos] & 0xc0) == 0x80) {};
+				while ((txt.at(--m_cur_pos) & 0xc0) == 0x80) {};
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 					for (uint32_t new_cur_pos = m_cur_pos;; m_cur_pos = new_cur_pos)
-						if (0 == new_cur_pos or isspace(txt[--new_cur_pos]))
+						if (0 == new_cur_pos or isspace(txt.at(--new_cur_pos)))
 							break;
 			}
 			break;
 
 		case SDLK_RIGHT:
 			if (m_cur_pos < txt.size()) {
-				while ((txt[++m_cur_pos] & 0xc0) == 0x80) {};
+				while ((txt.at(++m_cur_pos) & 0xc0) == 0x80) {};
 				if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 					for (uint32_t new_cur_pos = m_cur_pos;; ++new_cur_pos)
 						if
 							(new_cur_pos == txt.size()
 							 or
-							 isspace(txt[new_cur_pos - 1]))
+							 isspace(txt.at(new_cur_pos - 1)))
 						{
 							m_cur_pos = new_cur_pos;
 							break;
@@ -106,22 +107,23 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 		case SDLK_DOWN:
 			if (m_cur_pos < txt.size()) {
 				uint32_t begin_of_line = m_cur_pos;
-				if (txt[begin_of_line] == '\n')
+				if (txt.at(begin_of_line) == '\n')
 					--begin_of_line;
-				while (begin_of_line > 0 && txt[begin_of_line] != '\n')
+				while (begin_of_line > 0 && txt.at(begin_of_line) != '\n')
 					--begin_of_line;
 				if (begin_of_line)
 					++begin_of_line;
 				uint32_t begin_of_next_line = m_cur_pos;
 				while
-					(txt[begin_of_next_line] != '\n'
+					(txt.at(begin_of_next_line) != '\n'
 					 &&
 					 begin_of_next_line < txt.size())
 					++begin_of_next_line;
 				begin_of_next_line += begin_of_next_line == txt.size() ? -1 : 1;
 				uint32_t end_of_next_line = begin_of_next_line;
 				while
-					(txt[end_of_next_line] != '\n' && end_of_next_line < txt.size())
+					(txt.at(end_of_next_line) != '\n' &&
+					 end_of_next_line < txt.size())
 					++end_of_next_line;
 				m_cur_pos =
 					begin_of_next_line + m_cur_pos - begin_of_line
@@ -129,7 +131,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 					end_of_next_line ? end_of_next_line :
 					begin_of_next_line + m_cur_pos - begin_of_line;
 				// Care about unicode letters
-				while ((txt[m_cur_pos] & 0xc0) == 0x80)
+				while ((txt.at(m_cur_pos) & 0xc0) == 0x80)
 					++m_cur_pos;
 			}
 			break;
@@ -137,9 +139,9 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 		case SDLK_UP:
 			if (m_cur_pos > 0) {
 				uint32_t begin_of_line = m_cur_pos;
-				if (txt[begin_of_line] == '\n')
+				if (txt.at(begin_of_line) == '\n')
 					--begin_of_line;
-				while (begin_of_line > 0 && txt[begin_of_line] != '\n')
+				while (begin_of_line > 0 && txt.at(begin_of_line) != '\n')
 					--begin_of_line;
 				if (begin_of_line)
 					++begin_of_line;
@@ -147,9 +149,9 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 				if (begin_of_line)
 					--end_of_last_line;
 				uint32_t begin_of_lastline = end_of_last_line;
-				if (txt[begin_of_lastline] == '\n')
+				if (txt.at(begin_of_lastline) == '\n')
 					--begin_of_lastline;
-				while (begin_of_lastline > 0 && txt[begin_of_lastline] != '\n')
+				while (begin_of_lastline > 0 && txt.at(begin_of_lastline) != '\n')
 					--begin_of_lastline;
 				if (begin_of_lastline)
 					++begin_of_lastline;
@@ -159,7 +161,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 					end_of_last_line ? end_of_last_line :
 					begin_of_lastline + (m_cur_pos - begin_of_line);
 				// Care about unicode letters
-				while ((txt[m_cur_pos] & 0xc0) == 0x80)
+				while ((txt.at(m_cur_pos) & 0xc0) == 0x80)
 					++m_cur_pos;
 			}
 			break;
@@ -170,7 +172,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 			else
 				while (0 < m_cur_pos) {
 					uint32_t const preceding_cur_pos = m_cur_pos - 1;
-					if (txt[preceding_cur_pos] == '\n')
+					if (txt.at(preceding_cur_pos) == '\n')
 						break;
 					else
 						m_cur_pos = preceding_cur_pos;
@@ -181,7 +183,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				m_cur_pos = txt.size();
 			else
-				while (m_cur_pos < txt.size() and txt[m_cur_pos] != '\n')
+				while (m_cur_pos < txt.size() and txt.at(m_cur_pos) != '\n')
 					++m_cur_pos;
 			break;
 
@@ -304,10 +306,10 @@ void Multiline_Editbox::CalcLinePos()
 	uint32_t lbtb = 0; // linebreaks to bottom
 
 	for (size_t i = 0; i < m_cur_pos; ++i)
-		if (str[i] == '\n')
+		if (str.at(i) == '\n')
 			++lbtt;
 	for (size_t i = m_cur_pos; i < leng; ++i)
-		if (str[i] == '\n')
+		if (str.at(i) == '\n')
 			++lbtb;
 
 	m_textpos = (lbtt == 0) & (lbtb == 0) ?
