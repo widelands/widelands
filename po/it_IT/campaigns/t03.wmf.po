@@ -1,21 +1,22 @@
 # Widelands po/it_IT/campaigns/t03.wmf.po
 # Copyright (C) 2005-2009 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Gabriel Rota <gabriel.rota@gmail.com>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4435\n"
+"Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-07-21 18:08+0000\n"
-"PO-Revision-Date: 2009-07-01 18:23+0100\n"
+"POT-Creation-Date: 2009-09-27 10:20+0000\n"
+"PO-Revision-Date: 2009-09-27 11:23+0200\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
-"Language-Team: Gabriel Rota <gabriel.rota@gmail.com>\n"
+"Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Lokalize 0.3\n"
 
 #: ../../../campaigns/t03.wmf/elemental:7
 msgid "Tutorial3 - This land is our land"
@@ -23,7 +24,7 @@ msgstr "Tutorial3 - Questa terra è la nostra terra"
 
 #: ../../../campaigns/t03.wmf/elemental:9
 msgid "Third Mission of the Barbarian Tutorial Campaign. This tutorial explains the handling of military and training site buildings and will finally introduce fighting."
-msgstr ""
+msgstr "La terza missione della campagna tutorial dei barbari. Questo tutorial spiega come maneggiare le costruzioni militari e di allenamento e infine introdurrà il combattimento."
 
 #: ../../../campaigns/t03.wmf/event:316
 msgid "Thron looks worried..."
@@ -31,7 +32,7 @@ msgstr "Thron con sguardo preoccupato..."
 
 #: ../../../campaigns/t03.wmf/event:318
 msgid " \"The last days we came closer to our capital. Many people have already joined us on our march and set their hopes on me. However, I fear that we are not strong enough to take up the battle with my brothers.<br>For now we rest at the borders of the old forest and prepare for the coming days.\" "
-msgstr ""
+msgstr " \"Gli ultimi giorni siamo arrivati più vicini alla nostra capitale. Molte persone si sono già unite alla nostra marcia e ripongono le loro speranze in me. Tuttavia, temo che non siamo abbastanza forti per affrontare la battaglia con i miei fratelli.<br>Per ora restiamo ai confini del bosco vecchio e preparandoci per i prossimi giorni.\" "
 
 #: ../../../campaigns/t03.wmf/event:320
 msgid "Close to home"
@@ -43,7 +44,7 @@ msgstr "Boldreth parla:"
 
 #: ../../../campaigns/t03.wmf/event:333
 msgid " \"This morning I found Thron trouble-minded. He returned from his patrol late last night and sat back against a tree watching over the encampment. The number of quarrels and disputes keeps growing and the winter has us firmly under control. We should put food in our storage to survive the long, cold winter!\" "
-msgstr ""
+msgstr " \"Questa mattina ho trovato Thron perso nei suoi problemi. È tornato dalla sua ronda la tarda serata di ieri e si è messo seduto con la schiena contro un albero a guardare oltre l'accampamento. Il numero di liti e controversie continua a crescere e l'inverno ci ha saldamente sotto controllo. Dovremmo mettere il cibo nel nostro magazzino per sopravvivere al lungo, freddo inverno!\" "
 
 #: ../../../campaigns/t03.wmf/event:335
 msgid "Winter ahead"
@@ -51,11 +52,11 @@ msgstr "Inverno alle porte"
 
 #: ../../../campaigns/t03.wmf/event:346
 msgid "Khantrukh nods"
-msgstr ""
+msgstr "Khantrukh annuisce"
 
 #: ../../../campaigns/t03.wmf/event:348
 msgid " \"Boldreth is right! We don't have enough food to survive a long, cold winter. We should start to build a well, a fisher's and a hunter's hut. And if we find enough space, we should as well build up a farm and a bakery! One of our farmers seems to be very clever he already got some crops to grow in this cold soil.\" "
-msgstr ""
+msgstr " \"Boldreth ha riagione! Non abbiamo abbastanza cibo per sopravvivere ad un lungo, freddo inverno. Dovremmo cominciare a costruire un pozzo, un pescatore e la capanna di un cacciatore. E se si trova lo spazio sufficiente, dobbiamo anche costruire una fattoria e una panetteria! Uno dei nostri agricoltori sembra essere molto intelligente ha già fatto crescere alcune colture in questo suolo freddo.\" "
 
 #: ../../../campaigns/t03.wmf/event:350 ../../../campaigns/t03.wmf/event:459
 #: ../../../campaigns/t03.wmf/event:494 ../../../campaigns/t03.wmf/event:566
@@ -66,7 +67,7 @@ msgstr "-- NUOVO OBBIETTIVO --"
 
 #: ../../../campaigns/t03.wmf/event:352 ../../../campaigns/t03.wmf/objective:7
 msgid "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a farm and a bakery, to provide your people with food."
-msgstr ""
+msgstr "* Costruire un'economia alimentare di base - capanna di un pescatore, la capanna di un cacciatore, un pozzo, una fattoria e una panetteria, per fornire al tuo popolo il cibo."
 
 #: ../../../campaigns/t03.wmf/event:354
 msgid "The advisor"
@@ -74,7 +75,7 @@ msgstr "Il consigliere"
 
 #: ../../../campaigns/t03.wmf/event:418
 msgid " \"Khantrukh just informed me, that our basic food economy was built up successfully. Finally none of us has to fear starvation anymore."
-msgstr ""
+msgstr " \"Khantrukh mi ha appena informato che la nostra economia alimentare di base è stata costruita con successo. Finalmente nessuno di noi ha più da temere la fame."
 
 #: ../../../campaigns/t03.wmf/event:420
 msgid "Food economy completed"
@@ -82,11 +83,11 @@ msgstr "Economia del cibo completata"
 
 #: ../../../campaigns/t03.wmf/event:457
 msgid " \"Thron told me that he discovered tracks in the snow to the northeast of our settlement. He instructed us to build a Donjon, to have a further visual range on the area around our hall to protect our people from sudden attacks.\" "
-msgstr ""
+msgstr " \"Thron mi ha detto che ha scoperto delle tracce nella neve a nord-est del nostro insediamento. He instructed us to build a Donjon, to have a further visual range on the area around our hall to protect our people from sudden attacks.\" "
 
 #: ../../../campaigns/t03.wmf/event:461
 msgid "* Build a donjon at the northeast of your territory."
-msgstr ""
+msgstr "* Costruire una dongione a nord-est del territorio."
 
 #: ../../../campaigns/t03.wmf/event:463
 msgid "Tracks"
@@ -94,12 +95,12 @@ msgstr "Tracce"
 
 #: ../../../campaigns/t03.wmf/event:492
 msgid " \"The first fortification Thron ordered has just been completed. At the moment he seeks to bring trust and belief to those who live inside the walls of our new habitat, that we named 'Ondun', which means 'those who wait' in the old tongue. But Thron is not yet satisfied - and I fully understand his fears: The forests are deep and the fronier to Al’thunran is near. I am sure that there are thousand bigger dangers out there than the unknown tracks.<br>To overlook more of the area around our hall we should explore further and set up more guards and scouts to observe the frontier and keep an eye on the raging wars on our doorsteps. THAN we will be prepared once trouble seeks to capture our woods.\" "
-msgstr ""
+msgstr " \"La prima fortificazione che Thron ha ordinato è stato appena completata. Al momento si cerca di portare la fiducia e la fede di coloro che vivono all'interno delle mura del nostro nuovo ambiente, l'abbiamo chiamata 'Ondun', che significa 'chi aspetta' nella lingua antica. Ma Thron non è ancora soddisfatto - e capisco perfettamente le sue paure: Le foreste sono profonde e la froniera a Al'thunran è vicina. Sono sicuro che ci sono mille pericoli più grandi là fuori che i quelli sconosciuti.<br>Per osservare di più della zona attorno alla nostra entrata dobbiamo esplorare ulteriormente e creare più guardiole e torri per osservare la frontiera e tenere d'occhio la guerra che imperversa alle nostre porte. POI saremo pronti alla problematica ricerca di catturare i nostri boschi.\" "
 
 #: ../../../campaigns/t03.wmf/event:496
 #: ../../../campaigns/t03.wmf/objective:23
 msgid "* Build more military buildings to explore the area around the headquarters and to ensure the safety of your people."
-msgstr ""
+msgstr "* Costruire più edifici militari per esplorare l'area intorno alla sede centrale e per garantire la sicurezza del vostro popolo."
 
 #: ../../../campaigns/t03.wmf/event:498
 msgid "Further explorations"
@@ -107,12 +108,12 @@ msgstr "Esplora più lontano"
 
 #: ../../../campaigns/t03.wmf/event:564
 msgid " \"I just talked to the leader of our patrol. He told me, that they found some mountains to the north east and the east of our territory. With a bit of luck this opens us a new chance for rearming our men, because as far as I remember, most of the mountains west to Al'thunran hold coal and some metal ores.\" "
-msgstr ""
+msgstr " \"Ho appena parlato con il capo della nostra pattuglia. Mi ha detto che hanno trovato alcune montagne a nord-est e ad est del nostro territorio. Con un po 'di fortuna questo ci apre una nuova possibilità per il riarmo nostri uomini, perché per quanto mi ricordo, la maggior parte delle montagne a ovest di Al'thunran contengono carbone ed alcuni minerali metallici.\" "
 
 #: ../../../campaigns/t03.wmf/event:568
 #: ../../../campaigns/t03.wmf/objective:31
 msgid "* Expand your territory to the mountains, send geologists to search for ore and coal and build a mining economy with mines, taverns, smelting works and metalworks."
-msgstr ""
+msgstr "* Espandere il proprio territorio sino alle montagne, inviare geologi per la ricerca di minerali e carbone e costruire un'economia mineraria con le miniere, le taverne, la fonderia e lavori in ferro."
 
 #: ../../../campaigns/t03.wmf/event:570
 msgid "Mountains found"
@@ -120,7 +121,7 @@ msgstr "Montagna trovata"
 
 #: ../../../campaigns/t03.wmf/event:634
 msgid " \"I just got informed, that our mining economy started it's work. These news brought a smile on my face - even if the hardest part is still waiting to be done, now our smiths will give their best to further ease our lives.\" "
-msgstr ""
+msgstr " \"Sono stato appena informato, che la nostra economia mineraria iniziato la sua attività. Questa notizia ha portato un sorriso sul mio volto - anche se la parte più difficile è ancora in attesa di essere fatta, ora i nostri fabbri daranno il loro meglio per agevolare ulteriormente la nostra vita.\" "
 
 #: ../../../campaigns/t03.wmf/event:636
 msgid "Mining economy completed"
@@ -128,12 +129,12 @@ msgstr "Economia delle miniere completata"
 
 #: ../../../campaigns/t03.wmf/event:653
 msgid " \"Boldreth and I just explored the area around the three mountains. One major strategic problem of that area seems to be, that there are two bigger passages - one north and one south to the middle mountain. Those passages are quite hard to control and so it seems to me, like we have only one chance to secure the mountains from enemy hands: We must build a fortress to the east of the mountains!\" "
-msgstr ""
+msgstr " \"Boldreth ed io abbiamo esplorato la zona intorno alle tre montagne. un grande problema strategico di tale settore sembra essere, che ci sono due passaggi più grandi - uno a nord e uno sud fino alla montagna di mezzo. Tali passaggi sono abbastanza difficili da controllare e quindi mi sembra, che abbiamo una sola possibilità per difendere la montagna dalle mani nemiche: Dobbiamo costruire una fortezza a est delle montagne!\" "
 
 #: ../../../campaigns/t03.wmf/event:657
 #: ../../../campaigns/t03.wmf/objective:39
 msgid "* Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "Costruisci una fortezza ad est delle montagne."
 
 #: ../../../campaigns/t03.wmf/event:659
 msgid "Fortress needed"
@@ -141,7 +142,7 @@ msgstr "Fortezza necessaria"
 
 #: ../../../campaigns/t03.wmf/event:681
 msgid " \"Finally!<br>The fortress was just completed, so the entrance to our settlement should be save for now. For the future we might think on building some more fortifications like barriers and donjons at the passages, but for now we can take a deep breath.\" "
-msgstr ""
+msgstr " \"Finalmente!<br>La fortezza è stato appena completata, così l'ingresso al nostro insediamento dovrebbe essere salvo per ora. Per il futuro si potrebbe pensare alla costruzione di alcune fortificazioni come ostacoli e torrioni a passaggi, ma per ora siamo in grado di fare un respiro profondo.\" "
 
 #: ../../../campaigns/t03.wmf/event:683
 msgid "Fortress completed"
@@ -149,11 +150,11 @@ msgstr "fortezza completata"
 
 #: ../../../campaigns/t03.wmf/event:694
 msgid " \"Our mining economy seems to work fine, that is already good news! Anyway there are still a lot of men and women waiting in our hall to get a task, so they can help our soldiers to prepare for the future fights."
-msgstr ""
+msgstr " \"La nostra economia mineraria sembra funzionare bene, che è già una buona notizia! Comunque ci sono ancora un sacco di uomini e donne nella nostra sala d'attesa per ottenere un compito, in modo che possano aiutare i nostri soldati a prepararsi per le lotte future."
 
 #: ../../../campaigns/t03.wmf/event:696
 msgid "Our geologists found a lot more deposits of iron ore, coal and even gold. We should enhance our current mines as soon as our miners are more experienced. We should build up some more mines, a bigger food infrastructure to always supply our men with sufficient food and a further processing economy. But that's still not everything - most of our soldiers are quite young and neither have a good weapon nor are they well trained. We should build up trainingssites to prepare them for their future tasks.\" "
-msgstr ""
+msgstr "I nostri geologi hanno trovato molti depositi di minerale di ferro, carbone e anche l'oro. Dobbiamo migliorare la nostra attuale miniere non appena i nostri minatori sono più esperti. Dovremmo costruire alcune miniere in più, ed una più grande infrastruttura del cibo per fornire sempre ai nostri uomini cibo sufficiente e per uno sviluppo ulteriore dell'economia di trasformazione. Ma ancora non è tutto - la maggior parte dei nostri soldati sono piuttosto giovani e non hanno una buona arma né sono ben addestrati. Dovremmo costruire dei siti di allenamento per prepararli ai loro futuri compiti.\" "
 
 #: ../../../campaigns/t03.wmf/event:698
 msgid "-- NEW OBJECTIVES --"
@@ -162,26 +163,26 @@ msgstr "-- NUOVI OBBIETTIVI --"
 #: ../../../campaigns/t03.wmf/event:700
 #: ../../../campaigns/t03.wmf/objective:47
 msgid "* Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "* Costruisci un magazzino a ovest delle montagne."
 
 #: ../../../campaigns/t03.wmf/event:702
 #: ../../../campaigns/t03.wmf/objective:57
 msgid "* Build a battle arena and a trainings camp to the west of the mountains."
-msgstr ""
+msgstr "* Costruisci una arena di battaglia ed un campo allenamenti ad ovest delle montagne."
 
 #: ../../../campaigns/t03.wmf/event:704
 #: ../../../campaigns/t03.wmf/objective:67
 msgid "* As soon as the blacksmith reaches his next level (master blacksmith) enhance your metalworks to an axefactory or even a war mill and build up another metalworks to ensure the production of tools."
-msgstr ""
+msgstr "* Non appena il fabbro raggiunge il suo livello successivo (mastro fabbro) migliorate la vostra metallurgica in una fabbrica d'asce o anche a mulino di guerra e costruisci un altra metallurgia al fine di garantire la produzione di strumenti."
 
 #: ../../../campaigns/t03.wmf/event:706
 #: ../../../campaigns/t03.wmf/objective:75
 msgid "* Build a helmsmithy to the west of the mountains to provide your soldiers with better armor."
-msgstr ""
+msgstr "* Crea un fabbro di elmi a ovest delle montagne per fornire ai vostri soldati le migliori armature."
 
 #: ../../../campaigns/t03.wmf/event:708
 msgid "Enhanced economy and training"
-msgstr ""
+msgstr "Rafforza l'economia e l'allenamento"
 
 #: ../../../campaigns/t03.wmf/event:847 ../../../campaigns/t03.wmf/event:1039
 msgid "Thron looks worried."
@@ -189,7 +190,7 @@ msgstr "Thron con sguardo preoccupato..."
 
 #: ../../../campaigns/t03.wmf/event:849
 msgid " \"The news that a patrol brought is not good to hear. Our spies tell us, that the wartribes still rage in battle but some of the elder soldiers and tribe leaders seem to grow tired of this senseless war. Kalitat, son of Kun is the first warleader to leave Al’thunran, thus leaving his side weak and vulnerable. As my scouts report, he has set foot on the lower grounds around the capitol, securing the outer fortification rings.\" "
-msgstr ""
+msgstr " \"La notizia che una pattuglia ha portato non è bella da ascoltare. Le nostre spie ci dicono, che il tribu guerriere sono ancora in una rabbiosa battaglia, ma alcuni soldati anziani e capi tribù sembrano stanchi di questa guerra insensata. Kalitat, figlio di Kun è il primo condottiero a lasciare Al'thunran, lasciando così il suo lato debole e vulnerabile. Come dal rapporto del mio esploratore, ha messo piede nei bassifondi della capitale, garantendo la anelli esterni della fortificazione.\" "
 
 #: ../../../campaigns/t03.wmf/event:851 ../../../campaigns/t03.wmf/event:900
 #: ../../../campaigns/t03.wmf/event:1047
@@ -198,19 +199,19 @@ msgstr "Un altro freddo giorno"
 
 #: ../../../campaigns/t03.wmf/event:862
 msgid "Boldreth shakes his head."
-msgstr ""
+msgstr "Boldreth scuote la testa."
 
 #: ../../../campaigns/t03.wmf/event:864
 msgid " \"Thron seeks to believe that Kalitat is tired of fighting and will be willing to join us, once we march to re-establish law and order in Al’thunran. But I don’t think so. Kalitat is son to one of the mightiest generals of our forces and his family never quite liked the thought to bow before the banner of Chat’Karuth. Why should he march with his son to reclaim his heritage and the throne?\" "
-msgstr ""
+msgstr " \"Thron cerca di credere che Kalitat sia stanco di combattere e sia disposto a unirsi a noi, prima di marcire insieme per ristabilire la legge e l'ordine in Al'thunran. Ma io non la penso così. Kalitat è figlio di uno dei generali più potenti delle nostre forze e alla sua famiglia non piaceva molto il pensiero di inchinarsi davanti la bandiera di Chat'Karuth. Perché avrebbe dovuto marciare con suo figlio per reclamare il suo patrimonio e il trono?\" "
 
 #: ../../../campaigns/t03.wmf/event:866
 msgid "Doubts"
-msgstr ""
+msgstr "Dubbi"
 
 #: ../../../campaigns/t03.wmf/event:877
 msgid " \"However, Thron is not willing to listen to my doubts. He seeks to expand our fortifications to the borders of Kalitat’s territory and reunite with his forces. I have to keep an eye on everything that happens here.\" "
-msgstr ""
+msgstr " \"Tuttavia, Thron non è disposto ad ascoltare i miei dubbi. Egli cerca di espandere le nostre fortificazioni ai confini del territorio Kalitat e riunirsi con le sue forze. Devo tenere un occhio su tutto quello che succede qui.\" "
 
 #: ../../../campaigns/t03.wmf/event:879 ../../../campaigns/t03.wmf/event:913
 msgid "The story continues"
@@ -222,11 +223,11 @@ msgstr "Thron parla con fiducia."
 
 #: ../../../campaigns/t03.wmf/event:898
 msgid " \"The frontier line of my forces has expanded to the edge of the forests. We have a long and cold winter and so many miles behind us. The fortification that we erected around Ondun will guarantee us fast supply of man and goods and once Al’thunran is in my hands, the two cities will be linked by a good and defendable infrastructure. Still I hope I will not walk alone on this mission, I hope Kailitat son of Kun will follow my call.\" "
-msgstr ""
+msgstr " \"La linea di confine delle mie forze si è estesa fino al margine dei boschi. Noi abbiamo un inverno lungo e freddo e tanti chilometri dietro di noi. La fortificazione che abbiamo eretto intorno ad Ondun ci garantirà la rapida fornitura di uomini e merci ed allora Al'thunran sarà nelle mie mani, le due città saranno collegate da una buona infrastruttura e difendibili. Comunque spero di non camminare da solo in questa missione, mi auguro che il figlio Kailitat di Kun seguirà mia chiamata.\" "
 
 #: ../../../campaigns/t03.wmf/event:911
 msgid " \"I have sent men to meet Kalitat in this fortress. He has barricaded the former main entrance to the capital and is trying to set up a siege ring around Al’thunran. He will not let anyone enter or leave the city while the ring is intact. Until now, he has not answered any of my messages. But the time I wait won't be lost. I will further upgrade my soldiers and prepare for battle.\" "
-msgstr ""
+msgstr " \"Ho inviato gli uomini per incontrare Kalitat in questa fortezza. Ha bloccato l'ingresso principale dell'ex capitale e sta cercando di creare un anello di assedio attorno Al'thunran. Non permetterò a nessuno di entrare o uscire dalla città, mentre l'anello è intatto. Fino ad ora, non ha risposto a nessuno dei miei messaggi. Ma il tempo che ho atteso non sarà perso. Migliorerò ulteriormente i miei soldati e li preparerò per la battaglia.\" "
 
 #: ../../../campaigns/t03.wmf/event:924
 msgid "Boldreth shouts out!"
@@ -234,17 +235,17 @@ msgstr "Boldreth gridò forte!"
 
 #: ../../../campaigns/t03.wmf/event:926
 msgid " \"This BASTARD! Only one man of our frontier patrol came back alive. He carried a message of Kalitath telling us that he will punish every move of our troops with their own blood! We cannot accept this behaviour. From now on there is war between Kalitath and us!\" "
-msgstr ""
+msgstr " \"Questo bastardo! Solo un uomo della nostra pattuglia di frontiera è tornato vivo. Ha portato un messaggio di Kalitath per dirci che punirà ogni movimento delle nostre truppe, con il nostro sangue! Non possiamo accettare questo comportamento. Da ora in poi è guerra tra Kalitath e noi!\" "
 
 #: ../../../campaigns/t03.wmf/event:930
 #: ../../../campaigns/t03.wmf/objective:83
 msgid "* Destroy Kalitaths army and expand your territory to the east."
-msgstr ""
+msgstr "* Distruggi l'esercito Kalitaths ed espandi il tuo territorio ad est."
 
 #: ../../../campaigns/t03.wmf/event:932
 #: ../../../campaigns/t03.wmf/objective:85
 msgid "-> To attack an enemy you must click on the door of an advarse military building. A menu will pop up allowing you to select the number of soldiers that should attack. When you are ready with setting the number, click on the cross ('start attack')"
-msgstr ""
+msgstr "-> Per attaccare un nemico è necessario fare clic sulla porta di un edificio dell'avversario militare. Un menu a comparsa permette di selezionare il numero di soldati che dovrebbero attaccare. Quando si è pronti impostare il numero e fare clic sulla croce ( 'inizia attacco')"
 
 #: ../../../campaigns/t03.wmf/event:934
 msgid "Your loyal companion"
@@ -256,20 +257,20 @@ msgstr "Thron parla:"
 
 #: ../../../campaigns/t03.wmf/event:988
 msgid " \"The traitor has left his armies dying where they lay as he saw that he would not keep my forces back. Kalitat disappeared in the mess of the war, but I don’t care now. Shall he flee and be forgotten for all times as a tribeleader that would not bow before the wooden throne, that is mine to take now. Even more his flight brought us a big benefit: All year Kalitath was to busy fighting so that he did not even care to store enough food for all his men. Now that he fled the hunger brought some of his younger followers to desert. This group helds a strong fortification on the main ring. But there is more news: My scouts reported, that the two raging tribes of my brothers are in chaos and have barely noticed the new danger that is about to strike them. However they would not care if they noticed I guess, blinded by rage and hate, there is no sense left in them at all I believe.\" "
-msgstr ""
+msgstr " \"Il traditore ha lasciato i suoi eserciti a morire dove si trovavano, come ha visto che non avrebbe avuto le mie forze indietro. Kalitat è scomparso nel caos della guerra, ma non mi interessa adesso. Egli deve fuggire e dimenticare tutto il tempo che ha passato come comandante di una tribu che non si inchinava davanti al trono di legno, che è mio e ora prendo. Ancora di più la sua fuga ci ha portato un grande vantaggio: Kalitath tutti gli anni è stato impegnato a combattere che non ha nemmeno avuto la cura di conservare il cibo sufficiente per tutti i suoi uomini. Ora che è fuggto la fame ha portato alcuni dei suoi seguaci più giovani al deserto. Questo gruppo ha preso una robusta fortificazione dell'anello principale. Ma ci sono più novità: i miei scout segnalano, che le due tribù furiose dei miei fratelli sono nel caos e hanno appena notato il nuovo pericolo che sta per colpirli. Tuttavia potrebbero non curarsi di questa notizia, io credo, accecati dalla rabbia e odio, credo non abbia senso lasciare tutto a loro.\" "
 
 #: ../../../campaigns/t03.wmf/event:990
 msgid "Renegade fortification"
-msgstr ""
+msgstr "Fortificazione rinnegata"
 
 #: ../../../campaigns/t03.wmf/event:1000
 msgid " \"So be it, the generals are out to set up my troops and Boldreth himself will lead the first strike. I will ride by his side, to free Al’thunran of this war and bring peace back in our capital. When the young sun rises above the trees tomorrow morning, I will order the assault. By dusk, I will celebrate my victory in the wooden halls of the warlord and sacrifice a newborn lamb in the honour of my father whose eyes lie upon me today.<br>So be it!\" "
-msgstr ""
+msgstr " \"Così sia, i generali sono fuori per preparare le mie truppe e Boldreth stesso a guidare la prima incursione. Io cavalcherò al suo fianco, per liberare Al'thunran da questa guerra e riportare la pace nella nostra capitale. Quando il giovane sole sorge sopra gli alberi domani mattina, Io ordinerò l'assalto. Dal tramonto, celebrerò la mia vittoria nelle sale di legno del signore della guerra e sacrificherò un agnello neonato in onore di mio padre, i cui occhi si trovano su di me oggi.<br>Così sia!\" "
 
 #: ../../../campaigns/t03.wmf/event:1004
 #: ../../../campaigns/t03.wmf/objective:93
 msgid "* Destroy all enforcements of Thron’s two brothers to liberate the throne-circle."
-msgstr ""
+msgstr "* Distruggi tutte le forze dei due fratelli di Thron per liberare il cerchio del trono."
 
 #: ../../../campaigns/t03.wmf/event:1006
 msgid "Military assault"
@@ -277,7 +278,7 @@ msgstr "Assalto Militare"
 
 #: ../../../campaigns/t03.wmf/event:1041
 msgid " \"My brothers and their soldiers are dead and left fire and destruction behind. In none of all the ruins I found any man or woman of the normal folk and so I just may hope that they fled from this cruel battleground and started a better life somewhere else. Nothing is left from that beauty I remember, only ruins remain from the old capital. I am sorrowful but also relieved. I never hoped to ever see Al'thunrans old beauty again - some month ago I even wondered whether I will ever be able to set my feet near to Al'thunran again. Now the old town is back in my hands and I will not hesitate to rebuild it with all forces my people have. I can't wait to see it again in it's old beauty.\" "
-msgstr ""
+msgstr " \"I miei fratelli ed i loro soldati sono morti e lasciato indietro incendi e distruzione. In nessuna di tutte le rovine ho trovato un uomo o una donna della gente normale e quindi ho solo la speranza che siano fuggiti da questo campo di battaglia crudele ed abbiano iniziato una vita migliore da qualche altra parte. Niente è rimasto di quella bellezza che mi ricordo, restano solo le rovine della vecchia capitale. Sono triste, ma anche sollevato. Non ho mai sperato di vedere Al'thunrans vecchia bella di nuovo - qualche mese fa mi sono anche chiesto se sarei mai stato in grado di passare i miei piedi vicino a Al'thunran di nuovo. Ora il centro storico è tornato nelle mie mani e io non esiterò a ricostruire con tutte le forze il mio popolo ha. Non vedo l'ora di vederlo di nuovo nella sua antica bellezza.\" "
 
 #: ../../../campaigns/t03.wmf/event:1043
 msgid "--------------------- VICTORY! ----------------------"
@@ -285,11 +286,11 @@ msgstr "--------------------- Vittoria! ----------------------"
 
 #: ../../../campaigns/t03.wmf/event:1045
 msgid "You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission."
-msgstr ""
+msgstr "Hai completato questa missione. Puoi continuare a giocare, se lo desidi, altrimenti passara alla prossima missione."
 
 #: ../../../campaigns/t03.wmf/objective:5
 msgid "Build up a small food economy"
-msgstr ""
+msgstr "Costruisci una piccola economia alimentare"
 
 #: ../../../campaigns/t03.wmf/objective:13
 msgid "Build a donjon"
@@ -297,7 +298,7 @@ msgstr "Costruisci una dongione"
 
 #: ../../../campaigns/t03.wmf/objective:15
 msgid "* Build a donjon at the northeast of your territory to get a farther visual range and to protect your people from sudden attacks of enemies."
-msgstr ""
+msgstr "* Costruisci una dongione a nord-est del territorio per ottenere una visione più vasta e per proteggere il popolo da improvvisi attacchi dei nemici."
 
 #: ../../../campaigns/t03.wmf/objective:21
 msgid "Explore further"
@@ -317,7 +318,7 @@ msgstr "Costruisci un magazzino"
 
 #: ../../../campaigns/t03.wmf/objective:49
 msgid "-> Warehouses are similiar to your headquarters, with the only difference that it is not defended by soldiers. It is often wise to build a warehouse when your territory is growing and the paths to your headquarters get longer and longer."
-msgstr ""
+msgstr "-> I magazzini sono simili al vostro quartier generale, con la sola differenza che non sono difesi da soldati. Spesso è saggio costruire un magazzino quando il territorio è in crescita e le vie per il vostro quartier generale sono molto lunghe."
 
 #: ../../../campaigns/t03.wmf/objective:55
 msgid "Build trainingssites"
@@ -325,7 +326,7 @@ msgstr "Costruisci un'area addestramento"
 
 #: ../../../campaigns/t03.wmf/objective:59
 msgid "-> Trainingssites like a training camp or a battle arena are used for training soldiers in their different attributes. Those attributes are important in fights and the better a soldier is, the higher is the chance to win a fight.<br>Attributes are: health points, attack, defense and evade."
-msgstr ""
+msgstr "-> I siti di allenamento come un campo di addestramento o un'arena di battaglia vengono utilizzati per la formazione dei soldati sui loro attributi diversi.Questi attributi sono importanti negli scontri e il migliore è un soldato, maggiore è la possibilità di vincere una battaglia.<br>Attributi sono: i punti salute, attacco, difesa ed ritirata."
 
 #: ../../../campaigns/t03.wmf/objective:65
 msgid "Build weapon productions"
@@ -341,4 +342,4 @@ msgstr "Distruggi l'esercito di Kalitaths"
 
 #: ../../../campaigns/t03.wmf/objective:91
 msgid "Military assault on Al’thunran"
-msgstr ""
+msgstr "Assalto militare ad Al’thunran"

@@ -1,73 +1,68 @@
 # Widelands po/it_IT/worlds/greenland.po
 # Copyright (C) 2005-2009 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Gabriel Rota <gabriel.rota@gmail.com>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4435\n"
+"Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-07-21 18:08+0000\n"
-"PO-Revision-Date: 2009-07-01 18:23+0100\n"
+"POT-Creation-Date: 2009-09-27 10:20+0000\n"
+"PO-Revision-Date: 2009-08-28 15:47+0200\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
-"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.3\n"
 
 #: ../../../worlds/greenland/conf:2
-#, fuzzy
 msgid "The Widelands Development Team"
-msgstr "Imposta l'etichetta della squadra"
+msgstr "Il Gruppo di Sviluppo di Widelands"
 
 #: ../../../worlds/greenland/conf:3
-#, fuzzy
 msgid "Greenland"
-msgstr "Groenlandia"
+msgstr "Terra verde"
 
 #: ../../../worlds/greenland/conf:4
 msgid "These are the beauty and bountifull countries of the barbarians"
-msgstr ""
+msgstr "Queste sono le bellissime e generose contee dei barbari"
 
 #: ../../../worlds/greenland/conf:7 ../../../worlds/greenland/conf:8
 #: ../../../worlds/greenland/conf:9 ../../../worlds/greenland/conf:10
 #: ../../../worlds/greenland/conf:11
 msgid "Bush"
-msgstr ""
+msgstr "Cespuglio"
 
 #: ../../../worlds/greenland/conf:12 ../../../worlds/greenland/conf:13
 msgid "Cactus"
-msgstr ""
+msgstr "Cactus"
 
 #: ../../../worlds/greenland/conf:14 ../../../worlds/greenland/conf:15
 #: ../../../worlds/greenland/conf:16 ../../../worlds/greenland/conf:17
-#, fuzzy
 msgid "Dead Tree"
-msgstr "Grande albero"
+msgstr "Albero morto"
 
 #: ../../../worlds/greenland/conf:18
-#, fuzzy
 msgid "Fallen Tree"
-msgstr "Grande albero"
+msgstr "Albero caduto"
 
 #: ../../../worlds/greenland/conf:19 ../../../worlds/greenland/conf:20
 #: ../../../worlds/greenland/conf:21
 msgid "Grass"
-msgstr ""
+msgstr "Erba"
 
 #: ../../../worlds/greenland/conf:22 ../../../worlds/greenland/conf:23
-#, fuzzy
 msgid "Mushroom"
-msgstr "Campo di funghi"
+msgstr "Funghi"
 
 #: ../../../worlds/greenland/conf:24 ../../../worlds/greenland/conf:25
 #: ../../../worlds/greenland/conf:26 ../../../worlds/greenland/conf:27
 #: ../../../worlds/greenland/conf:28 ../../../worlds/greenland/conf:29
 msgid "Pebble"
-msgstr ""
+msgstr "Ciottolo"
 
 #: ../../../worlds/greenland/conf:30 ../../../worlds/greenland/conf:31
 #: ../../../worlds/greenland/conf:32
-#, fuzzy
 msgid "Skeleton"
 msgstr "Scheletro"
 
@@ -75,251 +70,219 @@ msgstr "Scheletro"
 #: ../../../worlds/greenland/conf:35 ../../../worlds/greenland/conf:36
 #: ../../../worlds/greenland/conf:37 ../../../worlds/greenland/conf:38
 #: ../../../worlds/greenland/conf:39
-#, fuzzy
 msgid "Standing Stones"
-msgstr "Animazione delle unità ferme"
+msgstr "Pietre arenarie"
 
 #: ../../../worlds/greenland/conf:40 ../../../worlds/greenland/conf:41
 #: ../../../worlds/greenland/conf:42 ../../../worlds/greenland/conf:43
 #: ../../../worlds/greenland/conf:44 ../../../worlds/greenland/conf:45
-#, fuzzy
 msgid "Stones"
-msgstr "pietrifica"
+msgstr "Pietre"
 
 #: ../../../worlds/greenland/conf:46
 msgid "Aspen"
-msgstr ""
+msgstr "Pioppo tremolo"
 
 #: ../../../worlds/greenland/conf:47
-#, fuzzy
 msgid "Aspen medium"
-msgstr "Testo medio"
+msgstr "Pioppo tremolo medio"
 
 #: ../../../worlds/greenland/conf:48
-#, fuzzy
 msgid "Aspen small"
-msgstr "Icone _piccole"
+msgstr "Pioppo tremolo piccolo"
 
 #: ../../../worlds/greenland/conf:49
-#, fuzzy
 msgid "Aspen tiny"
-msgstr "Testo minuscolo"
+msgstr "Pioppo tremolo minuscolo"
 
 #: ../../../worlds/greenland/conf:50
 msgid "Oak"
-msgstr ""
+msgstr "Quercia"
 
 #: ../../../worlds/greenland/conf:51
-#, fuzzy
 msgid "Oak medium"
-msgstr "Testo medio"
+msgstr "Quercia media"
 
 #: ../../../worlds/greenland/conf:52
-#, fuzzy
 msgid "Oak small"
-msgstr "Icone _piccole"
+msgstr "Quercia piccola"
 
 #: ../../../worlds/greenland/conf:53
-#, fuzzy
 msgid "Oak tiny"
-msgstr "Testo minuscolo"
+msgstr "Quercia minuscola"
 
 #: ../../../worlds/greenland/conf:54
 msgid "Spruce"
-msgstr ""
+msgstr "Abete"
 
 #: ../../../worlds/greenland/conf:55
-#, fuzzy
 msgid "Spruce medium"
-msgstr "Testo medio"
+msgstr "Abete medio"
 
 #: ../../../worlds/greenland/conf:56
-#, fuzzy
 msgid "Spruce small"
-msgstr "Icone _piccole"
+msgstr "Abete piccolo"
 
 #: ../../../worlds/greenland/conf:57
-#, fuzzy
 msgid "Spruce tiny"
-msgstr "Testo minuscolo"
+msgstr "Abete minuscolo"
 
 #: ../../../worlds/greenland/conf:58
 msgid "Alder"
-msgstr ""
+msgstr "Ontano"
 
 #: ../../../worlds/greenland/conf:59
-#, fuzzy
 msgid "Alder medium"
-msgstr "Testo medio"
+msgstr "Ontano medio"
 
 #: ../../../worlds/greenland/conf:60
-#, fuzzy
 msgid "Alder small"
-msgstr "Icone _piccole"
+msgstr "Ontano piccolo"
 
 #: ../../../worlds/greenland/conf:61
-#, fuzzy
 msgid "Alder tiny"
-msgstr "Testo minuscolo"
+msgstr "Ontano minuscolo"
 
 #: ../../../worlds/greenland/conf:62
 msgid "Birch"
-msgstr ""
+msgstr "Betulla"
 
 #: ../../../worlds/greenland/conf:63
-#, fuzzy
 msgid "Birch medium"
-msgstr "Testo medio"
+msgstr "Betulla media"
 
 #: ../../../worlds/greenland/conf:64
-#, fuzzy
 msgid "Birch small"
-msgstr "Icone _piccole"
+msgstr "Betulla piccola"
 
 #: ../../../worlds/greenland/conf:65
-#, fuzzy
 msgid "Birch tiny"
-msgstr "Testo minuscolo"
+msgstr "Betulla minuscola"
 
 #: ../../../worlds/greenland/conf:66
 msgid "Beech"
-msgstr ""
+msgstr "Faggio"
 
 #: ../../../worlds/greenland/conf:67
-#, fuzzy
 msgid "Beech medium"
-msgstr "Testo medio"
+msgstr "Faggio medio"
 
 #: ../../../worlds/greenland/conf:68
-#, fuzzy
 msgid "Beech small"
-msgstr "Icone _piccole"
+msgstr "Faggio piccolo"
 
 #: ../../../worlds/greenland/conf:69
-#, fuzzy
 msgid "Beech tiny"
-msgstr "Testo minuscolo"
+msgstr "Faggio minuscolo"
 
 #: ../../../worlds/greenland/conf:70
 msgid "Larch"
-msgstr ""
+msgstr "Larice"
 
 #: ../../../worlds/greenland/conf:71
-#, fuzzy
 msgid "Larch medium"
-msgstr "Testo medio"
+msgstr "Larice medio"
 
 #: ../../../worlds/greenland/conf:72
-#, fuzzy
 msgid "Larch small"
-msgstr "Icone _piccole"
+msgstr "Larice piccolo"
 
 #: ../../../worlds/greenland/conf:73
-#, fuzzy
 msgid "Larch tiny"
-msgstr "Testo minuscolo"
+msgstr "Larice minuscolo"
 
 #: ../../../worlds/greenland/conf:74
 msgid "Rowan"
-msgstr ""
+msgstr "Sorbo"
 
 #: ../../../worlds/greenland/conf:75
-#, fuzzy
 msgid "Rowan medium"
-msgstr "Testo medio"
+msgstr "Sorbo medio"
 
 #: ../../../worlds/greenland/conf:76
-#, fuzzy
 msgid "Rowan small"
-msgstr "Icone _piccole"
+msgstr "Sorbo piccolo"
 
 #: ../../../worlds/greenland/conf:77
-#, fuzzy
 msgid "Rowan tiny"
-msgstr "Testo minuscolo"
+msgstr "Sorbo minuscolo"
 
 #: ../../../worlds/greenland/conf:80
 msgid "Badger"
-msgstr ""
+msgstr "Tasso"
 
 #: ../../../worlds/greenland/conf:81
 msgid "Brownbear"
-msgstr ""
+msgstr "Orso bruno"
 
 #: ../../../worlds/greenland/conf:82
 msgid "Bunny"
-msgstr ""
+msgstr "Coniglietto"
 
 #: ../../../worlds/greenland/conf:83
 msgid "Chamois"
-msgstr ""
+msgstr "Camoscio"
 
 #: ../../../worlds/greenland/conf:84
 msgid "Deer"
-msgstr ""
+msgstr "Cervo"
 
 #: ../../../worlds/greenland/conf:85
 msgid "Duck"
-msgstr ""
+msgstr "Anatra"
 
 #: ../../../worlds/greenland/conf:86
 msgid "Elk"
-msgstr ""
+msgstr "Alce"
 
 #: ../../../worlds/greenland/conf:87
 msgid "Fox"
-msgstr ""
+msgstr "Volpe"
 
 #: ../../../worlds/greenland/conf:88
 msgid "Lynx"
-msgstr ""
+msgstr "Lince"
 
 #: ../../../worlds/greenland/conf:89
 msgid "Marten"
-msgstr ""
+msgstr "Martora"
 
 #: ../../../worlds/greenland/conf:90
 msgid "Reindeer"
-msgstr ""
+msgstr "Renna"
 
 #: ../../../worlds/greenland/conf:91
 msgid "Sheep"
-msgstr ""
+msgstr "Pecora"
 
 #: ../../../worlds/greenland/conf:92
-#, fuzzy
 msgid "Wisent"
-msgstr "Valle Wisent"
+msgstr "Bisonte"
 
 #: ../../../worlds/greenland/conf:93
-#, fuzzy
 msgid "Wolf"
 msgstr "Lupo"
 
 #: ../../../worlds/greenland/resconf:4
 msgid "Coal"
-msgstr ""
+msgstr "Carbone"
 
 #: ../../../worlds/greenland/resconf:12
-#, fuzzy
 msgid "Gold"
 msgstr "Oro"
 
 #: ../../../worlds/greenland/resconf:20
-#, fuzzy
 msgid "Iron"
-msgstr "Maglio di ferro"
+msgstr "Ferro"
 
 #: ../../../worlds/greenland/resconf:28
 msgid "Granit"
-msgstr ""
+msgstr "Granito"
 
 #: ../../../worlds/greenland/resconf:36
-#, fuzzy
 msgid "Water"
-msgstr "acqua"
+msgstr "Acqua"
 
 #: ../../../worlds/greenland/resconf:41
-#, fuzzy
 msgid "Fish"
-msgstr "Piovra gigante"
+msgstr "Pesce"

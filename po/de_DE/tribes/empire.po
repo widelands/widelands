@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4498\n"
+"Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-09-03 12:40+0000\n"
+"POT-Creation-Date: 2009-09-27 10:05+0000\n"
 "PO-Revision-Date: 2009-07-07 21:22+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -750,7 +750,7 @@ msgstr "Die Grundausrüstung eines Soldaten."
 msgid "The Hunter brings good meat to the colonists."
 msgstr "Der Jäger bringt gutes Fleisch zu den Siedlern."
 
-#: ../../../tribes/empire/hunters_house/conf:12
+#: ../../../tribes/empire/hunters_house/conf:13
 #: ../../../tribes/empire/stonemasons_house/conf:18
 #: ../../../tribes/empire/smelting_works/conf:21
 #: ../../../tribes/empire/burners_house/conf:16

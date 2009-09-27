@@ -1,41 +1,43 @@
 # Widelands po/it_IT/campaigns/t01.wmf.po
 # Copyright (C) 2005-2009 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Gabriel Rota <gabriel.rota@gmail.com>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4435\n"
+"Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-07-21 18:08+0000\n"
-"PO-Revision-Date: 2009-07-01 18:23+0100\n"
+"POT-Creation-Date: 2009-09-27 10:20+0000\n"
+"PO-Revision-Date: 2009-08-27 17:50+0200\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
-"Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
+"Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.3\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../../../campaigns/t01.wmf/elemental:7
-#, fuzzy
 msgid "Tutorial1 - Eyes in the Dark"
 msgstr "Tutorial1 - Occhi nel buio"
 
 #: ../../../campaigns/t01.wmf/elemental:9
 msgid "First Mission of the Barbarian Tutorial Campaign. In this tutorial the basic gameplay and control as well as basic production buildings (wood, stone, etc.) will be introduced."
-msgstr ""
+msgstr "La prima missione della campagna tutorial dei barbari. In questo tutorial verranno presentate le basi di gioco e le basi per la produzione degli edifici (legno,pietre, etc.)."
 
 #: ../../../campaigns/t01.wmf/event:23
 msgid "Thron sighs..."
-msgstr ""
+msgstr "Thron sospira..."
 
 #: ../../../campaigns/t01.wmf/event:25
 msgid " \"It's been months and we are still hiding where the forests are old and dark.<br> My warriors hunt at day and lie awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
-msgstr ""
+msgstr " \"Sono passati mesi e rimaniamo nascosti qui dove la foresta è vecchia e scura.<br> I miei guerrieri cacciano di giorno e stanno sdraiati e svegli la notte - ascoltando il suono della crudele macellazione echeggiare lontano tra gli antichi alberi.\""
 
 #: ../../../campaigns/t01.wmf/event:27 ../../../campaigns/t01.wmf/event:40
 #: ../../../campaigns/t01.wmf/event:53 ../../../campaigns/t01.wmf/event:66
-#, fuzzy
 msgid "The story begins"
-msgstr "È una storia incredibile!"
+msgstr "La storia comincia"
 
 #: ../../../campaigns/t01.wmf/event:32 ../../../campaigns/t01.wmf/event:45
 #: ../../../campaigns/t01.wmf/event:58 ../../../campaigns/t01.wmf/event:71
@@ -45,199 +47,183 @@ msgstr "È una storia incredibile!"
 #: ../../../campaigns/t01.wmf/event:203 ../../../campaigns/t01.wmf/event:233
 #: ../../../campaigns/t01.wmf/event:248 ../../../campaigns/t01.wmf/event:263
 #: ../../../campaigns/t01.wmf/event:278 ../../../campaigns/t01.wmf/event:310
-#, fuzzy
 msgid "OK"
 msgstr "OK"
 
 #: ../../../campaigns/t01.wmf/event:38
 msgid " \"We can see the raging flames that swallow Al'thunran from here, miles away.<br> The red lights flash in the darkness and dance to the rhythm of the wardrums that haunt me even in my nightmares.\" "
-msgstr ""
+msgstr " \"Da qui possiamo vedere le fiamme infuriate che inghiottono Al'thunran.<br> Le luci rosse brillano nella notte e danzano al ritmo dei tamburi da guerra che mi inseguono persino nei miei incubi.\" "
 
 #: ../../../campaigns/t01.wmf/event:51
 msgid " \"My father's bones lay peacefully in the grounds he cleared from the senseless bloodspilling that has once risen among us.<br> Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, not to let greed or despair destroy our bonds as well.\" "
-msgstr ""
+msgstr " \"Le ossa di mio padre stanno pacificamente sotto terra e chiariscono lo spargimento di sangue senza senso che nuovamente ci assale.<br> Boldreth, mio leale compagno ed amico è una sorgente di pace e consolazione per me in questi momenti bui. Tiene alto il mio spirito e tiene i miei guerrieri svegli, senza lasciare che avidità e disperazione distruggano i nostri legami.\" "
 
 #: ../../../campaigns/t01.wmf/event:64
 msgid " \"As father told me, there will be times to fight and times to lie and wait, trying not to sleep or die before the right time comes. And so I do... wait.\" "
-msgstr ""
+msgstr " \"Come mio padre mi disse, ci saranno tempi per combattere e tempi per giacere ed attendere, provando a non dormire o morire prima che l'esatto tempo arrivi. E così io faccio... aspetto.\" "
 
 #: ../../../campaigns/t01.wmf/event:102
-#, fuzzy
 msgid "An old man says..."
-msgstr "Il Guado del Morto"
+msgstr "Un vecchio uomo dice..."
 
 #: ../../../campaigns/t01.wmf/event:104
 msgid " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my counsel through these darkened days.\" "
-msgstr ""
+msgstr " \"Salve, comandante. Sono Khantrukh e ho visto molti inverni passare. Ti prego di consentirmi di aiutarti con il mio consiglio attraverso questi oscuri giorni.\" "
 
 #: ../../../campaigns/t01.wmf/event:106
 msgid "Somebody comes upon to you"
-msgstr ""
+msgstr "Qualcuno viene da te"
 
 #: ../../../campaigns/t01.wmf/event:116
-#, fuzzy
 msgid "Khantrukh continues..."
-msgstr "Specifica l'asse X della forza continua"
+msgstr "Khantrukh continua..."
 
 #: ../../../campaigns/t01.wmf/event:118
 msgid " \"None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...<br> We should prepare, in case we have to face the winter in these harsh lands. I believe to the east of our campside are a few places where we could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
-msgstr ""
+msgstr " \"Nulla, ma gli dei conoscono quanto a lungo siamo dovuti rimanere nascosti qui. I guerrieri ora sperano di poter tornare a marciare gloriosamente un giorno, ma dubito fortemente che questo succederà presto. E i giorni stanno già diventando corti e freddi...<br> Ci dovremmo preparare, nel caso dovessimo affrontare l'inverno in queste terre scabre. Credo che a est del nostro campo ci siano un po di posti dove potremmo far sorgere una capanna del boscaiolo.\"<br><br>-- NUOVI OBBIETTIVI --<br> "
 
 #: ../../../campaigns/t01.wmf/event:119 ../../../campaigns/t01.wmf/objective:7
 msgid "* Press SPACE to see where you can build.<br> The red spots show you where a small building - like a lumberjack's hut - may be built.<br>"
-msgstr ""
+msgstr "* Premi SPAZIO per vedere dove puoi costruire.<br> I punti rossi mostrano dove una piccola costruzione - tipo una capanna del boscaiolo - può essere costruita.<br>"
 
 #: ../../../campaigns/t01.wmf/event:120 ../../../campaigns/t01.wmf/objective:8
 msgid "* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting lumberjack's hut.<br>"
-msgstr ""
+msgstr "* Costruisci una capanna del boscaiolo al punto rosso immediatamente a destra del tuo quartier generale premendolo e selezionando capanna del boscaiolo.<br>"
 
 #: ../../../campaigns/t01.wmf/event:122 ../../../campaigns/t01.wmf/event:137
 #: ../../../campaigns/t01.wmf/event:153 ../../../campaigns/t01.wmf/event:168
 #: ../../../campaigns/t01.wmf/event:184 ../../../campaigns/t01.wmf/event:199
-#, fuzzy
 msgid "The advisor"
-msgstr "Alto consigliere"
+msgstr "Il consigliere"
 
 #: ../../../campaigns/t01.wmf/event:132
-#, fuzzy
 msgid "The elder remarks..."
-msgstr "Mago anziano"
+msgstr "Il vecchio commenta..."
 
 #: ../../../campaigns/t01.wmf/event:134
 msgid " \"Obviously, it would be too draining for our people to walk all the way to the lumberjack's hut through the wilderness. We will have to make a path between our hall and the lumberjack's hut. It's not a hard guess that the men would appreciate a way as short and even as possible - the wood surely will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr " \"Ovviamente, potrebbe essere troppo oneroso per la nostra gente camminare per tutta la strada verso la capanna del falegname attraverso la landa. Dovremmo formare un sentiero tra la nostra entrata e la capanna del boscaiolo. Non dovrebbe essere una grande richiesta e l'uomo dovrebbe apprezzare una strada il più corta possibile - il legno sicuramente sarà abbastanza pesante.\"<br><br>-- NUOVO OBBIETTIVO --<br> "
 
 #: ../../../campaigns/t01.wmf/event:135 ../../../campaigns/t01.wmf/objective:9
 msgid "* Build a road between your headquarters and the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You should connect it to another flag with a road.<br> If you click on a flag, little symbols will appear around it to show you in which directions you can build the road.<br> The colour of those symbols indicate how steep the road will be. Green is flat, yellow is steep and red is very steep. The steeper the step is, the harder it will be for your people to walk on it.<br> You can click on any of the symbols to build the first step of the road there. New symbols will appear to show you where the next step can go, and so on. However, you can also click further away to build several steps at once. Click on the flag at the headquarters to finish the road."
-msgstr ""
+msgstr "* Costruire una strada tra il quartier generale e la capanna del falegname.<br> Quando hai posizionato la capanna del falegname, una bandiera sarà creata per questa. Dovresti collegarla ad un'altra bandiera su una strada.<br> Se premi sulla bandiera, piccoli simboli appariranno attorno ad essa per mostrarti in che direzione puoi costruire la strada.<br> Il colore di questi simboli indica quanto sarà scoscesa la strada. Verde è pianura, gialla è scoscesa e rossa molto scoscesa. Più il tratto è scosceso, più difficile sarà per i tuoi uomini camminarci.<br> Puoi premere su ogni simbolo per costruire là il primo tratto di strada. Nuovi simboli appariranno per mostrarti dove il prossimo tratto può andare, e così via. Inoltre, puoi anche premere più lontano per costruire diversi tratti alla volta. Premi sulla bandiera del quartier generale per terminare la strada."
 
 #: ../../../campaigns/t01.wmf/event:148
 msgid "Khantrukh remembers..."
-msgstr ""
+msgstr "Khantrukh ricorda..."
 
 #: ../../../campaigns/t01.wmf/event:150
 msgid " \"There is an old saying:<br> 'A burden divided is easier to endure.'<br> A crossroads on the way between our site and the lumberjack's hut would ease the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr " \"Un vecchio va dicendo:<br> 'Un ostacolo divisorio è più facile da sopportare.'<br> Un incrocio sulla strada tra di noi e la capanna del boscaiolo dovrebbe facilitare il lavoro dei nostri corrieri.\"<br><br>-- NUOVO OBBIETTIVO --<br> "
 
 #: ../../../campaigns/t01.wmf/event:151
 #: ../../../campaigns/t01.wmf/objective:17
 msgid "* Place a flag in the middle of the road.<br> There is a flag symbol in the mid of the way you just built. You place a flag there by clicking on the symbol and then clicking on the flag button in the consequently appearing menu. This splits the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
-msgstr ""
+msgstr "* Posiziona una bandiera nel mezzo della strada.<br> C'è il simbolo di una bandiera nel mezzo di una strada appena costruita. Posiziona una bandiera premendo sul simbolo e poi premendo sul bottone bandiera in conseguenza apparirà il menu. Questo divide il lavoro di trasporto del legno tra due corrieri.<br> Quando abbastanza merci iniziano ad essere trasportate tra due punti, bandiere aggiuntive nel mezzo fanno in modo che arrivino più velocemente alla loro destinazione, quindi migliorano la tua tua infrastruttura.<br>"
 
 #: ../../../campaigns/t01.wmf/event:163
 msgid "The old man looks to the sky..."
-msgstr ""
+msgstr "Il vecchio uomo guarda verso il cielo..."
 
 #: ../../../campaigns/t01.wmf/event:165
 msgid " \"The northern winds tell us that the coming winter will be a long and cruel one. One lumberjack's hut will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr " \"I venti del nord ci dicono che l'inverno sta arrivando e sarà lungo e crudele. Una capanna per il boscaiolo non sarà abbastanza per calmare le esigenze del nostro popolo. Più alberi attendono le nostre asce a sud del nostro nuovo incrocio - permettici di innalzare una seconda capanna del boscaiolo qui!\"<br><br>-- NUOVO OBBIETTIVO --<br> "
 
 #: ../../../campaigns/t01.wmf/event:166
 #: ../../../campaigns/t01.wmf/objective:18
 msgid "* Place a lumberjack's hut directly south of the flag you just placed on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
-msgstr ""
+msgstr "* Posiziona una capanna del boscaiolo direttamente a sud della bandiera che hai appena piazzato sulla strada. In seguito unisci la bandiera con la nuova capanna del boscaiolo.<br> Nota che invece che costruire una strada passo passo, puoi anche premere direttamente sulla destinazione per costruire l'intera strada in una volta."
 
 #: ../../../campaigns/t01.wmf/event:179
 msgid "Khantrukh nods..."
-msgstr ""
+msgstr "Khantrukh annuisce..."
 
 #: ../../../campaigns/t01.wmf/event:181
 msgid " \"Of course, if we intended to build a bigger settlement, much more lumberjack's huts would be advisable, but this should do for now.<br> But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give back again.<br> So, in order to replace the trees we chop down, we should build a ranger's hut, preferably close to the lumberjack's hut.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr " \"Naturalmente, se abbiamo pianificato di costruire un grande insediamento, molte più capanne del taglialegna sarebbero consigliabili, ma questo dovrebbe essere fatto per ora.<br> Ma mai dimenticare - queste foreste sono la nostra eredità, affidate a noi dai nostri antenati. Noi dobbiamo sempre rispettare e badare ad esse. Cosa prendiamo, dobbiamo dare indietro nuovamente.<br> Così, per poter sostituire gli alberi abbattuti, dovremmo costruire una capanna della guardia forestale, piuttosto vicino alla capanna del taglialegna.\"<br><br>-- NUOVO OBBIETTIVO --<br> "
 
 #: ../../../campaigns/t01.wmf/event:182
 #: ../../../campaigns/t01.wmf/objective:26
 msgid "* Build a ranger's hut to the east of the first lumberjack's hut."
-msgstr ""
+msgstr "* Costruisci una capanna della guardia forestale ad est della prima capanna del taglialegna."
 
 #: ../../../campaigns/t01.wmf/event:194
-#, fuzzy
 msgid "The elder speaks..."
-msgstr "Mago anziano"
+msgstr "Il più vecchio parla..."
 
 #: ../../../campaigns/t01.wmf/event:196
 msgid " \"I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations.<br> I would advise that we obtain stones for the future - who knows what fortifications we might be forced to build very soon. And - like a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr " \"Ne sono ben consapevole di questo, comandante, né tu né i tuoi guerrieri hanno il desiderio di stare in questo posto a lungo abbandonato. Ma nonostante, la nostra guerra per riconquistare la nostra casa potrebbe prendere molto tempo e sembrerebbe saggio fare i preparativi.<br> Vorrei consigliare di ottenere pietre per il futuro - chissà che fortificazioni possiamo essere forzati a costruire molto presto. E - come un regalo del destino - ci sono veramente grandi rocce appena qui vicino...\"<br><br>-- NUOVO OBBIETTIVO --<br> "
 
 #: ../../../campaigns/t01.wmf/event:197
 #: ../../../campaigns/t01.wmf/objective:34
 msgid "* Build two quarries southwest of your headquarters."
-msgstr ""
+msgstr "* Costruisci due cave a sudovest del vostro quartier generale."
 
 #: ../../../campaigns/t01.wmf/event:224 ../../../campaigns/t01.wmf/event:239
-#, fuzzy
 msgid "Thron speaks..."
-msgstr "Il principe dice la verità."
+msgstr "Thron parla..."
 
 #: ../../../campaigns/t01.wmf/event:226
 msgid " \"In another sleepless night, I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br> They are a constant reminder why we had to hide here... and why we must return in the end!\" "
-msgstr ""
+msgstr " \"In un altra notte senza sonno, andai sulla collina e osservai a nord. I fuochi stanno ancora bruciando, erano ancora affamate sopra l'eredità di mio padre.<br> Sono una costante ricordo del perché abbiamo dovuto nasconderci qui... e perché dobbiamo tornare alla fine!\" "
 
 #: ../../../campaigns/t01.wmf/event:228
-#, fuzzy
 msgid "In the night"
-msgstr "Un tumulto nella notte"
+msgstr "Durante la notte"
 
 #: ../../../campaigns/t01.wmf/event:241
 msgid " \"Once again, I went up to my father's tomb, in a sacred grove at the foot of the great spire of Kal'mavrath. I just stood there and felt neither the hours pass nor the cold rain pouring down from a darkened sky...<br> Somehow it felt like a farewell. For the first time, I wondered what the future might hold for me...\" "
-msgstr ""
+msgstr " \"Una volta ancora, andai sulla tomba di mio padre, in un sacra cerchia di alberi ai piedi delle grandi guglie di Kal'mavrath. Appena giunsi là non sentii né le ore passare né la fredda pioggia riversarsi giù dall'oscuro cielo...<br> In un modo o nell'altro sentii come un separarsi. Per la prima volta, fui sorpreso da cosa le forze future tenevano per me...\" "
 
 #: ../../../campaigns/t01.wmf/event:243
-#, fuzzy
 msgid "At the grave"
-msgstr " superblocco %s a "
+msgstr "Alla tomba"
 
 #: ../../../campaigns/t01.wmf/event:254
-#, fuzzy
 msgid "Thron says thoughtfully..."
-msgstr "Il cartello dice «Foresteria»."
+msgstr "Thron dice pensoso ..."
 
 #: ../../../campaigns/t01.wmf/event:256
 msgid " \"Some time ago, Boldreth came to me. His advice was to move to a place closer to home - to strike at the first sign of my brother's forces wavering.<br> But I look over the forests and I still see black smoke rising to the sky. I know - it is too early yet, and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed that too rash a return would cause both on our and the other side...\" "
-msgstr ""
+msgstr " \"Qualche tempo fa, Boldreth venne da me. Il suo consiglio fu di spostarci in un posto sicuro - per battere la prima ondata delle forze di mio fratello.<br> Ma ho guardato fuori dalla foresta e ho visto ancora fumo nero salire verso il cielo. So che è ancora troppo presto, e che si spera non succeda mai. Le sue forze saranno presto pronte, ma ho paura dello spargimento di sangue che il nostro ritorno potrebbe causare ad entrambie le parti...\" "
 
 #: ../../../campaigns/t01.wmf/event:258
-#, fuzzy
 msgid "The other day"
-msgstr "Periodo del giorno"
+msgstr "Il giorno seguente"
 
 #: ../../../campaigns/t01.wmf/event:269
-#, fuzzy
 msgid "Thron looks furious..."
-msgstr "Queste rovine sono stranamente familiari."
+msgstr "Thron guarda furioso..."
 
 #: ../../../campaigns/t01.wmf/event:271
 msgid " \"Today, my warriors picked up an old man, wandering sick and wounded through the dark forest. We listened in horror when he told us of the atrocities taking place in Al'thunran.<br> I hereby renew my oath - I will stop this madness at any cost!\" "
-msgstr ""
+msgstr " \"Oggi, i miei guerrieri hanno raccolto un vecchio uomo, vagabondava malandato e ferito attraverso la foresta scura. Ascoltammo con orrore quando ci disse delle atrocità compiute ad Al'thunran.<br> Per questo rinnovo il mio giuramento - Fermerò questa follia ad ogni costo!\" "
 
 #: ../../../campaigns/t01.wmf/event:273
 msgid "The oath"
-msgstr ""
+msgstr "Il giuramento"
 
 #: ../../../campaigns/t01.wmf/event:304
 msgid " \"Very well done, chieftain. We now have all we need to face the winter and may prepare ourselves for the battles ahead.<br><br>--------------------- VICTORY! ----------------------<br><br> You may continue if you wish. Otherwise, move on to the next mission.\" "
-msgstr ""
+msgstr " \"Veramente ben fatto, capitano. Ora abbiamo tutto il necessario per affrontare l'inverno e per prepararci per le battaglie future.<br><br>--------------------- VITTORIA! ----------------------<br><br> Se vuoi puoi continuare. Altrimenti prosegui con la prossima missione.\" "
 
 #: ../../../campaigns/t01.wmf/event:306
-#, fuzzy
 msgid "Mission Complete"
-msgstr "Completa il costrutto"
+msgstr "Missione Completa"
 
 #: ../../../campaigns/t01.wmf/objective:5
-#, fuzzy
 msgid "Build a lumberjack's hut"
-msgstr "Comando di costruzione '%s' fallito.\n"
+msgstr "Costruisci una capanna del boscaiolo"
 
 #: ../../../campaigns/t01.wmf/objective:15
 msgid "Build another lumberjack's hut"
-msgstr ""
+msgstr "Costruisci un'altra capanna del boscaiolo"
 
 #: ../../../campaigns/t01.wmf/objective:24
-#, fuzzy
 msgid "Build a ranger's hut"
-msgstr "Ranger elfica"
+msgstr "Costruisci una capanna della guardia forestale"
 
 #: ../../../campaigns/t01.wmf/objective:32
-#, fuzzy
 msgid "Build two quarries"
-msgstr "Racconto di due fratelli"
+msgstr "Costruisci due cave"

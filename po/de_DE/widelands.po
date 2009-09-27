@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4498\n"
+"Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-09-03 14:40+0200\n"
-"PO-Revision-Date: 2009-09-03 14:39+0100\n"
+"POT-Creation-Date: 2009-09-27 12:05+0200\n"
+"PO-Revision-Date: 2009-09-27 12:00+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -538,7 +538,7 @@ msgstr "Gebäude"
 msgid "%u%% built"
 msgstr "%u%% gebaut"
 
-#: ../../src/militarysite.cc:65 ../../src/logic/warehouse.cc:260
+#: ../../src/militarysite.cc:65 ../../src/logic/warehouse.cc:275
 msgid " conquer"
 msgstr " erobern"
 
@@ -831,7 +831,7 @@ msgstr "Widelands konnte keine Verbindung zum Gastgeber erstellen"
 msgid "The address of the game server is invalid"
 msgstr "Die Adresse the Spiele Servers ist inkorrekt"
 
-#: ../../src/wlapplication.cc:1732 ../../src/network/nethost.cc:1115
+#: ../../src/wlapplication.cc:1732 ../../src/network/nethost.cc:1117
 msgid "Player"
 msgstr "Spieler"
 
@@ -861,7 +861,7 @@ msgstr "Startbedingung"
 msgid "Open"
 msgstr "Geöffnet"
 
-#: ../../src/playerdescrgroup.cc:152 ../../src/network/nethost.cc:1053
+#: ../../src/playerdescrgroup.cc:152 ../../src/network/nethost.cc:1055
 msgid "Computer"
 msgstr "Computer"
 
@@ -1258,109 +1258,101 @@ msgstr "Erlaube Gebäudetyp"
 msgid "Allows (or forbids) the construction of a building type for a player."
 msgstr "Erlaubt (oder verbietet) einem Spieler das Errichten eines Gebäudetyps."
 
-#: ../../src/events/event_factory.cc:55
+#: ../../src/events/event_factory.cc:56
 msgid "Create building"
 msgstr "Erstelle Gebäude"
 
-#: ../../src/events/event_factory.cc:56
+#: ../../src/events/event_factory.cc:57
 msgid "Create a building and optionally place workers in it"
 msgstr "Erstelle ein Gebäude und setze zusätzlich auch ein Arbeiter hinein."
 
-#: ../../src/events/event_factory.cc:59
+#: ../../src/events/event_factory.cc:61
 msgid "Conquer area"
 msgstr "Erobere Gebiet"
 
-#: ../../src/events/event_factory.cc:61
+#: ../../src/events/event_factory.cc:63
 msgid "Gives ownership of all unowned locations whithin an area to the player."
 msgstr "Gibt dem Spieler die Kontrolle über ein Gebiet, falls es von niemanden sonst kontrolliert wird."
 
-#: ../../src/events/event_factory.cc:65
+#: ../../src/events/event_factory.cc:68
 msgid "Create flag"
 msgstr "Flagge setzen"
 
-#: ../../src/events/event_factory.cc:66
+#: ../../src/events/event_factory.cc:69
 msgid "Create a flag."
 msgstr "Setze eine Flagge."
 
-#: ../../src/events/event_factory.cc:69
+#: ../../src/events/event_factory.cc:73
 msgid "Create immovable"
 msgstr "Erstelle unbewegten Gegenstand"
 
-#: ../../src/events/event_factory.cc:70
+#: ../../src/events/event_factory.cc:74
 msgid "Create an immovable."
 msgstr "Erstelle einen unbewegten Gegenstand."
 
-#: ../../src/events/event_factory.cc:73
+#: ../../src/events/event_factory.cc:78
 msgid "Show message box"
 msgstr "Zeige Nachrichten Fenster"
 
-#: ../../src/events/event_factory.cc:75
+#: ../../src/events/event_factory.cc:80
 msgid "Show a message box. It can be modal or and have a picture. An events can be assigned to each button to give the user chose the course of the game."
 msgstr "Dieses Ereignis zeigt ein Nachrichtenfenster, welches fest oder veränderbar sein kann. Das Fenster kann aus Text, Bildern und Knöpfen zusammengesetzt werden, wobei jedem Knopf ein bestimmtes Ereignis zugewiesen werden kann."
 
-#: ../../src/events/event_factory.cc:80
+#: ../../src/events/event_factory.cc:86
 msgid "Move view"
 msgstr "Bewege Blick"
 
-#: ../../src/events/event_factory.cc:81
+#: ../../src/events/event_factory.cc:87
 msgid "Center the player's view on a certain location."
 msgstr "Zentriere den Blick des Spielers auf ein bestimmtes Feld."
 
-#: ../../src/events/event_factory.cc:84
+#: ../../src/events/event_factory.cc:91
 msgid "Reveal campaign"
 msgstr "Decke Kampagne auf"
 
-#: ../../src/events/event_factory.cc:85
+#: ../../src/events/event_factory.cc:92
 msgid "Reveal a campaign."
 msgstr "Decke Kampagne auf."
 
-#: ../../src/events/event_factory.cc:88
+#: ../../src/events/event_factory.cc:96
 msgid "Reveal objective"
 msgstr "Decke Aufgabe auf"
 
-#: ../../src/events/event_factory.cc:89
+#: ../../src/events/event_factory.cc:97
 msgid "Reveal an objective."
 msgstr "Decke Aufgabe auf."
 
-#: ../../src/events/event_factory.cc:92
+#: ../../src/events/event_factory.cc:101
 msgid "Reveal scenario"
 msgstr "Decke Szenario auf"
 
-#: ../../src/events/event_factory.cc:93
+#: ../../src/events/event_factory.cc:102
 msgid "Reveal a scenario."
 msgstr "Decke Szenario auf."
 
-#: ../../src/events/event_factory.cc:96
+#: ../../src/events/event_factory.cc:106
 msgid "Create road"
 msgstr "Straße bauen"
 
-#: ../../src/events/event_factory.cc:97
+#: ../../src/events/event_factory.cc:107
 msgid "Create a road and optionally place a carrier on it"
 msgstr "Erstelle eine Straße und stelle zusätzlich noch einen Träger darauf."
 
-#: ../../src/events/event_factory.cc:100
+#: ../../src/events/event_factory.cc:111
 msgid "Set timer"
 msgstr "Setze Zeit-Auslöser"
 
-#: ../../src/events/event_factory.cc:101
+#: ../../src/events/event_factory.cc:112
 msgid "Set a timer to trigger after a certain duration."
 msgstr "Setze einen Zeit Auslöser nach einer bestimmten Zeit."
 
-#: ../../src/events/event_factory.cc:104
+#: ../../src/events/event_factory.cc:116
 msgid "Unhide area"
 msgstr "Zeige Gebiet"
 
-#: ../../src/events/event_factory.cc:106
+#: ../../src/events/event_factory.cc:118
 msgid "Gives vision for a specified amount of time of all locations whithin an area to the player."
 msgstr "Gibt dem Spieler für eine bestimmte Zeit die Sicht auf alle Dinge in einem bestimmten Gebiet."
-
-#: ../../src/events/event_factory.cc:110
-msgid "victory"
-msgstr "Sieg"
-
-#: ../../src/events/event_factory.cc:111
-msgid "Allows a player to claim victory of this campaign."
-msgstr "Ermöglicht einem Spieler den Sieg anzunehmen."
 
 #: ../../src/map_io/widelands_map_loader.cc:87
 msgid "Invalid World"
@@ -1501,133 +1493,133 @@ msgstr "Der Server ist abgestürzt und hat eine Notfallsicherung durchgeführt."
 msgid "Host sent player %s to the lobby!"
 msgstr "Der Gastgeber hat %s zu den Zuschauern gesendet!"
 
-#: ../../src/network/nethost.cc:1140
+#: ../../src/network/nethost.cc:1142
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr "WARNUNG: %s benutzt die Version %s, während der Gastgeber die Version %s benutzt."
 
-#: ../../src/network/nethost.cc:1176
+#: ../../src/network/nethost.cc:1178
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s hat das Spiel betreten."
 
-#: ../../src/network/nethost.cc:1200
+#: ../../src/network/nethost.cc:1202
 msgid "Client reports time to host that is running backwards."
 msgstr "Der Client hat dem Gastgeber eine Zeit genannt, die zurück läuft."
 
-#: ../../src/network/nethost.cc:1203
+#: ../../src/network/nethost.cc:1205
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Der Client simuliert ausserhalb der vom Server erlaubten Zeit."
 
-#: ../../src/network/nethost.cc:1207
+#: ../../src/network/nethost.cc:1209
 msgid "Client did not submit sync report in time."
 msgstr "Der Client hat der Synchronisationsreport nicht rechtzeitig gesendet."
 
-#: ../../src/network/nethost.cc:1383
+#: ../../src/network/nethost.cc:1385
 msgid "Client and host have become desynchronized."
 msgstr "Client und Server sind unsynchron geworden."
 
-#: ../../src/network/nethost.cc:1425
+#: ../../src/network/nethost.cc:1427
 msgid "New User"
 msgstr "Neuer Benutzer"
 
-#: ../../src/network/nethost.cc:1430
+#: ../../src/network/nethost.cc:1432
 msgid "The game has already started."
 msgstr "Das Spiel hat bereits begonnen."
 
-#: ../../src/network/nethost.cc:1448
+#: ../../src/network/nethost.cc:1450
 msgid "Connection to client lost."
 msgstr "Verbindung zum Client verloren."
 
-#: ../../src/network/nethost.cc:1462
+#: ../../src/network/nethost.cc:1464
 msgid "Client sent malformed commands: "
 msgstr "Der Client hat einen unverständlichen Befehl gesendet:"
 
-#: ../../src/network/nethost.cc:1495
+#: ../../src/network/nethost.cc:1497
 msgid "Game is running already, but client has not connected fully"
 msgstr "Das Spiel läuft bereits, aber der Client ist noch nicht richtig verbunden."
 
-#: ../../src/network/nethost.cc:1499
+#: ../../src/network/nethost.cc:1501
 #, c-format
 msgid "First command sent by client is %u instead of HELLO. Most likely the client is running an incompatible version."
 msgstr "Der Erste vom Clienten gesendete Befehl ist %u stattdessen hätte HELLO kommen müssen. Höchstwahrscheinlich verwenden Server und Client inkompatible Versionen."
 
-#: ../../src/network/nethost.cc:1505
+#: ../../src/network/nethost.cc:1507
 msgid "Server uses a different protocol version."
 msgstr "Der Server verwendet eine andere Protokollversion"
 
-#: ../../src/network/nethost.cc:1587
+#: ../../src/network/nethost.cc:1591
 msgid "Client sent TIME command even though game is not running."
 msgstr "Der Client hat einen TIME Befehl gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/network/nethost.cc:1595
+#: ../../src/network/nethost.cc:1599
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr "Der Client hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
 
-#: ../../src/network/nethost.cc:1607
+#: ../../src/network/nethost.cc:1611
 #, c-format
 msgid "Client %i (%i) sent a playercommand (%i) for a different player (%i)."
 msgstr "Der Client %i (%i) versucht einen Spielerbefehl (%i)  für einen anderen Spieler (%i) zu senden."
 
-#: ../../src/network/nethost.cc:1616
+#: ../../src/network/nethost.cc:1620
 msgid "Client sent unexpected synchronization report."
 msgstr "Der Client hat einen unerwarteten Synchronisationsreport geschickt."
 
-#: ../../src/network/nethost.cc:1651
+#: ../../src/network/nethost.cc:1655
 #, c-format
 msgid "Client sent unknown command number %u"
 msgstr "Der Client hat einen unbekannten Befehl Nummer %u gesendet."
 
-#: ../../src/network/nethost.cc:1692
+#: ../../src/network/nethost.cc:1696
 #, c-format
 msgid "%s has left the game (%s)"
 msgstr "%s hat das Spiel verlassen (%s)."
 
-#: ../../src/trigger/trigger_factory.cc:39
+#: ../../src/trigger/trigger_factory.cc:40
 msgid "Building Trigger"
 msgstr "Gebäude-Auslöser"
 
-#: ../../src/trigger/trigger_factory.cc:41
+#: ../../src/trigger/trigger_factory.cc:42
 msgid "Triggers when the player has the specified number of buildings of the specified type in the specified area."
 msgstr "Löst aus, wenn der Spieler eine bestimmte Anzahl eines Gebäudes in dem angegebenen Gebiet besitzt."
 
-#: ../../src/trigger/trigger_factory.cc:45
+#: ../../src/trigger/trigger_factory.cc:47
 msgid "Defeated Player Trigger"
 msgstr "Spieler besiegt Auslöser"
 
-#: ../../src/trigger/trigger_factory.cc:47
+#: ../../src/trigger/trigger_factory.cc:49
 msgid "Triggers when the player was defeated. The trigger is set to true, if the player has 0 workers."
 msgstr "Löst aus, wenn ein Spieler besiegt wurde. Der Auslöser wird wahr wenn der Spieler keine Arbeiter mehr hat."
 
-#: ../../src/trigger/trigger_factory.cc:51
+#: ../../src/trigger/trigger_factory.cc:54
 msgid "Military influence Trigger"
 msgstr "Militär-Einfluss-Auslöser"
 
-#: ../../src/trigger/trigger_factory.cc:53
+#: ../../src/trigger/trigger_factory.cc:56
 msgid "Triggers when the player has some (or highest) military influence over the specified number of nodes in the specified area."
 msgstr "Löst aus, wenn der Spieler einen bestimmte (oder den höchsten) militärischen Einfluss in dem angegebenen Gebiet besitzt."
 
-#: ../../src/trigger/trigger_factory.cc:57
+#: ../../src/trigger/trigger_factory.cc:61
 msgid "Ownership Trigger"
 msgstr "Gebiets-Besitzer Auslöser"
 
-#: ../../src/trigger/trigger_factory.cc:59
+#: ../../src/trigger/trigger_factory.cc:63
 msgid "Triggers when the the player owns at least the specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
 msgstr "Löst aus, wenn der Spieler mindestens eine bestimmte Menge Land in dem ausgewählten Gebiet besitzt. Falls es kein einfacher Auslöser ist, wird der Auslöser wieder zurückgesetzt, sobald der Spieler wieder zuwenig Land besitzt."
 
-#: ../../src/trigger/trigger_factory.cc:64
+#: ../../src/trigger/trigger_factory.cc:69
 msgid "Time Trigger"
 msgstr "Zeit-Auslöser"
 
-#: ../../src/trigger/trigger_factory.cc:66
+#: ../../src/trigger/trigger_factory.cc:71
 msgid "Triggers at a certain time. The time can be set to a value in ms. If the trigger has no time is set, a time can be set for it with an event."
 msgstr "Löst nach einer bestimmten Zeit aus. Die Zeit kann in einem Wert in ms gesetzt werden. Wenn der Auslöser keine Zeitdauer gegeben hat, kann eine Dauer über ein Ereignis gegeben werden."
 
-#: ../../src/trigger/trigger_factory.cc:71
+#: ../../src/trigger/trigger_factory.cc:77
 msgid "Vision Trigger"
 msgstr "Sicht-Auslöser"
 
-#: ../../src/trigger/trigger_factory.cc:73
+#: ../../src/trigger/trigger_factory.cc:79
 msgid "Triggers when the the player sees (or has seen) at least a specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
 msgstr "Löst aus, wenn der Spieler mindestens eine bestimmte Menge Land in dem ausgewählten Gebiet sieht (oder gesehen hat). Falls es kein einfacher Auslöser ist, wird der Auslöser wieder zurückgesetzt, sobald die Bedingung nicht mehr zutrifft."
 
@@ -1654,14 +1646,6 @@ msgstr "Statistik"
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:170
 msgid "Objectives Menu"
 msgstr "Aufgaben"
-
-#: ../../src/wui/game_objectives_menu.cc:67
-msgid "Claim Victory"
-msgstr "Sieg annehmen"
-
-#: ../../src/wui/game_objectives_menu.cc:75
-msgid "Restart Mission"
-msgstr "Mission neustarten"
 
 #: ../../src/wui/general_statistics_menu.cc:44
 #: ../../src/wui/game_main_menu.cc:47
@@ -2050,7 +2034,7 @@ msgstr "Unbekannt"
 msgid "Loading tribe: %s"
 msgstr "Lade Stamm: %s"
 
-#: ../../src/logic/warehouse.cc:407
+#: ../../src/logic/warehouse.cc:430
 msgid "A new warehouse is created"
 msgstr "Ein neues Warenhaus wurde erstellt."
 
@@ -2768,6 +2752,10 @@ msgstr "Beschreibung: "
 msgid "Ok"
 msgstr "Ok"
 
+#: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:152
+msgid " NOTE: There is no options window for this trigger type yet. It has to be created manually by editing the text files in the map."
+msgstr " ACHTUNG: Es gibt bisher noch kein Optionsfenster für diesen Auslöser. Diese Auslöser-Art kann daher nur durch die manuelle Bearbeitung der \"trigger\" Datei der Karte erstellt werden."
+
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:50
 #: ../../src/editor/ui_menus/editor_main_menu.cc:57
 msgid "New Random Map"
@@ -3209,6 +3197,10 @@ msgstr "Resource"
 msgid "Available Event types: "
 msgstr "Mögliche Ereignisse:"
 
+#: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:151
+msgid " NOTE: There is no options window for this event type yet. It has to be created manually by editing the text files in the map."
+msgstr " ACHTUNG: Es gibt bisher noch kein Optionsfenster für dieses Ereignis. Diese Ereignis-Art kann daher nur durch die manuelle Bearbeitung der \"event\" Datei der Karte erstellt werden."
+
 #: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:49
 msgid "Conquer Area Event Options"
 msgstr "Eroberungsereignisoptionen"
@@ -3480,6 +3472,18 @@ msgstr "Normal"
 #: ../../src/ai/defaultai.h:97
 msgid "Defensive"
 msgstr "Defensiv"
+
+#~ msgid "victory"
+#~ msgstr "Sieg"
+
+#~ msgid "Allows a player to claim victory of this campaign."
+#~ msgstr "Ermöglicht einem Spieler den Sieg anzunehmen."
+
+#~ msgid "Claim Victory"
+#~ msgstr "Sieg annehmen"
+
+#~ msgid "Restart Mission"
+#~ msgstr "Mission neustarten"
 
 #~ msgid "New Event Chain"
 #~ msgstr "Neue Kette"
