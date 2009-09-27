@@ -1514,13 +1514,14 @@ bool DefaultAI::check_mines(int32_t gametime)
 				continue;
 
 			// Check if mine needs an enhancement to mine more resources
-			int32_t prio = 0;
-			uint8_t until = field->get_starting_res_amount();
-			until = (until * (100 - site.bo->mines_percent)) / 100;
+			uint8_t const until =
+				field->get_starting_res_amount() * (100 - site.bo->mines_percent)
+				/
+				100;
 			if (until >= current) {
 				// add some randomness - just for the case if more than one
 				// enhancement is available (not in any tribe yet)
-				prio = time(0) % 3 + 1;
+				int32_t const prio = time(0) % 3 + 1;
 				if (prio > maxprio) {
 					maxprio = prio;
 					enbld = (*x.current);
