@@ -1,20 +1,22 @@
 # Widelands po/cs_CZ/tribes/empire.po
-# Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Copyright (C) 2009 Widelands Development Team
+# Prometheus <mmatej@yahoo.com>, ?.
+# Martin Večeřa <ja@marvec.org>, ?.
+# Markus7cz <markus7cz@gmail.com>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-06-20 21:41+0100\n"
+"POT-Creation-Date: 2009-09-23 18:30+0000\n"
+"PO-Revision-Date: 2009-09-23 22:06+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
-"Language-Team: Prometheus <mmatej@yahoo.com>\n"
+"Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: czech\n"
-"X-Poedit-Country: Czech Republic\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
 
 #: ../../../tribes/empire/advanced_lance/conf:1
 msgid "This is an advanced lance, with steel top."
@@ -88,12 +90,6 @@ msgstr "Plátna je potřeba pro císařské lodě a některé větší budovy. V
 msgid "The fires of the Empire are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
 msgstr "Ohně císařství spalují dřevo, ale někdy jen dřevo nestačí. Potom se používá uhlí."
 
-#: ../../../tribes/empire/colosseum/conf:27
-#: ../../../tribes/empire/trainingscamp/conf:38
-#: ../../../tribes/empire/arena/conf:13
-msgid "Sleep"
-msgstr "Vyčkat"
-
 #: ../../../tribes/empire/colosseum/conf:28
 #: ../../../tribes/empire/arena/conf:14
 msgid "Upgrade soldier evade 0"
@@ -161,7 +157,7 @@ msgid "Resource indicator coal much"
 msgstr "Ukazatel zdroje hodně uhlí"
 
 #: ../../../tribes/empire/conf:45
-msgid "Resource indicator gold litte"
+msgid "Resource indicator gold little"
 msgstr "Ukazatel zdroje málo zlata"
 
 #: ../../../tribes/empire/conf:46
@@ -748,38 +744,6 @@ msgstr "Základní obrana vojáka."
 msgid "The Hunter brings good meat to the colonists."
 msgstr "Lovec zajišťuje kolonistům přísun čerstvého masa."
 
-#: ../../../tribes/empire/hunters_house/conf:12
-#: ../../../tribes/empire/stonemasons_house/conf:18
-#: ../../../tribes/empire/smelting_works/conf:21
-#: ../../../tribes/empire/burners_house/conf:16
-#: ../../../tribes/empire/winery/conf:17 ../../../tribes/empire/farm/conf:19
-#: ../../../tribes/empire/sawmill/conf:17
-#: ../../../tribes/empire/bakery/conf:17
-#: ../../../tribes/empire/deep_goldmine/conf:22
-#: ../../../tribes/empire/armoursmithy/conf:27
-#: ../../../tribes/empire/deep_oremine/conf:22
-#: ../../../tribes/empire/quarry/conf:20
-#: ../../../tribes/empire/toolsmithy/conf:42
-#: ../../../tribes/empire/marblemine/conf:24
-#: ../../../tribes/empire/weaving-mill/conf:16
-#: ../../../tribes/empire/coalmine/conf:21
-#: ../../../tribes/empire/deep_coalmine/conf:22
-#: ../../../tribes/empire/inn/conf:20
-#: ../../../tribes/empire/lumberjacks_house/conf:15
-#: ../../../tribes/empire/piggery/conf:18 ../../../tribes/empire/well/conf:13
-#: ../../../tribes/empire/vineyard/conf:18
-#: ../../../tribes/empire/deep_marblemine/conf:23
-#: ../../../tribes/empire/mill/conf:17 ../../../tribes/empire/brewery/conf:17
-#: ../../../tribes/empire/foresters_house/conf:15
-#: ../../../tribes/empire/sheepfarm/conf:18
-#: ../../../tribes/empire/weaponsmithy/conf:31
-#: ../../../tribes/empire/oremine/conf:21
-#: ../../../tribes/empire/goldmine/conf:21
-#: ../../../tribes/empire/fishers_house/conf:16
-#: ../../../tribes/empire/tavern/conf:19
-msgid "Work"
-msgstr "Pracovat"
-
 #: ../../../tribes/empire/hunting_spear/conf:1
 msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters."
 msgstr "Tento oštěp je dost lehký na to, aby se jím dalo házet, a přesto mohl zabít jakékoli zvíře jednou ranou. Používají je pouze lovci. Vyrábí se v železárnách."
@@ -816,10 +780,25 @@ msgstr "Mramor je nádherný kámen, který se láme v horách a používá se n
 msgid "Marble columns present the high culture of the Empire, so they are needed for nearly every bigger building."
 msgstr "Mramorové sloupy představují úroveň kultury v císařství a jsou potřeba pro skoro všechny větší budovy."
 
-#: ../../../tribes/empire/master-miner/conf:1
-#: ../../../tribes/empire/miner/conf:1
-msgid "Works deep in the mines to produce coal, iron or gold."
-msgstr "Fárá hluboko v dolech aby vytěžil uhlí, železnou rudu a zlato."
+#: ../../../tribes/empire/marblemine/conf:22
+#: ../../../tribes/empire/quarry/conf:18
+msgid "Mine marble"
+msgstr "Těžit mramor"
+
+#: ../../../tribes/empire/marblemine/conf:23
+#: ../../../tribes/empire/quarry/conf:19
+msgid "Mine marble (only for compatibility with old savegames (build13))"
+msgstr "Těžit marmor (pouze pro kompatibilitu se starými uloženými hrami (build 13))"
+
+#: ../../../tribes/empire/marblemine/conf:24
+#: ../../../tribes/empire/quarry/conf:16
+msgid "Mine stone"
+msgstr "Těžit kámen"
+
+#: ../../../tribes/empire/marblemine/conf:25
+#: ../../../tribes/empire/quarry/conf:17
+msgid "Mine stone (only for compatibility with old savegames (build13))"
+msgstr "Těžit kámen (pouze pro kompatibilitu se starými uloženými hrami (build 13))"
 
 #: ../../../tribes/empire/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
@@ -828,6 +807,46 @@ msgstr "Pořádné jídlo, které uspokojí i hlad horníků."
 #: ../../../tribes/empire/meat/conf:1
 msgid "Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong."
 msgstr "Maso obsahuje spoustu energie. Podává se v hospodách a hostincích jako oběd pro horníky a ve vojenských leženích vojákům, aby jim dodalo sílu."
+
+#: ../../../tribes/empire/miner/conf:1
+#: ../../../tribes/empire/master-miner/conf:1
+msgid "Works deep in the mines to produce coal, iron or gold."
+msgstr "Fárá hluboko v dolech aby vytěžil uhlí, železnou rudu a zlato."
+
+#: ../../../tribes/empire/oremine/conf:21
+#: ../../../tribes/empire/armoursmithy/conf:27
+#: ../../../tribes/empire/sheepfarm/conf:18
+#: ../../../tribes/empire/mill/conf:17
+#: ../../../tribes/empire/vineyard/conf:18
+#: ../../../tribes/empire/smelting_works/conf:21
+#: ../../../tribes/empire/fishers_house/conf:16
+#: ../../../tribes/empire/weaving-mill/conf:16
+#: ../../../tribes/empire/coalmine/conf:21
+#: ../../../tribes/empire/burners_house/conf:16
+#: ../../../tribes/empire/brewery/conf:17
+#: ../../../tribes/empire/farm/conf:19
+#: ../../../tribes/empire/winery/conf:17
+#: ../../../tribes/empire/marblemine/conf:26
+#: ../../../tribes/empire/deep_marblemine/conf:23
+#: ../../../tribes/empire/foresters_house/conf:15
+#: ../../../tribes/empire/deep_oremine/conf:22
+#: ../../../tribes/empire/piggery/conf:18
+#: ../../../tribes/empire/weaponsmithy/conf:31
+#: ../../../tribes/empire/quarry/conf:20
+#: ../../../tribes/empire/toolsmithy/conf:42
+#: ../../../tribes/empire/deep_goldmine/conf:22
+#: ../../../tribes/empire/well/conf:13
+#: ../../../tribes/empire/stonemasons_house/conf:18
+#: ../../../tribes/empire/hunters_house/conf:13
+#: ../../../tribes/empire/inn/conf:20
+#: ../../../tribes/empire/goldmine/conf:21
+#: ../../../tribes/empire/tavern/conf:19
+#: ../../../tribes/empire/lumberjacks_house/conf:15
+#: ../../../tribes/empire/sawmill/conf:17
+#: ../../../tribes/empire/deep_coalmine/conf:22
+#: ../../../tribes/empire/bakery/conf:17
+msgid "Work"
+msgstr "Pracovat"
 
 #: ../../../tribes/empire/pick/conf:1
 msgid "This pick is used by the stonemasons and the miners. It is produced by the toolsmith."
@@ -840,24 +859,6 @@ msgstr "Chová vepře."
 #: ../../../tribes/empire/plate_armour/conf:1
 msgid "The strongest armour existing for the Empire soldiers."
 msgstr "Nejlepší existující zbroj císařských vojáků."
-
-#: ../../../tribes/empire/quarry/conf:16
-#: ../../../tribes/empire/marblemine/conf:23
-msgid "Mine stone"
-msgstr "Těžit kámen"
-
-#: ../../../tribes/empire/quarry/conf:17
-msgid "Mine stone (only for compatibility with old savegames (build13))"
-msgstr "Těžit kámen (pouze pro kompatibilitu se starými uloženými hrami (build 13))"
-
-#: ../../../tribes/empire/quarry/conf:18
-#: ../../../tribes/empire/marblemine/conf:22
-msgid "Mine marble"
-msgstr "Těžit mramor"
-
-#: ../../../tribes/empire/quarry/conf:19
-msgid "Mine marble (only for compatibility with old savegames (build13))"
-msgstr "Těžit marmor (pouze pro kompatibilitu se starými uloženými hrami (build 13))"
 
 #: ../../../tribes/empire/ration/conf:1
 msgid "A small bite to keep miners strong and working."
@@ -946,6 +947,12 @@ msgstr "Vyrobit pilu"
 #: ../../../tribes/empire/toolsmithy/conf:41
 msgid "Produce axe"
 msgstr "Vyrobit sekeru"
+
+#: ../../../tribes/empire/trainingscamp/conf:38
+#: ../../../tribes/empire/colosseum/conf:27
+#: ../../../tribes/empire/arena/conf:13
+msgid "Sleep"
+msgstr "Vyčkat"
 
 #: ../../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1063,7 +1070,8 @@ msgstr "Mouka je důležitá pro přežití, jde z ní připravit dobrý chleba 
 msgid "This wine gives enough power, to mine marble or gold. And furthermore, our soldiers like it, too."
 msgstr "Toto víno dodá sílu horníkům při lámání mramoru nebo dobývání zlata. Navíc si s ním užijí i vojáci."
 
-#: ../../../tribes/empire/wood/conf:1 ../../../tribes/empire/stone/conf:1
+#: ../../../tribes/empire/wood/conf:1
+#: ../../../tribes/empire/stone/conf:1
 msgid "Stones and wood are the basic build material of the Empire."
 msgstr "Kameny a dřevo jsou základní stavební materiály v císařství."
 
@@ -1077,21 +1085,16 @@ msgstr "Vlna je srstí ovcí. V císařských tkalcovnách se z ní tká plátno
 
 #~ msgid "Carpenter's workshop"
 #~ msgstr "Tesařství"
-
 #~ msgid "Vintagery"
 #~ msgstr "Vinice"
-
 #~ msgid "Coalearth"
 #~ msgstr "Kamenné uhlí"
-
 #~ msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
 #~ msgstr "Tato hornina se dobývá z hlubinných dolů. Musí být zpracována, aby se z ní stalo uhlí."
-
 #~ msgid "Carpenter"
 #~ msgstr "Tesař"
-
 #~ msgid "Herdsman"
 #~ msgstr "Pastýř"
-
 #~ msgid "Wine-Grower"
 #~ msgstr "Vinař"
+

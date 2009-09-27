@@ -1,15 +1,17 @@
 # Widelands po/cs_CZ/worlds/desert.po
-# Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Copyright (C) 2009 Widelands Development Team
+# Prometheus <mmatej@yahoo.com>, ?.
+# Martin Večeřa <ja@marvec.org>, ?.
+# Markus7cz <markus7cz@gmail.com>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-06-20 21:40+0100\n"
+"POT-Creation-Date: 2009-09-23 18:30+0000\n"
+"PO-Revision-Date: 2009-09-23 22:06+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
-"Language-Team: Prometheus <mmatej@yahoo.com>\n"
+"Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,43 +30,56 @@ msgstr "Poušť"
 msgid "This is the wide and sandy country of the bedouins"
 msgstr "Toto jsou otevřené a písečné země beduínů."
 
-#: ../../../worlds/desert/conf:7 ../../../worlds/desert/conf:8
+#: ../../../worlds/desert/conf:7
+#: ../../../worlds/desert/conf:8
 #: ../../../worlds/desert/conf:9
 msgid "Bush"
 msgstr "Keř"
 
-#: ../../../worlds/desert/conf:10 ../../../worlds/desert/conf:11
-#: ../../../worlds/desert/conf:12 ../../../worlds/desert/conf:13
+#: ../../../worlds/desert/conf:10
+#: ../../../worlds/desert/conf:11
+#: ../../../worlds/desert/conf:12
+#: ../../../worlds/desert/conf:13
 msgid "Cactus"
 msgstr "Kaktus"
 
-#: ../../../worlds/desert/conf:14 ../../../worlds/desert/conf:15
-#: ../../../worlds/desert/conf:16 ../../../worlds/desert/conf:17
+#: ../../../worlds/desert/conf:14
+#: ../../../worlds/desert/conf:15
+#: ../../../worlds/desert/conf:16
+#: ../../../worlds/desert/conf:17
 msgid "Dead Tree"
 msgstr "Uschlý strom"
 
-#: ../../../worlds/desert/conf:18 ../../../worlds/desert/conf:19
+#: ../../../worlds/desert/conf:18
+#: ../../../worlds/desert/conf:19
 #: ../../../worlds/desert/conf:20
 msgid "Grass"
 msgstr "Tráva"
 
-#: ../../../worlds/desert/conf:21 ../../../worlds/desert/conf:22
+#: ../../../worlds/desert/conf:21
+#: ../../../worlds/desert/conf:22
 msgid "Mushroom"
 msgstr "Houba"
 
-#: ../../../worlds/desert/conf:23 ../../../worlds/desert/conf:24
-#: ../../../worlds/desert/conf:25 ../../../worlds/desert/conf:26
-#: ../../../worlds/desert/conf:27 ../../../worlds/desert/conf:28
+#: ../../../worlds/desert/conf:23
+#: ../../../worlds/desert/conf:24
+#: ../../../worlds/desert/conf:25
+#: ../../../worlds/desert/conf:26
+#: ../../../worlds/desert/conf:27
+#: ../../../worlds/desert/conf:28
 msgid "Pebble"
 msgstr "Oblázek"
 
-#: ../../../worlds/desert/conf:29 ../../../worlds/desert/conf:30
-#: ../../../worlds/desert/conf:31 ../../../worlds/desert/conf:32
+#: ../../../worlds/desert/conf:29
+#: ../../../worlds/desert/conf:30
+#: ../../../worlds/desert/conf:31
+#: ../../../worlds/desert/conf:32
 #: ../../../worlds/desert/conf:33
 msgid "ruins"
 msgstr "zřícenina"
 
-#: ../../../worlds/desert/conf:34 ../../../worlds/desert/conf:35
+#: ../../../worlds/desert/conf:34
+#: ../../../worlds/desert/conf:35
 #: ../../../worlds/desert/conf:36
 msgid "Skeleton"
 msgstr "Kostlivec"
@@ -73,39 +88,53 @@ msgstr "Kostlivec"
 msgid "Shell"
 msgstr "Mušle"
 
-#: ../../../worlds/desert/conf:38 ../../../worlds/desert/conf:39
-#: ../../../worlds/desert/conf:40 ../../../worlds/desert/conf:41
-#: ../../../worlds/desert/conf:42 ../../../worlds/desert/conf:43
+#: ../../../worlds/desert/conf:38
+#: ../../../worlds/desert/conf:39
+#: ../../../worlds/desert/conf:40
+#: ../../../worlds/desert/conf:41
+#: ../../../worlds/desert/conf:42
+#: ../../../worlds/desert/conf:43
 #: ../../../worlds/desert/conf:44
 msgid "Standing Stones"
 msgstr "Menhiry"
 
-#: ../../../worlds/desert/conf:45 ../../../worlds/desert/conf:46
-#: ../../../worlds/desert/conf:47 ../../../worlds/desert/conf:48
-#: ../../../worlds/desert/conf:49 ../../../worlds/desert/conf:50
+#: ../../../worlds/desert/conf:45
+#: ../../../worlds/desert/conf:46
+#: ../../../worlds/desert/conf:47
+#: ../../../worlds/desert/conf:48
+#: ../../../worlds/desert/conf:49
+#: ../../../worlds/desert/conf:50
 msgid "Stones"
 msgstr "Kameny"
 
-#: ../../../worlds/desert/conf:51 ../../../worlds/desert/conf:55
-#: ../../../worlds/desert/conf:59 ../../../worlds/desert/conf:63
+#: ../../../worlds/desert/conf:51
+#: ../../../worlds/desert/conf:55
+#: ../../../worlds/desert/conf:59
+#: ../../../worlds/desert/conf:63
 #: ../../../worlds/desert/conf:67
 msgid "Palm"
 msgstr "Palma"
 
-#: ../../../worlds/desert/conf:52 ../../../worlds/desert/conf:56
-#: ../../../worlds/desert/conf:60 ../../../worlds/desert/conf:64
+#: ../../../worlds/desert/conf:52
+#: ../../../worlds/desert/conf:56
+#: ../../../worlds/desert/conf:60
+#: ../../../worlds/desert/conf:64
 #: ../../../worlds/desert/conf:68
 msgid "Palm medium"
 msgstr "Střední palma"
 
-#: ../../../worlds/desert/conf:53 ../../../worlds/desert/conf:57
-#: ../../../worlds/desert/conf:61 ../../../worlds/desert/conf:65
+#: ../../../worlds/desert/conf:53
+#: ../../../worlds/desert/conf:57
+#: ../../../worlds/desert/conf:61
+#: ../../../worlds/desert/conf:65
 #: ../../../worlds/desert/conf:69
 msgid "Palm small"
 msgstr "Malá palma"
 
-#: ../../../worlds/desert/conf:54 ../../../worlds/desert/conf:58
-#: ../../../worlds/desert/conf:62 ../../../worlds/desert/conf:66
+#: ../../../worlds/desert/conf:54
+#: ../../../worlds/desert/conf:58
+#: ../../../worlds/desert/conf:62
+#: ../../../worlds/desert/conf:66
 #: ../../../worlds/desert/conf:70
 msgid "Palm tiny"
 msgstr "Maličká palma"
@@ -204,12 +233,10 @@ msgstr "Ryba"
 
 #~ msgid "Tree"
 #~ msgstr "Stromy"
-
 #~ msgid "Desert Fox"
 #~ msgstr "Pouštní liška"
-
 #~ msgid "Reindeer"
 #~ msgstr "Sob"
-
 #~ msgid "Greenland"
 #~ msgstr "Zelená země"
+

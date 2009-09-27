@@ -1,20 +1,22 @@
 # Widelands po/cs_CZ/campaigns/t01.wmf.po
-# Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Copyright (C) 2009 Widelands Development Team
+# Prometheus <mmatej@yahoo.com>, ?.
+# Martin Večeřa <ja@marvec.org>, ?.
+# Markus7cz <markus7cz@gmail.com>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-06-20 21:43+0100\n"
+"POT-Creation-Date: 2009-09-23 18:30+0000\n"
+"PO-Revision-Date: 2009-09-23 22:05+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
-"Language-Team: Prometheus <mmatej@yahoo.com>\n"
+"Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: czech\n"
-"X-Poedit-Country: czech republic\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
 
 #: ../../../campaigns/t01.wmf/elemental:7
 msgid "Tutorial1 - Eyes in the Dark"
@@ -32,19 +34,29 @@ msgstr "Thron si povzdechl..."
 msgid " \"It's been months and we are still hiding where the forests are old and dark.<br> My warriors hunt at day and lie awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
 msgstr " \"Už jsou to celé měsíce a stále se ukrýváme v temných a starých hvozdech.<br> Mí bojovníci ve dne loví a v noci bdí - poslouchají zvuky krutého vraždění, které k nám doznívají z daleka mezi prastarými stromy.\" "
 
-#: ../../../campaigns/t01.wmf/event:27 ../../../campaigns/t01.wmf/event:40
-#: ../../../campaigns/t01.wmf/event:53 ../../../campaigns/t01.wmf/event:66
+#: ../../../campaigns/t01.wmf/event:27
+#: ../../../campaigns/t01.wmf/event:40
+#: ../../../campaigns/t01.wmf/event:53
+#: ../../../campaigns/t01.wmf/event:66
 msgid "The story begins"
 msgstr "Příběh začíná"
 
-#: ../../../campaigns/t01.wmf/event:32 ../../../campaigns/t01.wmf/event:45
-#: ../../../campaigns/t01.wmf/event:58 ../../../campaigns/t01.wmf/event:71
-#: ../../../campaigns/t01.wmf/event:110 ../../../campaigns/t01.wmf/event:126
-#: ../../../campaigns/t01.wmf/event:141 ../../../campaigns/t01.wmf/event:157
-#: ../../../campaigns/t01.wmf/event:172 ../../../campaigns/t01.wmf/event:188
-#: ../../../campaigns/t01.wmf/event:203 ../../../campaigns/t01.wmf/event:233
-#: ../../../campaigns/t01.wmf/event:248 ../../../campaigns/t01.wmf/event:263
-#: ../../../campaigns/t01.wmf/event:278 ../../../campaigns/t01.wmf/event:310
+#: ../../../campaigns/t01.wmf/event:32
+#: ../../../campaigns/t01.wmf/event:45
+#: ../../../campaigns/t01.wmf/event:58
+#: ../../../campaigns/t01.wmf/event:71
+#: ../../../campaigns/t01.wmf/event:110
+#: ../../../campaigns/t01.wmf/event:126
+#: ../../../campaigns/t01.wmf/event:141
+#: ../../../campaigns/t01.wmf/event:157
+#: ../../../campaigns/t01.wmf/event:172
+#: ../../../campaigns/t01.wmf/event:188
+#: ../../../campaigns/t01.wmf/event:203
+#: ../../../campaigns/t01.wmf/event:233
+#: ../../../campaigns/t01.wmf/event:248
+#: ../../../campaigns/t01.wmf/event:263
+#: ../../../campaigns/t01.wmf/event:278
+#: ../../../campaigns/t01.wmf/event:310
 msgid "OK"
 msgstr "OK"
 
@@ -80,17 +92,22 @@ msgstr "Khantrukh pokračuje..."
 msgid " \"None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...<br> We should prepare, in case we have to face the winter in these harsh lands. I believe to the east of our campside are a few places where we could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr " \"Jen sami bohové vědí, jak dlouho tu budeme ještě muset zůstat skryti. Tví bojovníci sní, že budeme pochodovat vítězně zpět už za pár dní, ale nemyslím, že k tomu dojde nějak brzy. A dny se už krátí a je stále chladněji...<br>Připravme se pro případ, že budeme muset čelit zimě v těchto drsných zemích. Na východ od tábora je pár míst, kde bychom mohli zbudovat chaty pro dřevorubce.\"<br><br>-- NOVÝ ÚKOL --<br>"
 
-#: ../../../campaigns/t01.wmf/event:119 ../../../campaigns/t01.wmf/objective:7
+#: ../../../campaigns/t01.wmf/event:119
+#: ../../../campaigns/t01.wmf/objective:7
 msgid "* Press SPACE to see where you can build.<br> The red spots show you where a small building - like a lumberjack's hut - may be built.<br>"
 msgstr "* Stiskni mezerník pro zobrazení míst ke stavění.<br> Červená místa ukazují, kde lze vybudovat malou budovu - například chatu pro dřevorubce.<br>"
 
-#: ../../../campaigns/t01.wmf/event:120 ../../../campaigns/t01.wmf/objective:8
+#: ../../../campaigns/t01.wmf/event:120
+#: ../../../campaigns/t01.wmf/objective:8
 msgid "* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting lumberjack's hut.<br>"
 msgstr "* Postav chatu pro dřevorubce na červeně vyznačeném místě přímo vpravo od základny kliknutím a vybráním chaty pro dřevorubce.<br>"
 
-#: ../../../campaigns/t01.wmf/event:122 ../../../campaigns/t01.wmf/event:137
-#: ../../../campaigns/t01.wmf/event:153 ../../../campaigns/t01.wmf/event:168
-#: ../../../campaigns/t01.wmf/event:184 ../../../campaigns/t01.wmf/event:199
+#: ../../../campaigns/t01.wmf/event:122
+#: ../../../campaigns/t01.wmf/event:137
+#: ../../../campaigns/t01.wmf/event:153
+#: ../../../campaigns/t01.wmf/event:168
+#: ../../../campaigns/t01.wmf/event:184
+#: ../../../campaigns/t01.wmf/event:199
 msgid "The advisor"
 msgstr "Rádce"
 
@@ -102,7 +119,8 @@ msgstr "Stařešina přidává..."
 msgid " \"Obviously, it would be too draining for our people to walk all the way to the lumberjack's hut through the wilderness. We will have to make a path between our hall and the lumberjack's hut. It's not a hard guess that the men would appreciate a way as short and even as possible - the wood surely will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Samozřejmě, že kdyby se měli naši lidé ke dřevorubci prodírat divočinou, bylo by to pro ně příliš namáhavé. Musíme vybudovat stezku mezi naší základnou a chatou dřevorubce. Není těžké uhádnout, že lidé ocení co možná nejkratší a nejpřímější cestu - i tak bude dřevo dost těžké samo o sobě.\"<br><br>-- NOVÝ ÚKOL --<br> "
 
-#: ../../../campaigns/t01.wmf/event:135 ../../../campaigns/t01.wmf/objective:9
+#: ../../../campaigns/t01.wmf/event:135
+#: ../../../campaigns/t01.wmf/objective:9
 msgid "* Build a road between your headquarters and the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You should connect it to another flag with a road.<br> If you click on a flag, little symbols will appear around it to show you in which directions you can build the road.<br> The colour of those symbols indicate how steep the road will be. Green is flat, yellow is steep and red is very steep. The steeper the step is, the harder it will be for your people to walk on it.<br> You can click on any of the symbols to build the first step of the road there. New symbols will appear to show you where the next step can go, and so on. However, you can also click further away to build several steps at once. Click on the flag at the headquarters to finish the road."
 msgstr "* Postav cestu mezi základnou a chatou dřevorubce.<br> Když umístíš chatu dřevorubce, je u staveniště vztyčena vlajka. Tuto vlajku bys měl propojit pomocí cesty s jinou vlajkou.<br> Pokud klikneš na vlajku, zobrazí se v okolí malé symboly, které ukazují, kterými směry můžeš budovat cestu.<br> Barva těchto symbolů napovídá jak strmý je okolní terén. Zelená je rovný terén, žlutá je strmý a červená je velmi strmý. Čím strmější, tím těžší bude pro tvé lidi přes něj přejít.<br> Když na symbol klikneš, postavíš úsek cesty a symboly se objeví v místě, kudy může vést další úsek cesty. Můžeš také kliknout dál od původního místa a postavit tak několik úseků najednou. Kliknutím na vlajku u základny cestu dokončíš."
 
@@ -158,7 +176,8 @@ msgstr " \"Vím moc dobře, veliteli, že ani ty, ani tví bojovníci, nechtěj�
 msgid "* Build two quarries southwest of your headquarters."
 msgstr "* Postav dva lomy jihozápadně od základny."
 
-#: ../../../campaigns/t01.wmf/event:224 ../../../campaigns/t01.wmf/event:239
+#: ../../../campaigns/t01.wmf/event:224
+#: ../../../campaigns/t01.wmf/event:239
 msgid "Thron speaks..."
 msgstr "Mluví Thron..."
 
@@ -228,33 +247,24 @@ msgstr "Postav dva lomy"
 
 #~ msgid "* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting Lumberjacks Hut.<br>"
 #~ msgstr "* Postav chatu pro dřevorubce na červeně vyznačeném místě přímo vpravo od základny kliknutím a vybráním chaty pro dřevorubce.<br>"
-
 #~ msgid "* Build a road between your headquarters and the lumberjack's hut.<br> You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
 #~ msgstr "* Postav cestu mezi základnou a dřevorubcem.<br> Klikni na vlajku jedné z budov a pak vyber symbol cesty. Okolo vlajky se zobrazí symboly, které ukazují, jak strmý je terén do různých směrů. Čím strmější, tím těžší bude pro tvé lidi přes něj přejít. Když na symbol klikneš, postavíš úsek cesty a musíš vybrat další směr. Postav cestu mezi vlajkami před budovami. Zkus ji postavit krátkou a rovnou."
-
 #~ msgid "* Place a flag in the mid of the road.<br> There is a flag symbol in the mid of the way you just built.<br> By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
 #~ msgstr "* Umísti vlajku doprostřed cesty.<br> Uprostřed právě postavené cesty je symbol vlajky. Kliknutím na něj otevři menu a vyber symbol vlajky. Tím na cestu umístíš novou vlajku a rozdělíš tak cestu pro nošení dřeva mezi dva nosiče.<br> Když je mezi dvěma body přenášeno hodně zboží, přidání dalších vlajek na takovou cestu zlepší infrastrukturu, protože se zboží rychleji dostane na místo určení.<br>"
-
 #~ msgid "* Place a lumberjack's hut directly south of the flag you are about to place on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
 #~ msgstr "* Postav chatu dřevorubce přímo na jih od vlajky, kterou umístíš na cestě. Potom spoj zmíněnou vlajku s novým dřevorubcem.<br> Všimni si, že místo stavění cesty kus po kusu, můžeš postavit celou cestu najednou kliknutím na cílovou vlajku."
-
 #~ msgid " \"Obviously, it would be too draining for our people to walk all the way to the Lumberjack through the wilderness. We will have to make a path between our hall and the Lumberjack. It's not a hard guess that the men would appreciate a possibly short and even way - the wood surely will be heavy enough.\"<br><br>--NEW OBJECTIVES--<br>- Build a road between your headquarters and the Lumberjack. You do so by clicking the flag of either building and then the road-button. Around the flag should appear symbols, showing how steep the way in this direction would be. The steepier the way, the harder it will be for your people to walk on it. When you click such a symbol, you build a part of the road and must choose the next direction then. Build a road between the flags in front of the two buildings. Try to keep it short and even."
 #~ msgstr "Samozřejmě by bylo pro naše lidi přespříliš těžké prodírat se k dřevorubci divočinou. Musíme udělat cestu mezi naší síní a dřevorubcem. Není těžké uhodnout, jak moc by naši muži ocenili, kdyby cesta byla tak krátká a rovná, jak je jen možné.\"<br><br>-- Nový úkol --<br>- postav cestu mezi základnou a dřevorubcem kliknutím na vlajku budovy a potom v menu na symbol cesty. Okolo vlajky se zobrazí symboly, které ukazují, jak je v tom místě strmý terén. Čím strmější, tím těžší bude pro tvé lidi přes něj přejít. Když na symbol klikneš, postavíš psek cesty a musíš vybrat další směr. Postav cestu mezi vlajkami před budovami. Zkus ji postavi krátkou a rovnou."
-
 #~ msgid "Another evening..."
 #~ msgstr "Jednoho večera..."
-
 #~ msgid "Victory!"
 #~ msgstr "Vítězství!"
-
 #~ msgid "- There is a flag symbol in the mid of the way you just built. By clicking it and, in the consecutively opening menu, clicking the flag-button, you place a flag there, thus splitting the work of carrying the wood between two carriers. When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure. Place a flag in the mid of the road.<br>- Place a Lumberjack directly south of the flag you are about to place on the road. Connect said flag with the new Lumberjack afterwards. Note that, instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
 #~ msgstr "- Uprostřed právě postavené cesty je symbol vlajky. Kliknutím na něj se otevři menu a vyber symbol vlajky. Na cestu umístíš vlajku a rozdělíš tak cestu nošení dříví pro dva nosiče. Když je přenášeno hodně zboží mezi dvouma body, přidáním vlajky mezi němi umožní jejich rychlejší přenos a zlepší tím infrastrukturu. Umísti vlajku doprostřed cesty. Postav chatu dřevorubce přímo na jih od vlajky, kterou umístíš na cestě. Spoj zmíněnou vlajku poté s novým dřevorubcem. Všimni si, že místo stavění cesty kus po kusu můžeš postavit celou cestu najednou kliknutím na cílovou vlajku."
-
 #~ msgid "Order3"
 #~ msgstr "Úkol 3"
-
 #~ msgid "Order5"
 #~ msgstr "Úkol 5"
-
 #~ msgid "Order7"
 #~ msgstr "Úkol 7"
+

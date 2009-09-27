@@ -1,40 +1,26 @@
 # Widelands po/cs_CZ/tribes/barbarians.po
-# Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Copyright (C) 2009 Widelands Development Team
+# Prometheus <mmatej@yahoo.com>, ?.
+# Martin Večeřa <ja@marvec.org>, ?.
+# Markus7cz <markus7cz@gmail.com>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-06-20 21:41+0100\n"
+"POT-Creation-Date: 2009-09-23 18:30+0000\n"
+"PO-Revision-Date: 2009-09-23 22:06+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
-"Language-Team: Prometheus <mmatej@yahoo.com>\n"
+"Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: czech\n"
-"X-Poedit-Country: Czech Republic\n"
+"X-Poedit-Language: Czech\n"
+"X-Poedit-Country: CZECH REPUBLIC\n"
 
 #: ../../../tribes/barbarians/axe/conf:1
 msgid "The Axe is the basic weapon and tool for the barbarians. All young soldiers are equipped with this basic weapon, but also the lumberjack is using the same model."
-msgstr "Sekera je základní zbraň a nástroj barbarů. Všichni mladí válečníci jsou ozbrojeni touto sekerou, ale i dřevorubci používají stejný typ."
-
-#: ../../../tribes/barbarians/axefactory/conf:26
-#: ../../../tribes/barbarians/warmill/conf:30
-#: ../../../tribes/barbarians/metalworks/conf:30
-msgid "Produce axe"
-msgstr "Vyrobit širočinu"
-
-#: ../../../tribes/barbarians/axefactory/conf:27
-#: ../../../tribes/barbarians/warmill/conf:31
-msgid "Produce sharpaxe"
-msgstr "Vyrobit kalenou sekeru"
-
-#: ../../../tribes/barbarians/axefactory/conf:28
-#: ../../../tribes/barbarians/warmill/conf:32
-msgid "Produce broadaxe"
-msgstr "Vyrobit širočinu"
+msgstr "Sekera je základní zbraní a nástrojem barbarů. Všichni mladí válečníci jsou ozbrojeni touto sekerou, ale stejný typ používají i dřevorubci."
 
 #: ../../../tribes/barbarians/bakingtray/conf:1
 msgid "The peel is the tool of the baker, each baker needs its own. It is produced in the metal works like all tools."
@@ -63,6 +49,17 @@ msgstr "Toto je druhá nejúčinější zbraň, kterou umí barbaři vyrobit. Je
 #: ../../../tribes/barbarians/beer/conf:1
 msgid "Young warriors need some encouragement. This drink makes a man fearless and strong."
 msgstr "Mladí vojáci potřebují nějaké povzbuzení. Tento nápoj činí muže neohrožnými a silnými."
+
+#: ../../../tribes/barbarians/big_inn/conf:24
+#: ../../../tribes/barbarians/inn/conf:23
+#: ../../../tribes/barbarians/tavern/conf:20
+msgid "Produce ration"
+msgstr "Připravit porci"
+
+#: ../../../tribes/barbarians/big_inn/conf:25
+#: ../../../tribes/barbarians/inn/conf:24
+msgid "Produce snack"
+msgstr "Připravit svačinu"
 
 #: ../../../tribes/barbarians/big_inn/conf:26
 msgid "Produce meal"
@@ -186,7 +183,7 @@ msgid "Resource indicator coal much"
 msgstr "Ukazatel zdroje hodně uhlí"
 
 #: ../../../tribes/barbarians/conf:53
-msgid "Resource indicator gold litte"
+msgid "Resource indicator gold little"
 msgstr "Ukazatel zdroje málo zlata"
 
 #: ../../../tribes/barbarians/conf:54
@@ -529,7 +526,8 @@ msgstr "Hláska"
 msgid "Stronghold"
 msgstr "Opevnění"
 
-#: ../../../tribes/barbarians/conf:157 ../../../tribes/barbarians/conf:158
+#: ../../../tribes/barbarians/conf:157
+#: ../../../tribes/barbarians/conf:158
 msgid "Headquarters"
 msgstr "Základna"
 
@@ -781,17 +779,6 @@ msgstr "Lovec zajišťuje kolonistům přísun čerstvého masa."
 msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters. Produced in the metal works."
 msgstr "Tento oštěp je dost lehký na to, aby se jím dalo házet, a přesto dostatečně účinný, aby zabil jakékoli zvíře jednou ranou. Používají je pouze lovci. Vyrábí se v železárnách."
 
-#: ../../../tribes/barbarians/inn/conf:23
-#: ../../../tribes/barbarians/big_inn/conf:24
-#: ../../../tribes/barbarians/tavern/conf:20
-msgid "Produce ration"
-msgstr "Připravit porci"
-
-#: ../../../tribes/barbarians/inn/conf:24
-#: ../../../tribes/barbarians/big_inn/conf:25
-msgid "Produce snack"
-msgstr "Připravit svačinu"
-
 #: ../../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
 msgstr "Připravuje jídlo pro horníky."
@@ -819,12 +806,6 @@ msgstr "Kácí stromy."
 #: ../../../tribes/barbarians/mask/conf:1
 msgid "An enhanced version of the helmet."
 msgstr "Vylepšená forma helmice."
-
-#: ../../../tribes/barbarians/master-miner/conf:1
-#: ../../../tribes/barbarians/chief-miner/conf:1
-#: ../../../tribes/barbarians/miner/conf:1
-msgid "Works deep in the mines to produce coal, iron or gold."
-msgstr "Fárá hluboko v dolech aby vytěžil uhlí, železnou rudu a zlato."
 
 #: ../../../tribes/barbarians/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
@@ -870,6 +851,49 @@ msgstr "Vyrobit lopatu"
 msgid "Produce hunting spear"
 msgstr "Vyrobit lovecký oštěp"
 
+#: ../../../tribes/barbarians/miner/conf:1
+#: ../../../tribes/barbarians/master-miner/conf:1
+#: ../../../tribes/barbarians/chief-miner/conf:1
+msgid "Works deep in the mines to produce coal, iron or gold."
+msgstr "Fárá hluboko v dolech aby vytěžil uhlí, železnou rudu a zlato."
+
+#: ../../../tribes/barbarians/oremine/conf:20
+#: ../../../tribes/barbarians/smelting_works/conf:23
+#: ../../../tribes/barbarians/fernery/conf:21
+#: ../../../tribes/barbarians/weaving-mill/conf:16
+#: ../../../tribes/barbarians/coalmine/conf:20
+#: ../../../tribes/barbarians/deeper_oremine/conf:22
+#: ../../../tribes/barbarians/burners_house/conf:16
+#: ../../../tribes/barbarians/brewery/conf:20
+#: ../../../tribes/barbarians/farm/conf:18
+#: ../../../tribes/barbarians/rangers_hut/conf:13
+#: ../../../tribes/barbarians/gamekeepers_hut/conf:14
+#: ../../../tribes/barbarians/fishers_hut/conf:14
+#: ../../../tribes/barbarians/warmill/conf:36
+#: ../../../tribes/barbarians/micro-brewery/conf:19
+#: ../../../tribes/barbarians/helmsmithy/conf:25
+#: ../../../tribes/barbarians/lime_kiln/conf:18
+#: ../../../tribes/barbarians/granitemine/conf:18
+#: ../../../tribes/barbarians/deep_oremine/conf:23
+#: ../../../tribes/barbarians/big_inn/conf:27
+#: ../../../tribes/barbarians/hardener/conf:15
+#: ../../../tribes/barbarians/deeper_goldmine/conf:22
+#: ../../../tribes/barbarians/quarry/conf:14
+#: ../../../tribes/barbarians/deep_goldmine/conf:23
+#: ../../../tribes/barbarians/well/conf:11
+#: ../../../tribes/barbarians/deeper_coalmine/conf:22
+#: ../../../tribes/barbarians/inn/conf:25
+#: ../../../tribes/barbarians/hunters_hut/conf:12
+#: ../../../tribes/barbarians/goldmine/conf:20
+#: ../../../tribes/barbarians/lumberjacks_hut/conf:14
+#: ../../../tribes/barbarians/metalworks/conf:40
+#: ../../../tribes/barbarians/tavern/conf:21
+#: ../../../tribes/barbarians/deep_coalmine/conf:23
+#: ../../../tribes/barbarians/bakery/conf:18
+#: ../../../tribes/barbarians/axefactory/conf:29
+msgid "Work"
+msgstr "Pracovat"
+
 #: ../../../tribes/barbarians/pick/conf:1
 msgid "This pick is used by the stonemasons and the miners. It is produced in the metal works."
 msgstr "Krumpáč používají kameníci a horníci. Vyrábí se v železárnách."
@@ -913,43 +937,6 @@ msgstr "Slévat železo"
 #: ../../../tribes/barbarians/smelting_works/conf:22
 msgid "Smelt gold"
 msgstr "Slévat zlato"
-
-#: ../../../tribes/barbarians/smelting_works/conf:23
-#: ../../../tribes/barbarians/lime_kiln/conf:18
-#: ../../../tribes/barbarians/burners_house/conf:16
-#: ../../../tribes/barbarians/granitemine/conf:18
-#: ../../../tribes/barbarians/farm/conf:18
-#: ../../../tribes/barbarians/hardener/conf:15
-#: ../../../tribes/barbarians/bakery/conf:18
-#: ../../../tribes/barbarians/deep_goldmine/conf:23
-#: ../../../tribes/barbarians/gamekeepers_hut/conf:14
-#: ../../../tribes/barbarians/helmsmithy/conf:25
-#: ../../../tribes/barbarians/deep_oremine/conf:23
-#: ../../../tribes/barbarians/quarry/conf:14
-#: ../../../tribes/barbarians/fishers_hut/conf:14
-#: ../../../tribes/barbarians/deeper_goldmine/conf:22
-#: ../../../tribes/barbarians/micro-brewery/conf:19
-#: ../../../tribes/barbarians/axefactory/conf:29
-#: ../../../tribes/barbarians/weaving-mill/conf:16
-#: ../../../tribes/barbarians/coalmine/conf:20
-#: ../../../tribes/barbarians/deeper_coalmine/conf:22
-#: ../../../tribes/barbarians/deep_coalmine/conf:23
-#: ../../../tribes/barbarians/fernery/conf:21
-#: ../../../tribes/barbarians/lumberjacks_hut/conf:14
-#: ../../../tribes/barbarians/inn/conf:25
-#: ../../../tribes/barbarians/well/conf:11
-#: ../../../tribes/barbarians/warmill/conf:36
-#: ../../../tribes/barbarians/deeper_oremine/conf:22
-#: ../../../tribes/barbarians/brewery/conf:20
-#: ../../../tribes/barbarians/rangers_hut/conf:13
-#: ../../../tribes/barbarians/hunters_hut/conf:12
-#: ../../../tribes/barbarians/oremine/conf:20
-#: ../../../tribes/barbarians/metalworks/conf:40
-#: ../../../tribes/barbarians/big_inn/conf:27
-#: ../../../tribes/barbarians/goldmine/conf:20
-#: ../../../tribes/barbarians/tavern/conf:21
-msgid "Work"
-msgstr "Pracovat"
 
 #: ../../../tribes/barbarians/snack/conf:1
 msgid "A bit bigger, for the advanced miners. They will need a big morsel."
@@ -1048,6 +1035,22 @@ msgstr "Klády jsou základní stavební materiál barbarů."
 msgid "An enhanced mask for barbarian warriors."
 msgstr "Vylepšená maska pro barbarské válečníky."
 
+#: ../../../tribes/barbarians/warmill/conf:30
+#: ../../../tribes/barbarians/metalworks/conf:30
+#: ../../../tribes/barbarians/axefactory/conf:26
+msgid "Produce axe"
+msgstr "Vyrobit širočinu"
+
+#: ../../../tribes/barbarians/warmill/conf:31
+#: ../../../tribes/barbarians/axefactory/conf:27
+msgid "Produce sharpaxe"
+msgstr "Vyrobit kalenou sekeru"
+
+#: ../../../tribes/barbarians/warmill/conf:32
+#: ../../../tribes/barbarians/axefactory/conf:28
+msgid "Produce broadaxe"
+msgstr "Vyrobit širočinu"
+
 #: ../../../tribes/barbarians/warmill/conf:33
 msgid "Produce bronzeaxe"
 msgstr "Vyrobit bronzovou sekeru"
@@ -1078,15 +1081,12 @@ msgstr "Přenice je důležitá pro přežití. Dají se z ní připravit vynika
 
 #~ msgid "Forester"
 #~ msgstr "Lesník"
-
 #~ msgid "Stonegrinder"
 #~ msgstr "Kameník"
-
 #~ msgid "Coalearth"
 #~ msgstr "Kamenné uhlí"
-
 #~ msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
 #~ msgstr "Tato hornina se dobývá z hlubinných dolů. Musí být zpracována, aby se z ní stalo uhlí."
-
 #~ msgid "Grindstone"
 #~ msgstr "Opracovaný kámen"
+

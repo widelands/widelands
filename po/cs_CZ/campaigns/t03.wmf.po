@@ -1,15 +1,17 @@
 # Widelands po/cs_CZ/campaigns/t03.wmf.po
-# Copyright (C) 2005-2009 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Copyright (C) 2009 Widelands Development Team
+# Prometheus <mmatej@yahoo.com>, ?.
+# Martin Večeřa <ja@marvec.org>, ?.
+# Markus7cz <markus7cz@gmail.com>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-06-20 21:43+0100\n"
+"POT-Creation-Date: 2009-09-23 18:30+0000\n"
+"PO-Revision-Date: 2009-09-23 22:06+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
-"Language-Team: Prometheus <mmatej@yahoo.com>\n"
+"Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -57,14 +59,18 @@ msgstr "Khantrukh přikyvuje"
 msgid " \"Boldreth is right! We don't have enough food to survive a long, cold winter. We should start to build a well, a fisher's and a hunter's hut. And if we find enough space, we should as well build up a farm and a bakery! One of our farmers seems to be very clever he already got some crops to grow in this cold soil.\" "
 msgstr " \"Boldreth má pravdu! Nemáme dost jídla, aby nám vystačilo na celou dlouhou zimu. Měli bychom začít s hloubením studny a postavením chat pro rybáře a lovce. A pokud najdeme vhodné místo, tak bychom také měli postavit statek a pekárnu! Jeden z našich farmářů je velmi šikovný a přestože je půda studená, už získal první úrodu.\" "
 
-#: ../../../campaigns/t03.wmf/event:350 ../../../campaigns/t03.wmf/event:459
-#: ../../../campaigns/t03.wmf/event:494 ../../../campaigns/t03.wmf/event:566
-#: ../../../campaigns/t03.wmf/event:655 ../../../campaigns/t03.wmf/event:928
+#: ../../../campaigns/t03.wmf/event:350
+#: ../../../campaigns/t03.wmf/event:459
+#: ../../../campaigns/t03.wmf/event:494
+#: ../../../campaigns/t03.wmf/event:566
+#: ../../../campaigns/t03.wmf/event:655
+#: ../../../campaigns/t03.wmf/event:928
 #: ../../../campaigns/t03.wmf/event:1002
 msgid "-- NEW OBJECTIVE --"
 msgstr "-- NOVÝ ÚKOL --"
 
-#: ../../../campaigns/t03.wmf/event:352 ../../../campaigns/t03.wmf/objective:7
+#: ../../../campaigns/t03.wmf/event:352
+#: ../../../campaigns/t03.wmf/objective:7
 msgid "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a farm and a bakery, to provide your people with food."
 msgstr "* Vybuduj základní ekonomiku potravin pro zásobování svých lidí jídlem - chatu rybáře, chatu lovce, studnu, statek a pekárnu."
 
@@ -183,7 +189,8 @@ msgstr "* Postav na západ od hor zbrojírnu, která pro tvé vojáky vyrobí le
 msgid "Enhanced economy and training"
 msgstr "Pokročilá ekonomika a trénink"
 
-#: ../../../campaigns/t03.wmf/event:847 ../../../campaigns/t03.wmf/event:1039
+#: ../../../campaigns/t03.wmf/event:847
+#: ../../../campaigns/t03.wmf/event:1039
 msgid "Thron looks worried."
 msgstr "Thron má obavy."
 
@@ -191,7 +198,8 @@ msgstr "Thron má obavy."
 msgid " \"The news that a patrol brought is not good to hear. Our spies tell us, that the wartribes still rage in battle but some of the elder soldiers and tribe leaders seem to grow tired of this senseless war. Kalitat, son of Kun is the first warleader to leave Al’thunran, thus leaving his side weak and vulnerable. As my scouts report, he has set foot on the lower grounds around the capitol, securing the outer fortification rings.\" "
 msgstr " \"Hlídka přinesla zprávy, které se neposlouchají dobře. Naši vyzvědači vzkazují, že kmeny stále bojují v zuřivých bitvách, ale někteří ze starších vojáků a kmenoví náčelníci začínají být nesmyslnou válkou unaveni. Kalitath, syn Kuna je prvním velitelem, který opustil Al’thunran, a tím nechal svou stranu slabou a nechráněnou. Jak hlásí moji zvědové, stáhl se blíže k hlavnímu městu, a snaží se zabezpečit vnější opevnění.\" "
 
-#: ../../../campaigns/t03.wmf/event:851 ../../../campaigns/t03.wmf/event:900
+#: ../../../campaigns/t03.wmf/event:851
+#: ../../../campaigns/t03.wmf/event:900
 #: ../../../campaigns/t03.wmf/event:1047
 msgid "Another cold day"
 msgstr "Další studený den"
@@ -212,7 +220,8 @@ msgstr "Pochybnosti"
 msgid " \"However, Thron is not willing to listen to my doubts. He seeks to expand our fortifications to the borders of Kalitat’s territory and reunite with his forces. I have to keep an eye on everything that happens here.\" "
 msgstr " \"Přesto se Thron zdráhá naslouchat mým pochybnostem. Plánuje rozšířit naše opevnění až ke hranicím Kalitathova území a spojit se s jeho jednotkami. Musím dávat dobrý pozor na vše, co se tu odehrává.\" "
 
-#: ../../../campaigns/t03.wmf/event:879 ../../../campaigns/t03.wmf/event:913
+#: ../../../campaigns/t03.wmf/event:879
+#: ../../../campaigns/t03.wmf/event:913
 msgid "The story continues"
 msgstr "Příběh pokračuje"
 
@@ -342,3 +351,4 @@ msgstr "Znič Kalitathovu armádu"
 #: ../../../campaigns/t03.wmf/objective:91
 msgid "Military assault on Al’thunran"
 msgstr "Vojenský útok na Al’thunran"
+

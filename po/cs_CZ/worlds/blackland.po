@@ -1,15 +1,17 @@
 # Widelands po/cs_CZ/worlds/blackland.po
-# Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Copyright (C) 2009 Widelands Development Team
+# Prometheus <mmatej@yahoo.com>, ?.
+# Martin Večeřa <ja@marvec.org>, ?.
+# Markus7cz <markus7cz@gmail.com>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2009-06-20 21:40+0100\n"
+"POT-Creation-Date: 2009-09-23 18:30+0000\n"
+"PO-Revision-Date: 2009-09-23 22:06+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
-"Language-Team: Prometheus <mmatej@yahoo.com>\n"
+"Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,51 +30,68 @@ msgstr "Temné země"
 msgid "These are the grey, horrible and dangerous blacklands"
 msgstr "Toto jsou šeré, strašlivé a nebezpečné temné země."
 
-#: ../../../worlds/blackland/conf:7 ../../../worlds/blackland/conf:8
-#: ../../../worlds/blackland/conf:9 ../../../worlds/blackland/conf:10
+#: ../../../worlds/blackland/conf:7
+#: ../../../worlds/blackland/conf:8
+#: ../../../worlds/blackland/conf:9
+#: ../../../worlds/blackland/conf:10
 #: ../../../worlds/blackland/conf:11
 msgid "Bush"
 msgstr "Keř"
 
-#: ../../../worlds/blackland/conf:12 ../../../worlds/blackland/conf:13
+#: ../../../worlds/blackland/conf:12
+#: ../../../worlds/blackland/conf:13
 msgid "Cactus"
 msgstr "Kaktus"
 
-#: ../../../worlds/blackland/conf:14 ../../../worlds/blackland/conf:15
-#: ../../../worlds/blackland/conf:16 ../../../worlds/blackland/conf:17
+#: ../../../worlds/blackland/conf:14
+#: ../../../worlds/blackland/conf:15
+#: ../../../worlds/blackland/conf:16
+#: ../../../worlds/blackland/conf:17
 msgid "Dead Tree"
 msgstr "Uschlý strom"
 
-#: ../../../worlds/blackland/conf:18 ../../../worlds/blackland/conf:19
+#: ../../../worlds/blackland/conf:18
+#: ../../../worlds/blackland/conf:19
 #: ../../../worlds/blackland/conf:20
 msgid "Grass"
 msgstr "Tráva"
 
-#: ../../../worlds/blackland/conf:21 ../../../worlds/blackland/conf:22
+#: ../../../worlds/blackland/conf:21
+#: ../../../worlds/blackland/conf:22
 msgid "Mushroom"
 msgstr "Houba"
 
-#: ../../../worlds/blackland/conf:23 ../../../worlds/blackland/conf:24
-#: ../../../worlds/blackland/conf:25 ../../../worlds/blackland/conf:26
-#: ../../../worlds/blackland/conf:27 ../../../worlds/blackland/conf:28
+#: ../../../worlds/blackland/conf:23
+#: ../../../worlds/blackland/conf:24
+#: ../../../worlds/blackland/conf:25
+#: ../../../worlds/blackland/conf:26
+#: ../../../worlds/blackland/conf:27
+#: ../../../worlds/blackland/conf:28
 msgid "Pebble"
 msgstr "Oblázek"
 
-#: ../../../worlds/blackland/conf:29 ../../../worlds/blackland/conf:30
+#: ../../../worlds/blackland/conf:29
+#: ../../../worlds/blackland/conf:30
 #: ../../../worlds/blackland/conf:31
 msgid "Skeleton"
 msgstr "Kostlivec"
 
-#: ../../../worlds/blackland/conf:32 ../../../worlds/blackland/conf:33
-#: ../../../worlds/blackland/conf:34 ../../../worlds/blackland/conf:35
-#: ../../../worlds/blackland/conf:36 ../../../worlds/blackland/conf:37
+#: ../../../worlds/blackland/conf:32
+#: ../../../worlds/blackland/conf:33
+#: ../../../worlds/blackland/conf:34
+#: ../../../worlds/blackland/conf:35
+#: ../../../worlds/blackland/conf:36
+#: ../../../worlds/blackland/conf:37
 #: ../../../worlds/blackland/conf:38
 msgid "Standing Stones"
 msgstr "Menhiry"
 
-#: ../../../worlds/blackland/conf:39 ../../../worlds/blackland/conf:40
-#: ../../../worlds/blackland/conf:41 ../../../worlds/blackland/conf:42
-#: ../../../worlds/blackland/conf:43 ../../../worlds/blackland/conf:44
+#: ../../../worlds/blackland/conf:39
+#: ../../../worlds/blackland/conf:40
+#: ../../../worlds/blackland/conf:41
+#: ../../../worlds/blackland/conf:42
+#: ../../../worlds/blackland/conf:43
+#: ../../../worlds/blackland/conf:44
 msgid "Stones"
 msgstr "Kameny"
 
@@ -254,3 +273,4 @@ msgstr "Ryba"
 
 #~ msgid "Tree"
 #~ msgstr "Stromy"
+
