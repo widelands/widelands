@@ -90,8 +90,7 @@ endif
 
 ifdef OPTIMIZE
 #fix bug with mingw/gcc under windows. revert back to -O3 after(if ever) gcc is fixed
-#ADD_CFLAGS += -O3
-ADD_CFLAGS += -O2 -fno-tree-ch
+#ADD_CFLAGS += -O3 -fno-tree-ch
 endif
 
 ifdef DEBUG
