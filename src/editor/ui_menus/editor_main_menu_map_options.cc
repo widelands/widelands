@@ -105,7 +105,7 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 			(this,
 			 posx, posy,
 			 get_inner_w() - spacing - posx, get_inner_h() - 25 - spacing - posy,
-			 _("Nothing defined!"));
+			 parent.egbase().map().get_description());
 	m_descr->changed.set(this, &Main_Menu_Map_Options::editbox_changed);
 	update();
 }
