@@ -752,7 +752,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 			// WTF? can anyone tell me why get_caps() returns 39 for
 			// BUILDCAPS_BIG and 36 for BUILDCAPS_SMALL ?
 			// Below is a hack to make it work - but I didn't found the reason yet.
-			int32_t BIG = 39;
+#define BIG 39
 			if (fpos.field->get_caps() != BIG) { //Widelands::BUILDCAPS_BIG) {
 				log("wrong size - trying to fix it:\n");
 				// Try to find a BUILDCAPS_BIG place near original start point
