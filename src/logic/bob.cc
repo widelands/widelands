@@ -653,7 +653,7 @@ bool Bob::start_task_movepath
 	 int32_t               const only_step)
 {
 	CoordPath path(game.map(), origpath);
-	int32_t curidx = path.get_index(get_position());
+	int32_t const curidx = path.get_index(get_position());
 
 	if (curidx == -1)
 		throw wexception
