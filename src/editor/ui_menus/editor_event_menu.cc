@@ -61,7 +61,7 @@ Editor_Event_Menu::Editor_Event_Menu
 	int32_t const ls_width = 190;
 
 	new UI::Textarea
-		(this, posx + ls_width / 2, offsy, _("Event Chains: "), UI::Align_HCenter); //  FIXME change to "Event Chains" when no message freeze
+		(this, posx + ls_width / 2, offsy, _("Event Chains"), UI::Align_HCenter);
 	m_eventchain_list =
 		new UI::Listselect<Widelands::EventChain *>
 		(this, spacing, offsy + 20, ls_width, get_inner_h() - offsy - 55);
@@ -72,7 +72,7 @@ Editor_Event_Menu::Editor_Event_Menu
 	posx += ls_width + spacing;
 
 	new UI::Textarea
-		(this, posx + ls_width / 2, offsy, _("Registered Events: "), UI::Align_HCenter); //  FIXME change to "Events" when no message freeze
+		(this, posx + ls_width / 2, offsy, _("Events"), UI::Align_HCenter);
 	m_event_list =
 		new UI::Listselect<Widelands::Event *>
 			(this, posx, offsy + 20, ls_width, get_inner_h() - offsy - 55);
@@ -82,7 +82,7 @@ Editor_Event_Menu::Editor_Event_Menu
 	posx += ls_width + spacing;
 
 	new UI::Textarea
-		(this, posx + ls_width / 2, offsy, _("Registered Triggers"), UI::Align_HCenter); //  FIXME change to "Triggers" when no message freeze
+		(this, posx + ls_width / 2, offsy, _("Triggers"), UI::Align_HCenter);
 	m_trigger_list =
 		new UI::Listselect<Widelands::Trigger *>
 		(this, posx, offsy + 20, ls_width, get_inner_h() - offsy - 55);
