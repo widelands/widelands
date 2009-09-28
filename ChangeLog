@@ -1,4 +1,13 @@
+### Build 15 (until now)
+- Fix memory leak in handling of compressed files. (svn:r4567)
+- Fix bug that when the editor's map options window was opened and the map's
+  description was shorter than a certain length (different for different
+  locales), the program would crash when a letter was typed in the description
+  multilineeditbox. (svn:r4563)
 ### Build 14
+- Fix bug that the Firegames map had no water. (svn:r4533)
+- New tree and stone graphics for the Blackland world. (svn:r4525, svn:r4526,
+  svn:r4527, svn:r4528, svn:r4529)
 - Fix bug that the Atlantean and Empire Hunter's Houses were not shown as meat
   producers in the ware encyclopedia. (svn:r4521)
 - Fix bug that in the new event/trigger dialogs, the Ok button was enabled even
