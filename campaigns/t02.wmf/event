@@ -483,7 +483,7 @@ button_00_trigger=Mission Grindstone
 type=message_box
 version=2
 text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
-_"Khantrukh seems reliefed..."
+_"Khantrukh seems relieved..."
 "</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
 _" "Wonderful! Our roofs are not dripping anymore, and we have all the material we need for, well, whichever monumental building we see fit!" "
 "</p></rt>""
@@ -518,7 +518,7 @@ version=2
 text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>"
 _"Thron looks worried..."
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>"
-_" "The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore - it must not be far anymore.<br> I prayed it might get warmer again, as I prayed the war would finally come to an end.<br> So far, it seems that neither prayer was fulfilled."</p>"
+_" "The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore - it must not be far anymore.<br> I prayed it might get warmer again, as I prayed the war would finally come to an end.<br> So far, it seems that neither prayer was fulfilled." "
 "</p></rt>""
 window_title=_Another cold day
 is_modal=true

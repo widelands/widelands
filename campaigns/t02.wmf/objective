@@ -10,7 +10,7 @@ visible=false
 trigger=Mission Quarry
 
 [Build Mines]
-name=_"Start building mines on a mountain"
+name=_"Start building mines on the mountain"
 descr=_""<rt><p>"
 _"* Build a coal mine and an iron ore mine.<br> Place a flag up on the mountain's flank to the east (on mountain terrain though, not mountain meadow). When you click at implied flag you can send Geologists there. Because the flag is on mountains, the Geologists will search for ores; otherwise, they will search for water. Then build a mine for both kinds of resource he will find, choosing the mine to be built appropriately:<br> Black - coal<br> Red - iron ore<br> Yellow - gold<br> Grey - granite<br> Mines may only be built on mountain terrain. Suitable places for mines are displayed as hammer and pick."
 "</p></rt>""
