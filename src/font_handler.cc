@@ -117,8 +117,7 @@ void Font_Handler::draw_string
 				m_cache.push_front (*i);
 				m_cache.erase (i);
 			}
-		}
-		else {
+		} else {
 			//not cached, create a new surface
 			ci.picture_id =
 				create_text_surface
@@ -138,14 +137,11 @@ void Font_Handler::draw_string
 			w = ci.w;
 			h = ci.h;
 		}
-	}
-	//Widget gave us an explicit picid
-	else if (widget_cache == Widget_Cache_Use) {
+	} else if (widget_cache == Widget_Cache_Use) {
+		//  Widget gave us an explicit picid.
 		g_gr->get_picture_size(widget_cache_id, w, h);
 		picid = widget_cache_id;
-	}
-	//We need to (re)create the picid for the widget
-	else {
+	} else { // We need to (re)create the picid for the widget.
 		if (widget_cache == Widget_Cache_Update)
 			g_gr->free_surface(widget_cache_id);
 		widget_cache_id =
