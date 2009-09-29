@@ -1,14 +1,14 @@
 # Widelands po/nl_NL/texts.po
 # Copyright (C) 2008 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR., 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4556\n"
+"Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-09-29 07:39+0000\n"
-"PO-Revision-Date: 2009-07-23 23:23+0200\n"
-"Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
+"POT-Creation-Date: 2009-09-28 18:45+0000\n"
+"PO-Revision-Date: 2009-09-28 20:49+0200\n"
+"Last-Translator: \n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,6 +16,7 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: Netherlands\n"
 "X-Generator: Lokalize 0.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../txts/COPYING:1
 msgid "License"
@@ -195,15 +196,15 @@ msgstr "Widelands is zo goed als speelbaar, maar om nog speelbaarder te worden z
 
 #: ../../txts/README:36
 msgid "General game control"
-msgstr ""
+msgstr "Algemene spelbesturing"
 
 #: ../../txts/README:40
 msgid "To close an open window, right click it."
-msgstr ""
+msgstr "Om een venster te sluiten, moet je er rechts op klikken."
 
 #: ../../txts/README:42
 msgid "To minimize/maximize a window, click on the titlebar of that window either with middle mousebutton or with left mousebutton while holding down CTRL."
-msgstr ""
+msgstr "Om een venster te minimaliseren/maximaliseren, klik op de titelbalk van dat venster met de middelste of linker muisknop, terwijl je CTRL ingedrukt houdt."
 
 #: ../../txts/README:47
 msgid "Keyboard shortcuts (in-game)"
@@ -586,23 +587,19 @@ msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr "ALT (Vasthouden)   Selecteer tweede alternatieve gereedschap, zolang ingedrukt"
 
 #: ../../txts/tips/atlanteans.tip:6
-#, fuzzy
 msgid "Always build a forester's and a fish breeder's house, so you will not run out of trunks and food."
-msgstr "Bouw altijd een boswachters- en houthakkershut, zodat je altijd bent voorzien van boomstammen en voedsel."
+msgstr "Bouw altijd een boswachters- en houthakkershuis, zodat je altijd bent voorzien van boomstammen en voedsel."
 
-#: ../../txts/tips/barbarians.tip:2 ../../txts/tips/atlanteans.tip:2
-#: ../../txts/tips/empire.tip:2
-#, fuzzy
+#: ../../txts/tips/barbarians.tip:2 ../../txts/tips/empire.tip:2
+#: ../../txts/tips/atlanteans.tip:2
 msgid "Some buildings, such as the farm, have a very small working area. If the building is surrounded with trees or roads, production will stop."
-msgstr "Sommige gebouwen, zoals de wijngaarde, hebben een heel klein werkgebied. Als het gebouw volledig omringd is door bomen of wegen, zal de productie stoppen."
+msgstr "Sommige gebouwen, zoals de boerderij, hebben een heel klein werkgebied. Als het gebouw volledig omringd is door bomen of wegen, zal de productie stoppen."
 
 #: ../../txts/tips/barbarians.tip:6 ../../txts/tips/empire.tip:6
-#, fuzzy
 msgid "Keep an eye on your fishers. After fish resources are exhausted in their working area, they will stop to fish."
-msgstr "Let goed op de vissershutten. Als de visreserves zijn uitgeput in het werkgebied, dan zal de productie stoppen."
+msgstr "Let goed op je vissers. Als de visreserves zijn uitgeput in het werkgebied, dan zal de productie stoppen."
 
 #: ../../txts/tips/barbarians.tip:10
-#, fuzzy
 msgid "Always build a ranger's and a gamekeeper's hut, so you will not run out of trunks and food."
 msgstr "Bouw altijd een boswachters- en houthakkershut, zodat je altijd bent voorzien van boomstammen en voedsel."
 
@@ -611,7 +608,6 @@ msgid "You can find general help for the editor as well as a short tutorial in o
 msgstr "Je kunt algemene help en een korte leerbeschrijving vinden in onze wiki op www.widelands.org"
 
 #: ../../txts/tips/editor.tip:6
-#, fuzzy
 msgid "You can select multiple nature object (bob) types if you hold down CTRL during selection. If you then click on the map, an instance of one of the selected object types will be placed."
 msgstr "Je kunt meerdere natuurlijke objecten (blobs) selecteren als je CTRL ingedrukt houdt tijdens de selectie. Als je dan op de kaart klikt, zal één van de geselecteerde objecten willekeurig geplaatst worden."
 
@@ -644,9 +640,8 @@ msgid "You can find a reference for all triggers and events in our wiki at widel
 msgstr "Je kunt referentiemateriaal vinden voor alle acties en gebeurtenissen op widelands.org."
 
 #: ../../txts/tips/empire.tip:10
-#, fuzzy
 msgid "Always build a forester's house so you will not run out of trunks."
-msgstr "Bouw altijd een boswachters- en houthakkershut, zodat je altijd bent voorzien van boomstammen en voedsel."
+msgstr "Bouw altijd een boswachtershuis, zodat je altijd bent voorzien van boomstammen en voedsel."
 
 #: ../../txts/tips/general_game.tip:2
 msgid "The building process will only start after a road is built to the construction site."
@@ -657,7 +652,6 @@ msgid "Be sure to send a geologist to survey sites before building a well or a m
 msgstr "Zorg ervoor dat je eerst een geoloog naar een locatie stuurt voor je een put of een mijn bouwt."
 
 #: ../../txts/tips/general_game.tip:10
-#, fuzzy
 msgid "Your territory can be expanded by building various military buildings - Sentry, Fortress, Barracks, etc."
 msgstr "Je territorium kan worden uitgebreid door verscheidene militaire gebouwen te bouwen - Wachthuis, Vesting, Barakken, enz."
 
@@ -679,16 +673,17 @@ msgstr "Gebruik de prioriteitsknoppen in het gebouwvenster om de levering van sp
 
 #: ../../txts/tips/general_game.tip:30
 msgid "Use the 'configure economy' menu to adjust the target quantity of a specific ware."
-msgstr ""
+msgstr "Gebruik het menu 'configureer economie' om de doelhoeveelheid van een specifiek materiaal aan te passen."
 
 #: ../../txts/tips/multiplayer.tip:2
 msgid "You can use 'Page up' and 'Page down' keys to adjust your wished speed - the real speed is than democratically set."
-msgstr ""
+msgstr "Je kunt de toetsen 'Page up' en 'Page down' gebruiken om de gewenste snelheid aan te passen - de werkelijke snelheid wordt dan democratisch bepaald."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid "You can use '/me' at the beginning of a chatmessage: '/me is tired' will be printed as '-> Nickname is tired'."
-msgstr ""
+msgstr "Je kunt '/me' gebruiken aan het begin van een chatbericht. '/me is moe' zal worden weergegeven als '-> nickname is moe'."
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid "Our computer players are too boring? Visit our website at www.widelands.org and meet other players to play online."
-msgstr ""
+msgstr "Onze computerspelers te saai? Bezoek op onze website op www.widelands.org en ontmoet andere spelers om online te spelen."
+
