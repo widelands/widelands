@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4437\n"
+"Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-07-24 09:16+0000\n"
+"POT-Creation-Date: 2009-09-29 07:39+0000\n"
 "PO-Revision-Date: 2009-02-16 22:44+0100\n"
 "Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
 "Language-Team: Dutch <NL@li.org>\n"

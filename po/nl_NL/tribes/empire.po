@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4437\n"
+"Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-07-24 09:16+0000\n"
+"POT-Creation-Date: 2009-09-29 07:39+0000\n"
 "PO-Revision-Date: 2009-07-23 23:22+0200\n"
 "Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
@@ -89,8 +89,8 @@ msgid "The fires of the Empire are usually fed with wood, but sometimes, wood ju
 msgstr ""
 
 #: ../../../tribes/empire/colosseum/conf:27
-#: ../../../tribes/empire/trainingscamp/conf:38
 #: ../../../tribes/empire/arena/conf:13
+#: ../../../tribes/empire/trainingscamp/conf:38
 msgid "Sleep"
 msgstr ""
 
@@ -748,40 +748,40 @@ msgstr ""
 msgid "The Hunter brings good meat to the colonists."
 msgstr ""
 
-#: ../../../tribes/empire/hunters_house/conf:12
-#: ../../../tribes/empire/stonemasons_house/conf:18
-#: ../../../tribes/empire/smelting_works/conf:21
-#: ../../../tribes/empire/burners_house/conf:16
-#: ../../../tribes/empire/winery/conf:17 ../../../tribes/empire/farm/conf:19
-#: ../../../tribes/empire/sawmill/conf:17
-#: ../../../tribes/empire/bakery/conf:17
-#: ../../../tribes/empire/deep_goldmine/conf:22
-#: ../../../tribes/empire/armoursmithy/conf:27
-#: ../../../tribes/empire/deep_oremine/conf:22
-#: ../../../tribes/empire/quarry/conf:20
-#: ../../../tribes/empire/toolsmithy/conf:42
-#: ../../../tribes/empire/marblemine/conf:24
-#: ../../../tribes/empire/weaving-mill/conf:16
-#: ../../../tribes/empire/coalmine/conf:21
-#: ../../../tribes/empire/deep_coalmine/conf:22
-#: ../../../tribes/empire/inn/conf:20
-#: ../../../tribes/empire/lumberjacks_house/conf:15
-#: ../../../tribes/empire/piggery/conf:18 ../../../tribes/empire/well/conf:13
-#: ../../../tribes/empire/vineyard/conf:18
-#: ../../../tribes/empire/deep_marblemine/conf:23
-#: ../../../tribes/empire/mill/conf:17 ../../../tribes/empire/brewery/conf:17
-#: ../../../tribes/empire/foresters_house/conf:15
-#: ../../../tribes/empire/sheepfarm/conf:18
-#: ../../../tribes/empire/weaponsmithy/conf:31
-#: ../../../tribes/empire/oremine/conf:21
-#: ../../../tribes/empire/goldmine/conf:21
-#: ../../../tribes/empire/fishers_house/conf:16
-#: ../../../tribes/empire/tavern/conf:19
-msgid "Work"
-msgstr ""
-
 #: ../../../tribes/empire/hunting_spear/conf:1
 msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters."
+msgstr ""
+
+#: ../../../tribes/empire/inn/conf:20 ../../../tribes/empire/farm/conf:19
+#: ../../../tribes/empire/mill/conf:17 ../../../tribes/empire/well/conf:13
+#: ../../../tribes/empire/vineyard/conf:18
+#: ../../../tribes/empire/sawmill/conf:17
+#: ../../../tribes/empire/deep_coalmine/conf:22
+#: ../../../tribes/empire/hunters_house/conf:13
+#: ../../../tribes/empire/coalmine/conf:21
+#: ../../../tribes/empire/toolsmithy/conf:42
+#: ../../../tribes/empire/weaving-mill/conf:16
+#: ../../../tribes/empire/bakery/conf:17
+#: ../../../tribes/empire/fishers_house/conf:16
+#: ../../../tribes/empire/lumberjacks_house/conf:15
+#: ../../../tribes/empire/stonemasons_house/conf:18
+#: ../../../tribes/empire/deep_oremine/conf:22
+#: ../../../tribes/empire/quarry/conf:20 ../../../tribes/empire/tavern/conf:19
+#: ../../../tribes/empire/smelting_works/conf:21
+#: ../../../tribes/empire/winery/conf:17
+#: ../../../tribes/empire/weaponsmithy/conf:31
+#: ../../../tribes/empire/deep_goldmine/conf:22
+#: ../../../tribes/empire/oremine/conf:21
+#: ../../../tribes/empire/deep_marblemine/conf:23
+#: ../../../tribes/empire/goldmine/conf:21
+#: ../../../tribes/empire/piggery/conf:18
+#: ../../../tribes/empire/armoursmithy/conf:27
+#: ../../../tribes/empire/foresters_house/conf:15
+#: ../../../tribes/empire/marblemine/conf:26
+#: ../../../tribes/empire/sheepfarm/conf:18
+#: ../../../tribes/empire/brewery/conf:17
+#: ../../../tribes/empire/burners_house/conf:16
+msgid "Work"
 msgstr ""
 
 #: ../../../tribes/empire/innkeeper/conf:1
@@ -817,17 +817,17 @@ msgstr ""
 msgid "Marble columns present the high culture of the Empire, so they are needed for nearly every bigger building."
 msgstr ""
 
-#: ../../../tribes/empire/master-miner/conf:1
-#: ../../../tribes/empire/miner/conf:1
-msgid "Works deep in the mines to produce coal, iron or gold."
-msgstr ""
-
 #: ../../../tribes/empire/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
 msgstr ""
 
 #: ../../../tribes/empire/meat/conf:1
 msgid "Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong."
+msgstr ""
+
+#: ../../../tribes/empire/miner/conf:1
+#: ../../../tribes/empire/master-miner/conf:1
+msgid "Works deep in the mines to produce coal, iron or gold."
 msgstr ""
 
 #: ../../../tribes/empire/pick/conf:1
@@ -843,12 +843,13 @@ msgid "The strongest armour existing for the Empire soldiers."
 msgstr ""
 
 #: ../../../tribes/empire/quarry/conf:16
-#: ../../../tribes/empire/marblemine/conf:23
+#: ../../../tribes/empire/marblemine/conf:24
 #, fuzzy
 msgid "Mine stone"
 msgstr "Kleine wijnrank"
 
 #: ../../../tribes/empire/quarry/conf:17
+#: ../../../tribes/empire/marblemine/conf:25
 msgid "Mine stone (only for compatibility with old savegames (build13))"
 msgstr ""
 
@@ -859,6 +860,7 @@ msgid "Mine marble"
 msgstr "Marmer"
 
 #: ../../../tribes/empire/quarry/conf:19
+#: ../../../tribes/empire/marblemine/conf:23
 msgid "Mine marble (only for compatibility with old savegames (build13))"
 msgstr ""
 

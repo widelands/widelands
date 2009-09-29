@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4437\n"
+"Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-07-24 09:16+0000\n"
+"POT-Creation-Date: 2009-09-29 07:39+0000\n"
 "PO-Revision-Date: 2009-07-23 23:22+0200\n"
 "Last-Translator: REAL NAME <EMAIL@ADDRESS.TLD>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
@@ -18,13 +18,6 @@ msgstr ""
 #: ../../../tribes/barbarians/axe/conf:1
 msgid "The Axe is the basic weapon and tool for the barbarians. All young soldiers are equipped with this basic weapon, but also the lumberjack is using the same model."
 msgstr "De bijl is het standaardwapen en -gereedschap voor de barbaren. Alle jonge soldaten worden met dit wapen uitgerust, maar ook de houthakker gebruikt dit model."
-
-#: ../../../tribes/barbarians/axefactory/conf:26
-#: ../../../tribes/barbarians/warmill/conf:30
-#: ../../../tribes/barbarians/metalworks/conf:30
-#, fuzzy
-msgid "Produce axe"
-msgstr "Brede bijl"
 
 #: ../../../tribes/barbarians/axefactory/conf:27
 #: ../../../tribes/barbarians/warmill/conf:31
@@ -71,11 +64,6 @@ msgstr ""
 #: ../../../tribes/barbarians/blackwood/conf:1
 msgid "Fire-hardened wood, hard as iron and can not burn, used for military buildings."
 msgstr "Met vuur versterkt hout, hard als staal en onbrandbaar, gebruikt voor militaire gebouwen."
-
-#: ../../../tribes/barbarians/brewer/conf:1
-#: ../../../tribes/barbarians/master-brewer/conf:1
-msgid "Produces the finest ales to keep warriors strong and happy in training."
-msgstr ""
 
 #: ../../../tribes/barbarians/broadaxe/conf:1
 msgid "Warriors with a fundamental fighting knowledge gain a broad axe. It is produced in the axe factory."
@@ -783,14 +771,51 @@ msgid "This spear is light enough to be thrown, but heavy enough to kill any ani
 msgstr "Deze speer is licht genoeg om te werpen, maar zwaar genoeg om elk dier in één klap te doden. Wordt alleen gebruikt door de jagers. Gemaakt in de metaalbewerkerij."
 
 #: ../../../tribes/barbarians/inn/conf:23
-#: ../../../tribes/barbarians/big_inn/conf:24
 #: ../../../tribes/barbarians/tavern/conf:20
+#: ../../../tribes/barbarians/big_inn/conf:24
 msgid "Produce ration"
 msgstr ""
 
 #: ../../../tribes/barbarians/inn/conf:24
 #: ../../../tribes/barbarians/big_inn/conf:25
 msgid "Produce snack"
+msgstr ""
+
+#: ../../../tribes/barbarians/inn/conf:25
+#: ../../../tribes/barbarians/farm/conf:18
+#: ../../../tribes/barbarians/well/conf:11
+#: ../../../tribes/barbarians/fishers_hut/conf:14
+#: ../../../tribes/barbarians/deep_coalmine/conf:23
+#: ../../../tribes/barbarians/metalworks/conf:40
+#: ../../../tribes/barbarians/rangers_hut/conf:13
+#: ../../../tribes/barbarians/coalmine/conf:20
+#: ../../../tribes/barbarians/deeper_oremine/conf:22
+#: ../../../tribes/barbarians/lumberjacks_hut/conf:14
+#: ../../../tribes/barbarians/fernery/conf:21
+#: ../../../tribes/barbarians/weaving-mill/conf:16
+#: ../../../tribes/barbarians/deeper_goldmine/conf:22
+#: ../../../tribes/barbarians/bakery/conf:18
+#: ../../../tribes/barbarians/hardener/conf:15
+#: ../../../tribes/barbarians/lime_kiln/conf:18
+#: ../../../tribes/barbarians/deep_oremine/conf:23
+#: ../../../tribes/barbarians/quarry/conf:14
+#: ../../../tribes/barbarians/axefactory/conf:29
+#: ../../../tribes/barbarians/tavern/conf:21
+#: ../../../tribes/barbarians/smelting_works/conf:23
+#: ../../../tribes/barbarians/deep_goldmine/conf:23
+#: ../../../tribes/barbarians/warmill/conf:36
+#: ../../../tribes/barbarians/big_inn/conf:27
+#: ../../../tribes/barbarians/oremine/conf:20
+#: ../../../tribes/barbarians/goldmine/conf:20
+#: ../../../tribes/barbarians/micro-brewery/conf:19
+#: ../../../tribes/barbarians/deeper_coalmine/conf:22
+#: ../../../tribes/barbarians/brewery/conf:20
+#: ../../../tribes/barbarians/hunters_hut/conf:12
+#: ../../../tribes/barbarians/helmsmithy/conf:25
+#: ../../../tribes/barbarians/gamekeepers_hut/conf:14
+#: ../../../tribes/barbarians/granitemine/conf:18
+#: ../../../tribes/barbarians/burners_house/conf:16
+msgid "Work"
 msgstr ""
 
 #: ../../../tribes/barbarians/innkeeper/conf:1
@@ -821,10 +846,9 @@ msgstr ""
 msgid "An enhanced version of the helmet."
 msgstr "Een verbeterde versie van de helm."
 
-#: ../../../tribes/barbarians/master-miner/conf:1
-#: ../../../tribes/barbarians/chief-miner/conf:1
-#: ../../../tribes/barbarians/miner/conf:1
-msgid "Works deep in the mines to produce coal, iron or gold."
+#: ../../../tribes/barbarians/master-brewer/conf:1
+#: ../../../tribes/barbarians/brewer/conf:1
+msgid "Produces the finest ales to keep warriors strong and happy in training."
 msgstr ""
 
 #: ../../../tribes/barbarians/meal/conf:1
@@ -835,6 +859,13 @@ msgstr "Een echte maaltijd die de behoefte van elke mijnwerker vervult."
 #: ../../../tribes/barbarians/meat/conf:1
 msgid "Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong."
 msgstr "Vlees bevat veel energie. Het wordt gebruikt in de herbergen en kroegen om lunch voor de mijnwerkers te maken en in trainingskampen om strijders sterk te houden."
+
+#: ../../../tribes/barbarians/metalworks/conf:30
+#: ../../../tribes/barbarians/axefactory/conf:26
+#: ../../../tribes/barbarians/warmill/conf:30
+#, fuzzy
+msgid "Produce axe"
+msgstr "Brede bijl"
 
 #: ../../../tribes/barbarians/metalworks/conf:31
 #, fuzzy
@@ -875,6 +906,12 @@ msgstr ""
 #, fuzzy
 msgid "Produce hunting spear"
 msgstr "Jagersspeer"
+
+#: ../../../tribes/barbarians/miner/conf:1
+#: ../../../tribes/barbarians/chief-miner/conf:1
+#: ../../../tribes/barbarians/master-miner/conf:1
+msgid "Works deep in the mines to produce coal, iron or gold."
+msgstr ""
 
 #: ../../../tribes/barbarians/pick/conf:1
 msgid "This pick is used by the stonemasons and the miners. It is produced in the metal works."
@@ -923,43 +960,6 @@ msgstr "Smelter"
 #, fuzzy
 msgid "Smelt gold"
 msgstr "Burcht"
-
-#: ../../../tribes/barbarians/smelting_works/conf:23
-#: ../../../tribes/barbarians/lime_kiln/conf:18
-#: ../../../tribes/barbarians/burners_house/conf:16
-#: ../../../tribes/barbarians/granitemine/conf:18
-#: ../../../tribes/barbarians/farm/conf:18
-#: ../../../tribes/barbarians/hardener/conf:15
-#: ../../../tribes/barbarians/bakery/conf:18
-#: ../../../tribes/barbarians/deep_goldmine/conf:23
-#: ../../../tribes/barbarians/gamekeepers_hut/conf:14
-#: ../../../tribes/barbarians/helmsmithy/conf:25
-#: ../../../tribes/barbarians/deep_oremine/conf:23
-#: ../../../tribes/barbarians/quarry/conf:14
-#: ../../../tribes/barbarians/fishers_hut/conf:14
-#: ../../../tribes/barbarians/deeper_goldmine/conf:22
-#: ../../../tribes/barbarians/micro-brewery/conf:19
-#: ../../../tribes/barbarians/axefactory/conf:29
-#: ../../../tribes/barbarians/weaving-mill/conf:16
-#: ../../../tribes/barbarians/coalmine/conf:20
-#: ../../../tribes/barbarians/deeper_coalmine/conf:22
-#: ../../../tribes/barbarians/deep_coalmine/conf:23
-#: ../../../tribes/barbarians/fernery/conf:21
-#: ../../../tribes/barbarians/lumberjacks_hut/conf:14
-#: ../../../tribes/barbarians/inn/conf:25
-#: ../../../tribes/barbarians/well/conf:11
-#: ../../../tribes/barbarians/warmill/conf:36
-#: ../../../tribes/barbarians/deeper_oremine/conf:22
-#: ../../../tribes/barbarians/brewery/conf:20
-#: ../../../tribes/barbarians/rangers_hut/conf:13
-#: ../../../tribes/barbarians/hunters_hut/conf:12
-#: ../../../tribes/barbarians/oremine/conf:20
-#: ../../../tribes/barbarians/metalworks/conf:40
-#: ../../../tribes/barbarians/big_inn/conf:27
-#: ../../../tribes/barbarians/goldmine/conf:20
-#: ../../../tribes/barbarians/tavern/conf:21
-msgid "Work"
-msgstr ""
 
 #: ../../../tribes/barbarians/snack/conf:1
 msgid "A bit bigger, for the advanced miners. They will need a big morsel."
