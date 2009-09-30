@@ -1209,7 +1209,7 @@ void Worker::transfer_update(Game & game, State & state) {
 	}
 
 	// Signal handling
-	std::string signal = get_signal();
+	std::string const signal = get_signal();
 
 	if (signal.size()) {
 		// The caller requested a route update, or the previously calulcated route
@@ -1307,6 +1307,10 @@ void Worker::transfer_update(Game & game, State & state) {
 			if (nextstep != &road.get_flag(Road::FlagEnd))
 				path.reverse();
 
+			molog
+				("[transfer]: starting task [movepath] and setting location to "
+				 "road %u\n",
+				 road.serial());
 			start_task_movepath
 				(game, path, descr().get_right_walk_anims(does_carry_ware()));
 			set_location(&road);

@@ -407,6 +407,13 @@ void Road::postsplit(Game & game, Flag & flag)
 	path.truncate(index);
 	secondpath.starttrim(index);
 
+	molog("splitting road: first part:\n");
+	container_iterate_const(std::vector<Coords>, path.get_coords(), i)
+		molog("* (%i, %i)\n", i.current->x, i.current->y);
+	molog("                second part:\n");
+	container_iterate_const(std::vector<Coords>, secondpath.get_coords(), i)
+		molog("* (%i, %i)\n", i.current->x, i.current->y);
+
 	// change road size and reattach
 	m_flags[FlagEnd] = &flag;
 	_set_path(game, path);
@@ -453,7 +460,8 @@ void Road::postsplit(Game & game, Flag & flag)
 			}
 		}
 
-		molog("Split: check %u -> idx %i\n", w.serial(), idx);
+		if (w.serial() == 3755)
+			molog("Split: check %u -> idx %i\n", w.serial(), idx);
 
 		if (idx < 0) {
 			reassigned_workers.push_back(&w);
@@ -466,6 +474,12 @@ void Road::postsplit(Game & game, Flag & flag)
 			}
 		}
 
+		if (w.serial() == 3755) {
+			molog
+				("Split: sending signal 'road' to worker %u (at (%i, %i)):\n",
+				 w.serial(), w.get_position().x, w.get_position().y);
+			w.log_general_info(game);
+		}
 		// Cause a worker update in any case
 		w.send_signal(game, "road");
 	}

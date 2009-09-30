@@ -34,6 +34,8 @@
 #include "upcast.h"
 #include "wexception.h"
 
+#include "backtrace.h"
+
 namespace Widelands {
 
 /**
@@ -655,9 +657,17 @@ bool Bob::start_task_movepath
 	CoordPath path(game.map(), origpath);
 	int32_t const curidx = path.get_index(get_position());
 
-	if (curidx == -1)
+	if (curidx == -1) {
+		molog
+			("ERROR: (%i, %i) is not on the given path:\n",
+			 get_position().x, get_position().y);
+		container_iterate_const(std::vector<Coords>, path.get_coords(), i)
+			molog("* (%i, %i)\n", i.current->x, i.current->y);
+		log_general_info(game);
+		log("%s", get_backtrace().c_str());
 		throw wexception
 			("MO(%u): start_task_movepath(index): not on path", serial());
+	}
 
 	if (curidx != index) {
 		if (curidx < index) {
@@ -678,8 +688,13 @@ bool Bob::start_task_movepath
 
 void Bob::movepath_update(Game & game, State & state)
 {
-	if (get_signal().size())
+	if (get_signal().size()) {
+		if (serial() == 3755)
+			molog
+				("[movepath_update] signal '%s'; popping task\n",
+				 get_signal().c_str());
 		return pop_task(game);
+	}
 
 	assert(state.ivar1 >= 0);
 	Path const * const path = state.path;
@@ -755,6 +770,9 @@ void Bob::start_task_move
 void Bob::move_update(Game & game, State & state)
 {
 	if (state.diranims) {
+		if (get_signal() == "road")
+			molog("ERROR!!!!!!!!!!!!!!!! GOT SIGNAL 'road' BEFORE start_walk\n");
+
 		int32_t const tdelta =
 			start_walk
 				(game,
@@ -768,14 +786,13 @@ void Bob::move_update(Game & game, State & state)
 			return pop_task(game);
 		} else
 			return schedule_act(game, tdelta);
+	} else if (m_walkend <= game.get_gametime()) {
+		end_walk();
+		return pop_task(game);
 	} else
-		if (game.get_gametime() - m_walkend >= 0) {
-			end_walk();
-			return pop_task(game);
-		} else
-			// Only end the task once we've actually completed the step
-			// Ignore signals until then
-			return schedule_act(game, m_walkend - game.get_gametime());
+		//  Only end the task once we've actually completed the step
+		// Ignore signals until then
+		return schedule_act(game, m_walkend - game.get_gametime());
 }
 
 
@@ -886,22 +903,22 @@ void Bob::set_animation(Editor_Game_Base & egbase, uint32_t const anim)
 int32_t Bob::start_walk
 	(Game & game, WalkingDir const dir, uint32_t const a, bool const force)
 {
-	FCoords newf;
+	FCoords newnode;
 
 	Map & map = game.map();
-	map.get_neighbour(m_position, dir, &newf);
+	map.get_neighbour(m_position, dir, &newnode);
 
 	// Move capability check
 	if (!force) {
 		CheckStepDefault cstep(descr().movecaps());
 
-		if (!cstep.allowed(map, m_position, newf, dir, CheckStep::stepNormal))
+		if (!cstep.allowed(map, m_position, newnode, dir, CheckStep::stepNormal))
 			return -1;
 	}
 
 	//  Always call checkNodeBlocked, because it might communicate with other
 	//  bobs (as is the case for soldiers on the battlefield).
-	if (checkNodeBlocked(game, newf, true) and !force)
+	if (checkNodeBlocked(game, newnode, true) and !force)
 		return -2;
 
 	// Move is go
@@ -912,7 +929,11 @@ int32_t Bob::start_walk
 	m_walkstart = game.get_gametime();
 	m_walkend = m_walkstart + tdelta;
 
-	set_position(game, newf);
+	if (serial() == 3755)
+		molog
+			("[start_walk]: changint position from (%i, %i) to (%i, %i)\n",
+			 get_position().x, get_position().y, newnode.x, newnode.y);
+	set_position(game, newnode);
 	set_animation(game, a);
 
 	return tdelta; // yep, we were successful
