@@ -91,6 +91,6 @@ private:
 	Reverse_Map_Object_Map m_objects;
 };
 
-};
+}
 
 #endif

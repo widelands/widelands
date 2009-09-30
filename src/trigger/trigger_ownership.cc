@@ -64,4 +64,4 @@ void Trigger_Ownership::check_set_conditions(Game const & game) {
 	while (mr.advance(map));
 }
 
-};
+}

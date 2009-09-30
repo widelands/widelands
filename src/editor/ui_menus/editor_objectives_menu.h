@@ -24,7 +24,7 @@
 #include "ui_basic/unique_window.h"
 
 struct Editor_Interactive;
-namespace Widelands {struct Objective;};
+namespace Widelands {struct Objective;}
 namespace UI {
 template <typename T> struct Callback_Button;
 template <typename T> struct Table;

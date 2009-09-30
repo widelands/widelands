@@ -108,5 +108,4 @@ Worker & IdleWorkerSupply::launch_worker(Game &, Request const & req)
 	return m_worker;
 }
 
-
-};
+}

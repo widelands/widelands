@@ -24,7 +24,7 @@
 
 #include <vector>
 
-namespace UI {struct Panel;};
+namespace UI {struct Panel;}
 
 namespace Widelands {
 
@@ -92,6 +92,6 @@ private:
 	int32_t m_width, m_height;
 };
 
-};
+}
 
 #endif

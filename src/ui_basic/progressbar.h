@@ -23,6 +23,7 @@
 #include "panel.h"
 
 namespace UI {
+
 /**
  * A very simple panel that displays progress or productivity in percent,
  * graphically enhanced with a coloured bar.
@@ -57,6 +58,7 @@ private:
 	uint32_t m_state; ///< m_state is [0..m_total]
 	uint32_t m_total; ///< maximum progress
 };
-};
+
+}
 
 #endif

@@ -30,7 +30,7 @@
 namespace Widelands {
 struct Game;
 struct Objective;
-};
+}
 struct Interactive_Player;
 
 ///  Shows the not already fulfilled objectives.

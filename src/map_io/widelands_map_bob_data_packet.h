@@ -55,6 +55,6 @@ private:
 		 Coords);
 };
 
-};
+}
 
 #endif

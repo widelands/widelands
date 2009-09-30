@@ -160,6 +160,6 @@ protected:
 	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
 };
 
-};
+}
 
 #endif

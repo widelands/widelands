@@ -407,4 +407,5 @@ const std::string & Table<void *>::Entry_Record::get_string
 
 	return m_data[column].d_string;
 }
-};
+
+}

@@ -88,4 +88,4 @@ void Trigger_Military_Influence::check_set_conditions(Game const & game) {
 		} while (mr.advance(map));
 }
 
-};
+}

@@ -238,7 +238,8 @@ bool Interactive_Spectator::handle_key(bool down, SDL_keysym code)
 			if (!m_chat.window)
 				new GameChatMenu(this, m_chat, *m_chatProvider);
 
-			dynamic_cast<GameChatMenu &>(*m_chat.window).enter_chat_message();
+			ref_cast<GameChatMenu, UI::UniqueWindow>(*m_chat.window)
+				.enter_chat_message();
 			return true;
 
 		default:

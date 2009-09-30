@@ -150,4 +150,4 @@ void Map_Object_Packet::Write
 	fw.Write(fs, "binary/mapobjects");
 }
 
-};
+}

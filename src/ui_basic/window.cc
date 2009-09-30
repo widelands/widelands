@@ -616,4 +616,5 @@ bool Window::handle_mousemove
 	}
 	return true;
 }
-};
+
+}

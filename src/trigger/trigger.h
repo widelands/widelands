@@ -68,6 +68,6 @@ private:
 	bool m_is_set;
 };
 
-};
+}
 
 #endif

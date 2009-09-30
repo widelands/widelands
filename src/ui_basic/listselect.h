@@ -243,6 +243,6 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 	}
 };
 
-};
+}
 
 #endif

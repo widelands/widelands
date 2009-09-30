@@ -100,4 +100,4 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 	return 0;
 }
 
-};
+}

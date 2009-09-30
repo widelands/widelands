@@ -33,7 +33,7 @@
 namespace UI {
 struct Multiline_Textarea;
 struct Textarea;
-};
+}
 
 
 /**

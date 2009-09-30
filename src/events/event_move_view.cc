@@ -84,4 +84,4 @@ Event::State Event_Move_View::run(Game & game) {
 	return m_state = DONE;
 }
 
-};
+}

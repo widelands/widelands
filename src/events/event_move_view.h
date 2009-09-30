@@ -50,6 +50,6 @@ private:
 	Player_Number m_player;
 };
 
-};
+}
 
 #endif

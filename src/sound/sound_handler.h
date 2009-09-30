@@ -32,7 +32,7 @@
 
 #include <unistd.h>
 
-namespace Widelands {struct Game;};
+namespace Widelands {struct Game;}
 struct Songset;
 
 /// How many milliseconds in the past to consider for

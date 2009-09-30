@@ -214,7 +214,7 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int32_t n, bool t) {
 
 		std::string buf = _("Current:");
 		Widelands::World const & world =
-			dynamic_cast<Editor_Interactive &>(*get_parent())
+			ref_cast<Editor_Interactive, UI::Panel>(*get_parent())
 			.egbase().map().world();
 		uint32_t j = m_tool.get_nr_enabled();
 		for (Widelands::Terrain_Index i = 0; j; ++i)

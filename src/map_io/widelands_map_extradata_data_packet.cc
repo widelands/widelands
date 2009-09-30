@@ -125,4 +125,4 @@ throw (_wexception)
 	prof.write("extra_data", false, fs);
 }
 
-};
+}

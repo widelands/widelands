@@ -212,4 +212,4 @@ Event::State Event_Message_Box::run(Game & game) {
 	return m_state;
 }
 
-};
+}

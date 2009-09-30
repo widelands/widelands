@@ -93,4 +93,4 @@ throw (_wexception)
 	prof.write("player_position", false, fs);
 }
 
-};
+}

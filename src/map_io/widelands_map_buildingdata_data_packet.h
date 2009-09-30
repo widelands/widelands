@@ -27,6 +27,7 @@
 namespace Widelands {
 
 struct ConstructionSite;
+struct Game;
 struct MilitarySite;
 struct TrainingSite;
 struct ProductionSite;
@@ -47,57 +48,27 @@ struct Map_Buildingdata_Data_Packet : public Map_Data_Packet {
 
 private:
 	virtual void read_constructionsite
-		(ConstructionSite &,
-		 FileRead &,
-		 Editor_Game_Base      &,
-		 Map_Map_Object_Loader *);
+		(ConstructionSite       &, FileRead  &, Game &, Map_Map_Object_Loader *);
 	virtual void read_warehouse
-		(Warehouse &,
-		 FileRead &,
-		 Editor_Game_Base      &,
-		 Map_Map_Object_Loader *);
+		(Warehouse              &, FileRead  &, Game &, Map_Map_Object_Loader *);
 	virtual void read_militarysite
-		(MilitarySite &,
-		 FileRead &,
-		 Editor_Game_Base      &,
-		 Map_Map_Object_Loader *);
+		(MilitarySite           &, FileRead  &, Game &, Map_Map_Object_Loader *);
 	virtual void read_trainingsite
-		(TrainingSite &,
-		 FileRead &,
-		 Editor_Game_Base      &,
-		 Map_Map_Object_Loader *);
+		(TrainingSite           &, FileRead  &, Game &, Map_Map_Object_Loader *);
 	virtual void read_productionsite
-		(ProductionSite &,
-		 FileRead &,
-		 Editor_Game_Base      &,
-		 Map_Map_Object_Loader *);
+		(ProductionSite         &, FileRead  &, Game &, Map_Map_Object_Loader *);
 	virtual void write_constructionsite
-		(const ConstructionSite &,
-		 FileWrite &,
-		 Editor_Game_Base       &,
-		 Map_Map_Object_Saver   *);
+		(ConstructionSite const &, FileWrite &, Game &, Map_Map_Object_Saver  *);
 	virtual void write_warehouse
-		(const Warehouse &,
-		 FileWrite &,
-		 Editor_Game_Base       &,
-		 Map_Map_Object_Saver   *);
+		(Warehouse        const &, FileWrite &, Game &, Map_Map_Object_Saver  *);
 	virtual void write_militarysite
-		(const MilitarySite &,
-		 FileWrite &,
-		 Editor_Game_Base       &,
-		 Map_Map_Object_Saver   *);
+		(MilitarySite     const &, FileWrite &, Game &, Map_Map_Object_Saver  *);
 	virtual void write_trainingsite
-		(const TrainingSite &,
-		 FileWrite &,
-		 Editor_Game_Base       &,
-		 Map_Map_Object_Saver   *);
+		(TrainingSite     const &, FileWrite &, Game &, Map_Map_Object_Saver  *);
 	virtual void write_productionsite
-		(const ProductionSite &,
-		 FileWrite &,
-		 Editor_Game_Base       &,
-		 Map_Map_Object_Saver   *);
+		(ProductionSite   const &, FileWrite &, Game &, Map_Map_Object_Saver  *);
 };
 
-};
+}
 
 #endif

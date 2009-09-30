@@ -77,4 +77,4 @@ void Map_Heights_Data_Packet::Write
 	fw.Write(fs,  "binary/heights");
 }
 
-};
+}

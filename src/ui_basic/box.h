@@ -25,7 +25,6 @@
 #include <vector>
 
 namespace UI {
-
 struct Scrollbar;
 
 /**
@@ -93,6 +92,7 @@ private:
 
 	std::vector<Item> m_items;
 };
-};
+
+}
 
 #endif

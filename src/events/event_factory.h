@@ -67,6 +67,6 @@ Type_Descr const & type_descr(size_t);
 size_t nr_event_types();
 };
 
-};
+}
 
 #endif

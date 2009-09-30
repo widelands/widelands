@@ -36,7 +36,7 @@ struct Editor_Interactive;
 namespace UI {
 struct EditBox;
 struct Textarea;
-};
+}
 
 /**
  * This is a modal box - The user must end this first

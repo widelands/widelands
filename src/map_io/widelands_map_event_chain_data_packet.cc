@@ -242,4 +242,4 @@ throw (_wexception)
 	prof.write("event_chain", false, fs);
 }
 
-};
+}

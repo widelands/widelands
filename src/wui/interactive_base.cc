@@ -545,35 +545,32 @@ void Interactive_Base::finish_build_road()
 
 	if (m_buildroad->get_nsteps()) {
 		// Build the path as requested
-		if (upcast(Game, game, &egbase())) {
-			game->send_player_build_road
-				(m_road_build_player, *new Widelands::Path(*m_buildroad));
-			if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
-				// place flags
-				Map const & map = game->map();
-				std::vector<Coords>         const &       c_vector =
-					m_buildroad->get_coords();
-				std::vector<Coords>::const_iterator const first    =
-					c_vector.begin() + 2;
-				std::vector<Coords>::const_iterator const last     =
-					c_vector.end  () - 2;
+		ref_cast<Game, Editor_Game_Base>(egbase()).send_player_build_road
+			(m_road_build_player, *new Widelands::Path(*m_buildroad));
+		if (get_key_state(SDLK_LCTRL) || get_key_state(SDLK_RCTRL)) {
+			//  place flags
+			Map const & map = egbase().map();
+			std::vector<Coords>         const &       c_vector =
+				m_buildroad->get_coords();
+			std::vector<Coords>::const_iterator const first    =
+				c_vector.begin() + 2;
+			std::vector<Coords>::const_iterator const last     =
+				c_vector.end  () - 2;
 
-				// start to end
-				if (get_key_state(SDLK_LSHIFT) || get_key_state(SDLK_RSHIFT)) {
-					for
-						(std::vector<Coords>::const_iterator it = first;
-						 it <= last;
-						 ++it)
-						game->send_player_build_flag
-							(m_road_build_player, map.get_fcoords(*it));
-				} else { //  end to start
-					for
-						(std::vector<Coords>::const_iterator it = last;
-						 first <= it;
-						 --it)
-						game->send_player_build_flag
-							(m_road_build_player, map.get_fcoords(*it));
-				}
+			if (get_key_state(SDLK_LSHIFT) || get_key_state(SDLK_RSHIFT)) {
+				for //  start to end
+					(std::vector<Coords>::const_iterator it = first;
+					 it <= last;
+					 ++it)
+					ref_cast<Game, Editor_Game_Base>(egbase()).send_player_build_flag
+						(m_road_build_player, map.get_fcoords(*it));
+			} else {
+				for //  end to start
+					(std::vector<Coords>::const_iterator it = last;
+					 first <= it;
+					 --it)
+					ref_cast<Game, Editor_Game_Base>(egbase()).send_player_build_flag
+						(m_road_build_player, map.get_fcoords(*it));
 			}
 		}
 	}

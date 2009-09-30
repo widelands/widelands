@@ -98,7 +98,7 @@ void Editor_Tool_Menu::changed_to() {
 	const int32_t n = m_radioselect.get_state();
 
 	Editor_Interactive & parent =
-		dynamic_cast<Editor_Interactive &>(*get_parent());
+		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 
 	Editor_Tool                * current_tool_pointer;
 	UI::UniqueWindow::Registry * current_registry_pointer;

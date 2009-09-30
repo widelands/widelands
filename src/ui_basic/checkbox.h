@@ -29,6 +29,7 @@
 #define STATEBOX_HEIGHT 20
 
 namespace UI {
+
 /**
  * Virtual base class providing a box that can be checked or unchecked.
  * Serves as base for Checkbox and Radiobutton.
@@ -103,6 +104,7 @@ struct Checkbox : public Statebox {
 private:
 	void clicked();
 };
-};
+
+}
 
 #endif

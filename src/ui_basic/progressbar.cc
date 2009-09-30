@@ -114,4 +114,5 @@ void Progress_Bar::draw(RenderTarget & dst)
 		 buffer,
 		 Align_Center);
 }
-};
+
+}

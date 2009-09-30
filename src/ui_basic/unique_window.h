@@ -53,6 +53,7 @@ private:
 	Registry * m_registry;
 	bool       m_usedefaultpos;
 };
-};
+
+}
 
 #endif

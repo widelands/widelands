@@ -66,6 +66,6 @@ private:
 	State m_s;
 };
 
-};
+}
 
 #endif

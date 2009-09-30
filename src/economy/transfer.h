@@ -73,7 +73,7 @@ private:
 	bool m_idle; ///< an idle transfer can be fail()ed if the item feels like it
 };
 
-};
+}
 
 #endif
 

@@ -25,7 +25,7 @@
 #include "ui_basic/unique_window.h"
 
 struct Editor_Interactive;
-namespace Widelands {struct Variable;};
+namespace Widelands {struct Variable;}
 
 struct Editor_Variables_Menu : public UI::UniqueWindow {
 	Editor_Variables_Menu(Editor_Interactive &, UI::UniqueWindow::Registry *);

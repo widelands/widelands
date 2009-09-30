@@ -45,6 +45,6 @@ private:
 	bool require_active_vision;
 };
 
-};
+}
 
 #endif

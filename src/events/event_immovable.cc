@@ -65,4 +65,4 @@ Event::State Event_Immovable::run(Game & game) {
 	return m_state = DONE;
 }
 
-};
+}

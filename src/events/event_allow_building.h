@@ -56,6 +56,6 @@ private:
 	bool           m_allow;
 };
 
-};
+}
 
 #endif

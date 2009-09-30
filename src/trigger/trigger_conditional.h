@@ -204,6 +204,6 @@ protected:
 	}
 };
 
-};
+}
 
 #endif

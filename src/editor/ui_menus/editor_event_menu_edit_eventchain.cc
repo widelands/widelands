@@ -38,7 +38,7 @@
 
 
 inline Editor_Interactive & Editor_Event_Menu_Edit_EventChain::eia() {
-	return dynamic_cast<Editor_Interactive &>(*get_parent());
+	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 }
 
 

@@ -38,6 +38,6 @@ struct Map_Immovabledata_Data_Packet : public Map_Data_Packet {
 		throw (_wexception) __attribute__ ((noreturn));
 };
 
-};
+}
 
 #endif

@@ -176,21 +176,15 @@ void WareInstance::init(Editor_Game_Base & egbase)
 
 void WareInstance::cleanup(Editor_Game_Base & egbase)
 {
-	//molog("WareInstance::cleanup\n");
-
 	// Unlink from our current location, if necessary
 	if (upcast(Flag, flag, m_location.get(egbase)))
-		flag->remove_item(egbase, this);
+		flag->remove_item(ref_cast<Game, Editor_Game_Base>(egbase), this);
 
 	delete m_supply;
 	m_supply = 0;
 
-	if (upcast(Game, game, &egbase)) {
-		cancel_moving();
-		set_location(*game, 0);
-	}
-
-	//molog("  done\n");
+	cancel_moving();
+	set_location(ref_cast<Game, Editor_Game_Base>(egbase), 0);
 
 	Map_Object::cleanup(egbase);
 }

@@ -34,6 +34,6 @@ struct Game_Player_Economies_Data_Packet : public Game_Data_Packet {
 		throw (_wexception);
 };
 
-};
+}
 
 #endif

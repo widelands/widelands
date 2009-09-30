@@ -42,6 +42,6 @@ struct Map_Seen_Fields_Data_Packet : public Map_Data_Packet {
 		throw (_wexception);
 };
 
-};
+}
 
 #endif

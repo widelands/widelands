@@ -33,7 +33,7 @@
 
 #include <SDL_keysym.h>
 
-namespace Widelands {struct CoordPath;};
+namespace Widelands {struct CoordPath;}
 
 struct InteractiveBaseInternals;
 

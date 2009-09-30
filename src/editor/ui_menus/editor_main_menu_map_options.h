@@ -28,7 +28,7 @@ namespace UI {
 struct EditBox;
 struct Multiline_Editbox;
 struct Textarea;
-};
+}
 
 /**
  * This is the Main Options Menu. Here, information

@@ -119,7 +119,7 @@ Event_Building::Event_Building
 								(tribe->get_worker_descr(i)->name().c_str(), 0);
 				}
 				Soldier_Descr const & soldier_descr =  //  soldiers
-					dynamic_cast<Soldier_Descr const &>
+					ref_cast<Soldier_Descr const, Worker_Descr const>
 						(*tribe->get_worker_descr(tribe->worker_index("soldier")));
 				uint32_t const max_hp_level      =
 					soldier_descr.get_max_hp_level     ();
@@ -240,7 +240,7 @@ Event_Building::Event_Building
 							try { //  soldiers
 								uint32_t soldier_count = 0;
 								Soldier_Descr const & soldier_descr =
-									dynamic_cast<Soldier_Descr const &>
+									ref_cast<Soldier_Descr const, Worker_Descr const>
 										(*tribe->get_worker_descr
 										 	(tribe->worker_index("soldier")));
 								uint32_t const max_hp_level      =
@@ -449,4 +449,4 @@ Event::State Event_Building::run(Game & game) {
 	return m_state = DONE;
 }
 
-};
+}

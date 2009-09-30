@@ -28,7 +28,7 @@ namespace Widelands {
 struct Event_Message_Box;
 struct Game;
 struct Trigger_Time;
-};
+}
 
 struct Message_Box_Event_Message_Box : public UI::Window {
 	Message_Box_Event_Message_Box

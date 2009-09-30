@@ -22,7 +22,7 @@
 
 #include <vector>
 
-// Needed for Object_Ptr
+// Needed for OPtr
 #include "logic/instances.h"
 
 #include "iroute.h"
@@ -67,7 +67,7 @@ struct Route : public IRoute {
 
 private:
 	int32_t                     m_totalcost;
-	std::vector<Object_Ptr> m_route; ///< includes start and end flags
+	std::vector<OPtr<Flag> > m_route; ///< includes start and end flags
 };
 
 }

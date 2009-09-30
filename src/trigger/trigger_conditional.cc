@@ -273,4 +273,4 @@ bool TriggerNOT::do_eval(bool const t) const {
 	return !t;
 }
 
-};
+}

@@ -26,7 +26,7 @@
 #include <cstdio>
 
 inline Editor_Interactive & Editor_Toolsize_Menu::eia() {
-	return dynamic_cast<Editor_Interactive &>(*get_parent());
+	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 }
 
 

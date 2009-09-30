@@ -43,4 +43,4 @@ Event::State Event_Reveal_Scenario::run(Game &) {
 	return m_state = DONE;
 }
 
-};
+}

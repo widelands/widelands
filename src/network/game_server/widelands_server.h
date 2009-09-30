@@ -27,26 +27,24 @@
 #define ARRAY_HEIGHT 10
 
 // WidelandsServer server object
-class WidelandsServer : public GGZGameServer
-{
-	public:
-		WidelandsServer();
-		~WidelandsServer();
-		void stateEvent();
-		void joinEvent(Client *client);
-		void leaveEvent(Client *client);
-		void spectatorJoinEvent(Client *client);
-		void spectatorLeaveEvent(Client *client);
-		void spectatorDataEvent(Client *client);
-		void dataEvent(Client *client);
-		void errorEvent();
+struct WidelandsServer : public GGZGameServer {
+	WidelandsServer();
+	~WidelandsServer();
+	void stateEvent();
+	void joinEvent(Client *);
+	void leaveEvent(Client *);
+	void spectatorJoinEvent(Client *);
+	void spectatorLeaveEvent(Client *);
+	void spectatorDataEvent(Client *);
+	void dataEvent(Client *);
+	void errorEvent();
 
-	private:
-		void game_start();
-		void game_stop();
-		void game_end();
+private:
+	void game_start();
+	void game_stop();
+	void game_end();
 
-		char * m_ip;
+	char * m_ip;
 };
 
 #endif

@@ -39,6 +39,6 @@ struct Map_Allowed_Buildings_Data_Packet : public Map_Data_Packet {
 		throw (_wexception);
 };
 
-};
+}
 
 #endif

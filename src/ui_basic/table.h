@@ -413,6 +413,7 @@ template <> struct Table<const intptr_t> : public Table<intptr_t> {
 		: Base(parent, x, y, w, h, descending)
 	{}
 };
-};
+
+}
 
 #endif

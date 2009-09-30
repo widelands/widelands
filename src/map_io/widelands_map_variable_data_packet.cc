@@ -111,4 +111,4 @@ throw (_wexception)
 	prof.write("variable", false, fs);
 }
 
-};
+}

@@ -125,4 +125,4 @@ throw (_wexception)
 	fw.Write(fs, "binary/player_economies");
 }
 
-};
+}

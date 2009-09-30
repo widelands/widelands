@@ -101,6 +101,7 @@ protected:
 	void    draw_scrollbar();
 	int32_t get_halign();
 };
-};
+
+}
 
 #endif

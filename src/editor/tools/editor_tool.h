@@ -25,7 +25,7 @@
 #include "widelands_geometry.h"
 
 struct Editor_Interactive;
-namespace Widelands {struct Map;};
+namespace Widelands {struct Map;}
 
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:

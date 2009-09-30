@@ -70,6 +70,6 @@ Type_Descr const & type_descr(size_t);
 size_t nr_trigger_types();
 };
 
-};
+}
 
 #endif

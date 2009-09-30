@@ -65,4 +65,4 @@ void Event_Unhide_Area::Write(Section & s, Editor_Game_Base & egbase) const {
 		s.set_int("duration", duration);
 }
 
-};
+}

@@ -128,4 +128,4 @@ throw (_wexception)
 	throw wexception("Immovable_Data_Packet is obsolete");
 }
 
-};
+}

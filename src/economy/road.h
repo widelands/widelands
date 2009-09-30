@@ -25,6 +25,7 @@
 #include "roadtype.h"
 
 namespace Widelands {
+struct Carrier;
 struct Request;
 
 /**
@@ -76,8 +77,8 @@ struct Road : public PlayerImmovable {
 	const Path &get_path() const {return m_path;}
 	int32_t get_idle_index() const {return m_idle_index;}
 
-	void presplit(Editor_Game_Base &, Coords split);
-	void postsplit(Editor_Game_Base &, Flag &);
+	void presplit(Game &, Coords split);
+	void postsplit(Game &, Flag &);
 
 	bool notify_ware(Game & game, FlagId flagid);
 	virtual void remove_worker(Worker &);
@@ -94,7 +95,7 @@ private:
 	void _mark_map(Editor_Game_Base &);
 	void _unmark_map(Editor_Game_Base &);
 
-	void _link_into_flags(Editor_Game_Base &);
+	void _link_into_flags(Game &);
 
 	void _request_carrier(Game &);
 	static void _request_carrier_callback
@@ -114,7 +115,7 @@ private:
 	///< total number of carriers we want (currently limited to 0 or 1)
 	uint32_t   m_desire_carriers;
 
-	Object_Ptr m_carrier;    ///< our carrier
+	OPtr<Carrier> m_carrier;    ///< our carrier
 	Request *  m_carrier_request;
 };
 

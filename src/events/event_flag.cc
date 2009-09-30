@@ -62,4 +62,4 @@ Event::State Event_Flag::run(Game & game) {
 	return m_state = DONE;
 }
 
-};
+}

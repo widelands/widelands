@@ -146,4 +146,4 @@ void Map_Map_Object_Saver::detect_unsaved_objects() const {
 }
 #endif
 
-};
+}

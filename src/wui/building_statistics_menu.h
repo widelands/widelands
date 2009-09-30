@@ -25,16 +25,17 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
-namespace Widelands {struct Building_Descr;};
+namespace Widelands {struct Building_Descr;}
 struct Interactive_Player;
 namespace UI {
 template <typename T, typename ID> struct Callback_IDButton;
 struct Progress_Bar;
 struct Textarea;
-};
+}
 
 struct Building_Statistics_Menu : public UI::UniqueWindow {
-	Building_Statistics_Menu(Interactive_Player &, UI::UniqueWindow::Registry &);
+	Building_Statistics_Menu
+		(Interactive_Player &, UI::UniqueWindow::Registry &);
 
 	void think();
 	void draw(RenderTarget &);

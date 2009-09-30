@@ -31,7 +31,7 @@ struct EditBox;
 template <typename T> struct Listselect;
 struct Multiline_Textarea;
 struct Textarea;
-};
+}
 
 /**
  * Choose a filename and save your brand new created map

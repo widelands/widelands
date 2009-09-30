@@ -88,4 +88,4 @@ void Trigger_Building::check_set_conditions(Game const & game) {
 	while (mr.advance(map));
 }
 
-};
+}

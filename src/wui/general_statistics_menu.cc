@@ -308,7 +308,7 @@ void General_Statistics_Menu::cb_changed_to(int32_t const id, bool const what)
  */
 void General_Statistics_Menu::radiogroup_changed(int32_t const id) {
 	size_t const statistics_size =
-		dynamic_cast<Interactive_GameBase &>(*get_parent()).game()
+		ref_cast<Interactive_GameBase, UI::Panel>(*get_parent()).game()
 		.get_general_statistics().size();
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		if (m_cbs[i]) {

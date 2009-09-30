@@ -100,4 +100,4 @@ Event::State Event_Road::run(Game & game) {
 	return m_state = DONE;
 }
 
-};
+}

@@ -47,6 +47,6 @@ private:
 	Economy * m_economy;
 };
 
-};
+}
 
 #endif

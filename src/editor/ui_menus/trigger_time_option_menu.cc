@@ -37,7 +37,7 @@ int32_t Widelands::Trigger_Time::option_menu(Editor_Interactive & eia) {
 
 
 inline Editor_Interactive & Trigger_Time_Option_Menu::eia() {
-	return dynamic_cast<Editor_Interactive &>(*get_parent());
+	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 }
 
 

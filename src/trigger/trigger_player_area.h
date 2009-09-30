@@ -49,6 +49,6 @@ protected:
 	Count_Type m_count;
 };
 
-};
+}
 
 #endif

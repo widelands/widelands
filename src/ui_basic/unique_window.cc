@@ -74,4 +74,5 @@ UniqueWindow::~UniqueWindow()
 		m_registry->y = get_y();
 	}
 }
-};
+
+}

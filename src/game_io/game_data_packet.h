@@ -48,6 +48,6 @@ struct Game_Data_Packet {
 		= 0;
 };
 
-};
+}
 
 #endif

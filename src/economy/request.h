@@ -96,8 +96,8 @@ struct Request : public Trackable {
 	void start_transfer(Game &, Supply &);
 
 
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  *) const;
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader *);
+	void Write(FileWrite &, Game &, Map_Map_Object_Saver  *) const;
+	void Read (FileRead  &, Game &, Map_Map_Object_Loader *);
 	Worker * get_transfer_worker();
 
 	//  callbacks for WareInstance/Worker code
@@ -145,8 +145,6 @@ private:
 	Requirements m_requirements;
 };
 
-
-
 }
 
-#endif // REQUEST_H
+#endif

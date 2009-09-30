@@ -100,4 +100,4 @@ throw (_wexception)
 	prof.write("event", false, fs);
 }
 
-};
+}

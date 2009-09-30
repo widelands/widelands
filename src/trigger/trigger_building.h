@@ -50,6 +50,6 @@ private:
 	Building_Descr const * m_building_type;
 };
 
-};
+}
 
 #endif

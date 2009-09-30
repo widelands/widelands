@@ -302,4 +302,5 @@ bool Button::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
 	}
 	return true;
 }
-};
+
+}

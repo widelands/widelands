@@ -438,14 +438,15 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 			if (!m_chat.window)
 				new GameChatMenu(this, m_chat, *m_chatProvider);
 
-			dynamic_cast<GameChatMenu &>(*m_chat.window).enter_chat_message();
+			ref_cast<GameChatMenu, UI::UniqueWindow>(*m_chat.window)
+				.enter_chat_message();
 			return true;
 
 		case SDLK_F6:
 			if (get_display_flag(dfDebug)) {
 				new GameChatMenu
 					(this, m_debugconsole, *DebugConsole::getChatProvider());
-				dynamic_cast<GameChatMenu &>(*m_debugconsole.window)
+				ref_cast<GameChatMenu, UI::UniqueWindow>(*m_debugconsole.window)
 					.enter_chat_message(false);
 			}
 			return true;
@@ -505,6 +506,7 @@ void Interactive_Player::cmdSwitchPlayer(std::vector<std::string> const & args)
 	if
 		(UI::UniqueWindow * const building_statistics_window =
 		 	m_mainm_windows.building_stats.window)
-		dynamic_cast<Building_Statistics_Menu &>(*building_statistics_window)
+		ref_cast<Building_Statistics_Menu, UI::UniqueWindow>
+			(*building_statistics_window)
 			.update();
 }

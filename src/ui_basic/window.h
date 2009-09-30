@@ -101,6 +101,7 @@ private:
 	PictureID m_pic_bottom;
 	PictureID m_pic_background;
 };
-};
+
+}
 
 #endif

@@ -47,6 +47,6 @@ private:
 	Time m_time;
 };
 
-};
+}
 
 #endif

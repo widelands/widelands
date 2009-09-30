@@ -138,4 +138,5 @@ void Radiogroup::set_state(int32_t const state) {
 	changed.call();
 	changedto.call(state);
 }
-};
+
+}

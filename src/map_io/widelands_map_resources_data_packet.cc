@@ -150,4 +150,4 @@ throw (_wexception)
 	fw.Write(fs, "binary/resource");
 }
 
-};
+}

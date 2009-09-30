@@ -307,4 +307,4 @@ int32_t WL_Map_Loader::load_map_complete
 	return 0;
 }
 
-};
+}

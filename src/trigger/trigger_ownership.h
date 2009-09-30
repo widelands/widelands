@@ -42,6 +42,6 @@ struct Trigger_Ownership : public Trigger_Player_Area {
 	void Write(Section &, Editor_Game_Base const &) const;
 };
 
-};
+}
 
 #endif

@@ -28,7 +28,7 @@
 namespace UI {
 struct EditBox;
 template <typename T, typename ID> struct Callback_IDButton;
-};
+}
 
 /**
  * Show a small modal dialog allowing the user to enter

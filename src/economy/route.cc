@@ -57,7 +57,7 @@ Flag & Route::get_flag
 	(Editor_Game_Base & egbase, std::vector<Flag *>::size_type const idx)
 {
 	assert(idx < m_route.size());
-	return dynamic_cast<Flag &>(*m_route[idx].get(egbase));
+	return *m_route[idx].get(egbase);
 }
 
 /**

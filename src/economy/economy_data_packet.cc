@@ -102,4 +102,4 @@ void EconomyDataPacket::Write(FileWrite & fw)
 	fw.Unsigned32(m_eco->m_request_timerid);
 }
 
-};
+}

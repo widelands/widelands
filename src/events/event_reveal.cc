@@ -45,4 +45,4 @@ void Event_Reveal::Write(Section & s, Editor_Game_Base &) const {
 	s.set_string("entry",   reveal);
 }
 
-};
+}

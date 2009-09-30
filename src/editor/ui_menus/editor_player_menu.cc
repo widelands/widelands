@@ -101,7 +101,8 @@ void Editor_Player_Menu::update() {
 		return;
 
 	Widelands::Map & map =
-		dynamic_cast<const Editor_Interactive &>(*get_parent()).egbase().map();
+		ref_cast<Editor_Interactive const, UI::Panel const>(*get_parent())
+		.egbase().map();
 	Widelands::Player_Number const nr_players = map.get_nrplayers();
 	{
 		assert(nr_players <= 99); //  2 decimal digits
@@ -186,7 +187,7 @@ void Editor_Player_Menu::update() {
 
 void Editor_Player_Menu::clicked_add_player() {
 	Editor_Interactive & parent =
-		dynamic_cast<Editor_Interactive &>(*get_parent());
+		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 	Widelands::Map & map = parent.egbase().map();
 	Widelands::Player_Number const nr_players = map.get_nrplayers() + 1;
 	assert(nr_players <= MAX_PLAYERS);
@@ -209,7 +210,7 @@ void Editor_Player_Menu::clicked_add_player() {
 
 void Editor_Player_Menu::clicked_remove_last_player() {
 	Editor_Interactive & parent =
-		dynamic_cast<Editor_Interactive &>(*get_parent());
+		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 	Widelands::Map & map = parent.egbase().map();
 	Widelands::Player_Number const old_nr_players = map.get_nrplayers();
 	Widelands::Player_Number const nr_players     = old_nr_players - 1;
@@ -262,7 +263,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
  */
 void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 	Editor_Interactive & parent =
-		dynamic_cast<Editor_Interactive &>(*get_parent());
+		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 	if (not parent.is_player_tribe_referenced(n + 1)) {
 		std::string t = m_plr_set_tribes_buts[n]->get_title();
 		if (!Widelands::Tribe_Descr::exists_tribe(t))
@@ -295,7 +296,7 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
  */
 void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 	Editor_Interactive & parent =
-		dynamic_cast<Editor_Interactive &>(*get_parent());
+		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 	//  jump to the current node
 	Widelands::Map & map = parent.egbase().map();
 	if (Widelands::Coords const sp = map.get_starting_pos(n))
@@ -323,7 +324,7 @@ void Editor_Player_Menu::name_changed(int32_t m) {
 	//  Player name has been changed.
 	std::string text = m_plr_names[m]->text();
 	Editor_Interactive & parent =
-		dynamic_cast<Editor_Interactive &>(*get_parent());
+		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 	Widelands::Map & map = parent.egbase().map();
 	if (text == "") {
 		text = map.get_scenario_player_name(m + 1);

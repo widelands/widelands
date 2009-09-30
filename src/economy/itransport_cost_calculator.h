@@ -31,8 +31,7 @@ namespace Widelands {
  * At the time of this writing, Map implements all of this functionality
  * but most economy code doesn't need all of maps functionality
  */
-class ITransportCostCalculator {
-public:
+struct ITransportCostCalculator {
 	virtual ~ITransportCostCalculator() {}
 
 	virtual int32_t calc_cost_estimate(Coords, Coords) const = 0;

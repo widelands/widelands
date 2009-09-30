@@ -25,6 +25,7 @@
 #include "panel.h"
 
 namespace UI {
+
 /**
  * This defines a non responsive (to clicks) text area, where a text
  * can easily be printed
@@ -79,6 +80,7 @@ private:
 	int32_t     m_fontsize;
 	RGBColor    m_fcolor;
 };
-};
+
+}
 
 #endif

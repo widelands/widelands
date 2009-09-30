@@ -49,6 +49,6 @@ private:
 	uint8_t m_player_nr;
 };
 
-};
+}
 
 #endif

@@ -75,4 +75,4 @@ void Game_Saver::save() throw (_wexception) {
 	log(" done\n");
 }
 
-};
+}

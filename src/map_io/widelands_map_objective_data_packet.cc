@@ -102,4 +102,4 @@ throw (_wexception)
 	prof.write("objective", false, fs);
 }
 
-};
+}

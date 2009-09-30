@@ -72,6 +72,6 @@ protected:
 	State m_state;
 };
 
-};
+}
 
 #endif

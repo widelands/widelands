@@ -35,7 +35,6 @@
 #include "wexception.h"
 #include "logic/worker.h"
 
-
 namespace Widelands {
 
 Map_Object_Descr g_flag_descr("flag", "Flag");
@@ -80,7 +79,7 @@ Flag::~Flag()
  * Create a flag at the given location
 */
 Flag::Flag
-	(Editor_Game_Base & egbase, Player & owning_player, Coords const coords)
+	(Game & game, Player & owning_player, Coords const coords)
 	:
 	PlayerImmovable       (g_flag_descr),
 	m_anim                (0),
@@ -97,15 +96,15 @@ Flag::Flag
 	set_flag_position(coords);
 
 
-	upcast(Road, road, egbase.map().get_immovable(coords));
+	upcast(Road, road, game.map().get_immovable(coords));
 	//  we split a road, or a new, standalone flag is created
 	(road ? road->get_economy() : new Economy(owning_player))->add_flag(*this);
 
 	if (road)
-		road->presplit(egbase, coords);
-	init(egbase);
+		road->presplit(game, coords);
+	init(game);
 	if (road)
-		road->postsplit(egbase, *this);
+		road->postsplit(game, *this);
 }
 
 void Flag::set_flag_position(Coords coords) {
@@ -426,7 +425,7 @@ WareInstance * Flag::fetch_pending_item(Game & game, PlayerImmovable & dest)
  * Force a removal of the given item from this flag.
  * Called by \ref WareInstance::cleanup()
 */
-void Flag::remove_item(Editor_Game_Base & egbase, WareInstance * const item)
+void Flag::remove_item(Game & game, WareInstance * const item)
 {
 	for (int32_t i = 0; i < m_item_filled; ++i) {
 		if (m_items[i].item != item)
@@ -437,8 +436,7 @@ void Flag::remove_item(Editor_Game_Base & egbase, WareInstance * const item)
 			(&m_items[i], &m_items[i + 1],
 			 sizeof(m_items[0]) * (m_item_filled - i));
 
-		if (upcast(Game, game, &egbase))
-			wake_up_capacity_queue(*game);
+		wake_up_capacity_queue(game);
 
 		return;
 	}
@@ -508,7 +506,7 @@ void Flag::call_carrier
 	}
 
 	// Deal with the normal (flag) case
-	dynamic_cast<Flag const &>(*nextstep);
+	ref_cast<Flag const, PlayerImmovable const>(*nextstep);
 
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Road * const road = get_road(dir);
@@ -587,8 +585,8 @@ void Flag::cleanup(Editor_Game_Base & egbase)
 	while (m_item_filled) {
 		WareInstance & item = *m_items[--m_item_filled].item;
 
-		item.set_location(dynamic_cast<Game &>(egbase), 0);
-		item.destroy     (dynamic_cast<Game &>(egbase));
+		item.set_location(ref_cast<Game, Editor_Game_Base>(egbase), 0);
+		item.destroy     (ref_cast<Game, Editor_Game_Base>(egbase));
 	}
 
 	//molog("  items destroyed\n");
@@ -659,7 +657,7 @@ void Flag::flag_job_request_callback
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	Flag & flag = dynamic_cast<Flag &>(target);
+	Flag & flag = ref_cast<Flag, PlayerImmovable>(target);
 
 	assert(w);
 

@@ -70,4 +70,4 @@ Event::State Event_Reveal_Objective::run(Game &) {
 	return m_state = DONE;
 }
 
-};
+}

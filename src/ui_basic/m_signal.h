@@ -93,6 +93,7 @@ public:
 	}
 	void call(T1 t1, T2 t2) {if (_fn) (_obj->*_fn)(t1, t2);}
 };
-};
+
+}
 
 #endif

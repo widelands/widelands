@@ -40,6 +40,6 @@ struct Map_Extradata_Data_Packet : public Map_Data_Packet {
 		throw (_wexception);
 };
 
-};
+}
 
 #endif

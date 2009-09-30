@@ -233,6 +233,7 @@ protected:
 		(_callback_argument_this.*_callback_function)(_callback_argument_id);
 	}
 };
-};
+
+}
 
 #endif

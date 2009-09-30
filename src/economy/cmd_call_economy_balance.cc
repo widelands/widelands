@@ -101,4 +101,4 @@ void Cmd_Call_Economy_Balance::Write
 	fw.Unsigned32(m_timerid);
 }
 
-};
+}

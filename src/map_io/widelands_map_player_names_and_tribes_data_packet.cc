@@ -106,4 +106,4 @@ throw (_wexception)
 	prof.write("player_names", false, fs);
 }
 
-};
+}

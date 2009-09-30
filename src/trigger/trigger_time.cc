@@ -74,4 +74,4 @@ void Trigger_Time::reset_trigger       (Game const &) {
 	set_trigger(false);
 }
 
-};
+}

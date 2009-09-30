@@ -469,4 +469,5 @@ bool Scrollbar::handle_mousemove
 		set_knob_pos((m_horizontal ? mx : my) - m_knob_grabdelta);
 	return true;
 }
-};
+
+}

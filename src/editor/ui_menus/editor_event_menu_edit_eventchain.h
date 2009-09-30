@@ -26,13 +26,13 @@ struct Editor_Interactive;
 namespace Widelands {
 struct Event;
 struct EventChain;
-};
+}
 namespace UI {
 template <typename T> struct Listselect;
 template <typename T> struct Callback_Button;
 struct Checkbox;
 struct EditBox;
-};
+}
 
 /**
  * This is a modal box - The user must end this first

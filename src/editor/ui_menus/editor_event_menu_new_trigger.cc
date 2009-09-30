@@ -35,7 +35,7 @@
 using namespace Widelands::Trigger_Factory;
 
 inline Editor_Interactive & Editor_Event_Menu_New_Trigger::eia() {
-	return dynamic_cast<Editor_Interactive &>(*get_parent());
+	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 }
 
 

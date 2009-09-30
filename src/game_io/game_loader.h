@@ -46,6 +46,6 @@ private:
 	Game       & m_game;
 };
 
-};
+}
 
 #endif

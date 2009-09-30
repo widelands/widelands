@@ -316,4 +316,4 @@ void Multiline_Editbox::CalcLinePos()
 		0 : (m_textheight - get_h()) * lbtt / (lbtb + lbtt);
 }
 
-};
+}

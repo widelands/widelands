@@ -45,6 +45,6 @@ struct Map_Player_Names_And_Tribes_Data_Packet : public Map_Data_Packet {
 	void Pre_Read(FileSystem &, Map *, bool skip);
 };
 
-};
+}
 
 #endif

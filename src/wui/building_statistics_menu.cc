@@ -62,7 +62,7 @@
 
 
 inline Interactive_Player & Building_Statistics_Menu::iplayer() const {
-	return dynamic_cast<Interactive_Player &>(*get_parent());
+	return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
 }
 
 
@@ -324,7 +324,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
  */
 void Building_Statistics_Menu::table_changed(uint32_t) {update();}
 
-namespace Columns {enum {Icon, Name, Size, Prod, Owned, Build};};
+namespace Columns {enum {Icon, Name, Size, Prod, Owned, Build};}
 
 /*
  * Update table
@@ -379,8 +379,9 @@ void Building_Statistics_Menu::update() {
 				++nr_owned;
 				if (productionsite)
 					total_prod +=
-						dynamic_cast<Widelands::ProductionSite &>
-						(*map[vec[l].pos].get_immovable()).get_statistics_percent();
+						ref_cast<Widelands::ProductionSite, Widelands::BaseImmovable>
+							(*map[vec[l].pos].get_immovable())
+						.get_statistics_percent();
 			}
 		}
 

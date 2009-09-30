@@ -362,5 +362,4 @@ void EditBox::draw(RenderTarget & dst)
 		 std::numeric_limits<uint32_t>::max());
 }
 
-
-};
+}

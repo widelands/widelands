@@ -31,7 +31,7 @@
 #include "profile/profile.h"
 
 Interactive_GameBase & Game_Main_Menu_Save_Game::igbase() {
-	return dynamic_cast<Interactive_GameBase &>(*get_parent());
+	return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent());
 }
 
 
@@ -211,7 +211,7 @@ struct SaveWarnMessageBox : public UI::WLMessageBox {
 	{}
 
 	Game_Main_Menu_Save_Game & menu_save_game() {
-		return dynamic_cast<Game_Main_Menu_Save_Game &>(*get_parent());
+		return ref_cast<Game_Main_Menu_Save_Game, UI::Panel>(*get_parent());
 	}
 
 

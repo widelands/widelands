@@ -224,4 +224,4 @@ void Map_Building_Data_Packet::read_priorities
 	}
 }
 
-};
+}

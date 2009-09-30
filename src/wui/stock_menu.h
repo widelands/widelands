@@ -27,7 +27,7 @@
 
 class WaresDisplay;
 struct Interactive_Player;
-namespace Widelands {struct Economy;};
+namespace Widelands {struct Economy;}
 
 /*
  * Shows statistics about all stocks currently in the game of

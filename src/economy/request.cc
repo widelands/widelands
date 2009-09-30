@@ -107,7 +107,7 @@ Request::~Request()
  * them through the data in the file
  */
 void Request::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader * mol)
+	(FileRead & fr, Game & game, Map_Map_Object_Loader * const mol)
 {
 	try {
 		uint16_t const version = fr.Unsigned16();
@@ -169,19 +169,17 @@ void Request::Read
 							 "%u (SOLDIER)}",
 							 what_is, WARE, WORKER, 2);
 					uint32_t const reg = fr.Unsigned32();
-					if (upcast(Game, game, &egbase)) {
-						if (not mol->is_object_known(reg))
-							throw wexception("%u is not known", reg);
-						Transfer * const trans =
-							what_is == WARE ?
-							new Transfer(*game, *this, mol->get<WareInstance>(reg)) :
-							new Transfer(*game, *this, mol->get<Worker>      (reg));
-						trans->set_idle(fr.Unsigned8());
-						m_transfers.push_back(trans);
+					if (not mol->is_object_known(reg))
+						throw wexception("%u is not known", reg);
+					Transfer * const trans =
+						what_is == WARE ?
+						new Transfer(game, *this, mol->get<WareInstance>(reg)) :
+						new Transfer(game, *this, mol->get<Worker>      (reg));
+					trans->set_idle(fr.Unsigned8());
+					m_transfers.push_back(trans);
 
-						if (fr.Unsigned8())
-							m_requirements.Read (fr, egbase, mol);
-					}
+					if (fr.Unsigned8())
+						m_requirements.Read (fr, game, mol);
 				} catch (_wexception const & e) {
 					throw wexception("transfer %u: %s", i, e.what());
 				}
@@ -199,8 +197,7 @@ void Request::Read
  * Write this request to a file
  */
 void Request::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver * mos)
-	const
+	(FileWrite & fw, Game & game, Map_Map_Object_Saver * mos) const
 {
 	fw.Unsigned16(REQUEST_VERSION);
 
@@ -239,7 +236,7 @@ void Request::Write
 		fw.Unsigned8(trans.is_idle());
 
 		fw.Unsigned8(true); //  for version compatibility
-		m_requirements.Write (fw, egbase, mos);
+		m_requirements.Write (fw, game, mos);
 	}
 }
 

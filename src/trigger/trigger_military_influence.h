@@ -42,6 +42,6 @@ private:
 	bool require_highest;
 };
 
-};
+}
 
 #endif

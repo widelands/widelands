@@ -52,6 +52,6 @@ private:
 	Map_Map_Object_Loader * m_mol;
 };
 
-};
+}
 
 #endif

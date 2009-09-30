@@ -56,6 +56,7 @@ private:
 	uint32_t m_maxchars;
 	bool     m_needs_update;
 };
-};
+
+}
 
 #endif

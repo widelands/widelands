@@ -127,7 +127,8 @@ void WaresQueue::request_callback
 #endif
 	 PlayerImmovable & target)
 {
-	WaresQueue & wq = dynamic_cast<Building &>(target).waresqueue(ware);
+	WaresQueue & wq =
+		ref_cast<Building, PlayerImmovable>(target).waresqueue(ware);
 
 	assert(!w); // WaresQueue can't hold workers
 	assert(wq.m_filled < wq.m_size);
@@ -206,8 +207,7 @@ void WaresQueue::set_consume_interval(const uint32_t time) throw ()
  * Read and write
  */
 #define WARES_QUEUE_DATA_PACKET_VERSION 1
-void WaresQueue::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver * os)
+void WaresQueue::Write(FileWrite & fw, Game & game, Map_Map_Object_Saver * os)
 {
 
 	fw.Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
@@ -220,14 +220,13 @@ void WaresQueue::Write
 	fw.Signed32(m_consume_interval);
 	if (m_request) {
 		fw.Unsigned8(1);
-		m_request->Write(fw, egbase, os);
+		m_request->Write(fw, game, os);
 	} else
 		fw.Unsigned8(0);
 }
 
 
-void WaresQueue::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader * ol)
+void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader * ol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION) {
@@ -243,7 +242,7 @@ void WaresQueue::Read
 					 Ware_Index::First(),
 					 WaresQueue::request_callback,
 					 Request::WORKER);
-			m_request->Read(fr, egbase, ol);
+			m_request->Read(fr, game, ol);
 		} else
 			m_request = 0;
 

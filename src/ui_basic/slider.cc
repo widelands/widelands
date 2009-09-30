@@ -441,4 +441,4 @@ bool VerticalSlider::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 }
 
 
-};
+}

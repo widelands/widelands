@@ -87,7 +87,7 @@ void Multiline_Textarea::set_text(const std::string & text) {
 /**
  * Change alignment of the textarea
 */
-void Multiline_Textarea::set_align(Align align)
+void Multiline_Textarea::set_align(Align const align)
 {
 	//  do not allow vertical alignment as it does not make sense
 	m_align = static_cast<Align>(align & Align_Horizontal);
@@ -97,7 +97,7 @@ void Multiline_Textarea::set_align(Align align)
 /**
  * Scroll to the given position.
 */
-void Multiline_Textarea::set_scrollpos(int32_t pixels)
+void Multiline_Textarea::set_scrollpos(int32_t const pixels)
 {
 	m_textpos = pixels;
 
@@ -168,7 +168,7 @@ void Multiline_Textarea::draw_scrollbar() {
 }
 
 bool Multiline_Textarea::handle_mousepress
-		(const Uint8 btn, int32_t x, int32_t y)
+	(Uint8 const btn, int32_t const x, int32_t const y)
 {
 	return
 		btn == SDL_BUTTON_WHEELUP or btn == SDL_BUTTON_WHEELDOWN ?
@@ -184,4 +184,5 @@ int32_t Multiline_Textarea::get_halign() {
 		x += get_w();
 	return x;
 }
-};
+
+}

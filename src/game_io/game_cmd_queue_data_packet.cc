@@ -145,4 +145,4 @@ throw (_wexception)
 	fw.Write(fs, "binary/cmd_queue");
 }
 
-};
+}

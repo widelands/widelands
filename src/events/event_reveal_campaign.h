@@ -38,6 +38,6 @@ struct Event_Reveal_Campaign : public Event_Reveal {
 	void Write(Section &, Editor_Game_Base &) const;
 };
 
-};
+}
 
 #endif

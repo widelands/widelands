@@ -121,5 +121,4 @@ private:
 
 extern AnimationManager g_anim;
 
-
 #endif

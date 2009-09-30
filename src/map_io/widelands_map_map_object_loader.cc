@@ -58,4 +58,4 @@ int32_t Map_Map_Object_Loader::get_nr_unloaded_objects()
 	return result;
 }
 
-};
+}

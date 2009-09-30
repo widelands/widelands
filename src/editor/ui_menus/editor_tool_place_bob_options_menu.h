@@ -27,7 +27,7 @@
 #include <vector>
 
 class Editor_Place_Bob_Tool;
-namespace UI {struct Checkbox;};
+namespace UI {struct Checkbox;}
 
 struct Editor_Tool_Place_Bob_Options_Menu : public Editor_Tool_Options_Menu {
 	Editor_Tool_Place_Bob_Options_Menu

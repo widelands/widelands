@@ -76,4 +76,4 @@ throw (_wexception)
 	m_mos = m_wms->get_map_object_saver();
 }
 
-};
+}

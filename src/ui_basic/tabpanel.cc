@@ -299,4 +299,5 @@ bool Tab_Panel::handle_mouserelease(Uint8, int32_t, int32_t)
 {
 	return false;
 }
-};
+
+}

@@ -129,6 +129,6 @@ size_t nr_trigger_types() {
 		sizeof(TRIGGER_TYPE_DESCRIPTIONS) / sizeof(*TRIGGER_TYPE_DESCRIPTIONS);
 }
 
-};
+}
 
-};
+}

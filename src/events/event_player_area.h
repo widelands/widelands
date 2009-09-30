@@ -47,6 +47,6 @@ protected:
 	Player_Area<> m_player_area;
 };
 
-};
+}
 
 #endif

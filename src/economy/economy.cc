@@ -35,10 +35,11 @@
 #include "wexception.h"
 
 namespace Widelands {
+
 Economy::Economy(Player & player) :
 	m_owner(player),
-m_rebuilding(false),
-m_request_timerid(0)
+	m_rebuilding     (false),
+	m_request_timerid(0)
 {
 	Tribe_Descr const & tribe = player.tribe();
 	Ware_Index const nr_wares = tribe.get_nrwares();
@@ -790,38 +791,36 @@ void Economy::balance_requestsupply(uint32_t const timerid)
 	RSPairStruct rsps;
 	rsps.nexttimer = -1;
 
-	if (upcast(Game, game, &m_owner.egbase())) {
+	//  Try to fulfill non-idle Requests.
+	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+	_process_requests(game, rsps);
 
-		//  Try to fulfill non-idle Requests.
-		_process_requests(*game, rsps);
+	//  Now execute request/supply pairs.
+	while (rsps.queue.size()) {
+		RequestSupplyPair rsp = rsps.queue.top();
 
-		//  Now execute request/supply pairs.
-		while (rsps.queue.size()) {
-			RequestSupplyPair rsp = rsps.queue.top();
+		rsps.queue.pop();
 
-			rsps.queue.pop();
-
-			if
-				(!rsp.request               ||
-				 !rsp.supply                ||
-				 !_has_request(*rsp.request) ||
-				 !rsp.supply->nr_supplies(*game, *rsp.request))
-			{
-				rsps.nexttimer = 200;
-				continue;
-			}
-
-			rsp.request->start_transfer(*game, *rsp.supply);
-			rsp.request->set_last_request_time(owner().egbase().get_gametime());
-
-			//  for multiple wares
-			if (rsp.request && _has_request(*rsp.request))
-				rsps.nexttimer = 200;
+		if
+			(!rsp.request                ||
+			 !rsp.supply                 ||
+			 !_has_request(*rsp.request) ||
+			 !rsp.supply->nr_supplies(game, *rsp.request))
+		{
+			rsps.nexttimer = 200;
+			continue;
 		}
 
-		if (rsps.nexttimer > 0) //  restart the timer, if necessary
-			_start_request_timer(rsps.nexttimer);
+		rsp.request->start_transfer(game, *rsp.supply);
+		rsp.request->set_last_request_time(game.get_gametime());
+
+		//  for multiple wares
+		if (rsp.request && _has_request(*rsp.request))
+			rsps.nexttimer = 200;
 	}
+
+	if (rsps.nexttimer > 0) //  restart the timer, if necessary
+		_start_request_timer(rsps.nexttimer);
 }
 
 }

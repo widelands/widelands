@@ -369,7 +369,7 @@ void Main_Menu_New_Random_Map::button_clicked(int32_t n) {
 
 void Main_Menu_New_Random_Map::clicked_create_map() {
 	Editor_Interactive & eia =
-		dynamic_cast<Editor_Interactive &>(*get_parent());
+		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 	Widelands::Editor_Game_Base & egbase = eia.egbase();
 	Widelands::Map              & map    = egbase.map();
 	UI::ProgressWindow loader;

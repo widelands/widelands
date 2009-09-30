@@ -23,12 +23,12 @@
 #include "ui_basic/window.h"
 
 struct Editor_Interactive;
-namespace Widelands {namespace Trigger_Factory {struct Type_Descr;};};
+namespace Widelands {namespace Trigger_Factory {struct Type_Descr;};}
 namespace UI {
 struct BaseListselect;
 struct Multiline_Textarea;
 template <typename T> struct Callback_Button;
-};
+}
 
 /**
  * This is a modal box - The user must end this first

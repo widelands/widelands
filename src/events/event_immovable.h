@@ -47,6 +47,6 @@ private:
 	Immovable_Descr const * m_immovable_type;
 };
 
-};
+}
 
 #endif

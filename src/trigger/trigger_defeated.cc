@@ -73,4 +73,4 @@ void Trigger_Defeated::check_set_conditions(Game const & game) {
 	return set_trigger(false);
 }
 
-};
+}

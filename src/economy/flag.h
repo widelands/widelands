@@ -70,7 +70,7 @@ class Flag : public PlayerImmovable, public RoutingNode {
 
 public:
 	Flag(); /// empty flag for savegame loading
-	Flag(Editor_Game_Base &, Player & owner, Coords); /// create a new flag
+	Flag(Game &, Player & owner, Coords); /// create a new flag
 	virtual ~Flag();
 
 
@@ -116,7 +116,7 @@ public:
 	void call_carrier(Game &, WareInstance &, PlayerImmovable * nextstep);
 	void update_items(Game &, Flag * other);
 
-	void remove_item(Editor_Game_Base &, WareInstance *);
+	void remove_item(Game &, WareInstance *);
 
 	void add_flag_job
 		(Game &, Ware_Index workerware, std::string const & programname);
@@ -161,4 +161,5 @@ private:
 };
 
 }
+
 #endif

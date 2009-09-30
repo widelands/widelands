@@ -100,6 +100,7 @@ private:
 	PictureID m_pic_background;
 	PictureID m_pic_buttons;
 };
-};
+
+}
 
 #endif

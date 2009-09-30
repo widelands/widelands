@@ -35,6 +35,6 @@ struct Game_Game_Class_Data_Packet : public Game_Data_Packet {
 		throw (_wexception);
 };
 
-};
+}
 
 #endif

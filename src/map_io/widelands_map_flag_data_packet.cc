@@ -20,7 +20,7 @@
 #include "widelands_map_flag_data_packet.h"
 
 #include "economy/flag.h"
-#include "logic/editor_game_base.h"
+#include "logic/game.h"
 #include "map.h"
 #include "logic/player.h"
 #include "upcast.h"
@@ -72,7 +72,9 @@ throw (_wexception)
 							ol->register_object<Flag>
 								(serial,
 								 *new Flag
-								 	(egbase, egbase.player(owner), Coords(x, y)));
+								 	(ref_cast<Game, Editor_Game_Base>(egbase),
+								 	 egbase.player(owner),
+								 	 Coords(x, y)));
 						} catch (_wexception const & e) {
 							throw wexception
 								("%u (at (%i, %i), owned by player %u): %s",
@@ -118,4 +120,4 @@ throw (_wexception)
 	fw.Write(fs, "binary/flag");
 }
 
-};
+}

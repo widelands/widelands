@@ -328,4 +328,5 @@ bool Icon_Grid::handle_mouserelease(const Uint8 btn, int32_t x, int32_t y) {
 
 	return true;
 }
-};
+
+}

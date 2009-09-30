@@ -25,12 +25,12 @@
 #include "ui_basic/window.h"
 
 struct Editor_Interactive;
-namespace Widelands {struct Event_Unhide_Area;};
+namespace Widelands {struct Event_Unhide_Area;}
 
 namespace UI {
 struct EditBox;
 struct Textarea;
-};
+}
 
 /**
  * This is a modal box - The user must end this first

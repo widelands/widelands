@@ -21,8 +21,7 @@
 
 #define WIDELANDS_PROTOCOL 1
 
-enum NetworkOpcodes
-{
+enum NetworkOpcodes {
 	op_greeting = 1,
 	op_request_ip = 2,
 	op_reply_ip = 3,

@@ -47,6 +47,6 @@ protected:
 	void write_priorities(Building const &, FileWrite &);
 };
 
-};
+}
 
 #endif

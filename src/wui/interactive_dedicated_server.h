@@ -25,7 +25,7 @@
 #include "interactive_gamebase.h"
 #include <SDL_keyboard.h>
 
-namespace Widelands {struct Game;};
+namespace Widelands {struct Game;}
 
 /**
  * This class is used for interactive handling of a dedicated server.

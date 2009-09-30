@@ -38,6 +38,6 @@ struct Map_Resources_Data_Packet : public Map_Data_Packet {
 		throw (_wexception);
 };
 
-};
+}
 
 #endif

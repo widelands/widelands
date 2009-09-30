@@ -42,6 +42,6 @@ struct Event_Conquer_Area : public Event_Player_Area {
 	State run(Game &);
 };
 
-};
+}
 
 #endif

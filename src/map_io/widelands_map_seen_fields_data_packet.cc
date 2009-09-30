@@ -113,4 +113,4 @@ throw (_wexception)
 	fw.Write(fs, "binary/seen_fields");
 }
 
-};
+}

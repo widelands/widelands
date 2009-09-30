@@ -153,7 +153,7 @@ void Main_Menu_Load_Map::clicked_ok() {
 		m_mapfiles.clear();
 		fill_list();
 	} else {
-		dynamic_cast<Editor_Interactive &>(*get_parent()).load(filename);
+		ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).load(filename);
 		die();
 	}
 }

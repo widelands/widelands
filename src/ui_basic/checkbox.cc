@@ -169,4 +169,5 @@ void Checkbox::clicked()
 	set_state(!get_state());
 	play_click();
 }
-};
+
+}

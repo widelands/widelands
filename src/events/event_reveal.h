@@ -36,6 +36,6 @@ protected:
 	std::string reveal;
 };
 
-};
+}
 
 #endif

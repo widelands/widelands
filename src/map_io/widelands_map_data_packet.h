@@ -53,6 +53,6 @@ private:
 	bool m_skip;
 };
 
-};
+}
 
 #endif

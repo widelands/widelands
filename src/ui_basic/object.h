@@ -21,6 +21,7 @@
 #define UI_OBJECT_H
 
 namespace UI {
+
 /**
  * Serves as a base class for UI related objects. The only purpose is
  * to provide the base class for signal function pointers.
@@ -38,6 +39,7 @@ private:
 	Object & operator= (Object const &);
 	explicit Object    (Object const &);
 };
-};
+
+}
 
 #endif

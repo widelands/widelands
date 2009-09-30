@@ -38,7 +38,7 @@ int32_t Trigger_Building::option_menu(Editor_Interactive & eia) {
 
 
 inline Editor_Interactive & Trigger_Building_Option_Menu::eia() {
-	return dynamic_cast<Editor_Interactive &>(*get_parent());
+	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 }
 
 

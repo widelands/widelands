@@ -90,4 +90,4 @@ Event::State Event_Allow_Building::run(Game & game) {
 	return m_state = DONE;
 }
 
-};
+}

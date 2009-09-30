@@ -55,6 +55,6 @@ private:
 	Map_Map_Object_Saver * m_mos;
 };
 
-};
+}
 
 #endif

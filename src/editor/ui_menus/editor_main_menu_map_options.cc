@@ -32,7 +32,7 @@
 #include <cstdio>
 
 inline Editor_Interactive & Main_Menu_Map_Options::eia() {
-	return dynamic_cast<Editor_Interactive &>(*get_parent());
+	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 }
 
 
@@ -153,6 +153,6 @@ void Main_Menu_Map_Options::editbox_changed() {
 
 void Main_Menu_Map_Options::Enable_Set_Origin_Tool_Button::clicked() const {
 	Editor_Interactive & eia =
-		dynamic_cast<Main_Menu_Map_Options &>(*get_parent()).eia();
+		ref_cast<Main_Menu_Map_Options, UI::Panel>(*get_parent()).eia();
 	eia.select_tool(eia.tools.set_origin, Editor_Tool::First);
 }

@@ -237,7 +237,7 @@ void DefaultAI::late_initialization ()
 		// Read all interesting data from ware producing buildings
 		if (typeid(bld) == typeid(ProductionSite_Descr)) {
 			const ProductionSite_Descr & prod =
-				dynamic_cast<ProductionSite_Descr const &>(bld);
+				ref_cast<ProductionSite_Descr const, Building_Descr const>(bld);
 
 			bo.type =
 				bld.get_ismine() ? BuildingObserver::MINE :
@@ -1787,7 +1787,7 @@ void DefaultAI::gain_building (Building & b)
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
 		BuildingObserver & target_bo =
 			get_building_observer
-				(dynamic_cast<ConstructionSite &>(b)
+				(ref_cast<ConstructionSite, Building>(b)
 				 .building().name().c_str());
 		++target_bo.cnt_under_construction;
 		++total_constructionsites;
@@ -1797,7 +1797,7 @@ void DefaultAI::gain_building (Building & b)
 
 		if (bo.type == BuildingObserver::PRODUCTIONSITE) {
 			productionsites.push_back (ProductionSiteObserver());
-			productionsites.back().site = &dynamic_cast<ProductionSite &>(b);
+			productionsites.back().site = &ref_cast<ProductionSite, Building>(b);
 			productionsites.back().bo = &bo;
 
 			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
@@ -1807,7 +1807,7 @@ void DefaultAI::gain_building (Building & b)
 				++wares[bo.inputs[i]].consumers;
 		} else if (bo.type == BuildingObserver::MINE) {
 			mines.push_back (ProductionSiteObserver());
-			mines.back().site = &dynamic_cast<ProductionSite &>(b);
+			mines.back().site = &ref_cast<ProductionSite, Building>(b);
 			mines.back().bo = &bo;
 
 			for (uint32_t i = 0; i < bo.outputs.size(); ++i)
@@ -1817,7 +1817,7 @@ void DefaultAI::gain_building (Building & b)
 				++wares[bo.inputs[i]].consumers;
 		} else if (bo.type == BuildingObserver::MILITARYSITE) {
 			militarysites.push_back (MilitarySiteObserver());
-			militarysites.back().site = &dynamic_cast<MilitarySite &>(b);
+			militarysites.back().site = &ref_cast<MilitarySite, Building>(b);
 			militarysites.back().bo = &bo;
 			militarysites.back().checks = bo.desc->get_size();
 		} else if (bo.type == BuildingObserver::WAREHOUSE)
@@ -1833,7 +1833,7 @@ void DefaultAI::lose_building (Building const & b)
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
 		BuildingObserver &target_bo =
 			get_building_observer
-				(dynamic_cast<ConstructionSite const &>(b)
+				(ref_cast<ConstructionSite const, Building const>(b)
 				 .building().name().c_str());
 		--target_bo.cnt_under_construction;
 		--total_constructionsites;

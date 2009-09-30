@@ -347,4 +347,4 @@ bool SpinBox::has_replacement(int32_t value)
 	return findReplacement(value) >= 0;
 }
 
-};
+}

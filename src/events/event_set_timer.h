@@ -61,6 +61,6 @@ private:
 	Duration       m_duration;
 };
 
-};
+}
 
 #endif

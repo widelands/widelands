@@ -70,6 +70,6 @@ private:
 	Soldier_Counts  m_soldier_counts;
 };
 
-};
+}
 
 #endif

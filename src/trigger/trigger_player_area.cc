@@ -78,4 +78,4 @@ void Trigger_Player_Area::Write(Section & s, Editor_Game_Base const &) const {
 		s.set_int("count",    m_count);
 }
 
-};
+}

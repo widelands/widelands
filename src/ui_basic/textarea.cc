@@ -178,4 +178,5 @@ void Textarea::expand()
 	set_pos(Point(x, y));
 	set_size(m_multiline ? get_w() : w, h);
 }
-};
+
+}

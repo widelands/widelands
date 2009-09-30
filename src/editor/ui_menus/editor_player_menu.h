@@ -36,7 +36,7 @@ namespace UI {
 struct Textarea;
 struct EditBox;
 template <typename T, typename ID> struct Callback_IDButton;
-};
+}
 
 struct Editor_Player_Menu : public UI::UniqueWindow {
 	Editor_Player_Menu

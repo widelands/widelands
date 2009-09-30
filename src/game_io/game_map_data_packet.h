@@ -54,6 +54,6 @@ private:
 	WL_Map_Loader         * m_wml;
 };
 
-};
+}
 
 #endif

@@ -46,6 +46,6 @@ private:
 		 WareInstance   const &);
 };
 
-};
+}
 
 #endif

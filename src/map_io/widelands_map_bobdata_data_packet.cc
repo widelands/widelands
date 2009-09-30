@@ -653,7 +653,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 			if (uint32_t const carried_item_serial = fr.Unsigned32()) {
 				try {
 					worker.m_carried_item =
-						&ol->get<Map_Object>(carried_item_serial);
+						&ol->get<WareInstance>(carried_item_serial);
 				} catch (_wexception const & e) {
 					throw wexception
 						("carried item (%u): %s", carried_item_serial, e.what());
@@ -667,13 +667,13 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 			worker.m_current_exp = fr.Signed32();
 
 			Economy * economy = 0;
-			if (Map_Object * const location = worker.m_location.get(egbase))
-				economy = dynamic_cast<PlayerImmovable &>(*location).get_economy();
+			if (PlayerImmovable * const location = worker.m_location.get(egbase))
+				economy = location->get_economy();
 			worker.set_economy(economy);
 			if
-				(Map_Object * const carried_item =
+				(WareInstance * const carried_item =
 				 	worker.m_carried_item.get(egbase))
-				dynamic_cast<WareInstance &>(*carried_item).set_economy(economy);
+				carried_item->set_economy(economy);
 
 			if (oldsoldier_fix)
 				if (upcast(Soldier, soldier, &worker))
@@ -681,8 +681,10 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						if (upcast(MilitarySite, ms, soldier->get_location(egbase)))
 							if (soldier->get_position() == ms->get_position()) {
 								// Fix behaviour of soldiers in buildings
-								soldier->reset_tasks(*game);
-								soldier->start_task_buildingwork(*game);
+								soldier->reset_tasks
+									(ref_cast<Game, Editor_Game_Base>(egbase));
+								soldier->start_task_buildingwork
+									(ref_cast<Game, Editor_Game_Base>(egbase));
 								ms->update_soldier_request();
 							}
 		} else
@@ -899,4 +901,4 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 	fw.Signed32(worker.m_current_exp);
 }
 
-};
+}

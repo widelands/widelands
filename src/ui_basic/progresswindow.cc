@@ -191,4 +191,4 @@ void ProgressWindow::remove_visualization(IProgressVisualization * instance) {
 		}
 }
 
-};
+}

@@ -28,6 +28,7 @@
 #include <vector>
 
 namespace UI {
+
 /**
  * Arranges clickable pictures of common size in a regular grid.
  *
@@ -112,6 +113,7 @@ private:
 
 	RGBColor          m_selectbox_color;
 };
-};
+
+}
 
 #endif

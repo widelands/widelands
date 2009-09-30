@@ -34,6 +34,6 @@ Editor_Tool_Options_Menu::Editor_Tool_Options_Menu
 
 
 void Editor_Tool_Options_Menu::select_correct_tool() {
-	dynamic_cast<Editor_Interactive &>(*get_parent())
+	ref_cast<Editor_Interactive, UI::Panel>(*get_parent())
 		.select_tool(*m_current_pointer, Editor_Tool::First);
 }

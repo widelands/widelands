@@ -28,7 +28,7 @@ struct Editor_Interactive;
 namespace UI {
 template <typename T, typename ID> struct Callback_IDButton;
 struct Textarea;
-};
+}
 
 /**
  * This is the new map selection menu. It offers

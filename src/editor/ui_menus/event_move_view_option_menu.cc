@@ -37,7 +37,7 @@ using Widelands::Y_Coordinate;
 
 
 inline Editor_Interactive & Event_Move_View_Option_Menu::eia() {
-	return dynamic_cast<Editor_Interactive &>(*get_parent());
+	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 }
 
 

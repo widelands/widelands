@@ -235,4 +235,4 @@ void Map_Saver::save() throw (_wexception) {
 #endif
 }
 
-};
+}

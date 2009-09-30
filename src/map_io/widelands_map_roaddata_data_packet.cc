@@ -22,6 +22,7 @@
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "economy/road.h"
+#include "logic/carrier.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "map.h"
@@ -116,14 +117,14 @@ throw (_wexception)
 
 					//  Now that all rudimentary data is set, init this road. Then
 					//  overwrite the initialization values.
-					road._link_into_flags(egbase);
+					road._link_into_flags(ref_cast<Game, Editor_Game_Base>(egbase));
 
 					road.m_idle_index      = fr.Unsigned32();
 					road.m_desire_carriers = fr.Unsigned32();
 					assert(!road.m_carrier.get(egbase));
 					if (uint32_t const carrier_serial = fr.Unsigned32())
 						try {
-							road.m_carrier = &ol->get<Map_Object>(carrier_serial);
+							road.m_carrier = &ol->get<Carrier>(carrier_serial);
 						} catch (_wexception const & e) {
 							throw wexception
 								("carrier (%u): %s", carrier_serial, e.what());
@@ -133,16 +134,15 @@ throw (_wexception)
 
 					delete road.m_carrier_request; road.m_carrier_request = 0;
 
-					if (fr.Unsigned8()) {
-						if (dynamic_cast<Game const *>(&egbase))
-							(road.m_carrier_request =
-							 	new Request
-							 		(road,
-							 		 Ware_Index::First(),
-							 		 Road::_request_carrier_callback,
-							 		 Request::WORKER))
-							->Read(fr, egbase, ol);
-					} else
+					if (fr.Unsigned8())
+						(road.m_carrier_request =
+						 	new Request
+						 		(road,
+						 		 Ware_Index::First(),
+						 		 Road::_request_carrier_callback,
+						 		 Request::WORKER))
+						->Read(fr, ref_cast<Game, Editor_Game_Base>(egbase), ol);
+					else
 						road.m_carrier_request = 0;
 
 					ol->mark_object_as_loaded(&road);
@@ -205,16 +205,16 @@ throw (_wexception)
 
 				fw.Unsigned32(r->m_desire_carriers);
 
-				if (r->m_carrier.get(egbase)) {
-					assert(os->is_object_known(*r->m_carrier.get(egbase)));
-					fw.Unsigned32
-						(os->get_object_file_index(*r->m_carrier.get(egbase)));
+				if (Carrier const * const carrier = r->m_carrier.get(egbase)) {
+					assert(os->is_object_known(*carrier));
+					fw.Unsigned32(os->get_object_file_index(*carrier));
 				} else
 					fw.Unsigned32(0);
 
 				if (r->m_carrier_request) {
 					fw.Unsigned8(1);
-					r->m_carrier_request->Write(fw, egbase, os);
+					r->m_carrier_request->Write
+						(fw, ref_cast<Game, Editor_Game_Base>(egbase), os);
 				} else
 					fw.Unsigned8(0);
 
@@ -224,4 +224,4 @@ throw (_wexception)
 	fw.Write(fs, "binary/road_data");
 }
 
-};
+}

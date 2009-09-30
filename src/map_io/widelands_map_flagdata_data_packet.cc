@@ -23,7 +23,7 @@
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
-#include "logic/editor_game_base.h"
+#include "logic/game.h"
 #include "map.h"
 #include "logic/player.h"
 #include "upcast.h"
@@ -163,7 +163,8 @@ throw (_wexception)
 										 Ware_Index::First(),
 										 Flag::flag_job_request_callback,
 										 Request::WORKER);
-								f.request->Read(fr, egbase, ol);
+								f.request->Read
+									(fr, ref_cast<Game, Editor_Game_Base>(egbase), ol);
 							} else {
 								f.request = 0;
 							}
@@ -273,7 +274,8 @@ void Map_Flagdata_Data_Packet::Write
 			container_iterate_const(Flag::FlagJobs, flag_jobs, i) {
 				if (i.current->request) {
 					fw.Unsigned8(1);
-					i.current->request->Write(fw, egbase, os);
+					i.current->request->Write
+						(fw, ref_cast<Game, Editor_Game_Base>(egbase), os);
 				} else
 					fw.Unsigned8(0);
 
@@ -288,4 +290,4 @@ void Map_Flagdata_Data_Packet::Write
 	fw.Write(fs, "binary/flag_data");
 }
 
-};
+}

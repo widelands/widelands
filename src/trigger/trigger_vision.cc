@@ -84,4 +84,4 @@ void Trigger_Vision::check_set_conditions(Game const & game) {
 	while (mr.advance(map));
 }
 
-};
+}

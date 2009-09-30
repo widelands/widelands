@@ -26,7 +26,7 @@
 
 
 inline Interactive_Player & GameMessageMenu::iplayer() const {
-	return dynamic_cast<Interactive_Player &>(*get_parent());
+	return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
 }
 
 

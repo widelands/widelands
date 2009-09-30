@@ -33,8 +33,6 @@
 
 #include "tribe.h"
 
-
-
 namespace Widelands {
 
 // dummy instance because Map_Object needs a description
@@ -44,10 +42,10 @@ Map_Object_Descr g_road_descr("road", "Road");
  * Most of the actual work is done in init.
 */
 Road::Road() :
-PlayerImmovable  (g_road_descr),
-m_type           (0),
-m_desire_carriers(0),
-m_carrier_request(0)
+	PlayerImmovable  (g_road_descr),
+	m_type           (0),
+	m_desire_carriers(0),
+	m_carrier_request(0)
 {
 	m_flags[0] = m_flags[1] = 0;
 	m_flagidx[0] = m_flagidx[1] = -1;
@@ -95,10 +93,10 @@ void Road::create
 		}
 		Tribe_Descr const & tribe = owner.tribe();
 		Carrier & carrier =
-			dynamic_cast<Carrier &>
+			ref_cast<Carrier, Worker>
 				(tribe.get_worker_descr(tribe.worker_index("carrier"))->create
 				 	(egbase, owner, &start, idle_position));
-		carrier.start_task_road(dynamic_cast<Game &>(egbase));
+		carrier.start_task_road(ref_cast<Game, Editor_Game_Base>(egbase));
 		road.m_carrier = &carrier;
 	}
 	log("Road::create: &road = %p\n", &road);
@@ -233,7 +231,7 @@ void Road::init(Editor_Game_Base & egbase)
 	PlayerImmovable::init(egbase);
 
 	if (2 <= m_path.get_nsteps())
-		_link_into_flags(egbase);
+		_link_into_flags(ref_cast<Game, Editor_Game_Base>(egbase));
 }
 
 /**
@@ -243,7 +241,7 @@ void Road::init(Editor_Game_Base & egbase)
  * we needed to have this road already registered
  * as Map Object, thats why this is moved
  */
-void Road::_link_into_flags(Editor_Game_Base & egbase) {
+void Road::_link_into_flags(Game & game) {
 	assert(m_path.get_nsteps() >= 2);
 
 	// Link into the flags (this will also set our economy)
@@ -262,19 +260,15 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 	Economy::check_merge(*m_flags[FlagStart], *m_flags[FlagEnd]);
 
 	// Mark Fields
-	_mark_map(egbase);
+	_mark_map(game);
 
-	if (upcast(Game, game, &egbase)) {
-		Carrier * const carrier =
-			static_cast<Carrier *>(m_carrier.get(*game));
-		m_desire_carriers = 1;
-		if (carrier) {
-			//  This happens after a road split. Tell the carrier what's going on.
-			carrier->set_location    (this);
-			carrier->update_task_road(*game);
-		} else if (not m_carrier_request)
-			_request_carrier(*game);
-	}
+	m_desire_carriers = 1;
+	if (Carrier * const carrier = m_carrier.get(game)) {
+		//  This happens after a road split. Tell the carrier what's going on.
+		carrier->set_location    (this);
+		carrier->update_task_road(game);
+	} else if (not m_carrier_request)
+		_request_carrier(game);
 }
 
 /**
@@ -282,7 +276,7 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 */
 void Road::cleanup(Editor_Game_Base & egbase)
 {
-	Game & game = dynamic_cast<Game &>(egbase);
+	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 
 	// Release carrier
 	m_desire_carriers = 0;
@@ -353,8 +347,8 @@ void Road::_request_carrier_callback
 {
 	assert(w);
 
-	Road    & road    = dynamic_cast<Road    &>(target);
-	Carrier & carrier = dynamic_cast<Carrier &>(*w);
+	Road    & road    = ref_cast<Road,    PlayerImmovable>(target);
+	Carrier & carrier = ref_cast<Carrier, Worker>         (*w);
 
 	delete &rq;
 	road.m_carrier_request = 0;
@@ -368,15 +362,14 @@ void Road::_request_carrier_callback
 */
 void Road::remove_worker(Worker & w)
 {
-	Editor_Game_Base & egbase = owner().egbase();
-	Carrier * carrier = dynamic_cast<Carrier *>(m_carrier.get(egbase));
+	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+	Carrier * carrier = m_carrier.get(game);
 
 	if (carrier == &w)
 		m_carrier = carrier = 0;
 
 	if (not carrier and not m_carrier_request and m_desire_carriers)
-		if (upcast(Game, game, &egbase))
-			_request_carrier(*game);
+		_request_carrier(game);
 
 	PlayerImmovable::remove_worker(w);
 }
@@ -386,7 +379,7 @@ void Road::remove_worker(Worker & w)
  * the new flag initializes. We remove markings to avoid interference with the
  * flag.
 */
-void Road::presplit(Editor_Game_Base & egbase, Coords) {_unmark_map(egbase);}
+void Road::presplit(Game & game, Coords) {_unmark_map(game);}
 
 /**
  * The flag that splits this road has been initialized. Perform the actual
@@ -395,7 +388,7 @@ void Road::presplit(Editor_Game_Base & egbase, Coords) {_unmark_map(egbase);}
  * After the split, this road will span [start...new flag]. A new road will
  * be created to span [new flag...end]
 */
-void Road::postsplit(Editor_Game_Base & egbase, Flag & flag)
+void Road::postsplit(Game & game, Flag & flag)
 {
 	Flag & oldend = *m_flags[FlagEnd];
 
@@ -403,7 +396,7 @@ void Road::postsplit(Editor_Game_Base & egbase, Flag & flag)
 	oldend.detach_road(m_flagidx[FlagEnd]);
 
 	// build our new path and the new road's path
-	Map & map = egbase.map();
+	Map & map = game.map();
 	CoordPath path(map, m_path);
 	CoordPath secondpath(path);
 	int32_t const index = path.get_index(flag.get_position());
@@ -416,14 +409,14 @@ void Road::postsplit(Editor_Game_Base & egbase, Flag & flag)
 
 	// change road size and reattach
 	m_flags[FlagEnd] = &flag;
-	_set_path(egbase, path);
+	_set_path(game, path);
 
 	const Direction dir = get_reverse_dir(m_path[m_path.get_nsteps() - 1]);
 	m_flags[FlagEnd]->attach_road(dir, this);
 	m_flagidx[FlagEnd] = dir;
 
 	// recreate road markings
-	_mark_map(egbase);
+	_mark_map(game);
 
 	// create the new road
 	Road & newroad = *new Road();
@@ -431,12 +424,12 @@ void Road::postsplit(Editor_Game_Base & egbase, Flag & flag)
 	newroad.m_type = m_type;
 	newroad.m_flags[FlagStart] = &flag; //  flagidx will be set on init()
 	newroad.m_flags[FlagEnd] = &oldend;
-	newroad._set_path(egbase, secondpath);
+	newroad._set_path(game, secondpath);
 
 	// Find workers on this road that need to be reassigned
 	// The algorithm is pretty simplistic, and has a bias towards keeping
 	// the worker around; there's obviously nothing wrong with that.
-	upcast(Carrier, carrier, m_carrier.get(egbase));
+	Carrier * const carrier = m_carrier.get(game);
 	std::vector<Worker *> const workers = get_workers();
 	std::vector<Worker *> reassigned_workers;
 
@@ -474,31 +467,26 @@ void Road::postsplit(Editor_Game_Base & egbase, Flag & flag)
 		}
 
 		// Cause a worker update in any case
-		if (upcast(Game, game, &egbase))
-			w.send_signal(*game, "road");
+		w.send_signal(game, "road");
 	}
 
 	// Initialize the new road
-	newroad.init(egbase);
+	newroad.init(game);
 
 	// Actually reassign workers after the new road has initialized,
 	// so that the reassignment is safe
 	container_iterate_const(std::vector<Worker *>, reassigned_workers, i)
 		(*i.current)->set_location(&newroad);
 
-	// Do the following only if in game
-	if (upcast(Game, game, &egbase)) {
+	//  Request a new carrier for this road if necessary. This must be done
+	//  _after_ the new road initializes, otherwise request routing might not
+	//  work correctly
+	if (!m_carrier.get(game) && !m_carrier_request)
+		_request_carrier(game);
 
-		// Request a new carrier for this road if necessary
-		// This must be done _after_ the new road initializes, otherwise request
-		// routing might not work correctly
-		if (!m_carrier.get(egbase) && !m_carrier_request)
-			_request_carrier(*game);
-
-		// Make sure items waiting on the original endpoint flags are dealt with
-		m_flags[FlagStart]->update_items(*game, &oldend);
-		oldend.update_items(*game, m_flags[FlagStart]);
-	}
+	//  Make sure items waiting on the original endpoint flags are dealt with.
+	m_flags[FlagStart]->update_items(game, &oldend);
+	oldend.update_items(game, m_flags[FlagStart]);
 }
 
 /**
@@ -507,7 +495,7 @@ void Road::postsplit(Editor_Game_Base & egbase, Flag & flag)
  */
 bool Road::notify_ware(Game & game, FlagId const flagid)
 {
-	if (upcast(Carrier, carrier, m_carrier.get(game)))
+	if (Carrier * const carrier = m_carrier.get(game))
 		return carrier->notify_ware(game, flagid);
 	return false;
 }

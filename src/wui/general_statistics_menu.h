@@ -31,7 +31,7 @@ struct Interactive_GameBase;
 namespace UI {
 struct Checkbox;
 struct Radiogroup;
-};
+}
 
 struct General_Statistics_Menu : public UI::UniqueWindow {
 	General_Statistics_Menu

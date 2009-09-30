@@ -26,12 +26,12 @@
 
 
 struct Editor_Interactive;
-namespace Widelands {struct Event_Conquer_Area;};
+namespace Widelands {struct Event_Conquer_Area;}
 namespace UI {
 struct EditBox;
 struct Checkbox;
 struct Textarea;
-};
+}
 
 /**
  * This is a modal box - The user must end this first

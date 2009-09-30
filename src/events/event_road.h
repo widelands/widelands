@@ -47,6 +47,6 @@ private:
 	bool          m_fill;
 };
 
-};
+}
 
 #endif

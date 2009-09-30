@@ -476,4 +476,4 @@ void BaseListselect::remove(const char * const str)
 	}
 }
 
-};
+}

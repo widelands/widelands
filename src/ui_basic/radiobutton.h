@@ -57,6 +57,7 @@ private:
 	int32_t           m_highestid;
 	int32_t           m_state;   //  -1: none
 };
-};
+
+}
 
 #endif

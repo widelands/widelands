@@ -26,7 +26,7 @@
 
 
 struct Editor_Interactive;
-namespace Widelands {struct Event_Message_Box;};
+namespace Widelands {struct Event_Message_Box;}
 namespace UI {
 template <typename T> struct Callback_Button;
 struct EditBox;

@@ -112,4 +112,4 @@ throw (_wexception)
 	prof.write("allowed_buildings", false, fs);
 }
 
-}; // namespace
+}

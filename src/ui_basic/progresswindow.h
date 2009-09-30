@@ -27,6 +27,7 @@
 #include <vector>
 
 namespace UI {
+
 /// Manages a progress window on the screen.
 struct IProgressVisualization {
 	///perform any visualizations as needed
@@ -67,6 +68,7 @@ private:
 	void draw_background(RenderTarget & rt, uint32_t xres, uint32_t yres);
 	void update(bool repaint);
 };
-};
+
+}
 
 #endif

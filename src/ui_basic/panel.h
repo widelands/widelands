@@ -36,6 +36,7 @@
 struct RenderTarget;
 
 namespace UI {
+
 /**
  * Panel is a basic rectangular UI element.
  * The outer rectangle is defined by (_x, _y, _w, _h) and encloses the entire
@@ -268,6 +269,7 @@ inline void Panel::set_dock_windows_to_edges(const bool on) {
 	if (on)
 		_flags |= pf_dock_windows_to_edges;
 }
-};
+
+}
 
 #endif

@@ -50,6 +50,6 @@ private:
 	Duration duration;
 };
 
-};
+}
 
 #endif

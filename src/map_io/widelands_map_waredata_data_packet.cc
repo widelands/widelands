@@ -123,8 +123,8 @@ throw (_wexception)
 								static_cast<PlayerImmovable *>(0);
 
 						//  Do some kind of init.
-						if (upcast(Game, game, &egbase))
-							ware.set_location(*game, &location);
+						ware.set_location
+							(ref_cast<Game, Editor_Game_Base>(egbase), &location);
 					} catch (_wexception const & e) {
 						throw wexception
 							("location %u: %s", location_serial, e.what());
@@ -187,8 +187,8 @@ throw (_wexception)
 								static_cast<PlayerImmovable *>(0);
 
 						//  Do some kind of init.
-						if (upcast(Game, game, &egbase))
-							ware.set_location(*game, &location);
+						ware.set_location
+							(ref_cast<Game, Editor_Game_Base>(egbase), &location);
 					} catch (_wexception const & e) {
 						throw wexception
 							("location %u: %s", location_serial, e.what());
@@ -272,4 +272,4 @@ void Map_Waredata_Data_Packet::write_ware
 	os->mark_object_as_saved(ware);
 }
 
-};
+}

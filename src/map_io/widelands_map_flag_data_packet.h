@@ -39,6 +39,6 @@ struct Map_Flag_Data_Packet : public Map_Data_Packet {
 		throw (_wexception);
 };
 
-};
+}
 
 #endif

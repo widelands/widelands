@@ -107,8 +107,7 @@ throw (_wexception)
 		fw.Unsigned16(CURRENT_PACKET_VERSION);
 		const Player::AreaWatchers & areawatchers = player->areawatchers();
 		container_iterate_const(Player::AreaWatchers, areawatchers, i) {
-			const AreaWatcher & areawatcher =
-				dynamic_cast<AreaWatcher const &>(*i.current->get(egbase));
+			AreaWatcher const & areawatcher = *i.current->get(egbase);
 			fw.Unsigned32(os->register_object(areawatcher));
 			fw.Area48    (areawatcher);
 			os->mark_object_as_saved(areawatcher);
@@ -123,4 +122,4 @@ throw (_wexception)
 	}
 }
 
-};
+}

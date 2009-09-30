@@ -84,4 +84,4 @@ void EventChain::add_event(Event * const ev) {
 	ev->reference(*this);
 }
 
-};
+}

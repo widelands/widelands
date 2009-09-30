@@ -51,4 +51,4 @@ void Event_Conquer_Area::Write(Section & s, Editor_Game_Base & egbase) const {
 	Event_Player_Area::Write(s, egbase);
 }
 
-};
+}

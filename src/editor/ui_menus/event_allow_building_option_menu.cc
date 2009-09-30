@@ -34,7 +34,7 @@
 
 
 inline Editor_Interactive & Event_Allow_Building_Option_Menu::eia() {
-	return dynamic_cast<Editor_Interactive &>(*get_parent());
+	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 }
 
 
