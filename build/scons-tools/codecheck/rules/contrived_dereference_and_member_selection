@@ -2,7 +2,7 @@
 
 
 """
-Thic catches use of the contrived syntax for dereference and member selection:
+This catches use of the contrived syntax for dereference and member selection:
 (*pointer).member
 
 Use the more convenient syntax instead:
@@ -11,7 +11,7 @@ pointer->member
 
 
 regexp = r"""[^]_A-Za-z0-9 >] *\(\*[a-zA-Z_][_a-zA-Z_]*\)\."""
-error_msg = "Don't use (*a).member, user a->member"
+error_msg = "Do not use (*a).member, use a->member"
 
 forbidden = [
     '+ (*abc).def',
