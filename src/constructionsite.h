@@ -123,6 +123,6 @@ private:
 	uint32_t m_work_steps;     // how many steps (= items) until we're done?
 };
 
-};
+}
 
 #endif

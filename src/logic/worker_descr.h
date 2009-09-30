@@ -109,6 +109,6 @@ protected:
 	Programs    m_programs;
 };
 
-};
+}
 
 #endif

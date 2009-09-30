@@ -61,4 +61,4 @@ void Cmd_Incorporate::Write
 	fw.Unsigned32(mos.get_object_file_index(*worker));
 }
 
-};
+}

@@ -36,7 +36,6 @@
 
 #include "ui_basic/object.h" //only needed for i18n function _()
 
-
 #include <cstdio>
 
 namespace Widelands {
@@ -267,30 +266,27 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 {
 	Building::init(egbase);
 
-	if (upcast(Game, game, &egbase)) {
-		// TODO: figure out whether planing is necessary
+	//  TODO figure out whether planing is necessary
 
-		// Initialize the wares queues
-		std::map<Ware_Index, uint8_t> const & buildcost =
-			m_building->buildcost();
-		size_t const buildcost_size = buildcost.size();
-		m_wares.resize(buildcost_size);
-		std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
-		for (size_t i = 0; i < buildcost_size; ++i, ++it) {
-			WaresQueue & wq =
-				*(m_wares[i] = new WaresQueue(*this, it->first, it->second));
+	//  initialize the wares queues
+	std::map<Ware_Index, uint8_t> const & buildcost = m_building->buildcost();
+	size_t const buildcost_size = buildcost.size();
+	m_wares.resize(buildcost_size);
+	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
+	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
+		WaresQueue & wq =
+			*(m_wares[i] = new WaresQueue(*this, it->first, it->second));
 
-			wq.set_callback(ConstructionSite::wares_queue_callback, this);
-			wq.set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
-			wq.update();
+		wq.set_callback(ConstructionSite::wares_queue_callback, this);
+		wq.set_consume_interval(CONSTRUCTIONSITE_STEP_TIME);
+		wq.update();
 
-			m_work_steps += it->second;
-		}
-
-		request_builder(*game);
-
-		g_sound_handler.play_fx("create_construction_site", m_position, 255);
+		m_work_steps += it->second;
 	}
+
+	request_builder(ref_cast<Game, Editor_Game_Base>(egbase));
+
+	g_sound_handler.play_fx("create_construction_site", m_position, 255);
 }
 
 
@@ -321,7 +317,7 @@ void ConstructionSite::cleanup(Editor_Game_Base & egbase)
 		// Put the real building in place
 		m_building->create(egbase, owner(), m_position, false);
 		if (Worker * const builder = m_builder.get(egbase))
-			builder->reset_tasks(dynamic_cast<Game &>(egbase));
+			builder->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
 	}
 }
 
@@ -371,7 +367,7 @@ void ConstructionSite::request_builder_callback
 {
 	assert(w);
 
-	ConstructionSite & cs = dynamic_cast<ConstructionSite &>(target);
+	ConstructionSite & cs = ref_cast<ConstructionSite, PlayerImmovable>(target);
 
 	cs.m_builder = w;
 
@@ -573,4 +569,4 @@ void ConstructionSite::draw
 	draw_help(game, dst, coords, pos);
 }
 
-};
+}

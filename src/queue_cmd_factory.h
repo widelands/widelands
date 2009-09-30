@@ -30,10 +30,10 @@ class GameLogicCommand;
  * This creates the correct queue commands
  * from the queue command file ids
  */
-struct Queue_Cmd_Factory {
-	static GameLogicCommand & create_correct_queue_command(uint32_t id);
-};
+namespace Queue_Cmd_Factory {
+	GameLogicCommand & create_correct_queue_command(uint32_t id);
+}
 
-};
+}
 
 #endif

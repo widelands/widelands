@@ -468,7 +468,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 {
 	BaseImmovable::Loader::load(fr, version);
 
-	Immovable & imm = dynamic_cast<Immovable &>(*get_object());
+	Immovable & imm = ref_cast<Immovable, Map_Object>(*get_object());
 
 	// Position
 	imm.m_position = fr.Coords32(egbase().map().extent());
@@ -1052,4 +1052,4 @@ void PlayerImmovable::log_general_info(Editor_Game_Base const & egbase)
 	molog("m_economy: %p\n", m_economy);
 }
 
-};
+}

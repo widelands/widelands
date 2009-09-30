@@ -310,4 +310,4 @@ bool ReplayWriter::hasDiskSpace() {
 	return space > MINIMUM_DISK_SPACE;
 }
 
-};
+}

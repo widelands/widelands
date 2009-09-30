@@ -181,6 +181,6 @@ struct Node_and_Triangle {
 	TCoords<Triangle_Coords_type> triangle;
 };
 
-};
+}
 
 #endif

@@ -95,6 +95,6 @@ private:
 	Direction                       m_direction;
 };
 
-};
+}
 
 #endif

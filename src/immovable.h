@@ -233,6 +233,6 @@ private:
 	Workers   m_workers;
 };
 
-};
+}
 
 #endif

@@ -46,6 +46,6 @@ struct AreaWatcher : public Map_Object, private Player_Area<> {
 	virtual void act(Game &, uint32_t data);
 };
 
-};
+}
 
 #endif

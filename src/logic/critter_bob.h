@@ -81,6 +81,6 @@ private:
 	static Task taskProgram;
 };
 
-};
+}
 
 #endif

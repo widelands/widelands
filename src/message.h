@@ -80,6 +80,6 @@ private:
 
 };
 
-};
+}
 
 #endif

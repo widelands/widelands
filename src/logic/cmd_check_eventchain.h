@@ -46,6 +46,6 @@ private:
 	Manager<EventChain>::Index m_eventchain_id;
 };
 
-};
+}
 
 #endif

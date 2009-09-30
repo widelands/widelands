@@ -35,7 +35,7 @@
 #include <cstring>
 #include <vector>
 
-namespace UI {struct Window;};
+namespace UI {struct Window;}
 struct BuildingHints;
 struct EncodeData;
 struct Interactive_GameBase;
@@ -253,6 +253,6 @@ protected:
 	std::map<Ware_Index, int32_t> m_ware_priorities;
 };
 
-};
+}
 
 #endif

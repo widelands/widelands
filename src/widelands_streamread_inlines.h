@@ -94,6 +94,6 @@ inline Building_Descr const & StreamRead::Building_Type
 	return Building_Type(Tribe(egbase));
 }
 
-};
+}
 
 #endif

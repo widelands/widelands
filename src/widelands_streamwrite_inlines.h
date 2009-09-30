@@ -44,6 +44,6 @@ inline void StreamWrite::Building_Type(Building_Descr const & building) {
 	String(building.name());
 }
 
-};
+}
 
 #endif

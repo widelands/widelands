@@ -225,7 +225,7 @@ void Soldier::init(Editor_Game_Base & egbase)
 		m_hp_max =
 			min_hp
 			+
-			dynamic_cast<Game &>(egbase).logic_rand()
+			ref_cast<Game, Editor_Game_Base>(egbase).logic_rand()
 			%
 			(descr().get_max_hp() - (min_hp - 1));
 	}
@@ -414,10 +414,15 @@ void Soldier::draw
  *
  */
 void Soldier::start_animation
-	(Editor_Game_Base & egbase, char const * const animname, uint32_t const time)
+	(Editor_Game_Base & egbase,
+	 char const * const animname,
+	 uint32_t const time)
 {
-	if (upcast(Game, game, &egbase))
-		return start_task_idle (*game, descr().get_rand_anim(animname), time);
+	return
+		start_task_idle
+			(ref_cast<Game, Editor_Game_Base>(egbase),
+			 descr().get_rand_anim(animname),
+			 time);
 }
 
 
@@ -449,7 +454,8 @@ bool Soldier::canBeChallenged()
 		return false;
 	if (!m_battle)
 		return true;
-	return !m_battle->locked(dynamic_cast<Game &>(owner().egbase()));
+	return
+		!m_battle->locked(ref_cast<Game, Editor_Game_Base>(owner().egbase()));
 }
 
 /**
@@ -897,7 +903,7 @@ bool Soldier::checkNodeBlocked
 		  soldiers.end()))
 	{
 		if (commit && soldiers.size() == 1) {
-			Soldier & soldier = dynamic_cast<Soldier &>(*soldiers[0]);
+			Soldier & soldier = ref_cast<Soldier, Bob>(*soldiers[0]);
 			if (soldier.get_owner() != get_owner() && soldier.canBeChallenged()) {
 				molog("[checkNodeBlocked] attacking a soldier\n");
 				new Battle(game, *this, soldier);
@@ -941,8 +947,8 @@ void Soldier::sendSpaceSignals(Game & game)
 
 		container_iterate_const(std::vector<BaseImmovable *>, attackables, i)
 			if
-				(dynamic_cast<PlayerImmovable const &>(**i.current).get_owner()
-				 ->player_number()
+				(ref_cast<PlayerImmovable const, BaseImmovable const>(**i.current)
+				 .get_owner()->player_number()
 				 ==
 				 land_owner)
 				dynamic_cast<Attackable &>(**i.current).aggressor(*this);
@@ -963,4 +969,4 @@ void Soldier::log_general_info(Editor_Game_Base const & egbase)
 	molog ("Evade:    %d%%\n", m_evade);
 }
 
-};
+}

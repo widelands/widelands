@@ -161,6 +161,6 @@ private:
 	Actions     m_actions;
 };
 
-};
+}
 
 #endif

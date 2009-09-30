@@ -32,6 +32,8 @@
 #include "worker.h"
 #include "worker_program.h"
 
+#include "ref_cast.h"
+
 namespace Widelands {
 
 Worker_Descr::Worker_Descr
@@ -197,7 +199,7 @@ Worker & Worker_Descr::create
 	 Coords             const coords)
 const
 {
-	Worker & worker = dynamic_cast<Worker &>(create_object());
+	Worker & worker = ref_cast<Worker, Map_Object>(create_object());
 	worker.set_owner(&owner);
 	worker.set_location(location);
 	worker.set_position(egbase, coords);
@@ -236,4 +238,4 @@ Ware_Index Worker_Descr::worker_index() const throw () {
 	return tribe().worker_index(name().c_str());
 }
 
-};
+}

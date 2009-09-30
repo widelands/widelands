@@ -175,4 +175,4 @@ void GameLogicCommand::Read
 	}
 }
 
-};
+}

@@ -26,12 +26,12 @@
 
 #include <vector>
 
-namespace UI {struct Textarea;};
+namespace UI {struct Textarea;}
 
 namespace Widelands {
 struct Tribe_Descr;
 struct WareList;
-};
+}
 
 /*
 class WaresDisplay

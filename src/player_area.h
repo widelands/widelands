@@ -34,6 +34,6 @@ template <typename Area_type = Area<> > struct Player_Area : public Area_type {
 	Player_Number player_number;
 };
 
-};
+}
 
 #endif

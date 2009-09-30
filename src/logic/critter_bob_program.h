@@ -84,6 +84,6 @@ private:
 	static const ParseMap          s_parsemap[];
 };
 
-};
+}
 
 #endif

@@ -107,11 +107,12 @@ private:
 
 #define DEFINE_INDEX(NAME)                                                    \
    struct NAME : public _Index<NAME> {                                        \
-   NAME(NAME const & other = Null()) : _Index<NAME>(other) {}                 \
-   explicit NAME(value_t const I) : _Index<NAME>(I) {}                        \
-   explicit NAME(size_t  const I) : _Index<NAME>(I) {}                        \
-   explicit NAME(int32_t const I) __attribute__((deprecated));                \
-};
+      NAME(NAME const & other = Null()) : _Index<NAME>(other) {}              \
+      explicit NAME(value_t const I) : _Index<NAME>(I) {}                     \
+      explicit NAME(size_t  const I) : _Index<NAME>(I) {}                     \
+      explicit NAME(int32_t const I) __attribute__((deprecated));             \
+   };                                                                         \
+
 DEFINE_INDEX(Building_Index)
 DEFINE_INDEX(Ware_Index)
 

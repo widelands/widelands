@@ -56,7 +56,7 @@
 using namespace Widelands;
 
 inline Interactive_Player & EncyclopediaWindow::iaplayer() const {
-	return dynamic_cast<Interactive_Player &>(*get_parent());
+	return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
 }
 
 
@@ -140,7 +140,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	Tribe_Descr const & tribe = iaplayer().player().tribe();
 
 	ProductionSite_Descr::Programs const & programs =
-		dynamic_cast<ProductionSite_Descr const &>
+		ref_cast<ProductionSite_Descr const, Building_Descr const>
 			(*tribe.get_building_descr(prodSites.get_selected()))
 		.programs();
 

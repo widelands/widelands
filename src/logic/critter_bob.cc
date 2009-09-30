@@ -253,7 +253,8 @@ void Critter_Bob::program_update(Game & game, State & state)
 
 	for (;;) {
 		Critter_BobProgram const & program =
-			dynamic_cast<Critter_BobProgram const &>(*state.program);
+			ref_cast<Critter_BobProgram const, BobProgramBase const>
+				(*state.program);
 
 		if (state.ivar1 >= program.get_size())
 			return pop_task(game);
@@ -319,4 +320,4 @@ Bob & Critter_Bob_Descr::create_object() const {
 	return *new Critter_Bob(*this);
 }
 
-};
+}

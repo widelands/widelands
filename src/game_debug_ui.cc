@@ -126,7 +126,7 @@ struct MapObjectDebugWindow : public UI::Window {
 	MapObjectDebugWindow(Interactive_Base & parent, Widelands::Map_Object &);
 
 	Interactive_Base & ibase() {
-		return dynamic_cast<Interactive_Base &>(*get_parent());
+		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
 	}
 
 	virtual void think();
@@ -214,7 +214,7 @@ struct FieldDebugWindow : public UI::Window {
 	FieldDebugWindow(Interactive_Base & parent, Widelands::Coords);
 
 	Interactive_Base & ibase() {
-		return dynamic_cast<Interactive_Base &>(*get_parent());
+		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
 	}
 
 	virtual void think();
@@ -284,7 +284,8 @@ void FieldDebugWindow::think()
 	str += buffer;
 	Widelands::Map_Index const i = m_coords.field - &m_map[0];
 	Widelands::Editor_Game_Base const & egbase =
-		dynamic_cast<const Interactive_Base &>(*get_parent()).egbase();
+		ref_cast<Interactive_Base const, UI::Panel const>(*get_parent())
+		.egbase();
 	Widelands::Player_Number const nr_players = m_map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
 		Widelands::Player::Field const & player_field = player->fields()[i];

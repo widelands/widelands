@@ -92,7 +92,7 @@ void Player::create_default_infrastructure() {
 	if (Coords const starting_pos = map.get_starting_pos(m_plnum)) {
 		Tribe_Descr::Initialization const & initialization =
 			tribe().initialization(m_initialization_index);
-		Game & game = dynamic_cast<Game &>(egbase());
+		Game & game = ref_cast<Game, Editor_Game_Base>(egbase());
 		container_iterate_const(std::vector<Event *>, initialization.events, i) {
 			Event & event = **i.current;
 			event.set_player(player_number());
@@ -167,7 +167,7 @@ void Player::build_flag(Coords const c) {
 	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
 	if (buildcaps & BUILDCAPS_FLAG)
-		new Flag(egbase(), *this, c);
+		new Flag(ref_cast<Game, Editor_Game_Base>(egbase()), *this, c);
 }
 
 
@@ -187,9 +187,9 @@ Flag & Player::force_flag(FCoords const c) {
 	while (mr.advance(map));
 
 	//  Make sure that the player owns the area around.
-	egbase().conquer_area_no_building
+	ref_cast<Game, Editor_Game_Base>(egbase()).conquer_area_no_building
 		(Player_Area<Area<FCoords> >(player_number(), Area<FCoords>(c, 1)));
-	return *new Flag(egbase(), *this, c);
+	return *new Flag(ref_cast<Game, Editor_Game_Base>(egbase()), *this, c);
 }
 
 /*
@@ -244,7 +244,7 @@ void Player::force_road(Path const & path, bool const create_carrier) {
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
-		egbase().conquer_area_no_building
+		ref_cast<Game, Editor_Game_Base>(egbase()).conquer_area_no_building
 			(Player_Area<Area<FCoords> >(player_number(), Area<FCoords>(c, 1)));
 
 		if (BaseImmovable * const immovable = c.field->get_immovable()) {
@@ -283,7 +283,7 @@ void Player::force_building
 		for (size_t i = 0; i < nr_locations; ++i) {
 
 			//  Make sure that the player owns the area around.
-			egbase().conquer_area_no_building
+			ref_cast<Game, Editor_Game_Base>(egbase()).conquer_area_no_building
 				(Player_Area<Area<FCoords> >
 				 	(player_number(), Area<FCoords>(c[i], 1)));
 
@@ -353,7 +353,8 @@ void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
 			building->destroy(egbase());
 			//  Now imm and building are dangling reference/pointer! Do not use!
 			if (flag.is_dead_end())
-				dynamic_cast<Game &>(egbase()).send_player_bulldoze(flag, true);
+				ref_cast<Game, Editor_Game_Base>(egbase()).send_player_bulldoze
+					(flag, true);
 			return;
 		}
 	} else if (upcast(Flag, flag, &imm)) {
@@ -383,8 +384,8 @@ void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
 					//  The primary road is gone. Now see if the flag at the other
 					//  end of it is a dead-end.
 					if (primary_other.is_dead_end())
-						dynamic_cast<Game &>(egbase()).send_player_bulldoze
-							(primary_other, true);
+						ref_cast<Game, Editor_Game_Base>(egbase())
+							.send_player_bulldoze(primary_other, true);
 				}
 	} else if (upcast(Road, road, &imm)) {
 		if (recurse) {
@@ -394,9 +395,11 @@ void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
 				r->destroy(egbase()); //  between start and end, not just selected
 			//  Now imm and road are dangling reference/pointer! Do not use!
 			if (start.is_dead_end())
-				dynamic_cast<Game &>(egbase()).send_player_bulldoze(start, true);
+				ref_cast<Game, Editor_Game_Base>(egbase()).send_player_bulldoze
+					(start, true);
 			if (end  .is_dead_end())
-				dynamic_cast<Game &>(egbase()).send_player_bulldoze(end,   true);
+				ref_cast<Game, Editor_Game_Base>(egbase()).send_player_bulldoze
+					(end,   true);
 			return;
 		}
 	} else
@@ -462,10 +465,11 @@ Perform an action on the given flag.
 */
 void Player::flagaction(Flag & flag)
 {
-	if (upcast(Game, game, &egbase()))
-		if (&flag.owner() == this) //  Additional security check.
-			flag.add_flag_job
-				(*game, tribe().worker_index("geologist"), "expedition");
+	if (&flag.owner() == this) //  Additional security check.
+		flag.add_flag_job
+			(ref_cast<Game, Editor_Game_Base>(egbase()),
+			 tribe().worker_index("geologist"),
+			 "expedition");
 }
 
 /*
@@ -580,7 +584,8 @@ uint32_t Player::findAttackSoldiers
 		return 0;
 
 	container_iterate_const(std::vector<BaseImmovable *>, immovables, i) {
-		MilitarySite const & ms = dynamic_cast<MilitarySite &>(**i.current);
+		MilitarySite const & ms =
+			ref_cast<MilitarySite, BaseImmovable>(**i.current);
 		std::vector<Soldier *> const present = ms.presentSoldiers();
 		uint32_t const nr_staying = ms.minSoldierCapacity();
 		uint32_t const nr_present = present.size();
@@ -623,7 +628,7 @@ void Player::enemyflagaction
 					findAttackSoldiers(flag, &attackers, count);
 					assert(attackers.size() <= count);
 					container_iterate_const(std::vector<Soldier *>, attackers, i)
-						dynamic_cast<MilitarySite &>
+						ref_cast<MilitarySite, PlayerImmovable>
 							(*(*i.current)->get_location(egbase()))
 						.sendAttacker(**i.current, *building);
 				}
@@ -888,4 +893,4 @@ void Player::WriteStatistics(FileWrite & fw) const {
 	}
 }
 
-};
+}

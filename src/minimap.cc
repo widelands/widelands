@@ -34,12 +34,12 @@ MiniMap::View::View
 	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
 	 Interactive_Base & ibase)
 :
-UI::Panel       (&parent, x, y, 10, 10),
-m_ibase       (ibase),
-m_viewx       (0),
-m_viewy       (0),
-m_pic_map_spot(g_gr->get_picture(PicMod_Game, "pics/map_spot.png")),
-m_flags       (flags)
+	UI::Panel       (&parent, x, y, 10, 10),
+	m_ibase       (ibase),
+	m_viewx       (0),
+	m_viewy       (0),
+	m_pic_map_spot(g_gr->get_picture(PicMod_Game, "pics/map_spot.png")),
+	m_flags       (flags)
 {
 	Widelands::Map const & map = ibase.egbase().map();
 	set_size(w ? w : map.get_width(), h ? h : map.get_height());
@@ -86,7 +86,7 @@ bool MiniMap::View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 
 	m_ibase.egbase().map().normalize_coords(c);
 
-	dynamic_cast<MiniMap &>(*get_parent()).warpview.call
+	ref_cast<MiniMap, UI::Panel>(*get_parent()).warpview.call
 		(c.x * TRIANGLE_WIDTH, c.y * TRIANGLE_HEIGHT);
 
 	return true;

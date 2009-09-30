@@ -78,6 +78,6 @@ private:
 	bool        m_is_visible;
 };
 
-};
+}
 
 #endif

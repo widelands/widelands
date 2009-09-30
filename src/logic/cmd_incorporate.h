@@ -44,6 +44,6 @@ private:
 	Worker * worker;
 };
 
-};
+}
 
 #endif

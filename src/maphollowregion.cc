@@ -86,4 +86,4 @@ template <> bool MapHollowRegion<Area<> >::advance(const Map & map) throw () {
 	return true;
 }
 
-};
+}

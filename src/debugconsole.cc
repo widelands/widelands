@@ -134,4 +134,4 @@ void Handler::addCommand(std::string const & cmd, HandlerFn const & fun)
 	m_commands.push_back(cmd);
 }
 
-} // namespace DebugConsole
+}

@@ -22,6 +22,8 @@
 
 #include "cmd_queue.h"
 
+#include "ref_cast.h"
+
 #include <map>
 #include <string>
 #include <cstring>
@@ -29,7 +31,7 @@
 
 struct DirAnimations;
 struct RenderTarget;
-namespace UI {struct Tab_Panel;};
+namespace UI {struct Tab_Panel;}
 
 namespace Widelands {
 
@@ -132,7 +134,8 @@ extern Map_Object_Descr g_flag_descr;
 /// or additional member variable, go ahead
 #define MO_DESCR(type) \
 public: const type & descr() const { \
-return dynamic_cast<const type &>(*m_descr);}
+      return ref_cast<type const, Map_Object_Descr const>(*m_descr);          \
+   }                                                                          \
 
 class Map_Object {
 	friend struct Object_Manager;
@@ -280,7 +283,9 @@ public:
 		Editor_Game_Base      & egbase    () {return *m_egbase;}
 		Map_Map_Object_Loader & mol   () {return *m_mol;}
 		Map_Object            * get_object() {return m_object;}
-		template<typename T> T & get() {return dynamic_cast<T &>(*m_object);}
+		template<typename T> T & get() {
+			return ref_cast<T, Map_Object>(*m_object);
+		}
 
 	protected:
 		virtual void load(FileRead &, uint8_t version);
@@ -463,6 +468,6 @@ private:
 	int32_t arg;
 };
 
-};
+}
 
 #endif

@@ -73,4 +73,4 @@ bool MapFringeRegion<Area<> >::advance(const Map & map) throw () {
 	return m_phase;
 }
 
-};
+}

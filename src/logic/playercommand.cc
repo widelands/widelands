@@ -1008,7 +1008,8 @@ void Cmd_EnemyFlagAction::execute (Game & game)
 {
 	Player & player = game.player(sender());
 	PlayerImmovable & imm =
-		dynamic_cast<PlayerImmovable &>(*game.objects().get_object(serial));
+		ref_cast<PlayerImmovable, Map_Object>
+			(*game.objects().get_object(serial));
 
 	log
 		("player(%u)    imm->owner (%d) number = %u\n",
@@ -1083,4 +1084,4 @@ void Cmd_EnemyFlagAction::Write
 	fw.Unsigned8 (0);
 }
 
-};
+}

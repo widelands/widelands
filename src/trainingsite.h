@@ -193,6 +193,6 @@ private:
 	Program_Result m_result; /// The result of the last training program.
 };
 
-};
+}
 
 #endif

@@ -23,6 +23,6 @@
 #include "io/basic_filewrite.h"
 #include "widelands_streamwrite.h"
 
-namespace Widelands {typedef basic_FileWrite<StreamWrite> FileWrite;};
+namespace Widelands {typedef basic_FileWrite<StreamWrite> FileWrite;}
 
 #endif

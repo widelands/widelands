@@ -121,6 +121,6 @@ private:
 	TCoords<Coords_type> m_location;
 };
 
-};
+}
 
 #endif

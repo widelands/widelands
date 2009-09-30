@@ -148,6 +148,6 @@ private:
 	uint32_t                     nextserial;
 };
 
-};
+}
 
 #endif

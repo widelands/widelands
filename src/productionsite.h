@@ -231,6 +231,6 @@ private:
 	int32_t m_max;
 };
 
-};
+}
 
 #endif

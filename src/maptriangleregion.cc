@@ -275,4 +275,4 @@ bool MapTriangleRegion<TCoords<FCoords> >::advance(const Map & map) throw ()
 	return true;
 }
 
-};
+}

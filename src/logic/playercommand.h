@@ -415,6 +415,6 @@ private:
 	uint8_t       number;
 };
 
-};
+}
 
 #endif

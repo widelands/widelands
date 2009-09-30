@@ -28,7 +28,10 @@
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
+#include "ptr_assert_cast.h"
+
 using Widelands::Economy;
+using Widelands::Editor_Game_Base;
 using Widelands::Game;
 using Widelands::Item_Ware_Descr;
 using Widelands::Ware_Index;
@@ -57,16 +60,16 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 
 	virtual void think() {
 		Interactive_GameBase const & igbase =
-			dynamic_cast<Interactive_GameBase &>(*get_parent());
+			ref_cast<Interactive_GameBase, UI::Panel>(*get_parent());
 		Widelands::Player_Number const owner = economy().owner().player_number();
 		if (not igbase.can_see(owner))
 			die();
 		bool const can_act = igbase.can_act(owner);
 		for
 			(Ware_Type_Box * b =
-			 	dynamic_cast<Ware_Type_Box *>(m_box.get_first_child());
+			 	ptr_assert_cast<Ware_Type_Box, UI::Panel>(m_box.get_first_child());
 			 b;
-			 b = dynamic_cast<Ware_Type_Box *>(b->get_next_sibling()))
+			 b = ptr_assert_cast<Ware_Type_Box, UI::Panel>(b->get_next_sibling()))
 		{
 			Ware_Index const i = b->ware_type;
 			Economy::Target_Quantity const & tq = economy().target_quantity(i);
@@ -126,8 +129,8 @@ private:
 
 		Economy & economy() const {
 			return
-				dynamic_cast<Economy_Options_Window &>
-					(*dynamic_cast<UI::Box &>(*get_parent()).get_parent())
+				ref_cast<Economy_Options_Window, UI::Panel>
+					(*ref_cast<UI::Box, UI::Panel>(*get_parent()).get_parent())
 				.economy();
 		}
 
@@ -144,14 +147,14 @@ private:
 			}
 			virtual void clicked() const {
 				Ware_Type_Box const & parent =
-					dynamic_cast<Ware_Type_Box &>(*get_parent());
+					ref_cast<Ware_Type_Box, UI::Panel>(*get_parent());
 				Economy & e = parent.economy();
 				Ware_Index const ware_type = parent.ware_type;
 				Economy::Target_Quantity const & tq = e.target_quantity(ware_type);
 				assert(tq.permanent <= tq.temporary);
 				if (1 < tq.permanent) {
 					Widelands::Player & player = e.owner();
-					Game & game = dynamic_cast<Game &>(player.egbase());
+					Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
 					game.send_player_command
 						(*new Widelands::Cmd_SetTargetQuantity
 						 	(game.get_gametime(), player.player_number(),
@@ -173,14 +176,14 @@ private:
 			}
 			virtual void clicked() const {
 				Ware_Type_Box const & parent =
-					dynamic_cast<Ware_Type_Box &>(*get_parent());
+					ref_cast<Ware_Type_Box, UI::Panel>(*get_parent());
 				Economy & e = parent.economy();
 				Ware_Index const ware_type = parent.ware_type;
 				Economy::Target_Quantity const & tq = e.target_quantity(ware_type);
 				assert(tq.permanent <= tq.temporary);
 				uint32_t const new_permanent = tq.permanent + 1;
 				Widelands::Player & player = e.owner();
-				Game & game = dynamic_cast<Game &>(player.egbase());
+				Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
 				game.send_player_command
 					(*new Widelands::Cmd_SetTargetQuantity
 					 	(game.get_gametime(), player.player_number(),
@@ -201,7 +204,7 @@ private:
 			}
 			virtual void clicked() const {
 				Ware_Type_Box const & parent =
-					dynamic_cast<Ware_Type_Box &>(*get_parent());
+					ref_cast<Ware_Type_Box, UI::Panel>(*get_parent());
 				Economy & e = parent.economy();
 				Ware_Index const ware_type = parent.ware_type;
 				Economy::Target_Quantity const & tq = e.target_quantity(ware_type);
@@ -209,7 +212,7 @@ private:
 				if (1 < tq.temporary) {
 					uint32_t const new_temporary = tq.temporary - 1;
 					Widelands::Player & player = e.owner();
-					Game   & game   = dynamic_cast<Game &>(player.egbase());
+					Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
 					game.send_player_command
 						(*new Widelands::Cmd_SetTargetQuantity
 						 	(game.get_gametime(), player.player_number(),
@@ -231,13 +234,13 @@ private:
 			}
 			virtual void clicked() const {
 				Ware_Type_Box const & parent =
-					dynamic_cast<Ware_Type_Box &>(*get_parent());
+					ref_cast<Ware_Type_Box, UI::Panel>(*get_parent());
 				Economy & e = parent.economy();
 				Ware_Index const ware_type = parent.ware_type;
 				Economy::Target_Quantity const & tq = e.target_quantity(ware_type);
 				assert(tq.permanent <= tq.temporary);
 				Widelands::Player & player = e.owner();
-				Game & game = dynamic_cast<Game &>(player.egbase());
+				Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
 				game.send_player_command
 					(*new Widelands::Cmd_SetTargetQuantity
 					 	(game.get_gametime(), player.player_number(),
@@ -254,10 +257,10 @@ private:
 			{}
 			virtual void clicked() const {
 				Ware_Type_Box const & parent =
-					dynamic_cast<Ware_Type_Box &>(*get_parent());
+					ref_cast<Ware_Type_Box, UI::Panel>(*get_parent());
 				Economy & e = parent.economy();
 				Widelands::Player & player = e.owner();
-				Game & game = dynamic_cast<Game &>(player.egbase());
+				Game & game = ref_cast<Game, Editor_Game_Base>(player.egbase());
 				game.send_player_command
 					(*new Widelands::Cmd_ResetTargetQuantity
 					 	(game.get_gametime(), player.player_number(),
@@ -285,6 +288,7 @@ void Economy::show_options_window() {
 		m_optionswindow_registry.window->move_to_top();
 	else
 		new Economy_Options_Window
-			(dynamic_cast<Interactive_GameBase &>(*owner().egbase().get_ibase()),
+			(ref_cast<Interactive_GameBase, Interactive_Base>
+			 	(*owner().egbase().get_ibase()),
 			 *this);
 }

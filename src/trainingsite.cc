@@ -185,13 +185,13 @@ void TrainingSite::prefill
 	ProductionSite::prefill(game, ware_counts, worker_counts, soldier_counts);
 	if (soldier_counts and soldier_counts->size()) {
 		Soldier_Descr const & soldier_descr =
-			dynamic_cast<Soldier_Descr const &>
+			ref_cast<Soldier_Descr const, Worker_Descr const>
 				(*tribe().get_worker_descr(tribe().worker_index("soldier")));
 		container_iterate_const(Soldier_Counts, *soldier_counts, i) {
 			Soldier_Strength const ss = i.current->first;
 			for (uint32_t j = i.current->second; j; --j) {
 				Soldier & soldier =
-					dynamic_cast<Soldier &>
+					ref_cast<Soldier, Worker>
 						(soldier_descr.create(game, owner(), 0, get_position()));
 				soldier.set_level(ss.hp, ss.attack, ss.defense, ss.evade);
 				Building::add_worker(soldier);
@@ -210,7 +210,7 @@ void TrainingSite::prefill
 void TrainingSite::init(Editor_Game_Base & egbase)
 {
 	ProductionSite::init(egbase);
-	Game & game = dynamic_cast<Game &>(egbase);
+	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 	container_iterate_const(std::vector<Soldier *>, m_soldiers, i) {
 		(*i.current)->set_location_initially(*this);
 		assert(not (*i.current)->get_state()); //  Should be newly created.
@@ -258,8 +258,7 @@ void TrainingSite::add_worker(Worker & w)
 			(std::find(m_soldiers.begin(), m_soldiers.end(), soldier) ==
 			 m_soldiers.end())
 			m_soldiers.push_back(soldier);
-		if (upcast(Game, game, &owner().egbase()))
-			schedule_act(*game, 100);
+		schedule_act(ref_cast<Game, Editor_Game_Base>(owner().egbase()), 100);
 	}
 }
 
@@ -270,8 +269,7 @@ void TrainingSite::remove_worker(Worker & w)
 			std::find(m_soldiers.begin(), m_soldiers.end(), soldier);
 		if (it != m_soldiers.end()) {
 			m_soldiers.erase(it);
-			if (upcast(Game, game, &owner().egbase()))
-				schedule_act(*game, 100);
+			schedule_act(ref_cast<Game, Editor_Game_Base>(owner().egbase()), 100);
 		}
 	}
 
@@ -349,8 +347,8 @@ void TrainingSite::request_soldier_callback
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	TrainingSite & tsite = dynamic_cast<TrainingSite &>(target);
-	Soldier      & s     = dynamic_cast<Soldier &>(*w);
+	TrainingSite & tsite = ref_cast<TrainingSite, PlayerImmovable>(target);
+	Soldier      & s     = ref_cast<Soldier,      Worker>         (*w);
 
 	assert(s.get_location(game) == &tsite);
 	assert(tsite.m_soldier_request == &rq);
@@ -402,7 +400,7 @@ void TrainingSite::setSoldierCapacity(uint32_t const capacity) {
  */
 void TrainingSite::dropSoldier(Soldier & soldier)
 {
-	Game & game = dynamic_cast<Game &>(owner().egbase());
+	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
 
 	std::vector<Soldier *>::iterator it =
 		std::find(m_soldiers.begin(), m_soldiers.end(), &soldier);
@@ -637,4 +635,4 @@ void TrainingSite::calc_upgrades() {
 		add_upgrade(atrEvade, "upgrade_soldier_evade_");
 }
 
-};
+}

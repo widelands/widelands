@@ -143,4 +143,4 @@ void set_locale(std::string name) {
 
 std::string const & get_locale() {return locale;}
 
-};
+}

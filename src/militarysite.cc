@@ -141,13 +141,13 @@ void MilitarySite::prefill
 	ProductionSite::prefill(game, ware_counts, worker_counts, soldier_counts);
 	if (soldier_counts and soldier_counts->size()) {
 		Soldier_Descr const & soldier_descr =
-			dynamic_cast<Soldier_Descr const &>
+			ref_cast<Soldier_Descr const, Worker_Descr const>
 				(*tribe().get_worker_descr(tribe().worker_index("soldier")));
 		container_iterate_const(Soldier_Counts, *soldier_counts, i) {
 			Soldier_Strength const ss = i.current->first;
 			for (uint32_t j = i.current->second; j; --j) {
 				Soldier & soldier =
-					dynamic_cast<Soldier &>
+					ref_cast<Soldier, Worker>
 						(soldier_descr.create(game, owner(), 0, get_position()));
 				soldier.set_level(ss.hp, ss.attack, ss.defense, ss.evade);
 				Building::add_worker(soldier);
@@ -164,7 +164,7 @@ void MilitarySite::prefill
 void MilitarySite::init(Editor_Game_Base & egbase)
 {
 	ProductionSite::init(egbase);
-	Game & game = dynamic_cast<Game &>(egbase);
+	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 	std::vector<Worker *> const & ws = get_workers();
 	container_iterate_const(std::vector<Worker *>, ws, i)
 		if (upcast(Soldier, soldier, *i.current)) {
@@ -203,7 +203,7 @@ void MilitarySite::cleanup(Editor_Game_Base & egbase)
 {
 	// unconquer land
 	if (m_didconquer)
-		egbase.unconquer_area
+		ref_cast<Game, Editor_Game_Base>(egbase).unconquer_area
 			(Player_Area<Area<FCoords> >
 			 	(owner().player_number(),
 			 	 Area<FCoords>
@@ -231,8 +231,8 @@ void MilitarySite::request_soldier_callback
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	MilitarySite & msite = dynamic_cast<MilitarySite &>(target);
-	Soldier & s = dynamic_cast<Soldier &>(*w);
+	MilitarySite & msite = ref_cast<MilitarySite, PlayerImmovable>(target);
+	Soldier      & s     = ref_cast<Soldier,      Worker>         (*w);
 
 	assert(s.get_location(game) == &msite);
 
@@ -274,13 +274,14 @@ void MilitarySite::update_soldier_request()
 		m_soldier_request = 0;
 	}
 
-	if (m_capacity < present.size())
-		if (upcast(Game, game, &owner().egbase()))
-			for (uint32_t i = 0; i < present.size() - m_capacity; ++i) {
-				Soldier & soldier = *present[i];
-				soldier.reset_tasks(*game);
-				soldier.start_task_leavebuilding(*game, true);
-			}
+	if (m_capacity < present.size()) {
+		Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+		for (uint32_t i = 0; i < present.size() - m_capacity; ++i) {
+			Soldier & soldier = *present[i];
+			soldier.reset_tasks(game);
+			soldier.start_task_leavebuilding(game, true);
+		}
+	}
 }
 
 
@@ -425,7 +426,7 @@ void MilitarySite::setSoldierCapacity(uint32_t const capacity) {
 
 void MilitarySite::dropSoldier(Soldier & soldier)
 {
-	Game & game = dynamic_cast<Game &>(owner().egbase());
+	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
 
 	if (!isPresent(soldier)) {
 		// This can happen when the "drop soldier" player command is delayed
@@ -463,7 +464,7 @@ bool MilitarySite::canAttack()
 
 void MilitarySite::aggressor(Soldier & enemy)
 {
-	Game & game = dynamic_cast<Game &>(owner().egbase());
+	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
 	Map  & map  = game.map();
 	if
 		(enemy.get_owner() == &owner() ||
@@ -500,7 +501,7 @@ void MilitarySite::aggressor(Soldier & enemy)
 
 bool MilitarySite::attack(Soldier & enemy)
 {
-	Game & game = dynamic_cast<Game &>(owner().egbase());
+	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
 	std::vector<Soldier *> present = presentSoldiers();
 
 	Soldier * defender = 0;
@@ -571,7 +572,8 @@ void MilitarySite::sendAttacker(Soldier & soldier, Building & target)
 	sj.stayhome = false;
 	m_soldierjobs.push_back(sj);
 
-	soldier.update_task_buildingwork(dynamic_cast<Game &>(owner().egbase()));
+	soldier.update_task_buildingwork
+		(ref_cast<Game, Editor_Game_Base>(owner().egbase()));
 }
 
 

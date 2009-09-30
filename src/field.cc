@@ -53,4 +53,4 @@ void Field::set_brightness
 	brightness = static_cast<int8_t>(b); //FIXME: ARGH !!
 }
 
-};
+}

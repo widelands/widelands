@@ -1091,6 +1091,6 @@ inline void move_r(X_Coordinate const mapwidth, FCoords & f, Map_Index & i) {
 
 std::string g_VariableCallback(std::string, void * data);
 
-};
+}
 
 #endif

@@ -832,4 +832,4 @@ void Terrain_Descr::load_graphics()
 		m_texture = g_gr->get_maptexture(*m_picnametempl, m_frametime);
 }
 
-};
+}

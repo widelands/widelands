@@ -311,6 +311,6 @@ private:
 	explicit World    (World const &);
 };
 
-};
+}
 
 #endif

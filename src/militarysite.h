@@ -147,6 +147,6 @@ private:
 	std::vector<SoldierJob> m_soldierjobs;
 };
 
-};
+}
 
 #endif

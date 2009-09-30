@@ -486,4 +486,4 @@ Building_Index Tribe_Descr::safe_building_index
 	return result;
 }
 
-};
+}

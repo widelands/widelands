@@ -75,4 +75,4 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 	}
 }
 
-};
+}

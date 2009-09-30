@@ -80,6 +80,6 @@ private:
 	std::string m_value;
 };
 
-};
+}
 
 #endif

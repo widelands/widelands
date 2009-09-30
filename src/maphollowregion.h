@@ -73,6 +73,6 @@ private:
 	typename Area_type::Coords_type m_left; //  left-most node of current row
 };
 
-};
+}
 
 #endif

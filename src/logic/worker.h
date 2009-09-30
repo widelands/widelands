@@ -21,6 +21,7 @@
 #define WORKER_H
 
 #include "economy/idleworkersupply.h"
+#include "economy/ware_instance.h"
 #include "worker_descr.h"
 
 namespace Widelands {
@@ -88,7 +89,7 @@ public:
 
 	Player & owner() const {assert(get_owner()); return *get_owner();}
 	PlayerImmovable * get_location(Editor_Game_Base & egbase) {
-		return dynamic_cast<PlayerImmovable *>(m_location.get(egbase));
+		return m_location.get(egbase);
 	}
 	Economy * get_economy() const throw () {return m_economy;}
 
@@ -108,12 +109,11 @@ public:
 	void set_economy(Economy *);
 
 	WareInstance       * get_carried_item(Editor_Game_Base       & egbase) {
-		return reinterpret_cast<WareInstance *>(m_carried_item.get(egbase));
+		return m_carried_item.get(egbase);
 	}
 	WareInstance const * get_carried_item(Editor_Game_Base const & egbase) const
 	{
-		return
-			reinterpret_cast<WareInstance const *>(m_carried_item.get(egbase));
+		return m_carried_item.get(egbase);
 	}
 	void set_carried_item(Game &, WareInstance *);
 	WareInstance * fetch_carried_item(Game &);
@@ -231,14 +231,14 @@ private:
 	bool run_geologist_find   (Game &, State &, Action const &);
 	bool run_playFX           (Game &, State &, Action const &);
 
-	Object_Ptr    m_location; ///< meta location of the worker, a PlayerImmovable
+	OPtr<PlayerImmovable> m_location; ///< meta location of the worker
 	Economy          * m_economy;      ///< economy this worker is registered in
-	Object_Ptr         m_carried_item; ///< item we are carrying
+	OPtr<WareInstance>    m_carried_item; ///< item we are carrying
 	IdleWorkerSupply * m_supply;   ///< supply while gowarehouse and not transfer
 	int32_t                m_needed_exp;   ///< experience for next level
 	int32_t                m_current_exp;  ///< current experience
 };
 
-};
+}
 
 #endif

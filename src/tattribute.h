@@ -34,6 +34,6 @@ enum tAttribute {
 	atrTotal = 100
 };
 
-};
+}
 
 #endif

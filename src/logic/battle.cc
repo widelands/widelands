@@ -71,28 +71,24 @@ void Battle::init (Editor_Game_Base & egbase)
 
 	m_creationtime = egbase.get_gametime();
 
-	if (upcast(Game, game, &egbase)) {
-		if (m_first->getBattle())
-			m_first->getBattle()->cancel(*game, *m_first);
-		m_first->setBattle(*game, this);
-		if (m_second->getBattle())
-			m_second->getBattle()->cancel(*game, *m_second);
-		m_second->setBattle(*game, this);
-	}
+	if (Battle * const battle = m_first ->getBattle())
+		battle->cancel(ref_cast<Game, Editor_Game_Base>(egbase), *m_first);
+	m_first->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), this);
+	if (Battle * const battle = m_second->getBattle())
+		battle->cancel(ref_cast<Game, Editor_Game_Base>(egbase), *m_second);
+	m_second->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), this);
 }
 
 
 void Battle::cleanup (Editor_Game_Base & egbase)
 {
-	if (upcast(Game, game, &egbase)) {
-		if (m_first) {
-			m_first ->setBattle(*game, 0);
-			m_first  = 0;
-		}
-		if (m_second) {
-			m_second->setBattle(*game, 0);
-			m_second = 0;
-		}
+	if (m_first) {
+		m_first ->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), 0);
+		m_first  = 0;
+	}
+	if (m_second) {
+		m_second->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), 0);
+		m_second = 0;
 	}
 
 	Map_Object::cleanup(egbase);
@@ -320,4 +316,4 @@ Map_Object::Loader * Battle::load
 	return loader.release();
 }
 
-};
+}

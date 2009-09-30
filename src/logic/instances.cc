@@ -505,4 +505,4 @@ void Map_Object::save
 	fw.Unsigned32(mos->get_object_file_index(*this));
 }
 
-};
+}

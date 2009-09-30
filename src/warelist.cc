@@ -122,4 +122,4 @@ bool WareList::operator== (WareList const & wl) const
 	return true;
 }
 
-};
+}

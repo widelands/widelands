@@ -44,6 +44,6 @@ struct Textdomain {
 
 void                set_locale(std::string);
 std::string const & get_locale();
-};
+}
 
 #endif

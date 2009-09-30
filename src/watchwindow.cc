@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ struct WatchWindow : public UI::Window {
 	~WatchWindow();
 
 	Widelands::Game & game() const {
-		return dynamic_cast<Interactive_GameBase &>(*get_parent()).game();
+		return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent()).game();
 	}
 
 	UI::Signal1<Point> warp_mainview;
@@ -93,7 +93,8 @@ private:
 				 _("Follow"))
 		{}
 		virtual void clicked() const {
-			WatchWindow     & parent = dynamic_cast<WatchWindow &>(*get_parent());
+			WatchWindow     & parent =
+				ref_cast<WatchWindow, UI::Panel>(*get_parent());
 			Widelands::Game & game   = parent.game();
 			if
 				(Widelands::Map_Object const * const obj =
@@ -155,7 +156,8 @@ private:
 				 _("Center mainview on this"))
 		{}
 		virtual void clicked() const {
-			WatchWindow & parent  = dynamic_cast<WatchWindow &>(*get_parent());
+			WatchWindow & parent  =
+				ref_cast<WatchWindow, UI::Panel>(*get_parent());
 			Map_View    & mapview = parent.mapview;
 			parent.warp_mainview.call
 				(mapview.get_viewpoint()
@@ -182,7 +184,8 @@ private:
 			set_visible(visible);
 		}
 		virtual void clicked() const {
-			WatchWindow & parent  = dynamic_cast<WatchWindow &>(*get_parent());
+			WatchWindow & parent =
+				ref_cast<WatchWindow, UI::Panel>(*get_parent());
 			if (parent.views.size() == 1) {
 				delete &parent;
 				return;
@@ -209,7 +212,8 @@ private:
 			m_index   (index)
 		{}
 		virtual void clicked() const {
-			WatchWindow & parent  = dynamic_cast<WatchWindow &>(*get_parent());
+			WatchWindow & parent =
+				ref_cast<WatchWindow, UI::Panel>(*get_parent());
 			parent.save_coords();
 			parent.cur_index = m_index;
 			parent.last_visit = parent.game().get_gametime();

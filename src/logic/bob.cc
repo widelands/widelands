@@ -157,7 +157,7 @@ void Bob::init(Editor_Game_Base & egbase)
 void Bob::cleanup(Editor_Game_Base & egbase)
 {
 	while (m_stack.size()) //  bobs in the editor do not have tasks
-		do_pop_task(dynamic_cast<Game &>(egbase));
+		do_pop_task(ref_cast<Game, Editor_Game_Base>(egbase));
 
 	set_owner(0); // implicitly remove ourselves from owner's map
 
@@ -1047,4 +1047,4 @@ void Bob::log_general_info(Editor_Game_Base const & egbase)
 	}
 }
 
-};
+}

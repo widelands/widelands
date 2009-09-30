@@ -23,8 +23,6 @@
 #include "graphic/animation.h"
 #include "writeHTML.h"
 
-#include <cassert>
-
 namespace Widelands {
 struct Map;
 struct Route;
@@ -379,7 +377,7 @@ private:
 	std::string m_signal;
 };
 
-};
+}
 
 #endif
 

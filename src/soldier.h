@@ -239,6 +239,6 @@ private:
 	Battle * m_battle;
 };
 
-};
+}
 
 #endif

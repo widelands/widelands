@@ -104,6 +104,6 @@ public:
 		(Editor_Game_Base &, Map_Map_Object_Loader *, FileRead &);
 };
 
-};
+}
 
 #endif

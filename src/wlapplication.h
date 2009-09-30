@@ -31,7 +31,7 @@
 #include <string>
 #include <cstring>
 
-namespace Widelands {struct Game;};
+namespace Widelands {struct Game;}
 class Journal;
 
 ///Thrown if a commandline parameter is faulty

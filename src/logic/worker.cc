@@ -579,7 +579,7 @@ bool Worker::run_walk(Game & game, State & state, Action const & action)
 	int32_t max_steps = -1;
 
 	// First of all, make sure we're outside
-	if (imm == &dynamic_cast<Building &>(*get_location(game))) {
+	if (imm == &ref_cast<Building, PlayerImmovable>(*get_location(game))) {
 		start_task_leavebuilding(game, false);
 		return true;
 	}
@@ -787,7 +787,7 @@ bool Worker::run_removeobject(Game & game, State & state, Action const &)
  */
 bool Worker::run_geologist(Game & game, State & state, Action const & action)
 {
-	dynamic_cast<Flag const &>(*get_location(game));
+	ref_cast<Flag const, PlayerImmovable const>(*get_location(game));
 
 	molog
 		("  Start Geologist (%i attempts, %i radius -> %s)\n",
@@ -940,7 +940,8 @@ void Worker::set_location(PlayerImmovable *location)
 		// Interrupt whatever we've been doing.
 		set_economy(0);
 
-		send_signal(dynamic_cast<Game &>(owner().egbase()), "location");
+		send_signal
+			(ref_cast<Game, Editor_Game_Base>(owner().egbase()), "location");
 	}
 }
 
@@ -983,8 +984,7 @@ void Worker::init(Editor_Game_Base & egbase)
 	// is unknown to this worker till he is initialized
 	//  assert(get_location(egbase));
 
-	if (upcast(Game, game, &egbase))
-		create_needed_experience(*game); //  set his experience
+	create_needed_experience(ref_cast<Game, Editor_Game_Base>(egbase));
 }
 
 
@@ -1006,8 +1006,7 @@ void Worker::cleanup(Editor_Game_Base & egbase)
 	// or doing something else. Get Location might
 	// init a gowarehouse task or something and this results
 	// in a dirty stack. Nono, we do not want to end like this
-	if (upcast(Game, game, &egbase))
-		reset_tasks(*game);
+	reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
 
 	if (get_location(egbase))
 		set_location(0);
@@ -1497,7 +1496,8 @@ void Worker::return_update(Game & game, State & state)
 
 	signal_handled();
 
-	Building & location = dynamic_cast<Building &>(*get_location(game));
+	Building & location =
+		ref_cast<Building, PlayerImmovable>(*get_location(game));
 	if (BaseImmovable * const pos = game.map().get_immovable(get_position())) {
 		if (pos == &location) {
 			set_animation(game, 0);
@@ -1618,7 +1618,7 @@ void Worker::program_update(Game & game, State & state)
 
 	for (;;) {
 		WorkerProgram const & program =
-			dynamic_cast<WorkerProgram const &>(*state.program);
+			ref_cast<WorkerProgram const, BobProgramBase const>(*state.program);
 
 		if (static_cast<uint32_t>(state.ivar1) >= program.get_size())
 			return pop_task(game);
@@ -1756,7 +1756,7 @@ void Worker::dropoff_update(Game & game, State &)
 	WareInstance * item = get_carried_item(game);
 	BaseImmovable * const location = game.map()[get_position()].get_immovable();
 #ifndef NDEBUG
-	Building & ploc = dynamic_cast<Building &>(*get_location(game));
+	Building & ploc = ref_cast<Building, PlayerImmovable>(*get_location(game));
 	assert(&ploc == location || &ploc.base_flag() == location);
 #endif
 
@@ -1856,7 +1856,8 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 		// In order to return to the warehouse, we're switching to State_DropOff
 		if
 			(WareInstance * const item =
-			 	dynamic_cast<Flag &>(*location).fetch_pending_item(game, employer))
+			 	ref_cast<Flag, PlayerImmovable>(*location).fetch_pending_item
+			 		(game, employer))
 			set_carried_item(game, item);
 
 		set_animation(game, descr().get_animation("idle"));
@@ -1994,7 +1995,8 @@ const Bob::Task Worker::taskLeavebuilding = {
  */
 void Worker::start_task_leavebuilding(Game & game, bool const changelocation)
 {
-	Building & building = dynamic_cast<Building &>(*get_location(game));
+	Building & building =
+		ref_cast<Building, PlayerImmovable>(*get_location(game));
 
 	// Set the wait task
 	push_task(game, taskLeavebuilding);
@@ -2140,7 +2142,7 @@ void Worker::fugitive_update(Game & game, State & state)
 		molog("[fugitive]: found a flag connected to warehouse(s)\n");
 
 		container_iterate_const(std::vector<ImmovableFound>, flags, i) {
-			Flag & flag = dynamic_cast<Flag &>(*i.current->object);
+			Flag & flag = ref_cast<Flag, BaseImmovable>(*i.current->object);
 
 			int32_t const dist =
 				map.calc_distance(get_position(), i.current->coords);
@@ -2236,7 +2238,7 @@ void Worker::geologist_update(Game & game, State & state)
 	const World & world = map.world();
 	Area<FCoords> owner_area
 		(map.get_fcoords
-		 	(dynamic_cast<Flag &>(*get_location(game)).get_position()),
+		 	(ref_cast<Flag, PlayerImmovable>(*get_location(game)).get_position()),
 		 state.ivar2);
 
 	// Check if it's time to go home
@@ -2369,4 +2371,4 @@ void Worker::draw
 		draw_inner(game, dst, calc_drawpos(game, pos));
 }
 
-};
+}

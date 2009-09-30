@@ -84,6 +84,6 @@ private:
 	int32_t m_acked_ware;
 };
 
-};
+}
 
 #endif

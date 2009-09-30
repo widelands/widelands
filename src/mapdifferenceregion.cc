@@ -75,4 +75,4 @@ throw ()
 	m_passed_corner     = false;
 }
 
-};
+}

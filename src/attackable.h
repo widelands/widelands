@@ -75,4 +75,4 @@ protected:
 
 }
 
-#endif // ATTACKABLE_H
+#endif

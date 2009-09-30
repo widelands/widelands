@@ -326,13 +326,13 @@ void Warehouse::postfill
 				insert_workers(i.i, count);
 	if (soldier_counts) {
 		Soldier_Descr const & soldier_descr =
-			dynamic_cast<Soldier_Descr const &>
+			ref_cast<Soldier_Descr const, Worker_Descr>
 				(*tribe().get_worker_descr(tribe().worker_index("soldier")));
 		container_iterate_const(Soldier_Counts, *soldier_counts, i) {
 			Soldier_Strength const ss = i.current->first;
 			for (uint32_t j = i.current->second; j; --j) {
 				Soldier & soldier =
-					dynamic_cast<Soldier &>
+					ref_cast<Soldier, Worker>
 						(soldier_descr.create(game, owner(), this, get_position()));
 				soldier.set_level(ss.hp, ss.attack, ss.defense, ss.evade);
 				incorporate_worker(game, soldier);
@@ -377,28 +377,29 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	m_supply->set_nrwares  (nr_wares);
 	m_supply->set_nrworkers(nr_workers);
 
-	if (upcast(Game, game, &egbase)) {
-		for (Ware_Index i = Ware_Index::First(); i < nr_wares;   ++i) {
-			Request & req =
-				*new Request
-					(*this, i, Warehouse::idle_request_cb, Request::WARE);
+	for (Ware_Index i = Ware_Index::First(); i < nr_wares;   ++i) {
+		Request & req =
+			*new Request(*this, i, Warehouse::idle_request_cb, Request::WARE);
 
-			req.set_idle(true);
+		req.set_idle(true);
 
-			m_requests.push_back(&req);
-		}
-		for (Ware_Index i = Ware_Index::First(); i < nr_workers; ++i) {
-			Request & req =
-				*new Request
-					(*this, i, &Warehouse::idle_request_cb, Request::WORKER);
-
-			req.set_idle(true);
-
-			m_requests.push_back(&req);
-		}
-		m_next_carrier_spawn = schedule_act(*game, CARRIER_SPAWN_INTERVAL);
-		m_next_military_act  = schedule_act(*game, 1000);
+		m_requests.push_back(&req);
 	}
+	for (Ware_Index i = Ware_Index::First(); i < nr_workers; ++i) {
+		Request & req =
+			*new Request
+				(*this, i, &Warehouse::idle_request_cb, Request::WORKER);
+
+		req.set_idle(true);
+
+		m_requests.push_back(&req);
+	}
+	m_next_carrier_spawn =
+		schedule_act
+			(ref_cast<Game, Editor_Game_Base>(egbase), CARRIER_SPAWN_INTERVAL);
+	m_next_military_act  =
+		schedule_act
+			(ref_cast<Game, Editor_Game_Base>(egbase), 1000);
 	m_target_supply.resize(m_requests.size());
 
 	// Even though technically, a warehouse might be completely empty,
@@ -410,7 +411,7 @@ void Warehouse::init(Editor_Game_Base & egbase)
 		 	(egbase.map().get_fcoords(get_position()), vision_range()));
 
 	if (uint32_t const conquer_radius = get_conquers())
-		egbase.conquer_area
+		ref_cast<Game, Editor_Game_Base>(egbase).conquer_area
 			(Player_Area<Area<FCoords> >
 			 	(owner().player_number(),
 			 	 Area<FCoords>
@@ -442,27 +443,22 @@ Destroy the warehouse.
 */
 void Warehouse::cleanup(Editor_Game_Base & egbase)
 {
-	if (upcast(Game, game, &egbase)) {
+	while (m_requests.size()) {
+		delete m_requests.back();
+		m_requests.pop_back();
+	}
 
-		while (m_requests.size()) {
-			delete m_requests.back();
-			m_requests.pop_back();
-		}
-
-		//  all cached workers are unbound and freed
-		while (m_incorporated_workers.size()) {
-			//  If the game ends and this worker has been created before this
-			//  warehouse, it might already be deleted. So do not try and free him
-			if
-				(upcast
-				 	(Worker, worker, m_incorporated_workers.begin()->get(egbase)))
-				worker->reset_tasks(*game);
-			m_incorporated_workers.erase(m_incorporated_workers.begin());
-		}
+	//  all cached workers are unbound and freed
+	while (m_incorporated_workers.size()) {
+		//  If the game ends and this worker has been created before this
+		//  warehouse, it might already be deleted. So do not try and free him
+		if (upcast(Worker, worker, m_incorporated_workers.begin()->get(egbase)))
+			worker->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
+		m_incorporated_workers.erase(m_incorporated_workers.begin());
 	}
 	Map & map = egbase.map();
 	if (const uint32_t conquer_radius = get_conquers())
-		egbase.unconquer_area
+		ref_cast<Game, Editor_Game_Base>(egbase).unconquer_area
 			(Player_Area<Area<FCoords> >
 			 	(owner().player_number(),
 			 	 Area<FCoords>(map.get_fcoords(get_position()), conquer_radius)),
@@ -510,11 +506,12 @@ void Warehouse::act(Game & game, uint32_t const data)
 		const std::string & workername = workerdescr.name();
 		//  Look if we got one in stock of those.
 		for
-			(std::vector<Object_Ptr>::iterator it = m_incorporated_workers.begin();
+			(std::vector<OPtr<Worker> >::iterator it =
+			 	m_incorporated_workers.begin();
 			 it != m_incorporated_workers.end();
 			 ++it)
 		{
-			Worker const & worker = dynamic_cast<Worker const &>(*it->get(game));
+			Worker const & worker = *it->get(game);
 			if (worker.name() == workername) {
 				upcast(Soldier const, soldier, &worker);
 
@@ -658,7 +655,8 @@ uint32_t Warehouse::count_workers
 
 	// NOTE: This code lies about the tAttributes of non-instantiated workers.
 
-	container_iterate_const(std::vector<Object_Ptr>, m_incorporated_workers, i)
+	container_iterate_const
+		(std::vector<OPtr<Worker> >, m_incorporated_workers, i)
 		if (Map_Object const * const w = i.current->get(game))
 			if (std::find(subs.begin(), subs.end(), &w->descr()) != subs.end())
 				//  This is one of the workers in our sum.
@@ -684,7 +682,8 @@ Worker & Warehouse::launch_worker
 
 			//  look if we got one of those in stock
 			const std::string & workername = workerdescr.name();
-			container_iterate(std::vector<Object_Ptr>, m_incorporated_workers, i)
+			container_iterate
+				(std::vector<OPtr<Worker> >, m_incorporated_workers, i)
 				if (upcast(Worker, worker, i.current->get(game)))
 					if (worker->name() == workername) {
 						--unincorporated;
@@ -763,12 +762,12 @@ void Warehouse::sort_worker_in
 	//  We insert this worker, but to keep some consistency in ordering, we tell
 	//  him where to insert.
 
-	std::vector<Object_Ptr>::iterator i = m_incorporated_workers.begin();
+	std::vector<OPtr<Worker> >::iterator i = m_incorporated_workers.begin();
 
 	while
 		(i != m_incorporated_workers.end()
 		 &&
-		 workername <= dynamic_cast<Worker &>(*i->get(egbase)).name())
+		 workername <= i->get(egbase)->name())
 		++i;
 	if (i == m_incorporated_workers.end()) {
 		m_incorporated_workers.insert(i, &w);
@@ -778,7 +777,7 @@ void Warehouse::sort_worker_in
 	while
 		(i != m_incorporated_workers.end()
 		 &&
-		 w.serial() <= dynamic_cast<Worker &>(*i->get(egbase)).serial())
+		 w.serial() <= i->get(egbase)->serial())
 		++i;
 
 	m_incorporated_workers.insert(i, &w);
@@ -852,7 +851,8 @@ void Warehouse::idle_request_cb
 	if (w)
 		w->schedule_incorporate(game);
 	else
-		dynamic_cast<Warehouse &>(target).m_supply->add_wares(ware, 1);
+		ref_cast<Warehouse, PlayerImmovable>(target).m_supply->add_wares
+			(ware, 1);
 }
 
 
@@ -924,7 +924,7 @@ void Warehouse::aggressor(Soldier & enemy)
 	if (!get_conquers())
 		return;
 
-	Game & game = dynamic_cast<Game &>(owner().egbase());
+	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
 	Map  & map  = game.map();
 	if
 		(enemy.get_owner() == &owner() ||
@@ -948,20 +948,20 @@ void Warehouse::aggressor(Soldier & enemy)
 		return;
 
 	Soldier & defender =
-		dynamic_cast<Soldier &>(launch_worker(game, soldier_index, noreq));
+		ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
 	defender.startTaskDefense(game, false);
 	new Battle(game, defender, enemy);
 }
 
 bool Warehouse::attack(Soldier & enemy)
 {
-	Game & game = dynamic_cast<Game &>(owner().egbase());
+	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
 	Ware_Index const soldier_index = tribe().worker_index("soldier");
 	Requirements noreq;
 
 	if (count_workers(game, soldier_index, noreq)) {
 		Soldier & defender =
-			dynamic_cast<Soldier &>(launch_worker(game, soldier_index, noreq));
+			ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
 		defender.startTaskDefense(game, true);
 		new Battle(game, defender, enemy);
 		return true;
@@ -972,4 +972,4 @@ bool Warehouse::attack(Soldier & enemy)
 	return false;
 }
 
-};
+}

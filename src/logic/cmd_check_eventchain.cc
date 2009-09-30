@@ -104,4 +104,4 @@ void Cmd_CheckEventChain::Write
 	fw.Unsigned16(m_eventchain_id);
 }
 
-};
+}

@@ -330,6 +330,6 @@ inline Player_Number StreamRead::Player_Number8(Player_Number const nr_players)
 	return p;
 }
 
-};
+}
 
 #endif

@@ -139,7 +139,7 @@ struct BulldozeConfirm : public UI::Window {
 		 Widelands::PlayerImmovable * todestroy = 0);
 
 	Interactive_Player & iaplayer() const {
-		return dynamic_cast<Interactive_Player &>(*get_parent());
+		return ref_cast<Interactive_Player, UI::Panel>(*get_parent());
 	}
 
 	virtual void think();
@@ -180,7 +180,7 @@ private:
 				 g_gr->get_picture(PicMod_Game, "pics/menu_abort.png"))
 		{}
 		virtual void clicked() const {
-			dynamic_cast<BulldozeConfirm &>(*get_parent()).die();
+			ref_cast<BulldozeConfirm, UI::Panel>(*get_parent()).die();
 		}
 	} m_cancel;
 };
@@ -238,7 +238,8 @@ Issue the CMD_BULLDOZE command for this building.
 */
 void BulldozeConfirm::OK::clicked() const
 {
-	BulldozeConfirm & parent = dynamic_cast<BulldozeConfirm &>(*get_parent());
+	BulldozeConfirm & parent =
+		ref_cast<BulldozeConfirm, UI::Panel>(*get_parent());
 	Interactive_Player & iaplayer = parent.iaplayer();
 	Widelands::Game & game   = iaplayer.game();
 	upcast(Building,        building,  parent.m_building.get(game));
@@ -475,7 +476,7 @@ struct Building_Window : public UI::Window {
 	Building & building() {return m_building;}
 
 	Interactive_GameBase & igbase() const {
-		return dynamic_cast<Interactive_GameBase &>(*get_parent());
+		return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent());
 	}
 
 	virtual void draw(RenderTarget &);
@@ -731,7 +732,8 @@ Callback for bulldozing request
 void Building_Window::act_bulldoze()
 {
 	new BulldozeConfirm
-		(dynamic_cast<Interactive_Player &>(igbase()), m_building);
+		(ref_cast<Interactive_Player, Interactive_GameBase>(igbase()),
+		 m_building);
 }
 
 void Building_Window::act_start_stop() {
@@ -790,7 +792,8 @@ void Building_Window::act_debug()
 
 void Building_Window::toggle_workarea() {
 	Widelands::Map & map =
-		dynamic_cast<Interactive_GameBase const &>(*get_parent()).egbase().map();
+		ref_cast<Interactive_GameBase const, UI::Panel>(*get_parent()).egbase()
+		.map();
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	if (m_workarea_job_id) {
 		overlay_manager.remove_overlay(m_workarea_job_id);
@@ -832,7 +835,7 @@ struct ProductionSite_Window : public Building_Window {
 		 UI::Window *         & registry);
 
 	ProductionSite & productionsite() {
-		return dynamic_cast<ProductionSite &>(building());
+		return ref_cast<ProductionSite, Building>(building());
 	}
 
 	virtual void think();
@@ -912,7 +915,8 @@ void ConstructionSite_Window::think()
 {
 	Building_Window::think();
 
-	ConstructionSite const & cs = dynamic_cast<ConstructionSite &>(building());
+	ConstructionSite const & cs =
+		ref_cast<ConstructionSite, Building>(building());
 	bool const can_act = igbase().can_act(cs.owner().player_number());
 	container_iterate(std::list<PriorityButtonHelper>, m_priority_helpers, i)
 		i.current->update_buttons(can_act);
@@ -946,7 +950,7 @@ struct Warehouse_Window : public Building_Window {
 		(Interactive_GameBase & parent, Warehouse &, UI::Window * & registry);
 
 	Warehouse & warehouse() {
-		return dynamic_cast<Warehouse &>(building());
+		return ref_cast<Warehouse, Building>(building());
 	}
 
 	virtual void think();
@@ -1109,7 +1113,7 @@ struct ProductionSite_Window_ListWorkerWindow : public UI::Window {
 	}
 
 	Interactive_GameBase & iaplayer() const {
-		return dynamic_cast<Interactive_GameBase &>(*get_parent());
+		return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent());
 	}
 
 	virtual void think();
@@ -1481,7 +1485,7 @@ struct MilitarySite_Window : public Building_Window {
 		 UI::Window *       & registry);
 
 	MilitarySite & militarysite() {
-		return dynamic_cast<MilitarySite &>(building());
+		return ref_cast<MilitarySite, Building>(building());
 	}
 
 	virtual void think();
@@ -1683,7 +1687,7 @@ struct TrainingSite_Window : public ProductionSite_Window {
 		(Interactive_GameBase & parent, TrainingSite &, UI::Window * & registry);
 
 	TrainingSite & trainingsite() {
-		return dynamic_cast<TrainingSite &>(building());
+		return ref_cast<TrainingSite, Building>(building());
 	}
 
 	virtual void think();
@@ -1777,7 +1781,7 @@ private:
 						parent.add(this, UI::Align_Top);
 					}
 					void clicked() const {
-						dynamic_cast<TrainingSite_Window &>
+						ref_cast<TrainingSite_Window, UI::Panel>
 							(*get_parent()->get_parent()->get_parent()->get_parent())
 							.act_change_soldier_capacity(-1);
 					}
@@ -1803,7 +1807,7 @@ private:
 						parent.add(this, UI::Align_Top);
 					}
 					void clicked() const {
-						dynamic_cast<TrainingSite_Window &>
+						ref_cast<TrainingSite_Window, UI::Panel>
 							(*get_parent()->get_parent()->get_parent()->get_parent())
 							.act_change_soldier_capacity(1);
 					}
@@ -1924,9 +1928,10 @@ get out selected soldier from this training site.
 void TrainingSite_Window::Tab_Panel::Sold_Box::Drop_Selected_Soldier::clicked()
 	const
 {
-	Sold_Box & sold_box = dynamic_cast<Sold_Box &>(*get_parent());
+	Sold_Box & sold_box = ref_cast<Sold_Box, UI::Panel>(*get_parent());
 	if (sold_box.m_table.selection_index() != Table::no_selection_index())
-		dynamic_cast<TrainingSite_Window &>(*sold_box.get_parent()->get_parent())
+		ref_cast<TrainingSite_Window, UI::Panel>
+			(*sold_box.get_parent()->get_parent())
 			.act_drop_soldier(sold_box.m_table.get_selected().serial());
 }
 

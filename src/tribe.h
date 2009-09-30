@@ -190,6 +190,6 @@ private:
 	explicit Tribe_Descr    (Tribe_Descr const &);
 };
 
-};
+}
 
 #endif

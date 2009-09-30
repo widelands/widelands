@@ -2899,7 +2899,7 @@ bool FindBobEnemySoldier::accept(Bob * const imm) const
 
 
 
-};
+}
 
 /*
 ===============

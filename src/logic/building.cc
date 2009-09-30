@@ -191,11 +191,11 @@ Building & Building_Descr::create
 	b.m_position = pos;
 	b.set_owner(&owner);
 	b.prefill
-		(dynamic_cast<Game &>(egbase),
+		(ref_cast<Game, Editor_Game_Base>(egbase),
 		 ware_counts, worker_counts, soldier_counts);
 	b.init(egbase);
 	b.postfill
-		(dynamic_cast<Game &>(egbase),
+		(ref_cast<Game, Editor_Game_Base>(egbase),
 		 ware_counts, worker_counts, soldier_counts);
 
 	return b;
@@ -258,7 +258,7 @@ Building & Building_Descr::create_constructionsite
 	{
 
 		ConstructionSite & csite =
-			dynamic_cast<ConstructionSite &>(descr->create_object());
+			ref_cast<ConstructionSite, Map_Object>(descr->create_object());
 		csite.set_building(*this);
 		if (old)
 			csite.set_previous_building(old);
@@ -364,7 +364,9 @@ void Building::init(Editor_Game_Base & egbase)
 	{
 		Flag * flag = dynamic_cast<Flag *>(map.get_immovable(neighb));
 		if (not flag)
-			flag = new Flag(egbase, owner(), neighb);
+			flag =
+				new Flag
+					(ref_cast<Game, Editor_Game_Base>(egbase), owner(), neighb);
 		m_flag = flag;
 		flag->attach_building(egbase, *this);
 	}
@@ -703,7 +705,8 @@ void Building::draw_help
 	 Point                    const pos)
 {
 	Interactive_GameBase const & igbase =
-		dynamic_cast<Interactive_GameBase const &>(*game.get_ibase());
+		ref_cast<Interactive_GameBase const, Interactive_Base const>
+			(*game.get_ibase());
 	uint32_t const dpyflags = igbase.get_display_flags();
 
 	if (dpyflags & Interactive_Base::dfShowCensus) {
@@ -831,4 +834,4 @@ void Building::remove_worker(Worker & worker) {
 	}
 }
 
-};
+}

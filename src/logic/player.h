@@ -444,7 +444,7 @@ struct Player :
 		m_areawatchers.erase(&areawatcher);
 	}
 
-	typedef std::set<Object_Ptr> AreaWatchers;
+	typedef std::set<OPtr<AreaWatcher> > AreaWatchers;
 	const AreaWatchers & areawatchers() const throw () {return m_areawatchers;}
 
 	// Statistics
@@ -504,6 +504,6 @@ private:
 	BuildingStats m_building_stats;
 };
 
-};
+}
 
 #endif

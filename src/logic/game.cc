@@ -24,6 +24,7 @@
 #include "computer_player.h"
 #include "events/event.h"
 #include "events/event_chain.h"
+#include "findimmovable.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 #include "ui_fsmenu/launchgame.h"
@@ -983,4 +984,227 @@ void Game::WriteStatistics(FileWrite & fw)
 		}
 }
 
-};
+/// This unconquers an area. This is only possible, when there is a building
+/// placed on this node.
+void Game::unconquer_area
+	(Player_Area<Area<FCoords> > player_area,
+	 Player_Number         const destroying_player)
+{
+	assert(0 <= player_area.x);
+	assert     (player_area.x < map().get_width());
+	assert(0 <= player_area.y);
+	assert     (player_area.y < map().get_height());
+	assert(&map()[0] <= player_area.field);
+	assert             (player_area.field < &map()[map().max_index()]);
+	assert(0 < player_area.player_number);
+	assert    (player_area.player_number <= map().get_nrplayers());
+
+	//  Here must be a building.
+	assert
+		(dynamic_cast<Building const &>(*map().get_immovable(player_area))
+		 .owner().player_number()
+		 ==
+		 player_area.player_number);
+
+	//  step 1: unconquer area of this building
+	do_conquer_area(player_area, false, destroying_player);
+
+	//  step 5: deal with player immovables in the lost area
+	//  Players are not allowed to have their immovables on their borders.
+	//  Therefore the area must be enlarged before calling
+	//  cleanup_playerimmovables_area, so that those new border locations are
+	//  covered.
+	++player_area.radius;
+	player_area.player_number = destroying_player;
+	cleanup_playerimmovables_area(player_area);
+}
+
+/// This conquers a given area because of a new (military) building that is set
+/// there.
+void Game::conquer_area(Player_Area<Area<FCoords> > player_area) {
+	assert(0 <= player_area.x);
+	assert     (player_area.x < map().get_width());
+	assert(0 <= player_area.y);
+	assert     (player_area.y < map().get_height());
+	assert(&map()[0] <= player_area.field);
+	assert             (player_area.field < &map()[map().max_index()]);
+	assert(0 < player_area.player_number);
+	assert    (player_area.player_number <= map().get_nrplayers());
+
+	do_conquer_area(player_area, true);
+
+	//  Players are not allowed to have their immovables on their borders.
+	//  Therefore the area must be enlarged before calling
+	//  cleanup_playerimmovables_area, so that those new border locations are
+	//  covered.
+	++player_area.radius;
+	cleanup_playerimmovables_area(player_area);
+}
+
+
+void Game::conquer_area_no_building(Player_Area<Area<FCoords> > player_area) {
+	assert(0 <= player_area.x);
+	assert     (player_area.x < map().get_width());
+	assert(0 <= player_area.y);
+	assert     (player_area.y < map().get_height());
+	Field const & first_field = map()[0];
+	assert(&first_field <= player_area.field);
+	assert(player_area.field < &first_field + map().max_index());
+	assert(0 < player_area.player_number);
+	assert    (player_area.player_number <= map().get_nrplayers());
+	MapRegion<Area<FCoords> > mr(map(), player_area);
+	do {
+		Player_Number const owner = mr.location().field->get_owned_by();
+		if (owner != player_area.player_number) {
+			if (owner)
+				receive(NoteField(mr.location(), LOSE));
+			mr.location().field->set_owned_by(player_area.player_number);
+			inform_players_about_ownership
+				(mr.location().field - &first_field, player_area.player_number);
+			receive (NoteField(mr.location(), GAIN));
+		}
+	} while (mr.advance(map()));
+
+	//  This must reach one step beyond the conquered area to adjust the borders
+	//  of neighbour players.
+	++player_area.radius;
+	map().recalc_for_field_area(player_area);
+}
+
+
+/// Conquers the given area for that player; does the actual work.
+/// Additionally, it updates the visible area for that player.
+void Game::do_conquer_area
+	(Player_Area<Area<FCoords> > player_area,
+	 bool          const conquer,
+	 Player_Number const preferred_player,
+	 bool          const neutral_when_no_influence,
+	 bool          const neutral_when_competing_influence,
+	 bool          const conquer_guarded_location_by_superior_influence)
+{
+	assert(0 <= player_area.x);
+	assert(player_area.x < map().get_width());
+	assert(0 <= player_area.y);
+	assert(player_area.y < map().get_height());
+	Field const & first_field = map()[0];
+	assert(&first_field <= player_area.field);
+	assert                (player_area.field < &first_field + map().max_index());
+	assert(0 < player_area.player_number);
+	assert    (player_area.player_number <= map().get_nrplayers());
+	assert    (preferred_player          <= map().get_nrplayers());
+	assert(preferred_player != player_area.player_number);
+	assert(not conquer or not preferred_player);
+	Player & conquering_player = player(player_area.player_number);
+	MapRegion<Area<FCoords> > mr(map(), player_area);
+	do {
+		Map_Index const index = mr.location().field - &first_field;
+		Military_Influence const influence =
+			map().calc_influence
+				(mr.location(), Area<>(player_area, player_area.radius));
+
+		Player_Number const owner = mr.location().field->get_owned_by();
+		if (conquer) {
+			//  adds the influence
+			Military_Influence new_influence_modified =
+				conquering_player.military_influence(index) += influence;
+			if (owner and not conquer_guarded_location_by_superior_influence)
+				new_influence_modified = 1;
+			if
+				(not owner
+				 or
+				 player(owner).military_influence(index) < new_influence_modified)
+			{
+				if (owner)
+					receive(NoteField(mr.location(), LOSE));
+				mr.location().field->set_owned_by(player_area.player_number);
+				inform_players_about_ownership(index, player_area.player_number);
+				receive (NoteField(mr.location(), GAIN));
+			}
+		} else if
+			(not (conquering_player.military_influence(index) -= influence)
+			 and
+			 owner == player_area.player_number)
+		{
+			//  The player completely lost influence over the location, which he
+			//  owned. Now we must see if some other player has influence and if
+			//  so, transfer the ownership to that player.
+			Player_Number best_player;
+			if
+				(preferred_player
+				 and
+				 player(preferred_player).military_influence(index))
+				best_player = preferred_player;
+			else {
+				best_player =
+					neutral_when_no_influence ? 0 : player_area.player_number;
+				Military_Influence highest_military_influence = 0;
+				Player_Number const nr_players = map().get_nrplayers();
+				iterate_players_existing_const(p, nr_players, *this, plr) {
+					if
+						(Military_Influence const value =
+						 	plr->military_influence(index))
+					{
+						if        (value >  highest_military_influence) {
+							highest_military_influence = value;
+							best_player = p;
+						} else if (value == highest_military_influence) {
+							Coords const c = map().get_fcoords(map()[index]);
+							best_player = neutral_when_competing_influence ?
+								0 : player_area.player_number;
+						}
+					}
+				}
+			}
+			if (best_player != player_area.player_number) {
+				receive (NoteField(mr.location(), LOSE));
+				mr.location().field->set_owned_by (best_player);
+				inform_players_about_ownership(index, best_player);
+				if (best_player)
+					receive (NoteField(mr.location(), GAIN));
+			}
+		}
+	} while (mr.advance(map()));
+
+	//  This must reach one step beyond the conquered area to adjust the borders
+	//  of neighbour players.
+	++player_area.radius;
+	map().recalc_for_field_area(player_area);
+}
+
+
+/// Makes sure that buildings cannot exist outside their owner's territory.
+void Game::cleanup_playerimmovables_area
+	(Player_Area<Area<FCoords> > const area)
+{
+	std::vector<ImmovableFound> immovables;
+	std::vector<PlayerImmovable *> burnlist;
+	Map & m = map();
+
+	//  find all immovables that need fixing
+	m.find_immovables(area, &immovables, FindImmovablePlayerImmovable());
+
+	container_iterate_const(std::vector<ImmovableFound>, immovables, i) {
+		PlayerImmovable & imm =
+			ref_cast<PlayerImmovable, BaseImmovable>(*i.current->object);
+		if
+			(not
+			 m[i.current->coords].is_interior(imm.owner().player_number()))
+			if
+				(std::find(burnlist.begin(), burnlist.end(), &imm)
+				 ==
+				 burnlist.end())
+				burnlist.push_back(&imm);
+	}
+
+	//  fix all immovables
+	container_iterate_const(std::vector<PlayerImmovable *>, burnlist, i) {
+		if (upcast(Building, building, *i.current))
+			building->set_defeating_player(area.player_number);
+		else if (upcast(Flag,     flag,     *i.current))
+			if (Building * const flag_building = flag->get_building())
+				flag_building->set_defeating_player(area.player_number);
+		(*i.current)->schedule_destroy(*this);
+	}
+}
+
+}

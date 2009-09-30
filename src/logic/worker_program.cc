@@ -603,4 +603,4 @@ void WorkerProgram::parse_playFX
 		atoi(cmd[2].c_str());
 }
 
-};
+}

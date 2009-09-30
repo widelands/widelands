@@ -325,7 +325,7 @@ void ProductionSite::init(Editor_Game_Base & egbase)
 {
 	Building::init(egbase);
 
-	Game & game = dynamic_cast<Game &>(egbase);
+	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 
 	//  Request missing wares.
 	container_iterate_const(std::vector<WaresQueue *>, m_input_queues, i)
@@ -444,7 +444,7 @@ void ProductionSite::request_worker_callback
 	 Worker          * const w,
 	 PlayerImmovable &       target)
 {
-	ProductionSite & psite = dynamic_cast<ProductionSite &>(target);
+	ProductionSite & psite = ref_cast<ProductionSite, PlayerImmovable>(target);
 
 	assert(w);
 	assert(w->get_location(game) == &psite);
@@ -721,4 +721,4 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 	m_program_time = schedule_act(game, m_post_timer);
 }
 
-};
+}

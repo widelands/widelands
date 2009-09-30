@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,33 +17,14 @@
  *
  */
 
-#include "areawatcher.h"
+#ifndef REF_CAST_H
+#define REF_CAST_H
 
-#include "logic/game.h"
-#include "logic/player.h"
+#include <cassert>
 
-namespace Widelands {
-
-void AreaWatcher::act(Game & game, uint32_t) {
-	game.player(player_number).remove_areawatcher(*this);
-	remove(game);
+template<typename Derived, typename Base> Derived & ref_cast(Base & base) {
+	assert(dynamic_cast<Derived *>(&base) == static_cast<Derived *>(&base));
+	return static_cast<Derived &>(base);
 }
 
-
-Map_Object_Descr g_areawatcher_descr("areawatcher", "Areawatcher");
-
-
-inline AreaWatcher::AreaWatcher(const Player_Area<> player_area) :
-Map_Object(&g_areawatcher_descr), Player_Area<>(player_area)
-{}
-
-
-AreaWatcher & AreaWatcher::create
-	(Editor_Game_Base & egbase, Player_Area<> const player_area)
-{
-	AreaWatcher & result = *new AreaWatcher(player_area);
-	result.init(egbase);
-	return result;
-}
-
-}
+#endif

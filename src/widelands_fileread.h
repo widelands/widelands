@@ -23,6 +23,6 @@
 #include "io/basic_fileread.h"
 #include "widelands_streamread.h"
 
-namespace Widelands {typedef basic_FileRead<StreamRead> FileRead;};
+namespace Widelands {typedef basic_FileRead<StreamRead> FileRead;}
 
 #endif

@@ -124,7 +124,7 @@ private:
 	std::vector<Request *>  m_requests; // one idle request per ware type
 
 	// Workers who live here at the moment
-	std::vector<Object_Ptr> m_incorporated_workers;
+	std::vector<OPtr<Worker> > m_incorporated_workers;
 	int32_t                 m_next_carrier_spawn; //  time of next carrier growth
 	int32_t                 m_next_military_act; // time of next military action
 
@@ -132,6 +132,6 @@ private:
 	std::vector<size_t> m_target_supply; // absolute value
 };
 
-};
+}
 
 #endif

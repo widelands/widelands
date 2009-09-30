@@ -64,6 +64,6 @@ private:
 	vector_type m_wares;
 };
 
-};
+}
 
 #endif

@@ -73,6 +73,6 @@ inline void StreamWrite::Area48(Area<Coords, uint16_t> const area) {
 	Unsigned16(area.radius);
 }
 
-};
+}
 
 #endif

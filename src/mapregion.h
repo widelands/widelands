@@ -71,6 +71,6 @@ private:
 	typename Area_type::Radius_type m_remaining_rows;
 };
 
-};
+}
 
 #endif
