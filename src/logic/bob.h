@@ -302,7 +302,7 @@ struct Bob : public Map_Object {
 	std::string get_signal() {return m_signal;}
 	State       * get_state(Task const &);
 	State const * get_state(Task const &) const;
-	void push_task(Game & game, Task const & task);
+	void push_task(Game & game, Task const & task, uint32_t tdelta = 10);
 	void pop_task(Game &);
 
 	void signal_handled();

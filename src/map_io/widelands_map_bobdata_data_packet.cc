@@ -43,7 +43,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 3
+#define CURRENT_PACKET_VERSION 4
 
 // Bob subtype versions
 #define CRITTER_BOB_PACKET_VERSION 1
@@ -160,8 +160,6 @@ void Map_Bobdata_Data_Packet::Read
 					for (uint32_t i = 0; i < new_stacksize; ++i) {
 						Bob::State & state = bob.m_stack[i];
 						try {
-							bool task_forcemove_hack = false;
-
 							{ //  Task
 								const Bob::Task * task;
 								char const * const taskname = fr.CString();
@@ -174,7 +172,6 @@ void Map_Bobdata_Data_Packet::Read
 									 not strcmp(taskname, "forcemove"))
 								{
 									task = &Bob::taskMove;
-									task_forcemove_hack = true;
 								} else if (not strcmp(taskname, "move"))
 									task = &Bob::taskMove;
 								else if (not strcmp(taskname, "roam"))
@@ -186,8 +183,7 @@ void Map_Bobdata_Data_Packet::Read
 										task = &Critter_Bob::taskProgram;
 									else
 										throw;
-								}
-								else if (not strcmp(taskname, "transfer"))
+								} else if (not strcmp(taskname, "transfer"))
 									task = &Worker::taskTransfer;
 								else if (not strcmp(taskname, "buildingwork"))
 									task = &Worker::taskBuildingwork;
@@ -234,9 +230,6 @@ void Map_Bobdata_Data_Packet::Read
 							state.ivar2 = fr.Signed32();
 							state.ivar3 = fr.Signed32();
 
-							if (state.task == &Bob::taskMove && task_forcemove_hack)
-								state.ivar2 = 1;
-
 							state.transfer = 0;
 
 							if (Serial const objvar1_serial = fr.Unsigned32()) {
@@ -269,8 +262,20 @@ void Map_Bobdata_Data_Packet::Read
 									bob_descr.get_animation(fr.CString()),
 									bob_descr.get_animation(fr.CString())
 								};
-								state.diranims = new DirAnimations
-									(ans[0], ans[1], ans[2], ans[3], ans[4], ans[5]);
+								state.diranims =
+									new DirAnimations
+										(ans[0], ans[1], ans[2], ans[3], ans[4], ans[5]);
+
+								if
+									(state.task == &Bob::taskMove and
+									 packet_version < 4)
+									throw wexception
+										("savegame created with old broken game engine "
+										 "version that pushed task move without "
+										 "starting walk first; not fixed; try another "
+										 "savegame from a slightly different point in "
+										 "time if available; the erroneous state that "
+										 "this bob is in only lasts 10ms");
 							} else
 								state.diranims = 0;
 

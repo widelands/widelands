@@ -270,12 +270,12 @@ void Bob::skip_act()
  * push_task() itself does not call any functions of the task, so the caller
  * can fill the state information with parameters for the task.
  */
-void Bob::push_task(Game & game, Task const & task)
+void Bob::push_task(Game & game, Task const & task, uint32_t const tdelta)
 {
 	assert(m_in_act || m_stack.empty());
 
 	m_stack.push_back(State(&task));
-	schedule_act(game, 10);
+	schedule_act(game, tdelta);
 }
 
 
@@ -759,34 +759,21 @@ void Bob::start_task_move
 	 DirAnimations const * const anims,
 	 bool                  const forcemove)
 {
-	push_task(game, taskMove);
-	State & state  = top_state();
-	state.ivar1    = dir;
-	state.ivar2    = forcemove;
-	state.diranims = anims;
+	int32_t const tdelta =
+		start_walk
+			(game,
+			 static_cast<WalkingDir>(dir),
+			 anims->get_animation(dir),
+			 forcemove);
+	if (tdelta < 0)
+		return send_signal(game, tdelta == -2 ? "blocked" : "fail");
+	push_task(game, taskMove, tdelta);
 }
 
 
-void Bob::move_update(Game & game, State & state)
+void Bob::move_update(Game & game, State &)
 {
-	if (state.diranims) {
-		if (get_signal() == "road")
-			molog("ERROR!!!!!!!!!!!!!!!! GOT SIGNAL 'road' BEFORE start_walk\n");
-
-		int32_t const tdelta =
-			start_walk
-				(game,
-				 static_cast<WalkingDir>(state.ivar1),
-				 state.diranims->get_animation(state.ivar1),
-				 state.ivar2);
-		state.diranims = 0;
-
-		if (tdelta < 0) {
-			send_signal(game, tdelta == -2 ? "blocked" : "fail");
-			return pop_task(game);
-		} else
-			return schedule_act(game, tdelta);
-	} else if (m_walkend <= game.get_gametime()) {
+	if (m_walkend <= game.get_gametime()) {
 		end_walk();
 		return pop_task(game);
 	} else
