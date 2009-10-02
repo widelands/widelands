@@ -1,6 +1,6 @@
 help=_Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong.
 default_target_quantity=15
-preciousness=3
+preciousness=2
 
 [idle]
 pics=meat_idle.png

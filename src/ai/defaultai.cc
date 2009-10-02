@@ -849,14 +849,11 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 							if (bf->consumers_nearby[bo.outputs[k]] > 0)
 								++iosum;
 						prio += 2 * iosum;
-					}
+					} else
+						continue;
 
-					// Prefer building space in the inner land.
-					prio /= (1 + (bf->unowned_land_nearby / 10));
-
-					// And especially spaces near the enemy are unlikely
-					if (bf->enemy_nearby)
-						prio /= 2;
+					// take care about borders and enemies
+					prio = recalc_with_border_range(*bf, prio);
 
 					// do not construct more than one building,
 					// if supply line is already broken.
@@ -890,6 +887,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				prio -= (bo.cnt_under_construction + numof_warehouses) * 25;
 				prio *= 2;
 
+				// take care about borders and enemies
+				prio = recalc_with_border_range(*bf, prio);
+
 			} else if (bo.type == BuildingObserver::TRAININGSITE) {
 				// Start building trainingsites when there are already more than 50
 				// other buildings. That should be enough for a working economy.
@@ -899,6 +899,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				prio += mines.size();
 				prio  = prio / (bo.total_count() + 1);
 				prio -= (bo.total_count() + 1) * 50;
+
+				// take care about borders and enemies
+				prio = recalc_with_border_range(*bf, prio);
 			}
 
 			// avoid to have too many construction sites
@@ -917,9 +920,12 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 						prio -= 3;
 			}
 
+			// Stop here, if priority is 0 or less.
+			if (prio <= 0)
+				continue;
+
 			// Prefer road side fields
-			if (prio > 0)
-				prio += bf->preferred ?  1 : 0;
+			prio += bf->preferred ?  1 : 0;
 
 			// don't waste good land for small huts
 			prio -= (maxsize - bo.desc->get_size()) * 3;
@@ -1114,9 +1120,9 @@ bool DefaultAI::improve_roads (int32_t gametime)
 			const Map & map = game().map();
 			CoordPath cp(map, path);
 
-			// try to split near the middle
-			CoordPath::Step_Vector::size_type i = cp.get_nsteps() / 2, j = i + 1;
-			for (; i > 1; --i, ++j) {
+			// try to split after two steps
+			CoordPath::Step_Vector::size_type i = cp.get_nsteps() - 1, j = 1;
+			for (; i >= j; --i, ++j) {
 				{
 					const Coords c = cp.get_coords()[i];
 					if (map[c].get_caps() & BUILDCAPS_FLAG) {
@@ -1367,6 +1373,12 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		 0)
 	{
 		if (site.site->get_statistics_percent() == 0) {
+			// Do not destruct the last lumberjack - perhaps some small trees are
+			// near, a forester will plant some trees or some new trees will seed
+			// in reach. Computer players can easily run out of wood if this check
+			// is not done.
+			if (site.bo->cnt_built == 1)
+				return false;
 			// destruct the building and it's flag (via flag destruction)
 			// the destruction of the flag avoids that defaultAI will have too many
 			// unused roads - if needed the road will be rebuild directly.
@@ -1663,6 +1675,34 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
 
 
 /**
+ * This function takes care about the unowned and opposing territory and
+ * recalculates the priority for none military buildings depending on the
+ * initialisation type of a defaultAI
+ *
+ * \arg bf   = BuildableField to be checked
+ * \arg prio = priority until now.
+ *
+ * \returns the recalculated priority
+ */
+int32_t DefaultAI::recalc_with_border_range
+	(const BuildableField & bf, int32_t prio)
+{
+	// Prefer building space in the inner land.
+	prio /= (1 + (bf.unowned_land_nearby / 4));
+
+	// Especially places near the frontier to the enemies are unlikely
+	//  NOTE take care about the type of computer player. The more
+	//  NOTE aggressive a computer player is, the more important is
+	//  NOTE this check. So we add \var type as bonus.
+	if (bf.enemy_nearby)
+		prio /= (2 + type);
+
+	return prio;
+}
+
+
+
+/**
  * calculates how much a productionsite of type \arg bo is needed inside it's
  * economy. \arg prio is initial value for this calculation
  *
@@ -1674,6 +1714,9 @@ int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
 	// the same (always == another game but same map with
 	// defaultAI on same coords)
 	prio += time(0) % 3 - 1;
+
+	//  TODO check if there are other buildings of that type that wait for a
+	//  TODO worker. If yes, set priority to -10000 or something.
 
 	// check if current economy can supply enough material for
 	// production.
@@ -1699,10 +1742,12 @@ int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
 	// If building consumes some wares, multiply with current statistics of all
 	// other buildings of this type to avoid constructing buildings where already
 	// some are running on low resources.
+	// Else at least add a part of the stats t the calculation.
 	if (!bo.inputs.empty()) {
 		prio *= bo.current_stats;
 		prio /= 100;
-	}
+	} else
+		prio = ((prio * bo.current_stats) / 100) + (prio / 2);
 
 	return prio;
 }
