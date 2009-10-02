@@ -1,21 +1,24 @@
 # Widelands po/it_IT/campaigns/emp01.wmf.po
 # Copyright (C) 2005-2009 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
 #
+# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Gabriel Rota <gabriel.rota@gmail.com>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4530\n"
+"Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-09-27 10:20+0000\n"
-"PO-Revision-Date: 2009-07-01 18:23+0100\n"
+"POT-Creation-Date: 2009-07-21 18:08+0000\n"
+"PO-Revision-Date: 2009-09-29 16:05+0200\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
-"Language-Team: Gabriel Rota <gabriel.rota@gmail.com>\n"
+"Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../../campaigns/emp01.wmf/elemental:7
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
@@ -28,11 +31,13 @@ msgstr "Dopo aver perso una battaglia importante contro i barbari, che condusse 
 #: ../../../campaigns/emp01.wmf/event:61 ../../../campaigns/emp01.wmf/event:76
 #: ../../../campaigns/emp01.wmf/event:91
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Diario di Lutius"
 
 #: ../../../campaigns/emp01.wmf/event:63
 msgid " \"What has become of our Empire? I really ask this question - why did my king forbid me from fighting against that monsterous barbarian tribe, who first acted as a peaceful friend and then attacked my army in the darkest night?<br> With an army of 150 men, I was assigned to patrol on our northern frontier, which lies near the Galdin Mountains in a great, beautiful and ancient forest. Soon, we met a barbarian tribe, which at first was friendly. A few of my men even traded with them and their kids came to us, to admire our clean and tidy uniforms and weapons.<br> But in our fifth night in that region, they attacked us with no reason. I lost dozens of good men, and found myself imprisoned and brought to their chieftain. He spat at me, mocked me and told me to leave this land forever. He did not want new land and did not want our land, but he told me that THIS forest was their land - and would stay theirs until the ghosts take the last man of his folk!<br> Three weeks later, I came back to Fremil to speak with our king. He was furious at the Barbarians, yet disallowed an attack of these tribes. He believed that our army was too weak to survive in a war against the barbarians.<br> Still, I saw no way that I could erase my shame - without fighting against the Barbarians. So I left Fremil by boat to find myself a new world, and a new life, somewhere in the south. Now I am sailing on the perl-gulf with my family, some of my friends and a few of my best warriors.\" "
 msgstr ""
+" \"Che ne è stato del nostro impero? Ho veramente posto questa domanda - perché il mio re mi impedisce di lottare contro quella tribù di barbari mostruosi, che prima ha agito come un amica pacifica e poi ha attaccato il mio esercito nella notte più oscura?<br> Con un esercito di 150 uomini, mi è stato assegnato la pattuglia sul nostro confine settentrionale, che si trova vicino alle Montagne Galdin in una foresta grande, bella e antica. Ben presto, abbiamo incontrato una tribù barbara, che in un primo momento è stata cordiale. Alcuni dei miei uomini hanno anche scambiato con loro ed i loro figli sono venuti da noi, per ammirare la nostra uniforme pulita e ordinata e le armi.<br> Ma nella nostra quinta notte in quella regione, ci hanno attaccato senza motivo. Ho perso decine di buoni uomini, e mi trovai incarcerato e portato al loro capo. Sputò su di me, si presa gioco di me e mi disse di lasciare questa terra per sempre. Non voleva nuova terra e non voleva la nostra terra, ma lui mi ha detto che questa foresta è stata la loro terra - e sarebbe rimasta loro fino a quando i fantasmi avessero preso l'ultimo uomo della sua gente!<br> Tre settimane più tardi, sono tornato a Fremil per parlare con il nostro re. Era furioso con i barbari, ma non permise l'attacco di queste tribù. Egli credeva che il nostro esercito fosse troppo debole per sopravvivere in una guerra contro i barbari.<br> Ancora, non ho visto alcun modo per poter cancellare la mia vergogna - senza "
+"combattere contro i barbari. Così ho lasciato Fremil con una barca per trovarmi un mondo nuovo e una nuova vita, da qualche parte nel sud. Ora sto navigando sul golfo Perl con la mia famiglia, alcuni dei miei amici e alcuni dei miei migliori guerrieri.\" "
 
 #: ../../../campaigns/emp01.wmf/event:65
 msgid "A dark night"
@@ -40,36 +45,36 @@ msgstr "Una scura notte"
 
 #: ../../../campaigns/emp01.wmf/event:78
 msgid " \"It seems as if sailing on the perl-gulf was one of our biggest mistakes. Nature was against us and drove us into a dark, wild storm. I really don't know how many hours have passed since the waves rose higher than our boat, but still it would be suicide to go outside.<br> Our ship is badly damaged and is taking in more and more water. We can thank the Gods if we survive this black night with our lives.\" "
-msgstr ""
+msgstr " \"Sembra che veleggiare sul golfo Perl sia stato uno dei nostri più grandi errori. La natura era contro di noi e ci ha spinto in una buia selvaggia tempesta. Io davvero non so quante ore sono passate da quando sono cominciate le onde più alte della nostra barca, ma sarebbe un suicidio andare fuori.<br> La nostra nave è gravemente danneggiata e sta imbarcando molta acqua. Potremo ringraziare gli Dei se sopravviveremo a questa notte nera con le nostre vite.\" "
 
 #: ../../../campaigns/emp01.wmf/event:80
 msgid "The rough sea"
-msgstr "Il mare "
+msgstr "Il mare mosso"
 
 #: ../../../campaigns/emp01.wmf/event:93
 msgid " \"Finally, the Gods were with us!<br> We landed on an unknown coast and found peaceful rest under the palm trees growing at the strand. But that is about as good as it gets. The truth is:<br> when I woke up this morning, I saw nothing more than sand around us.<br> It really seems as if we landed under the only palm trees existing in this far-away sandy desert. I fear we won't find the help we need to get our ship repaired in good time.\" "
-msgstr ""
+msgstr " \"Infine, gli dèi sono stati con noi!<br> Siamo naufragati su una costa sconosciuta ed ho trovato riposo tranquillo sotto le palme cresciute nel lido. Ma questo è pressappoco buono come arriva. La verità è:<br> quando mi sono svegliato questa mattina, non ho visto nulla di più che la sabbia intorno a noi.<br> Sembra proprio come se fossimo sbarcati sotto le uniche palme esistenti in questo molto lontano deserto di sabbia. Temo che non sarà possibile trovare l'aiuto di cui abbiamo bisogno per poter riparare la nostra nave in tempo utile.\" "
 
 #: ../../../campaigns/emp01.wmf/event:95
 msgid "Survivor"
-msgstr ""
+msgstr "Sopravvissuto"
 
 #: ../../../campaigns/emp01.wmf/event:133
 msgid "Saledus looks around nervously..."
-msgstr ""
+msgstr "Saledus si guarda intorno nervosamente..."
 
 #: ../../../campaigns/emp01.wmf/event:135
 msgid " \"Sire, I fear we are not safe in this foreign land. Who knows what terrible creatures live beyond this forest, in that mighty desert? What if these creatures enter the woods and await the time to attack us?<br> Well, perhaps my fear is misguided, but it can't be wrong to keep watch in the forests - so that we can be sure to see any potential enemies before they can see us.<br> We really should build a barracks in the eastern portion of the forest. Than one of us will keep watch in the darkness and keep us safe from these creatures.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr " \"Sire, temo che non siamo al sicuro in questa terra straniera. Chi sa che terribili creature vivono al di là di questa foresta, in quel possente deserto? Che cosa succede se queste creature entrano nel bosco e aspettano il momento per attaccarci?<br> Beh, forse la mia paura è sbagliata, ma non può essere sbagliato fare la guardia ai boschi - in modo che possiamo essere sicuri di vedere tutti i potenziali nemici prima che possano vederci.<br> Dovremmo davvero costruire una caserma nella parte orientale della foresta. Uno di noi continuerà a guardare nel buio e ci terrà al sicuro da queste creature.\"<br><br>-- NUOVO OBIETTIVO --<br> "
 
 #: ../../../campaigns/emp01.wmf/event:136
 #: ../../../campaigns/emp01.wmf/objective:7
 msgid "* Build a barracks at the red point on the east side of the forests, to the right of your headquarters."
-msgstr ""
+msgstr "* Costruisci una caserma nel punto rosso sul lato est delle foreste, alla destra del vostro quartier generale."
 
 #: ../../../campaigns/emp01.wmf/event:138
 msgid "A foreboding"
-msgstr ""
+msgstr "Un presentimento"
 
 #: ../../../campaigns/emp01.wmf/event:142
 #: ../../../campaigns/emp01.wmf/event:166
@@ -85,11 +90,11 @@ msgstr "OK"
 
 #: ../../../campaigns/emp01.wmf/event:158
 msgid "Saledus speaks with a sigh of relief..."
-msgstr ""
+msgstr "Saledus parla con un sospiro di sollievo..."
 
 #: ../../../campaigns/emp01.wmf/event:160
 msgid " \"Sire, I saw that the construction of the barracks was complete, so I assigned one of my best soldiers to it to keep watch on the desert.<br> This is a good step forward. Now we can feel a bit safer and can look forward to repair our ship.\" "
-msgstr ""
+msgstr " \"Sire, ho visto che la costruzione della caserma è stata completa, così ho assegnato a uno dei miei migliori soldati di vegliare sul deserto.<br> Questo è un buon passo avanti. Ora possiamo stare un po' più sicuri e possiamo guardare avanti alla riparazione della nostra nave.\" "
 
 #: ../../../campaigns/emp01.wmf/event:162
 msgid "Safe for now"
@@ -102,11 +107,13 @@ msgstr "Amalea sorride..."
 #: ../../../campaigns/emp01.wmf/event:174
 msgid " \"Hey Lutius, I just met Saledus outside.<br> He told me about the barracks. Well, I am not one of those girls who think we need more barracks - instead, we might concentrate on other things now.<br> It is absolutely clear that we need wood to repair our ship. So, I walked through the forest yesterday and found a nice place for a lumberjack's house, south of our headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Hey Lutius, ho appena incontrato Saledus fuori.<br> Mi ha raccontato delle caserme. Beh, io non sono una di quelle ragazze che pensano che abbiamo bisogno di più caserme - invece, possiamo concentrarci su altre cose adesso.<br> E' assolutamente chiaro che abbiamo bisogno di legno per riparare la nostra nave. Così, ho camminato attraverso la foresta ieri e ho trovato un bel posto per la casa di un boscaiolo, a sud della nostra sede.\"<br><br>-- 	"
+"NUOVO OBIETTIVO --<br> "
 
 #: ../../../campaigns/emp01.wmf/event:175
 #: ../../../campaigns/emp01.wmf/objective:15
 msgid "* Build a lumberjack's house at the red point, south of your headquarters."
-msgstr ""
+msgstr "* Costruisci la casa del boscaiolo sul punto rosso, a sud della vostro quartier generale."
 
 #: ../../../campaigns/emp01.wmf/event:177
 #: ../../../campaigns/emp01.wmf/event:197
@@ -120,25 +127,25 @@ msgstr "Amalea consiglia..."
 
 #: ../../../campaigns/emp01.wmf/event:194
 msgid " \"Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjack's houses, so that we can faster harvest the trunks.<br> But unfortunately the trunks are useless for repairing our ship - we need refined wood, like every ship and every bigger building needs, too. So we should build up a sawmill - as soon as we have enough space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr " \"Lutius hey, ho ricevuto il messaggio che il nostro boscaiolo ha iniziato il suo lavoro oggi. Forse sarebbe una buona idea aspettare fino a che non faccia abbastanza spazio per costruire due altre case del boscaiolo, in modo che sia possibile raccogliere più velocemente i tronchi.<br> Ma purtroppo i tronchi sono inutili per riparare la nostra nave - abbiamo bisogno di raffinarli in legno, come ogni nave ed i più grandi edifici hanno bisogno, troppo. Quindi dovremmo costruire una segheria - non appena è disponibile abbastanza spazio per costruirla.\"<br><br>-- NUOVO OBIETTIVO --<br> "
 
 #: ../../../campaigns/emp01.wmf/event:195
 #: ../../../campaigns/emp01.wmf/objective:23
 msgid "* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
-msgstr ""
+msgstr "* Costruisci altre due case del boscaiolo ed una segheria non appena vi è sufficiente spazio per costruirle."
 
 #: ../../../campaigns/emp01.wmf/event:217
 msgid "Amalea comes in..."
-msgstr "Amalea in arrivo..."
+msgstr "Amalea entra..."
 
 #: ../../../campaigns/emp01.wmf/event:219
 msgid " \"Hi Lutius, I've got two important things to talk about... First the good news:<br> I saw that the construction of the sawmill is complete, so we can begin to refine the trunks the lumberjacks are harvesting to wood.<br> But that's just about the only positive thing I know to talk about. The bad news is that our lumberjacks harvest at an unbelievable speed. There are almost no trees left on this island.<br> Lutius, these trees provide shelter from the sandstorms from the desert, shade on the hot days and they are the home of so many gentle animals. We shouldn't leave this island a complete desert.<br> Lutius, I beg you: find someone who takes care about planting new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr " \"Ciao Lutius, ho due cose importanti di cui parlarti... Prima la buona notizia:<br> Ho visto che la costruzione della segheria è completa, così possiamo cominciare a raffinare i tronchi raccolti dai boscaioli in legno.<br> Ma questo è la sola cosa positiva di cui ti parlerò. La cattiva notizia è che i nostri boscaioli raccolgono ad una velocità incredibile. Praticamente non ci sono alberi sulla sinistra di quest'isola.<br> Lutius, questi alberi forniscono riparo dalle tempeste di sabbia del deserto, ombra nelle calde giornate e sono la casa di tanti gentili animali. Non dobbiamo lasciare questa isola un deserto completo.<br> Lutius, ti prego: trova qualcuno che si prenda l'impegno di piantare nuovi alberi.\"<br><br>-- NUOVO OBIETTIVO --<br> "
 
 #: ../../../campaigns/emp01.wmf/event:220
 #: ../../../campaigns/emp01.wmf/objective:31
 msgid "* Build a forester's house to preserve the wood resources of this island."
-msgstr ""
+msgstr "* Costruire una casa della forestale per preservare le risorse di legno di questa isola."
 
 #: ../../../campaigns/emp01.wmf/event:247
 msgid "Saledus notes..."
@@ -146,12 +153,12 @@ msgstr "Note di Saledus..."
 
 #: ../../../campaigns/emp01.wmf/event:249
 msgid " \"Hey, my good old friend. I just thought about the rocks standing on the south strand of this land. Perhaps we could cut out some useful hard stones and beautiful marble.<br> The repair of our ship will take a few weeks, anyway, and the resources we harvest now might be the base of strong and big buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
+msgstr " \"Hey, il mio buon vecchio amico. Ho pensato alle rocce che stanno arenate a sud di questa terra. Forse potremmo tagliare alcune utili pietre dure e del bellissimo marmo.<br> La riparazione della nostra nave necessiterà di un paio di settimane, comunque, e le risorse che abbiamo raccolto oggi potrebbero essere la base di edifici forti e grandi in un altro paese.\"<br><br>-- NUOVO OBIETTIVO --<br> "
 
 #: ../../../campaigns/emp01.wmf/event:250
 #: ../../../campaigns/emp01.wmf/objective:39
 msgid "* Build a quarry in the south to cut some stones and marble out of the rocks.<br> These might be used for future buildings."
-msgstr ""
+msgstr "* Costruisci una cava a sud per tagliare alcune pietre e marmo dalle rocce. Queste potrebbero essere utilizzate per le costruzioni future."
 
 #: ../../../campaigns/emp01.wmf/event:252
 msgid "Thinking about the future"
@@ -163,7 +170,7 @@ msgstr "Saledus con sguardo promettente..."
 
 #: ../../../campaigns/emp01.wmf/event:274
 msgid " \"Hey Lutius, today we got a lot closer to our first castle. The quarry to the south began its work today and will soon provide us with stones and beautiful marble.<br> Now we truly can look forward to settling down on another island.\" "
-msgstr ""
+msgstr " \"Hey Lutius, oggi siamo molto più vicini al termine del nostro primo castello. La cava a sud ha iniziato il suo lavoro oggi e presto ci fornirà pietre e bellissimo marmo.<br> Ora possiamo veramente guardare avanti per stabilizzarci su un'altra isola.\" "
 
 #: ../../../campaigns/emp01.wmf/event:276
 msgid "A step forward"
@@ -171,7 +178,7 @@ msgstr "Un passo avanti"
 
 #: ../../../campaigns/emp01.wmf/event:292
 msgid " \"Today I got the message that our ship is completely repaired. At the moment my people are loading everything onto our newly repaired ship, hoping it will serve us better than last time.<br> Tonight will be our last night on this island. Tomorrow morning we will leave, searching for a new place for our exile.<br> I still wonder if we will ever see Fremil again.<br><br>--------------------- VICTORY! ----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.\" "
-msgstr ""
+msgstr " \"Oggi ho ricevuto il messaggio che la nostra nave è completamente riparata. Al momento la mia gente sta caricando tutto sulla nostra nave appena riparata, sperando che ci serva meglio della volta scorsa.<br> Stasera sarà la nostra ultima notte sull'isola. Domani mattina partiremo, alla ricerca di un nuovo posto per il nostro esilio.<br> Mi chiedo ancora se potremmo mai rivedere Fremil.<br><br>--------------------- VITTORIA! ----------------------<br><br> Hai completato questa missione. Se lo desideri puoi continuare a giocare, altrimenti passa alla prossima missione.\" "
 
 #: ../../../campaigns/emp01.wmf/event:294
 msgid "Mission Complete"
@@ -183,7 +190,7 @@ msgstr "Saledus parla:"
 
 #: ../../../campaigns/emp01.wmf/event:310
 msgid " \"You have made this peninsula a very secure place. It is time to move on!\" "
-msgstr ""
+msgstr " \"Hai fatto di questa penisola un posto molto sicuro. E' il momento di muoversi!\" "
 
 #: ../../../campaigns/emp01.wmf/event:312
 msgid "Safe Peninsula"
@@ -199,7 +206,7 @@ msgstr "Costruisci una falegnameria"
 
 #: ../../../campaigns/emp01.wmf/objective:21
 msgid "Build two lumberjack's houses and a sawmill"
-msgstr ""
+msgstr "Costruisci due case dei boscaioli ed una segheria"
 
 #: ../../../campaigns/emp01.wmf/objective:29
 msgid "Build a forester's house"
@@ -208,3 +215,5 @@ msgstr "Costruisci una casa della forestale"
 #: ../../../campaigns/emp01.wmf/objective:37
 msgid "Build a quarry"
 msgstr "Costruisci una cava"
+
+

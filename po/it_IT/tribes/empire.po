@@ -1,19 +1,20 @@
 # Widelands po/it_IT/tribes/empire.po
 # Copyright (C) 2005-2009 Widelands Development Team
-# Gabriel Rota <gabriel.rota@gmail.com>, 2009.
 #
+# Gabriel Rota <gabriel.rota@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2009-09-27 10:20+0000\n"
-"PO-Revision-Date: 2009-09-02 12:44+0200\n"
+"PO-Revision-Date: 2009-09-29 17:33+0200\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../../tribes/empire/advanced_lance/conf:1
 msgid "This is an advanced lance, with steel top."
@@ -557,7 +558,7 @@ msgstr "Birreria"
 
 #: ../../../tribes/empire/conf:162
 msgid "Charcoal Burner"
-msgstr "Inceneritore di Carbonella"
+msgstr "Carbonaio"
 
 #: ../../../tribes/empire/conf:163
 msgid "Deep Coal Mine"
@@ -661,7 +662,7 @@ msgstr "Mulino di tessitura"
 
 #: ../../../tribes/empire/conf:188
 msgid "Well"
-msgstr "Bene"
+msgstr "Pozzo"
 
 #: ../../../tribes/empire/conf:189
 msgid "Winery"
@@ -1075,3 +1076,4 @@ msgstr "Questo è una lancia di legno, che è la base del sistema militare dell'
 #: ../../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
 msgstr "La lana è il pelo delle pecore. Il mulino di tessitura la usa per fare la stoffa."
+

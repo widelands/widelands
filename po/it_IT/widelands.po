@@ -1,19 +1,19 @@
 # Widelands po/it_IT/widelands.po
 # Copyright (C) 2009 Widelands Development Team
-# Gabriel Rota <gabriel.rota@gmail.com>, 2009.
 #
+# Gabriel Rota <gabriel.rota@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2009-09-27 12:20+0200\n"
-"PO-Revision-Date: 2009-09-24 17:34+0200\n"
+"PO-Revision-Date: 2009-09-30 10:04+0200\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2 plural=(n!=1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -2758,7 +2758,7 @@ msgstr "Ok"
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:152
 msgid " NOTE: There is no options window for this trigger type yet. It has to be created manually by editing the text files in the map."
-msgstr ""
+msgstr " NOTE: Non vi è alcuna finestra delle opzioni per questo tipo di innesco ancora. Deve essere creata manualmente modificando il file di testo nella mappa."
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:50
 #: ../../src/editor/ui_menus/editor_main_menu.cc:57
@@ -2945,11 +2945,11 @@ msgstr "Menù opzioni innesco"
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:72
 msgid "Trigger at an absolute time from the beginning of the game (otherwise, only trigger if activated by an event set timer)."
-msgstr ""
+msgstr "Innesca in un momento assoluto dall'inizio della partita (in caso contrario, innesca solo se attivato da un insieme di eventi temporizzati)."
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:76
 msgid "Trigger at absolute time"
-msgstr ""
+msgstr "Innesca con tempo assoluto"
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:313
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:555
@@ -3203,7 +3203,7 @@ msgstr "Tipi di eventi disponibili: "
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:151
 msgid " NOTE: There is no options window for this event type yet. It has to be created manually by editing the text files in the map."
-msgstr ""
+msgstr " NOTE: Non vi è alcuna finestra delle opzioni per questo tipo di evento ancora. Deve essere creata manualmente modificando il file di testo nella mappa."
 
 #: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:49
 msgid "Conquer Area Event Options"

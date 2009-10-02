@@ -596,7 +596,7 @@ msgstr "Mulino di tessitura"
 
 #: ../../../tribes/atlanteans/conf:179
 msgid "Well"
-msgstr "Bene"
+msgstr "Pozzo"
 
 #: ../../../tribes/atlanteans/conf:180
 msgid "Woodcutter's House"
