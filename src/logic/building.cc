@@ -252,7 +252,7 @@ Building & Building_Descr::create_constructionsite
 	(Building_Descr const * const old) const
 {
 	if
-		(Building_Descr * const descr =
+		(Building_Descr const * const descr =
 		 	m_tribe.get_building_descr
 		 		(m_tribe.building_index("constructionsite")))
 	{

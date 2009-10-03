@@ -207,9 +207,9 @@ void DefaultAI::late_initialization ()
 	Building_Index const nr_buildings = tribe->get_nrbuildings();
 	const World & world = game().map().world();
 	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i) {
-		Building_Descr & bld = *tribe->get_building_descr(i);
+		Building_Descr const & bld = *tribe->get_building_descr(i);
 		const std::string & building_name = bld.name();
-		BuildingHints * bh = &bld.hints();
+		BuildingHints const & bh = bld.hints();
 
 		buildings.resize (buildings.size() + 1);
 
@@ -227,11 +227,11 @@ void DefaultAI::late_initialization ()
 
 		bo.is_buildable = bld.buildable() & player->is_building_allowed(i);
 
-		bo.need_trees             = bh->is_trunkproducer();
-		bo.need_stones            = bh->is_stoneproducer();
-		bo.need_water             = bh->get_needs_water();
+		bo.need_trees             = bh.is_trunkproducer();
+		bo.need_stones            = bh.is_stoneproducer();
+		bo.need_water             = bh.get_needs_water();
 
-		if (char const * const s = bh->get_renews_map_resource())
+		if (char const * const s = bh.get_renews_map_resource())
 			bo.production_hint = tribe->safe_ware_index(strdup(s)).value();
 
 		// Read all interesting data from ware producing buildings
@@ -252,12 +252,12 @@ void DefaultAI::late_initialization ()
 
 			if (bo.type == BuildingObserver::MINE) {
 				// get the resource needed by the mine
-				if (char const * const s = bh->get_mines())
+				if (char const * const s = bh.get_mines())
 					bo.mines = world.get_resource(strdup(s));
-				bo.mines_percent = bh->get_mines_percent();
+				bo.mines_percent = bh.get_mines_percent();
 			}
 
-			if (bh->is_basic())
+			if (bh.is_basic())
 				bo.is_basic = true;
 
 			continue;

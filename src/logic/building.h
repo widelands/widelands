@@ -102,7 +102,7 @@ struct Building_Descr : public Map_Object_Descr {
 	Workarea_Info m_workarea_info;
 
 	virtual int32_t suitability(Map const &, FCoords) const;
-	BuildingHints & hints() throw () {return m_hints;}
+	BuildingHints const & hints() const {return m_hints;}
 
 protected:
 	virtual Building & create_object() const = 0;

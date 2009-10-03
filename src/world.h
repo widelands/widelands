@@ -264,7 +264,7 @@ struct World {
 	}
 	int32_t get_nr_terrains() const {return ters.get_nitems();}
 	int32_t get_bob(char const * const l) const {return bobs.get_index(l);}
-	Bob::Descr * get_bob_descr(uint16_t const index) const {
+	Bob::Descr const * get_bob_descr(uint16_t const index) const {
 		return bobs.get(index);
 	}
 	int32_t get_nr_bobs() const {return bobs.get_nitems();}
@@ -272,14 +272,14 @@ struct World {
 		return immovables.get_index(l);
 	}
 	int32_t get_nr_immovables() const {return immovables.get_nitems();}
-	Immovable_Descr * get_immovable_descr(int32_t const index) const {
+	Immovable_Descr const * get_immovable_descr(int32_t const index) const {
 		return immovables.get(index);
 	}
 
 	int32_t get_resource(const char * const name) const {
 		return m_resources.get_index(name);
 	}
-	Resource_Descr * get_resource(Resource_Index const res) const throw () {
+	Resource_Descr const * get_resource(Resource_Index const res) const {
 		assert(res < m_resources.get_nitems());
 		return m_resources.get(res);
 	}

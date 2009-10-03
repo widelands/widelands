@@ -643,9 +643,11 @@ struct RSPairStruct {
 */
 void Economy::_process_requests(Game & game, RSPairStruct & s)
 {
+	//  TODO This function should be called from time to time.
+	_create_requested_workers (game);
+
 	container_iterate_const(RequestList, m_requests, i) {
 		Request & req = **i.current;
-		int32_t cost; // estimated time in milliseconds to fulfill Request
 
 		// We somehow get desynced request lists that don't trigger desync
 		// alerts, so add info to the sync stream here.
@@ -657,6 +659,7 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 		}
 
 		Ware_Index const ware_index = req.get_index();
+		int32_t cost; // estimated time in milliseconds to fulfill Request
 		Supply * const supp = _find_best_supply(game, req, cost);
 
 		if (!supp)
@@ -701,9 +704,6 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 
 		s.queue.push(rsp);
 	}
-
-	// TODO: This function should be called from time to time
-	_create_requested_workers (game);
 }
 
 
@@ -724,11 +724,7 @@ void Economy::_create_requested_workers(Game & game)
 			if (!req.is_idle() && req.get_type() == Request::WORKER) {
 				Ware_Index const index = req.get_index();
 				int32_t num_wares = 0;
-				Worker_Descr * const w_desc = tribe.get_worker_descr(index);
-
-				// Ignore the request if it is for a worker that can not be build
-				if (!w_desc->buildable())
-					continue;
+				Worker_Descr const & w_desc = *tribe.get_worker_descr(index);
 
 				for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i)
 					num_wares += m_supplies[i].nr_supplies(game, req);
@@ -765,7 +761,7 @@ void Economy::_create_requested_workers(Game & game)
 							}
 						}
 						Warehouse & nearest = *m_warehouses[nth_wh];
-						Worker_Descr::Buildcost const & cost = w_desc->buildcost();
+						Worker_Descr::Buildcost const & cost = w_desc.buildcost();
 						container_iterate_const(Worker_Descr::Buildcost, cost, bc_it)
 							if
 								(Ware_Index const w_id =

@@ -309,7 +309,7 @@ void Player::build(Coords c, Building_Index const idx)
 	// Validate building type
 	if (not (idx and idx < tribe().get_nrbuildings()))
 		return;
-	Building_Descr & descr = *tribe().get_building_descr(idx);
+	Building_Descr const & descr = *tribe().get_building_descr(idx);
 
 	if (!descr.buildable())
 		return;

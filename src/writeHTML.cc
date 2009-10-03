@@ -528,10 +528,7 @@ void Tribe_Descr::writeHTMLWorkers(std::string const & directory) {
 		fw.Text(worker_descname);
 		fw.Text("\">");
 		fw.Text(worker_descname);
-		fw.Text("</a></td><td>");
-		fw.Text
-			(worker_descr.buildable () ? _("Yes") : _("No"));
-		fw.Text("</td><td align=\"right\">");
+		fw.Text("</a></td><td align=\"right\">");
 		char buffer[32];
 		sprintf(buffer, "%u", worker_descr.vision_range());
 		fw.Text(buffer);

@@ -19,8 +19,6 @@
 
 #include "warehouse.h"
 
-#include <algorithm>
-
 #include "battle.h"
 #include "carrier.h"
 #include "worker.h"
@@ -41,6 +39,8 @@
 #include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
+
+#include <algorithm>
 
 namespace Widelands {
 
@@ -326,7 +326,7 @@ void Warehouse::postfill
 				insert_workers(i.i, count);
 	if (soldier_counts) {
 		Soldier_Descr const & soldier_descr =
-			ref_cast<Soldier_Descr const, Worker_Descr>
+			ref_cast<Soldier_Descr const, Worker_Descr const>
 				(*tribe().get_worker_descr(tribe().worker_index("soldier")));
 		container_iterate_const(Soldier_Counts, *soldier_counts, i) {
 			Soldier_Strength const ss = i.current->first;
@@ -483,7 +483,7 @@ void Warehouse::act(Game & game, uint32_t const data)
 {
 	if (game.get_gametime() - m_next_carrier_spawn >= 0) {
 		Ware_Index const id = tribe().safe_worker_index("carrier");
-		int32_t stock = m_supply->stock_workers(id);
+		int32_t const stock = m_supply->stock_workers(id);
 		int32_t tdelta = CARRIER_SPAWN_INTERVAL;
 
 		if (stock < 100) {
@@ -644,7 +644,7 @@ bool Warehouse::fetch_from_flag(Game & game)
 uint32_t Warehouse::count_workers
 	(Game const & game, Ware_Index ware, Requirements const & req)
 {
-	std::vector<Map_Object_Descr *> subs;
+	std::vector<Worker_Descr const *> subs;
 	uint32_t sum = 0;
 
 	do {
@@ -657,7 +657,7 @@ uint32_t Warehouse::count_workers
 
 	container_iterate_const
 		(std::vector<OPtr<Worker> >, m_incorporated_workers, i)
-		if (Map_Object const * const w = i.current->get(game))
+		if (Worker const * const w = i.current->get(game))
 			if (std::find(subs.begin(), subs.end(), &w->descr()) != subs.end())
 				//  This is one of the workers in our sum.
 				if (!req.check(*w))
@@ -868,10 +868,6 @@ bool Warehouse::can_create_worker(Game &, Ware_Index const worker) const {
 			 worker.value(), m_supply->get_workers().get_nrwareids().value());
 
 	if (Worker_Descr const * const w_desc = tribe().get_worker_descr(worker)) {
-		// First watch if we can build it
-		if (!w_desc->buildable())
-			return false;
-
 		// Now see if we have the resources
 		Worker_Descr::Buildcost const & buildcost = w_desc->buildcost();
 		container_iterate_const(Worker_Descr::Buildcost, buildcost, it) {

@@ -94,7 +94,7 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 #endif
 
 	/// returns the preciousness of the ware. It is used by the computer player
-	uint8_t preciousness() {return m_preciousness;}
+	uint8_t preciousness() const {return m_preciousness;}
 
 private:
 	std::string m_helptext;   ///< Long descriptive text

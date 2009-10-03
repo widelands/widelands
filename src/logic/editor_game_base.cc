@@ -391,7 +391,7 @@ Does not perform any placability checks.
 Immovable & Editor_Game_Base::create_immovable
 	(Coords const c, int32_t const idx, Tribe_Descr const * const tribe)
 {
-	Immovable_Descr & descr =
+	Immovable_Descr const & descr =
 		*
 		(tribe ?
 		 tribe->get_immovable_descr(idx)

@@ -60,7 +60,6 @@ public:
 
 	virtual void load_graphics();
 
-	bool              buildable() const throw () {return buildcost().size();}
 	Buildcost const & buildcost() const throw () {return m_buildcost;}
 
 	const Tribe_Descr * get_tribe() const throw () {return m_owner_tribe;}
@@ -86,7 +85,7 @@ public:
 	Worker & create
 		(Editor_Game_Base &, Player &, PlayerImmovable *, Coords) const;
 
-	typedef std::map<Worker_Descr *, std::string> becomes_map_t;
+	typedef std::map<Worker_Descr const *, std::string> becomes_map_t;
 	virtual uint32_t movecaps() const throw ();
 
 	typedef std::map<std::string, WorkerProgram *> Programs;
