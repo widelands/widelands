@@ -26,6 +26,7 @@
 #include "logic/editor_game_base.h"
 #include "findimmovable.h"
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "gamecontroller.h"
 #include "graphic/graphic.h"
 #include "helper.h"
@@ -51,57 +52,48 @@ Soldier_Descr::Soldier_Descr
 {
 	add_attribute(Map_Object::SOLDIER);
 
-	{ //  hitpoints
+	try { //  hitpoints
 		const char * const hp = global_s.get_safe_string("hp");
 		std::vector<std::string> list(split_string(hp, "-"));
 		if (list.size() != 2)
-			throw wexception
-				("Parse error in hp string: \"%s\" (must be \"min-max\")", hp);
+			throw game_data_error(_("expected \"min-max\" but found\"%s\""), hp);
 		container_iterate(std::vector<std::string>, list, i)
 			remove_spaces(*i.current);
 		char * endp;
 		m_min_hp = strtol(list[0].c_str(), &endp, 0);
 		if (*endp)
-			throw wexception
-				("Parse error in hp string: %s is a bad value", list[0].c_str());
+			throw game_data_error(_("%s is a bad value"), list[0].c_str());
 		if (0 == m_min_hp)
-			throw wexception
-				("Parse error in hp string: \"%s\" is not positive",
-				 list[0].c_str());
+			throw game_data_error(_("\"%s\" is not positive"), list[0].c_str());
 		m_max_hp = strtol(list[1].c_str(), &endp, 0);
 		if (*endp)
-			throw wexception
-				("Parse error in hp string: %s is a bad value", list[1].c_str());
+			throw game_data_error(_("%s is a bad value"), list[1].c_str());
 		if (m_max_hp < m_min_hp)
-			throw wexception
-				("Parse error in hp string: \"%s\" < \"%s\"",
-				 list[1].c_str(), list[0].c_str());
+			throw game_data_error
+				(_("\"%s\" < \"%s\""), list[1].c_str(), list[0].c_str());
+	} catch (_wexception const & e) {
+		throw game_data_error("hp: %s", e.what());
 	}
 
-	{ //  parse attack
+	try { //  parse attack
 		const char * const attack = global_s.get_safe_string("attack");
 		std::vector<std::string> list(split_string(attack, "-"));
 		if (list.size() != 2)
-			throw wexception
-				("Parse error in attack string: \"%s\" (must be \"min-max\")",
-				 attack);
+			throw game_data_error("expected \"min-max\" but found\"%s\"", attack);
 		container_iterate(std::vector<std::string>, list, i)
 			remove_spaces(*i.current);
 		char * endp;
 		m_min_attack = strtol(list[0].c_str(), &endp, 0);
 		if (*endp)
-			throw wexception
-				("Parse error in attack string: %s is a bad value",
-				 list[0].c_str());
+			throw game_data_error(_("%s is a bad value"), list[0].c_str());
 		m_max_attack = strtol(list[1].c_str(), &endp, 0);
 		if (*endp)
-			throw wexception
-				("Parse error in attack string: %s is a bad value",
-				 list[1].c_str());
+			throw game_data_error (_("%s is a bad value"), list[1].c_str());
 		if (m_max_attack < m_min_attack)
-			throw wexception
-				("Parse error in attack string: \"%s\" < \"%s\"",
-				 list[1].c_str(), list[0].c_str());
+			throw game_data_error
+				(_("\"%s\" < \"%s\""), list[1].c_str(), list[0].c_str());
+	} catch (_wexception const & e) {
+		throw game_data_error("attack: %s", e.what());
 	}
 
 	// Parse defend

@@ -63,14 +63,14 @@ throw (_wexception)
 				while (not fr.EndOfFile()) {
 					uint32_t const reg = fr.Unsigned32();
 					if (ol->is_object_known(reg))
-						throw wexception
+						throw game_data_error
 							("%lu: read object with reg %u, but an object with that "
 							 "reg has already been loaded",
 							 static_cast<long unsigned int>(fr.GetPos() - 4), reg);
 					Coords c;
 					try {c = fr.Coords32(extent);}
-					catch (_wexception const & e) {
-						throw wexception
+					catch (game_data_error const & e) {
+						throw game_data_error
 							("%lu: coordinates of watcher %u: %s",
 							 static_cast<long unsigned int>(fr.GetPos() - 4), reg,
 							 e.what());
@@ -81,10 +81,10 @@ throw (_wexception)
 						 	(Player_Area<>(p, Area<>(c, fr.Unsigned16()))));
 				}
 			} else
-				throw wexception
+				throw game_data_error
 					("0: unknown/unhandled packet version %u", packet_version);
 		} catch (std::exception const & e) {
-			throw wexception
+			throw game_data_error
 				("Map_Players_AreaWatchers_Data_Packet::Read: player %u: in "
 				 "\"%s\": %s",
 				 p, filename, e.what());

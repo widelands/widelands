@@ -24,6 +24,8 @@
 #include "map_io/widelands_map_map_object_saver.h"
 #include "wexception.h"
 
+#include "i18n.h"
+
 namespace Widelands {
 
 void Cmd_Incorporate::Read
@@ -40,7 +42,8 @@ void Cmd_Incorporate::Read
 				throw wexception("worker %u: %s", worker_serial, e.what());
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
 		throw wexception("incorporate: %s", e.what());
 	}

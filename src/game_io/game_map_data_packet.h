@@ -36,13 +36,11 @@ struct Game_Map_Data_Packet : public Game_Data_Packet {
 
 
 	/// Ensures that the world gets loaded but does not much more.
-	void Read (FileSystem &, Game &, Map_Map_Object_Loader * = 0)
-		throw (_wexception);
+	void Read (FileSystem &, Game &, Map_Map_Object_Loader * = 0);
 
 	void Read_Complete(Game &); ///  Loads the rest of the map.
 
-	void Write(FileSystem &, Game &, Map_Map_Object_Saver  * = 0)
-		throw (_wexception);
+	void Write(FileSystem &, Game &, Map_Map_Object_Saver  * = 0);
 
 	Map_Map_Object_Saver  * get_map_object_saver () {return m_mos;}
 	Map_Map_Object_Loader * get_map_object_loader() {return m_mol;}

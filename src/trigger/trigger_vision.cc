@@ -22,11 +22,11 @@
 #include "logic/building.h"
 #include "editor/editorinteractive.h"
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "i18n.h"
 #include "map.h"
 #include "logic/player.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 #include "upcast.h"
 
@@ -46,9 +46,10 @@ void Trigger_Vision::Read(Section & s, Editor_Game_Base & egbase) {
 			Trigger_Player_Area::Read(s, egbase);
 			require_active_vision = s.get_bool("require_active_vision", false);
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
-	} catch (std::exception const & e) {
-		throw wexception("(vision): %s", e.what());
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error(_("(vision): %s"), e.what());
 	}
 }
 

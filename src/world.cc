@@ -21,6 +21,7 @@
 
 #include "constants.h"
 #include "logic/critter_bob.h"
+#include "game_data_error.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"
@@ -83,7 +84,7 @@ void Resource_Descr::parse(Section *s, std::string basedir)
 		m_editor_pics.push_back(i);
 	}
 	if (m_editor_pics.empty())
-		throw wexception("Resource '%s' has no editor_pic", m_name.c_str());
+		throw game_data_error("resource '%s' has no editor_pic", m_name.c_str());
 }
 
 
@@ -169,7 +170,7 @@ void MapGenAreaInfo::readTerrains
 {
 	std::string str = s.get_string(value_name, "");
 	if (str.empty())
-		throw wexception
+		throw game_data_error
 			("terrain info \"%s\" missing in section \"%s\" mapgenconf for world "
 			 "\"%s\"",
 			 value_name, s.get_name(), m_world->get_name());
@@ -180,7 +181,7 @@ void MapGenAreaInfo::readTerrains
 	for (uint32_t ix = 0; ix < strs.size(); ++ix) {
 		Terrain_Index const tix = m_world->index_of_terrain(strs[ix].c_str());
 		if (tix > 128)
-			throw wexception
+			throw game_data_error
 				("unknown terrain \"%s\" in section \"%s\" in mapgenconf for "
 				 "world \"%s\"",
 				 value_name, s.get_name(), m_world->get_name());
@@ -403,8 +404,7 @@ World::World(std::string const & name) : m_basedir("worlds/" + name + '/') {
 
 		g_fs->RemoveFileSystem(fs);
 	} catch (std::exception const & e) {
-		// tag with world name
-		throw wexception("Error loading world %s: %s", name.c_str(), e.what());
+		throw game_data_error("world %s: %s", name.c_str(), e.what());
 	}
 }
 
@@ -458,8 +458,8 @@ void World::parse_resources()
 			m_resources.add(&descr);
 		}
 	}
-	catch (std::exception &e) {
-		throw wexception("%s: %s", fname, e.what());
+	catch (std::exception const & e) {
+		throw game_data_error("%s: %s", fname, e.what());
 	}
 }
 
@@ -478,16 +478,16 @@ void World::parse_terrains()
 			if (not s)
 				break;
 			if (i == 0x10)
-				throw wexception
-					("%s: too many terrain types, can not be more than 16\n",
+				throw game_data_error
+					(_("%s: too many terrain types, can not be more than 16\n"),
 					 fname);
 			ters.add(new Terrain_Descr(m_basedir.c_str(), s, &m_resources));
 		}
 
 		prof.check_used();
 	}
-	catch (std::exception &e) {
-		throw wexception("%s: %s", fname, e.what());
+	catch (game_data_error const & e) {
+		throw game_data_error("%s: %s", fname, e.what());
 	}
 }
 
@@ -521,136 +521,100 @@ void World::parse_mapgen   ()
 		m_mapGenInfo.parseProfile(this, prof);
 
 		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atWater) < 1)
-			throw wexception
-				("World '%s' is missing a water area in %s",
-				 get_name(), fname);
+			throw game_data_error("missing a water area");
 
 		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atWater) < 1)
-			throw wexception
-				("World '%s' has too many water areas (>3) in %s",
-				 get_name(), fname);
+			throw game_data_error("too many water areas (>3)");
 
 		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atLand) < 1)
-			throw wexception
-				("World '%s' is missing a land area in %s",
-				 get_name(), fname);
+			throw game_data_error("missing a land area");
 
 		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atLand) > 3)
-			throw wexception
-				("World '%s' has too many land areas (>3) in %s",
-				 get_name(), fname);
+			throw game_data_error("too many land areas (>3)");
 
 		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atWasteland) < 1)
-			throw wexception
-				("World '%s' is missing a wasteland area in %s",
-				 get_name(), fname);
+			throw game_data_error("missing a wasteland area");
 
 		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atWasteland) > 2)
-			throw wexception
-				("World '%s' has too many wasteland areas (>2) in %s",
-				 get_name(), fname);
+			throw game_data_error("too many wasteland areas (>2)");
 
 		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atMountains) < 1)
-			throw wexception
-				("World '%s' is missing a mountain area in %s",
-				 get_name(), fname);
+			throw game_data_error("missing a mountain area in %s");
 
 		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atMountains) < 1)
-			throw wexception
-				("World '%s' has too many mountain areas (>1) in %s",
-				 get_name(), fname);
+			throw game_data_error("too many mountain areas (>1)");
 
 		if
 			(m_mapGenInfo.getArea(MapGenAreaInfo::atWater, 0).getNumTerrains
 			 	(MapGenAreaInfo::ttWaterOcean) < 1)
-			throw wexception
-				("World '%s' is missing a water/ocean terrain type in %s",
-				 get_name(), fname);
+			throw game_data_error("missing a water/ocean terrain type");
 
 		if
 			(m_mapGenInfo.getArea(MapGenAreaInfo::atWater, 0).getNumTerrains
 			 	(MapGenAreaInfo::ttWaterShelf)
 			 <
 			 1)
-			throw wexception
-				("World '%s' is missing a water/shelf terrain type in %s",
-				 get_name(), fname);
+			throw game_data_error("missing a water/shelf terrain type");
 
 		if
 			(m_mapGenInfo.getArea(MapGenAreaInfo::atWater, 0).getNumTerrains
 			 	(MapGenAreaInfo::ttWaterShallow)
 			 <
 			 1)
-			throw wexception
-				("World '%s' is missing a water/shallow terrain type in %s",
-				 get_name(), fname);
+			throw game_data_error("is missing a water/shallow terrain type");
 
 		if
 			(m_mapGenInfo.getArea(MapGenAreaInfo::atLand, 0).getNumTerrains
 			 	(MapGenAreaInfo::ttLandCoast)
 			 <
 			 1)
-			throw wexception
-				("World '%s' is missing a land/coast terrain type in %s",
-				 get_name(), fname);
+			throw game_data_error("missing a land/coast terrain type");
 
 		if
 			(m_mapGenInfo.getArea(MapGenAreaInfo::atLand, 0).getNumTerrains
 			 	(MapGenAreaInfo::ttLandLand)
 			 <
 			 1)
-			throw wexception
-				("World '%s' is missing a land/land terrain type in %s",
-				 get_name(), fname);
+			throw game_data_error("missing a land/land terrain type");
 
 		if
 			(m_mapGenInfo.getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains
 			 	(MapGenAreaInfo::ttMountainsFoot)
 			 <
 			 1)
-			throw wexception
-				("World '%s' is missing a mountain/foot terrain type in %s",
-				 get_name(), fname);
+			throw game_data_error("missing a mountain/foot terrain type");
 
 		if
 			(m_mapGenInfo.getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains
 			 	(MapGenAreaInfo::ttMountainsMountain)
 			 <
 			 1)
-			throw wexception
-				("World '%s' is missing a monutain/mountain terrain type in %s",
-				 get_name(), fname);
+			throw game_data_error("missing a monutain/mountain terrain type");
 
 		if
 			(m_mapGenInfo.getArea(MapGenAreaInfo::atMountains, 0).getNumTerrains
 			 	(MapGenAreaInfo::ttMountainsSnow)
 			 <
 			 1)
-			throw wexception
-				("World '%s' is missing a mountain/snow terrain type in %s",
-				 get_name(), fname);
+			throw game_data_error("missing a mountain/snow terrain type");
 
 		if
 			(m_mapGenInfo.getArea(MapGenAreaInfo::atWasteland, 0).getNumTerrains
 			 	(MapGenAreaInfo::ttWastelandInner)
 			 <
 			 1)
-			throw wexception
-				("World '%s' is missing a land/coast terrain type in %s",
-				 get_name(), fname);
+			throw game_data_error("missing a land/coast terrain type");
 
 		if
 			(m_mapGenInfo.getArea(MapGenAreaInfo::atWasteland, 0).getNumTerrains
 			 	(MapGenAreaInfo::ttWastelandOuter)
 			 <
 			 1)
-			throw wexception
-				("World '%s' is missing a land/land terrain type in %s",
-				 get_name(), fname);
+			throw game_data_error("missing a land/land terrain type");
 
 		prof.check_used();
-	} catch (std::exception &e) {
-		throw wexception("%s: %s", fname, e.what());
+	} catch (_wexception const & e) {
+		throw game_data_error("%s: %s", fname, e.what());
 	}
 }
 
@@ -690,7 +654,7 @@ int32_t World::safe_resource_index(const char * const resourcename) const {
 	int32_t const result = get_resource(resourcename);
 
 	if (result == -1)
-		throw wexception
+		throw game_data_error
 			("world %s does not define resource type \"%s\"",
 			 get_name(), resourcename);
 	return result;
@@ -734,7 +698,7 @@ m_texture           (0)
 		str1 >> resource >> amount;
 		int32_t const res = resources->get_index(resource.c_str());;
 		if (res == -1)
-			throw wexception
+			throw game_data_error
 				("terrain type %s has valid resource type %s, which does not "
 				 "exist in world",
 				 s->get_name(), resource.c_str());
@@ -763,7 +727,7 @@ m_texture           (0)
 			if (str1[i] == ',' || i == str1.size()) {
 				const int32_t res = resources->get_index(curres.c_str());;
 				if (res == -1)
-					throw wexception
+					throw game_data_error
 						("terrain type %s has valid resource type %s which does not "
 						 "exist in world",
 						 s->get_name(), curres.c_str());
@@ -796,7 +760,7 @@ m_texture           (0)
 		else if (not strcmp(is, "unpassable"))
 			m_is = TERRAIN_DRY|TERRAIN_UNPASSABLE;
 		else
-			throw wexception("%s: invalid type '%s'", m_name.c_str(), is);
+			throw game_data_error("%s: invalid type '%s'", m_name.c_str(), is);
 	}
 
 	// Determine template of the texture animation pictures

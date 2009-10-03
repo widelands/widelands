@@ -22,9 +22,9 @@
 #include "constructionsite.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "editor_game_base.h"
 #include "font_handler.h"
 #include "game.h"
+#include "game_data_error.h"
 #include "wui/interactive_gamebase.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -53,11 +53,11 @@ Building_Descr::Building_Descr
 	:
 	Map_Object_Descr(_name, _descname),
 	m_tribe         (_descr),
-m_buildable      (true),
-m_buildicon      (g_gr->get_no_picture()),
-m_size           (BaseImmovable::SMALL),
-m_mine           (false),
-m_vision_range   (0)
+	m_buildable     (true),
+	m_buildicon     (g_gr->get_no_picture()),
+	m_size          (BaseImmovable::SMALL),
+	m_mine          (false),
+	m_vision_range  (0)
 {
 	{
 		char const * const string = global_s.get_safe_string("size");
@@ -71,10 +71,8 @@ m_vision_range   (0)
 			m_size = BaseImmovable::SMALL;
 			m_mine = true;
 		} else
-			throw wexception
-				("Section [global], unknown size '%s'. Valid values are small, "
-				 "medium, big, mine",
-				 string);
+			throw game_data_error
+				(_("size=\"%s\": expected {small|medium|big}"), string);
 	}
 
 	// Parse build options

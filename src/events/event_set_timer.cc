@@ -19,8 +19,8 @@
 
 #include "event_set_timer.h"
 
-#include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "i18n.h"
 #include "wui/interactive_base.h"
 #include "map.h"
@@ -50,13 +50,14 @@ Event_Set_Timer::Event_Set_Timer(Section & s, Editor_Game_Base & egbase)
 			if (upcast(Trigger_Time, trig, egbase.map().mtm()[trigger_name]))
 				set_trigger(trig);
 			else
-				throw wexception
-					("trigger \"%s\": not a time trigger", trigger_name);
+				throw game_data_error
+					(_("trigger \"%s\": not a time trigger"), trigger_name);
 			m_duration = s.get_natural("duration", 0);
 		} else
-			throw wexception("unknown/unhandled version %u", event_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), event_version);
 	} catch (_wexception const & e) {
-		throw wexception("(set_timer): %s", e.what());
+		throw game_data_error(_("(set_timer): %s"), e.what());
 	}
 }
 

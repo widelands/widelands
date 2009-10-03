@@ -308,7 +308,7 @@ Map_Object::Loader * Battle::load
 			loader->init(egbase, mol, new Battle);
 			loader->load(fr, version);
 		} else
-			throw wexception("unknown/unhandled version %u", version);
+			throw game_data_error(_("unknown/unhandled version %u"), version);
 	} catch (const std::exception & e) {
 		throw wexception("Loading Battle: %s", e.what());
 	}

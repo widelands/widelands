@@ -21,10 +21,10 @@
 
 #include "editor/editorinteractive.h"
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "map.h"
 #include "logic/player.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 #define PACKET_VERSION 1
 
@@ -42,13 +42,14 @@ void Trigger_Defeated::Read(Section & s, Editor_Game_Base & egbase) {
 			m_player = s.get_safe_int("player");
 			Map const & map = egbase.map();
 			if (map.get_nrplayers() < m_player)
-				throw wexception
-					("defeated player trigger for player %i, but map has only %i"
-					 "players.", m_player, map.get_nrplayers());
+				throw game_data_error
+					(_("player is %u, but map has only %u players"),
+					 m_player, map.get_nrplayers());
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
-	} catch (std::exception const & e) {
-		throw wexception("(defeated): %s", e.what());
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error(_("(defeated): %s"), e.what());
 	}
 }
 

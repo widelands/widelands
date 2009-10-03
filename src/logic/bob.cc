@@ -25,6 +25,7 @@
 #include "economy/route.h"
 #include "economy/transfer.h"
 #include "game.h"
+#include "game_data_error.h"
 #include "wui/mapviewpixelconstants.h"
 #include "path.h"
 #include "player.h"
@@ -80,7 +81,7 @@ Bob::Descr::Descr
 		uint32_t const attrib = get_attribute_id(val->get_string());
 
 		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
-			throw wexception("Bad attribute '%s'", val->get_string());
+			throw game_data_error(_("bad attribute \"%s\""), val->get_string());
 
 		add_attribute(attrib);
 	}

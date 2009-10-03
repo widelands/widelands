@@ -20,9 +20,9 @@
 #include "trigger_military_influence.h"
 
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "logic/player.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 #define PACKET_VERSION 3
 
@@ -41,9 +41,10 @@ void Trigger_Military_Influence::Read(Section & s, Editor_Game_Base & egbase) {
 			Trigger_Player_Area::Read(s, egbase);
 			require_highest = s.get_bool("require_highest", false);
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
-	} catch (std::exception const & e) {
-		throw wexception("(military influence): %s", e.what());
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error(_("(military influence): %s"), e.what());
 	}
 }
 

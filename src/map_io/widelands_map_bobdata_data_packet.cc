@@ -28,6 +28,7 @@
 #include "economy/transfer.h"
 #include "economy/ware_instance.h"
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "map.h"
 #include "militarysite.h"
 #include "logic/path.h"
@@ -79,7 +80,7 @@ void Map_Bobdata_Data_Packet::Read
 				Serial const serial = fr.Unsigned32();
 				if (packet_version < 3 and serial == 0xffffffff) {
 					if (not fr.EndOfFile())
-						throw wexception
+						throw game_data_error
 							("expected end of file after serial 0xffffffff");
 					break;
 				}
@@ -89,13 +90,13 @@ void Map_Bobdata_Data_Packet::Read
 
 					if (Player_Number const read_owner = fr.Player_Number8()) {
 						if (nr_players < read_owner)
-							throw wexception
+							throw game_data_error
 								("owner number is %u but there are only %u players",
 								 read_owner, nr_players);
 						if (Player * const owner = egbase.get_player(read_owner))
 							bob.set_owner(owner);
 						else
-							throw wexception
+							throw game_data_error
 								("owning player %u does not exist", read_owner);
 					}
 
@@ -129,7 +130,7 @@ void Map_Bobdata_Data_Packet::Read
 						Map_Object::WalkingDir const walking_dir =
 							static_cast<Map_Object::WalkingDir>(fr.Signed32());
 						if (6 < walking_dir)
-							throw wexception
+							throw game_data_error
 								("walking dir is %u but must be one of {0 (idle), 1 "
 								 "(northeast), 2 (east), 3 (southeast), 4 "
 								 "(southwest), 5 (west), 6 (northwest)}",
@@ -141,7 +142,7 @@ void Map_Bobdata_Data_Packet::Read
 								static_cast<Map_Object::WalkingDir>
 									(fr.Direction8_allow_null());
 						} catch (StreamRead::direction_invalid const & e) {
-							throw wexception
+							throw game_data_error
 								("walking dir is %u but must be one of {0 (idle), 1 "
 								 "(northeast), 2 (east), 3 (southeast), 4 "
 								 "(southwest), 5 (west), 6 (northwest)}",
@@ -150,7 +151,7 @@ void Map_Bobdata_Data_Packet::Read
 					bob.m_walkstart = fr.Signed32();
 					bob.m_walkend   = fr.Signed32();
 					if (bob.m_walkend < bob.m_walkstart)
-						throw wexception
+						throw game_data_error
 							("walkend (%i) < walkstart (%i)",
 							 bob.m_walkend, bob.m_walkstart);
 
@@ -221,7 +222,8 @@ void Map_Bobdata_Data_Packet::Read
 								else if (*taskname == '\0')
 									continue; // Skip task
 								else
-									throw wexception("unknown task \"%s\"", taskname);
+									throw game_data_error
+										(_("unknown task type \"%s\""), taskname);
 
 								state.task = task;
 							}
@@ -237,7 +239,7 @@ void Map_Bobdata_Data_Packet::Read
 									state.objvar1 =
 										&ol->get<Map_Object>(objvar1_serial);
 								} catch (_wexception const & e) {
-									throw wexception
+									throw game_data_error
 										("objvar1 (%u): %s", objvar1_serial, e.what());
 								}
 							} else
@@ -248,7 +250,7 @@ void Map_Bobdata_Data_Packet::Read
 								int32_t const y = fr.Signed32();
 								state.coords = Coords(x, y);
 								if (state.coords and (extent.w <= x or extent.h <= y))
-									throw wexception
+									throw game_data_error
 										("invalid coordinates (%i, %i)", x, y);
 							} else
 								state.coords = fr.Coords32_allow_null(extent);
@@ -269,7 +271,7 @@ void Map_Bobdata_Data_Packet::Read
 								if
 									(state.task == &Bob::taskMove and
 									 packet_version < 4)
-									throw wexception
+									throw game_data_error
 										("savegame created with old broken game engine "
 										 "version that pushed task move without "
 										 "starting walk first; not fixed; try another "
@@ -289,13 +291,14 @@ void Map_Bobdata_Data_Packet::Read
 										try {
 											path->append(map, fr.Direction8());
 										} catch (_wexception const & e) {
-											throw wexception
+											throw game_data_error
 												("step #%u: %s",
 												 pathsteps - step, e.what());
 										}
 									state.path = path;
 								} catch (_wexception const & e) {
-									throw wexception("reading path: %s", e.what());
+									throw game_data_error
+										(_("reading path: %s"), e.what());
 								}
 							} else
 								state.path = 0;
@@ -347,7 +350,8 @@ void Map_Bobdata_Data_Packet::Read
 								state.program = 0;
 
 						} catch (_wexception const & e) {
-							throw wexception("reading state %u: %s", i, e.what());
+							throw game_data_error
+								("reading state %u: %s", i, e.what());
 						}
 					}
 
@@ -367,13 +371,14 @@ void Map_Bobdata_Data_Packet::Read
 
 					ol->mark_object_as_loaded(&bob);
 				} catch (_wexception const & e) {
-					throw wexception("bob %u: %s", serial, e.what());
+					throw game_data_error(_("bob %u: %s"), serial, e.what());
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("bobdata: %s", e.what());
+		throw game_data_error(_("bobdata: %s"), e.what());
 	}
 }
 
@@ -385,9 +390,10 @@ void Map_Bobdata_Data_Packet::read_critter_bob
 		if (packet_version == CRITTER_BOB_PACKET_VERSION) {
 			// No data for critter bob currently
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("critter bob: %s", e.what());
+		throw game_data_error(_("critter bob: %s"), e.what());
 	}
 }
 
@@ -431,16 +437,16 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 								broken_hp_compensation + fr.Unsigned32();
 						}
 						if (not soldier->m_hp_current)
-							throw wexception("no hitpoints (should be dead)");
+							throw game_data_error("no hitpoints (should be dead)");
 						if (soldier->m_hp_max < soldier->m_hp_current)
-							throw wexception
+							throw game_data_error
 								("hp_max (%u) < hp_current (%u)",
 								 soldier->m_hp_max, soldier->m_hp_current);
 
 						soldier->m_min_attack    = fr.Unsigned32();
 						soldier->m_max_attack    = fr.Unsigned32();
 						if (soldier->m_max_attack < soldier->m_min_attack)
-							throw wexception
+							throw game_data_error
 								("max_attack = %u but must be at least %u",
 								 soldier->m_max_attack, soldier->m_min_attack);
 
@@ -621,11 +627,11 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 							if (Serial const battle = fr.Unsigned32())
 								soldier->m_battle = &ol->get<Battle>(battle);
 					} else
-						throw wexception
-							("unknown/unhandled version %u",
+						throw game_data_error
+							(_("unknown/unhandled version %u"),
 							 soldier_worker_bob_packet_version);
 				} catch (_wexception const & e) {
-					throw wexception("soldier: %s", e.what());
+					throw game_data_error(_("soldier: %s"), e.what());
 				}
 			} else if (upcast(Carrier, carrier, &worker)) {
 				try {
@@ -637,11 +643,11 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						 CARRIER_WORKER_BOB_PACKET_VERSION)
 						carrier->m_acked_ware = fr.Signed32();
 					else
-						throw wexception
-							("unknown/unhandled version %u",
+						throw game_data_error
+							(_("unknown/unhandled version %u"),
 							 carrier_worker_bob_packet_version);
 				} catch (_wexception const & e) {
-					throw wexception("carrier: %s", e.what());
+					throw game_data_error(_("carrier: %s"), e.what());
 				}
 			}
 
@@ -649,7 +655,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 				try {
 					worker.set_location(&ol->get<PlayerImmovable>(location_serial));
 				} catch (_wexception const & e) {
-					throw wexception
+					throw game_data_error
 						("location (%u): %s", location_serial, e.what());
 				}
 			} else
@@ -660,7 +666,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 					worker.m_carried_item =
 						&ol->get<WareInstance>(carried_item_serial);
 				} catch (_wexception const & e) {
-					throw wexception
+					throw game_data_error
 						("carried item (%u): %s", carried_item_serial, e.what());
 				}
 			} else
@@ -693,9 +699,10 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 								ms->update_soldier_request();
 							}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception
+		throw game_data_error
 			("worker %p (%u): %s", &worker, worker.serial(), e.what());
 	}
 }

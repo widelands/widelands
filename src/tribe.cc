@@ -28,6 +28,7 @@
 #include "events/event_conquer_area.h"
 #include "events/event_unhide_area.h"
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "helper.h"
 #include "i18n.h"
 #include "immovable.h"
@@ -38,7 +39,6 @@
 #include "soldier.h"
 #include "trainingsite.h"
 #include "logic/warehouse.h"
-#include "wexception.h"
 #include "logic/worker.h"
 #include "widelands_fileread.h"
 #include "world.h"
@@ -188,7 +188,7 @@ Tribe_Descr::Tribe_Descr
 							 i < &init;
 							 ++i)
 							if (i->name == init.name)
-								throw wexception("duplicated");
+								throw game_data_error("duplicated");
 						path += init.name;
 						Profile init_prof(path.c_str());
 						path.resize(base_path_size);
@@ -198,11 +198,11 @@ Tribe_Descr::Tribe_Descr
 							char const * const event_name = event_s->get_name();
 							Event * event;
 							if      (event_s->get_string("type"))
-								throw wexception("type key is not allowed");
+								throw game_data_error("type key is not allowed");
 							else if   (event_s->get_string("player"))
-								throw wexception("player key is not allowed");
+								throw game_data_error("player key is not allowed");
 							else if   (event_s->get_string("point"))
-								throw wexception("point key is not allowed");
+								throw game_data_error("point key is not allowed");
 							else if   (not strcmp(event_name, "allow_building")) {
 								event_s->set_int("version", 2);
 								event =
@@ -225,23 +225,23 @@ Tribe_Descr::Tribe_Descr
 								event_s->set_string("point", "0 0");
 								event = new Event_Unhide_Area(*event_s, egbase);
 							} else
-								throw wexception
+								throw game_data_error
 									("\"%s\" is invalid as player initialization event "
 									 "type for this tribe",
 									 event_name);
 							init.events.push_back(event);
 						}
 					} catch (_wexception const & e) {
-						throw wexception
+						throw game_data_error
 							("[initializations] \"%s=%s\": %s",
 							 init.name.c_str(), v->get_string(), e.what());
 					}
 				}
 		} catch (std::exception const & e) {
-			throw wexception("root conf: %s", e.what());
+			throw game_data_error("root conf: %s", e.what());
 		}
-	} catch (std::exception const & e) {
-		throw wexception("tribe %s: %s", tribename.c_str(), e.what());
+	} catch (_wexception const & e) {
+		throw game_data_error(_("tribe %s: %s"), tribename.c_str(), e.what());
 	}
 #ifdef WRITE_GAME_DATA_AS_HTML
 	if (g_options.pull_section("global").get_bool("write_HTML", false)) {
@@ -313,7 +313,7 @@ bool Tribe_Descr::exists_tribe
 						(TribeBasicInfo::Initialization
 						 	(v->get_name(), v->get_string()));
 			} catch (_wexception const & e) {
-				throw wexception
+				throw game_data_error
 					("reading basic info for tribe \"%s\": %s",
 					 name.c_str(), e.what());
 			}
@@ -387,7 +387,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 	if (not res or not amount) {
 		int32_t idx = get_immovable_index("resi_none");
 		if (idx == -1)
-			throw wexception
+			throw game_data_error
 				("tribe %s does not declare a resource indicator resi_none!",
 				 name().c_str());
 		return idx;
@@ -406,7 +406,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 	}
 
 	if (not num_indicators)
-		throw wexception
+		throw game_data_error
 			("tribe %s does not declare a resource indicator for resource %s",
 			 name().c_str(),
 			 res->name().c_str());
@@ -437,7 +437,7 @@ Ware_Index Tribe_Descr::safe_ware_index(std::string const & warename) const {
 	if (Ware_Index const result = ware_index(warename))
 		return result;
 	else
-		throw wexception
+		throw game_data_error
 			("tribe %s does not define ware type \"%s\"",
 			 name().c_str(), warename.c_str());
 }
@@ -445,7 +445,7 @@ Ware_Index Tribe_Descr::safe_ware_index(const char * const warename) const {
 	if (Ware_Index const result = ware_index(warename))
 		return result;
 	else
-		throw wexception
+		throw game_data_error
 			("tribe %s does not define ware type \"%s\"",
 			 name().c_str(), warename);
 }
@@ -458,7 +458,7 @@ Ware_Index Tribe_Descr::safe_worker_index(std::string const & workername) const
 	if (Ware_Index const result = worker_index(workername))
 		return result;
 	else
-		throw wexception
+		throw game_data_error
 			("tribe %s does not define worker type \"%s\"",
 			 name().c_str(), workername.c_str());
 }
@@ -466,7 +466,7 @@ Ware_Index Tribe_Descr::safe_worker_index(const char * const workername) const {
 	if (Ware_Index const result = worker_index(workername))
 		return result;
 	else
-		throw wexception
+		throw game_data_error
 			("tribe %s does not define worker type \"%s\"",
 			 name().c_str(), workername);
 }
@@ -480,7 +480,7 @@ Building_Index Tribe_Descr::safe_building_index
 	Building_Index const result = building_index(buildingname);
 
 	if (not result)
-		throw wexception
+		throw game_data_error
 			("tribe %s does not define building type \"%s\"",
 			 name().c_str(), buildingname);
 	return result;

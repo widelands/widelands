@@ -20,6 +20,7 @@
 #ifndef WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 #define WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 
+#include "game_data_error.h"
 #include "logic/instances.h"
 #include "widelands.h"
 
@@ -59,7 +60,7 @@ struct Map_Map_Object_Loader {
 			m_objects.find(n);
 		if (existing != m_objects.end()) {
 			//delete &object; can not do this
-			throw wexception
+			throw game_data_error
 				("already loaded (%s)", existing->second->type_name());
 		}
 		m_objects.insert(std::pair<Serial, Map_Object *>(n, &object));
@@ -70,11 +71,11 @@ struct Map_Map_Object_Loader {
 	template<typename T> T & get(Serial const serial) {
 		Reverse_Map_Object_Map::iterator const it = m_objects.find(serial);
 		if (it == m_objects.end())
-			throw wexception("not found");
+			throw game_data_error("not found");
 		else if (upcast(T, result, it->second))
 			return *result;
 		else
-			throw wexception
+			throw game_data_error
 				("is a %s, expected a %s",
 				 it->second->type_name(), typeid(T).name());
 	}

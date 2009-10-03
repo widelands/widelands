@@ -20,8 +20,8 @@
 #include "event_immovable.h"
 
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 #define EVENT_VERSION 1
 
@@ -38,9 +38,10 @@ Event_Immovable::Event_Immovable(Section & s, Editor_Game_Base & egbase)
 			m_immovable_type =
 				&s.get_safe_Immovable_Type("tribe", "name", egbase);
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("(flag): %s", e.what());
+		throw game_data_error(_("(immovable): %s"), e.what());
 	}
 }
 

@@ -76,16 +76,17 @@ throw (_wexception)
 								 	 egbase.player(owner),
 								 	 Coords(x, y)));
 						} catch (_wexception const & e) {
-							throw wexception
+							throw game_data_error
 								("%u (at (%i, %i), owned by player %u): %s",
 								 serial, x, y, owner, e.what());
 						}
 					}
 				}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("flags: %s", e.what());
+		throw game_data_error(_("flags: %s"), e.what());
 	}
 }
 

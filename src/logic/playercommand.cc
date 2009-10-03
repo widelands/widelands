@@ -111,9 +111,10 @@ void PlayerCommand::Read
 			m_sender    = fr.Unsigned8 ();
 			m_cmdserial = 1 < packet_version ? fr.Unsigned32() : 0;
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("player command: %s", e.what());
+		throw game_data_error(_("player command: %s"), e.what());
 	}
 }
 
@@ -151,15 +152,17 @@ void Cmd_Bulldoze::Read
 			PlayerCommand::Read(fr, egbase, mol);
 			Serial const pimm_serial = fr.Unsigned32();
 			try {
-				serial = mol.get<Map_Object>(pimm_serial).serial();
+				serial = mol.get<PlayerImmovable>(pimm_serial).serial();
 				recurse = 2 <= packet_version ? fr.Unsigned8() : false;
 			} catch (_wexception const & e) {
-				throw wexception("map object %u: %s", pimm_serial, e.what());
+				throw game_data_error
+					(_("player immovable %u: %s"), pimm_serial, e.what());
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("bulldoze: %s", e.what());
+		throw game_data_error(_("bulldoze: %s"), e.what());
 	}
 }
 void Cmd_Bulldoze::Write
@@ -208,9 +211,10 @@ void Cmd_Build::Read
 					(static_cast<Building_Index::value_t>(fr.Unsigned16()));
 			coords = fr.Coords32  (egbase.map().extent());
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("build: %s", e.what());
+		throw game_data_error(_("build: %s"), e.what());
 	}
 }
 
@@ -255,9 +259,10 @@ void Cmd_BuildFlag::Read
 			PlayerCommand::Read(fr, egbase, mol);
 			coords = fr.Coords32(egbase.map().extent());
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("build flag: %s", e.what());
+		throw game_data_error(_("build flag: %s"), e.what());
 	}
 }
 void Cmd_BuildFlag::Write
@@ -341,9 +346,10 @@ void Cmd_BuildRoad::Read
 			for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
 			steps[i] = fr.Unsigned8();
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("build road: %s", e.what());
+		throw game_data_error(_("build road: %s"), e.what());
 	}
 }
 void Cmd_BuildRoad::Write
@@ -397,12 +403,13 @@ void Cmd_FlagAction::Read
 			try {
 				serial = mol.get<Map_Object>(flag_serial).serial();
 			} catch (_wexception const & e) {
-				throw wexception("flag %u: %s", flag_serial, e.what());
+				throw game_data_error(_("flag %u: %s"), flag_serial, e.what());
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("flag action: %s", e.what());
+		throw game_data_error(_("flag action: %s"), e.what());
 	}
 }
 void Cmd_FlagAction::Write
@@ -452,12 +459,14 @@ void Cmd_StartStopBuilding::Read
 			try {
 				serial = mol.get<Map_Object>(building_serial).serial();
 			} catch (_wexception const & e) {
-				throw wexception("building %u: %s", building_serial, e.what());
+				throw game_data_error
+					(_("building %u: %s"), building_serial, e.what());
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("start/stop building: %s", e.what());
+		throw game_data_error(_("start/stop building: %s"), e.what());
 	}
 }
 void Cmd_StartStopBuilding::Write
@@ -508,15 +517,17 @@ void Cmd_EnhanceBuilding::Read
 			try {
 				serial = mol.get<Map_Object>(building_serial).serial();
 			} catch (_wexception const & e) {
-				throw wexception("building %u: %s", building_serial, e.what());
+				throw game_data_error
+					(_("building %u: %s"), building_serial, e.what());
 			}
 			bi =
 				Building_Index
 					(static_cast<Building_Index::value_t>(fr.Unsigned16()));
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("enhance building: %s", e.what());
+		throw game_data_error(_("enhance building: %s"), e.what());
 	}
 }
 void Cmd_EnhanceBuilding::Write
@@ -588,16 +599,17 @@ void Cmd_SetWarePriority::Read
 			try {
 				m_serial = mol.get<Map_Object>(serial).serial();
 			} catch (_wexception const & e) {
-				throw wexception("site %u: %s", serial, e.what());
+				throw game_data_error(_("site %u: %s"), serial, e.what());
 			}
 
 			m_type = fr.Unsigned8();
 			m_index = Ware_Index(static_cast<Ware_Index::value_t>(fr.Signed32()));
 			m_priority = fr.Signed32();
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("set ware priority: %s", e.what());
+		throw game_data_error(_("set ware priority: %s"), e.what());
 	}
 }
 
@@ -646,7 +658,7 @@ void Cmd_ChangeTargetQuantity::Read
 		m_ware_type =
 			egbase.player(sender()).tribe().ware_index(fr.CString());
 	} catch (_wexception const & e) {
-		throw wexception("change target quantity: %s", e.what());
+		throw game_data_error(_("change target quantity: %s"), e.what());
 	}
 }
 
@@ -708,9 +720,10 @@ void Cmd_SetTargetQuantity::Read
 			m_permanent = fr.Unsigned32();
 			m_temporary = fr.Unsigned32();
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("set target quantity: %s", e.what());
+		throw game_data_error(_("set target quantity: %s"), e.what());
 	}
 }
 
@@ -770,9 +783,10 @@ void Cmd_ResetTargetQuantity::Read
 		if (packet_version == PLAYER_CMD_RESETTARGETQUANTITY_VERSION) {
 			Cmd_ChangeTargetQuantity::Read(fr, egbase, mol);
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("set target quantity: %s", e.what());
+		throw game_data_error("reset target quantity: %s", e.what());
 	}
 }
 
@@ -825,15 +839,16 @@ void Cmd_ChangeTrainingOptions::Read
 			try {
 				serial    = mol.get<Map_Object>(trainingsite_serial).serial();
 			} catch (_wexception const & e) {
-				throw wexception
+				throw game_data_error
 					("trainingsite %u: %s", trainingsite_serial, e.what());
 			}
 			attribute = fr.Unsigned16();
 			value     = fr.Unsigned16();
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("change training options: %s", e.what());
+		throw game_data_error(_("change training options: %s"), e.what());
 	}
 }
 
@@ -885,22 +900,25 @@ void Cmd_DropSoldier::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == PLAYER_CMD_DROPSOLDIER_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
-			uint32_t const milsite_serial = fr.Unsigned32();
+			uint32_t const site_serial = fr.Unsigned32();
 			try {
-				serial  = mol.get<PlayerImmovable>(milsite_serial).serial();
+				serial  = mol.get<PlayerImmovable>(site_serial).serial();
 			} catch (_wexception const & e) {
-				throw wexception("militarysite %u: %s", milsite_serial, e.what());
+				throw game_data_error
+					(_("site %u: %s"),    site_serial, e.what());
 			}
 			uint32_t const soldier_serial = fr.Unsigned32();
 			try {
 				soldier = mol.get<Soldier>        (soldier_serial).serial();
 			} catch (_wexception const & e) {
-				throw wexception("soldier %u: %s",      soldier_serial, e.what());
+				throw game_data_error
+					(_("soldier %u: %s"), soldier_serial, e.what());
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("drop soldier: %s", e.what());
+		throw game_data_error(_("drop soldier: %s"), e.what());
 	}
 }
 
@@ -964,14 +982,15 @@ void Cmd_ChangeSoldierCapacity::Read
 			try {
 				serial = mol.get<Map_Object>(militarysite_serial).serial();
 			} catch (_wexception const & e) {
-				throw wexception
-					("militarysite %u: %s", militarysite_serial, e.what());
+				throw game_data_error
+					(_("site %u: %s"), militarysite_serial, e.what());
 			}
 			val = fr.Signed16();
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("change soldier capacity: %s", e.what());
+		throw game_data_error(_("change soldier capacity: %s"), e.what());
 	}
 }
 
@@ -1052,15 +1071,16 @@ void Cmd_EnemyFlagAction::Read
 			try {
 				serial = mol.get<Map_Object>(flag_serial).serial();
 			} catch (_wexception const & e) {
-				throw wexception("flag %u: %s", flag_serial, e.what());
+				throw game_data_error("flag %u: %s", flag_serial, e.what());
 			}
 			fr           .Unsigned8 ();
 			number   = fr.Unsigned8 ();
 			fr           .Unsigned8 ();
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("enemy flag action: %s", e.what());
+		throw game_data_error("enemy flag action: %s", e.what());
 	}
 }
 

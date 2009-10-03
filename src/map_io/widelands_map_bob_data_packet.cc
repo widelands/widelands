@@ -45,17 +45,17 @@ void Map_Bob_Data_Packet::ReadBob
 
 	try {
 		if (subtype != Bob::CRITTER && subtype != Bob::WORKER)
-			throw wexception("unknown bob type %u", subtype);
+			throw game_data_error(_("unknown bob type %u"), subtype);
 
 		if (not strcmp(owner, "world")) {
 			if (subtype != Bob::CRITTER)
-				throw wexception("world bob is not a critter!");
+				throw game_data_error("world bob is not a critter!");
 
 			Map   const & map   = egbase.map();
 			World const & world = map.world();
 			int32_t const idx = world.get_bob(name);
 			if (idx == -1)
-				throw wexception
+				throw game_data_error
 					("world %s does not define bob type \"%s\"",
 					 world.get_name(), name);
 			Bob::Descr const & descr = *world.get_bob_descr(idx);
@@ -86,7 +86,7 @@ void Map_Bob_Data_Packet::ReadBob
 						bob.set_position(egbase, coords);
 						bob.init(egbase);
 					} else
-						throw wexception
+						throw game_data_error
 							("tribe %s does not define bob type \"%s\"", owner, name);
 				} else if (subtype == Bob::CRITTER) {
 					int32_t const idx = tribe->get_bob(name);
@@ -94,15 +94,15 @@ void Map_Bob_Data_Packet::ReadBob
 						ol->register_object<Bob>
 							(serial, egbase.create_bob(coords, idx, tribe));
 					else
-						throw wexception
+						throw game_data_error
 							("tribe %s does not define defines bob type \"%s\"",
 							 owner, name);
 				}
 			} else
-				throw wexception("tribe \"%s\" does not exist", owner);
+				throw game_data_error(_("tribe \"%s\" does not exist"), owner);
 		}
 	} catch (_wexception const & e) {
-		throw wexception
+		throw game_data_error
 			("%u (owner = \"%s\", name = \"%s\"): %s",
 			 serial, owner, name, e.what());
 	}
@@ -135,9 +135,10 @@ throw (_wexception)
 				}
 			}
 		else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("bobs: %s", e.what());
+		throw game_data_error(_("bobs: %s"), e.what());
 	}
 }
 

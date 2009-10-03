@@ -20,6 +20,7 @@
 #include "widelands_map_elemental_data_packet.h"
 
 #include "logic/editor_game_base.h"
+#include "game_data_error.h"
 #include "map.h"
 #include "profile/profile.h"
 #include "world.h"
@@ -48,9 +49,10 @@ throw (_wexception)
 			map->set_description(s.get_string("descr"));
 			map->set_background (s.get_string("background"));
 		} else
-			throw wexception("unknown/unhandled version %i", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %i"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("elemental data: %s", e.what());
+		throw game_data_error(_("elemental data: %s"), e.what());
 	}
 }
 

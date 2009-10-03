@@ -23,6 +23,7 @@
 #include "io/bitoutbuffer.h"
 #include "logic/editor_game_base.h"
 #include "field.h"
+#include "game_data_error.h"
 #include "logic/instances.h" //for g_flag_descr
 #include "logic/player.h"
 #include "tribe.h"
@@ -118,7 +119,7 @@ inline static const Map_Object_Descr * read_unseen_immovable
 			map_object_descr = &immovables_file.Building_Type (egbase); break;
 		}
 	} catch (_wexception const & e) {
-		throw wexception("unseen immovable: %s", e.what());
+		throw game_data_error(_("unseen immovable: %s"), e.what());
 	}
 	return map_object_descr;
 }
@@ -129,7 +130,7 @@ inline static const Map_Object_Descr * read_unseen_immovable
    filetype file;                                                             \
    try {(file).Open(fs, filename);}                                           \
    catch (File_error const &) {                                               \
-      throw wexception                                                        \
+      throw game_data_error                                                   \
          ("Map_Players_View_Data_Packet::Read: player %u:Could not open "     \
           "\"%s\" for reading. This file should exist when \"%s\" exists",    \
           plnum, filename, unseen_times_filename);                            \
@@ -137,7 +138,7 @@ inline static const Map_Object_Descr * read_unseen_immovable
 
 #define CHECK_TRAILING_BYTES(file, filename)                                  \
    if (not (file).EndOfFile())                                                \
-      throw wexception                                                        \
+      throw game_data_error                                                   \
          ("Map_Players_View_Data_Packet::Read: player %u:"                    \
           "Found %lu trailing bytes in \"%s\"",                               \
           plnum,                                                              \
@@ -296,7 +297,7 @@ void Map_Players_View_Data_Packet::Read
 
 					uint32_t file_vision = vision_file.Unsigned32();
 					if (file_vision != f_player_field.vision)
-						throw wexception
+						throw game_data_error
 							("player %u, node (%i, %i): vision mismatch (%u vs. %u)",
 							 plnum, f.x, f.y, f_player_field.vision, file_vision);
 				} while (r.x);
@@ -401,7 +402,7 @@ void Map_Players_View_Data_Packet::Read
 						f_player_field.time_node_last_unseen =
 							unseen_times_file.Unsigned32();
 					} catch (const FileRead::File_Boundary_Exceeded) {
-						throw wexception
+						throw game_data_error
 							("Map_Players_View_Data_Packet::Read: player %u: in "
 							 "\"%s\":%lu: node (%i, %i): unexpected end of file "
 							 "while reading time_node_last_unseen",
@@ -414,7 +415,7 @@ void Map_Players_View_Data_Packet::Read
 
 					try {owner = owners_file.Unsigned8();}
 					catch (const FileRead::File_Boundary_Exceeded) {
-						throw wexception
+						throw game_data_error
 							("Map_Players_View_Data_Packet::Read: player %u: in "
 							 "\"%s\":%lu: node (%i, %i): unexpected end of file "
 							 "while reading owner",
@@ -425,7 +426,7 @@ void Map_Players_View_Data_Packet::Read
 							 f.x, f.y);
 					}
 					if (nr_players < owner)
-						throw wexception
+						throw game_data_error
 							("Map_Players_View_Data_Packet::Read: player %u: in "
 							 "\"%s\":%lu & 0xf: node (%i, %i): Player thinks that "
 							 "this node is owned by player %u, but there are only %u "
@@ -480,7 +481,7 @@ void Map_Players_View_Data_Packet::Read
 					//  Load his information about the triangle from file.
 					try {f_player_field.terrains.d = terrains_file.get();}
 					catch (const FileRead::File_Boundary_Exceeded) {
-						throw wexception
+						throw game_data_error
 							("Map_Players_View_Data_Packet::Read: player %u: in "
 							 "\"%s\": node (%i, %i) t = D: unexpected end of file "
 							 "while reading terrain",
@@ -502,7 +503,7 @@ void Map_Players_View_Data_Packet::Read
 					//  Load his information about the triangle from file.
 					try {f_player_field.terrains.r = terrains_file.get();}
 					catch (const FileRead::File_Boundary_Exceeded) {
-						throw wexception
+						throw game_data_error
 							("Map_Players_View_Data_Packet::Read: player %u: in "
 							 "\"%s\": node (%i, %i) t = R: unexpected end of file "
 							 "while reading terrain",
@@ -523,7 +524,7 @@ void Map_Players_View_Data_Packet::Read
 						//  it now. Load his information about this edge from file.
 						try {roads  = roads_file.get() << Road_SouthWest;}
 						catch (const FileRead::File_Boundary_Exceeded) {
-							throw wexception
+							throw game_data_error
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\": node (%i, %i): unexpected end of file while "
 								 "reading Road_SouthWest",
@@ -536,7 +537,7 @@ void Map_Players_View_Data_Packet::Read
 						//  it now. Load his information about this edge from file.
 						try {roads |= roads_file.get() << Road_SouthEast;}
 						catch (const FileRead::File_Boundary_Exceeded) {
-							throw wexception
+							throw game_data_error
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\": node (%i, %i): unexpected end of file while "
 								 "reading Road_SouthEast",
@@ -549,7 +550,7 @@ void Map_Players_View_Data_Packet::Read
 						//  it now. Load his information about this edge from file.
 						try {roads |= roads_file.get() << Road_East;}
 						catch (const FileRead::File_Boundary_Exceeded) {
-							throw wexception
+							throw game_data_error
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\": node (%i, %i): unexpected end of file while "
 								 "reading Road_East",
@@ -573,7 +574,7 @@ void Map_Players_View_Data_Packet::Read
 							f_player_field.resource_amounts.d =
 								survey_amounts_file.get();
 						} catch (const FileRead::File_Boundary_Exceeded) {
-							throw wexception
+							throw game_data_error
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\": node (%i, %i) t = D: unexpected end of file "
 								 "while reading resource amount of surveyed triangle",
@@ -583,7 +584,7 @@ void Map_Players_View_Data_Packet::Read
 							f_player_field.time_triangle_last_surveyed[TCoords<>::D] =
 								survey_times_file.Unsigned32();
 						} catch (const FileRead::File_Boundary_Exceeded) {
-							throw wexception
+							throw game_data_error
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\":%lu: node (%i, %i) t = D: unexpected end of "
 								 "file while reading time_triangle_last_surveyed",
@@ -594,7 +595,7 @@ void Map_Players_View_Data_Packet::Read
 						}
 					}
 				} catch (const FileRead::File_Boundary_Exceeded) {
-					throw wexception
+					throw game_data_error
 						("Map_Players_View_Data_Packet::Read: player %u: in \"%s\": "
 						 "node (%i, %i) t = D: unexpected end of file while reading "
 						 "survey bit",
@@ -610,7 +611,7 @@ void Map_Players_View_Data_Packet::Read
 							f_player_field.resource_amounts.r =
 								survey_amounts_file.get();
 						} catch (const FileRead::File_Boundary_Exceeded) {
-							throw wexception
+							throw game_data_error
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\": node (%i, %i) t = R: unexpected end of file "
 								 "while reading resource amount of surveyed triangle",
@@ -620,7 +621,7 @@ void Map_Players_View_Data_Packet::Read
 							f_player_field.time_triangle_last_surveyed[TCoords<>::R] =
 								survey_times_file.Unsigned32();
 						} catch (const FileRead::File_Boundary_Exceeded) {
-							throw wexception
+							throw game_data_error
 								("Map_Players_View_Data_Packet::Read: player %u: in "
 								 "\"%s\":%lu: node (%i, %i) t = R: unexpected end of "
 								 "file while reading time_triangle_last_surveyed",
@@ -631,7 +632,7 @@ void Map_Players_View_Data_Packet::Read
 						}
 					}
 				} catch (const FileRead::File_Boundary_Exceeded) {
-					throw wexception
+					throw game_data_error
 						("Map_Players_View_Data_Packet::Read: player %u: in \"%s\": "
 						 "node (%i, %i) t = R: unexpected end of file while reading "
 						 "survey bit",

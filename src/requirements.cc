@@ -19,7 +19,10 @@
 
 #include "requirements.h"
 
+#include "game_data_error.h"
 #include "logic/instances.h"
+
+#include "i18n.h"
 
 #include "container_iterate.h"
 
@@ -87,7 +90,8 @@ void Requirements::Read
 
 			*this = req;
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
 		throw wexception("requirements: %s", e.what());
 	}
@@ -137,7 +141,7 @@ Requirements RequirementsStorage::read
 	StorageMap::iterator it = s.find(id);
 
 	if (it == s.end())
-		throw wexception("unknown requirement id %u", id);
+		throw game_data_error("unknown requirement id %u", id);
 
 	return it->second->m_reader(fr, egbase, mol);
 }

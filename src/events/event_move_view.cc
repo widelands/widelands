@@ -22,8 +22,8 @@
 #include "wui/interactive_player.h"
 
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 #define EVENT_VERSION 2
 
@@ -46,13 +46,14 @@ Event_Move_View::Event_Move_View(Section & s, Editor_Game_Base & egbase)
 				(m_location.x < 0 or extent.w <= m_location.x
 				 or
 				 m_location.y < 0 or extent.h <= m_location.y)
-				throw wexception
-					("illegal coordinates (%i, %i)", m_location.x, m_location.y);
+				throw game_data_error
+					(_("illegal coordinates (%i, %i)"), m_location.x, m_location.y);
 			m_player = s.get_Player_Number("player", map.get_nrplayers(), 1);
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("(move view): %s", e.what());
+		throw game_data_error(_("(move view): %s"), e.what());
 	}
 }
 

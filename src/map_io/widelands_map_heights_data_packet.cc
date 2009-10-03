@@ -21,6 +21,7 @@
 
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
+#include "game_data_error.h"
 #include "map.h"
 #include "world.h"
 #include "widelands_fileread.h"
@@ -49,9 +50,10 @@ throw (_wexception)
 			for (Map_Index i = 0; i < max_index; ++i)
 				map[i].set_height(fr.Unsigned8());
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("heights: %s", e.what());
+		throw game_data_error(_("heights: %s"), e.what());
 	}
 }
 

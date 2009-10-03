@@ -22,11 +22,11 @@
 #include "logic/building.h"
 #include "editor/editorinteractive.h"
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "i18n.h"
 #include "map.h"
 #include "logic/player.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 #include "upcast.h"
 
@@ -52,9 +52,10 @@ void Trigger_Building::Read(Section & s, Editor_Game_Base & egbase) {
 				&s.get_safe_Building_Type
 					("building", egbase, m_player_area.player_number);
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
-	} catch (std::exception const & e) {
-		throw wexception("(building): %s", e.what());
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error(_("(building): %s"), e.what());
 	}
 }
 

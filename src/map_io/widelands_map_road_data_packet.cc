@@ -59,13 +59,14 @@ throw (_wexception)
 					//  Road data is read somewhere else
 					ol->register_object(serial, *new Road()).init(egbase);
 				} catch (_wexception const & e) {
-					throw wexception("%u: %s", serial, e.what());
+					throw game_data_error("%u: %s", serial, e.what());
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("road: %s", e.what());
+		throw game_data_error(_("road: %s"), e.what());
 	}
 }
 

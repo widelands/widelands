@@ -66,13 +66,14 @@ throw (_wexception)
 						 *new WareInstance(Ware_Index::Null(), 0))
 						.init(egbase);
 				} catch (_wexception const & e) {
-					throw wexception("%u: %s", serial, e.what());
+					throw game_data_error(_("%u: %s"), serial, e.what());
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("ware data: %s", e.what());
+		throw game_data_error(_("ware data: %s"), e.what());
 	}
 }
 

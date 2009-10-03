@@ -20,9 +20,9 @@
 #include "event_player_area.h"
 
 #include "logic/editor_game_base.h"
+#include "game_data_error.h"
 #include "map.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 #include "log.h"
 
@@ -51,13 +51,14 @@ Event_Player_Area::Event_Player_Area(Section & s, Editor_Game_Base & egbase)
 				(m_player_area.x < 0 or extent.w <= m_player_area.x
 				 or
 				 m_player_area.y < 0 or extent.h <= m_player_area.y)
-				throw wexception
-					("illegal coordinates (%i, %i)",
+				throw game_data_error
+					(_("illegal coordinates (%i, %i)"),
 					 m_player_area.x, m_player_area.y);
 		} else
-			throw wexception("unknown/unhandled version %u", event_version);
-	} catch (std::exception const & e) {
-		throw wexception("(player area): %s", e.what());
+			throw game_data_error
+				(_("unknown/unhandled version %u"), event_version);
+	} catch (_wexception const & e) {
+		throw game_data_error(_("(player area): %s"), e.what());
 	}
 }
 

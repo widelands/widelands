@@ -20,8 +20,8 @@
 #include "trigger_time.h"
 
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 #define TRIGGER_VERSION 2
 
@@ -40,9 +40,10 @@ void Trigger_Time::Read(Section & s, Editor_Game_Base &) {
 		else if (1 < packet_version and packet_version <= TRIGGER_VERSION)
 			m_time = s.get_natural("time", Never());
 		else
-			throw wexception("unknown/unhandled version %u", packet_version);
-	} catch (std::exception const & e) {
-		throw wexception("(time): %s", e.what());
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error(_("(time): %s"), e.what());
 	}
 }
 

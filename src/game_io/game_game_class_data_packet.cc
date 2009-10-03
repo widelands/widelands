@@ -20,6 +20,7 @@
 #include "game_game_class_data_packet.h"
 
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
 
@@ -30,7 +31,6 @@ namespace Widelands {
 
 void Game_Game_Class_Data_Packet::Read
 	(FileSystem & fs, Game & game, Map_Map_Object_Loader *)
-throw (_wexception)
 {
 	try {
 		FileRead fr;
@@ -40,9 +40,10 @@ throw (_wexception)
 			fr.Signed16(); // This used to be game speed
 			game.m_gametime = fr.Unsigned32();
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("check eventchain: %s", e.what());
+		throw game_data_error(_("check eventchain: %s"), e.what());
 	}
 }
 
@@ -51,7 +52,6 @@ throw (_wexception)
  */
 void Game_Game_Class_Data_Packet::Write
 	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
-throw (_wexception)
 {
 	FileWrite fw;
 

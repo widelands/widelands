@@ -19,6 +19,7 @@
 
 #include "widelands_map_resources_data_packet.h"
 #include "logic/editor_game_base.h"
+#include "game_data_error.h"
 #include "map.h"
 #include "world.h"
 #include "widelands_fileread.h"
@@ -61,8 +62,8 @@ throw (_wexception)
 			char const * const buffer = fr.CString();
 			int32_t const res = world.get_resource(buffer);
 			if (res == -1)
-				throw wexception
-					("Resource '%s' exists in map, not in world!", buffer);
+				throw game_data_error
+					("resource '%s' exists in map but not in world", buffer);
 			smap[id] = res;
 		}
 
@@ -92,7 +93,7 @@ throw (_wexception)
 			}
 		}
 	} else
-		throw wexception
+		throw game_data_error
 			("Unknown version in Map_Resources_Data_Packet: %u", packet_version);
 }
 

@@ -21,6 +21,7 @@
 
 #include "events/event.h"
 #include "game.h"
+#include "game_data_error.h"
 #include "trigger/trigger_conditional.h"
 
 namespace Widelands {
@@ -91,9 +92,10 @@ void Cmd_CheckEventChain::Read
 			GameLogicCommand::Read(fr, egbase, mol);
 			m_eventchain_id = fr.Unsigned16();
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("check eventchain: %s", e.what());
+		throw game_data_error(_("check eventchain: %s"), e.what());
 	}
 }
 void Cmd_CheckEventChain::Write

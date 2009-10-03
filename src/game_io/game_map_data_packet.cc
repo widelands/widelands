@@ -21,6 +21,7 @@
 
 #include "io/filesystem/filesystem.h"
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "map_io/widelands_map_loader.h"
 #include "map_io/widelands_map_saver.h"
 
@@ -36,10 +37,9 @@ Game_Map_Data_Packet::~Game_Map_Data_Packet() {
 
 void Game_Map_Data_Packet::Read
 	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const)
-throw (_wexception)
 {
 	if (not fs.FileExists("map") or not fs.IsDirectory("map"))
-		throw wexception("No map in this save game!");
+		throw game_data_error("no map");
 
 	//  Now Load the map as it would be a normal map saving.
 	delete m_wml;
@@ -63,7 +63,6 @@ void Game_Map_Data_Packet::Read_Complete(Game & game) {
 
 void Game_Map_Data_Packet::Write
 	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
-throw (_wexception)
 {
 
 	std::auto_ptr<FileSystem> mapfs

@@ -20,6 +20,7 @@
 #include "widelands_map_variable_data_packet.h"
 
 #include "logic/editor_game_base.h"
+#include "game_data_error.h"
 #include "map.h"
 
 #include "profile/profile.h"
@@ -64,21 +65,22 @@ throw (_wexception)
 						v.set_value(s->get_safe_string("value"));
 						variable = &v;
 					} else
-						throw wexception("invalid type \"%s\"", type_name);
+						throw game_data_error(_("invalid type \"%s\""), type_name);
 					variable->set_name(name);
 					try {
 						mvm.register_new(*variable);
 					} catch (Manager<Variable>::Already_Exists) {
-						throw wexception("duplicated");
+						throw game_data_error("duplicated");
 					}
 				} catch (_wexception const & e) {
-					throw wexception("variable %s: %s", name, e.what());
+					throw game_data_error(_("variable %s: %s"), name, e.what());
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("variables: %s", e.what());
+		throw game_data_error(_("variables: %s"), e.what());
 	}
 }
 
@@ -105,7 +107,8 @@ throw (_wexception)
 			s.set_string("type", "string");
 			s.set_string("value", svar->get_value());
 		} else
-			throw wexception("Unknown Variable type in Map_Variable_Data_Packet");
+			throw game_data_error
+				("unknown Variable type in Map_Variable_Data_Packet");
 	}
 
 	prof.write("variable", false, fs);

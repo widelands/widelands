@@ -59,7 +59,7 @@ throw (_wexception)
 				Serial const serial = fr.Unsigned32();
 				if (serial == 0xffffffff) {
 					if (not fr.EndOfFile())
-						throw wexception
+						throw game_data_error
 							("expected end of file after serial 0xffffffff");
 					break;
 				}
@@ -92,7 +92,7 @@ throw (_wexception)
 
 								ware.set_economy(player_immovable->get_economy());
 							} else
-								throw wexception
+								throw game_data_error
 									("is PlayerImmovable but not Building or Flag");
 						} else if (upcast(Worker, worker, &location)) {
 							Tribe_Descr const & tribe = *worker->get_tribe();
@@ -107,7 +107,7 @@ throw (_wexception)
 
 							//  The worker sets our economy.
 						} else
-							throw wexception("is not PlayerImmovable or Worker");
+							throw game_data_error("is not PlayerImmovable or Worker");
 						//  Do not touch supply or transfer.
 
 						if (uint32_t const nextstep_serial = fr.Unsigned32())
@@ -115,7 +115,7 @@ throw (_wexception)
 								ware.m_transfer_nextstep =
 									&ol->get<PlayerImmovable>(nextstep_serial);
 							} catch (_wexception const & e) {
-								throw wexception
+								throw game_data_error
 									("nextstep %u: %s", nextstep_serial, e.what());
 							}
 						else
@@ -126,12 +126,12 @@ throw (_wexception)
 						ware.set_location
 							(ref_cast<Game, Editor_Game_Base>(egbase), &location);
 					} catch (_wexception const & e) {
-						throw wexception
+						throw game_data_error
 							("location %u: %s", location_serial, e.what());
 					}
 					ol->mark_object_as_loaded(&ware);
 				} catch (_wexception const & e) {
-					throw wexception("item %u: %s", serial, e.what());
+					throw game_data_error(_("item %u: %s"), serial, e.what());
 				}
 			}
 		} else if
@@ -161,7 +161,7 @@ throw (_wexception)
 										 	tribe.safe_ware_index(type_name));
 								ware.set_economy(player_immovable->get_economy());
 							} else
-								throw wexception
+								throw game_data_error
 									("is PlayerImmovable but not Building or Flag");
 						} else if (upcast(Worker, worker, &location)) {
 							Tribe_Descr const & tribe = *worker->get_tribe();
@@ -171,7 +171,7 @@ throw (_wexception)
 									 	tribe.safe_ware_index(type_name));
 							//  The worker sets our economy.
 						} else
-							throw wexception("is not PlayerImmovable or Worker");
+							throw game_data_error("is not PlayerImmovable or Worker");
 						//  Do not touch supply or transfer.
 
 						if (uint32_t const nextstep_serial = fr.Unsigned32())
@@ -179,7 +179,7 @@ throw (_wexception)
 								ware.m_transfer_nextstep =
 									&ol->get<PlayerImmovable>(nextstep_serial);
 							} catch (_wexception const & e) {
-								throw wexception
+								throw game_data_error
 									("nextstep %u: %s", nextstep_serial, e.what());
 							}
 						else
@@ -190,18 +190,19 @@ throw (_wexception)
 						ware.set_location
 							(ref_cast<Game, Editor_Game_Base>(egbase), &location);
 					} catch (_wexception const & e) {
-						throw wexception
+						throw game_data_error
 							("location %u: %s", location_serial, e.what());
 					}
 					ol->mark_object_as_loaded(&ware);
 				} catch (_wexception const & e) {
-					throw wexception("item %u: %s", serial, e.what());
+					throw game_data_error(_("item %u: %s"), serial, e.what());
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("waredata: %s", e.what());
+		throw game_data_error(_("waredata: %s"), e.what());
 	}
 }
 

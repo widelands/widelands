@@ -187,7 +187,7 @@ void Request::Read
 			if (!is_open() && m_economy)
 				m_economy->remove_request(*this);
 		} else
-			throw wexception("unknown/unhandled version %u", version);
+			throw game_data_error(_("unknown/unhandled version %u"), version);
 	} catch (_wexception const & e) {
 		throw wexception("request: %s", e.what());
 	}

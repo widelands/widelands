@@ -22,6 +22,7 @@
 #include "logic/editor_game_base.h"
 #include "events/event.h"
 #include "events/event_factory.h"
+#include "game_data_error.h"
 #include "map.h"
 #include "profile/profile.h"
 #include "widelands_fileread.h"
@@ -58,16 +59,17 @@ throw (_wexception)
 					try {
 						mem.register_new(Event_Factory::create(*s, egbase));
 					} catch (Manager<Event>::Already_Exists) {
-						throw wexception("duplicated");
+						throw game_data_error("duplicated");
 					}
 				} catch (std::exception const & e) {
-					throw wexception("%s: %s", s->get_name(), e.what());
+					throw game_data_error(_("%s: %s"), s->get_name(), e.what());
 				}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 		prof.check_used();
 	} catch (_wexception const & e) {
-		throw wexception("Events: %s", e.what());
+		throw game_data_error(_("Events: %s"), e.what());
 	}
 }
 

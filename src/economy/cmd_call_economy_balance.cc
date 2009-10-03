@@ -82,9 +82,10 @@ void Cmd_Call_Economy_Balance::Read
 			else
 				m_timerid = 0;
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("call economy balance: %s", e.what());
+		throw wexception(_("call economy balance: %s"), e.what());
 	}
 }
 void Cmd_Call_Economy_Balance::Write

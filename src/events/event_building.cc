@@ -20,6 +20,7 @@
 #include "event_building.h"
 
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "wui/interactive_base.h"
 #include "mapfringeregion.h"
 #include "militarysite.h"
@@ -29,7 +30,6 @@
 #include "trainingsite.h"
 #include "tribe.h"
 #include "logic/warehouse.h"
-#include "wexception.h"
 
 #include "upcast.h"
 
@@ -57,9 +57,10 @@ Event_Building::Event_Building
 				s.get_int
 					("sufficient_suitability", std::numeric_limits<int32_t>::max());
 			if (m_sufficient_suitability < m_required_suitability)
-				throw wexception
-					("sufficient_suitability (%u) is smaller than "
-					 "required_suitability (%u)",
+				throw game_data_error
+					(_
+					 	("sufficient_suitability (%u) is smaller than "
+					 	 "required_suitability (%u)"),
 					 m_sufficient_suitability, m_required_suitability);
 			if (char const * distance = s.get_string("distance")) {
 				char * endp;
@@ -67,20 +68,22 @@ Event_Building::Event_Building
 					long long int const value = strtoll(distance, &endp, 0);
 					m_distance_max = value;
 					if (endp == distance or value <= 0 or m_distance_max != value)
-						throw wexception
-							("expected distance (1 .. 255) but found \"%s\"", endp);
+						throw game_data_error
+							(_("expected distance (1 .. 255) but found \"%s\""),
+							 endp);
 				}
 				if (*(distance = endp)) {
 					m_distance_min = m_distance_max;
 					long long int const value = strtoll(distance, &endp, 0);
 					m_distance_max = value;
 					if (endp == distance or value <= 0 or m_distance_max != value)
-						throw wexception
-							("expected distance (1 .. 255) but found \"%s\"", endp);
+						throw game_data_error
+							(_("expected distance (1 .. 255) but found \"%s\""),
+							 endp);
 				}
 				if (m_distance_max < m_distance_min)
-					throw wexception
-						("max distance (%u) is smaller than min distance (%u)",
+					throw game_data_error
+						(_("max distance (%u) is smaller than min distance (%u)"),
 						 m_distance_max, m_distance_min);
 			}
 			if (not tribe) {
@@ -163,12 +166,12 @@ Event_Building::Event_Building
 								throw false;
 						}
 						if (m_soldier_counts.find(ss) != m_soldier_counts.end())
-							throw wexception("duplicated");
+							throw game_data_error(_("duplicated"));
 						m_soldier_counts.insert
 							(std::pair<Soldier_Strength, uint32_t>(ss, amount));
 					} catch (...) {
-						throw wexception
-							("%s=\"%s\": invalid", v->get_name(), v->get_string());
+						throw game_data_error
+							(_("%s=\"%s\": invalid"), v->get_name(), v->get_string());
 					}
 			} else { //  not a warehouse
 				if (upcast(ProductionSite_Descr const, ps_descr, &descr))
@@ -197,8 +200,8 @@ Event_Building::Event_Building
 									uint32_t     const count = s.get_positive(wname, 0);
 									uint32_t     const max   = i.it->second;
 									if (max < count)
-										throw wexception
-											("can not have %u %s (only %u)",
+										throw game_data_error
+											(_("can not have %u %s (only %u)"),
 											 count, wname, max);
 									m_ware_counts[i.i] = count;
 								}
@@ -223,8 +226,8 @@ Event_Building::Event_Building
 								uint32_t     const count =
 									fill ? max : s.get_positive(wname, 0);
 								if (max < count)
-									throw wexception
-										("can not have %u %s (only %u)",
+									throw game_data_error
+										(_("can not have %u %s (only %u)"),
 										 count, wname, max);
 								m_worker_counts[i.i] = count;
 							}
@@ -298,31 +301,33 @@ Event_Building::Event_Building
 												throw false;
 										}
 										if (m_soldier_counts.count(ss))
-											throw wexception("duplicated");
+											throw game_data_error(_("duplicated"));
 										m_soldier_counts.insert
 											(std::pair<Soldier_Strength, uint32_t>
 											 	(ss, amount));
 										soldier_count += amount;
 									} catch (...) {
-										throw wexception
-											("%s=\"%s\":invalid",
+										throw game_data_error
+											(_("%s=\"%s\":invalid"),
 											 v->get_name(), v->get_string());
 									}
 								if (max_soldier_capacity < soldier_count)
-									throw wexception
-										("%u soldiers but only %u allowed",
+									throw game_data_error
+										(_("%u soldiers but only %u allowed"),
 										 soldier_count, max_soldier_capacity);
 							} catch (_wexception const & e) {
-								throw wexception("(soldiercontrol): %s", e.what());
+								throw game_data_error
+									(_("(soldiercontrol): %s"), e.what());
 							}
 					} catch (_wexception const & e) {
-						throw wexception("(productionsite): %s", e.what());
+						throw game_data_error(_("(productionsite): %s"), e.what());
 					}
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("(building): %s", e.what());
+		throw game_data_error(_("(building): %s"), e.what());
 	}
 }
 
@@ -436,9 +441,10 @@ Event::State Event_Building::run(Game & game) {
 		(mr.radius() <= m_distance_max and
 		 best_suitability < m_sufficient_suitability);
 	if (best_suitability < m_required_suitability)
-		throw wexception
-			("failed to place a %s near (%i, %i) (distance between %u and %u) "
-			 "for player %u (suitability required is %u but found only %u)",
+		throw game_data_error
+			(_
+			 	("failed to place a %s near (%i, %i) (distance between %u and %u) "
+			 	 "for player %u (suitability required is %u but found only %u)"),
 			 descr.descname().c_str(),
 			 m_location.x, m_location.y, m_distance_min, m_distance_max,
 			 m_player, m_required_suitability, best_suitability);

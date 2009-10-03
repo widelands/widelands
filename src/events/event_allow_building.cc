@@ -20,6 +20,7 @@
 #include "event_allow_building.h"
 
 #include "logic/editor_game_base.h"
+#include "game_data_error.h"
 #include "wui/interactive_base.h"
 #include "logic/game.h"
 #include "i18n.h"
@@ -27,7 +28,6 @@
 #include "logic/player.h"
 #include "profile/profile.h"
 #include "tribe.h"
-#include "wexception.h"
 
 #include "log.h"
 
@@ -64,9 +64,10 @@ Event_Allow_Building::Event_Allow_Building
 				tribe->safe_building_index(s.get_safe_string("building"));
 			m_allow    = s.get_bool("allow", true);
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
-	} catch (std::exception const & e) {
-		throw wexception("(allow building): %s", e.what());
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error(_("(allow building): %s"), e.what());
 	}
 }
 

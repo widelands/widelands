@@ -61,7 +61,7 @@ throw (_wexception)
 				Serial const serial = fr.Unsigned32();
 				if (serial == 0xffffffff) {
 					if (not fr.EndOfFile())
-						throw wexception
+						throw game_data_error
 							("expected end of file after serial 0xffffffff");
 					break;
 				}
@@ -110,13 +110,14 @@ throw (_wexception)
 
 					ol->mark_object_as_loaded(&imm);
 				} catch (_wexception const & e) {
-					throw wexception("immovable %u: %s", serial, e.what());
+					throw game_data_error(_("immovable %u: %s"), serial, e.what());
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("immovable data: %s", e.what());
+		throw game_data_error(_("immovable data: %s"), e.what());
 	}
 }
 
@@ -125,7 +126,7 @@ void Map_Immovabledata_Data_Packet::Write
 	(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-	throw wexception("Immovable_Data_Packet is obsolete");
+	throw game_data_error("Immovable_Data_Packet is obsolete");
 }
 
 }

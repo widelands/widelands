@@ -20,6 +20,7 @@
 #include "widelands_map_allowed_buildings_data_packet.h"
 
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "logic/player.h"
 #include "profile/profile.h"
 #include "tribe.h"
@@ -69,19 +70,20 @@ throw (_wexception)
 						if (Building_Index const index = tribe.building_index(name))
 							player->allow_building(index, allowed);
 						else
-							throw wexception
+							throw game_data_error
 								("tribe %s does not define building type \"%s\"",
 								 tribe.name().c_str(), name);
 					}
 				} catch (_wexception const & e) {
-					throw wexception
+					throw game_data_error
 						("player %u (%s): %s", p, tribe.name().c_str(), e.what());
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %i", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %i"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("Allowed buildings: %s", e.what());
+		throw game_data_error(_("allowed buildings: %s"), e.what());
 	}
 }
 

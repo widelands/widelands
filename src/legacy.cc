@@ -20,6 +20,7 @@
 #include "legacy.h"
 
 #include "logic/editor_game_base.h"
+#include "game_data_error.h"
 #include "immovable.h"
 #include "tribe.h"
 
@@ -402,7 +403,7 @@ Map_Object::Loader * loadAttackController
 	try {
 		uint8_t const version = fr.Unsigned8();
 		if (version != 1)
-			throw wexception("unknown/unhandled version %u", version);
+			throw game_data_error(_("unknown/unhandled version %u"), version);
 
 		loader->init(egbase, mol, new FakeAttackController);
 		loader->load(fr, version);
@@ -452,7 +453,7 @@ Map_Object::Loader * loadBattle
 			loader->init(egbase, mol, new FakeBattle);
 			loader->load(fr, version);
 		} else
-			throw wexception("unknown/unhandled version %u", version);
+			throw game_data_error(_("unknown/unhandled version %u"), version);
 	} catch (const std::exception & e) {
 		throw wexception("Loading legacy Battle: %s", e.what());
 	}

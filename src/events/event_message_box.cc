@@ -22,12 +22,12 @@
 #include "logic/editor_game_base.h"
 #include "event_message_box_message_box.h"
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "map.h"
 #include "profile/profile.h"
 #include "trigger/trigger_time.h"
-#include "wexception.h"
 
 #include "upcast.h"
 
@@ -134,8 +134,8 @@ Event_Message_Box::Event_Message_Box(Section & s, Editor_Game_Base & egbase)
 				}
 				if (not button_name) {
 					if (key[8] == '0' and key[7] == '0')
-						throw wexception
-							("there are no buttons, at least one is required");
+						throw game_data_error
+							(_("there are no buttons, at least one is required"));
 					break;
 				}
 				Button_Descr descr;
@@ -145,13 +145,13 @@ Event_Message_Box::Event_Message_Box(Section & s, Editor_Game_Base & egbase)
 				if (char const * const trigger_name = s.get_string(key)) {
 					if (upcast(Trigger_Time, trigger, mtm[trigger_name])) {
 						if (not m_is_modal)
-							throw wexception
-								("is not modal although %s=%s", key, trigger_name);
+							throw game_data_error
+								(_("is not modal although %s=%s"), key, trigger_name);
 						descr.trigger = trigger;
 						Referencer<Trigger>::reference(*trigger);
 					} else
-						throw wexception
-							("%s refers to \"%s\", " "which is not a null trigger",
+						throw game_data_error
+							(_("%s refers to \"%s\", which is not a null trigger"),
 							 key, trigger_name);
 				} else
 					descr.trigger = 0;
@@ -162,10 +162,11 @@ Event_Message_Box::Event_Message_Box(Section & s, Editor_Game_Base & egbase)
 				if (key[8] == '9') {key[8] = '0'; ++key[7];} else ++key[8];
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
-	} catch (std::exception const & e) {
-		throw wexception
-			("(message box): %s", e.what());
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error
+			(_("(message box): %s"), e.what());
 	}
 }
 

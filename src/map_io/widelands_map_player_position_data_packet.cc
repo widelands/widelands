@@ -20,6 +20,7 @@
 #include "widelands_map_player_position_data_packet.h"
 
 #include "logic/editor_game_base.h"
+#include "game_data_error.h"
 #include "map.h"
 #include "profile/profile.h"
 
@@ -62,12 +63,13 @@ throw (_wexception)
 						map.set_starting_pos(p, s.get_safe_Coords(buffer, extent));
 					}
 				} catch (_wexception const & e) {
-					throw wexception("player %u: %s", p, e.what());
+					throw game_data_error(_("player %u: %s"), p, e.what());
 				}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("player positions: %s", e.what());
+		throw game_data_error(_("player positions: %s"), e.what());
 	}
 }
 

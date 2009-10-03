@@ -23,7 +23,7 @@
          char const * const     _name = v->get_name  ();                      \
          char const * const _descname = v->get_string();                      \
          if (names.count(_name))                                              \
-            throw wexception                                                  \
+            throw game_data_error                                             \
                ("object name \"%s\" is already used", _name);                 \
          names.insert(_name);                                                 \
          path += _name;                                                       \
@@ -36,7 +36,8 @@
 #define PARSE_MAP_OBJECT_TYPES_END                                            \
             prof.check_used();                                                \
          } catch (std::exception const & e) {                                 \
-            throw wexception("%s=\"%s\": %s", _name, _descname, e.what());    \
+            throw game_data_error                                             \
+               ("%s=\"%s\": %s", _name, _descname, e.what());                 \
          }                                                                    \
          path.resize(base_path_size);                                         \
       }                                                                       \

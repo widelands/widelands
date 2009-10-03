@@ -20,6 +20,7 @@
 #include "widelands_map_objective_data_packet.h"
 
 #include "logic/editor_game_base.h"
+#include "game_data_error.h"
 #include "map.h"
 #include "profile/profile.h"
 #include "trigger/trigger_time.h"
@@ -58,7 +59,7 @@ throw (_wexception)
 					try {
 						mom.register_new(objective);
 					} catch (Manager<Objective>::Already_Exists) {
-						throw wexception("duplicated");
+						throw game_data_error("duplicated");
 					}
 					objective.set_visname    (s->get_string("name", name));
 					objective.set_descr      (s->get_safe_string("descr"));
@@ -66,16 +67,17 @@ throw (_wexception)
 					if (Trigger * const trig = mtm[trigger_name])
 						objective.set_trigger(trig);
 					else
-						throw wexception
+						throw game_data_error
 							("references nonexistent trigger \"%s\"", trigger_name);
 				} catch (_wexception const & e) {
-					throw wexception("%s: %s", name, e.what());
+					throw game_data_error(_("%s: %s"), name, e.what());
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %i", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %i"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("Objectives: %s", e.what());
+		throw game_data_error(_("Objectives: %s"), e.what());
 	}
 }
 

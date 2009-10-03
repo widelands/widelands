@@ -40,12 +40,8 @@ saved game file. it is an abstract base class
 */
 struct Game_Data_Packet {
 	virtual ~Game_Data_Packet() {}
-	virtual void Read (FileSystem &, Game &, Map_Map_Object_Loader * = 0)
-		throw (_wexception)
-		= 0;
-	virtual void Write(FileSystem &, Game &, Map_Map_Object_Saver  * = 0)
-		throw (_wexception)
-		= 0;
+	virtual void Read (FileSystem &, Game &, Map_Map_Object_Loader * = 0) = 0;
+	virtual void Write(FileSystem &, Game &, Map_Map_Object_Saver  * = 0) = 0;
 };
 
 }

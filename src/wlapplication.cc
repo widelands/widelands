@@ -40,6 +40,7 @@
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/singleplayer.h"
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "wui/game_tips.h"
 #include "gamesettings.h"
 #include "i18n.h"
@@ -313,6 +314,8 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 			game.run_load_game(m_filename.c_str());
+		} catch (Widelands::game_data_error const & e) {
+			log("Game not loaded: Game data error: %s\n", e.what());
 		} catch (...) {
 			emergency_save(game);
 			throw;
@@ -321,6 +324,8 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 			game.run_splayer_scenario_direct(m_filename.c_str());
+		} catch (Widelands::game_data_error const & e) {
+			log("Scenario not started: Game data error: %s\n", e.what());
 		} catch (...) {
 			emergency_save(game);
 			throw;
@@ -1438,6 +1443,9 @@ void WLApplication::mainmenu()
 		} catch (warning const & e) {
 			messagetitle = _("Warning: ");
 			messagetitle += e.title();
+			message = e.what();
+		} catch (Widelands::game_data_error const & e) {
+			messagetitle = _("Game data error");
 			message = e.what();
 		} catch (std::exception const & e) {
 			messagetitle = _("Unexpected error during the game");

@@ -20,6 +20,7 @@
 #include "game_preload_data_packet.h"
 
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "wui/interactive_player.h"
 #include "map.h"
 #include "profile/profile.h"
@@ -31,7 +32,6 @@ namespace Widelands {
 
 void Game_Preload_Data_Packet::Read
 	(FileSystem & fs, Game &, Map_Map_Object_Loader * const)
-throw (_wexception)
 {
 	try {
 		Profile prof;
@@ -51,16 +51,16 @@ throw (_wexception)
 			// so widelands won't crash with this setting.
 			m_player_nr  = 1;
 		} else
-			throw wexception("unknown/unhandled version %i", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %i"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("preload: %s", e.what());
+		throw game_data_error(_("preload: %s"), e.what());
 	}
 }
 
 
 void Game_Preload_Data_Packet::Write
 	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
-throw (_wexception)
 {
 
 	Profile prof;

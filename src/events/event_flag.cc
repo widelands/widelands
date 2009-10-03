@@ -20,9 +20,9 @@
 #include "event_flag.h"
 
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "logic/player.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 #define EVENT_VERSION 1
 
@@ -36,9 +36,10 @@ Event_Flag::Event_Flag(Section & s, Editor_Game_Base & egbase) : Event(s) {
 			m_location = s.get_safe_Coords  ("point",  map.extent());
 			m_player   = s.get_Player_Number("player", map.get_nrplayers(), 1);
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("(flag): %s", e.what());
+		throw game_data_error(_("(flag): %s"), e.what());
 	}
 }
 

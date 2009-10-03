@@ -20,6 +20,7 @@
 #include "game_interactive_player_data_packet.h"
 
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "wui/interactive_player.h"
 #include "wui/mapview.h"
 #include "graphic/overlay_manager.h"
@@ -35,7 +36,6 @@ namespace Widelands {
 
 void Game_Interactive_Player_Data_Packet::Read
 	(FileSystem & fs, Game & game, Map_Map_Object_Loader *)
-throw (_wexception)
 {
 	try {
 		FileRead fr;
@@ -45,8 +45,8 @@ throw (_wexception)
 			Player_Number const player_number =
 				fr.Player_Number8(game.map().get_nrplayers());
 			if (not game.get_player(player_number))
-				throw wexception
-					("player %u does not exist in the game", player_number);
+				throw game_data_error
+					(_("player %u does not exist in the game"), player_number);
 			int32_t       const x             = fr.Unsigned16();
 			int32_t       const y             = fr.Unsigned16();
 			uint32_t      const display_flags = fr.Unsigned32();
@@ -73,9 +73,10 @@ throw (_wexception)
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("interactive player: %s", e.what());
+		throw game_data_error(_("interactive player: %s"), e.what());
 	}
 }
 
@@ -84,7 +85,6 @@ throw (_wexception)
  */
 void Game_Interactive_Player_Data_Packet::Write
 	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
-throw (_wexception)
 {
 	FileWrite fw;
 

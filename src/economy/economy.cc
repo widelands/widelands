@@ -658,7 +658,6 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 			ss.Unsigned32(req.target    ().serial());
 		}
 
-		Ware_Index const ware_index = req.get_index();
 		int32_t cost; // estimated time in milliseconds to fulfill Request
 		Supply * const supp = _find_best_supply(game, req, cost);
 
@@ -696,7 +695,7 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 			assert(false);
 		}
 
-		rsp.ware = ware_index;
+		rsp.ware = req.get_index();
 		rsp.request  = &req;
 		rsp.supply = supp;
 		rsp.priority = priority;

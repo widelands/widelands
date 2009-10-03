@@ -40,7 +40,7 @@ Game_Saver::Game_Saver(FileSystem & fs, Game & game) : m_fs(fs), m_game(game) {
 /*
  * The core save function
  */
-void Game_Saver::save() throw (_wexception) {
+void Game_Saver::save() {
 
 	m_fs.EnsureDirectoryExists("binary");
 

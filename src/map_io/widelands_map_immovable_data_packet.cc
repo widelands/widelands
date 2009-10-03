@@ -56,7 +56,7 @@ throw (_wexception)
 				Serial const serial = fr.Unsigned32();
 				if (serial == 0xffffffff) {
 					if (not fr.EndOfFile())
-						throw wexception
+						throw game_data_error
 							("expected end of file after serial 0xffffffff");
 					break;
 				}
@@ -75,7 +75,7 @@ throw (_wexception)
 								(serial,
 								 egbase.create_immovable(position, idx, &tribe));
 						else
-							throw wexception
+							throw game_data_error
 								("tribe %s does not define immovable type \"%s\"",
 								 owner, name);
 					}
@@ -88,15 +88,16 @@ throw (_wexception)
 						if (not skip)
 							ol->register_object(serial, immovable);
 					} else
-						throw wexception
+						throw game_data_error
 							("world %s does not define immovable type \"%s\"",
 							 world.get_name(), name);
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("immovable data: %s", e.what());
+		throw game_data_error(_("immovable data: %s"), e.what());
 	}
 }
 
@@ -105,7 +106,7 @@ void Map_Immovable_Data_Packet::Write
 	(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-	throw wexception("Immovable_Data_Packet is obsolete");
+	throw game_data_error("Immovable_Data_Packet is obsolete");
 }
 
 }

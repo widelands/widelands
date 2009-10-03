@@ -20,6 +20,7 @@
 #include "widelands_map_seen_fields_data_packet.h"
 
 #include "logic/editor_game_base.h"
+#include "game_data_error.h"
 #include "map.h"
 #include "logic/player.h"
 #include "widelands_fileread.h"
@@ -81,9 +82,10 @@ throw (_wexception)
 				}
 			}
 		else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("seen: %s", e.what());
+		throw game_data_error(_("seen: %s"), e.what());
 	}
 }
 

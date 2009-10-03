@@ -20,6 +20,7 @@
 #include "widelands_map_player_names_and_tribes_data_packet.h"
 
 #include "logic/editor_game_base.h"
+#include "game_data_error.h"
 #include "map.h"
 #include "profile/profile.h"
 #include "world.h"
@@ -73,9 +74,10 @@ void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 				map->set_scenario_player_ai   (p, s.get_string("ai",    ""));
 			}
 		} else
-			throw wexception("unknown/unhandled version %i", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %i"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("player names and tribes: %s", e.what());
+		throw game_data_error(_("player names and tribes: %s"), e.what());
 	}
 }
 

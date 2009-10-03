@@ -21,6 +21,7 @@
 
 #include "logic/editor_game_base.h"
 #include "io/filewrite.h"
+#include "game_data_error.h"
 // Since we are lying about the path of the pictures
 // we also include graphic.h
 #include "graphic/graphic.h"
@@ -92,9 +93,10 @@ throw (_wexception)
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("extradata: %s", e.what());
+		throw game_data_error(_("extradata: %s"), e.what());
 	}
 }
 

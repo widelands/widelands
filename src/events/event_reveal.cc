@@ -18,10 +18,13 @@
  */
 
 #include "event_reveal.h"
+#include "game_data_error.h"
 
 #include "wexception.h"
 
 #include "profile/profile.h"
+
+#include "i18n.h"
 
 #define EVENT_VERSION 2
 
@@ -33,9 +36,10 @@ Event_Reveal::Event_Reveal(Section & s, Editor_Game_Base &) : Event(s) {
 		if (packet_version <= EVENT_VERSION)
 			reveal = s.get_safe_string("entry");
 		else
-			throw wexception("unknown/unhandled version %u", packet_version);
-	} catch (std::exception const & e) {
-		throw wexception("(reveal): %s", e.what());
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error("(reveal): %s", e.what());
 	}
 }
 

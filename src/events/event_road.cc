@@ -21,9 +21,9 @@
 
 #include "checkstep.h"
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "logic/player.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 #define EVENT_VERSION 1
 
@@ -37,16 +37,18 @@ Event_Road::Event_Road(Section & s, Editor_Game_Base & egbase) : Event(s) {
 			m_path = s.get_safe_Coords("point", map.extent());
 			char const * const steps = s.get_safe_string("steps");
 			if (not steps[0])
-				throw wexception("there are no steps");
+				throw game_data_error(_("there are no steps"));
 			if (not steps[1])
-				throw wexception("there is only 1 step, must be at least 2");
+				throw game_data_error
+					(_("there is only 1 step, must be at least 2"));
 			CheckStepLimited cstep;
 			for (char const * p = steps; *p; ++p) {
 				if (*p < '1' or '6' < *p)
-					throw wexception
-						("step %li has direction '%c', must be one of {1 "
-						 "(northeast), 2 (east), 3 (southeast), 4 (southwest), 5 "
-						 "(west), 6 (northwest)}",
+					throw game_data_error
+						(_
+						 	("step %li has direction '%c', must be one of {1 "
+						 	 "(northeast), 2 (east), 3 (southeast), 4 (southwest), 5 "
+						 	 "(west), 6 (northwest)}"),
 						 static_cast<long int>(p - steps), *p);
 				m_path.append(map, *p - '0');
 				cstep.add_allowed_location(m_path.get_end());
@@ -65,16 +67,19 @@ Event_Road::Event_Road(Section & s, Editor_Game_Base & egbase) : Event(s) {
 				optimal_steps[i] = '0' + optimal_path[i];
 			optimal_steps[nr_steps] = '\0';
 			if (strcmp(steps, optimal_steps))
-				throw wexception
-					("the steps \"%s\" do not form the optimal path from the start "
-					 "to the end through only the used locations, should be \"%s\"",
+				throw game_data_error
+					(_
+					 	("the steps \"%s\" do not form the optimal path from the "
+					 	 "start to the end through only the used locations, should "
+					 	 "be \"%s\""),
 					 steps, optimal_steps);
 			m_player = s.get_Player_Number("player", map.get_nrplayers(), 1);
 			m_fill   = s.get_bool         ("fill",                        true);
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("(road): %s", e.what());
+		throw game_data_error("(road): %s", e.what());
 	}
 }
 

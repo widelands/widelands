@@ -32,6 +32,7 @@
 #include "findimmovable.h"
 #include "findnode.h"
 #include "game.h"
+#include "game_data_error.h"
 #include "gamecontroller.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
@@ -102,9 +103,10 @@ bool Worker::run_mine(Game & game, State & state, Action const & action)
 	Resource_Index const res =
 		map.get_world()->get_resource(action.sparam1.c_str());
 	if (static_cast<int8_t>(res) == -1) //  FIXME ARGH!!
-		throw wexception
-			("should mine resource %s, which does not exist in world. Tribe is "
-			 "not compatible with world",
+		throw game_data_error
+			(_
+			 	("should mine resource %s, which does not exist in world; tribe "
+			 	 "is not compatible with world"),
 			 action.sparam1.c_str());
 
 	// Select one of the fields randomly
@@ -203,9 +205,10 @@ bool Worker::run_breed(Game & game, State & state, Action const & action)
 	Resource_Index const res =
 		map.get_world()->get_resource(action.sparam1.c_str());
 	if (static_cast<int8_t>(res) == -1) //  FIXME ARGH!!
-		throw wexception
-			("should breed resource type %s, which does not exist in world, "
-			 "tribe is not compatible with world",
+		throw game_data_error
+			(_
+			 	("should breed resource type %s, which does not exist in world; "
+			 	 "tribe is not compatible with world"),
 			 action.sparam1.c_str());
 
 	// Select one of the fields randomly

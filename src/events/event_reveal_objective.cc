@@ -19,8 +19,8 @@
 
 #include "event_reveal_objective.h"
 
-#include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "i18n.h"
 #include "wui/interactive_base.h"
 #include "map.h"
@@ -44,9 +44,10 @@ Event_Reveal_Objective::Event_Reveal_Objective
 			else
 				throw wexception("objective \"%s\" does not exist", objective_name);
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
-	} catch (std::exception const & e) {
-		throw wexception
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error
 			("Event (Reveal Objective) %s: %s", name().c_str(), e.what());
 	}
 }

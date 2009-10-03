@@ -20,6 +20,7 @@
 #include "replay.h"
 
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "game_io/game_loader.h"
 #include "gamecontroller.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -110,7 +111,7 @@ ReplayReader::ReplayReader(Game & game, std::string const & filename)
 			throw wexception
 				("Replay of version %u is known to have desync problems", version);
 		if (version != REPLAY_VERSION)
-			throw wexception("unknown/unhandled version %u", version);
+			throw game_data_error(_("unknown/unhandled version %u"), version);
 
 		game.rng().ReadState(*m_cmdlog);
 	}

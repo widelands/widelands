@@ -20,6 +20,7 @@
 #include "widelands_map_trigger_data_packet.h"
 
 #include "logic/editor_game_base.h"
+#include "game_data_error.h"
 #include "map.h"
 #include "trigger/trigger.h"
 #include "trigger/trigger_factory.h"
@@ -64,18 +65,19 @@ throw (_wexception)
 					try {
 						mtm.register_new(trigger);
 					} catch (Manager<Trigger>::Already_Exists) {
-						throw wexception("duplicated");
+						throw game_data_error("duplicated");
 					}
 					trigger.Read(*s, egbase);
 				} catch (std::exception const & e) {
-					throw wexception("%s: %s", name, e.what());
+					throw game_data_error(_("%s: %s"), name, e.what());
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 		prof.check_used();
 	} catch (_wexception const & e) {
-		throw wexception("Triggers: %s", e.what());
+		throw game_data_error(_("Triggers: %s"), e.what());
 	}
 }
 

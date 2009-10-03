@@ -21,6 +21,7 @@
 
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "queue_cmd_factory.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
@@ -34,7 +35,6 @@ namespace Widelands {
 
 void Game_Cmd_Queue_Data_Packet::Read
 	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const ol)
-throw (_wexception)
 {
 	try {
 		FileRead fr;
@@ -93,16 +93,16 @@ throw (_wexception)
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("command queue: %s", e.what());
+		throw game_data_error(_("command queue: %s"), e.what());
 	}
 }
 
 
 void Game_Cmd_Queue_Data_Packet::Write
 	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const os)
-throw (_wexception)
 {
 	FileWrite fw;
 

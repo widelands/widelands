@@ -21,6 +21,7 @@
 
 #include "io/filewrite.h"
 #include "game.h"
+#include "game_data_error.h"
 #include "instances.h"
 #include "machdep.h"
 #include "player.h"
@@ -166,12 +167,13 @@ void GameLogicCommand::Read
 			set_duetime(fr.Unsigned32());
 			int32_t const gametime = egbase.get_gametime();
 			if (duetime() < gametime)
-				throw wexception
-					("duetime (%i) < gametime (%i)", duetime(), gametime);
+				throw game_data_error
+					(_("duetime (%i) < gametime (%i)"), duetime(), gametime);
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("game logic: %s", e.what());
+		throw game_data_error(_("game logic: %s"), e.what());
 	}
 }
 

@@ -62,7 +62,7 @@ throw (_wexception)
 				Serial const serial = fr.Unsigned32();
 				if (packet_version < 2 and serial == 0xffffffff) {
 					if (not fr.EndOfFile())
-						throw wexception
+						throw game_data_error
 							("expected end of file after serial 0xffffffff");
 					break;
 				}
@@ -83,7 +83,7 @@ throw (_wexception)
 						try {
 							flag.m_building = &ol->get<Building>(building_serial);
 						} catch (_wexception const & e) {
-							throw wexception
+							throw game_data_error
 								("building (%u): %s", building_serial, e.what());
 						}
 					else
@@ -111,14 +111,14 @@ throw (_wexception)
 										flag.m_items[i].nextstep =
 											&ol->get<PlayerImmovable>(nextstep_serial);
 									} catch (_wexception const & e) {
-										throw wexception
+										throw game_data_error
 											("next step (%u): %s",
 											 nextstep_serial, e.what());
 									}
 								} else
 									flag.m_items[i].nextstep = 0;
 							} catch (_wexception const & e) {
-								throw wexception
+								throw game_data_error
 									("item #%u (%u): %s", i, item_serial, e.what());
 							}
 						}
@@ -128,7 +128,7 @@ throw (_wexception)
 								flag.m_always_call_for_flag =
 									&ol->get<Flag>(always_call_serial);
 							} catch (_wexception const & e) {
-								throw wexception
+								throw game_data_error
 									("always_call (%u): %s",
 									 always_call_serial, e.what());
 							}
@@ -146,7 +146,7 @@ throw (_wexception)
 									flag.m_capacity_wait.push_back
 										(&ol->get<Worker>(worker_serial));
 							} catch (_wexception const & e) {
-								throw wexception
+								throw game_data_error
 									("worker #%u (%u): %s", i, worker_serial, e.what());
 							}
 						}
@@ -175,13 +175,14 @@ throw (_wexception)
 						ol->mark_object_as_loaded(&flag);
 					}
 				} catch (_wexception const & e) {
-					throw wexception("%u: %s", serial, e.what());
+					throw game_data_error(_("%u: %s"), serial, e.what());
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("flagdata: %s", e.what());
+		throw game_data_error(_("flagdata: %s"), e.what());
 	}
 }
 

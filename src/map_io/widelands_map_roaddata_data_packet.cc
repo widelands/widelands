@@ -65,14 +65,14 @@ throw (_wexception)
 				Serial const serial = fr.Unsigned32();
 				if (packet_version < 2 and serial == 0xffffffff) {
 					if (not fr.EndOfFile())
-						throw wexception
+						throw game_data_error
 							("expected end of file after serial 0xffffffff");
 					break;
 				}
 				try {
 					Road & road = ol->get<Road>(serial);
 					if (ol->is_object_loaded(&road))
-						throw wexception("already loaded");
+						throw game_data_error("already loaded");
 					Player & plr = egbase.player(fr.Player_Number8(nr_players));
 
 					road.set_owner(&plr);
@@ -82,7 +82,7 @@ throw (_wexception)
 						try {
 							road.m_flags[0] = &ol->get<Flag>(flag_0_serial);
 						} catch (_wexception const & e) {
-							throw wexception
+							throw game_data_error
 								("flag 0 (%u): %s", flag_0_serial, e.what());
 						}
 					}
@@ -91,7 +91,7 @@ throw (_wexception)
 						try {
 							road.m_flags[1] = &ol->get<Flag>(flag_1_serial);
 						} catch (_wexception const & e) {
-							throw wexception
+							throw game_data_error
 								("flag 1 (%u): %s", flag_1_serial, e.what());
 						}
 					}
@@ -102,13 +102,13 @@ throw (_wexception)
 					road.m_cost[1] = fr.Unsigned32();
 					Path::Step_Vector::size_type const nr_steps = fr.Unsigned16();
 					if (not nr_steps)
-						throw wexception("nr_steps = 0");
+						throw game_data_error("nr_steps = 0");
 					Path p(road.m_flags[0]->get_position());
 					for (Path::Step_Vector::size_type i = nr_steps; i; --i)
 						try {
 							p.append(egbase.map(), fr.Direction8());
 						} catch (_wexception const & e) {
-							throw wexception
+							throw game_data_error
 								("step #%lu: %s",
 								 static_cast<long unsigned int>(nr_steps - i),
 								 e.what());
@@ -126,7 +126,7 @@ throw (_wexception)
 						try {
 							road.m_carrier = &ol->get<Carrier>(carrier_serial);
 						} catch (_wexception const & e) {
-							throw wexception
+							throw game_data_error
 								("carrier (%u): %s", carrier_serial, e.what());
 						}
 					else
@@ -147,13 +147,14 @@ throw (_wexception)
 
 					ol->mark_object_as_loaded(&road);
 				} catch (_wexception const & e) {
-					throw wexception("road %u: %s", serial, e.what());
+					throw game_data_error(_("road %u: %s"), serial, e.what());
 				}
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("roaddata: %s", e.what());
+		throw game_data_error(_("roaddata: %s"), e.what());
 	}
 }
 

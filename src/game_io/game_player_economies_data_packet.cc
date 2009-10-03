@@ -22,6 +22,7 @@
 #include "economy/economy_data_packet.h"
 #include "economy/flag.h"
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "logic/player.h"
 #include "upcast.h"
 #include "widelands_fileread.h"
@@ -34,7 +35,6 @@ namespace Widelands {
 
 void Game_Player_Economies_Data_Packet::Read
 	(FileSystem & fs, Game & game, Map_Map_Object_Loader *)
-throw (_wexception)
 {
 	try {
 		Map   const &       map        = game.map();
@@ -53,9 +53,10 @@ throw (_wexception)
 					if (packet_version == 1) {
 						uint16_t const nr_economies_from_file = fr.Unsigned16();
 						if (nr_economies != nr_economies_from_file)
-							throw wexception
-								("read number of economies as %u, but this was read "
-								 "as %u elsewhere",
+							throw game_data_error
+								(_
+								 	("read number of economies as %u, but this was "
+								 	 "read as %u elsewhere"),
 								 nr_economies_from_file, nr_economies);
 					}
 
@@ -77,15 +78,16 @@ throw (_wexception)
 								d.Read(fr);
 							}
 						} else
-							throw wexception
-								("there is no flag at the specified location");
+							throw game_data_error
+								(_("there is no flag at the specified location"));
 				} catch (_wexception const & e) {
-					throw wexception("player %u: %s", p, e.what());
+					throw game_data_error(_("player %u: %s"), p, e.what());
 				}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("economies: %s", e.what());
+		throw game_data_error(_("economies: %s"), e.what());
 	}
 }
 
@@ -94,7 +96,6 @@ throw (_wexception)
  */
 void Game_Player_Economies_Data_Packet::Write
 	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
-throw (_wexception)
 {
 	FileWrite fw;
 

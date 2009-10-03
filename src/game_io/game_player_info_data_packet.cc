@@ -21,6 +21,7 @@
 
 #include "computer_player.h"
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "wui/interactive_player.h"
 #include "logic/player.h"
 #include "tribe.h"
@@ -34,7 +35,6 @@ namespace Widelands {
 
 void Game_Player_Info_Data_Packet::Read
 	(FileSystem & fs, Game & game, Map_Map_Object_Loader *)
-throw (_wexception)
 {
 	try {
 		FileRead fr;
@@ -97,16 +97,16 @@ throw (_wexception)
 					 packet_version == 4 ? 2 :
 					 1);
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("player info: %s", e.what());
+		throw game_data_error(_("player info: %s"), e.what());
 	}
 }
 
 
 void Game_Player_Info_Data_Packet::Write
 	(FileSystem & fs, Game & game, Map_Map_Object_Saver *)
-throw (_wexception)
 {
 	FileWrite fw;
 

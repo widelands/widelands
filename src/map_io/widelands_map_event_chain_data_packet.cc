@@ -20,6 +20,7 @@
 #include "widelands_map_event_chain_data_packet.h"
 
 #include "logic/editor_game_base.h"
+#include "game_data_error.h"
 #include "events/event.h"
 #include "events/event_chain.h"
 #include "map.h"
@@ -67,7 +68,7 @@ throw (_wexception)
 					try {
 						mcm.register_new(event_chain);
 					} catch (Manager<EventChain>::Already_Exists) {
-						throw wexception("duplicated");
+						throw game_data_error("duplicated");
 					}
 
 					event_chain.m_repeating = s->get_safe_bool("repeating");
@@ -85,7 +86,7 @@ throw (_wexception)
 										(TriggerConditional_Factory::Token
 										 	(TriggerConditional_Factory::TRIGGER, tr));
 								else
-									throw wexception
+									throw game_data_error
 										("trigger \"%s\" does not exist", trigname);
 							}
 							else {
@@ -95,7 +96,7 @@ throw (_wexception)
 									 	(type,
 									 	 TriggerConditional_Factory::operators[i]))
 									if (i++ == TriggerConditional_Factory::TRIGGER)
-										throw wexception
+										throw game_data_error
 											("\"%s=%s\": token type \"%s\" is not "
 											 "allowed (must be one of {trigger, ), (, "
 											 "XOR, OR, AND, NOT}",
@@ -109,7 +110,7 @@ throw (_wexception)
 							if (key[21] == '9') {
 								key[21] = '0';
 								if (key[20] == '9') //  We are already at number 99!
-									throw wexception
+									throw game_data_error
 										("there are too many conditional elements, only "
 										 "99 are allowed");
 								++key[20];
@@ -128,7 +129,7 @@ throw (_wexception)
 							if (Event * const event = mem[evname])
 								event_chain.add_event(event);
 							else
-								throw wexception
+								throw game_data_error
 									("\"%s=%s\": event \"%s\" does not exist",
 									 key, evname, evname);
 
@@ -136,7 +137,7 @@ throw (_wexception)
 							if (key[7] == '9') {
 								key[7] = '0';
 								if (key[6] == '9') //  We are already at number 99!
-									throw wexception
+									throw game_data_error
 										("there are too many events, only 99 are "
 										 "allowed");
 								++key[6];
@@ -150,7 +151,7 @@ throw (_wexception)
 							if (Event * const event = mem[v->get_string()])
 								event_chain.add_event(event);
 							else
-								throw wexception
+								throw game_data_error
 									("event=%s\": event \"%s\" does not exist",
 									 v->get_string(), v->get_string());
 
@@ -165,20 +166,21 @@ throw (_wexception)
 						else if (not strcmp(state, "done"))
 							event_chain.m_state = EventChain::DONE;
 						else
-							throw wexception
+							throw game_data_error
 								("state is \"%s\" but must be one of {init (default), "
 								 "running, done}",
 								 state);
 					}
 				} catch (std::exception const & e) {
-					throw wexception("%s: %s", name, e.what());
+					throw game_data_error(_("%s: %s"), name, e.what());
 				}
 			}
 		else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 		prof.check_used();
 	} catch (std::exception const & e) {
-		throw wexception("EventChains: %s", e.what());
+		throw game_data_error(_("EventChains: %s"), e.what());
 	}
 }
 

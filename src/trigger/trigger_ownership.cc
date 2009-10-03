@@ -20,9 +20,9 @@
 #include "trigger_ownership.h"
 
 #include "logic/game.h"
+#include "game_data_error.h"
 #include "mapregion.h"
 #include "profile/profile.h"
-#include "wexception.h"
 
 #define PACKET_VERSION 3
 
@@ -39,9 +39,10 @@ void Trigger_Ownership::Read(Section & s, Editor_Game_Base & egbase) {
 		if (packet_version <= PACKET_VERSION) {
 			Trigger_Player_Area::Read(s, egbase);
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
-	} catch (std::exception const & e) {
-		throw wexception("(ownership): %s", e.what());
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error(_("(ownership): %s"), e.what());
 	}
 }
 

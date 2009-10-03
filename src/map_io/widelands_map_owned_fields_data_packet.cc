@@ -20,6 +20,7 @@
 #include "widelands_map_owned_fields_data_packet.h"
 
 #include "logic/editor_game_base.h"
+#include "game_data_error.h"
 #include "map.h"
 #include "world.h"
 #include "widelands_fileread.h"
@@ -49,9 +50,10 @@ void Map_Owned_Fields_Data_Packet::Read
 			for (Map_Index i = 0; i < max_index; ++i)
 				map[i].set_owned_by(fr.Unsigned8());
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("ownership: %s", e.what());
+		throw game_data_error(_("ownership: %s"), e.what());
 	}
 }
 

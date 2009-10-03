@@ -20,6 +20,7 @@
 #include "widelands_map_terrain_data_packet.h"
 
 #include "logic/editor_game_base.h"
+#include "game_data_error.h"
 #include "map.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
@@ -65,7 +66,7 @@ throw (_wexception)
 						 "\"%s\".",
 						 id, world.terrain_descr(it->second).name().c_str(), name);
 				if (not world.get_ter(name))
-					throw wexception
+					throw game_data_error
 						("Terrain '%s' exists in map, not in world!", name);
 				smap[id] = world.index_of_terrain(name);
 			}
@@ -77,9 +78,10 @@ throw (_wexception)
 				f.set_terrain_d(smap[fr.Unsigned8()]);
 			}
 		} else
-			throw wexception("unknown/unhandled version %u", packet_version);
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw wexception("terrain: %s", e.what());
+		throw game_data_error(_("terrain: %s"), e.what());
 	}
 }
 
