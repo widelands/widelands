@@ -1,4 +1,5 @@
 #!/usr/bin/python -tt
+# -*- coding: utf-8 -*-
 
 # Tries to find out the repository revision of the current working directory
 # using svn or svk.
@@ -27,13 +28,19 @@ def detect_revision():
     else:
 	    revstring='REVDETECT-BROKEN-PLEASE-REPORT-THIS'
 	    return revstring
-    
+
     svn_revnum = ""
     if os.path.exists('.svn'):
         has_svn = os.system('svn >/dev/null 2>&1')==256
         if has_svn:
             svn_revnum=os.popen('LANG=C svn info|grep Revision:|cut -d" " -f 2').read().rstrip()
             revstring='svn%s' % (svn_revnum,)
+
+    if os.path.exists('debian'):
+        has_svn = os.system('svn >/dev/null 2>&1')==256
+        if has_svn:
+            svn_revnum=os.popen('dpkg-parsechangelog | grep ^Version| cut -d : -f 3-| sed \'s/~rc.*/RC/\'').read().rstrip()
+            revstring='%s' % (svn_revnum,)
 
     has_svk = os.system('svk >/dev/null 2>&1')==0
 
@@ -63,7 +70,7 @@ def detect_revision():
             revstring='unofficial-git-%s(svn%s)' % (git_revnum, svn_revnum)
         else:
             revstring='unofficial-git-%s(svn%s+changes)' % (git_revnum, svn_revnum)
-    
+
     if __has_bzr and not is_git_workdir:
         try:
             b = BzrDir.open(".").open_branch()
