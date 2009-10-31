@@ -1,4 +1,19 @@
 ### Build 15 (until now)
+- Add new and replace old music. (svn:r4602)
+- Change the reporting of an error that is found in game data (savegame,
+  command log, world/tribe definitions) whenever such game data is read (for
+  example when a replay or new or saved game is started or a new or saved map
+  is loaded in the editor). Do not include source code filename:linenumber
+  information (just explain what is wrong with the game data that the user
+  tried to load). Return to where the user tried to load the game data
+  (menu/shell). (svn:r4600)
+- Fix bug that sometimes a warehouse did not provide a carrier to fulfill a
+  request when it should. (svn:r4599)
+- Change bob movement by eliminating a 10 ms pause before starting to move
+  along an edge. The game logic could fail and throw an exception if a bob was
+  moving along a road and the road was split during those 10 ms. Unfortunately
+  this fix breaks each old savegame with a bob that happens to be in this
+  state. (svn:r4597)
 - Fix memory leak in handling of compressed files. (svn:r4567)
 - Fix bug that when the editor's map options window was opened and the map's
   description was shorter than a certain length (different for different
