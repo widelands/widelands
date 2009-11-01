@@ -1,3 +1,4 @@
+#include "log.h"
 /*
  * Copyright (C) 2009 by the Widelands Development Team
  *
@@ -17,14 +18,20 @@
  *
  */
 
-#ifndef PTR_CAST_H
-#define PTR_CAST_H
+#ifndef PTR_ASSERT_CAST_H
+#define PTR_ASSERT_CAST_H
 
 #include <cassert>
 
 template<typename Derived, typename Base>
 Derived * ptr_assert_cast(Base * const base) {
-	assert(dynamic_cast<Derived *>(base) == static_cast<Derived *>(base));
+	if (dynamic_cast<Derived *>(base) != static_cast<Derived *>(base)) {
+		log
+			("ptr_assert_cast failure: base = %p, dynamic_cast<Derived *>(base) "
+			 "= %p, static_cast<Derived *>(base) = %p\n",
+			 base, dynamic_cast<Derived *>(base), static_cast<Derived *>(base));
+		assert(false);
+	}
 	return static_cast<Derived *>(base);
 }
 
