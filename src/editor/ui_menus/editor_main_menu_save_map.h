@@ -40,6 +40,7 @@ struct Main_Menu_Save_Map : public UI::Window {
 	Main_Menu_Save_Map(Editor_Interactive &);
 
 private:
+	Editor_Interactive & eia();
 	void clicked_ok            ();
 	void clicked_make_directory();
 	void        clicked_item(uint32_t);
@@ -52,8 +53,6 @@ private:
 	UI::EditBox * m_editbox;
 	UI::Textarea * m_name, * m_author, * m_size, * m_world, * m_nrplayers;
 	UI::Multiline_Textarea * m_descr;
-	/// \todo redundant (base stores parent pointer)
-	Editor_Interactive * m_parent;
 	UI::Listselect<const char *> * m_ls;
 	UI::Callback_Button<Main_Menu_Save_Map> * m_ok_btn;
 

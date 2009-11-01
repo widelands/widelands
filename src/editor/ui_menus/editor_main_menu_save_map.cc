@@ -46,6 +46,11 @@
 #include <string>
 
 
+inline Editor_Interactive & Main_Menu_Save_Map::eia() {
+	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
+}
+
+
 Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 	: UI::Window(&parent, 0, 0, 500, 330, _("Save Map"))
 {
@@ -173,7 +178,7 @@ void Main_Menu_Save_Map::clicked_ok() {
 		m_mapfiles.clear();
 		fill_list();
 	} else { //  Ok, save this map
-		Widelands::Map & map = m_parent->egbase().map();
+		Widelands::Map & map = eia().egbase().map();
 		if (not strcmp(map.get_name(), _("No Name"))) {
 			std::string::size_type const filename_size = filename.size();
 			map.set_name
@@ -243,7 +248,7 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 		m_world    ->set_text("");
 		m_nrplayers->set_text("");
 		m_size     ->set_text("");
-		m_editbox  ->setText(m_parent->egbase().map().get_name());
+		m_editbox  ->setText(eia().egbase().map().get_name());
 	}
 	edit_box_changed();
 }
@@ -358,7 +363,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 		s += FileSystem::FS_Filename(filename.c_str());
 		s += _(" exists already. Overwrite?");
 		UI::WLMessageBox mbox
-			(m_parent, _("Save Map Error!!"), s, UI::WLMessageBox::YESNO);
+			(&eia(), _("Save Map Error!!"), s, UI::WLMessageBox::YESNO);
 		if (not mbox.run())
 			return false;
 
@@ -368,10 +373,10 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 	FileSystem & fs =
 		g_fs->CreateSubFileSystem
 			(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
-	Widelands::Map_Saver wms(fs, m_parent->egbase());
+	Widelands::Map_Saver wms(fs, eia().egbase());
 	try {
 		wms.save();
-		m_parent->set_need_save(false);
+		eia().set_need_save(false);
 	} catch (std::exception const & e) {
 		std::string s =
 			_
@@ -379,7 +384,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 			 "given:\n");
 		s += e.what();
 		UI::WLMessageBox  mbox
-			(m_parent, _("Save Map Error!!"), s, UI::WLMessageBox::OK);
+			(&eia(), _("Save Map Error!!"), s, UI::WLMessageBox::OK);
 		mbox.run();
 	}
 	delete &fs;
