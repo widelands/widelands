@@ -42,7 +42,7 @@
 #include <cstring>
 #include <iostream>
 
-Graphic *g_gr;
+Graphic * g_gr;
 #if HAS_OPENGL
 bool g_opengl;
 #endif

@@ -980,7 +980,7 @@ PlayerImmovable::~PlayerImmovable()
 /**
  * Change the economy, transfer the workers
 */
-void PlayerImmovable::set_economy(Economy *e)
+void PlayerImmovable::set_economy(Economy * const e)
 {
 	if (m_economy == e)
 		return;
@@ -1024,12 +1024,6 @@ void PlayerImmovable::remove_worker(Worker & w)
  * Set the immovable's owner. Currently, it can only be set once.
 */
 void PlayerImmovable::set_owner(Player * const new_owner) {
-	// Change these asserts once you've made really sure that changing owners
-	// works (necessary for military building)
-	/*THIS IS A TEST
-   assert(!m_owner);
-	assert(new_owner);*/
-
 	m_owner = new_owner;
 
 	m_owner->egbase().receive(NoteImmovable(this, GAIN));

@@ -3,7 +3,7 @@
  *
  * Thanks to Ulrich Drepper for the md5sum example code
  *
- * Copyright (C) 2002, 2007 by the Widelands Development Team
+ * Copyright (C) 2002, 2007, 2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,7 +70,7 @@ void * md5_finish_ctx (md5_ctx * const ctx, void * const resbuf)
 	pad = bytes >= 56 ? 64 + 56 - bytes : 56 - bytes;
 	memcpy (&ctx->buffer[bytes], fillbuf, pad);
 
-	/* Put the 64-bit file length in *bits* at the end of the buffer.  */
+	//  Put the 64-bit file length in *bits* at the end of the buffer.
 	*reinterpret_cast<uint32_t *>(&ctx->buffer[bytes + pad])     =
 		(ctx->total[0] << 3);
 	*reinterpret_cast<uint32_t *>(&ctx->buffer[bytes + pad + 4]) =

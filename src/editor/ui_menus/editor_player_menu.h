@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ template <typename T, typename ID> struct Callback_IDButton;
 
 struct Editor_Player_Menu : public UI::UniqueWindow {
 	Editor_Player_Menu
-		(Editor_Interactive &, UI::UniqueWindow::Registry *);
+		(Editor_Interactive &, UI::UniqueWindow::Registry &);
 	virtual ~Editor_Player_Menu() {}
 
 private:

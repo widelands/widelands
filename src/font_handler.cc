@@ -880,16 +880,15 @@ std::string Font_Handler::word_wrap_text
 					} else
 						cur_line += cur_word[i];
 				}
-			}
-			else {
+			} else {
 				// Split the line on a word basis
 				wrapped_text += cur_line + '\n';
-				cur_line = remove_first_space(cur_word);
+				cur_line =
+					cur_word.size() and cur_word[0] == ' ' ? cur_word.substr(1) :
+					cur_word;
 			}
-		}
-		else {
+		} else
 			cur_line += cur_word;
-		}
 
 		if (forced_line_break) {
 			wrapped_text += cur_line;
@@ -916,14 +915,6 @@ std::string Font_Handler::word_wrap_text
 			 max_width);
 }
 
-//removes a leading spacer
-//Method taken from Wesnoth.
-//http://www.wesnoth.org
-std::string Font_Handler::remove_first_space(const std::string &text) {
-	if (text.length() > 0 && text[0] == ' ')
-		return text.substr(1);
-	return text;
-}
 
 //calculates size of a given text
 void Font_Handler::get_size

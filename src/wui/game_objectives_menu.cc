@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,7 +57,8 @@ GameObjectivesMenu::GameObjectivesMenu
 		 "",
 		 UI::Align_Left,
 		 1),
-/*m_claim_victory
+#if 0
+	m_claim_victory
 		(this,
 		 25,
 		 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5,
@@ -72,7 +73,8 @@ GameObjectivesMenu::GameObjectivesMenu
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
 		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
 		 &GameObjectivesMenu::restart_mission, *this,
-		 _("Restart Mission")),*/
+		 _("Restart Mission")),
+#endif
 	m_player(plr)
 {
 	list.selected.set(this, &GameObjectivesMenu::selected);

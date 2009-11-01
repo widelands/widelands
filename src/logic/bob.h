@@ -234,7 +234,7 @@ struct Bob : public Map_Object {
 	void schedule_act(Game &, uint32_t tdelta);
 	void skip_act();
 	Point calc_drawpos(Editor_Game_Base const &, Point) const;
-	void set_owner(Player *player);
+	void set_owner(Player *);
 	Player * get_owner() const {return m_owner;}
 	void set_position(Editor_Game_Base &, Coords);
 	FCoords const & get_position() const {return m_position;}

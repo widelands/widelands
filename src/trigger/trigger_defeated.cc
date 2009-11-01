@@ -69,7 +69,7 @@ void Trigger_Defeated::check_set_conditions(Game const & game) {
 
 	if (nr_workers.size() == 0)
 		return set_trigger(false);
-	if (nr_workers[nr_workers.size() - 1] == 0)
+	if (*nr_workers.rbegin() == 0)
 		return set_trigger(true);
 	return set_trigger(false);
 }

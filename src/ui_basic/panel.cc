@@ -28,9 +28,9 @@
 
 namespace UI {
 
-Panel *Panel::_modal = 0;
-Panel *Panel::_g_mousegrab = 0;
-Panel *Panel::_g_mousein = 0;
+Panel * Panel::_modal       = 0;
+Panel * Panel::_g_mousegrab = 0;
+Panel * Panel::_g_mousein   = 0;
 PictureID Panel::s_default_cursor = g_gr->get_no_picture();
 
 
@@ -443,7 +443,7 @@ void Panel::do_think()
 	if (get_think())
 		think();
 
-	for (Panel *child = _fchild; child; child = child->_next)
+	for (Panel * child = _fchild; child; child = child->_next)
 		child->do_think();
 }
 
@@ -628,7 +628,7 @@ void Panel::die()
 {
 	_flags |= pf_die;
 
-	for (Panel *p = _parent; p; p = p->_parent) {
+	for (Panel * p = _parent; p; p = p->_parent) {
 		p->_flags |= pf_child_die;
 		if (p == _modal)
 			break;
@@ -715,7 +715,7 @@ void Panel::do_draw(RenderTarget & dst)
 			if (inner) {
 				draw(inner);
 
-				for (Panel *child = _lchild; child; child = child->_prev)
+				for (Panel * child = _lchild; child; child = child->_prev)
 					child->do_draw(inner);
 
 				inner->leave_window();
@@ -849,7 +849,7 @@ bool Panel::get_key_state(const SDLKey key) const
  *
  * \return The panel which receives the mouse event
  */
-Panel *Panel::ui_trackmouse(int32_t & x, int32_t & y)
+Panel * Panel::ui_trackmouse(int32_t & x, int32_t & y)
 {
 	Panel * mousein;
 	Panel * rcv = 0;
@@ -861,7 +861,7 @@ Panel *Panel::ui_trackmouse(int32_t & x, int32_t & y)
 
 	x -= mousein->_x;
 	y -= mousein->_y;
-	for (Panel *p = mousein->_parent; p; p = p->_parent) {
+	for (Panel * p = mousein->_parent; p; p = p->_parent) {
 		x -= p->_lborder + p->_x;
 		y -= p->_tborder + p->_y;
 	}

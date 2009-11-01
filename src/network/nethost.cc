@@ -1425,7 +1425,7 @@ void NetHost::handle_network ()
 			// disconnectClient
 			UserSettings newuser;
 			newuser.name = _("New User"); // shown in later disconnect msg.
-			d->clients[d->clients.size() - 1].usernum = d->settings.users.size();
+			d->clients.rbegin()->usernum = d->settings.users.size();
 			d->settings.users.push_back(newuser);
 
 			disconnectClient

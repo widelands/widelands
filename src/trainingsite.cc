@@ -327,7 +327,7 @@ void TrainingSite::update_soldier_request() {
 		m_soldier_request = 0;
 
 		while (m_soldiers.size() > m_capacity)
-			dropSoldier(*m_soldiers[m_soldiers.size() - 1]);
+			dropSoldier(**m_soldiers.rbegin());
 	}
 }
 

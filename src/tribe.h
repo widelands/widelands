@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -102,7 +102,7 @@ struct Tribe_Descr {
 	Building_Index get_nrbuildings() const {
 		return m_buildings.get_nitems();
 	}
-	Building_Index safe_building_index(const char *name) const;
+	Building_Index safe_building_index(char const * name) const;
 	Building_Descr const * get_building_descr(Building_Index const index) const
 	{
 		return m_buildings.get(index);

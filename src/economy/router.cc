@@ -117,7 +117,7 @@ struct RoutingNodeQueue {
 	//  1. Put the new node in the last slot
 	//  2. If parent slot is worse than self, exchange places and recurse
 	// Note that I rearranged this a bit so swap isn't necessary
-	void push(RoutingNode *t)
+	void push(RoutingNode & t)
 	{
 		uint32_t slot = m_data.size();
 		m_data.push_back(static_cast<RoutingNode *>(0));
@@ -125,15 +125,15 @@ struct RoutingNodeQueue {
 		while (slot > 0) {
 			uint32_t parent = (slot - 1) / 2;
 
-			if (m_data[parent]->cost() < t->cost())
+			if (m_data[parent]->cost() < t.cost())
 				break;
 
 			m_data[slot] = m_data[parent];
 			m_data[slot]->mpf_heapindex = slot;
 			slot = parent;
 		}
-		m_data[slot] = t;
-		t->mpf_heapindex = slot;
+		m_data[slot] = &t;
+		t.mpf_heapindex = slot;
 
 		debug(0, "push");
 	}
@@ -141,25 +141,25 @@ struct RoutingNodeQueue {
 	// Rearrange the tree after a node has become better, i.e. move the
 	// node up
 	// Pushing algorithm is basically the same as in push()
-	void boost(RoutingNode *t)
+	void boost(RoutingNode & t)
 	{
-		uint32_t slot = t->mpf_heapindex;
+		uint32_t slot = t.mpf_heapindex;
 
 		assert(slot < m_data.size());
-		assert(m_data[slot] == t);
+		assert(m_data[slot] == &t);
 
 		while (slot > 0) {
 			uint32_t parent = (slot - 1) / 2;
 
-			if (m_data[parent]->cost() <= t->cost())
+			if (m_data[parent]->cost() <= t.cost())
 				break;
 
 			m_data[slot] = m_data[parent];
 			m_data[slot]->mpf_heapindex = slot;
 			slot = parent;
 		}
-		m_data[slot] = t;
-		t->mpf_heapindex = slot;
+		m_data[slot] = &t;
+		t.mpf_heapindex = slot;
 
 		debug(0, "boost");
 	}
@@ -248,7 +248,7 @@ bool Router::find_route
 		cost_calculator.calc_cost_estimate
 			(start.get_position(), end.get_position());
 
-	Open.push(&start);
+	Open.push(start);
 
 	while ((current = Open.pop())) {
 		if (current == &end)
@@ -260,18 +260,18 @@ bool Router::find_route
 		// Loop through all neighbouring nodes
 		RoutingNodeNeighbours neighbours;
 
-		current->get_neighbours(&neighbours);
+		current->get_neighbours(neighbours);
 
 		// \todo: I think the next line is buggy; the ++i always skips
 		// one neighbour. Maybe it is intentional though and I just don't
 		// understand it
 		for (uint32_t i = 0; i < neighbours.size(); ++i) {
-			RoutingNode * const neighbour = neighbours[i].get_neighbour();
+			RoutingNode & neighbour = *neighbours[i].get_neighbour();
 			int32_t cost;
 			int32_t wait_cost = 0;
 
 			//  No need to find the optimal path when only checking connectivity.
-			if (neighbour == &end && !route)
+			if (&neighbour == &end && !route)
 				return true;
 
 			/*
@@ -281,24 +281,24 @@ bool Router::find_route
 			 */
 			if (wait) {
 				wait_cost =
-					(current->get_waitcost() + neighbour->get_waitcost())
+					(current->get_waitcost() + neighbour.get_waitcost())
 					* neighbours[i].get_cost() / 2;
 			}
 			cost = current->mpf_realcost + neighbours[i].get_cost() + wait_cost;
 
-			if (neighbour->mpf_cycle != mpf_cycle) {
+			if (neighbour.mpf_cycle != mpf_cycle) {
 				// add to open list
-				neighbour->mpf_cycle = mpf_cycle;
-				neighbour->mpf_realcost = cost;
-				neighbour->mpf_estimate = cost_calculator.calc_cost_estimate
-					(neighbour->get_position(), end.get_position());
-				neighbour->mpf_backlink = current;
+				neighbour.mpf_cycle = mpf_cycle;
+				neighbour.mpf_realcost = cost;
+				neighbour.mpf_estimate = cost_calculator.calc_cost_estimate
+					(neighbour.get_position(), end.get_position());
+				neighbour.mpf_backlink = current;
 				Open.push(neighbour);
-			} else if (cost + neighbour->mpf_estimate < neighbour->cost()) {
+			} else if (cost + neighbour.mpf_estimate < neighbour.cost()) {
 				// found a better path to a field that's already Open
-				neighbour->mpf_realcost = cost;
-				neighbour->mpf_backlink = current;
-				if (neighbour->mpf_heapindex != -1) {
+				neighbour.mpf_realcost = cost;
+				neighbour.mpf_backlink = current;
+				if (neighbour.mpf_heapindex != -1) {
 					// This neighbour is already 'popped', skip it
 					Open.boost(neighbour);
 				}

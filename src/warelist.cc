@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ void WareList::add(Ware_Index const i, const count_type count) {
 }
 
 
-void WareList::add(const WareList &wl)
+void WareList::add(WareList const & wl)
 {
 	Ware_Index const nr_wares = wl.get_nrwareids();
 	if (m_wares.size() < nr_wares.value())
@@ -77,7 +77,7 @@ void WareList::remove(Ware_Index const i, const count_type count) {
 }
 
 
-void WareList::remove(const WareList &wl)
+void WareList::remove(WareList const & wl)
 {
 	Ware_Index const nr_wares = wl.get_nrwareids();
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i)

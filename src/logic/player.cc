@@ -391,7 +391,7 @@ void Player::bulldoze(PlayerImmovable & imm, bool const recurse)
 		if (recurse) {
 			Flag & start = road->get_flag(Road::FlagStart);
 			Flag & end   = road->get_flag(Road::FlagEnd);
-			while (Road * const r = start.get_road(&end)) //  destroy every road
+			while (Road * const r = start.get_road(end)) //  destroy every road
 				r->destroy(egbase()); //  between start and end, not just selected
 			//  Now imm and road are dangling reference/pointer! Do not use!
 			if (start.is_dead_end())

@@ -67,7 +67,6 @@ struct Font_Handler {
 		 uint32_t wrap = std::numeric_limits<uint32_t>::max());
 	int32_t calc_linewidth(TTF_Font &, const std::string & text);
 	uint32_t get_fontheight(std::string const & name, int32_t size);
-	std::string remove_first_space(const std::string &text);
 	std::string word_wrap_text
 		(TTF_Font &,
 		 const std::string & unwrapped_text,

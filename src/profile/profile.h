@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,7 +85,7 @@ struct Section {
 		Point  get_Point () const;
 		Widelands::Coords get_Coords(Widelands::Extent) const;
 
-		void set_string(const char *value);
+		void set_string(char const *);
 	};
 
 	typedef std::vector<Value> Value_list;
@@ -241,7 +241,7 @@ struct Profile {
 		 char const * textdomain,
 		 int32_t      error_level    = err_throw);
 
-	void error(const char *fmt, ...) const __attribute__((format(printf, 2, 3)));
+	void error(char const *, ...) const __attribute__((format(printf, 2, 3)));
 	void check_used() const;
 
 	void read

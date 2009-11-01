@@ -733,11 +733,8 @@ local int32_t unzlocal_GetCurrentFileInfoInternal
 
 
 
-/*
-  Write info about the ZipFile in the *pglobal_info structure.
-  No preparation of the structure is needed
-  return UNZ_OK if there is no problem.
-*/
+//  Write info about the ZipFile in the *pglobal_info structure. No preparation
+//  of the structure is needed. Return UNZ_OK if there is no problem.
 extern int32_t ZEXPORT unzGetCurrentFileInfo
 	(unzFile file, unz_file_info * const pfile_info,
 	 char * const szFileName, uLong fileNameBufferSize,
@@ -820,13 +817,10 @@ extern int32_t ZEXPORT unzGoToNextFile (unzFile file)
 ///////////////////////////////////////////
 */
 
-/*
-  Read the local header of the current zipfile
-  Check the coherency of the local header and info in the end of central
-        directory about this file
-  store in *piSizeVar the size of extra info in local header
-        (filename and size of extra field data)
-*/
+//  Read the local header of the current zipfile. Check the coherency of the
+//  local header and info in the end of central directory about this file store
+//  in *piSizeVar the size of extra info in local header (filename and size of
+//  extra field data).
 local int32_t unzlocal_CheckCurrentFileCoherencyHeader
 	(unz_s * const s,
 	 uInt  * const piSizeVar,
@@ -1353,7 +1347,7 @@ typedef struct linkedlist_datablock_internal_s
 	struct linkedlist_datablock_internal_s * next_datablock;
 	uLong  avail_in_this_block;
 	uLong  filled_in_this_block;
-	uLong  unused; /* for future use and aligement */
+	uLong  unused; //  for future use and alignment
 	unsigned char data[SIZEDATA_INDATABLOCK];
 } linkedlist_datablock_internal;
 
@@ -2050,13 +2044,13 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3
 		 4);
 	ziplocal_putValue_inmemory
 		(zi->ci.central_header + 16, 0UL,
-		 4); /*crc*/
+		 4); //  crc
 	ziplocal_putValue_inmemory
 		(zi->ci.central_header + 20, 0UL,
-		 4); /*compr size*/
+		 4); //  compr size
 	ziplocal_putValue_inmemory
 		(zi->ci.central_header + 24, 0UL,
-		 4); /*uncompr size*/
+		 4); //  uncompr size
 	ziplocal_putValue_inmemory
 		(zi->ci.central_header + 28,
 		 static_cast<uLong>(size_filename),
@@ -2072,7 +2066,7 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3
 	ziplocal_putValue_inmemory
 		(zi->ci.central_header + 34,
 		 0UL,
-		 2); /*disk nm start*/
+		 2); //  disk nm start
 
 	ziplocal_putValue_inmemory
 		(zi->ci.central_header + 36,
@@ -2359,13 +2353,13 @@ extern int32_t ZEXPORT zipCloseFileInZipRaw
 	}
 	compressed_size = static_cast<uLong>(zi->ci.stream.total_out);
 
-	ziplocal_putValue_inmemory(zi->ci.central_header + 16, crc32, 4); /*crc*/
+	ziplocal_putValue_inmemory(zi->ci.central_header + 16, crc32, 4); //  crc
 	ziplocal_putValue_inmemory(zi->ci.central_header + 20, compressed_size, 4);
 	if (zi->ci.stream.data_type == Z_ASCII)
 		ziplocal_putValue_inmemory
 			(zi->ci.central_header + 36, static_cast<uLong>(Z_ASCII), 2);
 	ziplocal_putValue_inmemory
-		(zi->ci.central_header + 24, uncompressed_size, 4); /*uncompr size*/
+		(zi->ci.central_header + 24, uncompressed_size, 4); //  uncompr size
 
 	if (err == ZIP_OK)
 		err =

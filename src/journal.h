@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,10 +81,10 @@ public:
 	///True if events are being played back
 	bool is_playingback() {return m_playback;}
 
-	void record_event(SDL_Event *e);
-	bool read_event(SDL_Event *e);
+	void record_event(SDL_Event const &);
+	bool read_event(SDL_Event &);
 
-	void timestamp_handler(uint32_t * stamp);
+	void timestamp_handler(uint32_t & stamp);
 	void set_idle_mark();
 
 protected:
@@ -94,23 +94,23 @@ protected:
 	 */
 	int32_t get_playback_offset() {return m_playbackstream.tellg();}
 
-	void write(int8_t   v);
-	void write(uint8_t  v);
-	void write(int16_t  v);
-	void write(uint16_t v);
-	void write(int32_t  v);
-	void write(uint32_t v);
-	void write(SDLKey v);
-	void write(SDLMod v);
+	void write(int8_t);
+	void write(uint8_t);
+	void write(int16_t);
+	void write(uint16_t);
+	void write(int32_t);
+	void write(uint32_t);
+	void write(SDLKey);
+	void write(SDLMod);
 
-	void read(int8_t   &v);
-	void read(uint8_t  &v);
-	void read(int16_t  &v);
-	void read(uint16_t &v);
-	void read(int32_t  &v);
-	void read(uint32_t &v);
-	void read(SDLKey &v);
-	void read(SDLMod &v);
+	void read(int8_t   &);
+	void read(uint8_t  &);
+	void read(int16_t  &);
+	void read(uint16_t &);
+	void read(int32_t  &);
+	void read(uint32_t &);
+	void read(SDLKey &);
+	void read(SDLMod &);
 	void ensure_code(uint8_t code);
 
 	///The recording file's name.

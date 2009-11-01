@@ -48,10 +48,10 @@ typedef struct
 MNG_Image;
 
 /* Check for MNG signature */
-int IMG_isMNG(SDL_RWops *src);
+int IMG_isMNG(SDL_RWops *);
 
 /* Read and return an MNG image */
-MNG_Image *IMG_loadMNG(const char *file);
+MNG_Image * IMG_loadMNG(char const * file);
 
 #ifdef __cplusplus
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ template <typename T> struct Listselect;
 };
 
 struct Editor_Event_Menu : public UI::UniqueWindow {
-	Editor_Event_Menu(Editor_Interactive &, UI::UniqueWindow::Registry *);
+	Editor_Event_Menu(Editor_Interactive &, UI::UniqueWindow::Registry &);
 
 private:
 	Editor_Interactive & eia();

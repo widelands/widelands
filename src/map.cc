@@ -638,8 +638,8 @@ The minimum valu will be 0, the maximum value will be MAX_ELEVATION,
 the average will be AVG_ELEVATION.
 
 w, h: are width and height of the two-dimensional array
-      produced. Thus, the array has w*h entries. To access a certain
-      "coordinate" in the array, use array[x+w*y] to retrieve the entry.
+      produced. Thus, the array has w * h entries. To access a certain
+      "coordinate" in the array, use array[x + w * y] to retrieve the entry.
 
 rng:  is the random number generator to be used.
       This will mostly be the current rng of the random map currently being
@@ -1331,7 +1331,7 @@ void Map::find_reachable
 		FCoords cur;
 
 		// Pop the last item from the queue
-		cur.field = queue[queue.size() - 1];
+		cur.field = *queue.rbegin();
 		curpf = &pathfields->fields[cur.field - m_fields];
 		get_coords(*cur.field, cur);
 		queue.pop_back();
@@ -1492,7 +1492,7 @@ struct FindImmovablesCallback {
 		if (!imm)
 			return;
 
-		if (m_functor.accept(imm)) {
+		if (m_functor.accept(*imm)) {
 			if (m_list) {
 				ImmovableFound imf;
 				imf.object = imm;
@@ -1576,7 +1576,7 @@ uint32_t Map::find_reachable_immovables_unique
 	container_iterate_const(std::vector<ImmovableFound>, duplist, i) {
 		BaseImmovable * const obj = i.current->object;
 		if (std::find(list->begin(), list->end(), obj) == list->end())
-			if (functor.accept(obj))
+			if (functor.accept(*obj))
 				list->push_back(obj);
 	}
 
@@ -2176,10 +2176,10 @@ The cost is in milliseconds it takes to walk.
 The time is calculated as BASE_COST_PER_FIELD * f, where
 
 f = 1.0 + d(Slope) - d(0)
-d = (Slope + SLOPE_COST_STEPS)*(Slope + SLOPE_COST_STEPS - 1)
-       / (2*SLOPE_COST_DIVISOR)
+d = (Slope + SLOPE_COST_STEPS) * (Slope + SLOPE_COST_STEPS - 1)
+       / (2 * SLOPE_COST_DIVISOR)
 
-Note that the actual calculations multiply through by (2*SLOPE_COST_DIVISOR)
+Note that the actual calculations multiply through by (2 * SLOPE_COST_DIVISOR)
 to avoid using floating point numbers in game logic code.
 
 Slope is limited to the range [ -SLOPE_COST_STEPS; +oo [
@@ -2503,7 +2503,7 @@ private:
  * \param persist tells the function how hard it should try to find a path:
  * If \p persist is \c 0, the function will never give up early. Otherwise, the
  * function gives up when it becomes clear that the path takes longer than
- * persist*bird's distance of flat terrain.
+ * persist * bird's distance of flat terrain.
  * Note that if the terrain contains steep hills, the cost calculation will
  * cause the search to terminate earlier than you may think. If persist==1,
  * findpath() can only find a path if the terrain is completely flat.

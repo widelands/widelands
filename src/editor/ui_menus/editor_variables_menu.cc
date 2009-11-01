@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -259,38 +259,42 @@ void Edit_Variable_Window::clicked_ok() {
 }
 
 
+inline Editor_Interactive & Editor_Variables_Menu::eia() {
+	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
+}
+
+
 /**
  * Create all the buttons etc...
 */
 #define spacing 5
 Editor_Variables_Menu::Editor_Variables_Menu
-	(Editor_Interactive & parent, UI::UniqueWindow::Registry * registry)
-:
-UI::UniqueWindow(&parent, registry, 410, 330, _("Variables Menu")),
-m_parent(parent),
-m_table(this, 5, 5, get_inner_w() - 2 * spacing, get_inner_h() - 40),
-m_button_new
-	(this,
-	 get_inner_w() / 2 - 180 - spacing, get_inner_h() - 30, 120, 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 &Editor_Variables_Menu::clicked_new, *this,
-	 _("New")),
-m_button_edit
-	(this,
-	 get_inner_w() / 2 - 60, get_inner_h() - 30, 120, 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 &Editor_Variables_Menu::clicked_edit, *this,
-	 _("Edit"),
-	 std::string(),
-	 false),
-m_button_del
-	(this,
-	 get_inner_w() / 2 + 60 + spacing, get_inner_h() - 30, 120, 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-	 &Editor_Variables_Menu::clicked_del, *this,
-	 _("Delete"),
-	 std::string(),
-	 false)
+	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
+	:
+	UI::UniqueWindow(&parent, &registry, 410, 330, _("Variables Menu")),
+	m_table(this, 5, 5, get_inner_w() - 2 * spacing, get_inner_h() - 40),
+	m_button_new
+		(this,
+		 get_inner_w() / 2 - 180 - spacing, get_inner_h() - 30, 120, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 &Editor_Variables_Menu::clicked_new, *this,
+		 _("New")),
+	m_button_edit
+		(this,
+		 get_inner_w() / 2 - 60, get_inner_h() - 30, 120, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 &Editor_Variables_Menu::clicked_edit, *this,
+		 _("Edit"),
+		 std::string(),
+		 false),
+	m_button_del
+		(this,
+		 get_inner_w() / 2 + 60 + spacing, get_inner_h() - 30, 120, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 &Editor_Variables_Menu::clicked_del, *this,
+		 _("Delete"),
+		 std::string(),
+		 false)
 {
 	m_table.add_column (14);
 	m_table.add_column(286, _("Variable"));
@@ -299,7 +303,7 @@ m_button_del
 	m_table.selected.set(this, &Editor_Variables_Menu::table_selected);
 	m_table.double_clicked.set(this, &Editor_Variables_Menu::table_dblclicked);
 
-	Manager<Variable> & mvm = m_parent.egbase().map().mvm();
+	Manager<Variable> & mvm = eia().egbase().map().mvm();
 	Manager<Variable>::Index const nr_variables = mvm.size();
 	for (Manager<Variable>::Index i = 0; i < nr_variables; ++i)
 		insert_variable(mvm[i]);
@@ -314,14 +318,14 @@ m_button_del
  * A Button has been clicked
  */
 void Editor_Variables_Menu::clicked_new() {
-	New_Variable_Window nvw(m_parent);
+	New_Variable_Window nvw(eia());
 	if (nvw.run()) {
 		insert_variable(*nvw.get_variable());
 		clicked_edit();
 	}
 }
 void Editor_Variables_Menu::clicked_edit() {
-	Edit_Variable_Window evw(m_parent, m_table.get_selected_record());
+	Edit_Variable_Window evw(eia(), m_table.get_selected_record());
 	if (evw.run())
 		m_table.sort();
 }
@@ -329,7 +333,7 @@ void Editor_Variables_Menu::clicked_del()      {
 	//  Otherwise, delete button should be disabled.
 	assert(not m_table.get_selected().is_delete_protected());
 
-	m_parent.egbase().map().mvm().remove(m_table.get_selected());
+	eia().egbase().map().mvm().remove(m_table.get_selected());
 	m_table.remove_selected();
 
 	m_button_edit.set_enabled(false);

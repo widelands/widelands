@@ -543,7 +543,7 @@ void Warehouse::set_economy(Economy * const e)
 		return;
 
 	if (old)
-		old->remove_warehouse(this);
+		old->remove_warehouse(*this);
 
 	m_supply->set_economy(e);
 	Building::set_economy(e);
@@ -552,7 +552,7 @@ void Warehouse::set_economy(Economy * const e)
 		m_requests[i]->set_economy(e);
 
 	if (e)
-		e->add_warehouse(this);
+		e->add_warehouse(*this);
 }
 
 

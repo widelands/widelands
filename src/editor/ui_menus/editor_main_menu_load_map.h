@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ template <typename T> struct Callback_Button;
  * Choose a filename and save your brand new created map
 */
 struct Main_Menu_Load_Map : public UI::Window {
-	Main_Menu_Load_Map(Editor_Interactive *);
+	Main_Menu_Load_Map(Editor_Interactive &);
 
 private:
 	void clicked_ok();

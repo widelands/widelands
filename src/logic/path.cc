@@ -157,7 +157,7 @@ void CoordPath::append(const Map & map, const Path & tail) {
 Append the given path.
 ===============
 */
-void CoordPath::append(const CoordPath &tail)
+void CoordPath::append(CoordPath const & tail)
 {
 	assert(tail.get_start() == get_end());
 

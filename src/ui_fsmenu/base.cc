@@ -36,13 +36,12 @@ Fullscreen_Menu_Base
 ==============================================================================
 */
 
-/** Fullscreen_Menu_Base::Fullscreen_Menu_Base(const char *bgpic)
- *
+/**
  * Initialize a pre-game menu
  *
  * Args: bgpic  name of the background picture
  */
-Fullscreen_Menu_Base::Fullscreen_Menu_Base(const char *bgpic)
+Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 	: UI::Panel(0, 0, 0, gr_x(), gr_y()),
 	// Switch graphics mode if necessary
 	m_xres(gr_x()), m_yres(gr_y())

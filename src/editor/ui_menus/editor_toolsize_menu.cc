@@ -34,9 +34,9 @@ inline Editor_Interactive & Editor_Toolsize_Menu::eia() {
  * Create all the buttons etc...
 */
 Editor_Toolsize_Menu::Editor_Toolsize_Menu
-		(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
+	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
 	:
-	UI::UniqueWindow(parent, registry, 160, 50, _("Toolsize Menu")),
+	UI::UniqueWindow(&parent, &registry, 160, 50, _("Toolsize Menu")),
 	m_textarea(this, 5, 5, 150, 10, std::string(), UI::Align_HCenter),
 	m_increase
 		(this,
@@ -45,7 +45,7 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
 		 &Editor_Toolsize_Menu::increase_radius, *this,
 		 std::string(),
-		 parent->get_sel_radius() < MAX_TOOL_AREA),
+		 parent.get_sel_radius() < MAX_TOOL_AREA),
 	m_decrease
 		(this,
 		 80, 25, 20, 20,
@@ -53,11 +53,11 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu
 		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
 		 &Editor_Toolsize_Menu::decrease_radius, *this,
 		 std::string(),
-		 0 < parent->get_sel_radius())
+		 0 < parent.get_sel_radius())
 {
 	m_increase.set_repeating(true);
 	m_decrease.set_repeating(true);
-	update(parent->get_sel_radius());
+	update(parent.get_sel_radius());
 
 	if (get_usedefaultpos())
 		center_to_parent();

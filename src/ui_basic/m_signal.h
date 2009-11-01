@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,7 @@ class Signal1 : public Object {
 public:
 	Signal1() {_obj = 0; _fn = 0;}
 	template<class T>
-	void set(Object *p, void (T::*f)(T1)) {
+	void set(Object * const p, void (T::*f)(T1)) {
 		_obj = p;
 		_fn = static_cast<fnT>(f);
 	}

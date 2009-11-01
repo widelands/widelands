@@ -48,7 +48,7 @@ struct Resource_Descr {
 	Resource_Descr() {}
 	~Resource_Descr() {}
 
-	void parse(Section *, std::string);
+	void parse(Section &, std::string const &);
 
 	const std::string & name     () const throw () {return m_name;}
 	std::string const & descname() const throw () {return m_descname;}

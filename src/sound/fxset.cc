@@ -47,7 +47,7 @@ FXset::~FXset()
  * \param[in] fx    The sound fx to append
  * \param[in] prio  Set previous \ref m_priority to new value (optional)
  */
-void FXset::add_fx(Mix_Chunk * fx, uint8_t const prio)
+void FXset::add_fx(Mix_Chunk * const fx, uint8_t const prio)
 {
 	assert(fx);
 
@@ -60,7 +60,7 @@ void FXset::add_fx(Mix_Chunk * fx, uint8_t const prio)
  * \return  a pointer to the chosen effect; 0 if sound effects are
  * disabled or no fx is registered
  */
-Mix_Chunk *FXset::get_fx()
+Mix_Chunk * FXset::get_fx()
 {
 	if (g_sound_handler.get_disable_fx() || m_fxs.empty())
 		return 0;

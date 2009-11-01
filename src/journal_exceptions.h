@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,19 +23,18 @@
 #include <stdint.h>
 #include <stdexcept>
 
-/**
- * Thrown for IO-errors occurring with a journal file (unable to open file
- * for any reason, out of space, etc.) that a) are unrecoverable and b)
- * have already been dealt with.
- *
- * This is a purely informational exception. Do not throw it unless it can
- * safely be ignored.
- *
- * \todo add offset into journal file if applicable
- * \todo Rework as proposed by Erik, see filesystem_exceptions.h. Before that:
- * Replace with File*_error where appropriate, migrate from runtime_error to
- * logic_error (?)
- */
+///
+/// Thrown for IO-errors occurring with a journal file (unable to open file
+/// for any reason, out of space, etc.) that a) are unrecoverable and b)
+/// have already been dealt with.
+///
+/// This is a purely informational exception. Do not throw it unless it can
+/// safely be ignored.
+///
+/// \todo add offset into journal file if applicable
+/// \todo Rework as proposed by Erik, see filesystem_exceptions.h. Before that:
+/// Replace with File*_error where appropriate, migrate from runtime_error to
+/// logic_error (?)
 struct Journalfile_error : public std::runtime_error {
 	explicit Journalfile_error(std::string const & filename) throw ();
 	virtual ~Journalfile_error() throw () {}

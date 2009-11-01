@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ struct WareList {
 	Ware_Index get_nrwareids() const {return Ware_Index(m_wares.size());}
 
 	void add   (Ware_Index, count_type = 1);
-	void add(const WareList &wl);
+	void add(WareList const &);
 	void remove(Ware_Index, count_type = 1);
 	void remove(WareList const & wl);
 	count_type stock(Ware_Index) const;

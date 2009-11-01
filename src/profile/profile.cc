@@ -60,7 +60,7 @@ Section::Value::Value(const char * const nname, const char * const nval) :
 	m_used(false), m_name(strdup(nname)), m_value(strdup(nval))
 {}
 
-Section::Value::Value(const Section::Value &o) :
+Section::Value::Value(Section::Value const & o) :
 m_used(o.m_used), m_name(strdup(o.m_name)), m_value(strdup(o.m_value)) {}
 
 Section::Value::~Value()
@@ -168,7 +168,7 @@ Widelands::Coords Section::Value::get_Coords
 	return Widelands::Coords(x, y);
 }
 
-void Section::Value::set_string(const char *value)
+void Section::Value::set_string(char const * const value)
 {
 	free(m_value);
 	m_value = strdup(value);
@@ -183,7 +183,7 @@ Section
 ==============================================================================
 */
 
-const char *Section::get_name() const {
+char const * Section::get_name() const {
 	return m_section_name;
 }
 
@@ -253,15 +253,14 @@ bool Section::has_val(char const * const name) const
 	return false;
 }
 
-/** Section::get_val(const char *name)
- *
+/**
  * Returns the Value associated with the given keyname.
  *
  * Args: name  name of the key
  *
  * Returns: Pointer to the Value struct; 0 if the key doesn't exist.
  */
-Section::Value *Section::get_val(char const * name)
+Section::Value * Section::get_val(char const * const name)
 {
 	container_iterate(Value_list, m_values, i)
 		if (!strcasecmp(i.current->get_name(), name)) {
@@ -272,15 +271,14 @@ Section::Value *Section::get_val(char const * name)
 	return 0;
 }
 
-/** Section::get_next_val(const char *name)
- *
+/**
  * Returns the first unused value associated with the given keyname.
  *
  * Args: name  name of the key; can be 0 to find any key
  *
  * Returns: Pointer to the Value struct; 0 if no more key-value pairs are found
  */
-Section::Value *Section::get_next_val(const char *name)
+Section::Value * Section::get_next_val(char const * const name)
 {
 	container_iterate(Value_list, m_values, i)
 		if (not i.current->is_used())
@@ -311,12 +309,11 @@ Section::Value & Section::create_val_duplicate
 	return m_values.back();
 }
 
-/** Section::get_safe_int(const char *name)
- *
+/**
  * Return the integer value of the given key or throw an exception if a
  * problem arises.
  */
-int32_t Section::get_safe_int(const char *name)
+int32_t Section::get_safe_int(char const * const name)
 {
 	Value * const v = get_val(name);
 	if (!v)
@@ -345,12 +342,11 @@ uint32_t Section::get_safe_positive(char const * const name)
 }
 
 
-/** Section::get_safe_bool(const char *name)
- *
+/**
  * Return the boolean value of the given key or throw an exception if a
  * problem arises.
  */
-bool Section::get_safe_bool(const char *name)
+bool Section::get_safe_bool(char const * const name)
 {
 	Value * const v = get_val(name);
 	if (!v)
@@ -358,12 +354,11 @@ bool Section::get_safe_bool(const char *name)
 	return v->get_bool();
 }
 
-/** Section::get_safe_string(const char *name)
- *
+/**
  * Return the key value as a plain string or throw an exception if the key
  * doesn't exist
  */
-const char *Section::get_safe_string(const char *name)
+char const * Section::get_safe_string(char const * const name)
 {
 	Value * const v = get_val(name);
 	if (!v)
@@ -456,8 +451,7 @@ Widelands::Building_Descr const & Section::get_safe_Building_Type
 }
 
 
-/** Section::get_int(const char *name, int32_t def)
- *
+/**
  * Returns the integer value of the given key. Falls back to a default value
  * if the key is not found.
  *
@@ -466,7 +460,7 @@ Widelands::Building_Descr const & Section::get_safe_Building_Type
  *
  * Returns: the integer value of the key
  */
-int32_t Section::get_int(const char *name, int32_t def)
+int32_t Section::get_int(char const * const name, int32_t const def)
 {
 	Value * const v = get_val(name);
 	if (!v)
@@ -474,7 +468,7 @@ int32_t Section::get_int(const char *name, int32_t def)
 
 	try {
 		return v->get_int();
-	} catch (std::exception &e) {
+	} catch (std::exception const & e) {
 		m_profile->error("%s", e.what());
 		return def;
 	}
@@ -486,7 +480,7 @@ uint32_t Section::get_natural(char const * const name, uint32_t const def)
 	if (Value * const v = get_val(name))
 		try {
 			return v->get_natural();
-		} catch (std::exception &e) {
+		} catch (std::exception const & e) {
 			m_profile->error("%s", e.what());
 			return def;
 		}
@@ -501,7 +495,7 @@ uint32_t Section::get_positive(char const * const name, uint32_t const def)
 	if (Value * const v = get_val(name))
 		try {
 			return v->get_positive();
-		} catch (std::exception &e) {
+		} catch (std::exception const & e) {
 			m_profile->error("%s", e.what());
 			return def;
 		}
@@ -511,8 +505,7 @@ uint32_t Section::get_positive(char const * const name, uint32_t const def)
 }
 
 
-/** Section::get_bool(const char *name, bool def)
- *
+/**
  * Returns the boolean value of the given key. Falls back to a default value
  * if the key is not found.
  *
@@ -521,7 +514,7 @@ uint32_t Section::get_positive(char const * const name, uint32_t const def)
  *
  * Returns: the boolean value of the key
  */
-bool Section::get_bool(const char *name, bool def)
+bool Section::get_bool(char const * const name, bool const def)
 {
 	Value * const v = get_val(name);
 	if (!v)
@@ -529,14 +522,13 @@ bool Section::get_bool(const char *name, bool def)
 
 	try {
 		return v->get_bool();
-	} catch (std::exception &e) {
+	} catch (std::exception const & e) {
 		m_profile->error("%s", e.what());
 		return def;
 	}
 }
 
-/** Section::get_string(const char *name, const char *def)
- *
+/**
  * Returns the value of the given key. Falls back to a default value if the
  * key is not found.
  *
@@ -546,7 +538,8 @@ bool Section::get_bool(const char *name, bool def)
  * Returns: the string associated with the key; never returns 0 if the key
  *          has been found
  */
-const char *Section::get_string(const char *name, const char *def)
+char const * Section::get_string
+	(char const * const name, char const * const def)
 {
 	Value const * const v = get_val(name);
 	return v ? v->get_string() : def;
@@ -583,8 +576,7 @@ Widelands::Player_Number Section::get_Player_Number
 }
 
 
-/** Section::get_next_bool(const char *name, int32_t *value)
- *
+/**
  * Retrieve the next unused key with the given name as a boolean value.
  *
  * Args: name   name of the key, can be 0 to find all unused keys
@@ -592,7 +584,8 @@ Widelands::Player_Number Section::get_Player_Number
  *
  * Returns: the name of the key, or 0 if none has been found
  */
-const char *Section::get_next_bool(const char *name, bool *value)
+char const * Section::get_next_bool
+	(char const * const name, bool * const value)
 {
 	Value * const v = get_next_val(name);
 	if (!v)
@@ -604,8 +597,7 @@ const char *Section::get_next_bool(const char *name, bool *value)
 }
 
 
-/** Section::set_int(const char *name, int32_t value, bool duplicate = false)
- *
+/**
  * Modifies/Creates the given key.
  * If duplicate is true, a duplicate key will be created if the key already
  * exists.
@@ -712,13 +704,12 @@ Profile::Profile
 }
 
 
-/** Profile::error(const char *fmt, ...)
- *
+/**
  * Output an error message.
  * Depending on the error level, it is thrown as a wexception, logged or
  * ignored.
  */
-void Profile::error(const char *fmt, ...) const
+void Profile::error(char const * const fmt, ...) const
 {
 	if (m_error_level == err_ignore)
 		return;
@@ -751,15 +742,14 @@ void Profile::check_used() const
 			i.current->check_used();
 }
 
-/** Profile::get_section(const char *name)
- *
+/**
  * Retrieve the first section of the given name and mark it used.
  *
  * Args: name  name of the section
  *
  * Returns: pointer to the section (or 0 if the section doesn't exist)
  */
-Section *Profile::get_section(const char *name)
+Section * Profile::get_section(char const * const name)
 {
 	container_iterate(Section_list, m_sections, i)
 		if (!strcasecmp(i.current->get_name(), name)) {
@@ -783,8 +773,7 @@ Section & Profile::get_safe_section(char const * const name)
 			("in \"%s\" section [%s] not found", m_filename.c_str(), name);
 }
 
-/** Profile::pull_section(const char *name)
- *
+/**
  * Safely get a section of the given name.
  * If the section doesn't exist, it is created.
  * Similar to create_section(), but the section is marked as used.
@@ -796,15 +785,14 @@ Section & Profile::pull_section(char const * const name)
 	return s;
 }
 
-/** Profile::get_next_section(const char *name)
- *
+/**
  * Retrieve the next unused section of the given name and mark it used.
  *
  * Args: name  name of the section; can be 0 to retrieve any unused section
  *
  * Returns: pointer to the section (or 0 if the section doesn't exist)
  */
-Section *Profile::get_next_section(const char *name)
+Section * Profile::get_next_section(char const * const name)
 {
 	container_iterate(Section_list, m_sections, i)
 		if (not i.current->is_used())
@@ -833,7 +821,7 @@ Section & Profile::create_section_duplicate(char const * const name)
 }
 
 
-inline char *skipwhite(char *p)
+inline char * skipwhite(char * p)
 {
 	while (*p && isspace(*p))
 		++p;
@@ -988,12 +976,12 @@ void Profile::read
 			}
 		}
 	}
-	catch (FileNotFound_error &e) {
+	catch (FileNotFound_error const & e) {
 		//It's no problem if the config file does not exist. (It'll get
 		//written on exit anyway)
 		log("There's no configuration file, using default values.\n");
 	}
-	catch (std::exception &e) {
+	catch (std::exception const & e) {
 		error("%s:%u: %s", filename, linenr, e.what());
 	}
 

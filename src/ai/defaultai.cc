@@ -1876,14 +1876,13 @@ void DefaultAI::lose_building (Building const & b)
 	BuildingObserver & bo = get_building_observer(b.name().c_str());
 
 	if (bo.type == BuildingObserver::CONSTRUCTIONSITE) {
-		BuildingObserver &target_bo =
+		BuildingObserver & target_bo =
 			get_building_observer
 				(ref_cast<ConstructionSite const, Building const>(b)
 				 .building().name().c_str());
 		--target_bo.cnt_under_construction;
 		--total_constructionsites;
-	}
-	else {
+	} else {
 		--bo.cnt_built;
 
 		if (bo.type == BuildingObserver::PRODUCTIONSITE) {
@@ -1940,7 +1939,7 @@ void DefaultAI::lose_building (Building const & b)
 
 /// Checks that supply line exists for given building.
 /// Recurcsively verify that all inputs have a producer.
-bool DefaultAI::check_supply(BuildingObserver const &bo)
+bool DefaultAI::check_supply(BuildingObserver const & bo)
 {
 	size_t supplied = 0;
 	container_iterate_const(std::vector<int16_t>, bo.inputs, i)

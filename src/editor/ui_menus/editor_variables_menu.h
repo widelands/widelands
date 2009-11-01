@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,10 +28,10 @@ struct Editor_Interactive;
 namespace Widelands {struct Variable;}
 
 struct Editor_Variables_Menu : public UI::UniqueWindow {
-	Editor_Variables_Menu(Editor_Interactive &, UI::UniqueWindow::Registry *);
+	Editor_Variables_Menu(Editor_Interactive &, UI::UniqueWindow::Registry &);
 
 private:
-	Editor_Interactive                & m_parent;
+	Editor_Interactive & eia();
 	UI::Table<Widelands::Variable &> m_table;
 	UI::Callback_Button<Editor_Variables_Menu> m_button_new;
 	UI::Callback_Button<Editor_Variables_Menu> m_button_edit;

@@ -35,7 +35,7 @@ Richtext_Block::Richtext_Block() :
 	m_text_align (Align_Left)
 {}
 
-Richtext_Block::Richtext_Block(const Richtext_Block &src) {
+Richtext_Block::Richtext_Block(Richtext_Block const & src) {
 	m_images.clear();
 	m_text_blocks.clear();
 	for (uint32_t i = 0; i < src.m_images.size(); ++i)
@@ -56,7 +56,7 @@ Text_Block::Text_Block() {
 	m_line_spacing = 0;
 }
 
-Text_Block::Text_Block(const Text_Block &src) {
+Text_Block::Text_Block(Text_Block const & src) {
 	m_words.clear();
 	m_line_breaks.clear();
 	for (uint32_t i = 0; i < src.m_words.size(); ++i)
@@ -110,7 +110,7 @@ void Text_Parser::parse
 			more_text_blocks =
 				parse_textblock
 					(unparsed_text, block_format, words, line_breaks, vcb, vcdata);
-			parse_text_attributes(block_format, &new_block);
+			parse_text_attributes(block_format, new_block);
 
 			new_block.set_words(words);
 			new_block.set_line_breaks(line_breaks);
@@ -264,7 +264,7 @@ void Text_Parser::parse_richtexttext_attributes
 }
 
 void Text_Parser::parse_text_attributes
-	(std::string format, Text_Block * const element)
+	(std::string format, Text_Block & element)
 {
 	if (format.empty())
 		return;
@@ -284,11 +284,11 @@ void Text_Parser::parse_text_attributes
 			std::string val = format.substr(0, val_end);
 			format.erase(0, val_end + 1);
 			if (key == "font-size") {
-				element->set_font_size(atoi(val.c_str()));
+				element.set_font_size(atoi(val.c_str()));
 			} else if (key == "font-face")
-				element->set_font_face(val + ".ttf");
+				element.set_font_face(val + ".ttf");
 			else if (key == "line-spacing")
-				element->set_line_spacing(atoi(val.c_str()));
+				element.set_line_spacing(atoi(val.c_str()));
 			else if (key == "font-color") {
 				std::string::size_type const offset = val[0] == '#';
 				std::string const r = "0x" + val.substr(offset,     2);
@@ -299,13 +299,13 @@ void Text_Parser::parse_text_attributes
 				long int const red   = strtol(r.c_str(), &ptr, 0);
 				long int const green = strtol(g.c_str(), &ptr, 0);
 				long int const blue  = strtol(b.c_str(), &ptr, 0);
-				element->set_font_color(RGBColor(red, green, blue));
+				element.set_font_color(RGBColor(red, green, blue));
 			} else if (key == "font-weight")
-				element->set_font_weight(val);
+				element.set_font_weight(val);
 			else if (key == "font-style")
-				element->set_font_style(val);
+				element.set_font_style(val);
 			else if (key == "font-decoration")
-				element->set_font_decoration(val);
+				element.set_font_decoration(val);
 		}
 	}
 }

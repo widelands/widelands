@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -219,12 +219,12 @@ struct Map : public ITransportCostCalculator {
 		return m_starting_pos[p - 1];
 	}
 
-	void set_filename(const char *string);
-	void set_author(const char *string);
-	void set_world_name(const char *string);
-	void set_name(const char *string);
-	void set_description(const char *string);
-	void set_background(const char *string);
+	void set_filename   (char const *);
+	void set_author     (char const *);
+	void set_world_name (char const *);
+	void set_name       (char const *);
+	void set_description(char const *);
+	void set_background (char const *);
 
 	// informational functions
 	const char * get_filename() const {return m_filename;}

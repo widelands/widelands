@@ -170,4 +170,4 @@ button_bldns
 }
 
 
-void MiniMap::toggle(Layers button) {*m_view.m_flags ^= button;}
+void MiniMap::toggle(Layers const button) {*m_view.m_flags ^= button;}

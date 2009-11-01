@@ -234,7 +234,7 @@ void Editor_Interactive::toggle_mainmenu() {
 	if (m_mainmenu.window)
 		delete m_mainmenu.window;
 	else
-		new Editor_Main_Menu(this, &m_mainmenu);
+		new Editor_Main_Menu(*this, m_mainmenu);
 }
 
 
@@ -242,7 +242,7 @@ void Editor_Interactive::toggle_objectivesmenu() {
 	if (m_objectivesmenu.window)
 		delete m_objectivesmenu.window;
 	else
-		new Editor_Objectives_Menu(this, &m_objectivesmenu);
+		new Editor_Objectives_Menu(*this, m_objectivesmenu);
 }
 
 
@@ -250,7 +250,7 @@ void Editor_Interactive::toggle_variablesmenu() {
 	if (m_variablesmenu.window)
 		delete m_variablesmenu.window;
 	else
-		new Editor_Variables_Menu(*this, &m_variablesmenu);
+		new Editor_Variables_Menu(*this, m_variablesmenu);
 }
 
 
@@ -258,7 +258,7 @@ void Editor_Interactive::toggle_eventmenu() {
 	if (m_eventmenu.window)
 		delete m_eventmenu.window;
 	else
-		new Editor_Event_Menu(*this, &m_eventmenu);
+		new Editor_Event_Menu(*this, m_eventmenu);
 }
 
 void Editor_Interactive::map_clicked() {
@@ -304,7 +304,7 @@ void Editor_Interactive::toggle_playermenu() {
 		delete m_playermenu.window;
 	else {
 		select_tool(tools.set_starting_pos, Editor_Tool::First);
-		new Editor_Player_Menu(*this, &m_playermenu);
+		new Editor_Player_Menu(*this, m_playermenu);
 	}
 
 }
@@ -314,7 +314,7 @@ void Editor_Interactive::toolsize_menu_btn() {
 	if (m_toolsizemenu.window)
 		delete m_toolsizemenu.window;
 	else
-		new Editor_Toolsize_Menu(this, &m_toolsizemenu);
+		new Editor_Toolsize_Menu(*this, m_toolsizemenu);
 }
 
 
@@ -429,7 +429,7 @@ bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 
 		case SDLK_l:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				new Main_Menu_Load_Map (this);
+				new Main_Menu_Load_Map (*this);
 			handled = true;
 			break;
 
@@ -440,7 +440,7 @@ bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
-				new Main_Menu_Save_Map (this);
+				new Main_Menu_Save_Map (*this);
 			handled = true;
 			break;
 
@@ -513,10 +513,7 @@ void Editor_Interactive::reference_player_tribe
 	m_player_tribe_references.push_back(r);
 }
 
-/**
- * Unreference !once!, if referenced many times, this
- * will leace a reference
- */
+/// Unreference !once!, if referenced many times, this will leak a reference.
 void Editor_Interactive::unreference_player_tribe
 	(Widelands::Player_Number const player, void const * const data)
 {

@@ -342,8 +342,8 @@ struct Object_Manager {
 		return it != m_objects.end() ? it->second : 0;
 	}
 
-	void insert(Map_Object *obj);
-	void remove(Map_Object *obj);
+	void insert(Map_Object &);
+	void remove(Map_Object &);
 
 	bool object_still_available(const Map_Object * const t) const {
 		objmap_t::const_iterator it = m_objects.begin();

@@ -49,9 +49,9 @@ inline Editor_Interactive & Editor_Event_Menu::eia() {
 
 
 Editor_Event_Menu::Editor_Event_Menu
-	(Editor_Interactive & parent, UI::UniqueWindow::Registry * registry)
+	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
 	:
-	UI::UniqueWindow(&parent, registry, 590, 380, _("Event Menu"))
+	UI::UniqueWindow(&parent, &registry, 590, 380, _("Event Menu"))
 {
 	int32_t const offsx    =   5;
 	int32_t const offsy    =   5;

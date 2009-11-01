@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,8 +60,8 @@ private:
 	void cs_selected      (uint32_t);
 	void cs_double_clicked(uint32_t);
 
-	UI::Listselect<Widelands::Event &> *m_available_events;
-	UI::Listselect<Widelands::Event &> *m_events;
+	UI::Listselect<Widelands::Event &> * m_available_events;
+	UI::Listselect<Widelands::Event &> * m_events;
 	UI::Callback_Button<Editor_Event_Menu_Edit_EventChain> * m_insert_btn;
 	UI::Callback_Button<Editor_Event_Menu_Edit_EventChain> * m_delete_btn;
 	UI::Callback_Button<Editor_Event_Menu_Edit_EventChain> * m_mvup_btn;

@@ -61,7 +61,7 @@ extern "C" {
 /* like the STRICT of WIN32, we define a pointer that cannot be converted
     from (void*) without cast */
 typedef struct TagzipFile__ {int32_t unused;} zipFile__;
-typedef zipFile__ *zipFile;
+typedef zipFile__ * zipFile;
 #else
 typedef voidp zipFile;
 #endif
@@ -112,7 +112,7 @@ typedef char const * zipcharpc;
 #define APPEND_STATUS_CREATEAFTER   (1)
 #define APPEND_STATUS_ADDINZIP      (2)
 
-extern zipFile ZEXPORT zipOpen OF((const char *pathname, int32_t append));
+extern zipFile ZEXPORT zipOpen OF((char const * pathname, int32_t append));
 /*
   Create a zipfile.  pathname contain on Windows XP a filename like
   "c:\\zlib\\zlib113.zip" or on an Unix computer "zlib/zlib113.zip".  if the

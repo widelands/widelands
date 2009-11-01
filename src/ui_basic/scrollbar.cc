@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,34 +42,31 @@ Scrollbar
 Initialize the scrollbar using default values.
 */
 Scrollbar::Scrollbar
-	(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool horiz) :
-		Panel(parent, x, y, w, h)
+	(Panel * const parent,
+	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
+	 bool const horiz)
+	:
+	Panel           (parent, x, y, w, h),
+	m_horizontal    (horiz),
+	m_force_draw    (false),
+	m_pos           (0),
+	m_singlestepsize(1),
+	m_pagesize      (5),
+	m_steps         (100),
+	m_pressed       (None),
+	m_time_nextact  (0),
+	m_pic_minus
+		(g_gr->get_picture
+		 	(PicMod_UI,
+		 	 horiz ? "pics/scrollbar_left.png"  : "pics/scrollbar_up.png")),
+	m_pic_plus
+		(g_gr->get_picture
+		 	(PicMod_UI,
+		 	 horiz ? "pics/scrollbar_right.png" : "pics/scrollbar_down.png")),
+	m_pic_background
+		(g_gr->get_picture(PicMod_UI, "pics/scrollbar_background.png")),
+	m_pic_buttons   (g_gr->get_picture(PicMod_UI, "pics/but3.png"))
 {
-	m_horizontal = horiz;
-
-	m_pos = 0;
-	m_pagesize = 5;
-	m_singlestepsize = 1;
-	m_steps = 100;
-
-	m_pressed = None;
-
-	if (m_horizontal)
-	{
-		m_pic_minus = g_gr->get_picture(PicMod_UI,  "pics/scrollbar_left.png");
-		m_pic_plus = g_gr->get_picture(PicMod_UI,  "pics/scrollbar_right.png");
-	} else {
-		m_pic_minus = g_gr->get_picture(PicMod_UI,  "pics/scrollbar_up.png");
-		m_pic_plus = g_gr->get_picture(PicMod_UI,  "pics/scrollbar_down.png");
-	}
-
-	m_pic_background = g_gr->get_picture
-		(PicMod_UI, "pics/scrollbar_background.png");
-	m_pic_buttons = g_gr->get_picture(PicMod_UI,  "pics/but3.png");
-
-	m_time_nextact = 0;
-	m_force_draw = false;
-
 	set_think(true);
 }
 

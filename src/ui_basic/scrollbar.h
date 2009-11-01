@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,8 @@ struct Scrollbar : public Panel {
 
 public:
 	Scrollbar
-		(Panel *parent, int32_t x, int32_t y, uint32_t w, uint32_t h, bool horiz);
+		(Panel * parent,
+		 int32_t x, int32_t y, uint32_t w, uint32_t h, bool horiz);
 
 	Signal1<int32_t> moved;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,7 +55,7 @@ struct StreamWrite {
 	virtual void Flush();
 
 	//TODO: implement an overloaded method that accepts fmt as std::string
-	void Printf(const char *fmt, ...) __attribute__((format(printf, 2, 3)));
+	void Printf(char const *, ...) __attribute__((format(printf, 2, 3)));
 
 	void   Signed8  (int8_t const x) {Data(&x, 1);}
 	void Unsigned8 (uint8_t const x) {Data(&x, 1);}

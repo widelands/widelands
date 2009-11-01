@@ -364,12 +364,14 @@ void Soldier::draw
 			(owner().get_playercolor()->r(),
 			 owner().get_playercolor()->g(),
 			 owner().get_playercolor()->b());
-		/*if (fraction <= 0.15)
+#if 0
+		if (fraction <= 0.15)
 			color = RGBColor(255, 0, 0);
 		else if (fraction <= 0.5)
 			color = RGBColor(255, 255, 0);
 		else
-			color = RGBColor(17, 192, 17);*/
+			color = RGBColor(17, 192, 17);
+#endif
 		assert(2 <= r.w);
 		assert(2 <= r.h);
 		dst.fill_rect

@@ -85,7 +85,7 @@ int32_t ZipFilesystem::FindFiles
 	if (path_in[0] != '/')
 		path = '/';
 	path += path_in;
-	if (path[path.size() - 1] != '/')
+	if (*path.rbegin() != '/')
 		path += '/';
 
 	unzCloseCurrentFile(m_unzipfile);
@@ -145,7 +145,7 @@ bool ZipFilesystem::FileExists(std::string const & path_in) {
 			 0, 0, 0, 0);
 
 		std::string complete_filename = &filename_inzip[m_basename.size()];
-		if (complete_filename[complete_filename.size() - 1] == '/')
+		if (*complete_filename.rbegin() == '/')
 			complete_filename.resize(complete_filename.size() - 1);
 
 		if (path == complete_filename)
@@ -265,7 +265,7 @@ void ZipFilesystem::MakeDirectory(std::string const & dirname) {
 	complete_file            += '/';
 	complete_file            += dirname;
 	assert(dirname.size());
-	if (complete_file[complete_file.size() - 1] != '/')
+	if (*complete_file.rbegin() != '/')
 		complete_file += '/';
 
 	switch

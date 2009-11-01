@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,11 +53,11 @@ public:
 		return _neighbours[idx];
 	}
 
-	void set_waitcost(int32_t wc) {_waitcost = wc;}
-	int32_t get_waitcost() {return _waitcost;}
+	void set_waitcost(int32_t const wc) {_waitcost = wc;}
+	int32_t get_waitcost() const {return _waitcost;}
 	Coords get_position() const {return _position;}
 
-	void get_neighbours(RoutingNodeNeighbours *);
+	void get_neighbours(RoutingNodeNeighbours &);
 
 	// test functionality
 	bool all_members_zeroed();
@@ -69,11 +69,11 @@ private:
 	int32_t _waitcost;
 	Coords _position;
 };
-void TestingRoutingNode::get_neighbours(RoutingNodeNeighbours * const n) {
+void TestingRoutingNode::get_neighbours(RoutingNodeNeighbours & n) {
 	container_iterate_const(Neigbours, _neighbours, i)
 		// second parameter is walktime in ms from this flag to the neighbour.
 		// only depends on slope
-		n->push_back(RoutingNodeNeighbour(*i.current, 1000));
+		n.push_back(RoutingNodeNeighbour(*i.current, 1000));
 }
 bool TestingRoutingNode::all_members_zeroed() {
 	bool integers_zero =

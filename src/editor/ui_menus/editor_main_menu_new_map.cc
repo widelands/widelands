@@ -39,11 +39,11 @@
 
 using Widelands::NUMBER_OF_MAP_DIMENSIONS;
 
-Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
+Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 	:
 	UI::Window
-		(parent,
-		 (parent->get_w() - 140) / 2, (parent->get_h() - 150) / 2, 140, 150,
+		(&parent,
+		 (parent.get_w() - 140) / 2, (parent.get_h() - 150) / 2, 140, 150,
 		 _("New Map")),
 	m_currentworld(0)
 {
@@ -55,7 +55,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive *parent)
 	int32_t const height  = 20;
 	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
-	Widelands::Map const & map = parent->egbase().map();
+	Widelands::Map const & map = parent.egbase().map();
 	{
 		Widelands::Extent const map_extent = map.extent();
 		for (m_w = 0; Widelands::MAP_DIMENSIONS[m_w] < map_extent.w; ++m_w) {}

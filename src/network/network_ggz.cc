@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2008 by the Widelands Development Team
+ * Copyright (C) 2004-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -354,7 +354,7 @@ void NetGGZ::data()
 		throw warning
 			(_("Connection problem"), "%s",
 			 _
-			 	("Your Server was not reachable from the internet.\n"
+			 	("Your Server was not reachable from the Internet.\n"
 			 	 "Please try to solve the problem - Reading the notes\n"
 			 	 "at http://wl.widelands.org/wiki/InternetGaming can\n"
 			 	 "be advantageous."));
@@ -499,7 +499,7 @@ void NetGGZ::event_server(uint32_t const id, void const * const cbdata)
 		}
 		formatedGGZChat
 			(_
-			 	("NOTE: The internet gaming implementation is in very early "
+			 	("NOTE: The Internet gaming implementation is in very early "
 			 	 "state."),
 			 "",
 			 true);
@@ -950,14 +950,15 @@ void NetGGZ::send(std::string const & msg)
 
 
 /// Called when a chatmessage was received.
-void NetGGZ::recievedGGZChat(const void *cbdata)
+void NetGGZ::recievedGGZChat(void const * const cbdata)
 {
-	const GGZChatEventData * msg = static_cast<const GGZChatEventData *>(cbdata);
-	bool system = msg->type == GGZ_CHAT_ANNOUNCE;
-	std::string recipient;
-	if (msg->type == GGZ_CHAT_PERSONAL)
-		recipient = username;
-	formatedGGZChat(msg->message, msg->sender, system, recipient);
+	GGZChatEventData const * const msg =
+		static_cast<GGZChatEventData const *>(cbdata);
+	formatedGGZChat
+		(msg->message,
+		 msg->sender,
+		 msg->type == GGZ_CHAT_ANNOUNCE,
+		 msg->type == GGZ_CHAT_PERSONAL ? username : std::string());
 }
 
 

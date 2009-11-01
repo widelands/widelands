@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #include "streamwrite.h"
 #include "wexception.h"
 
-#include <stdarg.h>
+#include <cstdarg>
 
 StreamWrite::~StreamWrite() {}
 
@@ -29,7 +29,7 @@ void StreamWrite::Flush()
 	// no-op as default implementation
 }
 
-void StreamWrite::Printf(const char *fmt, ...)
+void StreamWrite::Printf(char const * const fmt, ...)
 {
 	//  Try to do formatting on the stack first, but fallback to heap
 	//  allocations to accommodate strings of arbitrary length.

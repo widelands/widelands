@@ -230,7 +230,7 @@ DisconnectException::~DisconnectException() throw ()
 {
 }
 
-const char *DisconnectException::what() const throw ()
+char const * DisconnectException::what() const throw ()
 {
 	return m_what.c_str();
 }

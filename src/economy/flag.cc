@@ -139,7 +139,7 @@ Flag & Flag::base_flag()
 /**
  * Call this only from Economy code!
 */
-void Flag::set_economy(Economy *e)
+void Flag::set_economy(Economy * const e)
 {
 	Economy * const old = get_economy();
 
@@ -220,7 +220,7 @@ void Flag::detach_road(int32_t const dir)
 /**
  * Return neighbouring flags.
 */
-void Flag::get_neighbours(RoutingNodeNeighbours *neighbours)
+void Flag::get_neighbours(RoutingNodeNeighbours & neighbours)
 {
 	for (int8_t i = 0; i < 6; ++i) {
 		Road * const road = m_roads[i];
@@ -238,7 +238,7 @@ void Flag::get_neighbours(RoutingNodeNeighbours *neighbours)
 		RoutingNodeNeighbour n(f, nb_cost);
 
 		assert(n.get_neighbour() != this);
-		neighbours->push_back(n);
+		neighbours.push_back(n);
 	}
 
 	// I guess this would be the place to add other ports if a port building
@@ -250,18 +250,14 @@ void Flag::get_neighbours(RoutingNodeNeighbours *neighbours)
 /**
  * Return the road that leads to the given flag.
 */
-Road *Flag::get_road(Flag *flag)
+Road * Flag::get_road(Flag & flag)
 {
-	for (int8_t i = 0; i < 6; ++i) {
-		Road * const road = m_roads[i];
-		if (!road)
-			continue;
-
-		if
-			(&road->get_flag(Road::FlagStart) == flag ||
-			 &road->get_flag(Road::FlagEnd)   == flag)
-			return road;
-	}
+	for (int8_t i = 0; i < 6; ++i)
+		if (Road * const road = m_roads[i])
+			if
+				(&road->get_flag(Road::FlagStart) == &flag ||
+				 &road->get_flag(Road::FlagEnd)   == &flag)
+				return road;
 
 	return 0;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ struct Editor_Interactive;
 
 /// The tool size window/menu.
 struct Editor_Toolsize_Menu : public UI::UniqueWindow {
-	Editor_Toolsize_Menu(Editor_Interactive *, UI::UniqueWindow::Registry *);
+	Editor_Toolsize_Menu(Editor_Interactive &, UI::UniqueWindow::Registry &);
 	void update(uint32_t);
 
 private:

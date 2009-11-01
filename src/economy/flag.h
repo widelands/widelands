@@ -83,8 +83,8 @@ public:
 	virtual Flag & base_flag();
 
 	Coords get_position() const {return m_position;}
-	void get_neighbours(RoutingNodeNeighbours *);
-	int32_t get_waitcost() {return m_item_filled;}
+	void get_neighbours(RoutingNodeNeighbours &);
+	int32_t get_waitcost() const {return m_item_filled;}
 
 	virtual void set_economy(Economy *);
 
@@ -101,7 +101,7 @@ public:
 	void attach_road(int32_t dir, Road *);
 	void detach_road(int32_t dir);
 
-	Road * get_road(Flag *);
+	Road * get_road(Flag &);
 
 	bool is_dead_end() const;
 

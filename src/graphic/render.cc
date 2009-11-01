@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -629,8 +629,7 @@ AnimationGfx::AnimationGfx(AnimationData const * const data) :
 end:
 	if (m_plrframes[0].empty())
 		throw wexception
-			("Animation %s has no frames",
-			 data->picnametempl.c_str());
+			("animation %s has no frames", data->picnametempl.c_str());
 
 	if (m_pcmasks.size() and m_pcmasks.size() < m_plrframes[0].size())
 		throw wexception

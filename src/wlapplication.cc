@@ -243,7 +243,7 @@ WLApplication * WLApplication::get(int const argc, char const * * argv) {
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  */
-WLApplication::WLApplication(const int argc, const char **argv):
+WLApplication::WLApplication(int const argc, char const * const * const argv) :
 m_commandline          (std::map<std::string, std::string>()),
 m_game_type            (NONE),
 journal                (0),
@@ -417,7 +417,7 @@ void WLApplication::run()
  *
  * \todo Catch Journalfile_error
  */
-bool WLApplication::poll_event(SDL_Event *ev, const bool throttle) {
+bool WLApplication::poll_event(SDL_Event & ev, bool const throttle) {
 	bool haveevent = false;
 
 restart:
@@ -434,28 +434,28 @@ restart:
 			journal->stop_playback();
 		}
 	} else {
-		haveevent = SDL_PollEvent(ev);
+		haveevent = SDL_PollEvent(&ev);
 
 		if (haveevent) {
 			// We edit mouse motion events in here, so that
 			// differences caused by GrabInput or mouse speed
 			// settings are invisible to the rest of the code
-			switch (ev->type) {
+			switch (ev.type) {
 			case SDL_MOUSEMOTION:
-				ev->motion.xrel += m_mouse_compensate_warp.x;
-				ev->motion.yrel += m_mouse_compensate_warp.y;
+				ev.motion.xrel += m_mouse_compensate_warp.x;
+				ev.motion.yrel += m_mouse_compensate_warp.y;
 				m_mouse_compensate_warp = Point(0, 0);
 
 				if (m_mouse_locked) {
 					warp_mouse(m_mouse_position);
 
-					ev->motion.x = m_mouse_position.x;
-					ev->motion.y = m_mouse_position.y;
+					ev.motion.x = m_mouse_position.x;
+					ev.motion.y = m_mouse_position.y;
 				}
 
 				break;
 			case SDL_USEREVENT:
-				if (ev->user.code == CHANGE_MUSIC)
+				if (ev.user.code == CHANGE_MUSIC)
 					g_sound_handler.change_music();
 
 				break;
@@ -467,40 +467,32 @@ restart:
 	if (journal->is_recording()) {
 		if (haveevent)
 			journal->record_event(ev);
-		else {
+		else if (throttle && journal->is_playingback()) {
 			// Implement the throttle to avoid very quick inner mainloops when
 			// recoding a session
-			if (throttle && journal->is_playingback()) {
-				static int32_t lastthrottle = 0;
-				int32_t time = SDL_GetTicks();
+			static int32_t lastthrottle = 0;
+			int32_t const time = SDL_GetTicks();
 
-				if (time - lastthrottle < 10)
-					goto restart;
-
-				lastthrottle = time;
-			}
-
-			journal->set_idle_mark();
-		}
-	}
-	else
-	{ //not recording
-		if (haveevent)
-		{
-			// Eliminate any unhandled events to make sure record
-			// and playback are _really_ the same.
-			// Yes I know, it's overly paranoid but hey...
-			switch (ev->type) {
-			case SDL_KEYDOWN:
-			case SDL_KEYUP:
-			case SDL_MOUSEBUTTONDOWN:
-			case SDL_MOUSEBUTTONUP:
-			case SDL_MOUSEMOTION:
-			case SDL_QUIT:
-				break;
-			default:
+			if (time - lastthrottle < 10)
 				goto restart;
-			}
+
+			lastthrottle = time;
+		}
+
+		journal->set_idle_mark();
+	} else if (haveevent) {
+		//  Eliminate any unhandled events to make sure that record and playback
+		//  are _really_ the same. Yes I know, it's overly paranoid but hey...
+		switch (ev.type) {
+		case SDL_KEYDOWN:
+		case SDL_KEYUP:
+		case SDL_MOUSEBUTTONDOWN:
+		case SDL_MOUSEBUTTONUP:
+		case SDL_MOUSEMOTION:
+		case SDL_QUIT:
+			break;
+		default:
+			goto restart;
 		}
 	}
 
@@ -511,7 +503,7 @@ restart:
 /**
  * Pump the event queue, get packets from the network, etc...
  */
-void WLApplication::handle_input(const InputCallback *cb)
+void WLApplication::handle_input(InputCallback const * cb)
 {
 	bool gotevents = false;
 	SDL_Event ev; //  Valgrind says:
@@ -544,7 +536,7 @@ void WLApplication::handle_input(const InputCallback *cb)
 	}
 
 	// Usual event queue
-	while (poll_event(&ev, !gotevents)) {
+	while (poll_event(ev, !gotevents)) {
 
 		gotevents = true;
 
@@ -557,14 +549,12 @@ void WLApplication::handle_input(const InputCallback *cb)
 		switch (ev.type) {
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
-			if (ev.key.keysym.sym == SDLK_F10) // TEMP - get out of here quick
-			{
+			if (ev.key.keysym.sym == SDLK_F10) { //  TEMP - get out of here quick
 				if (ev.type == SDL_KEYDOWN)
 					m_should_die = true;
 				break;
 			}
-			if (ev.key.keysym.sym == SDLK_F11) // take screenshot
-			{
+			if (ev.key.keysym.sym == SDLK_F11) { //  take screenshot
 				if (ev.type == SDL_KEYDOWN)
 					for (uint32_t nr = 0; nr < 10000; ++nr) {
 						char buffer[256];
@@ -643,24 +633,22 @@ void WLApplication::handle_input(const InputCallback *cb)
  * \todo Use our internally defined time type
  */
 int32_t WLApplication::get_time() {
-	Uint32 time;
+	uint32_t time = SDL_GetTicks();
 
-	time = SDL_GetTicks();
-	journal->timestamp_handler(&time); //might change the time when playing back!
+	//  might change the time when playing back!
+	journal->timestamp_handler(time);
 
 	return time;
 }
 
-/**
- * Instantaneously move the mouse cursor without creating a motion event.
- *
- * SDL_WarpMouse() *will* create a mousemotion event, which we do not want. As a
- * workaround, we store the delta in m_mouse_compensate_warp and use that to
- * eliminate the motion event in poll_event()
- * \todo Should this method have to care about playback at all???
- *
- * \param position The new mouse position
- */
+/// Instantaneously move the mouse cursor without creating a motion event.
+///
+/// SDL_WarpMouse() *will* create a mousemotion event, which we do not want. As
+/// a workaround, we store the delta in m_mouse_compensate_warp and use that to
+/// eliminate the motion event in poll_event()
+/// \todo Should this method have to care about playback at all???
+///
+/// \param position The new mouse position
 void WLApplication::warp_mouse(const Point position)
 {
 	m_mouse_position = position;
@@ -972,7 +960,8 @@ void WLApplication::shutdown_hardware()
  * \param argc The number of command line arguments
  * \param argv Array of command line arguments
  */
-void WLApplication::parse_commandline(const int argc, const char **argv)
+void WLApplication::parse_commandline
+	(int const argc, char const * const * const argv)
 {
 	//TODO: EXENAME gets written out on windows!
 	m_commandline["EXENAME"] = argv[0];

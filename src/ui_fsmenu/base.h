@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@
  * MENU_XRES and MENU_YRES and is a modal UI Element
  */
 struct Fullscreen_Menu_Base : public UI::Panel {
-	Fullscreen_Menu_Base(const char *bgpic);
+	Fullscreen_Menu_Base(char const * bgpic);
 	~Fullscreen_Menu_Base();
 
 	virtual void draw(RenderTarget &);

@@ -38,8 +38,8 @@ struct WarehouseSupply : public Supply {
 	void set_nrworkers(Ware_Index);
 	void set_nrwares  (Ware_Index);
 
-	const WareList &get_wares() const {return m_wares;}
-	const WareList &get_workers() const {return m_workers;}
+	WareList const & get_wares  () const {return m_wares;}
+	WareList const & get_workers() const {return m_workers;}
 	uint32_t stock_wares  (Ware_Index const i) const {
 		return m_wares  .stock(i);
 	}

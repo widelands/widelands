@@ -102,8 +102,8 @@ struct Economy {
 	void    add_workers(Ware_Index, uint32_t count = 1);
 	void remove_workers(Ware_Index, uint32_t count = 1);
 
-	void add_warehouse(Warehouse *wh);
-	void remove_warehouse(Warehouse *wh);
+	void    add_warehouse(Warehouse &);
+	void remove_warehouse(Warehouse &);
 	uint32_t get_nr_warehouses() const {return m_warehouses.size();}
 
 	void    add_request(Request &);

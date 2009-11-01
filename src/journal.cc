@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -145,7 +145,7 @@ void Journal::read(uint32_t & v) {
  * \overload
  * \sa read(SDLKey v)
  */
-void Journal::read(SDLKey &v)
+void Journal::read(SDLKey & v)
 {
 	//Look at read(SDLKey v) before changing code here!
 	//Additional reminder: SDLKey is an enum which are signed int32_t !
@@ -160,7 +160,7 @@ void Journal::read(SDLKey &v)
  * \overload
  * \sa read(SDLKey v)
  */
-void Journal::read(SDLMod &v)
+void Journal::read(SDLMod & v)
 {
 	//Look at read(SDLMod v) before changing code here!
 	//Additional reminder: SDLKey is an enum which are signed int32_t !
@@ -311,7 +311,7 @@ void Journal::stop_playback()
  *
  * \param e The event to be recorded
  */
-void Journal::record_event(SDL_Event *e)
+void Journal::record_event(SDL_Event const & e)
 {
 	if (!m_record)
 		return;
@@ -323,62 +323,62 @@ void Journal::record_event(SDL_Event *e)
 		//If they were outside, they'd get executed on every mainloop
 		//iteration, which would yield a) huge files and b) lots of
 		//completely unnecessary overhad.
-		switch (e->type) {
+		switch (e.type) {
 		case SDL_KEYDOWN:
 			write(static_cast<uint8_t>(RFC_EVENT));
 			write(static_cast<uint8_t>(RFC_KEYDOWN));
-			write(e->key.keysym.mod);
-			write(e->key.keysym.sym);
-			write(e->key.keysym.unicode);
-			m_recordstream<<std::flush;
+			write(e.key.keysym.mod);
+			write(e.key.keysym.sym);
+			write(e.key.keysym.unicode);
+			m_recordstream << std::flush;
 			break;
 		case SDL_KEYUP:
 			write(static_cast<uint8_t>(RFC_EVENT));
 			write(static_cast<uint8_t>(RFC_KEYUP));
-			write(e->key.keysym.mod);
-			write(e->key.keysym.sym);
-			write(e->key.keysym.unicode);
-			m_recordstream<<std::flush;
+			write(e.key.keysym.mod);
+			write(e.key.keysym.sym);
+			write(e.key.keysym.unicode);
+			m_recordstream << std::flush;
 			break;
 		case SDL_MOUSEBUTTONDOWN:
 			write(static_cast<uint8_t>(RFC_EVENT));
 			write(static_cast<uint8_t>(RFC_MOUSEBUTTONDOWN));
-			write(e->button.button);
-			write(e->button.x);
-			write(e->button.y);
-			write(e->button.state);
-			m_recordstream<<std::flush;
+			write(e.button.button);
+			write(e.button.x);
+			write(e.button.y);
+			write(e.button.state);
+			m_recordstream << std::flush;
 			break;
 		case SDL_MOUSEBUTTONUP:
 			write(static_cast<uint8_t>(RFC_EVENT));
 			write(static_cast<uint8_t>(RFC_MOUSEBUTTONUP));
-			write(e->button.button);
-			write(e->button.x);
-			write(e->button.y);
-			write(e->button.state);
-			m_recordstream<<std::flush;
+			write(e.button.button);
+			write(e.button.x);
+			write(e.button.y);
+			write(e.button.state);
+			m_recordstream << std::flush;
 			break;
 		case SDL_MOUSEMOTION:
 			write(static_cast<uint8_t>(RFC_EVENT));
 			write(static_cast<uint8_t>(RFC_MOUSEMOTION));
-			write(e->motion.state);
-			write(e->motion.x);
-			write(e->motion.y);
-			write(e->motion.xrel);
-			write(e->motion.yrel);
-			m_recordstream<<std::flush;
+			write(e.motion.state);
+			write(e.motion.x);
+			write(e.motion.y);
+			write(e.motion.xrel);
+			write(e.motion.yrel);
+			m_recordstream << std::flush;
 			break;
 		case SDL_QUIT:
 			write(static_cast<uint8_t>(RFC_EVENT));
 			write(static_cast<uint8_t>(RFC_QUIT));
-			m_recordstream<<std::flush;
+			m_recordstream << std::flush;
 			break;
 		default:
 			// can't really do anything useful with this event
 			break;
 		}
 	}
-	catch (std::ofstream::failure f) {
+	catch (std::ofstream::failure const &) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Failed to write to record file. Recording deactivated.\n");
@@ -394,7 +394,7 @@ void Journal::record_event(SDL_Event *e)
  *
  * \param e The event being returned
  */
-bool Journal::read_event(SDL_Event *e)
+bool Journal::read_event(SDL_Event & e)
 {
 	if (!m_playback)
 		return false;
@@ -410,41 +410,41 @@ bool Journal::read_event(SDL_Event *e)
 			read(eventtype);
 			switch (eventtype) {
 			case RFC_KEYDOWN:
-				e->type = SDL_KEYDOWN;
-				read(e->key.keysym.mod);
-				read(e->key.keysym.sym);
-				read(e->key.keysym.unicode);
+				e.type = SDL_KEYDOWN;
+				read(e.key.keysym.mod);
+				read(e.key.keysym.sym);
+				read(e.key.keysym.unicode);
 				break;
 			case RFC_KEYUP:
-				e->type = SDL_KEYUP;
-				read(e->key.keysym.mod);
-				read(e->key.keysym.sym);
-				read(e->key.keysym.unicode);
+				e.type = SDL_KEYUP;
+				read(e.key.keysym.mod);
+				read(e.key.keysym.sym);
+				read(e.key.keysym.unicode);
 				break;
 			case RFC_MOUSEBUTTONDOWN:
-				e->type = SDL_MOUSEBUTTONDOWN;
-				read(e->button.button);
-				read(e->button.x);
-				read(e->button.y);
-				read(e->button.state);
+				e.type = SDL_MOUSEBUTTONDOWN;
+				read(e.button.button);
+				read(e.button.x);
+				read(e.button.y);
+				read(e.button.state);
 				break;
 			case RFC_MOUSEBUTTONUP:
-				e->type = SDL_MOUSEBUTTONUP;
-				read(e->button.button);
-				read(e->button.x);
-				read(e->button.y);
-				read(e->button.state);
+				e.type = SDL_MOUSEBUTTONUP;
+				read(e.button.button);
+				read(e.button.x);
+				read(e.button.y);
+				read(e.button.state);
 				break;
 			case RFC_MOUSEMOTION:
-				e->type = SDL_MOUSEMOTION;
-				read(e->motion.state);
-				read(e->motion.x);
-				read(e->motion.y);
-				read(e->motion.xrel);
-				read(e->motion.yrel);
+				e.type = SDL_MOUSEMOTION;
+				read(e.motion.state);
+				read(e.motion.x);
+				read(e.motion.y);
+				read(e.motion.xrel);
+				read(e.motion.yrel);
 				break;
 			case RFC_QUIT:
-				e->type = SDL_QUIT;
+				e.type = SDL_QUIT;
 				break;
 			default:
 				throw BadEvent_error(m_playbackname, eventtype);
@@ -461,7 +461,7 @@ bool Journal::read_event(SDL_Event *e)
 		}
 
 		return haveevent;
-	} catch (std::ifstream::failure f) {
+	} catch (std::ifstream::failure const &) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Failed to read from journal file. Playback deactivated.\n");
@@ -476,16 +476,16 @@ bool Journal::read_event(SDL_Event *e)
  * If necessary, they will be recorded. On playback, they will be modified to
  * show the recorded time instead of the current time.
  */
-void Journal::timestamp_handler(uint32_t * const stamp)
+void Journal::timestamp_handler(uint32_t & stamp)
 {
 	if (m_record) {
 		write(static_cast<uint8_t>(RFC_GETTIME));
-		write(*stamp);
+		write(stamp);
 	}
 
 	if (m_playback) {
 		ensure_code(static_cast<uint8_t>(RFC_GETTIME));
-		read(*stamp);
+		read(stamp);
 	}
 }
 

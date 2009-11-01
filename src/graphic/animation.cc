@@ -75,12 +75,12 @@ void EncodeData::parse(Section & s)
 Add another encode data. Already existing color codes are overwritten
 ===============
 */
-void EncodeData::add(const EncodeData *other)
+void EncodeData::add(EncodeData const & other)
 {
-	if (other->hasplrclrs == Old) {
+	if (other.hasplrclrs == Old) {
 		hasplrclrs = Old;
 		for (int32_t i = 0; i < 4; ++i)
-			plrclr[i] = other->plrclr[i];
+			plrclr[i] = other.plrclr[i];
 	}
 }
 
@@ -188,7 +188,7 @@ uint32_t AnimationManager::get
 
 	// Get descriptive data
 	if (encdefaults)
-		ad.encdata.add(encdefaults);
+		ad.encdata.add(*encdefaults);
 
 	ad.encdata.parse(s);
 

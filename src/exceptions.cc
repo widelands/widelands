@@ -46,7 +46,7 @@ throw ()
 
 _wexception::~_wexception() throw () {}
 
-const char *_wexception::what() const throw ()
+char const * _wexception::what() const throw ()
 {
 	return m_what.c_str();
 }
@@ -70,12 +70,12 @@ warning::warning(char const * const et, char const * const em, ...) throw () :
 
 warning::~warning() throw () {}
 
-const char *warning::title() const throw ()
+char const * warning::title() const throw ()
 {
 	return m_title.c_str();
 }
 
-const char *warning::what() const throw ()
+char const * warning::what() const throw ()
 {
 	return m_what.c_str();
 }

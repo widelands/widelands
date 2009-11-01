@@ -304,32 +304,28 @@ void Economy::remove_workers(Ware_Index const id, uint32_t const count)
  * This also adds the wares in the warehouse to the economy. However, if wares
  * are added to the warehouse in the future, add_wares() must be called.
 */
-void Economy::add_warehouse(Warehouse *wh)
+void Economy::add_warehouse(Warehouse & wh)
 {
-	m_warehouses.push_back(wh);
+	m_warehouses.push_back(&wh);
 }
 
 /**
  * Remove the warehouse and its wares from the economy.
 */
-void Economy::remove_warehouse(Warehouse *wh)
+void Economy::remove_warehouse(Warehouse & wh)
 {
-	uint32_t i;
-	for (i = 0; i < m_warehouses.size(); ++i)
-		if (m_warehouses[i] == wh) {
-			if (i < m_warehouses.size() - 1)
-				m_warehouses[i] = m_warehouses[m_warehouses.size() - 1];
-			break;
+	for (size_t i = 0; i < m_warehouses.size(); ++i)
+		if (m_warehouses[i] == &wh) {
+			m_warehouses[i] = *m_warehouses.rbegin();
+			m_warehouses.pop_back();
+			return;
 		}
 
 
 	//  This assert was modified, since on loading, warehouses might try to
 	//  remove themselves from their own economy, though they weren't added
 	//  (since they weren't initialized)
-	assert(i != m_warehouses.size() || m_warehouses.empty());
-
-	if (m_warehouses.size())
-		m_warehouses.pop_back();
+	assert(m_warehouses.empty());
 }
 
 /**
@@ -496,11 +492,11 @@ void Economy::_split(Flag & initial_flag)
 		//  them to the list (note: roads and buildings are reassigned via
 		//  Flag::set_economy)
 		RoutingNodeNeighbours neighbours;
-		flag.get_neighbours(&neighbours);
+		flag.get_neighbours(neighbours);
 
 		for (uint32_t i = 0; i < neighbours.size(); ++i) {
 			/// \todo the next line shouldn't need any casts at all
-			Flag &n = *dynamic_cast<Flag *>(neighbours[i].get_neighbour());
+			Flag & n = *dynamic_cast<Flag *>(neighbours[i].get_neighbour());
 
 			if (n.get_economy() == this)
 				open.push_back(&n);

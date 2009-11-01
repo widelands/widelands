@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,11 +42,11 @@
 using Widelands::NUMBER_OF_MAP_DIMENSIONS;
 
 Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
-	(Editor_Interactive * const parent)
+	(Editor_Interactive & parent)
 	:
 	UI::Window
-		(parent,
-		 (parent->get_w() - 220) / 2, (parent->get_h() - 250) / 2, 220, 250,
+		(&parent,
+		 (parent.get_w() - 220) / 2, (parent.get_h() - 250) / 2, 220, 250,
 		 _("New Random Map")),
 	m_currentworld(0)
 {
@@ -80,8 +80,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	rng.rand();
 	m_mapNumber = rng.rand();
 	snprintf
-		(buffer, sizeof(buffer), "%u",
-		 static_cast<unsigned int>(m_mapNumber));
+		(buffer, sizeof(buffer), "%u", static_cast<unsigned int>(m_mapNumber));
 	m_nrEditbox->setText(buffer);
 	posy += height + spacing + spacing + spacing;
 
@@ -89,7 +88,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	// ---------- Width  ----------
 
 
-	Widelands::Map const & map = parent->egbase().map();
+	Widelands::Map const & map = parent.egbase().map();
 	{
 		Widelands::Extent const map_extent = map.extent();
 		for (m_w = 0; Widelands::MAP_DIMENSIONS[m_w] < map_extent.w; ++m_w) {}

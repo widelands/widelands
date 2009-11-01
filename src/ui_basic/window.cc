@@ -102,7 +102,7 @@ Window::Window
 /**
  * Replace the current title with a new one
 */
-void Window::set_title(const char *text)
+void Window::set_title(char const * const text)
 {
 	m_title = text;
 	update(0, 0, get_w(), TP_B_PIXMAP_THICKNESS);

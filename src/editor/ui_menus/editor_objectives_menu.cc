@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,14 +44,16 @@ using Widelands::Trigger;
  */
 struct Edit_Objective_Window : public UI::Window {
 	Edit_Objective_Window
-		(Editor_Interactive * const parent,
+		(Editor_Interactive & parent,
 		 UI::Table<Objective &>::Entry_Record &);
 
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
-	Editor_Interactive                   * m_parent;
+	Editor_Interactive & eia() {
+		return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
+	}
 	UI::Table<Objective &>::Entry_Record & m_te;
 	UI::EditBox                          * m_name;
 	UI::Multiline_Editbox                * m_descr;
@@ -61,12 +63,10 @@ private:
 };
 
 Edit_Objective_Window::Edit_Objective_Window
-	(Editor_Interactive                   * const parent,
-	 UI::Table<Objective &>::Entry_Record &       te)
-:
-UI::Window(parent, 0, 0, 250, 85, _("Edit Objective")),
-m_parent  (parent),
-m_te      (te)
+	(Editor_Interactive & parent, UI::Table<Objective &>::Entry_Record & te)
+	:
+	UI::Window(&parent, 0, 0, 250, 85, _("Edit Objective")),
+	m_te      (te)
 {
 	int32_t const spacing = 5;
 	Point         pos       (get_inner_w() - STATEBOX_WIDTH - spacing, 5);
@@ -160,16 +160,19 @@ void Edit_Objective_Window::clicked_ok() {
 }
 
 
+inline Editor_Interactive & Editor_Objectives_Menu::eia() {
+	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
+}
+
 /**
  * Create all the buttons etc...
 */
 #define spacing 5
 Editor_Objectives_Menu::Editor_Objectives_Menu
-		(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
-:
-UI::UniqueWindow(parent, registry, 410, 330, _("Objectives Menu")),
-m_parent(parent),
-m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
+	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
+	:
+	UI::UniqueWindow(&parent, &registry, 410, 330, _("Objectives Menu")),
+	m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 {
 	m_table.add_column(270, _("Name"));
 	m_table.add_column (60, _("Visible"));
@@ -215,7 +218,7 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 			 posx, get_inner_h() - 20, 0, 0,
 			 std::string(), UI::Align_CenterLeft);
 
-	Manager<Objective> & mom = m_parent->egbase().map().mom();
+	Manager<Objective> & mom = eia().egbase().map().mom();
 	Manager<Objective>::Index const nr_objectives = mom.size();
 	for (Manager<Objective>::Index i = 0; i < nr_objectives; ++i)
 		insert_objective(mom[i]);
@@ -233,7 +236,7 @@ m_table(this, 5, 25, get_inner_w() - 2 * spacing, get_inner_h() - 60)
 void Editor_Objectives_Menu::clicked_new() {
 	char buffer[256];
 
-	Widelands::Map & map = m_parent->egbase().map();
+	Widelands::Map & map = eia().egbase().map();
 	Manager<Objective> & mom = map.mom();
 	Manager<Trigger>   & mtm = map.mtm();
 	for (uint32_t n = 1;; ++n) {
@@ -254,7 +257,7 @@ void Editor_Objectives_Menu::clicked_new() {
 }
 
 void Editor_Objectives_Menu::clicked_edit() {
-	Edit_Objective_Window evw(m_parent, m_table.get_selected_record());
+	Edit_Objective_Window evw(eia(), m_table.get_selected_record());
 	if (evw.run()) {
 		m_table.sort();
 		m_trigger->set_text
@@ -263,7 +266,7 @@ void Editor_Objectives_Menu::clicked_edit() {
 }
 
 void Editor_Objectives_Menu::clicked_del() {
-	Widelands::Map & map = m_parent->egbase().map();
+	Widelands::Map & map = eia().egbase().map();
 	Trigger * trigger;
 	{
 		Objective & obj = m_table.get_selected();
@@ -295,7 +298,7 @@ void Editor_Objectives_Menu::clicked_del() {
 			str += '\n';
 		}
 		UI::WLMessageBox mmb
-			(m_parent, _("Note"), str.c_str(), UI::WLMessageBox::OK);
+			(&eia(), _("Note"), str.c_str(), UI::WLMessageBox::OK);
 		mmb.run();
 	} else
 		map.mtm().remove(*trigger);

@@ -204,7 +204,7 @@ struct PlayerImmovable : public BaseImmovable {
 
 	virtual Flag & base_flag() = 0;
 
-	virtual void set_economy(Economy *e);
+	virtual void set_economy(Economy *);
 
 	virtual void    add_worker(Worker &);
 	virtual void remove_worker(Worker &);

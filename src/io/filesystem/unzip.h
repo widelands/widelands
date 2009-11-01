@@ -61,7 +61,7 @@ extern "C" {
 /* like the STRICT of WIN32, we define a pointer that cannot be converted
     from (void*) without cast */
 typedef struct TagunzFile__ {int32_t unused;} unzFile__;
-typedef unzFile__ *unzFile;
+typedef unzFile__ * unzFile;
 #else
 typedef voidp unzFile;
 #endif
@@ -120,7 +120,7 @@ typedef struct unz_file_info_s
 } unz_file_info;
 
 
-extern unzFile ZEXPORT unzOpen OF((const char *path));
+extern unzFile ZEXPORT unzOpen OF((char const * path));
 /*
   Open a Zip file. path contain the full pathname (by example,
      on a Windows XP computer "c:\\zlib\\zlib113.zip" or on an Unix computer
@@ -173,18 +173,16 @@ extern int32_t ZEXPORT unzGetCurrentFileInfo OF
 	  uLong           extraFieldBufferSize,
 	  char          * szComment,
 	  uLong           commentBufferSize));
-/*
-  Get Info about the current file
-  if pfile_info!=NULL, the *pfile_info structure will contain somes info about
-        the current file
-  if szFileName!=NULL, the filemane string will be copied in szFileName
-            (fileNameBufferSize is the size of the buffer)
-  if extraField!=NULL, the extra field information will be copied in extraField
-            (extraFieldBufferSize is the size of the buffer).
-            This is the Central-header version of the extra field
-  if szComment!=NULL, the comment string of the file will be copied in szComment
-            (commentBufferSize is the size of the buffer)
-*/
+	//  Get Info about the current file
+	//  * If pfile_info, the *pfile_info structure will contain some info about
+	//    the current file.
+	//  * If szFileName, the filemane string will be copied in szFileName
+	//    (fileNameBufferSize is the size of the buffer).
+	//  * If extraField, the extra field information will be copied in
+	//    extraField (extraFieldBufferSize is the size of the buffer). This is
+	//    the Central-header version of the extra field.
+	//  * If szComment, the comment string of the file will be copied in
+	//    szComment (commentBufferSize is the size of the buffer).
 
 /***************************************************************************/
 /* for reading the content of the current zipfile, you can open it, read data

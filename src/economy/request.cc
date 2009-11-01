@@ -499,12 +499,10 @@ void Request::transfer_fail(Game &, Transfer & t) {
 		m_economy->add_request(*this);
 }
 
-/**
- * Cancel the transfer with the given index.
- *
- * \note This does *not* update whether the \ref Request is registered with the
- * \ref Economy or not.
-*/
+/// Cancel the transfer with the given index.
+///
+/// \note This does *not* update whether the \ref Request is registered with
+/// the \ref Economy or not.
 void Request::cancel_transfer(uint32_t const idx)
 {
 	remove_transfer(idx);

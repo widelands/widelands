@@ -103,10 +103,7 @@ Bob & Bob::Descr::create
 }
 
 
-/**
- * Zero-initialize a map object
- */
-Bob::Bob(const Bob::Descr &_descr) :
+Bob::Bob(Bob::Descr const & _descr) :
 Map_Object       (&_descr),
 m_owner          (0),
 m_position       (FCoords(Coords(0, 0), 0)), // not linked anywhere

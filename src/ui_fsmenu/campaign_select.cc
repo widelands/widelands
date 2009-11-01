@@ -343,7 +343,7 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 
 	Widelands::Map map;
 
-	Widelands::Map_Loader *const ml
+	Widelands::Map_Loader * const ml
 		= map.get_correct_loader(campmapfile.c_str());
 	if (!ml) {
 		throw wexception

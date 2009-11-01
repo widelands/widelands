@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -131,7 +131,7 @@ private:
 		 std::vector<std::string>                          & words,
 		 std::vector<std::vector<std::string>::size_type>  & line_breaks,
 		 Varibale_Callback vcb, void * vcdata);
-		void parse_text_attributes(std::string format, Text_Block *element);
+	void parse_text_attributes(std::string format, Text_Block &);
 	bool extract_format_block
 		(std      ::string & block,
 		 std      ::string & block_text,

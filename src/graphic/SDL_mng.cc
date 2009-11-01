@@ -55,10 +55,10 @@ struct MNG_Frame {
 #define MNG_UINT_TERM 0x5445524dL
 
 /* Internal MNG functions */
-unsigned char MNG_read_byte     (SDL_RWops * src);
-unsigned int  MNG_read_uint32   (SDL_RWops * src);
-chunk_t       MNG_read_chunk    (SDL_RWops * src);
-MNG_Image    *MNG_iterate_chunks(SDL_RWops * src);
+unsigned char MNG_read_byte     (SDL_RWops *);
+unsigned int  MNG_read_uint32   (SDL_RWops *);
+chunk_t       MNG_read_chunk    (SDL_RWops *);
+MNG_Image   * MNG_iterate_chunks(SDL_RWops *);
 
 /* Read one MNG frame and return it as an SDL_Surface */
 SDL_Surface * MNG_read_frame(SDL_RWops * src);
@@ -161,7 +161,7 @@ MHDR_chunk read_MHDR(SDL_RWops * const src)
 }
 
 /* Iterate through the MNG chunks */
-MNG_Image *MNG_iterate_chunks(SDL_RWops * const src)
+MNG_Image * MNG_iterate_chunks(SDL_RWops * const src)
 {
 	chunk_t current_chunk;
 

@@ -85,7 +85,7 @@ struct CoordPath {
 	void truncate (const std::vector<char>::size_type after);
 	void starttrim(const std::vector<char>::size_type before);
 	void append(const Map & map, const Path & tail);
-	void append(const CoordPath &tail);
+	void append(CoordPath const & tail);
 
 private:
 	Step_Vector          m_path;   //  directions

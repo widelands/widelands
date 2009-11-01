@@ -28,7 +28,7 @@
 
 #include <cstdio>
 
-LayeredFileSystem *g_fs;
+LayeredFileSystem * g_fs;
 
 LayeredFileSystem::LayeredFileSystem(): m_home(0) {}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,96 +56,94 @@ struct InputCallback {
 	void (*key)        (bool down, SDL_keysym code);
 };
 
-/**
- * You know main functions, of course. This is the main class.
- *
- * The oversimplified version: everything else is either game logic or GUI
- *
- * WLAppplication bundles all initialization and shutdown code in one neat
- * package. It also includes all (well, most) system abstractions, notably
- * i18n, input handling, timing, low level networking and graphics setup (the
- * actual graphics work is done by Graphic).
- *
- * \todo Is the above part about i18n still true? \#bedouin
- *
- * Equally important, the main event loop is chugging along in this class. [not
- * yet but some time in the future \#bedouin8sep2007]
- *
- * \par WLApplication is a singleton
- *
- * Because of it's special purpose, having more than one WLApplication is
- * useless. So we implement singleton semantics:
- * \li A private(!) static class variable (--> unique for the whole program,
- *     although nobody can get at it) the_singleton holds a pointer to the
- *     only instance of WLApplication. It's private because it wouldn't be a
- *     class variable otherwise.
- * \li There is no public constructor. If there was, you'd be able to create
- *     more WLApplications. So constructor access must be encapsulated too.
- * \li The only way to get at the WLApplication object is to call
- *     WLApplication::get(), which is static as well. Because of this,
- *     get() can access the_singleton even if no WLApplication object
- *     has been instantiated yet.
- *     get() will \e always give you a valid WLApplication. If one doesn't
- *     exist yet, it will be created.
- * \li A destructor does not make sense. Just make sure you call
- *     shutdown_settings() and shutdown_hardware() when you're done - in a
- *     sense, it's a destructor without the destruction part ;-)
- *
- * These measures \e guarantee that there are no stray WLApplication objects
- * floating around by accident.
- *
- * For testing purposes, we can spawn a second process with widelands running in
- * it (see init_double_game()). The fact that WLApplication is a singleton
- * is not touched by this: the processes start out as a byte exact memory copy,
- * so the two instances can't know (except for fork()'s return value) that they
- * are (or are not) a primary thread. Each WLApplication singleton really *is* a
- * singleton - inside it's own process.
- *
- * Forking does not work on windows, but nobody cares enough to investigate.
- * It's only a debugging convenience anyway.
- *
- * \par Session recording and playback
- *
- * For debugging, e.g. profiling a real game without incurring the speed dis-
- * advantage while playing, the WLApplication can record (and of course play
- * back) a complete game session. To do so with guaranteed repeatability, every
- * single event - including low level stuff like mouse movement - gets recorded
- * or played back.
- *
- * During playback, external events are ignored to avoid interference with the
- * playback (exception: F10 will cancel the playback immediately)
- *
- * Recording/Playback does not work with --double. It could be made possible
- * but that feature wouldn't be very useful.
- *
- * \par The mouse cursor
- *
- * SDL can handle a mouse cursor on it's own, but only in black'n'white. That's
- * not sufficient for a game.
- *
- * So Widelands must paint it's own cursor and hide the system cursor.
- *
- * Ordinarily, relative coordinates break down when the cursor leaves the
- * window. This means we have to grab the mouse, then relative coords are
- * always available.
- * \todo Actually do grab the mouse when it is locked
- *
- * \todo What happens if a playback is canceled? Does the game continue or quit?
- * \todo Can recording be canceled?
- * \todo Should we allow to trigger recording ingame, starting with a snapshot
- * savegame? Preferably, the log would be stored inside the savegame. A new
- * user interface for starting / stopping playback may bue useful with this.
- * \todo How about a "pause" button during playback to examine the current game
- * state?
- * \todo Graphics are currently not handled by WLApplication, and it is non-
- * essential for playback anyway. Additionally, we'll want several rendering
- * backends (software and OpenGL). Maybe the graphics backend loader code should
- * be in System, while the actual graphics work is done elsewhere.
- * \todo Refactor the mainloop
- * \todo Sensible use of exceptions (goes for whole game)
- * \todo Default filenames for recording and playback
- */
-
+/// You know main functions, of course. This is the main struct.
+///
+/// The oversimplified version: everything else is either game logic or GUI.
+///
+/// WLAppplication bundles all initialization and shutdown code in one neat
+/// package. It also includes all (well, most) system abstractions, notably
+/// i18n, input handling, timing, low level networking and graphics setup (the
+/// actual graphics work is done by Graphic).
+///
+/// \todo Is the above part about i18n still true? \#bedouin
+///
+/// Equally important, the main event loop is chugging along in this class.
+/// [not yet but some time in the future \#bedouin8sep2007]
+///
+/// \par WLApplication is a singleton
+///
+/// Because of it's special purpose, having more than one WLApplication is
+/// useless. So we implement singleton semantics:
+/// \li A private(!) static class variable (--> unique for the whole program,
+///     although nobody can get at it) the_singleton holds a pointer to the
+///     only instance of WLApplication. It is private because it would not be a
+///     struct variable otherwise.
+/// \li There is no public constructor. If there was, you would be able to
+///     create more WLApplications. So constructor access must be encapsulated
+///     too.
+/// \li The only way to get at the WLApplication object is to call
+///     WLApplication::get(), which is static as well. Because of this, get()
+///     can access the_singleton even if no WLApplication object has been
+///     instantiated yet. get() will \e always give you a valid WLApplication.
+///     If one does not exist yet, it will be created.
+/// \li A destructor does not make sense. Just make sure you call
+///     shutdown_settings() and shutdown_hardware() when you are done - in a
+///     sense, it is a destructor without the destruction part ;-)
+///
+/// These measures \e guarantee that there are no stray WLApplication objects
+/// floating around by accident.
+///
+/// For testing purposes, we can spawn a second process with widelands running
+/// in it (see init_double_game()). The fact that WLApplication is a singleton
+/// is not touched by this: the processes start out as a byte exact memory
+/// copy, so the two instances ca not know (except for fork()'s return value)
+/// that they are (or are not) a primary thread. Each WLApplication singleton
+/// really *is* a singleton - inside it's own process.
+///
+/// Forking does not work on windows, but nobody cares enough to investigate.
+/// It is only a debugging convenience anyway.
+///
+/// \par Session recording and playback
+///
+/// For debugging, e.g. profiling a real game without incurring the speed
+/// disadvantage while playing, the WLApplication can record (and of course
+/// play back) a complete game session. To do so with guaranteed repeatability,
+/// every single event - including low level stuff like mouse movement - gets
+/// recorded or played back.
+///
+/// During playback, external events are ignored to avoid interference with the
+/// playback (exception: F10 will cancel the playback immediately).
+///
+/// Recording/Playback does not work with --double. It could be made possible
+/// but that feature would not be very useful.
+///
+/// \par The mouse cursor
+///
+/// SDL can handle a mouse cursor on its own, but only in black and white. That
+/// is not sufficient.
+///
+/// So Widelands must paint its own cursor and hide the system cursor.
+///
+/// Ordinarily, relative coordinates break down when the cursor leaves the
+/// window. This means we have to grab the mouse, then relative coords are
+/// always available.
+/// \todo Actually do grab the mouse when it is locked
+///
+/// \todo What happens if a playback is canceled? Does the game continue or
+/// quit?
+/// \todo Can recording be canceled?
+/// \todo Should we allow to trigger recording ingame, starting with a snapshot
+/// savegame? Preferably, the log would be stored inside the savegame. A new
+/// user interface for starting / stopping playback may bue useful with this.
+/// \todo How about a "pause" button during playback to examine the current
+/// game state?
+/// \todo Graphics are currently not handled by WLApplication, and it is
+/// non essential for playback anyway. Additionally, we will want several
+/// rendering backends (software and OpenGL). Maybe the graphics backend loader
+/// code should be in System, while the actual graphics work is done elsewhere.
+/// \todo Refactor the mainloop
+/// \todo Sensible use of exceptions (goes for whole game)
+/// \todo Default filenames for recording and playback
 struct WLApplication {
 	static WLApplication * get(int const argc = 0, char const * * argv = 0);
 	~WLApplication();
@@ -188,7 +186,7 @@ struct WLApplication {
 
 #endif
 
-	void handle_input(const InputCallback *cb);
+	void handle_input(InputCallback const *);
 
 	void mainmenu();
 	void mainmenu_singleplayer();
@@ -226,9 +224,9 @@ struct WLApplication {
 	static void emergency_save(Widelands::Game &);
 
 protected:
-	WLApplication(int argc, char const * * argv);
+	WLApplication(int argc, char const * const * argv);
 
-	bool poll_event(SDL_Event *ev, bool throttle);
+	bool poll_event(SDL_Event &, bool throttle);
 
 	bool init_settings();
 	void shutdown_settings();
@@ -236,7 +234,7 @@ protected:
 	bool init_hardware();
 	void shutdown_hardware();
 
-	void parse_commandline(int argc, char const * * argv);
+	void parse_commandline(int argc, char const * const * argv);
 	void handle_commandline_parameters() throw (Parameter_error);
 
 	void setup_searchpaths(std::string argv0);

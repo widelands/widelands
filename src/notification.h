@@ -53,7 +53,7 @@ class NoteSender {
 public:
 	~NoteSender() {
 		while (m_links.size())
-			m_links[m_links.size() - 1]->disconnect(*this);
+			(*m_links.rbegin())->disconnect(*this);
 	}
 
 protected:
@@ -75,7 +75,7 @@ class NoteReceiver {
 public:
 	virtual ~NoteReceiver() {
 		while (m_links.size())
-			disconnect(*m_links[m_links.size() - 1]);
+			disconnect(**m_links.rbegin());
 	}
 
 	void connect(NoteSender<T> & sender) {

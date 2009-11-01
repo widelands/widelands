@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,8 +53,8 @@ struct Multiline_Textarea : public Panel {
 	std::string const & get_text() const {return m_text;}
 	ScrollMode get_scrollmode() const {return m_scrollmode;}
 
-	void set_text(const std::string &text);
-	void set_align(Align align);
+	void set_text(std::string const &);
+	void set_align(Align);
 	void set_scrollpos(int32_t pixels);
 	void set_scrollmode(ScrollMode mode);
 

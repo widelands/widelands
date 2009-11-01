@@ -233,9 +233,9 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 			if
 				(m_resolutions.empty()
 				 or
-				 this_res.xres != m_resolutions[m_resolutions.size() - 1].xres
+				 this_res.xres != m_resolutions.rbegin()->xres
 				 or
-				 this_res.yres != m_resolutions[m_resolutions.size() - 1].yres)
+				 this_res.yres != m_resolutions.rbegin()->yres)
 				m_resolutions.push_back(this_res);
 			}
 	fmt.BitsPerPixel = 32;
@@ -248,9 +248,9 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 				if
 					(m_resolutions.empty()
 					 or
-					 this_res.xres != m_resolutions[m_resolutions.size() - 1].xres
+					 this_res.xres != m_resolutions.rbegin()->xres
 					 or
-					 this_res.yres != m_resolutions[m_resolutions.size() - 1].yres)
+					 this_res.yres != m_resolutions.rbegin()->yres)
 					m_resolutions.push_back(this_res);
 			}
 

@@ -74,7 +74,7 @@ struct Road : public PlayerImmovable {
 	virtual void set_economy(Economy *);
 
 	int32_t get_cost(FlagId fromflag);
-	const Path &get_path() const {return m_path;}
+	Path const & get_path() const {return m_path;}
 	int32_t get_idle_index() const {return m_idle_index;}
 
 	void presplit(Game &, Coords split);

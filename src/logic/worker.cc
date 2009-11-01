@@ -913,7 +913,7 @@ void Worker::log_general_info(Editor_Game_Base const & egbase)
  * \li worker moves along a route (location is a road and finally building)
  * \li current location is destroyed (building burnt down etc...)
  */
-void Worker::set_location(PlayerImmovable *location)
+void Worker::set_location(PlayerImmovable * const location)
 {
 	assert(not location or Object_Ptr(location).get(owner().egbase()));
 	PlayerImmovable * const oldlocation = get_location(owner().egbase());
@@ -954,7 +954,7 @@ void Worker::set_location(PlayerImmovable *location)
  * \li by set_location() when appropriate
  * \li by the current location, when the location's economy changes
  */
-void Worker::set_economy(Economy *economy)
+void Worker::set_economy(Economy * const economy)
 {
 	if (economy == m_economy)
 		return;
@@ -1303,7 +1303,7 @@ void Worker::transfer_update(Game & game, State & state) {
 					 WALK_NW, &descr().get_right_walk_anims(does_carry_ware()),
 					 true);
 		} else if (upcast(Flag,     nextflag,  nextstep)) { //  Flag to Flag
-			Road & road = *flag->get_road(nextflag);
+			Road & road = *flag->get_road(*nextflag);
 
 			Path path(road.get_path());
 
@@ -2097,8 +2097,8 @@ void Worker::start_task_fugitive(Game & game)
 
 struct FindFlagWithPlayersWarehouse {
 	FindFlagWithPlayersWarehouse(Player const & owner) : m_owner(owner) {}
-	bool accept(BaseImmovable * const imm) const {
-		if (upcast(Flag const, flag, imm))
+	bool accept(BaseImmovable const & imm) const {
+		if (upcast(Flag const, flag, &imm))
 			if (&flag->owner() == &m_owner)
 				if (flag->economy().get_nr_warehouses())
 					return true;

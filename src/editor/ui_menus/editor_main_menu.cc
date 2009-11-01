@@ -35,14 +35,18 @@
 #define vmargin margin
 #define vspacing 15
 
+inline Editor_Interactive & Editor_Main_Menu::eia() {
+	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
+}
+
 /**
  * Create all the buttons etc...
 */
 Editor_Main_Menu::Editor_Main_Menu
-		(Editor_Interactive *parent, UI::UniqueWindow::Registry *registry)
+	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
 :
-	UI::UniqueWindow(parent, registry, 2 * hmargin + width, 260, _("Main Menu")),
-	m_parent(*parent),
+	UI::UniqueWindow
+		(&parent, &registry, 2 * hmargin + width, 260, _("Main Menu")),
 	m_button_new_map
 		(this,
 		 hmargin, vmargin + 0 * (height + vspacing), width, height,
@@ -95,29 +99,29 @@ Editor_Main_Menu::Editor_Main_Menu
  * Called, when buttons get clicked
 */
 void Editor_Main_Menu::new_map_btn() {
-	new Main_Menu_New_Map(&m_parent);
+	new Main_Menu_New_Map(eia());
 	die();
 }
 
 void Editor_Main_Menu::new_random_map_btn() {
-	new Main_Menu_New_Random_Map(&m_parent);
+	new Main_Menu_New_Random_Map(eia());
 	die();
 }
 
 void Editor_Main_Menu::load_btn() {
-	new Main_Menu_Load_Map(&m_parent);
+	new Main_Menu_Load_Map(eia());
 	die();
 }
 
 void Editor_Main_Menu::save_btn() {
-	new Main_Menu_Save_Map(&m_parent);
+	new Main_Menu_Save_Map(eia());
 	die();
 }
 void Editor_Main_Menu::map_options_btn() {
-	new Main_Menu_Map_Options(m_parent);
+	new Main_Menu_Map_Options(eia());
 	die();
 }
-void Editor_Main_Menu::exit_btn() {m_parent.exit();}
+void Editor_Main_Menu::exit_btn() {eia().exit();}
 void Editor_Main_Menu::readme_btn() {
-	fileview_window(m_parent, m_window_readme, "txts/editor_readme");
+	fileview_window(eia(), m_window_readme, "txts/editor_readme");
 }

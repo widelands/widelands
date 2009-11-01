@@ -38,14 +38,14 @@ private:
 			if (--refcount == 0)
 				delete this;
 		}
-		virtual bool accept(BaseImmovable *) const = 0;
+		virtual bool accept(BaseImmovable const &) const = 0;
 
 		int refcount;
 	};
 	template<typename T>
 	struct Capsule : public BaseCapsule {
 		Capsule(T const & _op) : op(_op) {}
-		bool accept(BaseImmovable * const imm) const {return op.accept(imm);}
+		bool accept(BaseImmovable const & imm) const {return op.accept(imm);}
 
 		const T op;
 	};
@@ -74,32 +74,34 @@ public:
 	}
 
 	// Return true if this node should be returned by find_fields()
-	bool accept(BaseImmovable * const imm) const {
+	bool accept(BaseImmovable const & imm) const {
 		return capsule->accept(imm);
 	}
 };
 
 // FindImmovable functor
 struct FindImmovableSize {
-	FindImmovableSize(int32_t min, int32_t max) : m_min(min), m_max(max) {}
+	FindImmovableSize(int32_t const min, int32_t const max)
+		: m_min(min), m_max(max)
+	{}
 
-	bool accept(BaseImmovable *imm) const;
+	bool accept(BaseImmovable const &) const;
 
 private:
 	int32_t m_min, m_max;
 };
 struct FindImmovableType {
-	FindImmovableType(int32_t type) : m_type(type) {}
+	FindImmovableType(int32_t const type) : m_type(type) {}
 
-	bool accept(BaseImmovable *imm) const;
+	bool accept(BaseImmovable const &) const;
 
 private:
 	int32_t m_type;
 };
 struct FindImmovableAttribute {
-	FindImmovableAttribute(uint32_t attrib) : m_attrib(attrib) {}
+	FindImmovableAttribute(uint32_t const attrib) : m_attrib(attrib) {}
 
-	bool accept(BaseImmovable *imm) const;
+	bool accept(BaseImmovable const &) const;
 
 private:
 	int32_t m_attrib;
@@ -107,22 +109,22 @@ private:
 struct FindImmovablePlayerImmovable {
 	FindImmovablePlayerImmovable() {}
 
-	bool accept(BaseImmovable *) const;
+	bool accept(BaseImmovable const &) const;
 };
 struct FindImmovablePlayerMilitarySite {
-	FindImmovablePlayerMilitarySite(Player & _player) : player(_player) {}
+	FindImmovablePlayerMilitarySite(Player const & _player) : player(_player) {}
 
-	bool accept(BaseImmovable *) const;
+	bool accept(BaseImmovable const &) const;
 
-	Player & player;
+	Player const & player;
 };
 struct FindImmovableAttackable {
 	FindImmovableAttackable()  {}
 
-	bool accept(BaseImmovable *) const;
+	bool accept(BaseImmovable const &) const;
 };
 
 
 }
 
-#endif // FINDIMMOVABLE_H
+#endif

@@ -39,7 +39,7 @@ struct EncodeData {
 
 	void clear();
 	void parse(Section &);
-	void add(const EncodeData *o);
+	void add(EncodeData const &);
 };
 
 struct AnimationData {

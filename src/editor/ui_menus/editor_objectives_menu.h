@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,10 +32,10 @@ struct Textarea;
 };
 
 struct Editor_Objectives_Menu : public UI::UniqueWindow {
-	Editor_Objectives_Menu(Editor_Interactive *, UI::UniqueWindow::Registry *);
+	Editor_Objectives_Menu(Editor_Interactive &, UI::UniqueWindow::Registry &);
 
 private:
-	Editor_Interactive                 * m_parent;
+	Editor_Interactive & eia();
 	UI::Table<Widelands::Objective &> m_table;
 	UI::Callback_Button<Editor_Objectives_Menu> * m_edit_button;
 	UI::Callback_Button<Editor_Objectives_Menu> * m_delete_button;

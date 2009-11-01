@@ -78,8 +78,8 @@ public:
 
 	int32_t cost() const {return mpf_realcost + mpf_estimate;}
 
-	virtual int32_t get_waitcost() = 0;
-	virtual void get_neighbours(RoutingNodeNeighbours *) = 0;
+	virtual int32_t get_waitcost() const = 0;
+	virtual void get_neighbours(RoutingNodeNeighbours &) = 0;
 	virtual Coords get_position() const = 0;
 };
 

@@ -302,7 +302,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		{
 			char const * const name = pname->c_str();
 
-			Widelands::Map_Loader *const ml = map.get_correct_loader(name);
+			Widelands::Map_Loader * const ml = map.get_correct_loader(name);
 			if (!ml)
 				continue;
 

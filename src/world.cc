@@ -47,14 +47,14 @@ namespace Widelands {
 Parse a resource description section.
 ==============
 */
-void Resource_Descr::parse(Section *s, std::string basedir)
+void Resource_Descr::parse(Section & s, std::string const & basedir)
 {
-	m_name = s->get_name();
-	m_descname = s->get_string("name", s->get_name());
-	m_is_detectable = s->get_bool("detectable", true);
+	m_name = s.get_name();
+	m_descname = s.get_string("name", s.get_name());
+	m_is_detectable = s.get_bool("detectable", true);
 
-	m_max_amount = s->get_safe_int("max_amount");
-	while (Section::Value const * const v = s->get_next_val("editor_pic")) {
+	m_max_amount = s.get_safe_int("max_amount");
+	while (Section::Value const * const v = s.get_next_val("editor_pic")) {
 		Editor_Pic i;
 
 		std::vector<std::string> const args(split_string(v->get_string(), " \t"));
@@ -454,7 +454,7 @@ void World::parse_resources()
 		Profile prof(fname);
 		while (Section * const section = prof.get_next_section(0)) {
 			Resource_Descr & descr = *new Resource_Descr();
-			descr.parse(section, m_basedir);
+			descr.parse(*section, m_basedir);
 			m_resources.add(&descr);
 		}
 	}
@@ -539,7 +539,7 @@ void World::parse_mapgen   ()
 			throw game_data_error("too many wasteland areas (>2)");
 
 		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atMountains) < 1)
-			throw game_data_error("missing a mountain area in %s");
+			throw game_data_error("missing a mountain area");
 
 		if (m_mapGenInfo.getNumAreas(MapGenAreaInfo::atMountains) < 1)
 			throw game_data_error("too many mountain areas (>1)");

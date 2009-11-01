@@ -46,10 +46,7 @@ std::vector<std::string> split_string
 void remove_spaces(std::string & s) {
 	while (s[0] == ' ' or s[0] == '\t' or s[0] == '\n') s.erase(0, 1);
 
-	while
-		(s[s.size() - 1] == ' '  or
-		 s[s.size() - 1] == '\t' or
-		 s[s.size() - 1] == '\n')
+	while (*s.rbegin() == ' '  or *s.rbegin() == '\t' or *s.rbegin() == '\n')
 		s.erase(s.size() - 1, 1);
 }
 

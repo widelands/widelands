@@ -46,10 +46,8 @@
 #include <string>
 
 
-Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive *parent)
-:
-UI::Window(parent, 0, 0, 500, 330, _("Save Map")),
-m_parent  (parent) //  FIXME redundant (base has parent pointer)
+Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
+	: UI::Window(&parent, 0, 0, 500, 330, _("Save Map"))
 {
 	int32_t const spacing =  5;
 	int32_t const offsx   = spacing;
@@ -71,7 +69,7 @@ m_parent  (parent) //  FIXME redundant (base has parent pointer)
 			 get_inner_w() / 2 - spacing, 20,
 			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 			 0);
-	m_editbox->setText(parent->egbase().map().get_name());
+	m_editbox->setText(parent.egbase().map().get_name());
 	m_editbox->changed.set(this, &Main_Menu_Save_Map::edit_box_changed);
 
 	posx = get_inner_w() / 2 + spacing;

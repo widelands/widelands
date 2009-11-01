@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,25 +36,25 @@
 
 
 Editor_Player_Menu::Editor_Player_Menu
-	(Editor_Interactive & parent, UI::UniqueWindow::Registry * registry)
-:
-UI::UniqueWindow(&parent, registry, 340, 400, _("Player Options")),
-m_add_player
-	(this,
-	 5, 5, 20, 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
-	 &Editor_Player_Menu::clicked_add_player, *this,
-	 _("Add player"),
-	 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
-m_remove_last_player
-	(this,
-	 get_inner_w() - 5 - 20, 5, 20, 20,
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-	 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
-	 &Editor_Player_Menu::clicked_remove_last_player, *this,
-	 _("Remove last player"),
-	 1 < parent.egbase().map().get_nrplayers())
+	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
+	:
+	UI::UniqueWindow(&parent, &registry, 340, 400, _("Player Options")),
+	m_add_player
+		(this,
+		 5, 5, 20, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+		 &Editor_Player_Menu::clicked_add_player, *this,
+		 _("Add player"),
+		 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
+	m_remove_last_player
+		(this,
+		 get_inner_w() - 5 - 20, 5, 20, 20,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+		 &Editor_Player_Menu::clicked_remove_last_player, *this,
+		 _("Remove last player"),
+		 1 < parent.egbase().map().get_nrplayers())
 {
 	int32_t const spacing = 5;
 	int32_t const width   = 20;

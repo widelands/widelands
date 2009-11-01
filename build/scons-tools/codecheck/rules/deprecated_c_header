@@ -6,7 +6,7 @@ Checks for includes of deprecated c headers.
 """
 
 
-regexp = r"""^# *include +["<](?:assert|complex|type|errno|fenv|float|inttypes|iso646|limits|locale|math|setjmp|signal|starg|stdbool|stddef|stdio|stdlib|string|tgmath|time|wchar|wctype)\.h[">]"""
+regexp = r"""^# *include +["<](?:assert|complex|type|errno|fenv|float|inttypes|iso646|limits|locale|math|setjmp|signal|stdarg|stdbool|stddef|stdio|stdlib|string|tgmath|time|wchar|wctype)\.h[">]"""
 error_msg = "You've included a deprecated C header. Remove it!"
 
 forbidden = [
@@ -23,7 +23,7 @@ forbidden = [
     '#include <math.h>',
     '#include <setjmp.h>',
     '#include <signal.h>',
-    '#include <starg.h>',
+    '#include <stdarg.h>',
     '#include <stdbool.h>',
     '#include <stddef.h>',
     '#include <stdio.h>',
@@ -49,7 +49,7 @@ allowed = [
     '#include <cmath>',
     '#include <csetjmp>',
     '#include <csignal>',
-    '#include <cstarg>',
+    '#include <cstdarg>',
     '#include <cstdbool>',
     '#include <cstddef>',
     '#include <cstdio>',
