@@ -1,0 +1,4 @@
+#!/bin/bash
+for i in $(svn status src|sed "s@.       \(.*\)@\1@"); do
+	grep --with-filename "* Copyright (C)" $i|grep -v $(/bin/date +%Y)
+done
