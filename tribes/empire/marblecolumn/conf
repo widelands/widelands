@@ -1,6 +1,6 @@
 help=_Marble columns present the high culture of the Empire, so they are needed for nearly every bigger building.
 default_target_quantity=4
-preciousness=2
+preciousness=5
 
 [idle]
 pics=idle.png
