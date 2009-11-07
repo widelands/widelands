@@ -177,7 +177,7 @@ void Interactive_Base::unset_sel_picture() {
  */
 int32_t Interactive_Base::get_xres()
 {
-	return g_options.pull_section("global").get_int("xres", 640);
+	return g_options.pull_section("global").get_int("xres", XRES);
 }
 
 
@@ -188,7 +188,7 @@ int32_t Interactive_Base::get_xres()
  */
 int32_t Interactive_Base::get_yres()
 {
-	return g_options.pull_section("global").get_int("yres", 480);
+	return g_options.pull_section("global").get_int("yres", YRES);
 }
 
 
