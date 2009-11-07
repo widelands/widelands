@@ -99,10 +99,6 @@ void DefaultAI::think ()
 	m_buildable_changed = false;
 	m_mineable_changed = false;
 
-	// This must be checked every time as changes of bobs in AI area aren't
-	// handled by the AI itself.
-	update_all_not_buildable_fields();
-
 	// if there are more than one economy try to connect them with a road.
 	if (next_road_due <= gametime) {
 		next_road_due = gametime + 1000;
@@ -114,6 +110,21 @@ void DefaultAI::think ()
 	} else
 		// only go on, after defaultAI tried to connect all economies.
 		return;
+
+	// NOTE Because of the check above, the following parts of think() are used
+	// NOTE only once every second at maximum. This increases performance and as
+	// NOTE human players ca not even react that fast, it should not be a
+	// NOTE disadvantage for the defaultAI.
+
+	// This must be checked every time as changes of bobs in AI area aren't
+	// handled by the AI itself.
+	update_all_not_buildable_fields();
+
+	// IF defaultAI is AGGRESSIVE - we definitely should consider to attack as
+	// often as possible.
+	if (type == AGGRESSIVE)
+		if (next_attack_consideration_due <= gametime)
+			consider_attack(gametime);
 
 	// improve existing roads
 	if (improve_roads(gametime)) {
