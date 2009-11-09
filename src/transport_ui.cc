@@ -28,8 +28,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
-#include "ptr_assert_cast.h"
-
 using Widelands::Economy;
 using Widelands::Editor_Game_Base;
 using Widelands::Game;
@@ -67,9 +65,9 @@ struct Economy_Options_Window : public UI::UniqueWindow {
 		bool const can_act = igbase.can_act(owner);
 		for
 			(Ware_Type_Box * b =
-			 	ptr_assert_cast<Ware_Type_Box, UI::Panel>(m_box.get_first_child());
+			 	dynamic_cast<Ware_Type_Box *>(m_box.get_first_child());
 			 b;
-			 b = ptr_assert_cast<Ware_Type_Box, UI::Panel>(b->get_next_sibling()))
+			 b = dynamic_cast<Ware_Type_Box *>(b->get_next_sibling()))
 		{
 			Ware_Index const i = b->ware_type;
 			Economy::Target_Quantity const & tq = economy().target_quantity(i);
