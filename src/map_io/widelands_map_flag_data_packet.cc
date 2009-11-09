@@ -49,18 +49,18 @@ throw (_wexception)
 	FileRead fr;
 	try {fr.Open(fs, "binary/flag");} catch (...) {return;}
 
-	Map const & map = egbase.map();
-	Player_Number const nr_players = map.get_nrplayers();
-
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			for (uint16_t y = 0; y < map.get_height(); ++y)
-				for (uint16_t x = 0; x < map.get_width(); ++x) {
-					if (fr.Unsigned8()) {
-						Player_Number const owner  = fr.Player_Number8(nr_players);
-						Serial        const serial = fr.Unsigned32();
+			Map const & map = egbase.map();
+			Player_Number const nr_players = map.get_nrplayers();
+			Widelands::Extent const extent = map.extent();
+			iterate_Map_FCoords(map, extent, fc)
+				if (fr.Unsigned8()) {
+					Player_Number const owner  = fr.Player_Number8(nr_players);
+					Serial        const serial = fr.Unsigned32();
 
+					try {
 						//  No flag lives on more than one place.
 
 						//  Now, create this Flag. Directly create it, do not call
@@ -68,18 +68,16 @@ throw (_wexception)
 						//  packet. We always create this, no matter what skip is
 						//  since we have to read the data packets. We delete this
 						//  object later again, if it is not wanted.
-						try {
-							ol->register_object<Flag>
-								(serial,
-								 *new Flag
-								 	(ref_cast<Game, Editor_Game_Base>(egbase),
-								 	 egbase.player(owner),
-								 	 Coords(x, y)));
-						} catch (_wexception const & e) {
-							throw game_data_error
-								("%u (at (%i, %i), owned by player %u): %s",
-								 serial, x, y, owner, e.what());
-						}
+						ol->register_object<Flag>
+							(serial,
+							 *new Flag
+							 	(ref_cast<Game, Editor_Game_Base>(egbase),
+							 	 egbase.player(owner),
+							 	 fc));
+					} catch (_wexception const & e) {
+						throw game_data_error
+							("%u (at (%i, %i), owned by player %u): %s",
+							 serial, fc.x, fc.y, owner, e.what());
 					}
 				}
 		} else

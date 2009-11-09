@@ -55,7 +55,8 @@ throw (_wexception)
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
-			Extent const extent = egbase.map().extent();
+			Map const  & map    = egbase.map();
+			Extent const extent = map.extent();
 			for (;;) {
 				if (2 <= packet_version and fr.EndOfFile())
 					break;
@@ -71,7 +72,24 @@ throw (_wexception)
 
 					//  Owner is already set, nothing to do from PlayerImmovable.
 
-					flag.m_position = fr.Coords32(extent);
+					if (CURRENT_PACKET_VERSION < 3) {
+						if
+							(upcast
+							 	(Flag const,
+							 	 mf,
+							 	 map[flag.m_position = fr.Coords32(extent)]
+							 	 .get_immovable()))
+						{
+							if (mf != &flag)
+								throw game_data_error
+									(_("wrong flag (%u) at given position (%i, %i)"),
+									 mf->serial(),
+									 flag.m_position.x, flag.m_position.y);
+						} else
+							throw game_data_error
+								(_("no flag at given position (%i, %i)"),
+								 flag.m_position.x, flag.m_position.y);
+					}
 					flag.m_animstart = fr.Unsigned16();
 
 					//  FIXME This should not be explicitly read from file. A flag's
