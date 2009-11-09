@@ -61,6 +61,22 @@ throw (_wexception)
 					Serial        const serial = fr.Unsigned32();
 
 					try {
+						//  Check that there is not already a flag on a neighbour
+						//  node. We read the map in order and only need to check the
+						//  nodes that we have already read.
+						for (Direction dir = 6; dir; --dir) {
+							FCoords n;
+							map.get_neighbour(fc, dir, &n);
+							if (n.field < fc.field)
+								if (upcast(Flag const, nf, n.field->get_immovable()))
+									throw game_data_error
+										(_
+										 	("another flag is too near: %u (at (%i, %i), "
+										 	 "owned by player %u)"),
+										 nf->serial(), n.x, n.y,
+										 nf->owner().player_number());
+						}
+
 						//  No flag lives on more than one place.
 
 						//  Now, create this Flag. Directly create it, do not call
