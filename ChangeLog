@@ -1,5 +1,14 @@
 ### Build 15 (until now)
-- Add new and replace old music. (svn:r4602)
+- Fix bug that a savegame, with flags on neighbouring map nodes, could be
+  loaded, leading to errors later on (for example when trying to build a 1-step
+  road between them). (svn:r4621)
+- Fix bug that a savegame, where a flag was placed on one map node but later
+  was given the coordinates of another map node, could be loaded, leading to
+  errors later on. (svn:r4620)
+- Added more stones to the Elven Forests map. (svn:r4612)
+- Improved the selection of which warehouse a produced ware should be
+  transported to. (svn:r4609)
+- Add new music. (svn:r4602, svn:r4611)
 - Change the reporting of an error that is found in game data (savegame,
   command log, world/tribe definitions) whenever such game data is read (for
   example when a replay or new or saved game is started or a new or saved map
