@@ -57,8 +57,6 @@ class Building;
  * Common to all buildings!
  */
 struct Building_Descr : public Map_Object_Descr {
-	friend struct Map_Buildingdata_Data_Packet;
-
 	Building_Descr
 		(char const * _name, char const * _descname,
 		 std::string const & directory, Profile &, Section & global_s,
@@ -88,7 +86,7 @@ struct Building_Descr : public Map_Object_Descr {
 		 uint32_t       const * ware_counts   = 0,
 		 uint32_t       const * worker_counts = 0,
 		 Soldier_Counts  const * soldier_counts = 0,
-		 Building_Descr const * = 0)
+		 Building_Descr const * old = 0)
 		const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void writeHTML(::FileWrite &) const;
@@ -106,7 +104,7 @@ struct Building_Descr : public Map_Object_Descr {
 
 protected:
 	virtual Building & create_object() const = 0;
-	Building & create_constructionsite(Building_Descr const * const old) const;
+	Building & create_constructionsite(Building_Descr const * old) const;
 
 private:
 	const Tribe_Descr & m_tribe;

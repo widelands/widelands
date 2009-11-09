@@ -308,15 +308,16 @@ int32_t Request::get_priority (int32_t cost) const
 		modifier = m_target_building->get_priority(get_type(), get_index());
 		if (m_target_constructionsite)
 			is_construction_site = true;
-		else if (m_target_warehouse) {
+		else if (m_target_warehouse)
 			// if warehouse calculated a priority use it
-			if(modifier !=100)
-				return modifier;
 			// else lower priority based on cost
-			modifier = std::max(1, 
-				MAX_IDLE_PRIORITY - cost * MAX_IDLE_PRIORITY / PRIORITY_MAX_COST);
-			return modifier;
-		}
+			return
+				modifier != 100 ? modifier :
+				std::max
+					(1,
+					 MAX_IDLE_PRIORITY
+					 -
+					 cost * MAX_IDLE_PRIORITY / PRIORITY_MAX_COST);
 	}
 
 

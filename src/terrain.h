@@ -540,10 +540,10 @@ template<typename T> static void dither_edge_vert
 template<typename T> static void render_road_horiz
 	(Surface & dst, Point const start, Point const end, Surface const & src)
 {
-	int32_t dstw = dst.get_w();
-	int32_t dsth = dst.get_h();
+	int32_t const dstw = dst.get_w();
+	int32_t const dsth = dst.get_h();
 
-	int32_t ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
+	int32_t const ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
 	int32_t centery = start.y << 16;
 
 	for (int32_t x = start.x, sx = 0; x < end.x; ++x, centery += ydiff, ++sx) {
@@ -567,10 +567,10 @@ template<typename T> static void render_road_horiz
 template<typename T> static void render_road_vert
 	(Surface & dst, Point const start, Point const end, Surface const & src)
 {
-	int32_t dstw = dst.get_w();
-	int32_t dsth = dst.get_h();
+	int32_t const dstw = dst.get_w();
+	int32_t const dsth = dst.get_h();
 
-	int32_t xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
+	int32_t const xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
 	int32_t centerx = start.x << 16;
 
 	for (int32_t y = start.y, sy = 0; y < end.y; ++y, centerx += xdiff, ++sy) {

@@ -233,8 +233,10 @@ public:
 	}
 
 	int32_t get_roads() const {return roads;}
-	int32_t get_road(int32_t dir) const {return (roads >> dir) & Road_Mask;}
-	void set_road(int32_t dir, int32_t type) {
+	int32_t get_road(int32_t const dir) const {
+		return (roads >> dir) & Road_Mask;
+	}
+	void set_road(int32_t const dir, int32_t const type) {
 		roads &= ~(Road_Mask << dir);
 		roads |= type << dir;
 	}

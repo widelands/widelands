@@ -49,7 +49,7 @@ struct WareInstance;
  * Important: Do not access m_roads directly. get_road() and others use
  * Map_Object::WALK_xx in all "direction" parameters.
  */
-class Flag : public PlayerImmovable, public RoutingNode {
+struct Flag : public PlayerImmovable, public RoutingNode {
 	friend struct Economy;
 	friend struct Router;
 	friend class FlagQueue;
@@ -57,18 +57,6 @@ class Flag : public PlayerImmovable, public RoutingNode {
 	friend struct Map_Waredata_Data_Packet; // has to look at pending items
 	friend struct Map_Flagdata_Data_Packet; // has to read/write this to a file
 
-	struct PendingItem {
-		WareInstance    * item;     ///< the item itself
-		bool              pending;  ///< if the item is pending
-		OPtr<PlayerImmovable> nextstep; ///< next step that this item is sent to
-	};
-
-	struct FlagJob {
-		Request *   request;
-		std::string program;
-	};
-
-public:
 	Flag(); /// empty flag for savegame loading
 	Flag(Game &, Player & owner, Coords); /// create a new flag
 	virtual ~Flag();
@@ -137,6 +125,17 @@ protected:
 	void set_flag_position(Coords coords);
 
 private:
+	struct PendingItem {
+		WareInstance    * item;     ///< the item itself
+		bool              pending;  ///< if the item is pending
+		OPtr<PlayerImmovable> nextstep; ///< next step that this item is sent to
+	};
+
+	struct FlagJob {
+		Request *   request;
+		std::string program;
+	};
+
 	Coords       m_position;
 	uint32_t     m_anim;
 	int32_t      m_animstart;

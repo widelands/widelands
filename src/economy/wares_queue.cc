@@ -229,28 +229,32 @@ void WaresQueue::Write(FileWrite & fw, Game & game, Map_Map_Object_Saver * os)
 void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader * ol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
-	if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION) {
-		delete m_request;
-		m_ware             = owner().tribe().ware_index(fr.CString  ());
-		m_size             =                            fr.Signed32 ();
-		m_filled           =                            fr.Signed32 ();
-		m_consume_interval =                            fr.Signed32 ();
-		if                                             (fr.Unsigned8()) {
-			m_request =
-				new Request
-					(m_owner,
-					 Ware_Index::First(),
-					 WaresQueue::request_callback,
-					 Request::WORKER);
-			m_request->Read(fr, game, ol);
-		} else
-			m_request = 0;
+	try {
+		if (packet_version == WARES_QUEUE_DATA_PACKET_VERSION) {
+			delete m_request;
+			m_ware             = owner().tribe().ware_index(fr.CString  ());
+			m_size             =                            fr.Unsigned32();
+			m_filled           =                            fr.Unsigned32();
+			m_consume_interval =                            fr.Unsigned32();
+			if                                             (fr.Unsigned8 ()) {
+				m_request =
+					new Request
+						(m_owner,
+						 Ware_Index::First(),
+						 WaresQueue::request_callback,
+						 Request::WORKER);
+				m_request->Read(fr, game, ol);
+			} else
+				m_request = 0;
 
-		//  Now Economy stuff. We have to add our filled items to the economy.
-		add_to_economy(*m_owner.get_economy());
-	} else
-		throw wexception
-			("WaresQueue::Read: Unknown WaresQueueVersion %u!", packet_version);
+			//  Now Economy stuff. We have to add our filled items to the economy.
+			add_to_economy(*m_owner.get_economy());
+		} else
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (game_data_error const & e) {
+		throw game_data_error(_("waresqueue: %s"), e.what());
+	}
 }
 
 }
