@@ -414,9 +414,10 @@ void NetHost::run(bool autorun)
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
-		std::string tribe = hp.getPlayersTribe();
-		if (!tribe.empty())
-			tipstext.push_back(tribe);
+		try {
+			tipstext.push_back(hp.getPlayersTribe());
+		} catch (GameSettingsProvider::No_Tribe) {
+		}
 		GameTips tips (loaderUI, tipstext);
 
 		loaderUI.step(_("Preparing game"));

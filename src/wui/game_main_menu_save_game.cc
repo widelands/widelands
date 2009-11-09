@@ -125,7 +125,8 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	SPLIT_GAMETIME(seconds,  1000);
 	sprintf
 		(buf,
-		 _("%02ud%02uh%02u'%u\"%03u"), days, hours, minutes, seconds, gametime);
+		 _("%02ud%02uh%02u'%02u\"%03u"),
+		 days, hours, minutes, seconds, gametime);
 	m_gametime.set_text(buf);
 }
 

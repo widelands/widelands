@@ -123,9 +123,10 @@ struct GameSettingsProvider {
 	virtual void setPlayerReady   (uint8_t number, bool ready) = 0;
 	virtual bool getPlayerReady   (uint8_t number) = 0;
 
-	const std::string getPlayersTribe() {
+	struct No_Tribe {};
+	std::string const & getPlayersTribe() {
 		if (settings().playernum < 0)
-			return std::string();
+			throw No_Tribe();
 		return settings().players[settings().playernum].tribe;
 	}
 };

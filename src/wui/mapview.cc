@@ -51,7 +51,7 @@ void Map_View::warp_mouse_to_node(Widelands::Coords const c) {
 	MapviewPixelFunctions::get_save_pix(map, c, p.x, p.y);
 	p -= m_viewpoint;
 
-	//  If the user has scrolled the field outside the viewable area, he most
+	//  If the user has scrolled the node outside the viewable area, he most
 	//  surely doesn't want to jump there.
 	if (p.x < get_w() and p.y < get_h()) {
 		if      (p.x <= 0)
