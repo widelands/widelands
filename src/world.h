@@ -97,6 +97,14 @@ struct Terrain_Descr {
 			(get_is() & TERRAIN_UNPASSABLE ? 8 : 1) : -1;
 	}
 
+	uint8_t get_num_valid_resources() const {
+		return m_nr_valid_resources;
+	}
+
+	Resource_Index get_valid_resource(uint8_t index) const {
+		return m_valid_resources[index];
+	}
+
 	bool is_resource_valid(const int32_t res) const throw () {
 		for (int32_t i = 0; i < m_nr_valid_resources; ++i)
 			if (m_valid_resources[i] == res)
@@ -163,9 +171,9 @@ private:
 	void readTerrains
 		(std::vector<Terrain_Index> & list, Section &, char const * value_name);
 
-	std::vector<Terrain_Index> m_Terrains1; //  ocean, coast, inner or foot
-	std::vector<Terrain_Index> m_Terrains2; //  shelf, land, outer or mountain
-	std::vector<Terrain_Index> m_Terrains3; //  shallow, upper, snow
+	std::vector<Terrain_Index>  m_Terrains1; //  ocean, coast, inner or foot
+	std::vector<Terrain_Index>  m_Terrains2; //  shelf, land, outer or mountain
+	std::vector<Terrain_Index>  m_Terrains3; //  shallow, upper, snow
 
 	uint32_t m_weight;
 

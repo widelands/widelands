@@ -193,6 +193,7 @@ void MapGenAreaInfo::readTerrains
 void MapGenAreaInfo::parseSection
 	(World * const world, Section & s, MapGenAreaType const areaType)
 {
+	std::string res_str = s.get_string("resources", "");
 	m_weight = s.get_positive("weight", 1);
 	m_world = world;
 	switch (areaType) {
@@ -262,6 +263,7 @@ Terrain_Index MapGenAreaInfo::getTerrain
 		default:                  return 0;
 	}
 }
+
 
 uint32_t MapGenInfo::getSumLandWeight()
 {

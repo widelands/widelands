@@ -128,9 +128,19 @@ The Id-String also contains some kind of check-sum to prevent ill
 ids to be used.
 */
 struct UniqueRandomMapInfo {
+
+	enum Resource_Amount
+	{
+		raLow    = 0,
+		raMedium = 1,
+		raHigh   = 2
+	};
+
 	uint32_t mapNumber;
 	uint32_t w;
 	uint32_t h;
+	Resource_Amount resource_amount;
+
 	double   waterRatio;     //  How much of the map is water?
 	double   landRatio;      //  How much of the map is land?
 	double   wastelandRatio; //  How much of the "land" is wasteland?
@@ -463,6 +473,26 @@ private:
 		 UniqueRandomMapInfo const &);
 	static uint32_t * generate_random_value_map
 		(uint32_t w, uint32_t h, RNG & rng);
+
+	Terrain_Index figure_out_terrain
+		(MapGenInfo                &       mapGenInfo,
+		 uint32_t                  * const random2,
+		 uint32_t                  * const random3,
+		 uint32_t                  * const random4,
+		 uint32_t const x,  uint32_t const y,
+		 uint32_t const x1, uint32_t const y1,
+		 uint32_t const x2, uint32_t const y2,
+		 uint32_t const h1, uint32_t const h2, uint32_t const h3,
+		 UniqueRandomMapInfo const &       mapInfo,
+		 RNG                       &       rng);
+
+	void generate_resources
+		(uint32_t                  * const random1,
+		 uint32_t                  * const random2,
+		 uint32_t                  * const random3,
+		 uint32_t                  * const random4,
+		 uint32_t const x,  uint32_t const y,
+		 UniqueRandomMapInfo const &       mapInfo);
 
 };
 

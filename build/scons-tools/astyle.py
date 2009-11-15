@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import SCons.Builder
 import SCons.Action
@@ -20,7 +21,7 @@ def generate(env):
 
 def find_astyle(env):
     binary = None
-    if 'PATH' in env:
+    if env.has_key("PATH"):
         binary=env.WhereIs('astyle', path=env['PATH'])
 	buggy_binary=env.WhereIs('buggy-astyle', path=env['PATH'])
 

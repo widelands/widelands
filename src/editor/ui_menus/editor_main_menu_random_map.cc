@@ -46,7 +46,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	:
 	UI::Window
 		(&parent,
-		 (parent.get_w() - 220) / 2, (parent.get_h() - 250) / 2, 220, 250,
+		 (parent.get_w() - 220) / 2, (parent.get_h() - 450) / 2, 220, 450,
 		 _("New Random Map")),
 	m_currentworld(0)
 {
@@ -232,9 +232,30 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	m_island_mode->changed.set
 		(this, & Main_Menu_New_Random_Map::nr_edit_box_changed);
 
-	new UI::Textarea(this, posx + spacing + 20, posy, _("Island mode:"));
+	new UI::Textarea(this, posx, posy, _("Island mode:"));
 	posy += height + spacing;
 
+
+
+	// ---------- Amount of Resources (Low/Medium/High) ----------
+
+	new UI::Textarea(this, posx, posy, _("Resources:"));
+	posy += height + spacing;
+
+	m_res_amounts.push_back(_("Low"));
+	m_res_amounts.push_back(_("Medium"));
+	m_res_amounts.push_back(_("High"));
+
+	m_res_amount = 2;
+
+	m_res = new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
+		(this,
+		 posx, posy, width, height,
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 &Main_Menu_New_Random_Map::button_clicked, *this, 12,
+		 m_res_amounts[m_res_amount].c_str());
+
+	posy += height + spacing + spacing + spacing;
 
 
 	// ---------- Worlds ----------
@@ -333,6 +354,11 @@ void Main_Menu_New_Random_Map::button_clicked(int32_t n) {
 		if (m_wastelandval > 0)
 			m_wastelandval -= 10;
 		break;
+	case 12:
+		++ m_res_amount;
+		if (m_res_amount == m_res_amounts.size())
+			m_res_amount = 0;
+		m_res->set_title(m_res_amounts[m_res_amount].c_str());
 	}
 
 	char buffer[200];
@@ -388,15 +414,19 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 	mapInfo.mapNumber = m_mapNumber;
 	mapInfo.islandMode = m_island_mode->get_state();
 	mapInfo.numPlayers = 1;
+	mapInfo.resource_amount =
+		static_cast<Widelands::UniqueRandomMapInfo::Resource_Amount>
+			(m_res_amount);
 
 	std::stringstream sstrm;
 	sstrm << "Random generated map\nRandom number = "
 		<< mapInfo.mapNumber << "\n"
+		<< "World = " << m_world->get_title() << "\n"
 		<< "Water = " << m_waterval << " %\n"
 		<< "Land = " << m_landval << " %\n"
 		<< "Wasteland = " << m_wastelandval << " %\n"
+		<< "Resources = " << m_res->get_title() << "\n"
 		<< "ID = " << m_idEditbox->text() << "\n";
-
 
 	map.create_random_map
 		(mapInfo, m_worlds[m_currentworld].c_str(), _("No Name"),
@@ -410,6 +440,7 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 
 	eia.set_need_save(true);
 	eia.need_complete_redraw();
+	eia.register_overlays();
 
 	die();
 }
@@ -439,6 +470,11 @@ void Main_Menu_New_Random_Map::id_edit_box_changed()
 
 		m_landval  = mapInfo.landRatio  * 100.0 + 0.49;
 		m_waterval = mapInfo.waterRatio * 100.0 + 0.49;
+		m_res_amount = mapInfo.resource_amount;
+
+		// TODO: Get world !!
+
+		m_res->set_title(m_res_amounts[m_res_amount].c_str());
 
 		button_clicked(-1);  // Update other values in UI as well
 
@@ -468,6 +504,10 @@ void Main_Menu_New_Random_Map::nr_edit_box_changed()
 			mapInfo.mapNumber = m_mapNumber;
 			mapInfo.islandMode = m_island_mode->get_state();
 			mapInfo.numPlayers = 1;
+			mapInfo.resource_amount = static_cast
+				<Widelands::UniqueRandomMapInfo::Resource_Amount>
+					(m_res_amount);
+			// TODO: Set world !!!
 
 			std::string idStr;
 			Widelands::UniqueRandomMapInfo::generateIdString(idStr, mapInfo);

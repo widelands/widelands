@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import SCons.Builder
 import SCons.Action
 
@@ -15,7 +16,7 @@ def generate(env):
 
 def find_ctags(env):
     b = None
-    if 'PATH' in env:
+    if env.has_key("PATH"):
         b=env.WhereIs('ctags', path=env['PATH'])
 	if b==None:
 		print 'Searching for ctags:       not found. Tags will not be built'

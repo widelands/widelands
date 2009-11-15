@@ -43,13 +43,16 @@ struct Main_Menu_New_Random_Map : public UI::Window {
 private:
 	UI::Textarea * m_width, * m_height;
 	UI::Textarea * m_land, * m_water, * m_mountains, * m_wasteland;
+	UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t> * m_res;
 	UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t> * m_world;
 	UI::Checkbox * m_island_mode;
 	UI::Callback_Button<Main_Menu_New_Random_Map>* m_goButton;
 	int32_t m_w, m_h, m_landval, m_waterval, m_wastelandval;
 	uint32_t m_mapNumber;
 	std::vector<std::string>::size_type m_currentworld;
+	uint32_t m_res_amount;
 	std::vector<std::string> m_worlds;
+	std::vector<std::string> m_res_amounts;
 
 	UI::EditBox * m_nrEditbox;
 	UI::EditBox * m_idEditbox;

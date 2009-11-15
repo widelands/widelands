@@ -38,6 +38,7 @@
 #include "upcast.h"
 #include "wexception.h"
 #include "worlddata.h"
+#include "editor/tools/editor_increase_resources_tool.h"
 
 #include "log.h"
 
@@ -818,7 +819,7 @@ rng:         is the random number generator to be used.
              currently being created.
 ===============
 */
-static Terrain_Index figure_out_terrain
+Terrain_Index Map::figure_out_terrain
 	(MapGenInfo                &       mapGenInfo,
 	 uint32_t                  * const random2,
 	 uint32_t                  * const random3,
@@ -995,8 +996,107 @@ static Terrain_Index figure_out_terrain
 			 rng.rand()
 			 %
 			 mapGenInfo.getArea(atp, usedLandIndex).getNumTerrains(ttp));
+
 }
 
+#define set_resource_helper(rnd1, res)\
+{\
+	Resource_Index res_idx = terr.get_valid_resource(res);\
+	uint32_t max_amount = \
+		m_world->get_resource(res_idx)->get_max_amount();\
+	uint8_t res_val = static_cast < uint8_t > \
+		(rnd1 / (MAX_ELEVATION / max_amount));\
+	res_val *= \
+		(static_cast<uint8_t>(mapInfo.resource_amount) + 1);\
+	res_val /= 3;\
+	FCoords coords = get_fcoords(m_fields[x + mapInfo.w * y]);\
+	if (Editor_Change_Resource_Tool_Callback(coords, this, res_idx))\
+	{\
+		m_fields[x  + mapInfo.w * y].set_resources\
+			(res_idx, res_val);\
+			m_fields[x  + mapInfo.w * y].set_starting_res_amount\
+			(res_val);\
+	}\
+}
+
+void Map::generate_resources
+	(uint32_t                  * const random1,
+	 uint32_t                  * const random2,
+	 uint32_t                  * const random3,
+	 uint32_t                  * const random4,
+	 uint32_t const x,  uint32_t const y,
+	 UniqueRandomMapInfo const &       mapInfo)
+{
+	// We'll take the "D" terrain at first...
+	// TODO: Check how the editor handles this...
+
+	Terrain_Index tix = m_fields[x + mapInfo.w * y].get_terrains().d;
+	const Terrain_Descr & terr = m_world->get_ter(tix);
+	uint8_t numRsrc = terr.get_num_valid_resources();
+
+	if (numRsrc == 0) return;
+
+	if (numRsrc == 1)
+	{
+		uint32_t rnd1 = random1[x + mapInfo.w * y];
+		set_resource_helper(rnd1, 0);
+	}
+	else if (numRsrc == 2)
+	{
+		uint32_t rnd1 = random1[x + mapInfo.w * y];
+		uint32_t rnd2 = random2[x + mapInfo.w * y];
+		if (rnd1 > rnd2)
+		{
+			set_resource_helper(rnd1, 0);
+		}
+		else
+		{
+			set_resource_helper(rnd2, 1);
+		}
+	}
+	else if (numRsrc == 3)
+	{
+		uint32_t rnd1 = random1[x + mapInfo.w * y];
+		uint32_t rnd2 = random2[x + mapInfo.w * y];
+		uint32_t rnd3 = random3[x + mapInfo.w * y];
+		if ((rnd1 > rnd2) && (rnd1 > rnd3))
+		{
+			set_resource_helper(rnd1, 0);
+		}
+		else if ((rnd2 > rnd1) && (rnd2 > rnd3))
+		{
+			set_resource_helper(rnd2, 1);
+		}
+		else
+		{
+			set_resource_helper(rnd3, 2);
+		}
+	}
+	else if (numRsrc == 4)
+	{
+		uint32_t rnd1 = random1[x + mapInfo.w * y];
+		uint32_t rnd2 = random2[x + mapInfo.w * y];
+		uint32_t rnd3 = random3[x + mapInfo.w * y];
+		uint32_t rnd4 = random4[x + mapInfo.w * y];
+
+		if ((rnd1 > rnd2) && (rnd1 > rnd3) && (rnd1 > rnd4))
+		{
+			set_resource_helper(rnd1, 0);
+		}
+		else if ((rnd2 > rnd1) && (rnd2 > rnd3) && (rnd2 > rnd4))
+		{
+			set_resource_helper(rnd2, 1);
+		}
+		else if ((rnd3 > rnd1) && (rnd3 > rnd2) && (rnd3 > rnd4))
+		{
+			set_resource_helper(rnd3, 2);
+		}
+		else
+		{
+			set_resource_helper(rnd4, 3);
+		}
+	}
+}
 
 void Map::create_random_map
 	(UniqueRandomMapInfo const & mapInfo,
@@ -1036,9 +1136,19 @@ void Map::create_random_map
 	uint32_t * const random4    =
 		generate_random_value_map(mapInfo.w, mapInfo.h, rng);
 
+	// for resources
+	uint32_t * const random_rsrc_1 =
+		generate_random_value_map(mapInfo.w, mapInfo.h, rng);
+	uint32_t * const random_rsrc_2 =
+		generate_random_value_map(mapInfo.w, mapInfo.h, rng);
+	uint32_t * const random_rsrc_3 =
+		generate_random_value_map(mapInfo.w, mapInfo.h, rng);
+	uint32_t * const random_rsrc_4 =
+		generate_random_value_map(mapInfo.w, mapInfo.h, rng);
+
 	try {
-		//  Now we have generated a lot of elevation!!
-		//  Lets use them !!!
+		//  Now we have generated a lot of random data!!
+		//  Lets use it !!!
 
 		for (uint32_t x = 0; x < mapInfo.w; ++x)
 			for (uint32_t y = 0; y < mapInfo.h; ++y) {
@@ -1085,10 +1195,12 @@ void Map::create_random_map
 				//  "D" triangle
 
 				Terrain_Index tix;
+
 				tix = figure_out_terrain
 					(mapGenInfo, random2, random3, random4,
 					 x, y, lower_x, lower_y, lower_right_x, lower_y,
-					 height_x0_y0, height_x0_y1, height_x1_y1, mapInfo, rng);
+					 height_x0_y0, height_x0_y1, height_x1_y1, mapInfo,
+					 rng);
 
 				m_fields[x  + mapInfo.w * y].set_terrain_d(tix);
 
@@ -1098,10 +1210,24 @@ void Map::create_random_map
 				tix = figure_out_terrain
 					(mapGenInfo, random2, random3, random4,
 					 x, y, right_x, y, lower_right_x, lower_y,
-					 height_x0_y0, height_x1_y0, height_x1_y1, mapInfo, rng);
+					 height_x0_y0, height_x1_y0, height_x1_y1,
+					 mapInfo, rng);
 
 				m_fields[x  + mapInfo.w * y].set_terrain_r(tix);
 
+				// set resources for this field
+
+				generate_resources
+					(random_rsrc_1, random_rsrc_2,
+					 random_rsrc_3, random_rsrc_4,
+					 x, y, mapInfo);
+			}
+
+		//  Now lets create the resources
+
+		for (uint32_t x = 0; x < mapInfo.w; ++x)
+			for (uint32_t y = 0; y < mapInfo.h; ++y) {
+				// todo
 			}
 
 	} catch (...) {
@@ -1109,12 +1235,18 @@ void Map::create_random_map
 		delete[] random2;
 		delete[] random3;
 		delete[] random4;
+		delete[] random_rsrc_1;
+		delete[] random_rsrc_2;
+		delete[] random_rsrc_3;
 		throw;
 	}
 	delete[] elevations;
 	delete[] random2;
 	delete[] random3;
 	delete[] random4;
+	delete[] random_rsrc_1;
+	delete[] random_rsrc_2;
+	delete[] random_rsrc_3;
 	//  Aftermaths...
 
 	recalc_whole_map();
@@ -2948,14 +3080,14 @@ Return value: The converted value as a character
 */
 char Widelands::UniqueRandomMapInfo::mapIdNumberToChar(int32_t const num)
 {
-	if         (0 <= num && num < 24) {
+	if         ((0 <= num) && (num < 24)) {
 		char result =  num + 'a';
 		if (result >= 'i')
 			++result;
 		if (result >= 'o')
 			++result;
 		return result;
-	} else if (24 <= num && num < 32)
+	} else if ((24 <= num) && (num < 32))
 		return (num - 24) + '2';
 	else
 		return '?';
@@ -2985,7 +3117,7 @@ bool Widelands::UniqueRandomMapInfo::setFromIdString
 
 	//  convert digits to values
 
-	char nums[MAP_ID_DIGITS];
+	int32_t nums[MAP_ID_DIGITS];
 
 	for (uint32_t ix = 0; ix < MAP_ID_DIGITS; ++ix) {
 		int const num = mapIdCharToNumber(mapIdString[ix + (ix / 4)]);
@@ -2996,14 +3128,14 @@ bool Widelands::UniqueRandomMapInfo::setFromIdString
 
 	//  get xxor start value
 
-	char xorr = nums[MAP_ID_DIGITS - 1];
+	int32_t xorr = nums[MAP_ID_DIGITS - 1];
 
 	for (int32_t ix = MAP_ID_DIGITS - 1; ix >= 0; --ix) {
 		nums[ix] = nums[ix] ^ xorr;
 		xorr -= 7;
 		xorr -= ix;
 		if (xorr < 0)
-			xorr &= 0x0000003f;
+			xorr &= 0x0000001f;
 	}
 
 	//  check if xxor was right
@@ -3027,7 +3159,17 @@ bool Widelands::UniqueRandomMapInfo::setFromIdString
 		(nums[3] << 15) |
 		(nums[4] << 20) |
 		(nums[5] << 25) |
-		(nums[6] << 30);
+		((nums[6] & 3) << 30);
+
+	// Convert amount of resources
+	mapInfo_out.resource_amount =
+		static_cast<Widelands::UniqueRandomMapInfo::Resource_Amount>
+			((nums[6] & 0xc) >> 2);
+
+	if
+		(mapInfo_out.resource_amount >
+		 Widelands::UniqueRandomMapInfo::raHigh)
+			return false;
 
 	//  Convert map size
 	mapInfo_out.w = nums[8] * 16 + 64;
@@ -3073,9 +3215,10 @@ void Widelands::UniqueRandomMapInfo::generateIdString
 	assert(mapInfo.landRatio <= 1.0);
 	assert(mapInfo.wastelandRatio >= 0.0);
 	assert(mapInfo.wastelandRatio <= 1.0);
+	assert(mapInfo.resource_amount <= Widelands::UniqueRandomMapInfo::raHigh);
 
 	mapIdsString_out = "";
-	char nums[MAP_ID_DIGITS];
+	int32_t nums[MAP_ID_DIGITS];
 	for (uint32_t ix = 0; ix < MAP_ID_DIGITS; ++ix)
 		nums[ix] = 0;
 
@@ -3088,6 +3231,9 @@ void Widelands::UniqueRandomMapInfo::generateIdString
 	nums [4] = (mapInfo.mapNumber >> 20) & 31;
 	nums [5] = (mapInfo.mapNumber >> 25) & 31;
 	nums [6] = (mapInfo.mapNumber >> 30) &  3;
+
+	// Convert amount of resources
+	nums [6] |= (mapInfo.resource_amount & 3) << 2;
 
 	//  Convert width
 	nums [8] = (mapInfo.w - 64) / 16;
@@ -3117,7 +3263,7 @@ void Widelands::UniqueRandomMapInfo::generateIdString
 	//  This lets it look better
 	//  Every change in a digit will result in a complete id change
 
-	char xorr = 0x0a;
+	int32_t xorr = 0x0a;
 	for (uint32_t ix = 0; ix < MAP_ID_DIGITS; ++ix)
 		xorr = xorr ^ nums[ix];
 
@@ -3126,7 +3272,7 @@ void Widelands::UniqueRandomMapInfo::generateIdString
 		xorr -= 7;
 		xorr -= ix;
 		if (xorr < 0)
-			xorr &= 0x0000003f;
+			xorr &= 0x0000001f;
 	}
 
 	//  translate it to ASCII

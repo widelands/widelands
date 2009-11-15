@@ -10,12 +10,12 @@
 ocean=10
 shelf=10
 shallow=10
-coast=12
-upperland=16
-mountainfoot=18
-mountain=20
-snow=33
-summit=40
+coast=11
+upperland=14
+mountainfoot=15
+mountain=16
+snow=35
+summit=45
 
 [areas]
 water=water
