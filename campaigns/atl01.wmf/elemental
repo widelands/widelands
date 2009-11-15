@@ -1,0 +1,12 @@
+# Automatically created by Widelands svn4653 (debug)
+
+[global]
+packet_version="1"
+map_w="144"
+map_h="96"
+nr_players="4"
+world="greenland"
+name="01 - From nemesis to genesis"
+author="Nasenbaer"
+background="campaigns/atl01.wmf/pics/everythinglost.jpg"
+descr=

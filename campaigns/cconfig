@@ -19,7 +19,7 @@
 #####
 
 [global]
-version = 3
+version = 4
 # Barbarian Tutorial Campaign
 campname0=_"(Tutorial) Barbarians - The second Empire"
 campsect0=barbariantut
@@ -32,6 +32,12 @@ campsect1=empiretut
 campdiff1=2
 campdesc1=_"Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
 campvisi1=0
+# Atlantean Campaign
+campname2=_"Atlanteans - the new rise"
+campsect2=atlanteans
+campdiff2=3
+campdesc2=_"Some descriptive texts..."
+campvisi2=0
 
 
 
@@ -73,4 +79,9 @@ path="campaigns/emp01.wmf"
 name=_"Empire Tutorial2 - An outpost for exile"
 visible=0
 path="campaigns/emp02.wmf"
+
+[atlanteans00]
+name=_"01 - From nemesis to genesis"
+visible=1
+path="campaigns/atl01.wmf"
 
