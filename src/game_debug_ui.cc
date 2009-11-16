@@ -235,22 +235,21 @@ private:
 FieldDebugWindow::FieldDebugWindow
 	(Interactive_Base & parent, Widelands::Coords const coords)
 :
-UI::Window(&parent, 0, 60, 200, 400, _("Debug Field")),
-m_map     (parent.egbase().map()),
-m_coords  (m_map.get_fcoords(coords)),
+	UI::Window(&parent, 0, 60, 214, 400, _("Debug Field")),
+	m_map     (parent.egbase().map()),
+	m_coords  (m_map.get_fcoords(coords)),
 
-//  setup child panels
-m_ui_field(this, 0, 0, 200, 280, ""),
+	//  setup child panels
+	m_ui_field(this, 0, 0, 214, 280, ""),
 
-m_ui_immovable
-	(this,
-	 0, 280, 200, 24,
-	 g_gr->get_no_picture(),
-	 &FieldDebugWindow::open_immovable, *this,
-	 ""),
+	m_ui_immovable
+		(this,
+		 0, 280, 250, 24,
+		 g_gr->get_no_picture(),
+		 &FieldDebugWindow::open_immovable, *this,
+		 ""),
 
-m_ui_bobs(this, 0, 304, 200, 96)
-
+	m_ui_bobs(this, 0, 304, 214, 96)
 {
 	assert(0 <= m_coords.x);
 	assert(m_coords.x < m_map.get_width());
@@ -282,6 +281,10 @@ void FieldDebugWindow::think()
 		 _("%i, %i - height: %u\n"),
 		 m_coords.x, m_coords.y, m_coords.field->get_height());
 	str += buffer;
+	if (m_coords.field->get_caps() & Widelands::MOVECAPS_WALK)
+		str += "is walkable\n";
+	if (m_coords.field->get_caps() & Widelands::MOVECAPS_SWIM)
+		str += "is swimable\n";
 	Widelands::Map_Index const i = m_coords.field - &m_map[0];
 	Widelands::Editor_Game_Base const & egbase =
 		ref_cast<Interactive_Base const, UI::Panel const>(*get_parent())
