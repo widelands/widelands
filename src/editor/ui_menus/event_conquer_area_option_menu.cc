@@ -304,7 +304,7 @@ void Event_Conquer_Area_Option_Menu::clicked_ok() {
 					 _
 					 	("There is another event registered with the name \"%s\". "
 					 	 "Choose another name."),
-					 name.size());
+					 name.c_str());
 				UI::WLMessageBox mb
 					(get_parent(),
 					 _("Name in use"), buffer,
