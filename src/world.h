@@ -162,9 +162,9 @@ struct MapGenAreaInfo {
 	};
 
 	void parseSection (World *, Section &, MapGenAreaType areaType);
-	size_t getNumTerrains(MapGenTerrainType);
-	Terrain_Index getTerrain(MapGenTerrainType terrType, uint32_t index);
-	uint32_t getWeight() {return m_weight;}
+	size_t getNumTerrains(MapGenTerrainType) const;
+	Terrain_Index getTerrain(MapGenTerrainType terrType, uint32_t index) const;
+	uint32_t getWeight() const {return m_weight;}
 
 private:
 
@@ -192,19 +192,19 @@ struct MapGenInfo {
 
 	void parseProfile(World * world, Profile & profile);
 
-	size_t getNumAreas(MapGenAreaInfo::MapGenAreaType areaType);
-	MapGenAreaInfo & getArea
-		(MapGenAreaInfo::MapGenAreaType areaType, uint32_t index);
+	size_t getNumAreas(MapGenAreaInfo::MapGenAreaType areaType) const;
+	MapGenAreaInfo const & getArea
+		(MapGenAreaInfo::MapGenAreaType, uint32_t index) const;
 
-	uint8_t getWaterOceanHeight  () {return m_ocean_height;}
-	uint8_t getWaterShelfHeight  () {return m_shelf_height;}
-	uint8_t getWaterShallowHeight() {return m_shallow_height;}
-	uint8_t getLandCoastHeight   () {return m_coast_height;}
-	uint8_t getLandUpperHeight   () {return m_upperland_height;}
-	uint8_t getMountainFootHeight() {return m_mountainfoot_height;}
-	uint8_t getMountainHeight    () {return m_mountain_height;}
-	uint8_t getSnowHeight        () {return m_snow_height;}
-	uint8_t getSummitHeight      () {return m_summit_height;}
+	uint8_t getWaterOceanHeight  () const {return m_ocean_height;}
+	uint8_t getWaterShelfHeight  () const {return m_shelf_height;}
+	uint8_t getWaterShallowHeight() const {return m_shallow_height;}
+	uint8_t getLandCoastHeight   () const {return m_coast_height;}
+	uint8_t getLandUpperHeight   () const {return m_upperland_height;}
+	uint8_t getMountainFootHeight() const {return m_mountainfoot_height;}
+	uint8_t getMountainHeight    () const {return m_mountain_height;}
+	uint8_t getSnowHeight        () const {return m_snow_height;}
+	uint8_t getSummitHeight      () const {return m_summit_height;}
 
 	uint32_t getSumLandWeight();
 

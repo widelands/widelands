@@ -310,7 +310,10 @@ void ProductionSite::calc_statistics()
 		snprintf
 			(m_statistics_buf, sizeof(m_statistics_buf),
 			 "%d%% %s", percOk, trend.c_str());
-	else snprintf(m_statistics_buf, sizeof(m_statistics_buf), "%d%%", percOk);
+	else
+		snprintf
+			(m_statistics_buf, sizeof(m_statistics_buf),
+			 "%d%%",    percOk);
 
 	m_last_stat_percent = static_cast<char>(percOk); //FIXME: ARGH!
 

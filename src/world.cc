@@ -219,7 +219,7 @@ void MapGenAreaInfo::parseSection
 	}
 }
 
-size_t MapGenAreaInfo::getNumTerrains(MapGenTerrainType const terrType)
+size_t MapGenAreaInfo::getNumTerrains(MapGenTerrainType const terrType) const
 {
 	switch (terrType) {
 		case ttWaterOcean:        return m_Terrains1.size();
@@ -242,7 +242,7 @@ size_t MapGenAreaInfo::getNumTerrains(MapGenTerrainType const terrType)
 }
 
 Terrain_Index MapGenAreaInfo::getTerrain
-	(MapGenTerrainType const terrType, uint32_t const index)
+	(MapGenTerrainType const terrType, uint32_t const index) const
 {
 	switch (terrType) {
 		case ttWaterOcean:        return m_Terrains1[index];
@@ -278,7 +278,8 @@ uint32_t MapGenInfo::getSumLandWeight()
 }
 
 
-size_t MapGenInfo::getNumAreas(MapGenAreaInfo::MapGenAreaType const areaType)
+size_t MapGenInfo::getNumAreas
+	(MapGenAreaInfo::MapGenAreaType const areaType) const
 {
 	switch (areaType) {
 	case MapGenAreaInfo::atWater:     return m_WaterAreas    .size();
@@ -289,8 +290,8 @@ size_t MapGenInfo::getNumAreas(MapGenAreaInfo::MapGenAreaType const areaType)
 	throw wexception("invalid MapGenAreaType %u", areaType);
 }
 
-MapGenAreaInfo & MapGenInfo::getArea
-	(MapGenAreaInfo::MapGenAreaType const areaType, uint32_t const index)
+MapGenAreaInfo const & MapGenInfo::getArea
+	(MapGenAreaInfo::MapGenAreaType const areaType, uint32_t const index) const
 {
 	switch (areaType) {
 	case MapGenAreaInfo::atWater:     return m_WaterAreas    .at(index);

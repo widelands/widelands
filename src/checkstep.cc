@@ -123,13 +123,18 @@ CheckStepWalkOn
 ===============
 */
 bool CheckStepWalkOn::allowed
-	(Map &, FCoords start, FCoords end, int32_t, CheckStep::StepId id) const
+	(Map &,
+	 FCoords           const start,
+	 FCoords           const end,
+	 int32_t,
+	 CheckStep::StepId const id)
+	const
 {
-	uint8_t startcaps = start.field->get_caps();
-	uint8_t endcaps = end.field->get_caps();
+	uint8_t const startcaps = start.field->get_caps();
+	uint8_t const endcaps   = end  .field->get_caps();
 
-	// Make sure that we don't find paths where we walk onto an unwalkable field,
-	// then move back onto a walkable field.
+	//  Make sure to not find paths where we walk onto an unwalkable node, then
+	//  then back onto a walkable node.
 	if (!m_onlyend && id != CheckStep::stepFirst && !(startcaps & m_movecaps))
 		return false;
 

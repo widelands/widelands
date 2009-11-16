@@ -301,13 +301,13 @@ void RenderTarget::tile(Rect r, PictureID const picture, Point ofs)
 }
 
 
-static inline Sint8 node_brightness
+inline static Sint8 node_brightness
 	(Widelands::Time   gametime,
 	 Widelands::Time   last_seen,
 	 Widelands::Vision vision,
 	 Sint8             result)
 __attribute__((const));
-static inline Sint8 node_brightness
+inline static Sint8 node_brightness
 	(Widelands::Time   const gametime,
 	 Widelands::Time   const last_seen,
 	 Widelands::Vision const vision,

@@ -127,7 +127,7 @@ private:
  * bobs moving onto the shore).
  */
 struct CheckStepDefault {
-	CheckStepDefault(uint8_t movecaps) : m_movecaps(movecaps) {}
+	CheckStepDefault(uint8_t const movecaps) : m_movecaps(movecaps) {}
 
 	bool allowed
 		(Map &, FCoords start, FCoords end, int32_t dir, CheckStep::StepId)
@@ -145,7 +145,7 @@ private:
  * If onlyend is true, we can only do this on the final step.
  */
 struct CheckStepWalkOn {
-	CheckStepWalkOn(uint8_t movecaps, bool onlyend) :
+	CheckStepWalkOn(uint8_t const movecaps, bool const onlyend) :
 		m_movecaps(movecaps), m_onlyend(onlyend) {}
 
 	bool allowed
