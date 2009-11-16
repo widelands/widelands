@@ -1080,7 +1080,7 @@ bool NetHost::haveUserName(std::string const & name, int32_t ignoreplayer) {
 	if
 		(ignoreplayer <= static_cast<int32_t>(d->settings.users.size())
 		 && ignoreplayer >= 0)
-		ignoreplayer = d->settings.users[ignoreplayer].position;
+		ignoreplayer = d->settings.users.at(ignoreplayer).position;
 	for (uint32_t i = 0; i < d->settings.players.size(); ++i) {
 		if (static_cast<int32_t>(i) != ignoreplayer) {
 			PlayerSettings const & player = d->settings.players[i];
