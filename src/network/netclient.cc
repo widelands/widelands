@@ -350,12 +350,12 @@ void NetClient::setPlayerReady
 	}
 }
 
-bool NetClient::getPlayerReady(uint8_t number) {
+bool NetClient::getPlayerReady(uint8_t const number) {
 	return
-		d->settings.players[number].state == PlayerSettings::stateClosed ||
-		d->settings.players[number].state == PlayerSettings::stateComputer ||
-		(d->settings.players[number].state == PlayerSettings::stateHuman &&
-		 d->settings.players[number].ready);
+		d->settings.players.at(number).state == PlayerSettings::stateClosed ||
+		d->settings.players.at(number).state == PlayerSettings::stateComputer ||
+		(d->settings.players.at(number).state == PlayerSettings::stateHuman &&
+		 d->settings.players.at(number).ready);
 }
 
 void NetClient::setPlayerNumber(int32_t number)
@@ -405,7 +405,7 @@ void NetClient::recvOnePlayer
 		throw DisconnectException
 			(_("Server sent a player update for a player that does not exist."));
 
-	PlayerSettings & player = d->settings.players[number];
+	PlayerSettings & player = d->settings.players.at(number);
 	player.state = static_cast<PlayerSettings::State>(packet.Unsigned8());
 	player.name = packet.String();
 	player.tribe = packet.String();
@@ -430,12 +430,12 @@ void NetClient::recvOneUser
 		d->settings.users.push_back(newuser);
 	}
 
-	d->settings.users[number].name = packet.String();
-	d->settings.users[number].position = packet.Signed32();
+	d->settings.users.at(number).name     = packet.String  ();
+	d->settings.users.at(number).position = packet.Signed32();
 	if (number == d->settings.usernum) {
-		d->localplayername = d->settings.users[number].name;
-		d->settings.playernum = d->settings.users[number].position;
-		d->playernum = d->settings.users[number].position;
+		d->localplayername = d->settings.users.at(number).name;
+		d->settings.playernum = d->settings.users.at(number).position;
+		d->playernum = d->settings.users.at(number).position;
 	}
 }
 
@@ -571,7 +571,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 	case NETCMD_SET_PLAYERNUMBER: {
 		int32_t number = packet.Signed32();
 		d->playernum = number;
-		d->settings.users[d->settings.usernum].position = number;
+		d->settings.users.at(d->settings.usernum).position = number;
 		d->settings.playernum = number;
 		break;
 	}
