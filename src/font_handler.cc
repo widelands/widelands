@@ -308,7 +308,7 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 
 			m_rendered_lines.push_back(surface);
 			global_surface_height += surface->h + linespacing;
-			if (global_surface_width < surface->w)
+			if (global_surface_width < static_cast<uint32_t>(surface->w))
 				global_surface_width = surface->w;
 		} else {
 			log
