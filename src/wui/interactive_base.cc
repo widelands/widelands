@@ -438,8 +438,7 @@ void Interactive_Base::toggle_minimap() {
  */
 void Interactive_Base::hide_minimap()
 {
-	if (m->minimap.window)
-		delete m->minimap.window;
+	delete m->minimap.window;
 }
 
 
