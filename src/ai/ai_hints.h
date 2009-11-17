@@ -22,15 +22,14 @@
 
 #include <SDL_types.h>
 
-class Profile;
+struct Section;
 
 /// This struct is used to read out the data given in [aihints] section of a
 /// buildings conf file. It is used to tell the computer player about the
 /// special properties of a building.
 struct BuildingHints {
-	BuildingHints ();
-
-	void parse (Profile &);
+	BuildingHints (Section *);
+	~BuildingHints();
 
 	char const * get_renews_map_resource() const {return renews_map_resource;}
 
@@ -47,6 +46,9 @@ struct BuildingHints {
 	uint8_t      get_mines_percent      () const {return mines_percent;}
 
 private:
+	BuildingHints & operator= (BuildingHints const &);
+	explicit BuildingHints    (BuildingHints const &);
+
 	char  * renews_map_resource;
 	char  * mines;
 	bool    basic;

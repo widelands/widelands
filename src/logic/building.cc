@@ -57,6 +57,7 @@ Building_Descr::Building_Descr
 	m_buildicon     (g_gr->get_no_picture()),
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
+	m_hints         (prof.get_section("aihints")),
 	m_vision_range  (0)
 {
 	{
@@ -160,8 +161,6 @@ Building_Descr::Building_Descr
 
 	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
 		g_sound_handler.load_fx(directory, v->get_string());
-
-	m_hints.parse (prof);
 
 	m_vision_range = global_s.get_int("vision_range");
 }

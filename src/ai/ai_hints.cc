@@ -24,33 +24,25 @@
 #include <cstring>
 
 
-BuildingHints::BuildingHints ()
-:
-renews_map_resource(0),
-mines(0),
-basic(false),
-trunkproducer(false),
-stoneproducer(false),
-needs_water(false)
-{}
-
-
-void BuildingHints::parse (Profile & prof)
+BuildingHints::~BuildingHints ()
 {
-	if (Section * const hints = prof.get_section("aihints")) {
-		if (char const * const s = hints->get_string("renews_map_resource"))
+	free(renews_map_resource);
+	free(mines);
+}
+
+BuildingHints::BuildingHints (Section * const section) :
+	renews_map_resource(0),
+	mines              (0),
+	basic              (section ? section->get_bool("is_basic")      : false),
+	trunkproducer      (section ? section->get_bool("trunkproducer") : false),
+	stoneproducer      (section ? section->get_bool("stoneproducer") : false),
+	needs_water        (section ? section->get_bool("needs_water")   : false),
+	mines_percent      (section ? section->get_int ("mines_percent", 100) : 0)
+{
+	if (section) {
+		if (char const * const s = section->get_string("renews_map_resource"))
 			renews_map_resource = strdup(s);
-		if (char const * const s = hints->get_string("mines"))
-			mines = strdup(s);
-		if (const bool b = hints->get_bool("is_basic"))
-			basic = b;
-		if (const bool b = hints->get_bool("trunkproducer"))
-			trunkproducer = b;
-		if (const bool b = hints->get_bool("stoneproducer"))
-			stoneproducer = b;
-		if (const bool b = hints->get_bool("needs_water"))
-			needs_water   = b;
-		mines_percent
-		= static_cast<uint8_t>(hints->get_int("mines_percent", 100));
+		if (char const * const s = section->get_string("mines"))
+			mines               = strdup(s);
 	}
 }
