@@ -348,17 +348,17 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_sb_speed
 		(this,
 		 m_xres * 18 / 25, m_yres * 63 / 100, m_xres / 4, m_vbutw,
-		 opt.speed_of_new_game / 1000, 0, 100, "x",
+		 opt.speed_of_new_game / 1000, 0, 100, _("x"),
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 	m_sb_dis_panel
 		(this,
 		 m_xres * 18 / 25, m_yres * 6768 / 10000, m_xres / 4, m_vbutw,
-		 opt.border_snap_distance, 0, 100, "px.",
+		 opt.panel_snap_distance, 0, 100, _("px."),
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 	m_sb_dis_border
 		(this,
 		 m_xres * 18 / 25, m_yres * 7235 / 10000, m_xres / 4, m_vbutw,
-		 opt.panel_snap_distance, 0, 100, "px.",
+		 opt.border_snap_distance, 0, 100, _("px."),
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
 
 
