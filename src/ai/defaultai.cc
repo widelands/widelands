@@ -75,6 +75,19 @@ time_of_last_construction(0),
 numof_warehouses(0)
 {}
 
+DefaultAI::~DefaultAI()
+{
+	while (not buildable_fields.empty()) {
+		delete buildable_fields.back();
+		buildable_fields.pop_back();
+	}
+	while (not mineable_fields.empty()) {
+		delete mineable_fields.back();
+		mineable_fields.pop_back();
+	}
+
+}
+
 
 /**
  * Main loop of computer player "defaultAI"
@@ -243,7 +256,7 @@ void DefaultAI::late_initialization ()
 		bo.need_water             = bh.get_needs_water();
 
 		if (char const * const s = bh.get_renews_map_resource())
-			bo.production_hint = tribe->safe_ware_index(strdup(s)).value();
+			bo.production_hint = tribe->safe_ware_index(s).value();
 
 		// Read all interesting data from ware producing buildings
 		if (typeid(bld) == typeid(ProductionSite_Descr)) {
@@ -264,7 +277,7 @@ void DefaultAI::late_initialization ()
 			if (bo.type == BuildingObserver::MINE) {
 				// get the resource needed by the mine
 				if (char const * const s = bh.get_mines())
-					bo.mines = world.get_resource(strdup(s));
+					bo.mines = world.get_resource(s);
 				bo.mines_percent = bh.get_mines_percent();
 			}
 
@@ -338,27 +351,27 @@ void DefaultAI::update_all_buildable_fields(const int32_t gametime)
 		 and
 		 buildable_fields.front()->next_update_due <= gametime)
 	{
-		BuildableField * bf = buildable_fields.front();
+		BuildableField & bf = *buildable_fields.front();
 
 		//  check whether we lost ownership of the node
-		if (bf->coords.field->get_owned_by() != player_number()) {
+		if (bf.coords.field->get_owned_by() != player_number()) {
+			delete &bf;
 			buildable_fields.pop_front();
 			continue;
 		}
 
 		//  check whether we can still construct regular buildings on the node
-		if ((player->get_buildcaps(bf->coords) & BUILDCAPS_SIZEMASK) == 0) {
-			unusable_fields.push_back (bf->coords);
-			delete bf;
-
+		if ((player->get_buildcaps(bf.coords) & BUILDCAPS_SIZEMASK) == 0) {
+			unusable_fields.push_back (bf.coords);
+			delete &bf;
 			buildable_fields.pop_front();
 			continue;
 		}
 
-		update_buildable_field (*bf);
+		update_buildable_field (bf);
 		bf->next_update_due = gametime + FIELD_UPDATE_INTERVAL;
 
-		buildable_fields.push_back (bf);
+		buildable_fields.push_back (&bf);
 		buildable_fields.pop_front ();
 	}
 }

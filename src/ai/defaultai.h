@@ -62,7 +62,7 @@ struct Flag;
  */
 struct DefaultAI : Computer_Player {
 	DefaultAI(Widelands::Game &, const Widelands::Player_Number, uint8_t);
-
+	~DefaultAI();
 	virtual void think ();
 
 	virtual void receive(Widelands::NoteImmovable const &);
