@@ -369,7 +369,7 @@ void DefaultAI::update_all_buildable_fields(const int32_t gametime)
 		}
 
 		update_buildable_field (bf);
-		bf->next_update_due = gametime + FIELD_UPDATE_INTERVAL;
+		bf.next_update_due = gametime + FIELD_UPDATE_INTERVAL;
 
 		buildable_fields.push_back (&bf);
 		buildable_fields.pop_front ();

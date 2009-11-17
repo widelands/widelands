@@ -383,8 +383,8 @@ World::World(std::string const & name) : m_basedir("worlds/" + name + '/') {
 	try {
 		i18n::Textdomain textdomain(m_basedir);
 
-		FileSystem & fs = g_fs->MakeSubFileSystem(m_basedir);
-		g_fs->AddFileSystem(fs);
+		std::auto_ptr<FileSystem> fs(&g_fs->MakeSubFileSystem(m_basedir));
+		FileSystemLayer filesystemlayer(*fs);
 
 		{
 			Profile root_conf((m_basedir + "conf").c_str());
@@ -404,8 +404,6 @@ World::World(std::string const & name) : m_basedir("worlds/" + name + '/') {
 			parse_bobs(global_dir, global_root_conf);
 			global_root_conf.check_used();
 		}
-
-		g_fs->RemoveFileSystem(fs);
 	} catch (std::exception const & e) {
 		throw game_data_error("world %s: %s", name.c_str(), e.what());
 	}
@@ -460,8 +458,7 @@ void World::parse_resources()
 			descr.parse(*section, m_basedir);
 			m_resources.add(&descr);
 		}
-	}
-	catch (std::exception const & e) {
+	} catch (std::exception const & e) {
 		throw game_data_error("%s: %s", fname, e.what());
 	}
 }
@@ -472,8 +469,7 @@ void World::parse_terrains()
 
 	snprintf(fname, sizeof(fname), "%s/terrainconf", m_basedir.c_str());
 
-	try
-	{
+	try {
 		Profile prof(fname);
 
 		for (Terrain_Index i = 0;; ++i) {
@@ -488,8 +484,7 @@ void World::parse_terrains()
 		}
 
 		prof.check_used();
-	}
-	catch (game_data_error const & e) {
+	} catch (game_data_error const & e) {
 		throw game_data_error("%s: %s", fname, e.what());
 	}
 }
@@ -517,8 +512,7 @@ void World::parse_mapgen   ()
 
 	snprintf(fname, sizeof(fname), "%s/mapgenconf", m_basedir.c_str());
 
-	try
-	{
+	try {
 		Profile prof(fname);
 
 		m_mapGenInfo.parseProfile(this, prof);

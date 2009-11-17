@@ -48,7 +48,7 @@ struct LayeredFileSystem : public FileSystem {
 	virtual void    AddFileSystem(FileSystem &);
 	virtual void    SetHomeFileSystem(FileSystem &);
 
-	virtual void RemoveFileSystem(FileSystem &);
+	virtual void RemoveFileSystem(FileSystem const &);
 
 	virtual int32_t FindFiles
 		(std::string const & path,
@@ -79,8 +79,8 @@ struct LayeredFileSystem : public FileSystem {
 
 	virtual std::string getBasename() {return std::string();};
 
-	bool FindConflictingVersionFile(FileSystem * fs);
-	bool FindMatchingVersionFile(FileSystem * fs);
+	bool FindConflictingVersionFile(FileSystem &);
+	bool FindMatchingVersionFile(FileSystem &);
 
 	void PutRightVersionOnTop();
 
@@ -95,5 +95,16 @@ private:
 
 /// Access all game data files etc. through this FileSystem
 extern LayeredFileSystem * g_fs;
+
+/// Create an object of this type to add a new filesystem to the top of the
+/// stack and make sure that it is removed when the object goes out of scope.
+/// This is exception-safe, unlike calling g_fs->AddFileSystem and
+/// g_fs->RemoveFileSystem directly.
+struct FileSystemLayer {
+	FileSystemLayer(FileSystem & fs) : m_fs(fs) {g_fs->AddFileSystem(fs);}
+	~FileSystemLayer() {g_fs->RemoveFileSystem(m_fs);}
+private:
+	FileSystem const & m_fs;
+};
 
 #endif

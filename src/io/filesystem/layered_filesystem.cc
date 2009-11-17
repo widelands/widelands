@@ -56,13 +56,13 @@ bool LayeredFileSystem::IsWritable() const {
 
 /**
  * Add a new filesystem to the top of the stack
- * \todo use FileSystem & instead of pointer, throw on failure
+ * \todo throw on failure
  */
 void LayeredFileSystem::AddFileSystem(FileSystem & fs)
 {
 	//only add it to the stack if there isn't a conflicting version file in
 	//the directory
-	if (! FindConflictingVersionFile(&fs)) {
+	if (! FindConflictingVersionFile(fs)) {
 		m_filesystems.push_back(&fs);
 	} else {
 		log("File system NOT added\n");
@@ -70,7 +70,7 @@ void LayeredFileSystem::AddFileSystem(FileSystem & fs)
 }
 void LayeredFileSystem::SetHomeFileSystem(FileSystem & fs)
 {
-	if (! FindConflictingVersionFile(&fs)) {
+	if (! FindConflictingVersionFile(fs)) {
 		m_home = &fs;
 	} else {
 		log("File system NOT added\n");
@@ -81,7 +81,7 @@ void LayeredFileSystem::SetHomeFileSystem(FileSystem & fs)
  * Remove a filesystem from the stack
  * \param fs The filesystem to be removed
  */
-void LayeredFileSystem::RemoveFileSystem(FileSystem & fs)
+void LayeredFileSystem::RemoveFileSystem(FileSystem const & fs)
 {
 	if (m_filesystems.back() != &fs)
 		throw std::logic_error
@@ -93,9 +93,9 @@ void LayeredFileSystem::RemoveFileSystem(FileSystem & fs)
 /**
  * Check if there is a 'version' file with a version lower than minimal version
  * number */
-bool LayeredFileSystem::FindConflictingVersionFile(FileSystem * fs) {
-	if (fs->FileExists("VERSION")) {
-		std::auto_ptr<StreamRead> sr (fs->OpenStreamRead("VERSION"));
+bool LayeredFileSystem::FindConflictingVersionFile(FileSystem & fs) {
+	if (fs.FileExists("VERSION")) {
+		std::auto_ptr<StreamRead> sr (fs.OpenStreamRead("VERSION"));
 		if (sr->EndOfFile())
 			return false;
 		std::string version = sr->String();
@@ -116,9 +116,9 @@ bool LayeredFileSystem::FindConflictingVersionFile(FileSystem * fs) {
  * Check if there is a  'version' file with a version number equal to our
  * current version */
 
-bool LayeredFileSystem::FindMatchingVersionFile(FileSystem * fs) {
-	if (fs->FileExists("VERSION")) {
-		std::auto_ptr<StreamRead> sr (fs->OpenStreamRead("VERSION"));
+bool LayeredFileSystem::FindMatchingVersionFile(FileSystem & fs) {
+	if (fs.FileExists("VERSION")) {
+		std::auto_ptr<StreamRead> sr (fs.OpenStreamRead("VERSION"));
 		if (sr->EndOfFile())
 			return false;
 		std::string version = sr->String();
@@ -148,14 +148,14 @@ void LayeredFileSystem::PutRightVersionOnTop() {
 	{
 		//check if we matching version file and it's not already on top of
 		//the stack
-		FileSystem * const t = *i.current;
+		FileSystem & t = **i.current;
 		if (FindMatchingVersionFile(t)) {
 			std::vector<FileSystem *>::iterator const last = i.end - 1;
 			while (i.current < last) {
 				FileSystem * & target = *i.current;
 				target = *++i.current;
 			}
-			*last = t;
+			*last = &t;
 			break;
 		}
 	}
