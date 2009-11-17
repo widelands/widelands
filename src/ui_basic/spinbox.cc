@@ -79,9 +79,11 @@ struct SpinBoxImpl {
 SpinBox::SpinBox
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 int32_t startval, int32_t minval, int32_t maxval, std::string unit,
-	 const PictureID background, bool big,
-	 Align alignm)
+	 int32_t const startval, int32_t const minval, int32_t const maxval,
+	 std::string const &       unit,
+	 PictureID           const background,
+	 bool                const big,
+	 Align               const alignm)
 	:
 	Panel(parent, x, y, w, h),
 	m_big(big),
@@ -159,37 +161,27 @@ SpinBox::SpinBox
  */
 void SpinBox::update()
 {
-	char buf[64];
-	bool replacement = false;
-	for (uint32_t i = 0; i < sbi->valrep.size(); ++i) {
-		if (sbi->valrep[i].value == sbi->value) {
-			replacement = true;
-			snprintf(buf, sizeof(buf), sbi->valrep[i].text.c_str());
+	for
+		(struct {
+		 	std::vector<IntValueTextReplacement>::const_iterator       current;
+		 	std::vector<IntValueTextReplacement>::const_iterator const end;
+		 } i = {sbi->valrep.begin(), sbi->valrep.end()};;
+		 ++i.current)
+		if (i.current == i.end) {
+			char buf[64];
+			snprintf(buf, sizeof(buf), "%i%s", sbi->value, sbi->unit.c_str());
+			sbi->text->set_text(buf);
+			break;
+		} else if (i.current->value == sbi->value) {
+			sbi->text->set_text(i.current->text);
 			break;
 		}
-	}
-	if (!replacement)
-		snprintf(buf, sizeof(buf), "%i%s", sbi->value, sbi->unit.c_str());
 
-	sbi->text->set_text(buf);
-
-	if (sbi->value <= sbi->min)
-		sbi->butMinus->set_enabled(false);
-	else
-		sbi->butMinus->set_enabled(true);
-	if (sbi->value >= sbi->max)
-		sbi->butPlus->set_enabled(false);
-	else
-		sbi->butPlus->set_enabled(true);
+	sbi->butMinus->set_enabled(sbi->min < sbi->value);
+	sbi->butPlus ->set_enabled           (sbi->value < sbi->max);
 	if (m_big) {
-		if (sbi->value <= sbi->min + 10)
-			sbi->butTenMinus->set_enabled(false);
-		else
-			sbi->butTenMinus->set_enabled(true);
-		if (sbi->value >= sbi->max - 10)
-			sbi->butTenPlus->set_enabled(false);
-		else
-			sbi->butTenPlus->set_enabled(true);
+		sbi->butTenMinus->set_enabled(sbi->min + 10 < sbi->value);
+		sbi->butTenPlus->set_enabled(sbi->value < sbi->max - 10);
 	}
 }
 
@@ -197,7 +189,7 @@ void SpinBox::update()
 /**
  * private function called by spinbox buttons to in-/decrease the value
  */
-void SpinBox::changeValue(int32_t value)
+void SpinBox::changeValue(int32_t const value)
 {
 	setValue(value + sbi->value);
 }
@@ -206,7 +198,7 @@ void SpinBox::changeValue(int32_t value)
 /**
  * manually sets the used value to a given value
  */
-void SpinBox::setValue(int32_t value)
+void SpinBox::setValue(int32_t const value)
 {
 	sbi->value = value;
 	update();
@@ -216,7 +208,7 @@ void SpinBox::setValue(int32_t value)
 /**
  * sets the interval the value may lay in and fixes the value, if outside.
  */
-void SpinBox::setInterval(int32_t min, int32_t max)
+void SpinBox::setInterval(int32_t const min, int32_t const max)
 {
 	sbi->max = max;
 	sbi->min = min;
@@ -231,7 +223,7 @@ void SpinBox::setInterval(int32_t min, int32_t max)
 /**
  * manually sets the used unit to a given string
  */
-void SpinBox::setUnit(std::string unit)
+void SpinBox::setUnit(std::string const & unit)
 {
 	sbi->unit = unit;
 	update();
