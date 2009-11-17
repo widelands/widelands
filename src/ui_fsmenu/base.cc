@@ -113,13 +113,14 @@ std::string Fullscreen_Menu_Base::ui_fn() {
 		return UI_FONT_NAME_SERIF;
 	if (style == "sans")
 		return UI_FONT_NAME_SANS;
-	std::string temp(g_fs->FS_CanonicalizeName("fonts/" + style));
+	std::string const temp(g_fs->FS_CanonicalizeName("fonts/" + style));
 	if (g_fs->FileExists(temp))
 		return style;
-	temp =  "Could not find font file \"" + temp;
-	temp += "\n Make sure the path is given relative to Widelands font ";
-	temp += "directory. Widelands will use standard font.\n";
-	log(temp.c_str());
+	log
+		("Could not find font file \"%s\"\n"
+		 "Make sure the path is given relative to Widelands font directory. "
+		 "Widelands will use standard font.\n",
+		 temp.c_str());
 	return UI_FONT_NAME;
 }
 
