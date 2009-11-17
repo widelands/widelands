@@ -69,6 +69,9 @@ struct Computer_Player :
 	static const Implementation * getImplementation(const std::string & name);
 
 private:
+	Computer_Player & operator= (Computer_Player const &);
+	explicit Computer_Player    (Computer_Player const &);
+
 	Widelands::Game & m_game;
 	Widelands::Player_Number const m_player_number;
 };
