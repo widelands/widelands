@@ -27,6 +27,7 @@
 #include "container_iterate.h"
 
 #include <cstdio>
+#include <memory>
 
 LayeredFileSystem * g_fs;
 
@@ -94,7 +95,7 @@ void LayeredFileSystem::RemoveFileSystem(FileSystem & fs)
  * number */
 bool LayeredFileSystem::FindConflictingVersionFile(FileSystem * fs) {
 	if (fs->FileExists("VERSION")) {
-		StreamRead * sr = fs->OpenStreamRead("VERSION");
+		std::auto_ptr<StreamRead> sr (fs->OpenStreamRead("VERSION"));
 		if (sr->EndOfFile())
 			return false;
 		std::string version = sr->String();
@@ -117,7 +118,7 @@ bool LayeredFileSystem::FindConflictingVersionFile(FileSystem * fs) {
 
 bool LayeredFileSystem::FindMatchingVersionFile(FileSystem * fs) {
 	if (fs->FileExists("VERSION")) {
-		StreamRead * sr = fs->OpenStreamRead("VERSION");
+		std::auto_ptr<StreamRead> sr (fs->OpenStreamRead("VERSION"));
 		if (sr->EndOfFile())
 			return false;
 		std::string version = sr->String();
