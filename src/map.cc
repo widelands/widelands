@@ -1696,7 +1696,7 @@ uint32_t Map::find_reachable_immovables
  */
 uint32_t Map::find_reachable_immovables_unique
 	(const Area<FCoords> area,
-	 std::vector<BaseImmovable *> * list,
+	 std::vector<BaseImmovable *> & list,
 	 const CheckStep & checkstep,
 	 const FindImmovable & functor)
 {
@@ -1706,13 +1706,13 @@ uint32_t Map::find_reachable_immovables_unique
 	find_reachable(area, checkstep, cb);
 
 	container_iterate_const(std::vector<ImmovableFound>, duplist, i) {
-		BaseImmovable * const obj = i.current->object;
-		if (std::find(list->begin(), list->end(), obj) == list->end())
-			if (functor.accept(*obj))
-				list->push_back(obj);
+		BaseImmovable & obj = *i.current->object;
+		if (std::find(list.begin(), list.end(), &obj) == list.end())
+			if (functor.accept(obj))
+				list.push_back(&obj);
 	}
 
-	return list->size();
+	return list.size();
 }
 
 /*

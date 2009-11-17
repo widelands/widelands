@@ -280,7 +280,7 @@ struct Map : public ITransportCostCalculator {
 		 const FindImmovable & = FindImmovableAlwaysTrue());
 	uint32_t find_reachable_immovables_unique
 		(const Area<FCoords>,
-		 std::vector<BaseImmovable *> * list,
+		 std::vector<BaseImmovable *> & list,
 		 const CheckStep &,
 		 const FindImmovable & = FindImmovableAlwaysTrue());
 	uint32_t find_fields

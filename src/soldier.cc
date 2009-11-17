@@ -935,7 +935,7 @@ void Soldier::sendSpaceSignals(Game & game)
 		std::vector<BaseImmovable *> attackables;
 		game.map().find_reachable_immovables_unique
 			(Area<FCoords>(get_position(), MaxProtectionRadius),
-			 &attackables,
+			 attackables,
 			 CheckStepWalkOn(descr().movecaps(), false),
 			 FindImmovableAttackable());
 

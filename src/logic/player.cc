@@ -576,7 +576,7 @@ uint32_t Player::findAttackSoldiers
 
 	map.find_reachable_immovables_unique
 		(Area<FCoords>(map.get_fcoords(flag.get_position()), 25),
-		 &immovables,
+		 immovables,
 		 CheckStepWalkOn(MOVECAPS_WALK, false),
 		 FindImmovablePlayerMilitarySite(*this));
 
