@@ -466,32 +466,30 @@ private:
 	Map & operator= (Map const &);
 	explicit Map    (Map const &);
 
-	static uint8_t   make_field_elevation
-		(double ele,
-		 MapGenInfo &,
-		 uint16_t x, uint16_t y,
+	static uint8_t make_node_elevation
+		(double                      elevation,
+		 MapGenInfo          const &,
+		 Coords,
 		 UniqueRandomMapInfo const &);
 	static uint32_t * generate_random_value_map
 		(uint32_t w, uint32_t h, RNG & rng);
 
 	Terrain_Index figure_out_terrain
-		(MapGenInfo                &       mapGenInfo,
-		 uint32_t                  * const random2,
-		 uint32_t                  * const random3,
-		 uint32_t                  * const random4,
-		 uint32_t const x,  uint32_t const y,
-		 uint32_t const x1, uint32_t const y1,
-		 uint32_t const x2, uint32_t const y2,
-		 uint32_t const h1, uint32_t const h2, uint32_t const h3,
+		(MapGenInfo                & mapGenInfo,
+		 uint32_t                  * random2,
+		 uint32_t                  * random3,
+		 uint32_t                  * random4,
+		 Coords, Coords, Coords,
+		 uint32_t h1, uint32_t h2, uint32_t h3,
 		 UniqueRandomMapInfo const &       mapInfo,
 		 RNG                       &       rng);
 
 	void generate_resources
-		(uint32_t                  * const random1,
-		 uint32_t                  * const random2,
-		 uint32_t                  * const random3,
-		 uint32_t                  * const random4,
-		 uint32_t const x,  uint32_t const y,
+		(uint32_t            const * random1,
+		 uint32_t            const * random2,
+		 uint32_t            const * random3,
+		 uint32_t            const * random4,
+		 FCoords,
 		 UniqueRandomMapInfo const &       mapInfo);
 
 };
@@ -1114,9 +1112,14 @@ inline void move_r(X_Coordinate const mapwidth, FCoords & f, Map_Index & i) {
 
 
 #define iterate_Map_FCoords(map, extent, fc)                                  \
-   Widelands::FCoords fc(map.get_fcoords(Widelands::Coords(0, 0)));           \
-   for (fc.y = 0; fc.y < extent.h; ++fc.y)                                    \
-      for (fc.x = 0; fc.x < extent.w; ++fc.x, ++fc.field)                     \
+   for                                                                        \
+      (Widelands::FCoords fc = (map).get_fcoords(Widelands::Coords(0, 0));    \
+       fc.y < static_cast<Widelands::Y_Coordinate>(extent.h);                 \
+       ++fc.y)                                                                \
+      for                                                                     \
+         (fc.x = 0;                                                           \
+          fc.x < static_cast<Widelands::X_Coordinate>(extent.w);              \
+          ++fc.x, ++fc.field)                                                 \
 
 
 std::string g_VariableCallback(std::string, void * data);

@@ -556,58 +556,47 @@ void Map::set_origin(Coords const new_origin) {
 }
 
 
-/*
-===============
-Translates a random value into a map field height. This
-method is used within the random map generation methods.
-
-ele:         Random Value ("elevation")
-mapGenInfo:  Map generator information used to translate
-             Random values to height information (world-
-             specific info)
-x:           x position within map
-y:           y position within map
-mapInfo:     Information about the random map currently
-             begin created (map specific info)
-
-Return value: A map height value.corresponding to ele
-===============
-*/
-uint8_t Map::make_field_elevation
-	(double ele,
-	 MapGenInfo & mapGenInfo,
-	 uint16_t const x, uint16_t const y,
-	 UniqueRandomMapInfo const & mapInfo)
+/// Translates a random value into a map node height. This method is used
+/// within the random map generation methods.
+///
+/// \param elevation Random value.
+/// \param mapGenInfo Map generator information used to translate random values
+/// to height information (world specific info).
+/// \param c position within map
+/// \param mapInfo Information about the random map currently begin created
+/// (map specific info).
+///
+/// \Returns A map height value corresponding to elevation.
+uint8_t Map::make_node_elevation
+	(double                      const elevation,
+	 MapGenInfo          const &       mapGenInfo,
+	 Coords                      const c,
+	 UniqueRandomMapInfo const &       mapInfo)
 {
 	int32_t const water_h  = mapGenInfo.getWaterShallowHeight();
 	int32_t const mount_h  = mapGenInfo.getMountainFootHeight();
 	int32_t const summit_h = mapGenInfo.getSummitHeight      ();
 
-	double water_fac = mapInfo.waterRatio;
-	double land_fac  = mapInfo.landRatio;
+	double const water_fac = mapInfo.waterRatio;
+	double const land_fac  = mapInfo.landRatio;
 
-	uint8_t res_h;
-
-	if (ele < water_fac)
-		res_h = water_h;
-	else if (ele < water_fac + land_fac)
-		res_h =
-			water_h + 1 + ((ele - water_fac) / land_fac) * (mount_h - water_h);
-	else
-		res_h =
+	uint8_t res_h =
+		elevation < water_fac            ? water_h :
+		elevation < water_fac + land_fac ?
+			water_h + 1 +
+			((elevation - water_fac) / land_fac) * (mount_h - water_h)
+			:
 			mount_h +
-			((ele - water_fac - land_fac) / (1 - water_fac - land_fac))
+			((elevation - water_fac - land_fac) / (1 - water_fac - land_fac))
 			*
 			(summit_h - mount_h);
 
 	//  Handle Map Border in island mode
-
 	if (mapInfo.islandMode) {
-		int32_t const border_dist_x = x < mapInfo.w - x ? x : mapInfo.w - x;
-		int32_t const border_dist_y = y < mapInfo.h - y ? y : mapInfo.h - y;
-		int32_t const border_dist   =
-			border_dist_x < border_dist_y ? border_dist_x : border_dist_y;
-
+		int32_t const border_dist =
+			std::min
+				(std::min(c.x, static_cast<X_Coordinate>(mapInfo.w - c.x)),
+				 std::min(c.y, static_cast<Y_Coordinate>(mapInfo.h - c.y)));
 		if (border_dist <= ISLAND_BORDER) {
 			res_h =
 				static_cast<uint8_t>
@@ -824,9 +813,7 @@ Terrain_Index Map::figure_out_terrain
 	 uint32_t                  * const random2,
 	 uint32_t                  * const random3,
 	 uint32_t                  * const random4,
-	 uint32_t const x,  uint32_t const y,
-	 uint32_t const x1, uint32_t const y1,
-	 uint32_t const x2, uint32_t const y2,
+	 Coords const c0, Coords const c1, Coords const c2,
 	 uint32_t const h1, uint32_t const h2, uint32_t const h3,
 	 UniqueRandomMapInfo const &       mapInfo,
 	 RNG                       &       rng)
@@ -841,17 +828,20 @@ Terrain_Index Map::figure_out_terrain
 	uint32_t landAreaIndex = 0;
 	MapGenAreaInfo::MapGenAreaType landType = MapGenAreaInfo::atLand;
 
-	uint32_t rand2 = random2[x + mapInfo.w * y] / 3 +
-		random2[x1 + mapInfo.w * y1] / 3 +
-		random2[x2 + mapInfo.w * y2] / 3;
-	uint32_t rand3 = random3[x + mapInfo.w * y] / 3 +
-		random3[x1 + mapInfo.w * y1] / 3 +
-		random3[x2 + mapInfo.w * y2] / 3;
-	uint32_t rand4 = random4[x + mapInfo.w * y] / 3 +
-		random4[x1 + mapInfo.w * y1] / 3 +
-		random4[x2 + mapInfo.w * y2] / 3;
+	uint32_t rand2 =
+		random2[c0.x + mapInfo.w * c0.y] / 3 +
+		random2[c1.x + mapInfo.w * c1.y] / 3 +
+		random2[c2.x + mapInfo.w * c2.y] / 3;
+	uint32_t rand3 =
+		random3[c0.x + mapInfo.w * c0.y] / 3 +
+		random3[c1.x + mapInfo.w * c1.y] / 3 +
+		random3[c2.x + mapInfo.w * c2.y] / 3;
+	uint32_t rand4 =
+		random4[c0.x + mapInfo.w * c0.y] / 3 +
+		random4[c1.x + mapInfo.w * c1.y] / 3 +
+		random4[c2.x + mapInfo.w * c2.y] / 3;
 
-	//  At first we figure out if its wasteland or not.
+	//  At first we figure out if it is wasteland or not.
 
 	if        (numWasteLandAreas == 0) {
 	} else if (numWasteLandAreas == 1) {
@@ -899,7 +889,7 @@ Terrain_Index Map::figure_out_terrain
 				mapGenInfo.getArea(MapGenAreaInfo::atLand, 1).getWeight();
 			uint32_t const sum     = mapGenInfo.getSumLandWeight();
 			if
-				(weight1 * (random2[x + mapInfo.w * y] / sum)
+				(weight1 * (random2[c0.x + mapInfo.w * c0.y] / sum)
 				 >=
 				 weight2 * (AVG_ELEVATION / sum))
 				landAreaIndex = 0;
@@ -999,102 +989,76 @@ Terrain_Index Map::figure_out_terrain
 
 }
 
-#define set_resource_helper(rnd1, res)\
-{\
-	Resource_Index res_idx = terr.get_valid_resource(res);\
-	uint32_t max_amount = \
-		m_world->get_resource(res_idx)->get_max_amount();\
-	uint8_t res_val = static_cast < uint8_t > \
-		(rnd1 / (MAX_ELEVATION / max_amount));\
-	res_val *= \
-		(static_cast<uint8_t>(mapInfo.resource_amount) + 1);\
-	res_val /= 3;\
-	FCoords coords = get_fcoords(m_fields[x + mapInfo.w * y]);\
-	if (Editor_Change_Resource_Tool_Callback(coords, this, res_idx))\
-	{\
-		m_fields[x  + mapInfo.w * y].set_resources\
-			(res_idx, res_val);\
-			m_fields[x  + mapInfo.w * y].set_starting_res_amount\
-			(res_val);\
-	}\
-}
+#define set_resource_helper(rnd1, res)                                        \
+   {                                                                          \
+      Resource_Index const res_idx = terr.get_valid_resource(res);            \
+      uint32_t const max_amount    =                                          \
+         m_world->get_resource(res_idx)->get_max_amount();                    \
+      uint8_t res_val =                                                       \
+         static_cast<uint8_t>(rnd1 / (MAX_ELEVATION / max_amount));           \
+      res_val *= static_cast<uint8_t>(mapInfo.resource_amount) + 1;           \
+      res_val /= 3;                                                           \
+      if (Editor_Change_Resource_Tool_Callback(fc, this, res_idx)) {          \
+         fc.field->set_resources(res_idx, res_val);                           \
+         fc.field->set_starting_res_amount(res_val);                          \
+      }                                                                       \
+   }                                                                          \
 
 void Map::generate_resources
-	(uint32_t                  * const random1,
-	 uint32_t                  * const random2,
-	 uint32_t                  * const random3,
-	 uint32_t                  * const random4,
-	 uint32_t const x,  uint32_t const y,
+	(uint32_t            const * const random1,
+	 uint32_t            const * const random2,
+	 uint32_t            const * const random3,
+	 uint32_t            const * const random4,
+	 FCoords                     const fc,
 	 UniqueRandomMapInfo const &       mapInfo)
 {
 	// We'll take the "D" terrain at first...
 	// TODO: Check how the editor handles this...
 
-	Terrain_Index tix = m_fields[x + mapInfo.w * y].get_terrains().d;
+	Terrain_Index const tix = fc.field->get_terrains().d;
 	const Terrain_Descr & terr = m_world->get_ter(tix);
-	uint8_t numRsrc = terr.get_num_valid_resources();
-
-	if (numRsrc == 0) return;
-
-	if (numRsrc == 1)
-	{
-		uint32_t rnd1 = random1[x + mapInfo.w * y];
+	switch (terr.get_num_valid_resources()) {
+	case 1: {
+		uint32_t const rnd1 = random1[fc.x + mapInfo.w * fc.y];
 		set_resource_helper(rnd1, 0);
+		break;
 	}
-	else if (numRsrc == 2)
-	{
-		uint32_t rnd1 = random1[x + mapInfo.w * y];
-		uint32_t rnd2 = random2[x + mapInfo.w * y];
-		if (rnd1 > rnd2)
-		{
-			set_resource_helper(rnd1, 0);
-		}
-		else
-		{
+	case 2: {
+		uint32_t const rnd1 = random1[fc.x + mapInfo.w * fc.y];
+		uint32_t const rnd2 = random2[fc.x + mapInfo.w * fc.y];
+		if (rnd1 > rnd2) {
+			set_resource_helper(rnd1, 0)
+		} else
 			set_resource_helper(rnd2, 1);
-		}
+		break;
 	}
-	else if (numRsrc == 3)
-	{
-		uint32_t rnd1 = random1[x + mapInfo.w * y];
-		uint32_t rnd2 = random2[x + mapInfo.w * y];
-		uint32_t rnd3 = random3[x + mapInfo.w * y];
-		if ((rnd1 > rnd2) && (rnd1 > rnd3))
-		{
+	case 3: {
+		uint32_t const rnd1 = random1[fc.x + mapInfo.w * fc.y];
+		uint32_t const rnd2 = random2[fc.x + mapInfo.w * fc.y];
+		uint32_t const rnd3 = random3[fc.x + mapInfo.w * fc.y];
+		if        (rnd1 > rnd2 && rnd1 > rnd3) {
 			set_resource_helper(rnd1, 0);
-		}
-		else if ((rnd2 > rnd1) && (rnd2 > rnd3))
-		{
+		} else if (rnd2 > rnd1 && rnd2 > rnd3) {
 			set_resource_helper(rnd2, 1);
-		}
-		else
-		{
+		} else
 			set_resource_helper(rnd3, 2);
-		}
+		break;
 	}
-	else if (numRsrc == 4)
-	{
-		uint32_t rnd1 = random1[x + mapInfo.w * y];
-		uint32_t rnd2 = random2[x + mapInfo.w * y];
-		uint32_t rnd3 = random3[x + mapInfo.w * y];
-		uint32_t rnd4 = random4[x + mapInfo.w * y];
-
-		if ((rnd1 > rnd2) && (rnd1 > rnd3) && (rnd1 > rnd4))
-		{
+	case 4: {
+		uint32_t const rnd1 = random1[fc.x + mapInfo.w * fc.y];
+		uint32_t const rnd2 = random2[fc.x + mapInfo.w * fc.y];
+		uint32_t const rnd3 = random3[fc.x + mapInfo.w * fc.y];
+		uint32_t const rnd4 = random4[fc.x + mapInfo.w * fc.y];
+		if        (rnd1 > rnd2 && rnd1 > rnd3 && rnd1 > rnd4) {
 			set_resource_helper(rnd1, 0);
-		}
-		else if ((rnd2 > rnd1) && (rnd2 > rnd3) && (rnd2 > rnd4))
-		{
+		} else if (rnd2 > rnd1 && rnd2 > rnd3 && rnd2 > rnd4) {
 			set_resource_helper(rnd2, 1);
-		}
-		else if ((rnd3 > rnd1) && (rnd3 > rnd2) && (rnd3 > rnd4))
-		{
+		} else if (rnd3 > rnd1 && rnd3 > rnd2 && rnd3 > rnd4) {
 			set_resource_helper(rnd3, 2);
-		}
-		else
-		{
+		} else
 			set_resource_helper(rnd4, 3);
-		}
+		break;
+	}
 	}
 }
 
@@ -1149,86 +1113,66 @@ void Map::create_random_map
 	try {
 		//  Now we have generated a lot of random data!!
 		//  Lets use it !!!
-
-		for (uint32_t x = 0; x < mapInfo.w; ++x)
-			for (uint32_t y = 0; y < mapInfo.h; ++y) {
-				double adj_ele =
-					static_cast<double>(elevations[x + mapInfo.w * y])
-					/
-					static_cast<double>(MAX_ELEVATION);
-				m_fields[x + mapInfo.w * y].set_height
-					(make_field_elevation(adj_ele, mapGenInfo, x, y, mapInfo));
-			}
+		iterate_Map_FCoords(*this, mapInfo, fc)
+			fc.field->set_height
+				(make_node_elevation
+				 	(static_cast<double>(elevations[fc.x + mapInfo.w * fc.y])
+				 	 /
+				 	 static_cast<double>(MAX_ELEVATION),
+				 	 mapGenInfo,
+				 	 fc,
+				 	 mapInfo));
 
 		//  Now lets set the terrain right according to the heights.
 
-		for (uint32_t x = 0; x < mapInfo.w; ++x)
-			for (uint32_t y = 0; y < mapInfo.h; ++y) {
-				//  Calculate coordinates of left and bottom left neighbours of the
-				//  current node.
+		iterate_Map_FCoords(*this, mapInfo, fc) {
+			//  Calculate coordinates of left and bottom left neighbours of the
+			//  current node.
 
-				//  ... Treat "even" and "uneven" row numbers differently
-				uint32_t x_dec = y % 2 == 0;
+			//  ... Treat "even" and "uneven" row numbers differently
+			uint32_t const x_dec = fc.y % 2 == 0;
 
-				uint32_t right_x       = x + 1;
-				uint32_t lower_y       = y + 1;
-				uint32_t lower_x       = x - x_dec;
-				uint32_t lower_right_x = x - x_dec + 1;
+			uint32_t right_x       = fc.x + 1;
+			uint32_t lower_y       = fc.y + 1;
+			uint32_t lower_x       = fc.x - x_dec;
+			uint32_t lower_right_x = fc.x - x_dec + 1;
 
-				if       (lower_x >  mapInfo.w)       lower_x += mapInfo.w;
-				if       (right_x >= mapInfo.w)       right_x -= mapInfo.w;
-				if       (lower_x >= mapInfo.w)       lower_x -= mapInfo.w;
-				if (lower_right_x >= mapInfo.w) lower_right_x -= mapInfo.w;
-				if       (lower_y >= mapInfo.h)       lower_y -= mapInfo.h;
+			if       (lower_x >  mapInfo.w)       lower_x += mapInfo.w;
+			if       (right_x >= mapInfo.w)       right_x -= mapInfo.w;
+			if       (lower_x >= mapInfo.w)       lower_x -= mapInfo.w;
+			if (lower_right_x >= mapInfo.w) lower_right_x -= mapInfo.w;
+			if       (lower_y >= mapInfo.h)       lower_y -= mapInfo.h;
 
-				//  get the heights of my neighbour nodes and of my current node
+			//  get the heights of my neighbour nodes and of my current node
 
-				uint8_t height_x0_y0 =
-					m_fields[x + mapInfo.w * y].get_height();
-				uint8_t height_x1_y0 =
-					m_fields[right_x + mapInfo.w * y].get_height();
-				uint8_t height_x0_y1 =
-					m_fields[lower_x + mapInfo.w * lower_y].get_height();
-				uint8_t height_x1_y1 =
-					m_fields[lower_right_x + mapInfo.w * lower_y].get_height();
+			uint8_t height_x0_y0 =
+				fc.field                                 ->get_height();
+			uint8_t height_x1_y0 =
+				operator[](Coords(right_x,          fc.y)).get_height();
+			uint8_t height_x0_y1 =
+				operator[](Coords(lower_x,       lower_y)).get_height();
+			uint8_t height_x1_y1 =
+				operator[](Coords(lower_right_x, lower_y)).get_height();
 
-				//  "D" triangle
+			fc.field->set_terrain_d
+				(figure_out_terrain
+				 	(mapGenInfo, random2, random3, random4,
+				 	 fc, Coords(lower_x, lower_y), Coords(lower_right_x, lower_y),
+				 	 height_x0_y0, height_x0_y1, height_x1_y1, mapInfo,
+				 	 rng));
 
-				Terrain_Index tix;
+			fc.field->set_terrain_r
+				(figure_out_terrain
+				 	(mapGenInfo, random2, random3, random4,
+				 	 fc, Coords(right_x, fc.y), Coords(lower_right_x, lower_y),
+				 	 height_x0_y0, height_x1_y0, height_x1_y1,
+				 	 mapInfo, rng));
 
-				tix = figure_out_terrain
-					(mapGenInfo, random2, random3, random4,
-					 x, y, lower_x, lower_y, lower_right_x, lower_y,
-					 height_x0_y0, height_x0_y1, height_x1_y1, mapInfo,
-					 rng);
-
-				m_fields[x  + mapInfo.w * y].set_terrain_d(tix);
-
-
-				//  "R" triangle
-
-				tix = figure_out_terrain
-					(mapGenInfo, random2, random3, random4,
-					 x, y, right_x, y, lower_right_x, lower_y,
-					 height_x0_y0, height_x1_y0, height_x1_y1,
-					 mapInfo, rng);
-
-				m_fields[x  + mapInfo.w * y].set_terrain_r(tix);
-
-				// set resources for this field
-
-				generate_resources
-					(random_rsrc_1, random_rsrc_2,
-					 random_rsrc_3, random_rsrc_4,
-					 x, y, mapInfo);
-			}
-
-		//  Now lets create the resources
-
-		for (uint32_t x = 0; x < mapInfo.w; ++x)
-			for (uint32_t y = 0; y < mapInfo.h; ++y) {
-				// todo
-			}
+			//  set resources for this field
+			generate_resources
+				(random_rsrc_1, random_rsrc_2, random_rsrc_3, random_rsrc_4,
+				 fc, mapInfo);
+		}
 
 	} catch (...) {
 		delete[] elevations;
@@ -1453,24 +1397,20 @@ template<typename functorT>
 void Map::find_reachable
 	(Area<FCoords> const area, CheckStep const & checkstep, functorT & functor)
 {
-	std::vector<Field *> queue;
+	std::vector<Coords> queue;
 	boost::shared_ptr<Pathfields> pathfields = m_pathfieldmgr->allocate();
 
-	queue.push_back(area.field);
+	queue.push_back(area);
 
 	while (queue.size()) {
-		Pathfield * curpf;
-		FCoords cur;
-
 		// Pop the last item from the queue
-		cur.field = *queue.rbegin();
-		curpf = &pathfields->fields[cur.field - m_fields];
-		get_coords(*cur.field, cur);
+		FCoords const cur = get_fcoords(*queue.rbegin());
 		queue.pop_back();
+		Pathfield & curpf = pathfields->fields[cur.field - m_fields];
 
-		// Handle this field
+		//  handle this node
 		functor(*this, cur);
-		curpf->cycle = pathfields->cycle;
+		curpf.cycle = pathfields->cycle;
 
 		// Get neighbours
 		for (Direction dir = 1; dir <= 6; ++dir) {
@@ -1478,29 +1418,22 @@ void Map::find_reachable
 
 			get_neighbour(cur, dir, &neighb);
 
-			{ //  Have we already visited this node?
-				Pathfield & neighbpf = pathfields->fields[neighb.field - m_fields];
-				if (neighbpf.cycle == pathfields->cycle)
-					continue;
-			}
-
-			//  Is the node still within the radius?
-			if (calc_distance(area, neighb) > area.radius)
-				continue;
-
-			// Are we allowed to move onto this field?
-			if
-				(not
+			if  //  node not already handled?
+				(pathfields->fields[neighb.field - m_fields].cycle
+				 !=
+				 pathfields->cycle
+				 and
+				 //  node within the radius?
+				 calc_distance(area, neighb) <= area.radius
+				 and
+				 //  allowed to move onto this node?
 				 checkstep.allowed
 				 	(*this,
 				 	 cur,
 				 	 neighb,
 				 	 dir,
 				 	 cur == area ? CheckStep::stepFirst : CheckStep::stepNormal))
-				continue;
-
-			// Queue this field
-			queue.push_back(neighb.field);
+				queue.push_back(neighb);
 		}
 	}
 }
