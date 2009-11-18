@@ -45,6 +45,7 @@ struct S2_Map_Loader;
 
 namespace Widelands {
 
+struct MapGenerator;
 struct BaseImmovable;
 struct PathfieldManager;
 struct Player;
@@ -180,6 +181,7 @@ struct Map : public ITransportCostCalculator {
 	friend struct Map_Extradata_Data_Packet;
 	friend class Editor;
 	friend class Main_Menu_New_Map;
+	friend class MapGenerator;
 
 	enum { // flags for findpath()
 
@@ -210,6 +212,7 @@ struct Map : public ITransportCostCalculator {
 
 	void create_random_map
 		(UniqueRandomMapInfo const & mapInfo,
+		 MapGenerator & gen,
 		 std::string const & worldname   =   "greenland",
 		 char        const * name        = _("No Name"),
 		 char        const * author      = _("Random Map Generator"),
@@ -475,21 +478,22 @@ private:
 		(uint32_t w, uint32_t h, RNG & rng);
 
 	Terrain_Index figure_out_terrain
-		(MapGenInfo                & mapGenInfo,
-		 uint32_t                  * random2,
-		 uint32_t                  * random3,
-		 uint32_t                  * random4,
-		 Coords, Coords, Coords,
-		 uint32_t h1, uint32_t h2, uint32_t h3,
+		(MapGenInfo      const    &       mapGenInfo,
+		 uint32_t                  * const random2,
+		 uint32_t                  * const random3,
+		 uint32_t                  * const random4,
+		 Coords const c0, Coords const c1, Coords const c2,
+		 uint32_t const h1, uint32_t const h2, uint32_t const h3,
 		 UniqueRandomMapInfo const &       mapInfo,
-		 RNG                       &       rng);
+		 RNG                       &       rng,
+		 MapGenAreaInfo::MapGenTerrainType & terrType);
 
 	void generate_resources
-		(uint32_t            const * random1,
-		 uint32_t            const * random2,
-		 uint32_t            const * random3,
-		 uint32_t            const * random4,
-		 FCoords,
+		(uint32_t            const * const random1,
+		 uint32_t            const * const random2,
+		 uint32_t            const * const random3,
+		 uint32_t            const * const random4,
+		 FCoords                     const fc,
 		 UniqueRandomMapInfo const &       mapInfo);
 
 };

@@ -36,6 +36,7 @@
 #include <cstring>
 #include <vector>
 #include <sstream>
+#include "map_generator.h"
 
 #include "random.h"
 
@@ -91,10 +92,10 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	Widelands::Map const & map = parent.egbase().map();
 	{
 		Widelands::Extent const map_extent = map.extent();
+
 		for (m_w = 0; Widelands::MAP_DIMENSIONS[m_w] < map_extent.w; ++m_w) {}
 		for (m_h = 0; Widelands::MAP_DIMENSIONS[m_h] < map_extent.h; ++m_h) {}
 	}
-
 
 	new UI::Callback_IDButton<Main_Menu_New_Random_Map, int32_t>
 		(this,
@@ -428,8 +429,9 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 		<< "Resources = " << m_res->get_title() << "\n"
 		<< "ID = " << m_idEditbox->text() << "\n";
 
+	Widelands::MapGenerator gen(map, mapInfo, egbase);
 	map.create_random_map
-		(mapInfo, m_worlds[m_currentworld].c_str(), _("No Name"),
+		(mapInfo, gen, m_worlds[m_currentworld].c_str(), _("No Name"),
 		 g_options.pull_section("global").get_string("realname", _("Unknown")),
 		 sstrm.str().c_str());
 

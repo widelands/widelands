@@ -132,6 +132,8 @@ private:
 	explicit Terrain_Descr    (Terrain_Descr const &);
 };
 
+struct MapGenInfo;
+
 /// Holds world and area specific information for the map generator.
 /// Areas are: Water, Land, Wasteland and Mountains.
 struct MapGenAreaInfo {
@@ -183,6 +185,48 @@ private:
 
 };
 
+struct MapGenBobKind {
+
+	void parseSection (Section &);
+
+	size_t getNumImmovableBobs() const {return m_ImmovableBobs.size();}
+	size_t getNumMoveableBobs() const {return m_MoveableBobs.size();}
+
+	std::string const & getImmovableBob(size_t index) const {
+		return m_ImmovableBobs[index];
+	};
+	std::string const & getMoveableBob(size_t index) const {
+		return m_MoveableBobs[index];
+	};
+
+private:
+	std::vector<std::string> m_ImmovableBobs;
+	std::vector<std::string> m_MoveableBobs;
+
+};
+
+struct MapGenBobArea {
+
+	void parseSection (Section &, MapGenInfo & mapGenInfo);
+
+	uint32_t getWeight() const {return m_Weight;};
+	const MapGenBobKind * getBobKind
+		(MapGenAreaInfo::MapGenTerrainType terrType) const;
+
+	uint8_t getImmovableDensity() const {return m_Immovable_Density;};
+	uint8_t getMoveableDensity() const {return m_Moveable_Density;};
+
+private:
+	uint32_t        m_Weight;
+	uint8_t         m_Immovable_Density; // In percent
+	uint8_t         m_Moveable_Density;  // In percent
+	const MapGenBobKind * m_LandCoastBobKind;
+	const MapGenBobKind * m_LandInnerBobKind;
+	const MapGenBobKind * m_LandUpperBobKind;
+	const MapGenBobKind * m_WastelandInnerBobKind;
+	const MapGenBobKind * m_WastelandOuterBobKind;
+};
+
 /** class MapGenInfo
   *
   * This class holds world specific information for the map generator.
@@ -193,8 +237,10 @@ struct MapGenInfo {
 	void parseProfile(World * world, Profile & profile);
 
 	size_t getNumAreas(MapGenAreaInfo::MapGenAreaType areaType) const;
-	MapGenAreaInfo const & getArea
-		(MapGenAreaInfo::MapGenAreaType, uint32_t index) const;
+	const MapGenAreaInfo & getArea
+		(MapGenAreaInfo::MapGenAreaType const areaType, uint32_t const index)
+		const;
+	const MapGenBobKind * getBobKind(const std::string & bobKindName) const;
 
 	uint8_t getWaterOceanHeight  () const {return m_ocean_height;}
 	uint8_t getWaterShelfHeight  () const {return m_shelf_height;}
@@ -206,7 +252,11 @@ struct MapGenInfo {
 	uint8_t getSnowHeight        () const {return m_snow_height;}
 	uint8_t getSummitHeight      () const {return m_summit_height;}
 
-	uint32_t getSumLandWeight();
+	uint32_t getSumLandWeight() const;
+
+	size_t getNumBobAreas() const;
+	MapGenBobArea const & getBobArea(size_t index) const;
+	uint32_t getSumBobAreaWeight() const;
 
 private:
 
@@ -216,6 +266,9 @@ private:
 	std::vector<MapGenAreaInfo> m_LandAreas;
 	std::vector<MapGenAreaInfo> m_WasteLandAreas;
 	std::vector<MapGenAreaInfo> m_MountainAreas;
+
+	std::vector<MapGenBobArea>           m_BobAreas;
+	std::map<std::string, MapGenBobKind> m_BobKinds;
 
 	uint8_t m_ocean_height;
 	uint8_t m_shelf_height;
@@ -227,8 +280,11 @@ private:
 	uint8_t m_mountain_height;
 	uint8_t m_summit_height;
 
-	int32_t  m_land_weight;
-	bool m_land_weight_valid;
+	mutable int32_t  m_land_weight;
+	mutable bool m_land_weight_valid;
+
+	mutable int32_t m_sum_bob_area_weights;
+	mutable bool m_sum_bob_area_weights_valid;
 
 };
 

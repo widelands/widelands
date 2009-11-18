@@ -37,10 +37,6 @@ coast_terrains=strand
 land_terrains=wiese2,wiese3
 upper_terrains=wiese2,wiese3
 
-#coast_bobs=grass_bobs@forest_lr,sstone_bobs@stone_lr,sstone_bobs@sstone_lr
-#land_bobs=tree_bobs@forest_lr,bush_bobs@plant_lr,stone_bobs@stone_lr,sstone_bobs@sstone_lr
-#upper_bobs=bush_bobs@forest_lr,grass_bobs@plant_lr,sstone_bobs@stone_lr,sstone_bobs@sstone_lr
-
 
 [wiese1]
 
@@ -50,48 +46,104 @@ coast_terrains=strand
 land_terrains=wiese1
 upper_terrains=wiese2,wiese3
 
-#coast_bobs=grass_bobs@forest_lr,sstone_bobs@stone_lr,sstone_bobs@sstone_lr
-#land_bobs=tree_bobs@forest_lr,bush_bobs@plant_lr,stone_bobs@stone_lr,sstone_bobs@sstone_lr
-#upper_bobs=bush_bobs@forest_lr,grass_bobs@plant_lr,sstone_bobs@stone_lr,sstone_bobs@sstone_lr
-
 
 [sumpf]
 inner_terrains=sumpf
 outer_terrains=sumpf
 
-[mountains]
-mountainfoot_terrains=bergwiese
-mountain_terrains=berg1,berg2,berg3,berg4
-snow_terrains=schnee
 
 [steppe]
 inner_terrains=steppe_kahl
 outer_terrains=steppe
 
 
+[mountains]
+mountainfoot_terrains=bergwiese
+mountain_terrains=berg1,berg2,berg3,berg4
+snow_terrains=schnee
+
 
 #####################################
 ########## BOB definitions ##########
 #####################################
 
-#[bobs]
-#varieties=forest_lr,plant_lr,stone_lr,sstone_lr
 
-#[bobs]
-#bobs=trees_bobs,bush_bobs,grass_bobs,stone_bobs,sstone_bobs
+# The postfix "_lr" means "land resource"
 
-#[tree_bobs]
-#bobs=tree1,tree2,tree3,tree4,tree5,tree6,tree7,tree8
+[bobs]
+areas=forest_lr,bushland_lr,meadow_lr,stone_lr,sstone_lr
+bob_kinds=tree_bobs,bush_bobs,grass_bobs,stone_bobs,sstone_bobs,wasteland_bobs
 
-#[bush_bobs]
-#bobs=bush1,bush2,bush3,bush4,bush5
+[forest_lr]
+weight=6
+immovable_density=100
+moveable_density=20
+land_coast_bobs=bush_bobs
+land_inner_bobs=tree_bobs
+land_upper_bobs=bush_bobs
+wasteland_inner_bobs=wasteland_bobs
+wasteland_outer_bobs=bush_bobs
 
-#[grass_bobs]
-#bobs=grass1,grass2,grass3
+[bushland_lr]
+weight=2
+immovable_density=50
+moveable_density=20
+land_coast_bobs=grass_bobs
+land_inner_bobs=bush_bobs
+land_upper_bobs=grass_bobs
+wasteland_inner_bobs=wasteland_bobs
+wasteland_outer_bobs=grass_bobs
 
-#[sstone_bobs]
-#bobs=sstones1,sstones2,sstones3,sstones4,sstones5,sstones6,sstones7
+[meadow_lr]
+weight=2
+immovable_density=10
+moveable_density=20
+land_coast_bobs=grass_bobs
+land_inner_bobs=grass_bobs
+land_upper_bobs=grass_bobs
+wasteland_inner_bobs=wasteland_bobs
+wasteland_outer_bobs=grass_bobs
 
-#[stone_bobs]
-#bobs=stones1,stones2,stones3,stones4,stones5,stones6
+[stone_lr]
+weight=4
+immovable_density=100
+moveable_density=0
+land_coast_bobs=
+land_inner_bobs=stone_bobs
+land_upper_bobs=
+wasteland_inner_bobs=stone_bobs
+wasteland_outer_bobs=stone_bobs
 
+[sstone_lr]
+weight=2
+immovable_density=100
+moveable_density=0
+land_coast_bobs=
+land_inner_bobs=sstone_bobs
+land_upper_bobs=
+wasteland_inner_bobs=sstone_bobs
+wasteland_outer_bobs=sstone_bobs
+
+[tree_bobs]
+immovable_bobs=tree1,tree2,tree3,tree4,tree5,tree6,tree7,tree8
+moveable_bobs=brownbear,chamois,deer,elk,lynx,reindeer,wolf
+
+[bush_bobs]
+immovable_bobs=bush1,bush2,bush3,bush4,bush5
+moveable_bobs=wisent,wolf,bunny,elk,fox,lynx,wolf,marten,sheep,sheep
+
+[grass_bobs]
+immovable_bobs=grass1,grass2,grass3
+moveable_bobs=bunny,elk,fox,lynx,wolf,marten,sheep,sheep
+
+[sstone_bobs]
+immovable_bobs=sstones1,sstones2,sstones3,sstones4,sstones5,sstones6,sstones7
+moveable_bobs=
+
+[stone_bobs]
+immovable_bobs=stones1,stones2,stones3,stones4,stones5,stones5,stones6,stones6,stones6
+moveable_bobs=
+
+[wasteland_bobs]
+immovable_bobs=skeleton1,skeleton2,skeleton3,cactus1,cactus1,cactus2,cactus2,fallentree,deadtree1,deadtree2,deadtree3,deadtree4
+moveable_bobs=

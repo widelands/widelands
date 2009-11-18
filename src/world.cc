@@ -156,6 +156,81 @@ Map Gen Info
 =============================================================================
 */
 
+void MapGenBobKind::parseSection (Section & s)
+{
+	std::string str;
+
+	str = s.get_safe_string("immovable_bobs");
+	MapGenAreaInfo::split_string(m_ImmovableBobs, str);
+
+	str = s.get_safe_string("moveable_bobs");
+	MapGenAreaInfo::split_string(m_MoveableBobs, str);
+}
+
+const MapGenBobKind * MapGenBobArea::getBobKind
+	(MapGenAreaInfo::MapGenTerrainType terrType) const
+{
+	switch (terrType)
+	{
+		case MapGenAreaInfo::ttLandCoast:
+			return m_LandCoastBobKind;
+		case MapGenAreaInfo::ttLandLand:
+			return m_LandInnerBobKind;
+		case MapGenAreaInfo::ttLandUpper:
+			return m_LandUpperBobKind;
+		case MapGenAreaInfo::ttWastelandInner:
+			return m_WastelandInnerBobKind;
+		case MapGenAreaInfo::ttWastelandOuter:
+			return m_WastelandOuterBobKind;
+		default:
+			return NULL;
+	};
+	return NULL;
+}
+
+void MapGenBobArea::parseSection (Section & s, MapGenInfo & mapGenInfo)
+{
+	m_Weight = s.get_int("weight", 1);
+	m_Immovable_Density =
+		static_cast<uint8_t>
+			(s.get_safe_int("immovable_density"));
+	m_Moveable_Density =
+		static_cast<uint8_t>
+			(s.get_safe_int("moveable_density"));
+
+	std::string str;
+
+	str = s.get_safe_string("land_coast_bobs");
+	if (str.length() > 0)
+		m_LandCoastBobKind = mapGenInfo.getBobKind(str);
+	else
+		m_LandCoastBobKind = NULL;
+
+	str = s.get_safe_string("land_inner_bobs");
+	if (str.length() > 0)
+		m_LandInnerBobKind = mapGenInfo.getBobKind(str);
+	else
+		m_LandInnerBobKind = NULL;
+
+	str = s.get_safe_string("land_upper_bobs");
+	if (str.length() > 0)
+		m_LandUpperBobKind = mapGenInfo.getBobKind(str);
+	else
+		m_LandUpperBobKind = NULL;
+
+	str = s.get_safe_string("wasteland_inner_bobs");
+	if (str.length() > 0)
+		m_WastelandInnerBobKind = mapGenInfo.getBobKind(str);
+	else
+		m_WastelandInnerBobKind = NULL;
+
+	str = s.get_safe_string("wasteland_outer_bobs");
+	if (str.length() > 0)
+		m_WastelandOuterBobKind = mapGenInfo.getBobKind(str);
+	else
+		m_WastelandOuterBobKind = NULL;
+}
+
 int MapGenAreaInfo::split_string
 	(std::vector<std::string> & strs, std::string & str)
 {
@@ -265,7 +340,7 @@ Terrain_Index MapGenAreaInfo::getTerrain
 }
 
 
-uint32_t MapGenInfo::getSumLandWeight()
+uint32_t MapGenInfo::getSumLandWeight() const
 {
 	if (m_land_weight_valid)
 		return m_land_weight;
@@ -274,9 +349,34 @@ uint32_t MapGenInfo::getSumLandWeight()
 	for (uint32_t ix = 0; ix < getNumAreas(MapGenAreaInfo::atLand); ++ix)
 		sum += getArea(MapGenAreaInfo::atLand, ix).getWeight();
 	m_land_weight = sum;
+	m_land_weight_valid = true;
+
 	return m_land_weight;
 }
 
+MapGenBobArea const & MapGenInfo::getBobArea(size_t index) const
+{
+	return m_BobAreas[index];
+}
+
+size_t MapGenInfo::getNumBobAreas() const
+{
+	return m_BobAreas.size();
+}
+
+uint32_t MapGenInfo::getSumBobAreaWeight() const
+{
+	if (m_sum_bob_area_weights_valid)
+		return m_sum_bob_area_weights;
+
+	uint32_t sum = 0;
+	for (uint32_t ix = 0; ix < m_BobAreas.size(); ++ix)
+		sum += m_BobAreas[ix].getWeight();
+	m_sum_bob_area_weights = sum;
+	m_sum_bob_area_weights_valid = true;
+
+	return m_sum_bob_area_weights;
+}
 
 size_t MapGenInfo::getNumAreas
 	(MapGenAreaInfo::MapGenAreaType const areaType) const
@@ -291,7 +391,9 @@ size_t MapGenInfo::getNumAreas
 }
 
 MapGenAreaInfo const & MapGenInfo::getArea
-	(MapGenAreaInfo::MapGenAreaType const areaType, uint32_t const index) const
+	(MapGenAreaInfo::MapGenAreaType const areaType,
+	 uint32_t const index)
+	const
 {
 	switch (areaType) {
 	case MapGenAreaInfo::atWater:     return m_WaterAreas    .at(index);
@@ -302,10 +404,22 @@ MapGenAreaInfo const & MapGenInfo::getArea
 	throw wexception("invalid MapGenAreaType %u", areaType);
 }
 
+const MapGenBobKind * MapGenInfo::getBobKind
+	(const std::string & bobKindName)
+	 const
+{
+	if (m_BobKinds.find(bobKindName) == m_BobKinds.end())
+	{
+		throw wexception("Invalid MapGenBobKind %s", bobKindName.c_str());
+	}
+	return & m_BobKinds.at(bobKindName);
+}
+
 void MapGenInfo::parseProfile(World * const world, Profile & profile)
 {
 	m_world = world;
 	m_land_weight_valid = false;
+	m_sum_bob_area_weights_valid = false;
 
 	{ //  find out about the general heights
 		Section & s = profile.get_safe_section("heights");
@@ -369,6 +483,46 @@ void MapGenInfo::parseProfile(World * const world, Profile & profile)
 		m_MountainAreas.push_back(info);
 	}
 
+	Section & bobs_s = profile.get_safe_section("bobs");
+	std::vector<std::string> bob_area_strs;
+	std::vector<std::string> bob_kind_strs;
+
+	str = bobs_s.get_string("areas");
+	MapGenAreaInfo::split_string(bob_area_strs, str);
+
+	str = bobs_s.get_string("bob_kinds");
+	MapGenAreaInfo::split_string(bob_kind_strs, str);
+
+	for (uint32_t ix = 0; ix < bob_kind_strs.size(); ++ix) {
+		Section & s = profile.get_safe_section(bob_kind_strs[ix].c_str());
+		MapGenBobKind kind;
+		kind.parseSection(s);
+		m_BobKinds[bob_kind_strs[ix]] = kind;
+
+		for (size_t jx = 0; jx < kind.getNumImmovableBobs(); jx++)
+		{
+			if
+				(m_world->get_immovable_index
+				 (kind.getImmovableBob(jx).c_str()) < 0)
+				throw wexception
+					("Unknown immovable %s", kind.getImmovableBob(jx).c_str());
+		}
+
+		for (size_t jx = 0; jx < kind.getNumMoveableBobs(); jx++)
+		{
+			if
+				(m_world->get_bob(kind.getMoveableBob(jx).c_str()) < 0)
+				throw wexception
+					("Unknown moveable %s", kind.getMoveableBob(jx).c_str());
+		}
+	}
+
+	for (uint32_t ix = 0; ix < bob_area_strs.size(); ++ix) {
+		Section & s = profile.get_safe_section(bob_area_strs[ix].c_str());
+		MapGenBobArea area;
+		area.parseSection(s, *this);
+		m_BobAreas.push_back(area);
+	}
 }
 
 /*
@@ -391,7 +545,6 @@ World::World(std::string const & name) : m_basedir("worlds/" + name + '/') {
 			parse_root_conf(name, root_conf);
 			parse_resources();
 			parse_terrains();
-			parse_mapgen();
 			log("Parsing world bobs...\n");
 			parse_bobs(m_basedir, root_conf);
 			root_conf.check_used();
@@ -403,6 +556,11 @@ World::World(std::string const & name) : m_basedir("worlds/" + name + '/') {
 			log("Parsing global bobs in world...\n");
 			parse_bobs(global_dir, global_root_conf);
 			global_root_conf.check_used();
+		}
+
+		{
+			log("Parsing map gen info...\n");
+			parse_mapgen();
 		}
 	} catch (std::exception const & e) {
 		throw game_data_error("world %s: %s", name.c_str(), e.what());

@@ -39,6 +39,7 @@
 #include "wexception.h"
 #include "worlddata.h"
 #include "editor/tools/editor_increase_resources_tool.h"
+#include "map_generator.h"
 
 #include "log.h"
 
@@ -50,7 +51,6 @@
 #define MAX_ELEVATION   (0xffffffff)
 #define MAP_ID_DIGITS   20
 #define ISLAND_BORDER   10
-
 
 namespace Widelands {
 
@@ -806,17 +806,19 @@ mapInfo:     Information about the random map currently
 rng:         is the random number generator to be used.
              This will mostly be the current rng of the random map
              currently being created.
+terrType:    Returns the terrain-Type fpor this triangle
 ===============
 */
 Terrain_Index Map::figure_out_terrain
-	(MapGenInfo                &       mapGenInfo,
+	(MapGenInfo      const    &       mapGenInfo,
 	 uint32_t                  * const random2,
 	 uint32_t                  * const random3,
 	 uint32_t                  * const random4,
 	 Coords const c0, Coords const c1, Coords const c2,
 	 uint32_t const h1, uint32_t const h2, uint32_t const h3,
 	 UniqueRandomMapInfo const &       mapInfo,
-	 RNG                       &       rng)
+	 RNG                       &       rng,
+	 MapGenAreaInfo::MapGenTerrainType & terrType)
 {
 	uint32_t       numLandAreas      =
 		mapGenInfo.getNumAreas(MapGenAreaInfo::atLand);
@@ -979,6 +981,9 @@ Terrain_Index Map::figure_out_terrain
 			MapGenAreaInfo::ttWastelandOuter : MapGenAreaInfo::ttWastelandInner;
 	}
 
+	// Return terrain type
+	terrType = ttp;
+
 	//  Figure out which terrain to use at this point in the map...
 	return
 		mapGenInfo.getArea(atp, usedLandIndex).getTerrain
@@ -1064,6 +1069,7 @@ void Map::generate_resources
 
 void Map::create_random_map
 	(UniqueRandomMapInfo const & mapInfo,
+	 MapGenerator & gen,
 	 std::string const & worldname,
 	 char        const * name,
 	 char        const * author,
@@ -1110,6 +1116,17 @@ void Map::create_random_map
 	uint32_t * const random_rsrc_4 =
 		generate_random_value_map(mapInfo.w, mapInfo.h, rng);
 
+	// for bobs
+	uint32_t ** const random_bobs =
+			new uint32_t * [mapGenInfo.getNumBobAreas()];
+
+	for (size_t ix = 0; ix < mapGenInfo.getNumBobAreas(); ix++)
+	{
+		random_bobs[ix] =
+			generate_random_value_map
+				(mapInfo.w, mapInfo.h, rng);
+	}
+
 	try {
 		//  Now we have generated a lot of random data!!
 		//  Lets use it !!!
@@ -1154,26 +1171,30 @@ void Map::create_random_map
 			uint8_t height_x1_y1 =
 				operator[](Coords(lower_right_x, lower_y)).get_height();
 
+			MapGenAreaInfo::MapGenTerrainType terrType;
+
 			fc.field->set_terrain_d
 				(figure_out_terrain
 				 	(mapGenInfo, random2, random3, random4,
 				 	 fc, Coords(lower_x, lower_y), Coords(lower_right_x, lower_y),
 				 	 height_x0_y0, height_x0_y1, height_x1_y1, mapInfo,
-				 	 rng));
+				 	 rng, terrType));
 
 			fc.field->set_terrain_r
 				(figure_out_terrain
 				 	(mapGenInfo, random2, random3, random4,
 				 	 fc, Coords(right_x, fc.y), Coords(lower_right_x, lower_y),
 				 	 height_x0_y0, height_x1_y0, height_x1_y1,
-				 	 mapInfo, rng));
+				 	 mapInfo, rng, terrType));
 
 			//  set resources for this field
 			generate_resources
 				(random_rsrc_1, random_rsrc_2, random_rsrc_3, random_rsrc_4,
 				 fc, mapInfo);
-		}
 
+			// set bobs and immovables for this field
+			gen.generate_bobs(mapGenInfo, random_bobs, fc, rng, terrType);
+		}
 	} catch (...) {
 		delete[] elevations;
 		delete[] random2;
@@ -1182,6 +1203,12 @@ void Map::create_random_map
 		delete[] random_rsrc_1;
 		delete[] random_rsrc_2;
 		delete[] random_rsrc_3;
+		for (size_t ix = 0; ix < mapGenInfo.getNumBobAreas(); ix++)
+		{
+			delete[] random_bobs[ix];
+		}
+		delete[] random_bobs;
+
 		throw;
 	}
 	delete[] elevations;
@@ -1191,6 +1218,12 @@ void Map::create_random_map
 	delete[] random_rsrc_1;
 	delete[] random_rsrc_2;
 	delete[] random_rsrc_3;
+	for (size_t ix = 0; ix < mapGenInfo.getNumBobAreas(); ix++)
+	{
+		delete[] random_bobs[ix];
+	}
+	delete[] random_bobs;
+
 	//  Aftermaths...
 
 	recalc_whole_map();
