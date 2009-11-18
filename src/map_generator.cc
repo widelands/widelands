@@ -38,29 +38,27 @@ MapGenerator::MapGenerator
 
 void MapGenerator::generate_bobs
 	(MapGenInfo & mapGenInfo,
-	 uint32_t **  const random_bobs,
+	 uint32_t          const * const * const random_bobs,
 	 Coords const fc,
 	 RNG  &       rng,
-	 MapGenAreaInfo::MapGenTerrainType terrType)
+	 MapGenAreaInfo::MapGenTerrainType const terrType)
 {
 	// Figure out wich bob area is due here...
 
-	size_t ix;
 	size_t num = mapGenInfo.getNumBobAreas();
 	size_t found = num;
 	uint32_t sum_weight = mapGenInfo.getSumBobAreaWeight();
 	uint32_t max_val = 0;
-	for (ix = 0; ix < num; ix++)
-	{
+	for (size_t ix = 0; ix < num; ++ix) {
 		uint32_t val = random_bobs[ix][fc.x + m_mapInfo.w * fc.y];
 		val = (val / sum_weight) * mapGenInfo.getBobArea(ix).getWeight();
-		if (val >= max_val)
-		{
+		if (val >= max_val) {
 			found = ix;
 			max_val = val;
 		}
 	}
-	if (found >= num) return;
+	if (found >= num)
+		return;
 
 	// Figure out if we really need to set a bob here...
 
@@ -68,7 +66,8 @@ void MapGenerator::generate_bobs
 
 	const MapGenBobKind * bobKind = bobArea.getBobKind(terrType);
 
-	if (bobKind == NULL) return; // No bobs defined here...
+	if (not bobKind) //  no bobs defined here...
+		return;
 
 	uint32_t immovDens = bobArea.getImmovableDensity();
 	uint32_t movDens   = bobArea.getMoveableDensity();
@@ -76,14 +75,8 @@ void MapGenerator::generate_bobs
 	immovDens *= max_val / 100;
 	movDens   *= max_val / 100;
 
-	immovDens =
-			immovDens >= MAX_ELEVATION_HALF ?
-				MAX_ELEVATION :
-				immovDens * 2;
-	movDens =
-			movDens >= MAX_ELEVATION_HALF ?
-				MAX_ELEVATION :
-				movDens * 2;
+	immovDens = immovDens >= MAX_ELEVATION_HALF ? MAX_ELEVATION : immovDens * 2;
+	movDens   = movDens   >= MAX_ELEVATION_HALF ? MAX_ELEVATION : movDens   * 2;
 
 	uint32_t val = rng.rand();
 	bool set_immovable = (val <= immovDens);
@@ -93,31 +86,21 @@ void MapGenerator::generate_bobs
 
 	// Set bob according to bob area
 
-	if (set_immovable)
-	{
-		num = bobKind->getNumImmovableBobs();
-		if (num != 0)
-		{
-			size_t idx =
-				static_cast<size_t>(rng.rand() / (MAX_ELEVATION / num));
+	if (set_immovable and (num = bobKind->getNumImmovableBobs()))
+		m_egbase.create_immovable
+			(fc,
+			 bobKind->getImmovableBob
+			 	(static_cast<size_t>(rng.rand() / (MAX_ELEVATION / num))),
+			 0);
 
-			m_egbase.create_immovable(fc, bobKind->getImmovableBob(idx), NULL);
-		}
-	}
-
-	if (set_moveable)
-	{
-		num = bobKind->getNumMoveableBobs();
-		if (num != 0)
-		{
-			size_t idx =
-				static_cast<size_t>(rng.rand() / (MAX_ELEVATION / num));
-			m_egbase.create_bob
-				(fc,
-				 m_map.world().get_bob(bobKind->getMoveableBob(idx).c_str()),
-				 NULL);
-		}
-	}
+	if (set_moveable and (num = bobKind->getNumMoveableBobs()))
+		m_egbase.create_bob
+			(fc,
+			 m_map.world().get_bob
+			 	(bobKind->getMoveableBob
+			 	 	(static_cast<size_t>(rng.rand() / (MAX_ELEVATION / num)))
+			 	 .c_str()),
+			 0);
 }
 
 };

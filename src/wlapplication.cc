@@ -1752,10 +1752,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	}
 
 	virtual void setPlayerAI(uint8_t const number, std::string const & ai) {
-		if (number >= s.players.size())
-			return;
-
-		s.players[number].ai = ai;
+		if (number < s.players.size())
+			s.players[number].ai = ai;
 	}
 	virtual void nextPlayerState(uint8_t const number) {
 		if (number == s.playernum || number >= s.players.size())
@@ -1809,24 +1807,18 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	}
 
 	virtual void setPlayerName(uint8_t const number, std::string const & name) {
-		if (number >= s.players.size())
-			return;
-
-		s.players[number].name = name;
+		if (number < s.players.size())
+			s.players[number].name = name;
 	}
 
 	virtual void setPlayer(uint8_t const number, PlayerSettings const ps) {
-		if (number >= s.players.size())
-			return;
-
-		s.players[number] = ps;
+		if (number < s.players.size())
+			s.players[number] = ps;
 	}
 
-	virtual void setPlayerNumber(int32_t const number) {
-		if (number >= static_cast<int32_t>(s.players.size()))
-			return;
-
-		s.playernum = number;
+	virtual void setPlayerNumber(uint8_t const number) {
+		if (number < s.players.size())
+			s.playernum = number;
 	}
 
 	virtual void setPlayerReady(uint8_t const, bool const) {

@@ -72,7 +72,7 @@ struct NetHost : public GameController, private SyncCallback {
 	void setPlayerAI    (uint8_t number, std::string const & name);
 	void setPlayerName  (uint8_t number, std::string const & name);
 	void setPlayer      (uint8_t number, PlayerSettings);
-	void setPlayerNumber(int32_t number);
+	void setPlayerNumber(uint8_t number);
 	void setPlayerReady (uint8_t number, bool ready);
 	bool getPlayerReady (uint8_t number);
 
@@ -99,8 +99,10 @@ private:
 	void broadcastRealSpeed(uint32_t speed);
 	void updateNetworkSpeed();
 
-	std::string getComputerPlayerName(uint32_t playernum);
-	bool haveUserName(std::string const & name, int32_t ignoreplayer = -1);
+	std::string getComputerPlayerName(uint8_t playernum);
+	bool haveUserName
+		(std::string const & name,
+		 uint8_t             ignoreplayer = UserSettings::none());
 	void welcomeClient(uint32_t number, std::string const & playername);
 	void committedNetworkTime(int32_t time);
 	void recvClientTime(uint32_t number, int32_t time);

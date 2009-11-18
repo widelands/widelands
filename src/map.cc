@@ -1117,15 +1117,11 @@ void Map::create_random_map
 		generate_random_value_map(mapInfo.w, mapInfo.h, rng);
 
 	// for bobs
-	uint32_t ** const random_bobs =
-			new uint32_t * [mapGenInfo.getNumBobAreas()];
+	uint32_t * * const random_bobs =
+		new uint32_t * [mapGenInfo.getNumBobAreas()];
 
-	for (size_t ix = 0; ix < mapGenInfo.getNumBobAreas(); ix++)
-	{
-		random_bobs[ix] =
-			generate_random_value_map
-				(mapInfo.w, mapInfo.h, rng);
-	}
+	for (size_t ix = 0; ix < mapGenInfo.getNumBobAreas(); ++ix)
+		random_bobs[ix] = generate_random_value_map(mapInfo.w, mapInfo.h, rng);
 
 	try {
 		//  Now we have generated a lot of random data!!

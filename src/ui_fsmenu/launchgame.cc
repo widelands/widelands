@@ -368,10 +368,9 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	// Care about Multiplayer clients, lobby and players
 	if (settings.multiplayer) {
 		m_lobby_list->clear();
-		for (uint32_t i = 0; i < settings.users.size(); ++i) {
-			if (settings.users[i].position == -1)
-				m_lobby_list->add(settings.users[i].name.c_str(), 0);
-		}
+		container_iterate_const(std::vector<UserSettings>, settings.users, i)
+			if (i.current->position == UserSettings::none())
+				m_lobby_list->add(i.current->name.c_str(), 0);
 	}
 }
 
@@ -475,15 +474,15 @@ void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t const pos)
 	// This is only possible in multiplayer games.
 	if ((settings.playernum == pos) & settings.multiplayer) {
 		m_settings->setPlayerState(pos, PlayerSettings::stateOpen);
-		m_settings->setPlayerNumber(-1);
+		m_settings->setPlayerNumber(UserSettings::none());
 		return;
 	}
 
-	// Check if current player position == -1, if yes we just assign the player
-	// to the position. This is only possible in multiplayer games.
-	if (settings.playernum == -1) {
+	//  Check if current player position is none. If yes, we just assign the
+	//  player to the position. This is only possible in multiplayer games.
+	if (settings.playernum == UserSettings::none()) {
 		if (!settings.multiplayer)
-			throw wexception("Player position = -1 in none multiplayer game");
+			throw wexception("player position is none in non-multiplayer game");
 		if
 			(pos < m_nr_players and
 			 settings.players.at(pos).state == PlayerSettings::stateOpen)
@@ -566,17 +565,19 @@ void Fullscreen_Menu_LaunchGame::safe_place_for_host
 
 	// Check whether the host would still keep a valid position and return if
 	// yes.
-	if (settings.playernum < newplayernumber)
+	if
+		(settings.playernum == UserSettings::none() or
+		 settings.playernum < newplayernumber)
 		return;
 
 	if (settings.multiplayer) {
-		m_settings->setPlayerNumber(-1);
+		m_settings->setPlayerNumber(UserSettings::none());
 		return;
 	}
 
 	// Check if a still valid place is open.
 	for (uint8_t i = 0; i < newplayernumber; ++i) {
-		PlayerSettings position = settings.players[i];
+		PlayerSettings position = settings.players.at(i);
 		if (position.state == PlayerSettings::stateOpen) {
 			switch_to_position(i);
 			return;

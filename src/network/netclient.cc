@@ -335,11 +335,11 @@ void NetClient::setPlayerName(uint8_t, std::string const &)
 void NetClient::setPlayer(uint8_t, PlayerSettings)
 {
 	// do nothing here - the request for a positionchange is send in
-	// setPlayerNumber(int32_t) to the host.
+	//  setPlayerNumber(uint8_t) to the host.
 }
 
 void NetClient::setPlayerReady
-	(uint8_t number, bool ready)
+	(uint8_t const number, bool const ready)
 {
 	//only if we have a valid player number set readyness
 	if (number == d->playernum) {
@@ -358,7 +358,7 @@ bool NetClient::getPlayerReady(uint8_t const number) {
 		 d->settings.players.at(number).ready);
 }
 
-void NetClient::setPlayerNumber(int32_t number)
+void NetClient::setPlayerNumber(uint8_t const number)
 {
 	// If the playernumber we want to switch to is our own, there is no need
 	// for sending a request to the host.
@@ -368,7 +368,7 @@ void NetClient::setPlayerNumber(int32_t number)
 	// Send request
 	SendPacket s;
 	s.Unsigned8(NETCMD_SETTING_CHANGEPOSITION);
-	s.Signed32(number);
+	s.Unsigned8(number);
 	s.send(d->sock);
 }
 

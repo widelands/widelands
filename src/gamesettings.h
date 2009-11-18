@@ -43,7 +43,11 @@ struct PlayerSettings {
 };
 
 struct UserSettings {
-	int32_t     position; // -1 if in lobby
+	static uint8_t none() {return std::numeric_limits<uint8_t>::max();}
+	static uint8_t notConnected() {return none() - 1;}
+	static uint8_t highestPlayernum() {return notConnected() - 1;}
+
+	uint8_t     position;
 	std::string name;
 };
 
@@ -57,9 +61,9 @@ struct GameSettings {
 	GameSettings() : savegame(false) {}
 
 	/// Number of player position
-	int32_t playernum;
+	uint8_t playernum;
 	/// Number of users entry
-	uint32_t usernum;
+	uint8_t usernum;
 
 	/// Name of the selected map
 	std::string mapname;
@@ -119,13 +123,13 @@ struct GameSettingsProvider {
 	virtual void setPlayerInit    (uint8_t number, uint8_t index) = 0;
 	virtual void setPlayerName    (uint8_t number, std::string const &) = 0;
 	virtual void setPlayer        (uint8_t number, PlayerSettings) = 0;
-	virtual void setPlayerNumber  (int32_t number) = 0;
+	virtual void setPlayerNumber  (uint8_t number) = 0;
 	virtual void setPlayerReady   (uint8_t number, bool ready) = 0;
 	virtual bool getPlayerReady   (uint8_t number) = 0;
 
 	struct No_Tribe {};
 	std::string const & getPlayersTribe() {
-		if (settings().playernum < 0)
+		if (UserSettings::highestPlayernum() < settings().playernum)
 			throw No_Tribe();
 		return settings().players[settings().playernum].tribe;
 	}

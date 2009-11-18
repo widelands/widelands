@@ -405,13 +405,10 @@ MapGenAreaInfo const & MapGenInfo::getArea
 }
 
 const MapGenBobKind * MapGenInfo::getBobKind
-	(const std::string & bobKindName)
-	 const
+	(std::string const & bobKindName) const
 {
 	if (m_BobKinds.find(bobKindName) == m_BobKinds.end())
-	{
-		throw wexception("Invalid MapGenBobKind %s", bobKindName.c_str());
-	}
+		throw wexception("invalid MapGenBobKind %s", bobKindName.c_str());
 	return & m_BobKinds.at(bobKindName);
 }
 
@@ -500,21 +497,18 @@ void MapGenInfo::parseProfile(World * const world, Profile & profile)
 		m_BobKinds[bob_kind_strs[ix]] = kind;
 
 		for (size_t jx = 0; jx < kind.getNumImmovableBobs(); jx++)
-		{
 			if
-				(m_world->get_immovable_index
-				 (kind.getImmovableBob(jx).c_str()) < 0)
+				(m_world->get_immovable_index(kind.getImmovableBob(jx).c_str())
+				 <
+				 0)
 				throw wexception
-					("Unknown immovable %s", kind.getImmovableBob(jx).c_str());
-		}
+					("unknown immovable %s", kind.getImmovableBob(jx).c_str());
 
 		for (size_t jx = 0; jx < kind.getNumMoveableBobs(); jx++)
-		{
 			if
 				(m_world->get_bob(kind.getMoveableBob(jx).c_str()) < 0)
 				throw wexception
-					("Unknown moveable %s", kind.getMoveableBob(jx).c_str());
-		}
+					("unknown moveable %s", kind.getMoveableBob(jx).c_str());
 	}
 
 	for (uint32_t ix = 0; ix < bob_area_strs.size(); ++ix) {

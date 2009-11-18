@@ -79,7 +79,7 @@ struct NetClient :
 	virtual void setPlayerInit    (uint8_t number, uint8_t index);
 	virtual void setPlayerName    (uint8_t number, std::string const & name);
 	virtual void setPlayer        (uint8_t number, PlayerSettings ps);
-	virtual void setPlayerNumber  (int32_t number);
+	virtual void setPlayerNumber  (uint8_t number);
 	virtual void setPlayerReady   (uint8_t number, bool ready);
 	virtual bool getPlayerReady   (uint8_t number);
 

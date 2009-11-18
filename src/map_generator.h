@@ -41,12 +41,11 @@ struct MapGenerator {
 		 Editor_Game_Base & egbase);
 
 	void generate_bobs
-		(MapGenInfo & mapGenInfo,
-		 uint32_t **  const random_bobs,
-		 Coords const c,
-		 RNG  &       rng,
-		 MapGenAreaInfo::MapGenTerrainType terrType)
-		;
+		(MapGenInfo                      &,
+		 uint32_t          const * const * random_bobs,
+		 Coords,
+		 RNG                             &,
+		 MapGenAreaInfo::MapGenTerrainType terrType);
 
 private:
 
