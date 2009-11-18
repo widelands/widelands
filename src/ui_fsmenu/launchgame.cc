@@ -172,7 +172,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 void Fullscreen_Menu_LaunchGame::start()
 {
 	if
-		((m_settings->settings().mapname.empty())
+		(m_settings->settings().mapname.empty()
 		 &&
 		 m_settings->canChangeMap()
 		 &&
@@ -289,15 +289,15 @@ void Fullscreen_Menu_LaunchGame::refresh()
 		set_scenario_values();
 
 	// "Choose Position" Buttons in frond of PDG
-	for (int32_t i = 0; i < m_nr_players; ++i) {
+	for (uint8_t i = 0; i < m_nr_players; ++i) {
 		m_pos[i]->set_visible(true);
 		PlayerSettings const & player = settings.players[i];
 		if
-			((player.state == PlayerSettings::stateOpen) |
-			 ((player.state == PlayerSettings::stateComputer) &
+			(player.state == PlayerSettings::stateOpen or
+			 (player.state == PlayerSettings::stateComputer and
 			  !settings.multiplayer)
-			 |
-			 ((settings.playernum == i) & settings.multiplayer))
+			 or
+			 (settings.playernum == i and settings.multiplayer))
 			m_pos[i]->set_enabled(true);
 		else
 			m_pos[i]->set_enabled(false);
@@ -467,7 +467,7 @@ void Fullscreen_Menu_LaunchGame::set_scenario_values()
 /**
  * Called when a position-button was clicked.
  */
-void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t pos)
+void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t const pos)
 {
 	GameSettings settings = m_settings->settings();
 
@@ -484,27 +484,28 @@ void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t pos)
 	if (settings.playernum == -1) {
 		if (!settings.multiplayer)
 			throw wexception("Player position = -1 in none multiplayer game");
-		PlayerSettings position = settings.players[pos];
-		if ((pos < m_nr_players) & (position.state == PlayerSettings::stateOpen))
+		if
+			(pos < m_nr_players and
+			 settings.players.at(pos).state == PlayerSettings::stateOpen)
 		{
 			m_settings->setPlayerState(pos, PlayerSettings::stateHuman);
 			m_settings->setPlayerNumber(pos);
-			m_settings->setPlayerName(pos, settings.users[settings.usernum].name);
+			m_settings->setPlayerName
+				(pos, settings.users.at(settings.usernum).name);
 		}
 		return;
 	}
 
-	PlayerSettings position = settings.players[pos];
-	PlayerSettings player   = settings.players[settings.playernum];
+	PlayerSettings const position = settings.players.at(pos);
+	PlayerSettings const player   = settings.players.at(settings.playernum);
 	if
-		((pos < m_nr_players) &
-		 ((position.state == PlayerSettings::stateOpen) |
-		  ((position.state == PlayerSettings::stateComputer) &
+		(pos < m_nr_players and
+		 (position.state == PlayerSettings::stateOpen or
+		  (position.state == PlayerSettings::stateComputer and
 		   !settings.multiplayer)))
 	{
-		const PlayerSettings oldOnPos = position;
 		m_settings->setPlayer(pos, player);
-		m_settings->setPlayer(settings.playernum, oldOnPos);
+		m_settings->setPlayer(settings.playernum, position);
 		m_settings->setPlayerNumber(pos);
 	}
 }

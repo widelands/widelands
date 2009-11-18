@@ -769,34 +769,33 @@ void NetHost::setPlayerState
 
 	SendPacket s;
 
-	if (player.state == PlayerSettings::stateHuman) {
-		uint32_t i = 1; //  0 is host an host has no client -> segfault.
-		for (; i < d->settings.users.size(); ++i) {
-			if (d->settings.users.at(i).position == number)
+	if (player.state == PlayerSettings::stateHuman)
+		//  0 is host and has no client
+		for (uint8_t i = 1; i < d->settings.users.size(); ++i)
+			if (d->settings.users.at(i).position == number) {
+				d->settings.users.at(i).position = -1;
+				if (host) //  Did host send the user to lobby?
+					sendSystemChat
+						(_("Host sent player %s to the lobby!"),
+						 d->settings.users.at(i).name.c_str());
+
+				//  for local settings
+				for (std::vector<Client>::iterator j = d->clients.begin();; ++j) {
+					assert(j != d->clients.end());
+					if (j->usernum == static_cast<int32_t>(i)) {
+						j->playernum = -1;
+						break;
+					}
+				}
+
+				//  broadcast change
+				s.Unsigned8(NETCMD_SETTING_USER);
+				s.Unsigned32(i);
+				writeSettingUser(s, i);
+				broadcast(s);
+
 				break;
-		}
-		if (i < d->settings.users.size()) {
-			d->settings.users.at(i).position = -1;
-			if (host) // did host player send the user to lobby?
-				sendSystemChat
-					(_("Host sent player %s to the lobby!"),
-					 d->settings.users.at(i).name.c_str());
-
-			// for local settings
-			uint32_t j = 0;
-			for (; j < d->clients.size(); ++j)
-				if (d->clients.at(j).usernum == static_cast<int32_t>(i))
-					break;
-			Client & client = d->clients.at(j);
-			client.playernum = -1;
-
-			// Broadcast change
-			s.Unsigned8(NETCMD_SETTING_USER);
-			s.Unsigned32(i);
-			writeSettingUser(s, i);
-			broadcast(s);
-		}
-	}
+			}
 
 	player.state = state;
 
