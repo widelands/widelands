@@ -158,7 +158,7 @@ uint32_t AnimationManager::get
 		size_t const len = strlen(pictempl) - 4;
 		if (pictempl[len] == '.')
 			pictempl[len] = '\0'; // delete extension
-		ad.picnametempl = strdup(pictempl); //  FIXME assumably memory leak
+		ad.picnametempl = pictempl;
 	}
 
 	// Read mapping from frame numbers to sound effect names and load effects
