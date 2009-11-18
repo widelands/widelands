@@ -49,8 +49,7 @@ void Game_Cmd_Queue_Data_Packet::Read
 			cmdq.nextserial = fr.Unsigned32();
 
 			// Erase all currently pending commands in the queue
-			while (!cmdq.m_cmds.empty())
-				cmdq.m_cmds.pop();
+			cmdq.flush();
 
 			if (packet_version == CURRENT_PACKET_VERSION)
 				for (;;) {
