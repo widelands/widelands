@@ -758,7 +758,7 @@ int32_t Building::get_priority
 void Building::collect_priorities
 	(std::map<int32_t, std::map<Ware_Index, int32_t> > & p) const
 {
-	if (m_ware_priorities.size() == 0)
+	if (m_ware_priorities.empty())
 		return;
 	std::map<Ware_Index, int32_t> & ware_priorities = p[Request::WARE];
 	std::map<Ware_Index, int32_t>::const_iterator it;

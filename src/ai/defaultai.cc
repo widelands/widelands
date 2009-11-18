@@ -1748,7 +1748,7 @@ int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
 		prio += 2 * wares[bo.inputs[k]].producers;
 		prio -= 2 * wares[bo.inputs[k]].consumers;
 	}
-	if (bo.inputs.size() == 0)
+	if (bo.inputs.empty())
 		++prio;
 
 	int32_t output_prio = 0;

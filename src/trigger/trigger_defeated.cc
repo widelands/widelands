@@ -67,7 +67,7 @@ void Trigger_Defeated::check_set_conditions(Game const & game) {
 	const std::vector<uint32_t> & nr_workers =
 		game.get_general_statistics()[m_player - 1].nr_workers;
 
-	if (nr_workers.size() == 0)
+	if (nr_workers.empty())
 		return set_trigger(false);
 	if (*nr_workers.rbegin() == 0)
 		return set_trigger(true);

@@ -53,7 +53,7 @@ struct WareList {
 	count_type stock(Ware_Index) const;
 
 	void set_nrwares(Ware_Index const i) {
-		assert(m_wares.size() == 0);
+		assert(m_wares.empty());
 		m_wares.resize(i.value(), 0);
 	}
 

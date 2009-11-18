@@ -172,7 +172,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 void Fullscreen_Menu_LaunchGame::start()
 {
 	if
-		((m_settings->settings().mapname.size() == 0)
+		((m_settings->settings().mapname.empty())
 		 &&
 		 m_settings->canChangeMap()
 		 &&
@@ -180,7 +180,7 @@ void Fullscreen_Menu_LaunchGame::start()
 	{
 		select_map();
 
-		if (m_settings->settings().mapname.size() == 0)
+		if (m_settings->settings().mapname.empty())
 			end_modal(0); // back was pressed
 	}
 
@@ -225,7 +225,7 @@ void Fullscreen_Menu_LaunchGame::back_clicked()
 		//  from user point of view, so we reopen the mapselect-menu.
 		m_settings->setMap(std::string(), std::string(), 0);
 		select_map();
-		if (m_settings->settings().mapname.size() == 0)
+		if (m_settings->settings().mapname.empty())
 			end_modal(0);
 		refresh();
 	} else
@@ -449,7 +449,7 @@ void Fullscreen_Menu_LaunchGame::select_savegame()
  */
 void Fullscreen_Menu_LaunchGame::set_scenario_values()
 {
-	if (m_settings->settings().mapfilename.size() == 0)
+	if (m_settings->settings().mapfilename.empty())
 		throw wexception
 				("settings()->scenario was set to true, but no map is available");
 	Widelands::Map map; //  Map_Loader needs a place to put it's preload data

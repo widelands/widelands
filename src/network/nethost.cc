@@ -336,8 +336,8 @@ NetHost::~NetHost ()
 	if (d->svsock != 0)
 		SDLNet_TCP_Close (d->svsock);
 
+	delete d->promoter;
 	delete d;
-	d = 0;
 }
 
 std::string const & NetHost::getLocalPlayername() const
@@ -545,7 +545,7 @@ void NetHost::sendPlayerCommand(Widelands::PlayerCommand & pc)
  */
 void NetHost::send(ChatMessage msg)
 {
-	if (msg.msg.size() == 0)
+	if (msg.msg.empty())
 		return;
 
 	// Make sure that msg is free of richtext formation tags. Such tags could not
@@ -684,7 +684,7 @@ GameSettings const & NetHost::settings()
 
 bool NetHost::canLaunch()
 {
-	if (d->settings.mapname.size() == 0)
+	if (d->settings.mapname.empty())
 		return false;
 	if (d->settings.players.size() < 1)
 		return false;
@@ -1115,7 +1115,7 @@ void NetHost::welcomeClient
 	// Assign the player a name, preferably the name chosen by the client
 	std::string effective_name = playername;
 
-	if (effective_name.size() == 0)
+	if (effective_name.empty())
 		effective_name = _("Player");
 
 	if (haveUserName(effective_name, client.usernum)) {

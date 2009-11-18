@@ -148,7 +148,7 @@ void PlayerDescriptionGroup::refresh()
 			std::string title;
 
 			if (player.state == PlayerSettings::stateComputer) {
-				if (player.ai.size() == 0)
+				if (player.ai.empty())
 					title = _("Computer");
 				else {
 					title = _("AI: ");

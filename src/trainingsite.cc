@@ -621,7 +621,7 @@ void TrainingSite::add_upgrade
  * Called once at initialization to populate \ref m_upgrades.
  */
 void TrainingSite::calc_upgrades() {
-	assert(m_upgrades.size() == 0);
+	assert(m_upgrades.empty());
 
 	//  FIXME This is currently hardcoded for "soldier" but it should allow any
 	//  FIXME soldier type name.
