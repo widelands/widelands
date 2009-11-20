@@ -406,6 +406,10 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 	}
 }
 
+/// \note The MAP_FAILED macro from glibc uses old-style cast. We can not fix
+/// this ourselves, so we temporarily turn the error into a warning. It is
+/// turned back into an error after this function.
+#pragma GCC diagnostic warning "-Wold-style-cast"
 void * RealFSImpl::fastLoad
 	(const std::string & fname, size_t & length, bool & fast)
 {
@@ -424,9 +428,8 @@ void * RealFSImpl::fastLoad
 	data = mmap(0, length, PROT_READ, MAP_PRIVATE, file, 0);
 
 	//if mmap doesn't work for some strange reason try the old way
-	if (data == MAP_FAILED) {
+	if (data == MAP_FAILED)
 		return Load(fname, length);
-	}
 
 	fast = true;
 
@@ -438,6 +441,7 @@ void * RealFSImpl::fastLoad
 	return data;
 #endif
 }
+#pragma GCC diagnostic error "-Wold-style-cast"
 
 /**
  * Write the given block of memory to the repository.

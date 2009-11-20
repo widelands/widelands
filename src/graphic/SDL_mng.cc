@@ -319,14 +319,14 @@ SDL_Surface * MNG_read_frame(SDL_RWops * const src)
 			/* Check if all tRNS entries are opaque except one */
 			uint32_t i = 0;
 			int32_t  t = -1;
-			for (; i < num_trans; ++i)
+			for (; i < static_cast<uint32_t>(num_trans); ++i)
 				if (trans[i] == 0) {
 					if (t >= 0)
 						break;
 					t = i;
 				} else if (trans[i] != 255)
 					break;
-			if (i == num_trans) {
+			if (i == static_cast<uint32_t>(num_trans)) {
 				/* exactly one transparent index */
 				ckey = t;
 			} else {

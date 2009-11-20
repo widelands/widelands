@@ -76,6 +76,11 @@ bool NetGGZ::used()
 
 
 /// connects to the metaserver
+///
+/// \note The FD_SET macro from glibc uses old-style cast. We can not fix this
+/// ourselves, so we temporarily turn the error into a warning. It is turned
+/// back into an error after this function.
+#pragma GCC diagnostic warning "-Wold-style-cast"
 bool NetGGZ::connect()
 {
 	if (!used())
@@ -120,6 +125,7 @@ bool NetGGZ::connect()
 
 	return true;
 }
+#pragma GCC diagnostic error "-Wold-style-cast"
 
 
 /// handles the events of the ggzmod server
@@ -292,6 +298,11 @@ bool NetGGZ::usedcore()
 
 /// checks if the widelands game server module sent new data or whether it
 /// requests any data - this is only useful, when the player is in a table
+///
+/// \note The FD_SET macro from glibc uses old-style cast. We can not fix this
+/// ourselves, so we temporarily turn the error into a warning. It is turned
+/// back into an error after this function.
+#pragma GCC diagnostic warning "-Wold-style-cast"
 void NetGGZ::data()
 {
 	if (!used())
@@ -361,6 +372,7 @@ void NetGGZ::data()
 	default: log("GGZ ## opcode unknown!\n");
 	}
 }
+#pragma GCC diagnostic error "-Wold-style-cast"
 
 
 //\FIXME: mallformed updatedata, if the user is in a room and too many seats

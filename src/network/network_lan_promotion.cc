@@ -73,6 +73,10 @@ LAN_Base::~LAN_Base ()
 	closesocket (sock);
 }
 
+/// \note The INADDR_ANY macro from glibc uses old-style cast. We can not fix
+/// this ourselves, so we temporarily turn the error into a warning. It is
+/// turned back into an error after this function.
+#pragma GCC diagnostic warning "-Wold-style-cast"
 void LAN_Base::bind (uint16_t port)
 {
 	sockaddr_in addr;
@@ -82,7 +86,12 @@ void LAN_Base::bind (uint16_t port)
 
 	::bind (sock, reinterpret_cast<sockaddr *>(&addr), sizeof(addr));
 }
+#pragma GCC diagnostic error "-Wold-style-cast"
 
+/// \note The FD_SET macro from glibc uses old-style cast. We can not fix this
+/// ourselves, so we temporarily turn the error into a warning. It is turned
+/// back into an error after this function.
+#pragma GCC diagnostic warning "-Wold-style-cast"
 bool LAN_Base::avail ()
 {
 	fd_set fds;
@@ -96,6 +105,7 @@ bool LAN_Base::avail ()
 
 	return select(sock + 1, &fds, 0, 0, &tv) == 1;
 }
+#pragma GCC diagnostic error "-Wold-style-cast"
 
 ssize_t LAN_Base::recv
 	(void * const buf, size_t const len, sockaddr_in * const addr)

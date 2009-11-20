@@ -930,7 +930,6 @@ void NetHost::setPlayer(uint8_t const number, PlayerSettings const ps)
 
 void NetHost::setPlayerNumber(uint8_t const number)
 {
-	log("NetHost::setPlayerNumber(%u)\n", number);
 	if (number != UserSettings::none() and d->settings.players.size() <= number)
 		return;
 
