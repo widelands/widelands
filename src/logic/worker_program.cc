@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,7 +79,7 @@ void WorkerProgram::parse
 					break;
 
 			if (!s_parsemap[mapidx].name)
-				throw wexception("unknown command '%s'", cmd[0].c_str());
+				throw wexception("unknown command type \"%s\"", cmd[0].c_str());
 
 			(this->*s_parsemap[mapidx].function)(descr, &act, parser, cmd);
 

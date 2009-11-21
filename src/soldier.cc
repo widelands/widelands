@@ -56,21 +56,21 @@ Soldier_Descr::Soldier_Descr
 		const char * const hp = global_s.get_safe_string("hp");
 		std::vector<std::string> list(split_string(hp, "-"));
 		if (list.size() != 2)
-			throw game_data_error(_("expected \"min-max\" but found\"%s\""), hp);
+			throw game_data_error
+				(_("expected %s but found \"%s\""), _("\"min-max\""), hp);
 		container_iterate(std::vector<std::string>, list, i)
 			remove_spaces(*i.current);
 		char * endp;
 		m_min_hp = strtol(list[0].c_str(), &endp, 0);
-		if (*endp)
-			throw game_data_error(_("%s is a bad value"), list[0].c_str());
-		if (0 == m_min_hp)
-			throw game_data_error(_("\"%s\" is not positive"), list[0].c_str());
-		m_max_hp = strtol(list[1].c_str(), &endp, 0);
-		if (*endp)
-			throw game_data_error(_("%s is a bad value"), list[1].c_str());
-		if (m_max_hp < m_min_hp)
+		if (*endp or 0 == m_min_hp)
 			throw game_data_error
-				(_("\"%s\" < \"%s\""), list[1].c_str(), list[0].c_str());
+				(_("expected %s but found \"%s\""),
+				 _("positive integer"), list[0].c_str());
+		m_max_hp = strtol(list[1].c_str(), &endp, 0);
+		if (*endp or m_max_hp < m_min_hp)
+			throw game_data_error
+				(_("expected positive integer >= %u but found \"%s\""),
+				 m_min_hp, list[1].c_str());
 	} catch (_wexception const & e) {
 		throw game_data_error("hp: %s", e.what());
 	}
@@ -79,19 +79,21 @@ Soldier_Descr::Soldier_Descr
 		const char * const attack = global_s.get_safe_string("attack");
 		std::vector<std::string> list(split_string(attack, "-"));
 		if (list.size() != 2)
-			throw game_data_error("expected \"min-max\" but found\"%s\"", attack);
+			throw game_data_error
+				(_("expected %s but found \"%s\""), _("\"min-max\""), attack);
 		container_iterate(std::vector<std::string>, list, i)
 			remove_spaces(*i.current);
 		char * endp;
 		m_min_attack = strtol(list[0].c_str(), &endp, 0);
-		if (*endp)
-			throw game_data_error(_("%s is a bad value"), list[0].c_str());
-		m_max_attack = strtol(list[1].c_str(), &endp, 0);
-		if (*endp)
-			throw game_data_error (_("%s is a bad value"), list[1].c_str());
-		if (m_max_attack < m_min_attack)
+		if (*endp or 0 == m_min_attack)
 			throw game_data_error
-				(_("\"%s\" < \"%s\""), list[1].c_str(), list[0].c_str());
+				(_("expected %s but found \"%s\""),
+				 _("positive integer"), list[0].c_str());
+		m_max_attack = strtol(list[1].c_str(), &endp, 0);
+		if (*endp or m_max_attack < m_min_attack)
+			throw game_data_error
+				(_("expected positive integer >= %u but found \"%s\""),
+				 m_min_attack, list[1].c_str());
 	} catch (_wexception const & e) {
 		throw game_data_error("attack: %s", e.what());
 	}
@@ -806,13 +808,13 @@ void Soldier::battle_update(Game & game, State &)
 						(buffer, sizeof(buffer),
 						 _
 						 	("The game engine has encountered a logic error. The %s "
-						 	 "#%u of player %u could could not find a way from "
-						 	 "(%i, %i) (with %s immovable) to the opponent (%s #%u "
-						 	 "of player %u) at (%i, %i) (with %s immovable). The %s "
-						 	 "will now desert (but will not be executed). Strange "
-						 	 "things may happen. No solution for this problem has "
-						 	 "been implemented yet. (bug #1951113) (The game has "
-						 	 "been paused.)"),
+						 	 "#%u of player %u could not find a way from (%i, %i) "
+						 	 "(with %s immovable) to the opponent (%s #%u of player "
+						 	 "%u) at (%i, %i) (with %s immovable). The %s will now "
+						 	 "desert (but will not be executed). Strange things may "
+						 	 "happen. No solution for this problem has been "
+						 	 "implemented yet. (bug #1951113) (The game has been "
+						 	 "paused.)"),
 						 descname().c_str(), serial(), owner().player_number(),
 						 get_position().x, get_position().y,
 						 immovable_position ?

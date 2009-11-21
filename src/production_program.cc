@@ -98,7 +98,7 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 				new ProductionProgram::ActReturn::Economy_Needs(parameters, tribe);
 		else
 			throw game_data_error
-				(_("expected \"needs\" but found \"%s\""), parameters);
+				(_("expected %s but found \"%s\""), "\"needs\"", parameters);
 	} catch (_wexception const & e) {
 		throw game_data_error("economy: %s", e.what());
 	}
@@ -113,7 +113,8 @@ ProductionProgram::ActReturn::Condition * create_workers_condition
 			return new ProductionProgram::ActReturn::Workers_Need_Experience;
 		else
 			throw game_data_error
-				(_("expected \"need experience\" but found \"%s\""), parameters);
+				(_("expected %s but found \"%s\""),
+				 "\"need experience\"", parameters);
 	} catch (_wexception const & e) {
 		throw game_data_error("workers: %s", e.what());
 	}
@@ -133,8 +134,8 @@ ProductionProgram::ActReturn::create_condition
 			return create_workers_condition(parameters);
 		else
 			throw game_data_error
-				("expected {\"not\"|\"economy\"|\"workers\"} but found \"%s\"",
-				 parameters);
+				("expected %s but found \"%s\"",
+				 "{\"not\"|\"economy\"|\"workers\"}", parameters);
 	} catch (_wexception const & e) {
 		throw game_data_error(_("invalid condition: %s"), e.what());
 	}
@@ -187,11 +188,12 @@ ProductionProgram::ActReturn::ActReturn
 				}
 			} else
 				throw game_data_error
-					(_("expected {\"when\"|\"unless\"} but found \"%s\""),
-					 parameters);
+					(_("expected %s but found \"%s\""),
+					 "{\"when\"|\"unless\"}", parameters);
 		} else if (*parameters)
 			throw game_data_error
-				(_("expected space or end of input but found \"%s\""), parameters);
+				(_("expected %s but found \"%s\""),
+				 ("space or end of input"), parameters);
 		else
 			m_is_when = true;
 
@@ -358,7 +360,8 @@ ProductionProgram::ActSleep::ActSleep
 			m_duration = value;
 			if (*endp or value <= 0 or m_duration != value)
 				throw game_data_error
-					(_("expected duration in ms but found \"%s\""), parameters);
+					(_("expected %s but found \"%s\""),
+					 _("duration in ms"), parameters);
 		} else
 			m_duration = 0; //  Get duration from the result of a previous action.
 	} catch (_wexception const & e) {
@@ -401,7 +404,8 @@ ProductionProgram::ActAnimate::ActAnimate
 			m_duration = value;
 			if (*endp or value <= 0 or m_duration != value)
 				throw game_data_error
-					(_("expected duration in ms but found \"%s\""), parameters);
+					(_("expected %s but found \"%s\""),
+					 _("duration in ms"), parameters);
 		} else
 			m_duration = 0; //  Get duration from the result of a previous action.
 	} catch (_wexception const & e) {
@@ -480,7 +484,8 @@ ProductionProgram::ActConsume::ActConsume
 					count = value;
 					if ((*endp and *endp != ' ') or value < 1 or count != value)
 						throw game_data_error
-							(_("expected count but found \"%s\""), parameters);
+							(_("expected %s but found \"%s\""),
+							 _("count"), parameters);
 					parameters = endp;
 					//  fallthrough
 				}
@@ -607,7 +612,8 @@ ProductionProgram::ActProduce::ActProduce
 						 or
 						 value < 1 or item.second != value)
 						throw game_data_error
-							(_("expected count but found \"%s\""), parameters);
+							(_("expected %s but found \"%s\""),
+							 _("count"), parameters);
 					parameters = endp;
 					goto item_end;
 				}
@@ -653,7 +659,7 @@ ProductionProgram::ActMine::ActMine
 			m_distance = value;
 			if (*endp != ' ' or m_distance != value)
 				throw game_data_error
-					(_("expected distance but found \"%s\""), parameters);
+					(_("expected %s but found \"%s\""), _("distance"), parameters);
 			parameters = endp;
 		}
 
@@ -663,7 +669,8 @@ ProductionProgram::ActMine::ActMine
 			m_max = value;
 			if (*endp != ' ' or value < 1 or 100 < value)
 				throw game_data_error
-					(_("expected percent but found \"%s\""), parameters);
+					(_("expected %s but found \"%s\""),
+					 _("percentage"), parameters);
 			parameters = endp;
 		}
 
@@ -673,7 +680,8 @@ ProductionProgram::ActMine::ActMine
 			m_chance = value;
 			if (*endp or value < 1 or 100 < value)
 				throw game_data_error
-					(_("expected percent but found \"%s\""), parameters);
+					(_("expected %s but found \"%s\""),
+					 _("percentage"), parameters);
 		}
 
 		std::string description = descr.descname();
@@ -796,7 +804,7 @@ ProductionProgram::ActCheck_Soldier::ActCheck_Soldier
 	//  FIXME soldier type name.
 	if (not match_force_skip(parameters, "soldier"))
 		throw game_data_error
-			(_("expected name of soldier type, but found \"%s\""), parameters);
+			(_("expected %s but found \"%s\""), _("soldier type"), parameters);
 	try {
 		if      (match_force_skip(parameters, "hp"))
 			attribute = atrHP;
@@ -818,7 +826,7 @@ ProductionProgram::ActCheck_Soldier::ActCheck_Soldier
 		level = value;
 		if (*endp or level != value)
 			throw game_data_error
-				(_("expected level but found \"%s\""), parameters);
+				(_("expected %s but found \"%s\""), _("level"), parameters);
 	} catch (_wexception const & e) {
 		throw game_data_error("check_soldier: %s", e.what());
 	}
@@ -865,7 +873,7 @@ ProductionProgram::ActTrain::ActTrain
 	//  FIXME soldier type name.
 	if (not match_force_skip(parameters, "soldier"))
 		throw game_data_error
-			(_("expected name of soldier type, but found \"%s\""), parameters);
+			(_("expected %s but found \"%s\""), _("soldier type"), parameters);
 	try {
 		if      (match_force_skip(parameters, "hp"))
 			attribute = atrHP;
@@ -877,8 +885,8 @@ ProductionProgram::ActTrain::ActTrain
 			attribute = atrEvade;
 		else
 			throw game_data_error
-				("expected {hp|attack|defense|evade} but found \"%s\"",
-				 parameters);
+				(_("expected %s but found \"%s\""),
+				 "{\"hp\"|\"attack\"|\"defense\"|\"evade\"}", parameters);
 
 		{
 			char * endp;
@@ -886,7 +894,7 @@ ProductionProgram::ActTrain::ActTrain
 			level = value;
 			if (*endp != ' ' or level != value)
 				throw game_data_error
-					(_("expected level but found \"%s\""), parameters);
+					(_("expected %s but found \"%s\""), _("level"), parameters);
 			parameters = endp;
 		}
 
@@ -970,7 +978,7 @@ ProductionProgram::ActPlayFX::ActPlayFX
 			priority = value;
 			if (*endp or priority != value)
 				throw game_data_error
-					(_("expected priority but found \"%s\""), parameters);
+					(_("expected %s but found \"%s\""), _("priority"), parameters);
 		} else
 			priority = 127;
 	} catch (_wexception const & e) {

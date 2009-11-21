@@ -21,6 +21,7 @@
 
 #include "logic/bob.h"
 #include "constants.h"
+#include "i18n.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wexception.h"
@@ -169,7 +170,8 @@ uint32_t AnimationManager::get
 		try {
 			if (endp == parameters or frame_number != value)
 				throw wexception
-					("expected frame number but found \"%s\"", parameters);
+					(_("expected %s but found \"%s\""),
+					 _("frame number"), parameters);
 			parameters = endp;
 			force_skip(parameters);
 			g_sound_handler.load_fx(directory, parameters);

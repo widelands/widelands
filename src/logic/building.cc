@@ -60,7 +60,7 @@ Building_Descr::Building_Descr
 	m_hints         (prof.get_section("aihints")),
 	m_vision_range  (0)
 {
-	{
+	try {
 		char const * const string = global_s.get_safe_string("size");
 		if      (!strcasecmp(string, "small"))
 			m_size = BaseImmovable::SMALL;
@@ -73,7 +73,10 @@ Building_Descr::Building_Descr
 			m_mine = true;
 		} else
 			throw game_data_error
-				(_("size=\"%s\": expected {small|medium|big}"), string);
+				(_("expected %s but found \"%s\""),
+				 "{\"small\"|\"medium\"|\"big\"}", string);
+	} catch (_wexception const & e) {
+		throw game_data_error("size: %s", e.what());
 	}
 
 	// Parse build options

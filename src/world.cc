@@ -630,7 +630,7 @@ void World::parse_terrains()
 				break;
 			if (i == 0x10)
 				throw game_data_error
-					(_("%s: too many terrain types, can not be more than 16\n"),
+					(_("%s: too many terrain types, can not be more than 16"),
 					 fname);
 			ters.add(new Terrain_Descr(m_basedir.c_str(), s, &m_resources));
 		}

@@ -129,7 +129,8 @@ ImmovableProgram::ImmovableProgram
 		else if (not strcmp(v->get_name(), "playFX"))
 			action = new ActPlayFX   (v->get_string(), immovable);
 		else
-			throw game_data_error(_("unknown command \"%s\""), v->get_name());
+			throw game_data_error
+				(_("unknown command type \"%s\""), v->get_name());
 		m_actions.push_back(action);
 	}
 	if (m_actions.empty())
@@ -173,17 +174,21 @@ Immovable_Descr::Immovable_Descr
 	m_default_encodedata.clear();
 	m_default_encodedata.parse(global_s);
 
-	if (char const * const string = global_s.get_string("size")) {
-		if      (!strcasecmp(string, "small"))
-			m_size = BaseImmovable::SMALL;
-		else if (!strcasecmp(string, "medium"))
-			m_size = BaseImmovable::MEDIUM;
-		else if (!strcasecmp(string, "big"))
-			m_size = BaseImmovable::BIG;
-		else
-			throw game_data_error
-				(_("size=\"%s\": expected {small|medium|big}"), string);
-	}
+	if (char const * const string = global_s.get_string("size"))
+		try {
+			if      (!strcasecmp(string, "small"))
+				m_size = BaseImmovable::SMALL;
+			else if (!strcasecmp(string, "medium"))
+				m_size = BaseImmovable::MEDIUM;
+			else if (!strcasecmp(string, "big"))
+				m_size = BaseImmovable::BIG;
+			else
+				throw game_data_error
+					(_("expected %s but found \"%s\""),
+					 "{\"small\"|\"medium\"|\"big\"}", string);
+		} catch (_wexception const & e) {
+			throw game_data_error("size: %s", e.what());
+		}
 
 
 	//  parse attributes
@@ -293,7 +298,7 @@ ImmovableProgram const * Immovable_Descr::get_program
 
 	if (it == m_programs.end())
 		throw game_data_error
-			(_("immovable %s has no program '%s'"),
+			(_("immovable %s has no program \"%s\""),
 			 name().c_str(), programname.c_str());
 
 	return it->second;
@@ -652,7 +657,8 @@ ImmovableProgram::ActAnimate::ActAnimate
 			long int const value = strtol(parameters, &endp, 0);
 			if (*endp or value <= 0)
 				throw game_data_error
-					(_("expected duration in ms but found \"%s\""), parameters);
+					(_("expected %s but found \"%s\""),
+					 _("duration in ms"), parameters);
 			m_duration = value;
 		} else
 			m_duration = 0; //  forever
@@ -690,7 +696,7 @@ ImmovableProgram::ActPlayFX::ActPlayFX
 			priority = value;
 			if (*endp or priority != value)
 				throw game_data_error
-					(_("expected priority but found \"%s\""), parameters);
+					(_("expected %s but found \"%s\""), _("priority"), parameters);
 		} else
 			priority = 127;
 	} catch (_wexception const & e) {
@@ -730,8 +736,8 @@ ImmovableProgram::ActTransform::ActTransform
 				else if (strcmp(parameters, "world"))
 					throw game_data_error
 						(_
-						 	("scope \"%s\" given for tartget type (must be "
-						 	 "world\")"),
+						 	("scope \"%s\" given for target type (must be "
+						 	 "\"world\")"),
 						 parameters);
 				tribe = false;
 				parameters = p;
@@ -799,7 +805,7 @@ ImmovableProgram::ActGrow::ActGrow
 				else if (strcmp(parameters, "world"))
 					throw game_data_error
 						(_
-						 	("scope \"%s\" given for tartget type (must be "
+						 	("scope \"%s\" given for target type (must be "
 						 	 "\"world\")"),
 						 parameters);
 				tribe = false;
@@ -845,8 +851,8 @@ ImmovableProgram::ActRemove::ActRemove(char * parameters, Immovable_Descr &)
 			long int const value = strtol(parameters, &endp, 0);
 			if (*endp or value < 1 or 254 < value)
 				throw game_data_error
-					(_("expected probability in range [1, 254] but found \"%s\""),
-					 parameters);
+					(_("expected %s but found \"%s\""),
+					 _("probability in range [1, 254]"), parameters);
 			probability = value;
 		} else
 			probability = 0;
@@ -885,7 +891,7 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 				else if (strcmp(parameters, "world"))
 					throw game_data_error
 						(_
-						 	("scope \"%s\" given for tartget type (must be "
+						 	("scope \"%s\" given for target type (must be "
 						 	 "\"world\")"),
 						 parameters);
 				tribe = false;

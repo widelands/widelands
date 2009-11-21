@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -116,7 +116,7 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		"unhide_area",            _("Unhide area"),
 		_
 			("Gives vision for a specified amount of time of all locations "
-			 "whithin an area to the player.")
+			 "within an area to the player.")
 	},
 };
 

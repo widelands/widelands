@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -151,7 +151,7 @@ Event_Message_Box::Event_Message_Box(Section & s, Editor_Game_Base & egbase)
 						Referencer<Trigger>::reference(*trigger);
 					} else
 						throw game_data_error
-							(_("%s refers to \"%s\", which is not a null trigger"),
+							(_("%s refers to \"%s\", which is not a timer"),
 							 key, trigger_name);
 				} else
 					descr.trigger = 0;

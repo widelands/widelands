@@ -69,8 +69,8 @@ Event_Building::Event_Building
 					m_distance_max = value;
 					if (endp == distance or value <= 0 or m_distance_max != value)
 						throw game_data_error
-							(_("expected distance (1 .. 255) but found \"%s\""),
-							 endp);
+							(_("expected %s but found \"%s\""),
+							 _("distance (1 .. 255)"), endp);
 				}
 				if (*(distance = endp)) {
 					m_distance_min = m_distance_max;
@@ -78,8 +78,8 @@ Event_Building::Event_Building
 					m_distance_max = value;
 					if (endp == distance or value <= 0 or m_distance_max != value)
 						throw game_data_error
-							(_("expected distance (1 .. 255) but found \"%s\""),
-							 endp);
+							(_("expected %s but found \"%s\""),
+							 _("distance (1 .. 255)"), endp);
 				}
 				if (m_distance_max < m_distance_min)
 					throw game_data_error
@@ -308,7 +308,7 @@ Event_Building::Event_Building
 										soldier_count += amount;
 									} catch (...) {
 										throw game_data_error
-											(_("%s=\"%s\":invalid"),
+											(_("%s=\"%s\": invalid"),
 											 v->get_name(), v->get_string());
 									}
 								if (max_soldier_capacity < soldier_count)
