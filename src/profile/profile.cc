@@ -160,7 +160,11 @@ Widelands::Coords Section::Value::get_Coords
 	//  not set starting positions in the editor. So check whether x, y < -1 so
 	//  the editor can load incomplete maps. For games the starting positions
 	//  will be checked in player initalisation anyway.
-	if (x < -1 or extent.w <= x or y < -1 or extent.h <= y or *endp)
+	if
+		(((x < 0 or extent.w <= x or y < 0 or extent.h <= y) and
+		  (x != -1 or y != -1))
+		 or
+		 *endp)
 		throw wexception
 			("%s: \"%s\" is not a Coords on a map with size (%u, %u)",
 			 get_name(), m_value, extent.w, extent.h);

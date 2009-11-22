@@ -45,6 +45,7 @@
 #include "sound/sound_handler.h"
 #include "trainingsite.h"
 #include "tribe.h"
+#include "warning.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
 #include "map_io/widelands_map_loader.h"
@@ -427,7 +428,17 @@ bool Game::run
 				plr->create_default_infrastructure();
 
 			}
-		}
+		} else
+			iterate_players_existing(p, nr_players, *this, plr)
+				if (not map().get_starting_pos(p))
+				throw warning
+					(_("Missing starting position"),
+					 _
+					 	("Widelands could not start the game, because player %u has "
+					 	 "no starting position.\n"
+					 	 "You can manually add a starting position with Widelands "
+					 	 "Editor, to fix this problem."),
+					 p);
 
 		if (get_ipl())
 			get_ipl()->move_view_to
