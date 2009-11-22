@@ -158,6 +158,7 @@ void Sound_Handler::load_system_sounds()
 {
 	load_fx("sound", "click");
 	load_fx("sound", "create_construction_site");
+	load_fx("sound", "message");
 }
 
 /** Load a sound effect. One sound effect can consist of several audio files

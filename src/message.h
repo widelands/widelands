@@ -43,14 +43,14 @@ struct Message {
 		m_is_visible(true)
 	{}
 	Message
-		(std::string const &       sender,
-		 uint32_t                  time,
+		(std::string const &       msgsender,
+		 uint32_t                  msgtime,
 		 std::string const &       t,
 		 Widelands::Coords   const c,
 		 std::string const &       description)
 		:
-		m_sender(sender),
-		m_time(time),
+		m_sender(msgsender),
+		m_time(msgtime),
 		m_title(t),
 		m_descr(description),
 		m_coords(c),
@@ -61,13 +61,15 @@ struct Message {
 		return "Message: " + m_title + '|' + m_descr;
 	}
 
-	const std::string & title() const throw ()  {return m_title;}
-	const std::string & descr() const throw ()    {return m_descr;}
-	void set_title(std::string const & new_name)  {m_title = new_name;}
+	const std::string & sender() const throw ()     {return m_sender;}
+	const uint32_t & time() const                   {return m_time;}
+	const std::string & title() const throw ()      {return m_title;}
+	const std::string & descr() const throw ()      {return m_descr;}
+	void set_title(std::string const & new_name)    {m_title = new_name;}
 	void set_descr  (std::string const & new_descr) {m_descr   = new_descr;}
-	bool get_is_visible()       const throw ()    {return m_is_visible;}
-	void set_is_visible(const bool t) throw ()    {m_is_visible = t;}
-	Widelands::Coords get_coords() const {return m_coords;}
+	bool get_is_visible()       const throw ()      {return m_is_visible;}
+	void set_is_visible(const bool t) throw ()      {m_is_visible = t;}
+	Widelands::Coords get_coords() const            {return m_coords;}
 
 private:
 	std::string m_sender;

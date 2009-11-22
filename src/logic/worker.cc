@@ -818,9 +818,7 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 		(const Resource_Descr * const rdescr =
 		 	map.world().get_resource(position.field->get_resources()))
 	{
-		/* Geologist also sends a message notifying the player
-		 * TODO: each Geologist should report each resource only once
-		 */
+		// Geologist also sends a message notifying the player
 		if
 			(rdescr && rdescr->is_detectable() &&
 			 position.field->get_resources_amount())
@@ -828,12 +826,34 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 			log("Message: resources found %s\n", rdescr->name().c_str());
 			std::string sender = "g ";
 			sender += serial();
-			MessageQueue::add
-				(owner(),
-				 Message
-				 	(sender,
-				 	 game.get_gametime(),
-				 	 rdescr->name(), position, _("Resources found.")));
+			std::string resource = rdescr->descname();
+
+			//  We should add a message to the player's message queue - but only,
+			//  if there is not already a similiar one in list.
+			bool inlist = false;
+			Widelands::Coords coords = Widelands::Coords(get_position());
+			std::vector<Message> & msgQueue =
+				MessageQueue::get(owner().player_number());
+
+			for
+				(std::vector<Message>::iterator b = msgQueue.begin();
+				b != msgQueue.end(); ++b)
+				if (b->sender() == sender)
+					if (b->title() == resource)
+						// If the message is older than 45 seconds, a new one might
+						// be useful.
+						if (game.get_gametime() - b->time() < 45000) {
+							inlist = true;
+							break;
+						}
+
+			if (!inlist)
+				MessageQueue::add
+					(owner(),
+					Message
+						(sender,
+						 game.get_gametime(),
+						 resource, position, _("A geologist found resources.")));
 		}
 
 		Tribe_Descr const & t = tribe();

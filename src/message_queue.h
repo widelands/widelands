@@ -28,6 +28,7 @@
 #include "message.h"
 #include "ui_basic/button.h"
 #include "logic/player.h"
+#include "sound/sound_handler.h"
 
 #define NO_NEW_MESSAGES "pics/menu_toggle_oldmessage_menu.png"
 #define NEW_MESSAGES "pics/menu_toggle_newmessage_menu.png"
@@ -80,9 +81,14 @@ struct MessageQueue {
 		}
 
 		m_readall(player_number) = false;
-		if (player_number == m_player_number(0))
+		if (player_number == m_player_number(0)) {
+			// If we are not starting up the game, play a sound
+			if (m.time() > 0)
+				g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
 			if (m_button(0))
 				m_button(0)->set_pic(g_gr->get_picture(PicMod_Game, NEW_MESSAGES));
+
+		}
 	}
 
 	static void read_all (const Player & p)

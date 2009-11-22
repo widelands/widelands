@@ -417,19 +417,39 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			 	 Area<FCoords>
 			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
 
-	//  Fill the message queue with a message when a warehouse is created.
-	log
-		("Message: adding (wh) (%s) %i \n",
-		 type_name(), owner().player_number());
-	std::string sender = type_name();
-	MessageQueue::add
-		(owner(),
-		 Message
-		 	(sender,
-		 	 egbase.get_gametime(),
-		 	 "warehouse",
-		 	 Widelands::Coords(get_position()),
-		 	 _("A new warehouse is created")));
+	//  This function is twice called during loading, so only add a message,
+	//  to the player's message queue, if there is not already one for this wh.
+	bool inlist = false;
+	Widelands::Coords coords = Widelands::Coords(get_position());
+	std::vector<Message> & msgQueue = MessageQueue::get(owner().player_number());
+	for
+		(std::vector<Message>::iterator b = msgQueue.begin();
+		 b != msgQueue.end(); ++b)
+		if (b->sender() == "warehouse")
+			if (b->get_coords() == coords) {
+				inlist = true;
+				break;
+			}
+
+	if (!inlist) {
+		//  No entry for this warehouse yet - add one.
+		log
+			 ("Message: adding (wh) (%s) %i \n",
+			 type_name(), owner().player_number());
+		std::string buildingname = descname();
+		char message[2048];
+		snprintf
+			 (message, sizeof(message),
+			 _("A new %s was added to your economy."), buildingname.c_str());
+		MessageQueue::add
+			(owner(),
+			Message
+				("warehouse",
+				 egbase.get_gametime(),
+				 buildingname,
+				 coords,
+				 message));
+	}
 }
 
 
