@@ -22,7 +22,7 @@
 
 #include "io/fileread.h"
 #include "fxset.h"
-#include "widelands_geometry.h"
+#include "logic/widelands_geometry.h"
 #include "random.h"
 
 #include <map>

@@ -28,8 +28,8 @@
 #include "wexception.h"
 #include "logic/editor_game_base.h"
 #include "editor/tools/editor_set_starting_pos_tool.h"
-#include "graphic/overlay_manager.h"
-#include "world.h"
+#include "wui/overlay_manager.h"
+#include "logic/world.h"
 #include "map_io/map_loader.h"
 
 #include "ui_basic/button.h"

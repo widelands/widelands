@@ -21,8 +21,8 @@
 #define EVENT_BUILDING_H
 
 #include "event.h"
-#include "soldier_counts.h"
-#include "widelands_geometry.h"
+#include "logic/soldier_counts.h"
+#include "logic/widelands_geometry.h"
 
 #include <vector>
 

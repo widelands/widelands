@@ -22,7 +22,7 @@
 
 #include "editor_decrease_resources_tool.h"
 #include "editor_set_resources_tool.h"
-#include "widelands_geometry.h"
+#include "logic/widelands_geometry.h"
 
 /// Increases the resources of a node by a value.
 struct Editor_Increase_Resources_Tool : public Editor_Tool {

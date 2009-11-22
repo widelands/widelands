@@ -17,10 +17,10 @@
  *
  */
 
-#ifndef MAP_GENERATOR_H_
-#define MAP_GENERATOR_H_
+#ifndef MAP_GENERATOR_H
+#define MAP_GENERATOR_H
 
-#include "world.h"
+#include "logic/world.h"
 
 // This is the first step of separating map generation from
 // map.
@@ -56,4 +56,4 @@ private:
 
 }
 
-#endif /* MAP_GENERATOR_H_ */
+#endif

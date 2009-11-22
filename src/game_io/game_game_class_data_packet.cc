@@ -20,9 +20,9 @@
 #include "game_game_class_data_packet.h"
 
 #include "logic/game.h"
-#include "game_data_error.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
+#include "logic/game_data_error.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 
 namespace Widelands {
 

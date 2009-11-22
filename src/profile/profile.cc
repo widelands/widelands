@@ -24,7 +24,7 @@
 #include "io/filewrite.h"
 #include "i18n.h"
 #include "logic/player.h"
-#include "tribe.h"
+#include "logic/tribe.h"
 #include "wexception.h"
 
 #include "log.h"

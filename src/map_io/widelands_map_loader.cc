@@ -20,9 +20,9 @@
 #include "widelands_map_loader.h"
 
 #include "logic/editor_game_base.h"
-#include "map.h"
+#include "logic/map.h"
 #include "logic/player.h"
-#include "tribe.h"
+#include "logic/tribe.h"
 #include "warning.h"
 #include "widelands_map_allowed_buildings_data_packet.h"
 #include "widelands_map_bob_data_packet.h"
@@ -55,7 +55,7 @@
 #include "widelands_map_variable_data_packet.h"
 #include "widelands_map_ware_data_packet.h"
 #include "widelands_map_waredata_data_packet.h"
-#include "world.h"
+#include "logic/world.h"
 
 #include "log.h"
 

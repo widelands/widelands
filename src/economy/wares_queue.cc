@@ -28,10 +28,10 @@
 #include "map_io/widelands_map_map_object_saver.h"
 #include "logic/player.h"
 #include "request.h"
-#include "tribe.h"
+#include "logic/tribe.h"
 #include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 
 namespace Widelands {
 

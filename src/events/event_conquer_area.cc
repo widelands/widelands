@@ -20,7 +20,7 @@
 #include "event_conquer_area.h"
 
 #include "logic/game.h"
-#include "map.h"
+#include "logic/map.h"
 
 #include "profile/profile.h"
 

@@ -20,9 +20,9 @@
 #ifndef WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 #define WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 
-#include "game_data_error.h"
+#include "logic/game_data_error.h"
 #include "logic/instances.h"
-#include "widelands.h"
+#include "logic/widelands.h"
 
 #include "upcast.h"
 

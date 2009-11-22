@@ -20,7 +20,7 @@
 #ifndef EVENT_MOVE_VIEW_OPTION_MENU_H
 #define EVENT_MOVE_VIEW_OPTION_MENU_H
 
-#include "widelands_geometry.h"
+#include "logic/widelands_geometry.h"
 
 #include "ui_basic/window.h"
 

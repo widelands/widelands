@@ -20,7 +20,7 @@
 #include "event_flag.h"
 
 #include "logic/game.h"
-#include "game_data_error.h"
+#include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "profile/profile.h"
 

@@ -22,9 +22,9 @@
 #include "logic/building.h"
 #include "editor/editorinteractive.h"
 #include "logic/game.h"
-#include "game_data_error.h"
+#include "logic/game_data_error.h"
 #include "i18n.h"
-#include "map.h"
+#include "logic/map.h"
 #include "logic/player.h"
 #include "profile/profile.h"
 

@@ -20,7 +20,7 @@
 #include "trigger_time.h"
 
 #include "logic/game.h"
-#include "game_data_error.h"
+#include "logic/game_data_error.h"
 #include "profile/profile.h"
 
 #define TRIGGER_VERSION 2

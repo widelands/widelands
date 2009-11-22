@@ -23,8 +23,8 @@
 //TODO: as soon as g_fs is not needed anymore, next include can be changed
 //to ..../filesystem.h
 #include "io/filesystem/layered_filesystem.h"
-#include "widelands.h"
-#include "widelands_geometry.h"
+#include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
 
 #include "point.h"
 

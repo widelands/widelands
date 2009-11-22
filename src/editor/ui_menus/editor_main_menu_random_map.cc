@@ -22,9 +22,9 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "editor/editorinteractive.h"
-#include "map.h"
+#include "logic/map.h"
 #include "profile/profile.h"
-#include "world.h"
+#include "logic/world.h"
 #include "logic/editor_game_base.h"
 
 #include "ui_basic/button.h"

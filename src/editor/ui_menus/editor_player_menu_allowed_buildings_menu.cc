@@ -20,8 +20,8 @@
 #include "editor_player_menu_allowed_buildings_menu.h"
 
 #include "i18n.h"
-#include "map.h"
-#include "tribe.h"
+#include "logic/map.h"
+#include "logic/tribe.h"
 #include "logic/player.h"
 
 using Widelands::Building_Index;

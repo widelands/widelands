@@ -21,7 +21,7 @@
 #define WIDELANDS_MAP_DATA_PACKET_H
 
 #include "wexception.h"
-#include "widelands_filewrite.h"
+#include "logic/widelands_filewrite.h"
 
 struct FileSystem;
 

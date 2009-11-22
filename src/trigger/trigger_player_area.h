@@ -20,7 +20,7 @@
 #ifndef TRIGGER_PLAYER_AREA_H
 #define TRIGGER_PLAYER_AREA_H
 
-#include "player_area.h"
+#include "logic/player_area.h"
 #include "trigger.h"
 
 struct Trigger_Building_Option_Menu;

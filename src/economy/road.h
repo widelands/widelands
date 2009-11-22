@@ -20,9 +20,9 @@
 #ifndef S__ROAD_H
 #define S__ROAD_H
 
-#include "immovable.h"
+#include "logic/immovable.h"
 #include "logic/path.h"
-#include "roadtype.h"
+#include "logic/roadtype.h"
 
 namespace Widelands {
 struct Carrier;

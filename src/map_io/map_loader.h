@@ -20,7 +20,7 @@
 #ifndef MAP_LOADER_H
 #define MAP_LOADER_H
 
-#include "map.h"
+#include "logic/map.h"
 
 namespace Widelands {
 

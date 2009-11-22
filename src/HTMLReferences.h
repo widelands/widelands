@@ -24,7 +24,7 @@
 
 #ifdef WRITE_GAME_DATA_AS_HTML
 
-#include "widelands.h"
+#include "logic/widelands.h"
 
 #include <map>
 #include <set>

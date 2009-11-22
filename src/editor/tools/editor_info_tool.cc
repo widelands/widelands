@@ -21,8 +21,8 @@
 
 #include "editor/editorinteractive.h"
 #include "i18n.h"
-#include "map.h"
-#include "world.h"
+#include "logic/map.h"
+#include "logic/world.h"
 
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"

@@ -23,7 +23,7 @@
 #include <string>
 #include <ctime>
 
-#include "notification.h"
+#include "logic/notification.h"
 
 /**
  * Represents one chat message.

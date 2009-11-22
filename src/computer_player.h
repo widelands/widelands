@@ -21,7 +21,7 @@
 #define COMPUTER_PLAYER_H
 
 #include "logic/game.h"
-#include "notification.h"
+#include "logic/notification.h"
 
 /**
  * The generic interface to AI instances, or "computer players".

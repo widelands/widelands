@@ -21,7 +21,7 @@
 #define TRIGGER_TIME_H
 
 #include "trigger.h"
-#include "widelands.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 

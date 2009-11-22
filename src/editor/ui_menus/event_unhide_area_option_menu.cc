@@ -22,7 +22,7 @@
 #include "i18n.h"
 #include "events/event_unhide_area.h"
 #include "editor/editorinteractive.h"
-#include "map.h"
+#include "logic/map.h"
 #include "graphic/graphic.h"
 
 #include "ui_basic/messagebox.h"

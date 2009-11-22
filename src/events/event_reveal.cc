@@ -18,7 +18,7 @@
  */
 
 #include "event_reveal.h"
-#include "game_data_error.h"
+#include "logic/game_data_error.h"
 
 #include "wexception.h"
 

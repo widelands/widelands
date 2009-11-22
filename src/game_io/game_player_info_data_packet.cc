@@ -21,12 +21,12 @@
 
 #include "computer_player.h"
 #include "logic/game.h"
-#include "game_data_error.h"
+#include "logic/game_data_error.h"
 #include "wui/interactive_player.h"
 #include "logic/player.h"
-#include "tribe.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
+#include "logic/tribe.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 
 namespace Widelands {
 

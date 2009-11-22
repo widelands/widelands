@@ -28,7 +28,7 @@
 #include "rendertarget.h"
 #include "texture.h"
 #include "wexception.h"
-#include "widelands_fileread.h"
+#include "logic/widelands_fileread.h"
 
 #include "ui_basic/progresswindow.h"
 

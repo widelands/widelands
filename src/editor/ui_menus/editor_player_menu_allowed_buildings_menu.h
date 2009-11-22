@@ -20,7 +20,7 @@
 #ifndef EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
 #define EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
 
-#include "widelands.h"
+#include "logic/widelands.h"
 
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"

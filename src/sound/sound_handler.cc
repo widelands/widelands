@@ -24,7 +24,7 @@
 #include "i18n.h"
 #include "wui/interactive_base.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "map.h"
+#include "logic/map.h"
 #include "wui/mapview.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "profile/profile.h"

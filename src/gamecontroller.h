@@ -20,7 +20,7 @@
 #ifndef GAMECONTROLLER_H
 #define GAMECONTROLLER_H
 
-#include "widelands.h"
+#include "logic/widelands.h"
 
 #include <string>
 

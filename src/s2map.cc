@@ -20,13 +20,13 @@
 #include "s2map.h"
 
 #include "logic/editor_game_base.h"
-#include "field.h"
+#include "logic/field.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "map.h"
+#include "logic/map.h"
 #include "map_io/map_loader.h"
 #include "wexception.h"
-#include "world.h"
+#include "logic/world.h"
 
 #include <iostream>
 

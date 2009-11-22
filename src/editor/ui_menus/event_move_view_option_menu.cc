@@ -23,7 +23,7 @@
 #include "events/event_move_view.h"
 #include "editor/editorinteractive.h"
 #include "i18n.h"
-#include "map.h"
+#include "logic/map.h"
 
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"

@@ -20,9 +20,9 @@
 #include "editor_set_origin_tool.h"
 
 #include "editor/editorinteractive.h"
-#include "map.h"
+#include "logic/map.h"
 #include "wui/mapviewpixelconstants.h"
-#include "graphic/overlay_manager.h"
+#include "wui/overlay_manager.h"
 
 int32_t Editor_Set_Origin_Tool::handle_click_impl
 	(Widelands::Map               &       map,

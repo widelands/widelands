@@ -22,7 +22,7 @@
 
 #include "event.h"
 
-#include "widelands.h"
+#include "logic/widelands.h"
 
 struct Event_Allow_Building_Option_Menu;
 

@@ -21,9 +21,9 @@
 
 #include "graphic.h"
 #include "wui/mapviewpixelconstants.h"
-#include "overlay_manager.h"
+#include "wui/overlay_manager.h"
 #include "surface.h"
-#include "tribe.h"
+#include "logic/tribe.h"
 #include "vertex.h"
 
 #include "log.h"

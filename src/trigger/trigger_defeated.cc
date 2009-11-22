@@ -21,8 +21,8 @@
 
 #include "editor/editorinteractive.h"
 #include "logic/game.h"
-#include "game_data_error.h"
-#include "map.h"
+#include "logic/game_data_error.h"
+#include "logic/map.h"
 #include "logic/player.h"
 #include "profile/profile.h"
 

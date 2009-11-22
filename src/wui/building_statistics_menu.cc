@@ -25,9 +25,9 @@
 #include "interactive_player.h"
 #include "mapviewpixelconstants.h"
 #include "logic/player.h"
-#include "productionsite.h"
+#include "logic/productionsite.h"
 #include "graphic/rendertarget.h"
-#include "tribe.h"
+#include "logic/tribe.h"
 #include "plot_area.h"
 
 #include "ui_basic/button.h"

@@ -23,8 +23,8 @@
 #include <exception>
 
 #include "logic/cmd_queue.h"
-#include "widelands_streamread.h"
-#include "widelands_streamwrite.h"
+#include "logic/widelands_streamread.h"
+#include "logic/widelands_streamwrite.h"
 
 #include <SDL_net.h>
 

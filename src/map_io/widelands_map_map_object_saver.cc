@@ -19,7 +19,7 @@
 
 #include "widelands_map_map_object_saver.h"
 
-#include "areawatcher.h"
+#include "logic/areawatcher.h"
 #include "logic/battle.h"
 #include "logic/bob.h"
 #include "logic/building.h"
@@ -27,7 +27,7 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/ware_instance.h"
-#include "item_ware_descr.h"
+#include "logic/item_ware_descr.h"
 #include "wexception.h"
 
 namespace Widelands {

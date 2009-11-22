@@ -24,7 +24,7 @@
 
 #include "supply_list.h"
 #include "ui_basic/unique_window.h"
-#include "warelist.h"
+#include "logic/warelist.h"
 
 
 /**

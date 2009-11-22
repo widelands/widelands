@@ -23,7 +23,7 @@
 #include "editor/editorinteractive.h"
 #include "logic/game.h"
 #include "i18n.h"
-#include "map.h"
+#include "logic/map.h"
 #include "logic/player.h"
 #include "profile/profile.h"
 #include "wexception.h"

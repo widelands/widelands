@@ -20,7 +20,7 @@
 #ifndef MAPVIEWPIXELFUNCTIONS_H
 #define MAPVIEWPIXELFUNCTIONS_H
 
-#include "widelands_geometry.h"
+#include "logic/widelands_geometry.h"
 
 #include "point.h"
 
@@ -81,8 +81,8 @@ void get_save_pix
 //  have been in the cc file otherwise. Now objectcode modularity is not
 //  achieved, but only sourcecode modularity is required.
 
-#include "field.h"
-#include "map.h"
+#include "logic/field.h"
+#include "logic/map.h"
 #include "mapviewpixelconstants.h"
 
 inline uint32_t MapviewPixelFunctions::get_map_end_screen_x

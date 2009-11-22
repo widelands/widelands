@@ -20,10 +20,11 @@
 #include "widelands_map_allowed_buildings_data_packet.h"
 
 #include "logic/game.h"
-#include "game_data_error.h"
+#include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "profile/profile.h"
-#include "tribe.h"
+#include "logic/tribe.h"
+
 #include "upcast.h"
 
 namespace Widelands {

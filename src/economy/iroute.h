@@ -20,8 +20,11 @@
 #ifndef S__IROUTE_H
 #define S__IROUTE_H
 
+#include <stdint.h>
+
 namespace Widelands {
-class RoutingNode;
+
+struct RoutingNode;
 
 /**
  * This class represents a Route Interface, a virtual base class
@@ -34,8 +37,7 @@ class RoutingNode;
  * Most parts of the code still use the Route class directly and not this
  * interface
  **/
-class IRoute {
-public:
+struct IRoute {
 	virtual ~IRoute() {};
 
 	virtual void init(int32_t) = 0;

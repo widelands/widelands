@@ -20,8 +20,8 @@
 #include "widelands_map_variable_data_packet.h"
 
 #include "logic/editor_game_base.h"
-#include "game_data_error.h"
-#include "map.h"
+#include "logic/game_data_error.h"
+#include "logic/map.h"
 
 #include "profile/profile.h"
 

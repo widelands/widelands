@@ -20,9 +20,9 @@
 #ifndef EVENT_MOVE_VIEW_H
 #define EVENT_MOVE_VIEW_H
 
-#include "widelands.h"
+#include "logic/widelands.h"
 #include "event.h"
-#include "widelands_geometry.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 

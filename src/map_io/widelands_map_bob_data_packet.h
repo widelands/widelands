@@ -20,8 +20,8 @@
 #ifndef WIDELANDS_MAP_BOB_DATA_PACKET_H
 #define WIDELANDS_MAP_BOB_DATA_PACKET_H
 
-#include "widelands_fileread.h"
-#include "widelands_geometry.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_geometry.h"
 #include "widelands_map_data_packet.h"
 
 namespace Widelands {

@@ -20,11 +20,11 @@
 #ifndef AI_HELP_STRUCTS_H
 #define AI_HELP_STRUCTS_H
 
-#include "checkstep.h"
+#include "logic/checkstep.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "findnode.h"
-#include "map.h"
+#include "logic/findnode.h"
+#include "logic/map.h"
 
 #include <list>
 

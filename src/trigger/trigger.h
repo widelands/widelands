@@ -22,7 +22,7 @@
 
 #include "named.h"
 #include "referenced.h"
-#include "widelands_geometry.h"
+#include "logic/widelands_geometry.h"
 
 #include <map>
 #include <string>

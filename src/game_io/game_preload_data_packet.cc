@@ -20,9 +20,9 @@
 #include "game_preload_data_packet.h"
 
 #include "logic/game.h"
-#include "game_data_error.h"
+#include "logic/game_data_error.h"
 #include "wui/interactive_player.h"
-#include "map.h"
+#include "logic/map.h"
 #include "profile/profile.h"
 
 namespace Widelands {

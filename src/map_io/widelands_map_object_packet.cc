@@ -21,12 +21,12 @@
 
 #include "logic/battle.h"
 #include "logic/editor_game_base.h"
-#include "immovable.h"
-#include "legacy.h"
-#include "map.h"
+#include "logic/immovable.h"
+#include "logic/legacy.h"
+#include "logic/map.h"
 #include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 

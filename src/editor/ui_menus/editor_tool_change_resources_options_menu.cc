@@ -24,11 +24,11 @@
 #include "ui_basic/button.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "editor/tools/editor_set_resources_tool.h"
-#include "map.h"
-#include "widelands.h"
-#include "world.h"
+#include "logic/map.h"
+#include "logic/widelands.h"
+#include "logic/world.h"
 #include "graphic/graphic.h"
-#include "graphic/overlay_manager.h"
+#include "wui/overlay_manager.h"
 
 #include <cstdio>
 

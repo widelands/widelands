@@ -20,9 +20,9 @@
 #include "widelands_map_saver.h"
 
 #include "logic/editor_game_base.h"
-#include "map.h"
+#include "logic/map.h"
 #include "logic/player.h"
-#include "tribe.h"
+#include "logic/tribe.h"
 #include "wexception.h"
 #include "widelands_map_allowed_buildings_data_packet.h"
 #include "widelands_map_bob_data_packet.h"

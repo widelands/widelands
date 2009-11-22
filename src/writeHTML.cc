@@ -21,12 +21,12 @@
 
 #ifdef WRITE_GAME_DATA_AS_HTML
 
-#include "item_ware_descr.h"
-#include "productionsite.h"
-#include "soldier.h"
-#include "tribe.h"
+#include "logic/item_ware_descr.h"
+#include "logic/productionsite.h"
+#include "logic/soldier.h"
+#include "logic/tribe.h"
 #include "logic/worker_program.h"
-#include "world.h"
+#include "logic/world.h"
 
 #include "io/filesystem/disk_filesystem.h"
 #include "i18n.h"

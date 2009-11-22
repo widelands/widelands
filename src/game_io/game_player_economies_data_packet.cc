@@ -22,11 +22,12 @@
 #include "economy/economy_data_packet.h"
 #include "economy/flag.h"
 #include "logic/game.h"
-#include "game_data_error.h"
+#include "logic/game_data_error.h"
 #include "logic/player.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
+
 #include "upcast.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
 
 namespace Widelands {
 

@@ -21,7 +21,7 @@
 
 #include "editor/editorinteractive.h"
 #include "i18n.h"
-#include "map.h"
+#include "logic/map.h"
 #include "trigger/trigger.h"
 #include "trigger/trigger_time.h"
 

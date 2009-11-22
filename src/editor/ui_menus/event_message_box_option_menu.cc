@@ -23,7 +23,7 @@
 #include "i18n.h"
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
-#include "map.h"
+#include "logic/map.h"
 #include "trigger/trigger_time.h"
 
 #include "ui_basic/button.h"

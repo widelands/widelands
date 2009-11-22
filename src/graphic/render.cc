@@ -30,12 +30,12 @@ Rendering functions of the 16-bit software renderer.
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
-#include "map.h"
-#include "minimap.h"
+#include "logic/map.h"
+#include "wui/minimap.h"
 #include "logic/player.h"
 #include "upcast.h"
 #include "wexception.h"
-#include "world.h"
+#include "logic/world.h"
 
 #include <SDL.h>
 

@@ -20,7 +20,7 @@
 #ifndef EVENT_CONQUER_AREA_OPTION_MENU_H
 #define EVENT_CONQUER_AREA_OPTION_MENU_H
 
-#include "player_area.h"
+#include "logic/player_area.h"
 
 #include "ui_basic/window.h"
 

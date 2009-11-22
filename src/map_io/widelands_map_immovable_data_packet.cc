@@ -20,12 +20,12 @@
 #include "widelands_map_immovable_data_packet.h"
 
 #include "logic/editor_game_base.h"
-#include "immovable.h"
-#include "map.h"
-#include "tribe.h"
-#include "world.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
+#include "logic/immovable.h"
+#include "logic/map.h"
+#include "logic/tribe.h"
+#include "logic/world.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 

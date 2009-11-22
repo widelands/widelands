@@ -20,12 +20,12 @@
 #include "editor_increase_resources_tool.h"
 
 #include "editor/editorinteractive.h"
-#include "field.h"
+#include "logic/field.h"
 #include "graphic/graphic.h"
-#include "map.h"
-#include "world.h"
-#include "graphic/overlay_manager.h"
-#include "worlddata.h"
+#include "logic/map.h"
+#include "logic/world.h"
+#include "wui/overlay_manager.h"
+#include "logic/worlddata.h"
 
 using Widelands::TCoords;
 

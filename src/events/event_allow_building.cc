@@ -20,14 +20,14 @@
 #include "event_allow_building.h"
 
 #include "logic/editor_game_base.h"
-#include "game_data_error.h"
+#include "logic/game_data_error.h"
 #include "wui/interactive_base.h"
 #include "logic/game.h"
 #include "i18n.h"
-#include "map.h"
+#include "logic/map.h"
 #include "logic/player.h"
 #include "profile/profile.h"
-#include "tribe.h"
+#include "logic/tribe.h"
 
 #include "log.h"
 

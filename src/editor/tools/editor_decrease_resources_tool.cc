@@ -21,13 +21,13 @@
 
 #include "editor_increase_resources_tool.h"
 #include "editor_set_resources_tool.h"
-#include "widelands_geometry.h"
+#include "logic/widelands_geometry.h"
 #include "graphic/graphic.h"
-#include "map.h"
-#include "field.h"
+#include "logic/map.h"
+#include "logic/field.h"
 #include "editor/editorinteractive.h"
-#include "world.h"
-#include "graphic/overlay_manager.h"
+#include "logic/world.h"
+#include "wui/overlay_manager.h"
 
 
 /**

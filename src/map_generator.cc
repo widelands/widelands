@@ -18,7 +18,7 @@
  */
 
 #include "map_generator.h"
-#include "map.h"
+#include "logic/map.h"
 #include "logic/editor_game_base.h"
 
 #define MAX_ELEVATION      (0xffffffff)
@@ -43,7 +43,7 @@ void MapGenerator::generate_bobs
 	 RNG  &       rng,
 	 MapGenAreaInfo::MapGenTerrainType const terrType)
 {
-	// Figure out wich bob area is due here...
+	//  Figure out which bob area is due here...
 
 	size_t num = mapGenInfo.getNumBobAreas();
 	size_t found = num;

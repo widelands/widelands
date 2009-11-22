@@ -21,7 +21,7 @@
 #define EDITOR_SET_HEIGHT_TOOL_H
 
 #include "editor_tool.h"
-#include "field.h"
+#include "logic/field.h"
 #include "interval.h"
 
 ///  Ensures that the height of a node is within an interval.

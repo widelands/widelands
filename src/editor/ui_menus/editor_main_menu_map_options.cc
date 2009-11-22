@@ -21,7 +21,7 @@
 
 #include "editor/editorinteractive.h"
 #include "i18n.h"
-#include "map.h"
+#include "logic/map.h"
 #include "profile/profile.h"
 
 #include "ui_basic/textarea.h"

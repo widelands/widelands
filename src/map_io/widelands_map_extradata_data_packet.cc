@@ -21,14 +21,14 @@
 
 #include "logic/editor_game_base.h"
 #include "io/filewrite.h"
-#include "game_data_error.h"
+#include "logic/game_data_error.h"
 // Since we are lying about the path of the pictures
 // we also include graphic.h
 #include "graphic/graphic.h"
-#include "map.h"
+#include "logic/map.h"
 #include "profile/profile.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 
 #include <SDL_image.h>
 

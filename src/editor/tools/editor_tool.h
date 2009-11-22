@@ -22,7 +22,7 @@
 
 #define MAX_TOOL_AREA 9
 
-#include "widelands_geometry.h"
+#include "logic/widelands_geometry.h"
 
 struct Editor_Interactive;
 namespace Widelands {struct Map;}

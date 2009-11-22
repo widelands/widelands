@@ -21,9 +21,9 @@
 
 #include "logic/editor_game_base.h"
 #include "editor/editorinteractive.h"
-#include "field.h"
-#include "immovable.h"
-#include "mapregion.h"
+#include "logic/field.h"
+#include "logic/immovable.h"
+#include "logic/mapregion.h"
 
 /**
  * Choses an object to place randomly from all enabled

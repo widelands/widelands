@@ -20,7 +20,7 @@
 #ifndef TRIGGER_BUILDING_OPTION_MENU_H
 #define TRIGGER_BUILDING_OPTION_MENU_H
 
-#include "player_area.h"
+#include "logic/player_area.h"
 #include "logic/building.h"
 #include "trigger/trigger_building.h"
 

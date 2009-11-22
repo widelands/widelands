@@ -21,10 +21,10 @@
 
 #include "i18n.h"
 #include "editor/editorinteractive.h"
-#include "map.h"
+#include "logic/map.h"
 #include "graphic/graphic.h"
 #include "logic/player.h"
-#include "tribe.h"
+#include "logic/tribe.h"
 
 #include "ui_basic/messagebox.h"
 

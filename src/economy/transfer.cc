@@ -26,7 +26,7 @@
 #include "ware_instance.h"
 
 #include "logic/game.h"
-#include "immovable.h"
+#include "logic/immovable.h"
 #include "request.h"
 #include "logic/worker.h"
 #include "upcast.h"

@@ -24,7 +24,7 @@
 #include "game_io/game_preload_data_packet.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "replay.h"
+#include "logic/replay.h"
 
 Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),

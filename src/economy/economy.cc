@@ -28,7 +28,7 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "request.h"
-#include "tribe.h"
+#include "logic/tribe.h"
 #include "upcast.h"
 #include "logic/warehouse.h"
 #include "warehousesupply.h"

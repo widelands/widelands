@@ -26,23 +26,24 @@
 
 #include "ai_hints.h"
 
-#include "constructionsite.h"
+#include "logic/constructionsite.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "findimmovable.h"
-#include "findnode.h"
+#include "logic/findimmovable.h"
+#include "logic/findnode.h"
 #include "log.h"
-#include "map.h"
-#include "militarysite.h"
+#include "logic/map.h"
+#include "logic/militarysite.h"
 #include "logic/player.h"
-#include "productionsite.h"
+#include "logic/productionsite.h"
 #include "profile/profile.h"
-#include "trainingsite.h"
-#include "tribe.h"
-#include "upcast.h"
+#include "logic/trainingsite.h"
+#include "logic/tribe.h"
 #include "logic/warehouse.h"
-#include "world.h"
+#include "logic/world.h"
+
+#include "upcast.h"
 
 #include <algorithm>
 #include <queue>

@@ -22,7 +22,7 @@
 
 #include "editor_tool.h"
 
-#include "widelands.h"
+#include "logic/widelands.h"
 
 // How much place should be left around a player position
 // where no other player can start

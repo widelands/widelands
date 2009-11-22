@@ -21,7 +21,7 @@
 #define EVENT_PLAYER_AREA_H
 
 #include "event.h"
-#include "player_area.h"
+#include "logic/player_area.h"
 
 namespace Widelands {
 

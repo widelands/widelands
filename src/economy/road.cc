@@ -25,13 +25,13 @@
 
 #include "logic/carrier.h"
 #include "logic/instances.h"
-#include "upcast.h"
 #include "logic/player.h"
 #include "request.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/tribe.h"
 
-#include "tribe.h"
+#include "upcast.h"
 
 namespace Widelands {
 

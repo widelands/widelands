@@ -23,9 +23,9 @@
 #include <boost/scoped_ptr.hpp>
 
 #include "logic/editor_game_base.h"
-#include "map.h"
+#include "logic/map.h"
 #include "mapview.h"
-#include "graphic/overlay_manager.h"
+#include "overlay_manager.h"
 
 #include "ui_basic/box.h"
 #include "ui_basic/textarea.h"

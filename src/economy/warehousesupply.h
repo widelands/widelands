@@ -21,7 +21,7 @@
 #define WAREHOUSESUPPLY_H
 
 #include "supply.h"
-#include "warelist.h"
+#include "logic/warelist.h"
 
 namespace Widelands {
 

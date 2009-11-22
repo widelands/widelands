@@ -19,8 +19,8 @@
 
 #include "editor_delete_bob_tool.h"
 
-#include "field.h"
-#include "mapregion.h"
+#include "logic/field.h"
+#include "logic/mapregion.h"
 #include "editor/editorinteractive.h"
 #include "logic/bob.h"
 

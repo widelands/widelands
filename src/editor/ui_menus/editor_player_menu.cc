@@ -23,10 +23,10 @@
 #include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "map.h"
-#include "graphic/overlay_manager.h"
+#include "logic/map.h"
+#include "wui/overlay_manager.h"
 #include "logic/player.h"
-#include "tribe.h"
+#include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "wexception.h"
 

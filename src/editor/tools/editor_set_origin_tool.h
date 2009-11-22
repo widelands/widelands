@@ -22,7 +22,7 @@
 
 #include "editor_tool.h"
 
-#include "widelands.h"
+#include "logic/widelands.h"
 
 /// Sets the starting position of players.
 struct Editor_Set_Origin_Tool : public Editor_Tool {

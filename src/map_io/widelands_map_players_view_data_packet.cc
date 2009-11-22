@@ -22,13 +22,13 @@
 #include "io/bitinbuffer.h"
 #include "io/bitoutbuffer.h"
 #include "logic/editor_game_base.h"
-#include "field.h"
-#include "game_data_error.h"
+#include "logic/field.h"
+#include "logic/game_data_error.h"
 #include "logic/instances.h" //for g_flag_descr
 #include "logic/player.h"
-#include "tribe.h"
-#include "widelands_streamread_inlines.h"
-#include "widelands_streamwrite_inlines.h"
+#include "logic/tribe.h"
+#include "logic/widelands_streamread_inlines.h"
+#include "logic/widelands_streamwrite_inlines.h"
 
 #include "log.h"
 

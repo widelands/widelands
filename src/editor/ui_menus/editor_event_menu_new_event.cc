@@ -24,7 +24,7 @@
 #include "events/event.h"
 #include "events/event_factory.h"
 #include "i18n.h"
-#include "map.h"
+#include "logic/map.h"
 
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"

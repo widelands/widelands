@@ -22,7 +22,7 @@
 
 #include "editor_tool.h"
 
-#include "world.h"
+#include "logic/world.h"
 
 ///  Decreases the resources of a node by a value.
 struct Editor_Decrease_Resources_Tool : public Editor_Tool {

@@ -19,7 +19,7 @@
 
 #pragma GCC diagnostic ignored "-Wold-style-cast"
 
-#include "widelands_geometry.h"
+#include "logic/widelands_geometry.h"
 
 #include "../iroute.h"
 #include "../itransport_cost_calculator.h"

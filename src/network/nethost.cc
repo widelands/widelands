@@ -36,7 +36,7 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "profile/profile.h"
-#include "tribe.h"
+#include "logic/tribe.h"
 #include "wexception.h"
 #include "wlapplication.h"
 

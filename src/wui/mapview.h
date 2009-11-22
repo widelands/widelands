@@ -20,7 +20,7 @@
 #ifndef MAPVIEW_H
 #define MAPVIEW_H
 
-#include "widelands_geometry.h"
+#include "logic/widelands_geometry.h"
 
 #include "ui_basic/panel.h"
 #include "ui_basic/m_signal.h"

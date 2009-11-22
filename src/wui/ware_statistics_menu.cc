@@ -24,8 +24,8 @@
 #include "interactive_player.h"
 #include "logic/player.h"
 #include "graphic/rendertarget.h"
-#include "tribe.h"
-#include "warelist.h"
+#include "logic/tribe.h"
+#include "logic/warelist.h"
 #include "plot_area.h"
 
 #include "ui_basic/button.h"

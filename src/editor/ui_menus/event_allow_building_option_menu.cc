@@ -24,9 +24,9 @@
 #include "events/event_allow_building.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "map.h"
+#include "logic/map.h"
 #include "logic/player.h"
-#include "tribe.h"
+#include "logic/tribe.h"
 
 #include "ui_basic/messagebox.h"
 

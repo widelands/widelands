@@ -24,9 +24,9 @@
 
 #include "logic/game.h"
 #include "logic/player.h"
-#include "requirements.h"
-#include "soldier.h"
-#include "tribe.h"
+#include "logic/requirements.h"
+#include "logic/soldier.h"
+#include "logic/tribe.h"
 #include "wexception.h"
 #include "logic/worker.h"
 

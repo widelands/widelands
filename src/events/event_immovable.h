@@ -21,7 +21,7 @@
 #define EVENT_IMMOVABLE_H
 
 #include "event.h"
-#include "immovable.h"
+#include "logic/immovable.h"
 
 struct Event_Immovable_Option_Menu;
 

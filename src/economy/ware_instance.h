@@ -21,11 +21,11 @@
 #define S__WARE_INSTANCE_H
 
 // For Ware Index
-#include "widelands.h"
+#include "logic/widelands.h"
 // For MO_DESCR
 #include "logic/instances.h"
 // For Item_Ware_Descr
-#include "item_ware_descr.h"
+#include "logic/item_ware_descr.h"
 
 
 namespace Widelands {

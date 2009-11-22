@@ -18,8 +18,8 @@
  */
 
 #include "editor_place_bob_tool.h"
-#include "field.h"
-#include "mapregion.h"
+#include "logic/field.h"
+#include "logic/mapregion.h"
 #include "editor/editorinteractive.h"
 #include "logic/editor_game_base.h"
 #include "logic/bob.h"

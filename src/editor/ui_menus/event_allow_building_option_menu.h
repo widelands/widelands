@@ -26,7 +26,7 @@
 #include "ui_basic/window.h"
 #include "ui_basic/textarea.h"
 
-#include "widelands.h"
+#include "logic/widelands.h"
 
 #include <string>
 #include <cstring>

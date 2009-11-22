@@ -19,10 +19,10 @@
 
 #include "editor_delete_immovable_tool.h"
 
-#include "field.h"
+#include "logic/field.h"
 #include "editor/editorinteractive.h"
-#include "immovable.h"
-#include "mapregion.h"
+#include "logic/immovable.h"
+#include "logic/mapregion.h"
 
 #include "upcast.h"
 

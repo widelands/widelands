@@ -20,9 +20,9 @@
 #ifndef EVENT_FLAG_H
 #define EVENT_FLAG_H
 
-#include "widelands.h"
+#include "logic/widelands.h"
 #include "event.h"
-#include "widelands_geometry.h"
+#include "logic/widelands_geometry.h"
 
 struct Event_Flag_Option_Menu;
 

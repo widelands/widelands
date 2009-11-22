@@ -21,11 +21,11 @@
 
 #include "event.h"
 #include "logic/game.h"
-#include "map.h"
+#include "logic/map.h"
 #include "trigger/trigger_conditional.h"
 #include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 
 namespace Widelands {
 

@@ -21,7 +21,7 @@
 
 #include "io/filesystem/filesystem.h"
 #include "logic/game.h"
-#include "game_data_error.h"
+#include "logic/game_data_error.h"
 #include "map_io/widelands_map_loader.h"
 #include "map_io/widelands_map_saver.h"
 

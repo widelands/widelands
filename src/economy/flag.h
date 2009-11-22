@@ -23,7 +23,7 @@
 #include <vector>
 #include <list>
 
-#include "immovable.h"
+#include "logic/immovable.h"
 #include "routing_node.h"
 
 namespace Widelands {

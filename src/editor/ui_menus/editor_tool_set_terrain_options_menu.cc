@@ -23,12 +23,12 @@
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "map.h"
+#include "logic/map.h"
 #include "graphic/rendertarget.h"
 #include <SDL_keysym.h>
 #include "wlapplication.h"
-#include "world.h"
-#include "worlddata.h"
+#include "logic/world.h"
+#include "logic/worlddata.h"
 
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"

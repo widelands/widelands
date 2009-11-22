@@ -30,7 +30,7 @@
 #include "i18n.h"
 #include "logic/instances.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "map.h"
+#include "logic/map.h"
 #include "map_io/map_loader.h"
 #include "logic/player.h"
 #include "playerdescrgroup.h"

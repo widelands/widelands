@@ -20,7 +20,7 @@
 #ifndef WIDELANDS_MAP_MAP_OBJECT_SAVER_H
 #define WIDELANDS_MAP_MAP_OBJECT_SAVER_H
 
-#include "widelands.h"
+#include "logic/widelands.h"
 
 #include <map>
 

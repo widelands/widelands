@@ -23,7 +23,7 @@
 #include "map_io/widelands_map_map_object_saver.h"
 #include "map_io/widelands_map_map_object_loader.h"
 
-#include "tribe.h"
+#include "logic/tribe.h"
 #include "logic/player.h"
 
 

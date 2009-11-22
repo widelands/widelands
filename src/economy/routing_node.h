@@ -22,20 +22,17 @@
 
 #include <vector>
 
-#include "widelands_geometry.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
-class RoutingNode;
+
+struct RoutingNode;
 struct Road;
 
 /***
  * /todo The get functions should be declared const
  */
-class RoutingNodeNeighbour {
-	RoutingNode * m_nb;
-	int32_t m_cost; /// Cost to get from me to the neighbour (Cost for road)
-
-public:
+struct RoutingNodeNeighbour {
 	RoutingNodeNeighbour(RoutingNode * const f, int32_t const cost) :
 		m_nb(f), m_cost(cost)
 	{}
@@ -45,6 +42,10 @@ public:
 	int32_t get_cost() {
 		return m_cost;
 	}
+
+private:
+	RoutingNode * m_nb;
+	int32_t m_cost; /// Cost to get from me to the neighbour (Cost for road)
 };
 typedef std::vector<RoutingNodeNeighbour> RoutingNodeNeighbours;
 

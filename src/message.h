@@ -21,7 +21,7 @@
 #define MESSAGE_H
 
 #include "i18n.h"
-#include "map.h"
+#include "logic/map.h"
 
 #include <cassert>
 #include <string>

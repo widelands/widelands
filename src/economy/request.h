@@ -20,11 +20,11 @@
 #ifndef REQUEST_H
 #define REQUEST_H
 
-#include "requirements.h"
+#include "logic/requirements.h"
 #include "trackptr.h"
-#include "widelands.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
+#include "logic/widelands.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 
 namespace Widelands {
 

@@ -22,7 +22,7 @@
 
 #include "event.h"
 #include "trigger/trigger_time.h"
-#include "widelands.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 

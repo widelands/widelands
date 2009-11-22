@@ -29,7 +29,7 @@
 #include "editor/editorinteractive.h"
 #include "i18n.h"
 #include "trigger/trigger.h"
-#include "map.h"
+#include "logic/map.h"
 #include "trigger/trigger_factory.h"
 
 #include "ui_basic/button.h"

@@ -22,11 +22,11 @@
 #include "logic/editor_game_base.h"
 #include "events/event.h"
 #include "events/event_factory.h"
-#include "game_data_error.h"
-#include "map.h"
+#include "logic/game_data_error.h"
+#include "logic/map.h"
 #include "profile/profile.h"
-#include "widelands_fileread.h"
-#include "world.h"
+#include "logic/widelands_fileread.h"
+#include "logic/world.h"
 
 namespace Widelands {
 

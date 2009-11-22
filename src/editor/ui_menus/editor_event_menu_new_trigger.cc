@@ -24,7 +24,7 @@
 #include "editor/editorinteractive.h"
 #include "trigger/trigger.h"
 #include "trigger/trigger_factory.h"
-#include "map.h"
+#include "logic/map.h"
 
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"

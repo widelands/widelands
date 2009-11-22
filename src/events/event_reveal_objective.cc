@@ -20,10 +20,10 @@
 #include "event_reveal_objective.h"
 
 #include "logic/game.h"
-#include "game_data_error.h"
+#include "logic/game_data_error.h"
 #include "i18n.h"
 #include "wui/interactive_base.h"
-#include "map.h"
+#include "logic/map.h"
 #include "profile/profile.h"
 #include "wexception.h"
 

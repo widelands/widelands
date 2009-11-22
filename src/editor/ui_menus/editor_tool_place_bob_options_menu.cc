@@ -24,9 +24,9 @@
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "map.h"
+#include "logic/map.h"
 #include "wlapplication.h"
-#include "world.h"
+#include "logic/world.h"
 
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"

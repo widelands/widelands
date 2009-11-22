@@ -19,9 +19,9 @@
 
 #include "event_road.h"
 
-#include "checkstep.h"
+#include "logic/checkstep.h"
 #include "logic/game.h"
-#include "game_data_error.h"
+#include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "profile/profile.h"
 
