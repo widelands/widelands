@@ -511,6 +511,24 @@ def do_configure(conf, env):
 	do_configure_compiler_features(conf, env)
 	do_configure_linker_features(conf, env)
 
+# Previously BOOST_SP_DISABLE_THREADS was defined in some header file. But that
+# caused segmentation fault in 64bit optimized builds. Try to obey the
+# documented use by defining it for all translation units. Here is a quote from
+# the manual:
+#
+# If your program is single-threaded and does not link to any libraries that
+# might have used shared_ptr in its default configuration, you can  #define the
+# macro BOOST_SP_DISABLE_THREADS on a project-wide basis to switch to ordinary
+# non-atomic reference count updates.
+#
+# (Defining BOOST_SP_DISABLE_THREADS in some, but not all, translation units is
+# technically a violation of the One Definition Rule and undefined behavior.
+# Nevertheless, the implementation attempts to do its best to accommodate the
+# request to use non-atomic updates in those translation units. No guarantees,
+# though.)
+	env.Append(CCFLAGS = "-DBOOST_SP_DISABLE_THREADS")
+
+
 ################################################################################
 
 def generate_configh_content(env):

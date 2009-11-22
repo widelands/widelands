@@ -24,7 +24,7 @@
 #include "point.h"
 #include "rgbcolor.h"
 #include "graphic/graphic.h"
-#include "graphic/picture.h"
+#include "graphic/picture_id.h"
 #include "ui_basic/variable_callback.h"
 #include "ui_basic/widget_cache.h"
 

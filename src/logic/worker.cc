@@ -829,31 +829,31 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 			std::string resource = rdescr->descname();
 
 			//  We should add a message to the player's message queue - but only,
-			//  if there is not already a similiar one in list.
-			bool inlist = false;
-			Widelands::Coords coords = Widelands::Coords(get_position());
-			std::vector<Message> & msgQueue =
+			//  if there is not already a similar one in list.
+			Coords const coords = get_position();
+			std::vector<Message> const & msgQueue =
 				MessageQueue::get(owner().player_number());
-
 			for
-				(std::vector<Message>::iterator b = msgQueue.begin();
-				b != msgQueue.end(); ++b)
-				if (b->sender() == sender)
-					if (b->title() == resource)
-						// If the message is older than 90 seconds, a new one might
-						// be useful.
-						if (game.get_gametime() - b->time() < 90000) {
-							inlist = true;
-							break;
-						}
-
-			if (!inlist)
-				MessageQueue::add
-					(owner(),
-					Message
-						(sender,
-						 game.get_gametime(),
-						 resource, position, _("A geologist found resources.")));
+				(struct {
+				 	std::vector<Message>::const_iterator current;
+				 	std::vector<Message>::const_iterator const end;
+				 } i = {msgQueue.begin(), msgQueue.end()};;
+				 ++i.current)
+				if (i.current == i.end) {
+					MessageQueue::add
+						(owner(),
+						 Message
+						 	(sender,
+						 	 game.get_gametime(),
+						 	 resource, position, _("A geologist found resources.")));
+					break;
+				} else if
+					(i.current->sender() == sender   and
+					 i.current->title () == resource and
+					 //  If the message is older than 90 seconds, a new one might
+					 //  be useful.
+					 game.get_gametime() - i.current->time() < 90000)
+					break;
 		}
 
 		Tribe_Descr const & t = tribe();

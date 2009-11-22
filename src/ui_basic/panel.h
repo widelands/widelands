@@ -24,7 +24,7 @@
 #include "object.h"
 
 #include "point.h"
-#include "graphic/picture.h"
+#include "graphic/picture_id.h"
 #include "graphic/graphic.h"
 
 #include <SDL_keyboard.h>

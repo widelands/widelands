@@ -23,7 +23,7 @@
 #include "economy/itransport_cost_calculator.h"
 #include "events/event_chain.h"
 #include "field.h"
-#include "graphic/picture.h"
+#include "graphic/picture_id.h"
 #include "objective.h"
 #include "variable.h"
 #include "widelands_geometry.h"

@@ -28,7 +28,7 @@
 #include "ware_types.h"
 #include "widelands.h"
 
-#include "graphic/picture.h"
+#include "graphic/picture_id.h"
 #include "io/filewrite.h"
 
 #include <string>

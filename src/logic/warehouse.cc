@@ -419,37 +419,36 @@ void Warehouse::init(Editor_Game_Base & egbase)
 
 	//  This function is twice called during loading, so only add a message,
 	//  to the player's message queue, if there is not already one for this wh.
-	bool inlist = false;
-	Widelands::Coords coords = Widelands::Coords(get_position());
-	std::vector<Message> & msgQueue = MessageQueue::get(owner().player_number());
+	Widelands::Coords const coords = get_position();
+	std::vector<Message> const & msgQueue =
+		MessageQueue::get(owner().player_number());
 	for
-		(std::vector<Message>::iterator b = msgQueue.begin();
-		 b != msgQueue.end(); ++b)
-		if (b->sender() == "warehouse")
-			if (b->get_coords() == coords) {
-				inlist = true;
-				break;
-			}
-
-	if (!inlist) {
-		//  No entry for this warehouse yet - add one.
-		log
-			 ("Message: adding (wh) (%s) %i \n",
-			 type_name(), owner().player_number());
-		std::string buildingname = descname();
-		char message[2048];
-		snprintf
-			 (message, sizeof(message),
-			 _("A new %s was added to your economy."), buildingname.c_str());
-		MessageQueue::add
-			(owner(),
-			Message
-				("warehouse",
-				 egbase.get_gametime(),
-				 buildingname,
-				 coords,
-				 message));
-	}
+		(struct {
+		 	std::vector<Message>::const_iterator       current;
+		 	std::vector<Message>::const_iterator const end;
+		 } i = {msgQueue.begin(), msgQueue.end()};;
+		 ++i.current)
+		if (i.current == i.end) { //  No entry for this warehouse yet - add one.
+			log
+				("Message: adding (wh) (%s) %i \n",
+				 type_name(), owner().player_number());
+			char message[2048];
+			snprintf
+				(message, sizeof(message),
+				 _("A new %s was added to your economy."), descname().c_str());
+			MessageQueue::add
+				(owner(),
+				 Message
+				 	("warehouse",
+				 	 egbase.get_gametime(),
+				 	 descname(),
+				 	 coords,
+				 	 message));
+			break;
+		} else if
+			(i.current->sender    () == "warehouse" and
+			 i.current->get_coords() == coords)
+			break;
 }
 
 

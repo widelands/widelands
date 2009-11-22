@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,16 +16,6 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-
-#define BOOST_SP_DISABLE_THREADS
-#include <boost/shared_ptr.hpp>
-#include <stdint.h>
-
-#ifndef PICTURE_ID
-#define PICTURE_ID
-struct Picture;
-typedef boost::shared_ptr<Picture> PictureID;
-#endif
 
 #ifndef PICTURE_H
 #define PICTURE_H

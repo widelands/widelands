@@ -24,7 +24,7 @@
 #include "writeHTML.h"
 
 #include "io/filewrite.h"
-#include "graphic/picture.h"
+#include "graphic/picture_id.h"
 
 #include <stdint.h>
 #include <cstring>
