@@ -27,6 +27,7 @@
 #include "profile/profile.h"
 #include "economy/flag.h"
 #include "economy/request.h"
+#include "message_queue.h"
 #include "soldier.h"
 #include "tribe.h"
 #include "logic/worker.h"
@@ -497,13 +498,21 @@ void MilitarySite::aggressor(Soldier & enemy)
 				(*i.current)->update_task_buildingwork(game);
 				return;
 			}
+
+	// Inform the player, that we are under attack by adding a new entry to the
+	// message queue - a sound will automatically be played.
+	informPlayer(game, true);
 }
 
 bool MilitarySite::attack(Soldier & enemy)
 {
 	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
-	std::vector<Soldier *> present = presentSoldiers();
 
+	// Inform the player, that we are under attack by adding a new entry to the
+	// message queue - a sound will automatically be played.
+	informPlayer(game);
+
+	std::vector<Soldier *> present = presentSoldiers();
 	Soldier * defender = 0;
 
 	if (present.size()) {
@@ -536,6 +545,49 @@ bool MilitarySite::attack(Soldier & enemy)
 		schedule_destroy(game);
 		return false;
 	}
+}
+
+/// Informs the player about an attack of his opponent.
+void MilitarySite::informPlayer(Game & game, bool discovered)
+{
+	Map  & map  = game.map();
+
+	// Inform the player, that we are under attack by adding a new entry to the
+	// message queue - a sound will automatically be played. But only add this
+	// message if there is no other from that area from last 30 sec.
+	Coords const coords = base_flag().get_position();
+	std::vector<Message> & msgQueue = MessageQueue::get(owner().player_number());
+	for
+		(struct {
+		 	std::vector<Message>::const_iterator current;
+		 	std::vector<Message>::const_iterator const end;
+		 } i = {msgQueue.begin(), msgQueue.end()};;
+		 ++i.current)
+		if (i.current == i.end) {
+			char message[2048];
+			if (discovered)
+				snprintf
+					 (message, sizeof(message),
+					 _("Your %s discovered an aggressor."), descname().c_str());
+			else
+				snprintf
+					 (message, sizeof(message),
+					 _("Your %s is under attack."), descname().c_str());
+			MessageQueue::add
+				(owner(),
+				 Message
+				 (UNDER_ATTACK, game.get_gametime(),
+				 _("You are under attack!"), coords, message));
+			break;
+		} else if
+			(i.current->sender() == UNDER_ATTACK and
+			 (map.calc_distance(i.current->get_coords(), coords) < 5) and
+			 (game.get_gametime() - i.current->time() < 30000))
+				// Soldiers are running around during their attack, so we avoid too
+				// many messages through checking an area with radius = 4
+				// Further if the found message is older than 30 sec., and the fight
+				// still goes on, a reminder might be useful.
+				break;
 }
 
 

@@ -34,6 +34,8 @@
 #define NEW_MESSAGES "pics/menu_toggle_newmessage_menu.png"
 #define MAX_QUEUE_SIZE 255
 
+#define UNDER_ATTACK "under_attack"
+
 namespace Widelands {
 	struct Coords;
 	struct GameMessageMenu;
@@ -82,9 +84,13 @@ struct MessageQueue {
 
 		m_readall(player_number) = false;
 		if (player_number == m_player_number(0)) {
-			// If we are not starting up the game, play a sound
-			if (m.time() > 0)
+			// (If we are not starting up the game) play a sound
+			if (m.time() > 0) {
 				g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
+				// And be even louder, if we are under attack!
+				if (m.sender() == UNDER_ATTACK)
+					g_sound_handler.play_fx("under_attack", 128, PRIO_ALWAYS_PLAY);
+			}
 			if (m_button(0))
 				m_button(0)->set_pic(g_gr->get_picture(PicMod_Game, NEW_MESSAGES));
 

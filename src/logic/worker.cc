@@ -845,7 +845,7 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 						 Message
 						 	(sender,
 						 	 game.get_gametime(),
-						 	 resource, position, _("A geologist found resources.")));
+						 	 resource, coords, _("A geologist found resources.")));
 					break;
 				} else if
 					(i.current->sender() == sender   and
