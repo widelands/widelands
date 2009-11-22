@@ -840,9 +840,9 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 				b != msgQueue.end(); ++b)
 				if (b->sender() == sender)
 					if (b->title() == resource)
-						// If the message is older than 45 seconds, a new one might
+						// If the message is older than 90 seconds, a new one might
 						// be useful.
-						if (game.get_gametime() - b->time() < 45000) {
+						if (game.get_gametime() - b->time() < 90000) {
 							inlist = true;
 							break;
 						}
