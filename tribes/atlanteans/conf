@@ -148,6 +148,21 @@ high_tower=_High Tower
 small_tower=_Small Tower
 tower=_Tower
 
+[global militarysite types]
+barrier.barbarians=_Barrier
+citadel.barbarians=_Citadel
+donjon.barbarians=_Donjon
+fortress.barbarians=_Fortress
+sentry.barbarians=_Sentry
+stronghold.barbarians=_Stronghold
+sentry.empire=_Sentry
+barracks.empire=_Barracks
+barrier.empire=_Barrier
+castle.empire=_Castle
+fortress.empire=_Fortress
+outpost.empire=_Outpost
+tower.empire=_Tower
+
 [warehouse types]
 headquarters=_Headquarters
 warehouse=_Warehouse

@@ -1,0 +1,11 @@
+size=small
+heal_per_second=2
+conquers=6
+max_soldiers=2
+max_medics=0
+heal_increase_per_medic=0
+buildable=no
+
+[idle]
+pics=../../../tribes/empire/sentry/sentry_i_??.png
+hotspot=40 63

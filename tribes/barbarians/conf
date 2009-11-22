@@ -153,6 +153,21 @@ fortress=_Fortress
 sentry=_Sentry
 stronghold=_Stronghold
 
+[global militarysite types]
+castle.atlanteans=_Castle
+guardhall.atlanteans=_Guardhall
+guardhouse.atlanteans=_Guardhouse
+high_tower.atlanteans=_High Tower
+small_tower.atlanteans=_Small Tower
+tower.atlanteans=_Tower
+sentry.empire=_Sentry
+barracks.empire=_Barracks
+barrier.empire=_Barrier
+castle.empire=_Castle
+fortress.empire=_Fortress
+outpost.empire=_Outpost
+tower.empire=_Tower
+
 [warehouse types]
 headquarters=_Headquarters
 headquarters_interim=_Headquarters

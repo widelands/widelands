@@ -1,0 +1,12 @@
+size=medium
+max_soldiers=5
+heal_per_second=5
+conquers=8
+max_medics=2
+heal_increase_per_medic=3
+vision_range=17
+buildable=no
+
+[idle]
+pics=../../../tribes/barbarians/donjon/i_??.png
+hotspot=56 58

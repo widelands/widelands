@@ -28,7 +28,6 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/transfer.h"
-#include "economy/ware_instance.h"
 #include "findimmovable.h"
 #include "findnode.h"
 #include "game.h"
@@ -952,10 +951,13 @@ void Worker::set_location(PlayerImmovable * const location)
 	if (location) {
 		Economy * const eco = location->get_economy();
 
-		if (!m_economy)
+		// NOTE we have to explicitly check Worker_Descr::SOLDIER, as SOLDIER is
+		// NOTE as well defined in an enum in instances.h
+		if (!m_economy || (get_worker_type() == Worker_Descr::SOLDIER))
 			set_economy(eco);
 		else if (m_economy != eco)
-			throw wexception("Worker::set_location changes economy");
+			throw wexception
+				("Worker::set_location changes economy, but worker is no soldier");
 
 		location->add_worker(*this);
 	} else {

@@ -43,7 +43,9 @@ struct Soldier_Descr : public Worker_Descr {
 		 std::string const & directory, Profile &, Section & global_s,
 		 Tribe_Descr const &, EncodeData const *);
 
-	virtual Worker_Type get_worker_type() const {return SOLDIER;}
+	// NOTE we have to explicitly return Worker_Descr::SOLDIER, as SOLDIER is
+	// NOTE as well defined in an enum in instances.h
+	virtual Worker_Type get_worker_type() const {return Worker_Descr::SOLDIER;}
 
 	virtual void load_graphics();
 

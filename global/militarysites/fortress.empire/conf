@@ -1,0 +1,11 @@
+size=big
+max_soldiers=8
+heal_per_second=3
+conquers=11
+max_medics=3
+heal_increase_per_medic=3
+buildable=no
+
+[idle]
+pics=../../../tribes/empire/fortress/fortress_i_??.png
+hotspot=90 106

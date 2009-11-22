@@ -67,7 +67,7 @@ Tribe_Descr::Tribe_Descr
 		i18n::Textdomain textdomain(path);
 
 		path            += '/';
-		std::string::size_type const base_path_size = path.size();
+		std::string::size_type base_path_size = path.size();
 
 		m_default_encdata.clear();
 
@@ -130,6 +130,25 @@ Tribe_Descr::Tribe_Descr
 					 	(_name, _descname, path, prof, global_s, *this,
 					 	 &m_default_encdata));
 			PARSE_MAP_OBJECT_TYPES_END;
+
+
+			// global militarysites are in /global not in /tribes
+			std::string temp                = path;
+			std::string::size_type sizetemp = base_path_size;
+			path           = "global/militarysites/";
+			base_path_size = path.size();
+
+			PARSE_MAP_OBJECT_TYPES_BEGIN("global militarysite")
+				m_buildings.add
+					(new MilitarySite_Descr
+					 	(_name, _descname, path, prof, global_s, *this,
+					 	 &m_default_encdata));
+			PARSE_MAP_OBJECT_TYPES_END;
+
+			// Reset path and base_path_size
+			path           = temp;
+			base_path_size = sizetemp;
+
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("trainingsite")
 				m_buildings.add

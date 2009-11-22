@@ -489,6 +489,7 @@ void Soldier::startTaskAttack(Game & game, Building & building)
 	push_task(game, taskAttack);
 
 	top_state().objvar1 = &building;
+	top_state().coords  = building.get_position();
 }
 
 void Soldier::attack_update(Game & game, State & state)
@@ -515,15 +516,14 @@ void Soldier::attack_update(Game & game, State & state)
 	}
 
 	PlayerImmovable * const location = get_location(game);
-
 	BaseImmovable * const imm = game.map()[get_position()].get_immovable();
 	upcast(Building, enemy, state.objvar1.get(game));
+
 	if (imm == location) {
 		if (!enemy) {
 			molog("[attack] returned home\n");
 			return pop_task(game);
 		}
-
 		return start_task_leavebuilding(game, false);
 	}
 
@@ -541,6 +541,18 @@ void Soldier::attack_update(Game & game, State & state)
 	}
 
 	if (!enemy) {
+		BaseImmovable * const newimm = game.map()[state.coords].get_immovable();
+		upcast(Building, newbld, newimm);
+		if (&newbld->owner() == &owner()) {
+			if (upcast(SoldierControl, ctrl, newbld)) {
+				state.objvar1 = 0;
+				if (ctrl->stationedSoldiers().size() < ctrl->soldierCapacity()) {
+					molog("[attack] enemy belongs to us now, move in\n");
+					set_location(newbld);
+					return schedule_act(game, 10);
+				}
+			}
+		}
 		Flag & baseflag = location->base_flag();
 		if (imm == &baseflag)
 			return
@@ -561,18 +573,6 @@ void Soldier::attack_update(Game & game, State & state)
 			molog("[attack] failed to return home\n");
 			return pop_task(game);
 		}
-	}
-
-	if (&enemy->owner() == &owner()) {
-		if (upcast(SoldierControl, ctrl, enemy)) {
-			if (ctrl->stationedSoldiers().size() < ctrl->soldierCapacity()) {
-				molog("[attack] enemy belongs to us now, move in\n");
-				set_location(enemy);
-			}
-		}
-
-		state.objvar1 = 0;
-		return schedule_act(game, 10);
 	}
 
 	// At this point, we know that the enemy building still stands,

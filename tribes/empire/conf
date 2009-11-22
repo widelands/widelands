@@ -150,6 +150,20 @@ fortress=_Fortress
 outpost=_Outpost
 tower=_Tower
 
+[global militarysite types]
+castle.atlanteans=_Castle
+guardhall.atlanteans=_Guardhall
+guardhouse.atlanteans=_Guardhouse
+high_tower.atlanteans=_High Tower
+small_tower.atlanteans=_Small Tower
+tower.atlanteans=_Tower
+barrier.barbarians=_Barrier
+citadel.barbarians=_Citadel
+donjon.barbarians=_Donjon
+fortress.barbarians=_Fortress
+sentry.barbarians=_Sentry
+stronghold.barbarians=_Stronghold
+
 [warehouse types]
 headquarters=_Headquarters
 headquarters_shipwreck=_Headquarters shipwreck

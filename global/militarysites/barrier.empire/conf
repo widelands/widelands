@@ -1,0 +1,11 @@
+size=medium
+max_soldiers=5
+heal_per_second=3
+conquers=8
+max_medics=2
+heal_increase_per_medic=3
+buildable=no
+
+[idle]
+pics=../../../tribes/empire/barrier/barrier_i_??.png
+hotspot=55 80

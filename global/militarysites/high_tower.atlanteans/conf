@@ -1,0 +1,13 @@
+size=medium
+max_soldiers=5
+heal_per_second=5
+conquers=9
+max_medics=2
+heal_increase_per_medic=3
+vision_range=21
+buildable=no
+
+[idle]
+pics=../../../tribes/atlanteans/high_tower/high_tower_i_??.png
+hotspot=55 90
+playercolor=true
