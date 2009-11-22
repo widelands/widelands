@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4530\n"
+"Project-Id-Version: Widelands svn4699\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-09-27 10:05+0000\n"
-"PO-Revision-Date: 2009-09-27 12:05+0100\n"
+"POT-Creation-Date: 2009-11-22 12:19+0000\n"
+"PO-Revision-Date: 2009-11-22 13:17+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -246,8 +246,8 @@ msgid "PAGEDOWN    Decrease gamespeed"
 msgstr "BildRunter  Langsameres Spieltempo / Pause"
 
 #: ../../txts/README:71
-msgid "F5           Reveals the entire map (only in debug-builds)"
-msgstr "F5                Zeigt die gesamte Karte (nur in Debug-Version)"
+msgid "F5           Toggle hiding of game state not known to the player (only in debug-builds)"
+msgstr "F5                Schalte die Sichtbarkeit der gesamten Karte an/aus (nur in Debug-Version)"
 
 #: ../../txts/README:73
 msgid "F6           Shows the debug console (only in debug-builds)"
@@ -361,11 +361,11 @@ msgstr "Häuptling"
 msgid "Elders"
 msgstr "Ältesten"
 
-#: ../../txts/developers:19 ../../txts/developers:293
+#: ../../txts/developers:19 ../../txts/developers:294
 msgid "Graphics"
 msgstr "Grafik"
 
-#: ../../txts/developers:24 ../../txts/developers:286
+#: ../../txts/developers:24 ../../txts/developers:287
 msgid "Homepage"
 msgstr "Homepage"
 
@@ -373,11 +373,11 @@ msgstr "Homepage"
 msgid "vacant"
 msgstr "unbesetzt"
 
-#: ../../txts/developers:31 ../../txts/developers:299
+#: ../../txts/developers:31 ../../txts/developers:300
 msgid "Sound"
 msgstr "Geräusche"
 
-#: ../../txts/developers:36 ../../txts/developers:304
+#: ../../txts/developers:36 ../../txts/developers:305
 msgid "Translation"
 msgstr "Übersetzer"
 
@@ -397,111 +397,111 @@ msgstr "Musiker"
 msgid "Sound Effects"
 msgstr "Geräusche"
 
-#: ../../txts/developers:112
+#: ../../txts/developers:113
 msgid "Maps and Missions"
 msgstr "Karten und Missionen"
 
-#: ../../txts/developers:125
+#: ../../txts/developers:126
 msgid "Campaign Story"
 msgstr "Kampagnen Hintergrund"
 
-#: ../../txts/developers:128
+#: ../../txts/developers:129
 msgid "Barbarian"
 msgstr "Barbaren"
 
-#: ../../txts/developers:133
+#: ../../txts/developers:134
 msgid "Empire"
 msgstr "Imperium"
 
-#: ../../txts/developers:139
+#: ../../txts/developers:140
 msgid "Translators"
 msgstr "Übersetzer"
 
-#: ../../txts/developers:143
+#: ../../txts/developers:144
 msgid "Czech"
 msgstr "Tschechisch"
 
-#: ../../txts/developers:149
+#: ../../txts/developers:150
 msgid "Dansk"
 msgstr "Dänisch"
 
-#: ../../txts/developers:155
+#: ../../txts/developers:156
 msgid "Dutch"
 msgstr "Niederländisch"
 
-#: ../../txts/developers:161
+#: ../../txts/developers:162
 msgid "Finnish"
 msgstr "Finnisch"
 
-#: ../../txts/developers:167
+#: ../../txts/developers:168
 msgid "French"
 msgstr "Französisch"
 
-#: ../../txts/developers:174
+#: ../../txts/developers:175
 msgid "Galician"
 msgstr "Galizisch"
 
-#: ../../txts/developers:179
+#: ../../txts/developers:180
 msgid "German"
 msgstr "Deutsch"
 
-#: ../../txts/developers:189
+#: ../../txts/developers:190
 msgid "Hebrew"
 msgstr "Hebräisch"
 
-#: ../../txts/developers:194
+#: ../../txts/developers:195
 msgid "Hungarian"
 msgstr "Ungarisch"
 
-#: ../../txts/developers:199
+#: ../../txts/developers:200
 msgid "Italian"
 msgstr "Italienisch"
 
-#: ../../txts/developers:204
+#: ../../txts/developers:205
 msgid "Polish"
 msgstr "Polnisch"
 
-#: ../../txts/developers:212
+#: ../../txts/developers:213
 msgid "Russian"
 msgstr "Russisch"
 
-#: ../../txts/developers:217
+#: ../../txts/developers:218
 msgid "Slovak"
 msgstr "Slovakisch"
 
-#: ../../txts/developers:222
+#: ../../txts/developers:223
 msgid "Spanish"
 msgstr "Spanisch"
 
-#: ../../txts/developers:227
+#: ../../txts/developers:228
 msgid "Swedish"
 msgstr "Schwedisch"
 
-#: ../../txts/developers:235
+#: ../../txts/developers:236
 msgid "Packagers"
 msgstr "Packer"
 
-#: ../../txts/developers:239
+#: ../../txts/developers:240
 msgid "Linux Distributions"
 msgstr "Linux Distributionen"
 
-#: ../../txts/developers:250
+#: ../../txts/developers:251
 msgid "Other Unix Distributions"
 msgstr "Andere Unix Distributionen"
 
-#: ../../txts/developers:259
+#: ../../txts/developers:260
 msgid "Non Unix Distributions"
 msgstr "Nicht Unix Distributionen"
 
-#: ../../txts/developers:270
+#: ../../txts/developers:271
 msgid "Wiki and Enduser-Documentation"
 msgstr "Wiki und Endbenutzer-Dokumentation"
 
-#: ../../txts/developers:282
+#: ../../txts/developers:283
 msgid "Former elders"
 msgstr "Ehemalige Ältesten"
 
-#: ../../txts/developers:310
+#: ../../txts/developers:311
 msgid "Other"
 msgstr "Andere"
 
