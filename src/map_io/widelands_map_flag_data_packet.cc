@@ -61,20 +61,37 @@ throw (_wexception)
 					Serial        const serial = fr.Unsigned32();
 
 					try {
-						//  Check that there is not already a flag on a neighbour
-						//  node. We read the map in order and only need to check the
-						//  nodes that we have already read.
+						if (fc.field->get_owned_by() != owner)
+							throw game_data_error
+								(_("the node is owned by player %u"),
+								 fc.field->get_owned_by());
+
 						for (Direction dir = 6; dir; --dir) {
 							FCoords n;
 							map.get_neighbour(fc, dir, &n);
+							try {
+
+							//  Check that the flag owner owns all neighbour nodes (so
+							//  that the flag is not on his border). We can not check
+							//  the border bit of the node because it has not been set
+							//  yet.
+							if (n.field->get_owned_by() != owner)
+								throw game_data_error
+									(_("is owned by player %u"),
+									 n.field->get_owned_by());
+
+							//  Check that there is not already a flag on a neighbour
+							//  node. We read the map in order and only need to check
+							//  the nodes that we have already read.
 							if (n.field < fc.field)
 								if (upcast(Flag const, nf, n.field->get_immovable()))
 									throw game_data_error
-										(_
-										 	("another flag is too near: %u (at (%i, %i), "
-										 	 "owned by player %u)"),
-										 nf->serial(), n.x, n.y,
-										 nf->owner().player_number());
+										(_("has a flag (%u)"), nf->serial());
+							} catch (_wexception const & e) {
+								throw game_data_error
+									(_("neighbour node (%i, %i): %s"),
+									 n.x, n.y, e.what());
+							}
 						}
 
 						//  No flag lives on more than one place.
