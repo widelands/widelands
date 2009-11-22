@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4699\n"
+"Project-Id-Version: Widelands svn4703\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-11-22 13:19+0100\n"
-"PO-Revision-Date: 2009-11-22 13:16+0100\n"
+"POT-Creation-Date: 2009-11-22 17:23+0100\n"
+"PO-Revision-Date: 2009-11-22 17:21+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -585,7 +585,7 @@ msgstr "Warenarten.xhtml"
 #: ../../src/game_io/game_player_info_data_packet.cc:101
 #, c-format
 msgid "unknown/unhandled version %u"
-msgstr ""
+msgstr "unbekannte/nicht verwendbare Version %u"
 
 #: ../../src/minimap.cc:126 ../../src/ui_fsmenu/netsetup_lan.cc:115
 msgid "Map"
@@ -616,23 +616,37 @@ msgstr "Gebäude"
 msgid "%u%% built"
 msgstr "%u%% gebaut"
 
-#: ../../src/militarysite.cc:65 ../../src/logic/warehouse.cc:276
+#: ../../src/militarysite.cc:66 ../../src/logic/warehouse.cc:276
 msgid " conquer"
 msgstr " erobern"
 
-#: ../../src/militarysite.cc:116
+#: ../../src/militarysite.cc:117
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
 msgstr[0] "%u Soldat"
 msgstr[1] "%u Soldaten"
 
-#: ../../src/militarysite.cc:121
+#: ../../src/militarysite.cc:122
 #, c-format
 msgid "%u(+%u) soldier"
 msgid_plural "%u(+%u) soldiers"
 msgstr[0] "%u(+%u) Soldat"
 msgstr[1] "%u(+%u) Soldaten"
+
+#: ../../src/militarysite.cc:571
+#, c-format
+msgid "Your %s discovered an aggressor."
+msgstr "Dein(e) %s hat einen Angreifer entdeckt."
+
+#: ../../src/militarysite.cc:575
+#, c-format
+msgid "Your %s is under attack."
+msgstr "Dein(e) %s wird angegriffen."
+
+#: ../../src/militarysite.cc:580
+msgid "You are under attack!"
+msgstr "Du wirst angegriffen!"
 
 #: ../../src/wlapplication.cc:344
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
@@ -861,7 +875,7 @@ msgstr "Warnung: "
 
 #: ../../src/wlapplication.cc:1437
 msgid "Game data error"
-msgstr ""
+msgstr "Spieldaten-Fehler"
 
 #: ../../src/wlapplication.cc:1440
 msgid "Unexpected error during the game"
@@ -961,9 +975,8 @@ msgid "unknown command type \"%s\""
 msgstr "Der Client hat einen unbekannten Befehl Nummer %u gesendet."
 
 #: ../../src/immovable.cc:137
-#, fuzzy
 msgid "no actions"
-msgstr "Animation"
+msgstr "keine Aktionen"
 
 #: ../../src/immovable.cc:187 ../../src/immovable.cc:660
 #: ../../src/immovable.cc:699 ../../src/immovable.cc:854
@@ -989,14 +1002,13 @@ msgid "bad attribute \"%s\""
 msgstr "Lade Stamm: %s"
 
 #: ../../src/immovable.cc:213
-#, fuzzy
 msgid "this program has already been declared"
-msgstr "Das Spiel hat bereits begonnen."
+msgstr "Das Programm wurde bereits deklariert."
 
 #: ../../src/immovable.cc:219
-#, fuzzy, c-format
+#, c-format
 msgid "program %s: %s"
-msgstr "%ss Programm %s"
+msgstr "Programm %s: %s"
 
 #: ../../src/immovable.cc:252 ../../src/immovable.cc:266
 #, c-format
@@ -1025,9 +1037,9 @@ msgid "tribe %s does not define immovable type \"%s\""
 msgstr ""
 
 #: ../../src/immovable.cc:610
-#, fuzzy, c-format
+#, c-format
 msgid "unknown tribe %s"
-msgstr "Lade Stamm: %s"
+msgstr "Unbekannter Stamm %s"
 
 #: ../../src/immovable.cc:616
 #, c-format
@@ -1035,9 +1047,9 @@ msgid "world does not define immovable type \"%s\""
 msgstr ""
 
 #: ../../src/immovable.cc:626
-#, fuzzy, c-format
+#, c-format
 msgid "immovable type %s"
-msgstr "Unbewegte Natur"
+msgstr "Unbewegte Natur Typ %s"
 
 #: ../../src/immovable.cc:661 ../../src/production_program.cc:364
 #: ../../src/production_program.cc:408
@@ -1045,9 +1057,8 @@ msgid "duration in ms"
 msgstr ""
 
 #: ../../src/immovable.cc:699 ../../src/production_program.cc:981
-#, fuzzy
 msgid "priority"
-msgstr "Normale Priorität"
+msgstr "Priorität"
 
 #: ../../src/immovable.cc:733 ../../src/immovable.cc:802
 #: ../../src/immovable.cc:888
@@ -1158,9 +1169,8 @@ msgid "wrong order of wares within group: ware type %s appears after ware type %
 msgstr ""
 
 #: ../../src/production_program.cc:488 ../../src/production_program.cc:616
-#, fuzzy
 msgid "count"
-msgstr "Bild"
+msgstr "Anzahl"
 
 #: ../../src/production_program.cc:507
 msgid "expected ware1[,ware2[,...]][:N] ..."
@@ -1173,7 +1183,7 @@ msgstr ""
 
 #: ../../src/production_program.cc:662
 msgid "distance"
-msgstr ""
+msgstr "Entfernung"
 
 #: ../../src/production_program.cc:673 ../../src/production_program.cc:684
 msgid "percentage"
@@ -1242,7 +1252,7 @@ msgstr " oder"
 
 #: ../../src/soldier.cc:60 ../../src/soldier.cc:83
 msgid "\"min-max\""
-msgstr ""
+msgstr "\"min-max\""
 
 #: ../../src/soldier.cc:68 ../../src/soldier.cc:91
 msgid "positive integer"
@@ -1560,7 +1570,7 @@ msgstr "(Erlaube Gebäude): %s"
 #: ../../src/events/event_flag.cc:42
 #, c-format
 msgid "(flag): %s"
-msgstr ""
+msgstr "(Flagge): %s"
 
 #: ../../src/events/event_immovable.cc:44
 #, c-format
@@ -1826,7 +1836,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_object_packet.cc:85
 #, c-format
 msgid "map objects: %s"
-msgstr ""
+msgstr "Karten Objekt: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:202
 #: ../../src/logic/playercommand.cc:463 ../../src/logic/playercommand.cc:521
@@ -1842,7 +1852,7 @@ msgstr "Gebäudedaten: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:267
 #, c-format
 msgid "wares: %s"
-msgstr ""
+msgstr "Waren: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:280
 #, c-format
@@ -1857,12 +1867,12 @@ msgstr "unbekannte Arbeiterart \"%s\""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:362
 #, c-format
 msgid "warehouse: %s"
-msgstr ""
+msgstr "Warenhaus: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:469
 #, c-format
 msgid "militarysite: %s"
-msgstr ""
+msgstr "Militärgebäude: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:769
 #, c-format
@@ -1891,7 +1901,7 @@ msgstr "Erlaubte Gebäude: %s"
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:55
 #, c-format
 msgid "elemental data: %s"
-msgstr ""
+msgstr "Elementare Daten: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:134
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:198
@@ -1902,7 +1912,7 @@ msgstr "Ding: %u: %s"
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:205
 #, c-format
 msgid "waredata: %s"
-msgstr ""
+msgstr "Warendaten: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:150
 #, c-format
@@ -1912,7 +1922,7 @@ msgstr "Straße %u: %s"
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:157
 #, c-format
 msgid "roaddata: %s"
-msgstr ""
+msgstr "Straßendaten: %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
@@ -1937,7 +1947,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
 msgid "flags: %s"
-msgstr ""
+msgstr "Flaggen: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
@@ -1958,7 +1968,7 @@ msgstr "%u: %s"
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:203
 #, c-format
 msgid "flagdata: %s"
-msgstr ""
+msgstr "Flaggendaten: %s"
 
 #: ../../src/map_io/widelands_map_event_chain_data_packet.cc:183
 #, c-format
@@ -1988,7 +1998,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:76
 #, c-format
 msgid "ware data: %s"
-msgstr ""
+msgstr "Warendaten: %s"
 
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
@@ -2039,7 +2049,7 @@ msgstr "Gebäude: %s"
 #: ../../src/map_io/widelands_map_seen_fields_data_packet.cc:88
 #, c-format
 msgid "seen: %s"
-msgstr ""
+msgstr "Gesehen: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:226
 #, c-format
@@ -2089,7 +2099,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:141
 #, c-format
 msgid "bobs: %s"
-msgstr ""
+msgstr "Natur Objekte: %s"
 
 #: ../../src/map_io/widelands_map_owned_fields_data_packet.cc:56
 #, c-format
@@ -2118,7 +2128,7 @@ msgstr ""
 #: ../../src/economy/wares_queue.cc:256
 #, c-format
 msgid "waresqueue: %s"
-msgstr ""
+msgstr "Warenschlange: %s"
 
 #: ../../src/graphic/graphic.cc:812
 #, c-format
@@ -2349,7 +2359,7 @@ msgstr "(Militär-Einfluss): %s"
 #: ../../src/trigger/trigger_time.cc:46
 #, c-format
 msgid "(time): %s"
-msgstr ""
+msgstr "(Zeit): %s"
 
 #: ../../src/trigger/trigger_factory.cc:40
 msgid "Building Trigger"
@@ -2402,12 +2412,12 @@ msgstr "Löst aus, wenn der Spieler mindestens eine bestimmte Menge Land in dem 
 #: ../../src/trigger/trigger_ownership.cc:45
 #, c-format
 msgid "(ownership): %s"
-msgstr ""
+msgstr "(Besitztum): %s"
 
 #: ../../src/trigger/trigger_vision.cc:52
 #, c-format
 msgid "(vision): %s"
-msgstr ""
+msgstr "(Sicht): %s"
 
 #: ../../src/trigger/trigger_defeated.cc:46
 #, c-format
@@ -2417,7 +2427,7 @@ msgstr ""
 #: ../../src/trigger/trigger_defeated.cc:52
 #, c-format
 msgid "(defeated): %s"
-msgstr ""
+msgstr "(Besiegt): %s"
 
 #: ../../src/wui/interactive_dedicated_server.cc:53
 #: ../../src/wui/interactive_player.cc:171
@@ -2839,7 +2849,7 @@ msgstr "Unbekannt"
 msgid "Loading tribe: %s"
 msgstr "Lade Stamm: %s"
 
-#: ../../src/logic/warehouse.cc:443
+#: ../../src/logic/warehouse.cc:438
 #, c-format
 msgid "A new %s was added to your economy."
 msgstr "Ein neues %s wurde deiner Wirtschaft hinzugefügt."
@@ -2937,7 +2947,7 @@ msgstr ""
 msgid "should breed resource type %s, which does not exist in world; tribe is not compatible with world"
 msgstr ""
 
-#: ../../src/logic/worker.cc:856
+#: ../../src/logic/worker.cc:848
 msgid "A geologist found resources."
 msgstr "Ein Geologe hat Resourcen entdeckt."
 
@@ -2988,7 +2998,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:412
 #, c-format
 msgid "flag action: %s"
-msgstr ""
+msgstr "Flaggenaktion: %s"
 
 #: ../../src/logic/playercommand.cc:469
 #, c-format
@@ -3054,7 +3064,7 @@ msgstr "Spiellogik: %s"
 #: ../../src/game_io/game_preload_data_packet.cc:57
 #, c-format
 msgid "preload: %s"
-msgstr ""
+msgstr "Vorladung: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:49
 #, c-format
@@ -3083,7 +3093,7 @@ msgstr "Wirtschaften: %s"
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:98
 #, c-format
 msgid "command queue: %s"
-msgstr ""
+msgstr "Kommandoschlange: %s"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:103
 #, c-format
