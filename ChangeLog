@@ -1,7 +1,10 @@
 ### Build 15 (until now)
+- Change the code so victorious soldiers conquer an opposing militarysite,
+  instead of destroying it. (svn:r4706 - svn:r4711)
 - Improve player's message queue: (svn:r4698)
     * Add only important and not doubled messages.
     * Play a sound, if a new message arrives.
+    * Play special sounds at special events (e.g. "You are under attack")
 - Fix out-of-bounds array access bug in network game lobby code. (svn:r4676)
 - Fix bug that panel_snap_distance and border_snap_distance were mixed up when
   initializing the spinboxes in the options menu. (svn:r4665)
