@@ -106,8 +106,8 @@ public:
 	void sendAttacker(Soldier &, Building &);
 
 	/// This methods are helper for use at configure this site.
-	void set_requirements (Requirements const &);
-	void  clear_requirements ();
+	void set_requirements  (Requirements const &);
+	void clear_requirements();
 	Requirements const & get_requirements () const {
 		return m_soldier_requirements;
 	}

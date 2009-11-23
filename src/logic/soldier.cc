@@ -546,8 +546,13 @@ void Soldier::attack_update(Game & game, State & state)
 		if (&newbld->owner() == &owner()) {
 			if (upcast(SoldierControl, ctrl, newbld)) {
 				state.objvar1 = 0;
-				if (ctrl->stationedSoldiers().size() < ctrl->soldierCapacity()) {
+				if
+					(ctrl->stationedSoldiers().size() < ctrl->soldierCapacity() and
+					location->base_flag().get_position()
+					!= newbld->base_flag().get_position())
+				{
 					molog("[attack] enemy belongs to us now, move in\n");
+					pop_task(game);
 					set_location(newbld);
 					return schedule_act(game, 10);
 				}

@@ -542,6 +542,7 @@ bool MilitarySite::attack(Soldier & enemy)
 	} else {
 		// The enemy conquers the building
 		set_defeating_player(enemy.owner().player_number());
+		schedule_destroy(game);
 		// In fact we do not conquer it, but place a new building of same type at
 		// the old location.
 		Player            * enemyplayer = enemy.get_owner();
@@ -561,6 +562,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		uint32_t     * wares;    // just empty dummies
 		uint32_t     * worker;   // "    "     "
 		Soldier_Counts soldiers; // "    "     "
+		const Coords   coords = get_position();
 
 		Ware_Index const nr_of_wares   = enemytribe.get_nrwares();
 		Ware_Index const nr_of_workers = enemytribe.get_nrworkers();
@@ -571,11 +573,15 @@ bool MilitarySite::attack(Soldier & enemy)
 		for (Ware_Index i = Ware_Index::First(); i < nr_of_workers; ++i)
 			worker[i.value()] = 0;
 
-		enemyplayer->force_building
-			(get_position(), bldi, wares, worker, soldiers);
+		enemyplayer->force_building(coords, bldi, wares, worker, soldiers);
+		//BaseImmovable * const newimm = game.map()[coords].get_immovable();
+		//upcast(MilitarySite, newsite, newimm);
+		//newsite->reinit_after_conqueration(game);
+
 		return false;
 	}
 }
+
 
 /// Informs the player about an attack of his opponent.
 void MilitarySite::informPlayer(Game & game, bool discovered)
