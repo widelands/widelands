@@ -547,10 +547,17 @@ bool MilitarySite::attack(Soldier & enemy)
 		Player            * enemyplayer = enemy.get_owner();
 		const Tribe_Descr & enemytribe  = enemyplayer->tribe();
 		std::string bldname = name();
-		// Add suffix, if the new owner uses another tribe than we.
-		if (enemytribe.name() != owner().tribe().name())
-			bldname += "." + owner().tribe().name();
+
+		// Has this building already a suffix? == conquered building?
+		size_t dot = bldname.rfind('.');
+		if (dot >= bldname.size()) {
+			// Add suffix, if the new owner uses another tribe than we.
+			if (enemytribe.name() != owner().tribe().name())
+				bldname += "." + owner().tribe().name();
+		} else if (enemytribe.name() == bldname.substr(dot + 1, bldname.size()))
+			bldname = bldname.substr(0, dot);
 		Building_Index bldi = enemytribe.safe_building_index(bldname.c_str());
+
 		uint32_t     * wares;    // just empty dummies
 		uint32_t     * worker;   // "    "     "
 		Soldier_Counts soldiers; // "    "     "
@@ -559,9 +566,9 @@ bool MilitarySite::attack(Soldier & enemy)
 		Ware_Index const nr_of_workers = enemytribe.get_nrworkers();
 		wares  = new uint32_t[nr_of_wares.value()];
 		worker = new uint32_t[nr_of_workers.value()];
-		for (Ware_Index i = Ware_Index::First(); i < nr_ware_types; ++i)
+		for (Ware_Index i = Ware_Index::First(); i < nr_of_wares; ++i)
 			wares[i.value()] = 0;
-		for (Ware_Index i = Ware_Index::First(); i < nr_worker_types; ++i)
+		for (Ware_Index i = Ware_Index::First(); i < nr_of_workers; ++i)
 			worker[i.value()] = 0;
 
 		enemyplayer->force_building
