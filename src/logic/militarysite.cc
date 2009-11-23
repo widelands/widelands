@@ -543,6 +543,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		// The enemy conquers the building
 		set_defeating_player(enemy.owner().player_number());
 		schedule_destroy(game);
+
 		// In fact we do not conquer it, but place a new building of same type at
 		// the old location.
 		Player            * enemyplayer = enemy.get_owner();
@@ -574,14 +575,21 @@ bool MilitarySite::attack(Soldier & enemy)
 			worker[i.value()] = 0;
 
 		enemyplayer->force_building(coords, bldi, wares, worker, soldiers);
-		//BaseImmovable * const newimm = game.map()[coords].get_immovable();
-		//upcast(MilitarySite, newsite, newimm);
-		//newsite->reinit_after_conqueration(game);
+		BaseImmovable * const newimm = game.map()[coords].get_immovable();
+		upcast(MilitarySite, newsite, newimm);
+		newsite->reinit_after_conqueration(game);
 
 		return false;
 	}
 }
 
+/// Initialises the militarysite after it was "conquered" (the old was replaced)
+void MilitarySite::reinit_after_conqueration(Game & game)
+{
+	clear_requirements();
+	conquer_area(game);
+	update_soldier_request();
+}
 
 /// Informs the player about an attack of his opponent.
 void MilitarySite::informPlayer(Game & game, bool discovered)

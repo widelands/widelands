@@ -112,6 +112,8 @@ public:
 		return m_soldier_requirements;
 	}
 
+	void reinit_after_conqueration(Game &);
+
 	void update_soldier_request();
 
 protected:

@@ -541,19 +541,22 @@ void Soldier::attack_update(Game & game, State & state)
 	}
 
 	if (!enemy) {
+		// The old militarysite gets replaced by a new one, so if "enemy" is not
+		// valid anymore, we surely "conquered" the new building.
 		BaseImmovable * const newimm = game.map()[state.coords].get_immovable();
-		upcast(Building, newbld, newimm);
-		if (&newbld->owner() == &owner()) {
-			if (upcast(SoldierControl, ctrl, newbld)) {
+		upcast(MilitarySite, newsite, newimm);
+		if (&newsite->owner() == &owner()) {
+			if (upcast(SoldierControl, ctrl, newsite)) {
 				state.objvar1 = 0;
 				if
 					(ctrl->stationedSoldiers().size() < ctrl->soldierCapacity() and
 					location->base_flag().get_position()
-					!= newbld->base_flag().get_position())
+					!= newsite->base_flag().get_position())
 				{
 					molog("[attack] enemy belongs to us now, move in\n");
 					pop_task(game);
-					set_location(newbld);
+					set_location(newsite);
+					newsite->update_soldier_request();
 					return schedule_act(game, 10);
 				}
 			}
