@@ -554,6 +554,16 @@ bool MilitarySite::attack(Soldier & enemy)
 		uint32_t     * wares;    // just empty dummies
 		uint32_t     * worker;   // "    "     "
 		Soldier_Counts soldiers; // "    "     "
+
+		Ware_Index const nr_of_wares   = enemytribe.get_nrwares();
+		Ware_Index const nr_of_workers = enemytribe.get_nrworkers();
+		wares  = new uint32_t[nr_of_wares.value()];
+		worker = new uint32_t[nr_of_workers.value()];
+		for (Ware_Index i = Ware_Index::First(); i < nr_ware_types; ++i)
+			wares[i.value()] = 0;
+		for (Ware_Index i = Ware_Index::First(); i < nr_worker_types; ++i)
+			worker[i.value()] = 0;
+
 		enemyplayer->force_building
 			(get_position(), bldi, wares, worker, soldiers);
 		return false;
