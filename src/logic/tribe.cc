@@ -26,6 +26,8 @@
 #include "events/event_allow_building.h"
 #include "events/event_building.h"
 #include "events/event_conquer_area.h"
+#include "events/event_set_player_frontier_style.h"
+#include "events/event_set_player_flag_style.h"
 #include "events/event_unhide_area.h"
 #include "game.h"
 #include "game_data_error.h"
@@ -184,14 +186,48 @@ Tribe_Descr::Tribe_Descr
 			if (Section * const defaults_s = root_conf.get_section("defaults"))
 				m_default_encdata.parse(*defaults_s);
 
-			m_anim_frontier =
-				g_anim.get
-					(path, root_conf.get_safe_section("frontier"), 0,
-					 &m_default_encdata);
-			m_anim_flag     =
-				g_anim.get
-					(path, root_conf.get_safe_section("flag"), 0,
-					 &m_default_encdata);
+			try {
+				while (Section * const s = root_conf.get_next_section("frontier"))
+				{
+					char const * const style_name = s->get_safe_string("name");
+					try {
+						if (m_anim_frontier.empty())
+							throw Nonexistent();
+						frontier_style_index(style_name);
+						throw game_data_error(_("\"%s\" is duplicated"), style_name);
+					} catch (Nonexistent) {
+						m_anim_frontier.push_back
+							(std::pair<std::string, uint32_t>
+							 	(style_name,
+							 	 g_anim.get(path, *s, 0, &m_default_encdata)));
+					}
+				}
+				if (m_anim_frontier.empty())
+					throw game_data_error(_("none found"));
+			} catch (_wexception const & e) {
+				throw game_data_error(_("frontier styles: %s"), e.what());
+			}
+			try {
+				while (Section * const s = root_conf.get_next_section("flag"))
+				{
+					char const * const style_name = s->get_safe_string("name");
+					try {
+						if (m_anim_flag.empty())
+							throw Nonexistent();
+						flag_style_index(style_name);
+						throw game_data_error(_("\"%s\" is duplicated"), style_name);
+					} catch (Nonexistent) {
+						m_anim_flag.push_back
+							(std::pair<std::string, uint32_t>
+							 	(style_name,
+							 	 g_anim.get(path, *s, 0, &m_default_encdata)));
+					}
+				}
+				if (m_anim_flag.empty())
+					throw game_data_error(_("none found"));
+			} catch (_wexception const & e) {
+				throw game_data_error(_("flag styles: %s"), e.what());
+			}
 
 			if
 				(Section * const inits_s =
@@ -234,8 +270,7 @@ Tribe_Descr::Tribe_Descr
 								event =
 									new Event_Building
 										(*event_s, egbase, this, building);
-							}
-							else if   (not strcmp(event_name, "conquer_area"))   {
+							} else if (not strcmp(event_name, "conquer_area"))   {
 								event_s->set_int("version", 2);
 								event_s->set_string("point", "0 0");
 								event = new Event_Conquer_Area(*event_s, egbase);
@@ -243,6 +278,20 @@ Tribe_Descr::Tribe_Descr
 								event_s->set_int("version", 2);
 								event_s->set_string("point", "0 0");
 								event = new Event_Unhide_Area(*event_s, egbase);
+							} else if
+								(not strcmp(event_name, "set_player_frontier_style"))
+							{
+								event_s->set_int("version", 1);
+								event =
+									new Event_Set_Player_Frontier_Style
+										(*event_s, egbase);
+							} else if
+								(not strcmp(event_name, "set_player_flag_style"))
+							{
+								event_s->set_int("version", 1);
+								event =
+									new Event_Set_Player_Flag_Style
+										(*event_s, egbase);
 							} else
 								throw game_data_error
 									("\"%s\" is invalid as player initialization event "

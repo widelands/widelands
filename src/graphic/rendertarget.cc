@@ -567,7 +567,7 @@ void RenderTarget::rendermap
 					//  Render border markes on and halfway between border nodes.
 					if (f_is_border) {
 						const Player & owner = egbase.player(f_owner_number);
-						const uint32_t anim = owner.tribe().get_frontier_anim();
+						uint32_t const anim = owner.frontier_anim();
 						if (1 < f_vision)
 							drawanim(f_pos, anim, 0, &owner);
 						if
@@ -645,7 +645,7 @@ void RenderTarget::rendermap
 									drawanim(f_pos, picid, 0, owner);
 							else if (map_object_descr == &Widelands::g_flag_descr) {
 								drawanim
-									(f_pos, owner->tribe().get_flag_anim(), 0, owner);
+									(f_pos, owner->flag_anim(), 0, owner);
 							}
 						}
 				}
@@ -958,7 +958,7 @@ void RenderTarget::rendermap
 					//  Render border markes on and halfway between border nodes.
 					if (f_is_border) {
 						const Player & owner = egbase.player(f_owner_number);
-						const uint32_t anim = owner.tribe().get_frontier_anim();
+						uint32_t const anim = owner.frontier_anim();
 						drawanim(f_pos, anim, 0, &owner);
 						if
 							(r_owner_number == f_owner_number

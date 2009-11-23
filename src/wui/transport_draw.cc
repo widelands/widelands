@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2007 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2007, 2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include "economy/road.h"
 #include "economy/ware_instance.h"
 #include "logic/editor_game_base.h"
+#include "logic/player.h"
 #include "graphic/rendertarget.h"
 
 namespace Widelands {
@@ -42,7 +43,8 @@ void Flag::draw
 		{8, -3}
 	};
 
-	dst.drawanim(pos, m_anim, game.get_gametime() - m_animstart, get_owner());
+	dst.drawanim
+		(pos, owner().flag_anim(), game.get_gametime() - m_animstart, &owner());
 
 	const uint32_t item_filled = m_item_filled;
 	for (uint32_t i = 0; i < item_filled; ++i) { //  draw wares

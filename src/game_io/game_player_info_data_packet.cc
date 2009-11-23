@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 6
+#define CURRENT_PACKET_VERSION 7
 
 
 void Game_Player_Info_Data_Packet::Read
@@ -50,8 +50,17 @@ void Game_Player_Info_Data_Packet::Read
 						// Used to be the player type, not needed anymore
 						fr.Signed32();
 
-					int32_t const plnum   = fr.Signed32();
-					std::string tribe = fr.CString();
+					int32_t const plnum   =
+						packet_version < 7 ? fr.Signed32() : fr.Player_Number8();
+					if (plnum < 1 or MAX_PLAYERS < plnum)
+						throw game_data_error
+							(_("player number (%i) is out of range (1 .. %u)"),
+							 plnum, MAX_PLAYERS);
+					char const * const tribe_name = fr.CString();
+					char const * const frontier_style_name =
+						packet_version < 7 ? 0 : fr.CString();
+					char const * const flag_style_name     =
+						packet_version < 7 ? 0 : fr.CString();
 
 					RGBColor rgb[4];
 
@@ -64,8 +73,35 @@ void Game_Player_Info_Data_Packet::Read
 
 					std::string const name = fr.CString();
 
-					game.add_player(plnum, 0, tribe, name);
+					game.add_player(plnum, 0, tribe_name, name);
 					Player & player = game.player(plnum);
+					{
+						Tribe_Descr const & tribe = player.tribe();
+						try {
+							player.m_frontier_style_index =
+								frontier_style_name ?
+								tribe.frontier_style_index(frontier_style_name) : 0;
+						} catch (Tribe_Descr::Nonexistent) {
+							log
+								("WARNING: player %u has frontier style index \"%s\", "
+								 "which does not exist in his tribe %s; will use "
+								 "default frontier style \"%s\" instead\n",
+								 plnum, frontier_style_name, tribe.name().c_str(),
+								 tribe.frontier_style_name(0).c_str());
+						}
+						try {
+							player.m_flag_style_index =
+								flag_style_name ?
+								tribe.flag_style_index(flag_style_name) : 0;
+						} catch (Tribe_Descr::Nonexistent) {
+							log
+								("WARNING: player %u has flag style index \"%s\", "
+								 "which does not exist in his tribe %s; will use "
+								 "default flag style \"%s\" instead\n",
+								 plnum, flag_style_name, tribe.name().c_str(),
+								 tribe.flag_style_name(0).c_str());
+						}
+					}
 					player.set_see_all(see_all);
 
 					if (packet_version >= 6)
@@ -121,9 +157,14 @@ void Game_Player_Info_Data_Packet::Write
 
 		fw.Unsigned8(plr->m_see_all);
 
-		fw.Signed32(plr->m_plnum);
+		fw.Player_Number8(plr->m_plnum);
 
-		fw.CString(plr->m_tribe.name().c_str());
+		{
+			Tribe_Descr const & tribe = plr->tribe();
+			fw.CString(tribe.name().c_str());
+			fw.CString(tribe.frontier_style_name(plr->m_frontier_style_index));
+			fw.CString(tribe.flag_style_name    (plr->m_flag_style_index));
+		}
 
 		for (uint32_t j = 0; j < 4; ++j) {
 			fw.Unsigned8(plr->m_playercolor[j].r());

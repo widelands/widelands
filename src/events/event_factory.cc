@@ -31,6 +31,8 @@
 #include "event_reveal_campaign.h"
 #include "event_reveal_objective.h"
 #include "event_reveal_scenario.h"
+#include "event_set_player_frontier_style.h"
+#include "event_set_player_flag_style.h"
 #include "event_set_timer.h"
 #include "profile/profile.h"
 
@@ -60,7 +62,7 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		true,
 		"conquer_area",           _("Conquer area"),
 		_
-			("Gives ownership of all unowned locations whithin an area to the "
+			("Gives ownership of all unowned locations within an area to the "
 			 "player.")
 	},
 	{
@@ -118,6 +120,20 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 			("Gives vision for a specified amount of time of all locations "
 			 "within an area to the player.")
 	},
+	{
+		false,
+		"set_player_frontier_style", _("Set player's frontier style"),
+		_
+			("Sets the style of the player's frontier markers to one of the "
+			 "styles that are defined in the player's tribe.")
+	},
+	{
+		false,
+		"set_player_flag_style",     _("Set player's flag style"),
+		_
+			("Sets the style of the player's flags to one of the styles that are "
+			 "defined in the player's tribe.")
+	}
 };
 
 
@@ -145,6 +161,8 @@ Event & create
 	case 10: return *new Event_Road            (name, state);
 	case 11: return *new Event_Set_Timer       (name, state);
 	case 12: return *new Event_Unhide_Area     (name, state);
+	case 13: return *new Event_Set_Player_Frontier_Style(name, state);
+	case 14: return *new Event_Set_Player_Flag_Style    (name, state);
 	default:
 		assert(false);
 	}
@@ -182,6 +200,8 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	case 10: return *new Event_Road            (s, egbase);
 	case 11: return *new Event_Set_Timer       (s, egbase);
 	case 12: return *new Event_Unhide_Area     (s, egbase);
+	case 13: return *new Event_Set_Player_Frontier_Style(s, egbase);
+	case 14: return *new Event_Set_Player_Flag_Style    (s, egbase);
 	default:
 		assert(false);
 	}

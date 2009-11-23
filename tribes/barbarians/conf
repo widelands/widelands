@@ -23,11 +23,13 @@ uiposition=10
 
 # No idea for the frontier. Maybe some javelins?
 [frontier]
+name=frontier
 pics=pics/frontier_??.png
 hotspot=1 19
 
 # Not just a plain color, maybe a cross or some stribes
 [flag]
+name=flag
 pics=pics/flag_??.png
 hotspot=7 39
 fps=8

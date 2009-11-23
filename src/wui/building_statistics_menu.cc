@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -202,8 +202,7 @@ void Building_Statistics_Menu::draw(RenderTarget & dst) {
 		dst.drawanim
 			(FLAG_POINT - Point(TRIANGLE_WIDTH / 2, TRIANGLE_HEIGHT),
 			 m_anim, 0, &player);
-	dst.drawanim
-		(FLAG_POINT, player.tribe().get_flag_anim(), 0, &player);
+	dst.drawanim(FLAG_POINT, player.flag_anim(), 0, &player);
 
 	// Draw all the panels etc. above the background
 	UI::Window::draw(dst);

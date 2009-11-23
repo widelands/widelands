@@ -126,8 +126,34 @@ struct Tribe_Descr {
 	}
 	int32_t get_nr_bobs() {return m_bobs.get_nitems();}
 
-	uint32_t get_frontier_anim() const throw () {return m_anim_frontier;}
-	uint32_t get_flag_anim    () const throw () {return m_anim_flag;}
+	typedef std::vector<std::pair<std::string, uint32_t> > AnimationStyles;
+	struct Nonexistent {};
+	uint8_t frontier_style_index(char const * const stylename) const {
+		for (uint8_t result = m_anim_frontier.size();;)
+			if (m_anim_frontier.at(--result).first == stylename)
+				return result;
+			else if (not result)
+				throw Nonexistent();
+	}
+	uint8_t flag_style_index    (char const * const stylename) const {
+		for (uint8_t result = m_anim_flag.size();;)
+			if (m_anim_flag.at(--result).first == stylename)
+				return result;
+			else if (not result)
+				throw Nonexistent();
+	}
+	std::string const & frontier_style_name (uint8_t const i) const {
+		return m_anim_frontier.at(i).first;
+	}
+	std::string const & flag_style_name     (uint8_t const i) const {
+		return m_anim_flag    .at(i).first;
+	}
+	uint32_t frontier_animation  (uint8_t const i) const {
+		return m_anim_frontier.at(i).second;
+	}
+	uint32_t flag_animation      (uint8_t const i) const {
+		return m_anim_flag    .at(i).second;
+	}
 
 	uint32_t get_bob_vision_range() const {return m_bob_vision_range;}
 
@@ -166,8 +192,8 @@ struct Tribe_Descr {
 private:
 	const std::string m_name;
 	const World & m_world;
-	uint32_t m_anim_frontier;
-	uint32_t m_anim_flag;
+	AnimationStyles   m_anim_frontier;
+	AnimationStyles   m_anim_flag;
 	uint32_t m_bob_vision_range;
 
 	Indexed_Descr_Maintainer<Worker_Descr, Ware_Index>    m_workers;

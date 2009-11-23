@@ -19,7 +19,6 @@
 
 #include "player.h"
 
-
 #include "checkstep.h"
 #include "cmd_queue.h"
 #include "constructionsite.h"
@@ -57,6 +56,8 @@ Player::Player
 	:
 	m_egbase              (the_egbase),
 	m_initialization_index(initialization_index),
+	m_frontier_style_index(0),
+	m_flag_style_index    (0),
 	m_see_all           (false),
 	m_plnum             (plnum),
 	m_tribe             (tribe_descr),

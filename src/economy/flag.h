@@ -137,7 +137,6 @@ private:
 	};
 
 	Coords       m_position;
-	uint32_t     m_anim;
 	int32_t      m_animstart;
 
 	Building    * m_building; ///< attached building (replaces road WALK_NW)

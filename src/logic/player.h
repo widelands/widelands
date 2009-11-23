@@ -26,6 +26,7 @@
 #include "mapregion.h"
 #include "notification.h"
 #include "rgbcolor.h"
+#include "tribe.h"
 
 #include "widelands.h"
 
@@ -68,6 +69,8 @@ struct Player :
 	friend struct Editor_Game_Base;
 	friend class Game_Player_Info_Data_Packet;
 	friend class Game_Player_Economies_Data_Packet;
+	friend struct Event_Set_Player_Frontier_Style;
+	friend struct Event_Set_Player_Flag_Style;
 	friend struct Map_Buildingdata_Data_Packet;
 	friend struct Map_Players_View_Data_Packet;
 	friend struct Map_Seen_Fields_Data_Packet;
@@ -447,6 +450,13 @@ struct Player :
 	typedef std::set<OPtr<AreaWatcher> > AreaWatchers;
 	const AreaWatchers & areawatchers() const throw () {return m_areawatchers;}
 
+	uint32_t frontier_anim() const {
+		return tribe().frontier_animation(m_frontier_style_index);
+	}
+	uint32_t flag_anim    () const {
+		return tribe().flag_animation    (m_flag_style_index);
+	}
+
 	// Statistics
 	Building_Stats_vector const & get_building_statistics
 		(Building_Index const i) const
@@ -484,6 +494,8 @@ private:
 
 	Editor_Game_Base     & m_egbase;
 	uint8_t                m_initialization_index;
+	uint8_t                m_frontier_style_index;
+	uint8_t                m_flag_style_index;
 	bool m_see_all;
 	bool                   m_view_changed;
 	const Player_Number    m_plnum;

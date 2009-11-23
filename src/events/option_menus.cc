@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +38,8 @@
 #include "event_reveal_scenario.h"
 #include "event_road.h"
 #include "event_set_timer.h"
+#include "event_set_player_frontier_style.h"
+#include "event_set_player_flag_style.h"
 #include "event_unhide_area.h"
 
 namespace Widelands {
@@ -73,6 +75,12 @@ int32_t Event_Road                      ::option_menu(Editor_Interactive &)
 {throw;}
 
 int32_t Event_Set_Timer                 ::option_menu(Editor_Interactive &)
+{throw;}
+
+int32_t Event_Set_Player_Frontier_Style ::option_menu(Editor_Interactive &)
+{throw;}
+
+int32_t Event_Set_Player_Flag_Style     ::option_menu(Editor_Interactive &)
 {throw;}
 
 int32_t Event_Move_View                 ::option_menu(Editor_Interactive & eia)

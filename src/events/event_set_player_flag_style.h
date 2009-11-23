@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,22 +17,18 @@
  *
  */
 
-#ifndef EVENT_CONQUER_AREA_H
-#define EVENT_CONQUER_AREA_H
+#ifndef EVENT_SET_PLAYER_FLAG_STYLE_H
+#define EVENT_SET_PLAYER_FLAG_STYLE_H
 
-#include "event_player_area.h"
-
-struct Event_Conquer_Area_Option_Menu;
+#include "event_set_player_style.h"
 
 namespace Widelands {
 
-struct Event_Conquer_Area : public Event_Player_Area {
-	friend struct ::Event_Conquer_Area_Option_Menu;
-	Event_Conquer_Area(char const * const Name, State const S)
-		:
-		Event_Player_Area(Name, S)
+struct Event_Set_Player_Flag_Style : public Event_Set_Player_Style {
+	Event_Set_Player_Flag_Style(char const * const Name, State const S) :
+		Event_Set_Player_Style(Name, S)
 	{}
-	Event_Conquer_Area(Section &, Editor_Game_Base &);
+	Event_Set_Player_Flag_Style(Section &, Editor_Game_Base &);
 
 	int32_t option_menu(Editor_Interactive &);
 

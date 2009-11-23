@@ -44,7 +44,6 @@ Map_Object_Descr g_flag_descr("flag", "Flag");
 */
 Flag::Flag() :
 PlayerImmovable(g_flag_descr),
-m_anim(0),
 m_building(0),
 m_item_capacity(8),
 m_item_filled(0),
@@ -82,7 +81,6 @@ Flag::Flag
 	(Game & game, Player & owning_player, Coords const coords)
 	:
 	PlayerImmovable       (g_flag_descr),
-	m_anim                (0),
 	m_building            (0),
 	m_item_capacity       (8),
 	m_item_filled         (0),
@@ -562,7 +560,6 @@ void Flag::init(Editor_Game_Base & egbase)
 
 	set_position(egbase, m_position);
 
-	m_anim = owner().tribe().get_flag_anim();
 	m_animstart = egbase.get_gametime();
 }
 
