@@ -541,9 +541,6 @@ bool MilitarySite::attack(Soldier & enemy)
 		return true;
 	} else {
 		// The enemy conquers the building
-		set_defeating_player(enemy.owner().player_number());
-		schedule_destroy(game);
-
 		// In fact we do not conquer it, but place a new building of same type at
 		// the old location.
 		Player            * enemyplayer = enemy.get_owner();
@@ -573,6 +570,10 @@ bool MilitarySite::attack(Soldier & enemy)
 			wares[i.value()] = 0;
 		for (Ware_Index i = Ware_Index::First(); i < nr_of_workers; ++i)
 			worker[i.value()] = 0;
+
+		// Now we destroy the old building before we place the new one.
+		set_defeating_player(enemy.owner().player_number());
+		schedule_destroy(game);
 
 		enemyplayer->force_building(coords, bldi, wares, worker, soldiers);
 		BaseImmovable * const newimm = game.map()[coords].get_immovable();

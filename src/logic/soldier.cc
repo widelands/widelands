@@ -545,7 +545,7 @@ void Soldier::attack_update(Game & game, State & state)
 		// valid anymore, we surely "conquered" the new building.
 		BaseImmovable * const newimm = game.map()[state.coords].get_immovable();
 		upcast(MilitarySite, newsite, newimm);
-		if (&newsite->owner() == &owner()) {
+		if (newsite and (&newsite->owner() == &owner())) {
 			if (upcast(SoldierControl, ctrl, newsite)) {
 				state.objvar1 = 0;
 				if
