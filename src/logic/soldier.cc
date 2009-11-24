@@ -550,8 +550,9 @@ void Soldier::attack_update(Game & game, State & state)
 				state.objvar1 = 0;
 				if
 					(ctrl->stationedSoldiers().size() < ctrl->soldierCapacity() and
-					location->base_flag().get_position()
-					!= newsite->base_flag().get_position())
+					 location->base_flag().get_position()
+					 !=
+					 newsite ->base_flag().get_position())
 				{
 					molog("[attack] enemy belongs to us now, move in\n");
 					pop_task(game);

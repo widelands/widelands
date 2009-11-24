@@ -145,7 +145,7 @@ void Slider::set_enabled(const bool enabled) {
 	//  TODO: disabled should look different...
 	m_enabled = enabled;
 	if (not enabled) {m_pressed = false; m_highlighted = false;}
-	update(0, 0, get_w(), get_h());
+	update();
 }
 
 
@@ -157,7 +157,7 @@ void Slider::set_enabled(const bool enabled) {
 void Slider::handle_mousein(bool inside) {
 	if (not inside)
 		m_highlighted = false;
-	update(0, 0, get_w(), get_h());
+	update();
 }
 
 
@@ -181,7 +181,7 @@ bool Slider::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 			/
 			(m_max_value - m_min_value);
 	}
-	update(0, 0, get_w(), get_h());
+	update();
 	return true;
 }
 
@@ -227,7 +227,7 @@ void Slider::cursor_moved(int32_t pointer, int32_t x, int32_t y) {
 	//  updating
 	if (new_value != m_value) {m_value = new_value; send_value_changed();}
 
-	update(0, 0, get_w(), get_h());
+	update();
 }
 
 
@@ -247,7 +247,7 @@ void Slider::cursor_pressed(int32_t pointer) {
 
 	play_click();
 
-	update(0, 0, get_w(), get_h());
+	update();
 }
 
 
@@ -284,7 +284,7 @@ void Slider::bar_pressed(int32_t pointer, int32_t ofs) {
 	send_value_changed();
 
 	m_relative_move = ofs;
-	update(0, 0, get_w(), get_h());
+	update();
 }
 
 

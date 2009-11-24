@@ -27,15 +27,16 @@ namespace Widelands {
 /// Abstract base for events setting some style for a player.
 struct Event_Set_Player_Style : public Event {
 	Event_Set_Player_Style
-		(char const * const Name, State const S,
-		 uint8_t const style_index = 0)
-		: Event(Name, S), m_style_index(style_index)
+		(char const * const Name, State const S)
+		: Event(Name, S), m_player_number(1), m_style_index(0)
 	{}
 	Event_Set_Player_Style(Section &, Editor_Game_Base &);
 
 	void Write(Section &, Editor_Game_Base &) const;
 
+	Player_Number player_number() const {return m_player_number;}
 	void set_player(Player_Number);
+	uint8_t style_index() const {return m_style_index;}
 	void set_style_index(uint8_t);
 protected:
 	Player_Number m_player_number;

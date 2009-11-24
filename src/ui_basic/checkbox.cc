@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,7 +78,7 @@ void Statebox::set_enabled(bool const enabled)
 			(Is_Highlighted, m_flags & Is_Highlighted and m_flags & Is_Enabled);
 	}
 
-	update(0, 0, get_w(), get_h());
+	update();
 }
 
 
@@ -93,7 +93,7 @@ void Statebox::set_state(bool const on) {
 		changed    .call        ();
 		changedto  .call      (on);
 		changedtoid.call(m_id, on);
-		update(0, 0, get_w(), get_h());
+		update();
 	}
 }
 
@@ -140,7 +140,7 @@ void Statebox::draw(RenderTarget & dst)
  */
 void Statebox::handle_mousein(bool const inside) {
 	set_flags(Is_Highlighted, inside);
-	update(0, 0, get_w(), get_h());
+	update();
 }
 
 

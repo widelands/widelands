@@ -24,6 +24,8 @@
 #include "editor/ui_menus/event_conquer_area_option_menu.h"
 #include "editor/ui_menus/event_message_box_option_menu.h"
 #include "editor/ui_menus/event_move_view_option_menu.h"
+#include "editor/ui_menus/event_set_player_frontier_style_option_menu.h"
+#include "editor/ui_menus/event_set_player_flag_style_option_menu.h"
 #include "editor/ui_menus/event_unhide_area_option_menu.h"
 
 #include "event_allow_building.h"
@@ -77,11 +79,11 @@ int32_t Event_Road                      ::option_menu(Editor_Interactive &)
 int32_t Event_Set_Timer                 ::option_menu(Editor_Interactive &)
 {throw;}
 
-int32_t Event_Set_Player_Frontier_Style ::option_menu(Editor_Interactive &)
-{throw;}
+int32_t Event_Set_Player_Frontier_Style ::option_menu(Editor_Interactive & eia)
+{Event_Set_Player_Frontier_Style_Option_Menu    m(eia, *this); return m.run();}
 
-int32_t Event_Set_Player_Flag_Style     ::option_menu(Editor_Interactive &)
-{throw;}
+int32_t Event_Set_Player_Flag_Style     ::option_menu(Editor_Interactive & eia)
+{Event_Set_Player_Flag_Style_Option_Menu        m(eia, *this); return m.run();}
 
 int32_t Event_Move_View                 ::option_menu(Editor_Interactive & eia)
 {Event_Move_View_Option_Menu                    m(eia, *this); return m.run();}

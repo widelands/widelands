@@ -384,7 +384,7 @@ void WaresQueueDisplay::think()
 		recalc_size();
 
 	if (static_cast<uint32_t>(m_queue->get_filled()) != m_cache_filled)
-		update(0, 0, get_w(), get_h());
+		update();
 }
 
 

@@ -194,7 +194,7 @@ void Event_Allow_Building_Option_Menu::clicked_ok() {
 	if (name.size()) {
 		if
 			(Widelands::Event * const registered_event =
-			 eia().egbase().map().mem()[name])
+			 	eia().egbase().map().mem()[name])
 			if (registered_event != & m_event) {
 				char buffer[256];
 				snprintf

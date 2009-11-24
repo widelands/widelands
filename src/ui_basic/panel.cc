@@ -69,7 +69,7 @@ Panel::Panel
  */
 Panel::~Panel()
 {
-	update(0, 0, get_w(), get_h());
+	update();
 
 	if (_cache != g_gr->get_no_picture())
 		g_gr->free_surface(_cache);
@@ -297,7 +297,7 @@ void Panel::set_border(uint32_t l, uint32_t r, uint32_t t, uint32_t b)
 	_rborder = r;
 	_tborder = t;
 	_bborder = b;
-	update(0, 0, get_w(), get_h());
+	update();
 }
 
 /**

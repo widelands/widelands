@@ -121,14 +121,14 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 			 "within an area to the player.")
 	},
 	{
-		false,
+		true,
 		"set_player_frontier_style", _("Set player's frontier style"),
 		_
 			("Sets the style of the player's frontier markers to one of the "
 			 "styles that are defined in the player's tribe.")
 	},
 	{
-		false,
+		true,
 		"set_player_flag_style",     _("Set player's flag style"),
 		_
 			("Sets the style of the player's flags to one of the styles that are "

@@ -57,8 +57,8 @@ void Event_Set_Player_Style::set_player(Player_Number const p) {
 }
 
 
-void Event_Set_Player_Style::set_style_index(uint8_t const style_index) {
-	m_style_index = style_index;
+void Event_Set_Player_Style::set_style_index(uint8_t const i) {
+	m_style_index = i;
 }
 
 }

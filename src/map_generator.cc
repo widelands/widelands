@@ -664,7 +664,7 @@ void MapGenerator::create_random_map()
 
 	for (size_t ix = 0; ix < mapGenInfo.getNumBobAreas(); ++ix)
 		random_bobs[ix] =
-				generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng);
+			generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng);
 
 	try {
 		//  Now we have generated a lot of random data!!
@@ -672,10 +672,10 @@ void MapGenerator::create_random_map()
 		iterate_Map_FCoords(m_map, m_mapInfo, fc)
 			fc.field->set_height
 				(make_node_elevation
-					(static_cast<double>(elevations[fc.x + m_mapInfo.w * fc.y])
-					 /
-					 static_cast<double>(MAX_ELEVATION),
-					 fc));
+				 	(static_cast<double>(elevations[fc.x + m_mapInfo.w * fc.y])
+				 	 /
+				 	 static_cast<double>(MAX_ELEVATION),
+				 	 fc));
 
 		//  Now lets set the terrain right according to the heights.
 
@@ -700,29 +700,29 @@ void MapGenerator::create_random_map()
 			//  get the heights of my neighbour nodes and of my current node
 
 			uint8_t height_x0_y0 =
-				fc.field                                 ->get_height();
+				fc.field                            ->get_height();
 			uint8_t height_x1_y0 =
-				m_map.operator[](Coords(right_x,          fc.y)).get_height();
+				m_map[Coords(right_x,          fc.y)].get_height();
 			uint8_t height_x0_y1 =
-				m_map.operator[](Coords(lower_x,       lower_y)).get_height();
+				m_map[Coords(lower_x,       lower_y)].get_height();
 			uint8_t height_x1_y1 =
-				m_map.operator[](Coords(lower_right_x, lower_y)).get_height();
+				m_map[Coords(lower_right_x, lower_y)].get_height();
 
 			MapGenAreaInfo::MapGenTerrainType terrType;
 
 			fc.field->set_terrain_d
 				(figure_out_terrain
-					(random2, random3, random4,
-					 fc, Coords(lower_x, lower_y), Coords(lower_right_x, lower_y),
-					 height_x0_y0, height_x0_y1, height_x1_y1,
-					 rng, terrType));
+				 	(random2, random3, random4,
+				 	 fc, Coords(lower_x, lower_y), Coords(lower_right_x, lower_y),
+				 	 height_x0_y0, height_x0_y1, height_x1_y1,
+				 	 rng, terrType));
 
 			fc.field->set_terrain_r
 				(figure_out_terrain
-					(random2, random3, random4,
-					 fc, Coords(right_x, fc.y), Coords(lower_right_x, lower_y),
-					 height_x0_y0, height_x1_y0, height_x1_y1,
-					 rng, terrType));
+				 	(random2, random3, random4,
+				 	 fc, Coords(right_x, fc.y), Coords(lower_right_x, lower_y),
+				 	 height_x0_y0, height_x1_y0, height_x1_y1,
+				 	 rng, terrType));
 
 			//  set resources for this field
 			generate_resources

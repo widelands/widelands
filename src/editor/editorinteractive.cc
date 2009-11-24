@@ -586,7 +586,6 @@ void Editor_Interactive::run_editor(std::string const & filename)
 					(64, 64, "greenland", _("No Name"),
 					 g_options.pull_section("global").get_string
 					 	("realname", _("Unknown")));
-				editor.load_graphics(loader_ui);
 			} else {
 				loader_ui.stepf("Loading map \"%s\"...", filename.c_str());
 				eia.load(filename);
@@ -601,6 +600,8 @@ void Editor_Interactive::run_editor(std::string const & filename)
 				editor.manually_load_tribe(*i.current);
 			}
 		}
+		loader_ui.step(_("Loading graphics..."));
+		editor.load_graphics(loader_ui);
 		loader_ui.step(std::string());
 
 		eia.select_tool(eia.tools.increase_height, Editor_Tool::First);

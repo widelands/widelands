@@ -102,8 +102,7 @@ void WaresDisplay::add_warelist
 
 	m_type = type;
 
-
-	update(0, 0, get_w(), get_h());
+	update();
 }
 
 

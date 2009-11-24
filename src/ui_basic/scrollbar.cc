@@ -84,7 +84,7 @@ void Scrollbar::set_steps(int32_t steps)
 
 	m_steps = steps;
 
-	update(0, 0, get_w(), get_h());
+	update();
 }
 
 
@@ -137,7 +137,7 @@ void Scrollbar::set_scrollpos(int32_t pos)
 	m_pos = pos;
 	moved.call(pos);
 
-	update(0, 0, get_w(), get_h());
+	update();
 }
 
 
@@ -427,7 +427,7 @@ bool Scrollbar::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 		break;
 	}
 
-	update(0, 0, get_w(), get_h());
+	update();
 	return result;
 }
 bool Scrollbar::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
@@ -451,7 +451,7 @@ bool Scrollbar::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 		break;
 	}
 
-	update(0, 0, get_w(), get_h());
+	update();
 	return result;
 }
 

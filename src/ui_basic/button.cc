@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,7 +93,7 @@ Button::~Button() {
 /**
  * Sets a new picture for the Button.
 */
-void Button::set_pic(PictureID picid)
+void Button::set_pic(PictureID const picid)
 {
 	m_title.clear();
 
@@ -102,7 +102,7 @@ void Button::set_pic(PictureID picid)
 		g_gr->free_surface(m_pic_custom_disabled);
 	m_pic_custom_disabled = g_gr->create_grayed_out_pic(picid);
 
-	update(0, 0, get_w(), get_h());
+	update();
 }
 
 
@@ -113,8 +113,7 @@ void Button::set_title(std::string const & title) {
 	m_pic_custom = g_gr->get_no_picture();
 	m_title      = title;
 
-
-	update(0, 0, get_w(), get_h());
+	update();
 }
 
 
@@ -136,7 +135,7 @@ void Button::set_enabled(bool const on)
 		m_enabled = false;
 		m_highlighted = false;
 	}
-	update(0, 0, get_w(), get_h());
+	update();
 }
 
 
@@ -258,7 +257,7 @@ void Button::think()
 void Button::handle_mousein(bool const inside)
 {
 	m_highlighted = inside && m_enabled;
-	update(0, 0, get_w(), get_h());
+	update();
 }
 
 
@@ -279,7 +278,7 @@ bool Button::handle_mousepress(Uint8 const btn, int32_t, int32_t) {
 			set_think(true);
 		}
 	}
-	update(0, 0, get_w(), get_h());
+	update();
 
 	return true;
 }
@@ -291,7 +290,7 @@ bool Button::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
 	if (m_pressed) {
 		m_pressed = false;
 		grab_mouse(false);
-		update(0, 0, get_w(), get_h());
+		update();
 		if (m_highlighted && m_enabled) {
 			play_click();
 			clicked();
