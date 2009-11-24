@@ -32,7 +32,50 @@ namespace Widelands {
 
 struct Map;
 struct Editor_Game_Base;
-struct UniqueRandomMapInfo;
+
+/*
+This helper class repesents the complete map initialization
+info needed by the random map generator
+It can be converted to and from an "Id-String". The Id-String is a
+string-encoded version of the random map info. This Id-String can
+be handelled by the user/player more easily.
+The Id-String also contains some kind of check-sum to prevent ill
+ids to be used.
+*/
+struct UniqueRandomMapInfo {
+
+	enum Resource_Amount
+	{
+		raLow    = 0,
+		raMedium = 1,
+		raHigh   = 2
+	};
+
+	uint32_t mapNumber;
+	uint32_t w;
+	uint32_t h;
+	Resource_Amount resource_amount;
+	std::string worldName;
+
+	double   waterRatio;     //  How much of the map is water?
+	double   landRatio;      //  How much of the map is land?
+	double   wastelandRatio; //  How much of the "land" is wasteland?
+	int      numPlayers;     //  number of player to generate
+	bool     islandMode;     //  whether the world will be an island
+
+	//  other stuff
+	static bool setFromIdString
+		(UniqueRandomMapInfo & mapInfo_out, std::string const & mapIdString,
+		 std::vector<std::string> const & worlds);
+	static void generateIdString
+		(std::string & mapIdsString_out, UniqueRandomMapInfo const & mapInfo);
+	bool isWorldNameSet(std::string const & name) const;
+private:
+	static int  mapIdCharToNumber(char ch);
+	static char mapIdNumberToChar(int32_t num);
+	static uint16_t generateWorldNameHash(std::string const & name);
+};
+
 
 struct MapGenerator {
 
@@ -40,14 +83,37 @@ struct MapGenerator {
 		(Map & map, UniqueRandomMapInfo const & mapInfo,
 		 Editor_Game_Base & egbase);
 
+	void create_random_map();
+
+private:
+
 	void generate_bobs
-		(MapGenInfo                      &,
-		 uint32_t          const * const * random_bobs,
+		(uint32_t const * const *  random_bobs,
 		 Coords,
 		 RNG                             &,
 		 MapGenAreaInfo::MapGenTerrainType terrType);
 
-private:
+	void generate_resources
+		(uint32_t            const * const random1,
+		 uint32_t            const * const random2,
+		 uint32_t            const * const random3,
+		 uint32_t            const * const random4,
+		 FCoords                     const fc);
+
+	uint8_t make_node_elevation
+		(double elevation, Coords);
+
+	static uint32_t * generate_random_value_map
+		(uint32_t w, uint32_t h, RNG & rng);
+
+	Terrain_Index figure_out_terrain
+		(uint32_t                  * const random2,
+		 uint32_t                  * const random3,
+		 uint32_t                  * const random4,
+		 Coords const c0, Coords const c1, Coords const c2,
+		 uint32_t const h1, uint32_t const h2, uint32_t const h3,
+		 RNG                       &       rng,
+		 MapGenAreaInfo::MapGenTerrainType & terrType);
 
 	Map &                        m_map;
 	UniqueRandomMapInfo const & m_mapInfo;

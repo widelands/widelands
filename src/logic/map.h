@@ -119,45 +119,6 @@ struct FindBobEnemySoldier : public FindBob {
 };
 
 
-/*
-This helper class repesents the complete map initialization
-info needed by the random map generator
-It can be converted to and from an "Id-String". The Id-String is a
-string-encoded version of the random map info. This Id-String can
-be handelled by the user/player more easily.
-The Id-String also contains some kind of check-sum to prevent ill
-ids to be used.
-*/
-struct UniqueRandomMapInfo {
-
-	enum Resource_Amount
-	{
-		raLow    = 0,
-		raMedium = 1,
-		raHigh   = 2
-	};
-
-	uint32_t mapNumber;
-	uint32_t w;
-	uint32_t h;
-	Resource_Amount resource_amount;
-
-	double   waterRatio;     //  How much of the map is water?
-	double   landRatio;      //  How much of the map is land?
-	double   wastelandRatio; //  How much of the "land" is wasteland?
-	int      numPlayers;     //  number of player to generate
-	bool     islandMode;     //  whether the world will be an island
-
-	//  other stuff
-	static bool setFromIdString
-		(UniqueRandomMapInfo & mapInfo_out, std::string const & mapIdString);
-	static void generateIdString
-		(std::string & mapIdsString_out, UniqueRandomMapInfo const & mapInfo);
-	static int  mapIdCharToNumber(char ch);
-	static char mapIdNumberToChar(int32_t num);
-
-};
-
 /** class Map
  *
  * This really identifies a map like it is in the game
@@ -208,14 +169,6 @@ struct Map : public ITransportCostCalculator {
 		 std::string const & worldname   =   "greenland",
 		 char        const * name        = _("No Name"),
 		 char        const * author      = _("Unknown"),
-		 char        const * description = _("no description defined"));
-
-	void create_random_map
-		(UniqueRandomMapInfo const & mapInfo,
-		 MapGenerator & gen,
-		 std::string const & worldname   =   "greenland",
-		 char        const * name        = _("No Name"),
-		 char        const * author      = _("Random Map Generator"),
 		 char        const * description = _("no description defined"));
 
 	void load_graphics();
@@ -468,33 +421,6 @@ private:
 
 	Map & operator= (Map const &);
 	explicit Map    (Map const &);
-
-	static uint8_t make_node_elevation
-		(double                      elevation,
-		 MapGenInfo          const &,
-		 Coords,
-		 UniqueRandomMapInfo const &);
-	static uint32_t * generate_random_value_map
-		(uint32_t w, uint32_t h, RNG & rng);
-
-	Terrain_Index figure_out_terrain
-		(MapGenInfo      const    &       mapGenInfo,
-		 uint32_t                  * const random2,
-		 uint32_t                  * const random3,
-		 uint32_t                  * const random4,
-		 Coords const c0, Coords const c1, Coords const c2,
-		 uint32_t const h1, uint32_t const h2, uint32_t const h3,
-		 UniqueRandomMapInfo const &       mapInfo,
-		 RNG                       &       rng,
-		 MapGenAreaInfo::MapGenTerrainType & terrType);
-
-	void generate_resources
-		(uint32_t            const * const random1,
-		 uint32_t            const * const random2,
-		 uint32_t            const * const random3,
-		 uint32_t            const * const random4,
-		 FCoords                     const fc,
-		 UniqueRandomMapInfo const &       mapInfo);
 
 };
 

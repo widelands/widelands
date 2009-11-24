@@ -40,14 +40,14 @@
 
 #include "random.h"
 
-using Widelands::NUMBER_OF_MAP_DIMENSIONS;
+using namespace Widelands;
 
 Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	(Editor_Interactive & parent)
 	:
 	UI::Window
 		(&parent,
-		 (parent.get_w() - 220) / 2, (parent.get_h() - 450) / 2, 220, 450,
+		 (parent.get_w() - 260) / 2, (parent.get_h() - 450) / 2, 260, 450,
 		 _("New Random Map")),
 	m_currentworld(0)
 {
@@ -407,17 +407,7 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 		eia.change_world();
 
 	Widelands::UniqueRandomMapInfo mapInfo;
-	mapInfo.w = Widelands::MAP_DIMENSIONS[m_w];
-	mapInfo.h = Widelands::MAP_DIMENSIONS[m_h];
-	mapInfo.waterRatio = static_cast<double>(m_waterval) / 100.0;
-	mapInfo.landRatio  = static_cast<double>(m_landval) / 100.0;
-	mapInfo.wastelandRatio = static_cast<double>(m_wastelandval) / 100.0;
-	mapInfo.mapNumber = m_mapNumber;
-	mapInfo.islandMode = m_island_mode->get_state();
-	mapInfo.numPlayers = 1;
-	mapInfo.resource_amount =
-		static_cast<Widelands::UniqueRandomMapInfo::Resource_Amount>
-			(m_res_amount);
+	set_map_info(mapInfo);
 
 	std::stringstream sstrm;
 	sstrm << "Random generated map\nRandom number = "
@@ -430,10 +420,13 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 		<< "ID = " << m_idEditbox->text() << "\n";
 
 	Widelands::MapGenerator gen(map, mapInfo, egbase);
-	map.create_random_map
-		(mapInfo, gen, m_worlds[m_currentworld].c_str(), _("No Name"),
+	map.create_empty_map
+		(mapInfo.w, mapInfo.h,
+		 m_worlds[m_currentworld].c_str(), _("No Name"),
 		 g_options.pull_section("global").get_string("realname", _("Unknown")),
 		 sstrm.str().c_str());
+	loader.step(_("Generating random map..."));
+	gen.create_random_map();
 
 	egbase.postload     ();
 	egbase.load_graphics(loader);
@@ -449,11 +442,11 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 
 void Main_Menu_New_Random_Map::id_edit_box_changed()
 {
-	Widelands::UniqueRandomMapInfo mapInfo;
+	UniqueRandomMapInfo mapInfo;
 
 	std::string str = m_idEditbox->text();
 
-	if (!Widelands::UniqueRandomMapInfo::setFromIdString(mapInfo, str))
+	if (!UniqueRandomMapInfo::setFromIdString(mapInfo, str, m_worlds))
 		m_goButton->set_enabled(false);
 	else {
 		std::stringstream sstrm;
@@ -462,21 +455,28 @@ void Main_Menu_New_Random_Map::id_edit_box_changed()
 
 		m_h = 0;
 		for (uint32_t ix = 0; ix < NUMBER_OF_MAP_DIMENSIONS; ++ix)
-			if (Widelands::MAP_DIMENSIONS[ix] == mapInfo.h)
+			if (MAP_DIMENSIONS[ix] == mapInfo.h)
 				m_h = ix;
 
 		m_w = 0;
 		for (uint32_t ix = 0; ix < NUMBER_OF_MAP_DIMENSIONS; ++ix)
-			if (Widelands::MAP_DIMENSIONS[ix] == mapInfo.w)
+			if (MAP_DIMENSIONS[ix] == mapInfo.w)
 				m_w = ix;
 
 		m_landval  = mapInfo.landRatio  * 100.0 + 0.49;
 		m_waterval = mapInfo.waterRatio * 100.0 + 0.49;
 		m_res_amount = mapInfo.resource_amount;
 
-		// TODO: Get world !!
-
 		m_res->set_title(m_res_amounts[m_res_amount].c_str());
+
+		// Get world
+
+		m_currentworld = 0;
+		while
+			(strcmp(mapInfo.worldName.c_str(), m_worlds[m_currentworld].c_str()))
+			++m_currentworld;
+		m_world->set_title
+			(Widelands::World::World(m_worlds[m_currentworld].c_str()).get_name());
 
 		button_clicked(-1);  // Update other values in UI as well
 
@@ -497,19 +497,7 @@ void Main_Menu_New_Random_Map::nr_edit_box_changed()
 			m_mapNumber = number;
 
 			Widelands::UniqueRandomMapInfo mapInfo;
-
-			mapInfo.h = Widelands::MAP_DIMENSIONS[m_h];
-			mapInfo.w = Widelands::MAP_DIMENSIONS[m_w];
-			mapInfo.waterRatio = static_cast<double>(m_waterval) / 100.0;
-			mapInfo.landRatio  = static_cast<double>(m_landval) / 100.0;
-			mapInfo.wastelandRatio = static_cast<double>(m_wastelandval) / 100.0;
-			mapInfo.mapNumber = m_mapNumber;
-			mapInfo.islandMode = m_island_mode->get_state();
-			mapInfo.numPlayers = 1;
-			mapInfo.resource_amount = static_cast
-				<Widelands::UniqueRandomMapInfo::Resource_Amount>
-					(m_res_amount);
-			// TODO: Set world !!!
+			set_map_info(mapInfo);
 
 			std::string idStr;
 			Widelands::UniqueRandomMapInfo::generateIdString(idStr, mapInfo);
@@ -522,4 +510,21 @@ void Main_Menu_New_Random_Map::nr_edit_box_changed()
 	} catch (...) {
 		m_goButton->set_enabled(false);
 	}
+}
+
+void Main_Menu_New_Random_Map::set_map_info
+	(Widelands::UniqueRandomMapInfo & mapInfo) const
+{
+	mapInfo.h = Widelands::MAP_DIMENSIONS[m_h];
+	mapInfo.w = Widelands::MAP_DIMENSIONS[m_w];
+	mapInfo.waterRatio = static_cast<double>(m_waterval) / 100.0;
+	mapInfo.landRatio  = static_cast<double>(m_landval) / 100.0;
+	mapInfo.wastelandRatio = static_cast<double>(m_wastelandval) / 100.0;
+	mapInfo.mapNumber = m_mapNumber;
+	mapInfo.islandMode = m_island_mode->get_state();
+	mapInfo.numPlayers = 1;
+	mapInfo.resource_amount = static_cast
+		<Widelands::UniqueRandomMapInfo::Resource_Amount>
+			(m_res_amount);
+	mapInfo.worldName = m_worlds[m_currentworld];
 }

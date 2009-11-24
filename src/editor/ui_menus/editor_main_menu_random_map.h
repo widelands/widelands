@@ -26,6 +26,10 @@
 
 #include <vector>
 
+namespace Widelands {
+	struct UniqueRandomMapInfo;
+}
+
 struct Editor_Interactive;
 namespace UI {
 template <typename T, typename ID> struct IDButton;
@@ -61,6 +65,8 @@ private:
 	void clicked_create_map();
 	void id_edit_box_changed();
 	void nr_edit_box_changed();
+
+	void set_map_info(Widelands::UniqueRandomMapInfo & mapInfo) const;
 };
 
 #endif
