@@ -81,6 +81,7 @@ Building_Descr::Building_Descr
 
 	// Parse build options
 	m_buildable = global_s.get_bool("buildable", true);
+	m_destructible = global_s.get_bool("destructible", true);
 	while
 		(Section::Value const * const v = global_s.get_next_val("enhancement"))
 		try {
@@ -304,16 +305,16 @@ Flag & Building::base_flag()
 }
 
 
-/*
-===============
-Return a bitfield of commands the owning player can issue for this building.
-The bits are (1 << PCap_XXX).
-By default, all buildable buildings can be bulldozed.
-===============
-*/
+/**
+ * \return a bitfield of commands the owning player can issue for this building.
+ *
+ * The bits are (1 << PCap_XXX).
+ * By default, all buildings can be bulldozed. If a building should not be
+ * destructible, "destructible=no" must be added to buildings conf.
+ */
 uint32_t Building::get_playercaps() const throw () {
 	uint32_t caps = 0;
-	if (descr().buildable() or descr().get_enhanced_building())
+	if (descr().destructible())
 		caps                                |= 1 << PCap_Bulldoze;
 	if (descr().enhancements().size())
 		caps |= 1 << PCap_Enhancable;

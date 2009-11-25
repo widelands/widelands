@@ -3,6 +3,7 @@
 
 size=big
 buildable=no
+destructible=no
 conquers=9
 
 [idle]

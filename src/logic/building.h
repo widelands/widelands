@@ -63,6 +63,7 @@ struct Building_Descr : public Map_Object_Descr {
 		 Tribe_Descr const &, EncodeData const *);
 
 	bool buildable() const {return m_buildable;}
+	bool destructible() const {return m_destructible;}
 	bool get_enhanced_building() const {return m_enhanced_building;}
 	typedef std::map<Ware_Index, uint8_t> Buildcost;
 	Buildcost const & buildcost() const throw () {return m_buildcost;}
@@ -109,6 +110,7 @@ protected:
 private:
 	const Tribe_Descr & m_tribe;
 	bool         m_buildable;       // the player can build this himself
+	bool         m_destructible;    // the player can destruct this himself
 	Buildcost    m_buildcost;
 	PictureID    m_buildicon;       // if buildable: picture in the build dialog
 	std::string  m_buildicon_fname; // filename for this icon
