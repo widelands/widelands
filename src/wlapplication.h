@@ -240,6 +240,8 @@ protected:
 	void setup_searchpaths(std::string argv0);
 	void setup_homedir();
 
+	void cleanup_replays();
+
 	/**
 	 * The commandline, conveniently repackaged
 	 * This is usually not empty, it contains at least the tuple

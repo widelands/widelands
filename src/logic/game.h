@@ -96,6 +96,7 @@ struct Game : public Editor_Game_Base {
 	void set_game_controller(GameController *);
 	GameController * gameController();
 	void set_write_replay(bool wr);
+	void set_write_syncstream(bool wr);
 	void save_syncstream(bool save);
 	void init_newgame (UI::ProgressWindow &, GameSettings const &);
 	void init_savegame(UI::ProgressWindow &, GameSettings const &);
@@ -251,13 +252,18 @@ private:
 	/// replays.
 	bool                 m_writereplay;
 
-	int32_t                            m_state;
+	/// Whether a syncsteam file should be created.
+	/// Defaults to \c false, and can be set to true for network games. The file
+	/// is written only if \ref m_writereplay is true too.
+	bool                 m_writesyncstream;
+
+	int32_t              m_state;
 
 	RNG                  m_rng;
 
 	Cmd_Queue            m_cmdqueue;
 
-	SaveHandler                    m_savehandler;
+	SaveHandler          m_savehandler;
 
 	ReplayReader * m_replayreader;
 	ReplayWriter * m_replaywriter;

@@ -76,6 +76,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <string>
+#include <ctime>
 
 #ifdef DEBUG
 #ifndef WIN32
@@ -270,6 +271,7 @@ m_default_datadirs     (true)
 	}
 	setup_homedir();
 	init_settings();
+	cleanup_replays();
 	init_hardware();
 
 	//make sure we didn't forget to read any global option
@@ -785,12 +787,14 @@ bool WLApplication::init_settings() {
 	s.get_int("panel_snap_distance");
 	s.get_int("speed_of_new_game");
 	s.get_int("autosave");
+	s.get_int("remove_replays");
 	s.get_bool("single_watchwin");
 	s.get_bool("auto_roadbuild_mode");
 	s.get_bool("workareapreview");
 	s.get_bool("nozip");
 	s.get_bool("snap_windows_only_when_overlapping");
 	s.get_bool("dock_windows_to_edges");
+	s.get_bool("remove_syncstreams");
 	s.get_string("nickname");
 	s.get_string("lasthost");
 	s.get_string("servername");
@@ -1213,7 +1217,11 @@ void WLApplication::show_usage()
 			 "                      of using the SDL\n"
 			 " --language=[de_DE|sv_SE|...]\n"
 			 "                      The locale to use.\n"
-			 "\n")
+			 " --remove_syncstreams=[true|false]\n"
+			 "                      Remove syncstream files on startup\n"
+			 " --remove_replays=[...]\n"
+			 "                      Remove replays after this amount of days.\n"
+			 "                      If this is 0 replays are not deleted.\n")
 		<<
 		_
 			("Sound options:\n"
@@ -2101,6 +2109,65 @@ void WLApplication::emergency_save(Widelands::Game & game) {
 		} catch (...) {
 			log ("Emergency save failed");
 			throw;
+		}
+	}
+}
+
+/**
+ * Delete the syncstream (.wss) files in the replay directory on startup
+ * Delete old replay files on startup
+ */
+void WLApplication::cleanup_replays()
+{
+	filenameset_t files;
+
+	Section & s = g_options.pull_section("global");
+
+	if (s.get_bool("remove_syncstreams", true)) {
+		g_fs->FindFiles(REPLAY_DIR, "*" REPLAY_SUFFIX ".wss", &files, 1);
+
+		for
+			(filenameset_t::iterator filename = files.begin();
+			 filename != files.end();
+			 ++filename)
+		{
+			log("Delete syncstream %s\n", filename->c_str());
+			g_fs->Unlink(*filename);
+		}
+	}
+
+	time_t tnow = time(0);
+
+	if (s.get_int("remove_replays", 0)) {
+		g_fs->FindFiles(REPLAY_DIR, "*" REPLAY_SUFFIX, &files, 1);
+
+		for
+			(filenameset_t::iterator filename = files.begin();
+			 filename != files.end();
+			 ++filename)
+		{
+			std::string file = g_fs->FS_Filename(filename->c_str());
+			std::string timestr = file.substr(0, file.find(" "));
+
+			if (19 != timestr.size())
+				continue;
+
+			tm tfile;
+			memset(&tfile, 0, sizeof(tm));
+
+			tfile.tm_mday = atoi(timestr.substr(8, 2).c_str());
+			tfile.tm_mon = atoi(timestr.substr(5, 2).c_str()) - 1;
+			tfile.tm_year = atoi(timestr.substr(0, 4).c_str()) - 1900;
+
+			double tdiff = std::difftime(tnow, mktime(&tfile)) / 86400;
+
+			if (tdiff > s.get_int("remove_replays"))
+			{
+				log("Delete replay %s\n", file.c_str());
+
+				g_fs->Unlink(*filename);
+				g_fs->Unlink(*filename + ".wgf");
+			}
 		}
 	}
 }

@@ -97,7 +97,18 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 #endif
 
 	if (m_dump) {
-		m_dump->Data(data, size);
+
+		try {
+			m_dump->Data(data, size);
+		} catch (_wexception const & e) {
+			log
+			("Writing to syncstream file %s failed. Stop synctream dump.",
+			m_dumpfname.c_str());
+
+			delete m_dump;
+			m_dump = 0;
+		}
+
 		if ((time - last_check_time) > 2000) {
 			if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
 				delete m_dump;
@@ -116,6 +127,7 @@ Game::Game() :
 	m_syncwrapper      (*this, m_synchash),
 	m_ctrl             (0),
 	m_writereplay      (true),
+	m_writesyncstream  (false),
 	m_state            (gs_notrunning),
 	m_cmdqueue         (*this),
 	m_replaywriter     (0),
@@ -179,6 +191,13 @@ void Game::set_write_replay(bool const wr)
 	assert(m_state == gs_notrunning || not wr);
 
 	m_writereplay = wr;
+}
+
+void Game::set_write_syncstream(bool const wr)
+{
+	assert(m_state == gs_notrunning);
+
+	m_writesyncstream = wr;
 }
 
 
@@ -480,9 +499,10 @@ bool Game::run
 			fname += m_ctrl->getGameDescription();
 		}
 		fname += REPLAY_SUFFIX;
-
+		assert(not m_replaywriter);
 		m_replaywriter = new ReplayWriter(*this, fname);
-		m_syncwrapper.StartDump(fname);
+		if (m_writesyncstream)
+			m_syncwrapper.StartDump(fname);
 		log("Replay writer has started\n");
 	}
 

@@ -145,6 +145,10 @@ void NetClient::run ()
 	d->server_is_waiting = true;
 
 	Widelands::Game game;
+#ifdef DEBUG
+	game.set_write_syncstream(true);
+#endif
+
 	try {
 		UI::ProgressWindow loaderUI("pics/progress.png");
 		std::vector<std::string> tipstext;
