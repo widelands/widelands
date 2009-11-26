@@ -1,10 +1,24 @@
 ### Build 15 (until now)
+- Replace the event type that allows or forbids a building type for a player
+  with 2 separate event types (for allow and forbid respectively). They can
+  handle multiple building types in the same event and the configuration dialog
+  is more complete, with icons for the building types. (svn:r4717)
+- Implement event types to set the frontier/flag style of a player (can also be
+  used in initializations). Also implement configuration dialogs for those
+  event types. (svn:r4709, svn:r4715).
 - Change the code so victorious soldiers conquer an opposing militarysite,
   instead of destroying it. (svn:r4706 - svn:r4711)
+- Fix bug that caused udenfined behaviour, particularly segmentations faults in
+  64-bit optimized builds. (svn:r4702)
 - Improve player's message queue: (svn:r4698)
     * Add only important and not doubled messages.
     * Play a sound, if a new message arrives.
     * Play special sounds at special events (e.g. "You are under attack")
+- Fix bug that a savegame, with a flag on a node that was not interior to the
+  flag's owner, could be loaded. (svn:r4695)
+- Fix bug that a scenario game could be started from a map, where a player did
+  not have a starting position, causing a failed assertion when trying to
+  center the view on the player's home location. (svn:r4694)
 - Fix out-of-bounds array access bug in network game lobby code. (svn:r4676)
 - Fix bug that panel_snap_distance and border_snap_distance were mixed up when
   initializing the spinboxes in the options menu. (svn:r4665)
