@@ -603,8 +603,6 @@ char const * Section::get_next_bool
 
 /**
  * Modifies/Creates the given key.
- * If duplicate is true, a duplicate key will be created if the key already
- * exists.
  */
 void Section::set_int(char const * const name, int32_t const value)
 {
@@ -627,8 +625,6 @@ void Section::set_string_duplicate
 
 /**
  * Modifies/Creates the given key.
- * If duplicate is true, a duplicate key will be created if the key already
- * exists.
  */
 void Section::set_Coords
 	(char const * const name, Widelands::Coords const value)
@@ -910,18 +906,18 @@ void Profile::read
 					// skip " or '
 					++line;
 
-					char * eot = line + strlen(line) - 1;
-					while (*eot != '"' && *eot != '\'') {
+					for
+						(char * eot = line + strlen(line) - 1;
+						 *eot != '"' && *eot != '\'';
+						 --eot)
 						*eot = 0;
-						--eot;
-					}
 					// NOTE: we leave the last '"' and do not remove them
 					tail = line;
 				} else {
 					tail = strchr(p, '=');
 					if (!tail)
 						throw wexception("invalid syntax: %s", line);
-					*tail++ = 0;
+					*tail++ = '\0';
 					key = p;
 					if (*tail == '_') {
 						tail += 1; // skip =_, which is only used for translations
@@ -947,14 +943,14 @@ void Profile::read
 						++tail;
 				}
 				if (tail) {
-					char * eot = tail + strlen(tail) - 1;
+					char * const eot = tail + strlen(tail) - 1;
 					if (*eot == '\'' || *eot == '"') {
-						*eot = 0;
+						*eot = '\0';
 						if (*tail) {
-							char * eot2 = tail + strlen(tail) - 1;
+							char * const eot2 = tail + strlen(tail) - 1;
 							if (*eot2 == '\'' || *eot2 == '"') {
 								reading_multiline = false;
-								*eot2 = 0;
+								*eot2 = '\0';
 							}
 						}
 					}

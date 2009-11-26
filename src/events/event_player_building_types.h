@@ -17,43 +17,40 @@
  *
  */
 
-#ifndef EVENT_ALLOW_BUILDING_H
-#define EVENT_ALLOW_BUILDING_H
+#ifndef EVENT_PLAYER_BUILDING_TYPES_H
+#define EVENT_PLAYER_BUILDING_TYPES_H
 
 #include "event.h"
 
-#include "logic/widelands.h"
-
-struct Event_Allow_Building_Option_Menu;
+#include <set>
 
 namespace Widelands {
 
-struct Editor_Game_Base;
 struct Tribe_Descr;
 
-/**
- * Allows/denies the player to build a certain building
- */
-struct Event_Allow_Building : public Event {
-	friend struct ::Event_Allow_Building_Option_Menu;
-	Event_Allow_Building(char const * name, State);
-	Event_Allow_Building
-		(Section &, Editor_Game_Base &, Tribe_Descr const * = 0);
+/// Abstract base for events involving a player and a set of building types.
+struct Event_Player_Building_Types : public Event {
+	Event_Player_Building_Types
+		(char const * const Name, State const S)
+		: Event(Name, S), m_player_number(1)
+	{}
+	Event_Player_Building_Types
+		(Section &, Editor_Game_Base &, Tribe_Descr const *);
+
+	virtual char const * action_name() const = 0; /// What the event type does.
 
 	int32_t option_menu(Editor_Interactive &);
 
-	void set_player(Player_Number);
-	State run(Game &);
-
 	void Write(Section &, Editor_Game_Base &) const;
 
-	void set_allow(bool t) {m_allow = t;}
-	bool get_allow() {return m_allow;}
-
-private:
-	Player_Number  m_player;
-	Building_Index m_building;
-	bool           m_allow;
+	Player_Number player_number() const {return m_player_number;}
+	void set_player(Player_Number);
+	typedef std::set<Building_Index> Building_Types;
+	Building_Types const & building_types() const {return m_building_types;}
+	Building_Types       & building_types()       {return m_building_types;}
+protected:
+	Player_Number  m_player_number;
+	Building_Types m_building_types;
 };
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -202,7 +202,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					sprintf(amount_string, "%u", j.current->second);
 
 					//  picture only of first ware type in group
-					UI::Table<intptr_t>::Entry_Record & tableEntry =
+					UI::Table<uintptr_t>::Entry_Record & tableEntry =
 						condTable.add(0);
 					tableEntry.set_picture
 						(0, tribe.get_ware_descr(*ware_types.begin())->icon());

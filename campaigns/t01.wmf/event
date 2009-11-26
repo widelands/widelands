@@ -70,14 +70,10 @@ height=300
 posy=1
 button_00=_ OK
 
-[Enable Ranger]
-type=allow_building
-version=2
+[Enable Ranger's Hut and Quarry]
+type=allow_building_types
+version=3
 building=rangers_hut
-
-[Enable Quarry]
-type=allow_building
-version=2
 building=quarry
 
 [Goto Al'thunran]

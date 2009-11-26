@@ -55,12 +55,7 @@ public:
 /**
  * See Signal
  */
-template<class T1>
-class Signal1 : public Object {
-	typedef void (Object::*fnT)(T1);
-	Object * _obj;
-	fnT _fn;
-public:
+template<typename T1> struct Signal1 : public Object {
 	Signal1() {_obj = 0; _fn = 0;}
 	template<class T>
 	void set(Object * const p, void (T::*f)(T1)) {
@@ -71,17 +66,16 @@ public:
 		_fn = 0;
 	}
 	void call(T1 t1) {if (_fn) (_obj->*_fn)(t1);}
+private:
+	typedef void (Object::*fnT)(T1);
+	Object * _obj;
+	fnT _fn;
 };
 
 /**
  * See Signal
  */
-template<class T1, class T2>
-class Signal2 : public Object {
-	typedef void (Object::*fnT)(T1, T2);
-	Object * _obj;
-	fnT _fn;
-public:
+template<typename T1, typename T2> struct Signal2 : public Object {
 	Signal2() {_obj = 0; _fn = 0;}
 	template<class T>
 	void set(Object * p, void (T::*f)(T1, T2)) {
@@ -92,6 +86,10 @@ public:
 		_fn = 0;
 	}
 	void call(T1 t1, T2 t2) {if (_fn) (_obj->*_fn)(t1, t2);}
+private:
+	typedef void (Object::*fnT)(T1, T2);
+	Object * _obj;
+	fnT _fn;
 };
 
 }

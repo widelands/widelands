@@ -20,7 +20,7 @@
 /// \file
 /// This is a place where the user interface links into the game logic code.
 
-#include "editor/ui_menus/event_allow_building_option_menu.h"
+#include "editor/ui_menus/event_player_building_types_option_menu.h"
 #include "editor/ui_menus/event_conquer_area_option_menu.h"
 #include "editor/ui_menus/event_message_box_option_menu.h"
 #include "editor/ui_menus/event_move_view_option_menu.h"
@@ -28,7 +28,7 @@
 #include "editor/ui_menus/event_set_player_flag_style_option_menu.h"
 #include "editor/ui_menus/event_unhide_area_option_menu.h"
 
-#include "event_allow_building.h"
+#include "event_player_building_types.h"
 #include "event_building.h"
 #include "event_conquer_area.h"
 #include "event_flag.h"
@@ -46,8 +46,8 @@
 
 namespace Widelands {
 
-int32_t Event_Allow_Building            ::option_menu(Editor_Interactive & eia)
-{Event_Allow_Building_Option_Menu               m(eia, *this); return m.run();}
+int32_t Event_Player_Building_Types     ::option_menu(Editor_Interactive & eia)
+{Event_Player_Building_Types_Option_Menu        m(eia, *this); return m.run();}
 
 int32_t Event_Building                  ::option_menu(Editor_Interactive &)
 {throw;}

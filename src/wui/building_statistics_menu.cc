@@ -342,7 +342,8 @@ void Building_Statistics_Menu::update() {
 		 i < nr_buildings;
 		 ++i)
 	{
-		Widelands::Building_Descr const & building = *tribe.get_building_descr(i);
+		Widelands::Building_Descr const & building =
+			*tribe.get_building_descr(i);
 		if (not (building.buildable() or building.get_enhanced_building()))
 			continue;
 
@@ -350,11 +351,11 @@ void Building_Statistics_Menu::update() {
 			player.get_building_statistics(i);
 
 		//  walk all entries, add new ones if needed
-		UI::Table<const intptr_t>::Entry_Record * te = 0;
+		UI::Table<uintptr_t const>::Entry_Record * te = 0;
 		const uint32_t table_size = m_table.size();
 		for (uint32_t l = 0; l < table_size; ++l) {
-			UI::Table<const intptr_t>::Entry_Record & er = m_table.get_record(l);
-			if (UI::Table<const intptr_t>::get(er) == i.value()) {
+			UI::Table<uintptr_t const>::Entry_Record & er = m_table.get_record(l);
+			if (UI::Table<uintptr_t const>::get(er) == i.value()) {
 				te = &er;
 				break;
 			}

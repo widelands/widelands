@@ -19,10 +19,11 @@
 
 #include "event_factory.h"
 
-#include "event_allow_building.h"
+#include "event_allow_building_types.h"
 #include "event_building.h"
 #include "event_conquer_area.h"
 #include "event_flag.h"
+#include "event_forbid_building_types.h"
 #include "event_immovable.h"
 #include "event_message_box.h"
 #include "event_move_view.h"
@@ -48,10 +49,13 @@ namespace Event_Factory {
 Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 	{
 		true,
-		"allow_building",         _("Allow building type"),
-		_
-			("Allows (or forbids) the construction of a building type for a "
-			 "player.")
+		"allow_building_types",      _("Allow building types"),
+		_("Allows the construction of buildings of certain types for a player.")
+	},
+	{
+		true,
+		"forbid_building_types",     _("Forbid building types"),
+		_("Forbids the construction of buildings of certain types for a player.")
 	},
 	{
 		false,
@@ -148,21 +152,22 @@ Event & create
 	(size_t const id, char const * const name, Event::State const state)
 {
 	switch (id) {
-	case  0: return *new Event_Allow_Building  (name, state);
-	case  1: return *new Event_Building        (name, state);
-	case  2: return *new Event_Conquer_Area    (name, state);
-	case  3: return *new Event_Flag            (name, state);
-	case  4: return *new Event_Immovable       (name, state);
-	case  5: return *new Event_Message_Box     (name, state);
-	case  6: return *new Event_Move_View       (name, state);
-	case  7: return *new Event_Reveal_Campaign (name, state);
-	case  8: return *new Event_Reveal_Objective(name, state);
-	case  9: return *new Event_Reveal_Scenario (name, state);
-	case 10: return *new Event_Road            (name, state);
-	case 11: return *new Event_Set_Timer       (name, state);
-	case 12: return *new Event_Unhide_Area     (name, state);
-	case 13: return *new Event_Set_Player_Frontier_Style(name, state);
-	case 14: return *new Event_Set_Player_Flag_Style    (name, state);
+	case  0: return *new Event_Allow_Building_Types     (name, state);
+	case  1: return *new Event_Forbid_Building_Types    (name, state);
+	case  2: return *new Event_Building                 (name, state);
+	case  3: return *new Event_Conquer_Area             (name, state);
+	case  4: return *new Event_Flag                     (name, state);
+	case  5: return *new Event_Immovable                (name, state);
+	case  6: return *new Event_Message_Box              (name, state);
+	case  7: return *new Event_Move_View                (name, state);
+	case  8: return *new Event_Reveal_Campaign          (name, state);
+	case  9: return *new Event_Reveal_Objective         (name, state);
+	case 10: return *new Event_Reveal_Scenario          (name, state);
+	case 11: return *new Event_Road                     (name, state);
+	case 12: return *new Event_Set_Timer                (name, state);
+	case 13: return *new Event_Unhide_Area              (name, state);
+	case 14: return *new Event_Set_Player_Frontier_Style(name, state);
+	case 15: return *new Event_Set_Player_Flag_Style    (name, state);
 	default:
 		assert(false);
 	}
@@ -181,27 +186,32 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 		type_name = "reveal_campaign";
 	if (not strcmp(type_name, "set_null_trigger"))
 		type_name = "set_timer";
+	if (not strcmp(type_name, "allow_building"))
+		type_name =
+			s.get_bool("allow", true) ? "allow_building_types" :
+			"forbid_building_types";
 
 	size_t i = 0;
 	while (strcmp(type_name, EVENT_TYPE_DESCRIPTIONS[i].id))
 		if (++i == nr_event_types())
 			throw wexception("invalid type \"%s\"", type_name);
 	switch (i) {
-	case  0: return *new Event_Allow_Building  (s, egbase);
-	case  1: return *new Event_Building        (s, egbase);
-	case  2: return *new Event_Conquer_Area    (s, egbase);
-	case  3: return *new Event_Flag            (s, egbase);
-	case  4: return *new Event_Immovable       (s, egbase);
-	case  5: return *new Event_Message_Box     (s, egbase);
-	case  6: return *new Event_Move_View       (s, egbase);
-	case  7: return *new Event_Reveal_Campaign (s, egbase);
-	case  8: return *new Event_Reveal_Objective(s, egbase);
-	case  9: return *new Event_Reveal_Scenario (s, egbase);
-	case 10: return *new Event_Road            (s, egbase);
-	case 11: return *new Event_Set_Timer       (s, egbase);
-	case 12: return *new Event_Unhide_Area     (s, egbase);
-	case 13: return *new Event_Set_Player_Frontier_Style(s, egbase);
-	case 14: return *new Event_Set_Player_Flag_Style    (s, egbase);
+	case  0: return *new Event_Allow_Building_Types     (s, egbase);
+	case  1: return *new Event_Forbid_Building_Types    (s, egbase);
+	case  2: return *new Event_Building                 (s, egbase);
+	case  3: return *new Event_Conquer_Area             (s, egbase);
+	case  4: return *new Event_Flag                     (s, egbase);
+	case  5: return *new Event_Immovable                (s, egbase);
+	case  6: return *new Event_Message_Box              (s, egbase);
+	case  7: return *new Event_Move_View                (s, egbase);
+	case  8: return *new Event_Reveal_Campaign          (s, egbase);
+	case  9: return *new Event_Reveal_Objective         (s, egbase);
+	case 10: return *new Event_Reveal_Scenario          (s, egbase);
+	case 11: return *new Event_Road                     (s, egbase);
+	case 12: return *new Event_Set_Timer                (s, egbase);
+	case 13: return *new Event_Unhide_Area              (s, egbase);
+	case 14: return *new Event_Set_Player_Frontier_Style(s, egbase);
+	case 15: return *new Event_Set_Player_Flag_Style    (s, egbase);
 	default:
 		assert(false);
 	}

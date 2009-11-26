@@ -34,28 +34,16 @@ namespace UI {
 struct Scrollbar;
 template <typename T, typename ID> struct Callback_IDButton;
 
-/**
- * A table with columns and lines. The entries can be sorted by columns by
- * clicking on the column header button.
- *
- * Entry can be
- * 1. a reference type,
- * 2. a pointer type or
- * 3. intptr_t.
- */
+/// A table with columns and lines. The entries can be sorted by columns by
+/// clicking on the column header button.
+///
+/// Entry can be
+///   1. a reference type,
+///   2. a pointer type or
+///   3. uintptr_t.
 template<typename Entry> struct Table {
 
 	struct Entry_Record {
-		Entry_Record(Entry entry);
-
-		void set_string(uint32_t column, const std::string &);
-		std::string & get_string(uint32_t column) const;
-		Entry entry() const throw ();
-		void set_color(RGBColor);
-
-		bool     use_color() const throw ();
-		RGBColor get_color() const throw ();
-
 	};
 
 	Table
@@ -66,16 +54,21 @@ template<typename Entry> struct Table {
 
 	Signal1<uint32_t> selected;
 	Signal1<uint32_t> double_clicked;
+	Signal2<uint32_t, uint8_t> checked;
+	Signal2<uint32_t, uint8_t> unchecked;
 
 	/// A column that has a title is sortable (by clicking on the title).
 	void add_column
 		(uint32_t width,
 		 std::string const & title = std::string(),
-		 Align                     = Align_Left);
+		 Align                                  = Align_Left,
+		 bool                is_checkbox_column = false);
+
+	void set_column_title(uint8_t col, std::string const & title);
 
 	void clear();
-	void set_sort_column(uint32_t col) throw ();
-	uint32_t get_sort_colum() const throw ();
+	void set_sort_column(uint8_t col) throw ();
+	uint8_t get_sort_colum() const throw ();
 	bool get_sort_descending() const throw ();
 
 	void sort
@@ -120,11 +113,10 @@ template <> struct Table<void *> : public Panel {
 		Entry_Record(void * entry);
 
 		void set_picture
-			(uint32_t column,
-			 PictureID picid, std::string const & = std::string());
-		void set_string(uint32_t column, const std::string &);
-		PictureID get_picture(uint32_t column) const;
-		const std::string & get_string(uint32_t column) const;
+			(uint8_t col, PictureID picid, std::string const & = std::string());
+		void set_string(uint8_t col, std::string const &);
+		PictureID get_picture(uint8_t col) const;
+		std::string const & get_string(uint8_t col) const;
 		void * entry() const throw () {return m_entry;}
 		void set_color(const  RGBColor c) {
 			use_clr = true;
@@ -133,6 +125,10 @@ template <> struct Table<void *> : public Panel {
 
 		bool     use_color() const throw () {return use_clr;}
 		RGBColor get_color() const throw () {return clr;}
+
+		void set_checked(uint8_t col, bool checked);
+		void toggle     (uint8_t col);
+		bool  is_checked(uint8_t col) const;
 
 	private:
 		friend struct Table<void *>;
@@ -146,7 +142,6 @@ template <> struct Table<void *> : public Panel {
 		std::vector<_data> m_data;
 	};
 
-public:
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
@@ -159,19 +154,22 @@ public:
 	void add_column
 		(uint32_t width,
 		 std::string const & title = std::string(),
-		 Align                     = Align_Left);
+		 Align                                  = Align_Left,
+		 bool                is_checkbox_column = false);
+
+	void set_column_title(uint8_t col, std::string const & title);
 
 	void clear();
-	void set_sort_column(uint32_t const col) {
+	void set_sort_column(uint8_t const col) {
 		assert(col < m_columns.size());
 		m_sort_column = col;
 	}
-	uint32_t get_sort_colum() const throw () {return m_sort_column;}
+	uint8_t get_sort_colum() const throw () {return m_sort_column;}
 	bool  get_sort_descending() const throw () {return m_sort_descending;}
 	void set_sort_descending(bool const descending) {
 		m_sort_descending = descending;
 	}
-	void set_font(std::string const & fontname, int32_t fontsize) {
+	void set_font(std::string const & fontname, int32_t const fontsize) {
 		m_fontname = fontname;
 		m_fontsize = fontsize;
 		m_headerheight = fontsize * 6 / 5;
@@ -236,6 +234,7 @@ private:
 		Callback_IDButton<Table, Columns::size_type> * btn;
 		uint32_t                              width;
 		Align                                 alignment;
+		bool                                           is_checkbox_column;
 	};
 
 	static const int32_t ms_darken_value = -20;
@@ -375,8 +374,8 @@ template <typename Entry> struct Table<Entry &> : public Table<void *> {
 	}
 };
 
-compile_assert(sizeof(void *) == sizeof(intptr_t));
-template <> struct Table<intptr_t> : public Table<void *> {
+compile_assert(sizeof(void *) == sizeof(uintptr_t));
+template <> struct Table<uintptr_t> : public Table<void *> {
 	typedef Table<void *> Base;
 	Table
 		(Panel * parent,
@@ -385,27 +384,27 @@ template <> struct Table<intptr_t> : public Table<void *> {
 		: Base(parent, x, y, w, h, descending)
 	{}
 
-	Entry_Record & add(intptr_t const entry, bool const select_this = false) {
+	Entry_Record & add(uintptr_t const entry, bool const select_this = false) {
 		return Base::add(reinterpret_cast<void *>(entry), select_this);
 	}
 
-	intptr_t operator[](uint32_t const i) const throw () {
-		return reinterpret_cast<intptr_t>(Base::operator[](i));
+	uintptr_t operator[](uint32_t const i) const throw () {
+		return reinterpret_cast<uintptr_t>(Base::operator[](i));
 	}
-	static intptr_t get(Entry_Record const & er) {
-		return reinterpret_cast<intptr_t>(er.entry());
+	static uintptr_t get(Entry_Record const & er) {
+		return reinterpret_cast<uintptr_t>(er.entry());
 	}
 
-	Entry_Record * find(intptr_t const entry) const {
+	Entry_Record * find(uintptr_t const entry) const {
 		return Base::find(reinterpret_cast<void const *>(entry));
 	}
 
-	intptr_t get_selected() const {
-		return reinterpret_cast<intptr_t>(Base::get_selected());
+	uintptr_t get_selected() const {
+		return reinterpret_cast<uintptr_t>(Base::get_selected());
 	}
 };
-template <> struct Table<const intptr_t> : public Table<intptr_t> {
-	typedef Table<intptr_t> Base;
+template <> struct Table<uintptr_t const> : public Table<uintptr_t> {
+	typedef Table<uintptr_t> Base;
 	Table
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,

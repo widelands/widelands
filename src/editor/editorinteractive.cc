@@ -177,10 +177,18 @@ void Editor_Interactive::load(std::string const & filename) {
 		if (strcmp(map.get_world_name(), old_world_name.c_str()))
 			change_world();
 	}
-
+	{ //  Load all tribes into memory
+		std::vector<std::string> tribenames;
+		Widelands::Tribe_Descr::get_all_tribenames(tribenames);
+		container_iterate_const(std::vector<std::string>, tribenames, i) {
+			loader_ui.stepf(_("Loading tribe: %s"), i.current->c_str());
+			egbase().manually_load_tribe(*i.current);
+		}
+	}
 	loader_ui.step (_("Loading world data"));
 	ml->load_world();
 	ml->load_map_complete(egbase(), true);
+	loader_ui.step(_("Loading graphics..."));
 	egbase().load_graphics(loader_ui);
 	register_overlays();
 
@@ -586,23 +594,24 @@ void Editor_Interactive::run_editor(std::string const & filename)
 					(64, 64, "greenland", _("No Name"),
 					 g_options.pull_section("global").get_string
 					 	("realname", _("Unknown")));
+
+				{ //  Load all tribes into memory
+					std::vector<std::string> tribenames;
+					Widelands::Tribe_Descr::get_all_tribenames(tribenames);
+					container_iterate_const(std::vector<std::string>, tribenames, i)
+					{
+						loader_ui.stepf(_("Loading tribe: %s"), i.current->c_str());
+						editor.manually_load_tribe(*i.current);
+					}
+				}
+				loader_ui.step(_("Loading graphics..."));
+				editor.load_graphics(loader_ui);
+			loader_ui.step(std::string());
 			} else {
 				loader_ui.stepf("Loading map \"%s\"...", filename.c_str());
 				eia.load(filename);
 			}
 		}
-
-		{ //  Load all tribes into memory
-			std::vector<std::string> tribenames;
-			Widelands::Tribe_Descr::get_all_tribenames(tribenames);
-			container_iterate_const(std::vector<std::string>, tribenames, i) {
-				loader_ui.stepf(_("Loading tribe: %s"), i.current->c_str());
-				editor.manually_load_tribe(*i.current);
-			}
-		}
-		loader_ui.step(_("Loading graphics..."));
-		editor.load_graphics(loader_ui);
-		loader_ui.step(std::string());
 
 		eia.select_tool(eia.tools.increase_height, Editor_Tool::First);
 		editor.postload();

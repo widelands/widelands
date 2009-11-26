@@ -117,13 +117,13 @@ area=6
 duration=5000
 
 [Enable Barracks]
-type=allow_building
-version=1
+type=allow_building_types
+version=3
 building=barracks
 
 [Enable Lumberjack]
-type=allow_building
-version=1
+type=allow_building_types
+version=3
 building=lumberjacks_house
 
 [Saledus 1]
@@ -206,8 +206,8 @@ version=2
 objective=Build Sawmill and Lumberjacks
 
 [Enable Sawmill]
-type=allow_building
-version=1
+type=allow_building_types
+version=3
 building=sawmill
 
 [Amalea 3]
@@ -231,8 +231,8 @@ version=2
 objective=Build Forester
 
 [Enable Forester]
-type=allow_building
-version=1
+type=allow_building_types
+version=3
 building=foresters_house
 
 [Set Sawmill and Lumberjacks complete]
@@ -261,8 +261,8 @@ version=2
 objective=Build Quarry
 
 [Enable Quarry]
-type=allow_building
-version=1
+type=allow_building_types
+version=2
 building=quarry
 
 [Saledus 4]

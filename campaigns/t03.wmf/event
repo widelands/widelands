@@ -358,46 +358,15 @@ height="300"
 posy="1"
 button_00="OK"
 
-[Enable Fisher]
-type="allow_building"
-player="1"
-version="2"
+[Enable small food economy]
+type=allow_building_types
+version=3
 building="fishers_hut"
-
-[Enable Hunter]
-type="allow_building"
-player="1"
-version="2"
 building="hunters_hut"
-
-[Enable Gamekeeper]
-type="allow_building"
-player="1"
-version="2"
 building="gamekeepers_hut"
-
-[Enable Tavern]
-type="allow_building"
-player="1"
-version="2"
 building="tavern"
-
-[Enable Farm]
-type="allow_building"
-player="1"
-version="2"
 building="farm"
-
-[Enable Well]
-type="allow_building"
-player="1"
-version="2"
 building="well"
-
-[Enable Bakery]
-type="allow_building"
-player="1"
-version="2"
 building="bakery"
 
 [Reveal Objective 1 - Small Food Economy]
@@ -468,16 +437,13 @@ posy="1"
 button_00="OK"
 
 [Disable Sentry]
-type="allow_building"
-player="1"
-allow="false"
-version="2"
+type=forbid_building_types
+version=3
 building="sentry"
 
 [Enable Donjon]
-type="allow_building"
-player="1"
-version="2"
+type=allow_building_types
+version=3
 building="donjon"
 
 [Reveal Objective 2 - Build a donjon]
@@ -502,22 +468,11 @@ height="300"
 posy="1"
 button_00="OK"
 
-[Reenable Sentry]
-type="allow_building"
-player="1"
-version="2"
+[Reenable Sentry and Enable Medium Military Buildings]
+type=allow_building_types
+version=3
 building="sentry"
-
-[Enable Stronghold]
-type="allow_building"
-player="1"
-version="2"
 building="stronghold"
-
-[Enable Barrier]
-type="allow_building"
-player="1"
-version="2"
 building="barrier"
 
 [Reveal Objective 3 - Explore further]
@@ -579,46 +534,15 @@ type="reveal_objective"
 version="2"
 objective="Build mining economy"
 
-[Enable Coal Mine]
-type="allow_building"
-player="1"
-version="2"
+[Enable Mines and Metal Industry]
+type=allow_building_types
+version=3
 building="coalmine"
-
-[Enable Ore Mine]
-type="allow_building"
-player="1"
-version="2"
 building="oremine"
-
-[Enable Gold Mine]
-type="allow_building"
-player="1"
-version="2"
 building="goldmine"
-
-[Enable Granite Mine]
-type="allow_building"
-player="1"
-version="2"
 building="granitemine"
-
-[Enable Smelting Works]
-type="allow_building"
-player="1"
-version="2"
 building="smelting_works"
-
-[Enable Metalworks]
-type="allow_building"
-player="1"
-version="2"
 building="metalworks"
-
-[Enable Burner]
-type="allow_building"
-player="1"
-version="2"
 building="burners_house"
 
 [Set Mining Economy Trigger]
@@ -669,9 +593,8 @@ version="2"
 objective="Build a fortress"
 
 [Enable Fortress]
-type="allow_building"
-player=1
-version="2"
+type=allow_building_types
+version=3
 building="fortress"
 
 [Story Note 3]
@@ -732,100 +655,24 @@ type="reveal_objective"
 version="2"
 objective="Build a helmsmithy"
 
-[Enable Axefactory]
-type="allow_building"
-player=1
-version="2"
+[Enable Training, Deep Mining and Warehouse]
+type=allow_building_types
+version=3
 building="axefactory"
-
-[Enable Warmill]
-type="allow_building"
-player=1
-version="2"
 building="warmill"
-
-[Enable Helmsmithy]
-type="allow_building"
-player=1
-version="2"
 building="helmsmithy"
-
-[Enable Battle Arena]
-type="allow_building"
-player=1
-version="2"
 building="battlearena"
-
-[Enable Trainingscamp]
-type="allow_building"
-player=1
-version="2"
 building="trainingscamp"
-
-[Enable Inn]
-type="allow_building"
-player=1
-version="2"
 building="inn"
-
-[Enable Big Inn]
-type="allow_building"
-player=1
-version="2"
 building="big_inn"
-
-[Enable Deep Coal Mine]
-type="allow_building"
-player=1
-version="2"
 building="deep_coalmine"
-
-[Enable Deep Gold Mine]
-type="allow_building"
-player=1
-version="2"
 building="deep_goldmine"
-
-[Enable Deep Ore Mine]
-type="allow_building"
-player=1
-version="2"
 building="deep_oremine"
-
-[Enable Deeper Coal Mine]
-type="allow_building"
-player=1
-version="2"
 building="deeper_coalmine"
-
-[Enable Deeper Gold Mine]
-type="allow_building"
-player=1
-version="2"
 building="deeper_goldmine"
-
-[Enable Deeper Ore Mine]
-type="allow_building"
-player=1
-version="2"
 building="deeper_oremine"
-
-[Enable Warehouse]
-type="allow_building"
-player=1
-version="2"
 building="warehouse"
-
-[Enable Microbrewery]
-type="allow_building"
-player=1
-version="2"
 building="micro-brewery"
-
-[Enable Brewery]
-type="allow_building"
-player=1
-version="2"
 building="brewery"
 
 [Set Trainingssites complete trigger]

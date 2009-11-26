@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@ private:
 	Interactive_Player & iaplayer() const;
 	UI::Listselect<Widelands::Ware_Index> wares;
 	UI::Listselect<Widelands::Building_Index> prodSites;
-	UI::Table     <intptr_t> condTable;
+	UI::Table     <uintptr_t>                 condTable;
 	UI::Multiline_Textarea    descrTxt;
 	Widelands::Item_Ware_Descr const * selectedWare;
 	void fillWares();

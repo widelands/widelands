@@ -63,9 +63,7 @@ Event_Set_Player_Flag_Style_Option_Menu
 }
 
 
-void Event_Set_Player_Flag_Style_Option_Menu::draw
-	(RenderTarget & dst)
-{
+void Event_Set_Player_Flag_Style_Option_Menu::draw(RenderTarget & dst) {
 	UI::Window::draw(dst);
 	{
 		char buffer[4];

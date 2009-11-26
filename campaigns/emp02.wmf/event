@@ -251,14 +251,10 @@ type=reveal_objective
 version=2
 objective=Build military buildings
 
-[Enable Barracks]
-type=allow_building
-version=1
+[Enable Small Military Buildings]
+type=allow_building_types
+version=3
 building=barracks
-
-[Enable Sentry]
-type=allow_building
-version=1
 building=sentry
 
 [Show Marblemountains]
@@ -293,14 +289,10 @@ type=reveal_objective
 version=2
 objective=Build Marblemine
 
-[Enable Marblemine]
-type=allow_building
-version=1
+[Enable Marble Mining]
+type=allow_building_types
+version=3
 building=marblemine
-
-[Enable Deep Marblemine]
-type=allow_building
-version=1
 building=deep_marblemine
 
 [Show Ironmountains]
@@ -342,54 +334,18 @@ type=reveal_objective
 version=2
 objective=Build Mining infrastructure
 
-[Enable Coalmine]
-type=allow_building
-version=1
+[Enable Metal Industry and Stonemason's House]
+type=allow_building_types
+version=3
 building=coalmine
-
-[Enable Deep Coalmine]
-type=allow_building
-version=1
 building=deep_coalmine
-
-[Enable Oremine]
-type=allow_building
-version=1
 building=oremine
-
-[Enable Deep Oremine]
-type=allow_building
-version=1
 building=deep_oremine
-
-[Enable Stonemason]
-type=allow_building
-version=1
 building=stonemasons_house
-
-[Enable Toolsmith]
-type=allow_building
-version=1
 building=toolsmithy
-
-[Enable Armoursmith]
-type=allow_building
-version=1
 building=armoursmithy
-
-[Enable Weaponsmith]
-type=allow_building
-version=1
 building=weaponsmithy
-
-[Enable Smelter]
-type=allow_building
-version=1
 building=smelting_works
-
-[Enable Burner]
-type=allow_building
-version=1
 building=burners_house
 
 [Set Mining infrastructure-trigger]
@@ -424,64 +380,20 @@ type=reveal_objective
 version=2
 objective=Build Food infrastructure
 
-[Enable Well]
-type=allow_building
-version=1
+[Enable Food Production]
+type=allow_building_types
+version=3
 building=well
-
-[Enable Farm]
-type=allow_building
-version=1
 building=farm
-
-[Enable Brewery]
-type=allow_building
-version=1
 building=brewery
-
-[Enable Vineyard]
-type=allow_building
-version=1
 building=vineyard
-
-[Enable Winery]
-type=allow_building
-version=1
 building=winery
-
-[Enable Mill]
-type=allow_building
-version=1
 building=mill
-
-[Enable Bakery]
-type=allow_building
-version=1
 building=bakery
-
-[Enable Hunter]
-type=allow_building
-version=1
 building=hunters_house
-
-[Enable Piggery]
-type=allow_building
-version=1
 building=piggery
-
-[Enable Tavern]
-type=allow_building
-version=1
 building=tavern
-
-[Enable Inn]
-type=allow_building
-version=1
 building=inn
-
-[Enable Fisher]
-type=allow_building
-version=1
 building=fishers_house
 
 [Show Barbarians 1]
@@ -524,19 +436,11 @@ type=reveal_objective
 version=2
 objective=Build bigger military buildings
 
-[Enable Outpost]
-type=allow_building
-version=1
+[Enable Medium Military Buildings]
+type=allow_building_types
+version=3
 building=outpost
-
-[Enable Barrier]
-type=allow_building
-version=1
 building=barrier
-
-[Enable Tower]
-type=allow_building
-version=1
 building=tower
 
 [Set Bigger military building-trigger]
@@ -563,8 +467,8 @@ posy=1
 button_00=OK
 
 [Enable Fortress]
-type=allow_building
-version=1
+type=allow_building_types
+version=3
 building=fortress
 
 [Reveal Objective 7 - Attack]

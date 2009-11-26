@@ -23,9 +23,10 @@
 #include "constructionsite.h"
 #include "critter_bob.h"
 #include "editor_game_base.h"
-#include "events/event_allow_building.h"
+#include "events/event_allow_building_types.h"
 #include "events/event_building.h"
 #include "events/event_conquer_area.h"
+#include "events/event_forbid_building_types.h"
 #include "events/event_set_player_frontier_style.h"
 #include "events/event_set_player_flag_style.h"
 #include "events/event_unhide_area.h"
@@ -258,10 +259,19 @@ Tribe_Descr::Tribe_Descr
 								throw game_data_error("player key is not allowed");
 							else if   (event_s->get_string("point"))
 								throw game_data_error("point key is not allowed");
-							else if   (not strcmp(event_name, "allow_building")) {
-								event_s->set_int("version", 2);
+							else if   (not strcmp(event_name, "allow_building_types"))
+							{
+								event_s->set_int("version", 3);
 								event =
-									new Event_Allow_Building(*event_s, egbase, this);
+									new Event_Allow_Building_Types
+										(*event_s, egbase, this);
+							} else if
+								(not strcmp(event_name, "forbid_building_types"))
+							{
+								event_s->set_int("version", 3);
+								event =
+									new Event_Forbid_Building_Types
+										(*event_s, egbase, this);
 							} else if
 								(Building_Index const building =
 								 	building_index(event_name))

@@ -162,89 +162,50 @@ is_modal=true
 posy=1
 button_00=_OK
 
-[Enable Coal Mine]
-type=allow_building
-version=1
+[Enable Mines]
+type=allow_building_types
+version=3
 building=coalmine
-
-[Enable Ore Mine]
-type=allow_building
-version=1
 building=oremine
-
-[Enable Gold Mine]
-type=allow_building
-version=1
 building=goldmine
-
-[Enable Granite Mine]
-type=allow_building
-version=1
 building=granitemine
 
-[Enable Hunter]
-type=allow_building
-version=1
+[Enable Food Production]
+type=allow_building_types
+version=3
 building=hunters_hut
-
-[Enable Gamekeeper]
-type=allow_building
-version=1
 building=gamekeepers_hut
-
-[Enable Tavern]
-type=allow_building
-version=1
 building=tavern
-
-[Enable Farm]
-type=allow_building
-version=1
 building=farm
-
-[Enable Well]
-type=allow_building
-version=1
 building=well
-
-[Enable Bakery]
-type=allow_building
-version=1
 building=bakery
 
 [Enable Smelter]
-type=allow_building
-version=1
+type=allow_building_types
+version=3
 building=smelting_works
 
-[Enable Burner]
-type=allow_building
-version=1
-building=burners_house
-
-[Enable Inn]
-type=allow_building
-version=1
+[Enable Deep Mining]
+type=allow_building_types
+version=3
 building=inn
-
-[Enable Deep Coal Mine]
-type=allow_building
-version=1
 building=deep_coalmine
 
 [Enable Hardener]
-type=allow_building
-version=1
+type=allow_building_types
+version=3
 building=hardener
 
-[Enable Grinder]
-type=allow_building
-version=1
+[Enable Grout Production]
+type=allow_building_types
+version=3
 building=lime_kiln
+building=well
+building=burners_house
 
 [Enable Fernery]
-type=allow_building
-version=1
+type=allow_building_types
+version=3
 building=fernery
 
 [Order Msg 01]

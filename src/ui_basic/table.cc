@@ -27,9 +27,11 @@
 #include "wlapplication.h"
 
 namespace UI {
+
+#define CHECKBOX_VALUE_PREFIX "__[Table<void *>::Table]::checkbox value::"
+static std::string const checkbox_value_false = CHECKBOX_VALUE_PREFIX "0";
+
 /**
- * Initialize a panel
- *
  * Args: parent  parent panel
  *       x       coordinates of the Table
  *       y
@@ -70,7 +72,10 @@ Table<void *>::~Table()
 
 /// Add a new column to this table.
 void Table<void *>::add_column
-	(uint32_t const width, std::string const & title, Align const alignment)
+	(uint32_t            const width,
+	 std::string const &       title,
+	 Align               const alignment,
+	 bool                const is_checkbox_column)
 {
 
 	//  If there would be existing entries, they would not get the new column.
@@ -92,7 +97,8 @@ void Table<void *>::add_column
 				:
 				0,
 				width,
-				alignment
+				alignment,
+				is_checkbox_column
 		};
 		m_columns.push_back(c);
 	}
@@ -105,10 +111,91 @@ void Table<void *>::add_column
 				 false);
 		m_scrollbar->moved.set(this, &Table::set_scrollpos);
 		m_scrollbar->set_steps(1);
-		uint32_t lineheight = g_fh->get_fontheight(m_fontname, m_fontsize);
+		uint32_t const lineheight = g_fh->get_fontheight(m_fontname, m_fontsize);
 		m_scrollbar->set_singlestepsize(lineheight);
 		m_scrollbar->set_pagesize(get_h() - lineheight);
 	}
+}
+
+void Table<void *>::set_column_title
+	(uint8_t const col, std::string const & title)
+{
+	assert(col < m_columns.size());
+	Column & column = m_columns.at(col);
+	if (not column.btn and title.size()) { //  no title before, but now
+		uint32_t complete_width = 0;
+		for (uint8_t i = 0; i < col; ++i)
+			complete_width += m_columns.at(i).width;
+		column.btn =
+			new Callback_IDButton<Table, Columns::size_type>
+				(this,
+				 complete_width, 0, column.width, m_headerheight,
+				 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+				 &Table::header_button_clicked, *this, col,
+				 title, "", true, false, m_fontname, m_fontsize);
+	} else if (column.btn and title.empty()) { //  had title before, not now
+		delete column.btn;
+		column.btn = 0;
+	} else
+		column.btn->set_title(title);
+}
+
+void Table<void *>::Entry_Record::set_checked
+	(uint8_t const col, bool const checked)
+{
+	_data & cell = m_data.at(col);
+
+	//  The string representation of a checkbox value must be
+	//  CHECKBOX_VALUE_PREFIX followed by '0' or '1'.
+	assert
+		(not cell.d_string.compare
+		 	(0, strlen(CHECKBOX_VALUE_PREFIX), CHECKBOX_VALUE_PREFIX));
+	assert(cell.d_string.size() == strlen(CHECKBOX_VALUE_PREFIX) + 1);
+	assert
+		(cell.d_string.at(strlen(CHECKBOX_VALUE_PREFIX)) == '0' or
+		 cell.d_string.at(strlen(CHECKBOX_VALUE_PREFIX)) == '1');
+	cell.d_string.at(strlen(CHECKBOX_VALUE_PREFIX)) = checked ? '1' : '0';
+	cell.d_picture =
+		g_gr->get_picture
+			(PicMod_UI,
+			 checked ? "pics/checkbox_checked.png" : "pics/checkbox_empty.png");
+}
+
+void Table<void *>::Entry_Record::toggle     (uint8_t const col) {
+	_data & cell = m_data.at(col);
+
+	//  The string representation of a checkbox value must be
+	//  CHECKBOX_VALUE_PREFIX followed by '0' or '1'.
+	assert
+		(not cell.d_string.compare
+		 	(0, strlen(CHECKBOX_VALUE_PREFIX), CHECKBOX_VALUE_PREFIX));
+	assert(cell.d_string.size() == strlen(CHECKBOX_VALUE_PREFIX) + 1);
+	if        (cell.d_string.at(strlen(CHECKBOX_VALUE_PREFIX)) == '0') {
+		cell.d_string.at(strlen(CHECKBOX_VALUE_PREFIX)) = '1';
+		cell.d_picture =
+			g_gr->get_picture(PicMod_UI, "pics/checkbox_checked.png");
+	} else if (cell.d_string.at(strlen(CHECKBOX_VALUE_PREFIX)) == '1') {
+		cell.d_string.at(strlen(CHECKBOX_VALUE_PREFIX)) = '0';
+		cell.d_picture =
+			g_gr->get_picture(PicMod_UI, "pics/checkbox_empty.png");
+	} else
+		assert(false);
+}
+
+
+bool Table<void *>::Entry_Record::is_checked(uint8_t const col) const {
+	_data const & cell = m_data.at(col);
+
+	//  The string representation of a checkbox value must be
+	//  CHECKBOX_VALUE_PREFIX followed by '0' or '1'.
+	assert
+		(not cell.d_string.compare
+		 	(0, strlen(CHECKBOX_VALUE_PREFIX), CHECKBOX_VALUE_PREFIX));
+	assert(cell.d_string.size() == strlen(CHECKBOX_VALUE_PREFIX) + 1);
+	assert
+		(cell.d_string.at(strlen(CHECKBOX_VALUE_PREFIX)) == '0' or
+		 cell.d_string.at(strlen(CHECKBOX_VALUE_PREFIX)) == '1');
+	return cell.d_string.at(strlen(CHECKBOX_VALUE_PREFIX)) == '1';
 }
 
 Table<void *>::Entry_Record * Table<void *>::find
@@ -184,8 +271,9 @@ void Table<void *>::draw(RenderTarget & dst)
 
 		Columns::size_type const nr_columns = m_columns.size();
 		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
-			uint32_t const curw      = m_columns[i].width;
-			Align    const alignment = m_columns[i].alignment;
+			Column const & column    = m_columns[i];
+			uint32_t const curw      = column.width;
+			Align    const alignment = column.alignment;
 
 			PictureID           const entry_picture = er.get_picture(i);
 			std::string const &       entry_string  = er.get_string (i);
@@ -226,7 +314,9 @@ void Table<void *>::draw(RenderTarget & dst)
 /**
  * Handle mouse presses: select the appropriate entry
  */
-bool Table<void *>::handle_mousepress(const Uint8 btn, int32_t, int32_t y) {
+bool Table<void *>::handle_mousepress
+	(Uint8 const btn, int32_t x, int32_t const y)
+{
 	switch (btn) {
 	case SDL_BUTTON_WHEELDOWN:
 	case SDL_BUTTON_WHEELUP:
@@ -241,9 +331,23 @@ bool Table<void *>::handle_mousepress(const Uint8 btn, int32_t, int32_t y) {
 		m_last_selection  = m_selection;
 		m_last_click_time = time;
 
-		y = (y + m_scrollpos - m_headerheight) / get_lineheight();
-		if (static_cast<size_t>(y) < m_entry_records.size())
+		uint32_t const row =
+			(y + m_scrollpos - m_headerheight) / get_lineheight();
+		if (row < m_entry_records.size()) {
 			select(y);
+			Columns::size_type const nr_cols = m_columns.size();
+			for (uint8_t col = 0; col < nr_cols; ++col) {
+				Column const & column = m_columns.at(col);
+				x -= column.width;
+				if (x <= 0) {
+					if (column.is_checkbox_column) {
+						play_click();
+						m_entry_records.at(row)->toggle(col);
+					}
+					break;
+				}
+			}
+		}
 
 		if //  check if doubleclicked
 			(time - real_last_click_time < DOUBLE_CLICK_INTERVAL
@@ -292,6 +396,18 @@ Table<void *>::Entry_Record & Table<void *>::add
 	Entry_Record & result = *new Entry_Record(entry);
 	m_entry_records.push_back(&result);
 	result.m_data.resize(m_columns.size());
+	for
+		(struct {
+		 	Columns::size_type       current;
+		 	Columns::size_type const end;
+		 } i = {0, m_columns.size()};
+		 i.current < i.end;
+		 ++i.current)
+		if (m_columns.at(i.current).is_checkbox_column)
+			result.m_data.at(i.current) = {
+				g_gr->get_picture(PicMod_UI, "pics/checkbox_empty.png"),
+				checkbox_value_false
+			};
 
 	m_scrollbar->set_steps
 		(m_entry_records.size() * get_lineheight()
@@ -378,34 +494,37 @@ Table<void *>::Entry_Record::Entry_Record(void * const e)
 {}
 
 void Table<void *>::Entry_Record::set_picture
-	(uint32_t const column, PictureID const picid, std::string const & str)
+	(uint8_t const col, PictureID const picid, std::string const & str)
 {
-	assert(column < m_data.size());
+	assert(col < m_data.size());
 
-	m_data[column].d_picture = picid;
-	m_data[column].d_string = str;
+	m_data.at(col) = {picid, str};
 }
 void Table<void *>::Entry_Record::set_string
-	(const uint32_t column, const std::string & str)
+	(uint8_t const col, std::string const & str)
 {
-	assert(column < m_data.size());
+	assert(col < m_data.size());
+	assert
+		(str.compare
+		 	(0, strlen(CHECKBOX_VALUE_PREFIX), CHECKBOX_VALUE_PREFIX));
+	assert
+		(m_data.at(col).d_string.compare
+		 	(0, strlen(CHECKBOX_VALUE_PREFIX), CHECKBOX_VALUE_PREFIX));
 
-	m_data[column].d_picture = g_gr->get_no_picture();
-	m_data[column].d_string = str;
+	m_data.at(col) = {g_gr->get_no_picture(), str};
 }
-PictureID Table<void *>::Entry_Record::get_picture
-	(uint32_t const column) const
+PictureID Table<void *>::Entry_Record::get_picture(uint8_t const col) const
 {
-	assert(column < m_data.size());
+	assert(col < m_data.size());
 
-	return m_data[column].d_picture;
+	return m_data.at(col).d_picture;
 }
 const std::string & Table<void *>::Entry_Record::get_string
-	(const uint32_t column) const
+	(uint8_t const col) const
 {
-	assert(column < m_data.size());
+	assert(col < m_data.size());
 
-	return m_data[column].d_string;
+	return m_data.at(col).d_string;
 }
 
 }

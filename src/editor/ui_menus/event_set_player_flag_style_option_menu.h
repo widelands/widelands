@@ -40,9 +40,9 @@ struct Event_Set_Player_Flag_Style_Option_Menu : public UI::Window {
 	Event_Set_Player_Flag_Style_Option_Menu
 		(Editor_Interactive &, Widelands::Event_Set_Player_Flag_Style &);
 
+	void draw(RenderTarget &);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
-	void draw(RenderTarget &);
 
 private:
 	Editor_Interactive & eia();
