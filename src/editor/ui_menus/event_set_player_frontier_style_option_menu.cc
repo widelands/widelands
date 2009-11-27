@@ -21,6 +21,7 @@
 
 #include "logic/editor_game_base.h"
 #include "editor/editorinteractive.h"
+#include "events/event_set_player_frontier_style.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"

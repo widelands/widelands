@@ -2161,8 +2161,7 @@ void WLApplication::cleanup_replays()
 
 			double tdiff = std::difftime(tnow, mktime(&tfile)) / 86400;
 
-			if (tdiff > s.get_int("remove_replays"))
-			{
+			if (tdiff > s.get_int("remove_replays")) {
 				log("Delete replay %s\n", file.c_str());
 
 				g_fs->Unlink(*filename);

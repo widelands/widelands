@@ -102,8 +102,8 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 			m_dump->Data(data, size);
 		} catch (_wexception const & e) {
 			log
-			("Writing to syncstream file %s failed. Stop synctream dump.",
-			m_dumpfname.c_str());
+				("Writing to syncstream file %s failed. Stop synctream dump.\n",
+				 m_dumpfname.c_str());
 
 			delete m_dump;
 			m_dump = 0;

@@ -56,6 +56,8 @@ struct Options_Ctrl {
 		std::string language;
 		int32_t autosave; // autosave interval in minutes
 		uint32_t maxfps;
+		uint32_t remove_replays;
+		bool remove_syncstreams;
 
 		// advanced options
 		bool nozip;
@@ -97,6 +99,7 @@ private:
 	UI::Callback_Button<Fullscreen_Menu_Options> m_advanced_options;
 	UI::Callback_IDButton<Fullscreen_Menu_Options, int32_t> m_cancel, m_apply;
 	UI::SpinBox                       m_sb_maxfps, m_sb_autosave;
+	UI::SpinBox                       m_sb_remove_replays;
 	UI::Textarea                      m_title;
 	UI::Checkbox                      m_fullscreen;
 	UI::Textarea                      m_label_fullscreen;
@@ -123,7 +126,7 @@ private:
 	UI::Checkbox                      m_dock_windows_to_edges;
 	UI::Textarea                      m_label_dock_windows_to_edges;
 	UI::Textarea                      m_label_autosave;
-
+	UI::Textarea                      m_label_remove_replays;
 	Options_Ctrl::Options_Struct os;
 
 	void advanced_options();
@@ -170,6 +173,9 @@ private:
 	UI::Textarea                m_label_hw_improvements;
 	UI::Checkbox                m_double_buffer;
 	UI::Textarea                m_label_double_buffer;
+
+	UI::Checkbox                m_remove_syncstreams;
+	UI::Textarea                m_label_remove_syncstreams;
 
 	Options_Ctrl::Options_Struct os;
 };

@@ -19,11 +19,11 @@
 
 #include "event_set_player_flag_style_option_menu.h"
 
-#include "logic/editor_game_base.h"
-#include "editor/editorinteractive.h"
+#include "events/event_set_player_flag_style.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
+#include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"

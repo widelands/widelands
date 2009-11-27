@@ -27,13 +27,6 @@
 #include "ui_basic/window.h"
 #include "ui_basic/textarea.h"
 
-#include "events/event_set_player_flag_style.h"
-#include "logic/widelands.h"
-
-#include <string>
-#include <cstring>
-#include <vector>
-
 namespace Widelands {struct Event_Set_Player_Flag_Style;}
 
 struct Event_Set_Player_Flag_Style_Option_Menu : public UI::Window {

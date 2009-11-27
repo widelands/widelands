@@ -83,6 +83,12 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		 opt.autosave / 60, 0, 100, _("min."),
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"), true),
 
+	m_sb_remove_replays
+		(this,
+		 m_xres * 6767 / 10000, m_yres * 8799 / 10000, m_xres / 4, m_vbutw,
+		 opt.remove_replays, 0, 365, _("days."),
+		 g_gr->get_picture(PicMod_UI, "pics/but1.png"), true),
+
 // Title
 	m_title
 		(this,
@@ -182,6 +188,10 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		(this,
 		 m_xres * 1313 / 10000, m_yres * 8333 / 10000,
 		 _("Save game automatically every"), UI::Align_VCenter),
+	m_label_remove_replays
+		(this,
+		 m_xres * 1313 / 10000, m_yres * 8799 / 10000,
+		 _("Remove Replays after days"), UI::Align_VCenter),
 
 	os(opt)
 {
@@ -189,6 +199,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 
 	m_sb_maxfps       .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_sb_autosave     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_sb_remove_replays.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_title           .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_label_fullscreen.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_fullscreen      .set_state(opt.fullscreen);
@@ -220,6 +231,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_label_dock_windows_to_edges    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_dock_windows_to_edges          .set_state(opt.dock_windows_to_edges);
 	m_label_autosave                 .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_remove_replays           .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
 	SDL_PixelFormat & fmt = *SDL_GetVideoInfo()->vfmt;
@@ -308,6 +320,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	os.language              = m_language_list.get_selected();
 	os.autosave              = m_sb_autosave.getValue();
 	os.maxfps                = m_sb_maxfps.getValue();
+	os.remove_replays        = m_sb_remove_replays.getValue();
 
 	return os;
 }
@@ -410,6 +423,13 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		 m_xres * 1313 / 10000, m_yres * 8331 / 10000,
 		 _("Graphics double buffering."),
 		 UI::Align_VCenter),
+
+	m_remove_syncstreams (this, Point(m_xres * 19 / 200, m_yres * 8799 / 10000)),
+	m_label_remove_syncstreams
+		(this,
+		 m_xres * 1313 / 10000, m_yres * 8799 / 10000,
+		 _("Remove Syncstream dumps on startup"), UI::Align_VCenter),
+
 	os(opt)
 {
 	m_title                .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
@@ -422,6 +442,8 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_label_snap_dis_panel .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_hw_improvements.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_double_buffer  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_remove_syncstreams.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_remove_syncstreams   .set_state(opt.remove_syncstreams);
 	m_sb_speed             .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_sb_dis_border        .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_sb_dis_panel         .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -484,6 +506,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 	os.speed_of_new_game    = m_sb_speed.getValue() * 1000;
 	os.panel_snap_distance  = m_sb_dis_panel.getValue();
 	os.border_snap_distance = m_sb_dis_border.getValue();
+	os.remove_syncstreams   = m_remove_syncstreams.get_state();
 	return os;
 }
 
@@ -563,6 +586,10 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 		("border_snap_distance", 0);
 	opt.panel_snap_distance   =  m_opt_section.get_int
 		("panel_snap_distance",  0);
+	opt.remove_replays        = m_opt_section.get_int
+		("remove_replays", 0);
+	opt.remove_syncstreams    = m_opt_section.get_bool
+		("remove_syncstreams", true);
 	return opt;
 }
 
@@ -593,6 +620,9 @@ void Options_Ctrl::save_options() {
 	m_opt_section.set_int("speed_of_new_game",      opt.speed_of_new_game);
 	m_opt_section.set_int("border_snap_distance",   opt.border_snap_distance);
 	m_opt_section.set_int("panel_snap_distance",    opt.panel_snap_distance);
+
+	m_opt_section.set_int("remove_replays",         opt.remove_replays);
+	m_opt_section.set_bool("remove_syncstreams",    opt.remove_syncstreams);
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
