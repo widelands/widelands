@@ -403,11 +403,11 @@ Table<void *>::Entry_Record & Table<void *>::add
 		 } i = {0, m_columns.size()};
 		 i.current < i.end;
 		 ++i.current)
-		if (m_columns.at(i.current).is_checkbox_column)
-			result.m_data.at(i.current) = {
-				g_gr->get_picture(PicMod_UI, "pics/checkbox_empty.png"),
-				checkbox_value_false
-			};
+		if (m_columns.at(i.current).is_checkbox_column) {
+			result.m_data.at(i.current).d_picture =
+				g_gr->get_picture(PicMod_UI, "pics/checkbox_empty.png");
+			result.m_data.at(i.current).d_string = checkbox_value_false;
+		}
 
 	m_scrollbar->set_steps
 		(m_entry_records.size() * get_lineheight()
@@ -498,7 +498,8 @@ void Table<void *>::Entry_Record::set_picture
 {
 	assert(col < m_data.size());
 
-	m_data.at(col) = {picid, str};
+	m_data.at(col).d_picture = picid;
+	m_data.at(col).d_string  = str;
 }
 void Table<void *>::Entry_Record::set_string
 	(uint8_t const col, std::string const & str)
@@ -511,7 +512,8 @@ void Table<void *>::Entry_Record::set_string
 		(m_data.at(col).d_string.compare
 		 	(0, strlen(CHECKBOX_VALUE_PREFIX), CHECKBOX_VALUE_PREFIX));
 
-	m_data.at(col) = {g_gr->get_no_picture(), str};
+	m_data.at(col).d_picture = g_gr->get_no_picture();
+	m_data.at(col).d_string  = str;
 }
 PictureID Table<void *>::Entry_Record::get_picture(uint8_t const col) const
 {
