@@ -638,7 +638,7 @@ bool MilitarySite::military_presence_kept(Game & game)
 	std::vector<ImmovableFound> immovables;
 
 	// Search in a radius of 3 (needed for big militarysites)
-	FCoords const fc = FCoords(get_position());
+	FCoords const fc = game.map().get_fcoords(get_position());
 	game.map().find_immovables(Area<FCoords>(fc, 3), &immovables);
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
