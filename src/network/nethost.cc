@@ -1244,7 +1244,9 @@ void NetHost::checkHungClients()
 				 /
 				 1000)
 			{
-				log("[Host]: Client %i hung\n", i);
+				log
+					("[Host]: Client %i (%s) hung\n",
+					 i, d->settings.users.at(d->clients.at(i).usernum).name.c_str());
 				++nrhung;
 			}
 		}
