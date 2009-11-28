@@ -544,10 +544,10 @@ bool MilitarySite::attack(Soldier & enemy)
 		const Coords   coords = get_position();
 		{
 			char message[2048];
-				snprintf
-					(message, sizeof(message),
-					 _("The enemy defeated your soldiers at the %s."),
-					 descname().c_str());
+			snprintf
+				(message, sizeof(message),
+				 _("The enemy defeated your soldiers at the %s."),
+				 descname().c_str());
 			MessageQueue::add
 				(owner(),
 				 Message
@@ -641,14 +641,13 @@ bool MilitarySite::military_presence_kept(Game & game)
 	FCoords const fc = game.map().get_fcoords(get_position());
 	game.map().find_immovables(Area<FCoords>(fc, 3), &immovables);
 
-	for (uint32_t i = 0; i < immovables.size(); ++i) {
-		const BaseImmovable & base_immovable = *immovables[i].object;
-		if (upcast(MilitarySite const, militarysite, &base_immovable)) {
-			if (get_size() <= militarysite->get_size()) {
+	for (uint32_t i = 0; i < immovables.size(); ++i)
+		if (upcast(MilitarySite const, militarysite, immovables[i].object))
+			if
+				(this       !=  militarysite          and
+				 &owner  () == &militarysite->owner() and
+				 get_size() <=  militarysite->get_size())
 				return true;
-			}
-		}
-	}
 	return false;
 }
 
