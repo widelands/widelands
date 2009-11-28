@@ -26,7 +26,6 @@
 #include "events/event_chain.h"
 #include "findimmovable.h"
 #include "wui/interactive_player.h"
-#include "wui/interactive_spectator.h"
 #include "ui_fsmenu/launchgame.h"
 #include "game_io/game_loader.h"
 #include "wui/game_tips.h"

@@ -27,7 +27,6 @@
 #include "game.h"
 #include "i18n.h"
 #include "instances.h"
-#include "wui/interactive_base.h"
 #include "mapregion.h"
 #include "player.h"
 #include "tribe.h"

@@ -36,7 +36,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
-#include "wui/interactive_player.h"
 #include "message_queue.h"
 #include "player.h"
 #include "profile/profile.h"
