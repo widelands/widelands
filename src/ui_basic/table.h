@@ -54,8 +54,6 @@ template<typename Entry> struct Table {
 
 	Signal1<uint32_t> selected;
 	Signal1<uint32_t> double_clicked;
-	Signal2<uint32_t, uint8_t> checked;
-	Signal2<uint32_t, uint8_t> unchecked;
 
 	/// A column that has a title is sortable (by clicking on the title).
 	void add_column
