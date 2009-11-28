@@ -775,10 +775,10 @@ void NetGGZ::write_tablelist()
 			 sizeof(info.hostname));
 		GGZTableState const state = ggzcore_table_get_state(table);
 		if (state == GGZ_TABLE_WAITING) {
-			// To avoid freezes for users with build14 when trying to connect to
-			// a table with seats > 7 - could surely happen once the seats problem
+			// To avoid freezes for users with build15 when trying to connect to
+			// a table with seats > 8 - could surely happen once the seats problem
 			// is fixed.
-			if (ggzcore_table_get_num_seats(table) > 7)
+			if (ggzcore_table_get_num_seats(table) > 8)
 				info.state = LAN_GAME_CLOSED;
 			else if (ggzcore_table_get_seat_count(table, GGZ_SEAT_OPEN) > 0)
 				info.state = LAN_GAME_OPEN;
@@ -912,7 +912,7 @@ uint32_t NetGGZ::max_players()
 	//  FIXME available. I already posted this problem to the ggz
 	//  FIXME mailinglist. -- nasenbaer
 	//return gametype ? ggzcore_gametype_get_max_players(gametype) : 1;
-	return gametype ? 7 : 1;
+	return gametype ? 8 : 1;
 }
 
 
