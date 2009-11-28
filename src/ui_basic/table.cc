@@ -334,7 +334,7 @@ bool Table<void *>::handle_mousepress
 		uint32_t const row =
 			(y + m_scrollpos - m_headerheight) / get_lineheight();
 		if (row < m_entry_records.size()) {
-			select(y);
+			select(row);
 			Columns::size_type const nr_cols = m_columns.size();
 			for (uint8_t col = 0; col < nr_cols; ++col) {
 				Column const & column = m_columns.at(col);
