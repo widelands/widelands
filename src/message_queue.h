@@ -34,7 +34,12 @@
 #define NEW_MESSAGES "pics/menu_toggle_newmessage_menu.png"
 #define MAX_QUEUE_SIZE 255
 
-#define UNDER_ATTACK "under_attack"
+// Definitions of message strings:
+#define MSG_WAREHOUSE     "warehouse"
+#define MSG_UNDER_ATTACK  "under_attack"
+#define MSG_SITE_LOST     "site_lost"
+#define MSG_SITE_DEFEATED "site_defeated"
+
 
 namespace Widelands {
 	struct Coords;
@@ -42,6 +47,7 @@ namespace Widelands {
 
 	///the Message manager keeps track of messages
 	///based of the objective system
+
 
 struct MessageQueue {
 	void registerButton(UI::Callback_Button<GameMessageMenu>*);
@@ -66,8 +72,6 @@ struct MessageQueue {
 		add(p.player_number(), m);
 	}
 	static void add (Player_Number const player_number, Message const m) {
-		//log("Adding message for player %i : %s %s\n",player_number,
-		//m.visname().c_str(),m.descr().c_str());
 		std::vector<Message> & myQueue = get(player_number);
 		myQueue.push_back(m);
 		if (myQueue.size() >= MAX_QUEUE_SIZE) {
@@ -88,8 +92,12 @@ struct MessageQueue {
 			if (m.time() > 0) {
 				g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
 				// And be even louder, if we are under attack!
-				if (m.sender() == UNDER_ATTACK)
-					g_sound_handler.play_fx("under_attack", 128, PRIO_ALWAYS_PLAY);
+				if (m.sender() == MSG_UNDER_ATTACK)
+					g_sound_handler.play_fx("under_attack",  128, PRIO_ALWAYS_PLAY);
+				if (m.sender() == MSG_SITE_LOST)
+					g_sound_handler.play_fx("site_lost",     128, PRIO_ALWAYS_PLAY);
+				if (m.sender() == MSG_SITE_DEFEATED)
+					g_sound_handler.play_fx("site_defeated", 128, PRIO_ALWAYS_PLAY);
 			}
 			if (m_button(0))
 				m_button(0)->set_pic(g_gr->get_picture(PicMod_Game, NEW_MESSAGES));

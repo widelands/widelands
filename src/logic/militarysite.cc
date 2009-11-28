@@ -540,11 +540,25 @@ bool MilitarySite::attack(Soldier & enemy)
 		defender->update_task_buildingwork(game);
 		return true;
 	} else {
-		// The enemy has defeated our forces. Now let's see whether it conquers
-		// our militarysite, or whether we still hold the bigger military presence
-		// in that area (e.g. if there is a fortress one point away from our
-		// sentry, the fortress has a higher presence and thus the enemy can just
-		// burn down the sentry.
+		// The enemy has defeated our forces, we should inform the player
+		const Coords   coords = get_position();
+		{
+			char message[2048];
+				snprintf
+					(message, sizeof(message),
+					 _("The enemy defeated your soldiers at the %s."),
+					 descname().c_str());
+			MessageQueue::add
+				(owner(),
+				 Message
+				 	(MSG_SITE_LOST, game.get_gametime(),
+				 	 _("Militarysite lost!"), coords, message));
+		}
+
+		// Now let's see whether the enemy conquers our militarysite, or whether
+		// we still hold the bigger military presence in that area (e.g. if there
+		// is a fortress one or two points away from our sentry, the fortress has
+		// a higher presence and thus the enemy can just burn down the sentry.
 		if (military_presence_kept(game)) {
 			// Okay we still got the higher military presence, so the attacked
 			// militarysite will be destroyed.
@@ -573,7 +587,6 @@ bool MilitarySite::attack(Soldier & enemy)
 		uint32_t     * wares;    // just empty dummies
 		uint32_t     * worker;   // "    "     "
 		Soldier_Counts soldiers; // "    "     "
-		const Coords   coords = get_position();
 
 		Ware_Index const nr_of_wares   = enemytribe.get_nrwares();
 		Ware_Index const nr_of_workers = enemytribe.get_nrworkers();
@@ -592,6 +605,19 @@ bool MilitarySite::attack(Soldier & enemy)
 		BaseImmovable * const newimm = game.map()[coords].get_immovable();
 		upcast(MilitarySite, newsite, newimm);
 		newsite->reinit_after_conqueration(game);
+
+		// Of course we should inform the victorius player as well
+		char message[2048];
+			snprintf
+				(message, sizeof(message),
+				 _("Your soldiers defeated the enemy at the %s."),
+				 newsite->descname().c_str());
+		MessageQueue::add
+			(owner(),
+			 Message
+			 	(MSG_SITE_DEFEATED, game.get_gametime(),
+			 	 _("Enemy at site defeated!"), coords, message));
+
 
 		return false;
 	}
@@ -653,11 +679,11 @@ void MilitarySite::informPlayer(Game & game, bool discovered)
 			MessageQueue::add
 				(owner(),
 				 Message
-				 	(UNDER_ATTACK, game.get_gametime(),
+				 	(MSG_UNDER_ATTACK, game.get_gametime(),
 				 	 _("You are under attack!"), coords, message));
 			break;
 		} else if
-			(i.current->sender() == UNDER_ATTACK and
+			(i.current->sender() == MSG_UNDER_ATTACK and
 			 map.calc_distance(i.current->get_coords(), coords) < 5 and
 			 game.get_gametime() - i.current->time() < 30000)
 			//  Soldiers are running around during their attack, so we avoid too

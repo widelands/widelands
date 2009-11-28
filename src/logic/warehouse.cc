@@ -439,14 +439,14 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			MessageQueue::add
 				(owner(),
 				 Message
-				 	("warehouse",
+				 	(MSG_WAREHOUSE,
 				 	 egbase.get_gametime(),
 				 	 descname(),
 				 	 coords,
 				 	 message));
 			break;
 		} else if
-			(i.current->sender    () == "warehouse" and
+			(i.current->sender    () == MSG_WAREHOUSE and
 			 i.current->get_coords() == coords)
 			break;
 }
