@@ -129,6 +129,7 @@ private:
 
 	Map_Object * popSoldierJob(Soldier *, bool * stayhome = 0);
 	bool haveSoldierJob(Soldier &);
+	bool military_presence_kept(Game &);
 	void informPlayer(Game &, bool discovered = false);
 
 private:

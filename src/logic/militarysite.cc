@@ -540,6 +540,19 @@ bool MilitarySite::attack(Soldier & enemy)
 		defender->update_task_buildingwork(game);
 		return true;
 	} else {
+		// The enemy has defeated our forces. Now let's see whether it conquers
+		// our militarysite, or whether we still hold the bigger military presence
+		// in that area (e.g. if there is a fortress one point away from our
+		// sentry, the fortress has a higher presence and thus the enemy can just
+		// burn down the sentry.
+		if (military_presence_kept(game)) {
+			// Okay we still got the higher military presence, so the attacked
+			// militarysite will be destroyed.
+			set_defeating_player(enemy.owner().player_number());
+			schedule_destroy(game);
+			return false;
+		}
+
 		// The enemy conquers the building
 		// In fact we do not conquer it, but place a new building of same type at
 		// the old location.
@@ -592,10 +605,31 @@ void MilitarySite::reinit_after_conqueration(Game & game)
 	update_soldier_request();
 }
 
+/// Calculates whether the military presence is still kept and \returns true if.
+bool MilitarySite::military_presence_kept(Game & game)
+{
+	// collect information about immovables in the area
+	std::vector<ImmovableFound> immovables;
+
+	// Search in a radius of 3 (needed for big militarysites)
+	FCoords const fc = FCoords(get_position());
+	game.map().find_immovables(Area<FCoords>(fc, 3), &immovables);
+
+	for (uint32_t i = 0; i < immovables.size(); ++i) {
+		const BaseImmovable & base_immovable = *immovables[i].object;
+		if (upcast(MilitarySite const, militarysite, &base_immovable)) {
+			if (get_size() <= militarysite->get_size()) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 /// Informs the player about an attack of his opponent.
 void MilitarySite::informPlayer(Game & game, bool discovered)
 {
-	Map  & map  = game.map();
+	Map & map  = game.map();
 
 	// Inform the player, that we are under attack by adding a new entry to the
 	// message queue - a sound will automatically be played. But only add this
