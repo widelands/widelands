@@ -541,7 +541,8 @@ bool MilitarySite::attack(Soldier & enemy)
 		return true;
 	} else {
 		// The enemy has defeated our forces, we should inform the player
-		const Coords   coords = get_position();
+		const Coords        coords  = get_position();
+		const Player_Number current = owner().player_number();
 		{
 			char message[2048];
 			snprintf
@@ -549,7 +550,7 @@ bool MilitarySite::attack(Soldier & enemy)
 				 _("The enemy defeated your soldiers at the %s."),
 				 descname().c_str());
 			MessageQueue::add
-				(owner(),
+				(current,
 				 Message
 				 	(MSG_SITE_LOST, game.get_gametime(),
 				 	 _("Militarysite lost!"), coords, message));
@@ -613,7 +614,7 @@ bool MilitarySite::attack(Soldier & enemy)
 				 _("Your soldiers defeated the enemy at the %s."),
 				 newsite->descname().c_str());
 		MessageQueue::add
-			(owner(),
+			(current,
 			 Message
 			 	(MSG_SITE_DEFEATED, game.get_gametime(),
 			 	 _("Enemy at site defeated!"), coords, message));

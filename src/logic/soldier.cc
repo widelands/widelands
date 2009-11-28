@@ -542,7 +542,8 @@ void Soldier::attack_update(Game & game, State & state)
 
 	if (!enemy) {
 		// The old militarysite gets replaced by a new one, so if "enemy" is not
-		// valid anymore, we surely "conquered" the new building.
+		// valid anymore, we either "conquered" the new building, or it was
+		// destroyed.
 		BaseImmovable * const newimm = game.map()[state.coords].get_immovable();
 		upcast(MilitarySite, newsite, newimm);
 		if (newsite and (&newsite->owner() == &owner())) {
