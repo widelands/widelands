@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4699\n"
+"Project-Id-Version: Widelands svn4727\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-11-22 12:19+0000\n"
-"PO-Revision-Date: 2009-07-07 21:21+0100\n"
+"POT-Creation-Date: 2009-11-28 11:58+0000\n"
+"PO-Revision-Date: 2009-11-28 12:47+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -118,567 +118,599 @@ msgstr "Barbaren"
 msgid "The mighty tribes of the east-lands!"
 msgstr "Die mächtigen Stämme des Ostens!"
 
-#: ../../../tribes/barbarians/conf:36
+#: ../../../tribes/barbarians/conf:38
 msgid "Ashes"
 msgstr "Asche"
 
-#: ../../../tribes/barbarians/conf:37
+#: ../../../tribes/barbarians/conf:39
 msgid "Destroyed building"
 msgstr "Zerstörtes Gebäude"
 
-#: ../../../tribes/barbarians/conf:38
+#: ../../../tribes/barbarians/conf:40
 msgid "Field medium"
 msgstr "ausgewachsenes Feld"
 
-#: ../../../tribes/barbarians/conf:39
+#: ../../../tribes/barbarians/conf:41
 msgid "Field small"
 msgstr "junges Feld"
 
-#: ../../../tribes/barbarians/conf:40
+#: ../../../tribes/barbarians/conf:42
 msgid "Field tiny"
 msgstr "frisch gesätes Feld"
 
-#: ../../../tribes/barbarians/conf:41
+#: ../../../tribes/barbarians/conf:43
 msgid "Field ripe"
 msgstr "reifes Feld"
 
-#: ../../../tribes/barbarians/conf:42
+#: ../../../tribes/barbarians/conf:44
 msgid "Field harvested"
 msgstr "abgeerntetes Feld"
 
-#: ../../../tribes/barbarians/conf:43
+#: ../../../tribes/barbarians/conf:45
 msgid "Flax medium"
 msgstr "ausgewachsener Flachs"
 
-#: ../../../tribes/barbarians/conf:44
+#: ../../../tribes/barbarians/conf:46
 msgid "Flax small"
 msgstr "junger Flachs"
 
-#: ../../../tribes/barbarians/conf:45
+#: ../../../tribes/barbarians/conf:47
 msgid "Flax tiny"
 msgstr "frisch gesäter Flachs"
 
-#: ../../../tribes/barbarians/conf:46
+#: ../../../tribes/barbarians/conf:48
 msgid "Flax ripe"
 msgstr "reifer Flachs"
 
-#: ../../../tribes/barbarians/conf:47
+#: ../../../tribes/barbarians/conf:49
 msgid "Reed medium"
 msgstr "ausgewachsener Reet"
 
-#: ../../../tribes/barbarians/conf:48
+#: ../../../tribes/barbarians/conf:50
 msgid "Reed small"
 msgstr "junger Reet"
 
-#: ../../../tribes/barbarians/conf:49
+#: ../../../tribes/barbarians/conf:51
 msgid "Reed tiny"
 msgstr "frisch gesäter Reet"
 
-#: ../../../tribes/barbarians/conf:50
+#: ../../../tribes/barbarians/conf:52
 msgid "Reed ripe"
 msgstr "reifer Reet"
 
-#: ../../../tribes/barbarians/conf:51
+#: ../../../tribes/barbarians/conf:53
 msgid "Resource indicator coal little"
 msgstr "Ressourcen Anzeige für wenig Kohle"
 
-#: ../../../tribes/barbarians/conf:52
+#: ../../../tribes/barbarians/conf:54
 msgid "Resource indicator coal much"
 msgstr "Ressourcen Anzeige für viel Kohle"
 
-#: ../../../tribes/barbarians/conf:53
+#: ../../../tribes/barbarians/conf:55
 msgid "Resource indicator gold little"
 msgstr "Ressourcen Anzeige für wenig Gold"
 
-#: ../../../tribes/barbarians/conf:54
+#: ../../../tribes/barbarians/conf:56
 msgid "Resource indicator gold much"
 msgstr "Ressourcen Anzeige für viel Gold"
 
-#: ../../../tribes/barbarians/conf:55
+#: ../../../tribes/barbarians/conf:57
 msgid "Resource indicator granit little"
 msgstr "Ressourcen Anzeige für wenig Granit"
 
-#: ../../../tribes/barbarians/conf:56
+#: ../../../tribes/barbarians/conf:58
 msgid "Resource indicator granit much"
 msgstr "Ressourcen Anzeige für viel Granit"
 
-#: ../../../tribes/barbarians/conf:57
+#: ../../../tribes/barbarians/conf:59
 msgid "Resource indicator iron little"
 msgstr "Ressourcen Anzeige für wenig Eisen"
 
-#: ../../../tribes/barbarians/conf:58
+#: ../../../tribes/barbarians/conf:60
 msgid "Resource indicator iron much"
 msgstr "Ressourcen Anzeige für viel Eisen"
 
-#: ../../../tribes/barbarians/conf:59
+#: ../../../tribes/barbarians/conf:61
 msgid "Resource indicator no resource"
 msgstr "Ressourcen Anzeige für keine Ressource"
 
-#: ../../../tribes/barbarians/conf:60
+#: ../../../tribes/barbarians/conf:62
 msgid "Resource indicator water"
 msgstr "Ressourcen Anzeige für Wasser"
 
-#: ../../../tribes/barbarians/conf:63
+#: ../../../tribes/barbarians/conf:65
 msgid "Deer"
 msgstr "Reh"
 
-#: ../../../tribes/barbarians/conf:64
+#: ../../../tribes/barbarians/conf:66
 msgid "Wildboar"
 msgstr "Wildschwein"
 
-#: ../../../tribes/barbarians/conf:67
+#: ../../../tribes/barbarians/conf:69
 msgid "Axe"
 msgstr "Axt"
 
-#: ../../../tribes/barbarians/conf:68
+#: ../../../tribes/barbarians/conf:70
 msgid "Peel"
 msgstr "Brotschieber"
 
-#: ../../../tribes/barbarians/conf:69
+#: ../../../tribes/barbarians/conf:71
 msgid "Battle Axe"
 msgstr "Kriegsaxt"
 
-#: ../../../tribes/barbarians/conf:70
+#: ../../../tribes/barbarians/conf:72
 msgid "Beer"
 msgstr "Bier"
 
-#: ../../../tribes/barbarians/conf:71
+#: ../../../tribes/barbarians/conf:73
 msgid "Blackwood"
 msgstr "Hartholz"
 
-#: ../../../tribes/barbarians/conf:72
+#: ../../../tribes/barbarians/conf:74
 msgid "Broad Axe"
 msgstr "Breitaxt"
 
-#: ../../../tribes/barbarians/conf:73
+#: ../../../tribes/barbarians/conf:75
 msgid "Bronze Axe"
 msgstr "Bronzeaxt"
 
-#: ../../../tribes/barbarians/conf:74
+#: ../../../tribes/barbarians/conf:76
 msgid "Cloth"
 msgstr "Stoff"
 
-#: ../../../tribes/barbarians/conf:75
+#: ../../../tribes/barbarians/conf:77
 msgid "Coal"
 msgstr "Kohle"
 
-#: ../../../tribes/barbarians/conf:76
+#: ../../../tribes/barbarians/conf:78
 msgid "Fire Tongs"
 msgstr "Feuerzange"
 
-#: ../../../tribes/barbarians/conf:77
+#: ../../../tribes/barbarians/conf:79
 msgid "Fish"
 msgstr "Fisch"
 
-#: ../../../tribes/barbarians/conf:78
+#: ../../../tribes/barbarians/conf:80
 msgid "Fishing Rod"
 msgstr "Angel"
 
-#: ../../../tribes/barbarians/conf:79
+#: ../../../tribes/barbarians/conf:81
 msgid "Flax"
 msgstr "Flachs"
 
-#: ../../../tribes/barbarians/conf:80
+#: ../../../tribes/barbarians/conf:82
 msgid "Gold"
 msgstr "Gold"
 
-#: ../../../tribes/barbarians/conf:81
+#: ../../../tribes/barbarians/conf:83
 msgid "Goldstone"
 msgstr "Golderz"
 
-#: ../../../tribes/barbarians/conf:82
+#: ../../../tribes/barbarians/conf:84
 msgid "Grout"
 msgstr "Mörtel"
 
-#: ../../../tribes/barbarians/conf:83
+#: ../../../tribes/barbarians/conf:85
 msgid "Hammer"
 msgstr "Hammer"
 
-#: ../../../tribes/barbarians/conf:84
+#: ../../../tribes/barbarians/conf:86
 msgid "Helmet"
 msgstr "Helm"
 
-#: ../../../tribes/barbarians/conf:85
+#: ../../../tribes/barbarians/conf:87
 msgid "Hunting Spear"
 msgstr "Jagdspeer"
 
-#: ../../../tribes/barbarians/conf:86
+#: ../../../tribes/barbarians/conf:88
 msgid "Iron"
 msgstr "Eisen"
 
-#: ../../../tribes/barbarians/conf:87
+#: ../../../tribes/barbarians/conf:89
 msgid "Iron Ore"
 msgstr "Eisenerz"
 
-#: ../../../tribes/barbarians/conf:88
+#: ../../../tribes/barbarians/conf:90
 msgid "Kitchen Tools"
 msgstr "Küchengerät"
 
-#: ../../../tribes/barbarians/conf:89
+#: ../../../tribes/barbarians/conf:91
 msgid "Mask"
 msgstr "Maske"
 
-#: ../../../tribes/barbarians/conf:90
+#: ../../../tribes/barbarians/conf:92
 msgid "Meal"
 msgstr "Mahlzeit"
 
-#: ../../../tribes/barbarians/conf:91
+#: ../../../tribes/barbarians/conf:93
 msgid "Meat"
 msgstr "Fleisch"
 
-#: ../../../tribes/barbarians/conf:92
+#: ../../../tribes/barbarians/conf:94
 msgid "Pick"
 msgstr "Spitzhacke"
 
-#: ../../../tribes/barbarians/conf:93
+#: ../../../tribes/barbarians/conf:95
 msgid "Pitta Bread"
 msgstr "Fladenbrot"
 
-#: ../../../tribes/barbarians/conf:94
+#: ../../../tribes/barbarians/conf:96
 msgid "Ration"
 msgstr "Ration"
 
-#: ../../../tribes/barbarians/conf:95
+#: ../../../tribes/barbarians/conf:97
 msgid "Raw Stone"
 msgstr "Felsen"
 
-#: ../../../tribes/barbarians/conf:96
+#: ../../../tribes/barbarians/conf:98
 msgid "Scythe"
 msgstr "Sense"
 
-#: ../../../tribes/barbarians/conf:97
+#: ../../../tribes/barbarians/conf:99
 msgid "Sharp Axe"
 msgstr "Scharfe Axt"
 
-#: ../../../tribes/barbarians/conf:98
+#: ../../../tribes/barbarians/conf:100
 msgid "Shovel"
 msgstr "Schaufel"
 
-#: ../../../tribes/barbarians/conf:99
+#: ../../../tribes/barbarians/conf:101
 msgid "Snack"
 msgstr "Snack"
 
-#: ../../../tribes/barbarians/conf:100
+#: ../../../tribes/barbarians/conf:102
 msgid "Strong Beer"
 msgstr "Starkbier"
 
-#: ../../../tribes/barbarians/conf:101
+#: ../../../tribes/barbarians/conf:103
 msgid "Thatch Reed"
 msgstr "Reet"
 
-#: ../../../tribes/barbarians/conf:102
+#: ../../../tribes/barbarians/conf:104
 msgid "Trunk"
 msgstr "Stamm"
 
-#: ../../../tribes/barbarians/conf:103
+#: ../../../tribes/barbarians/conf:105
 msgid "War Helmet"
 msgstr "Kriegshelm"
 
-#: ../../../tribes/barbarians/conf:104
+#: ../../../tribes/barbarians/conf:106
 msgid "Warriors Axe"
 msgstr "Kriegeraxt"
 
-#: ../../../tribes/barbarians/conf:105
+#: ../../../tribes/barbarians/conf:107
 msgid "Water"
 msgstr "Wasser"
 
-#: ../../../tribes/barbarians/conf:106
+#: ../../../tribes/barbarians/conf:108
 msgid "Wheat"
 msgstr "Weizen"
 
-#: ../../../tribes/barbarians/conf:109
+#: ../../../tribes/barbarians/conf:111
 msgid "Carrier"
 msgstr "Träger"
 
-#: ../../../tribes/barbarians/conf:112
+#: ../../../tribes/barbarians/conf:114
 msgid "Soldier"
 msgstr "Soldat"
 
-#: ../../../tribes/barbarians/conf:115
+#: ../../../tribes/barbarians/conf:117
 msgid "Baker"
 msgstr "Bäcker"
 
-#: ../../../tribes/barbarians/conf:116
+#: ../../../tribes/barbarians/conf:118
 msgid "Master Blacksmith"
 msgstr "Meisterschmied"
 
-#: ../../../tribes/barbarians/conf:117
+#: ../../../tribes/barbarians/conf:119
 msgid "Blacksmith"
 msgstr "Schmied"
 
-#: ../../../tribes/barbarians/conf:118
+#: ../../../tribes/barbarians/conf:120
 msgid "Master Brewer"
 msgstr "Braumeister"
 
-#: ../../../tribes/barbarians/conf:119
+#: ../../../tribes/barbarians/conf:121
 msgid "Brewer"
 msgstr "Brauer"
 
-#: ../../../tribes/barbarians/conf:120
+#: ../../../tribes/barbarians/conf:122
 msgid "Builder"
 msgstr "Baumeister"
 
-#: ../../../tribes/barbarians/conf:121
+#: ../../../tribes/barbarians/conf:123
 msgid "Burner"
 msgstr "Brenner"
 
-#: ../../../tribes/barbarians/conf:122
+#: ../../../tribes/barbarians/conf:124
 msgid "Master Miner"
 msgstr "Bergwerksmeister"
 
-#: ../../../tribes/barbarians/conf:123
+#: ../../../tribes/barbarians/conf:125
 msgid "Chief Miner"
 msgstr "Steiger"
 
-#: ../../../tribes/barbarians/conf:124
+#: ../../../tribes/barbarians/conf:126
 msgid "Farmer"
 msgstr "Bauer"
 
-#: ../../../tribes/barbarians/conf:125
+#: ../../../tribes/barbarians/conf:127
 msgid "Ferner"
 msgstr "Reet- und Flachsbauer"
 
-#: ../../../tribes/barbarians/conf:126
+#: ../../../tribes/barbarians/conf:128
 msgid "Fisher"
 msgstr "Fischer"
 
-#: ../../../tribes/barbarians/conf:127
+#: ../../../tribes/barbarians/conf:129
 msgid "Gamekeeper"
 msgstr "Wildhüter"
 
-#: ../../../tribes/barbarians/conf:128
+#: ../../../tribes/barbarians/conf:130
 msgid "Geologist"
 msgstr "Geologe"
 
-#: ../../../tribes/barbarians/conf:129
+#: ../../../tribes/barbarians/conf:131
 msgid "Helmsmith"
 msgstr "Helmschmied"
 
-#: ../../../tribes/barbarians/conf:130
+#: ../../../tribes/barbarians/conf:132
 msgid "Hunter"
 msgstr "Jäger"
 
-#: ../../../tribes/barbarians/conf:131
+#: ../../../tribes/barbarians/conf:133
 msgid "Innkeeper"
 msgstr "Wirt"
 
-#: ../../../tribes/barbarians/conf:132
+#: ../../../tribes/barbarians/conf:134
 msgid "Lime-Burner"
 msgstr "Kalkbrenner"
 
-#: ../../../tribes/barbarians/conf:133
+#: ../../../tribes/barbarians/conf:135
 msgid "Lumberjack"
 msgstr "Holzfäller"
 
-#: ../../../tribes/barbarians/conf:134
+#: ../../../tribes/barbarians/conf:136
 msgid "Miner"
 msgstr "Bergmann"
 
-#: ../../../tribes/barbarians/conf:135
+#: ../../../tribes/barbarians/conf:137
 msgid "Ranger"
 msgstr "Förster"
 
-#: ../../../tribes/barbarians/conf:136
+#: ../../../tribes/barbarians/conf:138
 msgid "Smelter"
 msgstr "Hüttenarbeiter"
 
-#: ../../../tribes/barbarians/conf:137
+#: ../../../tribes/barbarians/conf:139
 msgid "Stonemason"
 msgstr "Steinmetz"
 
-#: ../../../tribes/barbarians/conf:138
+#: ../../../tribes/barbarians/conf:140
 msgid "Trainer"
 msgstr "Trainer"
 
-#: ../../../tribes/barbarians/conf:139
+#: ../../../tribes/barbarians/conf:141
 msgid "Weaver"
 msgstr "Weber"
 
-#: ../../../tribes/barbarians/conf:142
+#: ../../../tribes/barbarians/conf:144
 msgid "Construction Site"
 msgstr "Baustelle"
 
-#: ../../../tribes/barbarians/conf:145
+#: ../../../tribes/barbarians/conf:147
 msgid "Battle Arena"
 msgstr "Arena"
 
-#: ../../../tribes/barbarians/conf:146
+#: ../../../tribes/barbarians/conf:148
 msgid "Trainingscamp"
 msgstr "Trainingslager"
 
-#: ../../../tribes/barbarians/conf:149
+#: ../../../tribes/barbarians/conf:151 ../../../tribes/barbarians/conf:167
 msgid "Barrier"
 msgstr "Barriere"
 
-#: ../../../tribes/barbarians/conf:150
+#: ../../../tribes/barbarians/conf:152
 msgid "Citadel"
 msgstr "Zitadelle"
 
-#: ../../../tribes/barbarians/conf:151
+#: ../../../tribes/barbarians/conf:153
 msgid "Donjon"
 msgstr "Wachturm"
 
-#: ../../../tribes/barbarians/conf:152
+#: ../../../tribes/barbarians/conf:154 ../../../tribes/barbarians/conf:169
 msgid "Fortress"
 msgstr "Festung"
 
-#: ../../../tribes/barbarians/conf:153
+#: ../../../tribes/barbarians/conf:155 ../../../tribes/barbarians/conf:165
 msgid "Sentry"
 msgstr "Wachposten"
 
-#: ../../../tribes/barbarians/conf:154
+#: ../../../tribes/barbarians/conf:156
 msgid "Stronghold"
 msgstr "Bastion"
 
-#: ../../../tribes/barbarians/conf:157 ../../../tribes/barbarians/conf:158
+#: ../../../tribes/barbarians/conf:159 ../../../tribes/barbarians/conf:168
+msgid "Castle"
+msgstr "Burg"
+
+#: ../../../tribes/barbarians/conf:160
+msgid "Guardhall"
+msgstr "Wächterhalle"
+
+#: ../../../tribes/barbarians/conf:161
+msgid "Guardhouse"
+msgstr "Wachhaus"
+
+#: ../../../tribes/barbarians/conf:162
+msgid "High Tower"
+msgstr "Bergfried"
+
+#: ../../../tribes/barbarians/conf:163
+msgid "Small Tower"
+msgstr "Spähturm"
+
+#: ../../../tribes/barbarians/conf:164 ../../../tribes/barbarians/conf:171
+msgid "Tower"
+msgstr "Wachturm"
+
+#: ../../../tribes/barbarians/conf:166
+msgid "Barracks"
+msgstr "Barracke"
+
+#: ../../../tribes/barbarians/conf:170
+msgid "Outpost"
+msgstr "Außenposten"
+
+#: ../../../tribes/barbarians/conf:174 ../../../tribes/barbarians/conf:175
 msgid "Headquarters"
 msgstr "Hauptquartier"
 
-#: ../../../tribes/barbarians/conf:159
+#: ../../../tribes/barbarians/conf:176
 msgid "Warehouse"
 msgstr "Warenlager"
 
-#: ../../../tribes/barbarians/conf:162
+#: ../../../tribes/barbarians/conf:179
 msgid "War Mill"
 msgstr "Waffenschmiede"
 
-#: ../../../tribes/barbarians/conf:163
+#: ../../../tribes/barbarians/conf:180
 msgid "Axefactory"
 msgstr "Axtfabrik"
 
-#: ../../../tribes/barbarians/conf:164
+#: ../../../tribes/barbarians/conf:181
 msgid "Bakery"
 msgstr "Bäckerei"
 
-#: ../../../tribes/barbarians/conf:165
+#: ../../../tribes/barbarians/conf:182
 msgid "Big Inn"
 msgstr "Gaststätte"
 
-#: ../../../tribes/barbarians/conf:166
+#: ../../../tribes/barbarians/conf:183
 msgid "Brewery"
 msgstr "Brauerei"
 
-#: ../../../tribes/barbarians/conf:167
+#: ../../../tribes/barbarians/conf:184
 msgid "Charcoal Burner's House"
 msgstr "Köhlerei"
 
-#: ../../../tribes/barbarians/conf:168
+#: ../../../tribes/barbarians/conf:185
 msgid "Deeper Coal Mine"
 msgstr "Tiefere Kohlenmine"
 
-#: ../../../tribes/barbarians/conf:169
+#: ../../../tribes/barbarians/conf:186
 msgid "Deep Coal Mine"
 msgstr "Tiefe Kohlenmine"
 
-#: ../../../tribes/barbarians/conf:170
+#: ../../../tribes/barbarians/conf:187
 msgid "Coal mine"
 msgstr "Kohlenmine"
 
-#: ../../../tribes/barbarians/conf:171
+#: ../../../tribes/barbarians/conf:188
 msgid "Deeper Gold Mine"
 msgstr "Tiefere Goldmine"
 
-#: ../../../tribes/barbarians/conf:172
+#: ../../../tribes/barbarians/conf:189
 msgid "Deeper Iron Ore Mine"
 msgstr "Tiefere Eisenmine"
 
-#: ../../../tribes/barbarians/conf:173
+#: ../../../tribes/barbarians/conf:190
 msgid "Deep Gold Mine"
 msgstr "Tiefe Goldmine"
 
-#: ../../../tribes/barbarians/conf:174
+#: ../../../tribes/barbarians/conf:191
 msgid "Deep Iron Ore Mine"
 msgstr "Tiefe Eisenmine"
 
-#: ../../../tribes/barbarians/conf:175
+#: ../../../tribes/barbarians/conf:192
 msgid "Farm"
 msgstr "Bauernhof"
 
-#: ../../../tribes/barbarians/conf:176
+#: ../../../tribes/barbarians/conf:193
 msgid "Fernery"
 msgstr "Reet- und Flachshof"
 
-#: ../../../tribes/barbarians/conf:177
+#: ../../../tribes/barbarians/conf:194
 msgid "Fisher's Hut"
 msgstr "Fischerhütte"
 
-#: ../../../tribes/barbarians/conf:178
+#: ../../../tribes/barbarians/conf:195
 msgid "Gamekeeper's Hut"
 msgstr "Wildhüterhütte"
 
-#: ../../../tribes/barbarians/conf:179
+#: ../../../tribes/barbarians/conf:196
 msgid "Gold Mine"
 msgstr "Goldmine"
 
-#: ../../../tribes/barbarians/conf:180
+#: ../../../tribes/barbarians/conf:197
 msgid "Granite Mine"
 msgstr "Granitmine"
 
-#: ../../../tribes/barbarians/conf:181
+#: ../../../tribes/barbarians/conf:198
 msgid "Wood Hardener"
 msgstr "Holzhärter"
 
-#: ../../../tribes/barbarians/conf:182
+#: ../../../tribes/barbarians/conf:199
 msgid "Helmsmithy"
 msgstr "Helmschmiede"
 
-#: ../../../tribes/barbarians/conf:183
+#: ../../../tribes/barbarians/conf:200
 msgid "Hunter's Hut"
 msgstr "Jagdhütte"
 
-#: ../../../tribes/barbarians/conf:184
+#: ../../../tribes/barbarians/conf:201
 msgid "Inn"
 msgstr "Wirtshaus"
 
-#: ../../../tribes/barbarians/conf:185
+#: ../../../tribes/barbarians/conf:202
 msgid "Lime Kiln"
 msgstr "Kalkbrennerei"
 
-#: ../../../tribes/barbarians/conf:186
+#: ../../../tribes/barbarians/conf:203
 msgid "Lumberjack's Hut"
 msgstr "Holzfällerhütte"
 
-#: ../../../tribes/barbarians/conf:187
+#: ../../../tribes/barbarians/conf:204
 msgid "Metalwork Shop"
 msgstr "Schmiede"
 
-#: ../../../tribes/barbarians/conf:188
+#: ../../../tribes/barbarians/conf:205
 msgid "Micro Brewery"
 msgstr "Kleinbrauerei"
 
-#: ../../../tribes/barbarians/conf:189
+#: ../../../tribes/barbarians/conf:206
 msgid "Iron Ore Mine"
 msgstr "Eisenmine"
 
-#: ../../../tribes/barbarians/conf:190
+#: ../../../tribes/barbarians/conf:207
 msgid "Quarry"
 msgstr "Steinbruch"
 
-#: ../../../tribes/barbarians/conf:191
+#: ../../../tribes/barbarians/conf:208
 msgid "Ranger's Hut"
 msgstr "Försterhütte"
 
-#: ../../../tribes/barbarians/conf:192
+#: ../../../tribes/barbarians/conf:209
 msgid "Smelting Works"
 msgstr "Hochofen"
 
-#: ../../../tribes/barbarians/conf:193
+#: ../../../tribes/barbarians/conf:210
 msgid "Tavern"
 msgstr "Taverne"
 
-#: ../../../tribes/barbarians/conf:194
+#: ../../../tribes/barbarians/conf:211
 msgid "Weaving-Mill"
 msgstr "Weberei"
 
-#: ../../../tribes/barbarians/conf:195
+#: ../../../tribes/barbarians/conf:212
 msgid "Well"
 msgstr "Brunnen"
 
-#: ../../../tribes/barbarians/conf:198
+#: ../../../tribes/barbarians/conf:215
 msgid "Headquarters medium"
 msgstr "norm. Hauptquartier"
 
-#: ../../../tribes/barbarians/conf:199
+#: ../../../tribes/barbarians/conf:216
 msgid "Citadel village"
 msgstr "Zitadellen Dorf"
 
