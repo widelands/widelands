@@ -804,9 +804,6 @@ void Soldier::battle_update(Game & game, State &)
 					molog
 						("player %u's soldier started task_movepath\n",
 						 owner().player_number());
-					molog
-						("player %u's soldier started task_movepath\n",
-						 owner().player_number());
 					return;
 				} else {
 					BaseImmovable const * const immovable_position =
