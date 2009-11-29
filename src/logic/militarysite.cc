@@ -508,10 +508,6 @@ bool MilitarySite::attack(Soldier & enemy)
 {
 	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
 
-	// Inform the player, that we are under attack by adding a new entry to the
-	// message queue - a sound will automatically be played.
-	informPlayer(game);
-
 	std::vector<Soldier *> present = presentSoldiers();
 	Soldier * defender = 0;
 
@@ -538,11 +534,15 @@ bool MilitarySite::attack(Soldier & enemy)
 		m_soldierjobs.push_back(sj);
 
 		defender->update_task_buildingwork(game);
+
+		// Inform the player, that we are under attack by adding a new entry to
+		// the message queue - a sound will automatically be played.
+		informPlayer(game);
+
 		return true;
 	} else {
 		// The enemy has defeated our forces, we should inform the player
-		const Coords        coords  = get_position();
-		const Player_Number current = owner().player_number();
+		const Coords coords = get_position();
 		{
 			char message[2048];
 			snprintf
@@ -550,7 +550,7 @@ bool MilitarySite::attack(Soldier & enemy)
 				 _("The enemy defeated your soldiers at the %s."),
 				 descname().c_str());
 			MessageQueue::add
-				(current,
+				(owner().player_number(),
 				 Message
 				 	(MSG_SITE_LOST, game.get_gametime(),
 				 	 _("Militarysite lost!"), coords, message));
@@ -614,7 +614,7 @@ bool MilitarySite::attack(Soldier & enemy)
 				 _("Your soldiers defeated the enemy at the %s."),
 				 newsite->descname().c_str());
 		MessageQueue::add
-			(current,
+			(enemyplayer->player_number(),
 			 Message
 			 	(MSG_SITE_DEFEATED, game.get_gametime(),
 			 	 _("Enemy at site defeated!"), coords, message));
