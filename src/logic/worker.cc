@@ -1601,7 +1601,7 @@ void Worker::return_update(Game & game, State & state)
 			 	(_("Game engine"),
 			 	 game.get_gametime(),
 			 	 _("Logic error"),
-			 	 Widelands::Coords(get_position()),
+			 	 get_position(),
 			 	 buffer));
 		game.gameController()->setDesiredSpeed(0);
 		return set_location(0);
