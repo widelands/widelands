@@ -1116,7 +1116,7 @@ void NetHost::welcomeClient
 		uint32_t i = 2;
 		do {
 			char buf[32];
-			snprintf(buf, sizeof(buf), " %u", i++);
+			snprintf(buf, sizeof(buf), "%u", i++);
 			effective_name = playername + buf;
 		} while (haveUserName(effective_name, client.usernum));
 	}
