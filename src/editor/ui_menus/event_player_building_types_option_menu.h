@@ -38,8 +38,6 @@ struct Event_Player_Building_Types_Option_Menu : public UI::Window {
 		(Editor_Interactive &, Widelands::Event_Player_Building_Types &);
 
 	void draw(RenderTarget &);
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
 	Editor_Interactive & eia();
@@ -73,7 +71,7 @@ private:
 	struct Decrement_Player : public UI::Button {
 		Decrement_Player
 			(Event_Player_Building_Types_Option_Menu & parent, bool enable);
-		virtual void clicked() const {
+		void clicked() {
 			ref_cast<Event_Player_Building_Types_Option_Menu, UI::Panel>
 				(*get_parent())
 			.change_player(false);
@@ -82,7 +80,7 @@ private:
 	struct Increment_Player : public UI::Button {
 		Increment_Player
 			(Event_Player_Building_Types_Option_Menu & parent, bool enable);
-		virtual void clicked() const {
+		void clicked() {
 			ref_cast<Event_Player_Building_Types_Option_Menu, UI::Panel>
 				(*get_parent())
 			.change_player(true);
@@ -96,7 +94,7 @@ private:
 				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 				 _("Clear"), _("Clear selection"))
 		{}
-		virtual void clicked() const {
+		void clicked() {
 			Event_Player_Building_Types_Option_Menu & parent =
 				ref_cast<Event_Player_Building_Types_Option_Menu, UI::Panel>
 					(*get_parent());
@@ -117,7 +115,7 @@ private:
 				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 				 _("Invert"), _("Invert selection"))
 		{}
-		virtual void clicked() const {
+		void clicked() {
 			Event_Player_Building_Types_Option_Menu & parent =
 				ref_cast<Event_Player_Building_Types_Option_Menu, UI::Panel>
 					(*get_parent());
@@ -146,7 +144,7 @@ private:
 				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 				 _("Ok"))
 		{}
-		virtual void clicked() const;
+		void clicked();
 	} ok;
 	struct Cancel : public UI::Button {
 		Cancel(Event_Player_Building_Types_Option_Menu & parent) :
@@ -156,7 +154,7 @@ private:
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 				 _("Cancel"))
 		{}
-		virtual void clicked() const {
+		void clicked() {
 			ref_cast<Event_Player_Building_Types_Option_Menu, UI::Panel>
 				(*get_parent())
 			.end_modal(0);

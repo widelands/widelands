@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,7 +76,7 @@ struct Button : public Panel {
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
-	virtual void clicked() const = 0; /// Override this to react on the click.
+	virtual void clicked() = 0; /// Override this to react on the click.
 
 	bool        m_highlighted;    //  mouse is over the button
 	bool        m_pressed;
@@ -157,9 +157,7 @@ template <typename T> struct Callback_Button : public Button {
 protected:
 	void (T::*_callback_function)();
 	T & _callback_argument_this;
-	void clicked() const {
-		(_callback_argument_this.*_callback_function)();
-	}
+	void clicked() {(_callback_argument_this.*_callback_function)();}
 };
 
 /**
@@ -229,7 +227,7 @@ protected:
 	void (T::*_callback_function)(ID);
 	T & _callback_argument_this;
 	const ID _callback_argument_id;
-	void clicked() const {
+	void clicked() {
 		(_callback_argument_this.*_callback_function)(_callback_argument_id);
 	}
 };

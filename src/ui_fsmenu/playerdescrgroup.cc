@@ -262,7 +262,7 @@ void PlayerDescriptionGroup::enable_player(bool on)
 /**
  * The checkbox to indicate whether player is ready to start
  */
-void PlayerDescriptionGroup::ready_player(bool ready)
+void PlayerDescriptionGroup::ready_player(bool const ready)
 {
 	GameSettings const & settings = d->settings->settings();
 

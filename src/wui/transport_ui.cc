@@ -143,7 +143,7 @@ private:
 			{
 				set_repeating(true);
 			}
-			virtual void clicked() const {
+			void clicked() {
 				Ware_Type_Box const & parent =
 					ref_cast<Ware_Type_Box, UI::Panel>(*get_parent());
 				Economy & e = parent.economy();
@@ -172,7 +172,7 @@ private:
 			{
 				set_repeating(true);
 			}
-			virtual void clicked() const {
+			void clicked() {
 				Ware_Type_Box const & parent =
 					ref_cast<Ware_Type_Box, UI::Panel>(*get_parent());
 				Economy & e = parent.economy();
@@ -200,7 +200,7 @@ private:
 			{
 				set_repeating(true);
 			}
-			virtual void clicked() const {
+			void clicked() {
 				Ware_Type_Box const & parent =
 					ref_cast<Ware_Type_Box, UI::Panel>(*get_parent());
 				Economy & e = parent.economy();
@@ -230,7 +230,7 @@ private:
 			{
 				set_repeating(true);
 			}
-			virtual void clicked() const {
+			void clicked() {
 				Ware_Type_Box const & parent =
 					ref_cast<Ware_Type_Box, UI::Panel>(*get_parent());
 				Economy & e = parent.economy();
@@ -253,7 +253,7 @@ private:
 					(&parent, 330, 0, 90, 24, g_gr->get_no_picture(),
 					 _("Reset"), _("Reset target quantity to default value"))
 			{}
-			virtual void clicked() const {
+			void clicked() {
 				Ware_Type_Box const & parent =
 					ref_cast<Ware_Type_Box, UI::Panel>(*get_parent());
 				Economy & e = parent.economy();

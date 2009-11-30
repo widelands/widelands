@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -99,29 +99,6 @@ Editor_Event_Menu_New_Trigger::Editor_Event_Menu_New_Trigger
 	center_to_parent();
 }
 
-
-/**
- * Handle mouseclick
- *
- * we're a modal, therefore we can not delete ourself
- * on close (the caller must do this) instead
- * we simulate a cancel click
- * We are not draggable.
- */
-bool Editor_Event_Menu_New_Trigger::handle_mousepress
-	(Uint8 const btn, int32_t, int32_t)
-{
-	if (btn == SDL_BUTTON_RIGHT) {
-		end_modal(0);
-		return true;
-	}
-	return false;
-}
-bool Editor_Event_Menu_New_Trigger::handle_mouserelease
-	(Uint8,           int32_t, int32_t)
-{
-	return false;
-}
 
 /**
  * A button has been clicked

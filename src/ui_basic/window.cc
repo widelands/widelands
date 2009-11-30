@@ -365,10 +365,12 @@ bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my) {
 		_drag_start_mouse_x = get_x() + get_lborder() + mx;
 		_drag_start_mouse_y = get_y() + get_tborder() + my;
 		grab_mouse(true);
-	}
-	else if (btn == SDL_BUTTON_RIGHT) {
+	} else if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
-		delete this; // is this 100% safe?
+		if (is_modal())
+			end_modal(0);
+		else
+			delete this; //  is this 100% safe?
 		//  FIXME No, at least provide a flag for making a window unclosable and
 		//  FIXME provide a callback.
 	}

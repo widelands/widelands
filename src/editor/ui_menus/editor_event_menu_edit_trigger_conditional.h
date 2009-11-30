@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,8 +40,6 @@ struct Editor_Event_Menu_Edit_TriggerConditional : public UI::Window {
 		 Widelands::TriggerConditional *,
 		 Widelands::EventChain *);
 
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 	Widelands::TriggerConditional * get_trigcond() {return m_given_cond;}
 
 private:

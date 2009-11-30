@@ -92,7 +92,7 @@ private:
 				 g_gr->get_picture(PicMod_UI, "pics/menu_watch_follow.png"),
 				 _("Follow"))
 		{}
-		virtual void clicked() const {
+		void clicked() {
 			WatchWindow     & parent =
 				ref_cast<WatchWindow, UI::Panel>(*get_parent());
 			Widelands::Game & game   = parent.game();
@@ -155,7 +155,7 @@ private:
 				 g_gr->get_picture(PicMod_UI, "pics/menu_goto.png"),
 				 _("Center mainview on this"))
 		{}
-		virtual void clicked() const {
+		void clicked() {
 			WatchWindow & parent  =
 				ref_cast<WatchWindow, UI::Panel>(*get_parent());
 			Map_View    & mapview = parent.mapview;
@@ -183,7 +183,7 @@ private:
 		{
 			set_visible(visible);
 		}
-		virtual void clicked() const {
+		void clicked() {
 			WatchWindow & parent =
 				ref_cast<WatchWindow, UI::Panel>(*get_parent());
 			if (parent.views.size() == 1) {
@@ -211,7 +211,7 @@ private:
 				 false),
 			m_index   (index)
 		{}
-		virtual void clicked() const {
+		void clicked() {
 			WatchWindow & parent =
 				ref_cast<WatchWindow, UI::Panel>(*get_parent());
 			parent.save_coords();

@@ -47,9 +47,6 @@ struct Edit_Objective_Window : public UI::Window {
 		(Editor_Interactive & parent,
 		 UI::Table<Objective &>::Entry_Record &);
 
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
-
 private:
 	Editor_Interactive & eia() {
 		return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
@@ -121,26 +118,6 @@ Edit_Objective_Window::Edit_Objective_Window
 	center_to_parent();
 }
 
-/**
- * Handle mouseclick
- *
- * we're a modal, therefore we can not delete ourself
- * on close (the caller must do this) instead
- * we simulate a cancel click
- * We are not draggable.
- */
-bool Edit_Objective_Window::handle_mousepress(const Uint8 btn, int32_t, int32_t)
-{
-	if (btn == SDL_BUTTON_RIGHT) {
-		end_modal(0);
-		return true;
-	}
-	return false;
-}
-bool Edit_Objective_Window::handle_mouserelease(const Uint8, int32_t, int32_t)
-{
-	return false;
-}
 
 /**
  * A button has been clicked

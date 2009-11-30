@@ -42,8 +42,6 @@ struct Editor_Event_Menu_Edit_EventChain : public UI::Window {
 	Editor_Event_Menu_Edit_EventChain
 		(Editor_Interactive &, Widelands::EventChain &);
 
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 	void think();
 
 private:

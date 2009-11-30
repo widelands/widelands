@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,68 +17,78 @@
  *
  */
 
-#ifndef TRIGGER_TIME_OPTION_MENU_H
-#define TRIGGER_TIME_OPTION_MENU_H
+#ifndef EVENT_SET_TIMER_OPTION_MENU_H
+#define EVENT_SET_TIMER_OPTION_MENU_H
 
-#include "ui_basic/checkbox.h"
 #include "ui_basic/editbox.h"
-#include "ui_basic/messagebox.h"
+#include "ui_basic/listselect.h"
+#include "ui_basic/window.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/timeedit.h"
-#include "ui_basic/window.h"
 
 struct Editor_Interactive;
-namespace Widelands {struct Trigger_Time;}
+namespace Widelands {
+struct Event_Set_Timer;
+struct Trigger_Time;
+}
 
-/**
- * This is a modal box - The user must end this first
- * before it can return
- */
-struct Trigger_Time_Option_Menu : public UI::Window {
-	Trigger_Time_Option_Menu(Editor_Interactive &, Widelands::Trigger_Time &);
+struct Event_Set_Timer_Option_Menu : public UI::Window {
+	Event_Set_Timer_Option_Menu
+		(Editor_Interactive &, Widelands::Event_Set_Timer &);
 
 private:
 	Editor_Interactive & eia();
-	void absolute_time_clickedto(bool);
+	void timer_selected(uint32_t const selection) {
+		ok.set_enabled(selection != Timer::no_selection_index());
+	}
 
-	Widelands::Trigger_Time & m_trigger;
-	UI::Textarea              label_name;
+	Widelands::Event_Set_Timer & m_event;
+	struct Label_Name : public UI::Textarea {
+		Label_Name(Event_Set_Timer_Option_Menu & parent) :
+			UI::Textarea(&parent, 5, 5, _("Name:"))
+		{}
+	} label_name;
 	struct Name : public UI::EditBox {
 		Name
-			(Trigger_Time_Option_Menu & parent,
-			 std::string const & trigger_name)
+			(Event_Set_Timer_Option_Menu & parent,
+			 std::string const & event_name)
 			:
 			UI::EditBox
 				(&parent,
 				 parent.label_name.get_x() + parent.label_name.get_w() + 5, 5,
 				 parent.get_inner_w() - parent.label_name.get_w() - 15, 20)
 		{
-			setText(trigger_name);
+			setText(event_name);
 		}
 	} name;
-	UI::Checkbox              absolute_time;
-	UI::Textarea              label_absolute_time;
-	UI::TimeEdit              time;
+	UI::TimeEdit duration;
+	struct Timer : public UI::Listselect<Widelands::Trigger_Time &> {
+		Timer
+			(Event_Set_Timer_Option_Menu   & parent,
+			 Widelands::Trigger_Time const *);
+	} timer;
 	struct OK : public UI::Button {
-		OK(Trigger_Time_Option_Menu & parent) :
+		OK(Event_Set_Timer_Option_Menu & parent) :
 			UI::Button
 				(&parent,
-				 5, 120, 150, 20,
+				 5, 335, 150, 20,
 				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-				 _("Ok"))
+				 _("Ok"),
+				 std::string(),
+				 parent.timer.has_selection())
 		{}
 		void clicked();
 	} ok;
 	struct Cancel : public UI::Button {
-		Cancel(Trigger_Time_Option_Menu & parent) :
+		Cancel(Event_Set_Timer_Option_Menu & parent) :
 			UI::Button
 				(&parent,
-				 165, 120, 150, 20,
+				 165, 335, 150, 20,
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 				 _("Cancel"))
 		{}
-		void clicked() {
-			ref_cast<Trigger_Time_Option_Menu, UI::Panel>(*get_parent())
+		virtual void clicked() {
+			ref_cast<Event_Set_Timer_Option_Menu, UI::Panel>(*get_parent())
 			.end_modal(0);
 		}
 	} cancel;

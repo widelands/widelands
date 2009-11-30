@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,9 +40,6 @@ struct Main_Menu_Save_Map_Make_Directory : public UI::Window {
 	Main_Menu_Save_Map_Make_Directory(UI::Panel *, char const *);
 
 	char const * get_dirname() {return m_dirname.c_str();}
-
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
 	std::string                                                m_dirname;

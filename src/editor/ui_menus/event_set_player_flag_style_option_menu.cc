@@ -93,10 +93,7 @@ void Event_Set_Player_Flag_Style_Option_Menu::draw(RenderTarget & dst) {
 bool Event_Set_Player_Flag_Style_Option_Menu::handle_mousepress
 	(Uint8 const btn, int32_t const x, int32_t const y)
 {
-	if (btn == SDL_BUTTON_RIGHT) {
-		end_modal(0);
-		return true;
-	} else if
+	if
 		(btn == SDL_BUTTON_LEFT and
 		 140 <= x and x <= 315 and 30 <= y and y <= 90)
 	{
@@ -110,16 +107,11 @@ bool Event_Set_Player_Flag_Style_Option_Menu::handle_mousepress
 		}
 		return true;
 	}
-	return false;
-}
-bool Event_Set_Player_Flag_Style_Option_Menu::handle_mouserelease
-	(Uint8,           int32_t, int32_t)
-{
-	return false;
+	return UI::Window::handle_mousepress(btn, x, y);
 }
 
 
-void Event_Set_Player_Flag_Style_Option_Menu::OK::clicked() const {
+void Event_Set_Player_Flag_Style_Option_Menu::OK::clicked() {
 	Event_Set_Player_Flag_Style_Option_Menu & parent =
 		ref_cast<Event_Set_Player_Flag_Style_Option_Menu, UI::Panel>
 			(*get_parent());

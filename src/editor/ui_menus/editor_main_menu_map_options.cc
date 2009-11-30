@@ -151,7 +151,7 @@ void Main_Menu_Map_Options::editbox_changed() {
 }
 
 
-void Main_Menu_Map_Options::Enable_Set_Origin_Tool_Button::clicked() const {
+void Main_Menu_Map_Options::Enable_Set_Origin_Tool_Button::clicked() {
 	Editor_Interactive & eia =
 		ref_cast<Main_Menu_Map_Options, UI::Panel>(*get_parent()).eia();
 	eia.select_tool(eia.tools.set_origin, Editor_Tool::First);

@@ -267,30 +267,6 @@ Event_Conquer_Area_Option_Menu::Event_Conquer_Area_Option_Menu
 }
 
 
-/**
- * Handle mouseclick
- *
- * we're a modal, therefore we can not delete ourself
- * on close (the caller must do this) instead
- * we simulate a cancel click
- * We are not draggable.
- */
-bool Event_Conquer_Area_Option_Menu::handle_mousepress
-	(Uint8 const btn, int32_t, int32_t)
-{
-	if (btn == SDL_BUTTON_RIGHT) {
-		end_modal(0);
-		return true;
-	}
-	return false;
-}
-bool Event_Conquer_Area_Option_Menu::handle_mouserelease
-	(Uint8,           int32_t, int32_t)
-{
-	return false;
-}
-
-
 void Event_Conquer_Area_Option_Menu::clicked_ok() {
 	std::string const & name = m_name->text();
 	if (name.size()) {

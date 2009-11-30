@@ -366,30 +366,6 @@ Trigger_Building_Option_Menu::Trigger_Building_Option_Menu
 }
 
 
-/**
- * Handle mouseclick
- *
- * we're a modal, therefore we can not delete ourself
- * on close (the caller must do this) instead
- * we simulate a cancel click
- * We are not draggable.
- */
-bool Trigger_Building_Option_Menu::
-	handle_mousepress(const Uint8 btn, int32_t, int32_t)
-{
-	if (btn == SDL_BUTTON_RIGHT) {
-		end_modal(0);
-		return true;
-	}
-	return false;
-}
-bool Trigger_Building_Option_Menu::
-	handle_mouserelease(Uint8, int32_t, int32_t)
-{
-	return false;
-}
-
-
 ///  Change the player number 1 step in any direction. Wraps around.
 void Trigger_Building_Option_Menu::clicked_change_player(const bool up) {
 	Widelands::Editor_Game_Base       & egbase     = eia().egbase();

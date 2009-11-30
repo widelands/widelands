@@ -113,7 +113,7 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		_("Create a road and optionally place a carrier on it")
 	},
 	{
-		false,
+		true,
 		"set_timer",              _("Set timer"),
 		_("Set a timer to trigger after a certain duration.")
 	},

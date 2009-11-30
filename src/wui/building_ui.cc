@@ -168,7 +168,7 @@ private:
 				 g_gr->get_picture(PicMod_UI,   "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game, "pics/menu_okay.png"))
 		{}
-		virtual void clicked() const;
+		void clicked();
 	} m_ok;
 
 	struct Cancel : public UI::Button {
@@ -179,7 +179,7 @@ private:
 				 g_gr->get_picture(PicMod_UI,   "pics/but4.png"),
 				 g_gr->get_picture(PicMod_Game, "pics/menu_abort.png"))
 		{}
-		virtual void clicked() const {
+		void clicked() {
 			ref_cast<BulldozeConfirm, UI::Panel>(*get_parent()).die();
 		}
 	} m_cancel;
@@ -236,7 +236,7 @@ void BulldozeConfirm::think()
 Issue the CMD_BULLDOZE command for this building.
 ===============
 */
-void BulldozeConfirm::OK::clicked() const
+void BulldozeConfirm::OK::clicked()
 {
 	BulldozeConfirm & parent =
 		ref_cast<BulldozeConfirm, UI::Panel>(*get_parent());
@@ -1747,7 +1747,7 @@ private:
 				{
 					sold_box.add(this, UI::Align_Left);
 				}
-				void clicked() const;
+				void clicked();
 			} m_drop_selected_soldier;
 
 			struct Capacity_Box : public UI::Box {
@@ -1780,7 +1780,7 @@ private:
 						set_repeating(true);
 						parent.add(this, UI::Align_Top);
 					}
-					void clicked() const {
+					void clicked() {
 						ref_cast<TrainingSite_Window, UI::Panel>
 							(*get_parent()->get_parent()->get_parent()->get_parent())
 							.act_change_soldier_capacity(-1);
@@ -1806,7 +1806,7 @@ private:
 						set_repeating(true);
 						parent.add(this, UI::Align_Top);
 					}
-					void clicked() const {
+					void clicked() {
 						ref_cast<TrainingSite_Window, UI::Panel>
 							(*get_parent()->get_parent()->get_parent()->get_parent())
 							.act_change_soldier_capacity(1);
@@ -1926,7 +1926,6 @@ get out selected soldier from this training site.
 =============
 */
 void TrainingSite_Window::Tab_Panel::Sold_Box::Drop_Selected_Soldier::clicked()
-	const
 {
 	Sold_Box & sold_box = ref_cast<Sold_Box, UI::Panel>(*get_parent());
 	if (sold_box.m_table.selection_index() != Table::no_selection_index())

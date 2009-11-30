@@ -21,7 +21,6 @@
 #define ENCYCLOPEDIA_WINDOW_H
 
 #include "graphic/graphic.h"
-#include "i18n.h"
 
 #include "ui_basic/listselect.h"
 #include "ui_basic/window.h"

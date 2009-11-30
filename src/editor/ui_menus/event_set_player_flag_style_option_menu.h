@@ -35,7 +35,6 @@ struct Event_Set_Player_Flag_Style_Option_Menu : public UI::Window {
 
 	void draw(RenderTarget &);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
 	Editor_Interactive & eia();
@@ -80,7 +79,7 @@ private:
 		{
 			set_repeating(true);
 		}
-		virtual void clicked() const {
+		void clicked() {
 			ref_cast<Event_Set_Player_Flag_Style_Option_Menu, UI::Panel>
 				(*get_parent())
 			.change_player(false);
@@ -99,7 +98,7 @@ private:
 		{
 			set_repeating(true);
 		}
-		virtual void clicked() const {
+		void clicked() {
 			ref_cast<Event_Set_Player_Flag_Style_Option_Menu, UI::Panel>
 				(*get_parent())
 			.change_player(true);
@@ -113,7 +112,7 @@ private:
 				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 				 _("Ok"))
 		{}
-		virtual void clicked() const;
+		void clicked();
 	} ok;
 	struct Cancel : public UI::Button {
 		Cancel(Event_Set_Player_Flag_Style_Option_Menu & parent) :
@@ -123,7 +122,7 @@ private:
 				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 				 _("Cancel"))
 		{}
-		virtual void clicked() const {
+		void clicked() {
 			ref_cast<Event_Set_Player_Flag_Style_Option_Menu, UI::Panel>
 				(*get_parent())
 			.end_modal(0);

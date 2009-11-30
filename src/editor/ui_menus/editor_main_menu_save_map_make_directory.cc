@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,24 +72,6 @@ UI::Window(parent, 0, 0, 230, 120, _("Make Directory"))
 	center_to_parent();
 }
 
-/**
- * Handle mouseclick for a modal
- * We are not draggable.
- */
-bool Main_Menu_Save_Map_Make_Directory::handle_mousepress
-	(Uint8 const btn, int32_t, int32_t)
-{
-	if (btn == SDL_BUTTON_RIGHT) {
-		end_modal(0);
-		return true;
-	}
-	return false;
-}
-bool Main_Menu_Save_Map_Make_Directory::handle_mouserelease
-	(Uint8,           int32_t, int32_t)
-{
-	return false;
-}
 
 /**
  * Editbox changed

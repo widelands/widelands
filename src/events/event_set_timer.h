@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,8 +38,7 @@ struct Event_Set_Timer : public Event, public Referencer<Trigger> {
 
 	std::string identifier() const {return "Event (set timer): " + name();}
 
-	bool has_option_menu() const {return false;}
-	int32_t option_menu(Editor_Interactive &) __attribute__ ((noreturn));
+	int32_t option_menu(Editor_Interactive &);
 
 	State run(Game &);
 
@@ -54,7 +53,11 @@ struct Event_Set_Timer : public Event, public Referencer<Trigger> {
 			m_trigger = new_trigger;
 		}
 	}
-	Trigger_Time * get_trigger() const {return m_trigger;}
+	Trigger_Time * trigger() const {return m_trigger;}
+
+	void set_duration(Duration const d) {m_duration = d;}
+	Duration duration() const {return m_duration;}
+
 
 private:
 	Trigger_Time * m_trigger;

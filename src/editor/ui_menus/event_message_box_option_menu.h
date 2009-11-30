@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,9 +43,6 @@ struct Textarea;
 struct Event_Message_Box_Option_Menu : public UI::Window {
 	Event_Message_Box_Option_Menu
 		(Editor_Interactive &, Widelands::Event_Message_Box &);
-
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 private:
 	static const uint32_t MAX_BUTTONS = 4;

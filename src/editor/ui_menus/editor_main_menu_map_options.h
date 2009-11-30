@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ private:
 	UI::EditBox * m_name, * m_author;
 	struct Enable_Set_Origin_Tool_Button : UI::Button {
 		Enable_Set_Origin_Tool_Button(Main_Menu_Map_Options &);
-		virtual void clicked() const;
+		void clicked();
 	} m_enable_set_origin_tool;
 	void update();
 };
