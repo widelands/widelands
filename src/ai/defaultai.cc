@@ -1109,6 +1109,12 @@ bool DefaultAI::construct_roads (int32_t gametime)
 	if (eo_to_connect->flags.empty())
 		return check_economies();
 
+	// Check if the flag is still there and if not care about that situation
+	if (!eo_to_connect->flags.front()) {
+		eo_to_connect->flags.pop_front();
+		return check_economies();
+	}
+
 	// Try to connect - this should work fine as in nearly all cases we simply
 	// connect a constructionsite
 	bool done = connect_flag_to_another_economy(*eo_to_connect->flags.front());

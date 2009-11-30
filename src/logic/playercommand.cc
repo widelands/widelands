@@ -1030,11 +1030,11 @@ void Cmd_EnemyFlagAction::execute (Game & game)
 		ref_cast<PlayerImmovable, Map_Object>
 			(*game.objects().get_object(serial));
 
-	log
-		("player(%u)    imm->owner (%d) number = %u\n",
-		 player.player_number(), imm.owner().player_number(), number);
-
 	if (upcast(Flag, flag, &imm)) {
+		log
+			("Cmd_EnemyFlagAction::execute player(%u): imm->owner(%d) number=%u\n",
+			 player.player_number(), imm.owner().player_number(), number);
+
 		if (Building const * const building = flag->get_building())
 			if
 				(&imm.owner() != &player
