@@ -1026,18 +1026,16 @@ PlayerCommand (0, des.Unsigned8())
 void Cmd_EnemyFlagAction::execute (Game & game)
 {
 	Player & player = game.player(sender());
-	PlayerImmovable & imm =
-		ref_cast<PlayerImmovable, Map_Object>
-			(*game.objects().get_object(serial));
 
-	if (upcast(Flag, flag, &imm)) {
+	if (upcast(Flag, flag, game.objects().get_object(serial))) {
 		log
-			("Cmd_EnemyFlagAction::execute player(%u): imm->owner(%d) number=%u\n",
-			 player.player_number(), imm.owner().player_number(), number);
+			("Cmd_EnemyFlagAction::execute player(%u): flag->owner(%d) "
+			 "number=%u\n",
+			 player.player_number(), flag->owner().player_number(), number);
 
-		if (Building const * const building = flag->get_building())
+		if (Building const * const building = flag->get_building()) {
 			if
-				(&imm.owner() != &player
+				(&flag->owner() != &player
 				 and
 				 1
 				 <
@@ -1045,8 +1043,16 @@ void Cmd_EnemyFlagAction::execute (Game & game)
 				 	(Map::get_index
 				 	 	(building->get_position(), game.map().get_width())))
 				player.enemyflagaction (*flag, sender(), number);
+			else
+				log
+					("Cmd_EnemyFlagAction::execute: ERROR: wrong player target not "
+					 "seen.\n");
+		} else
+			log("Cmd_EnemyFlagAction::execute: ERROR: flag has no building\n");
 	} else
-		log ("Cmd_EnemyFlagAction Player invalid or not seeing target.\n");
+		log
+			("Cmd_EnemyFlagAction::execute: ERROR: no flag with serial %u\n",
+			 serial);
 }
 
 void Cmd_EnemyFlagAction::serialize (StreamWrite & ser) {
