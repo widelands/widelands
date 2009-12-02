@@ -132,7 +132,7 @@ struct ProductionProgram {
 			(char * & parameters, Tribe_Descr const &);
 		struct Negation : public Condition {
 			Negation
-				(char * parameters, Tribe_Descr const & tribe)
+				(char * & parameters, Tribe_Descr const & tribe)
 				: operand(create_condition(parameters, tribe))
 			{}
 			virtual ~Negation();
