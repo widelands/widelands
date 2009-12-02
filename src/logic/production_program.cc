@@ -224,31 +224,38 @@ ProductionProgram::ActReturn::~ActReturn() {
 void ProductionProgram::ActReturn::execute
 	(Game & game, ProductionSite & ps) const
 {
-	if (m_is_when) { //  "when a and b and ..." (all conditions must be true)
-		container_iterate_const(Conditions, m_conditions, i)
-			if (not (*i.current)->evaluate(ps)) { //  A condition is false,
-				snprintf
-					(ps.m_statistics_buf, sizeof(ps.m_statistics_buf),
-					 _("Resting because: %s"),
-					 (*i.current)->description(ps.owner().tribe()).c_str());
-				return ps.program_end(game, m_result); //  end program.
-			}
-		return ps.program_step(game);
-	} else { //  "unless a or b or ..." (all conditions must be false)
-		std::string resting_because = _("Resting because not: ");
-		container_iterate_const(Conditions, m_conditions, i)
-			if ((*i.current)->evaluate(ps)) //  A condition is true,
-				return ps.program_step(game); //  continue program.
-			else {
-				resting_because += (*i.current)->description(ps.owner().tribe());
-				resting_because += _(", ");
-			}
-		resting_because.resize(resting_because.size() - strlen(_(", ")));
+	if (m_conditions.size()) {
+		char const * operator_string;
+		std::string resting_because;
+		if (m_is_when) { //  "when a and b and ..." (all conditions must be true)
+			operator_string = _(" and ");
+			resting_because = _("Resting because: ");
+			container_iterate_const(Conditions, m_conditions, i)
+				if (not (*i.current)->evaluate(ps)) //  A condition is false,
+					return ps.program_step(game); //  continue program.
+				else {
+					resting_because +=
+						(*i.current)->description(ps.owner().tribe());
+					resting_because += operator_string;
+				}
+		} else { //  "unless a or b or ..." (all conditions must be false)
+			operator_string = _(" or ");
+			resting_because = _("Resting because not: ");
+			container_iterate_const(Conditions, m_conditions, i)
+				if ((*i.current)->evaluate(ps)) //  A condition is true,
+					return ps.program_step(game); //  continue program.
+				else {
+					resting_because +=
+						(*i.current)->description(ps.owner().tribe());
+					resting_because += operator_string;
+				}
+		}
+		resting_because.resize(resting_because.size() - strlen(operator_string));
 		snprintf
 			(ps.m_statistics_buf, sizeof(ps.m_statistics_buf),
 			 "%s", resting_because.c_str());
-		return ps.program_end(game, m_result);
 	}
+	return ps.program_end(game, m_result);
 }
 
 
