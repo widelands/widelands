@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -120,6 +120,8 @@ struct ProductionProgram {
 		struct Condition {
 			virtual ~Condition();
 			virtual bool evaluate(ProductionSite const &) const = 0;
+			virtual std::string description(Tribe_Descr const &) const
+				= 0;
 #ifdef WRITE_GAME_DATA_AS_HTML
 			virtual void writeHTML
 				(::FileWrite &, ProductionSite_Descr const &) const
@@ -135,6 +137,7 @@ struct ProductionProgram {
 			{}
 			virtual ~Negation();
 			virtual bool evaluate(ProductionSite const &) const;
+			std::string description(Tribe_Descr const &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
 				(::FileWrite &, ProductionSite_Descr const &) const;
@@ -147,6 +150,7 @@ struct ProductionProgram {
 		struct Economy_Needs : public Condition {
 			Economy_Needs(char * & parameters, Tribe_Descr const &);
 			virtual bool evaluate(ProductionSite const &) const;
+			std::string description(Tribe_Descr const &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
 				(::FileWrite &, ProductionSite_Descr const &) const;
@@ -159,6 +163,7 @@ struct ProductionProgram {
 		/// become upgraded.
 		struct Workers_Need_Experience : public Condition {
 			virtual bool evaluate(ProductionSite const &) const;
+			std::string description(Tribe_Descr const &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
 			(::FileWrite &, ProductionSite_Descr const &) const;

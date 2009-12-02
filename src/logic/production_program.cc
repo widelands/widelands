@@ -48,6 +48,11 @@ bool ProductionProgram::ActReturn::Negation::evaluate
 {
 	return not operand->evaluate(ps);
 }
+std::string ProductionProgram::ActReturn::Negation::description
+	(Tribe_Descr const & tribe) const
+{
+	return _("not ") + operand->description(tribe);
+}
 
 
 ProductionProgram::ActReturn::Economy_Needs::Economy_Needs
@@ -76,7 +81,11 @@ bool ProductionProgram::ActReturn::Economy_Needs::evaluate
 #endif
 	return ps.get_economy()->needs_ware(ware_type);
 }
-
+std::string ProductionProgram::ActReturn::Economy_Needs::description
+	(Tribe_Descr const & tribe) const
+{
+	return _("economy needs ") + tribe.get_ware_descr(ware_type)->descname();
+}
 
 bool ProductionProgram::ActReturn::Workers_Need_Experience::evaluate
 	(ProductionSite const & ps) const
@@ -86,6 +95,11 @@ bool ProductionProgram::ActReturn::Workers_Need_Experience::evaluate
 		if (wp[--i].worker->needs_experience())
 			return true;
 	return false;
+}
+std::string ProductionProgram::ActReturn::Workers_Need_Experience::description
+	(Tribe_Descr const &) const
+{
+	return _("workers need experience");
 }
 
 
@@ -212,13 +226,27 @@ void ProductionProgram::ActReturn::execute
 {
 	if (m_is_when) { //  "when a and b and ..." (all conditions must be true)
 		container_iterate_const(Conditions, m_conditions, i)
-			if (not (*i.current)->evaluate(ps)) //  A condition is false,
+			if (not (*i.current)->evaluate(ps)) { //  A condition is false,
+				snprintf
+					(ps.m_statistics_buf, sizeof(ps.m_statistics_buf),
+					 _("Resting because: %s"),
+					 (*i.current)->description(ps.owner().tribe()).c_str());
 				return ps.program_end(game, m_result); //  end program.
+			}
 		return ps.program_step(game);
 	} else { //  "unless a or b or ..." (all conditions must be false)
+		std::string resting_because = _("Resting because not: ");
 		container_iterate_const(Conditions, m_conditions, i)
 			if ((*i.current)->evaluate(ps)) //  A condition is true,
 				return ps.program_step(game); //  continue program.
+			else {
+				resting_because += (*i.current)->description(ps.owner().tribe());
+				resting_because += _(", ");
+			}
+		resting_because.resize(resting_because.size() - strlen(_(", ")));
+		snprintf
+			(ps.m_statistics_buf, sizeof(ps.m_statistics_buf),
+			 "%s", resting_because.c_str());
 		return ps.program_end(game, m_result);
 	}
 }
