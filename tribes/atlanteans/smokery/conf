@@ -22,14 +22,14 @@ smoke_fish=_Smoke fish
 work=_Work
 
 [smoke_meat]
-return=skipped unless economy needs smoked_meat
+return=skipped when economy needs trunk
 consume=meat:2 trunk
 sleep=30000
 animate=working 30000
 produce=smoked_meat:2
 
 [smoke_fish]
-return=skipped unless economy needs smoked_fish
+return=skipped when economy needs trunk
 consume=fish:2 trunk
 sleep=30000
 animate=working 30000
