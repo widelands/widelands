@@ -54,7 +54,7 @@ namespace Widelands {
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 1
 #define CURRENT_WAREHOUSE_PACKET_VERSION        1
 #define CURRENT_MILITARYSITE_PACKET_VERSION     3
-#define CURRENT_PRODUCTIONSITE_PACKET_VERSION   2
+#define CURRENT_PRODUCTIONSITE_PACKET_VERSION   3
 #define CURRENT_TRAININGSITE_PACKET_VERSION     3
 
 
@@ -589,6 +589,26 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			//  items from flags
 			productionsite.m_fetchfromflag = fr.Signed32();
 
+			//  skipped programs
+			uint32_t const gametime = game.get_gametime();
+			for (uint8_t i = 3 <= packet_version ? fr.Unsigned8() : 0; i; --i) {
+				char const * const program_name = fr.CString();
+				if (descr.programs().count(program_name)) {
+					uint32_t const skip_time = fr.Unsigned32();
+					if (gametime < skip_time)
+						throw game_data_error
+							(_
+							 	("program %s was skipped at time %u, but time is only "
+							 	 "%u"),
+							 program_name, skip_time, gametime);
+					productionsite.m_skipped_programs[program_name] = skip_time;
+				} else
+					log
+						("WARNING: productionsite has skipped program \"%s\", which "
+						 "does not exist\n",
+						 program_name);
+			}
+
 			//  state
 			uint16_t const nr_progs = fr.Unsigned16();
 			productionsite.m_stack.resize(nr_progs);
@@ -1056,6 +1076,19 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 		}
 
 	fw.Signed32(productionsite.m_fetchfromflag);
+
+	//  skipped programs
+	assert
+		(productionsite.m_skipped_programs.size()
+		 <=
+		 std::numeric_limits<uint8_t>::max());
+	fw.Unsigned8(productionsite.m_skipped_programs.size());
+	container_iterate_const
+		(ProductionSite::Skipped_Programs, productionsite.m_skipped_programs, i)
+	{
+		fw.String    (i.current->first);
+		fw.Unsigned32(i.current->second);
+	}
 
 	//  state
 	uint16_t const program_size = productionsite.m_stack.size();

@@ -197,6 +197,14 @@ protected:  // TrainingSite must have access to this stuff
 
 	int32_t m_fetchfromflag; ///< Number of items to fetch from flag
 
+	/// If a program has ended with the result Skipped, that program may not
+	/// start again until a certain time has passed. This is a map from program
+	/// name to game time. When a program ends with the result Skipped, its name
+	/// is added to this map, with the current game time. (When the program ends
+	/// with any other result, its name is removed from the map.)
+	typedef std::map<std::string, Time> Skipped_Programs;
+	Skipped_Programs m_skipped_programs;
+
 	typedef std::vector<State> Stack;
 	Stack        m_stack; ///<  program stack
 	bool         m_program_timer; ///< execute next instruction based on pointer
@@ -207,7 +215,7 @@ protected:  // TrainingSite must have access to this stuff
 	Input_Queues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
 	bool                     m_statistics_changed;
-	char                     m_statistics_buf[40];
+	char                     m_statistics_buf[128];
 	int8_t                   m_last_stat_percent;
 	bool                      m_is_stopped;
 };

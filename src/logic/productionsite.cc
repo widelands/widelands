@@ -29,7 +29,6 @@
 #include "i18n.h"
 #include "map.h"
 #include "player.h"
-#include "production_program.h"
 #include "profile/profile.h"
 #include "tribe.h"
 #include "upcast.h"
@@ -692,7 +691,15 @@ void ProductionSite::program_start
 	m_stack.push_back(state);
 
 	m_program_timer = true;
-	m_program_time = schedule_act(game, 10);
+	uint32_t tdelta = 10;
+	Skipped_Programs::const_iterator i = m_skipped_programs.find(program_name);
+	if (i != m_skipped_programs.end()) {
+		uint32_t const gametime = game.get_gametime();
+		uint32_t const earliest_allowed_start_time = i->second + 10000;
+		if (gametime + tdelta < earliest_allowed_start_time)
+			tdelta = earliest_allowed_start_time - gametime;
+	}
+	m_program_time = schedule_act(game, tdelta);
 }
 
 
@@ -706,11 +713,16 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 {
 	assert(m_stack.size());
 
+	std::string const & program_name = top_state().program->name();
+
 	m_stack.pop_back();
 	if (m_stack.size())
 		top_state().phase = result;
 
-	if (result != Skipped) {
+	if (result == Skipped)
+		m_skipped_programs[program_name] = game.get_gametime();
+	else {
+		m_skipped_programs.erase(program_name);
 		m_statistics_changed = true;
 		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
 		m_statistics.push_back(result == Completed);
