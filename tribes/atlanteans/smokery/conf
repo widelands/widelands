@@ -1,3 +1,5 @@
+#help: Will smoke food unless the economy has less trunks than the target quantity and at least the target quantity of the smoked food.
+
 size=medium
 output=smoked_meat
 output=smoked_fish
@@ -22,14 +24,14 @@ smoke_fish=_Smoke fish
 work=_Work
 
 [smoke_meat]
-return=skipped when economy needs trunk
+return=skipped when economy needs trunk and not economy needs smoked_meat
 consume=meat:2 trunk
 sleep=30000
 animate=working 30000
 produce=smoked_meat:2
 
 [smoke_fish]
-return=skipped when economy needs trunk
+return=skipped when economy needs trunk and not economy needs smoked_fish
 consume=fish:2 trunk
 sleep=30000
 animate=working 30000
