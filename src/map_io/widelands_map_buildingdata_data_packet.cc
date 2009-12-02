@@ -54,7 +54,7 @@ namespace Widelands {
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 1
 #define CURRENT_WAREHOUSE_PACKET_VERSION        1
 #define CURRENT_MILITARYSITE_PACKET_VERSION     3
-#define CURRENT_PRODUCTIONSITE_PACKET_VERSION   1
+#define CURRENT_PRODUCTIONSITE_PACKET_VERSION   2
 #define CURRENT_TRAININGSITE_PACKET_VERSION     3
 
 
@@ -479,7 +479,10 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_PRODUCTIONSITE_PACKET_VERSION) {
+		if
+			(1 <= packet_version and
+			 packet_version <= CURRENT_PRODUCTIONSITE_PACKET_VERSION)
+		{
 			//  FIXME The reason for this code is probably that the constructor of
 			//  FIXME ProductionSite requests workers. That makes sense when a
 			//  FIXME ProductionSite is created in the game, but definitely not
@@ -618,10 +621,24 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			for (uint32_t i = 0; i < productionsite.m_statistics.size(); ++i)
 				productionsite.m_statistics[i] = fr.Unsigned8();
 			productionsite.m_statistics_changed = fr.Unsigned8();
-			memcpy
-				(productionsite.m_statistics_buf,
-				 fr.Data(sizeof(productionsite.m_statistics_buf)),
-				 sizeof(productionsite.m_statistics_buf));
+			if (packet_version == 1) {
+				memcpy(productionsite.m_statistics_buf, fr.Data(40), 40);
+				productionsite.m_statistics_buf[39] = '\0';
+			} else {
+				char const * const statstring        = fr.CString();
+				size_t       const statstring_length =
+					snprintf
+						(productionsite.m_statistics_buf,
+						 sizeof(productionsite.m_statistics_buf),
+						 "%s", statstring);
+				if (sizeof(productionsite.m_statistics_buf) <= statstring_length)
+					log
+						("WARNING: productionsite statistics string can be at most "
+						 "%u characters but a loaded building has the string \"%s\" "
+						 "of length %u\n",
+						 sizeof(productionsite.m_statistics_buf) - 1,
+						 statstring, statstring_length);
+			}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -1062,10 +1079,7 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		fw.Unsigned8(productionsite.m_statistics[i]);
 	fw.Unsigned8(productionsite.m_statistics_changed);
-	fw.Data
-		(productionsite.m_statistics_buf,
-		 sizeof(productionsite.m_statistics_buf),
-		 FileWrite::Pos::Null());
+	fw.String(productionsite.m_statistics_buf);
 }
 
 /*
