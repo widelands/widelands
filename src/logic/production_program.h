@@ -22,6 +22,7 @@
 
 #include "program_result.h"
 #include "tattribute.h"
+#include "ware_types.h"
 #include "widelands.h"
 #include "writeHTML.h"
 
@@ -62,6 +63,17 @@ struct ProductionProgram {
 	private:
 		Action & operator= (Action const &);
 	};
+
+	/// A group of ware types with a count.
+	typedef std::pair<std::set<Ware_Index>, uint8_t> Ware_Type_Group;
+
+	/// Parse a group of ware types followed by an optional count and terminated
+	/// by a space or null. Example: "fish,meat:2".
+	static void parse_ware_type_group
+		(char            * & parameters,
+		 Ware_Type_Group   & group,
+		 Tribe_Descr const & tribe,
+		 Ware_Types  const & inputs);
 
 	/// Returns from the program.
 	///
@@ -331,7 +343,7 @@ struct ProductionProgram {
 		virtual void writeHTML
 			(::FileWrite &, ProductionSite_Descr const &) const;
 #endif
-		typedef std::vector<std::pair<std::set<Ware_Index>, uint8_t> > Groups;
+		typedef std::vector<Ware_Type_Group> Groups;
 		Groups const & groups() const {return m_groups;}
 	private:
 		Groups m_groups;

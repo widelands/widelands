@@ -38,6 +38,72 @@ namespace Widelands {
 
 ProductionProgram::Action::~Action() {}
 
+void ProductionProgram::parse_ware_type_group
+	(char            * & parameters,
+	 Ware_Type_Group   & group,
+	 Tribe_Descr const & tribe,
+	 Ware_Types  const & inputs)
+{
+	std::set<Ware_Index>::iterator last_insert_pos = group.first.end();
+	uint8_t count = 1;
+	for (;;) {
+		char const * ware = parameters;
+		while
+			(*parameters        and *parameters != ',' and
+			 *parameters != ':' and *parameters != ' ')
+			++parameters;
+		char const terminator = *parameters;
+		*parameters = '\0';
+		Ware_Index const ware_index = tribe.safe_ware_index(ware);
+		for
+			(struct {
+			 	Ware_Types::const_iterator       current;
+			 	Ware_Types::const_iterator const end;
+			 } i = {inputs.begin(), inputs.end()};;
+			 ++i.current)
+			if (i.current == i.end)
+				throw game_data_error
+					(_
+					 	("%s is not declared as an input (\"%s=<count>\" was not "
+					 	 "found in the [inputs] section)"),
+					 ware, ware);
+			else if (i.current->first == ware_index)
+				break;
+		if
+			(group.first.size()
+			 and
+			 ware_index.value() <= group.first.begin()->value())
+			throw game_data_error
+				(_
+				 	("wrong order of ware typess within group: ware type %s apears "
+				 	 "after ware type %s (fix order!)"),
+				 ware,
+				 tribe.get_ware_descr(*group.first.begin())->name().c_str());
+		last_insert_pos = group.first.insert(last_insert_pos, ware_index);
+		*parameters = terminator;
+		switch (terminator) {
+		case ':': {
+			++parameters;
+			char * endp;
+			unsigned long long int const value = strtoull(parameters, &endp, 0);
+			count = value;
+			if ((*endp and *endp != ' ') or value < 1 or count != value)
+				throw game_data_error
+					(_("expected %s but found \"%s\""), _("count"), parameters);
+			parameters = endp;
+			//  fallthrough
+		}
+		case '\0':
+		case ' ':
+			group.second = count;
+			return;
+		case ',':
+			++parameters;
+		}
+	}
+}
+
+
 ProductionProgram::ActReturn::Condition::~Condition() {}
 
 ProductionProgram::ActReturn::Negation::~Negation() {
@@ -464,76 +530,8 @@ ProductionProgram::ActConsume::ActConsume
 		Tribe_Descr const & tribe = descr.tribe();
 		for (;;) {
 			m_groups.resize(m_groups.size() + 1);
-			std::pair<std::set<Ware_Index>, uint8_t> & group =
-				*m_groups.rbegin();
-			std::set<Ware_Index>::iterator last_insert_pos = group.first.end();
-			uint8_t count = 1;
-#if 0
-			log
-				("ActConsume::ActConsume: creating new group starting at \"%s\"\n",
-				 parameters);
-#endif
-			for (;;) {
-				char const * ware = parameters;
-				while
-					(*parameters        and *parameters != ',' and
-					 *parameters != ':' and *parameters != ' ')
-					++parameters;
-				char const terminator = *parameters;
-				*parameters = '\0';
-				Ware_Index const ware_index = tribe.safe_ware_index(ware);
-				Ware_Types const & inputs = descr.inputs();
-				for
-					(struct {
-					 	Ware_Types::const_iterator       current;
-					 	Ware_Types::const_iterator const end;
-					 } i = {inputs.begin(), inputs.end()};;
-					 ++i.current)
-					if (i.current == i.end)
-						throw game_data_error
-							(_
-							 	("%s is not declared as an input (\"%s=<count>\" was "
-							 	 "not found in the [inputs] section)"),
-							 ware, ware);
-					else if (i.current->first == ware_index)
-						break;
-				if
-					(group.first.size()
-					 and
-					 ware_index.value() <= group.first.begin()->value())
-					throw game_data_error
-						(_
-						 	("wrong order of wares within group: ware type %s "
-						 	 "appears after ware type %s (fix order!)"),
-						 ware,
-						 tribe.get_ware_descr(*group.first.begin())->name().c_str());
-				last_insert_pos = group.first.insert(last_insert_pos, ware_index);
-				//log("\t\tadded %s to group\n", ware);
-				*parameters = terminator;
-				switch (terminator) {
-				case ':': {
-					++parameters;
-					char * endp;
-					unsigned long long int const value =
-						strtoull(parameters, &endp, 0);
-					count = value;
-					if ((*endp and *endp != ' ') or value < 1 or count != value)
-						throw game_data_error
-							(_("expected %s but found \"%s\""),
-							 _("count"), parameters);
-					parameters = endp;
-					//  fallthrough
-				}
-				case '\0':
-				case ' ':
-					goto group_done;
-				case ',':
-					++parameters;
-				}
-			}
-		group_done:
-			group.second = count;
-			//log("\tfinished group with count %u\n", count);
+			parse_ware_type_group
+				(parameters, *m_groups.rbegin(), tribe, descr.inputs());
 			if (not *parameters)
 				break;
 			force_skip(parameters);
