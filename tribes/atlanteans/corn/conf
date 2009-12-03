@@ -1,5 +1,6 @@
 help=_This corn is the base of the fine cornflour, that every atlantian baker needs for a good bread.
 preciousness=12
+default_target_quantity=25
 
 # Simply corn
 [idle]

@@ -16,7 +16,7 @@ trunk=8
 work=_Work
 
 [work]
-return=skipped unless economy needs coal
+return=skipped when economy needs trunk and not economy needs coal
 consume=trunk:6
 sleep=30000
 animate=working 90000 # charcoal fires are burning some days in real life

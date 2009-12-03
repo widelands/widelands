@@ -20,14 +20,15 @@ produce_blackrootflour=_Produce blackrootflour
 work=_Work
 
 [produce_cornflour]
-return=skipped unless economy needs cornflour
+return=skipped when site has blackroot and economy needs blackrootflour and not economy needs cornflour
+return=skipped when economy needs corn and not economy needs cornflour
 consume=corn
 sleep=3500
 animate=working 15000
 produce=cornflour
 
 [produce_blackrootflour]
-return=skipped unless economy needs blackrootflour
+return=skipped when site has corn and economy needs cornflour and not economy needs blackrootflour
 consume=blackroot
 sleep=3500
 animate=working 15000

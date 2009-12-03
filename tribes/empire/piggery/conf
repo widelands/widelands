@@ -18,8 +18,9 @@ water=7
 work=_Work
 
 [work]
+return=skipped when economy needs water and not economy needs meat
+return=skipped when economy needs wheat and not economy needs meat
 sleep=25000
-return=skipped unless economy needs meat
 consume=water wheat
 playFX=../../../sound/farm/farm_animal 180
 animate=working 30000

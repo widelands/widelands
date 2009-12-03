@@ -1,5 +1,6 @@
 help=_Water is the most essential essence for life! This water is used in many places, be it to make bread or beer or to produce grout.
 preciousness=1
+default_target_quantity=25
 
 [idle]
 pics=water_idle.png

@@ -1,5 +1,6 @@
 help=_Trunks are one important build material of the Empire.
 preciousness=8
+default_target_quantity=40
 
 [idle]
 pics=trunk_idle.png
