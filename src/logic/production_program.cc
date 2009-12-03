@@ -45,7 +45,8 @@ void ProductionProgram::parse_ware_type_group
 	 Ware_Types  const & inputs)
 {
 	std::set<Ware_Index>::iterator last_insert_pos = group.first.end();
-	uint8_t count = 1;
+	uint8_t count     = 1;
+	uint8_t count_max = 0;
 	for (;;) {
 		char const * ware = parameters;
 		while
@@ -67,15 +68,17 @@ void ProductionProgram::parse_ware_type_group
 					 	("%s is not declared as an input (\"%s=<count>\" was not "
 					 	 "found in the [inputs] section)"),
 					 ware, ware);
-			else if (i.current->first == ware_index)
+			else if (i.current->first == ware_index) {
+				count_max += i.current->second;
 				break;
+			}
 		if
 			(group.first.size()
 			 and
 			 ware_index.value() <= group.first.begin()->value())
 			throw game_data_error
 				(_
-				 	("wrong order of ware typess within group: ware type %s apears "
+				 	("wrong order of ware types within group: ware type %s appears "
 				 	 "after ware type %s (fix order!)"),
 				 ware,
 				 tribe.get_ware_descr(*group.first.begin())->name().c_str());
@@ -91,6 +94,13 @@ void ProductionProgram::parse_ware_type_group
 				throw game_data_error
 					(_("expected %s but found \"%s\""), _("count"), parameters);
 			parameters = endp;
+			if (count_max < count)
+				throw game_data_error
+					(_
+					 	("group count is %u but (total) input storage capacity of "
+					 	 "the specified ware type(s) is only %u, so the group can "
+					 	 "never be fulfilled by the site"),
+					 count, count_max);
 			//  fallthrough
 		}
 		case '\0':
@@ -153,6 +163,46 @@ std::string ProductionProgram::ActReturn::Economy_Needs::description
 	return _("economy needs ") + tribe.get_ware_descr(ware_type)->descname();
 }
 
+ProductionProgram::ActReturn::Site_Has::Site_Has
+	(char * & parameters, ProductionSite_Descr const & descr)
+{
+	try {
+		parse_ware_type_group(parameters, group, descr.tribe(), descr.inputs());
+	} catch (_wexception const & e) {
+		throw game_data_error
+			("has ware_type1[,ware_type2[,...]][:N]: %s", e.what());
+	}
+}
+bool ProductionProgram::ActReturn::Site_Has::evaluate
+	(ProductionSite const & ps) const
+{
+	uint8_t count = group.second;
+	container_iterate_const(ProductionSite::Input_Queues, ps.warequeues(), i)
+		if (group.first.count((*i.current)->get_ware())) {
+			uint8_t const filled = (*i.current)->get_filled();
+			if (count <= filled)
+				return true;
+			count -= filled;
+		}
+	return false;
+}
+std::string ProductionProgram::ActReturn::Site_Has::description
+	(Tribe_Descr const & tribe) const
+{
+	std::string result = _("site has ");
+	container_iterate_const(std::set<Ware_Index>, group.first, i) {
+		result += tribe.get_ware_descr(*i.current)->descname();
+		result += ',';
+	}
+	result.resize(result.size() - 1);
+	if (1 < group.second) {
+		char buffer[32];
+		sprintf(buffer, ":%u", group.second);
+		result += buffer;
+	}
+	return result;
+}
+
 bool ProductionProgram::ActReturn::Workers_Need_Experience::evaluate
 	(ProductionSite const & ps) const
 {
@@ -185,6 +235,22 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 }
 
 
+ProductionProgram::ActReturn::Condition * create_site_condition
+	(char * & parameters, ProductionSite_Descr const & descr)
+{
+	try {
+		if (match_force_skip(parameters, "has"))
+			return
+				new ProductionProgram::ActReturn::Site_Has(parameters, descr);
+		else
+			throw game_data_error
+				(_("expected %s but found \"%s\""), "\"has\"", parameters);
+	} catch (_wexception const & e) {
+		throw game_data_error("site: %s", e.what());
+	}
+}
+
+
 ProductionProgram::ActReturn::Condition * create_workers_condition
 	(char * & parameters)
 {
@@ -203,13 +269,15 @@ ProductionProgram::ActReturn::Condition * create_workers_condition
 
 ProductionProgram::ActReturn::Condition *
 ProductionProgram::ActReturn::create_condition
-	(char * & parameters, Tribe_Descr const & tribe)
+	(char * & parameters, ProductionSite_Descr const & descr)
 {
 	try {
 		if      (match_force_skip(parameters, "not"))
-			return new ActReturn::Negation (parameters, tribe);
+			return new ActReturn::Negation (parameters, descr);
 		else if (match_force_skip(parameters, "economy"))
-			return create_economy_condition(parameters, tribe);
+			return create_economy_condition(parameters, descr.tribe());
+		else if (match_force_skip(parameters, "site"))
+			return create_site_condition   (parameters, descr);
 		else if (match_force_skip(parameters, "workers"))
 			return create_workers_condition(parameters);
 		else
@@ -240,8 +308,7 @@ ProductionProgram::ActReturn::ActReturn
 			if      (match_force_skip(parameters, "when")) {
 				m_is_when = true;
 				for (;;) {
-					m_conditions.push_back
-						(create_condition(parameters, descr.tribe()));
+					m_conditions.push_back(create_condition(parameters, descr));
 					if (*parameters) {
 						skip(parameters);
 						if (not match_force_skip(parameters, "and"))
@@ -256,8 +323,7 @@ ProductionProgram::ActReturn::ActReturn
 					if (not *parameters)
 						throw game_data_error
 							(_("expected condition at end of input"));
-					m_conditions.push_back
-						(create_condition(parameters, descr.tribe()));
+					m_conditions.push_back(create_condition(parameters, descr));
 					if (*parameters) {
 						skip(parameters);
 						if (not match_force_skip(parameters, "or"))
@@ -537,7 +603,8 @@ ProductionProgram::ActConsume::ActConsume
 			force_skip(parameters);
 		}
 		if (m_groups.empty())
-			throw game_data_error(_("expected ware1[,ware2[,...]][:N] ..."));
+			throw game_data_error
+				(_("expected ware_type1[,ware_type2[,...]][:N] ..."));
 	} catch (_wexception const & e) {
 		throw game_data_error("consume: %s", e.what());
 	}

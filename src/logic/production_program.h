@@ -89,8 +89,11 @@ struct ProductionProgram {
 	///    condition ::= negation | economy_condition | workers_condition
 	///    negation           ::= "not" condition
 	///    economy_condition  ::= "economy" economy_needs
+	///    site_condition     ::= "site" site_has
 	///    workers_condition  ::= "workers" workers_need_experience
 	///    economy_needs      ::= "needs" ware_type
+	///    site_has           ::= "has" group
+	///    group              ::= ware_type{,ware_type}[:count]
 	///    workers_need_experience ::= "need experience"
 	/// Parameter semantics:
 	///    return_value:
@@ -141,11 +144,11 @@ struct ProductionProgram {
 #endif
 		};
 		static Condition * create_condition
-			(char * & parameters, Tribe_Descr const &);
+			(char * & parameters, ProductionSite_Descr const &);
 		struct Negation : public Condition {
 			Negation
-				(char * & parameters, Tribe_Descr const & tribe)
-				: operand(create_condition(parameters, tribe))
+				(char * & parameters, ProductionSite_Descr const & descr)
+				: operand(create_condition(parameters, descr))
 			{}
 			virtual ~Negation();
 			virtual bool evaluate(ProductionSite const &) const;
@@ -164,11 +167,26 @@ struct ProductionProgram {
 			virtual bool evaluate(ProductionSite const &) const;
 			std::string description(Tribe_Descr const &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
-		virtual void writeHTML
+			virtual void writeHTML
 				(::FileWrite &, ProductionSite_Descr const &) const;
 #endif
 		private:
 			Ware_Index ware_type;
+		};
+
+		/// Tests whether the site has the specified (or implied) number of
+		/// wares, combining from any of the types specified, in its input
+		/// queues.
+		struct Site_Has : public Condition {
+			Site_Has(char * & parameters, ProductionSite_Descr const &);
+			virtual bool evaluate(ProductionSite const &) const;
+			std::string description(Tribe_Descr const &) const;
+#ifdef WRITE_GAME_DATA_AS_HTML
+			virtual void writeHTML
+				(::FileWrite &, ProductionSite_Descr const &) const;
+#endif
+		private:
+			Ware_Type_Group group;
 		};
 
 		/// Tests whether any of the workers at the site needs experience to

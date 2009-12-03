@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -926,6 +926,44 @@ void ProductionProgram::ActReturn::Economy_Needs::writeHTML
 	fw.Text("\"/></a>");
 }
 
+
+void ProductionProgram::ActReturn::Site_Has::writeHTML
+	(::FileWrite & fw, ProductionSite_Descr const & site) const
+{
+	Tribe_Descr const & tribe = site.tribe();
+	fw.Text("<span class=\"keyword\">");
+	fw.Text(_("site"));
+	fw.Text("</span> <span class=\"keyword\">");
+	fw.Text(_("has"));
+	fw.Text("</span>");
+	for
+		(struct {
+		 	std::set<Ware_Index>::const_iterator       current;
+		 	std::set<Ware_Index>::const_iterator const end;
+		 } i = {group.first.begin(), group.first.end()};;)
+	{
+		Item_Ware_Descr const & ware_type = *tribe.get_ware_descr(*i.current);
+		std::string const & ware_type_name     = ware_type.    name();
+		std::string const & ware_type_descname = ware_type.descname();
+		fw.Text("<a href=\"../");
+		fw.Text(ware_type_name);
+		fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
+		fw.Text(ware_type_descname);
+		fw.Text("\"><img src=\"../");
+		fw.Text(ware_type_name);
+		fw.Text("/menu.png\" alt=\"");
+		fw.Text(ware_type_descname);
+		fw.Text("\"/></a>");
+		if (++i.current == i.end)
+			break;
+		fw.Unsigned8(',');
+	}
+	if (1 < group.second) {
+		char buffer[32];
+		sprintf(buffer, ":%u", group.second);
+		fw.Text(buffer);
+	}
+}
 
 void ProductionProgram::ActReturn::Workers_Need_Experience::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
