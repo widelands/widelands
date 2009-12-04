@@ -84,13 +84,14 @@ struct Building_Descr : public Map_Object_Descr {
 		 Player &,
 		 Coords,
 		 bool                   construct,
-		 uint32_t       const * ware_counts   = 0,
-		 uint32_t       const * worker_counts = 0,
-		 Soldier_Counts  const * soldier_counts = 0,
+		 uint32_t       const * ware_counts    = 0,
+		 uint32_t       const * worker_counts  = 0,
+		 Soldier_Counts const * soldier_counts = 0,
 		 Building_Descr const * old = 0)
 		const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void writeHTML(::FileWrite &) const;
+	bool global() const {return m_global;}
 #endif
 	virtual void load_graphics();
 
@@ -109,16 +110,19 @@ protected:
 
 private:
 	const Tribe_Descr & m_tribe;
-	bool         m_buildable;       // the player can build this himself
-	bool         m_destructible;    // the player can destruct this himself
-	Buildcost    m_buildcost;
-	PictureID    m_buildicon;       // if buildable: picture in the build dialog
-	std::string  m_buildicon_fname; // filename for this icon
-	int32_t      m_size;            // size of the building
-	bool         m_mine;
-	Enhancements m_enhancements;
-	bool         m_enhanced_building; // if it is one, it is bulldozable
-	BuildingHints       m_hints; //  hints (knowledge) for computer players
+	bool          m_buildable;       // the player can build this himself
+	bool          m_destructible;    // the player can destruct this himself
+	Buildcost     m_buildcost;
+	PictureID     m_buildicon;       // if buildable: picture in the build dialog
+	std::string   m_buildicon_fname; // filename for this icon
+	int32_t       m_size;            // size of the building
+	bool          m_mine;
+	Enhancements  m_enhancements;
+	bool          m_enhanced_building; // if it is one, it is bulldozable
+	BuildingHints m_hints;             // hints (knowledge) for computer players
+#ifdef WRITE_GAME_DATA_AS_HTML
+	bool          m_global;            // whether this is a "global" building
+#endif
 
 	// for migration, 0 is the default, meaning get_conquers() + 4
 	uint32_t m_vision_range;

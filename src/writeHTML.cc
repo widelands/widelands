@@ -127,10 +127,14 @@ void Tribe_Descr::referenceBuilding
 	std::string const & building_descname = descr.descname();
 	fw.Text(building_name);
 	fw.Text("\" href=\"../");
+	if (descr.global())
+		fw.Text("../../global/militarysites");
 	fw.Text(building_name);
 	fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
 	fw.Text(building_descname);
 	fw.Text("\"><img src=\"../");
+	if (descr.global())
+		fw.Text("../../global/militarysites");
 	fw.Text(building_name);
 	fw.Text("/menu.png\" alt=\"");
 	fw.Text(building_descname);
@@ -239,7 +243,10 @@ void Tribe_Descr::writeHTMLBuildings(std::string const & directory) {
 		building_descr.writeHTML(fw);
 		writeCrossReferences(fw, m_building_references[i.value()]);
 		fw.Text(HTML_FILE_END);
-		RealFSImpl fs(directory + building_descr.name());
+		RealFSImpl fs
+			(building_descr.global()
+			 ? "global/militarysites/" + building_descr.name()
+			 : directory + building_descr.name());
 		fw.Write(fs, ("index_" + i18n::get_locale() + ".xhtml").c_str());
 		ordered.insert
 			(std::pair<std::string const *, Building_Index>
@@ -285,8 +292,10 @@ void Tribe_Descr::writeHTMLBuildings(std::string const & directory) {
 	container_iterate_const(Ordered, ordered, i) {
 		Building_Descr const & building_descr =
 			*get_building_descr(i.current->second);
-		std::string const & building_name     = building_descr.    name();
+		std::string         building_name     = building_descr    .name();
 		std::string const & building_descname = building_descr.descname();
+		if (building_descr.global())
+			building_name = "../../global/militarysites/" + building_descr.name();
 		fw.Text("<tr><td><a href=\"");
 		fw.Text(building_name);
 		fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");

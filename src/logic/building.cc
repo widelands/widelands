@@ -58,7 +58,12 @@ Building_Descr::Building_Descr
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_hints         (prof.get_section("aihints")),
+#ifdef WRITE_GAME_DATA_AS_HTML
+	m_vision_range  (0),
+	m_global        (false)
+#else
 	m_vision_range  (0)
+#endif
 {
 	try {
 		char const * const string = global_s.get_safe_string("size");
@@ -167,6 +172,9 @@ Building_Descr::Building_Descr
 		g_sound_handler.load_fx(directory, v->get_string());
 
 	m_vision_range = global_s.get_int("vision_range");
+#ifdef WRITE_GAME_DATA_AS_HTML
+	m_global = directory.find("global/") < directory.size();
+#endif
 }
 
 
