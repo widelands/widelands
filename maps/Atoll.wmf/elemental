@@ -1,0 +1,9 @@
+[global]
+packet_version="1"
+map_w="160"
+map_h="160"
+nr_players="4"
+world="desert"
+name=_"Atoll"
+author="Nasenbaer"
+descr=_"Who will be the real King of the big atoll?"
