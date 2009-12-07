@@ -282,26 +282,27 @@ void Map_Bobdata_Data_Packet::Read
 								state.diranims = 0;
 
 							uint32_t const pathsteps = fr.Unsigned16();
-							if (i < old_stacksize)
+							if (i < old_stacksize) {
 								delete state.path;
+								state.path = 0;
+							}
 							if (pathsteps) {
 								try {
-									Path * const path = new Path(fr.Coords32(extent));
+									assert(not state.path);
+									state.path = new Path(fr.Coords32(extent));
 									for (uint32_t step = pathsteps; step; --step)
 										try {
-											path->append(map, fr.Direction8());
+											state.path->append(map, fr.Direction8());
 										} catch (_wexception const & e) {
 											throw game_data_error
 												("step #%u: %s",
 												 pathsteps - step, e.what());
 										}
-									state.path = path;
 								} catch (_wexception const & e) {
 									throw game_data_error
 										(_("reading path: %s"), e.what());
 								}
-							} else
-								state.path = 0;
+							}
 
 							if (i < old_stacksize && !trans)
 								delete state.transfer;
