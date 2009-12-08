@@ -94,6 +94,8 @@ void Map_View::draw(RenderTarget & dst)
 		dst.rendermap(egbase, m_viewpoint);
 
 	m_complete_redraw_needed = false;
+	if (char const * const text = tooltip())
+		draw_tooltip(dst, text);
 }
 
 

@@ -17,8 +17,6 @@
  *
  */
 
-#include "interactive_base.h"
-
 #include "logic/checkstep.h"
 #include "logic/cmd_queue.h"
 #include "constants.h"
@@ -35,6 +33,7 @@
 #include "minimap.h"
 #include "overlay_manager.h"
 #include "logic/player.h"
+#include "logic/productionsite.h"
 #include "profile/profile.h"
 #include "upcast.h"
 #include "wlapplication.h"
@@ -144,8 +143,20 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 			overlay_manager.register_overlay
 				(mr.location(), m_sel.pic, 7, Point::invalid(), jobid);
 		while (mr.advance(map));
+		if (upcast(Interactive_GameBase const, igbase, this))
+			if
+				(upcast
+				 	(Widelands::ProductionSite,
+				 	 productionsite,
+				 	 map[center.node].get_immovable()))
+			{
+				std::string const s =
+					productionsite->info_string(igbase->building_tooltip_format());
+				if (s.size())
+					return set_tooltip(s.c_str());
+			}
 	}
-
+	set_tooltip(0);
 }
 
 /*

@@ -54,7 +54,7 @@ namespace Widelands {
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 1
 #define CURRENT_WAREHOUSE_PACKET_VERSION        1
 #define CURRENT_MILITARYSITE_PACKET_VERSION     3
-#define CURRENT_PRODUCTIONSITE_PACKET_VERSION   3
+#define CURRENT_PRODUCTIONSITE_PACKET_VERSION   4
 #define CURRENT_TRAININGSITE_PACKET_VERSION     3
 
 
@@ -642,22 +642,45 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				productionsite.m_statistics[i] = fr.Unsigned8();
 			productionsite.m_statistics_changed = fr.Unsigned8();
 			if (packet_version == 1) {
-				memcpy(productionsite.m_statistics_buf, fr.Data(40), 40);
-				productionsite.m_statistics_buf[39] = '\0';
+				memcpy(productionsite.m_statistics_buffer, fr.Data(40), 40);
+				productionsite.m_statistics_buffer[39] = '\0';
 			} else {
-				char const * const statstring        = fr.CString();
-				size_t       const statstring_length =
-					snprintf
-						(productionsite.m_statistics_buf,
-						 sizeof(productionsite.m_statistics_buf),
-						 "%s", statstring);
-				if (sizeof(productionsite.m_statistics_buf) <= statstring_length)
-					log
-						("WARNING: productionsite statistics string can be at most "
-						 "%u characters but a loaded building has the string \"%s\" "
-						 "of length %u\n",
-						 sizeof(productionsite.m_statistics_buf) - 1,
-						 statstring, statstring_length);
+				{
+					char const * const statistics_string        = fr.CString();
+					size_t       const statistics_string_length =
+						snprintf
+							(productionsite.m_statistics_buffer,
+							 sizeof(productionsite.m_statistics_buffer),
+							 "%s", statistics_string);
+					if
+						(sizeof(productionsite.m_statistics_buffer)
+						 <=
+						 statistics_string_length)
+						log
+							("WARNING: productionsite statistics string can be at "
+							 "most %u characters but a loaded building has the "
+							 "string \"%s\" of length %u\n",
+							 sizeof(productionsite.m_statistics_buffer) - 1,
+							 statistics_string, statistics_string_length);
+				}
+				if (4 <= packet_version) {
+					char const * const result_string        = fr.CString();
+					size_t       const result_string_length =
+						snprintf
+							(productionsite.m_result_buffer,
+							 sizeof(productionsite.m_result_buffer),
+							 "%s", result_string);
+					if
+						(sizeof(productionsite.m_result_buffer)
+						 <=
+						 result_string_length)
+						log
+							("WARNING: productionsite result string can be at "
+							 "most %u characters but a loaded building has the "
+							 "string \"%s\" of length %u\n",
+							 sizeof(productionsite.m_result_buffer) - 1,
+							 result_string, result_string_length);
+				}
 			}
 		} else
 			throw game_data_error
@@ -1112,7 +1135,8 @@ void Map_Buildingdata_Data_Packet::write_productionsite
 	for (uint32_t i = 0; i < statistics_size; ++i)
 		fw.Unsigned8(productionsite.m_statistics[i]);
 	fw.Unsigned8(productionsite.m_statistics_changed);
-	fw.String(productionsite.m_statistics_buf);
+	fw.String(productionsite.m_statistics_buffer);
+	fw.String(productionsite.m_result_buffer);
 }
 
 /*

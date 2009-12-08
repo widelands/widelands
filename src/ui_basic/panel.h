@@ -238,6 +238,7 @@ private:
 
 	char * _tooltip;
 
+protected:
 	static void draw_tooltip(RenderTarget &, char const * const text);
 
 public:

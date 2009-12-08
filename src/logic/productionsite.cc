@@ -188,7 +188,9 @@ ProductionSite::ProductionSite(const ProductionSite_Descr & ps_descr) :
 	m_statistics_changed(true),
 	m_last_stat_percent (0),
 	m_is_stopped        (false)
-{}
+{
+	*m_result_buffer = '\0';
+}
 
 ProductionSite::~ProductionSite() {
 	delete[] m_working_positions;
@@ -210,10 +212,7 @@ std::string ProductionSite::get_statistics_string()
 		char buffer[1000];
 		snprintf
 			(buffer, sizeof(buffer),
-			 ngettext
-			 	("Waiting for one worker!", "Waiting for %u workers!",
-			 	 nr_requests),
-			 nr_requests);
+			 ngettext("Worker missing", "Workers missing", nr_requests));
 		return buffer;
 	}
 
@@ -223,7 +222,7 @@ std::string ProductionSite::get_statistics_string()
 	if (m_is_stopped)
 		return _("(stopped)");
 
-	return m_statistics_buf;
+	return m_statistics_buffer;
 }
 
 
@@ -307,11 +306,11 @@ void ProductionSite::calc_statistics()
 
 	if (0 < percOk and percOk < 100)
 		snprintf
-			(m_statistics_buf, sizeof(m_statistics_buf),
+			(m_statistics_buffer, sizeof(m_statistics_buffer),
 			 "%d%% %s", percOk, trend.c_str());
 	else
 		snprintf
-			(m_statistics_buf, sizeof(m_statistics_buf),
+			(m_statistics_buffer, sizeof(m_statistics_buffer),
 			 "%d%%",    percOk);
 
 	m_last_stat_percent = static_cast<char>(percOk); //FIXME: ARGH!

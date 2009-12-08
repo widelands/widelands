@@ -76,6 +76,9 @@ struct Interactive_GameBase : public Interactive_Base {
 	std::string const & building_statistics_format  () const {
 		return m_building_statistics_format;
 	}
+	std::string const & building_tooltip_format     () const {
+		return m_building_tooltip_format;
+	}
 	std::string const & building_window_title_format() const {
 		return m_building_window_title_format;
 	}
@@ -94,6 +97,7 @@ protected:
 	ChatDisplay            * m_chatDisplay;
 	std::string              m_building_census_format;
 	std::string              m_building_statistics_format;
+	std::string              m_building_tooltip_format;
 	std::string              m_building_window_title_format;
 	bool                     m_chatenabled;
 

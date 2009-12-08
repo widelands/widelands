@@ -129,6 +129,7 @@ public:
 
 	virtual std::string get_statistics_string();
 	int8_t get_statistics_percent() {return m_last_stat_percent;}
+	char const * result_string() const {return m_result_buffer;}
 
 	virtual WaresQueue & waresqueue(Ware_Index);
 
@@ -190,7 +191,7 @@ protected:
 	void calc_statistics();
 	bool can_start_working() const throw ();
 	void try_start_working(Game &);
-	void set_post_timer (int32_t t) {m_post_timer = t;}
+	void set_post_timer (int32_t const t) {m_post_timer = t;}
 
 protected:  // TrainingSite must have access to this stuff
 	Working_Position                   * m_working_positions;
@@ -215,7 +216,8 @@ protected:  // TrainingSite must have access to this stuff
 	Input_Queues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
 	bool                     m_statistics_changed;
-	char                     m_statistics_buf[128];
+	char                     m_statistics_buffer[40];
+	char                     m_result_buffer   [213];
 	int8_t                   m_last_stat_percent;
 	bool                      m_is_stopped;
 };
@@ -236,7 +238,7 @@ struct Input {
 
 private:
 	Ware_Index m_ware;
-	int32_t m_max;
+	uint8_t    m_max;
 };
 
 }

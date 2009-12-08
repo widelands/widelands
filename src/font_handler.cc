@@ -244,7 +244,7 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 	assert(2 * LINE_MARGIN < wrap);
 	assert(text.size() > 0);
 
-	uint32_t global_surface_width  = wrap;
+	uint32_t global_surface_width  = 0;
 	uint32_t global_surface_height = 0;
 	std::vector<SDL_Surface *> m_rendered_lines;
 
@@ -320,6 +320,7 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 	}
 
 	// blit all this together in one Surface
+	global_surface_height -= linespacing; //  subtract spacing after last line
 	return
 		join_sdl_surfaces
 			(global_surface_width, global_surface_height,
@@ -731,9 +732,10 @@ SDL_Surface * Font_Handler::join_sdl_surfaces
 	 bool                               const vertical,
 	 bool                               const keep_surfaces)
 {
+	assert(surfaces.size());
 	SDL_Surface * const global_surface =
 		create_empty_sdl_surface
-			(h ? w : 0, w ? h + spacing * surfaces.size() : 0);
+			(h ? w : 0, w ? h + spacing * (surfaces.size() - 1) : 0);
 	assert(global_surface);
 
 	SDL_FillRect

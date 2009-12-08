@@ -936,6 +936,7 @@ void Panel::ui_key(bool const down, SDL_keysym const code)
  * Set the tooltip for the panel.
  */
 void Panel::set_tooltip(const char * const text) {
+	assert(not text or *text);
 	if (_tooltip != text) {
 		free(_tooltip);
 		_tooltip = text ? strdup(text) : 0;
@@ -947,8 +948,10 @@ void Panel::set_tooltip(const char * const text) {
  */
 void Panel::draw_tooltip(RenderTarget & dst, char const * const text)
 {
+#define TIP_WIDTH_MAX 360
 	uint32_t tip_width, tip_height;
-	UI::g_fh->get_size(UI_FONT_TOOLTIP, text, tip_width, tip_height);
+	UI::g_fh->get_size
+		(UI_FONT_TOOLTIP, text, tip_width, tip_height, TIP_WIDTH_MAX);
 	tip_width += 4;
 	tip_height += 4;
 	const WLApplication & wlapplication = *WLApplication::get();
@@ -971,7 +974,7 @@ void Panel::draw_tooltip(RenderTarget & dst, char const * const text)
 		 r + Point(2, 2),
 		 text,
 		 Align_Left,
-		 std::numeric_limits<uint32_t>::max(),
+		 TIP_WIDTH_MAX,
 		 Widget_Cache_None,
 		 g_gr->get_no_picture(),
 		 std::numeric_limits<uint32_t>::max(),

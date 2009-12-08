@@ -17,8 +17,6 @@
  *
  */
 
-#include "building.h"
-
 #include "constructionsite.h"
 #include "economy/flag.h"
 #include "economy/request.h"
@@ -30,6 +28,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "map.h"
 #include "player.h"
+#include "productionsite.h"
 #include "profile/profile.h"
 #include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
@@ -59,11 +58,9 @@ Building_Descr::Building_Descr
 	m_mine          (false),
 	m_hints         (prof.get_section("aihints")),
 #ifdef WRITE_GAME_DATA_AS_HTML
-	m_vision_range  (0),
-	m_global        (false)
-#else
-	m_vision_range  (0)
+	m_global        (false),
 #endif
+	m_vision_range  (0)
 {
 	try {
 		char const * const string = global_s.get_safe_string("size");
@@ -507,6 +504,10 @@ std::string Building::info_string(std::string const & format) {
 					result << constructionsite->building().name();
 				else
 					result << name();
+				break;
+			case 'r':
+				if (upcast(ProductionSite const, productionsite, this))
+					result << productionsite->result_string();
 				break;
 			default: //  invalid format sequence
 				result << '%' << *i.current;

@@ -34,6 +34,8 @@
 #include "upcast.h"
 #include "worker_program.h"
 
+#include <libintl.h>
+
 namespace Widelands {
 
 ProductionProgram::Action::~Action() {}
@@ -356,37 +358,43 @@ ProductionProgram::ActReturn::~ActReturn() {
 void ProductionProgram::ActReturn::execute
 	(Game & game, ProductionSite & ps) const
 {
+	std::string statistics_string =
+		m_result == Failed    ? _("failed")    :
+		m_result == Completed ? _("completed") : _("skipped");
+	statistics_string += ' ';
+	statistics_string += ps.top_state().program->descname();
 	if (m_conditions.size()) {
 		char const * operator_string;
-		std::string resting_because;
+		std::string result_string = statistics_string;
 		if (m_is_when) { //  "when a and b and ..." (all conditions must be true)
 			operator_string = _(" and ");
-			resting_because = _("Resting because: ");
+			result_string += _(" because: ");
 			container_iterate_const(Conditions, m_conditions, i)
 				if (not (*i.current)->evaluate(ps)) //  A condition is false,
 					return ps.program_step(game); //  continue program.
 				else {
-					resting_because +=
-						(*i.current)->description(ps.owner().tribe());
-					resting_because += operator_string;
+					result_string += (*i.current)->description(ps.owner().tribe());
+					result_string += operator_string;
 				}
 		} else { //  "unless a or b or ..." (all conditions must be false)
 			operator_string = _(" or ");
-			resting_because = _("Resting because not: ");
+			result_string += _(" because not: ");
 			container_iterate_const(Conditions, m_conditions, i)
 				if ((*i.current)->evaluate(ps)) //  A condition is true,
 					return ps.program_step(game); //  continue program.
 				else {
-					resting_because +=
-						(*i.current)->description(ps.owner().tribe());
-					resting_because += operator_string;
+					result_string += (*i.current)->description(ps.owner().tribe());
+					result_string += operator_string;
 				}
 		}
-		resting_because.resize(resting_because.size() - strlen(operator_string));
+		result_string.resize(result_string.size() - strlen(operator_string));
 		snprintf
-			(ps.m_statistics_buf, sizeof(ps.m_statistics_buf),
-			 "%s", resting_because.c_str());
+			(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+			 "%s", result_string.c_str());
 	}
+	snprintf
+		(ps.m_statistics_buffer, sizeof(ps.m_statistics_buffer),
+		 "%s", statistics_string.c_str());
 	return ps.program_end(game, m_result);
 }
 
@@ -638,7 +646,6 @@ void ProductionProgram::ActConsume::execute
 		//  any thing from the currently considered input queue.
 		for (Groups::iterator it = l_groups.begin(); it != l_groups.end();)
 			if (it->first.count(ware_type)) {
-				it->first.erase(ware_type);
 				if (it->second <= nr_available) {
 					//  There are enough wares of the currently considered type
 					//  to fulfill the requirements of the current group. We can
@@ -671,7 +678,49 @@ void ProductionProgram::ActConsume::execute
 				++it;
 	}
 
-	if (l_groups.empty()) { //  we fulfilled all consumption requirements
+	if (uint8_t const nr_missing_groups = l_groups.size()) {
+		Tribe_Descr const & tribe = ps.owner().tribe();
+		std::string result_string = _("failed");
+		result_string            += ' ';
+		result_string            += ps.top_state().program->descname();
+		result_string            += _(" because: ");
+		for
+			(struct {
+			 	Groups::const_iterator       current;
+			 	Groups::const_iterator const end;
+			 } i = {l_groups.begin(), l_groups.end()};;)
+		{
+			assert(i.current->first.size());
+			for
+				(struct {
+				 	std::set<Ware_Index>::const_iterator       current;
+				 	std::set<Ware_Index>::const_iterator const end;
+				 } j = {i.current->first.begin(), i.current->first.end()};;)
+			{
+				result_string += tribe.get_ware_descr(*j.current)->descname();
+				if (++j.current == j.end)
+					break;
+				result_string += ',';
+			}
+			{
+				uint8_t const count = i.current->second;
+				if (1 < count) {
+					char buffer[5];
+					sprintf(buffer, ":%u", count);
+					result_string += buffer;
+				}
+			}
+			if (++i.current == i.end)
+				break;
+			result_string += _(" and ");
+		}
+		result_string +=
+			ngettext(" is missing", " are missing", nr_missing_groups);
+		snprintf
+			(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+			 "%s", result_string.c_str());
+		return ps.program_end(game, Failed);
+	} else { //  we fulfilled all consumption requirements
 		for (size_t i = 0; i < nr_warequeues; ++i)
 			if (uint8_t const q = consumption_quantities[i]) {
 				assert(q <= warequeues[i]->get_filled());
@@ -679,8 +728,7 @@ void ProductionProgram::ActConsume::execute
 				warequeues[i]->update();
 			}
 		return ps.program_step(game);
-	} else
-		return ps.program_end(game, Failed);
+	}
 }
 
 
@@ -740,6 +788,30 @@ void ProductionProgram::ActProduce::execute
 	assert(ps.m_produced_items.empty());
 	ps.m_produced_items = m_items;
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
+
+	Tribe_Descr const & tribe = ps.owner().tribe();
+	std::string result_string = _("Produced ");
+	assert(m_items.size());
+	for
+		(struct {Items::const_iterator current; Items::const_iterator const end;}
+		 i = {m_items.begin(), m_items.end()};;)
+	{
+		{
+			uint8_t const count = i.current->second;
+			if (1 < count) {
+				char buffer[5];
+				sprintf(buffer, _("%u "), count);
+				result_string += buffer;
+			}
+		}
+		result_string += tribe.get_ware_descr(i.current->first)->descname();
+		if (++i.current == i.end)
+			break;
+		result_string += _(", ");
+	}
+	snprintf
+		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+		 "%s", result_string.c_str());
 }
 
 
