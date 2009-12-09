@@ -321,6 +321,7 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 
 	// blit all this together in one Surface
 	global_surface_height -= linespacing; //  subtract spacing after last line
+	assert(m_rendered_lines.size());
 	return
 		join_sdl_surfaces
 			(global_surface_width, global_surface_height,
@@ -531,6 +532,7 @@ void Font_Handler::draw_richtext
 					//inserted before
 					if (text_width_left < cur_line_w + rend_word->w || break_before)
 					{
+						assert(rend_cur_words.size());
 						SDL_Surface * const rend_line =
 							join_sdl_surfaces
 								(cur_line_w, cur_line_h,
@@ -650,12 +652,13 @@ void Font_Handler::draw_richtext
 				SDL_BlitSurface(block_images, 0, block_surface, &img_pos);
 
 				{
-					SDL_Surface * block_lines = join_sdl_surfaces
-						(text_width_left,
-						 block_h,
-						 rend_lines,
-						 bg,
-						 richtext_it->get_text_align());
+					assert(rend_lines.size());
+					SDL_Surface * const block_lines =
+						join_sdl_surfaces
+							(text_width_left, block_h,
+							 rend_lines,
+							 bg,
+							 richtext_it->get_text_align());
 					SDL_BlitSurface(block_lines, 0, block_surface, &text_pos);
 					SDL_FreeSurface(block_lines);
 				}
@@ -670,9 +673,12 @@ void Font_Handler::draw_richtext
 			}
 			SDL_FreeSurface(block_images);
 		}
-		picid = convert_sdl_surface
-			(*join_sdl_surfaces(wrap, global_h, rend_blocks, bg),
-			 bg, transparent);
+		if (rend_blocks.empty())
+			return;
+		picid =
+			convert_sdl_surface
+				(*join_sdl_surfaces(wrap, global_h, rend_blocks, bg),
+				 bg, transparent);
 		widget_cache_id = picid;
 	}
 	dst.blit(dstpoint, picid);
