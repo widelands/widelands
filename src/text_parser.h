@@ -28,10 +28,6 @@
 
 namespace UI {
 
-inline bool is_richtext(std::string const & text) {
-	return text.substr(0, 3) == "<rt";
-}
-
 struct Text_Block {
 	Text_Block();
 	Text_Block(const Text_Block & src);

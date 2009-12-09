@@ -21,7 +21,6 @@
 
 #include "constants.h"
 #include "font_handler.h"
-#include "text_parser.h"
 
 namespace UI {
 
@@ -122,15 +121,7 @@ void Multiline_Textarea::draw(RenderTarget & dst)
 {
 	if (m_text.length()) {
 		//  Let the font handler worry about all the complicated stuff..
-		if (is_richtext(m_text))
-			UI::g_fh->draw_richtext
-				(dst,
-				 RGBColor(107, 87, 55),
-				 Point(get_halign(), 0 - m_textpos),
-				 m_text,
-				 get_eff_w(),
-				 m_cache_mode, m_cache_id);
-		else
+		if (m_text.compare(0, 3, "<rt"))
 			UI::g_fh->draw_string
 				(dst,
 				 m_fontname,
@@ -139,6 +130,14 @@ void Multiline_Textarea::draw(RenderTarget & dst)
 				 Point(get_halign(), 0 - m_textpos),
 				 m_text,
 				 m_align,
+				 get_eff_w(),
+				 m_cache_mode, m_cache_id);
+		else
+			UI::g_fh->draw_richtext
+				(dst,
+				 RGBColor(107, 87, 55),
+				 Point(get_halign(), 0 - m_textpos),
+				 m_text,
 				 get_eff_w(),
 				 m_cache_mode, m_cache_id);
 		draw_scrollbar();
