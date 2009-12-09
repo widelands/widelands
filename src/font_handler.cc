@@ -532,18 +532,18 @@ void Font_Handler::draw_richtext
 					//inserted before
 					if (text_width_left < cur_line_w + rend_word->w || break_before)
 					{
-						assert(rend_cur_words.size());
-						SDL_Surface * const rend_line =
-							join_sdl_surfaces
-								(cur_line_w, cur_line_h,
-								 rend_cur_words,
-								 bg,
-								 Align_Left,
-								 0,
-								 true);
-						rend_lines.push_back(rend_line);
-						block_h += cur_line_h;
-						rend_cur_words.clear();
+						if (rend_cur_words.size()) {
+							rend_lines.push_back
+								(join_sdl_surfaces
+								 	(cur_line_w, cur_line_h,
+								 	 rend_cur_words,
+								 	 bg,
+								 	 Align_Left,
+								 	 0,
+								 	 true));
+							block_h += cur_line_h;
+							rend_cur_words.clear();
+						}
 
 						//Ignore spaces on begin of the line, if another word follows
 						if (str_word != " ")
