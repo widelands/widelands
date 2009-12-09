@@ -8,7 +8,7 @@ space. It detects code like "if (condition){", which should be "if (condition)
 after // are ignored.
 """
 
-regexp = r"""^([^/#"']|/([^/"']|"([^"]|\\")*"|'(\\[\'0nt]|[^\'])')|"([^"\]|\\"|\\[^"])*"|'(\\[\'0nt]|[^\'])')*(/[^	 /@]|[^	 "@])\{"""
+regexp = r"""^([^/#"']|/([^/"']|"([^"]|\\")*"|'(\\[\'0nt]|[^\'])')|"([^"\]|\\"|\\[^"])*"|'(\\[\'0nt]|[^\'])')*(/[^	 /@]|[^	 "'@])\{"""
 error_msg = "Opening brace should be on the next line."
 
 forbidden = [
@@ -88,6 +88,7 @@ allowed = [
     'if (condition) {',
     ' * @{',
     'foo("{}")',
+    "buffer[i] = '{';",
 ]
 
 

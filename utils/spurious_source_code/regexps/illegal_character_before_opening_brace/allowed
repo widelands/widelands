@@ -3,3 +3,4 @@
 if (condition) {
  * @{
 foo("{}")
+buffer[i] = '{';

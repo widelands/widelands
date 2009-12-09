@@ -45,6 +45,8 @@ allowed = [
     r'{h',
     r'{"h"',
     "namespace Widelands {\n",
+    "//  Do { what we want in comments",
+    "buffer[i] = '{'",
 ]
 
 
