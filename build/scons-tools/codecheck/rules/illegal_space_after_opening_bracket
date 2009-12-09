@@ -18,7 +18,6 @@ allowed = [
     '[h',
     '//[',
     '// [',
-    '// [',
     '// Do [ what you want ( in comments',
 ]
 
