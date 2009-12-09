@@ -944,13 +944,13 @@ void NetGGZ::send(std::string const & msg)
 	if (!usedcore())
 		return;
 	int16_t sent;
-	if (msg.size() && msg.substr(0, 1) == "@") {
+	if (msg.size() && *msg.begin() == '@') {
 		// Format a personal message
-		size_t space = msg.find_first_of(" ");
-		if (space >= msg.size() - 1)
+		std::string::size_type const space = msg.find(' ');
+			if (space >= msg.size() - 1)
 			return;
-		std::string to = msg.substr(1, space - 1);
-		std::string pm = msg.substr(space + 1, msg.size() - space);
+		std::string const to = msg.substr(1, space - 1);
+		std::string const pm = msg.substr(space + 1);
 		sent = ggzcore_room_chat(room, GGZ_CHAT_PERSONAL, to.c_str(), pm.c_str());
 		// Add the pm to own message list
 		formatedGGZChat(pm, username, false, to);

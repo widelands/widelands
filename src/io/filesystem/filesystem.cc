@@ -78,7 +78,7 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
 	if (path_size == root_size)
 		return path == m_root;
 
-	if (path.substr(0, m_root.size()) != m_root)
+	if (path.compare(0, m_root.size(), m_root))
 		return false;
 
 	assert(root_size < path_size); //  Otherwise an invalid read happens below.

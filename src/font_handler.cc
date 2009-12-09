@@ -260,7 +260,7 @@ SDL_Surface * Font_Handler::create_static_long_text_surface
 		(struct {std::string::size_type pos; bool done;} j = {0, false};
 		 not j.done;)
 	{
-		std::string::size_type line_end = lines.find_first_of('\n', j.pos);
+		std::string::size_type line_end = lines.find('\n', j.pos);
 		if (line_end == std::string::npos) {
 			line_end = lines_size;
 			j.done = true;
@@ -943,7 +943,7 @@ void Font_Handler::get_size
 		(struct {std::string::size_type pos; bool done;} j = {0, false};
 		 not j.done;)
 	{
-		std::string::size_type line_end = text.find_first_of('\n', j.pos);
+		std::string::size_type line_end = text.find('\n', j.pos);
 		if (line_end == std::string::npos) {
 			line_end = text_size;
 			j.done = true;

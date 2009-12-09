@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2004-2006, 2008-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,8 +61,8 @@ struct MOTD {
 			return;
 
 		// first char is always \n - so we remove it
-		msg = msg.substr(1, msg.size() - 1);
-		size_t j = msg.find_first_of("\n");
+		msg = msg.substr(1);
+		std::string::size_type j = msg.find('\n');
 
 		// split the message parts to have good looking texts
 		for (int32_t i = 0; msg.size(); ++i) {
@@ -70,12 +70,12 @@ struct MOTD {
 				motd.push_back(msg);
 				break;
 			}
-			if (i == 0 && msg.substr(0, 1) == "<")
+			if (i == 0 && msg.size() and *msg.begin() == '<')
 				formationstr = msg.substr(0, j);
 			else
 				motd.push_back(msg.substr(0, j));
-			msg = msg.substr(j + 1, msg.size() - j);
-			j = msg.find_first_of("\n");
+			msg = msg.substr(j + 1);
+			j = msg.find('\n');
 		}
 	}
 };

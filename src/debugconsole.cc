@@ -57,12 +57,12 @@ struct Console : public ChatProvider, public Handler {
 	void send(std::string const & msg)
 	{
 		std::vector<std::string> arg;
-		size_t pos = 0;
+		std::string::size_type pos = 0;
 
 		write("# " + msg);
 
 		while ((pos = msg.find_first_not_of(' ', pos)) != std::string::npos) {
-			size_t end = msg.find_first_of(' ', pos);
+			std::string::size_type const end = msg.find(' ', pos);
 			arg.push_back(msg.substr(pos, end - pos));
 			pos = end;
 		}

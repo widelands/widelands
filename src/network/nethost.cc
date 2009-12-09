@@ -196,13 +196,13 @@ struct HostChatProvider : public ChatProvider {
 		c.playern = h->getLocalPlayerposition();
 		c.sender = h->getLocalPlayername();
 		c.msg = msg;
-		if (c.msg.size() && c.msg.substr(0, 1) == "@") {
+		if (c.msg.size() && *c.msg.begin() == '@') {
 			// Personal message
-			size_t space = c.msg.find_first_of(" ");
+			std::string::size_type const space = c.msg.find(' ');
 			if (space >= c.msg.size() - 1)
 				return;
 			c.recipient = c.msg.substr(1, space - 1);
-			c.msg = c.msg.substr(space + 1, c.msg.size() - space);
+			c.msg = c.msg.substr(space + 1);
 		}
 		h->send(c);
 	}
@@ -556,9 +556,11 @@ void NetHost::send(ChatMessage msg)
 
 	// Make sure that msg is free of richtext formation tags. Such tags could not
 	// just be abused by the user, but could also break the whole text formation.
-	for (uint32_t i = 0; i < msg.msg.size(); ++i)
-		if (msg.msg.substr(i, 1) == "<")
-			msg.msg.replace(i, 1, "{");
+	//  FIXME It would be better to escape < as &lt; and then render that as <
+	//  FIMXE instead of replacing < with { in chat messages.
+	container_iterate(std::string, msg.msg, i)
+		if (*i.current == '<')
+			*i.current = '{';
 
 	if (msg.recipient.empty()) {
 		SendPacket s;
@@ -1632,13 +1634,13 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		c.playern = d->settings.users.at(client.usernum).position;
 		c.sender = d->settings.users.at(client.usernum).name;
 		c.msg = r.String();
-		if (c.msg.size() && c.msg.substr(0, 1) == "@") {
+		if (c.msg.size() && *c.msg.begin() == '@') {
 			// Personal message
-			size_t space = c.msg.find_first_of(" ");
+			std::string::size_type const space = c.msg.find(' ');
 			if (space >= c.msg.size() - 1)
 				break;
 			c.recipient = c.msg.substr(1, space - 1);
-			c.msg = c.msg.substr(space + 1, c.msg.size() - space);
+			c.msg = c.msg.substr(space + 1);
 		}
 		send(c);
 		break;

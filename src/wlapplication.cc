@@ -973,24 +973,21 @@ void WLApplication::parse_commandline
 	for (int i = 1; i < argc; ++i) {
 		std::string opt = argv[i];
 		std::string value;
-		SSS_T pos;
 
 		//are we looking at an option at all?
-		if (opt.substr(0, 2) == "--") {
-			//yes. remove the leading "--", just for cosmetics
-			opt.erase(0, 2);
-		} else {
+		if (opt.compare(0, 2, "--"))
 			throw Parameter_error();
-		}
+		else
+			opt.erase(0, 2); //  yes. remove the leading "--", just for cosmetics
 
 		//look if this option has a value
-		pos = opt.find("=");
+		std::string::size_type const pos = opt.find('=');
 
 		if (pos == std::string::npos) { //  if no equals sign found
 			value = "";
 		} else {
 			//extract option value
-			value = opt.substr(pos + 1, opt.size() - pos);
+			value = opt.substr(pos + 1);
 
 			//remove value from option name
 			opt.erase(pos, opt.size() - pos);
@@ -1569,8 +1566,8 @@ void WLApplication::mainmenu_multiplayer()
 					std::string ip = NetGGZ::ref().ip();
 
 					//  Handle "IPv4 compatible" IPv6 addresses returned by ggzd.
-					if (ip.size() > 7 && ip.substr(0, 7) == "::ffff:") {
-						ip = ip.substr(7, ip.size() - 7);
+					if (not ip.compare(0, 7, "::ffff:")) {
+						ip = ip.substr(7);
 						log("GGZClient ## cut IPv6 address: %s\n", ip.c_str());
 					}
 
@@ -2147,7 +2144,7 @@ void WLApplication::cleanup_replays()
 			 ++filename)
 		{
 			std::string file = g_fs->FS_Filename(filename->c_str());
-			std::string timestr = file.substr(0, file.find(" "));
+			std::string timestr = file.substr(0, file.find(' '));
 
 			if (19 != timestr.size())
 				continue;

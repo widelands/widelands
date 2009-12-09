@@ -171,13 +171,13 @@ bool Text_Parser::parse_textblock
 void Text_Parser::split_words(std::string in, std::vector<std::string>* plist) {
 	std::replace(in.begin(), in.end(), '\n', ' ');
 	while (in.size()) {
-		SSS_T text_start = in.find_first_not_of(" ");
+		std::string::size_type const text_start = in.find_first_not_of(' ');
 		if (text_start > 0) {
 			plist->push_back(in.substr(0, text_start));
 			in.erase(0, text_start);
 		}
 		else {
-			SSS_T text_end = in.find_first_of(" ");
+			std::string::size_type const text_end = in.find(' ');
 			plist->push_back(in.substr(0, text_end));
 			in.erase(0, text_end);
 		}
@@ -192,7 +192,7 @@ bool Text_Parser::extract_format_block
 	 std::string const & format_end,
 	 std::string const & block_end)
 {
-	if (block.substr(0, block_start.size()) != block_start) {
+	if (block.compare(0, block_start.size(), block_start)) {
 		const std::string::size_type format_begin_pos = block.find(block_start);
 		if (format_begin_pos == std::string::npos) {
 			return false;
@@ -201,7 +201,7 @@ bool Text_Parser::extract_format_block
 	}
 
 	block.erase(0, block_start.size());
-	if (block.substr(0, 1) == " ")
+	if (block.size() and *block.begin() == ' ')
 		block.erase(0, 1);
 
 	const std::string::size_type format_end_pos = block.find(format_end);
@@ -224,7 +224,6 @@ bool Text_Parser::extract_format_block
 	//Extract text of block
 	block_text.erase();
 	block_text.append(block.substr(0, block_end_pos));
-	//block_text = new std::string(block->substr(0, block_end_pos));
 
 	//Erase text including closing tag
 	block.erase(0, block_end_pos + block_end.size());
@@ -245,7 +244,7 @@ void Text_Parser::parse_richtexttext_attributes
 		if (key_end == std::string::npos)
 			return;
 		else {
-			std::string key = format.substr(0, key_end);
+			std::string const key = format.substr(0, key_end);
 			format.erase(0, key_end + 1);
 			SSS_T val_end = format.find(" ");
 			if (val_end == std::string::npos)

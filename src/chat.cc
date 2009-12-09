@@ -34,27 +34,43 @@ std::string ChatMessage::toPrintable() const
 	message += "<p font-size=14 font-face=FreeSerif font-color=#";
 	message += color();
 
-	if (!recipient.empty() && !sender.empty()) {
+	if (recipient.size() && sender.size()) {
 	// Personal message handling
-		if ((msg.size() > 3) & (msg.substr(0, 3) == "/me")) {
-			message += ">@" + recipient + " >> </p><p font-size=14";
-			message += " font-face=FreeSerif font-color=#" + color();
-			message += " font-style=italic> " + sender;
-			message += msg.substr(3, msg.length() - 3);
+		if (msg.compare(0, 3, "/me")) {
+			message += " font-decoration=underline>";
+			message += sender;
+			message += " @ ";
+			message += recipient;
+			message += ":</p><p font-size=14 font-face=FreeSerif> ";
+			message += msg;
 		} else {
-			message += " font-decoration=underline>" + sender + " @ " + recipient;
-			message += ":</p><p font-size=14 font-face=FreeSerif> " + msg;
+			message += ">@";
+			message += recipient;
+			message += " >> </p><p font-size=14";
+			message += " font-face=FreeSerif font-color=#";
+			message += color();
+			message += " font-style=italic> ";
+			message += sender;
+			message += msg.substr(3);
 		}
 	} else {
 	// Normal messages handling
-		if ((msg.size() > 3) & (msg.substr(0, 3) == "/me")) {
-			message += " font-style=italic>-> " + (sender.size() ? sender : "***");
-			message += msg.substr(3, msg.length() - 3);
+		if (not msg.compare(0, 3, "/me")) {
+			message += " font-style=italic>-> ";
+			if (sender.size())
+				message += sender;
+			else
+				message += "***";
+			message += msg.substr(3);
 		} else if (sender.size()) {
-			message += " font-decoration=underline>" + sender;
-			message += ":</p><p font-size=14 font-face=FreeSerif> " + msg;
-		} else
-			message += " font-weight=bold>*** " + msg;
+			message += " font-decoration=underline>";
+			message += sender;
+			message += ":</p><p font-size=14 font-face=FreeSerif> ";
+			message += msg;
+		} else {
+			message += " font-weight=bold>*** ";
+			message += msg;
+		}
 	}
 
 	// return the formated message

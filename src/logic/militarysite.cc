@@ -576,7 +576,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		std::string bldname = name();
 
 		// Has this building already a suffix? == conquered building?
-		size_t dot = bldname.rfind('.');
+		std::string::size_type const dot = bldname.rfind('.');
 		if (dot >= bldname.size()) {
 			// Add suffix, if the new owner uses another tribe than we.
 			if (enemytribe.name() != owner().tribe().name())
