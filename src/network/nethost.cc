@@ -625,6 +625,10 @@ void NetHost::send(ChatMessage msg)
 				s.Unsigned8(0);
 			}
 		}
+
+		if (msg.sender == msg.recipient) //  he sent himself a private message
+			return; //  do not deliver it to him twice
+
 		//Now find the sender and send either the message or the failure notice
 		if (d->localplayername == msg.sender) // is host the sender?
 			d->chat.receive(msg);
