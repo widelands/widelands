@@ -72,8 +72,8 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 		g_gr->get_picture(PicMod_Game, "pics/terrain_unpassable.png");
 	const PictureID dry =
 		g_gr->get_picture(PicMod_Game, "pics/terrain_dry.png");
-	uint32_t small_picw, small_pich;
-	g_gr->get_picture_size(dry, small_picw, small_pich);
+#define small_pich 20
+#define small_picw 20
 
 	uint32_t cur_x = 0;
 	Point pos(hmargin(), vmargin());
@@ -91,23 +91,20 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 			}
 
 			//  create a surface for this
-			uint32_t picw, pich;
-			g_gr->get_picture_size
-				(g_gr->get_picture
-				 	(PicMod_Game, g_gr->get_maptexture_picture(i + 1)),
-				 picw, pich);
-			PictureID surface = g_gr->create_surface(picw, pich);
+			PictureID surface = g_gr->create_surface(64, 64);
 
 			//  get the rendertarget for this
 			RenderTarget & target = *g_gr->get_surface_renderer(surface);
 
-			//  firts, blit the terrain texture
+			//  first, blit the terrain texture
 			target.blit
 				(Point(0, 0),
 				 g_gr->get_picture
-				 	(PicMod_Game, g_gr->get_maptexture_picture(i + 1)));
+				 	(PicMod_Game,
+				 	 g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())
+				 	 ->get_texture_picture()));
 
-			Point pic(1, pich - small_pich - 1);
+			Point pic(1, 64 - small_pich - 1);
 
 			//  check is green
 			if (ter_is == 0) {

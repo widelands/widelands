@@ -864,16 +864,6 @@ void Graphic::screenshot(const char & fname) const
 	m_screen.save_bmp(fname);
 }
 
-/**
- * \return Filename of texture of given ID.
-*/
-char const * Graphic::get_maptexture_picture(uint32_t const id)
-{
-	if (Texture * const tex = get_maptexture_data(id))
-		return tex->get_texture_picture();
-	else
-		return 0;
-}
 
 /**
  * Save and load pictures

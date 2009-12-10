@@ -142,7 +142,6 @@ struct Graphic {
 		 uint32_t & h);
 
 	void screenshot(const char & fname) const;
-	char const * get_maptexture_picture (uint32_t id);
 	Texture * get_maptexture_data(uint32_t id);
 	AnimationGfx * get_animation(uint32_t) const;
 
