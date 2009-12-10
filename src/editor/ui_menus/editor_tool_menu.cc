@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -154,7 +154,7 @@ void Editor_Tool_Menu::changed_to() {
 				 *current_registry_pointer);
 			break;
 		case 2:
-			new Editor_Tool_Set_Terrain_Tool_Options_Menu
+			new Editor_Tool_Set_Terrain_Options_Menu
 				(parent,
 				 parent.tools.set_terrain,
 				 *current_registry_pointer);

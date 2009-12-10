@@ -34,8 +34,7 @@
 #include "ui_basic/panel.h"
 #include "ui_basic/checkbox.h"
 
-Editor_Tool_Set_Terrain_Tool_Options_Menu::
-Editor_Tool_Set_Terrain_Tool_Options_Menu
+Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	(Editor_Interactive         & parent,
 	 Editor_Set_Terrain_Tool    & tool,
 	 UI::UniqueWindow::Registry & registry)
@@ -143,7 +142,7 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu
 			cb.set_id(i);
 			cb.set_state(m_tool.is_enabled(i));
 			cb.changedtoid.set
-				(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::selected);
+				(this, &Editor_Tool_Set_Terrain_Options_Menu::selected);
 			m_checkboxes[i] = &cb;
 
 			pos.x += TEXTURE_WIDTH + hspacing();
@@ -170,15 +169,15 @@ Editor_Tool_Set_Terrain_Tool_Options_Menu
 }
 
 
-Editor_Tool_Set_Terrain_Tool_Options_Menu::
-	~Editor_Tool_Set_Terrain_Tool_Options_Menu()
-{
+Editor_Tool_Set_Terrain_Options_Menu::~Editor_Tool_Set_Terrain_Options_Menu() {
 	container_iterate_const(std::vector<PictureID>, m_surfaces, i)
 		g_gr->free_surface(*i.current);
 }
 
 
-void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int32_t n, bool t) {
+void Editor_Tool_Set_Terrain_Options_Menu::selected
+	(int32_t const n, bool const t)
+{
 	//  FIXME This code is erroneous. It checks the current key state. What it
 	//  FIXME needs is the key state at the time the mouse was clicked. See the
 	//  FIXME usage comment for get_key_state.
@@ -200,12 +199,12 @@ void Editor_Tool_Set_Terrain_Tool_Options_Menu::selected(int32_t n, bool t) {
 				m_checkboxes[i]->changedtoid.set
 					(this,
 					 static_cast
-					 	<void (Editor_Tool_Set_Terrain_Tool_Options_Menu::*)
+					 	<void (Editor_Tool_Set_Terrain_Options_Menu::*)
 					 	(int32_t, bool)>
 					 	(0));
 				m_checkboxes[i]->set_state(false);
 				m_checkboxes[i]->changedtoid.set
-					(this, &Editor_Tool_Set_Terrain_Tool_Options_Menu::selected);
+					(this, &Editor_Tool_Set_Terrain_Options_Menu::selected);
 			}
 		}
 
