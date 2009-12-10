@@ -6,4 +6,3 @@ distadd(env, 'utils/spurious_source_code/regexps/multiline_single-statement-cont
 distadd(env, 'utils/spurious_source_code/regexps/multiline_single-statement-controlling_control-statement_not_wrapped_before_controlled_statement/documentation')
 distadd(env, 'utils/spurious_source_code/regexps/multiline_single-statement-controlling_control-statement_not_wrapped_before_controlled_statement/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/multiline_single-statement-controlling_control-statement_not_wrapped_before_controlled_statement/regexps')
-

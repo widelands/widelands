@@ -6,4 +6,3 @@ distadd(env, 'utils/spurious_source_code/regexps/explicit_this_dereference_and_c
 distadd(env, 'utils/spurious_source_code/regexps/explicit_this_dereference_and_component_selection/documentation')
 distadd(env, 'utils/spurious_source_code/regexps/explicit_this_dereference_and_component_selection/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/explicit_this_dereference_and_component_selection/regexps')
-

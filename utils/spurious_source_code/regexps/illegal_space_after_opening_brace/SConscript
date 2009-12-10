@@ -6,4 +6,3 @@ distadd(env, 'utils/spurious_source_code/regexps/illegal_space_after_opening_bra
 distadd(env, 'utils/spurious_source_code/regexps/illegal_space_after_opening_brace/documentation')
 distadd(env, 'utils/spurious_source_code/regexps/illegal_space_after_opening_brace/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/illegal_space_after_opening_brace/regexps')
-

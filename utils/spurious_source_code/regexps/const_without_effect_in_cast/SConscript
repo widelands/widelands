@@ -6,4 +6,3 @@ distadd(env, 'utils/spurious_source_code/regexps/const_without_effect_in_cast/al
 distadd(env, 'utils/spurious_source_code/regexps/const_without_effect_in_cast/documentation')
 distadd(env, 'utils/spurious_source_code/regexps/const_without_effect_in_cast/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/const_without_effect_in_cast/regexps')
-

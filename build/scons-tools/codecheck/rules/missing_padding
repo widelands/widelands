@@ -7,6 +7,7 @@ Checking for forbidden
 TypeName* and TypeName& which should have a space before
 """
 
+error_msg="Missing padding for operator. Needs a space before and after."
 
 import re
 
@@ -27,7 +28,6 @@ regexp = re.compile(r"""(?x)
 """
 )
 
-error_msg="Missing padding for operator. Needs a space before and after."
 def match_function( lines, fn ):
     errors = []
     for lineno,line in enumerate(lines):
@@ -46,86 +46,6 @@ strip_comments_and_strings = True
 
 evaluate_matches = match_function
 
-allowed = [
-    "RoutingNode * a;",
-    "Blahtype & b;",
-    "/** Some comment",
-    "std::vector<RoutingNode *> & nodes",
-    "if (a && b)",
-    "\tOpen.push(&start);",
-    "\t\t*reinterpret_cast<std::vector<RoutingNode *>*>(&m_flags);",
-    "std::vector<RoutingNode *>& nodes",
-        "/* warehouses can determine max idle priority*/",
-        "blah // I *wanna* do that",
-    "&*m_stack.rbegin()",
-    
-    "(std::set<std::string>, j.current->second, i)",
-    
-    # > < 
-	"r = (palette[i].r * shade) >> 8;",
-    "std::vector<High>",
-	"std::vector<State>::iterator it = m_stack.end();",
-
-    "v->get_string()", # pointers are fine
-
-    # Allow includes
-    "#include <sys/types.h>",
-    
-
-    # Ignore strings & comments
-	"\tif (*i.current == '%') {",
-    "if (calc_linewidth(font, cur_word) > (max_width /*/ 2*/)) {",
-    
-    
-    # * Pointer to pointer
-	"func(int **r);",
-    "void (a::*b)",
-	"if (!*ppgrid) {",
-    "void MiniMap::toggle(Layers button) {*m_view.m_flags ^= button;}",
-    "m_loaded_obj[&object] = false;",
-    "m_loaded_obj[*object] = false;",
-	"(_callback_argument_this.*_callback_function)();",
-    "friend struct Table<void *>;",
-    
-    # Unary minus
-    "-1",
-	"func(-1);",
-    "8.46126929e-5",
-    "-8.46126929e-5",
-   
-    # Operator=
-    "int someclass::operator= (int)",
-    "int someclass::operator* (int)",
-    
-    # increment, decrement
-    "incr++;",
-    "++incr;",
-    "--decr;",
-    "decr--;",
-    "++*digit_to_increment;",
-    
-    # +=, -= 
-    "result += it",
-    "result -= it",
-
-    # Logical
-    "a && b",
-    "a || b",
-
-    # compares
-    "a == b",
-    "a != b",
-	"a >= b", 
-    "b <= a", 
-    "b < a", 
-    "b > a", 
-	"AreaWatcher(const Player_Area<>);",
-	"void func (Player_Area<Area>);",
-	"friend class NoteReceiver<T>;",
-    
-    'a %= a;',
-    
-]
 forbidden = [
     "RoutingNode* a;",
     "Blahtype& b;",
@@ -135,14 +55,14 @@ forbidden = [
     " a ==b",
     " a !=b",
     " a!= b",
-	"a>= b", 
-	"a >=b", 
-    "b<= a", 
-    "b <=a", 
-    #"b< a",  could also be std::vector<a  
+	"a>= b",
+	"a >=b",
+    "b<= a",
+    "b <=a",
+    #"b< a",  could also be std::vector<a
     #"b <a", could also be std::vector<hai>
     #"b> a", could also be std::vector<hallo> hi;
-    "b >a", 
+    "b >a",
 
     ' a&& b',
     ' a &&b',
@@ -369,4 +289,83 @@ forbidden = [
     'type_Z* ZZZ;',
 ]
 
+allowed = [
+    "RoutingNode * a;",
+    "Blahtype & b;",
+    "/** Some comment",
+    "std::vector<RoutingNode *> & nodes",
+    "if (a && b)",
+    "\tOpen.push(&start);",
+    "\t\t*reinterpret_cast<std::vector<RoutingNode *>*>(&m_flags);",
+    "std::vector<RoutingNode *>& nodes",
+        "/* warehouses can determine max idle priority*/",
+        "blah // I *wanna* do that",
+    "&*m_stack.rbegin()",
+    
+    "(std::set<std::string>, j.current->second, i)",
+    
+    # > < 
+	"r = (palette[i].r * shade) >> 8;",
+    "std::vector<High>",
+	"std::vector<State>::iterator it = m_stack.end();",
 
+    "v->get_string()", # pointers are fine
+
+    # Allow includes
+    "#include <sys/types.h>",
+    
+
+    # Ignore strings & comments
+	"\tif (*i.current == '%') {",
+    "if (calc_linewidth(font, cur_word) > (max_width /*/ 2*/)) {",
+    
+    
+    # * Pointer to pointer
+	"func(int **r);",
+    "void (a::*b)",
+	"if (!*ppgrid) {",
+    "void MiniMap::toggle(Layers button) {*m_view.m_flags ^= button;}",
+    "m_loaded_obj[&object] = false;",
+    "m_loaded_obj[*object] = false;",
+	"(_callback_argument_this.*_callback_function)();",
+    "friend struct Table<void *>;",
+    
+    # Unary minus
+    "-1",
+	"func(-1);",
+    "8.46126929e-5",
+    "-8.46126929e-5",
+   
+    # Operator=
+    "int someclass::operator= (int)",
+    "int someclass::operator* (int)",
+    
+    # increment, decrement
+    "incr++;",
+    "++incr;",
+    "--decr;",
+    "decr--;",
+    "++*digit_to_increment;",
+    
+    # +=, -= 
+    "result += it",
+    "result -= it",
+
+    # Logical
+    "a && b",
+    "a || b",
+
+    # compares
+    "a == b",
+    "a != b",
+	"a >= b", 
+    "b <= a", 
+    "b < a", 
+    "b > a", 
+	"AreaWatcher(const Player_Area<>);",
+	"void func (Player_Area<Area>);",
+	"friend class NoteReceiver<T>;",
+    
+    'a %= a;',
+    
+]

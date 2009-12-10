@@ -1,0 +1,2 @@
+compare(0, 3, str)
+compare(pos, 3, "abc")

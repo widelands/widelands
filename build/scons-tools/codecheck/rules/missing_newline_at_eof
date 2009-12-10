@@ -10,12 +10,13 @@ class EvalMatches( object ):
 
 evaluate_matches = EvalMatches()
 
-allowed = [
-    "jlhsdfjh\n",
-    "ksdhdsf\nkjshfkjhdsf\n",
-]
 forbidden = [
     "jlhsdfjh",
     "ksdhdsf\nkjshfkjhdsf",
     "",
+]
+
+allowed = [
+    "jlhsdfjh\n",
+    "ksdhdsf\nkjshfkjhdsf\n",
 ]

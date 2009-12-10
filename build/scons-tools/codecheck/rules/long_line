@@ -15,6 +15,11 @@ class EvalMatches( object ):
 
 evaluate_matches = EvalMatches()
 
+forbidden = [
+    " "*80+"a",
+    '\t\t' + 75*"a"
+]
+
 allowed = [
     "\t\tResonable sized line",
     " "*80,
@@ -22,8 +27,4 @@ allowed = [
     # When tabs are correctly expanded, the next line is only 79 chars long
     # when tabs are replaced, it is 81
     """\t\t\t \t \t (Coords(s.get_safe_int("pointy_x"), s.get_safe_int("point_y")))""" 
-]
-forbidden = [
-    " "*80+"a",
-    '\t\t' + 75*"a"
 ]

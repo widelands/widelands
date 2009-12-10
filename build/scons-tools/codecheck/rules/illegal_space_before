@@ -7,9 +7,9 @@ parenthesis), semicolon or comma. Characters inside "" and after // are
 ignored.
 """
 
+error_msg = "No space before ), }, ; allowed!"
 
 regexp = r"""^([^/#"']|/([^/"']|"([^"]|\\")*"|'(\\[\'0nt]|[^\'])')|"([^"\]|\\"|\\[^"])*"|'(\\[\'0nt]|[^\'])')*/? []);,]"""
-error_msg = "No space before ), }, ; allowed!"
 
 forbidden = [
     ' )',
@@ -25,6 +25,3 @@ allowed = [
     '" \")"',
     '	 " \")"',
 ]
-
-
-

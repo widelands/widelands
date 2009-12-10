@@ -11,10 +11,13 @@ This is not obligatory for macros, because of the Alignement of the \\ at the en
 
 error_msg="Use tabs for indentation."
 
-regexp = r"^ +"
-
 strip_comments_and_strings = True
 strip_macros = True
+regexp = r"^ +"
+
+forbidden = [
+    "   if(a)\n",
+]
 
 allowed = [
     "if\n",
@@ -23,8 +26,3 @@ allowed = [
     "/*\n * Multiline comment too */",
     "#in macros\\\nHi\\\n Hi", # \\\n   it's ok too",
 ]
-forbidden = [
-    "   if(a)\n",
-]
-
-

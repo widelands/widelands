@@ -108,7 +108,7 @@ int32_t RealFSImpl::FindFiles
 		std::string m_root_save(m_root); // save orginal m_root
 		m_root = path;
 		realpath = FS_CanonicalizeName(pattern);
-		realpath = realpath.substr(0, realpath.rfind("\\"));
+		realpath = realpath.substr(0, realpath.rfind('\\'));
 		m_root = m_root_save; // reset m_root
 	}
 

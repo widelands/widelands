@@ -4,5 +4,5 @@ from Distribute import *
 distadd(env, 'utils/spurious_source_code/regexps/trailing_whitespace/SConscript')
 distadd(env, 'utils/spurious_source_code/regexps/trailing_whitespace/documentation')
 distadd(env, 'utils/spurious_source_code/regexps/trailing_whitespace/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/trailing_whitespace/redundant_with_whitespace_checker')
 distadd(env, 'utils/spurious_source_code/regexps/trailing_whitespace/regexps')
-

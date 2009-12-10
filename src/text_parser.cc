@@ -138,7 +138,7 @@ bool Text_Parser::parse_textblock
 		(std::string::size_type offset;
 		 (offset = block_text.find("<variable name=")) != std::string::npos;)
 	{
-		std::string::size_type const end = block_text.find(">");
+		std::string::size_type const end = block_text.find('>');
 		if (end == std::string::npos)
 			log("WARNING: <variable> tag not closed!\n");
 		else {
@@ -240,13 +240,13 @@ void Text_Parser::parse_richtexttext_attributes
 		format.erase(0, 1);
 
 	while (format.size()) {
-		std::string::size_type const key_end = format.find("=");
+		std::string::size_type const key_end = format.find('=');
 		if (key_end == std::string::npos)
 			return;
 		else {
 			std::string const key = format.substr(0, key_end);
 			format.erase(0, key_end + 1);
-			SSS_T val_end = format.find(" ");
+			std::string::size_type val_end = format.find(' ');
 			if (val_end == std::string::npos)
 				val_end = format.size();
 			std::string val = format.substr(0, val_end);
@@ -271,13 +271,13 @@ void Text_Parser::parse_text_attributes
 		format.erase(0, 1);
 
 	while (format.size()) {
-		SSS_T key_end = format.find("=");
+		std::string::size_type const key_end = format.find('=');
 		if (key_end == std::string::npos)
 			return;
 		else {
 			std::string key = format.substr(0, key_end);
 			format.erase(0, key_end + 1);
-			SSS_T val_end = format.find(" ");
+			std::string::size_type val_end = format.find(' ');
 			if (val_end == std::string::npos)
 				val_end = format.size();
 			std::string val = format.substr(0, val_end);

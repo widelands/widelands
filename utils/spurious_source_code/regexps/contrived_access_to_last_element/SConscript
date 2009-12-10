@@ -1,0 +1,8 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/contrived_access_to_last_element/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/contrived_access_to_last_element/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/contrived_access_to_last_element/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/contrived_access_to_last_element/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/contrived_access_to_last_element/regexps')

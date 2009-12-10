@@ -6,4 +6,3 @@ distadd(env, 'utils/spurious_source_code/regexps/line_starting_with_space_follow
 distadd(env, 'utils/spurious_source_code/regexps/line_starting_with_space_followed_by_control_structure/documentation')
 distadd(env, 'utils/spurious_source_code/regexps/line_starting_with_space_followed_by_control_structure/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/line_starting_with_space_followed_by_control_structure/regexps')
-

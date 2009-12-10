@@ -6,4 +6,3 @@ distadd(env, 'utils/spurious_source_code/regexps/upcast_without_macro/allowed')
 distadd(env, 'utils/spurious_source_code/regexps/upcast_without_macro/documentation')
 distadd(env, 'utils/spurious_source_code/regexps/upcast_without_macro/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/upcast_without_macro/regexps')
-

@@ -161,13 +161,16 @@ procedure Whitespace_Checker is
       HT_Is_Allowed : Boolean := False;
    begin
       --  When this is called, "/*" has just been read. Therefore current
-      --  character is '*'. We change that to ' ' so that it does not think
+      --  character is '*'. We change that to '-' so that it does not think
       --  that the comment is over if it reads a '/' immediately.
-      Read_Characters (0) := ' ';
+      Read_Characters (0) := '-';
       loop
          Next_Character;
          case Read_Characters (0) is
             when LF     =>
+               if Read_Characters (1) = ' ' then
+                  Put_Error ("trailing whitespace");
+               end if;
                Next_Line;
                HT_Is_Allowed := True;
             when HT     =>
@@ -190,6 +193,9 @@ procedure Whitespace_Checker is
          Next_Character;
          case Read_Characters (0) is
             when LF     =>
+               if Read_Characters (1) = ' ' then
+                  Put_Error ("trailing whitespace");
+               end if;
                Next_Line;
                exit when Read_Characters (1) /= '\';
             when HT     =>
@@ -567,7 +573,12 @@ procedure Whitespace_Checker is
                            Put_Error
                              ("indentation is only allowed at line begin");
                         end if;
-                        exit Read_Code_Loop when Read_Characters (0) = LF;
+                        if Read_Characters (0) = LF then
+                           if Read_Characters (1) = ' ' then
+                              Put_Error ("trailing whitespace");
+                           end if;
+                           exit Read_Code_Loop;
+                        end if;
                      end loop;
                   when LF | HT | ' ' =>
                      null;

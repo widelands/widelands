@@ -7,4 +7,3 @@ distadd(env, 'utils/spurious_source_code/regexps/illegal_space_before/documentat
 distadd(env, 'utils/spurious_source_code/regexps/illegal_space_before/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/illegal_space_before/redundant_with_whitespace_checker')
 distadd(env, 'utils/spurious_source_code/regexps/illegal_space_before/regexps')
-

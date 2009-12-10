@@ -1938,7 +1938,7 @@ bool WLApplication::campaign_game()
 	std::string filename;
 	for (;;) { // Campaign UI - Loop
 		int32_t campaign;
-		{ //  First start UI for selecting the campaign
+		{ //  First start UI for selecting the campaign.
 			Fullscreen_Menu_CampaignSelect select_campaign;
 			if (select_campaign.run() > 0)
 				campaign = select_campaign.get_campaign();
@@ -1947,7 +1947,7 @@ bool WLApplication::campaign_game()
 				break;
 			}
 		}
-		// Than start UI for the selected campaign
+		//  Then start UI for the selected campaign.
 		Fullscreen_Menu_CampaignMapSelect select_campaignmap;
 		select_campaignmap.set_campaign(campaign);
 		if (select_campaignmap.run() > 0) {
@@ -1957,7 +1957,7 @@ bool WLApplication::campaign_game()
 	}
 	try {
 		// Load selected campaign-map-file
-		if (!filename.empty())
+		if (filename.size())
 			return game.run_splayer_scenario_direct(filename.c_str());
 	} catch (...) {
 		emergency_save(game);

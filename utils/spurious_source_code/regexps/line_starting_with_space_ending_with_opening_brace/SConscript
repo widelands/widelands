@@ -7,4 +7,3 @@ distadd(env, 'utils/spurious_source_code/regexps/line_starting_with_space_ending
 distadd(env, 'utils/spurious_source_code/regexps/line_starting_with_space_ending_with_opening_brace/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/line_starting_with_space_ending_with_opening_brace/redundant_with_whitespace_checker')
 distadd(env, 'utils/spurious_source_code/regexps/line_starting_with_space_ending_with_opening_brace/regexps')
-

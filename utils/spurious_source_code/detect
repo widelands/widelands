@@ -32,6 +32,10 @@ if [ ! -f $CHECKER ]; then
 	echo "WARNING:    Go to utils/spurious_source_code and build it with make!"
 	echo "WARNING:    Else many checks will be done much slower or not at all!"
 	unset CHECKER
+elif [ $CHECKER.adb -nt $CHECKER ]; then
+	echo "ERROR: $CHECKER is out of date!!!"
+	echo "ERROR:    Go to utils/spurious_source_code and rebuild it with make!"
+	exit
 fi
 
 KRAZY2=$(which krazy2 2>/dev/null)

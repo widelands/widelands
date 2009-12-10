@@ -38,7 +38,7 @@ LayeredFileSystem::LayeredFileSystem(): m_home(0) {}
  */
 LayeredFileSystem::~LayeredFileSystem()
 {
-	while (!m_filesystems.empty()) {
+	while (m_filesystems.size()) {
 		delete m_filesystems.back();
 		m_filesystems.pop_back();
 	}

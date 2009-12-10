@@ -1,0 +1,8 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_access_type_symbol/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_access_type_symbol/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_access_type_symbol/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_access_type_symbol/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_access_type_symbol/regexps')

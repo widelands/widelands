@@ -6,4 +6,3 @@ distadd(env, 'utils/spurious_source_code/regexps/const_std_string_by_value/allow
 distadd(env, 'utils/spurious_source_code/regexps/const_std_string_by_value/documentation')
 distadd(env, 'utils/spurious_source_code/regexps/const_std_string_by_value/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/const_std_string_by_value/regexps')
-

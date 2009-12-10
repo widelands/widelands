@@ -1,0 +1,8 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/std_string_replace_replaces_single_character/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/std_string_replace_replaces_single_character/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/std_string_replace_replaces_single_character/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/std_string_replace_replaces_single_character/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/std_string_replace_replaces_single_character/regexps')

@@ -6,4 +6,3 @@ distadd(env, 'utils/spurious_source_code/regexps/SDL_integer_types_in_non_SDL_de
 distadd(env, 'utils/spurious_source_code/regexps/SDL_integer_types_in_non_SDL_dependent_code/documentation')
 distadd(env, 'utils/spurious_source_code/regexps/SDL_integer_types_in_non_SDL_dependent_code/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/SDL_integer_types_in_non_SDL_dependent_code/regexps')
-

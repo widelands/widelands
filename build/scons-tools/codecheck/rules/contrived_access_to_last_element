@@ -8,9 +8,9 @@ which should be written as
    *some_container.rbegin()
 """
 
+error_msg = "Simplify \"some_container[some_container.size() - 1];\" to \"*some_container.rbegin();\"."
 
 regexp = r"""(.*) *\[ *\\1 *\. *size *\( *\) *- *1 *\]"""
-error_msg = "Simplify \"some_container[some_container.size() - 1];\" to \"*some_container.rbegin();\""
 
 forbidden = [
     "some_container[some_container.size() - 1];"
@@ -19,6 +19,3 @@ forbidden = [
 allowed = [
     "*some_container.rbegin();"
 ]
-
-
-

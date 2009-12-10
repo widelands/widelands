@@ -6,4 +6,3 @@ distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_control_str
 distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_control_structure_keyword/documentation')
 distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_control_structure_keyword/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_control_structure_keyword/regexps')
-

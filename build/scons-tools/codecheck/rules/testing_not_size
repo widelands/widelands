@@ -3,12 +3,12 @@
 
 """
 For standard containers and similar, do not use "not something.size()" to test
-if it is empty. Just use "something.empty()".  
+if it is empty. Just use "something.empty()".
 """
 
+error_msg = "Do not use !a.size(), use a.empty() instead."
 
 regexp=r"""(not |!) *[a-zA-Z_][a-zA-Z_0-9]* *(\.|->) *size *\(\)"""
-error_msg = "Don't use !a.size(), use a.empty() instead."
 
 forbidden = [
     '	!something.size ();',

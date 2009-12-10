@@ -15,15 +15,14 @@ regexp = r"""(?x)
 ((".*?")|(<.*?>))
 [^\s]+$"""
 
+forbidden = [
+    r"""#include "io/filesystem/layered_filesystem.h"io/filesystem/""",
+    r"""#include <file.h>io/filesystem/""",
+]
+
 allowed = [
     r'#include "file.h"',
     r"""#include <file.h>""",
     r"""#include <file.h>  \t""", # Trailing whitespaces are not of interest for this rule
     r"""#include "file.h" \t """,
 ]
-forbidden = [
-    r"""#include "io/filesystem/layered_filesystem.h"io/filesystem/""",
-    r"""#include <file.h>io/filesystem/""",
-]
-
-

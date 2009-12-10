@@ -5,10 +5,10 @@
 This catches an opening parenthesis followed by a space or end of line.
 """
 
-regexp=r"""\(( |$|\n)"""
-error_msg="No space or newline allowed after opening parenthesis"
+error_msg="No space or newline allowed after opening parenthesis."
 
 strip_comments_and_strings = True
+regexp=r"""\(( |$|\n)"""
 
 forbidden = [
     '( h',
@@ -20,8 +20,8 @@ forbidden = [
     '/ / /(',
     '/ / /(\nadjh',
 
-# TestCases by Erik
-## illegal_character_after_opening_parenthesis.cc
+    # Eriks tests
+    ## illegal_character_after_opening_parenthesis.cc
     'void f( float) {',
 ]
 
@@ -32,5 +32,3 @@ allowed = [
     '// (',
     '/* Convert \n * string blah ( \n */',
 ]
-
-

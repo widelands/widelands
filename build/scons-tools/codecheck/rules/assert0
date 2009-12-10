@@ -12,11 +12,10 @@ error_msg="Use assert(false) here."
 
 regexp = r"""assert *\( *0 *\)"""
 
-allowed = [
-    "assert(false)",
-]
 forbidden = [
     "assert(0)",
 ]
 
-
+allowed = [
+    "assert(false)",
+]

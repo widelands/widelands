@@ -1,0 +1,8 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/std_string_substr_compare/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/std_string_substr_compare/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/std_string_substr_compare/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/std_string_substr_compare/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/std_string_substr_compare/regexps')

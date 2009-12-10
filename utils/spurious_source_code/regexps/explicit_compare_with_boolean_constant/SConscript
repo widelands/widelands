@@ -6,4 +6,3 @@ distadd(env, 'utils/spurious_source_code/regexps/explicit_compare_with_boolean_c
 distadd(env, 'utils/spurious_source_code/regexps/explicit_compare_with_boolean_constant/documentation')
 distadd(env, 'utils/spurious_source_code/regexps/explicit_compare_with_boolean_constant/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/explicit_compare_with_boolean_constant/regexps')
-

@@ -6,4 +6,3 @@ distadd(env, 'utils/spurious_source_code/regexps/loop_with_numerical_constant_co
 distadd(env, 'utils/spurious_source_code/regexps/loop_with_numerical_constant_condition/documentation')
 distadd(env, 'utils/spurious_source_code/regexps/loop_with_numerical_constant_condition/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/loop_with_numerical_constant_condition/regexps')
-

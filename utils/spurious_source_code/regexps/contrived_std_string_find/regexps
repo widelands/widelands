@@ -1,0 +1,2 @@
+r?find(_(first|last)_of)? *\("([^\]|\\[nt\"])"[,)]
+find_(first|last)_of *\('([^\]|\\[nt\"])'[,)]

@@ -1,4 +1,4 @@
 for (;;)
 while (a)
 while (1 + b)
-} while(false)
+} while (false)

@@ -249,9 +249,9 @@ void Fullscreen_Menu_MapSelect::fill_list()
 	if (m_curdir != m_basedir) {
 		MapData map;
 #ifndef WIN32
-		map.filename = m_curdir.substr(0, m_curdir.rfind("/"));
+		map.filename = m_curdir.substr(0, m_curdir.rfind('/'));
 #else
-		map.filename = m_curdir.substr(0, m_curdir.rfind("\\"));
+		map.filename = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
 		m_list.add
 			(_("<parent>"),

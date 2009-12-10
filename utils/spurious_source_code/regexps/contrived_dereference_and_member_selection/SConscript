@@ -6,4 +6,3 @@ distadd(env, 'utils/spurious_source_code/regexps/contrived_dereference_and_membe
 distadd(env, 'utils/spurious_source_code/regexps/contrived_dereference_and_member_selection/documentation')
 distadd(env, 'utils/spurious_source_code/regexps/contrived_dereference_and_member_selection/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/contrived_dereference_and_member_selection/regexps')
-

@@ -144,22 +144,16 @@ std::string FileSystem::GetHomedir()
 	// trying to get it compatible to ALL windows versions...
 	// Could anybody please hit the Megasoft devs for not keeping
 	// their own "standards"?
-	homedir = getenv("USERPROFILE");
-	if (!homedir.empty())
-		if (check_writeable_for_data(homedir.c_str()))
-			return homedir;
-	homedir = getenv("HOMEPATH");
-	if (!homedir.empty())
-		if (check_writeable_for_data(homedir.c_str()))
-			return homedir;
-	homedir = getenv("HOME");
-	if (!homedir.empty())
-		if (check_writeable_for_data(homedir.c_str()))
-			return homedir;
-	homedir = getenv("APPDATA");
-	if (!homedir.empty())
-		if (check_writeable_for_data(homedir.c_str()))
-			return homedir;
+#define TRY_USE_AS_HOMEDIR(name)                                              \
+   homedir = getenv(name);                                                    \
+   if (homedir.size() and check_writeable_for_data(homedir.c_str()))          \
+      return homedir;                                                         \
+
+	TRY_USE_AS_HOMEDIR("USERPROFILE");
+	TRY_USE_AS_HOMEDIR("HOMEPATH");
+	TRY_USE_AS_HOMEDIR("HOME");
+	TRY_USE_AS_HOMEDIR("APPDATA");
+
 	log("None of the directories was useable - falling back to \".\"\n");
 #else
 #ifdef HAS_GETENV
@@ -235,7 +229,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	for (uint32_t j = 0; j < path_size; ++j) {
 		temp = fixedpath.at(j);
 		if (temp == "/")
-			fixedpath.replace(j, 1, "\\");
+			fixedpath.at(j) = '\\';
 	}
 
 	bool absolute = pathIsAbsolute(fixedpath);

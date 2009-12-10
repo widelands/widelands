@@ -1,0 +1,8 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/contrived_std_string_find/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/contrived_std_string_find/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/contrived_std_string_find/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/contrived_std_string_find/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/contrived_std_string_find/regexps')

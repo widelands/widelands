@@ -7,6 +7,10 @@ and when gcc-4.2 is common, -Werror=old-style-cast. It is complex because it
 should allow "operator==(h)" and "operator!=(h)". It should also ignore macros.
 """
 
+error_msg = "Old C-Style cast. Change to static_cast<Type>(var) or similar!"
+
+strip_comments_and_strings = True
+strip_macros = True
 regexp="""(?x)
 (((((((((([_a-zA-Z0-9]o|[^o]|^)p|[^p]|^)e|[^e]|^)r|[^r]|^)a|[^a]|^)t|[^t]|^)o|[^o]|^)r|[^r]|^)[!=]|[^!=]|^)=|[^] "'_a-zA-Z0-9>=]|return|^)
 [ ]*
@@ -18,10 +22,6 @@ regexp="""(?x)
 ([^].:,;{)=<>|?! c*/%+\-\n]|c([^o]|o([^n]|n([^s]|s([^t]|t[_a-zA-Z0-9]))))
 )"""
 
-error_msg = "Old C-Style cast. Change to static_cast<Type>(var) or similar!"
-
-strip_comments_and_strings = True
-strip_macros = True
 
 forbidden = [
     '(a)b',
@@ -62,7 +62,6 @@ forbidden = [
     '(I)consta;',
 ]
 
-
 allowed = [
     'a(b);',
     'operator==(b) and',
@@ -79,5 +78,3 @@ allowed = [
 	
     "\t(Widelands::Building_Index::value_t)\n",
 ]
-
-

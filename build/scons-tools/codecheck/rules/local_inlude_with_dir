@@ -42,10 +42,12 @@ def evaluate_matches(lines, fn):
     return errors
 
 # File this is called on is always called testdir/test.h
+
+forbidden = [
+    '#include "testdir/another_file.h"',
+]
+
 allowed = [
     '#include "file.h"',
     '#include "anotherdir/file.h"',
-]
-forbidden = [
-    '#include "testdir/another_file.h"',
 ]

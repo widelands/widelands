@@ -1177,7 +1177,7 @@ bool DefaultAI::improve_roads (int32_t gametime)
 		roads.pop_front ();
 	}
 
-	if (!economies.empty() && (inhibit_road_building <= gametime)) {
+	if (!economies.empty() && inhibit_road_building <= gametime) {
 		EconomyObserver * eco = economies.front();
 		if (!eco->flags.empty()) {
 			bool finish = false;

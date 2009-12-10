@@ -9,8 +9,9 @@ explicit use of "this->" is not allowed. But it should not catch things like
 some places.
 """
 
-regexp=r"""(?:^|[^_a-zA-Z0-9])this *-> *[^*]"""
 error_msg = "Do not use this->m_a, use m_a instead."
+
+regexp=r"""(?:^|[^_a-zA-Z0-9])this *-> *[^*]"""
 
 forbidden = [
     'this->m_b',
@@ -23,5 +24,3 @@ allowed = [
     'gthis->m_b',
     '(this->*(action->function))(g, state, action)',
 ]
-
-

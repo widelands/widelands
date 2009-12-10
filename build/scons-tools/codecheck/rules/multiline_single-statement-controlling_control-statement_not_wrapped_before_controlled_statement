@@ -28,6 +28,7 @@ lines ending with do or else followed by something very short (a single letter,
 because it has to allow "do if" and "else if".
 """
 
+error_msg = """Multiline conditional should break after conditional. if (a) blah... -> if (a) \\n blah"""
 
 regexp=r"""(?x)
 ^
@@ -39,9 +40,6 @@ regexp=r"""(?x)
 )
 (/[^/*]|[^/])*
 [^){};\\ \n]$"""
-
-error_msg = """Multiline conditional should break after conditional. if (a) blah... -> if (a) \\n blah"""
-
 
 forbidden = [
     'do hl',

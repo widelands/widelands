@@ -7,4 +7,3 @@ distadd(env, 'utils/spurious_source_code/regexps/misused_tab/documentation')
 distadd(env, 'utils/spurious_source_code/regexps/misused_tab/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/misused_tab/redundant_with_whitespace_checker')
 distadd(env, 'utils/spurious_source_code/regexps/misused_tab/regexps')
-

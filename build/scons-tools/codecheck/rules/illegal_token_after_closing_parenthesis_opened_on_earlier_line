@@ -51,7 +51,7 @@ strip_macros = True
 strip_comments_and_strings = True
 
 forbidden = [
-# Test cases by erik
+# Eriks tests
 ## illegal_character_after_closing_brace.cc
 """bool func(bool const a, bool const b) {
 \treturn
@@ -85,4 +85,3 @@ allowed = [
 \t\t _("%u%% built"), (get_built_per64k() * 100) >> 16);""",
 
 ]
-

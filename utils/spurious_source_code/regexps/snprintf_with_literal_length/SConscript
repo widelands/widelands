@@ -1,0 +1,8 @@
+Import('env')
+from Distribute import *
+
+distadd(env, 'utils/spurious_source_code/regexps/snprintf_with_literal_length/SConscript')
+distadd(env, 'utils/spurious_source_code/regexps/snprintf_with_literal_length/allowed')
+distadd(env, 'utils/spurious_source_code/regexps/snprintf_with_literal_length/documentation')
+distadd(env, 'utils/spurious_source_code/regexps/snprintf_with_literal_length/forbidden')
+distadd(env, 'utils/spurious_source_code/regexps/snprintf_with_literal_length/regexps')

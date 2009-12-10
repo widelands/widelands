@@ -15,11 +15,11 @@ I disagree with the macros. I do not think they add to the clarity of the code.
   -- SirVer
 """
 
-regexp=r"""^	* +(\{|case|else|try|(catch|if|switch|while) *\()"""
-error_msg = "Control structures shouldn't start a line. Move them to the end of the previous line"
+error_msg = "Bad indentation."
 
 strip_comments_and_strings = True
 strip_macros = True
+regexp=r"""^	* +(\{|case|else|try|(catch|if|switch|while) *\()"""
 
 forbidden = [
     '   {',
@@ -41,5 +41,3 @@ allowed = [
       if (Widelands::Player * const player = (egbase).get_player(p))          \\""",
 
 ]
-
-

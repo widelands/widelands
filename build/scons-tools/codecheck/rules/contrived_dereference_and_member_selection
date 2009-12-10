@@ -9,9 +9,9 @@ Use the more convenient syntax instead:
 pointer->member
 """
 
+error_msg = "Do not use (*a).member, use a->member."
 
 regexp = r"""[^]_A-Za-z0-9 >] *\(\*[a-zA-Z_][_a-zA-Z_]*\)\."""
-error_msg = "Do not use (*a).member, use a->member"
 
 forbidden = [
     '+ (*abc).def',
@@ -27,5 +27,3 @@ allowed = [
     'QString("%1 %2").arg(*it).arg(8)',
     'some_string.arg(*it).arg(8)',
 ]
-
-

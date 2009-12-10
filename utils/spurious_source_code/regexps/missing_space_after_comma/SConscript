@@ -7,4 +7,3 @@ distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_comma/docum
 distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_comma/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_comma/redundant_with_whitespace_checker')
 distadd(env, 'utils/spurious_source_code/regexps/missing_space_after_comma/regexps')
-

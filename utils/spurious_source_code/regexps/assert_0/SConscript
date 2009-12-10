@@ -6,4 +6,3 @@ distadd(env, 'utils/spurious_source_code/regexps/assert_0/allowed')
 distadd(env, 'utils/spurious_source_code/regexps/assert_0/documentation')
 distadd(env, 'utils/spurious_source_code/regexps/assert_0/forbidden')
 distadd(env, 'utils/spurious_source_code/regexps/assert_0/regexps')
-

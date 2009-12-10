@@ -143,8 +143,8 @@ void Cmd_Act::Write
 	GameLogicCommand::Write(fw, egbase, mos);
 
 	// Now serial
-	if (const Map_Object * const obj = egbase.objects().get_object(obj_serial)) {
-		// Object might have dissappeared
+	if (Map_Object const * const obj = egbase.objects().get_object(obj_serial))
+	{ //  object might have disappeared
 		assert(mos.is_object_known(*obj));
 		fw.Unsigned32(mos.get_object_file_index(*obj));
 	} else

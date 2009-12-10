@@ -6,6 +6,8 @@ This catches an opening brace followed by a space, but it allows it if a
 comment begins there, such as "{ //  comment". 
 """
 
+error_msg = "No space after opening brace allowed!"
+
 regexp=r"""(?x) 
 ^\s* 
 (?!///?)  # No comment 
@@ -21,8 +23,6 @@ regexp=r"""(?x)
 
 ([^\\]$|$)  # Make some extra work that '\' at the end of line is ok 
 """
-
-error_msg = "No space after opening brace allowed!"
 
 forbidden = [
     '{ ',
@@ -48,5 +48,3 @@ allowed = [
     "//  Do { what we want in comments",
     "buffer[i] = '{'",
 ]
-
-
