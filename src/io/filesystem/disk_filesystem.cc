@@ -421,7 +421,11 @@ void * RealFSImpl::fastLoad
 	int file = 0;
 	void * data = 0;
 
+#ifdef __APPLE__
+	file = open(fullname.c_str(), O_RDONLY);
+#else
 	file = open(fullname.c_str(), O_RDONLY|O_NOATIME);
+#endif
 	length = lseek(file, 0, SEEK_END);
 	lseek(file, 0, SEEK_SET);
 

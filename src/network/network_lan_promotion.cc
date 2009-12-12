@@ -132,6 +132,7 @@ void LAN_Base::send (void const * buf, size_t len, sockaddr_in const * addr)
 		 sizeof(sockaddr_in));
 }
 
+#pragma GCC diagnostic warning "-Wold-style-cast"
 void LAN_Base::broadcast (void const * buf, size_t len, uint16_t port)
 {
 	for
@@ -153,6 +154,7 @@ void LAN_Base::broadcast (void const * buf, size_t len, uint16_t port)
 			 sizeof(addr));
 	}
 }
+#pragma GCC diagnostic error "-Wold-style-cast"
 
 /*** class LAN_Game_Promoter ***/
 
@@ -236,6 +238,7 @@ void LAN_Game_Finder::reset ()
 }
 
 
+#pragma GCC diagnostic warning "-Wold-style-cast"
 void LAN_Game_Finder::run ()
 {
 	while (avail()) {
@@ -278,6 +281,7 @@ void LAN_Game_Finder::run ()
 		}
 	}
 }
+#pragma GCC diagnostic error "-Wold-style-cast"
 
 void LAN_Game_Finder::set_callback
 	(void (* const cb)(int32_t, Net_Open_Game const *, void *), void * const ud)
