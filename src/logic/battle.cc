@@ -130,8 +130,26 @@ Soldier * Battle::opponent(Soldier & soldier)
 
 //  FIXME Couldn't this code be simplified tremendously by doing all scheduling
 //  FIXME for one soldier and letting the other sleep until the battle is over?
+//  Could be, but we need to be able change the animations of the soldiers
+//  easily without unneeded hacks, and this code is not so difficult, only it
+//  had some translations errors
 void Battle::getBattleWork(Game & game, Soldier & soldier)
 {
+	// Identify what soldier is calling the routine
+	uint8_t const this_soldier_is = &soldier == m_first ? 1 : 2;
+
+	// Created this trhee 'states' of the battle:
+	// *First time entered, one enters :
+	//    oneReadyToFight, mark m_readyflags as he is ready to fight
+	// *Next time, the opponent enters:
+	//    bothReadyToFight, mark m_readyflags as 3 (round fighted)
+	// *Next time, the first enters again:
+	//    roundFighted, reset m_readyflags
+	bool const oneReadyToFight  = (m_readyflags == 0);
+	bool const roundFighted     = (m_readyflags == 3);
+	bool const bothReadyToFight = ((this_soldier_is | m_readyflags) == 3) and
+		(!roundFighted);
+
 	if (soldier.get_current_hitpoints() < 1) {
 		molog("soldier %u has died\n", soldier.serial());
 		soldier          . owner().count_casualty();
@@ -146,56 +164,41 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 
 	// So both soldiers are alive; are we ready to trade the next blow?
 	//
-	//  This code choses one of 3 codepaths, depending on 2 variables;
-	//  m_readyflags and thisflag. m_readyflags is 1 if only the first soldier
-	//  is ready, 2 if only the second soldier is ready and 3 if both soldiers
-	//  are ready. But ready to do what? Attack? Defend? Rest?
+	//  This code choses one of 3 codepaths:
+	//  *oneReadyToFight : This soldier is ready, but his opponent isn't, so
+	//                     wait until opponent "wakeup"-us
+	//  *bothReadyToFight: Opponent is ready to fight, so calculate this round
+	//                     and set flags to 'roundFighted', so the opponent
+	//                     will know that it need to set proper animation
+	//  *roundFighted    : Opponent has calculated this round, so this soldier
+	//                     only need to set his proper animation.
 	//
-	//  m_readyflags  :  thisflag  :  m_readyflags | thisflag  : codepath
-	//             0  :         1  :                        1  :        a
-	//             0  :         2  :                        2  :        a
-	//             1  :         1  :                        1  :        a
-	//             1  :         2  :                        3  :        b
-	//             2  :         1  :                        1  :        a
-	//             2  :         2  :                        3  :        b
-	//             3  :         1  :                        3  :        c
-	//             3  :         2  :                        3  :        c
-	//
-	//  * If the soldier that this function is called for was not ready before:
-	//      * he becomes ready hereby, and
-	//      * if the other soldier was ready before, it is time to let one hurt
-	//        the other.
-	//  * If both soldiers are already ready when this function is called, they
-	//    both become non-ready and the soldier that this function was called
-	//    for sleeps. When he wakes up, this function is called for him again.
-	//    He then becomes ready and wakes up his opponent. Then this function is
-	//    called for him, he becomes ready and it is time again to let one hurt
-	//    the other.
 
-	uint8_t const thisflag = &soldier == m_first ? 1 : 2;
-
-	if ((m_readyflags | thisflag) != 3) {                         //  codepath a
-		//  My opponent is not ready to defend. Idle until he wakes me up.
-		assert(m_readyflags == 0 or m_readyflags == thisflag);
-		m_readyflags = thisflag;
-		assert(m_readyflags == thisflag);
+	if (oneReadyToFight) {
+		//  My opponent is not ready to battle. Idle until he wakes me up.
+		assert(m_readyflags == 0);
+		m_readyflags = this_soldier_is;
+		assert(m_readyflags == this_soldier_is);
 		return
 			soldier.start_task_idle
 				(game, soldier.descr().get_animation("idle"), -1);
-	} else if (m_readyflags != 3) {                               //  codepath b
-		//  Only one of us was ready before and the other becomes ready now.
-		//  Time for one of us to hurt the other. Which one is on turn is decided
-		//  by calculateTurn.
+	}
+	if (bothReadyToFight) {
+		// Our opponent are waitingt for us to fight.
+		// Time for one of us to hurt the other. Which one is on turn is decided
+		// by calculateRound.
 		assert
-			((m_readyflags == 1 and thisflag == 2) or
-			 (m_readyflags == 2 and thisflag == 1));
+			((m_readyflags == 1 and this_soldier_is == 2) or
+			 (m_readyflags == 2 and this_soldier_is == 1));
 		m_readyflags = 3;
 		assert(m_readyflags == 3);
 		calculateRound(game);
 		opponent(soldier)->send_signal(game, "wakeup");
-	} else {                                                      //  codepath c
+	}
+
+	if (roundFighted) {
 		//  Both of us were already ready. That means that we already fought and
-		//  it is time to rest.
+		//  it is time to wait until both become ready.
 		m_readyflags = 0;
 	}
 
