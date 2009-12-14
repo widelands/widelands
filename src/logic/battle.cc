@@ -191,7 +191,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 			 (m_readyflags == 2 and thisflag == 1));
 		m_readyflags = 3;
 		assert(m_readyflags == 3);
-		calculateTurn(game);
+		calculateRound(game);
 		opponent(soldier)->send_signal(game, "wakeup");
 	} else {                                                      //  codepath c
 		//  Both of us were already ready. That means that we already fought and
@@ -203,7 +203,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	soldier.start_task_idle(game, soldier.descr().get_animation("idle"), 1000);
 }
 
-void Battle::calculateTurn(Game & game)
+void Battle::calculateRound(Game & game)
 {
 	Soldier * attacker;
 	Soldier * defender;

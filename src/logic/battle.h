@@ -64,7 +64,7 @@ struct Battle : public Map_Object {
 	void getBattleWork(Game &, Soldier &);
 
 private:
-	void calculateTurn(Game &);
+	void calculateRound(Game &);
 
 	Soldier * m_first;
 	Soldier * m_second;
