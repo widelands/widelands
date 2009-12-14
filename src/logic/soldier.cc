@@ -453,7 +453,7 @@ int32_t Soldier::get_tattribute(uint32_t const attr) const
 
 //  Unsignedness ensures that we can only heal, not hurt through this method.
 void Soldier::heal (const uint32_t hp) {
-	molog ("healing (%d+)%d/%d\n", hp, m_hp_current, m_hp_max);
+	molog ("[soldier] healing (%d+)%d/%d\n", hp, m_hp_current, m_hp_max);
 	assert(hp);
 	assert(m_hp_current <  m_hp_max);
 	m_hp_current += std::min(hp, m_hp_max - m_hp_current);
@@ -467,7 +467,7 @@ void Soldier::damage (const uint32_t value)
 {
 	assert (m_hp_current > 0);
 
-	molog ("damage %d(-%d)/%d\n", m_hp_current, value, m_hp_max);
+	molog ("[soldier] damage %d(-%d)/%d\n", m_hp_current, value, m_hp_max);
 	if (m_hp_current < value)
 		m_hp_current = 0;
 	else
@@ -616,7 +616,7 @@ void Soldier::start_animation
 	 char const * const animname,
 	 uint32_t const time)
 {
-	molog("Starting animation %s", animname);
+	molog("[soldier] starting animation %s", animname);
 	return
 		start_task_idle
 			(ref_cast<Game, Editor_Game_Base>(egbase),
@@ -678,7 +678,7 @@ void Soldier::setBattle(Game & game, Battle * const battle)
  */
 void Soldier::init_auto_task(Game & game) {
 	if (get_current_hitpoints() < 1) {
-		molog("init_auto_task: die\n");
+		molog("[soldier] init_auto_task: die\n");
 		return startTaskDie(game);
 	}
 
@@ -954,7 +954,7 @@ void Soldier::startTaskMoveInBattle(Game & game, CombatWalkingDir dir)
 
 	Map & map = game.map();
 	int32_t const tdelta = (map.calc_cost(get_position(), mapdir)) / 2;
-	molog("startTaskMoveInBattle tdelta: %d\n", tdelta);
+	molog("[move_in_battle] tdelta: %d\n", tdelta);
 	m_combat_walking   = dir;
 	m_combat_walkstart = game.get_gametime();
 	m_combat_walkend   = m_combat_walkstart + tdelta;
@@ -1093,7 +1093,7 @@ void Soldier::battle_update(Game & game, State &)
 					 	 false, (dist + 3) / 4))
 				{
 					molog
-						("player %u's soldier started task_movepath\n",
+						("[battle] player %u's soldier started task_movepath\n",
 						 owner().player_number());
 					return;
 				} else {
@@ -1221,7 +1221,7 @@ void Soldier::die_update(Game & game, State & state)
 void Soldier::die_pop(Game & game, State &)
 {
 	// Destroy the soldier!
-	molog("soldier %u has died\n", serial());
+	molog("[die] soldier %u has died\n", serial());
 	schedule_destroy(game);
 }
 

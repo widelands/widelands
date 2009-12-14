@@ -163,7 +163,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	std::string what_anim;
 
 	if (soldier.get_current_hitpoints() < 1) {
-		molog("soldier %u loose battle\n", soldier.serial());
+		molog(_("[battle] soldier %u loose battle\n"), soldier.serial());
 		soldier          . owner().count_casualty();
 		opponent(soldier)->owner().count_kill    ();
 		soldier.startTaskDie(game);
@@ -228,9 +228,9 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	// The function calculateRound inverts value of m_first_strikes, so
 	// attacker will be the m_first when m_first_strikes = false and
 	// attacker will be m_second when m_first_strikes = true
-	molog("This soldier is  %d\n", this_soldier_is);
-	molog("First strikes    %d\n", m_first_strikes);
-	molog("Last attack hits %d\n", m_last_attack_hits);
+	molog("[battle] This soldier is  %d\n", this_soldier_is);
+	molog("[battle] First strikes    %d\n", m_first_strikes);
+	molog("[battle] Last attack hits %d\n", m_last_attack_hits);
 	if (this_soldier_is == 1) {
 		if (m_first_strikes) {
 			if (m_last_attack_hits) {
@@ -266,7 +266,10 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 			}
 		}
 	}
-	molog("Starting animation %s\n", what_anim.c_str());
+	molog
+		("[battle] Starting animation %s for soldier %d\n",
+		 what_anim.c_str(),
+		 soldier.serial());
 	soldier.start_task_idle
 		(game, soldier.descr().get_rand_anim(game, what_anim.c_str()), 1000);
 }
