@@ -557,6 +557,8 @@ void Soldier::draw
 
 	// Draw energy bar
 	// first: draw white sourrounding
+		// Reduces energy bar length, so no overlap between soldiers
+		w = w * 0.6;
 		Rect r(Point(drawpos.x - w, drawpos.y - h - 7), w * 2, 5);
 		dst.draw_rect(r, HP_FRAMECOLOR);
 		// Draw the actual bar
