@@ -937,10 +937,8 @@ Bob::Task Soldier::taskMoveInBattle = {
 
 void Soldier::startTaskMoveInBattle(Game & game, CombatWalkingDir dir)
 {
-	assert(m_battle);
-	assert((this == m_battle->first()) or (this == m_battle->second()));
-
 	int32_t mapdir = IDLE;
+
 	switch (dir) {
 		case CD_WALK_W:
 		case CD_RETURN_E:
@@ -1045,18 +1043,15 @@ void Soldier::battle_update(Game & game, State &)
 	}
 
 	if (!m_battle) {
+		if (m_combat_walking == CD_COMBAT_W) {
+			return startTaskMoveInBattle(game, CD_RETURN_W);
+		}
+		if (m_combat_walking == CD_COMBAT_E) {
+			return startTaskMoveInBattle(game, CD_RETURN_E);
+		}
 		molog("[battle] is over\n");
 		sendSpaceSignals(game);
 		return pop_task(game);
-	}
-
-	if (!m_battle->has_opponent(*this)) {
-		molog("[battle] no opponent, returning\n");
-		if (m_combat_walking == CD_COMBAT_W) {
-			return startTaskMoveInBattle(game, CD_RETURN_W);
-		} else {
-			return startTaskMoveInBattle(game, CD_RETURN_E);
-		}
 	}
 
 	if (stayHome()) {
@@ -1064,9 +1059,19 @@ void Soldier::battle_update(Game & game, State &)
 			molog("[battle] stayHome, so reverse roles\n");
 			new Battle(game, *m_battle->second(), *m_battle->first());
 			return skip_act(); //  we will get a signal via setBattle()
+		} else {
+			if (m_combat_walking != CD_COMBAT_E) {
+				return startTaskMoveInBattle(game, CD_WALK_E);
+			}
 		}
 	} else {
 		Soldier & opponent = *m_battle->opponent(*this);
+
+		if (opponent.stayHome() and (this == m_battle->second())) {
+			// Wait until correct roles are assigned
+			new Battle(game, *m_battle->second(), *m_battle->first());
+			return schedule_act(game, 10);
+		}
 
 		if (opponent.get_position() != get_position()) {
 			Map & map = game.map();
