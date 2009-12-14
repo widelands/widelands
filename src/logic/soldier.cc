@@ -39,6 +39,7 @@
 #include "upcast.h"
 #include "warehouse.h"
 #include "wexception.h"
+#include "wui/mapviewpixelconstants.h"
 
 #include <cstdio>
 
@@ -144,6 +145,72 @@ Soldier_Descr::Soldier_Descr
 		m_evade_pics_fn[i] = dir;
 		m_evade_pics_fn[i] += global_s.get_safe_string(buffer);
 	}
+
+	{  ///  Battle animations
+		/// attack_success_*-> soldier is attacking and hit his opponent
+		/// attack_failure_*-> soldier is attacking and miss hit, defender evades
+		/// evade_success_* -> soldier is defending and opponent misses
+		/// evade_failure_* -> soldier is defending and opponent hits
+		m_attack_success_w_name =
+			load_animations_from_string
+				(directory, prof, global_s, encdata, "attack_success_w");
+		m_attack_success_e_name =
+			load_animations_from_string
+				(directory, prof, global_s, encdata, "attack_success_e");
+		m_attack_failure_w_name =
+			load_animations_from_string
+				(directory, prof, global_s, encdata, "attack_failure_w");
+		m_attack_failure_e_name =
+			load_animations_from_string
+				(directory, prof, global_s, encdata, "attack_failure_e");
+		m_evade_success_w_name =
+			load_animations_from_string
+				(directory, prof, global_s, encdata, "evade_success_w");
+		m_evade_success_e_name =
+			load_animations_from_string
+				(directory, prof, global_s, encdata, "evade_success_e");
+		m_evade_failure_w_name =
+			load_animations_from_string
+				(directory, prof, global_s, encdata, "evade_failure_w");
+		m_evade_failure_e_name =
+			load_animations_from_string
+				(directory, prof, global_s, encdata, "evade_failure_e");
+	}
+
+}
+
+std::vector<std::string> Soldier_Descr::load_animations_from_string
+	(std::string const & directory, Profile & prof,
+	 Section & global_s, EncodeData const * const encdata,
+	 const char * anim_name)
+{
+	try {
+		const char * anim_string = global_s.get_safe_string(anim_name);
+		std::vector<std::string> list(split_string(anim_string, ","));
+		if (list.size() < 1)
+			throw game_data_error
+				(_("expected %s but found \"%s\""),
+				 _("\"anim_name[,another_anim,...]\""), anim_string);
+
+		// Sanitation
+		container_iterate(std::vector<std::string>, list, i) {
+			remove_spaces(*i.current);
+
+			// Check that section exists
+			Section &
+				anim_s = prof.get_safe_section((*i.current).c_str());
+
+			m_default_encodedata.parse(anim_s);
+
+			add_animation
+				((*i.current).c_str(),
+				 g_anim.get (directory, anim_s, "idle_00.png", encdata));
+		}
+		return list;
+	} catch (_wexception const & e) {
+		throw game_data_error("%s : %s", anim_name, e.what());
+	}
+
 }
 
 /**
@@ -172,12 +239,61 @@ void Soldier_Descr::load_graphics() {
 /**
  * Get random animation of specified type
  */
-uint32_t Soldier_Descr::get_rand_anim(const char * const animation_name) const {
-	//  TODO This is thought to get a random animation like attack_1 attack_2
-	//  TODO attack_3 ...
-	//  TODO Randomly through this method. By now only gets attack, but is not
-	//  TODO very difficult to remake allowing the attack_1 and so.
-	return get_animation(animation_name);
+uint32_t Soldier_Descr::get_rand_anim
+	(Game & game, const char * const animation_name) const
+{
+	std::string run = animation_name;
+
+	if (strcmp(animation_name, "attack_success_w") == 0) {
+		assert(m_attack_success_w_name.size() > 0);
+		uint32_t i = game.logic_rand() % m_attack_success_w_name.size();
+		run = m_attack_success_w_name[i];
+	}
+
+	if (strcmp(animation_name, "attack_success_e") == 0) {
+		assert(m_attack_success_e_name.size() > 0);
+		uint32_t i = game.logic_rand() % m_attack_success_e_name.size();
+		run = m_attack_success_e_name[i];
+	}
+
+	if (strcmp(animation_name, "attack_failure_w") == 0) {
+		assert(m_attack_failure_w_name.size() > 0);
+		uint32_t i = game.logic_rand() % m_attack_failure_w_name.size();
+		run = m_attack_failure_w_name[i];
+	}
+
+	if (strcmp(animation_name, "attack_failure_e") == 0) {
+		assert(m_attack_failure_e_name.size() > 0);
+		uint32_t i = game.logic_rand() % m_attack_failure_e_name.size();
+		run = m_attack_failure_e_name[i];
+	}
+
+	if (strcmp(animation_name, "evade_success_w") == 0) {
+		assert(m_evade_success_w_name.size() > 0);
+		uint32_t i = game.logic_rand() % m_evade_success_w_name.size();
+		run = m_evade_success_w_name[i];
+	}
+
+	if (strcmp(animation_name, "evade_success_e") == 0) {
+		assert(m_evade_success_e_name.size() > 0);
+		uint32_t i = game.logic_rand() % m_evade_success_e_name.size();
+		run = m_evade_success_e_name[i];
+	}
+
+	if (strcmp(animation_name, "evade_failure_w") == 0) {
+		assert(m_evade_failure_w_name.size() > 0);
+		uint32_t i = game.logic_rand() % m_evade_failure_w_name.size();
+		run = m_evade_failure_w_name[i];
+	}
+
+	if (strcmp(animation_name, "evade_failure_e") == 0) {
+		assert(m_evade_failure_e_name.size() > 0);
+		uint32_t i = game.logic_rand() % m_evade_failure_e_name.size();
+		run = m_evade_failure_e_name[i];
+	}
+
+	log(" get %s\n", run.c_str());
+	return get_animation(run.c_str());
 }
 
 /**
@@ -224,6 +340,10 @@ void Soldier::init(Editor_Game_Base & egbase)
 			(descr().get_max_hp() - (min_hp - 1));
 	}
 	m_hp_current    = m_hp_max;
+
+	m_combat_walking   = CD_NONE;
+	m_combat_walkstart = 0;
+	m_combat_walkend   = 0;
 
 	Worker::init(egbase);
 }
@@ -336,6 +456,70 @@ void Soldier::damage (const uint32_t value)
 		m_hp_current -= value;
 }
 
+/// Calculates the actual position to draw on from the base node position.
+/// This function takes battling into account.
+///
+/// pos is the location, in pixels, of the node m_position (height is already
+/// taken into account).
+Point Soldier::calc_drawpos
+	(const Editor_Game_Base & game, const Point pos) const
+{
+	if (m_combat_walking == CD_NONE) {
+		return Bob::calc_drawpos(game, pos);
+	}
+
+	const FCoords end = get_position();
+	bool moving = false;
+	Point spos = pos, epos = pos;
+
+	switch (m_combat_walking) {
+		case CD_WALK_W:
+			moving = true;
+			epos.x -= TRIANGLE_WIDTH / 4;
+			break;
+		case CD_WALK_E:
+			moving = true;
+			epos.x += TRIANGLE_WIDTH / 4;
+			break;
+		case CD_RETURN_W:
+			moving = true;
+			spos.x -= TRIANGLE_WIDTH / 4;
+			break;
+		case CD_RETURN_E:
+			moving = true;
+			spos.x += TRIANGLE_WIDTH / 4;
+			break;
+		case CD_COMBAT_W:
+			moving = false;
+			epos.x -= TRIANGLE_WIDTH / 4;
+			break;
+		case CD_COMBAT_E:
+			moving = false;
+			epos.x += TRIANGLE_WIDTH / 4;
+			break;
+		case CD_NONE:
+			break;
+	}
+
+	if (moving) {
+
+		float f =
+			static_cast<float>(game.get_gametime() - m_combat_walkstart)
+			/
+			(m_combat_walkend - m_combat_walkstart);
+		assert(m_combat_walkstart <= game.get_gametime());
+		assert(m_combat_walkstart < m_combat_walkend);
+
+		if (f < 0)
+			f = 0;
+		else if (f > 1)
+			f = 1;
+
+		epos.x = static_cast<int32_t>(f * epos.x + (1 - f) * spos.x);
+	}
+	return epos;
+}
+
 /*
  * Draw this soldier. This basically draws him as a worker, but add hitpoints
  */
@@ -414,10 +598,12 @@ void Soldier::start_animation
 	 char const * const animname,
 	 uint32_t const time)
 {
+	molog("Starting animation %s", animname);
 	return
 		start_task_idle
 			(ref_cast<Game, Editor_Game_Base>(egbase),
-			 descr().get_rand_anim(animname),
+			 descr().get_rand_anim
+				(ref_cast<Game, Editor_Game_Base>(egbase), animname),
 			 time);
 }
 
@@ -710,6 +896,70 @@ void Soldier::defense_pop(Game & game, State &)
 }
 
 
+Bob::Task Soldier::taskMoveInBattle = {
+	"moveInBattle",
+	static_cast<Bob::Ptr>(&Soldier::move_in_battle_update),
+	0,
+	0
+};
+
+void Soldier::startTaskMoveInBattle(Game & game, CombatWalkingDir dir)
+{
+	assert(m_battle);
+	assert((this == m_battle->first()) or (this == m_battle->second()));
+
+	int32_t mapdir = IDLE;
+	switch (dir) {
+		case CD_WALK_W:
+		case CD_RETURN_E:
+			mapdir = WALK_W;
+			break;
+		case CD_WALK_E:
+		case CD_RETURN_W:
+			mapdir = WALK_E;
+			break;
+		default:
+			throw game_data_error(_("bad direction '%d'"), dir);
+	}
+
+	Map & map = game.map();
+	int32_t const tdelta = (map.calc_cost(get_position(), mapdir)) / 2;
+	molog("startTaskMoveInBattle tdelta: %d\n", tdelta);
+	m_combat_walking   = dir;
+	m_combat_walkstart = game.get_gametime();
+	m_combat_walkend   = m_combat_walkstart + tdelta;
+
+	push_task(game, taskMoveInBattle);
+	State & state = top_state();
+	state.ivar1 = dir;
+}
+
+void Soldier::move_in_battle_update(Game & game, State &)
+{
+	if (m_combat_walkend <= game.get_gametime()) {
+		switch (m_combat_walking) {
+			case CD_NONE:
+				break;
+			case CD_WALK_W:
+				m_combat_walking = CD_COMBAT_W;
+				break;
+			case CD_WALK_E:
+				m_combat_walking = CD_COMBAT_E;
+				break;
+			case CD_RETURN_W:
+			case CD_RETURN_E:
+			case CD_COMBAT_W:
+			case CD_COMBAT_E:
+				m_combat_walking = CD_NONE;
+				break;
+		}
+		return pop_task(game);
+	} else
+		//  Only end the task once we've actually completed the step
+		// Ignore signals until then
+		return schedule_act(game, m_combat_walkend - game.get_gametime());
+}
+
 /**
  * \return \c true if the defending soldier should not stray from
  * his home flag.
@@ -768,9 +1018,13 @@ void Soldier::battle_update(Game & game, State &)
 		return pop_task(game);
 	}
 
-	if (!m_battle->opponent(*this)) {
-		molog("[battle] no opponent, starting task idle\n");
-		return start_task_idle(game, get_animation("idle"), -1);
+	if (!m_battle->has_opponent(*this)) {
+		molog("[battle] no opponent, returning\n");
+		if (m_combat_walking == CD_COMBAT_W) {
+			return startTaskMoveInBattle(game, CD_RETURN_W);
+		} else {
+			return startTaskMoveInBattle(game, CD_RETURN_E);
+		}
 	}
 
 	if (stayHome()) {
@@ -850,6 +1104,35 @@ void Soldier::battle_update(Game & game, State &)
 						 	 buffer));
 					game.gameController()->setDesiredSpeed(0);
 					return pop_task(game);
+				}
+			}
+		} else {
+
+			assert(opponent.get_position() == get_position());
+			assert(m_battle == opponent.getBattle());
+
+			if (opponent.is_walking()) {
+				molog
+					("[battle]: Opponent '%d' is walking, sleeping\n",
+					 opponent.serial());
+				return start_task_idle(game, descr().get_animation("idle"), 100);
+			}
+
+			if (m_battle->first()->serial() == serial()) {
+				molog("[battle]: I'm first: '%d'\n", m_combat_walking);
+				if (m_combat_walking != CD_COMBAT_W) {
+					startTaskMoveInBattle(game, CD_WALK_W);
+					//opponent.startTaskMoveInBattle(game, CD_WALK_E);
+					return;
+				}
+			}
+
+			if (m_battle->second()->serial() == serial()) {
+				molog("[battle]: I'm second: '%d'\n", m_combat_walking);
+				if (m_combat_walking != CD_COMBAT_E) {
+					startTaskMoveInBattle(game, CD_WALK_E);
+					//opponent.startTaskMoveInBattle(game, CD_WALK_W);
+					return;
 				}
 			}
 		}

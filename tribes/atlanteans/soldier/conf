@@ -28,6 +28,16 @@ defense_level_0_pic=defense_level0.png
 defense_level_1_pic=defense_level1.png
 defense_level_2_pic=defense_level2.png
 
+# Animations for battle
+attack_success_w=atk_ok_w
+attack_success_e=atk_ok_e
+attack_failure_w=atk_fail_w
+attack_failure_e=atk_fail_e
+evade_success_w=eva_ok_w
+evade_success_e=eva_ok_e
+evade_failure_w=eva_fail_w
+evade_failure_e=eva_fail_e
+
 # SOLDIER SPECIFIC STUFF ENDS HERE
 
 [buildcost]
@@ -44,4 +54,44 @@ playercolor=true
 dirpics=walk_!!_??.png
 hotspot=14 29
 fps=10
+playercolor=true
+
+[atk_ok_e]
+pics=walk_e_??.png
+hotspot=13 25
+playercolor=true
+
+[atk_fail_e]
+pics=walk_ne_??.png
+hotspot=13 25
+playercolor=true
+
+[eva_ok_e]
+pics=walk_w_??.png
+hotspot=13 25
+playercolor=true
+
+[eva_fail_e]
+pics=walk_ne_??.png
+hotspot=13 25
+playercolor=true
+
+[atk_ok_w]
+pics=walk_w_??.png
+hotspot=13 25
+playercolor=true
+
+[atk_fail_w]
+pics=walk_nw_??.png
+hotspot=13 25
+playercolor=true
+
+[eva_ok_w]
+pics=walk_e_??.png
+hotspot=13 25
+playercolor=true
+
+[eva_fail_w]
+pics=walk_nw_??.png
+hotspot=13 25
 playercolor=true

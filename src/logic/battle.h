@@ -58,6 +58,12 @@ struct Battle : public Map_Object {
 	Soldier * opponent(Soldier &);
 
 	/**
+	 * \param soldier must be one of the soldier involved in this battle
+	 * \return if other soldier is set
+	 */
+	bool has_opponent(Soldier &);
+
+	/**
 	 * Called by the battling soldiers once they've met on a common node
 	 * and are idle.
 	 */
@@ -84,6 +90,11 @@ private:
 	 * \c true if the first soldier is the next to strike.
 	 */
 	bool m_first_strikes;
+
+	/**
+	 * \c true if the last turn attacker damaged his opponent
+	 */
+	bool m_last_attack_hits;
 
 	// Load/save support
 protected:

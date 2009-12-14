@@ -81,7 +81,7 @@ struct Soldier_Descr : public Worker_Descr {
 
 
 
-	uint32_t get_rand_anim(const char * const name) const;
+	uint32_t get_rand_anim(Game & game, const char * const name) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void writeHTMLSoldier(::FileWrite &) const;
 #endif
@@ -118,9 +118,35 @@ protected:
 	std::vector<std::string> m_attack_pics_fn;
 	std::vector<std::string> m_evade_pics_fn;
 	std::vector<std::string> m_defense_pics_fn;
+
+	// animation names
+	std::vector<std::string> m_attack_success_w_name;
+	std::vector<std::string> m_attack_failure_w_name;
+	std::vector<std::string> m_evade_success_w_name;
+	std::vector<std::string> m_evade_failure_w_name;
+
+	std::vector<std::string> m_attack_success_e_name;
+	std::vector<std::string> m_attack_failure_e_name;
+	std::vector<std::string> m_evade_success_e_name;
+	std::vector<std::string> m_evade_failure_e_name;
+
+	std::vector<std::string> load_animations_from_string
+			(std::string const & directory, Profile & prof, Section & global_s,
+			 EncodeData const * const encdata, const char * anim_name);
+
 };
 
 class Building;
+
+enum CombatWalkingDir {
+	CD_NONE = 0,     // Not in combat
+	CD_WALK_W = 1,   // Going to west       (facing west)
+	CD_WALK_E = 2,   // Going to east       (facing east)
+	CD_COMBAT_W = 3, // Fighting at west    (facing east!!)
+	CD_COMBAT_E = 4, // Fighting at east    (facing west!!)
+	CD_RETURN_W = 5, // Returning from west (facing east!!)
+	CD_RETURN_E = 6, // Returning from east (facing west!!)
+};
 
 class Soldier : public Worker {
 	friend struct Map_Bobdata_Data_Packet;
@@ -144,6 +170,7 @@ public:
 	uint32_t get_defense_level() const {return m_defense_level;}
 	uint32_t get_evade_level  () const throw () {return m_evade_level;}
 
+	Point calc_drawpos(Editor_Game_Base const &, Point) const;
 	/// Draw this soldier
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const Point) const;
@@ -204,6 +231,7 @@ public:
 	void startTaskAttack(Game & game, Building &);
 	void startTaskDefense(Game & game, bool stayhome);
 	void startTaskBattle(Game &);
+	void startTaskMoveInBattle(Game &, CombatWalkingDir);
 
 private:
 	void attack_update(Game &, State &);
@@ -212,6 +240,7 @@ private:
 	void defense_pop(Game &, State &);
 	void battle_update(Game &, State &);
 	void battle_pop(Game &, State &);
+	void move_in_battle_update(Game &, State &);
 
 	void sendSpaceSignals(Game &);
 	bool stayHome();
@@ -220,6 +249,7 @@ protected:
 	static Task taskAttack;
 	static Task taskDefense;
 	static Task taskBattle;
+	static Task taskMoveInBattle;
 
 private:
 	uint32_t m_hp_current;
@@ -233,6 +263,15 @@ private:
 	uint32_t m_attack_level;
 	uint32_t m_defense_level;
 	uint32_t m_evade_level;
+
+	// This is used to replicate walk for soldiers but only just before and
+	// just after figthing in a battle, to draw soldier at proper position
+	// May be could be used Bob.m_walking, but then that variables should be
+	// protected instead of private, and some type of rework needed to allow
+	// the new states. I thought that is cleaner to have this variables splitted
+	CombatWalkingDir m_combat_walking;
+	int32_t  m_combat_walkstart;
+	int32_t  m_combat_walkend;
 
 	/**
 	 * If the soldier is involved in a challenge, it is assigned a battle

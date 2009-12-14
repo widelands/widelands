@@ -51,7 +51,7 @@ namespace Widelands {
 #define WORKER_BOB_PACKET_VERSION 1
 
 // Worker subtype versions
-#define SOLDIER_WORKER_BOB_PACKET_VERSION 5
+#define SOLDIER_WORKER_BOB_PACKET_VERSION 6
 #define CARRIER_WORKER_BOB_PACKET_VERSION 1
 
 
@@ -214,6 +214,8 @@ void Map_Bobdata_Data_Packet::Read
 									task = &Soldier::taskDefense;
 								else if (not strcmp(taskname, "battle"))
 									task = &Soldier::taskBattle;
+								else if (not strcmp(taskname, "moveInBattle"))
+									task = &Soldier::taskMoveInBattle;
 								else if
 									(not strcmp(taskname, "moveToBattle") ||
 									 not strcmp(taskname, "moveHome"))
@@ -627,6 +629,32 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						if (soldier_worker_bob_packet_version >= 5)
 							if (Serial const battle = fr.Unsigned32())
 								soldier->m_battle = &ol->get<Battle>(battle);
+
+						if (soldier_worker_bob_packet_version >= 6)
+						{
+							try {
+								soldier->m_combat_walking =
+									static_cast<CombatWalkingDir>
+										(fr.Direction8_allow_null());
+							} catch (StreamRead::direction_invalid const & e) {
+								throw game_data_error
+									("combat walking dir is %u but must be one of {0 "
+									 "(none), 1 (combat walk to west), 2 (combat walk"
+									 " to east), 3 (fighting at west), 4 (fighting at"
+									 " east), 5 (return from west), 6 (return from "
+									 "east)}",
+									 e.direction);
+							}
+							soldier->m_combat_walkstart = fr.Signed32();
+							soldier->m_combat_walkend   = fr.Signed32();
+							if
+								(soldier->m_combat_walkend <
+								 soldier->m_combat_walkstart)
+								throw game_data_error
+									("combat_walkend (%i) < combat_walkstart (%i)",
+									 soldier->m_combat_walkend,
+									 soldier->m_combat_walkstart);
+						}
 					} else
 						throw game_data_error
 							(_("unknown/unhandled version %u"),
@@ -888,6 +916,10 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 			fw.Unsigned32(os->get_object_file_index(*soldier->m_battle));
 		else
 			fw.Unsigned32(0);
+		// New at version 6
+		fw.Direction8_allow_null(soldier->m_combat_walking);
+		fw.Unsigned32(soldier->m_combat_walkstart);
+		fw.Unsigned32(soldier->m_combat_walkend);
 	} else if (upcast(Carrier const, carrier, &worker)) {
 		fw.Unsigned16(CARRIER_WORKER_BOB_PACKET_VERSION);
 		fw.Signed32(carrier->m_acked_ware);

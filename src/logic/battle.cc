@@ -128,6 +128,12 @@ Soldier * Battle::opponent(Soldier & soldier)
 	return m_first == &soldier ? m_second : m_first;
 }
 
+bool Battle::has_opponent(Soldier & soldier)
+{
+	assert(m_first == &soldier or m_second == &soldier);
+	return m_first != 0 and m_second != 0;
+}
+
 //  FIXME Couldn't this code be simplified tremendously by doing all scheduling
 //  FIXME for one soldier and letting the other sleep until the battle is over?
 //  Could be, but we need to be able change the animations of the soldiers
@@ -149,6 +155,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	bool const roundFighted     = (m_readyflags == 3);
 	bool const bothReadyToFight = ((this_soldier_is | m_readyflags) == 3) and
 		(!roundFighted);
+	std::string what_anim;
 
 	if (soldier.get_current_hitpoints() < 1) {
 		molog("soldier %u has died\n", soldier.serial());
@@ -179,20 +186,30 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 		assert(m_readyflags == 0);
 		m_readyflags = this_soldier_is;
 		assert(m_readyflags == this_soldier_is);
+
+		what_anim = this_soldier_is == 1 ?
+			"evade_success_e" :
+			"evade_success_w";
 		return
 			soldier.start_task_idle
-				(game, soldier.descr().get_animation("idle"), -1);
+				(game, soldier.descr().get_rand_anim(game, what_anim.c_str()), 10);
 	}
 	if (bothReadyToFight) {
-		// Our opponent are waitingt for us to fight.
+		// Our opponent are waiting for us to fight.
 		// Time for one of us to hurt the other. Which one is on turn is decided
 		// by calculateRound.
 		assert
 			((m_readyflags == 1 and this_soldier_is == 2) or
 			 (m_readyflags == 2 and this_soldier_is == 1));
+
+		// Both are now ready, mark flags, so our opponent can get new animation
 		m_readyflags = 3;
 		assert(m_readyflags == 3);
+
+		// Resolve combat turn
 		calculateRound(game);
+
+		// Wake up opponent, so he could update his animation
 		opponent(soldier)->send_signal(game, "wakeup");
 	}
 
@@ -202,8 +219,50 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 		m_readyflags = 0;
 	}
 
-	//  common to codepaths b and c
-	soldier.start_task_idle(game, soldier.descr().get_animation("idle"), 1000);
+	// The function calculateRound inverts value of m_first_strikes, so
+	// attacker will be the m_first when m_first_strikes = false and
+	// attacker will be m_second when m_first_strikes = true
+	molog("This soldier is  %d\n", this_soldier_is);
+	molog("First strikes    %d\n", m_first_strikes);
+	molog("Last attack hits %d\n", m_last_attack_hits);
+	if (this_soldier_is == 1) {
+		if (m_first_strikes) {
+			if (m_last_attack_hits) {
+				what_anim = "evade_failure_e";
+			}
+			else {
+				what_anim = "evade_success_e";
+			}
+		}
+		else {
+			if (m_last_attack_hits) {
+				what_anim = "attack_success_e";
+			}
+			else {
+				what_anim = "attack_failure_e";
+			}
+		}
+	} else {
+		if (m_first_strikes) {
+			if (m_last_attack_hits) {
+				what_anim = "attack_success_w";
+			}
+			else {
+				what_anim = "attack_failure_w";
+			}
+		}
+		else {
+			if (m_last_attack_hits) {
+				what_anim = "evade_failure_w";
+			}
+			else {
+				what_anim = "evade_success_w";
+			}
+		}
+	}
+	molog("Starting animation %s\n", what_anim.c_str());
+	soldier.start_task_idle
+		(game, soldier.descr().get_rand_anim(game, what_anim.c_str()), 1000);
 }
 
 void Battle::calculateRound(Game & game)
@@ -223,6 +282,9 @@ void Battle::calculateRound(Game & game)
 
 	uint32_t const hit = game.logic_rand() % 100;
 	if (hit > defender->get_evade()) {
+		// Attacker hits!
+		m_last_attack_hits = true;
+
 		assert(attacker->get_min_attack() <= attacker->get_max_attack());
 		uint32_t const attack =
 			attacker->get_min_attack() +
@@ -230,6 +292,10 @@ void Battle::calculateRound(Game & game)
 			 %
 			 (1 + attacker->get_max_attack() - attacker->get_min_attack()));
 		defender->damage(attack - (attack * defender->get_defense()) / 100);
+	}
+	else {
+		// Defender evaded
+		m_last_attack_hits = false;
 	}
 }
 
