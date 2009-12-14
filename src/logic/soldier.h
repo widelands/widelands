@@ -124,11 +124,13 @@ protected:
 	std::vector<std::string> m_attack_failure_w_name;
 	std::vector<std::string> m_evade_success_w_name;
 	std::vector<std::string> m_evade_failure_w_name;
+	std::vector<std::string> m_die_w_name;
 
 	std::vector<std::string> m_attack_success_e_name;
 	std::vector<std::string> m_attack_failure_e_name;
 	std::vector<std::string> m_evade_success_e_name;
 	std::vector<std::string> m_evade_failure_e_name;
+	std::vector<std::string> m_die_e_name;
 
 	std::vector<std::string> load_animations_from_string
 			(std::string const & directory, Profile & prof, Section & global_s,
@@ -169,6 +171,9 @@ public:
 	uint32_t get_attack_level () const {return m_attack_level;}
 	uint32_t get_defense_level() const {return m_defense_level;}
 	uint32_t get_evade_level  () const throw () {return m_evade_level;}
+
+	/// Automatically select a task.
+	void init_auto_task(Game &);
 
 	Point calc_drawpos(Editor_Game_Base const &, Point) const;
 	/// Draw this soldier
@@ -232,6 +237,7 @@ public:
 	void startTaskDefense(Game & game, bool stayhome);
 	void startTaskBattle(Game &);
 	void startTaskMoveInBattle(Game &, CombatWalkingDir);
+	void startTaskDie(Game &);
 
 private:
 	void attack_update(Game &, State &);
@@ -241,6 +247,8 @@ private:
 	void battle_update(Game &, State &);
 	void battle_pop(Game &, State &);
 	void move_in_battle_update(Game &, State &);
+	void die_update(Game &, State &);
+	void die_pop(Game &, State &);
 
 	void sendSpaceSignals(Game &);
 	bool stayHome();
@@ -250,6 +258,8 @@ protected:
 	static Task taskDefense;
 	static Task taskBattle;
 	static Task taskMoveInBattle;
+	// May be this can be moved this to bob when finished
+	static Task taskDie;
 
 private:
 	uint32_t m_hp_current;

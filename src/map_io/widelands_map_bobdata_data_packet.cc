@@ -214,6 +214,8 @@ void Map_Bobdata_Data_Packet::Read
 									task = &Soldier::taskDefense;
 								else if (not strcmp(taskname, "battle"))
 									task = &Soldier::taskBattle;
+								else if (not strcmp(taskname, "die"))
+									task = &Soldier::taskDie;
 								else if (not strcmp(taskname, "moveInBattle"))
 									task = &Soldier::taskMoveInBattle;
 								else if
@@ -439,8 +441,10 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 							soldier->m_hp_max =
 								broken_hp_compensation + fr.Unsigned32();
 						}
-						if (not soldier->m_hp_current)
-							throw game_data_error("no hitpoints (should be dead)");
+						// This has been commented because now exists a 'die' task,
+						// so a soldier can have 0 hitpoints if it's dying.
+						//if (not soldier->m_hp_current)
+						// throw game_data_error("no hitpoints (should be dead)");
 						if (soldier->m_hp_max < soldier->m_hp_current)
 							throw game_data_error
 								("hp_max (%u) < hp_current (%u)",

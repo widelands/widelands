@@ -61,6 +61,11 @@ Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
 		ss.Unsigned32(Second.serial());
 	}
 
+	// Ensures only live soldiers eganges in a battle
+	assert
+		((First.get_current_hitpoints() > 0) and
+		(Second.get_current_hitpoints() > 0));
+
 	init(game);
 }
 
@@ -158,12 +163,13 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	std::string what_anim;
 
 	if (soldier.get_current_hitpoints() < 1) {
-		molog("soldier %u has died\n", soldier.serial());
+		molog("soldier %u loose battle\n", soldier.serial());
 		soldier          . owner().count_casualty();
 		opponent(soldier)->owner().count_kill    ();
-		soldier.schedule_destroy(game);
-		destroy(game);
-		return;
+		soldier.startTaskDie(game);
+		molog(_("[battle] waking up winner %d\n"), opponent(soldier)->serial());
+		opponent(soldier)->send_signal(game, "wakeup");
+		return schedule_destroy(game);
 	}
 
 	if (!m_first || !m_second)

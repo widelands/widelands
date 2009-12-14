@@ -41,6 +41,8 @@ evade_success_w=eva_ok_w
 evade_success_e=eva_ok_e
 evade_failure_w=eva_fail_w
 evade_failure_e=eva_fail_e
+die_w=die_w
+die_e=die_e
 
 # SOLDIER SPECIFIC STUFF ENDS HERE
 
@@ -97,5 +99,15 @@ playercolor=true
 
 [eva_fail_w]
 pics=walk_nw_??.png
+hotspot=13 25
+playercolor=true
+
+[die_w]
+pics=idle_??.png
+hotspot=13 25
+playercolor=true
+
+[die_e]
+pics=idle_??.png
 hotspot=13 25
 playercolor=true

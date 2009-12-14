@@ -151,6 +151,7 @@ Soldier_Descr::Soldier_Descr
 		/// attack_failure_*-> soldier is attacking and miss hit, defender evades
 		/// evade_success_* -> soldier is defending and opponent misses
 		/// evade_failure_* -> soldier is defending and opponent hits
+		/// die_*           -> soldier is dying
 		m_attack_success_w_name =
 			load_animations_from_string
 				(directory, prof, global_s, encdata, "attack_success_w");
@@ -175,6 +176,12 @@ Soldier_Descr::Soldier_Descr
 		m_evade_failure_e_name =
 			load_animations_from_string
 				(directory, prof, global_s, encdata, "evade_failure_e");
+		m_die_w_name =
+			load_animations_from_string
+				(directory, prof, global_s, encdata, "die_w");
+		m_die_e_name =
+			load_animations_from_string
+				(directory, prof, global_s, encdata, "die_e");
 	}
 
 }
@@ -290,6 +297,17 @@ uint32_t Soldier_Descr::get_rand_anim
 		assert(m_evade_failure_e_name.size() > 0);
 		uint32_t i = game.logic_rand() % m_evade_failure_e_name.size();
 		run = m_evade_failure_e_name[i];
+	}
+	if (strcmp(animation_name, "die_w") == 0) {
+		assert(m_die_w_name.size() > 0);
+		uint32_t i = game.logic_rand() % m_die_w_name.size();
+		run = m_die_w_name[i];
+	}
+
+	if (strcmp(animation_name, "die_e") == 0) {
+		assert(m_die_e_name.size() > 0);
+		uint32_t i = game.logic_rand() % m_die_e_name.size();
+		run = m_die_e_name[i];
 	}
 
 	log(" get %s\n", run.c_str());
@@ -632,6 +650,8 @@ Battle * Soldier::getBattle()
  */
 bool Soldier::canBeChallenged()
 {
+	if (m_hp_current < 1)  //< Soldier is dead!
+		return false;
 	if (!isOnBattlefield())
 		return false;
 	if (!m_battle)
@@ -651,6 +671,18 @@ void Soldier::setBattle(Game & game, Battle * const battle)
 		m_battle = battle;
 		send_signal(game, "battle");
 	}
+}
+
+/**
+ * Set a fallback task.
+ */
+void Soldier::init_auto_task(Game & game) {
+	if (get_current_hitpoints() < 1) {
+		molog("init_auto_task: die\n");
+		return startTaskDie(game);
+	}
+
+	return Worker::init_auto_task(game);
 }
 
 
@@ -1145,6 +1177,47 @@ void Soldier::battle_pop(Game & game, State &)
 {
 	if (m_battle)
 		m_battle->cancel(game, *this);
+}
+
+
+Bob::Task Soldier::taskDie = {
+	"die",
+	static_cast<Bob::Ptr>(&Soldier::die_update),
+	0,
+	static_cast<Bob::Ptr>(&Soldier::die_pop)
+};
+
+void Soldier::startTaskDie(Game & game)
+{
+	push_task(game, taskDie);
+	top_state().ivar1 = game.get_gametime() + 1000;
+
+	start_task_idle(game, descr().get_animation("idle"), 1000);
+}
+
+void Soldier::die_update(Game & game, State & state)
+{
+	std::string signal = get_signal();
+	molog
+		("[die] update for player %u's soldier: signal = \"%s\"\n",
+		 owner().player_number(), signal.c_str());
+
+	if (signal.size()) {
+		signal_handled();
+	}
+
+	if (state.ivar1 > game.get_gametime())
+		return schedule_act(game, state.ivar1 - game.get_gametime());
+
+	// When task updated, dead is near!
+	return pop_task(game);
+}
+
+void Soldier::die_pop(Game & game, State &)
+{
+	// Destroy the soldier!
+	molog("soldier %u has died\n", serial());
+	schedule_destroy(game);
 }
 
 
