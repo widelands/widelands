@@ -1,6 +1,9 @@
 size=small
 output=goldyarn
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=2
 stone=1

@@ -37,6 +37,8 @@ struct BuildingHints {
 
 	bool         is_basic               () const {return basic;}
 
+	bool         prod_build_material    () const {return build_material;}
+
 	bool         is_trunkproducer       () const {return trunkproducer;}
 
 	bool         is_stoneproducer       () const {return stoneproducer;}
@@ -52,6 +54,7 @@ private:
 	char  * renews_map_resource;
 	char  * mines;
 	bool    basic;
+	bool    build_material; // whether the building produces build material
 	bool    trunkproducer;
 	bool    stoneproducer;
 	bool    needs_water;

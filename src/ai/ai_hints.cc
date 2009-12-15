@@ -33,10 +33,11 @@ BuildingHints::~BuildingHints ()
 BuildingHints::BuildingHints (Section * const section) :
 	renews_map_resource(0),
 	mines              (0),
-	basic              (section ? section->get_bool("is_basic")      : false),
-	trunkproducer      (section ? section->get_bool("trunkproducer") : false),
-	stoneproducer      (section ? section->get_bool("stoneproducer") : false),
-	needs_water        (section ? section->get_bool("needs_water")   : false),
+	basic              (section ? section->get_bool("is_basic")         : false),
+	build_material     (section ? section->get_bool("build_material")   : true),
+	trunkproducer      (section ? section->get_bool("trunkproducer")    : false),
+	stoneproducer      (section ? section->get_bool("stoneproducer")    : false),
+	needs_water        (section ? section->get_bool("needs_water")      : false),
 	mines_percent      (section ? section->get_int ("mines_percent", 100) : 0)
 {
 	if (section) {

@@ -2,6 +2,9 @@ size=medium
 output=planks
 soundfx=../../../sound/sawmill/sawmill
 
+[aihints]
+is_basic=true
+
 [buildcost]
 trunk=2
 stone=3

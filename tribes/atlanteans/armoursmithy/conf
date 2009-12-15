@@ -2,6 +2,9 @@ size=medium
 output=advanced_shield
 output=steel_shield
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=2
 stone=2

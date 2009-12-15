@@ -1,6 +1,9 @@
 size=big
 output=cloth
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=5
 raw_stone=2

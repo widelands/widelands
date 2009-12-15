@@ -8,6 +8,9 @@ output=broadaxe
 enhanced_building=yes
 enhancement=warmill
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=1
 blackwood=1

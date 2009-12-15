@@ -1,5 +1,5 @@
 help=_Trunks are the primary build material of the barbarians.
-preciousness=10
+preciousness=14
 default_target_quantity=40
 
 # Barbarian trunks are made of black wood from the black forrests

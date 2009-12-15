@@ -7,6 +7,9 @@ output=steel_trident
 output=double_trident
 output=heavy_double_trident
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=2
 stone=2

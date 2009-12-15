@@ -10,6 +10,9 @@ output=battleaxe
 output=warriorsaxe
 enhanced_building=yes
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=1
 blackwood=1

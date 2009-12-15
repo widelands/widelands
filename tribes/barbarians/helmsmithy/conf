@@ -3,6 +3,9 @@ output=helm
 output=mask
 output=warhelmet
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=3
 blackwood=1

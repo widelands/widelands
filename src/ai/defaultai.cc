@@ -250,7 +250,7 @@ void DefaultAI::late_initialization ()
 
 		bo.is_basic               = false;
 
-		bo.is_buildable = bld.buildable() & player->is_building_allowed(i);
+		bo.is_buildable = bld.buildable() && player->is_building_allowed(i);
 
 		bo.need_trees             = bh.is_trunkproducer();
 		bo.need_stones            = bh.is_stoneproducer();
@@ -282,8 +282,8 @@ void DefaultAI::late_initialization ()
 				bo.mines_percent = bh.get_mines_percent();
 			}
 
-			if (bh.is_basic())
-				bo.is_basic = true;
+			bo.is_basic            = bh.is_basic();
+			bo.prod_build_material = bh.prod_build_material();
 
 			continue;
 		}
@@ -706,7 +706,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 	// Do not have too many constructionsites
 	uint32_t producers = mines.size() + productionsites.size();
 	bool onlymissing = false;
-	if (total_constructionsites >= (4 + (producers / 10)))
+	if (total_constructionsites >= (2 + (producers / 10)))
 		onlymissing = true;
 
 	//  Just used for easy checking whether a mine or something else was built.
@@ -783,12 +783,12 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				continue;
 
 			// If there are already a lot of constructionsites, only missing
-			// productionsites are allowed (perhaps they are needed to finish the
-			// other constructionsites?)
+			// productionsites that produce build material are allowed
+			// (perhaps they are needed to finish the other constructionsites?)
 			if (onlymissing) {
 				if (!(bo.type == BuildingObserver::PRODUCTIONSITE))
 					continue;
-				if (bo.total_count() > 0)
+				if ((bo.total_count() > 0) || !bo.prod_build_material)
 					continue;
 			}
 
@@ -824,7 +824,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// Do not build too many of these buildings, but still care
 					// to build at least one.
 					if (bo.total_count() > 1)
-						prio -= 10 * (bo.total_count());
+						prio -= 15 * (bo.total_count());
 					else
 						prio *= 3;
 
@@ -832,12 +832,13 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 						continue;
 
 					// Calculate the need for this building
-					prio += 4 * wares[bo.production_hint].consumers;
+					prio += 3 * wares[bo.production_hint].consumers;
 					prio += wares[bo.production_hint].preciousness;
+					prio += (bf->producers_nearby[bo.production_hint] - 1) * 15;
 				} else { // "normal" productionsites
 
 					if (bo.is_basic && (bo.total_count() == 0))
-						prio += 50; // for very important buildings
+						prio += 100; // for very important buildings
 
 					// Check if the produced wares are needed
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
@@ -1046,6 +1047,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			prio *= bo.current_stats;
 			prio /= 100;
 
+			if (onlymissing) // mines aren't *that* important
+				prio /= 4;
 			if (prio > proposed_priority) {
 
 				proposed_building = bo.id;

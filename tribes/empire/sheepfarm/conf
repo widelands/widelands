@@ -2,6 +2,9 @@ soundfx=../../../sound/farm/sheep
 size=big
 output=wool
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=2
 stone=2

@@ -2,6 +2,9 @@ size=medium
 output=marblecolumn
 soundfx=../../../sound/stonecutting/stonemason
 
+[aihints]
+is_basic=true
+
 [buildcost]
 trunk=1
 wood=1

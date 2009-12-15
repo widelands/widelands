@@ -1,6 +1,9 @@
 size=medium
 output=blackwood
 
+[aihints]
+is_basic=true
+
 [buildcost]
 trunk=3
 raw_stone=1

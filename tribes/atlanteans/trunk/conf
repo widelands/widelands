@@ -1,5 +1,5 @@
 help=_Trunks are the base for planks, which are used in nearly every building of the Atlanteans.
-preciousness=10
+preciousness=14
 default_target_quantity=40
 
 [idle]

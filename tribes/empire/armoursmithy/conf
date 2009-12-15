@@ -4,6 +4,9 @@ output=armour
 output=chain_armour
 output=plate_armour
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=2
 stone=2

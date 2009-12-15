@@ -1,6 +1,9 @@
 size=medium
 output=coal
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=2
 stone=3

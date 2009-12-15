@@ -7,6 +7,9 @@ output=advanced_lance
 output=heavy_lance
 output=war_lance
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=2
 stone=2
