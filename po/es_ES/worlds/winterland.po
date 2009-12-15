@@ -1,18 +1,19 @@
 # Widelands po/es_ES/worlds/winterland.po
 # Copyright (C) 2007 Widelands Development Team
-# Antonio Trueba <atrueba@users.sourceforge.net>, 2007.
 #
+# Antonio Trueba <atrueba@users.sourceforge.net>, 2007, 2009.
+# Raul Ferriz <raul.ferriz@gmail.com>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2007-06-13 20:35+0100\n"
-"Last-Translator: Antonio Trueba <atrueba@users.sourceforge.net>\n"
-"Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2009-12-14 09:34+0000\n"
+"PO-Revision-Date: 2009-12-14 15:58+0100\n"
+"Last-Translator: Raul Ferriz <raul.ferriz@gmail.com>\n"
+"Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bitn\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -26,8 +27,11 @@ msgid "Winterland"
 msgstr "Tundra"
 
 #: ../../../worlds/winterland/conf:4
-msgid "These are the white, wide and frosty winterlands, in which the Northmen dwell."
-msgstr "Estas son las blancas, vastas y heladas tundras, en donde los nórdicos moran."
+msgid ""
+"These are the white, wide and frosty winterlands, in which the Northmen "
+"dwell."
+msgstr ""
+"Estas son las blancas, vastas y heladas tundras, en donde los nórdicos moran."
 
 #: ../../../worlds/winterland/conf:7 ../../../worlds/winterland/conf:8
 #: ../../../worlds/winterland/conf:9 ../../../worlds/winterland/conf:10
@@ -62,7 +66,7 @@ msgstr "Esqueleto"
 
 #: ../../../worlds/winterland/conf:30
 msgid "Snowman"
-msgstr ""
+msgstr "Muñeco de nieve"
 
 #: ../../../worlds/winterland/conf:31 ../../../worlds/winterland/conf:32
 #: ../../../worlds/winterland/conf:33 ../../../worlds/winterland/conf:34
@@ -79,139 +83,139 @@ msgstr "Piedras"
 
 #: ../../../worlds/winterland/conf:44
 msgid "Track"
-msgstr ""
+msgstr "Rastro"
 
 #: ../../../worlds/winterland/conf:45
 msgid "Aspen"
-msgstr ""
+msgstr "Álamo temblón"
 
 #: ../../../worlds/winterland/conf:46
 msgid "Aspen medium"
-msgstr ""
+msgstr "Álamo temblón mediano"
 
 #: ../../../worlds/winterland/conf:47
 msgid "Aspen small"
-msgstr ""
+msgstr "Álamo temblón pequeño"
 
 #: ../../../worlds/winterland/conf:48
 msgid "Aspen tiny"
-msgstr ""
+msgstr "Álamo temblón diminuto"
 
 #: ../../../worlds/winterland/conf:49
 msgid "Oak"
-msgstr ""
+msgstr "Roble"
 
 #: ../../../worlds/winterland/conf:50
 msgid "Oak medium"
-msgstr ""
+msgstr "Roble mediano"
 
 #: ../../../worlds/winterland/conf:51
 msgid "Oak small"
-msgstr ""
+msgstr "Roble pequeño"
 
 #: ../../../worlds/winterland/conf:52
 msgid "Oak tiny"
-msgstr ""
+msgstr "Roble diminuto"
 
 #: ../../../worlds/winterland/conf:53
 msgid "Spruce"
-msgstr ""
+msgstr "Abeto"
 
 #: ../../../worlds/winterland/conf:54
 msgid "Spruce medium"
-msgstr ""
+msgstr "Abeto mediano"
 
 #: ../../../worlds/winterland/conf:55
 msgid "Spruce small"
-msgstr ""
+msgstr "Abeto pequeño"
 
 #: ../../../worlds/winterland/conf:56
 msgid "Spruce tiny"
-msgstr ""
+msgstr "Abeto diminuto"
 
 #: ../../../worlds/winterland/conf:57
 msgid "Maple"
-msgstr ""
+msgstr "Arce"
 
 #: ../../../worlds/winterland/conf:58
 msgid "Maple medium"
-msgstr ""
+msgstr "Arce mediano"
 
 #: ../../../worlds/winterland/conf:59
 msgid "Maple small"
-msgstr ""
+msgstr "Arce pequeño"
 
 #: ../../../worlds/winterland/conf:60
 msgid "Maple tiny"
-msgstr ""
+msgstr "Arce diminuto"
 
 #: ../../../worlds/winterland/conf:61
 msgid "Birch"
-msgstr ""
+msgstr "Abedul"
 
 #: ../../../worlds/winterland/conf:62
 msgid "Birch medium"
-msgstr ""
+msgstr "Abedul mediano"
 
 #: ../../../worlds/winterland/conf:63
 msgid "Birch small"
-msgstr ""
+msgstr "Abedul pequeño"
 
 #: ../../../worlds/winterland/conf:64
 msgid "Birch tiny"
-msgstr ""
+msgstr "Abedul diminuto"
 
 #: ../../../worlds/winterland/conf:65
 msgid "Beech"
-msgstr ""
+msgstr "Haya"
 
 #: ../../../worlds/winterland/conf:66
 msgid "Beech medium"
-msgstr ""
+msgstr "Haya mediana"
 
 #: ../../../worlds/winterland/conf:67
 msgid "Beech small"
-msgstr ""
+msgstr "Haya pequeña"
 
 #: ../../../worlds/winterland/conf:68
 msgid "Beech tiny"
-msgstr ""
+msgstr "Haya diminuta"
 
 #: ../../../worlds/winterland/conf:69
 msgid "Larch"
-msgstr ""
+msgstr "Alerce"
 
 #: ../../../worlds/winterland/conf:70
 msgid "Larch medium"
-msgstr ""
+msgstr "Alerce mediano"
 
 #: ../../../worlds/winterland/conf:71
 msgid "Larch small"
-msgstr ""
+msgstr "Alerce pequeño"
 
 #: ../../../worlds/winterland/conf:72
 msgid "Larch tiny"
-msgstr ""
+msgstr "Alerce diminuto"
 
 #: ../../../worlds/winterland/conf:73
 msgid "Rowan"
-msgstr ""
+msgstr "Mostajo"
 
 #: ../../../worlds/winterland/conf:74
 msgid "Rowan medium"
-msgstr ""
+msgstr "Mostajo mediano"
 
 #: ../../../worlds/winterland/conf:75
 msgid "Rowan small"
-msgstr ""
+msgstr "Mostajo pequeño"
 
 #: ../../../worlds/winterland/conf:76
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Mostajo diminuto"
 
 #: ../../../worlds/winterland/conf:79
 msgid "Badger"
-msgstr ""
+msgstr "Tejón"
 
 #: ../../../worlds/winterland/conf:80
 msgid "Bunny"
@@ -227,7 +231,7 @@ msgstr "Pato"
 
 #: ../../../worlds/winterland/conf:83
 msgid "Elk"
-msgstr ""
+msgstr "Alce"
 
 #: ../../../worlds/winterland/conf:84
 msgid "Fox"
@@ -235,11 +239,11 @@ msgstr "Zorro"
 
 #: ../../../worlds/winterland/conf:85
 msgid "Lynx"
-msgstr ""
+msgstr "Lince"
 
 #: ../../../worlds/winterland/conf:86
 msgid "Marten"
-msgstr ""
+msgstr "Marta"
 
 #: ../../../worlds/winterland/conf:87
 msgid "Reindeer"
@@ -251,7 +255,7 @@ msgstr "Oveja"
 
 #: ../../../worlds/winterland/conf:89
 msgid "Wisent"
-msgstr ""
+msgstr "Bisonte"
 
 #: ../../../worlds/winterland/conf:90
 msgid "Wolf"
