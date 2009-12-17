@@ -232,9 +232,14 @@ m_toggle_help
 
 	set_display_flag(dfSpeed, true);
 
+#ifdef DEBUG //  only in debug builds
 	addCommand
 		("switchplayer",
 		 boost::bind(&Interactive_Player::cmdSwitchPlayer, this, _1));
+	addCommand
+		("toggleSeeAll",
+		 boost::bind(&Interactive_Player::cmdToggleSeeAll, this, _1));
+#endif
 }
 
 
@@ -441,7 +446,7 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 			ref_cast<GameChatMenu, UI::UniqueWindow>(*m_chat.window)
 				.enter_chat_message();
 			return true;
-
+#ifdef DEBUG //  only in debug builds
 		case SDLK_F6:
 			if (get_display_flag(dfDebug)) {
 				new GameChatMenu
@@ -450,12 +455,7 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 					.enter_chat_message(false);
 			}
 			return true;
-#ifdef DEBUG //  only in debug builds
-		case SDLK_F5:
-			player().set_see_all(not player().see_all());
-			return true;
 #endif
-
 		default:
 			break;
 		}
@@ -509,4 +509,14 @@ void Interactive_Player::cmdSwitchPlayer(std::vector<std::string> const & args)
 		ref_cast<Building_Statistics_Menu, UI::UniqueWindow>
 			(*building_statistics_window)
 			.update();
+}
+
+void Interactive_Player::cmdToggleSeeAll(std::vector<std::string> const & args)
+{
+	if (args.size() != 1) {
+		DebugConsole::write("Usage: toggleSeeAll (without any arguments)");
+		return;
+	}
+
+	player().set_see_all(not player().see_all());
 }

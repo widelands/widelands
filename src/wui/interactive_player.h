@@ -93,6 +93,7 @@ struct Interactive_Player :
 
 private:
 	void cmdSwitchPlayer(std::vector<std::string> const & args);
+	void cmdToggleSeeAll(std::vector<std::string> const & args);
 
 	Widelands::Player_Number m_player_number;
 	bool                     m_auto_roadbuild_mode;
