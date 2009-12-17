@@ -292,7 +292,6 @@ instadd(env, 'widelands', filetype='binary')
 install=env.Install('installtarget', 'COPYING') # the second argument is a (neccessary) dummy
 Alias('install', install)
 AlwaysBuild(install)
-Depends(install)
 #env.AddPreAction(install, Action("scons buildlocale"))
 
 
