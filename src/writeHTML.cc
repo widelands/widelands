@@ -988,6 +988,8 @@ void ProductionProgram::ActReturn::Workers_Need_Experience::writeHTML
 	fw.Text("</span>");
 }
 
+static char const * const program_result_handling_method_names[5] =
+	{"fail", "complete", "skip", "continue", "repeat"};
 
 void ProductionProgram::ActCall::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const &) const
@@ -1010,12 +1012,44 @@ void ProductionProgram::ActCall::writeHTML
 	fw.Text("\">");
 	fw.Text(program_descname);
 	fw.Text("</a>");
-	if (m_failure_handling_method != Ignore) {
-		fw.Text
-			(" <span class=\"keyword\">on</span> "
-			 "<span class=\"keyword\">failure</span> <span class=\"keyword\">");
-		fw.Text
-			(m_failure_handling_method == Fail ? "fail</span>" : "repeat</span>");
+	{
+		Program_Result_Handling_Method const failure_handling_method    =
+			m_handling_methods[Failed    - 1];
+		if (failure_handling_method != Fail) {
+			fw.Text
+				(" <span class=\"keyword\">on</span> "
+				 "<span class=\"keyword\">failure</span> "
+				 "<span class=\"keyword\">");
+			fw.Text
+				(program_result_handling_method_names[failure_handling_method]);
+			fw.Text("</span>");
+		}
+	}
+	{
+		Program_Result_Handling_Method const completion_handling_method =
+			m_handling_methods[Completed - 1];
+		if (completion_handling_method != Continue) {
+			fw.Text
+				(" <span class=\"keyword\">on</span> "
+				 "<span class=\"keyword\">completion</span> "
+				 "<span class=\"keyword\">");
+			fw.Text
+				(program_result_handling_method_names[completion_handling_method]);
+			fw.Text("</span>");
+		}
+	}
+	{
+		Program_Result_Handling_Method const skip_handling_method       =
+			m_handling_methods[Skipped   - 1];
+		if (skip_handling_method != Continue) {
+			fw.Text
+				(" <span class=\"keyword\">on</span> "
+				 "<span class=\"keyword\">completion</span> "
+				 "<span class=\"keyword\">");
+			fw.Text
+				(program_result_handling_method_names[skip_handling_method]);
+			fw.Text("</span>");
+		}
 	}
 }
 

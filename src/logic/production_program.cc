@@ -402,6 +402,11 @@ void ProductionProgram::ActReturn::execute
 ProductionProgram::ActCall::ActCall
 	(char * parameters, ProductionSite_Descr const & descr)
 {
+	//  Initialize with default handling methods.
+	m_handling_methods[Failed    - 1] = Continue;
+	m_handling_methods[Completed - 1] = Continue;
+	m_handling_methods[Skipped   - 1] = Continue;
+
 	try {
 		bool reached_end;
 		{
@@ -418,31 +423,61 @@ ProductionProgram::ActCall::ActCall
 			m_program = it->second;
 		}
 
+		//  Override with specified handling methods.
 #if 0
 		log
 			("ActCall::ActCall: parsed m_program = \"%s\", remaining parameters "
 			 "= \"%s\"\n",
 			 m_program.c_str(), parameters);
 #endif
-		if (reached_end)
-			m_failure_handling_method = Ignore;
-		else {
+		while (not reached_end) {
 			skip(parameters);
-			if      (match(parameters, "on failure ignore"))
-				m_failure_handling_method = Ignore;
-			else if (match(parameters, "on failure repeat"))
-				m_failure_handling_method = Repeat;
-			else if (match(parameters, "on failure fail"))
-				m_failure_handling_method = Fail;
+			match_force_skip(parameters, "on");
+			log("found \"on \": parameters = \"%s\"\n", parameters);
+
+			Program_Result result_to_set_method_for;
+			if        (match_force_skip(parameters, "failure"))    {
+				if (m_handling_methods[Failed    - 1] != Continue)
+					throw game_data_error
+						(_("%s handling method already defined"), _("failure"));
+				result_to_set_method_for = Failed;
+			} else if (match_force_skip(parameters, "completion")) {
+				if (m_handling_methods[Completed - 1] != Continue)
+					throw game_data_error
+						(_("%s handling method already defined"), _("completion"));
+				result_to_set_method_for = Completed;
+			} else if (match_force_skip(parameters, "skip"))       {
+				if (m_handling_methods[Skipped   - 1] != Continue)
+					throw game_data_error
+						(_("%s handling method already defined"), _("skip"));
+				result_to_set_method_for = Skipped;
+			} else
+				throw game_data_error
+					(_("expected %s but found \"%s\""),
+					 _("{\"failure\"|\"completion\"|\"skip\"}"), parameters);
+
+			Program_Result_Handling_Method handling_method;
+			if      (match(parameters, "fail"))
+				handling_method = Fail;
+			else if (match(parameters, "complete"))
+				handling_method = Complete;
+			else if (match(parameters, "skip"))
+				handling_method = Skip;
+			else if (match(parameters, "repeat"))
+				handling_method = Repeat;
 			else
 				throw game_data_error
-					(_
-					 	("expected [\"on failure\" "
-					 	 "{\"fail\"|\"repeat\"|\"ignore\"}] or end of input but "
-					 	 "found \"%s\""),
+					(_("expected %s but found \"%s\""),
+					 _("{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"),
 					 parameters);
+			m_handling_methods[result_to_set_method_for - 1] = handling_method;
+			reached_end = not *parameters;
+			log
+				("read handling method for result %u: %u, parameters = \"%s\", "
+				 "reached_end = %u\n",
+				 result_to_set_method_for, handling_method,
+				 parameters, reached_end);
 		}
-
 	} catch (_wexception const & e) {
 		throw game_data_error("call: %s", e.what());
 	}
@@ -451,30 +486,25 @@ ProductionProgram::ActCall::ActCall
 void ProductionProgram::ActCall::execute
 	(Game & game, ProductionSite & ps) const
 {
-	switch (ps.top_state().phase) {
-	case None: // The program has not yet been called.
+	Program_Result const program_result =
+		static_cast<Program_Result>(ps.top_state().phase);
+
+	if (program_result == None) //  The program has not yet been called.
 		//ps.molog("%s  Call %s\n", ps.descname().c_str(),
 		//         m_program->get_name().c_str());
 		return ps.program_start(game, m_program->name());
-	case Completed:
-	case Skipped:
+
+	switch (m_handling_methods[program_result - 1]) {
+	case Fail:
+	case Complete:
+	case Skip:
+		return ps.program_end(game, None);
+	case Continue:
 		return ps.program_step(game);
-	case Failed:
-		switch (m_failure_handling_method) {
-		case Ignore:
-			return ps.program_step(game);
-		case Repeat:
-			ps.top_state().phase = None;
-			ps.m_program_timer = true;
-			ps.m_program_time  = ps.schedule_act(game, 10);
-			return;
-		case Fail:
-			return ps.program_end(game, Failed);
-		default:
-			assert(false);
-		}
-	default:
-		assert(false);
+	case Repeat:
+		ps.top_state().phase = None;
+		ps.m_program_timer   = true;
+		ps.m_program_time    = ps.schedule_act(game, 10);
 	}
 }
 

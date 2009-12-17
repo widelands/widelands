@@ -558,7 +558,7 @@ void Soldier::draw
 	// Draw energy bar
 	// first: draw white sourrounding
 		// Reduces energy bar length, so no overlap between soldiers
-		w = w * 0.6;
+		w = w * 3 / 5;
 		Rect r(Point(drawpos.x - w, drawpos.y - h - 7), w * 2, 5);
 		dst.draw_rect(r, HP_FRAMECOLOR);
 		// Draw the actual bar
@@ -623,7 +623,7 @@ void Soldier::start_animation
 		start_task_idle
 			(ref_cast<Game, Editor_Game_Base>(egbase),
 			 descr().get_rand_anim
-				(ref_cast<Game, Editor_Game_Base>(egbase), animname),
+			 	(ref_cast<Game, Editor_Game_Base>(egbase), animname),
 			 time);
 }
 

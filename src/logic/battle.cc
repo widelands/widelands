@@ -62,9 +62,7 @@ Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
 	}
 
 	// Ensures only live soldiers eganges in a battle
-	assert
-		((First.get_current_hitpoints() > 0) and
-		(Second.get_current_hitpoints() > 0));
+	assert(First.get_current_hitpoints() and Second.get_current_hitpoints());
 
 	init(game);
 }
@@ -149,7 +147,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	// Identify what soldier is calling the routine
 	uint8_t const this_soldier_is = &soldier == m_first ? 1 : 2;
 
-	// Created this trhee 'states' of the battle:
+	//  Created this three 'states' of the battle:
 	// *First time entered, one enters :
 	//    oneReadyToFight, mark m_readyflags as he is ready to fight
 	// *Next time, the opponent enters:
@@ -201,7 +199,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 				(game, soldier.descr().get_rand_anim(game, what_anim.c_str()), 10);
 	}
 	if (bothReadyToFight) {
-		// Our opponent are waiting for us to fight.
+		//  Our opponent is waiting for us to fight.
 		// Time for one of us to hurt the other. Which one is on turn is decided
 		// by calculateRound.
 		assert

@@ -210,24 +210,33 @@ struct ProductionProgram {
 	/// Calls a program of the productionsite.
 	///
 	/// Parameter syntax:
-	///    parameters                 ::= program [failure_handling_directive]
-	///    failure_handling_directive ::= "on failure" failure_handling_method
-	///    failure_handling_method    ::= Fail | Repeat | Ignore
-	///    Fail                       ::= "fail"
-	///    Repeat                     ::= "repeat"
-	///    Ignore                     ::= "ignore"
+	///    parameters         ::= program {handling_directive}
+	///    handling_directive ::= "on" Result handling_method
+	///    Result             ::= "failure" | "completion" | "skip"
+	///    handling_method    ::= Fail | Complete | Skip | Repeat
+	///    Fail               ::= "fail"
+	///    Ignore             ::= "ignore"
+	///    Repeat             ::= "repeat"
 	/// Parameter semantics:
 	///    program:
 	///       The name of a program defined in the productionsite.
-	///    failure_handling_method:
-	///       Specifies how to handle a failure of the called program.
-	///       * If failure_handling_method is Fail, the command fails (with the
-	///         same effect as executing "return=failed").
-	///       * If failure_handling_method is "repeat", the command is repeated.
-	///       * If failure_handling_method is "ignore", the failure is ignored
-	///         (the program is continued).
-	///    failure_handling_directive:
-	///       If omitted, the value Ignore is used for failure_handling_method.
+	///    handling_directive:
+	///       Only 1 handling_directive can be specified for each value of
+	///       Result. If no handling_directive is specified for a particular
+	///       value of Result, the program is continued when the call has
+	///       returned that value.
+	///    handling_method:
+	///       Specifies how to handle the specified kind of result of the called
+	///       program.
+	///       * If handling_method for the result of the called program is Fail,
+	///         the command fails (with the same effect as executing
+	///         "return=failed").
+	///       * If handling_method is Complete, the command completes the
+	///         calling program (with the same effect as executing
+	///         "return=completed").
+	///       * If handling_method is Skip, the command skips the calling
+	///         program (with the same effect as executing "return=skipped").
+	///       * If handling_method is "repeat", the command is repeated.
 	struct ActCall : public Action {
 		ActCall(char * parameters, ProductionSite_Descr const &);
 		virtual void execute(Game &, ProductionSite &) const;
@@ -237,7 +246,7 @@ struct ProductionProgram {
 #endif
 	private:
 		ProductionProgram             * m_program;
-		Program_Failure_Handling_Method m_failure_handling_method;
+		Program_Result_Handling_Method m_handling_methods[3];
 	};
 
 	/// Calls a program of the productionsite's main worker.

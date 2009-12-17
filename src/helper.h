@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -116,8 +116,7 @@ inline bool match_force_skip(char * & candidate, char const * pattern) {
 			candidate = p;
 			return true;
 		} else if (*p != *pattern)
-			break;
-	return false;
+			return false;
 }
 
 /**

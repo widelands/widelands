@@ -718,17 +718,21 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 	if (m_stack.size())
 		top_state().phase = result;
 
-	if (result == Skipped)
-		m_skipped_programs[program_name] = game.get_gametime();
-	else {
+	switch (result) {
+	case Failed:
+	case Completed:
 		m_skipped_programs.erase(program_name);
 		m_statistics_changed = true;
 		m_statistics.erase(m_statistics.begin(), m_statistics.begin() + 1);
 		m_statistics.push_back(result == Completed);
-
 		if (result == Completed)
 			for (uint32_t i = descr().nr_working_positions(); i;)
 				m_working_positions[--i].worker->gain_experience(game);
+		break;
+	case Skipped:
+		m_skipped_programs[program_name] = game.get_gametime();
+	case None:
+		break;
 	}
 
 	m_program_timer = true;

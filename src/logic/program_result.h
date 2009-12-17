@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 
 namespace Widelands {
 enum Program_Result {None = 0, Failed = 1, Completed = 2, Skipped = 3};
-enum Program_Failure_Handling_Method {Fail, Repeat, Ignore};
+enum Program_Result_Handling_Method {Fail, Complete, Skip, Continue, Repeat};
 }
 
 #endif
