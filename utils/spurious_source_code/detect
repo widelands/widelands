@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/sh
 #
 #  Detects style errors in the C++ source code. Run this from the top directory
 #  (which has the subdirectories build, src and utils).
@@ -25,6 +25,21 @@
 #  whilst checking a sequence of files with equal mtime, it will have to start
 #  over with that sequence the next time it is executed. But reducing the
 #  number of cache files is worth that minor inconvenience.
+#
+#  NOTE
+#  This script uses [ FILE1 -nt FILE2 ] to test if FILE1 is newer than FILE2.
+#  But it behaves differently in different shells. Bash behaves as the info
+#  page for the test program from GNU Coreutils explains:
+#    `FILE1 -nt FILE2'
+#         True if FILE1 is newer (according to modification date) than
+#         FILE2, or if FILE1 exists and FILE2 does not.
+#
+#  But zsh and dash behave differently in the case when FILE1 exits and FILE2
+#  does not. Therefore the FILE1 -nt FILE2 tests in this script are followed by
+#  || [ ! -e FILE2 ].
+#
+#  So if you are reading this script, only know bash and wonder about the
+#  reduanancy; this is the reason for it.
 
 CHECKER=utils/spurious_source_code/whitespace_checker
 if [ ! -f $CHECKER ]; then
@@ -32,7 +47,7 @@ if [ ! -f $CHECKER ]; then
 	echo "WARNING:    Go to utils/spurious_source_code and build it with make!"
 	echo "WARNING:    Else many checks will be done much slower or not at all!"
 	unset CHECKER
-elif [ $CHECKER.adb -nt $CHECKER ]; then
+elif [ $CHECKER.adb -nt $CHECKER ] || [ ! -e $CHECKER ]; then
 	echo "ERROR: $CHECKER is out of date!!!"
 	echo "ERROR:    Go to utils/spurious_source_code and rebuild it with make!"
 	exit
@@ -102,12 +117,18 @@ mkdir $TMP_DIR || { echo "ERROR: could not create $TMP_DIR"; exit; }
 
 REGEXPS_FILE=$TMP_DIR/regexps
 for r in utils/spurious_source_code/regexps/*; do
-	[[ -d $r && ! -f $r/disabled && ( ! $CHECKER || ! -f $r/redundant_with_whitespace_checker ) && ( ! $KRAZY2 || ! -f $r/redundant_with_krazy2 ) ]] &&
+	if
+		[ -d $r ]                                                              &&
+		[ ! -f $r/disabled ]                                                   &&
+		( [ ! $CHECKER ]  || [ ! -f $r/redundant_with_whitespace_checker ] )   &&
+		( [ ! $KRAZY2  ]  || [ ! -f $r/redundant_with_krazy2             ] )
+	then
 		cat $r/regexps >> $REGEXPS_FILE
+	fi
 done
 
 
-[[ -t 1 ]] && COLOUR=.colourized || unset COLOUR
+[ -t 1 ] && COLOUR=.colourized || unset COLOUR
 
 
 RESULT_FILE=$TMP_DIR/result
@@ -124,10 +145,14 @@ RESULT_FILE=$TMP_DIR/result
 #  Parameters:
 #    $1
 #      The name of the source file to be checked.
-function check {
+check () {
 	egrep --with-filename --line-number $([ $COLOUR ] && echo --colour=always) -f $REGEXPS_FILE $1 >  $RESULT_FILE
-	([[ $CHECKER ]] && $CHECKER $1 || utils/detect_spurious_indentation.py $1)                     >> $RESULT_FILE
-	([ $KRAZY2 ] && $KRAZY2 --brief --export=textedit --check=$KRAZY2CHECKS $1)                    >> $RESULT_FILE
+	if [ $CHECKER ]; then
+		$CHECKER $1                                                                                 >> $RESULT_FILE
+	else
+		utils/detect_spurious_indentation.py $1                                                     >> $RESULT_FILE
+	fi
+	[ $KRAZY2 ] && $KRAZY2 --brief --export=textedit --check=$KRAZY2CHECKS $1                      >> $RESULT_FILE
 }
 
 
@@ -147,21 +172,24 @@ CACHE_DIR="build/stylecheck"
 #  Parameters:
 #    $1
 #      The name of the directory to start the search and check in.
-function detect {
+detect () {
 	for d in $1/*; do
-		[[ -d $d ]] && detect $d
+		[ -d $d ] && detect $d
 	done
 	TIMESTAMP=$CACHE_DIR/$1/timestamp
 	PREVIOUS_FILE=$1
 	FILES=$(ls -tr $(find $1 -maxdepth 1 -name "*.h" -or -name "*.cc"))
-	if [[ -n $FILES ]]; then
+	if [ -n "$FILES" ]; then
 		mkdir -p $CACHE_DIR/$1
-		for f in $FILES; do
+		for f in $(echo $FILES); do
 			CACHE_BASE=$CACHE_DIR/$f.stylecheck
 			CACHE_COLOUR=$CACHE_BASE.colourized
 			CACHE=$CACHE_BASE$COLOUR
-			if [[ $f -nt $TIMESTAMP || -s $CACHE_BASE || -s $CACHE_COLOUR ]]; then
-				if [ $f -nt $CACHE ]; then
+			if
+				[ $f -nt $TIMESTAMP ] || [ ! -e $TIMESTAMP ]                     ||
+				[ -s $CACHE_BASE ] || [ -s $CACHE_COLOUR ]
+			then
+				if [ $f -nt $CACHE ] || [ ! -e $CACHE ]; then
 					echo "Checking for errors in $f ..."
 					check $f
 					if [ -s $RESULT_FILE ]; then
@@ -170,8 +198,12 @@ function detect {
 					else
 						rm -f $CACHE_BASE $CACHE_COLOUR
 					fi
-					[[ $f -nt $PREVIOUS_FILE && $PREVIOUS_FILE -nt $TIMESTAMP ]] &&
+					if
+						[ $f -nt $PREVIOUS_FILE ] &&
+						( [ $PREVIOUS_FILE -nt $TIMESTAMP ] || [ ! -e $TIMESTAMP ] )
+					then
 						touch --reference=$PREVIOUS_FILE $TIMESTAMP
+					fi
 				else
 					echo "Showing cached errors in $f ..."
 					cat $CACHE
@@ -179,8 +211,9 @@ function detect {
 			fi
 			PREVIOUS_FILE=$f
 		done
-		[[ $PREVIOUS_FILE -nt $TIMESTAMP ]] &&
+		if [ $PREVIOUS_FILE -nt $TIMESTAMP ] || [ ! -e $TIMESTAMP ]; then
 			touch --reference=$PREVIOUS_FILE $TIMESTAMP
+		fi
 	fi
 }
 
