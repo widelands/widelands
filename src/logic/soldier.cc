@@ -1127,7 +1127,7 @@ void Soldier::startTaskMoveInBattle(Game & game, CombatWalkingDir dir)
 
 	Map & map = game.map();
 	int32_t const tdelta = (map.calc_cost(get_position(), mapdir)) / 2;
-	molog("[move_in_battle] tdelta: %d\n", tdelta);
+	molog("[move_in_battle] dir: (%d) tdelta: (%d)\n", dir, tdelta);
 	m_combat_walking   = dir;
 	m_combat_walkstart = game.get_gametime();
 	m_combat_walkend   = m_combat_walkstart + tdelta;
@@ -1135,6 +1135,7 @@ void Soldier::startTaskMoveInBattle(Game & game, CombatWalkingDir dir)
 	push_task(game, taskMoveInBattle);
 	State & state = top_state();
 	state.ivar1 = dir;
+	set_animation(game, descr().get_animation(mapdir == WALK_E ? "walk_e" : "walk_w"));
 }
 
 void Soldier::move_in_battle_update(Game & game, State &)
@@ -1222,6 +1223,7 @@ void Soldier::battle_update(Game & game, State &)
 		if (m_combat_walking == CD_COMBAT_E) {
 			return startTaskMoveInBattle(game, CD_RETURN_E);
 		}
+		assert(m_combat_walking == CD_NONE);
 		molog("[battle] is over\n");
 		sendSpaceSignals(game);
 		return pop_task(game);
