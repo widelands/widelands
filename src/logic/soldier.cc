@@ -1170,7 +1170,7 @@ void Soldier::move_in_battle_update(Game & game, State &)
 bool Soldier::stayHome()
 {
 	if (State const * const state = get_state(taskDefense))
-		return state->ivar1;
+		return state->ivar1 & CF_DEFEND_STAYHOME;
 	return false;
 }
 
