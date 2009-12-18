@@ -166,12 +166,12 @@ function detect {
 					check $f
 					if [ -s $RESULT_FILE ]; then
 						mv $RESULT_FILE $CACHE
-						[[ $f -nt $PREVIOUS_FILE && $PREVIOUS_FILE -nt $TIMESTAMP ]] &&
-							touch --reference=$PREVIOUS_FILE $TIMESTAMP
 						cat $CACHE
 					else
 						rm -f $CACHE_BASE $CACHE_COLOUR
 					fi
+					[[ $f -nt $PREVIOUS_FILE && $PREVIOUS_FILE -nt $TIMESTAMP ]] &&
+						touch --reference=$PREVIOUS_FILE $TIMESTAMP
 				else
 					echo "Showing cached errors in $f ..."
 					cat $CACHE
