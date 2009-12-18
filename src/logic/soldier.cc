@@ -1232,11 +1232,12 @@ struct FindSoldierOnBattlefield : public FindBob {
 	bool accept(Bob * const bob) const
 	{
 		if (upcast(Soldier, soldier, bob))
-			return soldier->isOnBattlefield();
+			return
+				soldier->isOnBattlefield() and
+				soldier->get_current_hitpoints();
 		return false;
 	}
 };
-
 
 /**
  * Override \ref Bob::checkNodeBlocked.
