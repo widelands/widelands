@@ -153,7 +153,7 @@ function detect {
 	done
 	TIMESTAMP=$CACHE_DIR/$1/timestamp
 	PREVIOUS_FILE=$1
-	FILES=$(ls -tr $1/*.h $1/*.cc 2>/dev/null)
+	FILES=$(ls -tr $(find src/economy -maxdepth 1 -name "*.h" -or -name "*.cc"))
 	if [[ -n $FILES ]]; then
 		mkdir -p $CACHE_DIR/$1
 		for f in $FILES; do
