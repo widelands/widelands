@@ -2307,7 +2307,11 @@ bool FindBobAttribute::accept(Bob * const bob) const
 bool FindBobEnemySoldier::accept(Bob * const imm) const
 {
 	if (upcast(Soldier, soldier, imm))
-		if (soldier->isOnBattlefield() && &soldier->owner() != &player)
+		if
+			(soldier->isOnBattlefield() &&
+			 &soldier->owner() != &player &&
+			 soldier->get_current_hitpoints()
+			)
 			return true;
 
 	return false;
