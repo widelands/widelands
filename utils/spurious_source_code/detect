@@ -127,7 +127,7 @@ RESULT_FILE=$TMP_DIR/result
 function check {
 	egrep --with-filename --line-number $([ $COLOUR ] && echo --colour=always) -f $REGEXPS_FILE $1 >  $RESULT_FILE
 	([[ $CHECKER ]] && $CHECKER $1 || utils/detect_spurious_indentation.py $1)                     >> $RESULT_FILE
-	([[ $KRAZY2 ]] && $KRAZY2 --export=textedit --check=$KRAZY2CHECKS $1 2>/dev/null)              >> $RESULT_FILE
+	([ $KRAZY2 ] && $KRAZY2 --brief --export=textedit --check=$KRAZY2CHECKS $1)                    >> $RESULT_FILE
 }
 
 
