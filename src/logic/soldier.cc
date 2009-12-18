@@ -637,6 +637,21 @@ bool Soldier::isOnBattlefield()
 }
 
 
+/**
+ * \return \c true if this soldier is considered to be attacking the player
+ */
+bool Soldier::is_attacking_player(Game & game, Player & player)
+{
+	State * state = get_state(taskAttack);
+	if (state) {
+		if (upcast(PlayerImmovable, imm, state->objvar1.get(game))) {
+			return (imm->get_owner() == &player);
+		}
+	}
+	return false;
+}
+
+
 Battle * Soldier::getBattle()
 {
 	return m_battle;
@@ -717,7 +732,8 @@ void Soldier::attack_update(Game & game, State & state)
 	std::string signal = get_signal();
 
 	if (signal.size()) {
-		if (signal == "blocked" || signal == "battle" || signal == "wakeup") {
+		if (signal == "blocked" || signal == "battle" || signal == "wakeup" ||
+			 signal == "sleep") {
 			signal_handled();
 		} else if (signal == "fail") {
 			signal_handled();
@@ -733,6 +749,12 @@ void Soldier::attack_update(Game & game, State & state)
 				("[attack] cancelled by unexpected signal '%s'\n", signal.c_str());
 			return pop_task(game);
 		}
+	}
+
+	//  We are at enemy building flag, and a defender is coming, sleep until he
+	// "wake up"s me
+	if (signal == "sleep") {
+		return start_task_idle(game, get_animation("idle"), -1);
 	}
 
 	PlayerImmovable * const location = get_location(game);
@@ -753,7 +775,7 @@ void Soldier::attack_update(Game & game, State & state)
 	if (signal == "blocked")
 		// Wait before we try again. Note that this must come *after*
 		// we check for a battle
-		return start_task_idle(game, get_animation("idle"), 5000);
+		return start_task_idle(game, get_animation("idle"), 250);
 
 	if (!location) {
 		molog("[attack] our location disappeared during a battle\n");
@@ -836,12 +858,36 @@ void Soldier::attack_pop(Game & game, State &)
 }
 
 
+struct FindSoldierAttackingPlayer : public FindBob {
+	FindSoldierAttackingPlayer(Game & _game, Player & _player) :
+		player(_player),
+		game(_game) {}
+
+	bool accept(Bob * const bob) const
+	{
+		if (upcast(Soldier, soldier, bob)) {
+			return
+				soldier->get_current_hitpoints() and
+				soldier->is_attacking_player(game, player);
+		}
+		return false;
+	}
+
+	Player & player;
+	Game & game;
+};
+
 /**
- * We are defending our home.
+ * Soldiers with this task go out of his buildings. They will
+ * try to find an enemy in his lands and go to hunt them down (signaling
+ * "battle"). If no enemy was found inside our lands, but an enemy is found
+ * outside our lands, then wait until the enemy goes inside or dissapear.
+ * If no enemy is found, then return home.
  *
  * Variables used:
- * \li ivar1 is \c true when the soldier is supposed to stay on the home flag
- * \li ivar2 used to pause before finally going home
+ * \li ivar1 used to store \c CombatFlags
+ * \li ivar2 when CF_DEFEND_STAYHOME, 1 if it has reached the flag
+//           when CF_RETREAT_WHEN_INJURED, the lesser HP before retreat
  */
 Bob::Task Soldier::taskDefense = {
 	"defense",
@@ -850,13 +896,35 @@ Bob::Task Soldier::taskDefense = {
 	static_cast<Bob::Ptr>(&Soldier::defense_pop)
 };
 
-void Soldier::startTaskDefense(Game & game, bool const stayhome)
+void Soldier::start_task_defense(Game & game)
 {
+	molog("[defense] starting\n");
 	push_task(game, taskDefense);
+	State & state = top_state();
+
+	state.ivar1 = 0;
+	state.ivar2 = 0;
+
+	// Here goes 'configuration'
+	/*if (player.wants_pursue())
+		state.ivar1 |= CF_PURSUE_ATTACKERS;
+
+	if (player.wants_flee()) {
+		state.ivar1 |= CF_RETREAT_WHEN_INJURED;
+		state.ivar2 = player.when_flee();
+	}*/
+}
+
+void Soldier::start_task_defense
+	(Game & game, bool const stayhome)
+{
+	start_task_defense(game);
 
 	State & state = top_state();
-	state.ivar1 = stayhome;
-	state.ivar2 = 0;
+
+	if (stayhome) {
+		state.ivar1 |= CF_DEFEND_STAYHOME;
+	}
 }
 
 void Soldier::defense_update(Game & game, State & state)
@@ -873,54 +941,157 @@ void Soldier::defense_update(Game & game, State & state)
 	}
 
 	PlayerImmovable * const location = get_location(game);
+	Flag & baseflag = location->base_flag();
 	BaseImmovable * const position = game.map()[get_position()].get_immovable();
-	if (m_battle) {
-		if (position == location)
-			return start_task_leavebuilding(game, false);
-
-		state.ivar2 = 0;
-		return startTaskBattle(game);
-	}
-
-	if (!location) {
-		molog("[defense] location disappeared during battle\n");
-		return pop_task(game);
-	}
 
 	if (signal == "blocked")
 		// Wait before we try again. Note that this must come *after*
 		// we check for a battle
-		return start_task_idle(game, get_animation("idle"), 5000);
+		return start_task_idle(game, get_animation("idle"), 250);
 
-	if (position == location) {
-		molog("[defense] returned home\n");
+	// If we only are defending our home ...
+	if (state.ivar1 & CF_DEFEND_STAYHOME) {
+		if ((position == location) and (state.ivar2 == 1)) {
+			molog("[defense] stayhome: returned home\n");
+			return pop_task(game);
+		}
+
+		if (position == &baseflag) {
+			state.ivar2 = 1;
+			assert(state.ivar2 == 1);
+
+			if (m_battle)
+				return startTaskBattle(game);
+
+			// Check if any attacker is waiting us to fight
+			std::vector<Bob *> soldiers;
+			game.map().find_bobs
+				(Area<FCoords>(get_position(), 0),
+				&soldiers,
+				FindBobEnemySoldier(*get_owner()));
+
+			container_iterate_const(std::vector<Bob *>, soldiers, i) {
+				if (upcast(Soldier, soldier, *i.current)) {
+					if (soldier->canBeChallenged()) {
+						new Battle(game, *this, *soldier);
+						return startTaskBattle(game);
+					}
+				}
+			}
+
+			if (state.ivar2 == 1) {
+				molog("[defense] stayhome: return home\n");
+				return start_task_return(game, false);
+			}
+		}
+
+		molog("[defense] stayhome: leavebuilding\n");
+		return start_task_leavebuilding(game, false);
+	}
+
+	// We are outside our building, get list of enemy soldiers attacking us
+	std::vector<Bob *> soldiers;
+	game.map().find_bobs
+		(Area<FCoords>(get_position(), 15),
+		 &soldiers,
+		 FindSoldierAttackingPlayer(game, *get_owner()));
+
+	if (soldiers.size() == 0) {
+		molog("[defense] no enemy soldiers found, ending task\n");
+
+		// If no enemy was found, return home
+		if (!location) {
+			molog("[defense] location disappeared during battle\n");
+			return pop_task(game);
+		}
+
+		if (position == location) {
+			molog("[defense] returned home\n");
+			return pop_task(game);
+		}
+
+		if (position == &baseflag) {
+			return
+				start_task_move
+					(game,
+					 WALK_NW,
+					 &descr().get_right_walk_anims(does_carry_ware()),
+					 true);
+		}
+
+		molog("[defense] return home\n");
+		if
+			(start_task_movepath
+			 	(game,
+			 	 baseflag.get_position(),
+			 	 0,
+			 	 descr().get_right_walk_anims(does_carry_ware())))
+			return;
+
+		molog("[defense] could not find way home\n");
 		return pop_task(game);
 	}
 
-	Flag & baseflag = location->base_flag();
-	if (position == &baseflag) {
-		if (state.ivar1 && !state.ivar2) {
-			state.ivar2 = 1;
-			return start_task_idle(game, get_animation("idle"), 250);
+	// Go through soldiers
+	Soldier * target = 0;
+	uint32_t target_dist = 999;
+	container_iterate_const(std::vector<Bob *>, soldiers, i) {
+
+		// If enemy is in our land, then go after it!
+		if (upcast(Soldier, soldier, *i.current)) {
+			assert(soldier != this);
+			Field const f = game.map().operator[](soldier->get_position());
+
+			//  Check soldier, be sure that we can fight against soldier.
+			// Only pursuers can go over enemy land when defending.
+			if
+				((soldier->canBeChallenged()) and
+				 ((state.ivar1 & CF_PURSUE_ATTACKERS) or
+				  (f.get_owned_by() == get_owner()->player_number())))
+			{
+				uint32_t thisDist = game.map().calc_distance
+					(get_position(), soldier->get_position());
+				if (thisDist < target_dist) {
+					target_dist = thisDist;
+					target = soldier;
+				}
+			}
 		}
-		return
-			start_task_move
-				(game,
-				 WALK_NW,
-				 &descr().get_right_walk_anims(does_carry_ware()),
-				 true);
 	}
 
-	molog("[defense] return home\n");
-	if
-		(start_task_movepath
-		 	(game,
-		 	 baseflag.get_position(),
-		 	 0,
-		 	 descr().get_right_walk_anims(does_carry_ware())))
-		return;
-	else
-		molog("[defense] could not find way home");
+	if (target) {
+
+		if (position == location)
+			return start_task_leavebuilding(game, false);
+
+		if (target_dist <= 1) {
+			molog("[defense] starting battle with %i!\n", target->serial());
+			new Battle(game, *this, *target);
+			return startTaskBattle(game);
+		}
+
+		// Move towards soldier
+		if
+			(start_task_movepath
+				(game,
+				 target->get_position(),
+				 1,
+				 descr().get_right_walk_anims(does_carry_ware()),
+				 false,
+				 1))
+		{
+			molog("[defense] move towards soldier %i\n", target->serial());
+			return;
+		} else {
+			molog
+				("[defense] failed to move towards attacking soldier %i\n",
+				target->serial());
+			return pop_task(game);
+		}
+	}
+
+	// If the enemy is not in our land, wait
+	return start_task_idle(game, get_animation("idle"), 250);
 }
 
 void Soldier::defense_pop(Game & game, State &)

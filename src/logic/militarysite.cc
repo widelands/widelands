@@ -357,8 +357,9 @@ bool MilitarySite::get_building_work(Game & game, Worker & worker, bool)
 				return true;
 			} else if (upcast(Soldier, opponent, enemy)) {
 				if (!opponent->getBattle()) {
-					soldier->startTaskDefense(game, stayhome);
-					new Battle(game, *soldier, *opponent);
+					soldier->start_task_defense(game, stayhome);
+					if (stayhome)
+						opponent->send_signal(game, "sleep");
 					return true;
 				}
 			} else

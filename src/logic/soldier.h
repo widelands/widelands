@@ -150,6 +150,33 @@ enum CombatWalkingDir {
 	CD_RETURN_E = 6, // Returning from east (facing west!!)
 };
 
+enum CombatFlags {
+	/**
+	 * CF_DEFEND_STAY_HOME
+	 *    Soldier will wait enemies at his building flag. Only for defenders.
+	 */
+	CF_DEFEND_STAYHOME = 1,
+	/**
+	 * CF_PURSUE_ATTACKERS
+	 *    Soldier will pursue attackers into enemies land
+	 */
+	CF_PURSUE_ATTACKERS = 2,
+	/**
+	 * CF_RETREAT_WHEN_INJURED
+	 *    When current hitpoints goes under arbitrary value, soldier will flee
+	 * and heal inside military building
+	 */
+	CF_RETREAT_WHEN_INJURED = 4,
+	/**
+	 * CF_AVOID_COMBAT
+	 *    Attackers would try avoid entering combat with others soldiers but
+	 * 'flag deffenders'.
+	 */
+	CF_AVOID_COMBAT = 8,
+
+};
+
+
 class Soldier : public Worker {
 	friend struct Map_Bobdata_Data_Packet;
 	MO_DESCR(Soldier_Descr);
@@ -227,6 +254,7 @@ public:
 	virtual void log_general_info(Editor_Game_Base const &);
 
 	bool isOnBattlefield();
+	bool is_attacking_player(Game &, Player &);
 	Battle * getBattle();
 	bool canBeChallenged();
 	virtual bool checkNodeBlocked(Game &, FCoords const &, bool commit);
@@ -234,7 +262,8 @@ public:
 	void setBattle(Game &, Battle *);
 
 	void startTaskAttack(Game & game, Building &);
-	void startTaskDefense(Game & game, bool stayhome);
+	void start_task_defense(Game & game);
+	void start_task_defense(Game & game, bool stayhome);
 	void startTaskBattle(Game &);
 	void startTaskMoveInBattle(Game &, CombatWalkingDir);
 	void startTaskDie(Game &);
