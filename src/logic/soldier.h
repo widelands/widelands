@@ -303,11 +303,12 @@ private:
 	uint32_t m_defense_level;
 	uint32_t m_evade_level;
 
-	// This is used to replicate walk for soldiers but only just before and
-	// just after figthing in a battle, to draw soldier at proper position
-	// May be could be used Bob.m_walking, but then that variables should be
-	// protected instead of private, and some type of rework needed to allow
-	// the new states. I thought that is cleaner to have this variables splitted
+	/// This is used to replicate walk for soldiers but only just before and
+	/// just after figthing in a battle, to draw soldier at proper position.
+	/// Maybe Bob.m_walking could be used, but then that variable should be
+	/// protected instead of private, and some type of rework needed to allow
+	/// the new states. I thought that it is cleaner to have this variable
+	/// separate.
 	CombatWalkingDir m_combat_walking;
 	int32_t  m_combat_walkstart;
 	int32_t  m_combat_walkend;

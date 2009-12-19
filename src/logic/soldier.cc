@@ -732,10 +732,11 @@ void Soldier::attack_update(Game & game, State & state)
 	std::string signal = get_signal();
 
 	if (signal.size()) {
-		if (signal == "blocked" || signal == "battle" || signal == "wakeup" ||
-			 signal == "sleep") {
+		if
+			(signal == "blocked" || signal == "battle" || signal == "wakeup" ||
+			 signal == "sleep")
 			signal_handled();
-		} else if (signal == "fail") {
+		else if (signal == "fail") {
 			signal_handled();
 			if (state.objvar1.get(game)) {
 				molog("[attack] failed to reach enemy\n");
@@ -906,13 +907,15 @@ void Soldier::start_task_defense(Game & game)
 	state.ivar2 = 0;
 
 	// Here goes 'configuration'
-	/*if (player.wants_pursue())
+#if 0
+	if (player.wants_pursue())
 		state.ivar1 |= CF_PURSUE_ATTACKERS;
 
 	if (player.wants_flee()) {
 		state.ivar1 |= CF_RETREAT_WHEN_INJURED;
 		state.ivar2 = player.when_flee();
-	}*/
+	}
+#endif
 }
 
 void Soldier::start_task_defense
@@ -967,8 +970,8 @@ void Soldier::defense_update(Game & game, State & state)
 			std::vector<Bob *> soldiers;
 			game.map().find_bobs
 				(Area<FCoords>(get_position(), 0),
-				&soldiers,
-				FindBobEnemySoldier(*get_owner()));
+				 &soldiers,
+				 FindBobEnemySoldier(*get_owner()));
 
 			container_iterate_const(std::vector<Bob *>, soldiers, i) {
 				if (upcast(Soldier, soldier, *i.current)) {
@@ -1073,19 +1076,19 @@ void Soldier::defense_update(Game & game, State & state)
 		// Move towards soldier
 		if
 			(start_task_movepath
-				(game,
-				 target->get_position(),
-				 1,
-				 descr().get_right_walk_anims(does_carry_ware()),
-				 false,
-				 1))
+			 	(game,
+			 	 target->get_position(),
+			 	 1,
+			 	 descr().get_right_walk_anims(does_carry_ware()),
+			 	 false,
+			 	 1))
 		{
-			molog("[defense] move towards soldier %i\n", target->serial());
+			molog("[defense] move towards soldier %u\n", target->serial());
 			return;
 		} else {
 			molog
-				("[defense] failed to move towards attacking soldier %i\n",
-				target->serial());
+				("[defense] failed to move towards attacking soldier %u\n",
+				 target->serial());
 			return pop_task(game);
 		}
 	}
@@ -1135,7 +1138,8 @@ void Soldier::startTaskMoveInBattle(Game & game, CombatWalkingDir dir)
 	push_task(game, taskMoveInBattle);
 	State & state = top_state();
 	state.ivar1 = dir;
-	set_animation(game, descr().get_animation(mapdir == WALK_E ? "walk_e" : "walk_w"));
+	set_animation
+		(game, descr().get_animation(mapdir == WALK_E ? "walk_e" : "walk_w"));
 }
 
 void Soldier::move_in_battle_update(Game & game, State &)
@@ -1331,7 +1335,7 @@ void Soldier::battle_update(Game & game, State &)
 			}
 
 			if (m_battle->first()->serial() == serial()) {
-				molog("[battle]: I'm first: '%d'\n", m_combat_walking);
+				molog("[battle]: I am first: '%d'\n", m_combat_walking);
 				if (m_combat_walking != CD_COMBAT_W) {
 					startTaskMoveInBattle(game, CD_WALK_W);
 					//opponent.startTaskMoveInBattle(game, CD_WALK_E);
@@ -1340,7 +1344,7 @@ void Soldier::battle_update(Game & game, State &)
 			}
 
 			if (m_battle->second()->serial() == serial()) {
-				molog("[battle]: I'm second: '%d'\n", m_combat_walking);
+				molog("[battle]: I am second: '%d'\n", m_combat_walking);
 				if (m_combat_walking != CD_COMBAT_E) {
 					startTaskMoveInBattle(game, CD_WALK_E);
 					//opponent.startTaskMoveInBattle(game, CD_WALK_W);

@@ -150,6 +150,18 @@ void Interactive_Base::set_sel_pos(Widelands::Node_and_Triangle<> const center)
 				 	 productionsite,
 				 	 map[center.node].get_immovable()))
 			{
+				if (upcast(Interactive_Player const, iplayer, igbase)) {
+					Widelands::Player const & player = iplayer->player();
+					if
+						(not
+						 (player.see_all() or
+						  1
+						  <
+						  player.vision
+						  	(Widelands::Map::get_index
+						  	 	(center.node, map.get_width()))))
+						return set_tooltip(0);
+				}
 				std::string const s =
 					productionsite->info_string(igbase->building_tooltip_format());
 				if (s.size())
