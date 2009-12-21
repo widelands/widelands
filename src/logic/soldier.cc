@@ -1476,6 +1476,24 @@ bool Soldier::checkNodeBlocked
 				new Battle(game, *this, soldier);
 			}
 		}
+
+		/// Retreating soldiers don't check for blocked paths
+		State * state = 0;
+
+		if (get_state(taskAttack)) {
+			state = get_state(taskAttack);
+		}
+		if (get_state(taskDefense)) {
+			state = get_state(taskDefense);
+		}
+		if (state) {
+			if
+				(state->ivar1 & CF_RETREAT_WHEN_INJURED and
+				 state->ui32var3 > get_current_hitpoints())
+			{
+				return false;
+			}
+		}
 		return true;
 	}
 
