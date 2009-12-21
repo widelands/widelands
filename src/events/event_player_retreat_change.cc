@@ -29,7 +29,7 @@
 namespace Widelands {
 
 Event_Player_Retreat_Change::Event_Player_Retreat_Change
-	(Section & s, Editor_Game_Base & egbase)
+	(Section & s, Editor_Game_Base &)
 	: Event(s)
 {
 	try {
@@ -46,7 +46,7 @@ Event_Player_Retreat_Change::Event_Player_Retreat_Change
 }
 
 void Event_Player_Retreat_Change::Write
-	(Section & s, Editor_Game_Base & egbase) const
+	(Section & s, Editor_Game_Base &) const
 {
 	s.set_int           ("version",        EVENT_VERSION);
 	if (m_player_number != 1)
