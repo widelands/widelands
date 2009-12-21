@@ -44,6 +44,8 @@
 #include "event_set_player_frontier_style.h"
 #include "event_set_player_flag_style.h"
 #include "event_unhide_area.h"
+#include "event_player_allowed_retreat_change.h"
+#include "event_player_retreat_change.h"
 
 namespace Widelands {
 
@@ -91,4 +93,11 @@ int32_t Event_Move_View                 ::option_menu(Editor_Interactive & eia)
 
 int32_t Event_Unhide_Area               ::option_menu(Editor_Interactive & eia)
 {Event_Unhide_Area_Option_Menu                  m(eia, *this); return m.run();}
+
+int32_t
+Event_Player_Allowed_Retreat_Change     ::option_menu(Editor_Interactive &)
+{throw;}
+
+int32_t Event_Player_Retreat_Change     ::option_menu(Editor_Interactive &)
+{throw;}
 }

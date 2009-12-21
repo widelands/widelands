@@ -377,6 +377,16 @@ struct Player :
 	}
 	void allow_building(Building_Index, bool allow);
 
+	// Battle options
+	void set_retreat_percentage(uint32_t value);
+	uint32_t get_retreat_percentage() const throw () {
+		return m_retreat_percentage;
+	}
+	void allow_retreat_change(bool allow);
+	bool is_retreat_change_allowed() const throw () {
+		return m_allow_retreat_change;
+	}
+
 	// Player commands
 	// Only to be called indirectly via CmdQueue
 	Flag & force_flag(FCoords);      /// Do what it takes to create the flag.
@@ -504,6 +514,14 @@ private:
 	uint32_t               m_msites_lost,     m_msites_defeated;
 	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;
 	RGBColor               m_playercolor[4];
+
+	/**
+	 * Is player allowed to modify m_retreat_percentage?
+	 * Below percentage value, soldiers will retreat when current battle finish
+	 */
+
+	bool                  m_allow_retreat_change;
+	uint32_t              m_retreat_percentage;
 
 	Field *               m_fields;
 	std::vector<bool>     m_allowed_buildings;

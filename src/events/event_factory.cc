@@ -20,15 +20,18 @@
 #include "event_factory.h"
 
 #include "event_allow_building_types.h"
+#include "event_allow_retreat_change.h"
 #include "event_building.h"
 #include "event_conquer_area.h"
 #include "event_flag.h"
 #include "event_forbid_building_types.h"
+#include "event_forbid_retreat_change.h"
 #include "event_immovable.h"
 #include "event_message_box.h"
 #include "event_move_view.h"
 #include "event_road.h"
 #include "event_unhide_area.h"
+#include "event_retreat_change.h"
 #include "event_reveal_campaign.h"
 #include "event_reveal_objective.h"
 #include "event_reveal_scenario.h"
@@ -137,6 +140,27 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		_
 			("Sets the style of the player's flags to one of the styles that are "
 			 "defined in the player's tribe.")
+	},
+	{
+		false, // Change this value when option window exists
+		"allow_retreat_change",      _("Allows retreat value customization"),
+		_
+			("Allows that the player can change the value of 'retreat when hit"
+			 "points below x%'.")
+	},
+	{
+		false, // Change this value when option window exists
+		"forbid_retreat_change",     _("Forbids retreat value customization"),
+		_
+			("Forbids that the player can change the value of 'retreat when hit"
+			 "points below x%'.")
+	},
+	{
+		false, // Change this value when option window exists
+		"retreat_change",            _("Set player retreat percentage"),
+		_
+			("Sets the player value of 'retreat when hit points below x%', this "
+			 "value could be overriden by players if allowed.")
 	}
 };
 
@@ -168,6 +192,9 @@ Event & create
 	case 13: return *new Event_Unhide_Area              (name, state);
 	case 14: return *new Event_Set_Player_Frontier_Style(name, state);
 	case 15: return *new Event_Set_Player_Flag_Style    (name, state);
+	case 16: return *new Event_Allow_Retreat_Change     (name, state);
+	case 17: return *new Event_Forbid_Retreat_Change    (name, state);
+	case 18: return *new Event_Retreat_Change           (name, state);
 	default:
 		assert(false);
 	}
@@ -212,6 +239,9 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	case 13: return *new Event_Unhide_Area              (s, egbase);
 	case 14: return *new Event_Set_Player_Frontier_Style(s, egbase);
 	case 15: return *new Event_Set_Player_Flag_Style    (s, egbase);
+	case 16: return *new Event_Allow_Retreat_Change     (s, egbase);
+	case 17: return *new Event_Forbid_Retreat_Change    (s, egbase);
+	case 18: return *new Event_Retreat_Change           (s, egbase);
 	default:
 		assert(false);
 	}

@@ -157,22 +157,17 @@ enum CombatFlags {
 	 */
 	CF_DEFEND_STAYHOME = 1,
 	/**
-	 * CF_PURSUE_ATTACKERS
-	 *    Soldier will pursue attackers into enemies land
-	 */
-	CF_PURSUE_ATTACKERS = 2,
-	/**
 	 * CF_RETREAT_WHEN_INJURED
 	 *    When current hitpoints goes under arbitrary value, soldier will flee
 	 * and heal inside military building
 	 */
-	CF_RETREAT_WHEN_INJURED = 4,
+	CF_RETREAT_WHEN_INJURED = 2,
 	/**
 	 * CF_AVOID_COMBAT
 	 *    Attackers would try avoid entering combat with others soldiers but
 	 * 'flag deffenders'.
 	 */
-	CF_AVOID_COMBAT = 8,
+	CF_AVOID_COMBAT = 4,
 
 };
 
@@ -261,12 +256,11 @@ public:
 
 	void setBattle(Game &, Battle *);
 
-	void startTaskAttack(Game & game, Building &);
-	void start_task_defense(Game & game);
-	void start_task_defense(Game & game, bool stayhome);
-	void startTaskBattle(Game &);
-	void startTaskMoveInBattle(Game &, CombatWalkingDir);
-	void startTaskDie(Game &);
+	void start_task_attack(Game & game, Building &, uint32_t retreat);
+	void start_task_defense(Game & game, bool stayhome, uint32_t retreat);
+	void start_task_battle(Game &);
+	void start_task_move_in_battle(Game &, CombatWalkingDir);
+	void start_task_die(Game &);
 
 private:
 	void attack_update(Game &, State &);

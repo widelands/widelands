@@ -696,7 +696,7 @@ void Soldier::setBattle(Game & game, Battle * const battle)
 void Soldier::init_auto_task(Game & game) {
 	if (get_current_hitpoints() < 1) {
 		molog("[soldier] init_auto_task: die\n");
-		return startTaskDie(game);
+		return start_task_die(game);
 	}
 
 	return Worker::init_auto_task(game);
@@ -717,14 +717,28 @@ Bob::Task Soldier::taskAttack = {
 	static_cast<Bob::Ptr>(&Soldier::attack_pop)
 };
 
-void Soldier::startTaskAttack(Game & game, Building & building)
+void Soldier::start_task_attack
+	(Game & game, Building & building, uint32_t retreat)
 {
 	dynamic_cast<Attackable const &>(building);
 
 	push_task(game, taskAttack);
+	State & state  = top_state();
+	state.objvar1  = &building;
+	state.coords   = building.get_position();
 
-	top_state().objvar1 = &building;
-	top_state().coords  = building.get_position();
+	if (retreat) {
+		assert(retreat < 101);
+		state.ivar1    |= CF_RETREAT_WHEN_INJURED;
+		state.ui32var3  = retreat * get_max_hitpoints() / 100;
+
+		// Injured soldiers are not allowed to attack
+		if (state.ui32var3 > get_current_hitpoints()) {
+			state.ui32var3 = get_current_hitpoints();
+			//send_signal(game, "injured");
+		}
+	}
+
 }
 
 void Soldier::attack_update(Game & game, State & state)
@@ -771,7 +785,7 @@ void Soldier::attack_update(Game & game, State & state)
 	}
 
 	if (m_battle)
-		return startTaskBattle(game);
+		return start_task_battle(game);
 
 	if (signal == "blocked")
 		// Wait before we try again. Note that this must come *after*
@@ -783,7 +797,16 @@ void Soldier::attack_update(Game & game, State & state)
 		return pop_task(game);
 	}
 
-	if (!enemy) {
+	if
+		(!enemy or
+		 (state.ivar1 & CF_RETREAT_WHEN_INJURED and
+		  state.ui32var3 > get_current_hitpoints()))
+	{
+		// Injured soldiers will try to return to safe site at home.
+		if (state.ui32var3 > get_current_hitpoints()) {
+			state.coords = Coords(0, 0);
+			state.objvar1 = 0;
+		}
 		// The old militarysite gets replaced by a new one, so if "enemy" is not
 		// valid anymore, we either "conquered" the new building, or it was
 		// destroyed.
@@ -897,7 +920,8 @@ Bob::Task Soldier::taskDefense = {
 	static_cast<Bob::Ptr>(&Soldier::defense_pop)
 };
 
-void Soldier::start_task_defense(Game & game)
+void Soldier::start_task_defense
+	(Game & game, bool stayhome, uint32_t retreat)
 {
 	molog("[defense] starting\n");
 	push_task(game, taskDefense);
@@ -907,26 +931,18 @@ void Soldier::start_task_defense(Game & game)
 	state.ivar2 = 0;
 
 	// Here goes 'configuration'
-#if 0
-	if (player.wants_pursue())
-		state.ivar1 |= CF_PURSUE_ATTACKERS;
-
-	if (player.wants_flee()) {
-		state.ivar1 |= CF_RETREAT_WHEN_INJURED;
-		state.ivar2 = player.when_flee();
-	}
-#endif
-}
-
-void Soldier::start_task_defense
-	(Game & game, bool const stayhome)
-{
-	start_task_defense(game);
-
-	State & state = top_state();
-
 	if (stayhome) {
 		state.ivar1 |= CF_DEFEND_STAYHOME;
+	} else {
+		/* Flag defenders are not allowed to retreat, to avoid abuses */
+		if (retreat) {
+			state.ivar1 |= CF_RETREAT_WHEN_INJURED;
+			state.ui32var3 = get_max_hitpoints() * retreat / 100;
+
+			// Soldier must defend even if he starts injured
+			if (state.ui32var3 < get_current_hitpoints())
+				state.ui32var3 = get_current_hitpoints();
+		}
 	}
 }
 
@@ -964,7 +980,7 @@ void Soldier::defense_update(Game & game, State & state)
 			assert(state.ivar2 == 1);
 
 			if (m_battle)
-				return startTaskBattle(game);
+				return start_task_battle(game);
 
 			// Check if any attacker is waiting us to fight
 			std::vector<Bob *> soldiers;
@@ -977,7 +993,7 @@ void Soldier::defense_update(Game & game, State & state)
 				if (upcast(Soldier, soldier, *i.current)) {
 					if (soldier->canBeChallenged()) {
 						new Battle(game, *this, *soldier);
-						return startTaskBattle(game);
+						return start_task_battle(game);
 					}
 				}
 			}
@@ -992,15 +1008,24 @@ void Soldier::defense_update(Game & game, State & state)
 		return start_task_leavebuilding(game, false);
 	}
 
+
 	// We are outside our building, get list of enemy soldiers attacking us
 	std::vector<Bob *> soldiers;
 	game.map().find_bobs
-		(Area<FCoords>(get_position(), 15),
+		(Area<FCoords>(get_position(), 10),
 		 &soldiers,
 		 FindSoldierAttackingPlayer(game, *get_owner()));
 
-	if (soldiers.size() == 0) {
-		molog("[defense] no enemy soldiers found, ending task\n");
+	if
+		(soldiers.empty() or
+		 ((state.ivar1 & CF_RETREAT_WHEN_INJURED) and
+		  get_current_hitpoints() < state.ui32var3))
+	{
+
+		if (soldiers.empty())
+			molog("[defense] no enemy soldiers found, ending task\n");
+		else
+			molog("[defense] I'm heavily injured!\n");
 
 		// If no enemy was found, return home
 		if (!location) {
@@ -1049,8 +1074,7 @@ void Soldier::defense_update(Game & game, State & state)
 			// Only pursuers can go over enemy land when defending.
 			if
 				((soldier->canBeChallenged()) and
-				 ((state.ivar1 & CF_PURSUE_ATTACKERS) or
-				  (f.get_owned_by() == get_owner()->player_number())))
+				 (f.get_owned_by() == get_owner()->player_number()))
 			{
 				uint32_t thisDist = game.map().calc_distance
 					(get_position(), soldier->get_position());
@@ -1068,9 +1092,9 @@ void Soldier::defense_update(Game & game, State & state)
 			return start_task_leavebuilding(game, false);
 
 		if (target_dist <= 1) {
-			molog("[defense] starting battle with %i!\n", target->serial());
+			molog("[defense] starting battle with %u!\n", target->serial());
 			new Battle(game, *this, *target);
-			return startTaskBattle(game);
+			return start_task_battle(game);
 		}
 
 		// Move towards soldier
@@ -1111,7 +1135,7 @@ Bob::Task Soldier::taskMoveInBattle = {
 	0
 };
 
-void Soldier::startTaskMoveInBattle(Game & game, CombatWalkingDir dir)
+void Soldier::start_task_move_in_battle(Game & game, CombatWalkingDir dir)
 {
 	int32_t mapdir = IDLE;
 
@@ -1191,9 +1215,10 @@ Bob::Task Soldier::taskBattle = {
 	static_cast<Bob::Ptr>(&Soldier::battle_pop)
 };
 
-void Soldier::startTaskBattle(Game & game)
+void Soldier::start_task_battle(Game & game)
 {
 	assert(m_battle);
+	m_combat_walking = CD_NONE;
 
 	push_task(game, taskBattle);
 }
@@ -1222,10 +1247,10 @@ void Soldier::battle_update(Game & game, State &)
 
 	if (!m_battle) {
 		if (m_combat_walking == CD_COMBAT_W) {
-			return startTaskMoveInBattle(game, CD_RETURN_W);
+			return start_task_move_in_battle(game, CD_RETURN_W);
 		}
 		if (m_combat_walking == CD_COMBAT_E) {
-			return startTaskMoveInBattle(game, CD_RETURN_E);
+			return start_task_move_in_battle(game, CD_RETURN_E);
 		}
 		assert(m_combat_walking == CD_NONE);
 		molog("[battle] is over\n");
@@ -1240,7 +1265,7 @@ void Soldier::battle_update(Game & game, State &)
 			return skip_act(); //  we will get a signal via setBattle()
 		} else {
 			if (m_combat_walking != CD_COMBAT_E) {
-				return startTaskMoveInBattle(game, CD_WALK_E);
+				return start_task_move_in_battle(game, CD_WALK_E);
 			}
 		}
 	} else {
@@ -1337,8 +1362,7 @@ void Soldier::battle_update(Game & game, State &)
 			if (m_battle->first()->serial() == serial()) {
 				molog("[battle]: I am first: '%d'\n", m_combat_walking);
 				if (m_combat_walking != CD_COMBAT_W) {
-					startTaskMoveInBattle(game, CD_WALK_W);
-					//opponent.startTaskMoveInBattle(game, CD_WALK_E);
+					start_task_move_in_battle(game, CD_WALK_W);
 					return;
 				}
 			}
@@ -1346,8 +1370,7 @@ void Soldier::battle_update(Game & game, State &)
 			if (m_battle->second()->serial() == serial()) {
 				molog("[battle]: I am second: '%d'\n", m_combat_walking);
 				if (m_combat_walking != CD_COMBAT_E) {
-					startTaskMoveInBattle(game, CD_WALK_E);
-					//opponent.startTaskMoveInBattle(game, CD_WALK_W);
+					start_task_move_in_battle(game, CD_WALK_E);
 					return;
 				}
 			}
@@ -1371,7 +1394,7 @@ Bob::Task Soldier::taskDie = {
 	static_cast<Bob::Ptr>(&Soldier::die_pop)
 };
 
-void Soldier::startTaskDie(Game & game)
+void Soldier::start_task_die(Game & game)
 {
 	push_task(game, taskDie);
 	top_state().ivar1 = game.get_gametime() + 1000;
@@ -1511,6 +1534,12 @@ void Soldier::log_general_info(Editor_Game_Base const & egbase)
 	molog ("Attack :  %d-%d\n", m_min_attack, m_max_attack);
 	molog ("Defense : %d%%\n", m_defense);
 	molog ("Evade:    %d%%\n", m_evade);
+	molog ("CombatWalkingDir:   %i\n", m_combat_walking);
+	molog ("CombatWalkingStart: %i\n", m_combat_walkstart);
+	molog ("CombatWalkEnd:      %i\n", m_combat_walkend);
+	molog ("HasBattle:   %s\n", m_battle ? "yes" : "no");
+	if (m_battle)
+		molog("BattleSerial: %u\n", m_battle->serial());
 }
 
 }

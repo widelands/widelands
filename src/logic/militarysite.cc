@@ -353,11 +353,13 @@ bool MilitarySite::get_building_work(Game & game, Worker & worker, bool)
 		bool stayhome;
 		if (Map_Object * const enemy = popSoldierJob(soldier, &stayhome)) {
 			if (upcast(Building, building, enemy)) {
-				soldier->startTaskAttack(game, *building);
+				soldier->start_task_attack
+					(game, *building, owner().get_retreat_percentage());
 				return true;
 			} else if (upcast(Soldier, opponent, enemy)) {
 				if (!opponent->getBattle()) {
-					soldier->start_task_defense(game, stayhome);
+					soldier->start_task_defense
+						(game, stayhome, owner().get_retreat_percentage());
 					if (stayhome)
 						opponent->send_signal(game, "sleep");
 					return true;

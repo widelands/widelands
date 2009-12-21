@@ -964,7 +964,7 @@ void Warehouse::aggressor(Soldier & enemy)
 
 	Soldier & defender =
 		ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
-	defender.start_task_defense(game);
+	defender.start_task_defense(game, false, owner().get_retreat_percentage());
 }
 
 bool Warehouse::attack(Soldier & enemy)
@@ -976,7 +976,7 @@ bool Warehouse::attack(Soldier & enemy)
 	if (count_workers(game, soldier_index, noreq)) {
 		Soldier & defender =
 			ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
-		defender.start_task_defense(game, true);
+		defender.start_task_defense(game, true, 0);
 		enemy.send_signal(game, "sleep");
 		return true;
 	}

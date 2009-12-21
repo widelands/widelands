@@ -147,6 +147,8 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	// Identify what soldier is calling the routine
 	uint8_t const this_soldier_is = &soldier == m_first ? 1 : 2;
 
+	assert(m_first->getBattle() == this or m_second->getBattle() == this);
+
 	//  Created this three 'states' of the battle:
 	// *First time entered, one enters :
 	//    oneReadyToFight, mark m_readyflags as he is ready to fight
@@ -164,13 +166,13 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 		molog(_("[battle] soldier %u loose battle\n"), soldier.serial());
 		soldier          . owner().count_casualty();
 		opponent(soldier)->owner().count_kill    ();
-		soldier.startTaskDie(game);
+		soldier.start_task_die(game);
 		molog(_("[battle] waking up winner %d\n"), opponent(soldier)->serial());
 		opponent(soldier)->send_signal(game, "wakeup");
 		return schedule_destroy(game);
 	}
 
-	if (!m_first || !m_second)
+	if (!m_first or !m_second)
 		return soldier.skip_act();
 
 	// So both soldiers are alive; are we ready to trade the next blow?
@@ -226,9 +228,14 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	// The function calculateRound inverts value of m_first_strikes, so
 	// attacker will be the m_first when m_first_strikes = false and
 	// attacker will be m_second when m_first_strikes = true
-	molog("[battle] This soldier is  %d\n", this_soldier_is);
-	molog("[battle] First strikes    %d\n", m_first_strikes);
-	molog("[battle] Last attack hits %d\n", m_last_attack_hits);
+	molog
+		("[battle] (%u) vs (%u) is %d, first strikes %d, last hit %d\n",
+		 soldier.serial(),
+		 opponent(soldier)->serial(),
+		 this_soldier_is,
+		 m_first_strikes,
+		 m_last_attack_hits);
+
 	if (this_soldier_is == 1) {
 		if (m_first_strikes) {
 			if (m_last_attack_hits) {

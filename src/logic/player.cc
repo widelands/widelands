@@ -67,6 +67,8 @@ Player::Player
 	m_msites_defeated    (0),
 	m_civil_blds_lost    (0),
 	m_civil_blds_defeated(0),
+	m_allow_retreat_change(false),
+	m_retreat_percentage  (50),
 	m_fields            (0),
 	m_allowed_buildings (tribe_descr.get_nrbuildings(), true),
 	m_current_statistics(tribe_descr.get_nrwares    ()),
@@ -554,6 +556,22 @@ void Player::drop_soldier(PlayerImmovable & imm, Soldier & soldier) {
 		ctrl->dropSoldier(soldier);
 }
 
+/*
+===========
+===========
+*/
+void Player::allow_retreat_change(bool allow) {
+	m_allow_retreat_change = allow;
+}
+
+/*
+===========
+===========
+*/
+void Player::set_retreat_percentage(uint32_t percentage) {
+	assert(percentage < 101);
+	m_retreat_percentage = percentage;
+}
 
 /**
  * Get a list of soldiers that this player can be used to attack the
