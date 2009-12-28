@@ -1034,7 +1034,7 @@ void Soldier::defense_update(Game & game, State & state)
 		if (soldiers.empty())
 			molog("[defense] no enemy soldiers found, ending task\n");
 		else
-			molog("[defense] I'm heavily injured!\n");
+			molog("[defense] I am heavily injured!\n");
 
 		// If no enemy was found, return home
 		if (!location) {

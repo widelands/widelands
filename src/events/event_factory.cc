@@ -160,7 +160,7 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		"retreat_change",            _("Set player retreat percentage"),
 		_
 			("Sets the player value of 'retreat when hit points below x%', this "
-			 "value could be overriden by players if allowed.")
+			 "value could be overiden by players if allowed.")
 	}
 };
 
