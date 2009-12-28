@@ -395,8 +395,9 @@ struct Cmd_EnemyFlagAction : public PlayerCommand {
 		(int32_t      const t,
 		 int32_t      const p,
 		 Flag const &       f,
-		 uint32_t     const num)
-		: PlayerCommand(t, p), serial(f.serial()), number(num)
+		 uint32_t     const num,
+		 uint32_t     const ret)
+		: PlayerCommand(t, p), serial(f.serial()), number(num), retreat(ret)
 	{}
 
 	// Write these commands to a file (for savegames)
@@ -413,6 +414,7 @@ struct Cmd_EnemyFlagAction : public PlayerCommand {
 private:
 	Serial        serial;
 	uint8_t       number;
+	uint8_t       retreat;
 };
 
 }

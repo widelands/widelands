@@ -899,7 +899,8 @@ void FieldActionWindow::act_attack ()
 				 ref_cast<Interactive_Player const, Interactive_Base const>
 				 	(ibase())
 				 .player_number(),
-				 m_attack_box->soldiers()); //  number of soldiers
+				 m_attack_box->soldiers(), //  number of soldiers
+				 m_attack_box->retreat());
 	okdialog();
 }
 

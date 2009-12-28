@@ -160,7 +160,7 @@ struct Game : public Editor_Game_Base {
 	void send_player_drop_soldier(Building &, int32_t);
 	void send_player_change_soldier_capacity(Building &, int32_t);
 	void send_player_enemyflagaction
-		(Flag const &, Player_Number, uint32_t count);
+		(Flag const &, Player_Number, uint32_t count, uint32_t retreat);
 
 	Interactive_Player * get_ipl();
 

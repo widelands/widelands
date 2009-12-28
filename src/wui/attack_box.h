@@ -50,9 +50,8 @@ struct AttackBox : public UI::Box {
 	void init();
 
 	uint32_t soldiers() const;
-#if 0
 	uint32_t retreat() const;
-#endif
+
 	private:
 		uint32_t get_max_attackers();
 		Slider * add_slider
@@ -82,14 +81,11 @@ struct AttackBox : public UI::Box {
 		Widelands::Player     * m_pl;
 		Widelands::Map        * m_map;
 		Widelands::FCoords    * m_node;
-#if 0
+
 		UI::Slider            * m_slider_retreat;
-#endif
 		UI::Slider            * m_slider_soldiers;
 		UI::Textarea          * m_text_soldiers;
-#if 0
 		UI::Textarea          * m_text_retreat;
-#endif
 };
 
 }

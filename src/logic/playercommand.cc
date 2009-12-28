@@ -1020,7 +1020,7 @@ PlayerCommand (0, des.Unsigned8())
 	serial   = des.Unsigned32();
 	des         .Unsigned8 ();
 	number   = des.Unsigned8 ();
-	des         .Unsigned8 ();
+	retreat  = des.Unsigned8 ();
 }
 
 void Cmd_EnemyFlagAction::execute (Game & game)
@@ -1042,7 +1042,7 @@ void Cmd_EnemyFlagAction::execute (Game & game)
 				 player.vision
 				 	(Map::get_index
 				 	 	(building->get_position(), game.map().get_width())))
-				player.enemyflagaction (*flag, sender(), number);
+				player.enemyflagaction (*flag, sender(), number, retreat);
 			else
 				log
 					("Cmd_EnemyFlagAction::execute: ERROR: wrong player target not "
@@ -1062,9 +1062,11 @@ void Cmd_EnemyFlagAction::serialize (StreamWrite & ser) {
 	ser.Unsigned32(serial);
 	ser.Unsigned8 (sender());
 	ser.Unsigned8 (number);
-	ser.Unsigned8 (0);
+	ser.Unsigned8 (retreat);
 }
-#define PLAYER_CMD_ENEMYFLAGACTION_VERSION 2
+/// Version 2 and 3 are fully compatible: version 2 soldiers will never retreat
+/// but do not crash game.
+#define PLAYER_CMD_ENEMYFLAGACTION_VERSION 3
 void Cmd_EnemyFlagAction::Read
 	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
@@ -1081,7 +1083,7 @@ void Cmd_EnemyFlagAction::Read
 			}
 			fr           .Unsigned8 ();
 			number   = fr.Unsigned8 ();
-			fr           .Unsigned8 ();
+			retreat  = fr.Unsigned8 ();
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -1107,7 +1109,7 @@ void Cmd_EnemyFlagAction::Write
 	// Now param
 	fw.Unsigned8 (sender());
 	fw.Unsigned8 (number);
-	fw.Unsigned8 (0);
+	fw.Unsigned8 (retreat);
 }
 
 }

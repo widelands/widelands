@@ -770,7 +770,8 @@ void Game::send_player_change_soldier_capacity
 void Game::send_player_enemyflagaction
 	(Flag  const &       flag,
 	 Player_Number const who_attacks,
-	 uint32_t      const num_soldiers)
+	 uint32_t      const num_soldiers,
+	 uint32_t      const retreat)
 {
 	if
 		(1
@@ -780,7 +781,7 @@ void Game::send_player_enemyflagaction
 		 	 	(flag.get_building()->get_position(), map().get_width())))
 		send_player_command
 			(*new Cmd_EnemyFlagAction
-			 	(get_gametime(), who_attacks, flag, num_soldiers));
+			 	(get_gametime(), who_attacks, flag, num_soldiers, retreat));
 }
 
 

@@ -631,7 +631,8 @@ uint32_t Player::findAttackSoldiers
  * to attack, so pretending we have more types is pointless.
  */
 void Player::enemyflagaction
-	(Flag & flag, Player_Number const attacker, uint32_t const count)
+	(Flag & flag, Player_Number const attacker, uint32_t const count,
+	 uint32_t retreat)
 {
 	if      (attacker != player_number())
 		log
@@ -649,7 +650,7 @@ void Player::enemyflagaction
 					container_iterate_const(std::vector<Soldier *>, attackers, i)
 						ref_cast<MilitarySite, PlayerImmovable>
 							(*(*i.current)->get_location(egbase()))
-						.sendAttacker(**i.current, *building);
+						.sendAttacker(**i.current, *building, retreat);
 				}
 }
 

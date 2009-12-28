@@ -425,7 +425,8 @@ struct Player :
 		(Flag                   &,
 		 std::vector<Soldier *> * soldiers = 0,
 		 uint32_t                 max = std::numeric_limits<uint32_t>::max());
-	void enemyflagaction(Flag &, Player_Number attacker, uint32_t count);
+	void enemyflagaction
+		(Flag &, Player_Number attacker, uint32_t count, uint32_t retreat);
 
 	uint32_t casualties() const {return m_casualties;}
 	uint32_t kills     () const {return m_kills;}

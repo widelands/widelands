@@ -2018,6 +2018,7 @@ bool DefaultAI::consider_attack(int32_t gametime) {
 	Building * target = ms; // dummy initialisation to silence the compiler
 	int32_t    chance = 0;
 	int32_t    attackers = 0;
+	int32_t    retreat = ms->owner().get_retreat_percentage();
 
 	// Search in a radius of the vision of the militarysite and collect
 	// information about immovables in the area
@@ -2072,8 +2073,13 @@ bool DefaultAI::consider_attack(int32_t gametime) {
 		return false;
 	}
 
+	if (ms->owner().is_retreat_change_allowed()) {
+		// \todo Player is allowed to modify his retreat value
+	}
+
 	// Attack the selected target.
-	game().send_player_enemyflagaction(target->base_flag(), pn, attackers);
+	game().send_player_enemyflagaction
+		(target->base_flag(), pn, attackers, retreat);
 
 	// Don't attack to fast again - homecoming soldiers must get healed first
 	next_attack_consideration_due = (gametime % 51 + 10) * 1000 + gametime;

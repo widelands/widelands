@@ -331,7 +331,7 @@ void MilitarySite::remove_worker(Worker & w)
 	ProductionSite::remove_worker(w);
 
 	if (upcast(Soldier, soldier, &w))
-		popSoldierJob(soldier);
+		popSoldierJob(soldier, 0, 0);
 
 	update_soldier_request();
 }
@@ -351,15 +351,20 @@ bool MilitarySite::get_building_work(Game & game, Worker & worker, bool)
 		}
 
 		bool stayhome;
-		if (Map_Object * const enemy = popSoldierJob(soldier, &stayhome)) {
+		uint32_t retreat;
+		if
+			(Map_Object * const enemy
+			 =
+			 popSoldierJob(soldier, &stayhome, &retreat))
+		{
 			if (upcast(Building, building, enemy)) {
 				soldier->start_task_attack
-					(game, *building, owner().get_retreat_percentage());
+					(game, *building, retreat);
 				return true;
 			} else if (upcast(Soldier, opponent, enemy)) {
 				if (!opponent->getBattle()) {
 					soldier->start_task_defense
-						(game, stayhome, owner().get_retreat_percentage());
+						(game, stayhome, retreat);
 					if (stayhome)
 						opponent->send_signal(game, "sleep");
 					return true;
@@ -534,6 +539,7 @@ bool MilitarySite::attack(Soldier & enemy)
 		sj.soldier = defender;
 		sj.enemy = &enemy;
 		sj.stayhome = true;
+		sj.retreat = 0;         // Flag defenders could not retreat
 		m_soldierjobs.push_back(sj);
 
 		defender->update_task_buildingwork(game);
@@ -717,7 +723,8 @@ void MilitarySite::clear_requirements ()
 	m_soldier_requirements = Requirements();
 }
 
-void MilitarySite::sendAttacker(Soldier & soldier, Building & target)
+void MilitarySite::sendAttacker
+	(Soldier & soldier, Building & target, uint32_t retreat)
 {
 	assert(isPresent(soldier));
 
@@ -728,6 +735,7 @@ void MilitarySite::sendAttacker(Soldier & soldier, Building & target)
 	sj.soldier  = &soldier;
 	sj.enemy    = &target;
 	sj.stayhome = false;
+	sj.retreat  = retreat;
 	m_soldierjobs.push_back(sj);
 
 	soldier.update_task_buildingwork
@@ -750,13 +758,15 @@ bool MilitarySite::haveSoldierJob(Soldier & soldier)
  * to attack, and remove the job.
  */
 Map_Object * MilitarySite::popSoldierJob
-	(Soldier * const soldier, bool * const stayhome)
+	(Soldier * const soldier, bool * const stayhome, uint32_t * const retreat)
 {
 	container_iterate(std::vector<SoldierJob>, m_soldierjobs, i)
 		if (i.current->soldier == soldier) {
 			Map_Object * const enemy = i.current->enemy.get(owner().egbase());
 			if (stayhome)
 				*stayhome = i.current->stayhome;
+			if (retreat)
+				*retreat = i.current->retreat;
 			m_soldierjobs.erase(i.current);
 			return enemy;
 		}

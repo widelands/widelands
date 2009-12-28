@@ -103,7 +103,7 @@ public:
 	 * Launch the given soldier on an attack towards the given
 	 * target building.
 	 */
-	void sendAttacker(Soldier &, Building &);
+	void sendAttacker(Soldier &, Building &, uint32_t);
 
 	/// This methods are helper for use at configure this site.
 	void set_requirements  (Requirements const &);
@@ -127,7 +127,8 @@ private:
 	static void request_soldier_callback
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
-	Map_Object * popSoldierJob(Soldier *, bool * stayhome = 0);
+	Map_Object * popSoldierJob
+		(Soldier *, bool * stayhome = 0, uint32_t * retreat = 0);
 	bool haveSoldierJob(Soldier &);
 	bool military_presence_kept(Game &);
 	void informPlayer(Game &, bool discovered = false);
@@ -147,6 +148,7 @@ private:
 		Soldier * soldier;
 		Object_Ptr enemy;
 		bool stayhome;
+		uint32_t retreat;
 	};
 	std::vector<SoldierJob> m_soldierjobs;
 };

@@ -26,9 +26,9 @@
 
 namespace UI {
 
+#if 0
 static char const * const pic_more_soldiers    = "pics/attack_add_soldier.png";
 static char const * const pic_less_soldiers    = "pics/attack_sub_soldier.png";
-#if 0
 static char const * const pic_more_brave       = "pics/attack_add_soldier.png";
 static char const * const pic_less_brave       = "pics/attack_sub_soldier.png";
 #endif
@@ -45,27 +45,19 @@ AttackBox::AttackBox
 	m_pl(player),
 	m_map(&m_pl->egbase().map()),
 	m_node(target),
-#if 0
 	m_slider_retreat(0),
-#endif
 	m_slider_soldiers(0),
-	m_text_soldiers(0)
-#if 0
+	m_text_soldiers(0),
 	m_text_retreat(0)
-#endif
 {
 	init();
 }
 
 AttackBox::~AttackBox() {
-#if 0
 	delete m_slider_retreat;
-#endif
 	delete m_slider_soldiers;
 	delete m_text_soldiers;
-#if 0
 	delete m_text_retreat;
-#endif
 }
 
 uint32_t AttackBox::get_max_attackers() {
@@ -123,11 +115,11 @@ void AttackBox::add_button
 	Callback_Button<AttackBox> * button =
 		new Callback_Button<AttackBox>
 			(box,
-			 2, 2, 30, 30,
+			 8, 8, 26, 26,
 			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 			 fn,
 			 *this,
- 			 text,
+			 text,
 			 tooltip_text);
 	box->add
 		(button, Box::AlignTop);
@@ -201,7 +193,6 @@ void AttackBox::init() {
 		 _("Send more soldiers"));
 
 	/// Retreat line
-#if 0
 	linebox = new UI::Box
 		(this,
 		 0, 0,
@@ -218,7 +209,6 @@ void AttackBox::init() {
 	m_slider_retreat->changed.set(this, &AttackBox::update_attack);
 	add_text(linebox, _("Once injured"));
 	m_slider_retreat->set_enabled(m_pl->is_retreat_change_allowed());
-#endif
 
 	/// Add here another attack configuration params
 }
@@ -237,12 +227,10 @@ uint32_t AttackBox::soldiers() const {
 	return m_slider_soldiers->get_value();
 }
 
-#if 0
 uint32_t AttackBox::retreat() const {
 	assert(m_slider_retreat);
 	return m_slider_retreat->get_value();
 }
-#endif
 
 
 }
