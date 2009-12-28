@@ -46,6 +46,7 @@ public:
 	bool is_snap_target() const {return true;}
 
 	int32_t get_value() const {return m_value;}
+	void set_value(int32_t);
 
 	void set_enabled(bool enabled);
 
