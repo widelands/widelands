@@ -960,8 +960,17 @@ void Soldier::defense_update(Game & game, State & state)
 	}
 
 	PlayerImmovable * const location = get_location(game);
-	Flag & baseflag = location->base_flag();
 	BaseImmovable * const position = game.map()[get_position()].get_immovable();
+
+
+	/**
+	 * Attempt to fix a crash when player bulldozes a building being defended
+	 * by soldiers.
+	 */
+	if (not location or not position)
+		return pop_task(game);
+
+	Flag & baseflag = location->base_flag();
 
 	if (signal == "blocked")
 		// Wait before we try again. Note that this must come *after*
