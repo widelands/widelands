@@ -19,6 +19,7 @@
 
 #include "fieldaction.h"
 
+#include "attack_box.h"
 #include "logic/attackable.h"
 #include "logic/cmd_queue.h"
 #include "economy/economy.h"
@@ -197,8 +198,6 @@ struct FieldActionWindow : public UI::UniqueWindow {
 	void building_icon_mouse_in (Widelands::Building_Index::value_t);
 	void act_geologist();
 	void act_attack();      /// Launch the attack
-	void act_attack_more(); /// Increase the number of soldiers to be launched
-	void act_attack_less(); /// Decrease the number of soldiers to be launched
 
 	/// Total number of attackers available for a specific enemy flag
 	uint32_t get_max_attackers();
@@ -229,9 +228,7 @@ private:
 	PictureID workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
 
 	/// Variables to use with attack dialog.
-	UI::Textarea * m_text_attackers;
-	uint32_t       m_attackers;      //  0 - Number of available soldiers.
-	int32_t        m_attackers_type; //  STRONGEST - WEAKEST ...
+	UI::AttackBox * m_attack_box;
 };
 
 static char const * const pic_tab_buildroad  = "pics/menu_tab_buildroad.png";
@@ -261,8 +258,6 @@ static char const * const pic_abort          = "pics/menu_abort.png";
 static char const * const pic_geologist      = "pics/menu_geologist.png";
 
 static char const * const pic_tab_attack     = "pics/menu_tab_attack.png";
-static char const * const pic_attack_more    = "pics/attack_add_soldier.png";
-static char const * const pic_attack_less    = "pics/attack_sub_soldier.png";
 static char const * const pic_attack         = "pics/menu_attack.png";
 
 
@@ -285,7 +280,7 @@ FieldActionWindow::FieldActionWindow
 	m_fastclick(true),
 	m_best_tab(0),
 	m_workarea_preview_job_id(Overlay_Manager::Job_Id::Null()),
-	m_text_attackers(0)
+	m_attack_box(0)
 {
 	ib->set_sel_freeze(true);
 
@@ -305,7 +300,7 @@ FieldActionWindow::~FieldActionWindow()
 	if (m_workarea_preview_job_id)
 		m_overlay_manager.remove_overlay(m_workarea_preview_job_id);
 	ibase().set_sel_freeze(false);
-	delete m_text_attackers;
+	delete m_attack_box;
 }
 
 
@@ -486,51 +481,26 @@ void FieldActionWindow::add_buttons_auto()
 
 void FieldActionWindow::add_buttons_attack ()
 {
-	UI::Box * attackbox = 0;
+	UI::Box * a_box = 0;
+	a_box = new UI::Box
+		(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
-	// Add attack button
-	if (m_plr and m_plr->player_number() != m_node.field->get_owned_by()) {
+	m_attack_box = new UI::AttackBox
+		(a_box, m_plr, &m_node, 0, 0);
+	a_box->add(m_attack_box, UI::Box::AlignTop);
 
-		// The box with attack buttons
-		attackbox = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
+	add_button
+		(a_box,
+		 pic_attack,
+		 &FieldActionWindow::act_attack,
+		 _("Start attack"));
 
-		if
-			(upcast
-			 	(Widelands::Attackable, attackable, m_map->get_immovable(m_node)))
-			if (attackable->canAttack()) {
-				m_attackers = 0;
-				m_attackers_type = STRONGEST;
-				add_button
-					(attackbox,
-					 pic_attack_less,
-					 &FieldActionWindow::act_attack_less,
-					 _("Send less soldiers"),
-					 true);
-
-				m_text_attackers =
-					new UI::Textarea(attackbox, 90, 0, "000/000", UI::Align_Center);
-				attackbox->add(m_text_attackers, UI::Box::AlignTop);
-
-				add_button
-					(attackbox,
-					 pic_attack_more,
-					 &FieldActionWindow::act_attack_more,
-					 _("Send more soldiers"),
-					 true);
-
-				add_button
-					(attackbox,
-					 pic_attack,
-					 &FieldActionWindow::act_attack,
-					 _("Start attack"));
-				act_attack_more();
-			}
+	if (a_box and a_box->get_nritems()) { //  add tab
+		m_attack_box->resize();
+		a_box->resize();
+		add_tab(pic_tab_attack, a_box, _("Attack"));
 	}
 
-	if (attackbox and attackbox->get_nritems()) { //  add tab
-		attackbox->resize();
-		add_tab(pic_tab_attack, attackbox, _("Attack"));
-	}
 }
 
 /*
@@ -921,43 +891,16 @@ void FieldActionWindow::act_attack ()
 {
 	Game & game = ref_cast<Game, Editor_Game_Base>(ibase().egbase());
 
+	assert(m_attack_box);
 	if (upcast(Building, building, game.map().get_immovable(m_node)))
-		if (m_attackers > 0)
+		if (m_attack_box->soldiers() > 0)
 			game.send_player_enemyflagaction
 				(building->base_flag(),
 				 ref_cast<Interactive_Player const, Interactive_Base const>
 				 	(ibase())
 				 .player_number(),
-				 m_attackers); //  number of soldiers
-
+				 m_attack_box->soldiers()); //  number of soldiers
 	okdialog();
-}
-
-void FieldActionWindow::act_attack_more() {
-	char buf[20];
-	uint32_t available = get_max_attackers();
-
-	m_attackers = m_attackers < available ? m_attackers + 1 : available;
-
-	sprintf(buf, "%d/%d", m_attackers, available);
-	m_text_attackers->set_text (buf);
-}
-
-uint32_t FieldActionWindow::get_max_attackers() {
-	if (upcast(Building, building, m_map->get_immovable(m_node)))
-		if (&building->owner() != m_plr)
-			return m_plr->findAttackSoldiers(building->base_flag());
-	return 0;
-}
-
-void FieldActionWindow::act_attack_less() {
-	char buf[20];
-	uint32_t available = get_max_attackers();
-
-	m_attackers = m_attackers > 0 ? m_attackers - 1 : 0;
-
-	sprintf(buf, "%d/%d", m_attackers, available);
-	m_text_attackers->set_text (buf);
 }
 
 /*
