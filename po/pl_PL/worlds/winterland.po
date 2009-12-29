@@ -1,13 +1,12 @@
 # Widelands po/pl_PL/worlds/winterland.po
 # Copyright (C) 2008 Widelands Development Team
 # Endrju <endrjux@gmail.com>, 2005.
-# Stanislaw Gackowski <soeb@soeb.eu>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4529\n"
+"Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-09-18 16:56+0000\n"
+"POT-Creation-Date: 2009-12-29 19:54+0000\n"
 "PO-Revision-Date: 2009-04-17 19:12+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"

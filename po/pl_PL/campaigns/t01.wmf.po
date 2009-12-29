@@ -1,13 +1,12 @@
 # Widelands po/pl_PL/campaigns/t01.wmf.po
 # Copyright (C) 2008 Widelands Development Team
 # Andrzej 'Endrju' Krentosz <endrjux@gmail.com>, 2006.
-# Stanislaw Gackowski <soeb@soeb.eu>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4529\n"
+"Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-09-18 16:56+0000\n"
+"POT-Creation-Date: 2009-12-29 19:54+0000\n"
 "PO-Revision-Date: 2009-06-14 16:45+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -39,12 +38,12 @@ msgstr "Opowieść się rozpoczyna..."
 
 #: ../../../campaigns/t01.wmf/event:32 ../../../campaigns/t01.wmf/event:45
 #: ../../../campaigns/t01.wmf/event:58 ../../../campaigns/t01.wmf/event:71
-#: ../../../campaigns/t01.wmf/event:110 ../../../campaigns/t01.wmf/event:126
-#: ../../../campaigns/t01.wmf/event:141 ../../../campaigns/t01.wmf/event:157
-#: ../../../campaigns/t01.wmf/event:172 ../../../campaigns/t01.wmf/event:188
-#: ../../../campaigns/t01.wmf/event:203 ../../../campaigns/t01.wmf/event:233
-#: ../../../campaigns/t01.wmf/event:248 ../../../campaigns/t01.wmf/event:263
-#: ../../../campaigns/t01.wmf/event:278 ../../../campaigns/t01.wmf/event:310
+#: ../../../campaigns/t01.wmf/event:106 ../../../campaigns/t01.wmf/event:122
+#: ../../../campaigns/t01.wmf/event:137 ../../../campaigns/t01.wmf/event:153
+#: ../../../campaigns/t01.wmf/event:168 ../../../campaigns/t01.wmf/event:184
+#: ../../../campaigns/t01.wmf/event:199 ../../../campaigns/t01.wmf/event:229
+#: ../../../campaigns/t01.wmf/event:244 ../../../campaigns/t01.wmf/event:259
+#: ../../../campaigns/t01.wmf/event:274 ../../../campaigns/t01.wmf/event:306
 msgid "OK"
 msgstr "OK"
 
@@ -60,153 +59,153 @@ msgstr " \"Prochy mojego ojca spoczywają spokojnie w ziemi którą oczyścił z
 msgid " \"As father told me, there will be times to fight and times to lie and wait, trying not to sleep or die before the right time comes. And so I do... wait.\" "
 msgstr " \"Jak powiedział muj ojciec, będą czasy walki i czasy odpoczynku, czasy leżenia i czekania przy których będziemy próbować nie zasnąć lub umrzeć, zanim przyjdą czasy właściwe. I to ja robię... czekam.\" "
 
-#: ../../../campaigns/t01.wmf/event:102
+#: ../../../campaigns/t01.wmf/event:98
 msgid "An old man says..."
 msgstr "Stary człowiek mówi..."
 
-#: ../../../campaigns/t01.wmf/event:104
+#: ../../../campaigns/t01.wmf/event:100
 msgid " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my counsel through these darkened days.\" "
 msgstr " \"Chwała wodzu! Mam na imię Khantrukh, przeżyłem na tym świecie już wiele lat. Proszę, pozwól mi pomóc sobie moją radą w te okrutne, ciemne dni.\""
 
-#: ../../../campaigns/t01.wmf/event:106
+#: ../../../campaigns/t01.wmf/event:102
 msgid "Somebody comes upon to you"
 msgstr "Ktoś do Ciebie podchodzi"
 
-#: ../../../campaigns/t01.wmf/event:116
+#: ../../../campaigns/t01.wmf/event:112
 msgid "Khantrukh continues..."
 msgstr "Khantrukh mówi dalej..."
 
-#: ../../../campaigns/t01.wmf/event:118
+#: ../../../campaigns/t01.wmf/event:114
 msgid " \"None but the gods know how long we have to remain hidden here. The warriors hope we may march back gloriously any day now, but I strongly doubt that will happen soon. And the days are already getting shorter and colder...<br> We should prepare, in case we have to face the winter in these harsh lands. I believe to the east of our campside are a few places where we could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr " \"Tylko bogowie wiedzą jak długo mamy pozostać tutaj, w ukryciu. Wojownicy mają nadzieje, że będą mogli powrócić chwalebnie w któryś dzień, ale wątpię, że stanie się to niebawem. Dni już teraz robią się co raz krótsze i zimniejsze...<br> Powinniśmy się przygotować, jeżeli zamierzamy przetrwać zimę w tych niemiłych krainach. Sądzę, że wschodnia część obozu będzie idealna by wznieść chatki drwala .\"<br><br>-- NOWE CELE --<br>"
 
-#: ../../../campaigns/t01.wmf/event:119 ../../../campaigns/t01.wmf/objective:7
+#: ../../../campaigns/t01.wmf/event:115 ../../../campaigns/t01.wmf/objective:7
 msgid "* Press SPACE to see where you can build.<br> The red spots show you where a small building - like a lumberjack's hut - may be built.<br>"
 msgstr "* Naciśnij Spację aby zobaczyć gdzie możesz budować.<br> Czerwone punkty pokazują gdzie można budować małe budynki, takie jak naprzykład chata drwala.<br>"
 
-#: ../../../campaigns/t01.wmf/event:120 ../../../campaigns/t01.wmf/objective:8
+#: ../../../campaigns/t01.wmf/event:116 ../../../campaigns/t01.wmf/objective:8
 msgid "* Build a lumberjack's hut at the red spot directly right of your headquarters by clicking at it and selecting lumberjack's hut.<br>"
 msgstr "* Zbuduj chatę drwala na czerwonym punkcie bezpośrednio w prawo od swojej kwatery głównej, poprzez naciśnięcie na niego i wybranie chaty drwala.<br>"
 
-#: ../../../campaigns/t01.wmf/event:122 ../../../campaigns/t01.wmf/event:137
-#: ../../../campaigns/t01.wmf/event:153 ../../../campaigns/t01.wmf/event:168
-#: ../../../campaigns/t01.wmf/event:184 ../../../campaigns/t01.wmf/event:199
+#: ../../../campaigns/t01.wmf/event:118 ../../../campaigns/t01.wmf/event:133
+#: ../../../campaigns/t01.wmf/event:149 ../../../campaigns/t01.wmf/event:164
+#: ../../../campaigns/t01.wmf/event:180 ../../../campaigns/t01.wmf/event:195
 msgid "The advisor"
 msgstr "Doradca"
 
-#: ../../../campaigns/t01.wmf/event:132
+#: ../../../campaigns/t01.wmf/event:128
 msgid "The elder remarks..."
 msgstr "Starzec zauważa..."
 
-#: ../../../campaigns/t01.wmf/event:134
+#: ../../../campaigns/t01.wmf/event:130
 msgid " \"Obviously, it would be too draining for our people to walk all the way to the lumberjack's hut through the wilderness. We will have to make a path between our hall and the lumberjack's hut. It's not a hard guess that the men would appreciate a way as short and even as possible - the wood surely will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Oczywiście, było by to dla naszych ludzi zbyt męczące iść całą drogę do chatki drwala przez tą puszczę. Będziemy musieli zbudować drogę między halą i chatą drwala. Nie jest trudne do odgadnięcią, że ludzie by woleli drogę krótkę i prostą jak tylko możliwe - drzewo na pewno będzie wystarczająca ciężkie.\"<br><br>-- NOWE CELE --<br> "
 
-#: ../../../campaigns/t01.wmf/event:135 ../../../campaigns/t01.wmf/objective:9
+#: ../../../campaigns/t01.wmf/event:131 ../../../campaigns/t01.wmf/objective:9
 msgid "* Build a road between your headquarters and the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You should connect it to another flag with a road.<br> If you click on a flag, little symbols will appear around it to show you in which directions you can build the road.<br> The colour of those symbols indicate how steep the road will be. Green is flat, yellow is steep and red is very steep. The steeper the step is, the harder it will be for your people to walk on it.<br> You can click on any of the symbols to build the first step of the road there. New symbols will appear to show you where the next step can go, and so on. However, you can also click further away to build several steps at once. Click on the flag at the headquarters to finish the road."
 msgstr "* Zbuduj drogę pomiędzy kwaterą główną a chatką drwala.<br> Zrobisz to klikając na flagę przy budynku a następnie na przycisku drogi. Dookoła flagi pojawią się symbole pokazujące jak stroma będzie droga w tym kierunku.<br> Zielona jest płaska, żółta stroma a czerwona bardzo stroma .<br> Im droga jest bardziej stroma, tym Twoim ludziom będzie trudniej po niej chodzić.<br> Kiedy klikniesz na jeden z symboli wybudujesz w tym kierunku kawałek drogi a następnie musisz wybrać kolejny kierunek. Po za tym, możesz kliknąć trochę dalej, aby wybudować dłuższy kawałek na raz. Naciśnij na flagę u kwatery głównej, aby dokończyć drogę."
 
-#: ../../../campaigns/t01.wmf/event:148
+#: ../../../campaigns/t01.wmf/event:144
 msgid "Khantrukh remembers..."
 msgstr "Khantrukh przypomina..."
 
-#: ../../../campaigns/t01.wmf/event:150
+#: ../../../campaigns/t01.wmf/event:146
 msgid " \"There is an old saying:<br> 'A burden divided is easier to endure.'<br> A crossroads on the way between our site and the lumberjack's hut would ease the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr "\"Jest stare powiedzenie:<br> \"Podzielony ciężar łatwiej jest nosić.\"<br> Skrzyżowanie na drodze pomiędzy nami i chatką drwala ułatwi drogę naszym tragarzom. \"<br><br>-- NOWE CELE --<br>"
 
-#: ../../../campaigns/t01.wmf/event:151
+#: ../../../campaigns/t01.wmf/event:147
 #: ../../../campaigns/t01.wmf/objective:17
 msgid "* Place a flag in the middle of the road.<br> There is a flag symbol in the mid of the way you just built. You place a flag there by clicking on the symbol and then clicking on the flag button in the consequently appearing menu. This splits the work of carrying the wood between two carriers.<br> When much wares are being transported between two points, additional flags in between make them get faster to their destination, thus improving your infrastructure.<br>"
 msgstr "* Na drodze zauważ symbol flagi.<br> Kiedy na niego klikniesz a następnie klikniesz przycisk z flagą, umieścisz w tym miejscu flagę. Droga będzie podzielona między dwóch tragarzy co przyśpieszy transport w przypadku potrzeby przenoszenią większej ilości surowców. To w efekcie polepszy i przyśpieszy Twoją infrastrukturę.<br>"
 
-#: ../../../campaigns/t01.wmf/event:163
+#: ../../../campaigns/t01.wmf/event:159
 msgid "The old man looks to the sky..."
 msgstr "Stary człowiek patrzy w niebo..."
 
-#: ../../../campaigns/t01.wmf/event:165
+#: ../../../campaigns/t01.wmf/event:161
 msgid " \"The northern winds tell us that the coming winter will be a long and cruel one. One lumberjack's hut will not be enough to still the needs of our people. More trees await our axes south of our new crossroads - let us raise a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Północne wiatry zapowiadają, że nadchodząca zima będzie długa i sroga. Jedna chatka drwala nie zaspokoi nasze potrzeby. Drzewa czekają na nasze topory na południe od nowego skrzyżowania - postawmy tam nową chatkę drwala!\"<br><br>--NOWE CELE--<br>"
 
-#: ../../../campaigns/t01.wmf/event:166
+#: ../../../campaigns/t01.wmf/event:162
 #: ../../../campaigns/t01.wmf/objective:18
 msgid "* Place a lumberjack's hut directly south of the flag you just placed on the road. Connect the implied flag with the new lumberjack's hut afterwards.<br> Note that instead of building a road step by step, you may also directly click at the destination to build the entire road at once."
 msgstr "* Postaw chatkę drwala dokładnie na południe od flagi którą miałeś umieścić na drodze. Połącz wspomnianą flagę z tą która znajdzie się przy nowej chatce drwala.<br> Zauważ, że zamiast budować drogę po kawałku, możesz bezpośrednio połączyć flagi i zbudować całą drogę od razu."
 
-#: ../../../campaigns/t01.wmf/event:179
+#: ../../../campaigns/t01.wmf/event:175
 msgid "Khantrukh nods..."
 msgstr "Khantrukh przytakuje..."
 
-#: ../../../campaigns/t01.wmf/event:181
+#: ../../../campaigns/t01.wmf/event:177
 msgid " \"Of course, if we intended to build a bigger settlement, much more lumberjack's huts would be advisable, but this should do for now.<br> But never forget - these forests are our legacy, entrusted to us by our ancestors. We must always respect and nourish them. What we take, we must give back again.<br> So, in order to replace the trees we chop down, we should build a ranger's hut, preferably close to the lumberjack's hut.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Oczywiście, jeżeli chcemy wznieść większą osadę, będzie potrzebne dużo więcej chat drwali, ale na teraz ta ilość powinna wystarczyć.<br> Nigdy nie zapomnij, że te lasy to dziedzictwo powierzone nam przez naszych przodków. Musisz pamiętać, żeby zawsze je szanować: co zabierzemy, musimy i zwrócić spowrotem.<br>Tak więc, aby zastąpić ścięte drzewa, musimy wznieść leśniczówkę możliwie jak najbliżej chaty drwala.\"<br><br>--NOWE CELE--<br>"
 
-#: ../../../campaigns/t01.wmf/event:182
+#: ../../../campaigns/t01.wmf/event:178
 #: ../../../campaigns/t01.wmf/objective:26
 msgid "* Build a ranger's hut to the east of the first lumberjack's hut."
 msgstr "* Zbuduj leśniczówkę na wschód od pierwszej chatki drwala."
 
-#: ../../../campaigns/t01.wmf/event:194
+#: ../../../campaigns/t01.wmf/event:190
 msgid "The elder speaks..."
 msgstr "Starszy mówi..."
 
-#: ../../../campaigns/t01.wmf/event:196
+#: ../../../campaigns/t01.wmf/event:192
 msgid " \"I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to conquer back our home might take a long time and it would seem wise to make preparations.<br> I would advise that we obtain stones for the future - who knows what fortifications we might be forced to build very soon. And - like a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr " \"Zdaję sobie sprawę, wodzu, że ani Ty ani Twoi wojownicy nie pragną zostać w tym opuszczonym miejscu na dłużej. Mimo to nasza bitwa, aby przebić się z powrotem do domu może potrwać długo i mądre by było się najpierw przygotować.<br> Sugeruję abyśmy nazbierali kamienia na później - kto wie jakie fortyfikacje będziemy musieli wznieść w przyszłości? Cudownym zrządzeniem losu kamienie znajdują się dosyć niedaleko...\"<br><br>--NOWE CELE--<br>"
 
-#: ../../../campaigns/t01.wmf/event:197
+#: ../../../campaigns/t01.wmf/event:193
 #: ../../../campaigns/t01.wmf/objective:34
 msgid "* Build two quarries southwest of your headquarters."
 msgstr "* Zbuduj dwa kamieniołomy na południowy zachód od kwatery głównej."
 
-#: ../../../campaigns/t01.wmf/event:224 ../../../campaigns/t01.wmf/event:239
+#: ../../../campaigns/t01.wmf/event:220 ../../../campaigns/t01.wmf/event:235
 msgid "Thron speaks..."
 msgstr "Tron mówi..."
 
-#: ../../../campaigns/t01.wmf/event:226
+#: ../../../campaigns/t01.wmf/event:222
 msgid " \"In another sleepless night, I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br> They are a constant reminder why we had to hide here... and why we must return in the end!\" "
 msgstr " \"Kolejnej bezsennej nocy poszedłem na wzgórze i spojrzałem na północ. Ogień wciąż szalał pochłaniająć dziedzictwo mego ojca.<br> Jest dla nas stałym przypomnieniem, dlaczego musimy się tutaj ukrywać...<br> i dlaczego musimy na koniec wrócić!\" "
 
-#: ../../../campaigns/t01.wmf/event:228
+#: ../../../campaigns/t01.wmf/event:224
 msgid "In the night"
 msgstr "W nocy"
 
-#: ../../../campaigns/t01.wmf/event:241
+#: ../../../campaigns/t01.wmf/event:237
 msgid " \"Once again, I went up to my father's tomb, in a sacred grove at the foot of the great spire of Kal'mavrath. I just stood there and felt neither the hours pass nor the cold rain pouring down from a darkened sky...<br> Somehow it felt like a farewell. For the first time, I wondered what the future might hold for me...\" "
 msgstr " \"Jeszcze raz wybrałem się na grobowiec mojego ojca do upiornego lasku u stóp iglicy Kal'mavrath. Stałem tam i nie czułem nic poza upływającymi godzinami i deszczem lejącym się z ciemnego nieba...<br> Czułem, jak gdyby to było pożegnanie. Pierwszy raz zastanowiłem się, co przyszłość może kryć dla mnie...\" "
 
-#: ../../../campaigns/t01.wmf/event:243
+#: ../../../campaigns/t01.wmf/event:239
 msgid "At the grave"
 msgstr "Nad grobem"
 
-#: ../../../campaigns/t01.wmf/event:254
+#: ../../../campaigns/t01.wmf/event:250
 msgid "Thron says thoughtfully..."
 msgstr "Thron mówi zamyślenie..."
 
-#: ../../../campaigns/t01.wmf/event:256
+#: ../../../campaigns/t01.wmf/event:252
 msgid " \"Some time ago, Boldreth came to me. His advice was to move to a place closer to home - to strike at the first sign of my brother's forces wavering.<br> But I look over the forests and I still see black smoke rising to the sky. I know - it is too early yet, and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed that too rash a return would cause both on our and the other side...\" "
 msgstr " \"Jakiś czas temu Boldreth przyszedł do mnie i poradził mi, aby przenieść się w jakieś miejsce bliżej domu, abyśmy mogli uderzyć tylko kiedy wojska mojego brata dadzą znak.<br> Spojrzałem jednak nad lasy, i ciągle widzę czarny dym unoszący się do nieba. Wiem, że jest to jeszcze za wcześnie i to, na co mamy nadzieję nie stanie się w najbliższej przyszłości. Może i on ma rację, ale boje się. że rozlew krwi nastąpi na obu stronach...\" "
 
-#: ../../../campaigns/t01.wmf/event:258
+#: ../../../campaigns/t01.wmf/event:254
 msgid "The other day"
 msgstr "Kolejny dzień..."
 
-#: ../../../campaigns/t01.wmf/event:269
+#: ../../../campaigns/t01.wmf/event:265
 msgid "Thron looks furious..."
 msgstr "Thron wygląda wściekle..."
 
-#: ../../../campaigns/t01.wmf/event:271
+#: ../../../campaigns/t01.wmf/event:267
 msgid " \"Today, my warriors picked up an old man, wandering sick and wounded through the dark forest. We listened in horror when he told us of the atrocities taking place in Al'thunran.<br> I hereby renew my oath - I will stop this madness at any cost!\" "
 msgstr "\"Dzisiaj moi wojownicy znaleźli starego człowieka, który wędrował chory i poraniony przez ciemny las. Przerażeni słuchaliśmy, kiedy opowiadał o okrucieństwach mających miejsce w Al'thunran.<br> Niniejszym odnawiam moją przysięgę, zatrzymam to szaleństwo nie ważne za jaką cenę!\" "
 
-#: ../../../campaigns/t01.wmf/event:273
+#: ../../../campaigns/t01.wmf/event:269
 msgid "The oath"
 msgstr "Przysięga"
 
-#: ../../../campaigns/t01.wmf/event:304
+#: ../../../campaigns/t01.wmf/event:300
 msgid " \"Very well done, chieftain. We now have all we need to face the winter and may prepare ourselves for the battles ahead.<br><br>--------------------- VICTORY! ----------------------<br><br> You may continue if you wish. Otherwise, move on to the next mission.\" "
 msgstr "\"Dobra robota Wodzu. Mamy teraz wszystko co potrzebne by stawić czoła zimie i możemy się przygotować na czekające nas bitwy.<br><br>--------------------- ZWYCIĘSTWO! ---------------------<br><br> Możesz kontynuować grę jeżeli chcesz lub przejść do kolejnej misji.\" "
 
-#: ../../../campaigns/t01.wmf/event:306
+#: ../../../campaigns/t01.wmf/event:302
 msgid "Mission Complete"
 msgstr "Misja zakończona"
 

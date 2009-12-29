@@ -1,14 +1,13 @@
 # Widelands po/pl_PL/maps.po
 # Copyright (C) 2008 Widelands Development Team
 # Jacek Wolszczak <shutdownrunner@o2.pl>, 2008.
-# Stanislaw Gackowski <soeb@soeb.eu>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4529\n"
+"Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-09-18 16:56+0000\n"
-"PO-Revision-Date: 2009-09-03 14:16+0100\n"
+"POT-Creation-Date: 2009-12-29 19:54+0000\n"
+"PO-Revision-Date: 2009-12-06 09:32+0100\n"
 "Last-Translator: Stanislaw Gackowski <soeb@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -32,25 +31,45 @@ msgstr "Imperium - Miesiące wygnania"
 msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
 msgstr "Sześć miesięcy temu Lucjusz, młody generał Imperium, został wysłany z oddziałem 150 żołnierzy na granicę wśród północnych lasów, gdzie krzyżyją się ziemie Barbarzyńców i Imperium. Miał za zadanie bronić tej ziemi. Na początku było spokojnie, nawet rozmawiał z dziećmi barbarzyńców i myślał o spokojnym życiu w harmonii z tym archaicznym ludem. Poczuł się bezpieczniej, a jego armia mniej uwagi poświęcała potencjałowi wroga. To był ich błąd. Pewnej marcowej nocy jego nieprzygotowane do obrony oddział został zaatakowany przez 100 barbarzyńskich piechurów i zdziesiątkowany. Tylko dzięki czystemu przypadkowi on i garstka jego żołnierzy zdołali przeżyć."
 
-#: ../../campaigns/cconfig:51
+#: ../../campaigns/cconfig:36
+msgid "Atlanteans - the new rise"
+msgstr "Atlanci - nowe powstanie"
+
+#: ../../campaigns/cconfig:39
+msgid "Some descriptive texts..."
+msgstr "Jakiś opisujący tekst..."
+
+#: ../../campaigns/cconfig:57
 msgid "Tutorial1 - Eyes in the Dark"
 msgstr "Samouczek 1 - Oczy w mroku"
 
-#: ../../campaigns/cconfig:56
+#: ../../campaigns/cconfig:62
 msgid "Tutorial2 - A Place to call Home"
 msgstr "Samouczek 2 - Miejsce, które można nazwać domem"
 
-#: ../../campaigns/cconfig:61
+#: ../../campaigns/cconfig:67
 msgid "Tutorial3 - This land is our land"
 msgstr "Samouczek 3 - Ta krajina jest naszą krajiną"
 
-#: ../../campaigns/cconfig:68
+#: ../../campaigns/cconfig:74
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
 msgstr "Imperium Samouczek 1 - Plaże Malac' Mor"
 
-#: ../../campaigns/cconfig:73
+#: ../../campaigns/cconfig:79
 msgid "Empire Tutorial2 - An outpost for exile"
 msgstr "Imperium Samouczek 2 - Azyl dla wygnańców"
+
+#: ../../campaigns/cconfig:84
+msgid "01 - From nemesis to genesis"
+msgstr "01 - Od plagi do początku"
+
+#: ../../maps/Atoll.wmf/elemental:7
+msgid "Atoll"
+msgstr "Atol"
+
+#: ../../maps/Atoll.wmf/elemental:9
+msgid "Who will be the real King of the big atoll?"
+msgstr "Kto zostanie królem wielkiego atolu?"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -105,7 +124,7 @@ msgid "Finnish Lakes"
 msgstr "Fińskie jeziora"
 
 #: ../../maps/Finlakes.wmf/elemental:11
-msgid "These are the beautiful finnish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
+msgid "These are the beautiful Finnish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
 msgstr "To jest piękna Fińska krajina, składjąca się z jezior, rzek, starożytnych lasów i gór. Pozostaje to na tobie, odnaleźć drogę przez ten ląd."
 
 #: ../../maps/Firegames.wmf/elemental:7
@@ -129,7 +148,7 @@ msgid "Four Mountains"
 msgstr "Cztery góry"
 
 #: ../../maps/Four Mountains.wmf/elemental:11
-msgid "Each tribe is surrounded by four mighty mounains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional watersources. Hint 3: Each mountain contains only one resource."
+msgid "Each tribe is surrounded by four mighty mountains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional water sources. Hint 3: Each mountain contains only one resource."
 msgstr "Każdę plemię jest otoczone przez cztery potężne góry. Kto pierwszy je zdobędzie i zacznie wydobywać zasoby dla swojego plemiona? Podpowiedź I: Woda można znaleźć blizko rzeki. Podpowiedź II: Bałwany oznaczają dalsze źródła wody. Podpowiedź III: Każda góra ma tylko jeden typ zasobów."
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
@@ -273,8 +292,8 @@ msgid "The pass through the mountains"
 msgstr "Górski przesmyk"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
-msgid "In this mountainous region two princes have settled. Now they are expanding their terretories unaware of the fact that they are not alone!"
-msgstr "W tej górzystej krajinie usadziło się dwóch książąt. Teraz roszerzają swoje terytoriam, nie więdzec że nie są sami!"
+msgid "In this mountainous region two princes have settled. Now they are expanding their territories unaware of the fact that they are not alone!"
+msgstr "W tej górzystej krajinie usadziło się dwóch książąt. Teraz roszerzają swoje terytorium, nie więdzec że nie są sami!"
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
