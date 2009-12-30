@@ -94,6 +94,28 @@ void Slider::set_value(int32_t new_value)
 }
 
 /**
+ * \brief Sets max value.
+ *
+ * \param new_max The new max value.
+ */
+void Slider::set_max_value(int32_t new_max) {
+	assert(m_min_value <= new_max);
+	m_max_value = new_max;
+	set_value(m_value);
+}
+
+/**
+ * \brief Sets min value.
+ *
+ * \param new_min The new min value.
+ */
+void Slider::set_min_value(int32_t new_min) {
+	assert(m_max_value >= new_min);
+	m_min_value = new_min;
+	set_value(m_value);
+}
+
+/**
  * \brief Draw the cursor.
  *
  * \param dst Graphic target.

@@ -46,7 +46,12 @@ public:
 	bool is_snap_target() const {return true;}
 
 	int32_t get_value() const {return m_value;}
+	int32_t get_max_value() const {return m_max_value;}
+	int32_t get_min_value() const {return m_min_value;}
+
 	void set_value(int32_t);
+	void set_max_value(int32_t);
+	void set_min_value(int32_t);
 
 	void set_enabled(bool enabled);
 
