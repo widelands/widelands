@@ -138,6 +138,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect() :
 	m_list                      .set_font(m_fn, m_fs);
 
 	m_load_map_as_scenario.set_state(false);
+	m_load_map_as_scenario.set_enabled(false);
 
 	m_list.selected.set(this, &Fullscreen_Menu_MapSelect::map_selected);
 	m_list.double_clicked.set(this, &Fullscreen_Menu_MapSelect::double_clicked);
@@ -200,6 +201,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 		m_nr_players.set_text(buf);
 		m_descr     .set_text(map.description);
 		m_world     .set_text(world);
+		m_load_map_as_scenario.set_enabled(map.scenario);
 	} else {
 		// Directory
 		m_name      .set_text(_("(directory)"));
@@ -208,8 +210,10 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 		m_nr_players.set_text(std::string());
 		m_descr     .set_text(std::string());
 		m_world     .set_text(std::string());
+		m_load_map_as_scenario.set_enabled(false);
 	}
 	m_ok.set_enabled(true);
+	m_load_map_as_scenario.set_state(false); // reset
 }
 
 /**
@@ -319,6 +323,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				mapdata.nrplayers = map.get_nrplayers();
 				mapdata.width = map.get_width();
 				mapdata.height = map.get_height();
+				mapdata.scenario = map.as_scenario_playable();
 				if (!mapdata.width || !mapdata.height)
 					continue;
 
@@ -326,9 +331,11 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					(mapdata.name.c_str(),
 					 mapdata,
 					 g_gr->get_picture
-					 	(PicMod_Game,
-					 	 dynamic_cast<WL_Map_Loader const *>(ml) ?
-					 	 "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+						(PicMod_Game,
+						 dynamic_cast<WL_Map_Loader const *>(ml) ?
+						 (mapdata.scenario ?
+						  "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")
+						 : "pics/ls_s2map.png"));
 			} catch (const std::exception & e) {
 				log
 					("Mapselect: Skip %s due to preload error: %s\n",

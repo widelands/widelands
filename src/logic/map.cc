@@ -86,7 +86,8 @@ m_world          (0),
 m_starting_pos   (0),
 m_fields         (0),
 m_overlay_manager(0),
-m_pathfieldmgr(new PathfieldManager)
+m_pathfieldmgr(new PathfieldManager),
+m_scenario(false)
 {
 	m_worldname[0] = '\0';
 }

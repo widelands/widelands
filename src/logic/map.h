@@ -191,15 +191,17 @@ struct Map : public ITransportCostCalculator {
 	void set_name       (char const *);
 	void set_description(char const *);
 	void set_background (char const *);
+	void set_as_scenario_playable(bool s) {m_scenario = s;}
 
 	// informational functions
-	const char * get_filename() const {return m_filename;}
-	const char * get_author() const {return m_author;}
-	const char * get_name() const {return m_name;}
+	const char * get_filename()    const {return m_filename;}
+	const char * get_author()      const {return m_author;}
+	const char * get_name()        const {return m_name;}
 	const char * get_description() const {return m_description;}
-	const char * get_world_name() const {return m_worldname;}
+	const char * get_world_name()  const {return m_worldname;}
 	const std::string & get_background() const {return m_background;}
 	Player_Number get_nrplayers() const throw () {return m_nrplayers;}
+	bool as_scenario_playable() const throw () {return m_scenario;}
 	Extent extent() const throw () {return Extent(m_width, m_height);}
 	X_Coordinate get_width   () const throw () {return m_width;}
 	Y_Coordinate get_height  () const throw () {return m_height;}
@@ -369,6 +371,7 @@ private:
 
 	/// # of players this map supports (!= Game's number of players!)
 	Player_Number m_nrplayers;
+	bool          m_scenario; // whether the map is playable as scenario
 
 	X_Coordinate m_width;
 	Y_Coordinate m_height;

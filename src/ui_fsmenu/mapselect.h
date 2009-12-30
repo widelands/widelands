@@ -43,6 +43,7 @@ struct MapData {
 	uint32_t width;
 	uint32_t height;
 	uint32_t nrplayers;
+	bool scenario; // whether this map can be played as scenario
 
 	MapData()
 		: width(0), height(0), nrplayers(0) {}
