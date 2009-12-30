@@ -32,7 +32,8 @@ struct Event_Player_Allowed_Retreat_Change : public Event {
 		(char const * const Name, State const S)
 		: Event(Name, S), m_player_number(1)
 	{}
-	Event_Player_Allowed_Retreat_Change(Section &, Editor_Game_Base &);
+	Event_Player_Allowed_Retreat_Change
+		(Section &, Editor_Game_Base &);
 
 	virtual char const * action_name() const = 0; /// What the event type does.
 
@@ -42,11 +43,8 @@ struct Event_Player_Allowed_Retreat_Change : public Event {
 
 	Player_Number player_number() const {return m_player_number;}
 	void set_player(Player_Number);
-	bool const & allow() const          {return m_allow;}
-	bool       & allow()                {return m_allow;}
 protected:
 	Player_Number  m_player_number;
-	bool           m_allow;
 };
 
 }

@@ -35,7 +35,7 @@ Event_Player_Allowed_Retreat_Change::Event_Player_Allowed_Retreat_Change
 	try {
 		uint32_t const packet_version = s.get_safe_positive("version");
 		if (packet_version <= EVENT_VERSION) {
-			m_allow = s.get_safe_bool("allowed_retreat_change");
+			/// Nothing to do
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -51,7 +51,6 @@ void Event_Player_Allowed_Retreat_Change::Write
 	s.set_int           ("version",                EVENT_VERSION);
 	if (m_player_number != 1)
 		s.set_int        ("player",                 m_player_number);
-	s.set_bool          ("allowed_retreat_change", m_allow);
 }
 
 

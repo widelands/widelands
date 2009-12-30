@@ -26,13 +26,16 @@
 
 namespace Widelands {
 
+struct Tribe_Descr;
+
 /// Abstract base for events involving a player and a boolean option
 struct Event_Player_Retreat_Change : public Event {
 	Event_Player_Retreat_Change
 		(char const * const Name, State const S)
 		: Event(Name, S), m_player_number(1), m_percentage(0)
 	{}
-	Event_Player_Retreat_Change(Section &, Editor_Game_Base &);
+	Event_Player_Retreat_Change
+		(Section &, Editor_Game_Base &, Tribe_Descr const * = 0);
 
 	virtual char const * action_name() const = 0; /// What the event type does.
 

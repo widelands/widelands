@@ -24,12 +24,15 @@
 #include "critter_bob.h"
 #include "editor_game_base.h"
 #include "events/event_allow_building_types.h"
+#include "events/event_allow_retreat_change.h"
 #include "events/event_building.h"
 #include "events/event_conquer_area.h"
 #include "events/event_forbid_building_types.h"
+#include "events/event_forbid_retreat_change.h"
 #include "events/event_set_player_frontier_style.h"
 #include "events/event_set_player_flag_style.h"
 #include "events/event_unhide_area.h"
+#include "events/event_retreat_change.h"
 #include "game.h"
 #include "game_data_error.h"
 #include "helper.h"
@@ -302,6 +305,26 @@ Tribe_Descr::Tribe_Descr
 								event =
 									new Event_Set_Player_Flag_Style
 										(*event_s, egbase);
+							} else if
+								(not strcmp(event_name, "allow_retreat_change"))
+							{
+								event_s->set_int("version", 1);
+								event =
+									new Event_Allow_Retreat_Change
+										(*event_s, egbase);
+							} else if
+								(not strcmp(event_name, "forbid_retreat_change"))
+							{
+								event_s->set_int("version", 1);
+								event =
+									new Event_Forbid_Retreat_Change
+										(*event_s, egbase);
+							} else if
+								(not strcmp(event_name, "retreat_change"))
+							{
+								event_s->set_int("version", 1);
+								event =
+									new Event_Retreat_Change(*event_s, egbase);
 							} else
 								throw game_data_error
 									("\"%s\" is invalid as player initialization event "
