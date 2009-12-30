@@ -485,22 +485,24 @@ void FieldActionWindow::add_buttons_attack ()
 	a_box = new UI::Box
 		(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
-	if (m_plr and
+	if
+		(m_plr and
 		 m_plr->player_number() != m_node.field->get_owned_by())
 	{
-		if (upcast
-				(Widelands::Attackable, attackable, m_map->get_immovable(m_node)))
-					if (attackable->canAttack()) {
-			m_attack_box = new UI::AttackBox
-				(a_box, m_plr, &m_node, 0, 0);
-			a_box->add(m_attack_box, UI::Box::AlignTop);
+		if
+			(upcast
+			 	(Widelands::Attackable, attackable, m_map->get_immovable(m_node)))
+			if (attackable->canAttack()) {
+				m_attack_box = new UI::AttackBox
+					(a_box, m_plr, &m_node, 0, 0);
+				a_box->add(m_attack_box, UI::Box::AlignTop);
 
-			add_button
-				(a_box,
-				 pic_attack,
-				 &FieldActionWindow::act_attack,
-				 _("Start attack"));
-		}
+				add_button
+					(a_box,
+					 pic_attack,
+					 &FieldActionWindow::act_attack,
+					 _("Start attack"));
+			}
 	}
 
 	if (a_box and a_box->get_nritems()) { //  add tab

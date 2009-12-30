@@ -48,7 +48,8 @@ AttackBox::AttackBox
 	m_slider_retreat(0),
 	m_slider_soldiers(0),
 	m_text_soldiers(0),
-	m_text_retreat(0)
+	m_text_retreat(0),
+	m_add_soldiers(0)
 {
 	init();
 }
@@ -58,6 +59,7 @@ AttackBox::~AttackBox() {
 	delete m_slider_soldiers;
 	delete m_text_soldiers;
 	delete m_text_retreat;
+	delete m_add_soldiers;
 }
 
 uint32_t AttackBox::get_max_attackers() {
@@ -106,7 +108,7 @@ Textarea * AttackBox::add_text
 	return text;
 }
 
-void AttackBox::add_button
+Callback_Button<AttackBox> * AttackBox::add_button
 	(Box               * const box,
 	 char        const * const text,
 	 void         (AttackBox::*fn)(),
@@ -123,15 +125,26 @@ void AttackBox::add_button
 			 tooltip_text);
 	box->add
 		(button, Box::AlignTop);
+	return button;
 }
 
 void AttackBox::update_attack() {
-	char buf[20];
 	assert(m_slider_soldiers);
 	assert(m_text_soldiers);
+
+	char buf[20];
+	int32_t max_attackers = get_max_attackers();
+
+	if (m_slider_soldiers->get_max_value() != max_attackers)
+		m_slider_soldiers->set_max_value(max_attackers);
+
 	sprintf
-		(buf, "%u / %u", m_slider_soldiers->get_value(), get_max_attackers());
+		(buf, "%u / %u", m_slider_soldiers->get_value(), max_attackers);
 	m_text_soldiers->set_text(buf);
+
+	sprintf(buf, "%u", max_attackers);
+	m_add_soldiers->set_title(buf);
+
 
 #if 0
 	assert(m_slider_retreat);
@@ -186,7 +199,7 @@ void AttackBox::init() {
 	m_slider_soldiers->changed.set(this, &AttackBox::update_attack);
 
 	sprintf(buf, "%u", max_attackers);
-	add_button
+	m_add_soldiers = add_button
 		(linebox,
 		 buf,
 		 &AttackBox::send_more_soldiers,
@@ -209,6 +222,7 @@ void AttackBox::init() {
 	m_slider_retreat->changed.set(this, &AttackBox::update_attack);
 	add_text(linebox, _("Once injured"));
 	m_slider_retreat->set_enabled(m_pl->is_retreat_change_allowed());
+	linebox->set_visible(m_pl->is_retreat_change_allowed());
 
 	/// Add here another attack configuration params
 }
