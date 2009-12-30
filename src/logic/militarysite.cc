@@ -351,7 +351,7 @@ bool MilitarySite::get_building_work(Game & game, Worker & worker, bool)
 		}
 
 		bool stayhome;
-		uint32_t retreat;
+		uint8_t retreat;
 		if
 			(Map_Object * const enemy
 			 =
@@ -724,7 +724,7 @@ void MilitarySite::clear_requirements ()
 }
 
 void MilitarySite::sendAttacker
-	(Soldier & soldier, Building & target, uint32_t retreat)
+	(Soldier & soldier, Building & target, uint8_t retreat)
 {
 	assert(isPresent(soldier));
 
@@ -758,7 +758,7 @@ bool MilitarySite::haveSoldierJob(Soldier & soldier)
  * to attack, and remove the job.
  */
 Map_Object * MilitarySite::popSoldierJob
-	(Soldier * const soldier, bool * const stayhome, uint32_t * const retreat)
+	(Soldier * const soldier, bool * const stayhome, uint8_t * const retreat)
 {
 	container_iterate(std::vector<SoldierJob>, m_soldierjobs, i)
 		if (i.current->soldier == soldier) {

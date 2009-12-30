@@ -378,8 +378,8 @@ struct Player :
 	void allow_building(Building_Index, bool allow);
 
 	// Battle options
-	void set_retreat_percentage(uint32_t value);
-	uint32_t get_retreat_percentage() const throw () {
+	void set_retreat_percentage(uint8_t value);
+	uint8_t get_retreat_percentage() const throw () {
 		return m_retreat_percentage;
 	}
 	void allow_retreat_change(bool allow);
@@ -426,7 +426,7 @@ struct Player :
 		 std::vector<Soldier *> * soldiers = 0,
 		 uint32_t                 max = std::numeric_limits<uint32_t>::max());
 	void enemyflagaction
-		(Flag &, Player_Number attacker, uint32_t count, uint32_t retreat);
+		(Flag &, Player_Number attacker, uint32_t count, uint8_t retreat);
 
 	uint32_t casualties() const {return m_casualties;}
 	uint32_t kills     () const {return m_kills;}
@@ -522,7 +522,7 @@ private:
 	 */
 
 	bool                  m_allow_retreat_change;
-	uint32_t              m_retreat_percentage;
+	uint8_t               m_retreat_percentage;
 
 	Field *               m_fields;
 	std::vector<bool>     m_allowed_buildings;

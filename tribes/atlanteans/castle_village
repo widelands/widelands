@@ -126,3 +126,8 @@ distance=20
 
 trunk=1
 sawyer=1
+
+[allow_retreat_change]
+
+[retreat_change]
+retreat_change=60

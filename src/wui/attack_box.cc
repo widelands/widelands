@@ -227,7 +227,7 @@ uint32_t AttackBox::soldiers() const {
 	return m_slider_soldiers->get_value();
 }
 
-uint32_t AttackBox::retreat() const {
+uint8_t AttackBox::retreat() const {
 	assert(m_slider_retreat);
 	return m_slider_retreat->get_value();
 }

@@ -718,7 +718,7 @@ Bob::Task Soldier::taskAttack = {
 };
 
 void Soldier::start_task_attack
-	(Game & game, Building & building, uint32_t retreat)
+	(Game & game, Building & building, uint8_t retreat)
 {
 	dynamic_cast<Attackable const &>(building);
 
@@ -921,7 +921,7 @@ Bob::Task Soldier::taskDefense = {
 };
 
 void Soldier::start_task_defense
-	(Game & game, bool stayhome, uint32_t retreat)
+	(Game & game, bool stayhome, uint8_t retreat)
 {
 	molog("[defense] starting\n");
 	push_task(game, taskDefense);

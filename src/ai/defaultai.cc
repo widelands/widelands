@@ -2018,7 +2018,7 @@ bool DefaultAI::consider_attack(int32_t gametime) {
 	Building * target = ms; // dummy initialisation to silence the compiler
 	int32_t    chance = 0;
 	int32_t    attackers = 0;
-	int32_t    retreat = ms->owner().get_retreat_percentage();
+	int8_t     retreat = ms->owner().get_retreat_percentage();
 
 	// Search in a radius of the vision of the militarysite and collect
 	// information about immovables in the area

@@ -771,7 +771,7 @@ void Game::send_player_enemyflagaction
 	(Flag  const &       flag,
 	 Player_Number const who_attacks,
 	 uint32_t      const num_soldiers,
-	 uint32_t      const retreat)
+	 uint8_t       const retreat)
 {
 	if
 		(1

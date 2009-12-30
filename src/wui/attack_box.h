@@ -50,7 +50,7 @@ struct AttackBox : public UI::Box {
 	void init();
 
 	uint32_t soldiers() const;
-	uint32_t retreat() const;
+	uint8_t  retreat() const;
 
 	private:
 		uint32_t get_max_attackers();

@@ -568,7 +568,7 @@ void Player::allow_retreat_change(bool allow) {
 ===========
 ===========
 */
-void Player::set_retreat_percentage(uint32_t percentage) {
+void Player::set_retreat_percentage(uint8_t percentage) {
 	assert(percentage < 101);
 	m_retreat_percentage = percentage;
 }
@@ -632,7 +632,7 @@ uint32_t Player::findAttackSoldiers
  */
 void Player::enemyflagaction
 	(Flag & flag, Player_Number const attacker, uint32_t const count,
-	 uint32_t retreat)
+	 uint8_t retreat)
 {
 	if      (attacker != player_number())
 		log

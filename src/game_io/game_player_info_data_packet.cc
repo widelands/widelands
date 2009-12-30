@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 7
+#define CURRENT_PACKET_VERSION 8
 
 
 void Game_Player_Info_Data_Packet::Read
@@ -123,6 +123,11 @@ void Game_Player_Info_Data_Packet::Read
 							}
 						}
 					}
+
+					if (packet_version >= 8) {
+						player.allow_retreat_change(fr.Unsigned8());
+						player.set_retreat_percentage(fr.Unsigned8());
+					}
 				}
 			}
 
@@ -187,6 +192,8 @@ void Game_Player_Info_Data_Packet::Write
 		fw.Unsigned32(plr->msites_defeated    ());
 		fw.Unsigned32(plr->civil_blds_lost    ());
 		fw.Unsigned32(plr->civil_blds_defeated());
+		fw.Unsigned8(plr->is_retreat_change_allowed());
+		fw.Unsigned8(plr->get_retreat_percentage   ());
 	} else
 		fw.Unsigned8(0); //  Player is NOT in game.
 

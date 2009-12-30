@@ -256,8 +256,8 @@ public:
 
 	void setBattle(Game &, Battle *);
 
-	void start_task_attack(Game & game, Building &, uint32_t retreat);
-	void start_task_defense(Game & game, bool stayhome, uint32_t retreat);
+	void start_task_attack(Game & game, Building &, uint8_t retreat);
+	void start_task_defense(Game & game, bool stayhome, uint8_t retreat);
 	void start_task_battle(Game &);
 	void start_task_move_in_battle(Game &, CombatWalkingDir);
 	void start_task_die(Game &);
