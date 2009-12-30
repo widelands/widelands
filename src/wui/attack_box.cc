@@ -171,7 +171,7 @@ void AttackBox::init() {
 		 UI::Box::Vertical);
 	linebox->add(columnbox, UI::Box::AlignTop);
 
-	sprintf(buf, "%u/%u", max_attackers > 0 ? 1 : 0, max_attackers);
+	sprintf(buf, "%u / %u", max_attackers > 0 ? 1 : 0, max_attackers);
 
 	m_text_soldiers = add_text
 		(columnbox, buf, UI::Box::AlignCenter, UI_FONT_ULTRASMALL);
