@@ -1,0 +1,44 @@
+# This file holds all triggers.
+# they can be used in an event chain as conditional element. See the file
+# "event_chain" for more information on this.
+#
+# Note: this file shows only one type of triggers (time trigger), but
+#       there are quite some more. Best take a look at the following link:
+#       http://wl.widelands.org/wiki/TriggerAndEventsReference/
+
+[global]
+packet_version="2"
+
+
+# Time triggers
+
+[Begin] # This trigger gets true after 0 milliseconds have past = at the beginning
+type="time"
+version="2"
+time="0"
+
+
+# Vision triggers
+
+[Expanded east]
+type="vision"
+version="3"
+point="5 8"
+
+
+# Player defeated triggers
+
+[Player 2 defeated]
+type="defeated"
+version="1"
+player="2"
+
+[Player 3 defeated]
+type="defeated"
+version="1"
+player="3"
+
+[Player 4 defeated]
+type="defeated"
+version="1"
+player="4"

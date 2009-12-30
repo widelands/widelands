@@ -2,17 +2,20 @@
 packet_version=1
 
 [player_1]
-name=Spieler 1
+name=Theobald
 tribe=barbarians
 
 [player_2]
-name=Spieler2
+name=Erwyn
 tribe=barbarians
+ai="Normal"
 
 [player_3]
-name=Spieler3
+name=Jomo
 tribe=barbarians
+ai="Defensive"
 
 [player_4]
-name=Spieler4
+name=Lanissa
 tribe=barbarians
+ai="None"

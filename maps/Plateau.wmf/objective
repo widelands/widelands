@@ -1,2 +1,26 @@
 [global]
 packet_version=1
+
+[Capture ancient castle]
+name="Capture the ancient castle"
+descr=""<rt><p line-spacing=3 font-size=12>"
+       "* Defeat Lanissa and capture her ancient castle."
+       "</p></rt>""
+visible="false"
+trigger="Player 4 defeated"
+
+[Defeat Erwyn]
+name="Defeat Erwyn"
+descr=""<rt><p line-spacing=3 font-size=12>"
+       "* Defeat Erwyn. He commands the strongest opposing soldiers left on this island."
+       "</p></rt>""
+visible="false"
+trigger="Player 2 defeated"
+
+[Defeat Jomo]
+name="Defeat Jomo"
+descr=""<rt><p line-spacing=3 font-size=12>"
+       "* Defeat Jomo. He takes care about the soldiers food supply."
+       "</p></rt>""
+visible="false"
+trigger="Player 3 defeated"

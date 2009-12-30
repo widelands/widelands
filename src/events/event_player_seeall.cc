@@ -52,6 +52,7 @@ Event::State Event_Player_See_All::run(Game & game) {
 }
 
 void Event_Player_See_All::Write(Section & s, Editor_Game_Base &) const {
+	s.set_string("type",     "seeall");
 	s.set_int   ("version",  EVENT_VERSION);
 	s.get_bool  ("switchon", m_switch_to_on);
 	if (m_player_number != 1)

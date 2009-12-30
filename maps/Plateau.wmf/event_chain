@@ -1,0 +1,95 @@
+# This file holds all event_chains.
+# each event chain has it's own section [NAME], has at least one conditional
+# element (when should the event chain be started? - if triggerA AND ...) and
+# at least one event that will be started once the conditional elements get true.
+
+[global]
+packet_version="3"
+
+[Begin]
+repeating="false"
+conditional_element_00="trigger"
+conditional_element_00_data="Begin"
+event="Headquarters 1"
+event="Briefing 1: The forbidden island"
+event="Place ancient atlantean castle"
+event="Place enemy warehouse"
+event="Place enemy warehouse2"
+event="Place enemy donjon1"
+event="Place enemy donjon2"
+event="Place enemy donjon3"
+event="Place enemy barrier1"
+event="Place enemy barrier2"
+event="Place enemy barrier3"
+event="Place enemy barrier4"
+event="Place enemy stronghold1"
+event="Place enemy stronghold2"
+event="Place enemy stronghold3"
+event="Place enemy sentry1"
+event="Place enemy sentry2"
+event="Place enemy sentry3"
+event="Place enemy fortress"
+event="Place enemy citadel"
+event="Place enemy high_tower"
+event="Place enemy2 barrier"
+event="Place enemy2 tower"
+event="Place enemy2 guardhouse"
+event="Place enemy2 farm1"
+event="Place enemy2 farm2"
+event="Place enemy2 farm3"
+current_event="0"
+state="init"
+
+[Expanded east]
+repeating="false"
+conditional_element_00="trigger"
+conditional_element_00_data="Expanded east"
+event="Show ancient castle"
+event="Show way 1"
+event="Show way 2"
+event="Show way 3"
+event="Show way 4"
+event="Show way 5"
+event="Show way 6"
+event="Move view to ancient castle"
+event="Briefing 2: Found ancient castle"
+event="Reveal Objective 1 - Capture ancient castle"
+current_event="0"
+state="init"
+
+[Player 4 defeated]
+repeating="false"
+conditional_element_00="trigger"
+conditional_element_00_data="Player 4 defeated"
+event="Move view to ancient castle"
+event="Bigger castle view"
+event="Briefing 3: Captured ancient castle"
+event="Reveal Objective 2 - Defeat Erwyn"
+event="Reveal Objective 3 - Defeat Jomo"
+current_event="0"
+state="init"
+
+[Player 2 defeated]
+repeating="false"
+conditional_element_00="trigger"
+conditional_element_00_data="Player 2 defeated"
+event="Briefing: Erwyn defeated"
+current_event="0"
+state="init"
+
+[Player 3 defeated]
+repeating="false"
+conditional_element_00="trigger"
+conditional_element_00_data="Player 3 defeated"
+event="Briefing: Jomo defeated"
+current_event="0"
+state="init"
+
+[Victory]
+repeating="false"
+conditional_element_00="trigger"
+conditional_element_00_data="Player 4 defeated"
+event="Full view"
+event="Last Briefing: Victory"
+current_event="0"
+state="init"

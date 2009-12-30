@@ -1,0 +1,503 @@
+# This file holds all the events.
+# they have to be linked in an event chain to be called. See the file
+# "event_chain" for more information on this.
+#
+# Note: this file holds only one type of events (type "message"), but
+#       there are quite some more. Best take a look at the following link:
+#       http://wl.widelands.org/wiki/TriggerAndEventsReference/
+
+
+[global]
+packet_version="2"
+
+[Briefing 1: The forbidden island] # Show the introducing message
+type="message_box"
+version="2"
+text=""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=3333FF>"
+      "The forbidden island</p></rt><rt><p line-spacing=3 font-size=12>"
+      "Finally! Our first step to victory was just done! Last night, we landed "
+      "on the forbidden island and defeated the few guards that sentineled the "
+      "north western part of the island. I am quite sure, that none of the other "
+      "warlords observed us until now, so we should keep quiete and build up our "
+      "infrastructure until we are strong enough to raid their positions."
+      "</p></rt>""
+window_title="First Briefing"
+is_modal="true"
+width="400"
+height="300"
+posy="1"
+button_00="OK"
+
+[Headquarters 1]
+type="building"
+version="2"
+point="65 6"
+building="headquarters_interim"
+axe="6"
+bakingtray="2"
+blackwood="32"
+coal="12"
+fire_tongs="2"
+fish="6"
+grout="12"
+hammer="12"
+hunting_spear="2"
+iron="12"
+ironore="5"
+kitchen_tools="4"
+meal="4"
+meat="6"
+pick="14"
+pittabread="8"
+ration="12"
+raw_stone="40"
+scythe="6"
+shovel="4"
+snack="3"
+thatchreed="24"
+trunk="80"
+carrier="40"
+blacksmith="2"
+brewer="1"
+builder="10"
+ferner="1"
+fisher="2"
+geologist="4"
+lime-burner="1"
+lumberjack="3"
+miner="4"
+ranger="1"
+stonemason="2"
+0/0/0/0="45"
+
+[Place ancient atlantean castle]
+type="building"
+version="2"
+player="4"
+point="23 19"
+building="castle.atlanteans"
+0/0/0/0=2
+2/0/0/0=2
+0/1/0/0=2
+2/1/0/0=2
+1/1/0/0=1
+
+[Place enemy warehouse]
+type="building"
+version="2"
+player="3"
+point="6 44"
+building="warehouse"
+trunk="200"
+carrier="40"
+builder="4"
+kitchen_tools="4"
+lumberjack="10"
+pick="14"
+burner="1"
+raw_stone="40"
+scythe="6"
+shovel="4"
+thatchreed="24"
+coal="40"
+brewer="1"
+farmer=1"
+ferner="1"
+fisher="2"
+geologist="4"
+lime-burner="1"
+ranger="1"
+hunter="1"
+gamekeeper="1"
+0/0/0/0=30
+
+[Place enemy warehouse2]
+type="building"
+version="2"
+player="2"
+point="45 40"
+building="warehouse"
+carrier="40"
+trunk="20"
+builder="2"
+lumberjack="10"
+
+[Place enemy donjon1]
+type="building"
+version="2"
+player="2"
+point="14 67"
+building="donjon"
+0/0/0/0=1
+2/0/0/0=1
+3/1/0/0=1
+
+[Place enemy donjon2]
+type="building"
+version="2"
+player="2"
+point="31 65"
+building="donjon"
+2/1/0/0=2
+1/0/0/0=1
+
+[Place enemy donjon3]
+type="building"
+version="2"
+player="2"
+point="53 17"
+building="donjon"
+0/0/0/0=2
+2/1/0/0=1
+
+[Place enemy barrier1]
+type="building"
+version="2"
+player="2"
+point="40 24"
+building="barrier"
+2/0/0/0=2
+0/0/0/1=1
+
+[Place enemy barrier2]
+type="building"
+version="2"
+player="2"
+point="39 53"
+building="barrier"
+2/0/0/0=4
+
+[Place enemy barrier3]
+type="building"
+version="2"
+player="2"
+point="50 44"
+building="barrier"
+0/0/0/0=2
+0/1/0/1=1
+3/1/0/1=1
+
+[Place enemy barrier4]
+type="building"
+version="2"
+player="2"
+point="26 75"
+building="barrier"
+3/1/0/0=3
+0/0/0/0=1
+
+[Place enemy stronghold1]
+type="building"
+version="2"
+player="2"
+point="43 44"
+building="stronghold"
+0/0/0/0=2
+
+[Place enemy stronghold2]
+type="building"
+version="2"
+player="2"
+point="20 71"
+building="stronghold"
+0/1/0/1=1
+1/0/0/0=1
+0/0/0/0=1
+
+[Place enemy stronghold3]
+type="building"
+version="2"
+player="2"
+point="50 30"
+building="stronghold"
+0/0/0/0=1
+
+[Place enemy sentry1]
+type="building"
+version="2"
+player="2"
+point="43 29"
+building="sentry"
+0/0/0/0=2
+
+[Place enemy sentry2]
+type="building"
+version="2"
+player="2"
+point="42 9"
+building="sentry"
+0/0/0/0=1
+
+[Place enemy sentry3]
+type="building"
+version="2"
+player="2"
+point="30 76"
+building="sentry"
+0/0/0/0=2
+
+[Place enemy citadel]
+type="building"
+version="2"
+player="2"
+point="47 13"
+building="citadel"
+0/0/0/0=2
+1/0/0/0=1
+1/1/0/0=1
+2/0/0/0=2
+3/1/0/0=3
+
+[Place enemy fortress]
+type="building"
+version="2"
+player="2"
+point="42 72"
+building="fortress"
+0/0/0/0=2
+1/0/0/0=1
+1/1/0/0=1
+2/0/0/0=2
+3/1/0/0=1
+
+[Place enemy high_tower]
+type="building"
+version="2"
+player="2"
+point="52 26"
+building="high_tower.atlanteans"
+1/1/0/0=1
+2/0/0/0=2
+3/1/0/0=1
+
+[Place enemy2 barrier]
+type="building"
+version="2"
+player="3"
+point="6 51"
+building="barrier"
+0/0/0/0=2
+0/0/0/1=1
+
+[Place enemy2 tower]
+type="building"
+version="2"
+player="3"
+point="79 50"
+building="tower.atlanteans"
+0/0/0/0=2
+0/0/0/1=1
+
+[Place enemy2 guardhouse]
+type="building"
+version="2"
+player="3"
+point="7 42"
+building="guardhouse.atlanteans"
+0/0/0/0=2
+
+[Place enemy2 farm1]
+type="building"
+version="2"
+player="3"
+point="8 48"
+building="farm"
+farmer=1
+
+[Place enemy2 farm2]
+type="building"
+version="2"
+player="3"
+point="4 52"
+building="farm"
+farmer=1
+
+[Place enemy2 farm3]
+type="building"
+version="2"
+player="3"
+point="44 49"
+building="farm"
+farmer=1
+
+[Show ancient castle]
+type="unhide_area"
+version="2"
+point="23 19"
+area="4"
+duration="5000"
+
+[Show way 1]
+type="unhide_area"
+version="2"
+point="5 8"
+area="2"
+duration="1"
+
+[Show way 2]
+type="unhide_area"
+version="2"
+point="9 10"
+area="2"
+duration="1"
+
+[Show way 3]
+type="unhide_area"
+version="2"
+point="12 12"
+area="2"
+duration="1"
+
+[Show way 4]
+type="unhide_area"
+version="2"
+point="15 14"
+area="2"
+duration="1"
+
+[Show way 5]
+type="unhide_area"
+version="2"
+point="18 16"
+area="2"
+duration="1"
+
+[Show way 6]
+type="unhide_area"
+version="2"
+point="20 17"
+area="2"
+duration="1"
+
+[Move view to ancient castle]
+type="move_view"
+version="2"
+point="23 19"
+
+[Briefing 2: Found ancient castle]
+type="message_box"
+version="2"
+text=""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=3333FF>"
+      "An ancient castle</p></rt><rt><p line-spacing=3 font-size=12>"
+      "By the Gods! One of our scouts found a mighty castle at the middle of the "
+      "old plateau. The castle must be quite old and seems to be build in a foreign "
+      "methode. It's quite obvious, that this is not barbarian craft.<br>"
+      "Let's hope Lanissa - the warlord holding command over that castle - still "
+      "has not observed us. Perhaps we have a chance to conquer that mighty building "
+      "without a bigger fight!<br>However we really have to capture it. It will be "
+      "our key for our reign over this island!"
+      "<br><br>"
+      "-- NEW OBJECTIVE --"
+      "<br>"
+      "* Defeat Lanissa and capture the ancient castle."
+      "</p></rt>""
+window_title="Second Briefing"
+is_modal="true"
+width="400"
+height="300"
+posy="1"
+button_00="OK"
+
+[Reveal Objective 1 - Capture ancient castle]
+type="reveal_objective"
+version="2"
+objective="Capture ancient castle"
+
+[Reveal Objective 2 - Defeat Erwyn]
+type="reveal_objective"
+version="2"
+objective="Defeat Erwyn"
+
+[Reveal Objective 3 - Defeat Jomo]
+type="reveal_objective"
+version="2"
+objective="Defeat Jomo"
+
+[Bigger castle view]
+type="unhide_area"
+version="2"
+point="23 19"
+area="18"
+duration="1"
+
+[Briefing 3: Captured ancient castle]
+type="message_box"
+version="2"
+text=""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=3333FF>"
+      "Ancient castle captured</p></rt><rt><p line-spacing=3 font-size=12>"
+      "Wonderful! Our troups finally defeated Lanissa and her soldiers. The ancient "
+      "castle is ours!<br>"
+      "It is amazing, how far one can see from the highest tower of the castle. We "
+      "can watch the whole island. So now I wonder, why Lanissa has not observed "
+      "us and thus did not prepare. But well, some things will never come to the "
+      "light of day. The only important things at the moment are the left opposing "
+      "troups. We observed enemy's positions from Erwyn north and eastwards of the "
+      "castle. He is known to be a strong warlord and surely commands the strongest "
+      "warriors of the left troups. In the south we captured some guarded food "
+      "infrastructures of Jomo - a younger warlord - we should take care about that "
+      "infrastructures and cut of the food supply."
+      "<br><br>"
+      "-- NEW OBJECTIVES --"<br>"
+      "* Defeat Erwyn. He commands the strongest opposing soldiers left on this island."
+      "<br>"
+      "* Defeat Jomo. He takes care about the soldiers food supply."
+      "</p></rt>""
+window_title="Second Briefing"
+is_modal="true"
+width="400"
+height="300"
+posy="1"
+button_00="OK"
+
+[Briefing: Erwyn defeated]
+type="message_box"
+version="2"
+text=""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=3333FF>"
+      "Erwyn defeated</p></rt><rt><p line-spacing=3 font-size=12>"
+      "Great! Erwyn gave up, when he saw his last buildings burning down. One strong "
+      "warlord less on this island!"
+      "</p></rt>""
+window_title="Another Briefing"
+is_modal="true"
+width="400"
+height="300"
+posy="1"
+button_00="OK"
+
+[Briefing: Jomo defeated]
+type="message_box"
+version="2"
+text=""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=3333FF>"
+      "Jomo defeated</p></rt><rt><p line-spacing=3 font-size=12>"
+      "Great! Jomo gave up, when he saw his last buildings burning down. One warlord "
+      "less on this island!"
+      "</p></rt>""
+window_title="Another Briefing"
+is_modal="true"
+width="400"
+height="300"
+posy="1"
+button_00="OK"
+
+[Full view]
+type="seeall"
+version="1"
+switchon="true"
+player="1"
+
+[Last Briefing: Victory]
+type="message_box"
+version="2"
+text=""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=3333FF>"
+      "Victory!</p></rt><rt><p line-spacing=3 font-size=12>"
+      "Finally! The complete island is ours. Now we just have to defeat it better "
+      "Than the warlords did."
+      "<br><br>"
+      "Congratulations! You mastered this scenario. You may play on if you like!"
+      "</p></rt>""
+window_title="Last Briefing"
+is_modal="true"
+width="400"
+height="300"
+posy="1"
+button_00="OK"
