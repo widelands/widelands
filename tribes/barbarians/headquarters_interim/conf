@@ -7,6 +7,6 @@ destructible=no
 conquers=9
 
 [idle]
-pics=hq_i_??.png
+pics=headquarters_interim_i_??.png
 hotspot=70 110
 playercolor=true

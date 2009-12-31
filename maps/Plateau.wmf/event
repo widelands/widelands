@@ -393,17 +393,17 @@ button_00="OK"
 [Reveal Objective 1 - Capture ancient castle]
 type="reveal_objective"
 version="2"
-objective=_ "Capture the ancient castle"
+objective="Capture ancient castle"
 
 [Reveal Objective 2 - Defeat Erwyn]
 type="reveal_objective"
 version="2"
-objective=_ "Defeat Erwyn"
+objective="Defeat Erwyn"
 
 [Reveal Objective 3 - Defeat Jomo]
 type="reveal_objective"
 version="2"
-objective=_ "Defeat Jomo"
+objective="Defeat Jomo"
 
 [Bigger castle view]
 type="unhide_area"

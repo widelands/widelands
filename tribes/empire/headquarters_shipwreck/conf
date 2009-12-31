@@ -6,6 +6,6 @@ conquers=9
 
 [idle]
 # sfx=0 ../../../sound/spoken/warehouse-bringitin
-pics=wreck_??.png
+pics=headquarters_shipwreck_i_??.png
 hotspot=81 38
 playercolor=true

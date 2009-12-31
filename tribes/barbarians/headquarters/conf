@@ -9,6 +9,6 @@ destructible=no
 conquers=9
 
 [idle]
-pics=hq_i_??.png
+pics=headquarters_i_??.png
 # sfx=0 ../../../sound/spoken/warehouse-bringitin
 hotspot=83 113
