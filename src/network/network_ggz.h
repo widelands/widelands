@@ -121,7 +121,9 @@ struct NetGGZ : public ChatProvider {
 		op_unreachable = 99 // the metaserver says we are unreachable
 	};
 
-	bool initcore(const char * metaserver, const char * playername);
+	bool initcore
+		(const char *, const char *, const char *, const char *,
+		 bool, bool anonymous = false);
 	void deinitcore();
 	bool usedcore();
 	void datacore();

@@ -49,12 +49,9 @@ struct Fullscreen_Menu_NetSetupGGZ : public Fullscreen_Menu_Base {
 		JOINGAME
 	};
 
-	Fullscreen_Menu_NetSetupGGZ ();
+	Fullscreen_Menu_NetSetupGGZ (const char *, const char *, const char *, bool);
 
 	virtual void think();
-
-	/// \returns the name chosen by the player
-	std::string const & get_playername();
 
 	/// \returns the maximum number of players that may connect
 	int32_t get_maxplayers() {
@@ -70,17 +67,22 @@ private:
 	uint32_t                                    m_fs;
 	std::string                                 m_fn;
 	UI::Textarea                                title, m_users, m_opengames;
-	UI::Textarea                                m_playername, m_servername;
+	UI::Textarea                                m_servername;
 	UI::Textarea                                m_maxplayers;
 	UI::SpinBox                                 maxplayers;
 	UI::Callback_Button<Fullscreen_Menu_NetSetupGGZ>            joingame;
 	UI::Callback_Button<Fullscreen_Menu_NetSetupGGZ>            hostgame;
 	UI::Callback_IDButton<Fullscreen_Menu_NetSetupGGZ, int32_t> back;
-	UI::EditBox                                 playername;
 	UI::EditBox                                 servername;
 	UI::Table<const Net_Player * const>         usersonline;
 	UI::Listselect<Net_Open_Game>               opengames;
 	GameChatPanel                               chat;
+
+	// Login information
+	const char * nickname;
+	const char * password;
+	const char * email;
+	bool         newreg;
 
 	void fillServersList(std::vector<Net_Game_Info> const &);
 	void fillUserList   (std::vector<Net_Player> const &);
@@ -91,7 +93,6 @@ private:
 	void server_doubleclicked (uint32_t);
 
 	void change_servername();
-	void change_playername();
 	void clicked_joingame();
 	void clicked_hostgame();
 	void clicked_lasthost();

@@ -342,12 +342,12 @@ void WLApplication::run()
 			char const * const meta = s.get_string("metaserver", WL_METASERVER);
 			char const * const name = s.get_string("nickname", "dedicated");
 			char const * const server = s.get_string("servername", name);
-			if (!NetGGZ::ref().initcore(meta, name)) {
+			if (!NetGGZ::ref().initcore(meta, name, "", "", false, true)) {
 				log(_("ERROR: Could not connect to metaserver (reason above)!\n"));
 				return;
 			}
 			NetGGZ::ref().set_local_servername(server);
-			NetGGZ::ref().set_local_maxplayers(7); // > 7 == freeze -> ggz bug
+			NetGGZ::ref().set_local_maxplayers(8); // > 8 == freeze -> ggz bug
 
 			NetHost netgame(name, true);
 
@@ -796,6 +796,8 @@ bool WLApplication::init_settings() {
 	s.get_bool("dock_windows_to_edges");
 	s.get_bool("remove_syncstreams");
 	s.get_string("nickname");
+	s.get_string("password");
+	s.get_string("emailadd");
 	s.get_string("lasthost");
 	s.get_string("servername");
 	s.get_string("realname");
@@ -1518,11 +1520,8 @@ void WLApplication::mainmenu_multiplayer()
 #if HAVE_GGZ
 		bool ggz = false;
 		NetGGZ::ref().deinitcore(); // cleanup for reconnect to the metaserver
-		{
-			Fullscreen_Menu_MultiPlayer mp;
-			menu_result = mp.run();
-		}
-		switch (menu_result) {
+		Fullscreen_Menu_MultiPlayer mp;
+		switch (mp.run()) {
 			case Fullscreen_Menu_MultiPlayer::Back:
 				return;
 			case Fullscreen_Menu_MultiPlayer::Metaserver:
@@ -1533,17 +1532,29 @@ void WLApplication::mainmenu_multiplayer()
 			default:
 				assert(false);
 		}
-
 		if (ggz) {
+			playername = mp.get_nickname();
+			const char * password(mp.get_password().c_str());
+			const char * email   (mp.get_email().c_str());
+			bool registration = mp.new_registration();
+
+			Section & s = g_options.pull_section("global");
+			s.set_string("nickname", playername);
+			s.set_string("password", password);
+			// Only change the emailaddress if we register new
+			if (registration) {
+				s.set_string("emailadd", email);
+			}
+
 			// reinitalise in every run, else graphics look strange
-			Fullscreen_Menu_NetSetupGGZ ns;
+			Fullscreen_Menu_NetSetupGGZ ns
+				(playername.c_str(), password, email, registration);
 			menu_result = ns.run();
-			playername = ns.get_playername();
 
 			switch (menu_result) {
 				case Fullscreen_Menu_NetSetupGGZ::HOSTGAME: {
-					uint32_t mp = static_cast<uint32_t>(ns.get_maxplayers());
-					NetGGZ::ref().set_local_maxplayers(mp);
+					uint32_t max = static_cast<uint32_t>(ns.get_maxplayers());
+					NetGGZ::ref().set_local_maxplayers(max);
 					NetHost netgame(playername, true);
 					netgame.run();
 					NetGGZ::ref().deinitcore();

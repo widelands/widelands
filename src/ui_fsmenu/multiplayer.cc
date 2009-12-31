@@ -23,6 +23,7 @@
 
 #include "constants.h"
 #include "i18n.h"
+#include "wui/login_box.h"
 
 Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 	Fullscreen_Menu_Base("singleplmenu.jpg"),
@@ -45,7 +46,7 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 		(this,
 		 m_butx, m_yres * 6 / 25, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 &Fullscreen_Menu_MultiPlayer::end_modal, *this, Metaserver,
+		 &Fullscreen_Menu_MultiPlayer::ggzLogin, *this,
 		 _("Internet game"), std::string(), true, false,
 		 m_fn, m_fs),
 	lan
@@ -64,6 +65,18 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 		 m_fn, m_fs)
 {
 	title.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+}
+
+void Fullscreen_Menu_MultiPlayer::ggzLogin() {
+	UI::LoginBox lb(this);
+	if (lb.run()) {
+		m_nickname = lb.get_nickname();
+		m_password = lb.get_password();
+		m_email    = lb.get_email();
+		m_register = lb.new_registration();
+
+		end_modal(Metaserver);
+	}
 }
 
 #endif // if HAVE_GGZ

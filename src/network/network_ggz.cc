@@ -175,7 +175,9 @@ char const * NetGGZ::ip()
 
 /// initializes the local ggz core
 bool NetGGZ::initcore
-	(char const * const metaserver, char const * const playername)
+	(char const * const metaserver, char const * const nick,
+	 char const * const pwd, char const * const email,
+	 bool newreg, bool anonymous)
 {
 	GGZOptions opt;
 
@@ -246,13 +248,18 @@ bool NetGGZ::initcore
 	ggzcore_server_set_hostinfo
 		(ggzserver, metaserver, WL_METASERVER_PORT, GGZ_CONNECTION_CLEAR);
 #endif
-	ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, playername, 0, 0);
 
-	// Following are for registering a new account and for logging in an already
-	// registered account:
-	//ggzcore_server_set_logininfo
-		//(ggzserver, GGZ_LOGIN_NEW, playername, passwd, email");
-	//ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN, playername, passwd, 0);
+	// Login anonymously:
+	if (anonymous)
+		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_GUEST, nick, 0, 0);
+
+	// Register a new account:
+	else if (newreg)
+		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN_NEW, nick, pwd, email);
+
+	// Normal login:
+	else
+		ggzcore_server_set_logininfo(ggzserver, GGZ_LOGIN, nick, pwd, 0);
 
 	ggzcore_server_connect(ggzserver);
 
@@ -261,7 +268,7 @@ bool NetGGZ::initcore
 		datacore();
 	log("GGZCORE ## end loop\n");
 
-	username = playername;
+	username = nick;
 	return logged_in;
 }
 

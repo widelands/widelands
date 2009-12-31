@@ -28,8 +28,11 @@
 #include "network/network_ggz.h"
 #include "profile/profile.h"
 
-Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ () :
-	Fullscreen_Menu_Base("internetmenu.jpg"), //  FIXME change this
+Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
+	(char const * const nick, char const * const pwd,
+	 char const * const mail, bool newregister)
+:
+	Fullscreen_Menu_Base("internetmenu.jpg"),
 
 // Values for alignment and size
 	m_butx (m_xres * 13 / 40),
@@ -53,10 +56,6 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ () :
 		(this,
 		 m_lisw + m_xres * 85 / 1000, m_yres * 15 / 100,
 		 _("List of games:")),
-	m_playername
-		(this,
-		 m_xres * 17 / 25, m_yres * 15 / 100,
-		 _("Your nickname:")),
 	m_servername
 		(this,
 		 m_xres * 17 / 25, m_yres * 28 / 100,
@@ -96,9 +95,6 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ () :
 		 m_fn, m_fs),
 
 // Edit boxes
-	playername
-		(this, m_xres * 17 / 25, m_yres     /  5, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
 	servername
 		(this, m_xres * 17 / 25, m_yres * 33 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
@@ -118,7 +114,13 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ () :
 		(this,
 		 m_xres * 3 / 50,  m_yres * 5 / 8,
 		 m_xres * 217 / 250, m_yres * 8 / 25,
-		 NetGGZ::ref())
+		 NetGGZ::ref()),
+
+// Login information
+	nickname(nick),
+	password(pwd),
+	email(mail),
+	newreg(newregister)
 {
 	// Set the texts and style of UI elements
 	Section & s = g_options.pull_section("global"); //  for playername
@@ -126,7 +128,6 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ () :
 	title       .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
 	m_opengames .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_users     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_playername.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_servername.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_maxplayers.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	maxplayers  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -135,10 +136,6 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ () :
 	servername  .changed.set
 		(this, &Fullscreen_Menu_NetSetupGGZ::change_servername);
 	servername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	playername  .setText(s.get_string("nickname", (_("nobody"))));
-	playername  .changed.set
-		(this, &Fullscreen_Menu_NetSetupGGZ::change_playername);
-	playername  .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 
 	// prepare the lists
 	usersonline .set_font(m_fn, m_fs);
@@ -191,9 +188,12 @@ void Fullscreen_Menu_NetSetupGGZ::connectToMetaserver()
 	Section & s = g_options.pull_section("global");
 	char const * const metaserver = s.get_string("metaserver", WL_METASERVER);
 
-	if (NetGGZ::ref().initcore(metaserver, playername.text().c_str())) {
+	if (NetGGZ::ref().initcore(metaserver, nickname, password, email, newreg))
+	{
 		// Update of server spinbox
 		maxplayers.setInterval(1, NetGGZ::ref().max_players());
+
+		// Only one time registration
 	}
 }
 
@@ -250,13 +250,6 @@ void Fullscreen_Menu_NetSetupGGZ::fillUserList
 }
 
 
-/// \returns the name of the player
-std::string const & Fullscreen_Menu_NetSetupGGZ::get_playername()
-{
-	return playername.text();
-}
-
-
 /// called when an entry of the server list was selected
 void Fullscreen_Menu_NetSetupGGZ::server_selected (uint32_t)
 {
@@ -299,17 +292,6 @@ void Fullscreen_Menu_NetSetupGGZ::change_servername()
 		if (tables[i].hostname == servername.text())
 			hostgame.set_enabled(false);
 	}
-}
-
-
-/// called when the playername was changed
-void Fullscreen_Menu_NetSetupGGZ::change_playername()
-{
-	g_options.pull_section("global").set_string("nickname", playername.text());
-	NetGGZ::ref().deinitcore();
-	// instead of directly reconnecting to the server, we wait 2 seconds
-	// to avoid reconnection after each character change.
-	m_namechange = time(0);
 }
 
 
