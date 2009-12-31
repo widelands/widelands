@@ -42,8 +42,9 @@ Window(parent, 0, 0, 500, 200, _("Metaserver login"))
 		  g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0, Align_Left);
 
 	pwd_warning = new Textarea
-		(this, 20, 75,
-		 _("WARNING: Password will be shown and saved readable"));
+		(this, 250, 85,
+		 _("WARNING: Password will be shown and saved readable!"),
+		 Align_Center);
 
 	ta_password = new Textarea(this, 10, 110, _("Password:"));
 	eb_password = new EditBox

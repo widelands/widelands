@@ -17,8 +17,6 @@
  *
  */
 
-// just testing - philipp
-
 #include "minimap.h"
 
 #include "graphic/graphic.h"
@@ -31,7 +29,7 @@
 
 MiniMap::View::View
 	(UI::Panel & parent, int8_t * flags,
-	 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
+	 int32_t const x, int32_t const y, uint32_t const, uint32_t const,
 	 Interactive_Base & ibase)
 :
 	UI::Panel       (&parent, x, y, 10, 10),
@@ -40,13 +38,10 @@ MiniMap::View::View
 	m_viewy       (0),
 	m_pic_map_spot(g_gr->get_picture(PicMod_Game, "pics/map_spot.png")),
 	m_flags       (flags)
-{
-	Widelands::Map const & map = ibase.egbase().map();
-	set_size(w ? w : map.get_width(), h ? h : map.get_height());
-}
+{}
 
 
-/** MiniMapView::set_view_pos(int32_t x, int32_t y)
+/** MiniMap::View::set_view_pos(int32_t x, int32_t y)
  *
  * Set the view point marker to a new position.
  *
@@ -66,7 +61,9 @@ void MiniMap::View::draw(RenderTarget & dst)
 	dst.renderminimap
 		(m_ibase.egbase(),
 		 m_ibase.get_player(),
-		 Point(m_viewx - get_w() / 2, m_viewy - get_h() / 2),
+		(*m_flags) & (MiniMap::Zoom2) ?
+			Point((m_viewx - get_w() / 4), (m_viewy - get_h() / 4)):
+			Point((m_viewx - get_w() / 2), (m_viewy - get_h() / 2)),
 		 *m_flags);
 }
 
@@ -81,8 +78,14 @@ bool MiniMap::View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 		return false;
 
 	//  calculates the coordinates corresponding to the mouse position
-	Widelands::Coords c
-		(m_viewx + 1 - get_w() / 2 + x, m_viewy + 1 - get_h() / 2 + y);
+	Widelands::Coords c;
+	if (*m_flags & MiniMap::Zoom2)
+		c = Widelands::Coords
+			(m_viewx + 1 - (get_w() / 2 - x) / 2,
+			 m_viewy + 1 - (get_h() / 2 - y) / 2);
+	else
+		c = Widelands::Coords
+			(m_viewx + 1 - get_w() / 2 + x, m_viewy + 1 - get_h() / 2 + y);
 
 	m_ibase.egbase().map().normalize_coords(c);
 
@@ -93,6 +96,11 @@ bool MiniMap::View::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 }
 bool MiniMap::View::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
 	return btn == SDL_BUTTON_LEFT;
+}
+
+void MiniMap::View::set_zoom(int32_t z) {
+	Widelands::Map const & map = m_ibase.egbase().map();
+	set_size((map.get_width() * z), (map.get_height()) * z);
 }
 
 
@@ -160,14 +168,47 @@ button_bldns
 	 g_gr->get_no_picture(),
 	 g_gr->get_picture(PicMod_UI, "pics/button_bldns.png"),
 	 &MiniMap::toggle, *this, Bldns,
-	 _("Buildings"))
+	 _("Buildings")),
+button_zoom
+	(this,
+	 but_w() * 2, m_view.get_h() + but_h() * 1, but_w(), but_h(),
+	 g_gr->get_no_picture(),
+	 g_gr->get_picture(PicMod_UI, "pics/button_zoom.png"),
+	 &MiniMap::toggle, *this, Zoom2,
+	 _("Zoom"))
 {
-	set_inner_size
-		(m_view.get_w(), m_view.get_h() + number_of_button_rows() * but_h());
+
+	resize();
 
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
 
-void MiniMap::toggle(Layers const button) {*m_view.m_flags ^= button;}
+void MiniMap::toggle(Layers const button) {
+	*m_view.m_flags ^= button;
+	if (button == Zoom2)
+		resize();
+}
+
+void MiniMap::resize() {
+	if (*m_view.m_flags & Zoom2)
+		m_view.set_zoom(2);
+	else
+		m_view.set_zoom(1);
+	set_inner_size
+	(m_view.get_w(), m_view.get_h() + number_of_button_rows() * but_h());
+	button_terrn.set_pos(Point(but_w() * 0, m_view.get_h() + but_h() * 0));
+	button_terrn.set_size(but_w(), but_h());
+	button_owner.set_pos(Point(but_w() * 1, m_view.get_h() + but_h() * 0));
+	button_owner.set_size(but_w(), but_h());
+	button_flags.set_pos(Point(but_w() * 2, m_view.get_h() + but_h() * 0));
+	button_flags.set_size(but_w(), but_h());
+	button_roads.set_pos(Point(but_w() * 0, m_view.get_h() + but_h() * 1));
+	button_roads.set_size(but_w(), but_h());
+	button_bldns.set_pos(Point(but_w() * 1, m_view.get_h() + but_h() * 1));
+	button_bldns.set_size(but_w(), but_h());
+	button_zoom .set_pos(Point(but_w() * 2, m_view.get_h() + but_h() * 1));
+	button_zoom .set_size(but_w(), but_h());
+	move_inside_parent();
+}

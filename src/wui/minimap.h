@@ -40,13 +40,14 @@ struct MiniMap : public UI::UniqueWindow {
 		m_view.set_view_pos(x, y);
 	}
 
-	enum Layers {Terrn = 1, Owner = 2, Flags = 4, Roads = 8, Bldns = 16};
+	enum Layers {Terrn = 1, Owner = 2, Flags = 4, Roads = 8, Bldns = 16, Zoom2 = 32};
 
 private:
 	void toggle(Layers);
+	void resize();
 
 	/**
-	 * MiniMapView is the panel that represents the pure representation of the
+	 * MiniMap::View is the panel that represents the pure representation of the
 	 * map, without any borders or gadgets.
 	 *
 	 * If the size of MiniMapView is not the same as the size of the map itself,
@@ -67,6 +68,9 @@ private:
 		bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 		bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
+		void set_zoom(int32_t z);
+
+
 	private:
 		Interactive_Base & m_ibase;
 		int32_t                m_viewx, m_viewy;
@@ -86,6 +90,7 @@ private:
 	UI::Callback_IDButton<MiniMap, Layers> button_flags;
 	UI::Callback_IDButton<MiniMap, Layers> button_roads;
 	UI::Callback_IDButton<MiniMap, Layers> button_bldns;
+	UI::Callback_IDButton<MiniMap, Layers> button_zoom;
 };
 
 #endif

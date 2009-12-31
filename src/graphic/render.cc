@@ -328,34 +328,47 @@ static void draw_minimap_int
 	Widelands::Map const & map = egbase.map();
 	if (not player or player->see_all()) for (uint32_t y = 0; y < rc.h; ++y) {
 		Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
-		Widelands::FCoords f(Widelands::Coords(viewpoint.x, viewpoint.y + y), 0);
+		Widelands::FCoords f;
+		if (flags & MiniMap::Zoom2)
+			f = Widelands::FCoords
+				(Widelands::Coords(viewpoint.x, viewpoint.y + y / 2), 0);
+		else
+			f = Widelands::FCoords
+				(Widelands::Coords(viewpoint.x, viewpoint.y + y), 0);
 		map.normalize_coords(f);
 		f.field = &map[f];
 		Widelands::Map_Index i = Widelands::Map::get_index(f, mapwidth);
 		for (uint32_t x = 0; x < rc.w; ++x, pix += sizeof(T)) {
-			move_r(mapwidth, f, i);
+			if (x % 2 || !(flags & MiniMap::Zoom2))
+				move_r(mapwidth, f, i);
 			*reinterpret_cast<T *>(pix) = static_cast<T>
 				(calc_minimap_color
-				 	(format, egbase, f, flags, f.field->get_owned_by(), true));
+					(format, egbase, f, flags, f.field->get_owned_by(), true));
 		}
 	} else {
 		Widelands::Player::Field const * const player_fields = player->fields();
 		for (uint32_t y = 0; y < rc.h; ++y) {
 			Uint8 * pix = pixels + (rc.y + y) * pitch + rc.x * sizeof(T);
-			Widelands::FCoords f
-				(Widelands::Coords(viewpoint.x, viewpoint.y + y), 0);
+			Widelands::FCoords f;
+			if (flags & MiniMap::Zoom2)
+				f = Widelands::FCoords
+					(Widelands::Coords(viewpoint.x, viewpoint.y + y / 2), 0);
+			else
+				f = Widelands::FCoords
+					(Widelands::Coords(viewpoint.x, viewpoint.y + y), 0);
 			map.normalize_coords(f);
 			f.field = &map[f];
 			Widelands::Map_Index i = Widelands::Map::get_index(f, mapwidth);
 			for (uint32_t x = 0; x < rc.w; ++x, pix += sizeof(T)) {
-				move_r(mapwidth, f, i);
+				if (x % 2 || !(flags & MiniMap::Zoom2))
+					move_r(mapwidth, f, i);
 				Widelands::Player::Field const & player_field = player_fields[i];
 				Widelands::Vision const vision = player_field.vision;
 				*reinterpret_cast<T *>(pix) =
 					static_cast<T>
 					(vision ?
 					 calc_minimap_color
-					 	(format, egbase, f, flags, player_field.owner, 1 < vision)
+						(format, egbase, f, flags, player_field.owner, 1 < vision)
 					 :
 					 0);
 			}
@@ -638,11 +651,11 @@ end:
 #ifdef VALIDATE_ANIMATION_CROPPING
 	if
 		(char const * const where =
-		 	not data_in_x_min ? "left column"  :
-		 	not data_in_x_max ? "right column" :
-		 	not data_in_y_min ? "top row"      :
-		 	not data_in_y_max ? "bottom row"   :
-		 	0)
+			not data_in_x_min ? "left column"  :
+			not data_in_x_max ? "right column" :
+			not data_in_y_min ? "top row"      :
+			not data_in_y_max ? "bottom row"   :
+			0)
 		log
 			("The animation %s is not properly cropped (the %s has only fully "
 			 "transparent pixels in each frame. Therefore the %s should be "
@@ -698,7 +711,7 @@ void AnimationGfx::encode(uint8_t const plr, RGBColor const * const plrclrs)
 
 				if
 					(uint32_t const influence =
-					 	static_cast<uint32_t>(mask.r) * mask.a)
+						static_cast<uint32_t>(mask.r) * mask.a)
 				{
 					uint32_t const intensity =
 						(luminance_table_r[source.r] +
