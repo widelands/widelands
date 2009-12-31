@@ -21,6 +21,7 @@
 
 #include "attackable.h"
 #include "battle.h"
+#include "building.h"
 #include "checkstep.h"
 #include "economy/flag.h"
 #include "editor_game_base.h"
@@ -744,6 +745,7 @@ void Soldier::start_task_attack
 void Soldier::attack_update(Game & game, State & state)
 {
 	std::string signal = get_signal();
+	uint32_t    defenders = 0;
 
 	if (signal.size()) {
 		if
@@ -797,13 +799,26 @@ void Soldier::attack_update(Game & game, State & state)
 		return pop_task(game);
 	}
 
+	// Count remaining defenders
+	if (enemy) {
+		if (upcast(MilitarySite, ms, enemy)) {
+			defenders = ms->presentSoldiers().size();
+		}
+		if (upcast(Warehouse, wh, enemy)) {
+			Requirements noreq;
+			defenders = wh->count_workers
+				(game, wh->tribe().worker_index("soldier"), noreq);
+		}
+	}
+
 	if
 		(!enemy or
 		 (state.ivar1 & CF_RETREAT_WHEN_INJURED and
-		  state.ui32var3 > get_current_hitpoints()))
+		  state.ui32var3 > get_current_hitpoints() and
+		  defenders > 0))
 	{
 		// Injured soldiers will try to return to safe site at home.
-		if (state.ui32var3 > get_current_hitpoints()) {
+		if (state.ui32var3 > get_current_hitpoints() and defenders) {
 			state.coords = Coords(0, 0);
 			state.objvar1 = 0;
 		}
