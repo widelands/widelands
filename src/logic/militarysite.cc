@@ -656,7 +656,8 @@ bool MilitarySite::military_presence_kept(Game & game)
 			if
 				(this       !=  militarysite          and
 				 &owner  () == &militarysite->owner() and
-				 get_size() <=  militarysite->get_size())
+				 get_size() <=  militarysite->get_size() and
+				 militarysite->presentSoldiers().size())
 				return true;
 	return false;
 }
