@@ -1,6 +1,9 @@
 size=medium
 output=bread
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=2
 planks=2

@@ -9,6 +9,7 @@ planks=1
 stonecutter=1
 
 [aihints]
+is_basic=true
 stoneproducer=true
 
 [programs]

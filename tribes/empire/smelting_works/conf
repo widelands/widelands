@@ -2,6 +2,9 @@ size=medium
 output=iron
 output=gold
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=1
 stone=4

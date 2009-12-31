@@ -2,6 +2,9 @@ size=medium
 output=beer
 enhancement=brewery
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=3
 blackwood=2

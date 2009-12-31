@@ -1,6 +1,9 @@
 size=medium
 output=wine
 
+[aihints]
+build_material=false
+
 [buildcost]
 wood=1
 stone=1

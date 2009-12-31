@@ -802,18 +802,20 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// Priority of woodcutters depend on the number of near trees
 					prio += bf->trees_nearby * 5 / 3;
 					prio /= 2 * (1 + bf->tree_consumers_nearby);
-					if (bo.total_count() < 2)
+					if (bo.total_count() < 2) {
 						prio *= 6; // big bonus for the basics
-					if (bo.total_count() == 0)
-						prio *= 2; // even more for the absolute basics
+						if (bo.total_count() == 0)
+							prio *= 4; // even more for the absolute basics
+					}
 				} else if (bo.need_stones) {
 					// Priority of quarries depend on the number of near stones
 					prio += bf->stones_nearby * 5 / 3;
-					prio /= 2 * (1 + bf->stone_consumers_nearby);
-					if (bo.total_count() < 2)
+					prio /= 3 * (1 + bf->stone_consumers_nearby);
+					if (bo.total_count() < 2) {
 						prio *= 6; // big bonus for the basics
-					if (bo.total_count() == 0)
-						prio *= 2; // even more for the absolute basics
+						if (bo.total_count() == 0)
+							prio *= 4; // even more for the absolute basics
+					}
 				} else if (bo.production_hint >= 0) {
 					// production hint (f.e. associate forester with trunks)
 					// add bonus near buildings outputting production_hint ware
@@ -931,8 +933,12 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			}
 
 			// avoid to have too many construction sites
-			prio -=
-				2 * bo.cnt_under_construction * (bo.cnt_under_construction + 1);
+			// but still enable the player to build up basic productionsites
+			if
+				(bo.type != BuildingObserver::PRODUCTIONSITE
+				|| !bo.is_basic || bo.total_count() > 0)
+				prio -=
+					2 * bo.cnt_under_construction * (bo.cnt_under_construction + 1);
 
 			// add big penalty if water is needed, but is not near
 			if (bo.need_water) {

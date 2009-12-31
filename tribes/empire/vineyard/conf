@@ -1,6 +1,9 @@
 size=medium
 output=grape
 
+[aihints]
+build_material=false
+
 [buildcost]
 wood=2
 stone=1

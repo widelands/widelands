@@ -8,6 +8,7 @@ trunk=3
 lumberjack=1
 
 [aihints]
+is_basic=true
 trunkproducer=true
 
 [programs]

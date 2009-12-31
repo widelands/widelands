@@ -6,6 +6,9 @@ planks=3
 stone=2
 trunk=4
 
+[aihints]
+build_material=false
+
 [working positions]
 blackroot_farmer=1
 

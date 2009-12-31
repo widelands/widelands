@@ -1,6 +1,9 @@
 size=medium
 output=pittabread
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=2
 blackwood=2

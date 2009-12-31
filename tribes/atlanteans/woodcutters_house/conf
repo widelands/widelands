@@ -9,6 +9,7 @@ planks=1
 woodcutter=1
 
 [aihints]
+is_basic=true
 trunkproducer=true
 
 [programs]

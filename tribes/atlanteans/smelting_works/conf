@@ -8,6 +8,9 @@ stone=4
 planks=1
 spidercloth=1
 
+[aihints]
+build_material=false
+
 [working positions]
 smelter=1
 

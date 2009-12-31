@@ -10,6 +10,7 @@ wood=1
 stonemason=1
 
 [aihints]
+is_basic=true
 stoneproducer=true
 
 [programs]

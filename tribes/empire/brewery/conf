@@ -1,6 +1,9 @@
 size=medium
 output=beer
 
+[aihints]
+build_material=false
+
 [buildcost]
 trunk=1
 wood=2
