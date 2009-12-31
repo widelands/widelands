@@ -553,11 +553,24 @@ bool MilitarySite::attack(Soldier & enemy)
 		// The enemy has defeated our forces, we should inform the player
 		const Coords coords = get_position();
 		{
+			char formation[256];
+			std::string b_name(name());
+			std::string b_tribe(tribe().name());
+			if (b_name.find('.') <= b_name.size()) {
+				// global militarysite
+				b_tribe = b_name.substr(b_name.find('.'), b_name.size());
+				b_name.resize(b_name.find('.'));
+			}
+			snprintf
+				(formation, sizeof(formation),
+				 "<rt image=tribes/%s/%s/%s_i_00.png>"
+				 "<p font-size=14 font-face=FreeSerif>",
+				 b_tribe.c_str(), b_name.c_str(), b_name.c_str());
 			char message[2048];
 			snprintf
 				(message, sizeof(message),
-				 _("The enemy defeated your soldiers at the %s."),
-				 descname().c_str());
+				 _("%sThe enemy defeated your soldiers at the %s.</p></rt>"),
+				 formation, descname().c_str());
 			MessageQueue::add
 				(owner().player_number(),
 				 Message
@@ -617,11 +630,24 @@ bool MilitarySite::attack(Soldier & enemy)
 		newsite->reinit_after_conqueration(game);
 
 		// Of course we should inform the victorius player as well
+		char formation[256];
+		std::string b_name(newsite->name());
+		std::string b_tribe(enemytribe.name().c_str());
+		if (b_name.find('.') <= b_name.size()) {
+			// global militarysite
+			b_tribe = b_name.substr(b_name.find('.'), b_name.size());
+			b_name.resize(b_name.find('.'));
+		}
+		snprintf
+			(formation, sizeof(formation),
+			 "<rt image=tribes/%s/%s/%s_i_00.png>"
+			 "<p font-size=14 font-face=FreeSerif>",
+			 b_tribe.c_str(), b_name.c_str(), b_name.c_str());
 		char message[2048];
 			snprintf
 				(message, sizeof(message),
-				 _("Your soldiers defeated the enemy at the %s."),
-				 newsite->descname().c_str());
+				 _("%sYour soldiers defeated the enemy at the %s.</p></rt>"),
+				 formation, newsite->descname().c_str());
 		MessageQueue::add
 			(enemyplayer->player_number(),
 			 Message
@@ -679,13 +705,26 @@ void MilitarySite::informPlayer(Game & game, bool discovered)
 		 } i = {msgQueue.begin(), msgQueue.end()};;
 		 ++i.current)
 		if (i.current == i.end) {
+			char formation[256];
+			std::string b_name(name());
+			std::string b_tribe(tribe().name());
+			if (b_name.find('.') <= b_name.size()) {
+				// global militarysite
+				b_tribe = b_name.substr(b_name.find('.'), b_name.size());
+				b_name.resize(b_name.find('.'));
+			}
+			snprintf
+				(formation, sizeof(formation),
+				 "<rt image=tribes/%s/%s/%s_i_00.png>"
+				 "<p font-size=14 font-face=FreeSerif>",
+				 b_tribe.c_str(), b_name.c_str(), b_name.c_str());
 			char message[2048];
 			snprintf
 				(message, sizeof(message),
 				 discovered ?
-				 _("Your %s discovered an aggressor.") :
-				 _("Your %s is under attack."),
-				 descname().c_str());
+				 _("%sYour %s discovered an aggressor.</p></rt>") :
+				 _("%sYour %s is under attack.</p></rt>"),
+				 formation, descname().c_str());
 			MessageQueue::add
 				(owner(),
 				 Message

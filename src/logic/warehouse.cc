@@ -432,10 +432,17 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			log
 				("Message: adding (wh) (%s) %i \n",
 				 type_name(), owner().player_number());
+			char formation[256];
+			snprintf
+				(formation, sizeof(formation),
+				 "<rt image=tribes/%s/%s/%s_i_00.png>"
+				 "<p font-size=14 font-face=FreeSerif>",
+				 tribe().name().c_str(), name().c_str(), name().c_str());
 			char message[2048];
 			snprintf
 				(message, sizeof(message),
-				 _("A new %s was added to your economy."), descname().c_str());
+				 _("%sA new %s was added to your economy.</p></rt>"),
+				 formation, descname().c_str());
 			MessageQueue::add
 				(owner(),
 				 Message
