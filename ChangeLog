@@ -1,4 +1,19 @@
 ### Build 15 (until now)
+- Implemented zoomable minimap (svn:r4820)
+- Added login/register menu for games via metaserver (svn:r4818)
+- Added a small scenario part to "The Green Plateau" map (svn:r4808)
+- Added new event "seeall" allowing to switch see all mode of a player
+  to on/off. (svn:r4804)
+- Added new events for 'retreat when injured'. (svn:r4796)
+- Improved Battle code
+    * Added support for soldier combat animations (svn:r4772)
+    * Let soldiers retreat, when they are injured (svn:r4796)
+    * New attack user interface (svn:r4802)
+- Added a new map 'Atoll' (svn:r4755)
+- Show in the statistics string why a building is not working. (svn:r4744)
+- Improvements in replay handling to save diskspace (svn:r4719)
+    * Only write syncstreams in multiplayer games
+    * Delete old (definable) replay files and syncstreams at startup
 - Replace the event type that allows or forbids a building type for a player
   with 2 separate event types (for allow and forbid respectively). They can
   handle multiple building types in the same event and the configuration dialog
@@ -57,6 +72,7 @@
   description was shorter than a certain length (different for different
   locales), the program would crash when a letter was typed in the description
   multilineeditbox. (svn:r4563)
+
 ### Build 14
 - Fix bug that the Firegames map had no water. (svn:r4533)
 - New tree and stone graphics for the Blackland world. (svn:r4525, svn:r4526,
