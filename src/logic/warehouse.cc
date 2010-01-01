@@ -444,7 +444,7 @@ void Warehouse::init(Editor_Game_Base & egbase)
 				 _("%sA new %s was added to your economy.</p></rt>"),
 				 formation, descname().c_str());
 			MessageQueue::add
-				(owner(),
+				(owner().player_number(),
 				 Message
 				 	(MSG_WAREHOUSE,
 				 	 egbase.get_gametime(),
