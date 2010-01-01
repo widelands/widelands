@@ -38,6 +38,7 @@ struct Fullscreen_Menu_MultiPlayer : public Fullscreen_Menu_Base {
 
 	enum {Back = dying_code, Metaserver, Lan};
 
+	void showGGZLogin();
 	void ggzLogin();
 	std::string get_nickname() {return m_nickname;}
 	std::string get_password() {return m_password;}
@@ -52,6 +53,7 @@ private:
 	std::string                                         m_fn;
 	UI::Textarea                                        title;
 	UI::Callback_Button<Fullscreen_Menu_MultiPlayer>    metaserver;
+	UI::Callback_Button<Fullscreen_Menu_MultiPlayer>  * showloginbox;
 	UI::Callback_IDButton<Fullscreen_Menu_MultiPlayer, int32_t> lan;
 	UI::Callback_IDButton<Fullscreen_Menu_MultiPlayer, int32_t> back;
 
@@ -60,6 +62,7 @@ private:
 	std::string m_password;
 	std::string m_email;
 	bool        m_register;
+	bool        m_auto_log;
 };
 
 #endif // if HAVE_GGZ

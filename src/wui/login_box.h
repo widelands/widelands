@@ -34,6 +34,7 @@ struct LoginBox : public Window {
 	std::string get_password() {return eb_password->text();}
 	std::string get_email()    {return eb_emailadd->text();}
 	bool new_registration()    {return cb_register->get_state();}
+	bool set_automaticlog()    {return cb_auto_log->get_state();}
 
 private:
 	void pressedLogin();
@@ -44,10 +45,12 @@ private:
 	EditBox  * eb_emailadd;
 	EditBox  * eb_password;
 	Checkbox * cb_register;
+	Checkbox * cb_auto_log;
 	Textarea * ta_nickname;
 	Textarea * ta_emailadd;
 	Textarea * ta_password;
 	Textarea * ta_register;
+	Textarea * ta_auto_log;
 	Textarea * pwd_warning;
 };
 

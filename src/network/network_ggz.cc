@@ -799,6 +799,9 @@ void NetGGZ::write_tablelist()
 		tablelist.push_back(info);
 	}
 	tableupdate   = true;
+
+	// If a table was changed at least one user changed to that table as well
+	write_userlist();
 }
 
 
@@ -824,6 +827,12 @@ void NetGGZ::write_userlist()
 		user.name = ggzcore_player_get_name(player);
 		GGZTable * tab = ggzcore_player_get_table(player);
 		user.table = tab ? ggzcore_table_get_desc(tab) : "--";
+		int32_t buf;
+		if (ggzcore_player_get_rating(player, &buf)) {
+			snprintf(user.stats, sizeof(user.stats), "%i", buf);
+		} else
+			snprintf(user.stats, sizeof(user.stats), "%i", 0);
+		user.type = ggzcore_player_get_type(player);
 		userlist.push_back(user);
 	}
 	userupdate = true;

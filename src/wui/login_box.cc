@@ -27,7 +27,7 @@ namespace UI {
 
 LoginBox::LoginBox(Panel * parent)
 :
-Window(parent, 0, 0, 500, 200, _("Metaserver login"))
+Window(parent, 0, 0, 500, 230, _("Metaserver login"))
 {
 	center_to_parent();
 
@@ -51,18 +51,23 @@ Window(parent, 0, 0, 500, 200, _("Metaserver login"))
 		(this, 150, 110, 330, 20,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0, Align_Left);
 
-	cb_register = new Checkbox(this, Point(150, 135));
-	ta_register = new Textarea(this, 180, 130, _("Register new account"));
+	cb_register = new Checkbox(this, Point(10, 135));
+	ta_register = new Textarea(this, 40, 130, _("Register new account"));
+
+	cb_auto_log = new Checkbox(this, Point(10, 160));
+	ta_auto_log = new Textarea
+		(this, 40, 155,
+		 _("Automatically use these login informations from now on."));
 
 	new Callback_Button<LoginBox>
 		(this,
-		 (get_inner_w() / 2 - 200) / 2, 170, 200, 20,
+		 (get_inner_w() / 2 - 200) / 2, 195, 200, 20,
 		  g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &LoginBox::pressedLogin, *this,
 		 _("Login"));
 	new Callback_Button<LoginBox>
 		(this,
-		 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2, 170, 200, 20,
+		 (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2, 195, 200, 20,
 		  g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &LoginBox::pressedCancel, *this,
 		 _("Cancel"));

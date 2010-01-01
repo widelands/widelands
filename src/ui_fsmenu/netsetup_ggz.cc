@@ -36,9 +36,9 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 
 // Values for alignment and size
 	m_butx (m_xres * 13 / 40),
-	m_butw (m_xres / 4),
+	m_butw (m_xres * 36 / 125),
 	m_buth (m_yres * 19 / 400),
-	m_lisw (m_xres * 20 / 63),
+	m_lisw (m_xres * 623 / 1000),
 	m_namechange(0),
 	m_fs   (fs_small()),
 	m_fn   (ui_fn()),
@@ -50,45 +50,45 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 		 _("Metaserver Lobby"), UI::Align_HCenter),
 	m_users
 		(this,
-		 m_xres * 3 / 50, m_yres * 15 / 100,
+		 m_xres * 4 / 125, m_yres * 15 / 100,
 		 _("Users online:")),
 	m_opengames
 		(this,
-		 m_lisw + m_xres * 85 / 1000, m_yres * 15 / 100,
+		 m_xres * 17 / 25, m_yres * 15 / 100,
 		 _("List of games:")),
 	m_servername
 		(this,
-		 m_xres * 17 / 25, m_yres * 28 / 100,
+		 m_xres * 17 / 25, m_yres * 63 / 100,
 		 _("Name of your server:")),
 	m_maxplayers
 		(this,
-		 m_xres * 17 / 25, m_yres * 38 / 100,
+		 m_xres * 17 / 25, m_yres * 73 / 100,
 		 _("Maximum of players:")),
 
 // Spinboxes
 	maxplayers
 		(this,
-		 m_xres * 17 / 25, m_yres * 42 / 100, m_butw, m_buth * 7 / 10,
+		 m_xres * 17 / 25, m_yres * 77 / 100, m_butw, m_buth * 7 / 10,
 		 8, 1, 8), //  start/min./max. value dummy initializations
 
 // Buttons
 	joingame
 		(this,
-		 m_lisw + m_xres * 85 / 1000, m_yres * 55 / 100, m_lisw * 4 / 5, m_buth,
+		 m_xres * 17 / 25, m_yres * 55 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_NetSetupGGZ::clicked_joingame, *this,
 		 _("Join this game"), std::string(), false, false,
 		 m_fn, m_fs),
 	hostgame
 		(this,
-		 m_xres * 17 / 25, m_yres * 46 / 100, m_butw, m_buth,
+		 m_xres * 17 / 25, m_yres * 81 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
 		 &Fullscreen_Menu_NetSetupGGZ::clicked_hostgame, *this,
 		 _("Open a new game"), std::string(), true, false,
 		 m_fn, m_fs),
 	back
 		(this,
-		 m_xres * 17 / 25, m_yres * 55 / 100, m_butw, m_buth,
+		 m_xres * 17 / 25, m_yres * 90 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_NetSetupGGZ::end_modal, *this, CANCEL,
 		 _("Back"), std::string(), true, false,
@@ -96,24 +96,24 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 
 // Edit boxes
 	servername
-		(this, m_xres * 17 / 25, m_yres * 33 / 100, m_butw, m_buth,
+		(this, m_xres * 17 / 25, m_yres * 68 / 100, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"), 0),
 
 // List
 	usersonline
 		(this,
-		 m_xres * 3 / 50, m_yres     / 5,
-		 m_lisw,          m_yres * 2 / 5),
+		 m_xres * 4 / 125, m_yres     / 5,
+		 m_lisw,          m_yres * 3 / 10),
 	opengames
 		(this,
-		 m_lisw + m_xres * 17 / 200, m_yres     /  5,
-		 m_lisw * 4 / 5,             m_yres * 7 / 20),
+		 m_xres * 17 / 25, m_yres    / 5,
+		 m_butw,  m_yres * 7 / 20),
 
 // The chat UI
 	chat
 		(this,
-		 m_xres * 3 / 50,  m_yres * 5 / 8,
-		 m_xres * 217 / 250, m_yres * 8 / 25,
+		 m_xres * 4 / 125,    m_yres * 51 / 100,
+		 m_lisw, m_yres * 44 / 100,
 		 NetGGZ::ref()),
 
 // Login information
@@ -139,8 +139,10 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 
 	// prepare the lists
 	usersonline .set_font(m_fn, m_fs);
-	usersonline .add_column(m_lisw / 2, _("Name"));
-	usersonline .add_column(m_lisw / 2, _("Server"));
+	usersonline .add_column(22, "°");
+	usersonline .add_column((m_lisw - 22) * 3 / 8, _("Name"));
+	usersonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
+	usersonline .add_column((m_lisw - 22) * 3 / 8, _("Server"));
 	opengames   .set_font(m_fn, m_fs);
 	opengames   .selected.set
 		(this, &Fullscreen_Menu_NetSetupGGZ::server_selected);
@@ -244,8 +246,35 @@ void Fullscreen_Menu_NetSetupGGZ::fillUserList
 		Net_Player user(users[i]);
 		UI::Table<const Net_Player * const>::Entry_Record & er =
 			usersonline.add(&user);
-			er.set_string(0, users[i].name);
-			er.set_string(1, users[i].table);
+		er.set_string(1, user.name);
+		er.set_string(2, user.stats);
+		er.set_string(3, user.table);
+
+		PictureID pic;
+		switch (user.type) {
+			// NOTE the chars in set_picture() are only there to make list sortable
+			case GGZ_PLAYER_GUEST:
+				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_red.png");
+				er.set_picture(0, pic, "3");
+				break;
+			case GGZ_PLAYER_NORMAL:
+				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_yellow.png");
+				er.set_picture(0, pic, "2");
+				break;
+			case GGZ_PLAYER_ADMIN:
+			case GGZ_PLAYER_HOST:
+			case GGZ_PLAYER_BOT:
+				pic = g_gr->get_picture(PicMod_UI, "pics/roadb_green.png");
+				er.set_color(RGBColor(0, 255, 0));
+				er.set_picture(0, pic, "1");
+				break;
+			case GGZ_PLAYER_UNKNOWN:
+				pic = g_gr->get_picture(PicMod_UI, "pics/low_priority_button.png");
+				er.set_picture(0, pic, "4");
+				break;
+			default:
+				continue;
+		}
 	}
 }
 

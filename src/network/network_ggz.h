@@ -45,8 +45,10 @@
 
 /// A simply network player struct
 struct Net_Player {
-	std::string table;
-	std::string name;
+	std::string   table;
+	std::string   name;
+	GGZPlayerType type;
+	char          stats[16];
 };
 
 /// A MOTD struct for easier output to the chat panel

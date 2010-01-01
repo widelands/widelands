@@ -23,6 +23,7 @@
 
 #include "constants.h"
 #include "i18n.h"
+#include "profile/profile.h"
 #include "wui/login_box.h"
 
 Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
@@ -65,15 +66,44 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 		 m_fn, m_fs)
 {
 	title.set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
+
+	Section & s = g_options.pull_section("global");
+	m_auto_log = s.get_bool("auto_log", false);
+	if (m_auto_log)
+		showloginbox = new UI::Callback_Button<Fullscreen_Menu_MultiPlayer>
+			(this,
+			 m_butx + m_butw + m_buth / 4, m_yres * 6 / 25, m_buth, m_buth,
+			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+			 g_gr->get_picture(PicMod_UI, "pics/continue.png"),
+			 &Fullscreen_Menu_MultiPlayer::showGGZLogin, *this,
+			 _("Show login dialog"), true, false,
+			 m_fn, m_fs);
+}
+
+void Fullscreen_Menu_MultiPlayer::showGGZLogin() {
+	m_auto_log = false;
+	ggzLogin();
 }
 
 void Fullscreen_Menu_MultiPlayer::ggzLogin() {
+	Section & s = g_options.pull_section("global");
+	if (m_auto_log) {
+		m_nickname = s.get_string("nickname", _("nobody"));
+		m_password = s.get_string("password", "nobody");
+		m_email    = s.get_string("emailadd", "nobody@nobody.nob");
+		m_register = false;
+		end_modal(Metaserver);
+		return;
+	}
+
 	UI::LoginBox lb(this);
 	if (lb.run()) {
 		m_nickname = lb.get_nickname();
 		m_password = lb.get_password();
 		m_email    = lb.get_email();
 		m_register = lb.new_registration();
+
+		s.set_bool("auto_log", lb.set_automaticlog());
 
 		end_modal(Metaserver);
 	}

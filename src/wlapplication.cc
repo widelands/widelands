@@ -798,6 +798,7 @@ bool WLApplication::init_settings() {
 	s.get_string("nickname");
 	s.get_string("password");
 	s.get_string("emailadd");
+	s.get_string("auto_log");
 	s.get_string("lasthost");
 	s.get_string("servername");
 	s.get_string("realname");
