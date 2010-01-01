@@ -50,6 +50,9 @@ struct GameChatPanel :
 	 */
 	UI::Signal aborted;
 
+	std::string const & get_edit_text() const {return editbox.text();}
+	void set_edit_text(std::string const & text) {editbox.setText(text);}
+
 	void focusEdit();
 
 	void receive(ChatMessage const &);

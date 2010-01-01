@@ -143,6 +143,8 @@ Fullscreen_Menu_NetSetupGGZ::Fullscreen_Menu_NetSetupGGZ
 	usersonline .add_column((m_lisw - 22) * 3 / 8, _("Name"));
 	usersonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
 	usersonline .add_column((m_lisw - 22) * 3 / 8, _("Server"));
+	usersonline .double_clicked.set
+		(this, &Fullscreen_Menu_NetSetupGGZ::user_doubleclicked);
 	opengames   .set_font(m_fn, m_fs);
 	opengames   .selected.set
 		(this, &Fullscreen_Menu_NetSetupGGZ::server_selected);
@@ -275,6 +277,32 @@ void Fullscreen_Menu_NetSetupGGZ::fillUserList
 			default:
 				continue;
 		}
+	}
+}
+
+
+/// called when an entry of the user list was doubleclicked
+void Fullscreen_Menu_NetSetupGGZ::user_doubleclicked (uint32_t i)
+{
+	// add a @username to the current edit text.
+	if (usersonline.has_selection()) {
+		UI::Table<const Net_Player * const>::Entry_Record & er
+			= usersonline.get_record(i);
+
+		std::string temp("@");
+		temp += er.get_string(1);
+		std::string text(chat.get_edit_text());
+
+		if (text.size() && (text.at(0) == '@')) { // already PM ?
+			if (text.find(' ') <= text.size())
+				text = text.substr(text.find(' '), text.size());
+			else
+				text.clear();
+		} else
+			temp += " "; // The needed space between name and text
+
+		temp += text;
+		chat.set_edit_text(temp);
 	}
 }
 

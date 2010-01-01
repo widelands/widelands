@@ -734,10 +734,10 @@ void MilitarySite::informPlayer(Game & game, bool discovered)
 		} else if
 			(i.current->sender() == MSG_UNDER_ATTACK and
 			 map.calc_distance(i.current->get_coords(), coords) < 5 and
-			 game.get_gametime() - i.current->time() < 30000)
+			 game.get_gametime() - i.current->time() < 60000)
 			//  Soldiers are running around during their attack, so we avoid too
 			//  many messages through checking an area with radius = 4
-			//  Further if the found message is older than 30 sec., and the fight
+			//  Further if the found message is older than 60 sec., and the fight
 			//  still goes on, a reminder might be useful.
 			break;
 }

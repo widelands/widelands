@@ -89,6 +89,7 @@ private:
 
 	void connectToMetaserver();
 
+	void user_doubleclicked (uint32_t);
 	void server_selected (uint32_t);
 	void server_doubleclicked (uint32_t);
 
