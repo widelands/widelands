@@ -10,6 +10,7 @@ raw_stone=2
 miner=1
 
 [aihints]
+build_material=false
 mines=iron
 mines_percent=30
 

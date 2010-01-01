@@ -5,6 +5,9 @@ output=meat
 trunk=4
 raw_stone=1
 
+[aihints]
+build_material=false
+
 [working positions]
 hunter=1
 

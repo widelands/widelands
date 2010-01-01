@@ -7,6 +7,9 @@ trunk=2
 stone=2
 marblecolumn=2
 
+[aihints]
+build_material=false
+
 [working positions]
 pig-breeder=1
 

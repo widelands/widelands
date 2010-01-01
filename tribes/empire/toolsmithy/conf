@@ -19,6 +19,9 @@ stone=2
 marble=2
 marblecolumn=1
 
+[aihints]
+build_material=false
+
 [working positions]
 toolsmith=1
 

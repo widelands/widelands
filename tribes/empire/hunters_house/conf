@@ -6,6 +6,9 @@ trunk=1
 wood=1
 stone=1
 
+[aihints]
+build_material=false
+
 [working positions]
 hunter=1
 

@@ -26,6 +26,9 @@ blacksmith=1
 iron=8
 trunk=8
 
+[aihints]
+build_material=false
+
 [programs]
 produce_axe=_Produce axe
 produce_bakingtray=_Produce bakingtray

@@ -8,6 +8,7 @@ raw_stone=1
 gamekeeper=1
 
 [aihints]
+build_material=false
 renews_map_resource=meat
 
 [programs]

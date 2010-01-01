@@ -8,6 +8,9 @@ blackwood=2
 raw_stone=1
 thatchreed=1
 
+[aihints]
+build_material=false
+
 [working positions]
 innkeeper=1
 

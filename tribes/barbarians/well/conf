@@ -4,6 +4,9 @@ output=water
 [buildcost]
 trunk=4
 
+[aihints]
+build_material=false
+
 [working positions]
 carrier=1
 

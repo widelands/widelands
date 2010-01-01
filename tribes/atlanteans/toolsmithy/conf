@@ -18,6 +18,9 @@ stone=2
 planks=2
 spidercloth=1
 
+[aihints]
+build_material=false
+
 [working positions]
 toolsmith=1
 

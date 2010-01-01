@@ -9,6 +9,7 @@ stone=1
 fish_breeder=1
 
 [aihints]
+build_material=false
 needs_water=true
 renews_map_resource=fish
 

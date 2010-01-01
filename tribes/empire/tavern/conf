@@ -7,6 +7,9 @@ wood=2
 stone=2
 marble=1
 
+[aihints]
+build_material=false
+
 [working positions]
 innkeeper=1
 

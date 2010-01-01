@@ -1,5 +1,5 @@
 help=_This is a medium armour for Empire soldiers.
-preciousness=1
+preciousness=0
 
 [idle]
 pics=idle.png

@@ -7,6 +7,9 @@ trunk=3
 stone=3
 marble=1
 
+[aihints]
+build_material=false
+
 [working positions]
 miller=1
 

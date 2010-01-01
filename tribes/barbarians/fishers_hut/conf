@@ -8,6 +8,7 @@ trunk=4
 fisher=1
 
 [aihints]
+build_material=false
 needs_water=true
 
 [programs]

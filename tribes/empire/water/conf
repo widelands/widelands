@@ -1,5 +1,5 @@
 help=_Water is the most essential essence for life! This water is used in many places, be it to make bread or beer.
-preciousness=2
+preciousness=7
 default_target_quantity=25
 
 [idle]

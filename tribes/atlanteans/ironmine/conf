@@ -10,6 +10,7 @@ spidercloth=1
 miner=3
 
 [aihints]
+build_material=false
 mines=iron
 
 [inputs]

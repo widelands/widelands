@@ -1,5 +1,5 @@
 help=_This wooden lance has an iron spike.
-preciousness=1
+preciousness=0
 
 [idle]
 pics=idle.png
