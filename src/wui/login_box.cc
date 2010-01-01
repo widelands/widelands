@@ -78,8 +78,11 @@ Window(parent, 0, 0, 500, 230, _("Metaserver login"))
 	eb_password->setText(s.get_string("password", ""));
 }
 
+
+/// called, if "login" is pressed
 void LoginBox::pressedLogin()
 {
+	// Check if all needed input fields are valid
 	if (eb_nickname->text().empty()) {
 		WLMessageBox mb
 			(this, _("Empty Nickname"), _("Please enter a nickname!"),
@@ -105,6 +108,8 @@ void LoginBox::pressedLogin()
 	end_modal(1);
 }
 
+
+/// Called if "cancel" was pressed
 void LoginBox::pressedCancel()
 {
 	end_modal(0);

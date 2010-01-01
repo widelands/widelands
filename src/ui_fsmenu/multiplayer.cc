@@ -80,11 +80,26 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 			 m_fn, m_fs);
 }
 
+
+/// called if the showloginbox button was pressed
 void Fullscreen_Menu_MultiPlayer::showGGZLogin() {
 	m_auto_log = false;
 	ggzLogin();
 }
 
+
+/**
+ * Called if "Internet" button was pressed.
+ *
+ * IF autologin is not set, a LoginBox is shown and, if the user clicks on
+ * 'login' in it's menu, the data is read from the LoginBox and saved in 'this'
+ * so wlapplication can read it.
+ *
+ * IF autologin is set, all data is read from the config file and saved.
+ * That data will be used for login to the metaserver.
+ *
+ * In both cases this fullscreen menu ends it's modality.
+ */
 void Fullscreen_Menu_MultiPlayer::ggzLogin() {
 	Section & s = g_options.pull_section("global");
 	if (m_auto_log) {
