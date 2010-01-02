@@ -120,6 +120,7 @@ struct NetGGZ : public ChatProvider {
 		op_broadcast_ip = 4,
 		op_state_playing = 5, // tell the server that the game was stated
 		op_state_done = 6, // tell the server that the game ended
+		op_game_statistics = 7, // send game statistics
 		op_unreachable = 99 // the metaserver says we are unreachable
 	};
 
