@@ -1,0 +1,22 @@
+size=small
+
+[buildcost]
+trunk=2
+raw_stone=1
+
+[aihints]
+build_material=false
+
+[working positions]
+scout=1
+
+[programs]
+work=_Work
+
+[work]
+sleep=35000
+worker=scout
+
+[idle]
+pics=scouts_hut_i_??.png
+hotspot=48 43
