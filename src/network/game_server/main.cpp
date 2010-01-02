@@ -22,11 +22,12 @@
 // System includes
 #include <iostream>
 #include <getopt.h>
+#include <cstdio>
 #include <cstdlib>
 #include <ctime>
 
 // Version information
-#define WIDELANDS_SERVER_VERSION "0.3"
+#define WIDELANDS_SERVER_VERSION "0.4"
 
 // Main function: parse arguments and start server
 int main(int argc, char** argv)
