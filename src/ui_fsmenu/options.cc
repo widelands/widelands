@@ -85,8 +85,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 
 	m_sb_remove_replays
 		(this,
-		 m_xres * 6767 / 10000, m_yres * 8799 / 10000, m_xres / 4, m_vbutw,
-		 opt.remove_replays, 0, 365, _("days."),
+		 m_xres * 6767 / 10000, m_yres * 8631 / 10000, m_xres / 4, m_vbutw,
+		 opt.remove_replays, 0, 365, _("days"),
 		 g_gr->get_picture(PicMod_UI, "pics/but1.png"), true),
 
 // Title
@@ -191,7 +191,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_label_remove_replays
 		(this,
 		 m_xres * 1313 / 10000, m_yres * 8799 / 10000,
-		 _("Remove Replays after days"), UI::Align_VCenter),
+		 _("Remove Replays older than:"), UI::Align_VCenter),
 
 	os(opt)
 {
@@ -424,7 +424,7 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		 _("Graphics double buffering."),
 		 UI::Align_VCenter),
 
-	m_remove_syncstreams (this, Point(m_xres * 19 / 200, m_yres * 8799 / 10000)),
+	m_remove_syncstreams (this, Point(m_xres * 19 / 200, m_yres * 8649 / 10000)),
 	m_label_remove_syncstreams
 		(this,
 		 m_xres * 1313 / 10000, m_yres * 8799 / 10000,
