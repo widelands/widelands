@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -644,10 +644,10 @@ bool MilitarySite::attack(Soldier & enemy)
 			 "<p font-size=14 font-face=FreeSerif>",
 			 b_tribe.c_str(), b_name.c_str(), b_name.c_str());
 		char message[2048];
-			snprintf
-				(message, sizeof(message),
-				 _("%sYour soldiers defeated the enemy at the %s.</p></rt>"),
-				 formation, newsite->descname().c_str());
+		snprintf
+			(message, sizeof(message),
+			 _("%sYour soldiers defeated the enemy at the %s.</p></rt>"),
+			 formation, newsite->descname().c_str());
 		MessageQueue::add
 			(enemyplayer->player_number(),
 			 Message
@@ -683,7 +683,7 @@ bool MilitarySite::military_presence_kept(Game & game)
 				(this       !=  militarysite          and
 				 &owner  () == &militarysite->owner() and
 				 get_size() <=  militarysite->get_size() and
-				 militarysite->presentSoldiers().size())
+				 militarysite->m_didconquer)
 				return true;
 	return false;
 }
