@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -935,8 +935,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			// avoid to have too many construction sites
 			// but still enable the player to build up basic productionsites
 			if
-				(bo.type != BuildingObserver::PRODUCTIONSITE
-				|| !bo.is_basic || bo.total_count() > 0)
+				(bo.type != BuildingObserver::PRODUCTIONSITE ||
+				 !bo.is_basic || bo.total_count() > 0)
 				prio -=
 					2 * bo.cnt_under_construction * (bo.cnt_under_construction + 1);
 
@@ -2008,7 +2008,7 @@ bool DefaultAI::check_supply(BuildingObserver const & bo)
  *
  * \returns true, if attack was started.
  */
-bool DefaultAI::consider_attack(int32_t gametime) {
+bool DefaultAI::consider_attack(int32_t const gametime) {
 	// Only useable, if it owns at least one militarysite
 	if (militarysites.empty())
 		return false;
@@ -2022,9 +2022,9 @@ bool DefaultAI::consider_attack(int32_t gametime) {
 	FCoords f = map.get_fcoords(ms->get_position());
 
 	Building * target = ms; // dummy initialisation to silence the compiler
-	int32_t    chance = 0;
-	int32_t    attackers = 0;
-	int8_t     retreat = ms->owner().get_retreat_percentage();
+	uint32_t   chance    = 0;
+	uint32_t   attackers = 0;
+	uint8_t    retreat   = ms->owner().get_retreat_percentage();
 
 	// Search in a radius of the vision of the militarysite and collect
 	// information about immovables in the area
@@ -2043,7 +2043,7 @@ bool DefaultAI::consider_attack(int32_t gametime) {
 				if (ta < 1)
 					continue;
 
-				int32_t tc = ta - bld->presentSoldiers().size();
+				int32_t const tc = ta - bld->presentSoldiers().size();
 				if (tc > chance) {
 					target = bld;
 					chance = tc;
@@ -2075,7 +2075,7 @@ bool DefaultAI::consider_attack(int32_t gametime) {
 
 	// Return if chance to win is too low
 	if (chance < 3) {
-		next_attack_consideration_due = (gametime % 7) * 1000 + gametime;
+		next_attack_consideration_due = gametime % 7 * 1000 + gametime;
 		return false;
 	}
 
@@ -2087,7 +2087,7 @@ bool DefaultAI::consider_attack(int32_t gametime) {
 	game().send_player_enemyflagaction
 		(target->base_flag(), pn, attackers, retreat);
 
-	// Don't attack to fast again - homecoming soldiers must get healed first
+	//  Do not attack again too soon - returning soldiers must get healed first.
 	next_attack_consideration_due = (gametime % 51 + 10) * 1000 + gametime;
 	return true;
 }
