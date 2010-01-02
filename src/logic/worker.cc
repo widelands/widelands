@@ -45,6 +45,7 @@
 #include "warehouse.h"
 #include "wexception.h"
 #include "worker_program.h"
+#include "mapfringeregion.h"
 
 #include "upcast.h"
 
@@ -788,6 +789,7 @@ bool Worker::run_removeobject(Game & game, State & state, Action const &)
  */
 bool Worker::run_geologist(Game & game, State & state, Action const & action)
 {
+	// assert that location is of the right type.
 	ref_cast<Flag const, PlayerImmovable const>(*get_location(game));
 
 	molog
@@ -2269,7 +2271,7 @@ void Worker::geologist_update(Game & game, State & state)
 		 	(ref_cast<Flag, PlayerImmovable>(*get_location(game)).get_position()),
 		 state.ivar2);
 
-	// Check if it's time to go home
+	// Check if it's not time to go home
 	if (state.ivar1 > 0) {
 		// Check to see if we're on suitable terrain
 		BaseImmovable * const imm = map.get_immovable(get_position());
@@ -2367,6 +2369,160 @@ void Worker::geologist_update(Game & game, State & state)
 	}
 }
 
+/**
+ * Look at fields that are in the fog of war around our owner.
+ *
+ * ivar1 - time to spend
+ *
+ * Failure of path movement is caught, all other signals terminate this task.
+ */
+const Bob::Task Worker::taskScout = {
+	"scout",
+	static_cast<Bob::Ptr>(&Worker::scout_update),
+	0,
+	0
+};
+
+
+/**
+ * scout \<time\>
+ *
+ * Find a spot that is in the fog of war and go there to see what's up.
+ *
+ * iparam1 = maximum search time (in msecs)
+ */
+bool Worker::run_scout(Game & game, State & state, Action const & action)
+{
+    ref_cast<Flag const, PlayerImmovable const>(*get_location(game));
+
+	molog
+		("  Start Scout (%i time)\n",
+		 action.iparam1);
+
+	start_task_scout(game, action.iparam1);
+	return true;
+}
+
+void Worker::start_task_scout
+	(Game & game,
+	 uint8_t const time)
+{
+	push_task(game, taskScout);
+	State & state = top_state();
+	state.ivar1   = game.get_game_time_pointer() + time;
+}
+
+
+void Worker::scout_update(Game & game, State & state)
+{
+	std::string signal = get_signal();
+
+	if (signal == "fail") {
+		molog("[scout]: Caught signal '%s'\n", signal.c_str());
+		signal_handled();
+	} else if (signal.size()) {
+		molog("[scout]: Interrupted by signal '%s'\n", signal.c_str());
+		return pop_task(game);
+	}
+
+	Map & map = game.map();
+	Area<FCoords> owner_area
+		(map.get_fcoords
+		 	(ref_cast<Flag, PlayerImmovable>(*get_location(game)).get_position()),
+		 state.ivar2);
+
+	// at this point we either started out or reached a target
+	// and we need to look out for new blackness.
+
+	// Check if it's not time to go home again:
+	// FIXME: maybe try checking the time while walking?
+	// however, this could cause the scout to eat up all the food without ever
+	// reaching a destination.
+	if (state.ivar1 > game.get_game_time_pointer()) {
+		// start searching
+
+		// Find an unseen point
+
+		// the interesting points to survey
+		std::vector<Coords> list;
+
+		// if we don't have any interesting points, revisit the point, which
+		// we have the oldest 'knowledge' of
+		// however, don't revisit stuff that is newer than just a bit
+		// in this case we care about 1 minute.
+		// FIXME: balance this.
+		Time oldest_seen = game.get_game_time_pointer() - 10 * 60 * 1000;
+		Coords oldest_coord;
+		bool has_interesting_old_coord;
+
+		Widelands::MapFringeRegion<> mr(map, Area<>(get_position(), 0));
+		uint32_t fringe_size = 0;
+		
+		Map_Index idx; 
+
+		while (list.size() == 0 and fringe_size < 10) {
+			while (mr.advance(map)) {
+				idx = map.get_index(mr.location(), map.get_width());
+				Vision v = owner().vision(idx);
+				if (v == 0) {
+					// nominate this
+					list.push_back(mr.location());
+				} else if (v == 1 and oldest_seen > owner().fields()[idx].time_node_last_unseen) {
+					oldest_seen = owner().fields()[idx].time_node_last_unseen;
+					oldest_coord = mr.location();
+					has_interesting_old_coord = true;
+				}
+			}
+			++fringe_size;
+			mr.extend(map);
+		}
+
+		while (list.size() > 0) {
+			// select a random field
+			uint8_t lidx = game.logic_rand() % list.size();
+			Coords coord = list[lidx];
+			list.erase(list.begin() + lidx);
+			if (start_task_movepath(
+					game,
+					coord,
+					0,
+					descr().get_right_walk_anims(does_carry_ware())))
+			{
+				return;
+			}
+			// if it couldn't be reached, try another.
+		}
+		// if we ran out of nodes to try,
+		// see if we have an old node to revisit.
+		if (has_interesting_old_coord) {
+			if (start_task_movepath(
+					game,
+					oldest_coord,
+					0,
+					descr().get_right_walk_anims(does_carry_ware())))
+			{
+				return;
+			}
+			// if we can't get there,
+		}
+		// or if we don't have a place to go,
+	}
+
+	// and we are not already home
+	if (get_position() == owner_area)
+		return pop_task(game);
+
+	// we will go home.
+	if
+		(not
+		 start_task_movepath
+		 	(game, owner_area, 0, descr().get_right_walk_anims(does_carry_ware())))
+	{
+		molog("[scout]: could not find path home\n");
+		send_signal(game, "fail");
+		return pop_task(game);
+	}
+}
 
 void Worker::draw_inner
 	(Editor_Game_Base const &       game,

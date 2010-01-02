@@ -169,6 +169,7 @@ public:
 		 uint8_t attempts, uint8_t radius,
 		 std::string const & subcommand);
 
+	void start_task_scout(Game &g, uint8_t const time);
 
 protected:
 	void draw_inner(Editor_Game_Base const &, RenderTarget &, Point) const;
@@ -189,6 +190,7 @@ public:
 	static const Task taskLeavebuilding;
 	static const Task taskFugitive;
 	static const Task taskGeologist;
+	static const Task taskScout;
 
 private:
 	// task details
@@ -211,6 +213,7 @@ private:
 	void leavebuilding_pop(Game & game, State & state);
 	void fugitive_update(Game &, State &);
 	void geologist_update(Game &, State &);
+	void scout_update(Game &, State &);
 
 	// Program commands
 	bool run_mine             (Game &, State &, Action const &);
@@ -229,6 +232,7 @@ private:
 	bool run_removeobject     (Game &, State &, Action const &);
 	bool run_geologist        (Game &, State &, Action const &);
 	bool run_geologist_find   (Game &, State &, Action const &);
+	bool run_scout            (Game &, State &, Action const &);
 	bool run_playFX           (Game &, State &, Action const &);
 
 	OPtr<PlayerImmovable> m_location; ///< meta location of the worker

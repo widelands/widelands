@@ -42,6 +42,7 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{"removeobject",      &WorkerProgram::parse_removeobject},
 	{"geologist",         &WorkerProgram::parse_geologist},
 	{"geologist-find",    &WorkerProgram::parse_geologist_find},
+	{"scout",             &WorkerProgram::parse_scout},
 	{"playFX",            &WorkerProgram::parse_playFX},
 
 	{0, 0}
@@ -585,6 +586,21 @@ void WorkerProgram::parse_geologist_find
 	act->function = &Worker::run_geologist_find;
 }
 
+/**
+ * Have the scout run around scouting the area
+ */
+void WorkerProgram::parse_scout
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const & cmd)
+{
+	if (cmd.size() != 2)
+		throw wexception("Usage: scout <time>");
+
+	act->iparam1 = atoi(cmd[1].c_str());
+	act->function = &Worker::run_scout;
+}
 
 void WorkerProgram::parse_playFX
 	(Worker_Descr                   *,
