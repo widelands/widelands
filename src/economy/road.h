@@ -24,6 +24,8 @@
 #include "logic/path.h"
 #include "logic/roadtype.h"
 
+#include <vector>
+
 namespace Widelands {
 struct Carrier;
 struct Request;
@@ -50,6 +52,12 @@ struct Road : public PlayerImmovable {
 	enum FlagId {
 		FlagStart = 0,
 		FlagEnd = 1
+	};
+
+	struct CarrierSlot {
+		OPtr<Carrier> carrier;
+		Request * carrier_request;
+		uint8_t carrier_type;
 	};
 
 	Road();
@@ -81,7 +89,12 @@ struct Road : public PlayerImmovable {
 	void postsplit(Game &, Flag &);
 
 	bool notify_ware(Game & game, FlagId flagid);
+
 	virtual void remove_worker(Worker &);
+
+	bool is_our_carrier(Worker & w);
+	void add_carrier(Worker & w);
+
 
 protected:
 	virtual void init(Editor_Game_Base &);
@@ -97,7 +110,7 @@ private:
 
 	void _link_into_flags(Game &);
 
-	void _request_carrier(Game &);
+	void _request_carrier(Game &, CarrierSlot &);
 	static void _request_carrier_callback
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
@@ -115,8 +128,8 @@ private:
 	///< total number of carriers we want (currently limited to 0 or 1)
 	uint32_t   m_desire_carriers;
 
-	OPtr<Carrier> m_carrier;    ///< our carrier
-	Request *  m_carrier_request;
+	typedef std::vector<CarrierSlot> SlotVector;
+	SlotVector m_carrier_slots;
 };
 
 }

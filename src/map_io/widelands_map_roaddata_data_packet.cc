@@ -38,7 +38,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
+#define CURRENT_PACKET_VERSION 3
 
 void Map_Roaddata_Data_Packet::Read
 	(FileSystem            &       fs,
@@ -120,30 +120,56 @@ throw (_wexception)
 					road._link_into_flags(ref_cast<Game, Editor_Game_Base>(egbase));
 
 					road.m_idle_index      = fr.Unsigned32();
-					road.m_desire_carriers = fr.Unsigned32();
-					assert(!road.m_carrier.get(egbase));
-					if (uint32_t const carrier_serial = fr.Unsigned32())
-						try {
-							road.m_carrier = &ol->get<Carrier>(carrier_serial);
-						} catch (_wexception const & e) {
-							throw game_data_error
-								("carrier (%u): %s", carrier_serial, e.what());
+
+					int count = 1;
+					if (2 >= packet_version) {
+						fr.Unsigned32();
+						//log("Reading savegame with packet version <= 2\n");
+					} else if (3 >= packet_version) {
+						count = fr.Unsigned32();
+						//log("Reading savegame with packet version 3\n");
+						//log("Road has %u slots.\n", count);
+					}
+
+					for (int i = 0; i < count; i++) {
+						assert(!road.m_carrier_slots[i].carrier.get(egbase));
+						if (uint32_t const carrier_serial = fr.Unsigned32())
+							try {
+								//log("Read carrier serial %u", carrier_serial);
+								road.m_carrier_slots[i].carrier =
+									&ol->get<Carrier>(carrier_serial);
+							} catch (_wexception const & e) {
+								throw game_data_error
+									("carrier (%u): %s", carrier_serial, e.what());
+							}
+						else {
+							road.m_carrier_slots[i].carrier = 0;
+							//log("No carrier in this slot");
 						}
-					else
-						road.m_carrier = 0;
 
-					delete road.m_carrier_request; road.m_carrier_request = 0;
+						delete road.m_carrier_slots[i].carrier_request;
+						road.m_carrier_slots[i].carrier_request = 0;
 
-					if (fr.Unsigned8())
-						(road.m_carrier_request =
-						 	new Request
-						 		(road,
-						 		 Ware_Index::First(),
-						 		 Road::_request_carrier_callback,
-						 		 Request::WORKER))
-						->Read(fr, ref_cast<Game, Editor_Game_Base>(egbase), ol);
-					else
-						road.m_carrier_request = 0;
+						if (fr.Unsigned8()) {
+							//log("Reading request");
+							(road.m_carrier_slots[i].carrier_request =
+								new Request
+									(road,
+									Ware_Index::First(),
+									Road::_request_carrier_callback,
+									Request::WORKER))
+							->Read(fr, ref_cast<Game, Editor_Game_Base>(egbase), ol);
+						}
+						else {
+							road.m_carrier_slots[i].carrier_request = 0;
+							//log("No request in this slot");
+						}
+						if (3 <= packet_version)
+							road.m_carrier_slots[i].carrier_type =
+								fr.Unsigned32();
+						else
+							road.m_carrier_slots[i].carrier_type = 1;
+					}
 
 					ol->mark_object_as_loaded(&road);
 				} catch (_wexception const & e) {
@@ -204,25 +230,36 @@ throw (_wexception)
 
 				fw.Unsigned32(r->m_idle_index); //  FIXME do not save this
 
-				fw.Unsigned32(r->m_desire_carriers);
 
-				if (Carrier const * const carrier = r->m_carrier.get(egbase)) {
-					assert(os->is_object_known(*carrier));
-					fw.Unsigned32(os->get_object_file_index(*carrier));
-				} else
-					fw.Unsigned32(0);
+				fw.Unsigned32(r->m_carrier_slots.size());
+				log("Writing slot number %u", r->m_carrier_slots.size());
 
-				if (r->m_carrier_request) {
-					fw.Unsigned8(1);
-					r->m_carrier_request->Write
-						(fw, ref_cast<Game, Editor_Game_Base>(egbase), os);
-				} else
-					fw.Unsigned8(0);
+				container_iterate_const
+					(std::vector<Road::CarrierSlot>, r->m_carrier_slots, iter)
+				{
 
+					if
+						(Carrier const * const carrier =
+						 iter.current->carrier.get(egbase))
+					{
+						assert(os->is_object_known(*carrier));
+						fw.Unsigned32(os->get_object_file_index(*carrier));
+					} else {
+						fw.Unsigned32(0);
+					}
+
+					if (iter.current->carrier_request) {
+						fw.Unsigned8(1);
+						iter.current->carrier_request->Write
+							(fw, ref_cast<Game, Editor_Game_Base>(egbase), os);
+					} else {
+						fw.Unsigned8(0);
+					}
+					fw.Unsigned32(iter.current->carrier_type);
+				}
 				os->mark_object_as_saved(*r);
 			}
 
 	fw.Write(fs, "binary/road_data");
 }
-
 }

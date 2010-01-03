@@ -43,12 +43,20 @@ Map_Object_Descr g_road_descr("road", "Road");
 */
 Road::Road() :
 	PlayerImmovable  (g_road_descr),
-	m_type           (0),
-	m_desire_carriers(0),
-	m_carrier_request(0)
+	m_type           (0)
 {
 	m_flags[0] = m_flags[1] = 0;
 	m_flagidx[0] = m_flagidx[1] = -1;
+
+	CarrierSlot slot;
+	m_carrier_slots.push_back(slot);
+	m_carrier_slots.push_back(slot);
+	m_carrier_slots[0].carrier_type = 1;
+	m_carrier_slots[1].carrier_type = 2;
+	m_carrier_slots[0].carrier_request = 0;
+	m_carrier_slots[1].carrier_request = 0;
+	m_carrier_slots[0].carrier = 0;
+	m_carrier_slots[1].carrier = 0;
 }
 
 /**
@@ -56,9 +64,11 @@ Road::Road() :
  */
 Road::~Road()
 {
-	if (m_carrier_request) {
-		log("Road::~Road: carrier request left\n");
-		delete m_carrier_request;
+	for
+		(SlotVector::iterator iter = m_carrier_slots.begin();
+		 iter < m_carrier_slots.end(); ++iter)
+	{
+		 delete iter->carrier_request;
 	}
 }
 
@@ -97,7 +107,8 @@ void Road::create
 				(tribe.get_worker_descr(tribe.worker_index("carrier"))->create
 				 	(egbase, owner, &start, idle_position));
 		carrier.start_task_road(ref_cast<Game, Editor_Game_Base>(egbase));
-		road.m_carrier = &carrier;
+		road.m_carrier_slots[0].carrier = &carrier;
+
 	}
 	log("Road::create: &road = %p\n", &road);
 	road.init(egbase);
@@ -262,13 +273,17 @@ void Road::_link_into_flags(Game & game) {
 	// Mark Fields
 	_mark_map(game);
 
-	m_desire_carriers = 1;
-	if (Carrier * const carrier = m_carrier.get(game)) {
-		//  This happens after a road split. Tell the carrier what's going on.
-		carrier->set_location    (this);
-		carrier->update_task_road(game);
-	} else if (not m_carrier_request)
-		_request_carrier(game);
+	for
+		(SlotVector::iterator iter = m_carrier_slots.begin();
+		 iter < m_carrier_slots.end(); ++iter)
+	{
+		if (Carrier * const carrier = iter->carrier.get(game)) {
+			//  This happens after a road split. Tell the carrier what's going on.
+			carrier->set_location    (this);
+			carrier->update_task_road(game);
+		} else if (not iter->carrier_request)
+			_request_carrier(game, *iter);
+	}
 }
 
 /**
@@ -278,13 +293,16 @@ void Road::cleanup(Editor_Game_Base & egbase)
 {
 	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 
-	// Release carrier
-	m_desire_carriers = 0;
+	for
+		(SlotVector::iterator iter = m_carrier_slots.begin();
+		 iter < m_carrier_slots.end(); ++iter)
+	{
+		delete iter->carrier_request;
+		iter->carrier_request = 0;
 
-	delete m_carrier_request;
-	m_carrier_request = 0;
-
-	m_carrier = 0; // carrier will be released via PlayerImmovable::cleanup
+		// carrier will be released via PlayerImmovable::cleanup
+		iter->carrier = 0;
+	}
 
 	// Unmark Fields
 	_unmark_map(game);
@@ -308,8 +326,14 @@ void Road::cleanup(Editor_Game_Base & egbase)
 void Road::set_economy(Economy * const e)
 {
 	PlayerImmovable::set_economy(e);
-	if (m_carrier_request)
-		m_carrier_request->set_economy(e);
+
+	for
+		(SlotVector::iterator iter = m_carrier_slots.begin();
+		 iter < m_carrier_slots.end(); ++iter)
+	{
+		if (iter->carrier_request)
+			iter->carrier_request->set_economy(e);
+	}
 }
 
 /**
@@ -320,19 +344,28 @@ void Road::set_economy(Economy * const e)
 */
 void Road::_request_carrier
 #ifndef NDEBUG
-	(Game & game)
+	(Game & game, CarrierSlot & slot)
 #else
-	(Game &)
+	(Game &, CarrierSlot & slot)
 #endif
 {
-	assert(!m_carrier.get(game) && !m_carrier_request);
 
-	m_carrier_request =
+	if (slot.carrier_type == 1 or owner().tribe().name() != "empire") {
+		slot.carrier_request =
+			new Request
+				(*this,
+				owner().tribe().safe_worker_index("carrier"),
+				Road::_request_carrier_callback,
+				Request::WORKER);
+	} else {
+		slot.carrier_request =
 		new Request
 			(*this,
-			 owner().tribe().safe_worker_index("carrier"),
+			 owner().tribe().safe_worker_index("donkey"),
 			 Road::_request_carrier_callback,
 			 Request::WORKER);
+
+	}
 }
 
 /**
@@ -350,11 +383,22 @@ void Road::_request_carrier_callback
 	Road    & road    = ref_cast<Road,    PlayerImmovable>(target);
 	Carrier & carrier = ref_cast<Carrier, Worker>         (*w);
 
-	delete &rq;
-	road.m_carrier_request = 0;
+	for
+		(SlotVector::iterator iter = road.m_carrier_slots.begin();
+		 iter < road.m_carrier_slots.end(); ++ iter)
+	{
+		if (iter->carrier_request == &rq) {
+			iter->carrier_request = 0;
+			iter->carrier = &carrier;
 
-	road.m_carrier = &carrier;
-	carrier.start_task_road(game);
+			carrier.start_task_road(game);
+			delete &rq;
+			return;
+		}
+	}
+
+	delete &rq;
+	carrier.start_task_gowarehouse(game);
 }
 
 /**
@@ -363,15 +407,55 @@ void Road::_request_carrier_callback
 void Road::remove_worker(Worker & w)
 {
 	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
-	Carrier * carrier = m_carrier.get(game);
 
-	if (carrier == &w)
-		m_carrier = carrier = 0;
+	for
+		(SlotVector::iterator iter = m_carrier_slots.begin();
+		 iter < m_carrier_slots.end(); ++iter)
+	{
 
-	if (not carrier and not m_carrier_request and m_desire_carriers)
-		_request_carrier(game);
+		Carrier * carrier = iter->carrier.get(game);
+
+		if (carrier == &w)
+			iter->carrier = carrier = 0;
+
+		if (not carrier and not iter->carrier_request)
+			_request_carrier(game, *iter);
+	}
 
 	PlayerImmovable::remove_worker(w);
+}
+
+bool Road::is_our_carrier(Worker & w)
+{
+	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+
+	for
+		(SlotVector::iterator iter = m_carrier_slots.begin();
+		 iter < m_carrier_slots.end(); ++iter)
+	{
+		Carrier * carrier = iter->carrier.get(game);
+
+		if (carrier == &w)
+			return true;
+	}
+	return false;
+}
+
+void Road::add_carrier(Worker & w)
+{
+	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+
+	for
+		(SlotVector::iterator iter = m_carrier_slots.begin();
+		 iter < m_carrier_slots.end(); ++iter)
+	{
+		Carrier & carrier = ref_cast<Carrier, Worker> (w);
+
+		if (not iter->carrier.get(game) and not iter->carrier_request) {
+			iter->carrier = &carrier;
+			return;
+		}
+	}
 }
 
 /**
@@ -390,6 +474,7 @@ void Road::presplit(Game & game, Coords) {_unmark_map(game);}
 */
 void Road::postsplit(Game & game, Flag & flag)
 {
+
 	Flag & oldend = *m_flags[FlagEnd];
 
 	// detach from end
@@ -436,8 +521,23 @@ void Road::postsplit(Game & game, Flag & flag)
 	// Find workers on this road that need to be reassigned
 	// The algorithm is pretty simplistic, and has a bias towards keeping
 	// the worker around; there's obviously nothing wrong with that.
-	Carrier * const carrier = m_carrier.get(game);
+
+
+	//Carrier * const carrier = m_carrier.get(game);
+
+	SlotVector carrierslots = m_carrier_slots;
 	std::vector<Worker *> const workers = get_workers();
+
+	for
+		(SlotVector::iterator iter = m_carrier_slots.begin();
+		 iter < m_carrier_slots.end(); ++iter)
+	{
+			delete iter->carrier_request;
+			iter->carrier = 0;
+			iter->carrier_request = 0;
+	}
+
+
 	std::vector<Worker *> reassigned_workers;
 
 	container_iterate_const(std::vector<Worker *>, workers, i) {
@@ -466,11 +566,12 @@ void Road::postsplit(Game & game, Flag & flag)
 		if (idx < 0) {
 			reassigned_workers.push_back(&w);
 
-			if (carrier == &w) {
+			if (is_our_carrier(w)) {
 				// Reassign the carrier. Note that the final steps of reassigning
 				// are done in newroad->init()
-				m_carrier = 0;
-				newroad.m_carrier = carrier;
+				//m_carrier = 0;
+
+				newroad.add_carrier(w);
 			}
 		}
 
@@ -495,8 +596,15 @@ void Road::postsplit(Game & game, Flag & flag)
 	//  Request a new carrier for this road if necessary. This must be done
 	//  _after_ the new road initializes, otherwise request routing might not
 	//  work correctly
-	if (!m_carrier.get(game) && !m_carrier_request)
-		_request_carrier(game);
+
+
+	for
+		(SlotVector::iterator iter = m_carrier_slots.begin();
+		 iter < m_carrier_slots.end(); ++iter)
+	{
+		if (not iter->carrier.get(game) and not iter->carrier_request)
+			_request_carrier(game, *iter);
+	}
 
 	//  Make sure items waiting on the original endpoint flags are dealt with.
 	m_flags[FlagStart]->update_items(game, &oldend);
@@ -509,8 +617,17 @@ void Road::postsplit(Game & game, Flag & flag)
  */
 bool Road::notify_ware(Game & game, FlagId const flagid)
 {
-	if (Carrier * const carrier = m_carrier.get(game))
-		return carrier->notify_ware(game, flagid);
+
+	for
+		(SlotVector::iterator iter = m_carrier_slots.begin();
+		 iter < m_carrier_slots.end(); ++iter)
+	{
+
+		if (Carrier * const carrier = iter->carrier.get(game))
+			if (carrier->notify_ware(game, flagid))
+				return true;
+	}
+
 	return false;
 }
 
