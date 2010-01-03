@@ -4,6 +4,9 @@ size=small
 trunk=2
 raw_stone=1
 
+[inputs]
+ration=2
+
 [aihints]
 build_material=false
 
@@ -14,7 +17,8 @@ scout=1
 work=_Work
 
 [work]
-sleep=35000
+sleep=30000
+consume=ration
 worker=scout
 
 [idle]

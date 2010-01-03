@@ -2391,9 +2391,9 @@ const Bob::Task Worker::taskScout = {
  *
  * iparam1 = maximum search time (in msecs)
  */
-bool Worker::run_scout(Game & game, State & state, Action const & action)
+bool Worker::run_scout(Game & game, State &, Action const & action)
 {
-    ref_cast<Flag const, PlayerImmovable const>(*get_location(game));
+	ref_cast<Building const, PlayerImmovable const>(*get_location(game));
 
 	molog
 		("  Start Scout (%i time)\n",
@@ -2405,17 +2405,19 @@ bool Worker::run_scout(Game & game, State & state, Action const & action)
 
 void Worker::start_task_scout
 	(Game & game,
-	 uint8_t const time)
+	 uint32_t const time)
 {
 	push_task(game, taskScout);
 	State & state = top_state();
-	state.ivar1   = game.get_game_time_pointer() + time;
+	state.ivar1   = game.get_gametime() + time;
 }
 
 
 void Worker::scout_update(Game & game, State & state)
 {
 	std::string signal = get_signal();
+
+	molog("  Update Scout (%i time)\n", state.ivar1);
 
 	if (signal == "fail") {
 		molog("[scout]: Caught signal '%s'\n", signal.c_str());
@@ -2426,10 +2428,6 @@ void Worker::scout_update(Game & game, State & state)
 	}
 
 	Map & map = game.map();
-	Area<FCoords> owner_area
-		(map.get_fcoords
-		 	(ref_cast<Flag, PlayerImmovable>(*get_location(game)).get_position()),
-		 state.ivar2);
 
 	// at this point we either started out or reached a target
 	// and we need to look out for new blackness.
@@ -2438,7 +2436,8 @@ void Worker::scout_update(Game & game, State & state)
 	// FIXME: maybe try checking the time while walking?
 	// however, this could cause the scout to eat up all the food without ever
 	// reaching a destination.
-	if (state.ivar1 > game.get_game_time_pointer()) {
+	molog("  Update Scout get game time: %i\n", game.get_gametime());
+	if (state.ivar1 > game.get_gametime()) {
 		// start searching
 
 		// Find an unseen point
@@ -2451,23 +2450,25 @@ void Worker::scout_update(Game & game, State & state)
 		// however, don't revisit stuff that is newer than just a bit
 		// in this case we care about 1 minute.
 		// FIXME: balance this.
-		Time oldest_seen = game.get_game_time_pointer() - 10 * 60 * 1000;
+		Time oldest_seen = game.get_gametime() - 10 * 60 * 1000;
 		Coords oldest_coord;
 		bool has_interesting_old_coord;
 
 		Widelands::MapFringeRegion<> mr(map, Area<>(get_position(), 0));
 		uint32_t fringe_size = 0;
-		
-		Map_Index idx; 
 
-		while (list.size() == 0 and fringe_size < 10) {
+		Map_Index idx;
+		while (list.empty() and fringe_size < 10) {
 			while (mr.advance(map)) {
 				idx = map.get_index(mr.location(), map.get_width());
 				Vision v = owner().vision(idx);
 				if (v == 0) {
 					// nominate this
 					list.push_back(mr.location());
-				} else if (v == 1 and oldest_seen > owner().fields()[idx].time_node_last_unseen) {
+				} else if
+					(v == 1 and
+					 (oldest_seen > owner().fields()[idx].time_node_last_unseen))
+				{
 					oldest_seen = owner().fields()[idx].time_node_last_unseen;
 					oldest_coord = mr.location();
 					has_interesting_old_coord = true;
@@ -2476,17 +2477,16 @@ void Worker::scout_update(Game & game, State & state)
 			++fringe_size;
 			mr.extend(map);
 		}
-
+		molog (" interesting nodes %i\n", list.size());
 		while (list.size() > 0) {
 			// select a random field
 			uint8_t lidx = game.logic_rand() % list.size();
 			Coords coord = list[lidx];
 			list.erase(list.begin() + lidx);
-			if (start_task_movepath(
-					game,
-					coord,
-					0,
-					descr().get_right_walk_anims(does_carry_ware())))
+			if
+				(start_task_movepath
+				 (game, coord, 0,
+				  descr().get_right_walk_anims(does_carry_ware())))
 			{
 				return;
 			}
@@ -2495,11 +2495,10 @@ void Worker::scout_update(Game & game, State & state)
 		// if we ran out of nodes to try,
 		// see if we have an old node to revisit.
 		if (has_interesting_old_coord) {
-			if (start_task_movepath(
-					game,
-					oldest_coord,
-					0,
-					descr().get_right_walk_anims(does_carry_ware())))
+			if
+				(start_task_movepath
+				 (game, oldest_coord, 0,
+				  descr().get_right_walk_anims(does_carry_ware())))
 			{
 				return;
 			}
@@ -2507,6 +2506,12 @@ void Worker::scout_update(Game & game, State & state)
 		}
 		// or if we don't have a place to go,
 	}
+
+	Area<FCoords> owner_area
+		(map.get_fcoords
+		 (ref_cast<Building, PlayerImmovable>
+		  (*get_location(game)).get_position()),
+		  1);
 
 	// and we are not already home
 	if (get_position() == owner_area)
