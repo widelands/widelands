@@ -191,8 +191,7 @@ void Fullscreen_Menu_LaunchGame::think()
 	if (m_ctrl)
 		m_ctrl->think();
 
-	if (m_multiplayer)
-		refresh();
+	refresh();
 }
 
 
