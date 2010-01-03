@@ -136,6 +136,7 @@ weaponsmith=_Weaponsmith
 weaver=_Weaver
 vinefarmer=_Vine Farmer
 scout=_Scout
+donkeybreeder=_Donkey Breeder
 
 [constructionsite types]
 constructionsite=_Construction Site
@@ -207,6 +208,7 @@ well=_Well
 winery=_Winery
 vineyard=_Vineyard
 scouts_house=_"Scout's House"
+donkeyfarm=_Donkeyfarm
 
 [initializations]
 headquarters_medium=_Headquarters medium

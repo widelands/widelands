@@ -1,0 +1,35 @@
+size=medium
+output=donkey
+
+[aihints]
+build_material=false
+
+[buildcost]
+trunk=2
+stone=2
+wood=1
+
+[working positions]
+donkeybreeder=1
+
+[inputs]
+wheat=8
+water=8
+
+[programs]
+work=_Work
+
+[work]
+return=skipped when economy needs wheat and not economy needs donkey
+return=skipped when economy needs water and not economy needs donkey
+consume=wheat water
+animate=working 30000 # feeding cute little baby donkeys ;) 
+produce=donkey
+
+[idle]
+pics=donkeyfarm_i_??.png  # ???
+hotspot=54 54
+
+[working]
+pics=donkeyfarm_i_??.png  # ???
+hotspot=54 54
