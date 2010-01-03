@@ -53,6 +53,7 @@ lumberjack=3
 miner=4
 stonemason=1
 toolsmith=1
+donkey=5
 
 #  soldiers
 0/0/0/0=17

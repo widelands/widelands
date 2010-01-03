@@ -1,8 +1,5 @@
 help=_Helps to carry items at heavy used roads.
 
-[buildcost]
-carrier=1 # dummy for testing - of course that should be changed!
-
 [idle]
 pics=_donkey_idle_e_??.png
 hotspot=6 21
