@@ -1,0 +1,33 @@
+size=small
+
+[buildcost]
+trunk=2
+stone=1
+
+[working positions]
+scout=1
+
+[inputs]
+smoked_fish=2
+bread=2
+
+[aihints]
+build_material=false
+
+[programs]
+work=_Work
+work2=_Work
+
+[work]
+sleep=30000
+consume=smoked_fish
+worker=scout
+
+[work2]
+sleep=30000
+consume=bread
+worker=scout
+
+[idle]
+pics=scouts_house_i_??.png  # ???
+hotspot=37 44

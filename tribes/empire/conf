@@ -134,6 +134,7 @@ trainer=_Trainer
 weaponsmith=_Weaponsmith
 weaver=_Weaver
 vinefarmer=_Vine Farmer
+scout=_Scout
 
 [constructionsite types]
 constructionsite=_Construction Site
@@ -204,6 +205,7 @@ weaving-mill=_Weaving Mill
 well=_Well
 winery=_Winery
 vineyard=_Vineyard
+scouts_house=_"Scout's House"
 
 [initializations]
 headquarters_medium=_Headquarters medium

@@ -1,0 +1,26 @@
+size=small
+
+[buildcost]
+trunk=2
+stone=1
+
+[aihints]
+build_material=false
+
+[working positions]
+scout=1
+
+[inputs]
+ration=2
+
+[programs]
+work=_Work
+
+[work]
+sleep=30000
+consume=ration
+worker=scout
+
+[idle]
+pics=scouts_house_i_??.png
+hotspot=55 60

@@ -1,0 +1,24 @@
+help=_"Scouts like Scotty the scout scout unscouted area in a scouty fashion." # (c) WiHack Team 02.01.2010
+program=scout
+
+[buildcost]
+carrier=1
+
+[scout]
+0=scout 45000 # 45 seconds until return
+1=return
+
+[idle]
+pics=idle_??.png
+hotspot=11 22
+fps=10
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=10 21
+fps=10
+
+[walkload]
+dirpics=walk_!!_??.png
+hotspot=10 21
+fps=10

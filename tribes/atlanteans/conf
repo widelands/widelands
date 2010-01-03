@@ -134,6 +134,7 @@ trainer=_Trainer
 weaponsmith=_Weaponsmith
 weaver=_Weaver
 woodcutter=_Woodcutter
+scout=_Scout
 
 [constructionsite types]
 constructionsite=_Construction Site
@@ -195,6 +196,7 @@ weaponsmithy=_Weapon Smithy
 weaving-mill=_Weaving-Mill
 well=_Well
 woodcutters_house=_Woodcutter's House
+scouts_house=_"Scout's House"
 
 [initializations]
 headquarters_medium=_Headquarters medium
