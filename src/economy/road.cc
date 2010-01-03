@@ -350,7 +350,7 @@ void Road::_request_carrier
 #endif
 {
 
-	if (slot.carrier_type == 1 or owner().tribe().name() != "empire") {
+	if (slot.carrier_type == 1 or owner().tribe().name() == "atlanteans") {
 		slot.carrier_request =
 			new Request
 				(*this,
@@ -358,10 +358,12 @@ void Road::_request_carrier
 				Road::_request_carrier_callback,
 				Request::WORKER);
 	} else {
+		std::string donkey_name =
+			owner().tribe().name() == "empire" ? "donkey" : "wisent";
 		slot.carrier_request =
 		new Request
 			(*this,
-			 owner().tribe().safe_worker_index("donkey"),
+			 owner().tribe().safe_worker_index(donkey_name),
 			 Road::_request_carrier_callback,
 			 Request::WORKER);
 

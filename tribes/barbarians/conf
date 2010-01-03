@@ -109,6 +109,7 @@ wheat=_Wheat
 
 [carrier types]
 carrier=_Carrier
+wisent=_Ox
 
 [soldier types]
 soldier=_Soldier
