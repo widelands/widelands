@@ -105,6 +105,7 @@ wool=_Wool
 
 [carrier types]
 carrier=_Carrier
+donkey=_Donkey
 
 [soldier types]
 soldier=_Soldier
