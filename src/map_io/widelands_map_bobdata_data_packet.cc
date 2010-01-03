@@ -204,6 +204,8 @@ void Map_Bobdata_Data_Packet::Read
 									task = &Worker::taskFugitive;
 								else if (not strcmp(taskname, "geologist"))
 									task = &Worker::taskGeologist;
+								else if (not strcmp(taskname, "scout"))
+									task = &Worker::taskScout;
 								else if (not strcmp(taskname, "road"))
 									task = &Carrier::taskRoad;
 								else if (not strcmp(taskname, "transport"))

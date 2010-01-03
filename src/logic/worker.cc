@@ -2416,7 +2416,6 @@ void Worker::start_task_scout
 void Worker::scout_update(Game & game, State & state)
 {
 	std::string signal = get_signal();
-
 	molog("  Update Scout (%i time)\n", state.ivar1);
 
 	if (signal == "fail") {
@@ -2433,14 +2432,11 @@ void Worker::scout_update(Game & game, State & state)
 	// and we need to look out for new blackness.
 
 	// Check if it's not time to go home again:
-	// FIXME: maybe try checking the time while walking?
+	// TODO: maybe try checking the time while walking?
 	// however, this could cause the scout to eat up all the food without ever
 	// reaching a destination.
-	molog("  Update Scout get game time: %i\n", game.get_gametime());
 	if (state.ivar1 > game.get_gametime()) {
-		// start searching
-
-		// Find an unseen point
+		// start searching for unseen points
 
 		// the interesting points to survey
 		std::vector<Coords> list;
@@ -2448,9 +2444,9 @@ void Worker::scout_update(Game & game, State & state)
 		// if we don't have any interesting points, revisit the point, which
 		// we have the oldest 'knowledge' of
 		// however, don't revisit stuff that is newer than just a bit
-		// in this case we care about 1 minute.
-		// FIXME: balance this.
-		Time oldest_seen = game.get_gametime() - 10 * 60 * 1000;
+		// in this case we care about 10 minutes.
+		// TODO: balance this.
+		Time oldest_seen = game.get_gametime() - 600000; // == 600sec == 10min
 		Coords oldest_coord;
 		bool has_interesting_old_coord;
 
@@ -2477,7 +2473,7 @@ void Worker::scout_update(Game & game, State & state)
 			++fringe_size;
 			mr.extend(map);
 		}
-		molog (" interesting nodes %i\n", list.size());
+
 		while (list.size() > 0) {
 			// select a random field
 			uint8_t lidx = game.logic_rand() % list.size();
@@ -2492,6 +2488,7 @@ void Worker::scout_update(Game & game, State & state)
 			}
 			// if it couldn't be reached, try another.
 		}
+
 		// if we ran out of nodes to try,
 		// see if we have an old node to revisit.
 		if (has_interesting_old_coord) {
@@ -2507,6 +2504,7 @@ void Worker::scout_update(Game & game, State & state)
 		// or if we don't have a place to go,
 	}
 
+	// Area around our home
 	Area<FCoords> owner_area
 		(map.get_fcoords
 		 (ref_cast<Building, PlayerImmovable>
@@ -2519,9 +2517,8 @@ void Worker::scout_update(Game & game, State & state)
 
 	// we will go home.
 	if
-		(not
-		 start_task_movepath
-		 	(game, owner_area, 0, descr().get_right_walk_anims(does_carry_ware())))
+		(not start_task_movepath
+		 (game, owner_area, 0, descr().get_right_walk_anims(does_carry_ware())))
 	{
 		molog("[scout]: could not find path home\n");
 		send_signal(game, "fail");

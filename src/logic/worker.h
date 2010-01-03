@@ -169,7 +169,7 @@ public:
 		 uint8_t attempts, uint8_t radius,
 		 std::string const & subcommand);
 
-	void start_task_scout(Game &, uint32_t const);
+	void start_task_scout(Game &, uint32_t);
 
 protected:
 	void draw_inner(Editor_Game_Base const &, RenderTarget &, Point) const;
