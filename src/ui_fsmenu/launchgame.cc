@@ -120,8 +120,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 	m_chat         (0),
 	m_is_scenario  (false),
 	m_is_savegame  (false),
-	m_autolaunch   (autolaunch),
-	m_multiplayer  (m_settings->settings().multiplayer)
+	m_autolaunch   (autolaunch)
 {
 
 	m_title  .set_font(m_fn, fs_big(), UI_FONT_CLR_FG);
@@ -152,7 +151,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 				 m_fn, m_fs);
 	}
 
-	if (m_multiplayer) {
+	if (m_settings->settings().multiplayer) {
 		m_lobby_list =
 			new UI::Listselect<int32_t>
 				(this, m_xres * 7 / 10, m_yres * 6 / 10, m_butw, m_yres * 7 / 20);
@@ -184,8 +183,6 @@ void Fullscreen_Menu_LaunchGame::start()
 		if (m_settings->settings().mapname.empty())
 			end_modal(0); // back was pressed
 	}
-
-	refresh();
 }
 
 
@@ -406,7 +403,6 @@ void Fullscreen_Menu_LaunchGame::select_map()
 	m_settings->setMap(mapdata.name, mapdata.filename, m_nr_players);
 	m_is_savegame = false;
 	enable_all_pdgs();
-	refresh();
 }
 
 
@@ -441,7 +437,6 @@ void Fullscreen_Menu_LaunchGame::select_savegame()
 	m_settings->setMap(mapname, m_filename, m_nr_players, true);
 	m_is_savegame = true;
 	enable_all_pdgs();
-	refresh();
 }
 
 
@@ -465,7 +460,6 @@ void Fullscreen_Menu_LaunchGame::set_scenario_values()
 		m_settings->setPlayerName (i, map.get_scenario_player_name (i + 1));
 		m_settings->setPlayerTribe(i, map.get_scenario_player_tribe(i + 1));
 	}
-	refresh();
 }
 
 /**
@@ -512,7 +506,6 @@ void Fullscreen_Menu_LaunchGame::switch_to_position(uint8_t const pos)
 		m_settings->setPlayer(settings.playernum, position);
 		m_settings->setPlayerNumber(pos);
 	}
-	refresh();
 }
 
 /**
@@ -545,7 +538,6 @@ void Fullscreen_Menu_LaunchGame::load_previous_playerdata()
 		m_player_save_tribe[i - 1] = global.get_safe_string("name");
 	}
 	m_filename_proof = m_filename;
-	refresh();
 }
 
 
@@ -595,5 +587,4 @@ void Fullscreen_Menu_LaunchGame::safe_place_for_host
 	m_settings->setPlayerState(0, PlayerSettings::stateClosed);
 	m_settings->setPlayerState(0, PlayerSettings::stateOpen);
 	switch_to_position(0);
-	refresh();
 }

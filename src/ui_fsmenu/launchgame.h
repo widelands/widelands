@@ -100,7 +100,6 @@ private:
 	bool                      m_is_scenario;
 	bool                      m_is_savegame;
 	bool                      m_autolaunch;
-	bool                      m_multiplayer;
 };
 
 
