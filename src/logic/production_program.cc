@@ -949,8 +949,6 @@ void ProductionProgram::ActMine::execute
 	if (not totalres)
 		digged_percentage = 100;
 
-	log("MINE digged %i%% / %i%% ; left %i / %i; chance %i%%\n", digged_percentage, m_max, totalres, totalstart, m_chance);
-	
 	if (digged_percentage < m_max) {
 		//  mine can produce normally
 		if (totalres == 0)
@@ -993,7 +991,7 @@ void ProductionProgram::ActMine::execute
 		//  e.g. mines have m_chance=5, wells have 65
 		if (m_chance <= 20)
 			informPlayer(game, ps);
-		
+
 		//  Mine has reached its limits, still try to produce something but
 		//  independent of sourrunding resources. Do not decrease resources
 		//  further.
@@ -1011,15 +1009,14 @@ void ProductionProgram::ActMine::execute
 // Copied from militarysite.cc, MilitarySite::informPlayer
 // Informs the player about a mine that has run empty, if the
 // mine has not sent this message withing the last 60 seconds.
-void ProductionProgram::ActMine::informPlayer(Game & game, ProductionSite & ps) const
+void ProductionProgram::ActMine::informPlayer
+	(Game & game, ProductionSite & ps) const
 {
 	Map & map  = game.map();
 
-	// Inform the player, that we are under attack by adding a new entry to the
-	// message queue - a sound will automatically be played. But only add this
-	// message if there is no other from that area from last 30 sec.
 	Coords const coords = ps.get_position();
-	std::vector<Message> & msgQueue = MessageQueue::get(ps.owner().player_number());
+	std::vector<Message> & msgQueue =
+		MessageQueue::get(ps.owner().player_number());
 	for
 		(struct {
 		 	std::vector<Message>::const_iterator current;
@@ -1034,7 +1031,7 @@ void ProductionProgram::ActMine::informPlayer(Game & game, ProductionSite & ps) 
 			+ "<p font-size=14 font-face=FreeSerif>"
 			+ _("One of your mines has run empty. Consider expanding it.")
 			+ "</p></rt>";
-		
+
 			MessageQueue::add
 				(ps.owner().player_number(),
 				Message
@@ -1048,9 +1045,10 @@ void ProductionProgram::ActMine::informPlayer(Game & game, ProductionSite & ps) 
 			(i.current->sender() == MSG_MINE and
 			 map.calc_distance(i.current->get_coords(), coords) < 1 and
 			 game.get_gametime() - i.current->time() < 60000)
-			//  Mines will try producing from an empty mine over and over again,
-			//  since there is still a tiny chance they will find something.
-			//  We do not want to annoy the user with cxonstant "mine empty" messages.
+			// Mines will try producing from an empty mine over and over again,
+			// since there is still a tiny chance they will find something.
+			// We do not want to annoy the user with cxonstant "mine empty"
+			// messages.
 			break;
 }
 
