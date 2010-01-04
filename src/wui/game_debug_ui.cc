@@ -244,7 +244,7 @@ FieldDebugWindow::FieldDebugWindow
 
 	m_ui_immovable
 		(this,
-		 0, 280, 250, 24,
+		 0, 280, 214, 24,
 		 g_gr->get_no_picture(),
 		 &FieldDebugWindow::open_immovable, *this,
 		 ""),
