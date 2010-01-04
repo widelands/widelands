@@ -16,14 +16,11 @@ build_material=false
 
 [programs]
 work=_Work
-work2=_Work
 
 [work]
 sleep=30000
 consume=smoked_fish
 worker=scout
-
-[work2]
 sleep=30000
 consume=bread
 worker=scout

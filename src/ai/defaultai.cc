@@ -2032,7 +2032,7 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	map.find_immovables
 		(Area<FCoords>(f, vision), &immovables, FindImmovableAttackable());
 
-	for (uint32_t j = 0; j < immovables.size(); ++j) {
+	for (uint32_t j = 0; j < immovables.size(); ++j)
 		if (upcast(MilitarySite, bld, immovables[j].object)) {
 			if (bld->owner().player_number() == pn)
 				continue;
@@ -2067,7 +2067,6 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 				}
 			}
 		}
-	}
 
 	// Reenque militarysite at the end of list
 	militarysites.push_back(militarysites.front());

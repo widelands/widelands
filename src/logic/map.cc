@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,14 +80,14 @@ Map IMPLEMENTATION
 
 Map::Map() :
 m_nrplayers      (0),
+m_scenario       (false),
 m_width          (0),
 m_height         (0),
 m_world          (0),
 m_starting_pos   (0),
 m_fields         (0),
 m_overlay_manager(0),
-m_pathfieldmgr(new PathfieldManager),
-m_scenario(false)
+m_pathfieldmgr   (new PathfieldManager)
 {
 	m_worldname[0] = '\0';
 }

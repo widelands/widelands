@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,6 +66,24 @@ public:
 	const Tribe_Descr & tribe() const throw () {return *m_owner_tribe;}
 	std::string helptext() const {return m_helptext;}
 
+	/// How much of the worker type that an economy should store in warehouses.
+	/// The special value std::numeric_limits<uint32_t>::max() means that the
+	/// the target quantity of this ware type will never be checked and should
+	/// not be configurable.
+	uint32_t default_target_quantity() const {return m_default_target_quantity;}
+
+	bool has_demand_check() const {
+		return default_target_quantity() != std::numeric_limits<uint32_t>::max();
+	}
+
+	/// Called when a demand check for this ware type is encountered during
+	/// parsing. If there was no default target quantity set in the ware type's
+	/// configuration, set the default value 1.
+	void set_has_demand_check() {
+		if (m_default_target_quantity == std::numeric_limits<uint32_t>::max())
+			m_default_target_quantity = 1;
+	}
+
 	PictureID icon() const throw () {return m_icon;}
 	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
 	DirAnimations const & get_right_walk_anims(bool const carries_ware) const {
@@ -97,6 +115,7 @@ protected:
 #endif
 
 	std::string   m_helptext;       ///< Short (tooltip-like) help text
+	uint32_t    m_default_target_quantity;
 	std::string const m_icon_fname; ///< Filename of worker's icon
 	PictureID         m_icon;       ///< Pointer to icon into picture stack
 	DirAnimations m_walk_anims;

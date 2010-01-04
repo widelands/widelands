@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,9 +61,9 @@ void MiniMap::View::draw(RenderTarget & dst)
 	dst.renderminimap
 		(m_ibase.egbase(),
 		 m_ibase.get_player(),
-		(*m_flags) & (MiniMap::Zoom2) ?
-			Point((m_viewx - get_w() / 4), (m_viewy - get_h() / 4)):
-			Point((m_viewx - get_w() / 2), (m_viewy - get_h() / 2)),
+		 (*m_flags) & (MiniMap::Zoom2) ?
+		 	Point((m_viewx - get_w() / 4), (m_viewy - get_h() / 4)):
+		 	Point((m_viewx - get_w() / 2), (m_viewy - get_h() / 2)),
 		 *m_flags);
 }
 
@@ -134,50 +134,49 @@ MiniMap::MiniMap(Interactive_Base & ibase, Registry * const registry)
 	UI::UniqueWindow(&ibase, registry, 0, 0, _("Map")),
 	m_view(*this, &registry->flags, 0, 0, 0, 0, ibase),
 
-button_terrn
-	(this,
-	 but_w() * 0, m_view.get_h() + but_h() * 0, but_w(), but_h(),
-	 g_gr->get_no_picture(),
-	 g_gr->get_picture(PicMod_UI, "pics/button_terrn.png"),
-	 &MiniMap::toggle, *this, Terrn,
-	 _("Terrain")),
-button_owner
-	(this,
-	 but_w() * 1, m_view.get_h() + but_h() * 0, but_w(), but_h(),
-	 g_gr->get_no_picture(),
-	 g_gr->get_picture(PicMod_UI, "pics/button_owner.png"),
-	 &MiniMap::toggle, *this, Owner,
-	 _("Owner")),
-button_flags
-	(this,
-	 but_w() * 2, m_view.get_h() + but_h() * 0, but_w(), but_h(),
-	 g_gr->get_no_picture(),
-	 g_gr->get_picture(PicMod_UI, "pics/button_flags.png"),
-	 &MiniMap::toggle, *this, Flags,
-	 _("Flags")),
-button_roads
-	(this,
-	 but_w() * 0, m_view.get_h() + but_h() * 1, but_w(), but_h(),
-	 g_gr->get_no_picture(),
-	 g_gr->get_picture(PicMod_UI, "pics/button_roads.png"),
-	 &MiniMap::toggle, *this, Roads,
-	 _("Roads")),
-button_bldns
-	(this,
-	 but_w() * 1, m_view.get_h() + but_h() * 1, but_w(), but_h(),
-	 g_gr->get_no_picture(),
-	 g_gr->get_picture(PicMod_UI, "pics/button_bldns.png"),
-	 &MiniMap::toggle, *this, Bldns,
-	 _("Buildings")),
-button_zoom
-	(this,
-	 but_w() * 2, m_view.get_h() + but_h() * 1, but_w(), but_h(),
-	 g_gr->get_no_picture(),
-	 g_gr->get_picture(PicMod_UI, "pics/button_zoom.png"),
-	 &MiniMap::toggle, *this, Zoom2,
-	 _("Zoom"))
+	button_terrn
+		(this,
+		 but_w() * 0, m_view.get_h() + but_h() * 0, but_w(), but_h(),
+		 g_gr->get_no_picture(),
+		 g_gr->get_picture(PicMod_UI, "pics/button_terrn.png"),
+		 &MiniMap::toggle, *this, Terrn,
+		 _("Terrain")),
+	button_owner
+		(this,
+		 but_w() * 1, m_view.get_h() + but_h() * 0, but_w(), but_h(),
+		 g_gr->get_no_picture(),
+		 g_gr->get_picture(PicMod_UI, "pics/button_owner.png"),
+		 &MiniMap::toggle, *this, Owner,
+		 _("Owner")),
+	button_flags
+		(this,
+		 but_w() * 2, m_view.get_h() + but_h() * 0, but_w(), but_h(),
+		 g_gr->get_no_picture(),
+		 g_gr->get_picture(PicMod_UI, "pics/button_flags.png"),
+		 &MiniMap::toggle, *this, Flags,
+		 _("Flags")),
+	button_roads
+		(this,
+		 but_w() * 0, m_view.get_h() + but_h() * 1, but_w(), but_h(),
+		 g_gr->get_no_picture(),
+		 g_gr->get_picture(PicMod_UI, "pics/button_roads.png"),
+		 &MiniMap::toggle, *this, Roads,
+		 _("Roads")),
+	button_bldns
+		(this,
+		 but_w() * 1, m_view.get_h() + but_h() * 1, but_w(), but_h(),
+		 g_gr->get_no_picture(),
+		 g_gr->get_picture(PicMod_UI, "pics/button_bldns.png"),
+		 &MiniMap::toggle, *this, Bldns,
+		 _("Buildings")),
+	button_zoom
+		(this,
+		 but_w() * 2, m_view.get_h() + but_h() * 1, but_w(), but_h(),
+		 g_gr->get_no_picture(),
+		 g_gr->get_picture(PicMod_UI, "pics/button_zoom.png"),
+		 &MiniMap::toggle, *this, Zoom2,
+		 _("Zoom"))
 {
-
 	resize();
 
 	if (get_usedefaultpos())
@@ -192,12 +191,9 @@ void MiniMap::toggle(Layers const button) {
 }
 
 void MiniMap::resize() {
-	if (*m_view.m_flags & Zoom2)
-		m_view.set_zoom(2);
-	else
-		m_view.set_zoom(1);
+	m_view.set_zoom(*m_view.m_flags & Zoom2 ? 2 : 1);
 	set_inner_size
-	(m_view.get_w(), m_view.get_h() + number_of_button_rows() * but_h());
+		(m_view.get_w(), m_view.get_h() + number_of_button_rows() * but_h());
 	button_terrn.set_pos(Point(but_w() * 0, m_view.get_h() + but_h() * 0));
 	button_terrn.set_size(but_w(), but_h());
 	button_owner.set_pos(Point(but_w() * 1, m_view.get_h() + but_h() * 0));

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,10 +25,8 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 
-namespace UI {
-
-struct LoginBox : public Window {
-	LoginBox(Panel *);
+struct LoginBox : public UI::Window {
+	LoginBox(UI::Panel &);
 
 	std::string get_nickname() {return eb_nickname->text();}
 	std::string get_password() {return eb_password->text();}
@@ -41,19 +39,17 @@ private:
 	void pressedCancel();
 
 private:
-	EditBox  * eb_nickname;
-	EditBox  * eb_emailadd;
-	EditBox  * eb_password;
-	Checkbox * cb_register;
-	Checkbox * cb_auto_log;
-	Textarea * ta_nickname;
-	Textarea * ta_emailadd;
-	Textarea * ta_password;
-	Textarea * ta_register;
-	Textarea * ta_auto_log;
-	Textarea * pwd_warning;
+	UI::EditBox  * eb_nickname;
+	UI::EditBox  * eb_emailadd;
+	UI::EditBox  * eb_password;
+	UI::Checkbox * cb_register;
+	UI::Checkbox * cb_auto_log;
+	UI::Textarea * ta_nickname;
+	UI::Textarea * ta_emailadd;
+	UI::Textarea * ta_password;
+	UI::Textarea * ta_register;
+	UI::Textarea * ta_auto_log;
+	UI::Textarea * pwd_warning;
 };
-
-}
 
 #endif

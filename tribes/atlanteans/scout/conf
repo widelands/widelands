@@ -6,7 +6,6 @@ carrier=1
 
 [scout]
 0=scout 45000 # 45 seconds until return
-1=return
 
 [idle]
 pics=idle_??.png

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -153,11 +153,11 @@ throw (_wexception)
 						if (fr.Unsigned8()) {
 							//log("Reading request");
 							(road.m_carrier_slots[i].carrier_request =
-								new Request
-									(road,
-									Ware_Index::First(),
-									Road::_request_carrier_callback,
-									Request::WORKER))
+							 	new Request
+							 		(road,
+							 		 Ware_Index::First(),
+							 		 Road::_request_carrier_callback,
+							 		 Request::WORKER))
 							->Read(fr, ref_cast<Game, Editor_Game_Base>(egbase), ol);
 						}
 						else {

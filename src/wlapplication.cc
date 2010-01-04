@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1543,9 +1543,8 @@ void WLApplication::mainmenu_multiplayer()
 			s.set_string("nickname", playername);
 			s.set_string("password", password);
 			// Only change the emailaddress if we register new
-			if (registration) {
+			if (registration)
 				s.set_string("emailadd", email);
-			}
 
 			// reinitalise in every run, else graphics look strange
 			Fullscreen_Menu_NetSetupGGZ ns

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -161,7 +161,7 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		"retreat_change",            _("Set player retreat percentage"),
 		_
 			("Sets the player value of 'retreat when hit points below x%', this "
-			 "value could be overiden by players if allowed.")
+			 "value could be overridden by players if allowed.")
 	},
 	{
 		false, // Change this value when option window exists

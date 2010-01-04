@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -86,7 +86,7 @@ void Tab_Panel::resize()
  * the Tab_Panel whenever the Tab_Panel's size changes.
  * The default for snapparent behaviour is off.
 */
-void Tab_Panel::set_snapparent(bool snapparent)
+void Tab_Panel::set_snapparent(bool const snapparent)
 {
 	m_snapparent = snapparent;
 }

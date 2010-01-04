@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,14 +70,15 @@ Fullscreen_Menu_MultiPlayer::Fullscreen_Menu_MultiPlayer() :
 	Section & s = g_options.pull_section("global");
 	m_auto_log = s.get_bool("auto_log", false);
 	if (m_auto_log)
-		showloginbox = new UI::Callback_Button<Fullscreen_Menu_MultiPlayer>
-			(this,
-			 m_butx + m_butw + m_buth / 4, m_yres * 6 / 25, m_buth, m_buth,
-			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-			 g_gr->get_picture(PicMod_UI, "pics/continue.png"),
-			 &Fullscreen_Menu_MultiPlayer::showGGZLogin, *this,
-			 _("Show login dialog"), true, false,
-			 m_fn, m_fs);
+		showloginbox =
+			new UI::Callback_Button<Fullscreen_Menu_MultiPlayer>
+				(this,
+				 m_butx + m_butw + m_buth / 4, m_yres * 6 / 25, m_buth, m_buth,
+				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+				 g_gr->get_picture(PicMod_UI, "pics/continue.png"),
+				 &Fullscreen_Menu_MultiPlayer::showGGZLogin, *this,
+				 _("Show login dialog"), true, false,
+				 m_fn, m_fs);
 }
 
 
@@ -111,7 +112,7 @@ void Fullscreen_Menu_MultiPlayer::ggzLogin() {
 		return;
 	}
 
-	UI::LoginBox lb(this);
+	LoginBox lb(*this);
 	if (lb.run()) {
 		m_nickname = lb.get_nickname();
 		m_password = lb.get_password();

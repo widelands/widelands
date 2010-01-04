@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -398,7 +398,6 @@ void Interactive_Player::node_action()
  * \li Home: go to starting position
  * \li PageUp/PageDown: change game speed
  * \li Return: write chat message
- * \li F5: reveal map (in debug builds)
 */
 bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 {

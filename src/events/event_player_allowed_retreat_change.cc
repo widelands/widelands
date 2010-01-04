@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ Event_Player_Allowed_Retreat_Change::Event_Player_Allowed_Retreat_Change
 	try {
 		uint32_t const packet_version = s.get_safe_positive("version");
 		if (packet_version <= EVENT_VERSION) {
-			/// Nothing to do
+			//  nothing to do
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,19 +78,18 @@ Slider::Slider
 
 void Slider::set_value(int32_t new_value)
 {
-	if (new_value < m_min_value)
-		m_value = m_min_value;
-	else
-	if (new_value > m_max_value)
-		m_value = m_max_value;
-	else
-		m_value = new_value;
+	new_value = std::max(m_min_value, std::min(new_value, m_max_value));
 
-	m_cursor_pos =
-		(m_value <= m_min_value ? 0              :
-		 m_value >= m_max_value ? get_bar_size() :
-		 (m_value - m_min_value) * get_bar_size() / (m_max_value - m_min_value)),
-	send_value_changed();
+	if (new_value != m_value) {
+		m_value = new_value;
+		m_cursor_pos =
+			m_value <= m_min_value ? 0              :
+			m_value >= m_max_value ? get_bar_size() :
+			(m_value - m_min_value) * get_bar_size()
+			/
+			(m_max_value - m_min_value);
+		send_value_changed();
+	}
 }
 
 /**

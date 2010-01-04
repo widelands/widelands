@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,8 +32,6 @@
 #include "ui_basic/textarea.h"
 #include <list>
 
-namespace UI {
-
 using Widelands::Bob;
 using Widelands::Building;
 using Widelands::Soldier;
@@ -54,21 +52,21 @@ struct AttackBox : public UI::Box {
 
 	private:
 		uint32_t get_max_attackers();
-		Slider * add_slider
-			(Box         * parent,
+		UI::Slider & add_slider
+			(UI::Box    & parent,
 			 uint32_t      width,
 			 uint32_t      height,
 			 uint32_t      min, uint32_t max, uint32_t initial,
 			 char const  * picname,
 			 char const  * hint);
-		Textarea * add_text
-			(Box               * parent,
+		UI::Textarea & add_text
+			(UI::Box           & parent,
 			 std::string         str,
 			 uint32_t            alignment = UI::Box::AlignTop,
 			 std::string const & fontname = UI_FONT_NAME,
 			 uint32_t            fontsize = UI_FONT_SIZE_SMALL);
-		Callback_Button<AttackBox> * add_button
-			(Box *,
+		UI::Callback_Button<AttackBox> & add_button
+			(UI::Box           & parent,
 			 char const * picname,
 			 void (AttackBox::*fn)(),
 			 std::string const & tooltip_text);
@@ -90,5 +88,4 @@ struct AttackBox : public UI::Box {
 		UI::Callback_Button<AttackBox> * m_add_soldiers;
 };
 
-}
 #endif

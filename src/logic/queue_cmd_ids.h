@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,8 +47,10 @@
 #define QUEUE_CMD_CHANGESOLDIERCAPACITY 10
 #define QUEUE_CMD_ENEMYFLAGACTION       11
 #define QUEUE_CMD_SETWAREPRIORITY       12
-#define QUEUE_CMD_SETTARGETQUANTITY     13
-#define QUEUE_CMD_RESETTARGETQUANTITY   14
+#define QUEUE_CMD_SETWARETARGETQUANTITY     13
+#define QUEUE_CMD_RESETWARETARGETQUANTITY   14
+#define QUEUE_CMD_SETWORKERTARGETQUANTITY   15
+#define QUEUE_CMD_RESETWORKERTARGETQUANTITY 16
 
 #define QUEUE_CMD_DESTROY_MAPOBJECT    127
 #define QUEUE_CMD_ACT                  128

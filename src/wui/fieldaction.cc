@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -228,7 +228,7 @@ private:
 	PictureID workarea_cumulative_picid[NUMBER_OF_WORKAREA_PICS];
 
 	/// Variables to use with attack dialog.
-	UI::AttackBox * m_attack_box;
+	AttackBox * m_attack_box;
 };
 
 static char const * const pic_tab_buildroad  = "pics/menu_tab_buildroad.png";
@@ -481,9 +481,7 @@ void FieldActionWindow::add_buttons_auto()
 
 void FieldActionWindow::add_buttons_attack ()
 {
-	UI::Box * a_box = 0;
-	a_box = new UI::Box
-		(&m_tabpanel, 0, 0, UI::Box::Horizontal);
+	UI::Box & a_box = *new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 	if
 		(m_plr and
@@ -493,24 +491,22 @@ void FieldActionWindow::add_buttons_attack ()
 			(upcast
 			 	(Widelands::Attackable, attackable, m_map->get_immovable(m_node)))
 			if (attackable->canAttack()) {
-				m_attack_box = new UI::AttackBox
-					(a_box, m_plr, &m_node, 0, 0);
-				a_box->add(m_attack_box, UI::Box::AlignTop);
+				m_attack_box = new AttackBox(&a_box, m_plr, &m_node, 0, 0);
+				a_box.add(m_attack_box, UI::Box::AlignTop);
 
 				add_button
-					(a_box,
+					(&a_box,
 					 pic_attack,
 					 &FieldActionWindow::act_attack,
 					 _("Start attack"));
 			}
 	}
 
-	if (a_box and a_box->get_nritems()) { //  add tab
+	if (a_box.get_nritems()) { //  add tab
 		m_attack_box->resize();
-		a_box->resize();
-		add_tab(pic_tab_attack, a_box, _("Attack"));
+		a_box.resize();
+		add_tab(pic_tab_attack, &a_box, _("Attack"));
 	}
-
 }
 
 /*

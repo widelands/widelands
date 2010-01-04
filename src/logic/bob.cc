@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -425,7 +425,8 @@ Bob::Task Bob::taskIdle = {
  *
  * This task always succeeds unless interrupted.
  */
-void Bob::start_task_idle(Game & game, uint32_t anim, int32_t timeout)
+void Bob::start_task_idle
+	(Game & game, uint32_t const anim, int32_t const timeout)
 {
 	assert(timeout < 0 || timeout > 0);
 
