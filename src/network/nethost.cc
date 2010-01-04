@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -322,7 +322,7 @@ NetHost::NetHost (std::string const & playername, bool ggz)
 	hostuser.name = playername;
 	hostuser.position = UserSettings::none();
 	d->settings.users.push_back(hostuser);
-	file = 0; // Initialize as 0 pointer - unfortunally needed in struct
+	file = 0; //  Initialize as 0 pointer - unfortunately needed in struct.
 }
 
 NetHost::~NetHost ()
@@ -1693,7 +1693,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	case NETCMD_NEW_FILE_AVAILABLE: {
 		sendSystemChat
 			(_("Started to send file to %s"),
-			   d->settings.users.at(client.usernum).name.c_str());
+			 d->settings.users.at(client.usernum).name.c_str());
 		if (!file) // Do we have a file for sending
 			throw DisconnectException
 				(_("Client requests file altough none is available to send."));
@@ -1709,7 +1709,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		if (part == file->parts.size() - 1) {
 			sendSystemChat
 				(_("Completed transfer to %s"),
-				   d->settings.users.at(client.usernum).name.c_str());
+				 d->settings.users.at(client.usernum).name.c_str());
 			return;
 		}
 		sendFilePart(client.sock, part + 1);

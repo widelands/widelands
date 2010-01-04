@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -357,7 +357,7 @@ enum {
 	 * \li void[length of data]: data
 	 *
 	 * Sent by the client to request the next part from the host.
-	 * \li Unsigned32: number of the last recieved part
+	 * \li Unsigned32: number of the last received part
 	 */
 	NETCMD_FILE_PART = 25
 };
