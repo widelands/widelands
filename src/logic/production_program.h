@@ -409,6 +409,7 @@ struct ProductionProgram {
 			(char * parameters, ProductionSite_Descr &,
 			 std::string const & production_program_name);
 		virtual void execute(Game &, ProductionSite &) const;
+		virtual void informPlayer(Game &, ProductionSite &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
 			(::FileWrite &, ProductionSite_Descr const &) const;

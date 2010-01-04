@@ -25,6 +25,7 @@
 #include "game_data_error.h"
 #include "helper.h"
 #include "mapregion.h"
+#include "message_queue.h"
 #include "productionsite.h"
 #include "profile/profile.h"
 #include "soldier.h"
@@ -948,6 +949,8 @@ void ProductionProgram::ActMine::execute
 	if (not totalres)
 		digged_percentage = 100;
 
+	log("MINE digged %i%% / %i%% ; left %i / %i; chance %i%%\n", digged_percentage, m_max, totalres, totalstart, m_chance);
+	
 	if (digged_percentage < m_max) {
 		//  mine can produce normally
 		if (totalres == 0)
@@ -984,6 +987,13 @@ void ProductionProgram::ActMine::execute
 			return ps.program_end(game, Failed);
 
 	} else {
+		//  Inform the player about an empty mine, unless
+		//  there is a sufficiently high chance, that the mine
+		//  will still produce enough.
+		//  e.g. mines have m_chance=5, wells have 65
+		if (m_chance <= 20)
+			informPlayer(game, ps);
+		
 		//  Mine has reached its limits, still try to produce something but
 		//  independent of sourrunding resources. Do not decrease resources
 		//  further.
@@ -996,6 +1006,52 @@ void ProductionProgram::ActMine::execute
 	//  FIXME ProductionSite::program_step so that the following sleep/animate
 	//  FIXME command knows how long it should last.
 	return ps.program_step(game);
+}
+
+// Copied from militarysite.cc, MilitarySite::informPlayer
+// Informs the player about a mine that has run empty, if the
+// mine has not sent this message withing the last 60 seconds.
+void ProductionProgram::ActMine::informPlayer(Game & game, ProductionSite & ps) const
+{
+	Map & map  = game.map();
+
+	// Inform the player, that we are under attack by adding a new entry to the
+	// message queue - a sound will automatically be played. But only add this
+	// message if there is no other from that area from last 30 sec.
+	Coords const coords = ps.get_position();
+	std::vector<Message> & msgQueue = MessageQueue::get(ps.owner().player_number());
+	for
+		(struct {
+		 	std::vector<Message>::const_iterator current;
+		 	std::vector<Message>::const_iterator const end;
+		 } i = {msgQueue.begin(), msgQueue.end()};;
+		 ++i.current)
+		if (i.current == i.end) {
+			std::string message =
+			"<rt image=tribes/"
+			+ ps.owner().tribe().name()
+			+ "/" + ps.name() + "/" + ps.name() + "_i_00.png>"
+			+ "<p font-size=14 font-face=FreeSerif>"
+			+ _("One of your mines has run empty. Consider expanding it.")
+			+ "</p></rt>";
+		
+			MessageQueue::add
+				(ps.owner().player_number(),
+				Message
+					(MSG_MINE,
+					game.get_gametime(),
+					_("Mine empty"),
+					ps.get_position(),
+					message.c_str()));
+			break;
+		} else if
+			(i.current->sender() == MSG_MINE and
+			 map.calc_distance(i.current->get_coords(), coords) < 1 and
+			 game.get_gametime() - i.current->time() < 60000)
+			//  Mines will try producing from an empty mine over and over again,
+			//  since there is still a tiny chance they will find something.
+			//  We do not want to annoy the user with cxonstant "mine empty" messages.
+			break;
 }
 
 

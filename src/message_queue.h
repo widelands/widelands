@@ -39,6 +39,7 @@
 #define MSG_UNDER_ATTACK  "under_attack"
 #define MSG_SITE_LOST     "site_lost"
 #define MSG_SITE_DEFEATED "site_defeated"
+#define MSG_MINE          "mine"
 
 
 namespace Widelands {
