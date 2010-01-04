@@ -354,8 +354,11 @@ def do_configure_libraries(conf, env):
 		env.Exit(1)
 	
 	if not conf.CheckLibWithHeader('lua', header='lua.h', language='C', autoadd=1):
-		print 'Could not find the lua library! Is it installed?'
-		env.Exit(1)
+		# Try to find 'lua5.1'
+		conf.CheckCompilerFlag('-I/usr/include/lua5.1', env)
+		if not conf.CheckLibWithHeader('lua5.1', header='lua.h', language='C', autoadd=1):
+			print 'Could not find the lua library! Is it installed?'
+			env.Exit(1)
 
 	if not conf.CheckLib(library='SDL_image', symbol='IMG_Load', autoadd=1):
 		print 'Could not find the SDL_image library! Is it installed?'

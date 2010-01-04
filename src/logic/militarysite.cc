@@ -691,6 +691,31 @@ bool MilitarySite::military_presence_kept(Game & game)
 /// Informs the player about an attack of his opponent.
 void MilitarySite::informPlayer(Game & game, bool discovered)
 {
+	char formation[256];
+	snprintf
+		(formation, sizeof(formation),
+			"<p font-size=14 font-face=FreeSerif>");
+	char message[2048];
+	snprintf
+		(message, sizeof(message),
+			discovered ?
+			_("%sYour %s discovered an aggressor.</p>") :
+			_("%sYour %s is under attack.</p>"),
+			formation, descname().c_str());
+
+	MessageQueue::addWithTimeout
+		(game, owner().player_number(),
+		 30000, 4,
+		 Message::create_building_message
+			(MSG_UNDER_ATTACK,
+			 game.get_gametime(),
+			 _("You are under attack"),
+			 message,
+			 *this));
+
+	/* Old code remains here for security reasons:
+	   New code has not been tested yet.
+
 	Map & map  = game.map();
 
 	// Inform the player, that we are under attack by adding a new entry to the
@@ -740,6 +765,7 @@ void MilitarySite::informPlayer(Game & game, bool discovered)
 			//  Further if the found message is older than 60 sec., and the fight
 			//  still goes on, a reminder might be useful.
 			break;
+	*/
 }
 
 

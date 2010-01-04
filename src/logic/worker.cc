@@ -407,6 +407,10 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 			if (action.iparam1 < area.radius) {
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
+				informPlayer
+					(game,
+					 ref_cast<Building, PlayerImmovable>(*get_location(game)),
+					 Map_Object_Descr::get_attribute_name(action.iparam2));
 				return true;
 			}
 			std::vector<ImmovableFound> list;
@@ -427,6 +431,10 @@ bool Worker::run_findobject(Game & game, State & state, Action const & action)
 			if (action.iparam1 < area.radius) {
 				send_signal(game, "fail"); //  no object found, cannot run program
 				pop_task(game);
+				informPlayer
+					(game,
+					 ref_cast<Building, PlayerImmovable>(*get_location(game)),
+					 Map_Object_Descr::get_attribute_name(action.iparam2));
 				return true;
 			}
 			std::vector<Bob *> list;
@@ -550,6 +558,12 @@ bool Worker::run_findspace(Game & game, State & state, Action const & action)
 
 	if (!map.find_reachable_fields(area, &list, cstep, functor)) {
 		molog("  no space found\n");
+
+		informPlayer
+			(game,
+			 ref_cast<Building, PlayerImmovable>(*get_location(game)),
+			 action.sparam1);
+
 		send_signal(game, "fail");
 		pop_task(game);
 		return true;
@@ -562,6 +576,26 @@ bool Worker::run_findspace(Game & game, State & state, Action const & action)
 	schedule_act(game, 10);
 	return true;
 }
+
+// Informs the player about a building that cannot find resources any more,
+void Worker::informPlayer
+	(Game & game, Building & building, std::string res_type) const
+{
+	MessageQueue::addWithTimeout
+		(game, building.owner().player_number(),
+		 60000, 0,
+		 Message::create_building_message
+			(MSG_MINE,
+			 game.get_gametime(),
+			 _("Out of ") + res_type,
+				  "<p font-size=14 font-face=FreeSerif>"
+				+ std::string
+					 (_("This worker cannot find any more resources"
+					  " of the following type: "))
+				+ res_type + "</p>",
+			 building));
+}
+
 
 
 /**

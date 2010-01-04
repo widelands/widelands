@@ -302,6 +302,20 @@ uint32_t Map_Object_Descr::get_attribute_id(std::string const & name) {
 	return s_dyn_attribhigh;
 }
 
+/**
+ * Lookup an attribute by id. If the attribute isn't found,
+ * returns an emtpy string.
+ */
+std::string Map_Object_Descr::get_attribute_name(uint32_t const & id) {
+	for
+		(AttribMap::iterator iter = s_dyn_attribs.begin();
+		 iter != s_dyn_attribs.end(); ++iter)
+	{
+		if (iter->second == id)
+			return iter->first;
+	}
+	return "";
+}
 
 /*
 ==============================================================================

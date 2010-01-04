@@ -24,6 +24,7 @@
 #include <string>
 #include <vector>
 
+#include "logic/game.h"
 #include "graphic/graphic.h"
 #include "message.h"
 #include "ui_basic/button.h"
@@ -104,6 +105,40 @@ struct MessageQueue {
 				m_button(0)->set_pic(g_gr->get_picture(PicMod_Game, NEW_MESSAGES));
 
 		}
+	}
+
+
+	/**
+	 * Adds message m to the message queue of player player_number, if
+	 * there has not been a message from the same sender
+	 * in the last timeout milliseconds in a radius radius around
+	 * the coordinates of m.
+	 *
+	 * \note This code has been moved here from militarysite.cc
+	 */
+	static void addWithTimeout
+		(Game & game, Player_Number const player_number,
+		 uint32_t timeout, uint32_t radius,
+		 Message const m)
+	{
+		Map & map  = game.map();
+
+		Coords const coords = m.get_coords();
+		std::vector<Message> & msgQueue = MessageQueue::get(player_number);
+		for
+			(struct {
+				std::vector<Message>::const_iterator current;
+				std::vector<Message>::const_iterator const end;
+			} i = {msgQueue.begin(), msgQueue.end()};;
+			++i.current)
+			if (i.current == i.end) {
+				MessageQueue::add (player_number, m);
+				break;
+			} else if
+				(i.current->sender() == m.sender() and
+				map.calc_distance(i.current->get_coords(), coords) <= radius and
+				game.get_gametime() - i.current->time() < timeout)
+				break;
 	}
 
 	static void read_all (const Player & p)

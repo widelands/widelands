@@ -22,6 +22,7 @@
 
 #include "i18n.h"
 #include "logic/map.h"
+#include "logic/building.h"
 
 #include <cassert>
 #include <string>
@@ -56,6 +57,36 @@ struct Message {
 		m_coords(c),
 		m_is_visible(true)
 	{}
+
+	/**
+	 * Creates a message specific to a given building.
+	 * It will have the building's coordinates, and display
+	 * a picture of the building in its description
+	 */
+	static Message create_building_message
+		(std::string const &       msgsender,
+		 uint32_t                  msgtime,
+		 std::string const &       t,
+		 std::string const &       description,
+		 Building          &       building)
+	{
+		std::string picture_name =
+			g_anim.get_animation(building.descr().get_ui_anim())->picnametempl
+			+ ".png";
+		size_t templateIndex = picture_name.find("??");
+		picture_name.replace(templateIndex, 2, "00");
+
+
+		return
+			Message
+				(msgsender,
+				 msgtime,
+				 t,
+				 building.get_position(),
+				 "<rt image=" + picture_name + ">"
+				 + description
+				 + "</rt>");
+	}
 
 	std::string identifier() const {
 		return "Message: " + m_title + '|' + m_descr;

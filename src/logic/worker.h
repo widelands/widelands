@@ -23,6 +23,7 @@
 #include "economy/idleworkersupply.h"
 #include "economy/ware_instance.h"
 #include "worker_descr.h"
+#include "productionsite.h"
 
 namespace Widelands {
 struct Building;
@@ -237,6 +238,10 @@ private:
 	bool run_geologist_find   (Game &, State &, Action const &);
 	bool run_scout            (Game &, State &, Action const &);
 	bool run_playFX           (Game &, State &, Action const &);
+
+	// Displays a message to the player if a find... program can't be
+	// executed
+	void informPlayer(Game &, Building &, std::string) const;
 
 	OPtr<PlayerImmovable> m_location; ///< meta location of the worker
 	Economy          * m_economy;      ///< economy this worker is registered in
