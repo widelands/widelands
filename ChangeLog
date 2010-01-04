@@ -1,17 +1,74 @@
 ### Build 15 (until now)
-- Implemented zoomable minimap (svn:r4820)
-- Added login/register menu for games via metaserver (svn:r4818)
-- Added a small scenario part to "The Green Plateau" map (svn:r4808)
-- Added new event "seeall" allowing to switch see all mode of a player
-  to on/off. (svn:r4804)
-- Added new events for 'retreat when injured'. (svn:r4796)
+- Fix bug that when a worker program had a createitem command where the
+  parameter was not the name of a ware type in the tribe, the game would fail
+  an assertion when the command was executed. Now throw an exception when the
+  command is parsed. (svn:r4847)
+- Implement a the "scout" command in worker programs. Add a worker type "scout"
+  to each tribe. Such a worker type typically lives in a small house/hut
+  (productionsite). The productionsite's work program typically consists of a
+  sleep period, consumption of some food, and sending the worker out to explore
+  nodes that have never been seen before or not seen recently. (svn:r4840,
+  svn:r4841, svn:r4843, svn:r4844, svn:r4845)
+- In the chat, doubleclicking a username will add @username so that the text
+  that is written after will be sent as a personal message to that user.
+  (svn:r4832)
+- Implemented double size zoom mode for minimap (svn:r4820, svn:r4821)
+- Added login/register menu for games via metaserver (svn:r4818, svn:r4819)
+- Added a small scenario part to "The Green Plateau" map (svn:r4808, svn:r4810)
+- Improve map select menu - now the "play as scenario" checkbox is only usable,
+  if the selected map is playable as scenario (= if a file "trigger" exists).
+  Further it shows a special icon for scenario maps for a direct indication.
+  (svn:r4807)
+- Added new event "seeall" allowing to switch see all mode of a player to
+  on/off. (svn:r4804, svn:r4878)
+- In productionsite programs: Generalize failure handling method to result
+  handling method. Depending on the result of the called program, the calling
+  program can now return failed, completed or skipped. It can also chose to
+  continue execution or repeat the call. (svn:r4781)
+- Added new loading screens for Desert, Greenland and Winterland. (svn:r4778,
+  svn:r4816)
 - Improved Battle code
     * Added support for soldier combat animations (svn:r4772)
-    * Let soldiers retreat, when they are injured (svn:r4796)
-    * New attack user interface (svn:r4802)
+    * Let soldiers retreat, when they are injured. Let the player configure in
+      the game how injured they have to be to retreat. Make it configurable in
+      scenarios and initializations to what extent a player should be able to
+      configure this feature during the game. (svn:r4796, svn:r4812)
+    * New attack user interface (svn:r4802, svn:r4803, svn:r4813)
+- Fix bug that if a user sent a private chat message to himself, the nethost
+  delivered it to him twice. (svn:r4764)
 - Added a new map 'Atoll' (svn:r4755)
+- Add the production program return condition type "site has" that takes a
+  group (just like the consume command). Now it is possible to have a statement
+  "return=failed unless site has bread,fish,meat:4". (svn:r4750)
+- When parsing a consume group, check that the count is not so large that the
+  group can not be fulfilled by the site. For example if a site has "[inputs]"
+  "smoked_fish=6", "smoked_meat=6" and a program has a consume command with the
+  group "smoked_fish,smoked_meat:13" it will give an error message (previously
+  it was just accepted silently). (svn:r4750)
+- Fix bug that prevented parsing of a negation condition in a production
+  program return statement. (svn:r4748)
+- Change some productionsites to produce even if the product is not needed, if
+  none of the inputs nor the site's capacity are needed either, so that wares
+  of a more refined type are available when they are needed in the future.
+  (svn:r4746, svn:r4748, svn:r4751)
+- Fix broken logic of productionsite program's return command's when-condition.
+  (svn:r4745)
 - Show in the statistics string why a building is not working. (svn:r4744)
-- Improvements in replay handling to save diskspace (svn:r4719)
+- When a productionsite program has been skipped, do not start it again until
+  at least 10 seconds have passed, to avoid slowing down the simulation. The
+  drawback is that it may take longer time until the productionsite discovers
+  that it should produce something (for example because the amount of a ware
+  type dropped below the target quantity). (svn:r4743)
+- Fix bug that 40 characters was read from a file into a buffer that was used
+  as a 0-terminated string (the building statistics string). This worked as
+  long as the file provided the 0-terminator. Now make sure that the buffer is
+  0-terminated regardless of what the file contains. Previously the whole
+  buffer was written (including the garbage after the terminator). Now only
+  write the real content. (svn:r4742)
+- Fix the editor's trigger time option menu. (svn:r4740)
+- Fix the map Sun of fire so that there is no longer possible to walk (attack)
+  along the coast between players 4 and 5.
+- Improvements in replay handling to save diskspace (svn:r4719, svn:r4720)
     * Only write syncstreams in multiplayer games
     * Delete old (definable) replay files and syncstreams at startup
 - Replace the event type that allows or forbids a building type for a player
@@ -22,7 +79,8 @@
   used in initializations). Also implement configuration dialogs for those
   event types. (svn:r4709, svn:r4715).
 - Change the code so victorious soldiers conquer an opposing militarysite,
-  instead of destroying it. (svn:r4706 - svn:r4711)
+  instead of destroying it. (svn:r4706 - svn:r4711, svn:r4724, svn:r4727,
+  svn:r4731, svn:r4732, svn:r4822, svn:r4839)
 - Fix bug that caused udenfined behaviour, particularly segmentations faults in
   64-bit optimized builds. (svn:r4702)
 - Improve player's message queue: (svn:r4698)
@@ -67,7 +125,7 @@
   this fix breaks each old savegame with a bob that happens to be in this
   state. (svn:r4597)
 - Fix memory leaks. (svn:r4567, svn:r4671, svn:r4672, svn:r4673, svn:r4674,
-  svn:r4675, svn:r4677, svn:r4681, svn:r4682)
+  svn:r4675, svn:r4677, svn:r4681, svn:r4682, svn:r4756)
 - Fix bug that when the editor's map options window was opened and the map's
   description was shorter than a certain length (different for different
   locales), the program would crash when a letter was typed in the description
