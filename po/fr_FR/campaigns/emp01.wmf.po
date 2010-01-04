@@ -4,15 +4,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2008-08-18 23:07+0100\n"
+"POT-Creation-Date: 2010-01-04 02:07+0000\n"
+"PO-Revision-Date: 2010-01-03 13:59+0100\n"
 "Last-Translator: Jean-Pierre Gemble <jpgemble@voila.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Bookmarks: -1,-1,-1,-1,-1,-1,-1,34,-1,-1\n"
 
 #: ../../../campaigns/emp01.wmf/elemental:7
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
@@ -20,7 +21,7 @@ msgstr "Tutoriel de l'Empire 1 - Les rives de Malac' Mor"
 
 #: ../../../campaigns/emp01.wmf/elemental:9
 msgid "After losing an important battle against the barbarians, which leads to the forfeition of a bigger part of Empire's territory, Lutius leaves Fremil, to start a new life. But his destiny takes his ship into a heavy storm, which nearly desctructs the ship. Only with lot of luck he can save his people and the damaged ship on a unknown desert strand."
-msgstr ""
+msgstr "Après avoir perdu une bataille importante contre les Barbares, qui a aboutie à la perte d'une partie plus grande du territoire de l'Empire, Lutius quitte Fremil pour commencer une nouvelle vie. Mais son destin mène son navire dans une tempête violente qui presque détruit le navire. Avec beaucoup de chance il arrive à sauver son peuple et le navire abîmé à une plage déserte."
 
 #: ../../../campaigns/emp01.wmf/event:61 ../../../campaigns/emp01.wmf/event:76
 #: ../../../campaigns/emp01.wmf/event:91
@@ -88,9 +89,8 @@ msgid "Saledus speaks with a sigh of relief..."
 msgstr "Saledus parle avec un soupir de soulagement..."
 
 #: ../../../campaigns/emp01.wmf/event:160
-#, fuzzy
 msgid " \"Sire, I saw that the construction of the barracks was complete, so I assigned one of my best soldiers to it to keep watch on the desert.<br> This is a good step forward. Now we can feel a bit safer and can look forward to repair our ship.\" "
-msgstr " \"Sire, j'ai vu que la construction de la caserne était terminée, alors j'y ai envoyé un de mes meilleurs soldats pour surveiller le désert.<br> C'est un bon pas en avant. Maintenant nous pouvons nous sentir un peu plus en sécurité et aller de l'avant afin de réparer notre bateau.\""
+msgstr " \"Sire, j'ai vu que la construction de la caserne était terminée, alors j'y ai envoyé un de mes meilleurs soldats pour surveiller le désert.<br> C'est un bon pas en avant. Maintenant nous pouvons nous sentir un peu plus en sécurité et avancer de réparer notre bateau.\""
 
 #: ../../../campaigns/emp01.wmf/event:162
 msgid "Safe for now"
@@ -101,15 +101,13 @@ msgid "Amalea smiles..."
 msgstr "Amalea sourit..."
 
 #: ../../../campaigns/emp01.wmf/event:174
-#, fuzzy
 msgid " \"Hey Lutius, I just met Saledus outside.<br> He told me about the barracks. Well, I am not one of those girls who think we need more barracks - instead, we might concentrate on other things now.<br> It is absolutely clear that we need wood to repair our ship. So, I walked through the forest yesterday and found a nice place for a lumberjack's house, south of our headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Hé Lutius, je viens juste de rencontrer Saledus dehors.<br> Il m'a parlé de la caserne. Hé bien, je ne suis pas de celles qui pensent que nous avons besoin de plus de casernes, mais d'un autre côté nous pourrions nous concentrer sur d'autres choses maintenant.<br> Il est évident que nous avons besoin de bois pour réparer notre bateau. Je suis donc allé me promener dans la forêt hier et j'ai trouvé un bel endroit pour une maison de bûcheron au sud de notre quartier général.<br><br>-- NOUVEL OBJECTIF --<br>"
+msgstr " \"Hé Lutius, je viens juste de rencontrer Saledus dehors.<br> Il m'a parlé de la caserne. Hé bien, je ne suis pas de celles qui pensent que nous avons besoin de plus de casernes, par contre nous pourrions nous concentrer sur d'autres choses maintenant.<br> Il est évident que nous avons besoin de bois pour réparer notre bateau. Je suis donc allé me promener dans la forêt hier et j'ai trouvé un bel endroit pour une maison de bûcheron au sud de notre quartier général.\"<br><br>-- NOUVEL OBJECTIF --<br>"
 
 #: ../../../campaigns/emp01.wmf/event:175
 #: ../../../campaigns/emp01.wmf/objective:15
-#, fuzzy
 msgid "* Build a lumberjack's house at the red point, south of your headquarters."
-msgstr "* Construisez une maison de bûcheron sur le point rouge, au sud de votre quartier général"
+msgstr "* Construisez une maison de bûcheron sur le point rouge, au sud de votre quartier général."
 
 #: ../../../campaigns/emp01.wmf/event:177
 #: ../../../campaigns/emp01.wmf/event:197
@@ -122,24 +120,21 @@ msgid "Amalea recommends..."
 msgstr "Amalea recommande..."
 
 #: ../../../campaigns/emp01.wmf/event:194
-#, fuzzy
 msgid " \"Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjack's houses, so that we can faster harvest the trunks.<br> But unfortunately the trunks are useless for repairing our ship - we need refined wood, like every ship and every bigger building needs, too. So we should build up a sawmill - as soon as we have enough space for this.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Hé Lutius, j'ai eu l'information que notre premier bûcheron a commencé le travail aujourd'hui. Peut-être serait-il judicieux d'attendre qu'il ait déboisé suffisamment pour construire deux maisons de bûcheron supplémentaires, pour améliorer le rendement.<br>Mais malheureusement ces troncs d'arbre sont inutiles pour réparer notre bateau ; nous avons besoin de planches, comme en nécessite tout bateau et aussi tout grand bâtiment.  Nous devons donc construire une scierie, dès que nous aurons assez de place pour cela.\"<br><br>-- NOUVEL OBJECTIF --<br>"
+msgstr " \"Hé Lutius, j'ai eu l'information que notre premier bûcheron a commencé le travail aujourd'hui. Peut-être serait-il judicieux d'attendre qu'il ait déboisé suffisamment pour construire deux maisons de bûcheron supplémentaires, pour améliorer le rendement.<br>Mais malheureusement ces troncs d'arbre sont inutiles pour réparer notre bateau - nous avons besoin de planches, comme en nécessite tout bateau et aussi tout grand bâtiment.  Nous devons donc construire une scierie, dès que nous aurons assez de place pour cela.\"<br><br>-- NOUVEL OBJECTIF --<br>"
 
 #: ../../../campaigns/emp01.wmf/event:195
 #: ../../../campaigns/emp01.wmf/objective:23
-#, fuzzy
 msgid "* Build two more lumberjack's houses and a sawmill as soon as there is enough space for them."
-msgstr "* Construisez deux maisons de bûcheron plus loin et une scierie dès qu'il y a assez d'espace."
+msgstr "* Construisez deux maisons de bûcheron de plus et une scierie dès qu'il y a assez d'espace."
 
 #: ../../../campaigns/emp01.wmf/event:217
 msgid "Amalea comes in..."
 msgstr "Amalea entre..."
 
 #: ../../../campaigns/emp01.wmf/event:219
-#, fuzzy
 msgid " \"Hi Lutius, I've got two important things to talk about... First the good news:<br> I saw that the construction of the sawmill is complete, so we can begin to refine the trunks the lumberjacks are harvesting to wood.<br> But that's just about the only positive thing I know to talk about. The bad news is that our lumberjacks harvest at an unbelievable speed. There are almost no trees left on this island.<br> Lutius, these trees provide shelter from the sandstorms from the desert, shade on the hot days and they are the home of so many gentle animals. We shouldn't leave this island a complete desert.<br> Lutius, I beg you: find someone who takes care about planting new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Salut Lutius, J'ai deux nouvelles importantes te communiquer... D'abord la bonne :<br> j'ai vu que la construction de la scierie était terminée, nous pouvons donc commencer à fabriquer des planches à partir des troncs d'arbres.<br> Mais c'est la seule bonne nouvelle que j'ai à porter à ta connaissance. La mauvaise c'est que les bûcherons déboisent à une vitesse incroyable. Il n'y a presque plus d'arbres sur cette île.<br> Lutius, ces arbres nous protègent des tempêtes de sable du désert, nous fournissent un abri pour les jours chauds et sont le foyer de tant de doux animaux. Nous ne devrions pas laisser cette île comme un désert.<br>Lutius, je te le demande : trouve quelqu'un qui s'occupera de planter de nouveaux arbres.\"<br><br>-- NOUVEL OBJECTIF --<br> "
+msgstr " \"Salut Lutius, J'ai deux nouvelles importantes à te communiquer... D'abord la bonne :<br> j'ai vu que la construction de la scierie était terminée, nous pouvons donc commencer à fabriquer des planches à partir des troncs d'arbres.<br> Mais c'est la seule bonne nouvelle que j'ai à porter à ta connaissance. La mauvaise c'est que les bûcherons déboisent à une vitesse incroyable. Il n'y a presque plus d'arbres sur cette île.<br> Lutius, ces arbres nous protègent des tempêtes de sable du désert, nous fournissent un abri pour les jours chauds et sont le foyer de tant de doux animaux. Nous ne devrions pas laisser cette île comme un désert.<br>Lutius, je te supplie : trouve quelqu'un qui s'occupera de planter de nouveaux arbres.\"<br><br>-- NOUVEL OBJECTIF --<br> "
 
 #: ../../../campaigns/emp01.wmf/event:220
 #: ../../../campaigns/emp01.wmf/objective:31
@@ -151,9 +146,8 @@ msgid "Saledus notes..."
 msgstr "Saledus remarque..."
 
 #: ../../../campaigns/emp01.wmf/event:249
-#, fuzzy
 msgid " \"Hey, my good old friend. I just thought about the rocks standing on the south strand of this land. Perhaps we could cut out some useful hard stones and beautiful marble.<br> The repair of our ship will take a few weeks, anyway, and the resources we harvest now might be the base of strong and big buildings in another land.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr " \"Hé mon vieil ami, je viens juste de penser aux rochers de la rive sud de cette île. Peut-être pourrions nous en extraire quelques pierres utiles et du beau marbre.<br> La réparation de notre navire prendra de toute façon quelques semaines, et les ressources que nous récoltons maintenant pourrait être la base de grands et solides bâtiments dans un autre pays.\"<br><br>-- NOUVEL OBJECTIF --<br>"
+msgstr " \"Hé mon vieil ami, je viens juste de penser aux rochers de la rive sud de cette île. Peut-être pourrions nous en extraire quelques pierres utiles et du beau marbre.<br> La réparation de notre navire prendra de toute façon quelques semaines, et les ressources que nous récoltons maintenant pourraient être la base de grands et solides bâtiments dans un autre pays.\"<br><br>-- NOUVEL OBJECTIF --<br>"
 
 #: ../../../campaigns/emp01.wmf/event:250
 #: ../../../campaigns/emp01.wmf/objective:39
@@ -177,9 +171,8 @@ msgid "A step forward"
 msgstr "Un pas en avant"
 
 #: ../../../campaigns/emp01.wmf/event:292
-#, fuzzy
 msgid " \"Today I got the message that our ship is completely repaired. At the moment my people are loading everything onto our newly repaired ship, hoping it will serve us better than last time.<br> Tonight will be our last night on this island. Tomorrow morning we will leave, searching for a new place for our exile.<br> I still wonder if we will ever see Fremil again.<br><br>--------------------- VICTORY! ----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.\" "
-msgstr " \"Aujourd'hui on m'a informé que notre bateau est complétement réparé. En ce moment mon peuple charge tout sur le bateau, en espérant qu'il nous sauvera mieux que la dernière fois.<br> Cette nuit sera notre dernière sur cette île. Demain matin nous partirons chercher un autre endroit pour notre exil.<br>Je me demande toujours si nous reverrons Fremil un jour.\"<br><br>----------------------VICTOIRE!-----------------------<br><br>Vous avez complété cette mission. Vous pouvez continuer à jouer si vous le désirez, autrement passez à la mission suivante. "
+msgstr " \"Aujourd'hui on m'a informé que notre bateau est complétement réparé. En ce moment mon peuple charge tout sur le bateau, en espérant qu'il nous sauvera mieux que la dernière fois.<br> Cette nuit sera notre dernière sur cette île. Demain matin nous partirons chercher un autre endroit pour notre exil.<br>Je me demande toujours si nous reverrons Fremil un jour.\"<br><br>----------------------VICTOIRE!-----------------------<br><br>Vous avez complété cette mission. Vous pouvez continuer à jouer si vous le désirez, autrement passez à la mission suivante.\""
 
 #: ../../../campaigns/emp01.wmf/event:294
 msgid "Mission Complete"

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4699\n"
+"Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-11-22 12:19+0000\n"
-"PO-Revision-Date: 2009-11-22 13:18+0100\n"
+"POT-Creation-Date: 2010-01-04 02:14+0000\n"
+"PO-Revision-Date: 2010-01-03 12:29+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr "Atlanter - der neue Aufstieg"
 
 #: ../../campaigns/cconfig:39
 msgid "Some descriptive texts..."
-msgstr ""
+msgstr "Einige erklärende Worte..."
 
 #: ../../campaigns/cconfig:57
 msgid "Tutorial1 - Eyes in the Dark"
@@ -63,6 +63,14 @@ msgstr "Tutorial2 - Ein Außenposten für das Exil"
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
 msgstr "01 - Vom Untergang zum Neubeginn"
+
+#: ../../maps/Atoll.wmf/elemental:7
+msgid "Atoll"
+msgstr "Atoll"
+
+#: ../../maps/Atoll.wmf/elemental:9
+msgid "Who will be the real King of the big atoll?"
+msgstr "Wer wird der wirkliche König des großen Atoll sein?"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"

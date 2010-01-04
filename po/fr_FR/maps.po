@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4322\n"
+"Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
+"POT-Creation-Date: 2010-01-04 02:07+0000\n"
 "PO-Revision-Date: 2008-11-01 01:05+0100\n"
 "Last-Translator: Jean-Pierre Gemble <jpgemble@voila.fr>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
@@ -30,25 +30,45 @@ msgstr "L'Empire - Les mois d'exil"
 msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
 msgstr "Six mois plus tôt, Lutius, un jeune général de l'Empire, fût envoyé avec 150 soldats à la frontière dans les forêts du Nord, où les terres des tribus barbares et de l'Empire se rencontrent. Sa tâche était de défendre les terres de l'Empire. Au début, tout était calme, il parla même à quelques jeunes barbares et se prit à rêver d'une vie paisible, côte à côte avec ce peuple archaïque. Il commençait à se sentir en sécurité et son armée commença à baisser son attention sur leurs ennemis potentiels ; ce fut leur erreur. Une nuit de mars, son armée, manquant d'entraînement, fut attaquée par une centaine de soldats barbares et ce fut la débandade. Seule la chance leur permit à lui et une poignée de soldats de survivre."
 
-#: ../../campaigns/cconfig:51
+#: ../../campaigns/cconfig:36
+msgid "Atlanteans - the new rise"
+msgstr ""
+
+#: ../../campaigns/cconfig:39
+msgid "Some descriptive texts..."
+msgstr ""
+
+#: ../../campaigns/cconfig:57
 msgid "Tutorial1 - Eyes in the Dark"
 msgstr "Tutoriel 1 - Les yeux dans les ténèbres"
 
-#: ../../campaigns/cconfig:56
+#: ../../campaigns/cconfig:62
 msgid "Tutorial2 - A Place to call Home"
 msgstr "Tutoriel 2 - Un endroit à appeller Foyer"
 
-#: ../../campaigns/cconfig:61
+#: ../../campaigns/cconfig:67
 msgid "Tutorial3 - This land is our land"
 msgstr ""
 
-#: ../../campaigns/cconfig:68
+#: ../../campaigns/cconfig:74
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
 msgstr "Tutoriel de l'Empire 1 - Les rives de Malac' Mor"
 
-#: ../../campaigns/cconfig:73
+#: ../../campaigns/cconfig:79
 msgid "Empire Tutorial2 - An outpost for exile"
 msgstr "Turoriel de l'Empire 2 - Un poste avancé pour l'exil"
+
+#: ../../campaigns/cconfig:84
+msgid "01 - From nemesis to genesis"
+msgstr ""
+
+#: ../../maps/Atoll.wmf/elemental:7
+msgid "Atoll"
+msgstr ""
+
+#: ../../maps/Atoll.wmf/elemental:9
+msgid "Who will be the real King of the big atoll?"
+msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -105,7 +125,7 @@ msgstr "Lacs de la fin"
 
 #: ../../maps/Finlakes.wmf/elemental:11
 #, fuzzy
-msgid "These are the beautiful finnish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
+msgid "These are the beautiful Finnish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
 msgstr "Voici les magnifiques terres de la fin, composées de lacs, de rivières, de forêts ancestrales et de montagnes. C'est à vous de trouver un chemin à travers ces terres."
 
 #: ../../maps/Firegames.wmf/elemental:7
@@ -129,7 +149,8 @@ msgid "Four Mountains"
 msgstr "Quatre montagnes"
 
 #: ../../maps/Four Mountains.wmf/elemental:11
-msgid "Each tribe is surrounded by four mighty mounains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional watersources. Hint 3: Each mountain contains only one resource."
+#, fuzzy
+msgid "Each tribe is surrounded by four mighty mountains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional water sources. Hint 3: Each mountain contains only one resource."
 msgstr "Chaque tribu est entourée par quatre puissantes montagnes. Qui va les conquérir et mériter les ressources pour sa propre tribu ? Astuce 1 : de l'eau peut être trouvée le long de la rivière. Astuce 2 : les bonshommes de neige indiquent des sources supplémentaires d'eau. Astuce 3 : chaque montagne ne contient qu'une ressource."
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
@@ -273,7 +294,8 @@ msgid "The pass through the mountains"
 msgstr "Le passage à travers les montagnes"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
-msgid "In this mountainous region two princes have settled. Now they are expanding their terretories unaware of the fact that they are not alone!"
+#, fuzzy
+msgid "In this mountainous region two princes have settled. Now they are expanding their territories unaware of the fact that they are not alone!"
 msgstr "Dans cette région montagneuse deux princes se sont établis. Maintenant ils étendent leurs territoires, ignorant qu'ils ne sont pas seuls !"
 
 #: ../../maps/Three Warriors.wmf/elemental:9

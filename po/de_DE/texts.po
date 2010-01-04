@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4699\n"
+"Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-11-22 12:19+0000\n"
+"POT-Creation-Date: 2010-01-04 02:14+0000\n"
 "PO-Revision-Date: 2009-11-22 13:17+0100\n"
 "Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
@@ -246,102 +246,98 @@ msgid "PAGEDOWN    Decrease gamespeed"
 msgstr "BildRunter  Langsameres Spieltempo / Pause"
 
 #: ../../txts/README:71
-msgid "F5           Toggle hiding of game state not known to the player (only in debug-builds)"
-msgstr "F5                Schalte die Sichtbarkeit der gesamten Karte an/aus (nur in Debug-Version)"
-
-#: ../../txts/README:73
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr "F6                Zeigt die Debug Konsole (nur in Debug-Version)"
 
-#: ../../txts/README:75
+#: ../../txts/README:73
 msgid "F10         Quit the game immediately"
 msgstr "F10              Beendet das Spiel unmittelbar"
 
-#: ../../txts/README:77
+#: ../../txts/README:75
 msgid "F11         Take a screenshot"
 msgstr "F11              Erstellt einen Schnappschuss des Bildschirms"
 
-#: ../../txts/README:80
+#: ../../txts/README:78
 msgid "When finishing a road, if Ctrl is down, place flags along the road. Default is to place flags from end to start. If Shift is also down, place flags from start to end instead."
 msgstr "Wenn du beim Bau einer Straße STRG gedrückt hältst, wird die Straße automatisch durch Flaggen aufgeteilt. Standardmäßig werden die Flaggen vom Ende bis zum Start gesetzt. Falls du gleichzeitig SHIFT gedrückt hältst, so werden die Flaggen vom Start bis zum Ende gesetzt."
 
-#: ../../txts/README:85
+#: ../../txts/README:83
 msgid "Online Help"
 msgstr "Onlinehilfe"
 
-#: ../../txts/README:89
+#: ../../txts/README:87
 msgid "If you need documentation or help for Widelands or the Widelands Editor, be sure to visit our homepage. You can find an up to date online help at:"
 msgstr "Falls Du Dokumentationen oder Hilfe für Widelands oder den Widelands Editor benötigst, solltest Du ins Wiki unserer Homepage schauen. Du findest es auf der Seite:"
 
-#: ../../txts/README:97
+#: ../../txts/README:95
 msgid "Reporting Bugs"
 msgstr "Berichten von Fehlern"
 
-#: ../../txts/README:101
+#: ../../txts/README:99
 msgid "If you want to report bugs, please send your report to the mailing list, <widelands-public@list.sourceforge.net><br>To subscribe, visit the following page:"
 msgstr "Falls Du einen Fehler gefunden hast und diesen berichten willst, sende ihn bitte an die mailing list: <widelands-public@lists.sourceforge.net><br>Um Dich dort einzutragen, kannst Du die folgende Seite besuchen:"
 
-#: ../../txts/README:106
+#: ../../txts/README:104
 msgid "Please provide enough background information. Tell us:"
 msgstr "Bitte schreibe alle wichtigen Informationen auf. Also:"
 
-#: ../../txts/README:109
+#: ../../txts/README:107
 msgid "- what version of Widelands did you use (i.e. the build number, or whether it's<br>a custom compile from SVN)"
 msgstr "- Welche Version von Widelands benutzt Du (offizielle Buildnummer oder SVN-Version)"
 
-#: ../../txts/README:111
+#: ../../txts/README:109
 msgid "- how to reproduce the bug"
 msgstr "- Wie der Fehler reproduziert werden kann"
 
-#: ../../txts/README:113
+#: ../../txts/README:111
 msgid "- which map you were playing"
 msgstr "- Welche Karte Du gespielt hast"
 
-#: ../../txts/README:115
+#: ../../txts/README:113
 msgid "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-game. For more explanation, see the section on Replays below."
 msgstr "- Trat der Fehler während eines laufenden Spiels auf, so sende uns eine komprimierte Aufnahme. Mehr Informationen zu Aufnahmen findest Du im Abschnitt zu Aufnahmen weiter unten."
 
-#: ../../txts/README:117
+#: ../../txts/README:115
 msgid "- send us a compressed (zip, gzip, bzip2) session record if possible, unless the<br>bug is trivial to reproduce. In fact, it may be a good idea to always record<br>your sessions in case a bug surfaces. For more explanation, see below."
 msgstr "- Sende uns, wenn möglich, ein verpacktes Spielprotokoll (zip, gzip, bzip) zu, es sei denn, der Fehler ist leicht zu reproduzieren.<br>Es ist daher sinnvoll, wenn Du einfach immer ein Spielprotokoll mitschreiben lässt, denn falls dann ein Fehler auftreten sollte, hast Du direkt das Spielprotokoll zu diesem Fehler."
 
-#: ../../txts/README:122
+#: ../../txts/README:120
 msgid "Replays</p>"
 msgstr "Aufnahmen</p>"
 
-#: ../../txts/README:125
+#: ../../txts/README:123
 msgid "Widelands records every game you play in two files. One of these files has a .wrpl.wgf extension and contains an initial savegame. The other file has just a .wrpl extension and contains all commands that were issued by all players, such as building a road or attacking an enemy. The rest of the filenames will tell you the time you started the game."
 msgstr "Jedes von Dir gespielte Spiel nimmt Widelands in zwei Dateien auf. Eine dieser Dateien endet mit .wrpl.wgf und enthält einen initialen Speicherstand. Die zweite Datei endet mit .wrpl und enthält alle Kommandos die von den Spielern abgegeben wurden. Dazu gehören auch Gebäude oder der Angriff auf einen Gegner. Der übrige Teil der Dateinamen zeigt die Startzeit des aufgezeichneten Spiels."
 
-#: ../../txts/README:127
+#: ../../txts/README:125
 msgid "Using the Watch Replay option in the main menu, a previously played game will be precisely reconstructed for you to watch. Note, however, that even small changes in the game data files or the Widelands executable can cause a replay to become incompatible and to 'go out of sync'. This is similar to how network games will suffer from desynchronization problems if one of the players has a different version of the game."
 msgstr "Über den Aufnahmeknopf im Hauptmenü kannst Du Dir ein vorher gespieltes Spiel in einer genauen Ablaufrekonstruktion ansehen. Beachte aber, dass selbst kleine Änderungen an den Spieldaten oder der ausführbaren Widelandsdatei dazu führen können, dass die Spielaufnahmen unbrauchbar werden und die nicht mehr synchron laufen. Dieser Effekt ähnelt dem Fehlverhalten bei Netzwerkspielen in denen einer der Spieler einer andere Version des Spiels verwendet."
 
-#: ../../txts/README:129
+#: ../../txts/README:127
 msgid "Replays are a very useful tool to find bugs in the game logic code, so we ask you to attach replay files to all bug reports that you submit. The replay files are saved in the ~/.widelands/replays directory in your home on Linux and in the replays subdirectory of your Widelands installation on Windows."
 msgstr "Aufnahmen sind nützliche Instrumente um Fehler in der Logik des Spiels zu finden. Daher bitten wir Dich die Aufnahmedateien an jeden Deiner Fehlerberichte anzuhängen. Die Dateien sind unter Linux im Verzeichnis ~/.widelands/replays im Heimatverzeichnis gespeichert. Unter Windows finden sie sich im replays Unterverzeichnis der Widelands Installation."
 
-#: ../../txts/README:133
+#: ../../txts/README:131
 msgid "Creating a Session Record</p>"
 msgstr "Erstellen eines Spielprotokolls</p>"
 
-#: ../../txts/README:136
+#: ../../txts/README:134
 msgid "Widelands can record all your keypresses and mouse movements to a file. It can then replay an entire session from starting the game to exiting it. This is really helpful for debugging problems."
 msgstr "Widelands kann alle Tastatureingaben und Mausbewegungen, die Du innerhalb eines Spiels vornimmst, in einer externen Datei speichern. Somit kann Widelands ein gesamtes Spiel von Start bis Ende orginalgetreu nachspielen. Dies ist sehr hilfreich für die Fehlerbehebung."
 
-#: ../../txts/README:139
+#: ../../txts/README:137
 msgid "To create a session record, start the game with the --record parameter. On Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
 msgstr "Um ein Spielprotokoll zu erstellen, musst Du das Spiel mit dem --record Parameter starten. Unter Linux würde der Befehl wie folgt aussehen: $ ./widelands --record=filename.rec "
 
-#: ../../txts/README:142
+#: ../../txts/README:140
 msgid "On Windows, create a shortcut to the file widelands.exe (right-click on widelands.exe and choose Create Shortcut). Then edit the shortcut (right-click on the newly created shortcut and choose Properties). The Target field should read something like c:\\games\\widelands\\widelands.exe. Change this to c:\\games\\widelands\\widelands.exe --record=filename.rec."
 msgstr "Unter Windows müsstest Du Widelands entweder über die Konsole (mit dem Parameter) starten oder einen Link zur Widelands.exe erstellen. Das geht wie folgt:<br>*rechtsklick auf Widelands.exe und Verknüpfung erstellen auswählen<br>*editiere  den Link.<br>->In der Eingabezeile des Links sollte eine Zeile stehen in der etwas ähnliches wie C:\\Programme\\Widelands\\widelands.exe steht. Hier fügst Du einfach --record=filename.rec hinten an."
 
-#: ../../txts/README:145
+#: ../../txts/README:143
 msgid "A binary file called filename.rec will be created. To play it back, perform the same steps as outlined above, but replace --record with --playback."
 msgstr "Es wird eine binäre Datei mit dem Namen filname.rec erstellt. Um diese abzuspielen, musst Du die selben Schritte wie oben erklärt durchführen. Hierbei muss der Parameter --record durch den Parameter --playback ersetzt werden."
 
-#: ../../txts/README:148
+#: ../../txts/README:146
 msgid "Note that while recorded files are platform independent, they generally won't work across different versions of Widelands, because the user interface and the order in which low-level functions can be called may change between versions. Session records are not intended to serve as demo files; they are mostly a debugging tool which helps us to track down bugs."
 msgstr "Beachte bitte, dass die aufgezeichneten Spiele auf Deinem System und Deiner Einstellung basieren und somit nicht auf jedem Rechner, mit jeder Version bzw. jedem Betriebssystem abgespielt werden können. Spielprotokolle sollten nicht als Demo benutzt werden, da Sie wahrscheinlich auf den meisten Systemen nicht funktionieren. Die Funktion der Spielprotokolle ist einzig und allein für die Fehlerbehebung erstellt worden."
 
@@ -361,11 +357,11 @@ msgstr "Häuptling"
 msgid "Elders"
 msgstr "Ältesten"
 
-#: ../../txts/developers:19 ../../txts/developers:294
+#: ../../txts/developers:19 ../../txts/developers:297
 msgid "Graphics"
 msgstr "Grafik"
 
-#: ../../txts/developers:24 ../../txts/developers:287
+#: ../../txts/developers:24 ../../txts/developers:290
 msgid "Homepage"
 msgstr "Homepage"
 
@@ -373,11 +369,11 @@ msgstr "Homepage"
 msgid "vacant"
 msgstr "unbesetzt"
 
-#: ../../txts/developers:31 ../../txts/developers:300
+#: ../../txts/developers:31 ../../txts/developers:303
 msgid "Sound"
 msgstr "Geräusche"
 
-#: ../../txts/developers:36 ../../txts/developers:305
+#: ../../txts/developers:36 ../../txts/developers:308
 msgid "Translation"
 msgstr "Übersetzer"
 
@@ -385,123 +381,123 @@ msgstr "Übersetzer"
 msgid "Coders"
 msgstr "Programmierer"
 
-#: ../../txts/developers:70
+#: ../../txts/developers:71
 msgid "Graphicians"
 msgstr "Grafiker"
 
-#: ../../txts/developers:94
+#: ../../txts/developers:95
 msgid "Musicians"
 msgstr "Musiker"
 
-#: ../../txts/developers:105
+#: ../../txts/developers:106
 msgid "Sound Effects"
 msgstr "Geräusche"
 
-#: ../../txts/developers:113
+#: ../../txts/developers:115
 msgid "Maps and Missions"
 msgstr "Karten und Missionen"
 
-#: ../../txts/developers:126
+#: ../../txts/developers:128
 msgid "Campaign Story"
 msgstr "Kampagnen Hintergrund"
 
-#: ../../txts/developers:129
+#: ../../txts/developers:131
 msgid "Barbarian"
 msgstr "Barbaren"
 
-#: ../../txts/developers:134
+#: ../../txts/developers:136
 msgid "Empire"
 msgstr "Imperium"
 
-#: ../../txts/developers:140
+#: ../../txts/developers:142
 msgid "Translators"
 msgstr "Übersetzer"
 
-#: ../../txts/developers:144
+#: ../../txts/developers:146
 msgid "Czech"
 msgstr "Tschechisch"
 
-#: ../../txts/developers:150
+#: ../../txts/developers:153
 msgid "Dansk"
 msgstr "Dänisch"
 
-#: ../../txts/developers:156
+#: ../../txts/developers:159
 msgid "Dutch"
 msgstr "Niederländisch"
 
-#: ../../txts/developers:162
+#: ../../txts/developers:165
 msgid "Finnish"
 msgstr "Finnisch"
 
-#: ../../txts/developers:168
+#: ../../txts/developers:171
 msgid "French"
 msgstr "Französisch"
 
-#: ../../txts/developers:175
+#: ../../txts/developers:178
 msgid "Galician"
 msgstr "Galizisch"
 
-#: ../../txts/developers:180
+#: ../../txts/developers:183
 msgid "German"
 msgstr "Deutsch"
 
-#: ../../txts/developers:190
+#: ../../txts/developers:193
 msgid "Hebrew"
 msgstr "Hebräisch"
 
-#: ../../txts/developers:195
+#: ../../txts/developers:198
 msgid "Hungarian"
 msgstr "Ungarisch"
 
-#: ../../txts/developers:200
+#: ../../txts/developers:203
 msgid "Italian"
 msgstr "Italienisch"
 
-#: ../../txts/developers:205
+#: ../../txts/developers:208
 msgid "Polish"
 msgstr "Polnisch"
 
-#: ../../txts/developers:213
+#: ../../txts/developers:216
 msgid "Russian"
 msgstr "Russisch"
 
-#: ../../txts/developers:218
+#: ../../txts/developers:221
 msgid "Slovak"
 msgstr "Slovakisch"
 
-#: ../../txts/developers:223
+#: ../../txts/developers:226
 msgid "Spanish"
 msgstr "Spanisch"
 
-#: ../../txts/developers:228
+#: ../../txts/developers:231
 msgid "Swedish"
 msgstr "Schwedisch"
 
-#: ../../txts/developers:236
+#: ../../txts/developers:239
 msgid "Packagers"
 msgstr "Packer"
 
-#: ../../txts/developers:240
+#: ../../txts/developers:243
 msgid "Linux Distributions"
 msgstr "Linux Distributionen"
 
-#: ../../txts/developers:251
+#: ../../txts/developers:254
 msgid "Other Unix Distributions"
 msgstr "Andere Unix Distributionen"
 
-#: ../../txts/developers:260
+#: ../../txts/developers:263
 msgid "Non Unix Distributions"
 msgstr "Nicht Unix Distributionen"
 
-#: ../../txts/developers:271
+#: ../../txts/developers:274
 msgid "Wiki and Enduser-Documentation"
 msgstr "Wiki und Endbenutzer-Dokumentation"
 
-#: ../../txts/developers:283
+#: ../../txts/developers:286
 msgid "Former elders"
 msgstr "Ehemalige Ältesten"
 
-#: ../../txts/developers:311
+#: ../../txts/developers:314
 msgid "Other"
 msgstr "Andere"
 
@@ -685,6 +681,9 @@ msgstr "Du kannst '/me' am Anfang deiner Chatnachrichten benutzen: '/me ist müd
 #: ../../txts/tips/singleplayer.tip:2
 msgid "Our computer players are too boring? Visit our website at www.widelands.org and meet other players to play online."
 msgstr "Unsere Computer Spieler sind zu langweilig? Besuche unsere Webseite unter www.Widelands.org und spiele mit anderen Spielern online."
+
+#~ msgid "F5           Toggle hiding of game state not known to the player (only in debug-builds)"
+#~ msgstr "F5                Schalte die Sichtbarkeit der gesamten Karte an/aus (nur in Debug-Version)"
 
 #~ msgid "Any further questions? Meet us at www.widelands.org. There are our FAQs, the Wiki and of course our Community Forums."
 #~ msgstr "Irgendwelche Fragen? Dann triff uns auf www.widelands.org. Dort findest du unsere FAQs, das Wiki und natürlich unsere Community Foren."
