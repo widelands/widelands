@@ -25,6 +25,7 @@
 #include "md5.h"
 #include "random.h"
 #include "save_handler.h"
+#include "scripting/scripting.h"
 
 namespace UI {struct ProgressWindow;}
 struct Computer_Player;
@@ -174,6 +175,13 @@ struct Game : public Editor_Game_Base {
 	void ReadStatistics(FileRead &, uint32_t version);
 	void WriteStatistics(FileWrite &);
 
+
+	/// Lua frontend, used to run lua triggers and events
+	inline LuaInterface& lua() {
+		return m_lua;
+	}
+
+
 private:
 	/// \param preferred_player
 	///  When conquer is false, this can be used to prefer a player over other
@@ -271,6 +279,7 @@ private:
 	uint32_t m_last_stats_update;
 	General_Stats_vector m_general_stats;
 
+	LuaInterface         m_lua;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

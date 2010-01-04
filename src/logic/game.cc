@@ -130,7 +130,8 @@ Game::Game() :
 	m_state            (gs_notrunning),
 	m_cmdqueue         (*this),
 	m_replaywriter     (0),
-	m_last_stats_update(0)
+	m_last_stats_update(0),
+	m_lua(this)
 {
 	g_sound_handler.m_the_game = this;
 }

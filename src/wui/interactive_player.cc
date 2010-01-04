@@ -20,6 +20,7 @@
 #include "interactive_player.h"
 
 #include <boost/bind.hpp>
+#include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
 
 #include "logic/building.h"
@@ -239,6 +240,9 @@ m_toggle_help
 	addCommand
 		("toggleSeeAll",
 		 boost::bind(&Interactive_Player::cmdToggleSeeAll, this, _1));
+	addCommand
+		("lua",
+		 boost::bind(&Interactive_Player::cmdLua, this, _1));
 #endif
 }
 
@@ -519,3 +523,26 @@ void Interactive_Player::cmdToggleSeeAll(std::vector<std::string> const & args)
 
 	player().set_see_all(not player().see_all());
 }
+
+void Interactive_Player::cmdLua(std::vector<std::string> const & args)
+{
+	if (args.size() < 2) {
+		DebugConsole::write("Usage: lua <string to interpret>");
+		return;
+	}
+
+	std::string cmd;
+
+	// Drop lua, start with the second word
+	for (uint i = 1; i < args.size(); i++)
+		cmd += args[i] + " ";
+
+	DebugConsole::write("Starting Lua interpretation!");
+	int rv = game().lua().interpret_string(cmd);
+	if(rv != 0)
+		DebugConsole::write(game().lua().get_last_error());
+
+	DebugConsole::write("Ending Lua interpretation!");
+}
+
+

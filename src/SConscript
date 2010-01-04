@@ -56,6 +56,7 @@ add_sconscript('economy')
 add_sconscript('map_io')
 add_sconscript('game_io')
 add_sconscript('logic')
+add_sconscript('scripting')
 add_sconscript('profile')
 
 remaining = [srcenv.Object( i.replace(".cc",""),source=i) for i in SRC ]
