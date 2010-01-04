@@ -55,6 +55,8 @@ struct Road : public PlayerImmovable {
 	};
 
 	struct CarrierSlot {
+		CarrierSlot();
+
 		OPtr<Carrier> carrier;
 		Request * carrier_request;
 		uint8_t carrier_type;
@@ -91,10 +93,6 @@ struct Road : public PlayerImmovable {
 	bool notify_ware(Game & game, FlagId flagid);
 
 	virtual void remove_worker(Worker &);
-
-	bool is_our_carrier(Worker & w);
-	void add_carrier(Worker & w);
-
 
 protected:
 	virtual void init(Editor_Game_Base &);
