@@ -26,6 +26,8 @@
 #include "logic/game.h"
 #include "wui/game_tips.h"
 #include "i18n.h"
+#include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "wui/interactive_dedicated_server.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -320,6 +322,7 @@ NetHost::NetHost (std::string const & playername, bool ggz)
 	hostuser.name = playername;
 	hostuser.position = UserSettings::none();
 	d->settings.users.push_back(hostuser);
+	file = 0; // Initialize as 0 pointer - unfortunally needed in struct
 }
 
 NetHost::~NetHost ()
@@ -765,6 +768,37 @@ void NetHost::setMap
 	s.reset();
 	s.Unsigned8(NETCMD_SETTING_ALLPLAYERS);
 	writeSettingAllPlayers(s);
+	broadcast(s);
+
+	// TODO not yet able to handle directory type maps / savegames
+	if (g_fs->IsDirectory(mapfilename)) {
+		log("Map/Save is a directory! No way for making it available a.t.m.!\n");
+		return;
+	}
+
+	// Read in the file
+	FileRead fr;
+	fr.Open(*g_fs, mapfilename.c_str());
+	if (file)
+		delete file;
+	file = new NetTransferFile();
+	file->filename = mapfilename;
+	uint32_t leftparts = file->bytes = fr.GetSize();
+	while (leftparts > 0) {
+		uint8_t readout
+			= (leftparts > NETFILEPARTSIZE) ? NETFILEPARTSIZE : leftparts;
+		FilePart fp;
+		memcpy(fp.part, fr.Data(readout), readout);
+		file->parts.push_back(fp);
+		leftparts -= readout;
+	}
+
+	// Broadcast new map file information, so client can decide whether it
+	// needs the file.
+	s.reset();
+	s.Unsigned8(NETCMD_NEW_FILE_AVAILABLE);
+	s.String(mapfilename);
+	s.Unsigned32(file->bytes);
 	broadcast(s);
 }
 
@@ -1656,10 +1690,51 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		break;
 	}
 
+	case NETCMD_NEW_FILE_AVAILABLE: {
+		sendSystemChat
+			(_("Started to send file to %s"),
+			   d->settings.users.at(client.usernum).name.c_str());
+		if (!file) // Do we have a file for sending
+			throw DisconnectException
+				(_("Client requests file altough none is available to send."));
+		sendFilePart(client.sock, 0);
+		break;
+	}
+
+	case NETCMD_FILE_PART: {
+		uint32_t part = r.Unsigned32();
+		if (part >= file->parts.size())
+			throw DisconnectException
+				(_("Client requests file part that does not exist."));
+		if (part == file->parts.size() - 1) {
+			sendSystemChat
+				(_("Completed transfer to %s"),
+				   d->settings.users.at(client.usernum).name.c_str());
+			return;
+		}
+		sendFilePart(client.sock, part + 1);
+		break;
+	}
+
 	default:
 		throw DisconnectException
 			(_("Client sent unknown command number %u"), cmd);
 	}
+}
+
+void NetHost::sendFilePart(TCPsocket csock, uint32_t part) {
+	assert(part < file->parts.size());
+
+	uint32_t left = file->bytes - NETFILEPARTSIZE * part;
+	uint8_t size = (left > NETFILEPARTSIZE) ? NETFILEPARTSIZE : left;
+
+	// Send the part
+	SendPacket s;
+	s.Unsigned8(NETCMD_FILE_PART);
+	s.Unsigned32(part);
+	s.Unsigned8(size);
+	s.Data(file->parts[part].part, size);
+	s.send(csock);
 }
 
 

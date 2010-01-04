@@ -24,6 +24,8 @@
 #include "logic/game.h"
 #include "wui/game_tips.h"
 #include "i18n.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 #include "network_protocol.h"
@@ -109,6 +111,7 @@ NetClient::NetClient
 	d->game = 0;
 	d->realspeed = 0;
 	d->desiredspeed = 1000;
+	file = 0;
 }
 
 NetClient::~NetClient ()
@@ -525,7 +528,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		break;
 	}
 
-	case NETCMD_SETTING_MAP:
+	case NETCMD_SETTING_MAP: {
 		d->settings.mapname = packet.String();
 		d->settings.mapfilename =
 			g_fs->FileSystem::fixCrossFile(packet.String());
@@ -534,6 +537,79 @@ void NetClient::handle_packet(RecvPacket & packet)
 			("[Client] SETTING_MAP '%s' '%s'\n",
 			 d->settings.mapname.c_str(), d->settings.mapfilename.c_str());
 		break;
+	}
+
+	case NETCMD_NEW_FILE_AVAILABLE: {
+		std::string path = g_fs->FileSystem::fixCrossFile(packet.String());
+		uint32_t bytes = packet.Unsigned32();
+
+		if (g_fs->FileExists(path)) {
+			if (!g_fs->IsDirectory(path)) {
+				FileRead fr;
+				fr.Open(*g_fs, path.c_str());
+				// TODO use md5 sum instead.
+				if (bytes == fr.GetSize()) {
+					// everything is alright we already have the file.
+					return;
+				}
+			}
+		}
+
+		// Yes we need the file!
+		SendPacket s;
+		s.Unsigned8(NETCMD_NEW_FILE_AVAILABLE);
+		s.send(d->sock);
+
+		if (file)
+			delete file;
+
+		file = new NetTransferFile();
+		file->bytes = bytes;
+		file->filename = path;
+
+#ifndef WIN32
+		path.resize(path.rfind('/', path.size() - 2));
+#else
+		path.resize(path.rfind('\\', path.size() - 2));
+#endif
+		g_fs->EnsureDirectoryExists(path);
+		break;
+	}
+
+	case NETCMD_FILE_PART: {
+		uint32_t part = packet.Unsigned32();
+		uint8_t size = packet.Unsigned8();
+
+		// Send an answer
+		SendPacket s;
+		s.Unsigned8(NETCMD_FILE_PART);
+		s.Unsigned32(part);
+		s.send(d->sock);
+
+		FilePart fp;
+		char buf[size];
+		if (packet.Data(buf, size) != size)
+			log("Readproblem. Will try to go on anyways\n");
+		memcpy(fp.part, buf, size);
+		file->parts.push_back(fp);
+
+		// Write file to disk as soon as all parts arrived
+		uint32_t left = (file->bytes - NETFILEPARTSIZE * part);
+		if (left <= NETFILEPARTSIZE) {
+			FileWrite fw;
+			left = file->bytes;
+			uint32_t i = 0;
+			while (left > 0) {
+				uint8_t writeout
+					= (left > NETFILEPARTSIZE) ? NETFILEPARTSIZE : left;
+				fw.Data(file->parts[i].part, writeout, FileWrite::Pos::Null());
+				left -= writeout;
+				++i;
+			}
+			fw.Write(*g_fs, file->filename.c_str());
+		}
+		break;
+	}
 
 	case NETCMD_SETTING_TRIBES: {
 		d->settings.tribes.clear();
@@ -677,7 +753,7 @@ void NetClient::handle_network ()
 	} catch (DisconnectException const & e) {
 		disconnect(e.what());
 	} catch (std::exception const & e) {
-		std::string reason = _("Server sent malformed commands: ");
+		std::string reason = _("Something went wrong: ");
 		reason += e.what();
 		disconnect(reason);
 	}

@@ -83,6 +83,8 @@ struct NetHost : public GameController, private SyncCallback {
 	void send(ChatMessage msg);
 
 private:
+	NetTransferFile * file;
+
 	void sendSystemChat(char const * fmt, ...) PRINTF_FORMAT(2, 3);
 	void requestSyncReports();
 	void checkSyncReports();
@@ -94,6 +96,7 @@ private:
 
 	void handle_packet(uint32_t i, RecvPacket &);
 	void handle_network ();
+	void sendFilePart(TCPsocket, uint32_t);
 
 	void checkHungClients();
 	void broadcastRealSpeed(uint32_t speed);

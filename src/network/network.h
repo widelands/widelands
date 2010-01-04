@@ -25,8 +25,11 @@
 #include "logic/cmd_queue.h"
 #include "logic/widelands_streamread.h"
 #include "logic/widelands_streamwrite.h"
+#include "network_protocol.h"
 
 #include <SDL_net.h>
+#include <string>
+#include <vector>
 
 struct Deserializer;
 
@@ -114,6 +117,16 @@ public:
 private:
 	std::vector<uint8_t> buffer;
 	size_t m_index;
+};
+
+struct FilePart {
+	char part[NETFILEPARTSIZE];
+};
+
+struct NetTransferFile {
+	uint32_t bytes;
+	std::string filename;
+	std::vector<FilePart> parts;
 };
 
 struct Deserializer {

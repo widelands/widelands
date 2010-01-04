@@ -88,6 +88,8 @@ struct NetClient :
 	std::vector<ChatMessage> const & getMessages() const;
 
 private:
+	NetTransferFile * file;
+
 	void syncreport();
 
 	void handle_packet(RecvPacket &);

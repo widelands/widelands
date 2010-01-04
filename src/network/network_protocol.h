@@ -20,13 +20,16 @@
 #ifndef NETWORK_PROTOCOL_H
 #define NETWORK_PROTOCOL_H
 
+/// How many bytes will (maximal) be send as file part
+/// \note may maximal be 255 => uint8_t
+#define NETFILEPARTSIZE 255
 
 enum {
 	/**
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 12,
+	NETWORK_PROTOCOL_VERSION = 13,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -51,7 +54,7 @@ enum {
 	 * \ref NETCMD_TIME commands to update the game time to which clients
 	 * may advance.
 	 */
-	SERVER_TIMESTAMP_INTERVAL = 100
+	SERVER_TIMESTAMP_INTERVAL = 100,
 };
 
 
@@ -89,7 +92,7 @@ enum {
 	 *
 	 * \note For historical reasons, the HELLO command code should not be 1.
 	 */
-	NETCMD_HELLO = 16,
+	NETCMD_HELLO = 1,
 
 	/**
 	 * Bidirectional command: Game time update. This command has the following
@@ -103,7 +106,7 @@ enum {
 	 * The client uses this command to inform the host how far its simulation
 	 * has advanced.
 	 */
-	NETCMD_TIME = 22,
+	NETCMD_TIME = 2,
 
 	/**
 	 * Bidirectional command: Player command. This command has the payload:
@@ -126,7 +129,7 @@ enum {
 	 * that it sends. Instead, it must rely on the host echoing back the command.
 	 *
 	 */
-	NETCMD_PLAYERCOMMAND = 24,
+	NETCMD_PLAYERCOMMAND = 3,
 
 	/**
 	 * Bidirectional command: Terminate the connection with a given reason.
@@ -145,7 +148,7 @@ enum {
 	 * by appending new items. The reason is that this is the only command
 	 * that can be sent by the server even when the protocol versions differ.
 	 */
-	NETCMD_DISCONNECT = 27,
+	NETCMD_DISCONNECT = 4,
 
 	/**
 	 * During game setup, this command is sent by the host to advise clients
@@ -154,7 +157,7 @@ enum {
 	 * \li String: map filename
 	 * \li bool:   is_savegame
 	 */
-	NETCMD_SETTING_MAP = 4,
+	NETCMD_SETTING_MAP = 5,
 
 	/**
 	 * During game setup, this command is sent by the host to inform clients
@@ -162,7 +165,7 @@ enum {
 	 *
 	 * \see NetClient::handle_network
 	 */
-	NETCMD_SETTING_TRIBES = 5,
+	NETCMD_SETTING_TRIBES = 6,
 
 	/**
 	 * During game setup, this command contains complete information about all
@@ -170,7 +173,7 @@ enum {
 	 *
 	 * \see NetClient::handle_network
 	 */
-	NETCMD_SETTING_ALLPLAYERS = 6,
+	NETCMD_SETTING_ALLPLAYERS = 7,
 
 	/**
 	 * During game setup, this command updates the information associated to
@@ -178,7 +181,7 @@ enum {
 	 *
 	 * \see NetClient::handle_network
 	 */
-	NETCMD_SETTING_PLAYER = 7,
+	NETCMD_SETTING_PLAYER = 8,
 
 	/**
 	 * During game setup, this command contains complete information about all
@@ -186,7 +189,7 @@ enum {
 	 *
 	 * \see NetClient::handle_network
 	 */
-	NETCMD_SETTING_ALLUSERS = 8,
+	NETCMD_SETTING_ALLUSERS = 9,
 
 	/**
 	 * During game setup, this command updates the information associated to
@@ -194,13 +197,13 @@ enum {
 	 *
 	 * \see NetClient::handle_network
 	 */
-	NETCMD_SETTING_USER = 9,
+	NETCMD_SETTING_USER = 10,
 
 	/**
 	 * Sent by the host with no payload. The client must reply with a
 	 * \ref NETCMD_PONG command.
 	 */
-	NETCMD_PING = 10,
+	NETCMD_PING = 11,
 
 	/**
 	 * Sent by the host during game setup to indicate that the game starts.
@@ -209,7 +212,7 @@ enum {
 	 * is fully loaded, it must behave as if a \ref NETCMD_WAIT command had
 	 * been sent.
 	 */
-	NETCMD_LAUNCH = 20,
+	NETCMD_LAUNCH = 12,
 
 	/**
 	 * Sent by both the host and the client to indicate speed change.
@@ -225,7 +228,7 @@ enum {
 	 * player would like to play. It is up to the host to decide whether
 	 * the simulation speed should be changed or not.
 	 */
-	NETCMD_SETSPEED = 21,
+	NETCMD_SETSPEED = 13,
 
 	/**
 	 * Sent by the host when it suspects that a client has died or cannot
@@ -237,7 +240,7 @@ enum {
 	 * confirm that it is up to speed (in a sense, this time reply acts
 	 * as a pong).
 	 */
-	NETCMD_WAIT = 23,
+	NETCMD_WAIT = 14,
 
 	/**
 	 * Sent by the host to request an MD5 synchronization hash. Payload is:
@@ -248,12 +251,12 @@ enum {
 	 *
 	 * \see Widelands::Game::get_sync_hash
 	 */
-	NETCMD_SYNCREQUEST = 25,
+	NETCMD_SYNCREQUEST = 15,
 
 	/**
 	 * Reply to a \ref NETCMD_PING command, with no payload.
 	 */
-	NETCMD_PONG = 11,
+	NETCMD_PONG = 16,
 
 	/**
 	 * During game setup, this is sent by the client to request a change
@@ -292,7 +295,7 @@ enum {
 	 * the player is ready (or not). Playload is
 	 * \li Unsigned8: new state
 	 */
-	NETCMD_SETTING_CHANGEREADY = 30,
+	NETCMD_SETTING_CHANGEREADY = 20,
 
 	/**
 	 * Sent by the client to reply to a \ref NETCMD_SYNCREQUEST command,
@@ -303,7 +306,7 @@ enum {
 	 * It is solely the host's responsibility to act when desyncs are
 	 * detected.
 	 */
-	NETCMD_SYNCREPORT = 26,
+	NETCMD_SYNCREPORT = 21,
 
 	/**
 	 * Sent by both host and client to exchange chat messages, though with
@@ -321,7 +324,7 @@ enum {
 	 * \li Unsigned8: whether this is a personal message (0 / 1)
 	 * \li String: the recipient (only filled as personal message)
 	 */
-	NETCMD_CHAT = 28,
+	NETCMD_CHAT = 22,
 
 	/**
 	 * Sent by the host to indicate that a desync has been detected. This command
@@ -332,7 +335,31 @@ enum {
 	 * when receiving this packet. It is the host's job to decide how to proceed
 	 * after a desync has been detected.
 	 */
-	NETCMD_INFO_DESYNC = 29
+	NETCMD_INFO_DESYNC = 23,
+
+	/**
+	 * Sent by the host to tell a client that a file transfer will start soon.
+	 *
+	 * The host sends all needed data to prepare for the file transfer:
+	 * \li String: filename (path relative to standard path of filetype)
+	 * \li Unsigned32: how many parts will be send?
+	 *
+	 * Sent by the client as answer on the same message of the host as request.
+	 */
+	NETCMD_NEW_FILE_AVAILABLE = 24,
+
+	/**
+	 * Sent by the host to transfer a part of the file.
+	 *
+	 * Attached data is:
+	 * \li Unsigned32: part number
+	 * \li Unsigned8: length of data (needed because last part might be shorter)
+	 * \li void[length of data]: data
+	 *
+	 * Sent by the client to request the next part from the host.
+	 * \li Unsigned32: number of the last recieved part
+	 */
+	NETCMD_FILE_PART = 25
 };
 
 #endif // NETWORK_PROTOCOL_H
