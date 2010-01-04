@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,15 +17,13 @@
  *
  */
 
-#ifndef __S__LUA_MAP
-#define __S__LUA_MAP
+#ifndef LUA_MAP_H
+#define LUA_MAP_H
 
 extern "C" {
 #include <lua.h>
 }
 
-void luaopen_wlmap(lua_State*);
+void luaopen_wlmap(lua_State *);
 
-
-#endif /* end of include guard: __S__LUA_MAP */
-
+#endif

@@ -51,12 +51,12 @@ libs+=list(SConscript('editor/SConscript'))
 add_sconscript('trigger')
 add_sconscript('events')
 add_sconscript('ai')
-add_sconscript('wui')
 add_sconscript('economy')
 add_sconscript('map_io')
 add_sconscript('game_io')
 add_sconscript('logic')
 add_sconscript('scripting')
+add_sconscript('wui')
 add_sconscript('profile')
 
 remaining = [srcenv.Object( i.replace(".cc",""),source=i) for i in SRC ]

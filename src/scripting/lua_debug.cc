@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,18 +17,17 @@
  *
  */
 
-
-extern "C" {
-#include <lauxlib.h>
-#include <lualib.h>
-}
+#include "lua_debug.h"
 
 #include "c_utils.h"
 #include "log.h"
 #include "logic/game.h"
 #include "wui/interactive_player.h"
 
-#include "lua_debug.h"
+extern "C" {
+#include <lauxlib.h>
+#include <lualib.h>
+}
 
 // LUAMODULE wl.debug
 
@@ -40,10 +39,8 @@ extern "C" {
  *
  * LUAFUNC: log
  */
-static int L_log(lua_State * l) {
-	const char * x = luaL_checkstring(l, 1);
-
-	log("%s\n", x);
+static int L_log(lua_State * const l) {
+	log("%s\n", luaL_checkstring(l, 1));
 
 	return 0;
 }
@@ -51,8 +48,8 @@ static int L_log(lua_State * l) {
 /*
  * TODO: document me
  */
-static int L_setSeeAll(lua_State * l) {
-	bool bval = luaL_checkint(l, 1);
+static int L_setSeeAll(lua_State * const l) {
+	bool const bval = luaL_checkint(l, 1);
 
 	get_game(l)->get_ipl()->player().set_see_all(bval);
 
@@ -62,12 +59,10 @@ static int L_setSeeAll(lua_State * l) {
 const static struct luaL_reg wldebug [] = {
 	{"log", &L_log},
 	{"set_see_all", &L_setSeeAll},
-	{NULL, NULL}
+	{0, 0}
 };
 
 
-void luaopen_wldebug(lua_State * l) {
+void luaopen_wldebug(lua_State * const l) {
 	luaL_register(l, "wl.debug", wldebug);
 }
-
-

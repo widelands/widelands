@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,20 +17,18 @@
  *
  */
 
-
-extern "C" {
-#include <lauxlib.h>
-#include <lualib.h>
-}
+#include "lua_map.h"
 
 #include "log.h"
-#include "logic/game.h"
 #include "logic/widelands_geometry.h"
 #include "logic/immovable.h"
 #include "logic/game.h"
 #include "c_utils.h"
 
-#include "lua_map.h"
+extern "C" {
+#include <lauxlib.h>
+#include <lualib.h>
+}
 
 // LUAMODULE wl.map
 
@@ -47,37 +45,35 @@ using namespace Widelands;
  * posy: int, y position
  *
  */
-static int L_create_immovable(lua_State * l) {
-	const char * objname = luaL_checkstring(l, 1);
-	uint32_t x = luaL_checkint(l, 2);
-	uint32_t y = luaL_checkint(l, 3);
+static int L_create_immovable(lua_State * const l) {
+	char const * const objname = luaL_checkstring(l, 1);
+	uint32_t     const x       = luaL_checkint   (l, 2);
+	uint32_t     const y       = luaL_checkint   (l, 3);
 
-	Game * game = get_game(l);
+	Game & game = *get_game(l);
 	Coords pos(x, y);
 
 	// Check if the map is still free here
 	// TODO: this exact code is duplicated in worker.cc
-	if (BaseImmovable const * const imm = game->map()[pos].get_immovable())
+	if (BaseImmovable const * const imm = game.map()[pos].get_immovable())
 		if (imm->get_size() >= BaseImmovable::SMALL)
 			return report_error(l, "Field is no longer free!");
 
-	int32_t imm_idx = game->map().world().get_immovable_index(objname);
+	int32_t const imm_idx = game.map().world().get_immovable_index(objname);
 	if (imm_idx < 0)
 		return report_error(l, "Unknown immovable <%s>", objname);
 
-	game->create_immovable (pos, imm_idx, 0);
+	game.create_immovable (pos, imm_idx, 0);
 
 	return 0;
 }
 
 const static struct luaL_reg wlmap [] = {
 	{"create_immovable", &L_create_immovable},
-	{NULL, NULL}
+	{0, 0}
 };
 
 
 void luaopen_wlmap(lua_State * l) {
 	luaL_register(l, "wl.map", wlmap);
 }
-
-

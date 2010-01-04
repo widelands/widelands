@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -176,10 +176,8 @@ struct Game : public Editor_Game_Base {
 	void WriteStatistics(FileWrite &);
 
 
-	/// Lua frontend, used to run lua triggers and events
-	inline LuaInterface& lua() {
-		return m_lua;
-	}
+	/// Lua frontend, used to run lua triggers and events.
+	LuaInterface & lua() {return m_lua;}
 
 
 private:

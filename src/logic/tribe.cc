@@ -29,6 +29,7 @@
 #include "events/event_conquer_area.h"
 #include "events/event_forbid_building_types.h"
 #include "events/event_forbid_retreat_change.h"
+#include "events/event_player_seeall.h"
 #include "events/event_set_player_frontier_style.h"
 #include "events/event_set_player_flag_style.h"
 #include "events/event_unhide_area.h"
@@ -294,6 +295,13 @@ Tribe_Descr::Tribe_Descr
 								event_s->set_int("version", 2);
 								event_s->set_string("point", "0 0");
 								event = new Event_Unhide_Area(*event_s, egbase);
+							} else if
+								(not strcmp(event_name, "seeall"))
+							{
+								event_s->set_int("version", 1);
+								event =
+									new Event_Player_See_All
+										(*event_s, egbase);
 							} else if
 								(not strcmp(event_name, "set_player_frontier_style"))
 							{

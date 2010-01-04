@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __S__C_HELPER_H
-#define __S__C_HELPER_H
+#ifndef C_UTILS_H
+#define C_UTILS_H
 
 extern "C" {
 #include <lua.h>
@@ -26,7 +26,7 @@ extern "C" {
 
 #include "logic/game.h"
 
-Widelands::Game* get_game(lua_State*);
+Widelands::Game * get_game(lua_State *);
 
 #ifdef __GNUC__
 #define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))
@@ -36,7 +36,4 @@ Widelands::Game* get_game(lua_State*);
 
 int report_error(lua_State *, const char *, ...) PRINTF_FORMAT(2, 3);
 
-
-
-#endif /* end of include guard: __S__C_HELPER_H */
-
+#endif

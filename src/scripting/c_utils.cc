@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  *
  */
 
+#include "c_utils.h"
+
 #include <cstdarg>
 #include <cstdio>
 #include <iostream>
@@ -26,9 +28,7 @@ extern "C" {
 #include <lualib.h>
 }
 
-#include "c_utils.h"
-
-Widelands::Game * get_game(lua_State * l) {
+Widelands::Game * get_game(lua_State * const l) {
 	lua_pushstring(l, "game");
 	lua_gettable(l, LUA_REGISTRYINDEX);
 

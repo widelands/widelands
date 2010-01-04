@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef S_LUASCRIPTING_H
-#define S_LUASCRIPTING_H
+#ifndef SCRIPTING_H
+#define SCRIPTING_H
 
 #include <string>
 
@@ -26,25 +26,21 @@ extern "C" {
 #include <lua.h>
 }
 
-#include "scripting.h"
-
 namespace Widelands {
 	struct Game;
 }
 
-class LuaInterface {
-	public:
-		LuaInterface(Widelands::Game* const);
-		~LuaInterface();
+struct LuaInterface {
+	LuaInterface(Widelands::Game *);
+	~LuaInterface();
 
-		int interpret_string(std::string);
-		const std::string& get_last_error() const { return m_last_error; }
+	int interpret_string(std::string);
+	std::string const & get_last_error() const {return m_last_error;}
 
-	private:
-		lua_State* m_luastate;
-		std::string m_last_error;
+private:
+	lua_State * m_luastate;
+	std::string m_last_error;
 };
 
 
-#endif /* end of include guard: S_LUA_H */
-
+#endif
