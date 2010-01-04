@@ -534,7 +534,7 @@ void Interactive_Player::cmdLua(std::vector<std::string> const & args)
 	std::string cmd;
 
 	// Drop lua, start with the second word
-	for (uint i = 1; i < args.size(); i++)
+	for (uint32_t i = 1; i < args.size(); i++)
 		cmd += args[i] + " ";
 
 	DebugConsole::write("Starting Lua interpretation!");
