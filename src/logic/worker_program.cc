@@ -22,6 +22,7 @@
 #include "helper.h"
 #include "profile/profile.h"
 #include "findnode.h"
+#include "tribe.h"
 
 namespace Widelands {
 
@@ -104,7 +105,7 @@ void WorkerProgram::parse
  * sparam1 = ware name
  */
 void WorkerProgram::parse_createitem
-	(Worker_Descr                   *,
+	(Worker_Descr                   * descr,
 	 Worker::Action                 * act,
 	 Parser                         *,
 	 std::vector<std::string> const & cmd)
@@ -113,7 +114,7 @@ void WorkerProgram::parse_createitem
 		throw wexception("Usage: createitem <ware type>");
 
 	act->function = &Worker::run_createitem;
-	act->sparam1 = cmd[1];
+	act->iparam1 = descr->tribe().safe_ware_index(cmd[1]).value();
 }
 
 

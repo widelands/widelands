@@ -66,7 +66,7 @@ bool Worker::run_createitem(Game & game, State & state, Action const & action)
 	}
 
 	Player & player = *get_owner();
-	Ware_Index const wareid = player.tribe().ware_index(action.sparam1.c_str());
+	Ware_Index const wareid(static_cast<Ware_Index::value_t>(action.iparam1));
 	WareInstance & item =
 		*new WareInstance(wareid, tribe().get_ware_descr(wareid));
 	item.init(game);
