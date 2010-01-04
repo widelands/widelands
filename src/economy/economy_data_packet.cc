@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,45 +41,65 @@ void EconomyDataPacket::Read(FileRead & fr)
 				try {
 					Tribe_Descr const & tribe = m_eco->owner().tribe();
 					while (Time const last_modified = fr.Unsigned32()) {
-						char const * const ware_type_name = fr.CString();
+						char const * const type_name = fr.CString();
 						uint32_t const permanent = fr.Unsigned32();
 						uint32_t const temporary = fr.Unsigned32();
-						Ware_Index const ware_type =
-							tribe.ware_index(ware_type_name);
-						if (not ware_type)
+						if (Ware_Index i = tribe.ware_index(type_name)) {
+							if
+								(tribe.get_ware_descr(i)->default_target_quantity()
+								 ==
+								 std::numeric_limits<uint32_t>::max())
+								log
+									("WARNING: target quantity configured for %s, "
+									 "which should not have target quantity, "
+									 "ignoring\n",
+									 type_name);
+							else {
+								Economy::Target_Quantity & tq =
+									m_eco->m_ware_target_quantities[i.value()];
+								if (tq.last_modified)
+									throw game_data_error
+										(_("duplicated entry for %s"), type_name);
+								tq.permanent         = permanent;
+								tq.temporary         = temporary;
+								tq.last_modified     = last_modified;
+							}
+						} else if ((i = tribe.worker_index(type_name))) {
+							if
+								(tribe.get_worker_descr(i)->default_target_quantity()
+								 ==
+								 std::numeric_limits<uint32_t>::max())
+								log
+									("WARNING: target quantity configured for %s, "
+									 "which should not have target quantity, "
+									 "ignoring\n",
+									 type_name);
+							else {
+								Economy::Target_Quantity & tq =
+									m_eco->m_worker_target_quantities[i.value()];
+								if (tq.last_modified)
+									throw game_data_error
+										(_("duplicated entry for %s"), type_name);
+								tq.permanent         = permanent;
+								tq.temporary         = temporary;
+								tq.last_modified     = last_modified;
+							}
+						} else
 							log
 								("WARNING: target quantity configured for \"%s\", "
-								 "which is not a ware type defined in tribe %s, "
-								 "ignoring\n",
-								 ware_type_name, tribe.name().c_str());
-						else if
-							(tribe.get_ware_descr(ware_type)->default_target_quantity()
-							 ==
-							 std::numeric_limits<uint32_t>::max())
-							log
-								("WARNING: target quantity configured for %s, which "
-								 "should not have target quantity, ignoring\n",
-								 ware_type_name);
-						else {
-							Economy::Target_Quantity & tq =
-								m_eco->m_target_quantities[ware_type.value()];
-							if (tq.last_modified)
-								throw wexception
-									("duplicated entry for %s", ware_type_name);
-							tq.permanent         = permanent;
-							tq.temporary         = temporary;
-							tq.last_modified     = last_modified;
-						}
+								 "which is not a ware or worker type defined in tribe "
+								 "%s, ignoring\n",
+								 type_name, tribe.name().c_str());
 					}
 				} catch (_wexception const & e) {
-					throw wexception("target quantities: %s", e.what());
+					throw game_data_error(_("target quantities: %s"), e.what());
 				}
 			m_eco->m_request_timerid = fr.Unsigned32();
 		} else {
-			throw wexception("unknown version %u", version);
+			throw game_data_error(_("unknown version %u"), version);
 		}
 	} catch (std::exception const & e) {
-		throw wexception("economy: %s", e.what());
+		throw game_data_error(_("economy: %s"), e.what());
 	}
 }
 
@@ -90,10 +110,21 @@ void EconomyDataPacket::Write(FileWrite & fw)
 	for (Ware_Index i = tribe.get_nrwares(); i.value();) {
 		--i;
 		Economy::Target_Quantity const & tq =
-			m_eco->m_target_quantities[i.value()];
+			m_eco->m_ware_target_quantities[i.value()];
 		if (Time const last_modified = tq.last_modified) {
 			fw.Unsigned32(last_modified);
 			fw.CString(tribe.get_ware_descr(i)->name());
+			fw.Unsigned32(tq.permanent);
+			fw.Unsigned32(tq.temporary);
+		}
+	}
+	for (Ware_Index i = tribe.get_nrworkers(); i.value();) {
+		--i;
+		Economy::Target_Quantity const & tq =
+			m_eco->m_worker_target_quantities[i.value()];
+		if (Time const last_modified = tq.last_modified) {
+			fw.Unsigned32(last_modified);
+			fw.CString(tribe.get_worker_descr(i)->name());
 			fw.Unsigned32(tq.permanent);
 			fw.Unsigned32(tq.temporary);
 		}

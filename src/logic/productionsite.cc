@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -629,6 +629,38 @@ bool ProductionSite::get_building_work
 		assert(ware_type_with_count.second);
 		if (--ware_type_with_count.second == 0)
 			m_produced_items.pop_back();
+		return true;
+	}
+
+	if (m_recruited_workers.size()) {
+		//  There is still a recruited worker waiting to be released. Send it
+		//  out.
+		std::pair<Ware_Index, uint8_t> & worker_type_with_count =
+			*m_recruited_workers.rbegin();
+		{
+			Ware_Index const worker_index = worker_type_with_count.first;
+			Worker_Descr const & worker_descr =
+				*tribe().get_worker_descr(worker_type_with_count.first);
+			{
+				Worker & recruit = *new Worker(worker_descr);
+				recruit.set_owner(&worker.owner());
+				recruit.set_position(game, worker.get_position());
+				recruit.init(game);
+#if 0
+				recruit.start_task_move
+					(game,
+					 WALK_SE,
+					 &recruit.descr().get_right_walk_anims(false),
+					 true);
+#else
+				recruit.start_task_gowarehouse(game);
+#endif
+				worker.start_task_releaserecruit(game, recruit);
+			}
+		}
+		assert(worker_type_with_count.second);
+		if (--worker_type_with_count.second == 0)
+			m_recruited_workers.pop_back();
 		return true;
 	}
 

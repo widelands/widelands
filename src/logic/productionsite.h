@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -100,6 +100,7 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActAnimate;
 	friend struct ProductionProgram::ActConsume;
 	friend struct ProductionProgram::ActProduce;
+	friend struct ProductionProgram::ActRecruit;
 	friend struct ProductionProgram::ActMine;
 	friend struct ProductionProgram::ActCheck_Soldier;
 	friend struct ProductionProgram::ActTrain;
@@ -213,6 +214,7 @@ protected:  // TrainingSite must have access to this stuff
 	int32_t      m_post_timer;    ///< Time to schedule after ends
 
 	ProductionProgram::ActProduce::Items m_produced_items;
+	ProductionProgram::ActProduce::Items m_recruited_workers;
 	Input_Queues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
 	bool                     m_statistics_changed;

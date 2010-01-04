@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,19 +42,28 @@ Economy::Economy(Player & player) :
 	m_request_timerid(0)
 {
 	Tribe_Descr const & tribe = player.tribe();
-	Ware_Index const nr_wares = tribe.get_nrwares();
-	m_workers.set_nrwares(tribe.get_nrworkers());
+	Ware_Index const nr_wares   = tribe.get_nrwares();
+	Ware_Index const nr_workers = tribe.get_nrworkers();
 	m_wares.set_nrwares(nr_wares);
+	m_workers.set_nrwares(nr_workers);
 
 	player.add_economy(*this);
 
-	m_target_quantities = new Target_Quantity[nr_wares.value()];
+	m_ware_target_quantities   = new Target_Quantity[nr_wares  .value()];
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
 		Target_Quantity tq;
 		tq.temporary = tq.permanent =
 			tribe.get_ware_descr(i)->default_target_quantity();
 		tq.last_modified = 0;
-		m_target_quantities[i.value()] = tq;
+		m_ware_target_quantities[i.value()] = tq;
+	}
+	m_worker_target_quantities = new Target_Quantity[nr_workers.value()];
+	for (Ware_Index i = Ware_Index::First(); i < nr_workers; ++i) {
+		Target_Quantity tq;
+		tq.temporary = tq.permanent =
+			tribe.get_worker_descr(i)->default_target_quantity();
+		tq.last_modified = 0;
+		m_worker_target_quantities[i.value()] = tq;
 	}
 
 	m_router = new Router();
@@ -73,7 +82,8 @@ Economy::~Economy()
 	if (m_warehouses.size())
 		log("Warning: Economy still has warehouses left on destruction\n");
 
-	delete[] m_target_quantities;
+	delete[] m_ware_target_quantities;
+	delete[] m_worker_target_quantities;
 
 	delete m_router;
 }
@@ -228,13 +238,26 @@ void Economy::_remove_flag(Flag & flag)
  *
  * This is called from Cmd_ResetTargetQuantity and Cmd_SetTargetQuantity
  */
-void Economy::set_target_quantity
+void Economy::set_ware_target_quantity
 	(Ware_Index const ware_type,
 	 uint32_t   const permanent,
 	 uint32_t   const temporary,
 	 Time       const mod_time)
 {
-	Target_Quantity & tq = m_target_quantities[ware_type.value()];
+	Target_Quantity & tq = m_ware_target_quantities[ware_type.value()];
+	tq.temporary = temporary;
+	tq.permanent = permanent;
+	tq.last_modified = mod_time;
+}
+
+
+void Economy::set_worker_target_quantity
+	(Ware_Index const ware_type,
+	 uint32_t   const permanent,
+	 uint32_t   const temporary,
+	 Time       const mod_time)
+{
+	Target_Quantity & tq = m_worker_target_quantities[ware_type.value()];
 	tq.temporary = temporary;
 	tq.permanent = permanent;
 	tq.last_modified = mod_time;
@@ -277,7 +300,7 @@ void Economy::remove_wares(Ware_Index const id, uint32_t const count)
 
 	m_wares.remove(id, count);
 
-	Target_Quantity & tq = m_target_quantities[id.value()];
+	Target_Quantity & tq = m_ware_target_quantities[id.value()];
 	tq.temporary =
 		tq.temporary <= tq.permanent + count ?
 		tq.permanent : tq.temporary - count;
@@ -295,6 +318,11 @@ void Economy::remove_workers(Ware_Index const id, uint32_t const count)
 	//log("%p: remove(%i, %i) from %i\n", this, id, count, m_workers.stock(id));
 
 	m_workers.remove(id, count);
+
+	Target_Quantity & tq = m_worker_target_quantities[id.value()];
+	tq.temporary =
+		tq.temporary <= tq.permanent + count ?
+		tq.permanent : tq.temporary - count;
 
 	// TODO: remove from global player inventory?
 }
@@ -397,11 +425,25 @@ void Economy::remove_supply(Supply & supply)
 
 bool Economy::needs_ware(Ware_Index const ware_type) const {
 	size_t const nr_supplies = m_supplies.get_nrsupplies();
-	uint32_t const t = target_quantity(ware_type).temporary;
+	uint32_t const t = ware_target_quantity(ware_type).temporary;
 	uint32_t quantity = 0;
 	for (size_t i = 0; i < nr_supplies; ++i)
 		if (upcast(WarehouseSupply const, warehouse_supply, &m_supplies[i])) {
 			quantity += warehouse_supply->stock_wares(ware_type);
+			if (t <= quantity)
+				return false;
+		}
+	return true;
+}
+
+
+bool Economy::needs_worker(Ware_Index const worker_type) const {
+	size_t const nr_supplies = m_supplies.get_nrsupplies();
+	uint32_t const t = worker_target_quantity(worker_type).temporary;
+	uint32_t quantity = 0;
+	for (size_t i = 0; i < nr_supplies; ++i)
+		if (upcast(WarehouseSupply const, warehouse_supply, &m_supplies[i])) {
+			quantity += warehouse_supply->stock_workers(worker_type);
 			if (t <= quantity)
 				return false;
 		}
@@ -419,8 +461,15 @@ void Economy::_merge(Economy & e)
 {
 	for (Ware_Index::value_t i = m_owner.tribe().get_nrwares().value(); i;) {
 		--i;
-		Target_Quantity other_tq = e.m_target_quantities[i];
-		Target_Quantity & this_tq = m_target_quantities[i];
+		Target_Quantity other_tq = e.m_ware_target_quantities[i];
+		Target_Quantity & this_tq = m_ware_target_quantities[i];
+		if (this_tq.last_modified < other_tq.last_modified)
+			this_tq = other_tq;
+	}
+	for (Ware_Index::value_t i = m_owner.tribe().get_nrworkers().value(); i;) {
+		--i;
+		Target_Quantity other_tq = e.m_worker_target_quantities[i];
+		Target_Quantity & this_tq = m_worker_target_quantities[i];
 		if (this_tq.last_modified < other_tq.last_modified)
 			this_tq = other_tq;
 	}
@@ -465,9 +514,13 @@ void Economy::_split(Flag & initial_flag)
 {
 	Economy & e = *new Economy(m_owner);
 
-	for (Ware_Index::value_t i = m_owner.tribe().get_nrwares().value(); i;) {
+	for (Ware_Index::value_t i = m_owner.tribe().get_nrwares  ().value(); i;) {
 		--i;
-		e.m_target_quantities[i] = m_target_quantities[i];
+		e.m_ware_target_quantities[i] = m_ware_target_quantities[i];
+	}
+	for (Ware_Index::value_t i = m_owner.tribe().get_nrworkers().value(); i;) {
+		--i;
+		e.m_worker_target_quantities[i] = m_worker_target_quantities[i];
 	}
 
 	m_rebuilding = true;

@@ -1,5 +1,4 @@
-size=medium
-output=donkey
+size=big
 
 [aihints]
 build_material=false
@@ -23,8 +22,8 @@ work=_Work
 return=skipped when economy needs wheat and not economy needs donkey
 return=skipped when economy needs water and not economy needs donkey
 consume=wheat water
-animate=working 30000 # feeding cute little baby donkeys ;) 
-produce=donkey
+animate=working 30000 # feeding cute little baby donkeys ;)
+recruit=donkey
 
 [idle]
 pics=donkeyfarm_i_??.png  # ???

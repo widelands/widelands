@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,10 +56,14 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 		return *new Cmd_EnemyFlagAction      ();
 	case QUEUE_CMD_SETWAREPRIORITY:
 		return *new Cmd_SetWarePriority      ();
-	case QUEUE_CMD_SETTARGETQUANTITY:
-		return *new Cmd_SetTargetQuantity    ();
-	case QUEUE_CMD_RESETTARGETQUANTITY:
-		return *new Cmd_ResetTargetQuantity  ();
+	case QUEUE_CMD_SETWARETARGETQUANTITY:
+		return *new Cmd_SetWareTargetQuantity    ();
+	case QUEUE_CMD_RESETWARETARGETQUANTITY:
+		return *new Cmd_ResetWareTargetQuantity  ();
+	case QUEUE_CMD_SETWORKERTARGETQUANTITY:
+		return *new Cmd_SetWorkerTargetQuantity  ();
+	case QUEUE_CMD_RESETWORKERTARGETQUANTITY:
+		return *new Cmd_ResetWorkerTargetQuantity();
 	case QUEUE_CMD_DESTROY_MAPOBJECT:
 		return *new Cmd_Destroy_Map_Object   ();
 	case QUEUE_CMD_ACT:

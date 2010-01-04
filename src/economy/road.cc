@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,12 +61,8 @@ Road::CarrierSlot::CarrierSlot() :
  */
 Road::~Road()
 {
-	for
-		(SlotVector::iterator iter = m_carrier_slots.begin();
-		 iter < m_carrier_slots.end(); ++iter)
-	{
-		 delete iter->carrier_request;
-	}
+	container_iterate_const(SlotVector, m_carrier_slots, i)
+		delete i.current->carrier_request;
 }
 
 /**
@@ -208,7 +204,8 @@ void Road::_unmark_map(Editor_Game_Base & egbase) {
 	FCoords curf(m_path.get_start(), &map[m_path.get_start()]);
 
 	const Path::Step_Vector::size_type nr_steps = m_path.get_nsteps();
-	for (Path::Step_Vector::size_type steps = 0; steps < nr_steps + 1; ++steps) {
+	for (Path::Step_Vector::size_type steps = 0; steps < nr_steps + 1; ++steps)
+	{
 		if (steps > 0 && steps < m_path.get_nsteps())
 			unset_position(egbase, curf);
 
@@ -306,15 +303,12 @@ void Road::cleanup(Editor_Game_Base & egbase)
 {
 	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 
-	for
-		(SlotVector::iterator iter = m_carrier_slots.begin();
-		 iter < m_carrier_slots.end(); ++iter)
-	{
-		delete iter->carrier_request;
-		iter->carrier_request = 0;
+	container_iterate(SlotVector, m_carrier_slots, i) {
+		delete i.current->carrier_request;
+		i.current->carrier_request = 0;
 
 		// carrier will be released via PlayerImmovable::cleanup
-		iter->carrier = 0;
+		i.current->carrier = 0;
 	}
 
 	// Unmark Fields
@@ -340,13 +334,9 @@ void Road::set_economy(Economy * const e)
 {
 	PlayerImmovable::set_economy(e);
 
-	for
-		(SlotVector::iterator iter = m_carrier_slots.begin();
-		 iter < m_carrier_slots.end(); ++iter)
-	{
-		if (iter->carrier_request)
-			iter->carrier_request->set_economy(e);
-	}
+	container_iterate_const(SlotVector, m_carrier_slots, i)
+		if (i.current->carrier_request)
+			i.current->carrier_request->set_economy(e);
 }
 
 /**
@@ -355,21 +345,16 @@ void Road::set_economy(Economy * const e)
  * Only call this if the road can handle a new carrier, and if no request has
  * been issued.
 */
-void Road::_request_carrier
-#ifndef NDEBUG
-	(Game & game, CarrierSlot & slot)
-#else
-	(Game &, CarrierSlot & slot)
-#endif
+void Road::_request_carrier(Game &, CarrierSlot & slot)
 {
 
 	if (slot.carrier_type == 1 or owner().tribe().name() == "atlanteans") {
 		slot.carrier_request =
 			new Request
 				(*this,
-				owner().tribe().safe_worker_index("carrier"),
-				Road::_request_carrier_callback,
-				Request::WORKER);
+				 owner().tribe().safe_worker_index("carrier"),
+				 Road::_request_carrier_callback,
+				 Request::WORKER);
 	} else {
 		std::string donkey_name =
 			owner().tribe().name() == "empire" ? "donkey" : "wisent";
@@ -398,19 +383,15 @@ void Road::_request_carrier_callback
 	Road    & road    = ref_cast<Road,    PlayerImmovable>(target);
 	Carrier & carrier = ref_cast<Carrier, Worker>         (*w);
 
-	for
-		(SlotVector::iterator iter = road.m_carrier_slots.begin();
-		 iter < road.m_carrier_slots.end(); ++ iter)
-	{
-		if (iter->carrier_request == &rq) {
-			iter->carrier_request = 0;
-			iter->carrier = &carrier;
+	container_iterate(SlotVector, road.m_carrier_slots, i)
+		if (i.current->carrier_request == &rq) {
+			i.current->carrier_request = 0;
+			i.current->carrier = &carrier;
 
 			carrier.start_task_road(game);
 			delete &rq;
 			return;
 		}
-	}
 
 	delete &rq;
 	carrier.start_task_gowarehouse(game);
@@ -423,18 +404,16 @@ void Road::remove_worker(Worker & w)
 {
 	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
 
-	for
-		(SlotVector::iterator iter = m_carrier_slots.begin();
-		 iter < m_carrier_slots.end(); ++iter)
-	{
+	container_iterate(SlotVector, m_carrier_slots, i) {
+		Carrier const * carrier = i.current->carrier.get(game);
 
-		Carrier * carrier = iter->carrier.get(game);
+		if (carrier == &w) {
+			i.current->carrier = 0;
+			carrier            = 0;
+		}
 
-		if (carrier == &w)
-			iter->carrier = carrier = 0;
-
-		if (not carrier and not iter->carrier_request)
-			_request_carrier(game, *iter);
+		if (not carrier and not i.current->carrier_request)
+			_request_carrier(game, *i.current);
 	}
 
 	PlayerImmovable::remove_worker(w);
@@ -511,12 +490,9 @@ void Road::postsplit(Game & game, Flag & flag)
 	//SlotVector carrierslots = m_carrier_slots;
 	std::vector<Worker *> const workers = get_workers();
 
-	for
-		(SlotVector::iterator iter = m_carrier_slots.begin();
-		 iter < m_carrier_slots.end(); ++iter)
-	{
-		delete iter->carrier_request;
-		iter->carrier_request = 0;
+	container_iterate(SlotVector, m_carrier_slots, i) {
+		delete i.current->carrier_request;
+		i.current->carrier_request = 0;
 	}
 
 
@@ -542,9 +518,6 @@ void Road::postsplit(Game & game, Flag & flag)
 			}
 		}
 
-		if (w.serial() == 3755)
-			molog("Split: check %u -> idx %i\n", w.serial(), idx);
-
 		if (idx < 0) {
 			reassigned_workers.push_back(&w);
 
@@ -552,39 +525,23 @@ void Road::postsplit(Game & game, Flag & flag)
 			 * The current worker is not on this road. Search him
 			 * in this road and remove him. Than add him to the new road
 			 */
-			for
-				(SlotVector::iterator iter = m_carrier_slots.begin();
-				 iter < m_carrier_slots.end(); ++iter)
-			{
-				Carrier * carrier = iter->carrier.get(game);
+			container_iterate(SlotVector, m_carrier_slots, j) {
+				Carrier const * const carrier = j.current->carrier.get(game);
 
 				if (carrier == &w) {
-					iter->carrier = 0;
-					for
-						(SlotVector::iterator iter2 =
-						 newroad.m_carrier_slots.begin();
-						 iter2 < newroad.m_carrier_slots.end();
-						 ++iter2)
-					{
+					j.current->carrier = 0;
+					container_iterate(SlotVector, newroad.m_carrier_slots, k)
 						if
-							(not iter2->carrier.get(game) and
-							 not iter2->carrier_request)
+							(not k.current->carrier.get(game) and
+							 not k.current->carrier_request)
 						{
-							iter2->carrier =
-								&ref_cast<Carrier, Worker> (w);
+							k.current->carrier = &ref_cast<Carrier, Worker> (w);
 							break;
 						}
-					}
 				}
 			}
 		}
 
-		if (w.serial() == 3755) {
-			molog
-				("Split: sending signal 'road' to worker %u (at (%i, %i)):\n",
-				 w.serial(), w.get_position().x, w.get_position().y);
-			w.log_general_info(game);
-		}
 		// Cause a worker update in any case
 		w.send_signal(game, "road");
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -129,6 +129,9 @@ Tribe_Descr::Tribe_Descr
 					 	(_name, _descname, path, prof, global_s, *this,
 					 	 &m_default_encdata));
 			PARSE_MAP_OBJECT_TYPES_END;
+			if (not safe_building_index("constructionsite"))
+				throw game_data_error
+					(_("constructionsite type \"constructionsite\" is missing"));
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("militarysite")
 				m_buildings.add

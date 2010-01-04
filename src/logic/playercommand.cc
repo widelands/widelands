@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2007-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,8 +52,10 @@ enum {
 	PLCMD_CHANGESOLDIERCAPACITY,
 	PLCMD_ENEMYFLAGACTION,
 	PLCMD_SETWAREPRIORITY,
-	PLCMD_SETTARGETQUANTITY,
-	PLCMD_RESETTARGETQUANTITY
+	PLCMD_SETWARETARGETQUANTITY,
+	PLCMD_RESETWARETARGETQUANTITY,
+	PLCMD_SETWORKERTARGETQUANTITY,
+	PLCMD_RESETWORKERTARGETQUANTITY
 };
 
 /*** class PlayerCommand ***/
@@ -73,8 +75,14 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 	case PLCMD_STARTSTOPBUILDING:     return new Cmd_StartStopBuilding    (des);
 	case PLCMD_ENHANCEBUILDING:       return new Cmd_EnhanceBuilding      (des);
 	case PLCMD_SETWAREPRIORITY:       return new Cmd_SetWarePriority      (des);
-	case PLCMD_SETTARGETQUANTITY:     return new Cmd_SetTargetQuantity    (des);
-	case PLCMD_RESETTARGETQUANTITY:   return new Cmd_ResetTargetQuantity  (des);
+	case PLCMD_SETWARETARGETQUANTITY:
+		return new Cmd_SetWareTargetQuantity    (des);
+	case PLCMD_RESETWARETARGETQUANTITY:
+		return new Cmd_ResetWareTargetQuantity  (des);
+	case PLCMD_SETWORKERTARGETQUANTITY:
+		return new Cmd_SetWareTargetQuantity    (des);
+	case PLCMD_RESETWORKERTARGETQUANTITY:
+		return new Cmd_ResetWareTargetQuantity  (des);
 	case PLCMD_CHANGETRAININGOPTIONS: return new Cmd_ChangeTrainingOptions(des);
 	case PLCMD_DROPSOLDIER:           return new Cmd_DropSoldier          (des);
 	case PLCMD_CHANGESOLDIERCAPACITY: return new Cmd_ChangeSoldierCapacity(des);
@@ -677,7 +685,7 @@ void Cmd_ChangeTargetQuantity::serialize(StreamWrite & ser)
 }
 
 
-Cmd_SetTargetQuantity::Cmd_SetTargetQuantity
+Cmd_SetWareTargetQuantity::Cmd_SetWareTargetQuantity
 	(int32_t const _duetime, Player_Number const _sender,
 	 uint32_t const _economy,
 	 Ware_Index const _ware_type,
@@ -687,35 +695,33 @@ Cmd_SetTargetQuantity::Cmd_SetTargetQuantity
 	m_permanent(_permanent), m_temporary(_temporary)
 {}
 
-void Cmd_SetTargetQuantity::execute(Game & game)
+void Cmd_SetWareTargetQuantity::execute(Game & game)
 {
 	Player & player = game.player(sender());
 	if
 		(economy  () < player.get_nr_economies() and
 		 ware_type() < player.tribe().get_nrwares())
-	{
-		player.get_economy_by_number(economy())->set_target_quantity
+		player.get_economy_by_number(economy())->set_ware_target_quantity
 			(ware_type(),  m_permanent, m_temporary, duetime());
-	}
 }
 
-#define PLAYER_CMD_SETTARGETQUANTITY_VERSION 1
+#define PLAYER_CMD_SETWARETARGETQUANTITY_VERSION 1
 
-void Cmd_SetTargetQuantity::Write
+void Cmd_SetWareTargetQuantity::Write
 	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
-	fw.Unsigned16(PLAYER_CMD_SETTARGETQUANTITY_VERSION);
+	fw.Unsigned16(PLAYER_CMD_SETWARETARGETQUANTITY_VERSION);
 	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
 	fw.Unsigned32(m_permanent);
 	fw.Unsigned32(m_temporary);
 }
 
-void Cmd_SetTargetQuantity::Read
+void Cmd_SetWareTargetQuantity::Read
 	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == PLAYER_CMD_SETTARGETQUANTITY_VERSION) {
+		if (packet_version == PLAYER_CMD_SETWARETARGETQUANTITY_VERSION) {
 			Cmd_ChangeTargetQuantity::Read(fr, egbase, mol);
 			m_permanent = fr.Unsigned32();
 			m_temporary = fr.Unsigned32();
@@ -723,27 +729,27 @@ void Cmd_SetTargetQuantity::Read
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
-		throw game_data_error(_("set target quantity: %s"), e.what());
+		throw game_data_error(_("set ware target quantity: %s"), e.what());
 	}
 }
 
-Cmd_SetTargetQuantity::Cmd_SetTargetQuantity(StreamRead & des)
+Cmd_SetWareTargetQuantity::Cmd_SetWareTargetQuantity(StreamRead & des)
 	:
 	Cmd_ChangeTargetQuantity(des),
 	m_permanent             (des.Unsigned32()),
 	m_temporary             (des.Unsigned32())
 {}
 
-void Cmd_SetTargetQuantity::serialize(StreamWrite & ser)
+void Cmd_SetWareTargetQuantity::serialize(StreamWrite & ser)
 {
-	ser.Unsigned8 (PLCMD_SETTARGETQUANTITY);
+	ser.Unsigned8 (PLCMD_SETWARETARGETQUANTITY);
 	Cmd_ChangeTargetQuantity::serialize(ser);
 	ser.Unsigned32(m_permanent);
 	ser.Unsigned32(m_temporary);
 }
 
 
-Cmd_ResetTargetQuantity::Cmd_ResetTargetQuantity
+Cmd_ResetWareTargetQuantity::Cmd_ResetWareTargetQuantity
 	(int32_t const _duetime, Player_Number const _sender,
 	 uint32_t const _economy,
 	 Ware_Index const _ware_type)
@@ -751,7 +757,7 @@ Cmd_ResetTargetQuantity::Cmd_ResetTargetQuantity
 	Cmd_ChangeTargetQuantity(_duetime, _sender, _economy, _ware_type)
 {}
 
-void Cmd_ResetTargetQuantity::execute(Game & game)
+void Cmd_ResetWareTargetQuantity::execute(Game & game)
 {
 	Player & player = game.player(sender());
 	Tribe_Descr const & tribe = player.tribe();
@@ -761,28 +767,28 @@ void Cmd_ResetTargetQuantity::execute(Game & game)
 	{
 		int32_t const count =
 			tribe.get_ware_descr(ware_type())->default_target_quantity();
-		player.get_economy_by_number(economy())->set_target_quantity
+		player.get_economy_by_number(economy())->set_ware_target_quantity
 			(ware_type(),  count, count, 0);
 	}
 }
 
-#define PLAYER_CMD_RESETTARGETQUANTITY_VERSION 1
+#define PLAYER_CMD_RESETWARETARGETQUANTITY_VERSION 1
 
-void Cmd_ResetTargetQuantity::Write
+void Cmd_ResetWareTargetQuantity::Write
 	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
-	fw.Unsigned16(PLAYER_CMD_SETTARGETQUANTITY_VERSION);
+	fw.Unsigned16(PLAYER_CMD_RESETWARETARGETQUANTITY_VERSION);
 	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
 }
 
-void Cmd_ResetTargetQuantity::Read
+void Cmd_ResetWareTargetQuantity::Read
 	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == PLAYER_CMD_RESETTARGETQUANTITY_VERSION) {
+		if (packet_version == PLAYER_CMD_RESETWARETARGETQUANTITY_VERSION)
 			Cmd_ChangeTargetQuantity::Read(fr, egbase, mol);
-		} else
+		else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (_wexception const & e) {
@@ -790,13 +796,135 @@ void Cmd_ResetTargetQuantity::Read
 	}
 }
 
-Cmd_ResetTargetQuantity::Cmd_ResetTargetQuantity(StreamRead & des)
+Cmd_ResetWareTargetQuantity::Cmd_ResetWareTargetQuantity(StreamRead & des)
 	: Cmd_ChangeTargetQuantity(des)
 {}
 
-void Cmd_ResetTargetQuantity::serialize(StreamWrite & ser)
+void Cmd_ResetWareTargetQuantity::serialize(StreamWrite & ser)
 {
-	ser.Unsigned8 (PLCMD_RESETTARGETQUANTITY);
+	ser.Unsigned8 (PLCMD_RESETWARETARGETQUANTITY);
+	Cmd_ChangeTargetQuantity::serialize(ser);
+}
+
+
+Cmd_SetWorkerTargetQuantity::Cmd_SetWorkerTargetQuantity
+	(int32_t const _duetime, Player_Number const _sender,
+	 uint32_t const _economy,
+	 Ware_Index const _ware_type,
+	 uint32_t const _permanent, uint32_t const _temporary)
+	:
+	Cmd_ChangeTargetQuantity(_duetime, _sender, _economy, _ware_type),
+	m_permanent(_permanent), m_temporary(_temporary)
+{}
+
+void Cmd_SetWorkerTargetQuantity::execute(Game & game)
+{
+	Player & player = game.player(sender());
+	if
+		(economy  () < player.get_nr_economies() and
+		 ware_type() < player.tribe().get_nrwares())
+		player.get_economy_by_number(economy())->set_worker_target_quantity
+			(ware_type(),  m_permanent, m_temporary, duetime());
+}
+
+#define PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION 1
+
+void Cmd_SetWorkerTargetQuantity::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+{
+	fw.Unsigned16(PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION);
+	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
+	fw.Unsigned32(m_permanent);
+	fw.Unsigned32(m_temporary);
+}
+
+void Cmd_SetWorkerTargetQuantity::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+{
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_CMD_SETWORKERTARGETQUANTITY_VERSION) {
+			Cmd_ChangeTargetQuantity::Read(fr, egbase, mol);
+			m_permanent = fr.Unsigned32();
+			m_temporary = fr.Unsigned32();
+		} else
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error(_("set worker target quantity: %s"), e.what());
+	}
+}
+
+Cmd_SetWorkerTargetQuantity::Cmd_SetWorkerTargetQuantity(StreamRead & des)
+	:
+	Cmd_ChangeTargetQuantity(des),
+	m_permanent             (des.Unsigned32()),
+	m_temporary             (des.Unsigned32())
+{}
+
+void Cmd_SetWorkerTargetQuantity::serialize(StreamWrite & ser)
+{
+	ser.Unsigned8 (PLCMD_SETWORKERTARGETQUANTITY);
+	Cmd_ChangeTargetQuantity::serialize(ser);
+	ser.Unsigned32(m_permanent);
+	ser.Unsigned32(m_temporary);
+}
+
+
+Cmd_ResetWorkerTargetQuantity::Cmd_ResetWorkerTargetQuantity
+	(int32_t const _duetime, Player_Number const _sender,
+	 uint32_t const _economy,
+	 Ware_Index const _ware_type)
+	:
+	Cmd_ChangeTargetQuantity(_duetime, _sender, _economy, _ware_type)
+{}
+
+void Cmd_ResetWorkerTargetQuantity::execute(Game & game)
+{
+	Player & player = game.player(sender());
+	Tribe_Descr const & tribe = player.tribe();
+	if
+		(economy  () < player.get_nr_economies() and
+		 ware_type() < tribe.get_nrwares())
+	{
+		int32_t const count =
+			tribe.get_ware_descr(ware_type())->default_target_quantity();
+		player.get_economy_by_number(economy())->set_worker_target_quantity
+			(ware_type(),  count, count, 0);
+	}
+}
+
+#define PLAYER_CMD_RESETWORKERTARGETQUANTITY_VERSION 1
+
+void Cmd_ResetWorkerTargetQuantity::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+{
+	fw.Unsigned16(PLAYER_CMD_RESETWORKERTARGETQUANTITY_VERSION);
+	Cmd_ChangeTargetQuantity::Write(fw, egbase, mos);
+}
+
+void Cmd_ResetWorkerTargetQuantity::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+{
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_CMD_RESETWORKERTARGETQUANTITY_VERSION) {
+			Cmd_ChangeTargetQuantity::Read(fr, egbase, mol);
+		} else
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error("reset worker target quantity: %s", e.what());
+	}
+}
+
+Cmd_ResetWorkerTargetQuantity::Cmd_ResetWorkerTargetQuantity(StreamRead & des)
+	: Cmd_ChangeTargetQuantity(des)
+{}
+
+void Cmd_ResetWorkerTargetQuantity::serialize(StreamWrite & ser)
+{
+	ser.Unsigned8 (PLCMD_RESETWORKERTARGETQUANTITY);
 	Cmd_ChangeTargetQuantity::serialize(ser);
 }
 

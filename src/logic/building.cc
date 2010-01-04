@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -229,10 +229,7 @@ uint32_t Building_Descr::get_conquers() const
  */
 uint32_t Building_Descr::vision_range() const throw ()
 {
-	if (m_vision_range > 0)
-		return m_vision_range;
-	else
-		return get_conquers() + 4;
+	return m_vision_range ? m_vision_range : get_conquers() + 4;
 }
 
 
@@ -257,22 +254,16 @@ if old != 0 this is an enhancement from an older building
 Building & Building_Descr::create_constructionsite
 	(Building_Descr const * const old) const
 {
-	if
-		(Building_Descr const * const descr =
-		 	m_tribe.get_building_descr
-		 		(m_tribe.building_index("constructionsite")))
-	{
+	Building_Descr const * const descr =
+		m_tribe.get_building_descr
+			(m_tribe.safe_building_index("constructionsite"));
+	ConstructionSite & csite =
+		ref_cast<ConstructionSite, Map_Object>(descr->create_object());
+	csite.set_building(*this);
+	if (old)
+		csite.set_previous_building(old);
 
-		ConstructionSite & csite =
-			ref_cast<ConstructionSite, Map_Object>(descr->create_object());
-		csite.set_building(*this);
-		if (old)
-			csite.set_previous_building(old);
-
-		return csite;
-	} else
-		throw wexception
-			("Tribe %s has no constructionsite", m_tribe.name().c_str());
+	return csite;
 }
 
 

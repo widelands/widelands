@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -94,7 +94,8 @@ struct Economy {
 	void remove_flag(Flag &);
 	Flag & get_arbitrary_flag();
 
-	void set_target_quantity(Ware_Index, uint32_t, uint32_t, Time);
+	void set_ware_target_quantity  (Ware_Index, uint32_t, uint32_t, Time);
+	void set_worker_target_quantity(Ware_Index, uint32_t, uint32_t, Time);
 
 	void    add_wares  (Ware_Index, uint32_t count = 1);
 	void remove_wares  (Ware_Index, uint32_t count = 1);
@@ -125,11 +126,22 @@ struct Economy {
 	/// ware type by overproducing another from it.
 	bool needs_ware(Ware_Index) const;
 
-	Target_Quantity const & target_quantity(Ware_Index const i) const {
-		return m_target_quantities[i.value()];
+	/// Whether the economy needs more of this worker type.
+	/// Productionsites may ask this before they produce, to avoid depleting a
+	/// ware type by overproducing a worker type from it.
+	bool needs_worker(Ware_Index) const;
+
+	Target_Quantity const & ware_target_quantity  (Ware_Index const i) const {
+		return m_ware_target_quantities[i.value()];
 	}
-	Target_Quantity       & target_quantity(Ware_Index const i)       {
-		return m_target_quantities[i.value()];
+	Target_Quantity       & ware_target_quantity  (Ware_Index const i)       {
+		return m_ware_target_quantities[i.value()];
+	}
+	Target_Quantity const & worker_target_quantity(Ware_Index const i) const {
+		return m_worker_target_quantities[i.value()];
+	}
+	Target_Quantity       & worker_target_quantity(Ware_Index const i)       {
+		return m_worker_target_quantities[i.value()];
 	}
 
 	void show_options_window();
@@ -180,7 +192,8 @@ private:
 	RequestList m_requests; ///< requests
 	SupplyList m_supplies;
 
-	Target_Quantity        * m_target_quantities;
+	Target_Quantity        * m_ware_target_quantities;
+	Target_Quantity        * m_worker_target_quantities;
 	Router                 * m_router;
 
 	/**

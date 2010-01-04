@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
+#include "logic/worker.h"
 #include "logic/worker_program.h"
 #include "logic/world.h"
 
@@ -914,7 +915,7 @@ void ProductionProgram::ActReturn::Negation::writeHTML
 }
 
 
-void ProductionProgram::ActReturn::Economy_Needs::writeHTML
+void ProductionProgram::ActReturn::Economy_Needs_Ware::writeHTML
 	(::FileWrite & fw, ProductionSite_Descr const & site) const
 {
 	Item_Ware_Descr const & ware = *site.tribe().get_ware_descr(ware_type);
@@ -932,6 +933,28 @@ void ProductionProgram::ActReturn::Economy_Needs::writeHTML
 	fw.Text(ware_name);
 	fw.Text("/menu.png\" alt=\"");
 	fw.Text(ware_descname);
+	fw.Text("\"/></a>");
+}
+
+
+void ProductionProgram::ActReturn::Economy_Needs_Worker::writeHTML
+	(::FileWrite & fw, ProductionSite_Descr const & site) const
+{
+	Worker_Descr const & worker = *site.tribe().get_worker_descr(worker_type);
+	std::string const & worker_name     = worker.    name();
+	std::string const & worker_descname = worker.descname();
+	fw.Text("<span class=\"keyword\">");
+	fw.Text(_("economy"));
+	fw.Text("</span> <span class=\"keyword\">");
+	fw.Text(_("needs"));
+	fw.Text("</span> <a href=\"../");
+	fw.Text(worker_name);
+	fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
+	fw.Text(worker_descname);
+	fw.Text("\"><img src=\"../");
+	fw.Text(worker_name);
+	fw.Text("/menu.png\" alt=\"");
+	fw.Text(worker_descname);
 	fw.Text("\"/></a>");
 }
 
@@ -1201,6 +1224,47 @@ void ProductionProgram::ActProduce::writeHTML
 		fw.Text(ware_name);
 		fw.Text("/menu.png\" alt=\"");
 		fw.Text(ware_descname);
+		fw.Text("\"/></a>");
+		if (1 < i.current->second) {
+			char buffer[32];
+			sprintf(buffer, ":%u", i.current->second);
+			fw.Text(buffer);
+		}
+		if (++i.current == i.end)
+			break;
+		fw.Unsigned8(' ');
+	}
+}
+
+
+void ProductionProgram::ActRecruit::writeHTML
+	(::FileWrite & fw, ProductionSite_Descr const & site) const
+{
+	Tribe_Descr const & tribe = site.tribe();
+	fw.Text("<a href=\"../../../doc/");
+	fw.Text(_("productionsite_program_reference.xhtml"));
+	fw.Text("#recruit\" title=\"");
+	fw.Text(_("Documentation for program command produce"));
+	fw.Text("\">");
+	fw.Text(_("recruit"));
+	fw.Text("</a> ");
+	for
+		(struct {
+		 	Items::const_iterator       current;
+		 	Items::const_iterator const end;
+		 } i = {items().begin(), items().end()};;)
+	{
+		Worker_Descr const & worker = *tribe.get_worker_descr(i.current->first);
+		std::string const & worker_name     = worker.    name();
+		std::string const & worker_descname = worker.descname();
+		fw.Text("<a href=\"../");
+		fw.Text(worker_name);
+		fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
+		fw.Text(worker_descname);
+		fw.Text("\"><img src=\"../");
+		fw.Text(worker_name);
+		fw.Text("/menu.png\" alt=\"");
+		fw.Text(worker_descname);
 		fw.Text("\"/></a>");
 		if (1 < i.current->second) {
 			char buffer[32];

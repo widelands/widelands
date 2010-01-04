@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -97,6 +97,9 @@ struct Tribe_Descr {
 	void set_ware_type_has_demand_check(Ware_Index const index) const {
 		m_wares.get(index)->set_has_demand_check();
 	}
+	void set_worker_type_has_demand_check(Ware_Index const index) const {
+		m_workers.get(index)->set_has_demand_check();
+	}
 	Ware_Index safe_worker_index(std::string const & workername) const;
 	Ware_Index safe_worker_index(const char * const workername) const;
 	Building_Index get_nrbuildings() const {
@@ -190,7 +193,8 @@ struct Tribe_Descr {
 	};
 	typedef std::vector<Initialization> Initializations;
 	Initialization const & initialization(uint8_t const index) const {
-		assert(index < m_initializations.size());
+		if (m_initializations.size() <= index)
+			throw Nonexistent();
 		return m_initializations[index];
 	}
 

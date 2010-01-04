@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1736,6 +1736,10 @@ void Worker::gowarehouse_update(Game & game, State & state)
 	// flag is removed or a warehouse connects to the Economy).
 	if (!m_supply)
 		m_supply = new IdleWorkerSupply(*this);
+	if (name() == "donkey")
+		molog
+			("Worker::gowarehouse_update: donkey at (%i, %i): nothing to do, "
+			 "starting task idle\n", get_position().x, get_position().y);
 	return start_task_idle(game, get_animation("idle"), 1000);
 }
 
@@ -1760,6 +1764,13 @@ void Worker::gowarehouse_pop(Game &, State &)
 const Bob::Task Worker::taskDropoff = {
 	"dropoff",
 	static_cast<Bob::Ptr>(&Worker::dropoff_update),
+	0,
+	0
+};
+
+const Bob::Task Worker::taskReleaserecruit = {
+	"releaserecruit",
+	static_cast<Bob::Ptr>(&Worker::releaserecruit_update),
 	0,
 	0
 };
@@ -1806,8 +1817,7 @@ void Worker::dropoff_update(Game & game, State &)
 				flag->add_item(game, *fetch_carried_item(game));
 
 				set_animation(game, descr().get_animation("idle"));
-				schedule_act(game, 50);
-				return;
+				return schedule_act(game, 50);
 			}
 
 			molog("[dropoff]: flag is overloaded\n");
@@ -1845,6 +1855,22 @@ void Worker::dropoff_update(Game & game, State &)
 	return pop_task(game);
 }
 
+
+/// Give the recruit his diploma and say farwell to him.
+void Worker::start_task_releaserecruit(Game & game, Worker & recruit)
+{
+	push_task(game, taskReleaserecruit);
+	molog
+		("Starting to release %s %u...\n",
+		 recruit.descname().c_str(), recruit.serial());
+	return schedule_act(game, 5000);
+}
+
+void Worker::releaserecruit_update(Game & game, State &)
+{
+	molog("\t...done releasing recruit\n");
+	return pop_task(game);
+}
 
 /**
  * ivar1 is set to 0 if we should move to the flag and fetch the item, and it
@@ -2457,7 +2483,7 @@ void Worker::scout_update(Game & game, State & state)
 		while (list.empty() and fringe_size < 10) {
 			while (mr.advance(map)) {
 				idx = map.get_index(mr.location(), map.get_width());
-				Vision v = owner().vision(idx);
+				Vision const v = owner().vision(idx);
 				if (v == 0) {
 					// nominate this
 					list.push_back(mr.location());
@@ -2474,15 +2500,14 @@ void Worker::scout_update(Game & game, State & state)
 			mr.extend(map);
 		}
 
-		while (list.size() > 0) {
-			// select a random field
-			uint8_t lidx = game.logic_rand() % list.size();
-			Coords coord = list[lidx];
+		while (list.size() > 0) { //  select a random node
+			uint8_t const lidx = game.logic_rand() % list.size();
+			Coords const coord = list[lidx];
 			list.erase(list.begin() + lidx);
 			if
 				(start_task_movepath
-				 (game, coord, 0,
-				  descr().get_right_walk_anims(does_carry_ware())))
+				 	(game, coord, 0,
+				 	 descr().get_right_walk_anims(does_carry_ware())))
 			{
 				return;
 			}
@@ -2507,9 +2532,9 @@ void Worker::scout_update(Game & game, State & state)
 	// Area around our home
 	Area<FCoords> owner_area
 		(map.get_fcoords
-		 (ref_cast<Building, PlayerImmovable>
-		  (*get_location(game)).get_position()),
-		  1);
+		 	(ref_cast<Building, PlayerImmovable>
+		 	 	(*get_location(game)).get_position()),
+		 1);
 
 	// and we are not already home
 	if (get_position() == owner_area)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -134,23 +134,12 @@ std::string ProductionProgram::ActReturn::Negation::description
 }
 
 
-ProductionProgram::ActReturn::Economy_Needs::Economy_Needs
-	(char * & parameters, Tribe_Descr const & tribe)
-{
-	try {
-		bool reached_end;
-		ware_type = tribe.safe_ware_index(match(parameters, reached_end));
-		tribe.set_ware_type_has_demand_check(ware_type);
-	} catch (_wexception const & e) {
-		throw game_data_error("needs: %s", e.what());
-	}
-}
-bool ProductionProgram::ActReturn::Economy_Needs::evaluate
+bool ProductionProgram::ActReturn::Economy_Needs_Ware::evaluate
 	(ProductionSite const & ps) const
 {
 #if 0
 	log
-		("ActReturn::Economy_Needs::evaluate(%s): (called from %s:%u) "
+		("ActReturn::Economy_Needs_Ware::evaluate(%s): (called from %s:%u) "
 		 "economy_needs(%s) = %u\n",
 		 ps.descname().c_str(),
 		 const_cast<ProductionSite &>(ps).top_state().program->get_name().c_str(),
@@ -160,10 +149,31 @@ bool ProductionProgram::ActReturn::Economy_Needs::evaluate
 #endif
 	return ps.get_economy()->needs_ware(ware_type);
 }
-std::string ProductionProgram::ActReturn::Economy_Needs::description
+std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description
 	(Tribe_Descr const & tribe) const
 {
 	return _("economy needs ") + tribe.get_ware_descr(ware_type)->descname();
+}
+
+bool ProductionProgram::ActReturn::Economy_Needs_Worker::evaluate
+	(ProductionSite const & ps) const
+{
+#if 0
+	log
+		("ActReturn::Economy_Needs_Worker::evaluate(%s): (called from %s:%u) "
+		 "economy_needs(%s) = %u\n",
+		 ps.descname().c_str(),
+		 const_cast<ProductionSite &>(ps).top_state().program->get_name().c_str(),
+		 const_cast<ProductionSite &>(ps).top_state().ip,
+		 ps.descr().tribe().get_worker_descr(worker_type)->descname().c_str(),
+		 ps.get_economy()->needs_worker(worker_type));
+#endif
+	return ps.get_economy()->needs_worker(worker_type);
+}
+std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
+	(Tribe_Descr const & tribe) const
+{
+	return _("economy needs ") + tribe.get_ware_descr(worker_type)->descname();
 }
 
 ProductionProgram::ActReturn::Site_Has::Site_Has
@@ -227,8 +237,26 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 {
 	try {
 		if (match_force_skip(parameters, "needs"))
-			return
-				new ProductionProgram::ActReturn::Economy_Needs(parameters, tribe);
+			try {
+				bool reached_end;
+				char const * const type_name = match(parameters, reached_end);
+				if (Ware_Index index = tribe.ware_index(type_name)) {
+					tribe.set_ware_type_has_demand_check(index);
+					return
+						new ProductionProgram::ActReturn::Economy_Needs_Ware
+							(index);
+				} else if ((index = tribe.worker_index(type_name))) {
+					tribe.set_worker_type_has_demand_check(index);
+					return
+						new ProductionProgram::ActReturn::Economy_Needs_Worker
+							(index);
+				} else
+					throw game_data_error
+						(_("expected %s but found \"%s\""),
+						 _("ware type or worker type"), type_name);
+			} catch (_wexception const & e) {
+				throw game_data_error("needs: %s", e.what());
+			}
 		else
 			throw game_data_error
 				(_("expected %s but found \"%s\""), "\"needs\"", parameters);
@@ -846,6 +874,83 @@ void ProductionProgram::ActProduce::execute
 }
 
 
+ProductionProgram::ActRecruit::ActRecruit
+	(char * parameters, ProductionSite_Descr const & descr)
+{
+	try {
+		Tribe_Descr const & tribe = descr.tribe();
+		for (bool more = true; more; ++parameters) {
+			m_items.resize(m_items.size() + 1);
+			std::pair<Ware_Index, uint8_t> & item = *m_items.rbegin();
+			skip(parameters);
+			char const * worker = parameters;
+			for (;; ++parameters)
+				switch (*parameters) {
+				case '\0':
+				case ' ':
+					item.second = 1;
+					goto item_end;
+				case ':': {
+					*parameters = '\0';
+					++parameters;
+					char * endp;
+					unsigned long long int const value =
+						strtoull(parameters, &endp, 0);
+					item.second = value;
+					if
+						((*endp and *endp != ' ')
+						 or
+						 value < 1 or item.second != value)
+						throw game_data_error
+							(_("expected %s but found \"%s\""),
+							 _("count"), parameters);
+					parameters = endp;
+					goto item_end;
+				}
+				}
+		item_end:
+			more = *parameters != '\0';
+			*parameters = '\0';
+			item.first = tribe.safe_worker_index(worker);
+		}
+	} catch (_wexception const & e) {
+		throw game_data_error("recruit: %s", e.what());
+	}
+}
+
+void ProductionProgram::ActRecruit::execute
+	(Game & game, ProductionSite & ps) const
+{
+	assert(ps.m_recruited_workers.empty());
+	ps.m_recruited_workers = m_items;
+	ps.m_working_positions[0].worker->update_task_buildingwork(game);
+
+	Tribe_Descr const & tribe = ps.owner().tribe();
+	std::string result_string = _("Recruited ");
+	assert(m_items.size());
+	for
+		(struct {Items::const_iterator current; Items::const_iterator const end;}
+		 i = {m_items.begin(), m_items.end()};;)
+	{
+		{
+			uint8_t const count = i.current->second;
+			if (1 < count) {
+				char buffer[5];
+				sprintf(buffer, _("%u "), count);
+				result_string += buffer;
+			}
+		}
+		result_string += tribe.get_worker_descr(i.current->first)->descname();
+		if (++i.current == i.end)
+			break;
+		result_string += _(", ");
+	}
+	snprintf
+		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+		 "%s", result_string.c_str());
+}
+
+
 ProductionProgram::ActMine::ActMine
 	(char * parameters, ProductionSite_Descr & descr,
 	 const std::string & production_program_name)
@@ -1034,12 +1139,12 @@ void ProductionProgram::ActMine::informPlayer
 
 			MessageQueue::add
 				(ps.owner().player_number(),
-				Message
-					(MSG_MINE,
-					game.get_gametime(),
-					_("Mine empty"),
-					ps.get_position(),
-					message.c_str()));
+				 Message
+				 	(MSG_MINE,
+				 	 game.get_gametime(),
+				 	 _("Mine empty"),
+				 	 ps.get_position(),
+				 	 message.c_str()));
 			break;
 		} else if
 			(i.current->sender() == MSG_MINE and
@@ -1275,6 +1380,8 @@ ProductionProgram::ProductionProgram
 			action = new ActConsume(v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "produce"))
 			action = new ActProduce(v->get_string(), *building);
+		else if (not strcmp(v->get_name(), "recruit"))
+			action = new ActRecruit(v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "worker"))
 			action = new ActWorker (v->get_string(), *building, _name);
 		else if (not strcmp(v->get_name(), "mine"))

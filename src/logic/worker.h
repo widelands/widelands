@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -158,6 +158,7 @@ public:
 
 	void start_task_gowarehouse(Game &);
 	void start_task_dropoff(Game &, WareInstance &);
+	void start_task_releaserecruit(Game &, Worker &);
 	void start_task_fetchfromflag(Game &);
 
 	bool start_task_waitforcapacity(Game &, Flag &);
@@ -169,7 +170,7 @@ public:
 		 uint8_t attempts, uint8_t radius,
 		 std::string const & subcommand);
 
-	void start_task_scout(Game &, uint32_t);
+	void start_task_scout(Game &, uint32_t duration);
 
 protected:
 	void draw_inner(Editor_Game_Base const &, RenderTarget &, Point) const;
@@ -185,6 +186,7 @@ public:
 	static const Task taskProgram;
 	static const Task taskGowarehouse;
 	static const Task taskDropoff;
+	static const Task taskReleaserecruit;
 	static const Task taskFetchfromflag;
 	static const Task taskWaitforcapacity;
 	static const Task taskLeavebuilding;
@@ -206,6 +208,7 @@ private:
 		 std::string const & signal);
 	void gowarehouse_pop(Game & game, State & state);
 	void dropoff_update(Game &, State &);
+	void releaserecruit_update(Game &, State &);
 	void fetchfromflag_update(Game &, State &);
 	void waitforcapacity_update(Game &, State &);
 	void waitforcapacity_pop(Game & game, State & state);

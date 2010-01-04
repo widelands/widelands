@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "events/event.h"
 #include "findimmovable.h"
 #include "game.h"
+#include "game_data_error.h"
 #include "i18n.h"
 #include "log.h"
 #include "militarysite.h"
@@ -93,14 +94,23 @@ Player::~Player() {
 void Player::create_default_infrastructure() {
 	const Map & map = egbase().map();
 	if (Coords const starting_pos = map.get_starting_pos(m_plnum)) {
-		Tribe_Descr::Initialization const & initialization =
-			tribe().initialization(m_initialization_index);
-		Game & game = ref_cast<Game, Editor_Game_Base>(egbase());
-		container_iterate_const(std::vector<Event *>, initialization.events, i) {
-			Event & event = **i.current;
-			event.set_player(player_number());
-			event.set_position(starting_pos);
-			event.run(game);
+		try {
+			Tribe_Descr::Initialization const & initialization =
+				tribe().initialization(m_initialization_index);
+			Game & game = ref_cast<Game, Editor_Game_Base>(egbase());
+			container_iterate_const
+				(std::vector<Event *>, initialization.events, i)
+			{
+				Event & event = **i.current;
+				event.set_player(player_number());
+				event.set_position(starting_pos);
+				event.run(game);
+			}
+		} catch (Tribe_Descr::Nonexistent) {
+			throw game_data_error
+				("the selected initialization index (%u) is outside the range "
+				 "(tribe edited between preload and game start?)",
+				 m_initialization_index);
 		}
 	} else
 		throw warning

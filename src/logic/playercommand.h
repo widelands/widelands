@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -267,9 +267,9 @@ private:
 };
 
 
-struct Cmd_SetTargetQuantity : public Cmd_ChangeTargetQuantity {
-	Cmd_SetTargetQuantity() : Cmd_ChangeTargetQuantity() {}
-	Cmd_SetTargetQuantity
+struct Cmd_SetWareTargetQuantity : public Cmd_ChangeTargetQuantity {
+	Cmd_SetWareTargetQuantity() : Cmd_ChangeTargetQuantity() {}
+	Cmd_SetWareTargetQuantity
 		(int32_t duetime, Player_Number sender,
 		 uint32_t economy, Ware_Index index,
 		 uint32_t permanent, uint32_t temporary);
@@ -278,9 +278,9 @@ struct Cmd_SetTargetQuantity : public Cmd_ChangeTargetQuantity {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual uint8_t id() const {return QUEUE_CMD_SETTARGETQUANTITY;}
+	virtual uint8_t id() const {return QUEUE_CMD_SETWARETARGETQUANTITY;}
 
-	Cmd_SetTargetQuantity(StreamRead &);
+	Cmd_SetWareTargetQuantity(StreamRead &);
 
 	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
@@ -289,9 +289,9 @@ private:
 	uint32_t m_permanent, m_temporary;
 };
 
-struct Cmd_ResetTargetQuantity : public Cmd_ChangeTargetQuantity {
-	Cmd_ResetTargetQuantity() : Cmd_ChangeTargetQuantity() {}
-	Cmd_ResetTargetQuantity
+struct Cmd_ResetWareTargetQuantity : public Cmd_ChangeTargetQuantity {
+	Cmd_ResetWareTargetQuantity() : Cmd_ChangeTargetQuantity() {}
+	Cmd_ResetWareTargetQuantity
 		(int32_t duetime, Player_Number sender,
 		 uint32_t economy, Ware_Index index);
 
@@ -299,9 +299,53 @@ struct Cmd_ResetTargetQuantity : public Cmd_ChangeTargetQuantity {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual uint8_t id() const {return QUEUE_CMD_RESETTARGETQUANTITY;}
+	virtual uint8_t id() const {return QUEUE_CMD_RESETWARETARGETQUANTITY;}
 
-	Cmd_ResetTargetQuantity(StreamRead &);
+	Cmd_ResetWareTargetQuantity(StreamRead &);
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+
+private:
+	uint32_t m_economy;
+	Ware_Index m_ware_type;
+};
+
+struct Cmd_SetWorkerTargetQuantity : public Cmd_ChangeTargetQuantity {
+	Cmd_SetWorkerTargetQuantity() : Cmd_ChangeTargetQuantity() {}
+	Cmd_SetWorkerTargetQuantity
+		(int32_t duetime, Player_Number sender,
+		 uint32_t economy, Ware_Index index,
+		 uint32_t permanent, uint32_t temporary);
+
+	//  Write/Read these commands to/from a file (for savegames).
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_SETWORKERTARGETQUANTITY;}
+
+	Cmd_SetWorkerTargetQuantity(StreamRead &);
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+
+private:
+	uint32_t m_permanent, m_temporary;
+};
+
+struct Cmd_ResetWorkerTargetQuantity : public Cmd_ChangeTargetQuantity {
+	Cmd_ResetWorkerTargetQuantity() : Cmd_ChangeTargetQuantity() {}
+	Cmd_ResetWorkerTargetQuantity
+		(int32_t duetime, Player_Number sender,
+		 uint32_t economy, Ware_Index index);
+
+	//  Write/Read these commands to/from a file (for savegames).
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_RESETWORKERTARGETQUANTITY;}
+
+	Cmd_ResetWorkerTargetQuantity(StreamRead &);
 
 	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);

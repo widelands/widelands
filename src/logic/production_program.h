@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,7 +91,7 @@ struct ProductionProgram {
 	///    economy_condition  ::= "economy" economy_needs
 	///    site_condition     ::= "site" site_has
 	///    workers_condition  ::= "workers" workers_need_experience
-	///    economy_needs      ::= "needs" ware_type
+	///    economy_needs      ::= "needs" (ware_type|worker_type)
 	///    site_has           ::= "has" group
 	///    group              ::= ware_type{,ware_type}[:count]
 	///    workers_need_experience ::= "need experience"
@@ -115,8 +115,8 @@ struct ProductionProgram {
 	///       only appear once in the command.
 	///    economy_needs:
 	///       The result of this condition depends on whether the economy that
-	///       this productionsite belongs to needs a ware of the specified type.
-	///       How this is determined is defined by the economy.
+	///       this productionsite belongs to needs a ware/worker of the
+	///       specified type. How this is determined is defined by the economy.
 	///
 	/// Aborts the execution of the program and sets a return value. Updates the
 	/// productionsite's statistics depending on the return value.
@@ -162,8 +162,8 @@ struct ProductionProgram {
 		};
 
 		/// Tests whether the economy needs a ware of type ware_type.
-		struct Economy_Needs : public Condition {
-			Economy_Needs(char * & parameters, Tribe_Descr const &);
+		struct Economy_Needs_Ware : public Condition {
+			Economy_Needs_Ware(Ware_Index const i) : ware_type(i) {}
 			virtual bool evaluate(ProductionSite const &) const;
 			std::string description(Tribe_Descr const &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
@@ -172,6 +172,19 @@ struct ProductionProgram {
 #endif
 		private:
 			Ware_Index ware_type;
+		};
+
+		/// Tests whether the economy needs a worker of type worker_type.
+		struct Economy_Needs_Worker : public Condition {
+			Economy_Needs_Worker(Ware_Index const i) : worker_type(i) {}
+			virtual bool evaluate(ProductionSite const &) const;
+			std::string description(Tribe_Descr const &) const;
+#ifdef WRITE_GAME_DATA_AS_HTML
+			virtual void writeHTML
+				(::FileWrite &, ProductionSite_Descr const &) const;
+#endif
+		private:
+			Ware_Index worker_type;
 		};
 
 		/// Tests whether the site has the specified (or implied) number of
@@ -388,11 +401,39 @@ struct ProductionProgram {
 	///    count:
 	///       A positive integer. If omitted, the value 1 is used.
 	///
-	/// For each group, the number of wares specified in count is produced. The
+	/// For each group, the number of wares specified in count are produced. The
 	/// produced wares are of the type specified in the group. How the produced
 	/// wares are handled is defined by the productionsite.
 	struct ActProduce : public Action {
 		ActProduce(char * parameters, ProductionSite_Descr const &);
+		virtual void execute(Game &, ProductionSite &) const;
+#ifdef WRITE_GAME_DATA_AS_HTML
+		virtual void writeHTML
+			(::FileWrite &, ProductionSite_Descr const &) const;
+#endif
+		typedef std::vector<std::pair<Ware_Index, uint8_t> > Items;
+		Items const & items() const {return m_items;}
+	private:
+		Items m_items;
+	};
+
+	/// Recruits workers.
+	///
+	/// Parameter syntax:
+	///    parameters ::= group {group}
+	///    group      ::= worker_type[:count]
+	/// Parameter semantics:
+	///    ware_type:
+	///       The name of a worker type (defined in the tribe). A worker type
+	///       may only appear once in the command.
+	///    count:
+	///       A positive integer. If omitted, the value 1 is used.
+	///
+	/// For each group, the number of workers specified in count are recruited.
+	/// The recruited workers are of the type specified in the group. How the
+	/// recruited workers are handled is defined by the productionsite.
+	struct ActRecruit : public Action {
+		ActRecruit(char * parameters, ProductionSite_Descr const &);
 		virtual void execute(Game &, ProductionSite &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
