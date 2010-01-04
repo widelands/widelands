@@ -1,3 +1,5 @@
+help=_Breeds spider for yarn.
+
 [buildcost]
 carrier=1
 milking_tongs=1

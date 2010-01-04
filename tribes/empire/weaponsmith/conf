@@ -1,3 +1,4 @@
+help=_Produces weapons for the soldiers.
 
 [buildcost]
 carrier=1

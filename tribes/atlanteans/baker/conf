@@ -1,3 +1,5 @@
+help=_Bakes bread for workers.
+
 [buildcost]
 bakingtray=1
 carrier=1

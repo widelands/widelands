@@ -1,3 +1,4 @@
+help=_Produces weapons for soldiers and tools for workers.
 experience=23-25
 becomes=master-blacksmith
 

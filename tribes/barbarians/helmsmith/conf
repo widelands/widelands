@@ -1,3 +1,5 @@
+help=_Smelts helmets for soldiers.
+
 [buildcost]
 carrier=1
 hammer=1

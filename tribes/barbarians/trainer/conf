@@ -1,3 +1,5 @@
+help=_Trains the soldiers.
+
 [buildcost]
 carrier=1
 

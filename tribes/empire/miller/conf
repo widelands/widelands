@@ -1,3 +1,5 @@
+help=_Mills the wheat to produce flour.
+
 [buildcost]
 carrier=1
 

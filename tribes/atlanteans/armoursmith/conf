@@ -1,3 +1,5 @@
+help=_Produces armour for the soldiers.
+
 [buildcost]
 carrier=1
 hammer=1

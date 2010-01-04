@@ -1,3 +1,5 @@
+help=_Produces tools for the workers.
+
 [buildcost]
 carrier=1
 saw=1

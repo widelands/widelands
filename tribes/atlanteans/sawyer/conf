@@ -1,3 +1,5 @@
+help=_Saws the wood to produce planks.
+
 [buildcost]
 carrier=1
 saw=1

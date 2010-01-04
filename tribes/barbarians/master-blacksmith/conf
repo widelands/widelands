@@ -1,3 +1,5 @@
+help=_Produces weapons for soldiers and tools for workers.
+
 [idle]
 pics=idle_??.png
 hotspot=5 13

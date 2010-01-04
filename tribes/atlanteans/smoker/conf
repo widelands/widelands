@@ -1,3 +1,5 @@
+help=_Smokes meat and fish.
+
 [buildcost]
 carrier=1
 hook_pole=1
