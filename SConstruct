@@ -83,6 +83,7 @@ def cli_options():
 	opts.Add('build', 'debug / profile / release(default)', 'debug')
 	opts.Add('build_id', 'To get a default value (SVN revision), leave this empty', '') #change this before/after preparing a release
 	opts.Add('sdlconfig', 'On some systems (e.g. BSD) this is called sdl12-config', 'sdl-config')
+	opts.Add('pkgconfig', 'On some systems (e.g. BSD) this is called pkg-config13', 'pkg-config')
 	opts.Add('paraguiconfig', '', 'paragui-config')
 	opts.Add('install_prefix', '', '/usr/local')
 	opts.Add('bindir', '(absolute or relative to install_prefix)', 'games')

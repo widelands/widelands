@@ -136,13 +136,27 @@ def parse_cli(env, buildtargets):
 def CheckPKG(context, name):
 	context.Message( 'Checking for %s... ' % name )
 	ret = context.TryAction('pkg-config --exists \'%s\'' % name)[0]
-	context.Result( ret )
+	context.Result( not ret )
 	return ret
 
-def CheckPKGConfig(context, version):
+def CheckPKGConfig(context, version, env):
 	context.Message( 'Checking for pkg-config... ' )
 	ret = context.TryAction('pkg-config --atleast-pkgconfig-version=%s' % version)[0]
 	context.Result( ret )
+	if env['PLATFORM'] == 'win32':
+		for p in env['PATH']:
+			ret = context.TryAction('sh.exe '+os.path.join(p, env['pkgconfig'])+' --version')[0]
+			if ret==1:
+				env['pkgconfig']='sh.exe '+os.path.join(p, env['pkgconfig'])
+				context.Result( ret )
+				break
+	else:
+		for p in env['PATH']:
+			ret = context.TryAction(os.path.join(p, env['pkgconfig'])+' --version')[0]
+			if ret==1:
+				env['pkgconfig']=os.path.join(p, env['pkgconfig'])
+				context.Result( ret )
+				break
 	return ret
 
 def CheckSDLConfig(context, env):
@@ -325,6 +339,10 @@ def do_configure_libraries(conf, env):
 		print 'Could not find sdl-config! Is SDL installed?'
 		env.Exit(1)
 
+	if not conf.CheckPKGConfig(0.15, env):
+		print 'Could not find pkg-config! Is it installed?'
+		env.Exit(1)
+
 	if not conf.CheckSDLVersionAtLeast(1, 2, 8, env):
 		print 'Could not find an SDL version >= 1.2.8!'
 		env.Exit(1)
@@ -353,12 +371,11 @@ def do_configure_libraries(conf, env):
 		print 'Could not find the png library! Is it installed?'
 		env.Exit(1)
 	
-	if not conf.CheckLibWithHeader('lua', header='lua.h', language='C++', autoadd=1):
-		# Try to find 'lua5.1'
-		conf.CheckCompilerFlag('-I/usr/include/lua5.1', env)
-		if not conf.CheckLibWithHeader('lua5.1', header='lua.h', language='C', autoadd=1):
-			print 'Could not find the lua library! Is it installed?'
-			env.Exit(1)
+	if conf.CheckPKG("lua"):
+		print 'Could not find the lua library! Is it installed?'
+		env.Exit(1)
+	else:
+		env.ParseConfig(env["pkgconfig"] + " lua --libs --cflags")
 
 	if not conf.CheckLib(library='SDL_image', symbol='IMG_Load', autoadd=1):
 		print 'Could not find the SDL_image library! Is it installed?'
