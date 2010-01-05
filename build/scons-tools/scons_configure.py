@@ -379,7 +379,7 @@ def do_configure_libraries(conf, env):
 		print 'Could not find the png library! Is it installed?'
 		env.Exit(1)
 	
-	if not conf.CheckPKG(env, ("lua", "lua51")):
+	if not conf.CheckPKG(env, ("lua", "lua5.1", "lua51")):
 		print 'Could not find the lua library! Is it installed?'
 		env.Exit(1)
 	else:
