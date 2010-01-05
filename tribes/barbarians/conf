@@ -217,3 +217,8 @@ scouts_hut=_"Scout's Hut"
 [initializations]
 headquarters_medium=_Headquarters medium
 castle_village=_Citadel village
+
+[military_data]
+retreat_interval=0-80
+retreat=20
+

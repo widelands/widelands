@@ -201,3 +201,8 @@ scouts_house=_"Scout's House"
 [initializations]
 headquarters_medium=_Headquarters medium
 castle_village=_Castle village
+
+[military_data]
+retreat_interval=20-100
+retreat=60
+

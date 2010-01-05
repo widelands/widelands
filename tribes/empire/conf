@@ -213,3 +213,8 @@ donkeyfarm=_Donkeyfarm
 [initializations]
 headquarters_medium=_Headquarters medium
 castle_village=_Castle village
+
+[military_data]
+retreat_interval=10-90
+retreat=50
+

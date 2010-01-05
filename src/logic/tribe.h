@@ -26,6 +26,7 @@
 #include "descr_maintainer.h"
 #include "immovable.h"
 #include "item_ware_descr.h"
+#include "military_data.h"
 #include "worker.h"
 #include "HTMLReferences.h"
 
@@ -186,6 +187,8 @@ struct Tribe_Descr {
 	void postload(Editor_Game_Base &);
 	void load_graphics();
 
+	Military_Data get_military_data() const {return m_military_data;}
+
 	struct Initialization {
 		std::string          name;
 		std::string          descname;
@@ -229,6 +232,8 @@ private:
 	Initializations m_initializations;
 
 	EncodeData m_default_encdata;
+
+	Military_Data   m_military_data;
 
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void writeHTMLBuildings(std::string const & directory);

@@ -138,11 +138,12 @@ void AttackBox::update_attack() {
 	m_add_soldiers->set_title(buf);
 
 
-#if 0
-	assert(m_slider_retreat);
-	sprintf(buf, "%u%%", m_slider_retreat->get_value());
-	m_text_retreat->set_text(buf);
-#endif
+	if (m_pl->is_retreat_change_allowed()) {
+		assert(m_slider_retreat);
+		assert(m_text_retreat);
+		sprintf(buf, "%u %%", m_slider_retreat->get_value());
+		m_text_retreat->set_text(buf);
+	}
 }
 
 void AttackBox::init() {
@@ -196,11 +197,23 @@ void AttackBox::init() {
 		add(&linebox, UI::Box::AlignTop);
 
 		add_text(linebox, _("Retreat: Never!"));
+
+		//  Spliter of retreat
+		UI::Box & columnbox = *new UI::Box(&linebox, 0, 0, UI::Box::Vertical);
+		linebox.add(&columnbox, UI::Box::AlignTop);
+
+		sprintf(buf, "%u %%", m_pl->get_retreat_percentage());
+
+		m_text_retreat =
+			&add_text(columnbox, buf, UI::Box::AlignCenter, UI_FONT_ULTRASMALL);
+
 		m_slider_retreat =
 			&add_slider
-				(linebox,
+				(columnbox,
 				 100, 10,
-				 0, 100, m_pl->get_retreat_percentage(),
+				 m_pl->tribe().get_military_data().get_min_retreat(),
+				 m_pl->tribe().get_military_data().get_max_retreat(),
+				 m_pl->get_retreat_percentage(),
 				 "slider.png",
 				 _("Supported damage before retreat"));
 		m_slider_retreat->changed.set(this, &AttackBox::update_attack);

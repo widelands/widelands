@@ -574,13 +574,20 @@ void Player::allow_retreat_change(bool allow) {
 	m_allow_retreat_change = allow;
 }
 
-/*
-===========
-===========
-*/
+/**
+ *   Added check limits of valid values. Percentage limits are configured at
+ * tribe level
+ * Automatically adjust value if out of limits.
+ */
 void Player::set_retreat_percentage(uint8_t percentage) {
-	assert(percentage < 101);
-	m_retreat_percentage = percentage;
+
+	if (tribe().get_military_data().get_min_retreat() > percentage)
+		m_retreat_percentage = tribe().get_military_data().get_min_retreat();
+	else
+	if (tribe().get_military_data().get_max_retreat() < percentage)
+		m_retreat_percentage = tribe().get_military_data().get_max_retreat();
+	else
+		m_retreat_percentage = percentage;
 }
 
 /**
