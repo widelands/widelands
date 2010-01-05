@@ -133,11 +133,19 @@ def parse_cli(env, buildtargets):
 
 ################################################################################
 
-def CheckPKG(context, name):
-	context.Message( 'Checking for %s... ' % name )
-	ret = context.TryAction('pkg-config --exists \'%s\'' % name)[0]
-	context.Result( not ret )
-	return ret
+def CheckPKG(context, env, names):
+    if not getattr(names, '__iter__', False):
+        names = [ names ]
+    pkgconfig = env['pkgconfig']
+    context.Message( 'Checking for %s... ' % names[0] )
+    for name in names:
+        ret = context.TryAction('%s --exists %s' % (pkgconfig,name))[0]
+        if ret:
+            env["lualib"] = name
+            context.Result( ret )
+            return ret
+    context.Result( False )
+    return False
 
 def CheckPKGConfig(context, version, env):
 	context.Message( 'Checking for pkg-config... ' )
@@ -371,11 +379,11 @@ def do_configure_libraries(conf, env):
 		print 'Could not find the png library! Is it installed?'
 		env.Exit(1)
 	
-	if conf.CheckPKG("lua"):
+	if not conf.CheckPKG(env, ("lua", "lua51")):
 		print 'Could not find the lua library! Is it installed?'
 		env.Exit(1)
 	else:
-		env.ParseConfig(env["pkgconfig"] + " lua --libs --cflags")
+		env.ParseConfig(env["pkgconfig"] + " " + env["lualib"] + " --libs --cflags")
 
 	if not conf.CheckLib(library='SDL_image', symbol='IMG_Load', autoadd=1):
 		print 'Could not find the SDL_image library! Is it installed?'
