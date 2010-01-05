@@ -116,6 +116,7 @@ private:
 	void writeSettingAllPlayers(SendPacket &);
 	void writeSettingUser(SendPacket &, uint32_t number);
 	void writeSettingAllUsers(SendPacket &);
+	bool writeMapTransferInfo(SendPacket &, std::string);
 
 	void disconnectPlayer
 		(uint8_t number,

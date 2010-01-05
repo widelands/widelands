@@ -541,18 +541,28 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 	case NETCMD_NEW_FILE_AVAILABLE: {
 		std::string path = g_fs->FileSystem::fixCrossFile(packet.String());
-		uint32_t bytes = packet.Unsigned32();
+		uint32_t bytes   = packet.Unsigned32();
+		std::string md5  = packet.String();
 
+		// Check whether the file or a file with that name already exists
 		if (g_fs->FileExists(path)) {
 			if (!g_fs->IsDirectory(path)) {
 				FileRead fr;
 				fr.Open(*g_fs, path.c_str());
-				// TODO use md5 sum instead.
 				if (bytes == fr.GetSize()) {
-					// everything is alright we already have the file.
-					return;
+					char complete[bytes];
+					fr.DataComplete(complete, bytes);
+					MD5Checksum<FileRead> md5sum;
+					md5sum.Data(complete, bytes);
+					md5sum.FinishChecksum();
+					std::string localmd5 = md5sum.GetChecksum().str();
+					if (localmd5 == md5)
+						// everything is alright we already have the file.
+						return;
 				}
 			}
+			// Don't overwrite the file, better rename the original one
+			g_fs->Rename(path, "backup-" + path);
 		}
 
 		// Yes we need the file!
@@ -566,12 +576,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 		file = new NetTransferFile();
 		file->bytes = bytes;
 		file->filename = path;
+		file->md5sum = md5;
 
-#ifndef WIN32
 		path.resize(path.rfind('/', path.size() - 2));
-#else
-		path.resize(path.rfind('\\', path.size() - 2));
-#endif
+
 		g_fs->EnsureDirectoryExists(path);
 		break;
 	}
@@ -584,6 +592,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		SendPacket s;
 		s.Unsigned8(NETCMD_FILE_PART);
 		s.Unsigned32(part);
+		s.String(file->md5sum);
 		s.send(d->sock);
 
 		FilePart fp;
@@ -599,6 +608,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			FileWrite fw;
 			left = file->bytes;
 			uint32_t i = 0;
+			// Put all data together
 			while (left > 0) {
 				uint8_t writeout
 					= (left > NETFILEPARTSIZE) ? NETFILEPARTSIZE : left;
@@ -606,7 +616,29 @@ void NetClient::handle_packet(RecvPacket & packet)
 				left -= writeout;
 				++i;
 			}
+			// Now really write the file
 			fw.Write(*g_fs, file->filename.c_str());
+
+			// Check for consistence
+			FileRead fr;
+			fr.Open(*g_fs, file->filename.c_str());
+			char complete[file->bytes];
+			fr.DataComplete(complete, file->bytes);
+			MD5Checksum<FileRead> md5sum;
+			md5sum.Data(complete, file->bytes);
+			md5sum.FinishChecksum();
+			std::string localmd5 = md5sum.GetChecksum().str();
+			if (localmd5 != file->md5sum) {
+				// Something went wrong! We have to rerequest the file.
+				s.reset();
+				s.Unsigned8(NETCMD_NEW_FILE_AVAILABLE);
+				s.send(d->sock);
+				// Notify the players
+				s.reset();
+				s.Unsigned8(NETCMD_CHAT);
+				s.String(_("/me 's file failed md5 checksumming."));
+				s.send(d->sock);
+			}
 		}
 		break;
 	}

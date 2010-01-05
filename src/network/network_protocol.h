@@ -29,7 +29,7 @@ enum {
 	 * The current version of the in-game network protocol. Client and host
 	 * protocol versions must match.
 	 */
-	NETWORK_PROTOCOL_VERSION = 13,
+	NETWORK_PROTOCOL_VERSION = 14,
 
 	/**
 	 * The default interval (in milliseconds) in which the host issues
@@ -342,7 +342,8 @@ enum {
 	 *
 	 * The host sends all needed data to prepare for the file transfer:
 	 * \li String: filename (path relative to standard path of filetype)
-	 * \li Unsigned32: how many parts will be send?
+	 * \li Unsigned32: how many bytes will be send?
+	 * \li String: md5sum
 	 *
 	 * Sent by the client as answer on the same message of the host as request.
 	 */
@@ -358,6 +359,7 @@ enum {
 	 *
 	 * Sent by the client to request the next part from the host.
 	 * \li Unsigned32: number of the last received part
+	 * \li String: md5sum - to ensure client and host are talking about the same
 	 */
 	NETCMD_FILE_PART = 25
 };

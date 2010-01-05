@@ -126,6 +126,7 @@ struct FilePart {
 struct NetTransferFile {
 	uint32_t bytes;
 	std::string filename;
+	std::string md5sum;
 	std::vector<FilePart> parts;
 };
 

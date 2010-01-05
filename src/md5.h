@@ -91,9 +91,9 @@ template <typename Base> struct MD5Checksum : public Base {
 	///
 	/// \param data data to compute chksum for
 	/// \param size size of data
-	void Data(const void * const data, const size_t size) {
+	void Data(const void * const newdata, const size_t size) {
 		assert(can_handle_data);
-		md5_process_bytes(data, size, &ctx);
+		md5_process_bytes(newdata, size, &ctx);
 	}
 
 	/// This function finishes the checksum calculation.

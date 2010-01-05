@@ -31,6 +31,7 @@
 #include "wui/interactive_dedicated_server.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
+#include "md5.h"
 #include "network_ggz.h"
 #include "network_lan_promotion.h"
 #include "network_protocol.h"
@@ -770,36 +771,37 @@ void NetHost::setMap
 	writeSettingAllPlayers(s);
 	broadcast(s);
 
+	// If possible, offer the map / savegame as transfer
 	// TODO not yet able to handle directory type maps / savegames
-	if (g_fs->IsDirectory(mapfilename)) {
-		log("Map/Save is a directory! No way for making it available a.t.m.!\n");
-		return;
+	if (!g_fs->IsDirectory(mapfilename)) {
+		// Read in the file
+		FileRead fr;
+		fr.Open(*g_fs, mapfilename.c_str());
+		if (file)
+			delete file;
+		file = new NetTransferFile();
+		file->filename = mapfilename;
+		uint32_t leftparts = file->bytes = fr.GetSize();
+		while (leftparts > 0) {
+			uint8_t readout
+				= (leftparts > NETFILEPARTSIZE) ? NETFILEPARTSIZE : leftparts;
+			FilePart fp;
+			memcpy(fp.part, fr.Data(readout), readout);
+			file->parts.push_back(fp);
+			leftparts -= readout;
+		}
+		char complete[file->bytes];
+		fr.SetFilePos(0);
+		fr.DataComplete(complete, file->bytes);
+		MD5Checksum<FileRead> md5sum;
+		md5sum.Data(complete, file->bytes);
+		md5sum.FinishChecksum();
+		file->md5sum = md5sum.GetChecksum().str();
 	}
 
-	// Read in the file
-	FileRead fr;
-	fr.Open(*g_fs, mapfilename.c_str());
-	if (file)
-		delete file;
-	file = new NetTransferFile();
-	file->filename = mapfilename;
-	uint32_t leftparts = file->bytes = fr.GetSize();
-	while (leftparts > 0) {
-		uint8_t readout
-			= (leftparts > NETFILEPARTSIZE) ? NETFILEPARTSIZE : leftparts;
-		FilePart fp;
-		memcpy(fp.part, fr.Data(readout), readout);
-		file->parts.push_back(fp);
-		leftparts -= readout;
-	}
-
-	// Broadcast new map file information, so client can decide whether it
-	// needs the file.
 	s.reset();
-	s.Unsigned8(NETCMD_NEW_FILE_AVAILABLE);
-	s.String(mapfilename);
-	s.Unsigned32(file->bytes);
-	broadcast(s);
+	if (writeMapTransferInfo(s, mapfilename))
+		broadcast(s);
 }
 
 void NetHost::setPlayerState
@@ -1089,6 +1091,29 @@ void NetHost::writeSettingAllUsers(SendPacket & packet)
 		writeSettingUser(packet, i);
 }
 
+
+/**
+* If possible, this function writes the MapTransferInfo to SendPacket & s
+*
+* \returns true if the data was written, else false
+*/
+bool NetHost::writeMapTransferInfo(SendPacket & s, std::string mapfilename) {
+	// TODO not yet able to handle directory type maps / savegames
+	if (g_fs->IsDirectory(mapfilename)) {
+		log("Map/Save is a directory! No way for making it available a.t.m.!\n");
+		return false;
+	}
+
+	// Write the new map/save file information, so client can decide whether it
+	// needs the file.
+	s.Unsigned8(NETCMD_NEW_FILE_AVAILABLE);
+	s.String(mapfilename);
+	s.Unsigned32(file->bytes);
+	s.String(file->md5sum);
+	return true;
+}
+
+
 /**
  *
  * \return a name for the given player.
@@ -1178,11 +1203,20 @@ void NetHost::welcomeClient
 			(_("WARNING: %s uses version: %s, while Host uses version: %s"),
 			 effective_name.c_str(), client.build_id.c_str(), build_id().c_str());
 
+	// Send information about currently selected map / savegame
 	s.reset();
 	s.Unsigned8(NETCMD_SETTING_MAP);
 	writeSettingMap(s);
 	s.send(client.sock);
 
+	// If possible, offer the map / savegame as transfer
+	if (file) {
+		s.reset();
+		if (writeMapTransferInfo(s, file->filename))
+			s.send(client.sock);
+	}
+
+	// The the tribe informations to the new client
 	s.reset();
 	s.Unsigned8(NETCMD_SETTING_TRIBES);
 	s.Unsigned8(d->settings.tribes.size());
@@ -1691,28 +1725,47 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 	}
 
 	case NETCMD_NEW_FILE_AVAILABLE: {
-		sendSystemChat
-			(_("Started to send file to %s"),
-			 d->settings.users.at(client.usernum).name.c_str());
 		if (!file) // Do we have a file for sending
 			throw DisconnectException
 				(_("Client requests file altough none is available to send."));
+		sendSystemChat
+			(_("Started to send file %s to %s!"),
+			 file->filename.c_str(),
+			 d->settings.users.at(client.usernum).name.c_str());
 		sendFilePart(client.sock, 0);
 		break;
 	}
 
 	case NETCMD_FILE_PART: {
+		if (!file) // Do we have a file for sending
+			throw DisconnectException
+				(_("Client requests file altough none is available to send."));
 		uint32_t part = r.Unsigned32();
+		log("part %u/%u\n", part, file->parts.size());
+		std::string x = r.String();
+		if (x != file->md5sum) {
+			log("checksum missmatch %s != %s", x.c_str(), file->md5sum.c_str());
+			return; // Surely the file was changed, so we cancel here.
+		}
+
 		if (part >= file->parts.size())
 			throw DisconnectException
 				(_("Client requests file part that does not exist."));
 		if (part == file->parts.size() - 1) {
 			sendSystemChat
-				(_("Completed transfer to %s"),
+				(_("Completed transfer of file %s to %s"),
+				 file->filename.c_str(),
 				 d->settings.users.at(client.usernum).name.c_str());
 			return;
 		}
-		sendFilePart(client.sock, part + 1);
+		++part;
+		if (part % 100 == 0)
+			sendSystemChat
+				(_("Sending part %u/%u of file %s to %s"),
+				 part, (file->parts.size() + 1),
+				 file->filename.c_str(),
+				 d->settings.users.at(client.usernum).name.c_str());
+		sendFilePart(client.sock, part);
 		break;
 	}
 
