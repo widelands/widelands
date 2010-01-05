@@ -802,7 +802,7 @@ void Soldier::attack_update(Game & game, State & state)
 	// Count remaining defenders
 	if (enemy) {
 		if (upcast(MilitarySite, ms, enemy)) {
-			defenders = ms->presentSoldiers().size();
+			defenders = ms->stationedSoldiers().size();
 		}
 		if (upcast(Warehouse, wh, enemy)) {
 			Requirements noreq;
