@@ -162,6 +162,7 @@ struct Game : public Editor_Game_Base {
 	void send_player_change_soldier_capacity(Building &, int32_t);
 	void send_player_enemyflagaction
 		(Flag const &, Player_Number, uint32_t count, uint8_t retreat);
+	void send_player_changemilitaryconfig(Player_Number, uint8_t);
 
 	Interactive_Player * get_ipl();
 

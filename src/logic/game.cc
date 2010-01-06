@@ -786,6 +786,13 @@ void Game::send_player_enemyflagaction
 }
 
 
+void Game::send_player_changemilitaryconfig
+	(Player_Number const pid, uint8_t const retreat)
+{
+	send_player_command
+		(*new Cmd_ChangeMilitaryConfig(get_gametime(), pid, retreat));
+}
+
 /**
  * Sample global statistics for the game.
  */

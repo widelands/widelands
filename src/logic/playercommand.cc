@@ -55,7 +55,8 @@ enum {
 	PLCMD_SETWARETARGETQUANTITY,
 	PLCMD_RESETWARETARGETQUANTITY,
 	PLCMD_SETWORKERTARGETQUANTITY,
-	PLCMD_RESETWORKERTARGETQUANTITY
+	PLCMD_RESETWORKERTARGETQUANTITY,
+	PLCMD_CHANGEMILITARYCONFIG
 };
 
 /*** class PlayerCommand ***/
@@ -1238,6 +1239,81 @@ void Cmd_EnemyFlagAction::Write
 	fw.Unsigned8 (sender());
 	fw.Unsigned8 (number);
 	fw.Unsigned8 (retreat);
+}
+
+/*** Cmd_ChangeMilitaryConfig ***/
+
+Cmd_ChangeMilitaryConfig::Cmd_ChangeMilitaryConfig(StreamRead & des)
+:
+PlayerCommand (0, des.Unsigned8())
+{
+	retreat = des.Unsigned8();
+	/// Read reserved data
+	des.Unsigned8();
+	des.Unsigned8();
+}
+
+void Cmd_ChangeMilitaryConfig::execute (Game & game)
+{
+	game.get_player(sender())->set_retreat_percentage(retreat);
+}
+
+void Cmd_ChangeMilitaryConfig::serialize (StreamWrite & ser)
+{
+	ser.Unsigned8 (PLCMD_CHANGEMILITARYCONFIG);
+	ser.Unsigned8 (sender());
+	ser.Unsigned8 (retreat);
+	/// Serialize reserved data
+	ser.Unsigned8 (0);
+	ser.Unsigned8 (0);
+}
+
+#define PLAYER_CMD_CHANGEMILITARYCONFIG_VERSION 1
+void Cmd_ChangeMilitaryConfig::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+{
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_CMD_CHANGEMILITARYCONFIG_VERSION) {
+			PlayerCommand::Read(fr, egbase, mol);
+			Player * plr = egbase.get_player(sender());
+			assert(plr);
+			retreat = fr.Unsigned8();
+			if
+				(retreat < plr->tribe().get_military_data().get_min_retreat()
+				 or
+				 retreat > plr->tribe().get_military_data().get_max_retreat())
+				throw game_data_error
+					(_("retreat: value out of range. Received %u expected %u-%u"),
+					 retreat,
+					 plr->tribe().get_military_data().get_min_retreat(),
+					 plr->tribe().get_military_data().get_max_retreat());
+			/// Read reserved data
+			fr.Unsigned8();
+			fr.Unsigned8();
+		} else
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error(_("change military config: %s"), e.what());
+	}
+}
+
+void Cmd_ChangeMilitaryConfig::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+{
+	// First, write version
+	fw.Unsigned16(PLAYER_CMD_CHANGEMILITARYCONFIG_VERSION);
+	// Write base classes
+	PlayerCommand::Write(fw, egbase, mos);
+
+	// Now retreat
+	fw.Unsigned8(retreat);
+
+	// Reserved for future versions
+	fw.Unsigned8(0);
+	fw.Unsigned8(0);
+
 }
 
 }

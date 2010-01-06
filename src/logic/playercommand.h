@@ -461,6 +461,32 @@ private:
 	uint8_t       retreat;
 };
 
+// This is at very early stage, more vars should be added
+struct Cmd_ChangeMilitaryConfig : public PlayerCommand {
+	Cmd_ChangeMilitaryConfig() : PlayerCommand() {} // For savegame loading
+	Cmd_ChangeMilitaryConfig
+		(int32_t      const t,
+		 int32_t      const p,
+		 uint32_t     const ret)
+		: PlayerCommand(t, p), retreat(ret)
+	{}
+
+	// Write these commands to a file (for savegames)
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_CHANGEMILITARYCONFIG;}
+
+	Cmd_ChangeMilitaryConfig (StreamRead &);
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+
+private:
+	Serial        serial;
+	// By now only retreat info is stored
+	uint8_t       retreat;
+};
 }
 
 #endif

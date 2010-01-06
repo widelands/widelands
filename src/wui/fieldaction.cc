@@ -37,6 +37,7 @@
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
+#include "military_box.h"
 #include "watchwindow.h"
 
 #include "ui_basic/box.h"
@@ -233,6 +234,7 @@ private:
 
 static char const * const pic_tab_buildroad  = "pics/menu_tab_buildroad.png";
 static char const * const pic_tab_watch      = "pics/menu_tab_watch.png";
+static char const * const pic_tab_military   = "pics/menu_tab_military.png";
 static char const * const pic_tab_buildhouse[] = {
 	"pics/menu_tab_buildsmall.png",
 	"pics/menu_tab_buildmedium.png",
@@ -358,6 +360,7 @@ void FieldActionWindow::add_buttons_auto()
 {
 	UI::Box * buildbox = 0;
 	UI::Box * watchbox;
+	UI::Box * militarybox;
 
 	watchbox = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
@@ -469,6 +472,8 @@ void FieldActionWindow::add_buttons_auto()
 			 &FieldActionWindow::act_debug,
 			 _("Debug window"));
 
+	militarybox = new MilitaryBox(&m_tabpanel, m_plr, 0, 0);
+
 	// Add tabs
 	if (buildbox && buildbox->get_nritems()) {
 		buildbox->resize();
@@ -477,6 +482,15 @@ void FieldActionWindow::add_buttons_auto()
 
 	watchbox->resize();
 	add_tab(pic_tab_watch, watchbox, _("Watch"));
+
+	if (upcast(MilitaryBox, mb, militarybox)) {
+		if (mb->allowed_change()) {
+			militarybox->resize();
+			add_tab(pic_tab_military, militarybox, _("Military settings"));
+		} else {
+			delete militarybox;
+		}
+	}
 }
 
 void FieldActionWindow::add_buttons_attack ()
