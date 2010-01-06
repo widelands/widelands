@@ -112,7 +112,7 @@ Fullscreen_Menu_LaunchGame::Fullscreen_Menu_LaunchGame
 		 m_xres * 16 / 25, m_yres * 53 / 200),
 	m_notes
 		(this,
-		 m_xres * 2 / 25, m_yres * 9 / 50, m_xres * 21 / 25, m_yres / 10),
+		 m_xres * 2 / 25, m_yres * 9 / 50, m_xres * 21 / 25, m_yres / 11),
 
 // Variables and objects used in the menu
 	m_settings     (settings),
@@ -244,8 +244,9 @@ void Fullscreen_Menu_LaunchGame::start_clicked()
 			 	 "found at given path.\n"
 			 	 "The file was: %s\n"
 			 	 "If this happens in a network game, the host might have selected "
-			 	 "a file that you do not have. In that case you should ask the "
-			 	 "host to send you the file."),
+			 	 "a file that you do not own. Normally such a file should be send "
+			 	 "from the host to you, but perhaps the transfer was not yet "
+				 "finnished!?!"),
 			 m_filename.c_str());
 	if (m_settings->canLaunch()) {
 		if (!m_is_savegame)
@@ -306,10 +307,12 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	// Print warnings and information between title and player desc. group
 	if (!g_fs->FileExists(m_filename)) {
 		m_notes.set_text
-				(_("WARNING!!! Host selected file \"")
-				 + m_filename
-				 + _("\" for this game, but you do not have it.")
-				 + _(" Please add it manually."));
+			(_("WARNING!!! Host selected the file \"")
+			 + m_filename
+			 + _
+			    ("\" for this game, which you do not own. If the transfer of that "
+			     "file does not start automatically, please add it manually to "
+			     "your filesystem."));
 		for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
 			m_players[i]->refresh();
 		m_notes.set_color(UI_FONT_CLR_WARNING);

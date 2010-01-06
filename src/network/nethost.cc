@@ -1741,13 +1741,13 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			throw DisconnectException
 				(_("Client requests file altough none is available to send."));
 		uint32_t part = r.Unsigned32();
-		log("part %u/%u\n", part, file->parts.size());
 		std::string x = r.String();
 		if (x != file->md5sum) {
-			log("checksum missmatch %s != %s", x.c_str(), file->md5sum.c_str());
+			log
+				("[host] File transfer checksum missmatch %s != %s\n",
+				 x.c_str(), file->md5sum.c_str());
 			return; // Surely the file was changed, so we cancel here.
 		}
-
 		if (part >= file->parts.size())
 			throw DisconnectException
 				(_("Client requests file part that does not exist."));
