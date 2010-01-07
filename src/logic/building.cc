@@ -621,8 +621,7 @@ void Building::act(Game & game, uint32_t const data)
 {
 	uint32_t const time = game.get_gametime();
 
-	if (static_cast<int32_t>(time - m_leave_time) >= 0)
-	{
+	if (m_leave_time <= time) {
 		bool wakeup = false;
 
 		// Wake up one worker

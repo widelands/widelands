@@ -2099,7 +2099,7 @@ void Worker::start_task_leavebuilding(Game & game, bool const changelocation)
 
 void Worker::leavebuilding_update(Game & game, State & state)
 {
-	std::string signal = get_signal();
+	std::string const signal = get_signal();
 
 	if (signal == "wakeup")
 		signal_handled();
@@ -2132,8 +2132,8 @@ void Worker::leavebuilding_pop(Game & game, State & state)
 	// is interrupted by a signal. Putting this in the pop() method is just
 	// defensive programming, in case leavebuilding_update() changes
 	// in the future.
-	if (upcast(Building, building, state.objvar1.get(game)))
-		building->leave_skip(game, *this);
+	ref_cast<Building, Map_Object>(*state.objvar1.get(game))
+	.leave_skip(game, *this);
 }
 
 
