@@ -19,6 +19,7 @@
 
 #include "productionsite.h"
 
+#include "carrier.h"
 #include "economy/economy.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
@@ -30,11 +31,11 @@
 #include "map.h"
 #include "player.h"
 #include "profile/profile.h"
+#include "soldier.h"
 #include "tribe.h"
 #include "upcast.h"
 #include "warelist.h"
 #include "wexception.h"
-#include "worker.h"
 #include "world.h"
 
 #include <libintl.h>
@@ -642,20 +643,32 @@ bool ProductionSite::get_building_work
 			Worker_Descr const & worker_descr =
 				*tribe().get_worker_descr(worker_type_with_count.first);
 			{
-				Worker & recruit = *new Worker(worker_descr);
-				recruit.set_owner(&worker.owner());
-				recruit.set_position(game, worker.get_position());
-				recruit.init(game);
+				Worker * recruit;
+				if (worker_descr.get_worker_type() == Worker_Descr::CARRIER)
+					if (upcast(const Carrier::Descr, carrier_descr, &worker_descr))
+						recruit = new Carrier(*carrier_descr);
+					else
+						throw wexception("Error: this carrier is no carrier!");
+				else if (worker_descr.get_worker_type() == Worker_Descr::SOLDIER)
+					if (upcast(const Soldier_Descr, soldier_descr, &worker_descr))
+						recruit = new Soldier(*soldier_descr);
+					else
+						throw wexception("Error: this soldier is no soldier!");
+				else
+					recruit = new Worker(worker_descr);
+				recruit->set_owner(&worker.owner());
+				recruit->set_position(game, worker.get_position());
+				recruit->init(game);
 #if 0
-				recruit.start_task_move
+				recruit->start_task_move
 					(game,
 					 WALK_SE,
-					 &recruit.descr().get_right_walk_anims(false),
+					 &recruit->descr().get_right_walk_anims(false),
 					 true);
 #else
-				recruit.start_task_gowarehouse(game);
+				recruit->start_task_gowarehouse(game);
 #endif
-				worker.start_task_releaserecruit(game, recruit);
+				worker.start_task_releaserecruit(game, *recruit);
 			}
 		}
 		assert(worker_type_with_count.second);
