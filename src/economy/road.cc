@@ -381,10 +381,10 @@ void Road::_request_carrier_callback
 	assert(w);
 
 	Road    & road    = ref_cast<Road,    PlayerImmovable>(target);
-	Carrier & carrier = ref_cast<Carrier, Worker>         (*w);
 
 	container_iterate(SlotVector, road.m_carrier_slots, i)
 		if (i.current->carrier_request == &rq) {
+			Carrier & carrier = ref_cast<Carrier, Worker>         (*w);
 			i.current->carrier_request = 0;
 			i.current->carrier = &carrier;
 
@@ -394,7 +394,7 @@ void Road::_request_carrier_callback
 		}
 
 	delete &rq;
-	carrier.start_task_gowarehouse(game);
+	w->start_task_gowarehouse(game);
 }
 
 /**

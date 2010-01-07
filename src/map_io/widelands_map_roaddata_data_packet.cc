@@ -132,27 +132,30 @@ throw (_wexception)
 					}
 
 					for (int i = 0; i < count; i++) {
-						assert(!road.m_carrier_slots[i].carrier.get(egbase));
+						Carrier * carrier = 0;
+						Request * carrier_request = 0;
+						uint8_t carrier_type;
+
+
 						if (uint32_t const carrier_serial = fr.Unsigned32())
 							try {
 								//log("Read carrier serial %u", carrier_serial);
-								road.m_carrier_slots[i].carrier =
-									&ol->get<Carrier>(carrier_serial);
+								carrier = &ol->get<Carrier>(carrier_serial);
 							} catch (_wexception const & e) {
 								throw game_data_error
 									("carrier (%u): %s", carrier_serial, e.what());
 							}
 						else {
-							road.m_carrier_slots[i].carrier = 0;
+							carrier = 0;
 							//log("No carrier in this slot");
 						}
 
-						delete road.m_carrier_slots[i].carrier_request;
-						road.m_carrier_slots[i].carrier_request = 0;
+						//delete road.m_carrier_slots[i].carrier_request;
+						//carrier_request = 0;
 
 						if (fr.Unsigned8()) {
 							//log("Reading request");
-							(road.m_carrier_slots[i].carrier_request =
+							(carrier_request =
 							 	new Request
 							 		(road,
 							 		 Ware_Index::First(),
@@ -161,14 +164,42 @@ throw (_wexception)
 							->Read(fr, ref_cast<Game, Editor_Game_Base>(egbase), ol);
 						}
 						else {
-							road.m_carrier_slots[i].carrier_request = 0;
+							carrier_request = 0;
 							//log("No request in this slot");
 						}
 						if (3 <= packet_version)
-							road.m_carrier_slots[i].carrier_type =
-								fr.Unsigned32();
+							carrier_type = fr.Unsigned32();
 						else
-							road.m_carrier_slots[i].carrier_type = 1;
+							carrier_type = 1;
+
+						if
+							(i < road.m_carrier_slots.size() and
+							 road.m_carrier_slots[i].carrier_type == carrier_type)
+						{
+							assert(!road.m_carrier_slots[i].carrier.get(egbase));
+
+							road.m_carrier_slots[i].carrier = carrier;
+							if (carrier or carrier_request)
+							{
+								delete road.m_carrier_slots[i].carrier_request;
+								road.m_carrier_slots[i].carrier_request =
+									carrier_request;
+							}
+						}
+						else
+						{
+							delete carrier_request;
+							if (carrier)
+							{
+								//carrier->set_location (0);
+								carrier->reset_tasks
+									(ref_cast<Game,
+									 Editor_Game_Base>(egbase));
+								//carrier->send_signal
+								//(ref_cast<Game,
+								//Editor_Game_Base>(egbase), "location");
+							}
+						}
 					}
 
 					ol->mark_object_as_loaded(&road);
@@ -232,7 +263,6 @@ throw (_wexception)
 
 
 				fw.Unsigned32(r->m_carrier_slots.size());
-				log("Writing slot number %u", r->m_carrier_slots.size());
 
 				container_iterate_const
 					(std::vector<Road::CarrierSlot>, r->m_carrier_slots, iter)

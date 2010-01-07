@@ -1,5 +1,8 @@
 help=_Helps to carry items at heavy used roads.
 
+[buildcost]
+carrier=1
+
 [idle]
 pics=wisent_idle_se_??.png
 hotspot=16 21
