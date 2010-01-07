@@ -81,9 +81,9 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 	case PLCMD_RESETWARETARGETQUANTITY:
 		return new Cmd_ResetWareTargetQuantity  (des);
 	case PLCMD_SETWORKERTARGETQUANTITY:
-		return new Cmd_SetWareTargetQuantity    (des);
+		return new Cmd_SetWorkerTargetQuantity  (des);
 	case PLCMD_RESETWORKERTARGETQUANTITY:
-		return new Cmd_ResetWareTargetQuantity  (des);
+		return new Cmd_ResetWorkerTargetQuantity(des);
 	case PLCMD_CHANGETRAININGOPTIONS: return new Cmd_ChangeTrainingOptions(des);
 	case PLCMD_DROPSOLDIER:           return new Cmd_DropSoldier          (des);
 	case PLCMD_CHANGESOLDIERCAPACITY: return new Cmd_ChangeSoldierCapacity(des);
@@ -94,7 +94,7 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 	}
 }
 
-/*
+/**
  * Write this player command to a file. Call this from base classes
  */
 #define PLAYER_COMMAND_VERSION 2
