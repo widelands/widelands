@@ -809,12 +809,15 @@ void Economy::_create_requested_workers(Game & game)
 							}
 						}
 						Warehouse & nearest = *m_warehouses[nth_wh];
-						Worker_Descr::Buildcost const & cost = w_desc.buildcost();
-						container_iterate_const(Worker_Descr::Buildcost, cost, bc_it)
-							if
-								(Ware_Index const w_id =
-								 	tribe.ware_index(bc_it.current->first.c_str()))
-								nearest.set_needed(w_id, bc_it.current->second);
+						if (w_desc.buildable()) {
+							Worker_Descr::Buildcost const & cost = w_desc.buildcost();
+							container_iterate_const
+								(Worker_Descr::Buildcost, cost, bc_it)
+								if
+									(Ware_Index const w_id =
+									 	tribe.ware_index(bc_it.current->first.c_str()))
+									nearest.set_needed(w_id, bc_it.current->second);
+						}
 					}
 				} // if (num_wares == 0)
 			} // if (req->is_open())

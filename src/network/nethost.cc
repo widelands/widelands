@@ -1216,7 +1216,7 @@ void NetHost::welcomeClient
 			s.send(client.sock);
 	}
 
-	// The the tribe informations to the new client
+	//  Send the tribe information to the new client.
 	s.reset();
 	s.Unsigned8(NETCMD_SETTING_TRIBES);
 	s.Unsigned8(d->settings.tribes.size());

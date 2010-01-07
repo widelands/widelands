@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2009 by the Widelands Development Team
+ * Copyright (C) 2004-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,8 @@
 
 #include "build_info.h"
 #include "constants.h"
+
+#include "container_iterate.h"
 
 #include <cstdio>
 #include <cstring>
@@ -121,7 +123,8 @@ ssize_t LAN_Base::recv
 			 &addrlen);
 }
 
-void LAN_Base::send (void const * buf, size_t len, sockaddr_in const * addr)
+void LAN_Base::send
+	(void const * const buf, size_t const len, sockaddr_in const * const addr)
 {
 	sendto
 		(sock,
@@ -132,17 +135,16 @@ void LAN_Base::send (void const * buf, size_t len, sockaddr_in const * addr)
 		 sizeof(sockaddr_in));
 }
 
+//  FIXME Document why this pragma is needed and what is done about it (see how
+//  FIXME other uses of this pragmas are documented).
 #pragma GCC diagnostic warning "-Wold-style-cast"
-void LAN_Base::broadcast (void const * buf, size_t len, uint16_t port)
+void LAN_Base::broadcast
+	(void const * const buf, size_t const len, uint16_t const port)
 {
-	for
-		(std::list<in_addr_t>::iterator i = broadcast_addresses.begin();
-		 i != broadcast_addresses.end();
-		 ++i)
-	{
+	container_iterate_const(std::list<in_addr_t>, broadcast_addresses, i) {
 		sockaddr_in addr;
 		addr.sin_family      = AF_INET;
-		addr.sin_addr.s_addr = *i;
+		addr.sin_addr.s_addr = *i.current;
 		addr.sin_port        = htons(port);
 
 		sendto
@@ -238,6 +240,8 @@ void LAN_Game_Finder::reset ()
 }
 
 
+//  FIXME Document why this pragma is needed and what is done about it (see how
+//  FIXME other uses of this pragmas are documented).
 #pragma GCC diagnostic warning "-Wold-style-cast"
 void LAN_Game_Finder::run ()
 {
@@ -258,27 +262,25 @@ void LAN_Game_Finder::run ()
 		if (info.version != LAN_PROMOTION_PROTOCOL_VERSION)
 			continue;
 
-		std::list<Net_Open_Game *>::iterator i;
 		//  if the game already is in the list, update the information
-		for (i = opengames.begin(); i != opengames.end(); ++i) {
-			if ((*i)->address == addr.sin_addr.s_addr) {
-				(*i)->info = info;
-
-				callback (GameUpdated, *i, userdata);
+		//  otherwise just append it to the list
+		for
+			(struct {
+			 	std::list<Net_Open_Game *>::const_iterator       current;
+			 	std::list<Net_Open_Game *>::const_iterator const end;
+			 } i = {opengames.begin(), opengames.end()};;)
+			if (i.current == i.end) {
+				opengames.push_back (new Net_Open_Game);
+				opengames.back()->address = addr.sin_addr.s_addr;
+				opengames.back()->port    = htons(WIDELANDS_PORT);
+				opengames.back()->info    = info;
+				callback (GameOpened, opengames.back(), userdata);
+				break;
+			} else if ((*i.current)->address == addr.sin_addr.s_addr) {
+				(*i.current)->info = info;
+				callback (GameUpdated, *i.current, userdata);
 				break;
 			}
-		}
-
-		//  otherwise just append it to the list
-		if (i == opengames.end()) {
-			opengames.push_back (new Net_Open_Game);
-
-			opengames.back()->address = addr.sin_addr.s_addr;
-			opengames.back()->port    = htons(WIDELANDS_PORT);
-			opengames.back()->info    = info;
-
-			callback (GameOpened, opengames.back(), userdata);
-		}
 	}
 }
 #pragma GCC diagnostic error "-Wold-style-cast"

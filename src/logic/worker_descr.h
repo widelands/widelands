@@ -60,7 +60,11 @@ public:
 
 	virtual void load_graphics();
 
-	Buildcost const & buildcost() const throw () {return m_buildcost;}
+	bool buildable() const {return m_buildable;}
+	Buildcost const & buildcost() const throw () {
+		assert(buildable());
+		return m_buildcost;
+	}
 
 	const Tribe_Descr * get_tribe() const throw () {return m_owner_tribe;}
 	const Tribe_Descr & tribe() const throw () {return *m_owner_tribe;}
@@ -120,6 +124,7 @@ protected:
 	PictureID         m_icon;       ///< Pointer to icon into picture stack
 	DirAnimations m_walk_anims;
 	DirAnimations m_walkload_anims;
+	bool              m_buildable;
 	Buildcost     m_buildcost;
 	int32_t           m_max_experience;
 	int32_t           m_min_experience;

@@ -364,4 +364,4 @@ enum {
 	NETCMD_FILE_PART = 25
 };
 
-#endif // NETWORK_PROTOCOL_H
+#endif

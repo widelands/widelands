@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -246,7 +246,7 @@ void Fullscreen_Menu_LaunchGame::start_clicked()
 			 	 "If this happens in a network game, the host might have selected "
 			 	 "a file that you do not own. Normally such a file should be send "
 			 	 "from the host to you, but perhaps the transfer was not yet "
-				 "finnished!?!"),
+			 	 "finnished!?!"),
 			 m_filename.c_str());
 	if (m_settings->canLaunch()) {
 		if (!m_is_savegame)
@@ -307,12 +307,12 @@ void Fullscreen_Menu_LaunchGame::refresh()
 	// Print warnings and information between title and player desc. group
 	if (!g_fs->FileExists(m_filename)) {
 		m_notes.set_text
-			(_("WARNING!!! Host selected the file \"")
-			 + m_filename
-			 + _
-			    ("\" for this game, which you do not own. If the transfer of that "
-			     "file does not start automatically, please add it manually to "
-			     "your filesystem."));
+			(_("WARNING!!! Host selected the file \"") +
+			 m_filename +
+			 _
+			 	("\" for this game, which you do not own. If the transfer of that "
+			 	 "file does not start automatically, please add it manually to "
+			 	 "your filesystem."));
 		for (uint32_t i = 0; i < MAX_PLAYERS; ++i)
 			m_players[i]->refresh();
 		m_notes.set_color(UI_FONT_CLR_WARNING);

@@ -73,10 +73,13 @@ ChatDisplay::ChatDisplay
 {}
 ChatDisplay::~ChatDisplay()
 {
-	// Finally delete all left message pictures
-	for (uint32_t i = 0; i < m_cache_id.size(); ++i)
-		if (m_cache_id[i] != g_gr->get_no_picture())
-			UI::g_fh->delete_widget_cache(m_cache_id[i]);
+	delete_all_left_message_pictures();
+}
+
+void ChatDisplay::delete_all_left_message_pictures() {
+	container_iterate_const(std::vector<PictureID>, m_cache_id, i)
+		if (*i.current != g_gr->get_no_picture())
+			UI::g_fh->delete_widget_cache(*i.current);
 }
 
 void ChatDisplay::setChatProvider(ChatProvider & chat)
@@ -96,12 +99,10 @@ void ChatDisplay::draw(RenderTarget & dst)
 
 	// delete pictures of all old messages that we won't use again
 	// this is important to save space
-	for (uint32_t i = 0; i < m_cache_id.size(); ++i)
-		if (m_cache_id[i] != g_gr->get_no_picture())
-			UI::g_fh->delete_widget_cache(m_cache_id[i]);
+	delete_all_left_message_pictures();
 	m_cache_id.resize(0);
 
-	int32_t now = time(0);
+	int32_t const now = time(0);
 
 	std::vector<ChatMessage> const & msgs = m_chat->getMessages();
 	std::vector<Displayed> displaylist;
@@ -534,8 +535,17 @@ void Interactive_Player::cmdLua(std::vector<std::string> const & args)
 	std::string cmd;
 
 	// Drop lua, start with the second word
-	for (uint32_t i = 1; i < args.size(); i++)
-		cmd += args[i] + " ";
+	for
+		(struct {
+		 	std::vector<std::string>::const_iterator       current;
+		 	std::vector<std::string>::const_iterator const end;
+		 } i = {args.begin() + 1, args.end()};;)
+	{
+		cmd += *i.current;
+		if (++i.current == i.end)
+			break;
+		cmd += ' ';
+	}
 
 	DebugConsole::write("Starting Lua interpretation!");
 	LuaInterface & lua = game().lua();

@@ -45,6 +45,7 @@ Worker_Descr::Worker_Descr
 	m_helptext(global_s.get_string("help", "")),
 	m_icon_fname(directory + "/menu.png"),
 	m_icon(g_gr->get_no_picture()),
+	m_buildable     (false),
 	m_max_experience(-1),
 	m_min_experience(-1),
 	m_becomes (Ware_Index::Null())
@@ -55,7 +56,8 @@ Worker_Descr::Worker_Descr
 		global_s.get_positive
 			("default_target_quantity", std::numeric_limits<uint32_t>::max());
 
-	if (Section * const s = prof.get_section("buildcost"))
+	if (Section * const s = prof.get_section("buildcost")) {
+		m_buildable = true;
 		while (Section::Value const * const val = s->get_next_val())
 			try {
 				std::string const input = val->get_name();
@@ -78,6 +80,7 @@ Worker_Descr::Worker_Descr
 					("[buildcost] \"%s=%s\": %s",
 					 val->get_name(), val->get_string(), e.what());
 			}
+	}
 
 	// Read the walking animations
 	m_walk_anims.parse

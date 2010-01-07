@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -893,29 +893,29 @@ bool Warehouse::can_create_worker(Game &, Ware_Index const worker) const {
 			("worker type %d does not exists (max is %d)",
 			 worker.value(), m_supply->get_workers().get_nrwareids().value());
 
-	if (Worker_Descr const * const w_desc = tribe().get_worker_descr(worker)) {
-		// Now see if we have the resources
-		Worker_Descr::Buildcost const & buildcost = w_desc->buildcost();
-		container_iterate_const(Worker_Descr::Buildcost, buildcost, it) {
-			std::string const & input_name = it.current->first;
-			if (Ware_Index id_w = tribe().ware_index(input_name)) {
-				if (m_supply->stock_wares  (id_w) < it.current->second)
-					return false;
-			} else if ((id_w = tribe().worker_index(input_name))) {
-				if (m_supply->stock_workers(id_w) < it.current->second)
-					return false;
-			} else
-				throw wexception
-					("worker type %s needs \"%s\" to be built but that is neither "
-					 "a ware type nor a worker type defined in the tribe %s",
-					 w_desc->descname().c_str(), input_name.c_str(),
-					 tribe().name().c_str());
-		}
-		return true;
+	Worker_Descr const & w_desc = *tribe().get_worker_descr(worker);
+	assert(&w_desc);
+	if (not w_desc.buildable())
+		return false;
+
+	//  see if we have the resources
+	Worker_Descr::Buildcost const & buildcost = w_desc.buildcost();
+	container_iterate_const(Worker_Descr::Buildcost, buildcost, it) {
+		std::string const & input_name = it.current->first;
+		if (Ware_Index id_w = tribe().ware_index(input_name)) {
+			if (m_supply->stock_wares  (id_w) < it.current->second)
+				return false;
+		} else if ((id_w = tribe().worker_index(input_name))) {
+			if (m_supply->stock_workers(id_w) < it.current->second)
+				return false;
+		} else
+			throw wexception
+				("worker type %s needs \"%s\" to be built but that is neither "
+				 "a ware type nor a worker type defined in the tribe %s",
+				 w_desc.descname().c_str(), input_name.c_str(),
+				 tribe().name().c_str());
 	}
-	else
-		throw wexception
-			("Can not create worker of desired type : %d", worker.value());
+	return true;
 }
 
 

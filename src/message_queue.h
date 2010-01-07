@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -117,27 +117,29 @@ struct MessageQueue {
 	 * \note This code has been moved here from militarysite.cc
 	 */
 	static void addWithTimeout
-		(Game & game, Player_Number const player_number,
-		 uint32_t timeout, uint32_t radius,
-		 Message const m)
+		(Game        &       game,
+		 Player_Number const player_number,
+		 uint32_t      const timeout,
+		 uint32_t      const radius,
+		 Message       const m)
 	{
-		Map & map  = game.map();
+		Map const & map  = game.map();
 
 		Coords const coords = m.get_coords();
 		std::vector<Message> & msgQueue = MessageQueue::get(player_number);
 		for
 			(struct {
-				std::vector<Message>::const_iterator current;
-				std::vector<Message>::const_iterator const end;
-			} i = {msgQueue.begin(), msgQueue.end()};;
-			++i.current)
+			 	std::vector<Message>::const_iterator       current;
+			 	std::vector<Message>::const_iterator const end;
+			 } i = {msgQueue.begin(), msgQueue.end()};;
+			 ++i.current)
 			if (i.current == i.end) {
 				MessageQueue::add (player_number, m);
 				break;
 			} else if
 				(i.current->sender() == m.sender() and
-				map.calc_distance(i.current->get_coords(), coords) <= radius and
-				game.get_gametime() - i.current->time() < timeout)
+				 map.calc_distance(i.current->get_coords(), coords) <= radius and
+				 game.get_gametime() - i.current->time() < timeout)
 				break;
 	}
 

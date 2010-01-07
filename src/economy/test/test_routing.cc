@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2007-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  *
  */
 
+//  FIXME remove this pragma when boost-1.40 is required (when it has been
+//  FIXME accepted by distributions)
 #pragma GCC diagnostic ignored "-Wold-style-cast"
 
 #include "logic/widelands_geometry.h"

@@ -585,15 +585,16 @@ void Worker::informPlayer
 		(game, building.owner().player_number(),
 		 60000, 0,
 		 Message::create_building_message
-			(MSG_MINE,
-			 game.get_gametime(),
-			 _("Out of ") + res_type,
-				  "<p font-size=14 font-face=FreeSerif>"
-				+ std::string
-					 (_("This worker cannot find any more resources"
-					  " of the following type: "))
-				+ res_type + "</p>",
-			 building));
+		 	(MSG_MINE,
+		 	 game.get_gametime(),
+		 	 _("Out of ") + res_type,
+		 	 "<p font-size=14 font-face=FreeSerif>" +
+		 	 	std::string
+		 	 		(_
+		 	 		 	("This worker cannot find any more resources of the "
+		 	 		 	 "following type: "))
+		 	 	+ res_type + "</p>",
+		 	 building));
 }
 
 
