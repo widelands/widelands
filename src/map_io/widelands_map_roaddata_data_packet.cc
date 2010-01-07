@@ -121,17 +121,17 @@ throw (_wexception)
 
 					road.m_idle_index      = fr.Unsigned32();
 
-					int count = 1;
-					if (2 >= packet_version) {
-						fr.Unsigned32();
-						//log("Reading savegame with packet version <= 2\n");
-					} else if (3 >= packet_version) {
-						count = fr.Unsigned32();
-						//log("Reading savegame with packet version 3\n");
-						//log("Road has %u slots.\n", count);
-					}
+					uint32_t const count = fr.Unsigned32();
+					if (not count)
+						throw game_data_error(_("no carrier slot"));
+					if (packet_version <= 2 and 1 < count)
+						throw game_data_error
+							(_
+							 	("expected 1 but found %u carrier slots in road saved "
+							 	 "with packet version 2 (old)"),
+							 count);
 
-					for (int i = 0; i < count; i++) {
+					for (uint32_t i = 0; i < count; ++i) {
 						Carrier * carrier = 0;
 						Request * carrier_request = 0;
 						uint8_t carrier_type;
@@ -162,8 +162,7 @@ throw (_wexception)
 							 		 Road::_request_carrier_callback,
 							 		 Request::WORKER))
 							->Read(fr, ref_cast<Game, Editor_Game_Base>(egbase), ol);
-						}
-						else {
+						} else {
 							carrier_request = 0;
 							//log("No request in this slot");
 						}
@@ -179,18 +178,14 @@ throw (_wexception)
 							assert(!road.m_carrier_slots[i].carrier.get(egbase));
 
 							road.m_carrier_slots[i].carrier = carrier;
-							if (carrier or carrier_request)
-							{
+							if (carrier or carrier_request) {
 								delete road.m_carrier_slots[i].carrier_request;
 								road.m_carrier_slots[i].carrier_request =
 									carrier_request;
 							}
-						}
-						else
-						{
+						} else {
 							delete carrier_request;
-							if (carrier)
-							{
+							if (carrier) {
 								//carrier->set_location (0);
 								carrier->reset_tasks
 									(ref_cast<Game,
