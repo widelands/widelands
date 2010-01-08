@@ -1,16 +1,17 @@
 help=_Helps to carry items at heavy used roads.
+default_target_quantity=5
 
 [idle]
 pics=wisent_idle_se_??.png # TODO: fix naming once we have real oxen animations
-hotspot=16 21
-fps=10
+hotspot=21 35
+fps=20
 
 [walk]
 dirpics=wisent_walk_!!_??.png # TODO: fix naming once we have real oxen animations
-hotspot=18 21
-fps=10
+hotspot=22 36
+fps=20
 
 [walkload]
 dirpics=wisent_walk_!!_??.png # TODO: fix naming once we have real oxen animations
-hotspot=19 22
-fps=10
+hotspot=22 36
+fps=20

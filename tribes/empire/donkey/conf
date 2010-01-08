@@ -3,15 +3,15 @@ default_target_quantity=5
 
 [idle]
 pics=_donkey_idle_e_??.png
-hotspot=6 21
+hotspot=17 25
 fps=10
 
 [walk]
 dirpics=donkey_walk_!!_??.png
-hotspot=8 21
+hotspot=16 25
 fps=10
 
 [walkload]
 dirpics=donkey_walk_!!_??.png
-hotspot=9 22
+hotspot=16 25
 fps=10
