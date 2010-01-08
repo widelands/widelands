@@ -141,6 +141,7 @@ stonemason=_Stonemason
 trainer=_Trainer
 weaver=_Weaver
 scout=_Scout
+cattlebreeder=_Cattle Breeder
 
 [constructionsite types]
 constructionsite=_Construction Site
@@ -213,6 +214,7 @@ tavern=_Tavern
 weaving-mill=_Weaving-Mill
 well=_Well
 scouts_hut=_"Scout's Hut"
+cattlefarm=_Cattle Farm
 
 [initializations]
 headquarters_medium=_Headquarters medium

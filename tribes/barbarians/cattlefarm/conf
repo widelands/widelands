@@ -1,0 +1,34 @@
+size=big
+
+[aihints]
+build_material=false
+
+[buildcost]
+trunk=2
+raw_stone=2
+blackwood=1
+
+[working positions]
+cattlebreeder=1
+
+[inputs]
+wheat=8
+water=8
+
+[programs]
+work=_Work
+
+[work]
+return=skipped when economy needs wheat and not economy needs ox
+return=skipped when economy needs water and not economy needs ox
+consume=wheat water
+animate=working 30000 # animation of feeding the cattles
+recruit=ox
+
+[idle]
+pics=cattlefarm_i_??.png  # ???
+hotspot=54 54
+
+[working]
+pics=cattlefarm_i_??.png  # ???
+hotspot=54 54

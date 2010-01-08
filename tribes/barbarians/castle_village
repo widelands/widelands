@@ -44,6 +44,7 @@ lumberjack=2
 miner=4
 ranger=1
 stonemason=2
+ox=5
 
 #  soldiers
 0/0/0/0=13

@@ -1,0 +1,19 @@
+help=_"Breeds the strong oxen that help in the transportation of wares."
+
+[buildcost]
+carrier=1
+
+[idle]
+pics=idle_??.png
+hotspot=11 22
+fps=10
+
+[walk]
+dirpics=walk_!!_??.png
+hotspot=10 21
+fps=10
+
+[walkload]
+dirpics=walk_!!_??.png
+hotspot=10 21
+fps=10

@@ -1,19 +1,16 @@
 help=_Helps to carry items at heavy used roads.
 
-[buildcost]
-carrier=1
-
 [idle]
-pics=wisent_idle_se_??.png
+pics=wisent_idle_se_??.png # TODO: fix naming once we have real oxen animations
 hotspot=16 21
 fps=10
 
 [walk]
-dirpics=wisent_walk_!!_??.png
+dirpics=wisent_walk_!!_??.png # TODO: fix naming once we have real oxen animations
 hotspot=18 21
 fps=10
 
 [walkload]
-dirpics=wisent_walk_!!_??.png
+dirpics=wisent_walk_!!_??.png # TODO: fix naming once we have real oxen animations
 hotspot=19 22
 fps=10

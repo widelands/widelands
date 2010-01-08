@@ -351,7 +351,7 @@ void Road::set_economy(Economy * const e)
 */
 void Road::_request_carrier(Game &, CarrierSlot & slot)
 {
-
+	// FIXME this should be read out from the tribes conf
 	if (slot.carrier_type == 1 or owner().tribe().name() == "atlanteans") {
 		slot.carrier_request =
 			new Request
@@ -361,7 +361,7 @@ void Road::_request_carrier(Game &, CarrierSlot & slot)
 				 Request::WORKER);
 	} else {
 		std::string donkey_name =
-			owner().tribe().name() == "empire" ? "donkey" : "wisent";
+			owner().tribe().name() == "empire" ? "donkey" : "ox";
 		slot.carrier_request =
 		new Request
 			(*this,
