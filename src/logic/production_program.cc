@@ -173,7 +173,7 @@ bool ProductionProgram::ActReturn::Economy_Needs_Worker::evaluate
 std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
 	(Tribe_Descr const & tribe) const
 {
-	return _("economy needs ") + tribe.get_ware_descr(worker_type)->descname();
+	return _("economy needs ") + tribe.get_worker_descr(worker_type)->descname();
 }
 
 ProductionProgram::ActReturn::Site_Has::Site_Has
