@@ -948,7 +948,6 @@ void ProductionProgram::ActRecruit::execute
 	snprintf
 		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
 		 "%s", result_string.c_str());
-	return ps.program_step(game);
 }
 
 

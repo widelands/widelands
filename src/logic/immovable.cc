@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -540,13 +540,13 @@ void Immovable::Loader::load_finish()
 {
 	BaseImmovable::Loader::load_finish();
 
-	upcast(Immovable, imm, get_object());
+	Immovable & imm = dynamic_cast<Immovable &>(*get_object());
 	if (upcast(Game, game, &egbase()))
-		imm->schedule_act(*game, 1);
+		imm.schedule_act(*game, 1);
 
 	egbase().inform_players_about_immovable
-			(Map::get_index(imm->m_position, egbase().map().get_width()),
-			 &imm->descr());
+		(Map::get_index(imm.m_position, egbase().map().get_width()),
+		 &imm.descr());
 }
 
 void Immovable::save

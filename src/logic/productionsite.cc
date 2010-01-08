@@ -644,16 +644,10 @@ bool ProductionSite::get_building_work
 				*tribe().get_worker_descr(worker_type_with_count.first);
 			{
 				Worker * recruit;
-				if (worker_descr.get_worker_type() == Worker_Descr::CARRIER)
-					if (upcast(const Carrier::Descr, carrier_descr, &worker_descr))
-						recruit = new Carrier(*carrier_descr);
-					else
-						throw wexception("Error: this carrier is no carrier!");
-				else if (worker_descr.get_worker_type() == Worker_Descr::SOLDIER)
-					if (upcast(const Soldier_Descr, soldier_descr, &worker_descr))
-						recruit = new Soldier(*soldier_descr);
-					else
-						throw wexception("Error: this soldier is no soldier!");
+				if (upcast(Carrier::Descr const, carrier_descr, &worker_descr))
+					recruit = new Carrier(*carrier_descr);
+				else if (upcast(Soldier_Descr const, soldier_descr, &worker_descr))
+					recruit = new Soldier(*soldier_descr);
 				else
 					recruit = new Worker(worker_descr);
 				recruit->set_owner(&worker.owner());
@@ -695,10 +689,13 @@ bool ProductionSite::get_building_work
 				return true;
 			} else
 				program_step(game);
-		} else if (dynamic_cast<ProductionProgram::ActProduce const *>(&action))
+		} else if
+			(dynamic_cast<ProductionProgram::ActProduce const *>(&action) or
+			 dynamic_cast<ProductionProgram::ActRecruit const *>(&action))
 		{
-			//  All the wares that we produced have been carried out, so continue
-			//  with the program.
+			//  All the wares that we produced have been carried out and all the
+			//  workers that we recruited have been sent out, so continue with the
+			//  program.
 			program_step(game);
 		}
 	}
