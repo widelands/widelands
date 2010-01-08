@@ -809,6 +809,14 @@ void Soldier::attack_update(Game & game, State & state)
 			defenders = wh->count_workers
 				(game, wh->tribe().worker_index("soldier"), noreq);
 		}
+		/// Any enemy soldier at baseflag count as defender
+		std::vector<Bob *> soldiers;
+		game.map().find_bobs
+			(Area<FCoords>
+			 	(game.map().get_fcoords(enemy->base_flag().get_position()), 0),
+			 &soldiers,
+			 FindBobEnemySoldier(*get_owner()));
+		defenders += soldiers.size();
 	}
 
 	if
