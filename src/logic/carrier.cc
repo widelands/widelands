@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,11 +33,12 @@ namespace Widelands {
  * Signal "road" on road split.
  * Signal "ware" when a ware has arrived.
  */
-Bob::Task Carrier::taskRoad = {
+Bob::Task const Carrier::taskRoad = {
 	"road",
 	static_cast<Bob::Ptr>(&Carrier::road_update),
 	0,
-	0
+	0,
+	true
 };
 
 
@@ -118,11 +119,12 @@ void Carrier::road_update(Game & game, State & state)
  *
  * Signal "update" when the road has been split etc.
  */
-Bob::Task Carrier::taskTransport = {
+Bob::Task const Carrier::taskTransport = {
 	"transport",
 	static_cast<Bob::Ptr>(&Carrier::transport_update),
 	0,
-	0
+	0,
+	true
 };
 
 

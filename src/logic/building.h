@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -146,6 +146,8 @@ public:
 	Building(const Building_Descr &);
 	virtual ~Building();
 
+	void load_finish(Editor_Game_Base &);
+
 	Tribe_Descr const & tribe() const throw () {return descr().tribe();}
 
 	virtual int32_t  get_type    () const throw ();
@@ -245,7 +247,7 @@ protected:
 	uint32_t m_anim;
 	int32_t  m_animstart;
 
-	typedef std::vector<Object_Ptr> Leave_Queue;
+	typedef std::vector<OPtr<Worker> > Leave_Queue;
 	Leave_Queue m_leave_queue; //  FIFO queue of workers leaving the building
 	uint32_t    m_leave_time;  //  when to wake the next one from leave queue
 	Object_Ptr  m_leave_allow; //  worker that is allowed to leave now

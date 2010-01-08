@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef S__FLAG_H
-#define S__FLAG_H
+#ifndef FLAG_H
+#define FLAG_H
 
 #include <vector>
 #include <list>
@@ -61,6 +61,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	Flag(Game &, Player & owner, Coords); /// create a new flag
 	virtual ~Flag();
 
+	void load_finish(Editor_Game_Base &);
 
 	virtual int32_t  get_type    () const throw ();
 	char const * type_name() const throw () {return "flag";}

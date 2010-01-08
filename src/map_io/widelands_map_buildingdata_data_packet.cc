@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -111,7 +111,12 @@ throw (_wexception)
 						container_iterate(Building::Leave_Queue, leave_queue, i)
 							if (uint32_t const leaver_serial = fr.Unsigned32())
 								try {
-									*i.current = &ol->get<Map_Object>(leaver_serial);
+									//  The check that this worker actually has a
+									//  leavebuilding task for this building is in
+									//  Building::load_finish, which is called after the
+									//  worker (with his stack of tasks) has been fully
+									//  loaded.
+									*i.current = &ol->get<Worker>(leaver_serial);
 								} catch (_wexception const & e) {
 									throw game_data_error
 										("leave queue item #%lu (%u): %s",

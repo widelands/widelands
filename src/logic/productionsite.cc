@@ -653,15 +653,8 @@ bool ProductionSite::get_building_work
 				recruit->set_owner(&worker.owner());
 				recruit->set_position(game, worker.get_position());
 				recruit->init(game);
-#if 0
-				recruit->start_task_move
-					(game,
-					 WALK_SE,
-					 &recruit->descr().get_right_walk_anims(false),
-					 true);
-#else
-				recruit->start_task_gowarehouse(game);
-#endif
+				recruit->set_location(this);
+				recruit->start_task_leavebuilding(game, true);
 				worker.start_task_releaserecruit(game, *recruit);
 			}
 		}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,6 +72,38 @@ Flag::~Flag()
 	for (int32_t i = 0; i < 6; ++i)
 		if (m_roads[i])
 			log("Flag: ouch! road left\n");
+}
+
+void Flag::load_finish(Editor_Game_Base & egbase) {
+	CapacityWaitQueue & queue = m_capacity_wait;
+	for
+		(struct {
+		 	CapacityWaitQueue::iterator       current;
+		 	CapacityWaitQueue::const_iterator end;
+		 } i = {queue.begin(), queue.end()};
+		 i .current != i .end;)
+	{
+		Worker & worker = *i.current->get(egbase);
+		Bob::State const * const state =
+			worker.get_state(Worker::taskWaitforcapacity);
+		if (not state)
+			log
+				("WARNING: worker %u is in the capacity wait queue of flag %u but "
+				 "does not have a waitforcapacity task! Removing from queue.\n",
+				 worker.serial(), serial());
+		else if (state->objvar1 != this)
+			log
+				("WARNING: worker %u is in the capacity wait queue of flag %u but "
+				 "its waitforcapacity task is for map object %u! Removing from "
+				 "queue.\n",
+				 worker.serial(), serial(), state->objvar1.serial());
+		else {
+			++i.current;
+			continue;
+		}
+		i.current = queue.erase(i.current);
+		i.end     = queue.end  ();
+	}
 }
 
 /**

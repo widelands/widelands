@@ -270,6 +270,7 @@ void Bob::skip_act()
  */
 void Bob::push_task(Game & game, Task const & task, uint32_t const tdelta)
 {
+	assert(not task.unique or not get_state(task));
 	assert(m_in_act || m_stack.empty());
 
 	m_stack.push_back(State(&task));
@@ -408,12 +409,12 @@ void Bob::reset_tasks(Game & game)
  * Every signal can interrupt this task.  No signals are caught.
  */
 
-Bob::Task Bob::taskIdle = {
+Bob::Task const Bob::taskIdle = {
 	"idle",
-
 	&Bob::idle_update,
 	0, // signal_immediate
-	0
+	0,
+	true
 };
 
 
@@ -461,12 +462,12 @@ void Bob::idle_update(Game & game, State & state)
  * Sets the following signal(s):
  * "fail" - cannot move along the given path
  */
-Bob::Task Bob::taskMovepath = {
+Bob::Task const Bob::taskMovepath = {
 	"movepath",
-
 	&Bob::movepath_update,
 	0, // signal_immediate
-	0
+	0,
+	true
 };
 
 struct BlockedTracker {
@@ -740,12 +741,12 @@ void Bob::movepath_update(Game & game, State & state)
  * \li ivar1: direction
  * \li ivar2: non-zero if the move should be forced
  */
-Bob::Task Bob::taskMove = {
+Bob::Task const Bob::taskMove = {
 	"move",
-
 	&Bob::move_update,
 	0,
-	0
+	0,
+	true
 };
 
 

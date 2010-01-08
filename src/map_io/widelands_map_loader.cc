@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -155,10 +155,9 @@ int32_t WL_Map_Loader::load_map_complete
 	{Map_Terrain_Data_Packet         p; p.Read(m_fs, egbase, !scenario, m_mol);}
 	log("done!\n ");
 
-	bool have_immovables = m_fs.FileExists("binary/immovable");
 	Map_Object_Packet mapobjects;
 
-	if (have_immovables) {
+	if (bool const have_immovables = m_fs.FileExists("binary/immovable")) {
 		log("Reading Immovable Data ... ");
 		{Map_Immovable_Data_Packet p;    p.Read(m_fs, egbase, !scenario, m_mol);}
 		log("done!\n ");
@@ -283,6 +282,12 @@ int32_t WL_Map_Loader::load_map_complete
 
 	log("Second and third phase loading Map Objects ... ");
 	mapobjects.LoadFinish();
+	{
+		Field const & fields_end = map()[map().max_index()];
+		for (Field * field = &map()[0]; field < &fields_end; ++field)
+			if (BaseImmovable * const imm = field->get_immovable())
+				imm->load_finish(egbase);
+	}
 	log("done\n");
 
 	//  This should be at least after loading Soldiers (Bobs).

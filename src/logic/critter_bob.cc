@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -226,11 +226,12 @@ coords is used to store target coordinates found by findspace
 ==============================
 */
 
-Bob::Task Critter_Bob::taskProgram = {
+Bob::Task const Critter_Bob::taskProgram = {
 	"program",
 	static_cast<Bob::Ptr>(&Critter_Bob::program_update),
 	0,
-	0
+	0,
+	true
 };
 
 
@@ -277,11 +278,12 @@ Simply roam the map
 ==============================
 */
 
-Bob::Task Critter_Bob::taskRoam = {
+Bob::Task const Critter_Bob::taskRoam = {
 	"roam",
 	static_cast<Bob::Ptr>(&Critter_Bob::roam_update),
 	0,
-	0
+	0,
+	true
 };
 
 void Critter_Bob::roam_update(Game & game, State & state)

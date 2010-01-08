@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -189,6 +189,8 @@ public:
 		virtual void log(std::string str) = 0;
 		virtual ~LogSink() {}
 	};
+
+	virtual void load_finish(Editor_Game_Base &) {}
 
 protected:
 	Map_Object(Map_Object_Descr const * descr);

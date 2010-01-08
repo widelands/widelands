@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -142,6 +142,7 @@ throw (_wexception)
 			//  Flags can't life on multiply positions, therefore this flag
 			//  shouldn't be registered.
 			assert(!os->is_object_known(*flag));
+			assert(field->get_owned_by() == flag->owner().player_number());
 
 			fw.Unsigned8(1);
 			fw.Unsigned8(flag->owner().player_number());

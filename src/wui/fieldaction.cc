@@ -359,10 +359,7 @@ Add the buttons you normally get when clicking on a field.
 void FieldActionWindow::add_buttons_auto()
 {
 	UI::Box * buildbox = 0;
-	UI::Box * watchbox;
-	UI::Box * militarybox;
-
-	watchbox = new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
+	UI::Box & watchbox = *new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 	// Add road-building actions
 	Interactive_GameBase const & igbase =
@@ -449,30 +446,31 @@ void FieldActionWindow::add_buttons_auto()
 	//  census is ok
 	if (dynamic_cast<Game const *>(&ibase().egbase())) {
 		add_button
-			(watchbox,
+			(&watchbox,
 			 pic_watchfield,
 			 &FieldActionWindow::act_watch,
 			 _("Watch field in a separate window"));
 		add_button
-			(watchbox,
+			(&watchbox,
 			 pic_showstatistics,
 			 &FieldActionWindow::act_show_statistics,
 			 _("Toggle building statistics display"));
 	}
 	add_button
-		(watchbox,
+		(&watchbox,
 		 pic_showcensus,
 		 &FieldActionWindow::act_show_census,
 		 _("Toggle building label display"));
 
 	if (ibase().get_display_flag(Interactive_Base::dfDebug))
 		add_button
-			(watchbox,
+			(&watchbox,
 			 pic_debug,
 			 &FieldActionWindow::act_debug,
 			 _("Debug window"));
 
-	militarybox = new MilitaryBox(&m_tabpanel, m_plr, 0, 0);
+	MilitaryBox * militarybox =
+		m_plr ? new MilitaryBox(&m_tabpanel, m_plr, 0, 0) : 0;
 
 	// Add tabs
 	if (buildbox && buildbox->get_nritems()) {
@@ -480,16 +478,15 @@ void FieldActionWindow::add_buttons_auto()
 		add_tab(pic_tab_buildroad, buildbox, _("Build roads"));
 	}
 
-	watchbox->resize();
-	add_tab(pic_tab_watch, watchbox, _("Watch"));
+	watchbox.resize();
+	add_tab(pic_tab_watch, &watchbox, _("Watch"));
 
-	if (upcast(MilitaryBox, mb, militarybox)) {
-		if (mb->allowed_change()) {
+	if (militarybox) {
+		if (militarybox->allowed_change()) {
 			militarybox->resize();
 			add_tab(pic_tab_military, militarybox, _("Military settings"));
-		} else {
+		} else
 			delete militarybox;
-		}
 	}
 }
 

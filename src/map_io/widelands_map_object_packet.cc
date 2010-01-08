@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,8 +91,7 @@ struct loader_sorter {
 	bool operator()
 		(Map_Object::Loader * const a, Map_Object::Loader * const b) const
 	{
-		assert
-			(a->get_object()->serial() != b->get_object()->serial());
+		assert(a->get_object()->serial() != b->get_object()->serial());
 		return a->get_object()->serial() < b->get_object()->serial();
 	}
 };

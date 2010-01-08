@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -144,6 +144,8 @@ struct Bob : public Map_Object {
 		 * the task. Must only perform bookkeeping tasks. May be zero.
 		 */
 		Ptr pop;
+
+		bool unique; /// At most 1 of this task type can be on the stack.
 	};
 
 	/**
@@ -339,9 +341,9 @@ private:
 	void end_walk() {m_walking = IDLE;}
 
 
-	static Task taskIdle;
-	static Task taskMovepath;
-	static Task taskMove;
+	static Task const taskIdle;
+	static Task const taskMovepath;
+	static Task const taskMove;
 
 	Player   * m_owner; ///< can be 0
 	FCoords    m_position; ///< where are we right now?

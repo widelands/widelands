@@ -1762,7 +1762,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		if (part % 100 == 0)
 			sendSystemChat
 				(_("Sending part %u/%u of file %s to %s"),
-				 part, (file->parts.size() + 1),
+				 part, file->parts.size() + 1,
 				 file->filename.c_str(),
 				 d->settings.users.at(client.usernum).name.c_str());
 		sendFilePart(client.sock, part);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -711,11 +711,12 @@ void Soldier::init_auto_task(Game & game) {
  * The following variables are used:
  * \li objvar1 the \ref Building we're attacking.
  */
-Bob::Task Soldier::taskAttack = {
+Bob::Task const Soldier::taskAttack = {
 	"attack",
 	static_cast<Bob::Ptr>(&Soldier::attack_update),
 	0,
-	static_cast<Bob::Ptr>(&Soldier::attack_pop)
+	static_cast<Bob::Ptr>(&Soldier::attack_pop),
+	true
 };
 
 void Soldier::start_task_attack
@@ -809,7 +810,7 @@ void Soldier::attack_update(Game & game, State & state)
 			defenders = wh->count_workers
 				(game, wh->tribe().worker_index("soldier"), noreq);
 		}
-		/// Any enemy soldier at baseflag count as defender
+		//  Any enemy soldier at baseflag count as defender.
 		std::vector<Bob *> soldiers;
 		game.map().find_bobs
 			(Area<FCoords>
@@ -936,11 +937,12 @@ struct FindSoldierAttackingPlayer : public FindBob {
  * \li ivar2 when CF_DEFEND_STAYHOME, 1 if it has reached the flag
 //           when CF_RETREAT_WHEN_INJURED, the lesser HP before retreat
  */
-Bob::Task Soldier::taskDefense = {
+Bob::Task const Soldier::taskDefense = {
 	"defense",
 	static_cast<Bob::Ptr>(&Soldier::defense_update),
 	0,
-	static_cast<Bob::Ptr>(&Soldier::defense_pop)
+	static_cast<Bob::Ptr>(&Soldier::defense_pop),
+	true
 };
 
 void Soldier::start_task_defense
@@ -1002,7 +1004,7 @@ void Soldier::defense_update(Game & game, State & state)
 
 	// If we only are defending our home ...
 	if (state.ivar1 & CF_DEFEND_STAYHOME) {
-		if ((position == location) and (state.ivar2 == 1)) {
+		if (position == location and state.ivar2 == 1) {
 			molog("[defense] stayhome: returned home\n");
 			return pop_task(game);
 		}
@@ -1160,11 +1162,12 @@ void Soldier::defense_pop(Game & game, State &)
 }
 
 
-Bob::Task Soldier::taskMoveInBattle = {
+Bob::Task const Soldier::taskMoveInBattle = {
 	"moveInBattle",
 	static_cast<Bob::Ptr>(&Soldier::move_in_battle_update),
 	0,
-	0
+	0,
+	true
 };
 
 void Soldier::start_task_move_in_battle(Game & game, CombatWalkingDir dir)
@@ -1240,11 +1243,12 @@ bool Soldier::stayHome()
  * We are out in the open and involved in a challenge/battle.
  * Meet with the other soldier and fight.
  */
-Bob::Task Soldier::taskBattle = {
+Bob::Task const Soldier::taskBattle = {
 	"battle",
 	static_cast<Bob::Ptr>(&Soldier::battle_update),
 	0,
-	static_cast<Bob::Ptr>(&Soldier::battle_pop)
+	static_cast<Bob::Ptr>(&Soldier::battle_pop),
+	true
 };
 
 void Soldier::start_task_battle(Game & game)
@@ -1419,11 +1423,12 @@ void Soldier::battle_pop(Game & game, State &)
 }
 
 
-Bob::Task Soldier::taskDie = {
+Bob::Task const Soldier::taskDie = {
 	"die",
 	static_cast<Bob::Ptr>(&Soldier::die_update),
 	0,
-	static_cast<Bob::Ptr>(&Soldier::die_pop)
+	static_cast<Bob::Ptr>(&Soldier::die_pop),
+	true
 };
 
 void Soldier::start_task_die(Game & game)

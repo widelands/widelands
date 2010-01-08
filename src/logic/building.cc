@@ -289,6 +289,48 @@ Building::~Building()
 		hide_options();
 }
 
+void Building::load_finish(Editor_Game_Base & egbase) {
+	Leave_Queue & queue = m_leave_queue;
+	for
+		(struct {
+		 	Leave_Queue::iterator       current;
+		 	Leave_Queue::const_iterator end;
+		 } i = {queue.begin(), queue.end()};
+		 i .current != i .end;)
+	{
+		Worker & worker = *i.current->get(egbase);
+		{
+			OPtr<PlayerImmovable> const worker_location = worker.get_location();
+			if
+				(worker_location.serial() !=             serial() and
+				 worker_location.serial() != base_flag().serial())
+				log
+					("WARNING: worker %u is in the leave queue of building %u with "
+					 "base flag %u but is neither inside the building nor at the "
+					 "flag!\n",
+					 worker.serial(), serial(), base_flag().serial());
+		}
+		Bob::State const * const state =
+			worker.get_state(Worker::taskLeavebuilding);
+		if (not state)
+			log
+				("WARNING: worker %u is in the leave queue of building %u but "
+				 "does not have a leavebuilding task! Removing from queue.\n",
+				 worker.serial(), serial());
+		else if (state->objvar1 != this)
+			log
+				("WARNING: worker %u is in the leave queue of building %u but its "
+				 "leavebuilding task is for map object %u! Removing from queue.\n",
+				 worker.serial(), serial(), state->objvar1.serial());
+		else {
+			++i.current;
+			continue;
+		}
+		i.current = queue.erase(i.current);
+		i.end     = queue.end  ();
+	}
+}
+
 int32_t Building::get_type() const throw () {return BUILDING;}
 
 int32_t Building::get_size() const throw () {return descr().get_size();}
@@ -605,7 +647,7 @@ bool Building::leave_check_and_wait(Game & game, Worker & w)
 void Building::leave_skip(Game &, Worker & w)
 {
 	Leave_Queue::iterator const it =
-		std::find(m_leave_queue.begin(), m_leave_queue.end(), Object_Ptr(&w));
+		std::find(m_leave_queue.begin(), m_leave_queue.end(), &w);
 
 	if (it != m_leave_queue.end())
 		m_leave_queue.erase(it);

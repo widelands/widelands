@@ -92,6 +92,7 @@ public:
 	PlayerImmovable * get_location(Editor_Game_Base & egbase) {
 		return m_location.get(egbase);
 	}
+	OPtr<PlayerImmovable> get_location() const {return m_location;}
 	Economy * get_economy() const throw () {return m_economy;}
 
 	/// Sets the location of the worker initially. It may not have a previous

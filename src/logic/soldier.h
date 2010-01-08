@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -277,12 +277,12 @@ private:
 	bool stayHome();
 
 protected:
-	static Task taskAttack;
-	static Task taskDefense;
-	static Task taskBattle;
-	static Task taskMoveInBattle;
+	static Task const taskAttack;
+	static Task const taskDefense;
+	static Task const taskBattle;
+	static Task const taskMoveInBattle;
 	// May be this can be moved this to bob when finished
-	static Task taskDie;
+	static Task const taskDie;
 
 private:
 	uint32_t m_hp_current;

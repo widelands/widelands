@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -106,7 +106,7 @@ void Map_Immovable_Data_Packet::Write
 	(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * const)
 throw (_wexception)
 {
-	throw game_data_error("Immovable_Data_Packet is obsolete");
+	throw wexception("Immovable_Data_Packet is obsolete");
 }
 
 }

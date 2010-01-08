@@ -134,7 +134,6 @@ throw (_wexception)
 					for (uint32_t i = 0; i < count; ++i) {
 						Carrier * carrier = 0;
 						Request * carrier_request = 0;
-						uint8_t carrier_type;
 
 
 						if (uint32_t const carrier_serial = fr.Unsigned32())
@@ -166,10 +165,8 @@ throw (_wexception)
 							carrier_request = 0;
 							//log("No request in this slot");
 						}
-						if (3 <= packet_version)
-							carrier_type = fr.Unsigned32();
-						else
-							carrier_type = 1;
+						uint8_t const carrier_type =
+							packet_version < 3 ? 1 : fr.Unsigned32();
 
 						if
 							(i < road.m_carrier_slots.size() and

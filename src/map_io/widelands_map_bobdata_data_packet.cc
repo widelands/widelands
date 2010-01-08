@@ -233,6 +233,10 @@ void Map_Bobdata_Data_Packet::Read
 									throw game_data_error
 										(_("unknown task type \"%s\""), taskname);
 
+								if (task->unique and bob.get_state(*task))
+									throw game_data_error
+										(_("task %s is duplicated in stack"),
+										 task->name);
 								state.task = task;
 							}
 
@@ -360,7 +364,8 @@ void Map_Bobdata_Data_Packet::Read
 
 						} catch (_wexception const & e) {
 							throw game_data_error
-								("reading state %u: %s", i, e.what());
+								("(%s) reading state %u: %s",
+								 bob.descr().descname().c_str(), i, e.what());
 						}
 					}
 

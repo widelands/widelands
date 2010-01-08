@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -278,8 +278,9 @@ void FieldDebugWindow::think()
 	str = "";
 	snprintf
 		(buffer, sizeof(buffer),
-		 _("%i, %i - height: %u\n"),
-		 m_coords.x, m_coords.y, m_coords.field->get_height());
+		 _("(%i, %i)\n   height: %u\n   owner: %u\n"),
+		 m_coords.x, m_coords.y,
+		 m_coords.field->get_height(), m_coords.field->get_owned_by());
 	str += buffer;
 	if (m_coords.field->get_caps() & Widelands::MOVECAPS_WALK)
 		str += "is walkable\n";

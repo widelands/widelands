@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
+#define CURRENT_PACKET_VERSION 3
 
 void Map_Flagdata_Data_Packet::Read
 	(FileSystem            &       fs,
@@ -72,7 +72,7 @@ throw (_wexception)
 
 					//  Owner is already set, nothing to do from PlayerImmovable.
 
-					if (CURRENT_PACKET_VERSION < 3) {
+					if (packet_version < 3) {
 						if
 							(upcast
 							 	(Flag const,
@@ -92,21 +92,33 @@ throw (_wexception)
 					}
 					flag.m_animstart = fr.Unsigned16();
 
-					//  FIXME This should not be explicitly read from file. A flag's
-					//  FIXME building is always the one to the northwest (if any).
-					//  FIXME There is no way that a flag could have a building
-					//  FIXME somewhere else or not have the building to the
-					//  FIXME northwest.
-					if (int32_t const building_serial = fr.Unsigned32())
-						try {
-							flag.m_building = &ol->get<Building>(building_serial);
-						} catch (_wexception const & e) {
-							throw game_data_error
-								("building (%u): %s", building_serial, e.what());
-						}
-					else
-						flag.m_building = 0;
-
+					{
+						FCoords building_position = map.get_fcoords(flag.m_position);
+						map.get_tln(building_position, &building_position);
+						flag.m_building =
+							dynamic_cast<Building *>
+								(building_position.field->get_immovable());
+					}
+					if (packet_version < 3) {
+						if (uint32_t const building_serial = fr.Unsigned32())
+							try {
+								Building const & building =
+									ol->get<Building>(building_serial);
+								if (flag.m_building != &building)
+									throw game_data_error
+										(_
+										 	("has building %u at (%i, %i), which is not "
+										 	 "at the top left node"),
+										 building_serial,
+										 building.get_position().x,
+										 building.get_position().y);
+							} catch (_wexception const & e) {
+								throw game_data_error
+									(_("building (%u): %s"), building_serial, e.what());
+							}
+						else
+							flag.m_building = 0;
+					}
 
 					//  Roads are set somewhere else.
 
@@ -158,11 +170,12 @@ throw (_wexception)
 						for (uint32_t i = 0; i < nr_workers; ++i) {
 							uint32_t const worker_serial = fr.Unsigned32();
 							try {
-								// Hack to support old savegames.
-								// See the corresponding section in Write().
-								if (worker_serial)
-									flag.m_capacity_wait.push_back
-										(&ol->get<Worker>(worker_serial));
+								//  The check that this worker actually has a
+								//  waitforcapacity task for this flag is in
+								//  Flag::load_finish, which is called after the worker
+								//  (with his stack of tasks) has been fully loaded.
+								flag.m_capacity_wait.push_back
+									(&ol->get<Worker>(worker_serial));
 							} catch (_wexception const & e) {
 								throw game_data_error
 									("worker #%u (%u): %s", i, worker_serial, e.what());
@@ -226,22 +239,8 @@ void Map_Flagdata_Data_Packet::Write
 
 			//  Owner is already written in the existanz packet.
 
-			fw.Coords32  (flag->m_position);
-
 			//  Animation is set by creator.
 			fw.Unsigned16(flag->m_animstart);
-
-			//  FIXME This should not be explicitly written to file. A flag's
-			//  FIXME building is always the one to the northwest (if any). There
-			//  FIXME is no way that a flag could have a building somewhere else
-			//  FIXME or not have the building to the northwest.
-			//  Building is not used, it is set by Building_Data packet through
-			//  attach building.
-			if (Building const * const building = flag->m_building) {
-				assert(os->is_object_known(*building));
-				fw.Unsigned32(os->get_object_file_index(*building));
-			} else
-				fw.Unsigned32(0);
 
 			//  Roads are not saved, they are set on load.
 
@@ -272,21 +271,21 @@ void Map_Flagdata_Data_Packet::Write
 				fw.Unsigned32(0);
 
 			//  worker waiting for capacity
-			std::vector<OPtr<Worker> > const & capacity_wait =
+			Flag::CapacityWaitQueue const & capacity_wait =
 				flag->m_capacity_wait;
 			fw.Unsigned16(capacity_wait.size());
-			container_iterate_const(std::vector<OPtr<Worker> >, capacity_wait, i)
-			{
+			container_iterate_const(Flag::CapacityWaitQueue, capacity_wait, i) {
 				Worker const * const obj = i.current->get(egbase);
-				//  This is a very crude hack to support old and broken savegames,
-				//  where workers were not correctly removed from the capacity wait
-				//  queue. See bug #1919495.
-				if (obj && obj->get_state(Worker::taskWaitforcapacity)) {
-					assert(os->is_object_known(*obj));
-					fw.Unsigned32(os->get_object_file_index(*obj));
-				} else {
-					fw.Unsigned32(0);
-				}
+				assert
+					(obj);
+				assert
+					(obj->get_state(Worker::taskWaitforcapacity));
+				assert
+					(obj->get_state(Worker::taskWaitforcapacity)->objvar1.serial()
+					 ==
+					 flag                                               ->serial());
+				assert(os->is_object_known(*obj));
+				fw.Unsigned32(os->get_object_file_index(*obj));
 			}
 			Flag::FlagJobs const & flag_jobs = flag->m_flag_jobs;
 			fw.Unsigned16(flag_jobs.size());

@@ -1228,7 +1228,8 @@ const Bob::Task Worker::taskTransfer = {
 	"transfer",
 	static_cast<Bob::Ptr>(&Worker::transfer_update),
 	static_cast<Bob::PtrSignal>(&Worker::transfer_signalimmediate),
-	0
+	0,
+	false
 };
 
 
@@ -1463,7 +1464,8 @@ const Bob::Task Worker::taskBuildingwork = {
 	"buildingwork",
 	static_cast<Bob::Ptr>(&Worker::buildingwork_update),
 	0,
-	0
+	0,
+	true
 };
 
 
@@ -1530,7 +1532,8 @@ const Bob::Task Worker::taskReturn = {
 	"return",
 	static_cast<Bob::Ptr>(&Worker::return_update),
 	0,
-	0
+	0,
+	true
 };
 
 
@@ -1658,7 +1661,8 @@ const Bob::Task Worker::taskProgram = {
 	"program",
 	static_cast<Bob::Ptr>(&Worker::program_update),
 	0,
-	0
+	0,
+	false
 };
 
 
@@ -1700,7 +1704,8 @@ const Bob::Task Worker::taskGowarehouse = {
 	"gowarehouse",
 	static_cast<Bob::Ptr>(&Worker::gowarehouse_update),
 	static_cast<Bob::PtrSignal>(&Worker::gowarehouse_signalimmediate),
-	static_cast<Bob::Ptr>(&Worker::gowarehouse_pop)
+	static_cast<Bob::Ptr>(&Worker::gowarehouse_pop),
+	true
 };
 
 
@@ -1800,14 +1805,16 @@ const Bob::Task Worker::taskDropoff = {
 	"dropoff",
 	static_cast<Bob::Ptr>(&Worker::dropoff_update),
 	0,
-	0
+	0,
+	true
 };
 
 const Bob::Task Worker::taskReleaserecruit = {
 	"releaserecruit",
 	static_cast<Bob::Ptr>(&Worker::releaserecruit_update),
 	0,
-	0
+	0,
+	true
 };
 
 /**
@@ -1915,7 +1922,8 @@ const Bob::Task Worker::taskFetchfromflag = {
 	"fetchfromflag",
 	static_cast<Bob::Ptr>(&Worker::fetchfromflag_update),
 	0,
-	0
+	0,
+	true
 };
 
 
@@ -1996,7 +2004,8 @@ const Bob::Task Worker::taskWaitforcapacity = {
 	"waitforcapacity",
 	static_cast<Bob::Ptr>(&Worker::waitforcapacity_update),
 	0,
-	static_cast<Bob::Ptr>(&Worker::waitforcapacity_pop)
+	static_cast<Bob::Ptr>(&Worker::waitforcapacity_pop),
+	true
 };
 
 /**
@@ -2073,7 +2082,8 @@ const Bob::Task Worker::taskLeavebuilding = {
 	"leavebuilding",
 	static_cast<Bob::Ptr>(&Worker::leavebuilding_update),
 	0,
-	static_cast<Bob::Ptr>(&Worker::leavebuilding_pop)
+	static_cast<Bob::Ptr>(&Worker::leavebuilding_pop),
+	true
 };
 
 
@@ -2170,7 +2180,8 @@ const Bob::Task Worker::taskFugitive = {
 	"fugitive",
 	static_cast<Bob::Ptr>(&Worker::fugitive_update),
 	0,
-	0
+	0,
+	true
 };
 
 
@@ -2299,7 +2310,8 @@ const Bob::Task Worker::taskGeologist = {
 	"geologist",
 	static_cast<Bob::Ptr>(&Worker::geologist_update),
 	0,
-	0
+	0,
+	true
 };
 
 
@@ -2445,7 +2457,8 @@ const Bob::Task Worker::taskScout = {
 	"scout",
 	static_cast<Bob::Ptr>(&Worker::scout_update),
 	0,
-	0
+	0,
+	true
 };
 
 
