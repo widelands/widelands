@@ -49,6 +49,16 @@ Road::Road() :
 {
 	m_flags[0] = m_flags[1] = 0;
 	m_flagidx[0] = m_flagidx[1] = -1;
+
+	/*
+	 * Initialize the worker slots for the road
+	 * TODO: make this configurable
+	 */
+	CarrierSlot slot;
+	m_carrier_slots.push_back(slot);
+	m_carrier_slots.push_back(slot);
+	m_carrier_slots[0].carrier_type = 1;
+	m_carrier_slots[1].carrier_type = 2;
 }
 
 Road::CarrierSlot::CarrierSlot() :
@@ -108,7 +118,7 @@ void Road::create
 		slot.carrier_type = 1;
 		road.m_carrier_slots.push_back(slot);
 	}
-	log("Road::create: &road = %p\n", &road);
+
 	road.init(egbase);
 }
 
@@ -254,18 +264,6 @@ void Road::init(Editor_Game_Base & egbase)
 void Road::_link_into_flags(Game & game) {
 	assert(m_path.get_nsteps() >= 2);
 
-	/*
-	 * Initialize the worker slots for the road
-	 * TODO: make this configurable
-	 */
-	CarrierSlot slot;
-	m_carrier_slots.push_back(slot);
-	m_carrier_slots.push_back(slot);
-	//m_carrier_slots.push_back(slot);
-	m_carrier_slots[0].carrier_type = 1;
-	m_carrier_slots[1].carrier_type = 2;
-	//m_carrier_slots[2].carrier_type = 2;
-
 	// Link into the flags (this will also set our economy)
 	{
 		const Direction dir = m_path[0];
@@ -388,7 +386,7 @@ void Road::_request_carrier_callback
 
 	container_iterate(SlotVector, road.m_carrier_slots, i)
 		if (i.current->carrier_request == &rq) {
-			Carrier & carrier = ref_cast<Carrier, Worker>         (*w);
+			Carrier & carrier = ref_cast<Carrier, Worker> (*w);
 			i.current->carrier_request = 0;
 			i.current->carrier = &carrier;
 
@@ -397,6 +395,13 @@ void Road::_request_carrier_callback
 			return;
 		}
 
+	/*
+	 * Oops! We got a request_callback but don't have the request.
+	 * Try to send him home.
+	 */
+	log
+		("Road(%u): got a request_callback but don't have the request\n",
+		 road.serial());
 	delete &rq;
 	w->start_task_gowarehouse(game);
 }
@@ -486,17 +491,7 @@ void Road::postsplit(Game & game, Flag & flag)
 	// The algorithm is pretty simplistic, and has a bias towards keeping
 	// the worker around; there's obviously nothing wrong with that.
 
-
-	//Carrier * const carrier = m_carrier.get(game);
-
-	//SlotVector carrierslots = m_carrier_slots;
 	std::vector<Worker *> const workers = get_workers();
-
-	container_iterate(SlotVector, m_carrier_slots, i) {
-		delete i.current->carrier_request;
-		i.current->carrier_request = 0;
-	}
-
 
 	std::vector<Worker *> reassigned_workers;
 
