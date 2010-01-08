@@ -1119,17 +1119,18 @@ void ProductionProgram::ActMine::informPlayer
 {
 	MessageQueue::addWithTimeout
 		(game, ps.owner().player_number(),
-		 60000, 0,
+		 600000, 0,
 		 Message::create_building_message
-		 	(MSG_MINE,
-		 	 game.get_gametime(),
-		 	 _("Mine empty"),
-		 	 "<p font-size=14 font-face=FreeSerif>" +
-		 	 std::string
-		 	 	(_("One of your mines has run empty. Consider expanding it."))
-		 	 	+
-		 	 	"</p>",
-		 	 ps));
+			(MSG_MINE,
+			 game.get_gametime(),
+			 _("Mine empty"),
+			 "<p font-size=14 font-face=FreeSerif>" +
+			 std::string
+				 (_
+				 ("This mines has run empty. You should consider to expand or"
+				  "destruct it."))
+			 + "</p>",
+			 ps));
 }
 
 

@@ -581,20 +581,24 @@ bool Worker::run_findspace(Game & game, State & state, Action const & action)
 void Worker::informPlayer
 	(Game & game, Building & building, std::string res_type) const
 {
+	// NOTE this is just an ugly hack for now, to avoid getting messages
+	// NOTE for farms, ferneries, vineyards, etc.
+	if ((res_type != "fish") && (res_type != "stone"))
+		return;
 	MessageQueue::addWithTimeout
 		(game, building.owner().player_number(),
-		 60000, 0,
+		 600000, 0,
 		 Message::create_building_message
-		 	(MSG_MINE,
-		 	 game.get_gametime(),
-		 	 _("Out of ") + res_type,
-		 	 "<p font-size=14 font-face=FreeSerif>" +
-		 	 	std::string
-		 	 		(_
-		 	 		 	("This worker cannot find any more resources of the "
-		 	 		 	 "following type: "))
-		 	 	+ res_type + "</p>",
-		 	 building));
+			(MSG_MINE,
+			 game.get_gametime(),
+			 _("Out of ") + res_type,
+			 "<p font-size=14 font-face=FreeSerif>" +
+				std::string
+					(_
+					 ("The worker of this building cannot find any more resources "
+					  "of the following type: "))
+				+ res_type + "</p>",
+			 building));
 }
 
 
@@ -858,7 +862,6 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 			(rdescr && rdescr->is_detectable() &&
 			 position.field->get_resources_amount())
 		{
-			log("Message: resources found %s\n", rdescr->name().c_str());
 			std::string sender = "g ";
 			sender += serial();
 			std::string resource = rdescr->descname();
