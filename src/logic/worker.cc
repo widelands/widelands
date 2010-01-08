@@ -2132,8 +2132,12 @@ void Worker::leavebuilding_pop(Game & game, State & state)
 	// is interrupted by a signal. Putting this in the pop() method is just
 	// defensive programming, in case leavebuilding_update() changes
 	// in the future.
-	ref_cast<Building, Map_Object>(*state.objvar1.get(game))
-	.leave_skip(game, *this);
+	//
+	//  The if-statement is needed because this is (unfortunately) also called
+	//  when the Worker is deallocated when shutting down the simulation. Then
+	//  the building might not exist any more.
+	if (Map_Object * const building = state.objvar1.get(game))
+		ref_cast<Building, Map_Object>(*building).leave_skip(game, *this);
 }
 
 
