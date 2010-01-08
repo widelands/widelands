@@ -1423,6 +1423,9 @@ void Soldier::start_task_die(Game & game)
 	push_task(game, taskDie);
 	top_state().ivar1 = game.get_gametime() + 1000;
 
+	// Dead soldier is not owned by a location
+	set_location(0);
+
 	start_task_idle(game, descr().get_animation("idle"), 1000);
 }
 
