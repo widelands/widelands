@@ -43,6 +43,8 @@ Map_Object_Descr g_road_descr("road", "Road");
 */
 Road::Road() :
 	PlayerImmovable  (g_road_descr),
+	m_usage          (0),
+	m_usage_lastupdate(0),
 	m_type           (0)
 {
 	m_flags[0] = m_flags[1] = 0;
@@ -292,7 +294,9 @@ void Road::_link_into_flags(Game & game) {
 			//  This happens after a road split. Tell the carrier what's going on.
 			carrier->set_location    (this);
 			carrier->update_task_road(game);
-		} else if (not i.current->carrier_request)
+		} else if
+			(not i.current->carrier_request and
+			 i.current->carrier_type == 1)
 			_request_carrier(game, *i.current);
 }
 
@@ -410,10 +414,8 @@ void Road::remove_worker(Worker & w)
 		if (carrier == &w) {
 			i.current->carrier = 0;
 			carrier            = 0;
-		}
-
-		if (not carrier and not i.current->carrier_request)
 			_request_carrier(game, *i.current);
+		}
 	}
 
 	PlayerImmovable::remove_worker(w);
@@ -558,7 +560,10 @@ void Road::postsplit(Game & game, Flag & flag)
 	//  _after_ the new road initializes, otherwise request routing might not
 	//  work correctly
 	container_iterate(SlotVector, m_carrier_slots, i)
-		if (not i.current->carrier.get(game) and not i.current->carrier_request)
+		if
+			(not i.current->carrier.get(game) and
+			 not i.current->carrier_request and
+			 i.current->carrier_type == 1)
 			_request_carrier(game, *i.current);
 
 	//  Make sure items waiting on the original endpoint flags are dealt with.
@@ -572,10 +577,51 @@ void Road::postsplit(Game & game, Flag & flag)
  */
 bool Road::notify_ware(Game & game, FlagId const flagid)
 {
+	/*
+	 * Iterate over all carriers and try to find one which takes the ware
+	 */
 	container_iterate(SlotVector, m_carrier_slots, i)
 		if (Carrier * const carrier = i.current->carrier.get(game))
 			if (carrier->notify_ware(game, flagid))
+			{
+				/*
+				 * notify_ware returns false if the carrier currently
+				 * can not take the ware. If we get here, the carrier
+				 * took the ware. So we decrement the usage counter
+				 */
+				if ((game.get_gametime() - m_usage_lastupdate) > 500)
+				{
+					m_usage_lastupdate = game.get_gametime();
+					m_usage--;
+				}
+
+				//TODO: I m_usage drops below a limit, send the donkey home
+				if (m_usage < 0)
+				{
+					m_usage = 0;
+				}
 				return true;
+			}
+
+	/* If we get here no carrier took the ware. So we check if we should
+	 * update the usage counter. m_usage_lastupdate prevents the we increment
+	 * this counter to often.
+	 */
+
+	if ((game.get_gametime() - m_usage_lastupdate) > 100)
+	{
+		m_usage_lastupdate = game.get_gametime();
+		m_usage += 10;
+		container_iterate(SlotVector, m_carrier_slots, i)
+			if
+				(m_usage > 500 and
+				 not i.current->carrier.get(game) and
+				 not i.current->carrier_request and
+				 i.current->carrier_type != 1)
+			{
+				_request_carrier(game, *i.current);
+			}
+	}
 	return false;
 }
 

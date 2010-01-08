@@ -113,6 +113,8 @@ private:
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
 private:
+	int32_t    m_usage;      /// counts how often a ware do not get a transfer directly
+	uint32_t   m_usage_lastupdate; /// Holds the gametime when m_usage was updated last
 	int32_t    m_type;       ///< use Field::Road_XXX
 	Flag     * m_flags  [2]; ///< start and end flag
 	int32_t    m_flagidx[2]; ///< index of this road in the flag's road array
