@@ -109,7 +109,7 @@ wheat=_Wheat
 
 [carrier types]
 carrier=_Carrier
-wisent=_Ox
+ox=_Ox
 
 [soldier types]
 soldier=_Soldier
