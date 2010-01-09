@@ -809,6 +809,8 @@ void Graphic::reset_texture_animation_reminder()
 void Graphic::load_animations(UI::ProgressWindow & loader_ui) {
 	assert(m_animations.empty());
 
+	clock_t start = clock();
+
 	const std::string step_description = _("Loading animations: %d%% complete");
 	uint32_t last_shown = 100;
 	const uint32_t nr_animations = g_anim.get_nranimations();
@@ -822,6 +824,9 @@ void Graphic::load_animations(UI::ProgressWindow & loader_ui) {
 		m_animations.push_back(new AnimationGfx(g_anim.get_animation(id)));
 	}
 	loader_ui.step(std::string());
+
+	clock_t end = clock();
+	printf("load_animations took %f seconds\n", (float(end - start) / CLOCKS_PER_SEC));
 }
 
 /**
