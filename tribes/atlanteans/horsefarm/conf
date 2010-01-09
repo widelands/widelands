@@ -22,7 +22,7 @@ work=_Work
 return=skipped when economy needs water and not economy needs horse
 return=skipped when economy needs corn and not economy needs horse
 consume=corn water
-animate=working 30000 # feeding cute little baby donkeys ;)
+animate=working 30000 # feeding cute little foals ;)
 recruit=horse
 
 [idle]
