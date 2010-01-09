@@ -2,6 +2,7 @@ size=big
 
 [aihints]
 build_material=false
+recruitment=true
 
 [buildcost]
 trunk=2

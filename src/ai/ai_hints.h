@@ -45,6 +45,8 @@ struct BuildingHints {
 
 	bool         get_needs_water        () const {return needs_water;}
 
+	bool         for_recruitment        () const {return recruitment;}
+
 	uint8_t      get_mines_percent      () const {return mines_percent;}
 
 private:
@@ -58,6 +60,7 @@ private:
 	bool    trunkproducer;
 	bool    stoneproducer;
 	bool    needs_water;
+	bool    recruitment; // whether building recruits special workers
 	uint8_t mines_percent;
 };
 

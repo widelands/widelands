@@ -201,6 +201,7 @@ struct BuildingObserver {
 
 	bool                              is_basic;
 	bool                              prod_build_material;
+	bool                              recruitment;
 
 	bool                              is_buildable;
 

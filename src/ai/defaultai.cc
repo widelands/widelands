@@ -127,7 +127,7 @@ void DefaultAI::think ()
 
 	// NOTE Because of the check above, the following parts of think() are used
 	// NOTE only once every second at maximum. This increases performance and as
-	// NOTE human players ca not even react that fast, it should not be a
+	// NOTE human players can not even react that fast, it should not be a
 	// NOTE disadvantage for the defaultAI.
 
 	// This must be checked every time as changes of bobs in AI area aren't
@@ -255,6 +255,7 @@ void DefaultAI::late_initialization ()
 		bo.need_trees             = bh.is_trunkproducer();
 		bo.need_stones            = bh.is_stoneproducer();
 		bo.need_water             = bh.get_needs_water();
+		bo.recruitment            = bh.for_recruitment();
 
 		if (char const * const s = bh.get_renews_map_resource())
 			bo.production_hint = tribe->safe_ware_index(s).value();
@@ -837,6 +838,18 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					prio += 3 * wares[bo.production_hint].consumers;
 					prio += wares[bo.production_hint].preciousness;
 					prio += (bf->producers_nearby[bo.production_hint] - 1) * 15;
+				} else if (bo.recruitment) {
+					// "recruitment centeres" like the donkey farm should be build up
+					// as soon as a basic infrastructure was completed.
+					// and of course the defaultAI should think of further
+					// constructions of that type later in game.
+					prio -= 12; // start calculation with an offset
+					prio += productionsites.size() + mines.size();
+					prio -= (bo.total_count()) * 40;
+					prio *= 2;
+
+					// take care about borders and enemies
+					prio = recalc_with_border_range(*bf, prio);
 				} else { // "normal" productionsites
 
 					if (bo.is_basic && (bo.total_count() == 0))
@@ -969,8 +982,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		}
 	}
 
-	// then try all mines
-	for (uint32_t i = 0; i < buildings.size(); ++i) {
+	// then try all mines - as soon as basic economy is build up.
+	for (uint32_t i = 0; i < buildings.size() && productionsites.size() > 8; ++i)
+	{
 		BuildingObserver & bo = buildings[i];
 
 		if (!bo.is_buildable || bo.type != BuildingObserver::MINE)

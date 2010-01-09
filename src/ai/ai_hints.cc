@@ -38,6 +38,7 @@ BuildingHints::BuildingHints (Section * const section) :
 	trunkproducer      (section ? section->get_bool("trunkproducer")    : false),
 	stoneproducer      (section ? section->get_bool("stoneproducer")    : false),
 	needs_water        (section ? section->get_bool("needs_water")      : false),
+	recruitment        (section ? section->get_bool("recruitment")      : false),
 	mines_percent      (section ? section->get_int ("mines_percent", 100) : 0)
 {
 	if (section) {
