@@ -61,6 +61,7 @@ miner=4
 stonecutter=2
 toolsmith=1
 woodcutter=3
+horse=5
 
 #  soldiers
 0/0/0/0=7

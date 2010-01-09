@@ -20,6 +20,7 @@ name=_Barbarians
 descr=_The mighty tribes of the east-lands!
 bob_vision_range=2
 uiposition=10
+carrier2=ox
 
 # No idea for the frontier. Maybe some javelins?
 [frontier]

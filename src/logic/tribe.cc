@@ -196,6 +196,7 @@ Tribe_Descr::Tribe_Descr
 				tribe_s.get_string("name"); // descriptive name
 				tribe_s.get_string("descr"); // long description
 				m_bob_vision_range = tribe_s.get_int("bob_vision_range");
+				m_carrier2         = tribe_s.get_string("carrier2");
 			}
 
 			if (Section * const defaults_s = root_conf.get_section("defaults"))

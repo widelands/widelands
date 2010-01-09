@@ -1,0 +1,17 @@
+help=_Helps to carry items at heavy used roads.
+default_target_quantity=5
+
+[idle]
+pics=_wildhorse_idle_sw_??.png
+hotspot=26 34
+fps=10
+
+[walk]
+dirpics=wildhorse_walk_!!_??.png
+hotspot=25 34
+fps=10
+
+[walkload]
+dirpics=wildhorse_walk_!!_??.png
+hotspot=25 34
+fps=10

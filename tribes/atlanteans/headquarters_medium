@@ -59,6 +59,7 @@ stonecutter=2
 toolsmith=2
 weaponsmith=1
 woodcutter=3
+horse=5
 
 #  soldiers
 0/0/0/0=35

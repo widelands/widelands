@@ -83,6 +83,11 @@ struct Tribe_Descr {
 	Ware_Index worker_index(char const * const workername) const {
 		return m_workers.get_index(workername);
 	}
+	Ware_Index carrier2() const {
+		if (m_carrier2.size())
+			return worker_index(m_carrier2);
+		return worker_index("carrier");
+	}
 	Ware_Index get_nrwares() const {return m_wares.get_nitems();}
 	Ware_Index safe_ware_index(std::string const & warename) const;
 	Ware_Index safe_ware_index(const char * const warename) const;
@@ -228,6 +233,7 @@ private:
 	Indexed_Descr_Maintainer<Item_Ware_Descr, Ware_Index> m_wares;
 	Descr_Maintainer<Immovable_Descr> m_immovables;  // The player immovables
 	Descr_Maintainer<Bob::Descr>      m_bobs;  // The player critters
+	std::string                       m_carrier2;
 
 	Initializations m_initializations;
 

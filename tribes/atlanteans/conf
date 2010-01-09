@@ -20,6 +20,7 @@ name=_ Atlanteans
 descr=_ This tribe is known from the oldest tales. The sons and daughters of Atlantis.
 bob_vision_range=2
 uiposition=100
+carrier2=horse
 
 # Some blue fires would be fine, but just an idea
 [frontier]
@@ -106,6 +107,7 @@ water=_Water
 
 [carrier types]
 carrier=_Carrier
+horse=_Horse
 
 [soldier types]
 soldier=_Soldier
@@ -135,6 +137,7 @@ weaponsmith=_Weaponsmith
 weaver=_Weaver
 woodcutter=_Woodcutter
 scout=_Scout
+horsebreeder=_Horse Breeder
 
 [constructionsite types]
 constructionsite=_Construction Site
@@ -197,6 +200,7 @@ weaving-mill=_Weaving-Mill
 well=_Well
 woodcutters_house=_Woodcutter's House
 scouts_house=_"Scout's House"
+horsefarm=_Horse Farm
 
 [initializations]
 headquarters_medium=_Headquarters medium
