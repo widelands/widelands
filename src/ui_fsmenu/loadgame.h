@@ -43,6 +43,7 @@ struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 	const std::string & filename() {return m_filename;}
 
 	void clicked_ok    ();
+	void clicked_delete();
 	void map_selected  (uint32_t);
 	void double_clicked(uint32_t);
 	void fill_list     ();
@@ -56,6 +57,7 @@ private:
 	Widelands::Game &                               m_game;
 	UI::Callback_IDButton<Fullscreen_Menu_LoadGame, int32_t> m_back;
 	UI::Callback_Button<Fullscreen_Menu_LoadGame>            m_ok;
+	UI::Callback_Button<Fullscreen_Menu_LoadGame>            m_delete;
 	UI::Listselect<const char *>                    m_list;
 	UI::Textarea                                    m_title;
 	UI::Textarea                                    m_label_mapname;

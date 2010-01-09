@@ -25,6 +25,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "ui_basic/messagebox.h"
 
 #include <cstdio>
 
@@ -43,18 +44,25 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Widelands::Game & g) :
 // Buttons
 	m_back
 		(this,
-		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
+		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
 		 &Fullscreen_Menu_LoadGame::end_modal, *this, 0,
 		 _("Back"), std::string(), true, false,
 		 m_fn, m_fs),
 	m_ok
 		(this,
-		 m_xres * 71 / 100, m_yres * 9 / 10, m_butw, m_buth,
+		 m_xres * 71 / 100, m_yres * 15 / 20, m_butw, m_buth,
 		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
 		 &Fullscreen_Menu_LoadGame::clicked_ok, *this,
 		 _("OK"), std::string(), false, false,
 		 m_fn, m_fs),
+	m_delete
+		 (this,
+		  m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
+		  g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		  &Fullscreen_Menu_LoadGame::clicked_delete, *this,
+		  _("Delete"), std::string(), false, false,
+		  m_fn, m_fs),
 
 // Replay list
 	m_list
@@ -95,6 +103,26 @@ void Fullscreen_Menu_LoadGame::clicked_ok()
 	end_modal(1);
 }
 
+void Fullscreen_Menu_LoadGame::clicked_delete()
+{
+	std::string fname = m_list.get_selected();
+	UI::WLMessageBox confirmationBox
+		(this,
+		 _("Delete file"),
+		 _("Do you really want to delete ") + fname + "?",
+		 UI::WLMessageBox::YESNO);
+	if (confirmationBox.run()) {
+		g_fs->Unlink(m_list.get_selected());
+		m_list.clear();
+		fill_list();
+		if (!m_list.size()) { // else fill_list() already selected the first entry
+			m_ok.set_enabled(false);
+			m_delete.set_enabled(false);
+		}
+	}
+}
+
+
 void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
 	if (const char * const name = m_list.get_selected()) {
 		Widelands::Game_Loader gl(name, m_game);
@@ -102,6 +130,7 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t) {
 		gl.preload_game(gpdp); //  This has worked before, no problem
 
 		m_ok.set_enabled(true);
+		m_delete.set_enabled(true);
 		m_tamapname.set_text(gpdp.get_mapname());
 
 		char buf[200];
