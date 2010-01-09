@@ -565,7 +565,7 @@ void Soldier::draw
 		// Draw the actual bar
 		assert(m_hp_max);
 		const float fraction = static_cast<float>(m_hp_current) / m_hp_max;
-		RGBColor color(owner().get_playercolor()[3]);
+		RGBColor color(owner().get_playercolor()[2]);
 		assert(2 <= r.w);
 		assert(2 <= r.h);
 		dst.fill_rect
