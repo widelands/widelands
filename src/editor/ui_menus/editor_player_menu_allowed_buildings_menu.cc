@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -111,9 +111,9 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i) {
 		Widelands::Building_Descr const & building =
 			*tribe.get_building_descr(i);
-		if (not building.get_enhanced_building() and not building.buildable())
+		if (not building.is_enhanced() and not building.is_buildable())
 			continue;
-		(m_player.is_building_allowed(i) ? m_allowed : m_forbidden).add
+		(m_player.is_building_type_allowed(i) ? m_allowed : m_forbidden).add
 			(building.descname().c_str(), i, building.get_buildicon());
 	}
 	m_forbidden.sort();
@@ -158,7 +158,7 @@ void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(const bool allow) {
 		 building_index,
 		 building.get_buildicon());
 	target.sort();
-	m_player.allow_building(building_index, allow);
+	m_player.allow_building_type(building_index, allow);
 }
 
 void Editor_Player_Menu_Allowed_Buildings_Menu::

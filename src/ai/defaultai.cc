@@ -250,7 +250,7 @@ void DefaultAI::late_initialization ()
 
 		bo.is_basic               = false;
 
-		bo.is_buildable = bld.buildable() && player->is_building_allowed(i);
+		bo.is_buildable = player->is_building_type_allowed(i);
 
 		bo.need_trees             = bh.is_trunkproducer();
 		bo.need_stones            = bh.is_stoneproducer();
@@ -273,7 +273,7 @@ void DefaultAI::late_initialization ()
 				bo.inputs.push_back(j.current->first.value());
 
 			container_iterate_const
-				(ProductionSite_Descr::Output, prod.output(), j)
+				(ProductionSite_Descr::Output, prod.output_ware_types(), j)
 				bo.outputs.push_back(j.current->     value());
 
 			if (bo.type == BuildingObserver::MINE) {
@@ -1471,8 +1471,8 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 	Building_Index enbld;
 	container_iterate_const(std::set<Building_Index>, enhancements, x) {
 		// Only enhance buildings that are allowed (scenario mode)
-		if (player->is_building_allowed((*x.current))) {
-			const Building_Descr & bld = *tribe->get_building_descr((*x.current));
+		if (player->is_building_type_allowed(*x.current)) {
+			Building_Descr const & bld = *tribe->get_building_descr(*x.current);
 			BuildingObserver & en_bo = get_building_observer(bld.name().c_str());
 
 			// Don't enhance this building, if there is already one of same type
@@ -1570,8 +1570,8 @@ bool DefaultAI::check_mines(int32_t gametime)
 	bool changed = false;
 	container_iterate_const(std::set<Building_Index>, enhancements, x) {
 		// Only enhance buildings that are allowed (scenario mode)
-		if (player->is_building_allowed((*x.current))) {
-			const Building_Descr & bld = *tribe->get_building_descr((*x.current));
+		if (player->is_building_type_allowed(*x.current)) {
+			Building_Descr const & bld = *tribe->get_building_descr(*x.current);
 			BuildingObserver & en_bo = get_building_observer(bld.name().c_str());
 
 			// Don't enhance this building, if there is already one of same type
@@ -1640,7 +1640,7 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
 		// If no enemy in sight - decrease the number of stationed soldiers
 		// as long as it is > 1 - BUT take care that there is a warehouse in the
 		// same economy where the thrown out soldiers can go to.
-		if (ms->economy().get_nr_warehouses() > 0) {
+		if (ms->economy().warehouses().size()) {
 			uint32_t const j = ms->soldierCapacity();
 			if (j > 1)
 				game().send_player_change_soldier_capacity(*ms, -1);
@@ -1684,9 +1684,9 @@ bool DefaultAI::check_militarysites  (int32_t gametime)
 								(std::set<Building_Index>, enhancements, x)
 							{
 								// Only enhance building to allowed (scenario mode)
-								if (player->is_building_allowed((*x.current))) {
+								if (player->is_building_type_allowed(*x.current)) {
 									const Building_Descr & bld =
-										*tribe->get_building_descr((*x.current));
+										*tribe->get_building_descr(*x.current);
 									BuildingObserver & en_bo =
 										get_building_observer(bld.name().c_str());
 

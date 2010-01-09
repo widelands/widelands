@@ -548,9 +548,9 @@ void FieldActionWindow::add_buttons_build(int32_t const buildcaps)
 		//  Some building types cannot be built (i.e. construction site) and not
 		//  allowed buildings.
 		if (dynamic_cast<Game const *>(&ibase().egbase())) {
-			if (!descr.buildable() || !m_plr->is_building_allowed(id))
+			if (!descr.is_buildable() || !m_plr->is_building_type_allowed(id))
 				continue;
-		} else if (!descr.buildable() && !descr.get_enhanced_building())
+		} else if (!descr.is_buildable() && !descr.is_enhanced())
 			continue;
 
 		// Figure out if we can build it here, and in which tab it belongs

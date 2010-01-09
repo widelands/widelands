@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 /// \file
 /// This is a place where the user interface links into the game logic code.
 
+#include "editor/ui_menus/event_player_worker_types_option_menu.h"
 #include "editor/ui_menus/event_player_building_types_option_menu.h"
 #include "editor/ui_menus/event_conquer_area_option_menu.h"
 #include "editor/ui_menus/event_message_box_option_menu.h"
@@ -29,6 +30,7 @@
 #include "editor/ui_menus/event_set_timer_option_menu.h"
 #include "editor/ui_menus/event_unhide_area_option_menu.h"
 
+#include "event_player_worker_types.h"
 #include "event_player_building_types.h"
 #include "event_building.h"
 #include "event_conquer_area.h"
@@ -48,6 +50,9 @@
 #include "event_player_retreat_change.h"
 
 namespace Widelands {
+
+int32_t Event_Player_Worker_Types       ::option_menu(Editor_Interactive & eia)
+{Event_Player_Worker_Types_Option_Menu          m(eia, *this); return m.run();}
 
 int32_t Event_Player_Building_Types     ::option_menu(Editor_Interactive & eia)
 {Event_Player_Building_Types_Option_Menu        m(eia, *this); return m.run();}

@@ -1,4 +1,5 @@
 size=big
+output=donkey
 
 [aihints]
 build_material=false

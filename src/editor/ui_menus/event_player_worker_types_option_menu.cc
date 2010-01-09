@@ -17,7 +17,7 @@
  *
  */
 
-#include "event_player_building_types_option_menu.h"
+#include "event_player_worker_types_option_menu.h"
 
 #include "logic/editor_game_base.h"
 #include "editor/editorinteractive.h"
@@ -33,15 +33,15 @@
 #include <cstdio>
 
 
-inline Editor_Interactive & Event_Player_Building_Types_Option_Menu::eia() {
+inline Editor_Interactive & Event_Player_Worker_Types_Option_Menu::eia() {
 	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 }
 
 
-Event_Player_Building_Types_Option_Menu::
-Event_Player_Building_Types_Option_Menu
+Event_Player_Worker_Types_Option_Menu::
+Event_Player_Worker_Types_Option_Menu
 	(Editor_Interactive                     & parent,
-	 Widelands::Event_Player_Building_Types & event)
+	 Widelands::Event_Player_Worker_Types & event)
 	:
 	UI::Window      (&parent, 0, 0, 320, 360, ""),
 	m_event         (event),
@@ -61,7 +61,7 @@ Event_Player_Building_Types_Option_Menu
 		char buffer[256];
 		snprintf
 			(buffer, sizeof(buffer),
-			 _("%s Building Types Event Options"), event.action_name());
+			 _("%s Worker Types Event Options"), event.action_name());
 		set_title(buffer);
 	}
 
@@ -69,7 +69,7 @@ Event_Player_Building_Types_Option_Menu
 }
 
 
-void Event_Player_Building_Types_Option_Menu::draw(RenderTarget & dst) {
+void Event_Player_Worker_Types_Option_Menu::draw(RenderTarget & dst) {
 	UI::Window::draw(dst);
 	char buffer[4];
 	sprintf(buffer, "%u", m_player_number);
@@ -81,8 +81,8 @@ void Event_Player_Building_Types_Option_Menu::draw(RenderTarget & dst) {
 }
 
 
-Event_Player_Building_Types_Option_Menu::Decrement_Player::Decrement_Player
-	(Event_Player_Building_Types_Option_Menu & parent, bool enable)
+Event_Player_Worker_Types_Option_Menu::Decrement_Player::Decrement_Player
+	(Event_Player_Worker_Types_Option_Menu & parent, bool enable)
 	:
 	UI::Button
 		(&parent,
@@ -94,8 +94,8 @@ Event_Player_Building_Types_Option_Menu::Decrement_Player::Decrement_Player
 {
 	set_repeating(true);
 }
-Event_Player_Building_Types_Option_Menu::Increment_Player::Increment_Player
-	(Event_Player_Building_Types_Option_Menu & parent, bool const enable)
+Event_Player_Worker_Types_Option_Menu::Increment_Player::Increment_Player
+	(Event_Player_Worker_Types_Option_Menu & parent, bool const enable)
 	:
 	UI::Button
 		(&parent,
@@ -109,76 +109,52 @@ Event_Player_Building_Types_Option_Menu::Increment_Player::Increment_Player
 }
 
 
-Event_Player_Building_Types_Option_Menu::Table::Table
-	(Event_Player_Building_Types_Option_Menu & parent,
-	 Widelands::Event_Player_Building_Types  & event)
+Event_Player_Worker_Types_Option_Menu::Table::Table
+	(Event_Player_Worker_Types_Option_Menu & parent,
+	 Widelands::Event_Player_Worker_Types  & event)
 	:
 	UI::Table<uintptr_t const>(&parent, 5, 55, 310, 275)
 {
 	add_column (60, event.action_name(), UI::Align_HCenter, true);
 	add_column (32);
-	add_column (50, _("Size"),           UI::Align_HCenter);
-	add_column(144, _("Name"),           UI::Align_Left);
+	add_column(194, _("Name"),           UI::Align_Left);
 	fill
 		(parent.eia().egbase().manually_load_tribe(event.player_number()),
-		 event.building_types());
+		 event.worker_types());
 }
 
 
-void Event_Player_Building_Types_Option_Menu::Table::fill
+void Event_Player_Worker_Types_Option_Menu::Table::fill
 	(Widelands::Tribe_Descr                                 const & tribe,
-	 Widelands::Event_Player_Building_Types::Building_Types const & bld_types)
+	 Widelands::Event_Player_Worker_Types::Worker_Types const & bld_types)
 {
 	for
 		(struct {
-		 	Widelands::Building_Index       current;
-		 	Widelands::Building_Index const end;
-		 } i = {Widelands::Building_Index::First(), tribe.get_nrbuildings()};
+		 	Widelands::Ware_Index       current;
+		 	Widelands::Ware_Index const end;
+		 } i = {Widelands::Ware_Index::First(), tribe.get_nrworkers()};
 		 i.current < i.end;
 		 ++i.current)
 	{
-		Widelands::Building_Descr const & building =
-			*tribe.get_building_descr(i.current);
+		Widelands::Worker_Descr const & worker =
+			*tribe.get_worker_descr(i.current);
 
-		//  walk all entries, add new ones if needed
-		UI::Table<uintptr_t const>::Entry_Record & te = add(i.current.value());
+		if (worker.is_buildable()) {
+			UI::Table<uintptr_t const>::Entry_Record & te =
+				add(i.current.value());
 
-		if (bld_types.count(i.current))
-			te.set_checked(Selected, true);
-		te.set_picture(Icon, building.get_buildicon());
-		te.set_string (Name, building.descname     ());
-
-		{
-			char const * str = "";
-			char const * pic = "pics/novalue.png";
-			if (building.get_ismine()) {
-				str = "M";
-				pic = "pics/mine.png";
-			} else switch (building.get_size()) {
-			case Widelands::BaseImmovable::SMALL:
-				str = "1";
-				pic = "pics/small.png";
-				break;
-			case Widelands::BaseImmovable::MEDIUM:
-				str = "2";
-				pic = "pics/medium.png";
-				break;
-			case Widelands::BaseImmovable::BIG:
-				str = "3";
-				pic = "pics/big.png";
-				break;
-			default:
-				assert(false);
-			}
-			te.set_picture(Size, g_gr->get_picture(PicMod_UI, pic), str);
+			if (bld_types.count(i.current))
+				te.set_checked(Selected, true);
+			te.set_picture(Icon, worker.icon    ());
+			te.set_string (Name, worker.descname());
 		}
 	}
 }
 
 
-void Event_Player_Building_Types_Option_Menu::OK::clicked() {
-	Event_Player_Building_Types_Option_Menu & parent =
-		ref_cast<Event_Player_Building_Types_Option_Menu, UI::Panel>
+void Event_Player_Worker_Types_Option_Menu::OK::clicked() {
+	Event_Player_Worker_Types_Option_Menu & parent =
+		ref_cast<Event_Player_Worker_Types_Option_Menu, UI::Panel>
 			(*get_parent());
 	std::string const & name = parent.name.text();
 	if (name.size()) {
@@ -210,20 +186,20 @@ void Event_Player_Building_Types_Option_Menu::OK::clicked() {
 		parent.eia().reference_player_tribe
 			(parent.m_player_number, &parent.m_event);
 	}
-	Widelands::Event_Player_Building_Types::Building_Types building_types;
+	Widelands::Event_Player_Worker_Types::Worker_Types worker_types;
 	for
 		(struct {uint8_t current; uint8_t const end;} i =
 		 	{0, parent.table.size()};
 		 i.current < i.end;
 		 ++i.current)
 		if (parent.table.get_record(i.current).is_checked(Table::Selected))
-			building_types.insert
-				(Widelands::Building_Index(parent.table[i.current]));
-	if (building_types.empty()) {
+			worker_types.insert
+				(Widelands::Ware_Index(parent.table[i.current]));
+	if (worker_types.empty()) {
 		char buffer[256];
 		snprintf
 			(buffer, sizeof(buffer),
-			 _("No building types are selected. Select at least one."));
+			 _("No worker types are selected. Select at least one."));
 		UI::WLMessageBox mb
 			(parent.get_parent(),
 			 _("Nothing selected"), buffer,
@@ -231,14 +207,14 @@ void Event_Player_Building_Types_Option_Menu::OK::clicked() {
 		mb.run();
 		return;
 	}
-	parent.m_event.building_types() = building_types;
+	parent.m_event.worker_types() = worker_types;
 	parent.eia().set_need_save(true);
 	parent.end_modal(1);
 }
 
 
 ///  Change the player number 1 step in any direction. Wraps around.
-void Event_Player_Building_Types_Option_Menu::change_player(bool const up)
+void Event_Player_Worker_Types_Option_Menu::change_player(bool const up)
 {
 	Widelands::Editor_Game_Base       & egbase    = eia().egbase();
 	Widelands::Tribe_Descr      const & old_tribe =
@@ -261,13 +237,13 @@ void Event_Player_Building_Types_Option_Menu::change_player(bool const up)
 		egbase.manually_load_tribe(m_player_number);
 
 	//  When changing to a player with another tribe, try to select a set of
-	//  building types that is as close as possible to the previously selected
-	//  set. To do this, look in the new tribe for a building type with the same
-	//  name as the selected building type has in the old tribe.
+	//  worker types that is as close as possible to the previously selected
+	//  set. To do this, look in the new tribe for a worker type with the same
+	//  name as the selected worker type has in the old tribe.
 	if (&old_tribe != &new_tribe) {
-		/// Set of building types that are selected in the old tribe and also
-		/// exist in the new tribe.
-		Widelands::Event_Player_Building_Types::Building_Types selected_common;
+		/// Set of worker types that are selected in the old tribe and also
+		/// exist and are buildable in the new tribe.
+		Widelands::Event_Player_Worker_Types::Worker_Types selected_common;
 		for
 			(struct {uint8_t current; uint8_t const end;} i = {0, table.size()};
 			 i.current < i.end;
@@ -276,15 +252,18 @@ void Event_Player_Building_Types_Option_Menu::change_player(bool const up)
 			Table::Entry_Record const & er = table.get_record(i.current);
 			if (er.is_checked(Table::Selected))
 				if
-					(Widelands::Building_Index const index_in_new_tribe =
-					 	new_tribe.building_index
-					 		(old_tribe.get_building_descr
-					 		 	(Widelands::Building_Index(table[i.current]))
+					(Widelands::Ware_Index const index_in_new_tribe =
+					 	new_tribe.worker_index
+					 		(old_tribe.get_worker_descr
+					 		 	(Widelands::Ware_Index(table[i.current]))
 					 		 ->name()))
-				{
-					assert(not selected_common.count(index_in_new_tribe));
-					selected_common.insert(index_in_new_tribe);
-				}
+					if
+						(new_tribe.get_worker_descr(index_in_new_tribe)
+						 ->is_buildable())
+					{
+						assert(not selected_common.count(index_in_new_tribe));
+						selected_common.insert(index_in_new_tribe);
+					}
 		}
 
 		table.clear();

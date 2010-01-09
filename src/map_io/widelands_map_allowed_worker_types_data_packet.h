@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,18 +17,16 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_ALLOWED_BUILDINGS_DATA_PACKET_H
-#define WIDELANDS_MAP_ALLOWED_BUILDINGS_DATA_PACKET_H
+#ifndef WIDELANDS_MAP_ALLOWED_WORKER_TYPES_DATA_PACKET_H
+#define WIDELANDS_MAP_ALLOWED_WORKER_TYPES_DATA_PACKET_H
 
 #include "widelands_map_data_packet.h"
 
 namespace Widelands {
 
-/**
- * If present, this contains all buildings that are allowed to be build
- * by players. If absent, all buildings are allowed per default
- */
-struct Map_Allowed_Buildings_Data_Packet : public Map_Data_Packet {
+/// If present, this contains all worker types that are allowed to be build
+/// by players. If absent, all worker types are allowed per default.
+struct Map_Allowed_Worker_Types_Data_Packet : public Map_Data_Packet {
 	virtual void Read
 		(FileSystem &,
 		 Editor_Game_Base      &,

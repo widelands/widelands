@@ -1,4 +1,5 @@
 size=big
+output=horse
 
 [aihints]
 build_material=false

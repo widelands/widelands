@@ -38,7 +38,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 3
+#define CURRENT_PACKET_VERSION 4
 
 void Map_Roaddata_Data_Packet::Read
 	(FileSystem            &       fs,
@@ -76,6 +76,10 @@ throw (_wexception)
 					Player & plr = egbase.player(fr.Player_Number8(nr_players));
 
 					road.set_owner(&plr);
+					if (4 <= packet_version) {
+						road.m_busyness             = fr.Unsigned32();
+						road.m_busyness_last_update = fr.Unsigned32();
+					}
 					road.m_type = fr.Unsigned32();
 					{
 						uint32_t const flag_0_serial = fr.Unsigned32();
@@ -230,6 +234,9 @@ throw (_wexception)
 				//  First, write PlayerImmovable Stuff
 				//  Theres only the owner
 				fw.Unsigned8(r->owner().player_number());
+
+				fw.Unsigned32(r->m_busyness);
+				fw.Unsigned32(r->m_busyness_last_update);
 
 				fw.Unsigned32(r->m_type);
 

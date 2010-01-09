@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -120,9 +120,9 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 		if (upcast(ProductionSite_Descr const, de, &descr)) {
 
 			if
-				((descr.buildable() or descr.get_enhanced_building())
+				((descr.is_buildable() or descr.is_enhanced())
 				 and
-				 de->output().count(wares.get_selected()))
+				 de->output_ware_types().count(wares.get_selected()))
 			{
 				prodSites.add(de->descname().c_str(), i, de->get_buildicon());
 				found = true;

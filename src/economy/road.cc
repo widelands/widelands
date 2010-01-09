@@ -43,8 +43,8 @@ Map_Object_Descr g_road_descr("road", "Road");
 */
 Road::Road() :
 	PlayerImmovable  (g_road_descr),
-	m_usage          (0),
-	m_usage_lastupdate(0),
+	m_busyness            (0),
+	m_busyness_last_update(0),
 	m_type           (0)
 {
 	m_flags[0] = m_flags[1] = 0;
@@ -395,7 +395,7 @@ void Road::_request_carrier_callback
 	 * Try to send him home.
 	 */
 	log
-		("Road(%u): got a request_callback but don't have the request\n",
+		("Road(%u): got a request_callback but do not have the request\n",
 		 road.serial());
 	delete &rq;
 	w->start_task_gowarehouse(game);
@@ -567,50 +567,41 @@ void Road::postsplit(Game & game, Flag & flag)
  */
 bool Road::notify_ware(Game & game, FlagId const flagid)
 {
-	/*
-	 * Iterate over all carriers and try to find one which takes the ware
-	 */
+	uint32_t const gametime = game.get_gametime();
+	assert(m_busyness_last_update <= gametime);
+	uint32_t const tdelta = gametime - m_busyness_last_update;
+
+	//  Iterate over all carriers and try to find one which takes the ware.
 	container_iterate(SlotVector, m_carrier_slots, i)
 		if (Carrier * const carrier = i.current->carrier.get(game))
-			if (carrier->notify_ware(game, flagid))
-			{
-				/*
-				 * notify_ware returns false if the carrier currently
-				 * can not take the ware. If we get here, the carrier
-				 * took the ware. So we decrement the usage counter
-				 */
-				if ((game.get_gametime() - m_usage_lastupdate) > 500)
-				{
-					m_usage_lastupdate = game.get_gametime();
-					m_usage--;
-				}
-
-				//TODO: I m_usage drops below a limit, send the donkey home
-				if (m_usage < 0)
-				{
-					m_usage = 0;
+			if (carrier->notify_ware(game, flagid)) {
+				//  notify_ware returns false if the carrier currently can not take
+				//  the ware. If we get here, the carrier took the ware. So we
+				//  decrement the usage busyness.
+				if (500 < tdelta) {
+					m_busyness_last_update = gametime;
+					//  TODO: If m_busyness drops below a limit, release the donkey.
+					if (m_busyness)
+						--m_busyness;
 				}
 				return true;
 			}
 
-	/* If we get here no carrier took the ware. So we check if we should
-	 * update the usage counter. m_usage_lastupdate prevents the we increment
-	 * this counter to often.
-	 */
-
-	if ((game.get_gametime() - m_usage_lastupdate) > 100)
-	{
-		m_usage_lastupdate = game.get_gametime();
-		m_usage += 10;
-		container_iterate(SlotVector, m_carrier_slots, i)
-			if
-				(m_usage > 500 and
-				 not i.current->carrier.get(game) and
-				 not i.current->carrier_request and
-				 i.current->carrier_type != 1)
-			{
+	//  If we get here, no carrier took the ware. So we check if we should
+	//  increment the usage counter. m_busyness_last_update prevents that the
+	//  counter is incremented too often.
+	if (100 < tdelta) {
+		m_busyness_last_update = gametime;
+		if (500 < (m_busyness += 10)) {
+			m_type = Road_Busy;
+			_mark_map(game);
+			container_iterate(SlotVector, m_carrier_slots, i)
+				if
+					(not i.current->carrier.get(game) and
+					 not i.current->carrier_request and
+					 i.current->carrier_type != 1)
 				_request_carrier(game, *i.current);
-			}
+		}
 	}
 	return false;
 }

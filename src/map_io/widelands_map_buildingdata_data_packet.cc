@@ -52,7 +52,7 @@ namespace Widelands {
 
 // Subversions
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 1
-#define CURRENT_WAREHOUSE_PACKET_VERSION        1
+#define CURRENT_WAREHOUSE_PACKET_VERSION        2
 #define CURRENT_MILITARYSITE_PACKET_VERSION     3
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   4
 #define CURRENT_TRAININGSITE_PACKET_VERSION     3
@@ -296,7 +296,10 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_WAREHOUSE_PACKET_VERSION) {
+		if
+			(1 <= packet_version and
+			 packet_version <= CURRENT_WAREHOUSE_PACKET_VERSION)
+		{
 			log("Reading warehouse stuff for %p\n", &warehouse);
 			//  supply
 			Tribe_Descr const & tribe = warehouse.tribe();
@@ -340,16 +343,15 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				for (uint16_t i = 0; i < nr_workers; ++i) {
 					uint32_t const worker_serial = fr.Unsigned32();
 					try {
-						//  FIXME Is this really needed?
-						char const * const name = fr.CString();
-						//  Worker might not yet be loaded so that get ware would not
-						//  work but make sure that such a worker type exists.
-						if (not tribe.worker_index(name))
-							throw game_data_error
-								(_("unknown worker type \"%s\""), name);
-
-						warehouse.sort_worker_in
-							(game, name, ol->get<Worker>(worker_serial));
+						Worker & worker = ol->get<Worker>(worker_serial);
+						if (1 == packet_version) {
+							char const * const name = fr.CString();
+							if (name != worker.name())
+								throw game_data_error
+									(_("expected %s but found \"%s\""),
+									 worker.name().c_str(), name);
+						}
+						warehouse.sort_worker_in(game, worker);
 					} catch (_wexception const & e) {
 						throw game_data_error
 							("incorporated worker #%u (%u): %s",
@@ -358,7 +360,107 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				}
 			}
 
-			warehouse.m_next_carrier_spawn = fr.Unsigned32();
+			std::vector<Ware_Index> const & worker_types_without_cost =
+				tribe.worker_types_without_cost();
+
+			//  FIXME Mighty ugly kludge to undo what warehouse::init did, so that
+			//  FIXME we have a fresh object when starting to fill in the values
+			//  FIXME read from file. To get rid of this, make sure that init is
+			//  FIXME not called on a warehouse when it is loaded from a savegame.
+			for (uint8_t i = worker_types_without_cost.size(); i;)
+				warehouse.m_next_worker_without_cost_spawn[--i] = Never();
+
+			if (1 == packet_version) { //  a single next_spawn time for "carrier"
+				uint32_t const next_spawn = fr.Unsigned32();
+				Ware_Index const worker_index =
+					tribe.safe_worker_index("carrier");
+				if (not worker_index) {
+					log
+						("WARNING: %s %u has a next_spawn time for nonexistent "
+						 "worker type \"%s\" set to %u, ignoring\n",
+						 warehouse.descname().c_str(), warehouse.serial(),
+						 "carrier", next_spawn);
+				} else if
+					(tribe.get_worker_descr(worker_index)->buildcost().size())
+				{
+					log
+						("WARNING: %s %u has a next_spawn time for worker type "
+						 "\"%s\", that costs something to build, set to %u, "
+						 "ignoring\n",
+						 warehouse.descname().c_str(), warehouse.serial(),
+						 "carrier", next_spawn);
+				} else
+					for (uint8_t i = 0;; ++i) {
+						assert(i < worker_types_without_cost.size());
+						if (worker_types_without_cost.at(i) == worker_index) {
+							if
+								(warehouse.m_next_worker_without_cost_spawn[i]
+								 !=
+								 Never())
+							{
+								warehouse.molog
+									("read_warehouse: "
+									 "m_next_worker_without_cost_spawn[%u] = %u\n",
+									 i, warehouse.m_next_worker_without_cost_spawn[i]);
+							}
+							assert
+								(warehouse.m_next_worker_without_cost_spawn[i]
+								 ==
+								 Never());
+							warehouse.m_next_worker_without_cost_spawn[i] =
+								next_spawn;
+							break;
+						}
+					}
+			} else
+				for (;;) {
+					char const * const worker_typename = fr.CString   ();
+					if (not *worker_typename) //  encountered the terminator ("")
+						break;
+					uint32_t     const next_spawn      = fr.Unsigned32();
+					Ware_Index   const worker_index    =
+						tribe.safe_worker_index(worker_typename);
+					if (not worker_index) {
+						log
+							("WARNING: %s %u has a next_spawn time for nonexistent "
+							 "worker type \"%s\" set to %u, ignoring\n",
+							 warehouse.descname().c_str(), warehouse.serial(),
+							 worker_typename, next_spawn);
+						continue;
+					}
+					if (tribe.get_worker_descr(worker_index)->buildcost().size()) {
+						log
+							("WARNING: %s %u has a next_spawn time for worker type "
+							 "\"%s\", that costs something to build, set to %u, "
+							 "ignoring\n",
+							 warehouse.descname().c_str(), warehouse.serial(),
+							 worker_typename, next_spawn);
+						continue;
+					}
+					for (uint8_t i = 0;; ++i) {
+						assert(i < worker_types_without_cost.size());
+						if (worker_types_without_cost.at(i) == worker_index) {
+							if
+								(warehouse.m_next_worker_without_cost_spawn[i]
+								 !=
+								 Never())
+								throw game_data_error
+									(_
+									 	("%s %u has a next_spawn time for worker type "
+									 	 "\"%s\" set to %u, but it was previously set "
+									 	 "to %u\n"),
+									 warehouse.descname().c_str(), warehouse.serial(),
+									 worker_typename, next_spawn,
+									 warehouse.m_next_worker_without_cost_spawn[i]);
+							warehouse.m_next_worker_without_cost_spawn[i] =
+								next_spawn;
+							break;
+						}
+					}
+				}
+				//  The checks that the warehouse has a next_spawn time for each
+				//  worker type that the player is allowed to spawn, is in
+				//  Warehouse::load_finish.
 
 			log("Read warehouse stuff for %p\n", &warehouse);
 		} else
@@ -1032,19 +1134,33 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	}
 
 	for
-		(std::map<uint32_t, const Worker *>::const_iterator it =
-		 workermap.begin();
-		 it != workermap.end();
-		 ++it)
+		(struct {
+		 	std::map<uint32_t, Worker const *>::const_iterator       current;
+		 	std::map<uint32_t, Worker const *>::const_iterator const end;
+		 } i = {workermap.begin(), workermap.end()};
+		 i.current != i.end;
+		 ++i.current)
 	{
-		Worker const & obj = *it->second;
+		Worker const & obj = *i.current->second;
 		assert(os->is_object_known(obj));
 		fw.Unsigned32(os->get_object_file_index(obj));
-		// \todo is this really needed? If not, remove in the next packet version.
-		fw.String(obj.name());
 	}
 
-	fw.Unsigned32(warehouse.m_next_carrier_spawn);
+	{
+		std::vector<Ware_Index> const & worker_types_without_cost =
+			tribe.worker_types_without_cost();
+		for (uint8_t i = worker_types_without_cost.size(); i;) {
+			uint32_t const next_spawn =
+				warehouse.m_next_worker_without_cost_spawn[--i];
+			if (next_spawn != Never()) {
+				fw.String
+					(tribe.get_worker_descr(tribe.worker_types_without_cost().at(i))
+					 ->name());
+				fw.Unsigned32(next_spawn);
+			}
+		}
+	}
+	fw.Unsigned8(0); //  terminator for spawn times
 }
 
 

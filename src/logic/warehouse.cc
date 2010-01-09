@@ -44,7 +44,7 @@
 
 namespace Widelands {
 
-static const int32_t CARRIER_SPAWN_INTERVAL = 2500;
+static const uint32_t WORKER_WITHOUT_COST_SPAWN_INTERVAL = 2500;
 
 WarehouseSupply::~WarehouseSupply()
 {
@@ -285,18 +285,67 @@ IMPLEMENTATION
 ==============================
 */
 
+#define SET_WORKER_WITHOUT_COST_SPAWNS(nr, value)                             \
+   for                                                                        \
+      (struct {                                                               \
+          uint32_t       *       current;                                     \
+          uint32_t const * const end;                                         \
+       } i = {                                                                \
+          m_next_worker_without_cost_spawn,                                   \
+          m_next_worker_without_cost_spawn + nr                               \
+       };                                                                     \
+       i.current < i.end;                                                     \
+       ++i.current)                                                           \
+      *i.current = value;                                                     \
+
 Warehouse::Warehouse(const Warehouse_Descr & warehouse_descr) :
-Building            (warehouse_descr),
-m_supply            (new WarehouseSupply(this)),
-m_next_carrier_spawn(0)
-{}
+	Building(warehouse_descr),
+	m_supply(new WarehouseSupply(this))
+{
+	uint8_t nr_worker_types_without_cost =
+		warehouse_descr.tribe().worker_types_without_cost().size();
+	m_next_worker_without_cost_spawn =
+		new uint32_t[nr_worker_types_without_cost];
+	SET_WORKER_WITHOUT_COST_SPAWNS(nr_worker_types_without_cost, Never());
+}
 
 
 Warehouse::~Warehouse()
 {
 	delete m_supply;
+	delete[] m_next_worker_without_cost_spawn;
 }
 
+
+void Warehouse::load_finish(Editor_Game_Base & egbase) {
+	Building::load_finish(egbase);
+
+	uint32_t next_spawn = Never();
+	std::vector<Ware_Index> const & worker_types_without_cost =
+		tribe().worker_types_without_cost();
+	for (uint8_t i = worker_types_without_cost.size(); i;) {
+		Ware_Index const worker_index = worker_types_without_cost.at(--i);
+		if
+			(owner().is_worker_type_allowed(worker_index) and
+			 m_next_worker_without_cost_spawn[i] == Never())
+		{
+			if (next_spawn == Never())
+				next_spawn =
+					schedule_act
+						(ref_cast<Game, Editor_Game_Base>(egbase),
+						 WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+			m_next_worker_without_cost_spawn[i] = next_spawn;
+			log
+				("WARNING: player %u is allowed to create worker type %s but his "
+				 "%s %u at (%i, %i) does not have a next_spawn time set for that "
+				 "worker type; setting it to %u\n",
+				 owner().player_number(),
+				 tribe().get_worker_descr(worker_index)->descname().c_str(),
+				 descname().c_str(), serial(), get_position().x, get_position().y,
+				 next_spawn);
+		}
+	}
+}
 
 void Warehouse::prefill
 	(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *)
@@ -394,9 +443,19 @@ void Warehouse::init(Editor_Game_Base & egbase)
 
 		m_requests.push_back(&req);
 	}
-	m_next_carrier_spawn =
-		schedule_act
-			(ref_cast<Game, Editor_Game_Base>(egbase), CARRIER_SPAWN_INTERVAL);
+	{
+		uint32_t const act_time =
+			schedule_act
+				(ref_cast<Game, Editor_Game_Base>(egbase),
+				 WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+		uint8_t nr_worker_types_without_cost =
+			owner().tribe().worker_types_without_cost().size();
+		molog
+			("Warehouse::init: setting all "
+			 "m_next_worker_without_cost_spawn[0..%u] to %u\n",
+			 nr_worker_types_without_cost, act_time);
+		SET_WORKER_WITHOUT_COST_SPAWNS(nr_worker_types_without_cost, act_time);
+	}
 	m_next_military_act  =
 		schedule_act
 			(ref_cast<Game, Editor_Game_Base>(egbase), 1000);
@@ -499,34 +558,45 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 }
 
 
-/// Act regularly to create carriers. According to intelligence, this is some
-/// highly advanced technology. Not only do the settlers have no problems with
-/// birth control, they don't even need anybody to procreate. They must have
-/// built-in DNA samples in those warehouses. And what the hell are they doing,
-/// killing useless tribesmen! The Borg? Or just like Soylent Green?
-/// Or maybe I should just stop writing comments that late at night ;-)
+/// Act regularly to create workers of buildable types without cost. According
+/// to intelligence, this is some highly advanced technology. Not only do the
+/// settlers have no problems with birth control, they do not even need anybody
+/// to procreate. They must have built-in DNA samples in those warehouses. And
+/// what the hell are they doing, killing useless tribesmen! The Borg? Or just
+/// like Soylent Green? Or maybe I should just stop writing comments that late
+/// at night ;-)
 void Warehouse::act(Game & game, uint32_t const data)
 {
-	if (game.get_gametime() - m_next_carrier_spawn >= 0) {
-		Ware_Index const id = tribe().safe_worker_index("carrier");
-		int32_t const stock = m_supply->stock_workers(id);
-		int32_t tdelta = CARRIER_SPAWN_INTERVAL;
+	uint32_t const gametime = game.get_gametime();
+	{
+		std::vector<Ware_Index> const & worker_types_without_cost =
+			owner().tribe().worker_types_without_cost();
+		for (size_t i = worker_types_without_cost.size(); i;)
+			if (m_next_worker_without_cost_spawn[--i] <= gametime) {
+				Ware_Index const id = worker_types_without_cost.at(i);
+				if (owner().is_worker_type_allowed(id)) {
+					int32_t const stock = m_supply->stock_workers(id);
+					int32_t tdelta = WORKER_WITHOUT_COST_SPAWN_INTERVAL;
 
-		if (stock < 100) {
-			tdelta -= 4 * (100 - stock);
-			insert_workers(id, 1);
-		} else if (stock > 100) {
-			tdelta -= 4 * (stock - 100);
-			if (tdelta < 10)
-				tdelta = 10;
-			remove_workers(id, 1);
-		}
+					if (stock < 100) {
+						tdelta -= 4 * (100 - stock);
+						insert_workers(id, 1);
+					} else if (stock > 100) {
+						tdelta -= 4 * (stock - 100);
+						if (tdelta < 10)
+							tdelta = 10;
+						remove_workers(id, 1);
+					}
 
-		m_next_carrier_spawn = schedule_act(game, tdelta);
+					m_next_worker_without_cost_spawn[i] =
+						schedule_act(game, tdelta);
+				} else
+					m_next_worker_without_cost_spawn[i] = Never();
+			}
 	}
 
 	//  Military stuff: Kill the soldiers that are dead.
-	if (game.get_gametime() - m_next_military_act >= 0) {
+	if (m_next_military_act <= gametime) {
 		Ware_Index const ware = tribe().safe_worker_index("soldier");
 		Worker_Descr const & workerdescr = *tribe().get_worker_descr(ware);
 		const std::string & workername = workerdescr.name();
@@ -770,7 +840,7 @@ void Warehouse::incorporate_worker(Game & game, Worker & w)
 	if (dynamic_cast<Carrier const *>(&w))
 		return w.remove(game);
 
-	sort_worker_in(game, w.name(), w);
+	sort_worker_in(game, w);
 	w.set_location(0); //  no longer in an economy
 	w.reset_tasks(game);
 
@@ -782,11 +852,11 @@ void Warehouse::incorporate_worker(Game & game, Worker & w)
 /*
  * Sort the worker into the right position in m_incorporated_workers
  */
-void Warehouse::sort_worker_in
-	(Editor_Game_Base & egbase, std::string const & workername, Worker & w)
+void Warehouse::sort_worker_in(Editor_Game_Base & egbase, Worker & w)
 {
 	//  We insert this worker, but to keep some consistency in ordering, we tell
 	//  him where to insert.
+	std::string const & workername = w.name();
 
 	std::vector<OPtr<Worker> >::iterator i = m_incorporated_workers.begin();
 
@@ -895,7 +965,7 @@ bool Warehouse::can_create_worker(Game &, Ware_Index const worker) const {
 
 	Worker_Descr const & w_desc = *tribe().get_worker_descr(worker);
 	assert(&w_desc);
-	if (not w_desc.buildable())
+	if (not w_desc.is_buildable())
 		return false;
 
 	//  see if we have the resources
@@ -933,6 +1003,26 @@ void Warehouse::create_worker(Game & game, Ware_Index const worker) {
 	}
 
 	incorporate_worker(game, w_desc.create(game, owner(), this, m_position));
+}
+
+
+void Warehouse::enable_spawn
+	(Game & game, uint8_t const worker_types_without_cost_index)
+{
+	assert
+		(m_next_worker_without_cost_spawn[worker_types_without_cost_index]
+		 ==
+		 Never());
+	m_next_worker_without_cost_spawn[worker_types_without_cost_index] =
+		schedule_act(game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
+}
+void Warehouse::disable_spawn(uint8_t const worker_types_without_cost_index)
+{
+	assert
+		(m_next_worker_without_cost_spawn[worker_types_without_cost_index]
+		 !=
+		 Never());
+	m_next_worker_without_cost_spawn[worker_types_without_cost_index] = Never();
 }
 
 

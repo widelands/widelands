@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -660,7 +660,7 @@ void Building_Window::setup_capsbuttons()
 				m_building.enhancements();
 			Widelands::Tribe_Descr const & tribe  = owner.tribe();
 			container_iterate_const(std::set<Building_Index>, enhancements, i)
-				if (owner.is_building_allowed(*i.current)) {
+				if (owner.is_building_type_allowed(*i.current)) {
 					Widelands::Building_Descr const & building_descr =
 						*tribe.get_building_descr(*i.current);
 					char buffer[128];

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,6 +67,8 @@ public:
 	Warehouse(const Warehouse_Descr &);
 	virtual ~Warehouse();
 
+	void load_finish(Editor_Game_Base &);
+
 	void prefill
 		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
 	void postfill
@@ -103,6 +105,9 @@ public:
 	bool can_create_worker(Game &, Ware_Index) const;
 	void     create_worker(Game &, Ware_Index);
 
+	void enable_spawn(Game &, uint8_t worker_types_without_cost_index);
+	void disable_spawn(uint8_t worker_types_without_cost_index);
+
 	// Begin Attackable implementation
 	virtual bool canAttack();
 	virtual void aggressor(Soldier &);
@@ -118,15 +123,15 @@ protected:
 private:
 	static void idle_request_cb
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
-	void sort_worker_in(Editor_Game_Base &, std::string const &, Worker &);
+	void sort_worker_in(Editor_Game_Base &, Worker &);
 
 	WarehouseSupply       * m_supply;
 	std::vector<Request *>  m_requests; // one idle request per ware type
 
 	// Workers who live here at the moment
 	std::vector<OPtr<Worker> > m_incorporated_workers;
-	int32_t                 m_next_carrier_spawn; //  time of next carrier growth
-	int32_t                 m_next_military_act; // time of next military action
+	uint32_t                 * m_next_worker_without_cost_spawn;
+	uint32_t                   m_next_military_act;
 
 	/// how many do we want to store in this building
 	std::vector<size_t> m_target_supply; // absolute value

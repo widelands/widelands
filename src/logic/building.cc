@@ -352,7 +352,7 @@ Flag & Building::base_flag()
  */
 uint32_t Building::get_playercaps() const throw () {
 	uint32_t caps = 0;
-	if (descr().destructible())
+	if (descr().is_destructible())
 		caps                                |= 1 << PCap_Bulldoze;
 	if (descr().enhancements().size())
 		caps |= 1 << PCap_Enhancable;

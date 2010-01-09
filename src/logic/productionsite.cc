@@ -64,14 +64,21 @@ ProductionSite_Descr::ProductionSite_Descr
 	while
 		(Section::Value const * const op = global_s.get_next_val("output"))
 		try {
-			if (Ware_Index const idx = tribe().ware_index(op->get_string())) {
-				if (m_output.count(idx))
+			if (Ware_Index idx = tribe().ware_index(op->get_string())) {
+				if (m_output_ware_types.count(idx))
 					throw wexception
-						("this ware type has already been declared as an output");
-				m_output.insert(idx);
+						(_("this ware type has already been declared as an output"));
+				m_output_ware_types.insert(idx);
+			} else if ((idx = tribe().worker_index(op->get_string()))) {
+				if (m_output_worker_types.count(idx))
+					throw wexception
+						(_
+						 	("this worker type has already been declared as an "
+						 	 "output"));
+				m_output_worker_types.insert(idx);
 			} else
 				throw wexception
-					("tribe does not define a ware type with this name");
+					("tribe does not define a ware or worker type with this name");
 		} catch (_wexception const & e) {
 			throw wexception("output \"%s\": %s", op->get_string(), e.what());
 		}
@@ -643,19 +650,14 @@ bool ProductionSite::get_building_work
 			Worker_Descr const & worker_descr =
 				*tribe().get_worker_descr(worker_type_with_count.first);
 			{
-				Worker * recruit;
-				if (upcast(Carrier::Descr const, carrier_descr, &worker_descr))
-					recruit = new Carrier(*carrier_descr);
-				else if (upcast(Soldier_Descr const, soldier_descr, &worker_descr))
-					recruit = new Soldier(*soldier_descr);
-				else
-					recruit = new Worker(worker_descr);
-				recruit->set_owner(&worker.owner());
-				recruit->set_position(game, worker.get_position());
-				recruit->init(game);
-				recruit->set_location(this);
-				recruit->start_task_leavebuilding(game, true);
-				worker.start_task_releaserecruit(game, *recruit);
+				Worker & recruit =
+					ref_cast<Worker, Bob>(worker_descr.create_object());
+				recruit.set_owner(&worker.owner());
+				recruit.set_position(game, worker.get_position());
+				recruit.init(game);
+				recruit.set_location(this);
+				recruit.start_task_leavebuilding(game, true);
+				worker.start_task_releaserecruit(game, recruit);
 			}
 		}
 		assert(worker_type_with_count.second);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef S__ROAD_H
-#define S__ROAD_H
+#ifndef ROAD_H
+#define ROAD_H
 
 #include "logic/immovable.h"
 #include "logic/path.h"
@@ -113,9 +113,15 @@ private:
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
 private:
-	int32_t    m_usage;      /// counts how often a ware do not get a transfer directly
-	uint32_t   m_usage_lastupdate; /// Holds the gametime when m_usage was updated last
-	int32_t    m_type;       ///< use Field::Road_XXX
+
+	/// Counter that is incremented when a ware does not get a carrier for this
+	/// road immediately and decremented over time.
+	uint32_t   m_busyness;
+
+	/// holds the gametime when m_busyness was last updated
+	uint32_t   m_busyness_last_update;
+
+	uint8_t    m_type;       ///< RoadType, 2 bits used
 	Flag     * m_flags  [2]; ///< start and end flag
 	int32_t    m_flagidx[2]; ///< index of this road in the flag's road array
 
@@ -124,9 +130,6 @@ private:
 
 	Path       m_path;       ///< path goes from start to end
 	uint32_t   m_idle_index; ///< index into path where carriers should idle
-
-	///< total number of carriers we want (currently limited to 0 or 1)
-	uint32_t   m_desire_carriers;
 
 	typedef std::vector<CarrierSlot> SlotVector;
 	SlotVector m_carrier_slots;

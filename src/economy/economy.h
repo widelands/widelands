@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef S__ECONOMY_H
-#define S__ECONOMY_H
+#ifndef ECONOMY_H
+#define ECONOMY_H
 
 #include <vector>
 
@@ -105,7 +105,7 @@ struct Economy {
 
 	void    add_warehouse(Warehouse &);
 	void remove_warehouse(Warehouse &);
-	uint32_t get_nr_warehouses() const {return m_warehouses.size();}
+	std::vector<Warehouse *> const & warehouses() const {return m_warehouses;}
 
 	void    add_request(Request &);
 	void remove_request(Request &);

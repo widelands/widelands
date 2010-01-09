@@ -71,7 +71,8 @@ Player::Player
 	m_allow_retreat_change(false),
 	m_retreat_percentage  (50),
 	m_fields            (0),
-	m_allowed_buildings (tribe_descr.get_nrbuildings(), true),
+	m_allowed_worker_types  (tribe_descr.get_nrworkers  (), false),
+	m_allowed_building_types(tribe_descr.get_nrbuildings(), true),
 	m_current_statistics(tribe_descr.get_nrwares    ()),
 	m_ware_productions  (tribe_descr.get_nrwares    ())
 {
@@ -324,7 +325,7 @@ void Player::build(Coords c, Building_Index const idx)
 		return;
 	Building_Descr const & descr = *tribe().get_building_descr(idx);
 
-	if (!descr.buildable())
+	if (!descr.is_buildable())
 		return;
 
 
@@ -485,14 +486,22 @@ void Player::flagaction(Flag & flag)
 			 "expedition");
 }
 
+
+void Player::allow_worker_type(Ware_Index const i, bool const allow) {
+	assert(i.value() < m_allowed_worker_types.size());
+	assert(not allow or tribe().get_worker_descr(i)->is_buildable());
+	m_allowed_worker_types[i] = allow;
+}
+
+
 /*
  * allow building
  *
  * Disable or enable a building for a player
  */
-void Player::allow_building(Building_Index const i, bool const allow) {
-	assert(i.value() < m_allowed_buildings.size());
-	m_allowed_buildings[i] = allow;
+void Player::allow_building_type(Building_Index const i, bool const allow) {
+	assert(i.value() < m_allowed_building_types.size());
+	m_allowed_building_types[i] = allow;
 }
 
 /*

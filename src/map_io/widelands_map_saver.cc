@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,8 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "wexception.h"
-#include "widelands_map_allowed_buildings_data_packet.h"
+#include "widelands_map_allowed_building_types_data_packet.h"
+#include "widelands_map_allowed_worker_types_data_packet.h"
 #include "widelands_map_bob_data_packet.h"
 #include "widelands_map_bobdata_data_packet.h"
 #include "widelands_map_building_data_packet.h"
@@ -134,19 +135,33 @@ void Map_Saver::save() throw (_wexception) {
 		log("done!\n ");
 	}
 
-	//  allowed buildings
-	const Player_Number nr_players = map.get_nrplayers();
+	Player_Number const nr_players = map.get_nrplayers();
+
+	//  allowed worker types
+	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
+		Ware_Index const nr_workers = player->tribe().get_nrworkers();
+		for (Ware_Index i = Ware_Index::First(); i < nr_workers; ++i)
+			if (not player->is_worker_type_allowed(i)) {
+				log("Writing Allowed Worker Types Data ... ");
+				Map_Allowed_Worker_Types_Data_Packet p;
+				p.Write(m_fs, m_egbase, m_mos);
+				log("done!\n ");
+				goto end_find_a_forbidden_worker_type_loop;
+			}
+	} end_find_a_forbidden_worker_type_loop:;
+
+	//  allowed building types
 	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
 		Building_Index const nr_buildings = player->tribe().get_nrbuildings();
 		for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i)
-			if (not player->is_building_allowed(i)) {
-				log("Writing Allowed Buildings Data ... ");
-				Map_Allowed_Buildings_Data_Packet p;
+			if (not player->is_building_type_allowed(i)) {
+				log("Writing Allowed Building Types Data ... ");
+				Map_Allowed_Building_Types_Data_Packet p;
 				p.Write(m_fs, m_egbase, m_mos);
 				log("done!\n ");
-				goto end_outer_loop;
+				goto end_find_a_forbidden_building_type_loop;
 			}
-	} end_outer_loop:;
+	} end_find_a_forbidden_building_type_loop:;
 
 	// !!!!!!!!!! NOTE
 	// This packet must be before any building or road packet. So do not

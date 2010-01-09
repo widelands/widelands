@@ -589,16 +589,17 @@ void Worker::informPlayer
 		(game, building.owner().player_number(),
 		 600000, 0,
 		 Message::create_building_message
-			(MSG_MINE,
-			 game.get_gametime(),
-			 _("Out of ") + res_type,
-			 "<p font-size=14 font-face=FreeSerif>" +
-				std::string
-					(_
-					 ("The worker of this building cannot find any more resources "
-					  "of the following type: "))
-				+ res_type + "</p>",
-			 building));
+		 	(MSG_MINE,
+		 	 game.get_gametime(),
+		 	 _("Out of ") + res_type,
+		 	 "<p font-size=14 font-face=FreeSerif>" +
+		 	 std::string
+		 	 	(_
+		 	 	 	("The worker of this building cannot find any more resources "
+		 	 	 	 "of the following type: "))
+		 	 +
+		 	 res_type + "</p>",
+		 	 building));
 }
 
 
@@ -1210,7 +1211,7 @@ Ware_Index Worker::level(Game & game) {
  */
 void Worker::init_auto_task(Game & game) {
 	if (get_location(game)) {
-		if (get_economy()->get_nr_warehouses())
+		if (get_economy()->warehouses().size())
 			return start_task_gowarehouse(game);
 
 		set_location(0);
@@ -1767,7 +1768,7 @@ void Worker::gowarehouse_update(Game & game, State & state)
 		return start_task_transfer(game, t);
 	}
 
-	if (!get_economy()->get_nr_warehouses()) {
+	if (!get_economy()->warehouses().size()) {
 		molog("[gowarehouse]: No warehouse left in Economy\n");
 		return pop_task(game);
 	}
@@ -2202,7 +2203,7 @@ struct FindFlagWithPlayersWarehouse {
 	bool accept(BaseImmovable const & imm) const {
 		if (upcast(Flag const, flag, &imm))
 			if (&flag->owner() == &m_owner)
-				if (flag->economy().get_nr_warehouses())
+				if (flag->economy().warehouses().size())
 					return true;
 		return false;
 	}
@@ -2232,7 +2233,7 @@ void Worker::fugitive_update(Game & game, State & state)
 
 	// check whether we're on a flag and it's time to return home
 	if (upcast(Flag, flag, map[get_position()].get_immovable())) {
-		if (&flag->owner() == &owner() and flag->economy().get_nr_warehouses()) {
+		if (&flag->owner() == &owner() and flag->economy().warehouses().size()) {
 			set_location(flag);
 			return pop_task(game);
 		}

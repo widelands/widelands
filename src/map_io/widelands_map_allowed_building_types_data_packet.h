@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,32 +17,28 @@
  *
  */
 
-#ifndef IROUTE_H
-#define IROUTE_H
+#ifndef WIDELANDS_MAP_ALLOWED_BUILDING_TYPES_DATA_PACKET_H
+#define WIDELANDS_MAP_ALLOWED_BUILDING_TYPES_DATA_PACKET_H
 
-#include <stdint.h>
+#include "widelands_map_data_packet.h"
 
 namespace Widelands {
 
-struct RoutingNode;
-
 /**
- * This class represents a Route Interface, a virtual base class
- * for a Route used for routing of wares for workers.
- *
- * This class was introduced to hide the implementation of route
- * and hide some ugly helper functions. It is therefore not a complete
- * interface, it only shows what was needed for refactoring.
- *
- * Most parts of the code still use the Route class directly and not this
- * interface
- **/
-struct IRoute {
-	virtual ~IRoute() {};
-
-	virtual void init(int32_t) = 0;
-	virtual void insert_as_first(RoutingNode * node) = 0;
+ * If present, this contains all buildings that are allowed to be build
+ * by players. If absent, all buildings are allowed per default
+ */
+struct Map_Allowed_Building_Types_Data_Packet : public Map_Data_Packet {
+	virtual void Read
+		(FileSystem &,
+		 Editor_Game_Base      &,
+		 const bool,
+		 Map_Map_Object_Loader * = 0)
+		throw (_wexception);
+	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * = 0)
+		throw (_wexception);
 };
 
 }
+
 #endif

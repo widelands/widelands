@@ -24,7 +24,8 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "warning.h"
-#include "widelands_map_allowed_buildings_data_packet.h"
+#include "widelands_map_allowed_building_types_data_packet.h"
+#include "widelands_map_allowed_worker_types_data_packet.h"
 #include "widelands_map_bob_data_packet.h"
 #include "widelands_map_bobdata_data_packet.h"
 #include "widelands_map_building_data_packet.h"
@@ -206,9 +207,16 @@ int32_t WL_Map_Loader::load_map_complete
 	{Map_EventChain_Data_Packet      p; p.Read(m_fs, egbase, !scenario, m_mol);}
 	log("done!\n ");
 
-	log("Reading Allowed Buildings Data ... ");
+	log("Reading Allowed Worker Types Data ... ");
 	{
-		Map_Allowed_Buildings_Data_Packet p;
+		Map_Allowed_Worker_Types_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, m_mol);
+	}
+	log("done!\n ");
+
+	log("Reading Allowed Building Types Data ... ");
+	{
+		Map_Allowed_Building_Types_Data_Packet p;
 		p.Read(m_fs, egbase, !scenario, m_mol);
 	}
 	log("done!\n ");
@@ -285,8 +293,12 @@ int32_t WL_Map_Loader::load_map_complete
 	{
 		Field const & fields_end = map()[map().max_index()];
 		for (Field * field = &map()[0]; field < &fields_end; ++field)
-			if (BaseImmovable * const imm = field->get_immovable())
+			if (BaseImmovable * const imm = field->get_immovable()) {
+				if (upcast(Building const, building, imm))
+					if (field != &map()[building->get_position()])
+						continue; //  not the building's main position
 				imm->load_finish(egbase);
+			}
 	}
 	log("done\n");
 

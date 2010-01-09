@@ -73,12 +73,16 @@ struct ProductionSite_Descr : public Building_Descr {
 	Ware_Types const & working_positions() const throw () {
 		return m_working_positions;
 	}
-	bool is_output(Ware_Index const i) const throw () {
-		return m_output.count(i);
+	bool is_output_ware_type  (Ware_Index const i) const throw () {
+		return m_output_ware_types  .count(i);
+	}
+	bool is_output_worker_type(Ware_Index const i) const throw () {
+		return m_output_worker_types.count(i);
 	}
 	Ware_Types const & inputs() const throw () {return m_inputs;}
 	typedef std::set<Ware_Index>                       Output;
-	Output   const & output  () const throw () {return m_output;}
+	Output   const & output_ware_types  () const {return m_output_ware_types;}
+	Output   const & output_worker_types() const {return m_output_worker_types;}
 	const ProductionProgram * get_program(const std::string &) const;
 	typedef std::map<std::string, ProductionProgram *> Programs;
 	Programs const & programs() const throw () {return m_programs;}
@@ -86,7 +90,8 @@ struct ProductionSite_Descr : public Building_Descr {
 private:
 	Ware_Types m_working_positions;
 	Ware_Types m_inputs;
-	Output   m_output;
+	Output   m_output_ware_types;
+	Output   m_output_worker_types;
 	Programs m_programs;
 };
 

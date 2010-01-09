@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -344,7 +344,7 @@ void Building_Statistics_Menu::update() {
 	{
 		Widelands::Building_Descr const & building =
 			*tribe.get_building_descr(i);
-		if (not (building.buildable() or building.get_enhanced_building()))
+		if (not (building.is_buildable() or building.is_enhanced()))
 			continue;
 
 		std::vector<Widelands::Player::Building_Stats> const & vec =
@@ -363,7 +363,7 @@ void Building_Statistics_Menu::update() {
 
 		//  If not in list, add new one, as long as this building is enabled.
 		if (not te) {
-			if (! iplayer().player().is_building_allowed(i))
+			if (! iplayer().player().is_building_type_allowed(i))
 				continue;
 			te = &m_table.add(i.value());
 		}

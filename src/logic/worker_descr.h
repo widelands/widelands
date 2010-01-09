@@ -60,9 +60,9 @@ public:
 
 	virtual void load_graphics();
 
-	bool buildable() const {return m_buildable;}
+	bool is_buildable() const {return m_buildable;}
 	Buildcost const & buildcost() const throw () {
-		assert(buildable());
+		assert(is_buildable());
 		return m_buildcost;
 	}
 

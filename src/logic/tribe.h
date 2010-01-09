@@ -135,6 +135,10 @@ struct Tribe_Descr {
 	}
 	int32_t get_nr_bobs() {return m_bobs.get_nitems();}
 
+	std::vector<Ware_Index> const & worker_types_without_cost() const {
+		return m_worker_types_without_cost;
+	}
+
 	typedef std::vector<std::pair<std::string, uint32_t> > AnimationStyles;
 	struct Nonexistent {};
 	uint8_t frontier_style_index(std::string const & stylename) const {
@@ -234,6 +238,8 @@ private:
 	Descr_Maintainer<Immovable_Descr> m_immovables;  // The player immovables
 	Descr_Maintainer<Bob::Descr>      m_bobs;  // The player critters
 	std::string                       m_carrier2;
+
+	std::vector<Ware_Index> m_worker_types_without_cost;
 
 	Initializations m_initializations;
 

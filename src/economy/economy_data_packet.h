@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef S__ECONOMY_DATA_PACKET_H
-#define S__ECONOMY_DATA_PACKET_H
+#ifndef ECONOMY_DATA_PACKET_H
+#define ECONOMY_DATA_PACKET_H
 
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"

@@ -764,41 +764,49 @@ void Economy::_create_requested_workers(Game & game)
 	/*
 		Find the request of workers that can not be supplied
 	*/
-	if (get_nr_warehouses() > 0) {
+	if (warehouses().size()) {
 		Tribe_Descr const & tribe = owner().tribe();
 		container_iterate_const(RequestList, m_requests, j) {
 			Request const & req = **j.current;
 
 			if (!req.is_idle() && req.get_type() == Request::WORKER) {
 				Ware_Index const index = req.get_index();
-				int32_t num_wares = 0;
 				Worker_Descr const & w_desc = *tribe.get_worker_descr(index);
 
 				for (size_t i = 0; i < m_supplies.get_nrsupplies(); ++i)
-					num_wares += m_supplies[i].nr_supplies(game, req);
+					if (m_supplies[i].nr_supplies(game, req))
+						goto requested_worker_exists;
 
 				// If there aren't enough supplies...
-				if (num_wares == 0) {
+				if (owner().is_worker_type_allowed(index)) {
+					if (not w_desc.is_buildable()) {
+						log
+							("Economy::_create_requested_workers: ERROR: "
+							 "attempting to create worker of non-buildable type "
+							 "%s\n",
+							 w_desc.descname().c_str());
+					}
+					assert(w_desc.is_buildable());
 					bool created_worker = false;
-					for (uint32_t n_wh = 0; n_wh < get_nr_warehouses(); ++n_wh) {
+					for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
 						if (m_warehouses[n_wh]->can_create_worker(game, index)) {
 							m_warehouses[n_wh]->create_worker(game, index);
 							created_worker = true;
 							break;
 						} // if (m_warehouses[n_wh]
-					} // while (n_wh < get_nr_warehouses())
+					}
 					if (! created_worker) {
 						uint32_t nth_wh = 0;
-						if (get_nr_warehouses() > 1) {
+						if (warehouses().size() > 1) {
 							// Find nearest warehouse!
 							// NOTE  Just a dummy implementation to ensure that each
 							// NOTE  call of this function sets an request for the same
 							// NOTE  warehouse - should of coures be improved further.
-							Coords tac = req.target_flag().get_position();
+							Coords const tac = req.target_flag().get_position();
 							Coords whc = m_warehouses[0]->base_flag().get_position();
 							int32_t current = (tac.x - whc.x) * (tac.y - whc.y);
 							current = current < 1 ? (- current) : current;
-							for (uint32_t i = 0; i < get_nr_warehouses(); ++i) {
+							for (uint32_t i = 0; i < warehouses().size(); ++i) {
 								whc = m_warehouses[i]->base_flag().get_position();
 								int32_t cost = (tac.x - whc.x) * (tac.y - whc.y);
 								cost = cost < 0 ? (- cost) : cost;
@@ -809,20 +817,23 @@ void Economy::_create_requested_workers(Game & game)
 							}
 						}
 						Warehouse & nearest = *m_warehouses[nth_wh];
-						if (w_desc.buildable()) {
-							Worker_Descr::Buildcost const & cost = w_desc.buildcost();
-							container_iterate_const
-								(Worker_Descr::Buildcost, cost, bc_it)
-								if
-									(Ware_Index const w_id =
-									 	tribe.ware_index(bc_it.current->first.c_str()))
-									nearest.set_needed(w_id, bc_it.current->second);
-						}
+						Worker_Descr::Buildcost const & cost = w_desc.buildcost();
+						container_iterate_const
+							(Worker_Descr::Buildcost, cost, bc_it)
+							if
+								(Ware_Index const w_id =
+								 	tribe.ware_index(bc_it.current->first.c_str()))
+								nearest.set_needed(w_id, bc_it.current->second);
 					}
-				} // if (num_wares == 0)
+				} else
+					log
+						("Economy::_create_requested_workers: Could not create %s "
+						 "for player %u because it is forbidden\n",
+						 w_desc.descname().c_str(), owner().player_number());
 			} // if (req->is_open())
-		} // for (RequestList::iterator
-	} // if (get_nr_warehouses())
+			requested_worker_exists:;
+		}
+	}
 }
 
 /**

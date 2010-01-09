@@ -25,10 +25,12 @@
 #include "editor_game_base.h"
 #include "events/event_allow_building_types.h"
 #include "events/event_allow_retreat_change.h"
+#include "events/event_allow_worker_types.h"
 #include "events/event_building.h"
 #include "events/event_conquer_area.h"
 #include "events/event_forbid_building_types.h"
 #include "events/event_forbid_retreat_change.h"
+#include "events/event_forbid_worker_types.h"
 #include "events/event_player_seeall.h"
 #include "events/event_set_player_frontier_style.h"
 #include "events/event_set_player_flag_style.h"
@@ -104,26 +106,23 @@ Tribe_Descr::Tribe_Descr
 					 	(_name, _descname, path, prof, global_s));
 			PARSE_MAP_OBJECT_TYPES_END;
 
-			PARSE_MAP_OBJECT_TYPES_BEGIN("carrier")
-				m_workers.add
-					(new Carrier::Descr
-					 	(_name, _descname, path, prof, global_s, *this,
-					 	 &m_default_encdata));
-			PARSE_MAP_OBJECT_TYPES_END;
+#define PARSE_WORKER_TYPES(name, descr_type)                                  \
+         PARSE_MAP_OBJECT_TYPES_BEGIN(name)                                   \
+            descr_type & worker_descr =                                       \
+               *new descr_type                                                \
+                  (_name, _descname, path, prof, global_s, *this,             \
+                   &m_default_encdata);                                       \
+            Ware_Index const worker_idx = m_workers.add(&worker_descr);       \
+            if                                                                \
+               (worker_descr.is_buildable() and                               \
+                worker_descr.buildcost().empty())                             \
+               m_worker_types_without_cost.push_back(worker_idx);             \
+         PARSE_MAP_OBJECT_TYPES_END;
 
-			PARSE_MAP_OBJECT_TYPES_BEGIN("soldier")
-				m_workers.add
-					(new Soldier_Descr
-					 	(_name, _descname, path, prof, global_s, *this,
-					 	 &m_default_encdata));
-			PARSE_MAP_OBJECT_TYPES_END;
+			PARSE_WORKER_TYPES("carrier", Carrier::Descr);
+			PARSE_WORKER_TYPES("soldier", Soldier_Descr);
+			PARSE_WORKER_TYPES("worker",  Worker_Descr);
 
-			PARSE_MAP_OBJECT_TYPES_BEGIN("worker")
-				m_workers.add
-					(new Worker_Descr
-					 	(_name, _descname, path, prof, global_s, *this,
-					 	 &m_default_encdata));
-			PARSE_MAP_OBJECT_TYPES_END;
 			PARSE_MAP_OBJECT_TYPES_BEGIN("constructionsite")
 				m_buildings.add
 					(new ConstructionSite_Descr
@@ -274,7 +273,18 @@ Tribe_Descr::Tribe_Descr
 								throw game_data_error("player key is not allowed");
 							else if   (event_s->get_string("point"))
 								throw game_data_error("point key is not allowed");
-							else if   (not strcmp(event_name, "allow_building_types"))
+							else if   (not strcmp(event_name, "allow_worker_types")) {
+								event_s->set_int("version", 1);
+								event =
+									new Event_Allow_Worker_Types
+										(*event_s, egbase, this);
+							} else if (not strcmp(event_name, "forbid_worker_types"))
+							{
+								event_s->set_int("version", 1);
+								event =
+									new Event_Forbid_Worker_Types
+										(*event_s, egbase, this);
+							} else if (not strcmp(event_name, "allow_building_types"))
 							{
 								event_s->set_int("version", 3);
 								event =

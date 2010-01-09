@@ -330,10 +330,10 @@ void Tribe_Descr::writeHTMLBuildings(std::string const & directory) {
 		}
 		fw.Text("\"/></td><td>");
 		fw.Text
-			(building_descr.buildable            () ? _("Yes") : _("No"));
+			(building_descr.is_buildable() ? _("Yes") : _("No"));
 		fw.Text("</td><td>");
 		fw.Text
-			(building_descr.get_enhanced_building() ? _("Yes") : _("No"));
+			(building_descr.is_enhanced () ? _("Yes") : _("No"));
 		fw.Text("</td><td align=\"right\">");
 		char buffer[32];
 		sprintf(buffer, "%u", building_descr.get_conquers());
@@ -649,37 +649,43 @@ void Worker_Descr::writeHTML(::FileWrite & fw) const {
 	fw.Text(buffer);
 	fw.Text("</p>\n");
 
-	if (buildcost().size()) {
-		fw.Text("<h2 id=\"buildcost\">");
-		fw.Text(_("Build cost"));
-		fw.Text
-			("</h2>\n"
-			 "<ul>\n");
-		container_iterate_const(Buildcost, buildcost(), j) {
-			fw.Text("<li><a name=\"buildcost_");
-			if (Ware_Index const wi = tribe().ware_index(j.current->first))
-				tribe().referenceWare
-					(fw,
-					 name() + "/index_" + i18n::get_locale() + ".xhtml#buildcost_" +
-					 j.current->first + "\" title=\"" + descname()                 +
-					 _("'s creation") + "\"><img src=\"../" + name()               +
-					 "/menu.png\" alt=\"" + descname(),
-					 HTMLReferences::Madeof,
-					 wi,
-					 j.current->second);
-			else
-				tribe().referenceWorker
-					(fw,
-					 name() + "/index_" + i18n::get_locale() + ".xhtml#buildcost_" +
-					 j.current->first + "\" title=\"" + descname()                 +
-					 _("'s creation") + "\"><img src=\"../" + name()               +
-					 "/menu.png\" alt=\"" + descname(),
-					 HTMLReferences::Madeof,
-					 tribe().safe_worker_index(j.current->first),
-					 j.current->second);
-			fw.Text("</a></li>\n");
+	if (is_buildable()) {
+		if (buildcost().size()) {
+			fw.Text("<h2 id=\"buildcost\">");
+			fw.Text(_("Build cost"));
+			fw.Text
+				("</h2>\n"
+				 "<ul>\n");
+			container_iterate_const(Buildcost, buildcost(), j) {
+				fw.Text("<li><a name=\"buildcost_");
+				if (Ware_Index const wi = tribe().ware_index(j.current->first))
+					tribe().referenceWare
+						(fw,
+						 name() + "/index_" + i18n::get_locale()                    +
+						 ".xhtml#buildcost_" + j.current->first + "\" title=\""     +
+						 descname() + _("'s creation") + "\"><img src=\"../"        +
+						 name() + "/menu.png\" alt=\"" + descname(),
+						 HTMLReferences::Madeof,
+						 wi,
+						 j.current->second);
+				else
+					tribe().referenceWorker
+						(fw,
+						 name() + "/index_" + i18n::get_locale()                    +
+						 ".xhtml#buildcost_" + j.current->first + "\" title=\""     +
+						 descname() + _("'s creation") + "\"><img src=\"../"        +
+						 name() + "/menu.png\" alt=\"" + descname(),
+						 HTMLReferences::Madeof,
+						 tribe().safe_worker_index(j.current->first),
+						 j.current->second);
+				fw.Text("</a></li>\n");
+			}
+			fw.Text("</ul>\n");
+		} else {
+			fw.Text("<p>");
+			fw.Text(_("Spawns in warehouses."));
+			fw.Text("</p>");
 		}
-		fw.Text("</ul>\n");
 	}
 
 	if (becomes()) {
@@ -809,18 +815,31 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 			fw.Text("</ul>\n");
 		}
 
-		if (output().size()) {
+		if (output_ware_types().size() + output_worker_types().size()) {
 			fw.Text("<h3 id=\"output\">");
 			fw.Text(_("Output"));
 			fw.Text
 				("</h3>\n"
 				 "<ul>\n");
-			container_iterate_const(Output, output(), i) {
+			container_iterate_const(Output, output_ware_types(), i) {
 				fw.Text("<li><a name=\"output_");
 				tribe().referenceWare
 					(fw,
 					 name() + "/index_" + i18n::get_locale() + ".xhtml#output_"    +
 					 tribe().get_ware_descr(*i.current)->name().c_str()            +
+					 "\" title=\"" + descname() + _("'s output")                   +
+					 "\"><img src=\"../" + name() + "/menu.png\" alt=\""           +
+					 descname(),
+					 HTMLReferences::Output,
+					 *i.current);
+				fw.Text("</a></li>\n");
+			}
+			container_iterate_const(Output, output_worker_types(), i) {
+				fw.Text("<li><a name=\"output_");
+				tribe().referenceWorker
+					(fw,
+					 name() + "/index_" + i18n::get_locale() + ".xhtml#output_"    +
+					 tribe().get_worker_descr(*i.current)->name().c_str()          +
 					 "\" title=\"" + descname() + _("'s output")                   +
 					 "\"><img src=\"../" + name() + "/menu.png\" alt=\""           +
 					 descname(),

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -371,11 +371,16 @@ struct Player :
 		return m_fields[i].military_influence;
 	}
 
-	// Allowed buildings
-	bool is_building_allowed(Building_Index const i) const throw () {
-		return m_allowed_buildings[i];
+	bool is_worker_type_allowed(Ware_Index const i) const throw () {
+		return m_allowed_worker_types.at(i);
 	}
-	void allow_building(Building_Index, bool allow);
+	void allow_worker_type(Ware_Index, bool allow);
+
+	// Allowed buildings
+	bool is_building_type_allowed(Building_Index const i) const throw () {
+		return m_allowed_building_types[i];
+	}
+	void allow_building_type(Building_Index, bool allow);
 
 	// Battle options
 	void set_retreat_percentage(uint8_t value);
@@ -525,7 +530,8 @@ private:
 	uint8_t               m_retreat_percentage;
 
 	Field *               m_fields;
-	std::vector<bool>     m_allowed_buildings;
+	std::vector<bool>     m_allowed_worker_types;
+	std::vector<bool>     m_allowed_building_types;
 	Economies             m_economies;
 	std::string           m_name; // Player name
 	std::string           m_ai; /**< Name of preferred AI implementation */

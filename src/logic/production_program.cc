@@ -828,7 +828,10 @@ ProductionProgram::ActProduce::ActProduce
 		item_end:
 			more = *parameters != '\0';
 			*parameters = '\0';
-			if (not descr.is_output(item.first = tribe.safe_ware_index(ware)))
+			if
+				(not
+				 descr.is_output_ware_type
+				 	(item.first = tribe.safe_ware_index(ware)))
 				throw game_data_error
 					(_
 					 	("%s is not declared as an output (\"output=%s\" was not "
@@ -911,7 +914,15 @@ ProductionProgram::ActRecruit::ActRecruit
 		item_end:
 			more = *parameters != '\0';
 			*parameters = '\0';
-			item.first = tribe.safe_worker_index(worker);
+			if
+				(not
+				 descr.is_output_worker_type
+				 	(item.first = tribe.safe_worker_index(worker)))
+				throw game_data_error
+					(_
+					 	("%s is not declared as an output (\"output=%s\" was not "
+					 	 "found in the [global] section)"),
+					 worker, worker);
 		}
 	} catch (_wexception const & e) {
 		throw game_data_error("recruit: %s", e.what());
@@ -1121,16 +1132,17 @@ void ProductionProgram::ActMine::informPlayer
 		(game, ps.owner().player_number(),
 		 600000, 0,
 		 Message::create_building_message
-			(MSG_MINE,
-			 game.get_gametime(),
-			 _("Mine empty"),
-			 "<p font-size=14 font-face=FreeSerif>" +
-			 std::string
-				 (_
-				 ("This mines has run empty. You should consider to expand or"
-				  "destruct it."))
-			 + "</p>",
-			 ps));
+		 	(MSG_MINE,
+		 	 game.get_gametime(),
+		 	 _("Mine empty"),
+		 	 "<p font-size=14 font-face=FreeSerif>" +
+		 	 std::string
+		 	 	(_
+		 	 	 	("This mines has run empty. You should consider to expand or"
+		 	 	 	 "destruct it."))
+		 	 +
+		 	 "</p>",
+		 	 ps));
 }
 
 

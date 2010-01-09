@@ -62,9 +62,9 @@ struct Building_Descr : public Map_Object_Descr {
 		 std::string const & directory, Profile &, Section & global_s,
 		 Tribe_Descr const &, EncodeData const *);
 
-	bool buildable() const {return m_buildable;}
-	bool destructible() const {return m_destructible;}
-	bool get_enhanced_building() const {return m_enhanced_building;}
+	bool is_buildable   () const {return m_buildable;}
+	bool is_destructible() const {return m_destructible;}
+	bool is_enhanced    () const {return m_enhanced_building;}
 	typedef std::map<Ware_Index, uint8_t> Buildcost;
 	Buildcost const & buildcost() const throw () {return m_buildcost;}
 	PictureID get_buildicon() const {return m_buildicon;}

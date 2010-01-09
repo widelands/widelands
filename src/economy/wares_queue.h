@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef S__WARES_QUEUE_H
-#define S__WARES_QUEUE_H
+#ifndef WARES_QUEUE_H
+#define WARES_QUEUE_H
 
 // Needed for Ware_Index
 #include "logic/widelands.h"

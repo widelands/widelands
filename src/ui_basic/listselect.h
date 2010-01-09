@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,18 +75,17 @@ struct BaseListselect : public Panel {
 
 	void set_entry_color(uint32_t, RGBColor) throw ();
 	void set_align(Align);
-	void set_font(std::string const & fontname, int32_t fontsize) {
+	void set_font(std::string const & fontname, int32_t const fontsize) {
 		m_fontname = fontname;
 		m_fontsize = fontsize;
 	}
 
-	uint32_t size() const {
-		return m_entry_records.size();
-	}
+	uint32_t size () const {return m_entry_records.size ();}
+	bool     empty() const {return m_entry_records.empty();}
 
 	uint32_t operator[](const uint32_t i) const throw ()
 	{
-		assert(i < m_entry_records.size());
+		assert(i < size());
 		return m_entry_records[i]->m_entry;
 	}
 

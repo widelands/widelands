@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,12 +57,12 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame(Widelands::Game & g) :
 		 _("OK"), std::string(), false, false,
 		 m_fn, m_fs),
 	m_delete
-		 (this,
-		  m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
-		  g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		  &Fullscreen_Menu_LoadGame::clicked_delete, *this,
-		  _("Delete"), std::string(), false, false,
-		  m_fn, m_fs),
+		(this,
+		 m_xres * 71 / 100, m_yres * 17 / 20, m_butw, m_buth,
+		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 &Fullscreen_Menu_LoadGame::clicked_delete, *this,
+		 _("Delete"), std::string(), false, false,
+		 m_fn, m_fs),
 
 // Replay list
 	m_list
@@ -115,7 +115,8 @@ void Fullscreen_Menu_LoadGame::clicked_delete()
 		g_fs->Unlink(m_list.get_selected());
 		m_list.clear();
 		fill_list();
-		if (!m_list.size()) { // else fill_list() already selected the first entry
+		if (m_list.empty()) {
+			//  else fill_list() already selected the first entry
 			m_ok.set_enabled(false);
 			m_delete.set_enabled(false);
 		}

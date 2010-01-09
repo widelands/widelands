@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ char const * Event_Forbid_Building_Types::action_name() const {
 
 Event::State Event_Forbid_Building_Types::run(Game & game) {
 	container_iterate_const(Building_Types, m_building_types, i)
-		game.player(m_player_number).allow_building(*i.current, false);
+		game.player(m_player_number).allow_building_type(*i.current, false);
 	return m_state = DONE;
 }
 
