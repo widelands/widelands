@@ -2,7 +2,7 @@ help=_Helps to carry items at heavy used roads.
 default_target_quantity=5
 
 [idle]
-pics=_donkey_idle_e_??.png
+pics=donkey_idle_e_??.png
 hotspot=17 25
 fps=10
 
