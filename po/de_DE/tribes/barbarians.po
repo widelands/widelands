@@ -818,7 +818,7 @@ msgstr "Die Grundausrüstung eines Kriegers."
 
 #: ../../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
-msgstr "Schmieded Helme für die Soldaten."
+msgstr "Schmiedet Helme für die Soldaten."
 
 #: ../../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
@@ -1147,7 +1147,7 @@ msgstr "Weizen ist überlebenswichtig. Gutes Brot und starke Biere können aus d
 
 #: ../../../tribes/barbarians/wisent/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr "Hilft an viel benutzten Straßen Wahren zu tranzportieren."
+msgstr "Hilft an viel benutzten Straßen Waren zu transportieren."
 
 #~ msgid "Forester"
 #~ msgstr "Förster"
