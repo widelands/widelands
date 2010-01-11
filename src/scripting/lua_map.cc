@@ -39,53 +39,86 @@ using namespace Widelands;
 /*
  * Helper functions
  */
+
+#define luaL_checkint32(L, n)  static_cast<int32_t>(luaL_checkinteger(L, (n)))
+
+#define WRAPPED_PROPERTY_SET_INT(object, name) int set_##name(lua_State* L) { \
+	object.name = luaL_checkint32(L, -1); \
+	return 0; \
+}
+#define WRAPPED_PROPERTY_GET_INT(object, name) int get_##name(lua_State* L) { \
+	lua_pushinteger(L, object.name); \
+	return 1; \
+}
+#define WRAPPED_PROPERTY_INT(object, name) \
+	WRAPPED_PROPERTY_GET_INT(object, name) \
+	WRAPPED_PROPERTY_SET_INT(object, name)
+
+#define PROP_RO(klass, name) {#name, &klass::get_##name, 0}
+#define PROP_RW(klass, name) {#name, &klass::get_##name, &klass::set_##name}
+#define METHOD(klass, name) {#name, &klass::name}
+
+/*
+ * Map Object
+ */
+// class L_MapObject {
+//         Map_Object& mo;
+//
+// public:
+//         LUA_WRAPPED_CALL_R_INT(serial, mo);
+//
+//         static const char className[];
+//         static Luna<L_Coords>::RegType methods[];
+// }
+// const char L_MapObject::className[] = "MapObject";
+// Luna<L_Coords>::RegType L_MapObject::methods[] = {
+//         method(L_MapObject, serial),
+//         {0, 0},
+// };
+//
 /*
  * Coordinates
  */
-#define luaL_checkint32(L, n)  static_cast<int32_t>(luaL_checkinteger(L, (n)))
-
-#define LUA_WRAPPED_PROPERTY_RW_INT(name, object) int name(lua_State* L) { \
-	int n = lua_gettop(L); /* Number of arguments is now in n */ \
-	if (!n) { \
-		lua_pushinteger(L, object.name); \
-		return 1; \
-	} else { \
-		int32_t const val = luaL_checkint32(L, 1); \
-		object.name = val; \
-		return 0; \
-	} \
-}
-
 class L_Coords {
 	Coords m_c;
 
 public:
 	static const char className[];
-	static Luna<L_Coords>::RegType methods[];
+	static const Luna<L_Coords>::FunctionType Functions[];
+	static const Luna<L_Coords>::PropertyType Properties[];
+
 
 	L_Coords(lua_State * L)
 	{
 		m_c.x = luaL_checknumber(L, 1);
 		m_c.y = luaL_checknumber(L, 2);
 	}
-	LUA_WRAPPED_PROPERTY_RW_INT(x, m_c);
-	LUA_WRAPPED_PROPERTY_RW_INT(y, m_c);
-
 	~L_Coords() {}
 
+	/*
+	 * Properties
+	 */
+	WRAPPED_PROPERTY_INT(m_c, x);
+	WRAPPED_PROPERTY_INT(m_c, y);
+
+	/*
+	 * Lua functions
+	 */
+
+	/*
+	 * C Functions
+	 */
 	inline Coords & coords() {return m_c;}
 };
-
 const char L_Coords::className[] = "Coords";
-
-#define method(class, name) {#name, &class::name}
-
-Luna<L_Coords>::RegType L_Coords::methods[] = {
-	method(L_Coords, x),
-	method(L_Coords, y),
+const Luna <L_Coords>::FunctionType L_Coords::Functions[] = {
 	{0, 0},
 };
-
+const Luna <L_Coords>::PropertyType L_Coords::Properties[] = {
+	PROP_RW(L_Coords, x),
+	PROP_RW(L_Coords, y),
+	{0, 0, 0},
+};
 // LUAMODULE wl.map
 
 
@@ -118,9 +151,11 @@ static int L_create_immovable(lua_State * const l) {
 	if (imm_idx < 0)
 		return report_error(l, "Unknown immovable <%s>", objname);
 
-	game.create_immovable (pos, imm_idx, 0);
+	Map_Object & m = game.create_immovable (pos, imm_idx, 0);
 
-	return 0;
+	lua_pushlightuserdata(l, static_cast<void * >(&m));
+
+	return 1;
 }
 
 
@@ -183,6 +218,6 @@ const static struct luaL_reg wlmap [] = {
 void luaopen_wlmap(lua_State * L) {
 	luaL_register(L, "wl.map", wlmap);
 
-	Luna<L_Coords>::Register(L, "wl.map");
+	Luna<L_Coords>::register_class(L, "map");
 
 }
