@@ -506,7 +506,7 @@ void DefaultAI::update_buildable_field
 		field.water_nearby = water_list.size();
 
 		FCoords fse;
-		map.get_neighbour (field.coords, Map_Object::WALK_SE, &fse);
+		map.get_neighbour (field.coords, WALK_SE, &fse);
 
 		if (BaseImmovable const * const imm = fse.field->get_immovable())
 			if
@@ -514,7 +514,7 @@ void DefaultAI::update_buildable_field
 				 or
 				 (dynamic_cast<Road const *>(imm)
 				  &&
-				  fse.field->get_caps() & BUILDCAPS_FLAG))
+				  fse.field->nodecaps() & BUILDCAPS_FLAG))
 			field.preferred = true;
 
 		for (uint32_t i = 0; i < immovables.size(); ++i) {
@@ -629,7 +629,7 @@ void DefaultAI::update_mineable_field (MineableField & field)
 	field.mines_nearby = 1;
 
 	FCoords fse;
-	map.get_neighbour (field.coords, Map_Object::WALK_SE, &fse);
+	map.get_neighbour (field.coords, WALK_SE, &fse);
 
 	if (BaseImmovable const * const imm = fse.field->get_immovable())
 		if
@@ -637,7 +637,7 @@ void DefaultAI::update_mineable_field (MineableField & field)
 			 or
 			 (dynamic_cast<Road const *>(imm)
 			  &&
-			  fse.field->get_caps() & BUILDCAPS_FLAG))
+			  fse.field->nodecaps() & BUILDCAPS_FLAG))
 		field.preferred = true;
 
 	for (uint32_t i = 0; i < immovables.size(); ++i) {
@@ -722,7 +722,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 		(std::list<BuildableField *>::iterator i = buildable_fields.begin();
 		 i != buildable_fields.end();
 		 ++i)
-		++spots_avail[(*i)->coords.field->get_caps() & BUILDCAPS_SIZEMASK];
+		++spots_avail[(*i)->coords.field->nodecaps() & BUILDCAPS_SIZEMASK];
 
 	int32_t expand_factor = 1;
 
@@ -1179,14 +1179,14 @@ bool DefaultAI::improve_roads (int32_t gametime)
 			for (; i >= j; --i, ++j) {
 				{
 					const Coords c = cp.get_coords()[i];
-					if (map[c].get_caps() & BUILDCAPS_FLAG) {
+					if (map[c].nodecaps() & BUILDCAPS_FLAG) {
 						game().send_player_build_flag (player_number(), c);
 						return true;
 					}
 				}
 				{
 					const Coords c = cp.get_coords()[j];
-					if (map[c].get_caps() & BUILDCAPS_FLAG) {
+					if (map[c].nodecaps() & BUILDCAPS_FLAG) {
 						game().send_player_build_flag (player_number(), c);
 						return true;
 					}

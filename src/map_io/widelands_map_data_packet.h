@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,24 +35,27 @@ struct Map_Map_Object_Saver;
  * abstract base class
 */
 struct Map_Data_Packet {
-	virtual ~Map_Data_Packet() {m_skip = false;}
-
 	virtual void Read
-		(FileSystem &,
-		 Editor_Game_Base      &,
-		 const bool,
-		 Map_Map_Object_Loader * = 0)
+		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader * = 0)
 		throw (_wexception)
 		= 0;
 	virtual void Write
 		(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * = 0)
 		throw (_wexception)
 		= 0;
-
-private:
-	bool m_skip;
 };
 
 }
+
+#define MAP_DATA_PACKET(name)                                                 \
+namespace Widelands {                                                         \
+struct name : public Map_Data_Packet {                                        \
+   void Read                                                                  \
+      (FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader * = 0)   \
+      throw (_wexception);                                                    \
+   void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * = 0)   \
+      throw (_wexception);                                                    \
+};                                                                            \
+}                                                                             \
 
 #endif

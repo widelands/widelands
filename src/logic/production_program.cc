@@ -1122,9 +1122,9 @@ void ProductionProgram::ActMine::execute
 	return ps.program_step(game);
 }
 
-// Copied from militarysite.cc, MilitarySite::informPlayer
-// Informs the player about a mine that has run empty, if the
-// mine has not sent this message withing the last 60 seconds.
+/// Copied from militarysite.cc, MilitarySite::informPlayer
+/// Informs the player about a mine that has run empty, if the mine has not
+/// sent this message within the last 10 minutes.
 void ProductionProgram::ActMine::informPlayer
 	(Game & game, ProductionSite & ps) const
 {

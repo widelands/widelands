@@ -52,12 +52,12 @@
 #include "logic/soldier.h"
 #include "stock_menu.h"
 #include "logic/tribe.h"
-#include "upcast.h"
 #include "ware_statistics_menu.h"
 
 #include "ui_basic/editbox.h"
 #include "ui_basic/unique_window.h"
 
+#include "upcast.h"
 
 using Widelands::Building;
 using Widelands::Map;

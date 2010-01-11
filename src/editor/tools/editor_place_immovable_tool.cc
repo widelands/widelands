@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ int32_t Editor_Place_Immovable_Tool::handle_click_impl
 	do if
 		(not mr.location().field->get_immovable()
 		 and
-		 mr.location().field->get_caps() & Widelands::MOVECAPS_WALK)
+		 mr.location().field->nodecaps() & Widelands::MOVECAPS_WALK)
 		egbase.create_immovable(mr.location(), get_random_enabled(), 0);
 	while (mr.advance(map));
 	return radius + 2;

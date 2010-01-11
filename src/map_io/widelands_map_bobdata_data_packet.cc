@@ -127,8 +127,8 @@ void Map_Bobdata_Data_Packet::Read
 					bob.m_animstart = fr.Signed32();
 
 					if (packet_version < 3) {
-						Map_Object::WalkingDir const walking_dir =
-							static_cast<Map_Object::WalkingDir>(fr.Signed32());
+						WalkingDir const walking_dir =
+							static_cast<WalkingDir>(fr.Signed32());
 						if (6 < walking_dir)
 							throw game_data_error
 								("walking dir is %u but must be one of {0 (idle), 1 "
@@ -139,8 +139,7 @@ void Map_Bobdata_Data_Packet::Read
 					} else
 						try {
 							bob.m_walking =
-								static_cast<Map_Object::WalkingDir>
-									(fr.Direction8_allow_null());
+								static_cast<WalkingDir>(fr.Direction8_allow_null());
 						} catch (StreamRead::direction_invalid const & e) {
 							throw game_data_error
 								("walking dir is %u but must be one of {0 (idle), 1 "

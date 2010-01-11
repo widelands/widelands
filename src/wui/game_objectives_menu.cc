@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -93,7 +93,10 @@ void GameObjectivesMenu::think() {
 		bool should_show =
 			mom[i].get_is_visible() and not mom[i].get_trigger()->is_set();
 		if (should_show) {
+
+			//  FIXME Does not this change the game state from UI code???
 			mom[i].get_trigger()->check_set_conditions(iplayer().game());
+
 			should_show &= !mom[i].get_trigger()->is_set();
 		}
 		uint32_t const list_size = list.size();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,12 +47,12 @@ bool FindNodeAnd::accept(Map const & map, FCoords const & coord) const {
 
 
 bool FindNodeCaps::accept(Map const &, FCoords const & coord) const {
-	uint8_t fieldcaps = coord.field->get_caps();
+	NodeCaps nodecaps = coord.field->nodecaps();
 
-	if ((fieldcaps & BUILDCAPS_SIZEMASK) < (m_mincaps & BUILDCAPS_SIZEMASK))
+	if ((nodecaps & BUILDCAPS_SIZEMASK) < (m_mincaps & BUILDCAPS_SIZEMASK))
 		return false;
 
-	if ((m_mincaps & ~BUILDCAPS_SIZEMASK) & ~(fieldcaps & ~BUILDCAPS_SIZEMASK))
+	if ((m_mincaps & ~BUILDCAPS_SIZEMASK) & ~(nodecaps & ~BUILDCAPS_SIZEMASK))
 		return false;
 
 	return true;
@@ -62,22 +62,22 @@ bool FindNodeSize::accept(Map const &, FCoords const & coord) const {
 	if (BaseImmovable const * const immovable = coord.field->get_immovable())
 		if (immovable->get_size() > BaseImmovable::NONE)
 			return false;
-	uint8_t const fieldcaps = coord.field->get_caps();
+	NodeCaps const nodecaps = coord.field->nodecaps();
 
 	switch (m_size) {
 	case sizeBuild:
 		return
-			fieldcaps & (BUILDCAPS_SIZEMASK | BUILDCAPS_FLAG | BUILDCAPS_MINE);
+			nodecaps & (BUILDCAPS_SIZEMASK | BUILDCAPS_FLAG | BUILDCAPS_MINE);
 	case sizeMine:
-		return fieldcaps & BUILDCAPS_MINE;
+		return nodecaps & BUILDCAPS_MINE;
 	case sizePort:
-		return fieldcaps & BUILDCAPS_PORT;
+		return nodecaps & BUILDCAPS_PORT;
 	case sizeSmall:
-		return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_SMALL;
+		return (nodecaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_SMALL;
 	case sizeMedium:
-		return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_MEDIUM;
+		return (nodecaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_MEDIUM;
 	case sizeBig:
-		return (fieldcaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_BIG;
+		return (nodecaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_BIG;
 	case sizeAny:
 	default:
 		return true;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 by the Widelands Development Team
+ * Copyright (C) 2007, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,24 +51,18 @@ throw ()
 	--m_direction; if (not m_direction) m_direction = 6;
 	Area<FCoords>::Radius_type steps_left = m_area.radius + 1;
 	switch (m_direction) {
-	case Map_Object::WALK_NW:
-		for (; steps_left; --steps_left) map.get_tln(m_area, &m_area);
-		break;
-	case Map_Object::WALK_NE:
-		for (; steps_left; --steps_left) map.get_trn(m_area, &m_area);
-		break;
-	case Map_Object::WALK_E:
-		for (; steps_left; --steps_left) map.get_rn (m_area, &m_area);
-		break;
-	case Map_Object::WALK_SE:
-		for (; steps_left; --steps_left) map.get_brn(m_area, &m_area);
-		break;
-	case Map_Object::WALK_SW:
-		for (; steps_left; --steps_left) map.get_bln(m_area, &m_area);
-		break;
-	case Map_Object::WALK_W:
-		for (; steps_left; --steps_left) map.get_ln (m_area, &m_area);
-		break;
+#define DIRECTION_CASE(dir, neighbour_function)                               \
+   case dir:                                                                  \
+      for (; steps_left; --steps_left)                                        \
+         map.neighbour_function(m_area, &m_area);                             \
+      break;                                                                  \
+
+	DIRECTION_CASE(WALK_NW, get_tln);
+	DIRECTION_CASE(WALK_NE, get_trn);
+	DIRECTION_CASE(WALK_E,  get_rn);
+	DIRECTION_CASE(WALK_SE, get_brn);
+	DIRECTION_CASE(WALK_SW, get_bln);
+	DIRECTION_CASE(WALK_W,  get_ln);
 	}
 	--m_direction; if (not m_direction) m_direction = 6;
 	m_remaining_in_edge = m_area.radius;

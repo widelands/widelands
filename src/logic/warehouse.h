@@ -75,7 +75,24 @@ public:
 		(Game &, uint32_t const *, uint32_t const *, Soldier_Counts const *);
 
 	char const * type_name() const throw () {return "warehouse";}
+
+	/// Called only when the oject is logically created in the simulation. If
+	/// called again, such as when the object is loaded from a savegame, it will
+	/// cause bugs.
+	///
+	/// * Calls Building::init.
+	/// * Creates an idle_request for each ware and worker type.
+	/// * Sets a next_spawn time for each buildable worker type without cost
+	///   that the owning player is allowed to create and schedules act for for
+	///   the spawn.
+	/// * Schedules act for military stuff (and sets m_next_military_act).
+	/// * Sets the size of m_target_supplys to the sum of all ware and worker
+	///   types.
+	/// * Sees the area (since a warehouse is considered to be always occupied).
+	/// * Conquers land if the the warehouse type is configured to do that.
+	/// * Sends a message to the player about the creation of this warehouse.
 	virtual void init(Editor_Game_Base &);
+
 	virtual void cleanup(Editor_Game_Base &);
 
 	virtual void act(Game & game, uint32_t data);

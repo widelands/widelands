@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,27 +17,22 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_WAREDATA_DATA_PACKET_H
-#define WIDELANDS_MAP_WAREDATA_DATA_PACKET_H
-
-#include "widelands_map_data_packet.h"
+#ifndef WALKINGDIR_H
+#define WALKINGDIR_H
 
 namespace Widelands {
 
-class WareInstance;
-
-struct Map_Waredata_Data_Packet : public Map_Data_Packet {
-	void Read
-		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader * = 0)
-		throw (_wexception);
-	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * = 0)
-		throw (_wexception);
-private:
-	void write_ware
-		(FileWrite            &,
-		 Editor_Game_Base     &,
-		 Map_Map_Object_Saver *,
-		 WareInstance   const &);
+/// Constants for where we are going.
+enum WalkingDir {
+	IDLE            = 0,
+	FIRST_DIRECTION = 1,
+	WALK_NE         = 1,
+	WALK_E          = 2,
+	WALK_SE         = 3,
+	WALK_SW         = 4,
+	WALK_W          = 5,
+	WALK_NW         = 6,
+	LAST_DIRECTION  = 6,
 };
 
 }

@@ -508,18 +508,14 @@ struct FindNodeSpace {
 		: ignoreimmovable(ignoreimm) {}
 
 	bool accept(Map const & map, FCoords const & coords) const {
-		if (!(coords.field->get_caps() & MOVECAPS_WALK))
+		if (!(coords.field->nodecaps() & MOVECAPS_WALK))
 			return false;
 
-		for
-			(uint8_t dir = Map_Object::FIRST_DIRECTION;
-			 dir <= Map_Object::LAST_DIRECTION;
-			 ++dir)
-		{
-			FCoords neighb = map.get_neighbour(coords, dir);
+		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+			FCoords const neighb = map.get_neighbour(coords, dir);
 
 			if
-				(!(neighb.field->get_caps() & MOVECAPS_WALK) &&
+				(!(neighb.field->nodecaps() & MOVECAPS_WALK) &&
 				 neighb.field->get_immovable() != ignoreimmovable)
 				return false;
 		}

@@ -73,7 +73,7 @@ struct Player :
 	friend struct Event_Set_Player_Flag_Style;
 	friend struct Map_Buildingdata_Data_Packet;
 	friend struct Map_Players_View_Data_Packet;
-	friend struct Map_Seen_Fields_Data_Packet;
+	friend struct Map_Exploration_Data_Packet;
 
 	Player
 		(Editor_Game_Base &,
@@ -97,7 +97,7 @@ struct Player :
 
 	void create_default_infrastructure();
 
-	FieldCaps get_buildcaps(FCoords) const;
+	NodeCaps get_buildcaps(FCoords) const;
 
 	// For cheating
 	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}

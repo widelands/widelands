@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2007-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,8 +54,8 @@ struct SimpleRoadTestsFixture {
 		map = new TestingMap(32, 32);
 		g.set_map(map, false);
 
-		path.append(*map, Map_Object::WALK_E);
-		path.append(*map, Map_Object::WALK_E);
+		path.append(*map, WALK_E);
+		path.append(*map, WALK_E);
 
 		start = new TestingFlag(g, Coords(5, 5));
 		end = new TestingFlag(g, Coords(7, 5));

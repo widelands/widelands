@@ -22,21 +22,8 @@
 
 #include "widelands_map_data_packet.h"
 
-namespace Widelands {
-
 /// If present, this contains all worker types that are allowed to be build
 /// by players. If absent, all worker types are allowed per default.
-struct Map_Allowed_Worker_Types_Data_Packet : public Map_Data_Packet {
-	virtual void Read
-		(FileSystem &,
-		 Editor_Game_Base      &,
-		 const bool,
-		 Map_Map_Object_Loader * = 0)
-		throw (_wexception);
-	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * = 0)
-		throw (_wexception);
-};
-
-}
+MAP_DATA_PACKET(Map_Allowed_Worker_Types_Data_Packet);
 
 #endif

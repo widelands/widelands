@@ -142,9 +142,9 @@ void Player::allocate_map()
 Return filtered buildcaps that take the player's territory into account.
 ===============
 */
-FieldCaps Player::get_buildcaps(const FCoords fc) const {
+NodeCaps Player::get_buildcaps(FCoords const fc) const {
 	const Map & map = egbase().map();
-	uint8_t buildcaps = fc.field->get_caps();
+	uint8_t buildcaps = fc.field->nodecaps();
 
 	if (not fc.field->is_interior(m_plnum))
 		buildcaps = 0;
@@ -168,7 +168,7 @@ FieldCaps Player::get_buildcaps(const FCoords fc) const {
 			buildcaps &= ~BUILDCAPS_SMALL;
 	}
 
-	return static_cast<FieldCaps>(buildcaps);
+	return static_cast<NodeCaps>(buildcaps);
 }
 
 

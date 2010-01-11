@@ -139,13 +139,13 @@ void Map::recalc_for_field_area(const Area<FCoords> area) {
 		do {
 			recalc_brightness     (mr.location());
 			recalc_border         (mr.location());
-			recalc_fieldcaps_pass1(mr.location());
+			recalc_nodecaps_pass1(mr.location());
 		} while (mr.advance(*this));
 	}
 
 	{ //  Second pass.
 		MapRegion<Area<FCoords> > mr(*this, area);
-		do recalc_fieldcaps_pass2(mr.location()); while (mr.advance(*this));
+		do recalc_nodecaps_pass2(mr.location()); while (mr.advance(*this));
 	}
 
 	{ //  Now only recaluclate the overlays.
@@ -180,13 +180,13 @@ void Map::recalc_whole_map()
 			check_neighbour_heights(f, radius);
 			recalc_brightness     (f);
 			recalc_border         (f);
-			recalc_fieldcaps_pass1(f);
+			recalc_nodecaps_pass1  (f);
 		}
 
 	for (Y_Coordinate y = 0; y < m_height; ++y)
 		for (X_Coordinate x = 0; x < m_width; ++x) {
 			f = get_fcoords(Coords(x, y));
-			recalc_fieldcaps_pass2(f);
+			recalc_nodecaps_pass2(f);
 		}
 
 	//  Now only recaluclate the overlays.
@@ -229,7 +229,7 @@ void Map::recalc_default_resources() {
 			//  If one of the neighbours is unpassable, count its resource
 			//  stronger
 			//  top left neigbour
-			get_neighbour(f, Map_Object::WALK_NW, &f1);
+			get_neighbour(f, WALK_NW, &f1);
 			{
 				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
 				const int8_t resr =
@@ -256,7 +256,7 @@ void Map::recalc_default_resources() {
 			}
 
 			//  top right neigbour
-			get_neighbour(f, Map_Object::WALK_NE, &f1);
+			get_neighbour(f, WALK_NE, &f1);
 			{
 				const Terrain_Descr & terd = w.terrain_descr(f1.field->terrain_d());
 				const int8_t resd =
@@ -271,7 +271,7 @@ void Map::recalc_default_resources() {
 			}
 
 			//  left neighbour
-			get_neighbour(f, Map_Object::WALK_W, &f1);
+			get_neighbour(f, WALK_W, &f1);
 			{
 				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
 				const int8_t resr =
@@ -552,7 +552,11 @@ void Map::set_origin(Coords const new_origin) {
 				(Bob * bob = c.field->get_first_bob();
 				 bob;
 				 bob = bob->get_next_bob())
-				bob->m_position = c;
+			{
+				bob->m_position.x     = c.x;
+				bob->m_position.y     = c.y;
+				bob->m_position.field = c.field;
+			}
 		}
 }
 
@@ -1073,7 +1077,7 @@ uint32_t Map::find_reachable_fields
 
 
 /*
-Field attribute recalculation passes
+Node attribute recalculation passes
 ------------------------------------
 
 Some events can change the map in a way that run-time calculated attributes
@@ -1090,8 +1094,8 @@ with a radius of two fields. This means that you must build a list of the
 directly affected field and all fields that can be reached in two steps.
 
 You must then perform the following operations:
-1. Call recalc_brightness() and recalc_fieldcaps_pass1() on all fields
-2. Call recalc_fieldcaps_pass2() on all fields
+1. Call recalc_brightness() and recalc_nodecaps_pass1() on all nodes
+2. Call recalc_nodecaps_pass2() on all fields
 
 Note: it is possible to leave out recalc_brightness() unless the height has
 been changed.
@@ -1140,17 +1144,17 @@ void Map::recalc_brightness(FCoords const f) {
 
 /*
 ===============
-Recalculate the fieldcaps for the given field.
+Recalculate the caps for the given node.
  - Check terrain types for passability and flag buildability
 
 I hope this is understandable and maintainable.
 
-Note: due to inter-field dependencies, fieldcaps calculations are split up
+Note: due to inter-field dependencies, nodecaps calculations are split up
 into two passes. You should always perform both passes. See the comment
 above recalc_brightness.
 ===============
 */
-void Map::recalc_fieldcaps_pass1(FCoords const f)
+void Map::recalc_nodecaps_pass1(FCoords const f)
 {
 	uint8_t caps = CAPS_NONE;
 
@@ -1248,19 +1252,19 @@ void Map::recalc_fieldcaps_pass1(FCoords const f)
 		caps |= BUILDCAPS_FLAG;
 	}
 end:
-	f.field->caps = static_cast<FieldCaps>(caps);
+	f.field->caps = static_cast<NodeCaps>(caps);
 }
 
 
 /*
 ===============
-Second pass of fieldcaps. Determine which kind of building (if any) can be built
+Second pass of nodecaps. Determine which kind of building (if any) can be built
 on this Field.
 
 Important: flag buildability has already been checked in the first pass.
 ===============
 */
-void Map::recalc_fieldcaps_pass2(FCoords const f)
+void Map::recalc_nodecaps_pass2(FCoords const f)
 {
 	// 1) Collect neighbour information
 	//
@@ -1487,7 +1491,7 @@ void Map::recalc_fieldcaps_pass2(FCoords const f)
 		}
 	}
 end: //  9) That's it, store the collected information.
-	f.field->caps = static_cast<FieldCaps>(caps);
+	f.field->caps = static_cast<NodeCaps>(caps);
 }
 
 
@@ -1703,12 +1707,12 @@ void Map::get_neighbour
 	(Coords const f, Direction const dir, Coords * const o) const
 {
 	switch (dir) {
-	case Map_Object::WALK_NW: get_tln(f, o); break;
-	case Map_Object::WALK_NE: get_trn(f, o); break;
-	case Map_Object::WALK_E:  get_rn (f, o); break;
-	case Map_Object::WALK_SE: get_brn(f, o); break;
-	case Map_Object::WALK_SW: get_bln(f, o); break;
-	case Map_Object::WALK_W:  get_ln (f, o); break;
+	case WALK_NW: get_tln(f, o); break;
+	case WALK_NE: get_trn(f, o); break;
+	case WALK_E:  get_rn (f, o); break;
+	case WALK_SE: get_brn(f, o); break;
+	case WALK_SW: get_bln(f, o); break;
+	case WALK_W:  get_ln (f, o); break;
 	default:
 		assert(false);
 	}
@@ -1718,12 +1722,12 @@ void Map::get_neighbour
 	(FCoords const f, Direction const dir, FCoords * const o) const
 {
 	switch (dir) {
-	case Map_Object::WALK_NW: get_tln(f, o); break;
-	case Map_Object::WALK_NE: get_trn(f, o); break;
-	case Map_Object::WALK_E:  get_rn (f, o); break;
-	case Map_Object::WALK_SE: get_brn(f, o); break;
-	case Map_Object::WALK_SW: get_bln(f, o); break;
-	case Map_Object::WALK_W:  get_ln (f, o); break;
+	case WALK_NW: get_tln(f, o); break;
+	case WALK_NE: get_trn(f, o); break;
+	case WALK_E:  get_rn (f, o); break;
+	case WALK_SE: get_brn(f, o); break;
+	case WALK_SW: get_bln(f, o); break;
+	case WALK_W:  get_ln (f, o); break;
 	default:
 		assert(false);
 	}
@@ -1982,7 +1986,7 @@ int32_t Map::findpath
 	curpf->cycle      = pathfields->cycle;
 	curpf->real_cost  = 0;
 	curpf->estim_cost = calc_cost_lowerbound(start, end);
-	curpf->backlink   = Map_Object::IDLE;
+	curpf->backlink   = IDLE;
 
 	Open.push(*curpf);
 
@@ -1996,14 +2000,10 @@ int32_t Map::findpath
 			break; // found our target
 
 		// avoid bias by using different orders when pathfinding
-		static const int8_t order1[] = {
-			Map_Object::WALK_NW, Map_Object::WALK_NE, Map_Object::WALK_E,
-			Map_Object::WALK_SE, Map_Object::WALK_SW, Map_Object::WALK_W
-		};
-		static const int8_t order2[] = {
-			Map_Object::WALK_NW, Map_Object::WALK_W, Map_Object::WALK_SW,
-			Map_Object::WALK_SE, Map_Object::WALK_E, Map_Object::WALK_NE
-		};
+		static const int8_t order1[] =
+			{WALK_NW, WALK_NE, WALK_E, WALK_SE, WALK_SW, WALK_W};
+		static const int8_t order2[] =
+			{WALK_NW, WALK_W, WALK_SW, WALK_SE, WALK_E, WALK_NE};
 		int8_t const * direction = (cur.x + cur.y) & 1 ? order1 : order2;
 
 		// Check all the 6 neighbours
@@ -2065,7 +2065,7 @@ int32_t Map::findpath
 
 	path.m_path.clear();
 
-	while (curpf->backlink != Map_Object::IDLE) {
+	while (curpf->backlink != IDLE) {
 		path.m_path.push_back(curpf->backlink);
 
 		// Reverse logic! (WALK_NW needs to find the SE neighbour)
@@ -2081,35 +2081,35 @@ bool Map::can_reach_by_water(const Coords field) const
 {
 	FCoords fc = get_fcoords(field);
 
-	if (fc.field->get_caps() & MOVECAPS_SWIM)
+	if (fc.field->nodecaps() & MOVECAPS_SWIM)
 		return true;
-	if (!(fc.field->get_caps() & MOVECAPS_WALK))
+	if (!(fc.field->nodecaps() & MOVECAPS_WALK))
 		return false;
 
 	FCoords neighb;
 
 	get_tln(fc, &neighb);
-	if (fc.field->get_caps() & MOVECAPS_SWIM)
+	if (fc.field->nodecaps() & MOVECAPS_SWIM)
 		return true;
 
 	get_trn(fc, &neighb);
-	if (fc.field->get_caps() & MOVECAPS_SWIM)
+	if (fc.field->nodecaps() & MOVECAPS_SWIM)
 		return true;
 
 	get_rn(fc, &neighb);
-	if (fc.field->get_caps() & MOVECAPS_SWIM)
+	if (fc.field->nodecaps() & MOVECAPS_SWIM)
 		return true;
 
 	get_brn(fc, &neighb);
-	if (fc.field->get_caps() & MOVECAPS_SWIM)
+	if (fc.field->nodecaps() & MOVECAPS_SWIM)
 		return true;
 
 	get_bln(fc, &neighb);
-	if (fc.field->get_caps() & MOVECAPS_SWIM)
+	if (fc.field->nodecaps() & MOVECAPS_SWIM)
 		return true;
 
 	get_ln(fc, &neighb);
-	if (fc.field->get_caps() & MOVECAPS_SWIM)
+	if (fc.field->nodecaps() & MOVECAPS_SWIM)
 		return true;
 
 	return false;
@@ -2121,7 +2121,7 @@ changes the given triangle's terrain.
 this happens in the editor and might happen in the game
 too if some kind of land increasement is implemented (like
 drying swamps).
-The fieldcaps need to be recalculated
+The nodecaps need to be recalculated
 
 returns the radius of changes (which are always 2)
 ===========

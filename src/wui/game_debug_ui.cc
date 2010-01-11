@@ -283,9 +283,9 @@ void FieldDebugWindow::think()
 		 m_coords.x, m_coords.y,
 		 m_coords.field->get_height(), m_coords.field->get_owned_by());
 	str += buffer;
-	if (m_coords.field->get_caps() & Widelands::MOVECAPS_WALK)
+	if (m_coords.field->nodecaps() & Widelands::MOVECAPS_WALK)
 		str += "is walkable\n";
-	if (m_coords.field->get_caps() & Widelands::MOVECAPS_SWIM)
+	if (m_coords.field->nodecaps() & Widelands::MOVECAPS_SWIM)
 		str += "is swimable\n";
 	Widelands::Map_Index const i = m_coords.field - &m_map[0];
 	Widelands::Editor_Game_Base const & egbase =

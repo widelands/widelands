@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2003, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -749,11 +749,11 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 			}
 			Widelands::FCoords fpos = m_map.get_fcoords(starting_pos);
 
-			// WTF? can anyone tell me why get_caps() returns 39 for
+			//  WTF? can anyone tell me why nodecaps() returns 39 for
 			// BUILDCAPS_BIG and 36 for BUILDCAPS_SMALL ?
 			// Below is a hack to make it work - but I didn't found the reason yet.
 #define BIG 39
-			if (fpos.field->get_caps() != BIG) { //Widelands::BUILDCAPS_BIG) {
+			if (fpos.field->nodecaps() != BIG) { //  Widelands::BUILDCAPS_BIG) {
 				log("wrong size - trying to fix it:\n");
 				// Try to find a BUILDCAPS_BIG place near original start point
 				Widelands::FCoords tl = m_map.tl_n(fpos);
@@ -765,27 +765,27 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				bool fixed = false;
 
 				// Begin with a circle of radius = 1 :
-				if (!fixed & (tl.field->get_caps() == BIG)) {
+				if (!fixed & (tl.field->nodecaps() == BIG)) {
 					m_map.set_starting_pos(p, tl);
 					fixed = true;
 				}
-				if (!fixed & (l.field->get_caps() == BIG)) {
+				if (!fixed & (l.field->nodecaps() == BIG)) {
 					m_map.set_starting_pos(p,  l);
 					fixed = true;
 				}
-				if (!fixed & (bl.field->get_caps() == BIG)) {
+				if (!fixed & (bl.field->nodecaps() == BIG)) {
 					m_map.set_starting_pos(p, bl);
 					fixed = true;
 				}
-				if (!fixed & (br.field->get_caps() == BIG)) {
+				if (!fixed & (br.field->nodecaps() == BIG)) {
 					m_map.set_starting_pos(p, br);
 					fixed = true;
 				}
-				if (!fixed &  (r.field->get_caps() == BIG)) {
+				if (!fixed &  (r.field->nodecaps() == BIG)) {
 					m_map.set_starting_pos(p,  r);
 					fixed = true;
 				}
-				if (!fixed & (tr.field->get_caps() == BIG)) {
+				if (!fixed & (tr.field->nodecaps() == BIG)) {
 					m_map.set_starting_pos(p, tr);
 					fixed = true;
 				}
@@ -797,54 +797,54 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				} else {
 					// Second try - with a circle of radius = 2 :
 						// the three points at the top of the circle
-					if (!fixed & (m_map.tl_n(tl).field->get_caps() == BIG)) {
+					if (!fixed & (m_map.tl_n(tl).field->nodecaps() == BIG)) {
 						m_map.set_starting_pos(p, m_map.tl_n(tl));
 						fixed = true;
 					}
-					if (!fixed & (m_map.tr_n(tl).field->get_caps() == BIG)) {
+					if (!fixed & (m_map.tr_n(tl).field->nodecaps() == BIG)) {
 						m_map.set_starting_pos(p, m_map.tr_n(tl));
 						fixed = true;
 					}
-					if (!fixed & (m_map.tr_n(tr).field->get_caps() == BIG)) {
+					if (!fixed & (m_map.tr_n(tr).field->nodecaps() == BIG)) {
 						m_map.set_starting_pos(p, m_map.tr_n(tr));
 						fixed = true;
 					}
 					//  the three points at the bottom of the circle
-					if (!fixed & (m_map.bl_n(bl).field->get_caps() == BIG)) {
+					if (!fixed & (m_map.bl_n(bl).field->nodecaps() == BIG)) {
 						m_map.set_starting_pos(p, m_map.bl_n(bl));
 						fixed = true;
 					}
-					if (!fixed & (m_map.br_n(bl).field->get_caps() == BIG)) {
+					if (!fixed & (m_map.br_n(bl).field->nodecaps() == BIG)) {
 						m_map.set_starting_pos(p, m_map.br_n(bl));
 						fixed = true;
 					}
-					if (!fixed & (m_map.br_n(br).field->get_caps() == BIG)) {
+					if (!fixed & (m_map.br_n(br).field->nodecaps() == BIG)) {
 						m_map.set_starting_pos(p, m_map.br_n(br));
 						fixed = true;
 					}
 					//  the three points at the left side of the circle
-					if (!fixed & (m_map. l_n(tl).field->get_caps() == BIG)) {
+					if (!fixed & (m_map. l_n(tl).field->nodecaps() == BIG)) {
 						m_map.set_starting_pos(p, m_map. l_n(tl));
 						fixed = true;
 					}
-					if (!fixed & (m_map. l_n (l).field->get_caps() == BIG)) {
+					if (!fixed & (m_map. l_n (l).field->nodecaps() == BIG)) {
 						m_map.set_starting_pos(p, m_map. l_n (l));
 						fixed = true;
 					}
-					if (!fixed & (m_map. l_n(bl).field->get_caps() == BIG)) {
+					if (!fixed & (m_map. l_n(bl).field->nodecaps() == BIG)) {
 						m_map.set_starting_pos(p, m_map. l_n(bl));
 						fixed = true;
 					}
 					//  the three points at the right side of the circle
-					if (!fixed & (m_map. r_n(tr).field->get_caps() == BIG)) {
+					if (!fixed & (m_map. r_n(tr).field->nodecaps() == BIG)) {
 						m_map.set_starting_pos(p, m_map. r_n(tr));
 						fixed = true;
 					}
-					if (!fixed & (m_map. r_n (r).field->get_caps() == BIG)) {
+					if (!fixed & (m_map. r_n (r).field->nodecaps() == BIG)) {
 						m_map.set_starting_pos(p, m_map. r_n (r));
 						fixed = true;
 					}
-					if (!fixed & (m_map. r_n(br).field->get_caps() == BIG)) {
+					if (!fixed & (m_map. r_n(br).field->nodecaps() == BIG)) {
 						m_map.set_starting_pos(p, m_map. r_n(br));
 						fixed = true;
 					}

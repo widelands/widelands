@@ -33,6 +33,7 @@
 #include "widelands_map_elemental_data_packet.h"
 #include "widelands_map_event_data_packet.h"
 #include "widelands_map_event_chain_data_packet.h"
+#include "widelands_map_exploration_data_packet.h"
 #include "widelands_map_extradata_data_packet.h"
 #include "widelands_map_flag_data_packet.h"
 #include "widelands_map_flagdata_data_packet.h"
@@ -40,9 +41,9 @@
 #include "widelands_map_immovable_data_packet.h"
 #include "widelands_map_immovabledata_data_packet.h"
 #include "widelands_map_map_object_loader.h"
+#include "widelands_map_node_ownership_data_packet.h"
 #include "widelands_map_object_packet.h"
 #include "widelands_map_objective_data_packet.h"
-#include "widelands_map_owned_fields_data_packet.h"
 #include "widelands_map_player_names_and_tribes_data_packet.h"
 #include "widelands_map_player_position_data_packet.h"
 #include "widelands_map_players_areawatchers_data_packet.h"
@@ -50,7 +51,6 @@
 #include "widelands_map_resources_data_packet.h"
 #include "widelands_map_road_data_packet.h"
 #include "widelands_map_roaddata_data_packet.h"
-#include "widelands_map_seen_fields_data_packet.h"
 #include "widelands_map_terrain_data_packet.h"
 #include "widelands_map_trigger_data_packet.h"
 #include "widelands_map_variable_data_packet.h"
@@ -221,12 +221,12 @@ int32_t WL_Map_Loader::load_map_complete
 	}
 	log("done!\n ");
 
-	log("Reading Owned-Fields Data ... ");
-	{Map_Owned_Fields_Data_Packet    p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	log("Reading Node Ownership Data ... ");
+	{Map_Node_Ownership_Data_Packet  p; p.Read(m_fs, egbase, !scenario, m_mol);}
 	log("done!\n ");
 
-	log("Reading Seen-Fields Data ... ");
-	{Map_Seen_Fields_Data_Packet     p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	log("Reading Exploration Data ... ");
+	{Map_Exploration_Data_Packet     p; p.Read(m_fs, egbase, !scenario, m_mol);}
 	log("done!\n ");
 
 	log("Reading AreaWatchers Data ... ");

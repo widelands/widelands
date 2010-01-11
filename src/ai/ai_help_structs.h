@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2009-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,7 +56,7 @@ struct FindNodeUnowned {
 		// when looking for unowned terrain to acquire, we are actually
 		// only interested in fields we can walk on
 		return
-			fc.field->get_caps() & MOVECAPS_WALK
+			fc.field->nodecaps() & MOVECAPS_WALK
 			&& fc.field->get_owned_by() != playernum
 			&& (!onlyenemies || (fc.field->get_owned_by() != 0));
 	}

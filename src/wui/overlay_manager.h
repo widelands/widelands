@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,7 +65,7 @@ struct Overlay_Manager {
 		operator bool() const throw () {return id;}
 		bool operator<(const Job_Id other) const throw () {return id < other.id;}
 	private:
-		friend class Overlay_Manager;
+		friend struct Overlay_Manager;
 		Job_Id operator++() throw () {++id; return *this;}
 		bool operator== (Job_Id const other) const throw () {
 			return id == other.id;

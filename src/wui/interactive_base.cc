@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -711,12 +711,12 @@ void Interactive_Base::roadb_add_overlay()
 		Widelands::Direction dir = (*m_buildroad)[idx];
 		Coords c = m_buildroad->get_coords()[idx];
 
-		if (dir < Map_Object::WALK_E || dir > Map_Object::WALK_SW) {
+		if (dir < Widelands::WALK_E || dir > Widelands::WALK_SW) {
 			map.get_neighbour(c, dir, &c);
 			dir = Widelands::get_reverse_dir(dir);
 		}
 
-		int32_t const shift = 2 * (dir - Map_Object::WALK_E);
+		int32_t const shift = 2 * (dir - Widelands::WALK_E);
 
 		uint8_t set_to = overlay_manager.get_road_overlay(c);
 		set_to |=  Widelands::Road_Normal << shift;

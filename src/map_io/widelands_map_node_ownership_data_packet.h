@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,31 +17,11 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_SEEN_FIELDS_DATA_PACKET_H
-#define WIDELANDS_MAP_SEEN_FIELDS_DATA_PACKET_H
+#ifndef WIDELANDS_MAP_NODE_OWNERSHIP_DATA_PACKET_H
+#define WIDELANDS_MAP_NODE_OWNERSHIP_DATA_PACKET_H
 
 #include "widelands_map_data_packet.h"
 
-namespace Widelands {
-
-/*
- * Which field is seen by who?
- *
- * This can only be used to define additional fields. Per default
- * all buildings see some area. You can not use this to hide
- * some parts of the economy from a player
- */
-struct Map_Seen_Fields_Data_Packet : public Map_Data_Packet {
-	virtual void Read
-		(FileSystem &,
-		 Editor_Game_Base      &,
-		 const bool,
-		 Map_Map_Object_Loader * = 0)
-		throw (_wexception);
-	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * = 0)
-		throw (_wexception);
-};
-
-}
+MAP_DATA_PACKET(Map_Node_Ownership_Data_Packet);
 
 #endif

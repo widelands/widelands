@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,7 @@ int32_t Editor_Tool_Set_Starting_Pos_Callback
 		last = nr_players;
 	}
 
-	const int32_t caps = c.field->get_caps();
+	Widelands::NodeCaps const caps = c.field->nodecaps();
 	if ((caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG)
 		return caps;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include "widelands_geometry.h"
 #include "compile_assert.h"
 #include "constants.h"
+#include "nodecaps.h"
 #include "world.h"
 
 #include "roadtype.h"
@@ -50,44 +51,6 @@ namespace Widelands {
 // understanding)
 // Making it a struct doesn't add anything. struct is used interchangeably with
 // class all around the code
-
-enum FieldCaps {
-	CAPS_NONE = 0,
-	/** can we build normal buildings? (use BUILDCAPS_SIZEMASK for binary
-	 * masking)*/
-	BUILDCAPS_SMALL = 1,
-	BUILDCAPS_MEDIUM = 2,
-	BUILDCAPS_BIG = 3,
-	BUILDCAPS_SIZEMASK = 3,
-
-	/** can we build a flag on this field?*/
-	BUILDCAPS_FLAG = 4,
-
-	/** can we build a mine on this field (completely independent from build
-	 * size!)*/
-	BUILDCAPS_MINE = 8,
-
-	/** (only if BUILDCAPS_BIG): can we build a harbour on this field?  this
-	 * should be automatically set for BUILDCAPS_BIG fields that have a
-	 * swimmable second-order neighbour
-	 */
-	BUILDCAPS_PORT = 16,
-
-	/** can we build any building on this field?*/
-	BUILDCAPS_BUILDINGMASK = BUILDCAPS_SIZEMASK|BUILDCAPS_MINE|BUILDCAPS_PORT,
-
-	/// Can Map_Objects walk or swim here? Also used for
-	/// Map_Object_Descr::movecaps. If MOVECAPS_WALK, any walking being can walk
-	/// to this field.
-	MOVECAPS_WALK = 32,
-
-	/// If MOVECAPS_SWIM, any swimming being (including ships) can go there.
-	/// Additionally, swimming beings can temporarily visit nodes that are
-	/// walkable but not swimmable if those nodes are at the start or end of
-	/// their path. Without this clause, harbours would be kind of impossible ;)
-	/// This clause stops ducks from "swimwalking" along the coast.
-	MOVECAPS_SWIM = 64,
-};
 
 struct Terrain_Descr;
 class Bob;
@@ -120,7 +83,7 @@ private:
 	Height height;
 	int8_t brightness;
 
-	FieldCaps       caps                    : 7;
+	NodeCaps        caps                    : 7;
 	Buildhelp_Index buildhelp_overlay_index : 3;
 	uint8_t         roads                   : 6;
 
@@ -169,7 +132,7 @@ private:
 
 public:
 	Height get_height() const throw () {return height;}
-	FieldCaps get_caps() const {return caps;}
+	NodeCaps nodecaps() const {return caps;}
 
 	Terrains      get_terrains() const throw () {return terrains;}
 	Terrain_Index terrain_d   () const throw () {return terrains.d;}

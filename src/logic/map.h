@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -413,8 +413,8 @@ private:
 	Extradata_Infos m_extradatainfos;
 
 	void recalc_brightness(FCoords);
-	void recalc_fieldcaps_pass1(FCoords);
-	void recalc_fieldcaps_pass2(FCoords);
+	void recalc_nodecaps_pass1(FCoords);
+	void recalc_nodecaps_pass2(FCoords);
 	void check_neighbour_heights(FCoords, uint32_t & radius);
 
 	template<typename functorT>
@@ -1015,12 +1015,12 @@ inline FCoords Map::get_neighbour(const FCoords f, const Direction dir) const
 throw ()
 {
 	switch (dir) {
-	case Map_Object::WALK_NW: return tl_n(f);
-	case Map_Object::WALK_NE: return tr_n(f);
-	case Map_Object::WALK_E:  return  r_n(f);
-	case Map_Object::WALK_SE: return br_n(f);
-	case Map_Object::WALK_SW: return bl_n(f);
-	case Map_Object::WALK_W:  return  l_n(f);
+	case WALK_NW: return tl_n(f);
+	case WALK_NE: return tr_n(f);
+	case WALK_E:  return  r_n(f);
+	case WALK_SE: return br_n(f);
+	case WALK_SW: return bl_n(f);
+	case WALK_W:  return  l_n(f);
 	default:
 		assert(false);
 	}

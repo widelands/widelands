@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2009-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ bool FindNodeWithFlagOrRoad::accept (const Map &, FCoords fc) const
 			(dynamic_cast<Flag const *>(pimm)
 			 or
 			 (dynamic_cast<Road const *>(pimm) &&
-			  fc.field->get_caps() & BUILDCAPS_FLAG));
+			  fc.field->nodecaps() & BUILDCAPS_FLAG));
 	return false;
 }
 
@@ -70,7 +70,7 @@ bool CheckStepRoadAI::allowed
 
 bool CheckStepRoadAI::reachabledest(Map & map, FCoords const dest) const
 {
-	uint8_t caps = dest.field->get_caps();
+	NodeCaps const caps = dest.field->nodecaps();
 
 	if (!(caps & movecaps)) {
 		if (!((movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))

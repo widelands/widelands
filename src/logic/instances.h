@@ -172,19 +172,6 @@ public:
 		HIGHEST_FIXED_ATTRIBUTE
 	};
 
-	/// Constants for where we are going
-	enum WalkingDir {
-		IDLE = 0,
-		FIRST_DIRECTION = 1,
-		WALK_NE = 1,
-		WALK_E = 2,
-		WALK_SE = 3,
-		WALK_SW = 4,
-		WALK_W = 5,
-		WALK_NW = 6,
-		LAST_DIRECTION = 6,
-	};
-
 	struct LogSink {
 		virtual void log(std::string str) = 0;
 		virtual ~LogSink() {}
@@ -306,8 +293,11 @@ public:
 	// Pure Map_Objects cannot be loaded
 
 protected:
-	/// init for editor and game
+	/// Called only when the oject is logically created in the simulation. If
+	/// called again, such as when the object is loaded from a savegame, it will
+	/// cause bugs.
 	virtual void init(Editor_Game_Base &);
+
 	virtual void cleanup(Editor_Game_Base &);
 
 	void molog(char const * fmt, ...) const

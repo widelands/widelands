@@ -49,19 +49,19 @@ int32_t Editor_Change_Resource_Tool_Callback
 
 	//  If one of the neighbours is unpassable, count its resource stronger.
 	//  top left neigbour
-	map.get_neighbour(f, Widelands::Map_Object::WALK_NW, &f1);
+	map.get_neighbour(f, Widelands::WALK_NW, &f1);
 	count += world.terrain_descr(f1.field->terrain_r()).resource_value(curres);
 	count += world.terrain_descr(f1.field->terrain_d()).resource_value(curres);
 
 	//  top right neigbour
-	map.get_neighbour(f, Widelands::Map_Object::WALK_NE, &f1);
+	map.get_neighbour(f, Widelands::WALK_NE, &f1);
 	count += world.terrain_descr(f1.field->terrain_d()).resource_value(curres);
 
 	//  left neighbour
-	map.get_neighbour(f, Widelands::Map_Object::WALK_W, &f1);
+	map.get_neighbour(f, Widelands::WALK_W, &f1);
 	count += world.terrain_descr(f1.field->terrain_r()).resource_value(curres);
 
-	return count <= 3 ? 0 : f.field->get_caps();
+	return count <= 3 ? 0 : f.field->nodecaps();
 }
 
 /*

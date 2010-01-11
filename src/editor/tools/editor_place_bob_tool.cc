@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ int32_t Editor_Place_Bob_Tool::handle_click_impl
 		do {
 			Bob::Descr const & descr =
 				*map.world().get_bob_descr(get_random_enabled());
-			if (mr.location().field->get_caps() & descr.movecaps()) {
+			if (mr.location().field->nodecaps() & descr.movecaps()) {
 				if (Bob * const bob = mr.location().field->get_first_bob())
 					bob->remove(egbase); //  There is already a bob. Remove it.
 				descr.create(egbase, 0, mr.location());

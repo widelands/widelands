@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,13 +87,13 @@ CheckStepDefault
 bool CheckStepDefault::allowed
 	(Map &, FCoords start, FCoords end, int32_t, CheckStep::StepId) const
 {
-	uint8_t endcaps = end.field->get_caps();
+	NodeCaps const endcaps = end.field->nodecaps();
 
 	if (endcaps & m_movecaps)
 		return true;
 
 	// Swimming bobs are allowed to move from a water field to a shore field
-	uint8_t startcaps = start.field->get_caps();
+	NodeCaps const startcaps = start.field->nodecaps();
 
 	if ((endcaps & MOVECAPS_WALK) && (startcaps & m_movecaps & MOVECAPS_SWIM))
 		return true;
@@ -103,7 +103,7 @@ bool CheckStepDefault::allowed
 
 bool CheckStepDefault::reachabledest(Map & map, FCoords const dest) const
 {
-	uint8_t caps = dest.field->get_caps();
+	NodeCaps const caps = dest.field->nodecaps();
 
 	if (!(caps & m_movecaps)) {
 		if (!((m_movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))
@@ -130,8 +130,8 @@ bool CheckStepWalkOn::allowed
 	 CheckStep::StepId const id)
 	const
 {
-	uint8_t const startcaps = start.field->get_caps();
-	uint8_t const endcaps   = end  .field->get_caps();
+	NodeCaps const startcaps = start.field->nodecaps();
+	NodeCaps const endcaps   = end  .field->nodecaps();
 
 	//  Make sure to not find paths where we walk onto an unwalkable node, then
 	//  then back onto a walkable node.
@@ -193,7 +193,7 @@ bool CheckStepRoad::allowed
 
 bool CheckStepRoad::reachabledest(Map & map, FCoords const dest) const
 {
-	uint8_t caps = dest.field->get_caps();
+	NodeCaps const caps = dest.field->nodecaps();
 
 	if (!(caps & m_movecaps)) {
 		if (!((m_movecaps & MOVECAPS_SWIM) && (caps & MOVECAPS_WALK)))

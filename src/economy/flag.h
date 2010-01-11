@@ -46,8 +46,8 @@ struct WareInstance;
  * worker is to execute. Once execution of the program has finished, the worker
  * will return to a warehouse.
  *
- * Important: Do not access m_roads directly. get_road() and others use
- * Map_Object::WALK_xx in all "direction" parameters.
+/// Important: Do not access m_roads directly. get_road() and others use
+/// WALK_xx in all "direction" parameters.
  */
 struct Flag : public PlayerImmovable, public RoutingNode {
 	friend struct Economy;
@@ -141,7 +141,7 @@ private:
 	int32_t      m_animstart;
 
 	Building    * m_building; ///< attached building (replaces road WALK_NW)
-	Road        * m_roads[6]; ///< Map_Object::WALK_xx - 1 as index
+	Road        * m_roads[6]; ///< WALK_xx - 1 as index
 	int32_t      m_items_pending[6];
 
 	int32_t      m_item_capacity; ///< size of m_items array

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,13 +59,13 @@ void Map_Bob_Data_Packet::ReadBob
 					("world %s does not define bob type \"%s\"",
 					 world.get_name(), name);
 			Bob::Descr const & descr = *world.get_bob_descr(idx);
-			if (not (map[coords].get_caps() & descr.movecaps()))
+			if (not (map[coords].nodecaps() & descr.movecaps()))
 				log
 					("WARNING: Found a %s at (%i, %i), but it can not move "
 					 "there. Put it somewhere else instead. (Node has movecaps %u, "
 					 "bob type has movecaps %u.)\n",
 					 descr.name().c_str(), coords.x, coords.y,
-					 map[coords].get_caps() & (MOVECAPS_WALK | MOVECAPS_SWIM),
+					 map[coords].nodecaps() & (MOVECAPS_WALK | MOVECAPS_SWIM),
 					 descr.movecaps());
 			ol->register_object<Bob>(serial, descr.create(egbase, 0, coords));
 		} else {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,7 +54,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 		 center.node.x, center.node.y, f.get_height());
 	buf += buf1;
 	{
-		Widelands::FieldCaps const caps = f.get_caps();
+		Widelands::NodeCaps const caps = f.nodecaps();
 		switch (caps & Widelands::BUILDCAPS_SIZEMASK) {
 		case Widelands::BUILDCAPS_SMALL:  buf += _("small");  break;
 		case Widelands::BUILDCAPS_MEDIUM: buf += _("medium"); break;

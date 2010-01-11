@@ -946,7 +946,7 @@ void ImmovableProgram::ActSeed::execute
 		FCoords const f = map.get_fcoords(mr.location());
 		if
 			(not f.field->get_immovable()        and
-			 f.field->get_caps() & MOVECAPS_WALK and
+			 f.field->nodecaps() & MOVECAPS_WALK and
 			 game.logic_rand() % (6 * 256) < descr.terrain_suitability(f, map))
 			game.create_immovable
 				(mr.location(),

@@ -209,7 +209,7 @@ Building & Building_Descr::create
 
 
 int32_t Building_Descr::suitability(Map const &, FCoords const fc) const {
-	return m_size <= (fc.field->get_caps() & Widelands::BUILDCAPS_SIZEMASK);
+	return m_size <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
 }
 
 /**
