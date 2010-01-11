@@ -17,6 +17,8 @@
  *
  */
 
+#include <lua.hpp>
+
 #include "lua_map.h"
 
 #include "log.h"
@@ -29,11 +31,6 @@
 
 #include "luna.h"
 
-
-extern "C" {
-#include <lauxlib.h>
-#include <lualib.h>
-}
 using namespace Widelands;
 
 /*
@@ -58,24 +55,132 @@ using namespace Widelands;
 #define PROP_RW(klass, name) {#name, &klass::get_##name, &klass::set_##name}
 #define METHOD(klass, name) {#name, &klass::name}
 
+#define LUA_CLASS_HEAD(klass) \
+	static const char className[]; \
+	static const char parentName[]; \
+	static const MethodType<klass> Methods[]; \
+	static const PropertyType<klass> Properties[]; \
+
 /*
  * Map Object
  */
-// class L_MapObject {
-//         Map_Object& mo;
-//
-// public:
-//         LUA_WRAPPED_CALL_R_INT(serial, mo);
-//
-//         static const char className[];
-//         static Luna<L_Coords>::RegType methods[];
-// }
-// const char L_MapObject::className[] = "MapObject";
-// Luna<L_Coords>::RegType L_MapObject::methods[] = {
-//         method(L_MapObject, serial),
-//         {0, 0},
-// };
-//
+class L_MapObject {
+	Object_Ptr m_ptr;
+
+public:
+	LUA_CLASS_HEAD(L_MapObject);
+
+	L_MapObject(Map_Object & mo) : m_ptr(&mo) {
+	}
+	L_MapObject(lua_State * L) : m_ptr(0) {
+		report_error(L, "Cannot instantiate a '%s' directly!", className);
+	}
+
+	/*
+	 * Properties
+	 */
+	int get_serial(lua_State * L) {
+		lua_pushinteger(L, m_ptr.serial());
+		return 1;
+	}
+
+	/*
+	 * Lua Methods
+	 */
+	int remove(lua_State * L) {
+		Game & game = *get_game(L);
+		Map_Object * o = m_get(game, L);
+
+		if (!o)
+			return 0;
+
+		o->remove(game);
+		return 0;
+	}
+
+	/*
+	 * C Methods
+	 */
+
+private:
+	Map_Object * m_get(Game & game, lua_State * L) {
+		Map_Object * o = m_ptr.get(game);
+		if (!o)
+			report_error(L, "Object no longer exists!");
+		return o;
+	}
+};
+const char L_MapObject::className[] = "MapObject";
+const char L_MapObject::parentName[] = "";
+const MethodType<L_MapObject> L_MapObject::Methods[] = {
+	METHOD(L_MapObject, remove),
+	{0, 0},
+};
+const PropertyType<L_MapObject> L_MapObject::Properties[] = {
+	PROP_RO(L_MapObject, serial),
+	{0, 0, 0},
+};
+
+/*
+ * BaseImmovable
+ */
+class L_BaseImmovable : public L_MapObject {
+	OPtr<BaseImmovable> m_biptr;
+public:
+	LUA_CLASS_HEAD(L_BaseImmovable);
+
+	L_BaseImmovable(BaseImmovable & mo) : L_MapObject(mo), m_biptr(&mo) {
+	}
+	L_BaseImmovable(lua_State * L) : L_MapObject(L) {
+	}
+	/*
+	 * Properties
+	 */
+	int get_size(lua_State * L) {
+		Game & game = *get_game(L);
+		BaseImmovable * o = m_get(game, L);
+
+		switch (o->get_size()) {
+			case BaseImmovable::NONE: lua_pushstring(L, "none"); break;
+			case BaseImmovable::SMALL: lua_pushstring(L, "small"); break;
+			case BaseImmovable::MEDIUM: lua_pushstring(L, "medium"); break;
+			case BaseImmovable::BIG: lua_pushstring(L, "big"); break;
+			default:
+				return
+					report_error
+						(L, "Unknown size in L_BaseImmovable::get_size: %i",
+						 o->get_size());
+				break;
+		}
+		return 1;
+	}
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+private:
+	BaseImmovable * m_get(Game & game, lua_State * L) {
+		BaseImmovable * o = m_biptr.get(game);
+		if (!o)
+			report_error(L, "BaseImmovable no longer exists!");
+		return o;
+	}
+};
+const char L_BaseImmovable::className[] = "BaseImmovable";
+const char L_BaseImmovable::parentName[] = "MapObject";
+const MethodType<L_BaseImmovable> L_BaseImmovable::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
+	PROP_RO(L_BaseImmovable, size),
+	{0, 0, 0},
+};
+
+
 /*
  * Coordinates
  */
@@ -83,9 +188,7 @@ class L_Coords {
 	Coords m_c;
 
 public:
-	static const char className[];
-	static const Luna<L_Coords>::FunctionType Functions[];
-	static const Luna<L_Coords>::PropertyType Properties[];
+	LUA_CLASS_HEAD(L_Coords);
 
 
 	L_Coords(lua_State * L)
@@ -102,19 +205,21 @@ public:
 	WRAPPED_PROPERTY_INT(m_c, y);
 
 	/*
-	 * Lua functions
+	 * Lua methods
 	 */
 
 	/*
-	 * C Functions
+	 * C methods
 	 */
 	inline Coords & coords() {return m_c;}
+
 };
 const char L_Coords::className[] = "Coords";
-const Luna <L_Coords>::FunctionType L_Coords::Functions[] = {
+const char L_Coords::parentName[] = "";
+const MethodType<L_Coords> L_Coords::Methods[] = {
 	{0, 0},
 };
-const Luna <L_Coords>::PropertyType L_Coords::Properties[] = {
+const PropertyType<L_Coords> L_Coords::Properties[] = {
 	PROP_RW(L_Coords, x),
 	PROP_RW(L_Coords, y),
 	{0, 0, 0},
@@ -128,34 +233,33 @@ const Luna <L_Coords>::PropertyType L_Coords::Properties[] = {
 /*
  * Create a World immovable object immediately
  *
- * name: name ob object to create
+ * name: name of object to create
  * posx: int, x position
  * posy: int, y position
  *
  */
-static int L_create_immovable(lua_State * const l) {
-	char const * const objname = luaL_checkstring(l, 1);
-	uint32_t     const x       = luaL_checkint32(l, 2);
-	uint32_t     const y       = luaL_checkint32(l, 3);
+static int L_create_immovable(lua_State * const L) {
+	char const * const objname = luaL_checkstring(L, 1);
+	uint32_t     const x       = luaL_checkint32(L, 2);
+	uint32_t     const y       = luaL_checkint32(L, 3);
 
-	Game & game = *get_game(l);
+	Game & game = *get_game(L);
 	Coords pos(x, y);
 
 	// Check if the map is still free here
 	// TODO: this exact code is duplicated in worker.cc
 	if (BaseImmovable const * const imm = game.map()[pos].get_immovable())
 		if (imm->get_size() >= BaseImmovable::SMALL)
-			return report_error(l, "Field is no longer free!");
+			return report_error(L, "Field is no longer free!");
 
 	int32_t const imm_idx = game.map().world().get_immovable_index(objname);
 	if (imm_idx < 0)
-		return report_error(l, "Unknown immovable <%s>", objname);
+		return report_error(L, "Unknown immovable <%s>", objname);
 
-	Map_Object & m = game.create_immovable (pos, imm_idx, 0);
+	BaseImmovable & m = game.create_immovable (pos, imm_idx, 0);
 
-	lua_pushlightuserdata(l, static_cast<void * >(&m));
-
-	return 1;
+	// Send this to lua
+	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(m));
 }
 
 
@@ -167,14 +271,14 @@ static int L_create_immovable(lua_State * const l) {
  *
  * Returns: x, y position of object
  */
-static int L_find_immovable(lua_State * const l) {
-	uint32_t     const x       = luaL_checkint32(l, 1);
-	uint32_t     const y       = luaL_checkint32(l, 2);
-	uint32_t     const radius  = luaL_checkint32(l, 3);
-	const char *  const attrib  = luaL_checkstring(l, 4);
+static int L_find_immovable(lua_State * const L) {
+	uint32_t     const x       = luaL_checkint32(L, 1);
+	uint32_t     const y       = luaL_checkint32(L, 2);
+	uint32_t     const radius  = luaL_checkint32(L, 3);
+	const char *  const attrib  = luaL_checkstring(L, 4);
 
 	Coords pos(x, y);
-	Game & game = *get_game(l);
+	Game & game = *get_game(L);
 	Map & map = game.map();
 
 	Area<FCoords> area (map.get_fcoords(pos), 0);
@@ -183,7 +287,7 @@ static int L_find_immovable(lua_State * const l) {
 
 	for (;; ++area.radius) {
 		if (radius < area.radius)
-			return report_error(l, "No suitable object in radius %i", radius);
+			return report_error(L, "No suitable object in radius %i", radius);
 
 			std::vector<ImmovableFound> list;
                         // if (action.iparam2 < 0)
@@ -199,8 +303,8 @@ static int L_find_immovable(lua_State * const l) {
 				// TODO: if this is called from the console, it will screw
 				// network gaming
 				Coords & rv = list[game.logic_rand() % list.size()].coords;
-				lua_pushinteger(l, rv.x);
-				lua_pushinteger(l, rv.y);
+				lua_pushinteger(L, rv.x);
+				lua_pushinteger(L, rv.y);
 				return 2;
 			}
 		}
@@ -214,10 +318,13 @@ const static struct luaL_reg wlmap [] = {
 	{0, 0}
 };
 
-
 void luaopen_wlmap(lua_State * L) {
 	luaL_register(L, "wl.map", wlmap);
 
-	Luna<L_Coords>::register_class(L, "map");
+	register_class<L_Coords>(L, "map");
+	register_class<L_MapObject>(L, "map");
 
+	int metatable = register_class<L_BaseImmovable>(L, "map");
+	add_parent<L_BaseImmovable, L_MapObject>(L, metatable);
 }
+

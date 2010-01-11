@@ -231,9 +231,6 @@ LuaInterface_Impl::~LuaInterface_Impl() {
 }
 
 LuaState * LuaInterface_Impl::interpret_string(std::string cmd) {
-	log("In LuaInterface::interpret_string:\n");
-	log(" <%s>\n", cmd.c_str());
-
 	int rv = luaL_dostring(m_state->m_L, cmd.c_str());
 	m_check_for_errors(rv);
 
