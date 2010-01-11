@@ -29,18 +29,19 @@
 #include "event_forbid_retreat_change.h"
 #include "event_forbid_worker_types.h"
 #include "event_immovable.h"
+#include "event_lua.h"
 #include "event_message_box.h"
 #include "event_move_view.h"
-#include "event_road.h"
-#include "event_unhide_area.h"
 #include "event_player_seeall.h"
 #include "event_retreat_change.h"
 #include "event_reveal_campaign.h"
 #include "event_reveal_objective.h"
 #include "event_reveal_scenario.h"
-#include "event_set_player_frontier_style.h"
+#include "event_road.h"
 #include "event_set_player_flag_style.h"
+#include "event_set_player_frontier_style.h"
 #include "event_set_timer.h"
+#include "event_unhide_area.h"
 #include "profile/profile.h"
 
 #include "wexception.h"
@@ -94,6 +95,11 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		false,
 		"immovable",              _("Create immovable"),
 		_("Create an immovable.")
+	},
+	{
+		false,
+		"lua",              _("Lua event"),
+		_("Run a lua command")
 	},
 	{
 		true,
@@ -252,20 +258,21 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	case  5: return *new Event_Conquer_Area             (s, egbase);
 	case  6: return *new Event_Flag                     (s, egbase);
 	case  7: return *new Event_Immovable                (s, egbase);
-	case  8: return *new Event_Message_Box              (s, egbase);
-	case  9: return *new Event_Move_View                (s, egbase);
-	case 10: return *new Event_Reveal_Campaign          (s, egbase);
-	case 11: return *new Event_Reveal_Objective         (s, egbase);
-	case 12: return *new Event_Reveal_Scenario          (s, egbase);
-	case 13: return *new Event_Road                     (s, egbase);
-	case 14: return *new Event_Set_Timer                (s, egbase);
-	case 15: return *new Event_Unhide_Area              (s, egbase);
-	case 16: return *new Event_Set_Player_Frontier_Style(s, egbase);
-	case 17: return *new Event_Set_Player_Flag_Style    (s, egbase);
-	case 18: return *new Event_Allow_Retreat_Change     (s, egbase);
-	case 19: return *new Event_Forbid_Retreat_Change    (s, egbase);
-	case 20: return *new Event_Retreat_Change           (s, egbase);
-	case 21: return *new Event_Player_See_All           (s, egbase);
+	case  8: return *new Event_Lua                      (s, egbase);
+	case  9: return *new Event_Message_Box              (s, egbase);
+	case 10: return *new Event_Move_View                (s, egbase);
+	case 11: return *new Event_Reveal_Campaign          (s, egbase);
+	case 12: return *new Event_Reveal_Objective         (s, egbase);
+	case 13: return *new Event_Reveal_Scenario          (s, egbase);
+	case 14: return *new Event_Road                     (s, egbase);
+	case 15: return *new Event_Set_Timer                (s, egbase);
+	case 16: return *new Event_Unhide_Area              (s, egbase);
+	case 17: return *new Event_Set_Player_Frontier_Style(s, egbase);
+	case 18: return *new Event_Set_Player_Flag_Style    (s, egbase);
+	case 19: return *new Event_Allow_Retreat_Change     (s, egbase);
+	case 20: return *new Event_Forbid_Retreat_Change    (s, egbase);
+	case 21: return *new Event_Retreat_Change           (s, egbase);
+	case 22: return *new Event_Player_See_All           (s, egbase);
 	default:
 		assert(false);
 	}
