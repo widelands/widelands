@@ -21,7 +21,7 @@ def shrink_command(source, target, env, for_signature):
 
 	s=source[0].path
 	commands.append(env.Action(del_temp_png()))
-	commands.append(env.Action('$PNGREWRITE '+s+' temp.png'))
+	commands.append(env.Action('$PNGREWRITE '+s+' temp.png||echo skipped'))
 	commands.append(env.Action(move_temp_png(s)))
 	commands.append(env.Action('$OPTIPNG $OPTIPNGFLAGS '+s))
 	commands.append(env.Action('$ADVDEF $ADVDEFFLAGS '+s))
