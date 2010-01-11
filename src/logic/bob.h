@@ -21,6 +21,10 @@
 #define BOB_H
 
 #include "graphic/animation.h"
+#include "instances.h"
+
+#include "graphic/encodedata.h"
+#include "point.h"
 #include "writeHTML.h"
 
 namespace Widelands {

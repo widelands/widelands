@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,8 @@
 #define FULLSCREEN_MENU_LOADGAME_H
 
 #include "base.h"
+
+#include "io/filesystem/filesystem.h"
 
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"

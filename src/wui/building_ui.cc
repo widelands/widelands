@@ -35,6 +35,7 @@ class.
 #include "logic/maphollowregion.h"
 #include "logic/militarysite.h"
 #include "economy/request.h"
+#include "logic/player.h"
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"

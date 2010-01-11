@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,8 @@
 #include "mouse_constants.h"
 #include "scrollbar.h"
 #include "wlapplication.h"
+
+#include "container_iterate.h"
 
 namespace UI {
 
@@ -424,7 +426,7 @@ Table<void *>::Entry_Record & Table<void *>::add
 /**
  * Scroll to the given position, in pixels.
 */
-void Table<void *>::set_scrollpos(int32_t i)
+void Table<void *>::set_scrollpos(int32_t const i)
 {
 	m_scrollpos = i;
 
@@ -440,6 +442,11 @@ void Table<void *>::remove(const uint32_t i) {
 	m_entry_records.erase(it);
 	if (m_selection == i)
 		m_selection = no_selection_index();
+
+	m_scrollbar->set_steps
+		(m_entry_records.size() * get_lineheight()
+		 -
+		 (get_h() - m_headerheight - 2));
 }
 
 /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 
 #include "filesystem.h"
 
-#include "constants.h"
 #ifdef USE_DATAFILE
 #include "datafile.h"
 #endif
@@ -188,8 +187,8 @@ std::vector<std::string> FileSystem::FS_Tokenize
 	(std::string const & path) const
 {
 	std::vector<std::string> components;
-	SSS_T pos;  //start of token
-	SSS_T pos2; //next filesep character
+	std::string::size_type pos;  //  start of token
+	std::string::size_type pos2; //  next filesep character
 
 	//extract the first path component
 	if (path.find(m_filesep) == 0) //is this an absolute path?

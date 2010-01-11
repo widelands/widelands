@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,10 +43,13 @@
 
 #define MAX_RECTS 20
 
+namespace UI {struct ProgressWindow;}
+
 struct RenderTarget;
 class Surface;
 struct Graphic;
 struct Road_Textures;
+struct StreamWrite;
 struct Texture;
 
 ///\todo Get rid of this global function
@@ -139,7 +142,8 @@ struct Graphic {
 		(const uint32_t anim,
 		 const uint32_t time,
 		 uint32_t & w,
-		 uint32_t & h);
+		 uint32_t & h)
+		const;
 
 	void screenshot(const char & fname) const;
 	Texture * get_maptexture_data(uint32_t id);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,7 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "logic/instances.h"
-#include "rgbcolor.h"
+#include "encodedata.h"
 
 #include "point.h"
 
@@ -30,23 +29,18 @@
 #include <string>
 #include <vector>
 
+namespace Widelands {struct Map_Object_Descr;}
+
 class Profile;
 class Section;
-
-struct EncodeData {
-	enum {No, Mask, Old} hasplrclrs;
-	RGBColor plrclr[4];
-
-	void clear();
-	void parse(Section &);
-	void add(EncodeData const &);
-};
 
 struct AnimationData {
 	uint32_t frametime;
 	Point hotspot;
 	EncodeData encdata;
 	std::string picnametempl;
+
+	void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const;
 
 	/** mapping of soundeffect name to frame number, indexed by frame number
 	 * \sa AnimationManager::trigger_sfx */
@@ -82,42 +76,11 @@ struct AnimationManager {
 	// for use by the graphics subsystem
 	uint32_t get_nranimations() const;
 	AnimationData const * get_animation(uint32_t id) const;
-	void trigger_soundfx
-		(uint32_t animation, uint32_t framenumber, uint32_t stereo_position);
 
 private:
 	std::vector<AnimationData> m_animations;
 };
 
-
-/**
-* Use this class to automatically manage a set of 6 animations, one for each
-* possible direction
-*/
-struct DirAnimations {
-	explicit DirAnimations
-		(const uint32_t dir1 = 0,
-		 const uint32_t dir2 = 0,
-		 const uint32_t dir3 = 0,
-		 const uint32_t dir4 = 0,
-		 const uint32_t dir5 = 0,
-		 const uint32_t dir6 = 0);
-
-	void parse
-		(Widelands::Map_Object_Descr &,
-		 std::string           const & directory,
-		 Profile                     &,
-		 char                  const * sectnametempl,
-		 Section                     * defaults    = 0,
-		 EncodeData            const * encdefaults = 0);
-
-	uint32_t get_animation(int32_t const dir) const {
-		return m_animations[dir - 1];
-	}
-
-private:
-	uint32_t m_animations[6];
-};
 
 extern AnimationManager g_anim;
 

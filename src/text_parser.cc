@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2005, 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2005, 2007-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,9 @@
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "helper.h"
+#include "log.h"
+
+#include "container_iterate.h"
 
 #include <vector>
 #include <algorithm>

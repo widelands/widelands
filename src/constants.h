@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,10 +28,9 @@
  * Lots more are scattered through header files
  */
 
-/** \name Textures
- * textures have a fixed size and are squares
- * TEXTURE_HEIGHT is just defined for easier understandement of the code
- */
+/// \name Textures
+/// Textures have a fixed size and are squares.
+/// TEXTURE_HEIGHT is just defined for easier understanding of the code.
 //@{
 #define TEXTURE_WIDTH 64
 #define TEXTURE_HEIGHT TEXTURE_WIDTH
@@ -94,19 +93,6 @@
 /// FRAME_LENGTH is just the default animation speed
 #define FRAME_LENGTH 250
 
-/// Maximum numbers of players in a game
-#define MAX_PLAYERS 8
-
-/// How often are statistics to be sampled
-#define STATISTICS_SAMPLE_TIME 30000
-
-/** Shorthand because the original is a lot to type \e and harder to read.
- * Use \#define and not typedef so that we don't need to \#include \<string\>
- * here. This would cause \<string\> to be included in every constants.h
- * user instead of just every SSS_T user.
- */
-#define SSS_T std::string::size_type
-
 /// Networking
 //@{
 #define WIDELANDS_LAN_DISCOVERY_PORT 7394
@@ -117,7 +103,6 @@
 /// Constants for user-defined SDL events that get handled by SDL's mainloop
 //@{
 enum {
-	IDLE,
 	CHANGE_MUSIC
 };
 //@}

@@ -22,6 +22,7 @@
 #include "c_utils.h"
 #include "log.h"
 #include "logic/game.h"
+#include "logic/player.h"
 #include "wui/interactive_player.h"
 
 extern "C" {

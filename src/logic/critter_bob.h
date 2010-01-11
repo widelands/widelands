@@ -21,6 +21,7 @@
 #define CRITTER_BOB_H
 
 #include "bob.h"
+#include "graphic/diranimations.h"
 
 namespace Widelands {
 

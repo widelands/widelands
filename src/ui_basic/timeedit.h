@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,10 @@
 #define TIMEEDIT_H
 
 #include "button.h"
+
+#include "i18n.h"
+
+#include "ref_cast.h"
 
 namespace UI {
 

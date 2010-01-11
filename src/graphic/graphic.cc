@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #include "graphic.h"
 
 #include "build_info.h"
+#include "diranimations.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
@@ -28,11 +29,14 @@
 #include "rendertarget.h"
 #include "texture.h"
 #include "wexception.h"
+#include "logic/roadtype.h"
 #include "logic/widelands_fileread.h"
 
 #include "ui_basic/progresswindow.h"
 
 #include "log.h"
+
+#include "container_iterate.h"
 
 #include <SDL_image.h>
 #include <SDL_rotozoom.h>
@@ -826,7 +830,9 @@ void Graphic::load_animations(UI::ProgressWindow & loader_ui) {
 	loader_ui.step(std::string());
 
 	clock_t end = clock();
-	printf("load_animations took %f seconds\n", (float(end - start) / CLOCKS_PER_SEC));
+	printf
+		("load_animations took %f seconds\n",
+		 (float(end - start) / CLOCKS_PER_SEC));
 }
 
 /**
@@ -841,22 +847,20 @@ AnimationGfx::Index Graphic::nr_frames(const uint32_t anim) const
  * \return the size of the animation at the given time.
 */
 void Graphic::get_animation_size
-	(uint32_t const anim, uint32_t const time, uint32_t & w, uint32_t & h)
+	(uint32_t const anim, uint32_t const time, uint32_t & w, uint32_t & h) const
 {
-	AnimationData const * data = g_anim.get_animation(anim);
-	AnimationGfx        * gfx  = get_animation(anim);
-	Surface * frame;
+	AnimationData const * const data = g_anim.get_animation(anim);
+	AnimationGfx  const * const gfx  =        get_animation(anim);
 
 	if (!data || !gfx) {
 		log("WARNING: Animation %u does not exist\n", anim);
 		w = h = 0;
 	} else {
 		// Get the frame and its data. Ignore playerclrs.
-		frame =
-			gfx->get_frame((time / data->frametime) % gfx->nr_frames(), 0, 0);
-
-		w = frame->get_w();
-		h = frame->get_h();
+		Surface const & frame =
+			*gfx->get_frame((time / data->frametime) % gfx->nr_frames());
+		w = frame.get_w();
+		h = frame.get_h();
 	}
 }
 

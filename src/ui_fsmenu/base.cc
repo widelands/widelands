@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2007-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 
 #include "base.h"
 
+#include "constants.h"
 #include "io/filesystem/filesystem.h"
 #include "graphic/graphic.h"
 #include "log.h"

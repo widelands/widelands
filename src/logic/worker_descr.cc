@@ -24,6 +24,7 @@
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"
+#include "field.h"
 #include "profile/profile.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"

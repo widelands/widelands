@@ -51,8 +51,8 @@ Event_Player_Building_Types_Option_Menu
 	label_player    (*this),
 	decrement_player(*this, 1 < parent.egbase().map().get_nrplayers()),
 	increment_player(*this, 1 < parent.egbase().map().get_nrplayers()),
-	clear           (*this),
-	invert          (*this),
+	clear_selection (*this),
+	invert_selection(*this),
 	table           (*this, event),
 	ok              (*this),
 	cancel          (*this)

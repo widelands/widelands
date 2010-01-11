@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,10 @@
 #include "ui_basic/window.h"
 
 #include "events/event_player_building_types.h"
+
+#include "i18n.h"
+
+#include "ref_cast.h"
 
 #include <string>
 
@@ -86,8 +90,8 @@ private:
 			.change_player(true);
 		}
 	} increment_player;
-	struct Clear : public UI::Button {
-		Clear(Event_Player_Building_Types_Option_Menu & parent) :
+	struct Clear_Selection : public UI::Button {
+		Clear_Selection(Event_Player_Building_Types_Option_Menu & parent) :
 			UI::Button
 				(&parent,
 				 165, 30, 70, 20,
@@ -95,20 +99,20 @@ private:
 				 _("Clear"), _("Clear selection"))
 		{}
 		void clicked() {
-			Event_Player_Building_Types_Option_Menu & parent =
+			Event_Player_Building_Types_Option_Menu & menu =
 				ref_cast<Event_Player_Building_Types_Option_Menu, UI::Panel>
 					(*get_parent());
 			for
 				(struct {uint8_t current; uint8_t const end;} i =
-				 	{0, parent.table.size()};
+				 	{0, menu.table.size()};
 				 i.current < i.end;
 				 ++i.current)
-				parent.table.get_record(i.current).set_checked
+				menu.table.get_record(i.current).set_checked
 					(Table::Selected, false);
 		}
-	} clear;
-	struct Invert : public UI::Button {
-		Invert(Event_Player_Building_Types_Option_Menu & parent) :
+	} clear_selection;
+	struct Invert_Selection : public UI::Button {
+		Invert_Selection(Event_Player_Building_Types_Option_Menu & parent) :
 			UI::Button
 				(&parent,
 				 245, 30, 70, 20,
@@ -116,17 +120,17 @@ private:
 				 _("Invert"), _("Invert selection"))
 		{}
 		void clicked() {
-			Event_Player_Building_Types_Option_Menu & parent =
+			Event_Player_Building_Types_Option_Menu & menu =
 				ref_cast<Event_Player_Building_Types_Option_Menu, UI::Panel>
 					(*get_parent());
 			for
 				(struct {uint8_t current; uint8_t const end;} i =
-				 	{0, parent.table.size()};
+				 	{0, menu.table.size()};
 				 i.current < i.end;
 				 ++i.current)
-				parent.table.get_record(i.current).toggle(Table::Selected);
+				menu.table.get_record(i.current).toggle(Table::Selected);
 		}
-	} invert;
+	} invert_selection;
 	struct Table : public UI::Table<uintptr_t const> {
 		enum Cols {Selected, Icon, Size, Name};
 		Table

@@ -22,6 +22,8 @@
 #include "mouse_constants.h"
 #include "graphic/rendertarget.h"
 
+#include <cmath>
+
 namespace UI {
 
 /**

@@ -21,6 +21,7 @@
 #define WORKER_DESCR_H
 
 #include "bob.h"
+#include "graphic/diranimations.h"
 #include "graphic/picture_id.h"
 
 #include "immovable.h"

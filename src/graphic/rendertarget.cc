@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include "wui/mapviewpixelconstants.h"
 #include "wui/overlay_manager.h"
 #include "surface.h"
+#include "logic/player.h"
 #include "logic/tribe.h"
 #include "vertex.h"
 
@@ -1197,30 +1198,32 @@ void RenderTarget::drawanim
 	 uint32_t       const time,
 	 Player const * const player)
 {
-	AnimationData const & data = *g_anim.get_animation(animation);
-	AnimationGfx        & gfx  = *g_gr-> get_animation(animation);
-
-	assert(&data);
-	assert(&gfx);
+	AnimationData const * const data = g_anim.get_animation(animation);
+	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
+	if (!data || !g_gr) {
+		log("WARNING: Animation %u does not exist\n", animation);
+		return;
+	}
 
 	// Get the frame and its data
-
-	uint32_t const framenumber = (time / data.frametime) % gfx.nr_frames();
-
+	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
 	Surface * const frame =
-		gfx.get_frame(framenumber, player ? player->player_number() : 0, player);
+		player ?
+		gfx->get_frame
+			(framenumber, player->player_number(), player->get_playercolor())
+		:
+		gfx->get_frame
+			(framenumber);
 
-	dst -= gfx.get_hotspot();
+	dst -= gfx->get_hotspot();
 
 	Rect srcrc(Point(0, 0), frame->get_w(), frame->get_h());
 
 	doblit(dst, frame, srcrc);
 
-	// Look if there's a sound effect registered for this frame and trigger
-	// the effect
-	uint32_t stereo_position = 128; //  see Sound_Handler::stereo_position()
-
-	g_anim.trigger_soundfx(animation, framenumber, stereo_position);
+	//  Look if there is a sound effect registered for this frame and trigger
+	//  the effect (see Sound_Handler::stereo_position).
+	data->trigger_soundfx(framenumber, 128);
 }
 
 /**
@@ -1233,17 +1236,22 @@ void RenderTarget::drawanimrect
 	 Player const * const player,
 	 Rect                 srcrc)
 {
-	AnimationData const * data = g_anim.get_animation(animation);
+	AnimationData const * const data = g_anim.get_animation(animation);
+	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
 	if (!data || !g_gr) {
 		log("WARNING: Animation %u does not exist\n", animation);
 		return;
 	}
 
 	// Get the frame and its data
-	Surface * const frame = g_gr->get_animation(animation)->get_frame
-			((time / data->frametime) % g_gr->nr_frames(animation),
-			 player ? player->player_number() : 0,
-			 player);
+	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
+	Surface * const frame =
+		player ?
+		gfx->get_frame
+			(framenumber, player->player_number(), player->get_playercolor())
+		:
+		gfx->get_frame
+			(framenumber);
 
 	dst -= g_gr->get_animation(animation)->get_hotspot();
 

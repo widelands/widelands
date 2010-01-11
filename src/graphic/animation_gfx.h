@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,8 @@
 #ifndef ANIMATION_GFX_H
 #define ANIMATION_GFX_H
 
-#include "logic/player.h"
+#include "animation.h"
+#include "logic/widelands.h"
 
 struct Surface;
 
@@ -37,21 +38,26 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 	}
 
 	Surface * get_frame
-		(Index                     const i,
-		 Widelands::Player_Number  const plyr,
-		 Widelands::Player const * const player)
+		(Index                    const i,
+		 Widelands::Player_Number const player_number,
+		 RGBColor         const * const playercolor)
 	{
 		assert(i < nr_frames());
-		assert(plyr <= MAX_PLAYERS);
-		if (!m_encodedata.hasplrclrs || !plyr)
-			return m_plrframes[0][i];
-
-		assert(player);
+		assert(1 <= player_number);
+		assert     (player_number <= MAX_PLAYERS);
+		assert(playercolor);
+		if (!m_encodedata.hasplrclrs)
+			return get_frame(i);
 
 		// Encode for this player
-		if (not m_plrframes[plyr].size())
-			encode(plyr, player->get_playercolor());
-		return m_plrframes[plyr][i];
+		if (not m_plrframes[player_number].size())
+			encode(player_number, playercolor);
+		return m_plrframes[player_number][i];
+	}
+
+	Surface * get_frame(Index const i) const {
+		assert(i < nr_frames());
+		return m_plrframes[0][i];
 	}
 
 private:

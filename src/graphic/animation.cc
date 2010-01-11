@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 
 #include "animation.h"
 
+#include "diranimations.h"
 #include "logic/bob.h"
 #include "constants.h"
 #include "i18n.h"
@@ -84,6 +85,28 @@ void EncodeData::add(EncodeData const & other)
 			plrclr[i] = other.plrclr[i];
 	}
 }
+
+
+/// Find out if there is a sound effect registered for the animation's frame
+/// and try to play it. This is used to have sound effects that are tightly
+/// synchronized to an animation, for example when a geologist is shown
+/// hammering on rocks.
+///
+/// \par framenumber  The framenumber currently on display.
+///
+/// \note uint32_t animation is an ID number that starts at 1, not a vector
+///       index that starts at 0 !
+///
+/// \sa RenderTarget::drawanim
+void AnimationData::trigger_soundfx
+	(uint32_t const framenumber, uint32_t const stereo_position) const
+{
+	std::map<uint32_t, std::string>::const_iterator const sfx_cue =
+		sfx_cues.find(framenumber);
+	if (sfx_cue != sfx_cues.end())
+		g_sound_handler.play_fx(sfx_cue->second, stereo_position, 1);
+}
+
 
 /*
 ==============================================================================
@@ -232,34 +255,6 @@ AnimationData const * AnimationManager::get_animation(uint32_t const id) const
 	return &m_animations[id - 1];
 }
 
-/**
- * Find out if there is a sound effect registered for the animation's frame and
- * try to play it. This is used to have sound effects that are tightly
- * synchronized to an animation, for example when a geologist is shown
- * hammering on rocks.
- *
- * \par animation    The animation to check.
- * \par framenumber  The framenumber currently on display.
- *
- * \note uint32_t animation is an ID number that starts at 1, not a vector
- *       index that starts at 0 !
- *
- * \sa AnimationManager::get
- * \sa RenderTargetImpl::drawanim
-*/
-void AnimationManager::trigger_soundfx
-	(uint32_t animation, uint32_t framenumber, uint32_t stereo_position)
-{
-	assert(animation); //  animation must not be zero!
-	assert(animation <= m_animations.size());
-
-	std::map<uint32_t, std::string> const & sfx_cues =
-		m_animations[animation - 1].sfx_cues;
-	std::map<uint32_t, std::string>::const_iterator const sfx_cue =
-		sfx_cues.find(framenumber);
-	if (sfx_cue != sfx_cues.end())
-		g_sound_handler.play_fx(sfx_cue->second, stereo_position, 1);
-}
 
 /*
 ==============================================================================

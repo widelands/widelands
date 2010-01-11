@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include "game_data_error.h"
 #include "graphic/graphic.h"
 #include "helper.h"
+#include "log.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "parse_map_object_types.h"
@@ -32,6 +33,8 @@
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
 #include "worlddata.h"
+
+#include "container_iterate.h"
 
 #include <iostream>
 #include <sstream>

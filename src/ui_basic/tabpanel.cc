@@ -24,6 +24,8 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 
+#include "compile_assert.h"
+
 namespace UI {
 #define TP_BUTTON_WIDTH     34
 #define TP_BUTTON_HEIGHT    34

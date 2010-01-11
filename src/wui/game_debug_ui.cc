@@ -21,6 +21,7 @@
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/field.h"
+#include "logic/player.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/instances.h"
