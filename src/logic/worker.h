@@ -222,6 +222,7 @@ private:
 
 	// Program commands
 	bool run_mine             (Game &, State &, Action const &);
+	bool run_lua              (Game &, State &, Action const &);
 	bool run_breed            (Game &, State &, Action const &);
 	bool run_createitem       (Game &, State &, Action const &);
 	bool run_setdescription   (Game &, State &, Action const &);

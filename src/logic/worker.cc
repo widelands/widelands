@@ -83,6 +83,56 @@ bool Worker::run_createitem(Game & game, State & state, Action const & action)
 
 
 /**
+ * Run the given lua script whenever this program runs.
+ *
+ * Syntax in conffile: lua \<filename\>
+ *
+ * \param g
+ * \param state
+ * \param action Which file to load and run
+ */
+// TODO: the ugliness!!
+extern "C" {
+#include <lua.h>
+}
+bool Worker::run_lua(Game & game, State & state, Action const & action) {
+        // // TODO: make this general
+	log("state.ivar1: %s\n", state.ivar1);
+   log("state.ivar2: %i\n", state.ivar2);
+	if (!state.ivar2) {
+		try {
+			std::string cwd = "/Users/sirver/Desktop/Programming/cpp/widelands/"
+				"git_svn_trunk/tribes/barbarians/lumberjack/";
+			LuaState * st = game.lua()->interpret_file(cwd + action.sparam1);
+			LuaCoroutine * cr = st->pop_coroutine();
+			molog("  Starting coroutine!\n");
+			molog("   %i\n", cr->resume());
+			state.path = (Path *)cr;
+			state.ivar2 += 1;
+		} catch (LuaError & err) {
+			molog("  Lua program failed: %s\n", err.what());
+			send_signal(game, "fail"); //  mine empty, abort program
+			pop_task(game);
+			return true;
+		}
+	} else {
+		molog("  Advancing coroutine!\n");
+		LuaCoroutine * cr = (LuaCoroutine*)(state.path);
+		int rv = cr->resume();
+		molog("   %i\n", rv);
+		if (rv == 0) {
+			// All done, advance the program
+		   ++state.ivar1;
+			state.ivar2 = 0;
+		}
+	}
+
+	// Advance program state
+	schedule_act(game, 10);
+	return true;
+}
+
+/**
  * Mine on the current coordinates for resources decrease, go home.
  *
  * Syntax in conffile: mine \<resource\> \<area\>

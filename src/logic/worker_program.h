@@ -73,6 +73,11 @@ private:
 		parse_t      function;
 	};
 
+	void parse_lua
+		(Worker_Descr                   *,
+		 Worker::Action                 *,
+		 Parser                         *,
+		 const std::vector<std::string> & cmd);
 	void parse_mine
 		(Worker_Descr                   *,
 		 Worker::Action                 *,

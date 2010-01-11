@@ -20,27 +20,58 @@
 #ifndef SCRIPTING_H
 #define SCRIPTING_H
 
-#include <string>
-
-extern "C" {
-#include <lua.h>
-}
-
 namespace Widelands {
 	struct Game;
 }
 
-struct LuaInterface {
-	LuaInterface(Widelands::Game *);
-	~LuaInterface();
-
-	int interpret_string(std::string);
-	std::string const & get_last_error() const {return m_last_error;}
-
-private:
-	lua_State * m_luastate;
-	std::string m_last_error;
+class LuaError : public std::runtime_error {
+	public:
+		LuaError(std::string reason) : std::runtime_error(reason) {}
+};
+class LuaValueError : public LuaError {
+	public:
+		LuaValueError(std::string wanted) :
+			LuaError("Variable not of expected type: " + wanted) {}
 };
 
+/*
+ * Class LuaCoroutine.
+ *
+ * Easy handling of LuaCoroutines
+ */
+class LuaCoroutine {
+	public:
+		virtual int get_status(void) = 0;
+		virtual int resume(void) = 0;
+};
+
+/*
+ * This class mainly provides convenient wrappers to access
+ * variables that come from lua
+ */
+class LuaState {
+	public:
+		virtual void push_int32(int32_t) = 0;
+		virtual int32_t pop_int32() = 0;
+		virtual void push_uint32(uint32_t) = 0;
+		virtual uint32_t pop_uint32() = 0;
+		virtual void push_double(double) = 0;
+		virtual double pop_double() = 0;
+		virtual void push_string(std::string&) = 0;
+		virtual std::string pop_string() = 0;
+		virtual LuaCoroutine* pop_coroutine() = 0;
+};
+
+/*
+ * This is the thin class that is used to execute code
+ */
+class LuaInterface {
+	public:
+		virtual LuaState* interpret_string(std::string) = 0;
+		virtual LuaState* interpret_file(std::string) = 0;
+		virtual std::string const & get_last_error() const = 0;
+};
+
+LuaInterface* create_lua_interface(Widelands::Game*);
 
 #endif

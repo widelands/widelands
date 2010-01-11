@@ -27,6 +27,7 @@
 namespace Widelands {
 
 const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
+	{"lua",               &WorkerProgram::parse_lua},
 	{"mine",              &WorkerProgram::parse_mine},
 	{"breed",             &WorkerProgram::parse_breed},
 	{"createitem",        &WorkerProgram::parse_createitem},
@@ -117,6 +118,26 @@ void WorkerProgram::parse_createitem
 	act->iparam1 = descr->tribe().safe_ware_index(cmd[1]).value();
 }
 
+
+/**
+ * lua <filename>
+ *
+ * Read the workers program from the lua file filename
+ *
+ * sparam1 = filename to run
+ */
+void WorkerProgram::parse_lua
+	(Worker_Descr                   *,
+	 Worker::Action                 * act,
+	 Parser                         *,
+	 std::vector<std::string> const & cmd)
+{
+	if (cmd.size() != 2)
+		throw wexception("Usage: lua <filename>");
+
+	act->function = &Worker::run_lua;
+	act->sparam1 = cmd[1];
+}
 
 /**
  * mine \<resource\> \<area\>

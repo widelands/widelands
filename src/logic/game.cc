@@ -130,10 +130,10 @@ Game::Game() :
 	m_state            (gs_notrunning),
 	m_cmdqueue         (*this),
 	m_replaywriter     (0),
-	m_last_stats_update(0),
-	m_lua(this)
+	m_last_stats_update(0)
 {
 	g_sound_handler.m_the_game = this;
+	m_lua = create_lua_interface(this);
 }
 
 Game::~Game()
