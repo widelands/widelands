@@ -208,13 +208,34 @@ LuaInterface_Impl::LuaInterface_Impl
 
 	m_state = new LuaState_Impl(L, true);
 
-	// We need the basis library and the math
-#ifndef DEBUG
-	luaopen_base(L);
-	luaopen_math(L);
+	// Open the lua libraries
+#ifdef DEBUG
+	static const luaL_Reg lualibs[] = {
+		{"", luaopen_base},
+		{LUA_LOADLIBNAME, luaopen_package},
+		{LUA_TABLIBNAME, luaopen_table},
+		{LUA_IOLIBNAME, luaopen_io},
+		{LUA_OSLIBNAME, luaopen_os},
+		{LUA_STRLIBNAME, luaopen_string},
+		{LUA_MATHLIBNAME, luaopen_math},
+		{LUA_DBLIBNAME, luaopen_debug},
+		{NULL, NULL}
+	};
 #else
-	luaL_openlibs(L);
+	static const luaL_Reg lualibs[] = {
+		{"", luaopen_base},
+		{LUA_TABLIBNAME, luaopen_table},
+		{LUA_STRLIBNAME, luaopen_string},
+		{LUA_MATHLIBNAME, luaopen_math},
+		{NULL, NULL}
+	};
 #endif
+	const luaL_Reg * lib = lualibs;
+	for (; lib->func; lib++) {
+		lua_pushcfunction(L, lib->func);
+		lua_pushstring(L, lib->name);
+		lua_call(L, 1, 0);
+	}
 
 	// Now our own
 	luaopen_wldebug(L);
