@@ -39,7 +39,7 @@ msgstr "Prodziert Breitaxt"
 
 #: ../../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Backt Brot für Arbeiter."
 
 #: ../../../tribes/barbarians/bakingtray/conf:1
 msgid "The peel is the tool of the baker, each baker needs its own. It is produced in the metal works like all tools."
@@ -402,7 +402,7 @@ msgstr "Träger"
 
 #: ../../../tribes/barbarians/conf:112
 msgid "Ox"
-msgstr ""
+msgstr "Ochse"
 
 #: ../../../tribes/barbarians/conf:115
 msgid "Soldier"
@@ -818,7 +818,7 @@ msgstr "Die Grundausrüstung eines Kriegers."
 
 #: ../../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
-msgstr ""
+msgstr "Schmieded Helme für die Soldaten."
 
 #: ../../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
@@ -1038,7 +1038,7 @@ msgstr "Reet wird verwendet, um die Dächer der größeren Gebäude der Barbaren
 
 #: ../../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Trainiert die Soldaten."
 
 #: ../../../tribes/barbarians/trainingscamp/conf:36
 #: ../../../tribes/barbarians/battlearena/conf:25
@@ -1147,7 +1147,7 @@ msgstr "Weizen ist überlebenswichtig. Gutes Brot und starke Biere können aus d
 
 #: ../../../tribes/barbarians/wisent/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Hilft an viel benutzten Straßen Wahren zu tranzportieren."
 
 #~ msgid "Forester"
 #~ msgstr "Förster"
