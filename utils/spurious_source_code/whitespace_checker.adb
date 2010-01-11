@@ -245,9 +245,9 @@ procedure Whitespace_Checker is
                end case;
             when '}'                   =>
                case Read_Characters (0)  is
-                  when LF | ' ' | ';' | ',' =>
+                  when LF | ' ' | ';' | ',' | '}' =>
                      null;
-                  when others               =>
+                  when others                     =>
                      Put_Error
                        ("""}" & Read_Characters (0) & """ is not allowed");
                end case;
