@@ -52,7 +52,7 @@ msgstr "Die Axt ist das Werkzeug des Holzfällers. Sie wird vom Werkzeugmacher g
 
 #: ../../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Backt Brot für Arbeiter"
 
 #: ../../../tribes/empire/bakingtray/conf:1
 msgid "The peel is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
@@ -905,7 +905,7 @@ msgstr "Fleisch ist voller Energie, daher wird es in Gaststätten und Tavernen v
 
 #: ../../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
-msgstr ""
+msgstr "Mahlt Weizen um Mehl zu produzieren."
 
 #: ../../../tribes/empire/pick/conf:1
 msgid "This pick is used by the stonemasons and the miners. It is produced by the toolsmith."
@@ -1038,7 +1038,7 @@ msgstr "Produziert Axt"
 
 #: ../../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Bildet die Soldaten aus."
 
 #: ../../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"

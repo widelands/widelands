@@ -981,7 +981,7 @@ msgstr "unbekannte/nicht verwendbare Version %u"
 #: ../../src/events/event_player_allowed_retreat_change.cc:44
 #, c-format
 msgid "(player allowed retreat change): %s"
-msgstr ""
+msgstr "(Spieler erlaubte Rückzugsveränderungen): %s"
 
 #: ../../src/events/event_set_player_style.cc:43
 #, fuzzy, c-format
@@ -1033,12 +1033,12 @@ msgstr "ungültige Koordinaten (%i, %i)"
 #: ../../src/events/event_player_area.cc:61
 #, c-format
 msgid "(player area): %s"
-msgstr ""
+msgstr "(Spielergebiet): %s"
 
 #: ../../src/events/event_building.cc:62
 #, c-format
 msgid "sufficient_suitability (%u) is smaller than required_suitability (%u)"
-msgstr ""
+msgstr "ausreichende_Tauglichkeit (%u) ist kleiner als die vorrausgesetzte_Tauglichkeit (%u)"
 
 #: ../../src/events/event_building.cc:72 ../../src/events/event_building.cc:81
 #: ../../src/graphic/animation.cc:173 ../../src/logic/building.cc:78
@@ -1136,12 +1136,12 @@ msgstr "Spieler: %u: %s"
 #: ../../src/events/event_set_timer.cc:54
 #, c-format
 msgid "trigger \"%s\": not a time trigger"
-msgstr ""
+msgstr "Auslöser \"%s\":kein Zeitauslöser"
 
 #: ../../src/events/event_set_timer.cc:60
 #, c-format
 msgid "(set_timer): %s"
-msgstr ""
+msgstr "(Timer einstellen): %s"
 
 #: ../../src/events/event_move_view.cc:56
 #, c-format
@@ -1163,12 +1163,12 @@ msgstr "Weiter"
 
 #: ../../src/events/event_message_box.cc:138
 msgid "there are no buttons, at least one is required"
-msgstr ""
+msgstr "es gibt keine Knöpfe, wenigstens einer ist vorrausgesetzt"
 
 #: ../../src/events/event_message_box.cc:149
 #, c-format
 msgid "is not modal although %s=%s"
-msgstr ""
+msgstr "ist kein Modal obwohl %s=%s"
 
 #: ../../src/events/event_message_box.cc:154
 #, c-format
@@ -1314,7 +1314,7 @@ msgstr "Lege den Grenzen-Stil des Spielers fest"
 
 #: ../../src/events/event_factory.cc:135
 msgid "Sets the style of the player's frontier markers to one of the styles that are defined in the player's tribe."
-msgstr ""
+msgstr "Stellt den Stil von Grenzposten des Spielers zu einem der Stile die im Stamm des Spielers definiert sind ein."
 
 #: ../../src/events/event_factory.cc:140
 #, fuzzy
@@ -1327,53 +1327,53 @@ msgstr "Fügt den Flaggen-Stil des Spielers zu den Stilen hinzu, die im Volk des
 
 #: ../../src/events/event_factory.cc:147
 msgid "Allows retreat value customization"
-msgstr ""
+msgstr "Erlaubt Rückzugswertanpassung"
 
 #: ../../src/events/event_factory.cc:149
 msgid "Allows that the player can change the value of 'retreat when hitpoints below x%'."
-msgstr ""
+msgstr "Erlaubt dem Spieler den "zurückziehen wenn Trefferpunkte unter x%" Wert zu verändern."
 
 #: ../../src/events/event_factory.cc:154
 msgid "Forbids retreat value customization"
-msgstr ""
+msgstr "Untersagt Rückzugswertanpassung"
 
 #: ../../src/events/event_factory.cc:156
 msgid "Forbids that the player can change the value of 'retreat when hitpoints below x%'."
-msgstr ""
+msgstr "Verbietet dem Spieler den "zurückziehen wenn Trefferpunkte unter x%" Wert zu verändern."
 
 #: ../../src/events/event_factory.cc:161
 msgid "Set player retreat percentage"
-msgstr ""
+msgstr "Spieler-Rückzugsprozentsatz einstellen"
 
 #: ../../src/events/event_factory.cc:163
 msgid "Sets the player value of 'retreat when hit points below x%', this value could be overridden by players if allowed."
-msgstr ""
+msgstr "Stellt den Wert "Rückzug wenn Trefferpunkte unter x%" ein, dieser Wert könnten von den Spieler verändert werden, wäre es erlaubt."
 
 #: ../../src/events/event_factory.cc:168
 msgid "Set see all mode for a player"
-msgstr ""
+msgstr "Stellt den Alles-Sehen-Modus für Spiele ein."
 
 #: ../../src/events/event_factory.cc:169
 msgid "Sets the see all mode for a specific player to on/off."
-msgstr ""
+msgstr "Stellt den Alles-Sehen-Modus für einen spezifischen Spieler An/Aus."
 
 #: ../../src/events/event_road.cc:40
 msgid "there are no steps"
-msgstr ""
+msgstr "es gibt keine Schritte"
 
 #: ../../src/events/event_road.cc:43
 msgid "there is only 1 step, must be at least 2"
-msgstr ""
+msgstr "es gibt nur 1 Schritt, es sollten jedoch mindestens 2 sein"
 
 #: ../../src/events/event_road.cc:49
 #, c-format
 msgid "step %li has direction '%c', must be one of {1 (northeast), 2 (east), 3 (southeast), 4 (southwest), 5 (west), 6 (northwest)}"
-msgstr ""
+msgstr "Schritt %li hat die Richtung '%C', sollte einer von {1 (Nordosten), 2 (Osten), 3  (Südosten), 4 (Südwesten), 5 (Westen), 6 (Nordwesten)} sein"
 
 #: ../../src/events/event_road.cc:72
 #, c-format
 msgid "the steps \"%s\" do not form the optimal path from the start to the end through only the used locations, should be \"%s\""
-msgstr ""
+msgstr "die Schritte \"%s\" formen nicht den optimalen Pfad vom Start bis zum Ende nur duch die benutzten Standorte, sollten \"%s\" sein.
 
 #: ../../src/map_io/widelands_map_immovabledata_data_packet.cc:113
 #, c-format
@@ -1384,7 +1384,7 @@ msgstr "Unbewegte Natur %u: %s"
 #: ../../src/map_io/widelands_map_immovable_data_packet.cc:100
 #, c-format
 msgid "immovable data: %s"
-msgstr ""
+msgstr "unbewegbare Daten: %s"
 
 #: ../../src/map_io/widelands_map_trigger_data_packet.cc:72
 #: ../../src/map_io/widelands_map_event_chain_data_packet.cc:175
@@ -1402,7 +1402,7 @@ msgstr "Auslöser: %s"
 #: ../../src/map_io/widelands_map_object_packet.cc:82
 #, c-format
 msgid "unknown object header %u"
-msgstr ""
+msgstr "unbekannter Objektkopf %u"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:85
 #, c-format
@@ -1448,7 +1448,7 @@ msgstr "Militärgebäude: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:601
 #, c-format
 msgid "program %s was skipped at time %u, but time is only %u"
-msgstr ""
+msgstr "Programm %s wurde übersprungen zum Zeitpunkt %u aber die Zeit ist erst %u"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:830
 #, c-format
@@ -1467,7 +1467,7 @@ msgstr "Höhe: %s"
 #: ../../src/game_io/game_preload_data_packet.cc:55
 #, c-format
 msgid "unknown/unhandled version %i"
-msgstr ""
+msgstr "unbekannte/ungehandhabte Version %i"
 
 #: ../../src/map_io/widelands_map_allowed_buildings_data_packet.cc:87
 #, c-format
@@ -1503,7 +1503,7 @@ msgstr "Straßendaten: %s"
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr ""
+msgstr "der Knoten ist in Besitzt von Spieler %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
@@ -1518,7 +1518,7 @@ msgstr "hat eine Flagge (%u)"
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
 msgid "neighbour node (%i, %i): %s"
-msgstr ""
+msgstr "Nachbarsknoten (%i, %i): %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
@@ -1554,7 +1554,7 @@ msgstr "Ereignisketten: %s"
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:68
 #, c-format
 msgid "invalid type \"%s\""
-msgstr ""
+msgstr "ungültiger Typ \"%s\""
 
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:76
 #, c-format
@@ -1569,7 +1569,7 @@ msgstr "Variablen: %s"
 #: ../../src/map_io/widelands_map_extradata_data_packet.cc:99
 #, c-format
 msgid "extradata: %s"
-msgstr ""
+msgstr "Extradaten: %s"
 
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:77
 #, c-format
@@ -1594,7 +1594,7 @@ msgstr "ungesehener Gegenstand: %s"
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:80
 #, c-format
 msgid "player names and tribes: %s"
-msgstr ""
+msgstr "Spielernamen und -Stämme: %s"
 
 #: ../../src/map_io/widelands_map_event_data_packet.cc:72
 #, c-format
@@ -1615,7 +1615,7 @@ msgstr "Spielerpositionen: %s"
 #: ../../src/map_io/widelands_map_building_data_packet.cc:100
 #, c-format
 msgid "player %u does not exist"
-msgstr ""
+msgstr "Spieler %u existiert nicht"
 
 #: ../../src/map_io/widelands_map_building_data_packet.cc:106
 #, c-format
@@ -1630,7 +1630,7 @@ msgstr "Gesehen: %s"
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:232
 #, c-format
 msgid "unknown task type \"%s\""
-msgstr ""
+msgstr "unbekannter Aufgabentyp \"%s\""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:309
 #, c-format
@@ -1640,17 +1640,17 @@ msgstr "Lese Pfad: %s"
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:381
 #, c-format
 msgid "bob %u: %s"
-msgstr ""
+msgstr "Objekt %u: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:388
 #, c-format
 msgid "bobdata: %s"
-msgstr ""
+msgstr "Objektdaten: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:403
 #, c-format
 msgid "critter bob: %s"
-msgstr ""
+msgstr "Tierobjekt: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:669
 #, c-format
@@ -1665,12 +1665,12 @@ msgstr "Träger: %s"
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
 msgid "unknown bob type %u"
-msgstr ""
+msgstr "unbekannter Objekttyp %u"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:102
 #, c-format
 msgid "tribe \"%s\" does not exist"
-msgstr ""
+msgstr "Stamm \"%s\ existiert nicht"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:141
 #, c-format
@@ -1699,7 +1699,7 @@ msgstr "Gelände: %s"
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
 msgid "call economy balance: %s"
-msgstr ""
+msgstr "Wirtschaftsgleichgewicht abrufen: %s"
 
 #: ../../src/economy/wares_queue.cc:256
 #, c-format
@@ -1773,7 +1773,7 @@ msgstr "Der Server eine unbekannte Anweisungen (Anweisung Nummer: %u) gesendet"
 
 #: ../../src/network/netclient.cc:756
 msgid "Something went wrong: "
-msgstr ""
+msgstr "Irgendetwas ist schief gelaufen: "
 
 #: ../../src/network/netclient.cc:787
 msgid " An automatic savegame will be created."
@@ -1924,7 +1924,7 @@ msgstr "Beginne die Datei zu %s zu senden."
 
 #: ../../src/network/nethost.cc:1699
 msgid "Client requests file altough none is available to send."
-msgstr ""
+msgstr "Client fordert Datein an, obwohl keine zu Sendung vorgesehen ist."
 
 #: ../../src/network/nethost.cc:1708
 #, fuzzy
@@ -2017,7 +2017,7 @@ msgstr "(Sicht): %s"
 #: ../../src/trigger/trigger_defeated.cc:46
 #, c-format
 msgid "player is %u, but map has only %u players"
-msgstr ""
+msgstr "Spieler is %u, die Karte hat jedoch nur %u Spieler"
 
 #: ../../src/trigger/trigger_defeated.cc:52
 #, c-format
@@ -2344,15 +2344,15 @@ msgstr "Sende mehr Soldaten"
 
 #: ../../src/wui/attack_box.cc:198
 msgid "Retreat: Never!"
-msgstr ""
+msgstr "Rückzug: Nie!"
 
 #: ../../src/wui/attack_box.cc:205
 msgid "Supported damage before retreat"
-msgstr ""
+msgstr "Ausgehaltener Schaden vor dem Rückzug"
 
 #: ../../src/wui/attack_box.cc:207
 msgid "Once injured"
-msgstr ""
+msgstr "sobald verwundet"
 
 #: ../../src/wui/interactive_base.cc:231
 #, c-format
@@ -2836,7 +2836,7 @@ msgstr "Unbekannt"
 #: ../../src/logic/world.cc:618
 #, c-format
 msgid "%s: too many terrain types, can not be more than 16"
-msgstr ""
+msgstr "%s: zu viele Geländetypen, es könne nicht mehr als 16 sein"
 
 #: ../../src/logic/constructionsite.cc:168
 #, c-format
@@ -2939,22 +2939,22 @@ msgstr "Programm %s: %s"
 #: ../../src/logic/immovable.cc:252 ../../src/logic/immovable.cc:266
 #, c-format
 msgid "expected 0 .. 255 but found %u"
-msgstr ""
+msgstr "erwartete 0 .. 255, fand aber %u"
 
 #: ../../src/logic/immovable.cc:271
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
-msgstr ""
+msgstr "[Geländeneigung] \"%s\" (nicht in momentaner Welt): %s"
 
 #: ../../src/logic/immovable.cc:301
 #, c-format
 msgid "immovable %s has no program \"%s\""
-msgstr ""
+msgstr "unbewegbares %s hat kein Programm \"%s\""
 
 #: ../../src/logic/immovable.cc:607
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
-msgstr ""
+msgstr "Stamm %s definiert keinen unbeweglichen Typ \"%s\""
 
 #: ../../src/logic/immovable.cc:610
 #, c-format
@@ -2964,7 +2964,7 @@ msgstr "Unbekannter Stamm %s"
 #: ../../src/logic/immovable.cc:616
 #, c-format
 msgid "world does not define immovable type \"%s\""
-msgstr ""
+msgstr "Welt definiert keinen unbeweglichen Typ \"%s\""
 
 #: ../../src/logic/immovable.cc:626
 #, c-format
@@ -2984,26 +2984,26 @@ msgstr "Priorität"
 #: ../../src/logic/immovable.cc:888
 #, c-format
 msgid "immovable type not in tribe but target type has scope (\"%s\")"
-msgstr ""
+msgstr "unbeweglicher Typ nicht im Stamm, Ziel hat jedoch Weite (\"%s\")"
 
 #: ../../src/logic/immovable.cc:739 ../../src/logic/immovable.cc:808
 #: ../../src/logic/immovable.cc:894
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
-msgstr ""
+msgstr "Weite \"%s\" die für den Zieltypen gegeben wurde muss (\"Welt\") sein"
 
 #: ../../src/logic/immovable.cc:754 ../../src/logic/immovable.cc:909
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
-msgstr ""
+msgstr "unerwartete Wahrscheinlichkeit in Reichweite [1, 254] gefunden wurde jedoch \"%s\""
 
 #: ../../src/logic/immovable.cc:767
 msgid "illegal transformation to the same type"
-msgstr ""
+msgstr "illegale Umwandlung des selben Types"
 
 #: ../../src/logic/immovable.cc:855
 msgid "probability in range [1, 254]"
-msgstr ""
+msgstr "Wahrscheinlichkeit in Reichweite [1,254]"
 
 #: ../../src/logic/game.cc:223
 msgid "Preloading a map"
@@ -3056,12 +3056,12 @@ msgstr ""
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #, c-format
 msgid "check eventchain: %s"
-msgstr ""
+msgstr "prüfe Ereigniskette: %s"
 
 #: ../../src/logic/instances.cc:75
 #, c-format
 msgid "destroy map object: %s"
-msgstr ""
+msgstr "zerstöre Kartenobjekt: %s"
 
 #: ../../src/logic/instances.cc:124
 #, c-format
@@ -3076,7 +3076,7 @@ msgstr "Handle: %s"
 #: ../../src/logic/production_program.cc:71
 #, c-format
 msgid "%s is not declared as an input (\"%s=<count>\" was not found in the [inputs] section)"
-msgstr ""
+msgstr "%s ist nicht als Eingabe dekleriert (\"%s=<count>\§ wurde nicht inder [inputs] Sektion gefunden)"
 
 #: ../../src/logic/production_program.cc:84
 #, c-format
@@ -3091,7 +3091,7 @@ msgstr "Anzahl"
 #: ../../src/logic/production_program.cc:103
 #, c-format
 msgid "group count is %u but (total) input storage capacity of the specified ware type(s) is only %u, so the group can never be fulfilled by the site"
-msgstr ""
+msgstr "Gruppenzählung ist %u, aber (insgesamt) ist die Lagerkapazität der spezifizierten Wahtensorte(n) nur %u, sodass die Gruppe nie von der Seite volfüllt sein kann"
 
 #: ../../src/logic/production_program.cc:133
 msgid "not "
@@ -3112,24 +3112,24 @@ msgstr "Arbeiter brauchen Erfahrung"
 #: ../../src/logic/production_program.cc:291
 #, c-format
 msgid "invalid condition: %s"
-msgstr ""
+msgstr "Ungültige Verhältnisse: %s"
 
 #: ../../src/logic/production_program.cc:306
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
-msgstr ""
+msgstr "erwarte {\"fehlgeschlagen"|\"vollständig"|\"übersprungen\"}, gefunden wurde jedoch \"%s\""
 
 #: ../../src/logic/production_program.cc:319
 msgid "expected \"and\" or end of input"
-msgstr ""
+msgstr "erwartet \"und\" oder Ende der Eingabe"
 
 #: ../../src/logic/production_program.cc:328
 msgid "expected condition at end of input"
-msgstr ""
+msgstr "erwartete Verhältnisse am Ende der Eingabe"
 
 #: ../../src/logic/production_program.cc:334
 msgid "expected \"or\" or end of input"
-msgstr ""
+msgstr "Erwarte \"oder\" oder Ende der Eingabe"
 
 #: ../../src/logic/production_program.cc:371
 #: ../../src/logic/production_program.cc:746
@@ -3148,14 +3148,14 @@ msgstr " weil nicht:"
 #: ../../src/logic/production_program.cc:421
 #, c-format
 msgid "the program \"%s\" has not (yet) been declared in %s (wrong declaration order?)"
-msgstr ""
+msgstr "Das Programm \"%s\" wurde (noch) nicht in %s deklariert (falsche Erklärungsanweisung?)"
 
 #: ../../src/logic/production_program.cc:443
 #: ../../src/logic/production_program.cc:448
 #: ../../src/logic/production_program.cc:453
 #, c-format
 msgid "%s handling method already defined"
-msgstr ""
+msgstr "%s Handhabungsmethode bereits definiert"
 
 #: ../../src/logic/production_program.cc:443
 msgid "failure"
@@ -3171,11 +3171,11 @@ msgstr "überspringe"
 
 #: ../../src/logic/production_program.cc:458
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
-msgstr ""
+msgstr "{\"Versagen\"|\"Vervollständigung\"|\"überspringen\"}"
 
 #: ../../src/logic/production_program.cc:472
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
-msgstr ""
+msgstr "{\"versagen\"|\"fertig\"|\"überspringen\"|\"wiederholen\"}"
 
 #: ../../src/logic/production_program.cc:574
 #, c-format
@@ -3184,11 +3184,11 @@ msgstr "Schlafe: %s"
 
 #: ../../src/logic/production_program.cc:596
 msgid "idle animation is default; calling is not allowed"
-msgstr ""
+msgstr "Leerlaufsanimation ist Standard; Berufung ist nicht erlaubt"
 
 #: ../../src/logic/production_program.cc:646
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
-msgstr ""
+msgstr "erwartete ware_type1[,ware_type2[,...]][:N]..."
 
 #: ../../src/logic/production_program.cc:749
 msgid " is missing"
@@ -3199,7 +3199,7 @@ msgstr[1] " fehlen"
 #: ../../src/logic/production_program.cc:806
 #, c-format
 msgid "%s is not declared as an output (\"output=%s\" was not found in the [global] section)"
-msgstr ""
+msgstr "%s ist nicht als Ausgabe deklariert (\"Ausgabe=%s\" konnte nicht im [globalen] Abschnitt gefunden werden)"
 
 #: ../../src/logic/production_program.cc:824
 msgid "Produced "
@@ -3239,7 +3239,7 @@ msgstr "Soldatenart"
 #: ../../src/logic/production_program.cc:1076
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|evade\"} but found \"%s\""
-msgstr ""
+msgstr "erwartete {\"L\"|\"Angriff\"|\"Verteidigung\"|Ausweichen\"}, fand jedoch \"%s\""
 
 #: ../../src/logic/production_program.cc:1085
 #: ../../src/logic/production_program.cc:1153
@@ -3249,7 +3249,7 @@ msgstr "Level"
 #: ../../src/logic/production_program.cc:1163
 #, c-format
 msgid "expected level > %u but found \"%s\""
-msgstr ""
+msgstr "unerwartetes level > %u , fand jedoch \"%s\""
 
 #: ../../src/logic/productionsite.cc:210
 msgid "(not occupied)"
@@ -3277,12 +3277,12 @@ msgstr "-"
 #: ../../src/logic/battle.cc:166
 #, c-format
 msgid "[battle] soldier %u loose battle\n"
-msgstr ""
+msgstr "[Schlacht] Krieger %u verliert Schlacht\n"
 
 #: ../../src/logic/battle.cc:170
 #, c-format
 msgid "[battle] waking up winner %d\n"
-msgstr ""
+msgstr "[Schlacht] Gewinner aufwecken %d\n"
 
 #: ../../src/logic/soldier.cc:62 ../../src/logic/soldier.cc:85
 msgid "\"min-max\""
@@ -3290,21 +3290,21 @@ msgstr "\"min-max\""
 
 #: ../../src/logic/soldier.cc:70 ../../src/logic/soldier.cc:93
 msgid "positive integer"
-msgstr ""
+msgstr "positive Ganzzahl"
 
 #: ../../src/logic/soldier.cc:74 ../../src/logic/soldier.cc:97
 #, c-format
 msgid "expected positive integer >= %u but found \"%s\""
-msgstr ""
+msgstr "erwartete positive Ganzzahl >= %u fand aber \"%s\""
 
 #: ../../src/logic/soldier.cc:201
 msgid "\"anim_name[,another_anim,...]\""
-msgstr ""
+msgstr "\"anim_name[,another_anim,...]\""
 
 #: ../../src/logic/soldier.cc:1176
 #, c-format
 msgid "bad direction '%d'"
-msgstr ""
+msgstr "schlechte Richtung '%d'"
 
 #: ../../src/logic/soldier.cc:1336
 #, fuzzy, c-format
@@ -3329,12 +3329,12 @@ msgstr "Logikfehler"
 #: ../../src/logic/worker.cc:107
 #, c-format
 msgid "should mine resource %s, which does not exist in world; tribe is not compatible with world"
-msgstr ""
+msgstr "sollte eine Mine Resourcen von %s hervorbringen, die es in dieser Welt nicht gibt, dann ist dieser Stamm mit der Welt inkompatibel"
 
 #: ../../src/logic/worker.cc:209
 #, c-format
 msgid "should breed resource type %s, which does not exist in world; tribe is not compatible with world"
-msgstr ""
+msgstr "sollte Züchter Resourcen Typs %s, welche in dieser Welt nicht existieren, hervorbringen, dann ist der Stamm nicht mit dieser Welt kompatibel."
 
 #: ../../src/logic/worker.cc:848
 msgid "A geologist found resources."
@@ -3356,7 +3356,7 @@ msgstr "keine gefunden"
 #: ../../src/logic/tribe.cc:212
 #, c-format
 msgid "frontier styles: %s"
-msgstr ""
+msgstr "Grenzpostenstil: %s"
 
 #: ../../src/logic/tribe.cc:233
 #, c-format
@@ -3371,7 +3371,7 @@ msgstr "Stamm %s: %s"
 #: ../../src/logic/playercommand.cc:117
 #, c-format
 msgid "player command: %s"
-msgstr ""
+msgstr "Spielerkommando: %s"
 
 #: ../../src/logic/playercommand.cc:159
 #, c-format
@@ -3381,7 +3381,7 @@ msgstr "Gegenstand eines Spielers %u: %s"
 #: ../../src/logic/playercommand.cc:165
 #, c-format
 msgid "bulldoze: %s"
-msgstr ""
+msgstr "Abrreißen: %s"
 
 #: ../../src/logic/playercommand.cc:217
 #, c-format
@@ -3401,7 +3401,7 @@ msgstr "Baue Weg: %s"
 #: ../../src/logic/playercommand.cc:406
 #, c-format
 msgid "flag %u: %s"
-msgstr ""
+msgstr "Flagge %u: %s"
 
 #: ../../src/logic/playercommand.cc:412
 #, c-format
@@ -3442,12 +3442,12 @@ msgstr "Zielwerte setzen: %s"
 #: ../../src/logic/playercommand.cc:851
 #, c-format
 msgid "change training options: %s"
-msgstr ""
+msgstr "Trainingsoptionen verändern: %s"
 
 #: ../../src/logic/playercommand.cc:915
 #, c-format
 msgid "soldier %u: %s"
-msgstr ""
+msgstr "Soldat %u: %s"
 
 #: ../../src/logic/playercommand.cc:921
 #, c-format
@@ -3457,7 +3457,7 @@ msgstr "Soldat raussenden: %s"
 #: ../../src/logic/playercommand.cc:993
 #, c-format
 msgid "change soldier capacity: %s"
-msgstr ""
+msgstr "Soldatenkapazität ändern: %s"
 
 #: ../../src/logic/cmd_queue.cc:171
 #, c-format
@@ -3489,21 +3489,21 @@ msgstr "Vorladung: %s"
 #: ../../src/game_io/game_interactive_player_data_packet.cc:49
 #, c-format
 msgid "player %u does not exist in the game"
-msgstr ""
+msgstr "Spieler %u existier in diesem Spiel nicht"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:79
 #, c-format
 msgid "interactive player: %s"
-msgstr ""
+msgstr "interaktiver Spieler: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:59
 #, c-format
 msgid "read number of economies as %u, but this was read as %u elsewhere"
-msgstr ""
+msgstr "lese Wirtschaftszahlen als %u, diese jedoch wurde als %u woanders gelesen"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:83
 msgid "there is no flag at the specified location"
-msgstr ""
+msgstr "Auf dem spezifizierten Standort gibt es keine Flagge"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:91
 #, c-format
@@ -3518,7 +3518,7 @@ msgstr "Kommandoschlange: %s"
 #: ../../src/game_io/game_player_info_data_packet.cc:57
 #, c-format
 msgid "player number (%i) is out of range (1 .. %u)"
-msgstr ""
+msgstr "Spielernummer (%i) ist außerhalb der Reichweite (1 .. %u)"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:144
 #, c-format
@@ -4052,7 +4052,7 @@ msgstr "Grafik Doppelbufferung."
 
 #: ../../src/ui_fsmenu/options.cc:431
 msgid "Remove Syncstream dumps on startup"
-msgstr ""
+msgstr "Entferne Abgleichungsflussentladungen beim Starten"
 
 #: ../../src/ui_fsmenu/options.cc:451
 msgid "Pause"
@@ -4577,7 +4577,7 @@ msgstr "%s Gebäudeart Ereignisoptionen"
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:226
 #, c-format
 msgid "No building types are selected. Select at least one."
-msgstr ""
+msgstr "Keine Gebäudetypen wurden ausgewählt. Wähle mindestens einen aus."
 
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:229
 msgid "Nothing selected"
@@ -4678,7 +4678,7 @@ msgstr " ACHTUNG: Es gibt bisher noch kein Optionsfenster für dieses Ereignis. 
 
 #: ../../src/editor/ui_menus/event_set_player_frontier_style_option_menu.cc:51
 msgid "Set Player's Frontier Style Event Options"
-msgstr ""
+msgstr "Grenzenstilereignisoptionen des Spielers einstellen"
 
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.cc:50
 #, fuzzy

@@ -42,7 +42,7 @@ msgstr "Produziert verbessertes Schild (nur für Abwärtskompatiblität mit Spei
 
 #: ../../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Backt Brot für Arbeiter."
 
 #: ../../../tribes/atlanteans/bakingtray/conf:1
 msgid "The bakingtray is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
@@ -905,7 +905,7 @@ msgstr "Produziert Schwarzwurzelmehl"
 
 #: ../../../tribes/atlanteans/miller/conf:1
 msgid "Mills wheat to produce flour."
-msgstr ""
+msgstr "Mahlt Korn um Mehl zu produzieren."
 
 #: ../../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."
@@ -929,7 +929,7 @@ msgstr "Sägen werden vom Säger, dem Holzfäller und dem Werkzeugmacher gebrauc
 
 #: ../../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws the wood to produce planks."
-msgstr ""
+msgstr "Sägt Holz um Bretter herzustellen."
 
 #: ../../../tribes/atlanteans/scout/conf:1
 msgid "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
@@ -982,7 +982,7 @@ msgstr "Verteidigt und Erobert!"
 
 #: ../../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr ""
+msgstr "Züchtet Spinnen für Spinnengarn."
 
 #: ../../../tribes/atlanteans/spidercloth/conf:1
 msgid "Cloth made out of spideryarn."
@@ -1014,7 +1014,7 @@ msgstr "Jeder atlantische Soldat muss das Zeichen seines Landes auf seiner Brust
 
 #: ../../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Stellt Werkzeuge für Arbeiter her."
 
 #: ../../../tribes/atlanteans/toolsmithy/conf:33
 msgid "Produce bakingtray"
@@ -1066,7 +1066,7 @@ msgstr "Produziert Schaufel"
 
 #: ../../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Bildet Soldaten aus."
 
 #: ../../../tribes/atlanteans/trunk/conf:1
 msgid "Trunks are the base for planks, which are used in nearly every building of the Atlanteans."
