@@ -154,6 +154,13 @@ public:
 		}
 		return 1;
 	}
+	int get_name(lua_State * L) {
+		Game & game = *get_game(L);
+		BaseImmovable * o = m_get(game, L);
+
+		lua_pushstring(L, o->name().c_str());
+		return 1;
+	}
 
 	/*
 	 * Lua Methods
@@ -177,6 +184,7 @@ const MethodType<L_BaseImmovable> L_BaseImmovable::Methods[] = {
 };
 const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
 	PROP_RO(L_BaseImmovable, size),
+	PROP_RO(L_BaseImmovable, name),
 	{0, 0, 0},
 };
 
