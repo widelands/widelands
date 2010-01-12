@@ -20,6 +20,8 @@
 #ifndef SCRIPTING_H
 #define SCRIPTING_H
 
+//#include <stdint.h>
+
 namespace Widelands {
 	struct Game;
 }
