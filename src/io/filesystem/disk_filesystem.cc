@@ -169,8 +169,6 @@ bool RealFSImpl::FileExists(std::string const & path) {
 bool RealFSImpl::IsDirectory(std::string const & path) {
 	struct stat st;
 
-	if (!FileExists(path))
-		return false;
 	if (stat(FS_CanonicalizeName(path).c_str(), &st) == -1)
 		return false;
 
