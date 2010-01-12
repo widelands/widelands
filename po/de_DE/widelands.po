@@ -1331,7 +1331,7 @@ msgstr "Erlaubt Rückzugswertanpassung"
 
 #: ../../src/events/event_factory.cc:149
 msgid "Allows that the player can change the value of 'retreat when hitpoints below x%'."
-msgstr "Erlaubt dem Spieler den "zurückziehen wenn Trefferpunkte unter x%" Wert zu verändern."
+msgstr "Erlaubt dem Spieler den 'zurückziehen wenn Trefferpunkte unter x%' Wert zu verändern."
 
 #: ../../src/events/event_factory.cc:154
 msgid "Forbids retreat value customization"
@@ -1339,7 +1339,7 @@ msgstr "Untersagt Rückzugswertanpassung"
 
 #: ../../src/events/event_factory.cc:156
 msgid "Forbids that the player can change the value of 'retreat when hitpoints below x%'."
-msgstr "Verbietet dem Spieler den "zurückziehen wenn Trefferpunkte unter x%" Wert zu verändern."
+msgstr "Verbietet dem Spieler den 'zurückziehen wenn Trefferpunkte unter x%' Wert zu verändern."
 
 #: ../../src/events/event_factory.cc:161
 msgid "Set player retreat percentage"
@@ -1347,7 +1347,7 @@ msgstr "Spieler-Rückzugsprozentsatz einstellen"
 
 #: ../../src/events/event_factory.cc:163
 msgid "Sets the player value of 'retreat when hit points below x%', this value could be overridden by players if allowed."
-msgstr "Stellt den Wert "Rückzug wenn Trefferpunkte unter x%" ein, dieser Wert könnten von den Spieler verändert werden, wäre es erlaubt."
+msgstr "Stellt den Wert 'Rückzug wenn Trefferpunkte unter x%' ein, dieser Wert könnten von den Spieler verändert werden, wäre es erlaubt."
 
 #: ../../src/events/event_factory.cc:168
 msgid "Set see all mode for a player"
@@ -1373,7 +1373,7 @@ msgstr "Schritt %li hat die Richtung '%C', sollte einer von {1 (Nordosten), 2 (O
 #: ../../src/events/event_road.cc:72
 #, c-format
 msgid "the steps \"%s\" do not form the optimal path from the start to the end through only the used locations, should be \"%s\""
-msgstr "die Schritte \"%s\" formen nicht den optimalen Pfad vom Start bis zum Ende nur duch die benutzten Standorte, sollten \"%s\" sein.
+msgstr "die Schritte \"%s\" formen nicht den optimalen Pfad vom Start bis zum Ende nur duch die benutzten Standorte, sollten \"%s\" sein."
 
 #: ../../src/map_io/widelands_map_immovabledata_data_packet.cc:113
 #, c-format
@@ -1670,7 +1670,7 @@ msgstr "unbekannter Objekttyp %u"
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:102
 #, c-format
 msgid "tribe \"%s\" does not exist"
-msgstr "Stamm \"%s\ existiert nicht"
+msgstr "Stamm \"%s\" existiert nicht"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:141
 #, c-format
@@ -3076,7 +3076,7 @@ msgstr "Handle: %s"
 #: ../../src/logic/production_program.cc:71
 #, c-format
 msgid "%s is not declared as an input (\"%s=<count>\" was not found in the [inputs] section)"
-msgstr "%s ist nicht als Eingabe dekleriert (\"%s=<count>\§ wurde nicht inder [inputs] Sektion gefunden)"
+msgstr "%s ist nicht als Eingabe dekleriert (\"%s=<count>\" wurde nicht inder [inputs] Sektion gefunden)"
 
 #: ../../src/logic/production_program.cc:84
 #, c-format
@@ -3099,7 +3099,7 @@ msgstr "nicht"
 
 #: ../../src/logic/production_program.cc:166
 msgid "economy needs "
-msgstr "Wirtschaft braucht"
+msgstr "Wirtschaft braucht "
 
 #: ../../src/logic/production_program.cc:195
 msgid "site has "
@@ -3117,7 +3117,7 @@ msgstr "Ungültige Verhältnisse: %s"
 #: ../../src/logic/production_program.cc:306
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
-msgstr "erwarte {\"fehlgeschlagen"|\"vollständig"|\"übersprungen\"}, gefunden wurde jedoch \"%s\""
+msgstr "erwarte {\"fehlgeschlagen\"|\"vollständig\"|\"übersprungen\"}, gefunden wurde jedoch \"%s\""
 
 #: ../../src/logic/production_program.cc:319
 msgid "expected \"and\" or end of input"
