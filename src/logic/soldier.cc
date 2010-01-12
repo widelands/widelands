@@ -1499,12 +1499,14 @@ bool Soldier::checkNodeBlocked
 		if (commit && soldiers.size() == 1) {
 			Soldier & soldier = ref_cast<Soldier, Bob>(*soldiers[0]);
 			if (soldier.get_owner() != get_owner() && soldier.canBeChallenged()) {
-				molog("[checkNodeBlocked] attacking a soldier\n");
+				molog
+					("[checkNodeBlocked] attacking a soldier (%u)\n",
+					 soldier.serial());
 				new Battle(game, *this, soldier);
 			}
 		}
 
-		/// Retreating soldiers don't check for blocked paths
+		/// Only battles block retreating soldiers
 		State * state = 0;
 
 		if (get_state(taskAttack)) {
@@ -1518,7 +1520,8 @@ bool Soldier::checkNodeBlocked
 				(state->ivar1 & CF_RETREAT_WHEN_INJURED and
 				 state->ui32var3 > get_current_hitpoints())
 			{
-				return false;
+				// Retreating soldiers act like normal bobs
+				return Bob::checkNodeBlocked(game, field, commit);
 			}
 		}
 		return true;

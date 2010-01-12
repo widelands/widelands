@@ -31,6 +31,7 @@
 #include "player.h"
 #include "profile/profile.h"
 #include "graphic/rendertarget.h"
+#include "soldier.h"
 #include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
@@ -927,8 +928,22 @@ int32_t Bob::start_walk
 }
 
 
-bool Bob::checkNodeBlocked(Game &, FCoords const &, bool)
+bool Bob::checkNodeBlocked(Game & game, FCoords const & field, bool)
 {
+	// Battles always block movement!
+
+	std::vector<Bob *> soldiers;
+	game.map().find_bobs
+		(Area<FCoords>(field, 0), &soldiers, FindBobEnemySoldier(*get_owner()));
+
+	if (soldiers.size()) {
+		container_iterate(std::vector<Bob *>, soldiers, i) {
+			Soldier & soldier = ref_cast<Soldier, Bob>(**i.current);
+			if (soldier.getBattle())
+				return true;
+		}
+	}
+
 	return false;
 }
 
