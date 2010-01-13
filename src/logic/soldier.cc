@@ -892,9 +892,14 @@ void Soldier::attack_pop(Game & game, State &)
 		m_battle->cancel(game, *this);
 }
 
-
-struct FindSoldierAttackingPlayer : public FindBob {
-	FindSoldierAttackingPlayer(Game & _game, Player & _player) :
+/**
+ * Accept Bob when is a Soldier alive that is attacking the Player.
+ *
+ * \param _game
+ * \param _player
+ */
+struct FindBobSoldierAttackingPlayer : public FindBob {
+	FindBobSoldierAttackingPlayer(Game & _game, Player & _player) :
 		player(_player),
 		game(_game) {}
 
@@ -1035,7 +1040,7 @@ void Soldier::defense_update(Game & game, State & state)
 	game.map().find_bobs
 		(Area<FCoords>(get_position(), 10),
 		 &soldiers,
-		 FindSoldierAttackingPlayer(game, *get_owner()));
+		 FindBobSoldierAttackingPlayer(game, *get_owner()));
 
 	if
 		(soldiers.empty() or
@@ -1454,8 +1459,11 @@ void Soldier::die_pop(Game & game, State &)
 	schedule_destroy(game);
 }
 
-
-struct FindSoldierOnBattlefield : public FindBob {
+/**
+ * Accept a Bob if it is a Soldier, is not dead and is running taskAttack or
+ * taskDefense.
+ */
+struct FindBobSoldierOnBattlefield : public FindBob {
 	bool accept(Bob * const bob) const
 	{
 		if (upcast(Soldier, soldier, bob))
@@ -1487,7 +1495,7 @@ bool Soldier::checkNodeBlocked
 
 	std::vector<Bob *> soldiers;
 	game.map().find_bobs
-		(Area<FCoords>(field, 0), &soldiers, FindSoldierOnBattlefield());
+		(Area<FCoords>(field, 0), &soldiers, FindBobSoldierOnBattlefield());
 
 	if
 		(soldiers.size() &&
@@ -1544,7 +1552,7 @@ void Soldier::sendSpaceSignals(Game & game)
 	game.map().find_bobs
 		(Area<FCoords>(get_position(), 1),
 		 &soldiers,
-		 FindSoldierOnBattlefield());
+		 FindBobSoldierOnBattlefield());
 
 	container_iterate_const(std::vector<Bob *>, soldiers, i)
 		if (upcast(Soldier, soldier, *i.current))
