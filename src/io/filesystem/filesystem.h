@@ -28,6 +28,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <memory>
 
 
 typedef std::set<std::string> filenameset_t;
@@ -111,7 +112,7 @@ struct FileSystem {
 	std::string getWorkingDirectory() const;
 	std::string FS_CanonicalizeName(std::string const & path) const;
 	bool pathIsAbsolute(std::string const & path) const;
-	std::vector<std::string> FS_Tokenize (std::string const & path) const;
+	std::auto_ptr< std::vector<std::string> > FS_Tokenize (std::string const & path) const;
 	static char const * FS_Filename(char const *);
 	static char const * FS_Filename(char const *, char const * & extension);
 	static std::string GetHomedir();

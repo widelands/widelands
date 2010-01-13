@@ -183,10 +183,10 @@ std::string FileSystem::GetHomedir()
  *
  * \todo This does not really belong into a filesystem class
  */
-std::vector<std::string> FileSystem::FS_Tokenize
+std::auto_ptr< std::vector<std::string> > FileSystem::FS_Tokenize
 	(std::string const & path) const
 {
-	std::vector<std::string> components;
+	std::auto_ptr< std::vector<std::string> > components(new std::vector<std::string>());
 	std::string::size_type pos;  //  start of token
 	std::string::size_type pos2; //  next filesep character
 
@@ -200,13 +200,13 @@ std::vector<std::string> FileSystem::FS_Tokenize
 
 	//split path into it's components
 	while (pos2 != std::string::npos) {
-		components.push_back(path.substr(pos, pos2 - pos));
+		components->push_back(path.substr(pos, pos2 - pos));
 		pos = pos2 + 1;
 		pos2 = path.find(m_filesep, pos);
 	}
 
 	//extract the last component (most probably a filename)
-	components.push_back(path.substr(pos));
+	components->push_back(path.substr(pos));
 
 	return components;
 }
@@ -217,7 +217,7 @@ std::vector<std::string> FileSystem::FS_Tokenize
  * \todo Enable non-Unix paths
  */
 std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
-	std::vector<std::string> components;
+	std::auto_ptr< std::vector<std::string> > components;
 	std::vector<std::string>::iterator i;
 
 #ifdef WIN32
@@ -240,12 +240,12 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 #endif
 
 	//tilde expansion
-	if (*components.begin() == "~") {
-		components.erase(components.begin());
-		std::vector<std::string> homecomponents;
+	if (*components->begin() == "~") {
+		components->erase(components->begin());
+		std::auto_ptr< std::vector<std::string> > homecomponents;
 		homecomponents = FS_Tokenize(GetHomedir());
-		components.insert
-			(components.begin(), homecomponents.begin(), homecomponents.end());
+		components->insert
+			(components->begin(), homecomponents->begin(), homecomponents->end());
 
 		absolute = true;
 	}
@@ -255,19 +255,19 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 
 	//make relative paths absolute (so that "../../foo" can work)
 	if (!absolute) {
-		std::vector<std::string> cwdcomponents;
+		std::auto_ptr< std::vector<std::string> > cwdcomponents;
 
 		cwdcomponents =
 			FS_Tokenize
 				(m_root.empty() ? getWorkingDirectory() : m_root);
 
-		components.insert
-			(components.begin(), cwdcomponents.begin(), cwdcomponents.end());
+		components->insert
+			(components->begin(), cwdcomponents->begin(), cwdcomponents->end());
 		absolute = true;
 	}
 
 	//clean up the path
-	for (i = components.begin(); i != components.end();) {
+	for (i = components->begin(); i != components->end();) {
 		bool erase = false;
 		bool erase_prev = false;
 
@@ -281,7 +281,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 
 		//remove double dot and the preceding component (if any)
 		if (*i == "..") {
-			if (i != components.begin())
+			if (i != components->begin())
 				erase_prev = true;
 			erase = true;
 		}
@@ -289,13 +289,13 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 		std::vector<std::string>::iterator nexti = i;
 
 		if (erase_prev && erase) {
-			components.erase(i - 1, i + 1);
-			i = components.begin();
+			components->erase(i - 1, i + 1);
+			i = components->begin();
 			continue;
 		}
 		if (erase) {
-			components.erase(i);
-			i = components.begin();
+			components->erase(i);
+			i = components->begin();
 			continue;
 		}
 
@@ -306,12 +306,12 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 #ifndef WIN32
 	canonpath = absolute ? "/" : "./";
 
-	for (i = components.begin(); i != components.end(); ++i)
+	for (i = components->begin(); i != components->end(); ++i)
 		canonpath += *i + "/";
 #else
 	canonpath = absolute ? "" : ".\\";
 
-	for (i = components.begin(); i != components.end(); ++i)
+	for (i = components->begin(); i != components->end(); ++i)
 		canonpath += *i + "\\";
 #endif
 
