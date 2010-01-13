@@ -46,6 +46,21 @@
 #include "io/streamread.h"
 #include "io/streamwrite.h"
 
+struct FileSystemPath: public std::string
+{
+	bool m_exists;
+	bool m_isDirectory;
+
+	FileSystemPath(std::string const &path)
+	: std::string(path)
+	{
+		struct stat st;
+
+		m_exists = (stat(c_str(), &st) != -1);
+		m_isDirectory = m_exists and S_ISDIR(st.st_mode);
+	}
+};
+
 /**
  * Initialize the real file-system
  */
@@ -153,12 +168,7 @@ int32_t RealFSImpl::FindFiles
  * \todo Can this be rewritten to just using exceptions? Should it?
  */
 bool RealFSImpl::FileExists(std::string const & path) {
-	struct stat st;
-
-	if (stat(FS_CanonicalizeName(path).c_str(), &st) == -1)
-		return false;
-
-	return true;
+	return FileSystemPath(FS_CanonicalizeName(path)).m_exists;
 }
 
 /**
@@ -167,27 +177,22 @@ bool RealFSImpl::FileExists(std::string const & path) {
  * \e can't exist then)
  */
 bool RealFSImpl::IsDirectory(std::string const & path) {
-	struct stat st;
-
-	if (stat(FS_CanonicalizeName(path).c_str(), &st) == -1)
-		return false;
-
-	return S_ISDIR(st.st_mode);
+	return FileSystemPath(FS_CanonicalizeName(path)).m_isDirectory;
 }
 
 /**
  * Create a sub filesystem out of this filesystem
  */
 FileSystem & RealFSImpl::MakeSubFileSystem(std::string const & path) {
-	assert(FileExists(path)); //TODO: throw an exception instead
-	std::string const fullname = FS_CanonicalizeName(path);
+	FileSystemPath fspath(FS_CanonicalizeName(path));
+	assert(fspath.m_exists); //TODO: throw an exception instead
 	//printf("RealFSImpl MakeSubFileSystem path %s fullname %s\n",
-	//path.c_str(), fullname.c_str());
+	//path.c_str(), fspath.c_str());
 
-	if (IsDirectory(path))
-		return *new RealFSImpl   (fullname);
+	if (fspath.m_isDirectory)
+		return *new RealFSImpl   (fspath);
 	else
-		return *new ZipFilesystem(fullname);
+		return *new ZipFilesystem(fspath);
 }
 
 /**
@@ -196,30 +201,28 @@ FileSystem & RealFSImpl::MakeSubFileSystem(std::string const & path) {
 FileSystem & RealFSImpl::CreateSubFileSystem
 	(std::string const & path, Type const fs)
 {
-	if (FileExists(path))
+	FileSystemPath fspath(FS_CanonicalizeName(path));
+	if (fspath.m_exists)
 		throw wexception
 			("path %s already exists, can not create a filesystem from it",
 			 path.c_str());
 
-	std::string fullname;
-
-	fullname = FS_CanonicalizeName(path);
-
 	if (fs == FileSystem::DIR) {
 		EnsureDirectoryExists(path);
-		return *new RealFSImpl(fullname);
+		return *new RealFSImpl(fspath);
 	} else
-		return *new ZipFilesystem(fullname);
+		return *new ZipFilesystem(fspath);
 }
 
 /**
  * Remove a number of files
  */
 void RealFSImpl::Unlink(std::string const & file) {
-	if (!FileExists(file))
+	FileSystemPath fspath(FS_CanonicalizeName(file));
+	if (!fspath.m_exists)
 		return;
 
-	if (IsDirectory(file))
+	if (fspath.m_isDirectory)
 		m_unlink_directory(file);
 	else
 		m_unlink_file(file);
@@ -229,17 +232,14 @@ void RealFSImpl::Unlink(std::string const & file) {
  * Remove a single directory or file
  */
 void RealFSImpl::m_unlink_file(std::string const & file) {
-	assert(FileExists(file));  //TODO: throw an exception instead
-	assert(!IsDirectory(file)); //TODO: throw an exception instead
-
-	std::string fullname;
-
-	fullname = FS_CanonicalizeName(file);
+	FileSystemPath fspath(FS_CanonicalizeName(file));
+	assert(fspath.m_exists);  //TODO: throw an exception instead
+	assert(!fspath.m_isDirectory); //TODO: throw an exception instead
 
 #ifndef WIN32
-	unlink(fullname.c_str());
+	unlink(fspath.c_str());
 #else
-	DeleteFile(fullname.c_str());
+	DeleteFile(fspath.c_str());
 #endif
 }
 
@@ -247,8 +247,9 @@ void RealFSImpl::m_unlink_file(std::string const & file) {
  * Recursively remove a directory
  */
 void RealFSImpl::m_unlink_directory(std::string const & file) {
-	assert(FileExists(file));  //TODO: throw an exception instead
-	assert(IsDirectory(file));  //TODO: throw an exception instead
+	FileSystemPath fspath(FS_CanonicalizeName(file));
+	assert(fspath.m_exists);  //TODO: throw an exception instead
+	assert(fspath.m_isDirectory);  //TODO: throw an exception instead
 
 	filenameset_t files;
 
@@ -277,13 +278,10 @@ void RealFSImpl::m_unlink_directory(std::string const & file) {
 
 	// NOTE: this might fail if this directory contains CVS dir,
 	// so no error checking here
-	std::string fullname;
-
-	fullname = FS_CanonicalizeName(file);
 #ifndef WIN32
-	rmdir(fullname.c_str());
+	rmdir(fspath.c_str());
 #else
-	RemoveDirectory(fullname.c_str());
+	RemoveDirectory(fspath.c_str());
 #endif
 }
 
@@ -292,9 +290,9 @@ void RealFSImpl::m_unlink_directory(std::string const & file) {
  * if the dir can't be created or if a file with this name exists
  */
 void RealFSImpl::EnsureDirectoryExists(std::string const & dirname) {
-	if (FileExists(dirname))
-		if (IsDirectory(dirname))
-			return; //  ok, dir is already there
+	FileSystemPath fspath(FS_CanonicalizeName(dirname));
+	if (fspath.m_exists and fspath.m_isDirectory)
+		return; //  ok, dir is already there
 	try {
 		MakeDirectory(dirname);
 	} catch (DirectoryCannotCreate_error const & e) {
@@ -320,18 +318,17 @@ void RealFSImpl::EnsureDirectoryExists(std::string const & dirname) {
  * if either onedir or otherdir is missing
  */
 void RealFSImpl::MakeDirectory(std::string const & dirname) {
-	if (FileExists(dirname))
+	FileSystemPath fspath(FS_CanonicalizeName(dirname));
+	if (fspath.m_exists)
 		throw wexception
 			("a file with the name \"%s\" already exists", dirname.c_str());
-
-	std::string const fullname = FS_CanonicalizeName(dirname);
 
 	if
 		(mkdir
 #ifdef WIN32
-		 	(fullname.c_str())
+		 	(fspath.c_str())
 #else
-		 	(fullname.c_str(), 0x1FF)
+		 	(fspath.c_str(), 0x1FF)
 #endif
 		 ==
 		 -1)
