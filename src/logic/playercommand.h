@@ -494,7 +494,7 @@ private:
 struct PlayerMessageCommand : public PlayerCommand {
 	PlayerMessageCommand () : PlayerCommand() {} //  for savegames
 	PlayerMessageCommand
-		(uint32_t const t, Player_Number const p, uint32_t const i)
+		(uint32_t const t, Player_Number const p, Message_Id const i)
 		: PlayerCommand(t, p), m_message_id(i)
 	{}
 
@@ -512,7 +512,7 @@ private:
 struct Cmd_MessageSetStatusRead : public PlayerMessageCommand {
 	Cmd_MessageSetStatusRead () : PlayerMessageCommand() {}
 	Cmd_MessageSetStatusRead
-		(uint32_t const t, Player_Number const p, uint32_t const i)
+		(uint32_t const t, Player_Number const p, Message_Id const i)
 		: PlayerMessageCommand(t, p, i)
 	{}
 
@@ -527,7 +527,7 @@ struct Cmd_MessageSetStatusRead : public PlayerMessageCommand {
 struct Cmd_MessageSetStatusArchived : public PlayerMessageCommand {
 	Cmd_MessageSetStatusArchived () : PlayerMessageCommand() {}
 	Cmd_MessageSetStatusArchived
-		(uint32_t const t, Player_Number const p, uint32_t const i)
+		(uint32_t const t, Player_Number const p, Message_Id const i)
 		: PlayerMessageCommand(t, p, i)
 	{}
 

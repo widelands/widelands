@@ -45,8 +45,7 @@ struct Message_Id {
 	bool operator!= (Message_Id const other) const {return id != other.id;}
 	bool operator<  (Message_Id const other) const {return id <  other.id;}
 	operator bool     () const {return *this != Null();}
-	operator uint32_t () const {return id;}
-	operator uintptr_t() const {return id;}
+	uint32_t value() const {return id;}
 
 private:
 	//  This is needed to prevent operator bool from being applied when someone

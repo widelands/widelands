@@ -25,6 +25,7 @@
 #include "logic/playercommand.h"
 
 using Widelands::Message;
+using Widelands::Message_Id;
 using Widelands::MessageQueue;
 
 inline Interactive_Player & GameMessageMenu::iplayer() const {
@@ -78,14 +79,14 @@ static char const * const status_picture_filename[] = {
 
 
 void GameMessageMenu::show_new_message
-	(Widelands::Message_Id const id, Widelands::Message const & message)
+	(Message_Id const id, Widelands::Message const & message)
 {
 	assert(iplayer().player().messages()[id] == &message);
-	assert(not list.find(id));
+	assert(not list.find(id.value()));
 	Message::Status const status = message.status();
 	if ((mode == Archive) != (status == Message::Archived))
 		toggle_between_inbox_and_archive.clicked();
-	List::Entry_Record & te = list.add(id, true);
+	List::Entry_Record & te = list.add(id.value(), true);
 	te.set_picture
 		(List::Status,
 		 g_gr->get_picture(PicMod_UI, status_picture_filename[status]));
@@ -109,7 +110,7 @@ void GameMessageMenu::think() {
 	case Inbox:
 		//  Remove those that are still in the list but no longer in the queue.
 		for (uint32_t j = list.size(); j;)
-			if (Message const * const message = mq[list[--j]]) //  Still in queue.
+			if (Message const * const message = mq[Message_Id(list[--j])])
 				switch (message->status()) {
 				case Message::New:
 					//  Nothing to do. If it is new, it must have been new before.
@@ -135,15 +136,15 @@ void GameMessageMenu::think() {
 
 		//  Add those that are in the queue but not yet in the list.
 		container_iterate_const(MessageQueue, mq, i) {
-			Widelands::Message_Id const id      =  i.current->first;
-			Message       const &       message = *i.current->second;
-			Message::Status       const status  = message.status();
+			Message_Id      const id      =  i.current->first;
+			Message const &       message = *i.current->second;
+			Message::Status const status  = message.status();
 			if (status == Message::Archived)
 				continue;
 			assert(status < 2);
 			for (uint32_t j = 0;; ++j)
 				if (j == list.size()) {
-					List::Entry_Record & te = list.add(id);
+					List::Entry_Record & te = list.add(id.value());
 					te.set_picture
 						(List::Status,
 						 g_gr->get_picture
@@ -151,14 +152,14 @@ void GameMessageMenu::think() {
 						 status_sort_string[status]);
 					SET_TITLE_AND_TIME;
 					break;
-				} else if (list[j] == static_cast<uintptr_t>(id))
+				} else if (list[j] == id.value())
 					break;
 		}
 		break;
 	case Archive:
 		//  Remove those that are still in the list but no longer in the queue.
 		for (uint32_t j = list.size(); j;)
-			if (Message const * const message = mq[list[--j]]) //  Still in queue.
+			if (Message const * const message = mq[Message_Id(list[--j])])
 				switch (message->status()) {
 				case Message::New:
 					//  fallthrough
@@ -177,20 +178,20 @@ void GameMessageMenu::think() {
 
 		//  Add those that are in the queue but not yet in the list.
 		container_iterate_const(MessageQueue, mq, i) {
-			Widelands::Message_Id const id      =  i.current->first;
-			Message       const &       message = *i.current->second;
+			Message_Id      const id      =  i.current->first;
+			Message const &       message = *i.current->second;
 			if (message.status() != Message::Archived)
 				continue;
 			for (uint32_t j = 0;; ++j)
 				if (j == list.size()) {
-					List::Entry_Record & te = list.add(id);
+					List::Entry_Record & te = list.add(id.value());
 					te.set_picture
 						(List::Status,
 						 g_gr->get_picture
 						 	(PicMod_UI, status_picture_filename[Message::Archived]));
 					SET_TITLE_AND_TIME;
 					break;
-				} else if (list[j] == static_cast<uintptr_t>(id))
+				} else if (list[j] == id.value())
 					break;
 		}
 		break;
@@ -211,7 +212,7 @@ void GameMessageMenu::selected(uint32_t const t) {
 	Widelands::Player & player = iplayer().player  ();
 	MessageQueue      & mq     = player   .messages();
 	if (t != List::no_selection_index()) {
-		uint32_t const id = list[t];
+		Message_Id const id = Message_Id(list[t]);
 		if (Message const * const message = mq[id]) {
 			//  Maybe the message was removed since think?
 			if (message->status() == Message::New) {
@@ -246,7 +247,7 @@ void GameMessageMenu::Archive_Or_Restore_Selected_Messages::clicked() {
 			if (menu.list.get_record(i.current).is_checked(List::Select))
 				game.send_player_command
 					(*new Widelands::Cmd_MessageSetStatusArchived
-					 	(gametime, plnum, menu.list[i.current]));
+					 	(gametime, plnum, Message_Id(menu.list[i.current])));
 		break;
 	case Archive:
 		for
@@ -257,7 +258,7 @@ void GameMessageMenu::Archive_Or_Restore_Selected_Messages::clicked() {
 			if (menu.list.get_record(i.current).is_checked(List::Select))
 				game.send_player_command
 					(*new Widelands::Cmd_MessageSetStatusRead
-					 	(gametime, plnum, menu.list[i.current]));
+					 	(gametime, plnum, Message_Id(menu.list[i.current])));
 		break;
 	}
 }
@@ -271,7 +272,7 @@ void GameMessageMenu::Center_Main_Mapview_On_Location::clicked() {
 	assert(selection < list.size());
 	if
 		(Message const * const message =
-		 	iplayer.player().messages()[list[selection]])
+		 	iplayer.player().messages()[Message_Id(list[selection])])
 	{
 		assert(message->position());
 		iplayer.move_view_to(message->position());

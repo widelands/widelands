@@ -102,7 +102,7 @@ struct Player :
 	Message_Id add_message_with_timeout
 		(Game &, Message &, uint32_t timeout, uint32_t radius);
 
-	void set_message_status(uint32_t const id, Message::Status const status) {
+	void set_message_status(Message_Id const id, Message::Status const status) {
 		messages().set_message_status(id, status);
 	}
 

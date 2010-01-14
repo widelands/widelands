@@ -56,9 +56,7 @@ void Trigger_Message_Is_Read_Or_Archived::Read
 				if (highest_id < message)
 					throw game_data_error
 						(_("player %u's message %u does not exist (%u is highest)"),
-						 player,
-						 static_cast<uint32_t>(message),
-						 static_cast<uint32_t>(highest_id));
+						 player, message.value(), highest_id.value());
 			} else
 				throw game_data_error(_("player %u does not exist"), player);
 		}
@@ -79,9 +77,7 @@ void Trigger_Message_Is_Read_Or_Archived::Write
 		if (not egbase.player(player).messages()[message]) //  message expired
 			return warn_when_message_expired(); //  must not write player and id
 		s.set_int("player",  player);
-		s.set_int
-			("message",
-			 static_cast<uint32_t>(mos.message_savers[player - 1][message]));
+		s.set_int("message", mos.message_savers[player - 1][message].value());
 	}
 }
 
@@ -111,7 +107,7 @@ void Trigger_Message_Is_Read_Or_Archived::warn_when_message_expired() const {
 	log
 		("SCENARIO ERROR: \"%s\" (trigger message_is_read_or_archived) refers "
 		 "to player %u's nonexistent message %u. It has expired.",
-		 name().c_str(), player, static_cast<uint32_t>(message));
+		 name().c_str(), player, message.value());
 }
 
 }

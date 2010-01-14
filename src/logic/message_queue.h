@@ -58,9 +58,9 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 	}
 
 	/// \Returns a pointer to the message if it exists, otherwise 0.
-	Message const * operator[](uint32_t const i) const {
+	Message const * operator[](Message_Id const id) const {
 		assert_counts();
-		const_iterator const it = find(Message_Id(i));
+		const_iterator const it = find(Message_Id(id));
 		return it != end() ? it->second : 0;
 	}
 
@@ -97,10 +97,10 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 	}
 
 	/// Sets the status of the message with the given id, if it exists.
-	void set_message_status(uint32_t const id, Message::Status const status) {
+	void set_message_status(Message_Id const id, Message::Status const status) {
 		assert_counts();
 		assert(status < 3);
-		iterator const it = find(Message_Id(id));
+		iterator const it = find(id);
 		if (it != end()) {
 			Message & message = *it->second;
 			assert(it->second->status() < 3);
@@ -133,10 +133,13 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 	/// file/savegame but the simulation has not started to run yet.
 	bool is_continuous() const {
 		assert_counts();
-		return static_cast<uint32_t>(current_message_id()) == size();
+		return current_message_id().value() == size();
 	}
 
 private:
+	MessageQueue & operator= (MessageQueue const &);
+	explicit MessageQueue    (MessageQueue const &);
+
 	/// Only for working around bugs in map loading code. If something has
 	/// accidentally been added to the queue during load, it can be worked
 	/// around by clearing the queue before the saved messages are loaded into

@@ -1356,7 +1356,7 @@ void PlayerMessageCommand::Write
 {
 	fw.Unsigned16(PLAYER_MESSAGE_CMD_VERSION);
 	PlayerCommand::Write(fw, egbase, mos);
-	fw.Unsigned32(mos.message_savers[sender() - 1][message_id()]);
+	fw.Unsigned32(mos.message_savers[sender() - 1][message_id()].value());
 }
 
 
@@ -1372,7 +1372,7 @@ void Cmd_MessageSetStatusRead::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_MESSAGESETSTATUSREAD);
 	ser.Unsigned8 (sender());
-	ser.Unsigned32(message_id());
+	ser.Unsigned32(message_id().value());
 }
 
 
@@ -1388,7 +1388,7 @@ void Cmd_MessageSetStatusArchived::serialize (StreamWrite & ser)
 {
 	ser.Unsigned8 (PLCMD_MESSAGESETSTATUSARCHIVED);
 	ser.Unsigned8 (sender());
-	ser.Unsigned32(message_id());
+	ser.Unsigned32(message_id().value());
 }
 
 }

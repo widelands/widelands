@@ -53,7 +53,7 @@ Event_Expire_Message::Event_Expire_Message
 			if (not m)
 				throw game_data_error
 					(_("player %u's message %u does not exist"),
-					 player, static_cast<uint32_t>(message));
+					 player, message.value());
 
 			if (m->duration() != Forever())
 				throw game_data_error
@@ -61,7 +61,7 @@ Event_Expire_Message::Event_Expire_Message
 					 	("player %u's message %u has duration %u; (it must have "
 					 	 "infinite duration, so that only this event can exipre "
 					 	 "it)"),
-					 player, static_cast<uint32_t>(message), m->duration());
+					 player, message.value(), m->duration());
 
 			Manager<Event> const & mem = egbase.map().mem();
 			Manager<Event>::Index const nr_events = mem.size();
@@ -73,9 +73,7 @@ Event_Expire_Message::Event_Expire_Message
 							 	("refers to the same message id (player %u's %u) as "
 							 	 "another expire message event (\"%s\"); (only one "
 							 	 "event can expire each message)"),
-							 player,
-							 static_cast<uint32_t>(message),
-							 other->name().c_str());
+							 player, message.value(), other->name().c_str());
 		}
 	} catch (_wexception const & e) {
 		throw game_data_error(_("(expire message): %s"), e.what());
@@ -94,9 +92,7 @@ void Event_Expire_Message::Write
 		assert(message);
 		assert(egbase.get_player(player));
 		s.set_int("player",  player);
-		s.set_int
-			("message",
-			 static_cast<uint32_t>(mos.message_savers[player - 1][message]));
+		s.set_int("message", mos.message_savers[player - 1][message].value());
 	} else
 		assert(not message);
 }
