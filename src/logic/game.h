@@ -178,7 +178,7 @@ struct Game : public Editor_Game_Base {
 
 
 	/// Lua frontend, used to run lua triggers and events.
-	LuaInterface* lua() {return m_lua;}
+	LuaInterface * lua() {return m_lua;}
 
 
 private:
@@ -278,7 +278,7 @@ private:
 	uint32_t m_last_stats_update;
 	General_Stats_vector m_general_stats;
 
-	LuaInterface*        m_lua;
+	LuaInterface       * m_lua;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

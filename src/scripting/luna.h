@@ -26,8 +26,8 @@
  * A lot of new features (e.g. inheritance) were added for Widelands.
  */
 
-#ifndef __S_LUNA_H
-#define __S_LUNA_H
+#ifndef LUNA_H
+#define LUNA_H
 
 #include <lua.hpp>
 #include "luna_impl.h"
@@ -40,10 +40,10 @@
  * be used to create the class in one depth deeper (e.g. wl.map)
  */
 template <class T>
-int register_class(lua_State * L , const char * sub_namespace = "")
+int register_class(lua_State * const L, char const * const sub_namespace = "")
 {
 	// Get wl table which MUST already exist
-	lua_getglobal(L, "wl" );
+	lua_getglobal(L, "wl");
 
 	// push the wl sub namespace table onto the stack, if desired
 	if (strlen(sub_namespace) != 0)
@@ -74,36 +74,36 @@ void add_parent(lua_State * L, int metatable_idx)
  * as last call in a function that should create a new Lua object
  */
 template <class T>
-int to_lua(lua_State* L, T* obj) {
+int to_lua(lua_State * const L, T * const obj) {
 	// Create a new table with some slots preallocated
-	lua_createtable( L, 0, 30 );
+	lua_createtable(L, 0, 30);
 
 	// get the index of the new table on the stack
-	int newtable = lua_gettop( L );
+	int const newtable = lua_gettop(L);
 
 	// push index of position of user data in our array
-	lua_pushnumber( L, 0 );
+	lua_pushnumber(L, 0);
 
 	// Make a new userdata. A lightuserdata won't do since we want to assign
 	// a metatable to it
-	T** a = static_cast<T**>(lua_newuserdata(L, sizeof(T*)));
+	T * * const a = static_cast<T * * >(lua_newuserdata(L, sizeof(T *)));
 	*a = obj;
 
-	int userdata = lua_gettop( L );
+	int const userdata = lua_gettop(L);
 
 	// Assign this metatable to this userdata. We only do this to add
 	// garbage collection to this userdata, so that the destructor gets
 	// called. As a (unwanted, but not critical) side effect we also add all
 	// other methods to this object
-	luaL_getmetatable( L, T::className );
-	lua_setmetatable( L, userdata );
+	luaL_getmetatable(L, T::className);
+	lua_setmetatable (L, userdata);
 
 	// table[ 0 ] = USERDATA;
-	lua_settable( L, newtable );
+	lua_settable(L, newtable);
 
 	// Assign this metatable to the newly created table
-	luaL_getmetatable( L, T::className );
-	lua_setmetatable( L, newtable );
+	luaL_getmetatable(L, T::className);
+	lua_setmetatable (L, newtable);
 
 	return 1;
 }

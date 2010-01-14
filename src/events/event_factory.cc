@@ -208,20 +208,21 @@ Event & create
 	case  5: return *new Event_Conquer_Area             (name, state);
 	case  6: return *new Event_Flag                     (name, state);
 	case  7: return *new Event_Immovable                (name, state);
-	case  8: return *new Event_Message_Box              (name, state);
-	case  9: return *new Event_Move_View                (name, state);
-	case 10: return *new Event_Reveal_Campaign          (name, state);
-	case 11: return *new Event_Reveal_Objective         (name, state);
-	case 12: return *new Event_Reveal_Scenario          (name, state);
-	case 13: return *new Event_Road                     (name, state);
-	case 14: return *new Event_Set_Timer                (name, state);
-	case 15: return *new Event_Unhide_Area              (name, state);
-	case 16: return *new Event_Set_Player_Frontier_Style(name, state);
-	case 17: return *new Event_Set_Player_Flag_Style    (name, state);
-	case 18: return *new Event_Allow_Retreat_Change     (name, state);
-	case 19: return *new Event_Forbid_Retreat_Change    (name, state);
-	case 20: return *new Event_Retreat_Change           (name, state);
-	case 21: return *new Event_Player_See_All           (name, state);
+	case  8: return *new Event_Lua                      (name, state);
+	case  9: return *new Event_Message_Box              (name, state);
+	case 10: return *new Event_Move_View                (name, state);
+	case 11: return *new Event_Reveal_Campaign          (name, state);
+	case 12: return *new Event_Reveal_Objective         (name, state);
+	case 13: return *new Event_Reveal_Scenario          (name, state);
+	case 14: return *new Event_Road                     (name, state);
+	case 15: return *new Event_Set_Timer                (name, state);
+	case 16: return *new Event_Unhide_Area              (name, state);
+	case 17: return *new Event_Set_Player_Frontier_Style(name, state);
+	case 18: return *new Event_Set_Player_Flag_Style    (name, state);
+	case 19: return *new Event_Allow_Retreat_Change     (name, state);
+	case 20: return *new Event_Forbid_Retreat_Change    (name, state);
+	case 21: return *new Event_Retreat_Change           (name, state);
+	case 22: return *new Event_Player_See_All           (name, state);
 	default:
 		assert(false);
 	}

@@ -17,6 +17,13 @@
  *
  */
 
+#include "scripting.h"
+
+#include "log.h"
+
+#include "lua_debug.h"
+#include "lua_map.h"
+
 #include <string>
 #include <stdexcept>
 
@@ -24,13 +31,6 @@ extern "C" {
 #include <lauxlib.h>
 #include <lualib.h>
 }
-
-#include "log.h"
-
-#include "lua_debug.h"
-#include "lua_map.h"
-
-#include "scripting.h"
 
 /*
 ============================================
@@ -172,8 +172,8 @@ void LuaState_Impl::push_string(std::string & val)
 ============================================
 */
 class LuaInterface_Impl : public LuaInterface {
-		LuaState_Impl * m_state;
-		std::string m_last_error;
+	LuaState_Impl * m_state;
+	std::string m_last_error;
 
 	/*
 	 * Private functions
@@ -203,8 +203,9 @@ int LuaInterface_Impl::m_check_for_errors(int rv) {
  * Public functions
  *************************/
 LuaInterface_Impl::LuaInterface_Impl
-	(Widelands::Game * const game) : m_last_error("") {
-	lua_State * L = lua_open();
+	(Widelands::Game * const game) : m_last_error("")
+{
+	lua_State * const L = lua_open();
 
 	m_state = new LuaState_Impl(L, true);
 
@@ -219,7 +220,7 @@ LuaInterface_Impl::LuaInterface_Impl
 		{LUA_STRLIBNAME, luaopen_string},
 		{LUA_MATHLIBNAME, luaopen_math},
 		{LUA_DBLIBNAME, luaopen_debug},
-		{NULL, NULL}
+		{0,               0}
 	};
 #else
 	static const luaL_Reg lualibs[] = {
@@ -227,7 +228,7 @@ LuaInterface_Impl::LuaInterface_Impl
 		{LUA_TABLIBNAME, luaopen_table},
 		{LUA_STRLIBNAME, luaopen_string},
 		{LUA_MATHLIBNAME, luaopen_math},
-		{NULL, NULL}
+		{0,               0}
 	};
 #endif
 	const luaL_Reg * lib = lualibs;

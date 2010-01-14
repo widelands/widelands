@@ -20,20 +20,22 @@
 #ifndef SCRIPTING_H
 #define SCRIPTING_H
 
+#include <stdexcept>
+#include <string>
+
 #include <stdint.h>
 
 namespace Widelands {
 	struct Game;
 }
 
-class LuaError : public std::runtime_error {
-	public:
-		LuaError(std::string reason) : std::runtime_error(reason) {}
+struct LuaError : public std::runtime_error {
+	LuaError(std::string const & reason) : std::runtime_error(reason) {}
 };
-class LuaValueError : public LuaError {
-	public:
-		LuaValueError(std::string wanted) :
-			LuaError("Variable not of expected type: " + wanted) {}
+struct LuaValueError : public LuaError {
+	LuaValueError(std::string const & wanted) :
+		LuaError("Variable not of expected type: " + wanted)
+	{}
 };
 
 /*
@@ -41,39 +43,36 @@ class LuaValueError : public LuaError {
  *
  * Easy handling of LuaCoroutines
  */
-class LuaCoroutine {
-	public:
-		virtual int get_status(void) = 0;
-		virtual int resume(void) = 0;
+struct LuaCoroutine {
+	virtual int get_status() = 0;
+	virtual int resume    () = 0;
 };
 
 /*
  * This class mainly provides convenient wrappers to access
  * variables that come from lua
  */
-class LuaState {
-	public:
-		virtual void push_int32(int32_t) = 0;
-		virtual int32_t pop_int32() = 0;
-		virtual void push_uint32(uint32_t) = 0;
-		virtual uint32_t pop_uint32() = 0;
-		virtual void push_double(double) = 0;
-		virtual double pop_double() = 0;
-		virtual void push_string(std::string&) = 0;
-		virtual std::string pop_string() = 0;
-		virtual LuaCoroutine* pop_coroutine() = 0;
+struct LuaState {
+	virtual void push_int32(int32_t) = 0;
+	virtual int32_t pop_int32() = 0;
+	virtual void push_uint32(uint32_t) = 0;
+	virtual uint32_t pop_uint32() = 0;
+	virtual void push_double(double) = 0;
+	virtual double pop_double() = 0;
+	virtual void push_string(std::string &) = 0;
+	virtual std::string pop_string() = 0;
+	virtual LuaCoroutine * pop_coroutine() = 0;
 };
 
 /*
  * This is the thin class that is used to execute code
  */
-class LuaInterface {
-	public:
-		virtual LuaState* interpret_string(std::string) = 0;
-		virtual LuaState* interpret_file(std::string) = 0;
-		virtual std::string const & get_last_error() const = 0;
+struct LuaInterface {
+	virtual LuaState * interpret_string(std::string) = 0;
+	virtual LuaState * interpret_file(std::string) = 0;
+	virtual std::string const & get_last_error() const = 0;
 };
 
-LuaInterface* create_lua_interface(Widelands::Game*);
+LuaInterface * create_lua_interface(Widelands::Game *);
 
 #endif

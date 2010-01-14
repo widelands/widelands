@@ -96,18 +96,19 @@ extern "C" {
 #include <lua.h>
 }
 bool Worker::run_lua(Game & game, State & state, Action const & action) {
-        // // TODO: make this general
-	log("state.ivar1: %s\n", state.ivar1);
-   log("state.ivar2: %i\n", state.ivar2);
+	//  TODO: make this general
+	log("state.ivar1: %i\n", state.ivar1);
+	log("state.ivar2: %i\n", state.ivar2);
 	if (!state.ivar2) {
 		try {
-			std::string cwd = "/Users/sirver/Desktop/Programming/cpp/widelands/"
+			std::string const cwd =
+				"/Users/sirver/Desktop/Programming/cpp/widelands/"
 				"git_svn_trunk/tribes/barbarians/lumberjack/";
 			LuaState * st = game.lua()->interpret_file(cwd + action.sparam1);
 			LuaCoroutine * cr = st->pop_coroutine();
 			molog("  Starting coroutine!\n");
 			molog("   %i\n", cr->resume());
-			state.path = (Path *)cr;
+			state.path = reinterpret_cast<Path *>(cr);
 			state.ivar2 += 1;
 		} catch (LuaError & err) {
 			molog("  Lua program failed: %s\n", err.what());
@@ -117,12 +118,12 @@ bool Worker::run_lua(Game & game, State & state, Action const & action) {
 		}
 	} else {
 		molog("  Advancing coroutine!\n");
-		LuaCoroutine * cr = (LuaCoroutine*)(state.path);
+		LuaCoroutine * cr = reinterpret_cast<LuaCoroutine *>(state.path);
 		int rv = cr->resume();
 		molog("   %i\n", rv);
 		if (rv == 0) {
 			// All done, advance the program
-		   ++state.ivar1;
+			++state.ivar1;
 			state.ivar2 = 0;
 		}
 	}

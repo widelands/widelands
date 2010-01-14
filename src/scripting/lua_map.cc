@@ -17,8 +17,6 @@
  *
  */
 
-#include <lua.hpp>
-
 #include "lua_map.h"
 
 #include "log.h"
@@ -31,6 +29,8 @@
 
 #include "luna.h"
 
+#include <lua.hpp>
+
 using namespace Widelands;
 
 /*
@@ -40,26 +40,26 @@ using namespace Widelands;
 #define luaL_checkint32(L, n)  static_cast<int32_t>(luaL_checkinteger(L, (n)))
 
 #define WRAPPED_PROPERTY_SET_INT(object, name) int set_##name(lua_State* L) { \
-	object.name = luaL_checkint32(L, -1); \
-	return 0; \
+   object.name = luaL_checkint32(L, -1);                                      \
+   return 0;                                                                  \
 }
 #define WRAPPED_PROPERTY_GET_INT(object, name) int get_##name(lua_State* L) { \
-	lua_pushinteger(L, object.name); \
-	return 1; \
+   lua_pushinteger(L, object.name);                                           \
+   return 1;                                                                  \
 }
-#define WRAPPED_PROPERTY_INT(object, name) \
-	WRAPPED_PROPERTY_GET_INT(object, name) \
-	WRAPPED_PROPERTY_SET_INT(object, name)
+#define WRAPPED_PROPERTY_INT(object, name)                                    \
+   WRAPPED_PROPERTY_GET_INT(object, name)                                     \
+   WRAPPED_PROPERTY_SET_INT(object, name)                                     \
 
 #define PROP_RO(klass, name) {#name, &klass::get_##name, 0}
 #define PROP_RW(klass, name) {#name, &klass::get_##name, &klass::set_##name}
 #define METHOD(klass, name) {#name, &klass::name}
 
 #define LUA_CLASS_HEAD(klass) \
-	static const char className[]; \
-	static const char parentName[]; \
-	static const MethodType<klass> Methods[]; \
-	static const PropertyType<klass> Properties[]; \
+   static const char className[];                                             \
+   static const char parentName[];                                            \
+   static const MethodType  <klass> Methods   [];                             \
+   static const PropertyType<klass> Properties[];                             \
 
 /*
  * Map Object
@@ -258,7 +258,7 @@ static int L_create_immovable(lua_State * const L) {
 	// TODO: this exact code is duplicated in worker.cc
 	if (BaseImmovable const * const imm = game.map()[pos].get_immovable())
 		if (imm->get_size() >= BaseImmovable::SMALL)
-			return report_error(L, "Field is no longer free!");
+			return report_error(L, "Node is no longer free!");
 
 	int32_t const imm_idx = game.map().world().get_immovable_index(objname);
 	if (imm_idx < 0)
@@ -297,25 +297,25 @@ static int L_find_immovable(lua_State * const L) {
 		if (radius < area.radius)
 			return report_error(L, "No suitable object in radius %i", radius);
 
-			std::vector<ImmovableFound> list;
-                        // if (action.iparam2 < 0)
-                        //         map.find_reachable_immovables
-                        //                 (area, &list, cstep);
-                        // else
-			log("Finding immovables: %i\n", area.radius);
-			map.find_reachable_immovables
-				(area, &list, cstep, FindImmovableAttribute(attribute));
+		std::vector<ImmovableFound> list;
+		//  if (action.iparam2 < 0)
+		//          map.find_reachable_immovables
+		//                  (area, &list, cstep);
+		//  else
+		log("Finding immovables: %i\n", area.radius);
+		map.find_reachable_immovables
+			(area, &list, cstep, FindImmovableAttribute(attribute));
 
-			log("Found:  %zu\n", list.size());
-			if (list.size()) {
-				// TODO: if this is called from the console, it will screw
-				// network gaming
-				Coords & rv = list[game.logic_rand() % list.size()].coords;
-				lua_pushinteger(L, rv.x);
-				lua_pushinteger(L, rv.y);
-				return 2;
-			}
+		log("Found:  %zu\n", list.size());
+		if (list.size()) {
+			//  TODO If this is called from the console, it will screw network
+			//  TODO gaming.
+			Coords & rv = list[game.logic_rand() % list.size()].coords;
+			lua_pushinteger(L, rv.x);
+			lua_pushinteger(L, rv.y);
+			return 2;
 		}
+	}
 
 	return 0;
 }
