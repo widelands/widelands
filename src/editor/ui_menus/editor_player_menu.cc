@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -186,9 +186,9 @@ void Editor_Player_Menu::update() {
 }
 
 void Editor_Player_Menu::clicked_add_player() {
-	Editor_Interactive & parent =
+	Editor_Interactive & menu =
 		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
-	Widelands::Map & map = parent.egbase().map();
+	Widelands::Map & map = menu.egbase().map();
 	Widelands::Player_Number const nr_players = map.get_nrplayers() + 1;
 	assert(nr_players <= MAX_PLAYERS);
 	map.set_nrplayers(nr_players);
@@ -201,7 +201,7 @@ void Editor_Player_Menu::clicked_add_player() {
 		map.set_scenario_player_name(nr_players, name);
 	}
 	map.set_scenario_player_tribe(nr_players, m_tribes[0]);
-	parent.set_need_save(true);
+	menu.set_need_save(true);
 	m_add_player        .set_enabled(nr_players < MAX_PLAYERS);
 	m_remove_last_player.set_enabled(true);
 	update();
@@ -209,13 +209,13 @@ void Editor_Player_Menu::clicked_add_player() {
 
 
 void Editor_Player_Menu::clicked_remove_last_player() {
-	Editor_Interactive & parent =
+	Editor_Interactive & menu =
 		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
-	Widelands::Map & map = parent.egbase().map();
+	Widelands::Map & map = menu.egbase().map();
 	Widelands::Player_Number const old_nr_players = map.get_nrplayers();
 	Widelands::Player_Number const nr_players     = old_nr_players - 1;
 	assert(1 <= nr_players);
-	if (not parent.is_player_tribe_referenced(old_nr_players)) {
+	if (not menu.is_player_tribe_referenced(old_nr_players)) {
 		if (const Widelands::Coords sp = map.get_starting_pos(old_nr_players)) {
 			//  Remove starting position marker.
 			char picsname[] = "pics/editor_player_00_starting_pos.png";
@@ -229,13 +229,13 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 		map.set_nrplayers(nr_players);
 		map.set_scenario_player_name(nr_players, name);   //  ???
 		map.set_scenario_player_tribe(nr_players, tribe); //  ???
-		parent.set_need_save(true);
+		menu.set_need_save(true);
 		m_add_player        .set_enabled(true);
 		m_remove_last_player.set_enabled(1 < nr_players);
 		if
-			(&parent.tools.current() == &parent.tools.set_starting_pos
+			(&menu.tools.current() == &menu.tools.set_starting_pos
 			 and
-			 parent.tools.set_starting_pos.get_current_player() == old_nr_players)
+			 menu.tools.set_starting_pos.get_current_player() == old_nr_players)
 			//  The starting position tool is the currently active editor tool and
 			//  the sel picture is the one with the color of
 			//  the player that is being removed. Make sure that it is fixed in
@@ -246,7 +246,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 			update();
 	} else {
 		UI::WLMessageBox mmb
-			(&parent,
+			(&menu,
 			 _("Error!"),
 			 _
 			 	("Can not remove player. It is referenced in some place. Remove "
@@ -262,9 +262,9 @@ void Editor_Player_Menu::clicked_remove_last_player() {
  * Player Tribe Button clicked
  */
 void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
-	Editor_Interactive & parent =
+	Editor_Interactive & menu =
 		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
-	if (not parent.is_player_tribe_referenced(n + 1)) {
+	if (not menu.is_player_tribe_referenced(n + 1)) {
 		std::string t = m_plr_set_tribes_buts[n]->get_title();
 		if (!Widelands::Tribe_Descr::exists_tribe(t))
 			throw wexception
@@ -274,11 +274,11 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
 			if (m_tribes[i] == t)
 				break;
 		t = i == m_tribes.size() - 1 ? m_tribes[0] : m_tribes[++i];
-		parent.egbase().map().set_scenario_player_tribe(n + 1, t);
-		parent.set_need_save(true);
+		menu.egbase().map().set_scenario_player_tribe(n + 1, t);
+		menu.set_need_save(true);
 	} else {
 		UI::WLMessageBox mmb
-			(&parent,
+			(&menu,
 			 _("Error!"),
 			 _
 			 	("Can not change player tribe. It is referenced in some place. "
@@ -295,19 +295,19 @@ void Editor_Player_Menu::player_tribe_clicked(const Uint8 n) {
  * Set Current Start Position button selected
  */
 void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
-	Editor_Interactive & parent =
+	Editor_Interactive & menu =
 		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 	//  jump to the current node
-	Widelands::Map & map = parent.egbase().map();
+	Widelands::Map & map = menu.egbase().map();
 	if (Widelands::Coords const sp = map.get_starting_pos(n))
-		parent.move_view_to(sp);
+		menu.move_view_to(sp);
 
 	//  select tool set mplayer
-	parent.select_tool(parent.tools.set_starting_pos, Editor_Tool::First);
-	parent.tools.set_starting_pos.set_current_player(n);
+	menu.select_tool(menu.tools.set_starting_pos, Editor_Tool::First);
+	menu.tools.set_starting_pos.set_current_player(n);
 
 	//  reselect tool, so everything is in a defined state
-	parent.select_tool(parent.tools.current(), Editor_Tool::First);
+	menu.select_tool(menu.tools.current(), Editor_Tool::First);
 
 	//  Register callback function to make sure that only valid locations are
 	//  selected.
@@ -323,14 +323,14 @@ void Editor_Player_Menu::set_starting_pos_clicked(const Uint8 n) {
 void Editor_Player_Menu::name_changed(int32_t m) {
 	//  Player name has been changed.
 	std::string text = m_plr_names[m]->text();
-	Editor_Interactive & parent =
+	Editor_Interactive & menu =
 		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
-	Widelands::Map & map = parent.egbase().map();
+	Widelands::Map & map = menu.egbase().map();
 	if (text == "") {
 		text = map.get_scenario_player_name(m + 1);
 		m_plr_names[m]->setText(text);
 	}
 	map.set_scenario_player_name(m + 1, text);
 	m_plr_names[m]->setText(map.get_scenario_player_name(m + 1));
-	parent.set_need_save(true);
+	menu.set_need_save(true);
 }

@@ -21,6 +21,7 @@
 #define PLAYERCOMMAND_H
 
 #include "cmd_queue.h"
+#include "message_id.h"
 #include "path.h"
 #include "trainingsite.h"
 
@@ -486,6 +487,57 @@ private:
 	Serial        serial;
 	// By now only retreat info is stored
 	uint8_t       retreat;
+};
+
+
+/// Abstract base for commands about a message.
+struct PlayerMessageCommand : public PlayerCommand {
+	PlayerMessageCommand () : PlayerCommand() {} //  for savegames
+	PlayerMessageCommand
+		(uint32_t const t, Player_Number const p, uint32_t const i)
+		: PlayerCommand(t, p), m_message_id(i)
+	{}
+
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	PlayerMessageCommand(StreamRead &);
+
+	Message_Id message_id() const {return m_message_id;}
+
+private:
+	Message_Id m_message_id;
+};
+
+struct Cmd_MessageSetStatusRead : public PlayerMessageCommand {
+	Cmd_MessageSetStatusRead () : PlayerMessageCommand() {}
+	Cmd_MessageSetStatusRead
+		(uint32_t const t, Player_Number const p, uint32_t const i)
+		: PlayerMessageCommand(t, p, i)
+	{}
+
+	virtual uint8_t id() const {return QUEUE_CMD_MESSAGESETSTATUSREAD;}
+
+	Cmd_MessageSetStatusRead(StreamRead & des) : PlayerMessageCommand(des) {}
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+};
+
+struct Cmd_MessageSetStatusArchived : public PlayerMessageCommand {
+	Cmd_MessageSetStatusArchived () : PlayerMessageCommand() {}
+	Cmd_MessageSetStatusArchived
+		(uint32_t const t, Player_Number const p, uint32_t const i)
+		: PlayerMessageCommand(t, p, i)
+	{}
+
+	virtual uint8_t id() const {return QUEUE_CMD_MESSAGESETSTATUSARCHIVED;}
+
+	Cmd_MessageSetStatusArchived(StreamRead & des) : PlayerMessageCommand(des) {
+	}
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
 };
 }
 

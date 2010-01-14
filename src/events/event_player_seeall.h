@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@ namespace Widelands {
 struct Event_Player_See_All : public Event {
 	Event_Player_See_All
 		(char const * const Name, State const S)
-		: Event(Name, S)
+		: Event(Name, S), m_player(1), m_switch_to_on(true)
 	{}
 	Event_Player_See_All(Section &, Editor_Game_Base &);
 
@@ -37,13 +37,15 @@ struct Event_Player_See_All : public Event {
 
 	int32_t option_menu(Editor_Interactive &) {return 0;} // dummy to silent gcc
 
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
+
 	State run(Game &);
 
-	void Write(Section &, Editor_Game_Base &) const;
-
 protected:
-	bool   m_switch_to_on;
-	int8_t m_player_number;
+	Player_Number m_player;
+	bool          m_switch_to_on;
 };
 
 }

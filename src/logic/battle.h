@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -110,9 +110,9 @@ public:
 	// Remove as soon as we fully support the new system
 	virtual bool has_new_save_support() {return true;}
 
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver *, FileWrite &);
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader *, FileRead &);
+		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 };
 
 }

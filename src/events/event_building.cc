@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -88,8 +88,8 @@ Event_Building::Event_Building
 			}
 			if (not tribe) {
 				Map const & map = egbase.map();
-				m_player   = s.get_Player_Number("player", map.get_nrplayers(), 1);
-				m_location = s.get_safe_Coords("point", map.extent());
+				m_player   = s.get_Player_Number("player", map.get_nrplayers());
+				m_position = s.get_safe_Coords("point", map.extent());
 				egbase.get_ibase()->reference_player_tribe(m_player, this);
 				tribe =
 					&egbase.manually_load_tribe
@@ -338,7 +338,9 @@ Event_Building::~Event_Building() {
 }
 
 
-void Event_Building::Write(Section & s, Editor_Game_Base & egbase) const
+void Event_Building::Write
+	(Section & s, Editor_Game_Base const & egbase, Map_Map_Object_Saver const &)
+	const
 {
 	assert(m_distance_min <= m_distance_max);
 	s.set_string        ("type",     "building");
@@ -353,12 +355,12 @@ void Event_Building::Write(Section & s, Editor_Game_Base & egbase) const
 		s.set_string     ("distance",               buffer);
 	} else if (m_distance_max)
 		s.set_int        ("distance",               m_distance_max);
-	s.set_Coords        ("point",    m_location);
+	s.set_Coords        ("point",    m_position);
 	if (m_player != 1)
 		s.set_int        ("player",   m_player);
 	Tribe_Descr const & tribe =
-		egbase.manually_load_tribe
-			(egbase.map().get_scenario_player_tribe(m_player));
+		*egbase.get_tribe
+			(egbase.map().get_scenario_player_tribe(m_player).c_str());
 	Building_Descr const & descr = *tribe.get_building_descr(m_building);
 	s.set_string("building", descr.name().c_str());
 	if (dynamic_cast<Warehouse_Descr const *>(&descr)) {
@@ -411,12 +413,6 @@ void Event_Building::Write(Section & s, Editor_Game_Base & egbase) const
 }
 
 
-void Event_Building::set_player(Player_Number const p) {m_player = p;}
-
-
-void Event_Building::set_position(Coords const c) {m_location = c;}
-
-
 Event::State Event_Building::run(Game & game) {
 	Player & player = game.player(m_player);
 	Building_Descr const & descr =
@@ -425,7 +421,7 @@ Event::State Event_Building::run(Game & game) {
 	int32_t best_suitability = std::numeric_limits<int32_t>::min();
 	Map const & map = game.map();
 	MapFringeRegion<Area<FCoords> > mr
-		(map, Area<FCoords>(map.get_fcoords(m_location), m_distance_min));
+		(map, Area<FCoords>(map.get_fcoords(m_position), m_distance_min));
 	do {
 		do {
 			int32_t const suitability = descr.suitability(map, mr.location());
@@ -446,7 +442,7 @@ Event::State Event_Building::run(Game & game) {
 			 	("failed to place a %s near (%i, %i) (distance between %u and %u) "
 			 	 "for player %u (suitability required is %u but found only %u)"),
 			 descr.descname().c_str(),
-			 m_location.x, m_location.y, m_distance_min, m_distance_max,
+			 m_position.x, m_position.y, m_distance_min, m_distance_max,
 			 m_player, m_required_suitability, best_suitability);
 	assert(best_positions.size());
 	player.force_building

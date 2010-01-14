@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,9 @@ struct Event_Conquer_Area : public Event_Player_Area {
 
 	int32_t option_menu(Editor_Interactive &);
 
-	void Write(Section &, Editor_Game_Base &) const;
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
 
 	State run(Game &);
 };

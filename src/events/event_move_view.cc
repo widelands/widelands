@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,18 +37,18 @@ Event_Move_View::Event_Move_View(Section & s, Editor_Game_Base & egbase)
 		if (packet_version <= EVENT_VERSION) {
 			Map const & map = egbase.map();
 			Extent const extent = map.extent();
-			m_location =
+			m_position =
 				packet_version == 1 ?
 				Coords(s.get_safe_int("point_x"), s.get_safe_int("point_y"))
 				:
 				s.get_safe_Coords("point", extent);
 			if
-				(m_location.x < 0 or extent.w <= m_location.x
+				(m_position.x < 0 or extent.w <= m_position.x
 				 or
-				 m_location.y < 0 or extent.h <= m_location.y)
+				 m_position.y < 0 or extent.h <= m_position.y)
 				throw game_data_error
-					(_("illegal coordinates (%i, %i)"), m_location.x, m_location.y);
-			m_player = s.get_Player_Number("player", map.get_nrplayers(), 1);
+					(_("illegal coordinates (%i, %i)"), m_position.x, m_position.y);
+			m_player = s.get_Player_Number("player", map.get_nrplayers());
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -57,30 +57,23 @@ Event_Move_View::Event_Move_View(Section & s, Editor_Game_Base & egbase)
 	}
 }
 
-void Event_Move_View::Write(Section & s, Editor_Game_Base &) const {
+void Event_Move_View::Write
+	(Section & s, Editor_Game_Base const &, Map_Map_Object_Saver const &) const
+{
 	s.set_string ("type",    "move_view");
 	s.set_int    ("version", EVENT_VERSION);
-	s.set_Coords ("point",   m_location);
+	s.set_Coords ("point",   m_position);
 	if (m_player != 1)
 		s.set_int ("player",  m_player);
 }
 
 
-void Event_Move_View::set_player(Player_Number const p) {m_player = p;}
-
-
-void Event_Move_View::set_position(Coords const c) {m_location = c;}
-
-
-/**
- * Check if trigger conditions are done
- */
 Event::State Event_Move_View::run(Game & game) {
-	assert(m_location);
+	assert(m_position);
 
 	Interactive_Player & ipl = *game.get_ipl();
 	if (ipl.player_number() == m_player)
-		ipl.move_view_to(m_location);
+		ipl.move_view_to(m_position);
 
 	return m_state = DONE;
 }

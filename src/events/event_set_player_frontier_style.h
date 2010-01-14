@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2009-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,9 @@ struct Event_Set_Player_Frontier_Style : public Event_Set_Player_Style {
 
 	int32_t option_menu(Editor_Interactive &);
 
-	void Write(Section &, Editor_Game_Base &) const;
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
 
 	State run(Game &);
 };

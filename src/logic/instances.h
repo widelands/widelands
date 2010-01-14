@@ -261,13 +261,11 @@ public:
 		virtual ~Loader() {}
 
 		void init
-			(Editor_Game_Base      & e,
-			 Map_Map_Object_Loader * const m,
-			 Map_Object            * const object)
+			(Editor_Game_Base & e, Map_Map_Object_Loader & m, Map_Object & object)
 		{
 			m_egbase = &e;
-			m_mol = m;
-			m_object = object;
+			m_mol    = &m;
+			m_object = &object;
 		}
 
 		Editor_Game_Base      & egbase    () {return *m_egbase;}
@@ -289,7 +287,7 @@ public:
 	/// to the new Map_Object saving system
 	virtual bool has_new_save_support() {return false;}
 
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver *, FileWrite &);
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 	// Pure Map_Objects cannot be loaded
 
 protected:

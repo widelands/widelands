@@ -26,6 +26,7 @@
 #include "helper.h"
 #include "mapregion.h"
 #include "message_queue.h"
+#include "player.h"
 #include "productionsite.h"
 #include "profile/profile.h"
 #include "soldier.h"
@@ -1128,12 +1129,12 @@ void ProductionProgram::ActMine::execute
 void ProductionProgram::ActMine::informPlayer
 	(Game & game, ProductionSite & ps) const
 {
-	MessageQueue::addWithTimeout
-		(game, ps.owner().player_number(),
-		 600000, 0,
-		 Message::create_building_message
-		 	(MSG_MINE,
-		 	 game.get_gametime(),
+	Player & player = ps.owner();
+	player.add_message_with_timeout
+		(game,
+		 ps.create_message
+		 	("mine",
+		 	 game.get_gametime(), 60 * 60 * 1000,
 		 	 _("Mine empty"),
 		 	 "<p font-size=14 font-face=FreeSerif>" +
 		 	 std::string
@@ -1141,8 +1142,8 @@ void ProductionProgram::ActMine::informPlayer
 		 	 	 	("This mines has run empty. You should consider to expand or"
 		 	 	 	 "destruct it."))
 		 	 +
-		 	 "</p>",
-		 	 ps));
+		 	 "</p>"),
+		 600000, 0);
 }
 
 

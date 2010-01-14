@@ -32,10 +32,13 @@
 namespace Widelands {
 
 void Event_Allow_Worker_Types::Write
-	(Section & s, Editor_Game_Base & egbase) const
+	(Section                    & s,
+	 Editor_Game_Base     const & egbase,
+	 Map_Map_Object_Saver const & mos)
+	const
 {
 	s.set_string("type",  "allow_worker_types");
-	Event_Player_Worker_Types::Write(s, egbase);
+	Event_Player_Worker_Types::Write(s, egbase, mos);
 }
 
 
@@ -45,7 +48,7 @@ char const * Event_Allow_Worker_Types::action_name() const {
 
 
 Event::State Event_Allow_Worker_Types::run(Game & game) {
-	Player                        & player = game  .player(m_player_number);
+	Player                        & player = game  .player(m_player);
 	Tribe_Descr             const & tribe  = player.tribe ();
 	std::vector<Ware_Index> const & worker_types_without_cost =
 		tribe.worker_types_without_cost();

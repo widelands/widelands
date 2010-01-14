@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,9 @@ void Trigger_Time::Read(Section & s, Editor_Game_Base &) {
 	}
 }
 
-void Trigger_Time::Write(Section & s, Editor_Game_Base const &) const {
+void Trigger_Time::Write
+	(Section & s, Editor_Game_Base const &, Map_Map_Object_Saver const &) const
+{
 	s.set_string("type",    "time");
 	s.set_int   ("version", TRIGGER_VERSION);
 	if (m_time != Never())

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,11 +44,11 @@ struct Map_Object_Packet {
 
 	~Map_Object_Packet();
 
-	void Read (FileSystem &, Editor_Game_Base &, Map_Map_Object_Loader *);
+	void Read (FileSystem &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
 	void LoadFinish();
 
-	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver  *);
+	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 };
 
 }

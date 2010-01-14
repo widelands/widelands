@@ -61,7 +61,7 @@ struct Route : public IRoute {
 
 	void load(LoadData &, FileRead &);
 	void load_pointers(LoadData const &, Map_Map_Object_Loader &);
-	void save(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver *);
+	void save(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver &);
 
 	void insert_as_first(RoutingNode * node);
 

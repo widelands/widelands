@@ -37,7 +37,7 @@ void Map_Exploration_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader * const)
+	 Map_Map_Object_Loader &)
 throw (_wexception)
 {
 	if (skip)
@@ -98,7 +98,7 @@ throw (_wexception)
 
 
 void Map_Exploration_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
 throw (_wexception)
 {
 	FileWrite fw;

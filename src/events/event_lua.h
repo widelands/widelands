@@ -39,7 +39,9 @@ struct Event_Lua : public Event {
 
 	State run(Game &);
 
-	void Write(Section &, Editor_Game_Base &) const;
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
 
 protected:
 	std::string m_cmd;

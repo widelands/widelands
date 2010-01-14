@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,16 +28,16 @@
 
 namespace Widelands {
 
-Event_Player_See_All::Event_Player_See_All(Section & s, Editor_Game_Base &)
+Event_Player_See_All::Event_Player_See_All
+	(Section & s, Editor_Game_Base & egbase)
 	: Event(s)
 {
 	try {
 		uint32_t const event_version = s.get_safe_positive("version");
 		if (event_version <= EVENT_VERSION) {
 			m_switch_to_on  = s.get_bool("switchon", true);
-			m_player_number = s.get_int("player", 1);
-			if (m_player_number > MAX_PLAYERS)
-				throw game_data_error(_("wrong player number %i"), m_player_number);
+			m_player        =
+				s.get_Player_Number("player", egbase.map().get_nrplayers());
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), event_version);
@@ -46,18 +46,21 @@ Event_Player_See_All::Event_Player_See_All(Section & s, Editor_Game_Base &)
 	}
 }
 
-Event::State Event_Player_See_All::run(Game & game) {
-	game.player(m_player_number).set_see_all(m_switch_to_on);
-	return m_state = DONE;
-}
 
-void Event_Player_See_All::Write(Section & s, Editor_Game_Base &) const {
+void Event_Player_See_All::Write
+	(Section & s, Editor_Game_Base const &, Map_Map_Object_Saver const &) const
+{
 	s.set_string("type",     "seeall");
 	s.set_int   ("version",  EVENT_VERSION);
 	s.get_bool  ("switchon", m_switch_to_on);
-	if (m_player_number != 1)
-		s.set_int("player",    m_player_number);
+	if (m_player != 1)
+		s.set_int("player",   m_player);
 }
 
+
+Event::State Event_Player_See_All::run(Game & game) {
+	game.player(m_player).set_see_all(m_switch_to_on);
+	return m_state = DONE;
+}
 
 }

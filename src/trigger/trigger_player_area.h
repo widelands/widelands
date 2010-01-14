@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,12 +35,14 @@ struct Trigger_Player_Area : public Trigger {
 	friend struct ::Trigger_Building_Option_Menu;
 	Trigger_Player_Area(char const * Name, bool set);
 
-	virtual void reorigin(Coords const new_origin, Extent const extent) {
+	void reorigin(Coords const new_origin, Extent const extent) {
 		m_player_area.reorigin(new_origin, extent);
 	}
 
 	void Read (Section &, Editor_Game_Base       &);
-	void Write(Section &, Editor_Game_Base const &) const;
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
 
 	typedef uint16_t Count_Type;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2009-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,8 +34,8 @@ Event_Set_Player_Style::Event_Set_Player_Style
 	try {
 		uint32_t const event_version = s.get_safe_positive("version");
 		if (1 <= event_version and event_version <= EVENT_VERSION) {
-			m_player_number =
-				s.get_Player_Number("player", egbase.map().get_nrplayers(), 1);
+			m_player =
+				s.get_Player_Number("player", egbase.map().get_nrplayers());
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), event_version);
@@ -45,20 +45,12 @@ Event_Set_Player_Style::Event_Set_Player_Style
 }
 
 
-void Event_Set_Player_Style::Write(Section & s, Editor_Game_Base &) const {
+void Event_Set_Player_Style::Write
+	(Section & s, Editor_Game_Base const &, Map_Map_Object_Saver const &) const
+{
 	s.set_int   ("version", EVENT_VERSION);
-	if (m_player_number != 1)
-		s.set_int("player",  m_player_number);
-}
-
-
-void Event_Set_Player_Style::set_player(Player_Number const p) {
-	m_player_number = p;
-}
-
-
-void Event_Set_Player_Style::set_style_index(uint8_t const i) {
-	m_style_index = i;
+	if (m_player != 1)
+		s.set_int("player",  m_player);
 }
 
 }

@@ -43,7 +43,7 @@ void Map_Flagdata_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader * const ol)
+	 Map_Map_Object_Loader &       mol)
 throw (_wexception)
 {
 	if (skip)
@@ -68,7 +68,7 @@ throw (_wexception)
 					break;
 				}
 				try {
-					Flag & flag = ol->get<Flag>(serial);
+					Flag & flag = mol.get<Flag>(serial);
 
 					//  Owner is already set, nothing to do from PlayerImmovable.
 
@@ -103,7 +103,7 @@ throw (_wexception)
 						if (uint32_t const building_serial = fr.Unsigned32())
 							try {
 								Building const & building =
-									ol->get<Building>(building_serial);
+									mol.get<Building>(building_serial);
 								if (flag.m_building != &building)
 									throw game_data_error
 										(_
@@ -134,12 +134,12 @@ throw (_wexception)
 							uint32_t const item_serial = fr.Unsigned32();
 							try {
 								flag.m_items[i].item =
-									&ol->get<WareInstance>(item_serial);
+									&mol.get<WareInstance>(item_serial);
 
 								if (uint32_t const nextstep_serial = fr.Unsigned32()) {
 									try {
 										flag.m_items[i].nextstep =
-											&ol->get<PlayerImmovable>(nextstep_serial);
+											&mol.get<PlayerImmovable>(nextstep_serial);
 									} catch (_wexception const & e) {
 										throw game_data_error
 											("next step (%u): %s",
@@ -156,7 +156,7 @@ throw (_wexception)
 						if (uint32_t const always_call_serial = fr.Unsigned32())
 							try {
 								flag.m_always_call_for_flag =
-									&ol->get<Flag>(always_call_serial);
+									&mol.get<Flag>(always_call_serial);
 							} catch (_wexception const & e) {
 								throw game_data_error
 									("always_call (%u): %s",
@@ -175,7 +175,7 @@ throw (_wexception)
 								//  Flag::load_finish, which is called after the worker
 								//  (with his stack of tasks) has been fully loaded.
 								flag.m_capacity_wait.push_back
-									(&ol->get<Worker>(worker_serial));
+									(&mol.get<Worker>(worker_serial));
 							} catch (_wexception const & e) {
 								throw game_data_error
 									("worker #%u (%u): %s", i, worker_serial, e.what());
@@ -195,7 +195,7 @@ throw (_wexception)
 										 Flag::flag_job_request_callback,
 										 Request::WORKER);
 								f.request->Read
-									(fr, ref_cast<Game, Editor_Game_Base>(egbase), ol);
+									(fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);
 							} else {
 								f.request = 0;
 							}
@@ -203,7 +203,7 @@ throw (_wexception)
 							flag.m_flag_jobs.push_back(f);
 						}
 
-						ol->mark_object_as_loaded(&flag);
+						mol.mark_object_as_loaded(flag);
 					}
 				} catch (_wexception const & e) {
 					throw game_data_error(_("%u: %s"), serial, e.what());
@@ -219,9 +219,7 @@ throw (_wexception)
 
 
 void Map_Flagdata_Data_Packet::Write
-	(FileSystem           &       fs,
-	 Editor_Game_Base     &       egbase,
-	 Map_Map_Object_Saver * const os)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 	throw (_wexception)
 {
 	FileWrite fw;
@@ -232,10 +230,10 @@ void Map_Flagdata_Data_Packet::Write
 	const Field & fields_end = map[map.max_index()];
 	for (Field * field = &map[0]; field < &fields_end; ++field)
 		if (upcast(Flag const, flag, field->get_immovable())) {
-			assert(os->is_object_known(*flag));
-			assert(!os->is_object_saved(*flag));
+			assert(mos.is_object_known(*flag));
+			assert(!mos.is_object_saved(*flag));
 
-			fw.Unsigned32(os->get_object_file_index(*flag));
+			fw.Unsigned32(mos.get_object_file_index(*flag));
 
 			//  Owner is already written in the existanz packet.
 
@@ -253,20 +251,20 @@ void Map_Flagdata_Data_Packet::Write
 
 			for (int32_t i = 0; i < flag->m_item_filled; ++i) {
 				fw.Unsigned8(flag->m_items[i].pending);
-				assert(os->is_object_known(*flag->m_items[i].item));
-				fw.Unsigned32(os->get_object_file_index(*flag->m_items[i].item));
+				assert(mos.is_object_known(*flag->m_items[i].item));
+				fw.Unsigned32(mos.get_object_file_index(*flag->m_items[i].item));
 				if
 					(PlayerImmovable const * const nextstep =
 					 	flag->m_items[i].nextstep.get(egbase))
-					fw.Unsigned32(os->get_object_file_index(*nextstep));
+					fw.Unsigned32(mos.get_object_file_index(*nextstep));
 				else
 					fw.Unsigned32(0);
 			}
 
 			if (Flag const * const always_call_for = flag->m_always_call_for_flag)
 			{
-				assert(os->is_object_known(*always_call_for));
-				fw.Unsigned32(os->get_object_file_index(*always_call_for));
+				assert(mos.is_object_known(*always_call_for));
+				fw.Unsigned32(mos.get_object_file_index(*always_call_for));
 			} else
 				fw.Unsigned32(0);
 
@@ -284,8 +282,8 @@ void Map_Flagdata_Data_Packet::Write
 					(obj->get_state(Worker::taskWaitforcapacity)->objvar1.serial()
 					 ==
 					 flag                                               ->serial());
-				assert(os->is_object_known(*obj));
-				fw.Unsigned32(os->get_object_file_index(*obj));
+				assert(mos.is_object_known(*obj));
+				fw.Unsigned32(mos.get_object_file_index(*obj));
 			}
 			Flag::FlagJobs const & flag_jobs = flag->m_flag_jobs;
 			fw.Unsigned16(flag_jobs.size());
@@ -293,7 +291,7 @@ void Map_Flagdata_Data_Packet::Write
 				if (i.current->request) {
 					fw.Unsigned8(1);
 					i.current->request->Write
-						(fw, ref_cast<Game, Editor_Game_Base>(egbase), os);
+						(fw, ref_cast<Game, Editor_Game_Base>(egbase), mos);
 				} else
 					fw.Unsigned8(0);
 
@@ -301,7 +299,7 @@ void Map_Flagdata_Data_Packet::Write
 				fw.String(i.current->program);
 			}
 
-			os->mark_object_as_saved(*flag);
+			mos.mark_object_as_saved(*flag);
 
 		}
 

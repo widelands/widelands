@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 #include "trigger_building.h"
 #include "trigger_defeated.h"
+#include "trigger_message_is_read_or_archived.h"
 #include "trigger_military_influence.h"
 #include "trigger_ownership.h"
 #include "trigger_time.h"
@@ -80,6 +81,14 @@ Type_Descr TRIGGER_TYPE_DESCRIPTIONS[] = {
 			 "specified number of locations in the specified area. Unless it is "
 			 "a one-time trigger, it becomes unset when this no longer holds.")
 	},
+	{
+		true,
+		"message_is_read_or_archived", _("Message is Read or Archvied Trigger"),
+		_
+			("Triggers when a message, created with a message event with status "
+			 "New, has status Read or Archived, which means that the player has "
+			 "changed the status of the message.")
+	},
 };
 
 
@@ -97,6 +106,7 @@ Trigger & create(size_t const id, char const * const name, bool const set) {
 	case 3: return *new Trigger_Ownership         (name, set);
 	case 4: return *new Trigger_Time              (name, set);
 	case 5: return *new Trigger_Vision            (name, set);
+	case 6: return *new Trigger_Message_Is_Read_Or_Archived         (name, set);
 	default:
 		assert(false);
 	}

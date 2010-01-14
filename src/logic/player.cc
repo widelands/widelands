@@ -20,7 +20,7 @@
 #include "player.h"
 
 #include "checkstep.h"
-#include "cmd_queue.h"
+#include "cmd_expire_message.h"
 #include "constructionsite.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -41,6 +41,9 @@
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
+
+#include "wui/interactive_player.h"
+
 #include "upcast.h"
 
 namespace Widelands {
@@ -134,6 +137,49 @@ void Player::allocate_map()
 	assert(map.get_width ());
 	assert(map.get_height());
 	m_fields = new Field[map.max_index()];
+}
+
+
+Message_Id Player::add_message
+	(Game & game, Message & message, bool const popup)
+{
+	Message_Id const id = messages().add_message(message);
+	Duration const duration = message.duration();
+	if (duration != Forever())
+		game.cmdqueue().enqueue
+			(new Cmd_ExpireMessage
+			 	(game.get_gametime() + duration, player_number(), id));
+
+	if (Interactive_Player * const iplayer = game.get_ipl())
+		if (&iplayer->player() == this and popup)
+			iplayer->popup_message(id, message);
+
+	return id;
+}
+
+
+Message_Id Player::add_message_with_timeout
+	(Game & game, Message & m, uint32_t const timeout, uint32_t const radius)
+{
+	Map const &       map      = game.map         ();
+	uint32_t    const gametime = game.get_gametime();
+	Coords      const position = m   .position    ();
+	for
+		(struct {
+		 	MessageQueue::const_iterator current;
+		 	MessageQueue::const_iterator const end;
+		 } i = {messages().begin(), messages().end()};;
+		 ++i.current)
+		if (i.current == i.end)
+			return add_message(game, m);
+		else if
+			(i.current->second->sender() == m.sender()                      and
+			 gametime < i.current->second->sent() + timeout                 and
+			 map.calc_distance(i.current->second->position(), position) <= radius)
+		{
+			delete &m;
+			return Message_Id::Null();
+		}
 }
 
 

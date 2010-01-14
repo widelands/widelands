@@ -37,9 +37,11 @@ struct Event_Forbid_Worker_Types : public Event_Player_Worker_Types {
 
 	char const * action_name() const;
 
-	State run(Game &);
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
 
-	void Write(Section &, Editor_Game_Base &) const;
+	State run(Game &);
 };
 
 }

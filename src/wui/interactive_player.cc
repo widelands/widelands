@@ -44,7 +44,7 @@
 #include "helper.h"
 #include "i18n.h"
 #include "logic/immovable.h"
-#include "message_queue.h"
+#include "logic/message_queue.h"
 #include "overlay_manager.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
@@ -200,11 +200,6 @@ m_toggle_help
 	(INIT_BTN
 	 	("menu_help",                  toggle_help,            _("Ware help")))
 {
-	//  Register with the MessageQueue so that the button changes as new
-	//  messages get added. also set for which player the button should flip
-	Widelands::MessageQueue::m_button(&m_toggle_message_menu);
-	Widelands::MessageQueue::set_player_number(plyn);
-
 	// TODO : instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
 	m_toolbar.add(&m_toggle_options_menu,    UI::Box::AlignLeft);
@@ -288,6 +283,24 @@ void Interactive_Player::think()
 	}
 	m_toggle_chat.set_visible(m_chatenabled);
 	m_toggle_chat.set_enabled(m_chatenabled);
+	{
+		char         buffer[128];
+		char const * msg_icon    = "pics/menu_toggle_oldmessage_menu.png";
+		char const * msg_tooltip = _("Messages");
+		if
+			(uint32_t const nr_new_messages =
+			 	player().messages().nr_messages(Widelands::Message::New))
+		{
+			msg_icon    = "pics/menu_toggle_newmessage_menu.png";
+			snprintf
+				(buffer, sizeof(buffer),
+				 ngettext("%u new message", "%u new messages", nr_new_messages),
+				 nr_new_messages);
+			msg_tooltip = buffer;
+		}
+		m_toggle_message_menu.set_pic(g_gr->get_picture(PicMod_UI, msg_icon));
+		m_toggle_message_menu.set_tooltip(msg_tooltip);
+	}
 }
 
 
@@ -311,6 +324,16 @@ void Interactive_Player::postload()
 	m_fieldaction.window = 0;
 
 	hide_minimap();
+}
+
+
+void Interactive_Player::popup_message
+	(Widelands::Message_Id const id, Widelands::Message const & message)
+{
+	if (not m_message_menu.window)
+		new GameMessageMenu(*this, m_message_menu);
+	ref_cast<GameMessageMenu, UI::UniqueWindow>(*m_message_menu.window)
+	.show_new_message(id, message);
 }
 
 
@@ -342,10 +365,8 @@ void Interactive_Player::toggle_objectives() {
 void Interactive_Player::toggle_message_menu() {
 	if (m_message_menu.window)
 		delete m_message_menu.window;
-	else {
-		Widelands::MessageQueue::read_all(player());
+	else
 		new GameMessageMenu(*this, m_message_menu);
-	}
 }
 
 void Interactive_Player::toggle_buildhelp() {

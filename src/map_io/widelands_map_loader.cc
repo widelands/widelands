@@ -47,6 +47,7 @@
 #include "widelands_map_player_names_and_tribes_data_packet.h"
 #include "widelands_map_player_position_data_packet.h"
 #include "widelands_map_players_areawatchers_data_packet.h"
+#include "widelands_map_players_messages_data_packet.h"
 #include "widelands_map_players_view_data_packet.h"
 #include "widelands_map_resources_data_packet.h"
 #include "widelands_map_road_data_packet.h"
@@ -131,10 +132,9 @@ int32_t WL_Map_Loader::load_map_complete
 	m_mol = new Map_Map_Object_Loader;
 
 	// MANDATORY PACKETS
-	// Start with writing the map out, first Elemental data
 	// PRELOAD DATA BEGIN
 	log("Reading Elemental Data ... ");
-	{Map_Elemental_Data_Packet       p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Elemental_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	egbase.allocate_player_maps(); //  Can do this now that map size is known.
@@ -143,96 +143,80 @@ int32_t WL_Map_Loader::load_map_complete
 	log("Reading Player Names And Tribe Data ... ");
 	{
 		Map_Player_Names_And_Tribes_Data_Packet p;
-		p.Read(m_fs, egbase, !scenario, m_mol);
+		p.Read(m_fs, egbase, !scenario, *m_mol);
 	}
 	log("done!\n ");
 	// PRELOAD DATA END
 
 	log("Reading Heights Data ... ");
-	{Map_Heights_Data_Packet         p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Heights_Data_Packet        p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	log("Reading Terrain Data ... ");
-	{Map_Terrain_Data_Packet         p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Terrain_Data_Packet        p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	Map_Object_Packet mapobjects;
 
 	if (bool const have_immovables = m_fs.FileExists("binary/immovable")) {
 		log("Reading Immovable Data ... ");
-		{Map_Immovable_Data_Packet p;    p.Read(m_fs, egbase, !scenario, m_mol);}
+		{Map_Immovable_Data_Packet p;   p.Read(m_fs, egbase, !scenario, *m_mol);}
 		log("done!\n ");
 
 		if (m_fs.FileExists("binary/mapobjects"))
 			log("Warning: Map has both binary/immovable and binary/mapobjects\n");
 	} else {
 		log("Reading Map Objects ... ");
-		mapobjects.Read(m_fs, egbase, m_mol);
+		mapobjects.Read(m_fs, egbase, *m_mol);
 		log("done\n");
 	}
 
 	log("Reading Player Start Position Data ... ");
-	{Map_Player_Position_Data_Packet p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{
+		Map_Player_Position_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, *m_mol);
+	}
 	log("done!\n ");
 
 	log("Reading Bob Data ... ");
-	{Map_Bob_Data_Packet             p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Bob_Data_Packet            p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	log("Reading Resources Data ... ");
-	{Map_Resources_Data_Packet       p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Resources_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	log("Reading Map Extra Data ... ");
-	{Map_Extradata_Data_Packet       p; p.Read(m_fs, egbase, !scenario, m_mol);}
-	log("done!\n ");
-
-	log("Reading Trigger Data ... ");
-	{Map_Trigger_Data_Packet         p; p.Read(m_fs, egbase, !scenario, m_mol);}
-	log("done!\n ");
-
-	//  Objectives: Depends on triggers
-	log("Reading Objective Data ... ");
-	{Map_Objective_Data_Packet       p; p.Read(m_fs, egbase, !scenario, m_mol);}
-	log("done!\n ");
-
-	//  Events: depends on triggers, objectives
-	log("Reading Event Data ... ");
-	{Map_Event_Data_Packet           p; p.Read(m_fs, egbase, !scenario, m_mol);}
-	log("done!\n ");
-
-	//  Event Chains: depends on events, triggers
-	log("Reading Event Chain Data ... ");
-	{Map_EventChain_Data_Packet      p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Extradata_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	log("Reading Allowed Worker Types Data ... ");
 	{
 		Map_Allowed_Worker_Types_Data_Packet p;
-		p.Read(m_fs, egbase, !scenario, m_mol);
+		p.Read(m_fs, egbase, !scenario, *m_mol);
 	}
 	log("done!\n ");
 
 	log("Reading Allowed Building Types Data ... ");
 	{
 		Map_Allowed_Building_Types_Data_Packet p;
-		p.Read(m_fs, egbase, !scenario, m_mol);
+		p.Read(m_fs, egbase, !scenario, *m_mol);
 	}
 	log("done!\n ");
 
 	log("Reading Node Ownership Data ... ");
-	{Map_Node_Ownership_Data_Packet  p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Node_Ownership_Data_Packet p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	log("Reading Exploration Data ... ");
-	{Map_Exploration_Data_Packet     p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Exploration_Data_Packet    p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	log("Reading AreaWatchers Data ... ");
 	{
 		Map_Players_AreaWatchers_Data_Packet p;
-		p.Read(m_fs, egbase, !scenario, m_mol);
+		p.Read(m_fs, egbase, !scenario, *m_mol);
 	}
 	log("done!\n ");
 
@@ -244,48 +228,48 @@ int32_t WL_Map_Loader::load_map_complete
 	//  this order without knowing what you do
 	//  EXISTENT PACKETS
 	log("Reading Flag Data ... ");
-	{Map_Flag_Data_Packet            p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Flag_Data_Packet           p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	log("Reading Road Data ... ");
-	{Map_Road_Data_Packet            p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Road_Data_Packet           p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	log("Reading Building Data ... ");
-	{Map_Building_Data_Packet        p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Building_Data_Packet       p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 
 	log("Reading Map Ware Data ... ");
-	{Map_Ware_Data_Packet            p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Ware_Data_Packet           p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	//  DATA PACKETS
 	log("Reading Flagdata Data ... ");
-	{Map_Flagdata_Data_Packet        p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Flagdata_Data_Packet       p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	log("Reading Roaddata Data ... ");
-	{Map_Roaddata_Data_Packet        p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Roaddata_Data_Packet       p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 
 	log("Reading Buildingdata Data ... ");
-	{Map_Buildingdata_Data_Packet    p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Buildingdata_Data_Packet   p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 
 	log("Reading Waredata Data ... ");
-	{Map_Waredata_Data_Packet        p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Waredata_Data_Packet       p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	log("Reading Bobdata Data ... ");
-	{Map_Bobdata_Data_Packet         p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Bobdata_Data_Packet        p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	log("Reading Immovabledata Data ... ");
 	//  We do this only for binary compatibility.
-	{Map_Immovabledata_Data_Packet   p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Immovabledata_Data_Packet  p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	log("Second and third phase loading Map Objects ... ");
@@ -306,11 +290,43 @@ int32_t WL_Map_Loader::load_map_complete
 	//  NOTE DO NOT CHANGE THE PLACE UNLESS YOU KNOW WHAT ARE YOU DOING
 	//  Must be loaded after every kind of object that can see.
 	log("Reading Players View Data ... ");
-	{Map_Players_View_Data_Packet    p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Players_View_Data_Packet   p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	log("Reading Variable Data ... ");
-	{Map_Variable_Data_Packet        p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Variable_Data_Packet       p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	log("done!\n ");
+
+	//  This must come before anything that references messages, such as:
+	//    * events (Event_Expire_Message)
+	//    * triggers (Trigger_Message_Is_Read_Or_Archived)
+	//    * command queue (PlayerMessageCommand, inherited by
+	//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
+	log("Reading Player Message Data ... ");
+	{
+		Map_Players_Messages_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, *m_mol);
+	}
+	log("done!\n ");
+
+	//  Triggers: Depends on messages
+	log("Reading Trigger Data ... ");
+	{Map_Trigger_Data_Packet        p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	log("done!\n ");
+
+	//  Objectives: Depends on triggers
+	log("Reading Objective Data ... ");
+	{Map_Objective_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	log("done!\n ");
+
+	//  Events: depends on messages, triggers, objectives
+	log("Reading Event Data ... ");
+	{Map_Event_Data_Packet          p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	log("done!\n ");
+
+	//  Event Chains: depends on events, triggers
+	log("Reading Event Chain Data ... ");
+	{Map_EventChain_Data_Packet     p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	if (m_mol->get_nr_unloaded_objects())

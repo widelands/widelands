@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,14 +19,15 @@
 
 #include "trigger_time_option_menu.h"
 
-#include "graphic/graphic.h"
-#include "i18n.h"
 #include "trigger/trigger_time.h"
 #include "editor/editorinteractive.h"
 
+#include "ui_basic/messagebox.h"
+
 
 int32_t Widelands::Trigger_Time::option_menu(Editor_Interactive & eia) {
-	Trigger_Time_Option_Menu m(eia, *this); return m.run();
+	Trigger_Time_Option_Menu m(eia, *this);
+	return m.run();
 }
 
 
@@ -72,14 +73,14 @@ void Trigger_Time_Option_Menu::absolute_time_clickedto(bool const on) {
 
 
 void Trigger_Time_Option_Menu::OK::clicked() {
-	Trigger_Time_Option_Menu & parent =
+	Trigger_Time_Option_Menu & menu =
 		ref_cast<Trigger_Time_Option_Menu, UI::Panel>(*get_parent());
-	std::string const & name = parent.name.text();
+	std::string const & name = menu.name.text();
 	if (name.size()) {
 		if
 			(Widelands::Trigger * const registered_trigger =
-			 	parent.eia().egbase().map().mtm()[name])
-			if (registered_trigger != &parent.m_trigger) {
+			 	menu.eia().egbase().map().mtm()[name])
+			if (registered_trigger != &menu.m_trigger) {
 				char buffer[256];
 				snprintf
 					(buffer, sizeof(buffer),
@@ -88,17 +89,16 @@ void Trigger_Time_Option_Menu::OK::clicked() {
 					 	 "\"%s\". Choose another name."),
 					 name.c_str());
 				UI::WLMessageBox mb
-					(parent.get_parent(),
+					(menu.get_parent(),
 					 _("Name in use"), buffer,
 					 UI::WLMessageBox::OK);
 				mb.run();
 				return;
 			}
-		parent.m_trigger.set_name(name);
+		menu.m_trigger.set_name(name);
 	}
-	parent.m_trigger.set_time
-		(parent.absolute_time.get_state() ? parent.time.time() :
-		 Widelands::Never());
-	parent.eia().set_need_save(true);
-	parent.end_modal(1);
+	menu.m_trigger.set_time
+		(menu.absolute_time.get_state() ? menu.time.time() : Widelands::Never());
+	menu.eia().set_need_save(true);
+	menu.end_modal(1);
 }

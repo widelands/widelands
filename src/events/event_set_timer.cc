@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,12 +62,9 @@ Event_Set_Timer::Event_Set_Timer(Section & s, Editor_Game_Base & egbase)
 }
 
 
-Event_Set_Timer::~Event_Set_Timer() {
-	set_trigger(0);
-}
-
-
-void Event_Set_Timer::Write(Section & s, Editor_Game_Base &) const {
+void Event_Set_Timer::Write
+	(Section & s, Editor_Game_Base const &, Map_Map_Object_Saver const &) const
+{
 	assert(m_trigger);
 	s.set_string ("type",     "set_timer");
 	s.set_int    ("version",  EVENT_VERSION);

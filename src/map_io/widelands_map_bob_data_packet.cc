@@ -34,7 +34,7 @@ void Map_Bob_Data_Packet::ReadBob
 	(FileRead              &       fr,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader * const ol,
+	 Map_Map_Object_Loader &       mol,
 	 Coords                  const coords)
 {
 	char const * const owner = fr.CString();
@@ -67,7 +67,7 @@ void Map_Bob_Data_Packet::ReadBob
 					 descr.name().c_str(), coords.x, coords.y,
 					 map[coords].nodecaps() & (MOVECAPS_WALK | MOVECAPS_SWIM),
 					 descr.movecaps());
-			ol->register_object<Bob>(serial, descr.create(egbase, 0, coords));
+			mol.register_object<Bob>(serial, descr.create(egbase, 0, coords));
 		} else {
 			if (skip)
 				return; // We do no load player bobs when no scenario
@@ -80,7 +80,7 @@ void Map_Bob_Data_Packet::ReadBob
 					const Ware_Index idx = tribe->worker_index(name);
 					if (idx) {
 						Bob & bob =
-							ol->register_object<Bob>
+							mol.register_object<Bob>
 								(serial,
 								 tribe->get_worker_descr(idx)->create_object());
 						bob.set_position(egbase, coords);
@@ -91,7 +91,7 @@ void Map_Bob_Data_Packet::ReadBob
 				} else if (subtype == Bob::CRITTER) {
 					int32_t const idx = tribe->get_bob(name);
 					if (idx != -1)
-						ol->register_object<Bob>
+						mol.register_object<Bob>
 							(serial, egbase.create_bob(coords, idx, tribe));
 					else
 						throw game_data_error
@@ -112,7 +112,7 @@ void Map_Bob_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader * const ol)
+	 Map_Map_Object_Loader &       mol)
 throw (_wexception)
 {
 	FileRead fr;
@@ -131,7 +131,7 @@ throw (_wexception)
 					assert(!map[Coords(x, y)].get_first_bob());
 
 					for (uint32_t i = 0; i < nr_bobs; ++i)
-						ReadBob(fr, egbase, skip, ol, Coords(x, y));
+						ReadBob(fr, egbase, skip, mol, Coords(x, y));
 				}
 			}
 		else
@@ -144,14 +144,10 @@ throw (_wexception)
 
 
 void Map_Bob_Data_Packet::Write
-	(FileSystem           &       fs,
-	 Editor_Game_Base     &       egbase,
-	 Map_Map_Object_Saver * const os)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 throw (_wexception)
 {
 	FileWrite fw;
-
-	assert(os);
 
 	// now packet version
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
@@ -177,9 +173,9 @@ throw (_wexception)
 				// write serial number
 
 				//  a bob can not be owned by two nodes
-				assert(not os->is_object_known(*bobarr[i]));
+				assert(not mos.is_object_known(*bobarr[i]));
 
-				Serial const reg = os->register_object(*bobarr[i]);
+				Serial const reg = mos.register_object(*bobarr[i]);
 
 				// Write its owner
 				std::string owner_tribe =

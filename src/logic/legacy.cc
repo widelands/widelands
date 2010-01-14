@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -395,7 +395,7 @@ struct FakeAttackController : public BaseImmovable {
 
 
 Map_Object::Loader * loadAttackController
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader * const mol, FileRead & fr)
+	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
 	std::auto_ptr<FakeAttackController::Loader> loader
 		(new FakeAttackController::Loader);
@@ -405,7 +405,7 @@ Map_Object::Loader * loadAttackController
 		if (version != 1)
 			throw game_data_error(_("unknown/unhandled version %u"), version);
 
-		loader->init(egbase, mol, new FakeAttackController);
+		loader->init(egbase, mol, *new FakeAttackController);
 		loader->load(fr, version);
 	} catch (std::exception const & e) {
 		throw wexception("Loading legacy AttackController: %s", e.what());
@@ -442,7 +442,7 @@ struct FakeBattle : public BaseImmovable {
 };
 
 Map_Object::Loader * loadBattle
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader * mol, FileRead & fr)
+	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
 	std::auto_ptr<FakeBattle::Loader> loader(new FakeBattle::Loader);
 
@@ -450,7 +450,7 @@ Map_Object::Loader * loadBattle
 		// Header has been peeled away by caller
 		uint8_t const version = fr.Unsigned8();
 		if (1 == version) {
-			loader->init(egbase, mol, new FakeBattle);
+			loader->init(egbase, mol, *new FakeBattle);
 			loader->load(fr, version);
 		} else
 			throw game_data_error(_("unknown/unhandled version %u"), version);

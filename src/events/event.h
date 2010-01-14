@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,7 @@ namespace Widelands {
 
 struct Editor_Game_Base;
 struct Game;
+struct Map_Map_Object_Saver;
 
 /**
  * Event is a in game event of some kind
@@ -51,16 +52,20 @@ struct Event : public Named, public Referenced<Event> {
 
 	Event(char const * const Name, State const S = INIT)
 		: Named(Name), m_state(S)
-	{}
+	{
+		log("Constructing event: %s\n", name().c_str());
+	}
 	Event(Section &);
-	virtual ~Event() {}
+	virtual ~Event() {log("Destructing event: %s\n", name().c_str());}
 
-	virtual void reorigin(Coords, Extent) {} /// Translate stored coordinates;
+	virtual void reorigin(Coords, Extent) {} /// Translate stored coordinates.
 
 	virtual bool has_option_menu() const {return true;}
 	virtual int32_t option_menu(Editor_Interactive &) = 0;
 
-	virtual void Write(Section &, Editor_Game_Base &) const = 0;
+	virtual void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &) const
+		= 0;
 
 	virtual void set_player(Player_Number);
 	virtual void set_position(Coords);

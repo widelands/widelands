@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,7 +73,7 @@ Event_Road::Event_Road(Section & s, Editor_Game_Base & egbase) : Event(s) {
 					 	 "start to the end through only the used locations, should "
 					 	 "be \"%s\""),
 					 steps, optimal_steps);
-			m_player = s.get_Player_Number("player", map.get_nrplayers(), 1);
+			m_player = s.get_Player_Number("player", map.get_nrplayers());
 			m_fill   = s.get_bool         ("fill",                        true);
 		} else
 			throw game_data_error
@@ -83,7 +83,9 @@ Event_Road::Event_Road(Section & s, Editor_Game_Base & egbase) : Event(s) {
 	}
 }
 
-void Event_Road::Write(Section & s, Editor_Game_Base &) const {
+void Event_Road::Write
+	(Section & s, Editor_Game_Base const &, Map_Map_Object_Saver const &) const
+{
 	s.set_string ("type",    "road");
 	s.set_int    ("version", EVENT_VERSION);
 	s.set_Coords ("point",   m_path.get_start());

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,7 +46,7 @@ void Map_Building_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader * const ol)
+	 Map_Map_Object_Loader &       mol)
 throw (_wexception)
 {
 	if (skip)
@@ -83,7 +83,7 @@ throw (_wexception)
 							//  Now, create this Building, take extra special care for
 							//  constructionsites. All data is read later.
 							Building & building =
-								ol->register_object<Building>
+								mol.register_object<Building>
 									(serial,
 									 (is_constructionsite ?
 									  egbase.warp_constructionsite
@@ -112,9 +112,7 @@ throw (_wexception)
  * Write Function
  */
 void Map_Building_Data_Packet::Write
-	(FileSystem           &       fs,
-	 Editor_Game_Base     &       egbase,
-	 Map_Map_Object_Saver * const os)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -131,11 +129,11 @@ throw (_wexception)
 		if (building and building->get_position() == fc) {
 			//  We only write Buildings.
 			//  Buildings can life on only one main position.
-			assert(!os->is_object_known(*building));
+			assert(!mos.is_object_known(*building));
 
 			fw.Unsigned8(1);
 			fw.Unsigned8(building->owner().player_number());
-			fw.Unsigned32(os->register_object(*building));
+			fw.Unsigned32(mos.register_object(*building));
 
 			upcast(ConstructionSite const, constructionsite, building);
 			fw.CString

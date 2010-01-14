@@ -71,8 +71,8 @@ struct WaresQueue {
 
 	Player & owner() const throw () {return m_owner.owner();}
 
-	void Write(FileWrite &, Game &, Map_Map_Object_Saver  *);
-	void Read (FileRead  &, Game &, Map_Map_Object_Loader *);
+	void Read (FileRead  &, Game &, Map_Map_Object_Loader &);
+	void Write(FileWrite &, Game &, Map_Map_Object_Saver  &);
 
 private:
 	static void request_callback

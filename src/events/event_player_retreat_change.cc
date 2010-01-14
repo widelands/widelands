@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,17 +47,12 @@ Event_Player_Retreat_Change::Event_Player_Retreat_Change
 }
 
 void Event_Player_Retreat_Change::Write
-	(Section & s, Editor_Game_Base &) const
+	(Section & s, Editor_Game_Base const &, Map_Map_Object_Saver const &) const
 {
 	s.set_int           ("version",        EVENT_VERSION);
-	if (m_player_number != 1)
-		s.set_int        ("player",         m_player_number);
+	if (m_player != 1)
+		s.set_int("player",         m_player);
 	s.set_int           ("retreat_change", m_percentage);
-}
-
-
-void Event_Player_Retreat_Change::set_player (Player_Number const p) {
-	m_player_number = p;
 }
 
 }

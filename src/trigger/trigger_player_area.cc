@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,7 +68,9 @@ void Trigger_Player_Area::Read(Section & s, Editor_Game_Base & egbase) {
 	}
 }
 
-void Trigger_Player_Area::Write(Section & s, Editor_Game_Base const &) const {
+void Trigger_Player_Area::Write
+	(Section & s, Editor_Game_Base const &, Map_Map_Object_Saver const &) const
+{
 	s.set_Coords("point",    m_player_area);
 	if (m_player_area.radius)
 		s.set_int("area",     m_player_area.radius);

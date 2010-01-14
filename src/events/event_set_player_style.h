@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2009-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,18 +28,21 @@ namespace Widelands {
 struct Event_Set_Player_Style : public Event {
 	Event_Set_Player_Style
 		(char const * const Name, State const S)
-		: Event(Name, S), m_player_number(1), m_style_index(0)
+		: Event(Name, S), m_player(1), m_style_index(0)
 	{}
 	Event_Set_Player_Style(Section &, Editor_Game_Base &);
 
-	void Write(Section &, Editor_Game_Base &) const;
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
 
-	Player_Number player_number() const {return m_player_number;}
-	void set_player(Player_Number);
-	uint8_t style_index() const {return m_style_index;}
-	void set_style_index(uint8_t);
+	Player_Number player     () const {return m_player;}
+	void set_player     (Player_Number const p) {m_player      = p;}
+	uint8_t       style_index() const {return m_style_index;}
+	void set_style_index(uint8_t       const i) {m_style_index = i;}
+
 protected:
-	Player_Number m_player_number;
+	Player_Number m_player;
 	uint8_t       m_style_index;
 };
 

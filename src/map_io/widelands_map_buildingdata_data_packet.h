@@ -38,32 +38,32 @@ struct Warehouse;
  */
 struct Map_Buildingdata_Data_Packet : public Map_Data_Packet {
 	void Read
-		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader * = 0)
+		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &)
 		throw (_wexception);
-	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * = 0)
+	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &)
 		throw (_wexception);
 
 private:
 	virtual void read_constructionsite
-		(ConstructionSite       &, FileRead  &, Game &, Map_Map_Object_Loader *);
+		(ConstructionSite       &, FileRead  &, Game &, Map_Map_Object_Loader &);
 	virtual void read_warehouse
-		(Warehouse              &, FileRead  &, Game &, Map_Map_Object_Loader *);
+		(Warehouse              &, FileRead  &, Game &, Map_Map_Object_Loader &);
 	virtual void read_militarysite
-		(MilitarySite           &, FileRead  &, Game &, Map_Map_Object_Loader *);
+		(MilitarySite           &, FileRead  &, Game &, Map_Map_Object_Loader &);
 	virtual void read_trainingsite
-		(TrainingSite           &, FileRead  &, Game &, Map_Map_Object_Loader *);
+		(TrainingSite           &, FileRead  &, Game &, Map_Map_Object_Loader &);
 	virtual void read_productionsite
-		(ProductionSite         &, FileRead  &, Game &, Map_Map_Object_Loader *);
+		(ProductionSite         &, FileRead  &, Game &, Map_Map_Object_Loader &);
 	virtual void write_constructionsite
-		(ConstructionSite const &, FileWrite &, Game &, Map_Map_Object_Saver  *);
+		(ConstructionSite const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 	virtual void write_warehouse
-		(Warehouse        const &, FileWrite &, Game &, Map_Map_Object_Saver  *);
+		(Warehouse        const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 	virtual void write_militarysite
-		(MilitarySite     const &, FileWrite &, Game &, Map_Map_Object_Saver  *);
+		(MilitarySite     const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 	virtual void write_trainingsite
-		(TrainingSite     const &, FileWrite &, Game &, Map_Map_Object_Saver  *);
+		(TrainingSite     const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 	virtual void write_productionsite
-		(ProductionSite   const &, FileWrite &, Game &, Map_Map_Object_Saver  *);
+		(ProductionSite   const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 };
 
 }

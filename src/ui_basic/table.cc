@@ -416,8 +416,10 @@ Table<void *>::Entry_Record & Table<void *>::add
 		 -
 		 (get_h() - m_headerheight - 2));
 
-	if (do_select)
+	if (do_select) {
 		select(m_entry_records.size() - 1);
+		m_scrollbar->set_scrollpos(std::numeric_limits<int32_t>::max());
+	}
 
 	update(0, 0, get_eff_w(), get_h());
 	return result;

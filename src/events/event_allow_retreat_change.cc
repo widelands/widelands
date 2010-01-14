@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,10 +29,13 @@
 namespace Widelands {
 
 void Event_Allow_Retreat_Change::Write
-	(Section & s, Editor_Game_Base & egbase) const
+	(Section                    & s,
+	 Editor_Game_Base     const & egbase,
+	 Map_Map_Object_Saver const & mos)
+	const
 {
 	s.set_string("type",  "allow_retreat_change");
-	Event_Player_Allowed_Retreat_Change::Write(s, egbase);
+	Event_Player_Allowed_Retreat_Change::Write(s, egbase, mos);
 }
 
 
@@ -42,7 +45,7 @@ char const * Event_Allow_Retreat_Change::action_name() const {
 
 
 Event::State Event_Allow_Retreat_Change::run(Game & game) {
-	game.player(m_player_number).allow_retreat_change(true);
+	game.player(m_player).allow_retreat_change(true);
 	return m_state = DONE;
 }
 

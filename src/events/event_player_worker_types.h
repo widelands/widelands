@@ -33,7 +33,7 @@ struct Tribe_Descr;
 struct Event_Player_Worker_Types : public Event {
 	Event_Player_Worker_Types
 		(char const * const Name, State const S)
-		: Event(Name, S), m_player_number(1)
+		: Event(Name, S), m_player(1)
 	{}
 	Event_Player_Worker_Types
 		(Section &, Editor_Game_Base &, Tribe_Descr const *);
@@ -42,15 +42,17 @@ struct Event_Player_Worker_Types : public Event {
 
 	int32_t option_menu(Editor_Interactive &);
 
-	void Write(Section &, Editor_Game_Base &) const;
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
 
-	Player_Number player_number() const {return m_player_number;}
-	void set_player(Player_Number);
+	Player_Number player_number() const {return m_player;}
+	void set_player(Player_Number const p) {m_player = p;}
 	typedef std::set<Ware_Index> Worker_Types;
 	Worker_Types const & worker_types() const {return m_worker_types;}
 	Worker_Types       & worker_types()       {return m_worker_types;}
 protected:
-	Player_Number m_player_number;
+	Player_Number m_player;
 	Worker_Types  m_worker_types;
 };
 

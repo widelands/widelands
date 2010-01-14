@@ -1,0 +1,9 @@
+[global]
+packet_version=1
+map_w=64
+map_h=64
+nr_players=1
+world=greenland
+name=Message System Scripting Example
+author=Erik Sigra
+descr=This scenario gives an example of how the message system in Widelands can be scripted. It demonstrates the trigger types message_is_read_or_archived and time, and the event types expire_message, message and set_timer.

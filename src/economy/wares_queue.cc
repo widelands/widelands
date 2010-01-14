@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -207,7 +207,7 @@ void WaresQueue::set_consume_interval(const uint32_t time) throw ()
  * Read and write
  */
 #define WARES_QUEUE_DATA_PACKET_VERSION 1
-void WaresQueue::Write(FileWrite & fw, Game & game, Map_Map_Object_Saver * os)
+void WaresQueue::Write(FileWrite & fw, Game & game, Map_Map_Object_Saver & mos)
 {
 
 	fw.Unsigned16(WARES_QUEUE_DATA_PACKET_VERSION);
@@ -220,13 +220,13 @@ void WaresQueue::Write(FileWrite & fw, Game & game, Map_Map_Object_Saver * os)
 	fw.Signed32(m_consume_interval);
 	if (m_request) {
 		fw.Unsigned8(1);
-		m_request->Write(fw, game, os);
+		m_request->Write(fw, game, mos);
 	} else
 		fw.Unsigned8(0);
 }
 
 
-void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader * ol)
+void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 {
 	uint16_t const packet_version = fr.Unsigned16();
 	try {
@@ -237,13 +237,13 @@ void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader * ol)
 			m_filled           =                            fr.Unsigned32();
 			m_consume_interval =                            fr.Unsigned32();
 			if                                             (fr.Unsigned8 ()) {
-				m_request =
-					new Request
-						(m_owner,
-						 Ware_Index::First(),
-						 WaresQueue::request_callback,
-						 Request::WORKER);
-				m_request->Read(fr, game, ol);
+				m_request =                          //  FIXME Change Request::Read
+					new Request                       //  FIXME to a constructor.
+						(m_owner,                      //  FIXME
+						 Ware_Index::First(),          //  FIXME
+						 WaresQueue::request_callback, //  FIXME
+						 Request::WORKER);             //  FIXME
+				m_request->Read(fr, game, mol);      //  FIXME
 			} else
 				m_request = 0;
 

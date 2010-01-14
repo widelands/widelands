@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,10 +58,7 @@ throw (_wexception)
 
 
 void Map_Elemental_Data_Packet::Read
-	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
-	 bool,
-	 Map_Map_Object_Loader * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
 throw (_wexception)
 {
 	Pre_Read(fs, &egbase.map());
@@ -69,7 +66,7 @@ throw (_wexception)
 
 
 void Map_Elemental_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
 throw (_wexception)
 {
 

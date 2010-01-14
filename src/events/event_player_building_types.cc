@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,12 +38,11 @@ Event_Player_Building_Types::Event_Player_Building_Types
 		if (packet_version <= EVENT_VERSION) {
 			if (not tribe) {
 				Map const & map = egbase.map();
-				m_player_number =
-					s.get_Player_Number("player", map.get_nrplayers(), 1);
-				egbase.get_ibase()->reference_player_tribe(m_player_number, this);
+				m_player = s.get_Player_Number("player", map.get_nrplayers());
+				egbase.get_ibase()->reference_player_tribe(m_player, this);
 				tribe =
 					&egbase.manually_load_tribe
-						(map.get_scenario_player_tribe(m_player_number));
+						(map.get_scenario_player_tribe(m_player));
 			}
 			while (Section::Value const * const v = s.get_next_val("building"))
 				if
@@ -64,22 +63,18 @@ Event_Player_Building_Types::Event_Player_Building_Types
 }
 
 void Event_Player_Building_Types::Write
-	(Section & s, Editor_Game_Base & egbase) const
+	(Section & s, Editor_Game_Base const & egbase, Map_Map_Object_Saver const &)
+	const
 {
 	s.set_int           ("version",  EVENT_VERSION);
-	if (m_player_number != 1)
-		s.set_int        ("player",   m_player_number);
+	if (m_player != 1)
+		s.set_int("player",  m_player);
 	Tribe_Descr const & tribe =
-		egbase.manually_load_tribe
-			(egbase.map().get_scenario_player_tribe(m_player_number));
+		*egbase.get_tribe
+			(egbase.map().get_scenario_player_tribe(m_player).c_str());
 	container_iterate_const(Building_Types, m_building_types, i)
 		s.set_string_duplicate
 			("building", tribe.get_building_descr(*i.current)->name());
-}
-
-
-void Event_Player_Building_Types::set_player(Player_Number const p) {
-	m_player_number = p;
 }
 
 }

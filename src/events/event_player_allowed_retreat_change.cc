@@ -29,13 +29,14 @@
 namespace Widelands {
 
 Event_Player_Allowed_Retreat_Change::Event_Player_Allowed_Retreat_Change
-	(Section & s, Editor_Game_Base &)
+	(Section & s, Editor_Game_Base & egbase)
 	: Event(s)
 {
 	try {
 		uint32_t const packet_version = s.get_safe_positive("version");
 		if (packet_version <= EVENT_VERSION) {
-			//  nothing to do
+			m_player =
+				s.get_Player_Number("player", egbase.map().get_nrplayers());
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -46,16 +47,11 @@ Event_Player_Allowed_Retreat_Change::Event_Player_Allowed_Retreat_Change
 }
 
 void Event_Player_Allowed_Retreat_Change::Write
-	(Section & s, Editor_Game_Base &) const
+	(Section & s, Editor_Game_Base const &, Map_Map_Object_Saver const &) const
 {
 	s.set_int           ("version",                EVENT_VERSION);
-	if (m_player_number != 1)
-		s.set_int        ("player",                 m_player_number);
-}
-
-
-void Event_Player_Allowed_Retreat_Change::set_player (Player_Number const p) {
-	m_player_number = p;
+	if (m_player != 1)
+		s.set_int("player",  m_player);
 }
 
 }

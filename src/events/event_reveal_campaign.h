@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,9 +33,11 @@ struct Event_Reveal_Campaign : public Event_Reveal {
 	bool has_option_menu() const {return false;}
 	int32_t option_menu(Editor_Interactive &) __attribute__ ((noreturn));
 
-	State run(Game &);
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
 
-	void Write(Section &, Editor_Game_Base &) const;
+	State run(Game &);
 };
 
 }

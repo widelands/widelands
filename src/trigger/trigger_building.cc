@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,11 +60,14 @@ void Trigger_Building::Read(Section & s, Editor_Game_Base & egbase) {
 }
 
 void Trigger_Building::Write
-	(Section & s, Editor_Game_Base const & egbase) const
+	(Section                    & s,
+	 Editor_Game_Base     const & egbase,
+	 Map_Map_Object_Saver const & mos)
+	const
 {
 	s.set_string       ("type",     "building");
 	s.set_int          ("version",  PACKET_VERSION);
-	Trigger_Player_Area::Write(s, egbase);
+	Trigger_Player_Area::Write(s, egbase, mos);
 	s.set_string("building", m_building_type->name());
 }
 

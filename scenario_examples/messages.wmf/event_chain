@@ -1,0 +1,30 @@
+[global]
+packet_version=3
+
+[Begin]
+repeating=false
+conditional_element_00=trigger
+conditional_element_00_data=Begin
+event=Welcome Message
+event=Secret Message
+current_event=0
+state=init
+
+
+[Secret Message Read]
+repeating=false
+conditional_element_00=trigger
+conditional_element_00_data=Secret Message Read
+event=Set Secret Message Timeout
+current_event=0
+state=init
+
+[Expire Secret Message]
+repeating=false
+conditional_element_00=trigger
+conditional_element_00_data=Secret Message Timeout
+event=Expire Welcome Message
+event=Expire Secret Message
+event=Farewell
+current_event=0
+state=init

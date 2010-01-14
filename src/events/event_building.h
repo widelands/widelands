@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@ struct Event_Building : Event {
 	friend struct ::Event_Building_Option_Menu;
 	Event_Building(char const * Name, State const S) :
 		Event          (Name, S),
-		m_location     (Coords::Null()),
+		m_position              (Coords::Null()),
 		m_required_suitability  (std::numeric_limits<int32_t>::min()),
 		m_sufficient_suitability(std::numeric_limits<int32_t>::max()),
 		m_distance_min          (0),
@@ -53,14 +53,21 @@ struct Event_Building : Event {
 	bool has_option_menu() const {return false;}
 	int32_t option_menu(Editor_Interactive &) __attribute__ ((noreturn));
 
-	void set_player(Player_Number);
-	void set_position(Coords);
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
+
 	State run(Game &);
 
-	void Write(Section &, Editor_Game_Base &) const;
+	void reorigin(Coords const new_origin, Extent const extent) {
+		m_position.reorigin(new_origin, extent);
+	}
+
+	void set_position(Coords        const c) {m_position = c;}
+	void set_player  (Player_Number const p) {m_player   = p;}
 
 private:
-	Coords         m_location;
+	Coords         m_position;
 	int32_t        m_required_suitability, m_sufficient_suitability;
 	uint8_t        m_distance_min, m_distance_max;
 	Player_Number  m_player;

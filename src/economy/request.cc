@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -107,7 +107,7 @@ Request::~Request()
  * them through the data in the file
  */
 void Request::Read
-	(FileRead & fr, Game & game, Map_Map_Object_Loader * const mol)
+	(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 {
 	try {
 		uint16_t const version = fr.Unsigned16();
@@ -169,12 +169,12 @@ void Request::Read
 							 "%u (SOLDIER)}",
 							 what_is, WARE, WORKER, 2);
 					uint32_t const reg = fr.Unsigned32();
-					if (not mol->is_object_known(reg))
+					if (not mol.is_object_known(reg))
 						throw wexception("%u is not known", reg);
 					Transfer * const trans =
 						what_is == WARE ?
-						new Transfer(game, *this, mol->get<WareInstance>(reg)) :
-						new Transfer(game, *this, mol->get<Worker>      (reg));
+						new Transfer(game, *this, mol.get<WareInstance>(reg)) :
+						new Transfer(game, *this, mol.get<Worker>      (reg));
 					trans->set_idle(fr.Unsigned8());
 					m_transfers.push_back(trans);
 
@@ -197,7 +197,7 @@ void Request::Read
  * Write this request to a file
  */
 void Request::Write
-	(FileWrite & fw, Game & game, Map_Map_Object_Saver * mos) const
+	(FileWrite & fw, Game & game, Map_Map_Object_Saver & mos) const
 {
 	fw.Unsigned16(REQUEST_VERSION);
 
@@ -227,11 +227,11 @@ void Request::Write
 		//  is this a ware (or a worker)
 		fw.Unsigned8(m_type);
 		if        (trans.m_item) { //  write ware/worker
-			assert(mos->is_object_known(*trans.m_item));
-			fw.Unsigned32(mos->get_object_file_index(*trans.m_item));
+			assert(mos.is_object_known(*trans.m_item));
+			fw.Unsigned32(mos.get_object_file_index(*trans.m_item));
 		} else if (trans.m_worker) {
-			assert(mos->is_object_known(*trans.m_worker));
-			fw.Unsigned32(mos->get_object_file_index(*trans.m_worker));
+			assert(mos.is_object_known(*trans.m_worker));
+			fw.Unsigned32(mos.get_object_file_index(*trans.m_worker));
 		}
 		fw.Unsigned8(trans.is_idle());
 

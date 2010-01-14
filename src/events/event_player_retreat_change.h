@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,24 +32,28 @@ struct Tribe_Descr;
 struct Event_Player_Retreat_Change : public Event {
 	Event_Player_Retreat_Change
 		(char const * const Name, State const S)
-		: Event(Name, S), m_player_number(1), m_percentage(0)
+		: Event(Name, S), m_player(1), m_percentage(0)
 	{}
 	Event_Player_Retreat_Change
 		(Section &, Editor_Game_Base &, Tribe_Descr const * = 0);
 
 	virtual char const * action_name() const = 0; /// What the event type does.
 
+	bool has_option_menu() const {return false;}
 	int32_t option_menu(Editor_Interactive &) __attribute__ ((noreturn));
 
-	void Write(Section &, Editor_Game_Base &) const;
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
 
-	Player_Number player_number() const {return m_player_number;}
-	void set_player(Player_Number);
+	Player_Number player() const {return m_player;}
+	void set_player(Player_Number const p) {m_player = p;}
 	uint32_t const & percentage() const {return m_percentage;}
 	uint32_t       & percentage()       {return m_percentage;}
+
 protected:
-	Player_Number  m_player_number;
-	uint32_t       m_percentage;
+	Player_Number m_player;
+	uint32_t      m_percentage;
 };
 
 }

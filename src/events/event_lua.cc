@@ -52,7 +52,9 @@ Event::State Event_Lua::run(Game & game) {
 	return m_state = DONE;
 }
 
-void Event_Lua::Write(Section & s, Editor_Game_Base &) const {
+void Event_Lua::Write
+	(Section & s, Editor_Game_Base const &, Map_Map_Object_Saver const &) const
+{
 	s.set_string("type",  "lua");
 	s.set_int("version",  EVENT_VERSION);
 	s.set_string("cmd", m_cmd);

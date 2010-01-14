@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -170,7 +170,9 @@ Event_Message_Box::Event_Message_Box(Section & s, Editor_Game_Base & egbase)
 	}
 }
 
-void Event_Message_Box::Write(Section & s, Editor_Game_Base &) const {
+void Event_Message_Box::Write
+	(Section & s, Editor_Game_Base const &, Map_Map_Object_Saver const &) const
+{
 	s.set_string("type",         "message_box");
 	s.set_int   ("version",      EVENT_VERSION);
 	s.set_string("text",         m_text);
@@ -197,9 +199,7 @@ void Event_Message_Box::Write(Section & s, Editor_Game_Base &) const {
 	}
 }
 
-/**
- * Check if trigger conditions are done
- */
+
 Event::State Event_Message_Box::run(Game & game) {
 	Message_Box_Event_Message_Box * mb =
 		new Message_Box_Event_Message_Box

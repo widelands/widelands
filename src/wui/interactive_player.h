@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,8 @@
 
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
+
+#include "logic/message_id.h"
 
 #include <SDL_keyboard.h>
 
@@ -90,6 +92,8 @@ struct Interactive_Player :
 	void set_flag_to_connect(Widelands::Coords const location) {
 		m_flag_to_connect = location;
 	}
+
+	void popup_message(Widelands::Message_Id, Widelands::Message const &);
 
 private:
 	void cmdSwitchPlayer(std::vector<std::string> const & args);

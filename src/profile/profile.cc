@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -422,9 +422,7 @@ Widelands::Building_Index Section::get_safe_Building_Index
 	 Widelands::Editor_Game_Base &       egbase,
 	 Widelands::Player_Number      const player)
 {
-	Widelands::Tribe_Descr const & tribe =
-		egbase.manually_load_tribe
-			(egbase.map().get_scenario_player_tribe(player));
+	Widelands::Tribe_Descr const & tribe = egbase.manually_load_tribe(player);
 	char const * const b = get_safe_string(name);
 	if (Widelands::Building_Index const idx = tribe.building_index(b))
 		return idx;
@@ -440,9 +438,7 @@ Widelands::Building_Descr const & Section::get_safe_Building_Type
 	 Widelands::Editor_Game_Base &       egbase,
 	 Widelands::Player_Number      const player)
 {
-	Widelands::Tribe_Descr const & tribe =
-		egbase.manually_load_tribe
-			(egbase.map().get_scenario_player_tribe(player));
+	Widelands::Tribe_Descr const & tribe = egbase.manually_load_tribe(player);
 	char const * const b = get_safe_string(name);
 	if
 		(Widelands::Building_Descr const * const result =
@@ -570,13 +566,16 @@ Widelands::Player_Number Section::get_Player_Number
 	 Widelands::Player_Number const nr_players,
 	 Widelands::Player_Number const def)
 {
-	int32_t const value = get_int(name, def);
-	if (1 <= value and value <= nr_players)
-		return value;
-	else
-		throw wexception
-			("player number is %i but there are only %u players",
-			 value, nr_players);
+	if (Value const * const v = get_val(name)) {
+		int32_t const value = v->get_int();
+		if (1 <= value and value <= nr_players)
+			return value;
+		else
+			throw wexception
+				("player number is %i but there are only %u players",
+				 value, nr_players);
+	} else
+		return def;
 }
 
 
@@ -653,9 +652,7 @@ void Section::set_Building_Index
 {
 	set_string
 		(name,
-		 egbase.manually_load_tribe
-		 	(egbase.map().get_scenario_player_tribe(player))
-		 .get_building_descr(value)->name());
+		 egbase.manually_load_tribe(player).get_building_descr(value)->name());
 }
 
 

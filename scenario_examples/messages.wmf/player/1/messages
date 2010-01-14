@@ -1,0 +1,9 @@
+[global]
+packet_version=1
+
+[Game is paused]
+sender=
+sent=0
+duration=1
+body=The game is paused. Press PageUp to run it.
+status=new

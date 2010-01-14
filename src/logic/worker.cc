@@ -632,12 +632,11 @@ void Worker::informPlayer
 	// NOTE for farms, ferneries, vineyards, etc.
 	if ((res_type != "fish") && (res_type != "stone"))
 		return;
-	MessageQueue::addWithTimeout
-		(game, building.owner().player_number(),
-		 600000, 0,
-		 Message::create_building_message
-		 	(MSG_MINE,
-		 	 game.get_gametime(),
+	owner().add_message_with_timeout
+		(game,
+		 building.create_message
+		 	("mine",
+		 	 game.get_gametime(),  60 * 60 * 1000,
 		 	 _("Out of ") + res_type,
 		 	 "<p font-size=14 font-face=FreeSerif>" +
 		 	 std::string
@@ -645,8 +644,8 @@ void Worker::informPlayer
 		 	 	 	("The worker of this building cannot find any more resources "
 		 	 	 	 "of the following type: "))
 		 	 +
-		 	 res_type + "</p>",
-		 	 building));
+		 	 res_type + "</p>"),
+		 600000, 0);
 }
 
 
@@ -898,48 +897,35 @@ bool Worker::run_geologist_find(Game & game, State & state, Action const &)
 	Map const & map = game.map();
 	const FCoords position = map.get_fcoords(get_position());
 	BaseImmovable const * const imm = position.field->get_immovable();
+	World const & world = map.world();
 
 	if (imm && imm->get_size() > BaseImmovable::NONE) {
 		//NoLog("  Field is no longer empty\n");
 	} else if
 		(const Resource_Descr * const rdescr =
-		 	map.world().get_resource(position.field->get_resources()))
+		 	world.get_resource(position.field->get_resources()))
 	{
 		// Geologist also sends a message notifying the player
-		if
-			(rdescr && rdescr->is_detectable() &&
-			 position.field->get_resources_amount())
-		{
-			std::string sender = "g ";
-			sender += serial();
-			std::string resource = rdescr->descname();
+		if (rdescr->is_detectable() && position.field->get_resources_amount()) {
+			char message[1024];
+			snprintf
+				(message, sizeof(message),
+				 "<rt image=%sresources/%s_1f.png>"
+				 "<p font-size=14 font-face=FreeSerif>%s</p></rt>",
+				 world.basedir().c_str(), rdescr->name().c_str(),
+				 _("A geologist found resources."));
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
-			Coords const coords = get_position();
-			std::vector<Message> const & msgQueue =
-				MessageQueue::get(owner().player_number());
-			for
-				(struct {
-				 	std::vector<Message>::const_iterator current;
-				 	std::vector<Message>::const_iterator const end;
-				 } i = {msgQueue.begin(), msgQueue.end()};;
-				 ++i.current)
-				if (i.current == i.end) {
-					MessageQueue::add
-						(owner(),
-						 Message
-						 	(sender,
-						 	 game.get_gametime(),
-						 	 resource, coords, _("A geologist found resources.")));
-					break;
-				} else if
-					(i.current->sender() == sender   and
-					 i.current->title () == resource and
-					 //  If the message is older than 90 seconds, a new one might
-					 //  be useful.
-					 game.get_gametime() - i.current->time() < 90000)
-					break;
+			owner().add_message_with_timeout
+				(game,
+				 *new Message
+				 	("geologist " + rdescr->name(),
+				 	 game.get_gametime(), 60 * 60 * 1000,
+				 	 rdescr->descname(),
+				 	 message,
+				 	 position),
+				 90000, 8);
 		}
 
 		Tribe_Descr const & t = tribe();
@@ -1686,14 +1672,14 @@ void Worker::return_update(Game & game, State & state)
 			 location.get_position().x, location.get_position().y,
 			 descname().c_str(), descname().c_str(),
 			 location.descname().c_str(), location.descname().c_str());
-		MessageQueue::add
-			(owner(),
-			 Message
-			 	(_("Game engine"),
-			 	 game.get_gametime(),
+		owner().add_message
+			(game,
+			 *new Message
+			 	("game engine",
+			 	 game.get_gametime(), Forever(),
 			 	 _("Logic error"),
-			 	 get_position(),
-			 	 buffer));
+			 	 buffer,
+			 	 get_position()));
 		game.gameController()->setDesiredSpeed(0);
 		return set_location(0);
 	}

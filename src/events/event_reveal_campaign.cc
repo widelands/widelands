@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,10 +29,14 @@ Event_Reveal_Campaign::Event_Reveal_Campaign
 	: Event_Reveal(s, egbase)
 {}
 
-void Event_Reveal_Campaign::Write(Section & s, Editor_Game_Base & egbase) const
+void Event_Reveal_Campaign::Write
+	(Section                    & s,
+	 Editor_Game_Base     const & egbase,
+	 Map_Map_Object_Saver const & mos)
+	const
 {
 	s.set_string("type",    "reveal_campaign");
-	Event_Reveal::Write(s, egbase);
+	Event_Reveal::Write(s, egbase, mos);
 }
 
 

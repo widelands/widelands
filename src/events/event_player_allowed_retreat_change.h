@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ namespace Widelands {
 struct Event_Player_Allowed_Retreat_Change : public Event {
 	Event_Player_Allowed_Retreat_Change
 		(char const * const Name, State const S)
-		: Event(Name, S), m_player_number(1)
+		: Event(Name, S), m_player(1)
 	{}
 	Event_Player_Allowed_Retreat_Change
 		(Section &, Editor_Game_Base &);
@@ -39,12 +39,15 @@ struct Event_Player_Allowed_Retreat_Change : public Event {
 
 	int32_t option_menu(Editor_Interactive &) __attribute__ ((noreturn));
 
-	void Write(Section &, Editor_Game_Base &) const;
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
 
-	Player_Number player_number() const {return m_player_number;}
-	void set_player(Player_Number);
+	Player_Number player() const {return m_player;}
+	void set_player(Player_Number const p) {m_player = p;}
+
 protected:
-	Player_Number  m_player_number;
+	Player_Number m_player;
 };
 
 }

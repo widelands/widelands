@@ -30,7 +30,9 @@
 #include "event_forbid_worker_types.h"
 #include "event_immovable.h"
 #include "event_lua.h"
+#include "event_message.h"
 #include "event_message_box.h"
+#include "event_expire_message.h"
 #include "event_move_view.h"
 #include "event_player_seeall.h"
 #include "event_retreat_change.h"
@@ -185,6 +187,20 @@ Type_Descr EVENT_TYPE_DESCRIPTIONS[] = {
 		false, // Change this value when option window exists
 		"seeall",                    _("Set see all mode for a player"),
 		_("Sets the see all mode for a specific player to on/off.")
+	},
+	{
+		false,
+		"message",                   _("Creates a message for a player"),
+		_
+			("Creates a message for a player. This message can last forever, "
+			 "during a specified duration, or until a special event is run.")
+	},
+	{
+		true,
+		"expire_message",            _("Expires a previously created message"),
+		_
+			("Expires a message that was previously created for a player. The "
+			 "message will cease to exist.")
 	}
 };
 
@@ -223,6 +239,8 @@ Event & create
 	case 20: return *new Event_Forbid_Retreat_Change    (name, state);
 	case 21: return *new Event_Retreat_Change           (name, state);
 	case 22: return *new Event_Player_See_All           (name, state);
+	case 23: return *new Event_Message                  (name, state);
+	case 24: return *new Event_Expire_Message           (name, state);
 	default:
 		assert(false);
 	}
@@ -274,6 +292,8 @@ Event & create(Section & s, Editor_Game_Base & egbase) {
 	case 20: return *new Event_Forbid_Retreat_Change    (s, egbase);
 	case 21: return *new Event_Retreat_Change           (s, egbase);
 	case 22: return *new Event_Player_See_All           (s, egbase);
+	case 23: return *new Event_Message                  (s, egbase);
+	case 24: return *new Event_Expire_Message           (s, egbase);
 	default:
 		assert(false);
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,7 @@ namespace Widelands {
 
 struct Editor_Game_Base;
 struct Game;
+struct Map_Map_Object_Saver;
 
 struct Trigger : public Named, public Referenced<Trigger> {
 	friend struct Map_Trigger_Data_Packet;
@@ -50,7 +51,9 @@ struct Trigger : public Named, public Referenced<Trigger> {
 	virtual int32_t option_menu(Editor_Interactive &) = 0;
 
 	virtual void Read (Section &, Editor_Game_Base       &)       = 0;
-	virtual void Write(Section &, Editor_Game_Base const &) const = 0;
+	virtual void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &) const
+		= 0;
 
 	virtual void check_set_conditions(Game const &) = 0;
 

@@ -876,4 +876,35 @@ void Building::remove_worker(Worker & worker) {
 	}
 }
 
+Message & Building::create_message
+	(std::string const &       msgsender,
+	 uint32_t            const time,
+	 Duration            const duration,
+	 std::string const &       title,
+	 std::string const &       description)
+	const
+{
+	std::string const & picnametempl =
+		g_anim.get_animation(descr().get_ui_anim())->picnametempl;
+	std::string rt_description;
+	rt_description.reserve
+		(strlen("<rt image=") + picnametempl.size() + 1 + description.size() +
+		 strlen("</rt>"));
+	rt_description  = "<rt image=";
+	rt_description += picnametempl;
+	{
+		std::string::iterator it = rt_description.end() - 1;
+		for (; it != rt_description.begin() and *it != '?'; --it) {}
+		for (;                                  *it == '?'; --it)
+			*it = '0';
+	}
+	rt_description += ".png";
+	rt_description += '>';
+	rt_description += description;
+	rt_description += "</rt>";
+	return
+		*new Message
+			(msgsender, time, duration, title, rt_description, get_position());
+}
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,11 +35,13 @@ struct Event_Player_Area : public Event {
 	{}
 	Event_Player_Area(Section &, Editor_Game_Base &);
 
-	virtual void reorigin(Coords const new_origin, Extent const extent) {
+	void reorigin(Coords const new_origin, Extent const extent) {
 		m_player_area.reorigin(new_origin, extent);
 	}
 
-	void Write(Section &, Editor_Game_Base &) const;
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
 
 	void set_player(Player_Number);
 	void set_position(Coords);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ void Map_Players_AreaWatchers_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader * const ol)
+	 Map_Map_Object_Loader &       mol)
 throw (_wexception)
 {
 	if (skip)
@@ -62,7 +62,7 @@ throw (_wexception)
 			if (packet_version == CURRENT_PACKET_VERSION) {
 				while (not fr.EndOfFile()) {
 					uint32_t const reg = fr.Unsigned32();
-					if (ol->is_object_known(reg))
+					if (mol.is_object_known(reg))
 						throw game_data_error
 							("%lu: read object with reg %u, but an object with that "
 							 "reg has already been loaded",
@@ -75,7 +75,7 @@ throw (_wexception)
 							 static_cast<long unsigned int>(fr.GetPos() - 4), reg,
 							 e.what());
 					}
-					ol->register_object
+					mol.register_object
 						(reg,
 						 player->add_areawatcher
 						 	(Player_Area<>(p, Area<>(c, fr.Unsigned16()))));
@@ -94,9 +94,7 @@ throw (_wexception)
 
 
 void Map_Players_AreaWatchers_Data_Packet::Write
-	(FileSystem           &       fs,
-	 Editor_Game_Base     &       egbase,
-	 Map_Map_Object_Saver * const os)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 throw (_wexception)
 {
 	fs.EnsureDirectoryExists("player");
@@ -108,9 +106,9 @@ throw (_wexception)
 		const Player::AreaWatchers & areawatchers = player->areawatchers();
 		container_iterate_const(Player::AreaWatchers, areawatchers, i) {
 			AreaWatcher const & areawatcher = *i.current->get(egbase);
-			fw.Unsigned32(os->register_object(areawatcher));
+			fw.Unsigned32(mos.register_object(areawatcher));
 			fw.Area48    (areawatcher);
-			os->mark_object_as_saved(areawatcher);
+			mos.mark_object_as_saved(areawatcher);
 		}
 		char filename[FILENAME_SIZE];
 		snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, p);

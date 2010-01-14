@@ -1,0 +1,39 @@
+[global]
+packet_version=2
+
+
+[Expire Welcome Message]
+type=expire_message
+
+[Welcome Message]
+type=message
+version=1
+title=Welcome!
+body=You have a secret message. Once you have opened it, it will be destroyed after a short time.
+expire=Expire Welcome Message
+status=popup
+
+
+[Set Secret Message Timeout]
+type=set_timer
+version=1
+trigger=Secret Message Timeout
+duration=8000
+
+[Expire Secret Message]
+type=expire_message
+
+[Secret Message]
+type=message
+version=1
+title=Secret
+body=This message will disappear in 8 seconds...
+expire=Expire Secret Message
+status_change=Secret Message Read
+
+
+[Farewell]
+type=message
+version=1
+title=Secret expired
+body=Your secret message expired. Thank you for testing the message scripting functionality of Widelands.

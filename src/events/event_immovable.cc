@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ Event_Immovable::Event_Immovable(Section & s, Editor_Game_Base & egbase)
 		uint32_t const packet_version = s.get_safe_positive("version");
 		if (packet_version == EVENT_VERSION) {
 			Map const & map = egbase.map();
-			m_location = s.get_safe_Coords  ("point",  map.extent());
+			m_position = s.get_safe_Coords("point",  map.extent());
 			m_immovable_type =
 				&s.get_safe_Immovable_Type("tribe", "name", egbase);
 		} else
@@ -45,24 +45,23 @@ Event_Immovable::Event_Immovable(Section & s, Editor_Game_Base & egbase)
 	}
 }
 
-void Event_Immovable::Write(Section & s, Editor_Game_Base &) const {
+void Event_Immovable::Write
+	(Section & s, Editor_Game_Base const &, Map_Map_Object_Saver const &) const
+{
 	s.set_string        ("type",          "immovable");
 	s.set_int           ("version",       EVENT_VERSION);
-	s.set_Coords        ("point",         m_location);
+	s.set_Coords        ("point",         m_position);
 	s.set_Immovable_Type("tribe", "name", *m_immovable_type);
 }
 
 
-void Event_Immovable::set_position(Coords const c) {m_location = c;}
-
-
 Event::State Event_Immovable::run(Game & game) {
 	Map const & map = game.map();
-	if (BaseImmovable * const immovable = map[m_location].get_immovable())
+	if (BaseImmovable * const immovable = map[m_position].get_immovable())
 		immovable->remove(game);
-	m_immovable_type->create(game, m_location);
+	m_immovable_type->create(game, m_position);
 	game.inform_players_about_immovable
-		(Map::get_index(m_location, map.get_width()), m_immovable_type);
+		(Map::get_index(m_position, map.get_width()), m_immovable_type);
 	return m_state = DONE;
 }
 

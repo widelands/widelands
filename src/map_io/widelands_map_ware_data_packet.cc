@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ void Map_Ware_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader * const ol)
+	 Map_Map_Object_Loader &       mol)
 throw (_wexception)
 {
 	if (skip)
@@ -62,7 +62,7 @@ throw (_wexception)
 				//  data is read elsewhere
 				Serial const serial = fr.Unsigned32();
 				try {
-					ol->register_object<WareInstance>
+					mol.register_object<WareInstance>
 						(serial,
 						 *new WareInstance(Ware_Index::Null(), 0))
 						.init(egbase);
@@ -80,9 +80,7 @@ throw (_wexception)
 
 
 void Map_Ware_Data_Packet::Write
-	(FileSystem           &       fs,
-	 Editor_Game_Base     &       egbase,
-	 Map_Map_Object_Saver * const os)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 throw (_wexception)
 {
 
@@ -103,8 +101,8 @@ throw (_wexception)
 			const Flag::PendingItem * item = flag->m_items;
 			const Flag::PendingItem & items_end =  *(item + flag->m_item_filled);
 			for (; item < &items_end; ++item) {
-				assert(not os->is_object_known(*item->item));
-				ids.push_back(os->register_object(*item->item));
+				assert(not mos.is_object_known(*item->item));
+				ids.push_back(mos.register_object(*item->item));
 			}
 		}
 
@@ -113,8 +111,8 @@ throw (_wexception)
 			if (upcast(Worker, w, b))
 				if (const WareInstance * const ware = w->get_carried_item(egbase))
 				{
-					assert(!os->is_object_known(*ware));
-					ids.push_back(os->register_object(*ware));
+					assert(!mos.is_object_known(*ware));
+					ids.push_back(mos.register_object(*ware));
 				}
 	}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ Event_Player_Area::Event_Player_Area(Section & s, Editor_Game_Base & egbase)
 			Map const & map = egbase.map();
 			Extent const extent = map.extent();
 			m_player_area = Player_Area<>
-				(s.get_Player_Number("player", map.get_nrplayers(), 1),
+				(s.get_Player_Number("player", map.get_nrplayers()),
 				 Area<>
 				 	(event_version == 1
 				 	 ?
@@ -63,7 +63,9 @@ Event_Player_Area::Event_Player_Area(Section & s, Editor_Game_Base & egbase)
 }
 
 
-void Event_Player_Area::Write(Section & s, Editor_Game_Base &) const {
+void Event_Player_Area::Write
+	(Section & s, Editor_Game_Base const &, Map_Map_Object_Saver const &) const
+{
 	s.set_int   ("version", EVENT_VERSION);
 	s.set_Coords("point",   m_player_area);
 	if (m_player_area.radius)

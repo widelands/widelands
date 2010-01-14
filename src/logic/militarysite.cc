@@ -571,11 +571,14 @@ bool MilitarySite::attack(Soldier & enemy)
 				(message, sizeof(message),
 				 _("%sThe enemy defeated your soldiers at the %s.</p></rt>"),
 				 formation, descname().c_str());
-			MessageQueue::add
-				(owner().player_number(),
-				 Message
-				 	(MSG_SITE_LOST, game.get_gametime(),
-				 	 _("Militarysite lost!"), coords, message));
+			owner().add_message
+				(game,
+				 *new Message
+				 	("site_lost",
+				 	 game.get_gametime(), 60 * 60 * 1000,
+				 	 _("Militarysite lost!"),
+				 	 message,
+				 	 coords));
 		}
 
 		// Now let's see whether the enemy conquers our militarysite, or whether
@@ -648,11 +651,14 @@ bool MilitarySite::attack(Soldier & enemy)
 			(message, sizeof(message),
 			 _("%sYour soldiers defeated the enemy at the %s.</p></rt>"),
 			 formation, newsite->descname().c_str());
-		MessageQueue::add
-			(enemyplayer->player_number(),
-			 Message
-			 	(MSG_SITE_DEFEATED, game.get_gametime(),
-			 	 _("Enemy at site defeated!"), coords, message));
+		enemyplayer->add_message
+			(game,
+			 *new Message
+			 	("site_defeated",
+			 	 game.get_gametime(), 60 * 60 * 1000,
+			 	 _("Enemy at site defeated!"),
+			 	 message,
+			 	 coords));
 
 
 		return false;
@@ -702,15 +708,14 @@ void MilitarySite::informPlayer(Game & game, bool const discovered)
 		 _("%sYour %s is under attack.</p>"),
 		 formation, descname().c_str());
 
-	MessageQueue::addWithTimeout
-		(game, owner().player_number(),
-		 30000, 4,
-		 Message::create_building_message
-		 	(MSG_UNDER_ATTACK,
-		 	 game.get_gametime(),
+	owner().add_message_with_timeout
+		(game,
+		 create_message
+		 	("under_attack",
+		 	 game.get_gametime(), 8 * 60 * 1000,
 		 	 _("You are under attack"),
-		 	 message,
-		 	 *this));
+		 	 message),
+		 30000, 4);
 
 	/* Old code remains here for security reasons:
 	   New code has not been tested yet.
@@ -752,11 +757,11 @@ void MilitarySite::informPlayer(Game & game, bool const discovered)
 			MessageQueue::add
 				(owner(),
 				 Message
-				 	(MSG_UNDER_ATTACK, game.get_gametime(),
+				 	("under_attack", game.get_gametime(),
 				 	 _("You are under attack!"), coords, message));
 			break;
 		} else if
-			(i.current->sender() == MSG_UNDER_ATTACK and
+			(i.current->sender() == "under_attack" and
 			 map.calc_distance(i.current->get_coords(), coords) < 5 and
 			 game.get_gametime() - i.current->time() < 60000)
 			//  Soldiers are running around during their attack, so we avoid too

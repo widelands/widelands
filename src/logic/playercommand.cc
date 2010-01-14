@@ -56,7 +56,9 @@ enum {
 	PLCMD_RESETWARETARGETQUANTITY,
 	PLCMD_SETWORKERTARGETQUANTITY,
 	PLCMD_RESETWORKERTARGETQUANTITY,
-	PLCMD_CHANGEMILITARYCONFIG
+	PLCMD_CHANGEMILITARYCONFIG,
+	PLCMD_MESSAGESETSTATUSREAD,
+	PLCMD_MESSAGESETSTATUSARCHIVED
 };
 
 /*** class PlayerCommand ***/
@@ -75,6 +77,10 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 	case PLCMD_FLAGACTION:            return new Cmd_FlagAction           (des);
 	case PLCMD_STARTSTOPBUILDING:     return new Cmd_StartStopBuilding    (des);
 	case PLCMD_ENHANCEBUILDING:       return new Cmd_EnhanceBuilding      (des);
+	case PLCMD_CHANGETRAININGOPTIONS: return new Cmd_ChangeTrainingOptions(des);
+	case PLCMD_DROPSOLDIER:           return new Cmd_DropSoldier          (des);
+	case PLCMD_CHANGESOLDIERCAPACITY: return new Cmd_ChangeSoldierCapacity(des);
+	case PLCMD_ENEMYFLAGACTION:       return new Cmd_EnemyFlagAction      (des);
 	case PLCMD_SETWAREPRIORITY:       return new Cmd_SetWarePriority      (des);
 	case PLCMD_SETWARETARGETQUANTITY:
 		return new Cmd_SetWareTargetQuantity    (des);
@@ -84,10 +90,10 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 		return new Cmd_SetWorkerTargetQuantity  (des);
 	case PLCMD_RESETWORKERTARGETQUANTITY:
 		return new Cmd_ResetWorkerTargetQuantity(des);
-	case PLCMD_CHANGETRAININGOPTIONS: return new Cmd_ChangeTrainingOptions(des);
-	case PLCMD_DROPSOLDIER:           return new Cmd_DropSoldier          (des);
-	case PLCMD_CHANGESOLDIERCAPACITY: return new Cmd_ChangeSoldierCapacity(des);
-	case PLCMD_ENEMYFLAGACTION:       return new Cmd_EnemyFlagAction      (des);
+	case PLCMD_CHANGEMILITARYCONFIG:  return new Cmd_ChangeMilitaryConfig (des);
+	case PLCMD_MESSAGESETSTATUSREAD:  return new Cmd_MessageSetStatusRead (des);
+	case PLCMD_MESSAGESETSTATUSARCHIVED:
+		return new Cmd_MessageSetStatusArchived (des);
 	default:
 		throw wexception
 			("PlayerCommand::deserialize(): Invalid command id encountered");
@@ -118,6 +124,8 @@ void PlayerCommand::Read
 		if (1 <= packet_version and packet_version <= PLAYER_COMMAND_VERSION) {
 			GameLogicCommand::Read(fr, egbase, mol);
 			m_sender    = fr.Unsigned8 ();
+			if (not egbase.get_player(m_sender))
+				throw game_data_error(_("player %u does not exist"), m_sender);
 			m_cmdserial = 1 < packet_version ? fr.Unsigned32() : 0;
 		} else
 			throw game_data_error
@@ -1314,6 +1322,73 @@ void Cmd_ChangeMilitaryConfig::Write
 	fw.Unsigned8(0);
 	fw.Unsigned8(0);
 
+}
+
+
+/*** struct PlayerMessageCommand ***/
+
+PlayerMessageCommand::PlayerMessageCommand(StreamRead & des) :
+PlayerCommand (0, des.Unsigned8()), m_message_id(des.Unsigned32())
+{}
+
+#define PLAYER_MESSAGE_CMD_VERSION 1
+void PlayerMessageCommand::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+{
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_MESSAGE_CMD_VERSION) {
+			PlayerCommand::Read(fr, egbase, mol);
+			m_message_id = Message_Id(fr.Unsigned32());
+			if (not m_message_id)
+				throw game_data_error
+					(_("(player %u): message id is null"), sender());
+		} else
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (_wexception const & e) {
+		throw game_data_error(_("player message: %s"), e.what());
+	}
+}
+
+void PlayerMessageCommand::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+{
+	fw.Unsigned16(PLAYER_MESSAGE_CMD_VERSION);
+	PlayerCommand::Write(fw, egbase, mos);
+	fw.Unsigned32(mos.message_savers[sender() - 1][message_id()]);
+}
+
+
+/*** struct Cmd_MessageSetStatusRead ***/
+
+void Cmd_MessageSetStatusRead::execute (Game & game)
+{
+	game.player(sender()).messages().set_message_status
+		(message_id(), Message::Read);
+}
+
+void Cmd_MessageSetStatusRead::serialize (StreamWrite & ser)
+{
+	ser.Unsigned8 (PLCMD_MESSAGESETSTATUSREAD);
+	ser.Unsigned8 (sender());
+	ser.Unsigned32(message_id());
+}
+
+
+/*** struct Cmd_MessageSetStatusArchived ***/
+
+void Cmd_MessageSetStatusArchived::execute (Game & game)
+{
+	game.player(sender()).messages().set_message_status
+		(message_id(), Message::Archived);
+}
+
+void Cmd_MessageSetStatusArchived::serialize (StreamWrite & ser)
+{
+	ser.Unsigned8 (PLCMD_MESSAGESETSTATUSARCHIVED);
+	ser.Unsigned8 (sender());
+	ser.Unsigned32(message_id());
 }
 
 }

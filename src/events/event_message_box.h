@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,9 +44,11 @@ struct Event_Message_Box : public Event, public Referencer<Trigger> {
 
 	int32_t option_menu(Editor_Interactive &);
 
-	State run(Game &);
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
 
-	void Write(Section &, Editor_Game_Base &) const;
+	State run(Game &);
 
 	void set_text(const char * str) {m_text = str;}
 	const char * get_text() const {return m_text.c_str();}

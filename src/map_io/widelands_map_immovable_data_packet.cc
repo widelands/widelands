@@ -37,11 +37,9 @@ void Map_Immovable_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader * const ol)
+	 Map_Map_Object_Loader &       mol)
 throw (_wexception)
 {
-	assert(ol);
-
 	FileRead fr;
 	fr.Open(fs, "binary/immovable");
 
@@ -71,7 +69,7 @@ throw (_wexception)
 							egbase.manually_load_tribe(owner);
 						int32_t idx = tribe.get_immovable_index(name);
 						if (idx != -1)
-							ol->register_object
+							mol.register_object
 								(serial,
 								 egbase.create_immovable(position, idx, &tribe));
 						else
@@ -86,7 +84,7 @@ throw (_wexception)
 						Immovable & immovable =
 							egbase.create_immovable(position, idx, 0);
 						if (not skip)
-							ol->register_object(serial, immovable);
+							mol.register_object(serial, immovable);
 					} else
 						throw game_data_error
 							("world %s does not define immovable type \"%s\"",
@@ -103,7 +101,7 @@ throw (_wexception)
 
 
 void Map_Immovable_Data_Packet::Write
-	(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * const)
+	(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &)
 throw (_wexception)
 {
 	throw wexception("Immovable_Data_Packet is obsolete");

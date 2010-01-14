@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,9 +37,15 @@ struct Event_Road : Event {
 	bool has_option_menu() const {return false;}
 	int32_t option_menu(Editor_Interactive &) __attribute__ ((noreturn));
 
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
+
 	State run(Game &);
 
-	void Write(Section &, Editor_Game_Base &) const;
+	void reorigin(Coords const new_origin, Extent const extent) {
+		m_path.reorigin(new_origin, extent);
+	}
 
 private:
 	Path          m_path;

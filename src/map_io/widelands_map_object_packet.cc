@@ -44,9 +44,7 @@ Map_Object_Packet::~Map_Object_Packet() {
 
 
 void Map_Object_Packet::Read
-	(FileSystem            &       fs,
-	 Editor_Game_Base      &       egbase,
-	 Map_Map_Object_Loader * const ol)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	try {
 		FileRead fr;
@@ -63,19 +61,19 @@ void Map_Object_Packet::Read
 			case 0:
 				return;
 			case Map_Object::header_Immovable:
-				loaders.insert(Immovable::load(egbase, ol, fr));
+				loaders.insert(Immovable::load(egbase, mol, fr));
 				break;
 
 			case Map_Object::header_Legacy_AttackController:
-				loaders.insert(Legacy::loadAttackController(egbase, ol, fr));
+				loaders.insert(Legacy::loadAttackController(egbase, mol, fr));
 				break;
 
 			case Map_Object::header_Legacy_Battle:
-				loaders.insert(Legacy::loadBattle(egbase, ol, fr));
+				loaders.insert(Legacy::loadBattle(egbase, mol, fr));
 				break;
 
 			case Map_Object::header_Battle:
-				loaders.insert(Battle::load(egbase, ol, fr));
+				loaders.insert(Battle::load(egbase, mol, fr));
 				break;
 
 			default:
@@ -107,15 +105,13 @@ void Map_Object_Packet::LoadFinish() {
 	// load_finish stage
 	container_iterate_const(LoaderSetSorted, loaders_sorted, i) {
 		(*i.current)->load_finish();
-		(*i.current)->mol().mark_object_as_loaded((*i.current)->get_object());
+		(*i.current)->mol().mark_object_as_loaded(*(*i.current)->get_object());
 	}
 }
 
 
 void Map_Object_Packet::Write
-	(FileSystem           &       fs,
-	 Editor_Game_Base     &       egbase,
-	 Map_Map_Object_Saver * const os)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	FileWrite fw;
 
@@ -131,7 +127,7 @@ void Map_Object_Packet::Write
 
 		// These checks can be eliminated and the object saver simplified
 		// once all Map_Objects are saved using the new system
-		if (os->is_object_known(obj))
+		if (mos.is_object_known(obj))
 			continue;
 
 		if (!obj.has_new_save_support())
@@ -140,9 +136,9 @@ void Map_Object_Packet::Write
 				 "explicitly",
 				 obj.serial(), obj.descr().descname().c_str());
 
-		os->register_object(obj);
-		obj.save(egbase, os, fw);
-		os->mark_object_as_saved(obj);
+		mos.register_object(obj);
+		obj.save(egbase, mos, fw);
+		mos.mark_object_as_saved(obj);
 	}
 
 	fw.Unsigned8(0);

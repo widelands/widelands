@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,7 +39,7 @@ bool Requirements::check(Map_Object const & obj) const
  * Read this requirement from a file
  */
 void Requirements::Read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader * mol)
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -98,7 +98,7 @@ void Requirements::Read
 }
 
 void Requirements::Write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver * mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 	const
 {
 	fw.Unsigned16(REQUIREMENTS_VERSION);
@@ -130,7 +130,7 @@ uint32_t RequirementsStorage::id() const
 }
 
 Requirements RequirementsStorage::read
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader * mol)
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint32_t const id = fr.Unsigned16();
 
@@ -168,7 +168,7 @@ bool RequireOr::check(Map_Object const & obj) const
 }
 
 void RequireOr::write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver * mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 	const
 {
 	assert(m.size() == static_cast<uint16_t>(m.size()));
@@ -179,7 +179,7 @@ void RequireOr::write
 }
 
 static Requirements readOr
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader * mol)
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	uint32_t const count = fr.Unsigned16();
 	RequireOr req;
@@ -211,7 +211,7 @@ bool RequireAnd::check(Map_Object const & obj) const
 }
 
 void RequireAnd::write
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver * mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 	const
 {
 	assert(m.size() == static_cast<uint16_t>(m.size()));
@@ -222,9 +222,9 @@ void RequireAnd::write
 }
 
 static Requirements readAnd
-	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader * mol)
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
-	uint32_t count = fr.Unsigned16();
+	uint32_t const count = fr.Unsigned16();
 	RequireAnd req;
 
 	for (uint32_t i = 0; i < count; ++i) {
@@ -247,7 +247,7 @@ bool RequireAttribute::check(Map_Object const & obj) const
 }
 
 void RequireAttribute::write
-	(FileWrite & fw, Editor_Game_Base &, Map_Map_Object_Saver *) const
+	(FileWrite & fw, Editor_Game_Base &, Map_Map_Object_Saver &) const
 {
 	fw.Unsigned32(at);
 	fw.Signed32(min);
@@ -255,11 +255,20 @@ void RequireAttribute::write
 }
 
 static Requirements readAttribute
-	(FileRead & fr, Editor_Game_Base &, Map_Map_Object_Loader *)
+	(FileRead & fr, Editor_Game_Base &, Map_Map_Object_Loader &)
 {
-	tAttribute at = static_cast<tAttribute>(fr.Unsigned32());
-	int32_t min = fr.Signed32();
-	int32_t max = fr.Signed32();
+	tAttribute const at  = static_cast<tAttribute>(fr.Unsigned32());
+	if
+		(at != atrHP and at != atrAttack and at != atrDefense and at != atrEvade
+		 and
+		 at != atrTotal)
+		throw game_data_error
+			(_
+			 	("expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade "
+			 	 "(%u) or atrTotal (%u) but found unknown attribute value (%u)"),
+			 atrHP, atrAttack, atrDefense, atrEvade, atrTotal, at);
+	int32_t const min = fr.Signed32();
+	int32_t const max = fr.Signed32();
 
 	return RequireAttribute(at, min, max);
 }

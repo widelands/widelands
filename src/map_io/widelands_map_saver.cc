@@ -47,6 +47,7 @@
 #include "widelands_map_player_names_and_tribes_data_packet.h"
 #include "widelands_map_player_position_data_packet.h"
 #include "widelands_map_players_areawatchers_data_packet.h"
+#include "widelands_map_players_messages_data_packet.h"
 #include "widelands_map_players_view_data_packet.h"
 #include "widelands_map_resources_data_packet.h"
 #include "widelands_map_road_data_packet.h"
@@ -81,57 +82,72 @@ void Map_Saver::save() throw (_wexception) {
 	// Start with writing the map out, first Elemental data
 	// PRELOAD DATA BEGIN
 	log("Writing Elemental Data ... ");
-	{Map_Elemental_Data_Packet               p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Elemental_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 
 	log("Writing Player Names And Tribe Data ... ");
-	{Map_Player_Names_And_Tribes_Data_Packet p; p.Write(m_fs, m_egbase, m_mos);}
+	{
+		Map_Player_Names_And_Tribes_Data_Packet
+		p; p.Write(m_fs, m_egbase, *m_mos);
+	}
 	log("done!\n ");
 	//  PRELOAD DATA END
 
 	log("Writing Heights Data ... ");
-	{Map_Heights_Data_Packet                 p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Heights_Data_Packet                p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Terrain Data ... ");
-	{Map_Terrain_Data_Packet                 p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Terrain_Data_Packet                p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Player Start Position Data ... ");
-	{Map_Player_Position_Data_Packet         p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Player_Position_Data_Packet        p; p.Write(m_fs, m_egbase, *m_mos);}
+	log("done!\n ");
+
+	//  This must come before anything that references messages, such as:
+	//    * events (Event_Expire_Message)
+	//    * triggers (Trigger_Message_Is_Read_Or_Archived)
+	//    * command queue (PlayerMessageCommand, inherited by
+	//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
+	log("Writing Player Message Data ... ");
+	{Map_Players_Messages_Data_Packet       p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Bob Data ... ");
-	{Map_Bob_Data_Packet                     p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Bob_Data_Packet                    p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Resources Data ... ");
-	{Map_Resources_Data_Packet               p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Resources_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	log("Writing Map Extra Data ... ");
-	{Map_Extradata_Data_Packet               p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Extradata_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	Map const & map = m_egbase.map();
 
 	if (map.mtm().size()) {
 		log("Writing Trigger Data ... ");
-		Map_Trigger_Data_Packet               p; p.Write(m_fs, m_egbase, m_mos);
+		Map_Trigger_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);
 		log("done!\n ");
 	}
 
+	//  This must come after messages have been written, because when writing an
+	//  Event_Expire_Message, the sequence number in file of the referenced
+	//  message must be known.
 	if (map.mem().size()) {
 		log("Writing Event Data ... ");
-		Map_Event_Data_Packet                 p; p.Write(m_fs, m_egbase, m_mos);
+		Map_Event_Data_Packet                p; p.Write(m_fs, m_egbase, *m_mos);
 		log("done!\n ");
 	}
 
 	if (map.mcm().size()) {
 		log("Writing Event Chain Data ... ");
-		Map_EventChain_Data_Packet            p; p.Write(m_fs, m_egbase, m_mos);
+		Map_EventChain_Data_Packet           p; p.Write(m_fs, m_egbase, *m_mos);
 		log("done!\n ");
 	}
 
@@ -144,7 +160,7 @@ void Map_Saver::save() throw (_wexception) {
 			if (not player->is_worker_type_allowed(i)) {
 				log("Writing Allowed Worker Types Data ... ");
 				Map_Allowed_Worker_Types_Data_Packet p;
-				p.Write(m_fs, m_egbase, m_mos);
+				p                                  .Write(m_fs, m_egbase, *m_mos);
 				log("done!\n ");
 				goto end_find_a_forbidden_worker_type_loop;
 			}
@@ -157,7 +173,7 @@ void Map_Saver::save() throw (_wexception) {
 			if (not player->is_building_type_allowed(i)) {
 				log("Writing Allowed Building Types Data ... ");
 				Map_Allowed_Building_Types_Data_Packet p;
-				p.Write(m_fs, m_egbase, m_mos);
+				p                                  .Write(m_fs, m_egbase, *m_mos);
 				log("done!\n ");
 				goto end_find_a_forbidden_building_type_loop;
 			}
@@ -168,81 +184,81 @@ void Map_Saver::save() throw (_wexception) {
 	// change this order without knowing what you do
 	// EXISTENT PACKETS
 	log("Writing Flag Data ... ");
-	{Map_Flag_Data_Packet                    p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Flag_Data_Packet                   p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Road Data ... ");
-	{Map_Road_Data_Packet                    p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Road_Data_Packet                   p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Building Data ... ");
-	{Map_Building_Data_Packet                p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Building_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 
 	log("Writing Map Ware Data ... ");
-	{Map_Ware_Data_Packet                    p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Ware_Data_Packet                   p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Area Watchers Data ... ");
-	{Map_Players_AreaWatchers_Data_Packet    p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Players_AreaWatchers_Data_Packet   p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Map Objects ... ");
-	{Map_Object_Packet                       p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Object_Packet                      p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	// DATA PACKETS
 	if (m_mos->get_nr_flags()) {
 		log("Writing Flagdata Data ... ");
-		{Map_Flagdata_Data_Packet             p; p.Write(m_fs, m_egbase, m_mos);}
+		{Map_Flagdata_Data_Packet            p; p.Write(m_fs, m_egbase, *m_mos);}
 		log("done!\n ");
 	}
 
 	if (m_mos->get_nr_roads()) {
 		log("Writing Roaddata Data ... ");
-		{Map_Roaddata_Data_Packet             p; p.Write(m_fs, m_egbase, m_mos);}
+		{Map_Roaddata_Data_Packet            p; p.Write(m_fs, m_egbase, *m_mos);}
 		log("done!\n ");
 	}
 
 
 	if (m_mos->get_nr_buildings()) {
 		log("Writing Buildingdata Data ... ");
-		{Map_Buildingdata_Data_Packet         p; p.Write(m_fs, m_egbase, m_mos);}
+		{Map_Buildingdata_Data_Packet        p; p.Write(m_fs, m_egbase, *m_mos);}
 		log("done!\n ");
 	}
 
 
 	if (m_mos->get_nr_wares()) {
 		log("Writing Waredata Data ... ");
-		{Map_Waredata_Data_Packet             p; p.Write(m_fs, m_egbase, m_mos);}
+		{Map_Waredata_Data_Packet            p; p.Write(m_fs, m_egbase, *m_mos);}
 		log("done!\n ");
 	}
 
 	if (m_mos->get_nr_bobs()) {
 		log("Writing Bobdata Data ... ");
-		{Map_Bobdata_Data_Packet              p; p.Write(m_fs, m_egbase, m_mos);}
+		{Map_Bobdata_Data_Packet             p; p.Write(m_fs, m_egbase, *m_mos);}
 		log("done!\n ");
 	}
 
 	log("Writing Node Ownership Data ... ");
-	{Map_Node_Ownership_Data_Packet          p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Node_Ownership_Data_Packet         p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Exploration Data ... ");
-	{Map_Exploration_Data_Packet             p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Exploration_Data_Packet            p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Players Unseen Data ... ");
-	{Map_Players_View_Data_Packet            p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Players_View_Data_Packet           p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Variable Data ... ");
-	{Map_Variable_Data_Packet                p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Variable_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Objective Data ... ");
-	{Map_Objective_Data_Packet               p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Objective_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 #ifndef NDEBUG

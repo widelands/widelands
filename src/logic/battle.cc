@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -361,7 +361,7 @@ void Battle::Loader::load_pointers()
 }
 
 void Battle::save
-	(Editor_Game_Base & egbase, Map_Map_Object_Saver * mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_Battle);
 	fw.Unsigned8(BATTLE_SAVEGAME_VERSION);
@@ -373,13 +373,13 @@ void Battle::save
 	fw.Unsigned8(m_first_strikes);
 
 	// And now, the serials of the soldiers !
-	fw.Unsigned32(m_first  ? mos->get_object_file_index(*m_first)  : 0);
-	fw.Unsigned32(m_second ? mos->get_object_file_index(*m_second) : 0);
+	fw.Unsigned32(m_first  ? mos.get_object_file_index(*m_first)  : 0);
+	fw.Unsigned32(m_second ? mos.get_object_file_index(*m_second) : 0);
 }
 
 
 Map_Object::Loader * Battle::load
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader * mol, FileRead & fr)
+	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
 	std::auto_ptr<Loader> loader(new Loader);
 
@@ -388,7 +388,7 @@ Map_Object::Loader * Battle::load
 
 		uint8_t const version = fr.Unsigned8();
 		if (version == BATTLE_SAVEGAME_VERSION) {
-			loader->init(egbase, mol, new Battle);
+			loader->init(egbase, mol, *new Battle);
 			loader->load(fr, version);
 		} else
 			throw game_data_error(_("unknown/unhandled version %u"), version);

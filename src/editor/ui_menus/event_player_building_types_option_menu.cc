@@ -45,7 +45,7 @@ Event_Player_Building_Types_Option_Menu
 	:
 	UI::Window      (&parent, 0, 0, 320, 360, ""),
 	m_event         (event),
-	m_player_number (event.player_number()),
+	m_player_number (event.player()),
 	label_name      (*this),
 	name            (*this, event.name()),
 	label_player    (*this),
@@ -120,7 +120,7 @@ Event_Player_Building_Types_Option_Menu::Table::Table
 	add_column (50, _("Size"),           UI::Align_HCenter);
 	add_column(144, _("Name"),           UI::Align_Left);
 	fill
-		(parent.eia().egbase().manually_load_tribe(event.player_number()),
+		(parent.eia().egbase().manually_load_tribe(event.player()),
 		 event.building_types());
 }
 
@@ -177,15 +177,15 @@ void Event_Player_Building_Types_Option_Menu::Table::fill
 
 
 void Event_Player_Building_Types_Option_Menu::OK::clicked() {
-	Event_Player_Building_Types_Option_Menu & parent =
+	Event_Player_Building_Types_Option_Menu & menu =
 		ref_cast<Event_Player_Building_Types_Option_Menu, UI::Panel>
 			(*get_parent());
-	std::string const & name = parent.name.text();
+	std::string const & name = menu.name.text();
 	if (name.size()) {
 		if
 			(Widelands::Event * const registered_event =
-			 	parent.eia().egbase().map().mem()[name])
-			if (registered_event != & parent.m_event) {
+			 	menu.eia().egbase().map().mem()[name])
+			if (registered_event != & menu.m_event) {
 				char buffer[256];
 				snprintf
 					(buffer, sizeof(buffer),
@@ -194,46 +194,45 @@ void Event_Player_Building_Types_Option_Menu::OK::clicked() {
 					 	 "Choose another name."),
 					 name.c_str());
 				UI::WLMessageBox mb
-					(parent.get_parent(),
+					(menu.get_parent(),
 					 _("Name in use"), buffer,
 					 UI::WLMessageBox::OK);
 				mb.run();
 				return;
 			}
-		parent.m_event.set_name(name);
+		menu.m_event.set_name(name);
 	}
-	if (parent.m_event.player_number() != parent.m_player_number) {
-		if (parent.m_event.player_number())
-			parent.eia().unreference_player_tribe
-				(parent.m_event.player_number(), &parent.m_event);
-		parent.m_event.set_player(parent.m_player_number);
-		parent.eia().reference_player_tribe
-			(parent.m_player_number, &parent.m_event);
+	if (menu.m_event.player() != menu.m_player_number) {
+		if (menu.m_event.player())
+			menu.eia().unreference_player_tribe
+				(menu.m_event.player(), &menu.m_event);
+		menu.m_event.set_player(menu.m_player_number);
+		menu.eia().reference_player_tribe(menu.m_player_number, &menu.m_event);
 	}
 	Widelands::Event_Player_Building_Types::Building_Types building_types;
 	for
 		(struct {uint8_t current; uint8_t const end;} i =
-		 	{0, parent.table.size()};
+		 	{0, menu.table.size()};
 		 i.current < i.end;
 		 ++i.current)
-		if (parent.table.get_record(i.current).is_checked(Table::Selected))
+		if (menu.table.get_record(i.current).is_checked(Table::Selected))
 			building_types.insert
-				(Widelands::Building_Index(parent.table[i.current]));
+				(Widelands::Building_Index(menu.table[i.current]));
 	if (building_types.empty()) {
 		char buffer[256];
 		snprintf
 			(buffer, sizeof(buffer),
 			 _("No building types are selected. Select at least one."));
 		UI::WLMessageBox mb
-			(parent.get_parent(),
+			(menu.get_parent(),
 			 _("Nothing selected"), buffer,
 			 UI::WLMessageBox::OK);
 		mb.run();
 		return;
 	}
-	parent.m_event.building_types() = building_types;
-	parent.eia().set_need_save(true);
-	parent.end_modal(1);
+	menu.m_event.building_types() = building_types;
+	menu.eia().set_need_save(true);
+	menu.end_modal(1);
 }
 
 

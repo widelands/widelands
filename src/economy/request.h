@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,13 +91,13 @@ struct Request : public Trackable {
 	void set_required_time(int32_t time);
 	void set_required_interval(int32_t interval);
 
-	void set_last_request_time(int32_t time) {m_last_request_time = time;}
+	void set_last_request_time(int32_t const time) {m_last_request_time = time;}
 
 	void start_transfer(Game &, Supply &);
 
 
-	void Write(FileWrite &, Game &, Map_Map_Object_Saver  *) const;
-	void Read (FileRead  &, Game &, Map_Map_Object_Loader *);
+	void Read (FileRead  &, Game &, Map_Map_Object_Loader &);
+	void Write(FileWrite &, Game &, Map_Map_Object_Saver  &) const;
 	Worker * get_transfer_worker();
 
 	//  callbacks for WareInstance/Worker code

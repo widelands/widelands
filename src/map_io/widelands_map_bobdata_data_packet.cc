@@ -59,7 +59,7 @@ void Map_Bobdata_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader * const ol)
+	 Map_Map_Object_Loader &       mol)
 	throw (_wexception)
 {
 	if (skip)
@@ -85,7 +85,7 @@ void Map_Bobdata_Data_Packet::Read
 					break;
 				}
 				try {
-					Bob & bob = ol->get<Bob>(serial);
+					Bob & bob = mol.get<Bob>(serial);
 					Bob::Descr const & bob_descr = bob.descr();
 
 					if (Player_Number const read_owner = fr.Player_Number8()) {
@@ -248,7 +248,7 @@ void Map_Bobdata_Data_Packet::Read
 							if (Serial const objvar1_serial = fr.Unsigned32()) {
 								try {
 									state.objvar1 =
-										&ol->get<Map_Object>(objvar1_serial);
+										&mol.get<Map_Object>(objvar1_serial);
 								} catch (_wexception const & e) {
 									throw game_data_error
 										("objvar1 (%u): %s", objvar1_serial, e.what());
@@ -341,7 +341,7 @@ void Map_Bobdata_Data_Packet::Read
 										state.route ? state.route : new Route();
 									Route::LoadData d;
 									route->load(d, fr);
-									route->load_pointers(d, *ol);
+									route->load_pointers(d, mol);
 									state.route = route;
 								} else
 									state.route = 0;
@@ -376,13 +376,13 @@ void Map_Bobdata_Data_Packet::Read
 					bob.m_signal          = fr.CString  ();
 
 					if      (upcast(Critter_Bob, critter_bob, &bob))
-						read_critter_bob(fr, egbase, ol, *critter_bob);
+						read_critter_bob(fr, egbase, mol, *critter_bob);
 					else if (upcast(Worker,      worker,      &bob))
-						read_worker_bob (fr, egbase, ol, *worker);
+						read_worker_bob (fr, egbase, mol, *worker);
 					else
 						assert(false);
 
-					ol->mark_object_as_loaded(&bob);
+					mol.mark_object_as_loaded(bob);
 				} catch (_wexception const & e) {
 					throw game_data_error(_("bob %u: %s"), serial, e.what());
 				}
@@ -396,7 +396,7 @@ void Map_Bobdata_Data_Packet::Read
 }
 
 void Map_Bobdata_Data_Packet::read_critter_bob
-	(FileRead & fr, Editor_Game_Base &, Map_Map_Object_Loader *, Critter_Bob &)
+	(FileRead & fr, Editor_Game_Base &, Map_Map_Object_Loader &, Critter_Bob &)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -413,7 +413,7 @@ void Map_Bobdata_Data_Packet::read_critter_bob
 void Map_Bobdata_Data_Packet::read_worker_bob
 	(FileRead              & fr,
 	 Editor_Game_Base      & egbase,
-	 Map_Map_Object_Loader * ol,
+	 Map_Map_Object_Loader & mol,
 	 Worker                & worker)
 {
 	try {
@@ -640,7 +640,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						}
 						if (soldier_worker_bob_packet_version >= 5)
 							if (Serial const battle = fr.Unsigned32())
-								soldier->m_battle = &ol->get<Battle>(battle);
+								soldier->m_battle = &mol.get<Battle>(battle);
 
 						if (soldier_worker_bob_packet_version >= 6)
 						{
@@ -694,7 +694,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 
 			if (uint32_t const location_serial = fr.Unsigned32()) {
 				try {
-					worker.set_location(&ol->get<PlayerImmovable>(location_serial));
+					worker.set_location(&mol.get<PlayerImmovable>(location_serial));
 				} catch (_wexception const & e) {
 					throw game_data_error
 						("location (%u): %s", location_serial, e.what());
@@ -705,7 +705,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 			if (uint32_t const carried_item_serial = fr.Unsigned32()) {
 				try {
 					worker.m_carried_item =
-						&ol->get<WareInstance>(carried_item_serial);
+						&mol.get<WareInstance>(carried_item_serial);
 				} catch (_wexception const & e) {
 					throw game_data_error
 						("carried item (%u): %s", carried_item_serial, e.what());
@@ -750,9 +750,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 
 
 void Map_Bobdata_Data_Packet::Write
-	(FileSystem           &       fs,
-	 Editor_Game_Base     &       egbase,
-	 Map_Map_Object_Saver * const os)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -771,8 +769,8 @@ throw (_wexception)
 			for (uint32_t i = 0; i < bobarr.size(); ++i) {
 				Bob        const & bob   = *bobarr[i];
 				Bob::Descr const & descr = bob.descr();
-				assert(os->is_object_known(bob));
-				uint32_t const reg = os->get_object_file_index(bob);
+				assert(mos.is_object_known(bob));
+				uint32_t const reg = mos.get_object_file_index(bob);
 
 				fw.Unsigned32(reg);
 				//  BOB STUFF
@@ -816,8 +814,8 @@ throw (_wexception)
 					fw.Signed32(s.ivar3);
 
 					if (Map_Object const * const obj = s.objvar1.get(egbase)) {
-						assert(os->is_object_known(*obj));
-						fw.Unsigned32(os->get_object_file_index(*obj));
+						assert(mos.is_object_known(*obj));
+						fw.Unsigned32(mos.get_object_file_index(*obj));
 					} else
 						fw.Unsigned32(0);
 
@@ -865,7 +863,7 @@ throw (_wexception)
 
 					if (s.route) {
 						fw.Unsigned8(1);
-						s.route->save(fw, egbase, os);
+						s.route->save(fw, egbase, mos);
 					} else
 						fw.Unsigned8(0);
 
@@ -880,13 +878,13 @@ throw (_wexception)
 				fw.CString(bob.m_signal.c_str());
 
 				if      (upcast(Critter_Bob const, critter_bob, &bob))
-					write_critter_bob(fw, egbase, os, *critter_bob);
+					write_critter_bob(fw, egbase, mos, *critter_bob);
 				else if (upcast(Worker      const, worker,      &bob))
-					write_worker_bob (fw, egbase, os, *worker);
+					write_worker_bob (fw, egbase, mos, *worker);
 				else
 					assert(false);
 
-				os->mark_object_as_saved(bob);
+				mos.mark_object_as_saved(bob);
 			}
 
 		}
@@ -898,7 +896,7 @@ throw (_wexception)
 void Map_Bobdata_Data_Packet::write_critter_bob
 	(FileWrite            & fw,
 	 Editor_Game_Base     &,
-	 Map_Map_Object_Saver *,
+	 Map_Map_Object_Saver &,
 	 Critter_Bob    const &)
 {
 	fw.Unsigned16(CRITTER_BOB_PACKET_VERSION);
@@ -907,7 +905,7 @@ void Map_Bobdata_Data_Packet::write_critter_bob
 void Map_Bobdata_Data_Packet::write_worker_bob
 	(FileWrite            & fw,
 	 Editor_Game_Base     & egbase,
-	 Map_Map_Object_Saver * os,
+	 Map_Map_Object_Saver & mos,
 	 Worker         const & worker)
 {
 	fw.Unsigned16(WORKER_BOB_PACKET_VERSION);
@@ -925,7 +923,7 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 		fw.Unsigned32(soldier->m_defense_level);
 		fw.Unsigned32(soldier->m_evade_level);
 		if (soldier->m_battle)
-			fw.Unsigned32(os->get_object_file_index(*soldier->m_battle));
+			fw.Unsigned32(mos.get_object_file_index(*soldier->m_battle));
 		else
 			fw.Unsigned32(0);
 		// New at version 6
@@ -938,8 +936,8 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 	}
 
 	if (Map_Object const * const loca = worker.m_location.get(egbase)) {
-		assert(os->is_object_known(*loca));
-		fw.Unsigned32(os->get_object_file_index(*loca));
+		assert(mos.is_object_known(*loca));
+		fw.Unsigned32(mos.get_object_file_index(*loca));
 	} else
 		fw.Unsigned32(0);
 
@@ -949,8 +947,8 @@ void Map_Bobdata_Data_Packet::write_worker_bob
 		(Map_Object const * const carried_item =
 		 	worker.m_carried_item.get(egbase))
 	{
-		assert(os->is_object_known(*carried_item));
-		fw.Unsigned32(os->get_object_file_index(*carried_item));
+		assert(mos.is_object_known(*carried_item));
+		fw.Unsigned32(mos.get_object_file_index(*carried_item));
 	} else
 		fw.Unsigned32(0);
 

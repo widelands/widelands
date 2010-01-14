@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2007-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,7 +83,7 @@ struct Map_Map_Object_Loader {
 	int32_t get_nr_unloaded_objects();
 	bool is_object_loaded(Map_Object * const obj) {return m_loaded_obj[obj];}
 
-	void mark_object_as_loaded(Map_Object *);
+	void mark_object_as_loaded(Map_Object &);
 
 private:
 	typedef std::map<Serial, Map_Object *> Reverse_Map_Object_Map;

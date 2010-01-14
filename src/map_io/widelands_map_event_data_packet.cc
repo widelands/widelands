@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ void Map_Event_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader * const)
+	 Map_Map_Object_Loader &)
 throw (_wexception)
 {
 	if (skip)
@@ -75,9 +75,7 @@ throw (_wexception)
 
 
 void Map_Event_Data_Packet::Write
-	(FileSystem           &       fs,
-	 Editor_Game_Base     &       egbase,
-	 Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 throw (_wexception)
 {
 	Profile prof;
@@ -96,7 +94,7 @@ throw (_wexception)
 		default:
 			assert(false);
 		}
-		e.Write(s, egbase);
+		e.Write(s, egbase, mos);
 	}
 
 	prof.write("event", false, fs);

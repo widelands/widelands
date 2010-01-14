@@ -550,7 +550,7 @@ void Immovable::Loader::load_finish()
 }
 
 void Immovable::save
-	(Editor_Game_Base & egbase, Map_Map_Object_Saver * mos, FileWrite & fw)
+	(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw)
 {
 	// This is in front because it is required to obtain the descriptiong
 	// necessary to create the Immovable
@@ -581,7 +581,7 @@ void Immovable::save
 }
 
 Map_Object::Loader * Immovable::load
-	(Editor_Game_Base & egbase, Map_Map_Object_Loader * mol, FileRead & fr)
+	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
 	std::auto_ptr<Loader> loader(new Loader);
 
@@ -618,7 +618,7 @@ Map_Object::Loader * Immovable::load
 				imm = new Immovable(*world.get_immovable_descr(idx));
 			}
 
-			loader->init(egbase, mol, imm);
+			loader->init(egbase, mol, *imm);
 			loader->load(fr, version);
 		} else
 			throw game_data_error(_("unknown/unhandled version %u"), version);

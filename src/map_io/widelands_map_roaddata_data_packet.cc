@@ -44,7 +44,7 @@ void Map_Roaddata_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader * const ol)
+	 Map_Map_Object_Loader &       mol)
 throw (_wexception)
 {
 	if (skip)
@@ -70,8 +70,8 @@ throw (_wexception)
 					break;
 				}
 				try {
-					Road & road = ol->get<Road>(serial);
-					if (ol->is_object_loaded(&road))
+					Road & road = mol.get<Road>(serial);
+					if (mol.is_object_loaded(&road))
 						throw game_data_error("already loaded");
 					Player & plr = egbase.player(fr.Player_Number8(nr_players));
 
@@ -84,7 +84,7 @@ throw (_wexception)
 					{
 						uint32_t const flag_0_serial = fr.Unsigned32();
 						try {
-							road.m_flags[0] = &ol->get<Flag>(flag_0_serial);
+							road.m_flags[0] = &mol.get<Flag>(flag_0_serial);
 						} catch (_wexception const & e) {
 							throw game_data_error
 								("flag 0 (%u): %s", flag_0_serial, e.what());
@@ -93,7 +93,7 @@ throw (_wexception)
 					{
 						uint32_t const flag_1_serial = fr.Unsigned32();
 						try {
-							road.m_flags[1] = &ol->get<Flag>(flag_1_serial);
+							road.m_flags[1] = &mol.get<Flag>(flag_1_serial);
 						} catch (_wexception const & e) {
 							throw game_data_error
 								("flag 1 (%u): %s", flag_1_serial, e.what());
@@ -143,7 +143,7 @@ throw (_wexception)
 						if (uint32_t const carrier_serial = fr.Unsigned32())
 							try {
 								//log("Read carrier serial %u", carrier_serial);
-								carrier = &ol->get<Carrier>(carrier_serial);
+								carrier = &mol.get<Carrier>(carrier_serial);
 							} catch (_wexception const & e) {
 								throw game_data_error
 									("carrier (%u): %s", carrier_serial, e.what());
@@ -164,7 +164,7 @@ throw (_wexception)
 							 		 Ware_Index::First(),
 							 		 Road::_request_carrier_callback,
 							 		 Request::WORKER))
-							->Read(fr, ref_cast<Game, Editor_Game_Base>(egbase), ol);
+							->Read(fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);
 						} else {
 							carrier_request = 0;
 							//log("No request in this slot");
@@ -198,7 +198,7 @@ throw (_wexception)
 						}
 					}
 
-					ol->mark_object_as_loaded(&road);
+					mol.mark_object_as_loaded(road);
 				} catch (_wexception const & e) {
 					throw game_data_error(_("road %u: %s"), serial, e.what());
 				}
@@ -213,9 +213,7 @@ throw (_wexception)
 
 
 void Map_Roaddata_Data_Packet::Write
-	(FileSystem           &       fs,
-	 Editor_Game_Base     &       egbase,
-	 Map_Map_Object_Saver * const os)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -226,10 +224,10 @@ throw (_wexception)
 	Field const & fields_end = map[map.max_index()];
 	for (Field const * field = &map[0]; field < &fields_end; ++field)
 		if (upcast(Road const, r, field->get_immovable()))
-			if (not os->is_object_saved(*r)) {
-				assert(os->is_object_known(*r));
+			if (not mos.is_object_saved(*r)) {
+				assert(mos.is_object_known(*r));
 
-				fw.Unsigned32(os->get_object_file_index(*r));
+				fw.Unsigned32(mos.get_object_file_index(*r));
 
 				//  First, write PlayerImmovable Stuff
 				//  Theres only the owner
@@ -241,10 +239,10 @@ throw (_wexception)
 				fw.Unsigned32(r->m_type);
 
 				//  serial of flags
-				assert(os->is_object_known(*r->m_flags[0]));
-				assert(os->is_object_known(*r->m_flags[1]));
-				fw.Unsigned32(os->get_object_file_index(*r->m_flags[0]));
-				fw.Unsigned32(os->get_object_file_index(*r->m_flags[1]));
+				assert(mos.is_object_known(*r->m_flags[0]));
+				assert(mos.is_object_known(*r->m_flags[1]));
+				fw.Unsigned32(mos.get_object_file_index(*r->m_flags[0]));
+				fw.Unsigned32(mos.get_object_file_index(*r->m_flags[1]));
 
 				fw.Unsigned32(r->m_flagidx[0]);
 				fw.Unsigned32(r->m_flagidx[1]);
@@ -271,8 +269,8 @@ throw (_wexception)
 						(Carrier const * const carrier =
 						 iter.current->carrier.get(egbase))
 					{
-						assert(os->is_object_known(*carrier));
-						fw.Unsigned32(os->get_object_file_index(*carrier));
+						assert(mos.is_object_known(*carrier));
+						fw.Unsigned32(mos.get_object_file_index(*carrier));
 					} else {
 						fw.Unsigned32(0);
 					}
@@ -280,13 +278,13 @@ throw (_wexception)
 					if (iter.current->carrier_request) {
 						fw.Unsigned8(1);
 						iter.current->carrier_request->Write
-							(fw, ref_cast<Game, Editor_Game_Base>(egbase), os);
+							(fw, ref_cast<Game, Editor_Game_Base>(egbase), mos);
 					} else {
 						fw.Unsigned8(0);
 					}
 					fw.Unsigned32(iter.current->carrier_type);
 				}
-				os->mark_object_as_saved(*r);
+				mos.mark_object_as_saved(*r);
 			}
 
 	fw.Write(fs, "binary/road_data");

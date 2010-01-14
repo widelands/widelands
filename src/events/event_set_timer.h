@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,15 +34,17 @@ struct Editor_Game_Base;
 struct Event_Set_Timer : public Event, public Referencer<Trigger> {
 	Event_Set_Timer(char const * name, State);
 	Event_Set_Timer(Section &, Editor_Game_Base &);
-	~Event_Set_Timer();
+	~Event_Set_Timer() {set_trigger(0);}
 
 	std::string identifier() const {return "Event (set timer): " + name();}
 
 	int32_t option_menu(Editor_Interactive &);
 
-	State run(Game &);
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
 
-	void Write(Section &, Editor_Game_Base &) const;
+	State run(Game &);
 
 	void set_trigger(Trigger_Time * const new_trigger) {
 		if (new_trigger != m_trigger) {

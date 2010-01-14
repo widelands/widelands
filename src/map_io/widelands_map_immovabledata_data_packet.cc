@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ void Map_Immovabledata_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &,
 	 bool                    const skip,
-	 Map_Map_Object_Loader * const ol)
+	 Map_Map_Object_Loader &       mol)
 throw (_wexception)
 {
 	if (skip)
@@ -66,7 +66,7 @@ throw (_wexception)
 					break;
 				}
 				try {
-					Immovable & imm = ol->get<Immovable>(serial);
+					Immovable & imm = mol.get<Immovable>(serial);
 					Immovable_Descr const & descr = imm.descr();
 
 					// Animation
@@ -108,7 +108,7 @@ throw (_wexception)
 					}
 					imm.m_program_step = fr.Signed32();
 
-					ol->mark_object_as_loaded(&imm);
+					mol.mark_object_as_loaded(imm);
 				} catch (_wexception const & e) {
 					throw game_data_error(_("immovable %u: %s"), serial, e.what());
 				}
@@ -123,7 +123,7 @@ throw (_wexception)
 
 
 void Map_Immovabledata_Data_Packet::Write
-	(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * const)
+	(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &)
 throw (_wexception)
 {
 	throw game_data_error("Immovable_Data_Packet is obsolete");

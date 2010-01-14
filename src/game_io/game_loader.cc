@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,9 @@
 #include "game_loader.h"
 
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/cmd_expire_message.h"
 #include "logic/game.h"
+#include "logic/player.h"
 #include "game_cmd_queue_data_packet.h"
 #include "game_game_class_data_packet.h"
 #include "game_map_data_packet.h"
@@ -59,19 +61,19 @@ int32_t Game_Loader::preload_game(Game_Preload_Data_Packet & mp) {
 int32_t Game_Loader::load_game(bool const multiplayer) {
 
 	log("Game: Reading Preload Data ... ");
-	{Game_Preload_Data_Packet                     p; p.Read(m_fs, m_game, 0);}
+	{Game_Preload_Data_Packet                     p; p.Read(m_fs, m_game);}
 	log(" done\n");
 
 	log("Game: Reading Game Class Data ... ");
-	{Game_Game_Class_Data_Packet                  p; p.Read(m_fs, m_game, 0);}
+	{Game_Game_Class_Data_Packet                  p; p.Read(m_fs, m_game);}
 	log(" done\n");
 
 	log("Game: Reading Map Data ... ");
-	Game_Map_Data_Packet M;                          M.Read(m_fs, m_game, 0);
+	Game_Map_Data_Packet M;                          M.Read(m_fs, m_game);
 	log(" done\n");
 
 	log("Game: Reading Player Info ... ");
-	{Game_Player_Info_Data_Packet                 p; p.Read(m_fs, m_game, 0);}
+	{Game_Player_Info_Data_Packet                 p; p.Read(m_fs, m_game);}
 	log(" done\n");
 
 	log("Game: Reading Map Data Complete!\n");
@@ -86,6 +88,21 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 
 	log("Game: Reading Command Queue Data ... ");
 	{Game_Cmd_Queue_Data_Packet                   p; p.Read(m_fs, m_game, mol);}
+	log(" done\n");
+
+	//  This must be after the command queue has been read.
+	log("Game: Enqueuing comands to expire player's messages ... ");
+	Player_Number const nr_players = m_game.map().get_nrplayers();
+	iterate_players_existing_const(p, nr_players, m_game, player) {
+		MessageQueue const & messages = player->messages();
+		container_iterate_const(MessageQueue, messages, i) {
+			Duration const duration = i.current->second->duration();
+			if (duration != Forever())
+				m_game.cmdqueue().enqueue
+					(new Cmd_ExpireMessage
+					 	(m_game.get_gametime() + duration, p, i.current->first));
+		}
+	}
 	log(" done\n");
 
 	// Only read and use interactive player data, if we load a singleplayer game.

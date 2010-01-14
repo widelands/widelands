@@ -22,6 +22,7 @@
 
 #include "editor/ui_menus/event_player_worker_types_option_menu.h"
 #include "editor/ui_menus/event_player_building_types_option_menu.h"
+#include "editor/ui_menus/event_expire_message_option_menu.h"
 #include "editor/ui_menus/event_conquer_area_option_menu.h"
 #include "editor/ui_menus/event_message_box_option_menu.h"
 #include "editor/ui_menus/event_move_view_option_menu.h"
@@ -48,6 +49,8 @@
 #include "event_unhide_area.h"
 #include "event_player_allowed_retreat_change.h"
 #include "event_player_retreat_change.h"
+#include "event_message.h"
+#include "event_expire_message.h"
 
 namespace Widelands {
 
@@ -103,6 +106,13 @@ int32_t
 Event_Player_Allowed_Retreat_Change     ::option_menu(Editor_Interactive &)
 {throw;}
 
-int32_t Event_Player_Retreat_Change     ::option_menu(Editor_Interactive &)
+int32_t
+Event_Player_Retreat_Change             ::option_menu(Editor_Interactive &)
 {throw;}
+
+int32_t Event_Message                   ::option_menu(Editor_Interactive &)
+{throw;}
+
+int32_t Event_Expire_Message            ::option_menu(Editor_Interactive & eia)
+{Event_Expire_Message_Option_Menu               m(eia, *this); return m.run();}
 }

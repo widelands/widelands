@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,23 +30,28 @@ struct Editor_Game_Base;
 
 struct Event_Move_View : public Event {
 	Event_Move_View(char const * Name, State const S)
-		: Event(Name, S), m_location(Coords::Null()), m_player(1)
+		: Event(Name, S), m_position(Coords::Null()), m_player(1)
 	{}
 	Event_Move_View(Section &, Editor_Game_Base &);
 
 	int32_t option_menu(Editor_Interactive &);
 
-	void set_player(Player_Number);
-	void set_position(Coords);
+	void Write
+		(Section &, Editor_Game_Base const &, Map_Map_Object_Saver const &)
+		const;
+
 	State run(Game &);
 
-	void Write(Section &, Editor_Game_Base &) const;
+	void reorigin(Coords const new_origin, Extent const extent) {
+		m_position.reorigin(new_origin, extent);
+	}
 
-	void set_location(Coords const c) {m_location = c;}
-	Coords location() {return m_location;}
+	void set_position(Coords       const c) {m_position = c;}
+	Coords location() const {return m_position;}
+	void set_player  (Player_Number const p) {m_player  = p;}
 
 private:
-	Coords        m_location;
+	Coords        m_position;
 	Player_Number m_player;
 };
 

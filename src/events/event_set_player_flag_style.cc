@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2009-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,8 +35,7 @@ Event_Set_Player_Flag_Style::Event_Set_Player_Flag_Style
 		char const * const style_name = s.get_safe_string("flag_style");
 		try {
 			m_style_index =
-				egbase.player(m_player_number).tribe().flag_style_index
-					(style_name);
+				egbase.player(m_player).tribe().flag_style_index(style_name);
 		} catch (Tribe_Descr::Nonexistent) {
 			throw game_data_error
 				(_("player's tribe does not define flag style \"%s\""),
@@ -48,25 +47,27 @@ Event_Set_Player_Flag_Style::Event_Set_Player_Flag_Style
 }
 
 
-Event::State Event_Set_Player_Flag_Style::run(Game & game) {
-	assert(0 < m_player_number);
-	assert    (m_player_number <= game.map().get_nrplayers());
-
-	game.player(m_player_number).m_flag_style_index = m_style_index;
-
-	return m_state = DONE;
+void Event_Set_Player_Flag_Style::Write
+	(Section                    & s,
+	 Editor_Game_Base     const & egbase,
+	 Map_Map_Object_Saver const & mos)
+	const
+{
+	s.set_string("type", "set_player_flag_style");
+	Event_Set_Player_Style::Write(s, egbase, mos);
+	s.set_string
+		("flag_style",
+		 egbase.player(m_player).tribe().flag_style_name(m_style_index));
 }
 
 
-void Event_Set_Player_Flag_Style::Write
-	(Section & s, Editor_Game_Base & egbase) const
-{
-	s.set_string("type", "set_player_flag_style");
-	Event_Set_Player_Style::Write(s, egbase);
-	s.set_string
-		("flag_style",
-		 egbase.player(m_player_number).tribe().flag_style_name
-		 	(m_style_index));
+Event::State Event_Set_Player_Flag_Style::run(Game & game) {
+	assert(0 < m_player);
+	assert    (m_player <= game.map().get_nrplayers());
+
+	game.player(m_player).m_flag_style_index = m_style_index;
+
+	return m_state = DONE;
 }
 
 }

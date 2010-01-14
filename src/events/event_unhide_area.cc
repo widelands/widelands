@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,29 @@
 
 namespace Widelands {
 
+Event_Unhide_Area::Event_Unhide_Area(Section & s, Editor_Game_Base & egbase)
+	: Event_Player_Area(s, egbase)
+{
+	try {
+		duration = s.get_positive("duration", 0);
+	} catch (std::exception const & e) {
+		throw wexception("(unhide area): %s", e.what());
+	}
+}
+
+void Event_Unhide_Area::Write
+	(Section                    & s,
+	 Editor_Game_Base     const & egbase,
+	 Map_Map_Object_Saver const & mos)
+	const
+{
+	s.set_string("type",     "unhide_area");
+	Event_Player_Area::Write(s, egbase, mos);
+	if (duration)
+		s.set_int("duration", duration);
+}
+
+
 Event::State Event_Unhide_Area::run(Game & game) {
 	assert(m_player_area);
 	assert(0 < m_player_area.player_number);
@@ -46,23 +69,6 @@ Event::State Event_Unhide_Area::run(Game & game) {
 	}
 
 	return m_state = DONE;
-}
-
-Event_Unhide_Area::Event_Unhide_Area(Section & s, Editor_Game_Base & egbase)
-	: Event_Player_Area(s, egbase)
-{
-	try {
-		duration = s.get_positive("duration", 0);
-	} catch (std::exception const & e) {
-		throw wexception("(unhide area): %s", e.what());
-	}
-}
-
-void Event_Unhide_Area::Write(Section & s, Editor_Game_Base & egbase) const {
-	s.set_string("type",     "unhide_area");
-	Event_Player_Area::Write(s, egbase);
-	if (duration)
-		s.set_int("duration", duration);
 }
 
 }

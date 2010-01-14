@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,6 +54,11 @@ struct Path {
 	}
 
 	void append(Map const & map, Direction);
+
+	void reorigin(Coords const new_origin, Extent const extent) {
+		m_start.reorigin(new_origin, extent);
+		m_end  .reorigin(new_origin, extent);
+	}
 
 private:
 	Coords m_start;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 by the Widelands Development Team
+ * Copyright (C) 2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,11 +53,15 @@ void Trigger_Vision::Read(Section & s, Editor_Game_Base & egbase) {
 	}
 }
 
-void Trigger_Vision::Write(Section & s, Editor_Game_Base const & egbase) const
+void Trigger_Vision::Write
+	(Section                    & s,
+	 Editor_Game_Base     const & egbase,
+	 Map_Map_Object_Saver const & mos)
+	const
 {
 	s.set_string ("type",     "vision");
 	s.set_int    ("version",  PACKET_VERSION);
-	Trigger_Player_Area::Write(s, egbase);
+	Trigger_Player_Area::Write(s, egbase, mos);
 	if (require_active_vision)
 		s.set_bool("require_active_vision", true);
 }

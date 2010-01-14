@@ -403,10 +403,11 @@ int32_t Warehouse::get_priority
 	// return 100, if type is a ware, or the warehouse has no request itself
 	if ((type == Request::WORKER) || (m_target_supply[ware_index] == 0))
 		return 100;
-	int32_t x =
-		((m_target_supply[ware_index] + 2
-		  - m_supply->get_wares().stock(ware_index))
-		 * 100);
+	int32_t const x =
+		(m_target_supply.at(ware_index) + 2 -
+		 m_supply->get_wares().stock(ware_index))
+		*
+		100;
 	//  return 100 if all requests are fulfilled, else 100 * number of requested
 	return (x > 100) ? x : 100;
 }
@@ -448,13 +449,17 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			schedule_act
 				(ref_cast<Game, Editor_Game_Base>(egbase),
 				 WORKER_WITHOUT_COST_SPAWN_INTERVAL);
-		uint8_t nr_worker_types_without_cost =
-			owner().tribe().worker_types_without_cost().size();
-		molog
-			("Warehouse::init: setting all "
-			 "m_next_worker_without_cost_spawn[0..%u] to %u\n",
-			 nr_worker_types_without_cost, act_time);
-		SET_WORKER_WITHOUT_COST_SPAWNS(nr_worker_types_without_cost, act_time);
+		std::vector<Ware_Index> const & worker_types_without_cost =
+			tribe().worker_types_without_cost();
+		for
+			(struct {uint8_t current; uint32_t const size;} i =
+			 	{0, worker_types_without_cost.size()};
+			 i.current < i.size;
+			 ++i.current)
+			if
+				(owner().is_worker_type_allowed
+				 	(worker_types_without_cost.at(i.current)))
+				m_next_worker_without_cost_spawn[i.current] = act_time;
 	}
 	m_next_military_act  =
 		schedule_act
@@ -476,45 +481,23 @@ void Warehouse::init(Editor_Game_Base & egbase)
 			 	 Area<FCoords>
 			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
 
-	//  This function is twice called during loading, so only add a message,
-	//  to the player's message queue, if there is not already one for this wh.
-	Widelands::Coords const coords = get_position();
-	std::vector<Message> const & msgQueue =
-		MessageQueue::get(owner().player_number());
-	for
-		(struct {
-		 	std::vector<Message>::const_iterator       current;
-		 	std::vector<Message>::const_iterator const end;
-		 } i = {msgQueue.begin(), msgQueue.end()};;
-		 ++i.current)
-		if (i.current == i.end) { //  No entry for this warehouse yet - add one.
-			log
-				("Message: adding (wh) (%s) %i \n",
-				 type_name(), owner().player_number());
-			char formation[256];
-			snprintf
-				(formation, sizeof(formation),
-				 "<rt image=tribes/%s/%s/%s_i_00.png>"
-				 "<p font-size=14 font-face=FreeSerif>",
-				 tribe().name().c_str(), name().c_str(), name().c_str());
-			char message[2048];
-			snprintf
-				(message, sizeof(message),
-				 _("%sA new %s was added to your economy.</p></rt>"),
-				 formation, descname().c_str());
-			MessageQueue::add
-				(owner().player_number(),
-				 Message
-				 	(MSG_WAREHOUSE,
-				 	 egbase.get_gametime(),
-				 	 descname(),
-				 	 coords,
-				 	 message));
-			break;
-		} else if
-			(i.current->sender    () == MSG_WAREHOUSE and
-			 i.current->get_coords() == coords)
-			break;
+	log
+		("Message: adding (wh) (%s) %i \n",
+		 type_name(), owner().player_number());
+	char message[2048];
+	snprintf
+		(message, sizeof(message),
+		 _
+		 	("<p font-size=14 font-face=FreeSerif>A new %s was added to your "
+		 	 "economy.</p>"),
+		 descname().c_str());
+	owner().add_message
+		(ref_cast<Game, Editor_Game_Base>(egbase),
+		 create_message
+		 	("warehouse",
+		 	 egbase.get_gametime(), 32 * 60 * 1000,
+		 	 descname(),
+		 	 message));
 }
 
 

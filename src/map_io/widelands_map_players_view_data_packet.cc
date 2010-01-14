@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -149,7 +149,7 @@ void Map_Players_View_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader * const)
+	 Map_Map_Object_Loader &)
 	throw (_wexception)
 {
 	if (skip)
@@ -683,7 +683,7 @@ inline static void write_unseen_immovable
    (file).Write(fs, filename);                                                \
 
 void Map_Players_View_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
 throw (_wexception)
 {
 	fs.EnsureDirectoryExists("player");

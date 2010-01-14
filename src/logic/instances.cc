@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -514,12 +514,12 @@ void Map_Object::Loader::load_finish() {}
  * Save the Map_Object to the given file.
  */
 void Map_Object::save
-	(Editor_Game_Base &, Map_Map_Object_Saver * mos, FileWrite & fw)
+	(Editor_Game_Base &, Map_Map_Object_Saver & mos, FileWrite & fw)
 {
 	fw.Unsigned8(header_Map_Object);
 	fw.Unsigned8(CURRENT_SAVEGAME_VERSION);
 
-	fw.Unsigned32(mos->get_object_file_index(*this));
+	fw.Unsigned32(mos.get_object_file_index(*this));
 }
 
 }

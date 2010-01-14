@@ -1355,22 +1355,22 @@ void Soldier::battle_update(Game & game, State &)
 						 immovable_dest ?
 						 immovable_dest->descr().descname().c_str() : _("no"),
 						 descname().c_str());
-					MessageQueue::add
-						(owner(),
-						 Message
-						 	(_("Game engine"),
-						 	 game.get_gametime(),
+					owner().add_message
+						(game,
+						 *new Message
+						 	("game engine",
+						 	 game.get_gametime(), Forever(),
 						 	 _("Logic error"),
-						 	 Widelands::Coords(get_position()),
-						 	 buffer));
-					MessageQueue::add
-						(opponent.owner(),
-						 Message
-						 	(_("Game engine"),
-						 	 game.get_gametime(),
+						 	 buffer,
+						 	 get_position()));
+					opponent.owner().add_message
+						(game,
+						 *new Message
+						 	("game engine",
+						 	 game.get_gametime(), Forever(),
 						 	 _("Logic error"),
-						 	 Widelands::Coords(get_position()),
-						 	 buffer));
+						 	 buffer,
+						 	 opponent.get_position()));
 					game.gameController()->setDesiredSpeed(0);
 					return pop_task(game);
 				}

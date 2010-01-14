@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -118,7 +118,7 @@ void Route::load_pointers(const LoadData & data, Map_Map_Object_Loader & mol) {
  * Save the route to the given file.
  */
 void Route::save
-	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver * mos)
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	fw.Signed32(get_totalcost());
 	fw.Unsigned16(m_route.size());
@@ -128,8 +128,8 @@ void Route::save
 		 ++idx)
 	{
 		Flag & flag = get_flag(egbase, idx);
-		assert(mos->is_object_known(flag));
-		fw.Unsigned32(mos->get_object_file_index(flag));
+		assert(mos.is_object_known(flag));
+		fw.Unsigned32(mos.get_object_file_index(flag));
 	}
 }
 

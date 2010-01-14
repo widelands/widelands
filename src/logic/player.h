@@ -24,6 +24,7 @@
 #include "building.h"
 #include "editor_game_base.h"
 #include "mapregion.h"
+#include "message_queue.h"
 #include "notification.h"
 #include "rgbcolor.h"
 #include "tribe.h"
@@ -85,6 +86,25 @@ struct Player :
 	~Player();
 
 	void allocate_map();
+
+	MessageQueue const & messages() const {return m_messages;}
+	MessageQueue       & messages()       {return m_messages;}
+
+	/// Adds the message to the queue. Takes ownership of the message. Assumes
+	/// that it has been allocated in a separate memory block (not as a
+	/// component of an array or struct) with operator new, so that it can be
+	/// deallocated with operator delete.
+	Message_Id add_message(Game &, Message &, bool popup = false);
+
+	/// Like add_message, but if there has been a message from the same sender
+	/// in the last timeout milliseconds in a radius r around the coordinates
+	/// of m, the message deallocated instead.
+	Message_Id add_message_with_timeout
+		(Game &, Message &, uint32_t timeout, uint32_t radius);
+
+	void set_message_status(uint32_t const id, Message::Status const status) {
+		messages().set_message_status(id, status);
+	}
 
 	const Editor_Game_Base & egbase() const throw () {return m_egbase;}
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
@@ -506,6 +526,7 @@ private:
 		throw ();
 
 private:
+	MessageQueue           m_messages;
 	AreaWatchers           m_areawatchers;
 
 	Editor_Game_Base     & m_egbase;

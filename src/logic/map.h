@@ -88,7 +88,7 @@ struct FindImmovable;
 FindImmovable const & FindImmovableAlwaysTrue();
 
 struct FindBob {
-	// Return true if this immovable should be returned by find_bobs()
+	//  Return true if this bob should be returned by find_bobs.
 	virtual bool accept(Bob *) const = 0;
 	virtual ~FindBob() {}  // make gcc shut up
 };

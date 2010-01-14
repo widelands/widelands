@@ -26,9 +26,9 @@ namespace Widelands {
 
 struct Map_Immovabledata_Data_Packet : public Map_Data_Packet {
 	virtual void Read
-		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader * = 0)
+		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &)
 		throw (_wexception);
-	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver * = 0)
+	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &)
 		throw (_wexception) __attribute__ ((noreturn));
 };
 

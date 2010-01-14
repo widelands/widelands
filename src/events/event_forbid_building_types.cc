@@ -30,10 +30,13 @@
 namespace Widelands {
 
 void Event_Forbid_Building_Types::Write
-	(Section & s, Editor_Game_Base & egbase) const
+	(Section                    & s,
+	 Editor_Game_Base     const & egbase,
+	 Map_Map_Object_Saver const & mos)
+	const
 {
 	s.set_string("type",  "forbid_building_types");
-	Event_Player_Building_Types::Write(s, egbase);
+	Event_Player_Building_Types::Write(s, egbase, mos);
 }
 
 
@@ -44,7 +47,7 @@ char const * Event_Forbid_Building_Types::action_name() const {
 
 Event::State Event_Forbid_Building_Types::run(Game & game) {
 	container_iterate_const(Building_Types, m_building_types, i)
-		game.player(m_player_number).allow_building_type(*i.current, false);
+		game.player(m_player).allow_building_type(*i.current, false);
 	return m_state = DONE;
 }
 

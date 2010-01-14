@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2009-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,14 +74,14 @@ Event_Set_Timer_Option_Menu::Timer::Timer
 
 
 void Event_Set_Timer_Option_Menu::OK::clicked() {
-	Event_Set_Timer_Option_Menu & parent =
+	Event_Set_Timer_Option_Menu & menu =
 		ref_cast<Event_Set_Timer_Option_Menu, UI::Panel>(*get_parent());
-	std::string const & name = parent.name.text();
+	std::string const & name = menu.name.text();
 	if (name.size()) {
 		if
 			(Widelands::Event * const registered_event =
-			 	parent.eia().egbase().map().mem()[name])
-			if (registered_event != & parent.m_event) {
+			 	menu.eia().egbase().map().mem()[name])
+			if (registered_event != & menu.m_event) {
 				char buffer[256];
 				snprintf
 					(buffer, sizeof(buffer),
@@ -90,16 +90,16 @@ void Event_Set_Timer_Option_Menu::OK::clicked() {
 					 	 "Choose another name."),
 					 name.c_str());
 				UI::WLMessageBox mb
-					(parent.get_parent(),
+					(menu.get_parent(),
 					 _("Name in use"), buffer,
 					 UI::WLMessageBox::OK);
 				mb.run();
 				return;
 			}
-		parent.m_event.set_name(name);
+		menu.m_event.set_name(name);
 	}
-	parent.m_event.set_duration(parent.duration.time());
-	parent.m_event.set_trigger(&parent.timer.get_selected());
-	parent.eia().set_need_save(true);
-	parent.end_modal(1);
+	menu.m_event.set_duration(menu.duration.time());
+	menu.m_event.set_trigger(&menu.timer.get_selected());
+	menu.eia().set_need_save(true);
+	menu.end_modal(1);
 }

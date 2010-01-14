@@ -40,7 +40,7 @@ void Map_Flag_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader * const ol)
+	 Map_Map_Object_Loader &       mol)
 throw (_wexception)
 {
 	if (skip)
@@ -101,7 +101,7 @@ throw (_wexception)
 						//  packet. We always create this, no matter what skip is
 						//  since we have to read the data packets. We delete this
 						//  object later again, if it is not wanted.
-						ol->register_object<Flag>
+						mol.register_object<Flag>
 							(serial,
 							 *new Flag
 							 	(ref_cast<Game, Editor_Game_Base>(egbase),
@@ -123,9 +123,7 @@ throw (_wexception)
 
 
 void Map_Flag_Data_Packet::Write
-	(FileSystem           &       fs,
-	 Editor_Game_Base     &       egbase,
-	 Map_Map_Object_Saver * const os)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -141,12 +139,12 @@ throw (_wexception)
 		if (upcast(Flag const, flag, field->get_immovable())) {
 			//  Flags can't life on multiply positions, therefore this flag
 			//  shouldn't be registered.
-			assert(!os->is_object_known(*flag));
+			assert(!mos.is_object_known(*flag));
 			assert(field->get_owned_by() == flag->owner().player_number());
 
 			fw.Unsigned8(1);
 			fw.Unsigned8(flag->owner().player_number());
-			fw.Unsigned32(os->register_object(*flag));
+			fw.Unsigned32(mos.register_object(*flag));
 		} else //  no existence, no owner
 			fw.Unsigned8(0);
 

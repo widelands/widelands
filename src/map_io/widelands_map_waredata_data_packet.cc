@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ void Map_Waredata_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
-	 Map_Map_Object_Loader * const ol)
+	 Map_Map_Object_Loader &       mol)
 throw (_wexception)
 {
 	if (skip)
@@ -64,12 +64,12 @@ throw (_wexception)
 					break;
 				}
 				try {
-					WareInstance & ware = ol->get<WareInstance>(serial);
+					WareInstance & ware = mol.get<WareInstance>(serial);
 					ware.m_economy = 0;
 					uint32_t     const location_serial = fr.Unsigned32();
 					uint32_t     const index           = fr.Unsigned32();
 					try {
-						Map_Object & location = ol->get<Map_Object>(location_serial);
+						Map_Object & location = mol.get<Map_Object>(location_serial);
 
 						if (upcast(PlayerImmovable, player_immovable, &location)) {
 							if
@@ -113,7 +113,7 @@ throw (_wexception)
 						if (uint32_t const nextstep_serial = fr.Unsigned32())
 							try {
 								ware.m_transfer_nextstep =
-									&ol->get<PlayerImmovable>(nextstep_serial);
+									&mol.get<PlayerImmovable>(nextstep_serial);
 							} catch (_wexception const & e) {
 								throw game_data_error
 									("nextstep %u: %s", nextstep_serial, e.what());
@@ -129,7 +129,7 @@ throw (_wexception)
 						throw game_data_error
 							("location %u: %s", location_serial, e.what());
 					}
-					ol->mark_object_as_loaded(&ware);
+					mol.mark_object_as_loaded(ware);
 				} catch (_wexception const & e) {
 					throw game_data_error(_("item %u: %s"), serial, e.what());
 				}
@@ -140,12 +140,12 @@ throw (_wexception)
 			for (; not fr.EndOfFile();) {
 				Serial const serial = fr.Unsigned32();
 				try {
-					WareInstance & ware = ol->get<WareInstance>(serial);
+					WareInstance & ware = mol.get<WareInstance>(serial);
 					ware.m_economy = 0;
 					uint32_t     const location_serial = fr.Unsigned32();
 					char const * const type_name       = fr.CString   ();
 					try {
-						Map_Object & location = ol->get<Map_Object>(location_serial);
+						Map_Object & location = mol.get<Map_Object>(location_serial);
 
 						if (upcast(PlayerImmovable, player_immovable, &location)) {
 							if
@@ -177,7 +177,7 @@ throw (_wexception)
 						if (uint32_t const nextstep_serial = fr.Unsigned32())
 							try {
 								ware.m_transfer_nextstep =
-									&ol->get<PlayerImmovable>(nextstep_serial);
+									&mol.get<PlayerImmovable>(nextstep_serial);
 							} catch (_wexception const & e) {
 								throw game_data_error
 									("nextstep %u: %s", nextstep_serial, e.what());
@@ -193,7 +193,7 @@ throw (_wexception)
 						throw game_data_error
 							("location %u: %s", location_serial, e.what());
 					}
-					ol->mark_object_as_loaded(&ware);
+					mol.mark_object_as_loaded(ware);
 				} catch (_wexception const & e) {
 					throw game_data_error(_("item %u: %s"), serial, e.what());
 				}
@@ -208,9 +208,7 @@ throw (_wexception)
 
 
 void Map_Waredata_Data_Packet::Write
-	(FileSystem           &       fs,
-	 Editor_Game_Base     &       egbase,
-	 Map_Map_Object_Saver * const os)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 throw (_wexception)
 {
 	FileWrite fw;
@@ -226,8 +224,8 @@ throw (_wexception)
 		// First, check for Flags
 		if (upcast(Flag const, fl, field->get_immovable()))
 			for (int32_t i = 0; i < fl->m_item_filled; ++i) {
-				assert(os->is_object_known(*fl->m_items[i].item));
-				write_ware(fw, egbase, os, *fl->m_items[i].item);
+				assert(mos.is_object_known(*fl->m_items[i].item));
+				write_ware(fw, egbase, mos, *fl->m_items[i].item);
 			}
 
 		//  Now, check for workers.
@@ -237,8 +235,8 @@ throw (_wexception)
 					(WareInstance const * const ware =
 					 	worker->get_carried_item(egbase))
 				{
-					assert(os->is_object_known(*ware));
-					write_ware(fw, egbase, os, *ware);
+					assert(mos.is_object_known(*ware));
+					write_ware(fw, egbase, mos, *ware);
 				}
 	}
 
@@ -251,26 +249,26 @@ throw (_wexception)
 void Map_Waredata_Data_Packet::write_ware
 	(FileWrite            & fw,
 	 Editor_Game_Base     & egbase,
-	 Map_Map_Object_Saver * os,
+	 Map_Map_Object_Saver & mos,
 	 WareInstance   const & ware)
 {
-	fw.Unsigned32(os->get_object_file_index(ware));
+	fw.Unsigned32(mos.get_object_file_index(ware));
 
 	if (Map_Object const * const obj = ware.m_location.get(egbase)) {
-		assert(os->is_object_known(*obj));
-		fw.Unsigned32(os->get_object_file_index(*obj));
+		assert(mos.is_object_known(*obj));
+		fw.Unsigned32(mos.get_object_file_index(*obj));
 	} else
 		fw.Unsigned32(0);
 
 	fw.CString(ware.descr().name());
 
 	if (Map_Object const * const obj = ware.m_transfer_nextstep.get(egbase)) {
-		assert(os->is_object_known(*obj));
-		fw.Unsigned32(os->get_object_file_index(*obj));
+		assert(mos.is_object_known(*obj));
+		fw.Unsigned32(mos.get_object_file_index(*obj));
 	} else
 		fw.Unsigned32(0);
 
-	os->mark_object_as_saved(ware);
+	mos.mark_object_as_saved(ware);
 }
 
 }

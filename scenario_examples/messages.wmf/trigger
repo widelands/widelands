@@ -1,0 +1,15 @@
+[global]
+packet_version=2
+
+
+[Begin]
+type=time
+version=2
+time=0
+
+
+[Secret Message Read]
+type=message_is_read_or_archived
+
+[Secret Message Timeout]
+type=time
