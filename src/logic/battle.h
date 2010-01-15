@@ -87,6 +87,12 @@ private:
 	uint8_t m_readyflags;
 
 	/**
+	 * Damage pending to apply. Damage is applied at end of round so animations
+	 * can show current action.
+	 */
+	uint32_t m_damage;
+
+	/**
 	 * \c true if the first soldier is the next to strike.
 	 */
 	bool m_first_strikes;

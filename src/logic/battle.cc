@@ -43,6 +43,7 @@ Battle::Battle ()
 	m_first(0),
 	m_second(0),
 	m_readyflags(0),
+	m_damage(0),
 	m_first_strikes(true)
 {}
 
@@ -51,6 +52,7 @@ Battle::Battle(Game & game, Soldier & First, Soldier & Second) :
 	m_first        (&First),
 	m_second       (&Second),
 	m_readyflags   (0),
+	m_damage       (0),
 	m_first_strikes(true)
 {
 	assert(First.get_owner() != Second.get_owner());
@@ -161,6 +163,16 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	bool const bothReadyToFight = ((this_soldier_is | m_readyflags) == 3) and
 		(!roundFighted);
 	std::string what_anim;
+
+	// Apply pending damage
+	if (m_damage and oneReadyToFight) {
+		// Current attacker is last defender, so damage goes to current attacker
+		if (m_first_strikes)
+			m_first ->damage(m_damage);
+		else
+			m_second->damage(m_damage);
+		m_damage = 0;
+	}
 
 	if (soldier.get_current_hitpoints() < 1) {
 		molog(_("[battle] soldier %u loose battle\n"), soldier.serial());
@@ -281,6 +293,8 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 
 void Battle::calculateRound(Game & game)
 {
+	assert(!m_damage);
+
 	Soldier * attacker;
 	Soldier * defender;
 
@@ -305,7 +319,7 @@ void Battle::calculateRound(Game & game)
 			(game.logic_rand()
 			 %
 			 (1 + attacker->get_max_attack() - attacker->get_min_attack()));
-		defender->damage(attack - (attack * defender->get_defense()) / 100);
+		m_damage = attack - (attack * defender->get_defense()) / 100;
 	}
 	else {
 		// Defender evaded
@@ -322,7 +336,7 @@ Load/Save support
 ==============================
 */
 
-#define BATTLE_SAVEGAME_VERSION 1
+#define BATTLE_SAVEGAME_VERSION 2
 
 void Battle::Loader::load(FileRead & fr, uint8_t const version)
 {
@@ -330,12 +344,15 @@ void Battle::Loader::load(FileRead & fr, uint8_t const version)
 
 	Battle & battle = get<Battle>();
 
-	battle.m_creationtime = fr.Signed32();
-	battle.m_readyflags = fr.Unsigned8();
+	battle.m_creationtime  = fr.Signed32();
+	battle.m_readyflags    = fr.Unsigned8();
 	battle.m_first_strikes = fr.Unsigned8();
 
-	m_first = fr.Unsigned32();
-	m_second = fr.Unsigned32();
+	if (version == BATTLE_SAVEGAME_VERSION)
+		battle.m_damage     = fr.Unsigned32();
+
+	m_first                = fr.Unsigned32();
+	m_second               = fr.Unsigned32();
 }
 
 void Battle::Loader::load_pointers()
@@ -371,6 +388,7 @@ void Battle::save
 	fw.Signed32(m_creationtime);
 	fw.Unsigned8(m_readyflags);
 	fw.Unsigned8(m_first_strikes);
+	fw.Unsigned32(m_damage);
 
 	// And now, the serials of the soldiers !
 	fw.Unsigned32(m_first  ? mos.get_object_file_index(*m_first)  : 0);
@@ -387,7 +405,7 @@ Map_Object::Loader * Battle::load
 		// Header has been peeled away by caller
 
 		uint8_t const version = fr.Unsigned8();
-		if (version == BATTLE_SAVEGAME_VERSION) {
+		if (version <= BATTLE_SAVEGAME_VERSION) {
 			loader->init(egbase, mol, *new Battle);
 			loader->load(fr, version);
 		} else
