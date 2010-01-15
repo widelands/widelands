@@ -22,6 +22,7 @@
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
+#include <libintl.h>
 
 #include "logic/building.h"
 #include "building_statistics_menu.h"
