@@ -20,9 +20,8 @@ msgid "These shields are used by the best soldiers of the Atlanteans."
 msgstr "Diese Schilde werden nur von den besten Soldaten der Atlanter benutzt."
 
 #: ../../../tribes/atlanteans/armoursmith/conf:1
-#, fuzzy
 msgid "Produces armour for the soldiers."
-msgstr "Stellt Stoffe für Gebäude, Schiffe und Soldaten her"
+msgstr "Stellt Rüstung für Soldaten her."
 
 #: ../../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
@@ -61,13 +60,12 @@ msgid "Harvest blackroot"
 msgstr "Schwarzwurzelernte"
 
 #: ../../../tribes/atlanteans/blackroot_farmer/conf:1
-#, fuzzy
 msgid "Plants and harvests blackroot."
-msgstr "Schwarzwurzelernte"
+msgstr "Planzt und erntet Schwarzwurzeln."
 
 #: ../../../tribes/atlanteans/blackrootflour/conf:1
 msgid "Blackroot Flour is produced out of blackroots and is one of three parts of the atlantian bread."
-msgstr "Schwarzwurzelmehl wird aus Schwarzwurzel hergestellt und ist eine von drei Zutaten des atlantanischen Brotes"
+msgstr "Schwarzwurzelmehl wird aus Schwarzwurzel hergestellt und ist eine von drei Zutaten des atlantanischen Brotes."
 
 #: ../../../tribes/atlanteans/bread/conf:1
 msgid "This tasty bread is made out of corn- and blackrootflour and is one part of miners meal."
@@ -75,7 +73,7 @@ msgstr "Dieses leckere Brot wird aus Mais- und Schwarzwurzelmehl hergestellt und
 
 #: ../../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
-msgstr "Große Eimer für den Fischzüchter - produziert vom Werkzeugmacher"
+msgstr "Große Eimer für den Fischzüchter - produziert vom Werkzeugmacher."
 
 #: ../../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to create a new building."
@@ -83,7 +81,7 @@ msgstr "Arbeitet an Baustellen um neue Gebäude zu errichten."
 
 #: ../../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
-msgstr "Verbrennt Kohle"
+msgstr "Verbrennt Kohle."
 
 #: ../../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
@@ -127,7 +125,7 @@ msgstr "junges Schwarzwurzelfeld"
 
 #: ../../../tribes/atlanteans/conf:43
 msgid "Blackrootfield tiny"
-msgstr "frisch gesätes Schwarzwurzel"
+msgstr "frisch gesätes Schwarzwurzelfeld"
 
 #: ../../../tribes/atlanteans/conf:44
 msgid "Cornfield"
@@ -655,7 +653,7 @@ msgstr "Erkunderhütte"
 
 #: ../../../tribes/atlanteans/conf:202
 msgid "Headquarters medium"
-msgstr "norm. Hauptquartier"
+msgstr "normales Hauptquartier"
 
 #: ../../../tribes/atlanteans/conf:203
 msgid "Castle village"
@@ -683,7 +681,7 @@ msgstr "Diamantenabbau"
 
 #: ../../../tribes/atlanteans/diamond/conf:1
 msgid "This wonderful diamonds are used for some exclusive buildings and tools."
-msgstr "Diese wundervollen Diamanten werden beim Bau einiger, exclusiver Gebäude und Werkzeuge verwandt."
+msgstr "Diese wundervollen Diamanten werden beim Bau einiger, exklusiver Gebäude und Werkzeuge verwandt."
 
 #: ../../../tribes/atlanteans/double_trident/conf:1
 msgid "Already one of the best tridents of the Atlanteans. Only used by very good fighters."
@@ -755,11 +753,11 @@ msgstr "Das Fischernetz wird vom Fischer benutzt und vom Werkzeugmacher hergeste
 
 #: ../../../tribes/atlanteans/forester/conf:1
 msgid "Plants trees."
-msgstr "Pflanzt Bäume"
+msgstr "Pflanzt Bäume."
 
 #: ../../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr "Sucht Ressourcen zum minen."
+msgstr "Sucht Ressourcen zum schürfen."
 
 #: ../../../tribes/atlanteans/gold/conf:1
 msgid "Gold is one of the most valuable materials. Only important things are garnished with it."
@@ -771,11 +769,11 @@ msgstr "Ein spezieller Wappenrock für atlanter Soldaten."
 
 #: ../../../tribes/atlanteans/goldore/conf:1
 msgid "This is the yellow gold ore."
-msgstr "Dies ist gelbes Golderz"
+msgstr "Dies ist gelbes Golderz."
 
 #: ../../../tribes/atlanteans/goldyarn/conf:1
 msgid "This yarn, made of gold, is used for weaving exclusive cloth."
-msgstr "Dieses Garn, das aus Gold hergestellt wird, wird zum weben exclusiver Kleidung verwandt."
+msgstr "Dieses Garn, das aus Gold hergestellt wird, wird zum weben exklusiver Kleidung verwandt."
 
 #: ../../../tribes/atlanteans/hammer/conf:1
 msgid "The hammer is an essential tool. It is needed by the geologist, the builder and all smiths. Make sure you always got some in reserve! It is produced by the toolsmith."
@@ -953,7 +951,7 @@ msgstr "Verhüttet Eisenerz"
 
 #: ../../../tribes/atlanteans/smelting_works/conf:24
 msgid "Smelt gold"
-msgstr "Verhüttet Golderz."
+msgstr "Verhüttet Golderz"
 
 #: ../../../tribes/atlanteans/smoked_fish/conf:1
 msgid "This is smoked fish - As no Atlantid likes raw fish, smoking is the most common way to make it eatable."
@@ -964,9 +962,8 @@ msgid "This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat
 msgstr "Dieses Fleisch ist geräuchert - da die Atlanter kein rohes Fleisch mögen, ist dies ein beliebter Weg um das Fleisch genießbar zu machen."
 
 #: ../../../tribes/atlanteans/smoker/conf:1
-#, fuzzy
 msgid "Smokes meat and fish."
-msgstr "Räucherfisch"
+msgstr "Räuchert Fleisch und Fisch."
 
 #: ../../../tribes/atlanteans/smokery/conf:25
 msgid "Smoke meat"
@@ -1077,17 +1074,16 @@ msgid "Water is the most essential essence for life! This water is used in many 
 msgstr "Wasser ist der Hauptbestandteil des Lebens! Es wird für viele Dinge, wie zum Beispiel das Backen von Brot, verwandt."
 
 #: ../../../tribes/atlanteans/weaponsmith/conf:1
-#, fuzzy
 msgid "Produces weapons for the soldiers."
-msgstr "Stellt Stoffe für Gebäude, Schiffe und Soldaten her"
+msgstr "Stellt Waffen für Soldaten her."
 
 #: ../../../tribes/atlanteans/weaponsmithy/conf:30
 msgid "Produce light trident"
-msgstr "Produziert Leichter Dreizack"
+msgstr "Produziert leichten Dreizack"
 
 #: ../../../tribes/atlanteans/weaponsmithy/conf:31
 msgid "Produce long trident"
-msgstr "Produziert Langer Dreizack"
+msgstr "Produziert langen Dreizack"
 
 #: ../../../tribes/atlanteans/weaponsmithy/conf:32
 msgid "Produce steel trident"
@@ -1111,7 +1107,7 @@ msgstr "Produziert Spinnenstoff"
 
 #: ../../../tribes/atlanteans/weaving-mill/conf:20
 msgid "Produce tabard"
-msgstr "Produziert  Wappenrock"
+msgstr "Produziert Wappenrock"
 
 #: ../../../tribes/atlanteans/weaving-mill/conf:21
 msgid "Produce golden tabard"
@@ -1119,7 +1115,7 @@ msgstr "Produziert goldener Wappenrock"
 
 #: ../../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
-msgstr "Fällt Bäume"
+msgstr "Fällt Bäume."
 
 #~ msgid "Toolsmith's Shop"
 #~ msgstr "Werkzeugmacher"

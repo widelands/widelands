@@ -75,13 +75,12 @@ msgstr "Produziert Mahlzeit"
 
 #: ../../../tribes/barbarians/blacksmith/conf:1
 #: ../../../tribes/barbarians/master-blacksmith/conf:1
-#, fuzzy
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr "Produziert Stoffe für Schiffe und Krieger."
+msgstr "Produziert Waffen für Soldaten und Werkzeuge für Arbeiter."
 
 #: ../../../tribes/barbarians/blackwood/conf:1
 msgid "Fire-hardened wood, hard as iron and can not burn, used for military buildings."
-msgstr "Feuergehärtetes Holz, hart wie Eisen und nicht brennbar. Daher wird es besonders für militärische Gebäude benutzt."
+msgstr "Feuergehärtetes Holz ist hart wie Eisen und nicht brennbar. Daher wird es besonders für militärische Gebäude benutzt."
 
 #: ../../../tribes/barbarians/brewer/conf:1
 #: ../../../tribes/barbarians/master-brewer/conf:1
@@ -730,7 +729,7 @@ msgstr "Erkunderhütte"
 
 #: ../../../tribes/barbarians/conf:218
 msgid "Headquarters medium"
-msgstr "norm. Hauptquartier"
+msgstr "normales Hauptquartier"
 
 #: ../../../tribes/barbarians/conf:219
 msgid "Citadel village"
@@ -738,7 +737,7 @@ msgstr "Zitadellen Dorf"
 
 #: ../../../tribes/barbarians/farm/conf:14
 msgid "Plant wheat"
-msgstr "Pflanzt Weizen."
+msgstr "Pflanzt Weizen"
 
 #: ../../../tribes/barbarians/farm/conf:16
 msgid "Harvest wheat"
@@ -750,7 +749,7 @@ msgstr "Bestellt Felder."
 
 #: ../../../tribes/barbarians/ferner/conf:1
 msgid "Grows flax and thatch reed."
-msgstr "Lässt Flax und Reet wachsen"
+msgstr "Lässt Flachs und Reet wachsen."
 
 #: ../../../tribes/barbarians/fernery/conf:13
 msgid "Plant flax"
@@ -778,7 +777,7 @@ msgstr "Neben Brot und Fleisch essen Barbaren auch gerne etwas Fisch."
 
 #: ../../../tribes/barbarians/fisher/conf:1
 msgid "Gets fish out of the sea."
-msgstr "Holt Fische aus dem Wasser"
+msgstr "Holt Fische aus dem Wasser."
 
 #: ../../../tribes/barbarians/fishing_rod/conf:1
 msgid "Fishing rods are needed by barbarian fishers, to catch fish."
@@ -869,11 +868,11 @@ msgstr "Wie sollten unsere Köche Mahlzeiten oder Rationen herstellen, wenn sie 
 
 #: ../../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kilm."
-msgstr "Brennt Kalk in der Kalkbrennerei"
+msgstr "Brennt Kalk in der Kalkbrennerei."
 
 #: ../../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
-msgstr "Fällt Bäume"
+msgstr "Fällt Bäume."
 
 #: ../../../tribes/barbarians/mask/conf:1
 msgid "An enhanced version of the helmet."
@@ -882,9 +881,8 @@ msgstr "Eine verbesserte Version des Helms."
 #: ../../../tribes/barbarians/master-miner/conf:1
 #: ../../../tribes/barbarians/chief-miner/conf:1
 #: ../../../tribes/barbarians/miner/conf:1
-#, fuzzy
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr "Arbeitet tief in den Minen um Kohle, Eisen und Gold zu schürfen."
+msgstr "Arbeitet tief in den Minen um Kohle, Eisen oder Gold zu schürfen."
 
 #: ../../../tribes/barbarians/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
@@ -940,7 +938,7 @@ msgstr "Die barbarischen Bäcker sind für ihr flaches, leckeres Fladenbrot weit
 
 #: ../../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
-msgstr "Pflanzt Bäume"
+msgstr "Pflanzt Bäume."
 
 #: ../../../tribes/barbarians/ration/conf:1
 msgid "A small bite to keep miners strong and working."
@@ -968,7 +966,7 @@ msgstr "Die Schaufel wird für den Umgang mit Pflanzen benötigt, daher wird sie
 
 #: ../../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
-msgstr "Verhüttet Eisenerz"
+msgstr "Verhüttet Eisenerz."
 
 #: ../../../tribes/barbarians/smelting_works/conf:24
 msgid "Smelt iron"
@@ -1018,7 +1016,7 @@ msgstr "Arbeit"
 
 #: ../../../tribes/barbarians/snack/conf:1
 msgid "A bit bigger, for the advanced miners. They will need a big morsel."
-msgstr "Ein bischen größer als die Ration, da erfahrene Bergarbeiter auch etwas mehr verlangen."
+msgstr "Ein wenig größer als die Ration, da erfahrene Bergarbeiter auch etwas mehr verlangen."
 
 #: ../../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -1079,7 +1077,7 @@ msgstr "Verbessert Angriff des Soldaten 3 (nur für Abwärtskompatiblität mit S
 
 #: ../../../tribes/barbarians/trainingscamp/conf:45
 msgid "Upgrade soldier attack 4"
-msgstr "Verbessert Angriff des Soldaten 5"
+msgstr "Verbessert Angriff des Soldaten 4"
 
 #: ../../../tribes/barbarians/trainingscamp/conf:46
 msgid "Upgrade soldier attack 4 (only for compatibility with old savegames (build13))"
