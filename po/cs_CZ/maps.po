@@ -1,15 +1,13 @@
 # Widelands po/cs_CZ/maps.po
-# Copyright (C) 2009 Widelands Development Team
-# Prometheus <mmatej@yahoo.com>, ?.
-# Martin Večeřa <ja@marvec.org>, ?.
+# Copyright (C) 2010 Widelands Development Team
 # Markus7cz <markus7cz@gmail.com>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4530\n"
+"Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-09-23 18:30+0000\n"
-"PO-Revision-Date: 2009-09-23 22:06+0100\n"
+"POT-Creation-Date: 2010-01-05 18:17+0000\n"
+"PO-Revision-Date: 2010-01-09 23:00+0100\n"
 "Last-Translator: Markus7cz <markus7cz@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -34,25 +32,45 @@ msgstr "Císařství - Měsíce ve vyhnanství"
 msgid "Six month ago, Lutius - a young general of the Empire - was send with 150 soldiers at the frontier among the northern forests, where Barbarian-tribes and official Empire-land are crossing. His task was to defend the Empire-land. First everything was calm, he even talked to few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel saver and his army begun to draw off the attention on they potential enemy - That was their fault. At one night in march his unprepared army was attacked by 100 barbarian footmen and was totally scattered. Only with pure life he and a handful of soldiers survived."
 msgstr "Před šesti měsíci byl Lucius - mladý generál císařské armády - vyslán se 150 vojáky do lesů na severní hranici, kde končí území císařství a začíná území ovládané barbarskými kmeny. Jeho úkolem bylo bránit hranice císařství. Zpočátku bylo vše klidné, dokonce mluvil s několika barbarskými dětmi a přemýšlel o životě vedle těchto, sice primitivních, ale přesto mírumilovných sousedů. Začal se cítit v bezpečí a jeho armáda polevila v ostražitosti a přestala hlídat potenciálního nepřítele. To se ukázalo jako osudová chyba. Jedné březnové noci stovka barbarů bez varování zaútočila na jeho nepřipravenou armádu a zcela ji rozprášila. Lucius vyvázl pouze s holým životem a s hrstkou věrných vojáků."
 
-#: ../../campaigns/cconfig:51
+#: ../../campaigns/cconfig:36
+msgid "Atlanteans - the new rise"
+msgstr "Atlantiďané - nový vzestup"
+
+#: ../../campaigns/cconfig:39
+msgid "Some descriptive texts..."
+msgstr "Nějaké popisné texty..."
+
+#: ../../campaigns/cconfig:57
 msgid "Tutorial1 - Eyes in the Dark"
 msgstr "Trénink 1 - Oči v temnotě"
 
-#: ../../campaigns/cconfig:56
+#: ../../campaigns/cconfig:62
 msgid "Tutorial2 - A Place to call Home"
 msgstr "Trénink 2 - Budování domova"
 
-#: ../../campaigns/cconfig:61
+#: ../../campaigns/cconfig:67
 msgid "Tutorial3 - This land is our land"
 msgstr "Trénink 3 - Tato země je naše"
 
-#: ../../campaigns/cconfig:68
+#: ../../campaigns/cconfig:74
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
 msgstr "Císařství - Trénink 1 - Pobřeží Malac' Mor"
 
-#: ../../campaigns/cconfig:73
+#: ../../campaigns/cconfig:79
 msgid "Empire Tutorial2 - An outpost for exile"
 msgstr "Císařství - Trénink 2 - Základna v exilu"
+
+#: ../../campaigns/cconfig:84
+msgid "01 - From nemesis to genesis"
+msgstr "01 - Ze záhuby ke zrodu"
+
+#: ../../maps/Atoll.wmf/elemental:7
+msgid "Atoll"
+msgstr "Atol"
+
+#: ../../maps/Atoll.wmf/elemental:9
+msgid "Who will be the real King of the big atoll?"
+msgstr "Kdo se stane pravým vládcem mohutného atolu?"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -108,8 +126,8 @@ msgid "Finnish Lakes"
 msgstr "Finská jezera"
 
 #: ../../maps/Finlakes.wmf/elemental:11
-msgid "These are the beautiful finnish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
-msgstr "Tohle je krajina Finských jezer, plná jezerních ploch, řek, pravěkých hvozdů a hor. Je jen na tobě, jak si jimi najdeš cestu."
+msgid "These are the beautiful Finnish lands, which are of lakes, rivers, ancient forests and mountains. It is up to you, to find a way through these lands."
+msgstr "Toto je nádherná finská krajina, plná jezerních ploch, řek, prastarých hvozdů a hor. Je jen na tobě, jak si jimi najdeš cestu."
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
@@ -132,7 +150,7 @@ msgid "Four Mountains"
 msgstr "Čtyři hory"
 
 #: ../../maps/Four Mountains.wmf/elemental:11
-msgid "Each tribe is surrounded by four mighty mounains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional watersources. Hint 3: Each mountain contains only one resource."
+msgid "Each tribe is surrounded by four mighty mountains. Who will first conquer them and claim the resources for his own tribe? Hint I: Water can be found along the river. Hint II: Snowmen mark additional water sources. Hint 3: Each mountain contains only one resource."
 msgstr "Každý kmen je obklopen čtyřmi vysokými horami. Kdo je pokoří jako první a získá z nich nerostné bohatství pro svůj kmen? Nápověda I: Vodu lze nalézt v okolí řeky. Nápověda II: Sněhuláci označují další vodní zdroje. Nápověda III: Každá hora ukrývá pouze jeden nerost."
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
@@ -276,7 +294,7 @@ msgid "The pass through the mountains"
 msgstr "Horský průsmyk"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
-msgid "In this mountainous region two princes have settled. Now they are expanding their terretories unaware of the fact that they are not alone!"
+msgid "In this mountainous region two princes have settled. Now they are expanding their territories unaware of the fact that they are not alone!"
 msgstr "Dva princové se usadili na různých stranách tohoto pohoří. Nyní rozšiřují své země a ani jeden z nich netuší, že v této krajině nejsou sami!"
 
 #: ../../maps/Three Warriors.wmf/elemental:9
