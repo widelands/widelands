@@ -85,7 +85,7 @@ msgstr "Feuergehärtetes Holz ist hart wie Eisen und nicht brennbar. Daher wird 
 #: ../../../tribes/barbarians/brewer/conf:1
 #: ../../../tribes/barbarians/master-brewer/conf:1
 msgid "Produces the finest ales to keep warriors strong and happy in training."
-msgstr "Produziert das beste Ale um die Soldaten beim Training zu versorgen."
+msgstr "Produziert das beste Ale um die Soldaten bei ihrer Ausbildung zu versorgen."
 
 #: ../../../tribes/barbarians/broadaxe/conf:1
 msgid "Warriors with a fundamental fighting knowledge gain a broad axe. It is produced in the axe factory."
@@ -1036,7 +1036,7 @@ msgstr "Reet wird verwendet, um die Dächer der größeren Gebäude der Barbaren
 
 #: ../../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr "Trainiert die Soldaten."
+msgstr "Bildet Soldaten aus."
 
 #: ../../../tribes/barbarians/trainingscamp/conf:36
 #: ../../../tribes/barbarians/battlearena/conf:25

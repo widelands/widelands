@@ -1525,7 +1525,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:830
 #, c-format
 msgid "trainingsite: %s"
-msgstr "Trainingslager: %s"
+msgstr "Ausbildungslager: %s"
 
 #: ../../src/map_io/widelands_map_heights_data_packet.cc:56
 #, c-format
@@ -3654,7 +3654,7 @@ msgstr "Zielwerte setzen: %s"
 #: ../../src/logic/playercommand.cc:851
 #, c-format
 msgid "change training options: %s"
-msgstr "Trainingsoptionen verändern: %s"
+msgstr "Ausbildungsoptionen verändern: %s"
 
 #: ../../src/logic/playercommand.cc:915
 #, c-format
