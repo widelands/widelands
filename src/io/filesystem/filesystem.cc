@@ -243,15 +243,13 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 		components.erase(components.begin());
 		FS_Tokenize(GetHomedir(), m_filesep,
 			std::inserter(components, components.begin()));
-		absolute = true;
 	}
 
 	//make relative paths absolute (so that "../../foo" can work)
-	if (!absolute) {
+	else if (!absolute) {
 		FS_Tokenize
 			(m_root.empty() ? getWorkingDirectory() : m_root, m_filesep,
 			std::inserter(components, components.begin()));
-		absolute = true;
 	}
 
 	//clean up the path
@@ -277,17 +275,12 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	std::string canonpath;
 	canonpath.reserve(path.length());
 #ifndef WIN32
-	if (!absolute)
-		canonpath = ".";
-
 	for (i = components.begin(); i != components.end(); ++i)
 	{
 		canonpath.push_back('/');
 		canonpath += *i;
 	}
 #else
-	canonpath = absolute ? "" : ".\\";
-
 	for (i = components.begin(); i != components.end(); ++i)
 		canonpath += *i + "\\";
 
