@@ -45,6 +45,11 @@ class LuaScriptNotExistingError : public LuaError {
 		LuaScriptNotExistingError(std::string name) :
 			LuaError("The script '" + name + "' was not found!") {}
 };
+class LuaScriptNotExistingError : public LuaError {
+	public:
+		LuaScriptNotExistingError(std::string name) :
+			LuaError("The script '" + name + "' was not found!") {}
+};
 
 /**
  * Easy handling of LuaCoroutines

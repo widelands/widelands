@@ -21,8 +21,9 @@
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "profile/profile.h"
 #include "logic/world.h"
+#include "profile/profile.h"
+#include "scripting/scripting.h"
 
 namespace Widelands {
 

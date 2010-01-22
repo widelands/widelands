@@ -162,6 +162,10 @@ void LuaInterface_Impl::run_script(std::string ns, std::string name) {
 	return interpret_string(m_scripts[ns][name]);
 }
 
+LuaState * LuaInterface_Impl::run_script(std::string ns, std::string name) {
+	return interpret_string(m_scripts[ns][name]);
+}
+
 /*
 ============================================
        Global functions

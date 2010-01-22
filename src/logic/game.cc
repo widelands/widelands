@@ -485,6 +485,14 @@ bool Game::run
 		enqueue_command
 			(new Cmd_CheckEventChain(get_gametime(), static_cast<uint16_t>(-1)));
 
+		// Run the init script, if the map provides on.
+		// TODO: SirVer, Lua: Lua scripts should be run by a new Cmd, so that
+		// TOOD: SirVer, Lua: they also work over the network
+		try {
+			lua().run_script("map", "init");
+		} catch (LuaScriptNotExistingError &) {
+			// this may well happen, let's just ignore it
+		}
 	}
 
 	if (m_writereplay) {
