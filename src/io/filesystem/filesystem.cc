@@ -201,14 +201,18 @@ static void FS_Tokenize
 	//split path into it's components
 	while (pos2 != std::string::npos) {
 		if (pos != pos2)
-			*components++ = path.substr(pos, pos2 - pos);
+		{
+			std::string node = path.substr(pos, pos2 - pos);
+			*components++ = node;
+		}
 		pos = pos2 + 1;
 		pos2 = path.find(filesep, pos);
 	}
 
 	//extract the last component (most probably a filename)
-	if (pos < path.length())
-		*components++ = path.substr(pos);
+	std::string node = path.substr(pos);
+	if (!node.empty())
+		*components++ = node;
 }
 
 /**
