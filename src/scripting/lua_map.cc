@@ -36,9 +36,6 @@ using namespace Widelands;
 /*
  * Helper functions
  */
-
-#define luaL_checkint32(L, n)  static_cast<int32_t>(luaL_checkinteger(L, (n)))
-
 #define WRAPPED_PROPERTY_SET_INT(object, name) int set_##name(lua_State* L) { \
    object.name = luaL_checkint32(L, -1);                                      \
    return 0;                                                                  \
@@ -51,16 +48,6 @@ using namespace Widelands;
    WRAPPED_PROPERTY_GET_INT(object, name)                                     \
    WRAPPED_PROPERTY_SET_INT(object, name)                                     \
 
-#define PROP_RO(klass, name) {#name, &klass::get_##name, 0}
-#define PROP_RW(klass, name) {#name, &klass::get_##name, &klass::set_##name}
-#define METHOD(klass, name) {#name, &klass::name}
-
-#define LUA_CLASS_HEAD(klass) \
-   static const char className[];                                             \
-   static const char parentName[];                                            \
-   static const MethodType  <klass> Methods   [];                             \
-   static const PropertyType<klass> Properties[];                             \
-
 /*
  * Map Object
  */
@@ -68,7 +55,7 @@ class L_MapObject {
 	Object_Ptr m_ptr;
 
 public:
-	LUA_CLASS_HEAD(L_MapObject);
+	LUNA_CLASS_HEAD(L_MapObject);
 
 	L_MapObject(Map_Object & mo) : m_ptr(&mo) {
 	}
@@ -127,7 +114,7 @@ const PropertyType<L_MapObject> L_MapObject::Properties[] = {
 class L_BaseImmovable : public L_MapObject {
 	OPtr<BaseImmovable> m_biptr;
 public:
-	LUA_CLASS_HEAD(L_BaseImmovable);
+	LUNA_CLASS_HEAD(L_BaseImmovable);
 
 	L_BaseImmovable(BaseImmovable & mo) : L_MapObject(mo), m_biptr(&mo) {
 	}
@@ -196,7 +183,7 @@ class L_Coords {
 	Coords m_c;
 
 public:
-	LUA_CLASS_HEAD(L_Coords);
+	LUNA_CLASS_HEAD(L_Coords);
 
 
 	L_Coords(lua_State * L)

@@ -17,25 +17,12 @@
  *
  */
 
-#ifndef C_UTILS_H
-#define C_UTILS_H
+#ifndef LUA_GAME_H
+#define LUA_GAME_H
 
-extern "C" {
-#include <lua.h>
-}
+#include <lua.hpp>
 
-#include "logic/game.h"
-
-Widelands::Game * get_game(lua_State *);
-
-#ifdef __GNUC__
-#define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))
-#else
-#define PRINTF_FORMAT(b, c)
-#endif
-
-int report_error(lua_State *, const char *, ...) PRINTF_FORMAT(2, 3);
-
-#define luaL_checkint32(L, n)  static_cast<int32_t>(luaL_checkinteger(L, (n)))
+void luaopen_wlgame(lua_State *);
 
 #endif
+

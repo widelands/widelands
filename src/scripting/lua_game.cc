@@ -17,25 +17,42 @@
  *
  */
 
-#ifndef C_UTILS_H
-#define C_UTILS_H
+#include <lua.hpp>
 
-extern "C" {
-#include <lua.h>
+#include "lua_game.h"
+
+#include "c_utils.h"
+
+using namespace Widelands;
+
+/*
+ * Functions of game
+ */
+
+/*
+ * TODO: document me
+ */
+static int L_call_at(lua_State* L) {
+   int nargs = lua_gettop();
+   if(nargs < 2)
+      report_error("Too little arguments to run_at");
+
+   Game & game = *get_game(L);
+
+   int gametime = luaL_checkint32(L, 1);
+   
+   // Run the init script, if the map provides on.
+   game.enqueue_command(
+         new Cmd_LuaCallFunction(game.get_gametime(), "map", "init", true));
+
 }
 
-#include "logic/game.h"
+const static struct luaL_reg wlgame [] = {
+	{"call_at", &L_call_at},
+	{0, 0}
+};
 
-Widelands::Game * get_game(lua_State *);
+void luaopen_wlgame(lua_State * L) {
+	luaL_register(L, "wl.game", wlgame);
+}
 
-#ifdef __GNUC__
-#define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))
-#else
-#define PRINTF_FORMAT(b, c)
-#endif
-
-int report_error(lua_State *, const char *, ...) PRINTF_FORMAT(2, 3);
-
-#define luaL_checkint32(L, n)  static_cast<int32_t>(luaL_checkinteger(L, (n)))
-
-#endif
