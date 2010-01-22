@@ -1,0 +1,6 @@
+
+Import("*")
+
+sources = Glob("*.cc")
+tests.append( ("test_filesystem", sources ) )
+

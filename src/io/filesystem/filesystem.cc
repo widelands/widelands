@@ -302,7 +302,8 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 		++i;
 	}
 
-	std::string canonpath = "";
+	std::string canonpath;
+	canonpath.reserve(path.length());
 #ifndef WIN32
 	canonpath = absolute ? "/" : "./";
 
