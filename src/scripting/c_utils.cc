@@ -23,6 +23,7 @@
 #include <cstdio>
 #include <iostream>
 
+// TODO: this function should return a reference, since game is always set
 Widelands::Game * get_game(lua_State * const L) {
 	lua_pushstring(L, "game");
 	lua_gettable(L, LUA_REGISTRYINDEX);

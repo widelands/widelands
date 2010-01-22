@@ -17,19 +17,21 @@
  *
  */
 
-#include "lua_map.h"
+#include <lua.hpp>
 
 #include "log.h"
-#include "logic/widelands_geometry.h"
-#include "logic/immovable.h"
-#include "logic/game.h"
 #include "logic/checkstep.h"
 #include "logic/findimmovable.h"
-#include "c_utils.h"
+#include "logic/game.h"
+#include "logic/immovable.h"
+#include "logic/mapregion.h"
+#include "logic/maphollowregion.h"
+#include "logic/widelands_geometry.h"
 
+#include "c_utils.h"
 #include "luna.h"
 
-#include <lua.hpp>
+#include "lua_map.h"
 
 // TODO: make map a class and add attributes width, height
 
@@ -350,6 +352,52 @@ public:
 		lua_pushboolean(L, (*get_user_class<L_Field>(L, -1))->m_c == m_c);
 		return 1;
 	}
+	int _region(lua_State * L, uint32_t radius) {
+		Map & map = get_game(L)->map();
+		MapRegion<Area<FCoords> > mr
+			(map, Area<FCoords>(m_c, radius));
+
+		lua_newtable(L);
+		uint32_t idx = 1;
+		do {
+			lua_pushuint32(L, idx++);
+			const FCoords & loc = mr.location();
+			to_lua<L_Field>(L, new L_Field(loc.x, loc.y, loc.field));
+			lua_settable(L, -3);
+		} while (mr.advance(map));
+
+		return 1;
+	}
+	int _hollow_region(lua_State * L, uint32_t radius, uint32_t inner_radius) {
+		Map & map = get_game(L)->map();
+		HollowArea<Area<> > har(Area<>(m_c, radius), inner_radius);
+
+		MapHollowRegion<Area<> > mr(map, har);
+
+		lua_newtable(L);
+		uint32_t idx = 1;
+		do {
+			lua_pushuint32(L, idx++);
+			const Coords & loc = mr.location();
+			to_lua<L_Field>(L, new L_Field(loc.x, loc.y, &map[loc]));
+			lua_settable(L, -3);
+		} while (mr.advance(map));
+
+		return 1;
+	}
+	int region(lua_State * L) {
+		uint32_t n = lua_gettop(L);
+
+		if (n == 3) {
+			uint32_t radius = luaL_checkuint32(L, -2);
+			uint32_t inner_radius = luaL_checkuint32(L, -1);
+			return _hollow_region(L, radius, inner_radius);
+		} else {
+			uint32_t radius = luaL_checkuint32(L, -1);
+			return _region(L, radius);
+		}
+		return 1;
+	}
 
 	/*
 	 * C methods
@@ -361,6 +409,7 @@ const char L_Field::className[] = "Field";
 const char L_Field::parentName[] = "";
 const MethodType<L_Field> L_Field::Methods[] = {
 	METHOD(L_Field, __eq),
+	METHOD(L_Field, region),
 	{0, 0},
 };
 const PropertyType<L_Field> L_Field::Properties[] = {

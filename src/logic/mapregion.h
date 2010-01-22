@@ -27,7 +27,7 @@ namespace Widelands {
 /**
  * Producer/Coroutine struct that iterates over every node of an area.
  *
- * Note that the order in which fields are returned is not guarantueed.
+ * Note that the order in which fields are returned is not guaranteed.
  */
 template <typename Area_type = Area<> > struct MapRegion {
 	MapRegion(const Map & map, Area_type area) :

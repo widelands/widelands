@@ -131,6 +131,23 @@ function field_tests:test_setting_terd()
    assert_equal("wasser", f.terd)
    f.terd = "steppe"
 end
+function field_tests:test_region_radius_zero()
+   f = wl.map.Field(50,40)
+   list = f:region(0)
+   assert_equal(1, #list)
+   assert_equal(f, list[1])
+end
+function field_tests:test_region_radius_one()
+   f = wl.map.Field(50,40)
+   list = f:region(1)
+   assert_equal(7, #list)
+end
+function field_tests:test_hollow_region_radius_one()
+   f = wl.map.Field(50,40)
+   list = f:region(2,1)
+   assert_equal(13, #list)
+end
+
 
 
 
