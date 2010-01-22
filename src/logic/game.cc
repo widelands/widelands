@@ -24,6 +24,7 @@
 
 #include "carrier.h"
 #include "cmd_check_eventchain.h"
+#include "cmd_lua.h"
 #include "computer_player.h"
 #include "economy/economy.h"
 #include "events/event.h"
@@ -476,19 +477,14 @@ bool Game::run
 			map().set_scenario_player_ai   (p, player_ai);
 		}
 
+		// Run the init script, if the map provides on.
+		enqueue_command(new Cmd_Lua(get_gametime(), "map", "init", true));
+
 		// Everything prepared, send the first trigger event
 		// We lie about the sender here. Hey, what is one lie in a lifetime?
 		enqueue_command
 			(new Cmd_CheckEventChain(get_gametime(), static_cast<uint16_t>(-1)));
 
-		// Run the init script, if the map provides on.
-		// TODO: SirVer, Lua: Lua scripts should be run by a new Cmd, so that
-		// TOOD: SirVer, Lua: they also work over the network
-		try {
-			lua().run_script("map", "init");
-		} catch (LuaScriptNotExistingError &) {
-			// this may well happen, let's just ignore it
-		}
 	}
 
 	if (m_writereplay) {

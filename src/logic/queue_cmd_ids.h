@@ -61,6 +61,7 @@
 #define QUEUE_CMD_ACT                  128
 #define QUEUE_CMD_CHECK_EVENTCHAIN     129
 #define QUEUE_CMD_INCORPORATE          130
+#define QUEUE_CMD_LUA                  131
 
 #define QUEUE_CMD_CALL_ECONOMY_BALANCE 200
 #define QUEUE_CMD_EXPIREMESSAGE             201
