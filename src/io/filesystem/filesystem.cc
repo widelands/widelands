@@ -39,6 +39,7 @@
 #include <cstring>
 #include <string>
 #include <vector>
+#include <list>
 
 #ifdef WIN32
 #include "log.h"
@@ -183,10 +184,10 @@ std::string FileSystem::GetHomedir()
  *
  * \todo This does not really belong into a filesystem class
  */
-static std::auto_ptr< std::vector<std::string> > FS_Tokenize
+static std::auto_ptr< std::list<std::string> > FS_Tokenize
 	(std::string const & path, char filesep)
 {
-	std::auto_ptr< std::vector<std::string> > components(new std::vector<std::string>());
+	std::auto_ptr< std::list<std::string> > components(new std::list<std::string>());
 	std::string::size_type pos;  //  start of token
 	std::string::size_type pos2; //  next filesep character
 
@@ -217,8 +218,8 @@ static std::auto_ptr< std::vector<std::string> > FS_Tokenize
  * \todo Enable non-Unix paths
  */
 std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
-	std::auto_ptr< std::vector<std::string> > components;
-	std::vector<std::string>::iterator i;
+	std::auto_ptr< std::list<std::string> > components;
+	std::list<std::string>::iterator i;
 
 #ifdef WIN32
 	// remove all slashes with backslashes so following can work.
@@ -242,7 +243,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	//tilde expansion
 	if (*components->begin() == "~") {
 		components->erase(components->begin());
-		std::auto_ptr< std::vector<std::string> > homecomponents;
+		std::auto_ptr< std::list<std::string> > homecomponents;
 		homecomponents = FS_Tokenize(GetHomedir(), m_filesep);
 		components->insert
 			(components->begin(), homecomponents->begin(), homecomponents->end());
@@ -255,7 +256,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 
 	//make relative paths absolute (so that "../../foo" can work)
 	if (!absolute) {
-		std::auto_ptr< std::vector<std::string> > cwdcomponents;
+		std::auto_ptr< std::list<std::string> > cwdcomponents;
 
 		cwdcomponents =
 			FS_Tokenize
@@ -286,10 +287,13 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 			erase = true;
 		}
 
-		std::vector<std::string>::iterator nexti = i;
+		std::list<std::string>::iterator nexti = i;
 
 		if (erase_prev && erase) {
-			components->erase(i - 1, i + 1);
+			std::list<std::string>::iterator j = i;
+			--i;
+			++j;
+			components->erase(i, j);
 			i = components->begin();
 			continue;
 		}
