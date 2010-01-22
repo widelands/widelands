@@ -1,5 +1,7 @@
-A cool tutorial
-===============
+Scripting Tutorial
+==================
 
-.. todo:: This doesn't rock yet!
+
+Nothing written here yet.
+
 

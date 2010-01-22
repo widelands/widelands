@@ -39,6 +39,19 @@
 
 using namespace Widelands;
 
+/* RST
+:mod:`wl.map`
+=============
+
+.. module:: wl.map
+   :synopsis: Provides access on maps and fields
+
+.. moduleauthor:: The Widelands development team
+
+.. currentmodule:: wl.map
+*/
+
+
 /*
  * Base class for all classes in wl.map
  */
@@ -48,9 +61,16 @@ class L_MapModuleClass : public LunaClass {
 };
 
 
-/*
- * Map Object
- */
+/* RST
+MapObject
+----------
+
+.. class:: MapObject
+
+	This is the base class for all Objects in widelands, including immovables
+	and Bobs. This class can't be instantiated directly, but provides the base
+	for all others.
+*/
 class L_MapObject : public L_MapModuleClass {
 	Object_Ptr * m_ptr;
 
@@ -84,9 +104,12 @@ public:
 		m_ptr = new Object_Ptr(&mol.get<Map_Object>(idx));
 	}
 
-	/*
-	 * Properties
-	 */
+	/* RST
+	.. attribute:: serial
+
+	The serial number of this object. Note that this value does not stay
+	constant after saving/loading.
+	*/
 	int get_serial(lua_State * L) {
 		Game & game = get_game(L);
 		lua_pushuint32(L, m_ptr->get(game)->serial());
@@ -104,6 +127,14 @@ public:
 			(L, other->m_get(game, L)->serial() == m_get(game, L)->serial());
 		return 1;
 	}
+	/* RST
+	.. method:: remove()
+
+		Removes this object from the game immediately. If you want to destroy an
+		object as if the player had see :func:`destroy`.
+
+		:returns: :const:`nil`
+	*/
 	int remove(lua_State * L) {
 		Game & game = get_game(L);
 		Map_Object * o = m_get(game, L);
@@ -138,9 +169,18 @@ const PropertyType<L_MapObject> L_MapObject::Properties[] = {
 	{0, 0, 0},
 };
 
-/*
- * BaseImmovable
- */
+/* RST
+BaseImmovable
+-------------
+
+.. class:: BaseImmovable
+
+	Bases: :class:`MapObject`
+
+	This is the base class for all Objects in widelands, including immovables
+	and Bobs. This class can't be instantiated directly, but provides the base
+	for all others.
+*/
 class L_BaseImmovable : public L_MapObject {
 	OPtr<BaseImmovable>* m_biptr;
 

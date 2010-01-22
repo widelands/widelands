@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Widelands' Lua scripting documentation!
-==================================================
+Widelands' Lua Scripting documentation
+======================================
 
 Contents:
 
@@ -12,16 +12,7 @@ Contents:
    :maxdepth: 2
 
    tutorial
-
-Blahfasel
-=========
-
-.. todo:: Does this rock?
-
-EOF
-===
-
-.. todolist::
+   reference
 
 Indices and tables
 ==================
