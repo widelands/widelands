@@ -23,15 +23,14 @@
 #include <cstdio>
 #include <iostream>
 
-// TODO: this function should return a reference, since game is always set
-Widelands::Game * get_game(lua_State * const L) {
+Widelands::Game & get_game(lua_State * const L) {
 	lua_pushstring(L, "game");
 	lua_gettable(L, LUA_REGISTRYINDEX);
 
 	Widelands::Game * g = static_cast<Widelands::Game *>(lua_touserdata(L, -1));
 	lua_pop(L, 1); // pop this userdata
 
-	return g;
+	return *g;
 }
 
 Widelands::Map_Map_Object_Loader * get_mol(lua_State * const L) {

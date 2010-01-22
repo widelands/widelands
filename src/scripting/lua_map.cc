@@ -71,7 +71,7 @@ public:
 
 	virtual void __persist(lua_State * L) {
 		Map_Map_Object_Saver & mos = *get_mos(L);
-		Game & game = *get_game(L);
+		Game & game = get_game(L);
 
 		uint32_t idx = mos.get_object_file_index(*m_ptr->get(game));
 		PERS_UINT32("file_index", idx);
@@ -88,7 +88,7 @@ public:
 	 * Properties
 	 */
 	int get_serial(lua_State * L) {
-		Game & game = *get_game(L);
+		Game & game = get_game(L);
 		lua_pushuint32(L, m_ptr->get(game)->serial());
 		return 1;
 	}
@@ -97,7 +97,7 @@ public:
 	 * Lua Methods
 	 */
 	int __eq(lua_State * L) {
-		Game & game = *get_game(L);
+		Game & game = get_game(L);
 		L_MapObject * other = *get_base_user_class<L_MapObject>(L, -1);
 
 		lua_pushboolean
@@ -105,7 +105,7 @@ public:
 		return 1;
 	}
 	int remove(lua_State * L) {
-		Game & game = *get_game(L);
+		Game & game = get_game(L);
 		Map_Object * o = m_get(game, L);
 
 		if (!o)
@@ -161,7 +161,7 @@ public:
 
 	virtual void __persist(lua_State * L) {
 		Map_Map_Object_Saver & mos = *get_mos(L);
-		Game & game = *get_game(L);
+		Game & game = get_game(L);
 
 		uint32_t idx = mos.get_object_file_index(*m_biptr->get(game));
 		PERS_UINT32("file_index", idx);
@@ -182,7 +182,7 @@ public:
 	 * Properties
 	 */
 	int get_size(lua_State * L) {
-		Game & game = *get_game(L);
+		Game & game = get_game(L);
 		BaseImmovable * o = m_get(game, L);
 
 		switch (o->get_size()) {
@@ -200,7 +200,7 @@ public:
 		return 1;
 	}
 	int get_name(lua_State * L) {
-		Game & game = *get_game(L);
+		Game & game = get_game(L);
 		BaseImmovable * o = m_get(game, L);
 
 		lua_pushstring(L, o->name().c_str());
@@ -248,7 +248,7 @@ public:
 	L_Field(Coordinate x, Coordinate y, Field * f) : m_c(Coords(x, y), f) {}
 	L_Field(lua_State * L)
 	{
-		Map & m = get_game(L)->map();
+		Map & m = get_game(L).map();
 		uint32_t rv = luaL_checkuint32(L, 1);
 		if (rv >= static_cast<uint32_t>(m.get_width()))
 			report_error(L, "x coordinate out of range!");
@@ -257,7 +257,7 @@ public:
 		if (rv >= static_cast<uint32_t>(m.get_height()))
 			report_error(L, "y coordinate out of range!");
 		m_c.y = rv;
-		m_c.field = &get_game(L)->map()[m_c];
+		m_c.field = &get_game(L).map()[m_c];
 	}
 	~L_Field() {}
 
@@ -266,7 +266,7 @@ public:
 	}
 	virtual void __unpersist(lua_State * L) {
 		UNPERS_INT32("x", m_c.x); UNPERS_INT32("y", m_c.y);
-		m_c.field = &get_game(L)->map()[m_c];
+		m_c.field = &get_game(L).map()[m_c];
 	}
 
 	/*
@@ -283,7 +283,7 @@ public:
 		if (height > MAX_FIELD_HEIGHT)
 			report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
 
-		get_game(L)->map().set_height(m_c, height);
+		get_game(L).map().set_height(m_c, height);
 
 		return get_height(L);
 	}
@@ -298,13 +298,13 @@ public:
 	}
 	int get_terr(lua_State * L) {
 		Terrain_Descr & td =
-			get_game(L)->map().world().terrain_descr(m_c.field->terrain_r());
+			get_game(L).map().world().terrain_descr(m_c.field->terrain_r());
 		lua_pushstring(L, td.name().c_str());
 		return 1;
 	}
 	int set_terr(lua_State * L) {
 		const char * name = luaL_checkstring(L, -1);
-		Map & map = get_game(L)->map();
+		Map & map = get_game(L).map();
 		Terrain_Index td =
 			map.world().index_of_terrain(name);
 		if (td == static_cast<Terrain_Index>(-1))
@@ -318,13 +318,13 @@ public:
 	}
 	int get_terd(lua_State * L) {
 		Terrain_Descr & td =
-			get_game(L)->map().world().terrain_descr(m_c.field->terrain_d());
+			get_game(L).map().world().terrain_descr(m_c.field->terrain_d());
 		lua_pushstring(L, td.name().c_str());
 		return 1;
 	}
 	int set_terd(lua_State * L) {
 		const char * name = luaL_checkstring(L, -1);
-		Map & map = get_game(L)->map();
+		Map & map = get_game(L).map();
 		Terrain_Index td =
 			map.world().index_of_terrain(name);
 		if (td == static_cast<Terrain_Index>(-1))
@@ -337,7 +337,7 @@ public:
 	}
 #define GET_X_NEIGHBOUR(X) int get_ ##X(lua_State* L) { \
    FCoords n; \
-   get_game(L)->map().get_ ##X(m_c, &n); \
+   get_game(L).map().get_ ##X(m_c, &n); \
    to_lua<L_Field>(L, new L_Field(n.x, n.y, n.field)); \
 	return 1; \
 }
@@ -356,7 +356,7 @@ public:
 		return 1;
 	}
 	int _region(lua_State * L, uint32_t radius) {
-		Map & map = get_game(L)->map();
+		Map & map = get_game(L).map();
 		MapRegion<Area<FCoords> > mr
 			(map, Area<FCoords>(m_c, radius));
 
@@ -372,7 +372,7 @@ public:
 		return 1;
 	}
 	int _hollow_region(lua_State * L, uint32_t radius, uint32_t inner_radius) {
-		Map & map = get_game(L)->map();
+		Map & map = get_game(L).map();
 		HollowArea<Area<> > har(Area<>(m_c, radius), inner_radius);
 
 		MapHollowRegion<Area<> > mr(map, har);
@@ -444,7 +444,7 @@ static int L_create_immovable(lua_State * const L) {
 	char const * const objname = luaL_checkstring(L, 1);
 	L_Field * c = *get_user_class<L_Field>(L, 2);
 
-	Game & game = *get_game(L);
+	Game & game = get_game(L);
 
 	// Check if the map is still free here
 	// TODO: this exact code is duplicated in worker.cc
@@ -479,7 +479,7 @@ static int L_find_immovable(lua_State * const L) {
 	const char *  const attrib  = luaL_checkstring(L, 4);
 
 	Coords pos(x, y);
-	Game & game = *get_game(L);
+	Game & game = get_game(L);
 	Map & map = game.map();
 
 	Area<FCoords> area (map.get_fcoords(pos), 0);
@@ -579,7 +579,7 @@ public:
 	int build_flag(lua_State * L) {
 		L_Field * c = *get_user_class<L_Field>(L, -1);
 
-		m_get(*get_game(L)).build_flag(c->coords());
+		m_get(get_game(L)).build_flag(c->coords());
 		return 0;
 	}
 	// TODO: should return Building
@@ -587,9 +587,9 @@ public:
 		const char * name = luaL_checkstring(L, - 2);
 		L_Field * c = *get_user_class<L_Field>(L, -1);
 
-		Building_Index i = m_get(*get_game(L)).tribe().building_index(name);
+		Building_Index i = m_get(get_game(L)).tribe().building_index(name);
 
-		m_get(*get_game(L)).force_building(c->coords(), i, 0, 0, Soldier_Counts());
+		m_get(get_game(L)).force_building(c->coords(), i, 0, 0, Soldier_Counts());
 
 		return 0;
 	}

@@ -26,7 +26,7 @@
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 
-Widelands::Game * get_game(lua_State *);
+Widelands::Game & get_game(lua_State *);
 Widelands::Map_Map_Object_Loader * get_mol(lua_State *);
 Widelands::Map_Map_Object_Saver * get_mos(lua_State *);
 

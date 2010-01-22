@@ -42,7 +42,7 @@ using namespace Widelands;
  * TODO: document me
  */
 static int L_get_time(lua_State * L) {
-	Game & game = *get_game(L);
+	Game & game = get_game(L);
 	lua_pushint32(L, game.get_gametime());
 	return 1;
 }
@@ -57,7 +57,7 @@ static int L_run_coroutine(lua_State * L) {
 		report_error(L, "Too little arguments to run_at");
 
 	LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(L, -1));
-	Game & game = *get_game(L);
+	Game & game = get_game(L);
 
 	lua_pop(L, 1); // Remove coroutine from stack
 
