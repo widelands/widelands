@@ -121,5 +121,8 @@ end
 --    assert_equal(rv[1], 14)
 -- end
 
+rv = lunit:run()
+if rv == 0 then -- No errors in the testsuite. Exit the game
+   wl.debug.exit()
+end
 
-lunit:run()

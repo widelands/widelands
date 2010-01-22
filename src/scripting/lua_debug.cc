@@ -57,9 +57,19 @@ static int L_setSeeAll(lua_State * const l) {
 	return 0;
 }
 
+/*
+ * TODO: document me
+ */
+static int L_exit(lua_State * const l) {
+	get_game(l)->get_ipl()->end_modal(0);
+
+	return 0;
+}
+
 const static struct luaL_reg wldebug [] = {
 	{"log", &L_log},
 	{"set_see_all", &L_setSeeAll},
+	{"exit", &L_exit},
 	{0, 0}
 };
 
