@@ -33,6 +33,8 @@
 
 #include "lua_map.h"
 
+// TODO: this include should be in lua_player.h
+#include "logic/player.h"
 // TODO: make map a class and add attributes width, height
 
 using namespace Widelands;
@@ -231,7 +233,7 @@ const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
 };
 
 /*
- * Coordinates
+ * Field
  */
 class L_Field : public L_MapModuleClass {
 	FCoords m_c;
@@ -525,5 +527,105 @@ void luaopen_wlmap(lua_State * L) {
 	register_class<L_BaseImmovable>(L, "map", true);
 	add_parent<L_BaseImmovable, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
+}
+
+// BIG TODO: this should be in lua_player.cc
+
+
+/*
+ * Base class for all classes in wl.game
+ */
+class L_GameModuleClass : public LunaClass {
+	public:
+		const char * get_modulename() {return "game";}
+};
+
+/*
+ * ========================================================================
+ *                                CLASSES
+ * ========================================================================
+ */
+class L_Player : public L_GameModuleClass {
+	Player_Number m_pl;
+	enum {NONE = -1};
+
+public:
+	LUNA_CLASS_HEAD(L_Player);
+
+	L_Player() : m_pl(NONE) {}
+	L_Player(lua_State * L) {
+		m_pl = luaL_checkuint32(L, -1);
+	}
+
+	virtual void __persist(lua_State * L) {
+		PERS_UINT32("player", m_pl);
+	}
+	virtual void __unpersist(lua_State * L) {
+		UNPERS_UINT32("player", m_pl);
+	}
+
+	/*
+	 * Properties
+	 */
+	int get_number(lua_State * L) {
+		lua_pushuint32(L, m_pl);
+		return 1;
+	}
+
+	/*
+	 * Lua methods
+	 */
+	// TODO: should return Flag
+	int build_flag(lua_State * L) {
+		L_Field * c = *get_user_class<L_Field>(L, -1);
+
+		m_get(*get_game(L)).build_flag(c->coords());
+		return 0;
+	}
+	// TODO: should return Building
+	int force_building(lua_State * L) {
+		const char * name = luaL_checkstring(L, - 2);
+		L_Field * c = *get_user_class<L_Field>(L, -1);
+
+		Building_Index i = m_get(*get_game(L)).tribe().building_index(name);
+
+		m_get(*get_game(L)).force_building(c->coords(), i, 0, 0, Soldier_Counts());
+
+		return 0;
+	}
+
+	/*
+	 * C methods
+	 */
+private:
+	Player & m_get(Game & game) {return game.player(m_pl);}
+};
+const char L_Player::className[] = "Player";
+const MethodType<L_Player> L_Player::Methods[] = {
+	METHOD(L_Player, build_flag),
+	METHOD(L_Player, force_building),
+
+	{0, 0},
+};
+const PropertyType<L_Player> L_Player::Properties[] = {
+	PROP_RO(L_Player, number),
+	{0, 0, 0},
+};
+
+/*
+ * ========================================================================
+ *                               FUNCTIONS
+ * ========================================================================
+ */
+
+const static struct luaL_reg wlplayer [] = {
+	{0, 0}
+};
+
+void luaopen_wlplayer(lua_State * L) {
+	// luaL_register(L, "wl.player", wlplayer);
+	// lua_pop(L, 1); // pop the table
+
+	register_class<L_Player>(L, "game");
 }
 

@@ -24,6 +24,7 @@
 
 #include "lua_debug.h"
 #include "lua_game.h"
+#include "lua_player.h"
 #include "lua_map.h"
 #include "coroutine_impl.h"
 #include "c_utils.h"
@@ -126,6 +127,7 @@ LuaInterface_Impl::LuaInterface_Impl
 	luaopen_wldebug(m_L);
 	luaopen_wlmap(m_L);
 	luaopen_wlgame(m_L);
+	luaopen_wlplayer(m_L);
 
 	// Push the game onto the stack
 	lua_pushstring(m_L, "egbase");

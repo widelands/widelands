@@ -276,14 +276,20 @@ end
 --   assert_equal(self.i.pos.y, 10)
 --end
 
-
-
--- function testcase:test_creation()
---    wl.map.create_immovable("tree1", 25, 14)
---    rv = wl.map.find_immovable(25, 16, 5, "tree")
---    assert_equal(rv[1], 25)
---    assert_equal(rv[1], 14)
--- end
+-- ===========
+-- Player test 
+-- ===========
+player_tests = lunit.TestCase("Immovable sizes")
+function player_tests:test_number_property()
+   assert_equal(1, wl.game.Player(1).number)
+end
+function player_tests:test_create_flag()
+   f = wl.map.Field(42,42)
+   wl.game.Player(1):force_building("headquarters", f)
+   assert_equal("headquarters", f.immovable.name)
+   f.immovable:remove()
+   assert_equal(nil, f.immovable)
+end
 
 wl.debug.set_see_all(1)
 
