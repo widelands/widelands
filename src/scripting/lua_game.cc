@@ -21,14 +21,11 @@
 
 #include "lua_game.h"
 
-#include "scripting.h"
 #include "c_utils.h"
 #include "coroutine_impl.h"
 #include "logic/cmd_luafunction.h"
 #include "scripting.h"
 
-
-#include "logic/cmd_luafunction.h"
 
 using namespace Widelands;
 
