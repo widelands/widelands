@@ -113,6 +113,24 @@ function field_tests:test_setting_illegal_too_big_height()
       wl.map.Field(50,40).height = 61
    end)
 end
+function field_tests:test_getting_terr()
+   assert_equal("steppe", wl.map.Field(50,40).terr)
+end
+function field_tests:test_getting_terd()
+   assert_equal("steppe", wl.map.Field(50,40).terd)
+end
+function field_tests:test_setting_terr()
+   f = wl.map.Field(50,40)
+   f.terr = "wasser"
+   assert_equal("wasser", f.terr)
+   f.terr = "steppe"
+end
+function field_tests:test_setting_terd()
+   f = wl.map.Field(50,40)
+   f.terd = "wasser"
+   assert_equal("wasser", f.terd)
+   f.terd = "steppe"
+end
 
 
 

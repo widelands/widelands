@@ -294,6 +294,42 @@ public:
 			to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*bi));
 		return 1;
 	}
+	int get_terr(lua_State * L) {
+		Terrain_Descr & td =
+			get_game(L)->map().world().terrain_descr(m_c.field->terrain_r());
+		lua_pushstring(L, td.name().c_str());
+		return 1;
+	}
+	int set_terr(lua_State * L) {
+		const char * name = luaL_checkstring(L, -1);
+		Terrain_Index td =
+			get_game(L)->map().world().index_of_terrain(name);
+		if (td == static_cast<Terrain_Index>(-1))
+			report_error(L, "Unknown terrain '%s'", name);
+
+		m_c.field->set_terrain_r(td);
+
+		lua_pushstring(L, name);
+		return 1;
+	}
+	int get_terd(lua_State * L) {
+		Terrain_Descr & td =
+			get_game(L)->map().world().terrain_descr(m_c.field->terrain_d());
+		lua_pushstring(L, td.name().c_str());
+		return 1;
+	}
+	int set_terd(lua_State * L) {
+		const char * name = luaL_checkstring(L, -1);
+		Terrain_Index td =
+			get_game(L)->map().world().index_of_terrain(name);
+		if (td == static_cast<Terrain_Index>(-1))
+			report_error(L, "Unknown terrain '%s'", name);
+
+		m_c.field->set_terrain_d(td);
+
+		lua_pushstring(L, name);
+		return 1;
+	}
 #define GET_X_NEIGHBOUR(X) int get_ ##X(lua_State* L) { \
    FCoords n; \
    get_game(L)->map().get_ ##X(m_c, &n); \
@@ -337,6 +373,8 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	PROP_RO(L_Field, bln),
 	PROP_RO(L_Field, brn),
 	PROP_RO(L_Field, immovable),
+	PROP_RW(L_Field, terr),
+	PROP_RW(L_Field, terd),
 	PROP_RW(L_Field, height),
 	{0, 0, 0},
 };
@@ -348,8 +386,7 @@ const PropertyType<L_Field> L_Field::Properties[] = {
  * Create a World immovable object immediately
  *
  * name: name of object to create
- * posx: int, x position
- * posy: int, y position
+ * field: L_Field, position where to create this immovable
  *
  */
 static int L_create_immovable(lua_State * const L) {
