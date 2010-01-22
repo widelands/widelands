@@ -172,6 +172,25 @@ int to_lua(lua_State * const L, T * const obj) {
 	return 1;
 }
 
+/*
+ * Our userdata is saved in table[0]. This function fetches it and makes sure
+ * that it is the correct userdata.
+ */
+template <class T>
+T * * get_user_class(lua_State * const L, int narg) {
+	//  GET table[0]
+	lua_pushnumber(L, 0);
+	if(narg > 0)
+		lua_rawget(L, narg);
+	else
+		lua_rawget(L, narg - 1);
+
+	T** rv = static_cast<T * *>(luaL_checkudata(L, -1, T::className));
+	lua_pop(L, 1);
+
+	return rv;
+}
+
 
 #endif /* end of include guard: __S_LUNA_H */
 

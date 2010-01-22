@@ -272,19 +272,8 @@ public:
 	/*
 	 * Lua methods
 	 */
-	int __eq(lua_State * L)
-	{
-		//L_Coords * other = *get_user_class<L_Coords>(L, -1);
-		lua_pushint32(L, 0);
-		lua_gettable(L, -2);
-		L_Coords* other = *static_cast<L_Coords**>
-			(luaL_checkudata(L, -1, "Coords"));
-
-		if ((other->m_c.x == m_c.x) && (other->m_c.y == m_c.y))
-			lua_pushboolean(L, true);
-		else
-			lua_pushboolean(L, false);
-
+	int __eq(lua_State * L) {
+		lua_pushboolean(L, (*get_user_class<L_Coords>(L, -1))->m_c == m_c);
 		return 1;
 	}
 

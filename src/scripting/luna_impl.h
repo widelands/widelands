@@ -49,20 +49,7 @@ struct MethodType {
 
 // Forward declaration of public function, because we need it below
 template <class T> int to_lua(lua_State * L, T * obj);
-
-/*
- * The table must be the last on the stack. Our userdata is saved in
- * table[0]. This function fetches it and makes sure that it is the correct
- * userdata.
- */
-template <class T>
-T * * m_get_user_class_from_table(lua_State * const L) {
-	//  GET table[0]
-	lua_pushnumber(L, 0);
-	lua_rawget    (L, 1);
-
-	return static_cast<T * *>(luaL_checkudata(L, -1, T::className));
-}
+template <class T> T * * get_user_class(lua_State * const L, int narg);
 
 template <class T>
 PropertyType<T> const * m_lookup_property_in_metatable(lua_State * const L) {
@@ -104,9 +91,9 @@ int m_property_getter(lua_State * const L) {
 	if (!list)
 		return 1;
 
-	T * * const obj = m_get_user_class_from_table<T>(L);
+	T * * const obj = get_user_class<T>(L, 1);
 	// push value on top of the stack for the method call
-	lua_pushvalue(L, 3);
+	lua_pushvalue(L, 2);
 	return ((*obj)->*(list->getter))(L);
 }
 
@@ -124,7 +111,7 @@ int m_property_setter(lua_State * const L) {
 		return 0;
 	}
 
-	T * * const obj = m_get_user_class_from_table<T>(L);
+	T * * const obj = get_user_class<T>(L, 1);
 	// push value on top of the stack for the method call
 	lua_pushvalue(L, 3);
 
@@ -154,9 +141,7 @@ int m_method_dispatch(lua_State * const L) {
 	ConstMethod func = reinterpret_cast<ConstMethod>
 		(lua_touserdata(L, lua_upvalueindex(1)));
 
-	T * * const obj = m_get_user_class_from_table<T>(L);
-	// pop userdata from the stack
-	lua_pop(L, 1);
+	T * * const obj = get_user_class<T>(L, 1);
 
 	// Call it on our instance
 	return ((*obj)->*(*func))(L);
@@ -212,7 +197,7 @@ void m_add_instantiator_to_lua(lua_State * const L) {
 
 template <class T>
 int m_persist(lua_State * const L) {
-	T * * const obj = m_get_user_class_from_table<T>(L);
+	T * * const obj = get_user_class<T>(L, 1);
 
 	lua_newtable(L);
 
