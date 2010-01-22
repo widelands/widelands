@@ -221,12 +221,9 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 #ifdef WIN32
 	// remove all slashes with backslashes so following can work.
 	std::string fixedpath(path);
-	std::string temp;
-	uint32_t path_size = path.size();
-	for (uint32_t j = 0; j < path_size; ++j) {
-		temp = fixedpath.at(j);
-		if (temp == "/")
-			fixedpath.at(j) = '\\';
+	for (uint32_t j = 0; j < path.size(); ++j) {
+		if (fixedpath[j] == '/')
+			fixedpath[j] = '\\';
 	}
 
 	bool absolute = pathIsAbsolute(fixedpath);
