@@ -31,7 +31,7 @@
 #include "scripting.h"
 
 // TODO: document this whole scripting stuff: changes in pluto, pickling,
-// TODO: unpickling
+// TODO:   unpickling, Luna & Luna changes
 // TODO: make pickling independet of OS by using widelands Stream*
 // TODO: remove this include
 extern "C" {

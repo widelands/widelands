@@ -39,18 +39,18 @@
 	static const MethodType<klass> Methods[]; \
 	static const PropertyType<klass> Properties[]; \
 
-#define PROP_RO(klass, name) {#name, &klass::get_##name, 0}
-#define PROP_RW(klass, name) {#name, &klass::get_##name, &klass::set_##name}
-#define METHOD(klass, name) {#name, &klass::name}
-
-#define LUNA_CLASS_HEAD(klass) \
-	static const char className[]; \
-	static const char parentName[]; \
-	static const MethodType<klass> Methods[]; \
-	static const PropertyType<klass> Properties[]; \
-
 #include <lua.hpp>
 #include "luna_impl.h"
+
+/**
+ * Base Class. All Luna class must derive from this
+ */
+class LunaClass {
+	public:
+		virtual void __persist(lua_State*) = 0;
+		virtual void __unpersist(lua_State*) = 0;
+		virtual const char* get_modulename() = 0;
+};
 
 /**
  * Register the class as a Lua class (that is a metatable and a function to

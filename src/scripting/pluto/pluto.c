@@ -918,15 +918,15 @@ static void unpersistspecialtable(int ref, UnpersistInfo *upi)
 	unpersist(upi);
 					/* perms reftbl ... spfunc? */
    printf("Before assert\n");
-	lua_assert(lua_isfunction(upi->L, -1));
+	// lua_assert(lua_isfunction(upi->L, -1));
 					/* perms reftbl ... spfunc */
 
+   printf("Before calling restore: %i\n", lua_gettop(upi->L));
    restore_wl_object(upi->L);
+   printf("After calling restore: %i\n", lua_gettop(upi->L));
 
-   printf("Before call\n");
 	// lua_call(upi->L, 0, 1);
 					/* perms reftbl ... tbl? */
-   printf("After call\n");
 	lua_assert(lua_istable(upi->L, -1));
 					/* perms reftbl ... tbl */
    printf("After assert\n");

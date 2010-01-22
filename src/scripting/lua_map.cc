@@ -51,6 +51,7 @@ using namespace Widelands;
 /*
  * Map Object
  */
+#if 0
 class L_MapObject {
 	Object_Ptr m_ptr;
 
@@ -176,19 +177,22 @@ const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
 	PROP_RO(L_BaseImmovable, name),
 	{0, 0, 0},
 };
-
+#endif
 
 /*
  * Coordinates
  */
-class L_Coords {
+class L_Coords : public LunaClass {
 	Coords m_c;
 
 public:
+	const char * get_modulename() {return "map";}
+
 	LUNA_CLASS_HEAD(L_Coords);
 
-
-	L_Coords() {}
+	L_Coords() {
+		log("Constructed!\n");
+	}
 	L_Coords(lua_State * L)
 	{
 		m_c.x = luaL_checknumber(L, 1);
@@ -206,25 +210,19 @@ public:
 	/*
 	 * Lua methods
 	 */
-	int __persist(lua_State * L) {
-		lua_newtable(L);
-		
-		lua_pushstring(L, "map");
-		lua_setfield(L, -2, "module");
-		
-		lua_pushstring(L, "Coords");
-		lua_setfield(L, -2, "class");
-
+	virtual void __persist(lua_State * L) {
+		log("In persist!");
 		lua_pushint32(L, m_c.x);
 		lua_setfield(L, -2, "x");
 
 		lua_pushint32(L, m_c.y);
 		lua_setfield(L, -2, "y");
-
-		return 1;
+		log("Completly done!");
 	}
-	int __unpersist(lua_State * L) {
+	virtual void __unpersist(lua_State * L) {
 		log("In unpersist!\n");
+
+		return;
 
 		lua_getfield(L, -1, "x");
 		uint32_t x = luaL_checkint32(L, -1);
@@ -237,8 +235,8 @@ public:
 		log("y: %i\n", y);
 
 		lua_pop(L, 1);
+
 		to_lua<L_Coords>(L, this);
-		return 1;
 	}
 
 	/*
@@ -250,7 +248,6 @@ public:
 const char L_Coords::className[] = "Coords";
 const char L_Coords::parentName[] = "";
 const MethodType<L_Coords> L_Coords::Methods[] = {
-	METHOD(L_Coords, __persist),
 	{0, 0},
 };
 const PropertyType<L_Coords> L_Coords::Properties[] = {
@@ -272,20 +269,28 @@ int restore_wl_object(lua_State * L) {
 
 	// get this classes instantiator
 	lua_getglobal(L, "wl"); // table wl
+	log("module: %s\n", module.c_str());
 	lua_getfield(L, -1, module.c_str()); // table wl module
 	std::string instantiator = "__" + klass;
-	log("Instantiator: %s\n", klass.c_str());
-	lua_getfield(L, -1, instantiator.c_str()); // table wl module
+	log("Instantiator: %s\n", instantiator.c_str());
+	lua_getfield(L, -1, instantiator.c_str()); // table wl module func
 
 	// TODO: check if this is a function
-	lua_call(L, 0, 1);
-	lua_pushint32(L, 0);
-	lua_gettable(L, -2); // table wl module lua_obj obj
 
-	L_Coords * o = static_cast<L_Coords * >(lua_touserdata(L, - 1));
+	log("Now calling: %i\n", lua_gettop(L));
+	lua_call(L, 0, 1);
+	lua_pushint32(L, 0); // table wl module lua_obj int
+	log("Calling done: %i\n", lua_gettop(L));
+	lua_gettable(L, -2); // table wl module lua_obj obj
+	log("Gettable call done!\n");
+
+	L_Coords ** o = static_cast<L_Coords ** >(lua_touserdata(L, - 1));
+	log("To userdata done: %p\n", o);
 	lua_pop(L, 4);
 
-	return o->__unpersist(L);
+	log("Before unpersist: %i\n", lua_gettop(L));
+	(*o)->__unpersist(L);
+	return 1;
 }
 }
 
@@ -301,6 +306,7 @@ int restore_wl_object(lua_State * L) {
  *
  */
 static int L_create_immovable(lua_State * const L) {
+#if 0
 	char const * const objname = luaL_checkstring(L, 1);
 	uint32_t     const x       = luaL_checkint32(L, 2);
 	uint32_t     const y       = luaL_checkint32(L, 3);
@@ -322,6 +328,7 @@ static int L_create_immovable(lua_State * const L) {
 
 	// Send this to lua
 	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(m));
+#endif
 }
 
 
@@ -334,6 +341,7 @@ static int L_create_immovable(lua_State * const L) {
  * Returns: x, y position of object
  */
 static int L_find_immovable(lua_State * const L) {
+#if 0
 	uint32_t     const x       = luaL_checkint32(L, 1);
 	uint32_t     const y       = luaL_checkint32(L, 2);
 	uint32_t     const radius  = luaL_checkint32(L, 3);
@@ -372,6 +380,7 @@ static int L_find_immovable(lua_State * const L) {
 	}
 
 	return 0;
+#endif
 }
 
 const static struct luaL_reg wlmap [] = {
@@ -385,10 +394,12 @@ void luaopen_wlmap(lua_State * L) {
 	lua_pop(L, 1); // pop the table from the stack
 
 	register_class<L_Coords>(L, "map");
+#if 0
 	register_class<L_MapObject>(L, "map");
 
 	register_class<L_BaseImmovable>(L, "map", true);
 	add_parent<L_BaseImmovable, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
+#endif
 }
 

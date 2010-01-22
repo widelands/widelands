@@ -196,6 +196,7 @@ void m_add_constructor_to_lua(lua_State * const L) {
  */
 template <class T>
 int m_instantiator(lua_State * const L) {
+	log("In instantiator!\n");
 	return to_lua<T>(L, new T());
 }
 
@@ -205,6 +206,24 @@ void m_add_instantiator_to_lua(lua_State * const L) {
 	lua_pushcfunction (L, &m_instantiator<T>);
 	lua_setfield(L, -2, s.c_str());
 }
+
+template <class T>
+int m_persist(lua_State * const L) {
+	T * * const obj = m_get_user_class_from_table<T>(L);
+
+	lua_newtable(L);
+
+	lua_pushstring(L, (*obj)->get_modulename());
+	lua_setfield(L, -2, "module");
+
+	lua_pushstring(L, T::className);
+	lua_setfield(L, -2, "class");
+
+	(*obj)->__persist(L);
+
+	return 1;
+}
+
 
 template <class T>
 int m_create_metatable_for_class(lua_State * const L) {
@@ -222,6 +241,10 @@ int m_create_metatable_for_class(lua_State * const L) {
 
 	lua_pushstring(L, "__newindex");
 	lua_pushcfunction(L, &m_property_setter<T>);
+	lua_settable  (L, metatable);
+
+	lua_pushstring(L, "__persist");
+	lua_pushcfunction(L, &m_persist<T>);
 	lua_settable  (L, metatable);
 
 	return metatable;
