@@ -183,26 +183,26 @@ std::string FileSystem::GetHomedir()
  *
  * \todo This does not really belong into a filesystem class
  */
-std::auto_ptr< std::vector<std::string> > FileSystem::FS_Tokenize
-	(std::string const & path) const
+static std::auto_ptr< std::vector<std::string> > FS_Tokenize
+	(std::string const & path, char filesep)
 {
 	std::auto_ptr< std::vector<std::string> > components(new std::vector<std::string>());
 	std::string::size_type pos;  //  start of token
 	std::string::size_type pos2; //  next filesep character
 
 	//extract the first path component
-	if (path.find(m_filesep) == 0) //is this an absolute path?
+	if (path.find(filesep) == 0) //is this an absolute path?
 		pos = 1;
 	else //relative path
 		pos = 0;
-	pos2 = path.find(m_filesep, pos);
+	pos2 = path.find(filesep, pos);
 	//'current' token is now between pos and pos2
 
 	//split path into it's components
 	while (pos2 != std::string::npos) {
 		components->push_back(path.substr(pos, pos2 - pos));
 		pos = pos2 + 1;
-		pos2 = path.find(m_filesep, pos);
+		pos2 = path.find(filesep, pos);
 	}
 
 	//extract the last component (most probably a filename)
@@ -232,18 +232,18 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	}
 
 	bool absolute = pathIsAbsolute(fixedpath);
-	components = FS_Tokenize(fixedpath);
+	components = FS_Tokenize(fixedpath, m_filesep);
 
 #else
 	bool absolute = pathIsAbsolute(path);
-	components = FS_Tokenize(path);
+	components = FS_Tokenize(path, m_filesep);
 #endif
 
 	//tilde expansion
 	if (*components->begin() == "~") {
 		components->erase(components->begin());
 		std::auto_ptr< std::vector<std::string> > homecomponents;
-		homecomponents = FS_Tokenize(GetHomedir());
+		homecomponents = FS_Tokenize(GetHomedir(), m_filesep);
 		components->insert
 			(components->begin(), homecomponents->begin(), homecomponents->end());
 
@@ -259,7 +259,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 
 		cwdcomponents =
 			FS_Tokenize
-				(m_root.empty() ? getWorkingDirectory() : m_root);
+				(m_root.empty() ? getWorkingDirectory() : m_root, m_filesep);
 
 		components->insert
 			(components->begin(), cwdcomponents->begin(), cwdcomponents->end());
