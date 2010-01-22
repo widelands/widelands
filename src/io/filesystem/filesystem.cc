@@ -287,8 +287,6 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 			erase = true;
 		}
 
-		std::list<std::string>::iterator nexti = i;
-
 		if (erase_prev && erase) {
 			std::list<std::string>::iterator j = i;
 			--i;
