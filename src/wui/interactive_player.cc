@@ -570,10 +570,9 @@ void Interactive_Player::cmdLua(std::vector<std::string> const & args)
 	}
 
 	DebugConsole::write("Starting Lua interpretation!");
-	LuaInterface * lua = game().lua();
 	try {
-		lua->interpret_string(cmd);
-	} catch (LuaError & e) {
+		game().lua().interpret_string(cmd);
+	} catch(LuaError& e) {
 		DebugConsole::write(e.what());
 	}
 

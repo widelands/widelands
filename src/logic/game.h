@@ -178,7 +178,7 @@ struct Game : public Editor_Game_Base {
 
 
 	/// Lua frontend, used to run lua triggers and events.
-	LuaInterface * lua() {return m_lua;}
+	LuaInterface & lua() {return *m_lua;}
 
 
 private:

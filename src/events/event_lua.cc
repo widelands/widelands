@@ -46,7 +46,7 @@ namespace Widelands {
 Event::State Event_Lua::run(Game & game) {
 	log("Lua Event ##########\n");
 	log("%s\n", m_cmd.c_str());
-	game.lua()->interpret_string(m_cmd);
+	game.lua().interpret_string(m_cmd);
 	log("##############\n");
 
 	return m_state = DONE;

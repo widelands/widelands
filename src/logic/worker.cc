@@ -104,7 +104,7 @@ bool Worker::run_lua(Game & game, State & state, Action const & action) {
 			std::string const cwd =
 				"/Users/sirver/Desktop/Programming/cpp/widelands/"
 				"git_svn_trunk/tribes/barbarians/lumberjack/";
-			LuaState * st = game.lua()->interpret_file(cwd + action.sparam1);
+			LuaState * st = game.lua().interpret_file(cwd + action.sparam1);
 			LuaCoroutine * cr = st->pop_coroutine();
 			molog("  Starting coroutine!\n");
 			molog("   %i\n", cr->resume());
