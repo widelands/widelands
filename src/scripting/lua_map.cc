@@ -34,22 +34,6 @@
 using namespace Widelands;
 
 /*
- * Helper functions
- */
-#define WRAPPED_PROPERTY_SET_INT(object, name) int set_##name(lua_State* L) { \
-   object.name = luaL_checkint32(L, -1);                                      \
-   return 0;                                                                  \
-}
-#define WRAPPED_PROPERTY_GET_INT(object, name) int get_##name(lua_State* L) { \
-   lua_pushinteger(L, object.name);                                           \
-   return 1;                                                                  \
-}
-#define WRAPPED_PROPERTY_INT(object, name)                                    \
-   WRAPPED_PROPERTY_GET_INT(object, name)                                     \
-   WRAPPED_PROPERTY_SET_INT(object, name)                                     \
-
-
-/*
  * Base class for all classes in wl.map
  */
 class L_MapModuleClass : public LunaClass {
@@ -251,13 +235,15 @@ public:
 	L_Coords(Coordinate x, Coordinate y) : m_c(x, y) {}
 	L_Coords(lua_State * L)
 	{
-		Map & m = get_game(L) - >map();
-		m_c.x = luaL_checkuint32(L, 1);
-		m_c.y = luaL_checkuint32(L, 2);
-		if (m_c.x >= m.get_width())
+		Map & m = get_game(L)->map();
+		uint32_t rv = luaL_checkuint32(L, 1);
+		if (rv >= static_cast<uint32_t>(m.get_width()))
 			report_error(L, "x coordinate out of range!");
-		if (m_c.y >= m.get_height())
+		m_c.x = rv;
+		rv = luaL_checkuint32(L, 2);
+		if (rv >= static_cast<uint32_t>(m.get_height()))
 			report_error(L, "y coordinate out of range!");
+		m_c.y = rv;
 	}
 	~L_Coords() {}
 
@@ -271,8 +257,8 @@ public:
 	/*
 	 * Properties
 	 */
-	WRAPPED_PROPERTY_GET_INT(m_c, x)                                     \
-   WRAPPED_PROPERTY_GET_INT(m_c, y)                                     \
+	int get_x(lua_State * L) {lua_pushuint32(L, m_c.x); return 1;}
+	int get_y(lua_State * L) {lua_pushuint32(L, m_c.y); return 1;}
 
 	/*
 	 * Lua methods

@@ -18,6 +18,12 @@ end
 function coords_tests:test_create_yistobig()
    assert_error("y should be too big", function() wl.map.Coords(25, 64) end)
 end
+function coords_tests:test_create_xisnegativ()
+   assert_error("x is negativ", function() wl.map.Coords(-12, 23) end)
+end
+function coords_tests:test_create_yisnegativ()
+   assert_error("y is negativ", function() wl.map.Coords(25, -12) end)
+end
 function coords_tests:test_direct_change_impossible()
    assert_error("c.x should be read only", function() c.x = 12 end) 
    assert_error("c.y should be read only", function() c.y = 12 end) 
