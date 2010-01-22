@@ -27,7 +27,6 @@ namespace Widelands {
 
 void Cmd_Lua::execute (Game & game) {
 	log("Trying to run: %s, %s\n", m_ns.c_str(), m_script.c_str());
-
 	try {
 		game.lua().run_script(m_ns, m_script);
 	} catch (LuaScriptNotExistingError & e) {
