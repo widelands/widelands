@@ -1,0 +1,11 @@
+*.o
+*.so
+*.dylib
+*.dll
+*.exe
+*.lo
+*.la
+pptest
+puptest
+.libs
+test.plh

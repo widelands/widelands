@@ -1,0 +1,11 @@
+This directory contains the stripped down essentials of pluto[1] that we need for
+Widelands. You find the complete source and README of pluto on the github repo
+from one of it's authors Rob Hoelz at [2]. Our version of pluto has been
+heavily modified to create system agnostic files and to work with the widelands
+file streaming. The Widelands Team wishes to expresses total and complete
+gratitude to the authors of Pluto for making it public domain. 
+
+[1] http://luaforge.net/projects/pluto/
+[2] http://github.com/hoelzro/pluto
+
+   -- SirVer, in behalf of the Widelands Team
