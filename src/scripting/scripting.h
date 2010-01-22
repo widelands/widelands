@@ -27,6 +27,8 @@
 
 #include <lua.hpp>
 
+#include <lua.hpp>
+
 namespace Widelands {
 	struct Editor_Game_Base;
 	struct Game;
@@ -64,6 +66,9 @@ class LuaCoroutine {
 		virtual int get_status(void) = 0;
 		virtual int resume(uint32_t* = 0) = 0;
 };
+// TODO: this class and this wrapper should not be needed
+#include <lua.hpp>
+LuaState* create_lua_state(lua_State* );
 
 /**
  * This is the thin class that is used to execute code

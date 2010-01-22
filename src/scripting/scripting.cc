@@ -22,7 +22,9 @@
 #include "log.h"
 
 #include "lua_debug.h"
+#include "lua_game.h"
 #include "lua_map.h"
+#include "c_utils.h"
 
 #include <string>
 #include <stdexcept>

@@ -22,10 +22,7 @@
 #include "cmd_check_eventchain.h"
 #include "cmd_incorporate.h"
 #include "cmd_lua.h"
-<<<<<<< HEAD
 #include "cmd_luafunction.h"
-=======
->>>>>>> Added a Cmd_Lua. Lua commands should now also work over the network (except for those that are entered in the debug console)
 #include "economy/cmd_call_economy_balance.h"
 #include "events/event_chain.h"
 #include "instances.h"
