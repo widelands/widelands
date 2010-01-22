@@ -26,6 +26,7 @@
 #include "map.h"
 #include "notification.h"
 #include "player_area.h"
+#include "scripting/scripting.h"
 
 #include <string>
 #include <cstring>
@@ -141,10 +142,15 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>
 	int32_t & get_game_time_pointer() {return m_gametime;}
 	void set_ibase(Interactive_Base * const b) {m_ibase = b;}
 
+	/// Lua frontend, used to run lua triggers and events.
+	LuaInterface& lua() {return *m_lua;}
+
 private:
 	int32_t m_gametime;
 	Player                   * m_players[MAX_PLAYERS];
 	Object_Manager             m_objects;
+
+	LuaInterface*        m_lua;
 protected:
 	typedef std::vector<Tribe_Descr *> Tribe_Vector;
 	Tribe_Vector           m_tribes;

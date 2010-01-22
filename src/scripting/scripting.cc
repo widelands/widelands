@@ -174,6 +174,7 @@ void LuaState_Impl::push_string(std::string & val)
 class LuaInterface_Impl : public LuaInterface {
 	LuaState_Impl * m_state;
 	std::string m_last_error;
+	std::map<std::string, ScriptContainer> m_scripts;
 
 	/*
 	 * Private functions
@@ -182,12 +183,17 @@ class LuaInterface_Impl : public LuaInterface {
 		int m_check_for_errors(int);
 
 	public:
-		LuaInterface_Impl(Widelands::Game *);
+		LuaInterface_Impl(Widelands::Editor_Game_Base *);
 		virtual ~LuaInterface_Impl();
 
 		virtual LuaState * interpret_string(std::string);
 		virtual LuaState * interpret_file(std::string);
 		virtual std::string const & get_last_error() const {return m_last_error;}
+
+		virtual void register_script(std::string, std::string, std::string);
+		virtual ScriptContainer& get_scripts_for(std::string ns) {
+			return m_scripts[ns];
+		}
 };
 
 /*************************
@@ -243,13 +249,24 @@ LuaInterface_Impl::LuaInterface_Impl
 	luaopen_wlmap(L);
 
 	// Push the game onto the stack
+	lua_pushstring(L, "egbase");
+	lua_pushlightuserdata(L, static_cast<void *>(egbase));
+	lua_settable(L, LUA_REGISTRYINDEX);
+	// TODO: this should only be pushed if this is really a game!
 	lua_pushstring(L, "game");
-	lua_pushlightuserdata(L, static_cast<void *>(game));
+	lua_pushlightuserdata(L, static_cast<void *>(egbase));
 	lua_settable(L, LUA_REGISTRYINDEX);
 }
 
 LuaInterface_Impl::~LuaInterface_Impl() {
 	delete m_state;
+}
+
+
+void LuaInterface_Impl::register_script
+	(std::string ns, std::string name, std::string content)
+{
+	m_scripts[ns][name] = content;
 }
 
 LuaState * LuaInterface_Impl::interpret_string(std::string cmd) {
@@ -277,7 +294,7 @@ LuaState * LuaInterface_Impl::interpret_file(std::string filename) {
 /*
  * Factory Function
  */
-LuaInterface * create_lua_interface(Widelands::Game * g) {
+LuaInterface * create_lua_interface(Widelands::Editor_Game_Base * g) {
 	return new LuaInterface_Impl(g);
 }
 

@@ -31,8 +31,8 @@
 #include "widelands_map_building_data_packet.h"
 #include "widelands_map_buildingdata_data_packet.h"
 #include "widelands_map_elemental_data_packet.h"
-#include "widelands_map_event_data_packet.h"
 #include "widelands_map_event_chain_data_packet.h"
+#include "widelands_map_event_data_packet.h"
 #include "widelands_map_exploration_data_packet.h"
 #include "widelands_map_extradata_data_packet.h"
 #include "widelands_map_flag_data_packet.h"
@@ -52,6 +52,7 @@
 #include "widelands_map_resources_data_packet.h"
 #include "widelands_map_road_data_packet.h"
 #include "widelands_map_roaddata_data_packet.h"
+#include "widelands_map_scripting_data_packet.h"
 #include "widelands_map_terrain_data_packet.h"
 #include "widelands_map_trigger_data_packet.h"
 #include "widelands_map_variable_data_packet.h"
@@ -255,6 +256,10 @@ void Map_Saver::save() throw (_wexception) {
 
 	log("Writing Variable Data ... ");
 	{Map_Variable_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
+	log("done!\n ");
+
+	log("Writing Scripting Data ... ");
+	{Map_Scripting_Data_Packet                p; p.Write(m_fs, m_egbase, m_mos);}
 	log("done!\n ");
 
 	log("Writing Objective Data ... ");

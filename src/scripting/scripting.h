@@ -20,12 +20,13 @@
 #ifndef SCRIPTING_H
 #define SCRIPTING_H
 
+#include <map>
 #include <stdexcept>
+#include <stdint.h>
 #include <string>
 
-#include <stdint.h>
-
 namespace Widelands {
+	struct Editor_Game_Base;
 	struct Game;
 }
 
@@ -38,9 +39,7 @@ struct LuaValueError : public LuaError {
 	{}
 };
 
-/*
- * Class LuaCoroutine.
- *
+/**
  * Easy handling of LuaCoroutines
  */
 struct LuaCoroutine {
@@ -48,9 +47,9 @@ struct LuaCoroutine {
 	virtual int resume    () = 0;
 };
 
-/*
+/**
  * This class mainly provides convenient wrappers to access
- * variables that come from lua
+ * variables that come from Lua
  */
 struct LuaState {
 	virtual void push_int32(int32_t) = 0;
@@ -64,15 +63,20 @@ struct LuaState {
 	virtual LuaCoroutine * pop_coroutine() = 0;
 };
 
-/*
+/**
  * This is the thin class that is used to execute code
  */
-struct LuaInterface {
-	virtual LuaState * interpret_string(std::string) = 0;
-	virtual LuaState * interpret_file(std::string) = 0;
-	virtual std::string const & get_last_error() const = 0;
+typedef std::map<std::string, std::string> ScriptContainer;
+class LuaInterface {
+	public:
+		virtual LuaState* interpret_string(std::string) = 0;
+		virtual LuaState* interpret_file(std::string) = 0;
+		virtual std::string const & get_last_error() const = 0;
+
+		virtual void register_script(std::string, std::string, std::string) = 0;
+		virtual ScriptContainer& get_scripts_for(std::string) = 0;
 };
 
-LuaInterface * create_lua_interface(Widelands::Game *);
+LuaInterface* create_lua_interface(Widelands::Editor_Game_Base*);
 
 #endif

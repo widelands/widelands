@@ -53,6 +53,7 @@
 #include "widelands_map_road_data_packet.h"
 #include "widelands_map_roaddata_data_packet.h"
 #include "widelands_map_terrain_data_packet.h"
+#include "widelands_map_scripting_data_packet.h"
 #include "widelands_map_trigger_data_packet.h"
 #include "widelands_map_variable_data_packet.h"
 #include "widelands_map_ware_data_packet.h"
@@ -327,6 +328,10 @@ int32_t WL_Map_Loader::load_map_complete
 	//  Event Chains: depends on events, triggers
 	log("Reading Event Chain Data ... ");
 	{Map_EventChain_Data_Packet     p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	log("done!\n ");
+
+	log("Reading Scripting Data ... ");
+	{Map_Scripting_Data_Packet     p; p.Read(m_fs, egbase, !scenario, m_mol);}
 	log("done!\n ");
 
 	if (m_mol->get_nr_unloaded_objects())

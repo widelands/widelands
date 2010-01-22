@@ -111,6 +111,7 @@ m_map               (0),
 m_lasttrackserial   (0)
 {
 	memset(m_players, 0, sizeof(m_players));
+	m_lua = create_lua_interface(this);
 }
 
 

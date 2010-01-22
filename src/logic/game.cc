@@ -133,7 +133,6 @@ Game::Game() :
 	m_last_stats_update(0)
 {
 	g_sound_handler.m_the_game = this;
-	m_lua = create_lua_interface(this);
 }
 
 Game::~Game()
