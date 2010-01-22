@@ -196,6 +196,14 @@ public:
 	/*
 	 * Lua Methods
 	 */
+	int __eq(lua_State * L) {
+		Game & game = *get_game(L);
+		L_BaseImmovable * other = *get_user_class<L_BaseImmovable>(L, -1);
+
+		lua_pushboolean
+			(L, other->m_get(game, L)->serial() == m_get(game,L)->serial());
+		return 1;
+	}
 
 	/*
 	 * C Methods
@@ -211,6 +219,7 @@ private:
 const char L_BaseImmovable::className[] = "BaseImmovable";
 const char L_BaseImmovable::parentName[] = "MapObject";
 const MethodType<L_BaseImmovable> L_BaseImmovable::Methods[] = {
+	METHOD(L_BaseImmovable, __eq),
 	{0, 0},
 };
 const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
@@ -261,6 +270,15 @@ public:
 	 */
 	int get_x(lua_State * L) {lua_pushuint32(L, m_c.x); return 1;}
 	int get_y(lua_State * L) {lua_pushuint32(L, m_c.y); return 1;}
+	int get_immovable(lua_State * L) {
+		BaseImmovable * bi = m_c.field->get_immovable();
+
+		if (!bi)
+			lua_pushnil(L);
+		else
+			to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*bi));
+		return 1;
+	}
 #define GET_X_NEIGHBOUR(X) int get_ ##X(lua_State* L) { \
    FCoords n; \
    get_game(L)->map().get_ ##X(m_c, &n); \
@@ -303,6 +321,7 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	PROP_RO(L_Field, tln),
 	PROP_RO(L_Field, bln),
 	PROP_RO(L_Field, brn),
+	PROP_RO(L_Field, immovable),
 	{0, 0, 0},
 };
 

@@ -6,41 +6,41 @@ lunit.import "assertions"
 -- =======================================================================
 --                                Field test                               
 -- =======================================================================
-coords_tests = lunit.TestCase("Field creation")
-function coords_tests:test_create()
+field_tests = lunit.TestCase("Field creation")
+function field_tests:test_create()
    c = wl.map.Field(25,32)
    assert_equal(c.x, 25)
    assert_equal(c.y, 32)
 end
-function coords_tests:test_create_xistobig()
+function field_tests:test_create_xistobig()
    assert_error("x should be too big", function() wl.map.Field(64, 23) end)
 end
-function coords_tests:test_create_yistobig()
+function field_tests:test_create_yistobig()
    assert_error("y should be too big", function() wl.map.Field(25, 64) end)
 end
-function coords_tests:test_create_xisnegativ()
+function field_tests:test_create_xisnegativ()
    assert_error("x is negativ", function() wl.map.Field(-12, 23) end)
 end
-function coords_tests:test_create_yisnegativ()
+function field_tests:test_create_yisnegativ()
    assert_error("y is negativ", function() wl.map.Field(25, -12) end)
 end
-function coords_tests:test_direct_change_impossible()
+function field_tests:test_direct_change_impossible()
    assert_error("c.x should be read only", function() c.x = 12 end) 
    assert_error("c.y should be read only", function() c.y = 12 end) 
 end
-function coords_tests:test_r_neighbour()
+function field_tests:test_r_neighbour()
    c = wl.map.Field(25,40)
    assert_equal(wl.map.Field(26,40), c.rn)
    c = wl.map.Field(63,40)
    assert_equal(wl.map.Field(0,40), c.rn)
 end
-function coords_tests:test_l_neighbour()
+function field_tests:test_l_neighbour()
    c = wl.map.Field(25,40)
    assert_equal(wl.map.Field(24,40), c.ln)
    c = wl.map.Field(0,40)
    assert_equal(wl.map.Field(63,40), c.ln)
 end
-function coords_tests:test_trn_neighbour()
+function field_tests:test_trn_neighbour()
    c = wl.map.Field(25,40)
    assert_equal(wl.map.Field(25,39), c.trn)
    assert_equal(wl.map.Field(26,38), c.trn.trn)
@@ -50,7 +50,7 @@ function coords_tests:test_trn_neighbour()
    assert_equal(wl.map.Field(1,62), c.trn.trn)
    assert_equal(wl.map.Field(1,61), c.trn.trn.trn)
 end
-function coords_tests:test_tln_neighbour()
+function field_tests:test_tln_neighbour()
    c = wl.map.Field(25,40)
    assert_equal(wl.map.Field(24,39), c.tln)
    assert_equal(wl.map.Field(24,38), c.tln.tln)
@@ -60,7 +60,7 @@ function coords_tests:test_tln_neighbour()
    assert_equal(wl.map.Field(0,63), c.tln.tln)
    assert_equal(wl.map.Field(0,62), c.tln.tln.tln)
 end
-function coords_tests:test_bln_neighbour()
+function field_tests:test_bln_neighbour()
    c = wl.map.Field(26,37)
    assert_equal(wl.map.Field(26,38), c.bln)
    assert_equal(wl.map.Field(25,39), c.bln.bln)
@@ -71,7 +71,7 @@ function coords_tests:test_bln_neighbour()
    assert_equal(wl.map.Field(0,63), c.bln.bln)
    assert_equal(wl.map.Field(0,0), c.bln.bln.bln)
 end
-function coords_tests:test_brn_neighbour()
+function field_tests:test_brn_neighbour()
    c = wl.map.Field(35,22)
    assert_equal(wl.map.Field(35,23), c.brn)
    assert_equal(wl.map.Field(36,24), c.brn.brn)
@@ -82,13 +82,13 @@ function coords_tests:test_brn_neighbour()
    assert_equal(wl.map.Field(0,1), c.brn.brn)
    assert_equal(wl.map.Field(1,2), c.brn.brn.brn)
 end
-function coords_tests:test_equality()
+function field_tests:test_equality()
    c = wl.map.Field(32,33)
    c1 = wl.map.Field(32,33)
 
    assert_equal(c,c1)
 end
-function coords_tests:test_inequality()
+function field_tests:test_inequality()
    c = wl.map.Field(32,33)
    c1 = wl.map.Field(33,32)
 
@@ -136,10 +136,21 @@ function immovable_tests:test_wrongusage()
    )
 end
 function immovable_tests:test_serial_is_readonly()
-   function setserial(i)
-      i.serial = 12
-   end
-   assert_error("Serial should be read only", setserial, self.i)
+   assert_error("Serial should be read only", function() self.i.serial = 12 end)
+end
+function immovable_tests:test_field_access()
+   f = wl.map.Field(9,10)
+   assert_equal("tree1", f.immovable.name)
+end
+function immovable_tests:test_map_object_equality()
+   f = wl.map.Field(9,10)
+   assert_equal(self.i, f.immovable)
+end
+function immovable_tests:test_field_immovable_is_read_only()
+   f = wl.map.Field(10,10)
+   assert_error("f.immovable should be read only!", function()
+      f.immovable = self.i
+   end)
 end
 
 
@@ -176,6 +187,10 @@ end
 function immovable_property_tests:test_nsme_tree()
    assert_equal("tree1", self.small.name)
 end
+function immovable_property_tests:test_name_stone()
+   assert_equal("stones4", self.big.name)
+end
+
 function immovable_property_tests:test_name_stone()
    assert_equal("stones4", self.big.name)
 end
