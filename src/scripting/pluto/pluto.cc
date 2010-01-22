@@ -40,14 +40,14 @@
 #define LIF(prefix, name) lua ## prefix ## _ ## name
 #endif
 
-#include <string.h>
+#include <cstring>
 #include <stdint.h>	/*for intptr_t*/
 
 
 #define PLUTO_DEBUG
 
-// TODO: this doesn't belong here
-int restore_wl_object(lua_State*);
+// Forward declarated from lua_impl.h. So we do not need to include it
+int luna_restore_object(lua_State * L);
 
 
 
@@ -922,7 +922,7 @@ static void unpersistspecialtable(int ref, UnpersistInfo *upi)
 					/* perms reftbl ... spfunc */
 
    printf("Before calling restore: %i\n", lua_gettop(upi->L));
-   restore_wl_object(upi->L);
+   luna_restore_object(upi->L);
    printf("After calling restore: %i\n", lua_gettop(upi->L));
 
 	// lua_call(upi->L, 0, 1);

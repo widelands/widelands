@@ -256,42 +256,6 @@ const PropertyType<L_Coords> L_Coords::Properties[] = {
 	{0, 0, 0},
 };
 
-// TODO: dirty test function
-int restore_wl_object(lua_State * L) {
-	lua_getfield(L, -1, "module");
-	std::string module = luaL_checkstring(L, -1);
-	lua_pop(L, 1);
-
-	lua_getfield(L, -1, "class");
-	std::string klass = luaL_checkstring(L, -1);
-	lua_pop(L, 1);
-
-	// get this classes instantiator
-	lua_getglobal(L, "wl"); // table wl
-	log("module: %s\n", module.c_str());
-	lua_getfield(L, -1, module.c_str()); // table wl module
-	std::string instantiator = "__" + klass;
-	log("Instantiator: %s\n", instantiator.c_str());
-	lua_getfield(L, -1, instantiator.c_str()); // table wl module func
-
-	// TODO: check if this is a function
-
-	log("Now calling: %i\n", lua_gettop(L));
-	lua_call(L, 0, 1);
-	lua_pushint32(L, 0); // table wl module lua_obj int
-	log("Calling done: %i\n", lua_gettop(L));
-	lua_gettable(L, -2); // table wl module lua_obj obj
-	log("Gettable call done!\n");
-
-	L_Coords ** o = static_cast<L_Coords ** >(lua_touserdata(L, - 1));
-	log("To userdata done: %p\n", o);
-	lua_pop(L, 4);
-
-	log("Before unpersist: %i\n", lua_gettop(L));
-	(*o)->__unpersist(L);
-	return 1;
-}
-
 /*
  * Intern definitions of Lua Functions
  */

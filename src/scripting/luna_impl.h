@@ -23,10 +23,13 @@
  * it in a header file, not an implementation file
  */
 
-#ifndef LUA_IMPL_H
-#define LUA_IMPL_H
+#ifndef LUNA_IMPL_H
+#define LUNA_IMPL_H
 
 #include <lua.hpp>
+
+// This is only needed in pluto.cc
+int luna_restore_object(lua_State * L);
 
 /**
  * Descriptions for the Properties/Methods that should be available to Lua
