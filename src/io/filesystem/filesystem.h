@@ -110,7 +110,7 @@ struct FileSystem {
 	// basic path/filename manipulation
 	std::string fixCrossFile(std::string);
 	std::string getWorkingDirectory() const;
-	std::string FS_CanonicalizeName(std::string const & path) const;
+	std::string FS_CanonicalizeName(std::string path) const;
 	bool pathIsAbsolute(std::string const & path) const;
 	static char const * FS_Filename(char const *);
 	static char const * FS_Filename(char const *, char const * & extension);

@@ -220,21 +220,19 @@ static void FS_Tokenize
  *
  * \todo Enable non-Unix paths
  */
-std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
+std::string FileSystem::FS_CanonicalizeName(std::string path) const {
 	std::list<std::string> components;
 	std::list<std::string>::iterator i;
-
-	std::string fixedpath(path);
 
 #ifdef WIN32
 	// remove all slashes with backslashes so following can work.
 	for (uint32_t j = 0; j < path.size(); ++j) {
-		if (fixedpath[j] == '/')
-			fixedpath[j] = '\\';
+		if (path[j] == '/')
+			path[j] = '\\';
 	}
 #endif
 
-	FS_Tokenize(fixedpath, m_filesep,
+	FS_Tokenize(path, m_filesep,
 		std::inserter(components, components.begin()));
 
 	//tilde expansion
@@ -245,7 +243,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	}
 
 	//make relative paths absolute (so that "../../foo" can work)
-	else if (!pathIsAbsolute(fixedpath)) {
+	else if (!pathIsAbsolute(path)) {
 		FS_Tokenize
 			(m_root.empty() ? getWorkingDirectory() : m_root, m_filesep,
 			std::inserter(components, components.begin()));
