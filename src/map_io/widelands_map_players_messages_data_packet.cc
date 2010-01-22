@@ -134,7 +134,8 @@ void Map_Players_Messages_Data_Packet::Read
 						}
 					messages.add_message
 						(*new Message
-						 	(s->get_string     ("sender", ""),
+						 	(s->get_string     ("sender", "") +
+						 	 std::string(" (loaded)"),
 						 	 sent,
 						 	 duration,
 						 	 s->get_name       (),
@@ -175,12 +176,31 @@ throw (_wexception)
 			assert
 				(message.duration() == Forever() or
 				 message.sent() < message.sent() + message.duration());
+			if
+				(message.duration() != Forever() and
+				 message.sent() + message.duration() < egbase.get_gametime())
+				log
+					("ERROR: Trying to save a message that should have expired:\n"
+					 "\tsent = %u, duration = %u, expiry = %u, gametime = %u\n"
+					 "\tsender = \"%s\"\n"
+					 "\ttitle: %s\n"
+					 "\tbody: %s\n"
+					 "\tposition: (%i, %i)\n"
+					 "\tstatus: %s\n",
+					 message.sent(), message.duration(),
+					 message.sent() + message.duration(), egbase.get_gametime(),
+					 message.sender().c_str(), message.title().c_str(),
+					 message.body().c_str(),
+					 message.position().x, message.position().y,
+					 message.status() == Message::New      ? "new"      :
+					 message.status() == Message::Read     ? "read"     :
+					 message.status() == Message::Archived ? "archived" : "ERROR");
 			assert
 				(message.duration() == Forever() or
 				 egbase.get_gametime() <= message.sent() + message.duration());
 			Section & s = prof.create_section_duplicate(message.title().c_str());
 			if (message.sender().size())
-				s.set_string("sender",    message.sender  ());
+				s.set_string("sender",    message.sender  () + " (saved)");
 			s.set_int      ("sent",      message.sent    ());
 			{
 				Duration const duration = message.duration();
