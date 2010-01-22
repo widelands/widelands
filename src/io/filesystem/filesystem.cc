@@ -180,14 +180,13 @@ std::string FileSystem::GetHomedir()
  * Split a string into components separated by a certain character.
  *
  * \param path The path to parse
- * \return a list of path components
- *
- * \todo This does not really belong into a filesystem class
+ * \param filesep The file path separator used by the native filesystem
+ * \param components The output iterator to place the path nodes into
  */
-static std::auto_ptr< std::list<std::string> > FS_Tokenize
-	(std::string const & path, char filesep)
+template<typename Inserter>
+static void FS_Tokenize
+	(std::string const & path, char filesep, Inserter components)
 {
-	std::auto_ptr< std::list<std::string> > components(new std::list<std::string>());
 	std::string::size_type pos;  //  start of token
 	std::string::size_type pos2; //  next filesep character
 
@@ -201,15 +200,13 @@ static std::auto_ptr< std::list<std::string> > FS_Tokenize
 
 	//split path into it's components
 	while (pos2 != std::string::npos) {
-		components->push_back(path.substr(pos, pos2 - pos));
+		*components++ = path.substr(pos, pos2 - pos);
 		pos = pos2 + 1;
 		pos2 = path.find(filesep, pos);
 	}
 
 	//extract the last component (most probably a filename)
-	components->push_back(path.substr(pos));
-
-	return components;
+	*components++ = path.substr(pos);
 }
 
 /**
@@ -218,7 +215,7 @@ static std::auto_ptr< std::list<std::string> > FS_Tokenize
  * \todo Enable non-Unix paths
  */
 std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
-	std::auto_ptr< std::list<std::string> > components;
+	std::list<std::string> components;
 	std::list<std::string>::iterator i;
 
 #ifdef WIN32
@@ -233,42 +230,32 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	}
 
 	bool absolute = pathIsAbsolute(fixedpath);
-	components = FS_Tokenize(fixedpath, m_filesep);
-
+	FS_Tokenize(fixedpath, m_filesep,
+		std::inserter(components, components.begin()));
 #else
 	bool absolute = pathIsAbsolute(path);
-	components = FS_Tokenize(path, m_filesep);
+	FS_Tokenize(path, m_filesep,
+		std::inserter(components, components.begin()));
 #endif
 
 	//tilde expansion
-	if (*components->begin() == "~") {
-		components->erase(components->begin());
-		std::auto_ptr< std::list<std::string> > homecomponents;
-		homecomponents = FS_Tokenize(GetHomedir(), m_filesep);
-		components->insert
-			(components->begin(), homecomponents->begin(), homecomponents->end());
-
+	if (*components.begin() == "~") {
+		components.erase(components.begin());
+		FS_Tokenize(GetHomedir(), m_filesep,
+			std::inserter(components, components.begin()));
 		absolute = true;
 	}
 
-
-
-
 	//make relative paths absolute (so that "../../foo" can work)
 	if (!absolute) {
-		std::auto_ptr< std::list<std::string> > cwdcomponents;
-
-		cwdcomponents =
-			FS_Tokenize
-				(m_root.empty() ? getWorkingDirectory() : m_root, m_filesep);
-
-		components->insert
-			(components->begin(), cwdcomponents->begin(), cwdcomponents->end());
+		FS_Tokenize
+			(m_root.empty() ? getWorkingDirectory() : m_root, m_filesep,
+			std::inserter(components, components.begin()));
 		absolute = true;
 	}
 
 	//clean up the path
-	for (i = components->begin(); i != components->end();) {
+	for (i = components.begin(); i != components.end();) {
 		bool erase = false;
 		bool erase_prev = false;
 
@@ -282,7 +269,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 
 		//remove double dot and the preceding component (if any)
 		if (*i == "..") {
-			if (i != components->begin())
+			if (i != components.begin())
 				erase_prev = true;
 			erase = true;
 		}
@@ -291,11 +278,11 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 			std::list<std::string>::iterator j = i;
 			--i;
 			++j;
-			i = components->erase(i, j);
+			i = components.erase(i, j);
 			continue;
 		}
 		if (erase) {
-			i = components->erase(i);
+			i = components.erase(i);
 			continue;
 		}
 
@@ -307,12 +294,12 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 #ifndef WIN32
 	canonpath = absolute ? "/" : "./";
 
-	for (i = components->begin(); i != components->end(); ++i)
+	for (i = components.begin(); i != components.end(); ++i)
 		canonpath += *i + "/";
 #else
 	canonpath = absolute ? "" : ".\\";
 
-	for (i = components->begin(); i != components->end(); ++i)
+	for (i = components.begin(); i != components.end(); ++i)
 		canonpath += *i + "\\";
 #endif
 
