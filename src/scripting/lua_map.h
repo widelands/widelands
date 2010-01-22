@@ -20,9 +20,7 @@
 #ifndef LUA_MAP_H
 #define LUA_MAP_H
 
-extern "C" {
-#include <lua.h>
-}
+#include <lua.hpp>
 
 void luaopen_wlmap(lua_State *);
 

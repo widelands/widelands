@@ -29,6 +29,9 @@
 
 #include <lua.hpp>
 
+#include "logic/widelands_filewrite.h"
+#include "logic/widelands_fileread.h"
+
 namespace Widelands {
 	struct Editor_Game_Base;
 	struct Game;
@@ -65,6 +68,10 @@ class LuaCoroutine {
 
 		virtual int get_status(void) = 0;
 		virtual int resume(uint32_t* = 0) = 0;
+
+		// TODO: test function
+		virtual int freeze(Widelands::FileWrite& ) = 0;
+		virtual int unfreeze(Widelands::FileRead& ) = 0;
 };
 
 /**

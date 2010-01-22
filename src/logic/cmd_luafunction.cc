@@ -58,10 +58,10 @@ void Cmd_LuaFunction::Read
 void Cmd_LuaFunction::Write
 	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
-	// TODO: SirVer, Lua: this doesn't work yet
 	fw.Unsigned16(CMD_LUAFUNCTION_VERSION);
 	GameLogicCommand::Write(fw, egbase, mos);
 
+	m_cr->freeze(fw);
 }
 
 }

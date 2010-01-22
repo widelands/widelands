@@ -51,10 +51,44 @@ class LuaCoroutine_Impl : public LuaCoroutine {
 			return rv;
 		}
 
+		virtual int freeze(Widelands::FileWrite& );
+		virtual int unfreeze(Widelands::FileRead& );
+
 	private:
 		lua_State * m_L;
 };
 
+int write_func(lua_State*, const void* p, size_t data, void* ud) {
+	Widelands::FileWrite* fw = static_cast<Widelands::FileWrite *>(ud);
+
+	fw->Data(p, data, Widelands::FileWrite::Pos::Null());
+
+	return data;
+}
+/*int read_func(lua_State* L, void* ud, size_t data, size_t * sz) {
+	FileWrite* fw = static_cast<Widelands::FileWrite *>(ud);
+
+	fw->Data(p, data);
+
+	return data;
+}*/
+#include "pluto/pluto.h"
+
+int LuaCoroutine_Impl::freeze(Widelands::FileWrite& fw) {
+	log("Freezing!\n");
+	lua_newtable(m_L);
+	lua_pushthread(m_L);
+
+	// fw.Unsigned32(0xff);
+	pluto_persist(m_L, &write_func, &fw);
+	return 1;
+}
+
+int LuaCoroutine_Impl::unfreeze(Widelands::FileRead& fr) {
+	/*log("Unfreezing!\n");
+	lua_createtable();
+	pluto_unpersist(m_L, func, &fw)*/
+}
 
 #endif /* end of include guard: COROUTINE_IMPL_H */
 

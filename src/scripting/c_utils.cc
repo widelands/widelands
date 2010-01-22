@@ -23,11 +23,6 @@
 #include <cstdio>
 #include <iostream>
 
-extern "C" {
-#include <lauxlib.h>
-#include <lualib.h>
-}
-
 Widelands::Game * get_game(lua_State * const L) {
 	lua_pushstring(L, "game");
 	lua_gettable(L, LUA_REGISTRYINDEX);

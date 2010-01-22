@@ -17,6 +17,8 @@
  *
  */
 
+#include <lua.hpp>
+
 #include "lua_debug.h"
 
 #include "c_utils.h"
@@ -25,10 +27,6 @@
 #include "logic/player.h"
 #include "wui/interactive_player.h"
 
-extern "C" {
-#include <lauxlib.h>
-#include <lualib.h>
-}
 
 // LUAMODULE wl.debug
 
