@@ -322,6 +322,9 @@ public:
 		lua_pushstring(L, td.name().c_str());
 		return 1;
 	}
+	// TODO: changing the terrain only works when the user has vision on the
+	// TODO: triangles changed. this is surely not intentional but must be coped
+	// TODO: with
 	int set_terd(lua_State * L) {
 		const char * name = luaL_checkstring(L, -1);
 		Map & map = get_game(L).map();
