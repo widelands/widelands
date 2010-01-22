@@ -234,7 +234,6 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	}
 #endif
 
-	bool absolute = pathIsAbsolute(fixedpath);
 	FS_Tokenize(fixedpath, m_filesep,
 		std::inserter(components, components.begin()));
 
@@ -246,7 +245,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	}
 
 	//make relative paths absolute (so that "../../foo" can work)
-	else if (!absolute) {
+	else if (!pathIsAbsolute(fixedpath)) {
 		FS_Tokenize
 			(m_root.empty() ? getWorkingDirectory() : m_root, m_filesep,
 			std::inserter(components, components.begin()));
