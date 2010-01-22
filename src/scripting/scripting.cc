@@ -37,6 +37,11 @@
 
 #include "scripting.h"
 
+// TODO: remove this include
+extern "C" {
+#include "pluto/pluto.h"
+}
+
 // TODO: *.lua globbing doesn't work with zip file system
 
 /*
@@ -129,6 +134,9 @@ LuaInterface_Impl::LuaInterface_Impl
 	lua_pushstring(m_L, "game");
 	lua_pushlightuserdata(m_L, static_cast<void *>(egbase));
 	lua_settable(m_L, LUA_REGISTRYINDEX);
+
+	// TODO: remove this again
+	luaopen_pluto(m_L);
 }
 
 LuaInterface_Impl::~LuaInterface_Impl() {

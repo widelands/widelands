@@ -19,7 +19,10 @@
 
 #include "coroutine_impl.h"
 
+extern "C" {
 #include "pluto/pluto.h"
+}
+
 #include "c_utils.h"
 
 

@@ -1,7 +1,7 @@
 #ifndef PDEP_H
 #define PDEP_H
 
-#include <lua.hpp>
+#include "lua.h"
 
 #include "ldo.h"
 #include "lfunc.h"
