@@ -259,7 +259,7 @@ void Map_Saver::save() throw (_wexception) {
 	log("done!\n ");
 
 	log("Writing Scripting Data ... ");
-	{Map_Scripting_Data_Packet                p; p.Write(m_fs, m_egbase, m_mos);}
+	{Map_Scripting_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Objective Data ... ");

@@ -331,7 +331,7 @@ int32_t WL_Map_Loader::load_map_complete
 	log("done!\n ");
 
 	log("Reading Scripting Data ... ");
-	{Map_Scripting_Data_Packet     p; p.Read(m_fs, egbase, !scenario, m_mol);}
+	{Map_Scripting_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
 
 	if (m_mol->get_nr_unloaded_objects())

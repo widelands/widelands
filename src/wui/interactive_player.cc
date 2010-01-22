@@ -51,7 +51,6 @@
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
-#include "message_queue.h"
 #include "overlay_manager.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"

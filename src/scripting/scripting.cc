@@ -36,7 +36,6 @@
 #include "scripting.h"
 
 // TODO: *.lua globbing doesn't work with zip file system
->>>>>>> Added a new command LuaFunction that resumes a coroutine. Now working on making the first one unneeded
 
 /*
 ============================================

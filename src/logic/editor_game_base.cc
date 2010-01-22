@@ -124,6 +124,8 @@ Editor_Game_Base::~Editor_Game_Base() {
 
 	container_iterate_const(Tribe_Vector, m_tribes, i)
 		delete *i.current;
+
+	delete m_lua;
 }
 
 void Editor_Game_Base::think()

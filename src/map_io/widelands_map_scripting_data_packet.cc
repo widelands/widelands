@@ -33,7 +33,7 @@ void Map_Scripting_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool,
-	 Map_Map_Object_Loader * const)
+	 Map_Map_Object_Loader &)
 throw (_wexception)
 {
 	filenameset_t scripting_files;
@@ -54,13 +54,15 @@ throw (_wexception)
 		if (pos != std::string::npos)
 			name = name.substr(pos + 1, name.size());
 
+		log("Registering script: (map,%s)\n", name.c_str());
+
 		egbase.lua().register_script("map", name, data);
 	}
 }
 
 
 void Map_Scripting_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver * const)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
 throw (_wexception)
 {
 

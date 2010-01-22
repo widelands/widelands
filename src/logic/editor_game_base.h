@@ -143,7 +143,7 @@ struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>
 	void set_ibase(Interactive_Base * const b) {m_ibase = b;}
 
 	/// Lua frontend, used to run lua triggers and events.
-	LuaInterface& lua() {return *m_lua;}
+	LuaInterface & lua() {return * m_lua;}
 
 private:
 	int32_t m_gametime;
