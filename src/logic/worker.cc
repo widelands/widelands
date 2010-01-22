@@ -92,37 +92,9 @@ bool Worker::run_createitem(Game & game, State & state, Action const & action)
  * \param action Which file to load and run
  */
 bool Worker::run_lua(Game & game, State & state, Action const & action) {
-	// TODO: SirVer, Lua: This is just one evil hack to try something out
-	log("state.ivar1: %s\n", state.ivar1);
-	log("state.ivar2: %i\n", state.ivar2);
-	if (!state.ivar2) {
-		try {
-			std::string const cwd =
-				"/Users/sirver/Desktop/Programming/cpp/widelands/"
-				"git_svn_trunk/tribes/barbarians/lumberjack/";
-			LuaState * st = game.lua().interpret_file(cwd + action.sparam1);
-			LuaCoroutine * cr = st->pop_coroutine();
-			molog("  Starting coroutine!\n");
-			molog("   %i\n", cr->resume());
-			state.path = reinterpret_cast<Path *>(cr);
-			state.ivar2 += 1;
-		} catch (LuaError & err) {
-			molog("  Lua program failed: %s\n", err.what());
-			send_signal(game, "fail"); //  mine empty, abort program
-			pop_task(game);
-			return true;
-		}
-	} else {
-		molog("  Advancing coroutine!\n");
-		LuaCoroutine * cr = reinterpret_cast<LuaCoroutine *>(state.path);
-		int rv = cr->resume();
-		molog("   %i\n", rv);
-		if (rv == 0) {
-			// All done, advance the program
-			++state.ivar1;
-			state.ivar2 = 0;
-		}
-	}
+	// TODO: SirVer, Lua: This is not currently working, rework this
+	// one evil hack to try something out
+	throw game_data_error("Sorry, this action is not currently implemented!");
 
 	// Advance program state
 	schedule_act(game, 10);

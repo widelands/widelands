@@ -21,16 +21,32 @@
 
 #include "lua_game.h"
 
-#include "scripting.h"
 #include "c_utils.h"
-
+#include "coroutine_impl.h"
 #include "logic/cmd_luafunction.h"
+#include "scripting.h"
+
 
 using namespace Widelands;
 
 /*
+ * ========================================================================
+ *                                CLASSES
+ * ========================================================================
+ */
+
+/*
  * Functions of game
  */
+/*
+ * TODO: document me
+ */
+static int L_get_time(lua_State * L) {
+	Game & game = *get_game(L);
+	lua_pushint32(L, game.get_gametime());
+	return 1;
+}
+
 
 /*
  * TODO: document me
@@ -40,7 +56,7 @@ static int L_run_coroutine(lua_State * L) {
 	if (nargs < 1)
 		report_error(L, "Too little arguments to run_at");
 
-	LuaCoroutine * cr = create_lua_state(L)->pop_coroutine();
+	LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(L, -1));
 	Game & game = *get_game(L);
 
 	game.enqueue_command
@@ -51,6 +67,7 @@ static int L_run_coroutine(lua_State * L) {
 
 const static struct luaL_reg wlgame [] = {
 	{"run_coroutine", &L_run_coroutine},
+	{"get_time", &L_get_time},
 	{0, 0}
 };
 

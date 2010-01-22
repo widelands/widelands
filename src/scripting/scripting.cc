@@ -40,162 +40,13 @@
 
 /*
 ============================================
-       Lua Coroutine
-============================================
-*/
-class LuaCoroutine_Impl : public LuaCoroutine {
-	public:
-		LuaCoroutine_Impl(lua_State * L) : m_L(L) {}
-		virtual ~LuaCoroutine_Impl() {}
-
-		virtual int get_status() {
-			return lua_status(m_L);
-		}
-		virtual int resume(uint32_t * sleeptime = 0) {
-			int rv = lua_resume(m_L, 0);
-			int n = lua_gettop(m_L);
-			uint32_t sleep_for = 0;
-			if (n == 1)
-				sleep_for = luaL_checkint32(m_L, -1);
-
-			if (sleeptime)
-				*sleeptime = sleep_for;
-
-			if(rv != 0 && rv != YIELDED)
-				return lua_error(m_L);
-
-			return rv;
-		}
-
-	private:
-		lua_State * m_L;
-};
-
-/*
-============================================
-       Lua State
-============================================
-*/
-class LuaState_Impl : public LuaState {
-	private:
-		bool m_owning_state;
-
-	// TODO: this shouldn't be public
-	public:
-		lua_State * m_L;
-
-	public:
-		LuaState_Impl(lua_State * l, bool owning_state);
-		virtual ~LuaState_Impl();
-
-		virtual void push_int32(int32_t);
-		virtual int32_t pop_int32();
-		virtual void push_uint32(uint32_t);
-		virtual uint32_t pop_uint32();
-		virtual void push_double(double);
-		virtual double pop_double();
-		virtual void push_string(std::string &);
-		virtual std::string pop_string();
-		virtual LuaCoroutine * pop_coroutine();
-};
-
-/*
- * Public functions
- */
-LuaState_Impl::LuaState_Impl(lua_State * l, bool owning_state) :
-	m_owning_state(owning_state),
-	m_L(l)
-{
-}
-
-LuaState_Impl::~LuaState_Impl()
-{
-	if (m_owning_state)
-		lua_close(m_L);
-}
-
-/**
- * Pops one value from the lua state with error checking
- * returns this value to the caller.
- */
-uint32_t LuaState_Impl::pop_uint32()
-{
-	lua_Integer d = lua_tointeger(m_L, -1);
-	if ((d < 0) or (d == 0 && !lua_isnumber(m_L, -1)))
-		throw LuaValueError("uint32");
-	lua_pop(m_L, 1);
-	return static_cast<uint32_t>(d);
-}
-
-int32_t LuaState_Impl::pop_int32()
-{
-	lua_Integer d = lua_tointeger(m_L, -1);
-	if (d == 0 && !lua_isnumber(m_L, -1))
-		throw LuaValueError("int32");
-	lua_pop(m_L, 1);
-	return static_cast<int32_t>(d);
-}
-
-double LuaState_Impl::pop_double()
-{
-	if (!lua_isnumber(m_L, -1))
-		throw LuaValueError("double");
-	lua_Number d = lua_tonumber(m_L, -1);
-	lua_pop(m_L, 1);
-	return static_cast<double>(d);
-}
-
-std::string LuaState_Impl::pop_string()
-{
-	const char * s = lua_tostring(m_L, -1);
-	if (!s)
-		throw LuaValueError("string");
-	lua_pop(m_L, 1);
-	return std::string(s);
-}
-
-LuaCoroutine * LuaState_Impl::pop_coroutine()
-{
-	lua_State * L = lua_tothread(m_L, -1);
-	if (!L)
-		throw LuaValueError("coroutine");
-	lua_pop(m_L, 1);
-	return new LuaCoroutine_Impl(L);
-}
-
-/**
- * Unconditionally push the value on the Stack
- */
-void LuaState_Impl::push_int32(int32_t val)
-{
-	lua_pushinteger(m_L, val);
-}
-
-void LuaState_Impl::push_uint32(uint32_t val)
-{
-	lua_pushinteger(m_L, val);
-}
-void LuaState_Impl::push_double(double val)
-{
-	lua_pushnumber(m_L, val);
-}
-void LuaState_Impl::push_string(std::string & val)
-{
-	lua_pushstring(m_L, val.c_str());
-}
-LuaState * create_lua_state(lua_State * st) {
-	return new LuaState_Impl(st, false);
-}
-
-/*
-============================================
        Lua Interface
 ============================================
 */
 class LuaInterface_Impl : public LuaInterface {
-	LuaState_Impl * m_state;
 	std::string m_last_error;
 	std::map<std::string, ScriptContainer> m_scripts;
+	lua_State * m_L;
 
 	/*
 	 * Private functions
@@ -207,8 +58,8 @@ class LuaInterface_Impl : public LuaInterface {
 		LuaInterface_Impl(Widelands::Editor_Game_Base *);
 		virtual ~LuaInterface_Impl();
 
-		virtual LuaState * interpret_string(std::string);
-		virtual LuaState * interpret_file(std::string);
+		virtual void interpret_string(std::string);
+		virtual void interpret_file(std::string);
 		virtual std::string const & get_last_error() const {return m_last_error;}
 
 		virtual void register_script(std::string, std::string, std::string);
@@ -216,7 +67,7 @@ class LuaInterface_Impl : public LuaInterface {
 			return m_scripts[ns];
 		}
 
-		virtual LuaState * run_script(std::string, std::string);
+		virtual void run_script(std::string, std::string);
 };
 
 /*************************
@@ -224,7 +75,7 @@ class LuaInterface_Impl : public LuaInterface {
  *************************/
 int LuaInterface_Impl::m_check_for_errors(int rv) {
 	if (rv)
-		throw LuaError(m_state->pop_string());
+		throw LuaError(luaL_checkstring(m_L, -1));
 	return rv;
 }
 
@@ -232,11 +83,8 @@ int LuaInterface_Impl::m_check_for_errors(int rv) {
  * Public functions
  *************************/
 LuaInterface_Impl::LuaInterface_Impl
-	(Widelands::Game * const game) : m_last_error("")
-{
-	lua_State * const L = lua_open();
-
-	m_state = new LuaState_Impl(L, true);
+	(Widelands::Editor_Game_Base * const egbase) : m_last_error("") {
+	m_L = lua_open();
 
 	// Open the lua libraries
 #ifdef DEBUG
@@ -262,28 +110,28 @@ LuaInterface_Impl::LuaInterface_Impl
 #endif
 	const luaL_Reg * lib = lualibs;
 	for (; lib->func; lib++) {
-		lua_pushcfunction(L, lib->func);
-		lua_pushstring(L, lib->name);
-		lua_call(L, 1, 0);
+		lua_pushcfunction(m_L, lib->func);
+		lua_pushstring(m_L, lib->name);
+		lua_call(m_L, 1, 0);
 	}
 
 	// Now our own
-	luaopen_wldebug(L);
-	luaopen_wlmap(L);
-	luaopen_wlgame(L);
+	luaopen_wldebug(m_L);
+	luaopen_wlmap(m_L);
+	luaopen_wlgame(m_L);
 
 	// Push the game onto the stack
-	lua_pushstring(L, "egbase");
-	lua_pushlightuserdata(L, static_cast<void *>(egbase));
-	lua_settable(L, LUA_REGISTRYINDEX);
+	lua_pushstring(m_L, "egbase");
+	lua_pushlightuserdata(m_L, static_cast<void *>(egbase));
+	lua_settable(m_L, LUA_REGISTRYINDEX);
 	// TODO: this should only be pushed if this is really a game!
-	lua_pushstring(L, "game");
-	lua_pushlightuserdata(L, static_cast<void *>(egbase));
-	lua_settable(L, LUA_REGISTRYINDEX);
+	lua_pushstring(m_L, "game");
+	lua_pushlightuserdata(m_L, static_cast<void *>(egbase));
+	lua_settable(m_L, LUA_REGISTRYINDEX);
 }
 
 LuaInterface_Impl::~LuaInterface_Impl() {
-	delete m_state;
+	lua_close(m_L);
 }
 
 
@@ -293,24 +141,20 @@ void LuaInterface_Impl::register_script
 	m_scripts[ns][name] = content;
 }
 
-LuaState * LuaInterface_Impl::interpret_string(std::string cmd) {
-	int rv = luaL_dostring(m_state->m_L, cmd.c_str());
+void LuaInterface_Impl::interpret_string(std::string cmd) {
+	int rv = luaL_dostring(m_L, cmd.c_str());
 	m_check_for_errors(rv);
-
-	return m_state;
 }
 
-LuaState * LuaInterface_Impl::interpret_file(std::string filename) {
+void LuaInterface_Impl::interpret_file(std::string filename) {
 	log("In LuaInterface::interpret_file:\n");
 	log(" <%s>\n", filename.c_str());
 
-	int rv = luaL_dofile(m_state->m_L, filename.c_str());
+	int rv = luaL_dofile(m_L, filename.c_str());
 	m_check_for_errors(rv);
-
-	return m_state;
 }
 
-LuaState * LuaInterface_Impl::run_script(std::string ns, std::string name) {
+void LuaInterface_Impl::run_script(std::string ns, std::string name) {
 	if
 		((m_scripts.find(ns) == m_scripts.end()) ||
 		 (m_scripts[ns].find(name) == m_scripts[ns].end()))

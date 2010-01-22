@@ -36,4 +36,12 @@ int report_error(lua_State *, const char *, ...) PRINTF_FORMAT(2, 3);
 
 #define luaL_checkint32(L, n)  static_cast<int32_t>(luaL_checkinteger(L, (n)))
 
+#define lua_pushint32(L, n) (lua_pushinteger(L, static_cast<int32_t>(n)))
+
+inline lua_State* luaL_checkthread(lua_State* L, int n) {
+	luaL_checktype(L, n, LUA_TTHREAD);
+	lua_State * thread = lua_tothread(L, n);
+	return thread;
+}
+
 #endif

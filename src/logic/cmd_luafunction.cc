@@ -27,18 +27,13 @@ namespace Widelands {
 
 void Cmd_LuaFunction::execute (Game & game) {
 	try {
-		log("### Resuming coroutine!\n");
 		uint32_t sleeptime;
 		int rv = m_cr->resume(&sleeptime);
 		if (rv == LuaCoroutine::YIELDED) {
-			game.enqueue_command
-				(new Widelands::Cmd_LuaFunction
-				 (game.get_gametime() + sleeptime, m_cr));
+			game.enqueue_command(new Widelands::Cmd_LuaFunction(sleeptime, m_cr));
 		} else if (rv == LuaCoroutine::DONE) {
 			delete m_cr;
 		}
-
-		log("### Resuming done: %i!\n", rv);
 	} catch (LuaError & e) {
 		throw wexception("%s", e.what());
 	}

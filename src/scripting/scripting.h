@@ -61,38 +61,19 @@ class LuaCoroutine {
 };
 
 /**
- * This class mainly provides convenient wrappers to access
- * variables that come from Lua
- */
-struct LuaState {
-	virtual void push_int32(int32_t) = 0;
-	virtual int32_t pop_int32() = 0;
-	virtual void push_uint32(uint32_t) = 0;
-	virtual uint32_t pop_uint32() = 0;
-	virtual void push_double(double) = 0;
-	virtual double pop_double() = 0;
-	virtual void push_string(std::string &) = 0;
-	virtual std::string pop_string() = 0;
-	virtual LuaCoroutine * pop_coroutine() = 0;
-};
-// TODO: this class and this wrapper should not be needed
-#include <lua.hpp>
-LuaState* create_lua_state(lua_State* );
-
-/**
  * This is the thin class that is used to execute code
  */
 typedef std::map<std::string, std::string> ScriptContainer;
 class LuaInterface {
 	public:
-		virtual LuaState* interpret_string(std::string) = 0;
-		virtual LuaState* interpret_file(std::string) = 0;
+		virtual void interpret_string(std::string) = 0;
+		virtual void interpret_file(std::string) = 0;
 		virtual std::string const & get_last_error() const = 0;
 
 		virtual void register_script(std::string, std::string, std::string) = 0;
 		virtual ScriptContainer& get_scripts_for(std::string) = 0;
 
-		virtual LuaState* run_script(std::string, std::string) = 0;
+		virtual void run_script(std::string, std::string) = 0;
 };
 
 LuaInterface* create_lua_interface(Widelands::Editor_Game_Base*);
