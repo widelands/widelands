@@ -293,13 +293,11 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 			std::list<std::string>::iterator j = i;
 			--i;
 			++j;
-			components->erase(i, j);
-			i = components->begin();
+			i = components->erase(i, j);
 			continue;
 		}
 		if (erase) {
-			components->erase(i);
-			i = components->begin();
+			i = components->erase(i);
 			continue;
 		}
 
