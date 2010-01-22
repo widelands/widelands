@@ -255,28 +255,17 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 
 	//clean up the path
 	for (i = components.begin(); i != components.end();) {
-		bool erase = false;
-		bool erase_prev = false;
-
 		//remove single dot
 		if (*i == ".")
-			erase = true;
+		{
+			i = components.erase(i);
+			continue;
+		}
 
 		//remove double dot and the preceding component (if any)
 		if (*i == "..") {
 			if (i != components.begin())
-				erase_prev = true;
-			erase = true;
-		}
-
-		if (erase_prev && erase) {
-			std::list<std::string>::iterator j = i;
-			--i;
-			++j;
-			i = components.erase(i, j);
-			continue;
-		}
-		if (erase) {
+				i = components.erase(--i);
 			i = components.erase(i);
 			continue;
 		}
