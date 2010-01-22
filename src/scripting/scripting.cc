@@ -61,6 +61,9 @@ class LuaCoroutine_Impl : public LuaCoroutine {
 			if (sleeptime)
 				*sleeptime = sleep_for;
 
+			if(rv != 0 && rv != YIELDED)
+				return lua_error(m_L);
+
 			return rv;
 		}
 

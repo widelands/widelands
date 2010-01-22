@@ -36,9 +36,7 @@ using namespace Widelands;
  * TODO: document me
  */
 static int L_run_coroutine(lua_State * L) {
-	log("In corotine!\n");
 	int nargs = lua_gettop(L);
-	log("nargs: %i\n", nargs);
 	if (nargs < 1)
 		report_error(L, "Too little arguments to run_at");
 
