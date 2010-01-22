@@ -251,8 +251,13 @@ public:
 	L_Coords(Coordinate x, Coordinate y) : m_c(x, y) {}
 	L_Coords(lua_State * L)
 	{
-		m_c.x = luaL_checknumber(L, 1);
-		m_c.y = luaL_checknumber(L, 2);
+		Map & m = get_game(L) - >map();
+		m_c.x = luaL_checkuint32(L, 1);
+		m_c.y = luaL_checkuint32(L, 2);
+		if (m_c.x >= m.get_width())
+			report_error(L, "x coordinate out of range!");
+		if (m_c.y >= m.get_height())
+			report_error(L, "y coordinate out of range!");
 	}
 	~L_Coords() {}
 
@@ -266,7 +271,7 @@ public:
 	/*
 	 * Properties
 	 */
-   WRAPPED_PROPERTY_GET_INT(m_c, x)                                     \
+	WRAPPED_PROPERTY_GET_INT(m_c, x)                                     \
    WRAPPED_PROPERTY_GET_INT(m_c, y)                                     \
 
 	/*
