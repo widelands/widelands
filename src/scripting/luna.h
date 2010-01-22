@@ -178,16 +178,22 @@ int to_lua(lua_State * const L, T * const obj) {
  */
 template <class T>
 T * * get_user_class(lua_State * const L, int narg) {
-	luaL_checktype(L, narg, LUA_TTABLE);
-
-	//  GET table[0]
-	lua_pushnumber(L, 0);
-	if(narg > 0)
-		lua_rawget(L, narg);
-	else
-		lua_rawget(L, narg - 1);
+	m_extract_userdata_from_user_class<T>(L, narg);
 
 	T** rv = static_cast<T * *>(luaL_checkudata(L, -1, T::className));
+	lua_pop(L, 1);
+
+	return rv;
+}
+/*
+ * This forces the pointer to be a base class. ONLY use this if you are sure
+ * that indeed the object is a base class, like you can be in __eq
+ */
+template <class T>
+T * * get_base_user_class(lua_State * const L, int narg) {
+	m_extract_userdata_from_user_class<T>(L, narg);
+
+	T** rv = static_cast<T * *>(lua_touserdata(L, -1));
 	lua_pop(L, 1);
 
 	return rv;

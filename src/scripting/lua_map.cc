@@ -94,6 +94,14 @@ public:
 	/*
 	 * Lua Methods
 	 */
+	int __eq(lua_State * L) {
+		Game & game = *get_game(L);
+		L_MapObject * other = *get_base_user_class<L_MapObject>(L, -1);
+
+		lua_pushboolean
+			(L, other->m_get(game, L)->serial() == m_get(game, L)->serial());
+		return 1;
+	}
 	int remove(lua_State * L) {
 		Game & game = *get_game(L);
 		Map_Object * o = m_get(game, L);
@@ -121,6 +129,7 @@ const char L_MapObject::className[] = "MapObject";
 const char L_MapObject::parentName[] = "";
 const MethodType<L_MapObject> L_MapObject::Methods[] = {
 	METHOD(L_MapObject, remove),
+	METHOD(L_MapObject, __eq),
 	{0, 0},
 };
 const PropertyType<L_MapObject> L_MapObject::Properties[] = {
@@ -200,14 +209,6 @@ public:
 	/*
 	 * Lua Methods
 	 */
-	int __eq(lua_State * L) {
-		Game & game = *get_game(L);
-		L_BaseImmovable * other = *get_user_class<L_BaseImmovable>(L, -1);
-
-		lua_pushboolean
-			(L, other->m_get(game, L)->serial() == m_get(game, L)->serial());
-		return 1;
-	}
 
 	/*
 	 * C Methods
@@ -223,7 +224,6 @@ private:
 const char L_BaseImmovable::className[] = "BaseImmovable";
 const char L_BaseImmovable::parentName[] = "MapObject";
 const MethodType<L_BaseImmovable> L_BaseImmovable::Methods[] = {
-	METHOD(L_BaseImmovable, __eq),
 	{0, 0},
 };
 const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {

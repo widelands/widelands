@@ -274,4 +274,22 @@ void m_register_methods_in_metatable(lua_State * const L)
 	}
 }
 
+/*
+ * Get the userdata in a given stack object
+ */
+template <class T>
+void m_extract_userdata_from_user_class(lua_State* const L, int narg) {
+	luaL_checktype(L, narg, LUA_TTABLE);
+
+	//  GET table[0]
+	lua_pushnumber(L, 0);
+	if(narg > 0)
+		lua_rawget(L, narg);
+	else
+		lua_rawget(L, narg - 1);
+
+	if(not lua_isuserdata(L,-1))
+		luaL_typerror(L, narg, T::className);
+}
+
 #endif
