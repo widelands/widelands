@@ -259,6 +259,18 @@ public:
 	 */
 	int get_x(lua_State * L) {lua_pushuint32(L, m_c.x); return 1;}
 	int get_y(lua_State * L) {lua_pushuint32(L, m_c.y); return 1;}
+#define GET_X_NEIGHBOUR(X) int get_ ##X(lua_State* L) { \
+   Coords n; \
+   get_game(L)->map().get_ ##X(m_c, &n); \
+   to_lua<L_Coords>(L, new L_Coords(n.x, n.y)); \
+	return 1; \
+}
+	GET_X_NEIGHBOUR(rn);
+	GET_X_NEIGHBOUR(ln);
+	GET_X_NEIGHBOUR(trn);
+	GET_X_NEIGHBOUR(tln);
+	GET_X_NEIGHBOUR(bln);
+	GET_X_NEIGHBOUR(brn);
 
 	/*
 	 * Lua methods
@@ -283,6 +295,12 @@ const MethodType<L_Coords> L_Coords::Methods[] = {
 const PropertyType<L_Coords> L_Coords::Properties[] = {
 	PROP_RO(L_Coords, x),
 	PROP_RO(L_Coords, y),
+	PROP_RO(L_Coords, rn),
+	PROP_RO(L_Coords, ln),
+	PROP_RO(L_Coords, trn),
+	PROP_RO(L_Coords, tln),
+	PROP_RO(L_Coords, bln),
+	PROP_RO(L_Coords, brn),
 	{0, 0, 0},
 };
 
