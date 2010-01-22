@@ -224,8 +224,8 @@ const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
  */
 class L_Coords : public L_MapModuleClass {
 	Coords m_c;
-
 public:
+
 	LUNA_CLASS_HEAD(L_Coords);
 
 	/*
@@ -317,15 +317,14 @@ const PropertyType<L_Coords> L_Coords::Properties[] = {
  */
 static int L_create_immovable(lua_State * const L) {
 	char const * const objname = luaL_checkstring(L, 1);
-	uint32_t     const x       = luaL_checkint32(L, 2);
-	uint32_t     const y       = luaL_checkint32(L, 3);
+	L_Coords * c = *get_user_class<L_Coords>(L, 2);
 
 	Game & game = *get_game(L);
-	Coords pos(x, y);
 
 	// Check if the map is still free here
 	// TODO: this exact code is duplicated in worker.cc
-	if (BaseImmovable const * const imm = game.map()[pos].get_immovable())
+	if
+	 (BaseImmovable const * const imm = game.map()[c->coords()].get_immovable())
 		if (imm->get_size() >= BaseImmovable::SMALL)
 			return report_error(L, "Node is no longer free!");
 
@@ -333,7 +332,7 @@ static int L_create_immovable(lua_State * const L) {
 	if (imm_idx < 0)
 		return report_error(L, "Unknown immovable <%s>", objname);
 
-	BaseImmovable & m = game.create_immovable (pos, imm_idx, 0);
+	BaseImmovable & m = game.create_immovable (c->coords(), imm_idx, 0);
 
 	// Send this to lua
 	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(m));

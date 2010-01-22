@@ -106,8 +106,8 @@ end
 -- works because serial is a property of a MapObject.
 immovable_creation_tests = lunit.TestCase("Immovable Creation")
 function immovable_creation_tests:test_create()
-   imm = wl.map.create_immovable("tree1", 9, 10)
-   imm2 = wl.map.create_immovable("tree2", 10, 10)
+   imm = wl.map.create_immovable("tree1", wl.map.Coords(9, 10))
+   imm2 = wl.map.create_immovable("tree2", wl.map.Coords(10, 10))
    assert_table(imm) 
    assert_table(imm2)
    assert_true(imm.serial > 0)
@@ -123,7 +123,7 @@ end
 -- ===================
 immovable_tests = lunit.TestCase("Immovable usage")
 function immovable_tests:setup()
-   self.i = wl.map.create_immovable("tree1", 9, 10)
+   self.i = wl.map.create_immovable("tree1", wl.map.Coords(9, 10))
 end
 function immovable_tests:teardown()
    pcall(self.i.remove, self.i)
@@ -148,11 +148,11 @@ end
 -- ==============
 immovable_property_tests = lunit.TestCase("Immovable sizes")
 function immovable_property_tests:setup()
-   self.none = wl.map.create_immovable("pebble1", 9, 10)
-   self.small = wl.map.create_immovable("tree1", 10, 10)
+   self.none = wl.map.create_immovable("pebble1", wl.map.Coords(9, 10))
+   self.small = wl.map.create_immovable("tree1", wl.map.Coords(10, 10))
    -- No medium bob in world. Need a user immovable here!!! TODO
    -- self.medium = wl.map.create_immovable("tree1", 10, 10)
-   self.big = wl.map.create_immovable("stones4", 15, 10)
+   self.big = wl.map.create_immovable("stones4", wl.map.Coords(15, 10))
 end
 function immovable_property_tests:teardown()
    pcall(self.none.remove, self.none)
