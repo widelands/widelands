@@ -200,13 +200,15 @@ static void FS_Tokenize
 
 	//split path into it's components
 	while (pos2 != std::string::npos) {
-		*components++ = path.substr(pos, pos2 - pos);
+		if (pos != pos2)
+			*components++ = path.substr(pos, pos2 - pos);
 		pos = pos2 + 1;
 		pos2 = path.find(filesep, pos);
 	}
 
 	//extract the last component (most probably a filename)
-	*components++ = path.substr(pos);
+	if (pos < path.length())
+		*components++ = path.substr(pos);
 }
 
 /**
@@ -236,7 +238,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 #endif
 
 	//tilde expansion
-	if (*components.begin() == "~") {
+	if (!components.empty() && *components.begin() == "~") {
 		components.erase(components.begin());
 		FS_Tokenize(GetHomedir(), m_filesep,
 			std::inserter(components, components.begin()));
@@ -255,10 +257,6 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	for (i = components.begin(); i != components.end();) {
 		bool erase = false;
 		bool erase_prev = false;
-
-		//remove empty components ("foo/bar//baz/")
-		if (i->empty())
-			erase = true;
 
 		//remove single dot
 		if (*i == ".")
