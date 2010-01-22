@@ -257,7 +257,6 @@ const PropertyType<L_Coords> L_Coords::Properties[] = {
 };
 
 // TODO: dirty test function
-extern "C" {
 int restore_wl_object(lua_State * L) {
 	lua_getfield(L, -1, "module");
 	std::string module = luaL_checkstring(L, -1);
@@ -291,7 +290,6 @@ int restore_wl_object(lua_State * L) {
 	log("Before unpersist: %i\n", lua_gettop(L));
 	(*o)->__unpersist(L);
 	return 1;
-}
 }
 
 /*

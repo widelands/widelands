@@ -12,7 +12,7 @@
 #include <stddef.h>
 #include <stdio.h>
 
-#include "lua.h"
+#include <lua.hpp>
 
 
 #if defined(LUA_COMPAT_GETN)

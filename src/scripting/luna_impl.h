@@ -172,6 +172,7 @@ int m_garbage_collect(lua_State * const L) {
 	return 0;
 }
 
+
 /**
  * Object creation from lua. The object needs a constructor that only
  * takes a lua_State. If direct creation of this object is not desired,

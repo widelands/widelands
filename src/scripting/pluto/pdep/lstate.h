@@ -7,7 +7,7 @@
 #ifndef lstate_h
 #define lstate_h
 
-#include "lua.h"
+#include <lua.hpp>
 
 #include "lobject.h"
 #include "ltm.h"

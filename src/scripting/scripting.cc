@@ -34,9 +34,7 @@
 // TODO:   unpickling, Luna & Luna changes
 // TODO: make pickling independet of OS by using widelands Stream*
 // TODO: remove this include
-extern "C" {
 #include "pluto/pluto.h"
-}
 
 // TODO: *.lua globbing doesn't work with zip file system
 // TODO: get rid of LuaCmd. Only LuaFunction should be kept alife
