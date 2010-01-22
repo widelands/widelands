@@ -30,9 +30,12 @@ int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
 {
 	int rv = lua_resume(m_L, 0);
 	int n = lua_gettop(m_L);
+
 	uint32_t sleep_for = 0;
-	if (n == 1)
+	if (n == 1) {
 		sleep_for = luaL_checkint32(m_L, -1);
+		lua_pop(m_L, 1);
+	}
 
 	if (sleeptime)
 		*sleeptime = sleep_for;
@@ -59,16 +62,44 @@ int write_func(lua_State *, const void * p, size_t data, void * ud) {
 	return data;
 }*/
 
+#define PUSH_GLOBAL(name) lua_getglobal(m_parent, name); \
+   lua_pushint32(m_parent, idx++); \
+   lua_settable(m_parent, -3); \
+
 int LuaCoroutine_Impl::freeze(Widelands::FileWrite & fw) {
-	log("Freezing!\n");
-	lua_newtable(m_L);
-	log("after new table!\n");
-	lua_newtable(m_L);
-        // lua_pushvalue(m_L, LUA_GLOBALSINDEX);
-	log("after pushvalue!\n");
+	int n = lua_gettop(m_parent);
+	log("Freezing: %i\n", n);
+	int32_t idx = 1;
+
+	// Push all the stuff that should be be regenerated
+	lua_newtable(m_parent);
+	// PUSH_GLOBAL("wl");
+	// PUSH_GLOBAL("package");
+	// PUSH_GLOBAL("table");
+	// PUSH_GLOBAL("io");
+	// PUSH_GLOBAL("os");
+	// PUSH_GLOBAL("string");
+	// PUSH_GLOBAL("math");
+	// PUSH_GLOBAL("coroutine");
+	// PUSH_GLOBAL("debug");
+	// PUSH_GLOBAL("require");
+	// PUSH_GLOBAL("print");
+
+	lua_getglobal(m_parent, "coroutine");
+	lua_getfield(m_parent, -1, "yield");
+	lua_pushint32(m_parent, idx++); // stack: newtable coroutine yield integer
+	lua_settable(m_parent, -4); //  newtable[yield] = integer
+	lua_pop(m_parent, 1); // pop coroutine
+
+	log("Pushed all globals");
+
+        // lua_pushvalue(m_parent, LUA_GLOBALSINDEX);
+	log("State: %i\n", get_status());
+	lua_pushthread(m_L);
+	log("after pushing object: %i\n", lua_gettop(m_parent));
 
 	// fw.Unsigned32(0xff);
-	pluto_persist(m_L, &write_func, &fw);
+	pluto_persist(m_parent, &write_func, &fw);
 	log("After pluto_persist!\n");
 
 	return 1;

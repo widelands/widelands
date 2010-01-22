@@ -137,6 +137,8 @@ LuaInterface_Impl::LuaInterface_Impl
 
 	// TODO: remove this again
 	luaopen_pluto(m_L);
+	lua_pop(m_L, 1);
+	// End of removing
 }
 
 LuaInterface_Impl::~LuaInterface_Impl() {

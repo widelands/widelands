@@ -29,7 +29,8 @@
 */
 class LuaCoroutine_Impl : public LuaCoroutine {
 	public:
-		LuaCoroutine_Impl(lua_State * L) : m_L(L) {}
+		LuaCoroutine_Impl(lua_State * parent, lua_State* L) :
+			m_L(L), m_parent(parent) {}
 		virtual ~LuaCoroutine_Impl() {}
 
 		virtual int get_status() {
@@ -40,7 +41,7 @@ class LuaCoroutine_Impl : public LuaCoroutine {
 		virtual int unfreeze(Widelands::FileRead& );
 
 	private:
-		lua_State * m_L;
+		lua_State * m_L, * m_parent;
 };
 
 

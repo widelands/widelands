@@ -186,7 +186,6 @@ template <class T>
 void m_add_constructor_to_lua(lua_State * const L) {
 	lua_pushcfunction (L, &m_constructor<T>);
 	lua_setfield(L, -2, T::className);
-	lua_pop(L, 1);
 }
 
 template <class T>
@@ -212,7 +211,7 @@ int m_create_metatable_for_class(lua_State * const L) {
 
 template <class T>
 void m_register_properties_in_metatable
-	(lua_State * const L, int const metatable)
+	(lua_State * const L)
 {
 	for (int i = 0; T::Properties[i].name; ++i) {
 		// metatable[prop_name] = Pointer to getter setter
@@ -221,12 +220,12 @@ void m_register_properties_in_metatable
 			(L,
 			 const_cast<void *>
 			 	(reinterpret_cast<void const *>(&T::Properties[i])));
-		lua_settable(L, metatable);
+		lua_settable(L, -3); // Metatable is directly before our pushed stuff
 	}
 }
 
 template <class T, class PT>
-void m_register_methods_in_metatable(lua_State * const L, int const metatable)
+void m_register_methods_in_metatable(lua_State * const L)
 {
 	// We add a lua C closure around the call, the closure gets the pointer to
 	// the c method to call as its only argument. We can then use
@@ -240,7 +239,7 @@ void m_register_methods_in_metatable(lua_State * const L, int const metatable)
 			 const_cast<void *>
 			 	(reinterpret_cast<void const *>(&PT::Methods[i].method)));
 		lua_pushcclosure(L, &(m_method_dispatch<T>), 1);
-		lua_settable    (L, metatable);
+		lua_settable(L, -3); // Metatable is directly before our pushed stuff
 	}
 }
 

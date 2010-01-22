@@ -60,22 +60,37 @@
  * be used to create the class in one depth deeper (e.g. wl.map)
  */
 template <class T>
-int register_class(lua_State * const L, char const * const sub_namespace = "")
+void register_class
+	(lua_State * const L, char const * const sub_namespace = "",
+	 bool return_metatable = false)
 {
+	int to_pop = 0;
+
 	// Get wl table which MUST already exist
 	lua_getglobal(L, "wl");
+	to_pop ++;
 
 	// push the wl sub namespace table onto the stack, if desired
-	if (strlen(sub_namespace) != 0)
+	if (strlen(sub_namespace) != 0) {
 		lua_getfield(L, -1, sub_namespace);
+		to_pop ++;
+	}
 
+	log("Constructor %i\n", lua_gettop(L));
 	m_add_constructor_to_lua<T>(L);
-	int metatable_idx = m_create_metatable_for_class<T>(L);
+	lua_pop(L, to_pop); // Pop everything we used so far.
 
-	m_register_properties_in_metatable<T>(L, metatable_idx);
-	m_register_methods_in_metatable<T, T>(L, metatable_idx);
+	log("MetaTable %i\n", lua_gettop(L));
+	m_create_metatable_for_class<T>(L);
 
-	return metatable_idx;
+	log("Before properties %i\n", lua_gettop(L));
+	m_register_properties_in_metatable<T>(L);
+	log("After properties %i\n", lua_gettop(L));
+	m_register_methods_in_metatable<T, T>(L);
+
+	log("MetaTable %i\n", lua_gettop(L));
+	if(!return_metatable)
+		lua_pop(L, 1); // remove the Metatable
 }
 /**
  * Makes the first class a children of the second. Make sure that T is really a
@@ -83,10 +98,10 @@ int register_class(lua_State * const L, char const * const sub_namespace = "")
  * after register_class, so that the Metatable index is still valid
  */
 template <class T, class PT>
-void add_parent(lua_State * L, int metatable_idx)
+void add_parent(lua_State * L)
 {
-	m_register_properties_in_metatable<PT>(L, metatable_idx);
-	m_register_methods_in_metatable<T, PT>(L, metatable_idx);
+	m_register_properties_in_metatable<PT>(L);
+	m_register_methods_in_metatable<T, PT>(L);
 }
 
 /*

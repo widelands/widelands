@@ -56,8 +56,10 @@ static int L_run_coroutine(lua_State * L) {
 	if (nargs < 1)
 		report_error(L, "Too little arguments to run_at");
 
-	LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(L, -1));
+	LuaCoroutine * cr = new LuaCoroutine_Impl(L, luaL_checkthread(L, -1));
 	Game & game = *get_game(L);
+
+	lua_pop(L, 1); // Remove coroutine from stack
 
 	game.enqueue_command
 		(new Widelands::Cmd_LuaFunction(game.get_gametime(), cr));
@@ -73,5 +75,6 @@ const static struct luaL_reg wlgame [] = {
 
 void luaopen_wlgame(lua_State * L) {
 	luaL_register(L, "wl.game", wlgame);
+	lua_pop(L, 1); // pop the table
 }
 

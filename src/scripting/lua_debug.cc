@@ -74,4 +74,6 @@ const static struct luaL_reg wldebug [] = {
 
 void luaopen_wldebug(lua_State * const l) {
 	luaL_register(l, "wl.debug", wldebug);
+
+	lua_pop(l, 1); // pop the table from the stack again
 }
