@@ -222,18 +222,18 @@ const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
 /*
  * Coordinates
  */
-class L_Coords : public L_MapModuleClass {
-	Coords m_c;
+class L_Field : public L_MapModuleClass {
+	FCoords m_c;
 public:
 
-	LUNA_CLASS_HEAD(L_Coords);
+	LUNA_CLASS_HEAD(L_Field);
 
 	/*
 	 * Needed functionality
 	 */
-	L_Coords() {}
-	L_Coords(Coordinate x, Coordinate y) : m_c(x, y) {}
-	L_Coords(lua_State * L)
+	L_Field() {}
+	L_Field(Coordinate x, Coordinate y, Field * f) : m_c(Coords(x, y), f) {}
+	L_Field(lua_State * L)
 	{
 		Map & m = get_game(L)->map();
 		uint32_t rv = luaL_checkuint32(L, 1);
@@ -244,14 +244,16 @@ public:
 		if (rv >= static_cast<uint32_t>(m.get_height()))
 			report_error(L, "y coordinate out of range!");
 		m_c.y = rv;
+		m_c.field = &get_game(L)->map()[m_c];
 	}
-	~L_Coords() {}
+	~L_Field() {}
 
 	virtual void __persist(lua_State * L) {
 		PERS_INT32("x", m_c.x); PERS_INT32("y", m_c.y);
 	}
 	virtual void __unpersist(lua_State * L) {
 		UNPERS_INT32("x", m_c.x); UNPERS_INT32("y", m_c.y);
+		m_c.field = &get_game(L)->map()[m_c];
 	}
 
 	/*
@@ -260,9 +262,9 @@ public:
 	int get_x(lua_State * L) {lua_pushuint32(L, m_c.x); return 1;}
 	int get_y(lua_State * L) {lua_pushuint32(L, m_c.y); return 1;}
 #define GET_X_NEIGHBOUR(X) int get_ ##X(lua_State* L) { \
-   Coords n; \
+   FCoords n; \
    get_game(L)->map().get_ ##X(m_c, &n); \
-   to_lua<L_Coords>(L, new L_Coords(n.x, n.y)); \
+   to_lua<L_Field>(L, new L_Field(n.x, n.y, n.field)); \
 	return 1; \
 }
 	GET_X_NEIGHBOUR(rn);
@@ -276,31 +278,31 @@ public:
 	 * Lua methods
 	 */
 	int __eq(lua_State * L) {
-		lua_pushboolean(L, (*get_user_class<L_Coords>(L, -1))->m_c == m_c);
+		lua_pushboolean(L, (*get_user_class<L_Field>(L, -1))->m_c == m_c);
 		return 1;
 	}
 
 	/*
 	 * C methods
 	 */
-	inline Coords & coords() {return m_c;}
+	inline FCoords & coords() {return m_c;}
 
 };
-const char L_Coords::className[] = "Coords";
-const char L_Coords::parentName[] = "";
-const MethodType<L_Coords> L_Coords::Methods[] = {
-	METHOD(L_Coords, __eq),
+const char L_Field::className[] = "Field";
+const char L_Field::parentName[] = "";
+const MethodType<L_Field> L_Field::Methods[] = {
+	METHOD(L_Field, __eq),
 	{0, 0},
 };
-const PropertyType<L_Coords> L_Coords::Properties[] = {
-	PROP_RO(L_Coords, x),
-	PROP_RO(L_Coords, y),
-	PROP_RO(L_Coords, rn),
-	PROP_RO(L_Coords, ln),
-	PROP_RO(L_Coords, trn),
-	PROP_RO(L_Coords, tln),
-	PROP_RO(L_Coords, bln),
-	PROP_RO(L_Coords, brn),
+const PropertyType<L_Field> L_Field::Properties[] = {
+	PROP_RO(L_Field, x),
+	PROP_RO(L_Field, y),
+	PROP_RO(L_Field, rn),
+	PROP_RO(L_Field, ln),
+	PROP_RO(L_Field, trn),
+	PROP_RO(L_Field, tln),
+	PROP_RO(L_Field, bln),
+	PROP_RO(L_Field, brn),
 	{0, 0, 0},
 };
 
@@ -317,14 +319,14 @@ const PropertyType<L_Coords> L_Coords::Properties[] = {
  */
 static int L_create_immovable(lua_State * const L) {
 	char const * const objname = luaL_checkstring(L, 1);
-	L_Coords * c = *get_user_class<L_Coords>(L, 2);
+	L_Field * c = *get_user_class<L_Field>(L, 2);
 
 	Game & game = *get_game(L);
 
 	// Check if the map is still free here
 	// TODO: this exact code is duplicated in worker.cc
 	if
-	 (BaseImmovable const * const imm = game.map()[c->coords()].get_immovable())
+	 (BaseImmovable const * const imm = c->coords().field->get_immovable())
 		if (imm->get_size() >= BaseImmovable::SMALL)
 			return report_error(L, "Node is no longer free!");
 
@@ -332,7 +334,7 @@ static int L_create_immovable(lua_State * const L) {
 	if (imm_idx < 0)
 		return report_error(L, "Unknown immovable <%s>", objname);
 
-	BaseImmovable & m = game.create_immovable (c->coords(), imm_idx, 0);
+	BaseImmovable & m = game.create_immovable(c->coords(), imm_idx, 0);
 
 	// Send this to lua
 	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(m));
@@ -396,7 +398,7 @@ void luaopen_wlmap(lua_State * L) {
 	luaL_register(L, "wl.map", wlmap);
 	lua_pop(L, 1); // pop the table from the stack
 
-	register_class<L_Coords>(L, "map");
+	register_class<L_Field>(L, "map");
 	register_class<L_MapObject>(L, "map");
 
 	register_class<L_BaseImmovable>(L, "map", true);

@@ -4,93 +4,93 @@ lunit.setprivfenv()
 lunit.import "assertions"
 
 -- =======================================================================
---                                Coords test                               
+--                                Field test                               
 -- =======================================================================
-coords_tests = lunit.TestCase("Coords creation")
+coords_tests = lunit.TestCase("Field creation")
 function coords_tests:test_create()
-   c = wl.map.Coords(25,32)
+   c = wl.map.Field(25,32)
    assert_equal(c.x, 25)
    assert_equal(c.y, 32)
 end
 function coords_tests:test_create_xistobig()
-   assert_error("x should be too big", function() wl.map.Coords(64, 23) end)
+   assert_error("x should be too big", function() wl.map.Field(64, 23) end)
 end
 function coords_tests:test_create_yistobig()
-   assert_error("y should be too big", function() wl.map.Coords(25, 64) end)
+   assert_error("y should be too big", function() wl.map.Field(25, 64) end)
 end
 function coords_tests:test_create_xisnegativ()
-   assert_error("x is negativ", function() wl.map.Coords(-12, 23) end)
+   assert_error("x is negativ", function() wl.map.Field(-12, 23) end)
 end
 function coords_tests:test_create_yisnegativ()
-   assert_error("y is negativ", function() wl.map.Coords(25, -12) end)
+   assert_error("y is negativ", function() wl.map.Field(25, -12) end)
 end
 function coords_tests:test_direct_change_impossible()
    assert_error("c.x should be read only", function() c.x = 12 end) 
    assert_error("c.y should be read only", function() c.y = 12 end) 
 end
 function coords_tests:test_r_neighbour()
-   c = wl.map.Coords(25,40)
-   assert_equal(wl.map.Coords(26,40), c.rn)
-   c = wl.map.Coords(63,40)
-   assert_equal(wl.map.Coords(0,40), c.rn)
+   c = wl.map.Field(25,40)
+   assert_equal(wl.map.Field(26,40), c.rn)
+   c = wl.map.Field(63,40)
+   assert_equal(wl.map.Field(0,40), c.rn)
 end
 function coords_tests:test_l_neighbour()
-   c = wl.map.Coords(25,40)
-   assert_equal(wl.map.Coords(24,40), c.ln)
-   c = wl.map.Coords(0,40)
-   assert_equal(wl.map.Coords(63,40), c.ln)
+   c = wl.map.Field(25,40)
+   assert_equal(wl.map.Field(24,40), c.ln)
+   c = wl.map.Field(0,40)
+   assert_equal(wl.map.Field(63,40), c.ln)
 end
 function coords_tests:test_trn_neighbour()
-   c = wl.map.Coords(25,40)
-   assert_equal(wl.map.Coords(25,39), c.trn)
-   assert_equal(wl.map.Coords(26,38), c.trn.trn)
-   assert_equal(wl.map.Coords(26,37), c.trn.trn.trn)
-   c = wl.map.Coords(0,0)
-   assert_equal(wl.map.Coords(0,63), c.trn)
-   assert_equal(wl.map.Coords(1,62), c.trn.trn)
-   assert_equal(wl.map.Coords(1,61), c.trn.trn.trn)
+   c = wl.map.Field(25,40)
+   assert_equal(wl.map.Field(25,39), c.trn)
+   assert_equal(wl.map.Field(26,38), c.trn.trn)
+   assert_equal(wl.map.Field(26,37), c.trn.trn.trn)
+   c = wl.map.Field(0,0)
+   assert_equal(wl.map.Field(0,63), c.trn)
+   assert_equal(wl.map.Field(1,62), c.trn.trn)
+   assert_equal(wl.map.Field(1,61), c.trn.trn.trn)
 end
 function coords_tests:test_tln_neighbour()
-   c = wl.map.Coords(25,40)
-   assert_equal(wl.map.Coords(24,39), c.tln)
-   assert_equal(wl.map.Coords(24,38), c.tln.tln)
-   assert_equal(wl.map.Coords(23,37), c.tln.tln.tln)
-   c = wl.map.Coords(1,1)
-   assert_equal(wl.map.Coords(1,0), c.tln)
-   assert_equal(wl.map.Coords(0,63), c.tln.tln)
-   assert_equal(wl.map.Coords(0,62), c.tln.tln.tln)
+   c = wl.map.Field(25,40)
+   assert_equal(wl.map.Field(24,39), c.tln)
+   assert_equal(wl.map.Field(24,38), c.tln.tln)
+   assert_equal(wl.map.Field(23,37), c.tln.tln.tln)
+   c = wl.map.Field(1,1)
+   assert_equal(wl.map.Field(1,0), c.tln)
+   assert_equal(wl.map.Field(0,63), c.tln.tln)
+   assert_equal(wl.map.Field(0,62), c.tln.tln.tln)
 end
 function coords_tests:test_bln_neighbour()
-   c = wl.map.Coords(26,37)
-   assert_equal(wl.map.Coords(26,38), c.bln)
-   assert_equal(wl.map.Coords(25,39), c.bln.bln)
-   assert_equal(wl.map.Coords(25,40), c.bln.bln.bln)
+   c = wl.map.Field(26,37)
+   assert_equal(wl.map.Field(26,38), c.bln)
+   assert_equal(wl.map.Field(25,39), c.bln.bln)
+   assert_equal(wl.map.Field(25,40), c.bln.bln.bln)
 
-   c = wl.map.Coords(1,61)
-   assert_equal(wl.map.Coords(1,62), c.bln)
-   assert_equal(wl.map.Coords(0,63), c.bln.bln)
-   assert_equal(wl.map.Coords(0,0), c.bln.bln.bln)
+   c = wl.map.Field(1,61)
+   assert_equal(wl.map.Field(1,62), c.bln)
+   assert_equal(wl.map.Field(0,63), c.bln.bln)
+   assert_equal(wl.map.Field(0,0), c.bln.bln.bln)
 end
 function coords_tests:test_brn_neighbour()
-   c = wl.map.Coords(35,22)
-   assert_equal(wl.map.Coords(35,23), c.brn)
-   assert_equal(wl.map.Coords(36,24), c.brn.brn)
-   assert_equal(wl.map.Coords(36,25), c.brn.brn.brn)
+   c = wl.map.Field(35,22)
+   assert_equal(wl.map.Field(35,23), c.brn)
+   assert_equal(wl.map.Field(36,24), c.brn.brn)
+   assert_equal(wl.map.Field(36,25), c.brn.brn.brn)
 
-   c = wl.map.Coords(63,63)
-   assert_equal(wl.map.Coords(0,0), c.brn)
-   assert_equal(wl.map.Coords(0,1), c.brn.brn)
-   assert_equal(wl.map.Coords(1,2), c.brn.brn.brn)
+   c = wl.map.Field(63,63)
+   assert_equal(wl.map.Field(0,0), c.brn)
+   assert_equal(wl.map.Field(0,1), c.brn.brn)
+   assert_equal(wl.map.Field(1,2), c.brn.brn.brn)
 end
 function coords_tests:test_equality()
-   c = wl.map.Coords(32,33)
-   c1 = wl.map.Coords(32,33)
+   c = wl.map.Field(32,33)
+   c1 = wl.map.Field(32,33)
 
    assert_equal(c,c1)
 end
 function coords_tests:test_inequality()
-   c = wl.map.Coords(32,33)
-   c1 = wl.map.Coords(33,32)
+   c = wl.map.Field(32,33)
+   c1 = wl.map.Field(33,32)
 
    assert_not_equal(c,c1)
 end
@@ -106,8 +106,8 @@ end
 -- works because serial is a property of a MapObject.
 immovable_creation_tests = lunit.TestCase("Immovable Creation")
 function immovable_creation_tests:test_create()
-   imm = wl.map.create_immovable("tree1", wl.map.Coords(9, 10))
-   imm2 = wl.map.create_immovable("tree2", wl.map.Coords(10, 10))
+   imm = wl.map.create_immovable("tree1", wl.map.Field(9, 10))
+   imm2 = wl.map.create_immovable("tree2", wl.map.Field(10, 10))
    assert_table(imm) 
    assert_table(imm2)
    assert_true(imm.serial > 0)
@@ -123,7 +123,7 @@ end
 -- ===================
 immovable_tests = lunit.TestCase("Immovable usage")
 function immovable_tests:setup()
-   self.i = wl.map.create_immovable("tree1", wl.map.Coords(9, 10))
+   self.i = wl.map.create_immovable("tree1", wl.map.Field(9, 10))
 end
 function immovable_tests:teardown()
    pcall(self.i.remove, self.i)
@@ -148,11 +148,11 @@ end
 -- ==============
 immovable_property_tests = lunit.TestCase("Immovable sizes")
 function immovable_property_tests:setup()
-   self.none = wl.map.create_immovable("pebble1", wl.map.Coords(9, 10))
-   self.small = wl.map.create_immovable("tree1", wl.map.Coords(10, 10))
+   self.none = wl.map.create_immovable("pebble1", wl.map.Field(9, 10))
+   self.small = wl.map.create_immovable("tree1", wl.map.Field(10, 10))
    -- No medium bob in world. Need a user immovable here!!! TODO
    -- self.medium = wl.map.create_immovable("tree1", 10, 10)
-   self.big = wl.map.create_immovable("stones4", wl.map.Coords(15, 10))
+   self.big = wl.map.create_immovable("stones4", wl.map.Field(15, 10))
 end
 function immovable_property_tests:teardown()
    pcall(self.none.remove, self.none)
@@ -191,7 +191,6 @@ end
 --    pcall(self.big.remove, self.big)
 -- end
 
-function 
 -- function immovable_tests:test_position()
 --   assert_equal(self.i.pos.x, 9)
 --   assert_equal(self.i.pos.y, 10)
