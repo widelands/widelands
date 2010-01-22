@@ -224,22 +224,19 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	std::list<std::string> components;
 	std::list<std::string>::iterator i;
 
+	std::string fixedpath(path);
+
 #ifdef WIN32
 	// remove all slashes with backslashes so following can work.
-	std::string fixedpath(path);
 	for (uint32_t j = 0; j < path.size(); ++j) {
 		if (fixedpath[j] == '/')
 			fixedpath[j] = '\\';
 	}
+#endif
 
 	bool absolute = pathIsAbsolute(fixedpath);
 	FS_Tokenize(fixedpath, m_filesep,
 		std::inserter(components, components.begin()));
-#else
-	bool absolute = pathIsAbsolute(path);
-	FS_Tokenize(path, m_filesep,
-		std::inserter(components, components.begin()));
-#endif
 
 	//tilde expansion
 	if (!components.empty() && *components.begin() == "~") {
