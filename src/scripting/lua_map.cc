@@ -266,8 +266,8 @@ public:
 	/*
 	 * Properties
 	 */
-	WRAPPED_PROPERTY_INT(m_c, x);
-	WRAPPED_PROPERTY_INT(m_c, y);
+   WRAPPED_PROPERTY_GET_INT(m_c, x)                                     \
+   WRAPPED_PROPERTY_GET_INT(m_c, y)                                     \
 
 	/*
 	 * Lua methods
@@ -290,8 +290,8 @@ const MethodType<L_Coords> L_Coords::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_Coords> L_Coords::Properties[] = {
-	PROP_RW(L_Coords, x),
-	PROP_RW(L_Coords, y),
+	PROP_RO(L_Coords, x),
+	PROP_RO(L_Coords, y),
 	{0, 0, 0},
 };
 

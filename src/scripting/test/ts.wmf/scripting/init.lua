@@ -12,12 +12,9 @@ function coords_tests:test_create()
    assert_equal(c.x, 25)
    assert_equal(c.y, 32)
 end
-function coords_tests:test_change()
-   c = wl.map.Coords(32,25)
-   c.x = 10
-   c.y = 11
-   assert_equal(c.x, 10)
-   assert_equal(c.y, 11)
+function coords_tests:test_direct_change_impossible()
+   assert_error("c.x should be read only", function() c.x = 12 end) 
+   assert_error("c.y should be read only", function() c.y = 12 end) 
 end
 function coords_tests:test_equality()
    c = wl.map.Coords(32,33)
@@ -69,7 +66,7 @@ end
 function immovable_tests:test_wrongusage()
    self.i:remove()
    assert_error("Should not be able to remove an object twice!",
-      self.i.remove, self.i
+      function() self.i:remove() end 
    )
 end
 function immovable_tests:test_serial_is_readonly()
