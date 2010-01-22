@@ -103,7 +103,6 @@ struct Interactive_Base : public Map_View {
 		bool append_build_road(Widelands::Coords field);
 	Widelands::Coords    get_build_road_start  () const throw ();
 	Widelands::Coords    get_build_road_end    () const throw ();
-	Widelands::Direction get_build_road_end_dir() const throw ();
 
 	virtual void cleanup_for_load() {};
 

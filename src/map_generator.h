@@ -69,11 +69,11 @@ struct UniqueRandomMapInfo {
 		 std::vector<std::string> const & worlds);
 	static void generateIdString
 		(std::string & mapIdsString_out, UniqueRandomMapInfo const & mapInfo);
-	bool isWorldNameSet(std::string const & name) const;
+
 private:
-	static int  mapIdCharToNumber(char ch);
-	static char mapIdNumberToChar(int32_t num);
-	static uint16_t generateWorldNameHash(std::string const & name);
+	static int  mapIdCharToNumber(char);
+	static char mapIdNumberToChar(int32_t);
+	static uint16_t generateWorldNameHash(std::string const &);
 };
 
 

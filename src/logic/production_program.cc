@@ -394,30 +394,40 @@ void ProductionProgram::ActReturn::execute
 	statistics_string += ' ';
 	statistics_string += ps.top_state().program->descname();
 	if (m_conditions.size()) {
-		char const * operator_string;
 		std::string result_string = statistics_string;
 		if (m_is_when) { //  "when a and b and ..." (all conditions must be true)
-			operator_string = _(" and ");
+			char const * const operator_string = _(" and ");
 			result_string += _(" because: ");
-			container_iterate_const(Conditions, m_conditions, i)
+			for
+				(struct {
+				 	Conditions::const_iterator current;
+				 	Conditions::const_iterator const end;
+				 } i = {m_conditions.begin(), m_conditions.end()};;)
+			{
 				if (not (*i.current)->evaluate(ps)) //  A condition is false,
 					return ps.program_step(game); //  continue program.
-				else {
-					result_string += (*i.current)->description(ps.owner().tribe());
-					result_string += operator_string;
-				}
+				result_string += (*i.current)->description(ps.owner().tribe());
+				if (++i.current == i.end)
+					break;
+				result_string += operator_string;
+			}
 		} else { //  "unless a or b or ..." (all conditions must be false)
-			operator_string = _(" or ");
+			char const * const operator_string = _(" or ");
 			result_string += _(" because not: ");
-			container_iterate_const(Conditions, m_conditions, i)
+			for
+				(struct {
+				 	Conditions::const_iterator current;
+				 	Conditions::const_iterator const end;
+				 } i = {m_conditions.begin(), m_conditions.end()};;)
+			{
 				if ((*i.current)->evaluate(ps)) //  A condition is true,
 					return ps.program_step(game); //  continue program.
-				else {
-					result_string += (*i.current)->description(ps.owner().tribe());
-					result_string += operator_string;
-				}
+				result_string += (*i.current)->description(ps.owner().tribe());
+				if (++i.current == i.end)
+					break;
+				result_string += operator_string;
+			}
 		}
-		result_string.resize(result_string.size() - strlen(operator_string));
 		snprintf
 			(ps.m_result_buffer, sizeof(ps.m_result_buffer),
 			 "%s", result_string.c_str());

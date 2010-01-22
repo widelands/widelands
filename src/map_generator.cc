@@ -1064,11 +1064,6 @@ void Widelands::UniqueRandomMapInfo::generateIdString
 	}
 }
 
-bool Widelands::UniqueRandomMapInfo::isWorldNameSet
-	(std::string const & name) const
-{
-	return (generateWorldNameHash(worldName) == generateWorldNameHash(name));
-}
 
 uint16_t Widelands::UniqueRandomMapInfo::generateWorldNameHash
 	(std::string const & name)

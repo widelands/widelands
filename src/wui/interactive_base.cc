@@ -674,20 +674,6 @@ Coords Interactive_Base::get_build_road_end() const throw () {
 	return m_buildroad->get_end();
 }
 
-/*
-===============
-Return the direction of the last step
-===============
-*/
-Widelands::Direction Interactive_Base::get_build_road_end_dir() const throw ()
-{
-	assert(m_buildroad);
-
-	if (!m_buildroad->get_nsteps())
-		return 0;
-
-	return (*m_buildroad)[m_buildroad->get_nsteps() - 1];
-}
 
 /*
 ===============
