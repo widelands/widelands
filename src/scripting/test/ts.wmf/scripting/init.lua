@@ -94,6 +94,27 @@ function field_tests:test_inequality()
 
    assert_not_equal(c,c1)
 end
+function field_tests:test_getting_height()
+   assert_equal(10, wl.map.Field(32,33).height)
+end
+function field_tests:test_setting_height()
+   f = wl.map.Field(32,33)
+   f.height = 12
+   assert_equal(12, wl.map.Field(32,33).height)
+   f.height = 10
+end
+function field_tests:test_setting_illegal_negativ_height()
+   assert_error("height must be positive", function()
+      wl.map.Field(50,40).height =  -12
+   end)
+end
+function field_tests:test_setting_illegal_too_big_height()
+   assert_error("height must be <= 60", function()
+      wl.map.Field(50,40).height = 61
+   end)
+end
+
+
 
 -- =======================================================================
 --                         BaseImmovable Usage Tests                          
@@ -219,6 +240,8 @@ end
 --    assert_equal(rv[1], 25)
 --    assert_equal(rv[1], 14)
 -- end
+
+wl.debug.set_see_all(1)
 
 rv = lunit:run()
 if rv == 0 then -- No errors in the testsuite. Exit the game

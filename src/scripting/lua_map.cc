@@ -201,7 +201,7 @@ public:
 		L_BaseImmovable * other = *get_user_class<L_BaseImmovable>(L, -1);
 
 		lua_pushboolean
-			(L, other->m_get(game, L)->serial() == m_get(game,L)->serial());
+			(L, other->m_get(game, L)->serial() == m_get(game, L)->serial());
 		return 1;
 	}
 
@@ -270,6 +270,19 @@ public:
 	 */
 	int get_x(lua_State * L) {lua_pushuint32(L, m_c.x); return 1;}
 	int get_y(lua_State * L) {lua_pushuint32(L, m_c.y); return 1;}
+	int get_height(lua_State * L) {
+		lua_pushuint32(L, m_c.field->get_height());
+		return 1;
+	}
+	int set_height(lua_State * L) {
+		uint32_t height = luaL_checkuint32(L, -1);
+		if (height > MAX_FIELD_HEIGHT)
+			report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
+
+		get_game(L)->map().set_height(m_c, height);
+
+		return get_height(L);
+	}
 	int get_immovable(lua_State * L) {
 		BaseImmovable * bi = m_c.field->get_immovable();
 
@@ -322,6 +335,7 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	PROP_RO(L_Field, bln),
 	PROP_RO(L_Field, brn),
 	PROP_RO(L_Field, immovable),
+	PROP_RW(L_Field, height),
 	{0, 0, 0},
 };
 
