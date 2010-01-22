@@ -29,19 +29,17 @@
 */
 class LuaCoroutine_Impl : public LuaCoroutine {
 	public:
-		LuaCoroutine_Impl(lua_State * parent, lua_State* L) :
-			m_L(L), m_parent(parent) {}
+		LuaCoroutine_Impl(lua_State* L) : m_L(L) {}
 		virtual ~LuaCoroutine_Impl() {}
 
-		virtual int get_status() {
-			return lua_status(m_L);
-		}
+		virtual int get_status() {return lua_status(m_L);}
 		virtual int resume(uint32_t * sleeptime = 0);
-		virtual uint32_t freeze(Widelands::FileWrite& );
-		virtual void unfreeze(lua_State*, Widelands::FileRead &, uint32_t);
+
+		virtual uint32_t write(lua_State*, Widelands::FileWrite& );
+		virtual void read(lua_State*, Widelands::FileRead &, uint32_t);
 
 	private:
-		lua_State * m_L, * m_parent;
+		lua_State * m_L;
 };
 
 

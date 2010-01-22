@@ -56,7 +56,7 @@ static int L_run_coroutine(lua_State * L) {
 	if (nargs < 1)
 		report_error(L, "Too little arguments to run_at");
 
-	LuaCoroutine * cr = new LuaCoroutine_Impl(L, luaL_checkthread(L, -1));
+	LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(L, -1));
 	Game & game = *get_game(L);
 
 	lua_pop(L, 1); // Remove coroutine from stack

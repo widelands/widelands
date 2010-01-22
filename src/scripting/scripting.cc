@@ -17,22 +17,15 @@
  *
  */
 
-#include "scripting.h"
-
-#include "log.h"
-
-#include "lua_debug.h"
-#include "lua_game.h"
-#include "lua_map.h"
-#include "c_utils.h"
-
 #include <string>
 #include <stdexcept>
 
 #include "log.h"
+
 #include "lua_debug.h"
 #include "lua_game.h"
 #include "lua_map.h"
+#include "coroutine_impl.h"
 #include "c_utils.h"
 
 #include "scripting.h"
@@ -43,6 +36,7 @@ extern "C" {
 }
 
 // TODO: *.lua globbing doesn't work with zip file system
+// TODO: get rid of LuaCmd. Only LuaFunction should be kept alife
 
 /*
 ============================================
@@ -74,8 +68,9 @@ class LuaInterface_Impl : public LuaInterface {
 		}
 
 		virtual void run_script(std::string, std::string);
-		// TODO: test function, remove again
-		lua_State* get_lua_state() {return m_L; }
+
+		virtual LuaCoroutine * read_coroutine(Widelands::FileRead &, uint32_t);
+		virtual uint32_t write_coroutine(Widelands::FileWrite &, LuaCoroutine *);
 };
 
 /*************************
@@ -147,6 +142,24 @@ LuaInterface_Impl::~LuaInterface_Impl() {
 	lua_close(m_L);
 }
 
+LuaCoroutine * LuaInterface_Impl::read_coroutine
+	(Widelands::FileRead & fr, uint32_t size)
+{
+	LuaCoroutine_Impl * rv = new LuaCoroutine_Impl(0);
+
+	rv->read(m_L, fr, size);
+
+	return rv;
+}
+
+uint32_t LuaInterface_Impl::write_coroutine
+	(Widelands::FileWrite & fw, LuaCoroutine * cr)
+{
+	// we do not want to make the write function public by adding
+	// it to the interface of LuaCoroutine. Therefore, we make a cast
+	// to the Implementation function here.
+	return dynamic_cast<LuaCoroutine_Impl *>(cr)->write(m_L, fw);
+}
 
 void LuaInterface_Impl::register_script
 	(std::string ns, std::string name, std::string content)

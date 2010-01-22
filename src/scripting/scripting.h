@@ -63,9 +63,6 @@ class LuaCoroutine {
 
 		virtual int get_status(void) = 0;
 		virtual int resume(uint32_t* = 0) = 0;
-
-		virtual uint32_t freeze(Widelands::FileWrite &) = 0;
-		virtual void unfreeze(lua_State*, Widelands::FileRead &, uint32_t) = 0;
 };
 
 /**
@@ -83,8 +80,9 @@ class LuaInterface {
 
 		virtual void run_script(std::string, std::string) = 0;
 
-		// TODO: test function, remove again
-		virtual lua_State* get_lua_state() = 0;
+		virtual LuaCoroutine* read_coroutine(Widelands::FileRead &, uint32_t) = 0;
+		virtual uint32_t write_coroutine
+			(Widelands::FileWrite &, LuaCoroutine *) = 0;
 };
 
 LuaInterface* create_lua_interface(Widelands::Editor_Game_Base*);

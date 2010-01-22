@@ -23,9 +23,6 @@
 #include "game_data_error.h"
 #include "scripting/scripting.h"
 
-// TODO: SirVer, Lua: this should not be here
-#include "scripting/coroutine_impl.h"
-
 namespace Widelands {
 
 void Cmd_LuaFunction::execute (Game & game) {
@@ -51,8 +48,7 @@ void Cmd_LuaFunction::Read
 		if (packet_version == CMD_LUAFUNCTION_VERSION) {
 			GameLogicCommand::Read(fr, egbase, mol);
 
-			m_cr = new LuaCoroutine_Impl(egbase.lua().get_lua_state(), 0);
-			m_cr->unfreeze(egbase.lua().get_lua_state(), fr, fr.Unsigned32());
+			m_cr = egbase.lua().read_coroutine(fr, fr.Unsigned32());
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -69,7 +65,7 @@ void Cmd_LuaFunction::Write
 	FileWrite::Pos p = fw.GetPos();
 	fw.Unsigned32(0); // N bytes written, follows below
 
-	uint32_t nwritten = Little32(m_cr->freeze(fw));
+	uint32_t nwritten = Little32(egbase.lua().write_coroutine(fw, m_cr));
 	fw.Data(&nwritten, 4, p);
 }
 
