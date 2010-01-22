@@ -19,10 +19,14 @@
 
 #include "widelands_map_players_messages_data_packet.h"
 
+#include "logic/cmd_expire_message.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "widelands_map_map_object_saver.h"
 #include "profile/profile.h"
-#include <logic/game_data_error.h>
+
+#include "upcast.h"
 
 namespace Widelands {
 
@@ -35,6 +39,7 @@ void Map_Players_Messages_Data_Packet::Read
 	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
 	throw (_wexception)
 {
+	upcast(Game, game, &egbase);
 	uint32_t      const gametime   = egbase.get_gametime ();
 	Map   const &       map        = egbase.map          ();
 	Extent        const extent     = map   .extent       ();
@@ -132,15 +137,20 @@ void Map_Players_Messages_Data_Packet::Read
 						} catch (_wexception const & e) {
 							throw game_data_error("status: %s", e.what());
 						}
-					messages.add_message
-						(*new Message
-						 	(s->get_string     ("sender", ""),
-						 	 sent,
-						 	 duration,
-						 	 s->get_name       (),
-						 	 s->get_safe_string("body"),
-						 	 s->get_Coords     ("position", extent, Coords::Null()),
-						 	 status));
+					Message_Id const id =
+						messages.add_message
+							(*new Message
+							 	(s->get_string     ("sender", ""),
+							 	 sent,
+							 	 duration,
+							 	 s->get_name       (),
+							 	 s->get_safe_string("body"),
+							 	 s->get_Coords("position", extent, Coords::Null()),
+							 	 status));
+					if (game and duration != Forever())
+						game->cmdqueue().enqueue
+							(new Cmd_ExpireMessage
+							 	(game->get_gametime() + duration, p, id));
 					previous_message_sent = sent;
 				} catch (_wexception const & e) {
 					throw game_data_error
