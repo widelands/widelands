@@ -24,11 +24,8 @@
 #include <boost/format.hpp>
 #include <libintl.h>
 
-#include "logic/building.h"
 #include "building_statistics_menu.h"
 #include "chat.h"
-#include "logic/cmd_queue.h"
-#include "logic/constructionsite.h"
 #include "debugconsole.h"
 #include "economy/flag.h"
 #include "encyclopedia_window.h"
@@ -38,27 +35,31 @@
 #include "game_io/game_loader.h"
 #include "game_main_menu.h"
 #include "game_main_menu_save_game.h"
+#include "game_message_menu.h"
 #include "game_objectives_menu.h"
 #include "game_options_menu.h"
 #include "general_statistics_menu.h"
-#include "game_message_menu.h"
 #include "helper.h"
 #include "i18n.h"
+#include "logic/building.h"
+#include "logic/cmd_queue.h"
+#include "logic/constructionsite.h"
 #include "logic/immovable.h"
 #include "logic/message_queue.h"
 #include "overlay_manager.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
-#include "profile/profile.h"
 #include "logic/soldier.h"
-#include "stock_menu.h"
 #include "logic/tribe.h"
-#include "ware_statistics_menu.h"
-
+#include "message_queue.h"
+#include "overlay_manager.h"
+#include "profile/profile.h"
+#include "scripting/scripting.h"
+#include "stock_menu.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/unique_window.h"
-
 #include "upcast.h"
+#include "ware_statistics_menu.h"
 
 using Widelands::Building;
 using Widelands::Map;

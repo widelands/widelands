@@ -23,6 +23,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "profile/profile.h"
+#include "scripting/scripting.h"
 
 #define EVENT_VERSION 1
 

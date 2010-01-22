@@ -20,10 +20,9 @@
 #include "worker.h"
 
 #include "carrier.h"
-#include "critter_bob.h"
-
 #include "checkstep.h"
 #include "cmd_incorporate.h"
+#include "critter_bob.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -36,18 +35,18 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
+#include "mapfringeregion.h"
 #include "message_queue.h"
 #include "player.h"
 #include "profile/profile.h"
+#include "scripting/scripting.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
+#include "upcast.h"
 #include "warehouse.h"
 #include "wexception.h"
 #include "worker_program.h"
-#include "mapfringeregion.h"
-
-#include "upcast.h"
 
 namespace Widelands {
 
@@ -60,6 +59,7 @@ namespace Widelands {
  */
 bool Worker::run_createitem(Game & game, State & state, Action const & action)
 {
+
 	if (WareInstance * const item = fetch_carried_item(game)) {
 		molog("  Still carrying an item! Delete it.\n");
 		item->schedule_destroy(game);
@@ -91,13 +91,9 @@ bool Worker::run_createitem(Game & game, State & state, Action const & action)
  * \param state
  * \param action Which file to load and run
  */
-// TODO: the ugliness!!
-extern "C" {
-#include <lua.h>
-}
 bool Worker::run_lua(Game & game, State & state, Action const & action) {
-	//  TODO: make this general
-	log("state.ivar1: %i\n", state.ivar1);
+	// TODO: SirVer, Lua: This is just one evil hack to try something out
+	log("state.ivar1: %s\n", state.ivar1);
 	log("state.ivar2: %i\n", state.ivar2);
 	if (!state.ivar2) {
 		try {

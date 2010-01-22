@@ -38,6 +38,11 @@ struct LuaValueError : public LuaError {
 		LuaError("Variable not of expected type: " + wanted)
 	{}
 };
+class LuaScriptNotExistingError : public LuaError {
+	public:
+		LuaScriptNotExistingError(std::string name) :
+			LuaError("The script '" + name + "' was not found!") {}
+};
 
 /**
  * Easy handling of LuaCoroutines
@@ -75,6 +80,8 @@ class LuaInterface {
 
 		virtual void register_script(std::string, std::string, std::string) = 0;
 		virtual ScriptContainer& get_scripts_for(std::string) = 0;
+
+		virtual LuaState* run_script(std::string, std::string) = 0;
 };
 
 LuaInterface* create_lua_interface(Widelands::Editor_Game_Base*);

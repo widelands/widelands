@@ -29,14 +29,14 @@
 #include "instances.h"
 #include "mapregion.h"
 #include "player.h"
+#include "roadtype.h"
+#include "scripting/scripting.h"
 #include "tribe.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
 #include "wexception.h"
 #include "worker.h"
 #include "world.h"
-#include "roadtype.h"
-
 
 #include <set>
 #include <algorithm>

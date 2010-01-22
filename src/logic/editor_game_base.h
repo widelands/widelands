@@ -26,7 +26,6 @@
 #include "map.h"
 #include "notification.h"
 #include "player_area.h"
-#include "scripting/scripting.h"
 
 #include <string>
 #include <cstring>
@@ -35,6 +34,7 @@
 namespace UI {struct ProgressWindow;}
 struct Fullscreen_Menu_LaunchGame;
 struct Interactive_Base;
+class LuaInterface;
 
 namespace Widelands {
 

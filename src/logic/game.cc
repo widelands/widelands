@@ -17,51 +17,47 @@
  *
  */
 
+#include <string>
+#include <cstring>
+
 #include "game.h"
 
 #include "carrier.h"
 #include "cmd_check_eventchain.h"
 #include "computer_player.h"
+#include "economy/economy.h"
 #include "events/event.h"
 #include "events/event_chain.h"
 #include "findimmovable.h"
-#include "wui/interactive_player.h"
-#include "ui_fsmenu/launchgame.h"
 #include "game_io/game_loader.h"
-#include "wui/game_tips.h"
 #include "game_io/game_preload_data_packet.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "map_io/widelands_map_loader.h"
 #include "network/network.h"
 #include "player.h"
 #include "playercommand.h"
 #include "profile/profile.h"
 #include "replay.h"
+#include "scripting/scripting.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
+#include "timestring.h"
 #include "trainingsite.h"
 #include "tribe.h"
+#include "ui_basic/progresswindow.h"
+#include "ui_fsmenu/launchgame.h"
+#include "upcast.h"
 #include "warning.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-#include "map_io/widelands_map_loader.h"
 #include "wlapplication.h"
-
-#include "economy/economy.h"
-
-#include "ui_basic/progresswindow.h"
-
-#include "log.h"
-
-#include "upcast.h"
-
-#include "timestring.h"
-
-#include <string>
-#include <cstring>
+#include "wui/game_tips.h"
+#include "wui/interactive_player.h"
 
 namespace Widelands {
 
@@ -484,6 +480,15 @@ bool Game::run
 		// We lie about the sender here. Hey, what is one lie in a lifetime?
 		enqueue_command
 			(new Cmd_CheckEventChain(get_gametime(), static_cast<uint16_t>(-1)));
+
+		// Run the init script, if the map provides on.
+		// TODO: SirVer, Lua: Lua scripts should be run by a new Cmd, so that
+		// TOOD: SirVer, Lua: they also work over the network
+		try {
+			lua().run_script("map", "init");
+		} catch (LuaScriptNotExistingError &) {
+			// this may well happen, let's just ignore it
+		}
 	}
 
 	if (m_writereplay) {

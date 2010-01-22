@@ -194,6 +194,8 @@ class LuaInterface_Impl : public LuaInterface {
 		virtual ScriptContainer& get_scripts_for(std::string ns) {
 			return m_scripts[ns];
 		}
+
+		virtual LuaState* run_script(std::string, std::string);
 };
 
 /*************************
@@ -284,6 +286,10 @@ LuaState * LuaInterface_Impl::interpret_file(std::string filename) {
 	m_check_for_errors(rv);
 
 	return m_state;
+}
+
+LuaState * LuaInterface_Impl::run_script(std::string ns, std::string name) {
+	return interpret_string(m_scripts[ns][name]);
 }
 
 /*
