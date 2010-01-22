@@ -74,6 +74,8 @@ class LuaInterface_Impl : public LuaInterface {
 		}
 
 		virtual void run_script(std::string, std::string);
+		// TODO: test function, remove again
+		lua_State* get_lua_state() {return m_L; }
 };
 
 /*************************

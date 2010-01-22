@@ -37,8 +37,8 @@ class LuaCoroutine_Impl : public LuaCoroutine {
 			return lua_status(m_L);
 		}
 		virtual int resume(uint32_t * sleeptime = 0);
-		virtual int freeze(Widelands::FileWrite& );
-		virtual int unfreeze(Widelands::FileRead& );
+		virtual uint32_t freeze(Widelands::FileWrite& );
+		virtual void unfreeze(lua_State*, Widelands::FileRead &, uint32_t);
 
 	private:
 		lua_State * m_L, * m_parent;

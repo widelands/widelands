@@ -317,11 +317,8 @@ void luaopen_wlmap(lua_State * L) {
 	luaL_register(L, "wl.map", wlmap);
 	lua_pop(L, 1); // pop the table from the stack
 
-	log("Before register class: %i\n", lua_gettop(L));
 	register_class<L_Coords>(L, "map");
-	log("Before register class 2: %i\n", lua_gettop(L));
 	register_class<L_MapObject>(L, "map");
-	log("Before registering parent: %i\n", lua_gettop(L));
 
 	register_class<L_BaseImmovable>(L, "map", true);
 	add_parent<L_BaseImmovable, L_MapObject>(L);

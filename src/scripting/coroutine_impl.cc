@@ -47,38 +47,34 @@ int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
 }
 
 
-int write_func(lua_State *, const void * p, size_t data, void * ud) {
-	Widelands::FileWrite * fw = static_cast<Widelands::FileWrite *>(ud);
+struct DataWriter {
+	uint32_t written;
+	Widelands::FileWrite & fw;
 
-	fw->Data(p, data, Widelands::FileWrite::Pos::Null());
+	DataWriter(Widelands::FileWrite & gfw) : written(0), fw(gfw) {}
+};
+
+int write_func(lua_State *, const void * p, size_t data, void * ud) {
+	DataWriter * dw = static_cast<DataWriter *>(ud);
+
+	dw->fw.Data(p, data, Widelands::FileWrite::Pos::Null());
+	dw->written += data;
 
 	return data;
 }
-/*int read_func(lua_State* L, void* ud, size_t data, size_t * sz) {
-	FileWrite* fw = static_cast<Widelands::FileWrite *>(ud);
-
-	fw->Data(p, data);
-
-	return data;
-}*/
-
-#define PUSH_GLOBAL(name) lua_getglobal(m_parent, name); \
-   lua_pushint32(m_parent, idx++); \
-   lua_settable(m_parent, -3); \
 
 // TODO: freeze should get a copy of the parents state in some way
 // because currently we only keep m_parent around for persisting
-int LuaCoroutine_Impl::freeze(Widelands::FileWrite & fw) {
+uint32_t LuaCoroutine_Impl::freeze(Widelands::FileWrite & fw) {
+
 	int n = lua_gettop(m_parent);
 	log("\n\nFreezing: %i\n", n);
-	int32_t idx = 1;
 
 	// Push all the stuff that should be be regenerated
 	lua_newtable(m_parent);
-
 	lua_getglobal(m_parent, "coroutine");
 	lua_getfield(m_parent, -1, "yield");
-	lua_pushint32(m_parent, idx++); // stack: newtable coroutine yield integer
+	lua_pushint32(m_parent, 1); // stack: newtable coroutine yield integer
 	lua_settable(m_parent, -4); //  newtable[yield] = integer
 	lua_pop(m_parent, 1); // pop coroutine
 
@@ -87,21 +83,60 @@ int LuaCoroutine_Impl::freeze(Widelands::FileWrite & fw) {
 	// Dirty hack: we have to push m_L on the childs stack, then get it from
 	// there to push it on the parents stack. I didn't find another way to push
 	// m_L as a thread type onto the parents stack.
-   lua_pushthread(m_L);
+	lua_pushthread(m_L);
 	lua_xmove (m_L, m_parent, 1);
 
 	log("after pushing object: %i\n", lua_gettop(m_parent));
 
 	// fw.Unsigned32(0xff);
-	pluto_persist(m_parent, &write_func, &fw);
-	log("After pluto_persist!\n");
+	DataWriter dw(fw);
 
-	return 1;
+	pluto_persist(m_parent, &write_func, &dw);
+	lua_pop(m_parent, 2); // pop the two tables
+
+	log("After pluto_persist!\n");
+	log("Pickled %i bytes. Stack size: %i\n", dw.written, lua_gettop(m_parent));
+
+	return dw.written;
 }
 
-int LuaCoroutine_Impl::unfreeze(Widelands::FileRead & fr) {
-	/*log("Unfreezing!\n");
-	lua_createtable();
-	pluto_unpersist(m_L, func, &fw)*/
+struct DataReader {
+	uint32_t size;
+	Widelands::FileRead & fr;
+
+	DataReader(uint32_t gsize, Widelands::FileRead & gfr) :
+		size(gsize), fr(gfr) {}
+};
+
+const char * read_func(lua_State * L, void * ud, size_t * sz) {
+	DataReader * dr = static_cast<DataReader *>(ud);
+
+	*sz = dr->size;
+	return static_cast<const char *>(dr->fr.Data(dr->size));
+}
+
+void LuaCoroutine_Impl::unfreeze
+	(lua_State * pnt, Widelands::FileRead & fr, uint32_t size)
+{
+	int n = lua_gettop(m_parent);
+	log("\n\nUnfreezing: %i\n", n);
+
+	// Push all the stuff that should not be regenerated
+	lua_newtable(m_parent);
+	lua_getglobal(m_parent, "coroutine");
+	lua_pushint32(m_parent, 1);
+	lua_getfield(m_parent, -2, "yield");// stack: table coroutine integer yield
+	lua_settable(m_parent, -4); //  newtable[integer] = yield
+	lua_pop(m_parent, 1); // pop coroutine
+
+	log("Pushed all globals\n");
+
+	DataReader rd(size, fr);
+
+	pluto_unpersist(m_parent, &read_func, &rd);
+	m_L = luaL_checkthread(m_parent, -1);
+	lua_pop(m_parent, 2); // pop the thread & the table
+
+	log("Unpickled %i bytes. Stack size: %i\n", size, lua_gettop(m_parent));
 }
 
