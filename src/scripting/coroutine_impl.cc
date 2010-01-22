@@ -66,24 +66,15 @@ int write_func(lua_State *, const void * p, size_t data, void * ud) {
    lua_pushint32(m_parent, idx++); \
    lua_settable(m_parent, -3); \
 
+// TODO: freeze should get a copy of the parents state in some way
+// because currently we only keep m_parent around for persisting
 int LuaCoroutine_Impl::freeze(Widelands::FileWrite & fw) {
 	int n = lua_gettop(m_parent);
-	log("Freezing: %i\n", n);
+	log("\n\nFreezing: %i\n", n);
 	int32_t idx = 1;
 
 	// Push all the stuff that should be be regenerated
 	lua_newtable(m_parent);
-	// PUSH_GLOBAL("wl");
-	// PUSH_GLOBAL("package");
-	// PUSH_GLOBAL("table");
-	// PUSH_GLOBAL("io");
-	// PUSH_GLOBAL("os");
-	// PUSH_GLOBAL("string");
-	// PUSH_GLOBAL("math");
-	// PUSH_GLOBAL("coroutine");
-	// PUSH_GLOBAL("debug");
-	// PUSH_GLOBAL("require");
-	// PUSH_GLOBAL("print");
 
 	lua_getglobal(m_parent, "coroutine");
 	lua_getfield(m_parent, -1, "yield");
@@ -91,11 +82,14 @@ int LuaCoroutine_Impl::freeze(Widelands::FileWrite & fw) {
 	lua_settable(m_parent, -4); //  newtable[yield] = integer
 	lua_pop(m_parent, 1); // pop coroutine
 
-	log("Pushed all globals");
+	log("Pushed all globals\n");
 
-        // lua_pushvalue(m_parent, LUA_GLOBALSINDEX);
-	log("State: %i\n", get_status());
-	lua_pushthread(m_L);
+	// Dirty hack: we have to push m_L on the childs stack, then get it from
+	// there to push it on the parents stack. I didn't find another way to push
+	// m_L as a thread type onto the parents stack.
+   lua_pushthread(m_L);
+	lua_xmove (m_L, m_parent, 1);
+
 	log("after pushing object: %i\n", lua_gettop(m_parent));
 
 	// fw.Unsigned32(0xff);
