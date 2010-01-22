@@ -126,7 +126,6 @@ private:
 	}
 };
 const char L_MapObject::className[] = "MapObject";
-const char L_MapObject::parentName[] = "";
 const MethodType<L_MapObject> L_MapObject::Methods[] = {
 	METHOD(L_MapObject, remove),
 	METHOD(L_MapObject, __eq),
@@ -222,7 +221,6 @@ private:
 	}
 };
 const char L_BaseImmovable::className[] = "BaseImmovable";
-const char L_BaseImmovable::parentName[] = "MapObject";
 const MethodType<L_BaseImmovable> L_BaseImmovable::Methods[] = {
 	{0, 0},
 };
@@ -409,7 +407,6 @@ public:
 
 };
 const char L_Field::className[] = "Field";
-const char L_Field::parentName[] = "";
 const MethodType<L_Field> L_Field::Methods[] = {
 	METHOD(L_Field, __eq),
 	METHOD(L_Field, region),
