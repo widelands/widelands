@@ -251,19 +251,24 @@ std::string FileSystem::FS_CanonicalizeName(std::string path) const {
 
 	//clean up the path
 	for (i = components.begin(); i != components.end();) {
-		//remove single dot
-		if (*i == ".")
+		const char * str = (*i).c_str();
+		if (*str == '.')
 		{
-			i = components.erase(i);
-			continue;
-		}
+			++str;
 
-		//remove double dot and the preceding component (if any)
-		if (*i == "..") {
-			if (i != components.begin())
-				i = components.erase(--i);
-			i = components.erase(i);
-			continue;
+			//remove single dot
+			if (*str == '\0')
+			{
+				i = components.erase(i);
+				continue;
+			}
+			//remove double dot and the preceding component (if any)
+			else if (*str == '.' && *(str + 1) == '\0') {
+				if (i != components.begin())
+					i = components.erase(--i);
+				i = components.erase(i);
+				continue;
+			}
 		}
 
 		++i;
