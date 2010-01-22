@@ -19,7 +19,18 @@ function coords_tests:test_change()
    assert_equal(c.x, 10)
    assert_equal(c.y, 11)
 end
--- TODO: c1 == c2 for two coords
+function coords_tests:test_equality()
+   c = wl.map.Coords(32,33)
+   c1 = wl.map.Coords(32,33)
+
+   assert_equal(c,c1)
+end
+function coords_tests:test_inequality()
+   c = wl.map.Coords(32,33)
+   c1 = wl.map.Coords(33,32)
+
+   assert_not_equal(c,c1)
+end
 
 -- =======================================================================
 --                         BaseImmovable Usage Tests                          

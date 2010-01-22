@@ -73,7 +73,6 @@ public:
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 	virtual ~L_MapObject() {
-		log("m_ptr: %p, this: %p\n", m_ptr, this);
 		if (m_ptr) {
 			delete m_ptr;
 			m_ptr = 0;
@@ -156,7 +155,6 @@ public:
 	}
 	L_BaseImmovable(lua_State * L) : L_MapObject(L), m_biptr(0) {}
 	virtual ~L_BaseImmovable() {
-		log("m_biptr: %p, this: %p\n", m_biptr, this);
 		if (m_biptr) {
 			delete m_biptr;
 			m_biptr = 0;
@@ -173,7 +171,6 @@ public:
 		L_MapObject::__persist(L);
 	}
 	virtual void __unpersist(lua_State * L) {
-		log("Unpersisting object: %p\n", this);
 		uint32_t idx;
 		UNPERS_UINT32("file_index", idx);
 		Map_Map_Object_Loader & mol = *get_mol(L);
@@ -275,6 +272,22 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int __eq(lua_State * L)
+	{
+		//L_Coords * other = *get_user_class<L_Coords>(L, -1);
+		lua_pushint32(L, 0);
+		lua_gettable(L, -2);
+		L_Coords* other = *static_cast<L_Coords**>
+			(luaL_checkudata(L, -1, "Coords"));
+
+		if ((other->m_c.x == m_c.x) && (other->m_c.y == m_c.y))
+			lua_pushboolean(L, true);
+		else
+			lua_pushboolean(L, false);
+
+		return 1;
+	}
+
 	/*
 	 * C methods
 	 */
@@ -284,6 +297,7 @@ public:
 const char L_Coords::className[] = "Coords";
 const char L_Coords::parentName[] = "";
 const MethodType<L_Coords> L_Coords::Methods[] = {
+	METHOD(L_Coords, __eq),
 	{0, 0},
 };
 const PropertyType<L_Coords> L_Coords::Properties[] = {
@@ -359,11 +373,9 @@ static int L_find_immovable(lua_State * const L) {
 		//          map.find_reachable_immovables
 		//                  (area, &list, cstep);
 		//  else
-		log("Finding immovables: %i\n", area.radius);
 		map.find_reachable_immovables
 			(area, &list, cstep, FindImmovableAttribute(attribute));
 
-		log("Found:  %zu\n", list.size());
 		if (list.size()) {
 			//  TODO If this is called from the console, it will screw network
 			//  TODO gaming.
