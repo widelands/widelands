@@ -1,6 +1,9 @@
 Import('*')
 
-SRC=simpleglob("*.cc")
+
+pluto = SConscript("pluto/SConscript")
+
+SRC=simpleglob("*.cc") + [pluto]
 
 scripting=srcenv.StaticLibrary(target='scripting', source=SRC)
 
