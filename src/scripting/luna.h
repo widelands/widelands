@@ -178,6 +178,8 @@ int to_lua(lua_State * const L, T * const obj) {
  */
 template <class T>
 T * * get_user_class(lua_State * const L, int narg) {
+	luaL_checktype(L, narg, LUA_TTABLE);
+
 	//  GET table[0]
 	lua_pushnumber(L, 0);
 	if(narg > 0)

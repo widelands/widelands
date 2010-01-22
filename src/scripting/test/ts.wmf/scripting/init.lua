@@ -138,6 +138,11 @@ function immovable_creation_tests:test_create()
    imm:remove()
    imm2:remove()
 end
+function immovable_creation_tests:test_create_wrong_usage()
+   assert_error("Needs table, not integer", function() 
+      wl.map.create_immovable("tree1", 9, 10) end)
+end
+
 
 -- ===================
 -- Simple usage tests 
@@ -166,6 +171,10 @@ end
 function immovable_tests:test_map_object_equality()
    f = wl.map.Field(9,10)
    assert_equal(self.i, f.immovable)
+end
+function immovable_tests:test_field_immovable_nil_when_not_set()
+   f = wl.map.Field(10,10)
+   assert_equal(nil, f.immovable)
 end
 function immovable_tests:test_field_immovable_is_read_only()
    f = wl.map.Field(10,10)

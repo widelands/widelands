@@ -31,6 +31,8 @@
 
 #include <lua.hpp>
 
+// TODO: make map a class and add attributes width, height
+
 using namespace Widelands;
 
 /*
