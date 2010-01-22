@@ -180,7 +180,18 @@ function immovable_property_tests:test_name_stone()
    assert_equal("stones4", self.big.name)
 end
 
+-- ====================
+-- Find immovables test
+-- ====================
+-- find_immovables = lunit.TestCase("Find immovables")
+-- function immovable_property_tests:teardown()
+--    pcall(self.none.remove, self.none)
+--    pcall(self.small.remove, self.small)
+--    -- pcall(self.medium.remove, self.medium)
+--    pcall(self.big.remove, self.big)
+-- end
 
+function 
 -- function immovable_tests:test_position()
 --   assert_equal(self.i.pos.x, 9)
 --   assert_equal(self.i.pos.y, 10)
