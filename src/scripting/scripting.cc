@@ -191,11 +191,11 @@ class LuaInterface_Impl : public LuaInterface {
 		virtual std::string const & get_last_error() const {return m_last_error;}
 
 		virtual void register_script(std::string, std::string, std::string);
-		virtual ScriptContainer& get_scripts_for(std::string ns) {
+		virtual ScriptContainer & get_scripts_for(std::string ns) {
 			return m_scripts[ns];
 		}
 
-		virtual LuaState* run_script(std::string, std::string);
+		virtual LuaState * run_script(std::string, std::string);
 };
 
 /*************************
@@ -289,6 +289,11 @@ LuaState * LuaInterface_Impl::interpret_file(std::string filename) {
 }
 
 LuaState * LuaInterface_Impl::run_script(std::string ns, std::string name) {
+	if
+		((m_scripts.find(ns) == m_scripts.end()) ||
+		 (m_scripts[ns].find(name) == m_scripts[ns].end()))
+		throw LuaScriptNotExistingError(name);
+
 	return interpret_string(m_scripts[ns][name]);
 }
 
