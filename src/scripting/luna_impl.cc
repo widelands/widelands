@@ -57,7 +57,9 @@ static LunaClass ** m_get_new_empty_user_data(lua_State * L) {
 	lua_gettable(L, -2); // table wl module lua_obj obj
 
 	LunaClass ** obj = static_cast<LunaClass ** >(lua_touserdata(L, - 1));
-	lua_pop(L, 4);
+	lua_pop(L, 1); // table wl module lua_obj
+	lua_remove(L, -2); // table wl lua_obj
+	lua_remove(L, -2); // table lua_obj
 
 	return obj;
 }
@@ -75,6 +77,7 @@ static LunaClass ** m_get_new_empty_user_data(lua_State * L) {
  */
 int luna_restore_object(lua_State * L) {
 	LunaClass ** obj = m_get_new_empty_user_data(L);
+	// table luna_obj
 
 	(*obj)->__unpersist(L);
 	(*obj)->__finish_unpersist(L);

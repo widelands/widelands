@@ -37,8 +37,7 @@
 	static const PropertyType<klass> Properties[]; \
 	\
    virtual void __finish_unpersist(lua_State* L) { \
-      lua_pop(L, 1); /* Pop the table */ \
-      to_lua<klass>(L, this); \
+      lua_remove(L, -2); /* table luna_obj -> luna_obj */ \
 	}
 
 /*
@@ -57,7 +56,7 @@
 #define PERS_INT32(name, value) _PERS_INT(name, value, int32)
 #define PERS_UINT32(name, value) _PERS_INT(name, value, uint32)
 
-#define _UNPERS_INT(name, value, type) lua_getfield(L, -1, name); \
+#define _UNPERS_INT(name, value, type) lua_getfield(L, -2, name); \
    value = luaL_check ##type(L, -1); \
    lua_pop(L,1);
 #define UNPERS_INT32(name, value) _UNPERS_INT(name, value, int32)

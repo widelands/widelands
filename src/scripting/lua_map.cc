@@ -72,7 +72,13 @@ public:
 	L_MapObject(lua_State * L) : m_ptr(0) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
-	virtual ~L_MapObject() {if (m_ptr) delete m_ptr;}
+	virtual ~L_MapObject() {
+		log("m_ptr: %p, this: %p\n", m_ptr, this);
+		if (m_ptr) {
+			delete m_ptr;
+			m_ptr = 0;
+		}
+	}
 
 	virtual void __persist(lua_State * L) {
 		Map_Map_Object_Saver & mos = *get_mos(L);
@@ -149,7 +155,13 @@ public:
 		m_biptr = new OPtr<BaseImmovable>(&mo);
 	}
 	L_BaseImmovable(lua_State * L) : L_MapObject(L), m_biptr(0) {}
-	virtual ~L_BaseImmovable() {if (m_biptr) delete m_biptr;}
+	virtual ~L_BaseImmovable() {
+		log("m_biptr: %p, this: %p\n", m_biptr, this);
+		if (m_biptr) {
+			delete m_biptr;
+			m_biptr = 0;
+		}
+	}
 
 	virtual void __persist(lua_State * L) {
 		Map_Map_Object_Saver & mos = *get_mos(L);
@@ -161,6 +173,7 @@ public:
 		L_MapObject::__persist(L);
 	}
 	virtual void __unpersist(lua_State * L) {
+		log("Unpersisting object: %p\n", this);
 		uint32_t idx;
 		UNPERS_UINT32("file_index", idx);
 		Map_Map_Object_Loader & mol = *get_mol(L);
