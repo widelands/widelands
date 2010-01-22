@@ -304,12 +304,14 @@ public:
 	}
 	int set_terr(lua_State * L) {
 		const char * name = luaL_checkstring(L, -1);
+		Map & map = get_game(L)->map();
 		Terrain_Index td =
-			get_game(L)->map().world().index_of_terrain(name);
+			map.world().index_of_terrain(name);
 		if (td == static_cast<Terrain_Index>(-1))
 			report_error(L, "Unknown terrain '%s'", name);
 
-		m_c.field->set_terrain_r(td);
+		map.change_terrain(TCoords<FCoords>(m_c, TCoords<FCoords>::R), td);
+
 
 		lua_pushstring(L, name);
 		return 1;
@@ -322,12 +324,13 @@ public:
 	}
 	int set_terd(lua_State * L) {
 		const char * name = luaL_checkstring(L, -1);
+		Map & map = get_game(L)->map();
 		Terrain_Index td =
-			get_game(L)->map().world().index_of_terrain(name);
+			map.world().index_of_terrain(name);
 		if (td == static_cast<Terrain_Index>(-1))
 			report_error(L, "Unknown terrain '%s'", name);
 
-		m_c.field->set_terrain_d(td);
+		map.change_terrain(TCoords<FCoords>(m_c, TCoords<FCoords>::D), td);
 
 		lua_pushstring(L, name);
 		return 1;
