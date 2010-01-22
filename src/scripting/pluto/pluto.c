@@ -44,9 +44,10 @@
 #include <stdint.h>	/*for intptr_t*/
 
 
-
 #define PLUTO_DEBUG
 
+// TODO: this doesn't belong here
+int restore_wl_object(lua_State*);
 
 
 
@@ -171,8 +172,13 @@ static int persistspecialobject(PersistInfo *pi, int defaction)
 					/* perms reftbl ... obj mt func? */
 #endif
 					/* perms reftbl ... obj mt func? */
-	if(!lua_isfunction(pi->L, -1)) {
-		lua_pushstring(pi->L, "__persist function did not return a function");
+   // TODO: document the changes here
+	// if(!lua_isfunction(pi->L, -1)) {
+	// 	lua_pushstring(pi->L, "__persist function did not return a function");
+	// 	lua_error(pi->L);
+	// }
+	if(!lua_istable(pi->L, -1)) {
+		lua_pushstring(pi->L, "__persist function did not return a table");
 		lua_error(pi->L);
 	}
 					/* perms reftbl ... obj mt func */
@@ -908,14 +914,22 @@ static void unpersistspecialtable(int ref, UnpersistInfo *upi)
 	(void) ref; 			/* unused */
 					/* perms reftbl ... */
 	lua_checkstack(upi->L, 1);
+   printf("Calling unpersist\n");
 	unpersist(upi);
 					/* perms reftbl ... spfunc? */
+   printf("Before assert\n");
 	lua_assert(lua_isfunction(upi->L, -1));
 					/* perms reftbl ... spfunc */
-	lua_call(upi->L, 0, 1);
+
+   restore_wl_object(upi->L);
+
+   printf("Before call\n");
+	// lua_call(upi->L, 0, 1);
 					/* perms reftbl ... tbl? */
+   printf("After call\n");
 	lua_assert(lua_istable(upi->L, -1));
 					/* perms reftbl ... tbl */
+   printf("After assert\n");
 }
 
 static void unpersistliteraltable(int ref, UnpersistInfo *upi)
@@ -974,6 +988,7 @@ static void unpersisttable(int ref, UnpersistInfo *upi)
 		int isspecial;
 		verify(LIF(Z,read)(&upi->zio, &isspecial, sizeof(int)) == 0);
 		if(isspecial) {
+         printf("isspecial: %i\n", isspecial);
 			unpersistspecialtable(ref, upi);
 					/* perms reftbl ... tbl */
 		} else {

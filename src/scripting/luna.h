@@ -78,6 +78,7 @@ void register_class
 
 	log("Constructor %i\n", lua_gettop(L));
 	m_add_constructor_to_lua<T>(L);
+	m_add_instantiator_to_lua<T>(L);
 	lua_pop(L, to_pop); // Pop everything we used so far.
 
 	log("MetaTable %i\n", lua_gettop(L));

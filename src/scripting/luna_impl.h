@@ -188,6 +188,24 @@ void m_add_constructor_to_lua(lua_State * const L) {
 	lua_setfield(L, -2, T::className);
 }
 
+/*
+ * The instantiator creates an empty class. It is only used to immediately load
+ * objects from a saved game. The instantiator has __ in front of its name.
+ * So: ClassName == Constructor
+ *   __ClassName == Instantiator
+ */
+template <class T>
+int m_instantiator(lua_State * const L) {
+	return to_lua<T>(L, new T());
+}
+
+template <class T>
+void m_add_instantiator_to_lua(lua_State * const L) {
+	std::string s = std::string("__") + T::className;
+	lua_pushcfunction (L, &m_instantiator<T>);
+	lua_setfield(L, -2, s.c_str());
+}
+
 template <class T>
 int m_create_metatable_for_class(lua_State * const L) {
 	luaL_newmetatable(L, T::className);
