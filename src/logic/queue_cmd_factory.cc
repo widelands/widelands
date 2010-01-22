@@ -22,6 +22,7 @@
 #include "cmd_check_eventchain.h"
 #include "cmd_incorporate.h"
 #include "cmd_lua.h"
+#include "cmd_luafunction.h"
 #include "economy/cmd_call_economy_balance.h"
 #include "events/event_chain.h"
 #include "instances.h"
@@ -81,6 +82,8 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 		return *new Cmd_Incorporate          ();
 	case QUEUE_CMD_LUA:
 		return *new Cmd_Lua      ();
+	case QUEUE_CMD_LUAFUNCTION:
+		return *new Cmd_LuaFunction ();
 	case QUEUE_CMD_CALL_ECONOMY_BALANCE:
 		return *new Cmd_Call_Economy_Balance ();
 	default:

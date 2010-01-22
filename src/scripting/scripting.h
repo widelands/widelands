@@ -25,6 +25,8 @@
 #include <stdint.h>
 #include <string>
 
+#include <lua.hpp>
+
 namespace Widelands {
 	struct Editor_Game_Base;
 	struct Game;
@@ -47,9 +49,15 @@ class LuaScriptNotExistingError : public LuaError {
 /**
  * Easy handling of LuaCoroutines
  */
-struct LuaCoroutine {
-	virtual int get_status() = 0;
-	virtual int resume    () = 0;
+class LuaCoroutine {
+	public:
+		enum {
+			DONE = 0,
+			YIELDED = LUA_YIELD,
+		};
+
+		virtual int get_status(void) = 0;
+		virtual int resume(uint32_t* = 0) = 0;
 };
 
 /**
@@ -67,6 +75,9 @@ struct LuaState {
 	virtual std::string pop_string() = 0;
 	virtual LuaCoroutine * pop_coroutine() = 0;
 };
+// TODO: this class and this wrapper should not be needed
+#include <lua.hpp>
+LuaState* create_lua_state(lua_State* );
 
 /**
  * This is the thin class that is used to execute code

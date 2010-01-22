@@ -21,7 +21,10 @@
 
 #include "lua_game.h"
 
+#include "scripting.h"
 #include "c_utils.h"
+
+#include "logic/cmd_luafunction.h"
 
 using namespace Widelands;
 
@@ -32,23 +35,24 @@ using namespace Widelands;
 /*
  * TODO: document me
  */
-static int L_call_at(lua_State* L) {
-   int nargs = lua_gettop();
-   if(nargs < 2)
-      report_error("Too little arguments to run_at");
+static int L_run_coroutine(lua_State * L) {
+	log("In corotine!\n");
+	int nargs = lua_gettop(L);
+	log("nargs: %i\n", nargs);
+	if (nargs < 1)
+		report_error(L, "Too little arguments to run_at");
 
-   Game & game = *get_game(L);
+	LuaCoroutine * cr = create_lua_state(L)->pop_coroutine();
+	Game & game = *get_game(L);
 
-   int gametime = luaL_checkint32(L, 1);
-   
-   // Run the init script, if the map provides on.
-   game.enqueue_command(
-         new Cmd_LuaCallFunction(game.get_gametime(), "map", "init", true));
+	game.enqueue_command
+		(new Widelands::Cmd_LuaFunction(game.get_gametime(), cr));
 
+	return 0;
 }
 
 const static struct luaL_reg wlgame [] = {
-	{"call_at", &L_call_at},
+	{"run_coroutine", &L_run_coroutine},
 	{0, 0}
 };
 

@@ -27,10 +27,16 @@
 #include <string>
 #include <stdexcept>
 
-extern "C" {
-#include <lauxlib.h>
-#include <lualib.h>
-}
+#include "log.h"
+#include "lua_debug.h"
+#include "lua_game.h"
+#include "lua_map.h"
+#include "c_utils.h"
+
+#include "scripting.h"
+
+// TODO: *.lua globbing doesn't work with zip file system
+>>>>>>> Added a new command LuaFunction that resumes a coroutine. Now working on making the first one unneeded
 
 /*
 ============================================
@@ -45,8 +51,17 @@ class LuaCoroutine_Impl : public LuaCoroutine {
 		virtual int get_status() {
 			return lua_status(m_L);
 		}
-		virtual int resume() {
-			return lua_resume(m_L, 0);
+		virtual int resume(uint32_t * sleeptime = 0) {
+			int rv = lua_resume(m_L, 0);
+			int n = lua_gettop(m_L);
+			uint32_t sleep_for = 0;
+			if (n == 1)
+				sleep_for = luaL_checkint32(m_L, -1);
+
+			if (sleeptime)
+				*sleeptime = sleep_for;
+
+			return rv;
 		}
 
 	private:
@@ -165,6 +180,9 @@ void LuaState_Impl::push_string(std::string & val)
 {
 	lua_pushstring(m_L, val.c_str());
 }
+LuaState * create_lua_state(lua_State * st) {
+	return new LuaState_Impl(st, false);
+}
 
 /*
 ============================================
@@ -249,6 +267,7 @@ LuaInterface_Impl::LuaInterface_Impl
 	// Now our own
 	luaopen_wldebug(L);
 	luaopen_wlmap(L);
+	luaopen_wlgame(L);
 
 	// Push the game onto the stack
 	lua_pushstring(L, "egbase");

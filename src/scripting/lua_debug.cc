@@ -50,7 +50,7 @@ static int L_log(lua_State * const l) {
  * TODO: document me
  */
 static int L_setSeeAll(lua_State * const l) {
-	bool const bval = luaL_checkint(l, 1);
+	bool const bval = luaL_checkint32(l, 1);
 
 	get_game(l)->get_ipl()->player().set_see_all(bval);
 

@@ -20,9 +20,7 @@
 #ifndef C_UTILS_H
 #define C_UTILS_H
 
-extern "C" {
-#include <lua.h>
-}
+#include <lua.hpp>
 
 #include "logic/game.h"
 

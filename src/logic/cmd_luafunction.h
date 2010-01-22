@@ -17,41 +17,34 @@
  *
  */
 
-#include "c_utils.h"
+#ifndef CMD_LUAFUNCTION_H
+#define CMD_LUAFUNCTION_H
 
-#include <cstdarg>
-#include <cstdio>
-#include <iostream>
+#include <string>
 
-extern "C" {
-#include <lauxlib.h>
-#include <lualib.h>
+#include "cmd_queue.h"
+#include "scripting/scripting.h"
+
+namespace Widelands {
+
+struct Cmd_LuaFunction : public GameLogicCommand {
+	Cmd_LuaFunction() : GameLogicCommand(0) {} // For savegame loading
+	Cmd_LuaFunction(int32_t const _duetime, LuaCoroutine* cr) : 
+		GameLogicCommand(_duetime), m_cr(cr) {}
+
+	// Write these commands to a file (for savegames)
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_LUAFUNCTION;}
+
+	virtual void execute(Game &);
+
+private:
+	LuaCoroutine* m_cr;
+};
+
 }
 
-Widelands::Game * get_game(lua_State * const L) {
-	lua_pushstring(L, "game");
-	lua_gettable(L, LUA_REGISTRYINDEX);
+#endif /* end of include guard: CMD_LUAFUNCTION_H */
 
-	Widelands::Game * g = static_cast<Widelands::Game *>(lua_touserdata(L, -1));
-	lua_pop(L, 1); // pop this userdata
-
-	return g;
-}
-
-/*
- * Returns an error to lua. Returns 0
- */
-int report_error(lua_State * L, const char * const fmt, ...) {
-	char buffer[2048];
-	va_list va;
-
-	va_start(va, fmt);
-	vsnprintf(buffer, sizeof(buffer), fmt, va);
-	va_end(va);
-
-	lua_pushstring(L, buffer);
-
-	lua_error(L);
-
-	return 0;
-}
