@@ -292,18 +292,22 @@ std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
 	std::string canonpath;
 	canonpath.reserve(path.length());
 #ifndef WIN32
-	canonpath = absolute ? "/" : "./";
+	if (!absolute)
+		canonpath = ".";
 
 	for (i = components.begin(); i != components.end(); ++i)
-		canonpath += *i + "/";
+	{
+		canonpath.push_back('/');
+		canonpath += *i;
+	}
 #else
 	canonpath = absolute ? "" : ".\\";
 
 	for (i = components.begin(); i != components.end(); ++i)
 		canonpath += *i + "\\";
-#endif
 
 	canonpath.erase(canonpath.end() - 1); //remove trailing slash
+#endif
 
 	//debug info
 	//printf("canonpath = %s\n", canonpath.c_str());
