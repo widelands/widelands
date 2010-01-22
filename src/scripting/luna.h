@@ -39,6 +39,16 @@
 	static const MethodType<klass> Methods[]; \
 	static const PropertyType<klass> Properties[]; \
 
+#define PROP_RO(klass, name) {#name, &klass::get_##name, 0}
+#define PROP_RW(klass, name) {#name, &klass::get_##name, &klass::set_##name}
+#define METHOD(klass, name) {#name, &klass::name}
+
+#define LUNA_CLASS_HEAD(klass) \
+	static const char className[]; \
+	static const char parentName[]; \
+	static const MethodType<klass> Methods[]; \
+	static const PropertyType<klass> Properties[]; \
+
 #include <lua.hpp>
 #include "luna_impl.h"
 
