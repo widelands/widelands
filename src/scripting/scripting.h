@@ -33,6 +33,8 @@
 #include "logic/widelands_fileread.h"
 
 namespace Widelands {
+	struct Map_Map_Object_Loader;
+	struct Map_Map_Object_Saver;
 	struct Editor_Game_Base;
 	struct Game;
 }
@@ -80,9 +82,12 @@ class LuaInterface {
 
 		virtual void run_script(std::string, std::string) = 0;
 
-		virtual LuaCoroutine* read_coroutine(Widelands::FileRead &, uint32_t) = 0;
+		virtual LuaCoroutine* read_coroutine
+			(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
+			 uint32_t) = 0;
 		virtual uint32_t write_coroutine
-			(Widelands::FileWrite &, LuaCoroutine *) = 0;
+			(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&,
+			 LuaCoroutine *) = 0;
 };
 
 LuaInterface* create_lua_interface(Widelands::Editor_Game_Base*);

@@ -77,6 +77,7 @@ int luna_restore_object(lua_State * L) {
 	LunaClass ** obj = m_get_new_empty_user_data(L);
 
 	(*obj)->__unpersist(L);
+	(*obj)->__finish_unpersist(L);
 
 	return 1;
 }

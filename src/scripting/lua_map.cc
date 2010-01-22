@@ -48,28 +48,53 @@ using namespace Widelands;
    WRAPPED_PROPERTY_GET_INT(object, name)                                     \
    WRAPPED_PROPERTY_SET_INT(object, name)                                     \
 
+
+/*
+ * Base class for all classes in wl.map
+ */
+class L_MapModuleClass : public LunaClass {
+	public:
+		const char * get_modulename() {return "map";}
+};
+
+
 /*
  * Map Object
  */
-#if 0
-class L_MapObject {
-	Object_Ptr m_ptr;
+class L_MapObject : public L_MapModuleClass {
+	Object_Ptr * m_ptr;
 
 public:
 	LUNA_CLASS_HEAD(L_MapObject);
 
-	L_MapObject() {}
-	L_MapObject(Map_Object & mo) : m_ptr(&mo) {
-	}
+	L_MapObject() : m_ptr(0) {}
+	L_MapObject(Map_Object & mo) {m_ptr = new Object_Ptr(&mo);}
 	L_MapObject(lua_State * L) : m_ptr(0) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
+	}
+	virtual ~L_MapObject() {if (m_ptr) delete m_ptr;}
+
+	virtual void __persist(lua_State * L) {
+		Map_Map_Object_Saver & mos = *get_mos(L);
+		Game & game = *get_game(L);
+
+		uint32_t idx = mos.get_object_file_index(*m_ptr->get(game));
+		PERS_UINT32("file_index", idx);
+	}
+	virtual void __unpersist(lua_State * L) {
+		uint32_t idx;
+		UNPERS_UINT32("file_index", idx);
+		Map_Map_Object_Loader & mol = *get_mol(L);
+
+		m_ptr = new Object_Ptr(&mol.get<Map_Object>(idx));
 	}
 
 	/*
 	 * Properties
 	 */
 	int get_serial(lua_State * L) {
-		lua_pushinteger(L, m_ptr.serial());
+		Game & game = *get_game(L);
+		lua_pushuint32(L, m_ptr->get(game)->serial());
 		return 1;
 	}
 
@@ -93,7 +118,7 @@ public:
 
 private:
 	Map_Object * m_get(Game & game, lua_State * L) {
-		Map_Object * o = m_ptr.get(game);
+		Map_Object * o = m_ptr->get(game);
 		if (!o)
 			report_error(L, "Object no longer exists!");
 		return o;
@@ -114,15 +139,37 @@ const PropertyType<L_MapObject> L_MapObject::Properties[] = {
  * BaseImmovable
  */
 class L_BaseImmovable : public L_MapObject {
-	OPtr<BaseImmovable> m_biptr;
+	OPtr<BaseImmovable>* m_biptr;
+
 public:
 	LUNA_CLASS_HEAD(L_BaseImmovable);
 
-	L_BaseImmovable() {}
-	L_BaseImmovable(BaseImmovable & mo) : L_MapObject(mo), m_biptr(&mo) {
+	L_BaseImmovable() : m_biptr(0) {}
+	L_BaseImmovable(BaseImmovable & mo) : L_MapObject(mo) {
+		m_biptr = new OPtr<BaseImmovable>(&mo);
 	}
-	L_BaseImmovable(lua_State * L) : L_MapObject(L) {
+	L_BaseImmovable(lua_State * L) : L_MapObject(L), m_biptr(0) {}
+	virtual ~L_BaseImmovable() {if (m_biptr) delete m_biptr;}
+
+	virtual void __persist(lua_State * L) {
+		Map_Map_Object_Saver & mos = *get_mos(L);
+		Game & game = *get_game(L);
+
+		uint32_t idx = mos.get_object_file_index(*m_biptr->get(game));
+		PERS_UINT32("file_index", idx);
+
+		L_MapObject::__persist(L);
 	}
+	virtual void __unpersist(lua_State * L) {
+		uint32_t idx;
+		UNPERS_UINT32("file_index", idx);
+		Map_Map_Object_Loader & mol = *get_mol(L);
+
+		m_biptr = new OPtr<BaseImmovable>(&mol.get<BaseImmovable>(idx));
+
+		L_MapObject::__unpersist(L);
+	}
+
 	/*
 	 * Properties
 	 */
@@ -161,7 +208,7 @@ public:
 	 */
 private:
 	BaseImmovable * m_get(Game & game, lua_State * L) {
-		BaseImmovable * o = m_biptr.get(game);
+		BaseImmovable * o = m_biptr->get(game);
 		if (!o)
 			report_error(L, "BaseImmovable no longer exists!");
 		return o;
@@ -177,29 +224,34 @@ const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
 	PROP_RO(L_BaseImmovable, name),
 	{0, 0, 0},
 };
-#endif
 
 /*
  * Coordinates
  */
-class L_Coords : public LunaClass {
+class L_Coords : public L_MapModuleClass {
 	Coords m_c;
 
 public:
-	const char * get_modulename() {return "map";}
-
 	LUNA_CLASS_HEAD(L_Coords);
 
-	L_Coords() {
-		log("Constructed!\n");
-	}
+	/*
+	 * Needed functionality
+	 */
+	L_Coords() {}
+	L_Coords(Coordinate x, Coordinate y) : m_c(x, y) {}
 	L_Coords(lua_State * L)
 	{
 		m_c.x = luaL_checknumber(L, 1);
 		m_c.y = luaL_checknumber(L, 2);
 	}
-	L_Coords(Coordinate x, Coordinate y) : m_c(x, y) {}
 	~L_Coords() {}
+
+	virtual void __persist(lua_State * L) {
+		PERS_INT32("x", m_c.x); PERS_INT32("y", m_c.y);
+	}
+	virtual void __unpersist(lua_State * L) {
+		UNPERS_INT32("x", m_c.x); UNPERS_INT32("y", m_c.y);
+	}
 
 	/*
 	 * Properties
@@ -210,35 +262,6 @@ public:
 	/*
 	 * Lua methods
 	 */
-	virtual void __persist(lua_State * L) {
-		log("In persist!");
-		lua_pushint32(L, m_c.x);
-		lua_setfield(L, -2, "x");
-
-		lua_pushint32(L, m_c.y);
-		lua_setfield(L, -2, "y");
-		log("Completly done!");
-	}
-	virtual void __unpersist(lua_State * L) {
-		log("In unpersist!\n");
-
-		return;
-
-		lua_getfield(L, -1, "x");
-		uint32_t x = luaL_checkint32(L, -1);
-		lua_pop(L, 1);
-		log("x: %i\n", x);
-
-		lua_getfield(L, -1, "y");
-		uint32_t y = luaL_checkint32(L, -1);
-		lua_pop(L, 1);
-		log("y: %i\n", y);
-
-		lua_pop(L, 1);
-
-		to_lua<L_Coords>(L, this);
-	}
-
 	/*
 	 * C methods
 	 */
@@ -268,7 +291,6 @@ const PropertyType<L_Coords> L_Coords::Properties[] = {
  *
  */
 static int L_create_immovable(lua_State * const L) {
-#if 0
 	char const * const objname = luaL_checkstring(L, 1);
 	uint32_t     const x       = luaL_checkint32(L, 2);
 	uint32_t     const y       = luaL_checkint32(L, 3);
@@ -290,7 +312,6 @@ static int L_create_immovable(lua_State * const L) {
 
 	// Send this to lua
 	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(m));
-#endif
 }
 
 
@@ -303,7 +324,6 @@ static int L_create_immovable(lua_State * const L) {
  * Returns: x, y position of object
  */
 static int L_find_immovable(lua_State * const L) {
-#if 0
 	uint32_t     const x       = luaL_checkint32(L, 1);
 	uint32_t     const y       = luaL_checkint32(L, 2);
 	uint32_t     const radius  = luaL_checkint32(L, 3);
@@ -342,7 +362,6 @@ static int L_find_immovable(lua_State * const L) {
 	}
 
 	return 0;
-#endif
 }
 
 const static struct luaL_reg wlmap [] = {
@@ -356,12 +375,10 @@ void luaopen_wlmap(lua_State * L) {
 	lua_pop(L, 1); // pop the table from the stack
 
 	register_class<L_Coords>(L, "map");
-#if 0
 	register_class<L_MapObject>(L, "map");
 
 	register_class<L_BaseImmovable>(L, "map", true);
 	add_parent<L_BaseImmovable, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
-#endif
 }
 

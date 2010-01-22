@@ -48,7 +48,7 @@ void Cmd_LuaFunction::Read
 		if (packet_version == CMD_LUAFUNCTION_VERSION) {
 			GameLogicCommand::Read(fr, egbase, mol);
 
-			m_cr = egbase.lua().read_coroutine(fr, fr.Unsigned32());
+			m_cr = egbase.lua().read_coroutine(fr, mol, fr.Unsigned32());
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -65,7 +65,7 @@ void Cmd_LuaFunction::Write
 	FileWrite::Pos p = fw.GetPos();
 	fw.Unsigned32(0); // N bytes written, follows below
 
-	uint32_t nwritten = Little32(egbase.lua().write_coroutine(fw, m_cr));
+	uint32_t nwritten = Little32(egbase.lua().write_coroutine(fw, mos, m_cr));
 	fw.Data(&nwritten, 4, p);
 }
 

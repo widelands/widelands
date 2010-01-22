@@ -33,6 +33,32 @@ Widelands::Game * get_game(lua_State * const L) {
 	return g;
 }
 
+Widelands::Map_Map_Object_Loader * get_mol(lua_State * const L) {
+	lua_pushstring(L, "mol");
+	lua_gettable(L, LUA_REGISTRYINDEX);
+
+	Widelands::Map_Map_Object_Loader * mol =
+		static_cast<Widelands::Map_Map_Object_Loader *>(lua_touserdata(L, -1));
+
+	lua_pop(L, 1); // pop this userdata
+
+	return mol;
+}
+
+Widelands::Map_Map_Object_Saver * get_mos(lua_State * const L) {
+	lua_pushstring(L, "mos");
+	lua_gettable(L, LUA_REGISTRYINDEX);
+
+	Widelands::Map_Map_Object_Saver * mos =
+		static_cast<Widelands::Map_Map_Object_Saver *>(lua_touserdata(L, -1));
+
+	lua_pop(L, 1); // pop this userdata
+
+	return mos;
+}
+
+
+
 /*
  * Returns an error to lua. Returns 0
  */

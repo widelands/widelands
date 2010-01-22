@@ -31,7 +31,7 @@
 #include "scripting.h"
 
 // TODO: document this whole scripting stuff: changes in pluto, pickling,
-// TODO:   unpickling, Luna & Luna changes
+// TODO:   unpickling, Luna & Luna changes, mos & mol pickling
 // TODO: make pickling independet of OS by using widelands Stream*
 // TODO: remove this include
 #include "pluto/pluto.h"
@@ -70,8 +70,11 @@ class LuaInterface_Impl : public LuaInterface {
 
 		virtual void run_script(std::string, std::string);
 
-		virtual LuaCoroutine * read_coroutine(Widelands::FileRead &, uint32_t);
-		virtual uint32_t write_coroutine(Widelands::FileWrite &, LuaCoroutine *);
+		virtual LuaCoroutine * read_coroutine
+			(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t);
+		virtual uint32_t write_coroutine
+			(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &,
+			 LuaCoroutine *);
 };
 
 /*************************
@@ -144,22 +147,24 @@ LuaInterface_Impl::~LuaInterface_Impl() {
 }
 
 LuaCoroutine * LuaInterface_Impl::read_coroutine
-	(Widelands::FileRead & fr, uint32_t size)
+	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
+	 uint32_t size)
 {
 	LuaCoroutine_Impl * rv = new LuaCoroutine_Impl(0);
 
-	rv->read(m_L, fr, size);
+	rv->read(m_L, fr, mol, size);
 
 	return rv;
 }
 
 uint32_t LuaInterface_Impl::write_coroutine
-	(Widelands::FileWrite & fw, LuaCoroutine * cr)
+	(Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos,
+	 LuaCoroutine * cr)
 {
 	// we do not want to make the write function public by adding
 	// it to the interface of LuaCoroutine. Therefore, we make a cast
 	// to the Implementation function here.
-	return dynamic_cast<LuaCoroutine_Impl *>(cr)->write(m_L, fw);
+	return dynamic_cast<LuaCoroutine_Impl *>(cr)->write(m_L, fw, mos);
 }
 
 void LuaInterface_Impl::register_script

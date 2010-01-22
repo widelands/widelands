@@ -200,7 +200,6 @@ void m_add_constructor_to_lua(lua_State * const L) {
  */
 template <class T>
 int m_instantiator(lua_State * const L) {
-	log("In instantiator!\n");
 	return to_lua<T>(L, new T());
 }
 
@@ -223,7 +222,9 @@ int m_persist(lua_State * const L) {
 	lua_pushstring(L, T::className);
 	lua_setfield(L, -2, "class");
 
+	log("Before calling (*obj)->persist!: %i\n", lua_gettop(L));
 	(*obj)->__persist(L);
+	log("After calling (*obj)->persist!: %i\n", lua_gettop(L));
 
 	return 1;
 }

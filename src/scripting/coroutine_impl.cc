@@ -60,10 +60,16 @@ int write_func(lua_State *, const void * p, size_t data, void * ud) {
 	return data;
 }
 
-uint32_t LuaCoroutine_Impl::write(lua_State * parent, Widelands::FileWrite & fw)
+uint32_t LuaCoroutine_Impl::write
+	(lua_State * parent, Widelands::FileWrite & fw,
+	 Widelands::Map_Map_Object_Saver & mos)
 {
 	int n = lua_gettop(parent);
 	log("\n\nWriting Coroutine: %i\n", n);
+
+	// Save a reference to the object saver
+	lua_pushlightuserdata(parent, &mos);
+	lua_setfield(parent, LUA_REGISTRYINDEX, "mos");
 
 	// Push all the stuff that should be be regenerated
 	lua_newtable(parent);
@@ -92,6 +98,10 @@ uint32_t LuaCoroutine_Impl::write(lua_State * parent, Widelands::FileWrite & fw)
 	log("After pluto_persist!\n");
 	log("Pickled %i bytes. Stack size: %i\n", dw.written, lua_gettop(parent));
 
+	// Delete the entry in the registry
+	lua_pushnil(parent);
+	lua_setfield(parent, LUA_REGISTRYINDEX, "mos");
+
 	return dw.written;
 }
 
@@ -111,10 +121,15 @@ const char * read_func(lua_State *, void * ud, size_t * sz) {
 }
 
 void LuaCoroutine_Impl::read
-	(lua_State * parent, Widelands::FileRead & fr, uint32_t size)
+	(lua_State * parent, Widelands::FileRead & fr,
+	 Widelands::Map_Map_Object_Loader & mol, uint32_t size)
 {
 	int n = lua_gettop(parent);
 	log("\n\nReading Coroutine: %i\n", n);
+
+	// Save the mol in the registry
+	lua_pushlightuserdata(parent, &mol);
+	lua_setfield(parent, LUA_REGISTRYINDEX, "mol");
 
 	// Push all the stuff that should not be regenerated
 	lua_newtable(parent);
@@ -131,6 +146,12 @@ void LuaCoroutine_Impl::read
 	pluto_unpersist(parent, &read_func, &rd);
 	m_L = luaL_checkthread(parent, -1);
 	lua_pop(parent, 2); // pop the thread & the table
+
+	log("Done with pickling!\n");
+
+	// Delete the entry in the registry
+	lua_pushnil(parent);
+	lua_setfield(parent, LUA_REGISTRYINDEX, "mol");
 
 	log("Unpickled %i bytes. Stack size: %i\n", size, lua_gettop(parent));
 }

@@ -35,8 +35,12 @@ class LuaCoroutine_Impl : public LuaCoroutine {
 		virtual int get_status() {return lua_status(m_L);}
 		virtual int resume(uint32_t * sleeptime = 0);
 
-		virtual uint32_t write(lua_State*, Widelands::FileWrite& );
-		virtual void read(lua_State*, Widelands::FileRead &, uint32_t);
+		virtual uint32_t write
+			(lua_State*, Widelands::FileWrite &,
+			 Widelands::Map_Map_Object_Saver & );
+		virtual void read
+			(lua_State*, Widelands::FileRead &,
+			 Widelands::Map_Map_Object_Loader &, uint32_t);
 
 	private:
 		lua_State * m_L;

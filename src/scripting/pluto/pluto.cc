@@ -181,13 +181,16 @@ static int persistspecialobject(PersistInfo *pi, int defaction)
 		lua_pushstring(pi->L, "__persist function did not return a table");
 		lua_error(pi->L);
 	}
-					/* perms reftbl ... obj mt func */
+					/* perms reftbl ... obj mt table */
 	{
 		int one = 1;
 		pi->writer(pi->L, &one, sizeof(int), pi->ud);
 	}
+	printf("Maybe persist removes the item?: %i\n", lua_gettop(pi->L));
 	persist(pi);
-					/* perms reftbl ... obj mt func */
+	printf("Maybe persist removes the item: %i\n", lua_gettop(pi->L));
+
+					/* perms reftbl ... obj mt table */
 	lua_pop(pi->L, 2);
 					/* perms reftbl ... obj */
 	return 1;

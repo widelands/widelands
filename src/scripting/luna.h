@@ -29,15 +29,41 @@
 #ifndef LUNA_H
 #define LUNA_H
 
-#define PROP_RO(klass, name) {#name, &klass::get_##name, 0}
-#define PROP_RW(klass, name) {#name, &klass::get_##name, &klass::set_##name}
-#define METHOD(klass, name) {#name, &klass::name}
 
 #define LUNA_CLASS_HEAD(klass) \
 	static const char className[]; \
 	static const char parentName[]; \
 	static const MethodType<klass> Methods[]; \
 	static const PropertyType<klass> Properties[]; \
+	\
+   virtual void __finish_unpersist(lua_State* L) { \
+      lua_pop(L, 1); /* Pop the table */ \
+      to_lua<klass>(L, this); \
+	}
+
+/*
+ * Macros for filling the description tables
+ */
+#define PROP_RO(klass, name) {#name, &klass::get_##name, 0}
+#define PROP_RW(klass, name) {#name, &klass::get_##name, &klass::set_##name}
+#define METHOD(klass, name) {#name, &klass::name}
+
+/*
+ * Macros for helping with persistence and unpersistence
+ */
+#define _PERS_INT(name, value, type) \
+   lua_push ##type(L, value); \
+   lua_setfield(L, -2, name)
+#define PERS_INT32(name, value) _PERS_INT(name, value, int32)
+#define PERS_UINT32(name, value) _PERS_INT(name, value, uint32)
+
+#define _UNPERS_INT(name, value, type) lua_getfield(L, -1, name); \
+   value = luaL_check ##type(L, -1); \
+   lua_pop(L,1);
+#define UNPERS_INT32(name, value) _UNPERS_INT(name, value, int32)
+#define UNPERS_UINT32(name, value) _UNPERS_INT(name, value, uint32)
+
+
 
 #include <lua.hpp>
 #include "luna_impl.h"
@@ -50,6 +76,8 @@ class LunaClass {
 		virtual void __persist(lua_State*) = 0;
 		virtual void __unpersist(lua_State*) = 0;
 		virtual const char* get_modulename() = 0;
+		// The next class gets defined by LUNA_CLASS_HEAD
+		virtual void __finish_unpersist(lua_State*) = 0;
 };
 
 /**
@@ -112,35 +140,36 @@ void add_parent(lua_State * L)
 template <class T>
 int to_lua(lua_State * const L, T * const obj) {
 	// Create a new table with some slots preallocated
-	lua_createtable(L, 0, 30);
+	lua_createtable(L, 0, 30); // table
 
 	// get the index of the new table on the stack
 	int const newtable = lua_gettop(L);
 
 	// push index of position of user data in our array
-	lua_pushnumber(L, 0);
+	lua_pushnumber(L, 0);  // table 0
 
 	// Make a new userdata. A lightuserdata won't do since we want to assign
 	// a metatable to it
 	T * * const a = static_cast<T * * >(lua_newuserdata(L, sizeof(T *)));
 	*a = obj;
 
-	int const userdata = lua_gettop(L);
+	int const userdata = lua_gettop(L); // table 0 ud
 
 	// Assign this metatable to this userdata. We only do this to add
 	// garbage collection to this userdata, so that the destructor gets
 	// called. As a (unwanted, but not critical) side effect we also add all
 	// other methods to this object
-	luaL_getmetatable(L, T::className);
-	lua_setmetatable (L, userdata);
+	luaL_getmetatable(L, T::className); // table 0 ud mt
+	lua_setmetatable (L, userdata);  // table 0 ud
 
 	// table[ 0 ] = USERDATA;
-	lua_settable(L, newtable);
+	lua_settable(L, newtable); // table
 
 	// Assign this metatable to the newly created table
 	luaL_getmetatable(L, T::className);
 	lua_setmetatable (L, newtable);
 
+	// table
 	return 1;
 }
 
