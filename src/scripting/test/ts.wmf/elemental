@@ -1,10 +1,10 @@
-# Automatically created by Widelands unofficial-git-7a44c32 (debug)
+# Automatically created by Widelands unofficial-git-69dd66c (debug)
 
 [global]
 packet_version="1"
 map_w="64"
 map_h="64"
-nr_players="1"
+nr_players="3"
 world="greenland"
 name="00Test"
 author="Unknown"

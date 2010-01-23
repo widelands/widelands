@@ -1,5 +1,7 @@
-# Automatically created by Widelands unofficial-git-7a44c32 (debug)
+# Automatically created by Widelands unofficial-git-69dd66c (debug)
 
 [global]
 packet_version="2"
 player_1="40 40"
+player_2="18 24"
+player_3="47 7"
