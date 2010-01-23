@@ -316,6 +316,71 @@ PlayerImmovable * L_PlayerImmovable::m_get(Game & game, lua_State * L) {
 }
 
 
+/* RST
+Building
+--------
+
+.. class:: Building
+
+	Bases: :class:`PlayerImmovable`
+
+	This represents a building owned by a player.
+*/
+const char L_Building::className[] = "Building";
+const MethodType<L_Building> L_Building::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_Building> L_Building::Properties[] = {
+	PROP_RO(L_Building, building_type),
+	{0, 0, 0},
+};
+
+void L_Building::__persist(lua_State * L) {
+	L_PlayerImmovable::__persist(L);
+}
+void L_Building::__unpersist(lua_State * L) {
+	L_PlayerImmovable::__unpersist(L);
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: building_type
+
+		(RO) What type of building is this. Can be either of:
+
+		* constructionsite
+		* militarysite
+		* productionsite
+		* trainingsite
+		* warehouse
+*/
+int L_Building::get_building_type(lua_State * L) {
+	lua_pushstring(L, m_get(get_game(L), L)->type_name());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+Building * L_Building::m_get(Game & game, lua_State * L) {
+	Building * o = static_cast<Building *>(m_biptr->get(game));
+	if (!o)
+		report_error(L, "Building no longer exists!");
+	return o;
+}
+
 
 
 
@@ -640,6 +705,12 @@ void luaopen_wlmap(lua_State * L) {
 	register_class<L_PlayerImmovable>(L, "map", true);
 	add_parent<L_PlayerImmovable, L_BaseImmovable>(L);
 	add_parent<L_PlayerImmovable, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_Building>(L, "map", true);
+	add_parent<L_Building, L_PlayerImmovable>(L);
+	add_parent<L_Building, L_BaseImmovable>(L);
+	add_parent<L_Building, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 }
 

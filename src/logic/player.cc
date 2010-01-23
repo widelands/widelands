@@ -317,7 +317,7 @@ void Player::force_road(Path const & path, bool const create_carrier) {
 }
 
 
-void Player::force_building
+Building& Player::force_building
 	(Coords                const location,
 	 Building_Index        const idx,
 	 uint32_t      const *       ware_counts,
@@ -351,7 +351,7 @@ void Player::force_building
 				immovable->remove(egbase());
 		}
 	}
-	descr.create
+	return descr.create
 		(egbase(), *this, c[0], false,
 		 ware_counts, worker_counts, &soldier_counts);
 }

@@ -418,7 +418,7 @@ struct Player :
 	Flag*   build_flag(Coords);      /// Build a flag if it is allowed.
 	void   force_road(Path const &, bool create_carrier = false);
 	void   build_road(Path const &); /// Build a road if it is allowed.
-	void force_building
+	Building& force_building
 		(Coords,
 		 Building_Index,
 		 uint32_t      const * ware_counts,

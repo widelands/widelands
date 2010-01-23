@@ -147,6 +147,35 @@ private:
 	Widelands::PlayerImmovable * m_get(Widelands::Game & game, lua_State * L);
 };
 
+class L_Building : public L_PlayerImmovable {
+public:
+	LUNA_CLASS_HEAD(L_Building);
+
+	L_Building() {}
+	L_Building(Widelands::Building & mo) : L_PlayerImmovable(mo) {
+	}
+	L_Building(lua_State * L) : L_PlayerImmovable(L) {}
+	virtual ~L_Building() {}
+
+	virtual void __persist(lua_State * L);
+	virtual void __unpersist(lua_State * L);
+
+	/*
+	 * Properties
+	 */
+	int get_building_type(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+private:
+	Widelands::Building * m_get(Widelands::Game & game, lua_State * L);
+};
+
 
 class L_Field : public L_MapModuleClass {
 	Widelands::FCoords m_c;

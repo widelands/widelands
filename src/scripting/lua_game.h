@@ -60,8 +60,8 @@ public:
 	/*
 	 * Lua methods
 	 */
-	int build_flag(lua_State * L);
-	int force_building(lua_State * L);
+	int place_flag(lua_State * L);
+	int place_building(lua_State * L);
 
 	/*
 	 * C methods

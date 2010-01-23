@@ -44,8 +44,6 @@ using namespace Widelands;
 .. currentmodule:: wl.game
 */
 
-
-
 /*
  * ========================================================================
  *                         MODULE CLASSES
@@ -65,8 +63,8 @@ Player
 */
 const char L_Player::className[] = "Player";
 const MethodType<L_Player> L_Player::Methods[] = {
-	METHOD(L_Player, build_flag),
-	METHOD(L_Player, force_building),
+	METHOD(L_Player, place_flag),
+	METHOD(L_Player, place_building),
 
 	{0, 0},
 };
@@ -104,7 +102,7 @@ int L_Player::get_number(lua_State * L) {
  ==========================================================
  */
 /* RST
-	.. function:: build_flag(field[, force])
+	.. function:: place_flag(field[, force])
 
 		Builds a flag at a given position if it is legal to do so. If not,
 		reports an error
@@ -124,15 +122,15 @@ int L_Player::get_number(lua_State * L) {
 		:returns: :class:`wl.map.Flag` object created or :const:`nil`.
 */
 // TODO: should return Flag, not PlayerImmovable
-int L_Player::build_flag(lua_State * L) {
+int L_Player::place_flag(lua_State * L) {
 	uint32_t n = lua_gettop(L);
 	L_Field * c = *get_user_class<L_Field>(L, 2);
 	bool force = false;
 	if (n > 2)
 		force = luaL_checkboolean(L, 3);
 
-	Flag* f;
-	if(not force) {
+	Flag * f;
+	if (not force) {
 		f = m_get(get_game(L)).build_flag(c->coords());
 		if (!f)
 			return report_error(L, "Couldn't build flag!");
@@ -143,17 +141,27 @@ int L_Player::build_flag(lua_State * L) {
 	return to_lua<L_PlayerImmovable>(L, new L_PlayerImmovable(*f));
 }
 
-// TODO: document me
-// TODO: should return Building
-int L_Player::force_building(lua_State * L) {
-	const char * name = luaL_checkstring(L, - 2);
-	L_Field * c = *get_user_class<L_Field>(L, -1);
+/* RST
+	.. method:: place_building(name, pos)
+
+		Immediately creates a building at the given position. No construction
+		site is created. The building starts out completely empty.  The building
+		is forced to be at this position, the same action is taken as for
+		:meth:`place_flag` when force is :const:`true`. Additionally, all
+		buildings that are too close to the new one are ripped.
+
+		:returns: :class:`wl.map.Building` object created
+*/
+int L_Player::place_building(lua_State * L) {
+	const char * name = luaL_checkstring(L, 2);
+	L_Field * c = *get_user_class<L_Field>(L, 3);
 
 	Building_Index i = m_get(get_game(L)).tribe().building_index(name);
 
-	m_get(get_game(L)).force_building(c->coords(), i, 0, 0, Soldier_Counts());
+	Building& b = m_get(get_game(L)).force_building
+		(c->coords(), i, 0, 0, Soldier_Counts());
 
-	return 0;
+	return to_lua<L_Building>(L, new L_Building(b));
 }
 
 /*
