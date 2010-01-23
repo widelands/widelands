@@ -23,10 +23,12 @@
 #include <lua.hpp>
 
 #include "logic/game.h"
+#include "logic/warehouse.h"
 
 #include "luna.h"
 
 void luaopen_wlmap(lua_State *);
+
 
 /*
  * Base class for all classes in wl.map
@@ -176,6 +178,32 @@ private:
 	Widelands::Building * m_get(Widelands::Game & game, lua_State * L);
 };
 
+class L_Warehouse : public L_Building {
+public:
+	LUNA_CLASS_HEAD(L_Warehouse);
+
+	L_Warehouse() {}
+	L_Warehouse(Widelands::Warehouse & mo) : L_Building(mo) {
+	}
+	L_Warehouse(lua_State * L) : L_Building(L) {}
+	virtual ~L_Warehouse() {}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua Methods
+	 */
+	int set_ware(lua_State*);
+
+	/*
+	 * C Methods
+	 */
+private:
+	Widelands::Warehouse * m_get(Widelands::Game & game, lua_State * L);
+};
+
 
 class L_Field : public L_MapModuleClass {
 	Widelands::FCoords m_c;
@@ -226,5 +254,7 @@ private:
 	int m_region(lua_State * L, uint32_t radius);
 	int m_hollow_region(lua_State * L, uint32_t radius, uint32_t inner_radius);
 };
+
+int upcasted_immovable_to_lua(lua_State * L, Widelands::BaseImmovable * bi);
 
 #endif

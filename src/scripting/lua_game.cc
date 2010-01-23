@@ -161,7 +161,7 @@ int L_Player::place_building(lua_State * L) {
 	Building & b = m_get(get_game(L)).force_building
 		(c->coords(), i, 0, 0, Soldier_Counts());
 
-	return to_lua<L_Building>(L, new L_Building(b));
+	return upcasted_immovable_to_lua(L, &b);
 }
 
 /*

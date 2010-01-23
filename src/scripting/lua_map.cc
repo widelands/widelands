@@ -58,26 +58,28 @@ using namespace Widelands;
  * Lua. We use this so that scripters always work with the highest class
  * object available.
  */
+#define CAST_TO_LUA(k) to_lua<L_ ##k> \
+   (L, new L_ ##k(*static_cast<k *>(bi)))
 int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
 	if (!bi)
 		return 0;
 
 	switch  (bi->get_type()) {
 		case Map_Object::BUILDING:
-			return
-				to_lua<L_Building>
-					(L, new L_Building(*static_cast<Building *>(bi)));
+			if (!strcmp(bi->type_name(), "warehouse"))
+				return CAST_TO_LUA(Warehouse);
+			else
+				return CAST_TO_LUA(Building);
 
 		case Map_Object::FLAG:
 		case Map_Object::ROAD:
-			return
-				to_lua<L_PlayerImmovable>
-					(L, new L_PlayerImmovable(*static_cast<PlayerImmovable *>(bi)));
+			return CAST_TO_LUA(PlayerImmovable);
 		// TODO: Handle FLAG
 		// TODO: Handle ROAD
 	}
 	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*bi));
 }
+#undef CAST_TO_LUA
 
 
 
@@ -413,6 +415,79 @@ Building * L_Building::m_get(Game & game, lua_State * L) {
 }
 
 
+/* RST
+Warehouse
+---------
+
+.. class:: Warehouse
+
+	Bases: :class:`Building`
+
+	Every Headquarter or Warehouse on the Map is of this type.
+*/
+const char L_Warehouse::className[] = "Warehouse";
+const MethodType<L_Warehouse> L_Warehouse::Methods[] = {
+	METHOD(L_Warehouse, set_ware),
+	{0, 0},
+};
+const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
+	{0, 0, 0},
+};
+
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+/* RST
+	.. method:: set_ware(name, count)
+
+		Sets the wares available in this warehouse
+
+		:arg name: name of ware
+		:type name: :class:`string`
+		:arg count: this many units will be available after running
+		:type count: :class:`integer`
+
+		:returns: :const:`nil`
+*/
+// TODO: should take a table with "name": value
+// TODO: crashes when an illegal ware is used.
+// TODO: no tests for this are written
+int L_Warehouse::set_ware(lua_State * L) {
+	Warehouse * o = m_get(get_game(L), L);
+	std::string name = luaL_checkstring(L, 2);
+	uint32_t count = luaL_checkuint32(L, 3);
+
+	Ware_Index idx = o->get_owner()->tribe().ware_index(name);
+	log("idx: %i\n", idx.value());
+
+	// TODO: should set wares, not increase them
+	o->insert_wares(idx, count);
+	return 0;
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+Warehouse * L_Warehouse::m_get(Game & game, lua_State * L) {
+	Warehouse * o = static_cast<Warehouse *>(m_biptr->get(game));
+	if (!o)
+		report_error(L, "Warehouse no longer exists!");
+	return o;
+}
+
+
+
 
 
 /*
@@ -742,6 +817,13 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<L_Building, L_PlayerImmovable>(L);
 	add_parent<L_Building, L_BaseImmovable>(L);
 	add_parent<L_Building, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_Warehouse>(L, "map", true);
+	add_parent<L_Warehouse, L_Building>(L);
+	add_parent<L_Warehouse, L_PlayerImmovable>(L);
+	add_parent<L_Warehouse, L_BaseImmovable>(L);
+	add_parent<L_Warehouse, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 }
 
