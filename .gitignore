@@ -1,3 +1,4 @@
 *.pyc
 *.sw?
 src/scripting/doc/build
+src/scripting/doc/source/wl_*.rst
