@@ -48,6 +48,37 @@ using namespace Widelands;
 .. currentmodule:: wl.map
 */
 
+/*
+ * ========================================================================
+ *                         HELPER FUNCTIONS
+ * ========================================================================
+ */
+/*
+ * Upcast the given base immovable to a higher type and hand this to
+ * Lua. We use this so that scripters always work with the highest class
+ * object available.
+ */
+int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
+	if (!bi)
+		return 0;
+
+	switch  (bi->get_type()) {
+		case Map_Object::BUILDING:
+			return
+				to_lua<L_Building>
+					(L, new L_Building(*static_cast<Building *>(bi)));
+
+		case Map_Object::FLAG:
+		case Map_Object::ROAD:
+			return
+				to_lua<L_PlayerImmovable>
+					(L, new L_PlayerImmovable(*static_cast<PlayerImmovable *>(bi)));
+		// TODO: Handle FLAG
+		// TODO: Handle ROAD
+	}
+	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*bi));
+}
+
 
 
 /*
@@ -461,9 +492,9 @@ int L_Field::get_immovable(lua_State * L) {
 	BaseImmovable * bi = m_c.field->get_immovable();
 
 	if (!bi)
-		lua_pushnil(L);
+		return 0;
 	else
-		to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*bi));
+		upcasted_immovable_to_lua(L, bi);
 	return 1;
 }
 
@@ -634,7 +665,7 @@ static int L_create_immovable(lua_State * const L) {
 	BaseImmovable & m = game.create_immovable(c->coords(), imm_idx, 0);
 
 	// Send this to lua
-	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(m));
+	return upcasted_immovable_to_lua(L, &m);
 }
 
 

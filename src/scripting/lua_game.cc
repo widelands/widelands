@@ -158,7 +158,7 @@ int L_Player::place_building(lua_State * L) {
 
 	Building_Index i = m_get(get_game(L)).tribe().building_index(name);
 
-	Building& b = m_get(get_game(L)).force_building
+	Building & b = m_get(get_game(L)).force_building
 		(c->coords(), i, 0, 0, Soldier_Counts());
 
 	return to_lua<L_Building>(L, new L_Building(b));

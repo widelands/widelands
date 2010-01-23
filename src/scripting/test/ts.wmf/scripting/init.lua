@@ -315,8 +315,17 @@ function player_tests:test_force_building()
    -- TODO: this test doesn't clean up after itself: the player remains owner
    -- TODO: of the field
 end
--- TODO: implement and test automatic upcasting of immovables
 
+function player_tests:test_upcasting_from_immovable_to_building()
+   f = wl.map.Field(10,10)
+   k = wl.game.Player(1):place_building("headquarters", f)
+   i = f.immovable
+   assert_equal(i, k)
+   assert_equal("warehouse", i.building_type)
+   k:remove()
+   -- TODO: this test doesn't clean up after itself: the player remains owner
+   -- TODO: of the field
+end
 
 wl.debug.set_see_all(1)
 
