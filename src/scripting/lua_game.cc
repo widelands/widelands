@@ -19,24 +19,98 @@
 
 #include <lua.hpp>
 
-#include "lua_game.h"
+#include "logic/cmd_luafunction.h"
 
 #include "c_utils.h"
 #include "coroutine_impl.h"
-#include "logic/cmd_luafunction.h"
+#include "lua_map.h"
 #include "scripting.h"
+
+#include "lua_game.h"
 
 
 using namespace Widelands;
 
 /*
  * ========================================================================
- *                                CLASSES
+ *                         MODULE CLASSES
  * ========================================================================
  */
+/*
+ * TODO: document me
+ */
+const char L_Player::className[] = "Player";
+const MethodType<L_Player> L_Player::Methods[] = {
+	METHOD(L_Player, build_flag),
+	METHOD(L_Player, force_building),
+
+	{0, 0},
+};
+const PropertyType<L_Player> L_Player::Properties[] = {
+	PROP_RO(L_Player, number),
+	{0, 0, 0},
+};
+
+void L_Player::__persist(lua_State * L) {
+	PERS_UINT32("player", m_pl);
+}
+void L_Player::__unpersist(lua_State * L) {
+	UNPERS_UINT32("player", m_pl);
+}
+
 
 /*
- * Functions of game
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/*
+ * TODO: document me
+ */
+int L_Player::get_number(lua_State * L) {
+	lua_pushuint32(L, m_pl);
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+// TODO: document me
+// TODO: should return Flag
+int L_Player::build_flag(lua_State * L) {
+	L_Field * c = *get_user_class<L_Field>(L, -1);
+
+	m_get(get_game(L)).build_flag(c->coords());
+	return 0;
+}
+
+// TODO: document me
+// TODO: should return Building
+int L_Player::force_building(lua_State * L) {
+	const char * name = luaL_checkstring(L, - 2);
+	L_Field * c = *get_user_class<L_Field>(L, -1);
+
+	Building_Index i = m_get(get_game(L)).tribe().building_index(name);
+
+	m_get(get_game(L)).force_building(c->coords(), i, 0, 0, Soldier_Counts());
+
+	return 0;
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
+
+/*
+ * ========================================================================
+ *                            MODULE FUNCTIONS
+ * ========================================================================
  */
 /*
  * TODO: document me
@@ -76,5 +150,7 @@ const static struct luaL_reg wlgame [] = {
 void luaopen_wlgame(lua_State * L) {
 	luaL_register(L, "wl.game", wlgame);
 	lua_pop(L, 1); // pop the table
+
+	register_class<L_Player>(L, "game");
 }
 
