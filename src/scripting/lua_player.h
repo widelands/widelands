@@ -22,7 +22,52 @@
 
 #include <lua.hpp>
 
+#include "logic/player.h"
+
+#include "luna.h"
+
 void luaopen_wlplayer(lua_State *);
+
+/*
+ * Base class for all classes in wl.game
+ */
+class L_GameModuleClass : public LunaClass {
+	public:
+		const char * get_modulename() {return "game";}
+};
+
+class L_Player : public L_GameModuleClass {
+	Widelands::Player_Number m_pl;
+	enum {NONE = -1};
+
+public:
+	LUNA_CLASS_HEAD(L_Player);
+
+	L_Player() : m_pl(NONE) {}
+	L_Player(lua_State * L) {
+		m_pl = luaL_checkuint32(L, -1);
+	}
+
+	virtual void __persist(lua_State * L);
+	virtual void __unpersist(lua_State * L);
+
+	/*
+	 * Properties
+	 */
+	int get_number(lua_State * L);
+
+	/*
+	 * Lua methods
+	 */
+	int build_flag(lua_State * L);
+	int force_building(lua_State * L);
+
+	/*
+	 * C methods
+	 */
+private:
+	Widelands::Player & m_get(Widelands::Game & game) {return game.player(m_pl);}
+};
 
 #endif
 

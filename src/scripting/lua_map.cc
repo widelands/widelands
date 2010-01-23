@@ -22,19 +22,15 @@
 #include "log.h"
 #include "logic/checkstep.h"
 #include "logic/findimmovable.h"
-#include "logic/game.h"
 #include "logic/immovable.h"
 #include "logic/mapregion.h"
 #include "logic/maphollowregion.h"
 #include "logic/widelands_geometry.h"
 
 #include "c_utils.h"
-#include "luna.h"
 
 #include "lua_map.h"
 
-// TODO: this include should be in lua_player.h
-#include "logic/player.h"
 // TODO: make map a class and add attributes width, height
 
 using namespace Widelands;
@@ -52,14 +48,12 @@ using namespace Widelands;
 */
 
 
-/*
- * Base class for all classes in wl.map
- */
-class L_MapModuleClass : public LunaClass {
-	public:
-		const char * get_modulename() {return "map";}
-};
 
+/*
+ * ========================================================================
+ *                         MODULE CLASSES
+ * ========================================================================
+ */
 
 /* RST
 MapObject
@@ -71,93 +65,6 @@ MapObject
 	and Bobs. This class can't be instantiated directly, but provides the base
 	for all others.
 */
-class L_MapObject : public L_MapModuleClass {
-	Object_Ptr * m_ptr;
-
-public:
-	LUNA_CLASS_HEAD(L_MapObject);
-
-	L_MapObject() : m_ptr(0) {}
-	L_MapObject(Map_Object & mo) {m_ptr = new Object_Ptr(&mo);}
-	L_MapObject(lua_State * L) : m_ptr(0) {
-		report_error(L, "Cannot instantiate a '%s' directly!", className);
-	}
-	virtual ~L_MapObject() {
-		if (m_ptr) {
-			delete m_ptr;
-			m_ptr = 0;
-		}
-	}
-
-	virtual void __persist(lua_State * L) {
-		Map_Map_Object_Saver & mos = *get_mos(L);
-		Game & game = get_game(L);
-
-		uint32_t idx = mos.get_object_file_index(*m_ptr->get(game));
-		PERS_UINT32("file_index", idx);
-	}
-	virtual void __unpersist(lua_State * L) {
-		uint32_t idx;
-		UNPERS_UINT32("file_index", idx);
-		Map_Map_Object_Loader & mol = *get_mol(L);
-
-		m_ptr = new Object_Ptr(&mol.get<Map_Object>(idx));
-	}
-
-	/* RST
-	.. attribute:: serial
-
-	The serial number of this object. Note that this value does not stay
-	constant after saving/loading.
-	*/
-	int get_serial(lua_State * L) {
-		Game & game = get_game(L);
-		lua_pushuint32(L, m_ptr->get(game)->serial());
-		return 1;
-	}
-
-	/*
-	 * Lua Methods
-	 */
-	int __eq(lua_State * L) {
-		Game & game = get_game(L);
-		L_MapObject * other = *get_base_user_class<L_MapObject>(L, -1);
-
-		lua_pushboolean
-			(L, other->m_get(game, L)->serial() == m_get(game, L)->serial());
-		return 1;
-	}
-	/* RST
-	.. method:: remove()
-
-		Removes this object from the game immediately. If you want to destroy an
-		object as if the player had see :func:`destroy`.
-
-		:returns: :const:`nil`
-	*/
-	int remove(lua_State * L) {
-		Game & game = get_game(L);
-		Map_Object * o = m_get(game, L);
-
-		if (!o)
-			return 0;
-
-		o->remove(game);
-		return 0;
-	}
-
-	/*
-	 * C Methods
-	 */
-
-private:
-	Map_Object * m_get(Game & game, lua_State * L) {
-		Map_Object * o = m_ptr->get(game);
-		if (!o)
-			report_error(L, "Object no longer exists!");
-		return o;
-	}
-};
 const char L_MapObject::className[] = "MapObject";
 const MethodType<L_MapObject> L_MapObject::Methods[] = {
 	METHOD(L_MapObject, remove),
@@ -168,6 +75,86 @@ const PropertyType<L_MapObject> L_MapObject::Properties[] = {
 	PROP_RO(L_MapObject, serial),
 	{0, 0, 0},
 };
+
+void L_MapObject::__persist(lua_State * L) {
+		Map_Map_Object_Saver & mos = *get_mos(L);
+		Game & game = get_game(L);
+
+		uint32_t idx = mos.get_object_file_index(*m_ptr->get(game));
+		PERS_UINT32("file_index", idx);
+	}
+void L_MapObject::__unpersist(lua_State * L) {
+	uint32_t idx;
+	UNPERS_UINT32("file_index", idx);
+	Map_Map_Object_Loader & mol = *get_mol(L);
+
+	m_ptr = new Object_Ptr(&mol.get<Map_Object>(idx));
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+.. attribute:: serial
+
+The serial number of this object. Note that this value does not stay
+constant after saving/loading.
+*/
+int L_MapObject::get_serial(lua_State * L) {
+	Game & game = get_game(L);
+	lua_pushuint32(L, m_ptr->get(game)->serial());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+int L_MapObject::__eq(lua_State * L) {
+	Game & game = get_game(L);
+	L_MapObject * other = *get_base_user_class<L_MapObject>(L, -1);
+
+	lua_pushboolean
+		(L, other->m_get(game, L)->serial() == m_get(game, L)->serial());
+	return 1;
+}
+
+/* RST
+.. method:: remove()
+
+	Removes this object from the game immediately. If you want to destroy an
+	object as if the player had see :func:`destroy`.
+
+	:returns: :const:`nil`
+*/
+int L_MapObject::remove(lua_State * L) {
+	Game & game = get_game(L);
+	Map_Object * o = m_get(game, L);
+
+	if (!o)
+		return 0;
+
+	o->remove(game);
+	return 0;
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+Map_Object * L_MapObject::m_get(Game & game, lua_State * L) {
+	Map_Object * o = m_ptr->get(game);
+	if (!o)
+		report_error(L, "Object no longer exists!");
+	return o;
+}
+
+
+
 
 /* RST
 BaseImmovable
@@ -181,87 +168,6 @@ BaseImmovable
 	and Bobs. This class can't be instantiated directly, but provides the base
 	for all others.
 */
-class L_BaseImmovable : public L_MapObject {
-	OPtr<BaseImmovable>* m_biptr;
-
-public:
-	LUNA_CLASS_HEAD(L_BaseImmovable);
-
-	L_BaseImmovable() : m_biptr(0) {}
-	L_BaseImmovable(BaseImmovable & mo) : L_MapObject(mo) {
-		m_biptr = new OPtr<BaseImmovable>(&mo);
-	}
-	L_BaseImmovable(lua_State * L) : L_MapObject(L), m_biptr(0) {}
-	virtual ~L_BaseImmovable() {
-		if (m_biptr) {
-			delete m_biptr;
-			m_biptr = 0;
-		}
-	}
-
-	virtual void __persist(lua_State * L) {
-		Map_Map_Object_Saver & mos = *get_mos(L);
-		Game & game = get_game(L);
-
-		uint32_t idx = mos.get_object_file_index(*m_biptr->get(game));
-		PERS_UINT32("file_index", idx);
-
-		L_MapObject::__persist(L);
-	}
-	virtual void __unpersist(lua_State * L) {
-		uint32_t idx;
-		UNPERS_UINT32("file_index", idx);
-		Map_Map_Object_Loader & mol = *get_mol(L);
-
-		m_biptr = new OPtr<BaseImmovable>(&mol.get<BaseImmovable>(idx));
-
-		L_MapObject::__unpersist(L);
-	}
-
-	/*
-	 * Properties
-	 */
-	int get_size(lua_State * L) {
-		Game & game = get_game(L);
-		BaseImmovable * o = m_get(game, L);
-
-		switch (o->get_size()) {
-			case BaseImmovable::NONE: lua_pushstring(L, "none"); break;
-			case BaseImmovable::SMALL: lua_pushstring(L, "small"); break;
-			case BaseImmovable::MEDIUM: lua_pushstring(L, "medium"); break;
-			case BaseImmovable::BIG: lua_pushstring(L, "big"); break;
-			default:
-				return
-					report_error
-						(L, "Unknown size in L_BaseImmovable::get_size: %i",
-						 o->get_size());
-				break;
-		}
-		return 1;
-	}
-	int get_name(lua_State * L) {
-		Game & game = get_game(L);
-		BaseImmovable * o = m_get(game, L);
-
-		lua_pushstring(L, o->name().c_str());
-		return 1;
-	}
-
-	/*
-	 * Lua Methods
-	 */
-
-	/*
-	 * C Methods
-	 */
-private:
-	BaseImmovable * m_get(Game & game, lua_State * L) {
-		BaseImmovable * o = m_biptr->get(game);
-		if (!o)
-			report_error(L, "BaseImmovable no longer exists!");
-		return o;
-	}
-};
 const char L_BaseImmovable::className[] = "BaseImmovable";
 const MethodType<L_BaseImmovable> L_BaseImmovable::Methods[] = {
 	{0, 0},
@@ -272,185 +178,81 @@ const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
 	{0, 0, 0},
 };
 
-/*
- * Field
- */
-class L_Field : public L_MapModuleClass {
-	FCoords m_c;
-public:
+void L_BaseImmovable::__persist(lua_State * L) {
+	Map_Map_Object_Saver & mos = *get_mos(L);
+	Game & game = get_game(L);
 
-	LUNA_CLASS_HEAD(L_Field);
+	uint32_t idx = mos.get_object_file_index(*m_biptr->get(game));
+	PERS_UINT32("file_index", idx);
 
-	/*
-	 * Needed functionality
-	 */
-	L_Field() {}
-	L_Field(Coordinate x, Coordinate y, Field * f) : m_c(Coords(x, y), f) {}
-	L_Field(lua_State * L)
-	{
-		Map & m = get_game(L).map();
-		uint32_t rv = luaL_checkuint32(L, 1);
-		if (rv >= static_cast<uint32_t>(m.get_width()))
-			report_error(L, "x coordinate out of range!");
-		m_c.x = rv;
-		rv = luaL_checkuint32(L, 2);
-		if (rv >= static_cast<uint32_t>(m.get_height()))
-			report_error(L, "y coordinate out of range!");
-		m_c.y = rv;
-		m_c.field = &get_game(L).map()[m_c];
-	}
-	~L_Field() {}
-
-	virtual void __persist(lua_State * L) {
-		PERS_INT32("x", m_c.x); PERS_INT32("y", m_c.y);
-	}
-	virtual void __unpersist(lua_State * L) {
-		UNPERS_INT32("x", m_c.x); UNPERS_INT32("y", m_c.y);
-		m_c.field = &get_game(L).map()[m_c];
-	}
-
-	/*
-	 * Properties
-	 */
-	int get_x(lua_State * L) {lua_pushuint32(L, m_c.x); return 1;}
-	int get_y(lua_State * L) {lua_pushuint32(L, m_c.y); return 1;}
-	int get_height(lua_State * L) {
-		lua_pushuint32(L, m_c.field->get_height());
-		return 1;
-	}
-	int set_height(lua_State * L) {
-		uint32_t height = luaL_checkuint32(L, -1);
-		if (height > MAX_FIELD_HEIGHT)
-			report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
-
-		get_game(L).map().set_height(m_c, height);
-
-		return get_height(L);
-	}
-	int get_immovable(lua_State * L) {
-		BaseImmovable * bi = m_c.field->get_immovable();
-
-		if (!bi)
-			lua_pushnil(L);
-		else
-			to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*bi));
-		return 1;
-	}
-	int get_terr(lua_State * L) {
-		Terrain_Descr & td =
-			get_game(L).map().world().terrain_descr(m_c.field->terrain_r());
-		lua_pushstring(L, td.name().c_str());
-		return 1;
-	}
-	int set_terr(lua_State * L) {
-		const char * name = luaL_checkstring(L, -1);
-		Map & map = get_game(L).map();
-		Terrain_Index td =
-			map.world().index_of_terrain(name);
-		if (td == static_cast<Terrain_Index>(-1))
-			report_error(L, "Unknown terrain '%s'", name);
-
-		map.change_terrain(TCoords<FCoords>(m_c, TCoords<FCoords>::R), td);
-
-
-		lua_pushstring(L, name);
-		return 1;
-	}
-	int get_terd(lua_State * L) {
-		Terrain_Descr & td =
-			get_game(L).map().world().terrain_descr(m_c.field->terrain_d());
-		lua_pushstring(L, td.name().c_str());
-		return 1;
-	}
-	// TODO: changing the terrain only works when the user has vision on the
-	// TODO: triangles changed. this is surely not intentional but must be coped
-	// TODO: with
-	int set_terd(lua_State * L) {
-		const char * name = luaL_checkstring(L, -1);
-		Map & map = get_game(L).map();
-		Terrain_Index td =
-			map.world().index_of_terrain(name);
-		if (td == static_cast<Terrain_Index>(-1))
-			report_error(L, "Unknown terrain '%s'", name);
-
-		map.change_terrain(TCoords<FCoords>(m_c, TCoords<FCoords>::D), td);
-
-		lua_pushstring(L, name);
-		return 1;
-	}
-#define GET_X_NEIGHBOUR(X) int get_ ##X(lua_State* L) { \
-   FCoords n; \
-   get_game(L).map().get_ ##X(m_c, &n); \
-   to_lua<L_Field>(L, new L_Field(n.x, n.y, n.field)); \
-	return 1; \
+	L_MapObject::__persist(L);
 }
-	GET_X_NEIGHBOUR(rn);
-	GET_X_NEIGHBOUR(ln);
-	GET_X_NEIGHBOUR(trn);
-	GET_X_NEIGHBOUR(tln);
-	GET_X_NEIGHBOUR(bln);
-	GET_X_NEIGHBOUR(brn);
+void L_BaseImmovable::__unpersist(lua_State * L) {
+	uint32_t idx;
+	UNPERS_UINT32("file_index", idx);
+	Map_Map_Object_Loader & mol = *get_mol(L);
 
-	/*
-	 * Lua methods
-	 */
-	int __eq(lua_State * L) {
-		lua_pushboolean(L, (*get_user_class<L_Field>(L, -1))->m_c == m_c);
-		return 1;
+	m_biptr = new OPtr<BaseImmovable>(&mol.get<BaseImmovable>(idx));
+
+	L_MapObject::__unpersist(L);
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+// TODO: document me
+int L_BaseImmovable::get_size(lua_State * L) {
+	Game & game = get_game(L);
+	BaseImmovable * o = m_get(game, L);
+
+	switch (o->get_size()) {
+		case BaseImmovable::NONE: lua_pushstring(L, "none"); break;
+		case BaseImmovable::SMALL: lua_pushstring(L, "small"); break;
+		case BaseImmovable::MEDIUM: lua_pushstring(L, "medium"); break;
+		case BaseImmovable::BIG: lua_pushstring(L, "big"); break;
+		default:
+			return
+				report_error
+					(L, "Unknown size in L_BaseImmovable::get_size: %i",
+					 o->get_size());
+			break;
 	}
-	int _region(lua_State * L, uint32_t radius) {
-		Map & map = get_game(L).map();
-		MapRegion<Area<FCoords> > mr
-			(map, Area<FCoords>(m_c, radius));
+	return 1;
+}
 
-		lua_newtable(L);
-		uint32_t idx = 1;
-		do {
-			lua_pushuint32(L, idx++);
-			const FCoords & loc = mr.location();
-			to_lua<L_Field>(L, new L_Field(loc.x, loc.y, loc.field));
-			lua_settable(L, -3);
-		} while (mr.advance(map));
+// TODO: document me
+int L_BaseImmovable::get_name(lua_State * L) {
+	Game & game = get_game(L);
+	BaseImmovable * o = m_get(game, L);
 
-		return 1;
-	}
-	int _hollow_region(lua_State * L, uint32_t radius, uint32_t inner_radius) {
-		Map & map = get_game(L).map();
-		HollowArea<Area<> > har(Area<>(m_c, radius), inner_radius);
+	lua_pushstring(L, o->name().c_str());
+	return 1;
+}
 
-		MapHollowRegion<Area<> > mr(map, har);
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
 
-		lua_newtable(L);
-		uint32_t idx = 1;
-		do {
-			lua_pushuint32(L, idx++);
-			const Coords & loc = mr.location();
-			to_lua<L_Field>(L, new L_Field(loc.x, loc.y, &map[loc]));
-			lua_settable(L, -3);
-		} while (mr.advance(map));
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+BaseImmovable * L_BaseImmovable::m_get(Game & game, lua_State * L) {
+	BaseImmovable * o = m_biptr->get(game);
+	if (!o)
+		report_error(L, "BaseImmovable no longer exists!");
+	return o;
+}
 
-		return 1;
-	}
-	int region(lua_State * L) {
-		uint32_t n = lua_gettop(L);
 
-		if (n == 3) {
-			uint32_t radius = luaL_checkuint32(L, -2);
-			uint32_t inner_radius = luaL_checkuint32(L, -1);
-			return _hollow_region(L, radius, inner_radius);
-		} else {
-			uint32_t radius = luaL_checkuint32(L, -1);
-			return _region(L, radius);
-		}
-		return 1;
-	}
-
-	/*
-	 * C methods
-	 */
-	inline FCoords & coords() {return m_c;}
-
-};
+/*
+ * TODO: document me
+ */
 const char L_Field::className[] = "Field";
 const MethodType<L_Field> L_Field::Methods[] = {
 	METHOD(L_Field, __eq),
@@ -473,10 +275,205 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	{0, 0, 0},
 };
 
+
+L_Field::L_Field(lua_State * L) {
+	Map & m = get_game(L).map();
+	uint32_t rv = luaL_checkuint32(L, 1);
+	if (rv >= static_cast<uint32_t>(m.get_width()))
+		report_error(L, "x coordinate out of range!");
+	m_c.x = rv;
+	rv = luaL_checkuint32(L, 2);
+	if (rv >= static_cast<uint32_t>(m.get_height()))
+		report_error(L, "y coordinate out of range!");
+	m_c.y = rv;
+	m_c.field = &get_game(L).map()[m_c];
+}
+
+void L_Field::__persist(lua_State * L) {
+	PERS_INT32("x", m_c.x); PERS_INT32("y", m_c.y);
+}
+void L_Field::__unpersist(lua_State * L) {
+	UNPERS_INT32("x", m_c.x); UNPERS_INT32("y", m_c.y);
+	m_c.field = &get_game(L).map()[m_c];
+}
+
 /*
- * Intern definitions of Lua Functions
+ ==========================================================
+ PROPERTIES
+ ==========================================================
  */
+// TODO: document me
+int L_Field::get_x(lua_State * L) {lua_pushuint32(L, m_c.x); return 1;}
+// TODO: document me
+int L_Field::get_y(lua_State * L) {lua_pushuint32(L, m_c.y); return 1;}
+
+// TODO: document me
+int L_Field::get_height(lua_State * L) {
+	lua_pushuint32(L, m_c.field->get_height());
+	return 1;
+}
+int L_Field::set_height(lua_State * L) {
+	uint32_t height = luaL_checkuint32(L, -1);
+	if (height > MAX_FIELD_HEIGHT)
+		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
+
+	get_game(L).map().set_height(m_c, height);
+
+	return get_height(L);
+}
+
+// TODO: document me
+int L_Field::get_immovable(lua_State * L) {
+	BaseImmovable * bi = m_c.field->get_immovable();
+
+	if (!bi)
+		lua_pushnil(L);
+	else
+		to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*bi));
+	return 1;
+}
+
+// TODO: document me
+int L_Field::get_terr(lua_State * L) {
+	Terrain_Descr & td =
+		get_game(L).map().world().terrain_descr(m_c.field->terrain_r());
+	lua_pushstring(L, td.name().c_str());
+	return 1;
+}
+int L_Field::set_terr(lua_State * L) {
+	const char * name = luaL_checkstring(L, -1);
+	Map & map = get_game(L).map();
+	Terrain_Index td =
+		map.world().index_of_terrain(name);
+	if (td == static_cast<Terrain_Index>(-1))
+		report_error(L, "Unknown terrain '%s'", name);
+
+	map.change_terrain(TCoords<FCoords>(m_c, TCoords<FCoords>::R), td);
+
+
+	lua_pushstring(L, name);
+	return 1;
+}
+
+// TODO: document me
+int L_Field::get_terd(lua_State * L) {
+	Terrain_Descr & td =
+		get_game(L).map().world().terrain_descr(m_c.field->terrain_d());
+	lua_pushstring(L, td.name().c_str());
+	return 1;
+}
+// TODO: changing the terrain only works when the user has vision on the
+// TODO: triangles changed. this is surely not intentional but must be coped
+// TODO: with
+int L_Field::set_terd(lua_State * L) {
+	const char * name = luaL_checkstring(L, -1);
+	Map & map = get_game(L).map();
+	Terrain_Index td =
+		map.world().index_of_terrain(name);
+	if (td == static_cast<Terrain_Index>(-1))
+		report_error(L, "Unknown terrain '%s'", name);
+
+	map.change_terrain(TCoords<FCoords>(m_c, TCoords<FCoords>::D), td);
+
+	lua_pushstring(L, name);
+	return 1;
+}
+
+#define GET_X_NEIGHBOUR(X) int L_Field::get_ ##X(lua_State* L) { \
+   FCoords n; \
+   get_game(L).map().get_ ##X(m_c, &n); \
+   to_lua<L_Field>(L, new L_Field(n.x, n.y, n.field)); \
+	return 1; \
+}
+// TODO: document me
+	GET_X_NEIGHBOUR(rn);
+// TODO: document me
+	GET_X_NEIGHBOUR(ln);
+// TODO: document me
+	GET_X_NEIGHBOUR(trn);
+// TODO: document me
+	GET_X_NEIGHBOUR(tln);
+// TODO: document me
+	GET_X_NEIGHBOUR(bln);
+// TODO: document me
+	GET_X_NEIGHBOUR(brn);
+
 /*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+int L_Field::__eq(lua_State * L) {
+	lua_pushboolean(L, (*get_user_class<L_Field>(L, -1))->m_c == m_c);
+	return 1;
+}
+// TODO: document me
+int L_Field::region(lua_State * L) {
+	uint32_t n = lua_gettop(L);
+
+	if (n == 3) {
+		uint32_t radius = luaL_checkuint32(L, -2);
+		uint32_t inner_radius = luaL_checkuint32(L, -1);
+		return m_hollow_region(L, radius, inner_radius);
+	} else {
+		uint32_t radius = luaL_checkuint32(L, -1);
+		return m_region(L, radius);
+	}
+	return 1;
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+int L_Field::m_region(lua_State * L, uint32_t radius)
+{
+	Map & map = get_game(L).map();
+	MapRegion<Area<FCoords> > mr
+		(map, Area<FCoords>(m_c, radius));
+
+	lua_newtable(L);
+	uint32_t idx = 1;
+	do {
+		lua_pushuint32(L, idx++);
+		const FCoords & loc = mr.location();
+		to_lua<L_Field>(L, new L_Field(loc.x, loc.y, loc.field));
+		lua_settable(L, -3);
+	} while (mr.advance(map));
+
+	return 1;
+}
+
+int L_Field::m_hollow_region
+	(lua_State * L, uint32_t radius, uint32_t inner_radius)
+{
+	Map & map = get_game(L).map();
+	HollowArea<Area<> > har(Area<>(m_c, radius), inner_radius);
+
+	MapHollowRegion<Area<> > mr(map, har);
+
+	lua_newtable(L);
+	uint32_t idx = 1;
+	do {
+		lua_pushuint32(L, idx++);
+		const Coords & loc = mr.location();
+		to_lua<L_Field>(L, new L_Field(loc.x, loc.y, &map[loc]));
+		lua_settable(L, -3);
+	} while (mr.advance(map));
+
+	return 1;
+}
+
+
+/*
+ * ========================================================================
+ *                            MODULE FUNCTIONS
+ * ========================================================================
+ */
+
+/*
+ * TODO: document this properly
  * Create a World immovable object immediately
  *
  * name: name of object to create
@@ -509,6 +506,8 @@ static int L_create_immovable(lua_State * const L) {
 
 /*
  * Find a world immovable
+ * TODO: document this properly
+ * TODO: this function should return a list of all immovables found
  *
  * x, y, radius - position to search for
  * attrib - attribute to use
@@ -542,8 +541,6 @@ static int L_find_immovable(lua_State * const L) {
 			(area, &list, cstep, FindImmovableAttribute(attribute));
 
 		if (list.size()) {
-			//  TODO If this is called from the console, it will screw network
-			//  TODO gaming.
 			Coords & rv = list[game.logic_rand() % list.size()].coords;
 			lua_pushinteger(L, rv.x);
 			lua_pushinteger(L, rv.y);
@@ -570,105 +567,5 @@ void luaopen_wlmap(lua_State * L) {
 	register_class<L_BaseImmovable>(L, "map", true);
 	add_parent<L_BaseImmovable, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
-}
-
-// BIG TODO: this should be in lua_player.cc
-
-
-/*
- * Base class for all classes in wl.game
- */
-class L_GameModuleClass : public LunaClass {
-	public:
-		const char * get_modulename() {return "game";}
-};
-
-/*
- * ========================================================================
- *                                CLASSES
- * ========================================================================
- */
-class L_Player : public L_GameModuleClass {
-	Player_Number m_pl;
-	enum {NONE = -1};
-
-public:
-	LUNA_CLASS_HEAD(L_Player);
-
-	L_Player() : m_pl(NONE) {}
-	L_Player(lua_State * L) {
-		m_pl = luaL_checkuint32(L, -1);
-	}
-
-	virtual void __persist(lua_State * L) {
-		PERS_UINT32("player", m_pl);
-	}
-	virtual void __unpersist(lua_State * L) {
-		UNPERS_UINT32("player", m_pl);
-	}
-
-	/*
-	 * Properties
-	 */
-	int get_number(lua_State * L) {
-		lua_pushuint32(L, m_pl);
-		return 1;
-	}
-
-	/*
-	 * Lua methods
-	 */
-	// TODO: should return Flag
-	int build_flag(lua_State * L) {
-		L_Field * c = *get_user_class<L_Field>(L, -1);
-
-		m_get(get_game(L)).build_flag(c->coords());
-		return 0;
-	}
-	// TODO: should return Building
-	int force_building(lua_State * L) {
-		const char * name = luaL_checkstring(L, - 2);
-		L_Field * c = *get_user_class<L_Field>(L, -1);
-
-		Building_Index i = m_get(get_game(L)).tribe().building_index(name);
-
-		m_get(get_game(L)).force_building(c->coords(), i, 0, 0, Soldier_Counts());
-
-		return 0;
-	}
-
-	/*
-	 * C methods
-	 */
-private:
-	Player & m_get(Game & game) {return game.player(m_pl);}
-};
-const char L_Player::className[] = "Player";
-const MethodType<L_Player> L_Player::Methods[] = {
-	METHOD(L_Player, build_flag),
-	METHOD(L_Player, force_building),
-
-	{0, 0},
-};
-const PropertyType<L_Player> L_Player::Properties[] = {
-	PROP_RO(L_Player, number),
-	{0, 0, 0},
-};
-
-/*
- * ========================================================================
- *                               FUNCTIONS
- * ========================================================================
- */
-
-const static struct luaL_reg wlplayer [] = {
-	{0, 0}
-};
-
-void luaopen_wlplayer(lua_State * L) {
-	// luaL_register(L, "wl.player", wlplayer);
-	// lua_pop(L, 1); // pop the table
-
-	register_class<L_Player>(L, "game");
 }
 
