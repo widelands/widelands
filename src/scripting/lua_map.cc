@@ -28,6 +28,7 @@
 #include "logic/widelands_geometry.h"
 
 #include "c_utils.h"
+#include "lua_game.h"
 
 #include "lua_map.h"
 
@@ -97,10 +98,11 @@ void L_MapObject::__unpersist(lua_State * L) {
  ==========================================================
  */
 /* RST
-.. attribute:: serial
+	.. attribute:: serial
 
-The serial number of this object. Note that this value does not stay
-constant after saving/loading.
+		(RO)
+		The serial number of this object. Note that this value does not stay
+		constant after saving/loading.
 */
 int L_MapObject::get_serial(lua_State * L) {
 	Game & game = get_game(L);
@@ -123,12 +125,12 @@ int L_MapObject::__eq(lua_State * L) {
 }
 
 /* RST
-.. method:: remove()
+	.. method:: remove()
 
-	Removes this object from the game immediately. If you want to destroy an
-	object as if the player had see :func:`destroy`.
+		Removes this object from the game immediately. If you want to destroy an
+		object as if the player had see :func:`destroy`.
 
-	:returns: :const:`nil`
+		:returns: :const:`nil`
 */
 int L_MapObject::remove(lua_State * L) {
 	Game & game = get_game(L);
@@ -248,6 +250,73 @@ BaseImmovable * L_BaseImmovable::m_get(Game & game, lua_State * L) {
 		report_error(L, "BaseImmovable no longer exists!");
 	return o;
 }
+
+
+
+/* RST
+PlayerImmovable
+---------------
+
+.. class:: PlayerImmovable
+
+	Bases: :class:`BaseImmovable`
+
+	All Immovables that belong to a Player (Buildings, Flags, ...) are based on
+	this Class.
+*/
+const char L_PlayerImmovable::className[] = "PlayerImmovable";
+const MethodType<L_PlayerImmovable> L_PlayerImmovable::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_PlayerImmovable> L_PlayerImmovable::Properties[] = {
+	PROP_RO(L_PlayerImmovable, player),
+	{0, 0, 0},
+};
+
+void L_PlayerImmovable::__persist(lua_State * L) {
+	L_BaseImmovable::__persist(L);
+}
+void L_PlayerImmovable::__unpersist(lua_State * L) {
+	L_BaseImmovable::__unpersist(L);
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: player
+
+		(RO) The :class:`wl.game.Player` who owns this object.
+*/
+int L_PlayerImmovable::get_player(lua_State * L) {
+	return
+		to_lua<L_Player>
+			(L, new L_Player (m_get(get_game(L), L)->get_owner()->player_number())
+	);
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+PlayerImmovable * L_PlayerImmovable::m_get(Game & game, lua_State * L) {
+	PlayerImmovable * o = static_cast<PlayerImmovable *>(m_biptr->get(game));
+	if (!o)
+		report_error(L, "PlayerImmovable no longer exists!");
+	return o;
+}
+
+
+
 
 
 /*
@@ -566,6 +635,11 @@ void luaopen_wlmap(lua_State * L) {
 
 	register_class<L_BaseImmovable>(L, "map", true);
 	add_parent<L_BaseImmovable, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_PlayerImmovable>(L, "map", true);
+	add_parent<L_PlayerImmovable, L_BaseImmovable>(L);
+	add_parent<L_PlayerImmovable, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 }
 

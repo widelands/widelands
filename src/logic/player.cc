@@ -218,16 +218,16 @@ NodeCaps Player::get_buildcaps(FCoords const fc) const {
 }
 
 
-/*
-===============
-Build a flag, checking that it's legal to do so.
-===============
-*/
-void Player::build_flag(Coords const c) {
+/**
+ * Build a flag, checking that it's legal to do so. Returns
+ * the flag in case of success, else returns 0;
+ */
+Flag* Player::build_flag(Coords const c) {
 	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
 	if (buildcaps & BUILDCAPS_FLAG)
-		new Flag(ref_cast<Game, Editor_Game_Base>(egbase()), *this, c);
+		return new Flag(ref_cast<Game, Editor_Game_Base>(egbase()), *this, c);
+	return 0;
 }
 
 

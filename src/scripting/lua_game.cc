@@ -20,6 +20,7 @@
 #include <lua.hpp>
 
 #include "logic/cmd_luafunction.h"
+#include "economy/flag.h"
 
 #include "c_utils.h"
 #include "coroutine_impl.h"
@@ -28,17 +29,40 @@
 
 #include "lua_game.h"
 
-
 using namespace Widelands;
+
+
+/* RST
+:mod:`wl.game`
+======================
+
+.. module:: wl.game
+   :synopsis: Provides access on game internals like Players
+
+.. moduleauthor:: The Widelands development team
+
+.. currentmodule:: wl.game
+*/
+
+
 
 /*
  * ========================================================================
  *                         MODULE CLASSES
  * ========================================================================
  */
-/*
- * TODO: document me
- */
+/* RST
+Player
+------
+
+.. class:: Player(n)
+
+	This class represents one of the players in the game. You can access
+	information about this player or act on his behalf.
+
+	:arg n: player number, range is 1 - :const:`number of players`
+	:type n: Integer
+*/
 const char L_Player::className[] = "Player";
 const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, build_flag),
@@ -64,9 +88,11 @@ void L_Player::__unpersist(lua_State * L) {
  PROPERTIES
  ==========================================================
  */
-/*
- * TODO: document me
- */
+/* RST
+	.. attribute:: number
+
+		(RO) The number of this Player.
+*/
 int L_Player::get_number(lua_State * L) {
 	lua_pushuint32(L, m_pl);
 	return 1;
@@ -77,13 +103,44 @@ int L_Player::get_number(lua_State * L) {
  LUA METHODS
  ==========================================================
  */
-// TODO: document me
-// TODO: should return Flag
-int L_Player::build_flag(lua_State * L) {
-	L_Field * c = *get_user_class<L_Field>(L, -1);
+/* RST
+	.. function:: build_flag(field[, force])
 
-	m_get(get_game(L)).build_flag(c->coords());
-	return 0;
+		Builds a flag at a given position if it is legal to do so. If not,
+		reports an error
+
+		:arg field: where the flag should be created
+		:type field: :class:`wl.map.Field`
+		:arg force: If this is :const:`true` then the map is created with
+			pure force:
+
+				* if there is an immovable on this field, it will be
+				  removed
+				* if there are flags too close by to this field, they will be
+				  ripped
+				* if the player does not own the territory, it is conquered
+				  for him.
+		:type force: :class:`boolean`
+		:returns: :class:`wl.map.Flag` object created or :const:`nil`.
+*/
+// TODO: should return Flag, not PlayerImmovable
+int L_Player::build_flag(lua_State * L) {
+	uint32_t n = lua_gettop(L);
+	L_Field * c = *get_user_class<L_Field>(L, 2);
+	bool force = false;
+	if (n > 2)
+		force = luaL_checkboolean(L, 3);
+
+	Flag* f;
+	if(not force) {
+		f = m_get(get_game(L)).build_flag(c->coords());
+		if (!f)
+			return report_error(L, "Couldn't build flag!");
+	} else {
+		f = &m_get(get_game(L)).force_flag(c->coords());
+	}
+
+	return to_lua<L_PlayerImmovable>(L, new L_PlayerImmovable(*f));
 }
 
 // TODO: document me

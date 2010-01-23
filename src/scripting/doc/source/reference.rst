@@ -6,4 +6,5 @@ Widelands Scripting Reference
 
    wl
    wl_map
+   wl_game
 

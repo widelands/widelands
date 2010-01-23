@@ -80,6 +80,7 @@ private:
 
 
 class L_BaseImmovable : public L_MapObject {
+protected:
 	Widelands::OPtr<Widelands::BaseImmovable>* m_biptr;
 
 public:
@@ -115,6 +116,35 @@ public:
 	 */
 private:
 	Widelands::BaseImmovable * m_get(Widelands::Game & game, lua_State * L);
+};
+
+class L_PlayerImmovable : public L_BaseImmovable {
+public:
+	LUNA_CLASS_HEAD(L_PlayerImmovable);
+
+	L_PlayerImmovable() {}
+	L_PlayerImmovable(Widelands::PlayerImmovable & mo) : L_BaseImmovable(mo) {
+	}
+	L_PlayerImmovable(lua_State * L) : L_BaseImmovable(L) {}
+	virtual ~L_PlayerImmovable() {}
+
+	virtual void __persist(lua_State * L);
+	virtual void __unpersist(lua_State * L);
+
+	/*
+	 * Properties
+	 */
+	int get_player(lua_State* L);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+private:
+	Widelands::PlayerImmovable * m_get(Widelands::Game & game, lua_State * L);
 };
 
 

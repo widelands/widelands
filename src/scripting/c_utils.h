@@ -50,4 +50,10 @@ inline lua_State* luaL_checkthread(lua_State* L, int n) {
 	return thread;
 }
 
+inline bool luaL_checkboolean(lua_State* L, int n) {
+	if(lua_isboolean(L, n))
+		return lua_toboolean(L,n);
+	return luaL_checkinteger(L, n);
+}
+
 #endif

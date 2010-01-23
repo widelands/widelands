@@ -415,7 +415,7 @@ struct Player :
 	// Player commands
 	// Only to be called indirectly via CmdQueue
 	Flag & force_flag(FCoords);      /// Do what it takes to create the flag.
-	void   build_flag(Coords);       /// Build a flag if it is allowed.
+	Flag*   build_flag(Coords);      /// Build a flag if it is allowed.
 	void   force_road(Path const &, bool create_carrier = false);
 	void   build_road(Path const &); /// Build a road if it is allowed.
 	void force_building

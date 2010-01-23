@@ -42,6 +42,9 @@ public:
 	LUNA_CLASS_HEAD(L_Player);
 
 	L_Player() : m_pl(NONE) {}
+	L_Player(Widelands::Player_Number n) {
+		m_pl = n;
+	}
 	L_Player(lua_State * L) {
 		m_pl = luaL_checkuint32(L, -1);
 	}

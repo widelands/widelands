@@ -283,12 +283,25 @@ player_tests = lunit.TestCase("Immovable sizes")
 function player_tests:test_number_property()
    assert_equal(1, wl.game.Player(1).number)
 end
+function player_tests:test_number_property2()
+   assert_equal(2, wl.game.Player(2).number)
+end
+
 function player_tests:test_create_flag()
-   f = wl.map.Field(42,42)
-   wl.game.Player(1):force_building("headquarters", f)
-   assert_equal("headquarters", f.immovable.name)
-   f.immovable:remove()
-   assert_equal(nil, f.immovable)
+   f = wl.map.Field(10,10)
+   k = wl.game.Player(1):build_flag(f, true)
+   assert_equal(k.player.number, 1)
+   k:remove()
+   -- TODO: this test doesn't clean up after itself: the player remains owner
+   -- TODO: of the field
+end
+function player_tests:test_create_flag2()
+   f = wl.map.Field(20,10)
+   k = wl.game.Player(2):build_flag(f, true)
+   assert_equal(k.player.number, 2)
+   k:remove()
+   -- TODO: this test doesn't clean up after itself: the player remains owner
+   -- TODO: of the field
 end
 
 wl.debug.set_see_all(1)
