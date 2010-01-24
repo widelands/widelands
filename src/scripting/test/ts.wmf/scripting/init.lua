@@ -375,6 +375,44 @@ function warehouse_tests:test_set_get_wares_set_is_not_increase()
    assert_equal(20, k.raw_stone)
 end
 
+function warehouse_tests:test_set_worker_illegal_worker()
+   function ill()
+      self.w:set_workers("sdjsgfhg", 100)
+   end
+   assert_error("Illegal worker should throw an error!", ill)
+end
+function warehouse_tests:test_set_get_workers_string_arg()
+   assert_equal(0, self.w:get_workers("builder"))
+   self.w:set_workers("builder", 190)
+   assert_equal(190, self.w:get_workers("builder"))
+end
+function warehouse_tests:test_set_get_workers_table_arg()
+   k = self.w:get_workers{"builder", "lumberjack"}
+   assert_equal(0, k.builder)
+   assert_equal(0, k.lumberjack)
+   self.w:set_workers{builder=190, lumberjack=170}
+   k = self.w:get_workers{"builder", "lumberjack"}
+   assert_equal(190, k.builder)
+   assert_equal(170, k.lumberjack)
+end
+function warehouse_tests:test_set_get_workers_set_is_not_increase()
+   k = self.w:get_workers{"builder", "lumberjack"}
+   k.builder = 20
+   k.lumberjack = 40
+   self.w:set_workers(k)
+   k = self.w:get_workers{"builder", "lumberjack"}
+   assert_equal(20, k.builder)
+   assert_equal(40, k.lumberjack)
+
+   k.builder = 10
+   k.lumberjack = 20
+   self.w:set_workers(k)
+   k = self.w:get_workers{"builder", "lumberjack"}
+   assert_equal(10, k.builder)
+   assert_equal(20, k.lumberjack)
+end
+
+
 
 
 wl.debug.set_see_all(1)

@@ -430,6 +430,8 @@ const char L_Warehouse::className[] = "Warehouse";
 const MethodType<L_Warehouse> L_Warehouse::Methods[] = {
 	METHOD(L_Warehouse, set_wares),
 	METHOD(L_Warehouse, get_wares),
+	METHOD(L_Warehouse, set_workers),
+	METHOD(L_Warehouse, get_workers),
 	{0, 0},
 };
 const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
@@ -462,44 +464,47 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
 
 		:returns: :const:`nil`
 */
-int L_Warehouse::set_wares(lua_State * L) {
-	Warehouse * o = m_get(get_game(L), L);
-	int n = lua_gettop(L);
-
-	if (n == 3) {
-		// String, count combination
-		Ware_Index idx = m_get_ware_index(L, o, luaL_checkstring(L, 2));
-		uint32_t set_point = luaL_checkuint32(L, 3);
-
-		uint32_t current = o->get_wares().stock(idx);
-		int32_t diff = set_point - current;
-		if(diff < 0)
-			o->remove_wares(idx, -diff);
-		else if(diff > 0)
-			o->insert_wares(idx, diff);
-
-	} else {
-		luaL_checktype(L, 2, LUA_TTABLE);
-
-		// Table, iterate over
-		lua_pushnil(L);  /* first key */
-		while (lua_next(L, 2) != 0) {
-			std::string ware = luaL_checkstring(L, -2);
-			uint32_t set_point = luaL_checkuint32(L, -1);
-			Ware_Index idx = m_get_ware_index(L, o, ware);
-
-			uint32_t current = o->get_wares().stock(idx);
-			int32_t diff = set_point - current;
-			if(diff < 0)
-				o->remove_wares(idx, -diff);
-			else if(diff > 0)
-				o->insert_wares(idx, diff);
-
-			lua_pop(L, 1); // pop value, keep key for next iteration
-		}
-	}
-	return 0;
+#define SET_X(what) \
+int L_Warehouse::set_ ##what ## s(lua_State * L) { \
+	Warehouse * o = m_get(get_game(L), L); \
+	int n = lua_gettop(L); \
+ \
+	if (n == 3) { \
+		/* String, count combination */ \
+		Ware_Index idx = m_get_ ## what ## _index(L, o, luaL_checkstring(L, 2)); \
+		uint32_t set_point = luaL_checkuint32(L, 3); \
+ \
+		uint32_t current = o->get_ ## what ## s().stock(idx); \
+		int32_t diff = set_point - current; \
+		if (diff < 0) \
+			o->remove_ ## what ## s(idx, -diff); \
+		else if (diff > 0) \
+			o->insert_ ## what ## s(idx, diff); \
+ \
+	} else { \
+		luaL_checktype(L, 2, LUA_TTABLE); \
+ \
+		/* Table, iterate over */ \
+		lua_pushnil(L);  /* first key */ \
+		while (lua_next(L, 2) != 0) { \
+			std::string which = luaL_checkstring(L, -2); \
+			uint32_t set_point = luaL_checkuint32(L, -1); \
+			Ware_Index idx = m_get_ ## what ## _index(L, o, which); \
+ \
+			uint32_t current = o->get_ ## what ## s().stock(idx); \
+			int32_t diff = set_point - current; \
+			if (diff < 0) \
+				o->remove_ ## what ## s(idx, -diff); \
+			else if (diff > 0) \
+				o->insert_ ## what ## s(idx, diff); \
+ \
+			lua_pop(L, 1); /* pop value, keep key for next iteration */ \
+		} \
+	} \
+	return 0; \
 }
+SET_X(ware);
+
 /* RST
 	.. method:: get_wares(which)
 
@@ -513,33 +518,52 @@ int L_Warehouse::set_wares(lua_State * L) {
 
 		:returns: :class:`integer` or :class:`table`
 */
-int L_Warehouse::get_wares(lua_State * L) {
-	Warehouse * o = m_get(get_game(L), L);
-
-	if (lua_isstring(L, 2)) {
-		// One string as argument
-		lua_pushuint32
-			(L, o->get_wares().stock
-				(m_get_ware_index(L, o, luaL_checkstring(L, 2)))
-		);
-	} else {
-		// Table as argument, iterate over it
-		luaL_checktype(L, 2, LUA_TTABLE);
-
-		// create return value table
-		lua_newtable(L);
-		int table_idx = lua_gettop(L);
-
-		lua_pushnil(L);  /* first key */
-		while (lua_next(L, 2) != 0) {
-			std::string ware = luaL_checkstring(L, -1);
-
-			lua_pushuint32(L, o->get_wares().stock(m_get_ware_index(L, o, ware)));
-			lua_settable(L, table_idx); // pops name count
-		}
-	}
-	return 1;
+#define GET_X(what) \
+int L_Warehouse::get_ ##what ## s(lua_State * L) { \
+	Warehouse * o = m_get(get_game(L), L); \
+ \
+	if (lua_isstring(L, 2)) { \
+		/* One string as argument */ \
+		lua_pushuint32 \
+			(L, o->get_ ##what ## s().stock \
+				(m_get_ ##what ## _index(L, o, luaL_checkstring(L, 2))) \
+		); \
+	} else { \
+		/* Table as argument, iterate over it */ \
+		luaL_checktype(L, 2, LUA_TTABLE); \
+ \
+		/* create return value table */ \
+		lua_newtable(L); \
+		int table_idx = lua_gettop(L); \
+ \
+		lua_pushnil(L);  /* first key */ \
+		while (lua_next(L, 2) != 0) { \
+			std::string which = luaL_checkstring(L, -1); \
+ \
+			lua_pushuint32(L, o->get_##what## s().stock \
+					(m_get_## what ##_index(L, o, which))); \
+			lua_settable(L, table_idx); /* pops name count */ \
+		} \
+	} \
+	return 1; \
 }
+GET_X(ware);
+
+/* RST
+	.. method:: set_workers(which[, amount])
+
+		Analogous to :meth:`set_wares`, but for workers.
+*/
+SET_X(worker);
+#undef SET_X
+
+/* RST
+	.. method:: get_workers(which)
+
+		Analogous to :meth:`get_wares` but for workers.
+*/
+GET_X(worker);
+#undef GET_X
 
 /*
  ==========================================================
@@ -552,14 +576,19 @@ Warehouse * L_Warehouse::m_get(Game & game, lua_State * L) {
 		report_error(L, "Warehouse no longer exists!");
 	return o;
 }
-Ware_Index L_Warehouse::m_get_ware_index
-	(lua_State * L, Widelands::Warehouse * w, const std::string & ware)
-{
-	Ware_Index idx = w->get_owner()->tribe().ware_index(ware);
-	if (!idx)
-		report_error(L, "Invalid Ware: %s", ware.c_str());
-	return idx;
+#define GET_INDEX(name, capname) \
+Ware_Index L_Warehouse::m_get_ ## name ## _index \
+	(lua_State * L, Widelands::Warehouse * w, const std::string & what) \
+{ \
+	Ware_Index idx = w->get_owner()->tribe(). name ## _index(what); \
+	if (!idx) \
+		report_error(L, "Invalid " #capname ": %s", what.c_str()); \
+	return idx; \
 }
+GET_INDEX(ware, Ware);
+GET_INDEX(worker, Worker);
+#undef GET_INDEX
+
 
 
 

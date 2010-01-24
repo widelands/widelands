@@ -197,6 +197,8 @@ public:
 	 */
 	int set_wares(lua_State*);
 	int get_wares(lua_State*);
+	int set_workers(lua_State*);
+	int get_workers(lua_State*);
 
 	/*
 	 * C Methods
@@ -204,6 +206,8 @@ public:
 private:
 	Widelands::Warehouse * m_get(Widelands::Game & game, lua_State * L);
 	Widelands::Ware_Index m_get_ware_index
+		(lua_State * L, Widelands::Warehouse*, const std::string& s);
+	Widelands::Ware_Index m_get_worker_index
 		(lua_State * L, Widelands::Warehouse*, const std::string& s);
 };
 
