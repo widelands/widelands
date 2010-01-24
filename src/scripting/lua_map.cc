@@ -26,6 +26,7 @@
 #include "logic/mapregion.h"
 #include "logic/maphollowregion.h"
 #include "logic/widelands_geometry.h"
+#include "logic/warelist.h"
 
 #include "c_utils.h"
 #include "lua_game.h"
@@ -427,7 +428,8 @@ Warehouse
 */
 const char L_Warehouse::className[] = "Warehouse";
 const MethodType<L_Warehouse> L_Warehouse::Methods[] = {
-	METHOD(L_Warehouse, set_ware),
+	METHOD(L_Warehouse, set_wares),
+	METHOD(L_Warehouse, get_wares),
 	{0, 0},
 };
 const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
@@ -447,34 +449,96 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
  ==========================================================
  */
 /* RST
-	.. method:: set_ware(name, count)
+	.. method:: set_wares(which[, amount])
 
-		Sets the wares available in this warehouse
+		Sets the wares available in this warehouse. Either takes two arguments,
+		an ware name and an amount to set it too. Or it takes a table of name,
+		amount pairs.
 
-		:arg name: name of ware
-		:type name: :class:`string`
-		:arg count: this many units will be available after running
-		:type count: :class:`integer`
+		:arg which: name of ware or name, amount table
+		:type which: :class:`string` or :class:`table`
+		:arg amount: this many units will be available after the call
+		:type amount: :class:`integer`
 
 		:returns: :const:`nil`
 */
-// TODO: should take a table with "name": value
-// TODO: crashes when an illegal ware is used.
-// TODO: no tests for this are written
-int L_Warehouse::set_ware(lua_State * L) {
+int L_Warehouse::set_wares(lua_State * L) {
 	Warehouse * o = m_get(get_game(L), L);
-	std::string name = luaL_checkstring(L, 2);
-	uint32_t count = luaL_checkuint32(L, 3);
+	int n = lua_gettop(L);
 
-	Ware_Index idx = o->get_owner()->tribe().ware_index(name);
-	if(!idx)
-		return report_error(L, "Invalid Ware: %s", name.c_str());
+	if (n == 3) {
+		// String, count combination
+		Ware_Index idx = m_get_ware_index(L, o, luaL_checkstring(L, 2));
+		uint32_t set_point = luaL_checkuint32(L, 3);
 
-	log("idx: %i\n", idx.value());
+		uint32_t current = o->get_wares().stock(idx);
+		int32_t diff = set_point - current;
+		if(diff < 0)
+			o->remove_wares(idx, -diff);
+		else if(diff > 0)
+			o->insert_wares(idx, diff);
 
-	// TODO: should set wares, not increase them
-	o->insert_wares(idx, count);
+	} else {
+		luaL_checktype(L, 2, LUA_TTABLE);
+
+		// Table, iterate over
+		lua_pushnil(L);  /* first key */
+		while (lua_next(L, 2) != 0) {
+			std::string ware = luaL_checkstring(L, -2);
+			uint32_t set_point = luaL_checkuint32(L, -1);
+			Ware_Index idx = m_get_ware_index(L, o, ware);
+
+			uint32_t current = o->get_wares().stock(idx);
+			int32_t diff = set_point - current;
+			if(diff < 0)
+				o->remove_wares(idx, -diff);
+			else if(diff > 0)
+				o->insert_wares(idx, diff);
+
+			lua_pop(L, 1); // pop value, keep key for next iteration
+		}
+	}
 	return 0;
+}
+/* RST
+	.. method:: get_wares(which)
+
+		Gets the number of wares in this warehouse. If :const:`which` is
+		a :class:`string`, returns a single integer. If :const:`which` is a
+		:class:`table`, you can query more than one ware. The return value then
+		will be a table with ware names as key and integers as values.
+
+		:arg which: which ware(s) to query
+		:type which: :class:`string` or :class:`table` in array form
+
+		:returns: :class:`integer` or :class:`table`
+*/
+int L_Warehouse::get_wares(lua_State * L) {
+	Warehouse * o = m_get(get_game(L), L);
+
+	if (lua_isstring(L, 2)) {
+		// One string as argument
+		lua_pushuint32
+			(L, o->get_wares().stock
+				(m_get_ware_index(L, o, luaL_checkstring(L, 2)))
+		);
+	} else {
+		// Table as argument, iterate over it
+		luaL_checktype(L, 2, LUA_TTABLE);
+
+		// create return value table
+		lua_newtable(L);
+		int table_idx = lua_gettop(L);
+
+		lua_pushnil(L);  /* first key */
+		while (lua_next(L, 2) != 0) {
+			std::string ware = luaL_checkstring(L, -1);
+
+			lua_pushuint32(L, o->get_wares().stock(m_get_ware_index(L, o, ware)));
+			lua_settable(L, table_idx); // pops name count
+		}
+	}
+	return 1;
 }
 
 /*
@@ -487,6 +551,14 @@ Warehouse * L_Warehouse::m_get(Game & game, lua_State * L) {
 	if (!o)
 		report_error(L, "Warehouse no longer exists!");
 	return o;
+}
+Ware_Index L_Warehouse::m_get_ware_index
+	(lua_State * L, Widelands::Warehouse * w, const std::string & ware)
+{
+	Ware_Index idx = w->get_owner()->tribe().ware_index(ware);
+	if (!idx)
+		report_error(L, "Invalid Ware: %s", ware.c_str());
+	return idx;
 }
 
 
