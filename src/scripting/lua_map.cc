@@ -467,6 +467,9 @@ int L_Warehouse::set_ware(lua_State * L) {
 	uint32_t count = luaL_checkuint32(L, 3);
 
 	Ware_Index idx = o->get_owner()->tribe().ware_index(name);
+	if(!idx)
+		return report_error(L, "Invalid Ware: %s", name.c_str());
+
 	log("idx: %i\n", idx.value());
 
 	// TODO: should set wares, not increase them

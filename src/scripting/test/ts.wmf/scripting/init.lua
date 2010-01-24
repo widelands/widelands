@@ -296,14 +296,15 @@ function player_tests:test_create_flag()
    -- TODO: this test doesn't clean up after itself: the player remains owner
    -- TODO: of the field
 end
-function player_tests:test_create_flag2()
-   f = wl.map.Field(20,10)
-   k = wl.game.Player(2):place_flag(f, true)
-   assert_equal(k.player.number, 2)
-   k:remove()
-   -- TODO: this test doesn't clean up after itself: the player remains owner
-   -- TODO: of the field
-end
+-- This test is currently disabled because of issue #2938438
+-- function player_tests:test_create_flag2()
+--    f = wl.map.Field(20,10)
+--    k = wl.game.Player(2):place_flag(f, true)
+--    assert_equal(k.player.number, 2)
+--    k:remove()
+--    -- TODO: this test doesn't clean up after itself: the player remains owner
+--    -- TODO: of the field
+-- end
 -- TODO: set non forcing placement of flags
 
 function player_tests:test_force_building()
@@ -316,15 +317,32 @@ function player_tests:test_force_building()
    -- TODO: of the field
 end
 
-function player_tests:test_upcasting_from_immovable_to_building()
-   f = wl.map.Field(10,10)
-   k = wl.game.Player(1):place_building("headquarters", f)
-   i = f.immovable
-   assert_equal(i, k)
-   assert_equal("warehouse", i.building_type)
-   k:remove()
-   -- TODO: this test doesn't clean up after itself: the player remains owner
+-- =========================
+-- Warehouses Functionality 
+-- =========================
+warehouse_tests = lunit.TestCase("warehouse tests")
+function warehouse_tests:setup()
+   self.f = wl.map.Field(10,10)
+   self.p = wl.game.Player(1)
+   self.w = self.p:place_building("headquarters", f)
+end
+function warehouse_tests:teardown()
+   pcall(self.w.remove, self.w)
+   -- TODO: these tests do not clean up after itself: the player remains owner
    -- TODO: of the field
+end
+
+function warehouse_tests:test_upcasting_from_immovable_to_building()
+   i = self.f.immovable
+   assert_equal(i, self.w)
+   assert_function(i.set_ware) -- set_ware is non nil
+end
+
+function warehouse_tests:test_set_ware_illegal_ware()
+   function ill()
+      self.w:set_ware("sdjsgfhg", 100)
+   end
+   assert_error("Illegal ware should throw an error!", ill)
 end
 
 wl.debug.set_see_all(1)
