@@ -73,9 +73,9 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
 				return CAST_TO_LUA(Building);
 
 		case Map_Object::FLAG:
+			return CAST_TO_LUA(Flag);
 		case Map_Object::ROAD:
 			return CAST_TO_LUA(PlayerImmovable);
-		// TODO: Handle FLAG
 		// TODO: Handle ROAD
 	}
 	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*bi));
@@ -348,7 +348,92 @@ PlayerImmovable * L_PlayerImmovable::m_get(Game & game, lua_State * L) {
 		report_error(L, "PlayerImmovable no longer exists!");
 	return o;
 }
+#define GET_INDEX(name, capname) \
+Ware_Index L_PlayerImmovable::m_get_ ## name ## _index \
+	(lua_State * L, PlayerImmovable * i, const std::string & what) \
+{ \
+	Ware_Index idx = i->get_owner()->tribe(). name ## _index(what); \
+	if (!idx) \
+		report_error(L, "Invalid " #capname ": %s", what.c_str()); \
+	return idx; \
+}
+GET_INDEX(ware, Ware);
+GET_INDEX(worker, Worker);
+#undef GET_INDEX
 
+
+/* RST
+Flag
+--------
+
+.. class:: Flag
+
+	Bases: :class:`PlayerImmovable`
+
+	One flag in the economy of this Player.
+*/
+const char L_Flag::className[] = "Flag";
+const MethodType<L_Flag> L_Flag::Methods[] = {
+	METHOD(L_Flag, add_ware),
+	{0, 0},
+};
+const PropertyType<L_Flag> L_Flag::Properties[] = {
+	{0, 0, 0},
+};
+
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+/* RST
+	.. method:: add_ware(ware)
+
+		Adds a ware to this flag. The ware is created from thin air
+		and added to the players economy. Reports an error If there is no
+		capacity on this flag.
+
+		:arg ware: name of ware to create
+		:type ware: :class:`string`
+		:returns: :const:`nil`
+*/
+int L_Flag::add_ware(lua_State * L)
+{
+	Game & game = get_game(L);
+	Flag * f = m_get(game, L);
+
+	if (not f->has_capacity())
+		return report_error(L, "Flag has no capacity left!");
+
+	Ware_Index idx = m_get_ware_index(L, f, luaL_checkstring(L, 2));
+
+
+	Item_Ware_Descr const & wd = *f->get_owner()->tribe().get_ware_descr(idx);
+	WareInstance & item = *new WareInstance(idx, &wd);
+	item.init(game);
+
+	f->add_item(game, item);
+	return 0;
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+Flag * L_Flag::m_get(Game & game, lua_State * L) {
+	Flag * o = static_cast<Flag *>(m_biptr->get(game));
+	if (!o)
+		report_error(L, "Flag no longer exists!");
+	return o;
+}
 
 /* RST
 Building
@@ -576,19 +661,6 @@ Warehouse * L_Warehouse::m_get(Game & game, lua_State * L) {
 		report_error(L, "Warehouse no longer exists!");
 	return o;
 }
-#define GET_INDEX(name, capname) \
-Ware_Index L_Warehouse::m_get_ ## name ## _index \
-	(lua_State * L, Widelands::Warehouse * w, const std::string & what) \
-{ \
-	Ware_Index idx = w->get_owner()->tribe(). name ## _index(what); \
-	if (!idx) \
-		report_error(L, "Invalid " #capname ": %s", what.c_str()); \
-	return idx; \
-}
-GET_INDEX(ware, Ware);
-GET_INDEX(worker, Worker);
-#undef GET_INDEX
-
 
 
 
@@ -921,6 +993,12 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<L_Building, L_PlayerImmovable>(L);
 	add_parent<L_Building, L_BaseImmovable>(L);
 	add_parent<L_Building, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_Flag>(L, "map", true);
+	add_parent<L_Flag, L_PlayerImmovable>(L);
+	add_parent<L_Flag, L_BaseImmovable>(L);
+	add_parent<L_Flag, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_Warehouse>(L, "map", true);

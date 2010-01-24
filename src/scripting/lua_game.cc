@@ -121,7 +121,6 @@ int L_Player::get_number(lua_State * L) {
 		:type force: :class:`boolean`
 		:returns: :class:`wl.map.Flag` object created or :const:`nil`.
 */
-// TODO: should return Flag, not PlayerImmovable
 int L_Player::place_flag(lua_State * L) {
 	uint32_t n = lua_gettop(L);
 	L_Field * c = *get_user_class<L_Field>(L, 2);
@@ -138,7 +137,7 @@ int L_Player::place_flag(lua_State * L) {
 		f = &m_get(get_game(L)).force_flag(c->coords());
 	}
 
-	return to_lua<L_PlayerImmovable>(L, new L_PlayerImmovable(*f));
+	return to_lua<L_Flag>(L, new L_Flag(*f));
 }
 
 /* RST

@@ -22,6 +22,7 @@
 
 #include <lua.hpp>
 
+#include "economy/flag.h"
 #include "logic/game.h"
 #include "logic/warehouse.h"
 
@@ -147,6 +148,12 @@ public:
 	 */
 private:
 	Widelands::PlayerImmovable * m_get(Widelands::Game & game, lua_State * L);
+
+protected:
+	Widelands::Ware_Index m_get_ware_index
+		(lua_State * L, Widelands::PlayerImmovable*, const std::string& s);
+	Widelands::Ware_Index m_get_worker_index
+		(lua_State * L, Widelands::PlayerImmovable*, const std::string& s);
 };
 
 class L_Building : public L_PlayerImmovable {
@@ -178,6 +185,34 @@ private:
 	Widelands::Building * m_get(Widelands::Game & game, lua_State * L);
 };
 
+
+class L_Flag : public L_PlayerImmovable {
+public:
+	LUNA_CLASS_HEAD(L_Flag);
+
+	L_Flag() {}
+	L_Flag(Widelands::Flag & mo) : L_PlayerImmovable(mo) {
+	}
+	L_Flag(lua_State * L) : L_PlayerImmovable(L) {}
+	virtual ~L_Flag() {}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua Methods
+	 */
+	int add_ware(lua_State *);
+
+	/*
+	 * C Methods
+	 */
+private:
+	Widelands::Flag * m_get(Widelands::Game & game, lua_State * L);
+};
+
+
 class L_Warehouse : public L_Building {
 public:
 	LUNA_CLASS_HEAD(L_Warehouse);
@@ -205,10 +240,6 @@ public:
 	 */
 private:
 	Widelands::Warehouse * m_get(Widelands::Game & game, lua_State * L);
-	Widelands::Ware_Index m_get_ware_index
-		(lua_State * L, Widelands::Warehouse*, const std::string& s);
-	Widelands::Ware_Index m_get_worker_index
-		(lua_State * L, Widelands::Warehouse*, const std::string& s);
 };
 
 
