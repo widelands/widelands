@@ -65,7 +65,8 @@ const char L_Player::className[] = "Player";
 const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, place_flag),
 	METHOD(L_Player, place_building),
-
+	METHOD(L_Player, send_message),
+	METHOD(L_Player, sees_field),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
@@ -161,6 +162,49 @@ int L_Player::place_building(lua_State * L) {
 		(c->coords(), i, 0, 0, Soldier_Counts());
 
 	return upcasted_immovable_to_lua(L, &b);
+}
+
+// TODO: document me
+int L_Player::send_message(lua_State * L) {
+	uint32_t n = lua_gettop(L);
+
+	std::string title = luaL_checkstring(L, 2);
+	std::string body = luaL_checkstring(L, 3);
+	Coords c = Coords::Null();
+	if (n > 3)
+		c = (*get_user_class<L_Field>(L, 4))->coords();
+
+	Game & game = get_game(L);
+	Player & plr = m_get(game);
+
+	Message_Id const message =
+		plr.add_message
+			(game,
+			 *new Message
+			 	("blub", // TODO: blub is a stupid sender name
+			 	 game.get_gametime(),
+			 	 Forever(),
+			 	 title,
+			 	 body,
+				 c),
+			true);
+	// m_position,
+	// static_cast<Message::Status>(m_status)),
+
+	return 0;
+}
+
+// TODO: document me, test me
+int L_Player::sees_field(lua_State * L) {
+	FCoords & c = (*get_user_class<L_Field>(L, 2))->coords();
+	Game & game = get_game(L);
+	Map & map = game.map();
+	Player & p = m_get(game);
+
+	Widelands::Map_Index const i = c.field - &map[0];
+
+	lua_pushboolean(L, p.vision(i) > 1);
+	return 1;
 }
 
 /*
