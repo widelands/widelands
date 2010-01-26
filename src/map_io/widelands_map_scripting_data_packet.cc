@@ -16,7 +16,10 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
-#include "widelands_map_scripting_data_packet.h"
+
+
+#include <algorithm>
+#include <cctype>  // std::tolower
 
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
@@ -25,10 +28,36 @@
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 
+#include "widelands_map_scripting_data_packet.h"
+
 namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
+/*
+ * ========================================================================
+ *            PRIVATE FUNCTIONS
+ * ========================================================================
+ */
+static bool m_filename_to_short(const std::string & s) {
+	return s.size() < 4;
+}
+static bool m_is_lua_file(const std::string & s) {
+	std::string ext = s.substr(s.size() - 4, s.size());
+	// explicit cast needed to resolve ambiguity
+	std::transform
+		(ext.begin(), ext.end(), ext.begin(),
+		 static_cast<int(*)(int)>(std::tolower)
+	);
+	return (ext == ".lua");
+}
+
+
+/*
+ * ========================================================================
+ *            PUBLIC IMPLEMENTATION
+ * ========================================================================
+ */
 void Map_Scripting_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
@@ -38,15 +67,21 @@ throw (_wexception)
 {
 	filenameset_t scripting_files;
 
-	fs.FindFiles("scripting", "*.lua", &scripting_files);
+	// Theoretically, we should be able to use fs.FindFiles(*.lua) here,
+	// but since FindFiles doesn't support Globbing in Zips and most
+	// saved maps/games are zip, we have to work around this issue.
+	fs.FindFiles("scripting", "*", &scripting_files);
+
 	for
 		(filenameset_t::iterator i = scripting_files.begin();
 		 i != scripting_files.end(); i++)
 	{
+		if (m_filename_to_short(*i) or not m_is_lua_file(*i))
+			continue;
+
 
 		size_t length;
 		std::string data(static_cast<char *>(fs.Load(*i, length)));
-
 		std::string name = i->substr(0, i->size() - 4); // strips '.lua'
 		size_t pos = name.rfind('/');
 		if (pos == std::string::npos)
