@@ -165,6 +165,7 @@ int L_Player::place_building(lua_State * L) {
 }
 
 // TODO: document me
+// TODO: make this less hacky
 int L_Player::send_message(lua_State * L) {
 	uint32_t n = lua_gettop(L);
 

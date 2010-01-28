@@ -46,7 +46,9 @@ static void m_instantiate_new_lua_class(lua_State * L) {
 	std::string instantiator = "__" + klass;
 	lua_getfield(L, -1, instantiator.c_str()); // table wl module func
 
-	// TODO: check if this is a function
+	// Hopefully this is a function!
+	luaL_checktype(L, -1, LUA_TFUNCTION);
+
 	lua_call(L, 0, 1);
 }
 
