@@ -164,16 +164,87 @@ int L_Player::place_building(lua_State * L) {
 	return upcasted_immovable_to_lua(L, &b);
 }
 
-// TODO: document me
-// TODO: make this less hacky
+/* RST
+	.. method:: send_message(t, m[, opts])
+
+		Send a message to the player, the message will
+		appear in his inbox. Title or Message can be a
+		formatted using wideland's rich text.
+
+		:arg t: title of the message
+		:type t: :class:`string`
+
+		:arg m: text of the message
+		:type m: :class:`string`
+
+		Opts is a table of optional arguments and can be omitted. If it
+		exist it must contain string/value pairs of the following type:
+
+		:arg expires_in: if this is given, the message will be removed
+			from the players inbox after this many ms. Default:
+			message never expires.
+		:type expires_in: :class:`integer`
+
+		:arg loc: this field is the location connected to this message. Default:
+			no location attached to message
+		:type loc: :class:`wl.map.Field`
+
+		:arg status: status to attach to this message. can be 'new', 'read' or
+			'archived'. Default: "new"
+		:type status: :class:`string`
+
+		:arg sender: sender name of this string. Default: "LuaEngine"
+		:type sender: :class:`string`
+
+		:arg popup: should the message window be opened for this message or not.
+			Default: :const:`false`
+		:type popup: :class:`boolean`
+
+		:returns: :const:`nil`
+*/
+// TODO: add tests for this function
 int L_Player::send_message(lua_State * L) {
 	uint32_t n = lua_gettop(L);
-
 	std::string title = luaL_checkstring(L, 2);
 	std::string body = luaL_checkstring(L, 3);
 	Coords c = Coords::Null();
-	if (n > 3)
-		c = (*get_user_class<L_Field>(L, 4))->coords();
+	Duration d = Forever();
+	Message::Status st = Message::New;
+	std::string sender = "LuaEngine";
+	bool popup = true;
+
+	if (n == 4) {
+		// Optional arguments
+		lua_getfield(L, 4, "expires_in");
+		if (not lua_isnil(L, -1))
+			d = luaL_checkuint32(L, -1);
+		lua_pop(L, 1);
+
+		lua_getfield(L, 4, "loc");
+		if (not lua_isnil(L, -1))
+			c = (*get_user_class<L_Field>(L, -1))->coords();
+		lua_pop(L, 1);
+
+		lua_getfield(L, 4, "status");
+		if (not lua_isnil(L, -1)) {
+			std::string s = luaL_checkstring(L, -1);
+			if (s == "new") st = Message::New;
+			else if (s == "read") st = Message::Read;
+			else if (s == "archive") st = Message::Archived;
+			else report_error(L, "Unknown message status: %s", s.c_str());
+		}
+		lua_pop(L, 1);
+
+		lua_getfield(L, 4, "sender");
+		if (not lua_isnil(L, -1))
+			sender = luaL_checkstring(L, -1);
+		lua_pop(L, 1);
+
+		lua_getfield(L, 4, "popup");
+		if (not lua_isnil(L, -1))
+			popup = luaL_checkboolean(L, -1);
+		lua_pop(L, 1);
+	}
 
 	Game & game = get_game(L);
 	Player & plr = m_get(game);
@@ -182,15 +253,14 @@ int L_Player::send_message(lua_State * L) {
 		plr.add_message
 			(game,
 			 *new Message
-			 	("blub", // TODO: blub is a stupid sender name
+			 	(sender,
 			 	 game.get_gametime(),
-			 	 Forever(),
+			 	 d,
 			 	 title,
 			 	 body,
-				 c),
-			true);
-	// m_position,
-	// static_cast<Message::Status>(m_status)),
+				 c,
+				 st),
+			popup);
 
 	return 0;
 }
