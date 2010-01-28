@@ -7,4 +7,5 @@ Widelands Scripting Reference
    wl
    wl_map
    wl_game
+   wl_debug
 

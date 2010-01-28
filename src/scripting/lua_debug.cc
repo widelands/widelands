@@ -28,36 +28,57 @@
 #include "wui/interactive_player.h"
 
 
-// LUAMODULE wl.debug
+/* RST
+:mod:`wl.debug`
+==================
+
+.. module:: wl.debug
+   :synopsis: Debugging functionality (only when widelands was build with DEBUG)
+
+.. moduleauthor:: The Widelands development team
+
+.. currentmodule:: wl.debug
+
+The :mod:`wl.debug` module contains functionality that can be useful for
+developers or scenario creators. It allows to access some internals of
+widelands. It is only included in debug builds of widelands (not in release
+builds).
+*/
 
 /*
- * Intern definitions of Lua Functions
+ * ========================================================================
+ *                            MODULE FUNCTIONS
+ * ========================================================================
  */
-/*
- * TODO: describe these with doxygen descriptions
- *
- * LUAFUNC: log
- */
-static int L_log(lua_State * const l) {
-	log("%s\n", luaL_checkstring(l, 1));
+/* RST
+.. function:: set_see_all(b)
 
-	return 0;
-}
+	Toggles the set see all flag for the interactive player (the human
+	player). This will either completely hide the map or completely uncover
+	it.
 
-/*
- * TODO: document me
- */
-static int L_setSeeAll(lua_State * const l) {
-	bool const bval = luaL_checkint32(l, 1);
+	:arg b: either :const:`true` (reveal) or :const:`false` (hide) the map
+	:type b: :class:`boolean`
+	:returns: :const:`nil`
+*/
+static int L_set_see_all(lua_State * const l) {
+	bool const bval = luaL_checkboolean(l, 1);
 
 	get_game(l).get_ipl()->player().set_see_all(bval);
 
 	return 0;
 }
 
-/*
- * TODO: document me
- */
+/* RST
+.. function:: exit
+
+	Immediately exits the current game, this is equivalent to the user
+	clicking the exit button in the in-game main menu. This is especially
+	useful for automated testing of features and is for example used in the
+	widelands lua test suite.
+
+	:returns: :const:`nil`
+*/
 static int L_exit(lua_State * const l) {
 	get_game(l).get_ipl()->end_modal(0);
 
@@ -65,8 +86,7 @@ static int L_exit(lua_State * const l) {
 }
 
 const static struct luaL_reg wldebug [] = {
-	{"log", &L_log},
-	{"set_see_all", &L_setSeeAll},
+	{"set_see_all", &L_set_see_all},
 	{"exit", &L_exit},
 	{0, 0}
 };
@@ -77,3 +97,4 @@ void luaopen_wldebug(lua_State * const l) {
 
 	lua_pop(l, 1); // pop the table from the stack again
 }
+
