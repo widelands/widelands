@@ -18,7 +18,6 @@
  */
 
 
-#include <algorithm>
 #include <cctype>  // std::tolower
 
 #include "logic/editor_game_base.h"
@@ -44,11 +43,9 @@ static bool m_filename_to_short(const std::string & s) {
 }
 static bool m_is_lua_file(const std::string & s) {
 	std::string ext = s.substr(s.size() - 4, s.size());
-	// explicit cast needed to resolve ambiguity
-	std::transform
-		(ext.begin(), ext.end(), ext.begin(),
-		 static_cast<int(*)(int)>(std::tolower)
-	);
+	// std::transform fails on older system, therefore we use an explicit loop
+	for(uint32_t i = 0; i < ext.size(); i++)
+		ext[i] = std::tolower(ext[i]);
 	return (ext == ".lua");
 }
 
