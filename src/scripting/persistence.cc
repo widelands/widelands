@@ -19,7 +19,7 @@
 
 #include <lua.hpp>
 
-#include "pluto/pluto.h"
+#include "pluto.h"
 #include "c_utils.h"
 
 #include "persistence.h"

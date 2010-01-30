@@ -186,9 +186,7 @@ static int persistspecialobject(PersistInfo *pi, int defaction)
 		int one = 1;
 		pi->writer(pi->L, &one, sizeof(int), pi->ud);
 	}
-	printf("Maybe persist removes the item?: %i\n", lua_gettop(pi->L));
 	persist(pi);
-	printf("Maybe persist removes the item: %i\n", lua_gettop(pi->L));
 
 					/* perms reftbl ... obj mt table */
 	lua_pop(pi->L, 2);
@@ -917,22 +915,17 @@ static void unpersistspecialtable(int ref, UnpersistInfo *upi)
 	(void) ref; 			/* unused */
 					/* perms reftbl ... */
 	lua_checkstack(upi->L, 1);
-   printf("Calling unpersist\n");
 	unpersist(upi);
 					/* perms reftbl ... spfunc? */
-   printf("Before assert\n");
 	// lua_assert(lua_isfunction(upi->L, -1));
 					/* perms reftbl ... spfunc */
 
-   printf("Before calling restore: %i\n", lua_gettop(upi->L));
    luna_restore_object(upi->L);
-   printf("After calling restore: %i\n", lua_gettop(upi->L));
 
 	// lua_call(upi->L, 0, 1);
 					/* perms reftbl ... tbl? */
 	lua_assert(lua_istable(upi->L, -1));
 					/* perms reftbl ... tbl */
-   printf("After assert\n");
 }
 
 static void unpersistliteraltable(int ref, UnpersistInfo *upi)
@@ -991,7 +984,6 @@ static void unpersisttable(int ref, UnpersistInfo *upi)
 		int isspecial;
 		verify(LIF(Z,read)(&upi->zio, &isspecial, sizeof(int)) == 0);
 		if(isspecial) {
-         printf("isspecial: %i\n", isspecial);
 			unpersistspecialtable(ref, upi);
 					/* perms reftbl ... tbl */
 		} else {
