@@ -140,7 +140,7 @@ void Editor_Interactive::register_overlays() {
 					(amount);
 			if (immname.size())
 				overlay_manager.register_overlay
-					(fc, g_gr->get_picture(PicMod_Game, immname.c_str()), 4);
+					(fc, g_gr->get_picture(PicMod_Menu, immname.c_str()), 4);
 		}
 	}
 
