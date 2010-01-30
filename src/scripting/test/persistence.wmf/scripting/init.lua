@@ -1,0 +1,66 @@
+-- =======================================================================
+--                           LOADING/SAVING TESTS                           
+-- =======================================================================
+-- This tests saving and loading of various Lua objects in the global 
+-- environment.
+--
+-- To run this test use:
+-- ./widelands --nozip --scenario=src/scripting/test/persistence.wmf && 
+--   ./widelands --loadgame=~/.widelands/save/lua_persistence.wgf
+
+-- ====================
+-- Test Data to persist 
+-- ====================
+my_name = "SirVer"
+a = { "Hallo", "Welt" }
+c = { func = function(a) return "I say " .. a .. "!" end }
+field = wl.map.Field(32,34)
+tree = wl.map.create_immovable("tree3", field)
+
+corout = coroutine.create(function() coroutine.yield("What cool is that?") end)
+
+-- ========================
+-- Test after unpersisting 
+-- ========================
+function check_persistence()
+coroutine.yield(wl.game.get_time() + 2000)
+
+require "lunit"
+lunit.import "assertions"
+
+print("###################### CHECKING FOR CORRECT PERSISTENCE")
+assert_equal(my_name, "SirVer")
+
+assert_table(a)
+assert_equal(a[1], "Hallo")
+assert_equal(a[2], "Welt")
+
+assert_table(c)
+assert_function(c.func)
+assert_equal("I say zonk!", c.func("zonk"))
+
+assert_equal("tree3", tree.name)
+
+assert_equal(32, field.x)
+assert_equal(34, field.y)
+assert_equal(tree, field.immovable)
+
+assert_thread(corout)
+_,rv = coroutine.resume(corout)
+assert_equal("What cool is that?", rv)
+
+print("################### ALL TEST PASS!")
+wl.debug.exit()
+end
+
+
+-- ==========
+-- Main Code 
+-- ==========
+-- This starts the test routine, saves the game and exits.
+-- Loading the saved game will check that all objects are 
+-- correctly unpersisted
+wl.game.run_coroutine(coroutine.create(check_persistence))
+wl.debug.save("lua_persistence")
+wl.debug.exit()
+
