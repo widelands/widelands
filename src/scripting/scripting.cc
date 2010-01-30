@@ -75,6 +75,10 @@ class LuaInterface_Impl : public LuaInterface {
 		virtual uint32_t write_coroutine
 			(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &,
 			 LuaCoroutine *);
+		virtual LuaCoroutine * read_global_env
+			(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t);
+		virtual uint32_t write_global_env
+			(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &);
 };
 
 /*************************
@@ -166,6 +170,25 @@ uint32_t LuaInterface_Impl::write_coroutine
 	// to the Implementation function here.
 	return dynamic_cast<LuaCoroutine_Impl *>(cr)->write(m_L, fw, mos);
 }
+
+	LuaCoroutine * LuaInterface_Impl::read_global_env
+	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
+	 uint32_t size)
+{
+	LuaCoroutine_Impl * rv = new LuaCoroutine_Impl(0);
+
+	rv->read(m_L, fr, mol, size);
+
+	return rv;
+}
+
+uint32_t LuaInterface_Impl::write_global_env
+	(Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos)
+{
+	log("########In write global env!\n");
+	return 0;
+}
+
 
 void LuaInterface_Impl::register_script
 	(std::string ns, std::string name, std::string content)

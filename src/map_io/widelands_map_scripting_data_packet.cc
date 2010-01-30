@@ -79,7 +79,6 @@ throw (_wexception)
 		if (m_filename_to_short(*i) or not m_is_lua_file(*i))
 			continue;
 
-
 		size_t length;
 		std::string data(static_cast<char *>(fs.Load(*i, length)));
 		std::string name = i->substr(0, i->size() - 4); // strips '.lua'
@@ -93,11 +92,15 @@ throw (_wexception)
 
 		egbase.lua().register_script("map", name, data);
 	}
+
+	// Now, read the global state if any is saved
+	// TODO fs.TryOpen("scripting/globals.dump");
+
 }
 
 
 void Map_Scripting_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
+	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 throw (_wexception)
 {
 
@@ -113,6 +116,10 @@ throw (_wexception)
 
 		fs.Write(fname, i->second.c_str(), i->second.size());
 	}
+
+	Widelands::FileWrite fw;
+	egbase.lua().write_global_env(fw, mos);
+	fw.Write(fs, "scripting/globals.dump");
 }
 
 }
