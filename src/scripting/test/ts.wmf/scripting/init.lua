@@ -442,6 +442,9 @@ function flag_tests:test_add_ware()
    -- TODO: there is currently no way to check if this is alright
 end
 
+for n,v in pairs(_G) do
+   print (n,v)
+end
 
 wl.debug.set_see_all(1)
 

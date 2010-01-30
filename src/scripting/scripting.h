@@ -89,7 +89,7 @@ class LuaInterface {
 			(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&,
 			 LuaCoroutine *) = 0;
 
-		virtual LuaCoroutine* read_global_env
+		virtual void read_global_env
 			(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
 			 uint32_t) = 0;
 		virtual uint32_t write_global_env

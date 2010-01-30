@@ -36,7 +36,6 @@
 // TODO: remove this include
 #include "pluto/pluto.h"
 
-// TODO: *.lua globbing doesn't work with zip file system
 // TODO: get rid of LuaCmd. Only LuaFunction should be kept alife
 
 /*
@@ -75,7 +74,7 @@ class LuaInterface_Impl : public LuaInterface {
 		virtual uint32_t write_coroutine
 			(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &,
 			 LuaCoroutine *);
-		virtual LuaCoroutine * read_global_env
+		virtual void read_global_env
 			(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t);
 		virtual uint32_t write_global_env
 			(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &);
@@ -171,22 +170,156 @@ uint32_t LuaInterface_Impl::write_coroutine
 	return dynamic_cast<LuaCoroutine_Impl *>(cr)->write(m_L, fw, mos);
 }
 
-	LuaCoroutine * LuaInterface_Impl::read_global_env
+
+struct DataReader_L {
+	uint32_t size;
+	Widelands::FileRead & fr;
+
+	DataReader_L(uint32_t gsize, Widelands::FileRead & gfr) :
+		size(gsize), fr(gfr) {}
+};
+
+const char * read_func_L(lua_State *, void * ud, size_t * sz) {
+	DataReader_L * dr = static_cast<DataReader_L *>(ud);
+
+	*sz = dr->size;
+	return static_cast<const char *>(dr->fr.Data(dr->size));
+}
+
+// TODO: most of this function is also duplicate
+void LuaInterface_Impl::read_global_env
 	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size)
 {
-	LuaCoroutine_Impl * rv = new LuaCoroutine_Impl(0);
+	int n = lua_gettop(m_L);
+	log("\n\nReading Environment: %i\n", n);
 
-	rv->read(m_L, fr, mol, size);
+	// Save the mol in the registry
+	lua_pushlightuserdata(m_L, &mol);
+	lua_setfield(m_L, LUA_REGISTRYINDEX, "mol");
 
-	return rv;
+	// Push all the stuff that should not be regenerated
+	lua_newtable(m_L);
+	static const char * globals[] = {
+		"_VERSION", "assert", "collectgarbage", "coroutine", "debug",
+		"dofile", "error", "gcinfo", "getfenv", "getmetatable", "io", "ipairs",
+		"load", "loadfile", "loadstring", "math", "module", "newproxy", "next",
+		"os", "package", "pairs", "pcall", "pluto", "print", "rawequal",
+		"rawget", "rawset", "require", "select", "setfenv", "setmetatable",
+		"table", "tonumber", "tostring", "type", "unpack", "wl", "xpcall",
+		"string", 0
+	};
+	uint32_t ncounter = 1;
+	for (uint32_t i = 0; globals[i]; i++)
+	{
+		log("Do not unpersist: %s\n", globals[i]);
+		lua_pushint32(m_L, ncounter); // stack: table int
+		lua_getglobal(m_L, globals[i]); // stack: table int value
+		log("  got value: %i\n", ncounter);
+		lua_settable(m_L, -3); //  table[int] = object
+		ncounter++;
+	}
+	lua_getglobal(m_L, "coroutine");
+	lua_getfield(m_L, -1, "create");
+	lua_pushint32(m_L, ncounter++); // stack: newtable coroutine yield integer
+	lua_settable(m_L, -4); //  newtable[yield] = integer
+	lua_pop(m_L, 1); // pop coroutine
+
+	log("Pushed all globals\n");
+
+	DataReader_L rd(size, fr);
+
+	pluto_unpersist(m_L, &read_func_L, &rd);
+	log("Lua unpersisting done!");
+
+	// luaL_checktype(m_L, -1, LUA_TTABLE);
+	lua_pop(m_L, 2); // pop the thread & the table
+
+	log("Done with unpickling!\n");
+
+	// Delete the entry in the registry
+	lua_pushnil(m_L);
+	lua_setfield(m_L, LUA_REGISTRYINDEX, "mol");
+
+	log("Unpickled %i bytes. Stack size: %i\n", size, lua_gettop(m_L));
 }
 
+
+struct DataWriter_L {
+	uint32_t written;
+	Widelands::FileWrite & fw;
+
+	DataWriter_L(Widelands::FileWrite & gfw) : written(0), fw(gfw) {}
+};
+
+int write_func_L(lua_State *, const void * p, size_t data, void * ud) {
+	DataWriter_L * dw = static_cast<DataWriter_L *>(ud);
+
+	dw->fw.Data(p, data, Widelands::FileWrite::Pos::Null());
+	dw->written += data;
+
+	return data;
+}
+
+// TODO: this function + LuaCoroutine write should be factored out
+// into a class that cares for persistence
 uint32_t LuaInterface_Impl::write_global_env
 	(Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos)
 {
-	log("########In write global env!\n");
-	return 0;
+	// Save a reference to the object saver
+	lua_pushlightuserdata(m_L, &mos);
+	lua_setfield(m_L, LUA_REGISTRYINDEX, "mos");
+
+	// Push all globals that should not be persisted. If any of those
+	// do not exist, do not push the value.
+	lua_newtable(m_L);
+	static const char * globals[] = {
+		"_VERSION", "assert", "collectgarbage", "coroutine", "debug",
+		"dofile", "error", "gcinfo", "getfenv", "getmetatable", "io", "ipairs",
+		"load", "loadfile", "loadstring", "math", "module", "newproxy", "next",
+		"os", "package", "pairs", "pcall", "pluto", "print", "rawequal",
+		"rawget", "rawset", "require", "select", "setfenv", "setmetatable",
+		"table", "tonumber", "tostring", "type", "unpack", "wl", "xpcall",
+		"string", 0
+	};
+	uint32_t ncounter = 1;
+	for (uint32_t i = 0; globals[i]; i++)
+	{
+		log("Persisting: %s\n", globals[i]);
+		lua_getglobal(m_L, globals[i]); // stack: table value
+		if (lua_isnil(m_L, -1)) {
+			lua_pop(m_L, 1);
+		} else {
+			log("  got value: %i\n", ncounter);
+			lua_pushint32(m_L, ncounter++); // stack: table value int
+			lua_settable(m_L, -3); //  table[symbol] = integer
+		}
+	}
+	lua_getglobal(m_L, "coroutine");
+	lua_pushint32(m_L, ncounter++);
+	lua_getfield(m_L, -2, "create");// stack: table coroutine integer create
+	lua_settable(m_L, -4); //  newtable[integer] = create
+	lua_pop(m_L, 1); // pop coroutine
+	log("Pushed all globals\n");
+
+	// Now, we just push our globals dict
+	lua_pushvalue(m_L, LUA_GLOBALSINDEX);
+
+	log("after pushing object: %i\n", lua_gettop(m_L));
+
+	// fw.Unsigned32(0xff);
+	DataWriter_L dw(fw);
+	pluto_persist(m_L, &write_func_L, &dw);
+	lua_pop(m_L, 2); // pop the two tables
+
+	log("After pluto_persist!\n");
+	log("Pickled %i bytes. Stack size: %i\n", dw.written, lua_gettop(m_L));
+
+	// Delete the entry in the registry
+	lua_pushnil(m_L);
+	lua_setfield(m_L, LUA_REGISTRYINDEX, "mos");
+
+	return dw.written;
 }
 
 

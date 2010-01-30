@@ -62,7 +62,7 @@ void Map_Scripting_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
 	 bool,
-	 Map_Map_Object_Loader &)
+	 Map_Map_Object_Loader &       mol)
 throw (_wexception)
 {
 	filenameset_t scripting_files;
@@ -94,8 +94,10 @@ throw (_wexception)
 	}
 
 	// Now, read the global state if any is saved
-	// TODO fs.TryOpen("scripting/globals.dump");
-
+	Widelands::FileRead fr;
+	if (fr.TryOpen(fs, "scripting/globals.dump")) {
+		egbase.lua().read_global_env(fr, mol, fr.Unsigned32());
+	}
 }
 
 
@@ -117,8 +119,14 @@ throw (_wexception)
 		fs.Write(fname, i->second.c_str(), i->second.size());
 	}
 
+	// Dump the global environment
 	Widelands::FileWrite fw;
-	egbase.lua().write_global_env(fw, mos);
+	Widelands::FileWrite::Pos pos = fw.GetPos();
+	fw.Unsigned32(0); // N bytes written, follows below
+
+	uint32_t nwritten = Little32(egbase.lua().write_global_env(fw, mos));
+	fw.Data(&nwritten, 4, pos);
+
 	fw.Write(fs, "scripting/globals.dump");
 }
 
