@@ -233,9 +233,30 @@ void LuaInterface_Impl::read_global_env
 	log("Lua unpersisting done!");
 
 	luaL_checktype(m_L, -1, LUA_TTABLE);
-	lua_setglobal(m_L, "blub");
+	int table_idx = lua_gettop(m_L);
 
-	lua_pop(m_L, 1); // pop the thread
+
+	// Now, we have to merge all keys from the loaded table
+	// into the global table
+	lua_pushnil(m_L);
+	while (lua_next(m_L, table_idx) != 0) {
+		// key value
+		lua_pushvalue(m_L, -2); // key value key
+		lua_gettable(m_L, LUA_GLOBALSINDEX); // key value global_value
+		if (lua_equal(m_L, -1, -2)) {
+			lua_pop(m_L, 2); // key
+			continue;
+		} else {
+			// Make this a global value
+			lua_pop(m_L, 1); // key value
+			lua_pushvalue(m_L, -2); // key value key
+			lua_pushvalue(m_L, -2); // key value key value
+			lua_settable(m_L, LUA_GLOBALSINDEX); // key value
+			lua_pop(m_L, 1); // key
+		}
+	}
+
+	lua_pop(m_L, 2); // pop the thread & the table
 
 	log("Done with unpickling!\n");
 
@@ -305,13 +326,7 @@ uint32_t LuaInterface_Impl::write_global_env
 	log("Pushed all globals\n");
 
 	// Now, we just push our globals dict
-        // lua_pushvalue(m_L, LUA_GLOBALSINDEX);
-  lua_getglobal(m_L, "blub");
-  if(lua_isnil(m_L, -1)) {
-	  lua_pop(m_L, 1);
-	  lua_newtable(m_L);
-  }
-
+	lua_pushvalue(m_L, LUA_GLOBALSINDEX);
 
 	log("after pushing object: %i\n", lua_gettop(m_L));
 
