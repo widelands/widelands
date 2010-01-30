@@ -58,6 +58,8 @@ class LuaScriptNotExistingError : public LuaError {
  */
 class LuaCoroutine {
 	public:
+		virtual ~LuaCoroutine() {}
+
 		enum {
 			DONE = 0,
 			YIELDED = LUA_YIELD,
@@ -73,6 +75,8 @@ class LuaCoroutine {
 typedef std::map<std::string, std::string> ScriptContainer;
 class LuaInterface {
 	public:
+		virtual ~LuaInterface() {}
+
 		virtual void interpret_string(std::string) = 0;
 		virtual void interpret_file(std::string) = 0;
 		virtual std::string const & get_last_error() const = 0;
