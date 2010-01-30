@@ -220,7 +220,7 @@ void LuaInterface_Impl::read_global_env
 		ncounter++;
 	}
 	lua_getglobal(m_L, "coroutine");
-	lua_getfield(m_L, -1, "create");
+	lua_getfield(m_L, -1, "yield");
 	lua_pushint32(m_L, ncounter++); // stack: newtable coroutine yield integer
 	lua_settable(m_L, -4); //  newtable[yield] = integer
 	lua_pop(m_L, 1); // pop coroutine
@@ -232,8 +232,10 @@ void LuaInterface_Impl::read_global_env
 	pluto_unpersist(m_L, &read_func_L, &rd);
 	log("Lua unpersisting done!");
 
-	// luaL_checktype(m_L, -1, LUA_TTABLE);
-	lua_pop(m_L, 2); // pop the thread & the table
+	luaL_checktype(m_L, -1, LUA_TTABLE);
+	lua_setglobal(m_L, "blub");
+
+	lua_pop(m_L, 1); // pop the thread
 
 	log("Done with unpickling!\n");
 
@@ -297,13 +299,19 @@ uint32_t LuaInterface_Impl::write_global_env
 	}
 	lua_getglobal(m_L, "coroutine");
 	lua_pushint32(m_L, ncounter++);
-	lua_getfield(m_L, -2, "create");// stack: table coroutine integer create
-	lua_settable(m_L, -4); //  newtable[integer] = create
+	lua_getfield(m_L, -2, "yield");// stack: table coroutine integer yield
+	lua_settable(m_L, -4); //  newtable[integer] = yield
 	lua_pop(m_L, 1); // pop coroutine
 	log("Pushed all globals\n");
 
 	// Now, we just push our globals dict
-	lua_pushvalue(m_L, LUA_GLOBALSINDEX);
+        // lua_pushvalue(m_L, LUA_GLOBALSINDEX);
+  lua_getglobal(m_L, "blub");
+  if(lua_isnil(m_L, -1)) {
+	  lua_pop(m_L, 1);
+	  lua_newtable(m_L);
+  }
+
 
 	log("after pushing object: %i\n", lua_gettop(m_L));
 

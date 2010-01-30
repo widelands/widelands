@@ -17,12 +17,39 @@
  *
  */
 
+#include <boost/lexical_cast.hpp>
+
 #include "coroutine_impl.h"
 
 #include "c_utils.h"
 #include "pluto/pluto.h"
 
+uint32_t LuaCoroutine_Impl::g_idx = 0;
 
+LuaCoroutine_Impl::LuaCoroutine_Impl(lua_State* ms)
+	: m_L(ms)
+{
+	// Cache a lua reference to this object so that it does not
+	// get garbage collected
+	m_idx = g_idx ++;
+	if(ms) {
+		// TODO: factor this out. This is essentially the same as code in read.
+		lua_pushthread(ms);
+		std::string key = "co_" + boost::lexical_cast<std::string>(m_idx);
+		log("construct: key.c_str(: %s\n", key.c_str());
+		lua_setfield(ms, LUA_REGISTRYINDEX, key.c_str());
+	}
+}
+
+LuaCoroutine_Impl::~LuaCoroutine_Impl()
+{
+	// Release the reference cached.
+	// TODO: factor this out
+	lua_pushnil(m_L);
+	std::string key = "co_" + boost::lexical_cast<std::string>(m_idx);
+	log("destruct: key.c_str(: %s\n", key.c_str());
+	lua_setfield(m_L, LUA_REGISTRYINDEX, key.c_str());
+}
 int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
 {
 	int rv = lua_resume(m_L, 0);
@@ -126,7 +153,8 @@ void LuaCoroutine_Impl::read
 {
 	int n = lua_gettop(parent);
 	log("\n\nReading Coroutine: %i\n", n);
-
+		
+	
 	// Save the mol in the registry
 	lua_pushlightuserdata(parent, &mol);
 	lua_setfield(parent, LUA_REGISTRYINDEX, "mol");
@@ -146,6 +174,12 @@ void LuaCoroutine_Impl::read
 	pluto_unpersist(parent, &read_func, &rd);
 	m_L = luaL_checkthread(parent, -1);
 	lua_pop(parent, 2); // pop the thread & the table
+	
+	// TODO: this persistence code is the same as above
+	lua_pushthread(m_L);
+	std::string key = "co_" + boost::lexical_cast<std::string>(m_idx);
+	log("construct: key.c_str(: %s\n", key.c_str());
+	lua_setfield(m_L, LUA_REGISTRYINDEX, key.c_str());
 
 	log("Done with pickling!\n");
 
