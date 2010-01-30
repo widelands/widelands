@@ -397,7 +397,9 @@ const MapGenBobKind * MapGenInfo::getBobKind
 {
 	if (m_BobKinds.find(bobKindName) == m_BobKinds.end())
 		throw wexception("invalid MapGenBobKind %s", bobKindName.c_str());
-	return & m_BobKinds.at(bobKindName);
+	// Ugly workaround because at is not defined for some systems
+	// and operator[] does not fare well with constants
+	return & m_BobKinds.find(bobKindName)->second;
 }
 
 void MapGenInfo::parseProfile(World * const world, Profile & profile)
