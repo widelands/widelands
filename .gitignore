@@ -2,3 +2,5 @@
 *.sw?
 src/scripting/doc/build
 src/scripting/doc/source/wl_*.rst
+build/native-*
+build/sconf_temp/
