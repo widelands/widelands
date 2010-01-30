@@ -19,8 +19,6 @@
 
 #include <lua.hpp>
 
-#include "log.h"
-
 #include "pluto/pluto.h"
 #include "c_utils.h"
 
@@ -63,7 +61,6 @@ static bool m_add_object_to_not_persist
 	if (pos != std::string::npos) {
 		std::string table = name.substr(0, pos);
 		name = name.substr(pos + 1);
-		log("Pushing %s:%s!\n", table.c_str(), name.c_str());
 
 		lua_getglobal(L, table.c_str()); // table object table
 		if (lua_isnil(L, -1)) {
@@ -80,13 +77,11 @@ static bool m_add_object_to_not_persist
 		lua_pop(L, 1); // pop tabltable
 		return true;
 	} else {
-		log("Persisting: %s\n", name.c_str());
 		lua_getglobal(L, name.c_str()); // stack: table object value
 		if (lua_isnil(L, -1)) {
 			lua_pop(L, 1);
 			return false;
 		} else {
-			log("  got value: %i\n", nidx);
 			lua_pushint32(L, nidx); // stack: table object value int
 			lua_settable(L, 1); //  table[symbol] = integer
 			return true;
@@ -132,10 +127,8 @@ static bool m_add_object_to_not_unpersist
 		lua_settable(L, -3); //  table[int] = function
 		lua_pop(L, 1); // pop table
 	} else {
-		log("Do not unpersist: %s\n", name.c_str());
 		lua_pushint32(L, idx); // stack: table int
 		lua_getglobal(L, name.c_str()); // stack: table int value
-		log("  got value: %i\n", idx);
 		lua_settable(L, -3); //  table[int] = object
 	}
 	return true;
@@ -167,14 +160,10 @@ uint32_t persist_object
 		if (m_add_object_to_not_persist(L, globals[i], idx))
 			++idx;
 
-	log("before calling pluto_persist: %i\n", lua_gettop(L));
 
 	DataWriter dw(fw);
 	pluto_persist(L, &write_func, &dw);
 	lua_pop(L, 2); // pop the object and the table
-
-	log("After pluto_persist!\n");
-	log("Pickled %i bytes. Stack size: %i\n", dw.written, lua_gettop(L));
 
 	// Delete the entry in the registry
 	lua_pushnil(L);
@@ -201,12 +190,9 @@ uint32_t unpersist_object
 	for (uint32_t i = 0; globals[i]; i++)
 		m_add_object_to_not_unpersist(L, globals[i], i + 1);
 
-	log("Pushed all globals\n");
-
 	DataReader_L rd(size, fr);
 
 	pluto_unpersist(L, &read_func_L, &rd);
-	log("Lua unpersisting done!");
 
 	lua_remove(L, -2); // remove the globals table
 
@@ -215,11 +201,6 @@ uint32_t unpersist_object
 	lua_setfield(L, LUA_REGISTRYINDEX, "mol");
 
 	assert(lua_gettop(L) == 1);
-
-	log("Done with unpickling!\n");
-
-
-	log("Unpickled %i bytes. Stack size: %i\n", size, lua_gettop(L));
 
 	return 1;
 }

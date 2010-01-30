@@ -102,20 +102,15 @@ void register_class
 		to_pop ++;
 	}
 
-	log("Constructor %i\n", lua_gettop(L));
 	m_add_constructor_to_lua<T>(L);
 	m_add_instantiator_to_lua<T>(L);
 	lua_pop(L, to_pop); // Pop everything we used so far.
 
-	log("MetaTable %i\n", lua_gettop(L));
 	m_create_metatable_for_class<T>(L);
 
-	log("Before properties %i\n", lua_gettop(L));
 	m_register_properties_in_metatable<T>(L);
-	log("After properties %i\n", lua_gettop(L));
 	m_register_methods_in_metatable<T, T>(L);
 
-	log("MetaTable %i\n", lua_gettop(L));
 	if(!return_metatable)
 		lua_pop(L, 1); // remove the Metatable
 }

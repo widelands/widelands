@@ -209,9 +209,7 @@ int m_persist(lua_State * const L) {
 	lua_pushstring(L, T::className);
 	lua_setfield(L, -2, "class");
 
-	log("Before calling (*obj)->persist!: %i\n", lua_gettop(L));
 	(*obj)->__persist(L);
-	log("After calling (*obj)->persist!: %i\n", lua_gettop(L));
 
 	return 1;
 }

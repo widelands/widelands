@@ -44,7 +44,7 @@
 #include <stdint.h>	/*for intptr_t*/
 
 
-#define PLUTO_DEBUG
+// #define PLUTO_DEBUG
 
 // Forward declarated from lua_impl.h. So we do not need to include it
 int luna_restore_object(lua_State * L);

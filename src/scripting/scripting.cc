@@ -231,9 +231,6 @@ void LuaInterface_Impl::interpret_string(std::string cmd) {
 }
 
 void LuaInterface_Impl::interpret_file(std::string filename) {
-	log("In LuaInterface::interpret_file:\n");
-	log(" <%s>\n", filename.c_str());
-
 	int rv = luaL_dofile(m_L, filename.c_str());
 	m_check_for_errors(rv);
 }
