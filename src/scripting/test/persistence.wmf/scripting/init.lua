@@ -16,6 +16,8 @@ a = { "Hallo", "Welt" }
 c = { func = function(a) return "I say " .. a .. "!" end }
 field = wl.map.Field(32,34)
 tree = wl.map.create_immovable("tree3", field)
+removed_tree = wl.map.create_immovable("tree4", wl.map.Field(34,34))
+removed_tree:remove()
 
 corout = coroutine.create(function() coroutine.yield("What cool is that?") end)
 

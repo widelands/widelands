@@ -40,6 +40,12 @@ class L_MapModuleClass : public LunaClass {
 };
 
 
+#define CASTED_M_GET(klass) \
+Widelands:: klass * m_get(Widelands::Game & game, lua_State * L) { \
+	return static_cast<Widelands:: klass *> \
+		(L_MapObject::m_get(game, L, #klass)); \
+}
+
 class L_MapObject : public L_MapModuleClass {
 	Widelands::Object_Ptr * m_ptr;
 
@@ -77,32 +83,22 @@ public:
 	/*
 	 * C Methods
 	 */
-private:
-	Widelands::Map_Object * m_get(Widelands::Game & game, lua_State * L);
+protected:
+	Widelands::Map_Object * m_get
+		(Widelands::Game & game, lua_State * L, std::string = "MapObject");
+	Widelands::Map_Object * m_get_or_zero
+		(Widelands::Game & game);
 };
 
 
 class L_BaseImmovable : public L_MapObject {
-protected:
-	Widelands::OPtr<Widelands::BaseImmovable>* m_biptr;
-
 public:
 	LUNA_CLASS_HEAD(L_BaseImmovable);
 
-	L_BaseImmovable() : m_biptr(0) {}
-	L_BaseImmovable(Widelands::BaseImmovable & mo) : L_MapObject(mo) {
-		m_biptr = new Widelands::OPtr<Widelands::BaseImmovable>(&mo);
-	}
-	L_BaseImmovable(lua_State * L) : L_MapObject(L), m_biptr(0) {}
-	virtual ~L_BaseImmovable() {
-		if (m_biptr) {
-			delete m_biptr;
-			m_biptr = 0;
-		}
-	}
-
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
+	L_BaseImmovable() {}
+	L_BaseImmovable(Widelands::BaseImmovable & mo) : L_MapObject(mo) {}
+	L_BaseImmovable(lua_State * L) : L_MapObject(L) {}
+	virtual ~L_BaseImmovable() {}
 
 	/*
 	 * Properties
@@ -118,7 +114,7 @@ public:
 	 * C Methods
 	 */
 private:
-	Widelands::BaseImmovable * m_get(Widelands::Game & game, lua_State * L);
+	CASTED_M_GET(BaseImmovable);
 };
 
 class L_PlayerImmovable : public L_BaseImmovable {
@@ -130,9 +126,6 @@ public:
 	}
 	L_PlayerImmovable(lua_State * L) : L_BaseImmovable(L) {}
 	virtual ~L_PlayerImmovable() {}
-
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
 
 	/*
 	 * Properties
@@ -147,7 +140,7 @@ public:
 	 * C Methods
 	 */
 private:
-	Widelands::PlayerImmovable * m_get(Widelands::Game & game, lua_State * L);
+	CASTED_M_GET(PlayerImmovable);
 
 protected:
 	Widelands::Ware_Index m_get_ware_index
@@ -166,9 +159,6 @@ public:
 	L_Building(lua_State * L) : L_PlayerImmovable(L) {}
 	virtual ~L_Building() {}
 
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
-
 	/*
 	 * Properties
 	 */
@@ -182,7 +172,7 @@ public:
 	 * C Methods
 	 */
 private:
-	Widelands::Building * m_get(Widelands::Game & game, lua_State * L);
+	CASTED_M_GET(Building);
 };
 
 
@@ -209,7 +199,7 @@ public:
 	 * C Methods
 	 */
 private:
-	Widelands::Flag * m_get(Widelands::Game & game, lua_State * L);
+	CASTED_M_GET(Flag);
 };
 
 
@@ -239,9 +229,10 @@ public:
 	 * C Methods
 	 */
 private:
-	Widelands::Warehouse * m_get(Widelands::Game & game, lua_State * L);
+	CASTED_M_GET(Warehouse);
 };
 
+#undef CASTED_M_GET
 
 class L_Field : public L_MapModuleClass {
 	Widelands::FCoords m_c;

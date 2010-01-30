@@ -115,15 +115,23 @@ void L_MapObject::__persist(lua_State * L) {
 		Map_Map_Object_Saver & mos = *get_mos(L);
 		Game & game = get_game(L);
 
-		uint32_t idx = mos.get_object_file_index(*m_ptr->get(game));
+		uint32_t idx = 0;
+		if (m_ptr && m_ptr->get(game))
+			idx = mos.get_object_file_index(*m_ptr->get(game));
+
 		PERS_UINT32("file_index", idx);
 	}
 void L_MapObject::__unpersist(lua_State * L) {
 	uint32_t idx;
 	UNPERS_UINT32("file_index", idx);
-	Map_Map_Object_Loader & mol = *get_mol(L);
 
-	m_ptr = new Object_Ptr(&mol.get<Map_Object>(idx));
+	if (!idx)
+		m_ptr = 0;
+	else {
+		Map_Map_Object_Loader & mol = *get_mol(L);
+
+		m_ptr = new Object_Ptr(&mol.get<Map_Object>(idx));
+	}
 }
 
 /*
@@ -153,8 +161,18 @@ int L_MapObject::__eq(lua_State * L) {
 	Game & game = get_game(L);
 	L_MapObject * other = *get_base_user_class<L_MapObject>(L, -1);
 
-	lua_pushboolean
-		(L, other->m_get(game, L)->serial() == m_get(game, L)->serial());
+	Map_Object * me = m_get_or_zero(game);
+	Map_Object * you = other->m_get_or_zero(game);
+
+
+	// Both objects are destroyed: they are equal
+	if (me == you) lua_pushboolean(L, true);
+	else if (!me or !you) // One of the objects is destroyed: they are distinct
+		lua_pushboolean(L, false);
+	else // Compare them
+		lua_pushboolean
+			(L, other->m_get(game, L)->serial() == m_get(game, L)->serial());
+
 	return 1;
 }
 
@@ -182,13 +200,21 @@ int L_MapObject::remove(lua_State * L) {
  C METHODS
  ==========================================================
  */
-Map_Object * L_MapObject::m_get(Game & game, lua_State * L) {
-	Map_Object * o = m_ptr->get(game);
+Map_Object * L_MapObject::m_get
+	(Game & game, lua_State * L, std::string name)
+{
+	Map_Object * o = m_get_or_zero(game);
 	if (!o)
-		report_error(L, "Object no longer exists!");
+		report_error(L, "%s no longer exists!", name.c_str());
 	return o;
 }
-
+Map_Object * L_MapObject::m_get_or_zero (Game & game)
+{
+	Map_Object * o = 0;
+	if (m_ptr)
+		o = m_ptr->get(game);
+	return o;
+}
 
 
 
@@ -213,25 +239,6 @@ const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
 	PROP_RO(L_BaseImmovable, name),
 	{0, 0, 0},
 };
-
-void L_BaseImmovable::__persist(lua_State * L) {
-	Map_Map_Object_Saver & mos = *get_mos(L);
-	Game & game = get_game(L);
-
-	uint32_t idx = mos.get_object_file_index(*m_biptr->get(game));
-	PERS_UINT32("file_index", idx);
-
-	L_MapObject::__persist(L);
-}
-void L_BaseImmovable::__unpersist(lua_State * L) {
-	uint32_t idx;
-	UNPERS_UINT32("file_index", idx);
-	Map_Map_Object_Loader & mol = *get_mol(L);
-
-	m_biptr = new OPtr<BaseImmovable>(&mol.get<BaseImmovable>(idx));
-
-	L_MapObject::__unpersist(L);
-}
 
 /*
  ==========================================================
@@ -278,12 +285,6 @@ int L_BaseImmovable::get_name(lua_State * L) {
  C METHODS
  ==========================================================
  */
-BaseImmovable * L_BaseImmovable::m_get(Game & game, lua_State * L) {
-	BaseImmovable * o = m_biptr->get(game);
-	if (!o)
-		report_error(L, "BaseImmovable no longer exists!");
-	return o;
-}
 
 
 
@@ -306,13 +307,6 @@ const PropertyType<L_PlayerImmovable> L_PlayerImmovable::Properties[] = {
 	PROP_RO(L_PlayerImmovable, player),
 	{0, 0, 0},
 };
-
-void L_PlayerImmovable::__persist(lua_State * L) {
-	L_BaseImmovable::__persist(L);
-}
-void L_PlayerImmovable::__unpersist(lua_State * L) {
-	L_BaseImmovable::__unpersist(L);
-}
 
 /*
  ==========================================================
@@ -342,12 +336,6 @@ int L_PlayerImmovable::get_player(lua_State * L) {
  C METHODS
  ==========================================================
  */
-PlayerImmovable * L_PlayerImmovable::m_get(Game & game, lua_State * L) {
-	PlayerImmovable * o = static_cast<PlayerImmovable *>(m_biptr->get(game));
-	if (!o)
-		report_error(L, "PlayerImmovable no longer exists!");
-	return o;
-}
 #define GET_INDEX(name, capname) \
 Ware_Index L_PlayerImmovable::m_get_ ## name ## _index \
 	(lua_State * L, PlayerImmovable * i, const std::string & what) \
@@ -428,12 +416,7 @@ int L_Flag::add_ware(lua_State * L)
  C METHODS
  ==========================================================
  */
-Flag * L_Flag::m_get(Game & game, lua_State * L) {
-	Flag * o = static_cast<Flag *>(m_biptr->get(game));
-	if (!o)
-		report_error(L, "Flag no longer exists!");
-	return o;
-}
+
 
 /* RST
 Building
@@ -453,13 +436,6 @@ const PropertyType<L_Building> L_Building::Properties[] = {
 	PROP_RO(L_Building, building_type),
 	{0, 0, 0},
 };
-
-void L_Building::__persist(lua_State * L) {
-	L_PlayerImmovable::__persist(L);
-}
-void L_Building::__unpersist(lua_State * L) {
-	L_PlayerImmovable::__unpersist(L);
-}
 
 /*
  ==========================================================
@@ -493,12 +469,6 @@ int L_Building::get_building_type(lua_State * L) {
  C METHODS
  ==========================================================
  */
-Building * L_Building::m_get(Game & game, lua_State * L) {
-	Building * o = static_cast<Building *>(m_biptr->get(game));
-	if (!o)
-		report_error(L, "Building no longer exists!");
-	return o;
-}
 
 
 /* RST
@@ -655,13 +625,6 @@ GET_X(worker);
  C METHODS
  ==========================================================
  */
-Warehouse * L_Warehouse::m_get(Game & game, lua_State * L) {
-	Warehouse * o = static_cast<Warehouse *>(m_biptr->get(game));
-	if (!o)
-		report_error(L, "Warehouse no longer exists!");
-	return o;
-}
-
 
 
 
