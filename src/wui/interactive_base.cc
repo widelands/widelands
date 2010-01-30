@@ -793,7 +793,7 @@ void Interactive_Base::roadb_remove_overlay()
 }
 
 
-bool Interactive_Base::handle_key(bool down, SDL_keysym code)
+bool Interactive_Base::handle_key(bool const down, SDL_keysym const code)
 {
 	switch (code.sym) {
 	case SDLK_PAGEUP:

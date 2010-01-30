@@ -401,7 +401,7 @@ int32_t Warehouse::get_priority
 	//  NOTE  warehouse really wants to have this ware.
 
 	// return 100, if type is a ware, or the warehouse has no request itself
-	if ((type == Request::WORKER) || (m_target_supply[ware_index] == 0))
+	if (type == Request::WORKER || m_target_supply[ware_index] == 0)
 		return 100;
 	int32_t const x =
 		(m_target_supply.at(ware_index) + 2 -
@@ -461,7 +461,7 @@ void Warehouse::init(Editor_Game_Base & egbase)
 				 	(worker_types_without_cost.at(i.current)))
 				m_next_worker_without_cost_spawn[i.current] = act_time;
 	}
-	m_next_military_act  =
+	m_next_military_act =
 		schedule_act
 			(ref_cast<Game, Editor_Game_Base>(egbase), 1000);
 	m_target_supply.resize(m_requests.size());
@@ -477,13 +477,11 @@ void Warehouse::init(Editor_Game_Base & egbase)
 	if (uint32_t const conquer_radius = get_conquers())
 		ref_cast<Game, Editor_Game_Base>(egbase).conquer_area
 			(Player_Area<Area<FCoords> >
-			 	(owner().player_number(),
+			 	(player.player_number(),
 			 	 Area<FCoords>
 			 	 	(egbase.map().get_fcoords(get_position()), conquer_radius)));
 
-	log
-		("Message: adding (wh) (%s) %i \n",
-		 type_name(), owner().player_number());
+	log("Message: adding (wh) (%s) %i \n", type_name(), player.player_number());
 	char message[2048];
 	snprintf
 		(message, sizeof(message),
@@ -491,7 +489,7 @@ void Warehouse::init(Editor_Game_Base & egbase)
 		 	("<p font-size=14 font-face=FreeSerif>A new %s was added to your "
 		 	 "economy.</p>"),
 		 descname().c_str());
-	owner().add_message
+	player.add_message
 		(ref_cast<Game, Editor_Game_Base>(egbase),
 		 create_message
 		 	("warehouse",

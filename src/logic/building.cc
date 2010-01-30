@@ -175,13 +175,6 @@ Building_Descr::Building_Descr
 }
 
 
-/*
-===============
-Create a building of this type. Does not perform any sanity checks.
-
-if old != 0 this is an enhancing
-===============
-*/
 Building & Building_Descr::create
 	(Editor_Game_Base     &       egbase,
 	 Player               &       owner,

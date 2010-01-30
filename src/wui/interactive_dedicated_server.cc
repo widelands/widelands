@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2009-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -137,6 +137,7 @@ bool Interactive_DServer::handle_key(bool const down, SDL_keysym const code)
 			return true;
 
 		case SDLK_RETURN:
+		case SDLK_KP_ENTER:
 			if (!m_chatProvider | !m_chatenabled)
 				break;
 

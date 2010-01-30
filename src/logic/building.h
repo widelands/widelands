@@ -80,6 +80,13 @@ struct Building_Descr : public Map_Object_Descr {
 		m_enhancements.insert(i);
 	}
 
+	/// Create a building of this type in the game. Calls init, which does
+	/// different things for different types of buildings (such as conquering
+	/// land and requesting things). Therefore this must not be used to allocate
+	/// a building during savegame loading. (It would cause many bugs.)
+	///
+	/// Does not perform any sanity checks.
+	/// If old != 0 this is an enhancing.
 	Building & create
 		(Editor_Game_Base &,
 		 Player &,

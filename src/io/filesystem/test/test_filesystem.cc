@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,10 +27,8 @@
 
 BOOST_AUTO_TEST_SUITE(FileSystemTests)
 
-#define TEST_CANONICALIZE_NAME(root, path, expected)\
-	BOOST_CHECK_EQUAL(\
-		RealFSImpl(root).FS_CanonicalizeName(path), \
-		expected);
+#define TEST_CANONICALIZE_NAME(root, path, expected)                          \
+   BOOST_CHECK_EQUAL(RealFSImpl(root).FS_CanonicalizeName(path), expected);   \
 
 BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
 	setenv("HOME", "/home/test", 1);

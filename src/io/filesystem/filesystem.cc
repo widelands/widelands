@@ -185,7 +185,7 @@ std::string FileSystem::GetHomedir()
  */
 template<typename Inserter>
 static void FS_Tokenize
-	(std::string const & path, char filesep, Inserter components)
+	(std::string const & path, char const filesep, Inserter components)
 {
 	std::string::size_type pos;  //  start of token
 	std::string::size_type pos2; //  next filesep character
@@ -232,33 +232,29 @@ std::string FileSystem::FS_CanonicalizeName(std::string path) const {
 	}
 #endif
 
-	FS_Tokenize(path, m_filesep,
-		std::inserter(components, components.begin()));
+	FS_Tokenize(path, m_filesep, std::inserter(components, components.begin()));
 
 	//tilde expansion
 	if (!components.empty() && *components.begin() == "~") {
 		components.erase(components.begin());
-		FS_Tokenize(GetHomedir(), m_filesep,
-			std::inserter(components, components.begin()));
-	}
-
-	//make relative paths absolute (so that "../../foo" can work)
-	else if (!pathIsAbsolute(path)) {
+		FS_Tokenize
+			(GetHomedir(),
+			 m_filesep,
+			 std::inserter(components, components.begin()));
+	} else if (!pathIsAbsolute(path))
+		//  make relative paths absolute (so that "../../foo" can work)
 		FS_Tokenize
 			(m_root.empty() ? getWorkingDirectory() : m_root, m_filesep,
-			std::inserter(components, components.begin()));
-	}
+			 std::inserter(components, components.begin()));
 
 	//clean up the path
 	for (i = components.begin(); i != components.end();) {
-		const char * str = (*i).c_str();
-		if (*str == '.')
-		{
+		char const * str = i->c_str();
+		if (*str == '.') {
 			++str;
 
 			//remove single dot
-			if (*str == '\0')
-			{
+			if (*str == '\0') {
 				i = components.erase(i);
 				continue;
 			}
@@ -277,14 +273,15 @@ std::string FileSystem::FS_CanonicalizeName(std::string path) const {
 	std::string canonpath;
 	canonpath.reserve(path.length());
 #ifndef WIN32
-	for (i = components.begin(); i != components.end(); ++i)
-	{
+	for (i = components.begin(); i != components.end(); ++i) {
 		canonpath.push_back('/');
 		canonpath += *i;
 	}
 #else
-	for (i = components.begin(); i != components.end(); ++i)
-		canonpath += *i + "\\";
+	for (i = components.begin(); i != components.end(); ++i) {
+		canonpath += *i;
+		canonpath += '\\';
+	}
 
 	canonpath.erase(canonpath.end() - 1); //remove trailing slash
 #endif
