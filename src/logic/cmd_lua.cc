@@ -33,7 +33,7 @@ void Cmd_Lua::execute (Game & game) {
 		if (!m_optional) // this is only critical if this is not optional
 			throw wexception("%s", e.what());
 	} catch (LuaError & e) {
-		throw wexception("%s", e.what());
+		throw game_data_error("lua: %s", e.what());
 	}
 }
 

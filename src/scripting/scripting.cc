@@ -84,8 +84,11 @@ class LuaInterface_Impl : public LuaInterface {
  * Private functions
  *************************/
 int LuaInterface_Impl::m_check_for_errors(int rv) {
-	if (rv)
-		throw LuaError(luaL_checkstring(m_L, -1));
+	if (rv) {
+		std::string err = luaL_checkstring(m_L, -1);
+		lua_pop(m_L, 1);
+		throw LuaError(err);
+	}
 	return rv;
 }
 

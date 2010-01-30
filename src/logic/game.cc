@@ -477,7 +477,7 @@ bool Game::run
 			map().set_scenario_player_ai   (p, player_ai);
 		}
 
-		// Run the init script, if the map provides on.
+		// Run the init script, if the map provides one.
 		enqueue_command(new Cmd_Lua(get_gametime(), "map", "init", true));
 
 		// Everything prepared, send the first trigger event
