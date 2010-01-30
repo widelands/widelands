@@ -44,6 +44,8 @@ struct LuaValueError : public LuaError {
  * Easy handling of LuaCoroutines
  */
 struct LuaCoroutine {
+	virtual ~LuaCoroutine() {}
+
 	virtual int get_status() = 0;
 	virtual int resume    () = 0;
 };
@@ -68,6 +70,8 @@ struct LuaState {
  * This is the thin class that is used to execute code
  */
 struct LuaInterface {
+	virtual ~LuaInterface() {}
+
 	virtual LuaState * interpret_string(std::string) = 0;
 	virtual LuaState * interpret_file(std::string) = 0;
 	virtual std::string const & get_last_error() const = 0;
