@@ -44,7 +44,7 @@ static bool m_filename_to_short(const std::string & s) {
 static bool m_is_lua_file(const std::string & s) {
 	std::string ext = s.substr(s.size() - 4, s.size());
 	// std::transform fails on older system, therefore we use an explicit loop
-	for(uint32_t i = 0; i < ext.size(); i++)
+	for (uint32_t i = 0; i < ext.size(); i++)
 		ext[i] = std::tolower(ext[i]);
 	return (ext == ".lua");
 }
@@ -105,8 +105,7 @@ throw (_wexception)
 
 	ScriptContainer & p = egbase.lua().get_scripts_for("map");
 
-	if (p.size())
-		fs.EnsureDirectoryExists("scripting");
+	fs.EnsureDirectoryExists("scripting");
 
 	for (ScriptContainer::iterator i = p.begin(); i != p.end(); i++) {
 		std::string fname = "scripting/";
