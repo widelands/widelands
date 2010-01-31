@@ -235,16 +235,16 @@ private:
 #undef CASTED_M_GET
 
 class L_Field : public L_MapModuleClass {
-	Widelands::FCoords m_c;
+	Widelands::Coords m_c;
 public:
 	LUNA_CLASS_HEAD(L_Field);
 
 	L_Field() {}
-	L_Field
-		(Widelands::Coordinate x, Widelands::Coordinate y,
-		 Widelands::Field * f) : m_c(Widelands::Coords(x, y), f) {}
+	L_Field (Widelands::Coordinate x, Widelands::Coordinate y) :
+		m_c(Widelands::Coords(x, y)) {}
+	L_Field (Widelands::Coords c) : m_c(c) {}
 	L_Field(lua_State * L);
-	~L_Field() {}
+	virtual ~L_Field() {}
 
 	virtual void __persist(lua_State * L);
 	virtual void __unpersist(lua_State * L);
@@ -277,7 +277,8 @@ public:
 	/*
 	 * C methods
 	 */
-	inline Widelands::FCoords & coords() {return m_c;}
+	inline const Widelands::Coords & coords() {return m_c;}
+	const Widelands::FCoords fcoords(lua_State * L);
 
 private:
 	int m_region(lua_State * L, uint32_t radius);

@@ -131,11 +131,11 @@ int L_Player::place_flag(lua_State * L) {
 
 	Flag * f;
 	if (not force) {
-		f = m_get(get_game(L)).build_flag(c->coords());
+		f = m_get(get_game(L)).build_flag(c->fcoords(L));
 		if (!f)
 			return report_error(L, "Couldn't build flag!");
 	} else {
-		f = &m_get(get_game(L)).force_flag(c->coords());
+		f = &m_get(get_game(L)).force_flag(c->fcoords(L));
 	}
 
 	return to_lua<L_Flag>(L, new L_Flag(*f));
@@ -267,14 +267,12 @@ int L_Player::send_message(lua_State * L) {
 
 // TODO: document me, test me
 int L_Player::sees_field(lua_State * L) {
-	FCoords & c = (*get_user_class<L_Field>(L, 2))->coords();
 	Game & game = get_game(L);
-	Map & map = game.map();
-	Player & p = m_get(game);
 
-	Widelands::Map_Index const i = c.field - &map[0];
+	Widelands::Map_Index const i =
+		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &game.map()[0];
 
-	lua_pushboolean(L, p.vision(i) > 1);
+	lua_pushboolean(L, m_get(game).vision(i) > 1);
 	return 1;
 }
 

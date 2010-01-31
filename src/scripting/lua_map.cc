@@ -665,9 +665,6 @@ L_Field::L_Field(lua_State * L) {
 	if (rv >= static_cast<uint32_t>(m.get_height()))
 		report_error(L, "y coordinate out of range!");
 	m_c.y = rv;
-	// TODO: setting the field seems to be not working! Do not
-	// rely on m_c field begin correct!
-	m_c = get_game(L).map().get_fcoords(m_c);
 }
 
 void L_Field::__persist(lua_State * L) {
@@ -675,7 +672,6 @@ void L_Field::__persist(lua_State * L) {
 }
 void L_Field::__unpersist(lua_State * L) {
 	UNPERS_INT32("x", m_c.x); UNPERS_INT32("y", m_c.y);
-	m_c = get_game(L).map().get_fcoords(m_c);
 }
 
 /*
@@ -690,7 +686,7 @@ int L_Field::get_y(lua_State * L) {lua_pushuint32(L, m_c.y); return 1;}
 
 // TODO: document me
 int L_Field::get_height(lua_State * L) {
-	lua_pushuint32(L, m_c.field->get_height());
+	lua_pushuint32(L, fcoords(L).field->get_height());
 	return 1;
 }
 int L_Field::set_height(lua_State * L) {
@@ -698,7 +694,7 @@ int L_Field::set_height(lua_State * L) {
 	if (height > MAX_FIELD_HEIGHT)
 		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
 
-	get_game(L).map().set_height(m_c, height);
+	get_game(L).map().set_height(fcoords(L), height);
 
 	return get_height(L);
 }
@@ -717,7 +713,8 @@ int L_Field::get_immovable(lua_State * L) {
 // TODO: document me
 int L_Field::get_terr(lua_State * L) {
 	Terrain_Descr & td =
-		get_game(L).map().world().terrain_descr(m_c.field->terrain_r());
+		get_game(L).map().world().terrain_descr
+			(fcoords(L).field->terrain_r());
 	lua_pushstring(L, td.name().c_str());
 	return 1;
 }
@@ -729,7 +726,7 @@ int L_Field::set_terr(lua_State * L) {
 	if (td == static_cast<Terrain_Index>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	map.change_terrain(TCoords<FCoords>(m_c, TCoords<FCoords>::R), td);
+	map.change_terrain(TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
 
 
 	lua_pushstring(L, name);
@@ -739,7 +736,8 @@ int L_Field::set_terr(lua_State * L) {
 // TODO: document me
 int L_Field::get_terd(lua_State * L) {
 	Terrain_Descr & td =
-		get_game(L).map().world().terrain_descr(m_c.field->terrain_d());
+		get_game(L).map().world().terrain_descr
+			(fcoords(L).field->terrain_d());
 	lua_pushstring(L, td.name().c_str());
 	return 1;
 }
@@ -754,16 +752,17 @@ int L_Field::set_terd(lua_State * L) {
 	if (td == static_cast<Terrain_Index>(-1))
 		report_error(L, "Unknown terrain '%s'", name);
 
-	map.change_terrain(TCoords<FCoords>(m_c, TCoords<FCoords>::D), td);
+	map.change_terrain
+		(TCoords<FCoords> (fcoords(L), TCoords<FCoords>::D), td);
 
 	lua_pushstring(L, name);
 	return 1;
 }
 
 #define GET_X_NEIGHBOUR(X) int L_Field::get_ ##X(lua_State* L) { \
-   FCoords n; \
+   Coords n; \
    get_game(L).map().get_ ##X(m_c, &n); \
-   to_lua<L_Field>(L, new L_Field(n.x, n.y, n.field)); \
+   to_lua<L_Field>(L, new L_Field(n.x, n.y)); \
 	return 1; \
 }
 // TODO: document me
@@ -812,14 +811,14 @@ int L_Field::m_region(lua_State * L, uint32_t radius)
 {
 	Map & map = get_game(L).map();
 	MapRegion<Area<FCoords> > mr
-		(map, Area<FCoords>(m_c, radius));
+		(map, Area<FCoords>(fcoords(L), radius));
 
 	lua_newtable(L);
 	uint32_t idx = 1;
 	do {
 		lua_pushuint32(L, idx++);
 		const FCoords & loc = mr.location();
-		to_lua<L_Field>(L, new L_Field(loc.x, loc.y, loc.field));
+		to_lua<L_Field>(L, new L_Field(loc.x, loc.y));
 		lua_settable(L, -3);
 	} while (mr.advance(map));
 
@@ -838,14 +837,16 @@ int L_Field::m_hollow_region
 	uint32_t idx = 1;
 	do {
 		lua_pushuint32(L, idx++);
-		const Coords & loc = mr.location();
-		to_lua<L_Field>(L, new L_Field(loc.x, loc.y, &map[loc]));
+		to_lua<L_Field>(L, new L_Field(mr.location()));
 		lua_settable(L, -3);
 	} while (mr.advance(map));
 
 	return 1;
 }
 
+const Widelands::FCoords L_Field::fcoords(lua_State * L) {
+	return get_game(L).map().get_fcoords(m_c);
+}
 
 /*
  * ========================================================================
@@ -870,7 +871,7 @@ static int L_create_immovable(lua_State * const L) {
 	// Check if the map is still free here
 	// TODO: this exact code is duplicated in worker.cc
 	if
-	 (BaseImmovable const * const imm = c->coords().field->get_immovable())
+	 (BaseImmovable const * const imm = c->fcoords(L).field->get_immovable())
 		if (imm->get_size() >= BaseImmovable::SMALL)
 			return report_error(L, "Node is no longer free!");
 
