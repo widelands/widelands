@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,6 @@
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "game_io/game_saver.h"
-#include "i18n.h"
 #include "interactive_gamebase.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "profile/profile.h"
@@ -57,8 +56,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		(&parent, &registry, WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
 	m_ls     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT),
 	m_editbox
-		(this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+		(*this, HSPACING, EDITBOX_Y, LIST_WIDTH, EDITBOX_HEIGHT),
 	m_name_label
 		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name: "),  UI::Align_CenterLeft),
 	m_name
@@ -68,24 +66,13 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	m_gametime
 		(this, DESCRIPTION_X, 60, 0, 20, " ",              UI::Align_CenterLeft),
 	m_button_ok
-		(this,
-		 DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 &Game_Main_Menu_Save_Game::clicked_ok, *this,
-		 _("OK"),
-		 std::string(),
-		 false),
+		(*this, DESCRIPTION_X, OK_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT),
 	m_button_cancel
-		(this,
-		 DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-		 &Game_Main_Menu_Save_Game::die, *this,
-		 _("Cancel")),
+		(*this, DESCRIPTION_X, CANCEL_Y, DESCRIPTION_WIDTH, BUTTON_HEIGHT),
 	m_curdir(SaveHandler::get_base_dir())
 {
 	m_ls.selected.set(this, &Game_Main_Menu_Save_Game::selected);
 	m_ls.double_clicked.set(this, &Game_Main_Menu_Save_Game::double_clicked);
-	m_editbox.changed.set(this, &Game_Main_Menu_Save_Game::edit_box_changed);
 
 	fill_list();
 
@@ -133,7 +120,9 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 /**
  * An Item has been doubleclicked
  */
-void Game_Main_Menu_Save_Game::double_clicked(uint32_t) {clicked_ok();}
+void Game_Main_Menu_Save_Game::double_clicked(uint32_t) {
+	m_button_ok.clicked();
+}
 
 /*
  * fill the file list
@@ -176,6 +165,24 @@ void Game_Main_Menu_Save_Game::edit_box_changed() {
 	m_button_ok.set_enabled(m_editbox.text().size());
 }
 
+
+bool Game_Main_Menu_Save_Game::EditBox::handle_key
+	(bool const down, SDL_keysym const code)
+{
+	switch (code.sym) {
+	case SDLK_RETURN:
+	case SDLK_KP_ENTER:
+		if (down and text().size()) {
+			play_click();
+			ref_cast<Game_Main_Menu_Save_Game, UI::Panel>(*get_parent())
+			.m_button_ok.clicked();
+		}
+		return true;
+	default:
+		break;
+	}
+	return UI::EditBox::handle_key(down, code);
+}
 
 static void dosave
 	(Interactive_GameBase & igbase, std::string const & complete_filename)
@@ -237,16 +244,19 @@ private:
 called when the ok button has been clicked
 ===========
 */
-void Game_Main_Menu_Save_Game::clicked_ok() {
+void Game_Main_Menu_Save_Game::Ok::clicked() {
+	Game_Main_Menu_Save_Game & menu =
+		ref_cast<Game_Main_Menu_Save_Game, UI::Panel>(*get_parent());
+	Interactive_GameBase & igbase = menu.igbase();
 	std::string const complete_filename =
-		igbase().game().save_handler().create_file_name
-			(m_curdir, m_editbox.text());
+		igbase.game().save_handler().create_file_name
+			(menu.m_curdir, menu.m_editbox.text());
 
 	//  Check if file exists. If it does, show a warning.
 	if (g_fs->FileExists(complete_filename)) {
-		new SaveWarnMessageBox(*this, complete_filename);
+		new SaveWarnMessageBox(menu, complete_filename);
 	} else {
-		dosave(igbase(), complete_filename);
-		die();
+		dosave(igbase, complete_filename);
+		menu.die();
 	}
 }
