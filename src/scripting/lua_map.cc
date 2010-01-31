@@ -665,7 +665,9 @@ L_Field::L_Field(lua_State * L) {
 	if (rv >= static_cast<uint32_t>(m.get_height()))
 		report_error(L, "y coordinate out of range!");
 	m_c.y = rv;
-	m_c.field = &get_game(L).map()[m_c];
+	// TODO: setting the field seems to be not working! Do not
+	// rely on m_c field begin correct!
+	m_c = get_game(L).map().get_fcoords(m_c);
 }
 
 void L_Field::__persist(lua_State * L) {
@@ -673,7 +675,7 @@ void L_Field::__persist(lua_State * L) {
 }
 void L_Field::__unpersist(lua_State * L) {
 	UNPERS_INT32("x", m_c.x); UNPERS_INT32("y", m_c.y);
-	m_c.field = &get_game(L).map()[m_c];
+	m_c = get_game(L).map().get_fcoords(m_c);
 }
 
 /*
@@ -703,7 +705,7 @@ int L_Field::set_height(lua_State * L) {
 
 // TODO: document me
 int L_Field::get_immovable(lua_State * L) {
-	BaseImmovable * bi = m_c.field->get_immovable();
+	BaseImmovable * bi = get_game(L).map().get_immovable(m_c);
 
 	if (!bi)
 		return 0;
