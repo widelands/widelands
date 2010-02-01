@@ -27,7 +27,7 @@ corout = coroutine.create(function() coroutine.yield("What cool is that?") end)
 function check_persistence()
 coroutine.yield(wl.game.get_time() + 2000)
 
-require "lunit"
+use("map", "lunit")
 lunit.import "assertions"
 
 print("###################### CHECKING FOR CORRECT PERSISTENCE")

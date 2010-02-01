@@ -1,10 +1,9 @@
-require 'lunit'
-
-lunit.import "assertions"
-
 function include(s) 
    use("map", s)
 end
+
+include "lunit"
+lunit.import "assertions"
 
 include "test_field"
 include "test_immovables"
