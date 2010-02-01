@@ -19,10 +19,13 @@
 
 #include <lua.hpp>
 
+#include "economy/flag.h"
+#include "events/event_message_box.h"
+#include "events/event_message_box_message_box.h"
 #include "logic/cmd_luafunction.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "economy/flag.h"
+#include "wui/interactive_player.h"
 
 #include "c_utils.h"
 #include "coroutine_impl.h"
@@ -68,6 +71,7 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, place_flag),
 	METHOD(L_Player, place_building),
 	METHOD(L_Player, send_message),
+	METHOD(L_Player, message_box),
 	METHOD(L_Player, sees_field),
 	METHOD(L_Player, allow_buildings),
 	METHOD(L_Player, forbid_buildings),
@@ -291,6 +295,93 @@ int L_Player::send_message(lua_State * L) {
 			popup);
 
 	return 0;
+}
+
+/* RST
+	.. method:: message_box(t, m[, opts])
+
+		Shows a message box to the player. While the message box is displayed the
+		game will not continue. Use this carefully and prefer
+		:meth:`send_message` because it is less interruptive, but nevertheless
+		for a set of narrative messages with map movements, this is still useful.
+
+		:arg t: title of the message
+		:type t: :class:`string`
+
+		:arg m: text of the message
+		:type m: :class:`string`
+
+		Opts is a table of optional arguments and can be omitted. If it
+		exist it must contain string/value pairs of the following type:
+
+		:arg loc: The main view will be centered on this field when the box
+			pops up. Default: no location attached to message
+		:type loc: :class:`wl.map.Field`
+
+		:arg w: width of message box in pixels. Default: 400.
+		:type w: :class:`integer`
+		:arg h: width of message box in pixels. Default: 300.
+		:type h: :class:`integer`
+		:arg posx: x position of window in pixels. Default: centered
+		:type posx: :class:`integer`
+		:arg posy: y position of window in pixels. Default: centered
+		:type posy: :class:`integer`
+
+		:arg button_text: Text on the button. Default: OK.
+		:type button_text: :class:`string`
+
+		:returns: :const:`nil`
+*/
+// TODO: this is untested. But can this be tested?
+int L_Player::message_box(lua_State * L) {
+	Game & game = get_game(L);
+	Event_Message_Box e("temp", Event::INIT);
+
+	e.set_is_modal(true);
+	e.set_window_title(luaL_checkstring(L, 2));
+	e.set_text(luaL_checkstring(L, 3));
+	e.set_dimensions(400, 300);
+	e.set_button_name(0, "OK");
+	e.set_nr_buttons(1);
+
+	if (lua_gettop(L) == 4) {
+
+		lua_getfield(L, -1, "posx");
+		if (not lua_isnil(L, -1))
+			e.set_pos(luaL_checkuint32(L, -1), e.get_posy());
+		lua_pop(L, 1);
+
+		lua_getfield(L, -1, "posy");
+		if (not lua_isnil(L, -1))
+			e.set_pos(e.get_posx(), luaL_checkuint32(L, -1));
+		lua_pop(L, 1);
+
+		lua_getfield(L, -1, "w");
+		if (not lua_isnil(L, -1))
+			e.set_dimensions(luaL_checkuint32(L, -1), e.get_h());
+		lua_pop(L, 1);
+
+		lua_getfield(L, -1, "h");
+		if (not lua_isnil(L, -1))
+			e.set_dimensions(e.get_w(), luaL_checkuint32(L, -1));
+		lua_pop(L, 1);
+
+		lua_getfield(L, -1, "button_text");
+		if (not lua_isnil(L, -1))
+			e.set_button_name(0, luaL_checkstring(L, -1));
+		lua_pop(L, 1);
+
+		lua_getfield(L, 4, "loc");
+		if (not lua_isnil(L, -1)) {
+			Coords c = (*get_user_class<L_Field>(L, -1))->coords();
+			game.get_ipl()->move_view_to(c);
+		}
+		lua_pop(L, 1);
+	}
+
+	e.run(game);
+
+	return 1;
 }
 
 // TODO: document me, test me

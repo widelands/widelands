@@ -68,6 +68,7 @@ public:
 	int place_flag(lua_State * L);
 	int place_building(lua_State * L);
 	int send_message(lua_State * L);
+	int message_box(lua_State * L);
 	int sees_field(lua_State * L);
 	int allow_buildings(lua_State * L);
 	int forbid_buildings(lua_State * L);
