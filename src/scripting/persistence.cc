@@ -63,30 +63,27 @@ static bool m_add_object_to_not_persist
 		name = name.substr(pos + 1);
 
 		lua_getglobal(L, table.c_str()); // table object table
+		assert(!lua_isnil(L, -1));
+
+		lua_getfield(L, -1, name.c_str()); // table object table function
 		if (lua_isnil(L, -1)) {
 			lua_pop(L, 1);
 			return false;
 		}
-		lua_getfield(L, -1, name.c_str()); // table object table function
-		if (lua_isnil(L, -1)) {
-			lua_pop(L, 2);
-			return false;
-		}
+
 		lua_pushint32(L, nidx); // table object table function int
 		lua_settable(L, 1); //  newtable[function] = int
 		lua_pop(L, 1); // pop tabltable
-		return true;
 	} else {
 		lua_getglobal(L, name.c_str()); // stack: table object value
 		if (lua_isnil(L, -1)) {
 			lua_pop(L, 1);
 			return false;
-		} else {
-			lua_pushint32(L, nidx); // stack: table object value int
-			lua_settable(L, 1); //  table[symbol] = integer
-			return true;
 		}
+		lua_pushint32(L, nidx); // stack: table object value int
+		lua_settable(L, 1); //  table[symbol] = integer
 	}
+	return true;
 }
 
 
@@ -156,9 +153,8 @@ uint32_t persist_object
 
 	// Push objects that should not be touched while persisting into the empty
 	// table at stack position 1
-	for (uint32_t i = 0, idx = 1; globals[i]; i++)
-		if (m_add_object_to_not_persist(L, globals[i], idx))
-			++idx;
+	for (uint32_t i = 0; globals[i]; i++)
+		m_add_object_to_not_persist(L, globals[i], i + 1);
 
 
 	DataWriter dw(fw);
