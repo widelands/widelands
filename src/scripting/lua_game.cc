@@ -20,6 +20,8 @@
 #include <lua.hpp>
 
 #include "logic/cmd_luafunction.h"
+#include "logic/player.h"
+#include "logic/tribe.h"
 #include "economy/flag.h"
 
 #include "c_utils.h"
@@ -67,10 +69,13 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, place_building),
 	METHOD(L_Player, send_message),
 	METHOD(L_Player, sees_field),
+	METHOD(L_Player, allow_buildings),
+	METHOD(L_Player, forbid_buildings),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RO(L_Player, number),
+	PROP_RO(L_Player, allowed_buildings),
 	{0, 0, 0},
 };
 
@@ -94,6 +99,29 @@ void L_Player::__unpersist(lua_State * L) {
 */
 int L_Player::get_number(lua_State * L) {
 	lua_pushuint32(L, m_pl);
+	return 1;
+}
+/* RST
+	.. attribute:: allowed_buildings
+
+		(RO) an array with name:bool values with all buildings
+		that are currently allowed for this player. Note that
+		you can not enable/forbid a building by setting the value. Use
+		:meth:`allow_buildings` or :meth:`forbid_buildings` for that.
+*/
+int L_Player::get_allowed_buildings(lua_State * L) {
+	Game & game = get_game(L);
+	Player & p = m_get(game);
+	const Tribe_Descr & t = p.tribe();
+
+	lua_newtable(L);
+	for
+		(Building_Index i = Building_Index::First(); i < t.get_nrbuildings(); ++i)
+	{
+		lua_pushstring(L, t.get_building_descr(i)->name().c_str());
+		lua_pushboolean(L, p.is_building_type_allowed(i));
+		lua_settable(L, -3);
+	}
 	return 1;
 }
 
@@ -276,12 +304,82 @@ int L_Player::sees_field(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. method:: allow_buildings(what)
+
+		This method disables or enables buildings to build for the player. What
+		can either be the single string "all" or a list of strings containing
+		the names of the buildings that are allowed.
+
+		:see: :meth:`forbid_buildings`
+
+		:arg what: either "all" or an array containing the names of the allowed
+			buildings
+		:returns: :const:`nil`
+*/
+int L_Player::allow_buildings(lua_State * L) {
+	return m_allow_forbid_buildings(L, true);
+}
+
+/* RST
+	.. method:: forbid_buildings(what)
+
+		See :meth:`allow_buildings` for arguments. This is the opposite function.
+
+		:arg what: either "all" or an array containing the names of the allowed
+			buildings
+		:returns: :const:`nil`
+*/
+int L_Player::forbid_buildings(lua_State * L) {
+	return m_allow_forbid_buildings(L, false);
+}
+
+
 /*
  ==========================================================
  C METHODS
  ==========================================================
  */
+void L_Player::m_parse_building_list
+	(lua_State * L, const Tribe_Descr & tribe, std::vector<Building_Index> & rv)
+{
+	if (lua_isstring(L, -1)) {
+		std::string opt = luaL_checkstring(L, -1);
+		if (opt != "all")
+			report_error(L, "'%s' was not understood as argument!", opt.c_str());
+		for
+			(Building_Index i = Building_Index::First();
+			 i < tribe.get_nrbuildings(); ++i)
+				rv.push_back(i);
+	} else {
+		// array of strings argument
+		luaL_checktype(L, -1, LUA_TTABLE);
 
+		lua_pushnil(L);
+		while (lua_next(L, -2) != 0) {
+			const char * name = luaL_checkstring(L, -1);
+			Building_Index i = tribe.building_index(name);
+			if (i == Building_Index::Null())
+				report_error(L, "Unknown building type: '%s'", name);
+
+			rv.push_back(i);
+
+			lua_pop(L, 1); // pop value
+		}
+	}
+}
+int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
+{
+	Player & p = m_get(get_game(L));
+
+	std::vector<Building_Index> houses;
+	m_parse_building_list(L, p.tribe(), houses);
+
+	container_iterate_const(std::vector<Building_Index>, houses, i)
+		p.allow_building_type(*i.current, allow);
+
+	return 0;
+}
 
 
 /*

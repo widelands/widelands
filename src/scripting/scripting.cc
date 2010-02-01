@@ -36,6 +36,8 @@
 // TODO: make pickling independet of OS by using widelands Stream*
 
 // TODO: get rid of LuaCmd. Only LuaFunction should be kept alife
+// TODO: add support for gettext in lua
+// TODO: add a lua-xgettext like procedure for lua
 
 /*
 ============================================

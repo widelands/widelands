@@ -22,9 +22,13 @@
 
 #include <lua.hpp>
 
-#include "logic/player.h"
+#include "logic/building.h"
 
 #include "luna.h"
+
+namespace Widelands {
+	struct Tribe_Descr;
+};
 
 /*
  * Base class for all classes in wl.game
@@ -56,6 +60,7 @@ public:
 	 * Properties
 	 */
 	int get_number(lua_State * L);
+	int get_allowed_buildings(lua_State * L);
 
 	/*
 	 * Lua methods
@@ -64,12 +69,19 @@ public:
 	int place_building(lua_State * L);
 	int send_message(lua_State * L);
 	int sees_field(lua_State * L);
+	int allow_buildings(lua_State * L);
+	int forbid_buildings(lua_State * L);
+
 
 	/*
 	 * C methods
 	 */
 private:
 	Widelands::Player & m_get(Widelands::Game & game) {return game.player(m_pl);}
+	void m_parse_building_list
+		(lua_State *, const Widelands::Tribe_Descr &,
+		 std::vector<Widelands::Building_Index> &);
+	int m_allow_forbid_buildings(lua_State * L, bool);
 };
 
 void luaopen_wlgame(lua_State *);

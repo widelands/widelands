@@ -23,10 +23,11 @@
 #include "logic/checkstep.h"
 #include "logic/findimmovable.h"
 #include "logic/immovable.h"
-#include "logic/mapregion.h"
 #include "logic/maphollowregion.h"
-#include "logic/widelands_geometry.h"
+#include "logic/mapregion.h"
+#include "logic/player.h"
 #include "logic/warelist.h"
+#include "logic/widelands_geometry.h"
 
 #include "c_utils.h"
 #include "lua_game.h"
