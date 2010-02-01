@@ -26,6 +26,7 @@
 #include "lua_debug.h"
 #include "lua_game.h"
 #include "lua_map.h"
+#include "lua_globals.h"
 #include "coroutine_impl.h"
 #include "c_utils.h"
 
@@ -130,6 +131,7 @@ LuaInterface_Impl::LuaInterface_Impl
 	}
 
 	// Now our own
+	luaopen_globals(m_L);
 	luaopen_wldebug(m_L);
 	luaopen_wlmap(m_L);
 	luaopen_wlgame(m_L);
@@ -177,7 +179,7 @@ static const char * m_persistent_globals[] = {
 	"os", "package", "pairs", "pcall", "print", "rawequal",
 	"rawget", "rawset", "require", "select", "setfenv", "setmetatable",
 	"table", "tonumber", "tostring", "type", "unpack", "wl", "xpcall",
-	"string", 0
+	"string", "use", 0
 };
 void LuaInterface_Impl::read_global_env
 	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,

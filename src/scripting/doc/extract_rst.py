@@ -11,6 +11,7 @@ pairs = (
     ("../lua_map.cc", "source/wl_map.rst"),
     ("../lua_game.cc", "source/wl_game.rst"),
     ("../lua_debug.cc", "source/wl_debug.rst"),
+    ("../lua_globals.cc", "source/globals.rst"),
 )
 
 def extract_rst(inname, outname=None):
