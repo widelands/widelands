@@ -51,6 +51,21 @@ access to other scripts in other locations, localisation features and more.
  * ========================================================================
  */
 /* RST
+	.. function:: set_textdomain(domain)
+
+		Sets the textdomain for all further calls to :func:`_`.
+
+		:arg domain: The textdomain
+		:type domain: :class:`string`
+		:returns: :const:`nil`
+*/
+static int L_set_textdomain(lua_State * L) {
+	luaL_checkstring(L, -1);
+	lua_setglobal(L, "__TEXTDOMAIN");
+	return 0;
+}
+
+/* RST
 	.. function:: _(str)
 
 		This peculiar function is used to translate texts in your scenario into
@@ -68,7 +83,14 @@ access to other scripts in other locations, localisation features and more.
 		:returns: :const:`nil`
 */
 static int L__(lua_State * L) {
-	lua_pushstring(L, i18n::translate(luaL_checkstring(L, -1)));
+	lua_getglobal(L, "__TEXTDOMAIN");
+
+	if (not lua_isnil(L, -1)) {
+		i18n::Textdomain dom(luaL_checkstring(L, -1));
+		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
+	} else {
+		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
+	}
 	return 1;
 }
 
@@ -89,8 +111,8 @@ static int L__(lua_State * L) {
 		:returns: :const:`nil`
 */
 static int L_use(lua_State * L) {
-	const char* ns = luaL_checkstring(L, -2);
-	const char* script = luaL_checkstring(L, -1);
+	const char * ns = luaL_checkstring(L, -2);
+	const char * script = luaL_checkstring(L, -1);
 
 	// remove our argument so that the executed script gets a clear stack
 	lua_pop(L, 2);
@@ -101,6 +123,7 @@ static int L_use(lua_State * L) {
 }
 
 const static struct luaL_reg globals [] = {
+	{"set_textdomain", &L_set_textdomain},
 	{"use", &L_use},
 	{"_", &L__},
 	{0, 0}
