@@ -180,7 +180,7 @@ static const char * m_persistent_globals[] = {
 	"os", "package", "pairs", "pcall", "print", "rawequal",
 	"rawget", "rawset", "require", "select", "setfenv", "setmetatable",
 	"table", "tonumber", "tostring", "type", "unpack", "wl", "xpcall",
-	"string", "use", 0
+	"string", "use", "_", 0
 };
 void LuaInterface_Impl::read_global_env
 	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,

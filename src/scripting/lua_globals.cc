@@ -21,6 +21,7 @@
 
 #include "logic/game.h"
 
+#include "i18n.h"
 #include "scripting.h"
 #include "c_utils.h"
 
@@ -49,6 +50,28 @@ access to other scripts in other locations, localisation features and more.
  *                         MODULE FUNCTIONS
  * ========================================================================
  */
+/* RST
+	.. function:: _(str)
+
+		This peculiar function is used to translate texts in your scenario into
+		another language. The function takes a single string, grabs the
+		textdomain of your map (which is used the maps name) and returns the
+		translated string. Make sure that you part translatable and untranslatable
+		stuff:
+
+		.. code-block:: lua
+
+			s = "<p><br>" .. _ "Only this should be translated" .. "<br></p>"
+
+		:arg str: text to translate.
+		:type str: :class:`string`
+		:returns: :const:`nil`
+*/
+static int L__(lua_State * L) {
+	lua_pushstring(L, i18n::translate(luaL_checkstring(L, -1)));
+	return 1;
+}
+
 /* RST
 	.. function:: use(ns, script)
 
@@ -79,6 +102,7 @@ static int L_use(lua_State * L) {
 
 const static struct luaL_reg globals [] = {
 	{"use", &L_use},
+	{"_", &L__},
 	{0, 0}
 };
 
