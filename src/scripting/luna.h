@@ -49,17 +49,19 @@
 /*
  * Macros for helping with persistence and unpersistence
  */
-#define _PERS_INT(name, value, type) \
+#define _PERS_TYPE(name, value, type) \
    lua_push ##type(L, value); \
    lua_setfield(L, -2, name)
-#define PERS_INT32(name, value) _PERS_INT(name, value, int32)
-#define PERS_UINT32(name, value) _PERS_INT(name, value, uint32)
+#define PERS_INT32(name, value) _PERS_TYPE(name, value, int32)
+#define PERS_UINT32(name, value) _PERS_TYPE(name, value, uint32)
+#define PERS_STRING(name, value) _PERS_TYPE(name, value.c_str(), string)
 
-#define _UNPERS_INT(name, value, type) lua_getfield(L, -2, name); \
+#define _UNPERS_TYPE(name, value, type) lua_getfield(L, -2, name); \
    value = luaL_check ##type(L, -1); \
    lua_pop(L,1);
-#define UNPERS_INT32(name, value) _UNPERS_INT(name, value, int32)
-#define UNPERS_UINT32(name, value) _UNPERS_INT(name, value, uint32)
+#define UNPERS_INT32(name, value) _UNPERS_TYPE(name, value, int32)
+#define UNPERS_UINT32(name, value) _UNPERS_TYPE(name, value, uint32)
+#define UNPERS_STRING(name, value) _UNPERS_TYPE(name, value, string)
 
 
 

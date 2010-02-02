@@ -28,6 +28,7 @@
 
 namespace Widelands {
 	struct Tribe_Descr;
+	struct Objective;
 };
 
 /*
@@ -61,6 +62,7 @@ public:
 	 */
 	int get_number(lua_State * L);
 	int get_allowed_buildings(lua_State * L);
+	int get_objectives(lua_State * L);
 
 	/*
 	 * Lua methods
@@ -72,6 +74,7 @@ public:
 	int sees_field(lua_State * L);
 	int allow_buildings(lua_State * L);
 	int forbid_buildings(lua_State * L);
+	int add_objective(lua_State * L);
 
 
 	/*
@@ -83,6 +86,47 @@ private:
 		(lua_State *, const Widelands::Tribe_Descr &,
 		 std::vector<Widelands::Building_Index> &);
 	int m_allow_forbid_buildings(lua_State * L, bool);
+};
+
+class L_Objective : public L_GameModuleClass {
+	std::string m_name;
+
+public:
+	LUNA_CLASS_HEAD(L_Objective);
+
+	L_Objective(Widelands::Objective n);
+	L_Objective() : m_name("") {}
+	L_Objective(lua_State * L) {
+		report_error(L, "Cannot instantiate a '%s' directly!", className);
+	}
+
+	virtual void __persist(lua_State*);
+	virtual void __unpersist(lua_State*);
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State * L);
+	int get_title(lua_State * L);
+	int set_title(lua_State * L);
+	int get_body(lua_State * L);
+	int set_body(lua_State * L);
+	int get_visible(lua_State * L);
+	int set_visible(lua_State * L);
+	int get_done(lua_State * L);
+	int set_done(lua_State * L);
+
+	/*
+	 * Lua Methods
+	 */
+	int remove(lua_State * L);
+	int __eq(lua_State * L);
+
+	/*
+	 * C Methods
+	 */
+private:
+	Widelands::Objective & m_get(lua_State *, Widelands::Game &);
 };
 
 void luaopen_wlgame(lua_State *);

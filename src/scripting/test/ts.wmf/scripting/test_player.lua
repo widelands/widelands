@@ -81,3 +81,5 @@ function player_allow_buildings_tests:test_forbid_string_not_all()
    assert_error("String argument must be all", a)
 end
 
+use("map", "test_objectives")
+

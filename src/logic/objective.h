@@ -62,6 +62,12 @@ struct Objective : public Named, public Referencer<Trigger> {
 	//  Get the trigger that is attached to this
 	//  Trigger is created by Editor or on load
 	Trigger * get_trigger() const {return m_trigger;}
+	void set_done(bool t) { if(m_trigger) m_trigger->set_trigger(t); }
+	bool done() {
+		if(not m_trigger)
+			return false;
+		return m_trigger->is_set();
+	}
 
 	//  Setting the values below is only a good idea in editor.
 	void set_trigger(Trigger * const tr) {

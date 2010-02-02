@@ -23,8 +23,10 @@
 #include "events/event_message_box.h"
 #include "events/event_message_box_message_box.h"
 #include "logic/cmd_luafunction.h"
+#include "logic/objective.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "trigger/trigger_time.h"
 #include "wui/interactive_player.h"
 
 #include "c_utils.h"
@@ -75,11 +77,13 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, sees_field),
 	METHOD(L_Player, allow_buildings),
 	METHOD(L_Player, forbid_buildings),
+	METHOD(L_Player, add_objective),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RO(L_Player, number),
 	PROP_RO(L_Player, allowed_buildings),
+	PROP_RO(L_Player, objectives),
 	{0, 0, 0},
 };
 
@@ -124,6 +128,25 @@ int L_Player::get_allowed_buildings(lua_State * L) {
 	{
 		lua_pushstring(L, t.get_building_descr(i)->name().c_str());
 		lua_pushboolean(L, p.is_building_type_allowed(i));
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+	.. attribute:: objectives
+
+		(RO) A table of name -> :class:`wl.game.Objective`. You can change
+		the objectives in this table and it will be reflected in the game. To add
+		a new item, use :meth:`add_objective`.
+*/
+int L_Player::get_objectives(lua_State * L) {
+	Manager<Objective> const & mom = get_game(L).map().mom();
+
+	lua_newtable(L);
+	for (Manager<Objective>::Index i = 0; i < mom.size(); i++) {
+		lua_pushstring(L, mom[i].name().c_str());
+		to_lua<L_Objective>(L, new L_Objective(mom[i]));
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -425,6 +448,55 @@ int L_Player::forbid_buildings(lua_State * L) {
 	return m_allow_forbid_buildings(L, false);
 }
 
+/* RST
+	.. method:: add_objective(name, title, descr)
+
+		Add a new objective for this player. Will report an error, if an
+		Objective with the same name is already registered
+
+		:arg name: the name of the objective
+		:type name: :class:`string`
+		:arg title: the title of the objective that will be shown in the menu
+		:type title: :class:`string`
+		:arg body: the full text of the objective
+		:type body: :class:`string`
+
+		:returns: The objective class created
+		:rtype: :class:`wl.game.Objective`
+*/
+int L_Player::add_objective(lua_State * L) {
+	Game & game = get_game(L);
+	Player & p = m_get(game);
+	if (p.player_number() != game.get_ipl()->player_number())
+		return
+			report_error
+				(L, "Objectives can only be set for the interactive player");
+
+	Map * map = game.get_map();
+	Manager<Objective> & mom = map->mom();
+
+	std::string name = luaL_checkstring(L, 2);
+	if (mom[name] != 0)
+		return
+			report_error
+				(L, "An objective with the name '%s' already exists!", name.c_str()
+			);
+
+
+	Objective & o = *new Objective;
+	Trigger_Time & trigger = *new Trigger_Time(name.c_str());
+	map->mtm().register_new(trigger);
+
+	o.set_trigger(&trigger);
+	o.set_name(name);
+	o.set_visname(luaL_checkstring(L, 3));
+	o.set_descr(luaL_checkstring(L, 4));
+	o.set_is_visible(true);
+
+	game.get_map()->mom().register_new(o);
+
+	return to_lua<L_Objective>(L, new L_Objective(o));
+}
 
 /*
  ==========================================================
@@ -473,6 +545,163 @@ int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
 }
 
 
+
+/* RST
+Objective
+---------
+
+.. class:: Objective
+
+	This represents an Objective, a goal for the player in the game. This is
+	mainly for displaying to the user, but each objective also has a
+	:attr:`done` which can be set by the scripter to define if this is done. Use
+	:attr:`visible` to hide it from the user.
+*/
+const char L_Objective::className[] = "Objective";
+const MethodType<L_Objective> L_Objective::Methods[] = {
+	METHOD(L_Objective, remove),
+	METHOD(L_Objective, __eq),
+	{0, 0},
+};
+const PropertyType<L_Objective> L_Objective::Properties[] = {
+	PROP_RO(L_Objective, name),
+	PROP_RW(L_Objective, title),
+	PROP_RW(L_Objective, body),
+	PROP_RW(L_Objective, visible),
+	PROP_RW(L_Objective, done),
+	{0, 0, 0},
+};
+
+L_Objective::L_Objective(Widelands::Objective o) {
+	m_name = o.name();
+}
+
+void L_Objective::__persist(lua_State * L) {
+	PERS_STRING("name", m_name);
+}
+void L_Objective::__unpersist(lua_State * L) {
+	UNPERS_STRING("name", m_name);
+}
+
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: name
+
+		(RO) the internal name. You can reference this object via
+		:attr:`wl.game.Player.objectives` with :attr:`name` as key.
+*/
+int L_Objective::get_name(lua_State * L) {
+	Objective & o = m_get(L, get_game(L));
+	lua_pushstring(L, o.name().c_str());
+	return 1;
+}
+/* RST
+	.. attribute:: title
+
+		(RW) The line that is shown in the objectives menu
+*/
+int L_Objective::get_title(lua_State * L) {
+	Objective & o = m_get(L, get_game(L));
+	lua_pushstring(L, o.visname().c_str());
+	return 1;
+}
+int L_Objective::set_title(lua_State * L) {
+	Objective & o = m_get(L, get_game(L));
+	o.set_visname(luaL_checkstring(L, -1));
+	return 0;
+}
+/* RST
+	.. attribute:: body
+
+		(RW) The complete text of this objective. Can be Widelands RichText.
+*/
+int L_Objective::get_body(lua_State * L) {
+	Objective & o = m_get(L, get_game(L));
+	lua_pushstring(L, o.descr().c_str());
+	return 1;
+}
+int L_Objective::set_body(lua_State * L) {
+	Objective & o = m_get(L, get_game(L));
+	o.set_descr(luaL_checkstring(L, -1));
+	return 0;
+}
+/* RST
+	.. attribute:: visible
+
+		(RW) is this objective shown in the objectives menu
+*/
+int L_Objective::get_visible(lua_State * L) {
+	Objective & o = m_get(L, get_game(L));
+	lua_pushboolean(L, o.get_is_visible());
+	return 1;
+}
+int L_Objective::set_visible(lua_State * L) {
+	Objective & o = m_get(L, get_game(L));
+	o.set_is_visible(luaL_checkboolean(L, -1));
+	return 0;
+}
+/* RST
+	.. attribute:: done
+
+		(RW) defines if this objective is already fulfilled. If done is
+		:const`true`, the objective will not be shown to the user, no matter what
+		:attr:`visible` is set to.
+*/
+int L_Objective::get_done(lua_State * L) {
+	Objective & o = m_get(L, get_game(L));
+	lua_pushboolean(L, o.done());
+	return 1;
+}
+int L_Objective::set_done(lua_State * L) {
+	Objective & o = m_get(L, get_game(L));
+	o.set_done(luaL_checkboolean(L, -1));
+	return 0;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+int L_Objective::remove(lua_State * L) {
+	Game & g = get_game(L);
+	Objective & o = m_get(L, g); // will not return if object doesn't exist
+	std::string trigger_name = o.get_trigger()->name();
+	g.map().mom().remove(m_name);
+	g.map().mtm().remove(trigger_name);
+	return 0;
+}
+
+int L_Objective::__eq(lua_State * L) {
+	Manager<Objective> const & mom = get_game(L).map().mom();
+
+	const Objective * me = mom[m_name];
+	const Objective * you = mom[(*get_user_class<L_Objective>(L, 2))->m_name];
+
+	lua_pushboolean(L, (me && you) and (me == you));
+	return 1;
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+Objective & L_Objective::m_get(lua_State * L, Widelands::Game & g) {
+	Objective * o = g.map().mom()[m_name];
+	if (!o)
+		report_error
+			(L, "Objective with name '%s' doesn't exist!", m_name.c_str());
+	return *o;
+}
+
+
+
 /*
  * ========================================================================
  *                            MODULE FUNCTIONS
@@ -518,5 +747,6 @@ void luaopen_wlgame(lua_State * L) {
 	lua_pop(L, 1); // pop the table
 
 	register_class<L_Player>(L, "game");
+	register_class<L_Objective>(L, "game");
 }
 

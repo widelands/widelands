@@ -55,15 +55,21 @@ template <class T> T * * get_user_class(lua_State * const L, int narg);
 
 template <class T>
 PropertyType<T> const * m_lookup_property_in_metatable(lua_State * const L) {
+	// stack: table name
+
 	// Look up the key in the metatable
-	lua_getmetatable(L,  1);
-	lua_pushvalue   (L,  2);
-	lua_rawget      (L, -2);
+	lua_getmetatable(L,  1); // table name mt
+	lua_pushvalue   (L,  2); // table name mt name
+	lua_rawget      (L, -2); // table name mt mt_val
 
-	if (!lua_islightuserdata(L, -1))
-		return 0;
+	const PropertyType<T> * rv = 0;
 
-	return static_cast<const PropertyType<T> *>(lua_touserdata(L, -1));
+	if (lua_islightuserdata(L, -1))
+		rv = static_cast<const PropertyType<T> *>(lua_touserdata(L, -1));
+
+	lua_remove(L, -2); // table name mt_val
+
+	return rv;
 }
 
 /**
@@ -79,46 +85,50 @@ PropertyType<T> const * m_lookup_property_in_metatable(lua_State * const L) {
 template <class T>
 int m_property_getter(lua_State * const L) {
 	// Try a normal get on the table
-	lua_pushvalue(L, 2);
-	lua_rawget   (L, 1);
+	lua_pushvalue(L, 2); // table name name
+	lua_rawget   (L, 1); // table name val?
 
 	if (!lua_isnil(L, -1)) {
 		// Found in the table, we return it
 		return 1;
 	}
-
+	lua_pop(L, 1); // table name
 
 	const PropertyType<T>* list = m_lookup_property_in_metatable<T>(L);
-	// Not in metatable?, return nil
-	if (!list)
+	// stack: table name list
+
+	// Not in metatable?, return it
+	if (!list) {
 		return 1;
+	}
+	lua_pop(L, 1); // table name
 
 	T * * const obj = get_user_class<T>(L, 1);
+	// table name
+
 	// push value on top of the stack for the method call
-	lua_pushvalue(L, 2);
 	return ((*obj)->*(list->getter))(L);
 }
 
 template <class T>
 int m_property_setter(lua_State * const L) {
+	// stack: table name value
 	PropertyType<T> const * list = m_lookup_property_in_metatable<T>(L);
+	lua_pop(L, 1); // table name value
+	// table name value rv
 
 	if (!list) {
 		// Not in metatable?
-		// Pop the result(nil) and the metatable
-		lua_pop(L, 2);
-
 		// do a normal set on the table
 		lua_rawset(L, 1);
 		return 0;
 	}
 
 	T * * const obj = get_user_class<T>(L, 1);
-	// push value on top of the stack for the method call
-	lua_pushvalue(L, 3);
 
 	if (list->setter == 0)
 		return report_error(L, "The property '%s' is read-only!\n", list->name);
+
 	return ((*obj)->*(list->setter))(L);
 }
 

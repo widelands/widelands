@@ -12,14 +12,15 @@
 -- Test Data to persist 
 -- ====================
 my_name = "SirVer"
+p = wl.game.Player(1)
 a = { "Hallo", "Welt" }
 c = { func = function(a) return "I say " .. a .. "!" end }
 field = wl.map.Field(32,34)
 tree = wl.map.create_immovable("tree3", field)
 removed_tree = wl.map.create_immovable("tree4", wl.map.Field(34,34))
 removed_tree:remove()
-
 corout = coroutine.create(function() coroutine.yield("What cool is that?") end)
+objective = p:add_objective("lumber", "House", "Boat!")
 
 -- ========================
 -- Test after unpersisting 
@@ -31,6 +32,7 @@ use("map", "lunit")
 lunit.import "assertions"
 
 print("###################### CHECKING FOR CORRECT PERSISTENCE")
+assert_equal(1, p.number)
 assert_equal(my_name, "SirVer")
 
 assert_table(a)
@@ -51,6 +53,10 @@ assert_thread(corout)
 _,rv = coroutine.resume(corout)
 assert_equal("What cool is that?", rv)
 
+assert_table(objective)
+assert_equal("lumber", objective.name)
+assert_equal("House", objective.title)
+assert_equal("Boat!", objective.body)
 print("################### ALL TEST PASS!")
 wl.debug.exit()
 end

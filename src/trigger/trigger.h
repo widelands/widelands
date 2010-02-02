@@ -39,6 +39,7 @@ struct Map_Map_Object_Saver;
 
 struct Trigger : public Named, public Referenced<Trigger> {
 	friend struct Map_Trigger_Data_Packet;
+	friend struct Objective; // Needed for Scripting without triggers.
 
 	Trigger(char const * const Name, bool const set)
 		: Named(Name), m_is_set(set)
