@@ -80,4 +80,6 @@ p:message_box(_"Mission Complete", khantrukh_8)
 
 end
 
-wl.game.run_coroutine(coroutine.create(tutorial_thread))
+k = coroutine.create(tutorial_thread)
+
+wl.game.run_coroutine(k)
