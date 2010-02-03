@@ -121,7 +121,7 @@ static bool m_add_object_to_not_unpersist
 		lua_getfield(L, -2, name.c_str()); // gtables table int function
 		assert(!lua_isnil(L, -1)); // function must already exist
 
-		lua_settable(L, -3); //  table[int] = function
+		lua_settable(L, -4); //  table[int] = function
 		lua_pop(L, 1); // pop table
 	} else {
 		lua_pushint32(L, idx); // stack: table int
