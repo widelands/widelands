@@ -1,7 +1,6 @@
 -- ===============================
 -- Send a bunch of story messages 
 -- ===============================
--- All will be send right after each other
 
 function briefing_messages() 
    -- sleeptime = 15000
