@@ -3,7 +3,6 @@
 -- ======================
 
 -- TODO: gebabbel vom haeuptling
--- TODO: internationalization
 -- TODO: reveal campaign mission
 
 use("map", "texts")

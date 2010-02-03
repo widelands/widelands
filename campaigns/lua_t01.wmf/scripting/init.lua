@@ -2,8 +2,7 @@
 --                       Barbarians Campaign Mission 1
 -- =======================================================================
 
--- TODO: gettext support!
-function _(s) return s end
+set_textdomain("campaigns/t01.wmf")
 
 -- ===============
 -- Initialization
