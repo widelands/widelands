@@ -28,24 +28,27 @@
 ============================================
 */
 class LuaCoroutine_Impl : public LuaCoroutine {
-	public:
-		LuaCoroutine_Impl(lua_State* L);
-		virtual ~LuaCoroutine_Impl();
+public:
+	LuaCoroutine_Impl(lua_State* L);
+	virtual ~LuaCoroutine_Impl();
 
-		virtual int get_status() {return lua_status(m_L);}
-		virtual int resume(uint32_t * sleeptime = 0);
+	virtual int get_status() {return lua_status(m_L);}
+	virtual int resume(uint32_t * sleeptime = 0);
 
-		virtual uint32_t write
-			(lua_State*, Widelands::FileWrite &,
-			 Widelands::Map_Map_Object_Saver & );
-		virtual void read
-			(lua_State*, Widelands::FileRead &,
-			 Widelands::Map_Map_Object_Loader &, uint32_t);
+	virtual uint32_t write
+		(lua_State*, Widelands::FileWrite &,
+		 Widelands::Map_Map_Object_Saver & );
+	virtual void read
+		(lua_State*, Widelands::FileRead &,
+		 Widelands::Map_Map_Object_Loader &, uint32_t);
 
-	private:
-		static uint32_t g_idx;
-		uint32_t m_idx;
-		lua_State * m_L;
+private:
+	void m_reference();
+	void m_unreference();
+
+private:
+	lua_State * m_L;
+	uint32_t m_idx;
 };
 
 

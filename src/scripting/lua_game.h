@@ -74,7 +74,6 @@ public:
 	int forbid_buildings(lua_State * L);
 	int add_objective(lua_State * L);
 	int conquer(lua_State * L);
-	int unconquer(lua_State * L);
 
 
 	/*

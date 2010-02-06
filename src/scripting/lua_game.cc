@@ -79,7 +79,6 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, forbid_buildings),
 	METHOD(L_Player, add_objective),
 	METHOD(L_Player, conquer),
-	METHOD(L_Player, unconquer),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
@@ -437,9 +436,10 @@ int L_Player::conquer(lua_State * L) {
 	if (lua_gettop(L) > 2)
 		radius = luaL_checkuint32(L, 3);
 
-	game.conquer_area(Player_Area<Area<FCoords> >
+	game.conquer_area
+		(Player_Area<Area<FCoords> >
 			(m_pl, Area<FCoords>
-				((*get_user_class<L_Field>(L,2))->fcoords(L), radius))
+				((*get_user_class<L_Field>(L, 2))->fcoords(L), radius))
 	);
 	return 0;
 }

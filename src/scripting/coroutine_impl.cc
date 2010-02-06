@@ -24,33 +24,17 @@
 #include "c_utils.h"
 #include "persistence.h"
 
-uint32_t LuaCoroutine_Impl::g_idx = 0;
-
 LuaCoroutine_Impl::LuaCoroutine_Impl(lua_State * ms)
-	: m_L(ms)
+	: m_L(ms), m_idx(LUA_REFNIL)
 {
-	// Cache a lua reference to this object so that it does not
-	// get garbage collected
-	m_idx = g_idx ++;
-	if (ms)
-	{
-		// TODO: factor this out. This is essentially the same as code in read.
-		lua_pushthread(ms);
-		std::string key = "co_" + boost::lexical_cast<std::string>(m_idx);
-		log("construct: key.c_str(: %s\n", key.c_str());
-		lua_setfield(ms, LUA_REGISTRYINDEX, key.c_str());
-	}
+	m_reference();
 }
 
 LuaCoroutine_Impl::~LuaCoroutine_Impl()
 {
-	// Release the reference cached.
-	// TODO: factor this out
-	lua_pushnil(m_L);
-	std::string key = "co_" + boost::lexical_cast<std::string>(m_idx);
-	log("destruct: key.c_str(: %s\n", key.c_str());
-	lua_setfield(m_L, LUA_REGISTRYINDEX, key.c_str());
+	m_unreference();
 }
+
 int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
 {
 	int rv = lua_resume(m_L, 0);
@@ -96,10 +80,29 @@ void LuaCoroutine_Impl::read
 	m_L = luaL_checkthread(parent, -1);
 	lua_pop(parent, 1);
 
-	// TODO: this persistence code is the same as above
+	// Cache a lua reference to this object so that it does not
+	// get garbage collected
 	lua_pushthread(m_L);
-	std::string key = "co_" + boost::lexical_cast<std::string>(m_idx);
-	log("construct: key.c_str(: %s\n", key.c_str());
-	lua_setfield(m_L, LUA_REGISTRYINDEX, key.c_str());
+	m_idx = luaL_ref(m_L, LUA_REGISTRYINDEX);
 }
+
+/*
+ * ========================================================================
+ *                         PRIVATE FUNCTIONS
+ * ========================================================================
+ */
+/**
+ * Cache a lua reference to this object so that it does not get garbage
+ * collected
+ */
+void LuaCoroutine_Impl::m_reference() {
+	if (m_L) {
+		lua_pushthread(m_L);
+		m_idx = luaL_ref(m_L, LUA_REGISTRYINDEX);
+	}
+}
+void LuaCoroutine_Impl::m_unreference() {
+	luaL_unref(m_L, LUA_REGISTRYINDEX, m_idx);
+}
+
 
