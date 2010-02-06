@@ -21,14 +21,15 @@
 #include <stdexcept>
 
 #include "log.h"
+#include "io/filesystem/layered_filesystem.h"
 
-#include "persistence.h"
+#include "c_utils.h"
+#include "coroutine_impl.h"
 #include "lua_debug.h"
 #include "lua_game.h"
-#include "lua_map.h"
 #include "lua_globals.h"
-#include "coroutine_impl.h"
-#include "c_utils.h"
+#include "lua_map.h"
+#include "persistence.h"
 
 #include "scripting.h"
 
@@ -55,6 +56,7 @@ class LuaInterface_Impl : public LuaInterface {
 	 */
 	private:
 		int m_check_for_errors(int);
+		void m_register_core_scripts(Widelands::Editor_Game_Base *);
 
 	public:
 		LuaInterface_Impl(Widelands::Editor_Game_Base *);
@@ -92,6 +94,54 @@ int LuaInterface_Impl::m_check_for_errors(int rv) {
 		throw LuaError(err);
 	}
 	return rv;
+}
+
+// TODO: this exact code is also in map loading
+static bool m_filename_to_short(const std::string & s) {
+	return s.size() < 4;
+}
+static bool m_is_lua_file(const std::string & s) {
+	std::string ext = s.substr(s.size() - 4, s.size());
+	// std::transform fails on older system, therefore we use an explicit loop
+	for (uint32_t i = 0; i < ext.size(); i++)
+		ext[i] = std::tolower(ext[i]);
+	return (ext == ".lua");
+}
+void LuaInterface_Impl::m_register_core_scripts
+	(Widelands::Editor_Game_Base * egbase)
+{
+	filenameset_t scripting_files;
+
+	// Theoretically, we should be able to use fs.FindFiles(*.lua) here,
+	// but since FindFiles doesn't support Globbing in Zips and most
+	// saved maps/games are zip, we have to work around this issue.
+	g_fs->FindFiles("scripting", "*", &scripting_files);
+
+	for
+		(filenameset_t::iterator i = scripting_files.begin();
+		 i != scripting_files.end(); i++)
+	{
+		if (m_filename_to_short(*i) or not m_is_lua_file(*i))
+			continue;
+
+		size_t length;
+		std::string data(static_cast<char *>(g_fs->Load(*i, length)));
+		std::string name = i->substr(0, i->size() - 4); // strips '.lua'
+		size_t pos = name.rfind('/');
+		if (pos == std::string::npos)
+			pos = name.rfind("\\");
+		if (pos != std::string::npos)
+			name = name.substr(pos + 1, name.size());
+
+		log("Registering script: (core,%s)\n", name.c_str());
+		register_script("core", name, data);
+
+		// Immediately use() this script
+		// lua_getglobal(m_L, "use");
+		// lua_pushstring(m_L, "core");
+		// lua_pushstring(m_L, name.c_str());
+		// lua_call(m_L, 2, 0);
+	}
 }
 
 /*************************
@@ -145,6 +195,8 @@ LuaInterface_Impl::LuaInterface_Impl
 	lua_pushstring(m_L, "game");
 	lua_pushlightuserdata(m_L, static_cast<void *>(egbase));
 	lua_settable(m_L, LUA_REGISTRYINDEX);
+
+	m_register_core_scripts(egbase);
 }
 
 LuaInterface_Impl::~LuaInterface_Impl() {
