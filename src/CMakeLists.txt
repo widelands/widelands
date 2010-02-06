@@ -39,6 +39,16 @@ add_custom_target(codecheck
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
   )
 
+IF (MINGW)
+  # resource compilation for MinGW
+  # TODO by QCS - maybe we need to do something about the ../build/win32 link below...
+  ADD_CUSTOM_COMMAND (
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/widelands_ico.o
+    COMMAND windres.exe -I${CMAKE_CURRENT_SOURCE_DIR} -i${CMAKE_CURRENT_SOURCE_DIR}/../build/win32/mingw/Widelands_win.rc -o ${CMAKE_CURRENT_BINARY_DIR}/widelands_ico.o
+  )
+  SET( WL_SRCS ${WL_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/widelands_ico.o)
+ENDIF (MINGW)
+
 add_subdirectory(ai)
 add_subdirectory(economy)
 add_subdirectory(editor)
@@ -57,20 +67,7 @@ add_subdirectory(ui_fsmenu)
 add_subdirectory(wui)
 add_subdirectory(scripting)
 
-add_executable (widelands ${WL_SRCS} build_info.cc)
-
-target_link_libraries(widelands ${PNG_LIBRARY})
-target_link_libraries(widelands ${ZLIB_LIBRARY})
-target_link_libraries(widelands ${JPEG_LIBRARY})
-target_link_libraries(widelands ${TIFF_LIBRARY})
-target_link_libraries(widelands ${SDL_LIBRARY})
-target_link_libraries(widelands ${SDLIMAGE_LIBRARY})
-target_link_libraries(widelands ${SDLMIXER_LIBRARY})
-target_link_libraries(widelands ${SDLNET_LIBRARY})
-target_link_libraries(widelands ${SDLTTF_LIBRARY})
-target_link_libraries(widelands ${LUA_LIBRARY})
-target_link_libraries(widelands ${SDLGFX_LIBRARY})
-target_link_libraries(widelands ${Boost_unit_test_framework_LIBRARIES})
+add_executable (widelands ${GUI_TYPE} ${WL_SRCS} build_info.cc)
 
 target_link_libraries(widelands widelands_io_filesystem)
 target_link_libraries(widelands widelands_profile)
@@ -97,8 +94,26 @@ target_link_libraries(widelands widelands_events)
 target_link_libraries(widelands widelands_trigger)
 target_link_libraries(widelands widelands_scripting)
 
+target_link_libraries(widelands ${PNG_LIBRARY})
+target_link_libraries(widelands ${ZLIB_LIBRARY})
+target_link_libraries(widelands ${JPEG_LIBRARY})
+target_link_libraries(widelands ${TIFF_LIBRARY})
+target_link_libraries(widelands ${SDL_LIBRARY})
+target_link_libraries(widelands ${SDLIMAGE_LIBRARY})
+target_link_libraries(widelands ${SDLMIXER_LIBRARY})
+target_link_libraries(widelands ${SDLNET_LIBRARY})
+target_link_libraries(widelands ${SDLTTF_LIBRARY})
+target_link_libraries(widelands ${LUA_LIBRARY})
+target_link_libraries(widelands ${SDLGFX_LIBRARY})
+target_link_libraries(widelands ${Boost_unit_test_framework_LIBRARIES})
+
 if (APPLE)
   target_link_libraries(widelands ${INTL_LIBRARY})
 endif (APPLE)
+
+if (WIN32)
+  target_link_libraries(widelands intl)
+  target_link_libraries(widelands wsock32)
+endif (WIN32)
 
 install(TARGETS widelands DESTINATION bin COMPONENT ExecutableFiles)

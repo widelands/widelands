@@ -47,7 +47,7 @@ endif (DEFINED WL_VERSION_MAJOR)
 if (NOT DEFINED WL_VERSION)
   find_package (PythonInterp REQUIRED)
   execute_process (
-    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/detect_revision.py
+    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/build/scons-tools/detect_revision.py
     OUTPUT_VARIABLE WL_VERSION
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -75,11 +75,13 @@ target_link_libraries(widelands ${Boost_LIBRARIES})
 find_package(PNG REQUIRED)
 include_directories(${PNG_INCLUDE_DIR})
 
-find_package(JPEG REQUIRED)
-include_directories(${JPEG_INCLUDE_DIR})
+IF (NOT WIN32)
+  find_package(JPEG REQUIRED)
+  include_directories(${JPEG_INCLUDE_DIR})
 
-find_package(TIFF REQUIRED)
-include_directories(${TIFF_INCLUDE_DIR})
+  find_package(TIFF REQUIRED)
+  include_directories(${TIFF_INCLUDE_DIR})
+ENDIF (NOT WIN32)
 
 find_package(ZLIB REQUIRED)
 include_directories(${ZLIB_INCLUDE_DIR})
@@ -113,14 +115,20 @@ include_directories(${SDLGFX_INCLUDE_DIR})
 find_package(Lua51 REQUIRED)
 include_directories(${LUA_INCLUDE_DIR})
 
+IF (NOT WIN32)
 # TODO
-if (CMAKE_BUILD_TYPE STREQUAL Debug)
-  find_package(Doxygen REQUIRED)
-  include(Documentation)
-  file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/doc/sourcecode)
-  configure_file (${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY IMMEDIATE)
-  add_custom_target(doc COMMAND ${DOXYGEN_EXECUTABLE} WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
-endif()
+  if (CMAKE_BUILD_TYPE STREQUAL Debug)
+    find_package(Doxygen REQUIRED)
+    include(Documentation)
+    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/doc/sourcecode)
+    configure_file (${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY IMMEDIATE)
+    add_custom_target(doc COMMAND ${DOXYGEN_EXECUTABLE} WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+  endif(CMAKE_BUILD_TYPE STREQUAL Debug)
+ENDIF (NOT WIN32)
+
+IF (WIN32)
+  SET(GUI_TYPE WIN32)
+ENDIF (WIN32)
 
 include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
 
