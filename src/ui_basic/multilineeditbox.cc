@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -188,6 +188,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code) {
 			break;
 
 		case SDLK_RETURN:
+		case SDLK_KP_ENTER:
 			if (txt.size() < m_maxchars) {
 				txt.insert(txt.begin() + m_cur_pos++, 1, '\n');
 				set_text(txt.c_str());

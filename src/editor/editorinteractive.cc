@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -334,7 +334,7 @@ void Editor_Interactive::set_sel_radius_and_update_menu(uint32_t const val) {
 }
 
 
-bool Editor_Interactive::handle_key(bool down, SDL_keysym code)
+bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code)
 {
 	bool handled = Interactive_Base::handle_key(down, code);
 

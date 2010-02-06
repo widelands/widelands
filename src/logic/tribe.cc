@@ -322,14 +322,14 @@ Tribe_Descr::Tribe_Descr
 										(*event_s, egbase);
 							} else if
 								(not strcmp(event_name, "set_player_frontier_style"))
-							{
+							{ //  FIXME simplify this to just "[<frontierstyle_name>]"
 								event_s->set_int("version", 1);
 								event =
 									new Event_Set_Player_Frontier_Style
 										(*event_s, egbase);
 							} else if
 								(not strcmp(event_name, "set_player_flag_style"))
-							{
+							{ //  FIXME simplify this to just "[<flagstyle_name>]"
 								event_s->set_int("version", 1);
 								event =
 									new Event_Set_Player_Flag_Style

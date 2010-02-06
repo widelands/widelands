@@ -1,0 +1,58 @@
+#!/usr/bin/python
+
+"""
+Do not use std::string::replace to replace a signle character in a std::string (just assign the desired character to the position).
+"""
+
+error_msg="""s.replace(pos, 1, "c"); should be s.at(pos) = 'c';."""
+
+strip_comments_and_strings = True
+strip_macros = True
+regexp = r"""replace *\(.*, *(0x)?0*1[Uu]?(L|LL|l|ll)?, *("([^\]|\\[nt\"])"|'([^\]|\\[nt\'])')\)"""
+
+forbidden = [
+    'replace(pos, 1, "a")',
+    'replace(pos, 1U, "a")',
+    'replace(pos, 1UL, "a")',
+    'replace(pos, 1ULL, "a")',
+    'replace(pos, 1Ul, "a")',
+    'replace(pos, 1Ull, "a")',
+    'replace(pos, 1u, "a")',
+    'replace(pos, 1uL, "a")',
+    'replace(pos, 1uLL, "a")',
+    'replace(pos, 1ul, "a")',
+    'replace(pos, 1ull, "a")',
+    'replace(pos, 01, "a")',
+    'replace(pos, 01U, "a")',
+    'replace(pos, 01UL, "a")',
+    'replace(pos, 01ULL, "a")',
+    'replace(pos, 01Ul, "a")',
+    'replace(pos, 01Ull, "a")',
+    'replace(pos, 01u, "a")',
+    'replace(pos, 01uL, "a")',
+    'replace(pos, 01uLL, "a")',
+    'replace(pos, 01ul, "a")',
+    'replace(pos, 01ull, "a")',
+    'replace(pos, 0x1, "a")',
+    'replace(pos, 0x01, "a")',
+    'replace(pos, 0x01U, "a")',
+    'replace(pos, 0x01UL, "a")',
+    'replace(pos, 0x01ULL, "a")',
+    'replace(pos, 0x01Ul, "a")',
+    'replace(pos, 0x01Ull, "a")',
+    'replace(pos, 0x01u, "a")',
+    'replace(pos, 0x01uL, "a")',
+    'replace(pos, 0x01uLL, "a")',
+    'replace(pos, 0x01ul, "a")',
+    'replace(pos, 0x01ull, "a")',
+    'replace(pos, 1, "\n")',
+    'replace(pos, 1, "\t")',
+    'replace(pos, 1, "\\")',
+    'replace(pos, 1, "\"")',
+]
+
+allowed = [
+    'replace(pos, 1, "ab");',
+    'replace(pos, 2, "a");',
+    "at(pos) = 'a';",
+]

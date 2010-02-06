@@ -52,7 +52,7 @@ struct Map_Data_Packet {
 #define MAP_DATA_PACKET(name)                                                 \
 namespace Widelands {                                                         \
 struct name : public Map_Data_Packet {                                        \
-	virtual ~ name() {}                                                        \
+   virtual ~name() {}                                                         \
    void Read                                                                  \
       (FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &)       \
       throw (_wexception);                                                    \
