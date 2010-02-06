@@ -50,9 +50,7 @@ public:
 	L_Player(Widelands::Player_Number n) {
 		m_pl = n;
 	}
-	L_Player(lua_State * L) {
-		m_pl = luaL_checkuint32(L, -1);
-	}
+	L_Player(lua_State * L);
 
 	virtual void __persist(lua_State * L);
 	virtual void __unpersist(lua_State * L);
@@ -81,7 +79,7 @@ public:
 	 * C methods
 	 */
 private:
-	Widelands::Player & m_get(Widelands::Game & game) {return game.player(m_pl);}
+	Widelands::Player & m_get(lua_State * L, Widelands::Game & game);
 	void m_parse_building_list
 		(lua_State *, const Widelands::Tribe_Descr &,
 		 std::vector<Widelands::Building_Index> &);

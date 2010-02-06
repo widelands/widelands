@@ -87,6 +87,13 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	{0, 0, 0},
 };
 
+L_Player::L_Player(lua_State * L) {
+	m_pl = luaL_checkuint32(L, -1);
+
+	// checks that this is a valid Player
+	m_get(L, get_game(L));
+}
+
 void L_Player::__persist(lua_State * L) {
 	PERS_UINT32("player", m_pl);
 }
@@ -119,7 +126,7 @@ int L_Player::get_number(lua_State * L) {
 */
 int L_Player::get_allowed_buildings(lua_State * L) {
 	Game & game = get_game(L);
-	Player & p = m_get(game);
+	Player & p = m_get(L, game);
 	const Tribe_Descr & t = p.tribe();
 
 	lua_newtable(L);
@@ -186,11 +193,11 @@ int L_Player::place_flag(lua_State * L) {
 
 	Flag * f;
 	if (not force) {
-		f = m_get(get_game(L)).build_flag(c->fcoords(L));
+		f = m_get(L, get_game(L)).build_flag(c->fcoords(L));
 		if (!f)
 			return report_error(L, "Couldn't build flag!");
 	} else {
-		f = &m_get(get_game(L)).force_flag(c->fcoords(L));
+		f = &m_get(L, get_game(L)).force_flag(c->fcoords(L));
 	}
 
 	return to_lua<L_Flag>(L, new L_Flag(*f));
@@ -211,9 +218,9 @@ int L_Player::place_building(lua_State * L) {
 	const char * name = luaL_checkstring(L, 2);
 	L_Field * c = *get_user_class<L_Field>(L, 3);
 
-	Building_Index i = m_get(get_game(L)).tribe().building_index(name);
+	Building_Index i = m_get(L, get_game(L)).tribe().building_index(name);
 
-	Building & b = m_get(get_game(L)).force_building
+	Building & b = m_get(L, get_game(L)).force_building
 		(c->coords(), i, 0, 0, Soldier_Counts());
 
 	return upcasted_immovable_to_lua(L, &b);
@@ -302,7 +309,7 @@ int L_Player::send_message(lua_State * L) {
 	}
 
 	Game & game = get_game(L);
-	Player & plr = m_get(game);
+	Player & plr = m_get(L, game);
 
 	Message_Id const message =
 		plr.add_message
@@ -414,7 +421,7 @@ int L_Player::sees_field(lua_State * L) {
 	Widelands::Map_Index const i =
 		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &game.map()[0];
 
-	lua_pushboolean(L, m_get(game).vision(i) > 1);
+	lua_pushboolean(L, m_get(L, game).vision(i) > 1);
 	return 1;
 }
 
@@ -466,7 +473,7 @@ int L_Player::forbid_buildings(lua_State * L) {
 */
 int L_Player::add_objective(lua_State * L) {
 	Game & game = get_game(L);
-	Player & p = m_get(game);
+	Player & p = m_get(L, game);
 	if (p.player_number() != game.get_ipl()->player_number())
 		return
 			report_error
@@ -533,7 +540,7 @@ void L_Player::m_parse_building_list
 }
 int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
 {
-	Player & p = m_get(get_game(L));
+	Player & p = m_get(L, get_game(L));
 
 	std::vector<Building_Index> houses;
 	m_parse_building_list(L, p.tribe(), houses);
@@ -543,7 +550,15 @@ int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
 
 	return 0;
 }
-
+Player & L_Player::m_get(lua_State * L, Widelands::Game & game) {
+	log("m_pl: %i\n", m_pl);
+	if (m_pl > MAX_PLAYERS)
+		report_error(L, "Illegal player number %i",  m_pl);
+	Player * rv = game.get_player(m_pl);
+	if (!rv)
+		report_error(L, "Player with the number %i does not exist", m_pl);
+	return *rv;
+}
 
 
 /* RST

@@ -8,7 +8,18 @@ end
 function player_tests:test_number_property2()
    assert_equal(2, wl.game.Player(2).number)
 end
--- TODO: test accessing illegal values for Player
+function player_tests:test_number_property2()
+   assert_equal(2, wl.game.Player(2).number)
+end
+function player_tests:test_negativ_val_for_player()
+   assert_error("Illegal plr",  function() wl.game.Player(-1) end)
+end
+function player_tests:test_too_high_val()
+   assert_error("Illegal plr",  function() wl.game.Player(10) end)
+end
+function player_tests:test_ok_val_for_non_existing()
+   assert_error("non existing plr",  function() wl.game.Player(5) end)
+end
 
 function player_tests:test_create_flag()
    f = wl.map.Field(10,10)
