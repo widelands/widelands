@@ -79,6 +79,7 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, forbid_buildings),
 	METHOD(L_Player, add_objective),
 	METHOD(L_Player, conquer),
+	METHOD(L_Player, move_to),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
@@ -444,6 +445,22 @@ int L_Player::conquer(lua_State * L) {
 	return 0;
 }
 
+/* RST
+	.. method:: move_to(f)
+
+		Moves the view of the player to the given field if the Player is the
+		interactive player; otherwise it does nothing
+
+		:arg f: Field to move to
+		:type f: :class:`wl.map.Field`
+		:returns: :const:`nil`
+*/
+int L_Player::move_to(lua_State * L) {
+	Interactive_Player & ipl = *get_game(L).get_ipl();
+	if (ipl.player_number() == m_pl)
+		ipl.move_view_to((*get_user_class<L_Field>(L, 2))->coords());
+	return 0;
+}
 
 /* RST
 	.. method:: sees_field(f)
@@ -801,7 +818,6 @@ static int L_run_coroutine(lua_State * L) {
 
 	return 0;
 }
-
 const static struct luaL_reg wlgame [] = {
 	{"run_coroutine", &L_run_coroutine},
 	{"get_time", &L_get_time},
