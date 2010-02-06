@@ -315,15 +315,15 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				warehouse.insert_workers(id, fr.Unsigned16());
 			}
 
-			//  FIXME The reason for this code is probably that the constructor of
-			//  FIXME Warehouse requests things. That makes sense when a Warehouse
-			//  FIXME is created in the game, but definitely not when only
-			//  FIXME allocating a Warehouse to later fill it with information
-			//  FIXME from a savegame. Therefore this code here undoes what the
-			//  FIXME constructor just did. There should really be different
-			//  FIXME constructors for those cases.
-			for (uint32_t i = 0; i < warehouse.m_requests.size(); ++i)
-				delete warehouse.m_requests[i];
+			//  FIXME The reason for this code is that Warehouse::init is called
+			//  FIXME when a warehouse is allocated during savegame loading. That
+			//  FIXME is a bug. That code must only be executed when a warehouse
+			//  FIXME is created in the game. Requests are created there.
+			//  FIXME Therefore this code here undoes what Warehouse::init just
+			//  FIXME did.
+			container_iterate_const
+				(std::vector<Request *>, warehouse.m_requests, i)
+				delete *i.current;
 
 			warehouse.m_requests.resize(fr.Unsigned16());
 			for (uint32_t i = 0; i < warehouse.m_requests.size(); ++i) {
@@ -363,10 +363,11 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			std::vector<Ware_Index> const & worker_types_without_cost =
 				tribe.worker_types_without_cost();
 
-			//  FIXME Mighty ugly kludge to undo what warehouse::init did, so that
+			//  FIXME Mighty ugly kludge to undo what Warehouse::init did, so that
 			//  FIXME we have a fresh object when starting to fill in the values
 			//  FIXME read from file. To get rid of this, make sure that init is
-			//  FIXME not called on a warehouse when it is loaded from a savegame.
+			//  FIXME not called on a Warehouse object that has been allocated
+			//  FIXME during savegame loading.
 			for (uint8_t i = worker_types_without_cost.size(); i;)
 				warehouse.m_next_worker_without_cost_spawn[--i] = Never();
 
@@ -590,13 +591,12 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			(1 <= packet_version and
 			 packet_version <= CURRENT_PRODUCTIONSITE_PACKET_VERSION)
 		{
-			//  FIXME The reason for this code is probably that the constructor of
-			//  FIXME ProductionSite requests workers. That makes sense when a
-			//  FIXME ProductionSite is created in the game, but definitely not
-			//  FIXME when only allocating a ProductionSite to later fill it with
-			//  FIXME information from a savegame. Therefore this code here undoes
-			//  FIXME what the constructor just did. There should really be
-			//  FIXME different constructors for those cases.
+			//  FIXME The reason for this code is that ProductionSite::init is
+			//  FIXME called when a productionsite is allocated during savegame
+			//  FIXME loading. That is a bug. That code must only be executed when
+			//  FIXME a productionsite is created in the game. Requests are
+			//  FIXME created there. Therefore this code here undoes what
+			//  FIXME ProductionSite::init just did.
 			for (uint32_t i = productionsite.descr().nr_working_positions(); i;) {
 				delete productionsite.m_working_positions[--i].worker_request;
 				productionsite.m_working_positions[i].worker_request = 0;

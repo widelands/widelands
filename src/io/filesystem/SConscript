@@ -12,6 +12,12 @@ srcenv.Append(INDENTLIST=[
 	'io/filesystem/zip_exceptions.h',
 	])
 
-lib=srcenv.StaticLibrary(target='filesystem', source=SRC)
-Return('lib')
+filesystem=srcenv.StaticLibrary(target='filesystem', source=SRC)
+
+###########################################################################
+#                                  Tests                                  #
+###########################################################################
+SConscript("test/SConscript", "tests BUILDDIR testEnv simpleglob filesystem")
+
+Return('filesystem')
 

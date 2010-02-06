@@ -463,6 +463,7 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 			return true;
 
 		case SDLK_RETURN:
+		case SDLK_KP_ENTER:
 			if (!m_chatProvider | !m_chatenabled)
 				break;
 

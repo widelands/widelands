@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -206,7 +206,7 @@ void Interactive_Spectator::node_action() {
 /**
  * Global in-game keypresses:
  */
-bool Interactive_Spectator::handle_key(bool down, SDL_keysym code)
+bool Interactive_Spectator::handle_key(bool const down, SDL_keysym const code)
 {
 	if (down)
 		switch (code.sym) {
@@ -232,6 +232,7 @@ bool Interactive_Spectator::handle_key(bool down, SDL_keysym code)
 			return true;
 
 		case SDLK_RETURN:
+		case SDLK_KP_ENTER:
 			if (!m_chatProvider | !m_chatenabled)
 				break;
 

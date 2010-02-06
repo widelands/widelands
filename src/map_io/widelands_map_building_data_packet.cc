@@ -82,6 +82,24 @@ throw (_wexception)
 
 							//  Now, create this Building, take extra special care for
 							//  constructionsites. All data is read later.
+							//  FIXME This is where things start to go terribly wrong.
+							//  FIXME What needs to be done here is to allocate an
+							//  FIXME object of an appropriate type derived from
+							//  FIXME Building, so that it can be filled with the data
+							//  FIXME that is read later. But what is actually done is
+							//  FIXME to create a new building and initialize it as if
+							//  FIXME it was newly created in the game. This causes
+							//  FIXME several bugs, such as:
+							//  FIXME   * ProductionSites try to request wares and
+							//  FIXME     workers and start working.
+							//  FIXME   * Warehouses create requests for all kinds of
+							//  FIXME     wares and workers.
+							//  FIXME   * Warehouses with a conquer radius conquer
+							//  FIXME     land.
+							//  FIXME   * A message is created informing the owning
+							//  FIXME     player that he got a new warehouse.
+							//  FIXME Some of these bugs are worked around with ugly
+							//  FIXME kludges while others fully affect the users.
 							Building & building =
 								mol.register_object<Building>
 									(serial,

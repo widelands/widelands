@@ -39,6 +39,7 @@
 #include <cstring>
 #include <string>
 #include <vector>
+#include <list>
 
 #ifdef WIN32
 #include "log.h"
@@ -179,36 +180,39 @@ std::string FileSystem::GetHomedir()
  * Split a string into components separated by a certain character.
  *
  * \param path The path to parse
- * \return a list of path components
- *
- * \todo This does not really belong into a filesystem class
+ * \param filesep The file path separator used by the native filesystem
+ * \param components The output iterator to place the path nodes into
  */
-std::auto_ptr< std::vector<std::string> > FileSystem::FS_Tokenize
-	(std::string const & path) const
+template<typename Inserter>
+static void FS_Tokenize
+	(std::string const & path, char const filesep, Inserter components)
 {
-	std::auto_ptr< std::vector<std::string> > components(new std::vector<std::string>());
 	std::string::size_type pos;  //  start of token
 	std::string::size_type pos2; //  next filesep character
 
 	//extract the first path component
-	if (path.find(m_filesep) == 0) //is this an absolute path?
+	if (path.find(filesep) == 0) //is this an absolute path?
 		pos = 1;
 	else //relative path
 		pos = 0;
-	pos2 = path.find(m_filesep, pos);
+	pos2 = path.find(filesep, pos);
 	//'current' token is now between pos and pos2
 
 	//split path into it's components
 	while (pos2 != std::string::npos) {
-		components->push_back(path.substr(pos, pos2 - pos));
+		if (pos != pos2)
+		{
+			std::string node = path.substr(pos, pos2 - pos);
+			*components++ = node;
+		}
 		pos = pos2 + 1;
-		pos2 = path.find(m_filesep, pos);
+		pos2 = path.find(filesep, pos);
 	}
 
 	//extract the last component (most probably a filename)
-	components->push_back(path.substr(pos));
-
-	return components;
+	std::string node = path.substr(pos);
+	if (!node.empty())
+		*components++ = node;
 }
 
 /**
@@ -216,106 +220,71 @@ std::auto_ptr< std::vector<std::string> > FileSystem::FS_Tokenize
  *
  * \todo Enable non-Unix paths
  */
-std::string FileSystem::FS_CanonicalizeName(std::string const & path) const {
-	std::auto_ptr< std::vector<std::string> > components;
-	std::vector<std::string>::iterator i;
+std::string FileSystem::FS_CanonicalizeName(std::string path) const {
+	std::list<std::string> components;
+	std::list<std::string>::iterator i;
 
 #ifdef WIN32
 	// remove all slashes with backslashes so following can work.
-	std::string fixedpath(path);
-	std::string temp;
-	uint32_t path_size = path.size();
-	for (uint32_t j = 0; j < path_size; ++j) {
-		temp = fixedpath.at(j);
-		if (temp == "/")
-			fixedpath.at(j) = '\\';
+	for (uint32_t j = 0; j < path.size(); ++j) {
+		if (path[j] == '/')
+			path[j] = '\\';
 	}
-
-	bool absolute = pathIsAbsolute(fixedpath);
-	components = FS_Tokenize(fixedpath);
-
-#else
-	bool absolute = pathIsAbsolute(path);
-	components = FS_Tokenize(path);
 #endif
 
+	FS_Tokenize(path, m_filesep, std::inserter(components, components.begin()));
+
 	//tilde expansion
-	if (*components->begin() == "~") {
-		components->erase(components->begin());
-		std::auto_ptr< std::vector<std::string> > homecomponents;
-		homecomponents = FS_Tokenize(GetHomedir());
-		components->insert
-			(components->begin(), homecomponents->begin(), homecomponents->end());
-
-		absolute = true;
-	}
-
-
-
-
-	//make relative paths absolute (so that "../../foo" can work)
-	if (!absolute) {
-		std::auto_ptr< std::vector<std::string> > cwdcomponents;
-
-		cwdcomponents =
-			FS_Tokenize
-				(m_root.empty() ? getWorkingDirectory() : m_root);
-
-		components->insert
-			(components->begin(), cwdcomponents->begin(), cwdcomponents->end());
-		absolute = true;
-	}
+	if (!components.empty() && *components.begin() == "~") {
+		components.erase(components.begin());
+		FS_Tokenize
+			(GetHomedir(),
+			 m_filesep,
+			 std::inserter(components, components.begin()));
+	} else if (!pathIsAbsolute(path))
+		//  make relative paths absolute (so that "../../foo" can work)
+		FS_Tokenize
+			(m_root.empty() ? getWorkingDirectory() : m_root, m_filesep,
+			 std::inserter(components, components.begin()));
 
 	//clean up the path
-	for (i = components->begin(); i != components->end();) {
-		bool erase = false;
-		bool erase_prev = false;
+	for (i = components.begin(); i != components.end();) {
+		char const * str = i->c_str();
+		if (*str == '.') {
+			++str;
 
-		//remove empty components ("foo/bar//baz/")
-		if (i->empty())
-			erase = true;
-
-		//remove single dot
-		if (*i == ".")
-			erase = true;
-
-		//remove double dot and the preceding component (if any)
-		if (*i == "..") {
-			if (i != components->begin())
-				erase_prev = true;
-			erase = true;
-		}
-
-		std::vector<std::string>::iterator nexti = i;
-
-		if (erase_prev && erase) {
-			components->erase(i - 1, i + 1);
-			i = components->begin();
-			continue;
-		}
-		if (erase) {
-			components->erase(i);
-			i = components->begin();
-			continue;
+			//remove single dot
+			if (*str == '\0') {
+				i = components.erase(i);
+				continue;
+			}
+			//remove double dot and the preceding component (if any)
+			else if (*str == '.' && *(str + 1) == '\0') {
+				if (i != components.begin())
+					i = components.erase(--i);
+				i = components.erase(i);
+				continue;
+			}
 		}
 
 		++i;
 	}
 
-	std::string canonpath = "";
+	std::string canonpath;
+	canonpath.reserve(path.length());
 #ifndef WIN32
-	canonpath = absolute ? "/" : "./";
-
-	for (i = components->begin(); i != components->end(); ++i)
-		canonpath += *i + "/";
+	for (i = components.begin(); i != components.end(); ++i) {
+		canonpath.push_back('/');
+		canonpath += *i;
+	}
 #else
-	canonpath = absolute ? "" : ".\\";
-
-	for (i = components->begin(); i != components->end(); ++i)
-		canonpath += *i + "\\";
-#endif
+	for (i = components.begin(); i != components.end(); ++i) {
+		canonpath += *i;
+		canonpath += '\\';
+	}
 
 	canonpath.erase(canonpath.end() - 1); //remove trailing slash
+#endif
 
 	//debug info
 	//printf("canonpath = %s\n", canonpath.c_str());

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -193,7 +193,7 @@ bool EditBox::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
  * ASCII characters (--> //HERE). Instead, all user editable strings should be
  * real unicode.
 */
-bool EditBox::handle_key(bool down, SDL_keysym code)
+bool EditBox::handle_key(bool const down, SDL_keysym const code)
 {
 	if (down) {
 		switch (code.sym) {
@@ -203,6 +203,7 @@ bool EditBox::handle_key(bool down, SDL_keysym code)
 			return true;
 
 		case SDLK_RETURN:
+		case SDLK_KP_ENTER:
 			ok.call();
 			okid.call(m->id);
 			return true;

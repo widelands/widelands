@@ -1,0 +1,38 @@
+#!/usr/bin/python
+
+
+"""
+Do not call std::string::find_first_of with a single character to find. Use the
+version of std::string::find that takes a single character to locate instead.
+Same for find_last_of/rfind.
+"""
+
+error_msg = "Do not use find_first_of('a'), use find('a') (same for find_last_of/rfind)."
+
+regexp = r"""find_(first|last)_of *\('([^\]|\\[nt\"])'[,)]"""
+
+forbidden = [
+    "find_first_of('a')",
+    "find_first_of('\n')",
+    "find_first_of('\\')",
+    "find_first_of('a', 1)",
+    "find_last_of('a')",
+    "find_last_of('\n')",
+    "find_last_of('\\')",
+    "find_last_of('a', 1)",
+]
+
+allowed = [
+    "find('a')",
+    "rfind('a')",
+    "find('\n')",
+    "rfind('\n')",
+    "find('\t')",
+    "rfind('\t')",
+    "find('\\')",
+    "rfind('\\')",
+    "find('\"')",
+    "rfind('\"')",
+    "find('a', 1)",
+    "rfind('a', 1)",
+]

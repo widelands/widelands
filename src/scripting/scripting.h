@@ -47,57 +47,54 @@ struct LuaValueError : public LuaError {
 		LuaError("Variable not of expected type: " + wanted)
 	{}
 };
-class LuaScriptNotExistingError : public LuaError {
-	public:
-		LuaScriptNotExistingError(std::string name) :
-			LuaError("The script '" + name + "' was not found!") {}
+struct LuaScriptNotExistingError : public LuaError {
+	LuaScriptNotExistingError(std::string name) :
+		LuaError("The script '" + name + "' was not found!") {}
 };
 
 /**
  * Easy handling of LuaCoroutines
  */
-class LuaCoroutine {
-	public:
-		virtual ~LuaCoroutine() {}
+struct LuaCoroutine {
+	virtual ~LuaCoroutine() {}
 
-		enum {
-			DONE = 0,
-			YIELDED = LUA_YIELD,
-		};
+	enum {
+		DONE = 0,
+		YIELDED = LUA_YIELD,
+	};
 
-		virtual int get_status(void) = 0;
-		virtual int resume(uint32_t* = 0) = 0;
+	virtual int get_status(void) = 0;
+	virtual int resume(uint32_t* = 0) = 0;
 };
 
 /**
  * This is the thin class that is used to execute code
  */
 typedef std::map<std::string, std::string> ScriptContainer;
-class LuaInterface {
-	public:
-		virtual ~LuaInterface() {}
+struct LuaInterface {
+	virtual ~LuaInterface() {}
 
-		virtual void interpret_string(std::string) = 0;
-		virtual void interpret_file(std::string) = 0;
-		virtual std::string const & get_last_error() const = 0;
+	virtual void interpret_string(std::string) = 0;
+	virtual void interpret_file(std::string) = 0;
+	virtual std::string const & get_last_error() const = 0;
 
-		virtual void register_script(std::string, std::string, std::string) = 0;
-		virtual ScriptContainer& get_scripts_for(std::string) = 0;
+	virtual void register_script(std::string, std::string, std::string) = 0;
+	virtual ScriptContainer& get_scripts_for(std::string) = 0;
 
-		virtual void run_script(std::string, std::string) = 0;
+	virtual void run_script(std::string, std::string) = 0;
 
-		virtual LuaCoroutine* read_coroutine
-			(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
-			 uint32_t) = 0;
-		virtual uint32_t write_coroutine
-			(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&,
-			 LuaCoroutine *) = 0;
+	virtual LuaCoroutine* read_coroutine
+		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
+		 uint32_t) = 0;
+	virtual uint32_t write_coroutine
+		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&,
+		 LuaCoroutine *) = 0;
 
-		virtual void read_global_env
-			(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
-			 uint32_t) = 0;
-		virtual uint32_t write_global_env
-			(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&) = 0;
+	virtual void read_global_env
+		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader&,
+		 uint32_t) = 0;
+	virtual uint32_t write_global_env
+		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver&) = 0;
 };
 
 LuaInterface* create_lua_interface(Widelands::Editor_Game_Base*);

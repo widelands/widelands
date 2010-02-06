@@ -164,15 +164,8 @@ Message_Id Player::add_message_with_timeout
 	Map const &       map      = game.map         ();
 	uint32_t    const gametime = game.get_gametime();
 	Coords      const position = m   .position    ();
-	for
-		(struct {
-		 	MessageQueue::const_iterator current;
-		 	MessageQueue::const_iterator const end;
-		 } i = {messages().begin(), messages().end()};;
-		 ++i.current)
-		if (i.current == i.end)
-			return add_message(game, m);
-		else if
+	container_iterate_const(MessageQueue, messages(), i)
+		if
 			(i.current->second->sender() == m.sender()                      and
 			 gametime < i.current->second->sent() + timeout                 and
 			 map.calc_distance(i.current->second->position(), position) <= radius)
@@ -180,6 +173,7 @@ Message_Id Player::add_message_with_timeout
 			delete &m;
 			return Message_Id::Null();
 		}
+	return add_message(game, m);
 }
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008, 2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,10 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
+#include "i18n.h"
+
+#include "ref_cast.h"
+
 struct Interactive_GameBase;
 
 struct SaveWarnMessageBox;
@@ -37,7 +41,7 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
 
 private:
 	Interactive_GameBase & igbase();
-	void clicked_ok    ();
+	void die() {UI::UniqueWindow::die();}
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);
 	void edit_box_changed();
@@ -46,9 +50,51 @@ private:
 	bool save_game(std::string);
 
 	UI::Listselect<std::string> m_ls;
-	UI::EditBox m_editbox;
+	struct EditBox : public UI::EditBox {
+		EditBox
+			(Game_Main_Menu_Save_Game & parent,
+			 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h)
+			:
+			UI::EditBox
+				(&parent,
+				 x, y, w, h,
+				 g_gr->get_picture(PicMod_UI, "pics/but1.png"))
+		{
+			changed.set(&parent, &Game_Main_Menu_Save_Game::edit_box_changed);
+		}
+		bool handle_key(bool down, SDL_keysym);
+	} m_editbox;
 	UI::Textarea m_name_label, m_name, m_gametime_label, m_gametime;
-	UI::Callback_Button<Game_Main_Menu_Save_Game> m_button_ok, m_button_cancel;
+	struct Ok : public UI::Button {
+		Ok
+			(Game_Main_Menu_Save_Game & parent,
+			 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h)
+			:
+			UI::Button
+				(&parent,
+				 x, y, w, h,
+				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+				 _("OK"),
+				 std::string(),
+				 false)
+		{}
+		void clicked();
+	} m_button_ok;
+	struct Cancel : public UI::Button {
+		Cancel
+			(Game_Main_Menu_Save_Game & parent,
+			 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h)
+			:
+			UI::Button
+				(&parent,
+				 x, y, w, h,
+				 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+				 _("Cancel"))
+		{}
+		void clicked() {
+			ref_cast<Game_Main_Menu_Save_Game, UI::Panel>(*get_parent()).die();
+		}
+	} m_button_cancel;
 	std::string m_curdir;
 	std::string m_parentdir;
 	std::string m_filename;
