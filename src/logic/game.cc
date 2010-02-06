@@ -1113,6 +1113,10 @@ void Game::conquer_area_no_building(Player_Area<Area<FCoords> > player_area) {
 
 /// Conquers the given area for that player; does the actual work.
 /// Additionally, it updates the visible area for that player.
+// TODO: this needs a more fine grained refactoring
+// for example scripts will want to (un)conquer area of non oval shape
+// or give area back to the neutral player (this is very important for the Lua
+// testsuite).
 void Game::do_conquer_area
 	(Player_Area<Area<FCoords> > player_area,
 	 bool          const conquer,

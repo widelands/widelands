@@ -78,6 +78,8 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, allow_buildings),
 	METHOD(L_Player, forbid_buildings),
 	METHOD(L_Player, add_objective),
+	METHOD(L_Player, conquer),
+	METHOD(L_Player, unconquer),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
@@ -264,7 +266,7 @@ int L_Player::place_building(lua_State * L) {
 
 		:returns: :const:`nil`
 */
-// TODO: add tests for this function
+// UNTESTED
 int L_Player::send_message(lua_State * L) {
 	uint32_t n = lua_gettop(L);
 	std::string title = luaL_checkstring(L, 2);
@@ -362,7 +364,7 @@ int L_Player::send_message(lua_State * L) {
 
 		:returns: :const:`nil`
 */
-// TODO: this is untested. But can this be tested?
+// UNTESTED
 int L_Player::message_box(lua_State * L) {
 	Game & game = get_game(L);
 	Event_Message_Box e("temp", Event::INIT);
@@ -414,7 +416,44 @@ int L_Player::message_box(lua_State * L) {
 	return 1;
 }
 
-// TODO: document me, test me
+/* RST
+	.. method:: conquer(f[, radius=1])
+
+		Conquer this area around the given field if it does not belong to the
+		player already. This will conquer the fields no matter who owns it at the
+		moment.
+
+		:arg f: center field for conquering
+		:type f: :class:`wl.map.Field`
+		:arg radius: radius to conquer around. Default value makes this call
+			conquer 7 fields
+		:type radius: :class:`integer`
+		:returns: :const:`nil`
+*/
+// UNTESTED
+int L_Player::conquer(lua_State * L) {
+	Game & game = get_game(L);
+	uint32_t radius = 1;
+	if (lua_gettop(L) > 2)
+		radius = luaL_checkuint32(L, 3);
+
+	game.conquer_area(Player_Area<Area<FCoords> >
+			(m_pl, Area<FCoords>
+				((*get_user_class<L_Field>(L,2))->fcoords(L), radius))
+	);
+	return 0;
+}
+
+
+/* RST
+	.. method:: sees_field(f)
+
+		Returns true if this field is currently seen by this player
+
+		:returns: :const:`true` or :const:`false`
+		:rtype: :class:`bool`
+*/
+// UNTESTED
 int L_Player::sees_field(lua_State * L) {
 	Game & game = get_game(L);
 
@@ -722,9 +761,14 @@ Objective & L_Objective::m_get(lua_State * L, Widelands::Game & g) {
  *                            MODULE FUNCTIONS
  * ========================================================================
  */
-/*
- * TODO: document me
- */
+/* RST
+	.. method:: get_game
+
+		This returns the absolute time elapsed since the game was started.
+
+		:returns: the current gametime in milliseconds
+		:rtype: :class:`integer`
+*/
 static int L_get_time(lua_State * L) {
 	Game & game = get_game(L);
 	lua_pushint32(L, game.get_gametime());
@@ -732,9 +776,16 @@ static int L_get_time(lua_State * L) {
 }
 
 
-/*
- * TODO: document me
- */
+/* RST
+	.. method:: run_coroutine(func)
+
+		Hands a Lua coroutine object over to widelands for execution. The object
+		must have been created via :func:`coroutine.create`. The coroutine is
+		expected to :func:`coroutine.yield` at regular intervals with the
+		absolute game time on which the function should be awakened again.
+
+		:returns: :const:`nil`
+*/
 static int L_run_coroutine(lua_State * L) {
 	int nargs = lua_gettop(L);
 	if (nargs < 1)
