@@ -254,6 +254,8 @@ public:
 	 */
 	int get_x(lua_State * L);
 	int get_y(lua_State * L);
+	int get_viewpoint_x(lua_State * L);
+	int get_viewpoint_y(lua_State * L);
 	int get_height(lua_State * L);
 	int set_height(lua_State * L);
 	int get_immovable(lua_State * L);

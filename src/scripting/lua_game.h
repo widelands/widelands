@@ -61,6 +61,10 @@ public:
 	int get_number(lua_State * L);
 	int get_allowed_buildings(lua_State * L);
 	int get_objectives(lua_State * L);
+	int get_viewpoint_x(lua_State * L);
+	int set_viewpoint_x(lua_State * L);
+	int get_viewpoint_y(lua_State * L);
+	int set_viewpoint_y(lua_State * L);
 
 	/*
 	 * Lua methods

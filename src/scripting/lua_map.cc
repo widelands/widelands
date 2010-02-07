@@ -28,6 +28,7 @@
 #include "logic/player.h"
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
+#include "wui/mapviewpixelconstants.h"
 
 #include "c_utils.h"
 #include "lua_game.h"
@@ -629,10 +630,17 @@ GET_X(worker);
 
 
 
+/* RST
+Field
+-----
 
-/*
- * TODO: document me
- */
+.. class:: Field
+
+	This class represents one Field in Widelands. The field may contain
+	immovables like Flags or Buildings and can be connected via Roads. Every
+	Field has two Triangles associated with itself: the right and the down one.
+*/
+
 const char L_Field::className[] = "Field";
 const MethodType<L_Field> L_Field::Methods[] = {
 	METHOD(L_Field, __eq),
@@ -652,6 +660,8 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	PROP_RW(L_Field, terr),
 	PROP_RW(L_Field, terd),
 	PROP_RW(L_Field, height),
+	PROP_RO(L_Field, viewpoint_x),
+	PROP_RO(L_Field, viewpoint_y),
 	{0, 0, 0},
 };
 
@@ -698,6 +708,21 @@ int L_Field::set_height(lua_State * L) {
 	get_game(L).map().set_height(fcoords(L), height);
 
 	return get_height(L);
+}
+
+/* RST
+	.. attribute:: viewpoint_x, viewpoint_y
+
+		(RO) Returns the position in pixels to move the view to to center
+		this field for the current interactive player
+*/
+int L_Field::get_viewpoint_x(lua_State * L) {
+	lua_pushuint32(L, m_c.x * TRIANGLE_WIDTH);
+	return 1;
+}
+int L_Field::get_viewpoint_y(lua_State * L) {
+	lua_pushuint32(L, m_c.y * TRIANGLE_HEIGHT);
+	return 1;
 }
 
 // TODO: document me
