@@ -22,6 +22,7 @@
 #include "economy/flag.h"
 #include "events/event_message_box.h"
 #include "events/event_message_box_message_box.h"
+#include "gamecontroller.h"
 #include "logic/cmd_luafunction.h"
 #include "logic/objective.h"
 #include "logic/player.h"
@@ -465,7 +466,16 @@ int L_Player::message_box(lua_State * L) {
 		lua_pop(L, 1);
 	}
 
+	uint32_t cspeed = game.gameController()->desiredSpeed();
+	game.gameController()->setDesiredSpeed(0);
 	e.run(game);
+
+	game.gameController()->setDesiredSpeed(cspeed);
+	
+	// Manually force the game to reevalute it's current state,
+	// especially time information.
+	game.think();
+
 
 	return 1;
 }
@@ -944,9 +954,40 @@ static int L_run_coroutine(lua_State * L) {
 
 	return 0;
 }
+
+/* RST
+	.. function:: set_speed(speed)
+
+		Sets the desired speed of the game in ms per real second, so a speed of
+		1000 means the game runs at 1x speed. Note that this will not work in
+		network games.
+
+		:returns: :const:`nil`
+*/
+// UNTESTED
+static int L_set_speed(lua_State * L) {
+	get_game(L).gameController()->setDesiredSpeed(luaL_checkuint32(L, -1));
+	return 1;
+}
+
+/* RST
+	.. function:: get_speed(speed)
+
+		Gets the current game speed
+
+		:returns: :const:`nil`
+*/
+// UNTESTED
+static int L_get_speed(lua_State * L) {
+	lua_pushuint32(L, get_game(L).gameController()->desiredSpeed());
+	return 1;
+}
+
 const static struct luaL_reg wlgame [] = {
 	{"run_coroutine", &L_run_coroutine},
 	{"get_time", &L_get_time},
+	{"get_speed", &L_get_speed},
+	{"set_speed", &L_set_speed},
 	{0, 0}
 };
 
