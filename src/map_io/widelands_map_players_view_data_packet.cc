@@ -296,10 +296,14 @@ void Map_Players_View_Data_Packet::Read
 					r_player_field  = player_fields + r_index;
 
 					uint32_t file_vision = vision_file.Unsigned32();
+					// I removed this check, because scripting could
+					// have given the player a permanent view of this field. That's
+					// why we save this stuff in the first place!
 					if (file_vision != f_player_field.vision)
-						throw game_data_error
-							("player %u, node (%i, %i): vision mismatch (%u vs. %u)",
-							 plnum, f.x, f.y, f_player_field.vision, file_vision);
+						f_player_field.vision = file_vision;
+					//throw game_data_error
+					//("player %u, node (%i, %i): vision mismatch (%u vs. %u)",
+					//plnum, f.x, f.y, f_player_field.vision, file_vision);
 				} while (r.x);
 			}
 
