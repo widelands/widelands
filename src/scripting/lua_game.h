@@ -74,11 +74,13 @@ public:
 	int send_message(lua_State * L);
 	int message_box(lua_State * L);
 	int sees_field(lua_State * L);
+	int seen_field(lua_State * L);
 	int allow_buildings(lua_State * L);
 	int forbid_buildings(lua_State * L);
 	int add_objective(lua_State * L);
 	int conquer(lua_State * L);
-	int move_to(lua_State * L);
+	int reveal_fields(lua_State * L);
+	int hide_fields(lua_State * L);
 
 
 	/*

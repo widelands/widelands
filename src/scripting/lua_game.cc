@@ -75,11 +75,13 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, send_message),
 	METHOD(L_Player, message_box),
 	METHOD(L_Player, sees_field),
+	METHOD(L_Player, seen_field),
 	METHOD(L_Player, allow_buildings),
 	METHOD(L_Player, forbid_buildings),
 	METHOD(L_Player, add_objective),
 	METHOD(L_Player, conquer),
-	METHOD(L_Player, move_to),
+	METHOD(L_Player, reveal_fields),
+	METHOD(L_Player, hide_fields),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
@@ -212,22 +214,6 @@ int L_Player::set_viewpoint_y(lua_State * L) {
 	return 0;
 }
 
-/* RST
-	.. method:: move_to(f)
-
-		Moves the view of the player to the given field if the Player is the
-		interactive player; otherwise it does nothing
-
-		:arg f: Field to move to
-		:type f: :class:`wl.map.Field`
-		:returns: :const:`nil`
-*/
-int L_Player::move_to(lua_State * L) {
-	Interactive_Player & ipl = *get_game(L).get_ipl();
-	if (ipl.player_number() == m_pl)
-		ipl.move_view_to((*get_user_class<L_Field>(L, 2))->coords());
-	return 0;
-}
 
 /*
  ==========================================================
@@ -534,6 +520,26 @@ int L_Player::sees_field(lua_State * L) {
 }
 
 /* RST
+	.. method:: seen_field(f)
+
+		Returns true if this field has ever been seen by this player or
+		is currently seen
+
+		:returns: :const:`true` or :const:`false`
+		:rtype: :class:`bool`
+*/
+// UNTESTED
+int L_Player::seen_field(lua_State * L) {
+	Game & game = get_game(L);
+
+	Widelands::Map_Index const i =
+		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &game.map()[0];
+
+	lua_pushboolean(L, m_get(L, game).vision(i) >= 1);
+	return 1;
+}
+
+/* RST
 	.. method:: allow_buildings(what)
 
 		This method disables or enables buildings to build for the player. What
@@ -611,6 +617,66 @@ int L_Player::add_objective(lua_State * L) {
 	game.get_map()->mom().register_new(o);
 
 	return to_lua<L_Objective>(L, new L_Objective(o));
+}
+
+/* RST
+	.. method:: reveal_fields(fields)
+
+		Make these fields visible for the current player. The fields will remain
+		visible until they are hidden again.
+
+		:arg fields: The fields to show
+		:type fields: :class:`array` of :class:`wl.map.Fields`
+
+		:returns: :const:`nil`
+*/
+// UNTESTED
+int L_Player::reveal_fields(lua_State * L) {
+	Game & g = get_game(L);
+	Player & p = m_get(L, g);
+	Map & m = g.map();
+
+	luaL_checktype(L, 2, LUA_TTABLE);
+
+	lua_pushnil(L);  /* first key */
+	while (lua_next(L, 2) != 0) {
+		p.see_node
+			(m, m[0], (*get_user_class<L_Field>(L, -1))->fcoords(L),
+			g.get_gametime());
+		lua_pop(L, 1);
+	}
+
+	return 0;
+}
+
+/* RST
+	.. method:: hide_fields(fields)
+
+		Make these fields hidden for the current player if they are not
+		seen by a military building.
+
+		:arg fields: The fields to hide
+		:type fields: :class:`array` of :class:`wl.map.Fields`
+
+		:returns: :const:`nil`
+*/
+// UNTESTED
+int L_Player::hide_fields(lua_State * L) {
+	Game & g = get_game(L);
+	Player & p = m_get(L, g);
+	Map & m = g.map();
+
+	luaL_checktype(L, 2, LUA_TTABLE);
+
+	lua_pushnil(L);  /* first key */
+	while (lua_next(L, 2) != 0) {
+		p.unsee_node
+			((*get_user_class<L_Field>(L, -1))->fcoords(L).field - &m[0],
+			g.get_gametime());
+		lua_pop(L, 1);
+	}
+
+	return 0;
 }
 
 /*

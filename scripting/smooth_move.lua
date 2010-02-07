@@ -1,4 +1,4 @@
-use("core", "coroutine")
+use("aux", "coroutine")
 
 -- RST
 -- smooth_move.lua
@@ -10,8 +10,7 @@ use("core", "coroutine")
 -- =======================================================================
 --                             PRIVATE FUNCTIONS                            
 -- =======================================================================
-function _fm_move(x,y, g_plr, g_T)
-   local f = wl.map.Field(x,y)
+function _fm_move(f, g_plr, g_T)
    local plr = g_plr or wl.game.Player(1)
    local T = g_T or 1000
 
@@ -64,19 +63,19 @@ end
 --                             PUBLIC FUNCTIONS                             
 -- =======================================================================
 -- RST
--- .. function:: smooth_move(x, y[, plr = wl.game.Player(1), T = 1000])
+-- .. function:: smooth_move(f, [, plr = wl.game.Player(1), T = 1000])
 --
 --    Make a nice moving transition in a given time to the Field(x,y). 
 --
---    :arg x, y: Field coordinates to center the view on
---    :type x, y: :class:`integer`
+--    :arg f: Field to center the view on
+--    :type r: :class:`wl.map.Field`
 --    :arg plr: The player to move the view for
 --    :type plr: :class:`wl.game.Player`
 --    :arg T: Time in ms to take for the transition.
 --    :type T: :class:`integer`
 --
 --    :returns: :const:`nil`
-function smooth_move(x, y, g_plr, g_T)
-   run(_fm_move, x, y, g_plr, g_T)
+function smooth_move(f, g_plr, g_T)
+   run(_fm_move, f, g_plr, g_T)
 end
 
