@@ -165,7 +165,7 @@ LuaInterface_Impl::LuaInterface_Impl
 	lua_pushlightuserdata(m_L, static_cast<void *>(egbase));
 	lua_settable(m_L, LUA_REGISTRYINDEX);
 
-	register_scripts(*g_fs, "core");
+	register_scripts(*g_fs, "aux");
 }
 
 LuaInterface_Impl::~LuaInterface_Impl() {

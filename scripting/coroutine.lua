@@ -1,10 +1,26 @@
+-- RST
+-- coroutine.lua
+-- -------------
+--
+-- This script contains convenience wrapper around creation and resuming 
+-- of coroutines and yielding proper sleeping times to widelands. These
+-- functions are more specially tailored to widelands and take a lot of 
+-- the awkwardness out of using coroutines directly.
+
 -- =======================================================================
---          Convenience functions for Widelands Coroutine Handling          
+--                             PUBLIC FUNCTIONS                             
 -- =======================================================================
 
--- ================
--- Basic functions 
--- ================
+-- RST
+-- .. function:: run(func[, ...])
+--    
+--    Start to run a function as a coroutine and hand it over to widelands
+--    for periodical resuming. All arguments passed to this function are
+--    given to the coroutine when it is first run. 
+--
+--    :arg func: Lua function to launch as a coroutine
+--
+--    :returns: :const:`nil`
 function run(func, ...) 
    c = coroutine.create(func)
    success, sleeptime = coroutine.resume(c, ...)
@@ -15,10 +31,32 @@ function run(func, ...)
    end
 end
 
+-- RST
+-- .. function:: sleep(time)
+--    
+--    This must be called inside a coroutine. This will put the coroutine to
+--    sleep. Widelands will wake it after the given amount of time. 
+--
+--    :arg time: time to sleep in ms
+--    :type time: :class:`integer`
+--
+--    :returns: :const:`nil`
 function sleep(time)
    coroutine.yield(wl.game.get_time() + time)
 end
 
+-- RST
+-- .. function:: wake_me(at)
+--    
+--    This must be called inside a coroutine. This will put the coroutine to
+--    sleep. Widelands will wake it at the absolute time given. If this time is
+--    already in the past (that is at < :func:`wl.game.get_time()`) the
+--    behaviour is undefined.
+--
+--    :arg at: when to wake this coroutine
+--    :type at: :class:`integer`
+--
+--    :returns: :const:`nil`
 function wake_me(at)
    coroutine.yield(at)
 end

@@ -5,4 +5,5 @@ tags
 /src/scripting/doc/build/
 /src/scripting/doc/source/globals.rst
 /src/scripting/doc/source/wl_*.rst
+/src/scripting/doc/source/aux_*.rst
 
