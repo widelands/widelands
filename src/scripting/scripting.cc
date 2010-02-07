@@ -259,7 +259,7 @@ void LuaInterface_Impl::run_script(std::string ns, std::string name) {
 	if
 		((m_scripts.find(ns) == m_scripts.end()) ||
 		 (m_scripts[ns].find(name) == m_scripts[ns].end()))
-		throw LuaScriptNotExistingError(name);
+		throw LuaScriptNotExistingError(ns, name);
 
 	return interpret_string(m_scripts[ns][name]);
 }

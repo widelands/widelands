@@ -48,8 +48,8 @@ struct LuaValueError : public LuaError {
 	{}
 };
 struct LuaScriptNotExistingError : public LuaError {
-	LuaScriptNotExistingError(std::string name) :
-		LuaError("The script '" + name + "' was not found!") {}
+	LuaScriptNotExistingError(std::string ns, std::string name) :
+		LuaError("The script '" + ns + ":" + name + "' was not found!") {}
 };
 
 /**
