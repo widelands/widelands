@@ -470,11 +470,12 @@ int L_Player::message_box(lua_State * L) {
 	game.gameController()->setDesiredSpeed(0);
 	e.run(game);
 
-	game.gameController()->setDesiredSpeed(cspeed);
-	
 	// Manually force the game to reevalute it's current state,
 	// especially time information.
 	game.think();
+
+	game.gameController()->setDesiredSpeed(cspeed);
+
 
 
 	return 1;
