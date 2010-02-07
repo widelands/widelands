@@ -93,7 +93,6 @@ bool Worker::run_createitem(Game & game, State & state, Action const & action)
  */
 bool Worker::run_lua(Game & game, State & state, Action const & action) {
 	// TODO: SirVer, Lua: This is not currently working, rework this
-	// one evil hack to try something out
 	throw game_data_error("Sorry, this action is not currently implemented!");
 
 	// Advance program state

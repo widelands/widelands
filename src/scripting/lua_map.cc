@@ -35,7 +35,7 @@
 
 #include "lua_map.h"
 
-// TODO: make map a class and add attributes width, height
+// TODO: get_width, get_height
 
 using namespace Widelands;
 

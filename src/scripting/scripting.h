@@ -78,7 +78,7 @@ struct LuaInterface {
 	virtual void interpret_file(std::string) = 0;
 	virtual std::string const & get_last_error() const = 0;
 
-	virtual void register_script(std::string, std::string, std::string) = 0;
+	virtual void register_scripts(FileSystem &, std::string) = 0;
 	virtual ScriptContainer& get_scripts_for(std::string) = 0;
 
 	virtual void run_script(std::string, std::string) = 0;

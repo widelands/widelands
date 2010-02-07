@@ -35,23 +35,6 @@ namespace Widelands {
 
 /*
  * ========================================================================
- *            PRIVATE FUNCTIONS
- * ========================================================================
- */
-static bool m_filename_to_short(const std::string & s) {
-	return s.size() < 4;
-}
-static bool m_is_lua_file(const std::string & s) {
-	std::string ext = s.substr(s.size() - 4, s.size());
-	// std::transform fails on older system, therefore we use an explicit loop
-	for (uint32_t i = 0; i < ext.size(); i++)
-		ext[i] = std::tolower(ext[i]);
-	return (ext == ".lua");
-}
-
-
-/*
- * ========================================================================
  *            PUBLIC IMPLEMENTATION
  * ========================================================================
  */
@@ -62,33 +45,7 @@ void Map_Scripting_Data_Packet::Read
 	 Map_Map_Object_Loader &       mol)
 throw (_wexception)
 {
-	filenameset_t scripting_files;
-
-	// Theoretically, we should be able to use fs.FindFiles(*.lua) here,
-	// but since FindFiles doesn't support Globbing in Zips and most
-	// saved maps/games are zip, we have to work around this issue.
-	fs.FindFiles("scripting", "*", &scripting_files);
-
-	for
-		(filenameset_t::iterator i = scripting_files.begin();
-		 i != scripting_files.end(); i++)
-	{
-		if (m_filename_to_short(*i) or not m_is_lua_file(*i))
-			continue;
-
-		size_t length;
-		std::string data(static_cast<char *>(fs.Load(*i, length)));
-		std::string name = i->substr(0, i->size() - 4); // strips '.lua'
-		size_t pos = name.rfind('/');
-		if (pos == std::string::npos)
-			pos = name.rfind("\\");
-		if (pos != std::string::npos)
-			name = name.substr(pos + 1, name.size());
-
-		log("Registering script: (map,%s)\n", name.c_str());
-
-		egbase.lua().register_script("map", name, data);
-	}
+	egbase.lua().register_scripts(fs, "map");
 
 	// Now, read the global state if any is saved
 	Widelands::FileRead fr;

@@ -34,11 +34,9 @@
 #include "scripting.h"
 
 // TODO: document this whole scripting stuff: changes in pluto, pickling,
-// TODO:   unpickling, Luna & Luna changes, mos & mol pickling
-// TODO: make pickling independet of OS by using widelands Stream*
-
-// TODO: get rid of LuaCmd. Only LuaFunction should be kept alife
-// TODO: add support for gettext in lua
+// TODO:   unpickling, Luna & Luna changes, mos & mol pickling, LuaCmd <->
+// TODO:   LuaFunction, Testsuite and it's running.
+// TODO: make pickling independent of OS by using widelands Stream*
 // TODO: add a lua-xgettext like procedure for lua
 
 /*
@@ -56,7 +54,9 @@ class LuaInterface_Impl : public LuaInterface {
 	 */
 	private:
 		int m_check_for_errors(int);
-		void m_register_core_scripts(Widelands::Editor_Game_Base *);
+		void m_register_script(std::string, std::string, std::string);
+		bool m_filename_to_short(const std::string &);
+		bool m_is_lua_file(const std::string &);
 
 	public:
 		LuaInterface_Impl(Widelands::Editor_Game_Base *);
@@ -66,7 +66,7 @@ class LuaInterface_Impl : public LuaInterface {
 		virtual void interpret_file(std::string);
 		virtual std::string const & get_last_error() const {return m_last_error;}
 
-		virtual void register_script(std::string, std::string, std::string);
+		virtual void register_scripts(FileSystem &, std::string);
 		virtual ScriptContainer & get_scripts_for(std::string ns) {
 			return m_scripts[ns];
 		}
@@ -96,52 +96,21 @@ int LuaInterface_Impl::m_check_for_errors(int rv) {
 	return rv;
 }
 
-// TODO: this exact code is also in map loading
-static bool m_filename_to_short(const std::string & s) {
+void LuaInterface_Impl::m_register_script
+	(std::string ns, std::string name, std::string content)
+{
+	m_scripts[ns][name] = content;
+}
+
+bool LuaInterface_Impl::m_filename_to_short(const std::string & s) {
 	return s.size() < 4;
 }
-static bool m_is_lua_file(const std::string & s) {
+bool LuaInterface_Impl::m_is_lua_file(const std::string & s) {
 	std::string ext = s.substr(s.size() - 4, s.size());
 	// std::transform fails on older system, therefore we use an explicit loop
 	for (uint32_t i = 0; i < ext.size(); i++)
 		ext[i] = std::tolower(ext[i]);
 	return (ext == ".lua");
-}
-void LuaInterface_Impl::m_register_core_scripts
-	(Widelands::Editor_Game_Base * egbase)
-{
-	filenameset_t scripting_files;
-
-	// Theoretically, we should be able to use fs.FindFiles(*.lua) here,
-	// but since FindFiles doesn't support Globbing in Zips and most
-	// saved maps/games are zip, we have to work around this issue.
-	g_fs->FindFiles("scripting", "*", &scripting_files);
-
-	for
-		(filenameset_t::iterator i = scripting_files.begin();
-		 i != scripting_files.end(); i++)
-	{
-		if (m_filename_to_short(*i) or not m_is_lua_file(*i))
-			continue;
-
-		size_t length;
-		std::string data(static_cast<char *>(g_fs->Load(*i, length)));
-		std::string name = i->substr(0, i->size() - 4); // strips '.lua'
-		size_t pos = name.rfind('/');
-		if (pos == std::string::npos)
-			pos = name.rfind("\\");
-		if (pos != std::string::npos)
-			name = name.substr(pos + 1, name.size());
-
-		log("Registering script: (core,%s)\n", name.c_str());
-		register_script("core", name, data);
-
-		// Immediately use() this script
-		// lua_getglobal(m_L, "use");
-		// lua_pushstring(m_L, "core");
-		// lua_pushstring(m_L, name.c_str());
-		// lua_call(m_L, 2, 0);
-	}
 }
 
 /*************************
@@ -196,7 +165,7 @@ LuaInterface_Impl::LuaInterface_Impl
 	lua_pushlightuserdata(m_L, static_cast<void *>(egbase));
 	lua_settable(m_L, LUA_REGISTRYINDEX);
 
-	m_register_core_scripts(egbase);
+	register_scripts(*g_fs, "core");
 }
 
 LuaInterface_Impl::~LuaInterface_Impl() {
@@ -276,12 +245,6 @@ uint32_t LuaInterface_Impl::write_global_env
 }
 
 
-void LuaInterface_Impl::register_script
-	(std::string ns, std::string name, std::string content)
-{
-	m_scripts[ns][name] = content;
-}
-
 void LuaInterface_Impl::interpret_string(std::string cmd) {
 	int rv = luaL_dostring(m_L, cmd.c_str());
 	m_check_for_errors(rv);
@@ -299,6 +262,35 @@ void LuaInterface_Impl::run_script(std::string ns, std::string name) {
 		throw LuaScriptNotExistingError(name);
 
 	return interpret_string(m_scripts[ns][name]);
+}
+
+void LuaInterface_Impl::register_scripts(FileSystem & fs, std::string ns) {
+	filenameset_t scripting_files;
+
+	// Theoretically, we should be able to use fs.FindFiles(*.lua) here,
+	// but since FindFiles doesn't support Globbing in Zips and most
+	// saved maps/games are zip, we have to work around this issue.
+	fs.FindFiles("scripting", "*", &scripting_files);
+
+	for
+		(filenameset_t::iterator i = scripting_files.begin();
+		 i != scripting_files.end(); i++)
+	{
+		if (m_filename_to_short(*i) or not m_is_lua_file(*i))
+			continue;
+
+		size_t length;
+		std::string data(static_cast<char *>(fs.Load(*i, length)));
+		std::string name = i->substr(0, i->size() - 4); // strips '.lua'
+		size_t pos = name.rfind('/');
+		if (pos == std::string::npos)
+			pos = name.rfind("\\");
+		if (pos != std::string::npos)
+			name = name.substr(pos + 1, name.size());
+
+		log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
+		m_register_script(ns, name, data);
+	}
 }
 
 /*
