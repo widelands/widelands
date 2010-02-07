@@ -22,8 +22,11 @@ if (NOT DEFINED CMAKE_BUILD_TYPE)
   set (CMAKE_BUILD_TYPE Debug)
 endif (NOT DEFINED CMAKE_BUILD_TYPE)
 
-# CMAKE only defines -g, but we need -DDEBUG also
-set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+# CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
+set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+
+# CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
+set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 # we don't want someone to set this directly...
 unset (WL_VERSION CACHE)
