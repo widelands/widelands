@@ -1,2 +1,8 @@
 .bzr-repo
 tags
+
+# Scripting documentation ignores
+/src/scripting/doc/build/
+/src/scripting/doc/source/globals.rst
+/src/scripting/doc/source/wl_*.rst
+
