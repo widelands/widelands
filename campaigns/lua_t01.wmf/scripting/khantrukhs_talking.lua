@@ -41,10 +41,15 @@ function check_ranger()
 end
 
 function tutorial_thread()
-p:message_box(_"Somebody comes upon to you", khantrukh_1)
-p:message_box(_"The advisor", khantrukh_2)
-p:message_box(_"The advisor", khantrukh_3)
+send_msg(_"Somebody comes upon to you", khantrukh_1)
+send_msg(_"The advisor", khantrukh_2, home)
 o = start_lumberjack_01(p)
+-- Wait till the hut is build.
+while not exist_buildings(
+   wl.map.Field(15,11):region(2), {constructionsite = 1})
+   do sleep(5000) end
+
+send_msg(_"The advisor", khantrukh_3, home)
 
 -- Wait till the hut is build.
 while not exist_buildings(

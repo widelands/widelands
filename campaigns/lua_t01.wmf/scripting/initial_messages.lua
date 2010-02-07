@@ -49,12 +49,12 @@ send_msg(title, msg, grave)
 msg = "<rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
 _[[ "As father told me, there will be times to fight and times to lie and wait, trying not to sleep or die before the right time comes. And so I do... wait." ]] .. 
 "</p></rt>"
-p:message_box(title, msg, home)
+send_msg(title, msg, home)
 sleep(2000)
 
 use("map", "khantrukhs_talking")
 end
 
 
-wl.game.run_coroutine(coroutine.create(briefing_messages))
+run(briefing_messages)
 
