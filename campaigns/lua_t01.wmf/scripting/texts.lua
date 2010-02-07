@@ -94,3 +94,45 @@ khantrukh_8 =_ "<rt image=map:khantrukh.png><p line-spacing=3 font-size=12>" ..
 _[[ "Very well done, chieftain. We now have all we need to face the winter and may prepare ourselves for the battles ahead.<br><br>--------------------- VICTORY! ----------------------<br><br> You may continue if you wish. Otherwise, move on to the next mission." ]] ..
 "</p></rt>"
 
+
+-- =======================================================================
+--                  General story texts from the Chieftain                  
+-- =======================================================================
+story_msg1 = {
+   title = _"In the night",
+   msg ="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+_"Thron speaks..." ..
+"</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
+_ [[ "In another sleepless night, I went up to the hill and gazed to the north. The fires are still burning, stilling their hunger upon my father's legacy.<br> They are a constant reminder why we had to hide here... and why we must return in the end!" ]] ..
+"</p></rt>", 
+loc = al_thunran,
+}
+
+story_msg2= {
+   title = _"At the grave",
+   msg = "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" .. 
+_"Thron speaks..." ..
+"</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
+_[[ "Once again, I went up to my father's tomb, in a sacred grove at the foot of the great spire of Kal'mavrath. I just stood there and felt neither the hours pass nor the cold rain pouring down from a darkened sky...<br> Somehow it felt like a farewell. For the first time, I wondered what the future might hold for me..." ]] ..
+"</p></rt>", 
+loc = grave,
+}
+
+story_msg3 = {
+  title=_ "The other day",
+  msg = "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+_"Thron says thoughtfully..." ..
+"</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
+_[[ "Some time ago, Boldreth came to me. His advice was to move to a place closer to home - to strike at the first sign of my brother's forces wavering.<br> But I look over the forests and I still see black smoke rising to the sky. I know - it is too early yet, and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed that too rash a return would cause both on our and the other side..." ]] ..
+"</p></rt>"
+}
+
+story_msg4 = {
+title =_ "The oath",
+msg = "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+_"Thron looks furious..." ..
+"</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
+_[[ "Today, my warriors picked up an old man, wandering sick and wounded through the dark forest. We listened in horror when he told us of the atrocities taking place in Al'thunran.<br> I hereby renew my oath - I will stop this madness at any cost!" ]] ..
+"</p></rt>"
+}
+

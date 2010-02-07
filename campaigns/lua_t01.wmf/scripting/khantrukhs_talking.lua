@@ -2,7 +2,6 @@
 -- Messages by Khantrukh 
 -- ======================
 
--- TODO: gebabbel vom haeuptling
 -- TODO: reveal campaign mission
 
 use("map", "texts")
@@ -41,15 +40,15 @@ function check_ranger()
 end
 
 function tutorial_thread()
-send_msg(_"Somebody comes upon to you", khantrukh_1)
-send_msg(_"The advisor", khantrukh_2, home)
+show_story_box(_"Somebody comes upon to you", khantrukh_1)
+show_story_box(_"The advisor", khantrukh_2, nil, 80, 80)
 o = start_lumberjack_01(p)
 -- Wait till the hut is build.
 while not exist_buildings(
    wl.map.Field(15,11):region(2), {constructionsite = 1})
    do sleep(5000) end
 
-send_msg(_"The advisor", khantrukh_3, home)
+show_story_box(_"The advisor", khantrukh_3, nil, 80, 80)
 
 -- Wait till the hut is build.
 while not exist_buildings(
