@@ -22,6 +22,9 @@ if (NOT DEFINED CMAKE_BUILD_TYPE)
   set (CMAKE_BUILD_TYPE Debug)
 endif (NOT DEFINED CMAKE_BUILD_TYPE)
 
+# CMAKE only defines -g, but we need -DDEBUG also
+set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+
 # we don't want someone to set this directly...
 unset (WL_VERSION CACHE)
 
