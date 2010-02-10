@@ -1,4 +1,6 @@
 ### Build 15 (until now)
+- Changed localization structure so that we can translate from launchpad.net
+- Lua support (preliminary) 
 - Fix bug that when a worker program had a createitem command where the
   parameter was not the name of a ware type in the tribe, the game would fail
   an assertion when the command was executed. Now throw an exception when the
