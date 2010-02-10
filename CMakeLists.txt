@@ -10,7 +10,6 @@ project (widelands)
 #     If you try to set WL_VERSION directly, it will ignore your setting.
 
 cmake_minimum_required (VERSION 2.6)
-set (CMAKE_CONFIGURATION_TYPES Debug|Release)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build-directory and source-directory are the same!")
@@ -21,6 +20,9 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Mod
 if (NOT DEFINED CMAKE_BUILD_TYPE)
   set (CMAKE_BUILD_TYPE Debug)
 endif (NOT DEFINED CMAKE_BUILD_TYPE)
+
+set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
+
 
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
 set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
@@ -161,7 +163,7 @@ install(
     po
 #  locale
   DESTINATION share/widelands
-  CONFIGURATIONS Debug|Release
+  CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles
   PATTERN "*.svn*" EXCLUDE
   PATTERN "SCons*" EXCLUDE
