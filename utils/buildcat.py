@@ -32,13 +32,13 @@ HEADER_YEAR = strftime("%Y",gmtime())
 # Holds the names of non-iterative catalogs to build and the
 # corresponding source paths list. Note that paths MUST be relative to po/pot,
 # to let .po[t] comments point to somewhere useful
-MAINPOTS = [( "maps", ["../../maps/*/elemental", "../../campaigns/cconfig"] ),
-            ( "texts", ["../../txts/COPYING",
+MAINPOTS = [( "maps/maps", ["../../maps/*/elemental", "../../campaigns/cconfig"] ),
+            ( "texts/texts", ["../../txts/COPYING",
                           "../../txts/README",
                           "../../txts/developers",
                           "../../txts/editor_readme",
                           "../../txts/tips/*.tip"] ),
-            ( "widelands", ["../../src/*.cc",
+            ( "widelands/widelands", ["../../src/*.cc",
                             "../../src/*/*.cc",
                             "../../src/*/*/*.cc",
                             "../../src/*.h",
@@ -59,12 +59,12 @@ MAINPOTS = [( "maps", ["../../maps/*/elemental", "../../campaigns/cconfig"] ),
 #
 # For every instance found of a given type, '%s' in this values is replaced
 # with the name of the instance.
-ITERATIVEPOTS = [ ("campaigns/%s", "campaigns/",
-                                            ["../../../campaigns/%s/e*",
-                                            "../../../campaigns/%s/objective"] ),
-                  ("tribes/%s", "tribes/", ["../../../tribes/%s/conf",
+ITERATIVEPOTS = [ ("scenario_%s/scenario_%s", "campaigns/",
+                                        ["../../../campaigns/%s/e*",
+                                        "../../../campaigns/%s/objective"] ),
+                  ("tribe_%s/tribe_%s", "tribes/", ["../../../tribes/%s/conf",
                                              "../../../tribes/%s/*/conf"] ),
-                  ("worlds/%s", "worlds/", ["../../../worlds/%s/*conf",
+                  ("world_%s/world_%s", "worlds/", ["../../../worlds/%s/*conf",
                                              "../../../worlds/%s/*/conf"] )
                 ]
 
@@ -234,13 +234,13 @@ def do_update_potfiles():
 
         # Generate .pot catalogs
         for pot, srcfiles in potfiles:
-                path = os.path.normpath("po/pot/" + os.path.dirname(pot))
+                path = os.path.normpath("po/" + os.path.dirname(pot))
                 do_makedirs(path)
                 oldcwd = os.getcwd()
                 os.chdir(path)
                 potfile = os.path.basename(pot) + '.pot'
 
-                print("\tpo/pot/%s.pot" % pot)
+                print("\tpo/%s.pot" % pot)
                 if potfile == 'widelands.pot':
                         # This catalogs can be built with xgettext
                         do_compile_src( potfile, srcfiles )
@@ -419,9 +419,8 @@ def do_update_po(lang, files):
 
         for f in files:
                 # File names to use
-                po = os.path.normpath(("po/%s/%s" %
-                        (lang, f.rstrip("t").lstrip("/"))))
-                pot = os.path.normpath(("po/pot/%s" % f))
+                pot = os.path.normpath("po/%s" % f)
+                po = os.path.join(os.path.dirname(pot), lang + '.po')
                 tmp = "tmp.po"
 
                 if not (os.path.exists(po)):
@@ -476,7 +475,7 @@ if __name__ == "__main__":
                 print lang
 
         # Assemble a list of .pot files available
-        srcfiles = do_find_files("po/pot", ".*\.pot$")
+        srcfiles = do_find_files("po/", ".*\.pot$")
 
         for l in lang:
                 do_update_po(l, srcfiles)
