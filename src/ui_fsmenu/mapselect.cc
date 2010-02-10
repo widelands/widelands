@@ -189,7 +189,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 
 		// get translated worldsname
 		std::string worldpath("worlds/" + map.world);
-		Profile prof((worldpath + "/conf").c_str(), 0, worldpath.c_str());
+		Profile prof((worldpath + "/conf").c_str(), 0, "world_" + map.world);
 		Section & global = prof.get_safe_section("world");
 		std::string world(global.get_safe_string("name"));
 

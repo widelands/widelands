@@ -166,7 +166,8 @@ void PlayerDescriptionGroup::refresh()
 			}
 			// get translated tribesname
 			std::string tribepath("tribes/" + player.tribe);
-			Profile prof((tribepath + "/conf").c_str(), 0, tribepath.c_str());
+			Profile prof
+				((tribepath + "/conf").c_str(), 0, "tribe_" + player.tribe);
 			Section & global = prof.get_safe_section("tribe");
 			d->btnPlayerTribe->set_title(global.get_safe_string("name"));
 			d->btnPlayerType->set_title(title);
