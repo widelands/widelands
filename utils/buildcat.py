@@ -140,7 +140,6 @@ def do_compile( potfile, srcfiles ):
         for i in srcfiles:
                 files += glob(i)
 
-        print "files: %s" % (files)
         catalog = confgettext.parse_conf(files)
         file = open(potfile, "w")
         file.write(catalog)
@@ -198,13 +197,10 @@ def do_find_iterative(preffix, basedir, srcmasks):
         res = []
 
         for file in do_find_dirs(basedir, RE_NO_DOTFILE):
-            print "###: %s " % (file)
             srcfiles = []
             for p in srcmasks:
                 srcfiles.append(p % { "name": file })
             name = preffix % { "name": file }
-            print "   name: %s" % (name)
-            print "   srcfiles: %s" % (srcfiles)
             res.append((name, srcfiles))
 
         return res
@@ -241,8 +237,6 @@ def do_update_potfiles():
         for preffix, basedir, srcfiles in ITERATIVEPOTS:
             potfiles += do_find_iterative(preffix, basedir, srcfiles)
 
-        print "potfiles: %s" % (potfiles)
-
         # Generate .pot catalogs
         for pot, srcfiles in potfiles:
                 path = os.path.normpath("po/" + os.path.dirname(pot))
@@ -251,7 +245,6 @@ def do_update_potfiles():
                 os.chdir(path)
                 potfile = os.path.basename(pot) + '.pot'
 
-                print "potfile: %s" % (potfile)
                 print("\tpo/%s.pot" % pot)
 
                 if potfile == 'widelands.pot':
