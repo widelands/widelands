@@ -73,7 +73,7 @@ Tribe_Descr::Tribe_Descr
 
 		// Grab the localization textdomain.
 		// 'path' must be without final /
-		i18n::Textdomain textdomain(path);
+		i18n::Textdomain textdomain(std::string("tribe_") + tribename);
 
 		path            += '/';
 		std::string::size_type base_path_size = path.size();

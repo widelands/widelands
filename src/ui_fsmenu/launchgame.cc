@@ -535,7 +535,7 @@ void Fullscreen_Menu_LaunchGame::load_previous_playerdata()
 		// get translated tribename
 		strbuf = "tribes/" + m_player_save_tribe[i - 1];
 		strbuf += "/conf";
-		Profile tribe(strbuf.c_str(), 0, strbuf.c_str());
+		Profile tribe(strbuf.c_str(), 0, "tribe_" + m_player_save_tribe[i - 1]);
 		Section & global = tribe.get_safe_section("tribe");
 		m_player_save_tribe[i - 1] = global.get_safe_string("name");
 	}
