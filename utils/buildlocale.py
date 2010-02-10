@@ -14,6 +14,8 @@
 import os
 import sys
 import string
+from glob import glob
+import os.path as p
 
 import buildcat
 
@@ -25,19 +27,19 @@ import buildcat
 def do_compile(lang):
         sys.stdout.write("\t%s:\t" % lang)
 
-        for f in buildcat.do_find_files(("po/%s" % lang), ".*\.po$"):
-                # File names and paths to use
-                po = ("po/%s%s" % (lang, f))
-                pot = ("po/pot%st" % f)
-                mo = ("locale/%s/LC_MESSAGES%s" % (lang,
-                        string.replace(f, ".po", ".mo")))
+        for po in glob("po/*/%s.po" % lang):
+            # Hopefully only one pot
+            pot, = glob(p.join(p.dirname(po),"*.pot"))
+            mo = p.join("locale", lang, "LC_MESSAGES",
+                        p.splitext(p.basename(pot))[0] + '.mo'
+            )
 
-                if not buildcat.do_buildpo(po, pot, "tmp.po"):
-                        buildcat.do_makedirs(os.path.dirname(mo))
-                        if not (os.system("msgfmt -o %s tmp.po" % mo)):
-                                os.remove("tmp.po")
-                                sys.stdout.write(".")
-                                sys.stdout.flush()
+            if not buildcat.do_buildpo(po, pot, "tmp.po"):
+                buildcat.do_makedirs(os.path.dirname(mo))
+                if not (os.system("msgfmt -o %s tmp.po" % mo)):
+                    os.remove("tmp.po")
+                    sys.stdout.write(".")
+                    sys.stdout.flush()
 
         sys.stdout.write("\n")
 
@@ -63,7 +65,8 @@ if __name__ == "__main__":
                 print lang
         else:
                 # Find every directory that looks like ISO-639
-                lang = buildcat.do_find_dirs("po", buildcat.RE_ISO639)
+                lang = set(p.splitext(p.basename(l))[0] for
+                         l in glob("po/*/*.po"))
                 print "all available."
 
         for l in lang:

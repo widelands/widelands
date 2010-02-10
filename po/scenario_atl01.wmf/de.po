@@ -1,12 +1,12 @@
-# Widelands po/de_DE/campaigns/atl01.wmf.po
-# Copyright (C) 2005-2009 Widelands Development Team
-# FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
+# Widelands po/scenario_atl01.wmf/de.po
+# Copyright (C) 2007-2008 Widelands Development Team
+# German Translation <widelands-public@lists.sourceforge.net>, 2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Widelands svn4866\n"
+"Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-01-04 02:14+0000\n"
+"POT-Creation-Date: 2010-02-10 18:40+0000\n"
 "PO-Revision-Date: 2010-01-03 12:27+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -14,6 +14,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../../campaigns/atl01.wmf/elemental:9
+#: ../../campaigns/atl01.wmf/elemental:9
 msgid "01 - From nemesis to genesis"
 msgstr "01 - Vom Untergang zur Schöpfung"

@@ -59,14 +59,19 @@ MAINPOTS = [( "maps/maps", ["../../maps/*/elemental", "../../campaigns/cconfig"]
 #
 # For every instance found of a given type, '%s' in this values is replaced
 # with the name of the instance.
-ITERATIVEPOTS = [ ("scenario_%s/scenario_%s", "campaigns/",
-                                        ["../../../campaigns/%s/e*",
-                                        "../../../campaigns/%s/objective"] ),
-                  ("tribe_%s/tribe_%s", "tribes/", ["../../../tribes/%s/conf",
-                                             "../../../tribes/%s/*/conf"] ),
-                  ("world_%s/world_%s", "worlds/", ["../../../worlds/%s/*conf",
-                                             "../../../worlds/%s/*/conf"] )
-                ]
+ITERATIVEPOTS = [
+    ("scenario_%(name)s/scenario_%(name)s", "campaigns/",
+         ["../../campaigns/%(name)s/e*",
+          "../../campaigns/%(name)s/objective"]
+    ),
+    ("tribe_%(name)s/tribe_%(name)s", "tribes/",
+        ["../../tribes/%(name)s/conf",
+         "../../tribes/%(name)s/*/conf"]
+    ),
+    ("world_%(name)s/world_%(name)s", "worlds/",
+     ["../../worlds/%(name)s/*conf", "../../worlds/%(name)s/*/conf"]
+    )
+]
 
 
 # Some useful regular expressions
@@ -135,6 +140,7 @@ def do_compile( potfile, srcfiles ):
         for i in srcfiles:
                 files += glob(i)
 
+        print "files: %s" % (files)
         catalog = confgettext.parse_conf(files)
         file = open(potfile, "w")
         file.write(catalog)
@@ -192,11 +198,14 @@ def do_find_iterative(preffix, basedir, srcmasks):
         res = []
 
         for file in do_find_dirs(basedir, RE_NO_DOTFILE):
-                srcfiles = []
-                for p in srcmasks:
-                        srcfiles.append(string.replace(p, "%s", file))
-                name = string.replace(preffix, "%s", file)
-                res.append((name, srcfiles))
+            print "###: %s " % (file)
+            srcfiles = []
+            for p in srcmasks:
+                srcfiles.append(p % { "name": file })
+            name = preffix % { "name": file }
+            print "   name: %s" % (name)
+            print "   srcfiles: %s" % (srcfiles)
+            res.append((name, srcfiles))
 
         return res
 
@@ -230,7 +239,9 @@ def do_update_potfiles():
         # Build the list of catalogs to generate
         potfiles = MAINPOTS
         for preffix, basedir, srcfiles in ITERATIVEPOTS:
-                potfiles += do_find_iterative(preffix, basedir, srcfiles)
+            potfiles += do_find_iterative(preffix, basedir, srcfiles)
+
+        print "potfiles: %s" % (potfiles)
 
         # Generate .pot catalogs
         for pot, srcfiles in potfiles:
@@ -240,7 +251,9 @@ def do_update_potfiles():
                 os.chdir(path)
                 potfile = os.path.basename(pot) + '.pot'
 
+                print "potfile: %s" % (potfile)
                 print("\tpo/%s.pot" % pot)
+
                 if potfile == 'widelands.pot':
                         # This catalogs can be built with xgettext
                         do_compile_src( potfile, srcfiles )
@@ -424,7 +437,7 @@ def do_update_po(lang, files):
                 tmp = "tmp.po"
 
                 if not (os.path.exists(po)):
-                        # No need to call mesgmerge if there's no translation
+                        # No need to call msgmerge if there's no translation
                         # to merge with. We can use .pot file as input file
                         # below, but we need to make sure the target dir is
                         # ready.
@@ -468,7 +481,8 @@ if __name__ == "__main__":
             NO_HEADER_REWRITE = 1
 
         if (sys.argv[1] == "-a"):
-                lang = do_find_dirs("po/", RE_ISO639)
+                lang = set(p.splitext(p.basename(l))[0] for
+                         l in glob("po/*/*.po"))
                 print "all available."
         else:
                 lang = sys.argv[1:]
