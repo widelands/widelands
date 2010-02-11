@@ -7,12 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2009-07-13 16:48+0100\n"
-"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
+"PO-Revision-Date: 2010-02-10 21:25+0000\n"
+"Last-Translator: Peter Schwanemann <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-02-11 05:00+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
@@ -26,18 +28,23 @@ msgstr "Frühling"
 msgid "These are the beauty and bountifull countries of the barbarians"
 msgstr "Dies sind die wilden Ländereien der Barbaren."
 
-#: ../../worlds/greenland/conf:7 ../../worlds/greenland/conf:8
-#: ../../worlds/greenland/conf:9 ../../worlds/greenland/conf:10
+#: ../../worlds/greenland/conf:7
+#: ../../worlds/greenland/conf:8
+#: ../../worlds/greenland/conf:9
+#: ../../worlds/greenland/conf:10
 #: ../../worlds/greenland/conf:11
 msgid "Bush"
 msgstr "Busch"
 
-#: ../../worlds/greenland/conf:12 ../../worlds/greenland/conf:13
+#: ../../worlds/greenland/conf:12
+#: ../../worlds/greenland/conf:13
 msgid "Cactus"
 msgstr "Kaktus"
 
-#: ../../worlds/greenland/conf:14 ../../worlds/greenland/conf:15
-#: ../../worlds/greenland/conf:16 ../../worlds/greenland/conf:17
+#: ../../worlds/greenland/conf:14
+#: ../../worlds/greenland/conf:15
+#: ../../worlds/greenland/conf:16
+#: ../../worlds/greenland/conf:17
 msgid "Dead Tree"
 msgstr "Toter Baum"
 
@@ -45,36 +52,48 @@ msgstr "Toter Baum"
 msgid "Fallen Tree"
 msgstr "Gefällter Baum"
 
-#: ../../worlds/greenland/conf:19 ../../worlds/greenland/conf:20
+#: ../../worlds/greenland/conf:19
+#: ../../worlds/greenland/conf:20
 #: ../../worlds/greenland/conf:21
 msgid "Grass"
 msgstr "Gras"
 
-#: ../../worlds/greenland/conf:22 ../../worlds/greenland/conf:23
+#: ../../worlds/greenland/conf:22
+#: ../../worlds/greenland/conf:23
 msgid "Mushroom"
 msgstr "Pilz"
 
-#: ../../worlds/greenland/conf:24 ../../worlds/greenland/conf:25
-#: ../../worlds/greenland/conf:26 ../../worlds/greenland/conf:27
-#: ../../worlds/greenland/conf:28 ../../worlds/greenland/conf:29
+#: ../../worlds/greenland/conf:24
+#: ../../worlds/greenland/conf:25
+#: ../../worlds/greenland/conf:26
+#: ../../worlds/greenland/conf:27
+#: ../../worlds/greenland/conf:28
+#: ../../worlds/greenland/conf:29
 msgid "Pebble"
 msgstr "Kieselsteine"
 
-#: ../../worlds/greenland/conf:30 ../../worlds/greenland/conf:31
+#: ../../worlds/greenland/conf:30
+#: ../../worlds/greenland/conf:31
 #: ../../worlds/greenland/conf:32
 msgid "Skeleton"
 msgstr "Skelett"
 
-#: ../../worlds/greenland/conf:33 ../../worlds/greenland/conf:34
-#: ../../worlds/greenland/conf:35 ../../worlds/greenland/conf:36
-#: ../../worlds/greenland/conf:37 ../../worlds/greenland/conf:38
+#: ../../worlds/greenland/conf:33
+#: ../../worlds/greenland/conf:34
+#: ../../worlds/greenland/conf:35
+#: ../../worlds/greenland/conf:36
+#: ../../worlds/greenland/conf:37
+#: ../../worlds/greenland/conf:38
 #: ../../worlds/greenland/conf:39
 msgid "Standing Stones"
 msgstr "Obelisk"
 
-#: ../../worlds/greenland/conf:40 ../../worlds/greenland/conf:41
-#: ../../worlds/greenland/conf:42 ../../worlds/greenland/conf:43
-#: ../../worlds/greenland/conf:44 ../../worlds/greenland/conf:45
+#: ../../worlds/greenland/conf:40
+#: ../../worlds/greenland/conf:41
+#: ../../worlds/greenland/conf:42
+#: ../../worlds/greenland/conf:43
+#: ../../worlds/greenland/conf:44
+#: ../../worlds/greenland/conf:45
 msgid "Stones"
 msgstr "Steine"
 
@@ -293,7 +312,7 @@ msgstr "Fisch"
 #~ msgstr "Ahorn"
 
 #~ msgid "Maple medium"
-#~ msgstr "mittelhoher Ahorn "
+#~ msgstr "mittelhoher Ahorn"
 
 #~ msgid "Maple small"
 #~ msgstr "kleiner Ahorn"

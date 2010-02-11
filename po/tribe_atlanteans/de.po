@@ -7,17 +7,20 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-01-03 12:18+0100\n"
-"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
+"PO-Revision-Date: 2010-02-10 22:31+0000\n"
+"Last-Translator: Peter Schwanemann <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Language: German\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid "These shields are used by the best soldiers of the Atlanteans."
-msgstr "Diese Schilde werden nur von den besten Soldaten der Atlanter benutzt."
+msgstr ""
+"Diese Schilde werden nur von den besten Soldaten der Atlanter benutzt."
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
@@ -28,16 +31,22 @@ msgid "Produce steel shield"
 msgstr "Produziert Stahlschild"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:24
-msgid "Produce steel shield (only for compatibility with old savegames (build13))"
-msgstr "Produziert Stahlschild  (nur für Abwärtskompatiblität mit Speicherständen von build13)"
+msgid ""
+"Produce steel shield (only for compatibility with old savegames (build13))"
+msgstr ""
+"Produziert Stahlschild  (nur für Abwärtskompatiblität mit Speicherständen "
+"von build13)"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:25
 msgid "Produce advanced shield"
 msgstr "Produziert verbessertes Schild"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:26
-msgid "Produce advanced shield (only for compatibility with old savegames (build13))"
-msgstr "Produziert verbessertes Schild (nur für Abwärtskompatiblität mit Speicherständen von build13)"
+msgid ""
+"Produce advanced shield (only for compatibility with old savegames (build13))"
+msgstr ""
+"Produziert verbessertes Schild (nur für Abwärtskompatiblität mit "
+"Speicherständen von build13)"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:27
 #: ../../tribes/atlanteans/bakery/conf:21
@@ -54,7 +63,8 @@ msgstr "Produziert verbessertes Schild (nur für Abwärtskompatiblität mit Spei
 #: ../../tribes/atlanteans/horsefarm/conf:21
 #: ../../tribes/atlanteans/hunters_house/conf:16
 #: ../../tribes/atlanteans/ironmine/conf:22
-#: ../../tribes/atlanteans/mill/conf:23 ../../tribes/atlanteans/quarry/conf:16
+#: ../../tribes/atlanteans/mill/conf:23
+#: ../../tribes/atlanteans/quarry/conf:16
 #: ../../tribes/atlanteans/sawmill/conf:19
 #: ../../tribes/atlanteans/scouts_house/conf:18
 #: ../../tribes/atlanteans/smelting_works/conf:25
@@ -73,12 +83,20 @@ msgid "Bakes bread for workers."
 msgstr "Backt Brot für Arbeiter."
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
-msgid "The bakingtray is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
-msgstr "Das Backblech ist das Werkzeug des Bäckers - ein jeder braucht sein eigenes. Es wird vom Werkzeugmacher hergestellt."
+msgid ""
+"The bakingtray is the tool of the baker, each baker needs its own. It is "
+"produced by the toolsmith."
+msgstr ""
+"Das Backblech ist das Werkzeug des Bäckers - ein jeder braucht sein eigenes. "
+"Es wird vom Werkzeugmacher hergestellt."
 
 #: ../../tribes/atlanteans/blackroot/conf:1
-msgid "Blackroots are a special kind of roots. The Atlanteans like their strong taste and use its flour for making bread."
-msgstr "Schwarzwurzeln sind eine spezielle Wurzelart. Die Atlanter mögen den starken Geschmack und benutzen gemahlene Schwarzwurzeln beim backen ihrer Brote."
+msgid ""
+"Blackroots are a special kind of roots. The Atlanteans like their strong "
+"taste and use its flour for making bread."
+msgstr ""
+"Schwarzwurzeln sind eine spezielle Wurzelart. Die Atlanter mögen den starken "
+"Geschmack und benutzen gemahlene Schwarzwurzeln beim backen ihrer Brote."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:16
 msgid "Plant blackroot"
@@ -93,12 +111,20 @@ msgid "Plants and harvests blackroot."
 msgstr "Planzt und erntet Schwarzwurzeln."
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
-msgid "Blackroot Flour is produced out of blackroots and is one of three parts of the atlantian bread."
-msgstr "Schwarzwurzelmehl wird aus Schwarzwurzel hergestellt und ist eine von drei Zutaten des atlantanischen Brotes."
+msgid ""
+"Blackroot Flour is produced out of blackroots and is one of three parts of "
+"the atlantian bread."
+msgstr ""
+"Schwarzwurzelmehl wird aus Schwarzwurzel hergestellt und ist eine von drei "
+"Zutaten des atlantanischen Brotes."
 
 #: ../../tribes/atlanteans/bread/conf:1
-msgid "This tasty bread is made out of corn- and blackrootflour and is one part of miners meal."
-msgstr "Dieses leckere Brot wird aus Mais- und Schwarzwurzelmehl hergestellt und ist ein Teil der Nahrung der Bergarbeiter."
+msgid ""
+"This tasty bread is made out of corn- and blackrootflour and is one part of "
+"miners meal."
+msgstr ""
+"Dieses leckere Brot wird aus Mais- und Schwarzwurzelmehl hergestellt und ist "
+"ein Teil der Nahrung der Bergarbeiter."
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
@@ -117,8 +143,13 @@ msgid "Carries items along your roads."
 msgstr "Trägt Waren über deine Straßen."
 
 #: ../../tribes/atlanteans/coal/conf:1
-msgid "To make the fine atlantian steel a hot fire is needed. But a fire of wood isn't hot enough -this coal brings the needed heat."
-msgstr "Um den vorzüglichen atlantanischen Stahl herzustellen wird ein heißes Feuer benötigt, doch ein Holzfeuer ist nicht heiß genug - diese Kohle bringt die benötigte Hitze."
+msgid ""
+"To make the fine atlantian steel a hot fire is needed. But a fire of wood "
+"isn't hot enough -this coal brings the needed heat."
+msgstr ""
+"Um den vorzüglichen atlantanischen Stahl herzustellen wird ein heißes Feuer "
+"benötigt, doch ein Holzfeuer ist nicht heiß genug - diese Kohle bringt die "
+"benötigte Hitze."
 
 #: ../../tribes/atlanteans/conf:18
 msgid "The Widelands Development Team"
@@ -129,8 +160,12 @@ msgid "Atlanteans"
 msgstr "Atlanter"
 
 #: ../../tribes/atlanteans/conf:20
-msgid "This tribe is known from the oldest tales. The sons and daughters of Atlantis."
-msgstr "Dieses Volk wird schon in den ältesten Sagen erwähnt. Die Söhne und Töchter von Atlantis."
+msgid ""
+"This tribe is known from the oldest tales. The sons and daughters of "
+"Atlantis."
+msgstr ""
+"Dieses Volk wird schon in den ältesten Sagen erwähnt. Die Söhne und Töchter "
+"von Atlantis."
 
 #: ../../tribes/atlanteans/conf:39
 msgid "Ashes"
@@ -401,9 +436,8 @@ msgid "Carrier"
 msgstr "Träger"
 
 #: ../../tribes/atlanteans/conf:110
-#, fuzzy
 msgid "Horse"
-msgstr "Förster"
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Soldier"
@@ -506,9 +540,8 @@ msgid "Scout"
 msgstr "Erkunder"
 
 #: ../../tribes/atlanteans/conf:140
-#, fuzzy
 msgid "Horse Breeder"
-msgstr "Fischzüchter"
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:143
 msgid "Construction Site"
@@ -522,7 +555,8 @@ msgstr "Verlies"
 msgid "Labyrinth"
 msgstr "Labyrinth"
 
-#: ../../tribes/atlanteans/conf:150 ../../tribes/atlanteans/conf:167
+#: ../../tribes/atlanteans/conf:150
+#: ../../tribes/atlanteans/conf:167
 msgid "Castle"
 msgstr "Burg"
 
@@ -542,11 +576,13 @@ msgstr "Bergfried"
 msgid "Small Tower"
 msgstr "Spähturm"
 
-#: ../../tribes/atlanteans/conf:155 ../../tribes/atlanteans/conf:170
+#: ../../tribes/atlanteans/conf:155
+#: ../../tribes/atlanteans/conf:170
 msgid "Tower"
 msgstr "Wachturm"
 
-#: ../../tribes/atlanteans/conf:158 ../../tribes/atlanteans/conf:166
+#: ../../tribes/atlanteans/conf:158
+#: ../../tribes/atlanteans/conf:166
 msgid "Barrier"
 msgstr "Barriere"
 
@@ -558,11 +594,13 @@ msgstr "Zitadelle"
 msgid "Donjon"
 msgstr "Wachturm"
 
-#: ../../tribes/atlanteans/conf:161 ../../tribes/atlanteans/conf:168
+#: ../../tribes/atlanteans/conf:161
+#: ../../tribes/atlanteans/conf:168
 msgid "Fortress"
 msgstr "Festung"
 
-#: ../../tribes/atlanteans/conf:162 ../../tribes/atlanteans/conf:164
+#: ../../tribes/atlanteans/conf:162
+#: ../../tribes/atlanteans/conf:164
 msgid "Sentry"
 msgstr "Wachposten"
 
@@ -703,12 +741,20 @@ msgid "Castle village"
 msgstr "Burg Dorf"
 
 #: ../../tribes/atlanteans/corn/conf:1
-msgid "This corn is the base of the fine cornflour, that every atlantian baker needs for a good bread."
-msgstr "Mais ist die Basis für Maismehl, was wiederum von jedem atlanter Bäcker verwandt wird um Brot zu backen."
+msgid ""
+"This corn is the base of the fine cornflour, that every atlantian baker "
+"needs for a good bread."
+msgstr ""
+"Mais ist die Basis für Maismehl, was wiederum von jedem atlanter Bäcker "
+"verwandt wird um Brot zu backen."
 
 #: ../../tribes/atlanteans/cornflour/conf:1
-msgid "Cornflour is produced out of corn and is one of three parts of the atlantian bread."
-msgstr "Maismehl wird aus Mais hergestellt und ist eine von drei Zutaten für das atlantische Brot."
+msgid ""
+"Cornflour is produced out of corn and is one of three parts of the atlantian "
+"bread."
+msgstr ""
+"Maismehl wird aus Mais hergestellt und ist eine von drei Zutaten für das "
+"atlantische Brot."
 
 #: ../../tribes/atlanteans/crystalmine/conf:23
 msgid "Mine stone"
@@ -723,12 +769,19 @@ msgid "Mine diamond"
 msgstr "Diamantenabbau"
 
 #: ../../tribes/atlanteans/diamond/conf:1
-msgid "This wonderful diamonds are used for some exclusive buildings and tools."
-msgstr "Diese wundervollen Diamanten werden beim Bau einiger, exklusiver Gebäude und Werkzeuge verwandt."
+msgid ""
+"This wonderful diamonds are used for some exclusive buildings and tools."
+msgstr ""
+"Diese wundervollen Diamanten werden beim Bau einiger, exklusiver Gebäude und "
+"Werkzeuge verwandt."
 
 #: ../../tribes/atlanteans/double_trident/conf:1
-msgid "Already one of the best tridents of the Atlanteans. Only used by very good fighters."
-msgstr "Bereits eine der besten und gefährlichsten Dreizack-Arten der Atlanter. Wird nur von sehr guten Kämpfern benutzt."
+msgid ""
+"Already one of the best tridents of the Atlanteans. Only used by very good "
+"fighters."
+msgstr ""
+"Bereits eine der besten und gefährlichsten Dreizack-Arten der Atlanter. Wird "
+"nur von sehr guten Kämpfern benutzt."
 
 #: ../../tribes/atlanteans/dungeon/conf:31
 #: ../../tribes/atlanteans/labyrinth/conf:36
@@ -740,32 +793,48 @@ msgid "Upgrade soldier attack 0"
 msgstr "Verbessert Angriff des Soldaten 0"
 
 #: ../../tribes/atlanteans/dungeon/conf:33
-msgid "Upgrade soldier attack 0 (only for compatibility with old savegames (build13))"
-msgstr "Verbessert Angriff des Soldaten 0 (nur für Abwärtskompatiblität mit Speicherständen von build13)"
+msgid ""
+"Upgrade soldier attack 0 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Verbessert Angriff des Soldaten 0 (nur für Abwärtskompatiblität mit "
+"Speicherständen von build13)"
 
 #: ../../tribes/atlanteans/dungeon/conf:34
 msgid "Upgrade soldier attack 1"
 msgstr "Verbessert Angriff des Soldaten 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:35
-msgid "Upgrade soldier attack 1 (only for compatibility with old savegames (build13))"
-msgstr "Verbessert Angriff des Soldaten 1 (nur für Abwärtskompatiblität mit Speicherständen von build13)"
+msgid ""
+"Upgrade soldier attack 1 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Verbessert Angriff des Soldaten 1 (nur für Abwärtskompatiblität mit "
+"Speicherständen von build13)"
 
 #: ../../tribes/atlanteans/dungeon/conf:36
 msgid "Upgrade soldier attack 2"
 msgstr "Verbessert Angriff des Soldaten 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:37
-msgid "Upgrade soldier attack 2 (only for compatibility with old savegames (build13))"
-msgstr "Verbessert Angriff des Soldaten 2 (nur für Abwärtskompatiblität mit Speicherständen von build13)"
+msgid ""
+"Upgrade soldier attack 2 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Verbessert Angriff des Soldaten 2 (nur für Abwärtskompatiblität mit "
+"Speicherständen von build13)"
 
 #: ../../tribes/atlanteans/dungeon/conf:38
 msgid "Upgrade soldier attack 3"
 msgstr "Verbessert Angriff des Soldaten 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:39
-msgid "Upgrade soldier attack 3 (only for compatibility with old savegames (build13))"
-msgstr "Verbessert Angriff des Soldaten 3 (nur für Abwärtskompatiblität mit Speicherständen von build13)"
+msgid ""
+"Upgrade soldier attack 3 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Verbessert Angriff des Soldaten 3 (nur für Abwärtskompatiblität mit "
+"Speicherständen von build13)"
 
 #: ../../tribes/atlanteans/farm/conf:19
 msgid "Plant corn"
@@ -780,8 +849,12 @@ msgid "Plants fields."
 msgstr "Sät Felder."
 
 #: ../../tribes/atlanteans/fire_tongs/conf:1
-msgid "The fire tongs are the tools of the smelter, working in the smelting works. They are produced by the toolsmith."
-msgstr "Die Feuerzange wird vom Schmelzer verwendet und vom Werkzeugmacher hergestellt."
+msgid ""
+"The fire tongs are the tools of the smelter, working in the smelting works. "
+"They are produced by the toolsmith."
+msgstr ""
+"Die Feuerzange wird vom Schmelzer verwendet und vom Werkzeugmacher "
+"hergestellt."
 
 #: ../../tribes/atlanteans/fish/conf:1
 msgid "Fish is one of the biggest food-resources of the Atlanteans."
@@ -797,7 +870,8 @@ msgstr "Der Fischer fischt leckeren Fisch."
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
-msgstr "Das Fischernetz wird vom Fischer benutzt und vom Werkzeugmacher hergestellt."
+msgstr ""
+"Das Fischernetz wird vom Fischer benutzt und vom Werkzeugmacher hergestellt."
 
 #: ../../tribes/atlanteans/forester/conf:1
 msgid "Plants trees."
@@ -808,8 +882,12 @@ msgid "Discovers resources for mining."
 msgstr "Sucht Ressourcen zum schürfen."
 
 #: ../../tribes/atlanteans/gold/conf:1
-msgid "Gold is one of the most valuable materials. Only important things are garnished with it."
-msgstr "Gold ist eines der wertvollsten Materialen. Nur wichtige Sachen werden mit ihm geschmückt."
+msgid ""
+"Gold is one of the most valuable materials. Only important things are "
+"garnished with it."
+msgstr ""
+"Gold ist eines der wertvollsten Materialen. Nur wichtige Sachen werden mit "
+"ihm geschmückt."
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid "A special tabard for atlantian soldiers."
@@ -821,19 +899,35 @@ msgstr "Dies ist gelbes Golderz."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid "This yarn, made of gold, is used for weaving exclusive cloth."
-msgstr "Dieses Garn, das aus Gold hergestellt wird, wird zum weben exklusiver Kleidung verwandt."
+msgstr ""
+"Dieses Garn, das aus Gold hergestellt wird, wird zum weben exklusiver "
+"Kleidung verwandt."
 
 #: ../../tribes/atlanteans/hammer/conf:1
-msgid "The hammer is an essential tool. It is needed by the geologist, the builder and all smiths. Make sure you always got some in reserve! It is produced by the toolsmith."
-msgstr "Der Hammer ist ein grundlegendes Werkzeug. Er wird vom Geologen, dem Bauarbeiter und den Schmieden verwendet. Versuche immer ein paar Hämmer in Reserve zu behalten. Hammer werden vom Werkzeugmacher hergestellt."
+msgid ""
+"The hammer is an essential tool. It is needed by the geologist, the builder "
+"and all smiths. Make sure you always got some in reserve! It is produced by "
+"the toolsmith."
+msgstr ""
+"Der Hammer ist ein grundlegendes Werkzeug. Er wird vom Geologen, dem "
+"Bauarbeiter und den Schmieden verwendet. Versuche immer ein paar Hämmer in "
+"Reserve zu behalten. Hammer werden vom Werkzeugmacher hergestellt."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
-msgid "This is the most dangerous weapon of the atlantian military. Only the best of the best soldiers may use it."
-msgstr "Dies ist die absolut gefährlichste Waffe des atlantischen Militärs. Nur die allerbesten Soldaten dürfen sie benutzen."
+msgid ""
+"This is the most dangerous weapon of the atlantian military. Only the best "
+"of the best soldiers may use it."
+msgstr ""
+"Dies ist die absolut gefährlichste Waffe des atlantischen Militärs. Nur die "
+"allerbesten Soldaten dürfen sie benutzen."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
-msgid "This hook pole is used by the smoker to hang up all the meat and fish to the top of the smoke-house. It is created by the toolsmith."
-msgstr "Die Hakenstange wird vom Räucherer verwendet um das Fleisch und den Fisch in die Spitze der Räucherrei zu hängen. Sie wird vom Werkzeugmacher hergestellt."
+msgid ""
+"This hook pole is used by the smoker to hang up all the meat and fish to the "
+"top of the smoke-house. It is created by the toolsmith."
+msgstr ""
+"Die Hakenstange wird vom Räucherer verwendet um das Fleisch und den Fisch in "
+"die Spitze der Räucherrei zu hängen. Sie wird vom Werkzeugmacher hergestellt."
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid "Helps to carry items at heavy used roads."
@@ -864,40 +958,58 @@ msgid "Upgrade soldier defense 0"
 msgstr "Verbessert Verteidigung des Soldaten 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:38
-msgid "Upgrade soldier defense 0 (only for compatibility with old savegames (build13))"
-msgstr "Verbessert Verteidigung des Soldaten 0 (nur für Abwärtskompatiblität mit Speicherständen von build13)"
+msgid ""
+"Upgrade soldier defense 0 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Verbessert Verteidigung des Soldaten 0 (nur für Abwärtskompatiblität mit "
+"Speicherständen von build13)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:39
 msgid "Upgrade soldier defense 1"
 msgstr "Verbessert Verteidigung des Soldaten 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:40
-msgid "Upgrade soldier defense 1 (only for compatibility with old savegames (build13))"
-msgstr "Verbessert Verteidigung des Soldaten 0 (nur für Abwärtskompatiblität mit Speicherständen von build13)"
+msgid ""
+"Upgrade soldier defense 1 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Verbessert Verteidigung des Soldaten 0 (nur für Abwärtskompatiblität mit "
+"Speicherständen von build13)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:41
 msgid "Upgrade soldier hitpoints 0"
 msgstr "Verbessert Lebenspunkte des Soldaten 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:42
-msgid "Upgrade soldier hitpoints 0 (only for compatibility with old savegames (build13))"
-msgstr "Verbessert Lebenspunkte des Soldaten 0 (nur für Abwärtskompatiblität mit Speicherständen von build13)"
+msgid ""
+"Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
+"(build13))"
+msgstr ""
+"Verbessert Lebenspunkte des Soldaten 0 (nur für Abwärtskompatiblität mit "
+"Speicherständen von build13)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:43
 msgid "Upgrade soldier evade 0"
 msgstr "Verbessert Ausweichen des Soldaten 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:44
-msgid "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
-msgstr "Verbessert Ausweichen des Soldaten 0 (nur für Abwärtskompatiblität mit Speicherständen von build13)"
+msgid ""
+"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+"Verbessert Ausweichen des Soldaten 0 (nur für Abwärtskompatiblität mit "
+"Speicherständen von build13)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:45
 msgid "Upgrade soldier evade 1"
 msgstr "Verbessert Ausweichen des Soldaten 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
-msgid "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
-msgstr "Verbessert Ausweichen des Soldaten 1 (nur für Abwärtskompatiblität mit Speicherständen von build13)"
+msgid ""
+"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
+msgstr ""
+"Verbessert Ausweichen des Soldaten 1 (nur für Abwärtskompatiblität mit "
+"Speicherständen von build13)"
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid "This is the basic weapon for atlantian soldiers."
@@ -905,15 +1017,20 @@ msgstr "Dies ist die Grundwaffe für jeden atlanter Soldaten."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid "This is an advanced trident for more experienced soldiers."
-msgstr "Dies ist ein verbesserter Dreizack für die etwas erfahreneren Soldaten."
+msgstr ""
+"Dies ist ein verbesserter Dreizack für die etwas erfahreneren Soldaten."
 
 #: ../../tribes/atlanteans/meat/conf:1
 msgid "Meat is one food-resource of the Atlanteans."
 msgstr "Fleisch ist eine Nahrungsquelle der Atlanter."
 
 #: ../../tribes/atlanteans/milking_tongs/conf:1
-msgid "Milking tongs are used by the spider breeder, to milk the spiders. They are produced by the toolsmith."
-msgstr "Die Melkzange wird vom Spinnenzüchter, zum melken der Spinnen, verwendet. Sie werden vom Werkzeugmacher hergestellt."
+msgid ""
+"Milking tongs are used by the spider breeder, to milk the spiders. They are "
+"produced by the toolsmith."
+msgstr ""
+"Die Melkzange wird vom Spinnenzüchter, zum melken der Spinnen, verwendet. "
+"Sie werden vom Werkzeugmacher hergestellt."
 
 #: ../../tribes/atlanteans/mill/conf:21
 msgid "Produce cornflour"
@@ -932,36 +1049,58 @@ msgid "Works deep in the mines to produce coal, iron or gold."
 msgstr "Arbeitet tief in den Minen um Kohle, Eisen und Gold zu schürfen."
 
 #: ../../tribes/atlanteans/pick/conf:1
-msgid "Picks are used by stonecutters and miners. They are produced by the toolsmith."
-msgstr "Spitzhacken werden von Steinmetzen und Bergarbeitern verwendet. Sie werden vom Werkzeugmacher hergestellt."
+msgid ""
+"Picks are used by stonecutters and miners. They are produced by the "
+"toolsmith."
+msgstr ""
+"Spitzhacken werden von Steinmetzen und Bergarbeitern verwendet. Sie werden "
+"vom Werkzeugmacher hergestellt."
 
 #: ../../tribes/atlanteans/planks/conf:1
 msgid "Planks are an important build material of the Atlanteans."
 msgstr "Bretter sind ein wichtiges Baumaterial der Atlanter"
 
 #: ../../tribes/atlanteans/quartz/conf:1
-msgid "These transparent quartz' are used for some exclusive buildings and tools."
-msgstr "Diese durchscheinenden Bergkristalle werden für einige exclusive Gebäude und Werkzeuge verwendet."
+msgid ""
+"These transparent quartz' are used for some exclusive buildings and tools."
+msgstr ""
+"Diese durchscheinenden Bergkristalle werden für einige exclusive Gebäude und "
+"Werkzeuge verwendet."
 
 #: ../../tribes/atlanteans/saw/conf:1
-msgid "Saws are needed by the sawyer, the woodcutter and the toolsmith. It is produced by the toolsmith."
-msgstr "Sägen werden vom Säger, dem Holzfäller und dem Werkzeugmacher gebraucht. Sie werden vom Werkzeugmacher hergestellt."
+msgid ""
+"Saws are needed by the sawyer, the woodcutter and the toolsmith. It is "
+"produced by the toolsmith."
+msgstr ""
+"Sägen werden vom Säger, dem Holzfäller und dem Werkzeugmacher gebraucht. Sie "
+"werden vom Werkzeugmacher hergestellt."
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws the wood to produce planks."
 msgstr "Sägt Holz um Bretter herzustellen."
 
 #: ../../tribes/atlanteans/scout/conf:1
-msgid "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
-msgstr "Erkunder wie Erkundigunde, der erkundliche Erkunder erkundete das Gebiet auf erkundliche Weise."
+msgid ""
+"Scouts like Scotty the scout scout unscouted area in a scouty fashion."
+msgstr ""
+"Erkunder wie Erkundigunde, der erkundliche Erkunder erkundete das Gebiet auf "
+"erkundliche Weise."
 
 #: ../../tribes/atlanteans/scythe/conf:1
-msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr "Die Sense ist das Werkzeug des Bauern. Sie wird vom Werkzeugmacher hergestellt."
+msgid ""
+"The Scythe is the tool of the farmers. It is produced by the toolsmith."
+msgstr ""
+"Die Sense ist das Werkzeug des Bauern. Sie wird vom Werkzeugmacher "
+"hergestellt."
 
 #: ../../tribes/atlanteans/shovel/conf:1
-msgid "Shovels are needed for proper handling of plants. Therefore the forester and the blackroot farmer are using them. They are produced by the toolsmith."
-msgstr "Schaufeln werden zum richtigen Umgang mit Pflanzen gebraucht. Daher verwenden sie die Förster und Schwarzwurzelbauern. Sie werden vom Werkzeugmacher hergestellt."
+msgid ""
+"Shovels are needed for proper handling of plants. Therefore the forester and "
+"the blackroot farmer are using them. They are produced by the toolsmith."
+msgstr ""
+"Schaufeln werden zum richtigen Umgang mit Pflanzen gebraucht. Daher "
+"verwenden sie die Förster und Schwarzwurzelbauern. Sie werden vom "
+"Werkzeugmacher hergestellt."
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
@@ -976,12 +1115,20 @@ msgid "Smelt gold"
 msgstr "Verhüttet Golderz"
 
 #: ../../tribes/atlanteans/smoked_fish/conf:1
-msgid "This is smoked fish - As no Atlantid likes raw fish, smoking is the most common way to make it eatable."
-msgstr "Dieser Fisch ist geräuchert - da die Atlanter kein rohen Fisch mögen, ist dies ein beliebter Weg um den Fisch genießbar zu machen."
+msgid ""
+"This is smoked fish - As no Atlantid likes raw fish, smoking is the most "
+"common way to make it eatable."
+msgstr ""
+"Dieser Fisch ist geräuchert - da die Atlanter kein rohen Fisch mögen, ist "
+"dies ein beliebter Weg um den Fisch genießbar zu machen."
 
 #: ../../tribes/atlanteans/smoked_meat/conf:1
-msgid "This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is a common way to make it eatable."
-msgstr "Dieses Fleisch ist geräuchert - da die Atlanter kein rohes Fleisch mögen, ist dies ein beliebter Weg um das Fleisch genießbar zu machen."
+msgid ""
+"This is smoked meat - as no Atlantian likes to eat raw meat, smoking meat is "
+"a common way to make it eatable."
+msgstr ""
+"Dieses Fleisch ist geräuchert - da die Atlanter kein rohes Fleisch mögen, "
+"ist dies ein beliebter Weg um das Fleisch genießbar zu machen."
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."
@@ -1009,7 +1156,9 @@ msgstr "Stoff aus Spinnengarn."
 
 #: ../../tribes/atlanteans/spideryarn/conf:1
 msgid "This yarn is produced by spiders, which are bred on spiderfarms."
-msgstr "Dieses Garn wird von Spinnen, die auf den Spinnenfarmen gezüchtet werden, hergestellt."
+msgstr ""
+"Dieses Garn wird von Spinnen, die auf den Spinnenfarmen gezüchtet werden, "
+"hergestellt."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid "This steel shield is used by experienced soldiers."
@@ -1028,8 +1177,12 @@ msgid "Cuts raw pieces of granit out of laying stones."
 msgstr "Hackt Granitblöcke aus Steinbergen heraus."
 
 #: ../../tribes/atlanteans/tabard/conf:1
-msgid "All atlantean soldiers have to wear the sign of their country on their chests."
-msgstr "Jeder atlantische Soldat muss das Zeichen seines Landes auf seiner Brust tragen."
+msgid ""
+"All atlantean soldiers have to wear the sign of their country on their "
+"chests."
+msgstr ""
+"Jeder atlantische Soldat muss das Zeichen seines Landes auf seiner Brust "
+"tragen."
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."
@@ -1088,12 +1241,20 @@ msgid "Trains the soldiers."
 msgstr "Bildet Soldaten aus."
 
 #: ../../tribes/atlanteans/trunk/conf:1
-msgid "Trunks are the base for planks, which are used in nearly every building of the Atlanteans."
-msgstr "Stämme sind die Basis von Brettern, die in fast jedem Gebäude der Atlanter verwendet werden."
+msgid ""
+"Trunks are the base for planks, which are used in nearly every building of "
+"the Atlanteans."
+msgstr ""
+"Stämme sind die Basis von Brettern, die in fast jedem Gebäude der Atlanter "
+"verwendet werden."
 
 #: ../../tribes/atlanteans/water/conf:1
-msgid "Water is the most essential essence for life! This water is used in many places, for example to make bread."
-msgstr "Wasser ist der Hauptbestandteil des Lebens! Es wird für viele Dinge, wie zum Beispiel das Backen von Brot, verwandt."
+msgid ""
+"Water is the most essential essence for life! This water is used in many "
+"places, for example to make bread."
+msgstr ""
+"Wasser ist der Hauptbestandteil des Lebens! Es wird für viele Dinge, wie zum "
+"Beispiel das Backen von Brot, verwandt."
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
@@ -1148,5 +1309,9 @@ msgstr "Fällt Bäume."
 #~ msgid "Coalearth"
 #~ msgstr "Kohlenerde"
 
-#~ msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
-#~ msgstr "Diese Erde wird in den tiefen Kohleminen gefunden. Sie muss noch weiterverarbeitet werden um zu hochklassiger Kohle zu werden."
+#~ msgid ""
+#~ "This earth is found in the deep coal mines. It needs to be enhanced to get "
+#~ "proper coal"
+#~ msgstr ""
+#~ "Diese Erde wird in den tiefen Kohleminen gefunden. Sie muss noch "
+#~ "weiterverarbeitet werden um zu hochklassiger Kohle zu werden."
