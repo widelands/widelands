@@ -95,8 +95,8 @@ Data Types
 Lua only has one Fundamental data type called Table. A Table is what Python
 calls a dictionary and other languages call a Hashmap. It basically contains a
 set of Key-Value combinations. There are two ways to access the values in the
-array, either by using the ``d[key]`` synatx or by using the ``d.key`` syntax. For the 
-later, ``key`` must be a string:
+array, either by using the ``d[key]`` synatx or by using the ``d.key`` syntax.
+For the later, ``key`` must be a string:
 
 .. code-block:: lua
 
