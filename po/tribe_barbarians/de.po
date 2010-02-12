@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:24+0000\n"
-"Last-Translator: Peter Schwanemann <Unknown>\n"
+"PO-Revision-Date: 2010-02-11 12:46+0000\n"
+"Last-Translator: DelphiMarkus <maximilian.timmerkamp@web.de>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -209,7 +209,7 @@ msgstr "Trägt Waren über deine Straßen."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
-msgstr ""
+msgstr "Züchtet Ochsen, die beim Transportieren von Waren helfen."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
@@ -629,7 +629,7 @@ msgstr "Erkunder"
 
 #: ../../tribes/barbarians/conf:145
 msgid "Cattle Breeder"
-msgstr ""
+msgstr "Rinderzüchter"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Construction Site"
@@ -855,7 +855,7 @@ msgstr "Erkunderhütte"
 
 #: ../../tribes/barbarians/conf:218
 msgid "Cattle Farm"
-msgstr ""
+msgstr "Rinderfarm"
 
 #: ../../tribes/barbarians/conf:221
 msgid "Headquarters medium"

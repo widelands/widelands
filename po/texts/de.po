@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:37+0000\n"
-"Last-Translator: Peter Schwanemann <Unknown>\n"
+"PO-Revision-Date: 2010-02-11 09:27+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -1091,7 +1091,7 @@ msgstr "Homepage"
 
 #: ../../txts/developers:27
 msgid "Janus"
-msgstr ""
+msgstr "Janus"
 
 #: ../../txts/developers:31
 #: ../../txts/developers:323
@@ -1217,11 +1217,11 @@ msgstr "Nicht Unix Distributionen"
 
 #: ../../txts/developers:284
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Homepage Entwickler"
 
 #: ../../txts/developers:293
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "Dokumentation, Hilfe und Wiki"
 
 #: ../../txts/developers:307
 msgid "Former elders"

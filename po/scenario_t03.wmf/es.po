@@ -7,18 +7,18 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 20:32+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2010-02-11 11:39+0000\n"
+"Last-Translator: raul.ferriz <raul.ferriz@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/elemental:7
 msgid "Tutorial3 - This land is our land"
-msgstr ""
+msgstr "Tutorial 3 - Esta es nuestra tierra"
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
@@ -29,7 +29,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:316
 msgid "Thron looks worried..."
-msgstr ""
+msgstr "Thron parece preocupado..."
 
 #: ../../campaigns/t03.wmf/event:318
 msgid ""
@@ -41,7 +41,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:320
 msgid "Close to home"
-msgstr ""
+msgstr "Cerca de casa"
 
 #: ../../campaigns/t03.wmf/event:331
 msgid "Boldreth speaks:"
@@ -279,7 +279,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/event:747
 #: ../../campaigns/t03.wmf/event:894
 msgid "Another cold day"
-msgstr ""
+msgstr "Otro dia frío"
 
 #: ../../campaigns/t03.wmf/event:709
 msgid "Boldreth shakes his head."
@@ -297,7 +297,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:713
 msgid "Doubts"
-msgstr ""
+msgstr "Dudas"
 
 #: ../../campaigns/t03.wmf/event:724
 msgid ""
@@ -455,7 +455,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/objective:29
 msgid "Build mines"
-msgstr ""
+msgstr "Construir minas"
 
 #: ../../campaigns/t03.wmf/objective:37
 msgid "Build a fortress"

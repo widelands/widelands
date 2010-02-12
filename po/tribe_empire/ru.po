@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:50+0000\n"
-"Last-Translator: Alexander Bikmeyev <Unknown>\n"
+"PO-Revision-Date: 2010-02-11 20:42+0000\n"
+"Last-Translator: Auduf <5097@mail.ru>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -26,7 +26,7 @@ msgstr "Это длинная пика с железным наконечник�
 #: ../../tribes/empire/colosseum/conf:27
 #: ../../tribes/empire/trainingscamp/conf:38
 msgid "Sleep"
-msgstr ""
+msgstr "Сон"
 
 #: ../../tribes/empire/arena/conf:14
 #: ../../tribes/empire/colosseum/conf:28
@@ -98,7 +98,7 @@ msgstr ""
 #: ../../tribes/empire/well/conf:16
 #: ../../tribes/empire/winery/conf:20
 msgid "Work"
-msgstr ""
+msgstr "Работа"
 
 #: ../../tribes/empire/axe/conf:1
 msgid ""

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:21+0000\n"
-"Last-Translator: REAL NAME <Unknown>\n"
+"PO-Revision-Date: 2010-02-11 19:55+0000\n"
+"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/axe/conf:1
@@ -83,7 +83,7 @@ msgstr "Werk"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Bakt broden voor de werkers."
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
@@ -156,7 +156,7 @@ msgstr "Maak maaltijd"
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Produceert wapens voor soldaten en gereedschap voor werkers."
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
@@ -206,13 +206,13 @@ msgstr "Draagt voorwerpen over je wegen."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
-msgstr ""
+msgstr "Fokt de sterke ossen die helpen bij het goederenvervoer."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
 #: ../../tribes/barbarians/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
+msgstr "Werkt diep in de mijnen om kolen, ijzer of goud te delven."
 
 #: ../../tribes/barbarians/cloth/conf:1
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
@@ -512,7 +512,7 @@ msgstr "Drager"
 
 #: ../../tribes/barbarians/conf:113
 msgid "Ox"
-msgstr ""
+msgstr "Os"
 
 #: ../../tribes/barbarians/conf:116
 msgid "Soldier"
@@ -620,11 +620,11 @@ msgstr "Wever"
 
 #: ../../tribes/barbarians/conf:144
 msgid "Scout"
-msgstr ""
+msgstr "Verkenner"
 
 #: ../../tribes/barbarians/conf:145
 msgid "Cattle Breeder"
-msgstr ""
+msgstr "Veefokker"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Construction Site"
@@ -668,36 +668,36 @@ msgstr "Burcht"
 #: ../../tribes/barbarians/conf:163
 #: ../../tribes/barbarians/conf:172
 msgid "Castle"
-msgstr ""
+msgstr "Kasteel"
 
 #: ../../tribes/barbarians/conf:164
 msgid "Guardhall"
-msgstr ""
+msgstr "Wachtlokaal"
 
 #: ../../tribes/barbarians/conf:165
 msgid "Guardhouse"
-msgstr ""
+msgstr "Wachthuis"
 
 #: ../../tribes/barbarians/conf:166
 msgid "High Tower"
-msgstr ""
+msgstr "Hoge Toren"
 
 #: ../../tribes/barbarians/conf:167
 msgid "Small Tower"
-msgstr ""
+msgstr "Kleine Toren"
 
 #: ../../tribes/barbarians/conf:168
 #: ../../tribes/barbarians/conf:175
 msgid "Tower"
-msgstr ""
+msgstr "Toren"
 
 #: ../../tribes/barbarians/conf:170
 msgid "Barracks"
-msgstr ""
+msgstr "Barakken"
 
 #: ../../tribes/barbarians/conf:174
 msgid "Outpost"
-msgstr ""
+msgstr "Voorpost"
 
 #: ../../tribes/barbarians/conf:178
 #: ../../tribes/barbarians/conf:179
@@ -846,11 +846,11 @@ msgstr "Put"
 
 #: ../../tribes/barbarians/conf:217
 msgid "Scout's Hut"
-msgstr ""
+msgstr "Verkennershut"
 
 #: ../../tribes/barbarians/conf:218
 msgid "Cattle Farm"
-msgstr ""
+msgstr "Veeboerderij"
 
 #: ../../tribes/barbarians/conf:221
 msgid "Headquarters medium"
@@ -966,7 +966,7 @@ msgstr "Standaardverdeding voor een strijder."
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
-msgstr ""
+msgstr "Giet helmen voor soldaten"
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
@@ -1074,7 +1074,7 @@ msgstr "Maak jachtspeer"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Helpt items te sjouwen op veel gebruikte wegen."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -1107,6 +1107,8 @@ msgstr "Ruwe steen is het tweede bouwmateriaal van de barbaren."
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Verkenners als Ken de Verkenner verkennen niet verkend gebied op een "
+"verkennersmanier."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -1170,7 +1172,7 @@ msgstr "Dakstro wordt gebruikt om daken waterdicht te maken."
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Traint de soldaten."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"

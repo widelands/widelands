@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:19+0000\n"
-"Last-Translator: Peter Schwanemann <Unknown>\n"
+"PO-Revision-Date: 2010-02-11 20:23+0000\n"
+"Last-Translator: Kefir111 <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -24,17 +24,19 @@ msgid ""
 "are equipped with this basic weapon, but also the lumberjack is using the "
 "same model."
 msgstr ""
+"Sekera je základnou zbraňou a nástrojom barbarov. Všetci mladí bojovníci sú "
+"ozbrojení touto sekerou, ale rovnaký typ používajú aj drevorubači."
 
 #: ../../tribes/barbarians/axefactory/conf:29
 #: ../../tribes/barbarians/metalworks/conf:33
 #: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce axe"
-msgstr ""
+msgstr "vyrobiť sekeru"
 
 #: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/warmill/conf:34
 msgid "Produce sharpaxe"
-msgstr ""
+msgstr "Vyrobiť kalenú sekeru"
 
 #: ../../tribes/barbarians/axefactory/conf:31
 #: ../../tribes/barbarians/warmill/conf:35
@@ -78,11 +80,11 @@ msgstr ""
 #: ../../tribes/barbarians/weaving-mill/conf:19
 #: ../../tribes/barbarians/well/conf:14
 msgid "Work"
-msgstr ""
+msgstr "Práca"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Pečie chleba pre robotníkov"
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
@@ -173,11 +175,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "Pracuje na stavenisku, aby postavil novú budovu."
 
 #: ../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
-msgstr ""
+msgstr "Páli uhlie."
 
 #: ../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along your roads."
@@ -191,7 +193,7 @@ msgstr ""
 #: ../../tribes/barbarians/master-miner/conf:1
 #: ../../tribes/barbarians/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
+msgstr "Pracuje hlboko v bani, aby získal uhlie, železnú rudu alebo zlato."
 
 #: ../../tribes/barbarians/cloth/conf:1
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
@@ -405,7 +407,7 @@ msgstr "Železo"
 
 #: ../../tribes/barbarians/conf:90
 msgid "Iron Ore"
-msgstr ""
+msgstr "Železná ruda"
 
 #: ../../tribes/barbarians/conf:91
 msgid "Kitchen Tools"
@@ -489,7 +491,7 @@ msgstr "Nosič"
 
 #: ../../tribes/barbarians/conf:113
 msgid "Ox"
-msgstr ""
+msgstr "Vôl"
 
 #: ../../tribes/barbarians/conf:116
 msgid "Soldier"
@@ -597,7 +599,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:144
 msgid "Scout"
-msgstr ""
+msgstr "Prieskumník"
 
 #: ../../tribes/barbarians/conf:145
 msgid "Cattle Breeder"
@@ -645,7 +647,7 @@ msgstr "Opevnenie"
 #: ../../tribes/barbarians/conf:163
 #: ../../tribes/barbarians/conf:172
 msgid "Castle"
-msgstr ""
+msgstr "Hrad"
 
 #: ../../tribes/barbarians/conf:164
 msgid "Guardhall"
@@ -666,11 +668,11 @@ msgstr ""
 #: ../../tribes/barbarians/conf:168
 #: ../../tribes/barbarians/conf:175
 msgid "Tower"
-msgstr ""
+msgstr "Veža"
 
 #: ../../tribes/barbarians/conf:170
 msgid "Barracks"
-msgstr ""
+msgstr "Kasárne"
 
 #: ../../tribes/barbarians/conf:174
 msgid "Outpost"
@@ -882,11 +884,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Gets fish out of the sea."
-msgstr ""
+msgstr "Loví ryby v mori."
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
 msgid "Fishing rods are needed by barbarian fishers, to catch fish."
-msgstr ""
+msgstr "Rybárske udice sú potrebné pre barbarských rybárov na chytanie rýb."
 
 #: ../../tribes/barbarians/flax/conf:1
 msgid "Flax is a beautiful flower, which are used to make cloth."
@@ -935,15 +937,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
-msgstr ""
+msgstr "Vytvoriť helmu"
 
 #: ../../tribes/barbarians/helmsmithy/conf:26
 msgid "Produce mask"
-msgstr ""
+msgstr "Vytvoriť masku"
 
 #: ../../tribes/barbarians/helmsmithy/conf:27
 msgid "Produce warhelmet"
-msgstr ""
+msgstr "Vytvoriť vojenskú helmu"
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -957,11 +959,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Pripravuje jedlo pre baníkov."
 
 #: ../../tribes/barbarians/iron/conf:1
 msgid "Weapons and tools are made of iron."
-msgstr ""
+msgstr "Zbrane a nástroje sú vyrobené zo železa."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid "This is the red iron ore."
@@ -1004,11 +1006,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce fishing rod"
-msgstr ""
+msgstr "Vyrobiť rybársku udicu"
 
 #: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce hammer"
-msgstr ""
+msgstr "Vyrobiť kladivo"
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce kitchen tools"
@@ -1016,19 +1018,19 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce pick"
-msgstr ""
+msgstr "Vyrobiť krompáč"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce scythe"
-msgstr ""
+msgstr "Vyrobiť kosu"
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce shovel"
-msgstr ""
+msgstr "Vyrobiť lopatu"
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hunting spear"
-msgstr ""
+msgstr "Vyrobiť lovecký oštep"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavy used roads."
@@ -1047,7 +1049,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
-msgstr ""
+msgstr "Sadí stromy"
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid "A small bite to keep miners strong and working."
@@ -1116,7 +1118,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Cvičí vojakov"
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"
@@ -1208,7 +1210,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce bronzeaxe"
-msgstr ""
+msgstr "Vyrobiť bronzovú sekeru"
 
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce battleaxe"

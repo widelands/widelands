@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:13+0000\n"
+"PO-Revision-Date: 2010-02-11 13:48+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../txts/COPYING:1
@@ -1174,11 +1174,11 @@ msgstr "Dystrybucje nieuniksowe"
 
 #: ../../txts/developers:284
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Programiści strony internetowej"
 
 #: ../../txts/developers:293
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "Dokumentacja, pomoc i wiki"
 
 #: ../../txts/developers:307
 msgid "Former elders"

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:28+0000\n"
-"Last-Translator: Ike <Unknown>\n"
+"PO-Revision-Date: 2010-02-11 19:52+0000\n"
+"Last-Translator: Kefir111 <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 05:00+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
@@ -24,11 +24,11 @@ msgstr "Vývojový tím Widelands"
 
 #: ../../worlds/desert/conf:3
 msgid "Desert"
-msgstr ""
+msgstr "Púšť"
 
 #: ../../worlds/desert/conf:4
 msgid "This is the wide and sandy country of the bedouins"
-msgstr ""
+msgstr "Toto je šíra a piesočná krajina beduínov"
 
 #: ../../worlds/desert/conf:7
 #: ../../worlds/desert/conf:8
@@ -76,7 +76,7 @@ msgstr "Okruhliak"
 #: ../../worlds/desert/conf:32
 #: ../../worlds/desert/conf:33
 msgid "ruins"
-msgstr ""
+msgstr "zrúcaniny"
 
 #: ../../worlds/desert/conf:34
 #: ../../worlds/desert/conf:35
@@ -86,7 +86,7 @@ msgstr "Kostra"
 
 #: ../../worlds/desert/conf:37
 msgid "Shell"
-msgstr ""
+msgstr "Lastúra"
 
 #: ../../worlds/desert/conf:38
 #: ../../worlds/desert/conf:39
@@ -113,7 +113,7 @@ msgstr "Kamene"
 #: ../../worlds/desert/conf:63
 #: ../../worlds/desert/conf:67
 msgid "Palm"
-msgstr ""
+msgstr "Palma"
 
 #: ../../worlds/desert/conf:52
 #: ../../worlds/desert/conf:56
@@ -121,7 +121,7 @@ msgstr ""
 #: ../../worlds/desert/conf:64
 #: ../../worlds/desert/conf:68
 msgid "Palm medium"
-msgstr ""
+msgstr "Stredná palma"
 
 #: ../../worlds/desert/conf:53
 #: ../../worlds/desert/conf:57
@@ -129,7 +129,7 @@ msgstr ""
 #: ../../worlds/desert/conf:65
 #: ../../worlds/desert/conf:69
 msgid "Palm small"
-msgstr ""
+msgstr "Malá palma"
 
 #: ../../worlds/desert/conf:54
 #: ../../worlds/desert/conf:58
@@ -137,55 +137,55 @@ msgstr ""
 #: ../../worlds/desert/conf:66
 #: ../../worlds/desert/conf:70
 msgid "Palm tiny"
-msgstr ""
+msgstr "Maličká palma"
 
 #: ../../worlds/desert/conf:71
 msgid "Beech"
-msgstr ""
+msgstr "Buk"
 
 #: ../../worlds/desert/conf:72
 msgid "Beech medium"
-msgstr ""
+msgstr "Stredný buk"
 
 #: ../../worlds/desert/conf:73
 msgid "Beech small"
-msgstr ""
+msgstr "Malý buk"
 
 #: ../../worlds/desert/conf:74
 msgid "Beech tiny"
-msgstr ""
+msgstr "Maličký buk"
 
 #: ../../worlds/desert/conf:75
 msgid "Larch"
-msgstr ""
+msgstr "Červený smrek"
 
 #: ../../worlds/desert/conf:76
 msgid "Larch medium"
-msgstr ""
+msgstr "Stredný červený smrek"
 
 #: ../../worlds/desert/conf:77
 msgid "Larch small"
-msgstr ""
+msgstr "Malý červený smrek"
 
 #: ../../worlds/desert/conf:78
 msgid "Larch tiny"
-msgstr ""
+msgstr "Maličký červený smrek"
 
 #: ../../worlds/desert/conf:79
 msgid "Rowan"
-msgstr ""
+msgstr "Blahovičník"
 
 #: ../../worlds/desert/conf:80
 msgid "Rowan medium"
-msgstr ""
+msgstr "Stredný blahovičník"
 
 #: ../../worlds/desert/conf:81
 msgid "Rowan small"
-msgstr ""
+msgstr "Malý blahovičník"
 
 #: ../../worlds/desert/conf:82
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Maličký blahovičník"
 
 #: ../../worlds/desert/conf:85
 msgid "Bunny"
@@ -229,7 +229,7 @@ msgstr "Voda"
 
 #: ../../worlds/desert/resconf:41
 msgid "Fish"
-msgstr "Ryba"
+msgstr "Ryby"
 
 #~ msgid "Tree"
 #~ msgstr "Stromy"

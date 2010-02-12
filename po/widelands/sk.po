@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 19:40+0100\n"
-"PO-Revision-Date: 2010-02-10 22:59+0000\n"
-"Last-Translator: Ike <Unknown>\n"
+"PO-Revision-Date: 2010-02-11 20:25+0000\n"
+"Last-Translator: Kefir111 <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
@@ -57,6 +57,8 @@ msgid ""
 "Options:\n"
 "\n"
 msgstr ""
+"Nastavenia\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1208
 msgid ""
@@ -166,7 +168,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1441
 msgid "Warning: "
-msgstr ""
+msgstr "Upozornenie: "
 
 #: ../../src/wlapplication.cc:1445
 msgid "Game data error"
@@ -174,7 +176,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1448
 msgid "Unexpected error during the game"
-msgstr ""
+msgstr "Neočakávaná chyba počas hry"
 
 #: ../../src/wlapplication.cc:1452
 msgid ""
@@ -206,7 +208,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1592 ../../src/network/network_ggz.cc:373
 msgid "Connection problem"
-msgstr ""
+msgstr "Problém s pripojením"
 
 #: ../../src/wlapplication.cc:1594
 msgid "Widelands has not been able to connect to the host."
@@ -214,7 +216,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1640
 msgid "The address of the game server is invalid"
-msgstr ""
+msgstr "Adresa herného serveru je neplatná"
 
 #: ../../src/wlapplication.cc:1745 ../../src/network/nethost.cc:1178
 msgid "Player"
@@ -223,22 +225,24 @@ msgstr "Hráč"
 #: ../../src/wlapplication.cc:1893 ../../src/network/netclient.cc:163
 #: ../../src/network/nethost.cc:433
 msgid "Preparing game"
-msgstr ""
+msgstr "Pripravujem hru"
 
 #: ../../src/wlapplication.cc:2000
 msgid "End of replay"
-msgstr ""
+msgstr "Koniec nahrávky"
 
 #: ../../src/wlapplication.cc:2002
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
 msgstr ""
+"Bol dosiahnutý koniec nahrávky a hra bola pozastavená. Môžete hru opäť "
+"spustiť a pokračovať v pozeraní, ak chcete."
 
 #: ../../src/wlapplication.cc:2082 ../../src/logic/game.cc:344
 #: ../../src/logic/game.cc:383
 msgid "Loading..."
-msgstr ""
+msgstr "Načítava sa..."
 
 #: ../../src/writeHTML.cc:40
 msgid "Requesters"
@@ -246,7 +250,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:55
 msgid "Providers"
-msgstr ""
+msgstr "Poskytovatelia"
 
 #: ../../src/writeHTML.cc:70
 msgid "Successors"
@@ -258,7 +262,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:100
 msgid "Employers"
-msgstr ""
+msgstr "Zamestnanci"
 
 #: ../../src/writeHTML.cc:263 ../../src/writeHTML.cc:269
 msgid "Building types"
@@ -267,7 +271,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:274 ../../src/writeHTML.cc:509
 #: ../../src/writeHTML.cc:1434
 msgid "Icon"
-msgstr ""
+msgstr "Ikona"
 
 #: ../../src/writeHTML.cc:276 ../../src/writeHTML.cc:511
 #: ../../src/writeHTML.cc:1436 ../../src/ui_fsmenu/netsetup_ggz.cc:143
@@ -292,11 +296,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:282
 msgid "Enhanced"
-msgstr ""
+msgstr "Rozšírené"
 
 #: ../../src/writeHTML.cc:285 ../../src/wui/building_ui.cc:655
 msgid "Stop"
-msgstr ""
+msgstr "Zastaviť"
 
 #: ../../src/writeHTML.cc:287
 msgid "Conquer<br/>range"
@@ -332,14 +336,14 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:73
 #: ../../src/editor/tools/editor_info_tool.cc:74
 msgid "Yes"
-msgstr ""
+msgstr "Áno"
 
 #: ../../src/writeHTML.cc:333 ../../src/writeHTML.cc:336
 #: ../../src/ui_basic/messagebox.cc:103
 #: ../../src/editor/tools/editor_info_tool.cc:73
 #: ../../src/editor/tools/editor_info_tool.cc:74
 msgid "No"
-msgstr ""
+msgstr "Nie"
 
 #: ../../src/writeHTML.cc:351
 msgid "building_types.xhtml"
@@ -385,11 +389,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:437
 msgid "'s constructionsite"
-msgstr ""
+msgstr "-stavenisko"
 
 #: ../../src/writeHTML.cc:448
 msgid "Enhancements"
-msgstr ""
+msgstr "Rozšírenia:"
 
 #: ../../src/writeHTML.cc:458
 msgid "'s enhancement"
@@ -462,7 +466,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:713 ../../src/writeHTML.cc:854
 msgid "Programs"
-msgstr ""
+msgstr "Programy"
 
 #: ../../src/writeHTML.cc:750 ../../src/writeHTML.cc:1313
 #: ../../src/logic/building.cc:508
@@ -479,7 +483,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:753
 msgid "setdescription"
-msgstr ""
+msgstr "zadajte popis"
 
 #: ../../src/writeHTML.cc:754
 msgid "setbobdescription"
@@ -487,7 +491,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:755
 msgid "findobject"
-msgstr ""
+msgstr "nájdi objekt"
 
 #: ../../src/writeHTML.cc:756
 msgid "findspace"
@@ -495,11 +499,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:757
 msgid "walk"
-msgstr ""
+msgstr "chôdza"
 
 #: ../../src/writeHTML.cc:758
 msgid "animation"
-msgstr ""
+msgstr "animácia"
 
 #: ../../src/writeHTML.cc:759 ../../src/writeHTML.cc:894
 msgid "return"
@@ -507,7 +511,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:760
 msgid "object"
-msgstr ""
+msgstr "objekt"
 
 #: ../../src/writeHTML.cc:761
 msgid "plant"
@@ -543,7 +547,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:778 ../../src/wui/general_statistics_menu.cc:144
 msgid "Workers"
-msgstr ""
+msgstr "Pracovníci"
 
 #: ../../src/writeHTML.cc:788
 msgid "'s employee"
@@ -585,7 +589,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:899 ../../src/logic/production_program.cc:393
 msgid "completed"
-msgstr ""
+msgstr "dokončené"
 
 #: ../../src/writeHTML.cc:900 ../../src/logic/production_program.cc:393
 msgid "skipped"
@@ -593,7 +597,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:905
 msgid "and"
-msgstr ""
+msgstr "a"
 
 #: ../../src/writeHTML.cc:906
 msgid "when"
@@ -601,7 +605,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:908
 msgid "or"
-msgstr ""
+msgstr "alebo"
 
 #: ../../src/writeHTML.cc:909
 msgid "unless"
@@ -629,7 +633,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1025
 msgid "workers"
-msgstr ""
+msgstr "pracovníci"
 
 #: ../../src/writeHTML.cc:1026
 msgid "</span></a> <span class=\"keyword\">"
@@ -637,7 +641,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1027
 msgid "need"
-msgstr ""
+msgstr "potrebuje"
 
 #: ../../src/writeHTML.cc:1029
 msgid "experience"
@@ -662,7 +666,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1107
 msgid "worker"
-msgstr ""
+msgstr "pracovník"
 
 #: ../../src/writeHTML.cc:1118
 #, c-format
@@ -724,15 +728,15 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1346 ../../src/writeHTML.cc:1370
 msgid "hp"
-msgstr ""
+msgstr "hp"
 
 #: ../../src/writeHTML.cc:1347 ../../src/writeHTML.cc:1371
 msgid "attack"
-msgstr ""
+msgstr "útok"
 
 #: ../../src/writeHTML.cc:1348 ../../src/writeHTML.cc:1372
 msgid "defense"
-msgstr ""
+msgstr "obrana"
 
 #: ../../src/writeHTML.cc:1349 ../../src/writeHTML.cc:1373
 msgid "evade"
@@ -744,7 +748,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1364
 msgid "train"
-msgstr ""
+msgstr "trénovat"
 
 #: ../../src/writeHTML.cc:1386
 msgid "Documentation for program command playFX"
@@ -871,11 +875,11 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:64
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #: ../../src/editor/editorinteractive.cc:67
 msgid "Tool"
-msgstr ""
+msgstr "Nástroj"
 
 #: ../../src/editor/editorinteractive.cc:70
 msgid "Toolsize"
@@ -894,7 +898,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:79
 msgid "Players"
-msgstr ""
+msgstr "Hráči"
 
 #: ../../src/editor/editorinteractive.cc:82
 #: ../../src/editor/ui_menus/editor_event_menu.cc:75
@@ -903,7 +907,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:85
 msgid "Variables"
-msgstr ""
+msgstr "Premenné"
 
 #: ../../src/editor/editorinteractive.cc:88
 #: ../../src/wui/interactive_player.cc:183
@@ -936,7 +940,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:191
 #: ../../src/editor/editorinteractive.cc:607
 msgid "Loading graphics..."
-msgstr ""
+msgstr "Nahrávanie grafiky..."
 
 #: ../../src/editor/editorinteractive.cc:232
 msgid "Map unsaved"
@@ -967,7 +971,7 @@ msgstr "neznámy"
 #: ../../src/events/event_allow_worker_types.cc:46
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:95
 msgid "Allow"
-msgstr ""
+msgstr "Povoliť"
 
 #: ../../src/events/event_building.cc:62
 #, c-format
@@ -1149,11 +1153,11 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:93
 msgid "Create flag"
-msgstr ""
+msgstr "vytvoriť vlajku"
 
 #: ../../src/events/event_factory.cc:94
 msgid "Create a flag."
-msgstr ""
+msgstr "vytvoriť vlajku"
 
 #: ../../src/events/event_factory.cc:98
 msgid "Create immovable"
@@ -1215,7 +1219,7 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:136
 msgid "Create road"
-msgstr ""
+msgstr "vytvoriť cestu"
 
 #: ../../src/events/event_factory.cc:137
 msgid "Create a road and optionally place a carrier on it"

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:28+0000\n"
-"Last-Translator: REAL NAME <Unknown>\n"
+"PO-Revision-Date: 2010-02-11 19:57+0000\n"
+"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Produceert harnassen voor de soldaten."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
@@ -79,7 +79,7 @@ msgstr "Werk"
 
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Bakt broden voor de werkers."
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
@@ -107,7 +107,7 @@ msgstr "Oogst ereprijswortel"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
-msgstr ""
+msgstr "Plant en oogst ereprijs."
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
 msgid ""
@@ -434,7 +434,7 @@ msgstr "Drager"
 
 #: ../../tribes/atlanteans/conf:110
 msgid "Horse"
-msgstr ""
+msgstr "Paard"
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Soldier"
@@ -534,11 +534,11 @@ msgstr "Houtvester"
 
 #: ../../tribes/atlanteans/conf:139
 msgid "Scout"
-msgstr ""
+msgstr "Verkenner"
 
 #: ../../tribes/atlanteans/conf:140
 msgid "Horse Breeder"
-msgstr ""
+msgstr "Paardenfokker"
 
 #: ../../tribes/atlanteans/conf:143
 msgid "Construction Site"
@@ -581,37 +581,37 @@ msgstr "Toren"
 #: ../../tribes/atlanteans/conf:158
 #: ../../tribes/atlanteans/conf:166
 msgid "Barrier"
-msgstr ""
+msgstr "Barrière"
 
 #: ../../tribes/atlanteans/conf:159
 msgid "Citadel"
-msgstr ""
+msgstr "Citadel"
 
 #: ../../tribes/atlanteans/conf:160
 msgid "Donjon"
-msgstr ""
+msgstr "Verdedigingstoren"
 
 #: ../../tribes/atlanteans/conf:161
 #: ../../tribes/atlanteans/conf:168
 msgid "Fortress"
-msgstr ""
+msgstr "Vesting"
 
 #: ../../tribes/atlanteans/conf:162
 #: ../../tribes/atlanteans/conf:164
 msgid "Sentry"
-msgstr ""
+msgstr "Wachtpost"
 
 #: ../../tribes/atlanteans/conf:163
 msgid "Stronghold"
-msgstr ""
+msgstr "Burcht"
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Barracks"
-msgstr ""
+msgstr "Barakken"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Outpost"
-msgstr ""
+msgstr "Voorpost"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Headquarters"
@@ -723,11 +723,11 @@ msgstr "Houtvesterswoning"
 
 #: ../../tribes/atlanteans/conf:202
 msgid "Scout's House"
-msgstr ""
+msgstr "Verkennershuis"
 
 #: ../../tribes/atlanteans/conf:203
 msgid "Horse Farm"
-msgstr ""
+msgstr "Paardenboerderij"
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Headquarters medium"
@@ -927,11 +927,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Helpt items te sjouwen op veel gebruikte wegen."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
-msgstr ""
+msgstr "Fokt de sterke atlanteaanse paarden"
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -1037,7 +1037,7 @@ msgstr "Maak ereprijsbloem"
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid "Mills wheat to produce flour."
-msgstr ""
+msgstr "Maalt graan om bloem te produceren."
 
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."
@@ -1072,12 +1072,14 @@ msgstr ""
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws the wood to produce planks."
-msgstr ""
+msgstr "Zaagt het hout om planken te produceren."
 
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Verkenners als Ken de Verkenner verkennen niet verkend gebied op een "
+"verkennersmanier."
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
@@ -1125,7 +1127,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."
-msgstr ""
+msgstr "Rookt vlees en vis."
 
 #: ../../tribes/atlanteans/smokery/conf:25
 msgid "Smoke meat"
@@ -1141,7 +1143,7 @@ msgstr "Verdedig en Verover!"
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr ""
+msgstr "Kweekt spinnen voor garen."
 
 #: ../../tribes/atlanteans/spidercloth/conf:1
 msgid "Cloth made out of spideryarn."
@@ -1177,7 +1179,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Produceert gereedschap voor de werkers."
 
 #: ../../tribes/atlanteans/toolsmithy/conf:33
 msgid "Produce bakingtray"
@@ -1229,7 +1231,7 @@ msgstr "Maak schep"
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Traint de soldaten."
 
 #: ../../tribes/atlanteans/trunk/conf:1
 msgid ""
@@ -1249,7 +1251,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
-msgstr ""
+msgstr "Produceert wapens voor de soldaten."
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:30
 msgid "Produce light trident"

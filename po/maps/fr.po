@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 23:22+0000\n"
-"Last-Translator: Jean-Pierre Gemble <Unknown>\n"
+"PO-Revision-Date: 2010-02-11 15:13+0000\n"
+"Last-Translator: Bertram <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/cconfig:24
@@ -78,23 +78,23 @@ msgstr ""
 
 #: ../../campaigns/cconfig:36
 msgid "Atlanteans - the new rise"
-msgstr ""
+msgstr "Les Atlantes - La nouvelle aube"
 
 #: ../../campaigns/cconfig:39
 msgid "Some descriptive texts..."
-msgstr ""
+msgstr "Quelques textes descriptifs..."
 
 #: ../../campaigns/cconfig:57
 msgid "Tutorial1 - Eyes in the Dark"
-msgstr "Tutoriel 1 - Les yeux dans les ténèbres"
+msgstr "Tutoriel 1 - Des yeux dans l'obscurité"
 
 #: ../../campaigns/cconfig:62
 msgid "Tutorial2 - A Place to call Home"
-msgstr "Tutoriel 2 - Un endroit à appeller Foyer"
+msgstr "Didacticiel 2 - Un nouveau foyer ?"
 
 #: ../../campaigns/cconfig:67
 msgid "Tutorial3 - This land is our land"
-msgstr ""
+msgstr "Tutoriel 3 - Cette terre est nôtre"
 
 #: ../../campaigns/cconfig:74
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
@@ -102,7 +102,7 @@ msgstr "Tutoriel de l'Empire 1 - Les rives de Malac' Mor"
 
 #: ../../campaigns/cconfig:79
 msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Turoriel de l'Empire 2 - Un poste avancé pour l'exil"
+msgstr "Tutoriel de l'Empire 2 - Un avant-poste pour l'exil"
 
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
@@ -110,11 +110,11 @@ msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
-msgstr ""
+msgstr "Atoll"
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
-msgstr ""
+msgstr "Qui sera réellement le Roi du grand Atoll ?"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -126,9 +126,9 @@ msgid ""
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
 msgstr ""
-"N'étant peut-être qu'un des plus étrange hasard de la nature, ou la création "
-"d'un dieu fou (et amateur de jeu), cet étrange champ de bataille attend deux "
-"adversaires pour une autre confrontation."
+"N'étant peut-être qu'un des plus étranges hasards de la nature, ou la "
+"création d'un dieu fou (et amateur de jeu), cet étrange champ de bataille "
+"attend deux adversaires pour une autre confrontation."
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
@@ -157,9 +157,9 @@ msgid ""
 "Long after a meteor crashed into a couple of mountains life blossoms in the "
 "crater. Two tribes are now fighting about the rich resources."
 msgstr ""
-"Longtemps après qu'un météore se soit écrasé sur quelques montagnes, la vie "
-"s'épanouie dans le cratère. Deux tribus s'affrontent désormais pour les "
-"riches ressources présentes."
+"Maintes années après le crash d'une météorite, la vie s'est mise à fleurir "
+"dans ces montagnes. Deux tribus s'y affrontent désormais afin d'en conquérir "
+"les innombrables ressources."
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
@@ -198,13 +198,16 @@ msgstr "Une carte de bataille multijoueur sur une île en forme de X."
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
-msgstr ""
+msgstr "Les Lacs Finnois"
 
 #: ../../maps/Finlakes.wmf/elemental:11
 msgid ""
 "These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
 "forests and mountains. It is up to you, to find a way through these lands."
 msgstr ""
+"Voici que s'étend devant vous les magnifiques Lacs Finnois; un tumulte de "
+"lacs, de rivières, de forêts et de montagnes antiques. A vous de trouver "
+"votre voie à l'intérieur de ces contrées."
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
@@ -245,6 +248,15 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
 "Each mountain contains only one resource."
 msgstr ""
+"Chaque tribu est entourée par quatre gigantesques montagnes. Qui saura être "
+"le premier à les conquérir et à en réclamer les ressources pour sa propre "
+"tribu ?\r\n"
+"Un premier conseil : De l'eau douce pourra facilement être trouvé non loin "
+"de la rivière.\r\n"
+"Deuxième conseil : Les bonshommes de neige marquent également l'emplacement "
+"de sources d'eau.\r\n"
+"Troisième conseil : Chaque montagne ne permet d'obtenir qu'un seule "
+"ressource."
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -403,7 +415,7 @@ msgstr ""
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The ancient sun of fire"
-msgstr ""
+msgstr "L'antique soleil de feu"
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
@@ -412,6 +424,9 @@ msgid ""
 "barefaced enough to settle on the coast of that island, a lot other followed "
 "afterwards."
 msgstr ""
+"Durant des centaines d'années, cette île fût conservée comme le sanctuaire "
+"des Dieux. Aucun humain n'y avait même posé le pied. Mais maintenant que la "
+"plus éhonté des tribus a osé l'accosté, beaucoup d'autres l'y ont suivi."
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
@@ -532,6 +547,8 @@ msgid ""
 "In this mountainous region two princes have settled. Now they are expanding "
 "their territories unaware of the fact that they are not alone!"
 msgstr ""
+"Deux princes se sont installés dans cette région montagneuse. Maintenant ils "
+"y étendent chacun leurs empires, ignorant du fait qu'ils ne sont pas seuls !"
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
@@ -549,13 +566,15 @@ msgstr ""
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
-msgstr ""
+msgstr "Vagues scintillantes"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""
 "Many beautiful, green islands await the ones brave enough to pass the "
 "thousand waves, twinkling in the sun."
 msgstr ""
+"Beaucoup d'îles verdoyantes et radieuses attendent les braves qui oseront "
+"surmonter les vagues scintillantes sous le soleil."
 
 #: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"

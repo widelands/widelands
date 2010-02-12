@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 23:09+0000\n"
+"PO-Revision-Date: 2010-02-11 14:08+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/advanced_lance/conf:1
@@ -46,7 +46,7 @@ msgstr "Podstawowa zbroja żołnierzy Imperium."
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Produces zbroje dla żołnierzy."
 
 #: ../../tribes/empire/armoursmithy/conf:26
 msgid "Produce helm"
@@ -108,7 +108,7 @@ msgstr "Topór to narzędzie drwala. Produkuje go rzemieślnik."
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Piecze chleb dla pracowników"
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
@@ -462,7 +462,7 @@ msgstr "Tragarz"
 
 #: ../../tribes/empire/conf:109
 msgid "Donkey"
-msgstr ""
+msgstr "Osioł"
 
 #: ../../tribes/empire/conf:112
 msgid "Soldier"
@@ -567,11 +567,11 @@ msgstr "Hodowca winorośli"
 
 #: ../../tribes/empire/conf:139
 msgid "Scout"
-msgstr ""
+msgstr "Zwiadowca"
 
 #: ../../tribes/empire/conf:140
 msgid "Donkey Breeder"
-msgstr ""
+msgstr "Hodowca osłów"
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
@@ -792,11 +792,11 @@ msgstr "Plantacja winorośli"
 
 #: ../../tribes/empire/conf:211
 msgid "Scout's House"
-msgstr ""
+msgstr "Dom zwiadowcy"
 
 #: ../../tribes/empire/conf:212
 msgid "Donkeyfarm"
-msgstr ""
+msgstr "Farma osłów"
 
 #: ../../tribes/empire/conf:215
 msgid "Headquarters medium"
@@ -808,11 +808,11 @@ msgstr "Wioska z zamekiem (duża)"
 
 #: ../../tribes/empire/donkey/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Pomaga nosić przedmiot na często używanych drogach."
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
-msgstr ""
+msgstr "Hoduje słodkie i pomcne osły"
 
 #: ../../tribes/empire/farm/conf:15
 msgid "Plant wheat"
@@ -973,7 +973,7 @@ msgstr ""
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
+msgstr "Pracuje głęboko w kopalniach aby wykopać węgiel, żelazo i złoto."
 
 #: ../../tribes/empire/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
@@ -990,7 +990,7 @@ msgstr ""
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
-msgstr ""
+msgstr "Mieli pszenice na mąkę."
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1070,7 +1070,7 @@ msgstr "Wycina kawałki granitu i marmuru ze skał."
 
 #: ../../tribes/empire/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Produkuje narzędzia dla pracowników."
 
 #: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce bakingtray"
@@ -1122,7 +1122,7 @@ msgstr "Produce axe (Produkuj topór)"
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Trenuje żołnierzy."
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1261,7 +1261,7 @@ msgstr ""
 
 #: ../../tribes/empire/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
-msgstr ""
+msgstr "Produkuje bronie dla żołnierzy."
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"

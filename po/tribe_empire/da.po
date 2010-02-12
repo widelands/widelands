@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:17+0000\n"
-"Last-Translator: Joe Hansen <Unknown>\n"
+"PO-Revision-Date: 2010-02-11 14:39+0000\n"
+"Last-Translator: silentStatic <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/advanced_lance/conf:1
@@ -45,7 +45,7 @@ msgstr "Basisrustning for imperiumsoldater."
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Laver rustninger for soldaterne."
 
 #: ../../tribes/empire/armoursmithy/conf:26
 msgid "Produce helm"
@@ -108,7 +108,7 @@ msgstr ""
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Bager brød for arbejderne."
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
@@ -463,7 +463,7 @@ msgstr "Bærer"
 
 #: ../../tribes/empire/conf:109
 msgid "Donkey"
-msgstr ""
+msgstr "Æsel"
 
 #: ../../tribes/empire/conf:112
 msgid "Soldier"
@@ -567,7 +567,7 @@ msgstr "Vinavler"
 
 #: ../../tribes/empire/conf:139
 msgid "Scout"
-msgstr ""
+msgstr "Spejder"
 
 #: ../../tribes/empire/conf:140
 msgid "Donkey Breeder"
@@ -624,31 +624,31 @@ msgstr "Tårn"
 
 #: ../../tribes/empire/conf:161
 msgid "Guardhall"
-msgstr ""
+msgstr "Vagthal"
 
 #: ../../tribes/empire/conf:162
 msgid "Guardhouse"
-msgstr ""
+msgstr "Vagthus"
 
 #: ../../tribes/empire/conf:163
 msgid "High Tower"
-msgstr ""
+msgstr "Højt tårn"
 
 #: ../../tribes/empire/conf:164
 msgid "Small Tower"
-msgstr ""
+msgstr "Lille tårn"
 
 #: ../../tribes/empire/conf:167
 msgid "Citadel"
-msgstr ""
+msgstr "Citadel"
 
 #: ../../tribes/empire/conf:168
 msgid "Donjon"
-msgstr ""
+msgstr "Borgtårn"
 
 #: ../../tribes/empire/conf:171
 msgid "Stronghold"
-msgstr ""
+msgstr "Bastion"
 
 #: ../../tribes/empire/conf:174
 msgid "Headquarters"
@@ -812,7 +812,7 @@ msgstr ""
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
-msgstr ""
+msgstr "Opdrætter søde og brugbare æsler"
 
 #: ../../tribes/empire/farm/conf:15
 msgid "Plant wheat"
@@ -973,7 +973,7 @@ msgstr "Minesten (kun for kompatibilitet med gamle gemte spil (build13))"
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
+msgstr "Arbejder dybt i minerne for at fremskaffe kul, jern og guld."
 
 #: ../../tribes/empire/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
@@ -1070,7 +1070,7 @@ msgstr "Skærer rå stykker af granit og marmor ud af stenlag."
 
 #: ../../tribes/empire/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Laver værktøjer for arbejderne."
 
 #: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce bakingtray"
@@ -1122,7 +1122,7 @@ msgstr "Producer økse"
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Træner soldaterne."
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1250,7 +1250,7 @@ msgstr ""
 
 #: ../../tribes/empire/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
-msgstr ""
+msgstr "Laver våben for soldaterne."
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"

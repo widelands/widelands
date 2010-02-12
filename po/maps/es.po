@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2009-01-01 02:49+0000\n"
-"Last-Translator: DiegoJ <diegojromerolopez@gmail.com>\n"
+"PO-Revision-Date: 2010-02-11 11:32+0000\n"
+"Last-Translator: raul.ferriz <raul.ferriz@gmail.com>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -78,11 +78,11 @@ msgstr ""
 
 #: ../../campaigns/cconfig:74
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
-msgstr ""
+msgstr "Imperio: Tutorial 1 - Las hebras de Malac' Mor"
 
 #: ../../campaigns/cconfig:79
 msgid "Empire Tutorial2 - An outpost for exile"
-msgstr ""
+msgstr "Imperio 2: Avanzadilla hacia el exilio"
 
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
@@ -90,7 +90,7 @@ msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
-msgstr ""
+msgstr "El Atolón"
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"

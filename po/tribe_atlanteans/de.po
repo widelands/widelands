@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:31+0000\n"
-"Last-Translator: Peter Schwanemann <Unknown>\n"
+"PO-Revision-Date: 2010-02-11 15:44+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Language: German\n"
 
@@ -437,7 +437,7 @@ msgstr "Träger"
 
 #: ../../tribes/atlanteans/conf:110
 msgid "Horse"
-msgstr ""
+msgstr "Pferd"
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Soldier"
@@ -541,7 +541,7 @@ msgstr "Erkunder"
 
 #: ../../tribes/atlanteans/conf:140
 msgid "Horse Breeder"
-msgstr ""
+msgstr "Pferdezüchter"
 
 #: ../../tribes/atlanteans/conf:143
 msgid "Construction Site"
@@ -730,7 +730,7 @@ msgstr "Erkunderhütte"
 
 #: ../../tribes/atlanteans/conf:203
 msgid "Horse Farm"
-msgstr ""
+msgstr "Pferdezucht"
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Headquarters medium"
@@ -931,11 +931,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Hilft, Waren auf viel benutzende Straßen zu transportieren."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
-msgstr ""
+msgstr "Züchtet die starken atlantischen Pferde."
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."

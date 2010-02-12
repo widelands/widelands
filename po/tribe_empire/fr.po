@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:56+0000\n"
-"Last-Translator: Peter Schwanemann <Unknown>\n"
+"PO-Revision-Date: 2010-02-11 17:17+0000\n"
+"Last-Translator: NonoSan <fougey.a@orange.fr>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/advanced_lance/conf:1
@@ -24,7 +24,7 @@ msgstr "C'est une lance avancée, avec pointe en acier."
 #: ../../tribes/empire/colosseum/conf:27
 #: ../../tribes/empire/trainingscamp/conf:38
 msgid "Sleep"
-msgstr ""
+msgstr "Dormir"
 
 #: ../../tribes/empire/arena/conf:14
 #: ../../tribes/empire/colosseum/conf:28
@@ -43,7 +43,7 @@ msgstr "Armure basique pour les soldats de l'empire."
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Produit des Armures pour les soldats"
 
 #: ../../tribes/empire/armoursmithy/conf:26
 msgid "Produce helm"
@@ -51,15 +51,15 @@ msgstr ""
 
 #: ../../tribes/empire/armoursmithy/conf:27
 msgid "Produce armour"
-msgstr ""
+msgstr "Produire des armures"
 
 #: ../../tribes/empire/armoursmithy/conf:28
 msgid "Produce chain armour"
-msgstr ""
+msgstr "Produire des cottes de mailles"
 
 #: ../../tribes/empire/armoursmithy/conf:29
 msgid "Produce plate armour"
-msgstr ""
+msgstr "Produire des armures de plates"
 
 #: ../../tribes/empire/armoursmithy/conf:30
 #: ../../tribes/empire/bakery/conf:20
@@ -138,11 +138,11 @@ msgstr "Les boulangers de l'Empire font vraiment du très bon pain."
 
 #: ../../tribes/empire/brewer/conf:1
 msgid "Produces beer or wine."
-msgstr ""
+msgstr "Produit de la biere ou du vin"
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "Travaille sur un chantier pour construire un nouveau bâtiment."
 
 #: ../../tribes/empire/burner/conf:1
 msgid "Burns coal."
@@ -195,7 +195,7 @@ msgstr "Voici la culture de l'Empire Romain."
 
 #: ../../tribes/empire/conf:39
 msgid "Ashes"
-msgstr ""
+msgstr "Cendres"
 
 #: ../../tribes/empire/conf:40
 msgid "Field medium"
@@ -219,7 +219,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:45
 msgid "Destroyed building"
-msgstr ""
+msgstr "Bâtiments détruit"
 
 #: ../../tribes/empire/conf:46
 msgid "Resource indicator coal little"
@@ -563,11 +563,11 @@ msgstr "Vigneron"
 
 #: ../../tribes/empire/conf:139
 msgid "Scout"
-msgstr ""
+msgstr "Eclaireur"
 
 #: ../../tribes/empire/conf:140
 msgid "Donkey Breeder"
-msgstr ""
+msgstr "Eleveur d'ânes"
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
@@ -624,7 +624,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:162
 msgid "Guardhouse"
-msgstr ""
+msgstr "Poste de garde"
 
 #: ../../tribes/empire/conf:163
 msgid "High Tower"
@@ -644,7 +644,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:171
 msgid "Stronghold"
-msgstr ""
+msgstr "Place forte"
 
 #: ../../tribes/empire/conf:174
 msgid "Headquarters"
@@ -792,11 +792,11 @@ msgstr ""
 
 #: ../../tribes/empire/conf:212
 msgid "Donkeyfarm"
-msgstr ""
+msgstr "Elevage d'âne"
 
 #: ../../tribes/empire/conf:215
 msgid "Headquarters medium"
-msgstr ""
+msgstr "Quartier Général Moyen"
 
 #: ../../tribes/empire/conf:216
 msgid "Castle village"
