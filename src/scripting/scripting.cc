@@ -37,7 +37,6 @@
 // TODO:   unpickling, Luna & Luna changes, mos & mol pickling, LuaCmd <->
 // TODO:   LuaFunction, Testsuite and it's running.
 // TODO: make pickling independent of OS by using widelands Stream*
-// TODO: add a lua-xgettext like procedure for lua
 // TODO: replace math.random through widelands random number generator
 
 
