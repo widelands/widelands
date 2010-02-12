@@ -15,6 +15,7 @@
 ##############################################################################
 
 import confgettext
+from lua_xgettext import Lua_GetText
 from glob import glob
 import os
 import re
@@ -62,7 +63,9 @@ MAINPOTS = [( "maps/maps", ["../../maps/*/elemental", "../../campaigns/cconfig"]
 ITERATIVEPOTS = [
     ("scenario_%(name)s/scenario_%(name)s", "campaigns/",
          ["../../campaigns/%(name)s/e*",
-          "../../campaigns/%(name)s/objective"]
+          "../../campaigns/%(name)s/objective",
+          "../../campaigns/%(name)s/scripting/*.lua"
+         ]
     ),
     ("tribe_%(name)s/tribe_%(name)s", "tribes/",
         ["../../tribes/%(name)s/conf",
@@ -138,11 +141,21 @@ def do_makedirs( dirs ):
 def do_compile( potfile, srcfiles ):
         files = []
         for i in srcfiles:
-                files += glob(i)
+            files += glob(i)
+        files = set(files)
 
-        catalog = confgettext.parse_conf(files)
+        lua_files = set([ f for f in files if
+            os.path.splitext(f)[-1].lower() == '.lua' ])
+        conf_files = files - lua_files
+
+        l = Lua_GetText()
+        for fname in lua_files:
+            l.parse(open(fname, "r").read(), fname)
+
+        l.merge(confgettext.parse_conf(conf_files))
+
         file = open(potfile, "w")
-        file.write(catalog)
+        file.write(str(l))
         file.close()
 
 

@@ -6,14 +6,14 @@ import unittest
 import os, sys
 sys.path.append(os.path.dirname(__file__) + os.path.sep + '..')
 
-from lua_xgettext import gettext, Lua_GetText
+from lua_xgettext import gettext, Lua_GetText, head
 
 class TestXGettext(unittest.TestCase):
     def runTest(self):
         self.assertTrue(True)
 
     def test_empty_input(self):
-        self.assertEqual("",gettext("", "test.lua"))
+        self.assertEqual(head,gettext("", "test.lua"))
 
 class _TestLua_GetText_SingleFile(unittest.TestCase):
     filename = "test.lua"
@@ -81,7 +81,7 @@ class TestSimpleStringWithParens_Inline(_TestLua_GetText_SingleFile):
 
 class TestSimpleStringWithBackslashes_Inline(_TestLua_GetText_SingleFile):
     items = [
-        (r"""This \" is """, 0, 3),
+        (r"""This " is """, 0, 3),
         (r"fin'e!", 0, 3),
     ]
     code =r'''
@@ -220,7 +220,11 @@ is that then]] .. [[More]] ..  "And more"
     end
     '''
 
-
+class TestVerySimpleMultilineString(_TestLua_GetText_SingleFile):
+    items = [
+        (' "There is an old saying:<br> blah ', 0, 1),
+    ]
+    code = """_ [[ "There is an old saying:<br> blah ]]"""
 
 
 if __name__ == '__main__':

@@ -2,8 +2,9 @@
 # encoding: utf-8
 
 from collections import defaultdict
-
 import re
+
+from confgettext import head
 
 
 class Lua_GetText(object):
@@ -11,7 +12,7 @@ class Lua_GetText(object):
         r'''_\s*
         (?P<paren>[(])?\s*        #  opening parenthesis?
         (?P<all_text>(
-            ((?P<quote>["'])|(?P<doublep>\[\[))\s*  #  opening string mark?
+            ((?P<quote>["'])|(?P<doublep>\[\[))  #  opening string mark?
             (?P<text>.*?(?<!\\))
             (?(quote)(?P=quote)|\]\])\s*
             (?(paren)(?P<concat>\.\.\s*))?
@@ -29,7 +30,6 @@ class Lua_GetText(object):
     def parse(self, contents, filename):
 
         for m in self._SIMPLE_STRING.finditer(contents):
-            print m.groups()
             if m.group("concat"):
                 text = m.group("all_text")
                 if text.startswith('[['):
@@ -42,11 +42,8 @@ class Lua_GetText(object):
                 text = m.group("text")
                 start = m.start('text')
 
-            # Lua uses the same escaping as python. Let's use this to
-            # our advantage. But we must keep \" because gettext uses
-            # this as escaping too
-            print "text: %s" % (text)
-            text = text.replace(r'\"', r'\\"')
+            # Lua uses the same escaping as python. Let's use this to our
+            # advantage.
             text = eval('str("""%s""")' % text)
 
             self.findings[text].append(
@@ -54,13 +51,24 @@ class Lua_GetText(object):
             )
 
 
-    def __str__(self):
-        s = ""
+    def merge(self, other_findings):
+        for key in other_findings:
+            self.findings[key].extend(other_findings[key])
 
-        for string, occurences in self.findings.items():
+    def __str__(self):
+        s = head
+
+        for string in sorted(self.findings.keys()):
+            occurences = self.findings[string]
+            occurences.sort( lambda o1,o2: cmp(o1[0], o2[0])) # Sort by filename
+
             for filename, lineno in occurences:
                 s += "#: %s:%i\n" % (filename, lineno)
-            s += 'msgid "%s"\n' % string.replace('"', r'\"')
+            string = string.replace('\\', '\\\\').replace('"', '\\"')
+            if( string.find('\n') == -1 ):
+                s += 'msgid "%s"\n' % string
+            else:
+                s += 'msgid ""\n%s' % string
             s += 'msgstr ""\n\n'
 
         return s
