@@ -38,6 +38,7 @@
 // TODO:   LuaFunction, Testsuite and it's running.
 // TODO: make pickling independent of OS by using widelands Stream*
 // TODO: replace math.random through widelands random number generator
+// TODO: Make widelands recognize lua maps as scenario
 
 
 /*

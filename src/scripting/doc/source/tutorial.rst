@@ -29,9 +29,9 @@ Hello World
 
 The language widelands is using for scripting is called `Lua`_. It is a simple
 scripting language that is reasonable fast and easy to embed in host
-applications.  We will now learn how to start the map as a scenario and how to add
-a simple Lua script to it.  For this create a new text file and write the following
-inside:
+applications.  We will now learn how to start the map as a scenario and how to
+add a simple Lua script to it.  For this create a new text file and write the
+following inside:
 
 .. code-block:: lua
    
@@ -50,11 +50,12 @@ Save this file inside the maps directory as ``scripting/init.lua``.
    under Windows, nedit under Linux and TextEdit under Mac OS X). If you have
    programmed before, you likely already have found your favorite editor....
 
-Now we try to start this scenario. At the time of this writing, widelands does
-not understand Lua scenarios as scenario files (TODO), therefore we manually
-have to start widelands to use them: Open up a command line (Terminal under
-Mac OS X/Linux, Cmd under Windows) and ``cd`` into the widelands directory.
-Now start up widelands and add the scenario switch:
+Now we try to start this scenario. We can either directly select the map
+and mark the scenario box to start it as a scenario or we manually
+start widelands to open it directly from the console. This is very convenient
+for testing cycles: Open up a command line (Terminal under Mac OS X/Linux, Cmd
+under Windows) and ``cd`` into the widelands directory.  Now start up
+widelands and add the scenario switch:
 
 .. code-block:: sh
 
@@ -72,7 +73,7 @@ So what we learned is that widelands will run the script
 ``scripting/init.lua`` as soon as the map is finished loading. This script is
 the entry point for all scripting inside of widelands. 
 
-.. _`Lua`: http://TODO
+.. _`Lua`: http://www.lua.org/ 
 
 A Lua Primer
 ------------
@@ -84,8 +85,8 @@ You should definitively start there to learn Lua.
 This section only contains the parts of Lua that I found bewildering and it
 also defines a few conventions that are used in this documentation. 
 
-.. _`Luas Wiki`: http:// I don_t know, TODO
-.. _`Programming in Lua`: http:// I don_t know, TODO
+.. _`Luas Wiki`: http://lua-users.org/wiki/TutorialDirectory
+.. _`Programming in Lua`: http://www.lua.org/pil/
 
 
 Data Types
