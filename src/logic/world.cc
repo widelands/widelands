@@ -519,7 +519,7 @@ World
 
 World::World(std::string const & name) : m_basedir("worlds/" + name + '/') {
 	try {
-		i18n::Textdomain textdomain(m_basedir);
+		i18n::Textdomain textdomain("world_" + name);
 
 		std::auto_ptr<FileSystem> fs(&g_fs->MakeSubFileSystem(m_basedir));
 		FileSystemLayer filesystemlayer(*fs);

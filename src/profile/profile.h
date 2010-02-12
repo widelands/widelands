@@ -238,7 +238,7 @@ struct Profile {
 	Profile
 		(char const * filename,
 		 char const * global_section,
-		 char const * textdomain,
+		 const std::string  textdomain,
 		 int32_t      error_level    = err_throw);
 
 	void error(char const *, ...) const __attribute__((format(printf, 2, 3)));

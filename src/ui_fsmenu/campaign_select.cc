@@ -339,7 +339,14 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 	campmapfile = m_list.get_selected();
 
 	// Load the maps textdomain to translate the strings from map
-	i18n::Textdomain td(campmapfile.c_str());
+	// Determine text domain
+	std::string tdname(campmapfile);
+	uint32_t i;
+	for (i = tdname.size(); i and tdname[i] != '/' and tdname[i] != '\\'; --i)
+		 /* Do nothing */;
+	tdname = "scenario_" + tdname.substr(i + 1);
+
+	i18n::Textdomain td(tdname);
 
 	Widelands::Map map;
 
