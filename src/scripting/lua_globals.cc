@@ -20,8 +20,8 @@
 #include <lua.hpp>
 
 #include "logic/game.h"
-
 #include "i18n.h"
+
 #include "scripting.h"
 #include "c_utils.h"
 
@@ -117,9 +117,9 @@ static int L_use(lua_State * L) {
 	// remove our argument so that the executed script gets a clear stack
 	lua_pop(L, 2);
 
-	try { 
+	try {
 		get_game(L).lua().run_script(ns, script);
-	} catch(LuaError & e) {
+	} catch (LuaError & e) {
 		report_error(L, "%s", e.what());
 	}
 	return 0;
@@ -132,10 +132,61 @@ const static struct luaL_reg globals [] = {
 	{0, 0}
 };
 
+/*
+ * Special handling of math.random.
+ *
+ * We inject this function to make sure that lua uses our random number
+ * generator.  This guarantees that the game stays in sync over the network and
+ * in replays.
+ *
+ * The function was designed to simulate the standard math.random function and
+ * was therefore nearly verbatimly copied from the lua sources.
+ */
+static int L_math_random(lua_State * L) {
+	Widelands::Game & game = get_game(L);
+	uint32_t t = game.logic_rand();
+
+	lua_Number r = t / 4294967296.; // create a double in [0,1)
+
+	switch (lua_gettop(L)) {  /* check number of arguments */
+		case 0:
+		{  /* no arguments */
+			lua_pushnumber(L, r);  /* Number between 0 and 1 */
+			break;
+		}
+		case 1:
+		{  /* only upper limit */
+			int32_t u = luaL_checkint32(L, 1);
+			luaL_argcheck(L, 1 <= u, 1, "interval is empty");
+			lua_pushnumber(L, floor(r * u) + 1);  /* int between 1 and `u' */
+			break;
+		}
+		case 2:
+		{  /* lower and upper limits */
+			int32_t l = luaL_checkint32(L, 1);
+			int32_t u = luaL_checkint32(L, 2);
+			luaL_argcheck(L, l <= u, 2, "interval is empty");
+			/* int between `l' and `u' */
+			lua_pushnumber(L, floor(r * (u - l + 1)) + l);
+			break;
+		}
+		default: return luaL_error(L, "wrong number of arguments");
+	}
+	return 1;
+
+}
+
+
 void luaopen_globals(lua_State * L) {
 	lua_pushvalue(L, LUA_GLOBALSINDEX);
 	luaL_register(L, 0, globals);
 	lua_pop(L, 1);
+
+	// Overwrite math.random
+	lua_getglobal(L, "math");
+	lua_pushcfunction(L, L_math_random);
+	lua_setfield(L, -2, "random");
+	lua_pop(L, 1); // pop "math"
 }
 
 
