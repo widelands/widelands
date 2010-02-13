@@ -97,8 +97,10 @@ int32_t WL_Map_Loader::preload_map(bool const scenario) {
 		Map_Player_Names_And_Tribes_Data_Packet p;
 		p.Pre_Read(m_fs, &m_map, !scenario);
 	}
-	// No trigger file -> not playable as scenario!
-	m_map.set_as_scenario_playable(m_fs.FileExists("trigger"));
+	// No trigger file and no scripting/init.lua file -> not playable as scenario
+	m_map.set_as_scenario_playable
+		(m_fs.FileExists("trigger") or m_fs.FileExists("scripting/init.lua")
+	);
 
 	set_state(STATE_PRELOADED);
 
