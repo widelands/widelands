@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:53+0000\n"
+"PO-Revision-Date: 2010-02-12 16:50+0000\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-13 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/empire/advanced_lance/conf:1
@@ -103,9 +103,7 @@ msgstr "Lavoro"
 #: ../../tribes/empire/axe/conf:1
 msgid ""
 "The axe is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr ""
-"Questa ascia è lo strumento del falegname. È prodotta dal fabbro di "
-"strumenti."
+msgstr "Questa ascia è lo strumento del falegname. È prodotta dal fabbro."
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
@@ -117,7 +115,7 @@ msgid ""
 "by the toolsmith."
 msgstr ""
 "La pala è lo strumento del fornaio, ogni fornaio deve avere la sua. È "
-"prodotta dal fabbro di strumenti."
+"prodotta dal fabbro."
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
@@ -125,7 +123,7 @@ msgid ""
 "produced by the toolsmith."
 msgstr ""
 "Questo cesto è necessario per il viticoltore, per raccogliere i grappoli. "
-"Viene prodotto dal fabbro di strumenti."
+"Viene prodotto dal fabbro."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
@@ -549,7 +547,7 @@ msgstr "Tagliapietre"
 
 #: ../../tribes/empire/conf:134
 msgid "Toolsmith"
-msgstr "Fabbro di strumenti"
+msgstr "Fabbro"
 
 #: ../../tribes/empire/conf:135
 msgid "Trainer"
@@ -557,7 +555,7 @@ msgstr "Istruttore"
 
 #: ../../tribes/empire/conf:136
 msgid "Weaponsmith"
-msgstr "Fabbro d'armi"
+msgstr "Armaiolo"
 
 #: ../../tribes/empire/conf:137
 msgid "Weaver"
@@ -774,7 +772,7 @@ msgstr "Fucina di strumenti"
 
 #: ../../tribes/empire/conf:206
 msgid "Weapon Smithy"
-msgstr "Fabbro d'armi"
+msgstr "Armaiolo"
 
 #: ../../tribes/empire/conf:207
 msgid "Weaving Mill"
@@ -833,8 +831,8 @@ msgid ""
 "The fire tongs are the tool of the smelter, working in the smelting works. "
 "They are produced by the toolsmith."
 msgstr ""
-"Le pinze per il fuoco sono gli strumenti del fonditore, lavorando in "
-"fonderia. Essi sono prodotti dal fabbro di strumenti."
+"Le pinze per il fuoco sono lo strumento del fonditore per lavorare in "
+"fonderia. Sono prodotte dal fabbro."
 
 #: ../../tribes/empire/fish/conf:1
 msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
@@ -891,7 +889,7 @@ msgid ""
 msgstr ""
 "Il martello è uno strumento essenziale. E' necessario per i geologi, i "
 "lavoratori, i fabbri di corazze e armi. Sii sempre sicuro di avere qualche "
-"riserva! Sono prodotti dal fabbro di strumenti."
+"riserva! Sono prodotti dal fabbro."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid "This is a good warrior lance, with a steel-top and a little blade."
@@ -1008,7 +1006,7 @@ msgid ""
 "toolsmith."
 msgstr ""
 "Questo piccone è usato dai taglia pietre e dai minatori. E' prodotto dal "
-"fabbro di strumenti."
+"fabbro."
 
 #: ../../tribes/empire/pig-breeder/conf:1
 msgid "Breeds pigs."
@@ -1028,7 +1026,7 @@ msgid ""
 "produced by the toolsmith."
 msgstr ""
 "Questa sega è necessaria al falegname per creare tutti gli utili strumenti. "
-"E' prodotta dal fabbro di strumenti."
+"E' prodotta dal fabbro."
 
 #: ../../tribes/empire/scout/conf:1
 msgid ""
@@ -1038,8 +1036,7 @@ msgstr ""
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr ""
-"La falce è lo strumento dei fattori. È prodotta dal fabbro di strumenti."
+msgstr "La falce è lo strumento dei fattori. È prodotta dal fabbro."
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheeps."
@@ -1050,8 +1047,8 @@ msgid ""
 "The shovel is needed for proper handling of plants. Therefore the forester "
 "uses it. It is produced by the toolsmith."
 msgstr ""
-"Il badile è necessario piantare le piante. Quindi viene usata dal "
-"guardaboschi. E' prodotta dal fabbro di strumenti."
+"Il badile è necessario per piantare le piante. Quindi viene usato dal "
+"guardaboschi. E' prodotto dal fabbro."
 
 #: ../../tribes/empire/smelter/conf:1
 msgid "Smelts iron."
@@ -1251,8 +1248,8 @@ msgid ""
 "This is the best and sharpest weapon, the Empire weaponsmith creates for "
 "their warriors."
 msgstr ""
-"Questo è l'arma migliore e affilata, il fabbro d'armi dell'Impero le crea "
-"per i tuoi guerrieri."
+"Questa è l'arma migliore e affilata, l'armaiolo dell'Impero la crea per i "
+"tuoi guerrieri."
 
 #: ../../tribes/empire/water/conf:1
 msgid ""

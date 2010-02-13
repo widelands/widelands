@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 19:40+0100\n"
-"PO-Revision-Date: 2010-02-11 12:31+0000\n"
-"Last-Translator: Aurelien Pavel <pavel.aurelien@gmail.com>\n"
+"PO-Revision-Date: 2010-02-12 21:50+0000\n"
+"Last-Translator: Kristin <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-02-13 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -184,7 +184,7 @@ msgstr "Avertissement: "
 
 #: ../../src/wlapplication.cc:1445
 msgid "Game data error"
-msgstr ""
+msgstr "Erreur de données du jeux"
 
 #: ../../src/wlapplication.cc:1448
 msgid "Unexpected error during the game"
@@ -219,7 +219,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1569
 msgid "Connection timeouted"
-msgstr ""
+msgstr "Délai de connexion dépassé"
 
 #: ../../src/wlapplication.cc:1571
 msgid ""
@@ -227,18 +227,20 @@ msgid ""
 "There seems to be a network problem, either on your side or on side\n"
 "of the server.\n"
 msgstr ""
+"Widelands n'a pas réussi à récupérer l'adresse IP dans les temps. Il semble "
+"que le serveur ou vous-même avez un problème de réseau.\n"
 
 #: ../../src/wlapplication.cc:1592 ../../src/network/network_ggz.cc:373
 msgid "Connection problem"
-msgstr ""
+msgstr "Problème de connexion"
 
 #: ../../src/wlapplication.cc:1594
 msgid "Widelands has not been able to connect to the host."
-msgstr ""
+msgstr "Widelans n'a pas réussi à contacter l'hôte."
 
 #: ../../src/wlapplication.cc:1640
 msgid "The address of the game server is invalid"
-msgstr ""
+msgstr "L'adresse du serveur du jeux est incorrecte."
 
 #: ../../src/wlapplication.cc:1745 ../../src/network/nethost.cc:1178
 msgid "Player"
@@ -268,32 +270,32 @@ msgstr "Chargement..."
 
 #: ../../src/writeHTML.cc:40
 msgid "Requesters"
-msgstr ""
+msgstr "Demandeurs"
 
 #: ../../src/writeHTML.cc:55
 msgid "Providers"
-msgstr ""
+msgstr "Fournisseurs"
 
 #: ../../src/writeHTML.cc:70
 msgid "Successors"
-msgstr ""
+msgstr "Successeurs"
 
 #: ../../src/writeHTML.cc:85
 msgid "Predecessors"
-msgstr ""
+msgstr "Prédécesseurs"
 
 #: ../../src/writeHTML.cc:100
 msgid "Employers"
-msgstr ""
+msgstr "Employeurs"
 
 #: ../../src/writeHTML.cc:263 ../../src/writeHTML.cc:269
 msgid "Building types"
-msgstr ""
+msgstr "Types de construction(s)"
 
 #: ../../src/writeHTML.cc:274 ../../src/writeHTML.cc:509
 #: ../../src/writeHTML.cc:1434
 msgid "Icon"
-msgstr ""
+msgstr "Icône"
 
 #: ../../src/writeHTML.cc:276 ../../src/writeHTML.cc:511
 #: ../../src/writeHTML.cc:1436 ../../src/ui_fsmenu/netsetup_ggz.cc:143
@@ -314,11 +316,11 @@ msgstr "Taille"
 
 #: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:513
 msgid "Buildable"
-msgstr ""
+msgstr "Constructible"
 
 #: ../../src/writeHTML.cc:282
 msgid "Enhanced"
-msgstr ""
+msgstr "Amélioré"
 
 #: ../../src/writeHTML.cc:285 ../../src/wui/building_ui.cc:655
 msgid "Stop"
@@ -335,23 +337,23 @@ msgstr ""
 #: ../../src/writeHTML.cc:316 ../../src/writeHTML.cc:372
 #: ../../src/logic/building.cc:513
 msgid "Mine"
-msgstr ""
+msgstr "Mine"
 
 #: ../../src/writeHTML.cc:320 ../../src/writeHTML.cc:388
 #: ../../src/logic/building.cc:514
 msgid "Small"
-msgstr ""
+msgstr "Petit"
 
 #: ../../src/writeHTML.cc:324 ../../src/writeHTML.cc:382
 #: ../../src/logic/building.cc:515
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:247
 msgid "Medium"
-msgstr ""
+msgstr "Moyen"
 
 #: ../../src/writeHTML.cc:329 ../../src/writeHTML.cc:377
 #: ../../src/logic/building.cc:515
 msgid "Big"
-msgstr ""
+msgstr "Grand"
 
 #: ../../src/writeHTML.cc:333 ../../src/writeHTML.cc:336
 #: ../../src/ui_basic/messagebox.cc:96
@@ -373,19 +375,19 @@ msgstr "building_types_fr_FR.xhtml"
 
 #: ../../src/writeHTML.cc:374
 msgid "Is mine."
-msgstr ""
+msgstr "Est à moi."
 
 #: ../../src/writeHTML.cc:379
 msgid "Is big."
-msgstr ""
+msgstr "Est grand."
 
 #: ../../src/writeHTML.cc:384
 msgid "Is medium."
-msgstr ""
+msgstr "Est moyen."
 
 #: ../../src/writeHTML.cc:390
 msgid "Is small."
-msgstr ""
+msgstr "Est petit."
 
 #: ../../src/writeHTML.cc:397
 msgid "Is not buildable."
@@ -403,19 +405,19 @@ msgstr ""
 #: ../../src/writeHTML.cc:419 ../../src/writeHTML.cc:648
 #, c-format
 msgid "Vision range is %u."
-msgstr ""
+msgstr "La portée de vue est %u"
 
 #: ../../src/writeHTML.cc:427 ../../src/writeHTML.cc:655
 msgid "Build cost"
-msgstr ""
+msgstr "Coût de la construction"
 
 #: ../../src/writeHTML.cc:437
 msgid "'s constructionsite"
-msgstr ""
+msgstr "dont c'est le site de construction"
 
 #: ../../src/writeHTML.cc:448
 msgid "Enhancements"
-msgstr ""
+msgstr "Améliorations"
 
 #: ../../src/writeHTML.cc:458
 msgid "'s enhancement"
@@ -423,7 +425,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:498 ../../src/writeHTML.cc:504
 msgid "Worker types"
-msgstr ""
+msgstr "Types de travailleurs"
 
 #: ../../src/writeHTML.cc:517
 msgid "Minimum<br/>needed<br/>experience"
@@ -471,7 +473,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:666 ../../src/writeHTML.cc:676
 msgid "'s creation"
-msgstr ""
+msgstr "dont c'est la création"
 
 #: ../../src/writeHTML.cc:686
 msgid "Spawns in warehouses."
@@ -533,11 +535,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:760
 msgid "object"
-msgstr ""
+msgstr "objet"
 
 #: ../../src/writeHTML.cc:761
 msgid "plant"
-msgstr ""
+msgstr "plante"
 
 #: ../../src/writeHTML.cc:762
 msgid "create_bob"

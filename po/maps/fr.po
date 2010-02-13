@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-11 15:13+0000\n"
-"Last-Translator: Bertram <Unknown>\n"
+"PO-Revision-Date: 2010-02-12 22:00+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-02-13 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/cconfig:24
@@ -90,7 +90,7 @@ msgstr "Tutoriel 1 - Des yeux dans l'obscurité"
 
 #: ../../campaigns/cconfig:62
 msgid "Tutorial2 - A Place to call Home"
-msgstr "Didacticiel 2 - Un nouveau foyer ?"
+msgstr "Tutoriel 2 - Un endroit à appeller Foyer"
 
 #: ../../campaigns/cconfig:67
 msgid "Tutorial3 - This land is our land"
@@ -106,7 +106,7 @@ msgstr "Tutoriel de l'Empire 2 - Un avant-poste pour l'exil"
 
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
-msgstr ""
+msgstr "01 - Du chaos à la genèse"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"

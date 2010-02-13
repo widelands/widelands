@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 19:40+0100\n"
-"PO-Revision-Date: 2010-02-11 20:14+0000\n"
-"Last-Translator: Pieter Ouwerkerk <pienter.ouwerkerk@kpnplanet.nl>\n"
+"PO-Revision-Date: 2010-02-12 13:46+0000\n"
+"Last-Translator: Foppe Benedictus <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-02-13 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -985,7 +985,7 @@ msgstr "economie: %s"
 #: ../../src/economy/wares_queue.cc:256
 #, c-format
 msgid "waresqueue: %s"
-msgstr ""
+msgstr "goederenrij: %s"
 
 #: ../../src/editor/editorinteractive.cc:64
 msgid "Menu"
@@ -1443,7 +1443,7 @@ msgstr ""
 #: ../../src/events/event_flag.cc:42
 #, c-format
 msgid "(flag): %s"
-msgstr ""
+msgstr "(vlag): %s"
 
 #: ../../src/events/event_forbid_building_types.cc:44
 #: ../../src/events/event_forbid_retreat_change.cc:43
@@ -1841,7 +1841,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:610
 #, c-format
 msgid "unknown tribe %s"
-msgstr ""
+msgstr "onbekende stam %s"
 
 #: ../../src/logic/immovable.cc:616
 #, c-format
@@ -2040,17 +2040,17 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:629
 #, c-format
 msgid "set ware priority: %s"
-msgstr ""
+msgstr "stel goederenprioriteit in: %s"
 
 #: ../../src/logic/playercommand.cc:678
 #, c-format
 msgid "change target quantity: %s"
-msgstr ""
+msgstr "verander streefaantal: %s"
 
 #: ../../src/logic/playercommand.cc:741
 #, c-format
 msgid "set ware target quantity: %s"
-msgstr ""
+msgstr "stel goederenstreefaantal: %s"
 
 #: ../../src/logic/playercommand.cc:863
 #, c-format
@@ -2065,7 +2065,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1052
 #, c-format
 msgid "soldier %u: %s"
-msgstr ""
+msgstr "soldaat %u: %s"
 
 #: ../../src/logic/playercommand.cc:1058
 #, c-format
@@ -2143,7 +2143,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:257
 msgid "ware type or worker type"
-msgstr ""
+msgstr "goederentype of werkertype"
 
 #: ../../src/logic/production_program.cc:320
 #, c-format
@@ -2231,13 +2231,13 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:685
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
-msgstr ""
+msgstr "verwacht ware_type1[,ware_type2[,...]][:N] ..."
 
 #: ../../src/logic/production_program.cc:788
 msgid " is missing"
 msgid_plural " are missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " mist"
+msgstr[1] " missen"
 
 #: ../../src/logic/production_program.cc:848
 #: ../../src/logic/production_program.cc:934
@@ -2249,18 +2249,18 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:866
 msgid "Produced "
-msgstr ""
+msgstr "Geproduceerd "
 
 #: ../../src/logic/production_program.cc:876
 #: ../../src/logic/production_program.cc:961
 #, c-format
 msgid "%u "
-msgstr ""
+msgstr "%u "
 
 #: ../../src/logic/production_program.cc:883
 #: ../../src/logic/production_program.cc:968
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../../src/logic/production_program.cc:951
 msgid "Recruited "
@@ -2268,16 +2268,16 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:992
 msgid "distance"
-msgstr ""
+msgstr "afstand"
 
 #: ../../src/logic/production_program.cc:1003
 #: ../../src/logic/production_program.cc:1014
 msgid "percentage"
-msgstr ""
+msgstr "percentage"
 
 #: ../../src/logic/production_program.cc:1148
 msgid "Mine empty"
-msgstr ""
+msgstr "Mijn uitgeput"
 
 #: ../../src/logic/production_program.cc:1152
 msgid ""
@@ -2287,7 +2287,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1167
 #: ../../src/logic/production_program.cc:1236
 msgid "soldier type"
-msgstr ""
+msgstr "soldaattype"
 
 #: ../../src/logic/production_program.cc:1180
 #, c-format
@@ -2297,7 +2297,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1189
 #: ../../src/logic/production_program.cc:1257
 msgid "level"
-msgstr ""
+msgstr "niveau"
 
 #: ../../src/logic/production_program.cc:1267
 #, c-format
@@ -2320,8 +2320,8 @@ msgstr "(niet bezet)"
 #, c-format
 msgid "Worker missing"
 msgid_plural "Workers missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Werker mist"
+msgstr[1] "Werkers missen"
 
 #: ../../src/logic/productionsite.cc:231
 msgid "(stopped)"
@@ -2344,7 +2344,7 @@ msgstr ""
 
 #: ../../src/logic/soldier.cc:70 ../../src/logic/soldier.cc:93
 msgid "positive integer"
-msgstr ""
+msgstr "positieve integer"
 
 #: ../../src/logic/soldier.cc:74 ../../src/logic/soldier.cc:97
 #, c-format
@@ -2394,7 +2394,7 @@ msgstr ""
 
 #: ../../src/logic/tribe.cc:221 ../../src/logic/tribe.cc:242
 msgid "none found"
-msgstr ""
+msgstr "geen gevonden"
 
 #: ../../src/logic/tribe.cc:223
 #, c-format
@@ -2409,7 +2409,7 @@ msgstr ""
 #: ../../src/logic/tribe.cc:374
 #, c-format
 msgid "tribe %s: %s"
-msgstr ""
+msgstr "stam %s: %s"
 
 #: ../../src/logic/warehouse.cc:489
 #, c-format
@@ -2489,7 +2489,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:102
 #, c-format
 msgid "tribe \"%s\" does not exist"
-msgstr ""
+msgstr "stam \"%s\" bestaat niet"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:141
 #, c-format
@@ -2499,7 +2499,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:233
 #, c-format
 msgid "unknown task type \"%s\""
-msgstr ""
+msgstr "onbekend taaktype \"%s\""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:237
 #, c-format
@@ -2529,7 +2529,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:675
 #, c-format
 msgid "soldier: %s"
-msgstr ""
+msgstr "soldaat: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:691
 #, c-format
@@ -2549,12 +2549,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:273
 #, c-format
 msgid "wares: %s"
-msgstr ""
+msgstr "goederen: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:286
 #, c-format
 msgid "constructionsite: %s"
-msgstr ""
+msgstr "bouwplaats: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:450
 #, c-format
@@ -2566,7 +2566,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:471
 #, c-format
 msgid "warehouse: %s"
-msgstr ""
+msgstr "warenhuis: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:578
 #, c-format
@@ -2594,7 +2594,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_trigger_data_packet.cc:72
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: ../../src/map_io/widelands_map_event_chain_data_packet.cc:183
 #, c-format
@@ -2609,7 +2609,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_exploration_data_packet.cc:95
 #, c-format
 msgid "seen: %s"
-msgstr ""
+msgstr "gezien: %s"
 
 #: ../../src/map_io/widelands_map_extradata_data_packet.cc:99
 #, c-format
@@ -2629,7 +2629,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
 msgid "has a flag (%u)"
-msgstr ""
+msgstr "heeft een vlag (%u)"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
@@ -2639,7 +2639,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
 msgid "flags: %s"
-msgstr ""
+msgstr "vlaggen: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
@@ -2659,23 +2659,23 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
 msgid "building (%u): %s"
-msgstr ""
+msgstr "gebouw (%u): %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:209
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
 #, c-format
 msgid "%u: %s"
-msgstr ""
+msgstr "%u: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:216
 #, c-format
 msgid "flagdata: %s"
-msgstr ""
+msgstr "vlaggegevens: %s"
 
 #: ../../src/map_io/widelands_map_heights_data_packet.cc:53
 #, c-format
 msgid "heights: %s"
-msgstr ""
+msgstr "hoogten: %s"
 
 #: ../../src/map_io/widelands_map_immovable_data_packet.cc:98
 #: ../../src/map_io/widelands_map_immovabledata_data_packet.cc:120
@@ -2763,7 +2763,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:151
 #, c-format
 msgid "\"%s\": %s"
-msgstr ""
+msgstr "\"%s\": %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:156
 #, c-format
@@ -2778,7 +2778,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
 msgid "road: %s"
-msgstr ""
+msgstr "weg: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
 msgid "no carrier slot"
@@ -2794,17 +2794,17 @@ msgstr ""
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
 msgid "road %u: %s"
-msgstr ""
+msgstr "weg %u: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:210
 #, c-format
 msgid "roaddata: %s"
-msgstr ""
+msgstr "weggegevens: %s"
 
 #: ../../src/map_io/widelands_map_terrain_data_packet.cc:81
 #, c-format
 msgid "terrain: %s"
-msgstr ""
+msgstr "terrein: %s"
 
 #: ../../src/map_io/widelands_map_trigger_data_packet.cc:80
 #, c-format
@@ -2819,12 +2819,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:76
 #, c-format
 msgid "variable %s: %s"
-msgstr ""
+msgstr "variabele %s: %s"
 
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:83
 #, c-format
 msgid "variables: %s"
-msgstr ""
+msgstr "variabelen: %s"
 
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:77
 #, c-format
@@ -2936,7 +2936,7 @@ msgstr "Host stuurde speler %s naar de hal!"
 #: ../../src/network/nethost.cc:1127
 #, c-format
 msgid "Computer %u"
-msgstr ""
+msgstr "Computer %u"
 
 #: ../../src/network/nethost.cc:1203
 #, c-format
@@ -3097,7 +3097,7 @@ msgstr ""
 #: ../../src/trigger/trigger_defeated.cc:52
 #, c-format
 msgid "(defeated): %s"
-msgstr ""
+msgstr "(verslagen): %s"
 
 #: ../../src/trigger/trigger_factory.cc:41
 msgid "Building Trigger"
@@ -3207,7 +3207,7 @@ msgstr ""
 #: ../../src/trigger/trigger_time.cc:46
 #, c-format
 msgid "(time): %s"
-msgstr ""
+msgstr "(tijd): %s"
 
 #: ../../src/trigger/trigger_vision.cc:52
 #, c-format
@@ -3249,25 +3249,25 @@ msgstr "Verhoog de waarde met 10"
 
 #: ../../src/ui_basic/timeedit.cc:136 ../../src/ui_basic/timeedit.cc:137
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: ../../src/ui_basic/timeedit.cc:138
 msgid "."
-msgstr ""
+msgstr "."
 
 #: ../../src/ui_basic/timeedit.cc:151 ../../src/ui_basic/timeedit.cc:152
 msgid "h"
-msgstr ""
+msgstr "u"
 
 #: ../../src/ui_basic/timeedit.cc:153 ../../src/ui_basic/timeedit.cc:154
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: ../../src/ui_basic/timeedit.cc:155 ../../src/ui_basic/timeedit.cc:156
 #: ../../src/ui_basic/timeedit.cc:157 ../../src/ui_basic/timeedit.cc:158
 #: ../../src/ui_basic/timeedit.cc:159
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:52
 msgid "Select a campaign"
@@ -3521,7 +3521,7 @@ msgstr "Speeltijd:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:111
 msgid "Delete file"
-msgstr ""
+msgstr "Verwijder bestand"
 
 #: ../../src/ui_fsmenu/loadgame.cc:112
 msgid "Do you really want to delete "
@@ -3635,7 +3635,7 @@ msgstr "Open een nieuw spel"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:144
 msgid "Points"
-msgstr ""
+msgstr "Punten"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:145
 msgid "Server"
@@ -3726,7 +3726,7 @@ msgstr "min."
 
 #: ../../src/ui_fsmenu/options.cc:89
 msgid "days"
-msgstr ""
+msgstr "dagen"
 
 #: ../../src/ui_fsmenu/options.cc:96
 msgid "General Options"
@@ -3802,11 +3802,11 @@ msgstr "Standaard systeemtaal"
 
 #: ../../src/ui_fsmenu/options.cc:364
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #: ../../src/ui_fsmenu/options.cc:369 ../../src/ui_fsmenu/options.cc:374
 msgid "px."
-msgstr ""
+msgstr "px."
 
 #: ../../src/ui_fsmenu/options.cc:393
 msgid "Main menu font:"
@@ -3884,7 +3884,7 @@ msgstr "Laad spel"
 
 #: ../../src/wui/attack_box.cc:159
 msgid "Soldiers:"
-msgstr ""
+msgstr "Soldaten:"
 
 #: ../../src/wui/attack_box.cc:165
 msgid "Send less soldiers"
@@ -3892,7 +3892,7 @@ msgstr "Stuur minder soldaten"
 
 #: ../../src/wui/attack_box.cc:182
 msgid "Number of soldiers"
-msgstr ""
+msgstr "Aantal soldaten"
 
 #: ../../src/wui/attack_box.cc:192
 msgid "Send more soldiers"
@@ -3900,7 +3900,7 @@ msgstr "Stuur meer soldaten"
 
 #: ../../src/wui/attack_box.cc:199 ../../src/wui/military_box.cc:130
 msgid "Retreat: Never!"
-msgstr ""
+msgstr "Terugtrekken: nooit!"
 
 #: ../../src/wui/attack_box.cc:218 ../../src/wui/military_box.cc:149
 msgid "Supported damage before retreat"
@@ -3908,7 +3908,7 @@ msgstr ""
 
 #: ../../src/wui/attack_box.cc:220 ../../src/wui/military_box.cc:151
 msgid "Once injured"
-msgstr ""
+msgstr "Wanneer gewond"
 
 #: ../../src/wui/building_statistics_menu.cc:76
 #: ../../src/wui/game_main_menu.cc:61
@@ -4139,7 +4139,7 @@ msgstr "Bekijk"
 
 #: ../../src/wui/fieldaction.cc:487
 msgid "Military settings"
-msgstr ""
+msgstr "Militaire instellingen"
 
 #: ../../src/wui/fieldaction.cc:512
 msgid "Start attack"
@@ -4176,6 +4176,9 @@ msgid ""
 "   height: %u\n"
 "   owner: %u\n"
 msgstr ""
+"(%i, %i)\n"
+"   hoogte: %u\n"
+"   eigenaar: %u\n"
 
 #: ../../src/wui/game_main_menu.cc:38
 #: ../../src/editor/ui_menus/editor_main_menu.cc:49
@@ -4432,7 +4435,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:38
 msgid "email (optional):"
-msgstr ""
+msgstr "e-mail (optioneel):"
 
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
@@ -4440,11 +4443,11 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:50
 msgid "Password:"
-msgstr ""
+msgstr "Wachtwoord:"
 
 #: ../../src/wui/login_box.cc:57
 msgid "Register new account"
-msgstr ""
+msgstr "Registreer nieuwe account"
 
 #: ../../src/wui/login_box.cc:62
 msgid "Automatically use this login information from now on."
@@ -4472,11 +4475,11 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:105
 msgid "Empty Password"
-msgstr ""
+msgstr "Leeg wachtwoord"
 
 #: ../../src/wui/login_box.cc:105
 msgid "Please enter a password!"
-msgstr ""
+msgstr "Voer een wachtwoord in!"
 
 #: ../../src/wui/minimap.cc:143
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
@@ -4984,11 +4987,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Low"
-msgstr ""
+msgstr "Laag"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "High"
-msgstr ""
+msgstr "Hoog"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:281
 msgid "Map ID:"
@@ -5390,7 +5393,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:228
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:204
 msgid "Nothing selected"
-msgstr ""
+msgstr "Niets geselecteerd"
 
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:64
 #, c-format
@@ -5500,19 +5503,19 @@ msgstr "geen omschrijving"
 
 #: ../../src/wui/game_message_menu.h:62
 msgid "Select"
-msgstr ""
+msgstr "Selecteer"
 
 #: ../../src/wui/game_message_menu.h:63
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../src/wui/game_message_menu.h:64
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: ../../src/wui/game_message_menu.h:65
 msgid "Time sent"
-msgstr ""
+msgstr "Tijd verzonden"
 
 #: ../../src/wui/game_message_menu.h:76
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:99

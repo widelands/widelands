@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-11 20:34+0000\n"
+"PO-Revision-Date: 2010-02-12 22:15+0000\n"
 "Last-Translator: Kefir111 <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-02-13 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr "Vyrába zbroj pre bojovníkov."
+msgstr "Vyrába zbroj pre vojakov."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
@@ -70,11 +70,11 @@ msgstr ""
 #: ../../tribes/atlanteans/well/conf:13
 #: ../../tribes/atlanteans/woodcutters_house/conf:16
 msgid "Work"
-msgstr ""
+msgstr "Práca"
 
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Pečie chleba pre robotníkov"
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
@@ -118,11 +118,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "Pracuje na stavenisku, aby postavil novú budovu."
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
-msgstr ""
+msgstr "Páli uhlie."
 
 #: ../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
@@ -175,7 +175,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:45
 msgid "Cornfield"
-msgstr ""
+msgstr "Kukuričné pole"
 
 #: ../../tribes/atlanteans/conf:46
 msgid "Cornfield harvested"
@@ -183,15 +183,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:47
 msgid "Cornfield medium"
-msgstr ""
+msgstr "Stredné kukuričné pole"
 
 #: ../../tribes/atlanteans/conf:48
 msgid "Cornfield small"
-msgstr ""
+msgstr "Malé kukuričné pole"
 
 #: ../../tribes/atlanteans/conf:49
 msgid "Cornfield tiny"
-msgstr ""
+msgstr "Maličké kukuričné pole"
 
 #: ../../tribes/atlanteans/conf:50
 msgid "Destroyed building"
@@ -235,7 +235,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:60
 msgid "Resource indicator water"
-msgstr ""
+msgstr "Ukazovateľ zdroja vody"
 
 #: ../../tribes/atlanteans/conf:63
 msgid "Advanced Shield"
@@ -243,7 +243,7 @@ msgstr "Pokročilý štít"
 
 #: ../../tribes/atlanteans/conf:64
 msgid "Bakingtray"
-msgstr ""
+msgstr "Pekáč"
 
 #: ../../tribes/atlanteans/conf:65
 msgid "Blackroot Flour"
@@ -267,7 +267,7 @@ msgstr "Uhlie"
 
 #: ../../tribes/atlanteans/conf:70
 msgid "Cornflour"
-msgstr ""
+msgstr "Kukuřičná múka"
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Corn"
@@ -327,7 +327,7 @@ msgstr "Lovecký luk"
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Iron Ore"
-msgstr ""
+msgstr "Železná ruda"
 
 #: ../../tribes/atlanteans/conf:86
 msgid "Iron"
@@ -355,7 +355,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:92
 msgid "Pick"
-msgstr ""
+msgstr "Krompáč"
 
 #: ../../tribes/atlanteans/conf:93
 msgid "Planks"
@@ -552,11 +552,11 @@ msgstr "Strážnica"
 
 #: ../../tribes/atlanteans/conf:153
 msgid "High Tower"
-msgstr ""
+msgstr "Vysoká veža"
 
 #: ../../tribes/atlanteans/conf:154
 msgid "Small Tower"
-msgstr ""
+msgstr "Malá veža"
 
 #: ../../tribes/atlanteans/conf:155
 #: ../../tribes/atlanteans/conf:170
@@ -680,7 +680,7 @@ msgstr "Zlievareň"
 
 #: ../../tribes/atlanteans/conf:195
 msgid "Smokery"
-msgstr ""
+msgstr "Udiareň"
 
 #: ../../tribes/atlanteans/conf:196
 msgid "Spiderfarm"
@@ -736,7 +736,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/conf:23
 msgid "Mine stone"
-msgstr ""
+msgstr "Ťažiť kamen"
 
 #: ../../tribes/atlanteans/crystalmine/conf:24
 msgid "Mine quartz"
@@ -744,7 +744,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/conf:25
 msgid "Mine diamond"
-msgstr ""
+msgstr "Ťažiť diamanty"
 
 #: ../../tribes/atlanteans/diamond/conf:1
 msgid ""
@@ -842,7 +842,7 @@ msgstr "Sadí stromy"
 
 #: ../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Objavuje zdroje pre ťažbu."
 
 #: ../../tribes/atlanteans/gold/conf:1
 msgid ""
@@ -1062,7 +1062,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/smokery/conf:26
 msgid "Smoke fish"
-msgstr ""
+msgstr "Údiť rybu"
 
 #: ../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -1108,7 +1108,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmithy/conf:33
 msgid "Produce bakingtray"
-msgstr ""
+msgstr "Vyrobiť pekáč"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:34
 msgid "Produce bucket"
@@ -1176,7 +1176,7 @@ msgstr "Vyrába zbrane pre vojakov."
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:30
 msgid "Produce light trident"
-msgstr ""
+msgstr "Vyrobiť ľahký trojzubec"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:31
 msgid "Produce long trident"
@@ -1212,4 +1212,4 @@ msgstr ""
 
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
-msgstr ""
+msgstr "Kácá stromy."

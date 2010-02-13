@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 19:40+0100\n"
-"PO-Revision-Date: 2010-02-10 22:01+0000\n"
+"PO-Revision-Date: 2010-02-12 19:21+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-02-13 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -713,11 +713,11 @@ msgstr "needs (potrzebuje)"
 
 #: ../../src/writeHTML.cc:986
 msgid "site"
-msgstr ""
+msgstr "teren"
 
 #: ../../src/writeHTML.cc:988
 msgid "has"
-msgstr ""
+msgstr "ma"
 
 #: ../../src/writeHTML.cc:1023
 msgid "workers of this site"
@@ -804,7 +804,7 @@ msgstr "produce (produkuj)"
 
 #: ../../src/writeHTML.cc:1268
 msgid "recruit"
-msgstr ""
+msgstr "rekrutuj"
 
 #: ../../src/writeHTML.cc:1311
 msgid "Documentation for program command mine"
@@ -933,7 +933,7 @@ msgstr "ware_types.pl_PL.xhtml"
 #: ../../src/trigger/trigger_time.cc:44 ../../src/trigger/trigger_vision.cc:50
 #, c-format
 msgid "unknown/unhandled version %u"
-msgstr ""
+msgstr "nieznana/nieobsługiwana wersja %u"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
@@ -954,12 +954,12 @@ msgstr ""
 #: ../../src/economy/economy_data_packet.cc:99
 #, c-format
 msgid "unknown version %u"
-msgstr ""
+msgstr "nieznana wersja %u"
 
 #: ../../src/economy/economy_data_packet.cc:102
 #, c-format
 msgid "economy: %s"
-msgstr ""
+msgstr "gospodarka: %s"
 
 #: ../../src/economy/wares_queue.cc:256
 #, c-format
@@ -1035,7 +1035,7 @@ msgstr "Wczytywanie danych świata"
 #: ../../src/editor/editorinteractive.cc:191
 #: ../../src/editor/editorinteractive.cc:607
 msgid "Loading graphics..."
-msgstr ""
+msgstr "Ładowanie grafiki..."
 
 #: ../../src/editor/editorinteractive.cc:232
 msgid "Map unsaved"
@@ -1107,28 +1107,28 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:130
 #, c-format
 msgid "expected %s but found \"%s\""
-msgstr ""
+msgstr "oczekiwano %s ale znaleziono \"%s\""
 
 #: ../../src/events/event_building.cc:73 ../../src/events/event_building.cc:82
 msgid "distance (1 .. 255)"
-msgstr ""
+msgstr "odległość (1 .. 255)"
 
 #: ../../src/events/event_building.cc:86
 #, c-format
 msgid "max distance (%u) is smaller than min distance (%u)"
-msgstr ""
+msgstr "maks. odległość (%u) jest mniejsza niż min. odległość (%u)"
 
 #: ../../src/events/event_building.cc:169
 #: ../../src/events/event_building.cc:304 ../../src/logic/immovable.cc:254
 #: ../../src/logic/immovable.cc:268
 msgid "duplicated"
-msgstr ""
+msgstr "zdwojone"
 
 #: ../../src/events/event_building.cc:174
 #: ../../src/events/event_building.cc:311
 #, c-format
 msgid "%s=\"%s\": invalid"
-msgstr ""
+msgstr "%s=\"%s\": niepoprawne"
 
 #: ../../src/events/event_building.cc:204
 #: ../../src/events/event_building.cc:230
@@ -1139,7 +1139,7 @@ msgstr ""
 #: ../../src/events/event_building.cc:316
 #, c-format
 msgid "%u soldiers but only %u allowed"
-msgstr ""
+msgstr "%u żołnierzy ale tylko %u dozwolone"
 
 #: ../../src/events/event_building.cc:320
 #, c-format

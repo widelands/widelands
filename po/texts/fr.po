@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:36+0000\n"
-"Last-Translator: Jean-Pierre Gemble <Unknown>\n"
+"PO-Revision-Date: 2010-02-12 17:26+0000\n"
+"Last-Translator: Tarou <pierre.salagnac@gmail.com>\n"
 "Language-Team: French <eandry@mandriva.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-02-13 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../txts/COPYING:1
@@ -778,17 +778,20 @@ msgstr ""
 
 #: ../../txts/README:36
 msgid "General game control"
-msgstr ""
+msgstr "Contrôle général du jeux"
 
 #: ../../txts/README:40
 msgid "To close an open window, right click it."
-msgstr ""
+msgstr "Pour fermer une fenêtre, faites-y un clic avec le bouton droit."
 
 #: ../../txts/README:42
 msgid ""
 "To minimize/maximize a window, click on the titlebar of that window either "
 "with middle mousebutton or with left mousebutton while holding down CTRL."
 msgstr ""
+"Pour agrandir/réduire une fenêtre, cliquez sur la barre de titre de cette "
+"fenêtre avec le bouton du milieu ou celui de gauche tout en maintenant "
+"appuyée la touche CTRL."
 
 #: ../../txts/README:47
 msgid "Keyboard shortcuts (in-game)"
@@ -833,7 +836,7 @@ msgstr "PAGEDOWN    Diminuer la vitesse du jeu"
 
 #: ../../txts/README:71
 msgid "F6           Shows the debug console (only in debug-builds)"
-msgstr ""
+msgstr "F6 montre la console de débogage (uniquement dans debug-builds)"
 
 #: ../../txts/README:73
 msgid "F10         Quit the game immediately"
@@ -1060,7 +1063,7 @@ msgstr "Page d'accueil"
 
 #: ../../txts/developers:27
 msgid "Janus"
-msgstr ""
+msgstr "Janus"
 
 #: ../../txts/developers:31
 #: ../../txts/developers:323
@@ -1146,7 +1149,7 @@ msgstr "Hongrois"
 
 #: ../../txts/developers:213
 msgid "Italian"
-msgstr ""
+msgstr "Italien"
 
 #: ../../txts/developers:218
 msgid "Polish"
@@ -1186,11 +1189,11 @@ msgstr "Les distributions non Unix"
 
 #: ../../txts/developers:284
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Page d'accueil des développeurs"
 
 #: ../../txts/developers:293
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "Documentation, Aide et Wiki"
 
 #: ../../txts/developers:307
 msgid "Former elders"
@@ -1215,6 +1218,11 @@ msgid ""
 "progress and as the Editor becomes better and better this text will also get "
 "longer and more complete."
 msgstr ""
+"Cet éditeur est destiné aux joueurs désirant créer leur propres cartes pour "
+"Widelands.\r\n"
+"Comme vous pouvez le voir, cet éditeur est un gros travail en cours, et au "
+"fur et à mesure qu'il s'améliorera, ce texte deviendra plus long et sera "
+"plus complet"
 
 #: ../../txts/editor_readme:12
 msgid "Please look into our enduser manuals in our wiki-pages at:"
@@ -1300,12 +1308,17 @@ msgid ""
 "Some buildings, such as the farm, have a very small working area. If the "
 "building is surrounded with trees or roads, production will stop."
 msgstr ""
+"Certaines constructions, comme les fermes, ont un espace de travail "
+"restreint. Si le bâtiment est entouré de routes ou d'arbres la production "
+"s'arrêtera."
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
 "Always build a forester's and a fish breeder's house, so you will not run "
 "out of trunks and food."
 msgstr ""
+"Construisez toujours une maison de sylviculteur et une pêcherie, de cette "
+"manière vous ne serez pas à cours de troncs et de nourriture."
 
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6
@@ -1313,12 +1326,16 @@ msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "working area, they will stop to fish."
 msgstr ""
+"Gardez un oeil sur vos pêcheurs. Une fois qu'il n'y a plus de poissons dans "
+"leur espace de travail, il s'arrêteront de pêcher"
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
 "Always build a ranger's and a gamekeeper's hut, so you will not run out of "
 "trunks and food."
 msgstr ""
+"Construisez toujours une hutte de garde-chasse et de sylviculteur, afin de "
+"ne pas épuiser la ressource en tronc ou en viande."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
@@ -1334,6 +1351,9 @@ msgid ""
 "during selection. If you then click on the map, an instance of one of the "
 "selected object types will be placed."
 msgstr ""
+"Vous pouvez sélectionner différents types d'objets (bob) si vous maintenez "
+"CTRL enfoncé pendant la sélection. Si ensuite vous cliquez sur la carte, un "
+"représentant d'un des types sélectionné sera placé."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
@@ -1395,6 +1415,8 @@ msgstr ""
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester's house so you will not run out of trunks."
 msgstr ""
+"Construisez toujours une hutte de sylviculteur, afin de ne pas épuiser la "
+"ressource en tronc."
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
@@ -1416,6 +1438,8 @@ msgid ""
 "Your territory can be expanded by building various military buildings - "
 "Sentry, Fortress, Barracks, etc."
 msgstr ""
+"Votre territoire peut être agrandit en construisant différent bâtiments "
+"militaire : sentinelle, forteresse, baraquement, etc..."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will only work if supplied with food."
@@ -1450,24 +1474,33 @@ msgid ""
 "Use the 'configure economy' menu to adjust the target quantity of a specific "
 "ware."
 msgstr ""
+"Utilisez le menu \"Configurer l'économie\" pour ajuster les objectifs de "
+"production pour un article spécifique."
 
 #: ../../txts/tips/multiplayer.tip:2
 msgid ""
 "You can use 'Page up' and 'Page down' keys to adjust your wished speed - the "
 "real speed is than democratically set."
 msgstr ""
+"Vous pouvez utiliser les touches 'page suivante' et 'page précédente' pour "
+"modifier votre souhait de vitesse de jeu - la vitesse réelle est ensuite "
+"calculée démocratiquement."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""
 "You can use '/me' at the beginning of a chatmessage: '/me is tired' will be "
 "printed as '-> Nickname is tired'."
 msgstr ""
+"Vous pouvez utiliser '/me' au début d'un message instantané : \"/me est "
+"fatigué' sera affiché '->Pseudo est fatigué'."
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."
 msgstr ""
+"Les joueurs ordinateurs sont ennuyeux ? Visitez notre site www.widelands.org "
+"et rencontrez d'autres joueurs pour une partie en ligne."
 
 #~ msgid "vacant"
 #~ msgstr "inoccupé"

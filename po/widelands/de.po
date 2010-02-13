@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 19:40+0100\n"
-"PO-Revision-Date: 2010-02-11 19:36+0000\n"
+"PO-Revision-Date: 2010-02-12 21:55+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-02-13 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1177,7 +1177,7 @@ msgstr "Spieler %u existiert nicht"
 #: ../../src/events/event_expire_message.cc:55
 #, c-format
 msgid "player %u's message %u does not exist"
-msgstr ""
+msgstr "Nachricht %u des Spielers %u existiert nicht"
 
 #: ../../src/events/event_expire_message.cc:61
 #, c-format
@@ -1210,15 +1210,15 @@ msgstr "Erlaube Arbeitertypen"
 
 #: ../../src/events/event_factory.cc:62
 msgid "Allows the creation of workers of certain types for a player."
-msgstr ""
+msgstr "Erlaubt die Kreation bestimmter Arten von Arbeitern."
 
 #: ../../src/events/event_factory.cc:66
 msgid "Forbid worker types"
-msgstr ""
+msgstr "Verbiete Arbeiter vom Typ"
 
 #: ../../src/events/event_factory.cc:67
 msgid "Forbids the creation of workers of certain types for a player."
-msgstr ""
+msgstr "Verbietet einem Spieler, bestimmte Arten von Arbeitern zu kreieren."
 
 #: ../../src/events/event_factory.cc:71
 msgid "Allow building types"
@@ -1276,7 +1276,7 @@ msgstr "Erstelle einen unbewegten Gegenstand."
 
 #: ../../src/events/event_factory.cc:103
 msgid "Lua event"
-msgstr ""
+msgstr "Lua Ereignis"
 
 #: ../../src/events/event_factory.cc:104
 msgid "Run a lua command"
@@ -1425,23 +1425,28 @@ msgstr "Stellt den Alles-Sehen-Modus für einen spezifischen Spieler An/Aus."
 
 #: ../../src/events/event_factory.cc:193
 msgid "Creates a message for a player"
-msgstr ""
+msgstr "Schreibt eine Nachricht an einen Spieler"
 
 #: ../../src/events/event_factory.cc:195
 msgid ""
 "Creates a message for a player. This message can last forever, during a "
 "specified duration, or until a special event is run."
 msgstr ""
+"Sendet eine Nachricht an einen Spieler. Diese Nachricht kann für immer "
+"angezeigt werden, für einen bestimmten Zeitraum oder bis ein spezieller "
+"Event läuft."
 
 #: ../../src/events/event_factory.cc:200
 msgid "Expires a previously created message"
-msgstr ""
+msgstr "Verwirft eine zuvor geschriebene Nachricht"
 
 #: ../../src/events/event_factory.cc:202
 msgid ""
 "Expires a message that was previously created for a player. The message will "
 "cease to exist."
 msgstr ""
+"Verwirft eine zuvor an einen Spieler geschickte Nachricht. Die Nachricht "
+"wird gelöscht."
 
 #: ../../src/events/event_flag.cc:42
 #, c-format
@@ -1463,12 +1468,12 @@ msgstr "(Unbewegte Natur): %s"
 #: ../../src/events/event_lua.cc:42
 #, c-format
 msgid "(lua event): %s"
-msgstr ""
+msgstr "(lua Ereignis): %s"
 
 #: ../../src/events/event_message.cc:67
 #, c-format
 msgid "expire: \"%s\" is not an expire message event"
-msgstr ""
+msgstr "verwerfen: \"%s\" ist kein Verwirf-Nachricht Event"
 
 #: ../../src/events/event_message.cc:72
 #, c-format
@@ -1477,11 +1482,14 @@ msgid ""
 "meaning forever, which is the default; omit the duration key to make the "
 "message exist forever"
 msgstr ""
+"dauer: der Wert %u ist als Dauer nicht erlaubt; es ist ein spezieller Wert "
+"der Unendlich bedeutet. Dieser ist der Standardwert; man kann diesen Eintrag "
+"weglassen, damit die Nachricht für immer existiert."
 
 #: ../../src/events/event_message.cc:103
 #, c-format
 msgid "status_change: \"%s\" is not a message_is_read_or_archived trigger"
-msgstr ""
+msgstr "status_change: \"%s\" ist kein message_is_read_or_archived trigger"
 
 #: ../../src/events/event_message_box.cc:41
 msgid "No text defined"
@@ -1561,16 +1569,16 @@ msgstr "(Spieler sieht alles): %s"
 #: ../../src/events/event_player_worker_types.cc:52
 #, c-format
 msgid "\"%s\" is not buildable"
-msgstr ""
+msgstr "\"%s\" kann nicht gebaut werden"
 
 #: ../../src/events/event_player_worker_types.cc:58
 msgid "no worker types"
-msgstr ""
+msgstr "keine Arbeiter Typen"
 
 #: ../../src/events/event_player_worker_types.cc:63
 #, c-format
 msgid "(player worker types): %s"
-msgstr ""
+msgstr "(spieler Arbeiter Typen): %s"
 
 #: ../../src/events/event_retreat_change.cc:43
 msgid "Change"
@@ -1925,7 +1933,7 @@ msgstr "\"min-max\""
 
 #: ../../src/logic/military_data.cc:59
 msgid "positive integer <= 100"
-msgstr ""
+msgstr "positive Ganzzahl <= 100"
 
 #: ../../src/logic/military_data.cc:63
 #, c-format
@@ -1935,7 +1943,7 @@ msgstr "Benötigt ganze positive Zahl >= %u <= 100 aber \"%s\" wurde gefunden"
 #: ../../src/logic/military_data.cc:75
 #, c-format
 msgid "expected positive integer >= %u <= %u but found \"%u\""
-msgstr ""
+msgstr "erwartet war positive Ganzzahl >= %u <= %u, gefunden wurde \"%u\""
 
 #: ../../src/logic/militarysite.cc:66 ../../src/logic/warehouse.cc:276
 msgid " conquer"
@@ -2093,16 +2101,18 @@ msgstr "Soldatenkapazität ändern: %s"
 #, c-format
 msgid "retreat: value out of range. Received %u expected %u-%u"
 msgstr ""
+"rückzug: Wert ist nicht im zulässigen Bereich. Bekam %u, erwartete aber %u-"
+"%u."
 
 #: ../../src/logic/playercommand.cc:1306
 #, c-format
 msgid "change military config: %s"
-msgstr ""
+msgstr "verändert Militäreinstellung: %s"
 
 #: ../../src/logic/playercommand.cc:1345
 #, c-format
 msgid "(player %u): message id is null"
-msgstr ""
+msgstr "(Spieler %u): Nachrichten ID ist Null"
 
 #: ../../src/logic/playercommand.cc:1350
 #, c-format
@@ -2162,7 +2172,7 @@ msgstr "Arbeiter brauchen Erfahrung"
 
 #: ../../src/logic/production_program.cc:257
 msgid "ware type or worker type"
-msgstr ""
+msgstr "waren Typ oder Arbeiter typ"
 
 #: ../../src/logic/production_program.cc:320
 #, c-format
@@ -2289,7 +2299,7 @@ msgstr ", "
 
 #: ../../src/logic/production_program.cc:951
 msgid "Recruited "
-msgstr ""
+msgstr "Angeworben "
 
 #: ../../src/logic/production_program.cc:992
 msgid "distance"

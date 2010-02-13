@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:09+0000\n"
+"PO-Revision-Date: 2010-02-12 18:39+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-13 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/barbarians/axe/conf:1
@@ -83,7 +83,7 @@ msgstr "Work (Pracuj)"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Piecze chleb dla pracowników"
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
@@ -155,7 +155,7 @@ msgstr "Produce meal (Produkuj posiłek)"
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Produkuje bronie dla żołnierzy i narzędzia dla pracowników."
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
@@ -205,13 +205,13 @@ msgstr "Nosi przedmioty po twoich drogach."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
-msgstr ""
+msgstr "Hoduje silne woły, które pomagają w przenoszeniu towaru."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
 #: ../../tribes/barbarians/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
+msgstr "Pracuje głęboko w kopalniach aby wykopać węgiel, żelazo i złoto."
 
 #: ../../tribes/barbarians/cloth/conf:1
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
@@ -512,7 +512,7 @@ msgstr "Tragarz"
 
 #: ../../tribes/barbarians/conf:113
 msgid "Ox"
-msgstr ""
+msgstr "Wół"
 
 #: ../../tribes/barbarians/conf:116
 msgid "Soldier"
@@ -620,11 +620,11 @@ msgstr "Tkacz"
 
 #: ../../tribes/barbarians/conf:144
 msgid "Scout"
-msgstr ""
+msgstr "Zwiadowca"
 
 #: ../../tribes/barbarians/conf:145
 msgid "Cattle Breeder"
-msgstr ""
+msgstr "Hodowca bydła"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Construction Site"
@@ -846,11 +846,11 @@ msgstr "Studnia"
 
 #: ../../tribes/barbarians/conf:217
 msgid "Scout's Hut"
-msgstr ""
+msgstr "Chatka zwiadowcy"
 
 #: ../../tribes/barbarians/conf:218
 msgid "Cattle Farm"
-msgstr ""
+msgstr "Farma bydła"
 
 #: ../../tribes/barbarians/conf:221
 msgid "Headquarters medium"
@@ -962,19 +962,19 @@ msgstr "Podstawowa obrona wojownika."
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
-msgstr ""
+msgstr "Topi hełmy dla żołnierzy."
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
-msgstr "Produkuj hełm"
+msgstr "Produce helm (Produkuj hełm)"
 
 #: ../../tribes/barbarians/helmsmithy/conf:26
 msgid "Produce mask"
-msgstr "Produkuj maskę"
+msgstr "Produce mask (Produkuj maskę)"
 
 #: ../../tribes/barbarians/helmsmithy/conf:27
 msgid "Produce warhelmet"
-msgstr "Produkuj hełm bojownika"
+msgstr "Produce warhelmet (Produkuj hełm bojownika)"
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -1068,7 +1068,7 @@ msgstr "Produce hunting spear (Produkuj włócznię)"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Pomaga nosić przedmioty na często używanych drogach."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -1165,7 +1165,7 @@ msgstr "Strzecha jest używana do budowy wodoodpornych dachów."
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Trenuje żołnierzy."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"

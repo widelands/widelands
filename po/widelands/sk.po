@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 19:40+0100\n"
-"PO-Revision-Date: 2010-02-11 20:25+0000\n"
+"PO-Revision-Date: 2010-02-12 15:55+0000\n"
 "Last-Translator: Kefir111 <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-02-13 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
@@ -29,7 +29,7 @@ msgstr "Bluebyte Settlers II Map. Komentár nie je definovaný!"
 
 #: ../../src/wlapplication.cc:346
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-msgstr ""
+msgstr "CHYBA: Pripojenie k metaserveru sa nepodarilo (viz. dôvod hore)!\n"
 
 #: ../../src/wlapplication.cc:1081
 msgid ""
@@ -44,7 +44,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1201
 msgid "This is Widelands-"
-msgstr ""
+msgstr "Toto sú Widelands-"
 
 #: ../../src/wlapplication.cc:1203
 msgid ""
@@ -172,7 +172,7 @@ msgstr "Upozornenie: "
 
 #: ../../src/wlapplication.cc:1445
 msgid "Game data error"
-msgstr ""
+msgstr "Chyba herných dát"
 
 #: ../../src/wlapplication.cc:1448
 msgid "Unexpected error during the game"
@@ -197,7 +197,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1569
 msgid "Connection timeouted"
-msgstr ""
+msgstr "Čas pre pripojenie vypršal"
 
 #: ../../src/wlapplication.cc:1571
 msgid ""
@@ -212,7 +212,7 @@ msgstr "Problém s pripojením"
 
 #: ../../src/wlapplication.cc:1594
 msgid "Widelands has not been able to connect to the host."
-msgstr ""
+msgstr "Widelands sa nepodarilo pripojiť k  hostiteľovi."
 
 #: ../../src/wlapplication.cc:1640
 msgid "The address of the game server is invalid"
@@ -266,7 +266,7 @@ msgstr "Zamestnanci"
 
 #: ../../src/writeHTML.cc:263 ../../src/writeHTML.cc:269
 msgid "Building types"
-msgstr ""
+msgstr "Typy budov"
 
 #: ../../src/writeHTML.cc:274 ../../src/writeHTML.cc:509
 #: ../../src/writeHTML.cc:1434
@@ -292,7 +292,7 @@ msgstr "Veľkosť"
 
 #: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:513
 msgid "Buildable"
-msgstr ""
+msgstr "Možno postaviť"
 
 #: ../../src/writeHTML.cc:282
 msgid "Enhanced"
@@ -367,7 +367,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:397
 msgid "Is not buildable."
-msgstr ""
+msgstr "Nemožno postaviť."
 
 #: ../../src/writeHTML.cc:404
 msgid "Is enhanced."
@@ -385,7 +385,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:427 ../../src/writeHTML.cc:655
 msgid "Build cost"
-msgstr ""
+msgstr "Náklady na stavbu"
 
 #: ../../src/writeHTML.cc:437
 msgid "'s constructionsite"
@@ -397,11 +397,11 @@ msgstr "Rozšírenia:"
 
 #: ../../src/writeHTML.cc:458
 msgid "'s enhancement"
-msgstr ""
+msgstr "- vylepšenie"
 
 #: ../../src/writeHTML.cc:498 ../../src/writeHTML.cc:504
 msgid "Worker types"
-msgstr ""
+msgstr "Typy pracovníkov"
 
 #: ../../src/writeHTML.cc:517
 msgid "Minimum<br/>needed<br/>experience"
@@ -413,7 +413,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:521
 msgid "Becomes"
-msgstr ""
+msgstr "Stane sa"
 
 #: ../../src/writeHTML.cc:576
 msgid "worker_types.xhtml"
@@ -421,7 +421,7 @@ msgstr "worker_types_sk_SK.xhtml"
 
 #: ../../src/writeHTML.cc:583
 msgid "Combat Properties"
-msgstr ""
+msgstr "Bojové vlastnosti"
 
 #: ../../src/writeHTML.cc:590
 #, c-format
@@ -462,7 +462,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:703
 msgid "'s promotion"
-msgstr ""
+msgstr "- povýšenie"
 
 #: ../../src/writeHTML.cc:713 ../../src/writeHTML.cc:854
 msgid "Programs"
@@ -471,7 +471,7 @@ msgstr "Programy"
 #: ../../src/writeHTML.cc:750 ../../src/writeHTML.cc:1313
 #: ../../src/logic/building.cc:508
 msgid "mine"
-msgstr ""
+msgstr "tažit"
 
 #: ../../src/writeHTML.cc:751
 msgid "breed"
@@ -507,7 +507,7 @@ msgstr "animácia"
 
 #: ../../src/writeHTML.cc:759 ../../src/writeHTML.cc:894
 msgid "return"
-msgstr ""
+msgstr "ukončit"
 
 #: ../../src/writeHTML.cc:760
 msgid "object"
@@ -515,7 +515,7 @@ msgstr "objekt"
 
 #: ../../src/writeHTML.cc:761
 msgid "plant"
-msgstr ""
+msgstr "rastlina"
 
 #: ../../src/writeHTML.cc:762
 msgid "create_bob"
@@ -527,7 +527,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:764
 msgid "geologist"
-msgstr ""
+msgstr "geológ"
 
 #: ../../src/writeHTML.cc:765
 msgid "geologist_find"
@@ -543,7 +543,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:774
 msgid "Production"
-msgstr ""
+msgstr "Výroba"
 
 #: ../../src/writeHTML.cc:778 ../../src/wui/general_statistics_menu.cc:144
 msgid "Workers"
@@ -551,23 +551,23 @@ msgstr "Pracovníci"
 
 #: ../../src/writeHTML.cc:788
 msgid "'s employee"
-msgstr ""
+msgstr "- pracovník"
 
 #: ../../src/writeHTML.cc:798
 msgid "Inputs"
-msgstr ""
+msgstr "Vstupy"
 
 #: ../../src/writeHTML.cc:808
 msgid "'s input"
-msgstr ""
+msgstr "- vstup"
 
 #: ../../src/writeHTML.cc:820
 msgid "Output"
-msgstr ""
+msgstr "Výstup"
 
 #: ../../src/writeHTML.cc:830 ../../src/writeHTML.cc:843
 msgid "'s output"
-msgstr ""
+msgstr "- výstup"
 
 #: ../../src/writeHTML.cc:890 ../../src/writeHTML.cc:1041
 #: ../../src/writeHTML.cc:1103 ../../src/writeHTML.cc:1131
@@ -585,7 +585,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:898 ../../src/logic/production_program.cc:392
 #: ../../src/logic/production_program.cc:753
 msgid "failed"
-msgstr ""
+msgstr "zlyhalo"
 
 #: ../../src/writeHTML.cc:899 ../../src/logic/production_program.cc:393
 msgid "completed"
@@ -601,7 +601,7 @@ msgstr "a"
 
 #: ../../src/writeHTML.cc:906
 msgid "when"
-msgstr ""
+msgstr "keď"
 
 #: ../../src/writeHTML.cc:908
 msgid "or"
@@ -613,11 +613,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:944 ../../src/writeHTML.cc:966
 msgid "economy"
-msgstr ""
+msgstr "ekonomika"
 
 #: ../../src/writeHTML.cc:946 ../../src/writeHTML.cc:968
 msgid "needs"
-msgstr ""
+msgstr "potrebuje"
 
 #: ../../src/writeHTML.cc:986
 msgid "site"
@@ -625,11 +625,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:988
 msgid "has"
-msgstr ""
+msgstr "má"
 
 #: ../../src/writeHTML.cc:1023
 msgid "workers of this site"
-msgstr ""
+msgstr "pracovníci na tomto mieste"
 
 #: ../../src/writeHTML.cc:1025
 msgid "workers"
@@ -645,7 +645,7 @@ msgstr "potrebuje"
 
 #: ../../src/writeHTML.cc:1029
 msgid "experience"
-msgstr ""
+msgstr "zkúsenosť"
 
 #: ../../src/writeHTML.cc:1043
 msgid "Documentation for program command call"
@@ -692,7 +692,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1155
 msgid "animate"
-msgstr ""
+msgstr "animovať"
 
 #: ../../src/writeHTML.cc:1174
 msgid "Documentation for program command consume"
@@ -700,7 +700,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1176
 msgid "consume"
-msgstr ""
+msgstr "spotrebovat"
 
 #: ../../src/writeHTML.cc:1225 ../../src/writeHTML.cc:1266
 msgid "Documentation for program command produce"
@@ -708,11 +708,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1227
 msgid "produce"
-msgstr ""
+msgstr "vyrobiť"
 
 #: ../../src/writeHTML.cc:1268
 msgid "recruit"
-msgstr ""
+msgstr "verbovať"
 
 #: ../../src/writeHTML.cc:1311
 msgid "Documentation for program command mine"
@@ -883,13 +883,13 @@ msgstr "Nástroj"
 
 #: ../../src/editor/editorinteractive.cc:70
 msgid "Toolsize"
-msgstr ""
+msgstr "Velkosť nástroja"
 
 #: ../../src/editor/editorinteractive.cc:73
 #: ../../src/wui/interactive_player.cc:186
 #: ../../src/wui/interactive_spectator.cc:64
 msgid "Minimap"
-msgstr ""
+msgstr "Minimapa"
 
 #: ../../src/editor/editorinteractive.cc:76
 #: ../../src/wui/interactive_player.cc:189
@@ -903,7 +903,7 @@ msgstr "Hráči"
 #: ../../src/editor/editorinteractive.cc:82
 #: ../../src/editor/ui_menus/editor_event_menu.cc:75
 msgid "Events"
-msgstr ""
+msgstr "Udalosti"
 
 #: ../../src/editor/editorinteractive.cc:85
 msgid "Variables"
@@ -912,11 +912,11 @@ msgstr "Premenné"
 #: ../../src/editor/editorinteractive.cc:88
 #: ../../src/wui/interactive_player.cc:183
 msgid "Objectives"
-msgstr ""
+msgstr "Úlohy"
 
 #: ../../src/editor/editorinteractive.cc:164
 msgid "Unsupported format"
-msgstr ""
+msgstr "Nepodporovaný formát"
 
 #: ../../src/editor/editorinteractive.cc:166
 #, c-format
@@ -935,7 +935,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:188
 #: ../../src/logic/editor_game_base.cc:308
 msgid "Loading world data"
-msgstr ""
+msgstr "Nahrávanie dát sveta"
 
 #: ../../src/editor/editorinteractive.cc:191
 #: ../../src/editor/editorinteractive.cc:607
@@ -1016,7 +1016,7 @@ msgstr ""
 
 #: ../../src/events/event_building.cc:73 ../../src/events/event_building.cc:82
 msgid "distance (1 .. 255)"
-msgstr ""
+msgstr "vzdialenosť (1 .. 255)"
 
 #: ../../src/events/event_building.cc:86
 #, c-format
@@ -1128,28 +1128,30 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:76
 msgid "Forbid building types"
-msgstr ""
+msgstr "Zakázať typy budov"
 
 #: ../../src/events/event_factory.cc:77
 msgid "Forbids the construction of buildings of certain types for a player."
-msgstr ""
+msgstr "Zakáže hráčovi stavanie budov určitého typu."
 
 #: ../../src/events/event_factory.cc:81
 msgid "Create building"
-msgstr ""
+msgstr "Vytvoriť budovu"
 
 #: ../../src/events/event_factory.cc:82
 msgid "Create a building and optionally place workers in it"
-msgstr ""
+msgstr "Vytvořit budovu a volitelne do nej umiestiť pracovníkov"
 
 #: ../../src/events/event_factory.cc:86
 msgid "Conquer area"
-msgstr ""
+msgstr "Dobiť oblasť"
 
 #: ../../src/events/event_factory.cc:88
 msgid ""
 "Gives ownership of all unowned locations within an area to the player."
 msgstr ""
+"Priradí hráčovi v rámci územia vlastníctvo všetkých polí, ktoré nikto "
+"nevlastní."
 
 #: ../../src/events/event_factory.cc:93
 msgid "Create flag"
@@ -1161,11 +1163,11 @@ msgstr "vytvoriť vlajku"
 
 #: ../../src/events/event_factory.cc:98
 msgid "Create immovable"
-msgstr ""
+msgstr "Vytvoiiť pevný bod"
 
 #: ../../src/events/event_factory.cc:99
 msgid "Create an immovable."
-msgstr ""
+msgstr "Vytvoiiť pevný bod."
 
 #: ../../src/events/event_factory.cc:103
 msgid "Lua event"
@@ -1177,7 +1179,7 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:108
 msgid "Show message box"
-msgstr ""
+msgstr "Zobraziť okno so správami"
 
 #: ../../src/events/event_factory.cc:110
 msgid ""
@@ -1187,35 +1189,35 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:116
 msgid "Move view"
-msgstr ""
+msgstr "Posunúť pohľad"
 
 #: ../../src/events/event_factory.cc:117
 msgid "Center the player's view on a certain location."
-msgstr ""
+msgstr "Vycentrovať hráčov pohľad na určité miesto."
 
 #: ../../src/events/event_factory.cc:121
 msgid "Reveal campaign"
-msgstr ""
+msgstr "Odhaliť kampaň"
 
 #: ../../src/events/event_factory.cc:122
 msgid "Reveal a campaign."
-msgstr ""
+msgstr "Odhaliť kampaň"
 
 #: ../../src/events/event_factory.cc:126
 msgid "Reveal objective"
-msgstr ""
+msgstr "Odhaliť úlohu"
 
 #: ../../src/events/event_factory.cc:127
 msgid "Reveal an objective."
-msgstr ""
+msgstr "Odkryť úlohu."
 
 #: ../../src/events/event_factory.cc:131
 msgid "Reveal scenario"
-msgstr ""
+msgstr "Odhaliť scénár"
 
 #: ../../src/events/event_factory.cc:132
 msgid "Reveal a scenario."
-msgstr ""
+msgstr "Odkryť scénár."
 
 #: ../../src/events/event_factory.cc:136
 msgid "Create road"
@@ -1227,7 +1229,7 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:141
 msgid "Set timer"
-msgstr ""
+msgstr "Nastaviť časovač"
 
 #: ../../src/events/event_factory.cc:142
 msgid "Set a timer to trigger after a certain duration."
@@ -1235,7 +1237,7 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:146
 msgid "Unhide area"
-msgstr ""
+msgstr "Odkryť oblasť"
 
 #: ../../src/events/event_factory.cc:148
 msgid ""
@@ -1255,7 +1257,7 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:160
 msgid "Set player's flag style"
-msgstr ""
+msgstr "Nastaviť typ vlajky hráča"
 
 #: ../../src/events/event_factory.cc:162
 msgid ""
@@ -1324,19 +1326,19 @@ msgstr ""
 #: ../../src/events/event_flag.cc:42
 #, c-format
 msgid "(flag): %s"
-msgstr ""
+msgstr "(vlajka): %s"
 
 #: ../../src/events/event_forbid_building_types.cc:44
 #: ../../src/events/event_forbid_retreat_change.cc:43
 #: ../../src/events/event_forbid_worker_types.cc:46
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:85
 msgid "Forbid"
-msgstr ""
+msgstr "Zakázať"
 
 #: ../../src/events/event_immovable.cc:44
 #, c-format
 msgid "(immovable): %s"
-msgstr ""
+msgstr "(pevný bod): %s"
 
 #: ../../src/events/event_lua.cc:42
 #, c-format
@@ -1402,7 +1404,7 @@ msgstr ""
 #: ../../src/events/event_move_view.cc:56
 #, c-format
 msgid "(move view): %s"
-msgstr ""
+msgstr "(posunúť pohľad): %s"
 
 #: ../../src/events/event_player_allowed_retreat_change.cc:45
 #: ../../src/events/event_player_retreat_change.cc:45
@@ -1413,7 +1415,7 @@ msgstr ""
 #: ../../src/events/event_player_area.cc:61
 #, c-format
 msgid "(player area): %s"
-msgstr ""
+msgstr "(územie hráča): %s"
 
 #: ../../src/events/event_player_building_types.cc:54
 #: ../../src/events/event_player_worker_types.cc:55
@@ -1424,17 +1426,17 @@ msgstr ""
 
 #: ../../src/events/event_player_building_types.cc:56
 msgid "no building types"
-msgstr ""
+msgstr "žiadne typy budov"
 
 #: ../../src/events/event_player_building_types.cc:61
 #, c-format
 msgid "(player building types): %s"
-msgstr ""
+msgstr "(typy budov hráča): %s"
 
 #: ../../src/events/event_player_seeall.cc:45
 #, c-format
 msgid "(player see all): %s"
-msgstr ""
+msgstr "(hráč vidí všetko): %s"
 
 #: ../../src/events/event_player_worker_types.cc:52
 #, c-format
@@ -1452,7 +1454,7 @@ msgstr ""
 
 #: ../../src/events/event_retreat_change.cc:43
 msgid "Change"
-msgstr ""
+msgstr "Změnit"
 
 #: ../../src/events/event_road.cc:40
 msgid "there are no steps"
@@ -1494,12 +1496,12 @@ msgstr ""
 #: ../../src/events/event_set_player_frontier_style.cc:45
 #, c-format
 msgid "(set player frontier style): %s"
-msgstr ""
+msgstr "(nastaviť štýl hranice hráča): %s"
 
 #: ../../src/events/event_set_player_style.cc:43
 #, c-format
 msgid "(set player style): %s"
-msgstr ""
+msgstr "(nastaviť štýl hráča): %s"
 
 #: ../../src/events/event_set_timer.cc:54
 #, c-format
@@ -1509,7 +1511,7 @@ msgstr ""
 #: ../../src/events/event_set_timer.cc:60
 #, c-format
 msgid "(set_timer): %s"
-msgstr ""
+msgstr "(nastaviť_časovač): %s"
 
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:98
 #, c-format
@@ -1525,12 +1527,12 @@ msgstr ""
 #: ../../src/game_io/game_interactive_player_data_packet.cc:49
 #, c-format
 msgid "player %u does not exist in the game"
-msgstr ""
+msgstr "hráč %u v hre neexistuje"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:79
 #, c-format
 msgid "interactive player: %s"
-msgstr ""
+msgstr "interaktívny hráč: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:59
 #, c-format
@@ -1539,18 +1541,18 @@ msgstr ""
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:83
 msgid "there is no flag at the specified location"
-msgstr ""
+msgstr "na udanej pozícii nie je vlajka"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:85
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:63
 #, c-format
 msgid "player %u: %s"
-msgstr ""
+msgstr "hráč %u: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:91
 #, c-format
 msgid "economies: %s"
-msgstr ""
+msgstr "ekonomiky: %s"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:57
 #, c-format
@@ -1560,7 +1562,7 @@ msgstr ""
 #: ../../src/game_io/game_player_info_data_packet.cc:144
 #, c-format
 msgid "player info: %s"
-msgstr ""
+msgstr "info o hráčovi: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:55
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:94
@@ -1579,17 +1581,17 @@ msgstr ""
 
 #: ../../src/graphic/animation.cc:197
 msgid "frame number"
-msgstr ""
+msgstr "číslo snímku"
 
 #: ../../src/graphic/graphic.cc:818
 #, c-format
 msgid "Loading animations: %d%% complete"
-msgstr ""
+msgstr "Nahrávanie animácii: %d%% dokončené"
 
 #: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] soldier %u loose battle\n"
-msgstr ""
+msgstr "[súboj] vojak %u prehral súboj\n"
 
 #: ../../src/logic/battle.cc:182
 #, c-format
@@ -1624,12 +1626,12 @@ msgstr ""
 #: ../../src/logic/cmd_queue.cc:176
 #, c-format
 msgid "game logic: %s"
-msgstr ""
+msgstr "herná logika: %s"
 
 #: ../../src/logic/constructionsite.cc:168
 #, c-format
 msgid "%u%% built"
-msgstr ""
+msgstr "%u%% postavené"
 
 #: ../../src/logic/game.cc:224
 msgid "Preloading a map"
@@ -1637,7 +1639,7 @@ msgstr ""
 
 #: ../../src/logic/game.cc:235
 msgid "Loading a world"
-msgstr ""
+msgstr "Nahrávanie sveta"
 
 #: ../../src/logic/game.cc:241
 #, c-format
@@ -1655,19 +1657,19 @@ msgstr ""
 
 #: ../../src/logic/game.cc:299
 msgid "Configuring players"
-msgstr ""
+msgstr "Konfigurácia hráčov"
 
 #: ../../src/logic/game.cc:316
 msgid "Loading map"
-msgstr ""
+msgstr "Nahrávanie mapy"
 
 #: ../../src/logic/game.cc:443
 msgid "Creating player infrastructure"
-msgstr ""
+msgstr "Vytváranie infraštruktúry hráčov"
 
 #: ../../src/logic/game.cc:454 ../../src/logic/player.cc:121
 msgid "Missing starting position"
-msgstr ""
+msgstr "Chýbajúca štartovacia pozícia"
 
 #: ../../src/logic/game.cc:456 ../../src/logic/player.cc:123
 #, c-format
@@ -1681,11 +1683,11 @@ msgstr ""
 #: ../../src/logic/immovable.cc:133 ../../src/logic/production_program.cc:1396
 #, c-format
 msgid "unknown command type \"%s\""
-msgstr ""
+msgstr "neznámy typ príkazu \"%s\""
 
 #: ../../src/logic/immovable.cc:137
 msgid "no actions"
-msgstr ""
+msgstr "žiadne akcie"
 
 #: ../../src/logic/immovable.cc:213
 msgid "this program has already been declared"
@@ -1694,12 +1696,12 @@ msgstr ""
 #: ../../src/logic/immovable.cc:219
 #, c-format
 msgid "program %s: %s"
-msgstr ""
+msgstr "program %s: %s"
 
 #: ../../src/logic/immovable.cc:252 ../../src/logic/immovable.cc:266
 #, c-format
 msgid "expected 0 .. 255 but found %u"
-msgstr ""
+msgstr "očakávané 0 .. 255 ale nájdené %u"
 
 #: ../../src/logic/immovable.cc:271
 #, c-format
@@ -1719,7 +1721,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:610
 #, c-format
 msgid "unknown tribe %s"
-msgstr ""
+msgstr "neznámy kmeň %s"
 
 #: ../../src/logic/immovable.cc:616
 #, c-format
@@ -1729,16 +1731,16 @@ msgstr ""
 #: ../../src/logic/immovable.cc:626
 #, c-format
 msgid "immovable type %s"
-msgstr ""
+msgstr "typ pevného bodu %s"
 
 #: ../../src/logic/immovable.cc:661 ../../src/logic/production_program.cc:609
 #: ../../src/logic/production_program.cc:653
 msgid "duration in ms"
-msgstr ""
+msgstr "trvanie v ms"
 
 #: ../../src/logic/immovable.cc:699 ../../src/logic/production_program.cc:1341
 msgid "priority"
-msgstr ""
+msgstr "priorita"
 
 #: ../../src/logic/immovable.cc:733 ../../src/logic/immovable.cc:802
 #: ../../src/logic/immovable.cc:888
@@ -1763,17 +1765,17 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:855
 msgid "probability in range [1, 254]"
-msgstr ""
+msgstr "pravdepodobnosť v intervale [1, 254]"
 
 #: ../../src/logic/instances.cc:75
 #, c-format
 msgid "destroy map object: %s"
-msgstr ""
+msgstr "zničiť objekt na mape: %s"
 
 #: ../../src/logic/instances.cc:124
 #, c-format
 msgid "object %u: %s"
-msgstr ""
+msgstr "objekt %u: %s"
 
 #: ../../src/logic/instances.cc:133
 #, c-format
@@ -1787,7 +1789,7 @@ msgstr "Hráč 1"
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:62
 #: ../../src/logic/soldier.cc:85
 msgid "\"min-max\""
-msgstr ""
+msgstr "\"min-max\""
 
 #: ../../src/logic/military_data.cc:59
 msgid "positive integer <= 100"
@@ -1805,21 +1807,23 @@ msgstr ""
 
 #: ../../src/logic/militarysite.cc:66 ../../src/logic/warehouse.cc:276
 msgid " conquer"
-msgstr ""
+msgstr " dobiť"
 
 #: ../../src/logic/militarysite.cc:117
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u vojak"
+msgstr[1] "%u vojaci"
+msgstr[2] "%u vojakov"
 
 #: ../../src/logic/militarysite.cc:122
 #, c-format
 msgid "%u(+%u) soldier"
 msgid_plural "%u(+%u) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u(+%u) vojak"
+msgstr[1] "%u(+%u) vojaci"
+msgstr[2] "%u(+%u) vojakov"
 
 #: ../../src/logic/militarysite.cc:572
 #, c-format
@@ -1828,7 +1832,7 @@ msgstr ""
 
 #: ../../src/logic/militarysite.cc:579
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Vojenská budova ztratená!"
 
 #: ../../src/logic/militarysite.cc:652
 #, c-format
@@ -1851,42 +1855,42 @@ msgstr ""
 
 #: ../../src/logic/militarysite.cc:716
 msgid "You are under attack"
-msgstr ""
+msgstr "Nepriateľ na teba útočí"
 
 #: ../../src/logic/playercommand.cc:134
 #, c-format
 msgid "player command: %s"
-msgstr ""
+msgstr "príkaz hráča: %s"
 
 #: ../../src/logic/playercommand.cc:176
 #, c-format
 msgid "player immovable %u: %s"
-msgstr ""
+msgstr "hráčov pevný bod %u: %s"
 
 #: ../../src/logic/playercommand.cc:182
 #, c-format
 msgid "bulldoze: %s"
-msgstr ""
+msgstr "zbúrať: %s"
 
 #: ../../src/logic/playercommand.cc:234
 #, c-format
 msgid "build: %s"
-msgstr ""
+msgstr "postaviť: %s"
 
 #: ../../src/logic/playercommand.cc:282
 #, c-format
 msgid "build flag: %s"
-msgstr ""
+msgstr "postaviť vlajku: %s"
 
 #: ../../src/logic/playercommand.cc:369
 #, c-format
 msgid "build road: %s"
-msgstr ""
+msgstr "stavať cestu: %s"
 
 #: ../../src/logic/playercommand.cc:423
 #, c-format
 msgid "flag %u: %s"
-msgstr ""
+msgstr "vlajka %u: %s"
 
 #: ../../src/logic/playercommand.cc:429
 #, c-format
@@ -1897,7 +1901,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:208
 #, c-format
 msgid "building %u: %s"
-msgstr ""
+msgstr "budova %u: %s"
 
 #: ../../src/logic/playercommand.cc:486
 #, c-format
@@ -1907,7 +1911,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:547
 #, c-format
 msgid "enhance building: %s"
-msgstr ""
+msgstr "vylepšiť budovu: %s"
 
 #: ../../src/logic/playercommand.cc:619 ../../src/logic/playercommand.cc:1045
 #: ../../src/logic/playercommand.cc:1123
@@ -1943,12 +1947,12 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1052
 #, c-format
 msgid "soldier %u: %s"
-msgstr ""
+msgstr "vojak  %u: %s"
 
 #: ../../src/logic/playercommand.cc:1058
 #, c-format
 msgid "drop soldier: %s"
-msgstr ""
+msgstr "umiesniť vojaka: %s"
 
 #: ../../src/logic/playercommand.cc:1130
 #, c-format
@@ -1993,7 +1997,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:834
 #: ../../src/logic/production_program.cc:920
 msgid "count"
-msgstr ""
+msgstr "počet"
 
 #: ../../src/logic/production_program.cc:104
 #, c-format
@@ -2048,17 +2052,17 @@ msgstr ""
 #: ../../src/logic/production_program.cc:399
 #: ../../src/logic/production_program.cc:785
 msgid " and "
-msgstr ""
+msgstr " a "
 
 #: ../../src/logic/production_program.cc:400
 #: ../../src/logic/production_program.cc:756
 msgid " because: "
-msgstr ""
+msgstr " protože: "
 
 #: ../../src/logic/production_program.cc:415
 #: ../../src/wui/encyclopedia_window.cc:194
 msgid " or "
-msgstr ""
+msgstr " alebo "
 
 #: ../../src/logic/production_program.cc:416
 msgid " because not: "
@@ -2080,15 +2084,15 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:482
 msgid "failure"
-msgstr ""
+msgstr "neúspech"
 
 #: ../../src/logic/production_program.cc:487
 msgid "completion"
-msgstr ""
+msgstr "dokončené"
 
 #: ../../src/logic/production_program.cc:492
 msgid "skip"
-msgstr ""
+msgstr "preskočiť"
 
 #: ../../src/logic/production_program.cc:497
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
@@ -2127,13 +2131,13 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:866
 msgid "Produced "
-msgstr ""
+msgstr "Vyrobené "
 
 #: ../../src/logic/production_program.cc:876
 #: ../../src/logic/production_program.cc:961
 #, c-format
 msgid "%u "
-msgstr ""
+msgstr "%u "
 
 #: ../../src/logic/production_program.cc:883
 #: ../../src/logic/production_program.cc:968
@@ -2146,16 +2150,16 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:992
 msgid "distance"
-msgstr ""
+msgstr "vzdialenosť"
 
 #: ../../src/logic/production_program.cc:1003
 #: ../../src/logic/production_program.cc:1014
 msgid "percentage"
-msgstr ""
+msgstr "percento"
 
 #: ../../src/logic/production_program.cc:1148
 msgid "Mine empty"
-msgstr ""
+msgstr "Baňa je vyťažená"
 
 #: ../../src/logic/production_program.cc:1152
 msgid ""
@@ -2165,7 +2169,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1167
 #: ../../src/logic/production_program.cc:1236
 msgid "soldier type"
-msgstr ""
+msgstr "typ vojaka"
 
 #: ../../src/logic/production_program.cc:1180
 #, c-format
@@ -2175,7 +2179,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1189
 #: ../../src/logic/production_program.cc:1257
 msgid "level"
-msgstr ""
+msgstr "úroveň"
 
 #: ../../src/logic/production_program.cc:1267
 #, c-format
@@ -2203,7 +2207,7 @@ msgstr[1] ""
 
 #: ../../src/logic/productionsite.cc:231
 msgid "(stopped)"
-msgstr ""
+msgstr "(zastavené)"
 
 #: ../../src/logic/productionsite.cc:313
 msgid "UP"
@@ -2222,7 +2226,7 @@ msgstr ""
 
 #: ../../src/logic/soldier.cc:70 ../../src/logic/soldier.cc:93
 msgid "positive integer"
-msgstr ""
+msgstr "kladné celé číslo"
 
 #: ../../src/logic/soldier.cc:74 ../../src/logic/soldier.cc:97
 #, c-format
@@ -2256,7 +2260,7 @@ msgstr ""
 #: ../../src/logic/soldier.cc:1363 ../../src/logic/soldier.cc:1371
 #: ../../src/logic/worker.cc:1680
 msgid "Logic error"
-msgstr ""
+msgstr "Logická chyba"
 
 #: ../../src/logic/trainingsite.cc:173
 msgid "Resting"
@@ -2272,22 +2276,22 @@ msgstr ""
 
 #: ../../src/logic/tribe.cc:221 ../../src/logic/tribe.cc:242
 msgid "none found"
-msgstr ""
+msgstr "nenájdené"
 
 #: ../../src/logic/tribe.cc:223
 #, c-format
 msgid "frontier styles: %s"
-msgstr ""
+msgstr "stýl hranice: %s"
 
 #: ../../src/logic/tribe.cc:244
 #, c-format
 msgid "flag styles: %s"
-msgstr ""
+msgstr "štýl vlajok: %s"
 
 #: ../../src/logic/tribe.cc:374
 #, c-format
 msgid "tribe %s: %s"
-msgstr ""
+msgstr "kmeň %s: %s"
 
 #: ../../src/logic/warehouse.cc:489
 #, c-format
@@ -2311,7 +2315,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:640
 msgid "Out of "
-msgstr ""
+msgstr "Došlo "
 
 #: ../../src/logic/worker.cc:644
 msgid ""
@@ -2321,7 +2325,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:916
 msgid "A geologist found resources."
-msgstr ""
+msgstr "Geológ objavil zdroje."
 
 #: ../../src/logic/worker.cc:1649
 #, c-format
@@ -2352,7 +2356,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:96
 #, c-format
 msgid "allowed buildings: %s"
-msgstr ""
+msgstr "povolené budovy: %s"
 
 #: ../../src/map_io/widelands_map_allowed_worker_types_data_packet.cc:84
 #, c-format
@@ -2367,7 +2371,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:102
 #, c-format
 msgid "tribe \"%s\" does not exist"
-msgstr ""
+msgstr "kmeň \"%s\" neexistuje"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:141
 #, c-format
@@ -2407,7 +2411,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:675
 #, c-format
 msgid "soldier: %s"
-msgstr ""
+msgstr "vojak: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:691
 #, c-format
@@ -2417,7 +2421,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_building_data_packet.cc:124
 #, c-format
 msgid "buildings: %s"
-msgstr ""
+msgstr "budovy: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:215
 #, c-format
@@ -2472,7 +2476,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_trigger_data_packet.cc:72
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: ../../src/map_io/widelands_map_event_chain_data_packet.cc:183
 #, c-format
@@ -2507,7 +2511,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
 msgid "has a flag (%u)"
-msgstr ""
+msgstr "má vlajku (%u)"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
@@ -2517,7 +2521,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
 msgid "flags: %s"
-msgstr ""
+msgstr "vlajky: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format

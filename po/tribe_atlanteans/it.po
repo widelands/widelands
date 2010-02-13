@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:29+0000\n"
+"PO-Revision-Date: 2010-02-12 18:15+0000\n"
 "Last-Translator: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-13 04:53+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -25,7 +25,7 @@ msgstr "Questi scudi sono usati dai migliori soldati degli atlanti."
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Produce armature per i soldati."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
@@ -81,7 +81,7 @@ msgstr "Lavoro"
 
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Cuoce al forno pane per i lavoratori."
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
@@ -109,7 +109,7 @@ msgstr "Raccolta di radici nere"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
-msgstr ""
+msgstr "Pianta e raccoglie piante medicinali."
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
 msgid ""
@@ -129,8 +129,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
-msgstr ""
-"Grandi secchi per l'allevatore di pesce - prodotti dalla fabbro di strumenti."
+msgstr "Grandi secchi per l'allevatore di pesce - prodotti dal fabbro."
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to create a new building."
@@ -319,7 +318,7 @@ msgstr "Tabarro Dorato"
 
 #: ../../tribes/atlanteans/conf:78
 msgid "Gold Ore"
-msgstr "Oro Estraibile"
+msgstr "Minerale d'oro"
 
 #: ../../tribes/atlanteans/conf:79
 msgid "Gold"
@@ -439,7 +438,7 @@ msgstr "Portatore"
 
 #: ../../tribes/atlanteans/conf:110
 msgid "Horse"
-msgstr ""
+msgstr "Cavallo"
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Soldier"
@@ -519,7 +518,7 @@ msgstr "Tagliapietre"
 
 #: ../../tribes/atlanteans/conf:134
 msgid "Toolsmith"
-msgstr "Fabbro di strumenti"
+msgstr "Fabbro"
 
 #: ../../tribes/atlanteans/conf:135
 msgid "Trainer"
@@ -539,11 +538,11 @@ msgstr "Boscaiolo"
 
 #: ../../tribes/atlanteans/conf:139
 msgid "Scout"
-msgstr ""
+msgstr "Esploratore"
 
 #: ../../tribes/atlanteans/conf:140
 msgid "Horse Breeder"
-msgstr ""
+msgstr "Allevatore di cavalli"
 
 #: ../../tribes/atlanteans/conf:143
 msgid "Construction Site"
@@ -586,37 +585,37 @@ msgstr "Torre"
 #: ../../tribes/atlanteans/conf:158
 #: ../../tribes/atlanteans/conf:166
 msgid "Barrier"
-msgstr ""
+msgstr "Fortino"
 
 #: ../../tribes/atlanteans/conf:159
 msgid "Citadel"
-msgstr ""
+msgstr "Cittadella"
 
 #: ../../tribes/atlanteans/conf:160
 msgid "Donjon"
-msgstr ""
+msgstr "Dongione"
 
 #: ../../tribes/atlanteans/conf:161
 #: ../../tribes/atlanteans/conf:168
 msgid "Fortress"
-msgstr ""
+msgstr "Fortezza"
 
 #: ../../tribes/atlanteans/conf:162
 #: ../../tribes/atlanteans/conf:164
 msgid "Sentry"
-msgstr ""
+msgstr "Guardiola"
 
 #: ../../tribes/atlanteans/conf:163
 msgid "Stronghold"
-msgstr ""
+msgstr "Roccaforte"
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Barracks"
-msgstr ""
+msgstr "Caserma"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Outpost"
-msgstr ""
+msgstr "Avamposto"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Headquarters"
@@ -708,11 +707,11 @@ msgstr "Allevamento dei ragni"
 
 #: ../../tribes/atlanteans/conf:197
 msgid "Toolsmithy"
-msgstr "Casa del fabbro di strumenti"
+msgstr "Casa del fabbro"
 
 #: ../../tribes/atlanteans/conf:198
 msgid "Weapon Smithy"
-msgstr "Fabbro d'armi"
+msgstr "Armaiolo"
 
 #: ../../tribes/atlanteans/conf:199
 msgid "Weaving-Mill"
@@ -728,11 +727,11 @@ msgstr "Casa del taglialegna"
 
 #: ../../tribes/atlanteans/conf:202
 msgid "Scout's House"
-msgstr ""
+msgstr "Casa dell'esploratore"
 
 #: ../../tribes/atlanteans/conf:203
 msgid "Horse Farm"
-msgstr ""
+msgstr "Maneggio"
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Headquarters medium"
@@ -856,7 +855,7 @@ msgid ""
 "They are produced by the toolsmith."
 msgstr ""
 "Le pinze per il fuoco sono gli strumenti del fonditore, lavorando in "
-"fonderia. Essi sono prodotti dal fabbro di strumenti."
+"fonderia. Essi sono prodotti dal fabbro."
 
 #: ../../tribes/atlanteans/fish/conf:1
 msgid "Fish is one of the biggest food-resources of the Atlanteans."
@@ -872,9 +871,7 @@ msgstr "Il pescatore pesca deliziosi pesci."
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
-msgstr ""
-"La rete da pesca è utilizzata dal pescatore e prodotta dal fabbro di "
-"strumenti."
+msgstr "La rete da pesca è utilizzata dal pescatore e prodotta dal fabbro."
 
 #: ../../tribes/atlanteans/forester/conf:1
 msgid "Plants trees."
@@ -913,7 +910,7 @@ msgid ""
 msgstr ""
 "Il martello è uno strumento essenziale. E' necessario per il geologo, il "
 "costruttore e tutti i fabbri. Assicurati di averne sempre qualche riserva! E "
-"'prodotto dal fabbro di strumenti."
+"'prodotto dal fabbro."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
@@ -929,16 +926,15 @@ msgid ""
 "top of the smoke-house. It is created by the toolsmith."
 msgstr ""
 "Questa palo uncinato viene utilizzata dall'affumicatore per appendere le "
-"carni e il pesce alla parte superiore del affumicatoio. E' creata dal fabbro "
-"di strumenti."
+"carni e il pesce alla parte superiore del affumicatoio. E' creata dal fabbro."
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Aiuta a trasportare oggetti pesanti sulle strade usate."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
-msgstr ""
+msgstr "Alleva i forti cavalli atlantidei"
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -1032,7 +1028,7 @@ msgid ""
 "produced by the toolsmith."
 msgstr ""
 "Le pinze da mungitura sono usate dall'allevatore di ragni, per mungere i "
-"ragni. Sono prodotte dal fabro di strumenti."
+"ragni. Sono prodotte dal fabbro."
 
 #: ../../tribes/atlanteans/mill/conf:21
 msgid "Produce cornflour"
@@ -1044,7 +1040,7 @@ msgstr "Farina di radici nere"
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid "Mills wheat to produce flour."
-msgstr ""
+msgstr "Macina il grano per produrre farina."
 
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."
@@ -1056,7 +1052,7 @@ msgid ""
 "toolsmith."
 msgstr ""
 "I picconi sono utilizzati da scalpellini e dei minatori. Sono prodotti dal "
-"fabbro di strumenti."
+"fabbro."
 
 #: ../../tribes/atlanteans/planks/conf:1
 msgid "Planks are an important build material of the Atlanteans."
@@ -1074,23 +1070,24 @@ msgid ""
 "Saws are needed by the sawyer, the woodcutter and the toolsmith. It is "
 "produced by the toolsmith."
 msgstr ""
-"Seghe sono necessarie al falegname, al boscaiolo e al fabbro di strumenti. "
-"Sono prodotte dal fabbro di strumenti."
+"Seghe sono necessarie al falegname, al boscaiolo e al fabbro. Sono prodotte "
+"dal fabbro."
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws the wood to produce planks."
-msgstr ""
+msgstr "Sega il legno per produrre tavole."
 
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Esploratori come Scotty l'esploratore esplorano le aree non esplorate alla "
+"maniera degli esploratori."
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr ""
-"La falce è lo strumento dei fattori. È prodotta dal fabbro di strumenti."
+msgstr "La falce è lo strumento dei fattori. È prodotta dal fabbro."
 
 #: ../../tribes/atlanteans/shovel/conf:1
 msgid ""
@@ -1099,7 +1096,7 @@ msgid ""
 msgstr ""
 "Le pale sono necessarie per maneggiare correttamente le piante. Sia la "
 "guardia forestale che il contadino di radici nere la usano. Sono prodotte "
-"dal fabbro di strumenti."
+"dal fabbro."
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
@@ -1131,7 +1128,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."
-msgstr ""
+msgstr "Affumica carne e pesce."
 
 #: ../../tribes/atlanteans/smokery/conf:25
 msgid "Smoke meat"
@@ -1147,7 +1144,7 @@ msgstr "Difendi e conquista!"
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr ""
+msgstr "Alleva ragni per filati."
 
 #: ../../tribes/atlanteans/spidercloth/conf:1
 msgid "Cloth made out of spideryarn."
@@ -1185,7 +1182,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Produce strumenti per i lavoratori."
 
 #: ../../tribes/atlanteans/toolsmithy/conf:33
 msgid "Produce bakingtray"
@@ -1237,7 +1234,7 @@ msgstr "Produce vanga"
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Allena i soldati."
 
 #: ../../tribes/atlanteans/trunk/conf:1
 msgid ""
@@ -1257,7 +1254,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
-msgstr ""
+msgstr "Produce armi per i soldati."
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:30
 msgid "Produce light trident"
