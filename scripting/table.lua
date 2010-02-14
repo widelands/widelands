@@ -24,6 +24,25 @@ function array_combine(...)
    return t
 end
    
+-- RST
+-- .. function:: array_unique(a)
+--
+--    Removes duplicated values from an array, so that for example
+--
+--    .. code-block:: lua
+--
+--       array_unique{"one", "two", "one", "three"}
+--
+--    will return 
+--
+--    .. code-block:: lua
+--
+--       {"one", "two", "three"}
+--
+--    :arg a: One array object containing duplicated values
+--    :type a: :class:`array`
+--
+--    :returns: array with double values removed
 function array_unique(a)
    local set = {}
    rv = {}
