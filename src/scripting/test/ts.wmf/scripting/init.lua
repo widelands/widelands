@@ -54,6 +54,7 @@ function random_test:test_create_integer_range()
    assert_true(do_test(f))
 end
 
+include "test_map"
 include "test_field"
 include "test_immovables"
 include "test_player"

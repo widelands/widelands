@@ -49,6 +49,7 @@ using namespace Widelands;
 .. moduleauthor:: The Widelands development team
 
 .. currentmodule:: wl.map
+
 */
 
 /*
@@ -91,6 +92,12 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
  *                         MODULE CLASSES
  * ========================================================================
  */
+
+/* RST
+Module Classes
+^^^^^^^^^^^^^^
+
+*/
 
 /* RST
 MapObject
@@ -226,7 +233,7 @@ BaseImmovable
 
 .. class:: BaseImmovable
 
-	Bases: :class:`MapObject`
+	Child of: :class:`MapObject`
 
 	This is the base class for all Objects in widelands, including immovables
 	and Bobs. This class can't be instantiated directly, but provides the base
@@ -296,7 +303,7 @@ PlayerImmovable
 
 .. class:: PlayerImmovable
 
-	Bases: :class:`BaseImmovable`
+	Child of: :class:`BaseImmovable`
 
 	All Immovables that belong to a Player (Buildings, Flags, ...) are based on
 	this Class.
@@ -358,7 +365,7 @@ Flag
 
 .. class:: Flag
 
-	Bases: :class:`PlayerImmovable`
+	Child of: :class:`PlayerImmovable`
 
 	One flag in the economy of this Player.
 */
@@ -426,7 +433,7 @@ Building
 
 .. class:: Building
 
-	Bases: :class:`PlayerImmovable`
+	Child of: :class:`PlayerImmovable`
 
 	This represents a building owned by a player.
 */
@@ -479,7 +486,7 @@ Warehouse
 
 .. class:: Warehouse
 
-	Bases: :class:`Building`
+	Child of: :class:`Building`
 
 	Every Headquarter or Warehouse on the Map is of this type.
 */
@@ -936,14 +943,27 @@ const Widelands::FCoords L_Field::fcoords(lua_State * L) {
  * ========================================================================
  */
 
-/*
- * TODO: document this properly
- * Create a World immovable object immediately
- *
- * name: name of object to create
- * field: L_Field, position where to create this immovable
- *
- */
+/* RST
+Module Functions
+^^^^^^^^^^^^^^^^
+
+*/
+
+/* RST
+.. function:: create_immovable(name, field)
+
+	Creates an immovable that is defined by the world (e.g. trees, stones...)
+	on a given field. If there is already an immovable on the field, an error
+	is reported.
+
+	:arg name: The name of the immovable to create
+	:type name: :class:`string`
+	:arg field: The immovable is created on this field.
+	:type field: :class:`wl.map.Field`
+
+	:returns: The created immovable object, most likely a
+		:class:`wl.map.BaseImmovable`
+*/
 static int L_create_immovable(lua_State * const L) {
 	char const * const objname = luaL_checkstring(L, 1);
 	L_Field * c = *get_user_class<L_Field>(L, 2);
@@ -951,7 +971,6 @@ static int L_create_immovable(lua_State * const L) {
 	Game & game = get_game(L);
 
 	// Check if the map is still free here
-	// TODO: this exact code is duplicated in worker.cc
 	if
 	 (BaseImmovable const * const imm = c->fcoords(L).field->get_immovable())
 		if (imm->get_size() >= BaseImmovable::SMALL)
@@ -963,61 +982,38 @@ static int L_create_immovable(lua_State * const L) {
 
 	BaseImmovable & m = game.create_immovable(c->coords(), imm_idx, 0);
 
-	// Send this to lua
 	return upcasted_immovable_to_lua(L, &m);
 }
 
+/* RST
+.. function:: get_width()
 
-/*
- * Find a world immovable
- * TODO: document this properly
- * TODO: this function should return a list of all immovables found
- *
- * x, y, radius - position to search for
- * attrib - attribute to use
- *
- * Returns: x, y position of object
- */
-static int L_find_immovable(lua_State * const L) {
-	uint32_t     const x       = luaL_checkint32(L, 1);
-	uint32_t     const y       = luaL_checkint32(L, 2);
-	uint32_t     const radius  = luaL_checkint32(L, 3);
-	const char *  const attrib  = luaL_checkstring(L, 4);
+	Returns the width of the map in fields
 
-	Coords pos(x, y);
-	Game & game = get_game(L);
-	Map & map = game.map();
+	:returns: width of map in nr of fields
+	:rtype: :class:`integer`
+*/
+int L_get_width(lua_State * L) {
+	lua_pushuint32(L, get_game(L).map().get_width());
+	return 1;
+}
+/* RST
+.. function:: get_height()
 
-	Area<FCoords> area (map.get_fcoords(pos), 0);
-	CheckStepWalkOn cstep(MOVECAPS_WALK, false);
-	int attribute = Map_Object_Descr::get_attribute_id(attrib);
+	Returns the height of the map in fields
 
-	for (;; ++area.radius) {
-		if (radius < area.radius)
-			return report_error(L, "No suitable object in radius %i", radius);
-
-		std::vector<ImmovableFound> list;
-		//  if (action.iparam2 < 0)
-		//          map.find_reachable_immovables
-		//                  (area, &list, cstep);
-		//  else
-		map.find_reachable_immovables
-			(area, &list, cstep, FindImmovableAttribute(attribute));
-
-		if (list.size()) {
-			Coords & rv = list[game.logic_rand() % list.size()].coords;
-			lua_pushinteger(L, rv.x);
-			lua_pushinteger(L, rv.y);
-			return 2;
-		}
-	}
-
-	return 0;
+	:returns: height of map in nr of fields
+	:rtype: :class:`integer`
+*/
+int L_get_height(lua_State * L) {
+	lua_pushuint32(L, get_game(L).map().get_height());
+	return 1;
 }
 
 const static struct luaL_reg wlmap [] = {
 	{"create_immovable", &L_create_immovable},
-	{"find_immovable", &L_find_immovable},
+	{"get_width", &L_get_width},
+	{"get_height", &L_get_height},
 	{0, 0}
 };
 
