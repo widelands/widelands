@@ -57,6 +57,13 @@ using namespace Widelands;
  *                         MODULE CLASSES
  * ========================================================================
  */
+
+/* RST
+Module Classes
+^^^^^^^^^^^^^^^^
+
+*/
+
 /* RST
 Player
 ------
@@ -920,12 +927,18 @@ Objective & L_Objective::m_get(lua_State * L, Widelands::Game & g) {
  * ========================================================================
  */
 /* RST
-	.. method:: get_game
+Module Functions
+^^^^^^^^^^^^^^^^
 
-		This returns the absolute time elapsed since the game was started.
+*/
 
-		:returns: the current gametime in milliseconds
-		:rtype: :class:`integer`
+/* RST
+.. method:: get_game
+
+	This returns the absolute time elapsed since the game was started.
+
+	:returns: the current gametime in milliseconds
+	:rtype: :class:`integer`
 */
 static int L_get_time(lua_State * L) {
 	Game & game = get_game(L);
@@ -935,20 +948,20 @@ static int L_get_time(lua_State * L) {
 
 
 /* RST
-	.. method:: run_coroutine(func[, when = now])
+.. method:: run_coroutine(func[, when = now])
 
-		Hands a Lua coroutine object over to widelands for execution. The object
-		must have been created via :func:`coroutine.create`. The coroutine is
-		expected to :func:`coroutine.yield` at regular intervals with the
-		absolute game time on which the function should be awakened again. You
-		should also have a look at :mod:`core.cr`.
+	Hands a Lua coroutine object over to widelands for execution. The object
+	must have been created via :func:`coroutine.create`. The coroutine is
+	expected to :func:`coroutine.yield` at regular intervals with the
+	absolute game time on which the function should be awakened again. You
+	should also have a look at :mod:`core.cr`.
 
-		:arg func: coroutine object to run
-		:type func: :class:`thread`
-		:arg when: absolute time when this coroutine should run
-		:type when: :class:`integer`
+	:arg func: coroutine object to run
+	:type func: :class:`thread`
+	:arg when: absolute time when this coroutine should run
+	:type when: :class:`integer`
 
-		:returns: :const:`nil`
+	:returns: :const:`nil`
 */
 static int L_run_coroutine(lua_State * L) {
 	int nargs = lua_gettop(L);
@@ -970,13 +983,13 @@ static int L_run_coroutine(lua_State * L) {
 }
 
 /* RST
-	.. function:: set_speed(speed)
+.. function:: set_speed(speed)
 
-		Sets the desired speed of the game in ms per real second, so a speed of
-		1000 means the game runs at 1x speed. Note that this will not work in
-		network games.
+	Sets the desired speed of the game in ms per real second, so a speed of
+	1000 means the game runs at 1x speed. Note that this will not work in
+	network games.
 
-		:returns: :const:`nil`
+	:returns: :const:`nil`
 */
 // UNTESTED
 static int L_set_speed(lua_State * L) {

@@ -140,6 +140,7 @@ The same also goes for return values.
    a,b = f() -- a == 1, b == 2
    a,b,c,d = f() -- a == 1, b == 2, c == 3, d == nil
 
+TODO: calling of tables and strings
 
 Coroutines
 ^^^^^^^^^^
