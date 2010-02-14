@@ -14,4 +14,5 @@ otherwise stated. All auxiliary scripts are documented in this section.
 
    aux_coroutine
    aux_smooth_move
+   aux_table
 
