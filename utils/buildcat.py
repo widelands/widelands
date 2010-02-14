@@ -26,7 +26,7 @@ from time import strftime,gmtime
 
 # The current version of source
 SRCVERSION=detect_revision()
-NO_HEADER_REWRITE = 0
+NO_HEADER_REWRITE = 1
 HEADER_YEAR = strftime("%Y",gmtime())
 
 # Holds the names of non-iterative catalogs to build and the
@@ -302,7 +302,7 @@ def do_header_check(filename, filehandle, lines):
         re.compile(r"^\"MIME-Version: 1\.0\\n\"$"),
         re.compile(r"^\"Content-Type: text/plain; charset=UTF-8\\n\"$"),
         re.compile(r"^\"Content-Transfer-Encoding: 8bit\\n\"$"),
-        re.compile(r"^\"Plural-Forms: nplurals=[0-9] plural=.+\\n\"$")
+        re.compile(r"^\"Plural-Forms: nplurals=[0-9];? plural=.+\\n\";?$")
     ]
 
     # Create an array of template strings to output on header line
@@ -468,22 +468,25 @@ if __name__ == "__main__":
         # Make sure .pot files are up to date.
         do_update_potfiles()
 
-        sys.stdout.write("Updating translations: ")
+        # We no longer update translation files, because launchpad
+        # is doing this for us ATM. Only update the templates.
 
-        if (os.getenv('NO_HEADER_REWRITE')):
-            NO_HEADER_REWRITE = 1
-
-        if (sys.argv[1] == "-a"):
-                lang = set(p.splitext(p.basename(l))[0] for
-                         l in glob("po/*/*.po"))
-                print "all available."
-        else:
-                lang = sys.argv[1:]
-                print lang
-
-        # Assemble a list of .pot files available
-        srcfiles = do_find_files("po/", ".*\.pot$")
-
-        for l in lang:
-                do_update_po(l, srcfiles)
+        # sys.stdout.write("Updating translations: ")
+        #
+        # if (os.getenv('NO_HEADER_REWRITE')):
+        #     NO_HEADER_REWRITE = 1
+        #
+        # if (sys.argv[1] == "-a"):
+        #         lang = set(os.path.splitext(os.path.basename(l))[0] for
+        #                  l in glob("po/*/*.po"))
+        #         print "all available."
+        # else:
+        #         lang = sys.argv[1:]
+        #         print lang
+        #
+        # # Assemble a list of .pot files available
+        # srcfiles = do_find_files("po/", ".*\.pot$")
+        #
+        # for l in lang:
+        #         do_update_po(l, srcfiles)
         print ""
