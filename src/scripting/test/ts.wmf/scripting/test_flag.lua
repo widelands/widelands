@@ -10,6 +10,7 @@ function flag_tests:teardown()
    pcall(self.f.remove, self.f)
 end
 
+
 function flag_tests:test_add_ware_illegal_ware()
    function ill()
       self.f:add_ware("kjhsh")

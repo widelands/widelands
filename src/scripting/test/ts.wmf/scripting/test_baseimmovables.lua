@@ -117,4 +117,23 @@ function immovable_property_tests:test_name_stone()
    assert_equal("stones4", self.big.name)
 end
 
+-- ================
+-- PlayerImmovables 
+-- ================
+plr_immovables_test = lunit.TestCase("Player Immovables")
+function plr_immovables_test:setup()
+   self.p = wl.game.Player(1)
+   self.f = self.p:place_flag(wl.map.Field(13,10), 1)
+end
+function plr_immovables_test:teardown()
+   pcall(self.f.remove, self.f)
+end
+
+function plr_immovables_test:test_owner()
+   assert_equal(self.p.number, self.f.player.number)
+   assert_equal(self.p, self.f.player)
+end
+
+--scenario=~/.widelands/maps/Isle\ of\ Trigger.wmf     
+
 

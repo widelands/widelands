@@ -79,6 +79,9 @@ function player_tests:test_force_building_illegal_name()
    end)
 end
 
+-- =========================
+-- Forbid & Allow buildings 
+-- =========================
 player_allow_buildings_tests = lunit.TestCase("PlayerAllowed Buildings")
 function player_allow_buildings_tests:setup()
    self.p = wl.game.Player(1)

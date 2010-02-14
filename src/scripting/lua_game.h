@@ -69,6 +69,7 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int __eq(lua_State * L);
 	int place_flag(lua_State * L);
 	int place_building(lua_State * L);
 	int send_message(lua_State * L);

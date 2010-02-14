@@ -71,6 +71,7 @@ Player
 */
 const char L_Player::className[] = "Player";
 const MethodType<L_Player> L_Player::Methods[] = {
+	METHOD(L_Player, __eq),
 	METHOD(L_Player, place_flag),
 	METHOD(L_Player, place_building),
 	METHOD(L_Player, send_message),
@@ -221,6 +222,16 @@ int L_Player::set_viewpoint_y(lua_State * L) {
  LUA METHODS
  ==========================================================
  */
+int L_Player::__eq(lua_State * L) {
+	Game & g = get_game(L);
+	const Player & me = m_get(L, g);
+	const Player & you = (*get_user_class<L_Player>(L, 2))->m_get(L, g);
+
+	lua_pushboolean
+		(L, (me.player_number() == you.player_number()));
+	return 1;
+}
+
 /* RST
 	.. function:: place_flag(field[, force])
 
