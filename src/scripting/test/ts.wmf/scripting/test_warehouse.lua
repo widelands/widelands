@@ -8,9 +8,7 @@ function warehouse_tests:setup()
    self.w = self.p:place_building("headquarters", self.f)
 end
 function warehouse_tests:teardown()
-   pcall(self.w.remove, self.w)
-   -- TODO: these tests do not clean up after itself: the player remains owner
-   -- TODO: of the field
+   pcall(self.f.brn.remove, self.w)
 end
 
 function warehouse_tests:test_upcasting_from_immovable_to_building()

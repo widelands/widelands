@@ -942,7 +942,7 @@ int L_Field::__eq(lua_State * L) {
 
 		.. code-block:: lua
 
-			{ f, f.rn, f.ln, f.brn, f.bln, f.tln, f.trn }
+			{f, f.rn, f.ln, f.brn, f.bln, f.tln, f.trn}
 
 		:returns: The array of the given fields.
 		:rtype: :class:`array`

@@ -276,6 +276,8 @@ int L_Player::place_building(lua_State * L) {
 	L_Field * c = *get_user_class<L_Field>(L, 3);
 
 	Building_Index i = m_get(L, get_game(L)).tribe().building_index(name);
+	if (i == Building_Index::Null())
+		return report_error(L, "Unknown Building: '%s'", name);
 
 	Building & b = m_get(L, get_game(L)).force_building
 		(c->coords(), i, 0, 0, Soldier_Counts());

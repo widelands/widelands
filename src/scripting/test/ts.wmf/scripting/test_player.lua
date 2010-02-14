@@ -1,6 +1,13 @@
 -- ===========
 -- Player test 
 -- ===========
+
+-- NOTE: Most of these tests conquer some area for the player and even though
+-- all buildings are destroyed after each test, the area is not unconquered
+-- since this functionality is not defined inside the game. This means that the
+-- state of these fields bleed into others, therefore for the tree players,
+-- there are individual fields which are used only for these tests here, so
+-- this bleeding doesn't matter.
 player_tests = lunit.TestCase("Player tests sizes")
 function player_tests:test_number_property()
    assert_equal(1, wl.game.Player(1).number)
@@ -26,8 +33,30 @@ function player_tests:test_create_flag()
    k = wl.game.Player(1):place_flag(f, true)
    assert_equal(k.player.number, 1)
    k:remove()
-   -- TODO: this test doesn't clean up after itself: the player remains owner
-   -- TODO: of the field
+end
+function player_tests:test_create_flag_non_forcing()
+   f = wl.map.Field(10,10)
+   -- First force the flag, then remove them again
+   k = wl.game.Player(1):place_flag(f, true)
+   k:remove()
+   -- Now, try again, but non forcing
+   k = wl.game.Player(1):place_flag(f)
+   assert_equal(k.player.number, 1)
+   k:remove()
+end
+function player_tests:test_create_flag_non_forcing_too_close()
+   f = wl.map.Field(10,10)
+   -- First force the flag, then remove them again
+   wl.game.Player(1):place_flag(f, true):remove()
+   wl.game.Player(1):place_flag(f.rn, true):remove()
+
+   -- Now, try again, but non forcing
+   k = wl.game.Player(1):place_flag(f)
+   assert_error("Too close to other!", function()
+      wl.game.Player(1):place_flag(f.rn)
+   end)
+
+   k:remove()
 end
 -- This test is currently disabled because of issue #2938438
 -- function player_tests:test_create_flag2()
@@ -35,19 +64,19 @@ end
 --    k = wl.game.Player(2):place_flag(f, true)
 --    assert_equal(k.player.number, 2)
 --    k:remove()
---    -- TODO: this test doesn't clean up after itself: the player remains owner
---    -- TODO: of the field
 -- end
--- TODO: set non forcing placement of flags
 
 function player_tests:test_force_building()
    f = wl.map.Field(10,10)
    k = wl.game.Player(1):place_building("headquarters", f)
    assert_equal(1, k.player.number)
    assert_equal("warehouse", k.building_type)
-   k:remove()
-   -- TODO: this test doesn't clean up after itself: the player remains owner
-   -- TODO: of the field
+   f.brn.immovable:remove() -- removing map also removes building
+end
+function player_tests:test_force_building_illegal_name()
+   assert_error("Illegal building", function()
+      wl.game.Player(1):place_building("kjhsfjkh", wl.map.Field(10,10))
+   end)
 end
 
 player_allow_buildings_tests = lunit.TestCase("PlayerAllowed Buildings")

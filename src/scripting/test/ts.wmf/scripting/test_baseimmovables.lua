@@ -71,16 +71,20 @@ end
 -- ==============
 immovable_property_tests = lunit.TestCase("Immovable sizes")
 function immovable_property_tests:setup()
-   self.none = wl.map.create_immovable("pebble1", wl.map.Field(9, 10))
-   self.small = wl.map.create_immovable("tree1", wl.map.Field(10, 10))
-   -- No medium bob in world. Need a user immovable here!!! TODO
-   -- self.medium = wl.map.create_immovable("tree1", 10, 10)
-   self.big = wl.map.create_immovable("stones4", wl.map.Field(15, 10))
+   self.none = wl.map.create_immovable("pebble1", wl.map.Field(19, 10))
+   self.small = wl.map.create_immovable("tree1", wl.map.Field(18, 10))
+   self.medium = wl.game.Player(1):place_building(
+      "burners_house", wl.map.Field(10,10)
+   )
+   self.big = wl.map.create_immovable("stones4", wl.map.Field(20, 10))
 end
 function immovable_property_tests:teardown()
    pcall(self.none.remove, self.none)
    pcall(self.small.remove, self.small)
-   -- pcall(self.medium.remove, self.medium)
+   pcall(self.medium.remove, self.medium)
+   -- also remove flag
+   f = wl.map.Field(10,10)
+   pcall(f.brn.immovable.remove, f.brn.immovable)
    pcall(self.big.remove, self.big)
 end
 
@@ -90,14 +94,20 @@ end
 function immovable_property_tests:test_size_small()
    assert_equal("small", self.small.size)
 end
+function immovable_property_tests:test_size_medium()
+   assert_equal("medium", self.medium.size)
+end
 function immovable_property_tests:test_size_big()
    assert_equal("big", self.big.size)
 end
 function immovable_property_tests:test_name_pebble()
    assert_equal("pebble1", self.none.name)
 end
-function immovable_property_tests:test_nsme_tree()
+function immovable_property_tests:test_name_tree()
    assert_equal("tree1", self.small.name)
+end
+function immovable_property_tests:test_name_charcoal_burner()
+   assert_equal("burners_house", self.medium.name)
 end
 function immovable_property_tests:test_name_stone()
    assert_equal("stones4", self.big.name)
