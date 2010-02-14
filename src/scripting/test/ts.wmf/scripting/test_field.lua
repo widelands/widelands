@@ -143,6 +143,47 @@ function field_tests:test_hollow_region_radius_one()
    assert_equal(13, #list)
 end
 
+-- ==========
+-- Resources 
+-- ==========
+field_resources_tests = lunit.TestCase("Field resources test")
+function field_resources_tests:setup()
+   self.f = wl.map.Field(60,40)
+   self._amount = self.f.resource_amount
+   self._terr = self.f.terr
+   self._terd = self.f.terd
+end
+function field_resources_tests:teardown()
+   self.f.terr = self._terr
+   self.f.terd = self._terd
+   self.f.resource_amount = self._amount 
+end
+function field_resources_tests:test_default_resource()
+   assert_equal("water", self.f.resource)
+   assert_equal(5, self.f.resource_amount)
+end
+function field_resources_tests:test_set_resource_amount()
+   self.f.resource_amount = 25
+   assert_equal("water", self.f.resource)
+   assert_equal(25, self.f.resource_amount)
+end
+function field_resources_tests:test_set_resource_amount_negative()
+   assert_error("negative forbidden!",
+      function() self.f.resource_amount = -100 end)
+end
+function field_resources_tests:test_set_resource_amount_too_much()
+   assert_error("too big!", function () self.f.resource_amount = 1000 end)
+end
+function field_resources_tests:test_set_resource_type()
+   self.f.resource = "coal"
+   assert_equal("coal", self.f.resource)
+   assert_equal(5, self.f.resource_amount)
+end
+function field_resources_tests:test_set_resource_type_illegal_resource()
+   assert_error("Illegal name!", function() self.f.resource = "ksjdjhsdf" end)
+end
+
+
 
 
 

@@ -662,6 +662,8 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	PROP_RW(L_Field, height),
 	PROP_RO(L_Field, viewpoint_x),
 	PROP_RO(L_Field, viewpoint_y),
+	PROP_RW(L_Field, resource),
+	PROP_RW(L_Field, resource_amount),
 	{0, 0, 0},
 };
 
@@ -723,6 +725,62 @@ int L_Field::get_viewpoint_x(lua_State * L) {
 int L_Field::get_viewpoint_y(lua_State * L) {
 	lua_pushuint32(L, m_c.y * TRIANGLE_HEIGHT);
 	return 1;
+}
+
+/* RST
+	.. attribute:: resource
+
+		(RO) The name of the resource that is available in this field or
+		:const:`nil`
+
+		:see also: :attr:`resource_amount`
+*/
+int L_Field::get_resource(lua_State * L) {
+	lua_pushstring
+		(L, get_game(L).map().world().get_resource
+			 (fcoords(L).field->get_resources())->name().c_str());
+
+	return 1;
+}
+int L_Field::set_resource(lua_State * L) {
+	Field * field = fcoords(L).field;
+	int32_t res = get_game(L).map().world().get_resource
+		(luaL_checkstring(L, -1));
+
+	if (res == -1)
+		return report_error(L, "Illegal resource: '%s'", luaL_checkstring(L, -1));
+
+	field->set_resources(res, field->get_resources_amount());
+
+	return 0;
+}
+
+/* RST
+	.. attribute:: resource_amount
+
+		(RO) How many items of the resource is available in this field.
+
+		:see also: :attr:`resource`
+*/
+int L_Field::get_resource_amount(lua_State * L) {
+	lua_pushuint32(L, fcoords(L).field->get_resources_amount());
+	return 1;
+}
+int L_Field::set_resource_amount(lua_State * L) {
+	Field * field = fcoords(L).field;
+	int32_t res = field->get_resources();
+	int32_t amount = luaL_checkint32(L, -1);
+	int32_t max_amount = get_game(L).map().world().get_resource
+		(res)->get_max_amount();
+
+	if (amount < 0 or amount > max_amount)
+		return
+			report_error
+			(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
+
+	field->set_resources(res, amount);
+
+	return 0;
 }
 
 // TODO: document me

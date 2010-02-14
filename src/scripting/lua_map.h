@@ -269,6 +269,11 @@ public:
 	int get_tln(lua_State*);
 	int get_bln(lua_State*);
 	int get_brn(lua_State*);
+	int get_resource(lua_State *);
+	int set_resource(lua_State *);
+	int get_resource_amount(lua_State *);
+	int set_resource_amount(lua_State *);
+
 
 	/*
 	 * Lua methods
