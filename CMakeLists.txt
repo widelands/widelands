@@ -55,7 +55,7 @@ endif (DEFINED WL_VERSION_MAJOR)
 if (NOT DEFINED WL_VERSION)
   find_package (PythonInterp REQUIRED)
   execute_process (
-    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/build/scons-tools/detect_revision.py
+    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/detect_revision.py
     OUTPUT_VARIABLE WL_VERSION
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -123,17 +123,6 @@ include_directories(${SDLGFX_INCLUDE_DIR})
 find_package(Lua51 REQUIRED)
 include_directories(${LUA_INCLUDE_DIR})
 
-IF (NOT WIN32)
-# TODO
-  if (CMAKE_BUILD_TYPE STREQUAL Debug)
-    find_package(Doxygen REQUIRED)
-    include(Documentation)
-    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/doc/sourcecode)
-    configure_file (${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY IMMEDIATE)
-    add_custom_target(doc COMMAND ${DOXYGEN_EXECUTABLE} WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
-  endif(CMAKE_BUILD_TYPE STREQUAL Debug)
-ENDIF (NOT WIN32)
-
 IF (WIN32)
   SET(GUI_TYPE WIN32)
 ENDIF (WIN32)
@@ -143,6 +132,7 @@ include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
 #configure_file (src/config.h.cmake src/config.h)
 #configure_file (src/build_info.cc.cmake src/build_info.cc)
 
+add_subdirectory(doc)
 #add_subdirectory(po)
 add_subdirectory(pics)
 add_subdirectory(src)
@@ -160,8 +150,8 @@ install(
     tribes
     txts
     worlds
-    po
-#  locale
+#    po
+  locale
   DESTINATION share/widelands
   CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles
@@ -180,6 +170,18 @@ install(
     PATTERN "SCons*" EXCLUDE
   )
 #endif()
+
+find_package (PythonInterp REQUIRED)
+add_custom_target (
+  lang
+#  COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/../locale
+  COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
+  COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
+  COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/tribes ${CMAKE_CURRENT_BINARY_DIR}/tribes
+  COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/worlds ${CMAKE_CURRENT_BINARY_DIR}/worlds
+  COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/buildlocale.py
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+)
 
 set (CPACK_PACKAGE_FILE_NAME widelands-${WL_VERSION})
 set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles)

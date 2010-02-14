@@ -1,0 +1,10 @@
+IF (NOT WIN32)
+# TODO
+  if (CMAKE_BUILD_TYPE STREQUAL Debug)
+    find_package(Doxygen REQUIRED)
+    include(Documentation)
+    file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/doc/sourcecode)
+    configure_file (${CMAKE_CURRENT_SOURCE_DIR}/doc/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY IMMEDIATE)
+    add_custom_target(doc COMMAND ${DOXYGEN_EXECUTABLE} WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+  endif(CMAKE_BUILD_TYPE STREQUAL Debug)
+ENDIF (NOT WIN32)

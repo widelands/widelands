@@ -10,8 +10,8 @@
 ###############################################
 #
 # ATTENTION CMAKE-TRANSITION
-# In the future, this file is located in utils directory.
-# This file (in build/scons-utils) is for scons only and can be deleted after transition 
+# This (in utils directory) is the future location of this file.
+# The other file (in build/scons-utils) is for scons only and can be deleted after transition
 #
 ###############################################
 
