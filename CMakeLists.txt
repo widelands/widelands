@@ -53,7 +53,7 @@ if (DEFINED WL_VERSION_MAJOR)
 endif (DEFINED WL_VERSION_MAJOR)
 
 if (NOT DEFINED WL_VERSION)
-  find_package (PythonInterp REQUIRED)
+#  find_package (PythonInterp REQUIRED)
   execute_process (
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/detect_revision.py
     OUTPUT_VARIABLE WL_VERSION
@@ -151,7 +151,7 @@ install(
     txts
     worlds
 #    po
-  locale
+#    locale
   DESTINATION share/widelands
   CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles
@@ -171,6 +171,7 @@ install(
   )
 #endif()
 
+execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/locale)
 find_package (PythonInterp REQUIRED)
 add_custom_target (
   lang
@@ -183,8 +184,19 @@ add_custom_target (
   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
 
+install(
+  DIRECTORY
+    ${CMAKE_CURRENT_BINARY_DIR}/locale
+  DESTINATION share/widelands
+  CONFIGURATIONS Debug;Release
+  COMPONENT CoreLanguageFiles
+  PATTERN "*.svn*" EXCLUDE
+  PATTERN "SCons*" EXCLUDE
+)
+
+
 set (CPACK_PACKAGE_FILE_NAME widelands-${WL_VERSION})
-set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles)
+set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles)
 set (CPACK_GENERATOR TGZ)
 set (CPACK_SOURCE_GENERATOR TGZ)
 include(CPack)
