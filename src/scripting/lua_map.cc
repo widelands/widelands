@@ -35,8 +35,6 @@
 
 #include "lua_map.h"
 
-// TODO: get_width, get_height
-
 using namespace Widelands;
 
 /* RST
@@ -254,7 +252,17 @@ const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
  PROPERTIES
  ==========================================================
  */
-// TODO: document me
+/* RST
+	.. attribute:: size
+
+		(RO) The size of this immovable. Can be either of
+
+		* :const:`none` -- Example: mushrooms. Immovables will be destroyed when
+			something else is build on this field.
+		* :const:`small` -- Example: trees or flags
+		* :const:`medium` -- Example: Medium sized buildings
+		* :const:`big` -- Example: Big sized buildings or stones
+*/
 int L_BaseImmovable::get_size(lua_State * L) {
 	Game & game = get_game(L);
 	BaseImmovable * o = m_get(game, L);
@@ -274,7 +282,12 @@ int L_BaseImmovable::get_size(lua_State * L) {
 	return 1;
 }
 
-// TODO: document me
+/* RST
+	.. attribute:: name
+
+		(RO) The internal name of this immovable. This is the same as the
+		directory name of this immovable in the tribe or world directory.
+*/
 int L_BaseImmovable::get_name(lua_State * L) {
 	Game & game = get_game(L);
 	BaseImmovable * o = m_get(game, L);
@@ -699,12 +712,22 @@ void L_Field::__unpersist(lua_State * L) {
  PROPERTIES
  ==========================================================
  */
-// TODO: document me
+/* RST
+	.. attribute:: x, y
+
+		(RO) The x/y coordinate of this field
+*/
 int L_Field::get_x(lua_State * L) {lua_pushuint32(L, m_c.x); return 1;}
-// TODO: document me
 int L_Field::get_y(lua_State * L) {lua_pushuint32(L, m_c.y); return 1;}
 
-// TODO: document me
+/* RST
+	.. attribute:: height
+
+		(RW) The height of this field. The default height is 10, you can increase
+		or decrease this value to build mountains. Note though that if you change
+		this value too much, all surrounding fields will also change their
+		heights because the slope is constrained.
+*/
 int L_Field::get_height(lua_State * L) {
 	lua_pushuint32(L, fcoords(L).field->get_height());
 	return 1;
@@ -790,7 +813,12 @@ int L_Field::set_resource_amount(lua_State * L) {
 	return 0;
 }
 
-// TODO: document me
+/* RST
+	.. attribute:: immovable
+
+		(RO) The immovable that stands on this field or :const:`nil`. If you want
+		to remove an immovable, you can use :func:`wl.map.MapObject.remove`.
+*/
 int L_Field::get_immovable(lua_State * L) {
 	BaseImmovable * bi = get_game(L).map().get_immovable(m_c);
 
@@ -801,7 +829,14 @@ int L_Field::get_immovable(lua_State * L) {
 	return 1;
 }
 
-// TODO: document me
+/* RST
+	.. attribute:: terr, terd
+
+		(RW) The terrain of the right/down triangle. This is a string value
+		containing the name of the terrain as it is defined in the world
+		configuration. You can change the terrain by simply assigning another
+		valid name to these variables.
+*/
 int L_Field::get_terr(lua_State * L) {
 	Terrain_Descr & td =
 		get_game(L).map().world().terrain_descr
@@ -824,7 +859,6 @@ int L_Field::set_terr(lua_State * L) {
 	return 1;
 }
 
-// TODO: document me
 int L_Field::get_terd(lua_State * L) {
 	Terrain_Descr & td =
 		get_game(L).map().world().terrain_descr
@@ -832,7 +866,6 @@ int L_Field::get_terd(lua_State * L) {
 	lua_pushstring(L, td.name().c_str());
 	return 1;
 }
-// TODO: document me
 int L_Field::set_terd(lua_State * L) {
 	const char * name = luaL_checkstring(L, -1);
 	Map & map = get_game(L).map();
@@ -848,24 +881,37 @@ int L_Field::set_terd(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: rn, ln, brn, bln, trn, tln
+
+		(RO) The neighbour fields of this field. The abbreviations stand for:
+
+		* rn -- Right neighbour
+		* ln -- Left neighbour
+		* brn -- Bottom right neighbour
+		* bln -- Bottom left neighbour
+		* trn -- Top right neighbour
+		* tln -- Top left neighbour
+
+		Note that the widelands map wraps at its borders, that is the following
+		holds:
+
+		.. code-block:: lua
+
+			wl.map.Field(wl.map.get_width()-1, 10).rn == wl.map.Field(0, 10)
+*/
 #define GET_X_NEIGHBOUR(X) int L_Field::get_ ##X(lua_State* L) { \
    Coords n; \
    get_game(L).map().get_ ##X(m_c, &n); \
    to_lua<L_Field>(L, new L_Field(n.x, n.y)); \
 	return 1; \
 }
-// TODO: document me
-	GET_X_NEIGHBOUR(rn);
-// TODO: document me
-	GET_X_NEIGHBOUR(ln);
-// TODO: document me
-	GET_X_NEIGHBOUR(trn);
-// TODO: document me
-	GET_X_NEIGHBOUR(tln);
-// TODO: document me
-	GET_X_NEIGHBOUR(bln);
-// TODO: document me
-	GET_X_NEIGHBOUR(brn);
+GET_X_NEIGHBOUR(rn);
+GET_X_NEIGHBOUR(ln);
+GET_X_NEIGHBOUR(trn);
+GET_X_NEIGHBOUR(tln);
+GET_X_NEIGHBOUR(bln);
+GET_X_NEIGHBOUR(brn);
 
 /*
  ==========================================================
@@ -876,7 +922,31 @@ int L_Field::__eq(lua_State * L) {
 	lua_pushboolean(L, (*get_user_class<L_Field>(L, -1))->m_c == m_c);
 	return 1;
 }
-// TODO: document me
+/* RST
+	.. function:: region(r1[, r2])
+
+		Returns an array of all Fields inside the given region. If one argument
+		is given it defines the radius of the region. If both arguments are
+		specified, the first one defines the outer radius and the second one the
+		inner radius and a hollow region is returned, that is all fields in the
+		outer radius region minus all fields in the inner radius region.
+
+		A small example:
+
+		.. code-block:: lua
+
+			f:region(1)
+
+		will return an array with the following entries (Note: Ordering of the
+		fields inside the array is not guaranteed):
+
+		.. code-block:: lua
+
+			{ f, f.rn, f.ln, f.brn, f.bln, f.tln, f.trn }
+
+		:returns: The array of the given fields.
+		:rtype: :class:`array`
+*/
 int L_Field::region(lua_State * L) {
 	uint32_t n = lua_gettop(L);
 
