@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:57+0000\n"
-"Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
+"PO-Revision-Date: 2010-02-13 18:20+0000\n"
+"Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-14 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -50,7 +50,7 @@ msgstr "Perushaarniska Keisarikunnan sotilaille."
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Tuottaa haarniskoja sotilaille."
 
 #: ../../tribes/empire/armoursmithy/conf:26
 msgid "Produce helm"
@@ -112,7 +112,7 @@ msgstr "Kirves on puunhakkaajan työväline. Työkaluseppä valmistaa sen."
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Leipoo leipää työntekijöille."
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
@@ -472,7 +472,7 @@ msgstr "Kantaja"
 
 #: ../../tribes/empire/conf:109
 msgid "Donkey"
-msgstr ""
+msgstr "Aasi"
 
 #: ../../tribes/empire/conf:112
 msgid "Soldier"
@@ -576,11 +576,11 @@ msgstr "Rypäleenkasvattaja"
 
 #: ../../tribes/empire/conf:139
 msgid "Scout"
-msgstr ""
+msgstr "Tiedustelija"
 
 #: ../../tribes/empire/conf:140
 msgid "Donkey Breeder"
-msgstr ""
+msgstr "Aasinkasvattaja"
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
@@ -633,31 +633,31 @@ msgstr "Torni"
 
 #: ../../tribes/empire/conf:161
 msgid "Guardhall"
-msgstr ""
+msgstr "Linnake"
 
 #: ../../tribes/empire/conf:162
 msgid "Guardhouse"
-msgstr ""
+msgstr "Vartiotupa"
 
 #: ../../tribes/empire/conf:163
 msgid "High Tower"
-msgstr ""
+msgstr "Suurtorni"
 
 #: ../../tribes/empire/conf:164
 msgid "Small Tower"
-msgstr ""
+msgstr "Pieni torni"
 
 #: ../../tribes/empire/conf:167
 msgid "Citadel"
-msgstr ""
+msgstr "Kastelli"
 
 #: ../../tribes/empire/conf:168
 msgid "Donjon"
-msgstr ""
+msgstr "Keskustorni"
 
 #: ../../tribes/empire/conf:171
 msgid "Stronghold"
-msgstr ""
+msgstr "Linnake"
 
 #: ../../tribes/empire/conf:174
 msgid "Headquarters"
@@ -802,11 +802,11 @@ msgstr "Viinitarha"
 
 #: ../../tribes/empire/conf:211
 msgid "Scout's House"
-msgstr ""
+msgstr "Tiedustelijan talo"
 
 #: ../../tribes/empire/conf:212
 msgid "Donkeyfarm"
-msgstr ""
+msgstr "Aasifarmi"
 
 #: ../../tribes/empire/conf:215
 msgid "Headquarters medium"
@@ -818,11 +818,11 @@ msgstr "Linnakylä"
 
 #: ../../tribes/empire/donkey/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Auttaa tavaroiden kuljettamisessa teillä."
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
-msgstr ""
+msgstr "Siittää nättejä ja avuliaita aaseja"
 
 #: ../../tribes/empire/farm/conf:15
 msgid "Plant wheat"
@@ -995,6 +995,7 @@ msgstr ""
 #: ../../tribes/empire/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
 msgstr ""
+"Työskentelee syvällä kaivoksissa saadakseen hiiltä, rautaa tai kultaa."
 
 #: ../../tribes/empire/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
@@ -1011,7 +1012,7 @@ msgstr ""
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
-msgstr ""
+msgstr "Jauhaa vehnää jauhoksi."
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1046,6 +1047,8 @@ msgstr ""
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Tiedustelija kuten Teemu Tiedustelija tiedustelee tiedostelemattomia alueita "
+"tiedustelun malliin."
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
@@ -1094,7 +1097,7 @@ msgstr "Hakkaa raakakiveä ja ajoittain marmoria irtolohkareista."
 
 #: ../../tribes/empire/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Tuottaa työkaluja työmiehille."
 
 #: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce bakingtray"
@@ -1146,7 +1149,7 @@ msgstr "Valmista kirves"
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Kouluttaa sotilaita."
 
 #: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
@@ -1279,7 +1282,7 @@ msgstr ""
 
 #: ../../tribes/empire/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
-msgstr ""
+msgstr "Tuottaa aseita sotilaille."
 
 #: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"

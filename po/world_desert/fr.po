@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:28+0000\n"
-"Last-Translator: Jean-Pierre Gemble <Unknown>\n"
+"PO-Revision-Date: 2010-02-13 10:30+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-02-14 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: FRANCE\n"
 "X-Poedit-Language: French\n"
@@ -121,7 +121,7 @@ msgstr "Palmier"
 #: ../../worlds/desert/conf:64
 #: ../../worlds/desert/conf:68
 msgid "Palm medium"
-msgstr ""
+msgstr "Palmier moyen"
 
 #: ../../worlds/desert/conf:53
 #: ../../worlds/desert/conf:57
@@ -129,7 +129,7 @@ msgstr ""
 #: ../../worlds/desert/conf:65
 #: ../../worlds/desert/conf:69
 msgid "Palm small"
-msgstr ""
+msgstr "Petit palmier"
 
 #: ../../worlds/desert/conf:54
 #: ../../worlds/desert/conf:58
@@ -137,55 +137,55 @@ msgstr ""
 #: ../../worlds/desert/conf:66
 #: ../../worlds/desert/conf:70
 msgid "Palm tiny"
-msgstr ""
+msgstr "Palmier minuscule"
 
 #: ../../worlds/desert/conf:71
 msgid "Beech"
-msgstr ""
+msgstr "Hêtre"
 
 #: ../../worlds/desert/conf:72
 msgid "Beech medium"
-msgstr ""
+msgstr "Hêtre moyen"
 
 #: ../../worlds/desert/conf:73
 msgid "Beech small"
-msgstr ""
+msgstr "Petit hêtre"
 
 #: ../../worlds/desert/conf:74
 msgid "Beech tiny"
-msgstr ""
+msgstr "Hêtre minuscule"
 
 #: ../../worlds/desert/conf:75
 msgid "Larch"
-msgstr ""
+msgstr "Mélèze"
 
 #: ../../worlds/desert/conf:76
 msgid "Larch medium"
-msgstr ""
+msgstr "Mélèze moyen"
 
 #: ../../worlds/desert/conf:77
 msgid "Larch small"
-msgstr ""
+msgstr "Petit mélèze"
 
 #: ../../worlds/desert/conf:78
 msgid "Larch tiny"
-msgstr ""
+msgstr "Mélèze minuscule"
 
 #: ../../worlds/desert/conf:79
 msgid "Rowan"
-msgstr ""
+msgstr "Sorbier"
 
 #: ../../worlds/desert/conf:80
 msgid "Rowan medium"
-msgstr ""
+msgstr "Sorbier moyen"
 
 #: ../../worlds/desert/conf:81
 msgid "Rowan small"
-msgstr ""
+msgstr "Petit sorbier"
 
 #: ../../worlds/desert/conf:82
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Sorbier minuscule"
 
 #: ../../worlds/desert/conf:85
 msgid "Bunny"

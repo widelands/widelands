@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:23+0000\n"
-"Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
+"PO-Revision-Date: 2010-02-13 18:22+0000\n"
+"Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-14 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -86,7 +86,7 @@ msgstr "Työskentele (pääohjelna)"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Leipoo leipää työntekijöille."
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
@@ -159,7 +159,7 @@ msgstr "Valmista ateria"
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Tuottaa aseita sotilaille ja työkaluja työntekijöille."
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
@@ -210,13 +210,14 @@ msgstr "Kantaa tavaroita teilläsi (ja joskus tiellesi)."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
-msgstr ""
+msgstr "Siittää vahvan härän joka auttaa tavaroiden kuljetuksessa."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
 #: ../../tribes/barbarians/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
 msgstr ""
+"Työskentelee syvällä kaivoksissa saadakseen hiiltä, rautaa tai kultaa."
 
 #: ../../tribes/barbarians/cloth/conf:1
 msgid "Cloth is needed for barbarian ships. It is produced out of flax."
@@ -521,7 +522,7 @@ msgstr "Kantaja"
 
 #: ../../tribes/barbarians/conf:113
 msgid "Ox"
-msgstr ""
+msgstr "Härkä"
 
 #: ../../tribes/barbarians/conf:116
 msgid "Soldier"
@@ -630,11 +631,11 @@ msgstr "Kutoja"
 
 #: ../../tribes/barbarians/conf:144
 msgid "Scout"
-msgstr ""
+msgstr "Tiedustelija"
 
 #: ../../tribes/barbarians/conf:145
 msgid "Cattle Breeder"
-msgstr ""
+msgstr "Karjasiittäjä"
 
 #: ../../tribes/barbarians/conf:148
 msgid "Construction Site"
@@ -678,36 +679,36 @@ msgstr "Linnake"
 #: ../../tribes/barbarians/conf:163
 #: ../../tribes/barbarians/conf:172
 msgid "Castle"
-msgstr ""
+msgstr "Linna"
 
 #: ../../tribes/barbarians/conf:164
 msgid "Guardhall"
-msgstr ""
+msgstr "Linnake"
 
 #: ../../tribes/barbarians/conf:165
 msgid "Guardhouse"
-msgstr ""
+msgstr "Vartiotupa"
 
 #: ../../tribes/barbarians/conf:166
 msgid "High Tower"
-msgstr ""
+msgstr "Suurtorni"
 
 #: ../../tribes/barbarians/conf:167
 msgid "Small Tower"
-msgstr ""
+msgstr "Pieni torni"
 
 #: ../../tribes/barbarians/conf:168
 #: ../../tribes/barbarians/conf:175
 msgid "Tower"
-msgstr ""
+msgstr "Torni"
 
 #: ../../tribes/barbarians/conf:170
 msgid "Barracks"
-msgstr ""
+msgstr "Parakki"
 
 #: ../../tribes/barbarians/conf:174
 msgid "Outpost"
-msgstr ""
+msgstr "Etuvartioasema"
 
 #: ../../tribes/barbarians/conf:178
 #: ../../tribes/barbarians/conf:179
@@ -857,11 +858,11 @@ msgstr "Kaivo"
 
 #: ../../tribes/barbarians/conf:217
 msgid "Scout's Hut"
-msgstr ""
+msgstr "Tiedustelijan maja"
 
 #: ../../tribes/barbarians/conf:218
 msgid "Cattle Farm"
-msgstr ""
+msgstr "Karjatila"
 
 #: ../../tribes/barbarians/conf:221
 msgid "Headquarters medium"
@@ -977,7 +978,7 @@ msgstr "Soturin perussuoja."
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
-msgstr ""
+msgstr "Sulattaa kypäriä sotilaille"
 
 #: ../../tribes/barbarians/helmsmithy/conf:25
 msgid "Produce helm"
@@ -1085,7 +1086,7 @@ msgstr "Valmista metsästyskeihäs"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Auttaa tavaroiden kuljettamisessa teillä."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -1119,6 +1120,8 @@ msgstr ""
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Tiedustelija kuten Teemu Tiedustelija tiedustelee tiedostelemattomia alueita "
+"tiedustelun malliin."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -1187,7 +1190,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Kouluttaa sotilaita."
 
 #: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Upgrade soldier attack 0"

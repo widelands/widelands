@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 21:20+0000\n"
-"Last-Translator: Jean-Pierre Gemble <Unknown>\n"
+"PO-Revision-Date: 2010-02-13 10:27+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 05:00+0000\n"
+"X-Launchpad-Export-Date: 2010-02-14 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../worlds/winterland/conf:2
@@ -102,131 +102,131 @@ msgstr "Trace"
 
 #: ../../worlds/winterland/conf:45
 msgid "Aspen"
-msgstr ""
+msgstr "Tremble"
 
 #: ../../worlds/winterland/conf:46
 msgid "Aspen medium"
-msgstr ""
+msgstr "Tremble moyen"
 
 #: ../../worlds/winterland/conf:47
 msgid "Aspen small"
-msgstr ""
+msgstr "Petit tremble"
 
 #: ../../worlds/winterland/conf:48
 msgid "Aspen tiny"
-msgstr ""
+msgstr "Tremble minuscule"
 
 #: ../../worlds/winterland/conf:49
 msgid "Oak"
-msgstr ""
+msgstr "Chêne"
 
 #: ../../worlds/winterland/conf:50
 msgid "Oak medium"
-msgstr ""
+msgstr "Chêne moyen"
 
 #: ../../worlds/winterland/conf:51
 msgid "Oak small"
-msgstr ""
+msgstr "Petit chêne"
 
 #: ../../worlds/winterland/conf:52
 msgid "Oak tiny"
-msgstr ""
+msgstr "Chêne minuscule"
 
 #: ../../worlds/winterland/conf:53
 msgid "Spruce"
-msgstr ""
+msgstr "Sapin"
 
 #: ../../worlds/winterland/conf:54
 msgid "Spruce medium"
-msgstr ""
+msgstr "Sapin moyen"
 
 #: ../../worlds/winterland/conf:55
 msgid "Spruce small"
-msgstr ""
+msgstr "Petit sapin"
 
 #: ../../worlds/winterland/conf:56
 msgid "Spruce tiny"
-msgstr ""
+msgstr "Sapin minuscule"
 
 #: ../../worlds/winterland/conf:57
 msgid "Maple"
-msgstr ""
+msgstr "Érable"
 
 #: ../../worlds/winterland/conf:58
 msgid "Maple medium"
-msgstr ""
+msgstr "Érable moyen"
 
 #: ../../worlds/winterland/conf:59
 msgid "Maple small"
-msgstr ""
+msgstr "Petit érable"
 
 #: ../../worlds/winterland/conf:60
 msgid "Maple tiny"
-msgstr ""
+msgstr "Érable minuscule"
 
 #: ../../worlds/winterland/conf:61
 msgid "Birch"
-msgstr ""
+msgstr "Bouleau"
 
 #: ../../worlds/winterland/conf:62
 msgid "Birch medium"
-msgstr ""
+msgstr "Bouleau moyen"
 
 #: ../../worlds/winterland/conf:63
 msgid "Birch small"
-msgstr ""
+msgstr "Petit bouleau"
 
 #: ../../worlds/winterland/conf:64
 msgid "Birch tiny"
-msgstr ""
+msgstr "Bouleau minuscule"
 
 #: ../../worlds/winterland/conf:65
 msgid "Beech"
-msgstr ""
+msgstr "Hêtre"
 
 #: ../../worlds/winterland/conf:66
 msgid "Beech medium"
-msgstr ""
+msgstr "Hêtre moyen"
 
 #: ../../worlds/winterland/conf:67
 msgid "Beech small"
-msgstr ""
+msgstr "Petit hêtre"
 
 #: ../../worlds/winterland/conf:68
 msgid "Beech tiny"
-msgstr ""
+msgstr "Hêtre minuscule"
 
 #: ../../worlds/winterland/conf:69
 msgid "Larch"
-msgstr ""
+msgstr "Mélèze"
 
 #: ../../worlds/winterland/conf:70
 msgid "Larch medium"
-msgstr ""
+msgstr "Mélèze moyen"
 
 #: ../../worlds/winterland/conf:71
 msgid "Larch small"
-msgstr ""
+msgstr "Petit mélèze"
 
 #: ../../worlds/winterland/conf:72
 msgid "Larch tiny"
-msgstr ""
+msgstr "Mélèze minuscule"
 
 #: ../../worlds/winterland/conf:73
 msgid "Rowan"
-msgstr ""
+msgstr "Sorbier"
 
 #: ../../worlds/winterland/conf:74
 msgid "Rowan medium"
-msgstr ""
+msgstr "Sorbier moyen"
 
 #: ../../worlds/winterland/conf:75
 msgid "Rowan small"
-msgstr ""
+msgstr "Petit sorbier"
 
 #: ../../worlds/winterland/conf:76
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Sorbier minuscule"
 
 #: ../../worlds/winterland/conf:79
 msgid "Badger"

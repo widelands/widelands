@@ -7,19 +7,19 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:41+0000\n"
-"Last-Translator: Jean-Pierre Gemble <Unknown>\n"
+"PO-Revision-Date: 2010-02-13 11:25+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-02-14 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Language: French\n"
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "Tutorial2 - A Place to call Home"
-msgstr ""
+msgstr "Didacticiel 2 - Un nouveau foyer ?"
 
 #: ../../campaigns/t02.wmf/elemental:9
 msgid ""
@@ -478,7 +478,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/event:447
 msgid "Khantrukh seems relieved..."
-msgstr ""
+msgstr "Khantrukh semble soulagé ..."
 
 #: ../../campaigns/t02.wmf/event:449
 msgid ""
@@ -562,7 +562,7 @@ msgstr "Développez-vous vers le nord est et construisez une carrière"
 
 #: ../../campaigns/t02.wmf/objective:13
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "Construisez des mines dans la montagne"
 
 #: ../../campaigns/t02.wmf/objective:21
 msgid "Provide your miners with food"
@@ -578,15 +578,15 @@ msgstr "Raffinez vous ressources minières"
 
 #: ../../campaigns/t02.wmf/objective:45
 msgid "Enhance Buildings"
-msgstr ""
+msgstr "Amélioration de bâtiments"
 
 #: ../../campaigns/t02.wmf/objective:53
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Construisez un durcisseur de bois"
 
 #: ../../campaigns/t02.wmf/objective:61
 msgid "Build a lime kiln and coal economy"
-msgstr ""
+msgstr "Construisez un four à chaux et une économie du charbon"
 
 #: ../../campaigns/t02.wmf/objective:69
 msgid "Build a fernery"

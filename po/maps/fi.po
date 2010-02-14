@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 23:22+0000\n"
-"Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
+"PO-Revision-Date: 2010-02-13 18:06+0000\n"
+"Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-02-14 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -85,11 +85,11 @@ msgstr ""
 
 #: ../../campaigns/cconfig:36
 msgid "Atlanteans - the new rise"
-msgstr ""
+msgstr "Atlanteans - uusi nousu"
 
 #: ../../campaigns/cconfig:39
 msgid "Some descriptive texts..."
-msgstr ""
+msgstr "Joku kuvaava teksti..."
 
 #: ../../campaigns/cconfig:57
 msgid "Tutorial1 - Eyes in the Dark"
@@ -113,15 +113,15 @@ msgstr "Keisarikunta, opastus 2 - Rajalinnoitus maanpaolle"
 
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
-msgstr ""
+msgstr "01 - Arkkivihollisesta alkuun"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
-msgstr ""
+msgstr "Atolli"
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
-msgstr ""
+msgstr "Kuka tulee olemaan ison atollin todellinen kuningas"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
@@ -211,6 +211,8 @@ msgid ""
 "These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
 "forests and mountains. It is up to you, to find a way through these lands."
 msgstr ""
+"Nämä ovat kauniita suomalaisia maita, jotka ovat järviä, jokia, muinaisia "
+"metsiä ja tuntureita. On sinusta kiinni löytää reitti näiden maiden lävitse."
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
@@ -252,6 +254,10 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
 "Each mountain contains only one resource."
 msgstr ""
+"Jokainen heimo on ympyröity neljällä isolla vuorella. Kuka valtaa ne "
+"ensimmäisenä ja lunastaa resurssit oman heimonsa käyttöön? Vihje I: Vettä "
+"löytyy joen vierestä. Vihje II: Lumimiehet merkkaavat muita vesilähteitä. "
+"Vihje III: Jokainen vuori sisältää vain yhtä resurssia."
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -546,6 +552,8 @@ msgid ""
 "In this mountainous region two princes have settled. Now they are expanding "
 "their territories unaware of the fact that they are not alone!"
 msgstr ""
+"Kaksi prinssiä ovat asettuneet tälle vuoristoiselle alueelle. Nyt he "
+"laajentavat reviirejään toisistaan tietämättöminä!"
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"

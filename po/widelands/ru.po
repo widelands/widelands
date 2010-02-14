@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 19:40+0100\n"
-"PO-Revision-Date: 2010-02-11 09:54+0000\n"
-"Last-Translator: Alexander Bikmeyev <Unknown>\n"
+"PO-Revision-Date: 2010-02-13 20:26+0000\n"
+"Last-Translator: Vixis <Unknown>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:49+0000\n"
+"X-Launchpad-Export-Date: 2010-02-14 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -28,7 +28,7 @@ msgstr ""
 
 #: ../../src/s2map.cc:220
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Карта от Bluebyte Settlers II. Комментариев нет!"
+msgstr ""
 
 #: ../../src/wlapplication.cc:346
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
@@ -43,7 +43,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1084
 msgid "--double is disabled. This is not a debug build!"
-msgstr ""
+msgstr "--double отключен. Это не отладочная сборка!"
 
 #: ../../src/wlapplication.cc:1201
 msgid "This is Widelands-"
@@ -54,12 +54,16 @@ msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
+"Использование: widelands <опция0>=<значение0> ... <опцияN>=<значениеN>\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1204
 msgid ""
 "Options:\n"
 "\n"
 msgstr ""
+"Опции:\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1208
 msgid ""
@@ -226,22 +230,24 @@ msgstr "Игрок"
 #: ../../src/wlapplication.cc:1893 ../../src/network/netclient.cc:163
 #: ../../src/network/nethost.cc:433
 msgid "Preparing game"
-msgstr ""
+msgstr "Подготовка игры"
 
 #: ../../src/wlapplication.cc:2000
 msgid "End of replay"
-msgstr ""
+msgstr "Конец записи"
 
 #: ../../src/wlapplication.cc:2002
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
 msgstr ""
+"Конец записи достигнут и игра остановлена. Вы можете снова активировать игру "
+"и продолжить просмотр, если хотите."
 
 #: ../../src/wlapplication.cc:2082 ../../src/logic/game.cc:344
 #: ../../src/logic/game.cc:383
 msgid "Loading..."
-msgstr ""
+msgstr "Загрузка..."
 
 #: ../../src/writeHTML.cc:40
 msgid "Requesters"
@@ -265,12 +271,12 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:263 ../../src/writeHTML.cc:269
 msgid "Building types"
-msgstr ""
+msgstr "Типы построек"
 
 #: ../../src/writeHTML.cc:274 ../../src/writeHTML.cc:509
 #: ../../src/writeHTML.cc:1434
 msgid "Icon"
-msgstr ""
+msgstr "Значок"
 
 #: ../../src/writeHTML.cc:276 ../../src/writeHTML.cc:511
 #: ../../src/writeHTML.cc:1436 ../../src/ui_fsmenu/netsetup_ggz.cc:143
@@ -291,11 +297,11 @@ msgstr "Размер"
 
 #: ../../src/writeHTML.cc:280 ../../src/writeHTML.cc:513
 msgid "Buildable"
-msgstr ""
+msgstr "Возможна постройка"
 
 #: ../../src/writeHTML.cc:282
 msgid "Enhanced"
-msgstr ""
+msgstr "Усовершенствована"
 
 #: ../../src/writeHTML.cc:285 ../../src/wui/building_ui.cc:655
 msgid "Stop"
@@ -303,46 +309,46 @@ msgstr "Стоп"
 
 #: ../../src/writeHTML.cc:287
 msgid "Conquer<br/>range"
-msgstr ""
+msgstr "Дальность<br/>захвата"
 
 #: ../../src/writeHTML.cc:289 ../../src/writeHTML.cc:515
 msgid "Vision<br/>range"
-msgstr ""
+msgstr "Дальность<br/>виденья"
 
 #: ../../src/writeHTML.cc:316 ../../src/writeHTML.cc:372
 #: ../../src/logic/building.cc:513
 msgid "Mine"
-msgstr ""
+msgstr "Шахта"
 
 #: ../../src/writeHTML.cc:320 ../../src/writeHTML.cc:388
 #: ../../src/logic/building.cc:514
 msgid "Small"
-msgstr ""
+msgstr "Малая"
 
 #: ../../src/writeHTML.cc:324 ../../src/writeHTML.cc:382
 #: ../../src/logic/building.cc:515
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:247
 msgid "Medium"
-msgstr ""
+msgstr "Средняя"
 
 #: ../../src/writeHTML.cc:329 ../../src/writeHTML.cc:377
 #: ../../src/logic/building.cc:515
 msgid "Big"
-msgstr ""
+msgstr "Большая"
 
 #: ../../src/writeHTML.cc:333 ../../src/writeHTML.cc:336
 #: ../../src/ui_basic/messagebox.cc:96
 #: ../../src/editor/tools/editor_info_tool.cc:73
 #: ../../src/editor/tools/editor_info_tool.cc:74
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: ../../src/writeHTML.cc:333 ../../src/writeHTML.cc:336
 #: ../../src/ui_basic/messagebox.cc:103
 #: ../../src/editor/tools/editor_info_tool.cc:73
 #: ../../src/editor/tools/editor_info_tool.cc:74
 msgid "No"
-msgstr ""
+msgstr "Нет"
 
 #: ../../src/writeHTML.cc:351
 msgid "building_types.xhtml"
@@ -350,49 +356,49 @@ msgstr "building_types_ru_RU.xhtml"
 
 #: ../../src/writeHTML.cc:374
 msgid "Is mine."
-msgstr ""
+msgstr "Шахта"
 
 #: ../../src/writeHTML.cc:379
 msgid "Is big."
-msgstr ""
+msgstr "Большая."
 
 #: ../../src/writeHTML.cc:384
 msgid "Is medium."
-msgstr ""
+msgstr "Средняя."
 
 #: ../../src/writeHTML.cc:390
 msgid "Is small."
-msgstr ""
+msgstr "Малая."
 
 #: ../../src/writeHTML.cc:397
 msgid "Is not buildable."
-msgstr ""
+msgstr "Нельзя построить."
 
 #: ../../src/writeHTML.cc:404
 msgid "Is enhanced."
-msgstr ""
+msgstr "Усовершенствована"
 
 #: ../../src/writeHTML.cc:411
 #, c-format
 msgid "Conquer range is %u."
-msgstr ""
+msgstr "Дальность захвата: %u."
 
 #: ../../src/writeHTML.cc:419 ../../src/writeHTML.cc:648
 #, c-format
 msgid "Vision range is %u."
-msgstr ""
+msgstr "Дальность виденья: %u."
 
 #: ../../src/writeHTML.cc:427 ../../src/writeHTML.cc:655
 msgid "Build cost"
-msgstr ""
+msgstr "Стоимость постройки"
 
 #: ../../src/writeHTML.cc:437
 msgid "'s constructionsite"
-msgstr ""
+msgstr "стройка"
 
 #: ../../src/writeHTML.cc:448
 msgid "Enhancements"
-msgstr ""
+msgstr "Усовершенствования"
 
 #: ../../src/writeHTML.cc:458
 msgid "'s enhancement"
@@ -400,19 +406,19 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:498 ../../src/writeHTML.cc:504
 msgid "Worker types"
-msgstr ""
+msgstr "Тип рабочих"
 
 #: ../../src/writeHTML.cc:517
 msgid "Minimum<br/>needed<br/>experience"
-msgstr ""
+msgstr "Минимально<br/>необходимый<br/>опыт"
 
 #: ../../src/writeHTML.cc:519
 msgid "Maximum<br/>needed<br/>experience"
-msgstr ""
+msgstr "Максимально<br/>необходимый<br/>опыт"
 
 #: ../../src/writeHTML.cc:521
 msgid "Becomes"
-msgstr ""
+msgstr "Становится"
 
 #: ../../src/writeHTML.cc:576
 msgid "worker_types.xhtml"
@@ -855,12 +861,12 @@ msgstr ""
 #: ../../src/economy/economy_data_packet.cc:95
 #, c-format
 msgid "target quantities: %s"
-msgstr ""
+msgstr "плановое количество: %s"
 
 #: ../../src/economy/economy_data_packet.cc:99
 #, c-format
 msgid "unknown version %u"
-msgstr ""
+msgstr "неивестная весия %u"
 
 #: ../../src/economy/economy_data_packet.cc:102
 #, c-format
@@ -870,7 +876,7 @@ msgstr ""
 #: ../../src/economy/wares_queue.cc:256
 #, c-format
 msgid "waresqueue: %s"
-msgstr ""
+msgstr "складировано: %s"
 
 #: ../../src/editor/editorinteractive.cc:64
 msgid "Menu"
@@ -915,7 +921,7 @@ msgstr "Задания"
 
 #: ../../src/editor/editorinteractive.cc:164
 msgid "Unsupported format"
-msgstr ""
+msgstr "Неподдерживаемый формат"
 
 #: ../../src/editor/editorinteractive.cc:166
 #, c-format
@@ -923,23 +929,24 @@ msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
+"Не удается загрузить файл \"%s\". Возможно, формат файла несовместим."
 
 #: ../../src/editor/editorinteractive.cc:184
 #: ../../src/editor/editorinteractive.cc:603
 #: ../../src/logic/editor_game_base.cc:312
 #, c-format
 msgid "Loading tribe: %s"
-msgstr ""
+msgstr "Загрузка племени: %s"
 
 #: ../../src/editor/editorinteractive.cc:188
 #: ../../src/logic/editor_game_base.cc:308
 msgid "Loading world data"
-msgstr ""
+msgstr "Загрузка данных мира"
 
 #: ../../src/editor/editorinteractive.cc:191
 #: ../../src/editor/editorinteractive.cc:607
 msgid "Loading graphics..."
-msgstr ""
+msgstr "Загрузка графики..."
 
 #: ../../src/editor/editorinteractive.cc:232
 msgid "Map unsaved"
@@ -1011,39 +1018,39 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:130
 #, c-format
 msgid "expected %s but found \"%s\""
-msgstr ""
+msgstr "ожидалось %s, но найдено \"%s\""
 
 #: ../../src/events/event_building.cc:73 ../../src/events/event_building.cc:82
 msgid "distance (1 .. 255)"
-msgstr ""
+msgstr "дистанция (1 .. 255)"
 
 #: ../../src/events/event_building.cc:86
 #, c-format
 msgid "max distance (%u) is smaller than min distance (%u)"
-msgstr ""
+msgstr "Максимальная дистанция (%u) меньше, чем минимальная дистанция (%u)"
 
 #: ../../src/events/event_building.cc:169
 #: ../../src/events/event_building.cc:304 ../../src/logic/immovable.cc:254
 #: ../../src/logic/immovable.cc:268
 msgid "duplicated"
-msgstr ""
+msgstr "дублирован"
 
 #: ../../src/events/event_building.cc:174
 #: ../../src/events/event_building.cc:311
 #, c-format
 msgid "%s=\"%s\": invalid"
-msgstr ""
+msgstr "%s=\"%s\": неверно"
 
 #: ../../src/events/event_building.cc:204
 #: ../../src/events/event_building.cc:230
 #, c-format
 msgid "can not have %u %s (only %u)"
-msgstr ""
+msgstr "не может быть %u %s (только %u)"
 
 #: ../../src/events/event_building.cc:316
 #, c-format
 msgid "%u soldiers but only %u allowed"
-msgstr ""
+msgstr "%u солдат, но только %u разрешено"
 
 #: ../../src/events/event_building.cc:320
 #, c-format
@@ -1074,7 +1081,7 @@ msgstr ""
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:61
 #, c-format
 msgid "player %u does not exist"
-msgstr ""
+msgstr "игрок %u не существует"
 
 #: ../../src/events/event_expire_message.cc:55
 #, c-format
@@ -1103,47 +1110,47 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:61
 msgid "Allow worker types"
-msgstr ""
+msgstr "Разрешенные виды работников"
 
 #: ../../src/events/event_factory.cc:62
 msgid "Allows the creation of workers of certain types for a player."
-msgstr ""
+msgstr "Разрешает создание определенных типов работников для игрока."
 
 #: ../../src/events/event_factory.cc:66
 msgid "Forbid worker types"
-msgstr ""
+msgstr "Запрещенные виды работников"
 
 #: ../../src/events/event_factory.cc:67
 msgid "Forbids the creation of workers of certain types for a player."
-msgstr ""
+msgstr "Запрещает создание определенных типов работников для игрока."
 
 #: ../../src/events/event_factory.cc:71
 msgid "Allow building types"
-msgstr ""
+msgstr "Разрешенные виды построек"
 
 #: ../../src/events/event_factory.cc:72
 msgid "Allows the construction of buildings of certain types for a player."
-msgstr ""
+msgstr "Разрешает создание определенных типов построек для игрока."
 
 #: ../../src/events/event_factory.cc:76
 msgid "Forbid building types"
-msgstr ""
+msgstr "Запрещенные виды построек"
 
 #: ../../src/events/event_factory.cc:77
 msgid "Forbids the construction of buildings of certain types for a player."
-msgstr ""
+msgstr "Запрещает создание определенных типов построек для игрока."
 
 #: ../../src/events/event_factory.cc:81
 msgid "Create building"
-msgstr ""
+msgstr "Создать постройку"
 
 #: ../../src/events/event_factory.cc:82
 msgid "Create a building and optionally place workers in it"
-msgstr ""
+msgstr "Создать постройку с работником в ней"
 
 #: ../../src/events/event_factory.cc:86
 msgid "Conquer area"
-msgstr ""
+msgstr "Захватить местность"
 
 #: ../../src/events/event_factory.cc:88
 msgid ""
@@ -1152,11 +1159,11 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:93
 msgid "Create flag"
-msgstr ""
+msgstr "Создать флаг"
 
 #: ../../src/events/event_factory.cc:94
 msgid "Create a flag."
-msgstr ""
+msgstr "Создать флаг"
 
 #: ../../src/events/event_factory.cc:98
 msgid "Create immovable"
@@ -1168,65 +1175,67 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:103
 msgid "Lua event"
-msgstr ""
+msgstr "Lua событие"
 
 #: ../../src/events/event_factory.cc:104
 msgid "Run a lua command"
-msgstr ""
+msgstr "Запустить команду Lua"
 
 #: ../../src/events/event_factory.cc:108
 msgid "Show message box"
-msgstr ""
+msgstr "Показать окно сообщения"
 
 #: ../../src/events/event_factory.cc:110
 msgid ""
 "Show a message box. It can be modal or and have a picture. An events can be "
 "assigned to each button to give the user chose the course of the game."
 msgstr ""
+"Показать окно сообщения. Оно может быть с изображением. К каждой кнопке "
+"можно присвоить событие."
 
 #: ../../src/events/event_factory.cc:116
 msgid "Move view"
-msgstr ""
+msgstr "Переместить поле зрения"
 
 #: ../../src/events/event_factory.cc:117
 msgid "Center the player's view on a certain location."
-msgstr ""
+msgstr "Переместить поле зрения игрока на определенную местность"
 
 #: ../../src/events/event_factory.cc:121
 msgid "Reveal campaign"
-msgstr ""
+msgstr "Раскрыть кампанию"
 
 #: ../../src/events/event_factory.cc:122
 msgid "Reveal a campaign."
-msgstr ""
+msgstr "Раскрыть кампанию"
 
 #: ../../src/events/event_factory.cc:126
 msgid "Reveal objective"
-msgstr ""
+msgstr "Раскрыть задание"
 
 #: ../../src/events/event_factory.cc:127
 msgid "Reveal an objective."
-msgstr ""
+msgstr "Раскрыть задание"
 
 #: ../../src/events/event_factory.cc:131
 msgid "Reveal scenario"
-msgstr ""
+msgstr "Раскрыть сценарий"
 
 #: ../../src/events/event_factory.cc:132
 msgid "Reveal a scenario."
-msgstr ""
+msgstr "Раскрыть сценарий"
 
 #: ../../src/events/event_factory.cc:136
 msgid "Create road"
-msgstr ""
+msgstr "Создать дорогу"
 
 #: ../../src/events/event_factory.cc:137
 msgid "Create a road and optionally place a carrier on it"
-msgstr ""
+msgstr "Создать дорогу с носильщиком"
 
 #: ../../src/events/event_factory.cc:141
 msgid "Set timer"
-msgstr ""
+msgstr "Установить таймер"
 
 #: ../../src/events/event_factory.cc:142
 msgid "Set a timer to trigger after a certain duration."
@@ -1234,7 +1243,7 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:146
 msgid "Unhide area"
-msgstr ""
+msgstr "Раскрыть местность"
 
 #: ../../src/events/event_factory.cc:148
 msgid ""
@@ -1244,81 +1253,87 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:153
 msgid "Set player's frontier style"
-msgstr ""
+msgstr "Выбрать стиль границы игрока"
 
 #: ../../src/events/event_factory.cc:155
 msgid ""
 "Sets the style of the player's frontier markers to one of the styles that "
 "are defined in the player's tribe."
-msgstr ""
+msgstr "Выбрать стиль границы игрока на определенный стиль племени игрока."
 
 #: ../../src/events/event_factory.cc:160
 msgid "Set player's flag style"
-msgstr ""
+msgstr "Выбрать флаг для игрока"
 
 #: ../../src/events/event_factory.cc:162
 msgid ""
 "Sets the style of the player's flags to one of the styles that are defined "
 "in the player's tribe."
-msgstr ""
+msgstr "Выбрать флаг для игрока на определенный в племени игрока."
 
 #: ../../src/events/event_factory.cc:167
 msgid "Allows retreat value customization"
-msgstr ""
+msgstr "Разрешить настройку значения отступления"
 
 #: ../../src/events/event_factory.cc:169
 msgid ""
 "Allows that the player can change the value of 'retreat when hitpoints below "
 "x%'."
 msgstr ""
+"Разрешить игроку настройку значения \"отступить, когда жизни меньше x%\"."
 
 #: ../../src/events/event_factory.cc:174
 msgid "Forbids retreat value customization"
-msgstr ""
+msgstr "Запретить настройку значения отступления"
 
 #: ../../src/events/event_factory.cc:176
 msgid ""
 "Forbids that the player can change the value of 'retreat when hitpoints "
 "below x%'."
 msgstr ""
+"Запретить игроку настройку значения \"отступить, когда жизни меньше x%\"."
 
 #: ../../src/events/event_factory.cc:181
 msgid "Set player retreat percentage"
-msgstr ""
+msgstr "Установить процент для отступления"
 
 #: ../../src/events/event_factory.cc:183
 msgid ""
 "Sets the player value of 'retreat when hit points below x%', this value "
 "could be overridden by players if allowed."
 msgstr ""
+"Установить значение для \"отступить, когда жизни меньше x%\", может быть "
+"изменено игроком, если разрешено."
 
 #: ../../src/events/event_factory.cc:188
 msgid "Set see all mode for a player"
-msgstr ""
+msgstr "Установить режим видеть всё для игрока"
 
 #: ../../src/events/event_factory.cc:189
 msgid "Sets the see all mode for a specific player to on/off."
-msgstr ""
+msgstr "Задает режим видеть всё для определенного игрока вкл/выкл."
 
 #: ../../src/events/event_factory.cc:193
 msgid "Creates a message for a player"
-msgstr ""
+msgstr "Создает сообщение для игрока"
 
 #: ../../src/events/event_factory.cc:195
 msgid ""
 "Creates a message for a player. This message can last forever, during a "
 "specified duration, or until a special event is run."
 msgstr ""
+"Создает сообщение для игрока. Сообщение может существовать определенное "
+"время, вечно или до определенного события."
 
 #: ../../src/events/event_factory.cc:200
 msgid "Expires a previously created message"
-msgstr ""
+msgstr "Прекратить существование ранее созданого сообщения"
 
 #: ../../src/events/event_factory.cc:202
 msgid ""
 "Expires a message that was previously created for a player. The message will "
 "cease to exist."
-msgstr ""
+msgstr "Прекратить существование ранее созданого сообщения для игрока."
 
 #: ../../src/events/event_flag.cc:42
 #, c-format
@@ -1375,7 +1390,7 @@ msgstr "Далее"
 
 #: ../../src/events/event_message_box.cc:138
 msgid "there are no buttons, at least one is required"
-msgstr ""
+msgstr "кнопки отсутствуют, необходима хотя бы одна"
 
 #: ../../src/events/event_message_box.cc:149
 #, c-format
@@ -1385,7 +1400,7 @@ msgstr ""
 #: ../../src/events/event_message_box.cc:154
 #, c-format
 msgid "%s refers to \"%s\", which is not a timer"
-msgstr ""
+msgstr "%s отсылает к \"%s\", не являющийся таймером"
 
 #: ../../src/events/event_message_box.cc:169
 #, c-format
@@ -1396,7 +1411,7 @@ msgstr ""
 #: ../../src/events/event_player_area.cc:55
 #, c-format
 msgid "illegal coordinates (%i, %i)"
-msgstr ""
+msgstr "недопустимые координаты (%i, %i)"
 
 #: ../../src/events/event_move_view.cc:56
 #, c-format
@@ -1419,11 +1434,11 @@ msgstr ""
 #: ../../src/logic/tribe.cc:212 ../../src/logic/tribe.cc:233
 #, c-format
 msgid "\"%s\" is duplicated"
-msgstr ""
+msgstr "\"%s\" дублирован"
 
 #: ../../src/events/event_player_building_types.cc:56
 msgid "no building types"
-msgstr ""
+msgstr "нет типов построек"
 
 #: ../../src/events/event_player_building_types.cc:61
 #, c-format
@@ -1438,11 +1453,11 @@ msgstr ""
 #: ../../src/events/event_player_worker_types.cc:52
 #, c-format
 msgid "\"%s\" is not buildable"
-msgstr ""
+msgstr "\"%s\" нельзя построить"
 
 #: ../../src/events/event_player_worker_types.cc:58
 msgid "no worker types"
-msgstr ""
+msgstr "нет типов работников"
 
 #: ../../src/events/event_player_worker_types.cc:63
 #, c-format
@@ -1451,7 +1466,7 @@ msgstr ""
 
 #: ../../src/events/event_retreat_change.cc:43
 msgid "Change"
-msgstr ""
+msgstr "Изменить"
 
 #: ../../src/events/event_road.cc:40
 msgid "there are no steps"
@@ -1503,7 +1518,7 @@ msgstr ""
 #: ../../src/events/event_set_timer.cc:54
 #, c-format
 msgid "trigger \"%s\": not a time trigger"
-msgstr ""
+msgstr "триггер \"%s\": не является триггером времени"
 
 #: ../../src/events/event_set_timer.cc:60
 #, c-format
@@ -1513,18 +1528,18 @@ msgstr ""
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:98
 #, c-format
 msgid "command queue: %s"
-msgstr ""
+msgstr "Команда очереди: %s"
 
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #: ../../src/logic/cmd_check_eventchain.cc:98
 #, c-format
 msgid "check eventchain: %s"
-msgstr ""
+msgstr "проверить цепь событий: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:49
 #, c-format
 msgid "player %u does not exist in the game"
-msgstr ""
+msgstr "игрок %u не существует в игре"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:79
 #, c-format
@@ -1569,21 +1584,21 @@ msgstr ""
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:78
 #, c-format
 msgid "unknown/unhandled version %i"
-msgstr ""
+msgstr "неизвестная версия %i"
 
 #: ../../src/game_io/game_preload_data_packet.cc:57
 #, c-format
 msgid "preload: %s"
-msgstr ""
+msgstr "презагрузка: %s"
 
 #: ../../src/graphic/animation.cc:197
 msgid "frame number"
-msgstr ""
+msgstr "номер кадра"
 
 #: ../../src/graphic/graphic.cc:818
 #, c-format
 msgid "Loading animations: %d%% complete"
-msgstr ""
+msgstr "Загрузка анимации: %d%% завершена"
 
 #: ../../src/logic/battle.cc:178
 #, c-format
@@ -1598,7 +1613,7 @@ msgstr ""
 #: ../../src/logic/bob.cc:85 ../../src/logic/immovable.cc:199
 #, c-format
 msgid "bad attribute \"%s\""
-msgstr ""
+msgstr "плохой атрибут \"%s\""
 
 #: ../../src/logic/building.cc:509
 #: ../../src/editor/tools/editor_info_tool.cc:59
@@ -1628,45 +1643,45 @@ msgstr ""
 #: ../../src/logic/constructionsite.cc:168
 #, c-format
 msgid "%u%% built"
-msgstr ""
+msgstr "%u%% построено"
 
 #: ../../src/logic/game.cc:224
 msgid "Preloading a map"
-msgstr ""
+msgstr "Предзагрузка карты"
 
 #: ../../src/logic/game.cc:235
 msgid "Loading a world"
-msgstr ""
+msgstr "Загрузка мира"
 
 #: ../../src/logic/game.cc:241
 #, c-format
 msgid "Adding player %u"
-msgstr ""
+msgstr "Добавить игрока %u"
 
 #: ../../src/logic/game.cc:254
 msgid "Loading a map"
-msgstr ""
+msgstr "Загрузка карты"
 
 #: ../../src/logic/game.cc:285 ../../src/logic/game.cc:332
 #: ../../src/logic/game.cc:365
 msgid "Preloading map"
-msgstr ""
+msgstr "Предзагрузка карты"
 
 #: ../../src/logic/game.cc:299
 msgid "Configuring players"
-msgstr ""
+msgstr "Настройка игроков"
 
 #: ../../src/logic/game.cc:316
 msgid "Loading map"
-msgstr ""
+msgstr "Загрузка карты"
 
 #: ../../src/logic/game.cc:443
 msgid "Creating player infrastructure"
-msgstr ""
+msgstr "Создание инфрастуктуры игрока"
 
 #: ../../src/logic/game.cc:454 ../../src/logic/player.cc:121
 msgid "Missing starting position"
-msgstr ""
+msgstr "Отсутствует стартовая позиция"
 
 #: ../../src/logic/game.cc:456 ../../src/logic/player.cc:123
 #, c-format
@@ -1680,11 +1695,11 @@ msgstr ""
 #: ../../src/logic/immovable.cc:133 ../../src/logic/production_program.cc:1396
 #, c-format
 msgid "unknown command type \"%s\""
-msgstr ""
+msgstr "неизвестная команда \"%s\""
 
 #: ../../src/logic/immovable.cc:137
 msgid "no actions"
-msgstr ""
+msgstr "нет действий"
 
 #: ../../src/logic/immovable.cc:213
 msgid "this program has already been declared"
@@ -1698,7 +1713,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:252 ../../src/logic/immovable.cc:266
 #, c-format
 msgid "expected 0 .. 255 but found %u"
-msgstr ""
+msgstr "ожидали 0 .. 255, но получили %u"
 
 #: ../../src/logic/immovable.cc:271
 #, c-format
@@ -1718,7 +1733,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:610
 #, c-format
 msgid "unknown tribe %s"
-msgstr ""
+msgstr "неизвестное племя %s"
 
 #: ../../src/logic/immovable.cc:616
 #, c-format
@@ -1733,11 +1748,11 @@ msgstr ""
 #: ../../src/logic/immovable.cc:661 ../../src/logic/production_program.cc:609
 #: ../../src/logic/production_program.cc:653
 msgid "duration in ms"
-msgstr ""
+msgstr "длительность в мс"
 
 #: ../../src/logic/immovable.cc:699 ../../src/logic/production_program.cc:1341
 msgid "priority"
-msgstr ""
+msgstr "приоритет"
 
 #: ../../src/logic/immovable.cc:733 ../../src/logic/immovable.cc:802
 #: ../../src/logic/immovable.cc:888
@@ -1754,7 +1769,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:754 ../../src/logic/immovable.cc:909
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
-msgstr ""
+msgstr "ожидалась вероятность в пределах [1, 254], но обнаружено \"%s\""
 
 #: ../../src/logic/immovable.cc:767
 msgid "illegal transformation to the same type"
@@ -1762,17 +1777,17 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:855
 msgid "probability in range [1, 254]"
-msgstr ""
+msgstr "вероятность в пределах [1, 254]"
 
 #: ../../src/logic/instances.cc:75
 #, c-format
 msgid "destroy map object: %s"
-msgstr ""
+msgstr "уничтожить объект: %s"
 
 #: ../../src/logic/instances.cc:124
 #, c-format
 msgid "object %u: %s"
-msgstr ""
+msgstr "объект %u: %s"
 
 #: ../../src/logic/instances.cc:133
 #, c-format
@@ -1786,21 +1801,21 @@ msgstr "Игрок 1"
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:62
 #: ../../src/logic/soldier.cc:85
 msgid "\"min-max\""
-msgstr ""
+msgstr "\"min-max\""
 
 #: ../../src/logic/military_data.cc:59
 msgid "positive integer <= 100"
-msgstr ""
+msgstr "позитивное целое <= 100"
 
 #: ../../src/logic/military_data.cc:63
 #, c-format
 msgid "expected positive integer >= %u <= 100 but found \"%s\""
-msgstr ""
+msgstr "ожидалось позитивное целое >= %u <= 100, но получили \"%s\""
 
 #: ../../src/logic/military_data.cc:75
 #, c-format
 msgid "expected positive integer >= %u <= %u but found \"%u\""
-msgstr ""
+msgstr "ожидалось позитивное целое >= %u <= %u, но получили \"%u\""
 
 #: ../../src/logic/militarysite.cc:66 ../../src/logic/warehouse.cc:276
 msgid " conquer"
@@ -1823,16 +1838,16 @@ msgstr[1] ""
 #: ../../src/logic/militarysite.cc:572
 #, c-format
 msgid "%sThe enemy defeated your soldiers at the %s.</p></rt>"
-msgstr ""
+msgstr "%sВраг победил ваших солдат в %s.</p></rt>"
 
 #: ../../src/logic/militarysite.cc:579
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Военая постройка потеряна!"
 
 #: ../../src/logic/militarysite.cc:652
 #, c-format
 msgid "%sYour soldiers defeated the enemy at the %s.</p></rt>"
-msgstr ""
+msgstr "%sВаши солдаты победили врага в %s.</p></rt>"
 
 #: ../../src/logic/militarysite.cc:659
 msgid "Enemy at site defeated!"
@@ -1841,16 +1856,16 @@ msgstr ""
 #: ../../src/logic/militarysite.cc:707
 #, c-format
 msgid "%sYour %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "%sВаш %s обнаружил агрессора .</p>"
 
 #: ../../src/logic/militarysite.cc:708
 #, c-format
 msgid "%sYour %s is under attack.</p>"
-msgstr ""
+msgstr "%sВаш %s атакован.</p>"
 
 #: ../../src/logic/militarysite.cc:716
 msgid "You are under attack"
-msgstr ""
+msgstr "Вы атакованы"
 
 #: ../../src/logic/playercommand.cc:134
 #, c-format
@@ -1865,12 +1880,12 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:182
 #, c-format
 msgid "bulldoze: %s"
-msgstr ""
+msgstr "снести: %s"
 
 #: ../../src/logic/playercommand.cc:234
 #, c-format
 msgid "build: %s"
-msgstr ""
+msgstr "построить: %s"
 
 #: ../../src/logic/playercommand.cc:282
 #, c-format

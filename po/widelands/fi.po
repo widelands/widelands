@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 19:40+0100\n"
-"PO-Revision-Date: 2010-02-10 21:32+0000\n"
-"Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
+"PO-Revision-Date: 2010-02-13 20:26+0000\n"
+"Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-02-14 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -92,6 +92,25 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
+" --<config-entry-name>=arvo korvaa config tiedoston asetuksen\n"
+"\n"
+" --logfile=TIEDOSTO Logi tulostaa tiedostoon TIEDOSTO \n"
+"                      päätteen sijasta\n"
+" --datadir=HAKEMISTO Käytä tiettyä hakemistoa widelands:n \n"
+"                      data-tiedostoille\n"
+"--record=TIEDOSTO Talleta kaikki tapahtumat tiedostoon myöhempää \n"
+"                      toistoa varten\n"
+"--playback=TIEDOSTO Toista annettu tiedosto (katso --record)\n"
+"\n"
+"--coredump=[yes|no] Luo core dump:n segfaults-tilanteissa \n"
+"                      SDL:n sijaan\n"
+"--language=[de_DE|sv_SE|...]\n"
+"                      Käytetty lokalisaatio.\n"
+"--remove_syncstreams=[true|false]\n"
+"                      Poista syncstream käynnistyksessä\n"
+"--remove_replays=[...]\n"
+"                      Poista nauhoitukset näin monelta päivältä.\n"
+"                      Jos 0, nauhoituksia ei tuhota.\n"
 
 #: ../../src/wlapplication.cc:1227
 msgid ""
@@ -243,7 +262,7 @@ msgstr "Varoitus: "
 
 #: ../../src/wlapplication.cc:1445
 msgid "Game data error"
-msgstr ""
+msgstr "Pelitietovirhe"
 
 #: ../../src/wlapplication.cc:1448
 msgid "Unexpected error during the game"
@@ -546,7 +565,7 @@ msgstr ": käytetään luontiin"
 
 #: ../../src/writeHTML.cc:686
 msgid "Spawns in warehouses."
-msgstr ""
+msgstr "Luodaan varastoissa"
 
 #: ../../src/writeHTML.cc:695
 #, c-format
@@ -719,11 +738,11 @@ msgstr "tarvitsee tuotetta"
 
 #: ../../src/writeHTML.cc:986
 msgid "site"
-msgstr ""
+msgstr "paikka"
 
 #: ../../src/writeHTML.cc:988
 msgid "has"
-msgstr ""
+msgstr "omistaa"
 
 #: ../../src/writeHTML.cc:1023
 msgid "workers of this site"
@@ -810,7 +829,7 @@ msgstr "produce (valmista)"
 
 #: ../../src/writeHTML.cc:1268
 msgid "recruit"
-msgstr ""
+msgstr "värvää"
 
 #: ../../src/writeHTML.cc:1311
 msgid "Documentation for program command mine"
@@ -939,38 +958,38 @@ msgstr "ware_types_fi.xhtml"
 #: ../../src/trigger/trigger_time.cc:44 ../../src/trigger/trigger_vision.cc:50
 #, c-format
 msgid "unknown/unhandled version %u"
-msgstr ""
+msgstr "tuntematon/virheellinen versio %u"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
 msgid "call economy balance: %s"
-msgstr ""
+msgstr "kutsu talousbalanssi: %s"
 
 #: ../../src/economy/economy_data_packet.cc:62
 #: ../../src/economy/economy_data_packet.cc:82
 #, c-format
 msgid "duplicated entry for %s"
-msgstr ""
+msgstr "toistettu merkintä %s"
 
 #: ../../src/economy/economy_data_packet.cc:95
 #, c-format
 msgid "target quantities: %s"
-msgstr ""
+msgstr "tavoitemääriä: %s"
 
 #: ../../src/economy/economy_data_packet.cc:99
 #, c-format
 msgid "unknown version %u"
-msgstr ""
+msgstr "tuntematon versio %u"
 
 #: ../../src/economy/economy_data_packet.cc:102
 #, c-format
 msgid "economy: %s"
-msgstr ""
+msgstr "talous: %s"
 
 #: ../../src/economy/wares_queue.cc:256
 #, c-format
 msgid "waresqueue: %s"
-msgstr ""
+msgstr "tavarajono: %s"
 
 #: ../../src/editor/editorinteractive.cc:64
 msgid "Menu"
@@ -1041,7 +1060,7 @@ msgstr "Lataan maailma-asetuksia"
 #: ../../src/editor/editorinteractive.cc:191
 #: ../../src/editor/editorinteractive.cc:607
 msgid "Loading graphics..."
-msgstr ""
+msgstr "Ladataan grafiikkaa..."
 
 #: ../../src/editor/editorinteractive.cc:232
 msgid "Map unsaved"
@@ -1113,11 +1132,11 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:130
 #, c-format
 msgid "expected %s but found \"%s\""
-msgstr ""
+msgstr "odotettiin %s mutta löytyi \"%s\""
 
 #: ../../src/events/event_building.cc:73 ../../src/events/event_building.cc:82
 msgid "distance (1 .. 255)"
-msgstr ""
+msgstr "etäisyys (1 .. 255)"
 
 #: ../../src/events/event_building.cc:86
 #, c-format
@@ -1128,40 +1147,40 @@ msgstr ""
 #: ../../src/events/event_building.cc:304 ../../src/logic/immovable.cc:254
 #: ../../src/logic/immovable.cc:268
 msgid "duplicated"
-msgstr ""
+msgstr "toistettu"
 
 #: ../../src/events/event_building.cc:174
 #: ../../src/events/event_building.cc:311
 #, c-format
 msgid "%s=\"%s\": invalid"
-msgstr ""
+msgstr "%s=\"%s\": virheellinen"
 
 #: ../../src/events/event_building.cc:204
 #: ../../src/events/event_building.cc:230
 #, c-format
 msgid "can not have %u %s (only %u)"
-msgstr ""
+msgstr "ei voi olla %u%s (vain %u)"
 
 #: ../../src/events/event_building.cc:316
 #, c-format
 msgid "%u soldiers but only %u allowed"
-msgstr ""
+msgstr "%u sotilasta mutta vain %u on sallittu"
 
 #: ../../src/events/event_building.cc:320
 #, c-format
 msgid "(soldiercontrol): %s"
-msgstr ""
+msgstr "(sotilaskontrolli): %s"
 
 #: ../../src/events/event_building.cc:323
 #, c-format
 msgid "(productionsite): %s"
-msgstr ""
+msgstr "(tuotantopaikka): %s"
 
 #: ../../src/events/event_building.cc:330
 #: ../../src/trigger/trigger_building.cc:58
 #, c-format
 msgid "(building): %s"
-msgstr ""
+msgstr "(rakennus): %s"
 
 #: ../../src/events/event_building.cc:442
 #, c-format
@@ -1169,6 +1188,8 @@ msgid ""
 "failed to place a %s near (%i, %i) (distance between %u and %u) for player "
 "%u (suitability required is %u but found only %u)"
 msgstr ""
+"Epäonnistuttiin asettaa %s lähelle (%i,%i) (välimatka %u ja %u välillä) "
+"pelaajalle %u (vaadittu soveltuvuus on %u mutta löytyi vain %u)"
 
 #: ../../src/events/event_expire_message.cc:48
 #: ../../src/logic/playercommand.cc:128
@@ -1176,12 +1197,12 @@ msgstr ""
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:61
 #, c-format
 msgid "player %u does not exist"
-msgstr ""
+msgstr "pelaajaa %u ei ole"
 
 #: ../../src/events/event_expire_message.cc:55
 #, c-format
 msgid "player %u's message %u does not exist"
-msgstr ""
+msgstr "pelaaja %u:n viestiä %u ei ole olemassa"
 
 #: ../../src/events/event_expire_message.cc:61
 #, c-format
@@ -1196,32 +1217,34 @@ msgid ""
 "refers to the same message id (player %u's %u) as another expire message "
 "event (\"%s\"); (only one event can expire each message)"
 msgstr ""
+"viittaa samaan pelaaja id:hen (pelaaja %u:n %u) kuin toinen vanhentunut "
+"viestitapahtuma (\"%s\"); (vain yksi tapahtuma voi vanhentaa viestin)"
 
 #: ../../src/events/event_expire_message.cc:79
 #: ../../src/events/event_message.cc:111
 #, c-format
 msgid "(expire message): %s"
-msgstr ""
+msgstr "(vanhenna viesti): %s"
 
 #: ../../src/events/event_factory.cc:61
 msgid "Allow worker types"
-msgstr ""
+msgstr "Salli työntekijä tyypit"
 
 #: ../../src/events/event_factory.cc:62
 msgid "Allows the creation of workers of certain types for a player."
-msgstr ""
+msgstr "Sallii tietyn tyyppisten työntekijöiden luonnin pelaajalle."
 
 #: ../../src/events/event_factory.cc:66
 msgid "Forbid worker types"
-msgstr ""
+msgstr "Kiellä työntekijätyypit"
 
 #: ../../src/events/event_factory.cc:67
 msgid "Forbids the creation of workers of certain types for a player."
-msgstr ""
+msgstr "Kieltää työntekijätyyppien luonnin tietyntyyppiseltä pelaajalta."
 
 #: ../../src/events/event_factory.cc:71
 msgid "Allow building types"
-msgstr ""
+msgstr "Salli rakennustyypit"
 
 #: ../../src/events/event_factory.cc:72
 msgid "Allows the construction of buildings of certain types for a player."
@@ -1271,11 +1294,11 @@ msgstr "Luo liikkumattoman karttaobjektin."
 
 #: ../../src/events/event_factory.cc:103
 msgid "Lua event"
-msgstr ""
+msgstr "Lua tapahtuma"
 
 #: ../../src/events/event_factory.cc:104
 msgid "Run a lua command"
-msgstr ""
+msgstr "Aja lua komento"
 
 #: ../../src/events/event_factory.cc:108
 msgid "Show message box"
@@ -1362,76 +1385,83 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:160
 msgid "Set player's flag style"
-msgstr ""
+msgstr "Aseta pelaajan lipun tyyli"
 
 #: ../../src/events/event_factory.cc:162
 msgid ""
 "Sets the style of the player's flags to one of the styles that are defined "
 "in the player's tribe."
 msgstr ""
+"Asettaa pelajaan lipun tyylin yhdeksi niistä tyyleistä jotka on määritetty "
+"pelaajan heimolle."
 
 #: ../../src/events/event_factory.cc:167
 msgid "Allows retreat value customization"
-msgstr ""
+msgstr "Sallii karkuruuden arvon kustomoinnin"
 
 #: ../../src/events/event_factory.cc:169
 msgid ""
 "Allows that the player can change the value of 'retreat when hitpoints below "
 "x%'."
-msgstr ""
+msgstr "Sallii pelaajan muuttaa arvoa 'peräänny kun energia alle x%'."
 
 #: ../../src/events/event_factory.cc:174
 msgid "Forbids retreat value customization"
-msgstr ""
+msgstr "Estää karkuruuden arvon kustomoinnin"
 
 #: ../../src/events/event_factory.cc:176
 msgid ""
 "Forbids that the player can change the value of 'retreat when hitpoints "
 "below x%'."
-msgstr ""
+msgstr "Estää pelaajan muuttaa arvoa 'peräänny kun energia alle x%'."
 
 #: ../../src/events/event_factory.cc:181
 msgid "Set player retreat percentage"
-msgstr ""
+msgstr "Aseta pelaajan karkuruusprosentti"
 
 #: ../../src/events/event_factory.cc:183
 msgid ""
 "Sets the player value of 'retreat when hit points below x%', this value "
 "could be overridden by players if allowed."
 msgstr ""
+"Asettaa pelaajan arvon 'peräänny kun energia alle x%', pelaaja voi muuttaa "
+"tätä arvoa jos sallittu"
 
 #: ../../src/events/event_factory.cc:188
 msgid "Set see all mode for a player"
-msgstr ""
+msgstr "Aseta kaiken näkevä tila pelaajalle"
 
 #: ../../src/events/event_factory.cc:189
 msgid "Sets the see all mode for a specific player to on/off."
-msgstr ""
+msgstr "Asettaa näkee kaiken tilan tietylle pelaajalle on/off"
 
 #: ../../src/events/event_factory.cc:193
 msgid "Creates a message for a player"
-msgstr ""
+msgstr "Luo viestin pelaajalle"
 
 #: ../../src/events/event_factory.cc:195
 msgid ""
 "Creates a message for a player. This message can last forever, during a "
 "specified duration, or until a special event is run."
 msgstr ""
+"Luo viestin pelaajalle. Tämä viestit voi kestää ikuisuuden, tietyn ajan, tai "
+"kunnes erityinen tapahtuma ajetaan."
 
 #: ../../src/events/event_factory.cc:200
 msgid "Expires a previously created message"
-msgstr ""
+msgstr "Vanhentaa aiemmin luodun viestin"
 
 #: ../../src/events/event_factory.cc:202
 msgid ""
 "Expires a message that was previously created for a player. The message will "
 "cease to exist."
 msgstr ""
+"Vanhentaa viestin joka oli aiemmin luotu pelaajalle. Viesti lakkaa olemasta."
 
 #: ../../src/events/event_flag.cc:42
 #, c-format
 msgid "(flag): %s"
-msgstr ""
+msgstr "(lippu) %s"
 
 #: ../../src/events/event_forbid_building_types.cc:44
 #: ../../src/events/event_forbid_retreat_change.cc:43
@@ -1443,17 +1473,17 @@ msgstr "Kiellä"
 #: ../../src/events/event_immovable.cc:44
 #, c-format
 msgid "(immovable): %s"
-msgstr ""
+msgstr "(liikkumaton): %s"
 
 #: ../../src/events/event_lua.cc:42
 #, c-format
 msgid "(lua event): %s"
-msgstr ""
+msgstr "(lua tapahtuma): %s"
 
 #: ../../src/events/event_message.cc:67
 #, c-format
 msgid "expire: \"%s\" is not an expire message event"
-msgstr ""
+msgstr "vanhene: \"%s ei ole viestin vanhentava tapahtuma"
 
 #: ../../src/events/event_message.cc:72
 #, c-format
@@ -1462,6 +1492,8 @@ msgid ""
 "meaning forever, which is the default; omit the duration key to make the "
 "message exist forever"
 msgstr ""
+"kesto: tämä arvo %u ei ole sallittu kesto; erityinen arvo tarkoittaa "
+"ikuisuutta, joka on oletus, poista kesto tehdäksesi viestin kestosta ikuinen"
 
 #: ../../src/events/event_message.cc:103
 #, c-format
@@ -1483,7 +1515,7 @@ msgstr "Jatka"
 
 #: ../../src/events/event_message_box.cc:138
 msgid "there are no buttons, at least one is required"
-msgstr ""
+msgstr "Nappuloita ei löydy, vaaditaan ainakin yksi"
 
 #: ../../src/events/event_message_box.cc:149
 #, c-format
@@ -1493,73 +1525,73 @@ msgstr ""
 #: ../../src/events/event_message_box.cc:154
 #, c-format
 msgid "%s refers to \"%s\", which is not a timer"
-msgstr ""
+msgstr "%s viittaa \"%s\", joka ei ole ajastin"
 
 #: ../../src/events/event_message_box.cc:169
 #, c-format
 msgid "(message box): %s"
-msgstr ""
+msgstr "(viestikenttä): %s"
 
 #: ../../src/events/event_move_view.cc:50
 #: ../../src/events/event_player_area.cc:55
 #, c-format
 msgid "illegal coordinates (%i, %i)"
-msgstr ""
+msgstr "laittomat koordinaatit (%i,%i)"
 
 #: ../../src/events/event_move_view.cc:56
 #, c-format
 msgid "(move view): %s"
-msgstr ""
+msgstr "(muuta näkymää): %s"
 
 #: ../../src/events/event_player_allowed_retreat_change.cc:45
 #: ../../src/events/event_player_retreat_change.cc:45
 #, c-format
 msgid "(player allowed retreat change): %s"
-msgstr ""
+msgstr "(pelaajan sallitaan perääntyä): %s"
 
 #: ../../src/events/event_player_area.cc:61
 #, c-format
 msgid "(player area): %s"
-msgstr ""
+msgstr "(pelaaja-alue): %s"
 
 #: ../../src/events/event_player_building_types.cc:54
 #: ../../src/events/event_player_worker_types.cc:55
 #: ../../src/logic/tribe.cc:212 ../../src/logic/tribe.cc:233
 #, c-format
 msgid "\"%s\" is duplicated"
-msgstr ""
+msgstr "\"%s\" on toistettu"
 
 #: ../../src/events/event_player_building_types.cc:56
 msgid "no building types"
-msgstr ""
+msgstr "ei rakennustyppejä"
 
 #: ../../src/events/event_player_building_types.cc:61
 #, c-format
 msgid "(player building types): %s"
-msgstr ""
+msgstr "(pelaajan rakennustyypit) %s"
 
 #: ../../src/events/event_player_seeall.cc:45
 #, c-format
 msgid "(player see all): %s"
-msgstr ""
+msgstr "(pelaaja näkee kaiken): %s"
 
 #: ../../src/events/event_player_worker_types.cc:52
 #, c-format
 msgid "\"%s\" is not buildable"
-msgstr ""
+msgstr "\"%s\" ei voida rakentaa"
 
 #: ../../src/events/event_player_worker_types.cc:58
 msgid "no worker types"
-msgstr ""
+msgstr "ei työntekijätyyppejä"
 
 #: ../../src/events/event_player_worker_types.cc:63
 #, c-format
 msgid "(player worker types): %s"
-msgstr ""
+msgstr "(pelaajan työntekijätyypit): %s"
 
 #: ../../src/events/event_retreat_change.cc:43
 msgid "Change"
-msgstr ""
+msgstr "Muuta"
 
 #: ../../src/events/event_road.cc:40
 msgid "there are no steps"
@@ -1586,27 +1618,27 @@ msgstr ""
 #: ../../src/events/event_set_player_flag_style.cc:41
 #, c-format
 msgid "player's tribe does not define flag style \"%s\""
-msgstr ""
+msgstr "pelaajan heimo ei aseta lipun tyyliä \"%s\""
 
 #: ../../src/events/event_set_player_flag_style.cc:45
 #, c-format
 msgid "(set player flag style): %s"
-msgstr ""
+msgstr "(aseta pelaajan lipun tyyli): %s"
 
 #: ../../src/events/event_set_player_frontier_style.cc:41
 #, c-format
 msgid "player's tribe does not define frontier style \"%s\""
-msgstr ""
+msgstr "Pelaajan heimo ei määritä rajan tyyliä \"%s\""
 
 #: ../../src/events/event_set_player_frontier_style.cc:45
 #, c-format
 msgid "(set player frontier style): %s"
-msgstr ""
+msgstr "(aseta pelaajan rajantyyli): %s"
 
 #: ../../src/events/event_set_player_style.cc:43
 #, c-format
 msgid "(set player style): %s"
-msgstr ""
+msgstr "(aseta pelaajan tyyli): %s"
 
 #: ../../src/events/event_set_timer.cc:54
 #, c-format
@@ -1616,28 +1648,28 @@ msgstr ""
 #: ../../src/events/event_set_timer.cc:60
 #, c-format
 msgid "(set_timer): %s"
-msgstr ""
+msgstr "(aseta ajastin): %s"
 
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:98
 #, c-format
 msgid "command queue: %s"
-msgstr ""
+msgstr "komentojono: %s"
 
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #: ../../src/logic/cmd_check_eventchain.cc:98
 #, c-format
 msgid "check eventchain: %s"
-msgstr ""
+msgstr "tarkista tapahtumaketju: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:49
 #, c-format
 msgid "player %u does not exist in the game"
-msgstr ""
+msgstr "pelaaja %u ei ole olemassa pelissä"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:79
 #, c-format
 msgid "interactive player: %s"
-msgstr ""
+msgstr "Interaktiivinen pelaaja: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:59
 #, c-format
@@ -1646,28 +1678,28 @@ msgstr ""
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:83
 msgid "there is no flag at the specified location"
-msgstr ""
+msgstr "määritellyssä paikassa ei ole lippua"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:85
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:63
 #, c-format
 msgid "player %u: %s"
-msgstr ""
+msgstr "pelaaja %u: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:91
 #, c-format
 msgid "economies: %s"
-msgstr ""
+msgstr "taloudet: %s"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:57
 #, c-format
 msgid "player number (%i) is out of range (1 .. %u)"
-msgstr ""
+msgstr "pelaajan numero (%i) on alueen ulkopuolella (1 .. %u)"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:144
 #, c-format
 msgid "player info: %s"
-msgstr ""
+msgstr "pelaajan tiedot: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:55
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:94
@@ -1677,16 +1709,16 @@ msgstr ""
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:78
 #, c-format
 msgid "unknown/unhandled version %i"
-msgstr ""
+msgstr "tuntematon/virheellinen versio %i"
 
 #: ../../src/game_io/game_preload_data_packet.cc:57
 #, c-format
 msgid "preload: %s"
-msgstr ""
+msgstr "esilataa: %s"
 
 #: ../../src/graphic/animation.cc:197
 msgid "frame number"
-msgstr ""
+msgstr "frame numero"
 
 #: ../../src/graphic/graphic.cc:818
 #, c-format
@@ -1696,7 +1728,7 @@ msgstr "Lataan animaatioita:  %d%% valmis"
 #: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] soldier %u loose battle\n"
-msgstr ""
+msgstr "[taistelu] sotilas %u hävisi taistelun\n"
 
 #: ../../src/logic/battle.cc:182
 #, c-format
@@ -1731,7 +1763,7 @@ msgstr ""
 #: ../../src/logic/cmd_queue.cc:176
 #, c-format
 msgid "game logic: %s"
-msgstr ""
+msgstr "pelilogiikka: %s"
 
 #: ../../src/logic/constructionsite.cc:168
 #, c-format
@@ -1794,25 +1826,25 @@ msgstr ""
 #: ../../src/logic/immovable.cc:133 ../../src/logic/production_program.cc:1396
 #, c-format
 msgid "unknown command type \"%s\""
-msgstr ""
+msgstr "tuntematon komentotyyppi: \"%s\""
 
 #: ../../src/logic/immovable.cc:137
 msgid "no actions"
-msgstr ""
+msgstr "ei toimintoja"
 
 #: ../../src/logic/immovable.cc:213
 msgid "this program has already been declared"
-msgstr ""
+msgstr "tämä ohjelma on jo määritetty"
 
 #: ../../src/logic/immovable.cc:219
 #, c-format
 msgid "program %s: %s"
-msgstr ""
+msgstr "ohjelma %s: %s"
 
 #: ../../src/logic/immovable.cc:252 ../../src/logic/immovable.cc:266
 #, c-format
 msgid "expected 0 .. 255 but found %u"
-msgstr ""
+msgstr "odotettiin 0 ..255 mutta löytyi %u"
 
 #: ../../src/logic/immovable.cc:271
 #, c-format
@@ -1827,71 +1859,72 @@ msgstr ""
 #: ../../src/logic/immovable.cc:607
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
-msgstr ""
+msgstr "heimo %s ei aseta liikkumattomia tyyppejä \"%s\""
 
 #: ../../src/logic/immovable.cc:610
 #, c-format
 msgid "unknown tribe %s"
-msgstr ""
+msgstr "tuntematon heimo %s"
 
 #: ../../src/logic/immovable.cc:616
 #, c-format
 msgid "world does not define immovable type \"%s\""
-msgstr ""
+msgstr "maailma ei aseta liikkumattomia tyyppejä \"%s\""
 
 #: ../../src/logic/immovable.cc:626
 #, c-format
 msgid "immovable type %s"
-msgstr ""
+msgstr "liikkumaton tyyppi %s"
 
 #: ../../src/logic/immovable.cc:661 ../../src/logic/production_program.cc:609
 #: ../../src/logic/production_program.cc:653
 msgid "duration in ms"
-msgstr ""
+msgstr "kesto ms"
 
 #: ../../src/logic/immovable.cc:699 ../../src/logic/production_program.cc:1341
 msgid "priority"
-msgstr ""
+msgstr "prioriteetti"
 
 #: ../../src/logic/immovable.cc:733 ../../src/logic/immovable.cc:802
 #: ../../src/logic/immovable.cc:888
 #, c-format
 msgid "immovable type not in tribe but target type has scope (\"%s\")"
 msgstr ""
+"liikkumaton tyyppi ei heimossa mutta maalityyppillä on laajuus (\"%s\")"
 
 #: ../../src/logic/immovable.cc:739 ../../src/logic/immovable.cc:808
 #: ../../src/logic/immovable.cc:894
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
-msgstr ""
+msgstr "laajuus \"%s\" on annettu maalityyppi (täytyy olla \"maailma\")"
 
 #: ../../src/logic/immovable.cc:754 ../../src/logic/immovable.cc:909
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
-msgstr ""
+msgstr "odotettu todennäköisyys välillä [1,254] mutta löytyi \"%s\""
 
 #: ../../src/logic/immovable.cc:767
 msgid "illegal transformation to the same type"
-msgstr ""
+msgstr "laiton muutos samaan tyyppiin"
 
 #: ../../src/logic/immovable.cc:855
 msgid "probability in range [1, 254]"
-msgstr ""
+msgstr "todennäköisyys välillä [1,254]"
 
 #: ../../src/logic/instances.cc:75
 #, c-format
 msgid "destroy map object: %s"
-msgstr ""
+msgstr "tuhoa karttaobjekti: %s"
 
 #: ../../src/logic/instances.cc:124
 #, c-format
 msgid "object %u: %s"
-msgstr ""
+msgstr "objekti %u: %s"
 
 #: ../../src/logic/instances.cc:133
 #, c-format
 msgid "act: %s"
-msgstr ""
+msgstr "teko: %s"
 
 #: ../../src/logic/map.cc:401
 msgid "Player 1"
@@ -1900,11 +1933,11 @@ msgstr "Pelaaja 1"
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:62
 #: ../../src/logic/soldier.cc:85
 msgid "\"min-max\""
-msgstr ""
+msgstr "\"min-max\""
 
 #: ../../src/logic/military_data.cc:59
 msgid "positive integer <= 100"
-msgstr ""
+msgstr "positiivinen kokonaisluku <= 100"
 
 #: ../../src/logic/military_data.cc:63
 #, c-format
@@ -1937,156 +1970,156 @@ msgstr[1] "%u(+%u) sotilasta"
 #: ../../src/logic/militarysite.cc:572
 #, c-format
 msgid "%sThe enemy defeated your soldiers at the %s.</p></rt>"
-msgstr ""
+msgstr "%sVihollinen kukisti sotilaasi paikassa %s.</p></rt>"
 
 #: ../../src/logic/militarysite.cc:579
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Armeijarakennus menetty!"
 
 #: ../../src/logic/militarysite.cc:652
 #, c-format
 msgid "%sYour soldiers defeated the enemy at the %s.</p></rt>"
-msgstr ""
+msgstr "%sSotilaasi kukistivat vihollisen paikassa %s.</p></rt>"
 
 #: ../../src/logic/militarysite.cc:659
 msgid "Enemy at site defeated!"
-msgstr ""
+msgstr "Vihollinen kukistettu!"
 
 #: ../../src/logic/militarysite.cc:707
 #, c-format
 msgid "%sYour %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "%sSinun %s havaitsi hyökkääjän.</p>"
 
 #: ../../src/logic/militarysite.cc:708
 #, c-format
 msgid "%sYour %s is under attack.</p>"
-msgstr ""
+msgstr "%sSinun %s on hyökkäyksen alla.</p>"
 
 #: ../../src/logic/militarysite.cc:716
 msgid "You are under attack"
-msgstr ""
+msgstr "Olet hyökkäyksen alla"
 
 #: ../../src/logic/playercommand.cc:134
 #, c-format
 msgid "player command: %s"
-msgstr ""
+msgstr "pelaajan komento: %s"
 
 #: ../../src/logic/playercommand.cc:176
 #, c-format
 msgid "player immovable %u: %s"
-msgstr ""
+msgstr "pelaajan liikkumaton %u: %s"
 
 #: ../../src/logic/playercommand.cc:182
 #, c-format
 msgid "bulldoze: %s"
-msgstr ""
+msgstr "raivaa: %s"
 
 #: ../../src/logic/playercommand.cc:234
 #, c-format
 msgid "build: %s"
-msgstr ""
+msgstr "rakenna: %s"
 
 #: ../../src/logic/playercommand.cc:282
 #, c-format
 msgid "build flag: %s"
-msgstr ""
+msgstr "rakenna lippu: %s"
 
 #: ../../src/logic/playercommand.cc:369
 #, c-format
 msgid "build road: %s"
-msgstr ""
+msgstr "rakenna tie: %s"
 
 #: ../../src/logic/playercommand.cc:423
 #, c-format
 msgid "flag %u: %s"
-msgstr ""
+msgstr "lippu %u: %s"
 
 #: ../../src/logic/playercommand.cc:429
 #, c-format
 msgid "flag action: %s"
-msgstr ""
+msgstr "lipputapahtuma: %s"
 
 #: ../../src/logic/playercommand.cc:480 ../../src/logic/playercommand.cc:538
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:208
 #, c-format
 msgid "building %u: %s"
-msgstr ""
+msgstr "rakennus %u: %s"
 
 #: ../../src/logic/playercommand.cc:486
 #, c-format
 msgid "start/stop building: %s"
-msgstr ""
+msgstr "aloita/lopeta rakentaminen: %s"
 
 #: ../../src/logic/playercommand.cc:547
 #, c-format
 msgid "enhance building: %s"
-msgstr ""
+msgstr "paranna rakennusta: %s"
 
 #: ../../src/logic/playercommand.cc:619 ../../src/logic/playercommand.cc:1045
 #: ../../src/logic/playercommand.cc:1123
 #, c-format
 msgid "site %u: %s"
-msgstr ""
+msgstr "paikka %u: %s"
 
 #: ../../src/logic/playercommand.cc:629
 #, c-format
 msgid "set ware priority: %s"
-msgstr ""
+msgstr "aseta tavaraprioriteetti: %s"
 
 #: ../../src/logic/playercommand.cc:678
 #, c-format
 msgid "change target quantity: %s"
-msgstr ""
+msgstr "vaihda tavoitemäärä: %s"
 
 #: ../../src/logic/playercommand.cc:741
 #, c-format
 msgid "set ware target quantity: %s"
-msgstr ""
+msgstr "aseta tavoitemäärä: %s"
 
 #: ../../src/logic/playercommand.cc:863
 #, c-format
 msgid "set worker target quantity: %s"
-msgstr ""
+msgstr "aseta työläisen tavoitemäärä: %s"
 
 #: ../../src/logic/playercommand.cc:988
 #, c-format
 msgid "change training options: %s"
-msgstr ""
+msgstr "vaihda harjoittelun valinnat: %s"
 
 #: ../../src/logic/playercommand.cc:1052
 #, c-format
 msgid "soldier %u: %s"
-msgstr ""
+msgstr "sotilas %u: %s"
 
 #: ../../src/logic/playercommand.cc:1058
 #, c-format
 msgid "drop soldier: %s"
-msgstr ""
+msgstr "poista sotilas: %s"
 
 #: ../../src/logic/playercommand.cc:1130
 #, c-format
 msgid "change soldier capacity: %s"
-msgstr ""
+msgstr "vaihda sotilaiden kapasiteetti: %s"
 
 #: ../../src/logic/playercommand.cc:1295
 #, c-format
 msgid "retreat: value out of range. Received %u expected %u-%u"
-msgstr ""
+msgstr "peräänny: arvo ulkopuolella. Saatiin %u oletettiin %u-%u"
 
 #: ../../src/logic/playercommand.cc:1306
 #, c-format
 msgid "change military config: %s"
-msgstr ""
+msgstr "muuta armeijan asetusta: %s"
 
 #: ../../src/logic/playercommand.cc:1345
 #, c-format
 msgid "(player %u): message id is null"
-msgstr ""
+msgstr "(pelaaja %u): viesti id on tyhjä"
 
 #: ../../src/logic/playercommand.cc:1350
 #, c-format
 msgid "player message: %s"
-msgstr ""
+msgstr "pelaajan viesti: %s"
 
 #: ../../src/logic/production_program.cc:72
 #, c-format
@@ -2094,6 +2127,7 @@ msgid ""
 "%s is not declared as an input (\"%s=<count>\" was not found in the [inputs] "
 "section)"
 msgstr ""
+"%s ei ole määritetty syöttönä (\"%s=<count>\" ei löytynyt [syötöt] alueelta)"
 
 #: ../../src/logic/production_program.cc:85
 #, c-format
@@ -2101,12 +2135,14 @@ msgid ""
 "wrong order of ware types within group: ware type %s appears after ware type "
 "%s (fix order!)"
 msgstr ""
+"tavaratyypit väärässä järjestyksessä ryhmässä: tavaratyyppi %s on "
+"tavaratyypin %s jälkeen (korjaa järjestys!)"
 
 #: ../../src/logic/production_program.cc:99
 #: ../../src/logic/production_program.cc:834
 #: ../../src/logic/production_program.cc:920
 msgid "count"
-msgstr ""
+msgstr "lukumäärä"
 
 #: ../../src/logic/production_program.cc:104
 #, c-format
@@ -2117,7 +2153,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:134
 msgid "not "
-msgstr ""
+msgstr "ei "
 
 #: ../../src/logic/production_program.cc:156
 #: ../../src/logic/production_program.cc:177
@@ -2130,43 +2166,44 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:232
 msgid "workers need experience"
-msgstr ""
+msgstr "työläiset tarvitsevat kokemusta"
 
 #: ../../src/logic/production_program.cc:257
 msgid "ware type or worker type"
-msgstr ""
+msgstr "tavara- tai työläistyyppi"
 
 #: ../../src/logic/production_program.cc:320
 #, c-format
 msgid "invalid condition: %s"
-msgstr ""
+msgstr "virheellinen tilanne: %s"
 
 #: ../../src/logic/production_program.cc:335
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
 msgstr ""
+"oletettiin {\"failed\"|\"completed\"|\"skipped\"} mutta ei löytynyt \"%s\""
 
 #: ../../src/logic/production_program.cc:348
 msgid "expected \"and\" or end of input"
-msgstr ""
+msgstr "oletettiin \"and\" tai syötön lopetus"
 
 #: ../../src/logic/production_program.cc:357
 msgid "expected condition at end of input"
-msgstr ""
+msgstr "oletettiin ehto syötön lopussa"
 
 #: ../../src/logic/production_program.cc:363
 msgid "expected \"or\" or end of input"
-msgstr ""
+msgstr "oletettiin \"or\" tai syötön liopetus"
 
 #: ../../src/logic/production_program.cc:399
 #: ../../src/logic/production_program.cc:785
 msgid " and "
-msgstr ""
+msgstr " ja "
 
 #: ../../src/logic/production_program.cc:400
 #: ../../src/logic/production_program.cc:756
 msgid " because: "
-msgstr ""
+msgstr " koska "
 
 #: ../../src/logic/production_program.cc:415
 #: ../../src/wui/encyclopedia_window.cc:194
@@ -2175,7 +2212,7 @@ msgstr " tai "
 
 #: ../../src/logic/production_program.cc:416
 msgid " because not: "
-msgstr ""
+msgstr " ei koska: "
 
 #: ../../src/logic/production_program.cc:460
 #, c-format
@@ -2193,28 +2230,28 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:482
 msgid "failure"
-msgstr ""
+msgstr "virhe"
 
 #: ../../src/logic/production_program.cc:487
 msgid "completion"
-msgstr ""
+msgstr "päätös"
 
 #: ../../src/logic/production_program.cc:492
 msgid "skip"
-msgstr ""
+msgstr "ohita"
 
 #: ../../src/logic/production_program.cc:497
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
-msgstr ""
+msgstr "{\"virhe\"|\"päätös\"|\"ohitus\"}"
 
 #: ../../src/logic/production_program.cc:511
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
-msgstr ""
+msgstr "{\"virhe\"|\"päätös\"|\"ohitus\"|\"toista\"}"
 
 #: ../../src/logic/production_program.cc:613
 #, c-format
 msgid "sleep: %s"
-msgstr ""
+msgstr "nuku: %s"
 
 #: ../../src/logic/production_program.cc:635
 msgid "idle animation is default; calling is not allowed"
@@ -2227,8 +2264,8 @@ msgstr ""
 #: ../../src/logic/production_program.cc:788
 msgid " is missing"
 msgid_plural " are missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " on kadonnut"
+msgstr[1] " ovat kadoksissa"
 
 #: ../../src/logic/production_program.cc:848
 #: ../../src/logic/production_program.cc:934
@@ -2240,68 +2277,69 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:866
 msgid "Produced "
-msgstr ""
+msgstr "Tuotettu "
 
 #: ../../src/logic/production_program.cc:876
 #: ../../src/logic/production_program.cc:961
 #, c-format
 msgid "%u "
-msgstr ""
+msgstr "%u "
 
 #: ../../src/logic/production_program.cc:883
 #: ../../src/logic/production_program.cc:968
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../../src/logic/production_program.cc:951
 msgid "Recruited "
-msgstr ""
+msgstr "Värvätty "
 
 #: ../../src/logic/production_program.cc:992
 msgid "distance"
-msgstr ""
+msgstr "välimatka"
 
 #: ../../src/logic/production_program.cc:1003
 #: ../../src/logic/production_program.cc:1014
 msgid "percentage"
-msgstr ""
+msgstr "prosenttiosuus"
 
 #: ../../src/logic/production_program.cc:1148
 msgid "Mine empty"
-msgstr ""
+msgstr "Kaivos tyhjä"
 
 #: ../../src/logic/production_program.cc:1152
 msgid ""
 "This mines has run empty. You should consider to expand ordestruct it."
-msgstr ""
+msgstr "Kaivos on tyhjentynyt. Sinun kannattaa laajentaa tai tuhota se."
 
 #: ../../src/logic/production_program.cc:1167
 #: ../../src/logic/production_program.cc:1236
 msgid "soldier type"
-msgstr ""
+msgstr "sotilastyyppi"
 
 #: ../../src/logic/production_program.cc:1180
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|evade\"} but found \"%s\""
 msgstr ""
+"oletettiin {\"hp\"|\"attack\"|\"defense\"|evade\"} mutta ei löytynyt \"%s\""
 
 #: ../../src/logic/production_program.cc:1189
 #: ../../src/logic/production_program.cc:1257
 msgid "level"
-msgstr ""
+msgstr "taso"
 
 #: ../../src/logic/production_program.cc:1267
 #, c-format
 msgid "expected level > %u but found \"%s\""
-msgstr ""
+msgstr "odottettu taso > %u mutta ei löytynyt \"%s\""
 
 #: ../../src/logic/productionsite.cc:70
 msgid "this ware type has already been declared as an output"
-msgstr ""
+msgstr "tämä tavaratyyppi on jo asetettu lopputuotteeksi"
 
 #: ../../src/logic/productionsite.cc:76
 msgid "this worker type has already been declared as an output"
-msgstr ""
+msgstr "tämä työläinen on jo asettu lopputuotteeksi"
 
 #: ../../src/logic/productionsite.cc:218
 msgid "(not occupied)"
@@ -2311,8 +2349,8 @@ msgstr "(tyhjillään)"
 #, c-format
 msgid "Worker missing"
 msgid_plural "Workers missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "työläinen kadonnut"
+msgstr[1] "työläiset kadonneet"
 
 #: ../../src/logic/productionsite.cc:231
 msgid "(stopped)"
@@ -2336,7 +2374,7 @@ msgstr ""
 
 #: ../../src/logic/soldier.cc:70 ../../src/logic/soldier.cc:93
 msgid "positive integer"
-msgstr ""
+msgstr "positiivinen kokonaisluku"
 
 #: ../../src/logic/soldier.cc:74 ../../src/logic/soldier.cc:97
 #, c-format
@@ -2386,28 +2424,29 @@ msgstr ""
 
 #: ../../src/logic/tribe.cc:221 ../../src/logic/tribe.cc:242
 msgid "none found"
-msgstr ""
+msgstr "ei löytynyt"
 
 #: ../../src/logic/tribe.cc:223
 #, c-format
 msgid "frontier styles: %s"
-msgstr ""
+msgstr "rajojen tyylit: %s"
 
 #: ../../src/logic/tribe.cc:244
 #, c-format
 msgid "flag styles: %s"
-msgstr ""
+msgstr "lipputyylit: %s"
 
 #: ../../src/logic/tribe.cc:374
 #, c-format
 msgid "tribe %s: %s"
-msgstr ""
+msgstr "heimo %s %s"
 
 #: ../../src/logic/warehouse.cc:489
 #, c-format
 msgid ""
 "<p font-size=14 font-face=FreeSerif>A new %s was added to your economy.</p>"
 msgstr ""
+"<p font-size=14 font-face=FreeSerif>Uusi %s on lisätty ekonomiaasi.</p>"
 
 #: ../../src/logic/worker.cc:158
 #, c-format
@@ -2425,7 +2464,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:640
 msgid "Out of "
-msgstr ""
+msgstr "ilman "
 
 #: ../../src/logic/worker.cc:644
 msgid ""
@@ -2435,7 +2474,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:916
 msgid "A geologist found resources."
-msgstr ""
+msgstr "Geologi llöysi resursseja"
 
 #: ../../src/logic/worker.cc:1649
 #, c-format
@@ -2479,82 +2518,82 @@ msgstr ""
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:96
 #, c-format
 msgid "allowed buildings: %s"
-msgstr ""
+msgstr "sallitus rakennukset: %s"
 
 #: ../../src/map_io/widelands_map_allowed_worker_types_data_packet.cc:84
 #, c-format
 msgid "allowed worker types: %s"
-msgstr ""
+msgstr "sallitut työläisten tyypit: %s"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
 msgid "unknown bob type %u"
-msgstr ""
+msgstr "tuntematon bob tyyli %u"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:102
 #, c-format
 msgid "tribe \"%s\" does not exist"
-msgstr ""
+msgstr "heimo \"%s\" ei ole olemassa"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:141
 #, c-format
 msgid "bobs: %s"
-msgstr ""
+msgstr "bobs: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:233
 #, c-format
 msgid "unknown task type \"%s\""
-msgstr ""
+msgstr "tuntematon tehtävätyyppi \"%s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:237
 #, c-format
 msgid "task %s is duplicated in stack"
-msgstr ""
+msgstr "tehtävä %s on toistettu pinossa"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:314
 #, c-format
 msgid "reading path: %s"
-msgstr ""
+msgstr "luetaan polku: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:387
 #, c-format
 msgid "bob %u: %s"
-msgstr ""
+msgstr "bob %u %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:394
 #, c-format
 msgid "bobdata: %s"
-msgstr ""
+msgstr "bobdata: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:409
 #, c-format
 msgid "critter bob: %s"
-msgstr ""
+msgstr "critter bob: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:675
 #, c-format
 msgid "soldier: %s"
-msgstr ""
+msgstr "sotilas: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:691
 #, c-format
 msgid "carrier: %s"
-msgstr ""
+msgstr "kantaja: %s"
 
 #: ../../src/map_io/widelands_map_building_data_packet.cc:124
 #, c-format
 msgid "buildings: %s"
-msgstr ""
+msgstr "rakennukset: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:215
 #, c-format
 msgid "buildingdata: %s"
-msgstr ""
+msgstr "rakennusdata: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:273
 #, c-format
 msgid "wares: %s"
-msgstr ""
+msgstr "tavarat: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:286
 #, c-format
@@ -2571,12 +2610,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:471
 #, c-format
 msgid "warehouse: %s"
-msgstr ""
+msgstr "varasto: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:578
 #, c-format
 msgid "militarysite: %s"
-msgstr ""
+msgstr "armeijapaikka: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:708
 #, c-format
@@ -2586,7 +2625,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:937
 #, c-format
 msgid "trainingsite: %s"
-msgstr ""
+msgstr "harjoittelupaikka: %s"
 
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:55
 #, c-format
@@ -2599,7 +2638,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_trigger_data_packet.cc:72
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: ../../src/map_io/widelands_map_event_chain_data_packet.cc:183
 #, c-format
@@ -2609,42 +2648,42 @@ msgstr ""
 #: ../../src/map_io/widelands_map_event_data_packet.cc:72
 #, c-format
 msgid "Events: %s"
-msgstr ""
+msgstr "Tapahtumat: %s"
 
 #: ../../src/map_io/widelands_map_exploration_data_packet.cc:95
 #, c-format
 msgid "seen: %s"
-msgstr ""
+msgstr "nähty: %s"
 
 #: ../../src/map_io/widelands_map_extradata_data_packet.cc:99
 #, c-format
 msgid "extradata: %s"
-msgstr ""
+msgstr "extradata: %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr ""
+msgstr "noodi on pelaajan %u omistama"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
 msgid "is owned by player %u"
-msgstr ""
+msgstr "on pelaajan %u omistama"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
 msgid "has a flag (%u)"
-msgstr ""
+msgstr "on lippu (%u)"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
 msgid "neighbour node (%i, %i): %s"
-msgstr ""
+msgstr "naapurisolmu (%i,%i): %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
 msgid "flags: %s"
-msgstr ""
+msgstr "liput: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
@@ -2654,7 +2693,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:90
 #, c-format
 msgid "no flag at given position (%i, %i)"
-msgstr ""
+msgstr "ei annettua lippua paikassa (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:110
 #, c-format
@@ -2664,34 +2703,34 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
 msgid "building (%u): %s"
-msgstr ""
+msgstr "rakennus (%u): %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:209
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
 #, c-format
 msgid "%u: %s"
-msgstr ""
+msgstr "%u: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:216
 #, c-format
 msgid "flagdata: %s"
-msgstr ""
+msgstr "lippudata: %s"
 
 #: ../../src/map_io/widelands_map_heights_data_packet.cc:53
 #, c-format
 msgid "heights: %s"
-msgstr ""
+msgstr "korkeudet: %s"
 
 #: ../../src/map_io/widelands_map_immovable_data_packet.cc:98
 #: ../../src/map_io/widelands_map_immovabledata_data_packet.cc:120
 #, c-format
 msgid "immovable data: %s"
-msgstr ""
+msgstr "liikkumaton data: %s"
 
 #: ../../src/map_io/widelands_map_immovabledata_data_packet.cc:113
 #, c-format
 msgid "immovable %u: %s"
-msgstr ""
+msgstr "liikkumaton %u: %s"
 
 #: ../../src/map_io/widelands_map_loader.cc:89
 msgid "Invalid World"
@@ -2705,42 +2744,45 @@ msgstr "Maailmaa \"%s\", jonka kartta asettaa, ei löydy koneeltasi."
 #: ../../src/map_io/widelands_map_node_ownership_data_packet.cc:64
 #, c-format
 msgid "ownership: %s"
-msgstr ""
+msgstr "omistajuus: %s"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:80
 #, c-format
 msgid "unknown object header %u"
-msgstr ""
+msgstr "tuntematon objektin otsikko %u"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:83
 #, c-format
 msgid "map objects: %s"
-msgstr ""
+msgstr "karttaobjektit: %s"
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:80
 #, c-format
 msgid "Objectives: %s"
-msgstr ""
+msgstr "Tavoitteet: %s"
 
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:80
 #, c-format
 msgid "player names and tribes: %s"
-msgstr ""
+msgstr "pelaajien nimet ja heimot: %s"
 
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:69
 #, c-format
 msgid "player positions: %s"
-msgstr ""
+msgstr "pelaajien sijainnit: %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:88
 #, c-format
 msgid "messages are not ordered: sent at %u but previous message sent at %u"
 msgstr ""
+"Viestit eivät ole järjestetty: lähetetty %u mutta edellinen viesti lähetetty "
+"%u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:94
 #, c-format
 msgid "message is sent in the future: sent at %u but gametime is only %u"
 msgstr ""
+"Viesti lähetetään tulevaisuudessa: lähetetttu %u mutta peliaika on %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:103
 #, c-format
@@ -2766,26 +2808,26 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:151
 #, c-format
 msgid "\"%s\": %s"
-msgstr ""
+msgstr "”%s”: %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:156
 #, c-format
 msgid "messages for player %u: %s"
-msgstr ""
+msgstr "viestejä pelaajalle %u: %s"
 
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:122
 #, c-format
 msgid "unseen immovable: %s"
-msgstr ""
+msgstr "näkymätön liikkumaton: %s"
 
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
 msgid "road: %s"
-msgstr ""
+msgstr "tie: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
 msgid "no carrier slot"
-msgstr ""
+msgstr "ei kantajan rakoa"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:134
 #, c-format
@@ -2797,53 +2839,53 @@ msgstr ""
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
 msgid "road %u: %s"
-msgstr ""
+msgstr "tie %u: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:210
 #, c-format
 msgid "roaddata: %s"
-msgstr ""
+msgstr "tiedata: %s"
 
 #: ../../src/map_io/widelands_map_terrain_data_packet.cc:81
 #, c-format
 msgid "terrain: %s"
-msgstr ""
+msgstr "maasto: %s"
 
 #: ../../src/map_io/widelands_map_trigger_data_packet.cc:80
 #, c-format
 msgid "Triggers: %s"
-msgstr ""
+msgstr "Triggerit: %s"
 
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:68
 #, c-format
 msgid "invalid type \"%s\""
-msgstr ""
+msgstr "laiton tyyppi \"%s\""
 
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:76
 #, c-format
 msgid "variable %s: %s"
-msgstr ""
+msgstr "muuttuja %s: %s"
 
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:83
 #, c-format
 msgid "variables: %s"
-msgstr ""
+msgstr "muuttujat: %s"
 
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:77
 #, c-format
 msgid "ware data: %s"
-msgstr ""
+msgstr "tavaradata: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:134
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:198
 #, c-format
 msgid "item %u: %s"
-msgstr ""
+msgstr "tavara %u: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:205
 #, c-format
 msgid "waredata: %s"
-msgstr ""
+msgstr "tavaradata: %s"
 
 #: ../../src/network/netclient.cc:96
 msgid "Could not establish connection to host"
@@ -2890,7 +2932,7 @@ msgstr "Palvelin käyttää eri yhteyskäytäntöversiota"
 
 #: ../../src/network/netclient.cc:639
 msgid "/me 's file failed md5 checksumming."
-msgstr ""
+msgstr "/me :n tiedosto ei läpäissyt md5 tarkistusta"
 
 #: ../../src/network/netclient.cc:694
 msgid "Unexpectedly received LAUNCH command from server."
@@ -2914,7 +2956,7 @@ msgstr "Palvelin lähetti tuntemattoman komennon nro %u"
 
 #: ../../src/network/netclient.cc:788
 msgid "Something went wrong: "
-msgstr ""
+msgstr "Joku meni pieleen: "
 
 #: ../../src/network/netclient.cc:819
 msgid " An automatic savegame will be created."
@@ -2940,7 +2982,7 @@ msgstr "Isäntäkone lähetti pelaajan %s aulaan!"
 #: ../../src/network/nethost.cc:1127
 #, c-format
 msgid "Computer %u"
-msgstr ""
+msgstr "Tietokone %u"
 
 #: ../../src/network/nethost.cc:1203
 #, c-format
@@ -3029,7 +3071,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1732
 #, c-format
 msgid "Started to send file %s to %s!"
-msgstr ""
+msgstr "Aloitti tiedoston lähetyksen %s:sta %s:lle!"
 
 #: ../../src/network/nethost.cc:1753
 msgid "Client requests file part that does not exist."
@@ -3084,7 +3126,7 @@ msgstr "Yhteys metapalvelimeen palautettu."
 
 #: ../../src/network/network_ggz.cc:521
 msgid "NOTE: The Internet gaming implementation is in very early state."
-msgstr ""
+msgstr "HUOMAA: Internet-pelaaminen on erittäin alkutekijöissään."
 
 #: ../../src/network/network_ggz.cc:525
 msgid "Please take a look at the notes at:"
@@ -3107,7 +3149,7 @@ msgstr ""
 #: ../../src/trigger/trigger_defeated.cc:52
 #, c-format
 msgid "(defeated): %s"
-msgstr ""
+msgstr "(kukistettu): %s"
 
 #: ../../src/trigger/trigger_factory.cc:41
 msgid "Building Trigger"
@@ -3216,17 +3258,17 @@ msgstr ""
 #: ../../src/trigger/trigger_ownership.cc:45
 #, c-format
 msgid "(ownership): %s"
-msgstr ""
+msgstr "(omistajuus): %s"
 
 #: ../../src/trigger/trigger_time.cc:46
 #, c-format
 msgid "(time): %s"
-msgstr ""
+msgstr "(aika) %s"
 
 #: ../../src/trigger/trigger_vision.cc:52
 #, c-format
 msgid "(vision): %s"
-msgstr ""
+msgstr "(näkyvyys): %s"
 
 #: ../../src/ui_basic/messagebox.cc:89
 #: ../../src/ui_fsmenu/campaign_select.cc:74
@@ -3264,25 +3306,25 @@ msgstr "Pienennä arvoa 10:llä"
 
 #: ../../src/ui_basic/timeedit.cc:136 ../../src/ui_basic/timeedit.cc:137
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: ../../src/ui_basic/timeedit.cc:138
 msgid "."
-msgstr ""
+msgstr "."
 
 #: ../../src/ui_basic/timeedit.cc:151 ../../src/ui_basic/timeedit.cc:152
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #: ../../src/ui_basic/timeedit.cc:153 ../../src/ui_basic/timeedit.cc:154
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: ../../src/ui_basic/timeedit.cc:155 ../../src/ui_basic/timeedit.cc:156
 #: ../../src/ui_basic/timeedit.cc:157 ../../src/ui_basic/timeedit.cc:158
 #: ../../src/ui_basic/timeedit.cc:159
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:52
 msgid "Select a campaign"
@@ -3494,7 +3536,7 @@ msgstr "(ei karttaa)"
 
 #: ../../src/ui_fsmenu/launchgame.cc:310
 msgid "WARNING!!! Host selected the file \""
-msgstr ""
+msgstr "Varoitus!!! Host valitsi tiedoston \""
 
 #: ../../src/ui_fsmenu/launchgame.cc:313
 msgid ""
@@ -3536,11 +3578,11 @@ msgstr "Peliaika:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:111
 msgid "Delete file"
-msgstr ""
+msgstr "Poista tiedosto"
 
 #: ../../src/ui_fsmenu/loadgame.cc:112
 msgid "Do you really want to delete "
-msgstr ""
+msgstr "Haluatko varmasti tuhota "
 
 #: ../../src/ui_fsmenu/loadreplay.cc:63
 msgid "Choose a replay!"
@@ -3613,7 +3655,7 @@ msgstr "LAN / Suora IP-osoite -peli"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:80
 msgid "Show login dialog"
-msgstr ""
+msgstr "Näytä kirjautumisruutu"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:107
 #: ../../src/ui_fsmenu/netsetup_lan.cc:109 ../../src/wui/login_box.cc:78
@@ -3651,7 +3693,7 @@ msgstr "Avaa uusi peli"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:144
 msgid "Points"
-msgstr ""
+msgstr "Pisteet"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:145
 msgid "Server"
@@ -3742,7 +3784,7 @@ msgstr "min välein"
 
 #: ../../src/ui_fsmenu/options.cc:89
 msgid "days"
-msgstr ""
+msgstr "päivää"
 
 #: ../../src/ui_fsmenu/options.cc:96
 msgid "General Options"
@@ -3807,7 +3849,7 @@ msgstr "Tallenna peli automaattisesti"
 
 #: ../../src/ui_fsmenu/options.cc:194
 msgid "Remove Replays older than:"
-msgstr ""
+msgstr "Poista vanhemmat tallennukset kuin:"
 
 #: ../../src/ui_fsmenu/options.cc:198
 msgid "Off"
@@ -3819,11 +3861,11 @@ msgstr "Järjestelmän oletuskieli"
 
 #: ../../src/ui_fsmenu/options.cc:364
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #: ../../src/ui_fsmenu/options.cc:369 ../../src/ui_fsmenu/options.cc:374
 msgid "px."
-msgstr ""
+msgstr "px."
 
 #: ../../src/ui_fsmenu/options.cc:393
 msgid "Main menu font:"
@@ -3902,7 +3944,7 @@ msgstr "Lataa peli"
 
 #: ../../src/wui/attack_box.cc:159
 msgid "Soldiers:"
-msgstr ""
+msgstr "Sotilaat:"
 
 #: ../../src/wui/attack_box.cc:165
 msgid "Send less soldiers"
@@ -3910,7 +3952,7 @@ msgstr "Lähetä vähemmän sotilaita"
 
 #: ../../src/wui/attack_box.cc:182
 msgid "Number of soldiers"
-msgstr ""
+msgstr "Sotilaiden lukumäärä"
 
 #: ../../src/wui/attack_box.cc:192
 msgid "Send more soldiers"
@@ -3918,7 +3960,7 @@ msgstr "Lähetä enemmän sotilaita"
 
 #: ../../src/wui/attack_box.cc:199 ../../src/wui/military_box.cc:130
 msgid "Retreat: Never!"
-msgstr ""
+msgstr "Perääntyminen: Ei koskaan!"
 
 #: ../../src/wui/attack_box.cc:218 ../../src/wui/military_box.cc:149
 msgid "Supported damage before retreat"
@@ -3926,7 +3968,7 @@ msgstr ""
 
 #: ../../src/wui/attack_box.cc:220 ../../src/wui/military_box.cc:151
 msgid "Once injured"
-msgstr ""
+msgstr "Kun luokkaantuu"
 
 #: ../../src/wui/building_statistics_menu.cc:76
 #: ../../src/wui/game_main_menu.cc:61
@@ -4158,7 +4200,7 @@ msgstr "Tarkkailunäkymä"
 
 #: ../../src/wui/fieldaction.cc:487
 msgid "Military settings"
-msgstr ""
+msgstr "Armeijan asetukset"
 
 #: ../../src/wui/fieldaction.cc:512
 msgid "Start attack"
@@ -4233,7 +4275,7 @@ msgstr "Peliaika: "
 #: ../../src/wui/game_main_menu_save_game.cc:115
 #, c-format
 msgid "%02ud%02uh%02u'%02u\"%03u"
-msgstr ""
+msgstr "%02ud%02uh%02u'%02u\"%03u"
 
 #: ../../src/wui/game_main_menu_save_game.cc:196
 msgid ""
@@ -4264,7 +4306,7 @@ msgstr " on jo olemassa. Kirjoitetaanko yli?"
 
 #: ../../src/wui/game_message_menu.cc:39 ../../src/wui/game_message_menu.h:147
 msgid "Message Menu: Inbox"
-msgstr ""
+msgstr "Viestivalikko: Inbox"
 
 #: ../../src/wui/game_objectives_menu.cc:46
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:151
@@ -4438,8 +4480,8 @@ msgstr "Tuoteohje"
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u uusi viesti"
+msgstr[1] "%u uusia viestejä"
 
 #: ../../src/wui/interactive_spectator.cc:56
 msgid "Exit Replay"
@@ -4447,27 +4489,27 @@ msgstr "Poistu toistosta"
 
 #: ../../src/wui/login_box.cc:28
 msgid "Metaserver login"
-msgstr ""
+msgstr "Metaserver kirjautuminen"
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
-msgstr ""
+msgstr "Nimimerkki:"
 
 #: ../../src/wui/login_box.cc:38
 msgid "email (optional):"
-msgstr ""
+msgstr "email (valinnainen):"
 
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
-msgstr ""
+msgstr "VAROITUS: Salasana näytetään ja tallennetaan selväkielisenä!"
 
 #: ../../src/wui/login_box.cc:50
 msgid "Password:"
-msgstr ""
+msgstr "Salasana:"
 
 #: ../../src/wui/login_box.cc:57
 msgid "Register new account"
-msgstr ""
+msgstr "Luo uusi tili"
 
 #: ../../src/wui/login_box.cc:62
 msgid "Automatically use this login information from now on."
@@ -4475,31 +4517,31 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:69
 msgid "Login"
-msgstr ""
+msgstr "Kirjaudu"
 
 #: ../../src/wui/login_box.cc:90
 msgid "Empty Nickname"
-msgstr ""
+msgstr "Tyhjä nimimerkki"
 
 #: ../../src/wui/login_box.cc:90
 msgid "Please enter a nickname!"
-msgstr ""
+msgstr "Anna nimimerkki!"
 
 #: ../../src/wui/login_box.cc:97
 msgid "Space in Nickname"
-msgstr ""
+msgstr "Välimerkki nimimerkissä"
 
 #: ../../src/wui/login_box.cc:98
 msgid "Sorry, but spaces are not allowed in nicknames!"
-msgstr ""
+msgstr "Välimerkkejä ei sallita nimimerkeissä!"
 
 #: ../../src/wui/login_box.cc:105
 msgid "Empty Password"
-msgstr ""
+msgstr "Tyhjä salasana"
 
 #: ../../src/wui/login_box.cc:105
 msgid "Please enter a password!"
-msgstr ""
+msgstr "Anna salasana!"
 
 #: ../../src/wui/minimap.cc:143
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
@@ -4520,7 +4562,7 @@ msgstr "Tiet"
 
 #: ../../src/wui/minimap.cc:178
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 #: ../../src/wui/stock_menu.cc:70
 msgid "Show wares"
@@ -4560,11 +4602,11 @@ msgstr "Palauta tavoitemäärä oletusarvoon"
 
 #: ../../src/wui/transport_ui.cc:488
 msgid "Ware type target quantities"
-msgstr ""
+msgstr "Tavaratyypin tavoitemäärät"
 
 #: ../../src/wui/transport_ui.cc:492
 msgid "Worker type target quantities"
-msgstr ""
+msgstr "Työläistyypin tavoitemäärät"
 
 #: ../../src/wui/watchwindow.cc:93
 msgid "Follow"
@@ -4705,7 +4747,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:85
 msgid "Triggers"
-msgstr ""
+msgstr "Laukaisijat"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:103
 #: ../../src/editor/ui_menus/editor_event_menu.cc:136
@@ -5003,15 +5045,15 @@ msgstr "Saarityyppi:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:243
 msgid "Resources:"
-msgstr ""
+msgstr "Resurssit:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Low"
-msgstr ""
+msgstr "Matala"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "High"
-msgstr ""
+msgstr "Korkea"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:281
 msgid "Map ID:"
@@ -5043,7 +5085,7 @@ msgstr "Vuoristoa: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:428
 msgid "Generating random map..."
-msgstr ""
+msgstr "Luodaan satunnainen kartta..."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:150
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
@@ -5351,7 +5393,7 @@ msgstr "Nimi käytössä"
 
 #: ../../src/editor/ui_menus/event_expire_message_option_menu.cc:37
 msgid "Expire Message Event Options"
-msgstr ""
+msgstr "Vanheta viestitapahtuma valinnat"
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:47
 msgid "Message Box Event Options"
@@ -5418,7 +5460,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:228
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:204
 msgid "Nothing selected"
-msgstr ""
+msgstr "Mitään ei ole valittu"
 
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:64
 #, c-format
@@ -5440,7 +5482,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/event_set_timer_option_menu.cc:37
 msgid "Set Timer Event Options"
-msgstr ""
+msgstr "Aseta ajastimen tapahtumavalinnat"
 
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:49
 msgid "Unhide Area Event Options"
@@ -5525,74 +5567,74 @@ msgstr "ei kuvausta"
 
 #: ../../src/wui/game_message_menu.h:62
 msgid "Select"
-msgstr ""
+msgstr "Valitse"
 
 #: ../../src/wui/game_message_menu.h:63
 msgid "Status"
-msgstr ""
+msgstr "Tila"
 
 #: ../../src/wui/game_message_menu.h:64
 msgid "Title"
-msgstr ""
+msgstr "Titteli"
 
 #: ../../src/wui/game_message_menu.h:65
 msgid "Time sent"
-msgstr ""
+msgstr "Aika asetettu"
 
 #: ../../src/wui/game_message_menu.h:76
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:99
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:99
 msgid "Clear"
-msgstr ""
+msgstr "Tyhjennä"
 
 #: ../../src/wui/game_message_menu.h:76
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:99
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:99
 msgid "Clear selection"
-msgstr ""
+msgstr "Tyhjennä valinta"
 
 #: ../../src/wui/game_message_menu.h:97
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:120
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:120
 msgid "Invert"
-msgstr ""
+msgstr "Käänteinen"
 
 #: ../../src/wui/game_message_menu.h:97
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:120
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:120
 msgid "Invert selection"
-msgstr ""
+msgstr "Käänteinen valinta"
 
 #: ../../src/wui/game_message_menu.h:118 ../../src/wui/game_message_menu.h:151
 msgid "Archive selected messages"
-msgstr ""
+msgstr "Arkistoi valitut viestit"
 
 #: ../../src/wui/game_message_menu.h:129 ../../src/wui/game_message_menu.h:152
 msgid "Show Archive"
-msgstr ""
+msgstr "Näytä arkisto"
 
 #: ../../src/wui/game_message_menu.h:138
 msgid "Message Menu: Archive"
-msgstr ""
+msgstr "Viestivalikko: Arkisto"
 
 #: ../../src/wui/game_message_menu.h:142
 msgid "Restore selected messages"
-msgstr ""
+msgstr "Palauta valitut viestit"
 
 #: ../../src/wui/game_message_menu.h:143
 msgid "Show Inbox"
-msgstr ""
+msgstr "Näytä Inbox"
 
 #: ../../src/wui/game_message_menu.h:165
 msgid "center main mapview on location"
-msgstr ""
+msgstr "keskitä iso karttanäkymä paikkaan"
 
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:72
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:72
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.h:66
 #: ../../src/editor/ui_menus/event_set_player_frontier_style_option_menu.h:66
 msgid "Player:"
-msgstr ""
+msgstr "Pelaaja:"
 
 #~ msgid "Target quantities"
 #~ msgstr "Tavoitemäärät"

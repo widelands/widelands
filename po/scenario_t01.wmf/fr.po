@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 23:12+0000\n"
-"Last-Translator: Jean-Pierre Gemble <Unknown>\n"
+"PO-Revision-Date: 2010-02-13 15:51+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-12 04:48+0000\n"
+"X-Launchpad-Export-Date: 2010-02-14 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Language: French\n"
 
@@ -41,6 +41,10 @@ msgid ""
 "dark.<br> My warriors hunt at day and lie awake at night - listening to the "
 "sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
 msgstr ""
+" \"Des mois ont passés et nous restons toujours cachés dans la plus sombre "
+"des obscurités des forêts anciennes.<br> Mes guerriers chassent le jour et "
+"restent aux aguets la nuit - écoutant le son lointain des cruelles tueries "
+"résonnant parmi les arbres antiques.\" "
 
 #: ../../campaigns/t01.wmf/event:27
 #: ../../campaigns/t01.wmf/event:40
@@ -74,6 +78,9 @@ msgid ""
 "away.<br> The red lights flash in the darkness and dance to the rhythm of "
 "the wardrums that haunt me even in my nightmares.\" "
 msgstr ""
+" \"Nous pouvons voir les brasiers absorbant Al'thunran, à des kilomètres "
+"d'ici.<br> Les lumières rouges toisent l'obscurité au rythme des tambours de "
+"guerre, me hantant jusque dans mes cauchemars.\" "
 
 #: ../../campaigns/t01.wmf/event:51
 msgid ""
@@ -96,6 +103,9 @@ msgid ""
 "wait, trying not to sleep or die before the right time comes. And so I do... "
 "wait.\" "
 msgstr ""
+" \"Comme Père le disait : Il y aura un temps pour le combat et un temps pour "
+"se coucher et attendre, en essayant de ne pas sombrer dans le sommeil ou "
+"dans la mort avant que le moment voulu ne vienne. Et ainsi... j'attends.\" "
 
 #: ../../campaigns/t01.wmf/event:98
 msgid "An old man says..."
@@ -138,6 +148,9 @@ msgid ""
 "* Press SPACE to see where you can build.<br> The red spots show you where a "
 "small building - like a lumberjack's hut - may be built.<br>"
 msgstr ""
+"* Appuyez sur ESPACE afin d'afficher les endroits où vous pouvez "
+"construire.<br> Les emplacements en rouge vous indiquent où un petit "
+"bâtiment - comme une cabane de bûcheron - peut-être construit.<br>"
 
 #: ../../campaigns/t01.wmf/event:116
 #: ../../campaigns/t01.wmf/objective:8
@@ -170,6 +183,12 @@ msgid ""
 "men would appreciate a way as short and even as possible - the wood surely "
 "will be heavy enough.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Bien sûr, il serait trop contraignant pour nos gens de traverser les "
+"étendues sauvages jusqu'à la cabane du bûcheron. Nous devons fabriquer une "
+"route entre notre château et ce bâtiment. Il n'est pas difficile de deviner "
+"que n'importe quel homme apprécierait la route la plus courte et la plus "
+"plane possible - les bûches seront déjà assez lourdes à transporter comme "
+"cela.\"<br><br>-- NOUVEL OBJECTIF --<br> "
 
 #: ../../campaigns/t01.wmf/event:131
 #: ../../campaigns/t01.wmf/objective:9
@@ -186,6 +205,21 @@ msgid ""
 "can also click further away to build several steps at once. Click on the "
 "flag at the headquarters to finish the road."
 msgstr ""
+"* Construisez une route entre votre quartier général et la cabane de "
+"bûcheron.<br> Lorsque vous placez la cabane de bûcheron, un drapeau est créé "
+"devant elle. Vous devrez le connecter à un autre drapeau afin de construire "
+"une route.<br> Si vous cliquez sur un drapeau, de petits symboles "
+"apparaîtront autour de celui-ci afin de vous montrer dans quelles directions "
+"vous pouvez construire votre route.<br> La couleur de ces symboles indiquera "
+"la raideur de cette dernière. La couleur verte représente des chemins plats, "
+"la jaune les chemins un peu plus raide, et la rouge les routes très "
+"abruptes. Plus une route est inclinée, plus elle difficile à franchir.<br> "
+"Vous pouvez cliquer sur n'importe quel symbole pour construire la première "
+"étape de votre chemin à cet endroit. De nouveaux symboles apparaîtront afin "
+"de vous montrer les possibles étapes suivantes, et ainsi de suite. "
+"Cependant, vous pouvez aussi cliquer sur un endroit plus éloigné afin de "
+"construire plusieurs mesures d'un coup. Cliquez sur le drapeau du quartier "
+"général afin de terminer votre route."
 
 #: ../../campaigns/t01.wmf/event:144
 msgid "Khantrukh remembers..."
@@ -197,6 +231,10 @@ msgid ""
 "crossroads on the way between our site and the lumberjack's hut would ease "
 "the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Il y a un vieux diction qui dit :<br> 'Un fardeau partagé est plus aisé à "
+"endurer.'<br> Un croisement sur la route entre notre site et la cabane de "
+"bûcheron faciliterait le travail de nos porteurs.\"<br><br>-- NOUVEL "
+"OBJECTIF --<br> "
 
 #: ../../campaigns/t01.wmf/event:147
 #: ../../campaigns/t01.wmf/objective:17
@@ -209,6 +247,14 @@ msgid ""
 "in between make them get faster to their destination, thus improving your "
 "infrastructure.<br>"
 msgstr ""
+"* Placez un drapeau au milieu de la route.<br> Il y a symbole en forme de "
+"drapeau au milieu du chemin que vous venez de construire. Vous pouvez placer "
+"un drapeau à cet endroit en cliquant sur le symbole puis en cliquant le "
+"bouton en forme de drapeau dans le menu apparaissant ensuite. Ceci divisera "
+"le travail de transport du bois entre deux porteurs.<br> Quand de telles "
+"marchandises sont transportées entre deux points, le fait d'ajouter des "
+"drapeau permet d'accélérer leurs transports jusqu'à leur destination, "
+"améliorant de ce fait votre infrastructure."
 
 #: ../../campaigns/t01.wmf/event:159
 msgid "The old man looks to the sky..."
@@ -221,6 +267,11 @@ msgid ""
 "people. More trees await our axes south of our new crossroads - let us raise "
 "a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" \"Les vents du nord nous disent que l'hiver en chemin sera long et cruel. "
+"Une cabane de bûcheron ne sera pas suffisante pour les nécessités de nos "
+"gens. D'autres d'arbres attendent nos haches au sud de la nouvelle croisée "
+"des chemins - construisons une seconde cabane de bûcheron à cet endroit "
+"!\"<br><br>-- NOUVEL OBJECTIF --<br> "
 
 #: ../../campaigns/t01.wmf/event:162
 #: ../../campaigns/t01.wmf/objective:18
@@ -230,6 +281,11 @@ msgid ""
 "Note that instead of building a road step by step, you may also directly "
 "click at the destination to build the entire road at once."
 msgstr ""
+"* Placez une cabane de bûcheron juste sous le drapeau que vous avez placer "
+"sur la route. N'oubliez pas de connecter ce drapeau avec la nouvelle bâtisse "
+"après cela.<br> Il est à noter qu'au lieu de construire la route étape par "
+"étape, vous pouvez aussi cliquer directement sur sa destination afin de la "
+"terminer en une fois."
 
 #: ../../campaigns/t01.wmf/event:175
 msgid "Khantrukh nods..."
@@ -271,7 +327,7 @@ msgstr ""
 #: ../../campaigns/t01.wmf/event:193
 #: ../../campaigns/t01.wmf/objective:34
 msgid "* Build two quarries southwest of your headquarters."
-msgstr ""
+msgstr "* Construisez deux carrières au Sud-Ouest de votre quartier général."
 
 #: ../../campaigns/t01.wmf/event:220
 #: ../../campaigns/t01.wmf/event:235

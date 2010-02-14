@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:30+0000\n"
-"Last-Translator: Sini Ruohomaa <sini.ruohomaa@iki.fi>\n"
+"PO-Revision-Date: 2010-02-13 18:18+0000\n"
+"Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-14 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -22,7 +22,7 @@ msgstr "Näitä kilpiä käyttävät atlantislaisten parhaat sotilaat."
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Valmistaa haarniskoja sotilaille."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
@@ -78,7 +78,7 @@ msgstr "Työskentele (pääohjelma)"
 
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Leipoo leipää työntekijöille."
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
@@ -106,7 +106,7 @@ msgstr "Korjaa mustajuuri"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
-msgstr ""
+msgstr "Istuttaa ja korjaa virginiantädykettä."
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
 msgid ""
@@ -438,7 +438,7 @@ msgstr "Kantaja"
 
 #: ../../tribes/atlanteans/conf:110
 msgid "Horse"
-msgstr ""
+msgstr "Hevonen"
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Soldier"
@@ -538,11 +538,11 @@ msgstr "Puunhakkaaja"
 
 #: ../../tribes/atlanteans/conf:139
 msgid "Scout"
-msgstr ""
+msgstr "Tiedustelija"
 
 #: ../../tribes/atlanteans/conf:140
 msgid "Horse Breeder"
-msgstr ""
+msgstr "Hevosten kasvattaja"
 
 #: ../../tribes/atlanteans/conf:143
 msgid "Construction Site"
@@ -585,37 +585,37 @@ msgstr "Torni"
 #: ../../tribes/atlanteans/conf:158
 #: ../../tribes/atlanteans/conf:166
 msgid "Barrier"
-msgstr ""
+msgstr "Rajalinnake"
 
 #: ../../tribes/atlanteans/conf:159
 msgid "Citadel"
-msgstr ""
+msgstr "Kastelli"
 
 #: ../../tribes/atlanteans/conf:160
 msgid "Donjon"
-msgstr ""
+msgstr "Keskustorni"
 
 #: ../../tribes/atlanteans/conf:161
 #: ../../tribes/atlanteans/conf:168
 msgid "Fortress"
-msgstr ""
+msgstr "Linnoitus"
 
 #: ../../tribes/atlanteans/conf:162
 #: ../../tribes/atlanteans/conf:164
 msgid "Sentry"
-msgstr ""
+msgstr "Vartiopaikka"
 
 #: ../../tribes/atlanteans/conf:163
 msgid "Stronghold"
-msgstr ""
+msgstr "Linnake"
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Barracks"
-msgstr ""
+msgstr "Parakki"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Outpost"
-msgstr ""
+msgstr "Etuvartioasema"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Headquarters"
@@ -727,11 +727,11 @@ msgstr "Puunhakkaajan talo"
 
 #: ../../tribes/atlanteans/conf:202
 msgid "Scout's House"
-msgstr ""
+msgstr "Tiedustelijan talo"
 
 #: ../../tribes/atlanteans/conf:203
 msgid "Horse Farm"
-msgstr ""
+msgstr "Hevostila"
 
 #: ../../tribes/atlanteans/conf:206
 msgid "Headquarters medium"
@@ -929,11 +929,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr ""
+msgstr "Auttaa tavaroiden kuljettamisessa teillä."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
-msgstr ""
+msgstr "Siittää vahvoja atlantealaisia hevosia"
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -1040,7 +1040,7 @@ msgstr "Valmista mustajuurijauhoa"
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid "Mills wheat to produce flour."
-msgstr ""
+msgstr "Jauhaa vehnää jauhoiksi"
 
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."
@@ -1076,12 +1076,14 @@ msgstr ""
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws the wood to produce planks."
-msgstr ""
+msgstr "Sahaa puuta tuottaakseen lautoja."
 
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Tiedustelija kuten Teemu Tiedustelija tiedustelee tiedostelemattomia alueita "
+"tiedustelun malliin."
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
@@ -1128,7 +1130,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."
-msgstr ""
+msgstr "Savustaa lihaa ja kalaa."
 
 #: ../../tribes/atlanteans/smokery/conf:25
 msgid "Smoke meat"
@@ -1144,7 +1146,7 @@ msgstr "Puolusta ja valloita!"
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr ""
+msgstr "Siittää hämähäkin jamssille"
 
 #: ../../tribes/atlanteans/spidercloth/conf:1
 msgid "Cloth made out of spideryarn."
@@ -1181,7 +1183,7 @@ msgstr "Kaikki atlantislaiset sotilaat kantavat maansa tunnusta rinnallaan."
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Tuottaa työkaluja työmiehille."
 
 #: ../../tribes/atlanteans/toolsmithy/conf:33
 msgid "Produce bakingtray"
@@ -1233,7 +1235,7 @@ msgstr "Valmista lapio"
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Kouluttaa sotilaita."
 
 #: ../../tribes/atlanteans/trunk/conf:1
 msgid ""
@@ -1253,7 +1255,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
-msgstr ""
+msgstr "Tuottaa aseita sotilaille."
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:30
 msgid "Produce light trident"

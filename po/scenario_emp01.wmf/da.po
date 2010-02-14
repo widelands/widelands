@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 20:28+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2010-02-13 08:28+0000\n"
+"Last-Translator: beer <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-02-14 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/emp01.wmf/elemental:7
@@ -171,11 +171,11 @@ msgstr ""
 #: ../../campaigns/emp01.wmf/event:197
 #: ../../campaigns/emp01.wmf/event:222
 msgid "Young Amalea"
-msgstr ""
+msgstr "unge Amalea"
 
 #: ../../campaigns/emp01.wmf/event:192
 msgid "Amalea recommends..."
-msgstr ""
+msgstr "Amalea forslår"
 
 #: ../../campaigns/emp01.wmf/event:194
 msgid ""
@@ -194,10 +194,11 @@ msgid ""
 "* Build two more lumberjack's houses and a sawmill as soon as there is "
 "enough space for them."
 msgstr ""
+"byg 2 nye skovhuggerhuse og en treværksted så snart der er plads til det"
 
 #: ../../campaigns/emp01.wmf/event:217
 msgid "Amalea comes in..."
-msgstr ""
+msgstr "Amalea kommer ind ...."
 
 #: ../../campaigns/emp01.wmf/event:219
 msgid ""
@@ -221,7 +222,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/event:247
 msgid "Saledus notes..."
-msgstr ""
+msgstr "Saledus notere ..."
 
 #: ../../campaigns/emp01.wmf/event:249
 msgid ""

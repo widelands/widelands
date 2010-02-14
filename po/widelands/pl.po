@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-10 19:40+0100\n"
-"PO-Revision-Date: 2010-02-12 19:21+0000\n"
+"PO-Revision-Date: 2010-02-13 10:07+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-02-13 04:54+0000\n"
+"X-Launchpad-Export-Date: 2010-02-14 04:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -583,7 +583,7 @@ msgstr "setbobdescription (ustaw opis boba)"
 
 #: ../../src/writeHTML.cc:755
 msgid "findobject"
-msgstr "findobject (znajdź objekt)"
+msgstr "findobject (znajdź obiekt)"
 
 #: ../../src/writeHTML.cc:756
 msgid "findspace"
@@ -603,7 +603,7 @@ msgstr "return (zwróć)"
 
 #: ../../src/writeHTML.cc:760
 msgid "object"
-msgstr "object (objekt)"
+msgstr "object (obiekt)"
 
 #: ../../src/writeHTML.cc:761
 msgid "plant"
@@ -615,7 +615,7 @@ msgstr "create_bob (stwórz boba)"
 
 #: ../../src/writeHTML.cc:763
 msgid "removeobject"
-msgstr "usuńobjekt"
+msgstr "removeobject (usuńobiekt)"
 
 #: ../../src/writeHTML.cc:764
 msgid "geologist"
@@ -1260,7 +1260,7 @@ msgstr "Stwórz nieruchomy"
 
 #: ../../src/events/event_factory.cc:99
 msgid "Create an immovable."
-msgstr "Stwórz nieruchomy objekt"
+msgstr "Stwórz nieruchomy obiekt."
 
 #: ../../src/events/event_factory.cc:103
 msgid "Lua event"
@@ -2442,6 +2442,18 @@ msgid ""
 "object, such as a farm field, is placed on the map while the worker is out "
 "working. (bug #1796611) (The game has been paused.)"
 msgstr ""
+"Wystąpił błąd logiczny w silniku gry. %s #%u gracza %u (noszącego %s) nie "
+"mogło znaleźć drogi do domu z (%i, %i) (z %s nieruszającym) do podstawowej "
+"flagi na (%i, %i)tego %s  na (%i, %i). %s teraz będzie bezdomny i "
+"najprawdopodobniej umrze, chyba że jakiś obiekt wkrótce będzie usunięty i %s "
+"znajdzie drogę do flagi przyłączonej do magazynu. %s natychmiast zamówi "
+"nowego robotnika. Niestety to się może dziać powtórnie i wykończyć zasoby "
+"robotników (narzędzi). Żadne rozwiązanie dla tego problemu jeszcze nie było "
+"wprowadzone. Będzie bezpieczne zburzyć %s i nie odbudowywać to w tej "
+"lokacji, lub żadnego innego budynku który wysyła robotnik na mapę. To się "
+"zwykle dzieje w pobliżu tereny nie do przebycia, takiego jak woda, kiedy "
+"obiekt, taki jak pole farmy, jest umieszczony na mapie kiedy robotnik jest "
+"na zewnątrz, pracując. (błąd #1796611) (Gra była zapausowana.)"
 
 #: ../../src/logic/worker.cc:1666
 msgid "nothing"
