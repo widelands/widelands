@@ -140,12 +140,79 @@ The same also goes for return values.
    a,b = f() -- a == 1, b == 2
    a,b,c,d = f() -- a == 1, b == 2, c == 3, d == nil
 
-TODO: calling of tables and strings
+Another thing that comes to a surprise for some developer is the syntactic
+sugar that Lua adds to calls. The following rules apply: If a function is
+given exactly one argument and this argument is either a :class:`string` or a
+:class:`table`, the surrounding parenthesis can be left out. This makes for
+something similar to optional arguments. The following two lines are equal
+
+.. code-block:: lua
+
+   some_function{a = "Hi", b = "no"}
+   some_function({a = "Hi", b = "no"})
+
+The first one though is often used for functions that take mostly optional
+arguments. A second use case is for strings:
+
+.. code-block:: lua
+
+   print "hi"
+   print("hi") -- same
+
+We use this in widelands to our advantage to implement internationalization
+via a global function called :func:`_` (an long standing gettext paradigm):
+
+.. code-block:: lua
+
+   print _ "Hello Word" -- Will print in German: "Hallo Welt"
+   print( _("Hello World")) -- the same in more verbose writing
+
 
 Coroutines
 ^^^^^^^^^^
 
-TODO
+The most important feature of Lua that widelands is using are coroutines. We
+use them watered down and very simple, but their power is enormous. In
+Widelands use case, a coroutine is simply a function that can interrupt it's
+execution and give control back to widelands at any point in time and after
+it is awoken again by widelands, it will resume at precisely the same point 
+again. Let's dive into an example right away:
+
+.. code-block:: lua
+
+   use("aux", "coroutine")
+
+   function print_a_word(word)
+      while 1 do
+         print(word)
+         sleep(1000)
+      end
+   end
+
+   run(print_a_word, "Hello World!")
+
+If you put this code into our ``init.lua`` file from the earlier example, you
+will see "Hello World!" begin printed every second on the console. Let's
+digest this example. The first line imports the ``coroutine.lua`` script from
+the auxiliary Lua library that comes bundled with widelands. We use two
+functions from this in the rest of the code, namly :func:`sleep` and
+:func:`run`. 
+
+Then we define a simple function :func:`print_a_word` that takes one argument
+and enters an infinite loop: it prints the argument, then sleeps for a second.
+The :func:`sleep` function puts the coroutine to sleep and tells widelands to
+wake the coroutine up again after 1000 ms have passed. The coroutine will then
+continue its execution directly after the sleep call, that is it will enter
+the loop's body again. 
+
+All we need now is to get this function started and this is done via the
+:func:`run` function: it takes as first argument a function and then any
+number of arguments that will be passed on to the given function. 
+
+TODO: complexer example with zwei coroutines.
+
+TODO: widelands rt documentation
+TODO: appendixes in sphinx
 
 
 .. vim:ft=rst:spelllang=en:spell
