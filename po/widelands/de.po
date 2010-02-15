@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 19:40+0100\n"
-"PO-Revision-Date: 2010-02-12 21:55+0000\n"
+"POT-Creation-Date: 2010-02-14 19:26+0100\n"
+"PO-Revision-Date: 2010-02-14 21:26+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-13 04:54+0000\n"
+"X-Launchpad-Export-Date: 2010-02-15 04:46+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -27,7 +27,8 @@ msgstr "Bluebyte-Siedler-II-Karte. Kein Kommentar definiert!"
 
 #: ../../src/wlapplication.cc:346
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-msgstr "FEHLER: Konnte nicht mit dem Metaserver verbinden (obiger Grund)!\n"
+msgstr ""
+"FEHLER: Konnte nicht mit dem Metaserver verbinden (Grund siehe oben)!\n"
 
 #: ../../src/wlapplication.cc:1081
 msgid ""
@@ -85,6 +86,27 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
+" --<config-entry-name>=Wert überschreibt jede Einstellung in der "
+"Konfigurationsdatei\n"
+"\n"
+"--logfile=FILENAME Schreibe die Ausgabe in FILENAME anstelle einer  \n"
+"                      Konsolenausgabe\n"
+" --datadir=DIRNAME Benutze spezifizierten Pfad für die Widelands\n"
+"                      Datenstände\n"
+" --record=FILENAME Speichere alle Datenstände im angegebenen Dateinamen für\n"
+"                      späteres  Abspielen\n"
+" --playback=FILENAME Spiele angegebenen Dateinamen ab (see --record)\n"
+"\n"
+" --coredump=[yes|no] Erstellt einen core dump auf segfaults anstelle \n"
+"                      der Nutzung von SDL\n"
+" --language=[de_DE|sv_SE|...]\n"
+"                      Die zu nutzende Sprachdatei\n"
+" --remove_syncstreams=[true|false]\n"
+"                      Entferne syncstream-Dateien beim Programmstart\n"
+" --remove_replays=[...]\n"
+"                      Entferne Aufzeichnungen nach dieser Anzahl von Tagen.\n"
+"                      Wenn dieser Wert 0 ist, werden die Aufzeichnungen "
+"nicht gelöscht.\n"
 
 #: ../../src/wlapplication.cc:1227
 msgid ""
@@ -230,7 +252,7 @@ msgid ""
 "Hope you enjoy this game!\n"
 "\n"
 msgstr ""
-"Fehlerberichte? Ideen? Gucke auf die Projektwebseite:\n"
+"Fehlerberichte? Ideen? Schau auf die Projektwebseite:\n"
 "        http://www.sourceforge.net/projects/widelands\n"
 "\n"
 "Wir wünschen Dir viel Spaß beim Spielen!\n"
@@ -299,7 +321,7 @@ msgstr "Widelands konnte keine Verbindung zum Gastgeber erstellen."
 
 #: ../../src/wlapplication.cc:1640
 msgid "The address of the game server is invalid"
-msgstr "Die Adresse the Spiele Servers ist inkorrekt"
+msgstr "Die Adresse des Spieler-Servers ist inkorrekt"
 
 #: ../../src/wlapplication.cc:1745 ../../src/network/nethost.cc:1178
 msgid "Player"
@@ -320,11 +342,11 @@ msgid ""
 "unpause the game and continue watching if you want to."
 msgstr ""
 "Das Ende der Spielaufzeichnung wurde erreicht und das Spiel wurde auf Pause "
-"gesetzt. Wenn du möchtest, kannst du die Wiedergabe fortsetzen und "
-"weitergucken."
+"gesetzt. Wenn du möchtest, kannst du die Wiedergabe fortsetzen und weiter "
+"zuschauen."
 
-#: ../../src/wlapplication.cc:2082 ../../src/logic/game.cc:344
-#: ../../src/logic/game.cc:383
+#: ../../src/wlapplication.cc:2082 ../../src/logic/game.cc:352
+#: ../../src/logic/game.cc:391
 msgid "Loading..."
 msgstr "Laden..."
 
@@ -346,11 +368,11 @@ msgstr "Vorgänger"
 
 #: ../../src/writeHTML.cc:100
 msgid "Employers"
-msgstr "Arbeitsgeber"
+msgstr ""
 
 #: ../../src/writeHTML.cc:263 ../../src/writeHTML.cc:269
 msgid "Building types"
-msgstr "Gebäudeart"
+msgstr "Gebäudearten"
 
 #: ../../src/writeHTML.cc:274 ../../src/writeHTML.cc:509
 #: ../../src/writeHTML.cc:1434
@@ -485,7 +507,7 @@ msgstr "s Erweiterung"
 
 #: ../../src/writeHTML.cc:498 ../../src/writeHTML.cc:504
 msgid "Worker types"
-msgstr "Arbeiterart"
+msgstr "Arbeiterarten"
 
 #: ../../src/writeHTML.cc:517
 msgid "Minimum<br/>needed<br/>experience"
@@ -505,7 +527,7 @@ msgstr "Arbeiterarten.xhtml"
 
 #: ../../src/writeHTML.cc:583
 msgid "Combat Properties"
-msgstr "Kampf Einstellungen"
+msgstr "Kampf-Einstellungen"
 
 #: ../../src/writeHTML.cc:590
 #, c-format
@@ -513,7 +535,7 @@ msgid ""
 "Hitpoints is between %u and %u, plus %u for each level above 0 (maximum "
 "level is %u)."
 msgstr ""
-"Lebenpunkte liegen zwischen %u und %u, plus %u für jede Stufe über 0 (Die "
+"Lebenspunkte liegen zwischen %u und %u, + %u für jede Stufe über 0 (Die "
 "höchste Stufe ist %u)."
 
 #: ../../src/writeHTML.cc:600
@@ -543,7 +565,7 @@ msgstr "s Produkt"
 
 #: ../../src/writeHTML.cc:686
 msgid "Spawns in warehouses."
-msgstr "Wird in Warenhäusern erzeugt"
+msgstr "Wird in Warenhäusern erzeugt."
 
 #: ../../src/writeHTML.cc:695
 #, c-format
@@ -1766,45 +1788,45 @@ msgstr "Spiellogik: %s"
 msgid "%u%% built"
 msgstr "%u%% gebaut"
 
-#: ../../src/logic/game.cc:224
+#: ../../src/logic/game.cc:231
 msgid "Preloading a map"
 msgstr "Lese Teile der Karte"
 
-#: ../../src/logic/game.cc:235
+#: ../../src/logic/game.cc:243
 msgid "Loading a world"
 msgstr "Lade eine Welt"
 
-#: ../../src/logic/game.cc:241
+#: ../../src/logic/game.cc:249
 #, c-format
 msgid "Adding player %u"
 msgstr "Füge Spieler %u hinzu"
 
-#: ../../src/logic/game.cc:254
+#: ../../src/logic/game.cc:262
 msgid "Loading a map"
 msgstr "Lade eine Karte"
 
-#: ../../src/logic/game.cc:285 ../../src/logic/game.cc:332
-#: ../../src/logic/game.cc:365
+#: ../../src/logic/game.cc:293 ../../src/logic/game.cc:340
+#: ../../src/logic/game.cc:373
 msgid "Preloading map"
 msgstr "Lade Teile der Karte vor"
 
-#: ../../src/logic/game.cc:299
+#: ../../src/logic/game.cc:307
 msgid "Configuring players"
 msgstr "Konfiguriere Spieler"
 
-#: ../../src/logic/game.cc:316
+#: ../../src/logic/game.cc:324
 msgid "Loading map"
 msgstr "Lade Karte"
 
-#: ../../src/logic/game.cc:443
+#: ../../src/logic/game.cc:451
 msgid "Creating player infrastructure"
 msgstr "Erstelle Infrastruktur eines Spielers"
 
-#: ../../src/logic/game.cc:454 ../../src/logic/player.cc:121
+#: ../../src/logic/game.cc:462 ../../src/logic/player.cc:121
 msgid "Missing starting position"
 msgstr "Fehlender Startpunkt"
 
-#: ../../src/logic/game.cc:456 ../../src/logic/player.cc:123
+#: ../../src/logic/game.cc:464 ../../src/logic/player.cc:123
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting "
@@ -2316,8 +2338,10 @@ msgstr "Bergwerk leer"
 
 #: ../../src/logic/production_program.cc:1152
 msgid ""
-"This mines has run empty. You should consider to expand ordestruct it."
+"This mines has run empty. You should consider to expand or destruct it."
 msgstr ""
+"Diese Mine ist leer. Du solltest darüber nachdenken sie entweder zu "
+"erweitern oder abzureißen."
 
 #: ../../src/logic/production_program.cc:1167
 #: ../../src/logic/production_program.cc:1236
@@ -2724,7 +2748,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
 msgid "building (%u): %s"
-msgstr ""
+msgstr "Gebäude (%u): %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:209
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
@@ -2833,7 +2857,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:156
 #, c-format
 msgid "messages for player %u: %s"
-msgstr ""
+msgstr "Nachrichten für den Spieler %u: %s"
 
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:122
 #, c-format
@@ -2957,7 +2981,7 @@ msgstr "Der Server benutzt eine andere Protokollversion"
 
 #: ../../src/network/netclient.cc:639
 msgid "/me 's file failed md5 checksumming."
-msgstr ""
+msgstr "/me 's Datei hat die Überpfrüfung mit MD5 nicht bestanden"
 
 #: ../../src/network/netclient.cc:694
 msgid "Unexpectedly received LAUNCH command from server."
@@ -3116,7 +3140,7 @@ msgstr "Der Transfer der Datei %s zum Empfänger %s ist abgeschlossen"
 #: ../../src/network/nethost.cc:1764
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
-msgstr ""
+msgstr "Sende Teil %u/%u der Datei %s zu %s"
 
 #: ../../src/network/nethost.cc:1774
 #, c-format
@@ -3277,12 +3301,12 @@ msgstr ""
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:58
 #, c-format
 msgid "player %u's message %u does not exist (%u is highest)"
-msgstr ""
+msgstr "Nachricht von %u (%u) existiert nicht (%u ist die höchste)"
 
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:64
 #, c-format
 msgid "(message_is_read_or_archived): %s"
-msgstr ""
+msgstr "(Nachricht_wurde_gelesen_oder_archiviert): %s"
 
 #: ../../src/trigger/trigger_military_influence.cc:47
 #, c-format
@@ -3395,7 +3419,7 @@ msgstr "Zurück"
 #: ../../src/ui_fsmenu/campaign_select.cc:165
 #: ../../src/ui_fsmenu/campaign_select.cc:167
 #: ../../src/ui_fsmenu/campaign_select.cc:226
-#: ../../src/ui_fsmenu/campaign_select.cc:410
+#: ../../src/ui_fsmenu/campaign_select.cc:417
 msgid "[No value found]"
 msgstr "[Kein Wert gefunden]"
 
@@ -3447,7 +3471,7 @@ msgstr "Name:"
 msgid "Author:"
 msgstr "Autor:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:350
+#: ../../src/ui_fsmenu/campaign_select.cc:357
 #, c-format
 msgid "Invalid path to file in cconfig: %s"
 msgstr "Inkorrekter Pfad zur Datei in cconfig: %s"
@@ -3562,6 +3586,11 @@ msgid ""
 "you do not own. Normally such a file should be send from the host to you, "
 "but perhaps the transfer was not yet finnished!?!"
 msgstr ""
+"Widelands kann die Datei auf dem angegebenen Pfad nicht finden.\n"
+"Die Datei heißt: %s\n"
+"Wenn dies in einem Netzwerkspiel passiert, gehört dir die Datei "
+"wahrscheinlich nicht. Vielleicht ist die Datei noch nicht komplett "
+"übertragen worden, diese wird dir normalerweise vom Host gesendet."
 
 #: ../../src/ui_fsmenu/launchgame.cc:269
 msgid "(no map)"
@@ -4334,7 +4363,7 @@ msgstr " existiert bereits - überschreiben?"
 
 #: ../../src/wui/game_message_menu.cc:39 ../../src/wui/game_message_menu.h:147
 msgid "Message Menu: Inbox"
-msgstr ""
+msgstr "Nachrichten-Menü: Eingang"
 
 #: ../../src/wui/game_objectives_menu.cc:46
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:151
@@ -4505,8 +4534,8 @@ msgstr "Waren Hilfe"
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u neue Nachricht"
+msgstr[1] "%u neue Nachrichten"
 
 #: ../../src/wui/interactive_spectator.cc:56
 msgid "Exit Replay"
@@ -4631,7 +4660,7 @@ msgstr ""
 
 #: ../../src/wui/transport_ui.cc:492
 msgid "Worker type target quantities"
-msgstr ""
+msgstr "Zielanzahl der Arbeitertypen"
 
 #: ../../src/wui/watchwindow.cc:93
 msgid "Follow"
@@ -5596,11 +5625,11 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.h:63
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../src/wui/game_message_menu.h:64
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: ../../src/wui/game_message_menu.h:65
 msgid "Time sent"
@@ -5632,11 +5661,11 @@ msgstr "Invertiere Auswahl"
 
 #: ../../src/wui/game_message_menu.h:118 ../../src/wui/game_message_menu.h:151
 msgid "Archive selected messages"
-msgstr ""
+msgstr "Ausgewählte Nachrichten archivieren"
 
 #: ../../src/wui/game_message_menu.h:129 ../../src/wui/game_message_menu.h:152
 msgid "Show Archive"
-msgstr ""
+msgstr "Archiv anzeigen"
 
 #: ../../src/wui/game_message_menu.h:138
 msgid "Message Menu: Archive"
