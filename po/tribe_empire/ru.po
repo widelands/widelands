@@ -6,1138 +6,1254 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2009-06-26 17:07+0000\n"
-"PO-Revision-Date: 2007-03-17 00:59+0500\n"
-"Last-Translator: Alexander Bikmeyev <bikmeyev@freemail.ru>\n"
+"POT-Creation-Date: 2010-02-10 18:40+0000\n"
+"PO-Revision-Date: 2010-02-11 20:42+0000\n"
+"Last-Translator: Auduf <5097@mail.ru>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"X-Poedit-Language: Russian\n"
+"X-Launchpad-Export-Date: 2010-02-12 04:49+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
+"X-Poedit-Language: Russian\n"
 
-#: ../../../tribes/empire/advanced_lance/conf:1
+#: ../../tribes/empire/advanced_lance/conf:1
 msgid "This is an advanced lance, with steel top."
 msgstr "Это длинная пика с железным наконечником"
 
-#: ../../../tribes/empire/armour/conf:1
-msgid "Basic armour for Empire soldiers."
-msgstr "Простые доспехи для солдат Империи"
-
-#: ../../../tribes/empire/armoursmithy/conf:23
-msgid "Produce helm"
-msgstr ""
-
-#: ../../../tribes/empire/armoursmithy/conf:24
-msgid "Produce armour"
-msgstr ""
-
-#: ../../../tribes/empire/armoursmithy/conf:25
-msgid "Produce chain armour"
-msgstr ""
-
-#: ../../../tribes/empire/armoursmithy/conf:26
-#, fuzzy
-msgid "Produce plate armour"
-msgstr "Пластинчатая броня"
-
-#: ../../../tribes/empire/axe/conf:1
-#, fuzzy
-msgid "The axe is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr "Топор это инструмент дровосека. Он производится плотником."
-
-#: ../../../tribes/empire/bakingtray/conf:1
-#, fuzzy
-msgid "The peel is the tool of the baker, each baker needs its own. It is produced by the toolsmith."
-msgstr "Лопата пекаря это инструмент необходимый каждому пекарю. Она производится плотником."
-
-#: ../../../tribes/empire/basket/conf:1
-#, fuzzy
-msgid "This basket is needed by the winegrower, for harvesting the grapes. It is produced by the toolsmith."
-msgstr "Корзина нужна виноградарю для сбора винограда. Она производится плотником."
-
-#: ../../../tribes/empire/beer/conf:1
-msgid "Young soldiers and miners need some encouragement. This drink makes a man fearless and strong."
-msgstr "Ваши шахтёры и солдаты нуждаются в некотором поощрении. Этот напиток делает людей бесстрашными и сильными."
-
-#: ../../../tribes/empire/bread/conf:1
-msgid "The backers of the Empire make really tasty bread."
-msgstr "Пекари Империи пекут весьма вкусный хлеб."
-
-#: ../../../tribes/empire/brewer/conf:1
-msgid "Produces beer or wine."
-msgstr ""
-
-#: ../../../tribes/empire/builder/conf:1
-msgid "Works at construction sites to create a new building."
-msgstr ""
-
-#: ../../../tribes/empire/burner/conf:1
-msgid "Burns coal."
-msgstr ""
-
-#: ../../../tribes/empire/carrier/conf:1
-msgid "Carries items along your roads."
-msgstr ""
-
-#: ../../../tribes/empire/chain_armour/conf:1
-#, fuzzy
-msgid "This is a medium armour for Empire soldiers."
-msgstr "Это средние доспехи для солдат Империи"
-
-#: ../../../tribes/empire/cloth/conf:1
-msgid "Cloth is needed for Empire ships and few bigger buildings. It is produced out of wool."
-msgstr "Сукно необходимо кораблям Империи и некоторым большим строениям. Оно производится из шерсти."
-
-#: ../../../tribes/empire/coal/conf:1
-msgid "The fires of the Empire are usually fed with wood, but sometimes, wood just does not burn hot enough. Then, coal is used."
-msgstr "Огонь в Империи обычно поддерживают дровами, но иногда, дерево горит не столь жарко. Тогда используется уголь."
-
-#: ../../../tribes/empire/colosseum/conf:27
-#: ../../../tribes/empire/trainingscamp/conf:38
-#: ../../../tribes/empire/arena/conf:13
+#: ../../tribes/empire/arena/conf:13
+#: ../../tribes/empire/colosseum/conf:27
+#: ../../tribes/empire/trainingscamp/conf:38
 msgid "Sleep"
-msgstr ""
+msgstr "Сон"
 
-#: ../../../tribes/empire/colosseum/conf:28
-#: ../../../tribes/empire/arena/conf:14
+#: ../../tribes/empire/arena/conf:14
+#: ../../tribes/empire/colosseum/conf:28
 msgid "Upgrade soldier evade 0"
 msgstr ""
 
-#: ../../../tribes/empire/colosseum/conf:29
-#: ../../../tribes/empire/arena/conf:15
-msgid "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+#: ../../tribes/empire/arena/conf:15
+#: ../../tribes/empire/colosseum/conf:29
+msgid ""
+"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 
-#: ../../../tribes/empire/colosseum/conf:30
+#: ../../tribes/empire/armour/conf:1
+msgid "Basic armour for Empire soldiers."
+msgstr "Простые доспехи для солдат Империи"
+
+#: ../../tribes/empire/armoursmith/conf:1
+msgid "Produces armour for the soldiers."
+msgstr ""
+
+#: ../../tribes/empire/armoursmithy/conf:26
+msgid "Produce helm"
+msgstr ""
+
+#: ../../tribes/empire/armoursmithy/conf:27
+msgid "Produce armour"
+msgstr ""
+
+#: ../../tribes/empire/armoursmithy/conf:28
+msgid "Produce chain armour"
+msgstr ""
+
+#: ../../tribes/empire/armoursmithy/conf:29
+msgid "Produce plate armour"
+msgstr ""
+
+#: ../../tribes/empire/armoursmithy/conf:30
+#: ../../tribes/empire/bakery/conf:20
+#: ../../tribes/empire/brewery/conf:20
+#: ../../tribes/empire/burners_house/conf:19
+#: ../../tribes/empire/coalmine/conf:21
+#: ../../tribes/empire/deep_coalmine/conf:22
+#: ../../tribes/empire/deep_goldmine/conf:22
+#: ../../tribes/empire/deep_marblemine/conf:23
+#: ../../tribes/empire/deep_oremine/conf:22
+#: ../../tribes/empire/donkeyfarm/conf:21
+#: ../../tribes/empire/farm/conf:19
+#: ../../tribes/empire/fishers_house/conf:17
+#: ../../tribes/empire/foresters_house/conf:15
+#: ../../tribes/empire/goldmine/conf:22
+#: ../../tribes/empire/hunters_house/conf:16
+#: ../../tribes/empire/inn/conf:20
+#: ../../tribes/empire/lumberjacks_house/conf:16
+#: ../../tribes/empire/marblemine/conf:26
+#: ../../tribes/empire/mill/conf:20
+#: ../../tribes/empire/oremine/conf:22
+#: ../../tribes/empire/piggery/conf:21
+#: ../../tribes/empire/quarry/conf:21
+#: ../../tribes/empire/sawmill/conf:20
+#: ../../tribes/empire/scouts_house/conf:17
+#: ../../tribes/empire/sheepfarm/conf:21
+#: ../../tribes/empire/smelting_works/conf:24
+#: ../../tribes/empire/stonemasons_house/conf:21
+#: ../../tribes/empire/tavern/conf:22
+#: ../../tribes/empire/toolsmithy/conf:45
+#: ../../tribes/empire/vineyard/conf:21
+#: ../../tribes/empire/weaponsmithy/conf:34
+#: ../../tribes/empire/weaving-mill/conf:16
+#: ../../tribes/empire/well/conf:16
+#: ../../tribes/empire/winery/conf:20
+msgid "Work"
+msgstr "Работа"
+
+#: ../../tribes/empire/axe/conf:1
+msgid ""
+"The axe is the tool for the lumberjack. It is produced by the toolsmith."
+msgstr ""
+
+#: ../../tribes/empire/baker/conf:1
+msgid "Bakes bread for workers."
+msgstr ""
+
+#: ../../tribes/empire/bakingtray/conf:1
+msgid ""
+"The peel is the tool of the baker, each baker needs its own. It is produced "
+"by the toolsmith."
+msgstr ""
+
+#: ../../tribes/empire/basket/conf:1
+msgid ""
+"This basket is needed by the winegrower, for harvesting the grapes. It is "
+"produced by the toolsmith."
+msgstr ""
+
+#: ../../tribes/empire/beer/conf:1
+msgid ""
+"Young soldiers and miners need some encouragement. This drink makes a man "
+"fearless and strong."
+msgstr ""
+"Ваши шахтёры и солдаты нуждаются в некотором поощрении. Этот напиток делает "
+"людей бесстрашными и сильными."
+
+#: ../../tribes/empire/bread/conf:1
+msgid "The backers of the Empire make really tasty bread."
+msgstr "Пекари Империи пекут весьма вкусный хлеб."
+
+#: ../../tribes/empire/brewer/conf:1
+msgid "Produces beer or wine."
+msgstr ""
+
+#: ../../tribes/empire/builder/conf:1
+msgid "Works at construction sites to create a new building."
+msgstr ""
+
+#: ../../tribes/empire/burner/conf:1
+msgid "Burns coal."
+msgstr ""
+
+#: ../../tribes/empire/carrier/conf:1
+msgid "Carries items along your roads."
+msgstr ""
+
+#: ../../tribes/empire/chain_armour/conf:1
+msgid "This is a medium armour for Empire soldiers."
+msgstr ""
+
+#: ../../tribes/empire/cloth/conf:1
+msgid ""
+"Cloth is needed for Empire ships and few bigger buildings. It is produced "
+"out of wool."
+msgstr ""
+"Сукно необходимо кораблям Империи и некоторым большим строениям. Оно "
+"производится из шерсти."
+
+#: ../../tribes/empire/coal/conf:1
+msgid ""
+"The fires of the Empire are usually fed with wood, but sometimes, wood just "
+"does not burn hot enough. Then, coal is used."
+msgstr ""
+"Огонь в Империи обычно поддерживают дровами, но иногда, дерево горит не "
+"столь жарко. Тогда используется уголь."
+
+#: ../../tribes/empire/colosseum/conf:30
 msgid "Upgrade soldier evade 1"
 msgstr ""
 
-#: ../../../tribes/empire/colosseum/conf:31
-msgid "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
+#: ../../tribes/empire/colosseum/conf:31
+msgid ""
+"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 
-#: ../../../tribes/empire/conf:18
+#: ../../tribes/empire/conf:18
 msgid "The Widelands Development Team"
 msgstr "Команда разработчиков Widelands"
 
-#: ../../../tribes/empire/conf:19
-#, fuzzy
+#: ../../tribes/empire/conf:19
 msgid "Empire"
-msgstr "Империя"
+msgstr ""
 
-#: ../../../tribes/empire/conf:20
+#: ../../tribes/empire/conf:20
 msgid "This is the culture of the roman Empire."
 msgstr "Это культура Римской Империи"
 
-#: ../../../tribes/empire/conf:36
+#: ../../tribes/empire/conf:39
 msgid "Ashes"
 msgstr ""
 
-#: ../../../tribes/empire/conf:37
+#: ../../tribes/empire/conf:40
 msgid "Field medium"
 msgstr ""
 
-#: ../../../tribes/empire/conf:38
+#: ../../tribes/empire/conf:41
 msgid "Field small"
 msgstr ""
 
-#: ../../../tribes/empire/conf:39
+#: ../../tribes/empire/conf:42
 msgid "Field tiny"
 msgstr ""
 
-#: ../../../tribes/empire/conf:40
+#: ../../tribes/empire/conf:43
 msgid "Field ripe"
 msgstr ""
 
-#: ../../../tribes/empire/conf:41
+#: ../../tribes/empire/conf:44
 msgid "Field harvested"
 msgstr ""
 
-#: ../../../tribes/empire/conf:42
+#: ../../tribes/empire/conf:45
 msgid "Destroyed building"
 msgstr ""
 
-#: ../../../tribes/empire/conf:43
+#: ../../tribes/empire/conf:46
 msgid "Resource indicator coal little"
 msgstr ""
 
-#: ../../../tribes/empire/conf:44
+#: ../../tribes/empire/conf:47
 msgid "Resource indicator coal much"
 msgstr ""
 
-#: ../../../tribes/empire/conf:45
-msgid "Resource indicator gold litte"
+#: ../../tribes/empire/conf:48
+msgid "Resource indicator gold little"
 msgstr ""
 
-#: ../../../tribes/empire/conf:46
+#: ../../tribes/empire/conf:49
 msgid "Resource indicator gold much"
 msgstr ""
 
-#: ../../../tribes/empire/conf:47
+#: ../../tribes/empire/conf:50
 msgid "Resource indicator granit little"
 msgstr ""
 
-#: ../../../tribes/empire/conf:48
+#: ../../tribes/empire/conf:51
 msgid "Resource indicator granit much"
 msgstr ""
 
-#: ../../../tribes/empire/conf:49
+#: ../../tribes/empire/conf:52
 msgid "Resource indicator iron little"
 msgstr ""
 
-#: ../../../tribes/empire/conf:50
+#: ../../tribes/empire/conf:53
 msgid "Resource indicator iron much"
 msgstr ""
 
-#: ../../../tribes/empire/conf:51
+#: ../../tribes/empire/conf:54
 msgid "Resource indicator no resource"
 msgstr ""
 
-#: ../../../tribes/empire/conf:52
+#: ../../tribes/empire/conf:55
 msgid "Resource indicator water"
 msgstr ""
 
-#: ../../../tribes/empire/conf:53
-#, fuzzy
+#: ../../tribes/empire/conf:56
 msgid "Vine medium"
-msgstr "Виноградарь"
+msgstr ""
 
-#: ../../../tribes/empire/conf:54
+#: ../../tribes/empire/conf:57
 msgid "Vine small"
 msgstr ""
 
-#: ../../../tribes/empire/conf:55
-#, fuzzy
+#: ../../tribes/empire/conf:58
 msgid "Vine tiny"
-msgstr "Вино"
+msgstr ""
 
-#: ../../../tribes/empire/conf:56
-#, fuzzy
+#: ../../tribes/empire/conf:59
 msgid "Vine ripe"
-msgstr "Вино"
+msgstr ""
 
-#: ../../../tribes/empire/conf:59
+#: ../../tribes/empire/conf:62
 msgid "Advanced Lance"
 msgstr "Длинная пика"
 
-#: ../../../tribes/empire/conf:60
+#: ../../tribes/empire/conf:63
 msgid "Armour"
 msgstr "Доспехи"
 
-#: ../../../tribes/empire/conf:61
+#: ../../tribes/empire/conf:64
 msgid "Axe"
 msgstr "Топор"
 
-#: ../../../tribes/empire/conf:62
+#: ../../tribes/empire/conf:65
 msgid "Peel"
 msgstr ""
 
-#: ../../../tribes/empire/conf:63
+#: ../../tribes/empire/conf:66
 msgid "Basket"
 msgstr "Корзина"
 
-#: ../../../tribes/empire/conf:64
+#: ../../tribes/empire/conf:67
 msgid "Beer"
 msgstr "Пиво"
 
-#: ../../../tribes/empire/conf:65
+#: ../../tribes/empire/conf:68
 msgid "Bread"
 msgstr "Хлеб"
 
-#: ../../../tribes/empire/conf:66
+#: ../../tribes/empire/conf:69
 msgid "Chain-Armour"
 msgstr "Кольчуга"
 
-#: ../../../tribes/empire/conf:67
+#: ../../tribes/empire/conf:70
 msgid "Cloth"
 msgstr "Сукно"
 
-#: ../../../tribes/empire/conf:68
+#: ../../tribes/empire/conf:71
 msgid "Coal"
 msgstr "Уголь"
 
-#: ../../../tribes/empire/conf:69
+#: ../../tribes/empire/conf:72
 msgid "Fire Tongs"
 msgstr "Щипцы кузнеца"
 
-#: ../../../tribes/empire/conf:70
+#: ../../tribes/empire/conf:73
 msgid "Fish"
 msgstr "Рыба"
 
-#: ../../../tribes/empire/conf:71
+#: ../../tribes/empire/conf:74
 msgid "Fishing Rod"
 msgstr "Удочка"
 
-#: ../../../tribes/empire/conf:72
+#: ../../tribes/empire/conf:75
 msgid "Flour"
 msgstr "Мука"
 
-#: ../../../tribes/empire/conf:73
+#: ../../tribes/empire/conf:76
 msgid "Gold"
 msgstr "Золото"
 
-#: ../../../tribes/empire/conf:74
+#: ../../tribes/empire/conf:77
 msgid "Goldstone"
 msgstr "Слиток золота"
 
-#: ../../../tribes/empire/conf:75
+#: ../../tribes/empire/conf:78
 msgid "Grape"
 msgstr "Виноград"
 
-#: ../../../tribes/empire/conf:76
+#: ../../tribes/empire/conf:79
 msgid "Hammer"
 msgstr "Молот"
 
-#: ../../../tribes/empire/conf:77
+#: ../../tribes/empire/conf:80
 msgid "Heavy Lance"
 msgstr "Тяжёлая пика"
 
-#: ../../../tribes/empire/conf:78
-#, fuzzy
+#: ../../tribes/empire/conf:81
 msgid "Helmet"
-msgstr "Шлем"
+msgstr ""
 
-#: ../../../tribes/empire/conf:79
+#: ../../tribes/empire/conf:82
 msgid "Hunting Spear"
 msgstr "Копьё охотника"
 
-#: ../../../tribes/empire/conf:80
+#: ../../tribes/empire/conf:83
 msgid "Iron"
 msgstr "Железо"
 
-#: ../../../tribes/empire/conf:81
-#, fuzzy
+#: ../../tribes/empire/conf:84
 msgid "Iron Ore"
-msgstr "Железная руда"
+msgstr ""
 
-#: ../../../tribes/empire/conf:82
+#: ../../tribes/empire/conf:85
 msgid "Kitchen Tools"
 msgstr "Кухонная утварь"
 
-#: ../../../tribes/empire/conf:83
+#: ../../tribes/empire/conf:86
 msgid "Lance"
 msgstr "Пика"
 
-#: ../../../tribes/empire/conf:84
-#, fuzzy
+#: ../../tribes/empire/conf:87
 msgid "Marble Column"
-msgstr "Мраморная колонна"
+msgstr ""
 
-#: ../../../tribes/empire/conf:85
+#: ../../tribes/empire/conf:88
 msgid "Marble"
 msgstr "Мрамор"
 
-#: ../../../tribes/empire/conf:86
+#: ../../tribes/empire/conf:89
 msgid "Meal"
 msgstr "Сытный обед"
 
-#: ../../../tribes/empire/conf:87
+#: ../../tribes/empire/conf:90
 msgid "Meat"
 msgstr "Мясо"
 
-#: ../../../tribes/empire/conf:88
+#: ../../tribes/empire/conf:91
 msgid "Pick"
 msgstr "Кирка"
 
-#: ../../../tribes/empire/conf:89
+#: ../../tribes/empire/conf:92
 msgid "Plate-Armour"
 msgstr "Пластинчатая броня"
 
-#: ../../../tribes/empire/conf:90
+#: ../../tribes/empire/conf:93
 msgid "Ration"
 msgstr "Паёк"
 
-#: ../../../tribes/empire/conf:91
+#: ../../tribes/empire/conf:94
 msgid "Saw"
 msgstr "Пила"
 
-#: ../../../tribes/empire/conf:92
+#: ../../tribes/empire/conf:95
 msgid "Scythe"
 msgstr "Коса"
 
-#: ../../../tribes/empire/conf:93
+#: ../../tribes/empire/conf:96
 msgid "Shovel"
 msgstr "Лопата"
 
-#: ../../../tribes/empire/conf:94
+#: ../../tribes/empire/conf:97
 msgid "Stones"
 msgstr "Камни"
 
-#: ../../../tribes/empire/conf:95
+#: ../../tribes/empire/conf:98
 msgid "Trunk"
 msgstr "Бревно"
 
-#: ../../../tribes/empire/conf:96
+#: ../../tribes/empire/conf:99
 msgid "War-Lance"
 msgstr "Боевая Пика"
 
-#: ../../../tribes/empire/conf:97
+#: ../../tribes/empire/conf:100
 msgid "Water"
 msgstr "Вода"
 
-#: ../../../tribes/empire/conf:98
+#: ../../tribes/empire/conf:101
 msgid "Wheat"
 msgstr "Пшеница"
 
-#: ../../../tribes/empire/conf:99
+#: ../../tribes/empire/conf:102
 msgid "Wine"
 msgstr "Вино"
 
-#: ../../../tribes/empire/conf:100
+#: ../../tribes/empire/conf:103
 msgid "Wood"
 msgstr "Дерево"
 
-#: ../../../tribes/empire/conf:101
+#: ../../tribes/empire/conf:104
 msgid "Wood Lance"
 msgstr "Деревянное копьё"
 
-#: ../../../tribes/empire/conf:102
+#: ../../tribes/empire/conf:105
 msgid "Wool"
 msgstr "Шерсть"
 
-#: ../../../tribes/empire/conf:105
+#: ../../tribes/empire/conf:108
 msgid "Carrier"
 msgstr "Носильщик"
 
-#: ../../../tribes/empire/conf:108
+#: ../../tribes/empire/conf:109
+msgid "Donkey"
+msgstr ""
+
+#: ../../tribes/empire/conf:112
 msgid "Soldier"
 msgstr "Солдат"
 
-#: ../../../tribes/empire/conf:111
+#: ../../tribes/empire/conf:115
 msgid "Armoursmith"
 msgstr "Цех доспехов"
 
-#: ../../../tribes/empire/conf:112
+#: ../../tribes/empire/conf:116
 msgid "Baker"
 msgstr "Пекарь"
 
-#: ../../../tribes/empire/conf:113
+#: ../../tribes/empire/conf:117
 msgid "Brewer"
 msgstr "Пивовар"
 
-#: ../../../tribes/empire/conf:114
+#: ../../tribes/empire/conf:118
 msgid "Builder"
 msgstr "Строитель"
 
-#: ../../../tribes/empire/conf:115
+#: ../../tribes/empire/conf:119
 msgid "Burner"
 msgstr "Угольщик"
 
-#: ../../../tribes/empire/conf:116
+#: ../../tribes/empire/conf:120
 msgid "Farmer"
 msgstr "Фермер"
 
-#: ../../../tribes/empire/conf:117
+#: ../../tribes/empire/conf:121
 msgid "Fisher"
 msgstr "Рыбак"
 
-#: ../../../tribes/empire/conf:118
+#: ../../tribes/empire/conf:122
 msgid "Forester"
 msgstr "Лесник"
 
-#: ../../../tribes/empire/conf:119
+#: ../../tribes/empire/conf:123
 msgid "Geologist"
 msgstr "Геолог"
 
-#: ../../../tribes/empire/conf:120
+#: ../../tribes/empire/conf:124
 msgid "Hunter"
 msgstr "Охотник"
 
-#: ../../../tribes/empire/conf:121
+#: ../../tribes/empire/conf:125
 msgid "Innkeeper"
 msgstr "Трактирщик"
 
-#: ../../../tribes/empire/conf:122
+#: ../../tribes/empire/conf:126
 msgid "Lumberjack"
 msgstr "Дровосек"
 
-#: ../../../tribes/empire/conf:123
+#: ../../tribes/empire/conf:127
 msgid "Master Miner"
 msgstr "Главный шахтёр"
 
-#: ../../../tribes/empire/conf:124
+#: ../../tribes/empire/conf:128
 msgid "Miller"
 msgstr "Мельник"
 
-#: ../../../tribes/empire/conf:125
+#: ../../tribes/empire/conf:129
 msgid "Miner"
 msgstr "Шахтёр"
 
-#: ../../../tribes/empire/conf:126
-#, fuzzy
+#: ../../tribes/empire/conf:130
 msgid "Pig Breeder"
-msgstr "Свинопас"
+msgstr ""
 
-#: ../../../tribes/empire/conf:127
+#: ../../tribes/empire/conf:131
 msgid "Shepherd"
 msgstr ""
 
-#: ../../../tribes/empire/conf:128
+#: ../../tribes/empire/conf:132
 msgid "Smelter"
 msgstr "Плавильщик"
 
-#: ../../../tribes/empire/conf:129
+#: ../../tribes/empire/conf:133
 msgid "Stonemason"
 msgstr "Каменщик"
 
-#: ../../../tribes/empire/conf:130
-#, fuzzy
+#: ../../tribes/empire/conf:134
 msgid "Toolsmith"
-msgstr "Цех доспехов"
+msgstr ""
 
-#: ../../../tribes/empire/conf:131
+#: ../../tribes/empire/conf:135
 msgid "Trainer"
 msgstr "Пастух"
 
-#: ../../../tribes/empire/conf:132
+#: ../../tribes/empire/conf:136
 msgid "Weaponsmith"
 msgstr "Цех оружия"
 
-#: ../../../tribes/empire/conf:133
+#: ../../tribes/empire/conf:137
 msgid "Weaver"
 msgstr "Ткач"
 
-#: ../../../tribes/empire/conf:134
-#, fuzzy
+#: ../../tribes/empire/conf:138
 msgid "Vine Farmer"
-msgstr "Виноградарь"
+msgstr ""
 
-#: ../../../tribes/empire/conf:137
+#: ../../tribes/empire/conf:139
+msgid "Scout"
+msgstr ""
+
+#: ../../tribes/empire/conf:140
+msgid "Donkey Breeder"
+msgstr ""
+
+#: ../../tribes/empire/conf:143
 msgid "Construction Site"
 msgstr "Строительная площадка"
 
-#: ../../../tribes/empire/conf:140
+#: ../../tribes/empire/conf:146
 msgid "Colosseum"
 msgstr "Колизей"
 
-#: ../../../tribes/empire/conf:141
+#: ../../tribes/empire/conf:147
 msgid "Arena"
 msgstr "Арена"
 
-#: ../../../tribes/empire/conf:142
+#: ../../tribes/empire/conf:148
 msgid "Trainingscamp"
 msgstr "Казарма"
 
-#: ../../../tribes/empire/conf:145
+#: ../../tribes/empire/conf:151
+#: ../../tribes/empire/conf:170
 msgid "Sentry"
 msgstr "Караульная"
 
-#: ../../../tribes/empire/conf:146
+#: ../../tribes/empire/conf:152
 msgid "Barracks"
 msgstr "Бараки"
 
-#: ../../../tribes/empire/conf:147
+#: ../../tribes/empire/conf:153
+#: ../../tribes/empire/conf:166
 msgid "Barrier"
 msgstr "Застава"
 
-#: ../../../tribes/empire/conf:148
+#: ../../tribes/empire/conf:154
+#: ../../tribes/empire/conf:160
 msgid "Castle"
 msgstr "Замок"
 
-#: ../../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:155
+#: ../../tribes/empire/conf:169
 msgid "Fortress"
 msgstr "Укрепление"
 
-#: ../../../tribes/empire/conf:150
+#: ../../tribes/empire/conf:156
 msgid "Outpost"
 msgstr "Форпост"
 
-#: ../../../tribes/empire/conf:151
+#: ../../tribes/empire/conf:157
+#: ../../tribes/empire/conf:165
 msgid "Tower"
 msgstr "Башня"
 
-#: ../../../tribes/empire/conf:154
+#: ../../tribes/empire/conf:161
+msgid "Guardhall"
+msgstr ""
+
+#: ../../tribes/empire/conf:162
+msgid "Guardhouse"
+msgstr ""
+
+#: ../../tribes/empire/conf:163
+msgid "High Tower"
+msgstr ""
+
+#: ../../tribes/empire/conf:164
+msgid "Small Tower"
+msgstr ""
+
+#: ../../tribes/empire/conf:167
+msgid "Citadel"
+msgstr ""
+
+#: ../../tribes/empire/conf:168
+msgid "Donjon"
+msgstr ""
+
+#: ../../tribes/empire/conf:171
+msgid "Stronghold"
+msgstr ""
+
+#: ../../tribes/empire/conf:174
 msgid "Headquarters"
 msgstr "Штаб"
 
-#: ../../../tribes/empire/conf:155
-#, fuzzy
+#: ../../tribes/empire/conf:175
 msgid "Headquarters shipwreck"
-msgstr "Штаб"
+msgstr ""
 
-#: ../../../tribes/empire/conf:156
+#: ../../tribes/empire/conf:176
 msgid "Warehouse"
 msgstr "Склад"
 
-#: ../../../tribes/empire/conf:159
-#, fuzzy
+#: ../../tribes/empire/conf:179
 msgid "Armour Smithy"
-msgstr "Цех доспехов"
+msgstr ""
 
-#: ../../../tribes/empire/conf:160
+#: ../../tribes/empire/conf:180
 msgid "Bakery"
 msgstr "Пекарня"
 
-#: ../../../tribes/empire/conf:161
+#: ../../tribes/empire/conf:181
 msgid "Brewery"
 msgstr "Пивоварня"
 
-#: ../../../tribes/empire/conf:162
+#: ../../tribes/empire/conf:182
 msgid "Charcoal Burner"
 msgstr "Обжиг угля"
 
-#: ../../../tribes/empire/conf:163
+#: ../../tribes/empire/conf:183
 msgid "Deep Coal Mine"
 msgstr "Глубокая Угольная шахта"
 
-#: ../../../tribes/empire/conf:164
-#, fuzzy
+#: ../../tribes/empire/conf:184
 msgid "Coal Mine"
-msgstr "Угольная шахта"
+msgstr ""
 
-#: ../../../tribes/empire/conf:165
+#: ../../tribes/empire/conf:185
 msgid "Deep Gold Mine"
 msgstr "Глубокая Золотоносная шахта"
 
-#: ../../../tribes/empire/conf:166
+#: ../../tribes/empire/conf:186
 msgid "Deep Marble Mine"
 msgstr "Глубокая Мраморная шахта"
 
-#: ../../../tribes/empire/conf:167
+#: ../../tribes/empire/conf:187
 msgid "Deep Iron Ore Mine"
 msgstr "Глубокая Железоносная шахта"
 
-#: ../../../tribes/empire/conf:168
+#: ../../tribes/empire/conf:188
 msgid "Farm"
 msgstr "Ферма"
 
-#: ../../../tribes/empire/conf:169
-#, fuzzy
+#: ../../tribes/empire/conf:189
 msgid "Fisher's House"
-msgstr "Хижина рыбака"
+msgstr ""
 
-#: ../../../tribes/empire/conf:170
-#, fuzzy
+#: ../../tribes/empire/conf:190
 msgid "Forester's House"
-msgstr "Хижина Лесника"
+msgstr ""
 
-#: ../../../tribes/empire/conf:171
+#: ../../tribes/empire/conf:191
 msgid "Gold Mine"
 msgstr "Золотоносная шахта"
 
-#: ../../../tribes/empire/conf:172
-#, fuzzy
+#: ../../tribes/empire/conf:192
 msgid "Hunter's House"
-msgstr "Хижина охотника"
+msgstr ""
 
-#: ../../../tribes/empire/conf:173
+#: ../../tribes/empire/conf:193
 msgid "Inn"
 msgstr "Постоялый двор"
 
-#: ../../../tribes/empire/conf:174
-#, fuzzy
+#: ../../tribes/empire/conf:194
 msgid "Lumberjack's House"
-msgstr "Дровосек"
+msgstr ""
 
-#: ../../../tribes/empire/conf:175
+#: ../../tribes/empire/conf:195
 msgid "Marble Mine"
 msgstr "Мраморная шахта"
 
-#: ../../../tribes/empire/conf:176
+#: ../../tribes/empire/conf:196
 msgid "Mill"
 msgstr "Мельница"
 
-#: ../../../tribes/empire/conf:177
+#: ../../tribes/empire/conf:197
 msgid "Iron Ore Mine"
 msgstr "Железоносная шахта"
 
-#: ../../../tribes/empire/conf:178
+#: ../../tribes/empire/conf:198
 msgid "Piggery"
 msgstr "Свинарник"
 
-#: ../../../tribes/empire/conf:179
+#: ../../tribes/empire/conf:199
 msgid "Quarry"
 msgstr "Каменоломня"
 
-#: ../../../tribes/empire/conf:180
+#: ../../tribes/empire/conf:200
 msgid "Sawmill"
 msgstr "Лесопилка"
 
-#: ../../../tribes/empire/conf:181
+#: ../../tribes/empire/conf:201
 msgid "Sheepfarm"
 msgstr "Овечья ферма"
 
-#: ../../../tribes/empire/conf:182
+#: ../../tribes/empire/conf:202
 msgid "Smelting Works"
 msgstr "Плавильня"
 
-#: ../../../tribes/empire/conf:183
-#, fuzzy
+#: ../../tribes/empire/conf:203
 msgid "Stonemason's House"
-msgstr "Каменщик"
+msgstr ""
 
-#: ../../../tribes/empire/conf:184
+#: ../../tribes/empire/conf:204
 msgid "Tavern"
 msgstr "Таверна"
 
-#: ../../../tribes/empire/conf:185
-#, fuzzy
+#: ../../tribes/empire/conf:205
 msgid "Toolsmithy"
-msgstr "Цех доспехов"
+msgstr ""
 
-#: ../../../tribes/empire/conf:186
-#, fuzzy
+#: ../../tribes/empire/conf:206
 msgid "Weapon Smithy"
-msgstr "Цех оружия"
+msgstr ""
 
-#: ../../../tribes/empire/conf:187
-#, fuzzy
+#: ../../tribes/empire/conf:207
 msgid "Weaving Mill"
-msgstr "Прядильный комбинат"
+msgstr ""
 
-#: ../../../tribes/empire/conf:188
+#: ../../tribes/empire/conf:208
 msgid "Well"
 msgstr "Колодец"
 
-#: ../../../tribes/empire/conf:189
-#, fuzzy
+#: ../../tribes/empire/conf:209
 msgid "Winery"
-msgstr "Вино"
+msgstr ""
 
-#: ../../../tribes/empire/conf:190
+#: ../../tribes/empire/conf:210
 msgid "Vineyard"
 msgstr "Виноградник"
 
-#: ../../../tribes/empire/conf:193
-#, fuzzy
+#: ../../tribes/empire/conf:211
+msgid "Scout's House"
+msgstr ""
+
+#: ../../tribes/empire/conf:212
+msgid "Donkeyfarm"
+msgstr ""
+
+#: ../../tribes/empire/conf:215
 msgid "Headquarters medium"
-msgstr "Штаб"
+msgstr ""
 
-#: ../../../tribes/empire/conf:194
-#, fuzzy
+#: ../../tribes/empire/conf:216
 msgid "Castle village"
-msgstr "Замок"
+msgstr ""
 
-#: ../../../tribes/empire/farm/conf:15
+#: ../../tribes/empire/donkey/conf:1
+msgid "Helps to carry items at heavy used roads."
+msgstr ""
+
+#: ../../tribes/empire/donkeybreeder/conf:1
+msgid "Breeds cute and helpful donkeys"
+msgstr ""
+
+#: ../../tribes/empire/farm/conf:15
 msgid "Plant wheat"
 msgstr ""
 
-#: ../../../tribes/empire/farm/conf:17
+#: ../../tribes/empire/farm/conf:17
 msgid "Harvest wheat"
 msgstr ""
 
-#: ../../../tribes/empire/farmer/conf:2
+#: ../../tribes/empire/farmer/conf:2
 msgid "Plants fields."
 msgstr ""
 
-#: ../../../tribes/empire/fire_tongs/conf:1
-#, fuzzy
-msgid "The fire tongs are the tool of the smelter, working in the smelting works. They are produced by the toolsmith."
-msgstr "Щипцы кузнеца необходимы кузнецам в Кузнице. Они производятся плотником."
+#: ../../tribes/empire/fire_tongs/conf:1
+msgid ""
+"The fire tongs are the tool of the smelter, working in the smelting works. "
+"They are produced by the toolsmith."
+msgstr ""
 
-#: ../../../tribes/empire/fish/conf:1
-#, fuzzy
+#: ../../tribes/empire/fish/conf:1
 msgid "Besides bread and meat, fish is also a foodstuff for the Empire."
-msgstr "Кроме хлеба и мяса, рыба также является пищей, добываемой в Империи."
+msgstr ""
 
-#: ../../../tribes/empire/fisher/conf:1
+#: ../../tribes/empire/fisher/conf:1
 msgid "Gets fish out of the sea."
 msgstr ""
 
-#: ../../../tribes/empire/fishing_rod/conf:1
-#, fuzzy
-msgid "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
-msgstr "Удочка необходима рыбаку для ловли рыбы. Производится плотником."
+#: ../../tribes/empire/fishing_rod/conf:1
+msgid ""
+"Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
+msgstr ""
 
-#: ../../../tribes/empire/flour/conf:1
-msgid "Flour is produced out of wheat and is needed for the tasty Empire bread."
-msgstr "Мука производится из пшеницы и необходима для вкусного хлеба Империи."
+#: ../../tribes/empire/flour/conf:1
+msgid ""
+"Flour is produced out of wheat and is needed for the tasty Empire bread."
+msgstr ""
+"Мука производится из пшеницы и необходима для вкусного хлеба Империи."
 
-#: ../../../tribes/empire/forester/conf:1
+#: ../../tribes/empire/forester/conf:1
 msgid "Plants trees."
 msgstr ""
 
-#: ../../../tribes/empire/geologist/conf:1
+#: ../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
 msgstr ""
 
-#: ../../../tribes/empire/gold/conf:1
-msgid "Gold is the most valuable of all metals; only very important things are garnished with it."
-msgstr "Золото наиболее ценный из всех металлов; только очень важные вещи украшаются золотом."
+#: ../../tribes/empire/gold/conf:1
+msgid ""
+"Gold is the most valuable of all metals; only very important things are "
+"garnished with it."
+msgstr ""
+"Золото наиболее ценный из всех металлов; только очень важные вещи украшаются "
+"золотом."
 
-#: ../../../tribes/empire/goldstone/conf:1
+#: ../../tribes/empire/goldstone/conf:1
 msgid "This is the yellow goldstone."
 msgstr "Это слиток жёлтого золота."
 
-#: ../../../tribes/empire/grape/conf:1
-#, fuzzy
+#: ../../tribes/empire/grape/conf:1
 msgid "These grapes are the basic for tasty wine."
-msgstr "Этот виноград является основой будущего вкусного вина."
+msgstr ""
 
-#: ../../../tribes/empire/hammer/conf:1
-#, fuzzy
-msgid "The hammer is an essential tool. It is needed by the geologist, the worker, the armour- and weaponsmith. Make sure you always got some in reserve! It is produced by the toolsmith."
-msgstr "Молот это важный инструмент. Он необходим геологу, рабочему, плотнику и обоим кузнецам (оружейникам). Держите всегда небольшое количество в резерве! Он производится плотником."
+#: ../../tribes/empire/hammer/conf:1
+msgid ""
+"The hammer is an essential tool. It is needed by the geologist, the worker, "
+"the armour- and weaponsmith. Make sure you always got some in reserve! It is "
+"produced by the toolsmith."
+msgstr ""
 
-#: ../../../tribes/empire/heavy_lance/conf:1
+#: ../../tribes/empire/heavy_lance/conf:1
 msgid "This is a good warrior lance, with a steel-top and a little blade."
-msgstr "Это хорошая боевая пика, с железным наконечником и небольшим лезвием."
+msgstr ""
+"Это хорошая боевая пика, с железным наконечником и небольшим лезвием."
 
-#: ../../../tribes/empire/helm/conf:1
+#: ../../tribes/empire/helm/conf:1
 msgid "Basic defence of a warrior"
 msgstr "Простая защита воинов"
 
-#: ../../../tribes/empire/hunter/conf:1
+#: ../../tribes/empire/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
 msgstr ""
 
-#: ../../../tribes/empire/hunters_house/conf:12
-#: ../../../tribes/empire/stonemasons_house/conf:18
-#: ../../../tribes/empire/smelting_works/conf:21
-#: ../../../tribes/empire/burners_house/conf:16
-#: ../../../tribes/empire/winery/conf:17 ../../../tribes/empire/farm/conf:19
-#: ../../../tribes/empire/sawmill/conf:17
-#: ../../../tribes/empire/bakery/conf:17
-#: ../../../tribes/empire/deep_goldmine/conf:22
-#: ../../../tribes/empire/armoursmithy/conf:27
-#: ../../../tribes/empire/deep_oremine/conf:22
-#: ../../../tribes/empire/quarry/conf:20
-#: ../../../tribes/empire/toolsmithy/conf:42
-#: ../../../tribes/empire/marblemine/conf:24
-#: ../../../tribes/empire/weaving-mill/conf:16
-#: ../../../tribes/empire/coalmine/conf:21
-#: ../../../tribes/empire/deep_coalmine/conf:22
-#: ../../../tribes/empire/inn/conf:20
-#: ../../../tribes/empire/lumberjacks_house/conf:15
-#: ../../../tribes/empire/piggery/conf:18 ../../../tribes/empire/well/conf:13
-#: ../../../tribes/empire/vineyard/conf:18
-#: ../../../tribes/empire/deep_marblemine/conf:23
-#: ../../../tribes/empire/mill/conf:17 ../../../tribes/empire/brewery/conf:17
-#: ../../../tribes/empire/foresters_house/conf:15
-#: ../../../tribes/empire/sheepfarm/conf:18
-#: ../../../tribes/empire/weaponsmithy/conf:31
-#: ../../../tribes/empire/oremine/conf:21
-#: ../../../tribes/empire/goldmine/conf:21
-#: ../../../tribes/empire/fishers_house/conf:16
-#: ../../../tribes/empire/tavern/conf:19
-msgid "Work"
+#: ../../tribes/empire/hunting_spear/conf:1
+msgid ""
+"This spear is light enough to be thrown, but heavy enough to kill any animal "
+"in one blow. It is only used by the hunters."
 msgstr ""
+"Это копьё довольно лёгкое, чтоб его можно было бросать, но имеет достаточный "
+"вес, чтобы убить животное в один миг. Оно используется только охотниками."
 
-#: ../../../tribes/empire/hunting_spear/conf:1
-msgid "This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters."
-msgstr "Это копьё довольно лёгкое, чтоб его можно было бросать, но имеет достаточный вес, чтобы убить животное в один миг. Оно используется только охотниками."
-
-#: ../../../tribes/empire/innkeeper/conf:1
+#: ../../tribes/empire/innkeeper/conf:1
 msgid "Produces food for miners."
 msgstr ""
 
-#: ../../../tribes/empire/iron/conf:1
-#, fuzzy
+#: ../../tribes/empire/iron/conf:1
 msgid "Weapons and tools are made of iron."
-msgstr "Оружие и инструменты изготавливаются из железа."
+msgstr ""
 
-#: ../../../tribes/empire/ironore/conf:1
-#, fuzzy
+#: ../../tribes/empire/ironore/conf:1
 msgid "This is the red iron ore."
-msgstr "Это красный железняк"
+msgstr ""
 
-#: ../../../tribes/empire/kitchen_tools/conf:1
-#, fuzzy
+#: ../../tribes/empire/kitchen_tools/conf:1
 msgid "How to create a meal, snack or ration, if there are no kitchen tools?"
-msgstr "Как приготовить пайки и обеды, если нет кухни?"
+msgstr ""
 
-#: ../../../tribes/empire/lance/conf:1
+#: ../../tribes/empire/lance/conf:1
 msgid "This wooden lance has an iron spike."
 msgstr "Эта деревянная пика имеет металлическое остриё"
 
-#: ../../../tribes/empire/lumberjack/conf:1
+#: ../../tribes/empire/lumberjack/conf:1
 msgid "Fells trees."
 msgstr ""
 
-#: ../../../tribes/empire/marble/conf:1
-msgid "Marble is the beautiful stone, which is cutted out of the mountains and which is used for beautiful buildings and columns."
-msgstr "Мрамор это прекрасный камень, который вырезается в горах и используется для строительства прекрасных зданий и колонн."
+#: ../../tribes/empire/marble/conf:1
+msgid ""
+"Marble is the beautiful stone, which is cutted out of the mountains and "
+"which is used for beautiful buildings and columns."
+msgstr ""
+"Мрамор это прекрасный камень, который вырезается в горах и используется для "
+"строительства прекрасных зданий и колонн."
 
-#: ../../../tribes/empire/marblecolumn/conf:1
-#, fuzzy
-msgid "Marble columns present the high culture of the Empire, so they are needed for nearly every bigger building."
-msgstr "Мраморные колонны говорят о высокой культуре Империи, потому они необходимы вблизи каждого большого строения."
-
-#: ../../../tribes/empire/master-miner/conf:1
-#: ../../../tribes/empire/miner/conf:1
-msgid "Works deep in the mines to produce coal, iron or gold."
+#: ../../tribes/empire/marblecolumn/conf:1
+msgid ""
+"Marble columns present the high culture of the Empire, so they are needed "
+"for nearly every bigger building."
 msgstr ""
 
-#: ../../../tribes/empire/meal/conf:1
-msgid "A real meal which satisfies all miners needs."
-msgstr "Настоящая еда, удовлетворяющая всем потребностям шахтёров."
-
-#: ../../../tribes/empire/meat/conf:1
-#, fuzzy
-msgid "Meat contains a lot of energy. It is used in the inns and taverns to prepare lunch for the miners and in the soldier trainingcamps to keep warriors strong."
-msgstr "Мясо содержит много калорий. Оно используется на Постоялых дворах и в Тавернах для производства обедов для шахтёров и в тренировочных лагерях солдат, для поддержки силы воинов."
-
-#: ../../../tribes/empire/pick/conf:1
-#, fuzzy
-msgid "This pick is used by the stonemasons and the miners. It is produced by the toolsmith."
-msgstr "Кирка используется каменщиками и шахтёрами. Она производится плотником."
-
-#: ../../../tribes/empire/pig-breeder/conf:1
-msgid "Breeds pigs."
-msgstr ""
-
-#: ../../../tribes/empire/plate_armour/conf:1
-#, fuzzy
-msgid "The strongest armour existing for the Empire soldiers."
-msgstr "Наилучшая броня из существующих у солдат Империи."
-
-#: ../../../tribes/empire/quarry/conf:16
-#: ../../../tribes/empire/marblemine/conf:23
-#, fuzzy
-msgid "Mine stone"
-msgstr "Вино"
-
-#: ../../../tribes/empire/quarry/conf:17
-msgid "Mine stone (only for compatibility with old savegames (build13))"
-msgstr ""
-
-#: ../../../tribes/empire/quarry/conf:18
-#: ../../../tribes/empire/marblemine/conf:22
-#, fuzzy
+#: ../../tribes/empire/marblemine/conf:22
+#: ../../tribes/empire/quarry/conf:19
 msgid "Mine marble"
-msgstr "Мрамор"
+msgstr ""
 
-#: ../../../tribes/empire/quarry/conf:19
+#: ../../tribes/empire/marblemine/conf:23
+#: ../../tribes/empire/quarry/conf:20
 msgid "Mine marble (only for compatibility with old savegames (build13))"
 msgstr ""
 
-#: ../../../tribes/empire/ration/conf:1
+#: ../../tribes/empire/marblemine/conf:24
+#: ../../tribes/empire/quarry/conf:17
+msgid "Mine stone"
+msgstr ""
+
+#: ../../tribes/empire/marblemine/conf:25
+#: ../../tribes/empire/quarry/conf:18
+msgid "Mine stone (only for compatibility with old savegames (build13))"
+msgstr ""
+
+#: ../../tribes/empire/master-miner/conf:1
+#: ../../tribes/empire/miner/conf:1
+msgid "Works deep in the mines to obtain coal, iron or gold."
+msgstr ""
+
+#: ../../tribes/empire/meal/conf:1
+msgid "A real meal which satisfies all miners needs."
+msgstr "Настоящая еда, удовлетворяющая всем потребностям шахтёров."
+
+#: ../../tribes/empire/meat/conf:1
+msgid ""
+"Meat contains a lot of energy. It is used in the inns and taverns to prepare "
+"lunch for the miners and in the soldier trainingcamps to keep warriors "
+"strong."
+msgstr ""
+
+#: ../../tribes/empire/miller/conf:1
+msgid "Mills the wheat to produce flour."
+msgstr ""
+
+#: ../../tribes/empire/pick/conf:1
+msgid ""
+"This pick is used by the stonemasons and the miners. It is produced by the "
+"toolsmith."
+msgstr ""
+
+#: ../../tribes/empire/pig-breeder/conf:1
+msgid "Breeds pigs."
+msgstr ""
+
+#: ../../tribes/empire/plate_armour/conf:1
+msgid "The strongest armour existing for the Empire soldiers."
+msgstr ""
+
+#: ../../tribes/empire/ration/conf:1
 msgid "A small bite to keep miners strong and working."
 msgstr "Небольшой набор для поддержки сил шахтёров."
 
-#: ../../../tribes/empire/saw/conf:1
-#, fuzzy
-msgid "This saw is needed by the sawyer to create all the useful tools. It is produced by the toolsmith."
-msgstr "Пила необходима плотнику для производства всех инструментов. Производится плотником."
+#: ../../tribes/empire/saw/conf:1
+msgid ""
+"This saw is needed by the sawyer to create all the useful tools. It is "
+"produced by the toolsmith."
+msgstr ""
 
-#: ../../../tribes/empire/scythe/conf:1
-#, fuzzy
-msgid "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr "Коса это инструмент фермера. Производится плотником."
+#: ../../tribes/empire/scout/conf:1
+msgid ""
+"Scouts like Scotty the scout scout unscouted area in a scouty fashion."
+msgstr ""
 
-#: ../../../tribes/empire/shepherd/conf:1
+#: ../../tribes/empire/scythe/conf:1
+msgid ""
+"The Scythe is the tool of the farmers. It is produced by the toolsmith."
+msgstr ""
+
+#: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheeps."
 msgstr ""
 
-#: ../../../tribes/empire/shovel/conf:1
-#, fuzzy
-msgid "The shovel is needed for proper handling of plants. Therefore the forester uses it. It is produced by the toolsmith."
-msgstr "Лопата необходима для соответствующего ухода за растениями. Потому она используется лесником. Производится плотником."
+#: ../../tribes/empire/shovel/conf:1
+msgid ""
+"The shovel is needed for proper handling of plants. Therefore the forester "
+"uses it. It is produced by the toolsmith."
+msgstr ""
 
-#: ../../../tribes/empire/smelter/conf:1
-#, fuzzy
+#: ../../tribes/empire/smelter/conf:1
 msgid "Smelts iron."
-msgstr "Плавильщик"
+msgstr ""
 
-#: ../../../tribes/empire/smelting_works/conf:19
-#, fuzzy
+#: ../../tribes/empire/smelting_works/conf:22
 msgid "Smelt iron"
-msgstr "Плавильщик"
+msgstr ""
 
-#: ../../../tribes/empire/smelting_works/conf:20
+#: ../../tribes/empire/smelting_works/conf:23
 msgid "Smelt gold"
 msgstr ""
 
-#: ../../../tribes/empire/soldier/conf:1
+#: ../../tribes/empire/soldier/conf:1
 msgid "Defend and Conquer!"
 msgstr ""
 
-#: ../../../tribes/empire/stonemason/conf:1
+#: ../../tribes/empire/stone/conf:1
+#: ../../tribes/empire/wood/conf:1
+msgid "Stones and wood are the basic build material of the Empire."
+msgstr ""
+
+#: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granit and marble out of laying stones."
 msgstr ""
 
-#: ../../../tribes/empire/toolsmithy/conf:30
-#, fuzzy
-msgid "Produce bakingtray"
-msgstr "Лопата Пекаря"
+#: ../../tribes/empire/toolsmith/conf:1
+msgid "Produces tools for the workers."
+msgstr ""
 
-#: ../../../tribes/empire/toolsmithy/conf:31
+#: ../../tribes/empire/toolsmithy/conf:33
+msgid "Produce bakingtray"
+msgstr ""
+
+#: ../../tribes/empire/toolsmithy/conf:34
 msgid "Produce fire tongs"
 msgstr ""
 
-#: ../../../tribes/empire/toolsmithy/conf:32
-#, fuzzy
+#: ../../tribes/empire/toolsmithy/conf:35
 msgid "Produce fishing rod"
-msgstr "Удочка"
+msgstr ""
 
-#: ../../../tribes/empire/toolsmithy/conf:33
+#: ../../tribes/empire/toolsmithy/conf:36
 msgid "Produce hammer"
 msgstr ""
 
-#: ../../../tribes/empire/toolsmithy/conf:34
-#, fuzzy
+#: ../../tribes/empire/toolsmithy/conf:37
 msgid "Produce kitchen tools"
-msgstr "Кухонная утварь"
+msgstr ""
 
-#: ../../../tribes/empire/toolsmithy/conf:35
+#: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce pick"
 msgstr ""
 
-#: ../../../tribes/empire/toolsmithy/conf:36
+#: ../../tribes/empire/toolsmithy/conf:39
 msgid "Produce scythe"
 msgstr ""
 
-#: ../../../tribes/empire/toolsmithy/conf:37
+#: ../../tribes/empire/toolsmithy/conf:40
 msgid "Produce shovel"
 msgstr ""
 
-#: ../../../tribes/empire/toolsmithy/conf:38
-#, fuzzy
+#: ../../tribes/empire/toolsmithy/conf:41
 msgid "Produce hunting spear"
-msgstr "Копьё охотника"
+msgstr ""
 
-#: ../../../tribes/empire/toolsmithy/conf:39
+#: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce basket"
 msgstr ""
 
-#: ../../../tribes/empire/toolsmithy/conf:40
+#: ../../tribes/empire/toolsmithy/conf:43
 msgid "Produce saw"
 msgstr ""
 
-#: ../../../tribes/empire/toolsmithy/conf:41
+#: ../../tribes/empire/toolsmithy/conf:44
 msgid "Produce axe"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:39
+#: ../../tribes/empire/trainer/conf:1
+msgid "Trains the soldiers."
+msgstr ""
+
+#: ../../tribes/empire/trainingscamp/conf:39
 msgid "Upgrade soldier attack 0"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:40
-msgid "Upgrade soldier attack 0 (only for compatibility with old savegames (build13))"
+#: ../../tribes/empire/trainingscamp/conf:40
+msgid ""
+"Upgrade soldier attack 0 (only for compatibility with old savegames "
+"(build13))"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:41
+#: ../../tribes/empire/trainingscamp/conf:41
 msgid "Upgrade soldier attack 1"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:42
-msgid "Upgrade soldier attack 1 (only for compatibility with old savegames (build13))"
+#: ../../tribes/empire/trainingscamp/conf:42
+msgid ""
+"Upgrade soldier attack 1 (only for compatibility with old savegames "
+"(build13))"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:43
+#: ../../tribes/empire/trainingscamp/conf:43
 msgid "Upgrade soldier attack 2"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:44
-msgid "Upgrade soldier attack 2 (only for compatibility with old savegames (build13))"
+#: ../../tribes/empire/trainingscamp/conf:44
+msgid ""
+"Upgrade soldier attack 2 (only for compatibility with old savegames "
+"(build13))"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:45
+#: ../../tribes/empire/trainingscamp/conf:45
 msgid "Upgrade soldier attack 3"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:46
-msgid "Upgrade soldier attack 3 (only for compatibility with old savegames (build13))"
+#: ../../tribes/empire/trainingscamp/conf:46
+msgid ""
+"Upgrade soldier attack 3 (only for compatibility with old savegames "
+"(build13))"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:47
+#: ../../tribes/empire/trainingscamp/conf:47
 msgid "Upgrade soldier hitpoints 0"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:48
-msgid "Upgrade soldier hitpoints 0 (only for compatibility with old savegames (build13))"
+#: ../../tribes/empire/trainingscamp/conf:48
+msgid ""
+"Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
+"(build13))"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:49
+#: ../../tribes/empire/trainingscamp/conf:49
 msgid "Upgrade soldier hitpoints 1"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:50
-msgid "Upgrade soldier hitpoints 1 (only for compatibility with old savegames (build13))"
+#: ../../tribes/empire/trainingscamp/conf:50
+msgid ""
+"Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
+"(build13))"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:51
+#: ../../tribes/empire/trainingscamp/conf:51
 msgid "Upgrade soldier hitpoints 2"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:52
-msgid "Upgrade soldier hitpoints 2 (only for compatibility with old savegames (build13))"
+#: ../../tribes/empire/trainingscamp/conf:52
+msgid ""
+"Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
+"(build13))"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:53
+#: ../../tribes/empire/trainingscamp/conf:53
 msgid "Upgrade soldier hitpoints 3"
 msgstr ""
 
-#: ../../../tribes/empire/trainingscamp/conf:54
-msgid "Upgrade soldier hitpoints 3 (only for compatibility with old savegames (build13))"
+#: ../../tribes/empire/trainingscamp/conf:54
+msgid ""
+"Upgrade soldier hitpoints 3 (only for compatibility with old savegames "
+"(build13))"
 msgstr ""
 
-#: ../../../tribes/empire/trunk/conf:1
-#, fuzzy
+#: ../../tribes/empire/trunk/conf:1
 msgid "Trunks are one important build material of the Empire."
-msgstr "Бревно один из важных строительных материалов Империи."
+msgstr ""
 
-#: ../../../tribes/empire/vinefarmer/conf:1
-#, fuzzy
+#: ../../tribes/empire/vinefarmer/conf:1
 msgid "Grows vine."
-msgstr "Золотоносная шахта"
+msgstr ""
 
-#: ../../../tribes/empire/vineyard/conf:14
+#: ../../tribes/empire/vineyard/conf:17
 msgid "Plant vine"
 msgstr ""
 
-#: ../../../tribes/empire/vineyard/conf:16
-#, fuzzy
+#: ../../tribes/empire/vineyard/conf:19
 msgid "Harvest vine"
-msgstr "Мраморная шахта"
+msgstr ""
 
-#: ../../../tribes/empire/war_lance/conf:1
-#, fuzzy
-msgid "This is the best and sharpest weapon, the Empire weaponsmith creates for their warriors."
-msgstr "Это лучшее и самое острое оружие, которое римские оружейники создали для своих воинов"
+#: ../../tribes/empire/war_lance/conf:1
+msgid ""
+"This is the best and sharpest weapon, the Empire weaponsmith creates for "
+"their warriors."
+msgstr ""
 
-#: ../../../tribes/empire/water/conf:1
-msgid "Water is the most essential essence for life! This water is used in many places, be it to make bread or beer."
-msgstr "Вода это самая важная жидкость для жизни! Вода используется везде, будь это производство хлеба или пива."
+#: ../../tribes/empire/water/conf:1
+msgid ""
+"Water is the most essential essence for life! This water is used in many "
+"places, be it to make bread or beer."
+msgstr ""
+"Вода это самая важная жидкость для жизни! Вода используется везде, будь это "
+"производство хлеба или пива."
 
-#: ../../../tribes/empire/weaponsmithy/conf:26
+#: ../../tribes/empire/weaponsmith/conf:1
+msgid "Produces weapons for the soldiers."
+msgstr ""
+
+#: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce wood lance"
 msgstr ""
 
-#: ../../../tribes/empire/weaponsmithy/conf:27
-#, fuzzy
+#: ../../tribes/empire/weaponsmithy/conf:30
 msgid "Produce lance"
-msgstr "Деревянное копьё"
+msgstr ""
 
-#: ../../../tribes/empire/weaponsmithy/conf:28
-#, fuzzy
+#: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce advanced lance"
-msgstr "Длинная пика"
+msgstr ""
 
-#: ../../../tribes/empire/weaponsmithy/conf:29
-#, fuzzy
+#: ../../tribes/empire/weaponsmithy/conf:32
 msgid "Produce heavy lance"
-msgstr "Тяжёлая пика"
+msgstr ""
 
-#: ../../../tribes/empire/weaver/conf:1
+#: ../../tribes/empire/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
 msgstr ""
 
-#: ../../../tribes/empire/wheat/conf:1
-#, fuzzy
-msgid "Wheat is essential for surviving. Delicious bread and ales can be made of this wheat."
-msgstr "Пшеница важна для выживания, из неё можно сделать хороший хлеб и крепкое пиво."
+#: ../../tribes/empire/wheat/conf:1
+msgid ""
+"Wheat is essential for surviving. Delicious bread and ales can be made of "
+"this wheat."
+msgstr ""
 
-#: ../../../tribes/empire/wine/conf:1
-msgid "This wine gives enough power, to mine marble or gold. And furthermore, our soldiers like it, too."
-msgstr "Это вино придает сил шахтёрам, а кроме того и наши солдаты его любят."
+#: ../../tribes/empire/wine/conf:1
+msgid ""
+"This wine gives enough power, to mine marble or gold. And furthermore, our "
+"soldiers like it, too."
+msgstr ""
+"Это вино придает сил шахтёрам, а кроме того и наши солдаты его любят."
 
-#: ../../../tribes/empire/wood/conf:1 ../../../tribes/empire/stone/conf:1
-#, fuzzy
-msgid "Stones and wood are the basic build material of the Empire."
-msgstr "Камни и дерево основные строительные материалы Империи."
+#: ../../tribes/empire/wood_lance/conf:1
+msgid ""
+"This is a wooden lance, which is the basic of the Empires military system."
+msgstr ""
 
-#: ../../../tribes/empire/wood_lance/conf:1
-#, fuzzy
-msgid "This is a wooden lance, which is the basic of the Empires military system."
-msgstr "Это деревянное копьё, являющееся основой римской военной системы."
-
-#: ../../../tribes/empire/wool/conf:1
-#, fuzzy
+#: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheeps. Weaving mills use it to make cloth."
-msgstr "Шерсть, используется на Прядильных комбинатах Империи для производства сукна."
+msgstr ""
 
 #~ msgid "Carpenter's workshop"
 #~ msgstr "Деревообработка"
@@ -1148,8 +1264,12 @@ msgstr "Шерсть, используется на Прядильных ком�
 #~ msgid "Coalearth"
 #~ msgstr "Углезём"
 
-#~ msgid "This earth is found in the deep coal mines. It needs to be enhanced to get proper coal"
-#~ msgstr "Это грунт, который добывается в глубокой угольной шахте. Его необходимо переработать, чтобы получить нормальный уголь."
+#~ msgid ""
+#~ "This earth is found in the deep coal mines. It needs to be enhanced to get "
+#~ "proper coal"
+#~ msgstr ""
+#~ "Это грунт, который добывается в глубокой угольной шахте. Его необходимо "
+#~ "переработать, чтобы получить нормальный уголь."
 
 #~ msgid "Carpenter"
 #~ msgstr "Плотник"
