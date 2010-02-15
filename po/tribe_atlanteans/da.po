@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:32+0000\n"
-"Last-Translator: Joe Hansen <Unknown>\n"
+"POT-Creation-Date: 2010-02-14 18:26+0000\n"
+"PO-Revision-Date: 2010-02-15 13:36+0000\n"
+"Last-Translator: silentStatic <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-02-15 14:55+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -22,7 +22,7 @@ msgstr "Disse skjolde anvendes af de bedste altlanteanske soldater."
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Laver rustninger til soldaterne."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:23
 msgid "Produce steel shield"
@@ -76,7 +76,7 @@ msgstr "Arbejde"
 
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Bager brød til arbejderne."
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
@@ -104,7 +104,7 @@ msgstr "Høst sortrod"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
-msgstr ""
+msgstr "Sår og høster blackroot."
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
 msgid ""
@@ -431,7 +431,7 @@ msgstr "Bærer"
 
 #: ../../tribes/atlanteans/conf:110
 msgid "Horse"
-msgstr ""
+msgstr "Hest"
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Soldier"
@@ -531,11 +531,11 @@ msgstr "Træskærer"
 
 #: ../../tribes/atlanteans/conf:139
 msgid "Scout"
-msgstr ""
+msgstr "Spejder"
 
 #: ../../tribes/atlanteans/conf:140
 msgid "Horse Breeder"
-msgstr ""
+msgstr "Hæst"
 
 #: ../../tribes/atlanteans/conf:143
 msgid "Construction Site"
@@ -582,29 +582,29 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:159
 msgid "Citadel"
-msgstr ""
+msgstr "Citadel"
 
 #: ../../tribes/atlanteans/conf:160
 msgid "Donjon"
-msgstr ""
+msgstr "Borgtårn"
 
 #: ../../tribes/atlanteans/conf:161
 #: ../../tribes/atlanteans/conf:168
 msgid "Fortress"
-msgstr ""
+msgstr "Fæstning"
 
 #: ../../tribes/atlanteans/conf:162
 #: ../../tribes/atlanteans/conf:164
 msgid "Sentry"
-msgstr ""
+msgstr "Forpost"
 
 #: ../../tribes/atlanteans/conf:163
 msgid "Stronghold"
-msgstr ""
+msgstr "Bastion"
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Barracks"
-msgstr ""
+msgstr "Barakker"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Outpost"
@@ -720,7 +720,7 @@ msgstr "Træskærers hus"
 
 #: ../../tribes/atlanteans/conf:202
 msgid "Scout's House"
-msgstr ""
+msgstr "Spejder hus"
 
 #: ../../tribes/atlanteans/conf:203
 msgid "Horse Farm"
@@ -923,7 +923,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
-msgstr ""
+msgstr "Opdrætter stærke atlantiske hæste"
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -1028,7 +1028,7 @@ msgstr "Producer sortrodsmel"
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid "Mills wheat to produce flour."
-msgstr ""
+msgstr "Maler hvede for at lave mel"
 
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."
@@ -1060,7 +1060,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws the wood to produce planks."
-msgstr ""
+msgstr "Saver træet for at producere planker."
 
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
@@ -1077,6 +1077,9 @@ msgid ""
 "Shovels are needed for proper handling of plants. Therefore the forester and "
 "the blackroot farmer are using them. They are produced by the toolsmith."
 msgstr ""
+"Skovle er nødvendige for ordenlig håndtering af planter. Derfor bruger "
+"skovplanteren og blackroot bonden dem. Skovlene bliver lavet af værktøjs "
+"smeden."
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
@@ -1108,7 +1111,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."
-msgstr ""
+msgstr "Ryger kød og fisk."
 
 #: ../../tribes/atlanteans/smokery/conf:25
 msgid "Smoke meat"
@@ -1211,7 +1214,7 @@ msgstr "Producer skovl"
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Træner soldaterne."
 
 #: ../../tribes/atlanteans/trunk/conf:1
 msgid ""

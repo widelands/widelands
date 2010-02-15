@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-14 19:26+0100\n"
-"PO-Revision-Date: 2010-02-14 15:42+0000\n"
+"PO-Revision-Date: 2010-02-15 09:50+0000\n"
 "Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-15 04:46+0000\n"
+"X-Launchpad-Export-Date: 2010-02-15 14:56+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -1622,6 +1622,8 @@ msgid ""
 "the steps \"%s\" do not form the optimal path from the start to the end "
 "through only the used locations, should be \"%s\""
 msgstr ""
+"kohdat \"%s\" eivät muodosta optimaalista polkua lähdöstä kohteeseen "
+"käyttäen vain valittuja paikkoja, tulisi olla \"%s\""
 
 #: ../../src/events/event_set_player_flag_style.cc:41
 #, c-format
@@ -1766,7 +1768,7 @@ msgstr "iso"
 #: ../../src/logic/cmd_queue.cc:171
 #, c-format
 msgid "duetime (%i) < gametime (%i)"
-msgstr ""
+msgstr "valmisaika (%i) < peliaika (%i)"
 
 #: ../../src/logic/cmd_queue.cc:176
 #, c-format
@@ -1857,7 +1859,7 @@ msgstr "odotettiin 0 ..255 mutta löytyi %u"
 #: ../../src/logic/immovable.cc:271
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
-msgstr ""
+msgstr "[maaston mieltymys] \"%s\" (ei nykyisessä maailmassa): %s"
 
 #: ../../src/logic/immovable.cc:301
 #, c-format
@@ -2159,6 +2161,8 @@ msgid ""
 "group count is %u but (total) input storage capacity of the specified ware "
 "type(s) is only %u, so the group can never be fulfilled by the site"
 msgstr ""
+"ryhmämäärä on %u mutta (kokonais) tallennuskapasiteetti asetetulle "
+"tavaratyyp(e)ille on vain %u, joten ryhmää ei voi koskaan tyydyttää paikassa"
 
 #: ../../src/logic/production_program.cc:134
 msgid "not "
@@ -2229,13 +2233,14 @@ msgid ""
 "the program \"%s\" has not (yet) been declared in %s (wrong declaration "
 "order?)"
 msgstr ""
+"ohjelmaa \"%s\" ei ole (vielä) ilmoitettu %s (väärä ilmoitusjärjestys?)"
 
 #: ../../src/logic/production_program.cc:482
 #: ../../src/logic/production_program.cc:487
 #: ../../src/logic/production_program.cc:492
 #, c-format
 msgid "%s handling method already defined"
-msgstr ""
+msgstr "%s metodin käsittely ilmoitettu aikaisemmin"
 
 #: ../../src/logic/production_program.cc:482
 msgid "failure"
@@ -2264,11 +2269,11 @@ msgstr "nuku: %s"
 
 #: ../../src/logic/production_program.cc:635
 msgid "idle animation is default; calling is not allowed"
-msgstr ""
+msgstr "tyhjä animaatio on oletus; kutsu ei sallittu"
 
 #: ../../src/logic/production_program.cc:685
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
-msgstr ""
+msgstr "odotetaan ware_type1[,ware_type2[,...]][:N] ..."
 
 #: ../../src/logic/production_program.cc:788
 msgid " is missing"
@@ -2283,6 +2288,7 @@ msgid ""
 "%s is not declared as an output (\"output=%s\" was not found in the [global] "
 "section)"
 msgstr ""
+"%s ei ole ilmoitettu tulosteeksi (\"output=%s\" ei löytynyt [global] osiosta)"
 
 #: ../../src/logic/production_program.cc:866
 msgid "Produced "
@@ -2320,6 +2326,7 @@ msgstr "Kaivos tyhjä"
 msgid ""
 "This mines has run empty. You should consider to expand or destruct it."
 msgstr ""
+"Tämä kaivos on tyhjä. Kannattaa miettiä laajentamista tai tuhoamista."
 
 #: ../../src/logic/production_program.cc:1167
 #: ../../src/logic/production_program.cc:1236
@@ -2380,6 +2387,8 @@ msgid ""
 "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) or "
 "atrTotal (%u) but found unknown attribute value (%u)"
 msgstr ""
+"odotettiin atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) or "
+"atrTotal (%u) mutta löytyi tuntematon atribuutin arvo (%u)"
 
 #: ../../src/logic/soldier.cc:70 ../../src/logic/soldier.cc:93
 msgid "positive integer"
@@ -2392,7 +2401,7 @@ msgstr "odotettiin positiivinen kokonaisluku >= %u mutta löyty \"%s\""
 
 #: ../../src/logic/soldier.cc:201
 msgid "\"anim_name[,another_anim,...]\""
-msgstr ""
+msgstr "\"anim_name[,another_anim,...]\""
 
 #: ../../src/logic/soldier.cc:1179
 #, c-format
@@ -2408,6 +2417,11 @@ msgid ""
 "not be executed). Strange things may happen. No solution for this problem "
 "has been implemented yet. (bug #1951113) (The game has been paused.)"
 msgstr ""
+"Pelimoottori on kohdannut loogisen virheen. %s #%u pelaajan %u ei löytänyt "
+"reittiä (%i, %i) (jossa %s liikkumaton) vihollisen (%s #%u pelaajan %u) "
+"kohdassa (%i, %i) (jossa %s liikkumaton). %s tulee karkaaman (mutta ei tule "
+"suorittamaan). Odottamattomia asioita saattaa tapahtua. Tälle ongelmalle ei "
+"ole toteutettu ratkaisua vielä. (bug #1951113) (Peli on pysäytetty.)"
 
 #: ../../src/logic/soldier.cc:1351 ../../src/logic/soldier.cc:1356
 #: ../../src/logic/worker.cc:1668
@@ -2620,6 +2634,8 @@ msgid ""
 "%s %u has a next_spawn time for worker type \"%s\" set to %u, but it was "
 "previously set to %u\n"
 msgstr ""
+"%s %u on next_spawn aika seuravalla työläistyypille \"%s\" asetettu %u, "
+"mutta se oli aikaisemmin %u\n"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:471
 #, c-format
@@ -2657,7 +2673,7 @@ msgstr "%s: %s"
 #: ../../src/map_io/widelands_map_event_chain_data_packet.cc:183
 #, c-format
 msgid "EventChains: %s"
-msgstr ""
+msgstr "Tapahtumaketjut: %s"
 
 #: ../../src/map_io/widelands_map_event_data_packet.cc:72
 #, c-format
@@ -2702,7 +2718,7 @@ msgstr "liput: %s"
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
 msgid "wrong flag (%u) at given position (%i, %i)"
-msgstr ""
+msgstr "väärä lippu (%u) paikassa (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:90
 #, c-format
@@ -2712,7 +2728,7 @@ msgstr "ei annettua lippua paikassa (%i, %i)"
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:110
 #, c-format
 msgid "has building %u at (%i, %i), which is not at the top left node"
-msgstr ""
+msgstr "on rakennus %u at (%i, %i), joka ei ole ylin vasen noodi"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
@@ -2805,12 +2821,16 @@ msgid ""
 "forever, which is the default; omit the duration key to make the message "
 "exist forever"
 msgstr ""
+"arvo %u ei ole sallittu kesto; se on erikoisarvo tarkoittean ikuisuutta, "
+"joka on oletus; poista kestoavain saadaksesi viestin pysymään ikuisesti"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:111
 #, c-format
 msgid ""
 "duration %u is too large; causes numeric overflow when added to sent time %u"
 msgstr ""
+"kesto %u on liian suuri; aiheuttaa numeerisen ylivuodon kun lisätään "
+"lähetettyyn aikaan %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:117
 #, c-format
@@ -2851,6 +2871,8 @@ msgid ""
 "expected 1 but found %u carrier slots in road saved with packet version 2 "
 "(old)"
 msgstr ""
+"odotettiin 1 mutta löyty %u kantajapaikat tiessä tallennettu "
+"pakettiversiolla 2 (vanha)"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
@@ -3084,6 +3106,7 @@ msgstr "Asiakasohjelma lähetti odottamattoman synkronisointiraportin."
 #: ../../src/network/nethost.cc:1730 ../../src/network/nethost.cc:1742
 msgid "Client requests file altough none is available to send."
 msgstr ""
+"Asiakasohjelma pyytää tiedostoa vaikka ei löydy valmiina lähetettäväksi"
 
 #: ../../src/network/nethost.cc:1732
 #, c-format
@@ -3092,7 +3115,7 @@ msgstr "Aloitti tiedoston lähetyksen %s:sta %s:lle!"
 
 #: ../../src/network/nethost.cc:1753
 msgid "Client requests file part that does not exist."
-msgstr ""
+msgstr "Asiakasohjelma pyytää tiedostokohtaa jota ei löydy"
 
 #: ../../src/network/nethost.cc:1756
 #, c-format
@@ -3126,6 +3149,10 @@ msgid ""
 "at http://wl.widelands.org/wiki/InternetGaming can\n"
 "be advantageous."
 msgstr ""
+"Palvelin ei ollut saavutettavissa Internetistä.\n"
+"Yritä ratkaista ongelma - lukemalla ohjeita\n"
+"http://wl.widelands.org/wiki/InternetGaming saattaa\n"
+"auttaa tilanteessa."
 
 # TODO: trans comment: of what?
 #: ../../src/network/network_ggz.cc:499
@@ -3256,6 +3283,8 @@ msgid ""
 "status Read or Archived, which means that the player has changed the status "
 "of the message."
 msgstr ""
+"Laukeaa kun viesti on luotu viestitapahtumassa statuksella Uusi, Luettu tai "
+"Arkistoitu, mikä tarkoittaa että pelaaja on vaihtanut viestin statusta."
 
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:58
 #, c-format
@@ -3546,6 +3575,12 @@ msgid ""
 "you do not own. Normally such a file should be send from the host to you, "
 "but perhaps the transfer was not yet finnished!?!"
 msgstr ""
+"Widelands yritti aloittaa peliä mutta tiedostoa ei löydetty annetusta "
+"polusta.\n"
+"tiedosto oli: %s\n"
+"Jos tämä tapahtuu verkkopelin aikana, palvelin on saattanut valita tiedoston "
+"jota et omista. Normaalisti sellainen tiedosto tulee lähettää palvelimelta "
+"sinulle mutta ehkä tiedonsiirto ei ole vielä valmis!?!"
 
 #: ../../src/ui_fsmenu/launchgame.cc:269
 msgid "(no map)"
@@ -3560,6 +3595,8 @@ msgid ""
 "\" for this game, which you do not own. If the transfer of that file does "
 "not start automatically, please add it manually to your filesystem."
 msgstr ""
+"\" tälle pelille  jota et omista. Jos tiedonsiirto ei ala automaattisesti, "
+"lisää se manuaalisesti hakemistoon."
 
 #: ../../src/ui_fsmenu/launchgame.cc:332
 msgid "Original:"
@@ -4533,7 +4570,7 @@ msgstr "Luo uusi tili"
 
 #: ../../src/wui/login_box.cc:62
 msgid "Automatically use this login information from now on."
-msgstr ""
+msgstr "Käytä tätä tunnusta automaattisesti tästä eteenpäin"
 
 #: ../../src/wui/login_box.cc:69
 msgid "Login"
@@ -4940,6 +4977,8 @@ msgid ""
 " NOTE: There is no options window for this event type yet. It has to be "
 "created manually by editing the text files in the map."
 msgstr ""
+" MUISTUTUS: Tälle tapahtumatyypille ei ole valintaikkunaa vielä. Se täytyy "
+"luoda manuaalisesti editoimalla kartan tekstitiedostoja."
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:44
 msgid "New Trigger"
@@ -4954,6 +4993,8 @@ msgid ""
 " NOTE: There is no options window for this trigger type yet. It has to be "
 "created manually by editing the text files in the map."
 msgstr ""
+" MUISTUTUS: Tälle laukaisintyypille ei ole valintaikkunaa vielä. Se täytyy "
+"luoda manuaalisesti editoimalla kartan tekstitiedostoja."
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:51
@@ -5490,7 +5531,7 @@ msgstr "%s Työläisten tapahtumavalinnat"
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:201
 #, c-format
 msgid "No worker types are selected. Select at least one."
-msgstr ""
+msgstr "Työläistyyppiä ei valittu. Valitse ainakin yksi tyyppi."
 
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.cc:50
 msgid "Set Player's Flag Style Event Options"
@@ -5548,17 +5589,19 @@ msgstr "Nimellä \"%s\" on jo rekisteröity liipasin. Valitse toinen nimi."
 
 #: ../../src/editor/ui_menus/trigger_message_is_read_or_archived_option_menu.cc:52
 msgid "Trigger Message is Read or Archived Options"
-msgstr ""
+msgstr "Laukaisinviesti on Luettu tai Arkistoitu asetukset"
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:42
 msgid "Trigger Time Options"
-msgstr ""
+msgstr "Laukaisimen aika-asetukset"
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:50
 msgid ""
 "Trigger at an absolute time from the beginning of the game (otherwise, only "
 "trigger if activated by an event set timer)."
 msgstr ""
+"Laukaisin tietyllä ajan kuluttua pelin aloituksesta (muuten laukause vain "
+"tapahtuman asetuslaukaisimella)."
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:52
 msgid "Trigger at absolute time"
