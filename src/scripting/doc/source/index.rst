@@ -13,6 +13,7 @@ Contents:
 
    tutorial
    reference
+   wlrichtext
 
 Indices and tables
 ==================
