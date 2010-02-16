@@ -6,16 +6,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-14 19:26+0100\n"
-"PO-Revision-Date: 2010-02-14 21:26+0000\n"
+"POT-Creation-Date: 2010-02-15 17:30+0100\n"
+"PO-Revision-Date: 2010-02-15 19:51+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-15 04:46+0000\n"
+"X-Launchpad-Export-Date: 2010-02-16 04:51+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../src/events/event_road.cc:49
+#, c-format
+msgid ""
+"step %li has direction '%c', must be one of {1 (northeast), 2 (east), 3 "
+"(southeast), 4 (southwest), 5 (west), 6 (northwest)}"
+msgstr ""
+"Schritt %li hat die Richtung '%c', sollte einer von {1 (Nordosten), 2 "
+"(Osten), 3  (Südosten), 4 (Südwesten), 5 (Westen), 6 (Nordwesten)} sein"
+
+#: ../../src/network/nethost.cc:1685
+#, c-format
+msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
+msgstr ""
+"Der Client %u (%u) hat einen Spielerbefehl (%i)  für einen anderen Spieler "
+"(%i) gesendet."
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -1614,15 +1630,6 @@ msgstr "es gibt keine Schritte"
 msgid "there is only 1 step, must be at least 2"
 msgstr "es gibt nur 1 Schritt, es sollten jedoch mindestens 2 sein"
 
-#: ../../src/events/event_road.cc:49
-#, c-format
-msgid ""
-"step %li has direction '%c', must be one of {1 (northeast), 2 (east), 3 "
-"(southeast), 4 (southwest), 5 (west), 6 (northwest)}"
-msgstr ""
-"Schritt %li hat die Richtung '%c', sollte einer von {1 (Nordosten), 2 "
-"(Osten), 3  (Südosten), 4 (Südwesten), 5 (Westen), 6 (Nordwesten)} sein"
-
 #: ../../src/events/event_road.cc:72
 #, c-format
 msgid ""
@@ -3107,13 +3114,6 @@ msgstr ""
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
 msgstr ""
 "Der Client hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
-
-#: ../../src/network/nethost.cc:1685
-#, c-format
-msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
-msgstr ""
-"Der Client %u (%u) hat einen Spielerbefehl (%i)  für einen anderen Spieler "
-"(%i) gesendet."
 
 #: ../../src/network/nethost.cc:1694
 msgid "Client sent unexpected synchronization report."

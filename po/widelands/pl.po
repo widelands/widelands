@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-14 19:26+0100\n"
-"PO-Revision-Date: 2010-02-15 14:19+0000\n"
+"POT-Creation-Date: 2010-02-15 17:30+0100\n"
+"PO-Revision-Date: 2010-02-15 19:54+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-02-15 14:56+0000\n"
+"X-Launchpad-Export-Date: 2010-02-16 04:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../src/logic/worker.cc:1649
+#, c-format
+msgid ""
+"The game engine has encountered a logic error. The %s #%u of player %u "
+"(carrying %s) could not find a way home from (%i, %i) (with %s immovable) to "
+"the base flag at (%i, %i) of its %s at (%i, %i). The %s will be made "
+"homeless and probably die, unless some object is removed very soon and the "
+"%s finds a way to a flag connected to a warehouse. The %s will immediately "
+"request a new worker. Unfortunately this may happen repeatedly and drain the "
+"supply of workers (tools). No solution for this problem has been implemented "
+"yet. It would be safest to destroy the %s and not rebuild it at that "
+"location, nor any other building that sends out a worker on the map. This "
+"problem usually occurs near unpassable terrain, such as water, when an "
+"object, such as a farm field, is placed on the map while the worker is out "
+"working. (bug #1796611) (The game has been paused.)"
+msgstr ""
+"Wystąpił błąd logiczny w silniku gry. %s #%u gracza %u (noszącego %s) nie "
+"mogło znaleźć drogi do domu z (%i, %i) (z %s nieruszającym) do podstawowej "
+"flagi na (%i, %i)tego %s na (%i, %i). %s  teraz będzie bezdomny i "
+"najprawdopodobniej umrze, chyba że jakiś obiekt wkrótce zostanie usunięty i "
+"%s znajdzie drogę do flagi przyłączonej do magazynu. %s natychmiast poprosi "
+"o nowego robotnika. Niestety to się może dziać powtórnie i wyczerpie zasoby "
+"robotników (narzędzi). Nie istnieje rozwiązanie tego problemu. Będzie "
+"bezpieczne zburzyć %s i nie odbudowywać ten ani żaden inny budek w tej "
+"lokacji. To się zwykle dzieje w pobliżu terenu nie do przebycia, takiego jak "
+"woda, kiedy obiekt, taki jak pole farmy, jest umieszczony na mapie gdy "
+"robotnik jest na zewnątrz pracując. (błąd #1796611) (Gra była wstrzymana.)"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -2426,34 +2454,6 @@ msgstr ""
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/worker.cc:1649
-#, c-format
-msgid ""
-"The game engine has encountered a logic error. The %s #%u of player %u "
-"(carrying %s) could not find a way home from (%i, %i) (with %s immovable) to "
-"the base flag at (%i, %i) of its %s at (%i, %i). The %s will be made "
-"homeless and probably die, unless some object is removed very soon and the "
-"%s finds a way to a flag connected to a warehouse. The %s will immediately "
-"request a new worker. Unfortunately this may happen repeatedly and drain the "
-"supply of workers (tools). No solution for this problem has been implemented "
-"yet. It would be safest to destroy the %s and not rebuild it at that "
-"location, nor any other building that sends out a worker on the map. This "
-"problem usually occurs near unpassable terrain, such as water, when an "
-"object, such as a farm field, is placed on the map while the worker is out "
-"working. (bug #1796611) (The game has been paused.)"
-msgstr ""
-"Wystąpił błąd logiczny w silniku gry. %s #%u gracza %u (noszącego %s) nie "
-"mogło znaleźć drogi do domu z (%i, %i) (z %s nieruszającym) do podstawowej "
-"flagi na (%i, %i)tego %s na (%i, %i). %s  teraz będzie bezdomny i "
-"najprawdopodobniej umrze, chyba że jakiś obiekt wkrótce zostanie usunięty i "
-"%s znajdzie drogę do flagi przyłączonej do magazynu. %s natychmiast poprosi "
-"o nowego robotnika. Niestety to się może dziać powtórnie i wyczerpie zasoby "
-"robotników (narzędzi). Nie istnieje rozwiązanie tego problemu. Będzie "
-"bezpieczne zburzyć %s i nie odbudowywać ten ani żaden inny budek w tej "
-"lokacji. To się zwykle dzieje w pobliżu terenu nie do przebycia, takiego jak "
-"woda, kiedy obiekt, taki jak pole farmy, jest umieszczony na mapie gdy "
-"robotnik jest na zewnątrz pracując. (błąd #1796611) (Gra była wstrzymana.)"
-
 #: ../../src/logic/worker.cc:1666
 msgid "nothing"
 msgstr "nic"
@@ -2521,7 +2521,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:675
 #, c-format
 msgid "soldier: %s"
-msgstr ""
+msgstr "żołnierz: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:691
 #, c-format
@@ -2531,7 +2531,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_building_data_packet.cc:124
 #, c-format
 msgid "buildings: %s"
-msgstr ""
+msgstr "budynki: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:215
 #, c-format
@@ -2541,7 +2541,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:273
 #, c-format
 msgid "wares: %s"
-msgstr ""
+msgstr "towary: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:286
 #, c-format
@@ -2568,7 +2568,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:708
 #, c-format
 msgid "program %s was skipped at time %u, but time is only %u"
-msgstr ""
+msgstr "program %s był pominięty w czasie %u, ale czas jest tylko %u"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:937
 #, c-format
@@ -2586,7 +2586,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_trigger_data_packet.cc:72
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: ../../src/map_io/widelands_map_event_chain_data_packet.cc:183
 #, c-format
@@ -2601,7 +2601,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_exploration_data_packet.cc:95
 #, c-format
 msgid "seen: %s"
-msgstr ""
+msgstr "widziane: %s"
 
 #: ../../src/map_io/widelands_map_extradata_data_packet.cc:99
 #, c-format
@@ -2621,7 +2621,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
 msgid "has a flag (%u)"
-msgstr ""
+msgstr "ma flage (%u)"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
@@ -2631,12 +2631,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
 msgid "flags: %s"
-msgstr ""
+msgstr "flagi: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
 msgid "wrong flag (%u) at given position (%i, %i)"
-msgstr ""
+msgstr "zła flaga (%u) w danej pozycji (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:90
 #, c-format
@@ -2651,13 +2651,13 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
 msgid "building (%u): %s"
-msgstr ""
+msgstr "budynek (%u): %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:209
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
 #, c-format
 msgid "%u: %s"
-msgstr ""
+msgstr "%u: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:216
 #, c-format
