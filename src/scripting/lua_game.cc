@@ -29,6 +29,7 @@
 #include "logic/tribe.h"
 #include "trigger/trigger_time.h"
 #include "wui/interactive_player.h"
+#include "campvis.h"
 
 #include "c_utils.h"
 #include "coroutine_impl.h"
@@ -91,6 +92,7 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, conquer),
 	METHOD(L_Player, reveal_fields),
 	METHOD(L_Player, hide_fields),
+	METHOD(L_Player, reveal_scenario),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
@@ -710,6 +712,25 @@ int L_Player::hide_fields(lua_State * L) {
 	return 0;
 }
 
+/* RST
+	.. method:: reveal_scenarion(name)
+
+		This reveals a scenario inside a campaign. This only works for the
+		interactive player and most likely also only in single player games.
+
+		:arg name: name of the scenario to reveal
+		:type name: :class:`string`
+*/
+// UNTESTED
+int L_Player::reveal_scenario(lua_State * L) {
+	if (get_game(L).get_ipl()->player_number() != m_pl)
+		return report_error(L, "Can only be called for interactive player!");
+
+	Campaign_visibility_save cvs;
+	cvs.set_map_visibility(luaL_checkstring(L, 2), true);
+
+	return 0;
+}
 /*
  ==========================================================
  C METHODS
