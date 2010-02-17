@@ -4,6 +4,8 @@
 
 set_textdomain("campaigns/t02.wmf")
 
+use("aux", "coroutine")
+
 -- ===============
 -- Initialization 
 -- ===============
@@ -71,4 +73,5 @@ p:place_building("lumberjacks_hut", wl.map.Field(16,12))
 p:place_building("quarry", wl.map.Field(8,12))
 p:place_building("rangers_hut", wl.map.Field(9,13))
 
+use("map", "mission_thread")
 
