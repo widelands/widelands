@@ -134,7 +134,7 @@ include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
 
 add_subdirectory(doc)
 #add_subdirectory(po)
-add_subdirectory(pics)
+#add_subdirectory(pics)
 add_subdirectory(src)
 
 # install files to the correct locations here
@@ -145,13 +145,10 @@ install(
     global
     maps
     music
-    pics
     sound
     tribes
     txts
     worlds
-#    po
-#    locale
   DESTINATION share/widelands
   CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles
@@ -159,17 +156,15 @@ install(
   PATTERN "SCons*" EXCLUDE
 )
 
-#if (CMAKE_BUILD_TYPE STREQUAL Debug)
-  install(
-    DIRECTORY
-      doc
-    DESTINATION share/widelands
-    CONFIGURATIONS Debug
-    COMPONENT DocFiles
-    PATTERN "*.svn*" EXCLUDE
-    PATTERN "SCons*" EXCLUDE
-  )
-#endif()
+install(
+  DIRECTORY
+    doc
+  DESTINATION share/widelands
+  CONFIGURATIONS Debug
+  COMPONENT DocFiles
+  PATTERN "*.svn*" EXCLUDE
+  PATTERN "SCons*" EXCLUDE
+)
 
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/locale)
 find_package (PythonInterp REQUIRED)
@@ -194,9 +189,24 @@ install(
   PATTERN "SCons*" EXCLUDE
 )
 
+execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/pics)
+add_custom_target (
+  pics 
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pics
+  COMMAND cmake -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DWL_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}/pics -DWL_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/pics -P PicsFunctions.cmake
+)
+
+install(
+  DIRECTORY
+    ${CMAKE_CURRENT_BINARY_DIR}/pics
+  DESTINATION share/widelands
+  CONFIGURATIONS Debug;Release
+  COMPONENT CorePicsFiles
+)
+
 
 set (CPACK_PACKAGE_FILE_NAME widelands-${WL_VERSION})
-set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles)
+set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles CorePicsFiles)
 set (CPACK_GENERATOR TGZ)
 set (CPACK_SOURCE_GENERATOR TGZ)
 include(CPack)
