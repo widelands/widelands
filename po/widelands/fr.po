@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-15 19:52+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2010-02-16 08:00+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-02-16 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-02-17 04:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -511,11 +511,11 @@ msgstr "elève"
 
 #: ../../src/writeHTML.cc:752
 msgid "createitem"
-msgstr ""
+msgstr "creeobjet"
 
 #: ../../src/writeHTML.cc:753
 msgid "setdescription"
-msgstr ""
+msgstr "definirdescription"
 
 #: ../../src/writeHTML.cc:754
 msgid "setbobdescription"
@@ -523,11 +523,11 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:755
 msgid "findobject"
-msgstr ""
+msgstr "trouveobjet"
 
 #: ../../src/writeHTML.cc:756
 msgid "findspace"
-msgstr ""
+msgstr "trouveespace"
 
 #: ../../src/writeHTML.cc:757
 msgid "walk"
@@ -555,7 +555,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:763
 msgid "removeobject"
-msgstr ""
+msgstr "enleveobject"
 
 #: ../../src/writeHTML.cc:764
 msgid "geologist"
@@ -563,19 +563,19 @@ msgstr "géologue"
 
 #: ../../src/writeHTML.cc:765
 msgid "geologist_find"
-msgstr ""
+msgstr "trouve_geologue"
 
 #: ../../src/writeHTML.cc:766 ../../src/writeHTML.cc:1388
 msgid "playFX"
-msgstr ""
+msgstr "joueFX"
 
 #: ../../src/writeHTML.cc:767
 msgid "UNKNOWN"
-msgstr ""
+msgstr "INCONNU"
 
 #: ../../src/writeHTML.cc:774
 msgid "Production"
-msgstr ""
+msgstr "Production"
 
 #: ../../src/writeHTML.cc:778 ../../src/wui/general_statistics_menu.cc:144
 msgid "Workers"
@@ -595,7 +595,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:820
 msgid "Output"
-msgstr ""
+msgstr "Sorties"
 
 #: ../../src/writeHTML.cc:830 ../../src/writeHTML.cc:843
 msgid "'s output"
@@ -617,27 +617,27 @@ msgstr ""
 #: ../../src/writeHTML.cc:898 ../../src/logic/production_program.cc:392
 #: ../../src/logic/production_program.cc:753
 msgid "failed"
-msgstr ""
+msgstr "a échoué"
 
 #: ../../src/writeHTML.cc:899 ../../src/logic/production_program.cc:393
 msgid "completed"
-msgstr ""
+msgstr "achevé"
 
 #: ../../src/writeHTML.cc:900 ../../src/logic/production_program.cc:393
 msgid "skipped"
-msgstr ""
+msgstr "ignoré"
 
 #: ../../src/writeHTML.cc:905
 msgid "and"
-msgstr ""
+msgstr "et"
 
 #: ../../src/writeHTML.cc:906
 msgid "when"
-msgstr ""
+msgstr "quand"
 
 #: ../../src/writeHTML.cc:908
 msgid "or"
-msgstr ""
+msgstr "ou"
 
 #: ../../src/writeHTML.cc:909
 msgid "unless"
@@ -649,11 +649,11 @@ msgstr "économie"
 
 #: ../../src/writeHTML.cc:946 ../../src/writeHTML.cc:968
 msgid "needs"
-msgstr ""
+msgstr "nécessite"
 
 #: ../../src/writeHTML.cc:986
 msgid "site"
-msgstr ""
+msgstr "site"
 
 #: ../../src/writeHTML.cc:988
 msgid "has"
@@ -661,7 +661,7 @@ msgstr "possède"
 
 #: ../../src/writeHTML.cc:1023
 msgid "workers of this site"
-msgstr ""
+msgstr "travaillant sur ce site"
 
 #: ../../src/writeHTML.cc:1025
 msgid "workers"
@@ -669,7 +669,7 @@ msgstr "ouvriers"
 
 #: ../../src/writeHTML.cc:1026
 msgid "</span></a> <span class=\"keyword\">"
-msgstr ""
+msgstr "</span></a> <span class=\"keyword\">"
 
 #: ../../src/writeHTML.cc:1027
 msgid "need"
@@ -685,7 +685,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1045
 msgid "call"
-msgstr ""
+msgstr "appel"
 
 #: ../../src/writeHTML.cc:1052
 #, c-format
@@ -716,7 +716,7 @@ msgstr "dormir"
 #: ../../src/writeHTML.cc:1141 ../../src/writeHTML.cc:1161
 #, c-format
 msgid " %u.%03u s"
-msgstr ""
+msgstr " %u.%03u s"
 
 #: ../../src/writeHTML.cc:1153
 msgid "Documentation for program command animate"
@@ -732,7 +732,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1176
 msgid "consume"
-msgstr ""
+msgstr "consomme"
 
 #: ../../src/writeHTML.cc:1225 ../../src/writeHTML.cc:1266
 msgid "Documentation for program command produce"
@@ -744,7 +744,7 @@ msgstr "produire"
 
 #: ../../src/writeHTML.cc:1268
 msgid "recruit"
-msgstr ""
+msgstr "recrute"
 
 #: ../../src/writeHTML.cc:1311
 msgid "Documentation for program command mine"
@@ -756,23 +756,23 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1340
 msgid "check soldier"
-msgstr ""
+msgstr "verifie soldat"
 
 #: ../../src/writeHTML.cc:1346 ../../src/writeHTML.cc:1370
 msgid "hp"
-msgstr ""
+msgstr "hp"
 
 #: ../../src/writeHTML.cc:1347 ../../src/writeHTML.cc:1371
 msgid "attack"
-msgstr ""
+msgstr "attaque"
 
 #: ../../src/writeHTML.cc:1348 ../../src/writeHTML.cc:1372
 msgid "defense"
-msgstr ""
+msgstr "défend"
 
 #: ../../src/writeHTML.cc:1349 ../../src/writeHTML.cc:1373
 msgid "evade"
-msgstr ""
+msgstr "esquive"
 
 #: ../../src/writeHTML.cc:1362
 msgid "Documentation for program command train"
@@ -780,7 +780,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1364
 msgid "train"
-msgstr ""
+msgstr "entraine"
 
 #: ../../src/writeHTML.cc:1386
 msgid "Documentation for program command playFX"
@@ -788,7 +788,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1423 ../../src/writeHTML.cc:1429
 msgid "Ware types"
-msgstr ""
+msgstr "Types de marchandises"
 
 #: ../../src/writeHTML.cc:1463
 msgid "ware_types.xhtml"
@@ -972,7 +972,7 @@ msgstr "Chargement des données du monde"
 #: ../../src/editor/editorinteractive.cc:191
 #: ../../src/editor/editorinteractive.cc:607
 msgid "Loading graphics..."
-msgstr ""
+msgstr "Chargement des graphiques ..."
 
 #: ../../src/editor/editorinteractive.cc:232
 msgid "Map unsaved"
@@ -1048,18 +1048,18 @@ msgstr ""
 
 #: ../../src/events/event_building.cc:73 ../../src/events/event_building.cc:82
 msgid "distance (1 .. 255)"
-msgstr ""
+msgstr "distance (1 .. 255)"
 
 #: ../../src/events/event_building.cc:86
 #, c-format
 msgid "max distance (%u) is smaller than min distance (%u)"
-msgstr ""
+msgstr "la distance max (%u) est plus petite que la distance min (%u)"
 
 #: ../../src/events/event_building.cc:169
 #: ../../src/events/event_building.cc:304 ../../src/logic/immovable.cc:254
 #: ../../src/logic/immovable.cc:268
 msgid "duplicated"
-msgstr ""
+msgstr "dupliqué"
 
 #: ../../src/events/event_building.cc:174
 #: ../../src/events/event_building.cc:311
@@ -1071,12 +1071,12 @@ msgstr ""
 #: ../../src/events/event_building.cc:230
 #, c-format
 msgid "can not have %u %s (only %u)"
-msgstr ""
+msgstr "impossible d'avoir %u %s (il n'y en a que %u)"
 
 #: ../../src/events/event_building.cc:316
 #, c-format
 msgid "%u soldiers but only %u allowed"
-msgstr ""
+msgstr "%u soldats, mais seulement %u permis"
 
 #: ../../src/events/event_building.cc:320
 #, c-format
@@ -1107,7 +1107,7 @@ msgstr ""
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:61
 #, c-format
 msgid "player %u does not exist"
-msgstr ""
+msgstr "le joueur %u n'existe pas"
 
 #: ../../src/events/event_expire_message.cc:55
 #, c-format
@@ -1136,35 +1136,37 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:61
 msgid "Allow worker types"
-msgstr ""
+msgstr "Autoriser les types d'ouvriers"
 
 #: ../../src/events/event_factory.cc:62
 msgid "Allows the creation of workers of certain types for a player."
-msgstr ""
+msgstr "Autoriser la création d'un certain type d'ouvriers pour un joueur."
 
 #: ../../src/events/event_factory.cc:66
 msgid "Forbid worker types"
-msgstr ""
+msgstr "Interdire des types d'ouvriers"
 
 #: ../../src/events/event_factory.cc:67
 msgid "Forbids the creation of workers of certain types for a player."
-msgstr ""
+msgstr "Interdire la création d'un certain type d'ouvriers pour un joueur."
 
 #: ../../src/events/event_factory.cc:71
 msgid "Allow building types"
-msgstr ""
+msgstr "Autoriser les types de bâtiments"
 
 #: ../../src/events/event_factory.cc:72
 msgid "Allows the construction of buildings of certain types for a player."
 msgstr ""
+"Autoriser la construction de certains types de bâtiments pour un joueur."
 
 #: ../../src/events/event_factory.cc:76
 msgid "Forbid building types"
-msgstr ""
+msgstr "Interdire les types de bâtiments"
 
 #: ../../src/events/event_factory.cc:77
 msgid "Forbids the construction of buildings of certain types for a player."
 msgstr ""
+"Interdire la construction de certains types de bâtiments pour un joueur."
 
 #: ../../src/events/event_factory.cc:81
 msgid "Create building"
@@ -1183,6 +1185,7 @@ msgstr "Conquérir la zone"
 msgid ""
 "Gives ownership of all unowned locations within an area to the player."
 msgstr ""
+"Donne la propriété de tout terrain nos revendiqué dans la zone à un joueur."
 
 #: ../../src/events/event_factory.cc:93
 msgid "Create flag"
@@ -1190,7 +1193,7 @@ msgstr "Placer un drapeau"
 
 #: ../../src/events/event_factory.cc:94
 msgid "Create a flag."
-msgstr ""
+msgstr "Crée un drapeau."
 
 #: ../../src/events/event_factory.cc:98
 msgid "Create immovable"
@@ -1198,7 +1201,7 @@ msgstr "Créer une base immobile"
 
 #: ../../src/events/event_factory.cc:99
 msgid "Create an immovable."
-msgstr ""
+msgstr "Crée un objet inamovible."
 
 #: ../../src/events/event_factory.cc:103
 msgid "Lua event"
@@ -1224,7 +1227,7 @@ msgstr "Déplacer la vue"
 
 #: ../../src/events/event_factory.cc:117
 msgid "Center the player's view on a certain location."
-msgstr ""
+msgstr "Centre la vue d'un joueur sur un endroit précis."
 
 #: ../../src/events/event_factory.cc:121
 msgid "Reveal campaign"
@@ -1232,7 +1235,7 @@ msgstr "Révéler une campagne"
 
 #: ../../src/events/event_factory.cc:122
 msgid "Reveal a campaign."
-msgstr ""
+msgstr "Revèle une campagne."
 
 #: ../../src/events/event_factory.cc:126
 msgid "Reveal objective"
@@ -1240,7 +1243,7 @@ msgstr "Révéler un objectif"
 
 #: ../../src/events/event_factory.cc:127
 msgid "Reveal an objective."
-msgstr ""
+msgstr "Revèle un objectif."
 
 #: ../../src/events/event_factory.cc:131
 msgid "Reveal scenario"
@@ -1248,7 +1251,7 @@ msgstr "Révéler un scénario"
 
 #: ../../src/events/event_factory.cc:132
 msgid "Reveal a scenario."
-msgstr ""
+msgstr "Revèle un scénario."
 
 #: ../../src/events/event_factory.cc:136
 msgid "Create road"
@@ -1260,7 +1263,7 @@ msgstr "Crée une route et éventuellement place un porteur dessus"
 
 #: ../../src/events/event_factory.cc:141
 msgid "Set timer"
-msgstr ""
+msgstr "Déclenche un chronomètre"
 
 #: ../../src/events/event_factory.cc:142
 msgid "Set a timer to trigger after a certain duration."
@@ -1336,7 +1339,7 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:193
 msgid "Creates a message for a player"
-msgstr ""
+msgstr "Crée un message pour le joueur"
 
 #: ../../src/events/event_factory.cc:195
 msgid ""
@@ -1409,7 +1412,7 @@ msgstr "Continuer"
 
 #: ../../src/events/event_message_box.cc:138
 msgid "there are no buttons, at least one is required"
-msgstr ""
+msgstr "il n'y a aucun bouton, il en faut au moins un"
 
 #: ../../src/events/event_message_box.cc:149
 #, c-format
@@ -1489,11 +1492,11 @@ msgstr ""
 
 #: ../../src/events/event_road.cc:40
 msgid "there are no steps"
-msgstr ""
+msgstr "il n'y a aucunes étapes"
 
 #: ../../src/events/event_road.cc:43
 msgid "there is only 1 step, must be at least 2"
-msgstr ""
+msgstr "il n'y a qu'une étape, il en faut au moins 2"
 
 #: ../../src/events/event_road.cc:49
 #, c-format
@@ -1572,7 +1575,7 @@ msgstr ""
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:83
 msgid "there is no flag at the specified location"
-msgstr ""
+msgstr "il n'y a aucun drapeau dans la zone indiquée"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:85
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:63
@@ -1700,7 +1703,7 @@ msgstr "Création de l'infrastructure des joueurs"
 
 #: ../../src/logic/game.cc:462 ../../src/logic/player.cc:121
 msgid "Missing starting position"
-msgstr ""
+msgstr "Il manque la position de départ"
 
 #: ../../src/logic/game.cc:464 ../../src/logic/player.cc:123
 #, c-format
@@ -1710,6 +1713,10 @@ msgid ""
 "You can manually add a starting position with Widelands Editor, to fix this "
 "problem."
 msgstr ""
+"Widelands n'a pas pu commencer la partie, car le joueur %u n'a pas de "
+"position de départ.\n"
+"Vous pouvez ajouter une position de départ dans l'éditeur pour résoudre ce "
+"problème."
 
 #: ../../src/logic/immovable.cc:133 ../../src/logic/production_program.cc:1396
 #, c-format
@@ -1722,7 +1729,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:213
 msgid "this program has already been declared"
-msgstr ""
+msgstr "ce programme a déja été déclaré"
 
 #: ../../src/logic/immovable.cc:219
 #, c-format
@@ -1767,11 +1774,11 @@ msgstr ""
 #: ../../src/logic/immovable.cc:661 ../../src/logic/production_program.cc:609
 #: ../../src/logic/production_program.cc:653
 msgid "duration in ms"
-msgstr ""
+msgstr "durée en ms"
 
 #: ../../src/logic/immovable.cc:699 ../../src/logic/production_program.cc:1341
 msgid "priority"
-msgstr ""
+msgstr "priorité"
 
 #: ../../src/logic/immovable.cc:733 ../../src/logic/immovable.cc:802
 #: ../../src/logic/immovable.cc:888
@@ -1820,7 +1827,7 @@ msgstr "Joueur 1"
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:62
 #: ../../src/logic/soldier.cc:85
 msgid "\"min-max\""
-msgstr ""
+msgstr "\"min-max\""
 
 #: ../../src/logic/military_data.cc:59
 msgid "positive integer <= 100"
@@ -1861,30 +1868,30 @@ msgstr ""
 
 #: ../../src/logic/militarysite.cc:579
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Bâtiment militaire perdu !"
 
 #: ../../src/logic/militarysite.cc:652
 #, c-format
 msgid "%sYour soldiers defeated the enemy at the %s.</p></rt>"
-msgstr ""
+msgstr "%s Vos soldats ont défait l'ennemi à %s.</p></rt>"
 
 #: ../../src/logic/militarysite.cc:659
 msgid "Enemy at site defeated!"
-msgstr ""
+msgstr "Bâtiment ennemi vaincu !"
 
 #: ../../src/logic/militarysite.cc:707
 #, c-format
 msgid "%sYour %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "%sVotre %s a découvert un agresseur. </p>"
 
 #: ../../src/logic/militarysite.cc:708
 #, c-format
 msgid "%sYour %s is under attack.</p>"
-msgstr ""
+msgstr "%sVotre %s est attaqué !</p>"
 
 #: ../../src/logic/militarysite.cc:716
 msgid "You are under attack"
-msgstr ""
+msgstr "Vous êtes attaqué"
 
 #: ../../src/logic/playercommand.cc:134
 #, c-format
@@ -1904,17 +1911,17 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:234
 #, c-format
 msgid "build: %s"
-msgstr ""
+msgstr "construit : %s"
 
 #: ../../src/logic/playercommand.cc:282
 #, c-format
 msgid "build flag: %s"
-msgstr ""
+msgstr "construit drapeau : %s"
 
 #: ../../src/logic/playercommand.cc:369
 #, c-format
 msgid "build road: %s"
-msgstr ""
+msgstr "construit route : %s"
 
 #: ../../src/logic/playercommand.cc:423
 #, c-format
@@ -1940,7 +1947,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:547
 #, c-format
 msgid "enhance building: %s"
-msgstr ""
+msgstr "améliore bâtiment : %s"
 
 #: ../../src/logic/playercommand.cc:619 ../../src/logic/playercommand.cc:1045
 #: ../../src/logic/playercommand.cc:1123
@@ -1956,7 +1963,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:678
 #, c-format
 msgid "change target quantity: %s"
-msgstr ""
+msgstr "change le stock ciblé : %s"
 
 #: ../../src/logic/playercommand.cc:741
 #, c-format
@@ -2042,7 +2049,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:156
 #: ../../src/logic/production_program.cc:177
 msgid "economy needs "
-msgstr ""
+msgstr "l'économie a besoin de "
 
 #: ../../src/logic/production_program.cc:206
 msgid "site has "

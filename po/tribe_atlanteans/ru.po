@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-15 21:26+0000\n"
-"Last-Translator: Vixis <Unknown>\n"
+"PO-Revision-Date: 2010-02-16 22:46+0000\n"
+"Last-Translator: Victor Birkmanis <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-16 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-02-17 04:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -86,7 +86,7 @@ msgid ""
 "produced by the toolsmith."
 msgstr ""
 "Кухонная утварь является инструментом пекаря, каждый пекарь нуждается в "
-"своей собственной. Он изготовлен в toolsmith."
+"своей собственной. Она изготовлена в кузне."
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
@@ -922,7 +922,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid "Helps to carry items at heavy used roads."
-msgstr "Помогает перовозить грузы на сильно использованых дорогах."
+msgstr "Помогает перовозить грузы на сильно используюмых дорогах."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"

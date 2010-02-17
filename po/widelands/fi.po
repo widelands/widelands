@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-15 19:24+0000\n"
+"PO-Revision-Date: 2010-02-16 09:29+0000\n"
 "Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-16 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-02-17 04:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -1231,19 +1231,19 @@ msgstr "(vanhenna viesti): %s"
 
 #: ../../src/events/event_factory.cc:61
 msgid "Allow worker types"
-msgstr "Salli työntekijä tyypit"
+msgstr "Salli työläisten tyypit"
 
 #: ../../src/events/event_factory.cc:62
 msgid "Allows the creation of workers of certain types for a player."
-msgstr "Sallii tietyn tyyppisten työntekijöiden luonnin pelaajalle."
+msgstr "Sallii tietyn tyyppisten työläisten kouluttamisen pelaajalle."
 
 #: ../../src/events/event_factory.cc:66
 msgid "Forbid worker types"
-msgstr "Kiellä työntekijätyypit"
+msgstr "Kiellä työläisten tyypit"
 
 #: ../../src/events/event_factory.cc:67
 msgid "Forbids the creation of workers of certain types for a player."
-msgstr "Kieltää työntekijätyyppien luonnin tietyntyyppiseltä pelaajalta."
+msgstr "Kieltää työläisten tyyppien luonnin pelaajalle."
 
 #: ../../src/events/event_factory.cc:71
 msgid "Allow building types"
@@ -1265,10 +1265,9 @@ msgstr "Estää tiettyjen rakennustyyppien rakentamisen pelaajalle."
 msgid "Create building"
 msgstr "Lisää rakennus"
 
-# TODO: .
 #: ../../src/events/event_factory.cc:82
 msgid "Create a building and optionally place workers in it"
-msgstr "Lisää rakennuksen ja valinnan mukaan asettaa siihen työntekijät"
+msgstr "Lisää rakennuksen ja valinnan mukaan asettaa siihen työläiset"
 
 #: ../../src/events/event_factory.cc:86
 msgid "Conquer area"
@@ -1588,12 +1587,12 @@ msgstr "\"%s\" ei voida rakentaa"
 
 #: ../../src/events/event_player_worker_types.cc:58
 msgid "no worker types"
-msgstr "ei työntekijätyyppejä"
+msgstr "ei työläisten tyyppejä"
 
 #: ../../src/events/event_player_worker_types.cc:63
 #, c-format
 msgid "(player worker types): %s"
-msgstr "(pelaajan työntekijätyypit): %s"
+msgstr "(pelaajan työläisten tyypit): %s"
 
 #: ../../src/events/event_retreat_change.cc:43
 msgid "Change"
@@ -5526,7 +5525,7 @@ msgstr "Mitään ei ole valittu"
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:64
 #, c-format
 msgid "%s Worker Types Event Options"
-msgstr "%s Työläisten tapahtumavalinnat"
+msgstr "%s Työläistyyppien tapahtumavalinnat"
 
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:201
 #, c-format

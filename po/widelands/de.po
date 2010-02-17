@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-15 19:51+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2010-02-16 13:19+0000\n"
+"Last-Translator: TMiegel <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-16 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-02-17 04:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/events/event_road.cc:49
@@ -2409,6 +2409,8 @@ msgid ""
 "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) or "
 "atrTotal (%u) but found unknown attribute value (%u)"
 msgstr ""
+"Erwarte atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) oder "
+"atrTotal (%u), aber unbekannter Attributwert  (%u)  gefunden"
 
 #: ../../src/logic/soldier.cc:70 ../../src/logic/soldier.cc:93
 msgid "positive integer"
@@ -5633,7 +5635,7 @@ msgstr "Titel"
 
 #: ../../src/wui/game_message_menu.h:65
 msgid "Time sent"
-msgstr ""
+msgstr "Zeitstempel"
 
 #: ../../src/wui/game_message_menu.h:76
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:99
@@ -5669,19 +5671,19 @@ msgstr "Archiv anzeigen"
 
 #: ../../src/wui/game_message_menu.h:138
 msgid "Message Menu: Archive"
-msgstr ""
+msgstr "Nachrichtenmenü: Archiv"
 
 #: ../../src/wui/game_message_menu.h:142
 msgid "Restore selected messages"
-msgstr ""
+msgstr "Stelle ausgewählte Nachrichten wieder her."
 
 #: ../../src/wui/game_message_menu.h:143
 msgid "Show Inbox"
-msgstr ""
+msgstr "Zeige Nachrichteneingang"
 
 #: ../../src/wui/game_message_menu.h:165
 msgid "center main mapview on location"
-msgstr ""
+msgstr "Zentriere Kartenansicht auf Ort"
 
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:72
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:72

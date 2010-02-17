@@ -1,0 +1,302 @@
+# Brazilian Portuguese translation for widelands
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-02-15 16:30+0000\n"
+"PO-Revision-Date: 2010-02-17 02:49+0000\n"
+"Last-Translator: alms21 <alms21@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2010-02-17 04:53+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../../worlds/winterland/conf:2
+msgid "The Widelands Development Team"
+msgstr "A Equipe de Desenvolvimento Widelands"
+
+#: ../../worlds/winterland/conf:3
+msgid "Winterland"
+msgstr "Terras de Inverno"
+
+#: ../../worlds/winterland/conf:4
+msgid ""
+"These are the white, wide and frosty winterlands, in which the Northmen "
+"dwell."
+msgstr ""
+"Estas são as brancas, vastas e gélidas terras de inverno, nas quais os "
+"Nórdicos vivem."
+
+#: ../../worlds/winterland/conf:7
+#: ../../worlds/winterland/conf:8
+#: ../../worlds/winterland/conf:9
+#: ../../worlds/winterland/conf:10
+#: ../../worlds/winterland/conf:11
+msgid "Bush"
+msgstr "Arbusto"
+
+#: ../../worlds/winterland/conf:12
+#: ../../worlds/winterland/conf:13
+#: ../../worlds/winterland/conf:14
+#: ../../worlds/winterland/conf:15
+msgid "Dead Tree"
+msgstr "Árvore Morta"
+
+#: ../../worlds/winterland/conf:16
+#: ../../worlds/winterland/conf:17
+#: ../../worlds/winterland/conf:18
+msgid "Grass"
+msgstr "Grama"
+
+#: ../../worlds/winterland/conf:19
+#: ../../worlds/winterland/conf:20
+msgid "Mushroom"
+msgstr "Cogumelo"
+
+#: ../../worlds/winterland/conf:21
+#: ../../worlds/winterland/conf:22
+#: ../../worlds/winterland/conf:23
+#: ../../worlds/winterland/conf:24
+#: ../../worlds/winterland/conf:25
+#: ../../worlds/winterland/conf:26
+msgid "Pebble"
+msgstr "Seixo"
+
+#: ../../worlds/winterland/conf:27
+#: ../../worlds/winterland/conf:28
+#: ../../worlds/winterland/conf:29
+msgid "Skeleton"
+msgstr "Esqueleto"
+
+#: ../../worlds/winterland/conf:30
+msgid "Snowman"
+msgstr "Homem da neve"
+
+#: ../../worlds/winterland/conf:31
+#: ../../worlds/winterland/conf:32
+#: ../../worlds/winterland/conf:33
+#: ../../worlds/winterland/conf:34
+#: ../../worlds/winterland/conf:35
+#: ../../worlds/winterland/conf:36
+#: ../../worlds/winterland/conf:37
+msgid "Standing Stones"
+msgstr "Pedras de pé"
+
+#: ../../worlds/winterland/conf:38
+#: ../../worlds/winterland/conf:39
+#: ../../worlds/winterland/conf:40
+#: ../../worlds/winterland/conf:41
+#: ../../worlds/winterland/conf:42
+#: ../../worlds/winterland/conf:43
+msgid "Stones"
+msgstr "Pedras"
+
+#: ../../worlds/winterland/conf:44
+msgid "Track"
+msgstr "Trilha"
+
+#: ../../worlds/winterland/conf:45
+msgid "Aspen"
+msgstr "Álamo alpino"
+
+#: ../../worlds/winterland/conf:46
+msgid "Aspen medium"
+msgstr "Álamo alpino médio"
+
+#: ../../worlds/winterland/conf:47
+msgid "Aspen small"
+msgstr "Álamo alpino pequeno"
+
+#: ../../worlds/winterland/conf:48
+msgid "Aspen tiny"
+msgstr "Álamo alpino minúsculo"
+
+#: ../../worlds/winterland/conf:49
+msgid "Oak"
+msgstr "Carvalho"
+
+#: ../../worlds/winterland/conf:50
+msgid "Oak medium"
+msgstr "Carvalho Médio"
+
+#: ../../worlds/winterland/conf:51
+msgid "Oak small"
+msgstr "Carvalho Pequeno"
+
+#: ../../worlds/winterland/conf:52
+msgid "Oak tiny"
+msgstr "Carvalho minúsculo"
+
+#: ../../worlds/winterland/conf:53
+msgid "Spruce"
+msgstr "Pinho"
+
+#: ../../worlds/winterland/conf:54
+msgid "Spruce medium"
+msgstr "Pinho médio"
+
+#: ../../worlds/winterland/conf:55
+msgid "Spruce small"
+msgstr "Pinho pequeno"
+
+#: ../../worlds/winterland/conf:56
+msgid "Spruce tiny"
+msgstr "Pinho anão"
+
+#: ../../worlds/winterland/conf:57
+msgid "Maple"
+msgstr "Bordo"
+
+#: ../../worlds/winterland/conf:58
+msgid "Maple medium"
+msgstr "Bordo médio"
+
+#: ../../worlds/winterland/conf:59
+msgid "Maple small"
+msgstr "Bordo pequeno"
+
+#: ../../worlds/winterland/conf:60
+msgid "Maple tiny"
+msgstr "Bordo minúsculo"
+
+#: ../../worlds/winterland/conf:61
+msgid "Birch"
+msgstr "Bétula"
+
+#: ../../worlds/winterland/conf:62
+msgid "Birch medium"
+msgstr "Bétula média"
+
+#: ../../worlds/winterland/conf:63
+msgid "Birch small"
+msgstr "Bétula pequena"
+
+#: ../../worlds/winterland/conf:64
+msgid "Birch tiny"
+msgstr "Bétula anã"
+
+#: ../../worlds/winterland/conf:65
+msgid "Beech"
+msgstr "Faia"
+
+#: ../../worlds/winterland/conf:66
+msgid "Beech medium"
+msgstr "Faia média"
+
+#: ../../worlds/winterland/conf:67
+msgid "Beech small"
+msgstr "Faia pequena"
+
+#: ../../worlds/winterland/conf:68
+msgid "Beech tiny"
+msgstr "Faia minúscula"
+
+#: ../../worlds/winterland/conf:69
+msgid "Larch"
+msgstr "Cedro"
+
+#: ../../worlds/winterland/conf:70
+msgid "Larch medium"
+msgstr "Cedro médio"
+
+#: ../../worlds/winterland/conf:71
+msgid "Larch small"
+msgstr "Cedro pequeno"
+
+#: ../../worlds/winterland/conf:72
+msgid "Larch tiny"
+msgstr "Cedro anão"
+
+#: ../../worlds/winterland/conf:73
+msgid "Rowan"
+msgstr "Sorva"
+
+#: ../../worlds/winterland/conf:74
+msgid "Rowan medium"
+msgstr "Sorva média"
+
+#: ../../worlds/winterland/conf:75
+msgid "Rowan small"
+msgstr "Sorva pequena"
+
+#: ../../worlds/winterland/conf:76
+msgid "Rowan tiny"
+msgstr "Sorva minúscula"
+
+#: ../../worlds/winterland/conf:79
+msgid "Badger"
+msgstr "Texugo"
+
+#: ../../worlds/winterland/conf:80
+msgid "Bunny"
+msgstr "Coelho"
+
+#: ../../worlds/winterland/conf:81
+msgid "Deer"
+msgstr "Cervo"
+
+#: ../../worlds/winterland/conf:82
+msgid "Duck"
+msgstr "Pato"
+
+#: ../../worlds/winterland/conf:83
+msgid "Elk"
+msgstr "Alce"
+
+#: ../../worlds/winterland/conf:84
+msgid "Fox"
+msgstr "Raposa"
+
+#: ../../worlds/winterland/conf:85
+msgid "Lynx"
+msgstr "Lince"
+
+#: ../../worlds/winterland/conf:86
+msgid "Marten"
+msgstr "Fuinha"
+
+#: ../../worlds/winterland/conf:87
+msgid "Reindeer"
+msgstr "Rena"
+
+#: ../../worlds/winterland/conf:88
+msgid "Sheep"
+msgstr "Ovelha"
+
+#: ../../worlds/winterland/conf:89
+msgid "Wisent"
+msgstr "Bisonte"
+
+#: ../../worlds/winterland/conf:90
+msgid "Wolf"
+msgstr "Lobo"
+
+#: ../../worlds/winterland/resconf:4
+msgid "Coal"
+msgstr "Carvão"
+
+#: ../../worlds/winterland/resconf:12
+msgid "Gold"
+msgstr "Ouro"
+
+#: ../../worlds/winterland/resconf:20
+msgid "Iron"
+msgstr "Ferro"
+
+#: ../../worlds/winterland/resconf:28
+msgid "Granit"
+msgstr "Granito"
+
+#: ../../worlds/winterland/resconf:36
+msgid "Water"
+msgstr "Água"
+
+#: ../../worlds/winterland/resconf:41
+msgid "Fish"
+msgstr "Peixe"
