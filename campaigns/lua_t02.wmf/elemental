@@ -1,0 +1,10 @@
+[global]
+packet_version=1
+map_w=64
+map_h=64
+nr_players=1
+world=greenland
+name=_"Tutorial2 - A Place to call Home"
+author=Winterwind
+descr=_"Second Mission of the Barbarian Tutorial Campaign. In this tutorial the higher production buildings, including mining and the military expansions will be introduced."
+background="tribes/barbarians/pics/campmap-tut1+2.jpg"
