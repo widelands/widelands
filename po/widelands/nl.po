@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-15 20:02+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2010-02-17 13:04+0000\n"
+"Last-Translator: DaDosDude <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-16 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-02-18 04:45+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -584,7 +584,7 @@ msgstr "'s creatie"
 
 #: ../../src/writeHTML.cc:686
 msgid "Spawns in warehouses."
-msgstr ""
+msgstr "Verschijnt in Warenhuis"
 
 #: ../../src/writeHTML.cc:695
 #, c-format
@@ -843,7 +843,7 @@ msgstr "produceer"
 
 #: ../../src/writeHTML.cc:1268
 msgid "recruit"
-msgstr ""
+msgstr "soldaat"
 
 #: ../../src/writeHTML.cc:1311
 msgid "Documentation for program command mine"
@@ -971,7 +971,7 @@ msgstr "ware_types.xhtml"
 #: ../../src/trigger/trigger_time.cc:44 ../../src/trigger/trigger_vision.cc:50
 #, c-format
 msgid "unknown/unhandled version %u"
-msgstr ""
+msgstr "onbekend/niet ondersteinde versie %u"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
@@ -982,7 +982,7 @@ msgstr ""
 #: ../../src/economy/economy_data_packet.cc:82
 #, c-format
 msgid "duplicated entry for %s"
-msgstr ""
+msgstr "dubbele invoer voor %s"
 
 #: ../../src/economy/economy_data_packet.cc:95
 #, c-format
@@ -1154,13 +1154,13 @@ msgstr "afstand (1 .. 255)"
 #: ../../src/events/event_building.cc:86
 #, c-format
 msgid "max distance (%u) is smaller than min distance (%u)"
-msgstr ""
+msgstr "max afstand (%u) is korter dan min afstand (%u)"
 
 #: ../../src/events/event_building.cc:169
 #: ../../src/events/event_building.cc:304 ../../src/logic/immovable.cc:254
 #: ../../src/logic/immovable.cc:268
 msgid "duplicated"
-msgstr ""
+msgstr "Verdubbeld"
 
 #: ../../src/events/event_building.cc:174
 #: ../../src/events/event_building.cc:311
@@ -1172,7 +1172,7 @@ msgstr "%s=\"%s\": ongeldig"
 #: ../../src/events/event_building.cc:230
 #, c-format
 msgid "can not have %u %s (only %u)"
-msgstr ""
+msgstr "kan geen %u %s (alleen %u)"
 
 #: ../../src/events/event_building.cc:316
 #, c-format

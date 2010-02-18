@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-15 19:43+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2010-02-17 11:10+0000\n"
+"Last-Translator: NonoSan <fougey.a@orange.fr>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-16 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-02-18 04:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -581,7 +581,7 @@ msgstr "Tour"
 #: ../../tribes/atlanteans/conf:158
 #: ../../tribes/atlanteans/conf:166
 msgid "Barrier"
-msgstr ""
+msgstr "Barrière"
 
 #: ../../tribes/atlanteans/conf:159
 msgid "Citadel"
@@ -603,7 +603,7 @@ msgstr "Sentinelle"
 
 #: ../../tribes/atlanteans/conf:163
 msgid "Stronghold"
-msgstr ""
+msgstr "Place forte"
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Barracks"
@@ -735,7 +735,7 @@ msgstr "Quartier Général Moyen"
 
 #: ../../tribes/atlanteans/conf:207
 msgid "Castle village"
-msgstr ""
+msgstr "Village fortifié"
 
 #: ../../tribes/atlanteans/corn/conf:1
 msgid ""
@@ -1035,7 +1035,7 @@ msgstr "Produit de la farine de maïs"
 
 #: ../../tribes/atlanteans/mill/conf:22
 msgid "Produce blackrootflour"
-msgstr "Produit de la farice de racine noire"
+msgstr "Produit de la farine de racine noire"
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid "Mills wheat to produce flour."
@@ -1293,7 +1293,7 @@ msgstr "Produire un tabard"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:21
 msgid "Produce golden tabard"
-msgstr ""
+msgstr "Fabrique des tabards d'or"
 
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
