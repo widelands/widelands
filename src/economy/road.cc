@@ -80,7 +80,7 @@ Road::~Road()
 /**
  * Create a road between the given flags, using the given path.
 */
-void Road::create
+Road & Road::create
 	(Editor_Game_Base & egbase,
 	 Flag & start, Flag & end, Path const & path,
 	 bool    const create_carrier,
@@ -120,6 +120,8 @@ void Road::create
 	}
 
 	road.init(egbase);
+
+	return road;
 }
 
 int32_t Road::get_type() const throw ()

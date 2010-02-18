@@ -27,6 +27,8 @@
 #include "logic/objective.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "logic/path.h"
+#include "logic/checkstep.h"
 #include "trigger/trigger_time.h"
 #include "wui/interactive_player.h"
 #include "campvis.h"
@@ -93,6 +95,7 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, reveal_fields),
 	METHOD(L_Player, hide_fields),
 	METHOD(L_Player, reveal_scenario),
+	METHOD(L_Player, place_road),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
@@ -731,6 +734,60 @@ int L_Player::reveal_scenario(lua_State * L) {
 
 	return 0;
 }
+
+/* RST
+	.. method:: place_road(f1, dir1, dir2, ...)
+
+		Start a road at the given field, then walk the directions
+		given. Places a flag at the last field.
+
+		:arg f1: fields to connect with this road
+		:type f1: :class:`wl.map.Field`
+		:arg dirs: direction, can be either ("r", "l", "br", "bl", "tr", "tl") or
+			("e", "w", "ne", "nw", "se", "sw").
+		:type dirs: :class:`string`
+
+		:returns: the road created
+		TODO
+*/
+int L_Player::place_road(lua_State * L) {
+	Game & g = get_game(L);
+	Map & map = g.map();
+
+	FCoords start = (*get_user_class<L_Field>(L, 2))->fcoords(L);
+
+	BaseImmovable * bi = start.field->get_immovable();
+	if (!bi or bi->name() != "flag")
+		return report_error(L, "Start field does not have a flag!");
+
+	Path path(start);
+
+	// Find the shortest path
+	for (uint32_t i = 3; i <= lua_gettop(L); i++) {
+		std::string d = luaL_checkstring(L, i);
+
+		if (d == "ne" or d == "tr")
+			path.append(map, 1);
+		else if (d == "e" or d == "r")
+			path.append(map, 2);
+		else if (d == "se" or d == "br")
+			path.append(map, 3);
+		else if (d == "sw" or d == "bl")
+			path.append(map, 4);
+		else if (d == "w" or d == "l")
+			path.append(map, 5);
+		else if (d == "nw" or d == "tl")
+			path.append(map, 6);
+		else
+			return report_error(L, "Illegal direction: %s", d.c_str());
+
+	}
+
+	Road & r = m_get(L, g).force_road(path, true);
+
+	return to_lua<L_Road>(L, new L_Road(r));
+}
+
 /*
  ==========================================================
  C METHODS

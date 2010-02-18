@@ -40,6 +40,7 @@ class Soldier;
 struct TrainingSite;
 class Flag;
 struct Tribe_Descr;
+struct Road;
 struct AttackController;
 
 /** class Player
@@ -416,7 +417,7 @@ struct Player :
 	// Only to be called indirectly via CmdQueue
 	Flag & force_flag(FCoords);      /// Do what it takes to create the flag.
 	Flag*   build_flag(Coords);      /// Build a flag if it is allowed.
-	void   force_road(Path const &, bool create_carrier = false);
+	Road & force_road(Path const &, bool create_carrier = false);
 	void   build_road(Path const &); /// Build a road if it is allowed.
 	Building& force_building
 		(Coords,

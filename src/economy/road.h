@@ -65,7 +65,7 @@ struct Road : public PlayerImmovable {
 	Road();
 	virtual ~Road();
 
-	static void  create
+	static Road & create
 		(Editor_Game_Base &,
 		 Flag & start, Flag & end, Path const &,
 		 bool    create_carrier = false,

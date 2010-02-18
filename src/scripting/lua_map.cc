@@ -441,6 +441,50 @@ int L_Flag::add_ware(lua_State * L)
 
 
 /* RST
+Road
+--------
+
+.. class:: Road
+
+	Child of: :class:`PlayerImmovable`
+
+	One flag in the economy of this Player.
+*/
+const char L_Road::className[] = "Road";
+const MethodType<L_Road> L_Road::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_Road> L_Road::Properties[] = {
+	PROP_RO(L_Road, length),
+	{0, 0, 0},
+};
+
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+int L_Road::get_length(lua_State * L) {
+	lua_pushuint32(L, m_get(get_game(L), L)->get_path().get_nsteps());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
+
+/* RST
 Building
 --------
 
@@ -1113,6 +1157,12 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<L_Flag, L_PlayerImmovable>(L);
 	add_parent<L_Flag, L_BaseImmovable>(L);
 	add_parent<L_Flag, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_Road>(L, "map", true);
+	add_parent<L_Road, L_PlayerImmovable>(L);
+	add_parent<L_Road, L_BaseImmovable>(L);
+	add_parent<L_Road, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_Warehouse>(L, "map", true);

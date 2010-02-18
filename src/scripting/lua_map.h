@@ -23,6 +23,7 @@
 #include <lua.hpp>
 
 #include "economy/flag.h"
+#include "economy/road.h"
 #include "logic/game.h"
 #include "logic/warehouse.h"
 
@@ -200,6 +201,32 @@ public:
 	 */
 private:
 	CASTED_M_GET(Flag);
+};
+
+class L_Road : public L_PlayerImmovable {
+public:
+	LUNA_CLASS_HEAD(L_Road);
+
+	L_Road() {}
+	L_Road(Widelands::Road & mo) : L_PlayerImmovable(mo) {
+	}
+	L_Road(lua_State * L) : L_PlayerImmovable(L) {}
+	virtual ~L_Road() {}
+
+	/*
+	 * Properties
+	 */
+	int get_length(lua_State * L);
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+private:
+	CASTED_M_GET(Road);
 };
 
 
