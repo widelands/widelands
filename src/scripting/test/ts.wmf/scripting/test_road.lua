@@ -10,9 +10,12 @@ function road_tests:setup()
    self.p:place_flag(f)
 end
 
-function road_tests:test_simple()
+function road_tests:test_length()
    r = self.p:place_road(self.f, "r", "r")
    assert_equal(2, r.length)
+   r:remove()
+   -- TODO: remove both flags!
 end
 
--- TODO: error if flag is not already set at beginning
+
+-- TODO: test for error if flag is not already set at beginning

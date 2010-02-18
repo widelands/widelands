@@ -763,7 +763,7 @@ int L_Player::place_road(lua_State * L) {
 	Path path(start);
 
 	// Find the shortest path
-	for (uint32_t i = 3; i <= lua_gettop(L); i++) {
+	for (int32_t i = 3; i <= lua_gettop(L); i++) {
 		std::string d = luaL_checkstring(L, i);
 
 		if (d == "ne" or d == "tr")

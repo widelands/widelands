@@ -452,6 +452,7 @@ Road
 */
 const char L_Road::className[] = "Road";
 const MethodType<L_Road> L_Road::Methods[] = {
+	METHOD(L_Road, __len),
 	{0, 0},
 };
 const PropertyType<L_Road> L_Road::Properties[] = {
@@ -465,6 +466,11 @@ const PropertyType<L_Road> L_Road::Properties[] = {
  PROPERTIES
  ==========================================================
  */
+/* RST
+	.. attribute:: length
+
+		(RO) The length of the roads in number of edges.
+*/
 int L_Road::get_length(lua_State * L) {
 	lua_pushuint32(L, m_get(get_game(L), L)->get_path().get_nsteps());
 	return 1;
