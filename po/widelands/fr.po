@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-17 14:54+0000\n"
-"Last-Translator: NonoSan <fougey.a@orange.fr>\n"
+"PO-Revision-Date: 2010-02-18 23:06+0000\n"
+"Last-Translator: newpain <yannick@tipscollector.net>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-02-18 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-02-19 04:34+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -169,6 +169,69 @@ msgid ""
 "                      panel.\n"
 "\n"
 msgstr ""
+"options Sonore:\n"
+" --nosound Désactivation du son au démarrage.\n"
+" --disable_fx Désactivation des effets sonore.\n"
+" --disable_music Désactive la musique.\n"
+"\n"
+" --nozip Ne pas utiliser les sauvegardes dans des fichiers compressés ZIP.\n"
+"\n"
+" --editor=FICHIER Démarrer directement l'éditeur de cartes du jeu "
+"Widelands.\n"
+"                      Vous pouvez ajouter un =FICHIER pour charger ce "
+"Fichier\n"
+"                      dans l'éditeur de cartes.\n"
+" --scenario=FICHIER Démarre la carte FICHIER comme scénario.\n"
+" --loadgame=FICHIER Charge directement le fichier de sauvegarde FICHIER.\n"
+" --dedicated=FICHIER Démmare ggz host avec le FICHIER comme carte\n"
+" --speed_of_new_game La vitesse de la nouvelle partie démmarera\n"
+"                      avec un facteur de 1000 (0 est équivalent à la pause,\n"
+"                      1000 est la vitesse normale).\n"
+" --auto_roadbuild_mode=[yes|no]\n"
+"                      ([Oui|NON]) Mode de construction de routes automatique "
+"après\n"
+"                      avoir placé un drapeau qui n'est pas raccordé à une "
+"route.\n"
+" --write_HTML=[yes|no]\n"
+"                      Write HTML-helpfiles for parsed game data.\n"
+"                      Ecrire des fichiers au format HTML lors des analyses "
+"du jeu.\n"
+"\n"
+"Options graphiques:\n"
+" --fullscreen=[yes|no]\n"
+"                      Affichage du jeu en plein écran ([OUI|NON)].\n"
+" --depth=[16|32] Profondeur des couleurs en nombre de bits par pixel.\n"
+" --xres=[...] Hauteur de la fenêtre du jeu en pixel.\n"
+" --yres=[...] Largeur de la fenêtre du jeu en pixel.\n"
+" --hw_improvements=[0|1]\n"
+"                      Activer l'accélération matériel\n"
+"*Très expérimental*\n"
+" --double_buffer=[0|1]\n"
+"                      Activer le Tampon X2\n"
+"*Très expérimental*\n"
+" --opengl=[0|1]\n"
+"                      Activer le rendu  OpenGL\n"
+"*DANGEREUX ET BRISER, NE PAS UTILISER*\n"
+"\n"
+"Options pour le gestionnaire de fenêtre interne:\n"
+" --border_snap_distance=[0 ...]\n"
+"                      Déplacer une fenêtre sur le bord de l'écran\n"
+"                      lorsque le bord de la fenêtre est proche du bord de "
+"l'écran.\n"
+" --dock_windows_to_edges=[yes|no]\n"
+"                      Inclus une fenetre au bord de l'écran lorsque la "
+"fenêtre\n"
+"                      est à côté du bord de l'écran.\n"
+" --panel_snap_distance=[0 ...]\n"
+"                      Déplacer une fenêtre sur le bord du panneau lorsque le "
+"bord de\n"
+"                      la fenêtre entre dans cette distance entre le bord du "
+"panneau.\n"
+" --snap_windows_only_when_overlapping=[yes|no]\n"
+"                      Seulement se déplacer une fenêtre sur le bord d'un "
+"panneau\n"
+"                      si la fenêtre est de chevaucher le panneau.\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1295
 msgid ""
@@ -4360,7 +4423,7 @@ msgstr "Statistiques"
 #: ../../src/wui/interactive_player.cc:192
 #: ../../src/wui/interactive_player.cc:290
 msgid "Messages"
-msgstr ""
+msgstr "Messages"
 
 #: ../../src/wui/interactive_player.cc:198
 msgid "Resource information"
@@ -4374,8 +4437,8 @@ msgstr "Aide des ressources"
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u nouveau message"
+msgstr[1] "%u nouveaux messages"
 
 #: ../../src/wui/interactive_spectator.cc:56
 msgid "Exit Replay"
@@ -4387,55 +4450,58 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
-msgstr ""
+msgstr "Pseudonyme :"
 
 #: ../../src/wui/login_box.cc:38
 msgid "email (optional):"
-msgstr ""
+msgstr "email (optionel) :"
 
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
 msgstr ""
+"ATTENTION : Le mot de passe sera montré et sauvegardé de manière lisible !"
 
 #: ../../src/wui/login_box.cc:50
 msgid "Password:"
-msgstr ""
+msgstr "Mot de passe :"
 
 #: ../../src/wui/login_box.cc:57
 msgid "Register new account"
-msgstr ""
+msgstr "Enregistrer un nouvel acompte"
 
 #: ../../src/wui/login_box.cc:62
 msgid "Automatically use this login information from now on."
 msgstr ""
+"Utiliser automatiquement ces informations d'identification à partir de "
+"maintenant."
 
 #: ../../src/wui/login_box.cc:69
 msgid "Login"
-msgstr ""
+msgstr "Identifiant"
 
 #: ../../src/wui/login_box.cc:90
 msgid "Empty Nickname"
-msgstr ""
+msgstr "Pseudonyme vide"
 
 #: ../../src/wui/login_box.cc:90
 msgid "Please enter a nickname!"
-msgstr ""
+msgstr "Veuillez entrer un pseudonyme !"
 
 #: ../../src/wui/login_box.cc:97
 msgid "Space in Nickname"
-msgstr ""
+msgstr "Espace dans un pseudonyme"
 
 #: ../../src/wui/login_box.cc:98
 msgid "Sorry, but spaces are not allowed in nicknames!"
-msgstr ""
+msgstr "Désolé, mais les espaces ne sont pas autorisés dans les pseudnymes !"
 
 #: ../../src/wui/login_box.cc:105
 msgid "Empty Password"
-msgstr ""
+msgstr "Mot de passe vide"
 
 #: ../../src/wui/login_box.cc:105
 msgid "Please enter a password!"
-msgstr ""
+msgstr "Veuillez entrer un mot de passe !"
 
 #: ../../src/wui/minimap.cc:143
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
@@ -4468,7 +4534,7 @@ msgstr "Montrer les travailleurs"
 
 #: ../../src/wui/transport_ui.cc:44
 msgid "Economy options"
-msgstr ""
+msgstr "Options concernant l'économie"
 
 #: ../../src/wui/transport_ui.cc:149 ../../src/wui/transport_ui.cc:341
 msgid "Decrease permanent target quantity"
@@ -4484,23 +4550,23 @@ msgstr ""
 
 #: ../../src/wui/transport_ui.cc:240 ../../src/wui/transport_ui.cc:432
 msgid "Increase temporary target quantity"
-msgstr ""
+msgstr "Augmenter provisoirement la quantité des cibles"
 
 #: ../../src/wui/transport_ui.cc:266 ../../src/wui/transport_ui.cc:458
 msgid "Reset"
-msgstr ""
+msgstr "Réinitialiser"
 
 #: ../../src/wui/transport_ui.cc:266 ../../src/wui/transport_ui.cc:458
 msgid "Reset target quantity to default value"
-msgstr ""
+msgstr "Réinitialiser la quantité de cibles à la valeur par défaut"
 
 #: ../../src/wui/transport_ui.cc:488
 msgid "Ware type target quantities"
-msgstr ""
+msgstr "Quantité de marchandises"
 
 #: ../../src/wui/transport_ui.cc:492
 msgid "Worker type target quantities"
-msgstr ""
+msgstr "Quantité d'ouvriers"
 
 #: ../../src/wui/watchwindow.cc:93
 msgid "Follow"
@@ -4522,6 +4588,10 @@ msgid ""
 " Height: %u\n"
 " Caps: "
 msgstr ""
+"1) Info du noeud\n"
+" Coordonnées : (%i, %i)\n"
+" Hauteur : %u\n"
+" Capacité : "
 
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid " flag"
@@ -4632,11 +4702,11 @@ msgstr "Menu Évènements"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:64
 msgid "Event Chains"
-msgstr ""
+msgstr "Chaînes d'événements"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:85
 msgid "Triggers"
-msgstr ""
+msgstr "Déclencheurs"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:103
 #: ../../src/editor/ui_menus/editor_event_menu.cc:136
@@ -4656,7 +4726,7 @@ msgstr "Éditer"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:286
 msgid "Can not delete event. It is in use by "
-msgstr ""
+msgstr "Ne peut pas supprimer l'événement. Celui-ci est utilisé par "
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:293
 #: ../../src/editor/ui_menus/editor_event_menu.cc:333
@@ -4667,7 +4737,7 @@ msgstr "Erreur !"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:326
 msgid "Can not delete trigger. It is in use by "
-msgstr ""
+msgstr "Ne peut pas supprimer le déclencheur. Celui-ci est utilisé par "
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:357
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:220
@@ -4808,6 +4878,9 @@ msgid ""
 " NOTE: There is no options window for this event type yet. It has to be "
 "created manually by editing the text files in the map."
 msgstr ""
+" NOTE : Il n'a pas encore de fenêtres de configuration pour ce type "
+"d'événements. Il devra être créé manuellement en éditant le fichier texte de "
+"la carte."
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:44
 msgid "New Trigger"
@@ -4822,11 +4895,14 @@ msgid ""
 " NOTE: There is no options window for this trigger type yet. It has to be "
 "created manually by editing the text files in the map."
 msgstr ""
+" NOTE : Il n'a pas encore de fenêtres de configuration pour ce type de "
+"déclencheurs. Il devra être créé manuellement en éditant le fichier texte de "
+"la carte."
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:51
 msgid "New Random Map"
-msgstr ""
+msgstr "Nouvelle carte aléatoire"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:73
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:55
@@ -4869,13 +4945,15 @@ msgstr "Descr : "
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:46
 msgid "Set origin"
-msgstr ""
+msgstr "Indiquer le point centrale"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:48
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the top-"
 "left corner of a generated minimap."
 msgstr ""
+"Indiquer la position dont les coordonnées seront (0, 0). Ce point sera le "
+"coin supérieur gauche de la mini-carte."
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:85
 msgid "Nr Players:"
@@ -4903,75 +4981,75 @@ msgstr "Créer une carte"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:68
 msgid "Random Number:"
-msgstr ""
+msgstr "Nombre aléatoire"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:161
 #, c-format
 msgid "Water: %u %%"
-msgstr ""
+msgstr "Eau : %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:185
 #, c-format
 msgid "Land: %u %%"
-msgstr ""
+msgstr "Terrain : %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:209
 #, c-format
 msgid "Wasteland: %u %%"
-msgstr ""
+msgstr "Terre en friche : %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:219
 #, c-format
 msgid "Mountains: %u %%"
-msgstr ""
+msgstr "Montagnes : %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:236
 msgid "Island mode:"
-msgstr ""
+msgstr "Type d'île :"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:243
 msgid "Resources:"
-msgstr ""
+msgstr "Ressources :"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Low"
-msgstr ""
+msgstr "Faible"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "High"
-msgstr ""
+msgstr "Élevée"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:281
 msgid "Map ID:"
-msgstr ""
+msgstr "ID de la carte :"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:302
 msgid "Generate Map"
-msgstr ""
+msgstr "Générer la carte"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:380
 #, c-format
 msgid "Water: %i %%"
-msgstr ""
+msgstr "Eau : %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:383
 #, c-format
 msgid "Land: %i %%"
-msgstr ""
+msgstr "Terrain : %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:386
 #, c-format
 msgid "Wasteland: %i %%"
-msgstr ""
+msgstr "Terre en friche : %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:389
 #, c-format
 msgid "Mountains: %i %%"
-msgstr ""
+msgstr "Montagnes : %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:428
 msgid "Generating random map..."
-msgstr ""
+msgstr "Génération de carte aléatoire en cours..."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:150
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
@@ -5033,10 +5111,12 @@ msgid ""
 "The objective was deleted, but not its trigger, because it is still "
 "referenced by:\n"
 msgstr ""
+"L'objectif a été effacé, mais pas son déclencheur, car il est toujours "
+"référencé par :\n"
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:278
 msgid "Note"
-msgstr ""
+msgstr "Notes"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:41
 msgid "Player Options"
@@ -5063,12 +5143,18 @@ msgid ""
 "Can not remove player. It is referenced in some place. Remove all buildings, "
 "bobs, triggers and events that depend on this player and try again."
 msgstr ""
+"Impossible de supprimer le joueur. Celui-ci est référencé quelque-part. "
+"Détruisez tous les bâtiments, gens, événements et déclencheurs qui dépendent "
+"de ce joueur puis essayez à nouveau."
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:284
 msgid ""
 "Can not change player tribe. It is referenced in some place. Remove all "
 "bobs, triggers and events that depend on this tribe and try again."
 msgstr ""
+"Impossible de modifier le clan du joueur. Celui-ci est référencé quelque-"
+"part. Détruisez tous les bâtiments, gens, événements et déclencheurs qui "
+"dépendent de ce clan puis essayez à nouveau."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"
@@ -5266,7 +5352,7 @@ msgstr "Nom utilisé"
 
 #: ../../src/editor/ui_menus/event_expire_message_option_menu.cc:37
 msgid "Expire Message Event Options"
-msgstr ""
+msgstr "Options concernant l'expiration des messages événementiels"
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:47
 msgid "Message Box Event Options"
@@ -5323,39 +5409,39 @@ msgstr "Options des évènements de déplacement de vue"
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:64
 #, c-format
 msgid "%s Building Types Event Options"
-msgstr ""
+msgstr "Options concernant les bâtiment de type %s"
 
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:225
 #, c-format
 msgid "No building types are selected. Select at least one."
-msgstr ""
+msgstr "Aucun type de bâtiment sélectionné. Sélectionnez-en au moins un."
 
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:228
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:204
 msgid "Nothing selected"
-msgstr ""
+msgstr "Aucune sélection"
 
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:64
 #, c-format
 msgid "%s Worker Types Event Options"
-msgstr ""
+msgstr "Options concernant les événements des ouvriers de type %s"
 
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:201
 #, c-format
 msgid "No worker types are selected. Select at least one."
-msgstr ""
+msgstr "Aucun type d'ouvriers sélectionné. Choisissez-en au moins un."
 
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.cc:50
 msgid "Set Player's Flag Style Event Options"
-msgstr ""
+msgstr "Options concernant le style de drapeaux des événements du joueur"
 
 #: ../../src/editor/ui_menus/event_set_player_frontier_style_option_menu.cc:51
 msgid "Set Player's Frontier Style Event Options"
-msgstr ""
+msgstr "Options concernant le style d'événements à la frontière du joueur"
 
 #: ../../src/editor/ui_menus/event_set_timer_option_menu.cc:37
 msgid "Set Timer Event Options"
-msgstr ""
+msgstr "Options concernant les événement temporisés"
 
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:49
 msgid "Unhide Area Event Options"
@@ -5407,7 +5493,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:42
 msgid "Trigger Time Options"
-msgstr ""
+msgstr "Options concernant les déclencheurs temporisés"
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:50
 msgid ""
@@ -5417,19 +5503,19 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:52
 msgid "Trigger at absolute time"
-msgstr ""
+msgstr "Déclenchement d'après un temps absolu"
 
 #: ../../src/ai/defaultai.h:79
 msgid "Aggressive"
-msgstr ""
+msgstr "Agressif"
 
 #: ../../src/ai/defaultai.h:88
 msgid "Normal"
-msgstr ""
+msgstr "Standard"
 
 #: ../../src/ai/defaultai.h:97
 msgid "Defensive"
-msgstr ""
+msgstr "Défensif"
 
 #: ../../src/logic/map.h:172
 msgid "no description defined"
@@ -5441,15 +5527,15 @@ msgstr "pas de description"
 
 #: ../../src/wui/game_message_menu.h:62
 msgid "Select"
-msgstr ""
+msgstr "Sélectionner"
 
 #: ../../src/wui/game_message_menu.h:63
 msgid "Status"
-msgstr ""
+msgstr "État"
 
 #: ../../src/wui/game_message_menu.h:64
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 #: ../../src/wui/game_message_menu.h:65
 msgid "Time sent"
@@ -5481,7 +5567,7 @@ msgstr "Inverser la sélection"
 
 #: ../../src/wui/game_message_menu.h:118 ../../src/wui/game_message_menu.h:151
 msgid "Archive selected messages"
-msgstr ""
+msgstr "Archiver les messages sélectionnés"
 
 #: ../../src/wui/game_message_menu.h:129 ../../src/wui/game_message_menu.h:152
 msgid "Show Archive"
@@ -5489,19 +5575,19 @@ msgstr "Affiche l'archive"
 
 #: ../../src/wui/game_message_menu.h:138
 msgid "Message Menu: Archive"
-msgstr ""
+msgstr "Menu des messages : Archives"
 
 #: ../../src/wui/game_message_menu.h:142
 msgid "Restore selected messages"
-msgstr ""
+msgstr "Restaurer les messages sélectionnés"
 
 #: ../../src/wui/game_message_menu.h:143
 msgid "Show Inbox"
-msgstr ""
+msgstr "Afficher la boîte de réception"
 
 #: ../../src/wui/game_message_menu.h:165
 msgid "center main mapview on location"
-msgstr ""
+msgstr "centrer la carte principale sur la localisation"
 
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:72
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:72

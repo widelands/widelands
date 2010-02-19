@@ -6,19 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 20:29+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-02-15 16:30+0000\n"
+"PO-Revision-Date: 2010-02-18 14:35+0000\n"
+"Last-Translator: beer <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-02-19 04:34+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/emp02.wmf/elemental:9
 msgid "Empire Tutorial2 - An outpost for exile"
-msgstr ""
+msgstr "Riget Tutorial2  - forpost for flygtningne"
 
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -36,7 +36,7 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/event:456
 #: ../../campaigns/emp02.wmf/event:508
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Lutius dagbog"
 
 #: ../../campaigns/emp02.wmf/event:111
 msgid ""
@@ -51,7 +51,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/event:113
 msgid "A new island"
-msgstr ""
+msgstr "en ny ø"
 
 #: ../../campaigns/emp02.wmf/event:138
 msgid ""
@@ -68,11 +68,11 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/event:139
 #: ../../campaigns/emp02.wmf/objective:9
 msgid "* Build three lumberjack's houses, a forester's house and a sawmill."
-msgstr ""
+msgstr "byg 3 skovhugger huse, en Skovfoged hus og et savværk"
 
 #: ../../campaigns/emp02.wmf/event:141
 msgid "The green forests"
-msgstr ""
+msgstr "den grønne skov"
 
 #: ../../campaigns/emp02.wmf/event:171
 msgid ""
@@ -91,17 +91,19 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/event:174
 msgid "The rocks"
-msgstr ""
+msgstr "Stenen"
 
 #: ../../campaigns/emp02.wmf/event:192
 msgid ""
 " \"Good news! Today our wood economy was completed. Now we can be sure to "
 "have enough wood for our future building projects.\" "
 msgstr ""
+" \"Gode nyheder! Idag er vores tre økonomi oppe at køre. Nu er vi sikre på "
+"at vi har nok tre til vores fremtidige bygnings projekter "
 
 #: ../../campaigns/emp02.wmf/event:194
 msgid "Wood for the colony"
-msgstr ""
+msgstr "tre for kolonien"
 
 #: ../../campaigns/emp02.wmf/event:207
 msgid ""
@@ -115,7 +117,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/event:238
 msgid "Saledus looks unhappy"
-msgstr ""
+msgstr "Saledus  ser ked ud af det"
 
 #: ../../campaigns/emp02.wmf/event:240
 msgid ""
@@ -133,15 +135,15 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/event:241
 #: ../../campaigns/emp02.wmf/objective:25
 msgid "* Build some barracks and sentries around the colony."
-msgstr ""
+msgstr "byg nogle barraker og vagtposter omkring kolonien"
 
 #: ../../campaigns/emp02.wmf/event:243
 msgid "Dangerous shipparts"
-msgstr ""
+msgstr "farlige skibe"
 
 #: ../../campaigns/emp02.wmf/event:276
 msgid "Saledus smiles"
-msgstr ""
+msgstr "Saledus  smiler"
 
 #: ../../campaigns/emp02.wmf/event:278
 msgid ""
@@ -159,6 +161,7 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/objective:33
 msgid "* Expand to the east, to start mining marble from the mountain."
 msgstr ""
+"udvid mod øst og start noget minedrift i bjerget for at få fat på perler"
 
 #: ../../campaigns/emp02.wmf/event:281
 msgid "Marble on the mountain"
@@ -166,7 +169,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/event:321
 msgid "Saledus is amazed"
-msgstr ""
+msgstr "Saledus  er overesket"
 
 #: ../../campaigns/emp02.wmf/event:323
 msgid ""
@@ -190,7 +193,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/event:326
 msgid "Further mountains"
-msgstr ""
+msgstr "flere bjerge"
 
 #: ../../campaigns/emp02.wmf/event:367
 msgid "Amalea comes in..."
@@ -224,7 +227,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/event:372
 msgid "Food for the miners"
-msgstr ""
+msgstr "mad for minearbejderene"
 
 #: ../../campaigns/emp02.wmf/event:424
 msgid ""
@@ -251,7 +254,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/event:427
 msgid "The Barbarians"
-msgstr ""
+msgstr "Barbarende"
 
 #: ../../campaigns/emp02.wmf/event:458
 msgid ""
@@ -265,7 +268,7 @@ msgstr ""
 msgid ""
 "* As soon as you have enough soldiers, attack and completely destroy the "
 "barbarian buildings.<br>"
-msgstr ""
+msgstr "Så snart dy har nok soldater angrib og ødelæg Barbarendes bygninger"
 
 #: ../../campaigns/emp02.wmf/event:460
 #: ../../campaigns/emp02.wmf/objective:66
@@ -290,15 +293,15 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/event:485
 msgid "Victory"
-msgstr ""
+msgstr "sejer"
 
 #: ../../campaigns/emp02.wmf/event:496
 msgid "7 days later..."
-msgstr ""
+msgstr "7 dage senere"
 
 #: ../../campaigns/emp02.wmf/event:498
 msgid "As time is running by"
-msgstr ""
+msgstr "tiden går"
 
 #: ../../campaigns/emp02.wmf/event:502
 msgid "OK"
@@ -317,11 +320,11 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/event:512
 msgid "A Message"
-msgstr ""
+msgstr "En besked"
 
 #: ../../campaigns/emp02.wmf/event:524
 msgid "Amalea smiles"
-msgstr ""
+msgstr "Amalea  smiler"
 
 #: ../../campaigns/emp02.wmf/event:526
 msgid ""
@@ -333,36 +336,36 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/event:528
 msgid "Our new tavern"
-msgstr ""
+msgstr "Vores nye kro"
 
 #: ../../campaigns/emp02.wmf/objective:7
 msgid "Build up a wood economy"
-msgstr ""
+msgstr "Byg en tre økonomi"
 
 #: ../../campaigns/emp02.wmf/objective:15
 msgid "Build a quarry"
-msgstr ""
+msgstr "byg et stedbrud"
 
 #: ../../campaigns/emp02.wmf/objective:23
 msgid "Protect your colony"
-msgstr ""
+msgstr "beskydt din koloni"
 
 #: ../../campaigns/emp02.wmf/objective:31
 msgid "Start mining marble"
-msgstr ""
+msgstr "start udvind perler"
 
 #: ../../campaigns/emp02.wmf/objective:39
 msgid "Build a stonemason and mining infrastructure"
-msgstr ""
+msgstr "Byg en mure og mine infrastruktur"
 
 #: ../../campaigns/emp02.wmf/objective:47
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "giv dine minemedarbejder mad"
 
 #: ../../campaigns/emp02.wmf/objective:55
 msgid "Protect your eastern frontier"
-msgstr ""
+msgstr "beskydt din østlige granser"
 
 #: ../../campaigns/emp02.wmf/objective:63
 msgid "Destroy the barbarian tribe"
-msgstr ""
+msgstr "ødeløg den barbariske stamm"

@@ -7,20 +7,20 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-16 12:43+0000\n"
-"Last-Translator: Victor Birkmanis <Unknown>\n"
+"PO-Revision-Date: 2010-02-18 15:44+0000\n"
+"Last-Translator: AlexQR <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-17 04:52+0000\n"
+"X-Launchpad-Export-Date: 2010-02-19 04:34+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
 #: ../../campaigns/cconfig:24
 msgid "(Tutorial) Barbarians - The second Empire"
-msgstr ""
+msgstr "(Обучение) Варвары - Вторая Империя"
 
 #: ../../campaigns/cconfig:27
 msgid ""
@@ -37,10 +37,21 @@ msgid ""
 "Al’thunran, the young warlord seeks to reunite his ambitious brothers and "
 "force the tribes to march once again under a common banner."
 msgstr ""
+"Когда Чат'Карус умер, он был уже стар, а его три сына, сильные и амбициозные "
+"полководцы, способные справиться с любым врагом, осмелившимся восстать "
+"против древних лесов.  После его кончины власть переходила старшему сыну, "
+"Тсрону. Это решение оставило двух младших сыновей недовольным. Тсрон понимал "
+"это, поэтому, он последовал наказу отца, покин столицу  Алсунапана и повел "
+"свои войска к высоким горам где был похоронен его отец. Он поклялся богам и "
+"себе вернутся и востановить порядок.\r\n"
+"\r\n"
+"Пока его брать неистовствавали в кровавой войне против него Тсрон и скудные "
+"войска которые остались с ним, пытались образумить братьев и объеденить силы "
+"что бы вновь сражаться  под одним флагом."
 
 #: ../../campaigns/cconfig:30
 msgid "Empire - The months of exile"
-msgstr ""
+msgstr "Империя - Месяц в изгнании"
 
 #: ../../campaigns/cconfig:33
 msgid ""
@@ -54,26 +65,32 @@ msgid ""
 "army was attacked by 100 barbarian footmen and was totally scattered. Only "
 "with pure life he and a handful of soldiers survived."
 msgstr ""
+"Шесть месяцев назад, Литиус - молодой генерал Империи - был послан с 150 "
+"солдатами в преграничную крепость в северных лесах, где граничили земли "
+"варварский\\х племен  и империи. \r\n"
+"Ничто не предвещало беды и мирная жизнь казалась реальностью. Но в одну "
+"тихую ночь налет варваров перевернул его жизнь с ног на голову. Спашийся "
+"чудом ему и горстке солдат придется бороться за выживание."
 
 #: ../../campaigns/cconfig:36
 msgid "Atlanteans - the new rise"
-msgstr ""
+msgstr "Атланты - новая расса"
 
 #: ../../campaigns/cconfig:39
 msgid "Some descriptive texts..."
-msgstr ""
+msgstr "Описание..."
 
 #: ../../campaigns/cconfig:57
 msgid "Tutorial1 - Eyes in the Dark"
-msgstr ""
+msgstr "Обучение I - Глаза во Тьме"
 
 #: ../../campaigns/cconfig:62
 msgid "Tutorial2 - A Place to call Home"
-msgstr ""
+msgstr "Обучение II - Место названое Домом"
 
 #: ../../campaigns/cconfig:67
 msgid "Tutorial3 - This land is our land"
-msgstr ""
+msgstr "Обучение III - Эта земля наша"
 
 #: ../../campaigns/cconfig:74
 msgid "Empire Tutorial1 - The strands of Malac' Mor"
@@ -81,7 +98,7 @@ msgstr "Империя. Обучение 1 - Берега Малак Мора"
 
 #: ../../campaigns/cconfig:79
 msgid "Empire Tutorial2 - An outpost for exile"
-msgstr "Империя Обучение 2 - Форпост для изгнанников"
+msgstr ""
 
 #: ../../campaigns/cconfig:84
 msgid "01 - From nemesis to genesis"
@@ -97,7 +114,7 @@ msgstr "Кто станет реальным королём большого а�
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
-msgstr "Шах и Мат"
+msgstr "Шах и мат"
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""
