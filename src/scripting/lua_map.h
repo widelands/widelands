@@ -41,10 +41,10 @@ class L_MapModuleClass : public LunaClass {
 };
 
 
-#define CASTED_M_GET(klass) \
-Widelands:: klass * m_get(Widelands::Game & game, lua_State * L) { \
+#define CASTED_GET(klass) \
+Widelands:: klass * get(Widelands::Game & game, lua_State * L) { \
 	return static_cast<Widelands:: klass *> \
-		(L_MapObject::m_get(game, L, #klass)); \
+		(L_MapObject::get(game, L, #klass)); \
 }
 
 class L_MapObject : public L_MapModuleClass {
@@ -84,8 +84,7 @@ public:
 	/*
 	 * C Methods
 	 */
-protected:
-	Widelands::Map_Object * m_get
+	Widelands::Map_Object * get
 		(Widelands::Game & game, lua_State * L, std::string = "MapObject");
 	Widelands::Map_Object * m_get_or_zero
 		(Widelands::Game & game);
@@ -114,8 +113,7 @@ public:
 	/*
 	 * C Methods
 	 */
-private:
-	CASTED_M_GET(BaseImmovable);
+	CASTED_GET(BaseImmovable);
 };
 
 class L_PlayerImmovable : public L_BaseImmovable {
@@ -140,8 +138,7 @@ public:
 	/*
 	 * C Methods
 	 */
-private:
-	CASTED_M_GET(PlayerImmovable);
+	CASTED_GET(PlayerImmovable);
 
 protected:
 	Widelands::Ware_Index m_get_ware_index
@@ -172,8 +169,7 @@ public:
 	/*
 	 * C Methods
 	 */
-private:
-	CASTED_M_GET(Building);
+	CASTED_GET(Building);
 };
 
 
@@ -199,8 +195,7 @@ public:
 	/*
 	 * C Methods
 	 */
-private:
-	CASTED_M_GET(Flag);
+	CASTED_GET(Flag);
 };
 
 class L_Road : public L_PlayerImmovable {
@@ -227,8 +222,7 @@ public:
 	/*
 	 * C Methods
 	 */
-private:
-	CASTED_M_GET(Road);
+	CASTED_GET(Road);
 };
 
 
@@ -257,11 +251,10 @@ public:
 	/*
 	 * C Methods
 	 */
-private:
-	CASTED_M_GET(Warehouse);
+	CASTED_GET(Warehouse);
 };
 
-#undef CASTED_M_GET
+#undef CASTED_GET
 
 class L_Field : public L_MapModuleClass {
 	Widelands::Coords m_c;

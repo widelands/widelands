@@ -1,14 +1,17 @@
 -- ==============
 -- Testing roads 
 -- ==============
+
+-- TODO: proper and more complete build tests, but maybe with convenience functions
+
 road_tests = lunit.TestCase("road tests")
 function road_tests:setup()
    self.f = wl.map.Field(10,10)
    self.p = wl.game.Player(1)
    self.p:conquer(f, 6)
 
-   self.p:place_flag(f)
-   self.r = self.p:place_road(self.f, "r", "r")
+   self.start_flag = self.p:place_flag(self.f)
+   self.r = self.p:place_road(self.start_flag, "r", "r")
 end
 function road_tests:teardown()
    pcall(function()
@@ -21,12 +24,9 @@ end
 
 function road_tests:test_length()
    assert_equal(2, self.r.length)
-   -- TODO: remove both flags!
 end
 
 function road_tests:test_deletion_of_flag()
    self.r.start_flag:remove()
    assert_error("Road vanished!", function() self.r:length() end)
 end
-
--- TODO: test for error if flag is not already set at beginning

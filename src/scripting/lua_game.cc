@@ -111,7 +111,7 @@ L_Player::L_Player(lua_State * L) {
 	m_pl = luaL_checkuint32(L, -1);
 
 	// checks that this is a valid Player
-	m_get(L, get_game(L));
+	get(L, get_game(L));
 }
 
 void L_Player::__persist(lua_State * L) {
@@ -146,7 +146,7 @@ int L_Player::get_number(lua_State * L) {
 */
 int L_Player::get_allowed_buildings(lua_State * L) {
 	Game & game = get_game(L);
-	Player & p = m_get(L, game);
+	Player & p = get(L, game);
 	const Tribe_Descr & t = p.tribe();
 
 	lua_newtable(L);
@@ -236,8 +236,8 @@ int L_Player::set_viewpoint_y(lua_State * L) {
  */
 int L_Player::__eq(lua_State * L) {
 	Game & g = get_game(L);
-	const Player & me = m_get(L, g);
-	const Player & you = (*get_user_class<L_Player>(L, 2))->m_get(L, g);
+	const Player & me = get(L, g);
+	const Player & you = (*get_user_class<L_Player>(L, 2))->get(L, g);
 
 	lua_pushboolean
 		(L, (me.player_number() == you.player_number()));
@@ -273,11 +273,11 @@ int L_Player::place_flag(lua_State * L) {
 
 	Flag * f;
 	if (not force) {
-		f = m_get(L, get_game(L)).build_flag(c->fcoords(L));
+		f = get(L, get_game(L)).build_flag(c->fcoords(L));
 		if (!f)
 			return report_error(L, "Couldn't build flag!");
 	} else {
-		f = &m_get(L, get_game(L)).force_flag(c->fcoords(L));
+		f = &get(L, get_game(L)).force_flag(c->fcoords(L));
 	}
 
 	return to_lua<L_Flag>(L, new L_Flag(*f));
@@ -298,11 +298,11 @@ int L_Player::place_building(lua_State * L) {
 	const char * name = luaL_checkstring(L, 2);
 	L_Field * c = *get_user_class<L_Field>(L, 3);
 
-	Building_Index i = m_get(L, get_game(L)).tribe().building_index(name);
+	Building_Index i = get(L, get_game(L)).tribe().building_index(name);
 	if (i == Building_Index::Null())
 		return report_error(L, "Unknown Building: '%s'", name);
 
-	Building & b = m_get(L, get_game(L)).force_building
+	Building & b = get(L, get_game(L)).force_building
 		(c->coords(), i, 0, 0, Soldier_Counts());
 
 	return upcasted_immovable_to_lua(L, &b);
@@ -391,7 +391,7 @@ int L_Player::send_message(lua_State * L) {
 	}
 
 	Game & game = get_game(L);
-	Player & plr = m_get(L, game);
+	Player & plr = get(L, game);
 
 	Message_Id const message =
 		plr.add_message
@@ -551,7 +551,7 @@ int L_Player::sees_field(lua_State * L) {
 	Widelands::Map_Index const i =
 		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &game.map()[0];
 
-	lua_pushboolean(L, m_get(L, game).vision(i) > 1);
+	lua_pushboolean(L, get(L, game).vision(i) > 1);
 	return 1;
 }
 
@@ -571,7 +571,7 @@ int L_Player::seen_field(lua_State * L) {
 	Widelands::Map_Index const i =
 		(*get_user_class<L_Field>(L, 2))->fcoords(L).field - &game.map()[0];
 
-	lua_pushboolean(L, m_get(L, game).vision(i) >= 1);
+	lua_pushboolean(L, get(L, game).vision(i) >= 1);
 	return 1;
 }
 
@@ -623,7 +623,7 @@ int L_Player::forbid_buildings(lua_State * L) {
 */
 int L_Player::add_objective(lua_State * L) {
 	Game & game = get_game(L);
-	Player & p = m_get(L, game);
+	Player & p = get(L, game);
 	if (p.player_number() != game.get_ipl()->player_number())
 		return
 			report_error
@@ -669,7 +669,7 @@ int L_Player::add_objective(lua_State * L) {
 // UNTESTED
 int L_Player::reveal_fields(lua_State * L) {
 	Game & g = get_game(L);
-	Player & p = m_get(L, g);
+	Player & p = get(L, g);
 	Map & m = g.map();
 
 	luaL_checktype(L, 2, LUA_TTABLE);
@@ -699,7 +699,7 @@ int L_Player::reveal_fields(lua_State * L) {
 // UNTESTED
 int L_Player::hide_fields(lua_State * L) {
 	Game & g = get_game(L);
-	Player & p = m_get(L, g);
+	Player & p = get(L, g);
 	Map & m = g.map();
 
 	luaL_checktype(L, 2, LUA_TTABLE);
@@ -753,13 +753,7 @@ int L_Player::place_road(lua_State * L) {
 	Game & g = get_game(L);
 	Map & map = g.map();
 
-	FCoords start = (*get_user_class<L_Field>(L, 2))->fcoords(L);
-
-	BaseImmovable * bi = start.field->get_immovable();
-	if (!bi or bi->name() != "flag")
-		return report_error(L, "Start field does not have a flag!");
-
-	Path path(start);
+	Path path((*get_user_class<L_Flag>(L, 2))->get(g, L)->get_position());
 
 	// Find the shortest path
 	for (int32_t i = 3; i <= lua_gettop(L); i++) {
@@ -782,7 +776,7 @@ int L_Player::place_road(lua_State * L) {
 
 	}
 
-	Road & r = m_get(L, g).force_road(path, true);
+	Road & r = get(L, g).force_road(path, true);
 
 	return to_lua<L_Road>(L, new L_Road(r));
 }
@@ -822,7 +816,7 @@ void L_Player::m_parse_building_list
 }
 int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
 {
-	Player & p = m_get(L, get_game(L));
+	Player & p = get(L, get_game(L));
 
 	std::vector<Building_Index> houses;
 	m_parse_building_list(L, p.tribe(), houses);
@@ -832,7 +826,7 @@ int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
 
 	return 0;
 }
-Player & L_Player::m_get(lua_State * L, Widelands::Game & game) {
+Player & L_Player::get(lua_State * L, Widelands::Game & game) {
 	if (m_pl > MAX_PLAYERS)
 		report_error(L, "Illegal player number %i",  m_pl);
 	Player * rv = game.get_player(m_pl);
@@ -892,7 +886,7 @@ void L_Objective::__unpersist(lua_State * L) {
 		:attr:`wl.game.Player.objectives` with :attr:`name` as key.
 */
 int L_Objective::get_name(lua_State * L) {
-	Objective & o = m_get(L, get_game(L));
+	Objective & o = get(L, get_game(L));
 	lua_pushstring(L, o.name().c_str());
 	return 1;
 }
@@ -902,12 +896,12 @@ int L_Objective::get_name(lua_State * L) {
 		(RW) The line that is shown in the objectives menu
 */
 int L_Objective::get_title(lua_State * L) {
-	Objective & o = m_get(L, get_game(L));
+	Objective & o = get(L, get_game(L));
 	lua_pushstring(L, o.visname().c_str());
 	return 1;
 }
 int L_Objective::set_title(lua_State * L) {
-	Objective & o = m_get(L, get_game(L));
+	Objective & o = get(L, get_game(L));
 	o.set_visname(luaL_checkstring(L, -1));
 	return 0;
 }
@@ -917,12 +911,12 @@ int L_Objective::set_title(lua_State * L) {
 		(RW) The complete text of this objective. Can be Widelands RichText.
 */
 int L_Objective::get_body(lua_State * L) {
-	Objective & o = m_get(L, get_game(L));
+	Objective & o = get(L, get_game(L));
 	lua_pushstring(L, o.descr().c_str());
 	return 1;
 }
 int L_Objective::set_body(lua_State * L) {
-	Objective & o = m_get(L, get_game(L));
+	Objective & o = get(L, get_game(L));
 	o.set_descr(luaL_checkstring(L, -1));
 	return 0;
 }
@@ -932,12 +926,12 @@ int L_Objective::set_body(lua_State * L) {
 		(RW) is this objective shown in the objectives menu
 */
 int L_Objective::get_visible(lua_State * L) {
-	Objective & o = m_get(L, get_game(L));
+	Objective & o = get(L, get_game(L));
 	lua_pushboolean(L, o.get_is_visible());
 	return 1;
 }
 int L_Objective::set_visible(lua_State * L) {
-	Objective & o = m_get(L, get_game(L));
+	Objective & o = get(L, get_game(L));
 	o.set_is_visible(luaL_checkboolean(L, -1));
 	return 0;
 }
@@ -949,12 +943,12 @@ int L_Objective::set_visible(lua_State * L) {
 		:attr:`visible` is set to.
 */
 int L_Objective::get_done(lua_State * L) {
-	Objective & o = m_get(L, get_game(L));
+	Objective & o = get(L, get_game(L));
 	lua_pushboolean(L, o.done());
 	return 1;
 }
 int L_Objective::set_done(lua_State * L) {
-	Objective & o = m_get(L, get_game(L));
+	Objective & o = get(L, get_game(L));
 	o.set_done(luaL_checkboolean(L, -1));
 	return 0;
 }
@@ -966,7 +960,7 @@ int L_Objective::set_done(lua_State * L) {
  */
 int L_Objective::remove(lua_State * L) {
 	Game & g = get_game(L);
-	Objective & o = m_get(L, g); // will not return if object doesn't exist
+	Objective & o = get(L, g); // will not return if object doesn't exist
 	std::string trigger_name = o.get_trigger()->name();
 	g.map().mom().remove(m_name);
 	g.map().mtm().remove(trigger_name);
@@ -988,7 +982,7 @@ int L_Objective::__eq(lua_State * L) {
  C METHODS
  ==========================================================
  */
-Objective & L_Objective::m_get(lua_State * L, Widelands::Game & g) {
+Objective & L_Objective::get(lua_State * L, Widelands::Game & g) {
 	Objective * o = g.map().mom()[m_name];
 	if (!o)
 		report_error

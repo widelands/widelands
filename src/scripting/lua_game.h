@@ -89,8 +89,8 @@ public:
 	/*
 	 * C methods
 	 */
+	Widelands::Player & get(lua_State * L, Widelands::Game & game);
 private:
-	Widelands::Player & m_get(lua_State * L, Widelands::Game & game);
 	void m_parse_building_list
 		(lua_State *, const Widelands::Tribe_Descr &,
 		 std::vector<Widelands::Building_Index> &);
@@ -134,8 +134,7 @@ public:
 	/*
 	 * C Methods
 	 */
-private:
-	Widelands::Objective & m_get(lua_State *, Widelands::Game &);
+	Widelands::Objective & get(lua_State *, Widelands::Game &);
 };
 
 void luaopen_wlgame(lua_State *);

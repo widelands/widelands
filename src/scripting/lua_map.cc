@@ -178,7 +178,7 @@ int L_MapObject::__eq(lua_State * L) {
 		lua_pushboolean(L, false);
 	else // Compare them
 		lua_pushboolean
-			(L, other->m_get(game, L)->serial() == m_get(game, L)->serial());
+			(L, other->get(game, L)->serial() == get(game, L)->serial());
 
 	return 1;
 }
@@ -193,7 +193,7 @@ int L_MapObject::__eq(lua_State * L) {
 */
 int L_MapObject::remove(lua_State * L) {
 	Game & game = get_game(L);
-	Map_Object * o = m_get(game, L);
+	Map_Object * o = get(game, L);
 
 	if (!o)
 		return 0;
@@ -207,7 +207,7 @@ int L_MapObject::remove(lua_State * L) {
  C METHODS
  ==========================================================
  */
-Map_Object * L_MapObject::m_get
+Map_Object * L_MapObject::get
 	(Game & game, lua_State * L, std::string name)
 {
 	Map_Object * o = m_get_or_zero(game);
@@ -265,7 +265,7 @@ const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
 */
 int L_BaseImmovable::get_size(lua_State * L) {
 	Game & game = get_game(L);
-	BaseImmovable * o = m_get(game, L);
+	BaseImmovable * o = get(game, L);
 
 	switch (o->get_size()) {
 		case BaseImmovable::NONE: lua_pushstring(L, "none"); break;
@@ -290,7 +290,7 @@ int L_BaseImmovable::get_size(lua_State * L) {
 */
 int L_BaseImmovable::get_name(lua_State * L) {
 	Game & game = get_game(L);
-	BaseImmovable * o = m_get(game, L);
+	BaseImmovable * o = get(game, L);
 
 	lua_pushstring(L, o->name().c_str());
 	return 1;
@@ -343,7 +343,7 @@ const PropertyType<L_PlayerImmovable> L_PlayerImmovable::Properties[] = {
 int L_PlayerImmovable::get_player(lua_State * L) {
 	return
 		to_lua<L_Player>
-			(L, new L_Player (m_get(get_game(L), L)->get_owner()->player_number())
+			(L, new L_Player (get(get_game(L), L)->get_owner()->player_number())
 	);
 }
 
@@ -417,7 +417,7 @@ const PropertyType<L_Flag> L_Flag::Properties[] = {
 int L_Flag::add_ware(lua_State * L)
 {
 	Game & game = get_game(L);
-	Flag * f = m_get(game, L);
+	Flag * f = get(game, L);
 
 	if (not f->has_capacity())
 		return report_error(L, "Flag has no capacity left!");
@@ -473,7 +473,7 @@ const PropertyType<L_Road> L_Road::Properties[] = {
 		(RO) The length of the roads in number of edges.
 */
 int L_Road::get_length(lua_State * L) {
-	lua_pushuint32(L, m_get(get_game(L), L)->get_path().get_nsteps());
+	lua_pushuint32(L, get(get_game(L), L)->get_path().get_nsteps());
 	return 1;
 }
 
@@ -484,7 +484,7 @@ int L_Road::get_length(lua_State * L) {
 */
 int L_Road::get_start_flag(lua_State * L) {
 	return to_lua<L_Flag>
-		(L, new L_Flag(m_get(get_game(L), L)->get_flag(Road::FlagStart)));
+		(L, new L_Flag(get(get_game(L), L)->get_flag(Road::FlagStart)));
 }
 
 /* RST
@@ -494,7 +494,7 @@ int L_Road::get_start_flag(lua_State * L) {
 */
 int L_Road::get_end_flag(lua_State * L) {
 	return to_lua<L_Flag>
-		(L, new L_Flag(m_get(get_game(L), L)->get_flag(Road::FlagEnd)));
+		(L, new L_Flag(get(get_game(L), L)->get_flag(Road::FlagEnd)));
 }
 
 
@@ -548,7 +548,7 @@ const PropertyType<L_Building> L_Building::Properties[] = {
 		* warehouse
 */
 int L_Building::get_building_type(lua_State * L) {
-	lua_pushstring(L, m_get(get_game(L), L)->type_name());
+	lua_pushstring(L, get(get_game(L), L)->type_name());
 	return 1;
 }
 
@@ -615,7 +615,7 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
 */
 #define SET_X(what) \
 int L_Warehouse::set_ ##what ## s(lua_State * L) { \
-	Warehouse * o = m_get(get_game(L), L); \
+	Warehouse * o = get(get_game(L), L); \
 	int n = lua_gettop(L); \
  \
 	if (n == 3) { \
@@ -669,7 +669,7 @@ SET_X(ware);
 */
 #define GET_X(what) \
 int L_Warehouse::get_ ##what ## s(lua_State * L) { \
-	Warehouse * o = m_get(get_game(L), L); \
+	Warehouse * o = get(get_game(L), L); \
  \
 	if (lua_isstring(L, 2)) { \
 		/* One string as argument */ \
