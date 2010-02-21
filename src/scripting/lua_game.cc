@@ -748,7 +748,6 @@ int L_Player::reveal_scenario(lua_State * L) {
 		:type dirs: :class:`string`
 
 		:returns: the road created
-		TODO
 */
 int L_Player::place_road(lua_State * L) {
 	Game & g = get_game(L);

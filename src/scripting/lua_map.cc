@@ -452,11 +452,12 @@ Road
 */
 const char L_Road::className[] = "Road";
 const MethodType<L_Road> L_Road::Methods[] = {
-	METHOD(L_Road, __len),
 	{0, 0},
 };
 const PropertyType<L_Road> L_Road::Properties[] = {
 	PROP_RO(L_Road, length),
+	PROP_RO(L_Road, start_flag),
+	PROP_RO(L_Road, end_flag),
 	{0, 0, 0},
 };
 
@@ -475,6 +476,27 @@ int L_Road::get_length(lua_State * L) {
 	lua_pushuint32(L, m_get(get_game(L), L)->get_path().get_nsteps());
 	return 1;
 }
+
+/* RST
+	.. attribute:: start_flag
+
+		(RO) The flag were this road starts
+*/
+int L_Road::get_start_flag(lua_State * L) {
+	return to_lua<L_Flag>
+		(L, new L_Flag(m_get(get_game(L), L)->get_flag(Road::FlagStart)));
+}
+
+/* RST
+	.. attribute:: end_flag
+
+		(RO) The flag were this road ends
+*/
+int L_Road::get_end_flag(lua_State * L) {
+	return to_lua<L_Flag>
+		(L, new L_Flag(m_get(get_game(L), L)->get_flag(Road::FlagEnd)));
+}
+
 
 /*
  ==========================================================

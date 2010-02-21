@@ -217,6 +217,8 @@ public:
 	 * Properties
 	 */
 	int get_length(lua_State * L);
+	int get_start_flag(lua_State * L);
+	int get_end_flag(lua_State * L);
 
 	/*
 	 * Lua Methods
