@@ -63,12 +63,17 @@ if (NOT DEFINED WL_VERSION)
 endif (NOT DEFINED WL_VERSION)
 message ("Version of Widelands Build is ${WL_VERSION}(${CMAKE_BUILD_TYPE})")
 
+# TODO This will need to cleanup, see mailing list recommendations
+#set (WL_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
+#set (WL_INSTALL_BINDIR ${WL_INSTALL_PREFIX}/bin/)
+#set (WL_INSTALL_DATADIR ${WL_INSTALL_PREFIX}/share/widelands/)
+#set (WL_INSTALL_LOCALEDIR ${WL_INSTALL_DATADIR}/locale/)
 set (WL_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
-set (WL_INSTALL_BINDIR ${WL_INSTALL_PREFIX}/bin/)
-set (WL_INSTALL_DATADIR ${WL_INSTALL_PREFIX}/share/widelands/)
-# is this needed?
-set (WL_INSTALL_LOCALEDIR ${WL_INSTALL_DATADIR}/locale/)
+set (WL_INSTALL_BINDIR .)
+set (WL_INSTALL_DATADIR share/widelands)
+set (WL_INSTALL_LOCALEDIR ${WL_INSTALL_PREFIX}/${WL_INSTALL_DATADIR}/locale)
 
+# is this needed?
 set (WL_SOURCE_CHECKER ${CMAKE_CURRENT_SOURCE_DIR}/cmake/codecheck/CodeCheck.py)
 
 include(CheckIncludeFile)
@@ -194,6 +199,10 @@ add_custom_target (
   pics 
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pics
   COMMAND cmake -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DWL_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}/pics -DWL_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/pics -P PicsFunctions.cmake
+)
+add_custom_target (
+  quickpics 
+  COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/pics ${CMAKE_CURRENT_BINARY_DIR}/pics
 )
 
 install(
