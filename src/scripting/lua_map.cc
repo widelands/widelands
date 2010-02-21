@@ -19,6 +19,7 @@
 
 #include <lua.hpp>
 
+#include "container_iterate.h"
 #include "log.h"
 #include "logic/carrier.h"
 #include "logic/checkstep.h"
@@ -505,12 +506,20 @@ int L_Road::get_end_flag(lua_State * L) {
 /* RST
 	.. attribute:: workers
 
-		(RO) An array of carriers that work on this road. Note that you cannot
-		change this directly, use add_workers to overwrite any worker.
+		(RO) An array of names of carriers that work on this road.  Note that you
+		cannot change this directly, use add_workers to overwrite any worker.
 */
 int L_Road::get_workers(lua_State * L) {
-	// TODO: write this function
-	return 0;
+	const PlayerImmovable::Workers & ws = get(get_game(L), L)->get_workers();
+
+	lua_createtable(L, ws.size(), 0);
+	uint32_t widx = 1;
+	container_iterate_const(PlayerImmovable::Workers, ws, w) {
+		lua_pushuint32(L, widx++);
+		lua_pushstring(L, (*w.current)->descr().name().c_str());
+		lua_rawset(L, -3);
+	}
+	return 1;
 }
 
 
@@ -524,10 +533,13 @@ int L_Road::get_workers(lua_State * L) {
 	.. method:: warp_worker(name[, slot = 0])
 
 		Immediately creates a worker out of thin air and
-		assigns it the to the road.
+		assigns it the to the road. Slot defines which carrier should be warped
+		in, for slot 0, only "carrier" is valid. For slot 1 any valid carrier
+		worker is allowed.
 
-		:arg name: name of this worker, e.g. "carrier"
+		:arg name: name of this worker, e.g. "carrier", "ox"
 		:type name: :class:`name`
+TODO: this function should only take a count
 */
 int L_Road::warp_worker(lua_State * L) {
 	std::string name = "carrier";
@@ -561,6 +573,8 @@ int L_Road::warp_worker(lua_State * L) {
 
 	Tribe_Descr const & tribe = owner.tribe();
 	const Worker_Descr * wd = tribe.get_worker_descr(tribe.worker_index(name));
+	if (!wd)
+		return report_error(L, "%s is not a valid worker name!", name.c_str());
 
 	if (wd->get_worker_type() != Worker_Descr::CARRIER)
 		return report_error(L, "%s is not a carrier type!", name.c_str());
