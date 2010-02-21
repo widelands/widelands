@@ -93,6 +93,7 @@ struct Road : public PlayerImmovable {
 	bool notify_ware(Game & game, FlagId flagid);
 
 	virtual void remove_worker(Worker &);
+	void assign_carrier(Carrier &, uint8_t);
 
 protected:
 	virtual void init(Editor_Game_Base &);

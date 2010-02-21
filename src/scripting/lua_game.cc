@@ -776,7 +776,7 @@ int L_Player::place_road(lua_State * L) {
 
 	}
 
-	Road & r = get(L, g).force_road(path, true);
+	Road & r = get(L, g).force_road(path, false);
 
 	return to_lua<L_Road>(L, new L_Road(r));
 }

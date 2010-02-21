@@ -86,6 +86,9 @@ Road & Road::create
 	 bool    const create_carrier,
 	 int32_t const type)
 {
+	// TODO: SirVer, Lua remove create_carrier from this function after
+	// TODO: SirVer, Lua all campaigns are transfered
+
 	assert(start.get_position() == path.get_start());
 	assert(end  .get_position() == path.get_end  ());
 	assert(start.get_owner   () == end .get_owner());
@@ -113,6 +116,8 @@ Road & Road::create
 				 	(egbase, owner, &start, idle_position));
 		carrier.start_task_road(ref_cast<Game, Editor_Game_Base>(egbase));
 
+		// TODO: SirVer I guess this is wrong. There are already two slots,
+		// we shouldn't push back another. or not?
 		CarrierSlot slot;
 		slot.carrier = &carrier;
 		slot.carrier_type = 1;
@@ -421,6 +426,31 @@ void Road::remove_worker(Worker & w)
 	}
 
 	PlayerImmovable::remove_worker(w);
+}
+
+/**
+ * A carrier was created by someone else (e.g. Scripting Engine)
+ * and should now be assigned to this road.
+ */
+void Road::assign_carrier(Carrier & c, uint8_t slot)
+{
+	assert(slot <= 1);
+
+	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+
+	// Send the worker home if it occupies our slot
+	CarrierSlot & s = m_carrier_slots[slot];
+
+	if (s.carrier_request) {
+		delete s.carrier_request;
+		s.carrier_request = 0;
+	}
+	Carrier * current_carrier = s.carrier.get(game);
+	if (current_carrier)
+		current_carrier->set_location(0);
+
+	m_carrier_slots[slot].carrier = &c;
+	m_carrier_slots[slot].carrier_request = 0;
 }
 
 

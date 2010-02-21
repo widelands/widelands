@@ -216,7 +216,7 @@ NodeCaps Player::get_buildcaps(FCoords const fc) const {
  * Build a flag, checking that it's legal to do so. Returns
  * the flag in case of success, else returns 0;
  */
-Flag* Player::build_flag(Coords const c) {
+Flag * Player::build_flag(Coords const c) {
 	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
 	if (buildcaps & BUILDCAPS_FLAG)
@@ -311,7 +311,7 @@ Road & Player::force_road(Path const & path, bool const create_carrier) {
 }
 
 
-Building& Player::force_building
+Building & Player::force_building
 	(Coords                const location,
 	 Building_Index        const idx,
 	 uint32_t      const *       ware_counts,
@@ -345,9 +345,10 @@ Building& Player::force_building
 				immovable->remove(egbase());
 		}
 	}
-	return descr.create
-		(egbase(), *this, c[0], false,
-		 ware_counts, worker_counts, &soldier_counts);
+	return
+		descr.create
+		(egbase(), *this, c[0], false, ware_counts,
+		 worker_counts, &soldier_counts);
 }
 
 

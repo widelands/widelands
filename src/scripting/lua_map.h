@@ -214,10 +214,12 @@ public:
 	int get_length(lua_State * L);
 	int get_start_flag(lua_State * L);
 	int get_end_flag(lua_State * L);
+	int get_workers(lua_State * L);
 
 	/*
 	 * Lua Methods
 	 */
+	int warp_worker(lua_State * L);
 
 	/*
 	 * C Methods

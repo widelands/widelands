@@ -20,6 +20,7 @@
 #include <lua.hpp>
 
 #include "log.h"
+#include "logic/carrier.h"
 #include "logic/checkstep.h"
 #include "logic/findimmovable.h"
 #include "logic/immovable.h"
@@ -452,12 +453,14 @@ Road
 */
 const char L_Road::className[] = "Road";
 const MethodType<L_Road> L_Road::Methods[] = {
+	METHOD(L_Road, warp_worker),
 	{0, 0},
 };
 const PropertyType<L_Road> L_Road::Properties[] = {
 	PROP_RO(L_Road, length),
 	PROP_RO(L_Road, start_flag),
 	PROP_RO(L_Road, end_flag),
+	PROP_RO(L_Road, workers),
 	{0, 0, 0},
 };
 
@@ -483,8 +486,9 @@ int L_Road::get_length(lua_State * L) {
 		(RO) The flag were this road starts
 */
 int L_Road::get_start_flag(lua_State * L) {
-	return to_lua<L_Flag>
-		(L, new L_Flag(get(get_game(L), L)->get_flag(Road::FlagStart)));
+	return
+		to_lua<L_Flag>
+			(L, new L_Flag(get(get_game(L), L)->get_flag(Road::FlagStart)));
 }
 
 /* RST
@@ -493,8 +497,20 @@ int L_Road::get_start_flag(lua_State * L) {
 		(RO) The flag were this road ends
 */
 int L_Road::get_end_flag(lua_State * L) {
-	return to_lua<L_Flag>
-		(L, new L_Flag(get(get_game(L), L)->get_flag(Road::FlagEnd)));
+	return
+		to_lua<L_Flag>
+			(L, new L_Flag(get(get_game(L), L)->get_flag(Road::FlagEnd)));
+}
+
+/* RST
+	.. attribute:: workers
+
+		(RO) An array of carriers that work on this road. Note that you cannot
+		change this directly, use add_workers to overwrite any worker.
+*/
+int L_Road::get_workers(lua_State * L) {
+	// TODO: write this function
+	return 0;
 }
 
 
@@ -503,6 +519,61 @@ int L_Road::get_end_flag(lua_State * L) {
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+	.. method:: warp_worker(name[, slot = 0])
+
+		Immediately creates a worker out of thin air and
+		assigns it the to the road.
+
+		:arg name: name of this worker, e.g. "carrier"
+		:type name: :class:`name`
+*/
+int L_Road::warp_worker(lua_State * L) {
+	std::string name = "carrier";
+	if (lua_gettop(L) > 1)
+		name = luaL_checkstring(L, 2);
+	uint32_t slot = 0;
+	if (lua_gettop(L) > 2)
+		slot = luaL_checkuint32(L, 3);
+
+	if (slot == 0 && name != "carrier")
+		return report_error(L, "Only 'carrier' is allowed in slot 0!\n");
+	if (slot > 1)
+		return report_error(L, "slot must by <= 1!");
+
+	Game & g = get_game(L);
+	Map & map = g.map();
+
+	Road * r = get(g, L);
+
+	Flag & start = r->get_flag(Road::FlagStart);
+
+	Coords idle_position = start.get_position();
+	const Path & path = r->get_path();
+
+	// Determine Idle position.
+	Path::Step_Vector::size_type idle_index = r->get_idle_index();
+	for (Path::Step_Vector::size_type i = 0; i < idle_index; ++i)
+		map.get_neighbour(idle_position, path[i], &idle_position);
+
+	Player & owner = r->owner();
+
+	Tribe_Descr const & tribe = owner.tribe();
+	const Worker_Descr * wd = tribe.get_worker_descr(tribe.worker_index(name));
+
+	if (wd->get_worker_type() != Worker_Descr::CARRIER)
+		return report_error(L, "%s is not a carrier type!", name.c_str());
+
+	Carrier & carrier = ref_cast<Carrier, Worker>
+		(wd->create (g, owner, r, idle_position));
+
+	carrier.start_task_road(g);
+
+	r->assign_carrier(carrier, slot);
+
+	return 0;
+}
 
 /*
  ==========================================================

@@ -3,6 +3,11 @@
 -- ==============
 
 -- TODO: proper and more complete build tests, but maybe with convenience functions
+-- TODO: building a road that crosses itself, check for error
+-- TODO: check worker creation, illegal carriername, carrier != slot 0, both legal
+-- TODO: second carrier only on busy road allowed
+-- TODO: send one carrier home when warping another
+
 
 road_tests = lunit.TestCase("road tests")
 function road_tests:setup()
@@ -34,5 +39,8 @@ end
 function road_tests:test_access_of_flags()
    assert_equal(self.end_flag, self.r.end_flag)
    assert_equal(self.start_flag, self.r.start_flag)
+end
+function road_tests:test_carrier_creation()
+   self.r:warp_worker("carrier")
 end
 
