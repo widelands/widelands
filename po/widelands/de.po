@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-16 13:19+0000\n"
-"Last-Translator: TMiegel <Unknown>\n"
+"PO-Revision-Date: 2010-02-21 16:21+0000\n"
+"Last-Translator: meru <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-17 04:52+0000\n"
+"X-Launchpad-Export-Date: 2010-02-22 04:38+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/events/event_road.cc:49
@@ -2861,7 +2861,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:151
 #, c-format
 msgid "\"%s\": %s"
-msgstr ""
+msgstr "\"%s\": %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:156
 #, c-format
@@ -3642,7 +3642,7 @@ msgstr "Spielzeit:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:111
 msgid "Delete file"
-msgstr ""
+msgstr "Datei löschen"
 
 #: ../../src/ui_fsmenu/loadgame.cc:112
 msgid "Do you really want to delete "
@@ -4260,7 +4260,7 @@ msgstr "Beobachten"
 
 #: ../../src/wui/fieldaction.cc:487
 msgid "Military settings"
-msgstr ""
+msgstr "Militär-Einstellungen"
 
 #: ../../src/wui/fieldaction.cc:512
 msgid "Start attack"
@@ -4297,6 +4297,9 @@ msgid ""
 "   height: %u\n"
 "   owner: %u\n"
 msgstr ""
+"(%i, %i)\n"
+"   Höhe: %u\n"
+"   Besitzer: %u\n"
 
 #: ../../src/wui/game_main_menu.cc:38
 #: ../../src/editor/ui_menus/editor_main_menu.cc:49
@@ -4630,7 +4633,7 @@ msgstr "Zeige Arbeiter"
 
 #: ../../src/wui/transport_ui.cc:44
 msgid "Economy options"
-msgstr ""
+msgstr "Wirtschafts-Einstellungen"
 
 #: ../../src/wui/transport_ui.cc:149 ../../src/wui/transport_ui.cc:341
 msgid "Decrease permanent target quantity"
