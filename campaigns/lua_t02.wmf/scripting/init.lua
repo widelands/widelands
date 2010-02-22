@@ -23,7 +23,8 @@ p:allow_buildings{
 }
 
 -- Place hq and fill it with wares
-hq = p:place_building("headquarters_interim", wl.map.Field(12,10))
+hq_pos = wl.map.Field(12,10)
+hq = p:place_building("headquarters_interim", hq_pos)
 hq:set_wares{
    axe=6,
    bakingtray=2,
@@ -64,12 +65,38 @@ hq:set_workers{
    stonemason=2
 }
 -- TODO: soldiers. 0/0/0/0=45
--- TODO: roads
+
+-- ============
+-- Build roads 
+-- ============
+function connected_road(p, start, cmd, g_create_carriers)
+   create_carriers = g_create_carriers or true
+
+   if cmd:sub(-1) ~= "|" then
+      cmd = cmd .. "|"
+   end
+
+   moves = {}
+   for m in cmd:gmatch("%a+[,|]") do 
+      moves[#moves+1] = m:sub(1,-2)
+      if(m:sub(-1) == '|') then
+         r = p:place_road(start, unpack(moves))
+         start = r.end_flag
+         if create_carriers then
+            r:warp_worker("carrier")
+         end
+         moves = {}
+      end
+   end
+end
+
+connected_road(p, hq_pos.brn.immovable, "r,r|br,r|r,r")
+connected_road(p, hq_pos.brn.immovable, "l,l|l,bl,bl|br,r|br,r|r,tr|tr,tr,tr")
 
 -- Place some buildings from the last map
 -- TODO: add workers to these buildings
 p:place_building("lumberjacks_hut", wl.map.Field(15,11))
-p:place_building("lumberjacks_hut", wl.map.Field(16,12))
+p:place_building("lumberjacks_hut", wl.map.Field(12,13))
 p:place_building("quarry", wl.map.Field(8,12))
 p:place_building("rangers_hut", wl.map.Field(9,13))
 
