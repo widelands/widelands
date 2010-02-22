@@ -78,8 +78,7 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
 		case Map_Object::FLAG:
 			return CAST_TO_LUA(Flag);
 		case Map_Object::ROAD:
-			return CAST_TO_LUA(PlayerImmovable);
-		// TODO: Handle ROAD
+			return CAST_TO_LUA(Road);
 	}
 	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*bi));
 }
@@ -462,6 +461,7 @@ const PropertyType<L_Road> L_Road::Properties[] = {
 	PROP_RO(L_Road, start_flag),
 	PROP_RO(L_Road, end_flag),
 	PROP_RO(L_Road, workers),
+	PROP_RO(L_Road, type),
 	{0, 0, 0},
 };
 
@@ -522,6 +522,26 @@ int L_Road::get_workers(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: type
+
+		(RO) Type of road. Can be any either of:
+
+		* normal
+		* busy
+*/
+int L_Road::get_type(lua_State * L) {
+	switch (get(get_game(L), L)->get_roadtype()) {
+		case Road_Normal:
+			lua_pushstring(L, "normal"); break;
+		case Road_Busy:
+			lua_pushstring(L, "busy"); break;
+		default:
+			return
+				report_error(L, "Unknown Roadtype! This is a bug in widelands!");
+	}
+	return 1;
+}
 
 /*
  ==========================================================

@@ -753,32 +753,67 @@ int L_Player::place_road(lua_State * L) {
 	Game & g = get_game(L);
 	Map & map = g.map();
 
-	Path path((*get_user_class<L_Flag>(L, 2))->get(g, L)->get_position());
+	Flag * starting_flag = (*get_user_class<L_Flag>(L, 2))->get(g, L);
+	Coords current = starting_flag->get_position();
+	Path path(current);
 
-	// Find the shortest path
+	// Construct the path
+	CheckStepLimited cstep;
 	for (int32_t i = 3; i <= lua_gettop(L); i++) {
 		std::string d = luaL_checkstring(L, i);
 
-		if (d == "ne" or d == "tr")
+		if (d == "ne" or d == "tr") {
 			path.append(map, 1);
-		else if (d == "e" or d == "r")
+			map.get_trn(current, &current);
+		} else if (d == "e" or d == "r") {
 			path.append(map, 2);
-		else if (d == "se" or d == "br")
+			map.get_rn(current, &current);
+		} else if (d == "se" or d == "br") {
 			path.append(map, 3);
-		else if (d == "sw" or d == "bl")
+			map.get_brn(current, &current);
+		} else if (d == "sw" or d == "bl") {
 			path.append(map, 4);
-		else if (d == "w" or d == "l")
+			map.get_bln(current, &current);
+		} else if (d == "w" or d == "l") {
 			path.append(map, 5);
-		else if (d == "nw" or d == "tl")
+			map.get_ln(current, &current);
+		} else if (d == "nw" or d == "tl") {
 			path.append(map, 6);
-		else
+			map.get_tln(current, &current);
+		} else
 			return report_error(L, "Illegal direction: %s", d.c_str());
 
+		cstep.add_allowed_location(current);
 	}
 
-	Road & r = get(L, g).force_road(path, false);
+	// Make sure that the road cannot cross itself
+	Path optimal_path;
+	map.findpath
+		(path.get_start(), path.get_end(),
+		 0,
+		 optimal_path,
+		 cstep,
+		 Map::fpBidiCost);
+	if (optimal_path.get_nsteps() != path.get_nsteps())
+		return report_error(L, "Cannot build a road that crosses itself!");
 
-	return to_lua<L_Road>(L, new L_Road(r));
+	BaseImmovable * bi = map.get_immovable(current);
+	if (!bi or bi->get_type() != Map_Object::FLAG) {
+		if (!get(L, g).build_flag(current))
+			return report_error(L, "Could not place end flag!");
+	}
+	if (bi and bi == starting_flag)
+	  return report_error(L, "Cannot build a closed loop!");
+
+	Road * r = get(L, g).build_road(path);
+	if (!r)
+		return
+			report_error
+			  (L, "Error while creating Road. May be: something is in "
+					"the way or you do not own the territory were you want to build "
+					"the road");
+
+	return to_lua<L_Road>(L, new L_Road(*r));
 }
 
 /*

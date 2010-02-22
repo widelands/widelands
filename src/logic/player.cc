@@ -255,7 +255,7 @@ Note: the diagnostic log messages aren't exactly errors. They might happen
 in some situations over the network.
 ===============
 */
-void Player::build_road(const Path & path) {
+Road * Player::build_road(const Path & path) {
 	Map & map = egbase().map();
 	FCoords fc = map.get_fcoords(path.get_start());
 	if (upcast(Flag, start, fc.field->get_immovable())) {
@@ -271,18 +271,20 @@ void Player::build_road(const Path & path) {
 						log
 							("%i: building road, immovable in the way, type=%d\n",
 							 player_number(), imm->get_type());
-						return;
+						return 0;
 					}
 				if (!(get_buildcaps(fc) & MOVECAPS_WALK)) {
 					log("%i: building road, unwalkable\n", player_number());
-					return;
+					return 0;
 				}
 			}
-			Road::create(egbase(), *start, *end, path);
+			return &Road::create(egbase(), *start, *end, path);
 		} else
 			log("%i: building road, missed end flag\n", player_number());
 	} else
 		log("%i: building road, missed start flag\n", player_number());
+
+	return 0;
 }
 
 

@@ -44,6 +44,8 @@ struct Request;
  *
  * All Workers on the Road are attached via add_worker()/remove_worker() in
  * PlayerImmovable.
+ * I do not think the last sentence is correct. I added a assign_carrier
+ * function to properly add a carrier to a road. * SirVer
  */
 struct Road : public PlayerImmovable {
 	friend struct Map_Roaddata_Data_Packet; // For saving
@@ -74,6 +76,7 @@ struct Road : public PlayerImmovable {
 	Flag & get_flag(FlagId const flag) const {return *m_flags[flag];}
 
 	virtual int32_t  get_type    () const throw ();
+	uint8_t get_roadtype() const {return m_type;}
 	char const * type_name() const throw () {return "road";}
 	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
