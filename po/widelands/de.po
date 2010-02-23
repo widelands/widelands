@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-21 16:21+0000\n"
-"Last-Translator: meru <Unknown>\n"
+"PO-Revision-Date: 2010-02-22 20:08+0000\n"
+"Last-Translator: schulz3000 <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-22 04:38+0000\n"
+"X-Launchpad-Export-Date: 2010-02-23 05:01+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/events/event_road.cc:49
@@ -384,7 +384,7 @@ msgstr "Vorgänger"
 
 #: ../../src/writeHTML.cc:100
 msgid "Employers"
-msgstr ""
+msgstr "Arbeiter"
 
 #: ../../src/writeHTML.cc:263 ../../src/writeHTML.cc:269
 msgid "Building types"
@@ -603,7 +603,7 @@ msgstr "Baue ab"
 
 #: ../../src/writeHTML.cc:751
 msgid "breed"
-msgstr "Züchte"
+msgstr "züchten"
 
 #: ../../src/writeHTML.cc:752
 msgid "createitem"
@@ -2493,6 +2493,8 @@ msgstr "Stamm %s: %s"
 msgid ""
 "<p font-size=14 font-face=FreeSerif>A new %s was added to your economy.</p>"
 msgstr ""
+"<p font-size=14 font-face=FreeSerif>Eine neue %s wurde deiner Wirtschaft "
+"hinzugefügt.</p>"
 
 #: ../../src/logic/worker.cc:158
 #, c-format
@@ -2601,7 +2603,7 @@ msgstr "unbekannter Aufgabentyp \"%s\""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:237
 #, c-format
 msgid "task %s is duplicated in stack"
-msgstr ""
+msgstr "Aufgabe %s ist doppelt in Warteschlange vorhanden"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:314
 #, c-format
@@ -3646,7 +3648,7 @@ msgstr "Datei löschen"
 
 #: ../../src/ui_fsmenu/loadgame.cc:112
 msgid "Do you really want to delete "
-msgstr ""
+msgstr "Wirklich löschen "
 
 #: ../../src/ui_fsmenu/loadreplay.cc:63
 msgid "Choose a replay!"
@@ -4661,7 +4663,7 @@ msgstr "Setze Zielwert auf Standard zurück"
 
 #: ../../src/wui/transport_ui.cc:488
 msgid "Ware type target quantities"
-msgstr ""
+msgstr "Zielmenge der Ware"
 
 #: ../../src/wui/transport_ui.cc:492
 msgid "Worker type target quantities"
@@ -5525,7 +5527,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:201
 #, c-format
 msgid "No worker types are selected. Select at least one."
-msgstr ""
+msgstr "Es wurde keine Arbeiterart gewählt. Wähle mindestens eine aus."
 
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.cc:50
 msgid "Set Player's Flag Style Event Options"
@@ -5626,7 +5628,7 @@ msgstr "(Keine Beschreibung vorhanden.)"
 
 #: ../../src/wui/game_message_menu.h:62
 msgid "Select"
-msgstr ""
+msgstr "Wähle"
 
 #: ../../src/wui/game_message_menu.h:63
 msgid "Status"

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-21 16:25+0000\n"
-"Last-Translator: meru <Unknown>\n"
+"PO-Revision-Date: 2010-02-22 18:36+0000\n"
+"Last-Translator: schulz3000 <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-22 04:38+0000\n"
+"X-Launchpad-Export-Date: 2010-02-23 05:01+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/elemental:7
@@ -478,7 +478,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:781
 msgid "Your loyal companion"
-msgstr "Du bist ein treuerer Begleiter"
+msgstr "Dein treuer Begleiter"
 
 #: ../../campaigns/t03.wmf/event:833
 msgid "Thron speaks:"

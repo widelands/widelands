@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-21 22:19+0000\n"
+"PO-Revision-Date: 2010-02-22 17:39+0000\n"
 "Last-Translator: Lyashenko Vitaly <sudo.vhd@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-22 04:38+0000\n"
+"X-Launchpad-Export-Date: 2010-02-23 05:01+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -761,7 +761,7 @@ msgstr ""
 
 #: ../../txts/README:36
 msgid "General game control"
-msgstr ""
+msgstr "Основы управления игрой"
 
 #: ../../txts/README:40
 msgid "To close an open window, right click it."
@@ -797,7 +797,7 @@ msgstr "S               Выводит статистику"
 
 #: ../../txts/README:59
 msgid "O               Toggle objectives display"
-msgstr "Показать задания"
+msgstr "O Показать задания"
 
 #: ../../txts/README:61
 msgid "F               Toggle Fullscreen"
@@ -805,7 +805,7 @@ msgstr "F               Во весь экран"
 
 #: ../../txts/README:63
 msgid "Home        Center main mapview on starting location"
-msgstr "Начало       Центрирует главный вид карты на начальном положении"
+msgstr "Home Центрирует карту в начальное положение"
 
 #: ../../txts/README:66
 msgid "PAGEUP         Increase gamespeed"
@@ -1320,12 +1320,17 @@ msgid ""
 "during selection. If you then click on the map, an instance of one of the "
 "selected object types will be placed."
 msgstr ""
+"Вы можете выбрать несколько природных объектов если зажмете CTRL в процессе "
+"выбора. Если после этого кликнуть на карте, будет размещен один из выбранных "
+"объектов."
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Like with natural objects (bobs), you can also select multiple animals or "
 "groundtextures with CTRL + Mouseclick."
 msgstr ""
+"Так-же как и природные объекты можно выбрать несколько животных или текстур "
+"при помощи CTRL + клик."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
@@ -1333,10 +1338,15 @@ msgid ""
 "cases the complete difference of the normal tool (for example deletion of an "
 "object instead of placing one)."
 msgstr ""
+"Удерживая клавишу SHIFT можно вызвать первый альтернативный инструмент. В "
+"большинстве случаев он выполняет противоположное действие обычному "
+"инструменту (например удаление объекта вместо его помещения)."
 
 #: ../../txts/tips/editor.tip:18
 msgid "Holding down ALT switches second alternative tool on (if it exists)."
 msgstr ""
+"При нажатой ALT включается второй альтернативный инструмент (если такой "
+"присутствует)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""

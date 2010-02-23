@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-21 20:41+0000\n"
-"Last-Translator: clark17 <Unknown>\n"
+"PO-Revision-Date: 2010-02-22 21:12+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-02-22 04:38+0000\n"
+"X-Launchpad-Export-Date: 2010-02-23 05:01+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -183,8 +183,8 @@ msgstr ""
 "                      dans l'éditeur de cartes.\n"
 " --scenario=FICHIER Démarre la carte FICHIER comme scénario.\n"
 " --loadgame=FICHIER Charge directement le fichier de sauvegarde FICHIER.\n"
-" --dedicated=FICHIER Démmare ggz host avec le FICHIER comme carte\n"
-" --speed_of_new_game La vitesse de la nouvelle partie démmarera\n"
+" --dedicated=FICHIER Démarre ggz host avec le FICHIER comme carte\n"
+" --speed_of_new_game La vitesse de la nouvelle partie démarrera\n"
 "                      avec un facteur de 1000 (0 est équivalent à la pause,\n"
 "                      1000 est la vitesse normale).\n"
 " --auto_roadbuild_mode=[yes|no]\n"
@@ -211,7 +211,7 @@ msgstr ""
 "*Très expérimental*\n"
 " --opengl=[0|1]\n"
 "                      Activer le rendu  OpenGL\n"
-"*DANGEREUX ET BRISER, NE PAS UTILISER*\n"
+"*DANGEREUX ET HORS-SERVICE, NE PAS UTILISER*\n"
 "\n"
 "Options pour le gestionnaire de fenêtre interne:\n"
 " --border_snap_distance=[0 ...]\n"
@@ -219,7 +219,7 @@ msgstr ""
 "                      lorsque le bord de la fenêtre est proche du bord de "
 "l'écran.\n"
 " --dock_windows_to_edges=[yes|no]\n"
-"                      Inclus une fenetre au bord de l'écran lorsque la "
+"                      Inclus une fenêtre au bord de l'écran lorsque la "
 "fenêtre\n"
 "                      est à côté du bord de l'écran.\n"
 " --panel_snap_distance=[0 ...]\n"
@@ -693,11 +693,11 @@ msgstr ""
 #: ../../src/writeHTML.cc:1309 ../../src/writeHTML.cc:1336
 #: ../../src/writeHTML.cc:1360 ../../src/writeHTML.cc:1384
 msgid "productionsite_program_reference.xhtml"
-msgstr ""
+msgstr "productionsite_program_reference.xhtml"
 
 #: ../../src/writeHTML.cc:892
 msgid "Documentation for program command return"
-msgstr ""
+msgstr "Documentation concernant les commandes du programme."
 
 #: ../../src/writeHTML.cc:898 ../../src/logic/production_program.cc:392
 #: ../../src/logic/production_program.cc:753
@@ -788,7 +788,7 @@ msgstr "ouvrier"
 #: ../../src/writeHTML.cc:1118
 #, c-format
 msgid "%s's program %s"
-msgstr ""
+msgstr "Programme de %s : %s"
 
 #: ../../src/writeHTML.cc:1133
 msgid "Documentation for program command sleep"
@@ -957,7 +957,7 @@ msgstr "ware_types_fr_FR.xhtml"
 #: ../../src/trigger/trigger_time.cc:44 ../../src/trigger/trigger_vision.cc:50
 #, c-format
 msgid "unknown/unhandled version %u"
-msgstr ""
+msgstr "version inconnue ou non gérée (%u)"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
@@ -1201,7 +1201,7 @@ msgstr "le joueur %u n'existe pas"
 #: ../../src/events/event_expire_message.cc:55
 #, c-format
 msgid "player %u's message %u does not exist"
-msgstr ""
+msgstr "le message %u  du joueur %u n'existe pas"
 
 #: ../../src/events/event_expire_message.cc:61
 #, c-format
@@ -1359,7 +1359,7 @@ msgstr "Déclenche un chronomètre"
 
 #: ../../src/events/event_factory.cc:142
 msgid "Set a timer to trigger after a certain duration."
-msgstr ""
+msgstr "Déclenche un chronomètre qui se déclenche après une certaine durée."
 
 #: ../../src/events/event_factory.cc:146
 msgid "Unhide area"
@@ -1375,7 +1375,7 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:153
 msgid "Set player's frontier style"
-msgstr ""
+msgstr "Etablit un style de frontière pour le joueur"
 
 #: ../../src/events/event_factory.cc:155
 msgid ""
@@ -1399,7 +1399,7 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:167
 msgid "Allows retreat value customization"
-msgstr ""
+msgstr "Permet la personnalisation de la valeur de retraite"
 
 #: ../../src/events/event_factory.cc:169
 msgid ""
@@ -1456,7 +1456,7 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:200
 msgid "Expires a previously created message"
-msgstr ""
+msgstr "Fait périmer un message créé auparavent"
 
 #: ../../src/events/event_factory.cc:202
 msgid ""
@@ -1491,7 +1491,7 @@ msgstr ""
 #: ../../src/events/event_message.cc:67
 #, c-format
 msgid "expire: \"%s\" is not an expire message event"
-msgstr ""
+msgstr "expiration: \"%s\" n'est pas un évenement d'expiration de message"
 
 #: ../../src/events/event_message.cc:72
 #, c-format
@@ -1500,6 +1500,9 @@ msgid ""
 "meaning forever, which is the default; omit the duration key to make the "
 "message exist forever"
 msgstr ""
+"Durée: La valeur %u n'est pas autorisée comme durée, elle est une valeur "
+"spéciale qui signifie toujours, valeur par défaut; omettre la valeur de "
+"durée afin que le message existe toujours"
 
 #: ../../src/events/event_message.cc:103
 #, c-format
@@ -1526,7 +1529,7 @@ msgstr "il n'y a aucun bouton, il en faut au moins un"
 #: ../../src/events/event_message_box.cc:149
 #, c-format
 msgid "is not modal although %s=%s"
-msgstr ""
+msgstr "n'est pas modal bien que %s=%s"
 
 #: ../../src/events/event_message_box.cc:154
 #, c-format
@@ -1620,6 +1623,8 @@ msgid ""
 "the steps \"%s\" do not form the optimal path from the start to the end "
 "through only the used locations, should be \"%s\""
 msgstr ""
+"les étapes \"%s\" ne forment pas le chemin optimal du début à la fin en "
+"passant seulement les emplacements utilisés, elles devraient être \"% s\""
 
 #: ../../src/events/event_set_player_flag_style.cc:41
 #, c-format
@@ -1629,12 +1634,12 @@ msgstr "La tribu du joueur ne définit pas le style de drapeau \"%s\""
 #: ../../src/events/event_set_player_flag_style.cc:45
 #, c-format
 msgid "(set player flag style): %s"
-msgstr ""
+msgstr "(définit le style de drapeau du joueur): %s"
 
 #: ../../src/events/event_set_player_frontier_style.cc:41
 #, c-format
 msgid "player's tribe does not define frontier style \"%s\""
-msgstr ""
+msgstr "la tribu du joueur ne définit pas le style de frontière \"% s\""
 
 #: ../../src/events/event_set_player_frontier_style.cc:45
 #, c-format
@@ -1715,7 +1720,7 @@ msgstr "Information sur le joueur : %s"
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:78
 #, c-format
 msgid "unknown/unhandled version %i"
-msgstr ""
+msgstr "version inconnue ou non prise en charge : %i"
 
 #: ../../src/game_io/game_preload_data_packet.cc:57
 #, c-format
@@ -1724,7 +1729,7 @@ msgstr ""
 
 #: ../../src/graphic/animation.cc:197
 msgid "frame number"
-msgstr ""
+msgstr "nombre d'image"
 
 #: ../../src/graphic/graphic.cc:818
 #, c-format
@@ -1858,12 +1863,12 @@ msgstr ""
 #: ../../src/logic/immovable.cc:301
 #, c-format
 msgid "immovable %s has no program \"%s\""
-msgstr ""
+msgstr "l'objet inamovible %s n'a pas le programme \"%s\""
 
 #: ../../src/logic/immovable.cc:607
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
-msgstr ""
+msgstr "la tribu %s ne définit pas le type inamovible \"%s\""
 
 #: ../../src/logic/immovable.cc:610
 #, c-format
@@ -1873,12 +1878,12 @@ msgstr "tribu %s inconnue"
 #: ../../src/logic/immovable.cc:616
 #, c-format
 msgid "world does not define immovable type \"%s\""
-msgstr ""
+msgstr "le monde ne définit pas le type inamovible \"%s\""
 
 #: ../../src/logic/immovable.cc:626
 #, c-format
 msgid "immovable type %s"
-msgstr ""
+msgstr "type inamovible %s"
 
 #: ../../src/logic/immovable.cc:661 ../../src/logic/production_program.cc:609
 #: ../../src/logic/production_program.cc:653
@@ -1894,12 +1899,14 @@ msgstr "priorité"
 #, c-format
 msgid "immovable type not in tribe but target type has scope (\"%s\")"
 msgstr ""
+"le type inamovible n'est pas dans la tribu, mais la cible a la portée "
+"(\"%s\")"
 
 #: ../../src/logic/immovable.cc:739 ../../src/logic/immovable.cc:808
 #: ../../src/logic/immovable.cc:894
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
-msgstr ""
+msgstr "portée \"%s\" donné à la cible (doit être \"monde\")"
 
 #: ../../src/logic/immovable.cc:754 ../../src/logic/immovable.cc:909
 #, c-format
@@ -1917,17 +1924,17 @@ msgstr "probabilité entre [1,254"
 #: ../../src/logic/instances.cc:75
 #, c-format
 msgid "destroy map object: %s"
-msgstr ""
+msgstr "détruire l'objet de la carte : %s"
 
 #: ../../src/logic/instances.cc:124
 #, c-format
 msgid "object %u: %s"
-msgstr ""
+msgstr "objet %u : %s"
 
 #: ../../src/logic/instances.cc:133
 #, c-format
 msgid "act: %s"
-msgstr ""
+msgstr "action : %s"
 
 #: ../../src/logic/map.cc:401
 msgid "Player 1"
@@ -2005,12 +2012,12 @@ msgstr "Vous êtes attaqué"
 #: ../../src/logic/playercommand.cc:134
 #, c-format
 msgid "player command: %s"
-msgstr ""
+msgstr "commande du joueur : %s"
 
 #: ../../src/logic/playercommand.cc:176
 #, c-format
 msgid "player immovable %u: %s"
-msgstr ""
+msgstr "joueur inamovible %u : %s"
 
 #: ../../src/logic/playercommand.cc:182
 #, c-format
@@ -2137,12 +2144,14 @@ msgid ""
 "wrong order of ware types within group: ware type %s appears after ware type "
 "%s (fix order!)"
 msgstr ""
+"mauvais ordre des types de marchandises dans le groupe : le type %s apparait "
+"après le type %s (corrigez l'ordre !)"
 
 #: ../../src/logic/production_program.cc:99
 #: ../../src/logic/production_program.cc:834
 #: ../../src/logic/production_program.cc:920
 msgid "count"
-msgstr ""
+msgstr "nombre"
 
 #: ../../src/logic/production_program.cc:104
 #, c-format
@@ -2150,6 +2159,9 @@ msgid ""
 "group count is %u but (total) input storage capacity of the specified ware "
 "type(s) is only %u, so the group can never be fulfilled by the site"
 msgstr ""
+"le compte du groupe est %u, mais la capacité de stockage totale du type de "
+"marchandise(s) concernée(s) est seulement %u : le groupe ne peut jamais être "
+"rempli par le site"
 
 #: ../../src/logic/production_program.cc:134
 msgid "not "
@@ -2197,12 +2209,12 @@ msgstr ""
 #: ../../src/logic/production_program.cc:399
 #: ../../src/logic/production_program.cc:785
 msgid " and "
-msgstr ""
+msgstr " et "
 
 #: ../../src/logic/production_program.cc:400
 #: ../../src/logic/production_program.cc:756
 msgid " because: "
-msgstr ""
+msgstr " pour la raison que : "
 
 #: ../../src/logic/production_program.cc:415
 #: ../../src/wui/encyclopedia_window.cc:194
@@ -2211,7 +2223,7 @@ msgstr " ou "
 
 #: ../../src/logic/production_program.cc:416
 msgid " because not: "
-msgstr ""
+msgstr " pour la raison inverse que : "
 
 #: ../../src/logic/production_program.cc:460
 #, c-format
@@ -2278,7 +2290,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:866
 msgid "Produced "
-msgstr ""
+msgstr "A produit "
 
 #: ../../src/logic/production_program.cc:876
 #: ../../src/logic/production_program.cc:961
@@ -2385,7 +2397,7 @@ msgstr "attendu entier positif >= %u mais \"%s\" trouvé"
 
 #: ../../src/logic/soldier.cc:201
 msgid "\"anim_name[,another_anim,...]\""
-msgstr ""
+msgstr "\"anim_name[,another_anim,...]\""
 
 #: ../../src/logic/soldier.cc:1179
 #, c-format
@@ -2410,7 +2422,7 @@ msgstr ""
 #: ../../src/logic/soldier.cc:1363 ../../src/logic/soldier.cc:1371
 #: ../../src/logic/worker.cc:1680
 msgid "Logic error"
-msgstr ""
+msgstr "Erreur logique"
 
 #: ../../src/logic/trainingsite.cc:173
 msgid "Resting"
@@ -2448,6 +2460,8 @@ msgstr "tribu %s: %s"
 msgid ""
 "<p font-size=14 font-face=FreeSerif>A new %s was added to your economy.</p>"
 msgstr ""
+"<p font-size=14 font-face=FreeSerif>Un nouvel %s a été ajouté à votre "
+"économie.</p>"
 
 #: ../../src/logic/worker.cc:158
 #, c-format
@@ -2455,6 +2469,8 @@ msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"devrait miner %s, qui n'existe pas dans ce monde. La tribu n'est pas "
+"compatible avec ce monde."
 
 #: ../../src/logic/worker.cc:260
 #, c-format
@@ -2462,16 +2478,19 @@ msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"devrait produire la ressource %s, qui n'existe pas dans ce monde. La tribu "
+"n'est pas compatible avec ce monde"
 
 #: ../../src/logic/worker.cc:640
 msgid "Out of "
-msgstr ""
+msgstr "En manque de "
 
 #: ../../src/logic/worker.cc:644
 msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: "
 msgstr ""
+"L'ouvrier de ce bâtiment ne peut plus trouver de ressource de ce type : "
 
 #: ../../src/logic/worker.cc:916
 msgid "A geologist found resources."
@@ -2657,12 +2676,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
 msgid "is owned by player %u"
-msgstr ""
+msgstr "est possédé par le joueur %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
 msgid "has a flag (%u)"
-msgstr ""
+msgstr "possède le drapeau (%u)"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
@@ -2672,7 +2691,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
 msgid "flags: %s"
-msgstr ""
+msgstr "drapeaux : %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
@@ -2723,17 +2742,19 @@ msgstr ""
 
 #: ../../src/map_io/widelands_map_loader.cc:89
 msgid "Invalid World"
-msgstr ""
+msgstr "Monde Invalide"
 
 #: ../../src/map_io/widelands_map_loader.cc:91
 #, c-format
 msgid "The world \"%s\" set by the map, does not exist on your filesystem."
 msgstr ""
+"Le monde \"%s\" désigné par la carte n'existe pas dans votre système de "
+"fichiers."
 
 #: ../../src/map_io/widelands_map_node_ownership_data_packet.cc:64
 #, c-format
 msgid "ownership: %s"
-msgstr ""
+msgstr "propriétaire : %s"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:80
 #, c-format
@@ -2753,12 +2774,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:80
 #, c-format
 msgid "player names and tribes: %s"
-msgstr ""
+msgstr "nom et tribu des joueurs : %s"
 
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:69
 #, c-format
 msgid "player positions: %s"
-msgstr ""
+msgstr "position des joueurs : %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:88
 #, c-format
@@ -2794,12 +2815,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:151
 #, c-format
 msgid "\"%s\": %s"
-msgstr ""
+msgstr "\"%s\" : %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:156
 #, c-format
 msgid "messages for player %u: %s"
-msgstr ""
+msgstr "Messages pour le joueur %u : %s"
 
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:122
 #, c-format
@@ -2809,7 +2830,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
 msgid "road: %s"
-msgstr ""
+msgstr "route : %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
 msgid "no carrier slot"
@@ -2835,12 +2856,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_terrain_data_packet.cc:81
 #, c-format
 msgid "terrain: %s"
-msgstr ""
+msgstr "terrain : %s"
 
 #: ../../src/map_io/widelands_map_trigger_data_packet.cc:80
 #, c-format
 msgid "Triggers: %s"
-msgstr ""
+msgstr "Déclencheur : %s"
 
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:68
 #, c-format
@@ -2850,12 +2871,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:76
 #, c-format
 msgid "variable %s: %s"
-msgstr ""
+msgstr "variable %s : %s"
 
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:83
 #, c-format
 msgid "variables: %s"
-msgstr ""
+msgstr "variables : %s"
 
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:77
 #, c-format
@@ -2866,7 +2887,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:198
 #, c-format
 msgid "item %u: %s"
-msgstr ""
+msgstr "objet %u : %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:205
 #, c-format
@@ -2875,7 +2896,7 @@ msgstr ""
 
 #: ../../src/network/netclient.cc:96
 msgid "Could not establish connection to host"
-msgstr ""
+msgstr "Impossible de se connecter à l'hôte"
 
 #: ../../src/network/netclient.cc:98
 msgid ""
@@ -2883,6 +2904,9 @@ msgid ""
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
 msgstr ""
+"Widelands n'a pas pu établir une connexion vers l'adresse indiquée.\n"
+"Ou bien il n'y a aucun serveur Widelands en route sur le port prévu \n"
+"ou bien le serveur a été éteint pendant que vous tentiez le contact."
 
 #: ../../src/network/netclient.cc:120
 msgid "Client has left the game."
@@ -2898,7 +2922,7 @@ msgstr "Le serveur a envoyé une mise à jour pour un joueur inexistant."
 
 #: ../../src/network/netclient.cc:432
 msgid "Server sent an user update for a user that does not exist."
-msgstr ""
+msgstr "Le serveur a demandé une mise à jour à un joueur qui n'existe pas."
 
 #: ../../src/network/netclient.cc:508
 #, c-format
@@ -2937,7 +2961,7 @@ msgstr "Le serveur a envoyé en commande inconnue (code %u)"
 
 #: ../../src/network/netclient.cc:788
 msgid "Something went wrong: "
-msgstr ""
+msgstr "Quelque chose a raté : "
 
 #: ../../src/network/netclient.cc:819
 msgid " An automatic savegame will be created."
@@ -2958,22 +2982,23 @@ msgstr "Le serveur a planté et fait une sauvegarde d'urgence."
 #: ../../src/network/nethost.cc:827
 #, c-format
 msgid "Host sent player %s to the lobby!"
-msgstr ""
+msgstr "L'hôte a envoyé le joueur %s dans le couloir !"
 
 #: ../../src/network/nethost.cc:1127
 #, c-format
 msgid "Computer %u"
-msgstr ""
+msgstr "Ordinateur %u"
 
 #: ../../src/network/nethost.cc:1203
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr ""
+"ATTENTION : %s utilise la version %s, alors que l'hôte utilise la version %s"
 
 #: ../../src/network/nethost.cc:1250
 #, c-format
 msgid "%s has joined the game"
-msgstr ""
+msgstr "%s a rejoint la partie"
 
 #: ../../src/network/nethost.cc:1274
 msgid "Client reports time to host that is running backwards."
@@ -2994,7 +3019,7 @@ msgstr "Le client et l'hôte ont été désynchronisés."
 
 #: ../../src/network/nethost.cc:1503
 msgid "New User"
-msgstr ""
+msgstr "Nouvel Utilisateur"
 
 #: ../../src/network/nethost.cc:1508
 msgid "The game has already started."
@@ -3049,6 +3074,7 @@ msgstr "Le client a envoyé un rapport de synchronisation inattendu."
 #: ../../src/network/nethost.cc:1730 ../../src/network/nethost.cc:1742
 msgid "Client requests file altough none is available to send."
 msgstr ""
+"Le client demande des fichiers, mais aucun n'est disponible à l'envoi."
 
 #: ../../src/network/nethost.cc:1732
 #, c-format
@@ -3057,7 +3083,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1753
 msgid "Client requests file part that does not exist."
-msgstr ""
+msgstr "Le client demande des fichiers qui n'existent pas."
 
 #: ../../src/network/nethost.cc:1756
 #, c-format
@@ -3077,7 +3103,7 @@ msgstr "Le client a envoyé le numéro de commande inconnu %u"
 #: ../../src/network/nethost.cc:1830
 #, c-format
 msgid "%s has left the game (%s)"
-msgstr ""
+msgstr "%s a quitté la partie (%s)"
 
 #: ../../src/network/network_ggz.cc:281
 msgid "Closed the connection to the metaserver."
@@ -3097,7 +3123,7 @@ msgstr ""
 
 #: ../../src/network/network_ggz.cc:510
 msgid "Server MOTD:"
-msgstr ""
+msgstr "Serveur MOTD:"
 
 #: ../../src/network/network_ggz.cc:516
 msgid "Reconnected to the metaserver."
@@ -3105,11 +3131,11 @@ msgstr ""
 
 #: ../../src/network/network_ggz.cc:521
 msgid "NOTE: The Internet gaming implementation is in very early state."
-msgstr ""
+msgstr "NB : les fonction de jeu en ligne sont à un stade très préliminaire."
 
 #: ../../src/network/network_ggz.cc:525
 msgid "Please take a look at the notes at:"
-msgstr ""
+msgstr "Veuillez jeter un coup d'œil à :"
 
 #: ../../src/network/network_ggz.cc:664
 msgid " joined the metaserver."

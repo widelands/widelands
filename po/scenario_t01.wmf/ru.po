@@ -6,21 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 22:42+0000\n"
-"Last-Translator: Alexander Bikmeyev <Unknown>\n"
+"POT-Creation-Date: 2010-02-15 16:30+0000\n"
+"PO-Revision-Date: 2010-02-22 22:00+0000\n"
+"Last-Translator: Lyashenko Vitaly <sudo.vhd@gmail.com>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-02-23 05:01+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
 #: ../../campaigns/t01.wmf/elemental:7
 msgid "Tutorial1 - Eyes in the Dark"
-msgstr ""
+msgstr "Обучение I - Глаза во Тьме"
 
 #: ../../campaigns/t01.wmf/elemental:9
 msgid ""
@@ -28,10 +28,12 @@ msgid ""
 "gameplay and control as well as basic production buildings (wood, stone, "
 "etc.) will be introduced."
 msgstr ""
+"Это первая миссия в обучающей кампании Варваров. Здесь будут показаны основы "
+"игрового процесса, управления и постройки зданий."
 
 #: ../../campaigns/t01.wmf/event:23
 msgid "Thron sighs..."
-msgstr ""
+msgstr "Тсрон вздыхает..."
 
 #: ../../campaigns/t01.wmf/event:25
 msgid ""
@@ -39,13 +41,16 @@ msgid ""
 "dark.<br> My warriors hunt at day and lie awake at night - listening to the "
 "sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
 msgstr ""
+" \"Шли месяцы и мы по-прежнему скрывались в старом и темном лесу.<br> Мои "
+"воины днем охотятся и не спят по ночам - прислушиваясь к жестокой бойне, "
+"которая эхом доносится издалека сквозь древние деревья.\" "
 
 #: ../../campaigns/t01.wmf/event:27
 #: ../../campaigns/t01.wmf/event:40
 #: ../../campaigns/t01.wmf/event:53
 #: ../../campaigns/t01.wmf/event:66
 msgid "The story begins"
-msgstr ""
+msgstr "История начинается"
 
 #: ../../campaigns/t01.wmf/event:32
 #: ../../campaigns/t01.wmf/event:45
@@ -72,6 +77,9 @@ msgid ""
 "away.<br> The red lights flash in the darkness and dance to the rhythm of "
 "the wardrums that haunt me even in my nightmares.\" "
 msgstr ""
+" \"Даже отсюда мы видим устрашающее пламя, поглощающее Al'thunran, находясь "
+"при этом так далеко.<br> Красные огни вспыхивающие в темноте и танцующие в "
+"ритме барабанного боя, которые преследуют меня даже в ночных кошмарах.\" "
 
 #: ../../campaigns/t01.wmf/event:51
 msgid ""
