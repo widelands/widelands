@@ -87,6 +87,8 @@ struct LayeredFileSystem : public FileSystem {
 	virtual unsigned long DiskSpace();
 
 private:
+	bool m_read_version_from_version_file(FileSystem &, std::string *);
+
 	typedef std::vector<FileSystem *>::reverse_iterator FileSystem_rit;
 
 	std::vector<FileSystem *> m_filesystems;

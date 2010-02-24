@@ -136,7 +136,7 @@ template<typename Base> struct basic_FileRead : public Base {
 		char * const result = data + i;
 		for (char * p = result; *p; ++p, ++i) {}
 		++i; //  beyond the null
-		if (i > length)
+		if (i > (length + 1)) // allow EOF as end marker for string
 			throw File_Boundary_Exceeded();
 		if (pos.isNull())
 			filepos = i;
