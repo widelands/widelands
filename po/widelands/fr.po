@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-22 21:12+0000\n"
-"Last-Translator: Immunoman <Unknown>\n"
+"PO-Revision-Date: 2010-02-23 15:15+0000\n"
+"Last-Translator: NonoSan <fougey.a@orange.fr>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-02-23 05:01+0000\n"
+"X-Launchpad-Export-Date: 2010-02-24 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1568,7 +1568,7 @@ msgstr ""
 #: ../../src/logic/tribe.cc:212 ../../src/logic/tribe.cc:233
 #, c-format
 msgid "\"%s\" is duplicated"
-msgstr ""
+msgstr "\"%s\" est dupliqué(e)"
 
 #: ../../src/events/event_player_building_types.cc:56
 msgid "no building types"
@@ -1616,6 +1616,8 @@ msgid ""
 "step %li has direction '%c', must be one of {1 (northeast), 2 (east), 3 "
 "(southeast), 4 (southwest), 5 (west), 6 (northwest)}"
 msgstr ""
+"l'étape %li  a la direction '%c', qui doit être parmi {1 (nord-est), 2 "
+"(Est), 3 (sud-est), 4 (sud-ouest), 5 (ouest), 6 (nord-ouest)}"
 
 #: ../../src/events/event_road.cc:72
 #, c-format
@@ -2119,7 +2121,7 @@ msgstr "Retraite ; valeur en dehors du champs. Reçu %u attendu %u-%u"
 #: ../../src/logic/playercommand.cc:1306
 #, c-format
 msgid "change military config: %s"
-msgstr ""
+msgstr "Modifie la configuration militaire: %s"
 
 #: ../../src/logic/playercommand.cc:1345
 #, c-format

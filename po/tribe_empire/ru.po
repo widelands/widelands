@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-16 22:00+0000\n"
+"PO-Revision-Date: 2010-02-23 18:28+0000\n"
 "Last-Translator: Victor Birkmanis <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-17 04:52+0000\n"
+"X-Launchpad-Export-Date: 2010-02-24 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -902,7 +902,7 @@ msgstr ""
 
 #: ../../tribes/empire/innkeeper/conf:1
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Производит пищу для шахтёров."
 
 #: ../../tribes/empire/iron/conf:1
 msgid "Weapons and tools are made of iron."
@@ -962,7 +962,7 @@ msgstr ""
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
+msgstr "Работает в глубине шахты, чтобы получить уголь, железо или золото."
 
 #: ../../tribes/empire/meal/conf:1
 msgid "A real meal which satisfies all miners needs."
@@ -974,6 +974,9 @@ msgid ""
 "lunch for the miners and in the soldier trainingcamps to keep warriors "
 "strong."
 msgstr ""
+"Мясо содержит большое количество энергии. Оно используется на постоялых "
+"дворах и тавернах, чтобы приготовить обед для шахтеров и в солдатских "
+"тренировочных лагерях для восстановления энергии воинов."
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."

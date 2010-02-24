@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 19:40+0100\n"
-"PO-Revision-Date: 2010-02-10 22:58+0000\n"
-"Last-Translator: Dan O'Huiginn <daniel@ohuiginn.net>\n"
+"POT-Creation-Date: 2010-02-15 17:30+0100\n"
+"PO-Revision-Date: 2010-02-23 22:03+0000\n"
+"Last-Translator: Joakim Lundborg <joakim.lundborg@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:59+0000\n"
+"X-Launchpad-Export-Date: 2010-02-24 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -81,6 +81,25 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
+" --<konfigurationspost>=värde åsidosätter inställning i konfigurationsfil\n"
+"\n"
+" --logfile=FILNAMN   Logga till filen FILNAMN istället för terminalen \n"
+" --datadir=KATALOGNAMN Använd specificerad katalog för datafiler \n"
+"                                                till Widelands\n"
+" --record=FILNAMN    Spela in alla händelser till angivet filnamn för \n"
+"                                                         senare uppspelning "
+"\n"
+" --playback=FILNAMN  Spela upp angivet filnamn (se --record)\n"
+"\n"
+" --coredump=[yes|no]  Genererar en dumpfil vid segmenteringsfel \n"
+"                      istället för att använda SDL\n"
+" --language=[de_DE|sv_SE|...]\n"
+"                            Språk att använda\n"
+" --remove_syncstreams=[true|false]\n"
+"                      Ta bort synkströmfiler vid uppstart\n"
+" --remove_replays=[...]\n"
+"                      Ta bort repriser efter detta anta dagar\n"
+"                      Om satt till 0 raderas inga repriser.\n"
 
 #: ../../src/wlapplication.cc:1227
 msgid ""
@@ -144,6 +163,63 @@ msgid ""
 "                      panel.\n"
 "\n"
 msgstr ""
+"Ljudalternativ:\n"
+" --nosound            Startar spelet med ljud avstängt.\n"
+" --disable_fx         Avaktiverar ljudeffekter.\n"
+" --disable_music      Avaktiverar musik.\n"
+"\n"
+" --nozip              Spara inte filer som binära zip-filer\n"
+"\n"
+" --editor             Startar Widelands redigerar omedelbart.\n"
+"                      Du kan lägga till =FILNAMN för att omedelbart\n"
+"                      ladda kartan FILNAMN i redigeraren.\n"
+" --scenario=FILNAMN  Startar omedelbart kartan FILNAMN som scenariokarta.\n"
+"                     \n"
+" --loadgame=FILNAMN Laddar omedelbart det sparade spelet FILNAMN.\n"
+" --dedicated=FILNAMN Startar ggz-värd med FILNAMN som karta\n"
+" --speed_of_new_game  Hastigheten det nya spelet kommer köras med\n"
+"                      när det startas, med en faktor 1000 (0 är pausat,\n"
+"                      1000 är normal hastighet).\n"
+" --auto_roadbuild_mode=[yes|no]\n"
+"                      Gå in i vägbyggnadsläge automatiskt \n"
+"                      efter utplacering av flagga som  ej\n"
+"                      är ansluten till en väg.\n"
+" --write_HTML=[yes|no]\n"
+"                      Skriv HTML-hjälpfiler for inläst speldata.\n"
+"\n"
+"Grafikalternativ:\n"
+" --fullscreen=[yes|no]\n"
+"                      Använd fullskärmsläge i spelet.\n"
+" --depth=[16|32]      Färgdjup i bitar per pixel.\n"
+" --xres=[...]         Bredd på fönstret i pixlar.\n"
+" --yres=[...]         Höjd på fönstret i pixlar.\n"
+" --hw_improvements=[0|1]\n"
+"                      Aktivera hårdvaruaccelerering\n"
+"                      *MYCKET EXPERIMENTELLT*\n"
+" --double_buffer=[0|1]\n"
+"                      Aktiverar dubbelbuffring\n"
+"                      *MYCKET EXPERIMENTELLT*\n"
+" --opengl=[0|1]\n"
+"                      Aktiverar opengl-rendering\n"
+"                      *FARLIGT OCH TRASIGT, ANVÄND EJ*\n"
+"\n"
+"Alternativ för den interna fönsterhanteraren:\n"
+" --border_snap_distance=[0 ...]\n"
+"                      Flytta ett fönster till skärmens kant när \n"
+"                      fönstrets kant kommer inom detta avstånd\n"
+"                      från skärmens kant\n"
+" --dock_windows_to_edges=[yes|no]\n"
+"                      Eliminera ett fönsters kanter mod skärmkanten\n"
+"                      när fönsterkanten är intill skärmkanten.\n"
+"\n"
+" --panel_snap_distance=[0 ...]\n"
+"                      Flytta ett fönster till panelkanten när \n"
+"                      fönsterkanten kommer inom detta avstånd\n"
+"                      till panelen.\n"
+" --snap_windows_only_when_overlapping=[yes|no]\n"
+"                      Flytta endast fönster till panelkanten om fönstret \n"
+"                      överlappar panelen.\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1295
 msgid ""
@@ -151,6 +227,8 @@ msgid ""
 "                      testing)\n"
 "\n"
 msgstr ""
+" --double             Starta spelet två gånger (för lokal nätverkstestning)\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1299
 msgid " --help               Show this help\n"
@@ -203,6 +281,10 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often - though not always - possible to load it and continue playing.\n"
 msgstr ""
+". Var vänlig lägg till denna information till din rapport.\n"
+"\n"
+"Widelands försöker skapa ett sparat spel när fel inträffar under spelet. Det "
+"är oftast - men inte alltid - möjlift att läsa in det och fortsätta spela.\n"
 
 #: ../../src/wlapplication.cc:1569
 msgid "Connection timeouted"
@@ -214,6 +296,9 @@ msgid ""
 "There seems to be a network problem, either on your side or on side\n"
 "of the server.\n"
 msgstr ""
+"Widelands lyckades inte hitta serverns IP-address i tid.\n"
+"Det verkar vara ett nätverksproblem, antingen på din sida eller på serverns "
+"sida.\n"
 
 #: ../../src/wlapplication.cc:1592 ../../src/network/network_ggz.cc:373
 msgid "Connection problem"
@@ -248,8 +333,8 @@ msgstr ""
 "Slutet på reprisen har nåtts och spelet har pausats. Du kan sätta igång det "
 "och fortsätta titta om du vill."
 
-#: ../../src/wlapplication.cc:2082 ../../src/logic/game.cc:344
-#: ../../src/logic/game.cc:383
+#: ../../src/wlapplication.cc:2082 ../../src/logic/game.cc:352
+#: ../../src/logic/game.cc:391
 msgid "Loading..."
 msgstr "Laddar..."
 
@@ -466,7 +551,7 @@ msgstr "s tillkomst"
 
 #: ../../src/writeHTML.cc:686
 msgid "Spawns in warehouses."
-msgstr ""
+msgstr "Återskapas i lagerbyggnader."
 
 #: ../../src/writeHTML.cc:695
 #, c-format
@@ -635,11 +720,11 @@ msgstr "behöver"
 
 #: ../../src/writeHTML.cc:986
 msgid "site"
-msgstr ""
+msgstr "plats"
 
 #: ../../src/writeHTML.cc:988
 msgid "has"
-msgstr ""
+msgstr "har"
 
 #: ../../src/writeHTML.cc:1023
 msgid "workers of this site"
@@ -685,7 +770,7 @@ msgstr "arbetare"
 #: ../../src/writeHTML.cc:1118
 #, c-format
 msgid "%s's program %s"
-msgstr ""
+msgstr "%ss program %s"
 
 #: ../../src/writeHTML.cc:1133
 msgid "Documentation for program command sleep"
@@ -726,7 +811,7 @@ msgstr "skapa"
 
 #: ../../src/writeHTML.cc:1268
 msgid "recruit"
-msgstr ""
+msgstr "rekryt"
 
 #: ../../src/writeHTML.cc:1311
 msgid "Documentation for program command mine"
@@ -865,22 +950,22 @@ msgstr "anropa utjämna ekonomi: %s"
 #: ../../src/economy/economy_data_packet.cc:82
 #, c-format
 msgid "duplicated entry for %s"
-msgstr ""
+msgstr "duplicerad post för %s"
 
 #: ../../src/economy/economy_data_packet.cc:95
 #, c-format
 msgid "target quantities: %s"
-msgstr ""
+msgstr "målkvantiteter: %s"
 
 #: ../../src/economy/economy_data_packet.cc:99
 #, c-format
 msgid "unknown version %u"
-msgstr ""
+msgstr "okänd version %u"
 
 #: ../../src/economy/economy_data_packet.cc:102
 #, c-format
 msgid "economy: %s"
-msgstr ""
+msgstr "ekonomi: %s"
 
 #: ../../src/economy/wares_queue.cc:256
 #, c-format
@@ -955,7 +1040,7 @@ msgstr "Laddar världsdata"
 #: ../../src/editor/editorinteractive.cc:191
 #: ../../src/editor/editorinteractive.cc:607
 msgid "Loading graphics..."
-msgstr ""
+msgstr "Laddar grafik..."
 
 #: ../../src/editor/editorinteractive.cc:232
 msgid "Map unsaved"
@@ -1099,7 +1184,7 @@ msgstr "spelare %u finns ej"
 #: ../../src/events/event_expire_message.cc:55
 #, c-format
 msgid "player %u's message %u does not exist"
-msgstr ""
+msgstr "spelare %us meddelande %u existerar ej"
 
 #: ../../src/events/event_expire_message.cc:61
 #, c-format
@@ -1107,6 +1192,8 @@ msgid ""
 "player %u's message %u has duration %u; (it must have infinite duration, so "
 "that only this event can exipre it)"
 msgstr ""
+"spelare %us meddelande %u has tidsgräns %u; (det måste  ha oändlig "
+"tidsgräns, så att endast denna händelse kan göra det ogiltigt)"
 
 #: ../../src/events/event_expire_message.cc:73
 #, c-format
@@ -1114,44 +1201,47 @@ msgid ""
 "refers to the same message id (player %u's %u) as another expire message "
 "event (\"%s\"); (only one event can expire each message)"
 msgstr ""
+"refererar till samma meddelande-id  (spelare %u's %u) som en annan "
+"ogiltiggör meddelande-händelse (\"%s\"); (endast en händelse can ogiltiggöra "
+"ett meddelande)"
 
 #: ../../src/events/event_expire_message.cc:79
 #: ../../src/events/event_message.cc:111
 #, c-format
 msgid "(expire message): %s"
-msgstr ""
+msgstr "(ogiltiggör meddelande): %s"
 
 #: ../../src/events/event_factory.cc:61
 msgid "Allow worker types"
-msgstr ""
+msgstr "Tillåt arbetartyper"
 
 #: ../../src/events/event_factory.cc:62
 msgid "Allows the creation of workers of certain types for a player."
-msgstr ""
+msgstr "Tillåter skapande av arbetare av vissa typer för en spelare."
 
 #: ../../src/events/event_factory.cc:66
 msgid "Forbid worker types"
-msgstr ""
+msgstr "Förbjud arbetartyper"
 
 #: ../../src/events/event_factory.cc:67
 msgid "Forbids the creation of workers of certain types for a player."
-msgstr ""
+msgstr "Förbjuder skapande av arbetare av vissa typer för en spelare."
 
 #: ../../src/events/event_factory.cc:71
 msgid "Allow building types"
-msgstr ""
+msgstr "Tillåt byggnadstyper"
 
 #: ../../src/events/event_factory.cc:72
 msgid "Allows the construction of buildings of certain types for a player."
-msgstr ""
+msgstr "Tillåter konstruktion av byggnader av vissa typer för en spelare."
 
 #: ../../src/events/event_factory.cc:76
 msgid "Forbid building types"
-msgstr ""
+msgstr "Förbjud byggnadstyper"
 
 #: ../../src/events/event_factory.cc:77
 msgid "Forbids the construction of buildings of certain types for a player."
-msgstr ""
+msgstr "Förbjuder konstruktion av byggnader av vissa typer för en spelare."
 
 #: ../../src/events/event_factory.cc:81
 msgid "Create building"
@@ -1169,6 +1259,7 @@ msgstr "Erövra område"
 msgid ""
 "Gives ownership of all unowned locations within an area to the player."
 msgstr ""
+"Ger ägarskap för alla icke-ägda platser inom ett område till spelaren."
 
 #: ../../src/events/event_factory.cc:93
 msgid "Create flag"
@@ -1188,11 +1279,11 @@ msgstr "Skapa ett fast föremål"
 
 #: ../../src/events/event_factory.cc:103
 msgid "Lua event"
-msgstr ""
+msgstr "Lua-händelse"
 
 #: ../../src/events/event_factory.cc:104
 msgid "Run a lua command"
-msgstr ""
+msgstr "Kör ett lua-kommando"
 
 #: ../../src/events/event_factory.cc:108
 msgid "Show message box"
@@ -1203,6 +1294,8 @@ msgid ""
 "Show a message box. It can be modal or and have a picture. An events can be "
 "assigned to each button to give the user chose the course of the game."
 msgstr ""
+"Visar en meddelanderuta. Den kan vara modal och ha en bild. Händelser kan "
+"tilldelas knapparna för att låta användaren avgöra spelets förlopp."
 
 #: ../../src/events/event_factory.cc:116
 msgid "Move view"
@@ -1266,81 +1359,93 @@ msgstr ""
 
 #: ../../src/events/event_factory.cc:153
 msgid "Set player's frontier style"
-msgstr ""
+msgstr "Välj spelarens gränstyp."
 
 #: ../../src/events/event_factory.cc:155
 msgid ""
 "Sets the style of the player's frontier markers to one of the styles that "
 "are defined in the player's tribe."
 msgstr ""
+"Ställer in utseendet på spelarens gränsmarkörer till ett av utseendena som "
+"finns definierade för spelarens stam."
 
 #: ../../src/events/event_factory.cc:160
 msgid "Set player's flag style"
-msgstr ""
+msgstr "Ställ in spelarens flaggutseende"
 
 #: ../../src/events/event_factory.cc:162
 msgid ""
 "Sets the style of the player's flags to one of the styles that are defined "
 "in the player's tribe."
 msgstr ""
+"Ställer in utseendet på spelarens flaggor till ett av utseendena som finns "
+"definierade för spelarens stam."
 
 #: ../../src/events/event_factory.cc:167
 msgid "Allows retreat value customization"
-msgstr ""
+msgstr "Tillåt anpassning av reträttvärden"
 
 #: ../../src/events/event_factory.cc:169
 msgid ""
 "Allows that the player can change the value of 'retreat when hitpoints below "
 "x%'."
 msgstr ""
+"Tillåter spelaren att ändra värdet för 'reträtt vid träffpoäng under x%'"
 
 #: ../../src/events/event_factory.cc:174
 msgid "Forbids retreat value customization"
-msgstr ""
+msgstr "Förbjuder anpassning av reträttvärden"
 
 #: ../../src/events/event_factory.cc:176
 msgid ""
 "Forbids that the player can change the value of 'retreat when hitpoints "
 "below x%'."
 msgstr ""
+"Förbjuder spelaren att ändra värdet för 'reträtt vid träffpoäng under x%'"
 
 #: ../../src/events/event_factory.cc:181
 msgid "Set player retreat percentage"
-msgstr ""
+msgstr "Välj spelarens procentsats för reträtt"
 
 #: ../../src/events/event_factory.cc:183
 msgid ""
 "Sets the player value of 'retreat when hit points below x%', this value "
 "could be overridden by players if allowed."
 msgstr ""
+"Ställer in värdet hos 'reträtt vid träffpoäng under x%', detta värde kan "
+"åsidosättas av spelare om det är tillåtet."
 
 #: ../../src/events/event_factory.cc:188
 msgid "Set see all mode for a player"
-msgstr ""
+msgstr "Välj allseende läge för spelare"
 
 #: ../../src/events/event_factory.cc:189
 msgid "Sets the see all mode for a specific player to on/off."
-msgstr ""
+msgstr "Sätter allseende läge för en specifik spelare till av/på"
 
 #: ../../src/events/event_factory.cc:193
 msgid "Creates a message for a player"
-msgstr ""
+msgstr "Skapar ett meddelande till en spelare"
 
 #: ../../src/events/event_factory.cc:195
 msgid ""
 "Creates a message for a player. This message can last forever, during a "
 "specified duration, or until a special event is run."
 msgstr ""
+"Skapar ett meddelande till en spelare. Meddelandet kan vara för alltid, till "
+"en viss tidsgräns, eller tills en speciell händelse inträffar."
 
 #: ../../src/events/event_factory.cc:200
 msgid "Expires a previously created message"
-msgstr ""
+msgstr "Markera tidigare skapat meddelande som utgånget"
 
 #: ../../src/events/event_factory.cc:202
 msgid ""
 "Expires a message that was previously created for a player. The message will "
 "cease to exist."
 msgstr ""
+"Markerar ett meddelande som tidigare skapats för en spelare som utgånget. "
+"Meddelandet kommer att upphöra att existera."
 
 #: ../../src/events/event_flag.cc:42
 #, c-format
@@ -1362,12 +1467,12 @@ msgstr "(fast föremål): %s"
 #: ../../src/events/event_lua.cc:42
 #, c-format
 msgid "(lua event): %s"
-msgstr ""
+msgstr "(lua-händelse): %s"
 
 #: ../../src/events/event_message.cc:67
 #, c-format
 msgid "expire: \"%s\" is not an expire message event"
-msgstr ""
+msgstr "Utgång: \"%s\" är inte ett meddelande om meddelandeutgång"
 
 #: ../../src/events/event_message.cc:72
 #, c-format
@@ -1376,11 +1481,15 @@ msgid ""
 "meaning forever, which is the default; omit the duration key to make the "
 "message exist forever"
 msgstr ""
+"tidsgräns: värdet %u är inte tillåten som tidsgrän; det är ett speciellt "
+"värde som betyder för alltid, vilket är standard; utelämna tidsgränsnyckeln "
+"för att låta meddelandet finnas kvar för alltid"
 
 #: ../../src/events/event_message.cc:103
 #, c-format
 msgid "status_change: \"%s\" is not a message_is_read_or_archived trigger"
 msgstr ""
+"status_change: \"%s\" är ej en utlösare för message_is_read_or_archived"
 
 #: ../../src/events/event_message_box.cc:41
 msgid "No text defined"
@@ -1429,7 +1538,7 @@ msgstr "(flytta anblick): %s"
 #: ../../src/events/event_player_retreat_change.cc:45
 #, c-format
 msgid "(player allowed retreat change): %s"
-msgstr ""
+msgstr "(spelare tillåten ändra reträtt): %s"
 
 #: ../../src/events/event_player_area.cc:61
 #, c-format
@@ -1441,39 +1550,39 @@ msgstr "(spelarradie): %s"
 #: ../../src/logic/tribe.cc:212 ../../src/logic/tribe.cc:233
 #, c-format
 msgid "\"%s\" is duplicated"
-msgstr ""
+msgstr "\"%s\" är duplicerad"
 
 #: ../../src/events/event_player_building_types.cc:56
 msgid "no building types"
-msgstr ""
+msgstr "inga byggnadstyper"
 
 #: ../../src/events/event_player_building_types.cc:61
 #, c-format
 msgid "(player building types): %s"
-msgstr ""
+msgstr "(byggnadstyper för spelare): %s"
 
 #: ../../src/events/event_player_seeall.cc:45
 #, c-format
 msgid "(player see all): %s"
-msgstr ""
+msgstr "(allseende spelare): %s"
 
 #: ../../src/events/event_player_worker_types.cc:52
 #, c-format
 msgid "\"%s\" is not buildable"
-msgstr ""
+msgstr "\"%s\" är inte möjlig att bygga"
 
 #: ../../src/events/event_player_worker_types.cc:58
 msgid "no worker types"
-msgstr ""
+msgstr "inga arbetartyper"
 
 #: ../../src/events/event_player_worker_types.cc:63
 #, c-format
 msgid "(player worker types): %s"
-msgstr ""
+msgstr "(spelares arbetartyper): %s"
 
 #: ../../src/events/event_retreat_change.cc:43
 msgid "Change"
-msgstr ""
+msgstr "Ändra"
 
 #: ../../src/events/event_road.cc:40
 msgid "there are no steps"
@@ -1504,27 +1613,27 @@ msgstr ""
 #: ../../src/events/event_set_player_flag_style.cc:41
 #, c-format
 msgid "player's tribe does not define flag style \"%s\""
-msgstr ""
+msgstr "spelarens stam anger inte flaggutseendet \"%s\""
 
 #: ../../src/events/event_set_player_flag_style.cc:45
 #, c-format
 msgid "(set player flag style): %s"
-msgstr ""
+msgstr "(välj flaggutseende för spelare): %s"
 
 #: ../../src/events/event_set_player_frontier_style.cc:41
 #, c-format
 msgid "player's tribe does not define frontier style \"%s\""
-msgstr ""
+msgstr "spelarens stam anger inte gränsutseendet \"%s\""
 
 #: ../../src/events/event_set_player_frontier_style.cc:45
 #, c-format
 msgid "(set player frontier style): %s"
-msgstr ""
+msgstr "(välj gränsutseende för spelare): %s"
 
 #: ../../src/events/event_set_player_style.cc:43
 #, c-format
 msgid "(set player style): %s"
-msgstr ""
+msgstr "(välj spelarutseende): %s"
 
 #: ../../src/events/event_set_timer.cc:54
 #, c-format
@@ -1581,7 +1690,7 @@ msgstr "ekonomier: %s"
 #: ../../src/game_io/game_player_info_data_packet.cc:57
 #, c-format
 msgid "player number (%i) is out of range (1 .. %u)"
-msgstr ""
+msgstr "spelare nummer (%i) är utanför intervallet (1 .. %u)"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:144
 #, c-format
@@ -1605,7 +1714,7 @@ msgstr "förladdning: %s"
 
 #: ../../src/graphic/animation.cc:197
 msgid "frame number"
-msgstr ""
+msgstr "bildrutenummer"
 
 #: ../../src/graphic/graphic.cc:818
 #, c-format
@@ -1615,12 +1724,12 @@ msgstr "Laddar animationer: %d%% klart"
 #: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] soldier %u loose battle\n"
-msgstr ""
+msgstr "[strid] soldat %u förlorar strid\n"
 
 #: ../../src/logic/battle.cc:182
 #, c-format
 msgid "[battle] waking up winner %d\n"
-msgstr ""
+msgstr "[strid] väcker vinnare %d\n"
 
 #: ../../src/logic/bob.cc:85 ../../src/logic/immovable.cc:199
 #, c-format
@@ -1645,7 +1754,7 @@ msgstr "stor"
 #: ../../src/logic/cmd_queue.cc:171
 #, c-format
 msgid "duetime (%i) < gametime (%i)"
-msgstr ""
+msgstr "förväntad tid (%i) < speltime (%i)"
 
 #: ../../src/logic/cmd_queue.cc:176
 #, c-format
@@ -1657,45 +1766,45 @@ msgstr "spelsimulering: %s"
 msgid "%u%% built"
 msgstr "%u%% byggt"
 
-#: ../../src/logic/game.cc:224
+#: ../../src/logic/game.cc:231
 msgid "Preloading a map"
 msgstr "Förladdar en karta"
 
-#: ../../src/logic/game.cc:235
+#: ../../src/logic/game.cc:243
 msgid "Loading a world"
 msgstr "Förladdar en värld"
 
-#: ../../src/logic/game.cc:241
+#: ../../src/logic/game.cc:249
 #, c-format
 msgid "Adding player %u"
 msgstr "Lägger till spelare %u"
 
-#: ../../src/logic/game.cc:254
+#: ../../src/logic/game.cc:262
 msgid "Loading a map"
 msgstr "Laddar en karta"
 
-#: ../../src/logic/game.cc:285 ../../src/logic/game.cc:332
-#: ../../src/logic/game.cc:365
+#: ../../src/logic/game.cc:293 ../../src/logic/game.cc:340
+#: ../../src/logic/game.cc:373
 msgid "Preloading map"
 msgstr "Förladdar karta"
 
-#: ../../src/logic/game.cc:299
+#: ../../src/logic/game.cc:307
 msgid "Configuring players"
 msgstr "Konfigurerar spelare"
 
-#: ../../src/logic/game.cc:316
+#: ../../src/logic/game.cc:324
 msgid "Loading map"
 msgstr "Laddar karta"
 
-#: ../../src/logic/game.cc:443
+#: ../../src/logic/game.cc:451
 msgid "Creating player infrastructure"
 msgstr "Skapar spelarnas infrastruktur"
 
-#: ../../src/logic/game.cc:454 ../../src/logic/player.cc:121
+#: ../../src/logic/game.cc:462 ../../src/logic/player.cc:121
 msgid "Missing starting position"
 msgstr "Saknar startposition"
 
-#: ../../src/logic/game.cc:456 ../../src/logic/player.cc:123
+#: ../../src/logic/game.cc:464 ../../src/logic/player.cc:123
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting "
@@ -1821,17 +1930,17 @@ msgstr "\"min-max\""
 
 #: ../../src/logic/military_data.cc:59
 msgid "positive integer <= 100"
-msgstr ""
+msgstr "positivt heltal <= 100"
 
 #: ../../src/logic/military_data.cc:63
 #, c-format
 msgid "expected positive integer >= %u <= 100 but found \"%s\""
-msgstr ""
+msgstr "väntade positivt heltal >= %u <= 100 men hittade \"%s\""
 
 #: ../../src/logic/military_data.cc:75
 #, c-format
 msgid "expected positive integer >= %u <= %u but found \"%u\""
-msgstr ""
+msgstr "väntade positive integer >= %u <= %u but found \"%u\""
 
 #: ../../src/logic/militarysite.cc:66 ../../src/logic/warehouse.cc:276
 msgid " conquer"
@@ -1854,34 +1963,34 @@ msgstr[1] "%u(+%u) soldater"
 #: ../../src/logic/militarysite.cc:572
 #, c-format
 msgid "%sThe enemy defeated your soldiers at the %s.</p></rt>"
-msgstr ""
+msgstr "%s Fienden besegrade dina soldater vid %s.</p></rt>"
 
 #: ../../src/logic/militarysite.cc:579
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Militär plats förlorad!"
 
 #: ../../src/logic/militarysite.cc:652
 #, c-format
 msgid "%sYour soldiers defeated the enemy at the %s.</p></rt>"
-msgstr ""
+msgstr "%sDina soldater besegrade fienden vid %s.</p></rt>"
 
 #: ../../src/logic/militarysite.cc:659
 msgid "Enemy at site defeated!"
-msgstr ""
+msgstr "Fiender vid platsen besegrade!"
 
 #: ../../src/logic/militarysite.cc:707
 #, c-format
 msgid "%sYour %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "%sDin %s upptäckte en angripare.</p>"
 
 #: ../../src/logic/militarysite.cc:708
 #, c-format
 msgid "%sYour %s is under attack.</p>"
-msgstr ""
+msgstr "%sDin %s är under anfall.</p>"
 
 #: ../../src/logic/militarysite.cc:716
 msgid "You are under attack"
-msgstr ""
+msgstr "Du är under anfall"
 
 #: ../../src/logic/playercommand.cc:134
 #, c-format
@@ -1958,12 +2067,12 @@ msgstr "ändra målmängd: %s"
 #: ../../src/logic/playercommand.cc:741
 #, c-format
 msgid "set ware target quantity: %s"
-msgstr ""
+msgstr "välj målkvantitet för vara: %s"
 
 #: ../../src/logic/playercommand.cc:863
 #, c-format
 msgid "set worker target quantity: %s"
-msgstr ""
+msgstr "välj målkvantitet för arbetare: %s"
 
 #: ../../src/logic/playercommand.cc:988
 #, c-format
@@ -1988,22 +2097,22 @@ msgstr "ändra soldatkapacitet: %s"
 #: ../../src/logic/playercommand.cc:1295
 #, c-format
 msgid "retreat: value out of range. Received %u expected %u-%u"
-msgstr ""
+msgstr "reträtt: värde utanför intervall. Tog emot %u väntade %u-%u"
 
 #: ../../src/logic/playercommand.cc:1306
 #, c-format
 msgid "change military config: %s"
-msgstr ""
+msgstr "välj militärkonfiguration: %s"
 
 #: ../../src/logic/playercommand.cc:1345
 #, c-format
 msgid "(player %u): message id is null"
-msgstr ""
+msgstr "(spelare %u): meddelande-id är null"
 
 #: ../../src/logic/playercommand.cc:1350
 #, c-format
 msgid "player message: %s"
-msgstr ""
+msgstr "spelarmeddelande: %s"
 
 #: ../../src/logic/production_program.cc:72
 #, c-format
@@ -2019,6 +2128,8 @@ msgid ""
 "wrong order of ware types within group: ware type %s appears after ware type "
 "%s (fix order!)"
 msgstr ""
+"fel ordning på varutyper inom gruppen: varutyp %s förekommer efter varutyp "
+"%s (korrigera ordningen!)"
 
 #: ../../src/logic/production_program.cc:99
 #: ../../src/logic/production_program.cc:834
@@ -2032,27 +2143,30 @@ msgid ""
 "group count is %u but (total) input storage capacity of the specified ware "
 "type(s) is only %u, so the group can never be fulfilled by the site"
 msgstr ""
+"gruppantal är %u men (totalt) ingående lagerkapacitet för den angivna "
+"varautypen/-typerna är endast %u, så gruppbehovet kan aldlig uppfyllas vid "
+"platsen."
 
 #: ../../src/logic/production_program.cc:134
 msgid "not "
-msgstr ""
+msgstr "inte "
 
 #: ../../src/logic/production_program.cc:156
 #: ../../src/logic/production_program.cc:177
 msgid "economy needs "
-msgstr ""
+msgstr "ekonomibehov "
 
 #: ../../src/logic/production_program.cc:206
 msgid "site has "
-msgstr ""
+msgstr "platsen har "
 
 #: ../../src/logic/production_program.cc:232
 msgid "workers need experience"
-msgstr ""
+msgstr "arbetare behöver erfarenhet"
 
 #: ../../src/logic/production_program.cc:257
 msgid "ware type or worker type"
-msgstr ""
+msgstr "varutyp eller arbetartyp"
 
 #: ../../src/logic/production_program.cc:320
 #, c-format
@@ -2079,12 +2193,12 @@ msgstr "förväntade \"or\" eller slut på indata"
 #: ../../src/logic/production_program.cc:399
 #: ../../src/logic/production_program.cc:785
 msgid " and "
-msgstr ""
+msgstr " och "
 
 #: ../../src/logic/production_program.cc:400
 #: ../../src/logic/production_program.cc:756
 msgid " because: "
-msgstr ""
+msgstr " anledning: "
 
 #: ../../src/logic/production_program.cc:415
 #: ../../src/wui/encyclopedia_window.cc:194
@@ -2093,7 +2207,7 @@ msgstr " eller "
 
 #: ../../src/logic/production_program.cc:416
 msgid " because not: "
-msgstr ""
+msgstr " för att inte: "
 
 #: ../../src/logic/production_program.cc:460
 #, c-format
@@ -2109,27 +2223,27 @@ msgstr ""
 #: ../../src/logic/production_program.cc:492
 #, c-format
 msgid "%s handling method already defined"
-msgstr ""
+msgstr "%s hanteringsmetod redan definierad"
 
 #: ../../src/logic/production_program.cc:482
 msgid "failure"
-msgstr ""
+msgstr "misslyckades"
 
 #: ../../src/logic/production_program.cc:487
 msgid "completion"
-msgstr ""
+msgstr "komplettering"
 
 #: ../../src/logic/production_program.cc:492
 msgid "skip"
-msgstr ""
+msgstr "hoppa över"
 
 #: ../../src/logic/production_program.cc:497
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
-msgstr ""
+msgstr "{\"misslyckas\"|\"komplettera\"|\"hoppa över\"}"
 
 #: ../../src/logic/production_program.cc:511
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
-msgstr ""
+msgstr "{\"misslyckas\"|\"komplettera\"|\"hoppa över\"}"
 
 #: ../../src/logic/production_program.cc:613
 #, c-format
@@ -2143,13 +2257,13 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:685
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
-msgstr ""
+msgstr "väntade ware_type1[,ware_type2[,...]][:N] ..."
 
 #: ../../src/logic/production_program.cc:788
 msgid " is missing"
 msgid_plural " are missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " saknas"
+msgstr[1] " saknas"
 
 #: ../../src/logic/production_program.cc:848
 #: ../../src/logic/production_program.cc:934
@@ -2162,22 +2276,22 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:866
 msgid "Produced "
-msgstr ""
+msgstr "Producerade "
 
 #: ../../src/logic/production_program.cc:876
 #: ../../src/logic/production_program.cc:961
 #, c-format
 msgid "%u "
-msgstr ""
+msgstr "%u "
 
 #: ../../src/logic/production_program.cc:883
 #: ../../src/logic/production_program.cc:968
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../../src/logic/production_program.cc:951
 msgid "Recruited "
-msgstr ""
+msgstr "Rekryterade "
 
 #: ../../src/logic/production_program.cc:992
 msgid "distance"
@@ -2190,12 +2304,13 @@ msgstr "hundradel"
 
 #: ../../src/logic/production_program.cc:1148
 msgid "Mine empty"
-msgstr ""
+msgstr "Tom gruva"
 
 #: ../../src/logic/production_program.cc:1152
 msgid ""
-"This mines has run empty. You should consider to expand ordestruct it."
+"This mines has run empty. You should consider to expand or destruct it."
 msgstr ""
+"Denna gruva har tagit slut. Du bör överväga att exandera eller stänga den."
 
 #: ../../src/logic/production_program.cc:1167
 #: ../../src/logic/production_program.cc:1236
@@ -2219,11 +2334,11 @@ msgstr "förväntade nivå > %u men fann \"%s\""
 
 #: ../../src/logic/productionsite.cc:70
 msgid "this ware type has already been declared as an output"
-msgstr ""
+msgstr "denna varutyp har redan angetts som utgående"
 
 #: ../../src/logic/productionsite.cc:76
 msgid "this worker type has already been declared as an output"
-msgstr ""
+msgstr "denna arbetartyp har redans angetts som utgående"
 
 #: ../../src/logic/productionsite.cc:218
 msgid "(not occupied)"
@@ -2233,8 +2348,8 @@ msgstr "(obemannad)"
 #, c-format
 msgid "Worker missing"
 msgid_plural "Workers missing"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Arbetare saknas"
+msgstr[1] "Arbetare saknas"
 
 #: ../../src/logic/productionsite.cc:231
 msgid "(stopped)"
@@ -2254,6 +2369,8 @@ msgid ""
 "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) or "
 "atrTotal (%u) but found unknown attribute value (%u)"
 msgstr ""
+"väntade atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) eller "
+"atrTotal (%u) men hittade okänt attributvärde (%u)"
 
 #: ../../src/logic/soldier.cc:70 ../../src/logic/soldier.cc:93
 msgid "positive integer"
@@ -2266,12 +2383,12 @@ msgstr "förväntade positivt heltal >= %u men fann \"%s\""
 
 #: ../../src/logic/soldier.cc:201
 msgid "\"anim_name[,another_anim,...]\""
-msgstr ""
+msgstr "\"anim_name[,another_anim,...]\""
 
 #: ../../src/logic/soldier.cc:1179
 #, c-format
 msgid "bad direction '%d'"
-msgstr ""
+msgstr "ogiltig riktning '%d'"
 
 #: ../../src/logic/soldier.cc:1340
 #, c-format
@@ -2309,21 +2426,21 @@ msgstr "Arbetar inte"
 
 #: ../../src/logic/tribe.cc:134
 msgid "constructionsite type \"constructionsite\" is missing"
-msgstr ""
+msgstr "konstruktionsplats av typ \"konstruktionsplats\" saknas"
 
 #: ../../src/logic/tribe.cc:221 ../../src/logic/tribe.cc:242
 msgid "none found"
-msgstr ""
+msgstr "ingen hittad"
 
 #: ../../src/logic/tribe.cc:223
 #, c-format
 msgid "frontier styles: %s"
-msgstr ""
+msgstr "gränsutseende: %s"
 
 #: ../../src/logic/tribe.cc:244
 #, c-format
 msgid "flag styles: %s"
-msgstr ""
+msgstr "flaggutseende: %s"
 
 #: ../../src/logic/tribe.cc:374
 #, c-format
@@ -2335,6 +2452,7 @@ msgstr "stam %s: %s"
 msgid ""
 "<p font-size=14 font-face=FreeSerif>A new %s was added to your economy.</p>"
 msgstr ""
+"<p font-size=14 font-face=FreeSerif>En ny %s lades till din ekonomi.</p>"
 
 #: ../../src/logic/worker.cc:158
 #, c-format
@@ -2342,6 +2460,8 @@ msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"borde bryta resursen %s, som inte existirar i världen; stam ej kompatibel "
+"med värld"
 
 #: ../../src/logic/worker.cc:260
 #, c-format
@@ -2349,20 +2469,23 @@ msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"borde föda upp resurstyp %s, som inte finns i världen; stam ej kompatibel "
+"med värld"
 
 #: ../../src/logic/worker.cc:640
 msgid "Out of "
-msgstr ""
+msgstr "Av "
 
 #: ../../src/logic/worker.cc:644
 msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: "
 msgstr ""
+"Arbetaren i denna byggnad kan inte hitta fler resurser av följande typ: "
 
 #: ../../src/logic/worker.cc:916
 msgid "A geologist found resources."
-msgstr ""
+msgstr "En geolog hittade resurser."
 
 #: ../../src/logic/worker.cc:1649
 #, c-format
@@ -2410,12 +2533,12 @@ msgstr "tillåtna byggnadsslag: %s"
 #: ../../src/map_io/widelands_map_allowed_worker_types_data_packet.cc:84
 #, c-format
 msgid "allowed worker types: %s"
-msgstr ""
+msgstr "tillåtna arbetartyper: %s"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
 msgid "unknown bob type %u"
-msgstr ""
+msgstr "okänd bob-typ: %u"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:102
 #, c-format
@@ -2425,7 +2548,7 @@ msgstr "stam \"%s\" finns ej"
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:141
 #, c-format
 msgid "bobs: %s"
-msgstr ""
+msgstr "bob: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:233
 #, c-format
@@ -2435,7 +2558,7 @@ msgstr "okänt uppgiftsslag \"%s\""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:237
 #, c-format
 msgid "task %s is duplicated in stack"
-msgstr ""
+msgstr "uppgiften %s är duplicerad i stacken"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:314
 #, c-format
@@ -2445,17 +2568,17 @@ msgstr "läser väg: %s"
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:387
 #, c-format
 msgid "bob %u: %s"
-msgstr ""
+msgstr "bob %u: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:394
 #, c-format
 msgid "bobdata: %s"
-msgstr ""
+msgstr "bobdata: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:409
 #, c-format
 msgid "critter bob: %s"
-msgstr ""
+msgstr "kreatursbob: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:675
 #, c-format
@@ -2493,6 +2616,8 @@ msgid ""
 "%s %u has a next_spawn time for worker type \"%s\" set to %u, but it was "
 "previously set to %u\n"
 msgstr ""
+"%s %u har en nästa återskapningstid för arbetartyp \"%s\" satt till %u, men "
+"den var tidigare satt till %u\n"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:471
 #, c-format
@@ -2507,7 +2632,7 @@ msgstr "krigsinrättning: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:708
 #, c-format
 msgid "program %s was skipped at time %u, but time is only %u"
-msgstr ""
+msgstr "program %s skippades vid %u, men tiden är bara %u"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:937
 #, c-format
@@ -2550,22 +2675,22 @@ msgstr "extradata: %s"
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr ""
+msgstr "noden ägs av spelare %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
 msgid "is owned by player %u"
-msgstr ""
+msgstr "ägs av spelare %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
 msgid "has a flag (%u)"
-msgstr ""
+msgstr "har en flagga (%u)"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
 msgid "neighbour node (%i, %i): %s"
-msgstr ""
+msgstr "grannläge(%i, %i): %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
@@ -2585,18 +2710,18 @@ msgstr "ingen flagga på angiven position (%i, %i)"
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:110
 #, c-format
 msgid "has building %u at (%i, %i), which is not at the top left node"
-msgstr ""
+msgstr "har byggnad %u vid (%i, %i), som inte är en nod överst till vänster"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
 msgid "building (%u): %s"
-msgstr ""
+msgstr "byggnad (%u): %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:209
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
 #, c-format
 msgid "%u: %s"
-msgstr ""
+msgstr "%u: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:216
 #, c-format
@@ -2606,7 +2731,7 @@ msgstr "flaggdata: %s"
 #: ../../src/map_io/widelands_map_heights_data_packet.cc:53
 #, c-format
 msgid "heights: %s"
-msgstr ""
+msgstr "höjder: %s"
 
 #: ../../src/map_io/widelands_map_immovable_data_packet.cc:98
 #: ../../src/map_io/widelands_map_immovabledata_data_packet.cc:120
@@ -2627,6 +2752,7 @@ msgstr "Ogiltig värld"
 #, c-format
 msgid "The world \"%s\" set by the map, does not exist on your filesystem."
 msgstr ""
+"Världen \"%s\" som satts av kartan, existerar inte på ditt filsystem."
 
 #: ../../src/map_io/widelands_map_node_ownership_data_packet.cc:64
 #, c-format
@@ -2636,7 +2762,7 @@ msgstr "ägande: %s"
 #: ../../src/map_io/widelands_map_object_packet.cc:80
 #, c-format
 msgid "unknown object header %u"
-msgstr ""
+msgstr "okänd objektheader %u"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:83
 #, c-format
@@ -2662,11 +2788,14 @@ msgstr "spelarpositioner: %s"
 #, c-format
 msgid "messages are not ordered: sent at %u but previous message sent at %u"
 msgstr ""
+"meddelande är inte ordnade: skickat vid %u men tidigare meddelande sänt vid "
+"%u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:94
 #, c-format
 msgid "message is sent in the future: sent at %u but gametime is only %u"
 msgstr ""
+"meddelandet skickades i framtiden: skickades vid %u men speltiden är bara %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:103
 #, c-format
@@ -2675,12 +2804,17 @@ msgid ""
 "forever, which is the default; omit the duration key to make the message "
 "exist forever"
 msgstr ""
+"värdet %u är inte tillåten som tidsgräns; det är ett särskilt värde som "
+"betyder för alltid, vilket är standard; utelämna tidsgränsen för att få "
+"meddelandet att existera för alltid"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:111
 #, c-format
 msgid ""
 "duration %u is too large; causes numeric overflow when added to sent time %u"
 msgstr ""
+"tidsgräns %u är för stor; orsakar numeriskt överflöde när den adderas med "
+"tid för skickande %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:117
 #, c-format
@@ -2688,21 +2822,23 @@ msgid ""
 "message should have expired at %u; sent at %u with duration %u but gametime "
 "is already %u"
 msgstr ""
+"meddelandet borde ha gått ut vid %u; skickades vid %u med tidsgräns %u med "
+"speltiden är redan %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:151
 #, c-format
 msgid "\"%s\": %s"
-msgstr ""
+msgstr "\"%s\": %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:156
 #, c-format
 msgid "messages for player %u: %s"
-msgstr ""
+msgstr "meddelanden till spelare %u: %s"
 
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:122
 #, c-format
 msgid "unseen immovable: %s"
-msgstr ""
+msgstr "osedd oflyttbar: %s"
 
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
@@ -2711,7 +2847,7 @@ msgstr "väg: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
 msgid "no carrier slot"
-msgstr ""
+msgstr "ingen bäraröppning"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:134
 #, c-format
@@ -2719,6 +2855,8 @@ msgid ""
 "expected 1 but found %u carrier slots in road saved with packet version 2 "
 "(old)"
 msgstr ""
+"väntade 1 men hittade %u bäraröppningar i väg sparad med paketversion 2 "
+"(gammal)"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
@@ -2733,7 +2871,7 @@ msgstr "vägdata: %s"
 #: ../../src/map_io/widelands_map_terrain_data_packet.cc:81
 #, c-format
 msgid "terrain: %s"
-msgstr ""
+msgstr "terräng: %s"
 
 #: ../../src/map_io/widelands_map_trigger_data_packet.cc:80
 #, c-format
@@ -2764,7 +2902,7 @@ msgstr "varudata: %s"
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:198
 #, c-format
 msgid "item %u: %s"
-msgstr ""
+msgstr "artikel %u: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:205
 #, c-format
@@ -2781,6 +2919,9 @@ msgid ""
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
 msgstr ""
+"Widelands kunde inte etablera en anslutning till den angivna adressen.\n"
+"Antingen körs ingen Widelands-server på angiven port eller\n"
+"så stängdes servern av medans du försökte ansluta."
 
 #: ../../src/network/netclient.cc:120
 msgid "Client has left the game."
@@ -2805,6 +2946,8 @@ msgid ""
 "Expected a HELLO packet from server, but received command number %u. Maybe "
 "the server is running a different version of Widelands?"
 msgstr ""
+"Väntade ett HELLO-paket från servern, men emottog kommandonummer %u. Kanske "
+"kör servern en annan version av Widelands?"
 
 #: ../../src/network/netclient.cc:515
 msgid "Server uses a different protocol version"
@@ -2812,7 +2955,7 @@ msgstr "Servern använder en annan protokollversion."
 
 #: ../../src/network/netclient.cc:639
 msgid "/me 's file failed md5 checksumming."
-msgstr ""
+msgstr "/me s fil md5-kontrollsumma  underkändes"
 
 #: ../../src/network/netclient.cc:694
 msgid "Unexpectedly received LAUNCH command from server."
@@ -2833,11 +2976,11 @@ msgstr "Servern skickade ett okänt kommando (kommandonummer %u)"
 
 #: ../../src/network/netclient.cc:788
 msgid "Something went wrong: "
-msgstr ""
+msgstr "Något gick fel: "
 
 #: ../../src/network/netclient.cc:819
 msgid " An automatic savegame will be created."
-msgstr ""
+msgstr " Ett automatsparat spel kommer att skapas."
 
 #: ../../src/network/nethost.cc:334
 msgid "Server has left the game."
@@ -2859,12 +3002,12 @@ msgstr "Värden flyttade spelare %s till väntrummet!"
 #: ../../src/network/nethost.cc:1127
 #, c-format
 msgid "Computer %u"
-msgstr ""
+msgstr "Dator %u"
 
 #: ../../src/network/nethost.cc:1203
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
-msgstr ""
+msgstr "VARNING: %s använder version: %s, men värden använder version: %s"
 
 #: ../../src/network/nethost.cc:1250
 #, c-format
@@ -2932,6 +3075,7 @@ msgstr "Klient skickade PLAYERCOMMAND trots att spelet ej pågår."
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
+"Klient %u (%u) skickade ett spelarkommando (%i) för en annan spelare (%i)."
 
 #: ../../src/network/nethost.cc:1694
 msgid "Client sent unexpected synchronization report."
@@ -2939,26 +3083,26 @@ msgstr "Klient skickade oväntad synkroniseringsrapport."
 
 #: ../../src/network/nethost.cc:1730 ../../src/network/nethost.cc:1742
 msgid "Client requests file altough none is available to send."
-msgstr ""
+msgstr "Klienten efterfrågar fil trots att ingen finns tillgänglig."
 
 #: ../../src/network/nethost.cc:1732
 #, c-format
 msgid "Started to send file %s to %s!"
-msgstr ""
+msgstr "Påbörjade överföring av fil %s till %s!"
 
 #: ../../src/network/nethost.cc:1753
 msgid "Client requests file part that does not exist."
-msgstr ""
+msgstr "Klienten efterfrågar fildel som inte finns."
 
 #: ../../src/network/nethost.cc:1756
 #, c-format
 msgid "Completed transfer of file %s to %s"
-msgstr ""
+msgstr "Avslutade överföring av fil %s till %s"
 
 #: ../../src/network/nethost.cc:1764
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
-msgstr ""
+msgstr "Skickar del %u/%u av fil %s til %s"
 
 #: ../../src/network/nethost.cc:1774
 #, c-format
@@ -2972,7 +3116,7 @@ msgstr "%s har lämnat spelet (%s)"
 
 #: ../../src/network/network_ggz.cc:281
 msgid "Closed the connection to the metaserver."
-msgstr ""
+msgstr "Stängde anslutningen till metaservern"
 
 #: ../../src/network/network_ggz.cc:375
 msgid ""
@@ -2981,44 +3125,48 @@ msgid ""
 "at http://wl.widelands.org/wiki/InternetGaming can\n"
 "be advantageous."
 msgstr ""
+"Din server var ej nåbar från Internet.\n"
+"Var vänlig försök lösa problemet - Läs gärna anteckningarna\n"
+"på http://wl.widelands.org/wiki/InternetGaming."
 
 #: ../../src/network/network_ggz.cc:499
 msgid "Connected to the metaserver of:"
-msgstr ""
+msgstr "Ansluten till metaservern för:"
 
 #: ../../src/network/network_ggz.cc:510
 msgid "Server MOTD:"
-msgstr ""
+msgstr "Serverns MOTD:"
 
 #: ../../src/network/network_ggz.cc:516
 msgid "Reconnected to the metaserver."
-msgstr ""
+msgstr "Återanslöt till metaservern."
 
 #: ../../src/network/network_ggz.cc:521
 msgid "NOTE: The Internet gaming implementation is in very early state."
 msgstr ""
+"OBS: Implementationen av internetspel är i ett väldigt tidigt tillstånd."
 
 #: ../../src/network/network_ggz.cc:525
 msgid "Please take a look at the notes at:"
-msgstr ""
+msgstr "Var vänlig läs anteckningarna på:"
 
 #: ../../src/network/network_ggz.cc:664
 msgid " joined the metaserver."
-msgstr ""
+msgstr " anslöt till metaservern."
 
 #: ../../src/network/network_ggz.cc:673
 msgid " left the metaserver."
-msgstr ""
+msgstr " lämnade metaservern."
 
 #: ../../src/trigger/trigger_defeated.cc:46
 #, c-format
 msgid "player is %u, but map has only %u players"
-msgstr ""
+msgstr "spelaren är %u, men kartan har bara %u spelare."
 
 #: ../../src/trigger/trigger_defeated.cc:52
 #, c-format
 msgid "(defeated): %s"
-msgstr ""
+msgstr "(besegrad): %s"
 
 #: ../../src/trigger/trigger_factory.cc:41
 msgid "Building Trigger"
@@ -3034,23 +3182,27 @@ msgstr ""
 
 #: ../../src/trigger/trigger_factory.cc:48
 msgid "Defeated Player Trigger"
-msgstr ""
+msgstr "Utlösare för Besegrad Spelare"
 
 #: ../../src/trigger/trigger_factory.cc:50
 msgid ""
 "Triggers when the player was defeated. The trigger is set to true, if the "
 "player has 0 workers."
 msgstr ""
+"Utlöses när spelaren besegras. Utlösaren sätts till true, om spelaren har 0 "
+"arbetare."
 
 #: ../../src/trigger/trigger_factory.cc:55
 msgid "Military influence Trigger"
-msgstr ""
+msgstr "Utlösare för militart inflytande"
 
 #: ../../src/trigger/trigger_factory.cc:57
 msgid ""
 "Triggers when the player has some (or highest) military influence over the "
 "specified number of nodes in the specified area."
 msgstr ""
+"Utlöses när spelaren har något (eller högst) militärt inflytande över "
+"angivet antal noder i det angivna området."
 
 #: ../../src/trigger/trigger_factory.cc:62
 msgid "Ownership Trigger"
@@ -3062,6 +3214,9 @@ msgid ""
 "in the specified area. Unless it is a one-time trigger, it becomes unset "
 "when this no longer holds."
 msgstr ""
+"Utlöses när spelaren äger minst det angivna antalet platser i det angivna "
+"området. Om det inte är en engångsutlösare, sätts den till falskt när detta "
+"inte längre stämmer."
 
 #: ../../src/trigger/trigger_factory.cc:70
 msgid "Time Trigger"
@@ -3072,6 +3227,9 @@ msgid ""
 "Triggers at a certain time. The time can be set to a value in ms. If the "
 "trigger has no time is set, a time can be set for it with an event."
 msgstr ""
+"Utlöses vid en viss tidpunkt. Tiden kan sättas till ett värde i ms. Om "
+"utlösaren inte har en tidpunkt satt, kan en tidpunkt för den sättas med en "
+"händelse."
 
 #: ../../src/trigger/trigger_factory.cc:78
 msgid "Vision Trigger"
@@ -3083,10 +3241,13 @@ msgid ""
 "of locations in the specified area. Unless it is a one-time trigger, it "
 "becomes unset when this no longer holds."
 msgstr ""
+"Utlöses när en spelare ser (eller har sett) minst ett angivet antal platser "
+"i det angivna området. Om det inte är en engångsutlösare sätts den till "
+"falskt när detta inte längre stämmer."
 
 #: ../../src/trigger/trigger_factory.cc:86
 msgid "Message is Read or Archvied Trigger"
-msgstr ""
+msgstr "Utlösare för läst eller arkiverat meddelande"
 
 #: ../../src/trigger/trigger_factory.cc:88
 msgid ""
@@ -3094,36 +3255,39 @@ msgid ""
 "status Read or Archived, which means that the player has changed the status "
 "of the message."
 msgstr ""
+"Utlöses när ett meddelande skapat av en meddelandehändelse med status Ny, "
+"får status Läst eller Arkiverat, vilket innebär att spelaren har ändrat "
+"status hos meddelandet."
 
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:58
 #, c-format
 msgid "player %u's message %u does not exist (%u is highest)"
-msgstr ""
+msgstr "spelare %us meddelande %u existerar inte (%u är högst)"
 
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:64
 #, c-format
 msgid "(message_is_read_or_archived): %s"
-msgstr ""
+msgstr "(meddelande_läst_eller_arkiverat): %s"
 
 #: ../../src/trigger/trigger_military_influence.cc:47
 #, c-format
 msgid "(military influence): %s"
-msgstr ""
+msgstr "(militärt inflytande): %s"
 
 #: ../../src/trigger/trigger_ownership.cc:45
 #, c-format
 msgid "(ownership): %s"
-msgstr ""
+msgstr "(ägande): %s"
 
 #: ../../src/trigger/trigger_time.cc:46
 #, c-format
 msgid "(time): %s"
-msgstr ""
+msgstr "(tid): %s"
 
 #: ../../src/trigger/trigger_vision.cc:52
 #, c-format
 msgid "(vision): %s"
-msgstr ""
+msgstr "(synfält): %s"
 
 #: ../../src/ui_basic/messagebox.cc:89
 #: ../../src/ui_fsmenu/campaign_select.cc:74
@@ -3160,25 +3324,25 @@ msgstr "Minska värdet med 10"
 
 #: ../../src/ui_basic/timeedit.cc:136 ../../src/ui_basic/timeedit.cc:137
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: ../../src/ui_basic/timeedit.cc:138
 msgid "."
-msgstr ""
+msgstr "."
 
 #: ../../src/ui_basic/timeedit.cc:151 ../../src/ui_basic/timeedit.cc:152
 msgid "h"
-msgstr ""
+msgstr "t"
 
 #: ../../src/ui_basic/timeedit.cc:153 ../../src/ui_basic/timeedit.cc:154
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: ../../src/ui_basic/timeedit.cc:155 ../../src/ui_basic/timeedit.cc:156
 #: ../../src/ui_basic/timeedit.cc:157 ../../src/ui_basic/timeedit.cc:158
 #: ../../src/ui_basic/timeedit.cc:159
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:52
 msgid "Select a campaign"
@@ -3216,7 +3380,7 @@ msgstr "Tillbaka"
 #: ../../src/ui_fsmenu/campaign_select.cc:165
 #: ../../src/ui_fsmenu/campaign_select.cc:167
 #: ../../src/ui_fsmenu/campaign_select.cc:226
-#: ../../src/ui_fsmenu/campaign_select.cc:410
+#: ../../src/ui_fsmenu/campaign_select.cc:417
 msgid "[No value found]"
 msgstr "[Inget värde hittades]"
 
@@ -3268,10 +3432,10 @@ msgstr "Namn:"
 msgid "Author:"
 msgstr "Upphovsman:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:350
+#: ../../src/ui_fsmenu/campaign_select.cc:357
 #, c-format
 msgid "Invalid path to file in cconfig: %s"
-msgstr ""
+msgstr "Ogiltig sökväg till fil i cconfig: %s"
 
 #: ../../src/ui_fsmenu/editor.cc:35
 msgid "Editor Menu"
@@ -3383,6 +3547,12 @@ msgid ""
 "you do not own. Normally such a file should be send from the host to you, "
 "but perhaps the transfer was not yet finnished!?!"
 msgstr ""
+"Widelands försökte starta ett spel med en fil som inte hittades på angiven "
+"sökväg.\n"
+"Filen var: %s\n"
+"Om detta händer i ett nätverksspel, kan värden ha valt en fil som du inte "
+"har Normalt ska en sådan fil\n"
+"skickas från värden till dig, men kanske var inte överföringen färdig?"
 
 #: ../../src/ui_fsmenu/launchgame.cc:269
 msgid "(no map)"
@@ -3390,13 +3560,15 @@ msgstr "(ingen karta)"
 
 #: ../../src/ui_fsmenu/launchgame.cc:310
 msgid "WARNING!!! Host selected the file \""
-msgstr ""
+msgstr "VARNING!!! Värden valde filen \""
 
 #: ../../src/ui_fsmenu/launchgame.cc:313
 msgid ""
 "\" for this game, which you do not own. If the transfer of that file does "
 "not start automatically, please add it manually to your filesystem."
 msgstr ""
+"\" som du inte har, för detta spel. Om överföringen av den filen inte "
+"startas automatiskt var vänlig lägg till den i ditt filsystem."
 
 #: ../../src/ui_fsmenu/launchgame.cc:332
 msgid "Original:"
@@ -3432,11 +3604,11 @@ msgstr "Speltid:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:111
 msgid "Delete file"
-msgstr ""
+msgstr "Ta bort fil"
 
 #: ../../src/ui_fsmenu/loadgame.cc:112
 msgid "Do you really want to delete "
-msgstr ""
+msgstr "Är du säker på att du vill ta bort "
 
 #: ../../src/ui_fsmenu/loadreplay.cc:63
 msgid "Choose a replay!"
@@ -3496,19 +3668,19 @@ msgstr "(katalog)"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Choose game type"
-msgstr ""
+msgstr "Välj speltyp"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:51
 msgid "Internet game"
-msgstr ""
+msgstr "Internetspel"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:58
 msgid "LAN / Direct IP"
-msgstr ""
+msgstr "LAN / Direkt IP-anslutning"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:80
 msgid "Show login dialog"
-msgstr ""
+msgstr "Visa inloggningsdialog"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:107
 #: ../../src/ui_fsmenu/netsetup_lan.cc:109 ../../src/wui/login_box.cc:78
@@ -3529,11 +3701,11 @@ msgstr "Spel:"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:62
 msgid "Name of your server:"
-msgstr ""
+msgstr "Namn på din server:"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:66
 msgid "Maximum of players:"
-msgstr ""
+msgstr "Maximalt antal spelare:"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:80
 #: ../../src/ui_fsmenu/netsetup_lan.cc:62
@@ -3542,15 +3714,15 @@ msgstr "Anslut till detta spel"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:87
 msgid "Open a new game"
-msgstr ""
+msgstr "Öppna ett nytt spel"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:144
 msgid "Points"
-msgstr ""
+msgstr "Poäng"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:145
 msgid "Server"
-msgstr ""
+msgstr "Server"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:42
 msgid "Begin Network Game"
@@ -3574,7 +3746,7 @@ msgstr "Var värd för nytt spel"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:84
 msgid "Load previous host"
-msgstr ""
+msgstr "Ladda tidigare värd"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:114
 msgid "Host"
@@ -3633,11 +3805,11 @@ msgstr "Verkställ"
 
 #: ../../src/ui_fsmenu/options.cc:83
 msgid "min."
-msgstr ""
+msgstr "min."
 
 #: ../../src/ui_fsmenu/options.cc:89
 msgid "days"
-msgstr ""
+msgstr "dagar"
 
 #: ../../src/ui_fsmenu/options.cc:96
 msgid "General Options"
@@ -3701,7 +3873,7 @@ msgstr "Spara spel automatiskt var"
 
 #: ../../src/ui_fsmenu/options.cc:194
 msgid "Remove Replays older than:"
-msgstr ""
+msgstr "Ta bort repriser äldre än:"
 
 #: ../../src/ui_fsmenu/options.cc:198
 msgid "Off"
@@ -3713,11 +3885,11 @@ msgstr "Systemets förvalda språk"
 
 #: ../../src/ui_fsmenu/options.cc:364
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #: ../../src/ui_fsmenu/options.cc:369 ../../src/ui_fsmenu/options.cc:374
 msgid "px."
-msgstr ""
+msgstr "px."
 
 #: ../../src/ui_fsmenu/options.cc:393
 msgid "Main menu font:"
@@ -3725,39 +3897,39 @@ msgstr "Typsnitt för huvudmeny:"
 
 #: ../../src/ui_fsmenu/options.cc:400
 msgid "Do not zip widelands data files (maps, replays and savegames)."
-msgstr ""
+msgstr "Zippa inte Widelands datafiler (kartor, repriser och sparade spel)."
 
 #: ../../src/ui_fsmenu/options.cc:405
 msgid "Speed of a new game:"
-msgstr ""
+msgstr "Hastighet för nytt spel:"
 
 #: ../../src/ui_fsmenu/options.cc:409
 msgid "Distance for windows to snap to other panels:"
-msgstr ""
+msgstr "Avstånd för att fönster ska snappa till andra paneler:"
 
 #: ../../src/ui_fsmenu/options.cc:413
 msgid "Distance for windows to snap to borders:"
-msgstr ""
+msgstr "Avstånd för fönster att snappa till kanter:"
 
 #: ../../src/ui_fsmenu/options.cc:418
 msgid "Graphics experimental improvements."
-msgstr ""
+msgstr "Experimentella grafikförbättringar"
 
 #: ../../src/ui_fsmenu/options.cc:424
 msgid "Graphics double buffering."
-msgstr ""
+msgstr "Dubbelbuffring av grafik."
 
 #: ../../src/ui_fsmenu/options.cc:431
 msgid "Remove Syncstream dumps on startup"
-msgstr ""
+msgstr "Ta bort Synkström vid uppstart"
 
 #: ../../src/ui_fsmenu/options.cc:451
 msgid "Pause"
-msgstr ""
+msgstr "Pausa"
 
 #: ../../src/ui_fsmenu/options.cc:462
 msgid "FreeSerif (Default)"
-msgstr ""
+msgstr "FreeSerif (Standard)"
 
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:85
 msgid "Initialization"
@@ -3793,7 +3965,7 @@ msgstr "Ladda spel"
 
 #: ../../src/wui/attack_box.cc:159
 msgid "Soldiers:"
-msgstr ""
+msgstr "Soldater:"
 
 #: ../../src/wui/attack_box.cc:165
 msgid "Send less soldiers"
@@ -3801,7 +3973,7 @@ msgstr "Skicka färre soldater"
 
 #: ../../src/wui/attack_box.cc:182
 msgid "Number of soldiers"
-msgstr ""
+msgstr "Antal soldater"
 
 #: ../../src/wui/attack_box.cc:192
 msgid "Send more soldiers"
@@ -3809,15 +3981,15 @@ msgstr "Skicka fler soldater"
 
 #: ../../src/wui/attack_box.cc:199 ../../src/wui/military_box.cc:130
 msgid "Retreat: Never!"
-msgstr ""
+msgstr "Reträtt: Aldrig!"
 
 #: ../../src/wui/attack_box.cc:218 ../../src/wui/military_box.cc:149
 msgid "Supported damage before retreat"
-msgstr ""
+msgstr "Tillåten skada innan reträtt."
 
 #: ../../src/wui/attack_box.cc:220 ../../src/wui/military_box.cc:151
 msgid "Once injured"
-msgstr ""
+msgstr "När skadad"
 
 #: ../../src/wui/building_statistics_menu.cc:76
 #: ../../src/wui/game_main_menu.cc:61
@@ -4048,7 +4220,7 @@ msgstr "Iakttag"
 
 #: ../../src/wui/fieldaction.cc:487
 msgid "Military settings"
-msgstr ""
+msgstr "Militärinställningar"
 
 #: ../../src/wui/fieldaction.cc:512
 msgid "Start attack"
@@ -4085,6 +4257,9 @@ msgid ""
 "   height: %u\n"
 "   owner: %u\n"
 msgstr ""
+"(%i, %i)\n"
+"   höjd: %u\n"
+"   ägare: %u\n"
 
 #: ../../src/wui/game_main_menu.cc:38
 #: ../../src/editor/ui_menus/editor_main_menu.cc:49
@@ -4153,7 +4328,7 @@ msgstr " finns redan. Skriv över?"
 
 #: ../../src/wui/game_message_menu.cc:39 ../../src/wui/game_message_menu.h:147
 msgid "Message Menu: Inbox"
-msgstr ""
+msgstr "Meddelandemeny: Inkorg"
 
 #: ../../src/wui/game_objectives_menu.cc:46
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:151
@@ -4162,11 +4337,11 @@ msgstr "Uppdragsmål"
 
 #: ../../src/wui/game_objectives_menu.cc:68
 msgid "Claim Victory"
-msgstr ""
+msgstr "Ta ut seger"
 
 #: ../../src/wui/game_objectives_menu.cc:76
 msgid "Restart Mission"
-msgstr ""
+msgstr "Starta om uppdrag"
 
 #: ../../src/wui/game_options_menu.cc:52
 msgid "README"
@@ -4324,8 +4499,8 @@ msgstr "Varuhjälp"
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u nytt meddelande"
+msgstr[1] "%u nya meddelanden"
 
 #: ../../src/wui/interactive_spectator.cc:56
 msgid "Exit Replay"
@@ -4333,59 +4508,59 @@ msgstr "Lämna repris"
 
 #: ../../src/wui/login_box.cc:28
 msgid "Metaserver login"
-msgstr ""
+msgstr "Metaserverinloggning"
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
-msgstr ""
+msgstr "Smeknamn:"
 
 #: ../../src/wui/login_box.cc:38
 msgid "email (optional):"
-msgstr ""
+msgstr "epost (valfritt):"
 
 #: ../../src/wui/login_box.cc:47
 msgid "WARNING: Password will be shown and saved readable!"
-msgstr ""
+msgstr "VARNING: Lösenord kommer att visas och sparas i klartext!"
 
 #: ../../src/wui/login_box.cc:50
 msgid "Password:"
-msgstr ""
+msgstr "Lösenord:"
 
 #: ../../src/wui/login_box.cc:57
 msgid "Register new account"
-msgstr ""
+msgstr "Registrera nytt konto"
 
 #: ../../src/wui/login_box.cc:62
 msgid "Automatically use this login information from now on."
-msgstr ""
+msgstr "Använd denna inloggningsinformation automatiskt från och med nu."
 
 #: ../../src/wui/login_box.cc:69
 msgid "Login"
-msgstr ""
+msgstr "Logga in"
 
 #: ../../src/wui/login_box.cc:90
 msgid "Empty Nickname"
-msgstr ""
+msgstr "Tomt smeknamn"
 
 #: ../../src/wui/login_box.cc:90
 msgid "Please enter a nickname!"
-msgstr ""
+msgstr "Var vänlig fyll i smeknamn!"
 
 #: ../../src/wui/login_box.cc:97
 msgid "Space in Nickname"
-msgstr ""
+msgstr "Mellanslag i smeknamn"
 
 #: ../../src/wui/login_box.cc:98
 msgid "Sorry, but spaces are not allowed in nicknames!"
-msgstr ""
+msgstr "Tyvärr, mellanslag är ej tillåtet i smeknamn!"
 
 #: ../../src/wui/login_box.cc:105
 msgid "Empty Password"
-msgstr ""
+msgstr "Tomt lösenord"
 
 #: ../../src/wui/login_box.cc:105
 msgid "Please enter a password!"
-msgstr ""
+msgstr "Var vänlig fyll i ett lösenord!"
 
 #: ../../src/wui/minimap.cc:143
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
@@ -4406,7 +4581,7 @@ msgstr "Vägar"
 
 #: ../../src/wui/minimap.cc:178
 msgid "Zoom"
-msgstr ""
+msgstr "Zooma"
 
 #: ../../src/wui/stock_menu.cc:70
 msgid "Show wares"
@@ -4418,7 +4593,7 @@ msgstr "Visa arbetare"
 
 #: ../../src/wui/transport_ui.cc:44
 msgid "Economy options"
-msgstr ""
+msgstr "Ekonomialternativ"
 
 #: ../../src/wui/transport_ui.cc:149 ../../src/wui/transport_ui.cc:341
 msgid "Decrease permanent target quantity"
@@ -4446,11 +4621,11 @@ msgstr "Återställ målmängd till standardvärde"
 
 #: ../../src/wui/transport_ui.cc:488
 msgid "Ware type target quantities"
-msgstr ""
+msgstr "Målkvantiteter för varor"
 
 #: ../../src/wui/transport_ui.cc:492
 msgid "Worker type target quantities"
-msgstr ""
+msgstr "Målkvantiteter för arbetare"
 
 #: ../../src/wui/watchwindow.cc:93
 msgid "Follow"
@@ -4472,6 +4647,10 @@ msgid ""
 " Height: %u\n"
 " Caps: "
 msgstr ""
+"1) Nodinformation\n"
+" Koordinater: (%i, %i)\n"
+" Höjd: %u\n"
+" Begränsningar: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:63
 msgid " flag"
@@ -4501,6 +4680,10 @@ msgid ""
 " Has base immovable: %s\n"
 " Has bobs: %s\n"
 msgstr ""
+"\n"
+" Ägs av by %i\n"
+" Har oflyttbar bas: %s\n"
+" Har bobs: %s\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:77
 msgid ""
@@ -4534,6 +4717,9 @@ msgid ""
 " Size: %ix%i\n"
 " Author: "
 msgstr ""
+"\n"
+" Storlek: %ix%i\n"
+" Författare: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:96
 #: ../../src/editor/tools/editor_info_tool.cc:107
@@ -4599,7 +4785,7 @@ msgstr "Ändra"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:286
 msgid "Can not delete event. It is in use by "
-msgstr ""
+msgstr "Kan inte ta bort händelse. Den används av "
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:293
 #: ../../src/editor/ui_menus/editor_event_menu.cc:333
@@ -4610,7 +4796,7 @@ msgstr "Fel!"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:326
 msgid "Can not delete trigger. It is in use by "
-msgstr ""
+msgstr "Kan inte ta bort utlösare. Den används av "
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:357
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:220
@@ -4720,7 +4906,7 @@ msgstr "¬"
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:149
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
 msgid "<-"
-msgstr ""
+msgstr "<-"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:190
 msgid "Available Triggers: "
@@ -4772,7 +4958,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:51
 msgid "New Random Map"
-msgstr ""
+msgstr "Ny slumpmässig karta"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:73
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:55
@@ -4815,13 +5001,15 @@ msgstr "Beskr: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:46
 msgid "Set origin"
-msgstr ""
+msgstr "Välj origo"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:48
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the top-"
 "left corner of a generated minimap."
 msgstr ""
+"Välj position som skall ha koordinaterna (0, 0). Detta kommer vara övre "
+"vänstra hörnet i en genererad minikarta."
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:85
 msgid "Nr Players:"
@@ -4849,75 +5037,75 @@ msgstr "Skapa karta"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:68
 msgid "Random Number:"
-msgstr ""
+msgstr "Slumptal:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:161
 #, c-format
 msgid "Water: %u %%"
-msgstr ""
+msgstr "Vatten: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:185
 #, c-format
 msgid "Land: %u %%"
-msgstr ""
+msgstr "Mark: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:209
 #, c-format
 msgid "Wasteland: %u %%"
-msgstr ""
+msgstr "Ödemark: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:219
 #, c-format
 msgid "Mountains: %u %%"
-msgstr ""
+msgstr "Berg: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:236
 msgid "Island mode:"
-msgstr ""
+msgstr "Öläge:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:243
 msgid "Resources:"
-msgstr ""
+msgstr "Resurser:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Low"
-msgstr ""
+msgstr "Låg"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:248
 msgid "High"
-msgstr ""
+msgstr "Hög"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:281
 msgid "Map ID:"
-msgstr ""
+msgstr "Kart-ID"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:302
 msgid "Generate Map"
-msgstr ""
+msgstr "Generera karta"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:380
 #, c-format
 msgid "Water: %i %%"
-msgstr ""
+msgstr "Vatten: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:383
 #, c-format
 msgid "Land: %i %%"
-msgstr ""
+msgstr "Mark: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:386
 #, c-format
 msgid "Wasteland: %i %%"
-msgstr ""
+msgstr "Ödemark: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:389
 #, c-format
 msgid "Mountains: %i %%"
-msgstr ""
+msgstr "Berg: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:428
 msgid "Generating random map..."
-msgstr ""
+msgstr "Genererar slumpmässig karta..."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:150
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
@@ -4979,6 +5167,8 @@ msgid ""
 "The objective was deleted, but not its trigger, because it is still "
 "referenced by:\n"
 msgstr ""
+"Målet togs bort, men inte dess utlösare, eftersom den fortfarande refereras "
+"av:\n"
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:278
 msgid "Note"
@@ -5009,12 +5199,16 @@ msgid ""
 "Can not remove player. It is referenced in some place. Remove all buildings, "
 "bobs, triggers and events that depend on this player and try again."
 msgstr ""
+"Kan inte ta bort spelare. Den refereras någonstans. Ta bort alla byggnader, "
+"bobs, utlösare och händelser som beror på denna spelare och försök igen."
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:284
 msgid ""
 "Can not change player tribe. It is referenced in some place. Remove all "
 "bobs, triggers and events that depend on this tribe and try again."
 msgstr ""
+"Kan inte ändra spelarstam. Den refereras någonstans. Ta bort alla bobs, "
+"utlösare och händelser som beror på denna stam och försök igen."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"
@@ -5060,7 +5254,7 @@ msgstr "Ändra höjd"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 msgid "Noise height"
-msgstr ""
+msgstr "Brushöjd"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 msgid "Immovable"
@@ -5068,7 +5262,7 @@ msgstr "Fast föremål"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Bob"
-msgstr ""
+msgstr "Bob"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Resource"
@@ -5095,7 +5289,7 @@ msgstr "Sätt värde: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:46
 msgid "Bobs Menu"
-msgstr ""
+msgstr "Bobsmeny"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs Menu"
@@ -5191,6 +5385,8 @@ msgstr "Område: "
 msgid ""
 "There is another event registered with the name \"%s\". Choose another name."
 msgstr ""
+"Det finns en annan händelse registrerad med namnet \"%s\". Välj ett annat "
+"namn."
 
 #: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:286
 #: ../../src/editor/ui_menus/event_expire_message_option_menu.cc:65
@@ -5210,7 +5406,7 @@ msgstr "Namn används"
 
 #: ../../src/editor/ui_menus/event_expire_message_option_menu.cc:37
 msgid "Expire Message Event Options"
-msgstr ""
+msgstr "Alternativ för meddelanteutgång"
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:47
 msgid "Message Box Event Options"
@@ -5267,39 +5463,39 @@ msgstr "Alternativ för Flytta anblick-händelse"
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:64
 #, c-format
 msgid "%s Building Types Event Options"
-msgstr ""
+msgstr "Alternativ för %s-byggnadstyphändelser"
 
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:225
 #, c-format
 msgid "No building types are selected. Select at least one."
-msgstr ""
+msgstr "Inga byggnadstyper är valda. Välj minst en."
 
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:228
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:204
 msgid "Nothing selected"
-msgstr ""
+msgstr "Ingenting markerat"
 
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:64
 #, c-format
 msgid "%s Worker Types Event Options"
-msgstr ""
+msgstr "Alternativ för %s'arbetartyphändelser"
 
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:201
 #, c-format
 msgid "No worker types are selected. Select at least one."
-msgstr ""
+msgstr "Inga arbetartyper är markerade. Markera minst en."
 
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.cc:50
 msgid "Set Player's Flag Style Event Options"
-msgstr ""
+msgstr "Ställ in alternativ för spelarens flaggutseendehändelser"
 
 #: ../../src/editor/ui_menus/event_set_player_frontier_style_option_menu.cc:51
 msgid "Set Player's Frontier Style Event Options"
-msgstr ""
+msgstr "Ställ in alternativ för spelarens gränsutseendehändelser"
 
 #: ../../src/editor/ui_menus/event_set_timer_option_menu.cc:37
 msgid "Set Timer Event Options"
-msgstr ""
+msgstr "Ställ in alternativ för timerhändelser"
 
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:49
 msgid "Unhide Area Event Options"
@@ -5347,21 +5543,23 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/trigger_message_is_read_or_archived_option_menu.cc:52
 msgid "Trigger Message is Read or Archived Options"
-msgstr ""
+msgstr "Alternativ för utlösare för läst eller arkiverat meddelande."
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:42
 msgid "Trigger Time Options"
-msgstr ""
+msgstr "Alternativ för utlösartid"
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:50
 msgid ""
 "Trigger at an absolute time from the beginning of the game (otherwise, only "
 "trigger if activated by an event set timer)."
 msgstr ""
+"Utlös vid en ablosut tid från början av splete (utlös annars bara om "
+"aktiverat av en händelsestyrd timer)."
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:52
 msgid "Trigger at absolute time"
-msgstr ""
+msgstr "Utlös vid en absolut tidpunkt"
 
 #: ../../src/ai/defaultai.h:79
 msgid "Aggressive"
@@ -5369,11 +5567,11 @@ msgstr "Stridslysten"
 
 #: ../../src/ai/defaultai.h:88
 msgid "Normal"
-msgstr ""
+msgstr "Normalt"
 
 #: ../../src/ai/defaultai.h:97
 msgid "Defensive"
-msgstr ""
+msgstr "Defensiv"
 
 #: ../../src/logic/map.h:172
 msgid "no description defined"
@@ -5385,74 +5583,74 @@ msgstr "ingen beskr"
 
 #: ../../src/wui/game_message_menu.h:62
 msgid "Select"
-msgstr ""
+msgstr "Välj"
 
 #: ../../src/wui/game_message_menu.h:63
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../src/wui/game_message_menu.h:64
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: ../../src/wui/game_message_menu.h:65
 msgid "Time sent"
-msgstr ""
+msgstr "Tid skickad"
 
 #: ../../src/wui/game_message_menu.h:76
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:99
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:99
 msgid "Clear"
-msgstr ""
+msgstr "Rensa"
 
 #: ../../src/wui/game_message_menu.h:76
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:99
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:99
 msgid "Clear selection"
-msgstr ""
+msgstr "Töm markering"
 
 #: ../../src/wui/game_message_menu.h:97
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:120
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:120
 msgid "Invert"
-msgstr ""
+msgstr "Invertera"
 
 #: ../../src/wui/game_message_menu.h:97
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:120
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:120
 msgid "Invert selection"
-msgstr ""
+msgstr "Invertera markering"
 
 #: ../../src/wui/game_message_menu.h:118 ../../src/wui/game_message_menu.h:151
 msgid "Archive selected messages"
-msgstr ""
+msgstr "Arkivera markerade meddelanden"
 
 #: ../../src/wui/game_message_menu.h:129 ../../src/wui/game_message_menu.h:152
 msgid "Show Archive"
-msgstr ""
+msgstr "Visa arkiv"
 
 #: ../../src/wui/game_message_menu.h:138
 msgid "Message Menu: Archive"
-msgstr ""
+msgstr "Meddelandemeny: Arkiv"
 
 #: ../../src/wui/game_message_menu.h:142
 msgid "Restore selected messages"
-msgstr ""
+msgstr "Återskapa valda meddelanden"
 
 #: ../../src/wui/game_message_menu.h:143
 msgid "Show Inbox"
-msgstr ""
+msgstr "Visa inkorg"
 
 #: ../../src/wui/game_message_menu.h:165
 msgid "center main mapview on location"
-msgstr ""
+msgstr "centrera huvudkartvy på plats"
 
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:72
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:72
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.h:66
 #: ../../src/editor/ui_menus/event_set_player_frontier_style_option_menu.h:66
 msgid "Player:"
-msgstr ""
+msgstr "Spelare:"
 
 #~ msgid ""
 #~ "expected [\"on failure\" {\"fail\"|\"repeat\"|\"ignore\"}] or end of input "

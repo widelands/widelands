@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-17 13:04+0000\n"
-"Last-Translator: DaDosDude <Unknown>\n"
+"PO-Revision-Date: 2010-02-23 17:40+0000\n"
+"Last-Translator: Bart Hoogland <barthoogland@gmail.com>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-18 04:45+0000\n"
+"X-Launchpad-Export-Date: 2010-02-24 04:54+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -976,7 +976,7 @@ msgstr "onbekend/niet ondersteinde versie %u"
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
 msgid "call economy balance: %s"
-msgstr ""
+msgstr "roep economie evenwicht: %s"
 
 #: ../../src/economy/economy_data_packet.cc:62
 #: ../../src/economy/economy_data_packet.cc:82
@@ -987,7 +987,7 @@ msgstr "dubbele invoer voor %s"
 #: ../../src/economy/economy_data_packet.cc:95
 #, c-format
 msgid "target quantities: %s"
-msgstr ""
+msgstr "doel hoeveelheden: %s"
 
 #: ../../src/economy/economy_data_packet.cc:99
 #, c-format
@@ -1110,6 +1110,7 @@ msgstr "Laat toe"
 #, c-format
 msgid "sufficient_suitability (%u) is smaller than required_suitability (%u)"
 msgstr ""
+"voldoende_geschiktheid (%u) is kleiner dan verplichte_geschiktheid (%u)"
 
 #: ../../src/events/event_building.cc:72 ../../src/events/event_building.cc:81
 #: ../../src/events/event_message.cc:90 ../../src/graphic/animation.cc:196
@@ -1177,17 +1178,17 @@ msgstr "kan geen %u %s (alleen %u)"
 #: ../../src/events/event_building.cc:316
 #, c-format
 msgid "%u soldiers but only %u allowed"
-msgstr ""
+msgstr "%u soldaten maar enkel %u toegestaan"
 
 #: ../../src/events/event_building.cc:320
 #, c-format
 msgid "(soldiercontrol): %s"
-msgstr ""
+msgstr "(soldaatbediening): %s"
 
 #: ../../src/events/event_building.cc:323
 #, c-format
 msgid "(productionsite): %s"
-msgstr ""
+msgstr "(productieterrein): %s"
 
 #: ../../src/events/event_building.cc:330
 #: ../../src/trigger/trigger_building.cc:58
@@ -1201,6 +1202,8 @@ msgid ""
 "failed to place a %s near (%i, %i) (distance between %u and %u) for player "
 "%u (suitability required is %u but found only %u)"
 msgstr ""
+"mislukt om een %s te plaatsen vlakbij (%i, %i) (afstand tussen %u en %u) "
+"voor speler %u (geschiktheid vereist is %u maar enkel %u gevonden)"
 
 #: ../../src/events/event_expire_message.cc:48
 #: ../../src/logic/playercommand.cc:128
@@ -1213,7 +1216,7 @@ msgstr "speler %u bestaat nog niet"
 #: ../../src/events/event_expire_message.cc:55
 #, c-format
 msgid "player %u's message %u does not exist"
-msgstr ""
+msgstr "speler %u's bericht %u bestaat niet"
 
 #: ../../src/events/event_expire_message.cc:61
 #, c-format
@@ -1221,6 +1224,8 @@ msgid ""
 "player %u's message %u has duration %u; (it must have infinite duration, so "
 "that only this event can exipre it)"
 msgstr ""
+"speler %u's bericht %u heeft een duur van %u; (het moet een oneindige "
+"looptijd zijn, zodat alleen dit evenement het kan laten vervallen)"
 
 #: ../../src/events/event_expire_message.cc:73
 #, c-format
@@ -1228,6 +1233,9 @@ msgid ""
 "refers to the same message id (player %u's %u) as another expire message "
 "event (\"%s\"); (only one event can expire each message)"
 msgstr ""
+"verwijst naar hetzelfde bericht id (speler %u's %u) als een ander vervallen "
+"bericht evenement (\"%s\"); (slechts één evenement kan  elk bericht laten "
+"vervallen)"
 
 #: ../../src/events/event_expire_message.cc:79
 #: ../../src/events/event_message.cc:111
