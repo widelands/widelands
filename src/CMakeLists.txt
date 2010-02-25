@@ -22,6 +22,7 @@ endforeach (sourcefile ${WL_SRCS_ALL})
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
 set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/*_codecheck_stamp_)
 
+if (${CMAKE_BUILD_TYPE} STREQUAL Debug)
 foreach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
   string(REGEX REPLACE "\\.|\\/" "_" sourcenoslash ${sourcefile})
   get_filename_component(sourcename ${sourcefile} NAME) 
@@ -35,6 +36,7 @@ foreach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
     )
     add_custom_target(${stamp} ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp})
 endforeach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
+endif (${CMAKE_BUILD_TYPE} STREQUAL Debug)
 
 IF (MINGW)
   # resource compilation for MinGW
