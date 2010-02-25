@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-23 15:15+0000\n"
-"Last-Translator: NonoSan <fougey.a@orange.fr>\n"
+"PO-Revision-Date: 2010-02-24 07:50+0000\n"
+"Last-Translator: Immunoman <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-02-24 04:54+0000\n"
+"X-Launchpad-Export-Date: 2010-02-25 04:48+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -3253,22 +3253,22 @@ msgstr ""
 #: ../../src/trigger/trigger_military_influence.cc:47
 #, c-format
 msgid "(military influence): %s"
-msgstr ""
+msgstr "(influence militaire): %s"
 
 #: ../../src/trigger/trigger_ownership.cc:45
 #, c-format
 msgid "(ownership): %s"
-msgstr ""
+msgstr "(propriétaire): %s"
 
 #: ../../src/trigger/trigger_time.cc:46
 #, c-format
 msgid "(time): %s"
-msgstr ""
+msgstr "(temps): %s"
 
 #: ../../src/trigger/trigger_vision.cc:52
 #, c-format
 msgid "(vision): %s"
-msgstr ""
+msgstr "(vision): %s"
 
 #: ../../src/ui_basic/messagebox.cc:89
 #: ../../src/ui_fsmenu/campaign_select.cc:74
@@ -3289,41 +3289,41 @@ msgstr "Préparation..."
 
 #: ../../src/ui_basic/spinbox.cc:124
 msgid "Increase the value"
-msgstr ""
+msgstr "Augmenter la valeur"
 
 #: ../../src/ui_basic/spinbox.cc:132
 msgid "Decrease the value"
-msgstr ""
+msgstr "Diminuer la valeur"
 
 #: ../../src/ui_basic/spinbox.cc:143
 msgid "Increase the value by 10"
-msgstr ""
+msgstr "Augmenter la valeur par 10"
 
 #: ../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value by 10"
-msgstr ""
+msgstr "Diminuer la valeur par 10"
 
 #: ../../src/ui_basic/timeedit.cc:136 ../../src/ui_basic/timeedit.cc:137
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: ../../src/ui_basic/timeedit.cc:138
 msgid "."
-msgstr ""
+msgstr "."
 
 #: ../../src/ui_basic/timeedit.cc:151 ../../src/ui_basic/timeedit.cc:152
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #: ../../src/ui_basic/timeedit.cc:153 ../../src/ui_basic/timeedit.cc:154
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: ../../src/ui_basic/timeedit.cc:155 ../../src/ui_basic/timeedit.cc:156
 #: ../../src/ui_basic/timeedit.cc:157 ../../src/ui_basic/timeedit.cc:158
 #: ../../src/ui_basic/timeedit.cc:159
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:52
 msgid "Select a campaign"
@@ -3416,7 +3416,7 @@ msgstr "Auteur :"
 #: ../../src/ui_fsmenu/campaign_select.cc:357
 #, c-format
 msgid "Invalid path to file in cconfig: %s"
-msgstr ""
+msgstr "Chemin du fichier invalide dans cconfig : %s"
 
 #: ../../src/ui_fsmenu/editor.cc:35
 msgid "Editor Menu"
@@ -3468,7 +3468,7 @@ msgstr "Fermer"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
-msgstr ""
+msgstr "Appuyez sur échap ou cliquez pour continuer ..."
 
 #: ../../src/ui_fsmenu/launchgame.cc:58
 msgid "Select map"
@@ -3488,35 +3488,35 @@ msgstr "Lancer le jeu"
 
 #: ../../src/ui_fsmenu/launchgame.cc:97
 msgid "Player's name"
-msgstr ""
+msgstr "Nom du joueur"
 
 #: ../../src/ui_fsmenu/launchgame.cc:101
 msgid "Player's type"
-msgstr ""
+msgstr "Type du joueur"
 
 #: ../../src/ui_fsmenu/launchgame.cc:105
 msgid "Player's tribe"
-msgstr ""
+msgstr "Tribu du joueur"
 
 #: ../../src/ui_fsmenu/launchgame.cc:109
 msgid "Start type"
-msgstr ""
+msgstr "Type de point de départ"
 
 #: ../../src/ui_fsmenu/launchgame.cc:145
 msgid "Switch to position"
-msgstr ""
+msgstr "Échange de position"
 
 #: ../../src/ui_fsmenu/launchgame.cc:159
 msgid "Lobby:"
-msgstr ""
+msgstr "Couloir :"
 
 #: ../../src/ui_fsmenu/launchgame.cc:161
 msgid "Ready"
-msgstr ""
+msgstr "Prêt"
 
 #: ../../src/ui_fsmenu/launchgame.cc:241
 msgid "File not found"
-msgstr ""
+msgstr "Fichier introuvable"
 
 #: ../../src/ui_fsmenu/launchgame.cc:243
 #, c-format
@@ -3528,6 +3528,13 @@ msgid ""
 "you do not own. Normally such a file should be send from the host to you, "
 "but perhaps the transfer was not yet finnished!?!"
 msgstr ""
+"Widelands a essayé de démarrer une partie avec un fichier qui n'a pas été "
+"trouvé à l'endroit prévu.\n"
+"Le fichier était : %s\n"
+"Si cela se produit pour une partie en réseau, l'hôte peuta voir sélectionné "
+"un fichier que vous ne possédez pas. En temps normal, le fichier concerné "
+"devrait vous être envoyé par l'hôte, mais peut-être que le transfert n'est "
+"pas encore fini."
 
 #: ../../src/ui_fsmenu/launchgame.cc:269
 msgid "(no map)"
@@ -3535,13 +3542,16 @@ msgstr "(pas de carte)"
 
 #: ../../src/ui_fsmenu/launchgame.cc:310
 msgid "WARNING!!! Host selected the file \""
-msgstr ""
+msgstr "ATTENTION !!! L'hôte a sélectionné le fichier \""
 
 #: ../../src/ui_fsmenu/launchgame.cc:313
 msgid ""
 "\" for this game, which you do not own. If the transfer of that file does "
 "not start automatically, please add it manually to your filesystem."
 msgstr ""
+"\" pour cette partie, or vous ne le possédez pas. Si le transfert de "
+"fichiers ne démarre pas automatiquement, veuillez l'ajouter manuellement à "
+"votre système."
 
 #: ../../src/ui_fsmenu/launchgame.cc:332
 msgid "Original:"
@@ -3577,11 +3587,11 @@ msgstr "Temps de jeu :"
 
 #: ../../src/ui_fsmenu/loadgame.cc:111
 msgid "Delete file"
-msgstr ""
+msgstr "Supprimer le fichier"
 
 #: ../../src/ui_fsmenu/loadgame.cc:112
 msgid "Do you really want to delete "
-msgstr ""
+msgstr "Vouslez-vous vraiment supprimer "
 
 #: ../../src/ui_fsmenu/loadreplay.cc:63
 msgid "Choose a replay!"
@@ -3629,7 +3639,7 @@ msgstr "Version "
 
 #: ../../src/ui_fsmenu/main.cc:103
 msgid "by the Widelands Development Team"
-msgstr ""
+msgstr "par l'équipe de développement de Widelands"
 
 #: ../../src/ui_fsmenu/mapselect.cc:57
 msgid "Load Map as scenario: "
@@ -3641,19 +3651,19 @@ msgstr "(répertoire)"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:43
 msgid "Choose game type"
-msgstr ""
+msgstr "Choisissez le type de partie"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:51
 msgid "Internet game"
-msgstr ""
+msgstr "Partie en ligne"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:58
 msgid "LAN / Direct IP"
-msgstr ""
+msgstr "Partie en LAN / Direct IP"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:80
 msgid "Show login dialog"
-msgstr ""
+msgstr "Montrer la boite d'identification"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:107
 #: ../../src/ui_fsmenu/netsetup_lan.cc:109 ../../src/wui/login_box.cc:78
@@ -3666,19 +3676,19 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:54
 msgid "Users online:"
-msgstr ""
+msgstr "Utilisateurs en ligne :"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:58
 msgid "List of games:"
-msgstr ""
+msgstr "Liste des parties :"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:62
 msgid "Name of your server:"
-msgstr ""
+msgstr "Nom de votre server :"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:66
 msgid "Maximum of players:"
-msgstr ""
+msgstr "Nombre de joueur max :"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:80
 #: ../../src/ui_fsmenu/netsetup_lan.cc:62
@@ -3687,15 +3697,15 @@ msgstr "Rejoindre cette partie"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:87
 msgid "Open a new game"
-msgstr ""
+msgstr "Créer une nouvelle partie"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:144
 msgid "Points"
-msgstr ""
+msgstr "Points"
 
 #: ../../src/ui_fsmenu/netsetup_ggz.cc:145
 msgid "Server"
-msgstr ""
+msgstr "Serveur"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:42
 msgid "Begin Network Game"
@@ -3744,7 +3754,7 @@ msgstr "Fermé"
 
 #: ../../src/ui_fsmenu/options.cc:57 ../../src/ui_fsmenu/options.cc:382
 msgid "Advanced Options"
-msgstr ""
+msgstr "Options avancées"
 
 #: ../../src/ui_fsmenu/options.cc:64 ../../src/ui_fsmenu/options.cc:350
 #: ../../src/wui/login_box.cc:75
@@ -3782,7 +3792,7 @@ msgstr "min."
 
 #: ../../src/ui_fsmenu/options.cc:89
 msgid "days"
-msgstr ""
+msgstr "jours"
 
 #: ../../src/ui_fsmenu/options.cc:96
 msgid "General Options"
@@ -3846,11 +3856,11 @@ msgstr "Sauvegarde automatique toutes les"
 
 #: ../../src/ui_fsmenu/options.cc:194
 msgid "Remove Replays older than:"
-msgstr ""
+msgstr "Enlever les replays plus vieux que :"
 
 #: ../../src/ui_fsmenu/options.cc:198
 msgid "Off"
-msgstr ""
+msgstr "Arrêt"
 
 #: ../../src/ui_fsmenu/options.cc:285
 msgid "System default language"
@@ -3858,39 +3868,41 @@ msgstr "Langue par défaut du système"
 
 #: ../../src/ui_fsmenu/options.cc:364
 msgid "x"
-msgstr ""
+msgstr "x"
 
 #: ../../src/ui_fsmenu/options.cc:369 ../../src/ui_fsmenu/options.cc:374
 msgid "px."
-msgstr ""
+msgstr "px."
 
 #: ../../src/ui_fsmenu/options.cc:393
 msgid "Main menu font:"
-msgstr ""
+msgstr "Police de caractères du menu :"
 
 #: ../../src/ui_fsmenu/options.cc:400
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr ""
+"Ne compactez pas les fichiers de données de Widelands au format .zip "
+"(cartes, replays et sauvegardes)"
 
 #: ../../src/ui_fsmenu/options.cc:405
 msgid "Speed of a new game:"
-msgstr ""
+msgstr "Vitesse du la nouvelle partie :"
 
 #: ../../src/ui_fsmenu/options.cc:409
 msgid "Distance for windows to snap to other panels:"
-msgstr ""
+msgstr "Distance pour que la fenêtre se colle à d'autres"
 
 #: ../../src/ui_fsmenu/options.cc:413
 msgid "Distance for windows to snap to borders:"
-msgstr ""
+msgstr "Distance pour que la fenêtre se colle au bord"
 
 #: ../../src/ui_fsmenu/options.cc:418
 msgid "Graphics experimental improvements."
-msgstr ""
+msgstr "Améliorations graphiques expérimentales"
 
 #: ../../src/ui_fsmenu/options.cc:424
 msgid "Graphics double buffering."
-msgstr ""
+msgstr "Double la taille du tampon graphique"
 
 #: ../../src/ui_fsmenu/options.cc:431
 msgid "Remove Syncstream dumps on startup"
@@ -3898,7 +3910,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:451
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: ../../src/ui_fsmenu/options.cc:462
 msgid "FreeSerif (Default)"
@@ -3906,7 +3918,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:85
 msgid "Initialization"
-msgstr ""
+msgstr "Initialisation"
 
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:152
 msgid "Computer"
@@ -3914,7 +3926,7 @@ msgstr "Ordinateur"
 
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:154
 msgid "AI: "
-msgstr ""
+msgstr "IA : "
 
 #: ../../src/ui_fsmenu/playerdescrgroup.cc:159
 msgid "Human"
@@ -3938,7 +3950,7 @@ msgstr "Charger une partie"
 
 #: ../../src/wui/attack_box.cc:159
 msgid "Soldiers:"
-msgstr ""
+msgstr "Soldats :"
 
 #: ../../src/wui/attack_box.cc:165
 msgid "Send less soldiers"
@@ -3946,7 +3958,7 @@ msgstr "Envoyer moins de soldats"
 
 #: ../../src/wui/attack_box.cc:182
 msgid "Number of soldiers"
-msgstr ""
+msgstr "Nombre de soldats"
 
 #: ../../src/wui/attack_box.cc:192
 msgid "Send more soldiers"
@@ -3954,15 +3966,15 @@ msgstr "Envoyer plus de soldats"
 
 #: ../../src/wui/attack_box.cc:199 ../../src/wui/military_box.cc:130
 msgid "Retreat: Never!"
-msgstr ""
+msgstr "Retraite : jamais !"
 
 #: ../../src/wui/attack_box.cc:218 ../../src/wui/military_box.cc:149
 msgid "Supported damage before retreat"
-msgstr ""
+msgstr "Dommages encaissés avant la retraite"
 
 #: ../../src/wui/attack_box.cc:220 ../../src/wui/military_box.cc:151
 msgid "Once injured"
-msgstr ""
+msgstr "Déja blessé"
 
 #: ../../src/wui/building_statistics_menu.cc:76
 #: ../../src/wui/game_main_menu.cc:61
@@ -4060,11 +4072,11 @@ msgstr "Essaie de devenir : "
 
 #: ../../src/wui/building_ui.cc:1216
 msgid "(vacant)"
-msgstr ""
+msgstr "(vacant)"
 
 #: ../../src/wui/building_ui.cc:1216
 msgid "(coming)"
-msgstr ""
+msgstr "(bientôt)"
 
 #: ../../src/wui/building_ui.cc:1375
 msgid "Highest priority"
@@ -4109,7 +4121,7 @@ msgstr "Niveau"
 #: ../../src/wui/building_ui.cc:1648
 #, c-format
 msgid "Capacity: %2u"
-msgstr ""
+msgstr "Capacité : %2u"
 
 #: ../../src/wui/building_ui.cc:1793
 msgid "xx"
@@ -4153,7 +4165,7 @@ msgstr "Supprimer ce drapeau"
 
 #: ../../src/wui/fieldaction.cc:403
 msgid "Configure economy"
-msgstr ""
+msgstr "Configuration de l'économie"
 
 #: ../../src/wui/fieldaction.cc:409
 msgid "Send geologist to explore site"
@@ -4193,7 +4205,7 @@ msgstr "Voir"
 
 #: ../../src/wui/fieldaction.cc:487
 msgid "Military settings"
-msgstr ""
+msgstr "Options miliatires"
 
 #: ../../src/wui/fieldaction.cc:512
 msgid "Start attack"
@@ -4230,6 +4242,9 @@ msgid ""
 "   height: %u\n"
 "   owner: %u\n"
 msgstr ""
+"(%i, %i)\n"
+"   hauteur : %u\n"
+"   propriétaire : %u\n"
 
 #: ../../src/wui/game_main_menu.cc:38
 #: ../../src/editor/ui_menus/editor_main_menu.cc:49
@@ -4268,7 +4283,7 @@ msgstr "Temps de jeu : "
 #: ../../src/wui/game_main_menu_save_game.cc:115
 #, c-format
 msgid "%02ud%02uh%02u'%02u\"%03u"
-msgstr ""
+msgstr "%02ud%02uh%02u'%02u\"%03u"
 
 #: ../../src/wui/game_main_menu_save_game.cc:196
 msgid ""
@@ -4307,11 +4322,11 @@ msgstr "Menu Objectifs"
 
 #: ../../src/wui/game_objectives_menu.cc:68
 msgid "Claim Victory"
-msgstr ""
+msgstr "Revendiquer la victoire"
 
 #: ../../src/wui/game_objectives_menu.cc:76
 msgid "Restart Mission"
-msgstr ""
+msgstr "Recommencer la mission"
 
 #: ../../src/wui/game_options_menu.cc:52
 msgid "README"
@@ -4478,7 +4493,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:28
 msgid "Metaserver login"
-msgstr ""
+msgstr "Identification sur un méta-serveur"
 
 #: ../../src/wui/login_box.cc:32
 msgid "Nickname:"
@@ -4554,7 +4569,7 @@ msgstr "Routes"
 
 #: ../../src/wui/minimap.cc:178
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 #: ../../src/wui/stock_menu.cc:70
 msgid "Show wares"
@@ -4570,15 +4585,15 @@ msgstr "Options concernant l'économie"
 
 #: ../../src/wui/transport_ui.cc:149 ../../src/wui/transport_ui.cc:341
 msgid "Decrease permanent target quantity"
-msgstr ""
+msgstr "Diminue la quantité ciblée en permanence"
 
 #: ../../src/wui/transport_ui.cc:180 ../../src/wui/transport_ui.cc:372
 msgid "Increase permanent target quantity"
-msgstr ""
+msgstr "Augmente la quantité ciblée en permanence"
 
 #: ../../src/wui/transport_ui.cc:209 ../../src/wui/transport_ui.cc:401
 msgid "Decrease temporary target quantity"
-msgstr ""
+msgstr "Diminue temporairement la quantité ciblée"
 
 #: ../../src/wui/transport_ui.cc:240 ../../src/wui/transport_ui.cc:432
 msgid "Increase temporary target quantity"
@@ -5532,6 +5547,8 @@ msgid ""
 "Trigger at an absolute time from the beginning of the game (otherwise, only "
 "trigger if activated by an event set timer)."
 msgstr ""
+"Se déclenche après un temps compté à partir du début de la partie (sinon, ne "
+"se déclenche qu'après activation par un évènement chronométré)"
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:52
 msgid "Trigger at absolute time"

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-23 17:41+0000\n"
+"PO-Revision-Date: 2010-02-24 18:50+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-02-24 04:54+0000\n"
+"X-Launchpad-Export-Date: 2010-02-25 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/logic/worker.cc:1649
@@ -1013,7 +1013,7 @@ msgstr "gospodarka: %s"
 #: ../../src/economy/wares_queue.cc:256
 #, c-format
 msgid "waresqueue: %s"
-msgstr ""
+msgstr "kolejkatowarów: %s"
 
 #: ../../src/editor/editorinteractive.cc:64
 msgid "Menu"
@@ -1213,6 +1213,8 @@ msgid ""
 "failed to place a %s near (%i, %i) (distance between %u and %u) for player "
 "%u (suitability required is %u but found only %u)"
 msgstr ""
+"nie udało się umieścić %s blisko (%i, %i) (odległość między %u i %u) dla "
+"gracza %u (wymagana przydatność to %u ale znaleziono tylko %u)"
 
 #: ../../src/events/event_expire_message.cc:48
 #: ../../src/logic/playercommand.cc:128
@@ -1242,12 +1244,15 @@ msgid ""
 "refers to the same message id (player %u's %u) as another expire message "
 "event (\"%s\"); (only one event can expire each message)"
 msgstr ""
+"odnosi się do tego samego id wiadomości (gracza %u %u) jako inne zdarzenie "
+"wygaśnięcia wiadomości (\"%s\"); (tylko jedno zdarzenie może wygasić jedną "
+"wiadomość)"
 
 #: ../../src/events/event_expire_message.cc:79
 #: ../../src/events/event_message.cc:111
 #, c-format
 msgid "(expire message): %s"
-msgstr ""
+msgstr "(wiadomość wygaśnięcia): %s"
 
 #: ../../src/events/event_factory.cc:61
 msgid "Allow worker types"
@@ -2157,6 +2162,8 @@ msgid ""
 "wrong order of ware types within group: ware type %s appears after ware type "
 "%s (fix order!)"
 msgstr ""
+"zła kolejność typów towarów w grupie: towar %s pojawia się po towarze %s (do "
+"poprawienia!)"
 
 #: ../../src/logic/production_program.cc:99
 #: ../../src/logic/production_program.cc:834

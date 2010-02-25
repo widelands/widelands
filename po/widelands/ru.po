@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-23 18:14+0000\n"
+"PO-Revision-Date: 2010-02-24 21:49+0000\n"
 "Last-Translator: Victor Birkmanis <Unknown>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-02-24 04:54+0000\n"
+"X-Launchpad-Export-Date: 2010-02-25 04:49+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -3031,7 +3031,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1830
 #, c-format
 msgid "%s has left the game (%s)"
-msgstr ""
+msgstr "%s вышел из игры (%s)"
 
 #: ../../src/network/network_ggz.cc:281
 msgid "Closed the connection to the metaserver."
@@ -3201,62 +3201,62 @@ msgstr "OK"
 
 #: ../../src/ui_basic/progresswindow.cc:46
 msgid "Preparing..."
-msgstr ""
+msgstr "Подготовка..."
 
 #: ../../src/ui_basic/spinbox.cc:124
 msgid "Increase the value"
-msgstr ""
+msgstr "Увеличить значение"
 
 #: ../../src/ui_basic/spinbox.cc:132
 msgid "Decrease the value"
-msgstr ""
+msgstr "Уменьшить значение"
 
 #: ../../src/ui_basic/spinbox.cc:143
 msgid "Increase the value by 10"
-msgstr ""
+msgstr "Увеличить значение на 10"
 
 #: ../../src/ui_basic/spinbox.cc:151
 msgid "Decrease the value by 10"
-msgstr ""
+msgstr "Уменьшить значение на 10"
 
 #: ../../src/ui_basic/timeedit.cc:136 ../../src/ui_basic/timeedit.cc:137
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: ../../src/ui_basic/timeedit.cc:138
 msgid "."
-msgstr ""
+msgstr "."
 
 #: ../../src/ui_basic/timeedit.cc:151 ../../src/ui_basic/timeedit.cc:152
 msgid "h"
-msgstr ""
+msgstr "ч"
 
 #: ../../src/ui_basic/timeedit.cc:153 ../../src/ui_basic/timeedit.cc:154
 msgid "m"
-msgstr ""
+msgstr "м"
 
 #: ../../src/ui_basic/timeedit.cc:155 ../../src/ui_basic/timeedit.cc:156
 #: ../../src/ui_basic/timeedit.cc:157 ../../src/ui_basic/timeedit.cc:158
 #: ../../src/ui_basic/timeedit.cc:159
 msgid "s"
-msgstr ""
+msgstr "с"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:52
 msgid "Select a campaign"
-msgstr ""
+msgstr "Выберите кампанию"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:54
 msgid "Campaign:"
-msgstr ""
+msgstr "Кампания:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:58
 msgid "Difficulty:"
-msgstr ""
+msgstr "Трудность:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:62
 #: ../../src/ui_fsmenu/campaign_select.cc:272
 msgid "Description:"
-msgstr ""
+msgstr "Описание:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:81
 #: ../../src/ui_fsmenu/campaign_select.cc:290 ../../src/ui_fsmenu/editor.cc:57
@@ -3283,15 +3283,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:124
 msgid "Easy living"
-msgstr ""
+msgstr "Легкая жизнь"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:125
 msgid "Be vigilant"
-msgstr ""
+msgstr "Будьте бдительны"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:126
 msgid "Hard struggle"
-msgstr ""
+msgstr "Упорная борьба"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:170
 msgid "[Invalid entry]"
@@ -3384,7 +3384,7 @@ msgstr "Закрыть"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
-msgstr ""
+msgstr "Нажмите ESC или щелкните мышью для продолжения..."
 
 #: ../../src/ui_fsmenu/launchgame.cc:58
 msgid "Select map"
@@ -3461,7 +3461,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchgame.cc:332
 msgid "Original:"
-msgstr ""
+msgstr "Оригинал:"
 
 #: ../../src/ui_fsmenu/launchgame.cc:435
 msgid "(Save): "
@@ -3545,7 +3545,7 @@ msgstr "Версия "
 
 #: ../../src/ui_fsmenu/main.cc:103
 msgid "by the Widelands Development Team"
-msgstr ""
+msgstr "Widelands Development Team"
 
 #: ../../src/ui_fsmenu/mapselect.cc:57
 msgid "Load Map as scenario: "
@@ -4434,19 +4434,19 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:97
 msgid "Space in Nickname"
-msgstr ""
+msgstr "Пробел в имени"
 
 #: ../../src/wui/login_box.cc:98
 msgid "Sorry, but spaces are not allowed in nicknames!"
-msgstr ""
+msgstr "Извините, но пробелы в имени не разрешены!"
 
 #: ../../src/wui/login_box.cc:105
 msgid "Empty Password"
-msgstr ""
+msgstr "Пустой пароль"
 
 #: ../../src/wui/login_box.cc:105
 msgid "Please enter a password!"
-msgstr ""
+msgstr "Пожалуйста, введите пароль!"
 
 #: ../../src/wui/minimap.cc:143
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
@@ -4589,6 +4589,9 @@ msgid ""
 " Size: %ix%i\n"
 " Author: "
 msgstr ""
+"\n"
+" Размер: %ix%i\n"
+" Автор: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:96
 #: ../../src/editor/tools/editor_info_tool.cc:107
@@ -4596,6 +4599,8 @@ msgid ""
 "\n"
 " Descr: "
 msgstr ""
+"\n"
+" Описание: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:100
 #, c-format
@@ -4603,6 +4608,8 @@ msgid ""
 "\n"
 " Number of Players: %i\n"
 msgstr ""
+"\n"
+" Количество игроков: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:103
 msgid ""
@@ -4615,6 +4622,8 @@ msgid ""
 "\n"
 " Author: "
 msgstr ""
+"\n"
+" Автор: "
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:54
 msgid "Event Menu"
@@ -4626,7 +4635,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:85
 msgid "Triggers"
-msgstr ""
+msgstr "Триггеры"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:103
 #: ../../src/editor/ui_menus/editor_event_menu.cc:136
@@ -4877,7 +4886,7 @@ msgstr "Кол-во Игроков:"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:372
 #, c-format
 msgid "Width: %u"
-msgstr ""
+msgstr "Ширина: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:86
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:161
@@ -4885,7 +4894,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:376
 #, c-format
 msgid "Height: %u"
-msgstr ""
+msgstr "Высота: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:125
 msgid "Create Map"
@@ -4898,22 +4907,22 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:161
 #, c-format
 msgid "Water: %u %%"
-msgstr ""
+msgstr "Вода: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:185
 #, c-format
 msgid "Land: %u %%"
-msgstr ""
+msgstr "Суша: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:209
 #, c-format
 msgid "Wasteland: %u %%"
-msgstr ""
+msgstr "Пустошь: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:219
 #, c-format
 msgid "Mountains: %u %%"
-msgstr ""
+msgstr "Горы: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:236
 msgid "Island mode:"
@@ -4921,7 +4930,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:243
 msgid "Resources:"
-msgstr ""
+msgstr "Ресурсы:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Low"
@@ -4937,31 +4946,31 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:302
 msgid "Generate Map"
-msgstr ""
+msgstr "Сгенерировать карту"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:380
 #, c-format
 msgid "Water: %i %%"
-msgstr ""
+msgstr "Вода: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:383
 #, c-format
 msgid "Land: %i %%"
-msgstr ""
+msgstr "Суша: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:386
 #, c-format
 msgid "Wasteland: %i %%"
-msgstr ""
+msgstr "Пустошь: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:389
 #, c-format
 msgid "Mountains: %i %%"
-msgstr ""
+msgstr "Горы: %i %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:428
 msgid "Generating random map..."
-msgstr ""
+msgstr "Создание случайной карты..."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:150
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
@@ -5100,7 +5109,7 @@ msgstr "Меню инструментов"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Change height"
-msgstr ""
+msgstr "Изменить высоту"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 msgid "Noise height"
@@ -5250,7 +5259,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/trigger_message_is_read_or_archived_option_menu.cc:82
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:93
 msgid "Name in use"
-msgstr ""
+msgstr "Имя уже используется"
 
 #: ../../src/editor/ui_menus/event_expire_message_option_menu.cc:37
 msgid "Expire Message Event Options"
@@ -5321,7 +5330,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.cc:228
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:204
 msgid "Nothing selected"
-msgstr ""
+msgstr "Ничего не выбрано"
 
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:64
 #, c-format
@@ -5352,27 +5361,27 @@ msgstr "Настройки события открытия области"
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:49
 #, c-format
 msgid "Player: %u"
-msgstr ""
+msgstr "Игрок: %u"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:58
 #, c-format
 msgid "How many: %u"
-msgstr ""
+msgstr "Сколько: %u"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:68
 #, c-format
 msgid "Building: %s"
-msgstr ""
+msgstr "Строение: %s"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:78
 #, c-format
 msgid "(X, Y): (%i, %i)"
-msgstr ""
+msgstr "(X, Y): (%i, %i)"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:87
 #, c-format
 msgid "Radius: %u"
-msgstr ""
+msgstr "Радиус: %u"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:99
 msgid "Building Trigger Options"
@@ -5427,7 +5436,7 @@ msgstr "нет описания"
 
 #: ../../src/wui/game_message_menu.h:62
 msgid "Select"
-msgstr ""
+msgstr "Выберите"
 
 #: ../../src/wui/game_message_menu.h:63
 msgid "Status"
