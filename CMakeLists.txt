@@ -11,6 +11,19 @@ project (widelands)
 
 cmake_minimum_required (VERSION 2.6)
 
+# TODO This will need to cleanup, see mailing list recommendations
+#set (WL_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
+#set (WL_INSTALL_BINDIR ${WL_INSTALL_PREFIX}/bin/)
+#set (WL_INSTALL_DATADIR ${WL_INSTALL_PREFIX}/share/widelands/)
+#set (WL_INSTALL_LOCALEDIR ${WL_INSTALL_DATADIR}/locale/)
+set (WL_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
+set (WL_INSTALL_BINDIR .)
+set (WL_INSTALL_DATADIR share/widelands)
+set (WL_INSTALL_LOCALEDIR ${WL_INSTALL_PREFIX}/${WL_INSTALL_DATADIR}/locale)
+
+# is this needed?
+set (WL_SOURCE_CHECKER ${CMAKE_CURRENT_SOURCE_DIR}/cmake/codecheck/CodeCheck.py)
+
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build-directory and source-directory are the same!")
 endif (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
@@ -22,7 +35,6 @@ if (NOT DEFINED CMAKE_BUILD_TYPE)
 endif (NOT DEFINED CMAKE_BUILD_TYPE)
 
 set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
-
 
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
 set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
@@ -63,18 +75,13 @@ if (NOT DEFINED WL_VERSION)
 endif (NOT DEFINED WL_VERSION)
 message ("Version of Widelands Build is ${WL_VERSION}(${CMAKE_BUILD_TYPE})")
 
-# TODO This will need to cleanup, see mailing list recommendations
-#set (WL_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
-#set (WL_INSTALL_BINDIR ${WL_INSTALL_PREFIX}/bin/)
-#set (WL_INSTALL_DATADIR ${WL_INSTALL_PREFIX}/share/widelands/)
-#set (WL_INSTALL_LOCALEDIR ${WL_INSTALL_DATADIR}/locale/)
-set (WL_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
-set (WL_INSTALL_BINDIR .)
-set (WL_INSTALL_DATADIR share/widelands)
-set (WL_INSTALL_LOCALEDIR ${WL_INSTALL_PREFIX}/${WL_INSTALL_DATADIR}/locale)
-
-# is this needed?
-set (WL_SOURCE_CHECKER ${CMAKE_CURRENT_SOURCE_DIR}/cmake/codecheck/CodeCheck.py)
+file (WRITE ${CMAKE_CURRENT_BINARY_DIR}/VERSION "${WL_VERSION}")
+install (
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/VERSION
+  DESTINATION ${WL_INSTALL_DATADIR}
+  CONFIGURATIONS Debug;Release
+  COMPONENT CoreVersionFile
+)
 
 include(CheckIncludeFile)
 
@@ -215,7 +222,7 @@ install(
 
 
 set (CPACK_PACKAGE_FILE_NAME widelands-${WL_VERSION})
-set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles CorePicsFiles)
+set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles CorePicsFiles CoreVersionFile)
 set (CPACK_GENERATOR TGZ)
 set (CPACK_SOURCE_GENERATOR TGZ)
 include(CPack)
