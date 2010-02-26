@@ -181,7 +181,7 @@ install(
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/locale)
 find_package (PythonInterp REQUIRED)
 add_custom_target (
-  lang
+  lang ALL
 #  COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/../locale
   COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
   COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
@@ -203,12 +203,12 @@ install(
 
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/pics)
 add_custom_target (
-  pics 
+  optimizepics 
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pics
   COMMAND cmake -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DWL_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}/pics -DWL_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/pics -P PicsFunctions.cmake
 )
 add_custom_target (
-  quickpics 
+  pics ALL 
   COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/pics ${CMAKE_CURRENT_BINARY_DIR}/pics
 )
 
@@ -218,6 +218,8 @@ install(
   DESTINATION share/widelands
   CONFIGURATIONS Debug;Release
   COMPONENT CorePicsFiles
+  PATTERN "*.svn*" EXCLUDE
+  PATTERN "SCons*" EXCLUDE
 )
 
 
