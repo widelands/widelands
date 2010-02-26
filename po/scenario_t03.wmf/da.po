@@ -6,19 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 18:40+0000\n"
-"PO-Revision-Date: 2010-02-10 20:32+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-02-15 16:30+0000\n"
+"PO-Revision-Date: 2010-02-26 01:32+0000\n"
+"Last-Translator: silentStatic <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-11 04:57+0000\n"
+"X-Launchpad-Export-Date: 2010-02-26 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/elemental:7
 msgid "Tutorial3 - This land is our land"
-msgstr ""
+msgstr "Prøvespil 3 - Dette land er vores land"
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
@@ -29,7 +29,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:316
 msgid "Thron looks worried..."
-msgstr ""
+msgstr "Thron ser bekymret ud..."
 
 #: ../../campaigns/t03.wmf/event:318
 msgid ""
@@ -62,7 +62,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:346
 msgid "Khantrukh nods"
-msgstr ""
+msgstr "Khantrukh nikker"
 
 #: ../../campaigns/t03.wmf/event:348
 msgid ""
@@ -92,7 +92,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:354
 msgid "The advisor"
-msgstr ""
+msgstr "Rådgiveren"
 
 #: ../../campaigns/t03.wmf/event:387
 msgid ""
@@ -118,7 +118,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:432
 msgid "Tracks"
-msgstr ""
+msgstr "Spor"
 
 #: ../../campaigns/t03.wmf/event:458
 msgid ""
@@ -143,7 +143,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:464
 msgid "Further explorations"
-msgstr ""
+msgstr "Yderligere udforskning"
 
 #: ../../campaigns/t03.wmf/event:519
 msgid ""

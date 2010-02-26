@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4410\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-22 10:47+0000\n"
-"Last-Translator: hulagutten <Unknown>\n"
+"PO-Revision-Date: 2010-02-25 12:58+0000\n"
+"Last-Translator: Ville Witt <ville.witt@gmail.com>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-23 05:01+0000\n"
+"X-Launchpad-Export-Date: 2010-02-26 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -158,6 +158,8 @@ msgid ""
 "                      testing)\n"
 "\n"
 msgstr ""
+" --double Start spillet to gange (for lokal netværks test)\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1299
 msgid " --help               Show this help\n"
@@ -253,13 +255,15 @@ msgstr "Forbereder spil"
 
 #: ../../src/wlapplication.cc:2000
 msgid "End of replay"
-msgstr ""
+msgstr "Visning er færdig"
 
 #: ../../src/wlapplication.cc:2002
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
 msgstr ""
+"Enden af genafspilningen er nået og derfor spillet er sat på pause. Du kan "
+"se vidre efter denne genafspilning og se videre hvis du lyster."
 
 #: ../../src/wlapplication.cc:2082 ../../src/logic/game.cc:352
 #: ../../src/logic/game.cc:391
@@ -666,7 +670,7 @@ msgstr "kræver"
 
 #: ../../src/writeHTML.cc:986
 msgid "site"
-msgstr ""
+msgstr "sted"
 
 #: ../../src/writeHTML.cc:988
 msgid "has"
@@ -763,7 +767,7 @@ msgstr "producer"
 
 #: ../../src/writeHTML.cc:1268
 msgid "recruit"
-msgstr ""
+msgstr "rekruter"
 
 #: ../../src/writeHTML.cc:1311
 msgid "Documentation for program command mine"
@@ -894,7 +898,7 @@ msgstr "vare_typer.da.DK.xhtml"
 #: ../../src/trigger/trigger_time.cc:44 ../../src/trigger/trigger_vision.cc:50
 #, c-format
 msgid "unknown/unhandled version %u"
-msgstr ""
+msgstr "ukendt/uunderstøttet version %u"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
@@ -905,27 +909,27 @@ msgstr ""
 #: ../../src/economy/economy_data_packet.cc:82
 #, c-format
 msgid "duplicated entry for %s"
-msgstr ""
+msgstr "duplikeret indlæg for %s"
 
 #: ../../src/economy/economy_data_packet.cc:95
 #, c-format
 msgid "target quantities: %s"
-msgstr ""
+msgstr "målsætning: %s"
 
 #: ../../src/economy/economy_data_packet.cc:99
 #, c-format
 msgid "unknown version %u"
-msgstr ""
+msgstr "ukendt version %u"
 
 #: ../../src/economy/economy_data_packet.cc:102
 #, c-format
 msgid "economy: %s"
-msgstr ""
+msgstr "økonomi: %s"
 
 #: ../../src/economy/wares_queue.cc:256
 #, c-format
 msgid "waresqueue: %s"
-msgstr ""
+msgstr "varekø: %s"
 
 #: ../../src/editor/editorinteractive.cc:64
 msgid "Menu"
@@ -948,7 +952,7 @@ msgstr "Minikort"
 #: ../../src/editor/editorinteractive.cc:76
 #: ../../src/wui/interactive_player.cc:189
 msgid "Buildhelp"
-msgstr ""
+msgstr "Byggehjælp"
 
 #: ../../src/editor/editorinteractive.cc:79
 msgid "Players"
@@ -996,7 +1000,7 @@ msgstr "Indlæser verdensdata"
 #: ../../src/editor/editorinteractive.cc:191
 #: ../../src/editor/editorinteractive.cc:607
 msgid "Loading graphics..."
-msgstr ""
+msgstr "Indlæser grafik..."
 
 #: ../../src/editor/editorinteractive.cc:232
 msgid "Map unsaved"
@@ -1032,7 +1036,7 @@ msgstr "Tillad"
 #: ../../src/events/event_building.cc:62
 #, c-format
 msgid "sufficient_suitability (%u) is smaller than required_suitability (%u)"
-msgstr ""
+msgstr "sufficient_suitability (%u) er lavere end required_suitability (%u)"
 
 #: ../../src/events/event_building.cc:72 ../../src/events/event_building.cc:81
 #: ../../src/events/event_message.cc:90 ../../src/graphic/animation.cc:196
@@ -1068,55 +1072,55 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:130
 #, c-format
 msgid "expected %s but found \"%s\""
-msgstr ""
+msgstr "forventede %s men fandt \"%s\""
 
 #: ../../src/events/event_building.cc:73 ../../src/events/event_building.cc:82
 msgid "distance (1 .. 255)"
-msgstr ""
+msgstr "distance (1 .. 255)"
 
 #: ../../src/events/event_building.cc:86
 #, c-format
 msgid "max distance (%u) is smaller than min distance (%u)"
-msgstr ""
+msgstr "Størstee distance (%u) er mindre end mindste distance (%u)"
 
 #: ../../src/events/event_building.cc:169
 #: ../../src/events/event_building.cc:304 ../../src/logic/immovable.cc:254
 #: ../../src/logic/immovable.cc:268
 msgid "duplicated"
-msgstr ""
+msgstr "duplikeret"
 
 #: ../../src/events/event_building.cc:174
 #: ../../src/events/event_building.cc:311
 #, c-format
 msgid "%s=\"%s\": invalid"
-msgstr ""
+msgstr "%s=\"%s\": ugyldig"
 
 #: ../../src/events/event_building.cc:204
 #: ../../src/events/event_building.cc:230
 #, c-format
 msgid "can not have %u %s (only %u)"
-msgstr ""
+msgstr "kan ikke have %u %s (kun %u)"
 
 #: ../../src/events/event_building.cc:316
 #, c-format
 msgid "%u soldiers but only %u allowed"
-msgstr ""
+msgstr "%u soldater mod %u tilladtee"
 
 #: ../../src/events/event_building.cc:320
 #, c-format
 msgid "(soldiercontrol): %s"
-msgstr ""
+msgstr "(soldatkontrol): %s"
 
 #: ../../src/events/event_building.cc:323
 #, c-format
 msgid "(productionsite): %s"
-msgstr ""
+msgstr "(produktionssted): %s"
 
 #: ../../src/events/event_building.cc:330
 #: ../../src/trigger/trigger_building.cc:58
 #, c-format
 msgid "(building): %s"
-msgstr ""
+msgstr "(bygning): %s"
 
 #: ../../src/events/event_building.cc:442
 #, c-format
@@ -1124,6 +1128,8 @@ msgid ""
 "failed to place a %s near (%i, %i) (distance between %u and %u) for player "
 "%u (suitability required is %u but found only %u)"
 msgstr ""
+"kunne ikke placere %s nær (%i, %i) (afstand mellem %u og %u) for spiller %u "
+"(egnethed var kun %u mens %u er krævet)"
 
 #: ../../src/events/event_expire_message.cc:48
 #: ../../src/logic/playercommand.cc:128
@@ -1131,12 +1137,12 @@ msgstr ""
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:61
 #, c-format
 msgid "player %u does not exist"
-msgstr ""
+msgstr "spiller %u findes ikkee"
 
 #: ../../src/events/event_expire_message.cc:55
 #, c-format
 msgid "player %u's message %u does not exist"
-msgstr ""
+msgstr "spiller %u's besked %u findes ikkee"
 
 #: ../../src/events/event_expire_message.cc:61
 #, c-format
@@ -1156,39 +1162,39 @@ msgstr ""
 #: ../../src/events/event_message.cc:111
 #, c-format
 msgid "(expire message): %s"
-msgstr ""
+msgstr "(udløbsbesked): %s"
 
 #: ../../src/events/event_factory.cc:61
 msgid "Allow worker types"
-msgstr ""
+msgstr "Tilladte arbejdertyper"
 
 #: ../../src/events/event_factory.cc:62
 msgid "Allows the creation of workers of certain types for a player."
-msgstr ""
+msgstr "Tillad oprettelsen af arbejdere af en bestemt type for en spiller"
 
 #: ../../src/events/event_factory.cc:66
 msgid "Forbid worker types"
-msgstr ""
+msgstr "Forbyd arbejdertyper"
 
 #: ../../src/events/event_factory.cc:67
 msgid "Forbids the creation of workers of certain types for a player."
-msgstr ""
+msgstr "Forbyd oprettelsen af arbejdere af en bestemt type for en spiller"
 
 #: ../../src/events/event_factory.cc:71
 msgid "Allow building types"
-msgstr ""
+msgstr "Tillad bygningstyper"
 
 #: ../../src/events/event_factory.cc:72
 msgid "Allows the construction of buildings of certain types for a player."
-msgstr ""
+msgstr "Tillad opførselsen af bestemte typer bygninger for en spiller."
 
 #: ../../src/events/event_factory.cc:76
 msgid "Forbid building types"
-msgstr ""
+msgstr "Forbyd bygningstyper"
 
 #: ../../src/events/event_factory.cc:77
 msgid "Forbids the construction of buildings of certain types for a player."
-msgstr ""
+msgstr "Forbyder opførslen af bestemte bygningstyper for en spiller."
 
 #: ../../src/events/event_factory.cc:81
 msgid "Create building"
@@ -1206,6 +1212,7 @@ msgstr "Erobre område"
 msgid ""
 "Gives ownership of all unowned locations within an area to the player."
 msgstr ""
+"Overdrager ejerskab af alle frie lokationer i et område til spilleren."
 
 #: ../../src/events/event_factory.cc:93
 msgid "Create flag"
@@ -1225,11 +1232,11 @@ msgstr "Opret en urokkelig."
 
 #: ../../src/events/event_factory.cc:103
 msgid "Lua event"
-msgstr ""
+msgstr "Lua hendelsee"
 
 #: ../../src/events/event_factory.cc:104
 msgid "Run a lua command"
-msgstr ""
+msgstr "Kør en lua kommandoo"
 
 #: ../../src/events/event_factory.cc:108
 msgid "Show message box"
@@ -1283,15 +1290,15 @@ msgstr "Opret vej"
 
 #: ../../src/events/event_factory.cc:137
 msgid "Create a road and optionally place a carrier on it"
-msgstr ""
+msgstr "Byg en vej og sæt (valgfrit) en fragtmand på denne"
 
 #: ../../src/events/event_factory.cc:141
 msgid "Set timer"
-msgstr ""
+msgstr "Sæt timer"
 
 #: ../../src/events/event_factory.cc:142
 msgid "Set a timer to trigger after a certain duration."
-msgstr ""
+msgstr "Sæt en timer til at udløse efter et bestemt tidsrum."
 
 #: ../../src/events/event_factory.cc:146
 msgid "Unhide area"
@@ -1302,10 +1309,12 @@ msgid ""
 "Gives vision for a specified amount of time of all locations within an area "
 "to the player."
 msgstr ""
+"Giver overblik over alle lokationer i et område til spilleren inden for et "
+"angivet tidsrum."
 
 #: ../../src/events/event_factory.cc:153
 msgid "Set player's frontier style"
-msgstr ""
+msgstr "Bestem typen af spillerens grænseovergangee"
 
 #: ../../src/events/event_factory.cc:155
 msgid ""
@@ -1341,11 +1350,11 @@ msgstr ""
 msgid ""
 "Forbids that the player can change the value of 'retreat when hitpoints "
 "below x%'."
-msgstr ""
+msgstr "Forbyd spilleren i at ændre værdien for tilbagetræknings procent."
 
 #: ../../src/events/event_factory.cc:181
 msgid "Set player retreat percentage"
-msgstr ""
+msgstr "Set spiller tilbagetræknings procent"
 
 #: ../../src/events/event_factory.cc:183
 msgid ""
@@ -1401,12 +1410,12 @@ msgstr ""
 #: ../../src/events/event_lua.cc:42
 #, c-format
 msgid "(lua event): %s"
-msgstr ""
+msgstr "(lua hændelse): %s"
 
 #: ../../src/events/event_message.cc:67
 #, c-format
 msgid "expire: \"%s\" is not an expire message event"
-msgstr ""
+msgstr "udløb: \"%s\" er ikke en hændelse for en udløbsbeskeds"
 
 #: ../../src/events/event_message.cc:72
 #, c-format
@@ -1415,6 +1424,9 @@ msgid ""
 "meaning forever, which is the default; omit the duration key to make the "
 "message exist forever"
 msgstr ""
+"Varighed: værdien %u er ikke tilladt som varighed da denne værdien har den "
+"specielle betydning 'permanent'. Denne varighed er udgangspunktet; undlad "
+"varighedssetpunktet for at beholde beskeden permanent"
 
 #: ../../src/events/event_message.cc:103
 #, c-format
@@ -1436,7 +1448,7 @@ msgstr "Fortsæt"
 
 #: ../../src/events/event_message_box.cc:138
 msgid "there are no buttons, at least one is required"
-msgstr ""
+msgstr "der er ingen knapper, mindst en er krævet"
 
 #: ../../src/events/event_message_box.cc:149
 #, c-format
@@ -1446,41 +1458,41 @@ msgstr ""
 #: ../../src/events/event_message_box.cc:154
 #, c-format
 msgid "%s refers to \"%s\", which is not a timer"
-msgstr ""
+msgstr "%s henviser til \"%s\", hvilket ikke er en timer"
 
 #: ../../src/events/event_message_box.cc:169
 #, c-format
 msgid "(message box): %s"
-msgstr ""
+msgstr "(beskedkassee): %s"
 
 #: ../../src/events/event_move_view.cc:50
 #: ../../src/events/event_player_area.cc:55
 #, c-format
 msgid "illegal coordinates (%i, %i)"
-msgstr ""
+msgstr "ugyldig koordinater (%i, %i)"
 
 #: ../../src/events/event_move_view.cc:56
 #, c-format
 msgid "(move view): %s"
-msgstr ""
+msgstr "(træk visning): %s"
 
 #: ../../src/events/event_player_allowed_retreat_change.cc:45
 #: ../../src/events/event_player_retreat_change.cc:45
 #, c-format
 msgid "(player allowed retreat change): %s"
-msgstr ""
+msgstr "(spiller tilladt ændring af tilbagetrækningsprocent): %s"
 
 #: ../../src/events/event_player_area.cc:61
 #, c-format
 msgid "(player area): %s"
-msgstr ""
+msgstr "(spiller område): %s"
 
 #: ../../src/events/event_player_building_types.cc:54
 #: ../../src/events/event_player_worker_types.cc:55
 #: ../../src/logic/tribe.cc:212 ../../src/logic/tribe.cc:233
 #, c-format
 msgid "\"%s\" is duplicated"
-msgstr ""
+msgstr "\"%s\" er duplikeret"
 
 #: ../../src/events/event_player_building_types.cc:56
 msgid "no building types"
@@ -1512,7 +1524,7 @@ msgstr ""
 
 #: ../../src/events/event_retreat_change.cc:43
 msgid "Change"
-msgstr ""
+msgstr "Ændre"
 
 #: ../../src/events/event_road.cc:40
 msgid "there are no steps"
@@ -1559,43 +1571,43 @@ msgstr ""
 #: ../../src/events/event_set_player_style.cc:43
 #, c-format
 msgid "(set player style): %s"
-msgstr ""
+msgstr "(sæt player stil): %s"
 
 #: ../../src/events/event_set_timer.cc:54
 #, c-format
 msgid "trigger \"%s\": not a time trigger"
-msgstr ""
+msgstr "udløser \"%s\": ikke en tidsudløser"
 
 #: ../../src/events/event_set_timer.cc:60
 #, c-format
 msgid "(set_timer): %s"
-msgstr ""
+msgstr "(set_timer): %s"
 
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:98
 #, c-format
 msgid "command queue: %s"
-msgstr ""
+msgstr "kommando kø: %s"
 
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #: ../../src/logic/cmd_check_eventchain.cc:98
 #, c-format
 msgid "check eventchain: %s"
-msgstr ""
+msgstr "tjek eventchain; %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:49
 #, c-format
 msgid "player %u does not exist in the game"
-msgstr ""
+msgstr "spiller %u findes ikke i spillet"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:79
 #, c-format
 msgid "interactive player: %s"
-msgstr ""
+msgstr "interaktiv spiller: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:59
 #, c-format
 msgid "read number of economies as %u, but this was read as %u elsewhere"
-msgstr ""
+msgstr "læste antallet af økonomier til %u, mens %u blev læst andetsteds"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:83
 msgid "there is no flag at the specified location"
@@ -1605,22 +1617,22 @@ msgstr ""
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:63
 #, c-format
 msgid "player %u: %s"
-msgstr ""
+msgstr "spiller %u: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:91
 #, c-format
 msgid "economies: %s"
-msgstr ""
+msgstr "økonomier: %s"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:57
 #, c-format
 msgid "player number (%i) is out of range (1 .. %u)"
-msgstr ""
+msgstr "spillernummer (%i) er ude af interval (1 .. %u)"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:144
 #, c-format
 msgid "player info: %s"
-msgstr ""
+msgstr "spiller info: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:55
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:94
@@ -1639,7 +1651,7 @@ msgstr ""
 
 #: ../../src/graphic/animation.cc:197
 msgid "frame number"
-msgstr ""
+msgstr "frame nummer"
 
 #: ../../src/graphic/graphic.cc:818
 #, c-format
@@ -1649,12 +1661,12 @@ msgstr "Indlæser animationer: %d%% færdig"
 #: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] soldier %u loose battle\n"
-msgstr ""
+msgstr "[kamp] soldat %u taber kamp\n"
 
 #: ../../src/logic/battle.cc:182
 #, c-format
 msgid "[battle] waking up winner %d\n"
-msgstr ""
+msgstr "[kamp] vækker  vinder %d\n"
 
 #: ../../src/logic/bob.cc:85 ../../src/logic/immovable.cc:199
 #, c-format
@@ -1745,11 +1757,11 @@ msgstr ""
 #: ../../src/logic/immovable.cc:133 ../../src/logic/production_program.cc:1396
 #, c-format
 msgid "unknown command type \"%s\""
-msgstr ""
+msgstr "ukendt kommandotype \"%s\""
 
 #: ../../src/logic/immovable.cc:137
 msgid "no actions"
-msgstr ""
+msgstr "Ingen handling"
 
 #: ../../src/logic/immovable.cc:213
 msgid "this program has already been declared"
@@ -1763,7 +1775,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:252 ../../src/logic/immovable.cc:266
 #, c-format
 msgid "expected 0 .. 255 but found %u"
-msgstr ""
+msgstr "forventede 0 ... 255 men fandt %u"
 
 #: ../../src/logic/immovable.cc:271
 #, c-format
@@ -1783,7 +1795,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:610
 #, c-format
 msgid "unknown tribe %s"
-msgstr ""
+msgstr "ukendt stamme %s"
 
 #: ../../src/logic/immovable.cc:616
 #, c-format
@@ -1798,11 +1810,11 @@ msgstr ""
 #: ../../src/logic/immovable.cc:661 ../../src/logic/production_program.cc:609
 #: ../../src/logic/production_program.cc:653
 msgid "duration in ms"
-msgstr ""
+msgstr "varighed i ms"
 
 #: ../../src/logic/immovable.cc:699 ../../src/logic/production_program.cc:1341
 msgid "priority"
-msgstr ""
+msgstr "prioritet"
 
 #: ../../src/logic/immovable.cc:733 ../../src/logic/immovable.cc:802
 #: ../../src/logic/immovable.cc:888

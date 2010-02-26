@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-16 22:46+0000\n"
+"PO-Revision-Date: 2010-02-25 13:29+0000\n"
 "Last-Translator: Victor Birkmanis <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-17 04:52+0000\n"
+"X-Launchpad-Export-Date: 2010-02-26 04:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -559,7 +559,7 @@ msgstr "Форт"
 
 #: ../../tribes/atlanteans/conf:152
 msgid "Guardhouse"
-msgstr "Караулка"
+msgstr "Караульная"
 
 #: ../../tribes/atlanteans/conf:153
 msgid "High Tower"
