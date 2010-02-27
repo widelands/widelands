@@ -502,6 +502,7 @@ void MilitarySite::aggressor(Soldier & enemy)
 				sj.soldier  = *i.current;
 				sj.enemy = &enemy;
 				sj.stayhome = false;
+				sj.retreat = owner().get_retreat_percentage();
 				m_soldierjobs.push_back(sj);
 				(*i.current)->update_task_buildingwork(game);
 				return;
