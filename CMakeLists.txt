@@ -52,6 +52,8 @@ set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE ${CXX_FLAG_GGZ}" CACHE STRI
 set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG ${CXX_FLAG_GGZ}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 # we don't want someone to set this directly...
+# ...and we don't want to remember from former runs...
+unset (WL_VERSION)
 unset (WL_VERSION CACHE)
 
 # ...but using MAJOR, MINOR and PATCH
