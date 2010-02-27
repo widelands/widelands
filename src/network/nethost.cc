@@ -634,7 +634,7 @@ void NetHost::send(ChatMessage msg)
 				}
 				s.Signed16(-2); // System message
 				s.String("");
-				s.String(msg.msg);
+				s.String(fail);
 				s.Unsigned8(0);
 			}
 		}
