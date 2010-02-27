@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-15 16:30+0000\n"
+"POT-Creation-Date: 2010-02-27 16:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -583,14 +583,14 @@ msgstr ""
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr ""
 
-#: ../../txts/tips/atlanteans.tip:2
-#: ../../txts/tips/barbarians.tip:2
-#: ../../txts/tips/empire.tip:2
-msgid "Some buildings, such as the farm, have a very small working area. If the building is surrounded with trees or roads, production will stop."
-msgstr ""
-
 #: ../../txts/tips/atlanteans.tip:6
 msgid "Always build a forester's and a fish breeder's house, so you will not run out of trunks and food."
+msgstr ""
+
+#: ../../txts/tips/barbarians.tip:2
+#: ../../txts/tips/atlanteans.tip:2
+#: ../../txts/tips/empire.tip:2
+msgid "Some buildings, such as the farm, have a very small working area. If the building is surrounded with trees or roads, production will stop."
 msgstr ""
 
 #: ../../txts/tips/barbarians.tip:6
