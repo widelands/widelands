@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-15 17:30+0100\n"
-"PO-Revision-Date: 2010-02-25 11:49+0000\n"
+"PO-Revision-Date: 2010-02-26 14:29+0000\n"
 "Last-Translator: pierusch <marongiu@parallelo.it>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-26 04:47+0000\n"
+"X-Launchpad-Export-Date: 2010-02-27 04:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -89,6 +89,25 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
+" --<config-entry-name>=value overwrites any config file setting\n"
+"\n"
+" --logfile=FILENAME   Log output to file FILENAME instead of \n"
+"                      terminal output\n"
+" --datadir=DIRNAME    Use specified direction for the widelands\n"
+"                      data files\n"
+" --record=FILENAME    Record all events to the given filename for\n"
+"                      later playback\n"
+" --playback=FILENAME  Playback given filename (see --record)\n"
+"\n"
+" --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
+"                      of using the SDL\n"
+" --language=[de_DE|sv_SE|...]\n"
+"                      The locale to use.\n"
+" --remove_syncstreams=[true|false]\n"
+"                      Remove syncstream files on startup\n"
+" --remove_replays=[...]\n"
+"                      Remove replays after this amount of days.\n"
+"                      If this is 0 replays are not deleted.\n"
 
 #: ../../src/wlapplication.cc:1227
 msgid ""
@@ -719,7 +738,7 @@ msgstr "necessarie"
 
 #: ../../src/writeHTML.cc:986
 msgid "site"
-msgstr ""
+msgstr "site"
 
 #: ../../src/writeHTML.cc:988
 msgid "has"
@@ -938,7 +957,7 @@ msgstr "tipi_di_merce.xhtml"
 #: ../../src/trigger/trigger_time.cc:44 ../../src/trigger/trigger_vision.cc:50
 #, c-format
 msgid "unknown/unhandled version %u"
-msgstr ""
+msgstr "versione sconosciuta/non gestita %u"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
@@ -959,12 +978,12 @@ msgstr ""
 #: ../../src/economy/economy_data_packet.cc:99
 #, c-format
 msgid "unknown version %u"
-msgstr ""
+msgstr "versione sconosciuta %u"
 
 #: ../../src/economy/economy_data_packet.cc:102
 #, c-format
 msgid "economy: %s"
-msgstr ""
+msgstr "economia: %s"
 
 #: ../../src/economy/wares_queue.cc:256
 #, c-format
@@ -1040,7 +1059,7 @@ msgstr "Caricamento dati della mappa"
 #: ../../src/editor/editorinteractive.cc:191
 #: ../../src/editor/editorinteractive.cc:607
 msgid "Loading graphics..."
-msgstr ""
+msgstr "Caricamento della grafica..."
 
 #: ../../src/editor/editorinteractive.cc:232
 msgid "Map unsaved"
@@ -1112,16 +1131,16 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:130
 #, c-format
 msgid "expected %s but found \"%s\""
-msgstr ""
+msgstr "atteso %s ma trovato  \"%s\""
 
 #: ../../src/events/event_building.cc:73 ../../src/events/event_building.cc:82
 msgid "distance (1 .. 255)"
-msgstr ""
+msgstr "distanza (1 .. 255)"
 
 #: ../../src/events/event_building.cc:86
 #, c-format
 msgid "max distance (%u) is smaller than min distance (%u)"
-msgstr ""
+msgstr "la distanza massima (%u) è minore della distanza minima (%u)"
 
 #: ../../src/events/event_building.cc:169
 #: ../../src/events/event_building.cc:304 ../../src/logic/immovable.cc:254
@@ -1133,7 +1152,7 @@ msgstr "duplicato"
 #: ../../src/events/event_building.cc:311
 #, c-format
 msgid "%s=\"%s\": invalid"
-msgstr ""
+msgstr "%s=\"%s\": non valido"
 
 #: ../../src/events/event_building.cc:204
 #: ../../src/events/event_building.cc:230
@@ -1481,7 +1500,7 @@ msgstr "Continua"
 
 #: ../../src/events/event_message_box.cc:138
 msgid "there are no buttons, at least one is required"
-msgstr ""
+msgstr "non ci sono pulsanti, ne è richiesto almeno uno"
 
 #: ../../src/events/event_message_box.cc:149
 #, c-format
@@ -1491,7 +1510,7 @@ msgstr ""
 #: ../../src/events/event_message_box.cc:154
 #, c-format
 msgid "%s refers to \"%s\", which is not a timer"
-msgstr ""
+msgstr "%s si riferisce \"%s\", che non è un timer"
 
 #: ../../src/events/event_message_box.cc:169
 #, c-format
@@ -1502,7 +1521,7 @@ msgstr ""
 #: ../../src/events/event_player_area.cc:55
 #, c-format
 msgid "illegal coordinates (%i, %i)"
-msgstr ""
+msgstr "coordinate non permesse (%i, %i)"
 
 #: ../../src/events/event_move_view.cc:56
 #, c-format
@@ -1525,7 +1544,7 @@ msgstr ""
 #: ../../src/logic/tribe.cc:212 ../../src/logic/tribe.cc:233
 #, c-format
 msgid "\"%s\" is duplicated"
-msgstr ""
+msgstr "\"%s\" è duplicato"
 
 #: ../../src/events/event_player_building_types.cc:56
 msgid "no building types"
@@ -1544,7 +1563,7 @@ msgstr ""
 #: ../../src/events/event_player_worker_types.cc:52
 #, c-format
 msgid "\"%s\" is not buildable"
-msgstr ""
+msgstr "\"%s\" non è edificabile"
 
 #: ../../src/events/event_player_worker_types.cc:58
 msgid "no worker types"
@@ -1630,7 +1649,7 @@ msgstr ""
 #: ../../src/game_io/game_interactive_player_data_packet.cc:49
 #, c-format
 msgid "player %u does not exist in the game"
-msgstr ""
+msgstr "il giocatore %u non esiste nel gioco"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:79
 #, c-format
@@ -1644,13 +1663,13 @@ msgstr ""
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:83
 msgid "there is no flag at the specified location"
-msgstr ""
+msgstr "non esiste una bandiera nella posizione specificata."
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:85
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:63
 #, c-format
 msgid "player %u: %s"
-msgstr ""
+msgstr "giocatore %u: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:91
 #, c-format
@@ -1665,7 +1684,7 @@ msgstr ""
 #: ../../src/game_io/game_player_info_data_packet.cc:144
 #, c-format
 msgid "player info: %s"
-msgstr ""
+msgstr "informazioni sul giocatore: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:55
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:94
@@ -1675,7 +1694,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:78
 #, c-format
 msgid "unknown/unhandled version %i"
-msgstr ""
+msgstr "versione sconosciuta/non gestita %i"
 
 #: ../../src/game_io/game_preload_data_packet.cc:57
 #, c-format
@@ -1790,11 +1809,11 @@ msgstr ""
 #: ../../src/logic/immovable.cc:133 ../../src/logic/production_program.cc:1396
 #, c-format
 msgid "unknown command type \"%s\""
-msgstr ""
+msgstr "tipo di comando sconosciuto \"%s\""
 
 #: ../../src/logic/immovable.cc:137
 msgid "no actions"
-msgstr ""
+msgstr "nessuna azione"
 
 #: ../../src/logic/immovable.cc:213
 msgid "this program has already been declared"
@@ -1803,12 +1822,12 @@ msgstr ""
 #: ../../src/logic/immovable.cc:219
 #, c-format
 msgid "program %s: %s"
-msgstr ""
+msgstr "programma %s: %s"
 
 #: ../../src/logic/immovable.cc:252 ../../src/logic/immovable.cc:266
 #, c-format
 msgid "expected 0 .. 255 but found %u"
-msgstr ""
+msgstr "atteso 0 .. 255 ma trovato %u"
 
 #: ../../src/logic/immovable.cc:271
 #, c-format
@@ -1828,7 +1847,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:610
 #, c-format
 msgid "unknown tribe %s"
-msgstr ""
+msgstr "tribù sconosciuta %s"
 
 #: ../../src/logic/immovable.cc:616
 #, c-format
@@ -1843,11 +1862,11 @@ msgstr ""
 #: ../../src/logic/immovable.cc:661 ../../src/logic/production_program.cc:609
 #: ../../src/logic/production_program.cc:653
 msgid "duration in ms"
-msgstr ""
+msgstr "durata in ms"
 
 #: ../../src/logic/immovable.cc:699 ../../src/logic/production_program.cc:1341
 msgid "priority"
-msgstr ""
+msgstr "priorità"
 
 #: ../../src/logic/immovable.cc:733 ../../src/logic/immovable.cc:802
 #: ../../src/logic/immovable.cc:888
@@ -1865,6 +1884,7 @@ msgstr ""
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
 msgstr ""
+"attesa una probabilità  nell'intervallo [1,254] ma il valore è \"%s\""
 
 #: ../../src/logic/immovable.cc:767
 msgid "illegal transformation to the same type"
@@ -1872,7 +1892,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:855
 msgid "probability in range [1, 254]"
-msgstr ""
+msgstr "probabilità nell'intervallo [1, 254]"
 
 #: ../../src/logic/instances.cc:75
 #, c-format
@@ -1882,7 +1902,7 @@ msgstr ""
 #: ../../src/logic/instances.cc:124
 #, c-format
 msgid "object %u: %s"
-msgstr ""
+msgstr "oggetto %u: %s"
 
 #: ../../src/logic/instances.cc:133
 #, c-format
@@ -1896,21 +1916,21 @@ msgstr "Giocatore 1"
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:62
 #: ../../src/logic/soldier.cc:85
 msgid "\"min-max\""
-msgstr ""
+msgstr "\"minimo-massimo\""
 
 #: ../../src/logic/military_data.cc:59
 msgid "positive integer <= 100"
-msgstr ""
+msgstr "numero intero positivo <= 100"
 
 #: ../../src/logic/military_data.cc:63
 #, c-format
 msgid "expected positive integer >= %u <= 100 but found \"%s\""
-msgstr ""
+msgstr "atteso un numero intero positivo >= %u <= 100 ma trovato \"%s\""
 
 #: ../../src/logic/military_data.cc:75
 #, c-format
 msgid "expected positive integer >= %u <= %u but found \"%u\""
-msgstr ""
+msgstr "atteso un numero intero positivo >= %u <= %u ma trovato \"%u\""
 
 #: ../../src/logic/militarysite.cc:66 ../../src/logic/warehouse.cc:276
 msgid " conquer"
@@ -1933,7 +1953,7 @@ msgstr[1] "%u(+%u) soldati"
 #: ../../src/logic/militarysite.cc:572
 #, c-format
 msgid "%sThe enemy defeated your soldiers at the %s.</p></rt>"
-msgstr ""
+msgstr "%sIl nemico ha sconfitto i tuoi soldati nel %s.</p></rt>"
 
 #: ../../src/logic/militarysite.cc:579
 msgid "Militarysite lost!"
@@ -1956,11 +1976,11 @@ msgstr ""
 #: ../../src/logic/militarysite.cc:708
 #, c-format
 msgid "%sYour %s is under attack.</p>"
-msgstr ""
+msgstr "%sIl tuo %s è sotto attacco.</p>"
 
 #: ../../src/logic/militarysite.cc:716
 msgid "You are under attack"
-msgstr ""
+msgstr "Ti stanno attaccando"
 
 #: ../../src/logic/playercommand.cc:134
 #, c-format
