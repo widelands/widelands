@@ -581,11 +581,6 @@ void NetHost::send(ChatMessage msg)
 	} else { //  personal messages
 		SendPacket s;
 		s.Unsigned8(NETCMD_CHAT);
-		s.Signed16(msg.playern);
-		s.String(msg.sender);
-		s.String(msg.msg);
-		s.Unsigned8(1);
-		s.String(msg.recipient);
 
 		// Is this pm for the host player?
 		if (d->localplayername == msg.recipient)
@@ -611,6 +606,11 @@ void NetHost::send(ChatMessage msg)
 							 "it!\n");
 						break;
 					} else if (j.current->usernum == i) {
+						s.Signed16(msg.playern);
+						s.String(msg.sender);
+						s.String(msg.msg);
+						s.Unsigned8(1);
+						s.String(msg.recipient);
 						s.send(j.current->sock);
 						break;
 					}
@@ -619,13 +619,22 @@ void NetHost::send(ChatMessage msg)
 					("[Host]: personal chat: from %s to %s\n",
 					 msg.sender.c_str(), msg.recipient.c_str());
 			} else {
-				s.reset();
-				s.Unsigned8(NETCMD_CHAT);
-				s.Signed16(-2); // System message
-				s.String("");
 				std::string fail = "Failed to send message: Recipient \"";
 				fail += msg.recipient + "\" could not be found!";
-				s.String(fail);
+
+				// is host the sender?
+				if (d->localplayername == msg.sender) {
+					ChatMessage err;
+					err.playern = -2; // System message
+					err.sender = "";
+					err.msg = fail;
+					err.recipient = "";
+					d->chat.receive(err);
+					return; // nothing left to do!
+				}
+				s.Signed16(-2); // System message
+				s.String("");
+				s.String(msg.msg);
 				s.Unsigned8(0);
 			}
 		}
@@ -634,8 +643,6 @@ void NetHost::send(ChatMessage msg)
 			return; //  do not deliver it to him twice
 
 		//Now find the sender and send either the message or the failure notice
-		if (d->localplayername == msg.sender) // is host the sender?
-			d->chat.receive(msg);
 		else { // host is not the sender -> get sender
 			uint32_t i = 0;
 			for (; i < d->settings.users.size(); ++i) {
