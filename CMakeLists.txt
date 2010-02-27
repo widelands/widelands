@@ -39,9 +39,11 @@ set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 find_package(GGZ_Core)
 include_directories(${GGZ_CORE_INCLUDE_DIR})
 
-if (${GGZ_Core_FOUND})
+if (GGZ_CORE_FOUND)
   set (CXX_FLAG_GGZ "-DUSE_GGZ")
-endif (${GGZ_Core_FOUND})
+else (GGZ_CORE_FOUND)
+  message ("GGZ support disabled, check your libraries path and installed packages!")
+endif (GGZ_CORE_FOUND)
 
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
 set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE ${CXX_FLAG_GGZ}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
