@@ -36,11 +36,18 @@ endif (NOT DEFINED CMAKE_BUILD_TYPE)
 
 set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 
+find_package(GGZ_Core)
+include_directories(${GGZ_CORE_INCLUDE_DIR})
+
+if (${GGZ_Core_FOUND})
+  set (CXX_FLAG_GGZ "-DUSE_GGZ")
+endif (${GGZ_Core_FOUND})
+
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE ${CXX_FLAG_GGZ}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 # CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
-set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG ${CXX_FLAG_GGZ}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 # we don't want someone to set this directly...
 unset (WL_VERSION CACHE)
