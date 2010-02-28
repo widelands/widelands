@@ -253,7 +253,7 @@ install(
     tribes
     txts
     worlds
-  DESTINATION share/widelands
+  DESTINATION ${WL_INSTALL_DATADIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles
   PATTERN "*.svn*" EXCLUDE
@@ -263,7 +263,7 @@ install(
 install(
   DIRECTORY
     doc
-  DESTINATION share/widelands
+  DESTINATION ${WL_INSTALL_DATADIR}
   CONFIGURATIONS Debug
   COMPONENT DocFiles
   PATTERN "*.svn*" EXCLUDE
@@ -286,7 +286,7 @@ add_custom_target (
 install(
   DIRECTORY
     ${CMAKE_CURRENT_BINARY_DIR}/locale
-  DESTINATION share/widelands
+  DESTINATION ${WL_INSTALL_LOCALEDIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreLanguageFiles
   PATTERN "*.svn*" EXCLUDE
@@ -307,7 +307,7 @@ add_custom_target (
 install(
   DIRECTORY
     ${CMAKE_CURRENT_BINARY_DIR}/pics
-  DESTINATION share/widelands
+  DESTINATION ${WL_INSTALL_DATADIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CorePicsFiles
   PATTERN "*.svn*" EXCLUDE
