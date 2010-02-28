@@ -17,18 +17,18 @@ project (widelands)
 #     Prefix for installation of the files.
 #     This is not the install dir which is used for config.h - see WL_INSTALL_PREFIX
 #     default: /usr/local
-# CMAKE_INSTALL_PREFIX:
+# WL_INSTALL_PREFIX:
 #     Prefix for INSTALL_PREFIX in config.h.
 #     This is not the install dir for make install - see CMAKE_INSTALL_PREFIX
 #     default: .
 # WL_INSTALL_BINDIR:
-#     Directory the binary should be in (relative to CMAKE_INSTALL_PREFIX)
+#     Directory the binary should be in (relative to WL_INSTALL_PREFIX)
 #     default: games
 # WL_INSTALL_DATADIR
-#     Directory for the Widelands data (relative to CMAKE_INSTALL_PREFIX)
+#     Directory for the Widelands data (relative to WL_INSTALL_PREFIX)
 #     default: share/games/widelands
 # WL_INSTALL_LOCALEDIR
-#     Directory for Widelands locales (relative to CMAKE_INSTALL_PREFIX)
+#     Directory for Widelands locales (relative to WL_INSTALL_PREFIX)
 #     default: share/games/widelands/locale
 
 cmake_minimum_required (VERSION 2.6)
