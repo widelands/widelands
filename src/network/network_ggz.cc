@@ -835,7 +835,7 @@ void NetGGZ::write_userlist()
 		int ties[1];
 		int forfeits[1];*/
 		if (ggzcore_player_get_rating(player, buf)) {
-			snprintf(user.stats, sizeof(user.stats), "r %i", buf[1]);
+			snprintf(user.stats, sizeof(user.stats), "r %i", buf[0]);
 			log(user.stats);
 		/*} else if (ggzcore_player_get_highscore(player, buf)) {
 			snprintf(user.stats, sizeof(user.stats), "hs %i", buf[1]);
