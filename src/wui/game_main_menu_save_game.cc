@@ -92,12 +92,7 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	gl.preload_game(gpdp); //  This has worked before, no problem
 
 	{
-		char const * extension, * fname =
-			FileSystem::FS_Filename(name.c_str(), extension);
-		char fname_without_extension[extension - fname + 1];
-		for (char * p = fname_without_extension;; ++p, ++fname)
-			if (fname == extension) {*p = '\0'; break;} else *p = *fname;
-		m_editbox.setText(fname_without_extension);
+		m_editbox.setText(FileSystem::FS_FilenameWoExt(name.c_str()));
 	}
 	m_button_ok.set_enabled(true);
 
@@ -145,12 +140,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
 		try {
 			Widelands::Game_Loader gl(name, igbase().game());
 			gl.preload_game(gpdp);
-			char const * extension, * fname =
-				FileSystem::FS_Filename(name, extension);
-			char fname_without_extension[extension - fname + 1];
-			for (char * p = fname_without_extension;; ++p, ++fname)
-				if (fname == extension) {*p = '\0'; break;} else *p = *fname;
-			m_ls.add(fname_without_extension, name);
+			m_ls.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);
 		} catch (_wexception const &) {} //  we simply skip illegal entries
 	}
 

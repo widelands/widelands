@@ -558,11 +558,11 @@ void Interactive_Player::cmdLua(std::vector<std::string> const & args)
 	std::string cmd;
 
 	// Drop lua, start with the second word
-	for
-		(struct {
+    struct {
 		 	std::vector<std::string>::const_iterator       current;
 		 	std::vector<std::string>::const_iterator const end;
-		 } i = {args.begin() + 1, args.end()};;)
+	} i = {args.begin() + 1, args.end()};	
+    for(;;)
 	{
 		cmd += *i.current;
 		if (++i.current == i.end)

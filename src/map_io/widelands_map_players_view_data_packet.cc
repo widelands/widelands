@@ -30,13 +30,14 @@
 #include "logic/widelands_streamread_inlines.h"
 #include "logic/widelands_streamwrite_inlines.h"
 
+#include "economy/road.h"
+
 #include "log.h"
 
 #include "upcast.h"
 
 namespace Widelands {
 
-extern const Map_Object_Descr g_road_descr;
 
 #define PLAYERDIRNAME_TEMPLATE "player/%u"
 #define DIRNAME_TEMPLATE PLAYERDIRNAME_TEMPLATE "/view"
@@ -217,7 +218,7 @@ void Map_Players_View_Data_Packet::Read
 							 f.field->get_immovable())
 						{
 							map_object_descr = &base_immovable->descr();
-							if (map_object_descr == &g_road_descr)
+                            if (map_object_descr == &Road::GetRoadDescr())
 								map_object_descr = 0;
 							else if (upcast(Building const, building, base_immovable))
 								if (building->get_position() != f)
@@ -456,7 +457,7 @@ void Map_Players_View_Data_Packet::Read
 						 f.field->get_immovable())
 					{
 						map_object_descr = &base_immovable->descr();
-						if (map_object_descr == &g_road_descr)
+                        if (map_object_descr == &Road::GetRoadDescr())
 							map_object_descr = 0;
 						else if (upcast(Building const, building, base_immovable))
 							if (building->get_position() != f)
@@ -662,7 +663,7 @@ inline static void write_unseen_immovable
 	(Map_Object_Descr const * const map_object_descr,
 	 BitOutBuffer<2> & immovable_kinds_file, FileWrite & immovables_file)
 {
-	assert(map_object_descr != &g_road_descr);
+    assert(map_object_descr != &Road::GetRoadDescr());
 	uint8_t immovable_kind;
 	if (not map_object_descr)
 		immovable_kind = 0;

@@ -62,7 +62,11 @@ Event_Road::Event_Road(Section & s, Editor_Game_Base & egbase) : Event(s) {
 				 Map::fpBidiCost);
 			Path::Step_Vector::size_type const nr_steps =
 				optimal_path.get_nsteps();
+#ifndef _MSC_VER
 			char optimal_steps[nr_steps + 1];
+#else
+			char optimal_steps[1000];
+#endif
 			for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i)
 				optimal_steps[i] = '0' + optimal_path[i];
 			optimal_steps[nr_steps] = '\0';
@@ -90,7 +94,11 @@ void Event_Road::Write
 	s.set_int    ("version", EVENT_VERSION);
 	s.set_Coords ("point",   m_path.get_start());
 	Path::Step_Vector::size_type const nr_steps = m_path.get_nsteps();
+#ifndef _MSC_VER
 	char steps[nr_steps + 1];
+#else
+	char steps[1000];
+#endif
 	for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i)
 		steps[i] = '0' + m_path[i];
 	steps[nr_steps] = '\0';

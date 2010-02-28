@@ -34,7 +34,7 @@ struct Map_Map_Object_Saver;
 struct Player;
 struct Request;
 struct WaresQueue;
-struct Worker;
+class Worker;
 
 /**
  * This micro storage room can hold any number of items of a fixed ware.

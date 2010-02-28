@@ -147,10 +147,8 @@ bool LayeredFileSystem::FindMatchingVersionFile(FileSystem & fs) {
 
 void LayeredFileSystem::PutRightVersionOnTop() {
 	for
-		(struct {
-		 	std::vector<FileSystem *>::iterator       current;
-		 	std::vector<FileSystem *>::iterator const end;
-		 } i = {m_filesystems.begin(), m_filesystems.end()};
+        (wl_range<std::vector<FileSystem *>::iterator >
+         i(m_filesystems.begin(), m_filesystems.end());
 		 i.current != i.end;
 		 ++i.current)
 	{

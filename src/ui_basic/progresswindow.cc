@@ -27,7 +27,9 @@
 
 #include "container_iterate.h"
 
+#ifndef _MSC_VER
 #include <sys/time.h>
+#endif
 
 #define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
 #define PROGRESS_FONT_COLOR_BG        RGBColor(64, 64, 0)

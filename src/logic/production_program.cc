@@ -61,19 +61,15 @@ void ProductionProgram::parse_ware_type_group
 		*parameters = '\0';
 		Ware_Index const ware_index = tribe.safe_ware_index(ware);
 		for
-			(struct {
-			 	Ware_Types::const_iterator       current;
-			 	Ware_Types::const_iterator const end;
-			 } i = {inputs.begin(), inputs.end()};;
-			 ++i.current)
-			if (i.current == i.end)
+            (boost::sub_range<Ware_Types const> i(inputs);;i.advance_begin(1))
+			if (i.empty())
 				throw game_data_error
 					(_
 					 	("%s is not declared as an input (\"%s=<count>\" was not "
 					 	 "found in the [inputs] section)"),
 					 ware, ware);
-			else if (i.current->first == ware_index) {
-				count_max += i.current->second;
+			else if (i.front().first == ware_index) {
+				count_max += i.front().second;
 				break;
 			}
 		if
@@ -398,11 +394,7 @@ void ProductionProgram::ActReturn::execute
 		if (m_is_when) { //  "when a and b and ..." (all conditions must be true)
 			char const * const operator_string = _(" and ");
 			result_string += _(" because: ");
-			for
-				(struct {
-				 	Conditions::const_iterator current;
-				 	Conditions::const_iterator const end;
-				 } i = {m_conditions.begin(), m_conditions.end()};;)
+            container_iterate_const_noinc(Conditions, m_conditions, i)
 			{
 				if (not (*i.current)->evaluate(ps)) //  A condition is false,
 					return ps.program_step(game); //  continue program.
@@ -414,11 +406,7 @@ void ProductionProgram::ActReturn::execute
 		} else { //  "unless a or b or ..." (all conditions must be false)
 			char const * const operator_string = _(" or ");
 			result_string += _(" because not: ");
-			for
-				(struct {
-				 	Conditions::const_iterator current;
-				 	Conditions::const_iterator const end;
-				 } i = {m_conditions.begin(), m_conditions.end()};;)
+            container_iterate_const_noinc(Conditions, m_conditions, i)
 			{
 				if ((*i.current)->evaluate(ps)) //  A condition is true,
 					return ps.program_step(game); //  continue program.
@@ -693,7 +681,7 @@ void ProductionProgram::ActConsume::execute
 {
 	std::vector<WaresQueue *> const warequeues = ps.warequeues();
 	size_t const nr_warequeues = warequeues.size();
-	uint8_t consumption_quantities[nr_warequeues];
+    std::vector<uint8_t> consumption_quantities(nr_warequeues,0);
 	Groups l_groups = m_groups; //  make a copy for local modification
 	//log("ActConsume::execute(%s):\n", ps.descname().c_str());
 
@@ -754,18 +742,10 @@ void ProductionProgram::ActConsume::execute
 		result_string            += ' ';
 		result_string            += ps.top_state().program->descname();
 		result_string            += _(" because: ");
-		for
-			(struct {
-			 	Groups::const_iterator       current;
-			 	Groups::const_iterator const end;
-			 } i = {l_groups.begin(), l_groups.end()};;)
+        container_iterate_const_noinc(Groups, l_groups, i)
 		{
 			assert(i.current->first.size());
-			for
-				(struct {
-				 	std::set<Ware_Index>::const_iterator       current;
-				 	std::set<Ware_Index>::const_iterator const end;
-				 } j = {i.current->first.begin(), i.current->first.end()};;)
+            container_iterate_const_noinc(std::set<Ware_Index>, i.current->first, j)
 			{
 				result_string += tribe.get_ware_descr(*j.current)->descname();
 				if (++j.current == j.end)
@@ -865,9 +845,8 @@ void ProductionProgram::ActProduce::execute
 	Tribe_Descr const & tribe = ps.owner().tribe();
 	std::string result_string = _("Produced ");
 	assert(m_items.size());
-	for
-		(struct {Items::const_iterator current; Items::const_iterator const end;}
-		 i = {m_items.begin(), m_items.end()};;)
+
+    container_iterate_const_noinc(Items, m_items, i)
 	{
 		{
 			uint8_t const count = i.current->second;
@@ -950,9 +929,7 @@ void ProductionProgram::ActRecruit::execute
 	Tribe_Descr const & tribe = ps.owner().tribe();
 	std::string result_string = _("Recruited ");
 	assert(m_items.size());
-	for
-		(struct {Items::const_iterator current; Items::const_iterator const end;}
-		 i = {m_items.begin(), m_items.end()};;)
+    container_iterate_const_noinc(Items, m_items, i)
 	{
 		{
 			uint8_t const count = i.current->second;

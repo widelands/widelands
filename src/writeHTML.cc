@@ -909,11 +909,7 @@ void ProductionProgram::ActReturn::writeHTML
 			fw.Text(_("unless"));
 		}
 		fw.Text("</span> ");
-		for
-			(struct {
-			 	Conditions::const_iterator       current;
-			 	Conditions::const_iterator const end;
-			 } i = {m_conditions.begin(), m_conditions.end()};;)
+        container_iterate_const_init(Conditions, m_conditions, i)
 		{
 			(*i.current)->writeHTML(fw, site);
 			if (++i.current == i.end)
@@ -987,11 +983,7 @@ void ProductionProgram::ActReturn::Site_Has::writeHTML
 	fw.Text("</span> <span class=\"keyword\">");
 	fw.Text(_("has"));
 	fw.Text("</span>");
-	for
-		(struct {
-		 	std::set<Ware_Index>::const_iterator       current;
-		 	std::set<Ware_Index>::const_iterator const end;
-		 } i = {group.first.begin(), group.first.end()};;)
+    container_iterate_const_init(std::set<Ware_Index>, group.first, i)
 	{
 		Item_Ware_Descr const & ware_type = *tribe.get_ware_descr(*i.current);
 		std::string const & ware_type_name     = ware_type.    name();
@@ -1175,17 +1167,9 @@ void ProductionProgram::ActConsume::writeHTML
 	fw.Text("\">");
 	fw.Text(_("consume"));
 	fw.Text("</a> ");
-	for
-		(struct {
-		 	Groups::const_iterator       current;
-		 	Groups::const_iterator const end;
-		 } j = {groups().begin(), groups().end()};;)
+    container_iterate_const_init(Groups, groups(), j)
 	{
-		for
-			(struct {
-			 	std::set<Ware_Index>::const_iterator       current;
-			 	std::set<Ware_Index>::const_iterator const end;
-			 } i = {j.current->first.begin(), j.current->first.end()};;)
+        container_iterate_const_init(std::set<Ware_Index>, j.current->first, i)
 		{
 			Item_Ware_Descr const & ware = *tribe.get_ware_descr(*i.current);
 			std::string const & ware_name     = ware.    name();
@@ -1226,11 +1210,7 @@ void ProductionProgram::ActProduce::writeHTML
 	fw.Text("\">");
 	fw.Text(_("produce"));
 	fw.Text("</a> ");
-	for
-		(struct {
-		 	Items::const_iterator       current;
-		 	Items::const_iterator const end;
-		 } i = {items().begin(), items().end()};;)
+    container_iterate_const_init(Items, items(), i)
 	{
 		Item_Ware_Descr const & ware = *tribe.get_ware_descr(i.current->first);
 		std::string const & ware_name     = ware.    name();
@@ -1267,11 +1247,7 @@ void ProductionProgram::ActRecruit::writeHTML
 	fw.Text("\">");
 	fw.Text(_("recruit"));
 	fw.Text("</a> ");
-	for
-		(struct {
-		 	Items::const_iterator       current;
-		 	Items::const_iterator const end;
-		 } i = {items().begin(), items().end()};;)
+    container_iterate_const_init(Items, items(), i)
 	{
 		Worker_Descr const & worker = *tribe.get_worker_descr(i.current->first);
 		std::string const & worker_name     = worker.    name();

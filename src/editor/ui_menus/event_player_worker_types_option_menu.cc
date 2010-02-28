@@ -129,12 +129,9 @@ void Event_Player_Worker_Types_Option_Menu::Table::fill
 	 Widelands::Event_Player_Worker_Types::Worker_Types const & bld_types)
 {
 	for
-		(struct {
-		 	Widelands::Ware_Index       current;
-		 	Widelands::Ware_Index const end;
-		 } i = {Widelands::Ware_Index::First(), tribe.get_nrworkers()};
-		 i.current < i.end;
-		 ++i.current)
+		(wl_index_range<Widelands::Ware_Index> i(tribe.get_nrworkers());
+		 i;
+		 ++i)
 	{
 		Widelands::Worker_Descr const & worker =
 			*tribe.get_worker_descr(i.current);
@@ -187,10 +184,9 @@ void Event_Player_Worker_Types_Option_Menu::OK::clicked() {
 	}
 	Widelands::Event_Player_Worker_Types::Worker_Types worker_types;
 	for
-		(struct {uint8_t current; uint8_t const end;} i =
-		 	{0, menu.table.size()};
-		 i.current < i.end;
-		 ++i.current)
+		(wl_range<uint8_t> i(0, menu.table.size());
+		 i;
+		 ++i)
 		if (menu.table.get_record(i.current).is_checked(Table::Selected))
 			worker_types.insert
 				(Widelands::Ware_Index(menu.table[i.current]));
@@ -244,9 +240,9 @@ void Event_Player_Worker_Types_Option_Menu::change_player(bool const up)
 		/// exist and are buildable in the new tribe.
 		Widelands::Event_Player_Worker_Types::Worker_Types selected_common;
 		for
-			(struct {uint8_t current; uint8_t const end;} i = {0, table.size()};
-			 i.current < i.end;
-			 ++i.current)
+			(wl_range<uint8_t> i(0, table.size());
+			 i;
+			 ++i)
 		{
 			Table::Entry_Record const & er = table.get_record(i.current);
 			if (er.is_checked(Table::Selected))

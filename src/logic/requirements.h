@@ -32,11 +32,11 @@
 namespace Widelands {
 
 class Map_Object;
-class Editor_Game_Base;
-class Map_Map_Object_Loader;
-class Map_Map_Object_Saver;
+struct Editor_Game_Base;
+struct Map_Map_Object_Loader;
+struct Map_Map_Object_Saver;
 
-class RequirementsStorage;
+struct RequirementsStorage;
 
 /**
  * Requirements can be attached to Requests.

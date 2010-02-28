@@ -173,12 +173,7 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 			Widelands::Game_Loader gl(name, m_game);
 			gl.preload_game(gpdp);
 
-			char const * extension, * fname =
-				FileSystem::FS_Filename(name, extension);
-			char fname_without_extension[extension - fname + 1];
-			for (char * p = fname_without_extension;; ++p, ++fname)
-				if (fname == extension) {*p = '\0'; break;} else *p = *fname;
-			m_list.add(fname_without_extension, name);
+            m_list.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);
 		} catch (_wexception const &) {} //  we simply skip illegal entries
 	}
 

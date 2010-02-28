@@ -26,7 +26,7 @@
 
 namespace Widelands {
 
-struct RoutingNode;
+class RoutingNode;
 struct Road;
 
 /***
@@ -57,7 +57,7 @@ typedef std::vector<RoutingNodeNeighbour> RoutingNodeNeighbours;
  * this interface has been extracted to reduce coupling
  */
 class RoutingNode {
-	friend class Router;
+	friend struct Router;
 	friend class RoutingNodeQueue;
 
 // The variables are only protected so that Test classes can use them

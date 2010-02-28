@@ -32,7 +32,7 @@
 #include <cstring>
 #include <vector>
 
-class Fullscreen_Menu_Options;
+struct Fullscreen_Menu_Options;
 struct Section;
 
 #define NUM_RESOLUTIONS 6

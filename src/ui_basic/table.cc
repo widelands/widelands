@@ -398,12 +398,11 @@ Table<void *>::Entry_Record & Table<void *>::add
 	Entry_Record & result = *new Entry_Record(entry);
 	m_entry_records.push_back(&result);
 	result.m_data.resize(m_columns.size());
-	for
-		(struct {
-		 	Columns::size_type       current;
-		 	Columns::size_type const end;
-		 } i = {0, m_columns.size()};
-		 i.current < i.end;
+	struct {
+ 	    Columns::size_type       current;
+ 	    Columns::size_type const end;
+    } i = {0, m_columns.size()};
+	for(;i.current < i.end;
 		 ++i.current)
 		if (m_columns.at(i.current).is_checkbox_column) {
 			result.m_data.at(i.current).d_picture =

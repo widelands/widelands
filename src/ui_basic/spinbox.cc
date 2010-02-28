@@ -161,12 +161,11 @@ SpinBox::SpinBox
  */
 void SpinBox::update()
 {
-	for
-		(struct {
-		 	std::vector<IntValueTextReplacement>::const_iterator       current;
-		 	std::vector<IntValueTextReplacement>::const_iterator const end;
-		 } i = {sbi->valrep.begin(), sbi->valrep.end()};;
-		 ++i.current)
+	struct {
+	 	std::vector<IntValueTextReplacement>::const_iterator       current;
+	 	std::vector<IntValueTextReplacement>::const_iterator const end;
+	 } i = {sbi->valrep.begin(), sbi->valrep.end()};
+	for(;;++i.current)
 		if (i.current == i.end) {
 			char buf[64];
 			snprintf(buf, sizeof(buf), "%i%s", sbi->value, sbi->unit.c_str());

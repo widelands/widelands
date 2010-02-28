@@ -236,9 +236,9 @@ Immovable_Descr::Immovable_Descr
 		 	prof.get_section("terrain affinity"))
 	{
 		memset(it, 0, sizeof(m_terrain_affinity));
-		for
-			(struct {Terrain_Index current; Terrain_Index const nr_terrains;} i =
-			 	{0, world.get_nr_terrains()};
+		struct {Terrain_Index current; Terrain_Index const nr_terrains;} i =
+		 	{0, world.get_nr_terrains()};
+		for(;
 			 i.current < i.nr_terrains;
 			 ++i.current, ++it)
 		{
@@ -421,8 +421,7 @@ uint32_t Immovable_Descr::terrain_suitability
 	World const & world = map.world();
 	uint8_t nr_terrain_types = world.get_nr_terrains();
 	uint32_t result = 0;
-	uint8_t nr_triangles[nr_terrain_types];
-	memset(nr_triangles, 0, nr_terrain_types);
+    std::vector<uint8_t> nr_triangles(nr_terrain_types,0);
 
 	//  Neighbours
 	FCoords const tr = map.tr_n(f);

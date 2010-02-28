@@ -599,19 +599,17 @@ void NetHost::send(ChatMessage msg)
 			}
 			if (i < d->settings.users.size()) {
 				for
-					(struct {
-					 	std::vector<Client>::const_iterator       current;
-					 	std::vector<Client>::const_iterator const end;
-					 } j = {d->clients.begin(), d->clients.end()};;
-					 ++j.current)
-					if        (j.current          == j.end) {
+                    (boost::sub_range<std::vector<Client> > 
+                     j(d->clients);;
+					 j.advance_begin(1))
+					if        (j.empty()) {
 						//  Better no wexception; it would break the whole game.
 						log
 							("WARNING: user was found but no client is connected to "
 							 "it!\n");
 						break;
-					} else if (j.current->usernum == i) {
-						s.send(j.current->sock);
+					} else if (j.front().usernum == i) {
+						s.send(j.front().sock);
 						break;
 					}
 
@@ -790,11 +788,11 @@ void NetHost::setMap
 			file->parts.push_back(fp);
 			leftparts -= readout;
 		}
-		char complete[file->bytes];
+        std::vector<char> complete(file->bytes);
 		fr.SetFilePos(0);
-		fr.DataComplete(complete, file->bytes);
+		fr.DataComplete(&complete[0], file->bytes);
 		MD5Checksum<FileRead> md5sum;
-		md5sum.Data(complete, file->bytes);
+		md5sum.Data(&complete[0], file->bytes);
 		md5sum.FinishChecksum();
 		file->md5sum = md5sum.GetChecksum().str();
 	}

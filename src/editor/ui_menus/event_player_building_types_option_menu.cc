@@ -130,12 +130,9 @@ void Event_Player_Building_Types_Option_Menu::Table::fill
 	 Widelands::Event_Player_Building_Types::Building_Types const & bld_types)
 {
 	for
-		(struct {
-		 	Widelands::Building_Index       current;
-		 	Widelands::Building_Index const end;
-		 } i = {Widelands::Building_Index::First(), tribe.get_nrbuildings()};
-		 i.current < i.end;
-		 ++i.current)
+		(wl_index_range<Widelands::Building_Index> i(tribe.get_nrbuildings());
+		 i;
+		 ++i)
 	{
 		Widelands::Building_Descr const & building =
 			*tribe.get_building_descr(i.current);
@@ -211,10 +208,9 @@ void Event_Player_Building_Types_Option_Menu::OK::clicked() {
 	}
 	Widelands::Event_Player_Building_Types::Building_Types building_types;
 	for
-		(struct {uint8_t current; uint8_t const end;} i =
-		 	{0, menu.table.size()};
-		 i.current < i.end;
-		 ++i.current)
+        (wl_range<uint8_t> i(0, menu.table.size());
+         i;
+         ++i)
 		if (menu.table.get_record(i.current).is_checked(Table::Selected))
 			building_types.insert
 				(Widelands::Building_Index(menu.table[i.current]));
@@ -268,9 +264,9 @@ void Event_Player_Building_Types_Option_Menu::change_player(bool const up)
 		/// exist in the new tribe.
 		Widelands::Event_Player_Building_Types::Building_Types selected_common;
 		for
-			(struct {uint8_t current; uint8_t const end;} i = {0, table.size()};
-			 i.current < i.end;
-			 ++i.current)
+			(wl_range<uint8_t> i(0, table.size());
+			 i;
+			 ++i)
 		{
 			Table::Entry_Record const & er = table.get_record(i.current);
 			if (er.is_checked(Table::Selected))

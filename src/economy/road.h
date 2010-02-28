@@ -49,6 +49,8 @@ struct Road : public PlayerImmovable {
 	friend struct Map_Roaddata_Data_Packet; // For saving
 	friend struct Map_Road_Data_Packet; // For init()
 
+    static const Map_Object_Descr &GetRoadDescr();
+
 	enum FlagId {
 		FlagStart = 0,
 		FlagEnd = 1

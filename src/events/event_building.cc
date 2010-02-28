@@ -186,11 +186,13 @@ Event_Building::Event_Building
 									 '\0',
 									 nr_ware_types * sizeof(uint32_t));
 							else
-								for
-									(struct {
+                            {
+                                struct {
 									 	uint8_t                    i;
 									 	Ware_Types::const_iterator it;
 									 } i = {0, inputs.begin()};
+								for
+									(;
 									 i.i < nr_ware_types;
 									 ++i.i, ++i.it)
 								{
@@ -205,6 +207,7 @@ Event_Building::Event_Building
 											 count, wname, max);
 									m_ware_counts[i.i] = count;
 								}
+                            }
 						}
 						{ //  workers
 							bool const fill =
@@ -213,9 +216,9 @@ Event_Building::Event_Building
 								ps_descr->working_positions();
 							uint8_t const nr_worker_types = working_positions.size();
 							m_worker_counts = new uint32_t[nr_worker_types];
-							for
-								(struct {uint8_t i; Ware_Types::const_iterator it;} i =
-								 	{0, working_positions.begin()};
+							struct {uint8_t i; Ware_Types::const_iterator it;} i =
+							 	{0, working_positions.begin()};
+							for(;
 								 i.i < nr_worker_types;
 								 ++i.i, ++i.it)
 							{
@@ -365,26 +368,24 @@ void Event_Building::Write
 	s.set_string("building", descr.name().c_str());
 	if (dynamic_cast<Warehouse_Descr const *>(&descr)) {
 		for //  wares
-			(struct {Ware_Index i; Ware_Index const nr_ware_types;} i =
-			 	{Ware_Index::First(), tribe.get_nrwares()};
-			 i.i < i.nr_ware_types;
-			 ++i.i)
-			if (uint32_t const count = m_ware_counts[i.i.value()])
-				s.set_int(tribe.get_ware_descr(i.i)->name().c_str(), count);
+			(Ware_Index i = Ware_Index::First();
+			 i < tribe.get_nrwares();
+			 ++i)
+			if (uint32_t const count = m_ware_counts[i.value()])
+				s.set_int(tribe.get_ware_descr(i)->name().c_str(), count);
 		for //  workers
-			(struct {Ware_Index i; Ware_Index const nr_worker_types;} i =
-			 	{Ware_Index::First(), tribe.get_nrworkers()};
-			 i.i < i.nr_worker_types;
-			 ++i.i)
-			if (uint32_t const count = m_worker_counts[i.i.value()])
-				s.set_int(tribe.get_worker_descr(i.i)->name().c_str(), count);
+			(Ware_Index i = Ware_Index::First(); 
+             i < tribe.get_nrworkers();
+			 ++i)
+			if (uint32_t const count = m_worker_counts[i.value()])
+				s.set_int(tribe.get_worker_descr(i)->name().c_str(), count);
 	} else if (upcast(ProductionSite_Descr const, ps_descr, &descr)) {
 		{ //  wares
 			Ware_Types const & inputs = ps_descr->inputs();
 			uint8_t const nr_ware_types = inputs.size();
-			for
-				(struct {uint8_t i; Ware_Types::const_iterator it;} i =
-				 	{0, inputs.begin()};
+			struct {uint8_t i; Ware_Types::const_iterator it;} i =
+                   {0, inputs.begin()};
+			for(;
 				 i.i < nr_ware_types;
 				 ++i.i, ++i.it)
 				if (uint32_t const count = m_ware_counts[i.i])
@@ -394,9 +395,9 @@ void Event_Building::Write
 		{ //  workers
 			Ware_Types const & working_positions = ps_descr->working_positions();
 			uint8_t const nr_worker_types = working_positions.size();
-			for
-				(struct {uint8_t i; Ware_Types::const_iterator it;} i =
-				 	{0, working_positions.begin()};
+			struct {uint8_t i; Ware_Types::const_iterator it;} i =
+			 	{0, working_positions.begin()};
+			for(;
 				 i.i < nr_worker_types;
 				 ++i.i, ++i.it)
 				if (uint32_t const count = m_worker_counts[i.i])

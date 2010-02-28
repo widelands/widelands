@@ -144,7 +144,7 @@ struct BulldozeConfirm : public UI::Window {
 	}
 
 	virtual void think();
-
+    void close_window() { die();}
 private:
 	Widelands::Object_Ptr m_building;
 	Widelands::Object_Ptr m_todestroy;
@@ -181,7 +181,7 @@ private:
 				 g_gr->get_picture(PicMod_Game, "pics/menu_abort.png"))
 		{}
 		void clicked() {
-			ref_cast<BulldozeConfirm, UI::Panel>(*get_parent()).die();
+			ref_cast<BulldozeConfirm, UI::Panel>(*get_parent()).close_window();
 		}
 	} m_cancel;
 };
@@ -257,7 +257,7 @@ void BulldozeConfirm::OK::clicked()
 		iaplayer.need_complete_redraw();
 	}
 
-	parent.die();
+	parent.close_window();
 }
 
 
@@ -463,8 +463,8 @@ class Building_Window
 Baseclass providing common tools for building windows.
 */
 struct Building_Window : public UI::Window {
-	friend class TrainingSite_Window;
-	friend class MilitarySite_Window;
+	friend struct TrainingSite_Window;
+	friend struct MilitarySite_Window;
 	enum {
 		Width = 4 * 34 //  4 normally sized buttons
 	};

@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-class PlayerImmovable;
+struct PlayerImmovable;
 
 /*
 

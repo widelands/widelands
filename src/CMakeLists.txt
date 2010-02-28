@@ -19,6 +19,7 @@ foreach (sourcefile ${WL_SRCS_ALL})
   endif (${sourcefile} MATCHES ".*/test/.*")
 endforeach (sourcefile ${WL_SRCS_ALL})
 
+if (WL_CODECHECK_ENABLED)
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
 set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/*_codecheck_stamp_)
 
@@ -35,6 +36,7 @@ foreach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
     )
     add_custom_target(${stamp} ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp})
 endforeach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
+endif (WL_CODECHECK_ENABLED)
 
 IF (MINGW)
   # resource compilation for MinGW
@@ -107,7 +109,11 @@ if (APPLE)
 endif (APPLE)
 
 if (WIN32)
+if (DEFINED MSVC)
+  target_link_libraries(widelands ${INTL_LIBRARY})
+else (DEFINED MSVC)
   target_link_libraries(widelands intl)
+endif (DEFINED MSVC) 
   target_link_libraries(widelands wsock32)
 endif (WIN32)
 

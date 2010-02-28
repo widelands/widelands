@@ -25,6 +25,12 @@
 #include <string>
 #include <cstring>
 
+#ifdef _MSC_VER
+#ifndef __attribute__
+#define __attribute__(x) 
+#endif
+#endif
+
 namespace Widelands {
 
 /**

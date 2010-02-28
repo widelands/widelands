@@ -608,13 +608,14 @@ void Graphic::save_png(const PictureID & pic_index, StreamWrite * const sw)
 
 	// Write each row
 		for (uint32_t y = 0; y < surf_h; ++y) {
-			png_byte row[row_size];
-			png_bytep rowp = row;
+            std::vector<png_byte> row(row_size,0);
+//			png_byte row[row_size];
+			png_bytep rowp = &row[0];
 			for (uint32_t x = 0; x < surf_w; rowp += 4, ++x)
 				SDL_GetRGBA
 					(surf.get_pixel(x, y), &format,
 					 rowp + 0, rowp + 1, rowp + 2, rowp + 3);
-			png_write_row(png_ptr, row);
+			png_write_row(png_ptr, &row[0]);
 		}
 	}
 
@@ -694,16 +695,7 @@ void Graphic::free_surface(const PictureID & picid) {
 	//delete pic->surface;
 	//pic.surface = 0;
 	//pic.module = 0;
-	for
-		(struct {
-		 	Picturemap::      iterator       current;
-		 	Picturemap::const_iterator const end;
-		 } it = {
-		 	m_picturemap[picid->module].begin(),
-		 	m_picturemap[picid->module].end  ()
-		 };
-		 it.current != it.end;
-		 ++it.current)
+    container_iterate(Picturemap, m_picturemap[picid->module], it)
 		if (it.current->second == picid) {
 			m_picturemap[picid->module].erase(it.current);
 			break;
@@ -822,7 +814,7 @@ void Graphic::load_animations(UI::ProgressWindow & loader_ui) {
 		const uint32_t percent = 100 * id / nr_animations;
 		if (percent != last_shown) {
 			last_shown = percent;
-			loader_ui.stepf(step_description, percent);
+			loader_ui.stepf(step_description, (int32_t)percent);
 		}
 		++id;
 		m_animations.push_back(new AnimationGfx(g_anim.get_animation(id)));

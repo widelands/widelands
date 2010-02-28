@@ -265,20 +265,18 @@ void LAN_Game_Finder::run ()
 		//  if the game already is in the list, update the information
 		//  otherwise just append it to the list
 		for
-			(struct {
-			 	std::list<Net_Open_Game *>::const_iterator       current;
-			 	std::list<Net_Open_Game *>::const_iterator const end;
-			 } i = {opengames.begin(), opengames.end()};;)
-			if (i.current == i.end) {
+            (boost::sub_range<std::list<Net_Open_Game *> > 
+             i(opengames);;)
+			if (i.empty()) {
 				opengames.push_back (new Net_Open_Game);
 				opengames.back()->address = addr.sin_addr.s_addr;
 				opengames.back()->port    = htons(WIDELANDS_PORT);
 				opengames.back()->info    = info;
 				callback (GameOpened, opengames.back(), userdata);
 				break;
-			} else if ((*i.current)->address == addr.sin_addr.s_addr) {
-				(*i.current)->info = info;
-				callback (GameUpdated, *i.current, userdata);
+			} else if (i.front()->address == addr.sin_addr.s_addr) {
+				i.front()->info = info;
+				callback (GameUpdated, i.front(), userdata);
 				break;
 			}
 	}

@@ -27,8 +27,8 @@ namespace Widelands {
 struct PlayerImmovable;
 struct Game;
 struct Request;
-struct WareInstance;
-struct Worker;
+class WareInstance;
+class Worker;
 
 /**
  * A Supply is a virtual base class representing something that can offer

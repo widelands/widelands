@@ -33,6 +33,7 @@
 #include "ref_cast.h"
 
 #include <string>
+#include "container_iterate.h"
 
 struct Editor_Interactive;
 namespace Widelands {struct Tribe_Descr;}
@@ -103,10 +104,9 @@ private:
 				ref_cast<Event_Player_Building_Types_Option_Menu, UI::Panel>
 					(*get_parent());
 			for
-				(struct {uint8_t current; uint8_t const end;} i =
-				 	{0, menu.table.size()};
-				 i.current < i.end;
-				 ++i.current)
+				(wl_range<uint8_t> i(0, menu.table.size());
+				 i;
+				 ++i)
 				menu.table.get_record(i.current).set_checked
 					(Table::Selected, false);
 		}
@@ -124,10 +124,9 @@ private:
 				ref_cast<Event_Player_Building_Types_Option_Menu, UI::Panel>
 					(*get_parent());
 			for
-				(struct {uint8_t current; uint8_t const end;} i =
-				 	{0, menu.table.size()};
-				 i.current < i.end;
-				 ++i.current)
+				(wl_range<uint8_t> i(0, menu.table.size());
+				 i;
+				 ++i)
 				menu.table.get_record(i.current).toggle(Table::Selected);
 		}
 	} invert_selection;

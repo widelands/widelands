@@ -52,6 +52,36 @@ if (DEFINED WL_VERSION_MAJOR)
   endif (DEFINED WL_VERSION_MINOR)
 endif (DEFINED WL_VERSION_MAJOR)
 
+set (WL_CODECHECK_ENABLED "TRUE" CACHE BOOL "Enable code checking")
+#If building with MSVC, then check for 3rdparty libs
+if (DEFINED MSVC)
+  set (CMAKE_INCLUDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/include;${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/include/sdl")
+  set (CMAKE_LIBRARY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/lib")
+
+  add_definitions( -Dand=&& -Dor=|| -Dnot=! -Dxor=^ )
+  add_definitions( -Dstrcasecmp=_stricmp )
+  add_definitions( -Dstrncasecmp=_strnicmp )
+  add_definitions( -Dsnprintf=_snprintf )
+  add_definitions( -Drint=floor )
+  add_definitions( -Dstrtoll=_strtoi64 )
+  add_definitions( -Dstrtoull=_strtoui64 )
+  add_definitions( -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS )
+  add_definitions( -Dssize_t=size_t )
+  add_definitions( -Dmkdir=_mkdir )
+
+
+  find_library(INTL_LIBRARY NAMES intl libintl)
+
+# CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
+set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MDd /Zi /D_DEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+
+# CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
+set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG /MD" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+
+set (CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} /NODEFAULTLIB:msvcrt.lib" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  
+endif (DEFINED MSVC)
+
 if (NOT DEFINED WL_VERSION)
 #  find_package (PythonInterp REQUIRED)
   execute_process (

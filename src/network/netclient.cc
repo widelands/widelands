@@ -550,10 +550,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 				FileRead fr;
 				fr.Open(*g_fs, path.c_str());
 				if (bytes == fr.GetSize()) {
-					char complete[bytes];
-					fr.DataComplete(complete, bytes);
+                    std::auto_ptr<char> complete(new char[bytes]);
+					fr.DataComplete(complete.get(), bytes);
 					MD5Checksum<FileRead> md5sum;
-					md5sum.Data(complete, bytes);
+					md5sum.Data(complete.get(), bytes);
 					md5sum.FinishChecksum();
 					std::string localmd5 = md5sum.GetChecksum().str();
 					if (localmd5 == md5)
@@ -596,10 +596,11 @@ void NetClient::handle_packet(RecvPacket & packet)
 		s.send(d->sock);
 
 		FilePart fp;
-		char buf[size];
-		if (packet.Data(buf, size) != size)
+
+        std::vector<char> buf(size);
+		if (packet.Data(&buf[0], size) != size)
 			log("Readproblem. Will try to go on anyways\n");
-		memcpy(fp.part, buf, size);
+		memcpy(fp.part, &buf[0], size);
 		file->parts.push_back(fp);
 
 		// Write file to disk as soon as all parts arrived
@@ -622,10 +623,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 			// Check for consistence
 			FileRead fr;
 			fr.Open(*g_fs, file->filename.c_str());
-			char complete[file->bytes];
-			fr.DataComplete(complete, file->bytes);
+            std::vector<char> complete(file->bytes);
+			fr.DataComplete(&complete[0], file->bytes);
 			MD5Checksum<FileRead> md5sum;
-			md5sum.Data(complete, file->bytes);
+			md5sum.Data(&complete[0], file->bytes);
 			md5sum.FinishChecksum();
 			std::string localmd5 = md5sum.GetChecksum().str();
 			if (localmd5 != file->md5sum) {

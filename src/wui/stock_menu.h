@@ -25,7 +25,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
-class WaresDisplay;
+struct WaresDisplay;
 struct Interactive_Player;
 namespace Widelands {struct Economy;}
 
