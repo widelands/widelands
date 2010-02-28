@@ -66,7 +66,7 @@ add_subdirectory(ui_basic)
 add_subdirectory(ui_fsmenu)
 add_subdirectory(wui)
 
-add_executable (widelands ${GUI_TYPE} build_info.cc)
+add_executable (widelands ${GUI_TYPE} main.cc build_info.cc)
 
 target_link_libraries(widelands widelands_main)
 
@@ -115,6 +115,9 @@ endif (APPLE)
 if (WIN32)
   target_link_libraries(widelands intl)
   target_link_libraries(widelands wsock32)
+  target_link_libraries(widelands ggzmod)
+  target_link_libraries(widelands ggzcore)
+  target_link_libraries(widelands ggz)
 endif (WIN32)
 
 install(TARGETS widelands DESTINATION ${WL_INSTALL_BINDIR} COMPONENT ExecutableFiles)
