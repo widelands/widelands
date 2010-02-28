@@ -15,14 +15,19 @@ project (widelands)
 #     Suffix of the Build version (e.g. bzr, DEV, RC1, ...)
 # CMAKE_INSTALL_PREFIX:
 #     Prefix for installation of the files.
+#     This is not the install dir which is used for config.h - see WL_INSTALL_PREFIX
 #     default: /usr/local
-# CMAKE_BINDIR:
+# CMAKE_INSTALL_PREFIX:
+#     Prefix for INSTALL_PREFIX in config.h.
+#     This is not the install dir for make install - see CMAKE_INSTALL_PREFIX
+#     default: .
+# WL_INSTALL_BINDIR:
 #     Directory the binary should be in (relative to CMAKE_INSTALL_PREFIX)
 #     default: games
-# CMAKE_DATADIR
+# WL_INSTALL_DATADIR
 #     Directory for the Widelands data (relative to CMAKE_INSTALL_PREFIX)
 #     default: share/games/widelands
-# CMAKE_LOCALEDIR
+# WL_INSTALL_LOCALEDIR
 #     Directory for Widelands locales (relative to CMAKE_INSTALL_PREFIX)
 #     default: share/games/widelands/locale
 
@@ -49,34 +54,25 @@ endif (WL_VERSION_STANDARD STREQUAL "TRUE")
 # Define the directory structure for installation - will be hardcoded in WL bin
 # If nothing is given on command line, set the standard values.
 
-# General install prefix
-if (NOT CMAKE_INSTALL_PREFIX OR CMAKE_INSTALL_PREFIX STREQUAL "")
-	set (WL_INSTALL_PREFIX /usr/local)
-else (NOT CMAKE_INSTALL_PREFIX OR CMAKE_INSTALL_PREFIX STREQUAL "")
-	set (WL_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
-endif (NOT CMAKE_INSTALL_PREFIX OR CMAKE_INSTALL_PREFIX STREQUAL "")
+# General install prefix for config.h
+if (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
+	set (WL_INSTALL_PREFIX .)
+endif (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
 
 # Widelands binary directory
-if (NOT CMAKE_BINDIR OR CMAKE_BINDIR STREQUAL "")
+if (NOT WL_INSTALL_BINDIR OR WL_INSTALL_BINDIR STREQUAL "")
 	set (WL_INSTALL_BINDIR games)
-else (NOT CMAKE_BINDIR OR CMAKE_BINDIR STREQUAL "")
-	set (WL_INSTALL_BINDIR ${CMAKE_BINDIR})
-endif (NOT CMAKE_BINDIR OR CMAKE_BINDIR STREQUAL "")
+endif (NOT WL_INSTALL_BINDIR OR WL_INSTALL_BINDIR STREQUAL "")
 
 # Widelands data directory
-if (NOT CMAKE_DATADIR OR CMAKE_DATADIR STREQUAL "")
+if (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
 	set (WL_INSTALL_DATADIR share/games/widelands)
-else (NOT CMAKE_DATADIR OR CMAKE_DATADIR STREQUAL "")
-	set (WL_INSTALL_DATADIR ${CMAKE_DATADIR})
-endif (NOT CMAKE_DATADIR OR CMAKE_DATADIR STREQUAL "")
+endif (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
 
 # Widelands locale directory
-if (NOT CMAKE_LOCALEDIR OR CMAKE_LOCALEDIR STREQUAL "")
+if (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
 	set (WL_INSTALL_LOCALEDIR share/games/widelands/locale)
-else (NOT CMAKE_LOCALEDIR OR CMAKE_LOCALEDIR STREQUAL "")
-	set (WL_INSTALL_LOCALEDIR ${CMAKE_LOCALEDIR})
-endif (NOT CMAKE_LOCALEDIR OR CMAKE_LOCALEDIR STREQUAL "")
-
+endif (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
 
 # is this needed?
 set (WL_SOURCE_CHECKER ${CMAKE_CURRENT_SOURCE_DIR}/cmake/codecheck/CodeCheck.py)
