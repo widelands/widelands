@@ -129,7 +129,7 @@ void Event_Player_Worker_Types_Option_Menu::Table::fill
 	 Widelands::Event_Player_Worker_Types::Worker_Types const & bld_types)
 {
 	for
-		(wl_index_range<Widelands::Ware_Index> i(tribe.get_nrworkers());
+        (wl_index_range<Widelands::Ware_Index> i(Widelands::Ware_Index::First(), tribe.get_nrworkers());
 		 i;
 		 ++i)
 	{
@@ -184,7 +184,7 @@ void Event_Player_Worker_Types_Option_Menu::OK::clicked() {
 	}
 	Widelands::Event_Player_Worker_Types::Worker_Types worker_types;
 	for
-		(wl_range<uint8_t> i(0, menu.table.size());
+		(wl_index_range<uint8_t> i(0, menu.table.size());
 		 i;
 		 ++i)
 		if (menu.table.get_record(i.current).is_checked(Table::Selected))
@@ -240,7 +240,7 @@ void Event_Player_Worker_Types_Option_Menu::change_player(bool const up)
 		/// exist and are buildable in the new tribe.
 		Widelands::Event_Player_Worker_Types::Worker_Types selected_common;
 		for
-			(wl_range<uint8_t> i(0, table.size());
+			(wl_index_range<uint8_t> i(0, table.size());
 			 i;
 			 ++i)
 		{

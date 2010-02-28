@@ -242,7 +242,7 @@ void GameMessageMenu::Archive_Or_Restore_Selected_Messages::clicked() {
 	switch (menu.mode) {
 	case Inbox:
 		for
-			(wl_range<uint8_t> i(0, menu.list.size());
+			(wl_index_range<uint8_t> i(0, menu.list.size());
 			 i;
 			 ++i)
 			if (menu.list.get_record(i.current).is_checked(List::Select))
@@ -252,7 +252,7 @@ void GameMessageMenu::Archive_Or_Restore_Selected_Messages::clicked() {
 		break;
 	case Archive:
 		for
-			(wl_range<uint8_t> i(0, menu.list.size());
+			(wl_index_range<uint8_t> i(0, menu.list.size());
 			 i;
 			 ++i)
 			if (menu.list.get_record(i.current).is_checked(List::Select))

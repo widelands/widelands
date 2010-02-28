@@ -621,9 +621,9 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				//  Find a working position that matches this request.
 				ProductionSite::Working_Position * wp = &wp_begin;
 				for
-                    (boost::sub_range<const Ware_Types>
+                    (wl_const_range<Ware_Types>
                      j(working_positions);;
-					 j.advance_begin(1))
+					 ++j)
 				{
 					if (j.empty())
 						throw game_data_error
@@ -631,9 +631,9 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 							 "position",
 							 productionsite.tribe()
 							 .get_worker_descr(req.get_index())->name().c_str());
-					uint32_t count = j.front().second;
+					uint32_t count = j->second;
 					assert(count);
-					if (worker_index == j.front().first) {
+					if (worker_index == j->first) {
 						while (wp->worker_request)
 							if (--count)
 								++wp;
@@ -659,17 +659,17 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				//  Find a working position that matches this worker.
 				ProductionSite::Working_Position * wp = &wp_begin;
 				for
-                    (boost::sub_range<const Ware_Types> j(working_positions);;
-					 j.advance_begin(1))
+                    (wl_const_range<Ware_Types> j(working_positions);;
+					 ++j)
 				{
 					if (j.empty())
 						throw game_data_error
 							("site has %s, for which there is no free working "
 							 "position",
 							 worker_descr.name().c_str());
-					uint32_t count = j.front().second;
+					uint32_t count = j->second;
 					assert(count);
-					if (worker_descr.can_act_as(j.front().first)) {
+					if (worker_descr.can_act_as(j->first)) {
 						while (wp->worker or wp->worker_request) {
 							++wp;
 							if (not --count)

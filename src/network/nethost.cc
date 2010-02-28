@@ -599,17 +599,17 @@ void NetHost::send(ChatMessage msg)
 			}
 			if (i < d->settings.users.size()) {
 				for
-                    (boost::sub_range<std::vector<Client> > 
+                    (wl_range<std::vector<Client> > 
                      j(d->clients);;
-					 j.advance_begin(1))
+					 ++j)
 					if        (j.empty()) {
 						//  Better no wexception; it would break the whole game.
 						log
 							("WARNING: user was found but no client is connected to "
 							 "it!\n");
 						break;
-					} else if (j.front().usernum == i) {
-						s.send(j.front().sock);
+					} else if (j->usernum == i) {
+						s.send(j->sock);
 						break;
 					}
 

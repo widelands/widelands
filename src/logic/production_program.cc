@@ -61,14 +61,14 @@ void ProductionProgram::parse_ware_type_group
 		*parameters = '\0';
 		Ware_Index const ware_index = tribe.safe_ware_index(ware);
 		for
-            (boost::sub_range<Ware_Types const> i(inputs);;i.advance_begin(1))
+            (wl_const_range<Ware_Types> i(inputs);;++i)
 			if (i.empty())
 				throw game_data_error
 					(_
 					 	("%s is not declared as an input (\"%s=<count>\" was not "
 					 	 "found in the [inputs] section)"),
 					 ware, ware);
-			else if (i.front().first == ware_index) {
+			else if (i->first == ware_index) {
 				count_max += i.front().second;
 				break;
 			}

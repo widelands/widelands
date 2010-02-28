@@ -20,49 +20,76 @@
 #ifndef CONTAINER_ITERATE_H
 #define CONTAINER_ITERATE_H
 
-#include "boost/range.hpp"
+
+template<class T> 
+struct wl_index_range
+{
+    wl_index_range(const T &beginIndex, const T &endIndex) : current(beginIndex), end(endIndex) {}
+    wl_index_range(const wl_index_range &r) : current(r.current), end(r.end) {}
+    wl_index_range(T &r) : current(r.begin()), end(r.end()) {}
+    T current;
+    wl_index_range &operator++() {++current;return *this;}
+//    wl_range &operator++(int) {wl_range r(*this);++current;return r;}
+    bool empty() const {return current==end;}
+    operator bool() const
+    {
+        return empty() ? false: true;
+    }
+private:
+    T end;
+};
+
+
+template<class C> 
+struct wl_range
+{
+    wl_range(typename C::iterator &first, typename C::iterator &last) : current(first), end(last) {}
+    wl_range(C &container) : current(container.begin()), end(container.end()) {}
+    wl_range(const wl_range &r) : current(r.current), end(r.end) {}
+    typename C::iterator current;
+    wl_range &operator++() {++current;return *this;}
+    bool empty() const {return current==end;}
+    operator bool() const
+    {
+        return empty() ? false: true;
+    }
+    typename C::reference front() const { return *current;}
+    typename C::reference operator*() const { return *current;}
+    typename C::pointer operator->() const { return (&**this);}
+    typename C::iterator get_end(){ return end;}
+private:
+    typename C::iterator  end;
+};
+
+template<class C> 
+struct wl_const_range
+{
+    wl_const_range(typename const C::const_iterator &first, typename const C::const_iterator &last) : current(first), end(last) {}
+    wl_const_range(const C &container) : current(container.begin()), end(container.end()) {}
+    wl_const_range(const wl_const_range &r) : current(r.current), end(r.end) {}
+    typename C::const_iterator current;
+    wl_const_range &operator++() {++current;return *this;}
+    bool empty() const {return current==end;}
+    operator bool() const
+    {
+        return empty() ? false: true;
+    }
+    typename C::const_reference front() const { return *current;}
+    typename C::const_reference operator*() const { return *current;}
+    typename C::const_pointer operator->() const { return (&**this);}
+private:
+    typename C::const_iterator end;
+};
 
 // helper for erasing element in range so that range stays valid.
 // temporary variable ensures that end() is evaluated after erase().
 template <class C> 
-boost::sub_range<C>
+wl_range<C>
 wl_erase(C &c, typename C::iterator &w)
 {
     C::iterator it = c.erase(w); 
-    return boost::sub_range<C>(it , c.end());
+    return wl_range<C>(it , c.end());
 }
-
-template<class I> 
-struct wl_index_range
-{
-    wl_index_range(I max) : current(I::First()), end(max) {}
-    wl_index_range(const wl_index_range &r) : current(r.current), end(r.end) {}
-    I current;
-    I end;
-    wl_index_range &operator++() {++current;return *this;}
-    wl_index_range &operator++(int) {wl_index_range r(*this);++current;return r;}
-    bool empty() const {return current==end;}
-    operator bool() const
-    {
-        return empty() ? false: true;
-    }
-};
-template<class T> 
-struct wl_range
-{
-    wl_range(T beginIndex, T endIndex) : current(beginIndex), end(endIndex) {}
-    wl_range(const wl_range &r) : current(r.current), end(r.end) {}
-    wl_range(T &r) : current(r.begin()), end(r.end()) {}
-    T current;
-    T end;
-    wl_range &operator++() {++current;return *this;}
-    wl_range &operator++(int) {wl_range r(*this);++current;return r;}
-    bool empty() const {return current==end;}
-    operator bool() const
-    {
-        return empty() ? false: true;
-    }
-};
 
 template<class T1, class T2=T1 const> struct wl_iterator_helper
 {

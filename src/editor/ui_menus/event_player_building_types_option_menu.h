@@ -104,7 +104,7 @@ private:
 				ref_cast<Event_Player_Building_Types_Option_Menu, UI::Panel>
 					(*get_parent());
 			for
-				(wl_range<uint8_t> i(0, menu.table.size());
+				(wl_index_range<uint8_t> i(0, menu.table.size());
 				 i;
 				 ++i)
 				menu.table.get_record(i.current).set_checked
@@ -124,7 +124,7 @@ private:
 				ref_cast<Event_Player_Building_Types_Option_Menu, UI::Panel>
 					(*get_parent());
 			for
-				(wl_range<uint8_t> i(0, menu.table.size());
+				(wl_index_range<uint8_t> i(0, menu.table.size());
 				 i;
 				 ++i)
 				menu.table.get_record(i.current).toggle(Table::Selected);

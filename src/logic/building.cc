@@ -284,9 +284,9 @@ Building::~Building()
 
 void Building::load_finish(Editor_Game_Base & egbase) {
 	Leave_Queue & queue = m_leave_queue;
-	for (boost::sub_range<Leave_Queue> i(queue);i;)
+	for (wl_range<Leave_Queue> i(queue);i;)
 	{
-		Worker & worker = *i.front().get(egbase);
+		Worker & worker = *i->get(egbase);
 		{
 			OPtr<PlayerImmovable> const worker_location = worker.get_location();
 			if
@@ -311,10 +311,10 @@ void Building::load_finish(Editor_Game_Base & egbase) {
 				 "leavebuilding task is for map object %u! Removing from queue.\n",
 				 worker.serial(), serial(), state->objvar1.serial());
 		else {
-			i.advance_begin(1);
+			++i;
 			continue;
 		}
-        i = wl_erase(queue, i.begin());
+        i = wl_erase(queue, i.current);
 	}
 }
 

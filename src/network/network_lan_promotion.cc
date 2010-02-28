@@ -265,7 +265,7 @@ void LAN_Game_Finder::run ()
 		//  if the game already is in the list, update the information
 		//  otherwise just append it to the list
 		for
-            (boost::sub_range<std::list<Net_Open_Game *> > 
+            (wl_range<std::list<Net_Open_Game *> > 
              i(opengames);;)
 			if (i.empty()) {
 				opengames.push_back (new Net_Open_Game);
