@@ -117,4 +117,4 @@ if (WIN32)
   target_link_libraries(widelands wsock32)
 endif (WIN32)
 
-install(TARGETS widelands DESTINATION bin COMPONENT ExecutableFiles)
+install(TARGETS widelands DESTINATION ${WL_INSTALL_BINDIR} COMPONENT ExecutableFiles)

@@ -285,7 +285,7 @@ add_custom_target (
 
 install(
   DIRECTORY
-    ${CMAKE_CURRENT_BINARY_DIR}/locale
+    ${CMAKE_CURRENT_BINARY_DIR}/locale/
   DESTINATION ${WL_INSTALL_LOCALEDIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreLanguageFiles
