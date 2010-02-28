@@ -4,22 +4,79 @@ project (widelands)
 # set them via cmake -DVARIABLE=VALUE
 # CMAKE_BUILD_TYPE:
 #     Default is "Debug", Distributors should use "Release"
+# WL_VERSION_STANDARD
+#     Uses the defined standard values for versioning ("BuildXX.YY") if defined.
+#     (Should be set for each official release below.)
 # WL_VERSION_MAJOR, WL_VERSION_MINOR (, WL_VERSION_PATCH):
 #     Default is using SVN revision, Distributors should use correct version
 #     Attention: We are currently only using MAJOR and MINOR.
 #     If you try to set WL_VERSION directly, it will ignore your setting.
+# WL_VERSION_ADDITION:
+#     Suffix of the Build version (e.g. bzr, DEV, RC1, ...)
+# CMAKE_INSTALL_PREFIX:
+#     Prefix for installation of the files.
+#     default: /usr/local
+# CMAKE_BINDIR:
+#     Directory the binary should be in (relative to CMAKE_INSTALL_PREFIX)
+#     default: games
+# CMAKE_DATADIR
+#     Directory for the Widelands data (relative to CMAKE_INSTALL_PREFIX)
+#     default: share/games/widelands
+# CMAKE_LOCALEDIR
+#     Directory for Widelands locales (relative to CMAKE_INSTALL_PREFIX)
+#     default: share/games/widelands/locale
 
 cmake_minimum_required (VERSION 2.6)
 
-# TODO This will need to cleanup, see mailing list recommendations
-#set (WL_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
-#set (WL_INSTALL_BINDIR ${WL_INSTALL_PREFIX}/bin/)
-#set (WL_INSTALL_DATADIR ${WL_INSTALL_PREFIX}/share/widelands/)
-#set (WL_INSTALL_LOCALEDIR ${WL_INSTALL_DATADIR}/locale/)
-set (WL_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
-set (WL_INSTALL_BINDIR .)
-set (WL_INSTALL_DATADIR share/widelands)
-set (WL_INSTALL_LOCALEDIR ${WL_INSTALL_PREFIX}/${WL_INSTALL_DATADIR}/locale)
+
+# Used as versioning, if WL_VERSION_STANDARD is definded.
+if (WL_VERSION_STANDARD STREQUAL "TRUE")
+	# Set the values below for standard versioning.
+	# As long as WL_VERSION_MAJOR is 0, the naming will be in form of
+	# "Build${WL_VERSION_MINOR}" + ".${WL_VERSION_PATCH}" if WL_VERSION_PATCH is
+	# defined.
+	set (WL_VERSION_MAJOR 0)
+	set (WL_VERSION_MINOR 15)
+
+	# Just define in case that we release patches for official builds
+	#set (WL_VERSION_PATCH 90)
+
+	# An addition to the version name (e.g. RC1, DEV, ...)
+	set (WL_VERSION_ADDITION DEV)
+endif (WL_VERSION_STANDARD STREQUAL "TRUE")
+
+
+# Define the directory structure for installation - will be hardcoded in WL bin
+# If nothing is given on command line, set the standard values.
+
+# General install prefix
+if (CMAKE_INSTALL_PREFIX STREQUAL "")
+	set (WL_INSTALL_PREFIX /usr/local)
+else (CMAKE_INSTALL_PREFIX STREQUAL "")
+	set (WL_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
+endif (CMAKE_INSTALL_PREFIX STREQUAL "")
+
+# Widelands binary directory
+if (CMAKE_BINDIR STREQUAL "")
+	set (WL_INSTALL_BINDIR games)
+else (CMAKE_BINDIR STREQUAL "")
+	set (WL_INSTALL_BINDIR ${CMAKE_BINDIR})
+endif (CMAKE_BINDIR STREQUAL "")
+
+# Widelands data directory
+if (CMAKE_DATADIR STREQUAL "")
+	set (WL_INSTALL_DATADIR share/games/widelands)
+else (CMAKE_DATADIR STREQUAL "")
+	set (WL_INSTALL_DATADIR ${CMAKE_DATADIR})
+endif (CMAKE_DATADIR STREQUAL "")
+
+# Widelands locale directory
+if (CMAKE_LOCALEDIR STREQUAL "")
+	set (WL_INSTALL_LOCALEDIR share/games/widelands/locale)
+else (CMAKE_LOCALEDIR STREQUAL "")
+	set (WL_INSTALL_LOCALEDIR ${CMAKE_LOCALEDIR})
+endif (CMAKE_LOCALEDIR STREQUAL "")
+
 
 # is this needed?
 set (WL_SOURCE_CHECKER ${CMAKE_CURRENT_SOURCE_DIR}/cmake/codecheck/CodeCheck.py)
@@ -57,22 +114,46 @@ unset (WL_VERSION)
 unset (WL_VERSION CACHE)
 
 # ...but using MAJOR, MINOR and PATCH
-# (BUT: we only use MAJOR and MINOR for the moment; PATCH is set to 0)
 if (DEFINED WL_VERSION_MAJOR)
-  set (WL_VERSION ${WL_VERSION_MAJOR})
-  set (CPACK_PACKAGE_VERSION_MAJOR ${WL_VERSION_MAJOR})
-  if (DEFINED WL_VERSION_MINOR)
-    set (WL_VERSION ${WL_VERSION}.${WL_VERSION_MINOR})
-    set (CPACK_PACKAGE_VERSION_MINOR ${WL_VERSION_MINOR})
-    if (DEFINED WL_VERSION_PATCH)
-      set (WL_VERSION ${WL_VERSION}.${WL_VERSION_PATCH})
-      set (CPACK_PACKAGE_VERSION_PATCH ${WL_VERSION_PATCH})
-    else (DEFINED WL_VERSION_PATCH)
-      set (CPACK_PACKAGE_VERSION_PATCH 0)
-    endif (DEFINED WL_VERSION_PATCH)
-  else (DEFINED WL_VERSION_MINOR)
-    set (CPACK_PACKAGE_VERSION_MINOR 0)
-  endif (DEFINED WL_VERSION_MINOR)
+	set (CPACK_PACKAGE_VERSION_MAJOR ${WL_VERSION_MAJOR})
+
+	# Until 1.x.x set standard VERSION => "BuildXX"
+	if (WL_VERSION_MAJOR STREQUAL "0")
+		if (DEFINED WL_VERSION_MINOR)
+			set (WL_VERSION Build${WL_VERSION_MINOR})
+			set (CPACK_PACKAGE_VERSION_MINOR ${WL_VERSION_MINOR})
+			if (DEFINED WL_VERSION_PATCH)
+				set (WL_VERSION ${WL_VERSION}.${WL_VERSION_PATCH})
+				set (CPACK_PACKAGE_VERSION_PATCH ${WL_VERSION_PATCH})
+			else (DEFINED WL_VERSION_PATCH)
+				set (CPACK_PACKAGE_VERSION_PATCH 0)
+			endif (DEFINED WL_VERSION_PATCH)
+			if (DEFINED WL_VERSION_ADDITION)
+				set (WL_VERSION ${WL_VERSION}${WL_VERSION_ADDITION})
+			endif (DEFINED WL_VERSION_ADDITION)
+		else (DEFINED WL_VERSION_MINOR)
+			set (WL_VERSION "NO BUILD ID")
+		endif (DEFINED WL_VERSION_MINOR)
+
+	# from 1.x.x on:
+	else (WL_VERSION_MAJOR STREQUAL "0")
+		set (WL_VERSION ${WL_VERSION_MAJOR})
+		if (DEFINED WL_VERSION_MINOR)
+			set (WL_VERSION ${WL_VERSION}.${WL_VERSION_MINOR})
+			set (CPACK_PACKAGE_VERSION_MINOR ${WL_VERSION_MINOR})
+			if (DEFINED WL_VERSION_PATCH)
+				set (WL_VERSION ${WL_VERSION}.${WL_VERSION_PATCH})
+				set (CPACK_PACKAGE_VERSION_PATCH ${WL_VERSION_PATCH})
+			else (DEFINED WL_VERSION_PATCH)
+				set (CPACK_PACKAGE_VERSION_PATCH 0)
+			endif (DEFINED WL_VERSION_PATCH)
+			if (DEFINED WL_VERSION_ADDITION)
+				set (WL_VERSION ${WL_VERSION}${WL_VERSION_ADDITION})
+			endif (DEFINED WL_VERSION_ADDITION)
+		else (DEFINED WL_VERSION_MINOR)
+			set (CPACK_PACKAGE_VERSION_MINOR 0)
+		endif (DEFINED WL_VERSION_MINOR)
+	endif (WL_VERSION_MAJOR STREQUAL "0")
 endif (DEFINED WL_VERSION_MAJOR)
 
 if (NOT DEFINED WL_VERSION)
