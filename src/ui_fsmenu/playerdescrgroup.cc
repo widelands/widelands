@@ -175,7 +175,6 @@ void PlayerDescriptionGroup::refresh()
 				i18n::Textdomain td(tribepath); // for translated initialisation
                 container_iterate_const(std::vector<TribeBasicInfo>, settings.tribes, i)
 				{
-					assert(i.current < i.end);
 					if (i.current->name == player.tribe) {
 						d->btnPlayerInit->set_title
 							(_

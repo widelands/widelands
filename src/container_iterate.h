@@ -48,6 +48,7 @@ struct wl_range
     wl_range(const wl_range &r) : current(r.current), end(r.end) {}
     typename C::iterator current;
     wl_range &operator++() {++current;return *this;}
+    wl_range<C> &advance() { ++current;return *this;}
     bool empty() const {return current==end;}
     operator bool() const
     {
@@ -69,6 +70,7 @@ struct wl_const_range
     wl_const_range(const wl_const_range &r) : current(r.current), end(r.end) {}
     typename C::const_iterator current;
     wl_const_range &operator++() {++current;return *this;}
+    wl_const_range<C> &advance() { ++current;return *this;}
     bool empty() const {return current==end;}
     operator bool() const
     {
@@ -77,12 +79,14 @@ struct wl_const_range
     typename C::const_reference front() const { return *current;}
     typename C::const_reference operator*() const { return *current;}
     typename C::const_pointer operator->() const { return (&**this);}
+    typename C::const_iterator get_end(){ return end;}
 private:
     typename C::const_iterator end;
 };
 
 // helper for erasing element in range so that range stays valid.
 // temporary variable ensures that end() is evaluated after erase().
+// Returns new range with updated end points.
 template <class C> 
 wl_range<C>
 wl_erase(C &c, typename C::iterator &w)
@@ -91,41 +95,16 @@ wl_erase(C &c, typename C::iterator &w)
     return wl_range<C>(it , c.end());
 }
 
-template<class T1, class T2=T1 const> struct wl_iterator_helper
-{
-    wl_iterator_helper(T1 b, T2 e) : current(b), end(e){}
-      T1 current;
-      T2 end;
-};
-/*
-template<class C> struct wl_range
-{
-    wl_range(C::iterator b, C::const_iterator e) : current(b), end(e){}
-    C::iterator current;
-    C::iterator   T2 end;
-};
-*/
-
-#define container_iterate_const_noinc(type, container, i)                           \
-   for                                                                        \
-   (wl_iterator_helper<type::const_iterator, type::const_iterator const> i((container).begin(), (container).end());\
-       i.current != i.end;)                                                           \
-
-#define container_iterate_const_init(type, container, i)                           \
-   for                                                                        \
-   (wl_iterator_helper<type::const_iterator, type::const_iterator const> \
-    i((container).begin(), (container).end());;)\
-
 #define container_iterate_const(type, container, i)                           \
    for                                                                        \
-   (wl_iterator_helper<type::const_iterator, type::const_iterator const> i((container).begin(), (container).end());\
-       i.current != i.end;                                                    \
-       ++i.current)                                                           \
+   (wl_const_range<type> i(container);                                        \
+       i;                                                                     \
+       i.advance())                                                           \
 
 #define container_iterate(type, container, i)                                 \
    for                                                                        \
-      (wl_iterator_helper<type::iterator, type::const_iterator const> i((container).begin(), (container).end());\
-       i.current != i.end;                                                    \
-       ++i.current)                                                           \
+      (wl_range<type> i(container);                                           \
+       i;                                                                     \
+       i.advance())                                                           \
 
 #endif

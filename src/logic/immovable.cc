@@ -1015,9 +1015,10 @@ void PlayerImmovable::add_worker(Worker & w)
 */
 void PlayerImmovable::remove_worker(Worker & w)
 {
+    // TODO: why not use std::erase?
 	container_iterate(Workers, m_workers, i)
 		if (*i.current == &w) {
-			*i.current = *(i.end - 1);
+			*i.current = *(i.get_end() - 1);
 			return m_workers.pop_back();
 		}
 

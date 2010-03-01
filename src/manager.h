@@ -55,10 +55,11 @@ template<typename T> struct Manager {
 	///
 	/// \Throws Nonexistent if there is no such item.
 	void remove(T & item) {
+        // TODO: why not std::find & std::erase?
 		container_iterate(typename container, items, i)
 			if (*i.current == &item) {
 				delete &item;
-				*i.current = *(i.end - 1);
+				*i.current = *(i.get_end() - 1);
 				items.pop_back();
 				return;
 			}
@@ -82,7 +83,7 @@ template<typename T> struct Manager {
 		container_iterate(typename container, items, i)
 			if (name == (*i.current)->name()) {
 				delete *i.current;
-				*i.current = *(i.end - 1);
+				*i.current = *(i.get_end() - 1);
 				items.pop_back();
 				return;
 			}

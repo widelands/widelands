@@ -489,7 +489,7 @@ std::string Building::info_string(std::string const & format) {
 	std::ostringstream result;
 	container_iterate_const(std::string, format, i)
 		if (*i.current == '%') {
-			if (++i.current == i.end) { //  unterminated format sequence
+			if (i.advance().empty()) { //  unterminated format sequence
 				result << '%';
 				break;
 			}

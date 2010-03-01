@@ -104,9 +104,9 @@ private:
 				ref_cast<Event_Player_Worker_Types_Option_Menu, UI::Panel>
 					(*get_parent());
 			for
-				(wl_iterator_helper<uint8_t, uint8_t const> i(0,menu.table.size());
-				 i.current < i.end;
-				 ++i.current)
+				(wl_index_range<uint8_t> i(0,menu.table.size());
+				 i;
+				 ++i)
 				menu.table.get_record(i.current).set_checked
 					(Table::Selected, false);
 		}
@@ -124,9 +124,9 @@ private:
 				ref_cast<Event_Player_Worker_Types_Option_Menu, UI::Panel>
 					(*get_parent());
 			for
-				(wl_iterator_helper<uint8_t, uint8_t const> i(0, menu.table.size());
-				 i.current < i.end;
-				 ++i.current)
+				(wl_index_range<uint8_t> i(0, menu.table.size());
+				 i;
+				 ++i)
 				menu.table.get_record(i.current).toggle(Table::Selected);
 		}
 	} invert_selection;

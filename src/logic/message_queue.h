@@ -30,7 +30,13 @@ namespace Widelands {
 
 struct MessageQueue : private std::map<Message_Id, Message *> {
 	friend struct Map_Players_Messages_Data_Packet;
-
+	typedef std::map<Message_Id, Message *> _Mybase;
+	typedef _Mybase::pointer pointer;
+	typedef _Mybase::const_pointer const_pointer;
+	typedef _Mybase::reference reference;
+	typedef _Mybase::const_reference const_reference;
+	typedef _Mybase::iterator iterator;
+	typedef _Mybase::const_iterator const_iterator;
 	MessageQueue() { //  C++0x: MessageQueue() : m_counts({}) {}
 		m_counts[Message::New]      = 0; //  C++0x:
 		m_counts[Message::Read]     = 0; //  C++0x:
