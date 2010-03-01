@@ -175,6 +175,8 @@ install (
   COMPONENT CoreVersionFile
 )
 
+include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
+
 include(CheckIncludeFile)
 
 set (BUILD_SHARED_LIBS OFF)
@@ -230,8 +232,6 @@ include_directories(${LUA_INCLUDE_DIR})
 IF (WIN32)
   SET(GUI_TYPE WIN32)
 ENDIF (WIN32)
-
-include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
 
 #configure_file (src/config.h.cmake src/config.h)
 #configure_file (src/build_info.cc.cmake src/build_info.cc)
