@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-15 20:03+0000\n"
-"Last-Translator: Tarou <pierre.salagnac@gmail.com>\n"
+"POT-Creation-Date: 2010-02-27 16:15+0000\n"
+"PO-Revision-Date: 2010-02-28 12:53+0000\n"
+"Last-Translator: verdy_p <Unknown>\n"
 "Language-Team: French <eandry@mandriva.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-16 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-03-01 04:58+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../txts/COPYING:1
@@ -762,7 +762,7 @@ msgstr ""
 
 #: ../../txts/README:27
 msgid "Status"
-msgstr "Status"
+msgstr "État"
 
 #: ../../txts/README:31
 msgid ""
@@ -1297,8 +1297,16 @@ msgstr ""
 "ALT      (Maintenir) Sélectionne le second outil de rechange tant que la "
 "touche est appuyée"
 
-#: ../../txts/tips/atlanteans.tip:2
+#: ../../txts/tips/atlanteans.tip:6
+msgid ""
+"Always build a forester's and a fish breeder's house, so you will not run "
+"out of trunks and food."
+msgstr ""
+"Construisez toujours une maison de sylviculteur et une pêcherie, de cette "
+"manière vous ne serez pas à cours de troncs et de nourriture."
+
 #: ../../txts/tips/barbarians.tip:2
+#: ../../txts/tips/atlanteans.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
 "Some buildings, such as the farm, have a very small working area. If the "
@@ -1307,14 +1315,6 @@ msgstr ""
 "Certaines constructions, comme les fermes, ont un espace de travail "
 "restreint. Si le bâtiment est entouré de routes ou d'arbres la production "
 "s'arrêtera."
-
-#: ../../txts/tips/atlanteans.tip:6
-msgid ""
-"Always build a forester's and a fish breeder's house, so you will not run "
-"out of trunks and food."
-msgstr ""
-"Construisez toujours une maison de sylviculteur et une pêcherie, de cette "
-"manière vous ne serez pas à cours de troncs et de nourriture."
 
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-27 17:15+0100\n"
-"PO-Revision-Date: 2010-02-28 01:09+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2010-02-28 11:30+0000\n"
+"Last-Translator: schulz3000 <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-02-28 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-03-01 04:58+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/events/event_road.cc:49
@@ -3873,7 +3873,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:640
 msgid "Out of "
-msgstr ""
+msgstr "aus "
 
 #: ../../src/logic/worker.cc:644
 msgid ""

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-27 17:15+0100\n"
-"PO-Revision-Date: 2010-02-27 18:42+0000\n"
+"PO-Revision-Date: 2010-02-28 19:46+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-02-28 04:50+0000\n"
+"X-Launchpad-Export-Date: 2010-03-01 04:58+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/logic/worker.cc:1649
@@ -2501,7 +2501,7 @@ msgstr "Pusty pseudonim"
 
 #: ../../src/wui/login_box.cc:90
 msgid "Please enter a nickname!"
-msgstr ""
+msgstr "Proszę podać pseudonim!"
 
 #: ../../src/wui/login_box.cc:97
 msgid "Space in Nickname"
@@ -2517,7 +2517,7 @@ msgstr "Puste hasło"
 
 #: ../../src/wui/login_box.cc:105
 msgid "Please enter a password!"
-msgstr ""
+msgstr "Proszę podać hasło!"
 
 #: ../../src/wui/minimap.cc:134 ../../src/ui_fsmenu/netsetup_lan.cc:115
 msgid "Map"

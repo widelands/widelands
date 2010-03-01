@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-15 18:22+0000\n"
-"Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
+"POT-Creation-Date: 2010-02-27 16:15+0000\n"
+"PO-Revision-Date: 2010-02-28 21:39+0000\n"
+"Last-Translator: Mad_Mac <destroyerko@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-16 04:51+0000\n"
+"X-Launchpad-Export-Date: 2010-03-01 04:58+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -348,7 +348,7 @@ msgstr ""
 
 #: ../../txts/COPYING:86
 msgid "How to Apply These Terms to Your New Programs"
-msgstr ""
+msgstr "Miten näitä ehtoja voi soveltaa uusiin ohjelmiin?"
 
 #: ../../txts/COPYING:90
 msgid ""
@@ -356,6 +356,10 @@ msgid ""
 "use to the public, the best way to achieve this is to make it free software "
 "which everyone can redistribute and change under these terms."
 msgstr ""
+"Jos uuden ohjelman kehittäjä haluaa, että yleisö saa siitä suurimman "
+"mahdollisen hyödyn, silloin paras keino päästa tähän päämäärään on tehdä "
+"ohjelmasta vapaa, jolloin kuka tahansa voi näiden ehtojen mukaisesti muuttaa "
+"ja levittää sitä edelleen."
 
 #: ../../txts/COPYING:93
 msgid ""
@@ -1004,16 +1008,6 @@ msgstr "Vaihto   (Pohjassa) Valitse 1. vaihtoehtoinen työkalu alaspainettuna"
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr "Alt      (Pohjassa) Valitse 2. vaihtoehtoinen työkalu alaspainettuna"
 
-#: ../../txts/tips/atlanteans.tip:2
-#: ../../txts/tips/barbarians.tip:2
-#: ../../txts/tips/empire.tip:2
-msgid ""
-"Some buildings, such as the farm, have a very small working area. If the "
-"building is surrounded with trees or roads, production will stop."
-msgstr ""
-"Jotkin rakennukset, kuten maatila, toimivat hyvin pienellä alueella. Jos "
-"rakennus on puiden tai teiden ympäröimä, sen tuotanto lakkaa."
-
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
 "Always build a forester's and a fish breeder's house, so you will not run "
@@ -1021,6 +1015,16 @@ msgid ""
 msgstr ""
 "Rakenna aina metsänvartijan talo ja kalankasvattajan talo, jotteivät puu- ja "
 "ruokavarantosi pääse loppumaan."
+
+#: ../../txts/tips/barbarians.tip:2
+#: ../../txts/tips/atlanteans.tip:2
+#: ../../txts/tips/empire.tip:2
+msgid ""
+"Some buildings, such as the farm, have a very small working area. If the "
+"building is surrounded with trees or roads, production will stop."
+msgstr ""
+"Jotkin rakennukset, kuten maatila, toimivat hyvin pienellä alueella. Jos "
+"rakennus on puiden tai teiden ympäröimä, sen tuotanto lakkaa."
 
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6
