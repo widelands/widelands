@@ -869,7 +869,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 							if ((*l.current)->economy.needs_ware(wt)) {
 								prio += 1 + wares[bo.outputs[m]].preciousness;
 								if (bo.total_count() == 0)
-									prio *= 4; // big bonus, this site might be elemental
+									// big bonus, this site might be elemental
+									prio += 3 * wares[bo.outputs[m]].preciousness;
 							}
 						}
 					}
@@ -905,7 +906,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			} else if (bo.type == BuildingObserver::MILITARYSITE) {
 				if (!bf->unowned_land_nearby)
 					continue;
-				prio  = bf->unowned_land_nearby - bf->military_influence * 4;
+				prio  = bf->unowned_land_nearby - bf->military_influence * (4 - type);
 				prio  = prio > 0 ? prio : 1;
 				prio *= expand_factor;
 				prio /= 2;
