@@ -7,6 +7,14 @@
 # For svk: must be in checkout's root path, will not work otherwise
 #          (but could be made to)
 
+###############################################
+#
+# ATTENTION CMAKE-TRANSITION
+# In the future, this file is located in utils directory.
+# This file (in build/scons-utils) is for scons only and can be deleted after transition 
+#
+###############################################
+
 import os,sys
 
 # Support for bzr local branches
@@ -76,9 +84,9 @@ def detect_revision():
             b = BzrDir.open(".").open_branch()
             revno, nick = b.revno(), b.nick
             if svn_revnum=='':
-                revstring = "unofficial-bzr-%s-%s" % (nick,revno)
+                revstring = "bzr%s[%s] " % (revno,nick)
             else:
-                revstring = "unofficial-bzr-%s-%s(svn%s)" % (nick,revno,svn_revnum)
+                revstring = "bzr%s[%s](svn%s) " % (revno,nick,svn_revnum)
         except NotBranchError:
             pass
 

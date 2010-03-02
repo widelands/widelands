@@ -827,17 +827,18 @@ void NetGGZ::write_userlist()
 		user.name = ggzcore_player_get_name(player);
 		GGZTable * tab = ggzcore_player_get_table(player);
 		user.table = tab ? ggzcore_table_get_desc(tab) : "--";
-		int buf[1];
+
 		// TODO unfinished work down here!
 		// TODO something in ggzd does not work as it should!
-		/* int wins[1];
+		/* int buf[1];
+		int wins[1];
 		int losses[1];
 		int ties[1];
-		int forfeits[1];*/
+		int forfeits[1];
 		if (ggzcore_player_get_rating(player, buf)) {
-			snprintf(user.stats, sizeof(user.stats), "r %i", buf[1]);
+			snprintf(user.stats, sizeof(user.stats), "r %i", buf[0]);
 			log(user.stats);
-		/*} else if (ggzcore_player_get_highscore(player, buf)) {
+		} else if (ggzcore_player_get_highscore(player, buf)) {
 			snprintf(user.stats, sizeof(user.stats), "hs %i", buf[1]);
 			log(user.stats);
 		} else if (ggzcore_player_get_ranking(player, buf)) {
@@ -850,9 +851,9 @@ void NetGGZ::write_userlist()
 			snprintf
 				(user.stats, sizeof(user.stats), "%i %i %i %i",
 				 wins[1], losses[1], ties[1], forfeits[1]);
-			log(user.stats);*/
-		} else
-			snprintf(user.stats, sizeof(user.stats), "%i", 0);
+			log(user.stats);
+		} else*/
+		snprintf(user.stats, sizeof(user.stats), "%i", 0);
 		user.type = ggzcore_player_get_type(player);
 		userlist.push_back(user);
 	}

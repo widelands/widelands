@@ -1149,7 +1149,7 @@ void ProductionProgram::ActMine::informPlayer
 		 	 "<p font-size=14 font-face=FreeSerif>" +
 		 	 std::string
 		 	 	(_
-		 	 	 	("This mines has run empty. You should consider to expand or"
+		 	 	 	("This mines has run empty. You should consider to expand or "
 		 	 	 	 "destruct it."))
 		 	 +
 		 	 "</p>"),

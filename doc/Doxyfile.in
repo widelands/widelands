@@ -5,7 +5,7 @@
 #---------------------------------------------------------------------------
 PROJECT_NAME           = Widelands
 PROJECT_NUMBER         = SVN
-OUTPUT_DIRECTORY       = @CMAKE_CURRENT_BINARY_DIR@/doc/sourcecode
+OUTPUT_DIRECTORY       = @CMAKE_CURRENT_BINARY_DIR@/sourcecode
 CREATE_SUBDIRS         = YES
 OUTPUT_LANGUAGE        = English
 BRIEF_MEMBER_DESC      = YES
@@ -79,7 +79,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/src
+INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/../src
 FILE_PATTERNS          = *.c \
                          *.cc \
                          *.cxx \

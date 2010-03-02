@@ -18,6 +18,7 @@
  */
 
 #include "layered_filesystem.h"
+#include "io/fileread.h"
 #include "io/streamread.h"
 
 #include "build_info.h"
@@ -90,20 +91,31 @@ void LayeredFileSystem::RemoveFileSystem(FileSystem const & fs)
 	m_filesystems.pop_back();
 }
 
+bool LayeredFileSystem::m_read_version_from_version_file
+	(FileSystem & fs, std::string * rv)
+{
+	FileRead fr;
+	if (fr.TryOpen(fs, "VERSION")) {
+		std::string version = fr.CString();
+		// Truncate extra information like branch name , (debug)
+		version = version.substr(0, build_id().size());
+		*rv = version;
+		return true;
+	}
+	return false;
+}
+
 /**
  * Check if there is a 'version' file with a version lower than minimal version
  * number */
 bool LayeredFileSystem::FindConflictingVersionFile(FileSystem & fs) {
-	if (fs.FileExists("VERSION")) {
-		std::auto_ptr<StreamRead> sr (fs.OpenStreamRead("VERSION"));
-		if (sr->EndOfFile())
-			return false;
-		std::string version = sr->String();
-		version = version.substr(0, build_id().size());
+	std::string version;
+
+	if (m_read_version_from_version_file(fs, &version)) {
 		log
 			("Version file found with id \"%s\" (real \"%s\" )\n",
 			 version.c_str(), build_id().c_str());
-		if (version.compare(build_id()) != 0) {
+		if (version != build_id()) {
 			log ("not equal strings\n");
 			return true;
 		}
@@ -117,16 +129,12 @@ bool LayeredFileSystem::FindConflictingVersionFile(FileSystem & fs) {
  * current version */
 
 bool LayeredFileSystem::FindMatchingVersionFile(FileSystem & fs) {
-	if (fs.FileExists("VERSION")) {
-		std::auto_ptr<StreamRead> sr (fs.OpenStreamRead("VERSION"));
-		if (sr->EndOfFile())
-			return false;
-		std::string version = sr->String();
-		version = version.substr(0, build_id().size());
-		if (version.compare(build_id()) == 0) {
+	std::string version;
+
+	if (m_read_version_from_version_file(fs, &version))
+		if (version == build_id())
 			return true;
-		}
-	}
+
 	return false;
 }
 

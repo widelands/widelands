@@ -43,26 +43,27 @@ struct Languages {
  * NONE as first entry. Also increase the NR_LANGUAGES variable by one
  */
 #ifdef DEFINE_LANGUAGES  // defined in fullscreen_menu_options.cc
-#define NR_LANGUAGES 17
+#define NR_LANGUAGES 18
 static Languages available_languages[NR_LANGUAGES] = {
 	{"Default system language", ""},
 // EXTRACT BEGIN (leaves this line untouched)
-	{"česky",      "cs_CZ"},
-	{"Dansk",      "da_DK"},
-	{"Deutsch",    "de_DE"},
-	{"English",    "en_EN"},
-	{"Español",    "es_ES"},
-	{"Français",   "fr_FR"},
-	{"Galego",     "gl_ES"},
-	{"עברית",      "he_HE"},
-	{"Italiano",   "it_IT"},
-	{"Magyar",     "hu_HU"},
-	{"Nederlands", "nl_NL"},
-	{"Polski",     "pl_PL"},
-	{"Русский",    "ru_RU"},
-	{"Suomi",      "fi_FI"},
-	{"Slovensky",  "sk_SK"},
-	{"Svenska",    "sv_SE"},
+	{"česky",      "cs"},
+	{"Dansk",      "da"},
+	{"Deutsch",    "de"},
+	{"English",    "en"},
+	{"Español",    "es"},
+	{"Basque",     "eu"},
+	{"Français",   "fr"},
+	{"Galego",     "gl"},
+	{"עברית",      "he"},
+	{"Italiano",   "it"},
+	{"Magyar",     "hu"},
+	{"Nederlands", "nl"},
+	{"Polski",     "pl"},
+	{"Русский",    "ru"},
+	{"Suomi",      "fi"},
+	{"Slovensky",  "sk"},
+	{"Svenska",    "sv"},
 // EXTRACT END (leave this line untouched)
 };
 #endif

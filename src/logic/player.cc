@@ -716,6 +716,10 @@ void Player::enemyflagaction
 					std::vector<Soldier *> attackers;
 					findAttackSoldiers(flag, &attackers, count);
 					assert(attackers.size() <= count);
+
+					retreat = std::max(retreat, tribe().get_military_data().get_min_retreat());
+					retreat = std::min(retreat, tribe().get_military_data().get_max_retreat());
+
 					container_iterate_const(std::vector<Soldier *>, attackers, i)
 						ref_cast<MilitarySite, PlayerImmovable>
 							(*(*i.current)->get_location(egbase()))

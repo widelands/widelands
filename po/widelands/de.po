@@ -6,15 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-10 19:40+0100\n"
-"PO-Revision-Date: 2010-01-16 12:59+0100\n"
-"Last-Translator: Peter Schwanemann <nasenbaer_peter@sourceforge.net>\n"
+"POT-Creation-Date: 2010-02-14 19:26+0100\n"
+"PO-Revision-Date: 2010-02-14 21:26+0000\n"
+"Last-Translator: SirVer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2010-02-15 04:46+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -26,7 +27,8 @@ msgstr "Bluebyte-Siedler-II-Karte. Kein Kommentar definiert!"
 
 #: ../../src/wlapplication.cc:346
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-msgstr "FEHLER: Konnte nicht mit dem Metaserver verbinden (obiger Grund)!\n"
+msgstr ""
+"FEHLER: Konnte nicht mit dem Metaserver verbinden (Grund siehe oben)!\n"
 
 #: ../../src/wlapplication.cc:1081
 msgid ""
@@ -63,7 +65,6 @@ msgstr ""
 "\n"
 
 #: ../../src/wlapplication.cc:1208
-#, fuzzy
 msgid ""
 " --<config-entry-name>=value overwrites any config file setting\n"
 "\n"
@@ -85,20 +86,27 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
-" --<Konfigschlüssel>= Wert Definiert beliebige Werte der Konfigurationsdatei\n"
+" --<config-entry-name>=Wert überschreibt jede Einstellung in der "
+"Konfigurationsdatei\n"
 "\n"
-" --logfile=DATEINAME   Log Ausgabe in die Datei FILENAME umleiten \n"
-" --datadir=ORDNER      Benutze den spezifizierten Ort für die Widelands\n"
-"                      Dateien\n"
-" --record=DATEINAME   Protokolliere alle Ereignisse in der angegebenen Datei.\n"
-"                      Die Datei kann später mit --playback abgespielt werden.\n"
-" --playback=DATEINAME Datei abspielen (die mit --record erzeugt wurde).\n"
+"--logfile=FILENAME Schreibe die Ausgabe in FILENAME anstelle einer  \n"
+"                      Konsolenausgabe\n"
+" --datadir=DIRNAME Benutze spezifizierten Pfad für die Widelands\n"
+"                      Datenstände\n"
+" --record=FILENAME Speichere alle Datenstände im angegebenen Dateinamen für\n"
+"                      späteres  Abspielen\n"
+" --playback=FILENAME Spiele angegebenen Dateinamen ab (see --record)\n"
 "\n"
-" --coredump=[yes|no]  Erzeugt ein Speicherabbild bei Segmentfehlern.\n"
-"                      Schaltet den Mechanismus von SDL ab.\n"
+" --coredump=[yes|no] Erstellt einen core dump auf segfaults anstelle \n"
+"                      der Nutzung von SDL\n"
 " --language=[de_DE|sv_SE|...]\n"
-"                      Die zu benutzende Übersetzung.\n"
-"\n"
+"                      Die zu nutzende Sprachdatei\n"
+" --remove_syncstreams=[true|false]\n"
+"                      Entferne syncstream-Dateien beim Programmstart\n"
+" --remove_replays=[...]\n"
+"                      Entferne Aufzeichnungen nach dieser Anzahl von Tagen.\n"
+"                      Wenn dieser Wert 0 ist, werden die Aufzeichnungen "
+"nicht gelöscht.\n"
 
 #: ../../src/wlapplication.cc:1227
 msgid ""
@@ -244,7 +252,7 @@ msgid ""
 "Hope you enjoy this game!\n"
 "\n"
 msgstr ""
-"Fehlerberichte? Ideen? Gucke auf die Projektwebseite:\n"
+"Fehlerberichte? Ideen? Schau auf die Projektwebseite:\n"
 "        http://www.sourceforge.net/projects/widelands\n"
 "\n"
 "Wir wünschen Dir viel Spaß beim Spielen!\n"
@@ -266,21 +274,28 @@ msgstr "Unerwarteter Fehler im Spielverlauf"
 msgid ""
 "\n"
 "\n"
-"Please report this problem to help us improve Widelands. You will find related messages in the standard output (stdout.txt on Windows). You are using build "
+"Please report this problem to help us improve Widelands. You will find "
+"related messages in the standard output (stdout.txt on Windows). You are "
+"using build "
 msgstr ""
 "\n"
 "\n"
-"Bitte melde dieses Problem, um uns die Möglichkeit zu geben Widelands zu verbessern. Weitere Informationen findest du in der Standard-Ausgabe (stdout.txt unter Windows). Du benutzt Version "
+"Bitte melde dieses Problem, um uns die Möglichkeit zu geben Widelands zu "
+"verbessern. Weitere Informationen findest du in der Standard-Ausgabe "
+"(stdout.txt unter Windows). Du benutzt Version "
 
 #: ../../src/wlapplication.cc:1458
 msgid ""
 ". Please add this information to your report.\n"
 "\n"
-"Widelands attempts to create a savegame when errors occur during the game. It is often - though not always - possible to load it and continue playing.\n"
+"Widelands attempts to create a savegame when errors occur during the game. "
+"It is often - though not always - possible to load it and continue playing.\n"
 msgstr ""
 ". Bitte füge der Meldung diese Information hinzu.\n"
 "\n"
-"Widelands versucht eine Speicherung durchzuführen, wenn ein Fehler auftrat. Somit ist es oft - wenn auch nicht immer - möglich das Spiel wieder zu laden und fortzusetzen.\n"
+"Widelands versucht eine Speicherung durchzuführen, wenn ein Fehler auftrat. "
+"Somit ist es oft - wenn auch nicht immer - möglich das Spiel wieder zu laden "
+"und fortzusetzen.\n"
 
 #: ../../src/wlapplication.cc:1569
 msgid "Connection timeouted"
@@ -306,7 +321,7 @@ msgstr "Widelands konnte keine Verbindung zum Gastgeber erstellen."
 
 #: ../../src/wlapplication.cc:1640
 msgid "The address of the game server is invalid"
-msgstr "Die Adresse the Spiele Servers ist inkorrekt"
+msgstr "Die Adresse des Spieler-Servers ist inkorrekt"
 
 #: ../../src/wlapplication.cc:1745 ../../src/network/nethost.cc:1178
 msgid "Player"
@@ -322,11 +337,16 @@ msgid "End of replay"
 msgstr "Ende der Spielaufzeichnung"
 
 #: ../../src/wlapplication.cc:2002
-msgid "The end of the replay has been reached and the game has been paused. You may unpause the game and continue watching if you want to."
-msgstr "Das Ende der Spielaufzeichnung wurde erreicht und das Spiel wurde auf Pause gesetzt. Wenn du möchtest, kannst du die Wiedergabe fortsetzen und weitergucken."
+msgid ""
+"The end of the replay has been reached and the game has been paused. You may "
+"unpause the game and continue watching if you want to."
+msgstr ""
+"Das Ende der Spielaufzeichnung wurde erreicht und das Spiel wurde auf Pause "
+"gesetzt. Wenn du möchtest, kannst du die Wiedergabe fortsetzen und weiter "
+"zuschauen."
 
-#: ../../src/wlapplication.cc:2082 ../../src/logic/game.cc:344
-#: ../../src/logic/game.cc:383
+#: ../../src/wlapplication.cc:2082 ../../src/logic/game.cc:352
+#: ../../src/logic/game.cc:391
 msgid "Loading..."
 msgstr "Laden..."
 
@@ -348,11 +368,11 @@ msgstr "Vorgänger"
 
 #: ../../src/writeHTML.cc:100
 msgid "Employers"
-msgstr "Arbeitsgeber"
+msgstr ""
 
 #: ../../src/writeHTML.cc:263 ../../src/writeHTML.cc:269
 msgid "Building types"
-msgstr "Gebäudeart"
+msgstr "Gebäudearten"
 
 #: ../../src/writeHTML.cc:274 ../../src/writeHTML.cc:509
 #: ../../src/writeHTML.cc:1434
@@ -487,7 +507,7 @@ msgstr "s Erweiterung"
 
 #: ../../src/writeHTML.cc:498 ../../src/writeHTML.cc:504
 msgid "Worker types"
-msgstr "Arbeiterart"
+msgstr "Arbeiterarten"
 
 #: ../../src/writeHTML.cc:517
 msgid "Minimum<br/>needed<br/>experience"
@@ -507,27 +527,37 @@ msgstr "Arbeiterarten.xhtml"
 
 #: ../../src/writeHTML.cc:583
 msgid "Combat Properties"
-msgstr "Kampf Einstellungen"
+msgstr "Kampf-Einstellungen"
 
 #: ../../src/writeHTML.cc:590
 #, c-format
-msgid "Hitpoints is between %u and %u, plus %u for each level above 0 (maximum level is %u)."
-msgstr "Lebenpunkte liegen zwischen %u und %u, plus %u für jede Stufe über 0 (Die höchste Stufe ist %u)."
+msgid ""
+"Hitpoints is between %u and %u, plus %u for each level above 0 (maximum "
+"level is %u)."
+msgstr ""
+"Lebenspunkte liegen zwischen %u und %u, + %u für jede Stufe über 0 (Die "
+"höchste Stufe ist %u)."
 
 #: ../../src/writeHTML.cc:600
 #, c-format
-msgid "Attack is between %u and %u, plus %u for each level above 0 (maximum level is %u)."
-msgstr "Angriff ist zwischen %u und %u, + %u für jede Stufe über 0 (Die höchste Stufe ist %u)."
+msgid ""
+"Attack is between %u and %u, plus %u for each level above 0 (maximum level "
+"is %u)."
+msgstr ""
+"Angriff ist zwischen %u und %u, + %u für jede Stufe über 0 (Die höchste "
+"Stufe ist %u)."
 
 #: ../../src/writeHTML.cc:610
 #, c-format
 msgid "Defense is %u, plus %u for each level above 0 (maximum level is %u)."
-msgstr "Verteidigung ist %u, + %u für jede Stufe über 0 (Die höchste Stufe ist %u)."
+msgstr ""
+"Verteidigung ist %u, + %u für jede Stufe über 0 (Die höchste Stufe ist %u)."
 
 #: ../../src/writeHTML.cc:620
 #, c-format
 msgid "Evade is %u, plus %u for each level above 0 (maximum level is %u)."
-msgstr "Ausweichen ist %u, + %u für jede Stufe über 0 (Die höchste Stufe ist %u)."
+msgstr ""
+"Ausweichen ist %u, + %u für jede Stufe über 0 (Die höchste Stufe ist %u)."
 
 #: ../../src/writeHTML.cc:666 ../../src/writeHTML.cc:676
 msgid "'s creation"
@@ -535,7 +565,7 @@ msgstr "s Produkt"
 
 #: ../../src/writeHTML.cc:686
 msgid "Spawns in warehouses."
-msgstr ""
+msgstr "Wird in Warenhäusern erzeugt."
 
 #: ../../src/writeHTML.cc:695
 #, c-format
@@ -794,7 +824,7 @@ msgstr "Produziere"
 
 #: ../../src/writeHTML.cc:1268
 msgid "recruit"
-msgstr ""
+msgstr "rekrutieren"
 
 #: ../../src/writeHTML.cc:1311
 msgid "Documentation for program command mine"
@@ -931,24 +961,24 @@ msgstr "Wirtschaftsgleichgewicht abrufen: %s"
 
 #: ../../src/economy/economy_data_packet.cc:62
 #: ../../src/economy/economy_data_packet.cc:82
-#, fuzzy, c-format
+#, c-format
 msgid "duplicated entry for %s"
-msgstr "dupliziert"
+msgstr "doppelter Eintrag für %s"
 
 #: ../../src/economy/economy_data_packet.cc:95
-#, fuzzy, c-format
+#, c-format
 msgid "target quantities: %s"
-msgstr "Zielwerte"
+msgstr "Ziel Anzahl: %s"
 
 #: ../../src/economy/economy_data_packet.cc:99
-#, fuzzy, c-format
+#, c-format
 msgid "unknown version %u"
-msgstr "unbekannte/nicht verwendbare Version %u"
+msgstr "unbekannte Version %u"
 
 #: ../../src/economy/economy_data_packet.cc:102
-#, fuzzy, c-format
+#, c-format
 msgid "economy: %s"
-msgstr "Wirtschaften: %s"
+msgstr "Wirtschaft: %s"
 
 #: ../../src/economy/wares_queue.cc:256
 #, c-format
@@ -1002,8 +1032,12 @@ msgstr "Nicht unterstütztes Format"
 
 #: ../../src/editor/editorinteractive.cc:166
 #, c-format
-msgid "Widelands could not load the file \"%s\". The file format seems to be incompatible."
-msgstr "Widelands konnte die Datei \"%s\" nicht laden. Das Dateiformat scheint inkompatibel zu sein."
+msgid ""
+"Widelands could not load the file \"%s\". The file format seems to be "
+"incompatible."
+msgstr ""
+"Widelands konnte die Datei \"%s\" nicht laden. Das Dateiformat scheint "
+"inkompatibel zu sein."
 
 #: ../../src/editor/editorinteractive.cc:184
 #: ../../src/editor/editorinteractive.cc:603
@@ -1028,7 +1062,8 @@ msgstr "Karte nicht gespeichert"
 
 #: ../../src/editor/editorinteractive.cc:233
 msgid "The Map is unsaved, do you really want to quit?"
-msgstr "Die Karte ist nicht gespeichert! Willst du den Editor wirklich beenden?"
+msgstr ""
+"Die Karte ist nicht gespeichert! Willst du den Editor wirklich beenden?"
 
 #: ../../src/editor/editorinteractive.cc:594
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
@@ -1056,7 +1091,9 @@ msgstr "Erlaube"
 #: ../../src/events/event_building.cc:62
 #, c-format
 msgid "sufficient_suitability (%u) is smaller than required_suitability (%u)"
-msgstr "ausreichende_Tauglichkeit (%u) ist kleiner als die vorrausgesetzte_Tauglichkeit (%u)"
+msgstr ""
+"ausreichende_Tauglichkeit (%u) ist kleiner als die "
+"vorrausgesetzte_Tauglichkeit (%u)"
 
 #: ../../src/events/event_building.cc:72 ../../src/events/event_building.cc:81
 #: ../../src/events/event_message.cc:90 ../../src/graphic/animation.cc:196
@@ -1144,8 +1181,12 @@ msgstr "(Gebäude): %s"
 
 #: ../../src/events/event_building.cc:442
 #, c-format
-msgid "failed to place a %s near (%i, %i) (distance between %u and %u) for player %u (suitability required is %u but found only %u)"
-msgstr "konnte kein %s bei (%i, %i) bauen (Distanz zwischen %u und %u) für Spieler %u (gebraucht wird %u aber nur %u gefunden)"
+msgid ""
+"failed to place a %s near (%i, %i) (distance between %u and %u) for player "
+"%u (suitability required is %u but found only %u)"
+msgstr ""
+"konnte kein %s bei (%i, %i) bauen (Distanz zwischen %u und %u) für Spieler "
+"%u (gebraucht wird %u aber nur %u gefunden)"
 
 #: ../../src/events/event_expire_message.cc:48
 #: ../../src/logic/playercommand.cc:128
@@ -1156,45 +1197,50 @@ msgid "player %u does not exist"
 msgstr "Spieler %u existiert nicht"
 
 #: ../../src/events/event_expire_message.cc:55
-#, fuzzy, c-format
+#, c-format
 msgid "player %u's message %u does not exist"
-msgstr "Spieler %u existiert nicht"
+msgstr "Nachricht %u des Spielers %u existiert nicht"
 
 #: ../../src/events/event_expire_message.cc:61
 #, c-format
-msgid "player %u's message %u has duration %u; (it must have infinite duration, so that only this event can exipre it)"
+msgid ""
+"player %u's message %u has duration %u; (it must have infinite duration, so "
+"that only this event can exipre it)"
 msgstr ""
+"Spieler %u's Nachricht %u hat eine Dauer von %u; (sie muss eine unendliche "
+"Dauer haben, so dass sie nur durch diesen Event verfallen kann."
 
 #: ../../src/events/event_expire_message.cc:73
 #, c-format
-msgid "refers to the same message id (player %u's %u) as another expire message event (\"%s\"); (only one event can expire each message)"
+msgid ""
+"refers to the same message id (player %u's %u) as another expire message "
+"event (\"%s\"); (only one event can expire each message)"
 msgstr ""
+"Verweist auf die selbe Meldungs id (Spieler %u's %u) als ein anderer Lass-"
+"Nachricht-Verfallen event (\"%s\"); (jede Nachricht kann nur durch einen "
+"event verfallen)"
 
 #: ../../src/events/event_expire_message.cc:79
 #: ../../src/events/event_message.cc:111
-#, fuzzy, c-format
+#, c-format
 msgid "(expire message): %s"
-msgstr "(Nachrichtenfenster): %s"
+msgstr "(Lass Nachricht verfallen): %s"
 
 #: ../../src/events/event_factory.cc:61
-#, fuzzy
 msgid "Allow worker types"
-msgstr "Arbeiterart"
+msgstr "Erlaube Arbeitertypen"
 
 #: ../../src/events/event_factory.cc:62
-#, fuzzy
 msgid "Allows the creation of workers of certain types for a player."
-msgstr "Erlaubt einem Spieler das Errichten von Gebäuden einer bestimmten Gebäudeart."
+msgstr "Erlaubt die Kreation bestimmter Arten von Arbeitern."
 
 #: ../../src/events/event_factory.cc:66
-#, fuzzy
 msgid "Forbid worker types"
-msgstr "Arbeiterart"
+msgstr "Verbiete Arbeiter vom Typ"
 
 #: ../../src/events/event_factory.cc:67
-#, fuzzy
 msgid "Forbids the creation of workers of certain types for a player."
-msgstr "Erlaubt einem Spieler das Errichten eines Gebäudes einer bestimmten Gebäudeart."
+msgstr "Verbietet einem Spieler, bestimmte Arten von Arbeitern zu kreieren."
 
 #: ../../src/events/event_factory.cc:71
 msgid "Allow building types"
@@ -1202,7 +1248,8 @@ msgstr "Erlaube Gebäudearten"
 
 #: ../../src/events/event_factory.cc:72
 msgid "Allows the construction of buildings of certain types for a player."
-msgstr "Erlaubt einem Spieler das Errichten von Gebäuden einer bestimmten Gebäudeart."
+msgstr ""
+"Erlaubt einem Spieler das Errichten von Gebäuden einer bestimmten Gebäudeart."
 
 #: ../../src/events/event_factory.cc:76
 msgid "Forbid building types"
@@ -1210,7 +1257,9 @@ msgstr "Verbiete Gebäudearten"
 
 #: ../../src/events/event_factory.cc:77
 msgid "Forbids the construction of buildings of certain types for a player."
-msgstr "Erlaubt einem Spieler das Errichten eines Gebäudes einer bestimmten Gebäudeart."
+msgstr ""
+"Erlaubt einem Spieler das Errichten eines Gebäudes einer bestimmten "
+"Gebäudeart."
 
 #: ../../src/events/event_factory.cc:81
 msgid "Create building"
@@ -1225,8 +1274,11 @@ msgid "Conquer area"
 msgstr "Erobere Gebiet"
 
 #: ../../src/events/event_factory.cc:88
-msgid "Gives ownership of all unowned locations within an area to the player."
-msgstr "Gibt dem Spieler die Kontrolle über ein Gebiet, falls es von niemanden sonst kontrolliert wird."
+msgid ""
+"Gives ownership of all unowned locations within an area to the player."
+msgstr ""
+"Gibt dem Spieler die Kontrolle über ein Gebiet, falls es von niemanden sonst "
+"kontrolliert wird."
 
 #: ../../src/events/event_factory.cc:93
 msgid "Create flag"
@@ -1246,19 +1298,24 @@ msgstr "Erstelle einen unbewegten Gegenstand."
 
 #: ../../src/events/event_factory.cc:103
 msgid "Lua event"
-msgstr ""
+msgstr "Lua Ereignis"
 
 #: ../../src/events/event_factory.cc:104
 msgid "Run a lua command"
-msgstr ""
+msgstr "Führe ein Lua Kommando aus"
 
 #: ../../src/events/event_factory.cc:108
 msgid "Show message box"
 msgstr "Zeige Nachrichten Fenster"
 
 #: ../../src/events/event_factory.cc:110
-msgid "Show a message box. It can be modal or and have a picture. An events can be assigned to each button to give the user chose the course of the game."
-msgstr "Dieses Ereignis zeigt ein Nachrichtenfenster, welches fest oder veränderbar sein kann. Das Fenster kann aus Text, Bildern und Knöpfen zusammengesetzt werden, wobei jedem Knopf ein bestimmtes Ereignis zugewiesen werden kann."
+msgid ""
+"Show a message box. It can be modal or and have a picture. An events can be "
+"assigned to each button to give the user chose the course of the game."
+msgstr ""
+"Dieses Ereignis zeigt ein Nachrichtenfenster, welches fest oder veränderbar "
+"sein kann. Das Fenster kann aus Text, Bildern und Knöpfen zusammengesetzt "
+"werden, wobei jedem Knopf ein bestimmtes Ereignis zugewiesen werden kann."
 
 #: ../../src/events/event_factory.cc:116
 msgid "Move view"
@@ -1313,48 +1370,72 @@ msgid "Unhide area"
 msgstr "Zeige Gebiet"
 
 #: ../../src/events/event_factory.cc:148
-msgid "Gives vision for a specified amount of time of all locations within an area to the player."
-msgstr "Gibt dem Spieler für eine bestimmte Zeit die Sicht auf alle Dinge in einem bestimmten Gebiet."
+msgid ""
+"Gives vision for a specified amount of time of all locations within an area "
+"to the player."
+msgstr ""
+"Gibt dem Spieler für eine bestimmte Zeit die Sicht auf alle Dinge in einem "
+"bestimmten Gebiet."
 
 #: ../../src/events/event_factory.cc:153
 msgid "Set player's frontier style"
 msgstr "Lege den Grenzen-Stil des Spielers fest"
 
 #: ../../src/events/event_factory.cc:155
-msgid "Sets the style of the player's frontier markers to one of the styles that are defined in the player's tribe."
-msgstr "Stellt den Stil von Grenzposten des Spielers zu einem der Stile die im Stamm des Spielers definiert sind ein."
+msgid ""
+"Sets the style of the player's frontier markers to one of the styles that "
+"are defined in the player's tribe."
+msgstr ""
+"Stellt den Stil von Grenzposten des Spielers zu einem der Stile die im Stamm "
+"des Spielers definiert sind ein."
 
 #: ../../src/events/event_factory.cc:160
 msgid "Set player's flag style"
 msgstr "Flaggenstil eines Spielers einstellen"
 
 #: ../../src/events/event_factory.cc:162
-msgid "Sets the style of the player's flags to one of the styles that are defined in the player's tribe."
-msgstr "Fügt den Flaggen-Stil des Spielers zu den Stilen hinzu, die im Volk des Spielers festgelegt sind. "
+msgid ""
+"Sets the style of the player's flags to one of the styles that are defined "
+"in the player's tribe."
+msgstr ""
+"Fügt den Flaggen-Stil des Spielers zu den Stilen hinzu, die im Volk des "
+"Spielers festgelegt sind."
 
 #: ../../src/events/event_factory.cc:167
 msgid "Allows retreat value customization"
 msgstr "Erlaubt Rückzugswertanpassung"
 
 #: ../../src/events/event_factory.cc:169
-msgid "Allows that the player can change the value of 'retreat when hitpoints below x%'."
-msgstr "Erlaubt dem Spieler den 'zurückziehen wenn Trefferpunkte unter x%' Wert zu verändern."
+msgid ""
+"Allows that the player can change the value of 'retreat when hitpoints below "
+"x%'."
+msgstr ""
+"Erlaubt dem Spieler den 'zurückziehen wenn Trefferpunkte unter x%' Wert zu "
+"verändern."
 
 #: ../../src/events/event_factory.cc:174
 msgid "Forbids retreat value customization"
 msgstr "Untersagt Rückzugswertanpassung"
 
 #: ../../src/events/event_factory.cc:176
-msgid "Forbids that the player can change the value of 'retreat when hitpoints below x%'."
-msgstr "Verbietet dem Spieler den 'zurückziehen wenn Trefferpunkte unter x%' Wert zu verändern."
+msgid ""
+"Forbids that the player can change the value of 'retreat when hitpoints "
+"below x%'."
+msgstr ""
+"Verbietet dem Spieler den 'zurückziehen wenn Trefferpunkte unter x%' Wert zu "
+"verändern."
 
 #: ../../src/events/event_factory.cc:181
 msgid "Set player retreat percentage"
 msgstr "Spieler-Rückzugsprozentsatz einstellen"
 
 #: ../../src/events/event_factory.cc:183
-msgid "Sets the player value of 'retreat when hit points below x%', this value could be overridden by players if allowed."
-msgstr "Stellt den Wert 'Rückzug wenn Trefferpunkte unter x%' ein, dieser Wert könnten von den Spieler verändert werden, wäre es erlaubt."
+msgid ""
+"Sets the player value of 'retreat when hit points below x%', this value "
+"could be overridden by players if allowed."
+msgstr ""
+"Stellt den Wert 'Rückzug wenn Trefferpunkte unter x%' ein, dieser Wert "
+"könnten von den Spieler verändert werden, wäre es erlaubt."
 
 #: ../../src/events/event_factory.cc:188
 msgid "Set see all mode for a player"
@@ -1365,21 +1446,29 @@ msgid "Sets the see all mode for a specific player to on/off."
 msgstr "Stellt den Alles-Sehen-Modus für einen spezifischen Spieler An/Aus."
 
 #: ../../src/events/event_factory.cc:193
-#, fuzzy
 msgid "Creates a message for a player"
-msgstr "Stellt den Alles-Sehen-Modus für Spiele ein."
+msgstr "Schreibt eine Nachricht an einen Spieler"
 
 #: ../../src/events/event_factory.cc:195
-msgid "Creates a message for a player. This message can last forever, during a specified duration, or until a special event is run."
+msgid ""
+"Creates a message for a player. This message can last forever, during a "
+"specified duration, or until a special event is run."
 msgstr ""
+"Sendet eine Nachricht an einen Spieler. Diese Nachricht kann für immer "
+"angezeigt werden, für einen bestimmten Zeitraum oder bis ein spezieller "
+"Event läuft."
 
 #: ../../src/events/event_factory.cc:200
 msgid "Expires a previously created message"
-msgstr ""
+msgstr "Verwirft eine zuvor geschriebene Nachricht"
 
 #: ../../src/events/event_factory.cc:202
-msgid "Expires a message that was previously created for a player. The message will cease to exist."
+msgid ""
+"Expires a message that was previously created for a player. The message will "
+"cease to exist."
 msgstr ""
+"Verwirft eine zuvor an einen Spieler geschickte Nachricht. Die Nachricht "
+"wird gelöscht."
 
 #: ../../src/events/event_flag.cc:42
 #, c-format
@@ -1399,24 +1488,30 @@ msgid "(immovable): %s"
 msgstr "(Unbewegte Natur): %s"
 
 #: ../../src/events/event_lua.cc:42
-#, fuzzy, c-format
+#, c-format
 msgid "(lua event): %s"
-msgstr "(Flagge): %s"
+msgstr "(lua Ereignis): %s"
 
 #: ../../src/events/event_message.cc:67
 #, c-format
 msgid "expire: \"%s\" is not an expire message event"
-msgstr ""
+msgstr "verwerfen: \"%s\" ist kein Verwirf-Nachricht Event"
 
 #: ../../src/events/event_message.cc:72
 #, c-format
-msgid "duration: the value %u is not allowed as duration; it is a specal value meaning forever, which is the default; omit the duration key to make the message exist forever"
+msgid ""
+"duration: the value %u is not allowed as duration; it is a specal value "
+"meaning forever, which is the default; omit the duration key to make the "
+"message exist forever"
 msgstr ""
+"dauer: der Wert %u ist als Dauer nicht erlaubt; es ist ein spezieller Wert "
+"der Unendlich bedeutet. Dieser ist der Standardwert; man kann diesen Eintrag "
+"weglassen, damit die Nachricht für immer existiert."
 
 #: ../../src/events/event_message.cc:103
 #, c-format
 msgid "status_change: \"%s\" is not a message_is_read_or_archived trigger"
-msgstr ""
+msgstr "status_change: \"%s\" ist kein message_is_read_or_archived trigger"
 
 #: ../../src/events/event_message_box.cc:41
 msgid "No text defined"
@@ -1494,19 +1589,18 @@ msgid "(player see all): %s"
 msgstr "(Spieler sieht alles): %s"
 
 #: ../../src/events/event_player_worker_types.cc:52
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is not buildable"
-msgstr "Ist nicht baubar."
+msgstr "\"%s\" kann nicht gebaut werden"
 
 #: ../../src/events/event_player_worker_types.cc:58
-#, fuzzy
 msgid "no worker types"
-msgstr "Arbeiterart"
+msgstr "keine Arbeiter Typen"
 
 #: ../../src/events/event_player_worker_types.cc:63
-#, fuzzy, c-format
+#, c-format
 msgid "(player worker types): %s"
-msgstr "(Gebäudearten eines Spielers): %s"
+msgstr "(spieler Arbeiter Typen): %s"
 
 #: ../../src/events/event_retreat_change.cc:43
 msgid "Change"
@@ -1522,13 +1616,21 @@ msgstr "es gibt nur 1 Schritt, es sollten jedoch mindestens 2 sein"
 
 #: ../../src/events/event_road.cc:49
 #, c-format
-msgid "step %li has direction '%c', must be one of {1 (northeast), 2 (east), 3 (southeast), 4 (southwest), 5 (west), 6 (northwest)}"
-msgstr "Schritt %li hat die Richtung '%C', sollte einer von {1 (Nordosten), 2 (Osten), 3  (Südosten), 4 (Südwesten), 5 (Westen), 6 (Nordwesten)} sein"
+msgid ""
+"step %li has direction '%c', must be one of {1 (northeast), 2 (east), 3 "
+"(southeast), 4 (southwest), 5 (west), 6 (northwest)}"
+msgstr ""
+"Schritt %li hat die Richtung '%c', sollte einer von {1 (Nordosten), 2 "
+"(Osten), 3  (Südosten), 4 (Südwesten), 5 (Westen), 6 (Nordwesten)} sein"
 
 #: ../../src/events/event_road.cc:72
 #, c-format
-msgid "the steps \"%s\" do not form the optimal path from the start to the end through only the used locations, should be \"%s\""
-msgstr "die Schritte \"%s\" formen nicht den optimalen Pfad vom Start bis zum Ende nur duch die benutzten Standorte, sollten \"%s\" sein."
+msgid ""
+"the steps \"%s\" do not form the optimal path from the start to the end "
+"through only the used locations, should be \"%s\""
+msgstr ""
+"die Schritte \"%s\" formen nicht den optimalen Pfad vom Start bis zum Ende "
+"nur duch die benutzten Standorte, sollten \"%s\" sein."
 
 #: ../../src/events/event_set_player_flag_style.cc:41
 #, c-format
@@ -1589,7 +1691,8 @@ msgstr "interaktiver Spieler: %s"
 #: ../../src/game_io/game_player_economies_data_packet.cc:59
 #, c-format
 msgid "read number of economies as %u, but this was read as %u elsewhere"
-msgstr "lese Wirtschaftszahlen als %u, diese jedoch wurde als %u woanders gelesen"
+msgstr ""
+"lese Wirtschaftszahlen als %u, diese jedoch wurde als %u woanders gelesen"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:83
 msgid "there is no flag at the specified location"
@@ -1685,52 +1788,56 @@ msgstr "Spiellogik: %s"
 msgid "%u%% built"
 msgstr "%u%% gebaut"
 
-#: ../../src/logic/game.cc:224
+#: ../../src/logic/game.cc:231
 msgid "Preloading a map"
 msgstr "Lese Teile der Karte"
 
-#: ../../src/logic/game.cc:235
+#: ../../src/logic/game.cc:243
 msgid "Loading a world"
 msgstr "Lade eine Welt"
 
-#: ../../src/logic/game.cc:241
+#: ../../src/logic/game.cc:249
 #, c-format
 msgid "Adding player %u"
 msgstr "Füge Spieler %u hinzu"
 
-#: ../../src/logic/game.cc:254
+#: ../../src/logic/game.cc:262
 msgid "Loading a map"
 msgstr "Lade eine Karte"
 
-#: ../../src/logic/game.cc:285 ../../src/logic/game.cc:332
-#: ../../src/logic/game.cc:365
+#: ../../src/logic/game.cc:293 ../../src/logic/game.cc:340
+#: ../../src/logic/game.cc:373
 msgid "Preloading map"
 msgstr "Lade Teile der Karte vor"
 
-#: ../../src/logic/game.cc:299
+#: ../../src/logic/game.cc:307
 msgid "Configuring players"
 msgstr "Konfiguriere Spieler"
 
-#: ../../src/logic/game.cc:316
+#: ../../src/logic/game.cc:324
 msgid "Loading map"
 msgstr "Lade Karte"
 
-#: ../../src/logic/game.cc:443
+#: ../../src/logic/game.cc:451
 msgid "Creating player infrastructure"
 msgstr "Erstelle Infrastruktur eines Spielers"
 
-#: ../../src/logic/game.cc:454 ../../src/logic/player.cc:121
+#: ../../src/logic/game.cc:462 ../../src/logic/player.cc:121
 msgid "Missing starting position"
 msgstr "Fehlender Startpunkt"
 
-#: ../../src/logic/game.cc:456 ../../src/logic/player.cc:123
+#: ../../src/logic/game.cc:464 ../../src/logic/player.cc:123
 #, c-format
 msgid ""
-"Widelands could not start the game, because player %u has no starting position.\n"
-"You can manually add a starting position with Widelands Editor, to fix this problem."
+"Widelands could not start the game, because player %u has no starting "
+"position.\n"
+"You can manually add a starting position with Widelands Editor, to fix this "
+"problem."
 msgstr ""
-" Widelands konnte das Spiel nicht starten, das Spieler %u keinen Startpunkt besitzt.\n"
-"Du kannst manuell mit dem Widelands Editor einen Startpunkt setzen, um das Problem zu lösen."
+"Widelands konnte das Spiel nicht starten, das Spieler %u keinen Startpunkt "
+"besitzt.\n"
+"Du kannst manuell mit dem Widelands Editor einen Startpunkt setzen, um das "
+"Problem zu lösen."
 
 #: ../../src/logic/immovable.cc:133 ../../src/logic/production_program.cc:1396
 #, c-format
@@ -1804,12 +1911,15 @@ msgstr "unbeweglicher Typ nicht im Stamm, Ziel hat jedoch Weite (\"%s\")"
 #: ../../src/logic/immovable.cc:894
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
-msgstr "Weite \"%s\" die für den Zieltypen gegeben wurde muss (\"Welt\") sein"
+msgstr ""
+"Weite \"%s\" die für den Zieltypen gegeben wurde muss (\"Welt\") sein"
 
 #: ../../src/logic/immovable.cc:754 ../../src/logic/immovable.cc:909
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
-msgstr "unerwartete Wahrscheinlichkeit in Reichweite [1, 254] gefunden wurde jedoch \"%s\""
+msgstr ""
+"unerwartete Wahrscheinlichkeit in Reichweite [1, 254] gefunden wurde jedoch "
+"\"%s\""
 
 #: ../../src/logic/immovable.cc:767
 msgid "illegal transformation to the same type"
@@ -1844,19 +1954,18 @@ msgid "\"min-max\""
 msgstr "\"min-max\""
 
 #: ../../src/logic/military_data.cc:59
-#, fuzzy
 msgid "positive integer <= 100"
-msgstr "positive Ganzzahl"
+msgstr "positive Ganzzahl <= 100"
 
 #: ../../src/logic/military_data.cc:63
-#, fuzzy, c-format
+#, c-format
 msgid "expected positive integer >= %u <= 100 but found \"%s\""
-msgstr "erwartete positive Ganzzahl >= %u fand aber \"%s\""
+msgstr "Benötigt ganze positive Zahl >= %u <= 100 aber \"%s\" wurde gefunden"
 
 #: ../../src/logic/military_data.cc:75
-#, fuzzy, c-format
+#, c-format
 msgid "expected positive integer >= %u <= %u but found \"%u\""
-msgstr "erwartete positive Ganzzahl >= %u fand aber \"%s\""
+msgstr "erwartet war positive Ganzzahl >= %u <= %u, gefunden wurde \"%u\""
 
 #: ../../src/logic/militarysite.cc:66 ../../src/logic/warehouse.cc:276
 msgid " conquer"
@@ -1895,19 +2004,18 @@ msgid "Enemy at site defeated!"
 msgstr "Feindliches Militärgebäude besiegt."
 
 #: ../../src/logic/militarysite.cc:707
-#, fuzzy, c-format
+#, c-format
 msgid "%sYour %s discovered an aggressor.</p>"
-msgstr "%sDein(e) %s hat einen Angreifer entdeckt.</p></rt>"
+msgstr "%sdein %s hat einen Feind entdeckt.</p>"
 
 #: ../../src/logic/militarysite.cc:708
-#, fuzzy, c-format
+#, c-format
 msgid "%sYour %s is under attack.</p>"
-msgstr "%sDein(e) %s wird angegriffen.</p></rt>"
+msgstr "%sdein %s wird angegriffen.</p>"
 
 #: ../../src/logic/militarysite.cc:716
-#, fuzzy
 msgid "You are under attack"
-msgstr "Du wirst angegriffen!"
+msgstr "Du wirst angegriffen"
 
 #: ../../src/logic/playercommand.cc:134
 #, c-format
@@ -1982,14 +2090,14 @@ msgid "change target quantity: %s"
 msgstr "Zielwert ändern: %s"
 
 #: ../../src/logic/playercommand.cc:741
-#, fuzzy, c-format
+#, c-format
 msgid "set ware target quantity: %s"
-msgstr "Zielwerte setzen: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:863
-#, fuzzy, c-format
+#, c-format
 msgid "set worker target quantity: %s"
-msgstr "Zielwerte setzen: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:988
 #, c-format
@@ -2015,31 +2123,41 @@ msgstr "Soldatenkapazität ändern: %s"
 #, c-format
 msgid "retreat: value out of range. Received %u expected %u-%u"
 msgstr ""
+"rückzug: Wert ist nicht im zulässigen Bereich. Bekam %u, erwartete aber %u-"
+"%u."
 
 #: ../../src/logic/playercommand.cc:1306
-#, fuzzy, c-format
+#, c-format
 msgid "change military config: %s"
-msgstr "Zielwert ändern: %s"
+msgstr "verändert Militäreinstellung: %s"
 
 #: ../../src/logic/playercommand.cc:1345
 #, c-format
 msgid "(player %u): message id is null"
-msgstr ""
+msgstr "(Spieler %u): Nachrichten ID ist Null"
 
 #: ../../src/logic/playercommand.cc:1350
-#, fuzzy, c-format
+#, c-format
 msgid "player message: %s"
-msgstr "(Spielergebiet): %s"
+msgstr "Spieler Nachricht: %s"
 
 #: ../../src/logic/production_program.cc:72
 #, c-format
-msgid "%s is not declared as an input (\"%s=<count>\" was not found in the [inputs] section)"
-msgstr "%s ist nicht als Eingabe dekleriert (\"%s=<count>\" wurde nicht inder [inputs] Sektion gefunden)"
+msgid ""
+"%s is not declared as an input (\"%s=<count>\" was not found in the [inputs] "
+"section)"
+msgstr ""
+"%s ist nicht als Eingabe dekleriert (\"%s=<count>\" wurde nicht inder "
+"[inputs] Sektion gefunden)"
 
 #: ../../src/logic/production_program.cc:85
 #, c-format
-msgid "wrong order of ware types within group: ware type %s appears after ware type %s (fix order!)"
-msgstr "falsche Befehl über Warentypen innerhalb der Gruppe: Warentyp %s erscheint nach Warentyp %s (berichtige den Befehl!)"
+msgid ""
+"wrong order of ware types within group: ware type %s appears after ware type "
+"%s (fix order!)"
+msgstr ""
+"falsche Befehl über Warentypen innerhalb der Gruppe: Warentyp %s erscheint "
+"nach Warentyp %s (berichtige den Befehl!)"
 
 #: ../../src/logic/production_program.cc:99
 #: ../../src/logic/production_program.cc:834
@@ -2049,12 +2167,17 @@ msgstr "Anzahl"
 
 #: ../../src/logic/production_program.cc:104
 #, c-format
-msgid "group count is %u but (total) input storage capacity of the specified ware type(s) is only %u, so the group can never be fulfilled by the site"
-msgstr "Gruppenzählung ist %u, aber (insgesamt) ist die Lagerkapazität der spezifizierten Wahtensorte(n) nur %u, sodass die Gruppe nie von der Seite volfüllt sein kann"
+msgid ""
+"group count is %u but (total) input storage capacity of the specified ware "
+"type(s) is only %u, so the group can never be fulfilled by the site"
+msgstr ""
+"Gruppenzählung ist %u, aber (insgesamt) ist die Lagerkapazität der "
+"spezifizierten Wahtensorte(n) nur %u, sodass die Gruppe nie von der Seite "
+"volfüllt sein kann"
 
 #: ../../src/logic/production_program.cc:134
 msgid "not "
-msgstr "nicht"
+msgstr "nicht "
 
 #: ../../src/logic/production_program.cc:156
 #: ../../src/logic/production_program.cc:177
@@ -2071,7 +2194,7 @@ msgstr "Arbeiter brauchen Erfahrung"
 
 #: ../../src/logic/production_program.cc:257
 msgid "ware type or worker type"
-msgstr ""
+msgstr "waren Typ oder Arbeiter typ"
 
 #: ../../src/logic/production_program.cc:320
 #, c-format
@@ -2081,7 +2204,9 @@ msgstr "Ungültige Verhältnisse: %s"
 #: ../../src/logic/production_program.cc:335
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
-msgstr "erwarte {\"fehlgeschlagen\"|\"vollständig\"|\"übersprungen\"}, gefunden wurde jedoch \"%s\""
+msgstr ""
+"erwarte {\"fehlgeschlagen\"|\"vollständig\"|\"übersprungen\"}, gefunden "
+"wurde jedoch \"%s\""
 
 #: ../../src/logic/production_program.cc:348
 msgid "expected \"and\" or end of input"
@@ -2116,8 +2241,12 @@ msgstr " weil nicht: "
 
 #: ../../src/logic/production_program.cc:460
 #, c-format
-msgid "the program \"%s\" has not (yet) been declared in %s (wrong declaration order?)"
-msgstr "Das Programm \"%s\" wurde (noch) nicht in %s deklariert (falsche Erklärungsanweisung?)"
+msgid ""
+"the program \"%s\" has not (yet) been declared in %s (wrong declaration "
+"order?)"
+msgstr ""
+"Das Programm \"%s\" wurde (noch) nicht in %s deklariert (falsche "
+"Erklärungsanweisung?)"
 
 #: ../../src/logic/production_program.cc:482
 #: ../../src/logic/production_program.cc:487
@@ -2168,12 +2297,16 @@ msgstr[1] " fehlen"
 #: ../../src/logic/production_program.cc:848
 #: ../../src/logic/production_program.cc:934
 #, c-format
-msgid "%s is not declared as an output (\"output=%s\" was not found in the [global] section)"
-msgstr "%s ist nicht als Ausgabe deklariert (\"Ausgabe=%s\" konnte nicht im [globalen] Abschnitt gefunden werden)"
+msgid ""
+"%s is not declared as an output (\"output=%s\" was not found in the [global] "
+"section)"
+msgstr ""
+"%s ist nicht als Ausgabe deklariert (\"Ausgabe=%s\" konnte nicht im "
+"[globalen] Abschnitt gefunden werden)"
 
 #: ../../src/logic/production_program.cc:866
 msgid "Produced "
-msgstr "Produziert"
+msgstr "Produziert "
 
 #: ../../src/logic/production_program.cc:876
 #: ../../src/logic/production_program.cc:961
@@ -2188,7 +2321,7 @@ msgstr ", "
 
 #: ../../src/logic/production_program.cc:951
 msgid "Recruited "
-msgstr ""
+msgstr "Angeworben "
 
 #: ../../src/logic/production_program.cc:992
 msgid "distance"
@@ -2204,9 +2337,11 @@ msgid "Mine empty"
 msgstr "Bergwerk leer"
 
 #: ../../src/logic/production_program.cc:1152
-#, fuzzy
-msgid "This mines has run empty. You should consider to expand ordestruct it."
-msgstr "Eines deiner Bergwerke findet keine Ressourcen mehr. Du solltest überlegen es auszubauen oder abzureißen."
+msgid ""
+"This mines has run empty. You should consider to expand or destruct it."
+msgstr ""
+"Diese Mine ist leer. Du solltest darüber nachdenken sie entweder zu "
+"erweitern oder abzureißen."
 
 #: ../../src/logic/production_program.cc:1167
 #: ../../src/logic/production_program.cc:1236
@@ -2216,7 +2351,9 @@ msgstr "Soldatenart"
 #: ../../src/logic/production_program.cc:1180
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|evade\"} but found \"%s\""
-msgstr "erwartete {\"L\"|\"Angriff\"|\"Verteidigung\"|Ausweichen\"}, fand jedoch \"%s\""
+msgstr ""
+"erwartete {\"L\"|\"Angriff\"|\"Verteidigung\"|Ausweichen\"}, fand jedoch "
+"\"%s\""
 
 #: ../../src/logic/production_program.cc:1189
 #: ../../src/logic/production_program.cc:1257
@@ -2229,14 +2366,12 @@ msgid "expected level > %u but found \"%s\""
 msgstr "unerwartetes level > %u , fand jedoch \"%s\""
 
 #: ../../src/logic/productionsite.cc:70
-#, fuzzy
 msgid "this ware type has already been declared as an output"
-msgstr "das Programm wurde bereits deklariert"
+msgstr ""
 
 #: ../../src/logic/productionsite.cc:76
-#, fuzzy
 msgid "this worker type has already been declared as an output"
-msgstr "das Programm wurde bereits deklariert"
+msgstr ""
 
 #: ../../src/logic/productionsite.cc:218
 msgid "(not occupied)"
@@ -2263,7 +2398,9 @@ msgstr "-"
 
 #: ../../src/logic/requirements.cc:267
 #, c-format
-msgid "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) or atrTotal (%u) but found unknown attribute value (%u)"
+msgid ""
+"expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) or "
+"atrTotal (%u) but found unknown attribute value (%u)"
 msgstr ""
 
 #: ../../src/logic/soldier.cc:70 ../../src/logic/soldier.cc:93
@@ -2286,8 +2423,20 @@ msgstr "schlechte Richtung '%d'"
 
 #: ../../src/logic/soldier.cc:1340
 #, c-format
-msgid "The game engine has encountered a logic error. The %s #%u of player %u could not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will not be executed). Strange things may happen. No solution for this problem has been implemented yet. (bug #1951113) (The game has been paused.)"
-msgstr "Die Spieleengine hat einen Logikfehler entdeckt. Der/die/das %s #%u vom Spieler %u konnte keinen Weg von (%i, %i) (mit einem %s Objekt) zum Gegnerischen Objekt bei (%s #%u von Spieler %u) bei (%i, %i) (mit einem %s Objekt) finden. Der %s wird nun desertieren (aber wird dafür nicht ausgeführt). Seltsame Sachen können passieren. Bisher wurde keine Möglichkeit eingebaut um den Fehler (#1951113) zu beheben. (Das Spiel wurde pausiert.)"
+msgid ""
+"The game engine has encountered a logic error. The %s #%u of player %u could "
+"not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
+"player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
+"not be executed). Strange things may happen. No solution for this problem "
+"has been implemented yet. (bug #1951113) (The game has been paused.)"
+msgstr ""
+"Die Spieleengine hat einen Logikfehler entdeckt. Der/die/das %s #%u vom "
+"Spieler %u konnte keinen Weg von (%i, %i) (mit einem %s Objekt) zum "
+"Gegnerischen Objekt bei (%s #%u von Spieler %u) bei (%i, %i) (mit einem %s "
+"Objekt) finden. Der %s wird nun desertieren (aber wird dafür nicht "
+"ausgeführt). Seltsame Sachen können passieren. Bisher wurde keine "
+"Möglichkeit eingebaut um den Fehler (#1951113) zu beheben. (Das Spiel wurde "
+"pausiert.)"
 
 #: ../../src/logic/soldier.cc:1351 ../../src/logic/soldier.cc:1356
 #: ../../src/logic/worker.cc:1668
@@ -2331,27 +2480,39 @@ msgid "tribe %s: %s"
 msgstr "Stamm %s: %s"
 
 #: ../../src/logic/warehouse.cc:489
-#, fuzzy, c-format
-msgid "<p font-size=14 font-face=FreeSerif>A new %s was added to your economy.</p>"
-msgstr "%sEin neues %s wurde deiner Wirtschaft hinzugefügt.</p></rt>"
+#, c-format
+msgid ""
+"<p font-size=14 font-face=FreeSerif>A new %s was added to your economy.</p>"
+msgstr ""
 
 #: ../../src/logic/worker.cc:158
 #, c-format
-msgid "should mine resource %s, which does not exist in world; tribe is not compatible with world"
-msgstr "sollte eine Mine Resourcen von %s hervorbringen, die es in dieser Welt nicht gibt, dann ist dieser Stamm mit der Welt inkompatibel"
+msgid ""
+"should mine resource %s, which does not exist in world; tribe is not "
+"compatible with world"
+msgstr ""
+"sollte eine Mine Resourcen von %s hervorbringen, die es in dieser Welt nicht "
+"gibt, dann ist dieser Stamm mit der Welt inkompatibel"
 
 #: ../../src/logic/worker.cc:260
 #, c-format
-msgid "should breed resource type %s, which does not exist in world; tribe is not compatible with world"
-msgstr "sollte Züchter Resourcen Typs %s, welche in dieser Welt nicht existieren, hervorbringen, dann ist der Stamm nicht mit dieser Welt kompatibel."
+msgid ""
+"should breed resource type %s, which does not exist in world; tribe is not "
+"compatible with world"
+msgstr ""
+"sollte Züchter Resourcen Typs %s, welche in dieser Welt nicht existieren, "
+"hervorbringen, dann ist der Stamm nicht mit dieser Welt kompatibel."
 
 #: ../../src/logic/worker.cc:640
 msgid "Out of "
 msgstr ""
 
 #: ../../src/logic/worker.cc:644
-msgid "The worker of this building cannot find any more resources of the following type: "
+msgid ""
+"The worker of this building cannot find any more resources of the following "
+"type: "
 msgstr ""
+"Der Arbeiter dieses Gebäudes kann keine Ressourcen dieses Typs mehr finden: "
 
 #: ../../src/logic/worker.cc:916
 msgid "A geologist found resources."
@@ -2359,8 +2520,35 @@ msgstr "Ein Geologe hat Resourcen entdeckt."
 
 #: ../../src/logic/worker.cc:1649
 #, c-format
-msgid "The game engine has encountered a logic error. The %s #%u of player %u (carrying %s) could not find a way home from (%i, %i) (with %s immovable) to the base flag at (%i, %i) of its %s at (%i, %i). The %s will be made homeless and probably die, unless some object is removed very soon and the %s finds a way to a flag connected to a warehouse. The %s will immediately request a new worker. Unfortunately this may happen repeatedly and drain the supply of workers (tools). No solution for this problem has been implemented yet. It would be safest to destroy the %s and not rebuild it at that location, nor any other building that sends out a worker on the map. This problem usually occurs near unpassable terrain, such as water, when an object, such as a farm field, is placed on the map while the worker is out working. (bug #1796611) (The game has been paused.)"
-msgstr "Der Spieltreiber hat einen Logikfehler entdeckt. Der/die/das %s #%u vom Spieler %u (trägt %s) konnte keinen Weg von (%i, %i) (mit einem %s Objekt) zur Flagge bei (%i, %i) seines %s bei (%i, %i) finden. Dem %s wird nun sein Haus aberkannt. Er wird wahrscheinlich sterben - nur die Entfernung eines bestimmten Objekts könnte den %s eventuell retten, sodass er einen Weg zu einem Warenhaus finden kann. Sein Haus (%s) wird jetzt sofort einen neuen Arbeiter anfordern. Leider kann das aber auch dazu führen das noch mehr Arbeiter verloren gehen und somit Werkzeuge verschwendet werden. Bisher wurde keine Möglichkeit eingebaut um den Fehler (#1796611)  zu beheben. Es wird das sicherste sein das Gebäude (%s) abzureißen und es dort nicht wieder aufzubauen. Es wöre auch nicht ratsam ein anderes Gebäude dorthinzustellen dessen Arbeiter das Haus häufiger verlassen. Diese Problem geschieht am häufigsten in der Nähe von unbegehbarem Land wie z.B. Wasser -> Ein Objekt wird erstellt (z.B. ein Feld) und versperrt den einzigen Weg den der andere Arbeiter zurück zu seinem Haus nehmen könnte. (Das Spiel wurde pausiert.)"
+msgid ""
+"The game engine has encountered a logic error. The %s #%u of player %u "
+"(carrying %s) could not find a way home from (%i, %i) (with %s immovable) to "
+"the base flag at (%i, %i) of its %s at (%i, %i). The %s will be made "
+"homeless and probably die, unless some object is removed very soon and the "
+"%s finds a way to a flag connected to a warehouse. The %s will immediately "
+"request a new worker. Unfortunately this may happen repeatedly and drain the "
+"supply of workers (tools). No solution for this problem has been implemented "
+"yet. It would be safest to destroy the %s and not rebuild it at that "
+"location, nor any other building that sends out a worker on the map. This "
+"problem usually occurs near unpassable terrain, such as water, when an "
+"object, such as a farm field, is placed on the map while the worker is out "
+"working. (bug #1796611) (The game has been paused.)"
+msgstr ""
+"Der Spieltreiber hat einen Logikfehler entdeckt. Der/die/das %s #%u vom "
+"Spieler %u (trägt %s) konnte keinen Weg von (%i, %i) (mit einem %s Objekt) "
+"zur Flagge bei (%i, %i) seines %s bei (%i, %i) finden. Dem %s wird nun sein "
+"Haus aberkannt. Er wird wahrscheinlich sterben - nur die Entfernung eines "
+"bestimmten Objekts könnte den %s eventuell retten, sodass er einen Weg zu "
+"einem Warenhaus finden kann. Sein Haus (%s) wird jetzt sofort einen neuen "
+"Arbeiter anfordern. Leider kann das aber auch dazu führen das noch mehr "
+"Arbeiter verloren gehen und somit Werkzeuge verschwendet werden. Bisher "
+"wurde keine Möglichkeit eingebaut um den Fehler (#1796611)  zu beheben. Es "
+"wird das sicherste sein das Gebäude (%s) abzureißen und es dort nicht wieder "
+"aufzubauen. Es wöre auch nicht ratsam ein anderes Gebäude dorthinzustellen "
+"dessen Arbeiter das Haus häufiger verlassen. Diese Problem geschieht am "
+"häufigsten in der Nähe von unbegehbarem Land wie z.B. Wasser -> Ein Objekt "
+"wird erstellt (z.B. ein Feld) und versperrt den einzigen Weg den der andere "
+"Arbeiter zurück zu seinem Haus nehmen könnte. (Das Spiel wurde pausiert.)"
 
 #: ../../src/logic/worker.cc:1666
 msgid "nothing"
@@ -2377,9 +2565,9 @@ msgid "allowed buildings: %s"
 msgstr "Erlaubte Gebäude: %s"
 
 #: ../../src/map_io/widelands_map_allowed_worker_types_data_packet.cc:84
-#, fuzzy, c-format
+#, c-format
 msgid "allowed worker types: %s"
-msgstr "unbekannte Arbeiterart \"%s\""
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
@@ -2402,9 +2590,9 @@ msgid "unknown task type \"%s\""
 msgstr "unbekannter Aufgabentyp \"%s\""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:237
-#, fuzzy, c-format
+#, c-format
 msgid "task %s is duplicated in stack"
-msgstr "\"%s\" ist dupliziert"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:314
 #, c-format
@@ -2458,7 +2646,9 @@ msgstr "Baustelle: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:450
 #, c-format
-msgid "%s %u has a next_spawn time for worker type \"%s\" set to %u, but it was previously set to %u\n"
+msgid ""
+"%s %u has a next_spawn time for worker type \"%s\" set to %u, but it was "
+"previously set to %u\n"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:471
@@ -2474,7 +2664,8 @@ msgstr "Militärgebäude: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:708
 #, c-format
 msgid "program %s was skipped at time %u, but time is only %u"
-msgstr "Programm %s wurde übersprungen zum Zeitpunkt %u aber die Zeit ist erst %u"
+msgstr ""
+"Programm %s wurde übersprungen zum Zeitpunkt %u aber die Zeit ist erst %u"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:937
 #, c-format
@@ -2555,9 +2746,9 @@ msgid "has building %u at (%i, %i), which is not at the top left node"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
-#, fuzzy, c-format
+#, c-format
 msgid "building (%u): %s"
-msgstr "Gebäude %u: %s"
+msgstr "Gebäude (%u): %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:209
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
@@ -2593,7 +2784,9 @@ msgstr "Unzulässige Welt"
 #: ../../src/map_io/widelands_map_loader.cc:91
 #, c-format
 msgid "The world \"%s\" set by the map, does not exist on your filesystem."
-msgstr "Die Welt \"%s\" die von der Karte vorgegeben wird, exisitiert nicht auf deinem Dateisystem."
+msgstr ""
+"Die Welt \"%s\" die von der Karte vorgegeben wird, exisitiert nicht auf "
+"deinem Dateisystem."
 
 #: ../../src/map_io/widelands_map_node_ownership_data_packet.cc:64
 #, c-format
@@ -2633,32 +2826,38 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:94
 #, c-format
 msgid "message is sent in the future: sent at %u but gametime is only %u"
-msgstr ""
+msgstr "Nachricht wurde um %u gesendet, aber es ist erst %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:103
 #, c-format
-msgid "the value %u is not allowed as duration; it is a specal value meaning forever, which is the default; omit the duration key to make the message exist forever"
+msgid ""
+"the value %u is not allowed as duration; it is a specal value meaning "
+"forever, which is the default; omit the duration key to make the message "
+"exist forever"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:111
 #, c-format
-msgid "duration %u is too large; causes numeric overflow when added to sent time %u"
+msgid ""
+"duration %u is too large; causes numeric overflow when added to sent time %u"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:117
 #, c-format
-msgid "message should have expired at %u; sent at %u with duration %u but gametime is already %u"
+msgid ""
+"message should have expired at %u; sent at %u with duration %u but gametime "
+"is already %u"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:151
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\": %s"
-msgstr "%s: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:156
-#, fuzzy, c-format
+#, c-format
 msgid "messages for player %u: %s"
-msgstr "Spieler: %u: %s"
+msgstr "Nachrichten für den Spieler %u: %s"
 
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:122
 #, c-format
@@ -2671,13 +2870,14 @@ msgid "road: %s"
 msgstr "Straße: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
-#, fuzzy
 msgid "no carrier slot"
-msgstr "Träger: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:134
 #, c-format
-msgid "expected 1 but found %u carrier slots in road saved with packet version 2 (old)"
+msgid ""
+"expected 1 but found %u carrier slots in road saved with packet version 2 "
+"(old)"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
@@ -2751,20 +2951,29 @@ msgstr "Der Client hat das Spiel verlassen."
 
 #: ../../src/network/netclient.cc:198
 msgid "Client crashed and performed an emergency save."
-msgstr "Der Client ist abgestürzt und hat eine Notfallspeicherung durchgeführt."
+msgstr ""
+"Der Client ist abgestürzt und hat eine Notfallspeicherung durchgeführt."
 
 #: ../../src/network/netclient.cc:413
 msgid "Server sent a player update for a player that does not exist."
-msgstr "Der Server hat ein Spieler-Update für einen nicht existenten Spieler gesendet."
+msgstr ""
+"Der Server hat ein Spieler-Update für einen nicht existenten Spieler "
+"gesendet."
 
 #: ../../src/network/netclient.cc:432
 msgid "Server sent an user update for a user that does not exist."
-msgstr "Der Server hat ein Benutzerupdate für einen nicht existenten Benutzer gesendet."
+msgstr ""
+"Der Server hat ein Benutzerupdate für einen nicht existenten Benutzer "
+"gesendet."
 
 #: ../../src/network/netclient.cc:508
 #, c-format
-msgid "Expected a HELLO packet from server, but received command number %u. Maybe the server is running a different version of Widelands?"
-msgstr "Habe ein HELLO Paket vom Server erwartet, aber die Anweisung Nummer %u erhalten. Vielleicht verwendet der Server eine andere Widelands-Version?"
+msgid ""
+"Expected a HELLO packet from server, but received command number %u. Maybe "
+"the server is running a different version of Widelands?"
+msgstr ""
+"Habe ein HELLO Paket vom Server erwartet, aber die Anweisung Nummer %u "
+"erhalten. Vielleicht verwendet der Server eine andere Widelands-Version?"
 
 #: ../../src/network/netclient.cc:515
 msgid "Server uses a different protocol version"
@@ -2772,7 +2981,7 @@ msgstr "Der Server benutzt eine andere Protokollversion"
 
 #: ../../src/network/netclient.cc:639
 msgid "/me 's file failed md5 checksumming."
-msgstr ""
+msgstr "/me 's Datei hat die Überpfrüfung mit MD5 nicht bestanden"
 
 #: ../../src/network/netclient.cc:694
 msgid "Unexpectedly received LAUNCH command from server."
@@ -2780,16 +2989,19 @@ msgstr "Ich habe unerwartet ein LAUNCH Befehl vom Server erhalten."
 
 #: ../../src/network/netclient.cc:714
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
-msgstr "Der Server hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
+msgstr ""
+"Der Server hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
 
 #: ../../src/network/netclient.cc:727
 msgid "Server sent a SYNCREQUEST even though no game is running."
-msgstr "Der Server hat ein SYNCREQUEST gesendet, obwohl noch kein Spiel läuft."
+msgstr ""
+"Der Server hat ein SYNCREQUEST gesendet, obwohl noch kein Spiel läuft."
 
 #: ../../src/network/netclient.cc:754
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
-msgstr "Der Server eine unbekannte Anweisungen (Anweisung Nummer: %u) gesendet"
+msgstr ""
+"Der Server eine unbekannte Anweisungen (Anweisung Nummer: %u) gesendet"
 
 #: ../../src/network/netclient.cc:788
 msgid "Something went wrong: "
@@ -2809,7 +3021,8 @@ msgstr "Das Spiel wurde, kurz nachdem du dich verbinden wolltest, gestartet."
 
 #: ../../src/network/nethost.cc:488
 msgid "Server has crashed and performed an emergency save."
-msgstr "Der Server ist abgestürzt und hat eine Notfallsicherung durchgeführt."
+msgstr ""
+"Der Server ist abgestürzt und hat eine Notfallsicherung durchgeführt."
 
 #: ../../src/network/nethost.cc:827
 #, c-format
@@ -2824,7 +3037,9 @@ msgstr "Computer %u"
 #: ../../src/network/nethost.cc:1203
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
-msgstr "WARNUNG: %s benutzt die Version %s, während der Gastgeber die Version %s benutzt."
+msgstr ""
+"WARNUNG: %s benutzt die Version %s, während der Gastgeber die Version %s "
+"benutzt."
 
 #: ../../src/network/nethost.cc:1250
 #, c-format
@@ -2841,7 +3056,8 @@ msgstr "Der Client simuliert ausserhalb der vom Server erlaubten Zeit."
 
 #: ../../src/network/nethost.cc:1281
 msgid "Client did not submit sync report in time."
-msgstr "Der Client hat der Synchronisationsreport nicht rechtzeitig gesendet."
+msgstr ""
+"Der Client hat der Synchronisationsreport nicht rechtzeitig gesendet."
 
 #: ../../src/network/nethost.cc:1461
 msgid "Client and host have become desynchronized."
@@ -2861,16 +3077,22 @@ msgstr "Verbindung zum Client verloren."
 
 #: ../../src/network/nethost.cc:1540
 msgid "Client sent malformed commands: "
-msgstr "Der Client hat einen unverständlichen Befehl gesendet:"
+msgstr "Der Client hat einen unverständlichen Befehl gesendet: "
 
 #: ../../src/network/nethost.cc:1573
 msgid "Game is running already, but client has not connected fully"
-msgstr "Das Spiel läuft bereits, aber der Client ist noch nicht richtig verbunden."
+msgstr ""
+"Das Spiel läuft bereits, aber der Client ist noch nicht richtig verbunden."
 
 #: ../../src/network/nethost.cc:1577
 #, c-format
-msgid "First command sent by client is %u instead of HELLO. Most likely the client is running an incompatible version."
-msgstr "Der Erste vom Clienten gesendete Befehl ist %u stattdessen hätte HELLO kommen müssen. Höchstwahrscheinlich verwenden Server und Client inkompatible Versionen."
+msgid ""
+"First command sent by client is %u instead of HELLO. Most likely the client "
+"is running an incompatible version."
+msgstr ""
+"Der Erste vom Clienten gesendete Befehl ist %u stattdessen hätte HELLO "
+"kommen müssen. Höchstwahrscheinlich verwenden Server und Client inkompatible "
+"Versionen."
 
 #: ../../src/network/nethost.cc:1583
 msgid "Server uses a different protocol version."
@@ -2878,16 +3100,20 @@ msgstr "Der Server verwendet eine andere Protokollversion."
 
 #: ../../src/network/nethost.cc:1665
 msgid "Client sent TIME command even though game is not running."
-msgstr "Der Client hat einen TIME Befehl gesendet, obwohl noch kein Spiel läuft."
+msgstr ""
+"Der Client hat einen TIME Befehl gesendet, obwohl noch kein Spiel läuft."
 
 #: ../../src/network/nethost.cc:1673
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
-msgstr "Der Client hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
+msgstr ""
+"Der Client hat ein PLAYERCOMMAND gesendet, obwohl noch kein Spiel läuft."
 
 #: ../../src/network/nethost.cc:1685
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
-msgstr "Der Client %i (%i) hat einen Spielerbefehl (%i)  für einen anderen Spieler (%i) gesendet."
+msgstr ""
+"Der Client %u (%u) hat einen Spielerbefehl (%i)  für einen anderen Spieler "
+"(%i) gesendet."
 
 #: ../../src/network/nethost.cc:1694
 msgid "Client sent unexpected synchronization report."
@@ -2898,23 +3124,23 @@ msgid "Client requests file altough none is available to send."
 msgstr "Client fordert Datein an, obwohl keine zu Sendung vorgesehen ist."
 
 #: ../../src/network/nethost.cc:1732
-#, fuzzy, c-format
+#, c-format
 msgid "Started to send file %s to %s!"
-msgstr "Beginne die Datei zu %s zu senden."
+msgstr "Transfer der Datei %s nach %s gestartet!"
 
 #: ../../src/network/nethost.cc:1753
 msgid "Client requests file part that does not exist."
 msgstr "Client fordert ein Dateienteilstück an, welches nicht existiert."
 
 #: ../../src/network/nethost.cc:1756
-#, fuzzy, c-format
+#, c-format
 msgid "Completed transfer of file %s to %s"
-msgstr "Transfer der Datei zu %s wurde beendet"
+msgstr "Der Transfer der Datei %s zum Empfänger %s ist abgeschlossen"
 
 #: ../../src/network/nethost.cc:1764
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
-msgstr ""
+msgstr "Sende Teil %u/%u der Datei %s zu %s"
 
 #: ../../src/network/nethost.cc:1774
 #, c-format
@@ -2956,7 +3182,9 @@ msgstr "Metaserververbindung wieder hergestellt."
 
 #: ../../src/network/network_ggz.cc:521
 msgid "NOTE: The Internet gaming implementation is in very early state."
-msgstr "HINWEIS: Die Implementierung der Internetspielfunktion ist in einem sehr frühem Stadium."
+msgstr ""
+"HINWEIS: Die Implementierung der Internetspielfunktion ist in einem sehr "
+"frühem Stadium."
 
 #: ../../src/network/network_ggz.cc:525
 msgid "Please take a look at the notes at:"
@@ -2985,66 +3213,100 @@ msgid "Building Trigger"
 msgstr "Gebäude-Auslöser"
 
 #: ../../src/trigger/trigger_factory.cc:43
-msgid "Triggers when the player has the specified number of buildings of the specified type in the specified area."
-msgstr "Löst aus, wenn der Spieler eine bestimmte Anzahl eines Gebäudes in dem angegebenen Gebiet besitzt."
+msgid ""
+"Triggers when the player has the specified number of buildings of the "
+"specified type in the specified area."
+msgstr ""
+"Löst aus, wenn der Spieler eine bestimmte Anzahl eines Gebäudes in dem "
+"angegebenen Gebiet besitzt."
 
 #: ../../src/trigger/trigger_factory.cc:48
 msgid "Defeated Player Trigger"
 msgstr "Spieler besiegt Auslöser"
 
 #: ../../src/trigger/trigger_factory.cc:50
-msgid "Triggers when the player was defeated. The trigger is set to true, if the player has 0 workers."
-msgstr "Löst aus, wenn ein Spieler besiegt wurde. Der Auslöser wird wahr wenn der Spieler keine Arbeiter mehr hat."
+msgid ""
+"Triggers when the player was defeated. The trigger is set to true, if the "
+"player has 0 workers."
+msgstr ""
+"Löst aus, wenn ein Spieler besiegt wurde. Der Auslöser wird wahr wenn der "
+"Spieler keine Arbeiter mehr hat."
 
 #: ../../src/trigger/trigger_factory.cc:55
 msgid "Military influence Trigger"
 msgstr "Militär-Einfluss-Auslöser"
 
 #: ../../src/trigger/trigger_factory.cc:57
-msgid "Triggers when the player has some (or highest) military influence over the specified number of nodes in the specified area."
-msgstr "Löst aus, wenn der Spieler einen bestimmte (oder den höchsten) militärischen Einfluss in dem angegebenen Gebiet besitzt."
+msgid ""
+"Triggers when the player has some (or highest) military influence over the "
+"specified number of nodes in the specified area."
+msgstr ""
+"Löst aus, wenn der Spieler einen bestimmte (oder den höchsten) militärischen "
+"Einfluss in dem angegebenen Gebiet besitzt."
 
 #: ../../src/trigger/trigger_factory.cc:62
 msgid "Ownership Trigger"
 msgstr "Gebiets-Besitzer Auslöser"
 
 #: ../../src/trigger/trigger_factory.cc:64
-msgid "Triggers when the the player owns at least the specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
-msgstr "Löst aus, wenn der Spieler mindestens eine bestimmte Menge Land in dem ausgewählten Gebiet besitzt. Falls es kein einfacher Auslöser ist, wird der Auslöser wieder zurückgesetzt, sobald der Spieler wieder zuwenig Land besitzt."
+msgid ""
+"Triggers when the the player owns at least the specified number of locations "
+"in the specified area. Unless it is a one-time trigger, it becomes unset "
+"when this no longer holds."
+msgstr ""
+"Löst aus, wenn der Spieler mindestens eine bestimmte Menge Land in dem "
+"ausgewählten Gebiet besitzt. Falls es kein einfacher Auslöser ist, wird der "
+"Auslöser wieder zurückgesetzt, sobald der Spieler wieder zuwenig Land "
+"besitzt."
 
 #: ../../src/trigger/trigger_factory.cc:70
 msgid "Time Trigger"
 msgstr "Zeit-Auslöser"
 
 #: ../../src/trigger/trigger_factory.cc:72
-msgid "Triggers at a certain time. The time can be set to a value in ms. If the trigger has no time is set, a time can be set for it with an event."
-msgstr "Löst nach einer bestimmten Zeit aus. Die Zeit kann in einem Wert in ms gesetzt werden. Wenn der Auslöser keine Zeitdauer gegeben hat, kann eine Dauer über ein Ereignis gegeben werden."
+msgid ""
+"Triggers at a certain time. The time can be set to a value in ms. If the "
+"trigger has no time is set, a time can be set for it with an event."
+msgstr ""
+"Löst nach einer bestimmten Zeit aus. Die Zeit kann in einem Wert in ms "
+"gesetzt werden. Wenn der Auslöser keine Zeitdauer gegeben hat, kann eine "
+"Dauer über ein Ereignis gegeben werden."
 
 #: ../../src/trigger/trigger_factory.cc:78
 msgid "Vision Trigger"
 msgstr "Sicht-Auslöser"
 
 #: ../../src/trigger/trigger_factory.cc:80
-msgid "Triggers when the the player sees (or has seen) at least a specified number of locations in the specified area. Unless it is a one-time trigger, it becomes unset when this no longer holds."
-msgstr "Löst aus, wenn der Spieler mindestens eine bestimmte Menge Land in dem ausgewählten Gebiet sieht (oder gesehen hat). Falls es kein einfacher Auslöser ist, wird der Auslöser wieder zurückgesetzt, sobald die Bedingung nicht mehr zutrifft."
+msgid ""
+"Triggers when the the player sees (or has seen) at least a specified number "
+"of locations in the specified area. Unless it is a one-time trigger, it "
+"becomes unset when this no longer holds."
+msgstr ""
+"Löst aus, wenn der Spieler mindestens eine bestimmte Menge Land in dem "
+"ausgewählten Gebiet sieht (oder gesehen hat). Falls es kein einfacher "
+"Auslöser ist, wird der Auslöser wieder zurückgesetzt, sobald die Bedingung "
+"nicht mehr zutrifft."
 
 #: ../../src/trigger/trigger_factory.cc:86
 msgid "Message is Read or Archvied Trigger"
 msgstr ""
 
 #: ../../src/trigger/trigger_factory.cc:88
-msgid "Triggers when a message, created with a message event with status New, has status Read or Archived, which means that the player has changed the status of the message."
+msgid ""
+"Triggers when a message, created with a message event with status New, has "
+"status Read or Archived, which means that the player has changed the status "
+"of the message."
 msgstr ""
 
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:58
-#, fuzzy, c-format
+#, c-format
 msgid "player %u's message %u does not exist (%u is highest)"
-msgstr "Spieler %u existier in diesem Spiel nicht"
+msgstr "Nachricht von %u (%u) existiert nicht (%u ist die höchste)"
 
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:64
 #, c-format
 msgid "(message_is_read_or_archived): %s"
-msgstr ""
+msgstr "(Nachricht_wurde_gelesen_oder_archiviert): %s"
 
 #: ../../src/trigger/trigger_military_influence.cc:47
 #, c-format
@@ -3136,7 +3398,7 @@ msgstr "Schwierigkeit:"
 #: ../../src/ui_fsmenu/campaign_select.cc:62
 #: ../../src/ui_fsmenu/campaign_select.cc:272
 msgid "Description:"
-msgstr "Beschreibung: "
+msgstr "Beschreibung:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:81
 #: ../../src/ui_fsmenu/campaign_select.cc:290 ../../src/ui_fsmenu/editor.cc:57
@@ -3157,7 +3419,7 @@ msgstr "Zurück"
 #: ../../src/ui_fsmenu/campaign_select.cc:165
 #: ../../src/ui_fsmenu/campaign_select.cc:167
 #: ../../src/ui_fsmenu/campaign_select.cc:226
-#: ../../src/ui_fsmenu/campaign_select.cc:410
+#: ../../src/ui_fsmenu/campaign_select.cc:417
 msgid "[No value found]"
 msgstr "[Kein Wert gefunden]"
 
@@ -3209,7 +3471,7 @@ msgstr "Name:"
 msgid "Author:"
 msgstr "Autor:"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:350
+#: ../../src/ui_fsmenu/campaign_select.cc:357
 #, c-format
 msgid "Invalid path to file in cconfig: %s"
 msgstr "Inkorrekter Pfad zur Datei in cconfig: %s"
@@ -3315,27 +3577,33 @@ msgid "File not found"
 msgstr "Datei nicht gefunden"
 
 #: ../../src/ui_fsmenu/launchgame.cc:243
-#, fuzzy, c-format
+#, c-format
 msgid ""
-"Widelands tried to start a game with a file that could not be found at given path.\n"
+"Widelands tried to start a game with a file that could not be found at given "
+"path.\n"
 "The file was: %s\n"
-"If this happens in a network game, the host might have selected a file that you do not own. Normally such a file should be send from the host to you, but perhaps the transfer was not yet finnished!?!"
+"If this happens in a network game, the host might have selected a file that "
+"you do not own. Normally such a file should be send from the host to you, "
+"but perhaps the transfer was not yet finnished!?!"
 msgstr ""
-"Widelands had versucht, ein Spiel mit einer Datei zu starten, die am gegebenen Pfad nicht gefunden wurde.\n"
-"Die Datei war: %s\n"
-"Falls dies in einem Netzwerkspiel passiert, hat der Gastgeber wahrscheinlich eine Datei ausgewählt, die du nicht besitzt. In diesem Falle solltest du den Gastgeber kontaktieren und ihn bitten, dir die Datei zuzuschicken."
+"Widelands kann die Datei auf dem angegebenen Pfad nicht finden.\n"
+"Die Datei heißt: %s\n"
+"Wenn dies in einem Netzwerkspiel passiert, gehört dir die Datei "
+"wahrscheinlich nicht. Vielleicht ist die Datei noch nicht komplett "
+"übertragen worden, diese wird dir normalerweise vom Host gesendet."
 
 #: ../../src/ui_fsmenu/launchgame.cc:269
 msgid "(no map)"
 msgstr "(keine Karte)"
 
 #: ../../src/ui_fsmenu/launchgame.cc:310
-#, fuzzy
 msgid "WARNING!!! Host selected the file \""
-msgstr "ACHTUNG!!! Der Gastgeber hat die Datei \""
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchgame.cc:313
-msgid "\" for this game, which you do not own. If the transfer of that file does not start automatically, please add it manually to your filesystem."
+msgid ""
+"\" for this game, which you do not own. If the transfer of that file does "
+"not start automatically, please add it manually to your filesystem."
 msgstr ""
 
 #: ../../src/ui_fsmenu/launchgame.cc:332
@@ -3371,14 +3639,12 @@ msgid "Gametime:"
 msgstr "Spielzeit:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:111
-#, fuzzy
 msgid "Delete file"
-msgstr "Löschen"
+msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:112
-#, fuzzy
 msgid "Do you really want to delete "
-msgstr "Möchtest du wirklich das Gebäude "
+msgstr ""
 
 #: ../../src/ui_fsmenu/loadreplay.cc:63
 msgid "Choose a replay!"
@@ -3667,7 +3933,9 @@ msgstr "Hauptmenü Schrift:"
 
 #: ../../src/ui_fsmenu/options.cc:400
 msgid "Do not zip widelands data files (maps, replays and savegames)."
-msgstr "Packe die Daten (Karten, Spielaufzeichnungen und Speicherungen) nicht als zip-Dateien."
+msgstr ""
+"Packe die Daten (Karten, Spielaufzeichnungen und Speicherungen) nicht als "
+"zip-Dateien."
 
 #: ../../src/ui_fsmenu/options.cc:405
 msgid "Speed of a new game:"
@@ -3989,9 +4257,8 @@ msgid "Watch"
 msgstr "Beobachten"
 
 #: ../../src/wui/fieldaction.cc:487
-#, fuzzy
 msgid "Military settings"
-msgstr "Verlorene Militärgebäude"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:512
 msgid "Start attack"
@@ -4022,12 +4289,12 @@ msgid "Debug Field"
 msgstr "Felddebugging"
 
 #: ../../src/wui/game_debug_ui.cc:282
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "(%i, %i)\n"
 "   height: %u\n"
 "   owner: %u\n"
-msgstr "%i, %i - Höhe: %u\n"
+msgstr ""
 
 #: ../../src/wui/game_main_menu.cc:38
 #: ../../src/editor/ui_menus/editor_main_menu.cc:49
@@ -4061,7 +4328,7 @@ msgstr "Kartenname: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:65
 msgid "Game Time: "
-msgstr "Spielzeit:"
+msgstr "Spielzeit: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:115
 #, c-format
@@ -4095,9 +4362,8 @@ msgid " already exists. Overwrite?"
 msgstr " existiert bereits - überschreiben?"
 
 #: ../../src/wui/game_message_menu.cc:39 ../../src/wui/game_message_menu.h:147
-#, fuzzy
 msgid "Message Menu: Inbox"
-msgstr "Nachrichten Menü"
+msgstr "Nachrichten-Menü: Eingang"
 
 #: ../../src/wui/game_objectives_menu.cc:46
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:151
@@ -4265,11 +4531,11 @@ msgid "Ware help"
 msgstr "Waren Hilfe"
 
 #: ../../src/wui/interactive_player.cc:298
-#, fuzzy, c-format
+#, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] "Zeige Nachrichten Fenster"
-msgstr[1] "Zeige Nachrichten Fenster"
+msgstr[0] "%u neue Nachricht"
+msgstr[1] "%u neue Nachrichten"
 
 #: ../../src/wui/interactive_spectator.cc:56
 msgid "Exit Replay"
@@ -4361,9 +4627,8 @@ msgid "Show workers"
 msgstr "Zeige Arbeiter"
 
 #: ../../src/wui/transport_ui.cc:44
-#, fuzzy
 msgid "Economy options"
-msgstr "Klang Optionen"
+msgstr ""
 
 #: ../../src/wui/transport_ui.cc:149 ../../src/wui/transport_ui.cc:341
 msgid "Decrease permanent target quantity"
@@ -4390,14 +4655,12 @@ msgid "Reset target quantity to default value"
 msgstr "Setze Zielwert auf Standard zurück"
 
 #: ../../src/wui/transport_ui.cc:488
-#, fuzzy
 msgid "Ware type target quantities"
-msgstr "Zielwerte"
+msgstr ""
 
 #: ../../src/wui/transport_ui.cc:492
-#, fuzzy
 msgid "Worker type target quantities"
-msgstr "Zielwerte"
+msgstr "Zielanzahl der Arbeitertypen"
 
 #: ../../src/wui/watchwindow.cc:93
 msgid "Follow"
@@ -4557,7 +4820,7 @@ msgstr "Ändern"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:286
 msgid "Can not delete event. It is in use by "
-msgstr "Kann das Ereignis nicht löschen. Es wird genutzt von"
+msgstr "Kann das Ereignis nicht löschen. Es wird genutzt von "
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:293
 #: ../../src/editor/ui_menus/editor_event_menu.cc:333
@@ -4568,7 +4831,7 @@ msgstr "Fehler!"
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:326
 msgid "Can not delete trigger. It is in use by "
-msgstr "Kann den Auslöser nicht löschen. Er wird genutzt von"
+msgstr "Kann den Auslöser nicht löschen. Er wird genutzt von "
 
 #: ../../src/editor/ui_menus/editor_event_menu.cc:357
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:220
@@ -4597,7 +4860,7 @@ msgstr "Läuft mehrere Male"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:73
 msgid "Events: "
-msgstr "Ereignisse:"
+msgstr "Ereignisse: "
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:91
 msgid "Conditional"
@@ -4619,7 +4882,7 @@ msgstr "+"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:145
 msgid "Available Events: "
-msgstr "Mögliche Ereignisse:"
+msgstr "Mögliche Ereignisse: "
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_eventchain.cc:168
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:215
@@ -4649,7 +4912,7 @@ msgstr "Auslöserbedingung bearbeiten"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:59
 msgid "Trigger Conditional: "
-msgstr "Auslöserbedingung:"
+msgstr "Auslöserbedingung: "
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:79
 msgid "("
@@ -4682,19 +4945,20 @@ msgstr "<-"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:190
 msgid "Available Triggers: "
-msgstr "Mögliche Auslöser:"
+msgstr "Mögliche Auslöser: "
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:267
 msgid "Syntax Error"
 msgstr "Syntaxfehler"
 
 #: ../../src/editor/ui_menus/editor_event_menu_edit_trigger_conditional.cc:269
-msgid "Your conditional contains at least one syntax error. Please correct!\n"
+msgid ""
+"Your conditional contains at least one syntax error. Please correct!\n"
 msgstr "Deine Bedingung hat mindestens einen Syntaxfehler. Bitte beheben!\n"
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:53
 msgid "Available Event types: "
-msgstr "Mögliche Ereignisse:"
+msgstr "Mögliche Ereignisse: "
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:70
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:70
@@ -4702,8 +4966,13 @@ msgid "Description: "
 msgstr "Beschreibung: "
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_event.cc:128
-msgid " NOTE: There is no options window for this event type yet. It has to be created manually by editing the text files in the map."
-msgstr " ACHTUNG: Es gibt bisher noch kein Optionsfenster für dieses Ereignis. Diese Ereignis-Art kann daher nur durch die manuelle Bearbeitung der \"event\" Datei der Karte erstellt werden."
+msgid ""
+" NOTE: There is no options window for this event type yet. It has to be "
+"created manually by editing the text files in the map."
+msgstr ""
+" ACHTUNG: Es gibt bisher noch kein Optionsfenster für dieses Ereignis. Diese "
+"Ereignis-Art kann daher nur durch die manuelle Bearbeitung der \"event\" "
+"Datei der Karte erstellt werden."
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:44
 msgid "New Trigger"
@@ -4711,11 +4980,16 @@ msgstr "Neuer Auslöser"
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:54
 msgid "Available Trigger types: "
-msgstr "Mögliche Auslöserarten:"
+msgstr "Mögliche Auslöserarten: "
 
 #: ../../src/editor/ui_menus/editor_event_menu_new_trigger.cc:129
-msgid " NOTE: There is no options window for this trigger type yet. It has to be created manually by editing the text files in the map."
-msgstr " ACHTUNG: Es gibt bisher noch kein Optionsfenster für diesen Auslöser. Diese Auslöser-Art kann daher nur durch die manuelle Bearbeitung der \"trigger\" Datei der Karte erstellt werden."
+msgid ""
+" NOTE: There is no options window for this trigger type yet. It has to be "
+"created manually by editing the text files in the map."
+msgstr ""
+" ACHTUNG: Es gibt bisher noch kein Optionsfenster für diesen Auslöser. Diese "
+"Auslöser-Art kann daher nur durch die manuelle Bearbeitung der \"trigger\" "
+"Datei der Karte erstellt werden."
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:51
@@ -4766,8 +5040,11 @@ msgid "Set origin"
 msgstr "Setze Ursprungspunkt"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:48
-msgid "Set the position that will have the coordinates (0, 0). This will be the top-left corner of a generated minimap."
-msgstr "Setzt die Koordinate (0,0). Dies ist die linke obere Ecke in der Minikarte."
+msgid ""
+"Set the position that will have the coordinates (0, 0). This will be the top-"
+"left corner of a generated minimap."
+msgstr ""
+"Setzt die Koordinate (0,0). Dies ist die linke obere Ecke in der Minikarte."
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:85
 msgid "Nr Players:"
@@ -4897,7 +5174,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:41
 msgid "Enter Directory Name: "
-msgstr "Ordnernamen eingeben:"
+msgstr "Ordnernamen eingeben: "
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:65
 msgid "Edit Objective"
@@ -4921,8 +5198,12 @@ msgid "Trigger: "
 msgstr "Auslöser: "
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:264
-msgid "The objective was deleted, but not its trigger, because it is still referenced by:\n"
-msgstr "Die Aufgabe wurde gelöscht, sein Auslöser wurde allerdings beibehalten, weil er immer noch verwendet wird von:\n"
+msgid ""
+"The objective was deleted, but not its trigger, because it is still "
+"referenced by:\n"
+msgstr ""
+"Die Aufgabe wurde gelöscht, sein Auslöser wurde allerdings beibehalten, weil "
+"er immer noch verwendet wird von:\n"
 
 #: ../../src/editor/ui_menus/editor_objectives_menu.cc:278
 msgid "Note"
@@ -4949,12 +5230,22 @@ msgid "Player "
 msgstr "Spieler "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:252
-msgid "Can not remove player. It is referenced in some place. Remove all buildings, bobs, triggers and events that depend on this player and try again."
-msgstr "Kann Spieler nicht löschen, der Spieler wird verwendet. Entferne alle Gebäude, Natur, Auslöser und Ereignisse, die mit diesem Spieler verknüpft sind, und versuche es nochmal."
+msgid ""
+"Can not remove player. It is referenced in some place. Remove all buildings, "
+"bobs, triggers and events that depend on this player and try again."
+msgstr ""
+"Kann Spieler nicht löschen, der Spieler wird verwendet. Entferne alle "
+"Gebäude, Natur, Auslöser und Ereignisse, die mit diesem Spieler verknüpft "
+"sind, und versuche es nochmal."
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:284
-msgid "Can not change player tribe. It is referenced in some place. Remove all bobs, triggers and events that depend on this tribe and try again."
-msgstr "Kann Spieler-Stamm nicht ändern, der Stamm wird verwendet. Entferne alle Naturobjekte, Auslöser und Ereignisse, die mit diesem Stamm verknüpft sind, und versuche es nochmal."
+msgid ""
+"Can not change player tribe. It is referenced in some place. Remove all "
+"bobs, triggers and events that depend on this tribe and try again."
+msgstr ""
+"Kann Spieler-Stamm nicht ändern, der Stamm wird verwendet. Entferne alle "
+"Naturobjekte, Auslöser und Ereignisse, die mit diesem Stamm verknüpft sind, "
+"und versuche es nochmal."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:56
 msgid "Allowed Buildings"
@@ -5128,8 +5419,11 @@ msgstr "Gebiet: "
 #: ../../src/editor/ui_menus/event_set_timer_option_menu.cc:89
 #: ../../src/editor/ui_menus/event_unhide_area_option_menu.cc:284
 #, c-format
-msgid "There is another event registered with the name \"%s\". Choose another name."
-msgstr "Es gibt einen anderes registriertes Ereignis mit dem Namen \"%s\". Wähle einen anderen Namen."
+msgid ""
+"There is another event registered with the name \"%s\". Choose another name."
+msgstr ""
+"Es gibt einen anderes registriertes Ereignis mit dem Namen \"%s\". Wähle "
+"einen anderen Namen."
 
 #: ../../src/editor/ui_menus/event_conquer_area_option_menu.cc:286
 #: ../../src/editor/ui_menus/event_expire_message_option_menu.cc:65
@@ -5148,9 +5442,8 @@ msgid "Name in use"
 msgstr "Name wird benutzt"
 
 #: ../../src/editor/ui_menus/event_expire_message_option_menu.cc:37
-#, fuzzy
 msgid "Expire Message Event Options"
-msgstr "Nachrichtenereignisoptionen"
+msgstr ""
 
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:47
 msgid "Message Box Event Options"
@@ -5220,14 +5513,14 @@ msgid "Nothing selected"
 msgstr "Nichts ausgewählt"
 
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:64
-#, fuzzy, c-format
+#, c-format
 msgid "%s Worker Types Event Options"
-msgstr "%s Gebäudeart Ereignisoptionen"
+msgstr ""
 
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.cc:201
-#, fuzzy, c-format
+#, c-format
 msgid "No worker types are selected. Select at least one."
-msgstr "Keine Gebäudetypen wurden ausgewählt. Wähle mindestens einen aus."
+msgstr ""
 
 #: ../../src/editor/ui_menus/event_set_player_flag_style_option_menu.cc:50
 msgid "Set Player's Flag Style Event Options"
@@ -5253,7 +5546,7 @@ msgstr "Spieler: %u"
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:58
 #, c-format
 msgid "How many: %u"
-msgstr "Wie viele: %u "
+msgstr "Wie viele: %u"
 
 #: ../../src/editor/ui_menus/trigger_building_option_menu.cc:68
 #, c-format
@@ -5278,8 +5571,12 @@ msgstr "Gebäude-Auslöserioptionen"
 #: ../../src/editor/ui_menus/trigger_message_is_read_or_archived_option_menu.cc:77
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:88
 #, c-format
-msgid "There is another trigger registered with the name \"%s\". Choose another name."
-msgstr "Es gibt einen anderen registrierten Auslöser mit dem Namen \"%s\". Wähle einen anderen Namen."
+msgid ""
+"There is another trigger registered with the name \"%s\". Choose another "
+"name."
+msgstr ""
+"Es gibt einen anderen registrierten Auslöser mit dem Namen \"%s\". Wähle "
+"einen anderen Namen."
 
 #: ../../src/editor/ui_menus/trigger_message_is_read_or_archived_option_menu.cc:52
 msgid "Trigger Message is Read or Archived Options"
@@ -5290,8 +5587,13 @@ msgid "Trigger Time Options"
 msgstr "Zeit-Auslöseroptionen"
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:50
-msgid "Trigger at an absolute time from the beginning of the game (otherwise, only trigger if activated by an event set timer)."
-msgstr "Verwendet die absolute Zeit die seit dem Spielbeginn vergangen ist (ansonsten wird die Zeit verwendet die von einem \"Setze Zeit\" Ereignis gesetzt wird)."
+msgid ""
+"Trigger at an absolute time from the beginning of the game (otherwise, only "
+"trigger if activated by an event set timer)."
+msgstr ""
+"Verwendet die absolute Zeit die seit dem Spielbeginn vergangen ist "
+"(ansonsten wird die Zeit verwendet die von einem \"Setze Zeit\" Ereignis "
+"gesetzt wird)."
 
 #: ../../src/editor/ui_menus/trigger_time_option_menu.cc:52
 msgid "Trigger at absolute time"
@@ -5318,19 +5620,16 @@ msgid "no descr"
 msgstr "(Keine Beschreibung vorhanden.)"
 
 #: ../../src/wui/game_message_menu.h:62
-#, fuzzy
 msgid "Select"
-msgstr "Karte wählen"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:63
-#, fuzzy
 msgid "Status"
 msgstr "Status"
 
 #: ../../src/wui/game_message_menu.h:64
-#, fuzzy
 msgid "Title"
-msgstr "Gebäude"
+msgstr "Titel"
 
 #: ../../src/wui/game_message_menu.h:65
 msgid "Time sent"
@@ -5361,34 +5660,28 @@ msgid "Invert selection"
 msgstr "Invertiere Auswahl"
 
 #: ../../src/wui/game_message_menu.h:118 ../../src/wui/game_message_menu.h:151
-#, fuzzy
 msgid "Archive selected messages"
-msgstr "Lösche ausgewählte Nachricht"
+msgstr "Ausgewählte Nachrichten archivieren"
 
 #: ../../src/wui/game_message_menu.h:129 ../../src/wui/game_message_menu.h:152
-#, fuzzy
 msgid "Show Archive"
-msgstr "Zeige Waren"
+msgstr "Archiv anzeigen"
 
 #: ../../src/wui/game_message_menu.h:138
-#, fuzzy
 msgid "Message Menu: Archive"
-msgstr "Nachrichten Menü"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:142
-#, fuzzy
 msgid "Restore selected messages"
-msgstr "Lösche ausgewählte Nachricht"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:143
-#, fuzzy
 msgid "Show Inbox"
-msgstr "Zeige Nächsten"
+msgstr ""
 
 #: ../../src/wui/game_message_menu.h:165
-#, fuzzy
 msgid "center main mapview on location"
-msgstr "Zentriere Hauptfenster hierauf"
+msgstr ""
 
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:72
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:72
@@ -5419,7 +5712,7 @@ msgstr "Spieler:"
 #~ msgstr " Bitte füge sie per Hand hinzu."
 
 #~ msgid "Server sent malformed commands: "
-#~ msgstr "Der Server hat unverständliche Anweisungen gesendet:"
+#~ msgstr "Der Server hat unverständliche Anweisungen gesendet: "
 
 #~ msgid "Waiting for one worker!"
 #~ msgid_plural "Waiting for %u workers!"
