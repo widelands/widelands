@@ -74,6 +74,8 @@ struct Button : public Panel {
 	void handle_mousein(bool inside);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	
+	void update();
 
 private:
 	virtual void clicked() = 0; /// Override this to react on the click.
@@ -83,6 +85,9 @@ private:
 	bool        m_enabled;
 	bool        m_repeating;
 	bool        m_flat;
+	bool        m_needredraw;
+	PictureID   m_cache_pid;
+	
 
 	int32_t     m_time_nextact;
 

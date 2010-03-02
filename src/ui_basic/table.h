@@ -225,6 +225,10 @@ template <> struct Table<void *> : public Panel {
 	void draw(RenderTarget &);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	
+	void update(int32_t x, int32_t y, int32_t w, int32_t h);
+	void update();
+
 
 private:
 	struct Column;
@@ -251,7 +255,10 @@ private:
 	uint32_t           m_last_selection;  // for double clicks
 	Columns::size_type m_sort_column;
 	bool               m_sort_descending;
-
+	
+	bool               m_needredraw;
+	PictureID          m_cache_pid;
+	
 	void header_button_clicked(Columns::size_type);
 	typedef std::vector<Entry_Record *> Entry_Record_vector;
 	Entry_Record_vector m_entry_records;

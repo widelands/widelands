@@ -57,7 +57,8 @@ Table<void *>::Table
 	m_last_click_time (-10000),
 	m_last_selection  (no_selection_index()),
 	m_sort_column     (0),
-	m_sort_descending (descending)
+	m_sort_descending (descending),
+	m_needredraw      (true)
 {
 	set_think(false);
 }
@@ -247,8 +248,18 @@ void Table<void *>::clear()
 /**
  * Redraw the table
 */
-void Table<void *>::draw(RenderTarget & dst)
+void Table<void *>::draw(RenderTarget & odst)
 {
+	if(!m_needredraw)
+	{
+		odst.blit(Point(0, 0), m_cache_pid);
+		return;
+	}
+
+	m_cache_pid = g_gr->create_surface(odst.get_w(), odst.get_h());
+	
+	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
+  
 	//  draw text lines
 	int32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
@@ -311,6 +322,8 @@ void Table<void *>::draw(RenderTarget & dst)
 		y += lineheight;
 		++idx;
 	}
+	odst.blit(Point(0, 0), m_cache_pid);
+	m_needredraw = false;
 }
 
 /**
@@ -367,6 +380,19 @@ bool Table<void *>::handle_mousepress
 bool Table<void *>::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 {
 	return btn == SDL_BUTTON_LEFT;
+}
+
+
+void Table<void *>::update(int32_t x, int32_t y, int32_t w, int32_t h)
+{
+	Panel::update(x, y, w, h);
+	m_needredraw = true;
+}
+
+void Table<void *>::update()
+{
+	Panel::update();
+	m_needredraw = true;
 }
 
 /**
