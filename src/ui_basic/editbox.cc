@@ -110,6 +110,7 @@ void EditBox::setText(std::string const & t)
 	if (caretatend || m->caret > m->text.size())
 		m->caret = m->text.size();
 
+	m_needredraw = true;
 	update();
 }
 
@@ -163,6 +164,7 @@ void EditBox::setAlign(Align _align)
 	_align = static_cast<Align>((_align & Align_Horizontal) | Align_VCenter);
 	if (_align != m->align) {
 		m->align = _align;
+		m_needredraw = true;
 		update();
 	}
 }
@@ -175,6 +177,7 @@ bool EditBox::handle_mousepress(const Uint8 btn, int32_t, int32_t)
 {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
+		m_needredraw = true;
 		update();
 		return true;
 	}
@@ -222,6 +225,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 				m->text.erase(m->text.begin() + m->caret);
 				changed.call();
 				changedid.call(m->id);
+				m_needredraw = true;
 				update();
 			}
 			return true;
@@ -233,6 +237,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 					for (uint32_t new_caret = m->caret;; m->caret = new_caret)
 						if (0 == new_caret or isspace(m->text[--new_caret]))
 							break;
+				m_needredraw = true;
 				update();
 			}
 			return true;
@@ -250,6 +255,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 							m->caret = new_caret;
 							break;
 						}
+				m_needredraw = true;
 				update();
 			}
 			return true;
@@ -257,6 +263,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 		case SDLK_HOME:
 			if (m->caret != 0) {
 				m->caret = 0;
+				m_needredraw = true;
 				update();
 			}
 			return true;
@@ -264,6 +271,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 		case SDLK_END:
 			if (m->caret != m->text.size()) {
 				m->caret = m->text.size();
+				m_needredraw = true;
 				update();
 			}
 			return true;
@@ -294,6 +302,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 					}
 					changed.call();
 					changedid.call(m->id);
+					m_needredraw = true;
 					update();
 				}
 				return true;
@@ -305,8 +314,18 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 }
 
 
-void EditBox::draw(RenderTarget & dst)
+void EditBox::draw(RenderTarget & odst)
 {
+	if(!m_needredraw)
+	{
+		odst.blit(Point(0, 0), m_cache_pid);
+		return;
+	}
+
+	m_cache_pid = g_gr->create_surface(odst.get_w(), odst.get_h());
+
+	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
+
 	// Draw the background
 	dst.tile
 		(Rect(Point(0, 0), get_w(), get_h()),
@@ -361,6 +380,9 @@ void EditBox::draw(RenderTarget & dst)
 		 g_gr->get_no_picture(),
 		 has_focus() ? static_cast<int32_t>(m->caret) :
 		 std::numeric_limits<uint32_t>::max());
+
+	odst.blit(Point(0, 0), m_cache_pid);
+	m_needredraw = false;
 }
 
 }
