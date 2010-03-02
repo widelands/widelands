@@ -140,14 +140,6 @@ void DefaultAI::think ()
 		if (next_attack_consideration_due <= gametime)
 			consider_attack(gametime);
 
-	// improve existing roads
-	if (improve_roads(gametime)) {
-		m_buildable_changed = true;
-		m_mineable_changed = true;
-		inhibit_road_building = gametime + 2500;
-		return;
-	}
-
 	// check if anything in the economies changed.
 	// This needs to be done before new buildings are placed, to ensure that no
 	// empty economy is left.
@@ -186,6 +178,18 @@ void DefaultAI::think ()
 	if (!(type == DEFENSIVE))
 		if (next_attack_consideration_due <= gametime)
 			consider_attack(gametime);
+
+	// improve existing roads!
+	// This sounds important, but actually is not as important as the other
+	// actions are. Reasons are the following:
+	// * The "donkey feature" made economies more stable, even with stupid roads.
+	// * If defaultAI builds too much roads, it will waste good buildings space.
+	if (improve_roads(gametime)) {
+		m_buildable_changed = true;
+		m_mineable_changed = true;
+		inhibit_road_building = gametime + 2500;
+		return;
+	}
 }
 
 /// called by Widelands game engine when an immovable changed
@@ -250,7 +254,8 @@ void DefaultAI::late_initialization ()
 
 		bo.is_basic               = false;
 
-		bo.is_buildable = player->is_building_type_allowed(i);
+		bo.is_buildable =
+			bld.is_buildable() && player->is_building_type_allowed(i);
 
 		bo.need_trees             = bh.is_trunkproducer();
 		bo.need_stones            = bh.is_stoneproducer();
@@ -851,7 +856,6 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// take care about borders and enemies
 					prio = recalc_with_border_range(*bf, prio);
 				} else { // "normal" productionsites
-
 					if (bo.is_basic && (bo.total_count() == 0))
 						prio += 100; // for very important buildings
 
@@ -915,6 +919,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 				if (bf->avoid_military)
 					prio /= 5;
+
+				prio -= militarysites.size() - productionsites.size() / (3 - type);
 
 			} else if (bo.type == BuildingObserver::WAREHOUSE) {
 				//  Build one warehouse for ~every 25 productionsites and mines.
@@ -1785,7 +1791,7 @@ int32_t DefaultAI::calculate_need_for_ps
 		WareObserver & wo = wares[bo.outputs[k]];
 		if (wo.consumers > 0) {
 			output_prio += wo.preciousness;
-			output_prio += wo.consumers / 10;
+			output_prio += wo.consumers / 3;
 			if (bo.total_count() == 0)
 				output_prio += 10; // add a big bonus
 		}
