@@ -140,14 +140,6 @@ void DefaultAI::think ()
 		if (next_attack_consideration_due <= gametime)
 			consider_attack(gametime);
 
-	// improve existing roads
-	if (improve_roads(gametime)) {
-		m_buildable_changed = true;
-		m_mineable_changed = true;
-		inhibit_road_building = gametime + 2500;
-		return;
-	}
-
 	// check if anything in the economies changed.
 	// This needs to be done before new buildings are placed, to ensure that no
 	// empty economy is left.
@@ -186,6 +178,18 @@ void DefaultAI::think ()
 	if (!(type == DEFENSIVE))
 		if (next_attack_consideration_due <= gametime)
 			consider_attack(gametime);
+
+	// improve existing roads!
+	// This sounds important, but actually is not as important as the other
+	// actions are. Reasons are the following:
+	// * The "donkey feature" made economies more stable, even with stupid roads.
+	// * If defaultAI builds too much roads, it will waste good buildings space.
+	if (improve_roads(gametime)) {
+		m_buildable_changed = true;
+		m_mineable_changed = true;
+		inhibit_road_building = gametime + 2500;
+		return;
+	}
 }
 
 /// called by Widelands game engine when an immovable changed
@@ -250,7 +254,8 @@ void DefaultAI::late_initialization ()
 
 		bo.is_basic               = false;
 
-		bo.is_buildable = player->is_building_type_allowed(i);
+		bo.is_buildable =
+			bld.is_buildable() && player->is_building_type_allowed(i);
 
 		bo.need_trees             = bh.is_trunkproducer();
 		bo.need_stones            = bh.is_stoneproducer();
@@ -851,45 +856,40 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// take care about borders and enemies
 					prio = recalc_with_border_range(*bf, prio);
 				} else { // "normal" productionsites
-
 					if (bo.is_basic && (bo.total_count() == 0))
 						prio += 100; // for very important buildings
 
 					// Check if the produced wares are needed
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
+						// Don't check if the economy has only one flag.
+						// It is either a constructionsite not yet connected or the
+						// headquarters directly after start - in last case we need
+						// lumberjack huts and quarries, and so there is no need to
+						// check the other productionsites at that state.
+						if ((*l.current)->flags.size() < 2)
+							continue;
 						for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
-							// Don't check if the economy has only one flag.
-							// It is either a constructionsite not yet connected or the
-							// headquarters directly after start - in last case we need
-							// lumberjack huts and quarries, and so there is no need to
-							// check the other productionsites at that state.
-							if ((*l.current)->flags.size() < 2)
-								continue;
 							Ware_Index wt(static_cast<size_t>(bo.outputs[m]));
 							if ((*l.current)->economy.needs_ware(wt)) {
 								prio += 1 + wares[bo.outputs[m]].preciousness;
 								if (bo.total_count() == 0)
-									prio *= 4; // big bonus, this site might be elemental
+									// big bonus, this site might be elemental
+									prio += 3 * wares[bo.outputs[m]].preciousness;
 							}
 						}
 					}
 
 					// If the produced wares are needed
 					if (prio > 0) {
-						prio = calculate_need_for_ps(bo, prio);
-
-						int32_t iosum = 0;
-						for (size_t k = 0; k < bo.inputs.size(); ++k)
-							if (bf->producers_nearby[bo.inputs[k]] > 0)
-								++iosum;
-							else if (bf->consumers_nearby[bo.inputs[k]] > 0)
-								--iosum;
-						if (iosum < -2)
-							iosum = -2;
+						int32_t inout_prio = 0;
+						for (size_t k = 0; k < bo.inputs.size(); ++k) {
+							inout_prio += bf->producers_nearby[bo.inputs[k]];
+							inout_prio -= bf->consumers_nearby[bo.inputs[k]] / 3;
+						}
 						for (size_t k = 0; k < bo.outputs.size(); ++k)
-							if (bf->consumers_nearby[bo.outputs[k]] > 0)
-								++iosum;
-						prio += 2 * iosum;
+							inout_prio += bf->consumers_nearby[bo.outputs[k]];
+						prio += 2 * inout_prio;
+						prio = calculate_need_for_ps(bo, prio);
 					} else
 						continue;
 
@@ -905,7 +905,9 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			} else if (bo.type == BuildingObserver::MILITARYSITE) {
 				if (!bf->unowned_land_nearby)
 					continue;
-				prio  = bf->unowned_land_nearby - bf->military_influence * 4;
+				prio  = bf->unowned_land_nearby * (1 + type);
+				prio -= bf->military_influence * (5 - type);
+				// set to at least 1
 				prio  = prio > 0 ? prio : 1;
 				prio *= expand_factor;
 				prio /= 2;
@@ -917,6 +919,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 				if (bf->avoid_military)
 					prio /= 5;
+
+				prio -= militarysites.size() - productionsites.size() / (3 - type);
 
 			} else if (bo.type == BuildingObserver::WAREHOUSE) {
 				//  Build one warehouse for ~every 25 productionsites and mines.
@@ -1762,7 +1766,8 @@ int32_t DefaultAI::recalc_with_border_range
  *
  * \returns the calculated priority
  */
-int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
+int32_t DefaultAI::calculate_need_for_ps
+	(BuildingObserver & bo, int32_t prio)
 {
 	// some randomness to avoid that defaultAI is building always
 	// the same (always == another game but same map with
@@ -1776,22 +1781,26 @@ int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
 	// production.
 	for (uint32_t k = 0; k < bo.inputs.size(); ++k) {
 		prio += 2 * wares[bo.inputs[k]].producers;
-		prio -= 2 * wares[bo.inputs[k]].consumers;
+		prio -= wares[bo.inputs[k]].consumers;
 	}
 	if (bo.inputs.empty())
-		++prio;
+		prio += 4;
 
 	int32_t output_prio = 0;
 	for (uint32_t k = 0; k < bo.outputs.size(); ++k) {
 		WareObserver & wo = wares[bo.outputs[k]];
-		if (bo.total_count() == 0 && wo.consumers > 0)
-			output_prio += 8 + wo.preciousness; // add a big bonus
+		if (wo.consumers > 0) {
+			output_prio += wo.preciousness;
+			output_prio += wo.consumers;
+			output_prio -= wo.producers;
+			if (bo.total_count() == 0)
+				output_prio += 10; // add a big bonus
+		}
 	}
-
 	if (bo.outputs.size() > 1)
 		output_prio = static_cast<int32_t>
 			(ceil(output_prio / sqrt(bo.outputs.size())));
-	prio += output_prio;
+	prio += 2 * output_prio;
 
 	// If building consumes some wares, multiply with current statistics of all
 	// other buildings of this type to avoid constructing buildings where already
