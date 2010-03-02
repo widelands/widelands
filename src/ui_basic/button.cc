@@ -24,6 +24,8 @@
 #include "font_handler.h"
 #include "graphic/rendertarget.h"
 #include "wlapplication.h"
+#include "log.h"
+
 
 namespace UI {
 
@@ -98,13 +100,16 @@ Button::~Button() {
 void Button::set_pic(PictureID const picid)
 {
 	m_title.clear();
+  
+	//log("Button::set_pic\n");
+	if(m_pic_custom != picid)
+		m_needredraw=true;
 
 	m_pic_custom = picid;
 	if (m_pic_custom_disabled != g_gr->get_no_picture())
 		g_gr->free_surface(m_pic_custom_disabled);
 	m_pic_custom_disabled = g_gr->create_grayed_out_pic(picid);
 
-	m_needredraw=true;
 	update();
 }
 
@@ -113,9 +118,13 @@ void Button::set_pic(PictureID const picid)
  * Set a text title for the Button
 */
 void Button::set_title(std::string const & title) {
+	if(m_title == title)
+		 return;
+  
 	m_pic_custom = g_gr->get_no_picture();
 	m_title      = title;
 
+	//log("Button::set_title\n");
 	m_needredraw=true;
 	update();
 }
@@ -127,6 +136,11 @@ void Button::set_title(std::string const & title) {
 */
 void Button::set_enabled(bool const on)
 {
+	if(m_enabled!=on)
+		m_needredraw=true;
+
+	//log("Button::set_enabled\n");
+
 	// disabled buttons should look different...
 	if (on)
 		m_enabled = true;
@@ -139,7 +153,6 @@ void Button::set_enabled(bool const on)
 		m_enabled = false;
 		m_highlighted = false;
 	}
-	m_needredraw=true;
 	update();
 }
 
@@ -292,11 +305,11 @@ bool Button::handle_mousepress(Uint8 const btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
-	m_needredraw=true;
-
 	if (m_enabled) {
 		assert(m_highlighted);
 		grab_mouse(true);
+		if(!m_pressed)
+			m_needredraw=true;
 		m_pressed = true;
 		if (m_repeating) {
 			m_time_nextact =
@@ -312,10 +325,10 @@ bool Button::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
-	m_needredraw=true;
-
 	set_think(false);
 	if (m_pressed) {
+		if(m_pressed)
+			m_needredraw=true;
 		m_pressed = false;
 		grab_mouse(false);
 		update();
