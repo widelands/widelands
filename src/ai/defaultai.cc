@@ -806,7 +806,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 			if (bo.type == BuildingObserver::PRODUCTIONSITE) {
 				if (bo.need_trees) {
 					// Priority of woodcutters depend on the number of near trees
-					prio += bf->trees_nearby * 5 / 3;
+					prio += bf->trees_nearby * 2;
 					prio /= 2 * (1 + bf->tree_consumers_nearby);
 					if (bo.total_count() < 2) {
 						prio *= 6; // big bonus for the basics
@@ -1791,8 +1791,8 @@ int32_t DefaultAI::calculate_need_for_ps
 		WareObserver & wo = wares[bo.outputs[k]];
 		if (wo.consumers > 0) {
 			output_prio += wo.preciousness;
-			output_prio += wo.consumers;
-			output_prio -= wo.producers;
+			output_prio += wo.consumers * 2;
+			output_prio -= wo.producers * 2;
 			if (bo.total_count() == 0)
 				output_prio += 10; // add a big bonus
 		}
