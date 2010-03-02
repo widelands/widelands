@@ -1,4 +1,4 @@
-/*
+// /*
  * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
@@ -310,7 +310,7 @@ void ProductionSite::calc_statistics()
 	uint32_t const lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	const std::string trend =
-		lastPercOk > percOk ? _("UP") : lastPercOk < percOk ? _("DOWN") : "=";
+		lastPercOk > percOk ? "+" : lastPercOk < percOk ? "-" : "=";
 
 	if (0 < percOk and percOk < 100)
 		snprintf
