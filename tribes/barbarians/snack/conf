@@ -1,5 +1,5 @@
 help=_A bit bigger, for the advanced miners. They will need a big morsel.
-preciousness=2
+preciousness=5
 default_target_quantity=10
 
 [idle]
