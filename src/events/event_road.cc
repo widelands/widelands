@@ -62,21 +62,17 @@ Event_Road::Event_Road(Section & s, Editor_Game_Base & egbase) : Event(s) {
 				 Map::fpBidiCost);
 			Path::Step_Vector::size_type const nr_steps =
 				optimal_path.get_nsteps();
-#ifndef _MSC_VER
-			char optimal_steps[nr_steps + 1];
-#else
-			char optimal_steps[1000];
-#endif
-			for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i)
-				optimal_steps[i] = '0' + optimal_path[i];
-			optimal_steps[nr_steps] = '\0';
-			if (strcmp(steps, optimal_steps))
+            std::string optimal_steps;
+            optimal_steps.reserve(nr_steps+1);
+            for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i)
+				optimal_steps.push_back('0' + optimal_path[i]);
+			if (optimal_steps.compare(steps))
 				throw game_data_error
 					(_
 					 	("the steps \"%s\" do not form the optimal path from the "
 					 	 "start to the end through only the used locations, should "
 					 	 "be \"%s\""),
-					 steps, optimal_steps);
+					 steps, optimal_steps.c_str());
 			m_player = s.get_Player_Number("player", map.get_nrplayers());
 			m_fill   = s.get_bool         ("fill",                        true);
 		} else
@@ -94,14 +90,10 @@ void Event_Road::Write
 	s.set_int    ("version", EVENT_VERSION);
 	s.set_Coords ("point",   m_path.get_start());
 	Path::Step_Vector::size_type const nr_steps = m_path.get_nsteps();
-#ifndef _MSC_VER
-	char steps[nr_steps + 1];
-#else
-	char steps[1000];
-#endif
+    std::string steps;
+    steps.reserve(nr_steps+1);
 	for (Path::Step_Vector::size_type i = 0; i < nr_steps; ++i)
-		steps[i] = '0' + m_path[i];
-	steps[nr_steps] = '\0';
+		steps.push_back('0' + m_path[i]);
 	s.set_string ("steps",   steps);
 	if (m_player != 1)
 		s.set_int ("player",  m_player);
