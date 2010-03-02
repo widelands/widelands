@@ -181,10 +181,18 @@ This function is slow as hell.
 ===============
 */
 void Surface::brighten_rect(const Rect rc, const int32_t factor) {
+	if(!factor)
+		return;
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
 	assert(rc.w >= 1);
 	assert(rc.h >= 1);
+
+	const Point bl = rc.bottom_left();
+
+	log
+		("Surface::brighten_rect((%u, %u, %u, %u), %u)\n", 
+		 bl.x, rc.x, bl.x, rc.x, factor);
 
 #if HAS_OPENGL
 	if (g_opengl) {
@@ -192,7 +200,7 @@ void Surface::brighten_rect(const Rect rc, const int32_t factor) {
 		return;
 	}
 #endif
-	const Point bl = rc.bottom_left();
+	
 
 	lock();
 

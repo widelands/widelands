@@ -104,6 +104,7 @@ void Button::set_pic(PictureID const picid)
 		g_gr->free_surface(m_pic_custom_disabled);
 	m_pic_custom_disabled = g_gr->create_grayed_out_pic(picid);
 
+	m_needredraw=true;
 	update();
 }
 
@@ -115,6 +116,7 @@ void Button::set_title(std::string const & title) {
 	m_pic_custom = g_gr->get_no_picture();
 	m_title      = title;
 
+	m_needredraw=true;
 	update();
 }
 
@@ -137,6 +139,7 @@ void Button::set_enabled(bool const on)
 		m_enabled = false;
 		m_highlighted = false;
 	}
+	m_needredraw=true;
 	update();
 }
 
@@ -252,7 +255,6 @@ void Button::think()
 	assert(m_pressed);
 	Panel::think();
 
-
 	if (m_highlighted) {
 		int32_t const time = WLApplication::get()->get_time();
 		if (m_time_nextact <= time) {
@@ -273,9 +275,14 @@ void Button::think()
 */
 void Button::handle_mousein(bool const inside)
 {
+	bool oldhl = m_highlighted;
+
 	m_highlighted = inside && m_enabled;
 	update();
-}
+
+	//if(oldhl != m_highlighted)
+	//	m_needredraw = true;
+}	
 
 
 /**
@@ -284,6 +291,8 @@ void Button::handle_mousein(bool const inside)
 bool Button::handle_mousepress(Uint8 const btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
+
+	m_needredraw=true;
 
 	if (m_enabled) {
 		assert(m_highlighted);
@@ -303,6 +312,8 @@ bool Button::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
+	m_needredraw=true;
+
 	set_think(false);
 	if (m_pressed) {
 		m_pressed = false;
@@ -317,12 +328,6 @@ bool Button::handle_mouserelease(Uint8 const btn, int32_t, int32_t) {
 		}
 	}
 	return true;
-}
-
-void Button::update()
-{
-	Panel::update();
-	m_needredraw=true;
 }
 
 }
