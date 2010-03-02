@@ -607,9 +607,8 @@ void Graphic::save_png(const PictureID & pic_index, StreamWrite * const sw)
 		SDL_PixelFormat & format = const_cast<SDL_PixelFormat &>(surf.format());
 
 	// Write each row
+		std::vector<png_byte> row(row_size,0);
 		for (uint32_t y = 0; y < surf_h; ++y) {
-            std::vector<png_byte> row(row_size,0);
-//			png_byte row[row_size];
 			png_bytep rowp = &row[0];
 			for (uint32_t x = 0; x < surf_w; rowp += 4, ++x)
 				SDL_GetRGBA

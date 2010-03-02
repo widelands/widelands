@@ -29,6 +29,7 @@
 
 #include "i18n.h"
 
+#include "container_iterate.h"
 #include "ref_cast.h"
 
 namespace Widelands {

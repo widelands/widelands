@@ -368,17 +368,17 @@ void Event_Building::Write
 	s.set_string("building", descr.name().c_str());
 	if (dynamic_cast<Warehouse_Descr const *>(&descr)) {
 		for //  wares
-			(Ware_Index i = Ware_Index::First();
-			 i < tribe.get_nrwares();
+			(wl_index_range<Ware_Index> i(Ware_Index::First(), tribe.get_nrwares());
+			 i;
 			 ++i)
-			if (uint32_t const count = m_ware_counts[i.value()])
-				s.set_int(tribe.get_ware_descr(i)->name().c_str(), count);
+			if (uint32_t const count = m_ware_counts[i.current.value()])
+				s.set_int(tribe.get_ware_descr(i.current)->name().c_str(), count);
 		for //  workers
-			(Ware_Index i = Ware_Index::First(); 
-             i < tribe.get_nrworkers();
+			(wl_index_range<Ware_Index>i(Ware_Index::First(), tribe.get_nrworkers());
+			 i;
 			 ++i)
-			if (uint32_t const count = m_worker_counts[i.value()])
-				s.set_int(tribe.get_worker_descr(i)->name().c_str(), count);
+			if (uint32_t const count = m_worker_counts[i.current.value()])
+				s.set_int(tribe.get_worker_descr(i.current)->name().c_str(), count);
 	} else if (upcast(ProductionSite_Descr const, ps_descr, &descr)) {
 		{ //  wares
 			Ware_Types const & inputs = ps_descr->inputs();
