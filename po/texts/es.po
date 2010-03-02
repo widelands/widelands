@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-19 13:02+0000\n"
+"POT-Creation-Date: 2010-02-27 16:15+0000\n"
+"PO-Revision-Date: 2010-03-01 08:24+0000\n"
 "Last-Translator: raul.ferriz <raul.ferriz@gmail.com>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-20 04:38+0000\n"
+"X-Launchpad-Export-Date: 2010-03-02 04:39+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -1199,6 +1199,10 @@ msgid ""
 "progress and as the Editor becomes better and better this text will also get "
 "longer and more complete."
 msgstr ""
+"Este Editor esta pensado para jugadores a los que les gusta diseñar sus "
+"propios mapas para usar con Widelands.<br>Como puedes ver, este Editor está "
+"en pleno desarrollo y conforme el Editor vaya mejorando este texto se hará "
+"más largo y completo."
 
 #: ../../txts/editor_readme:12
 msgid "Please look into our enduser manuals in our wiki-pages at:"
@@ -1272,8 +1276,14 @@ msgstr "SHIFT      (pulsado) Selecciona la primera herramienta alternativa"
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr "ALT        (pulsado) Selecciona la segunda herramienta alternativa"
 
-#: ../../txts/tips/atlanteans.tip:2
+#: ../../txts/tips/atlanteans.tip:6
+msgid ""
+"Always build a forester's and a fish breeder's house, so you will not run "
+"out of trunks and food."
+msgstr ""
+
 #: ../../txts/tips/barbarians.tip:2
+#: ../../txts/tips/atlanteans.tip:2
 #: ../../txts/tips/empire.tip:2
 msgid ""
 "Some buildings, such as the farm, have a very small working area. If the "
@@ -1282,12 +1292,6 @@ msgstr ""
 "Algunos edificios (por ejemplo, las granjas) tienen una pequeña área de "
 "producción .Si el edificio está rodeado de árboles o caminos, se parará la "
 "producción."
-
-#: ../../txts/tips/atlanteans.tip:6
-msgid ""
-"Always build a forester's and a fish breeder's house, so you will not run "
-"out of trunks and food."
-msgstr ""
 
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6
