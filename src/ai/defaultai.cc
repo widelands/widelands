@@ -1781,7 +1781,7 @@ int32_t DefaultAI::calculate_need_for_ps
 	// production.
 	for (uint32_t k = 0; k < bo.inputs.size(); ++k) {
 		prio += 2 * wares[bo.inputs[k]].producers;
-		prio -= 2 * wares[bo.inputs[k]].consumers;
+		prio -= wares[bo.inputs[k]].consumers;
 	}
 	if (bo.inputs.empty())
 		prio += 4;
@@ -1791,7 +1791,8 @@ int32_t DefaultAI::calculate_need_for_ps
 		WareObserver & wo = wares[bo.outputs[k]];
 		if (wo.consumers > 0) {
 			output_prio += wo.preciousness;
-			output_prio += wo.consumers / 3;
+			output_prio += wo.consumers;
+			output_prio -= wo.producers;
 			if (bo.total_count() == 0)
 				output_prio += 10; // add a big bonus
 		}
