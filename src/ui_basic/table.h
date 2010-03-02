@@ -225,9 +225,6 @@ template <> struct Table<void *> : public Panel {
 	void draw(RenderTarget &);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
-	
-	void update(int32_t x, int32_t y, int32_t w, int32_t h);
-	void update();
 
 
 private:

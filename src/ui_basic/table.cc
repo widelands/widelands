@@ -383,18 +383,6 @@ bool Table<void *>::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 }
 
 
-void Table<void *>::update(int32_t x, int32_t y, int32_t w, int32_t h)
-{
-	Panel::update(x, y, w, h);
-	m_needredraw = true;
-}
-
-void Table<void *>::update()
-{
-	Panel::update();
-	m_needredraw = true;
-}
-
 /**
  * Change the currently selected entry
  *
@@ -408,6 +396,7 @@ void Table<void *>::select(const uint32_t i)
 	m_selection = i;
 
 	selected.call(m_selection);
+	m_needredraw = true;
 	update(0, 0, get_eff_w(), get_h());
 }
 
@@ -446,7 +435,7 @@ Table<void *>::Entry_Record & Table<void *>::add
 		select(m_entry_records.size() - 1);
 		m_scrollbar->set_scrollpos(std::numeric_limits<int32_t>::max());
 	}
-
+	m_needredraw = true;
 	update(0, 0, get_eff_w(), get_h());
 	return result;
 }
@@ -456,8 +445,10 @@ Table<void *>::Entry_Record & Table<void *>::add
 */
 void Table<void *>::set_scrollpos(int32_t const i)
 {
-	m_scrollpos = i;
+	if(m_scrollpos != i)
+		m_needredraw = true;
 
+	m_scrollpos = i;
 	update(0, 0, get_eff_w(), get_h());
 }
 

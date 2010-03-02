@@ -53,7 +53,8 @@ BaseListselect::BaseListselect
 	m_last_selection(no_selection_index()),
 	m_show_check(show_check),
 	m_fontname(UI_FONT_NAME),
-	m_fontsize(UI_FONT_SIZE_SMALL)
+	m_fontsize(UI_FONT_SIZE_SMALL),
+	m_needredraw(true)
 {
 	set_think(false);
 
@@ -139,7 +140,8 @@ void BaseListselect::add
 	m_entry_records.push_back(er);
 
 	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
-
+	
+	m_needredraw = true;
 	update(0, 0, get_eff_w(), get_h());
 
 	if (sel)
@@ -181,6 +183,7 @@ void BaseListselect::add_front
 
 	m_scrollbar.set_steps(m_entry_records.size() * get_lineheight() - get_h());
 
+	m_needredraw = true;
 	update(0, 0, get_eff_w(), get_h());
 
 	if (sel)
@@ -248,6 +251,7 @@ void BaseListselect::set_scrollpos(const int32_t i)
 {
 	m_scrollpos = i;
 
+	m_needredraw = true;
 	update(0, 0, get_eff_w(), get_h());
 }
 
@@ -283,6 +287,7 @@ void BaseListselect::select(const uint32_t i)
 	}
 	m_selection = i;
 
+	m_needredraw = true;
 	selected.call(m_selection);
 	update(0, 0, get_eff_w(), get_h());
 }
@@ -339,32 +344,46 @@ uint32_t BaseListselect::get_eff_w() const throw ()
 /**
 Redraw the listselect box
 */
-void BaseListselect::draw(RenderTarget & dst)
+void BaseListselect::draw(RenderTarget & odst)
 {
+	if(!m_needredraw)
+	{
+		odst.blit(Point(0, 0), m_cache_pid);
+		return;
+	}
+
+	m_cache_pid = g_gr->create_surface(odst.get_w(), odst.get_h());
+	
+	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
+
 	// draw text lines
 	const uint32_t lineheight = get_lineheight();
 	uint32_t idx = m_scrollpos / lineheight;
 	int32_t y = 1 + idx * lineheight - m_scrollpos;
 
-	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	//ToDo Copy the background image int the cache image
+	//dst.blit((Point(0, 0), odst))
+	//dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < m_entry_records.size()) {
 		assert
 			(get_h()
 			 <
 			 static_cast<int32_t>(std::numeric_limits<int32_t>::max()));
+
+		//log("BaseListselect::draw: y=%d, get_h: %d\n", y, static_cast<int32_t>(get_h()));
 		if (y >= static_cast<int32_t>(get_h()))
-			return;
+			break;
 
 		const Entry_Record & er = *m_entry_records[idx];
-
+/*
 		if (idx == m_selection) {
 			assert(2 <= get_eff_w());
 			dst.brighten_rect
 				(Rect(Point(1, y), get_eff_w() - 2, m_lineheight),
 				 -ms_darken_value);
 		}
-
+*/
 		int32_t const x =
 			m_align & Align_Right   ? get_eff_w() -      1 :
 			m_align & Align_HCenter ? get_eff_w() >>     1 :
@@ -399,6 +418,9 @@ void BaseListselect::draw(RenderTarget & dst)
 		y += lineheight;
 		++idx;
 	}
+	
+	odst.blit(Point(0, 0), m_cache_pid);
+	m_needredraw = false;
 }
 
 
