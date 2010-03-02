@@ -173,6 +173,11 @@ void Surface::fill_rect(const Rect rc, const RGBColor clr) {
 ===============
 Change the brightness of the given rectangle
 This function is slow as hell.
+
+* This function is a possible point to optimize on
+  slow system. It takes a lot of cpu time atm and is
+  not needed. It is used by the ui_basic stuff to
+  highlight things.
 ===============
 */
 void Surface::brighten_rect(const Rect rc, const int32_t factor) {
@@ -187,24 +192,60 @@ void Surface::brighten_rect(const Rect rc, const int32_t factor) {
 		return;
 	}
 #endif
-
 	const Point bl = rc.bottom_left();
+
 	lock();
-	for (int32_t y = rc.y; y < bl.y; ++y) for (int32_t x = rc.x; x < bl.x; ++x) {
-		uint32_t const clr = get_pixel(x, y);
-		uint8_t gr, gg, gb;
-		SDL_GetRGB(clr, m_surface->format, &gr, &gg, &gb);
-		int16_t r = gr + factor;
-		int16_t g = gg + factor;
-		int16_t b = gb + factor;
-		if (b & 0xFF00)
-			b = ~b >> 24;
-		if (g & 0xFF00)
-			g = ~g >> 24;
-		if (r & 0xFF00)
-			r = ~r >> 24;
-		set_pixel(x, y, SDL_MapRGB(m_surface->format, r, g, b));
+
+	if(m_surface->format->BytesPerPixel == 4)
+	{
+		for (int32_t y = rc.y; y < bl.y; ++y) for (int32_t x = rc.x; x < bl.x; ++x) {
+		  
+			Uint8 * const pix =
+				static_cast<Uint8 *>(m_surface->pixels) +
+				(y + m_offsy)* m_surface->pitch + (x + m_offsx) * 4;
+		  
+			uint32_t const clr = *reinterpret_cast<const Uint32 *>(pix);
+			uint8_t gr, gg, gb;
+			SDL_GetRGB(clr, m_surface->format, &gr, &gg, &gb);
+			int16_t r = gr + factor;
+			int16_t g = gg + factor;
+			int16_t b = gb + factor;
+		
+			if (b & 0xFF00)
+				b = ~b >> 24;
+			if (g & 0xFF00)
+				g = ~g >> 24;
+			if (r & 0xFF00)
+				r = ~r >> 24;
+		
+			*reinterpret_cast<Uint32 *>(pix) = SDL_MapRGB(m_surface->format, r, g, b);
+		}
+	} else if(m_surface->format->BytesPerPixel == 2) {
+		for (int32_t y = rc.y; y < bl.y; ++y) for (int32_t x = rc.x; x < bl.x; ++x) {
+		  
+			Uint8 * const pix =
+				static_cast<Uint8 *>(m_surface->pixels) +
+				(y + m_offsy)* m_surface->pitch + (x + m_offsx) * 2;
+		  
+			uint32_t const clr = *reinterpret_cast<const Uint16 *>(pix);
+			uint8_t gr, gg, gb;
+			SDL_GetRGB(clr, m_surface->format, &gr, &gg, &gb);
+			int16_t r = gr + factor;
+			int16_t g = gg + factor;
+			int16_t b = gb + factor;
+		
+			if (b & 0xFF00)
+				b = ~b >> 24;
+			if (g & 0xFF00)
+				g = ~g >> 24;
+			if (r & 0xFF00)
+				r = ~r >> 24;
+		
+			*reinterpret_cast<Uint16 *>(pix) = SDL_MapRGB(m_surface->format, r, g, b);
+		}
+	  
 	}
+
 	unlock();
 }
 
