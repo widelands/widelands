@@ -156,7 +156,7 @@ void LayeredFileSystem::PutRightVersionOnTop() {
 		//the stack
 		FileSystem & t = **i.current;
 		if (FindMatchingVersionFile(t)) {
-            //TODO: tarnform this to for loop with range (current, end()-1)
+            //TODO: transform this to for loop with range (current, end()-1)
 			std::vector<FileSystem *>::iterator const last = i.get_end() - 1;
 			while (i.current < last) {
 				FileSystem * & target = *i.current;

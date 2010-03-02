@@ -550,10 +550,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 				FileRead fr;
 				fr.Open(*g_fs, path.c_str());
 				if (bytes == fr.GetSize()) {
-                    std::auto_ptr<char> complete(new char[bytes]);
-					fr.DataComplete(complete.get(), bytes);
+                    std::vector<char> complete(bytes,0);
+					fr.DataComplete(&complete[0], bytes);
 					MD5Checksum<FileRead> md5sum;
-					md5sum.Data(complete.get(), bytes);
+					md5sum.Data(&complete[0], bytes);
 					md5sum.FinishChecksum();
 					std::string localmd5 = md5sum.GetChecksum().str();
 					if (localmd5 == md5)

@@ -78,10 +78,7 @@ private:
 		void clicked() {
 			GameMessageMenu & menu =
 				ref_cast<GameMessageMenu, UI::Panel>(*get_parent());
-            struct {uint8_t current; uint8_t const end;} i = 
-                   {0, menu.list.size()};
-			for(;i.current < i.end;
-				 ++i.current)
+			for(wl_index_range<uint8_t>i(0,menu.list.size());i;++i)
 				menu.list.get_record(i.current).set_checked
 					(List::Select, false);
 		}
@@ -99,10 +96,7 @@ private:
 			GameMessageMenu & menu =
 				ref_cast<GameMessageMenu, UI::Panel>(*get_parent());
 
-            struct {uint8_t current; uint8_t const end;} i =
-				   {0, menu.list.size()};
-			for(;i.current < i.end;
-				 ++i.current)
+			for(wl_index_range<uint8_t> i(0, menu.list.size());i;++i)
 				menu.list.get_record(i.current).toggle(List::Select);
 		}
 	} invert_selection;
