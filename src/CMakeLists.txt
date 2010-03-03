@@ -106,11 +106,6 @@ target_link_libraries(widelands ${Boost_unit_test_framework_LIBRARIES})
 
 if (GGZ_CORE_FOUND)
   target_link_libraries(widelands ${GGZ_CORE_LIBRARY})
-  if (WIN32)
-    target_link_libraries(widelands ggzmod)
-    target_link_libraries(widelands ggzcore)
-    target_link_libraries(widelands ggz)
-  endif (WIN32)
 endif (GGZ_CORE_FOUND)
 
 if (APPLE)
