@@ -1,7 +1,0 @@
-Import('*')
-
-SRC=simpleglob("*.cc")
-
-lib=srcenv.StaticLibrary(target='map_io', source=SRC)
-Return('lib')
-
