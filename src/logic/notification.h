@@ -58,7 +58,7 @@ public:
 
 protected:
 	void send(T const & note) {
-		container_iterate_const(typename Links, m_links, i)
+		container_iterate_const(Links, m_links, i)
 			(*i.current)->receive(note);
 	}
 

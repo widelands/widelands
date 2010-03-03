@@ -21,7 +21,7 @@
 #define CONTAINER_ITERATE_H
 
 
-template<class T> 
+template<typename T> 
 struct wl_index_range
 {
     wl_index_range(const T &beginIndex, const T &endIndex) : current(beginIndex), end(endIndex) {}
@@ -40,10 +40,10 @@ private:
 };
 
 
-template<class C> 
+template<typename C> 
 struct wl_range
 {
-    wl_range(typename C::iterator &first, typename C::iterator &last) : current(first), end(last) {}
+    wl_range(const typename C::iterator &first, const typename C::iterator &last) : current(first), end(last) {}
     wl_range(C &container) : current(container.begin()), end(container.end()) {}
     wl_range(const wl_range &r) : current(r.current), end(r.end) {}
     typename C::iterator current;
@@ -62,10 +62,10 @@ private:
     typename C::iterator  end;
 };
 
-template<class C> 
+template<typename C> 
 struct wl_const_range
 {
-    wl_const_range(typename const C::const_iterator &first, typename const C::const_iterator &last) : current(first), end(last) {}
+    wl_const_range(const typename  C::const_iterator &first, const typename C::const_iterator &last) : current(first), end(last) {}
     wl_const_range(const C &container) : current(container.begin()), end(container.end()) {}
     wl_const_range(const wl_const_range &r) : current(r.current), end(r.end) {}
     typename C::const_iterator current;
@@ -91,20 +91,20 @@ template <class C>
 wl_range<C>
 wl_erase(C &c, typename C::iterator &w)
 {
-    C::iterator it = c.erase(w); 
-    return wl_range<C>(it , c.end());
+    typename C::iterator it = c.erase(w); 
+    return wl_range< C >(it , c.end());
 }
 
 #define container_iterate_const(type, container, i)                           \
    for                                                                        \
-   (wl_const_range<type> i(container);                                        \
+   (wl_const_range< type > i(container);                                        \
        i;                                                                     \
-       i.advance())                                                           \
+       ++i)                                                           \
 
 #define container_iterate(type, container, i)                                 \
    for                                                                        \
-      (wl_range<type> i(container);                                           \
+      (wl_range< type > i(container);                                           \
        i;                                                                     \
-       i.advance())                                                           \
+       ++i)                                                           \
 
 #endif

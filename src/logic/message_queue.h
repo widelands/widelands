@@ -51,7 +51,7 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 	}
 
 	//  Make some selected inherited members public.
-	typedef std::map<Message_Id, Message *>::const_iterator const_iterator;
+//	typedef std::map<Message_Id, Message *>::const_iterator const_iterator;
 	const_iterator begin() const {
 		return std::map<Message_Id, Message *>::begin();
 	}
