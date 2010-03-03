@@ -55,8 +55,9 @@ endif (DEFINED WL_VERSION_MAJOR)
 set (WL_CODECHECK_ENABLED "TRUE" CACHE BOOL "Enable code checking")
 #If building with MSVC, then check for 3rdparty libs
 if (DEFINED MSVC)
-  set (CMAKE_INCLUDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/include;${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/include/sdl")
-  set (CMAKE_LIBRARY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/lib")
+  set (WL_3RDPARTY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty" CACHE STRING "Widelands 3rdparty dir")
+  set (CMAKE_INCLUDE_PATH "${WL_3RDPARTY_DIR}/include;${WL_3RDPARTY_DIR}/include/sdl")
+  set (CMAKE_LIBRARY_PATH "${WL_3RDPARTY_DIR}/lib")
 
   add_definitions( -Dand=&& -Dor=|| -Dnot=! -Dxor=^ )
   add_definitions( -Dstrcasecmp=_stricmp )
