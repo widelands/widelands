@@ -139,7 +139,7 @@ void Surface::draw_rect(const Rect rc, const RGBColor clr) {
 Draws a filled rectangle
 ===============
 */
-void Surface::fill_rect(const Rect rc, const RGBColor clr) {
+void Surface::fill_rect(const Rect rc, const RGBAColor clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
@@ -151,9 +151,9 @@ void Surface::fill_rect(const Rect rc, const RGBColor clr) {
 	if (g_opengl) {
 		glBegin(GL_QUADS);
 		glColor3f
-			((clr.r() / 256.0f),
-			 (clr.g() / 256.0f),
-			 (clr.b() / 256.0f));
+			((clr.r / 256.0f),
+			 (clr.g / 256.0f),
+			 (clr.b / 256.0f));
 		glVertex2f(rc.x, rc.y);
 		glVertex2f(rc.x + rc.w, rc.y);
 		glVertex2f(rc.x + rc.w, rc.y + rc.h);
@@ -213,8 +213,8 @@ void Surface::brighten_rect(const Rect rc, const int32_t factor) {
 				(y + m_offsy)* m_surface->pitch + (x + m_offsx) * 4;
 		  
 			uint32_t const clr = *reinterpret_cast<const Uint32 *>(pix);
-			uint8_t gr, gg, gb;
-			SDL_GetRGB(clr, m_surface->format, &gr, &gg, &gb);
+			uint8_t gr, gg, gb, ga;
+			SDL_GetRGBA(clr, m_surface->format, &gr, &gg, &gb, &ga);
 			int16_t r = gr + factor;
 			int16_t g = gg + factor;
 			int16_t b = gb + factor;
@@ -226,7 +226,7 @@ void Surface::brighten_rect(const Rect rc, const int32_t factor) {
 			if (r & 0xFF00)
 				r = ~r >> 24;
 		
-			*reinterpret_cast<Uint32 *>(pix) = SDL_MapRGB(m_surface->format, r, g, b);
+			*reinterpret_cast<Uint32 *>(pix) = SDL_MapRGBA(m_surface->format, r, g, b, ga);
 		}
 	} else if(m_surface->format->BytesPerPixel == 2) {
 		for (int32_t y = rc.y; y < bl.y; ++y) for (int32_t x = rc.x; x < bl.x; ++x) {
@@ -264,7 +264,7 @@ Clear the entire bitmap to black
 ===============
 */
 void Surface::clear() {
-	SDL_FillRect(m_surface, 0, 0);
+	SDL_FillRect(m_surface, 0, SDL_MapRGB(m_surface->format, 0, 0, 0));
 }
 
 /*

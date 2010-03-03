@@ -200,7 +200,7 @@ void RenderTarget::draw_rect(Rect r, const RGBColor clr)
 		m_surface->draw_rect(r, clr);
 }
 
-void RenderTarget::fill_rect(Rect r, const RGBColor clr)
+void RenderTarget::fill_rect(Rect r, const RGBAColor clr)
 {
 	if (clip(r))
 		m_surface->fill_rect(r, clr);
@@ -214,6 +214,7 @@ void RenderTarget::brighten_rect(Rect r, const int32_t factor)
 
 void RenderTarget::clear()
 {
+	log("RenderTarget::clear()\n");
 	if
 		(not m_rect.x and not m_rect.y
 		 and
@@ -228,7 +229,24 @@ void RenderTarget::clear()
 void RenderTarget::blit(const Point dst, const PictureID picture)
 {
 	if (Surface * const src = g_gr->get_picture_surface(picture))
+	{
 		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()));
+	}
+}
+
+/**
+ * Blits a blitsource into this bitmap
+ */
+void RenderTarget::blit_a(const Point dst, const PictureID picture, bool enable_alpha)
+{
+	if (Surface * const src = g_gr->get_picture_surface(picture))
+	{
+		SDL_Surface * surf = g_gr->get_picture_surface(picture)->get_sdl_surface();
+		uint32_t flags = surf->flags;
+		SDL_SetAlpha(surf, enable_alpha & SDL_SRCALPHA, 0);
+		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()));
+		SDL_SetAlpha(surf, flags & SDL_SRCALPHA, 0);
+	}
 }
 
 void RenderTarget::blitrect
