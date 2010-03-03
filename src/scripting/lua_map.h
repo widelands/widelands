@@ -272,6 +272,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_valid_workers(lua_State * L);
 
 	/*
 	 * Lua Methods

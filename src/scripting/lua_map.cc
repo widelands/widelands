@@ -847,6 +847,7 @@ const MethodType<L_ProductionSite> L_ProductionSite::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
+	PROP_RO(L_ProductionSite, valid_workers),
 	{0, 0, 0},
 };
 
@@ -855,6 +856,34 @@ const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
  PROPERTIES
  ==========================================================
  */
+/* RST
+	.. attribute:: valid_workers
+
+		(RO) an array of names of workers that are allowed to work in this
+		productionsite. If of one type more than one is allowed, it will appear
+		more than once.
+*/
+// TODO: needs testing
+// TODO: should be in road too
+int L_ProductionSite::get_valid_workers(lua_State * L) {
+	Game & g = get_game(L);
+	ProductionSite * ps = get(g, L);
+
+	lua_newtable(L);
+
+	Tribe_Descr const & tribe = ps->owner().tribe();
+	uint32_t idx = 1;
+	container_iterate_const(Ware_Types, ps->descr().working_positions(), i) {
+		std::string name = tribe.get_worker_descr(i.current->first)->name();
+
+		for (uint32_t j = 0; j < i.current->second; j++) {
+			lua_pushuint32(L, idx++);
+			lua_pushstring(L, name);
+			lua_rawset(L, -3);
+		}
+	}
+	return 1;
+}
 
 /*
  ==========================================================
@@ -869,11 +898,13 @@ const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
 		:arg workers: array of worker names. If more than one worker of this type
 			should be warped, the worker has to be named more than once.
 */
+// TODO: this needs testing badly
+// TODO: harmonize the API with Road
 int L_ProductionSite::warp_worker(lua_State * L) {
-	Game & g = get_game(L);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 
+	Game & g = get_game(L);
 	ProductionSite * ps = get(g, L);
 	Tribe_Descr const & tribe = ps->owner().tribe();
 
