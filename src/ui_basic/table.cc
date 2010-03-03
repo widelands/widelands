@@ -118,6 +118,7 @@ void Table<void *>::add_column
 		m_scrollbar->set_singlestepsize(lineheight);
 		m_scrollbar->set_pagesize(get_h() - lineheight);
 	}
+	m_needredraw = true;
 }
 
 void Table<void *>::set_column_title
@@ -141,6 +142,7 @@ void Table<void *>::set_column_title
 		column.btn = 0;
 	} else
 		column.btn->set_title(title);
+	m_needredraw = true;
 }
 
 void Table<void *>::Entry_Record::set_checked
@@ -243,6 +245,7 @@ void Table<void *>::clear()
 	m_selection = no_selection_index();
 	m_last_click_time = -10000;
 	m_last_selection = no_selection_index();
+	m_needredraw = true;
 }
 
 /**
@@ -269,7 +272,7 @@ void Table<void *>::draw(RenderTarget & odst)
 
 	while (idx < m_entry_records.size()) {
 		if (y >= static_cast<int32_t>(get_h()))
-			return;
+			break;
 
 		const Entry_Record & er = *m_entry_records[idx];
 
@@ -322,6 +325,7 @@ void Table<void *>::draw(RenderTarget & odst)
 		y += lineheight;
 		++idx;
 	}
+
 	odst.blit(Point(0, 0), m_cache_pid);
 	m_needredraw = false;
 }
@@ -466,6 +470,7 @@ void Table<void *>::remove(const uint32_t i) {
 		(m_entry_records.size() * get_lineheight()
 		 -
 		 (get_h() - m_headerheight - 2));
+	m_needredraw = true;
 }
 
 /**
@@ -494,6 +499,7 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End) {
 						m_selection = i;
 					m_entry_records[i] = erj;
 					m_entry_records[j] = eri;
+					m_needredraw = true;
 				}
 			}
 	else
@@ -510,6 +516,7 @@ void Table<void *>::sort(const uint32_t Begin, uint32_t End) {
 						m_selection = i;
 					m_entry_records[i] = erj;
 					m_entry_records[j] = eri;
+					m_needredraw = true;
 				}
 			}
 }
