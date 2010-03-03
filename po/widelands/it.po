@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-27 17:15+0100\n"
-"PO-Revision-Date: 2010-03-01 11:28+0000\n"
+"PO-Revision-Date: 2010-03-02 09:55+0000\n"
 "Last-Translator: pierusch <marongiu@parallelo.it>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2010-03-02 04:39+0000\n"
+"X-Launchpad-Export-Date: 2010-03-03 04:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -902,17 +902,17 @@ msgstr "."
 
 #: ../../src/ui_basic/timeedit.cc:151 ../../src/ui_basic/timeedit.cc:152
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #: ../../src/ui_basic/timeedit.cc:153 ../../src/ui_basic/timeedit.cc:154
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: ../../src/ui_basic/timeedit.cc:155 ../../src/ui_basic/timeedit.cc:156
 #: ../../src/ui_basic/timeedit.cc:157 ../../src/ui_basic/timeedit.cc:158
 #: ../../src/ui_basic/timeedit.cc:159
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: ../../src/ui_basic/progresswindow.cc:46
 msgid "Preparing..."
@@ -1046,7 +1046,7 @@ msgstr ""
 #: ../../src/events/event_flag.cc:42
 #, c-format
 msgid "(flag): %s"
-msgstr ""
+msgstr "(bandiera): %s"
 
 #: ../../src/events/event_immovable.cc:44
 #, c-format
@@ -1059,7 +1059,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:128
 #, c-format
 msgid "player %u does not exist"
-msgstr ""
+msgstr "il giocatore %u non esiste"
 
 #: ../../src/events/event_expire_message.cc:55
 #, c-format

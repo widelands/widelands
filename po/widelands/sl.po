@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-02-27 17:15+0100\n"
-"PO-Revision-Date: 2010-03-01 16:53+0000\n"
+"PO-Revision-Date: 2010-03-02 10:03+0000\n"
 "Last-Translator: mrt <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2010-03-02 04:39+0000\n"
+"X-Launchpad-Export-Date: 2010-03-03 04:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/writeHTML.cc:40
@@ -747,7 +747,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1299
 msgid " --help               Show this help\n"
-msgstr ""
+msgstr " --help               Prikaži pomoč\n"
 
 #: ../../src/wlapplication.cc:1303
 msgid ""
@@ -757,6 +757,11 @@ msgid ""
 "Hope you enjoy this game!\n"
 "\n"
 msgstr ""
+"Poročila o hroščih? Predlogi? Obiščite projektno spletno stran:\n"
+"        http://www.sourceforge.net/projects/widelands\n"
+"\n"
+"Upamo, da uživate v igri!\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1441
 msgid "Warning: "
@@ -798,7 +803,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1569
 msgid "Connection timeouted"
-msgstr ""
+msgstr "Povezava je presegla časovno omejitev"
 
 #: ../../src/wlapplication.cc:1571
 msgid ""
@@ -806,6 +811,9 @@ msgid ""
 "There seems to be a network problem, either on your side or on side\n"
 "of the server.\n"
 msgstr ""
+"Widelandsu ni uspelo pridobiti IP naslov strežnika.\n"
+"Očitno je težava v omrežju, bodisi na vaši strani, bodisi \n"
+"na strani strežnika.\n"
 
 #: ../../src/wlapplication.cc:1592 ../../src/network/network_ggz.cc:373
 msgid "Connection problem"
@@ -813,11 +821,11 @@ msgstr "Težava s povezavo"
 
 #: ../../src/wlapplication.cc:1594
 msgid "Widelands has not been able to connect to the host."
-msgstr ""
+msgstr "Widelandsu se ni uspelo povezati do gostitelja"
 
 #: ../../src/wlapplication.cc:1640
 msgid "The address of the game server is invalid"
-msgstr ""
+msgstr "Naslov igralskega strežnika je neveljaven"
 
 #: ../../src/wlapplication.cc:1745 ../../src/network/nethost.cc:1185
 msgid "Player"
@@ -837,6 +845,8 @@ msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
 msgstr ""
+"Igra je v premoru, ker se je počasni posnetek iztekel. Po želji lahko "
+"nadaljujete z ogledom posnetka."
 
 #: ../../src/wlapplication.cc:2082 ../../src/logic/game.cc:352
 #: ../../src/logic/game.cc:391
@@ -845,7 +855,7 @@ msgstr "Nalagam..."
 
 #: ../../src/s2map.cc:220
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr ""
+msgstr "Zemljevid Bluebyte Settlers II. Brez komentarja!"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -1001,7 +1011,7 @@ msgstr "neznana/nepričakovana različica %u"
 #: ../../src/events/event_player_allowed_retreat_change.cc:45
 #, c-format
 msgid "(player allowed retreat change): %s"
-msgstr ""
+msgstr "(igralec je dovolil spremembo pri umikanju): %s"
 
 #: ../../src/events/event_forbid_worker_types.cc:46
 #: ../../src/events/event_forbid_building_types.cc:44
@@ -1013,7 +1023,7 @@ msgstr "Prepovej"
 #: ../../src/events/event_set_player_style.cc:43
 #, c-format
 msgid "(set player style): %s"
-msgstr ""
+msgstr "(nastavi slog igralca): %s"
 
 #: ../../src/events/event_flag.cc:42
 #, c-format
@@ -1044,6 +1054,8 @@ msgid ""
 "player %u's message %u has duration %u; (it must have infinite duration, so "
 "that only this event can exipre it)"
 msgstr ""
+"igralčevo (%u) sporočilo %u ima čas trajanja %u; (mora imeti neskončni čas "
+"trajanja, da ga lahko odstrani le ta dogodek)"
 
 #: ../../src/events/event_expire_message.cc:73
 #, c-format
@@ -1051,17 +1063,20 @@ msgid ""
 "refers to the same message id (player %u's %u) as another expire message "
 "event (\"%s\"); (only one event can expire each message)"
 msgstr ""
+"nanaša se na enak ID sporočila (igralec %u, sporočilo %u), ki drugi dogodek "
+"za odstranitev sporočila (\"%s\"); (le en dogodek lahko odstrani posamezno "
+"sporočilo)"
 
 #: ../../src/events/event_expire_message.cc:79
 #: ../../src/events/event_message.cc:111
 #, c-format
 msgid "(expire message): %s"
-msgstr ""
+msgstr "(odstrani sporočilo): %s"
 
 #: ../../src/events/event_message.cc:67
 #, c-format
 msgid "expire: \"%s\" is not an expire message event"
-msgstr ""
+msgstr "odstrani: \"%s\" ni dogodek za odstranitev sporočila"
 
 #: ../../src/events/event_message.cc:72
 #, c-format
@@ -1070,6 +1085,8 @@ msgid ""
 "meaning forever, which is the default; omit the duration key to make the "
 "message exist forever"
 msgstr ""
+"trajanje: vrednost %u ni dopustna za trajanje; To je posebna vrednost za "
+"neskončno, ki je privzeta, brez omejitve sporočilo ostane za vedno"
 
 #: ../../src/events/event_message.cc:90 ../../src/events/event_building.cc:72
 #: ../../src/events/event_building.cc:81
@@ -1105,122 +1122,123 @@ msgstr ""
 #: ../../src/logic/soldier.cc:92 ../../src/logic/soldier.cc:200
 #, c-format
 msgid "expected %s but found \"%s\""
-msgstr ""
+msgstr "pričakovano %s, najdeno pa \"%s\""
 
 #: ../../src/events/event_message.cc:103
 #, c-format
 msgid "status_change: \"%s\" is not a message_is_read_or_archived trigger"
 msgstr ""
+"sprememba_statusa: \"%s\" ni prožilec sporočilo_je_prebrano_ali_arhivirano."
 
 #: ../../src/events/event_set_player_frontier_style.cc:41
 #, c-format
 msgid "player's tribe does not define frontier style \"%s\""
-msgstr ""
+msgstr "igralčevo pleme ne definira glavnega sloga \"%s\""
 
 #: ../../src/events/event_set_player_frontier_style.cc:45
 #, c-format
 msgid "(set player frontier style): %s"
-msgstr ""
+msgstr "(nastavi igralčev glavni slog): %s"
 
 #: ../../src/events/event_player_worker_types.cc:52
 #, c-format
 msgid "\"%s\" is not buildable"
-msgstr ""
+msgstr "\"%s\" ni izgradljiv"
 
 #: ../../src/events/event_player_worker_types.cc:55
 #: ../../src/events/event_player_building_types.cc:54
 #: ../../src/logic/tribe.cc:212 ../../src/logic/tribe.cc:233
 #, c-format
 msgid "\"%s\" is duplicated"
-msgstr ""
+msgstr "\"%s\" je podvojen"
 
 #: ../../src/events/event_player_worker_types.cc:58
 msgid "no worker types"
-msgstr ""
+msgstr "ni tipov delavcev"
 
 #: ../../src/events/event_player_worker_types.cc:63
 #, c-format
 msgid "(player worker types): %s"
-msgstr ""
+msgstr "(tipi igralčevih delavcev): %s"
 
 #: ../../src/events/event_set_player_flag_style.cc:41
 #, c-format
 msgid "player's tribe does not define flag style \"%s\""
-msgstr ""
+msgstr "igralčevo pleme ne definira slog zastav: \"%s\""
 
 #: ../../src/events/event_set_player_flag_style.cc:45
 #, c-format
 msgid "(set player flag style): %s"
-msgstr ""
+msgstr "(nastavi slog igralčevih zastav): %s"
 
 #: ../../src/events/event_lua.cc:42
 #, c-format
 msgid "(lua event): %s"
-msgstr ""
+msgstr "(lua dogodek): %s"
 
 #: ../../src/events/event_player_area.cc:55
 #: ../../src/events/event_move_view.cc:50
 #, c-format
 msgid "illegal coordinates (%i, %i)"
-msgstr ""
+msgstr "neveljavne koordinate (%i, %i)"
 
 #: ../../src/events/event_player_area.cc:61
 #, c-format
 msgid "(player area): %s"
-msgstr ""
+msgstr "(ozemlje igralca): %s"
 
 #: ../../src/events/event_building.cc:62
 #, c-format
 msgid "sufficient_suitability (%u) is smaller than required_suitability (%u)"
-msgstr ""
+msgstr "zadostna_primernost (%u) je manjša od  zahtevana_primernost (%u)"
 
 #: ../../src/events/event_building.cc:73 ../../src/events/event_building.cc:82
 msgid "distance (1 .. 255)"
-msgstr ""
+msgstr "razdalja (1 .. 255)"
 
 #: ../../src/events/event_building.cc:86
 #, c-format
 msgid "max distance (%u) is smaller than min distance (%u)"
-msgstr ""
+msgstr "največja razdalja (%u) je manjša od najmanjše razdalje (%u)"
 
 #: ../../src/events/event_building.cc:169
 #: ../../src/events/event_building.cc:304 ../../src/logic/immovable.cc:254
 #: ../../src/logic/immovable.cc:268
 msgid "duplicated"
-msgstr ""
+msgstr "podvojeno"
 
 #: ../../src/events/event_building.cc:174
 #: ../../src/events/event_building.cc:311
 #, c-format
 msgid "%s=\"%s\": invalid"
-msgstr ""
+msgstr "%s=\"%s\": Neveljavno"
 
 #: ../../src/events/event_building.cc:204
 #: ../../src/events/event_building.cc:230
 #, c-format
 msgid "can not have %u %s (only %u)"
-msgstr ""
+msgstr "ni mogoče imeti %u %s (le %u)"
 
 #: ../../src/events/event_building.cc:316
 #, c-format
 msgid "%u soldiers but only %u allowed"
-msgstr ""
+msgstr "%u vojakov, toda le %u je dovoljenih"
 
 #: ../../src/events/event_building.cc:320
 #, c-format
 msgid "(soldiercontrol): %s"
-msgstr ""
+msgstr "(nadzorvojakov): %s"
 
 #: ../../src/events/event_building.cc:323
 #, c-format
 msgid "(productionsite): %s"
-msgstr ""
+msgstr "(proizvodnja): %s"
 
 #: ../../src/events/event_building.cc:330
 #: ../../src/trigger/trigger_building.cc:58
 #, c-format
 msgid "(building): %s"
-msgstr ""
+msgstr "(zgradba): %s"
 
 #: ../../src/events/event_building.cc:442
 #, c-format
@@ -1228,294 +1246,315 @@ msgid ""
 "failed to place a %s near (%i, %i) (distance between %u and %u) for player "
 "%u (suitability required is %u but found only %u)"
 msgstr ""
+"ni bilo mogoče postaviti %s pri (%i, %i) (razdalja med %u in %u) za igralca "
+"%u (zahtevana primernost je %u, dejanska pa le %u)"
 
 #: ../../src/events/event_player_seeall.cc:45
 #, c-format
 msgid "(player see all): %s"
-msgstr ""
+msgstr "(igralec vidi vse): %s"
 
 #: ../../src/events/event_set_timer.cc:54
 #, c-format
 msgid "trigger \"%s\": not a time trigger"
-msgstr ""
+msgstr "sproži \"%s\": ni časovni prožilec"
 
 #: ../../src/events/event_set_timer.cc:60
 #, c-format
 msgid "(set_timer): %s"
-msgstr ""
+msgstr "(nastavi_časovnik): %s"
 
 #: ../../src/events/event_move_view.cc:56
 #, c-format
 msgid "(move view): %s"
-msgstr ""
+msgstr "(premakni pogled): %s"
 
 #: ../../src/events/event_message_box.cc:41
 msgid "No text defined"
-msgstr ""
+msgstr "Ni določenega besedila"
 
 #: ../../src/events/event_message_box.cc:42
 msgid "Window Title"
-msgstr ""
+msgstr "Naslov okna"
 
 #: ../../src/events/event_message_box.cc:48 ../../src/wui/building_ui.cc:655
 #: ../../src/editor/ui_menus/event_message_box_option_menu.cc:55
 msgid "Continue"
-msgstr ""
+msgstr "Nadaljuj"
 
 #: ../../src/events/event_message_box.cc:138
 msgid "there are no buttons, at least one is required"
-msgstr ""
+msgstr "ni gumbov, vsaj eden je nujen"
 
 #: ../../src/events/event_message_box.cc:149
 #, c-format
 msgid "is not modal although %s=%s"
-msgstr ""
+msgstr "ni modalno, čeprav %s=%s"
 
 #: ../../src/events/event_message_box.cc:154
 #, c-format
 msgid "%s refers to \"%s\", which is not a timer"
-msgstr ""
+msgstr "%s se nanaša na \"%s\", ki ni časovnik"
 
 #: ../../src/events/event_message_box.cc:169
 #, c-format
 msgid "(message box): %s"
-msgstr ""
+msgstr "(sporočilno okno): %s"
 
 #: ../../src/events/event_player_building_types.cc:56
 msgid "no building types"
-msgstr ""
+msgstr "ni tipov zgradb"
 
 #: ../../src/events/event_player_building_types.cc:61
 #, c-format
 msgid "(player building types): %s"
-msgstr ""
+msgstr "(igralčevi tipi zgradb): %s"
 
 #: ../../src/events/event_factory.cc:61
 msgid "Allow worker types"
-msgstr ""
+msgstr "Dovoli tipe delavcev"
 
 #: ../../src/events/event_factory.cc:62
 msgid "Allows the creation of workers of certain types for a player."
-msgstr ""
+msgstr "Dovoli ustvarjanje posameznih tipov delavcev za igralca."
 
 #: ../../src/events/event_factory.cc:66
 msgid "Forbid worker types"
-msgstr ""
+msgstr "Prepovej tipe delavcev."
 
 #: ../../src/events/event_factory.cc:67
 msgid "Forbids the creation of workers of certain types for a player."
-msgstr ""
+msgstr "Prepovej ustvarjanje posameznih tipov delavcev za igralca."
 
 #: ../../src/events/event_factory.cc:71
 msgid "Allow building types"
-msgstr ""
+msgstr "Dovoli tipe zgradb"
 
 #: ../../src/events/event_factory.cc:72
 msgid "Allows the construction of buildings of certain types for a player."
-msgstr ""
+msgstr "Dovoli ustvarjanje posameznih tipov zgradb za igralca."
 
 #: ../../src/events/event_factory.cc:76
 msgid "Forbid building types"
-msgstr ""
+msgstr "Prepovej tipe zgradb"
 
 #: ../../src/events/event_factory.cc:77
 msgid "Forbids the construction of buildings of certain types for a player."
-msgstr ""
+msgstr "Prepovej ustvarjanje posameznih tipov zgradb za igralca."
 
 #: ../../src/events/event_factory.cc:81
 msgid "Create building"
-msgstr ""
+msgstr "Postavi zgradbo"
 
 #: ../../src/events/event_factory.cc:82
 msgid "Create a building and optionally place workers in it"
-msgstr ""
+msgstr "Postavi zgradbo in po želji vanjo nastavi delavce"
 
 #: ../../src/events/event_factory.cc:86
 msgid "Conquer area"
-msgstr ""
+msgstr "Območje zasedbe"
 
 #: ../../src/events/event_factory.cc:88
 msgid ""
 "Gives ownership of all unowned locations within an area to the player."
-msgstr ""
+msgstr "Da lastništvo igralcu nad nikogaršnjo zemljo v tem območju."
 
 #: ../../src/events/event_factory.cc:93
 msgid "Create flag"
-msgstr ""
+msgstr "Postavi zastavo"
 
 #: ../../src/events/event_factory.cc:94
 msgid "Create a flag."
-msgstr ""
+msgstr "Postavi zastavo."
 
 #: ../../src/events/event_factory.cc:98
 msgid "Create immovable"
-msgstr ""
+msgstr "Postavi nepremično"
 
 #: ../../src/events/event_factory.cc:99
 msgid "Create an immovable."
-msgstr ""
+msgstr "Postavi nepremično."
 
 #: ../../src/events/event_factory.cc:103
 msgid "Lua event"
-msgstr ""
+msgstr "Lua dogodek"
 
 #: ../../src/events/event_factory.cc:104
 msgid "Run a lua command"
-msgstr ""
+msgstr "Poženi lua ukaz"
 
 #: ../../src/events/event_factory.cc:108
 msgid "Show message box"
-msgstr ""
+msgstr "Prikaži sporočilno okno"
 
 #: ../../src/events/event_factory.cc:110
 msgid ""
 "Show a message box. It can be modal or and have a picture. An events can be "
 "assigned to each button to give the user chose the course of the game."
 msgstr ""
+"Prikaži sporočilno okno. Lahko je modalna ali ima sliko. Dogodki so lahko "
+"povezani z vsakim gumbom, da dajo igralcu vpliv nad razvojem igre."
 
 #: ../../src/events/event_factory.cc:116
 msgid "Move view"
-msgstr ""
+msgstr "Premakni pogled"
 
 #: ../../src/events/event_factory.cc:117
 msgid "Center the player's view on a certain location."
-msgstr ""
+msgstr "Pozicioniraj igralčev pogled na določeno lokacijo"
 
 #: ../../src/events/event_factory.cc:121
 msgid "Reveal campaign"
-msgstr ""
+msgstr "Razkrij kampanijo"
 
 #: ../../src/events/event_factory.cc:122
 msgid "Reveal a campaign."
-msgstr ""
+msgstr "Razkrij kampanijo."
 
 #: ../../src/events/event_factory.cc:126
 msgid "Reveal objective"
-msgstr ""
+msgstr "Razkrij cilj"
 
 #: ../../src/events/event_factory.cc:127
 msgid "Reveal an objective."
-msgstr ""
+msgstr "Razkrij cilj."
 
 #: ../../src/events/event_factory.cc:131
 msgid "Reveal scenario"
-msgstr ""
+msgstr "Razkrij scenarij"
 
 #: ../../src/events/event_factory.cc:132
 msgid "Reveal a scenario."
-msgstr ""
+msgstr "Razkrij scenarij."
 
 #: ../../src/events/event_factory.cc:136
 msgid "Create road"
-msgstr ""
+msgstr "Postavi cesto"
 
 #: ../../src/events/event_factory.cc:137
 msgid "Create a road and optionally place a carrier on it"
-msgstr ""
+msgstr "Postavi cesto in po želji na njo določi nosača"
 
 #: ../../src/events/event_factory.cc:141
 msgid "Set timer"
-msgstr ""
+msgstr "Nastavi časovnik"
 
 #: ../../src/events/event_factory.cc:142
 msgid "Set a timer to trigger after a certain duration."
-msgstr ""
+msgstr "Nastavi časovnik za sprožitev po preteku določenega času."
 
 #: ../../src/events/event_factory.cc:146
 msgid "Unhide area"
-msgstr ""
+msgstr "Ponovno prikaži ozemlje"
 
 #: ../../src/events/event_factory.cc:148
 msgid ""
 "Gives vision for a specified amount of time of all locations within an area "
 "to the player."
 msgstr ""
+"Igralcu dovoli pogled za določen čas nad vsemi objekti in ozemlju na "
+"določenem področju."
 
 #: ../../src/events/event_factory.cc:153
 msgid "Set player's frontier style"
-msgstr ""
+msgstr "Nastavi slog igralčevega ospredja"
 
 #: ../../src/events/event_factory.cc:155
 msgid ""
 "Sets the style of the player's frontier markers to one of the styles that "
 "are defined in the player's tribe."
 msgstr ""
+"Nastavi slog igralčevega ospredja na enega od slogov, ki jih določa "
+"igralčevo pleme."
 
 #: ../../src/events/event_factory.cc:160
 msgid "Set player's flag style"
-msgstr ""
+msgstr "Nastavi igralčev slog zastav"
 
 #: ../../src/events/event_factory.cc:162
 msgid ""
 "Sets the style of the player's flags to one of the styles that are defined "
 "in the player's tribe."
 msgstr ""
+"Nastavi igralčev slog zastav na enega od slogov, ki jih določa igralčevo "
+"pleme."
 
 #: ../../src/events/event_factory.cc:167
 msgid "Allows retreat value customization"
-msgstr ""
+msgstr "Dovoljuje spreminjanje vrednost za umik."
 
 #: ../../src/events/event_factory.cc:169
 msgid ""
 "Allows that the player can change the value of 'retreat when hitpoints below "
 "x%'."
 msgstr ""
+"Dovoljuje igralcu spreminjanje vrednosti, da se igralčevi vojaki umaknejo, "
+"ko njihove življenjske točke padejo pod vrednost x%."
 
 #: ../../src/events/event_factory.cc:174
 msgid "Forbids retreat value customization"
-msgstr ""
+msgstr "Prepoveduje spreminjanje vrednost za umik."
 
 #: ../../src/events/event_factory.cc:176
 msgid ""
 "Forbids that the player can change the value of 'retreat when hitpoints "
 "below x%'."
 msgstr ""
+"Prepoveduje igralcu spreminjanje vrednosti, da se igralčevi vojaki umaknejo, "
+"ko njihove življenjske točke padejo pod vrednost x%."
 
 #: ../../src/events/event_factory.cc:181
 msgid "Set player retreat percentage"
-msgstr ""
+msgstr "Nastavi odstotek igralčevega umika"
 
 #: ../../src/events/event_factory.cc:183
 msgid ""
 "Sets the player value of 'retreat when hit points below x%', this value "
 "could be overridden by players if allowed."
 msgstr ""
+"Nastavi odstotek možnosti, da se igralčevi vojaki umaknejo, ko njihove "
+"življenjske točke padejo pod vrednost x%, ki jo lahko igralec spremeni, če "
+"ima dovoljenje."
 
 #: ../../src/events/event_factory.cc:188
 msgid "Set see all mode for a player"
-msgstr ""
+msgstr "Nastavineomejen pogled za igralca."
 
 #: ../../src/events/event_factory.cc:189
 msgid "Sets the see all mode for a specific player to on/off."
-msgstr ""
+msgstr "Nastavi dovoljenje o neomejenem pogledu za določenega igralca."
 
 #: ../../src/events/event_factory.cc:193
 msgid "Creates a message for a player"
-msgstr ""
+msgstr "Ustvari sporočilo za uporabnika"
 
 #: ../../src/events/event_factory.cc:195
 msgid ""
 "Creates a message for a player. This message can last forever, during a "
 "specified duration, or until a special event is run."
 msgstr ""
+"Ustvari sporočilo za uporabnika. To sporočilo lahko traja neomejeno, v "
+"določenem časovnem območju, ali dokler ga poseben dogodek ne prekine."
 
 #: ../../src/events/event_factory.cc:200
 msgid "Expires a previously created message"
-msgstr ""
+msgstr "Prekine predhodno ustvarjeno sporočilo."
 
 #: ../../src/events/event_factory.cc:202
 msgid ""
 "Expires a message that was previously created for a player. The message will "
 "cease to exist."
 msgstr ""
+"Prekine predhodno ustvarjeno sporočilo za igralca. Sporočilo bo prenehalo "
+"obstajati."
 
 #: ../../src/events/event_road.cc:40
 msgid "there are no steps"
-msgstr ""
+msgstr "ne obstaja možnost korakov"
 
 #: ../../src/events/event_road.cc:43
 msgid "there is only 1 step, must be at least 2"
-msgstr ""
+msgstr "obstaja le 1 možen korakov, potrebna sta vsaj 2"
 
 #: ../../src/events/event_road.cc:49
 #, c-format
@@ -1523,6 +1562,8 @@ msgid ""
 "step %li has direction '%c', must be one of {1 (northeast), 2 (east), 3 "
 "(southeast), 4 (southwest), 5 (west), 6 (northwest)}"
 msgstr ""
+"korak %li ima smer '%c', moral pa bi imeti eno od smeri{1 (severovzhod), 2 "
+"(vzhod), 3 (jugovzhod), 4 (jugozahod), 5 (zahod), 6 (severozahod)}"
 
 #: ../../src/events/event_road.cc:72
 #, c-format
@@ -1530,17 +1571,19 @@ msgid ""
 "the steps \"%s\" do not form the optimal path from the start to the end "
 "through only the used locations, should be \"%s\""
 msgstr ""
+"koraki \"%s\" ne tvorijo optimalne poti od začetka do konca, morali bi biti "
+"\"%s\""
 
 #: ../../src/map_io/widelands_map_immovabledata_data_packet.cc:113
 #, c-format
 msgid "immovable %u: %s"
-msgstr ""
+msgstr "nepremično %u: %s"
 
 #: ../../src/map_io/widelands_map_immovabledata_data_packet.cc:120
 #: ../../src/map_io/widelands_map_immovable_data_packet.cc:98
 #, c-format
 msgid "immovable data: %s"
-msgstr ""
+msgstr "nepremični podatki: %s"
 
 #: ../../src/map_io/widelands_map_trigger_data_packet.cc:72
 #: ../../src/map_io/widelands_map_event_chain_data_packet.cc:175
@@ -1548,43 +1591,43 @@ msgstr ""
 #: ../../src/map_io/widelands_map_event_data_packet.cc:65
 #, c-format
 msgid "%s: %s"
-msgstr ""
+msgstr "%s: %s"
 
 #: ../../src/map_io/widelands_map_trigger_data_packet.cc:80
 #, c-format
 msgid "Triggers: %s"
-msgstr ""
+msgstr "Sproži: %s"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:80
 #, c-format
 msgid "unknown object header %u"
-msgstr ""
+msgstr "neznana header objekta: %u"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:83
 #, c-format
 msgid "map objects: %s"
-msgstr ""
+msgstr "objekti zemljevida: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:208
 #: ../../src/logic/playercommand.cc:480 ../../src/logic/playercommand.cc:538
 #, c-format
 msgid "building %u: %s"
-msgstr ""
+msgstr "zgradba %u: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:215
 #, c-format
 msgid "buildingdata: %s"
-msgstr ""
+msgstr "podatkizgradbe: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:273
 #, c-format
 msgid "wares: %s"
-msgstr ""
+msgstr "dobrine: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:286
 #, c-format
 msgid "constructionsite: %s"
-msgstr ""
+msgstr "gradbišče: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:450
 #, c-format
@@ -1592,31 +1635,33 @@ msgid ""
 "%s %u has a next_spawn time for worker type \"%s\" set to %u, but it was "
 "previously set to %u\n"
 msgstr ""
+"%s %u ima naslednji_prosti čas za delavce tipa \"%s\" nastavljen na %u, toda "
+"pred tem je bil %u\n"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:471
 #, c-format
 msgid "warehouse: %s"
-msgstr ""
+msgstr "skladišče: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:578
 #, c-format
 msgid "militarysite: %s"
-msgstr ""
+msgstr "vojaško prizorišče: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:708
 #, c-format
 msgid "program %s was skipped at time %u, but time is only %u"
-msgstr ""
+msgstr "program %s je bil preskočen ob času %u, toda čas je šele %u"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:937
 #, c-format
 msgid "trainingsite: %s"
-msgstr ""
+msgstr "prizorišče treninga: %s"
 
 #: ../../src/map_io/widelands_map_heights_data_packet.cc:53
 #, c-format
 msgid "heights: %s"
-msgstr ""
+msgstr "višine: %s"
 
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:53
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:94
@@ -1626,27 +1671,27 @@ msgstr ""
 #: ../../src/game_io/game_preload_data_packet.cc:55
 #, c-format
 msgid "unknown/unhandled version %i"
-msgstr ""
+msgstr "neznana/nepričakovana različica %i"
 
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:55
 #, c-format
 msgid "elemental data: %s"
-msgstr ""
+msgstr "osnovni podatek: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:134
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:198
 #, c-format
 msgid "item %u: %s"
-msgstr ""
+msgstr "predmet: %u: %s"
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:205
 #, c-format
 msgid "waredata: %s"
-msgstr ""
+msgstr "podatkidobrin: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:130
 msgid "no carrier slot"
-msgstr ""
+msgstr "ni mest nosačev"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:134
 #, c-format
@@ -1654,6 +1699,8 @@ msgid ""
 "expected 1 but found %u carrier slots in road saved with packet version 2 "
 "(old)"
 msgstr ""
+"pričakovano je bila 1, toda dejansko je %u mest nosačev na cesti, shranjenih "
+"z žepno verzijo 2 (staro)"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
@@ -1663,47 +1710,47 @@ msgstr ""
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:210
 #, c-format
 msgid "roaddata: %s"
-msgstr ""
+msgstr "cestnipodatki: %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr ""
+msgstr "vozlišče je v lasti igralca %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
 msgid "is owned by player %u"
-msgstr ""
+msgstr "je v lasti igralca %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
 msgid "has a flag (%u)"
-msgstr ""
+msgstr "ima zastavo (%u)"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
 msgid "neighbour node (%i, %i): %s"
-msgstr ""
+msgstr "sosednje vozlišče (%i, %i): %s"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
 msgid "flags: %s"
-msgstr ""
+msgstr "zastave: %s"
 
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:96
 #, c-format
 msgid "allowed buildings: %s"
-msgstr ""
+msgstr "dovoljene zgradbe: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
 msgid "wrong flag (%u) at given position (%i, %i)"
-msgstr ""
+msgstr "napačna zastava (%u)  na izbranem položaju (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:90
 #, c-format
 msgid "no flag at given position (%i, %i)"
-msgstr ""
+msgstr "ni zastave na izbranem položaju (%i, %i)"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:110
 #, c-format

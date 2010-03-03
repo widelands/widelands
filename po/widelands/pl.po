@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-02-27 17:15+0100\n"
-"PO-Revision-Date: 2010-02-28 19:46+0000\n"
+"PO-Revision-Date: 2010-03-02 19:52+0000\n"
 "Last-Translator: Stanisław Gackowski <launchpad@soeb.eu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2010-03-01 04:58+0000\n"
+"X-Launchpad-Export-Date: 2010-03-03 04:44+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/logic/worker.cc:1649
@@ -5555,7 +5555,7 @@ msgstr "Status"
 
 #: ../../src/wui/game_message_menu.h:64
 msgid "Title"
-msgstr ""
+msgstr "Tytuł"
 
 #: ../../src/wui/game_message_menu.h:65
 msgid "Time sent"
@@ -5565,25 +5565,25 @@ msgstr "Czas wysłania"
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:99
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:99
 msgid "Clear"
-msgstr ""
+msgstr "Wyczyść"
 
 #: ../../src/wui/game_message_menu.h:76
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:99
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:99
 msgid "Clear selection"
-msgstr ""
+msgstr "Usuń zaznaczenie"
 
 #: ../../src/wui/game_message_menu.h:97
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:120
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:120
 msgid "Invert"
-msgstr ""
+msgstr "Odwróć"
 
 #: ../../src/wui/game_message_menu.h:97
 #: ../../src/editor/ui_menus/event_player_building_types_option_menu.h:120
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:120
 msgid "Invert selection"
-msgstr ""
+msgstr "Odwróć zaznaczenie"
 
 #: ../../src/wui/game_message_menu.h:118 ../../src/wui/game_message_menu.h:151
 msgid "Archive selected messages"
@@ -5622,7 +5622,7 @@ msgstr "nie ustawiono opisu"
 #: ../../src/editor/ui_menus/event_set_player_frontier_style_option_menu.h:66
 #: ../../src/editor/ui_menus/event_player_worker_types_option_menu.h:72
 msgid "Player:"
-msgstr ""
+msgstr "Gracz:"
 
 #~ msgid "Server sent malformed commands: "
 #~ msgstr "Serwer wysłał nieprawidłowe polecenie: "

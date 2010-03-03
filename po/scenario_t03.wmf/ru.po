@@ -6,19 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2010-02-15 16:30+0000\n"
-"PO-Revision-Date: 2010-02-20 13:39+0000\n"
-"Last-Translator: Groza_BOTov <Unknown>\n"
+"POT-Creation-Date: 2010-02-27 16:15+0000\n"
+"PO-Revision-Date: 2010-03-02 14:38+0000\n"
+"Last-Translator: Victor Birkmanis <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-02-21 04:53+0000\n"
+"X-Launchpad-Export-Date: 2010-03-03 04:43+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../campaigns/t03.wmf/elemental:7
 msgid "Tutorial3 - This land is our land"
-msgstr ""
+msgstr "Обучение III - Это наша земля!"
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
@@ -81,7 +81,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/event:775
 #: ../../campaigns/t03.wmf/event:849
 msgid "-- NEW OBJECTIVE --"
-msgstr ""
+msgstr "-- НОВОЕ ЗАДАНИЕ --"
 
 #: ../../campaigns/t03.wmf/event:352
 #: ../../campaigns/t03.wmf/objective:7
@@ -92,7 +92,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:354
 msgid "The advisor"
-msgstr ""
+msgstr "Советник"
 
 #: ../../campaigns/t03.wmf/event:387
 msgid ""
@@ -118,7 +118,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:432
 msgid "Tracks"
-msgstr ""
+msgstr "Пути"
 
 #: ../../campaigns/t03.wmf/event:458
 msgid ""
@@ -228,7 +228,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/event:621
 msgid "-- NEW OBJECTIVES --"
-msgstr ""
+msgstr "-- НОВЫЕ ЗАДАНИЯ --"
 
 #: ../../campaigns/t03.wmf/event:623
 #: ../../campaigns/t03.wmf/objective:47
