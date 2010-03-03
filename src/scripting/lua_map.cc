@@ -72,6 +72,8 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
 		case Map_Object::BUILDING:
 			if (!strcmp(bi->type_name(), "warehouse"))
 				return CAST_TO_LUA(Warehouse);
+			else if (!strcmp(bi->type_name(), "productionsite"))
+				return CAST_TO_LUA(ProductionSite);
 			else
 				return CAST_TO_LUA(Building);
 
@@ -559,8 +561,8 @@ int L_Road::get_type(lua_State * L) {
 
 		:arg name: name of this worker, e.g. "carrier", "ox"
 		:type name: :class:`name`
-TODO: this function should only take a count
 */
+// TODO: this function should only a name
 int L_Road::warp_worker(lua_State * L) {
 	std::string name = "carrier";
 	if (lua_gettop(L) > 1)
@@ -692,7 +694,6 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
 	{0, 0, 0},
 };
 
-
 /*
  ==========================================================
  PROPERTIES
@@ -818,6 +819,93 @@ SET_X(worker);
 */
 GET_X(worker);
 #undef GET_X
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
+/* RST
+ProductionSite
+--------------
+
+.. class:: ProductionSite
+
+	Child of: :class:`Building`
+
+	Every building that produces anything.
+*/
+const char L_ProductionSite::className[] = "ProductionSite";
+const MethodType<L_ProductionSite> L_ProductionSite::Methods[] = {
+	METHOD(L_ProductionSite, warp_worker),
+        // METHOD(L_ProductionSite, set_wares),
+        // METHOD(L_ProductionSite, get_wares),
+        // METHOD(L_ProductionSite, set_workers),
+        // METHOD(L_ProductionSite, get_workers),
+	{0, 0},
+};
+const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
+	{0, 0, 0},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+/* RST
+	.. method:: warp_worker(workers)
+
+		Warp workers into this building. The workers are created from thin air.
+
+		:arg workers: array of worker names. If more than one worker of this type
+			should be warped, the worker has to be named more than once.
+*/
+int L_ProductionSite::warp_worker(lua_State * L) {
+	Game & g = get_game(L);
+
+	luaL_checktype(L, 2, LUA_TTABLE);
+
+	ProductionSite * ps = get(g, L);
+	Tribe_Descr const & tribe = ps->owner().tribe();
+
+	Ware_Types const & working_positions = ps->descr().working_positions();
+
+	lua_pushnil(L);  /* first key */
+	while (lua_next(L, 2) != 0) {
+		std::string name = luaL_checkstring(L, -1);
+		const Worker_Descr * wdes = tribe.get_worker_descr
+			(tribe.worker_index(name));
+		if (!wdes)
+			return report_error(L, "%s is not a valid worker name!", name.c_str());
+
+		bool success = false;
+		container_iterate_const(Ware_Types, working_positions, i) {
+			if (i.current->first == wdes->worker_index()) {
+				if (!ps->warp_worker(g, *wdes))
+					success = true;
+				else
+					return report_error(L, "TODO: errmsg");
+			}
+		}
+		if (!success)
+			return
+				report_error
+				  (L, "%s is not a valid worker for this site!", name.c_str());
+
+		lua_pop(L, 1); /* pop value, keep key for next iteration */
+	}
+
+	return 0;
+}
 
 /*
  ==========================================================
@@ -1303,6 +1391,13 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<L_Warehouse, L_PlayerImmovable>(L);
 	add_parent<L_Warehouse, L_BaseImmovable>(L);
 	add_parent<L_Warehouse, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_ProductionSite>(L, "map", true);
+	add_parent<L_ProductionSite, L_Building>(L);
+	add_parent<L_ProductionSite, L_PlayerImmovable>(L);
+	add_parent<L_ProductionSite, L_BaseImmovable>(L);
+	add_parent<L_ProductionSite, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 }
 

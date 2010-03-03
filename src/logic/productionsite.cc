@@ -271,7 +271,7 @@ void ProductionSite::prefill
 	}
 	if (worker_counts) {
 		Working_Position * wp = m_working_positions;
-		Ware_Types const & descr_working_positions = descr().working_positions();
+	Ware_Types const & descr_working_positions = descr().working_positions();
 		container_iterate_const(Ware_Types, descr_working_positions, i) {
 			uint32_t nr_workers = *worker_counts;
 			assert(nr_workers <= i.current->second);
@@ -405,6 +405,40 @@ void ProductionSite::cleanup(Editor_Game_Base & egbase)
 	Building::cleanup(egbase);
 }
 
+/**
+ * Create a new worker inside of us out of thin air
+ *
+ * returns 0 on success -1 if there is no room for this worker
+ */
+int ProductionSite::warp_worker(Game & game, const Worker_Descr & wdes) {
+	bool assigned = false;
+	Working_Position * current = m_working_positions;
+	for
+		(Working_Position * const end = current + descr().nr_working_positions();
+		 current < end;
+		 ++current)
+	{
+		if (current->worker)
+			continue;
+
+		assert(current->worker_request);
+		if (current->worker_request->get_index() != wdes.worker_index())
+			continue;
+
+		// Okay, space is free and worker is fitting. Let's create him
+		Worker & worker = wdes.create(game, owner(), this, get_position());
+		worker.start_task_idle(game, 0, -1);
+		current->worker = &worker;
+		delete current->worker_request;
+		current->worker_request = 0;
+		assigned = true;
+	}
+	if (not assigned)
+		return -1;
+
+	try_start_working(game);
+	return 0;
+}
 
 /**
  * Intercept remove_worker() calls to unassign our worker, if necessary.

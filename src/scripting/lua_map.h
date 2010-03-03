@@ -26,6 +26,7 @@
 #include "economy/road.h"
 #include "logic/game.h"
 #include "logic/warehouse.h"
+#include "logic/productionsite.h"
 
 #include "luna.h"
 
@@ -256,6 +257,33 @@ public:
 	 */
 	CASTED_GET(Warehouse);
 };
+
+
+class L_ProductionSite : public L_Building {
+public:
+	LUNA_CLASS_HEAD(L_ProductionSite);
+
+	L_ProductionSite() {}
+	L_ProductionSite(Widelands::ProductionSite & mo) : L_Building(mo) {
+	}
+	L_ProductionSite(lua_State * L) : L_Building(L) {}
+	virtual ~L_ProductionSite() {}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua Methods
+	 */
+	int warp_worker(lua_State * L);
+
+	/*
+	 * C Methods
+	 */
+	CASTED_GET(ProductionSite);
+};
+
 
 #undef CASTED_GET
 
