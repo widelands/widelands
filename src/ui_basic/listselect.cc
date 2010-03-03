@@ -363,7 +363,7 @@ void BaseListselect::draw(RenderTarget & odst)
 
 	//ToDo Copy the background image int the cache image
 	//dst.blit((Point(0, 0), odst))
-	//dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < m_entry_records.size()) {
 		assert
@@ -376,14 +376,14 @@ void BaseListselect::draw(RenderTarget & odst)
 			break;
 
 		const Entry_Record & er = *m_entry_records[idx];
-/*
+
 		if (idx == m_selection) {
 			assert(2 <= get_eff_w());
 			dst.brighten_rect
 				(Rect(Point(1, y), get_eff_w() - 2, m_lineheight),
 				 -ms_darken_value);
 		}
-*/
+
 		int32_t const x =
 			m_align & Align_Right   ? get_eff_w() -      1 :
 			m_align & Align_HCenter ? get_eff_w() >>     1 :
