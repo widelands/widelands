@@ -52,7 +52,7 @@ if (DEFINED WL_VERSION_MAJOR)
   endif (DEFINED WL_VERSION_MINOR)
 endif (DEFINED WL_VERSION_MAJOR)
 
-set (WL_CODECHECK_ENABLED "TRUE" CACHE BOOL "Enable code checking")
+set (WL_CODECHECK_ENABLED "FALSE" CACHE BOOL "Enable code checking")
 #If building with MSVC, then check for 3rdparty libs
 if (DEFINED MSVC)
   set (WL_3RDPARTY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty" CACHE STRING "Widelands 3rdparty dir")
