@@ -56,6 +56,7 @@ _[[ "I beg your forgiveness, chieftain, but I have a grave concern to discuss wi
 
 order_msg_3 = {
    title=_"Your loyal companion", 
+   posx = 0,
    body =
 "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>" ..
 _"Boldreth jumps up..." ..
@@ -67,6 +68,7 @@ _"* Build military buildings (like sentries and strongholds) to expand your terr
 
 order_msg_4 = {
    title =_ "The advisor",
+   posx = 0,
    body =
 "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>" ..
 _"Khantrukh grumbles..." ..
