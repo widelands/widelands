@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-02-27 17:15+0100\n"
-"PO-Revision-Date: 2010-03-02 10:03+0000\n"
+"PO-Revision-Date: 2010-03-03 13:18+0000\n"
 "Last-Translator: mrt <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2010-03-03 04:44+0000\n"
+"X-Launchpad-Export-Date: 2010-03-04 04:50+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/writeHTML.cc:40
@@ -180,11 +180,11 @@ msgstr "Tipi delavcev"
 
 #: ../../src/writeHTML.cc:517
 msgid "Minimum<br/>needed<br/>experience"
-msgstr "Najmanj<br/>potrebno<br/>izkušnje"
+msgstr "Najmanjše<br/>potrebne<br/>izkušnje"
 
 #: ../../src/writeHTML.cc:519
 msgid "Maximum<br/>needed<br/>experience"
-msgstr "Največ<br/>potrebno<br/>izkušnje"
+msgstr "Največje<br/>potrebne<br/>izkušnje"
 
 #: ../../src/writeHTML.cc:521
 msgid "Becomes"
@@ -218,12 +218,12 @@ msgstr ""
 #: ../../src/writeHTML.cc:610
 #, c-format
 msgid "Defense is %u, plus %u for each level above 0 (maximum level is %u)."
-msgstr ""
+msgstr "Obramba je %u, plus %u za vsak nivo nad 0 (najvišji nivo je %u)."
 
 #: ../../src/writeHTML.cc:620
 #, c-format
 msgid "Evade is %u, plus %u for each level above 0 (maximum level is %u)."
-msgstr ""
+msgstr "Izmikanje je %u, plus %u za vsak nivo nad 0 (najvišji nivo je %u)."
 
 #: ../../src/writeHTML.cc:666 ../../src/writeHTML.cc:676
 msgid "'s creation"
@@ -1705,7 +1705,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:203
 #, c-format
 msgid "road %u: %s"
-msgstr ""
+msgstr "cesta %u: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:210
 #, c-format
@@ -1756,32 +1756,34 @@ msgstr "ni zastave na izbranem položaju (%i, %i)"
 #, c-format
 msgid "has building %u at (%i, %i), which is not at the top left node"
 msgstr ""
+"ima zgradbo %u na koordinatah (%i, %i), kar pa ni zgornje levo vozlišče"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
 msgid "building (%u): %s"
-msgstr ""
+msgstr "zgradba (%u): %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:209
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:70
 #, c-format
 msgid "%u: %s"
-msgstr ""
+msgstr "%u: %s"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:216
 #, c-format
 msgid "flagdata: %s"
-msgstr ""
+msgstr "podatkizastave: %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:88
 #, c-format
 msgid "messages are not ordered: sent at %u but previous message sent at %u"
-msgstr ""
+msgstr "sporočila niso urejena: poslano ob %u, predhodno sporočilo pa ob %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:94
 #, c-format
 msgid "message is sent in the future: sent at %u but gametime is only %u"
 msgstr ""
+"sporočilo je poslano v prihodnosti: poslano ob %u, čas v igri pa je %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:103
 #, c-format
@@ -1790,12 +1792,17 @@ msgid ""
 "forever, which is the default; omit the duration key to make the message "
 "exist forever"
 msgstr ""
+"vrednost %u ni dovoljena kot čas trajanja; to je posebna vrednost za "
+"neskončno, ki je prednastavljena; izpustite čas trajanja, da bo sporočilo "
+"obstajalo za vedno"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:111
 #, c-format
 msgid ""
 "duration %u is too large; causes numeric overflow when added to sent time %u"
 msgstr ""
+"čas trajanja %u je previsok; povzroči numerično prekoračitev pomnilnika, ko "
+"se prišteje času pošiljanja %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:117
 #, c-format
@@ -1803,215 +1810,217 @@ msgid ""
 "message should have expired at %u; sent at %u with duration %u but gametime "
 "is already %u"
 msgstr ""
+"sporočilo bi moralo zapasti ob %u; poslano ob %u s časom trajanja %u, toda "
+"čas v igri je že %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:151
 #, c-format
 msgid "\"%s\": %s"
-msgstr ""
+msgstr "\"%s\": %s"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:156
 #, c-format
 msgid "messages for player %u: %s"
-msgstr ""
+msgstr "sporočila za igralca %u: %s"
 
 #: ../../src/map_io/widelands_map_event_chain_data_packet.cc:183
 #, c-format
 msgid "EventChains: %s"
-msgstr ""
+msgstr "VerigeDogodkov: %s"
 
 #: ../../src/map_io/widelands_map_exploration_data_packet.cc:95
 #, c-format
 msgid "seen: %s"
-msgstr ""
+msgstr "videno: %s"
 
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:68
 #, c-format
 msgid "invalid type \"%s\""
-msgstr ""
+msgstr "neveljaven tip \"%s\""
 
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:76
 #, c-format
 msgid "variable %s: %s"
-msgstr ""
+msgstr "spremenljivka %s: %s"
 
 #: ../../src/map_io/widelands_map_variable_data_packet.cc:83
 #, c-format
 msgid "variables: %s"
-msgstr ""
+msgstr "spremenljivke: %s"
 
 #: ../../src/map_io/widelands_map_allowed_worker_types_data_packet.cc:84
 #, c-format
 msgid "allowed worker types: %s"
-msgstr ""
+msgstr "dovoljeni tipi delavcev: %s"
 
 #: ../../src/map_io/widelands_map_extradata_data_packet.cc:99
 #, c-format
 msgid "extradata: %s"
-msgstr ""
+msgstr "dodatnipodatki: %s"
 
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:77
 #, c-format
 msgid "ware data: %s"
-msgstr ""
+msgstr "podatski o surovinah: %s"
 
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
 msgid "road: %s"
-msgstr ""
+msgstr "cesta: %s"
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:80
 #, c-format
 msgid "Objectives: %s"
-msgstr ""
+msgstr "Cilji: %s"
 
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:122
 #, c-format
 msgid "unseen immovable: %s"
-msgstr ""
+msgstr "neviden nepremični: %s"
 
 #: ../../src/map_io/widelands_map_node_ownership_data_packet.cc:64
 #, c-format
 msgid "ownership: %s"
-msgstr ""
+msgstr "lastništvo: %s"
 
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:80
 #, c-format
 msgid "player names and tribes: %s"
-msgstr ""
+msgstr "igralčeva imena in plemena: %s"
 
 #: ../../src/map_io/widelands_map_event_data_packet.cc:72
 #, c-format
 msgid "Events: %s"
-msgstr ""
+msgstr "Dogodki: %s"
 
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:63
 #: ../../src/game_io/game_player_economies_data_packet.cc:85
 #, c-format
 msgid "player %u: %s"
-msgstr ""
+msgstr "igralec %u: %s"
 
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:69
 #, c-format
 msgid "player positions: %s"
-msgstr ""
+msgstr "igralčevi položaji: %s"
 
 #: ../../src/map_io/widelands_map_building_data_packet.cc:124
 #, c-format
 msgid "buildings: %s"
-msgstr ""
+msgstr "zgradba: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:233
 #, c-format
 msgid "unknown task type \"%s\""
-msgstr ""
+msgstr "neznan tip opravila \"%s\""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:237
 #, c-format
 msgid "task %s is duplicated in stack"
-msgstr ""
+msgstr "opravilo %s je podvojeno v skladu"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:314
 #, c-format
 msgid "reading path: %s"
-msgstr ""
+msgstr "berem pot: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:387
 #, c-format
 msgid "bob %u: %s"
-msgstr ""
+msgstr "nagib %u: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:394
 #, c-format
 msgid "bobdata: %s"
-msgstr ""
+msgstr "podatkinagiba: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:409
 #, c-format
 msgid "critter bob: %s"
-msgstr ""
+msgstr "kriterij nagiba: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:675
 #, c-format
 msgid "soldier: %s"
-msgstr ""
+msgstr "vojak: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:691
 #, c-format
 msgid "carrier: %s"
-msgstr ""
+msgstr "nosač: %s"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
 msgid "unknown bob type %u"
-msgstr ""
+msgstr "neznan tip nagiba %u"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:102
 #, c-format
 msgid "tribe \"%s\" does not exist"
-msgstr ""
+msgstr "pleme \"%s\" ne obstaja"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:141
 #, c-format
 msgid "bobs: %s"
-msgstr ""
+msgstr "nagibi: %s"
 
 #: ../../src/map_io/widelands_map_loader.cc:89
 msgid "Invalid World"
-msgstr ""
+msgstr "Neveljaven svet"
 
 #: ../../src/map_io/widelands_map_loader.cc:91
 #, c-format
 msgid "The world \"%s\" set by the map, does not exist on your filesystem."
-msgstr ""
+msgstr "Svet \"%s\" z zemljevidom na vašem disku ne obstaja."
 
 #: ../../src/map_io/widelands_map_terrain_data_packet.cc:81
 #, c-format
 msgid "terrain: %s"
-msgstr ""
+msgstr "teren: %s"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
 msgid "call economy balance: %s"
-msgstr ""
+msgstr "deločiuravnoteženo ekomnomijo: %s"
 
 #: ../../src/economy/economy_data_packet.cc:62
 #: ../../src/economy/economy_data_packet.cc:82
 #, c-format
 msgid "duplicated entry for %s"
-msgstr ""
+msgstr "podvojen vnos za %s"
 
 #: ../../src/economy/economy_data_packet.cc:95
 #, c-format
 msgid "target quantities: %s"
-msgstr ""
+msgstr "ciljne količine: %s"
 
 #: ../../src/economy/economy_data_packet.cc:99
 #, c-format
 msgid "unknown version %u"
-msgstr ""
+msgstr "neznana različica %u"
 
 #: ../../src/economy/economy_data_packet.cc:102
 #, c-format
 msgid "economy: %s"
-msgstr ""
+msgstr "ekonomija: %s"
 
 #: ../../src/economy/wares_queue.cc:256
 #, c-format
 msgid "waresqueue: %s"
-msgstr ""
+msgstr "vrstaskaldišča: %s"
 
 #: ../../src/graphic/graphic.cc:818
 #, c-format
 msgid "Loading animations: %d%% complete"
-msgstr ""
+msgstr "Nalagam animacije: %d%% končano"
 
 #: ../../src/graphic/animation.cc:197
 msgid "frame number"
-msgstr ""
+msgstr "število sličic"
 
 #: ../../src/network/netclient.cc:96
 msgid "Could not establish connection to host"
-msgstr ""
+msgstr "Ni se bilo mogoče povezati z gostiteljem"
 
 #: ../../src/network/netclient.cc:98
 msgid ""
@@ -2019,22 +2028,25 @@ msgid ""
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
 msgstr ""
+"Widelands se ni uspel povezati z vnesenim naslovom.\n"
+"Widelandsov strežnik ni tekel na vnesenih vratih \n"
+"ali pa strežnik sploh ni deloval."
 
 #: ../../src/network/netclient.cc:120
 msgid "Client has left the game."
-msgstr ""
+msgstr "Odjemalec je zapustil igro."
 
 #: ../../src/network/netclient.cc:198
 msgid "Client crashed and performed an emergency save."
-msgstr ""
+msgstr "Odjemalec je zasilno shranil igro zaradi sesutja."
 
 #: ../../src/network/netclient.cc:413
 msgid "Server sent a player update for a player that does not exist."
-msgstr ""
+msgstr "Strežnik je poslal posodobitev igralcu, ki ne obstaja."
 
 #: ../../src/network/netclient.cc:432
 msgid "Server sent an user update for a user that does not exist."
-msgstr ""
+msgstr "Strežnik je poslal posodobitev uporabniku, ki ne obstaja."
 
 #: ../../src/network/netclient.cc:508
 #, c-format
@@ -2042,43 +2054,45 @@ msgid ""
 "Expected a HELLO packet from server, but received command number %u. Maybe "
 "the server is running a different version of Widelands?"
 msgstr ""
+"Pričakovan je bil HELLO paket od strežnika, prejeta pa je bila ukazna "
+"številka %u. Teče na strežniku drugačna različica Widelandsa?"
 
 #: ../../src/network/netclient.cc:515
 msgid "Server uses a different protocol version"
-msgstr ""
+msgstr "Strežnik uporablja drugo različico protokola"
 
 #: ../../src/network/netclient.cc:639
 msgid "/me 's file failed md5 checksumming."
-msgstr ""
+msgstr "/me datoteka ni prestala md5 kontroliranja vsote."
 
 #: ../../src/network/netclient.cc:694
 msgid "Unexpectedly received LAUNCH command from server."
-msgstr ""
+msgstr "Nepričakovano je bil prejet ukaz LAUNCH s strani strežnika."
 
 #: ../../src/network/netclient.cc:714
 msgid "Server sent a PLAYERCOMMAND even though no game is running."
-msgstr ""
+msgstr "Strežnik je poslal ukaz PLAYERCOMMAND, čeprav ne teče nobena igra."
 
 #: ../../src/network/netclient.cc:727
 msgid "Server sent a SYNCREQUEST even though no game is running."
-msgstr ""
+msgstr "Strežnik je poslal ukaz SYNCREQUEST, čeprav ne teče nobena igra."
 
 #: ../../src/network/netclient.cc:754
 #, c-format
 msgid "Server sent an unknown command (command number %u)"
-msgstr ""
+msgstr "Strežnik je poslal neznan ukaz (številka ukaza %u)"
 
 #: ../../src/network/netclient.cc:788
 msgid "Something went wrong: "
-msgstr ""
+msgstr "Prišlo je do napake: "
 
 #: ../../src/network/netclient.cc:819
 msgid " An automatic savegame will be created."
-msgstr ""
+msgstr " Igra bo samodejno shranjena."
 
 #: ../../src/network/network_ggz.cc:281
 msgid "Closed the connection to the metaserver."
-msgstr ""
+msgstr "Povezava z glavnim strežnikom je bila prekinjena."
 
 #: ../../src/network/network_ggz.cc:375
 msgid ""
@@ -2087,102 +2101,107 @@ msgid ""
 "at http://wl.widelands.org/wiki/InternetGaming can\n"
 "be advantageous."
 msgstr ""
+"Vaš strežnik ni dosegljiv na internetu.\n"
+"Prosim poskušajte rešiti težave, v pomoč vam je lahko stran \n"
+"http://wl.widelands.org/wiki/InternetGaming"
 
 #: ../../src/network/network_ggz.cc:499
 msgid "Connected to the metaserver of:"
-msgstr ""
+msgstr "Povezan z glavnim strežnikom:"
 
 #: ../../src/network/network_ggz.cc:510
 msgid "Server MOTD:"
-msgstr ""
+msgstr "Strežnik MOTD:"
 
 #: ../../src/network/network_ggz.cc:516
 msgid "Reconnected to the metaserver."
-msgstr ""
+msgstr "Ponovno povezan z glavnim strežnikom."
 
 #: ../../src/network/network_ggz.cc:521
 msgid "NOTE: The Internet gaming implementation is in very early state."
-msgstr ""
+msgstr "OPOMBA: Implementacija internetnega igranja je še v zgodnji fazi."
 
 #: ../../src/network/network_ggz.cc:525
 msgid "Please take a look at the notes at:"
-msgstr ""
+msgstr "Prosim preberite opombe na:"
 
 #: ../../src/network/network_ggz.cc:664
 msgid " joined the metaserver."
-msgstr ""
+msgstr " povezan na glavni strežnik."
 
 #: ../../src/network/network_ggz.cc:673
 msgid " left the metaserver."
-msgstr ""
+msgstr " zapustil glavni strežnik."
 
 #: ../../src/network/nethost.cc:334
 msgid "Server has left the game."
-msgstr ""
+msgstr "Strežnik je zapustil igro."
 
 #: ../../src/network/nethost.cc:410
 msgid "The game has started just after you tried to connect."
-msgstr ""
+msgstr "Igra se je začela tik preden ste se povezali na strežnik."
 
 #: ../../src/network/nethost.cc:488
 msgid "Server has crashed and performed an emergency save."
-msgstr ""
+msgstr "Strežnik se je zrušil inzasilno shranil igro."
 
 #: ../../src/network/nethost.cc:834
 #, c-format
 msgid "Host sent player %s to the lobby!"
-msgstr ""
+msgstr "Gostitelj je poslal igralca %s v ložo!"
 
 #: ../../src/network/nethost.cc:1134
 #, c-format
 msgid "Computer %u"
-msgstr ""
+msgstr "Računalnik %u"
 
 #: ../../src/network/nethost.cc:1210
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr ""
+"Opozorilo: %s uporablja različico: %s, medtem ko gostitelj uporablja "
+"različico: %s"
 
 #: ../../src/network/nethost.cc:1257
 #, c-format
 msgid "%s has joined the game"
-msgstr ""
+msgstr "%s se je pridružil igri"
 
 #: ../../src/network/nethost.cc:1281
 msgid "Client reports time to host that is running backwards."
-msgstr ""
+msgstr "Odjemalec poroča gostitelju čas, ki teče nazaj."
 
 #: ../../src/network/nethost.cc:1284
 msgid "Client simulates beyond the game time allowed by the host."
-msgstr ""
+msgstr "Odjemalec simulira dlje od časa, ki ga dovoljuje gostitelj."
 
 #: ../../src/network/nethost.cc:1288
 msgid "Client did not submit sync report in time."
-msgstr ""
+msgstr "Odjemalec ni pravočasno poslal sinhronizacijskega poročila."
 
 #: ../../src/network/nethost.cc:1468
 msgid "Client and host have become desynchronized."
-msgstr ""
+msgstr "Odjemalec in gostitelj sta postala nesinhronizirana."
 
 #: ../../src/network/nethost.cc:1510
 msgid "New User"
-msgstr ""
+msgstr "Nov uporabnik"
 
 #: ../../src/network/nethost.cc:1515
 msgid "The game has already started."
-msgstr ""
+msgstr "Igra se je že začela."
 
 #: ../../src/network/nethost.cc:1533
 msgid "Connection to client lost."
-msgstr ""
+msgstr "Povezava z odjemalcem izgubljena."
 
 #: ../../src/network/nethost.cc:1547
 msgid "Client sent malformed commands: "
-msgstr ""
+msgstr "Odjemalec je posla neveljavne ukaze: "
 
 #: ../../src/network/nethost.cc:1580
 msgid "Game is running already, but client has not connected fully"
-msgstr ""
+msgstr "Igra že teče, odjemalec pa se ni uspel popolnoma povezati"
 
 #: ../../src/network/nethost.cc:1584
 #, c-format
@@ -2190,104 +2209,111 @@ msgid ""
 "First command sent by client is %u instead of HELLO. Most likely the client "
 "is running an incompatible version."
 msgstr ""
+"Odjemalec je kot prvi ukaz poslal %u namesto HELLO. Zelo verjetno na "
+"odjemalcu teče nezdružljiva različica igre."
 
 #: ../../src/network/nethost.cc:1590
 msgid "Server uses a different protocol version."
-msgstr ""
+msgstr "Strežnik uporablja drugo različico protokola."
 
 #: ../../src/network/nethost.cc:1672
 msgid "Client sent TIME command even though game is not running."
-msgstr ""
+msgstr "Odjemalec je poslal ukaz TIME, čeprav igra ne teče."
 
 #: ../../src/network/nethost.cc:1680
 msgid "Client sent PLAYERCOMMAND command even though game is not running."
-msgstr ""
+msgstr "Odjemalec je poslal ukaz PLAYERCOMMAND, čeprav igra ne teče."
 
 #: ../../src/network/nethost.cc:1692
 #, c-format
 msgid "Client %u (%u) sent a playercommand (%i) for a different player (%i)."
 msgstr ""
+"Odjemalec %u (%u)  je poslal ukaz PLAYERCOMMAND (%i) za drugega igralca (%i)."
 
 #: ../../src/network/nethost.cc:1701
 msgid "Client sent unexpected synchronization report."
-msgstr ""
+msgstr "Odjemalec je poslal nepričakovano sinhronizacijsko poročilo."
 
 #: ../../src/network/nethost.cc:1737 ../../src/network/nethost.cc:1749
 msgid "Client requests file altough none is available to send."
-msgstr ""
+msgstr "Odjemalec zahteva datoteka, čeprav jo nihče ne more poslati."
 
 #: ../../src/network/nethost.cc:1739
 #, c-format
 msgid "Started to send file %s to %s!"
-msgstr ""
+msgstr "Začetek pošiljanja datoteke %s do %s!"
 
 #: ../../src/network/nethost.cc:1760
 msgid "Client requests file part that does not exist."
-msgstr ""
+msgstr "Odjemalec zahteva del datoteke, ki ne obstaja."
 
 #: ../../src/network/nethost.cc:1763
 #, c-format
 msgid "Completed transfer of file %s to %s"
-msgstr ""
+msgstr "Zaključen prenos datoteke %s do %s"
 
 #: ../../src/network/nethost.cc:1771
 #, c-format
 msgid "Sending part %u/%u of file %s to %s"
-msgstr ""
+msgstr "Pošiljam del %u/%u  datoteke %s do %s"
 
 #: ../../src/network/nethost.cc:1781
 #, c-format
 msgid "Client sent unknown command number %u"
-msgstr ""
+msgstr "Odjemalec je poslal neznano številko ukaza %u"
 
 #: ../../src/network/nethost.cc:1837
 #, c-format
 msgid "%s has left the game (%s)"
-msgstr ""
+msgstr "%s je zapustil igro (%s)"
 
 #: ../../src/trigger/trigger_military_influence.cc:47
 #, c-format
 msgid "(military influence): %s"
-msgstr ""
+msgstr "(vojaški vpliv): %s"
 
 #: ../../src/trigger/trigger_time.cc:46
 #, c-format
 msgid "(time): %s"
-msgstr ""
+msgstr "(čas): %s"
 
 #: ../../src/trigger/trigger_factory.cc:41
 msgid "Building Trigger"
-msgstr ""
+msgstr "Sprožilec gradnje"
 
 #: ../../src/trigger/trigger_factory.cc:43
 msgid ""
 "Triggers when the player has the specified number of buildings of the "
 "specified type in the specified area."
 msgstr ""
+"Sproži se, ko igralec zgradi določeno število zgradb določenega tipa na "
+"določenem ozemlju."
 
 #: ../../src/trigger/trigger_factory.cc:48
 msgid "Defeated Player Trigger"
-msgstr ""
+msgstr "Prožilec ob porazu igralca"
 
 #: ../../src/trigger/trigger_factory.cc:50
 msgid ""
 "Triggers when the player was defeated. The trigger is set to true, if the "
 "player has 0 workers."
-msgstr ""
+msgstr "Sproži se, ko je igralec poražen, natančneje ko ima 0 delavcev."
 
 #: ../../src/trigger/trigger_factory.cc:55
 msgid "Military influence Trigger"
-msgstr ""
+msgstr "Vojaški prožilec"
 
 #: ../../src/trigger/trigger_factory.cc:57
 msgid ""
 "Triggers when the player has some (or highest) military influence over the "
 "specified number of nodes in the specified area."
 msgstr ""
+"Sproži se, ko ima igralec vojaški vpliv nad določenim številom vozlišč na "
+"določenem ozemlju."
 
 #: ../../src/trigger/trigger_factory.cc:62
 msgid "Ownership Trigger"
-msgstr ""
+msgstr "Lastniški prožilec"
 
 #: ../../src/trigger/trigger_factory.cc:64
 msgid ""
@@ -2295,20 +2321,25 @@ msgid ""
 "in the specified area. Unless it is a one-time trigger, it becomes unset "
 "when this no longer holds."
 msgstr ""
+"Sproži se, ko ima igralec v lasti določeno število lokacij na določenem "
+"ozemlju.  Razen če je prožilec enkraten, se ob izgubi pogleda povrne na "
+"prvotno stanje."
 
 #: ../../src/trigger/trigger_factory.cc:70
 msgid "Time Trigger"
-msgstr ""
+msgstr "Časovni prožilec"
 
 #: ../../src/trigger/trigger_factory.cc:72
 msgid ""
 "Triggers at a certain time. The time can be set to a value in ms. If the "
 "trigger has no time is set, a time can be set for it with an event."
 msgstr ""
+"Sproži se ob določenem času, ki je nastavljena vrednost v ms. Če prožilec "
+"nima nastavljene časovne vrednosti, mu ga lahko nastavi dogodek."
 
 #: ../../src/trigger/trigger_factory.cc:78
 msgid "Vision Trigger"
-msgstr ""
+msgstr "Prožilec pogleda"
 
 #: ../../src/trigger/trigger_factory.cc:80
 msgid ""
@@ -2316,10 +2347,13 @@ msgid ""
 "of locations in the specified area. Unless it is a one-time trigger, it "
 "becomes unset when this no longer holds."
 msgstr ""
+"Sproži se, ko igralec vidi (ali je videl) vsaj določeno število lokacij na "
+"določenem območju. Razen če je prožilec enkraten, se ob izgubi pogleda "
+"povrne na prvotno stanje."
 
 #: ../../src/trigger/trigger_factory.cc:86
 msgid "Message is Read or Archvied Trigger"
-msgstr ""
+msgstr "Prožilnik ob prebranem ali arhiviranem sporočilu"
 
 #: ../../src/trigger/trigger_factory.cc:88
 msgid ""
@@ -2327,21 +2361,23 @@ msgid ""
 "status Read or Archived, which means that the player has changed the status "
 "of the message."
 msgstr ""
+"Sproži se, ko se status sporočila spremeni iz Novo v Prebrano ali "
+"Arhivirano, kar pomeni da je igralec spremenil status sporočila."
 
 #: ../../src/trigger/trigger_ownership.cc:45
 #, c-format
 msgid "(ownership): %s"
-msgstr ""
+msgstr "(lastništvo): %s"
 
 #: ../../src/trigger/trigger_vision.cc:52
 #, c-format
 msgid "(vision): %s"
-msgstr ""
+msgstr "(pogled): %s"
 
 #: ../../src/trigger/trigger_defeated.cc:46
 #, c-format
 msgid "player is %u, but map has only %u players"
-msgstr ""
+msgstr "igralec je %u, tod na zemljevidu je le %u igralcev"
 
 #: ../../src/trigger/trigger_defeated.cc:52
 #, c-format
@@ -2351,12 +2387,12 @@ msgstr "(poražen): %s"
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:58
 #, c-format
 msgid "player %u's message %u does not exist (%u is highest)"
-msgstr ""
+msgstr "igralčevo (%u) sporočilo %u ne obstaja (%u je najvišje)"
 
 #: ../../src/trigger/trigger_message_is_read_or_archived.cc:64
 #, c-format
 msgid "(message_is_read_or_archived): %s"
-msgstr ""
+msgstr "(sporočilo_je_prebrano_ali_arhivirano): %s"
 
 #: ../../src/wui/interactive_dedicated_server.cc:53
 #: ../../src/wui/interactive_player.cc:174
@@ -2806,15 +2842,15 @@ msgstr "Opazuj polje v ločenem oknu"
 
 #: ../../src/wui/fieldaction.cc:457
 msgid "Toggle building statistics display"
-msgstr ""
+msgstr "Preklopi na prikaz statistike zgradb"
 
 #: ../../src/wui/fieldaction.cc:463
 msgid "Toggle building label display"
-msgstr ""
+msgstr "Preklopi na prikaz gradnje"
 
 #: ../../src/wui/fieldaction.cc:470
 msgid "Debug window"
-msgstr ""
+msgstr "Razhroščevalno okno"
 
 #: ../../src/wui/fieldaction.cc:478 ../../src/wui/fieldaction.cc:621
 msgid "Build roads"
@@ -2846,7 +2882,7 @@ msgstr "Prekliči cesto"
 
 #: ../../src/wui/game_debug_ui.cc:239
 msgid "Debug Field"
-msgstr ""
+msgstr "Razhroščevalno polje"
 
 #: ../../src/wui/game_debug_ui.cc:282
 #, c-format
@@ -2963,11 +2999,11 @@ msgstr "Skoči na neproduktivne: "
 
 #: ../../src/wui/building_statistics_menu.cc:111
 msgid "Prod"
-msgstr ""
+msgstr "Sunek"
 
 #: ../../src/wui/building_statistics_menu.cc:112
 msgid "Owned"
-msgstr ""
+msgstr "V lasti"
 
 #: ../../src/wui/building_statistics_menu.cc:113
 msgid "Build"
@@ -3092,7 +3128,7 @@ msgstr "OT"
 
 #: ../../src/wui/building_ui.cc:1547 ../../src/wui/building_ui.cc:1735
 msgid "EV"
-msgstr ""
+msgstr "TI"
 
 #: ../../src/wui/building_ui.cc:1548 ../../src/wui/building_ui.cc:1736
 msgid "Level"
@@ -3105,7 +3141,7 @@ msgstr "Zmogljivost: %2u"
 
 #: ../../src/wui/building_ui.cc:1793
 msgid "xx"
-msgstr ""
+msgstr "xx"
 
 #: ../../src/editor/editorinteractive.cc:64
 msgid "Menu"
@@ -3117,7 +3153,7 @@ msgstr "Orodje"
 
 #: ../../src/editor/editorinteractive.cc:70
 msgid "Toolsize"
-msgstr ""
+msgstr "Velikostorodij"
 
 #: ../../src/editor/editorinteractive.cc:79
 msgid "Players"
@@ -3196,6 +3232,8 @@ msgid ""
 "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) or "
 "atrTotal (%u) but found unknown attribute value (%u)"
 msgstr ""
+"pričakovano je bilo atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade "
+"(%u) ali atrTotal (%u), dobljena pa neznana vrednost. (%u)"
 
 #: ../../src/logic/constructionsite.cc:168
 #, c-format
@@ -3243,7 +3281,7 @@ msgstr "%sSovražnik je premagal vaše vojake pri %s.</p></rt>"
 
 #: ../../src/logic/militarysite.cc:580
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Vojaška zgradba izgubljena!"
 
 #: ../../src/logic/militarysite.cc:653
 #, c-format
@@ -3257,12 +3295,12 @@ msgstr "Sovražnik je premagan!"
 #: ../../src/logic/militarysite.cc:708
 #, c-format
 msgid "%sYour %s discovered an aggressor.</p>"
-msgstr ""
+msgstr "%sVaš %s je odkrit s strani sovražnika.</p>"
 
 #: ../../src/logic/militarysite.cc:709
 #, c-format
 msgid "%sYour %s is under attack.</p>"
-msgstr ""
+msgstr "%sVašr %s je napaden.</p>"
 
 #: ../../src/logic/militarysite.cc:717
 msgid "You are under attack"
