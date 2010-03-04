@@ -113,7 +113,7 @@ empty. The message popups the message window when it is received.
 The complete message rendered looks like this on my system:
 
 .. image:: images/fancymsg.png
-   :scale: 100 %
+   :scale: 100
    :alt: sample rendering
    :align: center
 
