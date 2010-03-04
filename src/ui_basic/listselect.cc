@@ -356,7 +356,7 @@ void BaseListselect::draw(RenderTarget & odst)
 	// Create a off-screen surface 
 	m_cache_pid = g_gr->create_surface_a(odst.get_w(), odst.get_h());
 
-	m_cache_pid->surface->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 80));
+	m_cache_pid->surface->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
 
 	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
 
@@ -390,7 +390,7 @@ void BaseListselect::draw(RenderTarget & odst)
 			assert(2 <= get_eff_w());
 			// Make the area a bit more white and more transparent
 			if( r.w > 0 and r.h > 0 )
-				m_cache_pid->surface->fill_rect(r, RGBAColor(200, 200, 200, 30));
+				m_cache_pid->surface->fill_rect(r, RGBAColor(100, 100, 100, 80));
 			//dst.brighten_rect
 			//(Rect(Point(1, y), get_eff_w() - 2, m_lineheight),
 			// -ms_darken_value*2);

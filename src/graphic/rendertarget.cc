@@ -243,7 +243,7 @@ void RenderTarget::blit_a(const Point dst, const PictureID picture, bool enable_
 	{
 		SDL_Surface * surf = g_gr->get_picture_surface(picture)->get_sdl_surface();
 		uint32_t flags = surf->flags;
-		SDL_SetAlpha(surf, enable_alpha & SDL_SRCALPHA, 0);
+		SDL_SetAlpha(surf, enable_alpha && SDL_SRCALPHA, 0);
 		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()));
 		SDL_SetAlpha(surf, flags & SDL_SRCALPHA, 0);
 	}

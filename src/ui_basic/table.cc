@@ -259,7 +259,11 @@ void Table<void *>::draw(RenderTarget & odst)
 		return;
 	}
 
-	m_cache_pid = g_gr->create_surface(odst.get_w(), odst.get_h());
+	m_cache_pid = g_gr->create_surface_a(odst.get_w(), odst.get_h());
+
+	m_cache_pid->surface->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 80));
+
+	SDL_SetAlpha(m_cache_pid->surface->get_sdl_surface(), SDL_SRCALPHA, 0);
 	
 	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
   
@@ -268,7 +272,7 @@ void Table<void *>::draw(RenderTarget & odst)
 	uint32_t idx = m_scrollpos / lineheight;
 	int32_t y = 1 + idx * lineheight - m_scrollpos + m_headerheight;
 
-	dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
+	//dst.brighten_rect(Rect(Point(0, 0), get_w(), get_h()), ms_darken_value);
 
 	while (idx < m_entry_records.size()) {
 		if (y >= static_cast<int32_t>(get_h()))
@@ -309,7 +313,7 @@ void Table<void *>::draw(RenderTarget & odst)
 					 /
 					 2);
 			if (entry_picture != g_gr->get_no_picture())
-				dst.blit(point, entry_picture);
+				dst.blit_a(point, entry_picture, false);
 			else
 				UI::g_fh->draw_string
 					(dst,
