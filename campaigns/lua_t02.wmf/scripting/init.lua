@@ -90,13 +90,24 @@ function connected_road(p, start, cmd, g_create_carriers)
    end
 end
 
+function place_buildings_with_workers(p, ...)
+   for idx,bdescr in ipairs({...}) do
+      print(idx,bdescr)
+      b = p:place_building(bdescr[1], wl.map.Field(bdescr[2],bdescr[3]))
+      b:warp_workers(b.valid_workers)
+   end
+end
 connected_road(p, hq_pos.brn.immovable, "r,r|br,r|r,r")
 connected_road(p, hq_pos.brn.immovable, "l,l|l,bl,bl|br,r|br,r|r,tr|tr,tr,tr")
 
 -- Place some buildings from the last map
--- TODO: add workers to these buildings
-p:place_building("lumberjacks_hut", wl.map.Field(15,11))
-p:place_building("lumberjacks_hut", wl.map.Field(12,13))
+place_buildings_with_workers(p,
+   {"lumberjacks_hut", 15, 11},
+   {"lumberjacks_hut", 12, 13},
+   {"quarry", 8, 12},
+   {"rangers_hut", 9, 13}
+) 
+
 p:place_building("quarry", wl.map.Field(8,12))
 p:place_building("rangers_hut", wl.map.Field(9,13))
 

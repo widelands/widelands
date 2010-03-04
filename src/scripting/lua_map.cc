@@ -455,7 +455,7 @@ Road
 */
 const char L_Road::className[] = "Road";
 const MethodType<L_Road> L_Road::Methods[] = {
-	METHOD(L_Road, warp_worker),
+	METHOD(L_Road, warp_workers),
 	{0, 0},
 };
 const PropertyType<L_Road> L_Road::Properties[] = {
@@ -463,6 +463,7 @@ const PropertyType<L_Road> L_Road::Properties[] = {
 	PROP_RO(L_Road, start_flag),
 	PROP_RO(L_Road, end_flag),
 	PROP_RO(L_Road, workers),
+	PROP_RO(L_Road, valid_workers),
 	PROP_RO(L_Road, type),
 	{0, 0, 0},
 };
@@ -525,6 +526,21 @@ int L_Road::get_workers(lua_State * L) {
 }
 
 /* RST
+	.. attribute:: valid_workers
+
+		(RO) an array of names of workers that are allowed to work in this
+		productionsite. If of one type more than one is allowed, it will appear
+		more than once.
+*/
+int L_Road::get_valid_workers(lua_State * L) {
+	lua_newtable(L);
+	lua_pushuint32(L, 1);
+	lua_pushstring(L, "carrier");
+	lua_rawset(L, -3);
+	return 1;
+}
+
+/* RST
 	.. attribute:: type
 
 		(RO) Type of road. Can be any either of:
@@ -552,34 +568,37 @@ int L_Road::get_type(lua_State * L) {
  */
 
 /* RST
-	.. method:: warp_worker(name[, slot = 0])
+	.. method:: warp_workers(workers)
 
 		Immediately creates a worker out of thin air and
-		assigns it the to the road. Slot defines which carrier should be warped
-		in, for slot 0, only "carrier" is valid. For slot 1 any valid carrier
-		worker is allowed.
+		assigns it the to the road. Currently only carriers can
+		be created like this (e.g. no 'oxes' and therelike).
 
-		:arg name: name of this worker, e.g. "carrier", "ox"
-		:type name: :class:`name`
+		:arg names: array of names of workers, e.g. "carrier", "ox"
+		:type name: :class:`array`
+
+		:seealso: wl.map.ProductionSite.warp_workers
 */
-// TODO: this function should only a name
-int L_Road::warp_worker(lua_State * L) {
-	std::string name = "carrier";
-	if (lua_gettop(L) > 1)
-		name = luaL_checkstring(L, 2);
-	uint32_t slot = 0;
-	if (lua_gettop(L) > 2)
-		slot = luaL_checkuint32(L, 3);
+int L_Road::warp_workers(lua_State * L) {
+	if (lua_gettop(L) != 2)
+		return report_error(L, "Only one carrier can be warped here!");
 
-	if (slot == 0 && name != "carrier")
-		return report_error(L, "Only 'carrier' is allowed in slot 0!\n");
-	if (slot > 1)
-		return report_error(L, "slot must by <= 1!");
+	luaL_checktype(L, 2, LUA_TTABLE);
+
+	lua_pushuint32(L, 1);
+	lua_rawget(L, -2);
+	std::string name = luaL_checkstring(L, -1);
+
+	if (name != "carrier")
+		return report_error(L, "Only 'carrier' is allowed currently!\n");
 
 	Game & g = get_game(L);
 	Map & map = g.map();
 
 	Road * r = get(g, L);
+
+	if (r->get_workers().size())
+		return report_error(L, "No space for this worker!");
 
 	Flag & start = r->get_flag(Road::FlagStart);
 
@@ -606,7 +625,7 @@ int L_Road::warp_worker(lua_State * L) {
 
 	carrier.start_task_road(g);
 
-	r->assign_carrier(carrier, slot);
+	r->assign_carrier(carrier, 0);
 
 	return 0;
 }
@@ -839,7 +858,7 @@ ProductionSite
 */
 const char L_ProductionSite::className[] = "ProductionSite";
 const MethodType<L_ProductionSite> L_ProductionSite::Methods[] = {
-	METHOD(L_ProductionSite, warp_worker),
+	METHOD(L_ProductionSite, warp_workers),
         // METHOD(L_ProductionSite, set_wares),
         // METHOD(L_ProductionSite, get_wares),
         // METHOD(L_ProductionSite, set_workers),
@@ -864,7 +883,6 @@ const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
 		more than once.
 */
 // TODO: needs testing
-// TODO: should be in road too
 int L_ProductionSite::get_valid_workers(lua_State * L) {
 	Game & g = get_game(L);
 	ProductionSite * ps = get(g, L);
@@ -891,16 +909,17 @@ int L_ProductionSite::get_valid_workers(lua_State * L) {
  ==========================================================
  */
 /* RST
-	.. method:: warp_worker(workers)
+	.. method:: warp_workers(workers)
 
 		Warp workers into this building. The workers are created from thin air.
 
 		:arg workers: array of worker names. If more than one worker of this type
 			should be warped, the worker has to be named more than once.
+
+		:seealso: wl.map.Road.warp_workers
 */
 // TODO: this needs testing badly
-// TODO: harmonize the API with Road
-int L_ProductionSite::warp_worker(lua_State * L) {
+int L_ProductionSite::warp_workers(lua_State * L) {
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 
@@ -924,7 +943,7 @@ int L_ProductionSite::warp_worker(lua_State * L) {
 				if (!ps->warp_worker(g, *wdes))
 					success = true;
 				else
-					return report_error(L, "TODO: errmsg");
+					return report_error(L, "No space left for this worker");
 			}
 		}
 		if (!success)
