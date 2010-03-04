@@ -510,7 +510,8 @@ int L_Road::get_end_flag(lua_State * L) {
 	.. attribute:: workers
 
 		(RO) An array of names of carriers that work on this road.  Note that you
-		cannot change this directly, use add_workers to overwrite any worker.
+		cannot change this directly, use :meth:`warp_workers` to overwrite any
+		worker.
 */
 int L_Road::get_workers(lua_State * L) {
 	const PlayerImmovable::Workers & ws = get(get_game(L), L)->get_workers();
@@ -859,14 +860,11 @@ ProductionSite
 const char L_ProductionSite::className[] = "ProductionSite";
 const MethodType<L_ProductionSite> L_ProductionSite::Methods[] = {
 	METHOD(L_ProductionSite, warp_workers),
-        // METHOD(L_ProductionSite, set_wares),
-        // METHOD(L_ProductionSite, get_wares),
-        // METHOD(L_ProductionSite, set_workers),
-        // METHOD(L_ProductionSite, get_workers),
 	{0, 0},
 };
 const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
 	PROP_RO(L_ProductionSite, valid_workers),
+	PROP_RO(L_ProductionSite, workers),
 	{0, 0, 0},
 };
 
@@ -882,7 +880,6 @@ const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
 		productionsite. If of one type more than one is allowed, it will appear
 		more than once.
 */
-// TODO: needs testing
 int L_ProductionSite::get_valid_workers(lua_State * L) {
 	Game & g = get_game(L);
 	ProductionSite * ps = get(g, L);
@@ -903,6 +900,25 @@ int L_ProductionSite::get_valid_workers(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: workers
+
+		(RO) An array of names of workers that work here.  Note that you
+		cannot change this directly, use warp_workers to overwrite any worker.
+*/
+int L_ProductionSite::get_workers(lua_State * L) {
+	const PlayerImmovable::Workers & ws = get(get_game(L), L)->get_workers();
+
+	lua_createtable(L, ws.size(), 0);
+	uint32_t widx = 1;
+	container_iterate_const(PlayerImmovable::Workers, ws, w) {
+		lua_pushuint32(L, widx++);
+		lua_pushstring(L, (*w.current)->descr().name().c_str());
+		lua_rawset(L, -3);
+	}
+	return 1;
+}
+
 /*
  ==========================================================
  LUA METHODS
@@ -918,7 +934,6 @@ int L_ProductionSite::get_valid_workers(lua_State * L) {
 
 		:seealso: wl.map.Road.warp_workers
 */
-// TODO: this needs testing badly
 int L_ProductionSite::warp_workers(lua_State * L) {
 
 	luaL_checktype(L, 2, LUA_TTABLE);
@@ -940,9 +955,10 @@ int L_ProductionSite::warp_workers(lua_State * L) {
 		bool success = false;
 		container_iterate_const(Ware_Types, working_positions, i) {
 			if (i.current->first == wdes->worker_index()) {
-				if (!ps->warp_worker(g, *wdes))
+				if (!ps->warp_worker(g, *wdes)) {
 					success = true;
-				else
+					break;
+				} else
 					return report_error(L, "No space left for this worker");
 			}
 		}

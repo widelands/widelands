@@ -432,6 +432,7 @@ int ProductionSite::warp_worker(Game & game, const Worker_Descr & wdes) {
 		delete current->worker_request;
 		current->worker_request = 0;
 		assigned = true;
+		break;
 	}
 	if (not assigned)
 		return -1;
