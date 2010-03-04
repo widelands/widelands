@@ -95,6 +95,14 @@ void Sound_Handler::init()
 	const uint16_t bufsize = 1024;
 #endif
 
+	if(m_nosound)
+	{
+		set_disable_music(true);
+		set_disable_fx(true);
+		m_lock_audio_disabling = true;
+		return;
+	}
+
 	if
 		(SDL_InitSubSystem(SDL_INIT_AUDIO) == -1
 		 or
@@ -190,6 +198,9 @@ void Sound_Handler::load_fx
 
 	assert(g_fs);
 
+	if(m_nosound)
+		return;
+
 	g_fs->FindFiles(dir, fxname + "_??.ogg." + i18n::get_locale(), &files);
 	if (files.empty())
 		g_fs->FindFiles(dir, fxname + "_??.ogg", &files);
@@ -223,6 +234,10 @@ void Sound_Handler::load_one_fx
 	(char const * const filename, std::string const & fx_name)
 {
 	FileRead fr;
+
+	if(m_nosound)
+		return;
+
 	if (not fr.TryOpen(*g_fs, filename)) {
 		log("WARNING: Could not open %s for reading!\n", filename);
 		return;
@@ -260,6 +275,9 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
 	//x, y resolutions of game window
 	Widelands::FCoords fposition;
 
+	if(m_nosound)
+		return -1;
+
 	assert(m_the_game);
 	assert(position);
 
@@ -293,6 +311,9 @@ bool Sound_Handler::play_or_not
 	bool allow_multiple = false; //  convenience for easier code reading
 	float evaluation; //temporary to calculate single influences
 	float probability; //weighted total of all influences
+
+	if(m_nosound)
+		return false;
 
 	//probability that this fx gets played; initially set according to priority
 
@@ -373,6 +394,9 @@ void Sound_Handler::play_fx
 	 Widelands::Coords   const map_position,
 	 uint8_t             const priority)
 {
+	if(m_nosound)
+		return;
+
 	play_fx(fx_name, stereo_position(map_position), priority);
 }
 
@@ -388,6 +412,9 @@ void Sound_Handler::play_fx
 	 int32_t             const stereo_pos,
 	 uint8_t             const priority)
 {
+	if(m_nosound)
+		return;
+
 	assert(stereo_pos >= -1);
 	assert(stereo_pos <= 254);
 
@@ -442,6 +469,9 @@ void Sound_Handler::register_song
 	filenameset_t files;
 	filenameset_t::const_iterator i;
 
+	if(m_nosound)
+		return;
+
 	assert(g_fs);
 
 	if (recursive)
@@ -472,7 +502,7 @@ void Sound_Handler::register_song
 void Sound_Handler::start_music
 	(std::string const & songset_name, int32_t fadein_ms)
 {
-	if (get_disable_music())
+	if (get_disable_music() or m_nosound)
 		return;
 
 	if (fadein_ms == 0) fadein_ms = 50; //  avoid clicks
@@ -502,7 +532,7 @@ void Sound_Handler::start_music
 */
 void Sound_Handler::stop_music(int32_t fadeout_ms)
 {
-	if (get_disable_music())
+	if (get_disable_music() or m_nosound)
 		return;
 
 	if (fadeout_ms == 0) fadeout_ms = 50; //  avoid clicks
@@ -524,6 +554,9 @@ void Sound_Handler::change_music
 	(std::string const & songset_name,
 	 int32_t const fadeout_ms, int32_t const fadein_ms)
 {
+	if(m_nosound)
+		return;
+
 	std::string s = songset_name;
 
 	if (s == "")
@@ -592,7 +625,7 @@ void Sound_Handler::set_disable_fx(bool const disable)
  * \param volume The new music volume.
  */
 void Sound_Handler::set_music_volume(int32_t volume) {
-	if (not m_lock_audio_disabling) {
+	if (not m_lock_audio_disabling and not m_nosound) {
 		m_music_volume = volume;
 		Mix_VolumeMusic(volume);
 		g_options.pull_section("global").set_int("music_volume", volume);
@@ -607,7 +640,7 @@ void Sound_Handler::set_music_volume(int32_t volume) {
  * \param volume The new music volume.
  */
 void Sound_Handler::set_fx_volume(int32_t volume) {
-	if (not m_lock_audio_disabling) {
+	if (not m_lock_audio_disabling and not m_nosound) {
 		m_fx_volume = volume;
 		Mix_Volume(-1, volume);
 		g_options.pull_section("global").set_int("fx_volume", volume);
