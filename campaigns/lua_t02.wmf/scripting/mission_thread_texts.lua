@@ -77,3 +77,81 @@ _ [[ "Old man? Disrespectful youth!" ]] ..
 "</p></rt>"
 }
 
+
+-- =======================================================================
+--                                OBJECTIVES                                
+-- =======================================================================
+obj_claim_northeastern_rocks = {
+   name = "mission quarry",
+   title =_"Expand north-east and build a quarry",
+   body = "<rt><p>" ..
+_"* Build military buildings (like sentries and strongholds) to expand your territory.<br> Get to the rocks northeast from you and build a quarry there." ..
+"</p></rt>"
+}
+
+obj_build_mines = {
+name="mission mines",
+title=_"Start building mines on the mountain",
+body="<rt><p>" .. 
+_"* Build a coal mine and an iron ore mine.<br> Place a flag up on the mountain's flank to the east (on mountain terrain though, not mountain meadow). When you click at implied flag you can send Geologists there. Because the flag is on mountains, the Geologists will search for ores; otherwise, they will search for water. Then build a mine for both kinds of resource he will find, choosing the mine to be built appropriately:<br> Black - coal<br> Red - iron ore<br> Yellow - gold<br> Grey - granite<br> Mines may only be built on mountain terrain. Suitable places for mines are displayed as hammer and pick." .. 
+"</p></rt>"
+}
+
+-- TODO: objectives
+obj_basic_food = {
+   name="basic food began",
+   title=_"Provide your miners with food",
+   body="<rt><p>" .. 
+_"* Build a hunter, a gamekeeper and a tavern.<br> In order to work, your miners need food.<br> A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br> This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow." ..
+"</p></rt>"
+}
+
+obj_begin_farming = {
+name="farming began",
+title=_"Bake bread",
+body="<rt><p>" ..
+_"* Build a well, a farm and a bakery.<br> Other ways to produce food - different kinds of food - are fishers and hunters. The wheat of the farms has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source." ..
+"</p></rt>"
+}
+
+obj_refine_ores = {
+name="refining began",
+title=_"Refine your mined resources",
+body="<rt><p>" ..
+_"* Build a smelting works. The iron ore your miners bring up is not usable yet - it has to be melted into iron first." ..
+"</p></rt>"
+}
+
+obj_enhance_buildings = {
+name="enhance buildings",
+title=_"Enhance Buildings",
+body="<rt><p>" ..
+_"* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath it; then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate the enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish). You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which strategy you prefer." ..
+"</p></rt>"
+}
+
+-- TODO rest is not yet done
+-- [Better Material I]
+-- name=_"Build a wood hardener"
+-- descr=_""<rt><p>"
+-- _"* Build a wood hardener.<br> Bigger and better buildings - including all military ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, as without it you cannot expand."
+-- "</p></rt>""
+-- visible=false
+-- trigger=Built Hardener
+--
+-- [Better Material II]
+-- name=_"Build a lime kiln and coal economy"
+-- descr=_""<rt><p>"
+-- _"* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better buildings may require also other improved materials besides blackwood. One of those is grout, which is produced out of raw stone, water and coal by a lime-burner. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain, by clicking on the implied flag and the Geologist-symbol in the consequently appearing menu. Coal can be obtained by building a charcoal burner or a coal mine."
+-- "</p></rt>""
+-- visible=false
+-- trigger=Mission Grindstone
+--
+-- [Better Material III]
+-- name=_"Build a fernery"
+-- descr=_""<rt><p>"
+-- _"* Build a fernery.<br> The third material necessary for improved buildings is thatch reed, used to cover roofs. Thatch reed is planted by a fernery, around the building."
+-- "</p></rt>""
+-- visible=false
+-- trigger=Mission Fernery
+--
