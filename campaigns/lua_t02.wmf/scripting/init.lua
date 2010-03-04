@@ -83,7 +83,7 @@ function connected_road(p, start, cmd, g_create_carriers)
          r = p:place_road(start, unpack(moves))
          start = r.end_flag
          if create_carriers then
-            r:warp_worker("carrier")
+            r:warp_workers{"carrier"}
          end
          moves = {}
       end
@@ -94,6 +94,8 @@ function place_buildings_with_workers(p, ...)
    for idx,bdescr in ipairs({...}) do
       print(idx,bdescr)
       b = p:place_building(bdescr[1], wl.map.Field(bdescr[2],bdescr[3]))
+      print(#b.valid_workers)
+      print(b.valid_workers[1])
       b:warp_workers(b.valid_workers)
    end
 end
@@ -107,9 +109,6 @@ place_buildings_with_workers(p,
    {"quarry", 8, 12},
    {"rangers_hut", 9, 13}
 ) 
-
-p:place_building("quarry", wl.map.Field(8,12))
-p:place_building("rangers_hut", wl.map.Field(9,13))
 
 use("map", "mission_thread")
 
