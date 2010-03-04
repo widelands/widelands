@@ -64,7 +64,7 @@ hq:set_workers{
    ranger=1,
    stonemason=2
 }
--- TODO: soldiers. 0/0/0/0=45
+hq:set_soldiers({0,0,0,0}, 45)
 
 -- ============
 -- Build roads 

@@ -91,3 +91,40 @@ function warehouse_tests:test_set_get_workers_set_is_not_increase()
    assert_equal(20, k.lumberjack)
 end
 
+
+-- =========
+-- Soldiers 
+-- =========
+function warehouse_tests:test_set_soldiers()
+   self.w:set_soldiers({0,0,0,0}, 100)
+   -- TODO: there is no way to verify this ATM
+end
+function warehouse_tests:test_set_soldiers_by_list()
+   self.w:set_soldiers{
+      [{0,0,0,0}] = 1,
+      [{1,1,0,1}] = 2,
+   }
+   -- TODO: there is no way to verify this ATM
+end
+function warehouse_tests:test_set_soldiers_hp_too_high()
+   assert_error("hp too high", function()
+      self.w:set_soldiers({10,0,0,0}, 1)
+   end)
+end
+function warehouse_tests:test_set_soldiers_attack_too_high()
+   assert_error("attack too high", function()
+      self.w:set_soldiers({0,10,0,0}, 1)
+   end)
+end
+function warehouse_tests:test_set_soldiers_defense_too_high()
+   assert_error("defense too high", function()
+      self.w:set_soldiers({0,0,10,0}, 1)
+   end)
+end
+function warehouse_tests:test_set_soldiers_evade_too_high()
+   assert_error("evade too high", function()
+      self.w:set_soldiers({0,0,0,10}, 1)
+   end)
+end
+
+

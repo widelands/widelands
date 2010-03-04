@@ -252,6 +252,8 @@ public:
 	int get_wares(lua_State*);
 	int set_workers(lua_State*);
 	int get_workers(lua_State*);
+	int set_soldiers(lua_State*);
+	// int get_soldiers(lua_State*);
 
 	/*
 	 * C Methods

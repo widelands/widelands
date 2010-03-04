@@ -28,6 +28,7 @@
 #include "logic/maphollowregion.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
+#include "logic/soldier.h"
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
 #include "wui/mapviewpixelconstants.h"
@@ -708,6 +709,8 @@ const MethodType<L_Warehouse> L_Warehouse::Methods[] = {
 	METHOD(L_Warehouse, get_wares),
 	METHOD(L_Warehouse, set_workers),
 	METHOD(L_Warehouse, get_workers),
+	METHOD(L_Warehouse, set_soldiers),
+	// METHOD(L_Warehouse, get_soldiers),
 	{0, 0},
 };
 const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
@@ -839,6 +842,186 @@ SET_X(worker);
 */
 GET_X(worker);
 #undef GET_X
+
+/* RST
+	.. method:: set_soldiers(which[, amount])
+
+		Analogous to :meth:`set_wares`, but for soldiers. Instead of
+		a name a :class:`array` is used to define the soldier. The array contains
+		the level for hitpoints, attack, defense, evade in this order.  A usage
+		example:
+
+		.. code-block:: lua
+
+			w:set_soldiers({0,0,0,0}, 100)
+
+		would add 100 level 0 soldiers. While
+
+		.. code-block:: lua
+
+			w:set_soldiers{
+			  [{0,0,0,0}] = 10,
+			  [{1,2,3,4}] = 5,
+			)
+
+		would add 10 level 0 soldier and 5 soldiers with hit point level 1,
+		attack level 2, defense level 3 and evade level 4 (as long as this is
+		legal for the players tribe).
+*/
+static int _get_soldier_levels
+	(lua_State * L, int tidx, uint32_t * hp, uint32_t * a,
+	 uint32_t * d, uint32_t * e, const Soldier_Descr & sd)
+{
+	lua_pushuint32(L, 1);
+	lua_rawget(L, tidx);
+	*hp = luaL_checkuint32(L, -1);
+	lua_pop(L, 1);
+	if (*hp > sd.get_max_hp_level())
+		return
+			report_error
+			(L, "hp level (%i) > max hp level (%i)", *hp, sd.get_max_hp_level());
+
+	lua_pushuint32(L, 2);
+	lua_rawget(L, tidx);
+	*a = luaL_checkuint32(L, -1);
+	lua_pop(L, 1);
+	if (*a > sd.get_max_attack_level())
+		return
+			report_error
+			(L, "attack level (%i) > max attack level (%i)",
+			 *a, sd.get_max_attack_level());
+
+	lua_pushuint32(L, 3);
+	lua_rawget(L, tidx);
+	*d = luaL_checkuint32(L, -1);
+	lua_pop(L, 1);
+	if (*d > sd.get_max_defense_level())
+		return
+			report_error
+			(L, "defense level (%i) > max defense level (%i)",
+			 *d, sd.get_max_defense_level());
+
+	lua_pushuint32(L, 4);
+	lua_rawget(L, tidx);
+	*e = luaL_checkuint32(L, -1);
+	lua_pop(L, 1);
+	if (*e > sd.get_max_evade_level())
+		return
+			report_error
+			(L, "evade level (%i) > max evade level (%i)",
+			 *e, sd.get_max_evade_level());
+
+	return 0;
+}
+int L_Warehouse::set_soldiers(lua_State * L) {
+	Game & game = get_game(L);
+	Warehouse * wh = get(game, L);
+	Tribe_Descr const & tribe = wh->owner().tribe();
+
+	Soldier_Descr const & soldier_descr =  //  soldiers
+		ref_cast<Soldier_Descr const, Worker_Descr const>
+			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+
+	uint32_t hp, a, d, e, count;
+	if (lua_gettop(L) > 2) {
+		// STACK: cls, descr, count
+		count = luaL_checkuint32(L, 3);
+		_get_soldier_levels(L, 2, &hp, &a, &d, &e, soldier_descr);
+
+		for (uint32_t j = count; j; --j) {
+			Soldier & soldier =
+				ref_cast<Soldier, Worker>
+				(soldier_descr.create(game, wh->owner(), wh, wh->get_position()));
+			soldier.set_level(hp, a, d, e);
+			wh->incorporate_worker(game, soldier);
+		}
+	} else {
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			_get_soldier_levels(L, 3, &hp, &a, &d, &e, soldier_descr);
+			count = luaL_checkuint32(L, -1);
+
+			for (uint32_t j = count; j; --j) {
+				Soldier & soldier =
+					ref_cast<Soldier, Worker>
+					(soldier_descr.create
+					 (game, wh->owner(), wh, wh->get_position()));
+				soldier.set_level(hp, a, d, e);
+				wh->incorporate_worker(game, soldier);
+			}
+
+			lua_pop(L, 1);
+		}
+	}
+	return 0;
+}
+
+#if 0
+// This is currently not available because Requirements do not allow
+// to check for more then one attribute. This seems easy to add, but
+// alters many things in the source, so I left sensing soldiers out
+// for the moment
+int L_Warehouse::get_soldiers(lua_State * L) {
+
+	Requirements req;
+
+	Game & game = get_game(L);
+	Warehouse * wh = get(game, L);
+	Tribe_Descr const & tribe = wh->owner().tribe();
+
+	Soldier_Descr const & soldier_descr =  //  soldiers
+		ref_cast<Soldier_Descr const, Worker_Descr const>
+			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+
+	uint32_t hp, a, d, e, count;
+
+	luaL_checktype(L, 2, LUA_TTABLE);
+
+	lua_pushuint32(L, 1);
+	lua_rawget(L, 2);
+
+
+	if (lua_isnumber(L, -1)) {
+		lua_pop(L, 1);
+		// STACK: cls, descr, count
+		count = luaL_checkuint32(L, 3);
+		_get_soldier_levels(L, 2, &hp, &a, &d, &e, soldier_descr);
+
+		for (uint32_t j = count; j; --j) {
+			Soldier & soldier =
+				ref_cast<Soldier, Worker>
+				(soldier_descr.create(game, wh->owner(), wh, wh->get_position()));
+			soldier.set_level(hp, a, d, e);
+			wh->incorporate_worker(game, soldier);
+		}
+	} else {
+		lua_pop(L, 1);
+
+// lua_pushnil(L);
+// while (lua_next(L, 2) != 0) {
+//                   _get_soldier_levels(L, 3, &hp, &a,
+//                   &d, &e, soldier_descr);
+//                   count = luaL_checkuint32(L, -1);
+//
+//                   for (uint32_t j = count; j; --j) {
+//                           Soldier & soldier =
+//                                   ref_cast<Soldier, Worker>
+//                                   (soldier_descr.create
+//                                    (game, wh->owner(), wh,
+//                                    wh->get_position()));
+//                           soldier.set_level(hp, a, d, e);
+//                           wh->incorporate_worker(game, soldier);
+//                   }
+//
+//                   lua_pop(L, 1);
+//           }
+	}
+
+	m_warehouse->count_workers
+				(game, req.get_index(), req.get_requirements());
+	return 1;
+}
+#endif
 
 /*
  ==========================================================
