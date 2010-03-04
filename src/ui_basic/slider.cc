@@ -138,6 +138,8 @@ void Slider::draw_cursor
 
 	RGBColor black(0, 0, 0);
 
+	// Make the slider button opaque
+	m_cache_pid->surface->fill_rect(Rect(Point(x, y), w, h), RGBAColor(0, 0, 0, 255));
 	dst.tile //  background
 		(Rect(Point(x, y), w, h), m_pic_background, Point(get_x(), get_y()));
 
@@ -357,11 +359,13 @@ void HorizontalSlider::draw(RenderTarget & odst) {
 		return;
 	}
 
-	m_cache_pid = g_gr->create_surface(odst.get_w(), odst.get_h());
-	
+	m_cache_pid = g_gr->create_surface_a(odst.get_w(), odst.get_h());
+
+	m_cache_pid->surface->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
+
 	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
   
-	RGBColor black(0, 0, 0);
+	RGBAColor black(0, 0, 0, 255);
 
 	dst.brighten_rect //  bottom edge
 		(Rect(Point(get_x_gap(), get_h() / 2), get_bar_size(), 2),
@@ -448,11 +452,13 @@ void VerticalSlider::draw(RenderTarget & odst) {
 		return;
 	}
 
-	m_cache_pid = g_gr->create_surface(odst.get_w(), odst.get_h());
-	
+	m_cache_pid = g_gr->create_surface_a(odst.get_w(), odst.get_h());
+
+	m_cache_pid->surface->fill_rect(Rect(Point(0, 0), get_w(), get_h()), RGBAColor(0, 0, 0, 0));
+
 	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
 
-	RGBColor black(0, 0, 0);
+	RGBAColor black(0, 0, 0, 255);
 
 	dst.brighten_rect //  right edge
 		(Rect(Point(get_w() / 2, get_y_gap()), 2, get_bar_size()),
