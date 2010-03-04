@@ -170,12 +170,14 @@ void ProgressWindow::update(bool const repaint) {
 
 /**
  * Display a loader step description
+ * std:string style format broke format argument list
+ * on windows visual studio.
  */
-void ProgressWindow::stepf(const std::string & format, ...) {
+void ProgressWindow::stepf(const char * format, ...) {
 	char buffer[1024];
 	va_list va;
 	va_start(va, format);
-	vsnprintf(buffer, sizeof(buffer), format.c_str(), va);
+	vsnprintf(buffer, sizeof(buffer), format, va);
 	va_end(va);
 	step (buffer);
 }

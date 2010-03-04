@@ -39,6 +39,8 @@
 
 #include "upcast.h"
 
+#include "container_iterate.h"
+
 #include <cstdio>
 
 namespace Widelands {
@@ -236,11 +238,9 @@ Immovable_Descr::Immovable_Descr
 		 	prof.get_section("terrain affinity"))
 	{
 		memset(it, 0, sizeof(m_terrain_affinity));
-		struct {Terrain_Index current; Terrain_Index const nr_terrains;} i =
-		 	{0, world.get_nr_terrains()};
-		for(;
-			 i.current < i.nr_terrains;
-			 ++i.current, ++it)
+		for(wl_index_range<Terrain_Index> i
+			(0, world.get_nr_terrains());
+			 i;++i, ++it)
 		{
 			char const * const terrain_type_name =
 				world.get_ter(i.current).name().c_str();

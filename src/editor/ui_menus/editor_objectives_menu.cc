@@ -266,7 +266,7 @@ void Editor_Objectives_Menu::clicked_del() {
 		for (wl_const_range<Trigger::Referencers> r(referencers);;)
 		{
 			str += r->first->identifier();
-			if ((++r).empty())
+			if (r.advance().empty())
 				break;
 			str += '\n';
 		}

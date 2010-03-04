@@ -1831,10 +1831,10 @@ struct StarQueue {
 		}
 
 
-        m_data.pop_back();
+		m_data.pop_back();
 
-        if (m_data.size())
-            debug(0, "pop");
+		if (m_data.size())
+			debug(0, "pop");
 
 
 		head->heap_index = -1;

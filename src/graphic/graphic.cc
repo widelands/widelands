@@ -813,7 +813,7 @@ void Graphic::load_animations(UI::ProgressWindow & loader_ui) {
 		const uint32_t percent = 100 * id / nr_animations;
 		if (percent != last_shown) {
 			last_shown = percent;
-			loader_ui.stepf(step_description, (int32_t)percent);
+			loader_ui.stepf(step_description.c_str(), percent);
 		}
 		++id;
 		m_animations.push_back(new AnimationGfx(g_anim.get_animation(id)));

@@ -659,7 +659,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				//  Find a working position that matches this worker.
 				ProductionSite::Working_Position * wp = &wp_begin;
 				for
-                    (wl_const_range<Ware_Types> j(working_positions);;
+					(wl_const_range<Ware_Types> j(working_positions);;
 					 ++j)
 				{
 					if (j.empty())
@@ -1115,7 +1115,7 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 
 	//  Incorporated workers, write sorted after file-serial.
 	fw.Unsigned16(warehouse.m_incorporated_workers.size());
-    typedef std::map<uint32_t, const Worker *> TWorkerMap;
+	typedef std::map<uint32_t, const Worker *> TWorkerMap;
 	TWorkerMap workermap;
 	container_iterate_const
 		(std::vector<OPtr<Worker> >, warehouse.m_incorporated_workers, i)
@@ -1126,7 +1126,7 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 			(std::pair<uint32_t, const Worker *>
 			 	(mos.get_object_file_index(w), &w));
 	}
-    container_iterate_const(TWorkerMap, workermap, i)
+	container_iterate_const(TWorkerMap, workermap, i)
 	{
 		Worker const & obj = *i.current->second;
 		assert(mos.is_object_known(obj));

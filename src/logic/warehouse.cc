@@ -357,18 +357,18 @@ void Warehouse::postfill
 	Building::postfill(game, ware_types, worker_types, soldier_counts);
 	if (ware_types)
 		for
-			(Ware_Index i =Ware_Index::First();
-			 i < tribe().get_nrwares();
-			 ++i, ++ware_types)
+			(wl_index_range<Ware_Index> i
+			(Ware_Index::First(),tribe().get_nrwares());
+			 i; ++i, ++ware_types)
 			if (uint32_t const count = *ware_types)
-				insert_wares  (i, count);
+				insert_wares  (i.current, count);
 	if (worker_types)
 		for
-			(Ware_Index i=Ware_Index::First();
-			 i < tribe().get_nrworkers();
-			 ++i, ++worker_types)
+			(wl_index_range<Ware_Index> i
+			(Ware_Index::First(),tribe().get_nrworkers());
+			 i; ++i, ++worker_types)
 			if (uint32_t const count = *worker_types)
-				insert_workers(i, count);
+				insert_workers(i.current, count);
 	if (soldier_counts) {
 		Soldier_Descr const & soldier_descr =
 			ref_cast<Soldier_Descr const, Worker_Descr const>
@@ -448,11 +448,9 @@ void Warehouse::init(Editor_Game_Base & egbase)
 		std::vector<Ware_Index> const & worker_types_without_cost =
 			tribe().worker_types_without_cost();
 
-        struct {uint8_t current; uint32_t const size;} i =
-			   {0, worker_types_without_cost.size()};
-
-		for (;i.current < i.size;
-			 ++i.current)
+		for (wl_index_range<uint32_t> i
+			(0, worker_types_without_cost.size());
+			i; ++i)
 			if
 				(owner().is_worker_type_allowed
 				 	(worker_types_without_cost.at(i.current)))

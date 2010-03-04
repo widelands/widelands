@@ -394,7 +394,7 @@ void ProductionProgram::ActReturn::execute
 		if (m_is_when) { //  "when a and b and ..." (all conditions must be true)
 			char const * const operator_string = _(" and ");
 			result_string += _(" because: ");
-            for (wl_const_range<Conditions> i(m_conditions);i;)
+			for (wl_const_range<Conditions> i(m_conditions);i;)
 			{
 				if (not (i.front()->evaluate(ps))) //  A condition is false,
 					return ps.program_step(game); //  continue program.
@@ -406,7 +406,7 @@ void ProductionProgram::ActReturn::execute
 		} else { //  "unless a or b or ..." (all conditions must be false)
 			char const * const operator_string = _(" or ");
 			result_string += _(" because not: ");
-            for (wl_const_range<Conditions> i(m_conditions);i;)
+			for (wl_const_range<Conditions> i(m_conditions);i;)
 			{
 				if ((*i.current)->evaluate(ps)) //  A condition is true,
 					return ps.program_step(game); //  continue program.
@@ -846,7 +846,7 @@ void ProductionProgram::ActProduce::execute
 	std::string result_string = _("Produced ");
 	assert(m_items.size());
 
-    for(wl_const_range<Items> i(m_items);i;)
+	for(wl_const_range<Items> i(m_items);i;)
 	{
 		{
 			uint8_t const count = i.current->second;

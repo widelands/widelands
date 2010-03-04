@@ -599,8 +599,8 @@ void NetHost::send(ChatMessage msg)
 			}
 			if (i < d->settings.users.size()) {
 				for
-                    (wl_range<std::vector<Client> > 
-                     j(d->clients);;
+					(wl_const_range<std::vector<Client> > 
+					 j(d->clients);;
 					 ++j)
 					if        (j.empty()) {
 						//  Better no wexception; it would break the whole game.
@@ -788,7 +788,7 @@ void NetHost::setMap
 			file->parts.push_back(fp);
 			leftparts -= readout;
 		}
-        std::vector<char> complete(file->bytes);
+		std::vector<char> complete(file->bytes);
 		fr.SetFilePos(0);
 		fr.DataComplete(&complete[0], file->bytes);
 		MD5Checksum<FileRead> md5sum;

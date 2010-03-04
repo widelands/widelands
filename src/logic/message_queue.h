@@ -30,6 +30,8 @@ namespace Widelands {
 
 struct MessageQueue : private std::map<Message_Id, Message *> {
 	friend struct Map_Players_Messages_Data_Packet;
+	// Make typedefs public so that this looks like proper
+	// STL container to templated algorithms.
 	typedef std::map<Message_Id, Message *> _Mybase;
 	typedef _Mybase::pointer pointer;
 	typedef _Mybase::const_pointer const_pointer;
@@ -51,7 +53,6 @@ struct MessageQueue : private std::map<Message_Id, Message *> {
 	}
 
 	//  Make some selected inherited members public.
-//	typedef std::map<Message_Id, Message *>::const_iterator const_iterator;
 	const_iterator begin() const {
 		return std::map<Message_Id, Message *>::begin();
 	}

@@ -811,8 +811,7 @@ Section & Profile::create_section          (char const * const name)
 
 Section & Profile::create_section_duplicate(char const * const name)
 {
-    Section s(this, name);
-	m_sections.push_back(s);
+	m_sections.push_back(Section(this, name));
 	return m_sections.back();
 }
 

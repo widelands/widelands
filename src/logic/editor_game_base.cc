@@ -223,7 +223,7 @@ void Editor_Game_Base::inform_players_about_ownership
 void Editor_Game_Base::inform_players_about_immovable
 	(Map_Index const i, Map_Object_Descr const * const descr)
 {
-    if (descr != &Road::GetRoadDescr())
+	if (not Road::IsRoadDescr(descr))
 		for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
 			if (Player * const p = m_players[plnum]) {
 				Player::Field & player_field = p->m_fields[i];

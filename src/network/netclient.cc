@@ -550,7 +550,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 				FileRead fr;
 				fr.Open(*g_fs, path.c_str());
 				if (bytes == fr.GetSize()) {
-                    std::vector<char> complete(bytes,0);
+					std::vector<char> complete(bytes,0);
 					fr.DataComplete(&complete[0], bytes);
 					MD5Checksum<FileRead> md5sum;
 					md5sum.Data(&complete[0], bytes);
@@ -597,7 +597,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 		FilePart fp;
 
-        std::vector<char> buf(size);
+		std::vector<char> buf(size);
 		if (packet.Data(&buf[0], size) != size)
 			log("Readproblem. Will try to go on anyways\n");
 		memcpy(fp.part, &buf[0], size);
