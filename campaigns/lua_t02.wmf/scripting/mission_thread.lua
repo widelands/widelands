@@ -4,6 +4,7 @@
 
 use("map", "mission_thread_texts")
 use("aux", "smooth_move")
+use("aux", "table")
 
 function send_msg(t) 
    p:message_box( t.title, t.body, t)
@@ -24,13 +25,13 @@ function mission_thread()
    local rocks = wl.map.Field(27, 48)
    p:reveal_fields(rocks:region(6))
 
-   smooth_move(rocks, p, 3000)
+   pts = smooth_move(rocks, p, 3000)
    sleep(3000)
 
    send_msg(order_msg_3)
    send_msg(order_msg_4)
 
-   smooth_move(hq_pos, p, 1000)
+   timed_move(reverse(pts), p, 10)
    sleep(1000)
 
    -- TODO: objective!

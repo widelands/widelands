@@ -54,3 +54,21 @@ function array_unique(a)
    end
    return rv
 end
+
+-- RST
+-- .. function:: reverse(a)
+--
+--    Returns an array with the same values in reverse order
+--
+--    :arg a: One array object
+--    :type a: :class:`array`
+--
+--    :returns: array with values in a in reversed order
+function reverse(a)
+   rv = {}
+   for i=#a,1,-1 do
+      rv[#rv+1] = a[i]
+   end
+   return rv
+end
+
