@@ -339,7 +339,7 @@ void Surface::clear() {
 
 /*
 ===============
-Blit this given source bitmap to this bitmap.
+
 ===============
 */
 #ifdef HAS_OPENGL
@@ -624,6 +624,7 @@ static void draw_minimap_int
 					move_r(mapwidth, f, i);
 				Widelands::Player::Field const & player_field = player_fields[i];
 				Widelands::Vision const vision = player_field.vision;
+
 				*reinterpret_cast<T *>(pix) =
 					static_cast<T>
 					(vision ?
@@ -649,9 +650,53 @@ void Surface::draw_minimap
 	 Point                               const viewpt,
 	 uint32_t                            const flags)
 {
+#ifdef HAS_OPENGL
+	SDL_Surface * surface = SDL_CreateRGBSurface
+				(SDL_SWSURFACE,
+				 rc.w,
+				 rc.h,
+				 m_surface->format->BitsPerPixel,
+				 m_surface->format->Rmask,
+				 m_surface->format->Gmask,
+				 m_surface->format->Bmask,
+				 m_surface->format->Amask);
+
+	/*log("Surface::draw_minimap(Rect(%d, %d, d%, %d), Point(%d, %d))\n",
+	    rc.x, rc.y, rc.w, rc.h, viewpt.x, viewpt.y);*/
+
+	Rect rc2;
+	rc2.x=rc2.y=0;
+	rc2.w=rc.w;
+	rc2.h=rc.h;
+
+	SDL_LockSurface(surface);
+	
+	Uint8 * const pixels = static_cast<uint8_t *>(surface->pixels);
+	Widelands::X_Coordinate const w = egbase.map().get_width();
+	switch (surface->format->BytesPerPixel) {
+	case sizeof(Uint16):
+		draw_minimap_int<Uint16>
+			(pixels, surface->pitch, *surface->format, w, egbase, player, rc2, viewpt, flags);
+		break;
+	case sizeof(Uint32):
+		draw_minimap_int<Uint32>
+			(pixels, surface->pitch, *surface->format, w, egbase, player, rc2, viewpt, flags);
+		break;
+	default:
+		assert (false);
+	}
+
+	SDL_UnlockSurface(surface);
+
+	Surface surf;
+	surf.set_sdl_surface(*surface);
+
+	blit(Point(rc.x,rc.y), &surf, rc2);
+#else
 	//TODO: this const_cast is evil and should be exorcised.
 	Uint8 * const pixels = const_cast<Uint8 *>
 		(static_cast<const Uint8 *>(get_pixels()));
+
 	const uint16_t pitch = get_pitch();
 	Widelands::X_Coordinate const w = egbase.map().get_width();
 	switch (format().BytesPerPixel) {
@@ -666,6 +711,7 @@ void Surface::draw_minimap
 	default:
 		assert (false);
 	}
+#endif
 }
 
 /*
