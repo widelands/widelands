@@ -22,6 +22,8 @@
 
 #include <SDL.h>
 
+struct RGBAColor;
+
 struct RGBColor : protected SDL_Color {
 	RGBColor() {}
 	RGBColor(Uint8 const R, Uint8 const G, Uint8 const B) {
@@ -58,6 +60,12 @@ struct RGBAColor {
 		g = _g;
 		b = _b;
 		a = _a;
+	}
+	RGBAColor(RGBColor c) {
+		r = static_cast<uint8_t>(c.r());
+		g = static_cast<uint8_t>(c.g());
+		b = static_cast<uint8_t>(c.b());
+		a = 255;
 	}
 
 	Uint32 map(const SDL_PixelFormat & fmt) const {

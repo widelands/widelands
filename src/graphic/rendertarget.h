@@ -68,11 +68,12 @@ struct RenderTarget {
 		 int32_t y2,
 		 RGBColor color);
 	void draw_rect(Rect, RGBColor);
-	void fill_rect(Rect, RGBColor);
+	void fill_rect(Rect, RGBAColor);
 	void brighten_rect(Rect, int32_t factor);
 	void clear();
 
 	void blit(Point dst, PictureID picture);
+	void blit_solid(Point dst, PictureID picture);
 	void blitrect(Point dst, PictureID picture, Rect src);
 	void tile(Rect, PictureID picture, Point ofs);
 
@@ -126,7 +127,7 @@ struct RenderTarget {
 protected:
 	bool clip(Rect & r) const throw ();
 
-	void doblit(Point dst, Surface * const src, Rect srcrc);
+	void doblit(Point dst, Surface * const src, Rect srcrc, bool enable_alpha=true);
 
 	///The target surface
 	Surface * m_surface;

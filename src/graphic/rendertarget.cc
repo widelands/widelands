@@ -200,7 +200,7 @@ void RenderTarget::draw_rect(Rect r, const RGBColor clr)
 		m_surface->draw_rect(r, clr);
 }
 
-void RenderTarget::fill_rect(Rect r, const RGBColor clr)
+void RenderTarget::fill_rect(Rect r, const RGBAColor clr)
 {
 	if (clip(r))
 		m_surface->fill_rect(r, clr);
@@ -229,6 +229,12 @@ void RenderTarget::blit(const Point dst, const PictureID picture)
 {
 	if (Surface * const src = g_gr->get_picture_surface(picture))
 		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()));
+}
+
+void RenderTarget::blit_solid(const Point dst, const PictureID picture)
+{
+	if (Surface * const src = g_gr->get_picture_surface(picture))
+		doblit(dst, src, Rect(Point(0, 0), src->get_w(), src->get_h()), false);
 }
 
 void RenderTarget::blitrect
@@ -1326,7 +1332,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
 /**
  * Clip against window and source bitmap, then call the Bitmap blit routine.
  */
-void RenderTarget::doblit(Point dst, Surface * const src, Rect srcrc)
+void RenderTarget::doblit(Point dst, Surface * const src, Rect srcrc, bool enable_alpha)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);

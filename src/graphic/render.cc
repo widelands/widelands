@@ -167,7 +167,7 @@ void Surface::draw_rect(const Rect rc, const RGBColor clr) {
 Draws a filled rectangle
 ===============
 */
-void Surface::fill_rect(const Rect rc, const RGBColor clr) {
+void Surface::fill_rect(const Rect rc, const RGBAColor clr) {
 	assert(m_surface);
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
@@ -184,9 +184,9 @@ void Surface::fill_rect(const Rect rc, const RGBColor clr) {
 		glDisable(GL_BLEND);
 		glBegin(GL_QUADS);
 		    glColor3f
-			((clr.r() / 256.0f),
-			 (clr.g() / 256.0f),
-			 (clr.b() / 256.0f));
+			((clr.r / 256.0f),
+			 (clr.g / 256.0f),
+			 (clr.b / 256.0f));
 		    glVertex2f(rc.x,        rc.y);
 		    glVertex2f(rc.x + rc.w, rc.y);
 		    glVertex2f(rc.x + rc.w, rc.y + rc.h);
