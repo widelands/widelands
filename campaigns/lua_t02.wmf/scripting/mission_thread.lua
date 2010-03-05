@@ -60,7 +60,7 @@ function introduction_thread()
    send_msg(order_msg_4)
 
    -- Move back to HQ
-   timed_move(reverse(pts), p, 10)
+   timed_move(array_reverse(pts), p, 10)
    sleep(1000)
 end
 

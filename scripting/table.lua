@@ -56,7 +56,7 @@ function array_unique(a)
 end
 
 -- RST
--- .. function:: reverse(a)
+-- .. function:: array_reverse(a)
 --
 --    Returns an array with the same values in reverse order
 --
@@ -64,7 +64,7 @@ end
 --    :type a: :class:`array`
 --
 --    :returns: array with values in a in reversed order
-function reverse(a)
+function array_reverse(a)
    rv = {}
    for i=#a,1,-1 do
       rv[#rv+1] = a[i]

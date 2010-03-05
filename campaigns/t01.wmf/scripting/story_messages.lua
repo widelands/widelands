@@ -2,10 +2,6 @@
 function story_messages()
    function _story_box(msg)
       show_story_box(msg.title, msg.msg, msg.loc)
-      if msg.loc then
-         smooth_move(home)
-         sleep(1200)
-      end
    end
 
    wake_me(75 * 1000)

@@ -26,7 +26,7 @@ show_story_box(title, msg, grave)
 msg = "<rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
 _[[ "As father told me, there will be times to fight and times to lie and wait, trying not to sleep or die before the right time comes. And so I do... wait." ]] .. 
 "</p></rt>"
-show_story_box(title, msg, home)
+show_story_box(title, msg)
 sleep(2000)
 
 use("map", "khantrukhs_talking")
