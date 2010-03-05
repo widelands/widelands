@@ -7,7 +7,7 @@ use("aux", "smooth_move")
 use("aux", "table")
 
 function send_msg(t) 
-   p:message_box( t.title, t.body, t)
+   p:send_message( t.title, t.body, t)
 end
 
 function add_obj(t)
@@ -40,7 +40,7 @@ end
 
 function introduction_thread()
    sleep(2000)
-
+   
    send_msg(briefing_msg_1)
    send_msg(briefing_msg_2)
    send_msg(briefing_msg_3)
@@ -98,9 +98,8 @@ function mines_and_food_thread()
    send_msg(order_msg_9_hunter)
    send_msg(order_msg_10_bread)
 
-   -- TODO: checking for these to finish
-   add_obj(obj_basic_food)
-   add_obj(obj_begin_farming)
+   local obj_bf = add_obj(obj_basic_food)
+   local obj_farming = add_obj(obj_begin_farming)
 
    -- Enable food production
    p:allow_buildings{
@@ -112,8 +111,79 @@ function mines_and_food_thread()
       "bakery",
    }
 
+   while not (obj_bf.done and ob_farming.done) do
+      sleep(6231)
+   end
+
+   -- Ready to build refiner stuff
+   send_msg(order_msg_14_refine_ore)
+   p:allow_buildings("smelting_works")
+   add_obj(obj_refine_ores)
+   while #p:get_buildings("smelting_works") < 1 do
+      sleep(6223)
+   end
+   
+   -- Information about making mines deeper
+   send_msg(order_msg_15_mines_exhausted)
+   p:allow_buildings{ "deep_coalmine", "inn" }
+   -- objective.check will make sure that this i finished
+   add_obj(obj_enhance_buildings)
 
 end
 
+function build_materials_thread()
+   local p = wl.game.Player(1)
+
+   -- Wait for a barrier or a sentry to be build
+   while true do
+      local rv = p:get_buildings{"sentry", "stronghold"}
+      if #rv.sentry + #rv.stronghold > 0 then
+         break
+      end
+      sleep(5421)
+   end
+   
+   send_msg(order_msg_16_blackwood)
+   p:enable_buildings("hardener")
+   local o = add_obj(obj_better_material_1)
+   while #p:get_buildings("hardener") < 1 do sleep(5421) end
+   o.done = true
+
+   send_msg(order_msg_17_grindstone)
+   p:enable_buildings{"lime_kiln", "well", "burners_house"}
+   o = add_obj(obj_better_material_2)
+   -- Wait for the buildings to be build
+   while true do
+      local rv = p:get_buildings{"grinder", "well",
+         "coalmine", "deep_coalmine", "burners_house"} 
+      if (#rv.grinder > 0 and #rv.well > 0) and
+         (#rv.coalmine + #rv.deep_coalmine + #burners_house > 0) then
+         break
+      end
+      sleep(5421)
+   end
+   o.done = true
+
+   send_msg(order_msg_18_fernery)
+   p:enable_buildings{"fernery"}
+   o = add_obj(obj_better_material_3)
+   while #p:get_buildings("fernery") < 1 do sleep(5421) end
+
+   p:send_msg(order_msg_19_all_material)
+end
+
+function mission_complete_thread()
+   -- TODO: check for mission quarry,
+   -- mission fernery and
+   -- mission enhance_buildings
+   -- TODO: best add missions at the very beginning, but keep them hidden or so
+end
+
+-- TODO: story texts 
+
 run(introduction_thread)
 run(mines_and_food_thread)
+run(build_materials_thread)
+
+run(mission_complete_thread)
+

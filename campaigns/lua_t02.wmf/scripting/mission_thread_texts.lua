@@ -163,86 +163,66 @@ _[[ "A tavern opened for our people yesterday. While I am hardly in the mood for
 "</p></rt>"
 }
 
--- [Order Msg 14 Refine Ore]
--- type=message_box
--- version=2
--- text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
--- _"Boldreth remarks..."
--- "</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>"
--- _" "So now that we have both the mines and the food to sustain them, we should bring what our brave miners gain for us into a more useful state. The iron ore has to be melted into iron so that it is ready to be forged into whatever we want. And we need the coal to keep the smelter's ovens burning."<br><br>-- NEW OBJECTIVE --<br> "
--- _"* Build a smelting works. The iron ore your miners bring up is not usable yet - it has to be melted into iron first."
--- "</p></rt>""
--- window_title=_Your loyal companion
--- is_modal=true
--- button_00=_OK
---
--- [Order Msg 15 Mines Exhausted]
--- type=message_box
--- version=2
--- text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
--- _"Khantrukh speaks..."
--- "</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
--- _" "Our miners are digging up less and less by day! We have to go deeper, closer to the mountain's core, if we want more of its treasures!<br> Of course, it is dark and cold in such depths and only few venture voluntarily into these places. We should reward this bravery with greater rations for them."<br><br>-- NEW OBJECTIVE --<br> "
--- _"* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath it; then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate the enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish). You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which strategy you prefer."
--- "</p></rt>""
--- window_title=_The advisor
--- is_modal=true
--- button_00=_OK
--- button_00_trigger=Refining Began
---
--- [Order Msg 16 Blackwood]
--- type=message_box
--- version=2
--- text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
--- _"Boldreth seems concerned..."
--- "</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>"
--- _" "As I just discovered, we are running short on blackwood! We cannot put our warriors into some crumbling huts, and even less so in times as dangerous as ours!<br> We need a wood hardener, and we need one now!"<br><br>-- NEW OBJECTIVE --<br> "
--- _"* Build a wood hardener.<br> Bigger and better buildings - including all military ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, as without it you cannot expand."
--- "</p></rt>""
--- window_title=_Your loyal companion
--- is_modal=true
--- button_00=_OK
---
--- [Order Msg 17 Grindstone]
--- type=message_box
--- version=2
--- text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>"
--- _"Boldreth smiles..."
--- "</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>"
--- _" "Well, old friend, this should ensure that our fortifications do not break down with our foes' first battle cry! Now we can expand safely!<br> Still, it would not hurt to assemble some grout for our further campaign; thus we could, in times of need, build a fortress as the world has not seen before!"<br><br>-- NEW OBJECTIVE --<br> "
--- _"* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better buildings may require also other improved materials besides blackwood. One of those is grout, which is produced out of raw stone, water and coal by a lime-burner. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain, by clicking on the implied flag and the Geologist-symbol in the consequently appearing menu. Coal can be obtained by building a charcoal burner or a coal mine."
--- "</p></rt>""
--- window_title=_Your loyal companion
--- is_modal=true
--- button_00=_OK
---
--- [Order Msg 18 Fernery]
--- type=message_box
--- version=2
--- text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
--- _"Khantrukh steps in..."
--- "</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
--- _" "Chieftain, this is a disgrace! It is well that we can produce grout for mighty fortifications and great buildings now - only this does not prevent our roofs from becoming leaky! Maybe the young ones like spending their nights in the rain, but I just can't find any sleep with these raindrops dripping on my face!<br> Now this is a problem we should do something about!"<br><br>-- NEW OBJECTIVE --<br> "
--- _"* Build a fernery.<br> The third material necessary for improved buildings is thatch reed, used to cover roofs. Thatch reed is planted by a fernery, around the building."
--- "</p></rt>""
--- window_title=_The advisor
--- is_modal=true
--- button_00=_OK
--- button_00_trigger=Mission Grindstone
---
--- [Order Msg 19 All Material]
--- type=message_box
--- version=2
--- text=_""<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>"
--- _"Khantrukh seems relieved..."
--- "</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>"
--- _" "Wonderful! Our roofs are not dripping anymore, and we have all the material we need for, well, whichever monumental building we see fit!" "
--- "</p></rt>""
--- window_title=_The advisor
--- is_modal=true
--- button_00=_OK
--- button_00_trigger=Mission Fernery
---
+order_msg_14_refine_ore = {
+   title=_ "Your loyal companion",
+   body= "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>" ..
+_"Boldreth remarks..." ..
+"</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>" ..
+_[[ "So now that we have both the mines and the food to sustain them, we should bring what our brave miners gain for us into a more useful state. The iron ore has to be melted into iron so that it is ready to be forged into whatever we want. And we need the coal to keep the smelter's ovens burning."<br><br>-- NEW OBJECTIVE --<br> ]] ..
+_"* Build a smelting works. The iron ore your miners bring up is not usable yet - it has to be melted into iron first." ..
+"</p></rt>",
+}
+
+order_msg_15_mines_exhausted = {
+   title=_ "The advisor", 
+   body = "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>" ..
+_"Khantrukh speaks..." ..
+"</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>" ..
+_[[ "Our miners are digging up less and less by day! We have to go deeper, closer to the mountain's core, if we want more of its treasures!<br> Of course, it is dark and cold in such depths and only few venture voluntarily into these places. We should reward this bravery with greater rations for them."<br><br>-- NEW OBJECTIVE --<br> ]] ..
+_"* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath it; then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate the enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish). You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which strategy you prefer." ..
+"</p></rt>"
+}
+
+order_msg_16_blackwood = {
+   title=_"Your loyal companion",
+   body= "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>" ..
+_"Boldreth seems concerned..." ..
+"</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>" ..
+_[[ "As I just discovered, we are running short on blackwood! We cannot put our warriors into some crumbling huts, and even less so in times as dangerous as ours!<br> We need a wood hardener, and we need one now!"<br><br>-- NEW OBJECTIVE --<br> ]] ..
+_"* Build a wood hardener.<br> Bigger and better buildings - including all military ones - require better building materials. They cannot be built of simple trunks - the wood has to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, as without it you cannot expand." ..
+"</p></rt>"
+}
+
+order_msg_17_grindstone = {
+   title=_"Your loyal companion",
+   body= "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>" ..
+_"Boldreth smiles..." ..
+"</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>" ..
+_[[ "Well, old friend, this should ensure that our fortifications do not break down with our foes' first battle cry! Now we can expand safely!<br> Still, it would not hurt to assemble some grout for our further campaign; thus we could, in times of need, build a fortress as the world has not seen before!"<br><br>-- NEW OBJECTIVE --<br> ]] ..
+_"* Build a lime kiln, a well and a charcoal burner or coal mine.<br> Better buildings may require also other improved materials besides blackwood. One of those is grout, which is produced out of raw stone, water and coal by a lime-burner. You can obtain water by building a well upon a water source, which your Geologists can discover when you send them to any flag that is not on a mountain, by clicking on the implied flag and the Geologist-symbol in the consequently appearing menu. Coal can be obtained by building a charcoal burner or a coal mine." ..
+"</p></rt>"
+}
+
+
+order_msg_18_fernery = {
+   title=_"The advisor", 
+   body= "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>" ..
+_"Khantrukh steps in..." ..
+"</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>" ..
+_[[ "Chieftain, this is a disgrace! It is well that we can produce grout for mighty fortifications and great buildings now - only this does not prevent our roofs from becoming leaky! Maybe the young ones like spending their nights in the rain, but I just can't find any sleep with these raindrops dripping on my face!<br> Now this is a problem we should do something about!"<br><br>-- NEW OBJECTIVE --<br> ]] ..
+_"* Build a fernery.<br> The third material necessary for improved buildings is thatch reed, used to cover roofs. Thatch reed is planted by a fernery, around the building." ..
+"</p></rt>"
+}
+
+order_msg_19_all_material = {
+   title=_"The advisor",
+   body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>" ..
+_"Khantrukh seems relieved..." ..
+"</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>" ..
+_[[ "Wonderful! Our roofs are not dripping anymore, and we have all the material we need for, well, whichever monumental building we see fit!" ]] ..
+"</p></rt>"
+}
+
 
 -- =======================================================================
 --                                OBJECTIVES                                
@@ -276,6 +256,26 @@ _"* Build a coal mine and an iron ore mine.<br> Place a flag up on the mountain'
 obj_basic_food = {
    name="basic food began",
    title=_"Provide your miners with food",
+   check = function(obj) 
+      local p = wl.game.Player(1)
+      local tavern_msg_done = nil
+      local hunter_msg_done = nil
+      while true do
+         local rv = p:get_buildings{"hunters_hut", "gamekeepers_hut", "tavern"}
+         if #rv.hunters_hut >= 1 and not hunter_msg_done then
+            send_msg(order_msg_11_basic_food_began)
+            hunter_msg_done = true
+         end
+         if #rv.tavern >= 1 and not tavern_msg_done then
+            send_msg(order_msg_13_tavern)
+            tavern_msg_done = true
+         end
+         if #rv.hunters_hut >= 1 and #rv.gamekeepers_hut >= 1
+                  and #rv.tavern >= 1 then break end
+         sleep(5331)
+      end
+      obj.done = true
+   end,
    body="<rt><p>" .. 
 _"* Build a hunter, a gamekeeper and a tavern.<br> In order to work, your miners need food.<br> A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.<br> This is only the first example of a ware which has to be refined before being used in a secondary building - others will follow." ..
 "</p></rt>"
@@ -284,6 +284,16 @@ _"* Build a hunter, a gamekeeper and a tavern.<br> In order to work, your miners
 obj_begin_farming = {
 name="farming began",
 title=_"Bake bread",
+check = function(obj) 
+   while 1 do
+      local rv = p:get_buildings{"well", "bakery", "farm"}
+      if #rv.well >= 1 and #rv.bakery >= 1 and #rv.farm >= 1 then
+         break
+      end
+   end
+   send_msg(order_msg_12_farming_began)
+   obj.done = true
+end,
 body="<rt><p>" ..
 _"* Build a well, a farm and a bakery.<br> Other ways to produce food - different kinds of food - are fishers and hunters. The wheat of the farms has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well at a spot where your Geologists find a water source." ..
 "</p></rt>"
@@ -300,6 +310,17 @@ _"* Build a smelting works. The iron ore your miners bring up is not usable yet 
 obj_enhance_buildings = {
 name="enhance buildings",
 title=_"Enhance Buildings",
+check = function (obj)
+   local p = wl.game.Player(1)
+   while true do
+      rv = p:get_buildings{"inn", "deep_coalmine"}
+      if #rv.inn >= 1 and #rv.deep_coalmine >= 1 then
+         break
+      end
+      sleep(5742)
+   end
+   obj.done = true
+end,
 body="<rt><p>" ..
 _"* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath it; then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate the enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish). You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which strategy you prefer." ..
 "</p></rt>"
