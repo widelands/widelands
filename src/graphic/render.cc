@@ -72,7 +72,7 @@ void Surface::update() {
 	//in case of 2d graphics but also allows for double buffering
 #if HAS_OPENGL
 	if (g_opengl && isGLsf()) {
-		log("Surface::update() SDL_GL_SwapBuffers\n");
+		//log("Surface::update() SDL_GL_SwapBuffers\n");
 		SDL_GL_SwapBuffers();
 		//glClear(GL_COLOR_BUFFER_BIT);
 		return;
@@ -327,7 +327,7 @@ void Surface::clear() {
 #ifdef HAS_OPENGL
 	if(g_opengl and isGLsf())
 	{
-		log("Surface::clear() for opengl mode\n");
+		//log("Surface::clear() for opengl mode\n");
  		glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
 		glClear(GL_COLOR_BUFFER_BIT);
 		return;
@@ -418,6 +418,77 @@ GLuint Surface::getTexture()
 	return texture;
 }
 #endif
+
+void Surface::blit_solid(Point const dst, Surface * const src, Rect const srcrc)
+{
+	/*
+	log("Surface::blit((%d, %d), (%d, %d), (%d, %d, %d, %d))\n",
+	    dst.x, dst.y,
+	    surface->w, surface->h,
+	    srcrc.x, srcrc.y, srcrc.w, srcrc.h);
+	*/
+#ifdef HAS_OPENGL
+	if(g_opengl and isGLsf())
+	{
+		/* Set a texture scaling factor. Normaly texture coordiantes 
+		 * (see glBegin()...glEnd() Block below) are given in the range 0-1
+		 * to avoid the calculation (and let opengl do it) the texture 
+		 * space is modified. glMatrixMode select which matrix to manipulate
+		 * (the texture transformation matrix in this case). glLoadIdentity()
+		 * resets the (selected) matrix to the identity matrix. And finally 
+		 * glScalef() calculates the texture matrix.
+		 */
+		glMatrixMode(GL_TEXTURE);
+		glLoadIdentity();
+		glScalef(1.0f/(GLfloat)src->get_w(), 1.0f/(GLfloat)src->get_h(), 1);
+
+		// Enable Alpha blending 
+		glDisable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		/* select the texture to paint on the screen
+		 * openGL does not know anything about SDL_Surfaces
+		 * opengl uses textures to handle images
+		 * getTexture() returns the texture id of the Surface. It creates
+		 * the texture from the SDL_Surface if it doesn't exist
+		 */
+		glBindTexture( GL_TEXTURE_2D, src->getTexture());
+		
+		/* This block between blBegin() and glEnd() does the blit.
+		 * It draws a textured rectangle. glTexCoord2i() set the Texture
+		 * Texture cooardinates. This is the source rectangle.
+		 * glVertex2f() sets the screen coordiantes which belong to the 
+		 * previous texture coordinate. This is the destination rectangle 
+		 */
+		glBegin(GL_QUADS);
+		    //set color white, otherwise textures get mixed with color
+		    glColor3f(1.0,1.0,1.0);
+		    //top-left 
+		    glTexCoord2i( srcrc.x,         srcrc.y );
+		    glVertex2i(   dst.x,           dst.y );
+		    //top-right
+		    glTexCoord2i( srcrc.x+srcrc.w, srcrc.y );
+		    glVertex2f(   dst.x+srcrc.w,   dst.y );
+		    //botton-right
+		    glTexCoord2i( srcrc.x+srcrc.w, srcrc.y+srcrc.h );
+		    glVertex2f(   dst.x+srcrc.w,   dst.y+srcrc.h );
+		    //bottom-left
+		    glTexCoord2i( srcrc.x,         srcrc.y + srcrc.h);
+		    glVertex2f(   dst.x,           dst.y+srcrc.h );
+		glEnd();
+
+		glMatrixMode(GL_TEXTURE);
+		glLoadIdentity();
+
+		return;
+	}
+#endif
+
+	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
+	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
+
+	SDL_BlitSurface(src->m_surface, &srcrect, m_surface, &dstrect);
+}
 
 void Surface::blit(Point const dst, Surface * const src, Rect const srcrc)
 {
@@ -668,7 +739,7 @@ void Surface::draw_minimap
 	rc2.x=rc2.y=0;
 	rc2.w=rc.w;
 	rc2.h=rc.h;
-
+	SDL_FillRect(surface, 0, SDL_MapRGBA(surface->format, 0, 0, 0, 255));
 	SDL_LockSurface(surface);
 	
 	Uint8 * const pixels = static_cast<uint8_t *>(surface->pixels);
@@ -691,7 +762,7 @@ void Surface::draw_minimap
 	Surface surf;
 	surf.set_sdl_surface(*surface);
 
-	blit(Point(rc.x,rc.y), &surf, rc2);
+	blit_solid(Point(rc.x,rc.y), &surf, rc2);
 #else
 	//TODO: this const_cast is evil and should be exorcised.
 	Uint8 * const pixels = const_cast<Uint8 *>
