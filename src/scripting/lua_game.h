@@ -84,6 +84,7 @@ public:
 	int hide_fields(lua_State * L);
 	int reveal_scenario(lua_State * L);
 	int place_road(lua_State * L);
+	int get_buildings(lua_State * L);
 
 
 	/*

@@ -39,6 +39,9 @@
 // TODO: make pickling independent of OS by using widelands Stream*
 // TODO: check SirVer, Lua TODOs!
 
+// FUTURE: access to player stock via Player.get_wares and get_workers
+// FUTURE: access to constructionsites via Player.get_buildings
+// FUTURE: making busy roads and second carriers
 
 /*
 ============================================

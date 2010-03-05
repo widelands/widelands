@@ -96,6 +96,7 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, hide_fields),
 	METHOD(L_Player, reveal_scenario),
 	METHOD(L_Player, place_road),
+	METHOD(L_Player, get_buildings),
 	{0, 0},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
@@ -814,6 +815,58 @@ int L_Player::place_road(lua_State * L) {
 					"the road");
 
 	return to_lua<L_Road>(L, new L_Road(*r));
+}
+
+/*
+ * TODO: docu
+ */
+int L_Player::get_buildings(lua_State * L) {
+	Game & g = get_game(L);
+	Map * map = g.get_map();
+	Player & p = get(L, g);
+
+	// if only one string, convert to array so that we can use
+	// m_parse_building_list
+	bool return_array = true;
+	if (lua_isstring(L, -1)) {
+		const char * name = luaL_checkstring(L, -1);
+		lua_pop(L, 1);
+		lua_newtable(L);
+		lua_pushuint32(L, 1);
+		lua_pushstring(L, name);
+		lua_rawset(L, -3);
+		return_array = false;
+	}
+
+	std::vector<Building_Index> houses;
+	m_parse_building_list(L, p.tribe(), houses);
+
+	lua_newtable(L);
+
+	uint32_t cidx = 1;
+	container_iterate_const(std::vector<Building_Index>, houses, i) {
+		const std::vector<Widelands::Player::Building_Stats> & vec =
+			p.get_building_statistics(*i.current);
+
+		if (return_array) {
+			lua_pushstring(L, p.tribe().get_building_descr(*i.current)->name());
+			lua_newtable(L);
+			cidx = 1;
+		}
+
+		for (uint32_t l = 0; l < vec.size(); ++l) {
+			if (vec[l].is_constructionsite)
+				continue;
+
+			lua_pushuint32(L, cidx++);
+			upcasted_immovable_to_lua(L, (*map)[vec[l].pos].get_immovable());
+			lua_rawset(L, -3);
+		}
+
+		if (return_array)
+			lua_rawset(L, -3);
+	}
+	return 1;
 }
 
 /*
