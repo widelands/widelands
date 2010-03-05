@@ -46,13 +46,21 @@ using Widelands::Road;
 /*
  * Create a Surface from a surface
  */
-Surface::Surface(Surface const & other)
-:
+Surface::Surface(Surface const & other):
 
 // HACK: assume this should be picture format; there is no SDL_CopySurface
-m_surface(SDL_DisplayFormatAlpha(other.m_surface)),
+m_surface     (SDL_DisplayFormatAlpha(other.m_surface)),
 
-m_offsx(other.m_offsx), m_offsy(other.m_offsx), m_w(other.m_w), m_h(other.m_h)
+#ifdef HAS_OPENGL
+m_surf_type  (SURF_SDL),
+m_texture (0),
+#endif 
+
+m_offsx       (other.m_offsx),
+m_offsy       (other.m_offsx),
+m_w           (other.m_w),
+m_h           (other.m_h)
+
 {}
 
 
@@ -63,10 +71,14 @@ void Surface::update() {
 	//  flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0);
 	//in case of 2d graphics but also allows for double buffering
 #if HAS_OPENGL
-	if (g_opengl) {
-		//  SDL_GL_SwapBuffers();
-	} else
+	if (g_opengl && isGLsf()) {
+		log("Surface::update() SDL_GL_SwapBuffers\n");
+		SDL_GL_SwapBuffers();
+		//glClear(GL_COLOR_BUFFER_BIT);
+		return;
+	} 
 #endif
+
 		SDL_Flip(m_surface);
 }
 
@@ -75,6 +87,13 @@ void Surface::update() {
  */
 void Surface::save_bmp(const char & fname) const {
 	assert(m_surface);
+#ifdef HAS_OPENGL
+	//if(g_opengl and isGLsf())
+	//{
+		log("Warning: Surface::save_bmp() not implemented for opengl mode\n");
+		return;
+	//}
+#endif
 	SDL_SaveBMP(m_surface, &fname);
 }
 
@@ -85,6 +104,13 @@ void Surface::save_bmp(const char & fname) const {
  * textures
  */
 void Surface::force_disable_alpha() {
+#ifdef HAS_OPENGL
+	if(g_opengl and isGLsf())
+	{
+		log("Warning: Surface::force_disable_alpha() not implemented for opengl mode\n");
+		return;
+	}
+#endif
 	SDL_Surface * const newsur = SDL_DisplayFormat(m_surface);
 	SDL_FreeSurface(m_surface);
 	m_surface = newsur;
@@ -97,18 +123,20 @@ Draws the outline of a rectangle
 */
 void Surface::draw_rect(const Rect rc, const RGBColor clr) {
 
-#if HAS_OPENGL
-	//use opengl drawing if available
-	if (g_opengl) {
+#ifdef HAS_OPENGL
+	if(g_opengl and isGLsf())
+	{
+		//log("Surface::draw_rect() for opengl is experimental\n");
+		glDisable(GL_BLEND);
 		glBegin(GL_LINE_LOOP);
-		glColor3f
+		    glColor3f
 			((clr.r() / 256.0f),
-			 (clr.g() / 256.0f),
-			 (clr.b() / 256.0f));
-		glVertex2f(rc.x, rc.y);
-		glVertex2f(rc.x + rc.w, rc.y);
-		glVertex2f(rc.x + rc.w, rc.y + rc.h);
-		glVertex2f(rc.x, rc.y + rc.h);
+			(clr.g() / 256.0f),
+			(clr.b() / 256.0f));
+		    glVertex2f(rc.x,        rc.y);
+		    glVertex2f(rc.x + rc.w, rc.y);
+		    glVertex2f(rc.x + rc.w, rc.y + rc.h);
+		    glVertex2f(rc.x,        rc.y + rc.h);
 		glEnd();
 		return;
 	}
@@ -146,18 +174,23 @@ void Surface::fill_rect(const Rect rc, const RGBColor clr) {
 	assert(rc.w >= 1);
 	assert(rc.h >= 1);
 
-#if HAS_OPENGL
-	//use opengl if available
-	if (g_opengl) {
+#ifdef HAS_OPENGL
+	if(g_opengl and isGLsf())
+	{
+		/*log("Surface::fill_rect((%d, %d, %d, %d),(%u, %u, %u)) for opengl\n",
+		    rc.x, rc.y, rc.w, rc.h,
+		    clr.r(), clr.g(), clr.b());*/
+		    
+		glDisable(GL_BLEND);
 		glBegin(GL_QUADS);
-		glColor3f
+		    glColor3f
 			((clr.r() / 256.0f),
 			 (clr.g() / 256.0f),
 			 (clr.b() / 256.0f));
-		glVertex2f(rc.x, rc.y);
-		glVertex2f(rc.x + rc.w, rc.y);
-		glVertex2f(rc.x + rc.w, rc.y + rc.h);
-		glVertex2f(rc.x, rc.y + rc.h);
+		    glVertex2f(rc.x,        rc.y);
+		    glVertex2f(rc.x + rc.w, rc.y);
+		    glVertex2f(rc.x + rc.w, rc.y + rc.h);
+		    glVertex2f(rc.x,        rc.y + rc.h);
 		glEnd();
 		return;
 	}
@@ -190,18 +223,45 @@ void Surface::brighten_rect(const Rect rc, const int32_t factor) {
 
 	const Point bl = rc.bottom_left();
 
-	log
+	/*log
 		("Surface::brighten_rect((%d, %d, %d, %d), %d)\n", 
-		 bl.x, rc.x, bl.x, rc.x, factor);
+		 bl.x, rc.x, bl.x, rc.x, factor);*/
 
-#if HAS_OPENGL
-	if (g_opengl) {
-		//  FIXME do something here
+#ifdef HAS_OPENGL
+	if(g_opengl and isGLsf())
+	{
+		//log("Warning: Surface::brighten_rect() not implemented for opengl mode\n");
+		/* glBlendFunc is a very nice feature of opengl. You can specify how the 
+		 * color is calculated.
+		 * 
+		 * glBlendFunc(GL_ONE, GL_ONE) means the following:
+		 * Rnew = Rdest + Rsrc 
+		 * Gnew = Gdest + Gsrc
+		 * Bnew = Bdest + Bsrc
+		 * Anew = Adest + Asrc
+		 * where Xnew is the new calculated color for destination, Xdest is the old 
+		 * color of the destination and Xsrc is the color of the source.
+		 */
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_ONE, GL_ONE);
+		
+		// And now simply draw a rect with facor as the color (this is the source color)
+		// over the region
+		glBegin(GL_QUADS);
+		    glColor3f
+			((factor / 256.0f),
+			 (factor / 256.0f),
+			 (factor / 256.0f));
+		    glVertex2f(rc.x,        rc.y);
+		    glVertex2f(rc.x + rc.w, rc.y);
+		    glVertex2f(rc.x + rc.w, rc.y + rc.h);
+		    glVertex2f(rc.x,        rc.y + rc.h);
+		glEnd();
 		return;
 	}
 #endif
 	
-
+	return;
 	lock();
 
 	if(m_surface->format->BytesPerPixel == 4)
@@ -264,6 +324,16 @@ Clear the entire bitmap to black
 ===============
 */
 void Surface::clear() {
+#ifdef HAS_OPENGL
+	if(g_opengl and isGLsf())
+	{
+		log("Surface::clear() for opengl mode\n");
+ 		glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
+		glClear(GL_COLOR_BUFFER_BIT);
+		return;
+	}
+#endif
+
 	SDL_FillRect(m_surface, 0, 0);
 }
 
@@ -272,9 +342,147 @@ void Surface::clear() {
 Blit this given source bitmap to this bitmap.
 ===============
 */
+#ifdef HAS_OPENGL
+GLuint Surface::getTexture()
+{
+	if(!m_glTexUpdate and m_texture)
+		return m_texture->id();
+	
+	log("Warning: Surface::getTexture() creates Texture from Surface\n");
+
+	GLuint texture;
+	SDL_Surface *surface;
+	GLenum texture_format;
+	GLint  Colors;
+
+	surface=m_surface;
+
+	SDL_Surface * tsurface = NULL;
+
+	Colors = surface->format->BytesPerPixel;
+	if (Colors == 4)
+	{
+		if (surface->format->Rmask == 0x000000ff)
+			texture_format = GL_RGBA;
+		else
+			texture_format = GL_BGRA;
+	} else if (Colors == 3)
+	{
+		if (surface->format->Rmask == 0x000000ff)
+			texture_format = GL_RGB;
+		else
+			texture_format = GL_BGR;
+	} else {
+		printf("warning: the image is not truecolor\n");
+		/* Opengl can't use this surface. So create a new SDL_Surface
+		 * an do a SDL blit. Then give OpenGL this surface.
+		 */
+		tsurface = SDL_DisplayFormatAlpha(surface);
+		//SDL_BlitSurface(src->m_surface, &srcrect, m_surface, &dstrect);
+		
+		SDL_FillRect(tsurface, 0, SDL_MapRGBA(tsurface->format,0,0,0,0));
+		//SDL_SetAlpha(surface, 0, 0); 
+		//SDL_SetAlpha(tsurface, 0, 0); 
+		SDL_BlitSurface(surface, 0, tsurface, 0);
+		surface = tsurface;
+		if (surface->format->Rmask == 0x000000ff)
+			texture_format = GL_RGBA;
+		else
+			texture_format = GL_BGRA;
+
+		// this error should not go unhandled
+	}
+
+	// Let OpenGL create a texture object
+	glGenTextures( 1, &texture );
+
+	// seclet the texture object
+	glBindTexture( GL_TEXTURE_2D, texture );
+
+	// set texture filter to siply take the nearest pixel.
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+
+	glTexImage2D( GL_TEXTURE_2D, 0, Colors, surface->w, surface->h, 0,
+	texture_format, GL_UNSIGNED_BYTE, surface->pixels );
+	
+	
+	if(tsurface)
+		SDL_FreeSurface(tsurface);
+
+	//SDL_FreeSurface(m_surface);
+	if(m_texture)
+		delete m_texture;
+	m_texture = new oglTexture(texture);
+	m_glTexUpdate = false;
+	return texture;
+}
+#endif
+
 void Surface::blit(Point const dst, Surface * const src, Rect const srcrc)
 {
-	//  FIXME draw using opengl
+	/*
+	log("Surface::blit((%d, %d), (%d, %d), (%d, %d, %d, %d))\n",
+	    dst.x, dst.y,
+	    surface->w, surface->h,
+	    srcrc.x, srcrc.y, srcrc.w, srcrc.h);
+	*/
+#ifdef HAS_OPENGL
+	if(g_opengl and isGLsf())
+	{
+		/* Set a texture scaling factor. Normaly texture coordiantes 
+		 * (see glBegin()...glEnd() Block below) are given in the range 0-1
+		 * to avoid the calculation (and let opengl do it) the texture 
+		 * space is modified. glMatrixMode select which matrix to manipulate
+		 * (the texture transformation matrix in this case). glLoadIdentity()
+		 * resets the (selected) matrix to the identity matrix. And finally 
+		 * glScalef() calculates the texture matrix.
+		 */
+		glMatrixMode(GL_TEXTURE);
+		glLoadIdentity();
+		glScalef(1.0f/(GLfloat)src->get_w(), 1.0f/(GLfloat)src->get_h(), 1);
+
+		// Enable Alpha blending 
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		/* select the texture to paint on the screen
+		 * openGL does not know anything about SDL_Surfaces
+		 * opengl uses textures to handle images
+		 * getTexture() returns the texture id of the Surface. It creates
+		 * the texture from the SDL_Surface if it doesn't exist
+		 */
+		glBindTexture( GL_TEXTURE_2D, src->getTexture());
+		
+		/* This block between blBegin() and glEnd() does the blit.
+		 * It draws a textured rectangle. glTexCoord2i() set the Texture
+		 * Texture cooardinates. This is the source rectangle.
+		 * glVertex2f() sets the screen coordiantes which belong to the 
+		 * previous texture coordinate. This is the destination rectangle 
+		 */
+		glBegin(GL_QUADS);
+		    //set color white, otherwise textures get mixed with color
+		    glColor3f(1.0,1.0,1.0);
+		    //top-left 
+		    glTexCoord2i( srcrc.x,         srcrc.y );
+		    glVertex2i(   dst.x,           dst.y );
+		    //top-right
+		    glTexCoord2i( srcrc.x+srcrc.w, srcrc.y );
+		    glVertex2f(   dst.x+srcrc.w,   dst.y );
+		    //botton-right
+		    glTexCoord2i( srcrc.x+srcrc.w, srcrc.y+srcrc.h );
+		    glVertex2f(   dst.x+srcrc.w,   dst.y+srcrc.h );
+		    //bottom-left
+		    glTexCoord2i( srcrc.x,         srcrc.y + srcrc.h);
+		    glVertex2f(   dst.x,           dst.y+srcrc.h );
+		glEnd();
+
+		glMatrixMode(GL_TEXTURE);
+		glLoadIdentity();
+
+		return;
+	}
+#endif
 
 	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
 	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
@@ -286,6 +494,13 @@ void Surface::blit(Point const dst, Surface * const src, Rect const srcrc)
  * Fast blit, simply copy the source to the destination
  */
 void Surface::fast_blit(Surface * const src) {
+#ifdef HAS_OPENGL
+	if(g_opengl and isGLsf())
+	{
+		log("Warning: Surface::fast_blit() not implemented for opengl mode\n");
+		return;
+	}
+#endif
 	SDL_BlitSurface(src->m_surface, 0, m_surface, 0);
 }
 

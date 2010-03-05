@@ -160,9 +160,9 @@ void Button::set_enabled(bool const on)
 /**
  * Redraw the button
 */
-void Button::draw(RenderTarget & odst)
+void Button::draw(RenderTarget & dst)
 {
-
+/*
 	if(!m_needredraw)
 	{
 		odst.blit(Point(0, 0), m_cache_pid);
@@ -172,7 +172,7 @@ void Button::draw(RenderTarget & odst)
 	m_cache_pid = g_gr->create_surface(odst.get_w(), odst.get_h());
 	
 	RenderTarget &dst = *(g_gr->get_surface_renderer(m_cache_pid));
-
+*/
 	// Draw the background
 	if (not m_flat)
 		dst.tile
@@ -258,8 +258,9 @@ void Button::draw(RenderTarget & odst)
 		if (m_pressed && m_highlighted)
 			dst.draw_rect(Rect(Point(0, 0), get_w(), get_h()), m_clr_down);
 	}
-	odst.blit(Point(0, 0), m_cache_pid);
-	m_needredraw=false;
+	
+	//odst.blit(Point(0, 0), m_cache_pid);
+	//m_needredraw=false;
 }
 
 void Button::think()

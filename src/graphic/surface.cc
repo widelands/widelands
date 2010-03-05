@@ -27,15 +27,19 @@
 Surface::~Surface() {
 	if (m_surface)
 		SDL_FreeSurface(m_surface);
+	if(m_texture)
+		delete m_texture;
 }
 
 void Surface::set_sdl_surface(SDL_Surface & surface)
 {
 	if (m_surface)
 		SDL_FreeSurface(m_surface);
+
 	m_surface = &surface;
 	m_w = m_surface->w;
 	m_h = m_surface->h;
+	m_glTexUpdate = true;
 }
 
 const SDL_PixelFormat * Surface::get_format() const {

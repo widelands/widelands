@@ -25,6 +25,9 @@
 
 #include "rect.h"
 
+#include <SDL_opengl.h>
+
+
 namespace Widelands {
 struct Editor_Game_Base;
 struct Field;
@@ -54,7 +57,14 @@ class Surface {
 	uint32_t m_w, m_h;
 
 public:
-	Surface() : m_surface(0), m_offsx(0), m_offsy(0) {}
+	Surface() : 
+		m_surface(0), m_offsx(0), m_offsy(0) 
+#ifdef HAS_OPENGL
+		, m_surf_type(SURF_SDL),
+		m_texture(0)
+#endif 
+	{}
+	
 	Surface(Surface const &);
 	~Surface();
 
@@ -112,6 +122,32 @@ public:
 		 const Texture & l_r_texture,
 		 const Texture & f_d_texture,
 		 const Texture & f_r_texture);
+
+#ifdef HAS_OPENGL
+	enum SurfaceType_t
+	{
+		SURF_SDL,
+		SURF_OGLHW
+	} m_surf_type;
+	void set_isGLsf(){m_surf_type=SURF_OGLHW;}
+	bool isGLsf() {return m_surf_type==SURF_OGLHW;}
+	
+	class oglTexture
+	{
+	  public:
+		oglTexture() {}
+		oglTexture(GLuint id): m_textureID(id) {}
+		~oglTexture()
+			{glDeleteTextures( 1, &m_textureID);}
+		GLuint id() {return m_textureID;}
+		GLuint m_textureID;
+	};
+	
+	oglTexture * m_texture;
+	bool m_glTexUpdate;
+	
+	GLuint getTexture();
+#endif
 
 private:
 	void set_subwin(Rect r);

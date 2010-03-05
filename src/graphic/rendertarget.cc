@@ -367,6 +367,13 @@ void RenderTarget::rendermap
 	 Player                      const &       player,
 	 Point                                     viewofs)
 {
+#if HAS_OPENGL
+	if (g_opengl)
+	{
+		glClearColor(0,0,0,1);
+		glClear(GL_COLOR_BUFFER_BIT);
+	}
+#endif
 	if (player.see_all())
 		return rendermap(egbase, viewofs);
 

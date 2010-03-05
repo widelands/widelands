@@ -26,6 +26,7 @@
 #include "picture_id.h"
 
 #include <stdint.h>
+#include <vector>
 
 /**
  * This contains all the road textures needed to render roads
@@ -61,6 +62,11 @@ struct Texture {
 	void animate(uint32_t time);
 	void reset_was_animated() {m_was_animated = false;}
 	bool was_animated() const throw () {return m_was_animated;}
+#ifdef HAS_OPENGL
+	uint32_t getTexture(uint32_t frame = 0) const
+		{return m_glFrames.at(frame);}
+	//uint32_t getCurTexture(return m_glFrames.at(frame););
+#endif
 
 private:
 	Colormap * m_colormap;
@@ -71,6 +77,9 @@ private:
 	uint32_t   m_frametime;
 	bool       is_32bit;
 	bool       m_was_animated;
+#ifdef HAS_OPENGL
+	std::vector<uint32_t> m_glFrames;
+#endif
 };
 
 #endif

@@ -141,10 +141,44 @@ is_32bit   (format.BytesPerPixel == 4)
 				 TEXTURE_WIDTH);
 
 		SDL_UnlockSurface(cv);
+		
+#ifdef HAS_OPENGL
+		fmt.BitsPerPixel = 24;
+		fmt.BytesPerPixel = 3;
+		fmt.palette = 0;
+		fmt.Rmask = 0x000000FF;
+		fmt.Gmask = 0x0000FF00;
+		fmt.Bmask = 0x00FF0000;
+		fmt.Amask = 0;
+		SDL_Surface * tsurface = SDL_ConvertSurface(surf, &fmt, 0);
+		
+		GLuint texture;
+		
+		// Let OpenGL create a texture object
+		glGenTextures( 1, &texture );
+
+		// seclet the texture object
+		glBindTexture( GL_TEXTURE_2D, texture );
+
+		// set texture filter to siply take the nearest pixel.
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+
+		glTexImage2D( GL_TEXTURE_2D, 0, 3, tsurface->w, tsurface->h, 0,
+		GL_RGB, GL_UNSIGNED_BYTE, tsurface->pixels );
+		
+		
+		if(tsurface)
+		SDL_FreeSurface(tsurface);
+		
+		
+		m_glFrames.push_back(texture);
+#endif
 
 		SDL_FreeSurface(cv);
 		SDL_FreeSurface(surf);
 	}
+
 
 	if (!m_nrframes)
 		throw wexception("%s: texture has no frames", &fnametmpl);

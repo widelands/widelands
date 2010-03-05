@@ -28,6 +28,8 @@
 #include "logic/roadtype.h"
 #include "vertex.h"
 
+#include "log.h"
+
 ///Must be a power of two
 #define DITHER_WIDTH 4
 
@@ -216,7 +218,18 @@ template<typename T> static void render_triangle
 		return; // degenerate triangle
 
 #if HAS_OPENGL
+
+	//log("Warning: render_triangle not implemented\n");
+
+	glMatrixMode(GL_TEXTURE);
+	glLoadIdentity();
+	glScalef(1.0f/(GLfloat)TEXTURE_WIDTH, 1.0f/(GLfloat)TEXTURE_HEIGHT, 1);
+	
 	if (g_opengl) {
+		glBindTexture( GL_TEXTURE_2D, tex.getTexture());
+		glDisable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glColor4f(1.0f,1.0f,1.0f,1.0f);
 		glBegin(GL_TRIANGLES);
 		glTexCoord2i(p1.tx, p1.ty);
 		glVertex2f(p1.x, p1.y);

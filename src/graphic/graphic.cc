@@ -115,23 +115,36 @@ Graphic::Graphic
 	}
 
 	// Set video mode using SDL
-	int32_t flags = SDL_SWSURFACE;
+	int32_t flags = 0; 
 
-	if (hw_improvements) {
+	const SDL_VideoInfo * videoInfo = SDL_GetVideoInfo();
+
+	if (hw_improvements and videoInfo->hw_available) {
 		log("Graphics: Trying HW_SURFACE\n");
-		flags = SDL_HWSURFACE; //  |SDL_HWACCEL|SDL_OPENGL;
+		flags |= SDL_HWSURFACE | SDL_HWPALETTE; 
 	}
+	else
+	{
+		log("Graphics: Trying SW_SURFACE\n");
+		flags |= SDL_SWSURFACE;
+	}
+
 #if HAS_OPENGL
-	if (hw_improvements && opengl) {
+	if (opengl) {
 		log("Graphics: Trying opengl\n");
-		flags = SDL_HWACCEL|SDL_OPENGL; //  SDL_OPENGLBLIT;
-		g_opengl = true;
+		flags |= SDL_OPENGL | SDL_OPENGLBLIT;
 	}
 #endif
+
 	if (hw_improvements && double_buffer) {
+#ifdef HAS_OPENGL
+		flags |= SDL_GL_DOUBLEBUFFER;
+#else
 		flags |= SDL_DOUBLEBUF;
+#endif
 		log("Graphics: Trying DOUBLE BUFFERING\n");
 	}
+
 	if (fullscreen) {
 		flags |= SDL_FULLSCREEN;
 		log("Graphics: Trying FULLSCREEN\n");
@@ -144,17 +157,34 @@ Graphic::Graphic
 	if (!sdlsurface)
 		throw wexception("could not set video mode: %s", SDL_GetError());
 
+#ifdef HAS_OPENGL
+	SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
+#endif
+	
+	
 	if (0 != (sdlsurface->flags & SDL_HWSURFACE))
 		log("Graphics: HW SURFACE ENABLED\n");
 	if (0 != (sdlsurface->flags & SDL_DOUBLEBUF))
 		log("Graphics: DOUBLE BUFFERING ENABLED\n");
+	if (0 != (sdlsurface->flags & SDL_GL_DOUBLEBUFFER))
+		log("Graphics: OPENGL DOUBLE BUFFERING ENABLED\n");
 	if (0 != (sdlsurface->flags & SDL_SWSURFACE))
 		log("Graphics: SW SURFACE ENABLED\n");
 	if (0 != (sdlsurface->flags & SDL_FULLSCREEN))
 		log("Graphics: FULLSCREEN ENABLED\n");
 #if HAS_OPENGL
 	if (0 != (sdlsurface->flags & SDL_OPENGL))
+	{
 		log ("Graphics: OPENGL ENABLED\n");
+		g_opengl = true;
+		
+		GLboolean glDoubleBuf;
+		glGetBooleanv(GL_DOUBLEBUFFER, &glDoubleBuf);
+		if (glDoubleBuf == GL_TRUE)
+			log("OpenGL: Double buffering enabled\n");
+		else
+			log("OpenGL: Double buffering disabled\n");
+	}
 #endif
 
 	/* Information about the current video settings. */
@@ -207,22 +237,25 @@ Graphic::Graphic
 
 #if HAS_OPENGL
 	if (g_opengl) {
+		m_screen.set_isGLsf();
+
+		glShadeModel( GL_SMOOTH );
+
+		glViewport( 0, 0, w, h );
+		
 		glMatrixMode(GL_PROJECTION);
-		glPushMatrix();
 		glLoadIdentity();
-		glOrtho(0, w, 0, h, -1, 1);
+		glOrtho(0, w, h, 0, -1, 1);
 
 		glMatrixMode(GL_MODELVIEW);
-		glPushMatrix();
 		glLoadIdentity();
 
 		glDisable(GL_DEPTH_TEST);
-		//  glViewport(0, 0, w, h);
-		//  gluOrtho2D(0, w, h, 0);
-		//  glEnable(GL_TEXTURE_2D);
-		//  glEnable(GL_BLEND);
-		//  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_TEXTURE_2D);
 
+		glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
+		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+		SDL_GL_SwapBuffers( );
 	}
 #endif
 
@@ -325,6 +358,7 @@ void Graphic::refresh(bool force)
 		SDL_UpdateRects
 			(m_screen.get_sdl_surface(), m_nr_update_rects, m_update_rects);
 
+	SDL_GL_SwapBuffers();
 	m_update_fullscreen = false;
 	m_nr_update_rects = 0;
 }
