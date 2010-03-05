@@ -43,6 +43,11 @@
 
 #include <cstdio>
 
+#include "config.h"
+
+#ifndef HAVE_VARARRAY
+#include <climits>
+#endif
 namespace Widelands {
 
 BaseImmovable::BaseImmovable(const Map_Object_Descr & mo_descr) :
@@ -421,8 +426,11 @@ uint32_t Immovable_Descr::terrain_suitability
 	World const & world = map.world();
 	uint8_t nr_terrain_types = world.get_nr_terrains();
 	uint32_t result = 0;
-    std::vector<uint8_t> nr_triangles(nr_terrain_types,0);
-
+#ifdef HAVE_VARARRAY
+	uint8_t nr_triangles[nr_terrain_types];
+#else
+	uint8_t nr_triangles[UCHAR_MAX];
+#endif
 	//  Neighbours
 	FCoords const tr = map.tr_n(f);
 	FCoords const tl = map.tl_n(f);
@@ -1015,7 +1023,6 @@ void PlayerImmovable::add_worker(Worker & w)
 */
 void PlayerImmovable::remove_worker(Worker & w)
 {
-    // TODO: why not use std::erase?
 	container_iterate(Workers, m_workers, i)
 		if (*i.current == &w) {
 			*i.current = *(i.get_end() - 1);

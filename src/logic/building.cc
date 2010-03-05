@@ -314,7 +314,7 @@ void Building::load_finish(Editor_Game_Base & egbase) {
 			++i;
 			continue;
 		}
-        i = wl_erase(queue, i.current);
+		i = wl_erase(queue, i.current);
 	}
 }
 

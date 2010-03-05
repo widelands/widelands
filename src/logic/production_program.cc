@@ -38,6 +38,8 @@
 
 #include <libintl.h>
 
+#include "config.h"
+
 namespace Widelands {
 
 ProductionProgram::Action::~Action() {}
@@ -60,8 +62,7 @@ void ProductionProgram::parse_ware_type_group
 		char const terminator = *parameters;
 		*parameters = '\0';
 		Ware_Index const ware_index = tribe.safe_ware_index(ware);
-		for
-            (wl_const_range<Ware_Types> i(inputs);;++i)
+		for (wl_const_range<Ware_Types> i(inputs);;++i)
 			if (i.empty())
 				throw game_data_error
 					(_
@@ -681,7 +682,11 @@ void ProductionProgram::ActConsume::execute
 {
 	std::vector<WaresQueue *> const warequeues = ps.warequeues();
 	size_t const nr_warequeues = warequeues.size();
-    std::vector<uint8_t> consumption_quantities(nr_warequeues,0);
+#ifdef HAVE_VARARRAY
+	uint8_t consumption_quantities[nr_warequeues];
+#else
+	std::vector<uint8_t> consumption_quantities(nr_warequeues,0);
+#endif
 	Groups l_groups = m_groups; //  make a copy for local modification
 	//log("ActConsume::execute(%s):\n", ps.descname().c_str());
 
@@ -742,10 +747,10 @@ void ProductionProgram::ActConsume::execute
 		result_string            += ' ';
 		result_string            += ps.top_state().program->descname();
 		result_string            += _(" because: ");
-        for (wl_const_range<Groups> i(l_groups);i;)
+		for (wl_const_range<Groups> i(l_groups);i;)
 		{
 			assert(i.current->first.size());
-            for(wl_const_range<std::set<Ware_Index> > j(i.current->first);j;)
+			for(wl_const_range<std::set<Ware_Index> > j(i.current->first);j;)
 			{
 				result_string += tribe.get_ware_descr(j.front())->descname();
 				if (j.advance().empty())
@@ -929,7 +934,7 @@ void ProductionProgram::ActRecruit::execute
 	Tribe_Descr const & tribe = ps.owner().tribe();
 	std::string result_string = _("Recruited ");
 	assert(m_items.size());
-    for(wl_const_range<Items> i(m_items);i;)
+	for(wl_const_range<Items> i(m_items);i;)
 	{
 		{
 			uint8_t const count = i.current->second;

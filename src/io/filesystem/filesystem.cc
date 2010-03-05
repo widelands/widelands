@@ -327,12 +327,12 @@ char const * FileSystem::FS_Filename(char const * p, char const * & extension)
 std::string FileSystem::FS_FilenameWoExt(const char *p)
 {
 	char const * extension;
-    std::string fname(p ? 
+	std::string fname(p ? 
 		FileSystem::FS_Filename(p, extension) 
-        : "");
-    return extension ? 
-        fname.substr(0, fname.length()-strlen(extension))
-        : fname;
+		: "");
+	return extension ? 
+		fname.substr(0, fname.length()-strlen(extension))
+		: fname;
 }
 
 /// Create a filesystem from a zipfile or a real directory

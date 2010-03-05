@@ -287,7 +287,7 @@ IMPLEMENTATION
 
 #define SET_WORKER_WITHOUT_COST_SPAWNS(nr, value)                             \
    for                                                                        \
-      (wl_index_range<uint32_t *>                                                   \
+      (wl_index_range<uint32_t *>                                             \
        i(                                                                     \
           m_next_worker_without_cost_spawn,                                   \
           m_next_worker_without_cost_spawn + nr                               \

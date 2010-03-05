@@ -31,7 +31,10 @@ set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE" CACHE STRING "Set by widel
 set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 # we don't want someone to set this directly...
+# CMAKE 2.6.2 does not support unset command.
+if (DEFINED CMAKE_VERSION)
 unset (WL_VERSION CACHE)
+endif (DEFINED CMAKE_VERSION)
 
 # ...but using MAJOR, MINOR and PATCH
 # (BUT: we only use MAJOR and MINOR for the moment; PATCH is set to 0)
@@ -80,7 +83,9 @@ set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MDd /Zi /D_DEBUG" CACHE STRI
 set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG /MD" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 set (CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} /NODEFAULTLIB:msvcrt.lib" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-  
+
+else (DEFINED MSVC)
+  set (HAVE_VARARRAY TRUE CACHE BOOL "Use variable length arrays to improve performance. Requires gcc." )
 endif (DEFINED MSVC)
 
 if (DEFINED WL_3RDPARTY_DIR)

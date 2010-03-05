@@ -909,7 +909,7 @@ void ProductionProgram::ActReturn::writeHTML
 			fw.Text(_("unless"));
 		}
 		fw.Text("</span> ");
-        for (wl_const_range<Conditions> i(m_conditions);;)
+		for (wl_const_range<Conditions> i(m_conditions);;)
 		{
 			i.front()->writeHTML(fw, site);
 			if (i.advance().empty())
@@ -983,7 +983,7 @@ void ProductionProgram::ActReturn::Site_Has::writeHTML
 	fw.Text("</span> <span class=\"keyword\">");
 	fw.Text(_("has"));
 	fw.Text("</span>");
-    for (wl_const_range<std::set<Ware_Index> > i(group.first);;)
+	for (wl_const_range<std::set<Ware_Index> > i(group.first);;)
 	{
 		Item_Ware_Descr const & ware_type = *tribe.get_ware_descr(*i.current);
 		std::string const & ware_type_name     = ware_type.    name();
@@ -1167,9 +1167,9 @@ void ProductionProgram::ActConsume::writeHTML
 	fw.Text("\">");
 	fw.Text(_("consume"));
 	fw.Text("</a> ");
-    for(wl_const_range<Groups> j(groups());;)
+	for(wl_const_range<Groups> j(groups());;)
 	{
-        for(wl_const_range<std::set<Ware_Index> > i(j.current->first);;)
+		for(wl_const_range<std::set<Ware_Index> > i(j.current->first);;)
 		{
 			Item_Ware_Descr const & ware = *tribe.get_ware_descr(*i.current);
 			std::string const & ware_name     = ware.    name();
@@ -1210,7 +1210,7 @@ void ProductionProgram::ActProduce::writeHTML
 	fw.Text("\">");
 	fw.Text(_("produce"));
 	fw.Text("</a> ");
-    for (wl_const_range<Items> i(items());;)
+	for (wl_const_range<Items> i(items());;)
 	{
 		Item_Ware_Descr const & ware = *tribe.get_ware_descr(i.current->first);
 		std::string const & ware_name     = ware.    name();
@@ -1247,7 +1247,7 @@ void ProductionProgram::ActRecruit::writeHTML
 	fw.Text("\">");
 	fw.Text(_("recruit"));
 	fw.Text("</a> ");
-    for(wl_const_range<Items> i(items());;)
+	for(wl_const_range<Items> i(items());;)
 	{
 		Worker_Descr const & worker = *tribe.get_worker_descr(i.current->first);
 		std::string const & worker_name     = worker.    name();

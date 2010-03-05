@@ -77,7 +77,7 @@ Flag::~Flag()
 
 void Flag::load_finish(Editor_Game_Base & egbase) {
 	CapacityWaitQueue & queue = m_capacity_wait;
-    for (wl_range<CapacityWaitQueue > r(queue);r;)
+	for (wl_range<CapacityWaitQueue > r(queue);r;)
 	{
 		Worker & worker = *r->get(egbase);
 		Bob::State const * const state =
@@ -94,10 +94,10 @@ void Flag::load_finish(Editor_Game_Base & egbase) {
 				 "queue.\n",
 				 worker.serial(), serial(), state->objvar1.serial());
 		else {
-            ++r;
+			++r;
 			continue;
 		}
-        r = wl_erase(queue, r.current);
+		r = wl_erase(queue, r.current);
 	}
 }
 

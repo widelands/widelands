@@ -130,7 +130,7 @@ void Event_Player_Building_Types_Option_Menu::Table::fill
 	 Widelands::Event_Player_Building_Types::Building_Types const & bld_types)
 {
 	for
-        (wl_index_range<Widelands::Building_Index> i(Widelands::Building_Index::First(),tribe.get_nrbuildings());
+		(wl_index_range<Widelands::Building_Index> i(Widelands::Building_Index::First(),tribe.get_nrbuildings());
 		 i;
 		 ++i)
 	{
@@ -208,9 +208,9 @@ void Event_Player_Building_Types_Option_Menu::OK::clicked() {
 	}
 	Widelands::Event_Player_Building_Types::Building_Types building_types;
 	for
-        (wl_index_range<uint8_t> i(0, menu.table.size());
-         i;
-         ++i)
+		(wl_index_range<uint8_t> i(0, menu.table.size());
+		 i;
+		 ++i)
 		if (menu.table.get_record(i.current).is_checked(Table::Selected))
 			building_types.insert
 				(Widelands::Building_Index(menu.table[i.current]));

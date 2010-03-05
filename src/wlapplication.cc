@@ -1238,11 +1238,11 @@ void WLApplication::show_usage()
 			 "                      map.\n"
 			 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n")
 #if HAVE_GGZ
-        << _(" --dedicated=FILENAME Starts ggz host with FILENAME as map\n")
+		<< _(" --dedicated=FILENAME Starts ggz host with FILENAME as map\n")
 #endif
-        <<
-        _
-            ( " --speed_of_new_game  The speed that the new game will run at\n"
+		<<
+		_
+			( " --speed_of_new_game  The speed that the new game will run at\n"
 			 "                      when started, with factor 1000 (0 is pause,\n"
 			 "                      1000 is normal speed).\n"
 			 " --auto_roadbuild_mode=[yes|no]\n"
@@ -1266,15 +1266,15 @@ void WLApplication::show_usage()
 			 "                      Enables double buffering\n"
 			 "                      *HIGHLY EXPERIMENTAL*\n")
 #if HAS_OPENGL
-         <<
-         _
+		<<
+		_
 			 (" --opengl=[0|1]\n"
 			 "                      Enables opengl rendering\n"
 			 "                      *DANGEROUS AND BROKEN, DO NOT USE*\n")
 #endif
 		<<
-        _  
-            ("\n"
+		_
+			("\n"
 			 "Options for the internal window manager:\n"
 			 " --border_snap_distance=[0 ...]\n"
 			 "                      Move a window to the edge of the screen\n"
@@ -1292,8 +1292,7 @@ void WLApplication::show_usage()
 			 "                      Only move a window to the edge of a panel\n"
 			 "                      if the window is overlapping with the\n"
 			 "                      panel.\n"
-			 "\n"
-             );
+			 "\n");
 #ifdef DEBUG
 #ifndef WIN32
 	wout

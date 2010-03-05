@@ -17,6 +17,7 @@
  *
  */
 
+#include "config.h"
 #include "graphic.h"
 
 #include "build_info.h"
@@ -607,14 +608,22 @@ void Graphic::save_png(const PictureID & pic_index, StreamWrite * const sw)
 		SDL_PixelFormat & format = const_cast<SDL_PixelFormat &>(surf.format());
 
 	// Write each row
-		std::vector<png_byte> row(row_size,0);
+#ifndef HAVE_VARARRAY
+		std::auto_ptr<png_byte> row_buf(new png_byte[row_size]);
+		if (!row_buf.get()) throw wexception("Out of memory.");
+#endif
 		for (uint32_t y = 0; y < surf_h; ++y) {
-			png_bytep rowp = &row[0];
+#ifdef HAVE_VARARRAY
+			png_byte row[row_size];
+#else
+			png_bytep row = row_buf.get();
+#endif
+			png_bytep rowp = row;
 			for (uint32_t x = 0; x < surf_w; rowp += 4, ++x)
 				SDL_GetRGBA
 					(surf.get_pixel(x, y), &format,
 					 rowp + 0, rowp + 1, rowp + 2, rowp + 3);
-			png_write_row(png_ptr, &row[0]);
+			png_write_row(png_ptr, row);
 		}
 	}
 
@@ -694,7 +703,7 @@ void Graphic::free_surface(const PictureID & picid) {
 	//delete pic->surface;
 	//pic.surface = 0;
 	//pic.module = 0;
-    container_iterate(Picturemap, m_picturemap[picid->module], it)
+	container_iterate(Picturemap, m_picturemap[picid->module], it)
 		if (it.current->second == picid) {
 			m_picturemap[picid->module].erase(it.current);
 			break;

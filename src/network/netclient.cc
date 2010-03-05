@@ -39,6 +39,10 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 
+#include "config.h"
+#ifndef HAVE_VARARRAY
+#include <climits>
+#endif
 
 struct NetClientImpl {
 	GameSettings settings;
@@ -550,10 +554,16 @@ void NetClient::handle_packet(RecvPacket & packet)
 				FileRead fr;
 				fr.Open(*g_fs, path.c_str());
 				if (bytes == fr.GetSize()) {
-					std::vector<char> complete(bytes,0);
-					fr.DataComplete(&complete[0], bytes);
+#ifdef HAVE_VARARRAY
+					char complete[bytes];
+#else
+					std::auto_ptr<char> complete_buf(new char[bytes]);
+					if (!complete_buf.get()) throw wexception("Out of memory");
+					char *complete = complete_buf.get();
+#endif
+					fr.DataComplete(complete, bytes);
 					MD5Checksum<FileRead> md5sum;
-					md5sum.Data(&complete[0], bytes);
+					md5sum.Data(complete, bytes);
 					md5sum.FinishChecksum();
 					std::string localmd5 = md5sum.GetChecksum().str();
 					if (localmd5 == md5)
@@ -583,7 +593,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 		g_fs->EnsureDirectoryExists(path);
 		break;
 	}
-
+	
 	case NETCMD_FILE_PART: {
 		uint32_t part = packet.Unsigned32();
 		uint8_t size = packet.Unsigned8();
@@ -597,8 +607,12 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 		FilePart fp;
 
-		std::vector<char> buf(size);
-		if (packet.Data(&buf[0], size) != size)
+#ifdef HAVE_VARARRAY
+		char buf[size];
+#else
+		char buf[UCHAR_MAX];
+#endif
+		if (packet.Data(buf, size) != size)
 			log("Readproblem. Will try to go on anyways\n");
 		memcpy(fp.part, &buf[0], size);
 		file->parts.push_back(fp);
@@ -623,10 +637,16 @@ void NetClient::handle_packet(RecvPacket & packet)
 			// Check for consistence
 			FileRead fr;
 			fr.Open(*g_fs, file->filename.c_str());
-            std::vector<char> complete(file->bytes);
-			fr.DataComplete(&complete[0], file->bytes);
+#ifdef HAVE_VARARRAY
+			char complete[file->bytes];
+#else
+			std::auto_ptr<char> complete_buf(new char[file->bytes]);
+			if (!complete_buf.get()) throw wexception("Out of memory");
+			char *complete = complete_buf.get();
+#endif
+			fr.DataComplete(complete, file->bytes);
 			MD5Checksum<FileRead> md5sum;
-			md5sum.Data(&complete[0], file->bytes);
+			md5sum.Data(complete, file->bytes);
 			md5sum.FinishChecksum();
 			std::string localmd5 = md5sum.GetChecksum().str();
 			if (localmd5 != file->md5sum) {

@@ -609,7 +609,7 @@ void NetHost::send(ChatMessage msg)
 							 "it!\n");
 						break;
 					} else if (j->usernum == i) {
-						s.send(j->sock);
+						s.send(j.current->sock);
 						break;
 					}
 

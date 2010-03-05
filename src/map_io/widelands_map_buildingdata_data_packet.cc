@@ -621,8 +621,8 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				//  Find a working position that matches this request.
 				ProductionSite::Working_Position * wp = &wp_begin;
 				for
-                    (wl_const_range<Ware_Types>
-                     j(working_positions);;
+					(wl_const_range<Ware_Types>
+					 j(working_positions);;
 					 ++j)
 				{
 					if (j.empty())
