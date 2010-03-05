@@ -275,7 +275,7 @@ int L_Player::place_flag(lua_State * L) {
 	if (not force) {
 		f = get(L, get_game(L)).build_flag(c->fcoords(L));
 		if (!f)
-			return report_error(L, "Couldn't build flag!");
+			return luaL_error(L, "Couldn't build flag!");
 	} else {
 		f = &get(L, get_game(L)).force_flag(c->fcoords(L));
 	}
@@ -300,7 +300,7 @@ int L_Player::place_building(lua_State * L) {
 
 	Building_Index i = get(L, get_game(L)).tribe().building_index(name);
 	if (i == Building_Index::Null())
-		return report_error(L, "Unknown Building: '%s'", name);
+		return luaL_error(L, "Unknown Building: '%s'", name);
 
 	Building & b = get(L, get_game(L)).force_building
 		(c->coords(), i, 0, 0, Soldier_Counts());
@@ -375,7 +375,7 @@ int L_Player::send_message(lua_State * L) {
 			if (s == "new") st = Message::New;
 			else if (s == "read") st = Message::Read;
 			else if (s == "archive") st = Message::Archived;
-			else report_error(L, "Unknown message status: %s", s.c_str());
+			else luaL_error(L, "Unknown message status: %s", s.c_str());
 		}
 		lua_pop(L, 1);
 
@@ -626,7 +626,7 @@ int L_Player::add_objective(lua_State * L) {
 	Player & p = get(L, game);
 	if (p.player_number() != game.get_ipl()->player_number())
 		return
-			report_error
+			luaL_error
 				(L, "Objectives can only be set for the interactive player");
 
 	Map * map = game.get_map();
@@ -635,7 +635,7 @@ int L_Player::add_objective(lua_State * L) {
 	std::string name = luaL_checkstring(L, 2);
 	if (mom[name] != 0)
 		return
-			report_error
+			luaL_error
 				(L, "An objective with the name '%s' already exists!", name.c_str()
 			);
 
@@ -727,7 +727,7 @@ int L_Player::hide_fields(lua_State * L) {
 // UNTESTED
 int L_Player::reveal_scenario(lua_State * L) {
 	if (get_game(L).get_ipl()->player_number() != m_pl)
-		return report_error(L, "Can only be called for interactive player!");
+		return luaL_error(L, "Can only be called for interactive player!");
 
 	Campaign_visibility_save cvs;
 	cvs.set_map_visibility(luaL_checkstring(L, 2), true);
@@ -781,7 +781,7 @@ int L_Player::place_road(lua_State * L) {
 			path.append(map, 6);
 			map.get_tln(current, &current);
 		} else
-			return report_error(L, "Illegal direction: %s", d.c_str());
+			return luaL_error(L, "Illegal direction: %s", d.c_str());
 
 		cstep.add_allowed_location(current);
 	}
@@ -795,20 +795,20 @@ int L_Player::place_road(lua_State * L) {
 		 cstep,
 		 Map::fpBidiCost);
 	if (optimal_path.get_nsteps() != path.get_nsteps())
-		return report_error(L, "Cannot build a road that crosses itself!");
+		return luaL_error(L, "Cannot build a road that crosses itself!");
 
 	BaseImmovable * bi = map.get_immovable(current);
 	if (!bi or bi->get_type() != Map_Object::FLAG) {
 		if (!get(L, g).build_flag(current))
-			return report_error(L, "Could not place end flag!");
+			return luaL_error(L, "Could not place end flag!");
 	}
 	if (bi and bi == starting_flag)
-	  return report_error(L, "Cannot build a closed loop!");
+	  return luaL_error(L, "Cannot build a closed loop!");
 
 	Road * r = get(L, g).build_road(path);
 	if (!r)
 		return
-			report_error
+			luaL_error
 			  (L, "Error while creating Road. May be: something is in "
 					"the way or you do not own the territory were you want to build "
 					"the road");
@@ -827,7 +827,7 @@ void L_Player::m_parse_building_list
 	if (lua_isstring(L, -1)) {
 		std::string opt = luaL_checkstring(L, -1);
 		if (opt != "all")
-			report_error(L, "'%s' was not understood as argument!", opt.c_str());
+			luaL_error(L, "'%s' was not understood as argument!", opt.c_str());
 		for
 			(Building_Index i = Building_Index::First();
 			 i < tribe.get_nrbuildings(); ++i)
@@ -841,7 +841,7 @@ void L_Player::m_parse_building_list
 			const char * name = luaL_checkstring(L, -1);
 			Building_Index i = tribe.building_index(name);
 			if (i == Building_Index::Null())
-				report_error(L, "Unknown building type: '%s'", name);
+				luaL_error(L, "Unknown building type: '%s'", name);
 
 			rv.push_back(i);
 
@@ -863,10 +863,10 @@ int L_Player::m_allow_forbid_buildings(lua_State * L, bool allow)
 }
 Player & L_Player::get(lua_State * L, Widelands::Game & game) {
 	if (m_pl > MAX_PLAYERS)
-		report_error(L, "Illegal player number %i",  m_pl);
+		luaL_error(L, "Illegal player number %i",  m_pl);
 	Player * rv = game.get_player(m_pl);
 	if (!rv)
-		report_error(L, "Player with the number %i does not exist", m_pl);
+		luaL_error(L, "Player with the number %i does not exist", m_pl);
 	return *rv;
 }
 
@@ -1020,7 +1020,7 @@ int L_Objective::__eq(lua_State * L) {
 Objective & L_Objective::get(lua_State * L, Widelands::Game & g) {
 	Objective * o = g.map().mom()[m_name];
 	if (!o)
-		report_error
+		luaL_error
 			(L, "Objective with name '%s' doesn't exist!", m_name.c_str());
 	return *o;
 }
@@ -1073,7 +1073,7 @@ static int L_run_coroutine(lua_State * L) {
 	int nargs = lua_gettop(L);
 	uint32_t runtime = get_game(L).get_gametime();
 	if (nargs < 1)
-		report_error(L, "Too little arguments to run_at");
+		luaL_error(L, "Too little arguments to run_at");
 	if (nargs == 2)
 		runtime = luaL_checkuint32(L, 2);
 

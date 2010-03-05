@@ -120,7 +120,7 @@ static int L_use(lua_State * L) {
 	try {
 		get_game(L).lua().run_script(ns, script);
 	} catch (LuaError & e) {
-		report_error(L, "%s", e.what());
+		luaL_error(L, "%s", e.what());
 	}
 	return 0;
 }

@@ -216,7 +216,7 @@ Map_Object * L_MapObject::get
 {
 	Map_Object * o = m_get_or_zero(game);
 	if (!o)
-		report_error(L, "%s no longer exists!", name.c_str());
+		luaL_error(L, "%s no longer exists!", name.c_str());
 	return o;
 }
 Map_Object * L_MapObject::m_get_or_zero (Game & game)
@@ -278,7 +278,7 @@ int L_BaseImmovable::get_size(lua_State * L) {
 		case BaseImmovable::BIG: lua_pushstring(L, "big"); break;
 		default:
 			return
-				report_error
+				luaL_error
 					(L, "Unknown size in L_BaseImmovable::get_size: %i",
 					 o->get_size());
 			break;
@@ -368,7 +368,7 @@ Ware_Index L_PlayerImmovable::m_get_ ## name ## _index \
 { \
 	Ware_Index idx = i->get_owner()->tribe(). name ## _index(what); \
 	if (!idx) \
-		report_error(L, "Invalid " #capname ": %s", what.c_str()); \
+		luaL_error(L, "Invalid " #capname ": %s", what.c_str()); \
 	return idx; \
 }
 GET_INDEX(ware, Ware);
@@ -424,7 +424,7 @@ int L_Flag::add_ware(lua_State * L)
 	Flag * f = get(game, L);
 
 	if (not f->has_capacity())
-		return report_error(L, "Flag has no capacity left!");
+		return luaL_error(L, "Flag has no capacity left!");
 
 	Ware_Index idx = m_get_ware_index(L, f, luaL_checkstring(L, 2));
 
@@ -558,7 +558,7 @@ int L_Road::get_type(lua_State * L) {
 			lua_pushstring(L, "busy"); break;
 		default:
 			return
-				report_error(L, "Unknown Roadtype! This is a bug in widelands!");
+				luaL_error(L, "Unknown Roadtype! This is a bug in widelands!");
 	}
 	return 1;
 }
@@ -583,7 +583,7 @@ int L_Road::get_type(lua_State * L) {
 */
 int L_Road::warp_workers(lua_State * L) {
 	if (lua_gettop(L) != 2)
-		return report_error(L, "Only one carrier can be warped here!");
+		return luaL_error(L, "Only one carrier can be warped here!");
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 
@@ -592,7 +592,7 @@ int L_Road::warp_workers(lua_State * L) {
 	std::string name = luaL_checkstring(L, -1);
 
 	if (name != "carrier")
-		return report_error(L, "Only 'carrier' is allowed currently!\n");
+		return luaL_error(L, "Only 'carrier' is allowed currently!\n");
 
 	Game & g = get_game(L);
 	Map & map = g.map();
@@ -600,7 +600,7 @@ int L_Road::warp_workers(lua_State * L) {
 	Road * r = get(g, L);
 
 	if (r->get_workers().size())
-		return report_error(L, "No space for this worker!");
+		return luaL_error(L, "No space for this worker!");
 
 	Flag & start = r->get_flag(Road::FlagStart);
 
@@ -617,10 +617,10 @@ int L_Road::warp_workers(lua_State * L) {
 	Tribe_Descr const & tribe = owner.tribe();
 	const Worker_Descr * wd = tribe.get_worker_descr(tribe.worker_index(name));
 	if (!wd)
-		return report_error(L, "%s is not a valid worker name!", name.c_str());
+		return luaL_error(L, "%s is not a valid worker name!", name.c_str());
 
 	if (wd->get_worker_type() != Worker_Descr::CARRIER)
-		return report_error(L, "%s is not a carrier type!", name.c_str());
+		return luaL_error(L, "%s is not a carrier type!", name.c_str());
 
 	Carrier & carrier = ref_cast<Carrier, Worker>
 		(wd->create (g, owner, r, idle_position));
@@ -878,7 +878,7 @@ static int _get_soldier_levels
 	lua_pop(L, 1);
 	if (*hp > sd.get_max_hp_level())
 		return
-			report_error
+			luaL_error
 			(L, "hp level (%i) > max hp level (%i)", *hp, sd.get_max_hp_level());
 
 	lua_pushuint32(L, 2);
@@ -887,7 +887,7 @@ static int _get_soldier_levels
 	lua_pop(L, 1);
 	if (*a > sd.get_max_attack_level())
 		return
-			report_error
+			luaL_error
 			(L, "attack level (%i) > max attack level (%i)",
 			 *a, sd.get_max_attack_level());
 
@@ -897,7 +897,7 @@ static int _get_soldier_levels
 	lua_pop(L, 1);
 	if (*d > sd.get_max_defense_level())
 		return
-			report_error
+			luaL_error
 			(L, "defense level (%i) > max defense level (%i)",
 			 *d, sd.get_max_defense_level());
 
@@ -907,7 +907,7 @@ static int _get_soldier_levels
 	lua_pop(L, 1);
 	if (*e > sd.get_max_evade_level())
 		return
-			report_error
+			luaL_error
 			(L, "evade level (%i) > max evade level (%i)",
 			 *e, sd.get_max_evade_level());
 
@@ -1133,7 +1133,7 @@ int L_ProductionSite::warp_workers(lua_State * L) {
 		const Worker_Descr * wdes = tribe.get_worker_descr
 			(tribe.worker_index(name));
 		if (!wdes)
-			return report_error(L, "%s is not a valid worker name!", name.c_str());
+			return luaL_error(L, "%s is not a valid worker name!", name.c_str());
 
 		bool success = false;
 		container_iterate_const(Ware_Types, working_positions, i) {
@@ -1142,12 +1142,12 @@ int L_ProductionSite::warp_workers(lua_State * L) {
 					success = true;
 					break;
 				} else
-					return report_error(L, "No space left for this worker");
+					return luaL_error(L, "No space left for this worker");
 			}
 		}
 		if (!success)
 			return
-				report_error
+				luaL_error
 				  (L, "%s is not a valid worker for this site!", name.c_str());
 
 		lua_pop(L, 1); /* pop value, keep key for next iteration */
@@ -1206,11 +1206,11 @@ L_Field::L_Field(lua_State * L) {
 	Map & m = get_game(L).map();
 	uint32_t rv = luaL_checkuint32(L, 1);
 	if (rv >= static_cast<uint32_t>(m.get_width()))
-		report_error(L, "x coordinate out of range!");
+		luaL_error(L, "x coordinate out of range!");
 	m_c.x = rv;
 	rv = luaL_checkuint32(L, 2);
 	if (rv >= static_cast<uint32_t>(m.get_height()))
-		report_error(L, "y coordinate out of range!");
+		luaL_error(L, "y coordinate out of range!");
 	m_c.y = rv;
 }
 
@@ -1249,7 +1249,7 @@ int L_Field::get_height(lua_State * L) {
 int L_Field::set_height(lua_State * L) {
 	uint32_t height = luaL_checkuint32(L, -1);
 	if (height > MAX_FIELD_HEIGHT)
-		report_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
+		luaL_error(L, "height must be <= %i", MAX_FIELD_HEIGHT);
 
 	get_game(L).map().set_height(fcoords(L), height);
 
@@ -1292,7 +1292,7 @@ int L_Field::set_resource(lua_State * L) {
 		(luaL_checkstring(L, -1));
 
 	if (res == -1)
-		return report_error(L, "Illegal resource: '%s'", luaL_checkstring(L, -1));
+		return luaL_error(L, "Illegal resource: '%s'", luaL_checkstring(L, -1));
 
 	field->set_resources(res, field->get_resources_amount());
 
@@ -1319,7 +1319,7 @@ int L_Field::set_resource_amount(lua_State * L) {
 
 	if (amount < 0 or amount > max_amount)
 		return
-			report_error
+			luaL_error
 			(L, "Illegal amount: %i, must be >= 0 and <= %i", amount, max_amount);
 
 	field->set_resources(res, amount);
@@ -1364,7 +1364,7 @@ int L_Field::set_terr(lua_State * L) {
 	Terrain_Index td =
 		map.world().index_of_terrain(name);
 	if (td == static_cast<Terrain_Index>(-1))
-		report_error(L, "Unknown terrain '%s'", name);
+		luaL_error(L, "Unknown terrain '%s'", name);
 
 	map.change_terrain(TCoords<FCoords>(fcoords(L), TCoords<FCoords>::R), td);
 
@@ -1386,7 +1386,7 @@ int L_Field::set_terd(lua_State * L) {
 	Terrain_Index td =
 		map.world().index_of_terrain(name);
 	if (td == static_cast<Terrain_Index>(-1))
-		report_error(L, "Unknown terrain '%s'", name);
+		luaL_error(L, "Unknown terrain '%s'", name);
 
 	map.change_terrain
 		(TCoords<FCoords> (fcoords(L), TCoords<FCoords>::D), td);
@@ -1558,11 +1558,11 @@ static int L_create_immovable(lua_State * const L) {
 	if
 	 (BaseImmovable const * const imm = c->fcoords(L).field->get_immovable())
 		if (imm->get_size() >= BaseImmovable::SMALL)
-			return report_error(L, "Node is no longer free!");
+			return luaL_error(L, "Node is no longer free!");
 
 	int32_t const imm_idx = game.map().world().get_immovable_index(objname);
 	if (imm_idx < 0)
-		return report_error(L, "Unknown immovable <%s>", objname);
+		return luaL_error(L, "Unknown immovable <%s>", objname);
 
 	BaseImmovable & m = game.create_immovable(c->coords(), imm_idx, 0);
 

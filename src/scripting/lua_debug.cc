@@ -110,7 +110,7 @@ static int L_save(lua_State * const L) {
 		g_fs->Unlink(complete_filename);
 	std::string error;
 	if (!game.save_handler().save_game(game, complete_filename, &error))
-		return report_error(L, "save error: %s", error.c_str());
+		return luaL_error(L, "save error: %s", error.c_str());
 
 	return 0;
 }
