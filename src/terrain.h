@@ -218,25 +218,30 @@ template<typename T> static void render_triangle
 		return; // degenerate triangle
 
 #if HAS_OPENGL
-
-	//log("Warning: render_triangle not implemented\n");
-
-	glMatrixMode(GL_TEXTURE);
-	glLoadIdentity();
-	glScalef(1.0f/(GLfloat)TEXTURE_WIDTH, 1.0f/(GLfloat)TEXTURE_HEIGHT, 1);
-	
 	if (g_opengl) {
+		if(p1.b==-128 and p2.b==-128 and p3.b==-128)
+			return;
+		glMatrixMode(GL_TEXTURE);
+		glLoadIdentity();
+		glScalef(1.0f/(GLfloat)TEXTURE_WIDTH, 1.0f/(GLfloat)TEXTURE_HEIGHT, 1);
 		glBindTexture( GL_TEXTURE_2D, tex.getTexture());
 		glDisable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glColor4f(1.0f,1.0f,1.0f,1.0f);
+		GLfloat brightness;
 		glBegin(GL_TRIANGLES);
-		glTexCoord2i(p1.tx, p1.ty);
-		glVertex2f(p1.x, p1.y);
-		glTexCoord2i(p2.tx, p2.ty);
-		glVertex2f(p2.x, p2.y);
-		glTexCoord2i(p3.tx, p3.ty);
-		glVertex2f(p3.x, p3.y);
+		    brightness=(150.0+p1.b)/150.0;
+		    glColor3f(brightness, brightness, brightness);
+		    glTexCoord2i(p1.tx, p1.ty);
+		    glVertex2f(p1.x, p1.y);
+		    
+		    brightness=(150.0+p2.b)/150.0;
+		    glColor3f(brightness, brightness, brightness);
+		    glTexCoord2i(p2.tx, p2.ty);
+		    glVertex2f(p2.x, p2.y);
+		    
+		    brightness=(150.0+p3.b)/150.0;
+		    glColor3f(brightness, brightness, brightness);
+		    glTexCoord2i(p3.tx, p3.ty);
+		    glVertex2f(p3.x, p3.y);
 		glEnd();
 		return;
 	}
