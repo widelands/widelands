@@ -348,7 +348,7 @@ GLuint Surface::getTexture()
 	if(!m_glTexUpdate and m_texture)
 		return m_texture->id();
 	
-	log("Warning: Surface::getTexture() creates Texture from Surface\n");
+	//log("Warning: Surface::getTexture() creates Texture from Surface\n");
 
 	GLuint texture;
 	SDL_Surface *surface;
@@ -373,24 +373,23 @@ GLuint Surface::getTexture()
 		else
 			texture_format = GL_BGR;
 	} else {
-		printf("warning: the image is not truecolor\n");
-		/* Opengl can't use this surface. So create a new SDL_Surface
-		 * an do a SDL blit. Then give OpenGL this surface.
-		 */
-		tsurface = SDL_DisplayFormatAlpha(surface);
-		//SDL_BlitSurface(src->m_surface, &srcrect, m_surface, &dstrect);
-		
-		SDL_FillRect(tsurface, 0, SDL_MapRGBA(tsurface->format,0,0,0,0));
-		//SDL_SetAlpha(surface, 0, 0); 
-		//SDL_SetAlpha(tsurface, 0, 0); 
+		SDL_PixelFormat fmt;
+		fmt.BitsPerPixel = 32;
+		fmt.Rmask = 0x000000FF;
+		fmt.Gmask = 0x0000FF00;
+		fmt.Bmask = 0x00FF0000;
+		fmt.Amask = 0xFF000000;
+
+		const SDL_PixelFormat & format = *m_surface->format;
+		SDL_Surface * tsurface = SDL_CreateRGBSurface
+			(SDL_SWSURFACE,
+			 get_w(), get_h(),
+			 fmt.BitsPerPixel,
+			 fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
 		SDL_BlitSurface(surface, 0, tsurface, 0);
 		surface = tsurface;
-		if (surface->format->Rmask == 0x000000ff)
-			texture_format = GL_RGBA;
-		else
-			texture_format = GL_BGRA;
-
-		// this error should not go unhandled
+		Colors=4;
+		texture_format = GL_RGBA;
 	}
 
 	// Let OpenGL create a texture object
@@ -403,9 +402,10 @@ GLuint Surface::getTexture()
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
 
+	SDL_LockSurface(surface);
 	glTexImage2D( GL_TEXTURE_2D, 0, Colors, surface->w, surface->h, 0,
 	texture_format, GL_UNSIGNED_BYTE, surface->pixels );
-	
+	SDL_UnlockSurface(surface);
 	
 	if(tsurface)
 		SDL_FreeSurface(tsurface);
