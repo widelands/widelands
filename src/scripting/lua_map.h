@@ -59,7 +59,7 @@ public:
 		m_ptr = new Widelands::Object_Ptr(&mo);
 	}
 	L_MapObject(lua_State * L) : m_ptr(0) {
-		luaL_error(L, "Cannot instantiate a '%s' directly!", className);
+		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 	virtual ~L_MapObject() {
 		if (m_ptr) {

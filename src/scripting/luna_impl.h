@@ -127,7 +127,7 @@ int m_property_setter(lua_State * const L) {
 	T * * const obj = get_user_class<T>(L, 1);
 
 	if (list->setter == 0)
-		return luaL_error(L, "The property '%s' is read-only!\n", list->name);
+		return report_error(L, "The property '%s' is read-only!\n", list->name);
 
 	return ((*obj)->*(list->setter))(L);
 }
@@ -143,7 +143,7 @@ int m_method_dispatch(lua_State * const L) {
 	// Check for invalid: obj.method()
 	int const n = lua_gettop(L);
 	if (!n)
-		return luaL_error(L, "Method needs at least the object as argument!");
+		return report_error(L, "Method needs at least the object as argument!");
 
 	// Check for invalid: obj.method(plainOldDatatype)
 	luaL_checktype(L, 1, LUA_TTABLE);
@@ -176,7 +176,7 @@ int m_garbage_collect(lua_State * const L) {
 /**
  * Object creation from lua. The object needs a constructor that only
  * takes a lua_State. If direct creation of this object is not desired,
- * use luaL_error in the constructor to tell this the user
+ * use report_error in the constructor to tell this the user
  */
 template <class T>
 int m_constructor(lua_State * const L) {

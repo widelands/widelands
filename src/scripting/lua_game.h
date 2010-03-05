@@ -106,7 +106,7 @@ public:
 	L_Objective(Widelands::Objective n);
 	L_Objective() : m_name("") {}
 	L_Objective(lua_State * L) {
-		luaL_error(L, "Cannot instantiate a '%s' directly!", className);
+		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 
 	virtual void __persist(lua_State*);

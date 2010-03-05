@@ -57,3 +57,22 @@ Widelands::Map_Map_Object_Saver * get_mos(lua_State * const L) {
 	return mos;
 }
 
+
+
+/*
+ * Returns an error to lua. Returns 0
+ */
+int report_error(lua_State * L, const char * const fmt, ...) {
+	char buffer[2048];
+	va_list va;
+
+	va_start(va, fmt);
+	vsnprintf(buffer, sizeof(buffer), fmt, va);
+	va_end(va);
+
+	lua_pushstring(L, buffer);
+
+	lua_error(L);
+
+	return 0;
+}
