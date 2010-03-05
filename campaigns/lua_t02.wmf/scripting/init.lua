@@ -92,10 +92,7 @@ end
 
 function place_buildings_with_workers(p, ...)
    for idx,bdescr in ipairs({...}) do
-      print(idx,bdescr)
       b = p:place_building(bdescr[1], wl.map.Field(bdescr[2],bdescr[3]))
-      print(#b.valid_workers)
-      print(b.valid_workers[1])
       b:warp_workers(b.valid_workers)
    end
 end
