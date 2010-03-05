@@ -64,7 +64,6 @@ class LuaInterface_Impl : public LuaInterface {
 		virtual ~LuaInterface_Impl();
 
 		virtual void interpret_string(std::string);
-		virtual void interpret_file(std::string);
 		virtual std::string const & get_last_error() const {return m_last_error;}
 
 		virtual void register_scripts(FileSystem &, std::string);
@@ -251,18 +250,18 @@ void LuaInterface_Impl::interpret_string(std::string cmd) {
 	m_check_for_errors(rv);
 }
 
-void LuaInterface_Impl::interpret_file(std::string filename) {
-	int rv = luaL_dofile(m_L, filename.c_str());
-	m_check_for_errors(rv);
-}
-
 void LuaInterface_Impl::run_script(std::string ns, std::string name) {
 	if
 		((m_scripts.find(ns) == m_scripts.end()) ||
 		 (m_scripts[ns].find(name) == m_scripts[ns].end()))
 		throw LuaScriptNotExistingError(ns, name);
 
-	return interpret_string(m_scripts[ns][name]);
+	const std::string & s = m_scripts[ns][name];
+
+	m_check_for_errors
+		(luaL_loadbuffer(m_L, s.c_str(), s.size(), (ns + ":" + name).c_str()) ||
+		 lua_pcall(m_L, 0, LUA_MULTRET, 0)
+	);
 }
 
 void LuaInterface_Impl::register_scripts(FileSystem & fs, std::string ns) {
