@@ -737,10 +737,14 @@ int L_Player::reveal_scenario(lua_State * L) {
 }
 
 /* RST
-	.. method:: place_road(f1, dir1, dir2, ...)
+	.. method:: place_road(f1, dir1, dir2, ...[, force=false])
 
 		Start a road at the given field, then walk the directions
 		given. Places a flag at the last field.
+
+		If the last argument to this function is :const:`true` the road will
+		be created by force: all immovables in the way are removed and land
+		is conquered.
 
 		:arg f1: fields to connect with this road
 		:type f1: :class:`wl.map.Field`
@@ -757,6 +761,12 @@ int L_Player::place_road(lua_State * L) {
 	Flag * starting_flag = (*get_user_class<L_Flag>(L, 2))->get(g, L);
 	Coords current = starting_flag->get_position();
 	Path path(current);
+
+	bool force_road = false;
+	if(lua_isboolean(L, -1)) {
+		force_road = luaL_checkboolean(L, -1);
+		lua_pop(L, 1);
+	}
 
 	// Construct the path
 	CheckStepLimited cstep;
@@ -798,15 +808,21 @@ int L_Player::place_road(lua_State * L) {
 	if (optimal_path.get_nsteps() != path.get_nsteps())
 		return report_error(L, "Cannot build a road that crosses itself!");
 
-	BaseImmovable * bi = map.get_immovable(current);
-	if (!bi or bi->get_type() != Map_Object::FLAG) {
-		if (!get(L, g).build_flag(current))
-			return report_error(L, "Could not place end flag!");
-	}
-	if (bi and bi == starting_flag)
-	  return report_error(L, "Cannot build a closed loop!");
+	Road * r = 0;
+	if (force_road) {
+		r = &get(L, g).force_road(path, false);
+	} else {
+		BaseImmovable * bi = map.get_immovable(current);
+		if (!bi or bi->get_type() != Map_Object::FLAG) {
+			if (!get(L, g).build_flag(current))
+				return report_error(L, "Could not place end flag!");
+		}
+		if (bi and bi == starting_flag)
+		  return report_error(L, "Cannot build a closed loop!");
 
-	Road * r = get(L, g).build_road(path);
+		r = get(L, g).build_road(path);
+	}
+
 	if (!r)
 		return
 			report_error
