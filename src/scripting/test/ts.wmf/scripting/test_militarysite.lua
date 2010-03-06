@@ -8,7 +8,6 @@
 militarysite_tests = lunit.TestCase("MilitarySite Tests")
 function militarysite_tests:setup()
    self.f1 = wl.map.Field(10,10)
-   self.f2 = wl.map.Field(12,10)
    self.p = wl.game.Player(1)
 
    self.sentry = self.p:place_building("sentry", self.f1)
@@ -16,9 +15,6 @@ end
 function militarysite_tests:teardown()
    pcall(function()
       self.f1.brn.immovable:remove()
-   end)
-   pcall(function()
-      self.f2.brn.immovable:remove()
    end)
 end
 function militarysite_tests:test_no_soldiers_initially()

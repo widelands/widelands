@@ -79,6 +79,7 @@ public:
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void act(Game &, uint32_t data);
 	virtual void remove_worker(Worker &);
+	int add_soldier(Game & game, Soldier & s);
 
 	virtual void set_economy(Economy *);
 	virtual bool get_building_work(Game &, Worker &, bool success);

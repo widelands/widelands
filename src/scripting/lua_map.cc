@@ -1233,9 +1233,6 @@ int L_MilitarySite::warp_soldiers(lua_State * L) {
 		ref_cast<Soldier_Descr const, Worker_Descr const>
 			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 
-	uint32_t count_inside = ms->stationedSoldiers().size();
-	uint32_t count_max = ms->descr().get_max_number_of_soldiers();
-
 	uint32_t hp, a, d, e, count;
 	lua_pushnil(L);
 	while (lua_next(L, 2) != 0) {
@@ -1244,18 +1241,16 @@ int L_MilitarySite::warp_soldiers(lua_State * L) {
 
 
 		for (uint32_t j = count; j; --j) {
-			if (count_inside == count_max)
-				return report_error(L, "No space left for soldier!");
-
 			Soldier & soldier =
 				ref_cast<Soldier, Worker>
 				(soldier_descr.create
-				 (game, ms->owner(), ms, ms->get_position()));
+				 (game, ms->owner(), 0, ms->get_position()));
 			soldier.set_level(hp, a, d, e);
 
-			soldier.reset_tasks(game);
-			soldier.start_task_buildingwork(game);
-			++count_inside;
+			if (ms->add_soldier(game, soldier)) {
+				return report_error(L, "No space left for soldier!");
+				soldier.remove(game);
+			}
 		}
 
 		lua_pop(L, 1);
