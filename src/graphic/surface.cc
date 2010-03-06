@@ -58,6 +58,12 @@ const SDL_PixelFormat & Surface::format() const {
 
 void * Surface::get_pixels() const throw () {
 	assert(m_surface);
+#if HAS_OPENGL
+	if (g_opengl && isGLsf()) {
+		log("Error: Surface:get_pixels() not possible for OpenGL Screen\n");
+		assert (false);
+	}
+#endif
 	return
 		static_cast<uint8_t *>(m_surface->pixels)
 		+
@@ -83,7 +89,12 @@ uint32_t Surface::get_pixel(uint32_t x, uint32_t y) {
 	assert(x < get_w());
 	assert(y < get_h());
 	assert(m_surface);
-
+	
+#if HAS_OPENGL
+	if (g_opengl && isGLsf()) {
+		log("Warning: Surface::get_pixel() not implemented for OpenGL surface\n");
+	}
+#endif
 	// Locking not needed: reading only
 	const Uint8 bytes_per_pixel = m_surface->format->BytesPerPixel;
 	Uint8 * const pix =
@@ -125,6 +136,11 @@ void Surface::set_pixel(uint32_t x, uint32_t y, const Uint32 clr) {
 	assert(x < get_w());
 	assert(y < get_h());
 	assert(m_surface);
+#if HAS_OPENGL
+	if (g_opengl && isGLsf()) {
+		log("Warning: Surface::get_pixel() not implemented for OpenGL surface\n");
+	}
+#endif
 
 	if (SDL_MUSTLOCK(m_surface))
 		SDL_LockSurface(m_surface);

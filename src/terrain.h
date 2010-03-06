@@ -374,6 +374,14 @@ template<typename T> static void dither_edge_horiz
 	 Vertex const & start, Vertex const & end,
 	 Texture const & ttex, Texture const & btex)
 {
+#ifdef HAS_OPENGL
+
+	//log("Warning: render_triangle not implemented\n");
+	if (g_opengl) {
+		return;
+	}
+#endif
+
 	uint8_t * tpixels, * bpixels;
 	T * tcolormap, * bcolormap;
 
@@ -471,6 +479,14 @@ template<typename T> static void dither_edge_vert
 	 Vertex const & start, Vertex const & end,
 	 Texture const & ltex, Texture const & rtex)
 {
+#ifdef HAS_OPENGL
+
+	//log("Warning: render_triangle not implemented\n");
+	if (g_opengl) {
+		return;
+	}
+#endif
+
 	uint8_t * lpixels, * rpixels;
 	T * lcolormap, * rcolormap;
 
@@ -568,24 +584,22 @@ template<typename T> static void render_road_horiz
 #ifdef HAS_OPENGL
 
 	//log("Warning: render_triangle not implemented\n");
-
-	glMatrixMode(GL_TEXTURE);
-	glLoadIdentity();
-	glScalef(1.0f/(GLfloat)TEXTURE_WIDTH, 1.0f/(GLfloat)TEXTURE_HEIGHT, 1);
-	
 	if (g_opengl) {
+		glMatrixMode(GL_TEXTURE);
+		glLoadIdentity();
+		glScalef(1.0f/(GLfloat)TEXTURE_WIDTH, 1.0f/(GLfloat)TEXTURE_HEIGHT, 1);
 		glBindTexture( GL_TEXTURE_2D, const_cast<Surface &>(src).getTexture());
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glColor4f(1.0f,1.0f,1.0f,0.6f);
 		glBegin(GL_QUADS);
-		glTexCoord2i(0, 0);
-		glVertex2f(start.x, start.y-2);
-		//glTexCoord2i(p2.tx, p2.ty);
-		glVertex2f(end.x, end.y-2);
-		//glTexCoord2i(p3.tx, p3.ty);
-		glVertex2f(end.x, end.y+2);
-		glVertex2f(start.x, start.y+2);
+		    glTexCoord2i(0, 0);
+		    glVertex2f(start.x, start.y-2);
+		    //glTexCoord2i(p2.tx, p2.ty);
+		    glVertex2f(end.x, end.y-2);
+		    //glTexCoord2i(p3.tx, p3.ty);
+		    glVertex2f(end.x, end.y+2);
+		    glVertex2f(start.x, start.y+2);
 		glEnd();
 		return;
 	}
@@ -621,24 +635,22 @@ template<typename T> static void render_road_vert
 #ifdef HAS_OPENGL
 
 	//log("Warning: render_triangle not implemented\n");
-
-	glMatrixMode(GL_TEXTURE);
-	glLoadIdentity();
-	glScalef(1.0f/(GLfloat)TEXTURE_WIDTH, 1.0f/(GLfloat)TEXTURE_HEIGHT, 1);
-	
 	if (g_opengl) {
+		glMatrixMode(GL_TEXTURE);
+		glLoadIdentity();
+		glScalef(1.0f/(GLfloat)TEXTURE_WIDTH, 1.0f/(GLfloat)TEXTURE_HEIGHT, 1);
 		glBindTexture( GL_TEXTURE_2D, const_cast<Surface &>(src).getTexture());
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glColor4f(1.0f,1.0f,1.0f,0.6f);
 		glBegin(GL_QUADS);
-		glTexCoord2i(0, 0);
-		glVertex2f(start.x-2, start.y);
-		//glTexCoord2i(p2.tx, p2.ty);
-		glVertex2f(start.x+2, start.y);
-		//glTexCoord2i(p3.tx, p3.ty);
-		glVertex2f(end.x+2, end.y);
-		glVertex2f(end.x-2, end.y);
+		    glTexCoord2i(0, 0);
+		    glVertex2f(start.x-2, start.y);
+		    //glTexCoord2i(p2.tx, p2.ty);
+		    glVertex2f(start.x+2, start.y);
+		    //glTexCoord2i(p3.tx, p3.ty);
+		    glVertex2f(end.x+2, end.y);
+		    glVertex2f(end.x-2, end.y);
 		glEnd();
 		return;
 	}

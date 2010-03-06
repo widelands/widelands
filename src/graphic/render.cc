@@ -68,8 +68,7 @@ m_h           (other.m_h)
  * Updating the whole Surface
  */
 void Surface::update() {
-	//  flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0);
-	//in case of 2d graphics but also allows for double buffering
+	
 #if HAS_OPENGL
 	if (g_opengl && isGLsf()) {
 		//log("Surface::update() SDL_GL_SwapBuffers\n");
@@ -78,8 +77,9 @@ void Surface::update() {
 		return;
 	} 
 #endif
-
-		SDL_Flip(m_surface);
+	//  flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0);
+	//in case of 2d graphics but also allows for double buffering
+	SDL_Flip(m_surface);
 }
 
 /*
@@ -88,11 +88,11 @@ void Surface::update() {
 void Surface::save_bmp(const char & fname) const {
 	assert(m_surface);
 #ifdef HAS_OPENGL
-	//if(g_opengl and isGLsf())
-	//{
+	if(g_opengl and isGLsf())
+	{
 		log("Warning: Surface::save_bmp() not implemented for opengl mode\n");
 		return;
-	//}
+	}
 #endif
 	SDL_SaveBMP(m_surface, &fname);
 }
@@ -122,7 +122,6 @@ Draws the outline of a rectangle
 ===============
 */
 void Surface::draw_rect(const Rect rc, const RGBColor clr) {
-
 #ifdef HAS_OPENGL
 	if(g_opengl and isGLsf())
 	{
@@ -131,8 +130,8 @@ void Surface::draw_rect(const Rect rc, const RGBColor clr) {
 		glBegin(GL_LINE_LOOP);
 		    glColor3f
 			((clr.r() / 256.0f),
-			(clr.g() / 256.0f),
-			(clr.b() / 256.0f));
+			 (clr.g() / 256.0f),
+			 (clr.b() / 256.0f));
 		    glVertex2f(rc.x,        rc.y);
 		    glVertex2f(rc.x + rc.w, rc.y);
 		    glVertex2f(rc.x + rc.w, rc.y + rc.h);
@@ -180,13 +179,13 @@ void Surface::fill_rect(const Rect rc, const RGBAColor clr) {
 		/*log("Surface::fill_rect((%d, %d, %d, %d),(%u, %u, %u)) for opengl\n",
 		    rc.x, rc.y, rc.w, rc.h,
 		    clr.r(), clr.g(), clr.b());*/
-		    
 		glDisable(GL_BLEND);
 		glBegin(GL_QUADS);
-		    glColor3f
-			((clr.r / 256.0f),
-			 (clr.g / 256.0f),
-			 (clr.b / 256.0f));
+		    glColor4f
+			((((GLfloat)clr.r) / 256.0f),
+			 (((GLfloat)clr.g) / 256.0f),
+			 (((GLfloat)clr.b) / 256.0f),
+			 (((GLfloat)clr.a) / 256.0f));
 		    glVertex2f(rc.x,        rc.y);
 		    glVertex2f(rc.x + rc.w, rc.y);
 		    glVertex2f(rc.x + rc.w, rc.y + rc.h);
@@ -260,8 +259,7 @@ void Surface::brighten_rect(const Rect rc, const int32_t factor) {
 		return;
 	}
 #endif
-	
-	return;
+
 	lock();
 
 	if(m_surface->format->BytesPerPixel == 4)
@@ -373,22 +371,27 @@ GLuint Surface::getTexture()
 		else
 			texture_format = GL_BGR;
 	} else {
+		/*
 		SDL_PixelFormat fmt;
 		fmt.BitsPerPixel = 32;
 		fmt.Rmask = 0x000000FF;
 		fmt.Gmask = 0x0000FF00;
 		fmt.Bmask = 0x00FF0000;
 		fmt.Amask = 0xFF000000;
-
+		
 		const SDL_PixelFormat & format = *m_surface->format;
-		SDL_Surface * tsurface = SDL_CreateRGBSurface
+		*/
+		/*SDL_Surface * tsurface = SDL_CreateRGBSurface
 			(SDL_SWSURFACE,
 			 get_w(), get_h(),
 			 fmt.BitsPerPixel,
-			 fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
+			 fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);*/
+		SDL_Surface * tsurface = SDL_DisplayFormatAlpha(surface);
+		SDL_SetAlpha(tsurface, 0, 0);
+		SDL_SetAlpha(tsurface, 0, 0);
 		SDL_BlitSurface(surface, 0, tsurface, 0);
 		surface = tsurface;
-		Colors=4;
+		Colors=surface->format->BytesPerPixel;
 		texture_format = GL_RGBA;
 	}
 
@@ -444,7 +447,6 @@ void Surface::blit_solid(Point const dst, Surface * const src, Rect const srcrc)
 
 		// Enable Alpha blending 
 		glDisable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		/* select the texture to paint on the screen
 		 * openGL does not know anything about SDL_Surfaces
@@ -487,7 +489,13 @@ void Surface::blit_solid(Point const dst, Surface * const src, Rect const srcrc)
 	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
 	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
 
+	SDL_SetAlpha(src->m_surface, 0, 0);
+	SDL_SetAlpha(m_surface, 0, 0);
+
 	SDL_BlitSurface(src->m_surface, &srcrect, m_surface, &dstrect);
+
+	SDL_SetAlpha(src->m_surface, SDL_SRCALPHA, 0);
+	SDL_SetAlpha(m_surface, SDL_SRCALPHA, 0);
 }
 
 void Surface::blit(Point const dst, Surface * const src, Rect const srcrc)
@@ -559,6 +567,7 @@ void Surface::blit(Point const dst, Surface * const src, Rect const srcrc)
 	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
 
 	SDL_BlitSurface(src->m_surface, &srcrect, m_surface, &dstrect);
+
 }
 
 /*

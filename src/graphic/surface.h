@@ -131,7 +131,7 @@ public:
 		SURF_OGLHW
 	} m_surf_type;
 	void set_isGLsf(){m_surf_type=SURF_OGLHW;}
-	bool isGLsf() {return m_surf_type==SURF_OGLHW;}
+	bool isGLsf() const {return m_surf_type==SURF_OGLHW;}
 	
 	class oglTexture
 	{

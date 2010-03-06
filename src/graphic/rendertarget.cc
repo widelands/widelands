@@ -138,6 +138,7 @@ void RenderTarget::draw_line
 {
 #if HAS_OPENGL
 	//use opengl drawing if available
+	glDisable(GL_BLEND);
 	if (g_opengl) {
 		glBegin(GL_LINES);
 		glColor3f
@@ -1374,5 +1375,8 @@ void RenderTarget::doblit(Point dst, Surface * const src, Rect srcrc, bool enabl
 	dst += m_rect;
 
 	// Draw it
-	m_surface->blit(dst, src, srcrc);
+	if(enable_alpha)
+		m_surface->blit(dst, src, srcrc);
+	else
+		m_surface->blit_solid(dst, src, srcrc);
 }
