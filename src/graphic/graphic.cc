@@ -136,7 +136,7 @@ Graphic::Graphic
 	}
 #endif
 
-	if (hw_improvements && double_buffer) {
+	if (double_buffer | opengl) {
 #ifdef HAS_OPENGL
 		flags |= SDL_GL_DOUBLEBUFFER;
 #else
@@ -253,6 +253,8 @@ Graphic::Graphic
 		glDisable(GL_DEPTH_TEST);
 		glEnable(GL_TEXTURE_2D);
 
+		glDrawBuffer(GL_BACK);
+
 		glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 		SDL_GL_SwapBuffers( );
@@ -329,7 +331,7 @@ void Graphic::update_rectangle(int32_t x, int32_t y, int32_t w, int32_t h)
 		m_update_fullscreen = true;
 		return;
 	}
-
+	m_update_fullscreen = true;
 	m_update_rects[m_nr_update_rects].x = x;
 	m_update_rects[m_nr_update_rects].y = y;
 	m_update_rects[m_nr_update_rects].w = w;
@@ -355,10 +357,16 @@ void Graphic::refresh(bool force)
 	if (force or m_update_fullscreen)
 		m_screen.update();
 	else
+#ifndef HAS_OPENGL
 		SDL_UpdateRects
 			(m_screen.get_sdl_surface(), m_nr_update_rects, m_update_rects);
-
-	SDL_GL_SwapBuffers();
+#else
+		if (g_opengl)
+			SDL_GL_SwapBuffers();
+		else
+			SDL_UpdateRects
+				(m_screen.get_sdl_surface(), m_nr_update_rects, m_update_rects);
+#endif
 	m_update_fullscreen = false;
 	m_nr_update_rects = 0;
 }
