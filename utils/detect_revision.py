@@ -84,9 +84,9 @@ def detect_revision():
             b = BzrDir.open(".").open_branch()
             revno, nick = b.revno(), b.nick
             if svn_revnum=='':
-                revstring = "unofficial-bzr-%s-%s" % (nick,revno)
+                revstring = "bzr%s[%s] " % (revno,nick)
             else:
-                revstring = "unofficial-bzr-%s-%s(svn%s)" % (nick,revno,svn_revnum)
+                revstring = "bzr%s[%s](svn%s) " % (revno,nick,svn_revnum)
         except NotBranchError:
             pass
 
