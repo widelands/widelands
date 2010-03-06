@@ -350,50 +350,86 @@ GLuint Surface::getTexture()
 
 	GLuint texture;
 	SDL_Surface *surface;
-	GLenum texture_format;
-	GLint  Colors;
+	GLenum pixels_format, pixels_type;
+	GLint  Bpp;
 
 	surface=m_surface;
 
 	SDL_Surface * tsurface = NULL;
-
-	Colors = surface->format->BytesPerPixel;
-	if (Colors == 4)
+	SDL_PixelFormat & fmt = *surface->format;
+	
+	if(fmt.palette)
 	{
-		if (surface->format->Rmask == 0x000000ff)
-			texture_format = GL_RGBA;
-		else
-			texture_format = GL_BGRA;
-	} else if (Colors == 3)
-	{
-		if (surface->format->Rmask == 0x000000ff)
-			texture_format = GL_RGB;
-		else
-			texture_format = GL_BGR;
-	} else {
-		/*
-		SDL_PixelFormat fmt;
-		fmt.BitsPerPixel = 32;
-		fmt.Rmask = 0x000000FF;
-		fmt.Gmask = 0x0000FF00;
-		fmt.Bmask = 0x00FF0000;
-		fmt.Amask = 0xFF000000;
-		
-		const SDL_PixelFormat & format = *m_surface->format;
-		*/
-		/*SDL_Surface * tsurface = SDL_CreateRGBSurface
-			(SDL_SWSURFACE,
-			 get_w(), get_h(),
-			 fmt.BitsPerPixel,
-			 fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);*/
+		log("Warning: trying to use a paletted picture for opengl texture\n");
 		SDL_Surface * tsurface = SDL_DisplayFormatAlpha(surface);
 		SDL_SetAlpha(tsurface, 0, 0);
 		SDL_SetAlpha(tsurface, 0, 0);
 		SDL_BlitSurface(surface, 0, tsurface, 0);
 		surface = tsurface;
-		Colors=surface->format->BytesPerPixel;
-		texture_format = GL_RGBA;
+		fmt = *surface->format;
 	}
+
+	if(fmt.colorkey!=0)
+	{
+		log("Colorkey: %X Alpha: %u, Amask: %X\n",
+		fmt.colorkey,
+		fmt.alpha,
+		fmt.Amask);
+
+		SDL_Surface * tsurface = SDL_CreateRGBSurface(SDL_SWSURFACE, surface->w, surface->h, 32, 
+                                  0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
+		//DisplayFormatAlpha(surface);
+		//SDL_SetAlpha(tsurface, 0, 255);
+		//SDL_SetAlpha(tsurface, 0, 0);
+		SDL_BlitSurface(surface, 0, tsurface, 0);
+		surface = tsurface;
+		fmt = *surface->format;
+	}
+
+	Bpp = fmt.BytesPerPixel;
+
+	log
+		("Surface::getTexture() Size: (%d, %d) %db(%dB) ", get_w(), get_h(),
+		 fmt.BitsPerPixel, Bpp);
+
+	log("R:%X, G:%X, B:%X, A:%X", fmt.Rmask, fmt.Gmask, fmt.Bmask, fmt.Amask);
+		 
+	if(Bpp==4)
+	{
+		if(fmt.Rmask==0x000000ff and fmt.Gmask==0x0000ff00 and fmt.Bmask==0x00ff0000)
+		{
+			if(fmt.Amask==0xff000000)
+			{ pixels_format=GL_RGBA; log(" RGBA 8888 "); }
+			else
+			{ pixels_format=GL_RGB; log(" RGB 8880 "); }
+		}
+		else if(fmt.Bmask==0x000000ff and fmt.Gmask==0x0000ff00 and fmt.Rmask==0x00ff0000)
+		{
+			if(fmt.Amask==0xff000000)
+			{ pixels_format=GL_BGRA; log(" RGBA 8888 "); }
+			else
+			{ pixels_format=GL_BGR; log(" RGBA 8888 "); }
+		}
+
+		pixels_type=GL_UNSIGNED_INT_8_8_8_8_REV;
+	}
+	else if (Bpp==2)
+	{
+		if((fmt.Rmask==0xF800) and (fmt.Gmask==0x7E0) and (fmt.Bmask==0x1F))
+		{
+			pixels_format=GL_RGB; log(" RGB 565"); 
+			 // A:0
+		}
+		else if ((fmt.Bmask==0xF800) and (fmt.Gmask==0x7E0) and (fmt.Rmask==0x1F))
+		{
+			pixels_format=GL_BGR; log(" BGR 565"); 
+		} else
+			assert(false);
+		pixels_type = GL_UNSIGNED_SHORT_5_6_5;
+	}
+	else
+		assert(false);
+	log("\n");
 
 	// Let OpenGL create a texture object
 	glGenTextures( 1, &texture );
@@ -406,8 +442,9 @@ GLuint Surface::getTexture()
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
 
 	SDL_LockSurface(surface);
-	glTexImage2D( GL_TEXTURE_2D, 0, Colors, surface->w, surface->h, 0,
-	texture_format, GL_UNSIGNED_BYTE, surface->pixels );
+
+	glTexImage2D( GL_TEXTURE_2D, 0, Bpp, surface->w, surface->h, 0,
+	pixels_format, pixels_type, surface->pixels );
 	SDL_UnlockSurface(surface);
 	
 	if(tsurface)
@@ -487,8 +524,8 @@ void Surface::blit(Point const dst, Surface * const src, Rect const srcrc, bool 
 	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
 	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
 
-	SDL_SetAlpha(src->m_surface, enable_alpha && SDL_SRCALPHA, 0);
-	SDL_SetAlpha(m_surface, enable_alpha && SDL_SRCALPHA, 0);
+	//SDL_SetAlpha(src->m_surface, enable_alpha && SDL_SRCALPHA, 0);
+	//SDL_SetAlpha(m_surface, enable_alpha && SDL_SRCALPHA, 0);
 
 	SDL_BlitSurface(src->m_surface, &srcrect, m_surface, &dstrect);
 }
