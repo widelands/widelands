@@ -71,6 +71,11 @@ void Carrier::road_update(Game & game, State & state)
 	if (signal == "road" || signal == "ware") {
 		// The road changed under us or we're supposed to pick up some ware
 		signal_handled();
+	} else if (signal == "blocked") {
+		// Blocked by an ongoing battle
+		signal_handled();
+		set_animation(game, descr().get_animation("idle"));
+		return schedule_act(game, 250);
 	} else if (signal.size()) {
 		// Something else happened (probably a location signal)
 		molog("[road]: Terminated by signal '%s'\n", signal.c_str());
