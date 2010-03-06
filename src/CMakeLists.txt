@@ -19,24 +19,24 @@ foreach (sourcefile ${WL_SRCS_ALL})
   endif (${sourcefile} MATCHES ".*/test/.*")
 endforeach (sourcefile ${WL_SRCS_ALL})
 
-if (WL_CODECHECK_ENABLED)
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps)
 set_directory_properties (PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/*_codecheck_stamp_)
 
-foreach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
-  string(REGEX REPLACE "\\.|\\/" "_" sourcenoslash ${sourcefile})
-  get_filename_component(sourcename ${sourcefile} NAME) 
-  set(stamp ${sourcenoslash}_codecheck_stamp_)
-  set(PREFIX_WL_SRCS ${PREFIX_WL_SRCS};${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp})
-    add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp}
-      PRE_LINK
-      COMMAND "${WL_SOURCE_CHECKER}" -c "${sourcefile}"
-      COMMAND cmake -E touch ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp}
-      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    )
-    add_custom_target(${stamp} ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp})
-endforeach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
-endif (WL_CODECHECK_ENABLED)
+if (CMAKE_BUILD_TYPE STREQUAL Debug)
+  foreach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
+    string(REGEX REPLACE "\\.|\\/" "_" sourcenoslash ${sourcefile})
+    get_filename_component(sourcename ${sourcefile} NAME) 
+    set(stamp ${sourcenoslash}_codecheck_stamp_)
+    set(PREFIX_WL_SRCS ${PREFIX_WL_SRCS};${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp})
+      add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp}
+	PRE_LINK
+	COMMAND "${WL_SOURCE_CHECKER}" -c "${sourcefile}"
+	COMMAND cmake -E touch ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp}
+	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+      )
+      add_custom_target(${stamp} DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/codecheck-stamps/${stamp})
+  endforeach(sourcefile ${WL_SRCS} ${WL_TEST_SRCS})
+endif (CMAKE_BUILD_TYPE STREQUAL Debug)
 
 IF (MINGW)
   # resource compilation for MinGW
@@ -66,7 +66,7 @@ add_subdirectory(ui_basic)
 add_subdirectory(ui_fsmenu)
 add_subdirectory(wui)
 
-add_executable (widelands ${GUI_TYPE} build_info.cc)
+add_executable (widelands ${GUI_TYPE} main.cc build_info.cc)
 
 target_link_libraries(widelands widelands_main)
 
@@ -104,6 +104,10 @@ target_link_libraries(widelands ${LUA_LIBRARY})
 target_link_libraries(widelands ${SDLGFX_LIBRARY})
 target_link_libraries(widelands ${Boost_unit_test_framework_LIBRARIES})
 
+if (GGZ_CORE_FOUND)
+  target_link_libraries(widelands ${GGZ_CORE_LIBRARY})
+endif (GGZ_CORE_FOUND)
+
 if (APPLE)
   target_link_libraries(widelands ${INTL_LIBRARY})
 endif (APPLE)
@@ -117,4 +121,4 @@ endif (DEFINED MSVC)
   target_link_libraries(widelands wsock32)
 endif (WIN32)
 
-install(TARGETS widelands DESTINATION bin COMPONENT ExecutableFiles)
+install(TARGETS widelands DESTINATION ${WL_INSTALL_BINDIR} COMPONENT ExecutableFiles)

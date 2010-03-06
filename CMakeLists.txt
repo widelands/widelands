@@ -4,58 +4,158 @@ project (widelands)
 # set them via cmake -DVARIABLE=VALUE
 # CMAKE_BUILD_TYPE:
 #     Default is "Debug", Distributors should use "Release"
+# WL_VERSION_STANDARD
+#     Uses the defined standard values for versioning ("BuildXX.YY") if defined.
+#     (Should be set for each official release below.)
 # WL_VERSION_MAJOR, WL_VERSION_MINOR (, WL_VERSION_PATCH):
 #     Default is using SVN revision, Distributors should use correct version
 #     Attention: We are currently only using MAJOR and MINOR.
 #     If you try to set WL_VERSION directly, it will ignore your setting.
+# WL_VERSION_ADDITION:
+#     Suffix of the Build version (e.g. bzr, DEV, RC1, ...)
+# CMAKE_INSTALL_PREFIX:
+#     Prefix for installation of the files.
+#     This is not the install dir which is used for config.h - see WL_INSTALL_PREFIX
+#     default: /usr/local
+# WL_INSTALL_PREFIX:
+#     Prefix for INSTALL_PREFIX in config.h.
+#     This is not the install dir for make install - see CMAKE_INSTALL_PREFIX
+#     default: .
+# WL_INSTALL_BINDIR:
+#     Directory the binary should be in (relative to WL_INSTALL_PREFIX)
+#     default: games
+# WL_INSTALL_DATADIR
+#     Directory for the Widelands data (relative to WL_INSTALL_PREFIX)
+#     default: share/games/widelands
+# WL_INSTALL_LOCALEDIR
+#     Directory for Widelands locales (relative to WL_INSTALL_PREFIX)
+#     default: share/games/widelands/locale
 
 cmake_minimum_required (VERSION 2.6)
+
+
+# Used as versioning, if WL_VERSION_STANDARD is definded.
+if (WL_VERSION_STANDARD STREQUAL "TRUE")
+	# Set the values below for standard versioning.
+	# As long as WL_VERSION_MAJOR is 0, the naming will be in form of
+	# "Build${WL_VERSION_MINOR}" + ".${WL_VERSION_PATCH}" if WL_VERSION_PATCH is
+	# defined.
+	set (WL_VERSION_MAJOR 0)
+	set (WL_VERSION_MINOR 15)
+
+	# Just define in case that we release patches for official builds
+	#set (WL_VERSION_PATCH 90)
+
+	# An addition to the version name (e.g. RC1, DEV, ...)
+	set (WL_VERSION_ADDITION DEV)
+endif (WL_VERSION_STANDARD STREQUAL "TRUE")
+
+
+# Define the directory structure for installation - will be hardcoded in WL bin
+# If nothing is given on command line, set the standard values.
+
+# General install prefix for config.h
+if (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
+	set (WL_INSTALL_PREFIX .)
+endif (NOT WL_INSTALL_PREFIX OR WL_INSTALL_PREFIX STREQUAL "")
+
+# Widelands binary directory
+if (NOT WL_INSTALL_BINDIR OR WL_INSTALL_BINDIR STREQUAL "")
+	set (WL_INSTALL_BINDIR games)
+endif (NOT WL_INSTALL_BINDIR OR WL_INSTALL_BINDIR STREQUAL "")
+
+# Widelands data directory
+if (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
+	set (WL_INSTALL_DATADIR share/games/widelands)
+endif (NOT WL_INSTALL_DATADIR OR WL_INSTALL_DATADIR STREQUAL "")
+
+# Widelands locale directory
+if (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
+	set (WL_INSTALL_LOCALEDIR share/games/widelands/locale)
+endif (NOT WL_INSTALL_LOCALEDIR OR WL_INSTALL_LOCALEDIR STREQUAL "")
+
+# is this needed?
+set (WL_SOURCE_CHECKER ${CMAKE_CURRENT_SOURCE_DIR}/cmake/codecheck/CodeCheck.py)
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
   message(FATAL_ERROR "Build-directory and source-directory are the same!")
 endif (CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
 
+if (CMAKE_INSTALL_PREFIX STREQUAL CMAKE_BINARY_DIR)
+  message(FATAL_ERROR "Build-directory and install-directory are the same!")
+endif (CMAKE_INSTALL_PREFIX STREQUAL CMAKE_BINARY_DIR)
+
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
-if (NOT DEFINED CMAKE_BUILD_TYPE)
+if (CMAKE_BUILD_TYPE STREQUAL "")
   set (CMAKE_BUILD_TYPE Debug)
-endif (NOT DEFINED CMAKE_BUILD_TYPE)
+endif (CMAKE_BUILD_TYPE STREQUAL "")
 
 set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 
+find_package(GGZ_Core)
+include_directories(${GGZ_CORE_INCLUDE_DIR})
+
+if (GGZ_CORE_FOUND)
+  set (CXX_FLAG_GGZ "-DUSE_GGZ")
+else (GGZ_CORE_FOUND)
+  message ("GGZ support disabled, check your libraries path and installed packages!")
+endif (GGZ_CORE_FOUND)
 
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE ${CXX_FLAG_GGZ}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 # CMAKE defines "-O3 -DNDEBUG", but we better say -O2 (see gcc manual)
-set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG ${CXX_FLAG_GGZ}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 # we don't want someone to set this directly...
-# CMAKE 2.6.2 does not support unset command.
-if (DEFINED CMAKE_VERSION)
+# ...and we don't want to remember from former runs...
+unset (WL_VERSION)
 unset (WL_VERSION CACHE)
-endif (DEFINED CMAKE_VERSION)
 
 # ...but using MAJOR, MINOR and PATCH
-# (BUT: we only use MAJOR and MINOR for the moment; PATCH is set to 0)
 if (DEFINED WL_VERSION_MAJOR)
-  set (WL_VERSION ${WL_VERSION_MAJOR})
-  set (CPACK_PACKAGE_VERSION_MAJOR ${WL_VERSION_MAJOR})
-  if (DEFINED WL_VERSION_MINOR)
-    set (WL_VERSION ${WL_VERSION}.${WL_VERSION_MINOR})
-    set (CPACK_PACKAGE_VERSION_MINOR ${WL_VERSION_MINOR})
-    if (DEFINED WL_VERSION_PATCH)
-      set (WL_VERSION ${WL_VERSION}.${WL_VERSION_PATCH})
-      set (CPACK_PACKAGE_VERSION_PATCH ${WL_VERSION_PATCH})
-    else (DEFINED WL_VERSION_PATCH)
-      set (CPACK_PACKAGE_VERSION_PATCH 0)
-    endif (DEFINED WL_VERSION_PATCH)
-  else (DEFINED WL_VERSION_MINOR)
-    set (CPACK_PACKAGE_VERSION_MINOR 0)
-  endif (DEFINED WL_VERSION_MINOR)
+	set (CPACK_PACKAGE_VERSION_MAJOR ${WL_VERSION_MAJOR})
+
+	# Until 1.x.x set standard VERSION => "BuildXX"
+	if (WL_VERSION_MAJOR STREQUAL "0")
+		if (DEFINED WL_VERSION_MINOR)
+			set (WL_VERSION Build${WL_VERSION_MINOR})
+			set (CPACK_PACKAGE_VERSION_MINOR ${WL_VERSION_MINOR})
+			if (DEFINED WL_VERSION_PATCH)
+				set (WL_VERSION ${WL_VERSION}.${WL_VERSION_PATCH})
+				set (CPACK_PACKAGE_VERSION_PATCH ${WL_VERSION_PATCH})
+			else (DEFINED WL_VERSION_PATCH)
+				set (CPACK_PACKAGE_VERSION_PATCH 0)
+			endif (DEFINED WL_VERSION_PATCH)
+			if (DEFINED WL_VERSION_ADDITION)
+				set (WL_VERSION ${WL_VERSION}${WL_VERSION_ADDITION})
+			endif (DEFINED WL_VERSION_ADDITION)
+		else (DEFINED WL_VERSION_MINOR)
+			set (WL_VERSION "NO BUILD ID")
+		endif (DEFINED WL_VERSION_MINOR)
+
+	# from 1.x.x on:
+	else (WL_VERSION_MAJOR STREQUAL "0")
+		set (WL_VERSION ${WL_VERSION_MAJOR})
+		if (DEFINED WL_VERSION_MINOR)
+			set (WL_VERSION ${WL_VERSION}.${WL_VERSION_MINOR})
+			set (CPACK_PACKAGE_VERSION_MINOR ${WL_VERSION_MINOR})
+			if (DEFINED WL_VERSION_PATCH)
+				set (WL_VERSION ${WL_VERSION}.${WL_VERSION_PATCH})
+				set (CPACK_PACKAGE_VERSION_PATCH ${WL_VERSION_PATCH})
+			else (DEFINED WL_VERSION_PATCH)
+				set (CPACK_PACKAGE_VERSION_PATCH 0)
+			endif (DEFINED WL_VERSION_PATCH)
+			if (DEFINED WL_VERSION_ADDITION)
+				set (WL_VERSION ${WL_VERSION}${WL_VERSION_ADDITION})
+			endif (DEFINED WL_VERSION_ADDITION)
+		else (DEFINED WL_VERSION_MINOR)
+			set (CPACK_PACKAGE_VERSION_MINOR 0)
+		endif (DEFINED WL_VERSION_MINOR)
+	endif (WL_VERSION_MAJOR STREQUAL "0")
 endif (DEFINED WL_VERSION_MAJOR)
 
-set (WL_CODECHECK_ENABLED "FALSE" CACHE BOOL "Enable code checking")
 #If building with MSVC, then check for 3rdparty libs
 if (DEFINED MSVC)
   set (WL_3RDPARTY_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty" CACHE STRING "Widelands 3rdparty dir")
@@ -104,18 +204,15 @@ if (NOT DEFINED WL_VERSION)
 endif (NOT DEFINED WL_VERSION)
 message ("Version of Widelands Build is ${WL_VERSION}(${CMAKE_BUILD_TYPE})")
 
-# TODO This will need to cleanup, see mailing list recommendations
-#set (WL_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
-#set (WL_INSTALL_BINDIR ${WL_INSTALL_PREFIX}/bin/)
-#set (WL_INSTALL_DATADIR ${WL_INSTALL_PREFIX}/share/widelands/)
-#set (WL_INSTALL_LOCALEDIR ${WL_INSTALL_DATADIR}/locale/)
-set (WL_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
-set (WL_INSTALL_BINDIR .)
-set (WL_INSTALL_DATADIR share/widelands)
-set (WL_INSTALL_LOCALEDIR ${WL_INSTALL_PREFIX}/${WL_INSTALL_DATADIR}/locale)
+file (WRITE ${CMAKE_CURRENT_BINARY_DIR}/VERSION "${WL_VERSION}")
+install (
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/VERSION
+  DESTINATION ${WL_INSTALL_DATADIR}
+  CONFIGURATIONS Debug;Release
+  COMPONENT CoreVersionFile
+)
 
-# is this needed?
-set (WL_SOURCE_CHECKER ${CMAKE_CURRENT_SOURCE_DIR}/cmake/codecheck/CodeCheck.py)
+include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
 
 include(CheckIncludeFile)
 
@@ -173,8 +270,6 @@ IF (WIN32)
   SET(GUI_TYPE WIN32)
 ENDIF (WIN32)
 
-include_directories(src ${CMAKE_CURRENT_BINARY_DIR}/src)
-
 #configure_file (src/config.h.cmake src/config.h)
 #configure_file (src/build_info.cc.cmake src/build_info.cc)
 
@@ -195,7 +290,7 @@ install(
     tribes
     txts
     worlds
-  DESTINATION share/widelands
+  DESTINATION ${WL_INSTALL_DATADIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreDataFiles
   PATTERN "*.svn*" EXCLUDE
@@ -205,7 +300,7 @@ install(
 install(
   DIRECTORY
     doc
-  DESTINATION share/widelands
+  DESTINATION ${WL_INSTALL_DATADIR}
   CONFIGURATIONS Debug
   COMPONENT DocFiles
   PATTERN "*.svn*" EXCLUDE
@@ -215,7 +310,7 @@ install(
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/locale)
 find_package (PythonInterp REQUIRED)
 add_custom_target (
-  lang
+  lang ALL
 #  COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/../locale
   COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/po ${CMAKE_CURRENT_BINARY_DIR}/po
   COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/campaigns ${CMAKE_CURRENT_BINARY_DIR}/campaigns
@@ -227,8 +322,8 @@ add_custom_target (
 
 install(
   DIRECTORY
-    ${CMAKE_CURRENT_BINARY_DIR}/locale
-  DESTINATION share/widelands
+    ${CMAKE_CURRENT_BINARY_DIR}/locale/
+  DESTINATION ${WL_INSTALL_LOCALEDIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CoreLanguageFiles
   PATTERN "*.svn*" EXCLUDE
@@ -237,26 +332,28 @@ install(
 
 execute_process (COMMAND cmake -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/pics)
 add_custom_target (
-  pics 
+  optimizepics 
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/pics
   COMMAND cmake -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DWL_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}/pics -DWL_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/pics -P PicsFunctions.cmake
 )
 add_custom_target (
-  quickpics 
+  pics ALL 
   COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/pics ${CMAKE_CURRENT_BINARY_DIR}/pics
 )
 
 install(
   DIRECTORY
     ${CMAKE_CURRENT_BINARY_DIR}/pics
-  DESTINATION share/widelands
+  DESTINATION ${WL_INSTALL_DATADIR}
   CONFIGURATIONS Debug;Release
   COMPONENT CorePicsFiles
+  PATTERN "*.svn*" EXCLUDE
+  PATTERN "SCons*" EXCLUDE
 )
 
 
 set (CPACK_PACKAGE_FILE_NAME widelands-${WL_VERSION})
-set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles CorePicsFiles)
+set (CPACK_COMPONENTS_ALL ExecutableFiles CoreDataFiles DocFiles CoreLanguageFiles CorePicsFiles CoreVersionFile)
 set (CPACK_GENERATOR TGZ)
 set (CPACK_SOURCE_GENERATOR TGZ)
 include(CPack)

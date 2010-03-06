@@ -100,7 +100,8 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 			if (duration != Forever())
 				m_game.cmdqueue().enqueue
 					(new Cmd_ExpireMessage
-					 	(m_game.get_gametime() + duration, p, i.current->first));
+					 	(i.current->second->sent() +
+					 	 duration, p, i.current->first));
 		}
 	}
 	log(" done\n");

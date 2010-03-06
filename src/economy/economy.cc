@@ -825,11 +825,11 @@ void Economy::_create_requested_workers(Game & game)
 								 	tribe.ware_index(bc_it.current->first.c_str()))
 								nearest.set_needed(w_id, bc_it.current->second);
 					}
-				} else
-					log
-						("Economy::_create_requested_workers: Could not create %s "
-						 "for player %u because it is forbidden\n",
-						 w_desc.descname().c_str(), owner().player_number());
+				} //else
+					//log
+						//("Economy::_create_requested_workers: Could not create %s "
+						 //"for player %u because it is forbidden\n",
+						 //w_desc.descname().c_str(), owner().player_number());
 			} // if (req->is_open())
 			requested_worker_exists:;
 		}

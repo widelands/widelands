@@ -29,8 +29,8 @@ recruit=donkey
 
 [idle]
 pics=donkeyfarm_i_??.png  # ???
-hotspot=54 54
+hotspot=85 78
 
 [working]
 pics=donkeyfarm_i_??.png  # ???
-hotspot=54 54
+hotspot=85 78
