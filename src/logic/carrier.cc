@@ -144,6 +144,11 @@ void Carrier::transport_update(Game & game, State & state)
 
 	if (signal == "road") {
 		signal_handled();
+	} else if (signal == "blocked") {
+		// Blocked by an ongoing battle
+		signal_handled();
+		set_animation(game, descr().get_animation("idle"));
+		return schedule_act(game, 250);
 	} else if (signal.size()) {
 		molog("[transport]: Interrupted by signal '%s'\n", signal.c_str());
 		return pop_task(game);
