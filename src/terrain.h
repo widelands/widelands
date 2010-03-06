@@ -596,9 +596,12 @@ template<typename T> static void render_road_horiz
 		    glTexCoord2i(0, 0);
 		    glVertex2f(start.x, start.y-2);
 		    //glTexCoord2i(p2.tx, p2.ty);
+		    glTexCoord2i(TEXTURE_WIDTH, 0);
 		    glVertex2f(end.x, end.y-2);
 		    //glTexCoord2i(p3.tx, p3.ty);
+		    glTexCoord2i(TEXTURE_WIDTH, 4);
 		    glVertex2f(end.x, end.y+2);
+		    glTexCoord2i(TEXTURE_WIDTH, 4);
 		    glVertex2f(start.x, start.y+2);
 		glEnd();
 		return;
@@ -645,12 +648,13 @@ template<typename T> static void render_road_vert
 		glColor4f(1.0f,1.0f,1.0f,0.6f);
 		glBegin(GL_QUADS);
 		    glTexCoord2i(0, 0);
-		    glVertex2f(start.x-2, start.y);
-		    //glTexCoord2i(p2.tx, p2.ty);
-		    glVertex2f(start.x+2, start.y);
-		    //glTexCoord2i(p3.tx, p3.ty);
-		    glVertex2f(end.x+2, end.y);
-		    glVertex2f(end.x-2, end.y);
+		    glVertex2f(start.x - 3, start.y);
+		    glTexCoord2i(6, 0);
+		    glVertex2f(start.x + 3, start.y);
+		    glTexCoord2i(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+		    glVertex2f(end.x + 3, end.y);
+		    glTexCoord2i(TEXTURE_WIDTH - 6 , TEXTURE_HEIGHT);
+		    glVertex2f(end.x - 3, end.y);
 		glEnd();
 		return;
 	}

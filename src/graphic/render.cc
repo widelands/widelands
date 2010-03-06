@@ -123,20 +123,26 @@ Draws the outline of a rectangle
 */
 void Surface::draw_rect(const Rect rc, const RGBColor clr) {
 #ifdef HAS_OPENGL
+	/*log("Surface::draw_rect((%d, %d, %d, %d),(%u, %u, %u, %u)) for opengl\n",
+		rc.x, rc.y, rc.w, rc.h,
+		clr.r(), clr.g(), clr.b());*/
 	if(g_opengl and isGLsf())
 	{
 		//log("Surface::draw_rect() for opengl is experimental\n");
 		glDisable(GL_BLEND);
+		glDisable(GL_TEXTURE_2D);
+		
 		glBegin(GL_LINE_LOOP);
 		    glColor3f
 			((clr.r() / 256.0f),
 			 (clr.g() / 256.0f),
 			 (clr.b() / 256.0f));
-		    glVertex2f(rc.x,        rc.y);
+		    glVertex2f(rc.x + 1,            rc.y);
 		    glVertex2f(rc.x + rc.w, rc.y);
-		    glVertex2f(rc.x + rc.w, rc.y + rc.h);
-		    glVertex2f(rc.x,        rc.y + rc.h);
+		    glVertex2f(rc.x + rc.w, rc.y + rc.h - 1);
+		    glVertex2f(rc.x,            rc.y + rc.h -1 );
 		glEnd();
+		glEnable(GL_TEXTURE_2D);
 		return;
 	}
 #endif
@@ -176,9 +182,10 @@ void Surface::fill_rect(const Rect rc, const RGBAColor clr) {
 #ifdef HAS_OPENGL
 	if(g_opengl and isGLsf())
 	{
-		/*log("Surface::fill_rect((%d, %d, %d, %d),(%u, %u, %u)) for opengl\n",
+		/*log("Surface::fill_rect((%d, %d, %d, %d),(%u, %u, %u, %u)) for opengl\n",
 		    rc.x, rc.y, rc.w, rc.h,
-		    clr.r(), clr.g(), clr.b());*/
+		    clr.r, clr.g, clr.b, clr.a);*/
+		glDisable(GL_TEXTURE_2D);
 		glDisable(GL_BLEND);
 		glBegin(GL_QUADS);
 		    glColor4f
@@ -186,11 +193,12 @@ void Surface::fill_rect(const Rect rc, const RGBAColor clr) {
 			 (((GLfloat)clr.g) / 256.0f),
 			 (((GLfloat)clr.b) / 256.0f),
 			 (((GLfloat)clr.a) / 256.0f));
-		    glVertex2f(rc.x,        rc.y);
+		    glVertex2f(rc.x ,       rc.y);
 		    glVertex2f(rc.x + rc.w, rc.y);
 		    glVertex2f(rc.x + rc.w, rc.y + rc.h);
-		    glVertex2f(rc.x,        rc.y + rc.h);
+		    glVertex2f(rc.x ,       rc.y + rc.h);
 		glEnd();
+		glEnable(GL_TEXTURE_2D);
 		return;
 	}
 #endif
@@ -415,7 +423,7 @@ GLuint Surface::getTexture()
 	// Let OpenGL create a texture object
 	glGenTextures( 1, &texture );
 
-	// seclet the texture object
+	// selcet the texture object
 	glBindTexture( GL_TEXTURE_2D, texture );
 
 	// set texture filter to siply take the nearest pixel.
