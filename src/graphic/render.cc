@@ -356,36 +356,17 @@ GLuint Surface::getTexture()
 	surface=m_surface;
 
 	SDL_Surface * tsurface = NULL;
-	SDL_PixelFormat & fmt = *surface->format;
+	//SDL_PixelFormat & fmt = *surface->format;
 	
-	if(fmt.palette)
+	if(surface->format->palette or (surface->format->colorkey > 0))
 	{
-		log("Warning: trying to use a paletted picture for opengl texture\n");
+		//log("Warning: trying to use a paletted picture for opengl texture\n");
 		SDL_Surface * tsurface = SDL_DisplayFormatAlpha(surface);
-		SDL_SetAlpha(tsurface, 0, 0);
-		SDL_SetAlpha(tsurface, 0, 0);
 		SDL_BlitSurface(surface, 0, tsurface, 0);
 		surface = tsurface;
-		fmt = *surface->format;
 	}
-
-	if(fmt.colorkey!=0)
-	{
-		log("Colorkey: %X Alpha: %u, Amask: %X\n",
-		fmt.colorkey,
-		fmt.alpha,
-		fmt.Amask);
-
-		SDL_Surface * tsurface = SDL_CreateRGBSurface(SDL_SWSURFACE, surface->w, surface->h, 32, 
-                                  0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
-		//DisplayFormatAlpha(surface);
-		//SDL_SetAlpha(tsurface, 0, 255);
-		//SDL_SetAlpha(tsurface, 0, 0);
-		SDL_BlitSurface(surface, 0, tsurface, 0);
-		surface = tsurface;
-		fmt = *surface->format;
-	}
-
+	
+	SDL_PixelFormat const & fmt = *surface->format;
 	Bpp = fmt.BytesPerPixel;
 
 	log
