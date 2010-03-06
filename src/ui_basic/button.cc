@@ -136,10 +136,10 @@ void Button::set_title(std::string const & title) {
 */
 void Button::set_enabled(bool const on)
 {
-	if(m_enabled!=on)
-		m_needredraw=true;
-
-	//log("Button::set_enabled\n");
+	if(m_enabled == on)
+		return;
+ 
+	m_needredraw=true;
 
 	// disabled buttons should look different...
 	if (on)
