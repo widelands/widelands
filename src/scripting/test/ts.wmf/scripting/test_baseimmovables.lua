@@ -20,6 +20,28 @@ function immovable_creation_tests:test_create()
    imm:remove()
    imm2:remove()
 end
+function immovable_creation_tests:test_create_tribe_immovables()
+   imm = wl.map.create_immovable("field2", wl.map.Field(10,10), "barbarians")
+   imm:remove()
+end
+function immovable_creation_tests:test_create_world_immovables()
+   imm = wl.map.create_immovable("tree1", wl.map.Field(10,10), "world")
+   imm:remove()
+end
+function immovable_creation_tests:test_create_tribe_immovables_ill_tribe()
+   assert_error("Illegal tribe!", function()
+      imm = wl.map.create_immovable("field2", wl.map.Field(10,10), "blablub")
+   end)
+end
+function immovable_creation_tests:test_create_tribe_immovables_ill_immovable()
+   assert_error("Illegal tribe!", function()
+      imm = wl.map.create_immovable("b", wl.map.Field(10,10), "barbarians")
+   end)
+end
+function immovable_creation_tests:test_create_wrong_usage()
+   assert_error("Needs table, not integer", function() 
+      wl.map.create_immovable("tree1", 9, 10) end)
+end
 function immovable_creation_tests:test_create_wrong_usage()
    assert_error("Needs table, not integer", function() 
       wl.map.create_immovable("tree1", 9, 10) end)
@@ -134,6 +156,6 @@ function plr_immovables_test:test_owner()
    assert_equal(self.p, self.f.player)
 end
 
---scenario=~/.widelands/maps/Isle\ of\ Trigger.wmf     
+
 
 

@@ -1534,25 +1534,30 @@ Module Functions
 */
 
 /* RST
-.. function:: create_immovable(name, field)
+.. function:: create_immovable(name, field[, from_where = "world"])
 
-	Creates an immovable that is defined by the world (e.g. trees, stones...)
-	on a given field. If there is already an immovable on the field, an error
-	is reported.
+	Creates an immovable that is defined by the world (e.g. trees, stones...) or
+	a tribe (field) on a given field. If there is already an immovable on the
+	field, an error is reported.
 
 	:arg name: The name of the immovable to create
 	:type name: :class:`string`
 	:arg field: The immovable is created on this field.
 	:type field: :class:`wl.map.Field`
+	:arg from_where: a tribe name or "world" that defines where the immovable
+		is defined
+	:type from_where: :class:`string`
 
 	:returns: The created immovable object, most likely a
 		:class:`wl.map.BaseImmovable`
 */
 static int L_create_immovable(lua_State * const L) {
+	std::string from_where = "world";
+
 	char const * const objname = luaL_checkstring(L, 1);
 	L_Field * c = *get_user_class<L_Field>(L, 2);
-
-	Game & game = get_game(L);
+	if (lua_gettop(L) > 2)
+		from_where = luaL_checkstring(L, 3);
 
 	// Check if the map is still free here
 	if
@@ -1560,13 +1565,37 @@ static int L_create_immovable(lua_State * const L) {
 		if (imm->get_size() >= BaseImmovable::SMALL)
 			return report_error(L, "Node is no longer free!");
 
-	int32_t const imm_idx = game.map().world().get_immovable_index(objname);
-	if (imm_idx < 0)
-		return report_error(L, "Unknown immovable <%s>", objname);
+	Game & game = get_game(L);
 
-	BaseImmovable & m = game.create_immovable(c->coords(), imm_idx, 0);
+	BaseImmovable * m = 0;
+	if (from_where != "world") {
+		try {
+			Widelands::Tribe_Descr const & tribe =
+				game.manually_load_tribe(from_where);
 
-	return upcasted_immovable_to_lua(L, &m);
+			int32_t const imm_idx = tribe.get_immovable_index(objname);
+			if (imm_idx < 0)
+				return
+					report_error
+					(L, "Unknown immovable <%s> for tribe <%s>",
+					 objname, from_where.c_str());
+
+			m = &game.create_immovable(c->coords(), imm_idx, &tribe);
+		} catch(game_data_error & gd) {
+			return
+				report_error
+					(L, "Problem loading tribe <%s>. Maybe not existent?",
+					 from_where.c_str());
+		}
+	} else {
+		int32_t const imm_idx = game.map().world().get_immovable_index(objname);
+		if (imm_idx < 0)
+			return report_error(L, "Unknown immovable <%s>", objname);
+
+		m = &game.create_immovable(c->coords(), imm_idx, 0);
+	}
+
+	return upcasted_immovable_to_lua(L, m);
 }
 
 /* RST
