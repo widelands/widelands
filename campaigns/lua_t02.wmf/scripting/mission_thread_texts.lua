@@ -223,6 +223,39 @@ _[[ "Wonderful! Our roofs are not dripping anymore, and we have all the material
 "</p></rt>"
 }
 
+msg_complete_msg = {
+   title=_"Mission Complete",
+   body="<rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
+_[[ "The other day Boldreth asked me to accompany him to the new inn. It would cheer me up, he said.<br> When I looked around, I saw faithful faces, trusting that I could guide them through these dark days. Yet before I could speak any words of gratitude or encouragement, one of my warriors ran into the inn. He had been far out in the forest for the past days and I could see how weary he was.<br> The news he brought changed everything..."<br><br>--------------------- VICTORY! ----------------------<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]] .. 
+"</p></rt>"
+}
+
+msg_story_1 = {
+   title=_"One fullmoon night",
+   body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+_"Thron speaks..." ..
+"</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
+_[[ "One night, when the moon shone brightly, I climbed to the peak of Kal'mavrath.<br> When I gazed at the horizon, I still saw crimson lights flicker in the distance. It is incredible how much passion my brethren fight this war with. I fear the moment I see Al'thunran again - will there be anything but ashes and wasted ruins left of our once beautiful capital when we get there?" ]] ..
+"</p></rt>"
+}
+
+msg_story_2 = {
+    title= _"Another cold day",
+    body= "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+ _"Thron looks worried..." ..
+ "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
+ _[[ "The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore - it must not be far anymore.<br> I prayed it might get warmer again, as I prayed the war would finally come to an end.<br> So far, it seems that neither prayer was fulfilled." ]] ..
+ "</p></rt>"
+}
+
+msg_village = {
+   title=_"A friendly village joined us!",
+   body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+_"Thron speaks..." ..
+"</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
+_[[ "We have found a village with friendly and productive people, impressed by our wealth, technology and strength.<br> They have decided to join us!" ]] ..
+"</p></rt>"
+}
 
 -- =======================================================================
 --                                OBJECTIVES                                
@@ -239,6 +272,7 @@ obj_claim_northeastern_rocks = {
       obj.done = true
       send_msg(order_msg_5_quarry)
 
+      quarry_done = true
    end, 
    body = "<rt><p>" ..
 _"* Build military buildings (like sentries and strongholds) to expand your territory.<br> Get to the rocks northeast from you and build a quarry there." ..
@@ -320,6 +354,7 @@ check = function (obj)
       sleep(5742)
    end
    obj.done = true
+   enhance_buildings_done = true
 end,
 body="<rt><p>" ..
 _"* Enhance the coal mine and the tavern to the better versions of their buildings respectively.<br> A normal mine can only dig up about one third of all resources lying beneath it; then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing menu.<br> Workers gain experience by successful work. With enough experience they become more advanced workers, who are necessary to operate the enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building! Such buildings usually have greater demands than the basic kind of that building - for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish). You may of course enhance all mines to deep mines instantly - bigger mines work a bit faster, smaller mines need cheaper food. It's up to you which strategy you prefer." ..
@@ -349,4 +384,5 @@ body="<rt><p>"..
 _"* Build a fernery.<br> The third material necessary for improved buildings is thatch reed, used to cover roofs. Thatch reed is planted by a fernery, around the building." ..
 "</p></rt>"
 }
+
 

@@ -6,6 +6,10 @@ use("map", "mission_thread_texts")
 use("aux", "smooth_move")
 use("aux", "table")
 
+quarry_done = false
+enhance_buildings_done = false
+build_materials_done = false
+
 function send_msg(t) 
    p:send_message( t.title, t.body, t)
 end
@@ -38,6 +42,9 @@ function exist_buildings(region, t)
    return true
 end
 
+-- ==============================================
+-- First messages player at beginning of mission 
+-- ==============================================
 function introduction_thread()
    sleep(2000)
    
@@ -64,6 +71,9 @@ function introduction_thread()
    sleep(1000)
 end
 
+-- ==================================
+-- How to mine & Produce food thread 
+-- ==================================
 function mines_and_food_thread()
    local f1 = wl.map.Field(30, 15)
    local f2 = wl.map.Field(24, 61)
@@ -131,6 +141,9 @@ function mines_and_food_thread()
 
 end
 
+-- ==============================
+-- Better build materials thread 
+-- ==============================
 function build_materials_thread()
    local p = wl.game.Player(1)
 
@@ -170,20 +183,183 @@ function build_materials_thread()
    while #p:get_buildings("fernery") < 1 do sleep(5421) end
 
    p:send_msg(order_msg_19_all_material)
+
+   build_materials_done = true
+end
+
+-- ======================
+-- Throns story messages 
+-- ======================
+function story_messages_thread()
+   wake_me(180 * 1000)
+   send_msg(msg_story_2)
+
+   wake_me(600 * 1000)
+   send_msg(msg_story_1)
 end
 
 function mission_complete_thread()
-   -- TODO: check for mission quarry,
-   -- mission fernery and
-   -- mission enhance_buildings
-   -- TODO: best add missions at the very beginning, but keep them hidden or so
+   while not (build_materials_done and quarry_done
+            and enhance_buildings_done ) do
+         sleep(10000)
+   end
+
+   send_msg(msg_mission_complete)
+   p:reveal_scenario("barbariantut01")
 end
 
--- TODO: story texts 
+-- ==============
+-- Village thread 
+-- ==============
+function village_thread()
+   local p = wl.game.Player(1)
+   while not (p:seen_field(wl.map.Field(52,39)) or
+              p:seen_field(wl.map.Field(58,10))) do
+         sleep(6534)
+   end
+
+   reveal_village()
+
+   pts = smooth_move(wl.map.Field(55, 25), p, 3000)
+   sleep(3000)
+
+   send_msg(msg_village)
+
+   timed_move(array_reverse(pts), p, 10)
+   sleep(1500)
+end
+      
+
+--[[
+   This is a village of poor but friendly people who have settled in a safe
+   valley between two glaciers. They hunt and grow timber and grain but they do
+   not have ores or even stones, so they are dependent on the infrequent
+   merchant that may pass by and provide them with whatever they can not
+   produce on their own. Their only protection is a guard hut at each entrance
+   to the valley. Therefore they realize that they may have to join a more
+   powerful society for protection in order to stay alive in this world.
+
+   A user that explores the map far from home will discover this village as a
+   bonus. Doing so is not necessary for winning.
+
+   Technically the village is created instantly when the player sees any of the
+   two entrances to the valley. But we place some trees and fields in various
+   stages of growth to make it seem like the village has actually existed for
+   some time. Some land ownership adjustments are made to ensure that the
+   village owns all land between the glaciers.
+--]]
+function reveal_village()
+   function force_map_immovables(list) 
+      for idx, id in ipairs(list) do
+         local f = wl.map.Field(id[2], id[3])
+         if f.immovable then
+            pcall(f.immovable.remove, f.immovable)
+         end
+         wl.map.create_immovable(id[1], f, id[4])
+      end
+   end
+   
+   force_map_immovables{
+      { "tree3", 55, 19 },
+      { "tree7_s", 58, 19 },
+      { "tree5_m", 58, 20 },
+      { "tree7", 57, 21 },
+      { "tree4_s", 54, 22 },
+      { "tree5_s", 56, 24 },
+      { "tree1", 58, 24 },
+      { "tree7_s", 56, 25 },
+      { "tree3", 53, 27 },
+      { "tree7_s", 57, 27 },
+      { "tree1_m", 52, 29 },
+      { "tree5", 54, 30 },
+      { "tree6", 55, 30 },
+      { "tree7", 56, 30 },
+      { "field2", 56, 14, "barbarians" },
+      { "field0s",57, 14, "barbarians" },
+      { "field2", 54, 15, "barbarians" },
+      { "field2", 57, 15, "barbarians" },
+      { "field2", 54, 16, "barbarians" },
+      { "field1", 57, 16, "barbarians" },
+      { "field2", 58, 16, "barbarians" },
+      { "field2", 54, 17, "barbarians" },
+      { "field0", 55, 17, "barbarians" },
+      { "field2", 57, 17, "barbarians" },
+      { "field2", 55, 18, "barbarians" },
+      { "field2", 57, 18, "barbarians" },
+      { "field2", 53, 31, "barbarians" },
+      { "field2", 54, 31, "barbarians" },
+      { "field0", 55, 31, "barbarians" },
+      { "field2", 56, 32, "barbarians" },
+      { "field2", 52, 33, "barbarians" },
+      { "field0s",55, 33, "barbarians" },
+      { "field2", 56, 33, "barbarians" },
+      { "field2", 53, 34, "barbarians" },
+      { "field1", 54, 34, "barbarians" },
+      { "field2", 56, 34, "barbarians" },
+      { "field2", 53, 35, "barbarians" },
+      { "field2", 55, 35, "barbarians" },
+   } 
+
+   local p = wl.game.Player(1)
+   place_buildings_with_workers(p,
+      {"sentry", 57, 9}, 
+      {"sentry", 52, 39}, 
+      {"hunters_hut", 56, 10}, 
+      {"gamekeepers_hut", 56, 12}, 
+      {"farm", 56, 16}, 
+      {"well", 54, 18}, 
+      {"bakery", 55, 20},  -- TODO: wheat 6, water =6
+      {"lumberjacks_hut", 56, 21}, 
+      {"lumberjacks_hut", 55, 22}, 
+      {"lumberjacks_hut", 54, 24}, 
+      {"rangers_hut", 57, 24}, 
+      {"rangers_hut", 55, 25}, 
+      {"hardener", 54, 26},  -- TODO: trunk 8
+      {"warehouse", 53, 28},
+      {"inn", 55, 28}, -- TODO: pittabread 4, meat 4
+      {"tavern", 57, 28}, -- TODO: pittabread 4, meat 4
+      {"well", 52, 30}, 
+      {"farm", 54, 33},
+      {"bakery", 51, 35}, -- TODO: wheat 6, water 6
+      {"well", 52, 37} -- TODO: wheat 6, water 6
+   )
+   
+   -- Adjust the borders so that the village owns everything green
+   p:conquer(wl.map.Field(59, 16), 2)
+   p:conquer(wl.map.Field(57, 18), 2)
+   p:conquer(wl.map.Field(58, 19), 1)
+   p:conquer(wl.map.Field(58, 20), 1)
+   p:conquer(wl.map.Field(54, 15), 1)
+   p:conquer(wl.map.Field(54, 16), 1)
+   p:conquer(wl.map.Field(54, 20), 1)
+   p:conquer(wl.map.Field(54, 22), 1)
+   p:conquer(wl.map.Field(57, 23), 1)
+   p:conquer(wl.map.Field(58, 24), 1)
+   p:conquer(wl.map.Field(57, 27), 1)
+   p:conquer(wl.map.Field(56, 31), 1)
+   p:conquer(wl.map.Field(56, 33), 1)
+   p:conquer(wl.map.Field(52, 32), 1)
+
+   -- Build roads
+   -- Start at northern sentry
+   connected_road(p, wl.map.Field(58, 10).immovable,
+      "w,sw|se,sw|e,se|se,se|sw,sw|sw,w|sw,sw|se,sw|sw,sw|se,sw|" ..
+      "sw,sw|sw,sw|sw,sw|se,se,sw|e,e|sw,sw|se,sw|")
+   
+   connected_road(p, wl.map.Field(57, 25).immovable, "sw,w|sw,w")
+   connected_road(p, wl.map.Field(57, 29).immovable, "w,w|w,w")
+   connected_road(p, wl.map.Field(55, 34).immovable, "sw,sw")
+   connected_road(p, wl.map.Field(57, 22).immovable, "sw,w")
+   connected_road(p, wl.map.Field(54, 19).immovable, "sw,se,e")
+   connected_road(p, wl.map.Field(56, 17).immovable, "sw,se")
+end
 
 run(introduction_thread)
 run(mines_and_food_thread)
 run(build_materials_thread)
+run(story_messages_thread)
+run(village_thread)
 
 run(mission_complete_thread)
+
 
