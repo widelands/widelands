@@ -47,7 +47,7 @@ if (WL_VERSION_STANDARD STREQUAL "TRUE")
 	#set (WL_VERSION_PATCH 90)
 
 	# An addition to the version name (e.g. RC1, DEV, ...)
-	set (WL_VERSION_ADDITION DEV)
+	set (WL_VERSION_ADDITION RC1)
 endif (WL_VERSION_STANDARD STREQUAL "TRUE")
 
 
