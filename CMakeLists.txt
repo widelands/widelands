@@ -93,8 +93,10 @@ endif (CMAKE_BUILD_TYPE STREQUAL "")
 
 set (CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE})
 
-find_package(GGZ_Core)
-include_directories(${GGZ_CORE_INCLUDE_DIR})
+if (NOT DEFINED MSVC)
+  find_package(GGZ_Core)
+  include_directories(${GGZ_CORE_INCLUDE_DIR})
+endif (NOT DEFINED MSVC)
 
 if (GGZ_CORE_FOUND)
   set (CXX_FLAG_GGZ "-DUSE_GGZ")
