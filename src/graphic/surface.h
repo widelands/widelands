@@ -101,8 +101,7 @@ public:
 	void fill_rect(Rect, RGBAColor);
 	void brighten_rect(Rect, int32_t factor);
 
-	void blit(Point, Surface *, Rect srcrc);
-	void blit_solid(Point, Surface *, Rect srcrc);
+	void blit(Point, Surface *, Rect srcrc, bool enable_alpha = true);
 	void fast_blit(Surface *);
 
 	void draw_minimap

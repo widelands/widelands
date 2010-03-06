@@ -1375,8 +1375,5 @@ void RenderTarget::doblit(Point dst, Surface * const src, Rect srcrc, bool enabl
 	dst += m_rect;
 
 	// Draw it
-	if(enable_alpha)
-		m_surface->blit(dst, src, srcrc);
-	else
-		m_surface->blit_solid(dst, src, srcrc);
+	m_surface->blit(dst, src, srcrc, enable_alpha);
 }

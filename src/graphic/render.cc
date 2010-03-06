@@ -422,14 +422,8 @@ GLuint Surface::getTexture()
 }
 #endif
 
-void Surface::blit_solid(Point const dst, Surface * const src, Rect const srcrc)
+void Surface::blit(Point const dst, Surface * const src, Rect const srcrc, bool enable_alpha)
 {
-	/*
-	log("Surface::blit((%d, %d), (%d, %d), (%d, %d, %d, %d))\n",
-	    dst.x, dst.y,
-	    surface->w, surface->h,
-	    srcrc.x, srcrc.y, srcrc.w, srcrc.h);
-	*/
 #ifdef HAS_OPENGL
 	if(g_opengl and isGLsf())
 	{
@@ -446,7 +440,11 @@ void Surface::blit_solid(Point const dst, Surface * const src, Rect const srcrc)
 		glScalef(1.0f/(GLfloat)src->get_w(), 1.0f/(GLfloat)src->get_h(), 1);
 
 		// Enable Alpha blending 
-		glDisable(GL_BLEND);
+		if(enable_alpha) {
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		} else
+			glDisable(GL_BLEND);
 
 		/* select the texture to paint on the screen
 		 * openGL does not know anything about SDL_Surfaces
@@ -489,85 +487,10 @@ void Surface::blit_solid(Point const dst, Surface * const src, Rect const srcrc)
 	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
 	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
 
-	SDL_SetAlpha(src->m_surface, 0, 0);
-	SDL_SetAlpha(m_surface, 0, 0);
+	SDL_SetAlpha(src->m_surface, enable_alpha && SDL_SRCALPHA, 0);
+	SDL_SetAlpha(m_surface, enable_alpha && SDL_SRCALPHA, 0);
 
 	SDL_BlitSurface(src->m_surface, &srcrect, m_surface, &dstrect);
-
-	SDL_SetAlpha(src->m_surface, SDL_SRCALPHA, 0);
-	SDL_SetAlpha(m_surface, SDL_SRCALPHA, 0);
-}
-
-void Surface::blit(Point const dst, Surface * const src, Rect const srcrc)
-{
-	/*
-	log("Surface::blit((%d, %d), (%d, %d), (%d, %d, %d, %d))\n",
-	    dst.x, dst.y,
-	    surface->w, surface->h,
-	    srcrc.x, srcrc.y, srcrc.w, srcrc.h);
-	*/
-#ifdef HAS_OPENGL
-	if(g_opengl and isGLsf())
-	{
-		/* Set a texture scaling factor. Normaly texture coordiantes 
-		 * (see glBegin()...glEnd() Block below) are given in the range 0-1
-		 * to avoid the calculation (and let opengl do it) the texture 
-		 * space is modified. glMatrixMode select which matrix to manipulate
-		 * (the texture transformation matrix in this case). glLoadIdentity()
-		 * resets the (selected) matrix to the identity matrix. And finally 
-		 * glScalef() calculates the texture matrix.
-		 */
-		glMatrixMode(GL_TEXTURE);
-		glLoadIdentity();
-		glScalef(1.0f/(GLfloat)src->get_w(), 1.0f/(GLfloat)src->get_h(), 1);
-
-		// Enable Alpha blending 
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-		/* select the texture to paint on the screen
-		 * openGL does not know anything about SDL_Surfaces
-		 * opengl uses textures to handle images
-		 * getTexture() returns the texture id of the Surface. It creates
-		 * the texture from the SDL_Surface if it doesn't exist
-		 */
-		glBindTexture( GL_TEXTURE_2D, src->getTexture());
-		
-		/* This block between blBegin() and glEnd() does the blit.
-		 * It draws a textured rectangle. glTexCoord2i() set the Texture
-		 * Texture cooardinates. This is the source rectangle.
-		 * glVertex2f() sets the screen coordiantes which belong to the 
-		 * previous texture coordinate. This is the destination rectangle 
-		 */
-		glBegin(GL_QUADS);
-		    //set color white, otherwise textures get mixed with color
-		    glColor3f(1.0,1.0,1.0);
-		    //top-left 
-		    glTexCoord2i( srcrc.x,         srcrc.y );
-		    glVertex2i(   dst.x,           dst.y );
-		    //top-right
-		    glTexCoord2i( srcrc.x+srcrc.w, srcrc.y );
-		    glVertex2f(   dst.x+srcrc.w,   dst.y );
-		    //botton-right
-		    glTexCoord2i( srcrc.x+srcrc.w, srcrc.y+srcrc.h );
-		    glVertex2f(   dst.x+srcrc.w,   dst.y+srcrc.h );
-		    //bottom-left
-		    glTexCoord2i( srcrc.x,         srcrc.y + srcrc.h);
-		    glVertex2f(   dst.x,           dst.y+srcrc.h );
-		glEnd();
-
-		glMatrixMode(GL_TEXTURE);
-		glLoadIdentity();
-
-		return;
-	}
-#endif
-
-	SDL_Rect srcrect = {srcrc.x, srcrc.y, srcrc.w, srcrc.h};
-	SDL_Rect dstrect = {dst.x, dst.y, 0, 0};
-
-	SDL_BlitSurface(src->m_surface, &srcrect, m_surface, &dstrect);
-
 }
 
 /*
@@ -771,7 +694,7 @@ void Surface::draw_minimap
 	Surface surf;
 	surf.set_sdl_surface(*surface);
 
-	blit_solid(Point(rc.x,rc.y), &surf, rc2);
+	blit(Point(rc.x,rc.y), &surf, rc2, false);
 #else
 	//TODO: this const_cast is evil and should be exorcised.
 	Uint8 * const pixels = const_cast<Uint8 *>
