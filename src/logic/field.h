@@ -53,14 +53,14 @@ namespace Widelands {
 // class all around the code
 
 struct Terrain_Descr;
-class Bob;
+struct Bob;
 struct BaseImmovable;
 
 /// a field like it is represented in the game
 /// \todo This is all one evil hack :(
 struct Field {
 	friend struct Map;
-	friend class Bob;
+	friend struct Bob;
 	friend struct BaseImmovable;
 
 	enum Buildhelp_Index {

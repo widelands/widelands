@@ -263,14 +263,10 @@ void Editor_Objectives_Menu::clicked_del() {
 			_
 				("The objective was deleted, but not its trigger, because it is "
 				 "still referenced by:\n");
-		for
-			(struct {
-			 	Trigger::Referencers::const_iterator       current;
-			 	Trigger::Referencers::const_iterator const end;
-			 } i = {referencers.begin(), referencers.end()};;)
+		for (wl_const_range<Trigger::Referencers> r(referencers);;)
 		{
-			str += i.current->first->identifier();
-			if (++i.current == i.end)
+			str += r->first->identifier();
+			if (r.advance().empty())
 				break;
 			str += '\n';
 		}

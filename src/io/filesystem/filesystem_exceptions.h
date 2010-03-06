@@ -21,6 +21,7 @@
 #define FILESYSTEM_EXCEPTIONS_H
 
 #include <stdexcept>
+#include <string>
 
 /**
  * Generic problem when dealing with a file or directory

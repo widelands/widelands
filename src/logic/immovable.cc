@@ -39,8 +39,15 @@
 
 #include "upcast.h"
 
+#include "container_iterate.h"
+
 #include <cstdio>
 
+#include "config.h"
+
+#ifndef HAVE_VARARRAY
+#include <climits>
+#endif
 namespace Widelands {
 
 BaseImmovable::BaseImmovable(const Map_Object_Descr & mo_descr) :
@@ -236,11 +243,9 @@ Immovable_Descr::Immovable_Descr
 		 	prof.get_section("terrain affinity"))
 	{
 		memset(it, 0, sizeof(m_terrain_affinity));
-		for
-			(struct {Terrain_Index current; Terrain_Index const nr_terrains;} i =
-			 	{0, world.get_nr_terrains()};
-			 i.current < i.nr_terrains;
-			 ++i.current, ++it)
+		for(wl_index_range<Terrain_Index> i
+			(0, world.get_nr_terrains());
+			 i;++i, ++it)
 		{
 			char const * const terrain_type_name =
 				world.get_ter(i.current).name().c_str();
@@ -421,9 +426,11 @@ uint32_t Immovable_Descr::terrain_suitability
 	World const & world = map.world();
 	uint8_t nr_terrain_types = world.get_nr_terrains();
 	uint32_t result = 0;
+#ifdef HAVE_VARARRAY
 	uint8_t nr_triangles[nr_terrain_types];
-	memset(nr_triangles, 0, nr_terrain_types);
-
+#else
+	uint8_t nr_triangles[UCHAR_MAX];
+#endif
 	//  Neighbours
 	FCoords const tr = map.tr_n(f);
 	FCoords const tl = map.tl_n(f);
@@ -1018,7 +1025,7 @@ void PlayerImmovable::remove_worker(Worker & w)
 {
 	container_iterate(Workers, m_workers, i)
 		if (*i.current == &w) {
-			*i.current = *(i.end - 1);
+			*i.current = *(i.get_end() - 1);
 			return m_workers.pop_back();
 		}
 

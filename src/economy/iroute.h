@@ -24,7 +24,7 @@
 
 namespace Widelands {
 
-struct RoutingNode;
+class RoutingNode;
 
 /**
  * This class represents a Route Interface, a virtual base class

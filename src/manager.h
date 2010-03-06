@@ -46,7 +46,7 @@ template<typename T> struct Manager {
 
 	/// Removes all items.
 	void remove_all() {
-		container_iterate_const(typename container, items, i)
+		container_iterate_const(container, items, i)
 			delete *i.current;
 		items.clear();
 	}
@@ -55,10 +55,11 @@ template<typename T> struct Manager {
 	///
 	/// \Throws Nonexistent if there is no such item.
 	void remove(T & item) {
-		container_iterate(typename container, items, i)
+        // TODO: why not std::find & std::erase?
+		container_iterate(container, items, i)
 			if (*i.current == &item) {
 				delete &item;
-				*i.current = *(i.end - 1);
+				*i.current = *(i.get_end() - 1);
 				items.pop_back();
 				return;
 			}
@@ -69,7 +70,7 @@ template<typename T> struct Manager {
 	///
 	/// \Throws Nonexistent if there is no such item.
 	void remove(char const * const name) {
-		container_iterate(typename container, items, i)
+		container_iterate(container, items, i)
 			if (not strcmp((*i.current)->name().c_str(), name)) {
 				delete *i.current;
 				*i.current = *(i.end - 1);
@@ -79,10 +80,10 @@ template<typename T> struct Manager {
 		throw Nonexistent();
 	}
 	void remove(std::string const & name) {
-		container_iterate(typename container, items, i)
+		container_iterate(container, items, i)
 			if (name == (*i.current)->name()) {
 				delete *i.current;
-				*i.current = *(i.end - 1);
+				*i.current = *(i.get_end() - 1);
 				items.pop_back();
 				return;
 			}
@@ -115,25 +116,25 @@ template<typename T> struct Manager {
 		return *items[i];
 	}
 	T const * operator[](char const * const name) const {
-		container_iterate_const(typename container, items, i)
+		container_iterate_const(container, items, i)
 			if (not strcmp((*i.current)->name().c_str(), name))
 				return *i.current;
 		return 0;
 	}
 	T       * operator[](char const * const name)       {
-		container_iterate_const(typename container, items, i)
+		container_iterate_const(container, items, i)
 			if (not strcmp((*i.current)->name().c_str(), name))
 				return *i.current;
 		return 0;
 	}
 	T const * operator[](std::string const & name) const {
-		container_iterate_const(typename container, items, i)
+		container_iterate_const(container, items, i)
 			if (name == (*i.current)->name())
 				return *i.current;
 		return 0;
 	}
 	T       * operator[](std::string const & name)       {
-		container_iterate_const(typename container, items, i)
+		container_iterate_const(container, items, i)
 			if (name == (*i.current)->name())
 				return *i.current;
 		return 0;

@@ -43,7 +43,7 @@ struct Profile;
 
 namespace Widelands {
 
-class Flag;
+struct Flag;
 struct Message;
 struct Tribe_Descr;
 struct WaresQueue;

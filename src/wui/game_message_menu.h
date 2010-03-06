@@ -29,6 +29,7 @@
 
 #include "i18n.h"
 
+#include "container_iterate.h"
 #include "ref_cast.h"
 
 namespace Widelands {
@@ -78,11 +79,7 @@ private:
 		void clicked() {
 			GameMessageMenu & menu =
 				ref_cast<GameMessageMenu, UI::Panel>(*get_parent());
-			for
-				(struct {uint8_t current; uint8_t const end;} i =
-				 	{0, menu.list.size()};
-				 i.current < i.end;
-				 ++i.current)
+			for(wl_index_range<uint8_t>i(0,menu.list.size());i;++i)
 				menu.list.get_record(i.current).set_checked
 					(List::Select, false);
 		}
@@ -99,11 +96,8 @@ private:
 		void clicked() {
 			GameMessageMenu & menu =
 				ref_cast<GameMessageMenu, UI::Panel>(*get_parent());
-			for
-				(struct {uint8_t current; uint8_t const end;} i =
-				 	{0, menu.list.size()};
-				 i.current < i.end;
-				 ++i.current)
+
+			for(wl_index_range<uint8_t> i(0, menu.list.size());i;++i)
 				menu.list.get_record(i.current).toggle(List::Select);
 		}
 	} invert_selection;

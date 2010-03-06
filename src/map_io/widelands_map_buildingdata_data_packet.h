@@ -26,12 +26,12 @@
 
 namespace Widelands {
 
-struct ConstructionSite;
+class ConstructionSite;
 struct Game;
-struct MilitarySite;
-struct TrainingSite;
-struct ProductionSite;
-struct Warehouse;
+class MilitarySite;
+class TrainingSite;
+class ProductionSite;
+class Warehouse;
 
 /*
  * This cares for the data of buildings

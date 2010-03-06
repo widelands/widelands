@@ -40,7 +40,7 @@ namespace Widelands {
 struct Flag;
 struct Path;
 struct PlayerImmovable;
-struct TrainingSite;
+class TrainingSite;
 
 #define WLGF_SUFFIX ".wgf"
 #define WLGF_MAGIC      "WLgf"
@@ -82,7 +82,7 @@ struct Game : public Editor_Game_Base {
 	friend class Cmd_Queue; // this class handles the commands
 	friend class Game_Game_Class_Data_Packet;
 	friend class Game_Player_Info_Data_Packet;
-	friend class Game_Loader;
+	friend struct Game_Loader;
 	friend struct ::Game_Main_Menu_Load_Game;
 	friend struct ::WLApplication;
 

@@ -254,14 +254,7 @@ void ProductionSite::prefill
 	{ //  init input ware queues
 		Ware_Types const & inputs = descr().inputs();
 		m_input_queues.resize(inputs.size());
-		for
-			(struct {
-			 	Ware_Types::const_iterator       current;
-			 	Ware_Types::const_iterator const end;
-			 	uint8_t                          i;
-			 } i = {inputs.begin(), inputs.end(), 0};
-			 i.current < i.end;
-			 ++i.current, ++i.i)
+		for (ware_range i(inputs);i;++i)
 			m_input_queues[i.i] =
 				new WaresQueue
 					(*this,

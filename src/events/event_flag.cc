@@ -24,6 +24,8 @@
 #include "logic/player.h"
 #include "profile/profile.h"
 
+#include "economy/flag.h"
+
 #define EVENT_VERSION 1
 
 namespace Widelands {
@@ -52,8 +54,6 @@ void Event_Flag::Write
 	if (m_player != 1)
 		s.set_int ("player",  m_player);
 }
-
-
 Event::State Event_Flag::run(Game & game) {
 	game.player(m_player).force_flag(game.map().get_fcoords(m_position));
 	return m_state = DONE;

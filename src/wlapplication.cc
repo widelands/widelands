@@ -1236,11 +1236,13 @@ void WLApplication::show_usage()
 			 "                      the map FILENAME in editor.\n"
 			 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 			 "                      map.\n"
-			 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
+			 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n")
 #if HAVE_GGZ
-			 " --dedicated=FILENAME Starts ggz host with FILENAME as map\n"
+		<< _(" --dedicated=FILENAME Starts ggz host with FILENAME as map\n")
 #endif
-			 " --speed_of_new_game  The speed that the new game will run at\n"
+		<<
+		_
+			( " --speed_of_new_game  The speed that the new game will run at\n"
 			 "                      when started, with factor 1000 (0 is pause,\n"
 			 "                      1000 is normal speed).\n"
 			 " --auto_roadbuild_mode=[yes|no]\n"
@@ -1262,13 +1264,17 @@ void WLApplication::show_usage()
 			 "                      *HIGHLY EXPERIMENTAL*\n"
 			 " --double_buffer=[0|1]\n"
 			 "                      Enables double buffering\n"
-			 "                      *HIGHLY EXPERIMENTAL*\n"
+			 "                      *HIGHLY EXPERIMENTAL*\n")
 #if HAS_OPENGL
-			 " --opengl=[0|1]\n"
+		<<
+		_
+			 (" --opengl=[0|1]\n"
 			 "                      Enables opengl rendering\n"
-			 "                      *DANGEROUS AND BROKEN, DO NOT USE*\n"
+			 "                      *DANGEROUS AND BROKEN, DO NOT USE*\n")
 #endif
-			 "\n"
+		<<
+		_
+			("\n"
 			 "Options for the internal window manager:\n"
 			 " --border_snap_distance=[0 ...]\n"
 			 "                      Move a window to the edge of the screen\n"

@@ -41,7 +41,7 @@ struct WareList;
 /*
 Warehouse
 */
-class WarehouseSupply;
+struct WarehouseSupply;
 
 struct Warehouse_Descr : public Building_Descr {
 	Warehouse_Descr

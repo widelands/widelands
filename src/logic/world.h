@@ -27,7 +27,7 @@
 
 #include "widelands.h"
 
-class Section;
+struct Section;
 
 namespace Widelands {
 

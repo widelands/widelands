@@ -142,7 +142,7 @@ struct Map : public ITransportCostCalculator {
 	friend struct Map_Extradata_Data_Packet;
 	friend class Editor;
 	friend class Main_Menu_New_Map;
-	friend class MapGenerator;
+	friend struct MapGenerator;
 
 	enum { // flags for findpath()
 

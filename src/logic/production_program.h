@@ -46,7 +46,7 @@ namespace Widelands {
 
 struct Game;
 struct ProductionSite_Descr;
-struct ProductionSite;
+class ProductionSite;
 struct Tribe_Descr;
 
 /// Ordered sequence of actions (at least 1). Has a name.

@@ -31,7 +31,7 @@ namespace Widelands {
  *
  * Represents a cross-country path found by Path::findpath, for example
  */
-class CoordPath;
+struct CoordPath;
 struct Map;
 
 struct Path {

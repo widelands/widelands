@@ -37,13 +37,12 @@
 #include "world.h"
 #include "roadtype.h"
 
+#include "economy/road.h"
 
 #include <set>
 #include <algorithm>
 
 namespace Widelands {
-
-extern Map_Object_Descr g_road_descr;
 
 // hard-coded playercolors
 const uint8_t g_playercolors[MAX_PLAYERS][12] = {
@@ -224,7 +223,7 @@ void Editor_Game_Base::inform_players_about_ownership
 void Editor_Game_Base::inform_players_about_immovable
 	(Map_Index const i, Map_Object_Descr const * const descr)
 {
-	if (descr != &g_road_descr)
+	if (not Road::IsRoadDescr(descr))
 		for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
 			if (Player * const p = m_players[plnum]) {
 				Player::Field & player_field = p->m_fields[i];

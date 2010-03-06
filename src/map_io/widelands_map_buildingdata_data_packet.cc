@@ -621,21 +621,19 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				//  Find a working position that matches this request.
 				ProductionSite::Working_Position * wp = &wp_begin;
 				for
-					(struct {
-					 	Ware_Types::const_iterator       current;
-					 	Ware_Types::const_iterator const end;
-					 } j = {working_positions.begin(), working_positions.end()};;
-					 ++j.current)
+					(wl_const_range<Ware_Types>
+					 j(working_positions);;
+					 ++j)
 				{
-					if (j.current == j.end)
+					if (j.empty())
 						throw game_data_error
 							("site has request for %s, for which there is no working "
 							 "position",
 							 productionsite.tribe()
 							 .get_worker_descr(req.get_index())->name().c_str());
-					uint32_t count = j.current->second;
+					uint32_t count = j->second;
 					assert(count);
-					if (worker_index == j.current->first) {
+					if (worker_index == j->first) {
 						while (wp->worker_request)
 							if (--count)
 								++wp;
@@ -661,20 +659,17 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				//  Find a working position that matches this worker.
 				ProductionSite::Working_Position * wp = &wp_begin;
 				for
-					(struct {
-					 	Ware_Types::const_iterator       current;
-					 	Ware_Types::const_iterator const end;
-					 } j = {working_positions.begin(), working_positions.end()};;
-					 ++j.current)
+					(wl_const_range<Ware_Types> j(working_positions);;
+					 ++j)
 				{
-					if (j.current == j.end)
+					if (j.empty())
 						throw game_data_error
 							("site has %s, for which there is no free working "
 							 "position",
 							 worker_descr.name().c_str());
-					uint32_t count = j.current->second;
+					uint32_t count = j->second;
 					assert(count);
-					if (worker_descr.can_act_as(j.current->first)) {
+					if (worker_descr.can_act_as(j->first)) {
 						while (wp->worker or wp->worker_request) {
 							++wp;
 							if (not --count)
@@ -1120,7 +1115,8 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 
 	//  Incorporated workers, write sorted after file-serial.
 	fw.Unsigned16(warehouse.m_incorporated_workers.size());
-	std::map<uint32_t, const Worker *> workermap;
+	typedef std::map<uint32_t, const Worker *> TWorkerMap;
+	TWorkerMap workermap;
 	container_iterate_const
 		(std::vector<OPtr<Worker> >, warehouse.m_incorporated_workers, i)
 	{
@@ -1130,14 +1126,7 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 			(std::pair<uint32_t, const Worker *>
 			 	(mos.get_object_file_index(w), &w));
 	}
-
-	for
-		(struct {
-		 	std::map<uint32_t, Worker const *>::const_iterator       current;
-		 	std::map<uint32_t, Worker const *>::const_iterator const end;
-		 } i = {workermap.begin(), workermap.end()};
-		 i.current != i.end;
-		 ++i.current)
+	container_iterate_const(TWorkerMap, workermap, i)
 	{
 		Worker const & obj = *i.current->second;
 		assert(mos.is_object_known(obj));

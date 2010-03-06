@@ -25,8 +25,8 @@
 #include <string>
 
 namespace Widelands {
-class Game;
-class PlayerCommand;
+struct Game;
+struct PlayerCommand;
 }
 
 

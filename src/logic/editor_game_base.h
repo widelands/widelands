@@ -39,7 +39,7 @@ namespace Widelands {
 
 struct AreaWatcher;
 struct Battle;
-class Bob;
+struct Bob;
 struct Building_Descr;
 class Immovable;
 struct Map;
@@ -47,7 +47,7 @@ struct Object_Manager;
 struct Player;
 struct PlayerImmovable;
 struct Tribe_Descr;
-class Flag;
+struct Flag;
 struct AttackController;
 
 struct Editor_Game_Base : NoteReceiver<NoteImmovable>, NoteReceiver<NoteField>

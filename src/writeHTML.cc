@@ -909,14 +909,10 @@ void ProductionProgram::ActReturn::writeHTML
 			fw.Text(_("unless"));
 		}
 		fw.Text("</span> ");
-		for
-			(struct {
-			 	Conditions::const_iterator       current;
-			 	Conditions::const_iterator const end;
-			 } i = {m_conditions.begin(), m_conditions.end()};;)
+		for (wl_const_range<Conditions> i(m_conditions);;)
 		{
-			(*i.current)->writeHTML(fw, site);
-			if (++i.current == i.end)
+			i.front()->writeHTML(fw, site);
+			if (i.advance().empty())
 				break;
 			fw.Text("<span class=\"keyword\">");
 			fw.Text(op);
@@ -987,11 +983,7 @@ void ProductionProgram::ActReturn::Site_Has::writeHTML
 	fw.Text("</span> <span class=\"keyword\">");
 	fw.Text(_("has"));
 	fw.Text("</span>");
-	for
-		(struct {
-		 	std::set<Ware_Index>::const_iterator       current;
-		 	std::set<Ware_Index>::const_iterator const end;
-		 } i = {group.first.begin(), group.first.end()};;)
+	for (wl_const_range<std::set<Ware_Index> > i(group.first);;)
 	{
 		Item_Ware_Descr const & ware_type = *tribe.get_ware_descr(*i.current);
 		std::string const & ware_type_name     = ware_type.    name();
@@ -1005,7 +997,7 @@ void ProductionProgram::ActReturn::Site_Has::writeHTML
 		fw.Text("/menu.png\" alt=\"");
 		fw.Text(ware_type_descname);
 		fw.Text("\"/></a>");
-		if (++i.current == i.end)
+		if (i.advance().empty())
 			break;
 		fw.Unsigned8(',');
 	}
@@ -1175,17 +1167,9 @@ void ProductionProgram::ActConsume::writeHTML
 	fw.Text("\">");
 	fw.Text(_("consume"));
 	fw.Text("</a> ");
-	for
-		(struct {
-		 	Groups::const_iterator       current;
-		 	Groups::const_iterator const end;
-		 } j = {groups().begin(), groups().end()};;)
+	for(wl_const_range<Groups> j(groups());;)
 	{
-		for
-			(struct {
-			 	std::set<Ware_Index>::const_iterator       current;
-			 	std::set<Ware_Index>::const_iterator const end;
-			 } i = {j.current->first.begin(), j.current->first.end()};;)
+		for(wl_const_range<std::set<Ware_Index> > i(j.current->first);;)
 		{
 			Item_Ware_Descr const & ware = *tribe.get_ware_descr(*i.current);
 			std::string const & ware_name     = ware.    name();
@@ -1199,7 +1183,7 @@ void ProductionProgram::ActConsume::writeHTML
 			fw.Text("/menu.png\" alt=\"");
 			fw.Text(ware_descname);
 			fw.Text("\"/></a>");
-			if (++i.current == i.end)
+			if (i.advance().empty())
 				break;
 			fw.Unsigned8(',');
 		}
@@ -1208,7 +1192,7 @@ void ProductionProgram::ActConsume::writeHTML
 			sprintf(buffer, ":%u", j.current->second);
 			fw.Text(buffer);
 		}
-		if (++j.current == j.end)
+		if (j.advance().empty())
 			break;
 		fw.Unsigned8(' ');
 	}
@@ -1226,11 +1210,7 @@ void ProductionProgram::ActProduce::writeHTML
 	fw.Text("\">");
 	fw.Text(_("produce"));
 	fw.Text("</a> ");
-	for
-		(struct {
-		 	Items::const_iterator       current;
-		 	Items::const_iterator const end;
-		 } i = {items().begin(), items().end()};;)
+	for (wl_const_range<Items> i(items());;)
 	{
 		Item_Ware_Descr const & ware = *tribe.get_ware_descr(i.current->first);
 		std::string const & ware_name     = ware.    name();
@@ -1249,7 +1229,7 @@ void ProductionProgram::ActProduce::writeHTML
 			sprintf(buffer, ":%u", i.current->second);
 			fw.Text(buffer);
 		}
-		if (++i.current == i.end)
+		if (i.advance().empty())
 			break;
 		fw.Unsigned8(' ');
 	}
@@ -1267,11 +1247,7 @@ void ProductionProgram::ActRecruit::writeHTML
 	fw.Text("\">");
 	fw.Text(_("recruit"));
 	fw.Text("</a> ");
-	for
-		(struct {
-		 	Items::const_iterator       current;
-		 	Items::const_iterator const end;
-		 } i = {items().begin(), items().end()};;)
+	for(wl_const_range<Items> i(items());;)
 	{
 		Worker_Descr const & worker = *tribe.get_worker_descr(i.current->first);
 		std::string const & worker_name     = worker.    name();
@@ -1290,7 +1266,7 @@ void ProductionProgram::ActRecruit::writeHTML
 			sprintf(buffer, ":%u", i.current->second);
 			fw.Text(buffer);
 		}
-		if (++i.current == i.end)
+		if (i.advance().empty())
 			break;
 		fw.Unsigned8(' ');
 	}

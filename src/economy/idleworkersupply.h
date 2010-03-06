@@ -22,8 +22,12 @@
 
 #include "supply.h"
 
+#ifdef _MSC_VER
+#define __attribute__(x)
+#endif
+
 namespace Widelands {
-struct Worker;
+class Worker;
 struct Economy;
 
 struct IdleWorkerSupply : public Supply {

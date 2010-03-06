@@ -39,7 +39,7 @@
 #include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
-
+#include "container_iterate.h"
 #include <algorithm>
 
 namespace Widelands {
@@ -287,15 +287,13 @@ IMPLEMENTATION
 
 #define SET_WORKER_WITHOUT_COST_SPAWNS(nr, value)                             \
    for                                                                        \
-      (struct {                                                               \
-          uint32_t       *       current;                                     \
-          uint32_t const * const end;                                         \
-       } i = {                                                                \
+      (wl_index_range<uint32_t *>                                             \
+       i(                                                                     \
           m_next_worker_without_cost_spawn,                                   \
           m_next_worker_without_cost_spawn + nr                               \
-       };                                                                     \
-       i.current < i.end;                                                     \
-       ++i.current)                                                           \
+       );                                                                     \
+       i;                                                                     \
+       ++i)                                                                   \
       *i.current = value;                                                     \
 
 Warehouse::Warehouse(const Warehouse_Descr & warehouse_descr) :
@@ -359,20 +357,18 @@ void Warehouse::postfill
 	Building::postfill(game, ware_types, worker_types, soldier_counts);
 	if (ware_types)
 		for
-			(struct {Ware_Index i; Ware_Index const nr_ware_types;} i =
-			 	{Ware_Index::First(), tribe().get_nrwares  ()};
-			 i.i < i.nr_ware_types;
-			 ++i.i, ++ware_types)
+			(wl_index_range<Ware_Index> i
+			(Ware_Index::First(),tribe().get_nrwares());
+			 i; ++i, ++ware_types)
 			if (uint32_t const count = *ware_types)
-				insert_wares  (i.i, count);
+				insert_wares  (i.current, count);
 	if (worker_types)
 		for
-			(struct {Ware_Index i; Ware_Index const nr_worker_types;} i =
-			 	{Ware_Index::First(), tribe().get_nrworkers()};
-			 i.i < i.nr_worker_types;
-			 ++i.i, ++worker_types)
+			(wl_index_range<Ware_Index> i
+			(Ware_Index::First(),tribe().get_nrworkers());
+			 i; ++i, ++worker_types)
 			if (uint32_t const count = *worker_types)
-				insert_workers(i.i, count);
+				insert_workers(i.current, count);
 	if (soldier_counts) {
 		Soldier_Descr const & soldier_descr =
 			ref_cast<Soldier_Descr const, Worker_Descr const>
@@ -451,11 +447,10 @@ void Warehouse::init(Editor_Game_Base & egbase)
 				 WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 		std::vector<Ware_Index> const & worker_types_without_cost =
 			tribe().worker_types_without_cost();
-		for
-			(struct {uint8_t current; uint32_t const size;} i =
-			 	{0, worker_types_without_cost.size()};
-			 i.current < i.size;
-			 ++i.current)
+
+		for (wl_index_range<uint32_t> i
+			(0, worker_types_without_cost.size());
+			i; ++i)
 			if
 				(owner().is_worker_type_allowed
 				 	(worker_types_without_cost.at(i.current)))

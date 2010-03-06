@@ -167,6 +167,7 @@ struct RoutingNodeQueue {
 	// Recursively check integrity
 	void debug(uint32_t node, char const * const str)
 	{
+        if (m_data.size() >= node) return;
 		uint32_t l = node * 2 + 1;
 		uint32_t r = node * 2 + 2;
 		if (m_data[node]->mpf_heapindex != static_cast<int32_t>(node)) {
