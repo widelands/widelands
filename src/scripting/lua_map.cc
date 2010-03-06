@@ -71,12 +71,17 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * bi) {
 
 	switch  (bi->get_type()) {
 		case Map_Object::BUILDING:
-			if (!strcmp(bi->type_name(), "warehouse"))
+		{
+			const char * type_name = bi->type_name();
+			if (!strcmp(type_name, "warehouse"))
 				return CAST_TO_LUA(Warehouse);
-			else if (!strcmp(bi->type_name(), "productionsite"))
+			else if (!strcmp(type_name, "productionsite"))
 				return CAST_TO_LUA(ProductionSite);
+			else if (!strcmp(type_name, "militarysite"))
+				return CAST_TO_LUA(MilitarySite);
 			else
 				return CAST_TO_LUA(Building);
+		}
 
 		case Map_Object::FLAG:
 			return CAST_TO_LUA(Flag);
@@ -1163,6 +1168,151 @@ int L_ProductionSite::warp_workers(lua_State * L) {
  */
 
 
+/* RST
+MilitarySite
+--------------
+
+.. class:: MilitarySite
+
+	Child of: :class:`Building`
+
+	Miltary Buildings
+*/
+const char L_MilitarySite::className[] = "MilitarySite";
+const MethodType<L_MilitarySite> L_MilitarySite::Methods[] = {
+	METHOD(L_MilitarySite, warp_soldiers),
+	METHOD(L_MilitarySite, get_soldiers),
+	{0, 0},
+};
+const PropertyType<L_MilitarySite> L_MilitarySite::Properties[] = {
+	PROP_RO(L_MilitarySite, max_soldiers),
+	{0, 0, 0},
+};
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: max_soldiers
+
+		(RO) The maximum number of soldiers that can be inside this building
+			at one time.
+*/
+int L_MilitarySite::get_max_soldiers(lua_State * L) {
+	lua_pushuint32
+		(L, get(get_game(L), L)->descr().get_max_number_of_soldiers());
+
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+/* RST
+	.. method:: warp_soldiers(list)
+
+		The equivalent to :meth:`wl.map.ProductionSite.warp_workers`.
+		Creates soldiers out of thin air. ``list`` is a table of soldier
+		descriptions and counts, see :meth:`wl.map.Warehouse.set_soldiers`
+		for a description.
+
+		:returns: :const:`nil`
+*/
+int L_MilitarySite::warp_soldiers(lua_State * L) {
+	luaL_checktype(L, 2, LUA_TTABLE);
+
+	Game & game = get_game(L);
+	MilitarySite * ms = get(game, L);
+	Tribe_Descr const & tribe = ms->owner().tribe();
+
+	Soldier_Descr const & soldier_descr =  //  soldiers
+		ref_cast<Soldier_Descr const, Worker_Descr const>
+			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+
+	uint32_t count_inside = ms->stationedSoldiers().size();
+	uint32_t count_max = ms->descr().get_max_number_of_soldiers();
+
+	uint32_t hp, a, d, e, count;
+	lua_pushnil(L);
+	while (lua_next(L, 2) != 0) {
+		_get_soldier_levels(L, 3, &hp, &a, &d, &e, soldier_descr);
+		count = luaL_checkuint32(L, -1);
+
+
+		for (uint32_t j = count; j; --j) {
+			if (count_inside == count_max)
+				return report_error(L, "No space left for soldier!");
+
+			Soldier & soldier =
+				ref_cast<Soldier, Worker>
+				(soldier_descr.create
+				 (game, ms->owner(), ms, ms->get_position()));
+			soldier.set_level(hp, a, d, e);
+
+			soldier.reset_tasks(game);
+			soldier.start_task_buildingwork(game);
+			++count_inside;
+		}
+
+		lua_pop(L, 1);
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: get_soldiers([descr])
+
+		Returns the number of soldiers of the given type in this building. See
+		:meth:`warp_soldiers` for a description of the description of soldiers.
+		If descr is not given or :const:`nil` the total number of soldiers is
+		returned.
+
+		:returns: Number of soldiers that match descr
+		:rtype: :class:`integer`
+*/
+int L_MilitarySite::get_soldiers(lua_State * L) {
+	Game & game = get_game(L);
+	MilitarySite * ms = get(game, L);
+	std::vector<Soldier *> vec = ms->stationedSoldiers();
+
+	if (lua_gettop(L) == 1 or lua_isnil(L, 2)) {
+		lua_pushuint32(L, vec.size());
+		return 1;
+	}
+
+	Tribe_Descr const & tribe = ms->owner().tribe();
+
+	Soldier_Descr const & soldier_descr =  //  soldiers
+		ref_cast<Soldier_Descr const, Worker_Descr const>
+			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+
+	uint32_t count = 0;
+	uint32_t hp, a, d, e;
+	_get_soldier_levels(L, 2, &hp, &a, &d, &e, soldier_descr);
+#define CHECK(type, val) \
+		((*i.current)->get_ ##type ## _level() == val)
+	container_iterate_const(std::vector<Soldier *>, vec, i)
+		if
+			(CHECK(hp, hp) and CHECK(attack, a) and
+			 CHECK(defense, d) and CHECK(evade, e))
+				++count;
+#undef CHECK
+
+	lua_pushuint32(L, count);
+
+	return 1;
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
 
 /* RST
 Field
@@ -1581,7 +1731,7 @@ static int L_create_immovable(lua_State * const L) {
 					 objname, from_where.c_str());
 
 			m = &game.create_immovable(c->coords(), imm_idx, &tribe);
-		} catch(game_data_error & gd) {
+		} catch (game_data_error & gd) {
 			return
 				report_error
 					(L, "Problem loading tribe <%s>. Maybe not existent?",
@@ -1676,6 +1826,13 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<L_ProductionSite, L_PlayerImmovable>(L);
 	add_parent<L_ProductionSite, L_BaseImmovable>(L);
 	add_parent<L_ProductionSite, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_MilitarySite>(L, "map", true);
+	add_parent<L_MilitarySite, L_Building>(L);
+	add_parent<L_MilitarySite, L_PlayerImmovable>(L);
+	add_parent<L_MilitarySite, L_BaseImmovable>(L);
+	add_parent<L_MilitarySite, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 }
 

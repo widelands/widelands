@@ -27,6 +27,7 @@
 #include "logic/game.h"
 #include "logic/warehouse.h"
 #include "logic/productionsite.h"
+#include "logic/militarysite.h"
 
 #include "luna.h"
 
@@ -287,6 +288,33 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(ProductionSite);
+};
+
+class L_MilitarySite : public L_Building {
+public:
+	LUNA_CLASS_HEAD(L_MilitarySite);
+
+	L_MilitarySite() {}
+	L_MilitarySite(Widelands::MilitarySite & mo) : L_Building(mo) {
+	}
+	L_MilitarySite(lua_State * L) : L_Building(L) {}
+	virtual ~L_MilitarySite() {}
+
+	/*
+	 * Properties
+	 */
+	int get_max_soldiers(lua_State * L);
+	int get_soldiers(lua_State * L);
+
+	/*
+	 * Lua Methods
+	 */
+	int warp_soldiers(lua_State * L);
+
+	/*
+	 * C Methods
+	 */
+	CASTED_GET(MilitarySite);
 };
 
 

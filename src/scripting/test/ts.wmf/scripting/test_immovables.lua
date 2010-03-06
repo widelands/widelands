@@ -8,4 +8,5 @@ include "test_road"
 -- Buildings
 include "test_warehouse"
 include "test_productionsite"
+include "test_militarysite"
 
