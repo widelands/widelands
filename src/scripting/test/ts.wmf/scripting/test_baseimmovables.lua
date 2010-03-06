@@ -28,6 +28,10 @@ function immovable_creation_tests:test_create_world_immovables()
    imm = wl.map.create_immovable("tree1", wl.map.Field(10,10), "world")
    imm:remove()
 end
+function immovable_creation_tests:test_create_world_immovables1()
+   imm = wl.map.create_immovable("tree1", wl.map.Field(10,10), nil)
+   imm:remove()
+end
 function immovable_creation_tests:test_create_tribe_immovables_ill_tribe()
    assert_error("Illegal tribe!", function()
       imm = wl.map.create_immovable("field2", wl.map.Field(10,10), "blablub")

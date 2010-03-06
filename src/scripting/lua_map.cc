@@ -1556,7 +1556,7 @@ static int L_create_immovable(lua_State * const L) {
 
 	char const * const objname = luaL_checkstring(L, 1);
 	L_Field * c = *get_user_class<L_Field>(L, 2);
-	if (lua_gettop(L) > 2)
+	if (lua_gettop(L) > 2 and not lua_isnil(L, 3))
 		from_where = luaL_checkstring(L, 3);
 
 	// Check if the map is still free here
