@@ -35,7 +35,7 @@
 #include "ui_basic/unique_window.h"
 
 class Editor;
-class Editor_Tool;
+struct Editor_Tool;
 
 /**
  * This is the EditorInteractive. It is like the InteractivePlayer class,

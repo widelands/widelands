@@ -23,6 +23,7 @@
 #include "button.h"
 #include "textarea.h"
 #include "wexception.h"
+#include "container_iterate.h"
 
 #include <vector>
 
@@ -161,13 +162,10 @@ SpinBox::SpinBox
  */
 void SpinBox::update()
 {
-	for
-		(struct {
-		 	std::vector<IntValueTextReplacement>::const_iterator       current;
-		 	std::vector<IntValueTextReplacement>::const_iterator const end;
-		 } i = {sbi->valrep.begin(), sbi->valrep.end()};;
-		 ++i.current)
-		if (i.current == i.end) {
+
+	for(wl_const_range<std::vector<IntValueTextReplacement> >
+		i(sbi->valrep);;++i)
+		if (i.empty()) {
 			char buf[64];
 			snprintf(buf, sizeof(buf), "%i%s", sbi->value, sbi->unit.c_str());
 			sbi->text->set_text(buf);

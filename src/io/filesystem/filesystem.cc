@@ -53,6 +53,11 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#ifdef _MSC_VER
+#define S_ISDIR(x) ((x&_S_IFDIR)?1:0)
+#define S_ISREG(x) ((x&_S_IFREG)?1:0)
+#endif
+
 FileSystem::FileSystem()
 {
 #ifdef WIN32
@@ -317,6 +322,17 @@ char const * FileSystem::FS_Filename(char const * p, char const * & extension)
 			result = p + 1;
 		} else if (*p == '.')
 			extension = p;
+}
+
+std::string FileSystem::FS_FilenameWoExt(const char *p)
+{
+	char const * extension;
+	std::string fname(p ? 
+		FileSystem::FS_Filename(p, extension) 
+		: "");
+	return extension ? 
+		fname.substr(0, fname.length()-strlen(extension))
+		: fname;
 }
 
 /// Create a filesystem from a zipfile or a real directory

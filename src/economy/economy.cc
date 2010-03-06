@@ -225,7 +225,7 @@ void Economy::_remove_flag(Flag & flag)
 	// fast remove
 	container_iterate(Flags, m_flags, i)
 		if (*i.current == &flag) {
-			*i.current = *(i.end - 1);
+			*i.current = *(i.get_end() - 1);
 			return m_flags.pop_back();
 		}
 	throw wexception("trying to remove nonexistent flag");

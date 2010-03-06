@@ -346,6 +346,8 @@ bool Sound_Handler::play_or_not
 		 it != active_fx_end;
 		 ++it)
 	{
+		// Crashed here! it is not valid and m_active_fx is empty. 
+		// Probably threading problem with erase() in handle_channel_finished()
 		if (it->second == fx_name) {
 			already_running = true;
 			break;
@@ -688,5 +690,6 @@ void Sound_Handler::fx_finished_callback(int32_t const channel)
  */
 void Sound_Handler::handle_channel_finished(uint32_t channel)
 {
+	// TODO: Needs locking
 	m_active_fx.erase(channel);
 }

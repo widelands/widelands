@@ -27,6 +27,10 @@
 #include <string>
 #include <cstring>
 
+#ifdef _MSC_VER
+#define __attribute__(x)
+#endif
+
 /**
  * Abstract base class for stream-like data sinks.
  * It is intended for serializing network packets and for writing log-type

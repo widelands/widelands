@@ -24,6 +24,8 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 
+#include "container_iterate.h"
+
 using Widelands::Message;
 using Widelands::Message_Id;
 using Widelands::MessageQueue;
@@ -240,10 +242,9 @@ void GameMessageMenu::Archive_Or_Restore_Selected_Messages::clicked() {
 	switch (menu.mode) {
 	case Inbox:
 		for
-			(struct {uint8_t current; uint8_t const end;} i =
-			 	{0, menu.list.size()};
-			 i.current < i.end;
-			 ++i.current)
+			(wl_index_range<uint8_t> i(0, menu.list.size());
+			 i;
+			 ++i)
 			if (menu.list.get_record(i.current).is_checked(List::Select))
 				game.send_player_command
 					(*new Widelands::Cmd_MessageSetStatusArchived
@@ -251,10 +252,9 @@ void GameMessageMenu::Archive_Or_Restore_Selected_Messages::clicked() {
 		break;
 	case Archive:
 		for
-			(struct {uint8_t current; uint8_t const end;} i =
-			 	{0, menu.list.size()};
-			 i.current < i.end;
-			 ++i.current)
+			(wl_index_range<uint8_t> i(0, menu.list.size());
+			 i;
+			 ++i)
 			if (menu.list.get_record(i.current).is_checked(List::Select))
 				game.send_player_command
 					(*new Widelands::Cmd_MessageSetStatusRead

@@ -36,7 +36,7 @@ struct Game;
 struct Flag;
 struct Route;
 struct RSPairStruct;
-struct Warehouse;
+class Warehouse;
 struct Request;
 struct Supply;
 struct Router;

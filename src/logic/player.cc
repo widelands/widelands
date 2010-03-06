@@ -48,7 +48,7 @@
 
 namespace Widelands {
 
-extern Map_Object_Descr g_road_descr;
+extern const Map_Object_Descr g_road_descr;
 
 Player::Player
 	(Editor_Game_Base  & the_egbase,
@@ -754,7 +754,7 @@ throw ()
 			const Map_Object_Descr * map_object_descr;
 			if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
-				if (map_object_descr == &g_road_descr)
+				if (Road::IsRoadDescr(map_object_descr))
 					map_object_descr = 0;
 				else if (upcast(Building const, building, base_immovable))
 					if (building->get_position() != f)

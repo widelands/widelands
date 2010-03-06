@@ -146,7 +146,7 @@ struct Deserializer {
 	bool avail () const;
 
 private:
-	friend class RecvPacket;
+	friend struct RecvPacket;
 	std::vector<uint8_t> queue;
 	size_t index;
 };

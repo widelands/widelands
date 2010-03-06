@@ -30,7 +30,9 @@
 #include <cstring>
 #include <vector>
 
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 
 namespace Widelands {struct Game;}
 struct Songset;
@@ -162,8 +164,8 @@ extern class Sound_Handler g_sound_handler;
 */
 class Sound_Handler
 {
-	friend class Songset;
-	friend class FXset;
+	friend struct Songset;
+	friend struct FXset;
 public:
 	Sound_Handler();
 	~Sound_Handler();

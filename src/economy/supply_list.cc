@@ -40,7 +40,7 @@ void SupplyList::remove_supply(Supply & supp)
 {
 	container_iterate(Supplies, m_supplies, i)
 		if (*i.current == &supp) {
-			*i.current = *(i.end - 1);
+			*i.current = *(i.get_end() - 1);
 			return m_supplies.pop_back();
 		}
 

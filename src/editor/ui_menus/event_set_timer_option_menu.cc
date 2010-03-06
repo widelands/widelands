@@ -55,12 +55,9 @@ Event_Set_Timer_Option_Menu::Timer::Timer
 	selected.set(&parent, &Event_Set_Timer_Option_Menu::timer_selected);
 	Manager<Widelands::Trigger> & mtm = parent.eia().egbase().map().mtm();
 	for
-		(struct {
-		 	Manager<Widelands::Trigger>::Index       current;
-		 	Manager<Widelands::Trigger>::Index const end;
-		 } i = {0, mtm.size()};
-		 i.current < i.end;
-		 ++i.current)
+		(wl_index_range<Manager<Widelands::Trigger>::Index> i(0,mtm.size());
+		 i;
+		 ++i)
 		if (upcast(Widelands::Trigger_Time, tt, &mtm[i.current])) {
 			add
 				(tt->name().c_str(),
