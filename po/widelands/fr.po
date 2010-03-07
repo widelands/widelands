@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2010-03-04 11:36+0100\n"
-"PO-Revision-Date: 2010-03-05 05:59+0000\n"
-"Last-Translator: Immunoman <Unknown>\n"
+"PO-Revision-Date: 2010-03-06 08:37+0000\n"
+"Last-Translator: NonoSan <fougey.a@orange.fr>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2010-03-06 05:09+0000\n"
+"X-Launchpad-Export-Date: 2010-03-07 05:26+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../../src/computer_player.cc:38
@@ -588,7 +588,7 @@ msgstr "Programmes"
 #: ../../src/writeHTML.cc:750 ../../src/writeHTML.cc:1313
 #: ../../src/logic/building.cc:508
 msgid "mine"
-msgstr "mien"
+msgstr "mine"
 
 #: ../../src/writeHTML.cc:751
 msgid "breed"
@@ -746,7 +746,7 @@ msgstr "possède"
 
 #: ../../src/writeHTML.cc:1023
 msgid "workers of this site"
-msgstr "travaillant sur ce site"
+msgstr "ouvriers sur ce site"
 
 #: ../../src/writeHTML.cc:1025
 msgid "workers"
