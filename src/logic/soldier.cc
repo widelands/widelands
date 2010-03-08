@@ -984,10 +984,13 @@ void Soldier::defense_update(Game & game, State & state)
 	 * Attempt to fix a crash when player bulldozes a building being defended
 	 * by soldiers.
 	 */
-	if (not location or not position)
+	if(not location)
 		return pop_task(game);
 
 	Flag & baseflag = location->base_flag();
+
+	if (m_battle)
+		return start_task_battle(game);
 
 	if (signal == "blocked")
 		// Wait before we try again. Note that this must come *after*
