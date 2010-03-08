@@ -989,6 +989,9 @@ void Soldier::defense_update(Game & game, State & state)
 
 	Flag & baseflag = location->base_flag();
 
+	if (m_battle)
+		return start_task_battle(game);
+
 	if (signal == "blocked")
 		// Wait before we try again. Note that this must come *after*
 		// we check for a battle
